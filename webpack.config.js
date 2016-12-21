@@ -3,7 +3,6 @@ const path = require('path');
 
 module.exports = {
     entry: path.join(__dirname, 'src', 'index.js'),
-
     output: {
         path: path.join(__dirname),
         filename: 'bundle.js'
@@ -12,7 +11,6 @@ module.exports = {
         loaders: [
             { test: /\.jsx?/, loaders: ['babel'] },
             { test: /\.json$/, loader: 'json' },
-            //{ test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader'},
             { test: /\.css$/, loaders: ['style', 'css'] }
         ]
     },
