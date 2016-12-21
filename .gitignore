@@ -1,0 +1,6 @@
+node_modules/
+static/
+.idea/
+.DS_Store
+*.log
+yarn.lock
