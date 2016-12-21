@@ -24,6 +24,7 @@
   },
   "homepage": "",
   "dependencies": {
+    "autoprefixer": "^6.5.3",
     "axios": "^0.15.2",
     "babel-core": "^6.18.2",
     "babel-eslint": "^7.1.1",
@@ -52,6 +53,7 @@
     "jquery": "^2.2.4",
     "lodash": "^4.11.1",
     "moment": "^2.13.0",
+    "precss": "^1.4.0",
     "rc-slider": "^5.2.1",
     "react": "^15.2.1",
     "react-addons-css-transition-group": "^15.2.1",
@@ -79,6 +81,9 @@
     "redux-form": "^6.2.0",
     "redux-thunk": "^2.1.0",
     "underscore": "^1.8.3",
-    "webpack-dev-server": "^1.14.1"
+    "webpack-dev-server": "^1.14.1",
+    "webpack": "^1.13.3",
+    "webpack-dev-middleware": "^1.8.4",
+    "webpack-hot-middleware": "^2.13.2"
   }
 }
