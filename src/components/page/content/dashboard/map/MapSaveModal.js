@@ -3,16 +3,16 @@ import Modal from 'react-bootstrap-modal'
 import moment from 'moment'
 
 export default class MapSaveModal extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-        }
+  constructor (props) {
+    super(props)
+    this.state = {
     }
+  }
 
-    render() {
-        return (
-            <Modal show={true} onHide={this.onHide.bind(this)}
-                   aria-labelledby="ModalHeader" className="bootstrap-dialog type-primary">
+  render () {
+    return (
+            <Modal show onHide={this.onHide.bind(this)}
+              aria-labelledby="ModalHeader" className="bootstrap-dialog type-primary">
 
                 <div className="modal-header">
                     <h4 className="modal-title bootstrap-dialog-title">
@@ -44,35 +44,35 @@ export default class MapSaveModal extends React.Component {
                     </div>
                 </div>
             </Modal>
-        )
-    }
+    )
+  }
 
-    onHide() {
-        this.props.onClose &&
+  onHide () {
+    this.props.onClose &&
         this.props.onClose(this)
+  }
+
+  onClickClose () {
+    this.onHide()
+  }
+
+  onClickSave () {
+    let name = this.refs.name.value
+    if (!name) {
+      alert('Please input map name.')
+      return
     }
 
-    onClickClose() {
-        this.onHide()
-    }
+    document.location.href = `${'/exportmap' + '?'}${$.param({
+      name,
+      mapid: this.props.mapId
+    })}`
 
-    onClickSave() {
-        let name = this.refs.name.value
-        if (!name) {
-            alert("Please input map name.")
-            return
-        }
-
-        document.location.href = '/exportmap' + '?' + $.param({
-            name,
-            mapid: this.props.mapId
-        });
-
-        this.onHide()
-    }
+    this.onHide()
+  }
 }
 
 MapSaveModal.defaultProps = {
-    onClose: null,
-    mapId: '',
+  onClose: null,
+  mapId: ''
 }

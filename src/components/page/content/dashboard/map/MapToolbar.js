@@ -3,47 +3,42 @@ import React from 'react'
 import { ChromePicker } from 'react-color'
 import { findIndex } from 'lodash'
 
-import MapMenu from './MapMenu.js'
-import DeviceMenu from './DeviceMenu.js'
+import MapMenu from './MapMenu'
+import DeviceMenu from './DeviceMenu'
 
-import { lineTypes } from 'shared/Global.js'
-
-import NewIncidentModal from './NewIncidentModal.js'
-// import { appendComponent, removeComponent } from 'util/Component.js'
+import { lineTypes } from '../../../../../shared/Global'
 
 export default class Toolbar extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            selectedObj: null,
-            cmap: null,
+  constructor (props) {
+    super(props)
+    this.state = {
+      selectedObj: null,
+      cmap: null,
 
-            displayColorPicker: false,
+      displayColorPicker: false,
 
-            displayLineType: false,
-            displayDevices: false,
+      displayLineType: false,
+      displayDevices: false,
 
-            headerCollapsed: false,
-        }
-
-        this.lineTypes = lineTypes
-
-        this.loadLineTypes()
-
-        this.handleClick = this.handleClick.bind(this)
+      headerCollapsed: false
     }
 
-    componentWillMount() {
+    this.lineTypes = lineTypes
 
-        document.addEventListener('click', this.handleClick, false);
-    }
+    this.loadLineTypes()
 
-    componentWillUnmount() {
+    this.handleClick = this.handleClick.bind(this)
+  }
 
-        document.removeEventListener('click', this.handleClick, false);
-    }
+  componentWillMount () {
+    document.addEventListener('click', this.handleClick, false)
+  }
 
-    loadLineTypes() {
+  componentWillUnmount () {
+    document.removeEventListener('click', this.handleClick, false)
+  }
+
+  loadLineTypes () {
 
         // $.get(Api.deviceadmin.getShapeTypes)
         // .done((res) => {
@@ -58,85 +53,84 @@ export default class Toolbar extends React.Component {
         //
         //     this.setState({lineTypes})
         // });
+  }
+
+  render () {
+    const cmap = this.state.cmap
+    const obj = this.state.selectedObj
+
+    const line = obj ? cmap.selectedLine() : null
+    const lineGroup = line ? line.objectSubType === MapItemType.ShapeLineGroup : false
+    const text = obj ? cmap.selectedText() : null
+    const hub = obj ? cmap.selectedLonghub() : null
+
+    const zooming = cmap && cmap.zooming === true
+
+    const popover = {
+      position: 'absolute',
+      zIndex: '2',
+      left: '-40px',
+      top: '30px'
+
+    }
+    const cover = {
+      position: 'fixed',
+      top: 0,
+      right: 0,
+      bottom: 0,
+      left: 0
     }
 
-    render() {
-
-        const cmap = this.state.cmap
-        const obj = this.state.selectedObj
-
-        const line = obj ? cmap.selectedLine() : null
-        const lineGroup = line ? line.objectSubType == MapItemType.ShapeLineGroup : false
-        const text = obj ? cmap.selectedText() : null
-        const hub = obj ? cmap.selectedLonghub() : null
-
-        const zooming = cmap && cmap.zooming == true;
-
-        const popover = {
-            position: 'absolute',
-            zIndex: '2',
-            left: '-40px',
-            top: '30px',
-
-        }
-        const cover = {
-            position: 'fixed',
-            top: 0,
-            right: 0,
-            bottom: 0,
-            left: 0,
-        }
-
-        return (
-            <div className={"panel-heading text-center map-heading " + (this.state.headerCollapsed ? "collapsed" : "")}>
+    return (
+            <div className={`panel-heading text-center map-heading ${this.state.headerCollapsed ? 'collapsed' : ''}`}>
                 <MapMenu />
 
                 <a href="javascript:;" className="btn-new-incident" onClick={this.onClickNewIncident.bind(this)}>
-                    <i className="fa fa-book" title="New Incident"></i>
+                    <i className="fa fa-book" title="New Incident" />
                 </a>
 
-                <div className="panel-options main-map-options" style={{top: "15px"}}>
-                    <ul className="nav nav-tabs" style={{background: "transparent"}}>
-                        
+                <div className="panel-options main-map-options" style={{top: '15px'}}>
+                    <ul className="nav nav-tabs" style={{background: 'transparent'}}>
+
                         <li className="dropdown margin-sm-left">
                             <a href="javascript:;" className="option maximize p-none"
-                               onClick={this.onClickMaximize.bind(this)}
-                               style={{display: this.props.maximized ? "none" : "block"}}>
-                                <i className="fa fa fa-arrows-alt" title="Maximize"></i>
-                                <b className="caret" style={{position: "absolute", left: "48%", top: "23px"}}></b>
+                              onClick={this.onClickMaximize.bind(this)}
+                              style={{display: this.props.maximized ? 'none' : 'block'}}>
+                                <i className="fa fa fa-arrows-alt" title="Maximize" />
+                                <b className="caret" style={{position: 'absolute', left: '48%', top: '23px'}} />
                             </a>
                             <a href="javascript:;" className="option restore p-none"
-                               style={{display: this.props.maximized ? "block" : "none"}}
-                               onClick={this.onClickMaximize.bind(this)}>
-                                <i className="fa fa fa-compress" title="Restore"></i>
-                                <b className="caret" style={{position: "absolute", left: "48%", top: "23px"}}></b>
+                              style={{display: this.props.maximized ? 'block' : 'none'}}
+                              onClick={this.onClickMaximize.bind(this)}>
+                                <i className="fa fa fa-compress" title="Restore" />
+                                <b className="caret" style={{position: 'absolute', left: '48%', top: '23px'}} />
                             </a>
                             <ul className="dropdown-menu drop-right">
                                 <li>
-                                    <a href="javascript:;" className={"option " + (zooming ? "option-active" : "")}
-                                       onClick={this.props.onClickZoomRect}>
-                                        <i className="fa fa-search margin-md-right"></i>Zoom Rect
+                                    <a href="javascript:;" className={`option ${zooming ? 'option-active' : ''}`}
+                                      onClick={this.props.onClickZoomRect}>
+                                        <i className="fa fa-search margin-md-right" />Zoom Rect
                                     </a>
                                 </li>
                                 <li>
                                     <a href="javascript:;"
-                                       className="option"
-                                       onClick={this.props.onClickZoomIn}>
-                                        <i className="fa fa-search-plus margin-md-right"></i>Zoom In
+                                      className="option"
+                                      onClick={this.props.onClickZoomIn}>
+                                        <i className="fa fa-search-plus margin-md-right" />Zoom In
                                     </a>
                                 </li>
                                 <li>
                                     <a href="javascript:;"
-                                       className="option"
-                                       onClick={this.props.onClickZoomOut}>
-                                        <i className="fa fa-search-minus margin-md-right"></i>Zoom Out
+                                      className="option"
+                                      onClick={this.props.onClickZoomOut}>
+                                        <i className="fa fa-search-minus margin-md-right" />Zoom Out
                                     </a>
                                 </li>
                                 <li>
                                     <a href="javascript:;"
-                                       className="option"
-                                       onClick={this.props.onClickZoomReset}>
-                                        <i className="fa fa fa-square-o margin-md-right"></i>Reset
+                                      className="option"
+                                      onClick={this.props.onClickZoomReset}>
+                                        <i className="fa fa fa-square-o margin-md-right" />Reset
                                     </a>
                                 </li>
                             </ul>
@@ -144,140 +138,139 @@ export default class Toolbar extends React.Component {
 
                         <li>
                             <a href="javascript:"
-                               className="option trash p-none"  style={{display: obj ? "block" : "none"}}
-                               onClick={this.props.onClickDelete}>
-                                <i className="fa fa-trash-o" title="Delete"></i>
+                              className="option trash p-none" style={{display: obj ? 'block' : 'none'}}
+                              onClick={this.props.onClickDelete}>
+                                <i className="fa fa-trash-o" title="Delete" />
                             </a>
                         </li>
                         <li>
-                            <div className="input-group colorpicker-element" style={{display: lineGroup ? "block" : "none"}}
-                                 onClick={this.onClickColorPicker.bind(this)}>
+                            <div className="input-group colorpicker-element" style={{display: lineGroup ? 'block' : 'none'}}
+                              onClick={this.onClickColorPicker.bind(this)}>
                                 <div className="input-group-addon">
-                                    <i className="color-preview" style={{background: lineGroup ? line.getStrokeColor() : 'black'}}></i>
+                                    <i className="color-preview" style={{background: lineGroup ? line.getStrokeColor() : 'black'}} />
                                 </div>
                             </div>
 
                             {
-                                this.state.displayColorPicker ? <div style={ popover }>
-                                    <div style={ cover } onClick={ this.onCloseColorPicker.bind(this) }/>
+                                this.state.displayColorPicker ? <div style={popover}>
+                                    <div style={cover} onClick={this.onCloseColorPicker.bind(this)}/>
                                     <ChromePicker color={lineGroup ? line.getStrokeColor() : 'black'}
-                                                  onChangeComplete={this.onChangeColorPicker.bind(this)}/>
+                                      onChangeComplete={this.onChangeColorPicker.bind(this)}/>
                                 </div> : null
                             }
 
                         </li>
                         <li>
                             <a href="javascript:;"
-                               className="option p-none"  style={{display: lineGroup ? "block" : "none"}}
-                               onClick={this.props.onClickLineWidthInc}>
-                                <i className="fa fa-expand" title="Increase Line Width"></i>
+                              className="option p-none" style={{display: lineGroup ? 'block' : 'none'}}
+                              onClick={this.props.onClickLineWidthInc}>
+                                <i className="fa fa-expand" title="Increase Line Width" />
                             </a>
                         </li>
                         <li>
                             <a href="javascript:;"
-                               className="option p-none"  style={{display: lineGroup ? "block" : "none"}}
-                                onClick={this.props.onClickLineWidthDec}>
-                                <i className="fa fa-compress" title="Decrease Line Width"></i>
+                              className="option p-none" style={{display: lineGroup ? 'block' : 'none'}}
+                              onClick={this.props.onClickLineWidthDec}>
+                                <i className="fa fa-compress" title="Decrease Line Width" />
                             </a>
                         </li>
                         <li>
                             <a href="javascript:;"
-                               className="option p-none"  style={{display: text ? "block" : "none"}}
-                               onClick={this.props.onClickFontSizeUp}> <i className="fa fa-arrow-up" title="Increase Font Size"></i>
+                              className="option p-none" style={{display: text ? 'block' : 'none'}}
+                              onClick={this.props.onClickFontSizeUp}> <i className="fa fa-arrow-up" title="Increase Font Size" />
                             </a>
                         </li>
                         <li>
                             <a href="javascript:;"
-                               className="option p-none"  style={{display: text ? "block" : "none"}}
-                               onClick={this.props.onClickFontSizeDown}> <i className="fa fa-arrow-down" title="Decrease Font Size"></i>
+                              className="option p-none" style={{display: text ? 'block' : 'none'}}
+                              onClick={this.props.onClickFontSizeDown}> <i className="fa fa-arrow-down" title="Decrease Font Size" />
                             </a>
                         </li>
                         <li>
                             <a href="javascript:;"
-                               className="option p-none"  style={{display: text ? "block" : "none"}}
-                               onClick={this.props.onClickAlignLeft}> <i className="fa fa-align-left" title="Align Left"></i>
+                              className="option p-none" style={{display: text ? 'block' : 'none'}}
+                              onClick={this.props.onClickAlignLeft}> <i className="fa fa-align-left" title="Align Left" />
                             </a>
                         </li>
                         <li>
                             <a href="javascript:;"
-                               className="option p-none"  style={{display: text ? "block" : "none"}}
-                               onClick={this.props.onClickAlignCenter}> <i className="fa fa-align-center" title="Align Center"></i>
+                              className="option p-none" style={{display: text ? 'block' : 'none'}}
+                              onClick={this.props.onClickAlignCenter}> <i className="fa fa-align-center" title="Align Center" />
                             </a>
 
                         </li>
                         <li>
                             <a href="javascript:;"
-                               className="option p-none"  style={{display: text ? "block" : "none"}}
-                               onClick={this.props.onClickAlignRight}> <i className="fa fa-align-right" title="Align Right"></i>
+                              className="option p-none" style={{display: text ? 'block' : 'none'}}
+                              onClick={this.props.onClickAlignRight}> <i className="fa fa-align-right" title="Align Right" />
                             </a>
                         </li>
 
                         <li>
                             <a href="javascript:;"
-                               className="option p-none"  style={{display: hub ? "block" : "none"}}>
-                                <i className="fa fa-rotate-left" title="Rotate Left"></i>
+                              className="option p-none" style={{display: hub ? 'block' : 'none'}}>
+                                <i className="fa fa-rotate-left" title="Rotate Left" />
                             </a>
                         </li>
                         <li>
                             <a href="javascript:;"
-                               className="option p-none"  style={{display:  hub ? "block" : "none"}}>
-                                <i className="fa fa-rotate-right" title="Rotate Right"></i>
+                              className="option p-none" style={{display: hub ? 'block' : 'none'}}>
+                                <i className="fa fa-rotate-right" title="Rotate Right" />
                             </a>
                         </li>
 
                         <li>
                             <a href="javascript:;" onClick={this.toggleLineTypes.bind(this)}
-                               className="option p-none" style={{display: line ? "block" : "none"}}>
-                                <i className="fa fa-reply" title="Change Type"></i>
+                              className="option p-none" style={{display: line ? 'block' : 'none'}}>
+                                <i className="fa fa-reply" title="Change Type" />
                             </a>
 
                             {this.renderLineTypes()}
                         </li>
                         <li>
                             <img className="option uploader" src="/images/uploading.gif"
-                                 style={{float: "left", width: "18px", display: "none", opacity:0.5, marginLeft: "10px"}}/>
+                              style={{float: 'left', width: '18px', display: 'none', opacity: 0.5, marginLeft: '10px'}}/>
                         </li>
 
-                        <li className={this.state.displayDevices ? "" : "dropdown"} ref="liDevices">
+                        <li className={this.state.displayDevices ? '' : 'dropdown'} ref="liDevices">
                             <a href="javascript:" onClick={this.onClickAdd.bind(this)}
-                               className={"option p-none " + (this.state.displayDevices ? "option-active" : "")}>
-                                <i className="fa fa-plus-square" title="Add"></i>
-                                <b className="caret" style={{position: "absolute", left: "48%", top: "23px"}}></b>
+                              className={`option p-none ${this.state.displayDevices ? 'option-active' : ''}`}>
+                                <i className="fa fa-plus-square" title="Add" />
+                                <b className="caret" style={{position: 'absolute', left: '48%', top: '23px'}} />
                             </a>
                             <ul className="dropdown-menu drop-right">
                                 <li>
                                     <a href="javascript:;" onClick={this.props.onClickEdit}
-                                       className={"option " + (this.props.editable ? "option-active" : "")}> <i className="fa fa-edit margin-md-right"></i>Edit
+                                      className={`option ${this.props.editable ? 'option-active' : ''}`}> <i className="fa fa-edit margin-md-right" />Edit
                                     </a>
                                 </li>
                                 <li>
                                     <a href="javascript:;"
-                                       className="option edit-undo"> <i className="fa fa-undo margin-md-right"></i>Undo
+                                      className="option edit-undo"> <i className="fa fa-undo margin-md-right" />Undo
                                     </a>
                                 </li>
                             </ul>
 
-                            {this.state.displayDevices ? 
+                            {this.state.displayDevices ?
                                 <DeviceMenu onClickItem={this.props.onClickDeviceItem} selectedItem={this.props.selectedItem}/> : null}
                         </li>
 
                         <li className="dropdown dropdown-settings">
-                            <a href="javascript:;" className="option p-none"><i className="fa fa-cog" title="Add"></i>
-                                <b className="caret" style  ={{position: "absolute", left: "48%", top: "23px"}}></b>
+                            <a href="javascript:;" className="option p-none"><i className="fa fa-cog" title="Add" />
+                                <b className="caret" style ={{position: 'absolute', left: '48%', top: '23px'}} />
                             </a>
                             <ul className="dropdown-menu drop-right">
                                 <li>
                                     <a href="javascript:logout();"
-                                       className="option"> <i className="fa fa-sign-out margin-md-right"></i>Log Out
+                                      className="option"> <i className="fa fa-sign-out margin-md-right" />Log Out
                                     </a>
                                 </li>
                             </ul>
                         </li>
 
                         <li className="dropdown active">
-                            <a href="#" data-toggle="dropdown" className="dropdown-toggle" style={{display:"none"}}></a>
-                            <ul className="dropdown-menu">
-                            </ul>
+                            <a href="#" data-toggle="dropdown" className="dropdown-toggle" style={{display: 'none'}} />
+                            <ul className="dropdown-menu" />
                         </li>
                     </ul>
 
@@ -288,31 +281,30 @@ export default class Toolbar extends React.Component {
                     <img src="/images/arrow-down.png" width="14" height="14" className="down" />
                 </a>
             </div>
-        )
+    )
+  }
+
+  renderLineTypes () {
+    if (!this.state.displayLineType) return null
+
+    const popover = {
+      position: 'absolute',
+      zIndex: '2',
+      right: '-10px',
+      top: '30px'
     }
-    
-    renderLineTypes() {
 
-        if (!this.state.displayLineType) return null
+    const cover = {
+      position: 'fixed',
+      top: 0,
+      right: 0,
+      bottom: 0,
+      left: 0
+    }
 
-        const popover = {
-            position: 'absolute',
-            zIndex: '2',
-            right: "-10px",
-            top: "30px",
-        }
-
-        const cover = {
-            position: 'fixed',
-            top: 0,
-            right: 0,
-            bottom: 0,
-            left: 0,
-        }
-
-        return (
-            <div style={ popover }>
-                <div style={ cover } onClick={ this.toggleLineTypes.bind(this) }/>
+    return (
+            <div style={popover}>
+                <div style={cover} onClick={this.toggleLineTypes.bind(this)}/>
                 <div id="linetypediv" className="panel-group">
                     <div className="panel panel-default">
                         <div className="panel-body"><ul>
@@ -332,72 +324,70 @@ export default class Toolbar extends React.Component {
                     </div>
                 </div>
             </div>
-        )
-    }
+    )
+  }
 
-    /////////////////////////////////////////
+    // ///////////////////////////////////////
 
-    onClickAdd() {
-        this.setState({
-            displayDevices: !this.state.displayDevices,
-        }, () => {
-            this.props.onClickAdd(this.state.displayDevices)
-        })
-    }
+  onClickAdd () {
+    this.setState({
+      displayDevices: !this.state.displayDevices
+    }, () => {
+      this.props.onClickAdd(this.state.displayDevices)
+    })
+  }
 
-    hideDeviceMenu() {
-        this.setState({
-            displayDevices: false
-        })
-    }
+  hideDeviceMenu () {
+    this.setState({
+      displayDevices: false
+    })
+  }
 
-    /////////////////////////////////////////
+    // ///////////////////////////////////////
 
-    onClickColorPicker() {
-        this.setState({ displayColorPicker: !this.state.displayColorPicker })
-    }
+  onClickColorPicker () {
+    this.setState({ displayColorPicker: !this.state.displayColorPicker })
+  }
 
-    onCloseColorPicker() {
-        this.setState({ displayColorPicker: false })
-    }
+  onCloseColorPicker () {
+    this.setState({ displayColorPicker: false })
+  }
 
-    onChangeColorPicker(color) {
-        this.props.onChangeLineColor(color.hex)
-    }
+  onChangeColorPicker (color) {
+    this.props.onChangeLineColor(color.hex)
+  }
 
-    /////////////////////////////////////////
+    // ///////////////////////////////////////
 
-    onClickMaximize() {
-        this.props.onClickMaximize()
-    }
+  onClickMaximize () {
+    this.props.onClickMaximize()
+  }
 
-    toggleLineTypes() {
-        this.setState({ displayLineType: !this.state.displayLineType})
-    }
+  toggleLineTypes () {
+    this.setState({ displayLineType: !this.state.displayLineType})
+  }
 
-    onClickLineType(item) {
-        this.toggleLineTypes()
+  onClickLineType (item) {
+    this.toggleLineTypes()
 
-        var deviceTypeId = item['typeid'];
-        var type = item['typename'];
-        var imgUrl = item['image'];
+    let deviceTypeId = item['typeid']
+    let type = item['typename']
+    let imgUrl = item['image']
 
-        this.props.onChangeLineType(type, imgUrl, deviceTypeId)
-    }
+    this.props.onChangeLineType(type, imgUrl, deviceTypeId)
+  }
 
-    onClickToggleMapHeader() {
-        this.setState({ headerCollapsed: !this.state.headerCollapsed })
-    }
+  onClickToggleMapHeader () {
+    this.setState({ headerCollapsed: !this.state.headerCollapsed })
+  }
 
-    /////////////////////////////////////////
+    // ///////////////////////////////////////
 
-    renderBody() {
-        /*return (
+  renderBody () {
+        /* return (
             <div class="panel panel-default mb-none" id="mapeditdiv">
 
                 <div class="panel-body" style="overflow: hidden;padding: 0;position:relative;">
-                    
-                    
 
                     <div id="map-context-menu">
                         <ul class="dropdown-menu" role="menu" id="menu-firewall">
@@ -416,41 +406,39 @@ export default class Toolbar extends React.Component {
                 </div>
                 <!-- div class="trash"><img src="/images/trash.png" width="70px"></div-->
             </div>
-        )*/
+        ) */
+  }
+
+  handleClick (e) {
+        // Detect device menu outer click
+    if (this.state.displayDevices) {
+      if (!this.refs.liDevices.contains(e.target)) {
+        this.setState({ displayDevices: false }, () => {
+          this.props.onClickAdd(this.state.displayDevices)
+        })
+      }
     }
+  }
+    // ////////////////////////////////////////////////////////////////////////
 
-    handleClick (e) {
-
-        //Detect device menu outer click
-        if (this.state.displayDevices) {
-            if (!this.refs.liDevices.contains(e.target)) {
-                this.setState({ displayDevices: false }, () => {
-                    this.props.onClickAdd(this.state.displayDevices)
-                })
-            }
-        }
-
-    }
-    //////////////////////////////////////////////////////////////////////////
-
-    onClickNewIncident() {
+  onClickNewIncident () {
         // appendComponent(
         //     <NewIncidentModal
         //         onClose={removeComponent}
         //         sid={this.context.sid}/>
         // )
-    }
+  }
 }
 
 Toolbar.contextTypes = {
-    sid: React.PropTypes.string,
+  sid: React.PropTypes.string
 }
 
 Toolbar.defaultProps = {
-    onClickEdit: null,
-    editable: false,
-    maximized: false,
+  onClickEdit: null,
+  editable: false,
+  maximized: false,
 
-    selectedItem: {},
-    onClickDeviceItem: null
+  selectedItem: {},
+  onClickDeviceItem: null
 }

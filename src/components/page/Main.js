@@ -5,123 +5,116 @@ import { startsWith } from 'lodash'
 import { DragDropContext } from 'react-dnd'
 import TouchBackend from 'react-dnd-touch-backend'
 
-import {closeDevice} from 'actions/index'
+import {closeDevice} from '../../actions'
 
 import Topbar from './topbar/Topbar'
 import Sidebar from './sidebar/Sidebar'
 import Dashboard from './content/dashboard/Dashboard'
-import {scrollTop} from 'util/Scroll'
+import {scrollTop} from '../../util/Scroll'
 
 import {mainMenu, deviceMenu, contentType} from './Config'
 
 const dashboardId = mainMenu[0].id
 
 class Main extends React.Component {
-    static contextTypes = {
-        router: React.PropTypes.object
+
+  constructor (props) {
+    super(props)
+    this.state = {
+      user: null,
+      minHeight: 1300
+    }
+  }
+
+  renderDashboard () {
+    const hidden = !!this.props.children
+    return (
+            <Dashboard hidden={hidden}/>
+    )
+  }
+
+  onClickMenuItem (type, item) {
+    const {router} = this.props
+
+    scrollTop(this.refs.content)
+
+    if (item.id === 'dashboard') {
+      this.props.closeDevice()
     }
 
-    constructor(props) {
-        super(props)
-        this.state = {
-            user: null,
-            minHeight: 1300
+    router.push({
+      pathname: item.path
+    })
+  }
+
+  renderSidebar () {
+    const {location, device} = this.props
+    const {pathname} = location
+
+    let pageId = dashboardId, pageType = contentType.Main
+
+    let found = false
+    mainMenu.forEach(item => {
+      if (item.id === dashboardId) return true
+      if (startsWith(pathname, item.path)) {
+        pageId = item.id
+        pageType = contentType.Main
+        found = true
+        return false
+      }
+    })
+
+    if (!found) {
+      deviceMenu.forEach(item => {
+        if (item.id === dashboardId) return true
+        if (startsWith(pathname, item.path)) {
+          pageId = item.id
+          pageType = contentType.Device
+          found = true
+          return false
         }
+      })
     }
 
-    render() {
+    return (
+            <Sidebar
+              pageId={pageId}
+              pageType={pageType}
+              device={device}
+              onClickItem={this.onClickMenuItem.bind(this)}
+            />
+    )
+  }
 
-        const {children} = this.props
-        const {minHeight} = this.state
+  render () {
+    const {children} = this.props
+    const {minHeight} = this.state
 
+    let style = {}
+    if (!children) style = {minHeight: `${minHeight}px`}
 
-        let style = {}
-        if (!children) style = {minHeight: minHeight + 'px'}
-
-        return (
+    return (
             <div style={style}>
                 <Topbar/>
                 {this.renderSidebar()}
-                <div className="page-content flex-vertical" style={{overflow: "auto"}} ref="content">
+                <div className="page-content flex-vertical" style={{overflow: 'auto'}} ref="content">
                     {this.renderDashboard()}
                     {children ? children : null}
                 </div>
             </div>
-        )
-
+    )
 
         //
         // <IncidentAlert />
         // {this.state.loading ? <Loader /> : null}
         // <ReactTooltip />
-    }
-
-    renderSidebar() {
-        const {location, device} = this.props
-        const {pathname} = location
-
-        let pageId = dashboardId, pageType = contentType.Main
-
-
-        var found = false
-        mainMenu.forEach(item => {
-            if (item.id == dashboardId) return true
-            if (startsWith(pathname, item.path)) {
-                pageId = item.id
-                pageType = contentType.Main
-                found = true
-                return false
-            }
-        })
-
-        if (!found) {
-            deviceMenu.forEach(item => {
-                if (item.id == dashboardId) return true
-                if (startsWith(pathname, item.path)) {
-                    pageId = item.id
-                    pageType = contentType.Device
-                    found = true
-                    return false
-                }
-            })
-        }
-
-        return (
-            <Sidebar
-                pageId={pageId}
-                pageType={pageType}
-                device={device}
-                onClickItem={this.onClickMenuItem.bind(this)}
-            />
-        )
-    }
-
-    renderDashboard() {
-        const hidden = !!this.props.children
-        return (
-            <Dashboard hidden={hidden}/>
-        )
-    }
-
-    onClickMenuItem(type, item) {
-        const {router} = this.props
-
-        scrollTop(this.refs.content)
-
-        if (item.id == 'dashboard') {
-            this.props.closeDevice()
-        }
-
-        router.push({
-            pathname: item.path,
-        })
-    }
+  }
 }
 
 Main.defaultProps = {}
 
-function mapStateToProps(state) {
-    return {device: state.dashboard.selectedDevice};
+function mapStateToProps (state) {
+  return {device: state.dashboard.selectedDevice}
 }
 
 export default withRouter(connect(mapStateToProps, {closeDevice})(DragDropContext(TouchBackend({ enableMouseEvents: true }))(Main)))

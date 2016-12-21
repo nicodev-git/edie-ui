@@ -1,33 +1,32 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
-import {fetchDevices, openDeviceEditModal, deleteDevice} from '../actions/index';
-import {Link} from 'react-router';
+import React, {Component} from 'react'
+import {connect} from 'react-redux'
+import {fetchDevices, openDeviceEditModal, deleteDevice} from '../actions'
 
 import DeviceEditModal from './DeviceEditModal'
 
 class DeviceList extends Component {
 
-    constructor(props) {
-        super(props)
-        this.state = {
-            selected: -1
-        }
+  constructor (props) {
+    super(props)
+    this.state = {
+      selected: -1
     }
+  }
 
-    componentWillMount(){
-        this.props.fetchDevices();
-    }
+  componentWillMount () {
+    this.props.fetchDevices()
+  }
 
-    renderDevices() {
+  renderDevices () {
         // console.log('DEVICES: ',this.props.devices);
         // if (this.props.devices && this.props.devices.length > 0) {
         //         console.log(this.props.devices[0].name);
         //     return <div>{this.props.devices[0].name}</div>
         // }
 
-        const {selected} = this.state
+    const {selected} = this.state
 
-        return (
+    return (
             <table className="table table-hover dataTable">
                 <thead>
                     <tr>
@@ -37,8 +36,8 @@ class DeviceList extends Component {
                 </thead>
                 <tbody>{
                     this.props.devices.map((device, index) =>
-                        <tr key={index} className={selected == index ? 'selected' : ''}
-                            onClick={this.onClickRow.bind(this, index)}>
+                        <tr key={index} className={selected === index ? 'selected' : ''}
+                          onClick={this.onClickRow.bind(this, index)}>
                             <td>{device.name}</td>
                             <td>{device.lanIP}</td>
                         </tr>
@@ -46,65 +45,64 @@ class DeviceList extends Component {
                 }
                 </tbody>
             </table>
-        )
-    }
+    )
+  }
 
-    render() {
-
-        return (
+  render () {
+    return (
             <div style={{background: 'white'}} className="padding-md">
                 <div className="padding-sm fa-lg">
                     <a href="javascript:;" className="margin-sm-right" onClick={this.onClickAdd.bind(this)}>
-                        <i className="fa fa-plus"></i></a>
+                        <i className="fa fa-plus" /></a>
                     <a href="javascript:;" className="margin-sm-right" onClick={this.onClickEdit.bind(this)}>
-                        <i className="fa fa-edit"></i></a>
+                        <i className="fa fa-edit" /></a>
                     <a href="javascript:;" className="margin-sm-right" onClick={this.onClickDelete.bind(this)}>
-                        <i className="fa fa-trash-o"></i></a>
+                        <i className="fa fa-trash-o" /></a>
                 </div>
                 {this.renderDevices()}
                 {this.renderModal()}
             </div>
-        );
-    }
+    )
+  }
 
-    renderModal() {
-        if (!this.props.openModal) return null
-        return (
+  renderModal () {
+    if (!this.props.openModal) return null
+    return (
             <DeviceEditModal />
-        )
-    }
+    )
+  }
 
-    //////////////////////
+    // ////////////////////
 
-    onClickRow(selected) {
-        this.setState({ selected })
-    }
+  onClickRow (selected) {
+    this.setState({ selected })
+  }
 
-    onClickAdd() {
-        this.props.openDeviceEditModal()
-    }
+  onClickAdd () {
+    this.props.openDeviceEditModal()
+  }
 
-    onClickEdit() {
-        const {selected} = this.state
-        const device = this.props.devices[selected]
-        if (!device) return alert("Please selected device.")
-        this.props.openDeviceEditModal(device)
-    }
+  onClickEdit () {
+    const {selected} = this.state
+    const device = this.props.devices[selected]
+    if (!device) return alert('Please selected device.')
+    this.props.openDeviceEditModal(device)
+  }
 
-    onClickDelete() {
-        const {selected} = this.state
-        const device = this.props.devices[selected]
-        if (!device) return alert("Please selected device.")
-        const url = device._links.self.href
-        this.props.deleteDevice(url)
-    }
+  onClickDelete () {
+    const {selected} = this.state
+    const device = this.props.devices[selected]
+    if (!device) return alert('Please selected device.')
+    const url = device._links.self.href
+    this.props.deleteDevice(url)
+  }
 }
-function mapStateToProps(state) {
+function mapStateToProps (state) {
     // console.log('DATA', state.devices);
-    return {
-        devices: state.devices.devices,
-        openModal: state.devices.openModal,
-    };
+  return {
+    devices: state.devices.devices,
+    openModal: state.devices.openModal
+  }
 }
 export default connect(mapStateToProps,
-    {fetchDevices, openDeviceEditModal, deleteDevice})(DeviceList);
+    {fetchDevices, openDeviceEditModal, deleteDevice})(DeviceList)

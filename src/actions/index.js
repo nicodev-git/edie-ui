@@ -38,14 +38,12 @@ import {
     FETCH_DEVICE_BASIC_MONITORS,
     FETCH_DEVICE_EVENTLOG,
     FETCH_DEVICE_APPS,
-    FETCH_DEVICE_PROCESS,
 
     FETCH_ATTACKERS,
 
     FETCH_MAPS,
     ADD_MAP,
     UPDATE_MAP,
-    REMOVE_MAP,
     CHANGE_MAP,
     OPEN_MAP_IMPORT_MODAL,
     CLOSE_MAP_IMPORT_MODAL,
@@ -136,1233 +134,1211 @@ import {
 
     API_ERROR
 } from './types'
-import { encodeUrlParams } from 'shared/Global'
+import { encodeUrlParams } from '../shared/Global'
 
-const ROOT_URL = '';
+const ROOT_URL = 'http://imp.dev.securegion.com'
 
-export function fetchDevices() {
-    return function (dispatch) {
-        var config = {
-            headers: {
-                'Cache-Control': 'no-cache',
-                'X-Authorization': localStorage.getItem('token')
-            }
-        };
-        axios.get(`${ROOT_URL}/device`,config)
+export function fetchDevices () {
+  return function (dispatch) {
+    let config = {
+      headers: {
+        'Cache-Control': 'no-cache',
+        'X-Authorization': window.localStorage.getItem('token')
+      }
+    }
+    axios.get(`${ROOT_URL}/device`, config)
             .then(response => {
-                //console.log('FETCH_DEVICES:', response);
-                console.log('Response DATA:', response.data._embedded.devices);
+                // console.log('FETCH_DEVICES:', response);
+              console.log('Response DATA:', response.data._embedded.devices)
 
-                dispatch({
-                    type: FETCH_DEVICES,
-                    payload: response.data._embedded.devices
-                });
-            });
-    };
+              dispatch({
+                type: FETCH_DEVICES,
+                payload: response.data._embedded.devices
+              })
+            })
+  }
 }
 
-
-function getAuthConfig(){
-    var config = {
-        headers: {
-            'Cache-Control': 'no-cache',
-            'X-Authorization': localStorage.getItem('token')
-        }
-    };
-    return config;
+function getAuthConfig () {
+  let config = {
+    headers: {
+      'Cache-Control': 'no-cache',
+      'X-Authorization': window.localStorage.getItem('token')
+    }
+  }
+  return config
 }
 
-export function signUser({ email, password }) {
+export function signUser ({ email, password }) {
     // //console.log('signUser', email, password);
-    return function (dispatch) {
-        var config = {
-            headers: {
-                'Content-Type': 'application/json',
-                'X-Requested-With': 'XMLHttpRequest'
-            }
-        };
+  return function (dispatch) {
+    let config = {
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Requested-With': 'XMLHttpRequest'
+      }
+    }
         // //console.log(email, password);
-        axios.post(`${ROOT_URL}/api/auth/login`,
-            {
-                username: email,
-                password: password
-            }, config
+    axios.post(`${ROOT_URL}/api/auth/login`,
+      {
+        username: email,
+        password: password
+      }, config
             )
             .then(response => {
-                dispatch({type: AUTH_USER});
-                //console.log('token:', response.data.token);
-                localStorage.setItem('token', response.data.token);
+              dispatch({type: AUTH_USER})
+                // console.log('token:', response.data.token);
+              window.localStorage.setItem('token', response.data.token)
 
-                hashHistory.push('/');
+              hashHistory.push('/')
             })
             .catch(() => {
-                dispatch({type: AUTH_ERROR, msg: 'Wrong credentials.'});
-            });
-    };
+              dispatch({type: AUTH_ERROR, msg: 'Wrong credentials.'})
+            })
+  }
 }
 
-
-export function signOut() {
-    localStorage.removeItem('token');
-    return {
-        type: INVALIDATE_USER,
-    };
+export function signOut () {
+  window.localStorage.removeItem('token')
+  return {
+    type: INVALIDATE_USER
+  }
 }
 
-export function signup({ email, password }) {
-    //console.log('signup', email, password);
-    return function (dispatch) {
-
-
-        axios.post(`${ROOT_URL}/signup`, {email, password})
+export function signup ({ email, password }) {
+    // console.log('signup', email, password);
+  return function (dispatch) {
+    axios.post(`${ROOT_URL}/signup`, {email, password})
             .then(response => {
-                dispatch({type: AUTH_USER});
-                localStorage.setItem('token', response.data.token);
-                hashHistory.push('/feature');
+              dispatch({type: AUTH_USER})
+              window.localStorage.setItem('token', response.data.token)
+              hashHistory.push('/feature')
             })
             .catch(error => {
-                dispatch({type: AUTH_ERROR, msg: error});
-            });
-    };
+              dispatch({type: AUTH_ERROR, msg: error})
+            })
+  }
 }
 
-export function fetchUserInfo() {
-    return function (dispatch) {
-        var config = {
-            headers: {
-                'Cache-Control': 'no-cache',
-                'X-Authorization': localStorage.getItem('token')
-            }
-        };
-        axios.get('/api/me',config).then(response => {
-            dispatch({ type: FETCH_USER_INFO, data: response.data})
-        }).catch(error => {
-            dispatch({type: API_ERROR, msg: error})
-        })
-
-    };
+export function fetchUserInfo () {
+  return function (dispatch) {
+    let config = {
+      headers: {
+        'Cache-Control': 'no-cache',
+        'X-Authorization': window.localStorage.getItem('token')
+      }
+    }
+    axios.get('/api/me', config).then(response => {
+      dispatch({ type: FETCH_USER_INFO, data: response.data})
+    }).catch(error => {
+      dispatch({type: API_ERROR, msg: error})
+    })
+  }
 }
 
-
-export function fetchMessage() {
+export function fetchMessage () {
     // //console.log('signup', email, password);
-    return function (dispatch) {
-        //console.log(localStorage.getItem('token'));
-        var config = {
-            headers: {
-                'Cache-Control': 'no-cache',
-                'X-Authorization': localStorage.getItem('token')
-            }
-        };
-        axios.get(`${ROOT_URL}/api/me`,config)
+  return function (dispatch) {
+        // console.log(window.localStorage.getItem('token'));
+    let config = {
+      headers: {
+        'Cache-Control': 'no-cache',
+        'X-Authorization': window.localStorage.getItem('token')
+      }
+    }
+    axios.get(`${ROOT_URL}/api/me`, config)
             .then(response => {
-                //console.log(response);
-                dispatch({
-                    type: FETCH_MESSAGE,
-                    payload: response.data.username
-                });
-            });
-        //.catch(error => {
+                // console.log(response);
+              dispatch({
+                type: FETCH_MESSAGE,
+                payload: response.data.username
+              })
+            })
+        // .catch(error => {
         //    dispatch(authError(error));
-        //});
-    };
+        // });
+  }
 }
 
-export function updateUserProfile(props) {
-    return function (dispatch) {
-        axios.put('/user/' + props.id, props)
+export function updateUserProfile (props) {
+  return function (dispatch) {
+    axios.put(`/user/${props.id}`, props)
             .then(response => {
-                dispatch({ type: UPDATE_USER_INFO, data: response.data })
-                dispatch(closeProfileModal())
+              dispatch({ type: UPDATE_USER_INFO, data: response.data })
+              dispatch(closeProfileModal())
             })
             .catch(error => {
-                dispatch({type: API_ERROR, msg: error})
+              dispatch({type: API_ERROR, msg: error})
             })
-    }
+  }
 }
 
-export function openProfileModal() {
-    return function (dispatch) {
-        dispatch({ type: OPEN_PROFILE_MODAL })
-    }
+export function openProfileModal () {
+  return function (dispatch) {
+    dispatch({ type: OPEN_PROFILE_MODAL })
+  }
 }
 
-export function closeProfileModal() {
-    return function (dispatch) {
-        dispatch({ type: CLOSE_PROFILE_MODAL })
-    }
+export function closeProfileModal () {
+  return function (dispatch) {
+    dispatch({ type: CLOSE_PROFILE_MODAL })
+  }
 }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-export function fetchMaps(initial) {
-    return function (dispatch) {
-
-        axios.get('/map')
+export function fetchMaps (initial) {
+  return function (dispatch) {
+    axios.get('/map')
             .then(response => {
-                const maps = response.data._embedded.maps
-                dispatch({type: FETCH_MAPS, data: maps})
-                if (initial && maps.length) dispatch(changeMap(maps[0]))
+              const maps = response.data._embedded.maps
+              dispatch({type: FETCH_MAPS, data: maps})
+              if (initial && maps.length) dispatch(changeMap(maps[0]))
             })
             .catch(error => {
-                dispatch({type: API_ERROR, msg: error})
+              dispatch({type: API_ERROR, msg: error})
             })
-    }
+  }
 }
 
-export function changeMap(map) {
-    return function (dispatch) {
-        dispatch({type: CHANGE_MAP, map})
+export function changeMap (map) {
+  return function (dispatch) {
+    dispatch({type: CHANGE_MAP, map})
 
-        dispatch(fetchMapDevicesAndLines(map.id))
-    }
+    dispatch(fetchMapDevicesAndLines(map.id))
+  }
 }
 
-export function addMap(props) {
-    return function (dispatch) {
-
-        axios.post('/map', props)
+export function addMap (props) {
+  return function (dispatch) {
+    axios.post('/map', props)
         .then(response => {
-            dispatch({ type: ADD_MAP, data: response.data })
+          dispatch({ type: ADD_MAP, data: response.data })
         })
         .catch(error => {
-            dispatch({type: API_ERROR, msg: error})
+          dispatch({type: API_ERROR, msg: error})
         })
-    }
+  }
 }
 
-export function updateMap(entity) {
-    return function (dispatch) {
-        axios.put(entity._links.self.href, entity)
+export function updateMap (entity) {
+  return function (dispatch) {
+    axios.put(entity._links.self.href, entity)
         .then(response => {
-            dispatch({ type: UPDATE_MAP, data: response.data })
+          dispatch({ type: UPDATE_MAP, data: response.data })
         })
         .catch(error => {
-            dispatch({type: API_ERROR, msg: error})
+          dispatch({type: API_ERROR, msg: error})
         })
-    }
+  }
 }
 
-export function deleteMap(entity) {
-    return function (dispatch) {
-        axios.delete(entity._links.self.href)
+export function deleteMap (entity) {
+  return function (dispatch) {
+    axios.delete(entity._links.self.href)
             .then(response => {
-                dispatch(fetchMaps(true))
+              dispatch(fetchMaps(true))
                 // dispatch({ type: REMOVE_MAP, data: entity })
             })
             .catch(error => {
-                dispatch({type: API_ERROR, msg: error})
+              dispatch({type: API_ERROR, msg: error})
             })
-    }
+  }
 }
 
-export function openMapImportModal() {
-    return function (dispatch) {
-        dispatch({ type: OPEN_MAP_IMPORT_MODAL })
-    }
+export function openMapImportModal () {
+  return function (dispatch) {
+    dispatch({ type: OPEN_MAP_IMPORT_MODAL })
+  }
 }
 
-export function closeMapImportModal() {
-    return function (dispatch) {
-        dispatch({ type: CLOSE_MAP_IMPORT_MODAL })
-    }
+export function closeMapImportModal () {
+  return function (dispatch) {
+    dispatch({ type: CLOSE_MAP_IMPORT_MODAL })
+  }
 }
 
-export function importMap(form) {
-    return function (dispatch) {
-        axios.post('/importmap', form).then(response => {
-            dispatch({type: IMPORT_MAP, data: response.data})
-            dispatch(closeMapImportModal())
-        }).catch(error => {
-            dispatch({type: API_ERROR, msg: error})
-        })
-    }
+export function importMap (form) {
+  return function (dispatch) {
+    axios.post('/importmap', form).then(response => {
+      dispatch({type: IMPORT_MAP, data: response.data})
+      dispatch(closeMapImportModal())
+    }).catch(error => {
+      dispatch({type: API_ERROR, msg: error})
+    })
+  }
 }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-export function updateDashboard(data) {
-    return function (dispatch) {
-        dispatch({
-            type: UPDATE_DASHBOARD,
-            data
-        })
-    }
+export function updateDashboard (data) {
+  return function (dispatch) {
+    dispatch({
+      type: UPDATE_DASHBOARD,
+      data
+    })
+  }
 }
 
-export function fetchMapDevicesAndLines(mapid) {
-    return function (dispatch) {
-        if (!mapid) {
-            dispatch({ type: FETCH_MAP_DEVICES_LINES, maps: [], lines: [] })
-            return
-        }
-
-        const req1 = axios.get('/device/search/findDevicesByMapid', {
-            params: { mapid }
-        }).then(response => {
-            return response.data._embedded.devices
-        })
-
-        const req2 = axios.get('/device/search/findLinesByMapid', {
-            params: { mapid }
-        }).then(response => {
-            return response.data._embedded.devices
-        })
-
-        axios.all([req1, req2]).then(res => {
-            dispatch({ type: FETCH_MAP_DEVICES_LINES, maps: res[0], lines: res[1] })
-        }).catch(error => {
-            dispatch({type: API_ERROR, msg: error})
-        })
+export function fetchMapDevicesAndLines (mapid) {
+  return function (dispatch) {
+    if (!mapid) {
+      dispatch({ type: FETCH_MAP_DEVICES_LINES, maps: [], lines: [] })
+      return
     }
+
+    const req1 = axios.get('/device/search/findDevicesByMapid', {
+      params: { mapid }
+    }).then(response => {
+      return response.data._embedded.devices
+    })
+
+    const req2 = axios.get('/device/search/findLinesByMapid', {
+      params: { mapid }
+    }).then(response => {
+      return response.data._embedded.devices
+    })
+
+    axios.all([req1, req2]).then(res => {
+      dispatch({ type: FETCH_MAP_DEVICES_LINES, maps: res[0], lines: res[1] })
+    }).catch(error => {
+      dispatch({type: API_ERROR, msg: error})
+    })
+  }
 }
 
-export function addMapDevice(props) {
-    return function (dispatch) {
-        axios.post('/device', props)
+export function addMapDevice (props) {
+  return function (dispatch) {
+    axios.post('/device', props)
             .then(response => {
-                dispatch({type: ADD_MAP_DEVICE, data: response.data})
+              dispatch({type: ADD_MAP_DEVICE, data: response.data})
             })
             .catch(error => {
-                dispatch({type: API_ERROR, msg: error})
+              dispatch({type: API_ERROR, msg: error})
             })
-    }
+  }
 }
 
-export function updateMapDevice(entity) {
-    return function (dispatch) {
-        axios.put(entity._links.self.href, entity)
+export function updateMapDevice (entity) {
+  return function (dispatch) {
+    axios.put(entity._links.self.href, entity)
             .then(response => {
-                dispatch({type: UPDATE_MAP_DEVICE, data: response.data})
+              dispatch({type: UPDATE_MAP_DEVICE, data: response.data})
             })
             .catch(error => {
-                dispatch({type: API_ERROR, msg: error})
+              dispatch({type: API_ERROR, msg: error})
             })
-    }
+  }
 }
 
-export function deleteMapDevice(entity) {
-    return function (dispatch) {
-        axios.delete(entity._links.self.href)
+export function deleteMapDevice (entity) {
+  return function (dispatch) {
+    axios.delete(entity._links.self.href)
             .then(response => {
-                dispatch({type: DELETE_MAP_DEVICE, data: entity})
+              dispatch({type: DELETE_MAP_DEVICE, data: entity})
             })
             .catch(error => {
-                dispatch({type: API_ERROR, msg: error})
+              dispatch({type: API_ERROR, msg: error})
             })
-    }
+  }
 }
 
-export function addMapLine(props, cb) {
-    return function (dispatch) {
-        axios.post('/device', props)
+export function addMapLine (props, cb) {
+  return function (dispatch) {
+    axios.post('/device', props)
             .then(response => {
-                dispatch({type: ADD_MAP_LINE, data: response.data})
-                cb && cb(response.data)
+              dispatch({type: ADD_MAP_LINE, data: response.data})
+              cb && cb(response.data)
             })
             .catch(error => {
-                dispatch({type: API_ERROR, msg: error})
+              dispatch({type: API_ERROR, msg: error})
             })
-    }
+  }
 }
 
-export function updateMapLine(entity) {
-    return function (dispatch) {
-        axios.put(entity._links.self.href, entity)
+export function updateMapLine (entity) {
+  return function (dispatch) {
+    axios.put(entity._links.self.href, entity)
             .then(response => {
-                dispatch({type: UPDATE_MAP_LINE, data: response.data})
+              dispatch({type: UPDATE_MAP_LINE, data: response.data})
             })
             .catch(error => {
-                dispatch({type: API_ERROR, msg: error})
+              dispatch({type: API_ERROR, msg: error})
             })
-    }
+  }
 }
 
-export function deleteMapLine(entity) {
-    return function (dispatch) {
-        axios.delete(entity._links.self.href)
+export function deleteMapLine (entity) {
+  return function (dispatch) {
+    axios.delete(entity._links.self.href)
             .then(response => {
-                dispatch({type: DELETE_MAP_LINE, data: entity})
+              dispatch({type: DELETE_MAP_LINE, data: entity})
             })
             .catch(error => {
-                dispatch({type: API_ERROR, msg: error})
+              dispatch({type: API_ERROR, msg: error})
             })
-    }
+  }
 }
 
+// //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-export function fetchIncidents() {
-    return function (dispatch) {
-        axios.get('/incident', {
-            params: { }
-        }).then(response => {
-            dispatch({ type: FETCH_DASHBOARD_INCIDENTS, data: response.data._embedded.incidents })
-        }).catch(error => {
-            dispatch({type: API_ERROR, msg: error})
-        })
-    }
+export function fetchIncidents () {
+  return function (dispatch) {
+    axios.get('/incident', {
+      params: { }
+    }).then(response => {
+      dispatch({ type: FETCH_DASHBOARD_INCIDENTS, data: response.data._embedded.incidents })
+    }).catch(error => {
+      dispatch({type: API_ERROR, msg: error})
+    })
+  }
 }
 
-export function fetchBigIncidents(params) {
-    return function (dispatch) {
-        axios.get('/incident/search/findBy?' + encodeUrlParams(params)).then(response => {
-            dispatch({ type: FETCH_DASHBOARD_BIGINCIDENTS, data: response.data._embedded.incidents })
-        }).catch(error => {
-            dispatch({type: API_ERROR, msg: error})
-        })
-    }
+export function fetchBigIncidents (params) {
+  return function (dispatch) {
+    axios.get(`/incident/search/findBy?${encodeUrlParams(params)}`).then(response => {
+      dispatch({ type: FETCH_DASHBOARD_BIGINCIDENTS, data: response.data._embedded.incidents })
+    }).catch(error => {
+      dispatch({type: API_ERROR, msg: error})
+    })
+  }
 }
 
-export function fetchAttackers() {
-    return function (dispatch) {
-        axios.get('/attacker', {
-            params: { }
-        }).then(response => {
-            dispatch({ type: FETCH_ATTACKERS, data: response.data._embedded.attackers })
-        }).catch(error => {
-            dispatch({type: API_ERROR, msg: error})
-        })
-    }
+export function fetchAttackers () {
+  return function (dispatch) {
+    axios.get('/attacker', {
+      params: { }
+    }).then(response => {
+      dispatch({ type: FETCH_ATTACKERS, data: response.data._embedded.attackers })
+    }).catch(error => {
+      dispatch({type: API_ERROR, msg: error})
+    })
+  }
 }
 
-
-export function openNewIncidentModal() {
-    return function (dispatch) {
-        dispatch({
-            type: OPEN_NEW_INCIDENT_MODAL
-        })
-    }
+export function openNewIncidentModal () {
+  return function (dispatch) {
+    dispatch({
+      type: OPEN_NEW_INCIDENT_MODAL
+    })
+  }
 }
 
-export function closeNewIncidentModal() {
-    return function (dispatch) {
-        dispatch({
-            type: CLOSE_NEW_INCIDENT_MODAL
-        })
-    }
+export function closeNewIncidentModal () {
+  return function (dispatch) {
+    dispatch({
+      type: CLOSE_NEW_INCIDENT_MODAL
+    })
+  }
 }
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-export function fetchDeviceTemplates() {
-    return function (dispatch) {
-        axios.get('/devicetemplate').then(response => {
-            dispatch({type: FETCH_DEVICE_TEMPLATES, data: response.data._embedded.deviceTemplates})
-        })
+// //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+export function fetchDeviceTemplates () {
+  return function (dispatch) {
+    axios.get('/devicetemplate').then(response => {
+      dispatch({type: FETCH_DEVICE_TEMPLATES, data: response.data._embedded.deviceTemplates})
+    })
         .catch(error => {
-            dispatch({type: API_ERROR, msg: error})
+          dispatch({type: API_ERROR, msg: error})
         })
-    }
+  }
 }
 
-export function addDeviceTemplate(props) {
-    return function (dispatch) {
-        axios.post('/devicetemplate', props)
+export function addDeviceTemplate (props) {
+  return function (dispatch) {
+    axios.post('/devicetemplate', props)
             .then(response => {
-                dispatch({type: ADD_DEVICE_TEMPLATE, data: response.data})
-                dispatch(closeDeviceTplModal())
+              dispatch({type: ADD_DEVICE_TEMPLATE, data: response.data})
+              dispatch(closeDeviceTplModal())
             })
             .catch(error => {
-                dispatch({type: API_ERROR, msg: error})
+              dispatch({type: API_ERROR, msg: error})
             })
-    }
+  }
 }
 
-export function updateDeviceTemplate(entity) {
-    return function (dispatch) {
-        axios.put(entity._links.self.href, entity)
+export function updateDeviceTemplate (entity) {
+  return function (dispatch) {
+    axios.put(entity._links.self.href, entity)
             .then(response => {
-                dispatch({type: UPDATE_DEVICE_TEMPLATE, data: response.data})
-                dispatch(closeDeviceTplModal())
+              dispatch({type: UPDATE_DEVICE_TEMPLATE, data: response.data})
+              dispatch(closeDeviceTplModal())
             })
             .catch(error => {
-                dispatch({type: API_ERROR, msg: error})
+              dispatch({type: API_ERROR, msg: error})
             })
-    }
+  }
 }
 
-export function deleteDeviceTemplate(entity) {
-    return function (dispatch) {
-        axios.delete(entity._links.self.href, entity)
+export function deleteDeviceTemplate (entity) {
+  return function (dispatch) {
+    axios.delete(entity._links.self.href, entity)
             .then(response => {
-                dispatch({type: DELETE_DEVICE_TEMPLATE, data: entity})
+              dispatch({type: DELETE_DEVICE_TEMPLATE, data: entity})
             })
             .catch(error => {
-                dispatch({type: API_ERROR, msg: error})
+              dispatch({type: API_ERROR, msg: error})
             })
-    }
+  }
 }
 
-export function openDeviceTplModal(tpl) {
-    return function (dispatch) {
-        dispatch({type: OPEN_DEVICE_TEMPLATE_MODAL, data: tpl})
-    }
+export function openDeviceTplModal (tpl) {
+  return function (dispatch) {
+    dispatch({type: OPEN_DEVICE_TEMPLATE_MODAL, data: tpl})
+  }
 }
 
-export function closeDeviceTplModal() {
-    return function (dispatch) {
-        dispatch({type: CLOSE_DEVICE_TEMPLATE_MODAL})
-
-    }
+export function closeDeviceTplModal () {
+  return function (dispatch) {
+    dispatch({type: CLOSE_DEVICE_TEMPLATE_MODAL})
+  }
 }
 
-export function fetchMonitorTemplates() {
-    return function (dispatch) {
-        axios.get('/monitortemplate').then(response => {
-            dispatch({type: FETCH_MONITOR_TEMPLATES, data: response.data._embedded.monitorTemplates})
-        })
+export function fetchMonitorTemplates () {
+  return function (dispatch) {
+    axios.get('/monitortemplate').then(response => {
+      dispatch({type: FETCH_MONITOR_TEMPLATES, data: response.data._embedded.monitorTemplates})
+    })
             .catch(error => {
-                dispatch({type: API_ERROR, msg: error})
+              dispatch({type: API_ERROR, msg: error})
             })
-    }
+  }
 }
 
-export function addMonitorTemplate(props) {
-    return function (dispatch) {
-        axios.post('/monitortemplate', props)
+export function addMonitorTemplate (props) {
+  return function (dispatch) {
+    axios.post('/monitortemplate', props)
             .then(response => {
-                dispatch({type: ADD_MONITOR_TEMPLATE, data: response.data})
-                dispatch(closeMonitorTplModal())
+              dispatch({type: ADD_MONITOR_TEMPLATE, data: response.data})
+              dispatch(closeMonitorTplModal())
             })
             .catch(error => {
-                dispatch({type: API_ERROR, msg: error})
+              dispatch({type: API_ERROR, msg: error})
             })
-    }
+  }
 }
 
-export function updateMonitorTemplate(entity) {
-    return function (dispatch) {
-        axios.put(entity._links.self.href, entity)
+export function updateMonitorTemplate (entity) {
+  return function (dispatch) {
+    axios.put(entity._links.self.href, entity)
             .then(response => {
-                dispatch({type: UPDATE_MONITOR_TEMPLATE, data: response.data})
-                dispatch(closeMonitorTplModal())
+              dispatch({type: UPDATE_MONITOR_TEMPLATE, data: response.data})
+              dispatch(closeMonitorTplModal())
             })
             .catch(error => {
-                dispatch({type: API_ERROR, msg: error})
+              dispatch({type: API_ERROR, msg: error})
             })
-    }
+  }
 }
 
-export function deleteMonitorTemplate(entity) {
-    return function (dispatch) {
-        axios.delete(entity._links.self.href, entity)
-            .then(response => {
-                dispatch({type: DELETE_MONITOR_TEMPLATE, data: entity})
+export function deleteMonitorTemplate (entity) {
+  return function (dispatch) {
+    axios.delete(entity._links.self.href, entity)
+            .then(() => {
+              dispatch({type: DELETE_MONITOR_TEMPLATE, data: entity})
             })
             .catch(error => {
-                dispatch({type: API_ERROR, msg: error})
+              dispatch({type: API_ERROR, msg: error})
             })
-    }
+  }
 }
 
-export function openMonitorTplModal(tpl) {
-    return function (dispatch) {
-        dispatch({type: OPEN_MONITOR_TEMPLATE_MODAL, data: tpl})
-    }
+export function openMonitorTplModal (tpl) {
+  return function (dispatch) {
+    dispatch({type: OPEN_MONITOR_TEMPLATE_MODAL, data: tpl})
+  }
 }
 
-export function closeMonitorTplModal() {
-    return function (dispatch) {
-        dispatch({type: CLOSE_MONITOR_TEMPLATE_MODAL})
-
-    }
+export function closeMonitorTplModal () {
+  return function (dispatch) {
+    dispatch({type: CLOSE_MONITOR_TEMPLATE_MODAL})
+  }
 }
 
-export function openTplImageModal() {
-    return function (dispatch) {
-        dispatch({type: OPEN_TPL_IMAGE_MODAL})
-    }
+export function openTplImageModal () {
+  return function (dispatch) {
+    dispatch({type: OPEN_TPL_IMAGE_MODAL})
+  }
 }
 
-export function closeTplImageModal(selectedImage) {
-    return function (dispatch) {
-        dispatch({type: CLOSE_TPL_IMAGE_MODAL, data: selectedImage})
-
-    }
+export function closeTplImageModal (selectedImage) {
+  return function (dispatch) {
+    dispatch({type: CLOSE_TPL_IMAGE_MODAL, data: selectedImage})
+  }
 }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-export function openDevice(device) {
-    return function (dispatch) {
-        dispatch({
-            type: OPEN_DEVICE,
-            data: device
-        })
-    }
+export function openDevice (device) {
+  return function (dispatch) {
+    dispatch({
+      type: OPEN_DEVICE,
+      data: device
+    })
+  }
 }
 
-export function closeDevice() {
-    return function (dispatch) {
-        dispatch({
-            type: CLOSE_DEVICE
-        })
-    }
+export function closeDevice () {
+  return function (dispatch) {
+    dispatch({
+      type: CLOSE_DEVICE
+    })
+  }
 }
 
+// //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-export function fetchDeviceIncidents(params) {
-    return function (dispatch) {
-        axios.get('/incident/search/findBy?' + encodeUrlParams(params)).then(response => {
-            dispatch({type: FETCH_DEVICE_INCIDENTS, data: response.data._embedded.incidents})
-        })
+export function fetchDeviceIncidents (params) {
+  return function (dispatch) {
+    axios.get(`/incident/search/findBy?${encodeUrlParams(params)}`).then(response => {
+      dispatch({type: FETCH_DEVICE_INCIDENTS, data: response.data._embedded.incidents})
+    })
         .catch(error => {
-            dispatch({type: API_ERROR, msg: error})
+          dispatch({type: API_ERROR, msg: error})
         })
-    }
+  }
 }
 
-export function addDeviceIncident(props) {
-    return function (dispatch) {
-        axios.post('/incident', props)
+export function addDeviceIncident (props) {
+  return function (dispatch) {
+    axios.post('/incident', props)
             .then(response => {
-                dispatch({type: ADD_DEVICE_INCIDENT, data: response.data})
-                dispatch(closeAddDeviceIncident())
+              dispatch({type: ADD_DEVICE_INCIDENT, data: response.data})
+              dispatch(closeAddDeviceIncident())
             })
             .catch(error => {
-                dispatch({type: API_ERROR, msg: error})
+              dispatch({type: API_ERROR, msg: error})
             })
-    }
+  }
 }
 
-export function updateDeviceIncident(entity) {
-    return function (dispatch) {
-        axios.put(entity._links.self.href, entity).then(response => {
-            dispatch({type: UPDATE_DEVICE_INCIDENT, data: response.data})
-        })
+export function updateDeviceIncident (entity) {
+  return function (dispatch) {
+    axios.put(entity._links.self.href, entity).then(response => {
+      dispatch({type: UPDATE_DEVICE_INCIDENT, data: response.data})
+    })
         .catch(error => {
-            dispatch({type: API_ERROR, msg: error})
+          dispatch({type: API_ERROR, msg: error})
         })
-    }
+  }
 }
 
-export function openAddDeviceIncident() {
-    return function (dispatch) {
-        dispatch({
-            type: OPEN_ADD_DEVICE_INCIDENT
-        })
-    }
+export function openAddDeviceIncident () {
+  return function (dispatch) {
+    dispatch({
+      type: OPEN_ADD_DEVICE_INCIDENT
+    })
+  }
 }
 
-export function closeAddDeviceIncident() {
-    return function (dispatch) {
-        dispatch({
-            type: CLOSE_ADD_DEVICE_INCIDENT
-        })
-    }
+export function closeAddDeviceIncident () {
+  return function (dispatch) {
+    dispatch({
+      type: CLOSE_ADD_DEVICE_INCIDENT
+    })
+  }
 }
 
-export function fixIncident(incident) {
-    return function (dispatch) {
-        incident.fixed = true
-        incident.acknowledged = true
-        dispatch(updateDeviceIncident(incident))
-    }
+export function fixIncident (incident) {
+  return function (dispatch) {
+    incident.fixed = true
+    incident.acknowledged = true
+    dispatch(updateDeviceIncident(incident))
+  }
 }
 
-export function ackIncident(incident) {
-    return function (dispatch) {
-        incident.acknowledged = true
-        dispatch(updateDeviceIncident(incident))
-    }
+export function ackIncident (incident) {
+  return function (dispatch) {
+    incident.acknowledged = true
+    dispatch(updateDeviceIncident(incident))
+  }
 }
 
+// //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-export function openDeviceMonitorPicker() {
-    return function (dispatch) {
-        dispatch({
-            type: OPEN_DEVICE_MONITOR_PICKER
-        })
-    }
+export function openDeviceMonitorPicker () {
+  return function (dispatch) {
+    dispatch({
+      type: OPEN_DEVICE_MONITOR_PICKER
+    })
+  }
 }
 
-export function closeDeviceMonitorPicker() {
-    return function (dispatch) {
-        dispatch({
-            type: CLOSE_DEVICE_MONITOR_PICKER
-        })
-    }
+export function closeDeviceMonitorPicker () {
+  return function (dispatch) {
+    dispatch({
+      type: CLOSE_DEVICE_MONITOR_PICKER
+    })
+  }
 }
 
-export function openDeviceMonitorWizard(initialValues) {
-    return function (dispatch) {
-        dispatch({
-            type: OPEN_DEVICE_MONITOR_WIZARD,
-            data: initialValues
-        })
-    }
+export function openDeviceMonitorWizard (initialValues) {
+  return function (dispatch) {
+    dispatch({
+      type: OPEN_DEVICE_MONITOR_WIZARD,
+      data: initialValues
+    })
+  }
 }
 
-export function closeDeviceMonitorWizard() {
-    return function (dispatch) {
-        dispatch({
-            type: CLOSE_DEVICE_MONITOR_WIZARD
-        })
-    }
+export function closeDeviceMonitorWizard () {
+  return function (dispatch) {
+    dispatch({
+      type: CLOSE_DEVICE_MONITOR_WIZARD
+    })
+  }
 }
 
-export function clearDeviceWizardInitialValues() {
-    return dispatch => {
-        dispatch({ type: CLEAR_DEVICE_WIZARD_INITIAL_VALUES })
-    }
+export function clearDeviceWizardInitialValues () {
+  return dispatch => {
+    dispatch({ type: CLEAR_DEVICE_WIZARD_INITIAL_VALUES })
+  }
 }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-export function uploadImage(formData) {
-    return dispatch => {
-        axios.post('/upload', formData)
+export function uploadImage (formData) {
+  return dispatch => {
+    axios.post('/upload', formData)
         .then(response => {
-            dispatch({type: UPLOAD_IMAGE, data: response.data})
+          dispatch({type: UPLOAD_IMAGE, data: response.data})
         })
         .catch(error => {
-            dispatch({type: API_ERROR, msg: error})
+          dispatch({type: API_ERROR, msg: error})
         })
-    }
+  }
 }
 
-export function fetchImages() {
-    return dispatch => {
-        axios.get('/customImage')
+export function fetchImages () {
+  return dispatch => {
+    axios.get('/customImage')
             .then(response => {
-                dispatch({type: FETCH_IMAGES, data: response.data._embedded.customImages})
+              dispatch({type: FETCH_IMAGES, data: response.data._embedded.customImages})
             })
             .catch(error => {
-                dispatch({type: API_ERROR, msg: error})
+              dispatch({type: API_ERROR, msg: error})
             })
-    }
+  }
 }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-export function searchIncidents(params) {
-    return dispatch => {
-        axios.get('/incident/search/findBy?' + encodeUrlParams(params)).then(response => {
-            dispatch({type: SEARCH_INCIDENTS, data: response.data._embedded.incidents})
-        }).catch(error => {
-            dispatch({type: API_ERROR, msg: error})
-        })
-    }
+export function searchIncidents (params) {
+  return dispatch => {
+    axios.get(`/incident/search/findBy?${encodeUrlParams(params)}`).then(response => {
+      dispatch({type: SEARCH_INCIDENTS, data: response.data._embedded.incidents})
+    }).catch(error => {
+      dispatch({type: API_ERROR, msg: error})
+    })
+  }
 }
 
-export function searchIncidentDevices(params) {
-    return dispatch => {
-        axios.get('/device/search/findByName?' + encodeUrlParams(params)).then(response => {
-            dispatch({type: SEARCH_INCIDENT_DEVICES, data: response.data._embedded.devices})
-        }).catch(error => {
-            dispatch({type: API_ERROR, msg: error})
-        })
-    }
+export function searchIncidentDevices (params) {
+  return dispatch => {
+    axios.get(`/device/search/findByName?${encodeUrlParams(params)}`).then(response => {
+      dispatch({type: SEARCH_INCIDENT_DEVICES, data: response.data._embedded.devices})
+    }).catch(error => {
+      dispatch({type: API_ERROR, msg: error})
+    })
+  }
 }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-export function fetchSettingMaps() {
-    return function (dispatch) {
-        axios.get('/map').then(response => {
-            dispatch({type: FETCH_SETTING_MAPS, data: response.data._embedded.maps})
-        }).catch(error => {
-            dispatch({type: API_ERROR, msg: error})
-        })
-    }
+export function fetchSettingMaps () {
+  return function (dispatch) {
+    axios.get('/map').then(response => {
+      dispatch({type: FETCH_SETTING_MAPS, data: response.data._embedded.maps})
+    }).catch(error => {
+      dispatch({type: API_ERROR, msg: error})
+    })
+  }
 }
 
-export function openSettingMapModal(map) {
-    return function (dispatch) {
-        dispatch({type: OPEN_SETTING_MAP_MODAL, data: map})
-    }
+export function openSettingMapModal (map) {
+  return function (dispatch) {
+    dispatch({type: OPEN_SETTING_MAP_MODAL, data: map})
+  }
 }
 
-export function closeSettingMapModal() {
-    return function (dispatch) {
-        dispatch({type: CLOSE_SETTING_MAP_MODAL})
-    }
+export function closeSettingMapModal () {
+  return function (dispatch) {
+    dispatch({type: CLOSE_SETTING_MAP_MODAL})
+  }
 }
 
-export function addSettingMap(props) {
-    return function (dispatch) {
-
-        axios.post('/map', props)
+export function addSettingMap (props) {
+  return function (dispatch) {
+    axios.post('/map', props)
             .then(response => {
-                dispatch({ type: ADD_SETTING_MAP, data: response.data })
-                dispatch(closeSettingMapModal())
+              dispatch({ type: ADD_SETTING_MAP, data: response.data })
+              dispatch(closeSettingMapModal())
             })
             .catch(error => {
-                dispatch({type: API_ERROR, msg: error})
+              dispatch({type: API_ERROR, msg: error})
             })
-    }
+  }
 }
 
-export function updateSettingMap(entity) {
-    return function (dispatch) {
-        axios.put(entity._links.self.href, entity)
+export function updateSettingMap (entity) {
+  return function (dispatch) {
+    axios.put(entity._links.self.href, entity)
             .then(response => {
-                dispatch({ type: UPDATE_SETTING_MAP, data: response.data })
-                dispatch(closeSettingMapModal())
+              dispatch({ type: UPDATE_SETTING_MAP, data: response.data })
+              dispatch(closeSettingMapModal())
             })
             .catch(error => {
-                dispatch({type: API_ERROR, msg: error})
+              dispatch({type: API_ERROR, msg: error})
             })
-    }
+  }
 }
 
-export function deleteSettingMap(entity) {
-    return function (dispatch) {
-        axios.delete(entity._links.self.href)
-            .then(response => {
-                dispatch({ type: REMOVE_SETTING_MAP, data: entity })
-            })
-            .catch(error => {
-                dispatch({type: API_ERROR, msg: error})
-            })
-    }
-}
-
-export function openMapUsersModal(map) {
-    return function (dispatch) {
-        dispatch({type: OPEN_MAP_USERS_MODAL, data: map})
-        dispatch(fetchMapUsers(map.id))
-    }
-}
-
-export function closeMapUsersModal() {
-    return function (dispatch) {
-        dispatch({type: CLOSE_MAP_USERS_MODAL})
-    }
-}
-
-export function fetchMapUsers(mapId) {
-    return function (dispatch) {
-        axios.get('/user/search/findByMap?mapid=' + mapId).then(response => {
-            dispatch({type: FETCH_MAP_USERS, data: response.data._embedded.users})
-        }).catch(error => {
-            dispatch({type: API_ERROR, msg: error})
-        })
-    }
-}
-
-export function addMapUser(map, user) {
-    return function (dispatch) {
-        const entity = assign({ }, user)
-        entity.mapids = concat(entity.mapids || [], map.id)
-
-        axios.put(entity._links.self.href, entity).then(response => {
-                dispatch({ type: ADD_MAP_USER, data: response.data })
-        }).catch(error => {
-            dispatch({type: API_ERROR, msg: error})
-        })
-    }
-}
-
-export function removeMapUser(map, user) {
-    return function (dispatch) {
-        const entity = assign({ mapids: [] }, user)
-        entity.mapids = (entity.mapids || []).filter(u => u != map.id)
-
-        axios.put(entity._links.self.href, entity).then(response => {
-            dispatch({ type: REMOVE_MAP_USER, data: user })
-        }).catch(error => {
-            dispatch({type: API_ERROR, msg: error})
-        })
-    }
-}
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-export function fetchSettingUsers() {
-    return function (dispatch) {
-        dispatch({type: FETCH_SETTING_USERS, data: []})
-
-        axios.get('/user').then(response => {
-            dispatch({type: FETCH_SETTING_USERS, data: response.data._embedded.users})
-        }).catch(error => {
-            dispatch({type: API_ERROR, msg: error})
-        })
-    }
-}
-
-export function addSettingUser(props) {
-    return function (dispatch) {
-
-        axios.post('/user', props)
-            .then(response => {
-                dispatch({ type: ADD_SETTING_USER, data: response.data })
-                dispatch(closeSettingUserModal())
+export function deleteSettingMap (entity) {
+  return function (dispatch) {
+    axios.delete(entity._links.self.href)
+            .then(() => {
+              dispatch({ type: REMOVE_SETTING_MAP, data: entity })
             })
             .catch(error => {
-                dispatch({type: API_ERROR, msg: error})
+              dispatch({type: API_ERROR, msg: error})
             })
-    }
+  }
 }
 
-export function updateSettingUser(entity) {
-    return function (dispatch) {
-        axios.put(entity._links.self.href, entity).then(response => {
-            dispatch({ type: UPDATE_SETTING_USER, data: response.data })
-            dispatch(closeSettingUserModal())
-            dispatch(closeUserPasswordModal())
-        }).catch(error => {
-            dispatch({type: API_ERROR, msg: error})
-        })
-    }
+export function openMapUsersModal (map) {
+  return function (dispatch) {
+    dispatch({type: OPEN_MAP_USERS_MODAL, data: map})
+    dispatch(fetchMapUsers(map.id))
+  }
 }
 
-export function deleteSettingUser(entity) {
-    return function (dispatch) {
-        axios.delete(entity._links.self.href).then(response => {
-            dispatch({ type: REMOVE_SETTING_USER, data: entity })
-        }).catch(error => {
-            dispatch({type: API_ERROR, msg: error})
-        })
-    }
+export function closeMapUsersModal () {
+  return function (dispatch) {
+    dispatch({type: CLOSE_MAP_USERS_MODAL})
+  }
 }
 
-export function openSettingUserModal(user) {
-    return function (dispatch) {
-        dispatch({type: OPEN_SETTING_USER_MODAL, data: user})
-    }
+export function fetchMapUsers (mapId) {
+  return function (dispatch) {
+    axios.get(`/user/search/findByMap?mapid=${mapId}`).then(response => {
+      dispatch({type: FETCH_MAP_USERS, data: response.data._embedded.users})
+    }).catch(error => {
+      dispatch({type: API_ERROR, msg: error})
+    })
+  }
 }
 
-export function closeSettingUserModal() {
-    return function (dispatch) {
-        dispatch({type: CLOSE_SETTING_USER_MODAL})
-    }
+export function addMapUser (map, user) {
+  return function (dispatch) {
+    const entity = assign({ }, user)
+    entity.mapids = concat(entity.mapids || [], map.id)
+
+    axios.put(entity._links.self.href, entity).then(response => {
+      dispatch({ type: ADD_MAP_USER, data: response.data })
+    }).catch(error => {
+      dispatch({type: API_ERROR, msg: error})
+    })
+  }
 }
 
-export function openUserPasswordModal(user) {
-    return function (dispatch) {
-        dispatch({type: OPEN_USER_PASSWORD_MODAL, data: user})
-    }
+export function removeMapUser (map, user) {
+  return function (dispatch) {
+    const entity = assign({ mapids: [] }, user)
+    entity.mapids = (entity.mapids || []).filter(u => u !== map.id)
+
+    axios.put(entity._links.self.href, entity).then(() => {
+      dispatch({ type: REMOVE_MAP_USER, data: user })
+    }).catch(error => {
+      dispatch({type: API_ERROR, msg: error})
+    })
+  }
 }
 
-export function closeUserPasswordModal() {
-    return function (dispatch) {
-        dispatch({type: CLOSE_USER_PASSWORD_MODAL})
-    }
+// //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+export function fetchSettingUsers () {
+  return function (dispatch) {
+    dispatch({type: FETCH_SETTING_USERS, data: []})
+
+    axios.get('/user').then(response => {
+      dispatch({type: FETCH_SETTING_USERS, data: response.data._embedded.users})
+    }).catch(error => {
+      dispatch({type: API_ERROR, msg: error})
+    })
+  }
 }
 
-export function generatePincode() {
-    return function (dispatch) {
-        axios.get('/genpin').then(response => {
-            dispatch({type: GENERATE_PINCODE, data: response.data})
-        }).catch(error => {
-            dispatch({type: API_ERROR, msg: error})
-        })
-    }
-}
-
-export function fetchEnvVars() {
-    return function (dispatch) {
-        axios.get('/setting/search/envvars').then(response => {
-            dispatch({type: FETCH_ENV_VARS, data: response.data._embedded.settingses})
-        }).catch(error => {
-            dispatch({type: API_ERROR, msg: error})
-        })
-    }
-}
-
-export function updateEnvVar(entity) {
-    return function (dispatch) {
-        axios.put(entity._links.self.href, entity).then(response => {
-            dispatch({type: UPDATE_ENV_VAR, data: response.data})
-        }).catch(error => {
-            dispatch({type: API_ERROR, msg: error})
-        })
-    }
-}
-
-export function addEnvVar(entity) {
-    return function (dispatch) {
-        axios.post('/setting', entity).then(response => {
-            dispatch({type: ADD_ENV_VAR, data: response.data})
-        }).catch(error => {
-            dispatch({type: API_ERROR, msg: error})
-        })
-    }
-}
-
-export function fetchIdentities() {
-    return function (dispatch) {
-        axios.get('/setting/search/identities').then(response => {
-            dispatch({type: FETCH_IDENTITIES, data: response.data._embedded.settingses})
-        }).catch(error => {
-            dispatch({type: API_ERROR, msg: error})
-        })
-    }
-}
-
-export function addIdentity(props) {
-    return function (dispatch) {
-        axios.post('/setting', props).then(response => {
-            dispatch({type: ADD_IDENTITY, data: response.data})
-            dispatch(closeIdentityModal())
-        }).catch(error => {
-            dispatch({type: API_ERROR, msg: error})
-        })
-    }
-}
-
-export function updateIdentity(entity) {
-    return function (dispatch) {
-        axios.put(entity._links.self.href, entity).then(response => {
-            dispatch({type: UPDATE_IDENTITY, data: response.data})
-            dispatch(closeIdentityModal())
-        }).catch(error => {
-            dispatch({type: API_ERROR, msg: error})
-        })
-    }
-}
-
-export function removeIdentity(entity) {
-    return function (dispatch) {
-        axios.delete(entity._links.self.href).then(response => {
-            dispatch({type: REMOVE_IDENTITY, data: entity})
-        }).catch(error => {
-            dispatch({type: API_ERROR, msg: error})
-        })
-    }
-}
-
-export function openIdentityModal(entity) {
-    return function (dispatch) {
-        dispatch({ type: OPEN_IDENTITY_MODAL, data: entity })
-    }
-}
-
-export function closeIdentityModal() {
-    return function (dispatch) {
-        dispatch({ type: CLOSE_IDENTITY_MODAL })
-    }
-}
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-export function fetchCredentials() {
-    return function (dispatch) {
-        axios.get('/credential').then(response => {
-            dispatch({ type: FETCH_CREDENTIALS, data: response.data._embedded.credentials })
-        }).catch(error => {
-            dispatch({type: API_ERROR, msg: error})
-        })
-    }
-}
-
-export function addCredentials(props) {
-    return function (dispatch) {
-        axios.post('/credential', props).then(response => {
-            dispatch({type: ADD_CREDENTIALS, data: response.data})
-            dispatch(closeCredentialsModal())
-        }).catch(error => {
-            dispatch({type: API_ERROR, msg: error})
-        })
-    }
-}
-
-export function updateCredentials(entity) {
-    return function (dispatch) {
-        axios.put(entity._links.self.href, entity).then(response => {
-            dispatch({type: UPDATE_CREDENTIALS, data: response.data})
-            dispatch(closeCredentialsModal())
-        }).catch(error => {
-            dispatch({type: API_ERROR, msg: error})
-        })
-    }
-}
-
-export function removeCredentials(entity) {
-    return function (dispatch) {
-        axios.delete(entity._links.self.href).then(response => {
-            dispatch({type: REMOVE_CREDENTIALS, data: entity})
-        }).catch(error => {
-            dispatch({type: API_ERROR, msg: error})
-        })
-    }
-}
-
-export function openCredentialsModal(entity) {
-    return function (dispatch) {
-        dispatch({ type: OPEN_CREDENTIALS_MODAL, data: entity })
-    }
-}
-
-export function closeCredentialsModal() {
-    return function (dispatch) {
-        dispatch({ type: CLOSE_CREDENTIALS_MODAL })
-    }
-}
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-export function fetchWorkflows() {
-    return function (dispatch) {
-        axios.get('/workflow').then(response => {
-            dispatch({ type: FETCH_WORKFLOWS, data: response.data._embedded.workflows })
-        }).catch(error => {
-            dispatch({type: API_ERROR, msg: error})
-        })
-    }
-}
-
-export function addWorkflow(props) {
-    return function (dispatch) {
-        axios.post('/workflow', props).then(response => {
-            dispatch({type: ADD_WORKFLOW, data: response.data})
-            dispatch(closeWorkflowModal())
-        }).catch(error => {
-            dispatch({type: API_ERROR, msg: error})
-        })
-    }
-}
-
-export function updateWorkflow(entity) {
-    return function (dispatch) {
-        axios.put(entity._links.self.href, entity).then(response => {
-            dispatch({type: UPDATE_WORKFLOW, data: response.data})
-            dispatch(closeWorkflowModal())
-        }).catch(error => {
-            dispatch({type: API_ERROR, msg: error})
-        })
-    }
-}
-
-export function removeWorkflow(entity) {
-    return function (dispatch) {
-        axios.delete(entity._links.self.href).then(response => {
-            dispatch({type: REMOVE_WORKFLOW, data: entity})
-        }).catch(error => {
-            dispatch({type: API_ERROR, msg: error})
-        })
-    }
-}
-
-export function openWorkflowModal(entity) {
-    return function (dispatch) {
-        dispatch({ type: OPEN_WORKFLOW_MODAL, data: entity })
-    }
-}
-
-export function closeWorkflowModal() {
-    return function (dispatch) {
-        dispatch({ type: CLOSE_WORKFLOW_MODAL })
-    }
-}
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-export function fetchDeviceRules() {
-    return function (dispatch) {
-        dispatch({
-            type: FETCH_DEVICE_RULES,
-            data: [],
-        })
-    }
-}
-
-export function fetchDeviceRawIncidents() {
-    return function (dispatch) {
-        dispatch({
-            type: FETCH_DEVICE_RAW_INCIDENTS,
-            data: [],
-        })
-    }
-}
-
-export function fetchDevicePhysicalRules() {
-    return function (dispatch) {
-        dispatch({
-            type: FETCH_DEVICE_PHYSICAL_RULES,
-            data: [],
-        })
-    }
-}
-
-export function fetchDeviceBasicMonitors() {
-
-    return function (dispatch) {
-        const res = []
-
-        dispatch({
-            type: FETCH_DEVICE_BASIC_MONITORS,
-            data: [],
-        })
-    }
-}
-
-export function fetchDeviceEventLog() {
-    return function (dispatch) {
-        dispatch({
-            type: FETCH_DEVICE_EVENTLOG,
-            data: [],
-        })
-    }
-}
-
-export function fetchDeviceApps() {
-    return function (dispatch) {
-        const res = []
-        dispatch({
-            type: FETCH_DEVICE_APPS,
-            data: res
-        })
-    }
-}
-
-export function openDeviceEditModal(device) {
-    return function (dispatch) {
-        dispatch({
-            type: OPEN_DEVICE_EDIT_MODAL,
-            device
-        })
-    }
-}
-
-export function closeDeviceEditModal() {
-    return function (dispatch) {
-        dispatch({
-            type: CLOSE_DEVICE_EDIT_MODAL,
-        })
-    }
-}
-
-export function addDevice(url, props) {
-    return function (dispatch) {
-        axios.post(url, props)
+export function addSettingUser (props) {
+  return function (dispatch) {
+    axios.post('/user', props)
             .then(response => {
-                dispatch(closeDeviceEditModal())
-                dispatch(fetchDevices())
+              dispatch({ type: ADD_SETTING_USER, data: response.data })
+              dispatch(closeSettingUserModal())
             })
             .catch(error => {
-                dispatch({type: UPDATE_DEVICE_ERROR, msg: error})
+              dispatch({type: API_ERROR, msg: error})
             })
-    }
+  }
 }
 
-export function updateDevice(url, props) {
-    return function (dispatch) {
-        axios.put(url, props)
-            .then(response => {
-                dispatch(closeDeviceEditModal())
-                dispatch(fetchDevices())
-            })
-            .catch(error => {
-                dispatch({type: UPDATE_DEVICE_ERROR, msg: error})
-            })
-    }
+export function updateSettingUser (entity) {
+  return function (dispatch) {
+    axios.put(entity._links.self.href, entity).then(response => {
+      dispatch({ type: UPDATE_SETTING_USER, data: response.data })
+      dispatch(closeSettingUserModal())
+      dispatch(closeUserPasswordModal())
+    }).catch(error => {
+      dispatch({type: API_ERROR, msg: error})
+    })
+  }
 }
 
+export function deleteSettingUser (entity) {
+  return function (dispatch) {
+    axios.delete(entity._links.self.href).then(response => {
+      dispatch({ type: REMOVE_SETTING_USER, data: entity })
+    }).catch(error => {
+      dispatch({type: API_ERROR, msg: error})
+    })
+  }
+}
 
-export function deleteDevice(url) {
-    return function (dispatch) {
-        axios.delete(url)
+export function openSettingUserModal (user) {
+  return function (dispatch) {
+    dispatch({type: OPEN_SETTING_USER_MODAL, data: user})
+  }
+}
+
+export function closeSettingUserModal () {
+  return function (dispatch) {
+    dispatch({type: CLOSE_SETTING_USER_MODAL})
+  }
+}
+
+export function openUserPasswordModal (user) {
+  return function (dispatch) {
+    dispatch({type: OPEN_USER_PASSWORD_MODAL, data: user})
+  }
+}
+
+export function closeUserPasswordModal () {
+  return function (dispatch) {
+    dispatch({type: CLOSE_USER_PASSWORD_MODAL})
+  }
+}
+
+export function generatePincode () {
+  return function (dispatch) {
+    axios.get('/genpin').then(response => {
+      dispatch({type: GENERATE_PINCODE, data: response.data})
+    }).catch(error => {
+      dispatch({type: API_ERROR, msg: error})
+    })
+  }
+}
+
+export function fetchEnvVars () {
+  return function (dispatch) {
+    axios.get('/setting/search/envvars').then(response => {
+      dispatch({type: FETCH_ENV_VARS, data: response.data._embedded.settingses})
+    }).catch(error => {
+      dispatch({type: API_ERROR, msg: error})
+    })
+  }
+}
+
+export function updateEnvVar (entity) {
+  return function (dispatch) {
+    axios.put(entity._links.self.href, entity).then(response => {
+      dispatch({type: UPDATE_ENV_VAR, data: response.data})
+    }).catch(error => {
+      dispatch({type: API_ERROR, msg: error})
+    })
+  }
+}
+
+export function addEnvVar (entity) {
+  return function (dispatch) {
+    axios.post('/setting', entity).then(response => {
+      dispatch({type: ADD_ENV_VAR, data: response.data})
+    }).catch(error => {
+      dispatch({type: API_ERROR, msg: error})
+    })
+  }
+}
+
+export function fetchIdentities () {
+  return function (dispatch) {
+    axios.get('/setting/search/identities').then(response => {
+      dispatch({type: FETCH_IDENTITIES, data: response.data._embedded.settingses})
+    }).catch(error => {
+      dispatch({type: API_ERROR, msg: error})
+    })
+  }
+}
+
+export function addIdentity (props) {
+  return function (dispatch) {
+    axios.post('/setting', props).then(response => {
+      dispatch({type: ADD_IDENTITY, data: response.data})
+      dispatch(closeIdentityModal())
+    }).catch(error => {
+      dispatch({type: API_ERROR, msg: error})
+    })
+  }
+}
+
+export function updateIdentity (entity) {
+  return function (dispatch) {
+    axios.put(entity._links.self.href, entity).then(response => {
+      dispatch({type: UPDATE_IDENTITY, data: response.data})
+      dispatch(closeIdentityModal())
+    }).catch(error => {
+      dispatch({type: API_ERROR, msg: error})
+    })
+  }
+}
+
+export function removeIdentity (entity) {
+  return function (dispatch) {
+    axios.delete(entity._links.self.href).then(response => {
+      dispatch({type: REMOVE_IDENTITY, data: entity})
+    }).catch(error => {
+      dispatch({type: API_ERROR, msg: error})
+    })
+  }
+}
+
+export function openIdentityModal (entity) {
+  return function (dispatch) {
+    dispatch({ type: OPEN_IDENTITY_MODAL, data: entity })
+  }
+}
+
+export function closeIdentityModal () {
+  return function (dispatch) {
+    dispatch({ type: CLOSE_IDENTITY_MODAL })
+  }
+}
+
+// //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+export function fetchCredentials () {
+  return function (dispatch) {
+    axios.get('/credential').then(response => {
+      dispatch({ type: FETCH_CREDENTIALS, data: response.data._embedded.credentials })
+    }).catch(error => {
+      dispatch({type: API_ERROR, msg: error})
+    })
+  }
+}
+
+export function addCredentials (props) {
+  return function (dispatch) {
+    axios.post('/credential', props).then(response => {
+      dispatch({type: ADD_CREDENTIALS, data: response.data})
+      dispatch(closeCredentialsModal())
+    }).catch(error => {
+      dispatch({type: API_ERROR, msg: error})
+    })
+  }
+}
+
+export function updateCredentials (entity) {
+  return function (dispatch) {
+    axios.put(entity._links.self.href, entity).then(response => {
+      dispatch({type: UPDATE_CREDENTIALS, data: response.data})
+      dispatch(closeCredentialsModal())
+    }).catch(error => {
+      dispatch({type: API_ERROR, msg: error})
+    })
+  }
+}
+
+export function removeCredentials (entity) {
+  return function (dispatch) {
+    axios.delete(entity._links.self.href).then(response => {
+      dispatch({type: REMOVE_CREDENTIALS, data: entity})
+    }).catch(error => {
+      dispatch({type: API_ERROR, msg: error})
+    })
+  }
+}
+
+export function openCredentialsModal (entity) {
+  return function (dispatch) {
+    dispatch({ type: OPEN_CREDENTIALS_MODAL, data: entity })
+  }
+}
+
+export function closeCredentialsModal () {
+  return function (dispatch) {
+    dispatch({ type: CLOSE_CREDENTIALS_MODAL })
+  }
+}
+
+// //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+export function fetchWorkflows () {
+  return function (dispatch) {
+    axios.get('/workflow').then(response => {
+      dispatch({ type: FETCH_WORKFLOWS, data: response.data._embedded.workflows })
+    }).catch(error => {
+      dispatch({type: API_ERROR, msg: error})
+    })
+  }
+}
+
+export function addWorkflow (props) {
+  return function (dispatch) {
+    axios.post('/workflow', props).then(response => {
+      dispatch({type: ADD_WORKFLOW, data: response.data})
+      dispatch(closeWorkflowModal())
+    }).catch(error => {
+      dispatch({type: API_ERROR, msg: error})
+    })
+  }
+}
+
+export function updateWorkflow (entity) {
+  return function (dispatch) {
+    axios.put(entity._links.self.href, entity).then(response => {
+      dispatch({type: UPDATE_WORKFLOW, data: response.data})
+      dispatch(closeWorkflowModal())
+    }).catch(error => {
+      dispatch({type: API_ERROR, msg: error})
+    })
+  }
+}
+
+export function removeWorkflow (entity) {
+  return function (dispatch) {
+    axios.delete(entity._links.self.href).then(response => {
+      dispatch({type: REMOVE_WORKFLOW, data: entity})
+    }).catch(error => {
+      dispatch({type: API_ERROR, msg: error})
+    })
+  }
+}
+
+export function openWorkflowModal (entity) {
+  return function (dispatch) {
+    dispatch({ type: OPEN_WORKFLOW_MODAL, data: entity })
+  }
+}
+
+export function closeWorkflowModal () {
+  return function (dispatch) {
+    dispatch({ type: CLOSE_WORKFLOW_MODAL })
+  }
+}
+
+// //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export function fetchDeviceRules () {
+  return function (dispatch) {
+    dispatch({
+      type: FETCH_DEVICE_RULES,
+      data: []
+    })
+  }
+}
+
+export function fetchDeviceRawIncidents () {
+  return function (dispatch) {
+    dispatch({
+      type: FETCH_DEVICE_RAW_INCIDENTS,
+      data: []
+    })
+  }
+}
+
+export function fetchDevicePhysicalRules () {
+  return function (dispatch) {
+    dispatch({
+      type: FETCH_DEVICE_PHYSICAL_RULES,
+      data: []
+    })
+  }
+}
+
+export function fetchDeviceBasicMonitors () {
+  return function (dispatch) {
+    const res = []
+
+    dispatch({
+      type: FETCH_DEVICE_BASIC_MONITORS,
+      data: []
+    })
+  }
+}
+
+export function fetchDeviceEventLog () {
+  return function (dispatch) {
+    dispatch({
+      type: FETCH_DEVICE_EVENTLOG,
+      data: []
+    })
+  }
+}
+
+export function fetchDeviceApps () {
+  return function (dispatch) {
+    const res = []
+    dispatch({
+      type: FETCH_DEVICE_APPS,
+      data: res
+    })
+  }
+}
+
+export function openDeviceEditModal (device) {
+  return function (dispatch) {
+    dispatch({
+      type: OPEN_DEVICE_EDIT_MODAL,
+      device
+    })
+  }
+}
+
+export function closeDeviceEditModal () {
+  return function (dispatch) {
+    dispatch({
+      type: CLOSE_DEVICE_EDIT_MODAL
+    })
+  }
+}
+
+export function addDevice (url, props) {
+  return function (dispatch) {
+    axios.post(url, props)
             .then(response => {
-                dispatch(fetchDevices())
+              dispatch(closeDeviceEditModal())
+              dispatch(fetchDevices())
             })
             .catch(error => {
-                dispatch({type: UPDATE_DEVICE_ERROR, msg: error})
+              dispatch({type: UPDATE_DEVICE_ERROR, msg: error})
             })
-    };
+  }
+}
+
+export function updateDevice (url, props) {
+  return function (dispatch) {
+    axios.put(url, props)
+            .then(response => {
+              dispatch(closeDeviceEditModal())
+              dispatch(fetchDevices())
+            })
+            .catch(error => {
+              dispatch({type: UPDATE_DEVICE_ERROR, msg: error})
+            })
+  }
+}
+
+export function deleteDevice (url) {
+  return function (dispatch) {
+    axios.delete(url)
+            .then(response => {
+              dispatch(fetchDevices())
+            })
+            .catch(error => {
+              dispatch({type: UPDATE_DEVICE_ERROR, msg: error})
+            })
+  }
 }

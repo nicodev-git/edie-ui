@@ -1,6 +1,5 @@
 import React from 'react'
-import { Route, IndexRoute } from 'react-router'
-import { Router , hashHistory, browserHistory } from 'react-router'
+import { Router, hashHistory, Route } from 'react-router'
 
 import Main from './components/page/Main'
 import Signin from './components/auth/signin'
@@ -14,7 +13,7 @@ import SearchProcess from './components/page/content/search/Processes'
 import Chat from './components/page/content/chat/Chat'
 import Incidents from './components/page/content/incidents/Incidents'
 import BigIncidents from './components/page/content/dashboard/incidents/BigIncidents'
-import Threatmap from './components/page/content/threatmap/ThreatMap'
+import ThreatMap from './components/page/content/threatmap/Threatmap'
 import Settings from './components/page/content/settings/Settings'
 import SettingGeneral from './components/page/content/settings/general/General'
 import SettingAgent from './components/page/content/settings/agent/Agents'
@@ -42,25 +41,25 @@ import DeviceList from './components/DeviceList'
 import RequireAuth from './components/auth/require_auth'
 
 const onMainEnter = (prevState, nextState, replace, callback) => {
-    console.log("On Main Change")
-    setTimeout(() => {
-        window.dispatchEvent(new Event('resize'))
-    }, 150)
-    callback && callback()
+  console.log('On Main Change')
+  setTimeout(() => {
+    window.dispatchEvent(new window.Event('resize'))
+  }, 150)
+  callback && callback()
 }
 
 export default(
     <Router history={hashHistory}>
-        <Route path="/"  component={RequireAuth(Main)} onChange={onMainEnter}>
-            <Route path="chat"  component={Chat} />
-            <Route path="search"  component={Search}>
+        <Route path="/" component={RequireAuth(Main)} onChange={onMainEnter}>
+            <Route path="chat" component={Chat} />
+            <Route path="search" component={Search}>
                 <Route path="incidents" component={SearchIncidents} />
                 <Route path="devices" component={SearchDevices} />
                 <Route path="process" component={SearchProcess} />
             </Route>
             <Route path="incidents" component={Incidents}/>
             <Route path="bigincidents" component={BigIncidents}/>
-            <Route path="threatmap" component={Threatmap}/>
+            <Route path="threatmap" component={ThreatMap}/>
             <Route path="settings" component={Settings}>
                 <Route path="general" component={SettingGeneral} />
                 <Route path="agents" component={SettingAgent} />

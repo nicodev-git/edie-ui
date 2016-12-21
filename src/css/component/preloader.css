@@ -1,0 +1,25 @@
+.preloader .overlay {
+    background-color: black;
+    opacity: 0.4;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+}
+
+.preloader .content {
+    text-align: center;
+    position: absolute;
+    left: 0;
+    right: 0px;
+    margin: auto;
+    top: 50%;
+    z-index: 9999;
+
+    width: 150px;
+    background: white;
+    border-radius: 5px;
+    padding-bottom: 5px;
+}

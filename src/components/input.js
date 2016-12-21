@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 
 const Input = ({ input, label, type, meta: { touched, error } }) => (
     <fieldset className="form-group">
@@ -8,7 +8,7 @@ const Input = ({ input, label, type, meta: { touched, error } }) => (
             {touched && error && <span className="error">{error}</span>}
         </div>
     </fieldset>
-);
+)
 
-export default Input;
+export default Input
 

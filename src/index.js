@@ -1,89 +1,87 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-import { createStore, applyMiddleware, combineReducers } from 'redux';
-import { Router , browserHistory } from 'react-router';
-import reducers from './reducers';
-import Routes from './routes';
-import reduxThunk from 'redux-thunk';
+import React from 'react'
+import ReactDOM from 'react-dom'
+import { Provider } from 'react-redux'
+import { createStore, applyMiddleware } from 'redux'
+import reducers from './reducers'
+import Routes from './routes'
+import reduxThunk from 'redux-thunk'
 
+import { AUTH_USER } from './actions/types'
 
-import { AUTH_USER } from './actions/types';
-
-const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
+const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore)
 
 const initialState = {
-    dashboard: {
-        stats: {
-            open: 0,
-            month: 0,
-            today: 0,
-            attackers: 0
-        },
-
-        maps: [],
-        mapDevices: [],
-        mapLines: [],
-
-        incidents: [],
-
-        selectedDevice: null,
-
-        images: [],
+  dashboard: {
+    stats: {
+      open: 0,
+      month: 0,
+      today: 0,
+      attackers: 0
     },
 
-    devices: {
-        devices: [],
+    maps: [],
+    mapDevices: [],
+    mapLines: [],
 
-        incidents: [],
-        addIncidentModalVisible: false,
-        
-        rules: [],
-        rawIncidents: [],
-        physicalRules: [],
+    incidents: [],
 
-        monitorPickerVisible: false,
+    selectedDevice: null,
 
-        wizardInitialValues: {},
-        monitorWizardVisible: false,
+    images: []
+  },
 
-        basicMonitors: [],
-        monitors: [],
+  devices: {
+    devices: [],
 
-        eventLogs: [],
-        apps: [],
-        processes: [],
-    },
+    incidents: [],
+    addIncidentModalVisible: false,
 
-    search: {
-        incidents: [],
-        incidentDevices: [],
-    },
+    rules: [],
+    rawIncidents: [],
+    physicalRules: [],
 
-    settings: {
-        envVars: [],
-        identities: [],
-        credentials: [],
+    monitorPickerVisible: false,
 
-        deviceTemplates: [],
-        monitorTemplates: [],
-        tplImageModalVisible: false,
+    wizardInitialValues: {},
+    monitorWizardVisible: false,
 
-        maps: [],
-        editMap: null,
+    basicMonitors: [],
+    monitors: [],
 
-        editUser: null,
-        editUserPin: '',
+    eventLogs: [],
+    apps: [],
+    processes: []
+  },
 
-        showTraffic: true,
-    }
+  search: {
+    incidents: [],
+    incidentDevices: []
+  },
+
+  settings: {
+    envVars: [],
+    identities: [],
+    credentials: [],
+
+    deviceTemplates: [],
+    monitorTemplates: [],
+    tplImageModalVisible: false,
+
+    maps: [],
+    editMap: null,
+
+    editUser: null,
+    editUserPin: '',
+
+    showTraffic: true
+  }
 }
-const store = createStoreWithMiddleware(reducers, initialState);
+const store = createStoreWithMiddleware(reducers, initialState)
 
-const token = localStorage.getItem('token');
+const token = window.localStorage.getItem('token')
 
 if (token) {
-    store.dispatch({ type: AUTH_USER });
+  store.dispatch({ type: AUTH_USER })
 }
 
 console.log('Version: 0.6.2')
@@ -93,4 +91,8 @@ ReactDOM.render(
         {Routes}
     </Provider>
     , document.getElementById('app')
-);
+)
+
+// _$(document).ready(function () {
+//   React.render(<App />, document.body);
+// });

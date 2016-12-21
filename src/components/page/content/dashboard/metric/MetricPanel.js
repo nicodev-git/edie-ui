@@ -2,93 +2,90 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
 
-import Metric from 'components/shared/Metric.jsx'
-import { appendComponent, removeComponent } from 'util/Component.js'
+import Metric from '../../../../shared/Metric'
 
 import AttackersModal from './AttackersModal'
 
 class MetricPanel extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            showAttackers: false
-        }
+  constructor (props) {
+    super(props)
+    this.state = {
+      showAttackers: false
     }
+  }
 
-    render() {
-        const {stats} = this.props
+  render () {
+    const {stats} = this.props
 
-        return (
+    return (
             <div className="row news-info">
                 <div className="col-sm-3 col-lg-3 col-xs-6">
                     <Metric icon="fa-tags" title="Open Incidents" value={stats.open} className="panel-body-inverse"
-                        onClick={this.showOpenIncidentsDiv.bind(this)}/>
+                      onClick={this.showOpenIncidentsDiv.bind(this)}/>
                 </div>
                 <div className="col-sm-3 col-lg-3 col-xs-6">
                     <Metric icon="fa-trophy" title="Today's Incidents" value={stats.today} className="panel-body-inverse"
-                        onClick={this.showTodayIncidentsDiv.bind(this)}/>
+                      onClick={this.showTodayIncidentsDiv.bind(this)}/>
                 </div>
                 <div className="col-sm-3 col-lg-3 col-xs-6">
                     <Metric icon="fa-chain-broken" title="Attackers Today" value={stats.attackers} className="panel-body-inverse"
-                        onClick={this.showIpIncidentsDiv.bind(this)}/>
+                      onClick={this.showIpIncidentsDiv.bind(this)}/>
                 </div>
                 <div className="col-sm-3 col-lg-3 col-xs-6">
                     <Metric icon="fa-users" title="Month Incidents" value={stats.month} className="panel-body-inverse"
-                        onClick={this.showMonthIncidentsDiv.bind(this)}/>
+                      onClick={this.showMonthIncidentsDiv.bind(this)}/>
                 </div>
 
                 {this.renderAttackers()}
             </div>
-        )
-    }
+    )
+  }
 
-    renderAttackers() {
-        if (!this.state.showAttackers) return
-        return (
+  renderAttackers () {
+    if (!this.state.showAttackers) return
+    return (
             <AttackersModal onClose={() => {
-                this.setState({ showAttackers: false })
+              this.setState({ showAttackers: false })
             }} />
-        )
-    }
+    )
+  }
 
-    componentWillMount() {
-        this.loadCounts()
-    }
+  componentWillMount () {
+    this.loadCounts()
+  }
 
-    loadCounts() {
-    }
+  loadCounts () {
+  }
 
-    showOpenIncidentsDiv() {
-        this.showIncidentSearch('')
-    }
+  showOpenIncidentsDiv () {
+    this.showIncidentSearch('')
+  }
 
-    showTodayIncidentsDiv() {
-        this.showIncidentSearch('today')
-    }
+  showTodayIncidentsDiv () {
+    this.showIncidentSearch('today')
+  }
 
-    showIpIncidentsDiv() {
-        this.setState({ showAttackers: true })
-    }
+  showIpIncidentsDiv () {
+    this.setState({ showAttackers: true })
+  }
 
-    showMonthIncidentsDiv() {
+  showMonthIncidentsDiv () {
+    this.showIncidentSearch('month')
+  }
 
-        this.showIncidentSearch('month')
-    }
-
-    showIncidentSearch(filterType) {
-        const {router} = this.props
-        router.push({
-            pathname: '/search/incidents',
-            state: {
-                filterType
-            }
-        })
-    }
+  showIncidentSearch (filterType) {
+    const {router} = this.props
+    router.push({
+      pathname: '/search/incidents',
+      state: {
+        filterType
+      }
+    })
+  }
 }
 
-
-function mapStateToProps(state) {
-    return {stats: state.dashboard.stats};
+function mapStateToProps (state) {
+  return {stats: state.dashboard.stats}
 }
 
 export default withRouter(connect(mapStateToProps)(MetricPanel))

@@ -1,0 +1,59 @@
+.modal-fit .modal-dialog{
+     width: 100%;
+     margin: 0;
+     height: 100%;
+ }
+
+.modal-fit .modal-content{
+    height: 100%;
+}
+
+.modal-flex .modal-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-flex .modal-body{
+    flex:1;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.modal.fade .modal-dialog {
+    -webkit-transform: translate(0, 125%);
+    -ms-transform: translate(0, 125%);
+    -o-transform: translate(0, 125%);
+    transform: translate(0, 125%);
+    -webkit-transition: -webkit-transform 0.3s ease-out;
+    -moz-transition: -moz-transform 0.3s ease-out;
+    -o-transition: -o-transform 0.3s ease-out;
+    transition: transform 0.3s ease-out;
+}
+
+.modal.in .modal-dialog {
+    -webkit-transform: translate(0,0);
+    -ms-transform: translate(0,0);
+    -o-transform: translate(0,0);
+    transform: translate(0,0);
+}
+
+.bootstrap-dialog.type-default .modal-header {
+    background-color: #ddd;
+}
+
+.bootstrap-dialog .bootstrap-dialog-message {
+    font-size: inherit;
+}
+
+.modal-dialog {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) !important;
+    margin: auto;
+}
+
+.modal-md .modal-dialog{
+    width: 1000px;
+}

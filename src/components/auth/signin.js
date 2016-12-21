@@ -1,41 +1,37 @@
-import React, { Component } from 'react';
-import { reduxForm, Field } from 'redux-form';
-import { connect } from 'react-redux';
+import React, { Component } from 'react'
+import { reduxForm, Field } from 'redux-form'
+import { connect } from 'react-redux'
 
-import { signUser } from '../../actions/index';
+import { signUser } from '../../actions'
 
-
-//import * as actions from '../../actions';
+// import * as actions from '../../actions';
 
 const renderInput = field =>   // Define stateless component to render input and errors
     <div>
-        <input className={"form-control " + field.className} {...field.input}
-               type={field.type}
-               placeholder={field.label}/>
+        <input className={`form-control ${field.className}`} {...field.input}
+          type={field.type}
+          placeholder={field.label}/>
     </div>
 
 class Signin extends Component {
 
-    handleFormSubmit({ email, password }) {
-        this.props.signUser({email, password});
-    }
+  handleFormSubmit ({ email, password }) {
+    this.props.signUser({email, password})
+  }
 
-    renderAlert() {
-        if (this.props.errorMessage) {
-            return (
+  renderAlert () {
+    if (this.props.errorMessage) {
+      return (
                 <div className="alert alert-danger">
                     {this.props.errorMessage}
                 </div>
-            );
-        }
+      )
     }
+  }
 
-
-    render() {
-        const { handleSubmit } = this.props;
-
-
-        return (
+  render () {
+    const { handleSubmit } = this.props
+    return (
             <div className="login">
                 <div className="heading">
                     <h1>Incident Manager</h1>
@@ -48,15 +44,13 @@ class Signin extends Component {
                             <div className="field"><img src="/images/user_icon.png" /></div>
                             <Field name="email" component={renderInput} type="text" label="Username" className="text_field"/>
 
-                            <div className="line"></div>
+                            <div className="line" />
 
                             <div className="field"><img src="/images/pass_icon.png"/></div>
                             <Field name="password" component={renderInput} type="password" label="Password" className="text_field" />
 
-
-
                         </div>
-                        <button type='submit' style={{border: 'none', padding: 0, background: 'none'}}>
+                        <button type="submit" style={{border: 'none', padding: 0, background: 'none'}}>
                             <img src="/images/log_in_btn.png"/>
                         </button>
 
@@ -67,18 +61,17 @@ class Signin extends Component {
                     Copyright 2016 SecuRegion Ltd. All Rights Reserved.
                 </div>
             </div>
-        )
-    }
+    )
+  }
 }
 
-function mapStateToProps(state) {
-    return {errorMessage: state.auth.error};
+function mapStateToProps (state) {
+  return {errorMessage: state.auth.error}
 }
 
 Signin = reduxForm({
-    form: 'signin'
-})(Signin);
+  form: 'signin'
+})(Signin)
 
-
-export default Signin = connect(mapStateToProps, {signUser})(Signin);
+export default Signin = connect(mapStateToProps, {signUser})(Signin)
 

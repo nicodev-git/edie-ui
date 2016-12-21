@@ -8,7 +8,7 @@ const webpackHotMiddleware = require('webpack-hot-middleware')
 
 const app = express()
 const port = 8123
-
+app.use(express.static('src'))
 const compiler = webpack(config)
 app.use(webpackDevMiddleware(compiler, {
   noInfo: true,

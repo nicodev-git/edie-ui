@@ -3,28 +3,26 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { findIndex } from 'lodash'
 
-import { fetchMaps, changeMap } from '../../../../../actions/index'
-
+import { fetchMaps, changeMap } from '../../../../../actions'
 
 class MapSelect extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = {
+  constructor (props) {
+    super(props)
+    this.state = {
 
-        }
     }
+  }
 
-    componentWillMount() {
-        this.props.fetchMaps(true)
-    }
-    render() {
-
-        const {selectedMap} = this.props
-        return (
+  componentWillMount () {
+    this.props.fetchMaps(true)
+  }
+  render () {
+    const {selectedMap} = this.props
+    return (
             <select className="input-sm map-select margin-sm-left"
-                    style={{marginTop:"-9px"}}
-                    value={selectedMap ? selectedMap.id : ''}
-                    onChange={this.onChange.bind(this)}>
+              style={{marginTop: '-9px'}}
+              value={selectedMap ? selectedMap.id : ''}
+              onChange={this.onChange.bind(this)}>
                 {
                     this.props.maps.map(map =>
                         <option value={map.id} key={map.id}>
@@ -33,12 +31,12 @@ class MapSelect extends React.Component {
                     )
                 }
             </select>
-        )
-    }
+    )
+  }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    removeSelected() {
+  removeSelected () {
         // let index = findIndex(this.state.maps, {id: this.state.selected})
         // let maps = this.state.maps
         // maps.splice(index, 1)
@@ -46,9 +44,9 @@ class MapSelect extends React.Component {
         // this.setState({maps, selected}, () => {
         //     emit(EVENTS.MAP_CHANGED, selected)
         // })
-    }
+  }
 
-    renameSelected(newname) {
+  renameSelected (newname) {
         // if (!newname) return
         //
         // let index = findIndex(this.state.maps, {id: this.state.selected})
@@ -67,15 +65,15 @@ class MapSelect extends React.Component {
         // }).fail(function(res, data){
         //     showAlert('Save Failed!');
         // });
-    }
+  }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    onUserInfoLoaded() {
-        this.loadMaps()
-    }
+  onUserInfoLoaded () {
+    this.loadMaps()
+  }
 
-    onMapAdded(map) {
+  onMapAdded (map) {
         // let maps = this.state.maps
         // maps.push(map)
         //
@@ -85,14 +83,14 @@ class MapSelect extends React.Component {
         // }, () => {
         //     emit(EVENTS.MAP_CHANGED, map.id)
         // })
-    }
+  }
 
-    onChange(e) {
-        let selectedMap = this.props.maps.filter(u => u.id == e.target.value)[0]
-        this.props.changeMap(selectedMap)
-    }
+  onChange (e) {
+    let selectedMap = this.props.maps.filter(u => u.id === e.target.value)[0]
+    this.props.changeMap(selectedMap)
+  }
 
-    loadMaps() {
+  loadMaps () {
         // const {user} = this.context
         //
         // $.get(Api.map.getMapsByUserDT, {
@@ -116,16 +114,16 @@ class MapSelect extends React.Component {
         //         emit(EVENTS.MAP_CHANGED, mapId)
         //     })
         // });
-    }
+  }
 }
 
 MapSelect.contextTypes = {
 
 }
 
-function mapStateToProps(state) {
-    const { maps, selectedMap } = state.dashboard
-    return { maps, selectedMap }
+function mapStateToProps (state) {
+  const { maps, selectedMap } = state.dashboard
+  return { maps, selectedMap }
 }
 
 export default connect(mapStateToProps, { fetchMaps, changeMap })(MapSelect)

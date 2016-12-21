@@ -1,44 +1,43 @@
 import React from 'react'
 
-import DragSource from 'react-dnd'
-import HTML5Backend from 'react-dnd-html5-backend'
-import DragTypes from '../../../../../shared/Global'
+import { DragSource } from 'react-dnd'
+import {DragTypes} from '../../../../../shared/Global'
 
 const deviceSource = {
-    beginDrag(props) {
+  beginDrag (props) {
         // Return the data describing the dragged item
-        const item = {
-            img: props.img,
-            title: props.title,
-            type: props.type,
-        };
-        return item;
-    },
-
-    endDrag() {
-        //console.log(arguments)
+    const item = {
+      img: props.img,
+      title: props.title,
+      type: props.type
     }
-};
+    return item
+  },
 
-function collect(connect, monitor) {
-    return {
+  endDrag () {
+        // console.log(arguments)
+  }
+}
+
+function collect (connect, monitor) {
+  return {
         // Call this function inside render()
         // to let React DnD handle the drag events:
-        connectDragSource: connect.dragSource(),
-        connectDragPreview: connect.dragPreview(),
-        currentOffset: monitor.getSourceClientOffset(),
+    connectDragSource: connect.dragSource(),
+    connectDragPreview: connect.dragPreview(),
+    currentOffset: monitor.getSourceClientOffset(),
         // You can ask the monitor about the current drag state:
-        isDragging: monitor.isDragging()
-    };
+    isDragging: monitor.isDragging()
+  }
 }
 
 class DeviceImg extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = {}
-    }
+  constructor (props) {
+    super(props)
+    this.state = {}
+  }
 
-    componentDidMount() {
+  componentDidMount () {
         // let img = new Image()
         //
         // img.onload = () => {
@@ -60,17 +59,16 @@ class DeviceImg extends React.Component {
         // }
         //
         // img.src = "/images/" + this.props.img
-    }
+  }
 
-    render() {
+  render () {
+    const { connectDragSource, isDragging } = this.props
 
-        const { connectDragSource, isDragging } = this.props
-
-        return (
+    return (
             connectDragSource(
                 <a href="javascript:;">
                     <span className="pull-left item-icon" ref="div">
-                        <img src={"/externalpictures?name=" + this.props.img} data-type={this.props.type}/>
+                        <img src={`/externalpictures?name=${this.props.img}`} data-type={this.props.type}/>
                     </span>
 
                     <span className="item-text">
@@ -78,8 +76,8 @@ class DeviceImg extends React.Component {
                     </span>
                 </a>
             )
-        )
-    }
+    )
+  }
 
     // render() {
     //
@@ -97,11 +95,11 @@ class DeviceImg extends React.Component {
     // }
 }
 DeviceImg.defaultProps = {
-    img: '',
-    type: '',
-    title: '',
-    selected: false,
+  img: '',
+  type: '',
+  title: '',
+  selected: false
 }
 
-export default DragSource(DragTypes.DEVICE, deviceSource, collect)(DeviceImg);
+export default DragSource(DragTypes.DEVICE, deviceSource, collect)(DeviceImg)
 // export default DeviceImg;

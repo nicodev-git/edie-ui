@@ -2,17 +2,17 @@ import React from 'react'
 import Modal from 'react-bootstrap-modal'
 
 export default class AddExceptionModal extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            open: true,
-        }
+  constructor (props) {
+    super(props)
+    this.state = {
+      open: true
     }
+  }
 
-    render() {
-        return (
+  render () {
+    return (
             <Modal show={this.state.open} onHide={this.onHide.bind(this)}
-                   aria-labelledby="ModalHeader" className="bootstrap-dialog type-primary">
+              aria-labelledby="ModalHeader" className="bootstrap-dialog type-primary">
                 <div className="modal-header">
                     <h4 className="modal-title bootstrap-dialog-title">
                         Add Exception
@@ -41,24 +41,24 @@ export default class AddExceptionModal extends React.Component {
                     </div>
                 </div>
             </Modal>
-        )
-    }
+    )
+  }
 
-    onHide(success) {
-        this.setState({
-            open: false
-        }, () => {
-            this.props.onClose &&
+  onHide (success) {
+    this.setState({
+      open: false
+    }, () => {
+      this.props.onClose &&
             this.props.onClose(this, success)
-        })
-    }
+    })
+  }
 
-    onClickClose() {
-        this.onHide()
-    }
+  onClickClose () {
+    this.onHide()
+  }
 }
 
 AddExceptionModal.defaultProps = {
-    incident: {},
-    onClose: null,
+  incident: {},
+  onClose: null
 }

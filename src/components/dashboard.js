@@ -1,40 +1,38 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { fetchMessage } from '../actions/index';
-
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { fetchMessage } from '../actions'
 
 class Dashboard extends Component {
 
-    componentWillMount() {
-        this.props.fetchMessage();
-    }
+  componentWillMount () {
+    this.props.fetchMessage()
+  }
 
-    rendereMessage() {
-        if (this.props.message) {
-            return (
+  rendereMessage () {
+    if (this.props.message) {
+      return (
                 <div>
                    <h3>This is the secured Dashboard!</h3>
                     <strong>{this.props.message}</strong>
                 </div>
-            );
-        }
+      )
     }
+  }
 
-    render() {
-        return (
+  render () {
+    return (
             <div>
                 This is a feature
                 {this.rendereMessage()}
             </div>
 
-        );
-    }
+    )
+  }
 }
 
-function mapStateToProps(state) {
-    return {message: state.auth.message};
+function mapStateToProps (state) {
+  return {message: state.auth.message}
 }
 
-export default connect(mapStateToProps, {fetchMessage})(Dashboard);
-
+export default connect(mapStateToProps, {fetchMessage})(Dashboard)
 

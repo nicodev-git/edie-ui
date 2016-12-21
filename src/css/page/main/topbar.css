@@ -1,0 +1,76 @@
+.navbar-form.nav-news {
+    margin-right: 200px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+#newstext {
+    top: 4px;
+    left: 415px;
+    font-weight: bold;
+    height: 15px;
+    width: 1156px;
+}
+
+.nav.nav-user-info {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.navbar-static-top .dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+@media (min-width: 768px){
+    .navbar .navbar-brand-group .navbar-brand{
+        border-right: none;
+    }
+
+    .sidebar-condensed .navbar .navbar-brand-group {
+        width: initial;
+    }
+
+    .sidebar-condensed .navbar .navbar-brand-group .navbar-brand {
+        width: 240px;
+    }
+
+    .sidebar-condensed .sc-visible {
+        display: none;
+    }
+
+    .sidebar-condensed .sc-hidden {
+        display: inline;
+    }
+
+    .sidebar-condensed .sidebar .nav-pills>li.nav-dropdown-open, .sidebar-condensed .sidebar .nav-pills>li:hover  {
+        width: inherit;
+    }
+
+    .sidebar-condensed .sidebar .nav>li.nav-dropdown-open, .sidebar-condensed .sidebar .nav>li:hover {
+        width: inherit;
+        z-index: inherit;
+    }
+
+    .sidebar-condensed .sidebar .nav>li.nav-dropdown-open a, .sidebar-condensed .sidebar .nav>li:hover a {
+        overflow: hidden;
+        white-space: nowrap;
+    }
+}
+.navbar-search .form-control {
+    width: 160px;
+    -webkit-transition: width 0.5s ease;
+    -moz-transition: width 0.5s ease;
+    -o-transition: width 0.5s ease;
+    -ms-transition: width 0.5s ease;
+    transition: width 0.5s ease;
+}
+.navbar-search .form-control:focus {
+    width: 200px;
+    -webkit-transition: width 0.5s ease;
+    -moz-transition: width 0.5s ease;
+    -o-transition: width 0.5s ease;
+    -ms-transition: width 0.5s ease;
+    transition: width 0.5s ease;
+}

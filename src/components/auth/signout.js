@@ -1,22 +1,21 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
 
-import { signOut } from '../../actions/index';
-
+import { signOut } from '../../actions'
 
 class Signout extends Component {
 
-    componentWillMount(){
-        this.props.signOut();
-    }
+  componentWillMount () {
+    this.props.signOut()
+  }
 
-    render() {
-        return (
+  render () {
+    return (
             <div>
                 See you nex time...
             </div>
-        );
-    }
+    )
+  }
 }
 
-export default Signout = connect(null, { signOut })(Signout);
+export default Signout = connect(null, { signOut })(Signout)

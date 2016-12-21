@@ -3,10 +3,9 @@ import Modal from 'react-bootstrap-modal'
 import { reduxForm, Field } from 'redux-form'
 import {connect} from 'react-redux'
 
-import {closeDeviceEditModal, updateDevice, addDevice} from 'actions/index'
+import {closeDeviceEditModal, updateDevice, addDevice} from '../actions'
 
-import { validate } from './DeviceValidation';
-
+import { validate } from './DeviceValidation'
 
 const Input = ({ input, label, type, meta: { touched, error } }) => (
     <fieldset className="form-group">
@@ -19,28 +18,27 @@ const Input = ({ input, label, type, meta: { touched, error } }) => (
 )
 
 class DeviceEditModal extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-        }
+  constructor (props) {
+    super(props)
+    this.state = {
     }
+  }
 
-    handleFormSubmit(formProps) {
-        const {device} = this.props
-        if (device) {
-            this.props.updateDevice(device._links.self.href, formProps)
-        } else {
-            this.props.addDevice('/device', formProps)
-        }
+  handleFormSubmit (formProps) {
+    const {device} = this.props
+    if (device) {
+      this.props.updateDevice(device._links.self.href, formProps)
+    } else {
+      this.props.addDevice('/device', formProps)
     }
+  }
 
-    render() {
+  render () {
+    const { handleSubmit, device } = this.props
 
-        const { handleSubmit, device } = this.props
-
-        return (
-            <Modal show={true} onHide={this.onHide.bind(this)}
-                   aria-labelledby="ModalHeader" className="bootstrap-dialog type-primary">
+    return (
+            <Modal show onHide={this.onHide.bind(this)}
+              aria-labelledby="ModalHeader" className="bootstrap-dialog type-primary">
                 <div className="modal-header">
                     <h4 className="modal-title bootstrap-dialog-title">
                         Device
@@ -54,77 +52,76 @@ class DeviceEditModal extends React.Component {
                     <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
 
                         <Field label="Name:" name="name" component={Input} type="text"
-                               defaultValue={device ? device.name : ''}/>
+                          defaultValue={device ? device.name : ''}/>
 
                         <Field label="LAN IP:" name="lanIP" component={Input} type="text"
-                               defaultValue={device ? device.lanIP : ''}/>
+                          defaultValue={device ? device.lanIP : ''}/>
 
                         {this.renderError()}
 
                         <div className="text-right p-none">
-                            <button action='submit' className="btn btn-primary btn-sm margin-sm-right">Save</button>
+                            <button action="submit" className="btn btn-primary btn-sm margin-sm-right">Save</button>
                             <a href="javascript:;" className="btn btn-default btn-sm"
-                               onClick={this.onClickClose.bind(this)}>Close</a>
+                              onClick={this.onClickClose.bind(this)}>Close</a>
                         </div>
                     </form>
 
                 </div>
             </Modal>
-        )
-    }
+    )
+  }
 
-    renderError() {
-        const {updateDeviceError} = this.props
-        if (!updateDeviceError) return null
-        return (
+  renderError () {
+    const {updateDeviceError} = this.props
+    if (!updateDeviceError) return null
+    return (
             <div className="alert alert-danger" role="alert">
-                <span className="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                <span className="glyphicon glyphicon-exclamation-sign" aria-hidden="true" />
                 <span className="sr-only">Error:</span>
                 {updateDeviceError}
             </div>
-        )
-    }
+    )
+  }
 
-    /////////////////////////////////////////////////////////////
+    // ///////////////////////////////////////////////////////////
 
-    onHide() {
+  onHide () {
 
-    }
+  }
 
-    onClickClose() {
-        this.props.closeDeviceEditModal()
-    }
+  onClickClose () {
+    this.props.closeDeviceEditModal()
+  }
 
-    onClickSave() {
+  onClickSave () {
 
-    }
+  }
 
-    //////////////////////////////////////////////////////////////
+    // ////////////////////////////////////////////////////////////
 
-    onChangeProperty(prop, e) {
-        let {device} = this.state
-        device[prop] = e.target.value
-        this.setState({ device })
-    }
+  onChangeProperty (prop, e) {
+    let {device} = this.state
+    device[prop] = e.target.value
+    this.setState({ device })
+  }
 }
 
 DeviceEditModal.defaultProps = {
 
 }
 
-function mapStateToProps(state) {
+function mapStateToProps (state) {
     // console.log('DATA', state.devices);
-    return {
-        device: state.devices.editDevice,
-        initialValues: state.devices.editDevice || {},
-        updateDeviceError: state.devices.updateDeviceError
-    }
+  return {
+    device: state.devices.editDevice,
+    initialValues: state.devices.editDevice || {},
+    updateDeviceError: state.devices.updateDeviceError
+  }
 }
 
-
 DeviceEditModal = reduxForm({
-    form: 'deviceEdit',
-    validate
+  form: 'deviceEdit',
+  validate
 })(DeviceEditModal)
 
 export default connect(mapStateToProps, { closeDeviceEditModal, addDevice, updateDevice })(DeviceEditModal)

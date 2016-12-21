@@ -4,7 +4,7 @@ export const mainMenu = [
     {id: 'chat', title: 'Chat', icon: 'fa-comment', path: '/chat'},
     {id: 'threatmap', title: 'Threat Map', icon: 'fa-bolt', path: '/threatmap'},
     {id: 'incidents', title: 'Incidents', icon: ' fa-exclamation-triangle', path: '/incidents'},
-    {id: 'settings', title: 'Settings', icon: 'fa-wrench', path: '/settings'},
+    {id: 'settings', title: 'Settings', icon: 'fa-wrench', path: '/settings'}
 ]
 
 export const deviceMenu = [
@@ -14,10 +14,10 @@ export const deviceMenu = [
     {id: 'incidents', title: 'Incidents', icon: 'fa-th-list', path: '/device/main'},
     {id: 'monitors', title: 'Monitors', icon: 'fa-desktop', path: '/device/monitor'},
     {id: 'connected', title: 'Connected Devices', icon: 'fa-code-fork', path: '/device/connected'},
-    {id: 'deviceinfo', title: 'Device Info', icon: 'fa-wrench', path: '/device/info'},
+    {id: 'deviceinfo', title: 'Device Info', icon: 'fa-wrench', path: '/device/info'}
 ]
 
 export const contentType = {
-    Device: 'device',
-    Main: 'main',
+  Device: 'device',
+  Main: 'main'
 }

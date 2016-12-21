@@ -1,0 +1,55 @@
+.news-info {
+    margin-left: 0;
+    margin-right: 0;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.news-info .panel {
+    margin-bottom: 0px;
+}
+
+.news-info > div {
+    padding-left: 8px;
+    padding-right: 8px;
+}
+
+.news-info .panel-metric {
+    cursor: pointer;
+}
+
+.panel-metric-sm .metric-content .icon .fa {
+    font-size: 35px;
+}
+
+.panel-metric-sm .metric-content {
+    min-height: 58px;
+}
+
+.news-info .panel-metric-sm .metric-content .icon .fa {
+    font-size: 21px;
+    line-height: 21px;
+}
+
+.news-info .panel-metric .metric-content .icon,
+.news-info .panel-metric-sm .metric-content .value {
+    margin-top: 22px;
+    font-size: 15px;
+}
+
+.panel-metric .metric-content header h1,
+.panel-metric .metric-content header h2,
+.panel-metric .metric-content header h3,
+.panel-metric .metric-content header h4,
+.panel-metric .metric-content header h5,
+.panel-metric .metric-content header h6 {
+    padding: 2px 0 19px;
+}
+
+@media (min-width: 1200px) {
+    .news-info .panel-metric .metric-content .icon,
+    .news-info .panel-metric-sm .metric-content .value {
+        margin-top: 19px;
+        font-size: 21px;
+    }
+}

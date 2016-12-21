@@ -1,0 +1,22 @@
+.select-severity {
+    display: inline-flex;
+    outline: 0;
+}
+.select-severity .Select-control {
+    border: none;
+}
+
+.select-severity.is-focused .Select-control {
+    box-shadow: none;
+}
+
+select.select-custom {
+    border: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: none;
+    /*text-decoration: underline;*/
+    padding-left: 2px;
+    padding-right: 0;
+}

@@ -1,4 +1,3 @@
-import React from 'react';
+import React from 'react'
 
-
-export default () => <div>Welcome to IM Security Center</div>;
+export default () => <div>Welcome to IM Security Center</div>

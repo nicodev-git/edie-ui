@@ -1,4 +1,4 @@
-import { 
+import {
     FETCH_DEVICE_TEMPLATES,
     ADD_DEVICE_TEMPLATE,
     UPDATE_DEVICE_TEMPLATE,
@@ -67,239 +67,237 @@ import {
 import {concat, difference} from 'lodash'
 
 export default function (state = {}, action) {
-    switch (action.type) {
-        case FETCH_DEVICE_TEMPLATES:
-            return { ...state, deviceTemplates: action.data }
+  switch (action.type) {
+    case FETCH_DEVICE_TEMPLATES:
+      return { ...state, deviceTemplates: action.data }
 
-        case ADD_DEVICE_TEMPLATE: {
-            const deviceTemplates = concat(state.deviceTemplates || [], action.data)
-            return { ...state, deviceTemplates }
-        }
-
-        case UPDATE_DEVICE_TEMPLATE: {
-            let deviceTemplates = state.deviceTemplates.map(
-                u => u.id == action.data.id ? action.data : u)
-            return {...state, deviceTemplates}
-        }
-
-        case DELETE_DEVICE_TEMPLATE: {
-            const deviceTemplates = difference(state.deviceTemplates,
-                state.deviceTemplates.filter(u => u.id == action.data.id))
-            return {...state, deviceTemplates}
-        }
-
-        case OPEN_DEVICE_TEMPLATE_MODAL:
-            return { ...state, deviceTplModalVisible: true, deviceTpl: action.data, selectedTplImage: null}
-
-        case CLOSE_DEVICE_TEMPLATE_MODAL:
-            return { ...state, deviceTplModalVisible: false}
-
-        case FETCH_MONITOR_TEMPLATES:
-            return { ...state, monitorTemplates: action.data }
-
-
-        case ADD_MONITOR_TEMPLATE: {
-            const monitorTemplates = concat(state.monitorTemplates || [], action.data)
-            return { ...state, monitorTemplates }
-        }
-
-        case UPDATE_MONITOR_TEMPLATE: {
-            let monitorTemplates = state.monitorTemplates.map(
-                u => u.id == action.data.id ? action.data : u)
-            return {...state, monitorTemplates}
-        }
-
-        case DELETE_MONITOR_TEMPLATE: {
-            const monitorTemplates = difference(state.monitorTemplates,
-                state.monitorTemplates.filter(u => u.id == action.data.id))
-            return {...state, monitorTemplates}
-        }
-
-        case OPEN_MONITOR_TEMPLATE_MODAL:
-            return { ...state, monitorTplModalVisible: true, monitorTpl: action.data, selectedTplImage: null}
-
-        case CLOSE_MONITOR_TEMPLATE_MODAL:
-            return { ...state, monitorTplModalVisible: false}
-
-        case OPEN_TPL_IMAGE_MODAL:
-            return { ...state, tplImageModalVisible: true}
-
-        case CLOSE_TPL_IMAGE_MODAL:
-            return { ...state, tplImageModalVisible: false, selectedTplImage: action.data || state.selectedTplImage}
-
-        case FETCH_SETTING_MAPS:
-            return { ...state, maps: action.data}
-
-        case OPEN_SETTING_MAP_MODAL:
-            return { ...state, mapModalVisible: true, editMap: action.data}
-
-        case CLOSE_SETTING_MAP_MODAL:
-            return { ...state, mapModalVisible: false }
-
-        case OPEN_MAP_USERS_MODAL:
-            return { ...state, mapUsersModalVisible: true, editMap: action.data, mapUsers: [] }
-
-        case CLOSE_MAP_USERS_MODAL:
-            return { ...state, mapUsersModalVisible: false }
-
-        case FETCH_MAP_USERS:
-            return { ...state, mapUsers: action.data }
-
-        case ADD_MAP_USER: {
-            const mapUsers = concat(state.mapUsers || [], action.data)
-            return { ...state, mapUsers }
-        }
-
-        case REMOVE_MAP_USER: {
-            const mapUsers = state.mapUsers.filter(u => u.id != action.data.id)
-            return { ...state, mapUsers }
-        }
-
-        case ADD_SETTING_MAP: {
-            const maps = concat(state.maps || [], action.data)
-            return { ...state, maps }
-        }
-
-        case UPDATE_SETTING_MAP: {
-            const maps = state.maps.map(u => u.id == action.data.id ? action.data : u)
-            return { ...state, maps }
-        }
-
-        case REMOVE_SETTING_MAP: {
-            let { maps } = state
-            maps = maps.filter(u => u.id != action.data.id)
-            return { ...state, maps }
-        }
-
-        /////////////////////////////////////////////////////
-
-        case FETCH_ENV_VARS:
-            return { ...state, envVars: action.data }
-
-        case ADD_ENV_VAR: {
-            const envVars = concat(state.envVars || [], action.data)
-            return { ...state, envVars }
-        }
-
-        case UPDATE_ENV_VAR: {
-            const envVars = state.envVars.map(u => u.id == action.data.id ? action.data : u)
-            return { ...state, envVars }
-        }
-
-        case FETCH_IDENTITIES:
-            return { ...state, identities: action.data }
-
-        case ADD_IDENTITY: {
-            const identities = concat(state.identities || [], action.data)
-            return { ...state, identities }
-        }
-
-        case UPDATE_IDENTITY: {
-            const identities = state.identities.map(u => u.id == action.data.id ? action.data : u)
-            return { ...state, identities }
-        }
-
-        case REMOVE_IDENTITY: {
-            const identities = state.identities.filter(u => u.id != action.data.id)
-            return { ...state, identities }
-        }
-
-        case OPEN_IDENTITY_MODAL: {
-            return { ...state, identityModalVisible: true, editIdentity: action.data }
-        }
-
-        case CLOSE_IDENTITY_MODAL: {
-            return { ...state, identityModalVisible: false }
-        }
-
-        /////////////////////////////////////////////////////
-
-        case FETCH_CREDENTIALS:
-            return { ...state, credentials: action.data }
-
-        case ADD_CREDENTIALS: {
-            const credentials = concat(state.credentials || [], action.data)
-            return { ...state, credentials }
-        }
-
-        case UPDATE_CREDENTIALS: {
-            const credentials = state.credentials.map(u => u.id == action.data.id ? action.data : u)
-            return { ...state, credentials }
-        }
-
-        case REMOVE_CREDENTIALS: {
-            const credentials = state.credentials.filter(u => u.id != action.data.id)
-            return { ...state, credentials }
-        }
-
-        case OPEN_CREDENTIALS_MODAL: {
-            return { ...state, credentialsModalVisible: true, editCredentials: action.data }
-        }
-
-        case CLOSE_CREDENTIALS_MODAL: {
-            return { ...state, credentialsModalVisible: false }
-        }
-
-        /////////////////////////////////////////////////////
-
-        case FETCH_WORKFLOWS:
-            return { ...state, workflows: action.data }
-
-        case ADD_WORKFLOW: {
-            const workflows = concat(state.workflows || [], action.data)
-            return { ...state, workflows }
-        }
-
-        case UPDATE_WORKFLOW: {
-            const workflows = state.workflows.map(u => u.id == action.data.id ? action.data : u)
-            return { ...state, workflows }
-        }
-
-        case REMOVE_WORKFLOW: {
-            const workflows = state.workflows.filter(u => u.id != action.data.id)
-            return { ...state, workflows }
-        }
-
-        case OPEN_WORKFLOW_MODAL: {
-            return { ...state, workflowModalVisible: true, editWorkflow: action.data }
-        }
-
-        case CLOSE_WORKFLOW_MODAL: {
-            return { ...state, workflowModalVisible: false }
-        }
-
-        /////////////////////////////////////////////////////
-
-        case FETCH_SETTING_USERS:
-            return { ...state, users: action.data}
-
-        case OPEN_SETTING_USER_MODAL:
-            return { ...state, userModalVisible: true, editUser: action.data, editUserPin: ''}
-
-        case CLOSE_SETTING_USER_MODAL:
-            return { ...state, userModalVisible: false }
-
-        case ADD_SETTING_USER: {
-            const users = concat(state.users || [], action.data)
-            return { ...state, users }
-        }
-
-        case UPDATE_SETTING_USER: {
-            const users = state.users.map(u => u.id == action.data.id ? action.data : u)
-            return { ...state, users }
-        }
-
-        case REMOVE_SETTING_USER: {
-            let { users } = state
-            users = users.filter(u => u.id != action.data.id)
-            return { ...state, users }
-        }
-
-        case OPEN_USER_PASSWORD_MODAL:
-            return { ...state, userPasswordModalVisible: true }
-
-        case CLOSE_USER_PASSWORD_MODAL:
-            return { ...state, userPasswordModalVisible: false }
+    case ADD_DEVICE_TEMPLATE: {
+      const deviceTemplates = concat(state.deviceTemplates || [], action.data)
+      return { ...state, deviceTemplates }
     }
-    return state;
+
+    case UPDATE_DEVICE_TEMPLATE: {
+      let deviceTemplates = state.deviceTemplates.map(u => u.id === action.data.id ? action.data : u)
+      return {...state, deviceTemplates}
+    }
+
+    case DELETE_DEVICE_TEMPLATE: {
+      const deviceTemplates = difference(state.deviceTemplates,
+                state.deviceTemplates.filter(u => u.id === action.data.id))
+      return {...state, deviceTemplates}
+    }
+
+    case OPEN_DEVICE_TEMPLATE_MODAL:
+      return { ...state, deviceTplModalVisible: true, deviceTpl: action.data, selectedTplImage: null }
+
+    case CLOSE_DEVICE_TEMPLATE_MODAL:
+      return { ...state, deviceTplModalVisible: false }
+
+    case FETCH_MONITOR_TEMPLATES:
+      return { ...state, monitorTemplates: action.data }
+
+    case ADD_MONITOR_TEMPLATE: {
+      const monitorTemplates = concat(state.monitorTemplates || [], action.data)
+      return { ...state, monitorTemplates }
+    }
+
+    case UPDATE_MONITOR_TEMPLATE: {
+      let monitorTemplates = state.monitorTemplates.map(
+                u => u.id === action.data.id ? action.data : u)
+      return { ...state, monitorTemplates }
+    }
+
+    case DELETE_MONITOR_TEMPLATE: {
+      const monitorTemplates = difference(state.monitorTemplates,
+                state.monitorTemplates.filter(u => u.id === action.data.id))
+      return { ...state, monitorTemplates }
+    }
+
+    case OPEN_MONITOR_TEMPLATE_MODAL:
+      return { ...state, monitorTplModalVisible: true, monitorTpl: action.data, selectedTplImage: null }
+
+    case CLOSE_MONITOR_TEMPLATE_MODAL:
+      return { ...state, monitorTplModalVisible: false }
+
+    case OPEN_TPL_IMAGE_MODAL:
+      return { ...state, tplImageModalVisible: true }
+
+    case CLOSE_TPL_IMAGE_MODAL:
+      return { ...state, tplImageModalVisible: false, selectedTplImage: action.data || state.selectedTplImage }
+
+    case FETCH_SETTING_MAPS:
+      return { ...state, maps: action.data }
+
+    case OPEN_SETTING_MAP_MODAL:
+      return { ...state, mapModalVisible: true, editMap: action.data }
+
+    case CLOSE_SETTING_MAP_MODAL:
+      return { ...state, mapModalVisible: false }
+
+    case OPEN_MAP_USERS_MODAL:
+      return { ...state, mapUsersModalVisible: true, editMap: action.data, mapUsers: [] }
+
+    case CLOSE_MAP_USERS_MODAL:
+      return { ...state, mapUsersModalVisible: false }
+
+    case FETCH_MAP_USERS:
+      return { ...state, mapUsers: action.data }
+
+    case ADD_MAP_USER: {
+      const mapUsers = concat(state.mapUsers || [], action.data)
+      return { ...state, mapUsers }
+    }
+
+    case REMOVE_MAP_USER: {
+      const mapUsers = state.mapUsers.filter(u => u.id !== action.data.id)
+      return { ...state, mapUsers }
+    }
+
+    case ADD_SETTING_MAP: {
+      const maps = concat(state.maps || [], action.data)
+      return { ...state, maps }
+    }
+
+    case UPDATE_SETTING_MAP: {
+      const maps = state.maps.map(u => u.id === action.data.id ? action.data : u)
+      return { ...state, maps }
+    }
+
+    case REMOVE_SETTING_MAP: {
+      let { maps } = state
+      maps = maps.filter(u => u.id !== action.data.id)
+      return { ...state, maps }
+    }
+
+        // ///////////////////////////////////////////////////
+
+    case FETCH_ENV_VARS:
+      return { ...state, envVars: action.data }
+
+    case ADD_ENV_VAR: {
+      const envVars = concat(state.envVars || [], action.data)
+      return { ...state, envVars }
+    }
+
+    case UPDATE_ENV_VAR: {
+      const envVars = state.envVars.map(u => u.id === action.data.id ? action.data : u)
+      return { ...state, envVars }
+    }
+
+    case FETCH_IDENTITIES:
+      return { ...state, identities: action.data }
+
+    case ADD_IDENTITY: {
+      const identities = concat(state.identities || [], action.data)
+      return { ...state, identities }
+    }
+
+    case UPDATE_IDENTITY: {
+      const identities = state.identities.map(u => u.id === action.data.id ? action.data : u)
+      return { ...state, identities }
+    }
+
+    case REMOVE_IDENTITY: {
+      const identities = state.identities.filter(u => u.id !== action.data.id)
+      return { ...state, identities }
+    }
+
+    case OPEN_IDENTITY_MODAL: {
+      return { ...state, identityModalVisible: true, editIdentity: action.data }
+    }
+
+    case CLOSE_IDENTITY_MODAL: {
+      return { ...state, identityModalVisible: false }
+    }
+
+        // ///////////////////////////////////////////////////
+
+    case FETCH_CREDENTIALS:
+      return { ...state, credentials: action.data }
+
+    case ADD_CREDENTIALS: {
+      const credentials = concat(state.credentials || [], action.data)
+      return { ...state, credentials }
+    }
+
+    case UPDATE_CREDENTIALS: {
+      const credentials = state.credentials.map(u => u.id === action.data.id ? action.data : u)
+      return { ...state, credentials }
+    }
+
+    case REMOVE_CREDENTIALS: {
+      const credentials = state.credentials.filter(u => u.id !== action.data.id)
+      return { ...state, credentials }
+    }
+
+    case OPEN_CREDENTIALS_MODAL: {
+      return { ...state, credentialsModalVisible: true, editCredentials: action.data }
+    }
+
+    case CLOSE_CREDENTIALS_MODAL: {
+      return { ...state, credentialsModalVisible: false }
+    }
+
+        // ///////////////////////////////////////////////////
+
+    case FETCH_WORKFLOWS:
+      return { ...state, workflows: action.data }
+
+    case ADD_WORKFLOW: {
+      const workflows = concat(state.workflows || [], action.data)
+      return { ...state, workflows }
+    }
+
+    case UPDATE_WORKFLOW: {
+      const workflows = state.workflows.map(u => u.id === action.data.id ? action.data : u)
+      return { ...state, workflows }
+    }
+
+    case REMOVE_WORKFLOW: {
+      const workflows = state.workflows.filter(u => u.id !== action.data.id)
+      return { ...state, workflows }
+    }
+
+    case OPEN_WORKFLOW_MODAL: {
+      return { ...state, workflowModalVisible: true, editWorkflow: action.data }
+    }
+
+    case CLOSE_WORKFLOW_MODAL: {
+      return { ...state, workflowModalVisible: false }
+    }
+
+        // ///////////////////////////////////////////////////
+
+    case FETCH_SETTING_USERS:
+      return { ...state, users: action.data }
+
+    case OPEN_SETTING_USER_MODAL:
+      return { ...state, userModalVisible: true, editUser: action.data, editUserPin: '' }
+
+    case CLOSE_SETTING_USER_MODAL:
+      return { ...state, userModalVisible: false }
+
+    case ADD_SETTING_USER: {
+      const users = concat(state.users || [], action.data)
+      return { ...state, users }
+    }
+
+    case UPDATE_SETTING_USER: {
+      const users = state.users.map(u => u.id === action.data.id ? action.data : u)
+      return { ...state, users }
+    }
+
+    case REMOVE_SETTING_USER: {
+      let { users } = state
+      users = users.filter(u => u.id !== action.data.id)
+      return { ...state, users }
+    }
+
+    case OPEN_USER_PASSWORD_MODAL:
+      return { ...state, userPasswordModalVisible: true }
+
+    case CLOSE_USER_PASSWORD_MODAL:
+      return { ...state, userPasswordModalVisible: false }
+  }
+  return state
 }

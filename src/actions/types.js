@@ -58,7 +58,7 @@ export const ADD_MAP_LINE = 'ADD_MAP_LINE'
 export const UPDATE_MAP_LINE = 'UPDATE_MAP_LINE'
 export const DELETE_MAP_LINE = 'DELETE_MAP_LINE'
 
-export const SIDEBAR_ITEM_CLICKED='sidebar_item_clicked'
+export const SIDEBAR_ITEM_CLICKED = 'sidebar_item_clicked'
 
 export const FETCH_DEVICES = 'FETCH_DEVICES'
 export const OPEN_DEVICE_EDIT_MODAL = 'open_device_edit_modal'
@@ -124,7 +124,6 @@ export const UPDATE_WORKFLOW = 'UPDATE_WORKFLOW'
 export const REMOVE_WORKFLOW = 'REMOVE_WORKFLOW'
 export const OPEN_WORKFLOW_MODAL = 'OPEN_WORKFLOW_MODAL'
 export const CLOSE_WORKFLOW_MODAL = 'CLOSE_WORKFLOW_MODAL'
-
 
 export const FETCH_SETTING_USERS = 'FETCH_SETTING_USERS'
 export const ADD_SETTING_USER = 'ADD_SETTING_USER'
