@@ -1,0 +1,24 @@
+.attacker-bubble-in {
+    border-style: solid;
+    border-width: 6px 14px 16px 15px;
+    -moz-border-image: url(/images/message/BubbleIncoming.png) 18 24 48 39 repeat;
+    -webkit-border-image: url(/images/message/BubbleIncoming.png) 18 24 48 39 repeat;
+    -o-border-image: url(/images/message/BubbleIncoming.png) 18 24 48 39 repeat;
+    border-image: url(/images/message/BubbleIncoming.png) 18 24 48 39 fill repeat;
+
+    min-width: 280px;
+    display: inline-block;
+
+    text-align: left;
+    line-height: 1;
+    color: #191A1A;
+    word-break: break-all;
+
+    position: absolute;
+    z-index: 9999;
+    margin: 0px;
+}
+
+.attacker-bubble-in .text-content {
+    margin-bottom: -7px;
+}

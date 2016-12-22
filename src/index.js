@@ -5,6 +5,7 @@ import { createStore, applyMiddleware } from 'redux'
 import reducers from './reducers'
 import Routes from './routes'
 import reduxThunk from 'redux-thunk'
+import './style/style.styl'
 
 import { AUTH_USER } from './actions/types'
 
