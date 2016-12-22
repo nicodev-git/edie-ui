@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/impweb.iml" filepath="$PROJECT_DIR$/impweb.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/test3.iml" filepath="$PROJECT_DIR$/.idea/test3.iml" />
+      <module fileurl="file://$PROJECT_DIR$/imweb.iml" filepath="$PROJECT_DIR$/imweb.iml" />
     </modules>
   </component>
 </project>

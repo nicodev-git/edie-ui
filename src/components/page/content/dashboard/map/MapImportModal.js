@@ -97,7 +97,7 @@ class MapImportModal extends React.Component {
 
     let file = input.files[0]
 
-    let formData = new FormData()
+    let formData = new FormData();
     formData.append('file', file, input.value.split(/(\\|\/)/g).pop())
     formData.append('name', this.refs.name.value)
 
