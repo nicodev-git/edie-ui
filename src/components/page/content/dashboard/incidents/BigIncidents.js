@@ -47,19 +47,6 @@ class BigIncidents extends React.Component {
     this.onChangeFixed = this.onChangeFixed.bind(this)
   }
 
-  updateDimensions () {
-    const container = this.refs.tableContainer
-    if (!container) {
-      throw new Error('Cannot find container div')
-    }
-
-    if (this.state.tableHeight === container.clientHeight) return
-
-    this.setState({
-      tableHeight: container.clientHeight
-    })
-  }
-
   onResize () {
     if (this.rqf) return
     this.rqf = window.setTimeout(() => {
@@ -80,6 +67,19 @@ class BigIncidents extends React.Component {
 
   componentWillUnmount () {
     window.removeEventListener('resize', this.onResize)
+  }
+
+  updateDimensions () {
+    const container = this.refs.tableContainer
+    if (!container) {
+      throw new Error('Cannot find container div')
+    }
+
+    if (this.state.tableHeight === container.clientHeight) return
+
+    this.setState({
+      tableHeight: container.clientHeight
+    })
   }
 
   render () {
@@ -210,7 +210,7 @@ class BigIncidents extends React.Component {
       templateText: text
     }, () => {
       this.setState({
-        selectWidth: $(this.refs.templateSelect).width() * 1.03
+        selectWidth: $(this.refs.templateSelect).width() * 1.03 // eslint-disable-line no-undef
       })
     })
 

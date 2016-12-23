@@ -49,42 +49,6 @@ class Processes extends React.Component {
     }]
   }
 
-  render () {
-    const defaultDate = 'Last 7 Days'// moment().startOf("month").format("MMMM")
-
-    return (
-            <TabPage>
-                <TabPageHeader title="Search">
-                    <div className="text-center margin-md-top" >
-                        <div className="form-inline" style={{position: 'absolute'}}>
-
-                            <div className="text-left"
-                              style={{'verticalAlign': 'middle', 'lineHeight': 2.2}}>
-                                <DateRangePicker onClickRange={this.onFilterChange}
-                                  default={defaultDate} ref="dp">
-                                    <i className="fa fa-caret-down margin-xs-left" />
-                                </DateRangePicker>
-                            </div>
-                        </div>
-
-                        <div style={{ position: 'relative', display: 'inline-block'}}>
-                            <input type="text" placeholder="Search" className="form-control"
-                              style={{width: '220px', paddingLeft: '35px'}}
-                              onChange={this.onSearchKeyUp.bind(this)}
-                              ref="search"/>
-                            <a className="btn" href="javascript:;" style={{position: 'absolute', left: 0, top: 0}}>
-                                <i className="fa fa-search" />
-                            </a>
-                        </div>
-
-                    </div>
-                </TabPageHeader>
-
-                <TabPageBody tabs={SearchTabs} tab={2} />
-            </TabPage>
-    )
-  }
-
   renderTable () {
     return (
             <InfiniteTable
@@ -124,6 +88,40 @@ class Processes extends React.Component {
   onFilterChange () {
     this.props.onFilterChange &&
         this.props.onFilterChange(this.getOptions())
+  }
+
+  render () {
+    const defaultDate = 'Last 7 Days'// moment().startOf("month").format("MMMM")
+
+    return (
+      <TabPage>
+        <TabPageHeader title="Search">
+          <div className="text-center margin-md-top" >
+            <div className="form-inline" style={{position: 'absolute'}}>
+
+              <div className="text-left" style={{'verticalAlign': 'middle', 'lineHeight': 2.2}}>
+                <DateRangePicker onClickRange={this.onFilterChange} default={defaultDate} ref="dp">
+                  <i className="fa fa-caret-down margin-xs-left" />
+                </DateRangePicker>
+              </div>
+            </div>
+
+            <div style={{ position: 'relative', display: 'inline-block' }}>
+              <input type="text" placeholder="Search" className="form-control"
+                style={{width: '220px', paddingLeft: '35px'}}
+                onChange={this.onSearchKeyUp.bind(this)}
+                ref="search"/>
+              <a className="btn" href="javascript:;" style={{position: 'absolute', left: 0, top: 0}}>
+                <i className="fa fa-search" />
+              </a>
+            </div>
+
+          </div>
+        </TabPageHeader>
+
+        <TabPageBody tabs={SearchTabs} tab={2} />
+      </TabPage>
+    )
   }
 }
 

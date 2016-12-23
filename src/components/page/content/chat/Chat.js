@@ -1,6 +1,10 @@
 import React from 'react'
 import TimeAgo from 'react-timeago'
-import { assign, forIn, findIndex } from 'lodash'
+import {
+  // assign, // Never used
+  forIn,
+  findIndex
+} from 'lodash'
 import moment from 'moment'
 
 import { chatSocket } from '../../../../util/socket/ChatSocket'
@@ -44,59 +48,6 @@ class Chat extends React.Component {
       chatSocket.removeListener(key, value)
     })
     chatSocket.close()
-  }
-
-  render () {
-    let {rooms, selected} = this.state
-    let room = null
-    let messages = []
-    if (selected) room = rooms[selected.id]
-    if (room) messages = room.messages
-
-    return (
-            <div className="chat-content">
-                <section className="incidents">
-                    <ul className="nav nav-stacked" id="nav-incidents">{
-                        this.state.incidents.map(item => this.renderIncident(item))
-                    }
-                    </ul>
-                </section>
-
-                <section className="chat flex-vertical">
-                    <div className="messages-wrapper flex-vertical" ref="messages">
-                        <div>
-                            {messages.map(item => this.renderMessage(item))}
-                        </div>
-                    </div>
-                    <form>
-                        <div className="channel-textarea">
-                            <div className="channel-textarea-inner">
-                                <div className="channel-textarea-upload">
-                                    <input type="file" name="file"
-                                      accept="image/png, image/x-png, image/gif, image/jpeg"
-                                      onChange={this.onFileChange.bind(this)}/>
-                                </div>
-                                <textarea rows="1" placeholder="Chat in general..."
-                                  onKeyUp={this.onTextKeyUp.bind(this)}
-                                  onBlur={this.onTextBlur.bind(this)} />
-                            </div>
-                        </div>
-
-                        {this.renderTypingStatus(room)}
-                    </form>
-                </section>
-
-                <section className="channel-members">
-                    <h2>
-                        <span>Users</span>
-                        <span>—</span>
-                        <span className="online-count">{this.state.roomUsers.length}</span>{
-                        this.state.roomUsers.map(item => this.renderUser(item, room))
-                    }
-                    </h2>
-                </section>
-            </div>
-    )
   }
 
   renderIncident (item) {
@@ -205,7 +156,7 @@ class Chat extends React.Component {
     // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   loadIncidents () {
-    $.get(Api.incidents.getUnfixedIncidentsQuick, {
+    $.get(Api.incidents.getUnfixedIncidentsQuick, { // eslint-disable-line no-undef
       draw: 1,
       start: 0,
       length: 150,
@@ -316,13 +267,13 @@ class Chat extends React.Component {
     if (!input.files || !input.files.length) return
 
     let file = input.files[0]
-    let formData = new FormData()
+    let formData = new FormData() // eslint-disable-line no-undef
 
     formData.append('file', file, input.value.split(/(\\|\/)/g).pop())
     formData.append('sid', this.context.sid)
 
-    $.ajax({
-      url: Api.upload.uploadImage,
+    $.ajax({ // eslint-disable-line no-undef
+      url: Api.upload.uploadImage, // eslint-disable-line no-undef
       type: 'POST',
       data: formData,
       cache: false,
@@ -351,7 +302,7 @@ class Chat extends React.Component {
     this.setState({
       roomUsers: []
     })
-    $.get(Api.chat.users, {
+    $.get(Api.chat.users, { // eslint-disable-line no-undef
       sid: this.context.sid,
       incidentId: incidentId
     }).done(res => {
@@ -464,7 +415,7 @@ class Chat extends React.Component {
       if (!room) return
 
       const user = sockMsg.fullname
-//				if (!user || user === user.fullname) return;
+      // if (!user || user === user.fullname) return;
 
       const typing = sockMsg.message === 'typing'
       let users = room.usersTyping
@@ -560,8 +511,61 @@ class Chat extends React.Component {
     // ///////////////////////////////////////////////////////////
 
   playBeep () {
-    if (!this.beepSound) this.beepSound = new Audio('/snd/beep.mp3')
+    if (!this.beepSound) this.beepSound = new Audio('/snd/beep.mp3') // eslint-disable-line no-undef
     this.beepSound && this.beepSound.play()
+  }
+
+  render () {
+    let {rooms, selected} = this.state
+    let room = null
+    let messages = []
+    if (selected) room = rooms[selected.id]
+    if (room) messages = room.messages
+
+    return (
+      <div className="chat-content">
+        <section className="incidents">
+          <ul className="nav nav-stacked" id="nav-incidents">{
+            this.state.incidents.map(item => this.renderIncident(item))
+          }
+          </ul>
+        </section>
+
+        <section className="chat flex-vertical">
+          <div className="messages-wrapper flex-vertical" ref="messages">
+            <div>
+              {messages.map(item => this.renderMessage(item))}
+            </div>
+          </div>
+          <form>
+            <div className="channel-textarea">
+              <div className="channel-textarea-inner">
+                <div className="channel-textarea-upload">
+                  <input type="file" name="file"
+                    accept="image/png, image/x-png, image/gif, image/jpeg"
+                    onChange={this.onFileChange.bind(this)}/>
+                </div>
+                <textarea rows="1" placeholder="Chat in general..."
+                  onKeyUp={this.onTextKeyUp.bind(this)}
+                  onBlur={this.onTextBlur.bind(this)} />
+              </div>
+            </div>
+
+            {this.renderTypingStatus(room)}
+          </form>
+        </section>
+
+        <section className="channel-members">
+          <h2>
+            <span>Users</span>
+            <span>—</span>
+            <span className="online-count">{this.state.roomUsers.length}</span>{
+            this.state.roomUsers.map(item => this.renderUser(item, room))
+          }
+          </h2>
+        </section>
+      </div>
+    )
   }
 }
 

@@ -1,6 +1,10 @@
 import React from 'react'
 
-import { findIndex, assign, concat } from 'lodash'
+import {
+  // findIndex, // Never used
+  assign,
+  concat
+} from 'lodash'
 import d3 from 'd3'
 import moment from 'moment'
 import Transition from 'react-addons-css-transition-group'
@@ -57,7 +61,7 @@ class Incidents extends React.Component {
   componentDidMount () {
     let me = this
 
-    let $svg = $(me.refs.mapsvg)
+    let $svg = $(me.refs.mapsvg) // eslint-disable-line no-undef
     me.svg = d3.select(me.refs.mapsvg)
 
     me.targetCenter = {
@@ -72,64 +76,6 @@ class Incidents extends React.Component {
     me.setState({
       scenarioCount: me.scenario.length
     })
-  }
-
-  render () {
-    let me = this
-    const { mode, scenarioCount } = this.state
-
-    let currenttime = ''
-    if (me.currentPlay && me.currentPlay.scene) {
-      currenttime = moment(me.currentPlay.scene[0].time + me.state.sliderPos * 1000).format('HH:mm:ss')
-    }
-
-    return (
-            <div className="flex-vertical" style={{flex: 1}}>
-                <div className="inline form-inline padding-sm">
-                    <label style={{marginRight: '3px'}}>Choose:</label>
-                    <select className="form-control input-sm margin-sm-left"
-                      value={mode} onChange={this.onChangeMode.bind(this)}>
-                        <option value="real">Real</option>
-                        <option value="demo">Demo</option>
-                    </select>
-                    {this.renderScenarioSelect()}
-
-                    <select className={`form-control input-sm margin-md-left ${mode === 'real' ? '' : 'hidden'}`} />
-                    <a href="javascript:;" style={{padding: '2px'}}
-                      className="margin-md-left" onClick={() => { showAlert('Scenario Description') }}>
-                        Description
-                    </a>
-                </div>
-
-                <div className="flex-vertical" style={{flex: 1, backgroundColor: '#23272D', position: 'relative'}}>
-                    <svg ref="mapsvg" style={{flex: 1}} />
-
-                    {this.renderAttackInfo()}
-
-                    <div className="text-center" style={{height: '26px'}}>
-                        <div style={{position: 'absolute', left: '19px'}}>
-                            {
-                                this.state.playing ?
-                                    <a href="javascript:;" onClick={this.onClickPause.bind(this)}>
-                                        <img src="/images/btn_pause.png" style={{width: '23px'}}/>
-                                    </a>
-                                    :
-                                    <a href="javascript:;" onClick={this.onClickPlay.bind(this)}>
-                                        <img src="/images/btn_play.png" style={{width: '23px'}}/>
-                                    </a>
-                            }
-
-                            <a href="javascript:;" onClick={this.onClickStop.bind(this)} className="margin-sm-left">
-                                <img src="/images/btn_stop.png" style={{width: '23px'}}/>
-                            </a>
-
-                            {this.renderTime()}
-                        </div>
-                        <div style={{color: 'white', paddingTop: '3px'}}>{currenttime}</div>
-                    </div>
-                </div>
-            </div>
-    )
   }
 
   renderScenarioSelect () {
@@ -401,7 +347,7 @@ class Incidents extends React.Component {
     let scene2 = []
 
     let lasttime = new Date('2015-06-01 05:01:29') - 0
-    for (var i = 0; i < 10; i++) {
+    for (let i = 0; i < 10; i++) {
       scene2.push({
         type: 'Possible Bot HTTP Request.AA',
         count: 1,
@@ -417,7 +363,7 @@ class Incidents extends React.Component {
       lasttime += parseInt(1 + Math.random() * 4) * 1000
     }
 
-    for (var i = 0; i < 5; i++) {
+    for (let i = 0; i < 5; i++) {
       let attacks = []
       for (let j = 0; j < 3; j++) {
         attacks.push({
@@ -525,7 +471,7 @@ class Incidents extends React.Component {
 
   reset () {
     let me = this
-    $(me.refs.mapsvg).children().remove()
+    $(me.refs.mapsvg).children().remove() // eslint-disable-line no-undef
     me.svg.append('text').attr('class', 'layer')
         // p.find('.attacker-popup').remove();
 
@@ -626,12 +572,12 @@ class Incidents extends React.Component {
 
     let midXY = [(from.x + to.x) / 2, (from.y + to.y) / 2]
     let sameCountry = (to.x === from.x && to.y === from.y)
-    let x = from.x,
-      y = from.y,
-      tx = to.x,
-      ty = to.y,
-      mx = midXY[0],
-      my = midXY[1]
+    let x = from.x
+    let y = from.y
+    let tx = to.x
+    let ty = to.y
+    let mx = midXY[0]
+    let my = midXY[1]
     let arcSharpness = 4 * Math.random()
     let cx = mx + (50 * arcSharpness)
     let cy = Math.abs(my - (50 * arcSharpness))
@@ -643,7 +589,7 @@ class Incidents extends React.Component {
             .style('stroke-width', $scope.arcThickness)
             .attr('d', (datum) => {
               if (type === 'straight') {
-                var str = 'M{0},{1}L{2},{3}'
+                const str = 'M{0},{1}L{2},{3}'
                 return format(str, from.x, from.y, to.x, to.y)
               }
 
@@ -651,11 +597,11 @@ class Incidents extends React.Component {
                 if (sameCountry) {
                   let widthConst = 10
                   let heightConst = 10
-                  var str = 'M{0},{1}T{2},{3}T{4},{5}T{6},{7}T{8},{9}'
+                  const str = 'M{0},{1}T{2},{3}T{4},{5}T{6},{7}T{8},{9}'
                   return format(str, x, y, x + widthConst, y - heightConst, x, y - (2 * heightConst), x - widthConst, y - heightConst, x, y)
                 }
 
-                var str = 'M{0},{1}S{2},{3},{4},{5}'
+                const str = 'M{0},{1}S{2},{3},{4},{5}'
                 return format(str, x, y, cx, cy, tx, ty)
               }
 
@@ -682,38 +628,38 @@ class Incidents extends React.Component {
 
     me.connections.push(line)
 
+    function B1 (t) { return t * t * t }
+    function B2 (t) { return 3 * t * t * (1 - t) }
+    function B3 (t) { return 3 * t * (1 - t) * (1 - t) }
+    function B4 (t) { return (1 - t) * (1 - t) * (1 - t) }
+
+    function A1 (t) { return t * t }
+    function A2 (t) { return 2 * t * (1 - t) }
+    function A3 (t) { return (1 - t) * (1 - t) } // eslint-disable-line no-unused-vars
+
+    let Coord = (x, y) => {
+      if (!x) x = 0
+      if (!y) y = 0
+      return {x: x, y: y}
+    }
+
+    function getBezier (percent, C1, C2, C3, C4) {
+      let pos = new Coord()
+      pos.x = C1.x * B1(percent) + C2.x * B2(percent) + C3.x * B3(percent) + C4.x * B4(percent)
+      pos.y = C1.y * B1(percent) + C2.y * B2(percent) + C3.y * B3(percent) + C4.y * B4(percent)
+      return pos
+    }
+
+    function getBezierVector (percent, C1, C2, C3, C4) {
+      let pos = new Coord()
+      pos.x = (C1.x - C2.x) * A1(percent) + (C2.x - C3.x) * A2(percent) + (C3.x - C4.x) * B3(percent)
+      pos.y = (C1.y - C2.y) * A1(percent) + (C2.y - C3.y) * A2(percent) + (C3.y - C4.y) * B3(percent)
+      return pos
+    }
+
     if (attacks > 1) {
-      let coord = (x, y) => {
-        if (!x) var x = 0
-        if (!y) var y = 0
-        return {x: x, y: y}
-      }
-
-      function B1 (t) { return t * t * t }
-      function B2 (t) { return 3 * t * t * (1 - t) }
-      function B3 (t) { return 3 * t * (1 - t) * (1 - t) }
-      function B4 (t) { return (1 - t) * (1 - t) * (1 - t) }
-
-      function A1 (t) { return t * t }
-      function A2 (t) { return 2 * t * (1 - t) }
-      function A3 (t) { return (1 - t) * (1 - t) }
-
-      function getBezier (percent, C1, C2, C3, C4) {
-        let pos = new coord()
-        pos.x = C1.x * B1(percent) + C2.x * B2(percent) + C3.x * B3(percent) + C4.x * B4(percent)
-        pos.y = C1.y * B1(percent) + C2.y * B2(percent) + C3.y * B3(percent) + C4.y * B4(percent)
-        return pos
-      }
-
-      function getBezierVector (percent, C1, C2, C3, C4) {
-        let pos = new coord()
-        pos.x = (C1.x - C2.x) * A1(percent) + (C2.x - C3.x) * A2(percent) + (C3.x - C4.x) * B3(percent)
-        pos.y = (C1.y - C2.y) * A1(percent) + (C2.y - C3.y) * A2(percent) + (C3.y - C4.y) * B3(percent)
-        return pos
-      }
-
-      let bt = getBezier(0.35, {x: x, y: y }, {x: x, y: y }, {x: cx, y: cy}, {x: tx, y: ty})
-      let bv = getBezierVector(0.35, {x: x, y: y }, {x: x, y: y }, {x: cx, y: cy}, {x: tx, y: ty})
+      let bt = getBezier(0.35, { x: x, y: y }, { x: x, y: y }, { x: cx, y: cy }, { x: tx, y: ty })
+      let bv = getBezierVector(0.35, { x: x, y: y }, { x: x, y: y }, { x: cx, y: cy }, { x: tx, y: ty })
 
       let angle = Math.atan2(bv.y, bv.x)
       angle *= 180 / Math.PI
@@ -1025,6 +971,66 @@ class Incidents extends React.Component {
     me.setState({
       playing: false
     })
+  }
+
+  render () {
+    let me = this
+    const {
+      mode
+      // scenarioCount // Never used
+    } = this.state
+
+    let currenttime = ''
+    if (me.currentPlay && me.currentPlay.scene) {
+      currenttime = moment(me.currentPlay.scene[0].time + me.state.sliderPos * 1000).format('HH:mm:ss')
+    }
+
+    return (
+      <div className="flex-vertical" style={{flex: 1}}>
+        <div className="inline form-inline padding-sm">
+          <label style={{marginRight: '3px'}}>Choose:</label>
+          <select className="form-control input-sm margin-sm-left"
+            value={mode} onChange={this.onChangeMode.bind(this)}>
+            <option value="real">Real</option>
+            <option value="demo">Demo</option>
+          </select>
+          {this.renderScenarioSelect()}
+
+          <select className={`form-control input-sm margin-md-left ${mode === 'real' ? '' : 'hidden'}`} />
+          <a href="javascript:;" style={{padding: '2px'}}
+            className="margin-md-left" onClick={() => { showAlert('Scenario Description') }}>
+            Description
+          </a>
+        </div>
+
+        <div className="flex-vertical" style={{flex: 1, backgroundColor: '#23272D', position: 'relative'}}>
+          <svg ref="mapsvg" style={{flex: 1}} />
+
+          {this.renderAttackInfo()}
+
+          <div className="text-center" style={{height: '26px'}}>
+            <div style={{position: 'absolute', left: '19px'}}>
+              {
+                this.state.playing
+                  ? <a href="javascript:;" onClick={this.onClickPause.bind(this)}>
+                      <img src="/images/btn_pause.png" style={{width: '23px'}}/>
+                    </a>
+                  : <a href="javascript:;" onClick={this.onClickPlay.bind(this)}>
+                      <img src="/images/btn_play.png" style={{width: '23px'}}/>
+                    </a>
+              }
+
+              <a href="javascript:;" onClick={this.onClickStop.bind(this)} className="margin-sm-left">
+                <img src="/images/btn_stop.png" style={{width: '23px'}}/>
+              </a>
+
+              {this.renderTime()}
+            </div>
+            <div style={{color: 'white', paddingTop: '3px'}}>{currenttime}</div>
+          </div>
+        </div>
+      </div>
+    )
   }
 }
 

@@ -143,7 +143,7 @@ export default function (state = {}, action) {
     }
 
     case FETCH_IMAGES:
-      return { ...state, images: action.data}
+      return { ...state, images: action.data }
 
     case UPLOAD_IMAGE: {
       const images = concat(state.images, action.data)

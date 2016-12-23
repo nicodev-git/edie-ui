@@ -31,31 +31,6 @@ class Devices extends React.Component {
     }]
   }
 
-  render () {
-    return (
-            <TabPage>
-                <TabPageHeader title="Search">
-                    <div style={{margin: '0 auto', position: 'relative', textAlign: 'center'}}>
-                        <div className="pull-right">
-                            <Button>Open</Button>
-                        </div>
-
-                        <div style={{ position: 'relative', display: 'inline-block'}}>
-                            <input type="text" placeholder="Search" className="form-control"
-                              style={{width: '220px', paddingLeft: '35px'}}
-                              ref="search"/>
-                            <a className="btn" href="javascript:;" style={{position: 'absolute', left: 0, top: 0}}>
-                                <i className="fa fa-search" />
-                            </a>
-                        </div>
-                    </div>
-                </TabPageHeader>
-
-                <TabPageBody tabs={SearchTabs} tab={1} />
-            </TabPage>
-    )
-  }
-
   renderTable () {
     return (
             <InfiniteTable
@@ -75,11 +50,36 @@ class Devices extends React.Component {
     const selected = this.refs.table.getSelected()
     if (!selected) return showAlert('Please choose device.')
 
-    emit(EVENTS.MAP_DEVICE_CLICKED, selected)
+    emit(EVENTS.MAP_DEVICE_CLICKED, selected) // eslint-disable-line no-undef
   }
 
   onRowDblClick (selected) {
-    emit(EVENTS.MAP_DEVICE_CLICKED, selected)
+    emit(EVENTS.MAP_DEVICE_CLICKED, selected) // eslint-disable-line no-undef
+  }
+
+  render () {
+    return (
+      <TabPage>
+        <TabPageHeader title="Search">
+          <div style={{margin: '0 auto', position: 'relative', textAlign: 'center'}}>
+            <div className="pull-right">
+              <Button>Open</Button>
+            </div>
+
+            <div style={{ position: 'relative', display: 'inline-block' }}>
+              <input type="text" placeholder="Search" className="form-control"
+                     style={{width: '220px', paddingLeft: '35px'}}
+                     ref="search"/>
+              <a className="btn" href="javascript:;" style={{position: 'absolute', left: 0, top: 0}}>
+                <i className="fa fa-search" />
+              </a>
+            </div>
+          </div>
+        </TabPageHeader>
+
+        <TabPageBody tabs={SearchTabs} tab={1} />
+      </TabPage>
+    )
   }
 }
 
