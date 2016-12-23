@@ -24,7 +24,7 @@ class Sidebar extends React.Component {
     // ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   initMenuItemHover () {
-    const nav = this.refs.nav
+    const nav = this.nav
     $(nav).on('mouseover', 'li', (e) => { // eslint-disable-line no-undef
       if (!$('body').hasClass('sidebar-condensed')) return // eslint-disable-line no-undef
 
@@ -46,7 +46,7 @@ class Sidebar extends React.Component {
   }
 
   destoryMenuItemHover () {
-    const nav = this.refs.nav
+    const nav = this.nav
     $(nav).off('mouseover', 'li') // eslint-disable-line no-undef
     $(nav).off('mouseout', 'li') // eslint-disable-line no-undef
     $(nav).off('touchend', 'li') // eslint-disable-line no-undef
@@ -89,7 +89,7 @@ class Sidebar extends React.Component {
             <i className="fa fa-lg fa-fw fa-bars" />
           </a>
         </div>
-        <nav ref="nav">
+        <nav ref={nav => { this.nav = nav }}>
           <ul className="nav nav-pills nav-stacked" style={{display: contentType.Main === pageType ? 'block' : 'none'}}>
 
             {mainMenu.map((item, index) =>
