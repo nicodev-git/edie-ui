@@ -1,5 +1,5 @@
 import React from 'react'
-import {assign} from 'lodash'
+// import {assign} from 'lodash'
 import Select from 'react-select'
 import moment from 'moment'
 import { connect } from 'react-redux'
@@ -8,7 +8,8 @@ import ReactTooltip from 'react-tooltip'
 
 import DateRangePicker from '../../../shared/DateRangePicker'
 import InfiniteTable from '../../../shared/InfiniteTable'
-import {ResponsiveInfiniteTable} from '../../../shared/InfiniteTable'
+// import {ResponsiveInfiniteTable} from '../../../shared/InfiniteTable'
+const ResponsiveInfiniteTable = InfiniteTable
 
 import { getSeverityIcon } from '../../../../shared/Global'
 import SearchTabs from './SearchTabs'
@@ -31,11 +32,11 @@ class Incidents extends React.Component {
     this.state = {
 
       severities: [
-                { label: 'High', value: 'HIGH'},
-                { label: 'Medium', value: 'MEDIUM'},
-                { label: 'Low', value: 'LOW'},
-                { label: 'Audit', value: 'AUDIT'},
-                { label: 'Ignore', value: 'IGNORE'}
+        { label: 'High', value: 'HIGH' },
+        { label: 'Medium', value: 'MEDIUM' },
+        { label: 'Low', value: 'LOW' },
+        { label: 'Audit', value: 'AUDIT' },
+        { label: 'Ignore', value: 'IGNORE' }
       ],
 
       selectedSeverity: ['HIGH', 'MEDIUM'],
@@ -79,7 +80,7 @@ class Incidents extends React.Component {
           str += `<br/><b>Reason:</b> ${props.rowData.lastcomment}`
         }
 
-        return <span dangerouslySetInnerHTML={{__html: str }} />
+        return <span dangerouslySetInnerHTML={{ __html: str }} />
       }
     }, {
       'displayName': 'Actions',
@@ -114,12 +115,12 @@ class Incidents extends React.Component {
                         &nbsp;
 
                         {
-                            (row.fixed & !row.whathappened) ?
-                                <a href="javascript:;" onClick={this.showIncidentComments.bind(this, row)}>
+                            (row.fixed & !row.whathappened)
+                              ? <a href="javascript:;" onClick={this.showIncidentComments.bind(this, row)}>
                                     <img style={{height: '25px'}} title="Reason"
                                       src={`/images/${row.lastcomment ? 'reason-icon.png' : 'reason-x.png'}`} />
                                 </a>
-                                : null
+                              : null
                         }
 
                     </div>
@@ -132,64 +133,6 @@ class Incidents extends React.Component {
 
   componentDidMount () {
     this.onFilterChange()
-  }
-
-  render () {
-    const {location} = this.props
-    const {state} = location || {}
-    const {filterType} = state || {}
-
-    let defaultDate = moment().startOf('years').format('YYYY')
-
-    if (filterType === 'today') {
-      defaultDate = 'Today'
-    } else if (filterType === 'month') {
-      defaultDate = moment().startOf('month').format('MMMM')
-    }
-
-    return (
-            <TabPage>
-                <TabPageHeader title="Search">
-                    <div className="form-inline" style={{margin: '0 auto', position: 'relative', textAlign: 'center'}}>
-                        <div className="text-left"
-                          style={{'verticalAlign': 'middle', 'lineHeight': 2.2}}>
-                            <Select
-                              value={this.state.selectedSeverity.join(',')}
-                              options={this.state.severities}
-                              onChange={this.onChangeSeverity.bind(this)}
-                              multi
-                              clearable={false}
-                              className="select-severity"
-                              style={{minWidth: '85px'}}
-                              searchable={false}
-                              autosize={false}
-                              backspaceRemoves={false}
-                            />
-
-                            <select className="form-control inline text-primary margin-md-left"
-                              onChange={this.onFilterChange}
-                              ref="fixed" defaultValue="false">
-                                <option value="">Any</option>
-                                <option value="false">Unfixed</option>
-                                <option value="true">Fixed</option>
-                            </select>
-                            <DateRangePicker onClickRange={this.onFilterChange} className="margin-md-left"
-                              default={defaultDate} ref="dp">
-                                <i className="fa fa-caret-down margin-xs-left" />
-                            </DateRangePicker>
-
-                            {this.renderDeviceSearch()}
-                        </div>
-                    </div>
-                </TabPageHeader>
-
-                <TabPageBody tabs={SearchTabs} tab={0}>
-                    {this.renderTable()}
-
-                    {this.renderDeviceModal()}
-                </TabPageBody>
-            </TabPage>
-    )
   }
 
   renderDeviceSearch () {
@@ -316,9 +259,67 @@ class Incidents extends React.Component {
 
   showIncidentComments (incident) {
     this.setState({
-      selectedIndex: findIndex(this.props.incidents, {id: incident.id}),
+      selectedIndex: findIndex(this.props.incidents, {id: incident.id}), // eslint-disable-line no-undef
       commentModalVisible: true
     })
+  }
+
+  render () {
+    const {location} = this.props
+    const {state} = location || {}
+    const {filterType} = state || {}
+
+    let defaultDate = moment().startOf('years').format('YYYY')
+
+    if (filterType === 'today') {
+      defaultDate = 'Today'
+    } else if (filterType === 'month') {
+      defaultDate = moment().startOf('month').format('MMMM')
+    }
+
+    return (
+      <TabPage>
+        <TabPageHeader title="Search">
+          <div className="form-inline" style={{margin: '0 auto', position: 'relative', textAlign: 'center'}}>
+            <div className="text-left"
+                 style={{'verticalAlign': 'middle', 'lineHeight': 2.2}}>
+              <Select
+                value={this.state.selectedSeverity.join(',')}
+                options={this.state.severities}
+                onChange={this.onChangeSeverity.bind(this)}
+                multi
+                clearable={false}
+                className="select-severity"
+                style={{minWidth: '85px'}}
+                searchable={false}
+                autosize={false}
+                backspaceRemoves={false}
+              />
+
+              <select className="form-control inline text-primary margin-md-left"
+                      onChange={this.onFilterChange}
+                      ref="fixed" defaultValue="false">
+                <option value="">Any</option>
+                <option value="false">Unfixed</option>
+                <option value="true">Fixed</option>
+              </select>
+              <DateRangePicker onClickRange={this.onFilterChange} className="margin-md-left"
+                               default={defaultDate} ref="dp">
+                <i className="fa fa-caret-down margin-xs-left" />
+              </DateRangePicker>
+
+              {this.renderDeviceSearch()}
+            </div>
+          </div>
+        </TabPageHeader>
+
+        <TabPageBody tabs={SearchTabs} tab={0}>
+          {this.renderTable()}
+
+          {this.renderDeviceModal()}
+        </TabPageBody>
+      </TabPage>
+    )
   }
 
     // //////////////////////////////////////////////////

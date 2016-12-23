@@ -1,5 +1,3 @@
-import React from 'react'
-
 import Api from '../../../api'
 
 export const MAX_WIDTH = 12
@@ -459,9 +457,9 @@ export const wizardConfig = {
           width: 3
         },
         required: true,
-                // pattern: /((^|\.)((25[0-5])|(2[0-4]\d)|(1\d\d)|([1-9]?\d))){4}$/,
+        // pattern: /((^|\.)((25[0-5])|(2[0-4]\d)|(1\d\d)|([1-9]?\d))){4}$/,
         name: 'ipaddress'
-//				validation: [commonconfig.ipvalidation],
+        // validation: [commonconfig.ipvalidation],
       }, commonconfig.credentialsMenu(3),
       {
         type: 'label',
@@ -982,7 +980,7 @@ export const wizardConfig = {
           width: 2
         },
         name: 'ipaddress',
-//				pattern: /((^|\.)((25[0-5])|(2[0-4]\d)|(1\d\d)|([1-9]?\d))){4}$/,
+        // pattern: /((^|\.)((25[0-5])|(2[0-4]\d)|(1\d\d)|([1-9]?\d))){4}$/,
         required: true,
         width: 6
       }, {
@@ -1096,7 +1094,7 @@ export const wizardConfig = {
           width: 2
         },
         name: 'ipaddress',
-//				pattern: /((^|\.)((25[0-5])|(2[0-4]\d)|(1\d\d)|([1-9]?\d))){4}$/,
+        // pattern: /((^|\.)((25[0-5])|(2[0-4]\d)|(1\d\d)|([1-9]?\d))){4}$/,
         required: true,
         width: 6
       }, {
@@ -1210,7 +1208,7 @@ export const wizardConfig = {
           width: 2
         },
         name: 'ipaddress',
-//				pattern: /((^|\.)((25[0-5])|(2[0-4]\d)|(1\d\d)|([1-9]?\d))){4}$/,
+        // pattern: /((^|\.)((25[0-5])|(2[0-4]\d)|(1\d\d)|([1-9]?\d))){4}$/,
         required: true,
         width: 6
       }, {
@@ -2045,7 +2043,7 @@ export const wizardConfig = {
         width: 6,
         required: true
       }, {
-        type: 'text',
+        // type: 'text', // Duplicate
         label: {
           text: 'Threshold',
           type: 'attach',
@@ -2184,7 +2182,7 @@ export const wizardConfig = {
         width: 6,
         required: true
       }, {
-        type: 'text',
+        // type: 'text', // Duplicate
         label: {
           text: 'Threshold',
           type: 'attach',
@@ -2301,7 +2299,7 @@ export const wizardConfig = {
         width: 6,
         required: true
       }, {
-        type: 'text',
+        // type: 'text', // Duplicate
         label: {
           text: 'Threshold',
           type: 'attach',
@@ -2418,7 +2416,7 @@ export const wizardConfig = {
         width: 6,
         required: true
       }, {
-        type: 'text',
+        // type: 'text', // Duplicate
         label: {
           text: 'Threshold',
           type: 'attach',
@@ -2950,7 +2948,7 @@ export const wizardConfig = {
     server: {
       url: Api.deviceadmin.addDevice,
       params: {
-        type: 'File',
+        // type: 'File', // Duplicate
         type: 'file'
       }
     },
@@ -3195,7 +3193,7 @@ export const wizardConfig = {
               width: 2
             },
             name: 'ipaddress',
-//						pattern: /((^|\.)((25[0-5])|(2[0-4]\d)|(1\d\d)|([1-9]?\d))){4}$/,
+            // pattern: /((^|\.)((25[0-5])|(2[0-4]\d)|(1\d\d)|([1-9]?\d))){4}$/,
             required: true,
             style: {
               'padding-right': '40%'

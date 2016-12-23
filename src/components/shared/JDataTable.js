@@ -12,45 +12,6 @@ class JDataTable extends React.Component {
     this.draw = 1
   }
 
-  render () {
-    let style = {
-      overflow: 'auto',
-      height: this.props.height
-    }
-
-    return (
-            <div style={style}>
-                <table className={`table ${this.props.className}`}>
-                    <thead>
-                        <tr>
-                            {this.props.columns.map((col, index) =>
-                                <th key={index}>{col.title}</th>
-                            )}
-                        </tr>
-                    </thead>
-                    <tbody>
-                    {
-                        this.state.data.map((row, i) =>
-                            <tr key={i}
-                              onClick={this.onClickRow.bind(this, i)}
-                              onDoubleClick={this.props.onRowDblClick}
-                              className={this.state.selected === i ? 'selected' : ''}>
-                                {this.props.columns.map((col, index) =>
-                                    <td key={index}>
-                                        {
-                                            col.render ? col.render(row[col.data], row) : row[col.data]
-                                        }
-                                    </td>
-                                )}
-                            </tr>
-                        )
-                    }
-                    </tbody>
-                </table>
-            </div>
-    )
-  }
-
   componentWillMount () {
     this.load(this.props.params)
   }
@@ -68,7 +29,7 @@ class JDataTable extends React.Component {
     if (!url) return
     let draw = this.draw++
 
-    $.get(url, assign({}, {draw, start, length}, params))
+    $.get(url, assign({}, {draw, start, length}, params)) // eslint-disable-line no-undef
         .done(res => {
           this.setState({
             data: res.data,
@@ -96,6 +57,45 @@ class JDataTable extends React.Component {
     this.setState({
       selected: index
     })
+  }
+
+  render () {
+    let style = {
+      overflow: 'auto',
+      height: this.props.height
+    }
+
+    return (
+      <div style={style}>
+        <table className={`table ${this.props.className}`}>
+          <thead>
+          <tr>
+            {this.props.columns.map((col, index) =>
+              <th key={index}>{col.title}</th>
+            )}
+          </tr>
+          </thead>
+          <tbody>
+          {
+            this.state.data.map((row, i) =>
+              <tr key={i}
+                  onClick={this.onClickRow.bind(this, i)}
+                  onDoubleClick={this.props.onRowDblClick}
+                  className={this.state.selected === i ? 'selected' : ''}>
+                {this.props.columns.map((col, index) =>
+                  <td key={index}>
+                    {
+                      col.render ? col.render(row[col.data], row) : row[col.data]
+                    }
+                  </td>
+                )}
+              </tr>
+            )
+          }
+          </tbody>
+        </table>
+      </div>
+    )
   }
 }
 

@@ -13,7 +13,7 @@ export const util = {
 
   convertStyle: function (style) {
     let newStyle = {}
-    style && $.each(style, (k, v) => {
+    style && $.each(style, (k, v) => { // eslint-disable-line no-undef
       let name = k.replace(/(-)(\w)/g, (match, m1, m2) => {
         return m2.toUpperCase()
       })

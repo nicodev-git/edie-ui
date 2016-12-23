@@ -69,9 +69,9 @@ function mapStateToProps (state) {
   return {errorMessage: state.auth.error}
 }
 
-Signin = reduxForm({
-  form: 'signin'
-})(Signin)
-
-export default Signin = connect(mapStateToProps, {signUser})(Signin)
+export default connect(mapStateToProps, {signUser})(
+  reduxForm({
+    form: 'signin'
+  })(Signin)
+)
 

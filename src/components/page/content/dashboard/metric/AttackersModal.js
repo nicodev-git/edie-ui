@@ -1,6 +1,6 @@
 import React from 'react'
 import Modal from 'react-bootstrap-modal'
-import { assign, findIndex } from 'lodash'
+import { findIndex } from 'lodash'
 import { connect } from 'react-redux'
 
 import InfiniteTable from '../../../../shared/InfiniteTable'
@@ -24,10 +24,10 @@ class AttackersModal extends React.Component {
         let index = findIndex(countries, {name: row.ipcountry})
         if (index < 0) return <span>{val}</span>
 
-        let iso_code = (countries[index].alpha2 || '').toLowerCase()
+        let isoCode = (countries[index].alpha2 || '').toLowerCase()
         let flag
-        if (!iso_code) iso_code = '_European Union'
-        if (iso_code) flag = <img src={`/images/flags/32/${iso_code}.png`} title={row.ipcountry}/>
+        if (!isoCode) isoCode = '_European Union'
+        if (isoCode) flag = <img src={`/images/flags/32/${isoCode}.png`} title={row.ipcountry}/>
 
         return <span>{flag}&nbsp;{val}</span>
       }
@@ -54,36 +54,6 @@ class AttackersModal extends React.Component {
     }]
   }
 
-  render () {
-    return (
-            <Modal show={this.state.open} onHide={this.onHide.bind(this)}
-              aria-labelledby="ModalHeader" className="bootstrap-dialog type-primary modal-md">
-
-                <div className="modal-header">
-                    <h4 className="modal-title bootstrap-dialog-title">
-                        Attackers Today
-                    </h4>
-                    <div className="bootstrap-dialog-close-button">
-                        <button className="close"
-                          onClick={this.onClickClose.bind(this)}>×</button>
-                    </div>
-                </div>
-
-                <div className="modal-body bootstrap-dialog-message">
-                    <InfiniteTable
-                      url="/bi/getAllAttackers"
-                      params={this.state.params}
-                      cells={this.cells}
-                      ref="table"
-                      rowMetadata={{'key': 'ipaddress'}}
-                      bodyHeight={500}
-                      selectable
-                    />
-                </div>
-            </Modal>
-    )
-  }
-
   renderTable () {
 
   }
@@ -93,7 +63,7 @@ class AttackersModal extends React.Component {
   }
 
   closeModal (data) {
-    this.setState({ open: false}, () => {
+    this.setState({ open: false }, () => {
       this.props.onClose &&
             this.props.onClose(this, data)
     })
@@ -157,6 +127,36 @@ class AttackersModal extends React.Component {
     }
 
     return label
+  }
+
+  render () {
+    return (
+      <Modal show={this.state.open} onHide={this.onHide.bind(this)}
+             aria-labelledby="ModalHeader" className="bootstrap-dialog type-primary modal-md">
+
+        <div className="modal-header">
+          <h4 className="modal-title bootstrap-dialog-title">
+            Attackers Today
+          </h4>
+          <div className="bootstrap-dialog-close-button">
+            <button className="close"
+                    onClick={this.onClickClose.bind(this)}>×</button>
+          </div>
+        </div>
+
+        <div className="modal-body bootstrap-dialog-message">
+          <InfiniteTable
+            url="/bi/getAllAttackers"
+            params={this.state.params}
+            cells={this.cells}
+            ref="table"
+            rowMetadata={{'key': 'ipaddress'}}
+            bodyHeight={500}
+            selectable
+          />
+        </div>
+      </Modal>
+    )
   }
 }
 

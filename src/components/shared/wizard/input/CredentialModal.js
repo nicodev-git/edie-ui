@@ -23,50 +23,6 @@ class CredentialModal extends React.Component {
     }]
   }
 
-  render () {
-    return (
-            <Modal show={this.state.open} onHide={this.onHide.bind(this)}
-              aria-labelledby="ModalHeader" className="bootstrap-dialog type-primary">
-
-                <div className="modal-header">
-                    <h4 className="modal-title bootstrap-dialog-title">
-                        Credentials
-                    </h4>
-                    <div className="bootstrap-dialog-close-button">
-                        <button className="close"
-                          onClick={this.onClickClose.bind(this)}>×</button>
-                    </div>
-                </div>
-
-                <div className="modal-body bootstrap-dialog-message p-none">
-                    <div className="panel panel-default panel-noborder">
-                        <div className="panel-heading">
-                            <a href="javascript:;" className="margin-xs-left"
-                              onClick={this.onClickAdd.bind(this)}>
-                                <i className="fa fa-x fa-plus-square" title="Add" /></a>
-                            <a href="javascript:;" className="margin-xs-left"
-                              onClick={this.onClickEdit.bind(this)}>
-                                <i className="fa fa-x fa-edit" title="Edit" /></a>
-                            <a href="javascript:;" className="margin-xs-left"
-                              onClick={this.onClickRemove.bind(this)}>
-                                <i className="fa fa-x fa-trash-o" title="Remove" /></a>
-                        </div>
-                        <div className="panel-body">
-                            <InfiniteTable
-                              url="/devices/getCredentials"
-                              cells={this.cells}
-                              rowMetadata={{'key': 'id'}}
-                              selectable
-                              bodyHeight={400}
-                              ref="table"
-                            />
-                        </div>
-                    </div>
-                </div>
-            </Modal>
-    )
-  }
-
   onHide () {
     this.onClickClose()
   }
@@ -76,7 +32,7 @@ class CredentialModal extends React.Component {
   }
 
   closeModal (data) {
-    this.setState({ open: false}, () => {
+    this.setState({ open: false }, () => {
       this.props.onClose &&
             this.props.onClose(this, data)
     })
@@ -119,7 +75,7 @@ class CredentialModal extends React.Component {
     showConfirm('Click OK to remove.', (btn) => {
       if (btn !== 'ok') return
 
-      $.get(Api.devices.removeCredential, selected).done((res) => {
+      $.get(Api.devices.removeCredential, selected).done((res) => { // eslint-disable-line no-undef
         if (!res.success) {
           showAlert('Failed!')
           return
@@ -128,6 +84,54 @@ class CredentialModal extends React.Component {
         this.refreshTable()
       })
     })
+  }
+
+  render () {
+    return (
+      <Modal
+        show={this.state.open}
+        onHide={this.onHide.bind(this)}
+        aria-labelledby="ModalHeader"
+        className="bootstrap-dialog type-primary"
+      >
+
+        <div className="modal-header">
+          <h4 className="modal-title bootstrap-dialog-title">
+            Credentials
+          </h4>
+          <div className="bootstrap-dialog-close-button">
+            <button className="close"
+                    onClick={this.onClickClose.bind(this)}>×</button>
+          </div>
+        </div>
+
+        <div className="modal-body bootstrap-dialog-message p-none">
+          <div className="panel panel-default panel-noborder">
+            <div className="panel-heading">
+              <a href="javascript:;" className="margin-xs-left"
+                 onClick={this.onClickAdd.bind(this)}>
+                <i className="fa fa-x fa-plus-square" title="Add" /></a>
+              <a href="javascript:;" className="margin-xs-left"
+                 onClick={this.onClickEdit.bind(this)}>
+                <i className="fa fa-x fa-edit" title="Edit" /></a>
+              <a href="javascript:;" className="margin-xs-left"
+                 onClick={this.onClickRemove.bind(this)}>
+                <i className="fa fa-x fa-trash-o" title="Remove" /></a>
+            </div>
+            <div className="panel-body">
+              <InfiniteTable
+                url="/devices/getCredentials"
+                cells={this.cells}
+                rowMetadata={{'key': 'id'}}
+                selectable
+                bodyHeight={400}
+                ref="table"
+              />
+            </div>
+          </div>
+        </div>
+      </Modal>
+    )
   }
 
     // ////////////////////////////////////////////////////////////////

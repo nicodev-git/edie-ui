@@ -1,5 +1,5 @@
 import React from 'react'
-import {assign, extend} from 'lodash'
+import {extend} from 'lodash'
 import ReactTooltip from 'react-tooltip'
 import { connect } from 'react-redux'
 import {withRouter} from 'react-router'
@@ -135,44 +135,6 @@ class Map extends React.Component {
     window.removeEventListener('resize', this.updateDimensions)
   }
 
-  render () {
-    let events = this.mapEvents
-    const {tooltip, tipLeft, tipTop, tipWidth, tipHeight, selectedItem,
-            dropItem, dropItemPos, editable, maximized, mapHeight} = this.state
-
-    return (
-            <div className={`map-row${maximized ? ' map-maximized' : ''}`}
-              tabIndex="-1" style={{ outline: 0 }} onKeyUp={this.onMapKeyUp.bind(this)}>
-                <div className="panel panel-default mb-none" id="mapeditdiv">
-                    <MapToolbar
-                      {...events}
-                      {...this.state}
-                      selectedItem={selectedItem}
-                      ref="toolbar"
-                    />
-
-                    <div className="panel-body p-none"
-                      style={{height: maximized ? '100%' : (`${mapHeight}px`), position: 'relative'}}>
-                        <MapCanvas
-                          listener={this.mapListener}
-                          editable={editable}
-                          dragItem={selectedItem}
-                          dropItem={dropItem}
-                          dropItemPos={dropItemPos}
-                          hidden={this.props.hidden}
-                          mapDevices={this.props.mapDevices}
-                          mapLines={this.props.mapLines}
-                          showTraffic={this.props.showTraffic}
-                          ref="map"/>
-                        <DeviceDragLayer />
-                    </div>
-                </div>
-
-                {this.renderDeviceWizard()}
-            </div>
-    )
-  }
-
   renderDeviceWizard () {
     if (!this.state.deviceWizardVisible) return null
 
@@ -236,23 +198,23 @@ class Map extends React.Component {
       return
     }
 
-    $('.option.loader').show()
-    $('.option.mapalert').hide()
+    $('.option.loader').show() // eslint-disable-line no-undef
+    $('.option.mapalert').hide() // eslint-disable-line no-undef
 
-    let callLoadMap = $.get(Api.dashboard.getDevicesForMap, {
+    let callLoadMap = $.get(Api.dashboard.getDevicesForMap, { // eslint-disable-line no-undef
       mapid: currentmap,
       fatherid: 0,
       sid: this.context.sid
     })
 
-    let callLoadLines = $.get(Api.dashboard.getLineByLine, {
+    let callLoadLines = $.get(Api.dashboard.getLineByLine, { // eslint-disable-line no-undef
       mapid: currentmap
     })
 
-    return $.when(callLoadMap, callLoadLines).done((resMap, resLines) => {
+    return $.when(callLoadMap, callLoadLines).done((resMap, resLines) => { // eslint-disable-line no-undef
       if (callDraw !== this.curMapDraw) return
 
-      $('.option.loader').hide()
+      $('.option.loader').hide() // eslint-disable-line no-undef
 
             // Cancel when device adding
       if (!force && this.state.editable) return
@@ -281,18 +243,16 @@ class Map extends React.Component {
                 // this.arrLines = arrNewLines
 
         this.arrLines = {}// assign({}, this.arrLastLines)
-        $.each(arrNewLines, (i, item) => {
+        $.each(arrNewLines, (i, item) => { // eslint-disable-line no-undef
           this.arrLines[item.lineId] = {
-            'id':	item.id,
-            'type':	item.type,
-
+            'id': item.id,
+            'type': item.type,
             'fromDeviceid': item.fromDevice,
             'fromPoint': item.fromPoint,
             'toDeviceid': item.toDevice,
             'toPoint': item.toPoint,
-
-            'linecolor':	item.linecolor,
-            'linewidth':	item.linewidth
+            'linecolor': item.linecolor,
+            'linewidth': item.linewidth
           }
         })
       }
@@ -302,10 +262,10 @@ class Map extends React.Component {
         this.drawMap(this.arrDevices, this.arrLines, this.arrLastDevices, this.arrLastLines, force)
       }
     }).fail(() => {
-      if (callDraw !== curMapDraw) return
+      if (callDraw !== curMapDraw) return // eslint-disable-line no-undef
 
-      $('.option.loader').hide()
-      $('.option.mapalert').show()
+      $('.option.loader').hide() // eslint-disable-line no-undef
+      $('.option.mapalert').show() // eslint-disable-line no-undef
     }).always(() => {
 
             // if (!this.state.editable) this.enqueueMapLoad()
@@ -326,7 +286,7 @@ class Map extends React.Component {
     if (!refMap) return
 
     refMap.drawMap(deviceData, lineData, prevDeviceData, prevLineData, force, () => {
-      emit(EVENTS.MAP_LOADED)
+      emit(EVENTS.MAP_LOADED) // eslint-disable-line no-undef
     })
   }
 
@@ -460,7 +420,7 @@ class Map extends React.Component {
     let lineId = lineObj.id
     if (!lineId) return
 
-    $.get(Api.devices.updateLine, {
+    $.get(Api.devices.updateLine, { // eslint-disable-line no-undef
 
       lineId: lineId,
       linecolor: style.color,
@@ -528,7 +488,7 @@ class Map extends React.Component {
     let {x, y} = pos
 
     let options = options || {}
-    $.extend(options, {
+    $.extend(options, { // eslint-disable-line no-undef
       title: item.title,
       type: item.type,
       imgName: item.img,
@@ -740,19 +700,19 @@ class Map extends React.Component {
 
     let object = cmap.getSelected()
     if (!object) {
-      showAlert('Please select a device to remove.')
+      showAlert('Please select a device to remove.') // eslint-disable-line no-undef
       return
     }
 
-    let item = ''
-    let name = ''
+    let item = '' // eslint-disable-line no-unused-vars
+    let name = '' // eslint-disable-line no-unused-vars
     let {data} = object
-    if (object.objectType === MapItemType.Device) {
+    if (object.objectType === MapItemType.Device) { // eslint-disable-line no-undef
       item = 'device'
       name = `Name: ${object.data.name}`
-    } else if (object.objectType === MapItemType.BI) {
+    } else if (object.objectType === MapItemType.BI) { // eslint-disable-line no-undef
       item = 'bi'
-    } else if (object.objectType === MapItemType.Shape) {
+    } else if (object.objectType === MapItemType.Shape) { // eslint-disable-line no-undef
       item = 'connection'
       data = this.findMapLine(object.id)
     }
@@ -761,7 +721,7 @@ class Map extends React.Component {
       if (btn !== 'ok') return
 
       if (data) {
-        if (object.objectType === MapItemType.Shape) {
+        if (object.objectType === MapItemType.Shape) { // eslint-disable-line no-undef
           this.props.deleteMapLine(data)
         } else {
           this.props.deleteMapDevice(data)
@@ -774,7 +734,7 @@ class Map extends React.Component {
   updateLineConnectionDB (lineid) {
     let con = this.arrLines[lineid]
     if (con.id) {
-      $.ajax({
+      $.ajax({ // eslint-disable-line no-undef
         dataType: 'json',
         url: '/devices/updateConnection',
         data: {
@@ -789,7 +749,7 @@ class Map extends React.Component {
         }
       })
     } else {
-      $.ajax({
+      $.ajax({ // eslint-disable-line no-undef
         dataType: 'json',
         url: '/devices/addConnection',
         data: {
@@ -812,7 +772,7 @@ class Map extends React.Component {
   }
 
   changeLineType (id, typeid) {
-    $.get(Api.deviceadmin.updateLine, {
+    $.get(Api.deviceadmin.updateLine, { // eslint-disable-line no-undef
       id: id,
       type: typeid
     }).done(() => {
@@ -830,7 +790,7 @@ class Map extends React.Component {
 
   showAddWizard (options, callback, closeCallback) {
     if (options.type === 'longhub') {
-      const url = Api.deviceadmin.addDevice
+      const url = Api.deviceadmin.addDevice // eslint-disable-line no-undef
       const param = {
         devicetype: 'longhub',
         name: 'longhub',
@@ -843,9 +803,9 @@ class Map extends React.Component {
         mapid: this.state.mapId
       }
 
-      $.get(url, param).done((res) => {
+      $.get(url, param).done((res) => { // eslint-disable-line no-undef
         if (!res || !res.success || !res.object.length) {
-          showAlert('Add Failed!')
+          showAlert('Add Failed!') // eslint-disable-line no-undef
           return
         }
 
@@ -856,7 +816,7 @@ class Map extends React.Component {
       })
     } else {
       if (wizardConfig[options.type] === null) {
-        showAlert(`Unrecognized Type: ${options.type}`)
+        showAlert(`Unrecognized Type: ${options.type}`) // eslint-disable-line no-undef
         return
       }
 
@@ -893,7 +853,7 @@ class Map extends React.Component {
 
   onChangeDivider (diffY) {
     let {mapHeight} = this.state
-    const oldHeight = mapHeight
+    // const oldHeight = mapHeight // Never used
     mapHeight += diffY
     if (mapHeight < 250) mapHeight = 250
     this.setState({mapHeight})
@@ -902,7 +862,46 @@ class Map extends React.Component {
   }
 
   onDragEndDivider () {
-    window.dispatchEvent(new Event('resize'))
+    window.dispatchEvent(new Event('resize')) // eslint-disable-line no-undef
+  }
+
+  render () {
+    let events = this.mapEvents
+    const { selectedItem, dropItem, dropItemPos, editable, maximized, mapHeight } = this.state
+    // const {tooltip, tipLeft, tipTop, tipWidth, tipHeight, selectedItem, // Never used
+    //   dropItem, dropItemPos, editable, maximized, mapHeight} = this.state
+
+    return (
+      <div className={`map-row${maximized ? ' map-maximized' : ''}`}
+        tabIndex="-1" style={{ outline: 0 }} onKeyUp={this.onMapKeyUp.bind(this)}>
+        <div className="panel panel-default mb-none" id="mapeditdiv">
+          <MapToolbar
+            {...events}
+            {...this.state}
+            selectedItem={selectedItem}
+            ref="toolbar"
+          />
+
+          <div className="panel-body p-none"
+            style={{height: maximized ? '100%' : (`${mapHeight}px`), position: 'relative'}}>
+            <MapCanvas
+              listener={this.mapListener}
+              editable={editable}
+              dragItem={selectedItem}
+              dropItem={dropItem}
+              dropItemPos={dropItemPos}
+              hidden={this.props.hidden}
+              mapDevices={this.props.mapDevices}
+              mapLines={this.props.mapLines}
+              showTraffic={this.props.showTraffic}
+              ref="map"/>
+            <DeviceDragLayer />
+          </div>
+        </div>
+
+        {this.renderDeviceWizard()}
+      </div>
+    )
   }
 }
 
@@ -928,8 +927,13 @@ function mapStateToProps (state) {
 }
 
 const actions = {
-  openDevice, addMapDevice, deleteMapDevice, updateMapDevice,
-  addMapLine, deleteMapLine, updateMapLine
+  openDevice,
+  addMapDevice,
+  deleteMapDevice,
+  updateMapDevice,
+  addMapLine,
+  deleteMapLine,
+  updateMapLine
 }
 
 export default withRouter(connect(mapStateToProps, actions)(Map))

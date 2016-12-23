@@ -51,7 +51,8 @@ class Main extends React.Component {
     const {location, device} = this.props
     const {pathname} = location
 
-    let pageId = dashboardId, pageType = contentType.Main
+    let pageId = dashboardId
+    let pageType = contentType.Main
 
     let found = false
     mainMenu.forEach(item => {
@@ -99,7 +100,7 @@ class Main extends React.Component {
                 {this.renderSidebar()}
                 <div className="page-content flex-vertical" style={{overflow: 'auto'}} ref="content">
                     {this.renderDashboard()}
-                    {children ? children : null}
+                    {children || null}
                 </div>
             </div>
     )

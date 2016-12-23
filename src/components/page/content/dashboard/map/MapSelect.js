@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { connect } from 'react-redux'
-import { findIndex } from 'lodash'
+// import { findIndex } from 'lodash'
 
 import { fetchMaps, changeMap } from '../../../../../actions'
 
@@ -15,23 +15,6 @@ class MapSelect extends React.Component {
 
   componentWillMount () {
     this.props.fetchMaps(true)
-  }
-  render () {
-    const {selectedMap} = this.props
-    return (
-            <select className="input-sm map-select margin-sm-left"
-              style={{marginTop: '-9px'}}
-              value={selectedMap ? selectedMap.id : ''}
-              onChange={this.onChange.bind(this)}>
-                {
-                    this.props.maps.map(map =>
-                        <option value={map.id} key={map.id}>
-                            {map.name}
-                        </option>
-                    )
-                }
-            </select>
-    )
   }
 
     // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -114,6 +97,23 @@ class MapSelect extends React.Component {
         //         emit(EVENTS.MAP_CHANGED, mapId)
         //     })
         // });
+  }
+  render () {
+    const {selectedMap} = this.props
+    return (
+      <select className="input-sm map-select margin-sm-left"
+              style={{marginTop: '-9px'}}
+              value={selectedMap ? selectedMap.id : ''}
+              onChange={this.onChange.bind(this)}>
+        {
+          this.props.maps.map(map =>
+            <option value={map.id} key={map.id}>
+              {map.name}
+            </option>
+          )
+        }
+      </select>
+    )
   }
 }
 

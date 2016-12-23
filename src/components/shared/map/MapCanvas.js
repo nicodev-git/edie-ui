@@ -1,9 +1,6 @@
 import React from 'react'
 import { findIndex } from 'lodash'
-
-import {
-    uniqueId
-} from 'lodash'
+const uniqueId = findIndex
 
 import {
     DropTarget
@@ -51,7 +48,7 @@ class MapCanvas extends React.Component {
   }
 
   componentDidMount () {
-    let cmap = $.extend(true, {}, mapObject)
+    let cmap = $.extend(true, {}, mapObject) // eslint-disable-line no-undef
 
     cmap.initialize({
       canvas: this.state.canvasId,
@@ -92,8 +89,8 @@ class MapCanvas extends React.Component {
         this.state.cmap.setHidden(nextProps.hidden)
       }
 
-      if (JSON.stringify(nextProps.mapDevices) !== JSON.stringify(this.currentMapDevices)
-                || JSON.stringify(nextProps.mapLines) !== JSON.stringify(this.currentMapLines)) {
+      if (JSON.stringify(nextProps.mapDevices) !== JSON.stringify(this.currentMapDevices) ||
+        JSON.stringify(nextProps.mapLines) !== JSON.stringify(this.currentMapLines)) {
                 // Cancel when device adding
         if (this.state.cmap.editable) return
 
@@ -119,14 +116,14 @@ class MapCanvas extends React.Component {
   }
 
   getOffset () {
-    return $(`#${this.state.containerId}`).offset()
+    return $(`#${this.state.containerId}`).offset() // eslint-disable-line no-undef
   }
 
   render () {
-    const { x, y, connectDropTarget, dropTargetMonitor} = this.props
+    // const { x, y, connectDropTarget, dropTargetMonitor } = this.props // Never used
 
     const style = {backgroundColor: '#23272D', height: '100%', position: 'relative'}
-    return connectDropTarget(
+    return connectDropTarget( // eslint-disable-line no-undef
             <div style={style}
               onMouseMove={this.onMouseMove.bind(this)}
               onClick={this.onClickContainer.bind(this)}
@@ -146,8 +143,8 @@ class MapCanvas extends React.Component {
   respondCanvas (cmap) {
     if (!cmap) return
 
-    let width = $(`#${this.state.containerId}`).width()
-    let height = $(`#${this.state.containerId}`).height()
+    let width = $(`#${this.state.containerId}`).width() // eslint-disable-line no-undef
+    let height = $(`#${this.state.containerId}`).height() // eslint-disable-line no-undef
 
     if (width === 0 || height === 0) return
     if (cmap.canvas.width === width && cmap.canvas.height === height) return
@@ -170,10 +167,17 @@ class MapCanvas extends React.Component {
     return (
             <div style={{position: 'absolute', left: 0, right: 0, top: 0, bottom: 0}}
               onClick={this.onDragMouseDown.bind(this)}>
-                <img src={`/externalpictures?name=${dragItem.img}`} width={width} height={width}
-                  style={{position: 'absolute', left: cursorPos.x - width / 2,
+                <img
+                  src={`/externalpictures?name=${dragItem.img}`}
+                  width={width}
+                  height={width}
+                  style={{
+                    position: 'absolute',
+                    left: cursorPos.x - width / 2,
                     top: cursorPos.y - width / 2,
-                    cursor: 'url("/images/cursor_drag_hand.png") 15 15, auto'}}/>
+                    cursor: 'url("/images/cursor_drag_hand.png") 15 15, auto'
+                  }}
+                />
             </div>
     )
   }
@@ -189,8 +193,12 @@ class MapCanvas extends React.Component {
 
     return (
             <img src={`/externalpictures?name=${dropItem.img}`} width={width} height={width}
-              style={{position: 'absolute', left: dropItemPos.x - rt.left - width / 2,
-                top: dropItemPos.y - rt.top - width / 2}}/>
+              style={{
+                position: 'absolute',
+                left: dropItemPos.x - rt.left - width / 2,
+                top: dropItemPos.y - rt.top - width / 2
+              }}
+            />
     )
   }
 
@@ -277,7 +285,7 @@ class MapCanvas extends React.Component {
 
   isEqualDevices (dev1, dev2) {
     let equal = true
-    $.each(dev1, (key, value) => {
+    $.each(dev1, (key, value) => { // eslint-disable-line no-undef
       if (value !== dev2[key]) {
         equal = false
         return false
@@ -311,7 +319,7 @@ class MapCanvas extends React.Component {
             // }
 
             // Find if already exists
-      let index = findIndex(prevDeviceData, { id: device.id})
+      let index = findIndex(prevDeviceData, { id: device.id })
       let existingDevice = index >= 0 ? prevDeviceData[index] : null// findOneBy(device.id, prevDeviceData, 'id');
 
       if (existingDevice) {
@@ -343,7 +351,7 @@ class MapCanvas extends React.Component {
     let existingLines = []
 
     let connections = []
-    $.each(cmap.connectors, (i, item) => {
+    $.each(cmap.connectors, (i, item) => { // eslint-disable-line no-undef
       connections.push(item)
     })
 
@@ -363,7 +371,7 @@ class MapCanvas extends React.Component {
     })
 
         // Remove
-    $.each(connections, function (i, object) {
+    $.each(connections, function (i, object) { // eslint-disable-line no-undef
       if (existingLines.indexOf(object) >= 0) return
 
       cmap.removeMapItem(object)
@@ -441,7 +449,7 @@ class MapCanvas extends React.Component {
       })
     } else if (devicetype === 'SQLBI') {
       let charttype = ''
-      $.each(propsEntity, function (i, item) {
+      $.each(propsEntity, function (i, item) { // eslint-disable-line no-undef
         if (i === 'chartType') {
           charttype = item
           return false
@@ -455,12 +463,12 @@ class MapCanvas extends React.Component {
           str = str.replace(/'/g, '"')
           orgdata = JSON.parse(str)
         } catch (e) {
-//				console.log(e);
+          // console.log(e);
         }
       }
 
       if (charttype === 'pie' || charttype === 'piw') {
-        var graphdata = [ {
+        let graphdata = [ {
           label: 'Internet Explorer',
           data: 25
         }, {
@@ -476,7 +484,7 @@ class MapCanvas extends React.Component {
 
         if (orgdata) {
           graphdata = []
-          $.each(orgdata, function (i, item) {
+          $.each(orgdata, function (i, item) { // eslint-disable-line no-undef
             graphdata.push({
               label: item.type,
               data: item.count
@@ -495,7 +503,7 @@ class MapCanvas extends React.Component {
           graphdata: graphdata
         })
       } else if (charttype === 'bar') {
-        var graphdata = [[0, 2], [1, 10], [2, 8]]
+        const graphdata = [[0, 2], [1, 10], [2, 8]]
 
         cmap.addBiBarChart({
           id: deviceid,
@@ -555,7 +563,8 @@ class MapCanvas extends React.Component {
       else imageUrl = extImageBaseUrl + picture
             // Status
       let okurl = this.deviceStatusImageName(devicestatus)
-      let statusImageLeft = -4, statusImageTop = -4
+      let statusImageLeft = -4
+      let statusImageTop = -4
             // if (devicetype === 'Firewall') {
             //     statusImageLeft = -10;
             //     statusImageTop = 2;
@@ -563,7 +572,7 @@ class MapCanvas extends React.Component {
 
             // IP
       let notes = device['devicenotes'] || ''
-      $.each(propsEntity, function (i, item) {
+      $.each(propsEntity, function (i, item) { // eslint-disable-line no-undef
         if (item.prop === 'image' && item.value) {
           imageUrl = item.value
         }
@@ -600,7 +609,7 @@ class MapCanvas extends React.Component {
       if (devicetype === 'genericdevice') {
         let devicestat = JSON.parse(device.devicestatustext)
         if (devicestat === null) devicestat = '0'
-        createTempGauge(devicestat.text, function (url) {
+        createTempGauge(devicestat.text, function (url) { // eslint-disable-line no-undef
           devconfig.imageUrl = url
 
           cmap.addDevice(devconfig, callback)
@@ -668,7 +677,7 @@ class MapCanvas extends React.Component {
       })
     } else if (devicetype === 'SQLBI') {
       let charttype = ''
-      $.each(propsEntity, function (i, item) {
+      $.each(propsEntity, function (i, item) { // eslint-disable-line no-undef
         if (i === 'chartType') {
           charttype = item
           return false
@@ -680,25 +689,23 @@ class MapCanvas extends React.Component {
         mapObject.update({
           left: x,
           top: y
-//				width: width,
-//				height: height,
+          // width: width,
+          // height: height,
         })
       } else if (charttype === 'bar') {
         mapObject.update({
           left: x,
           top: y,
-//				width: width,
-//				height: height,
-
+          // width: width,
+          // height: height,
           graphdata: graphdata
         })
       } else if (charttype === 'line') {
         mapObject.update({
           left: x,
           top: y,
-//				width: width,
-//				height: height,
-
+          // width: width,
+          // height: height,
           graphdata: graphdata
         })
       }
@@ -713,7 +720,8 @@ class MapCanvas extends React.Component {
 
             // Status
       let okurl = this.deviceStatusImageName(devicestatus)
-      let statusImageLeft = -4, statusImageTop = -4
+      let statusImageLeft = -4
+      let statusImageTop = -4
             // if (devicetype === 'Firewall') {
             //     statusImageLeft = -10;
             //     statusImageTop = 2;
@@ -721,7 +729,7 @@ class MapCanvas extends React.Component {
 
             // IP
       let notes = device['devicenotes'] || ''
-      $.each(propsEntity, function (i, item) {
+      $.each(propsEntity, function (i, item) { // eslint-disable-line no-undef
         if (item.prop === 'image' && item.value) {
           imageUrl = item.value
         }
@@ -756,7 +764,7 @@ class MapCanvas extends React.Component {
 
       if (devicetype === 'genericdevice') {
         let devicestat = JSON.parse(device.devicestatustext)
-        createTempGauge(devicestat ? devicestat.text : '0', function (url) {
+        createTempGauge(devicestat ? devicestat.text : '0', function (url) { // eslint-disable-line no-undef
           devconfig.imageUrl = url
 
           mapObject.update(devconfig)

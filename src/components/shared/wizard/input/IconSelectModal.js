@@ -13,7 +13,7 @@ class IconSelectModal extends React.Component {
   }
 
   componentWillMount () {
-    $.get(Api.devices.getIcons, {
+    $.get(Api.devices.getIcons, { // eslint-disable-line no-undef
 
     }).done(res => {
       if (!res.length) return
@@ -28,62 +28,6 @@ class IconSelectModal extends React.Component {
         icons: icons
       })
     })
-  }
-
-  render () {
-    const {currentIcon} = this.state
-
-    return (
-            <Modal show={this.state.open}
-              onHide={this.onHide.bind(this)}
-              aria-labelledby="ModalHeader"
-              className="bootstrap-dialog type-primary">
-                <div className="modal-header">
-                    <h4 className="modal-title bootstrap-dialog-title">
-                        Change Image
-                    </h4>
-                </div>
-                <div className="modal-body bootstrap-dialog-message">
-
-                    <div className="dropdown-image">
-                        {this.state.icons.map(item => (
-                            <div key={item.url}
-                              className={currentIcon.url === item.url ? 'active' : ''}
-                              onClick={this.onClickItem.bind(this, item)}>
-                                <img src={item.url}/>
-                            </div>
-                        ))}
-                    </div>
-
-                    <div className="text-right mb-none">
-
-                        <a href="javascript:;" style={{position: 'relative', cursor: 'pointer'}} className="pull-left">
-                            Upload File
-                            <input type="file" name="file"
-                              onChange={this.onChangeFile.bind(this)}
-                              style={{
-                                position: 'absolute',
-                                top: 0,
-                                left: 0,
-                                right: 0,
-                                bottom: 0,
-                                margin: 0,
-                                padding: 0,
-                                fontSize: '20px',
-                                cursor: 'pointer',
-                                opacity: 0
-                              }}
-                            />
-                        </a>
-
-                        <a href="javascript:;" className="btn btn-default btn-sm"
-                          onClick={this.onClickClose.bind(this)}>Cancel</a>
-                        <a href="javascript:;" className="btn btn-primary btn-sm margin-sm-left"
-                          onClick={this.onClickSave.bind(this)}>OK</a>
-                    </div>
-                </div>
-            </Modal>
-    )
   }
 
   onHide () {
@@ -117,7 +61,7 @@ class IconSelectModal extends React.Component {
   }
 
   onChangeFile (e) {
-    let formData = new FormData()
+    let formData = new FormData() // eslint-disable-line no-undef
     let input = e.target
 
     let name = input.attributes['name'].value
@@ -131,8 +75,8 @@ class IconSelectModal extends React.Component {
     input.value = ''
         // upload/uploadImage
 
-    $.ajax({
-      url: Api.upload.uploadImage,
+    $.ajax({ // eslint-disable-line no-undef
+      url: Api.upload.uploadImage, // eslint-disable-line no-undef
       type: 'POST',
       data: formData,
       cache: false,
@@ -156,15 +100,71 @@ class IconSelectModal extends React.Component {
 
                     // ///////////////////////////////////
 
-          $.get(Api.devices.addIcon, { filename })
+          $.get(Api.devices.addIcon, { filename }) // eslint-disable-line no-undef
         } else {
-          alert('Failed to upload.')
+          window.alert('Failed to upload.')
         }
       },
       error: (jqXHR, textStatus, errorThrown) => {
-        alert('Failed to upload.')
+        window.alert('Failed to upload.')
       }
     })
+  }
+
+  render () {
+    const {currentIcon} = this.state
+
+    return (
+      <Modal show={this.state.open}
+             onHide={this.onHide.bind(this)}
+             aria-labelledby="ModalHeader"
+             className="bootstrap-dialog type-primary">
+        <div className="modal-header">
+          <h4 className="modal-title bootstrap-dialog-title">
+            Change Image
+          </h4>
+        </div>
+        <div className="modal-body bootstrap-dialog-message">
+
+          <div className="dropdown-image">
+            {this.state.icons.map(item => (
+              <div key={item.url}
+                   className={currentIcon.url === item.url ? 'active' : ''}
+                   onClick={this.onClickItem.bind(this, item)}>
+                <img src={item.url}/>
+              </div>
+            ))}
+          </div>
+
+          <div className="text-right mb-none">
+
+            <a href="javascript:;" style={{position: 'relative', cursor: 'pointer'}} className="pull-left">
+              Upload File
+              <input type="file" name="file"
+                onChange={this.onChangeFile.bind(this)}
+                style={{
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  bottom: 0,
+                  margin: 0,
+                  padding: 0,
+                  fontSize: '20px',
+                  cursor: 'pointer',
+                  opacity: 0
+                }}
+              />
+            </a>
+
+            <a href="javascript:;" className="btn btn-default btn-sm"
+               onClick={this.onClickClose.bind(this)}>Cancel</a>
+            <a href="javascript:;" className="btn btn-primary btn-sm margin-sm-left"
+               onClick={this.onClickSave.bind(this)}>OK</a>
+          </div>
+        </div>
+      </Modal>
+    )
   }
 }
 

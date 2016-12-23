@@ -24,7 +24,7 @@ class ProfileModal extends React.Component {
   constructor (props) {
     super(props)
 
-    const {user} = props
+    // const {user} = props // Never used
 
     this.state = {
       imgSrc: '',
@@ -36,31 +36,6 @@ class ProfileModal extends React.Component {
 
   componentWillMount () {
     this.props.fetchUserInfo()
-  }
-
-  render () {
-    let {user, handleSubmit} = this.props
-
-    return (
-            <Modal show onHide={this.onHide.bind(this)}
-              aria-labelledby="ModalHeader" className="bootstrap-dialog type-primary">
-
-                <div className="modal-header">
-                    <h4 className="modal-title bootstrap-dialog-title">
-                        Profile
-                    </h4>
-                    <div className="bootstrap-dialog-close-button">
-                        <button className="close"
-                          onClick={this.onClickClose.bind(this)}>×</button>
-                    </div>
-                </div>
-
-                <div className="modal-body bootstrap-dialog-message">
-
-                    {this.renderForm()}
-                </div>
-            </Modal>
-    )
   }
 
   renderForm () {
@@ -163,10 +138,10 @@ class ProfileModal extends React.Component {
 
     let file = input.files[0]
 
-    let formData = new FormData()
+    let formData = new FormData() // eslint-disable-line no-undef
     formData.append('file', file, input.value.split(/(\\|\/)/g).pop())
 
-    $.ajax({
+    $.ajax({ // eslint-disable-line no-undef
       url: '/upload',
       type: 'POST',
       data: formData,
@@ -189,7 +164,7 @@ class ProfileModal extends React.Component {
   onChangeImage (e) {
     const input = e.target
     if (input.files && input.files[0]) {
-      let reader = new FileReader()
+      let reader = new FileReader() // eslint-disable-line no-undef
 
       reader.onload = v => {
         this.setState({
@@ -206,14 +181,35 @@ class ProfileModal extends React.Component {
       defaultmap: e.target.value
     })
   }
+
+  render () {
+    // let {user, handleSubmit} = this.props // Never used
+
+    return (
+      <Modal show onHide={this.onHide.bind(this)}
+             aria-labelledby="ModalHeader" className="bootstrap-dialog type-primary">
+
+        <div className="modal-header">
+          <h4 className="modal-title bootstrap-dialog-title">
+            Profile
+          </h4>
+          <div className="bootstrap-dialog-close-button">
+            <button className="close"
+                    onClick={this.onClickClose.bind(this)}>×</button>
+          </div>
+        </div>
+
+        <div className="modal-body bootstrap-dialog-message">
+
+          {this.renderForm()}
+        </div>
+      </Modal>
+    )
+  }
 }
 
 ProfileModal.defaultProps = {
 }
-
-ProfileModal = reduxForm({
-  form: 'userProfileForm'
-})(ProfileModal)
 
 function mapStateToProps (state) {
   const user = state.dashboard.userInfo
@@ -224,4 +220,8 @@ function mapStateToProps (state) {
   }
 }
 
-export default connect(mapStateToProps, { fetchUserInfo, updateUserProfile, closeProfileModal })(ProfileModal)
+export default connect(mapStateToProps, { fetchUserInfo, updateUserProfile, closeProfileModal })(
+  reduxForm({
+    form: 'userProfileForm'
+  })(ProfileModal)
+)

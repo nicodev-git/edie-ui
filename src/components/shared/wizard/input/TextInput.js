@@ -3,7 +3,8 @@ import { Field } from 'redux-form'
 
 import { util } from '../WizardUtil'
 
-const renderField2 = ({ input, type, label, cls, useColumn, disabled, width, style, placeholder, meta: { touched, error } }) => {
+const renderField2 = ({ input, type, label, cls, useColumn, disabled, width, style, placeholder }) => { // eslint-disable-line no-unused-vars
+// const renderField2 = ({ input, type, label, cls, useColumn, disabled, width, style, placeholder, meta: { touched, error } }) => { // Never used "touched", "error"
   const field = (
         <div className={`col-md-${width}`}
           style={util.convertStyle(style)}>
@@ -24,6 +25,24 @@ export default class TextInput extends React.Component {
     this.state = {}
   }
 
+  renderField (config) {
+    const { input, type, label, cls, useColumn, disabled, width, style, placeholder } = config
+    // const { input, type, label, cls, useColumn, disabled, width, style, placeholder, meta: { touched, error } } = config // Never used touched, error
+
+    const field = (
+            <div className={`col-md-${width}`}
+              style={util.convertStyle(style)}>
+                <input {...input} type={type}
+                  className={`form-control ${cls || ''}`}
+                  disabled={disabled ? 'disabled' : null}
+                  placeholder={placeholder}/>
+
+            </div>
+        )
+
+    return util.wrapInputs(label, field, useColumn)
+  }
+
   render () {
     const { config } = this.props
 
@@ -42,32 +61,16 @@ export default class TextInput extends React.Component {
     }
 
     return (
-            <Field type="text"
-              name={config.name} label={label} component={this.renderField}
-              style={config.style}
-              width={width}
-              cls={config.cls}
-              useColumn={config.useColumn}
-              disabled={config.disabled}
-              placeholder={placeholder}/>
+      <Field type="text"
+        name={config.name} label={label} component={this.renderField}
+        style={config.style}
+        width={width}
+        cls={config.cls}
+        useColumn={config.useColumn}
+        disabled={config.disabled}
+        placeholder={placeholder}
+      />
     )
-  }
-
-  renderField (config) {
-    const { input, type, label, cls, useColumn, disabled, width, style, placeholder, meta: { touched, error } } = config
-
-    const field = (
-            <div className={`col-md-${width}`}
-              style={util.convertStyle(style)}>
-                <input {...input} type={type}
-                  className={`form-control ${cls || ''}`}
-                  disabled={disabled ? 'disabled' : null}
-                  placeholder={placeholder}/>
-
-            </div>
-        )
-
-    return util.wrapInputs(label, field, useColumn)
   }
 }
 

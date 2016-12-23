@@ -62,7 +62,7 @@ class DeviceImg extends React.Component {
   }
 
   render () {
-    const { connectDragSource, isDragging } = this.props
+    const { connectDragSource } = this.props // { connectDragSource, isDragging }
 
     return (
             connectDragSource(

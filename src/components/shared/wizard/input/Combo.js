@@ -26,13 +26,13 @@ export default class Combo extends React.Component {
           url += '&'
         }
 
-        url += $.param(params)
+        url += $.param(params) // eslint-disable-line no-undef
       }
 
       this.loadComboOptions(config, url)
     } else {
       let options = []
-      $.each(config.items, function (i, item) {
+      $.each(config.items, function (i, item) { // eslint-disable-line no-undef
         options.push({
           label: item.display || '',
           value: item.value || '',
@@ -42,56 +42,6 @@ export default class Combo extends React.Component {
 
       this.setState({options})
     }
-  }
-
-  render () {
-    let config = this.props.config
-    let values = this.props.values
-
-    let label, input
-    let width = util.calcWidth(config.width)
-
-    if (config.label !== null) {
-      if (config.label.type === 'place') {
-
-      } else {
-        label = this.props.buildLabel(config.label)
-        width = util.calcWidth(config.width) - util.calcWidth(config.label.width)
-      }
-    }
-
-    let defaultValue = config.value
-
-    let options = this.state.options.map(item => {
-      if (item.selected && !defaultValue) defaultValue = item.value
-      return {
-        text: item.label,
-        value: item.value
-      }
-    })
-
-    if (config.name && values[config.name] !== undefined) {
-      defaultValue = values[config.name]
-    }
-
-    if (!defaultValue && options.length) {
-      defaultValue = options[0].value
-    }
-
-    input = (
-            <div className={`col-md-${width}`}
-              style={util.convertStyle(config.style)}>
-                <SelectField className={`form-control ${config.cls || ''}`}
-                  name={config.name}
-                  validation={config.required ? 'required' : null}
-                  defaultValue={defaultValue}
-                  options={options}
-                />
-                {this.renderSidebar()}
-            </div>
-        )
-
-    return util.wrapInputs(label, input, config['useColumn'])
   }
 
   renderSidebar () {
@@ -190,6 +140,56 @@ export default class Combo extends React.Component {
                 }}/>
             )
     }
+  }
+
+  render () {
+    let config = this.props.config
+    let values = this.props.values
+
+    let label, input
+    let width = util.calcWidth(config.width)
+
+    if (config.label !== null) {
+      if (config.label.type === 'place') {
+
+      } else {
+        label = this.props.buildLabel(config.label)
+        width = util.calcWidth(config.width) - util.calcWidth(config.label.width)
+      }
+    }
+
+    let defaultValue = config.value
+
+    let options = this.state.options.map(item => {
+      if (item.selected && !defaultValue) defaultValue = item.value
+      return {
+        text: item.label,
+        value: item.value
+      }
+    })
+
+    if (config.name && values[config.name] !== undefined) {
+      defaultValue = values[config.name]
+    }
+
+    if (!defaultValue && options.length) {
+      defaultValue = options[0].value
+    }
+
+    input = (
+      <div className={`col-md-${width}`}
+           style={util.convertStyle(config.style)}>
+        <SelectField className={`form-control ${config.cls || ''}`}
+                     name={config.name}
+                     validation={config.required ? 'required' : null}
+                     defaultValue={defaultValue}
+                     options={options}
+        />
+        {this.renderSidebar()}
+      </div>
+    )
+
+    return util.wrapInputs(label, input, config['useColumn'])
   }
 }
 

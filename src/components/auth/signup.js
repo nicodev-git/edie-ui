@@ -62,8 +62,9 @@ function mapStateToProps (state) {
   return { errorMessage: state.auth.error }
 }
 
-Signup = reduxForm({
-  form: 'signup',
-  validate
-})(Signup)
-export default Signup = connect(mapStateToProps, { signup })(Signup)
+export default connect(mapStateToProps, { signup })(
+  reduxForm({
+    form: 'signup',
+    validate
+  })(Signup)
+)

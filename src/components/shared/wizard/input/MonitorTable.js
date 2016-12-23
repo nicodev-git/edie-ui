@@ -1,7 +1,5 @@
 import React from 'react'
-import { forIn, findIndex } from 'lodash'
 import { Panel } from 'react-bootstrap'
-import { concat } from 'lodash'
 
 import DeviceWizard from '../../../shared/wizard/DeviceWizard'
 
@@ -25,54 +23,6 @@ class MonitorTable extends React.Component {
 
   componentWillUnmount () {
     document.removeEventListener('click', this.handleClick, false)
-  }
-
-  render () {
-    return (
-            <div className="panel panel-default panel-noborder">
-                <div className="panel-heading drag-handle">
-                    <h4 className="panel-title">Monitors</h4>
-                    <div className="panel-options">
-                        <a href="javascript:;" className="option trash"
-                          onClick={this.onClickRemove.bind(this)}>
-                            <i className="fa fa-trash-o" />
-                        </a>
-                        <a href="javascript:;" className="option add-device"
-                          onClick={this.onClickAdd.bind(this)}>
-                            <i className="fa fa-plus-square" />
-                        </a>
-                    </div>
-
-                    {this.renderMenu()}
-                </div>
-
-                <div className="panel-body"
-                  style={{minHeight: '100px', maxHeight: '350px', overflow: 'auto', padding: '3px'}}>
-                    <table className="table dataTable hover">
-                        <thead>
-                        <tr>
-                            <th width="5%">Type</th>
-                            <th width="5%">Name</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {
-                            this.props.monitors.map((item, index) =>
-                                <tr key={index}
-                                  className={index === this.state.selected ? 'selected' : ''}
-                                  onClick={() => this.setState({selected: index})}>
-                                    <td>{item.monitortype}</td>
-                                    <td>{item.name}</td>
-                                </tr>
-                            )
-                        }
-                        </tbody>
-                    </table>
-
-                    {this.renderMonitorWizard()}
-                </div>
-            </div>
-    )
   }
 
   renderMenu () {
@@ -146,7 +96,7 @@ class MonitorTable extends React.Component {
   }
 
   onClickAdd (e) {
-    this.setState({ menuHidden: !this.state.menuHidden})
+    this.setState({ menuHidden: !this.state.menuHidden })
 
     e.preventDefault()
     e.nativeEvent.stopImmediatePropagation()
@@ -176,6 +126,54 @@ class MonitorTable extends React.Component {
     monitors.push(params)
 
     onChanged && onChanged(monitors)
+  }
+
+  render () {
+    return (
+      <div className="panel panel-default panel-noborder">
+        <div className="panel-heading drag-handle">
+          <h4 className="panel-title">Monitors</h4>
+          <div className="panel-options">
+            <a href="javascript:;" className="option trash"
+              onClick={this.onClickRemove.bind(this)}>
+              <i className="fa fa-trash-o" />
+            </a>
+            <a href="javascript:;" className="option add-device"
+              onClick={this.onClickAdd.bind(this)}>
+              <i className="fa fa-plus-square" />
+            </a>
+          </div>
+
+          {this.renderMenu()}
+        </div>
+
+        <div className="panel-body"
+          style={{minHeight: '100px', maxHeight: '350px', overflow: 'auto', padding: '3px'}}>
+          <table className="table dataTable hover">
+            <thead>
+            <tr>
+              <th width="5%">Type</th>
+              <th width="5%">Name</th>
+            </tr>
+            </thead>
+            <tbody>
+            {
+              this.props.monitors.map((item, index) =>
+                <tr key={index}
+                  className={index === this.state.selected ? 'selected' : ''}
+                  onClick={() => this.setState({selected: index})}>
+                  <td>{item.monitortype}</td>
+                  <td>{item.name}</td>
+                </tr>
+              )
+            }
+            </tbody>
+          </table>
+
+          {this.renderMonitorWizard()}
+        </div>
+      </div>
+    )
   }
 }
 

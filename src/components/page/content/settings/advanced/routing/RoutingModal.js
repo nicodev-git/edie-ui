@@ -22,89 +22,6 @@ class RoutingModal extends React.Component {
     }
   }
 
-  render () {
-    const { routing } = this.props
-
-    return (
-            <Modal show={this.state.open} onHide={this.onHide.bind(this)}
-              aria-labelledby="ModalHeader" className="bootstrap-dialog type-primary">
-
-                <div className="modal-header">
-                    <h4 className="modal-title bootstrap-dialog-title">
-                        Routing
-                    </h4>
-                    <div className="bootstrap-dialog-close-button">
-                        <button className="close"
-                          onClick={this.onClickClose.bind(this)}>×</button>
-                    </div>
-                </div>
-
-                <div className="modal-body bootstrap-dialog-message">
-
-                    <div className="row margin-md-bottom">
-                        <label className="col-md-3 control-label">Device IP</label>
-                        <div className="col-md-9">
-                            <select className="form-control" ref="filterType"
-                              defaultValue={routing ? routing.filterType : ''}>
-                                <option value="ip">Device IP</option>
-                                <option value="text">Text</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div className="row margin-md-bottom">
-                        <label className="col-md-3 control-label">Value</label>
-                        <div className="col-md-9">
-                            <input type="text" className="form-control" ref="value"
-                              defaultValue={routing ? routing.value : ''}/>
-                        </div>
-                    </div>
-
-                    <div className="row">
-                        <div className="col-md-12">
-                            <a className="margin-sm-right" onClick={this.onClickAddGroup.bind(this)}>
-                                <i className="fa fa-lg fa-users" title="Add Group" />
-                            </a>
-                            <a className="margin-sm-right" onClick={this.onClickAddUser.bind(this)}>
-                                <i className="fa fa-lg fa-user" title="Add User" />
-                            </a>
-
-                            <a className="margin-sm-right" onClick={this.onClickRemove.bind(this)}>
-                                <i className="fa fa-lg fa-trash-o" title="Remove" />
-                            </a>
-                        </div>
-                    </div>
-
-                    <div className="margin-md-bottom" style={{height: '250px'}}>
-                        <table className="table table-hover" ref="targets">
-                            <thead>
-                            <tr>
-                                <th>Groups and Users</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            {
-                                this.state.targets.map((item, i) =>
-                                    <tr key={i} onClick={() => { this.setState({selected: item}) }}
-                                      className={this.state.selected === item ? 'selected' : ''}>
-                                        <td>{item.targetName}</td>
-                                    </tr>
-                                )
-                            }
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <div className="text-right">
-                        <Button className="btn-primary btn-sm"
-                          onClick={this.onClickSave.bind(this)}>Save</Button>
-                        <Button className="btn-sm margin-sm-left"
-                          onClick={this.onClickClose.bind(this)}>Cancel</Button>
-                    </div>
-                </div>
-            </Modal>
-    )
-  }
-
   onHide () {
     this.onClickClose()
   }
@@ -136,7 +53,7 @@ class RoutingModal extends React.Component {
         // ////////////////////////////////////////////////////
 
     let addlist = []
-    let modifylist = []
+    // let modifylist = [] // Never used
     let removelist = []
 
     targets.forEach(item => {
@@ -172,7 +89,7 @@ class RoutingModal extends React.Component {
       addlist.forEach(item => {
         item.routingId = obj.id
 
-        calls.push($.get(Api.routing.addTarget, item).done(res => {
+        calls.push($.get(Api.routing.addTarget, item).done(res => { // eslint-disable-line no-undef
           if (!res.success) {
             console.log('Add routing target failed!')
             return false
@@ -183,7 +100,7 @@ class RoutingModal extends React.Component {
       })
 
       removelist.forEach(item => {
-        calls.push($.get(Api.routing.removeTarget, item).done((res) => {
+        calls.push($.get(Api.routing.removeTarget, item).done((res) => { // eslint-disable-line no-undef
           if (!res.success) {
             console.log('Remove routing target failed!')
             return false
@@ -193,7 +110,7 @@ class RoutingModal extends React.Component {
         }))
       })
 
-      $.when(...calls).done(() => {
+      $.when(...calls).done(() => { // eslint-disable-line no-undef
         this.closeModal(obj)
       }).fail(() => {
         showAlert('Save failed!')
@@ -202,11 +119,11 @@ class RoutingModal extends React.Component {
   }
 
   callSaveRoutingAPI (params, callback) {
-    const url = this.props.routing ?
-            (Api.routing.modifyRouting) :
-            (Api.routing.addRouting)
+    const url = this.props.routing
+      ? (Api.routing.modifyRouting)  // eslint-disable-line no-undef
+      : (Api.routing.addRouting) // eslint-disable-line no-undef
 
-    return $.get(url, params).done(function (res) {
+    return $.get(url, params).done(function (res) { // eslint-disable-line no-undef
       if (!res.success) return showAlert('Save failed!')
 
       callback && callback(res.object)
@@ -267,6 +184,89 @@ class RoutingModal extends React.Component {
       selected: null,
       targets: targets
     })
+  }
+
+  render () {
+    const { routing } = this.props
+
+    return (
+      <Modal show={this.state.open} onHide={this.onHide.bind(this)}
+             aria-labelledby="ModalHeader" className="bootstrap-dialog type-primary">
+
+        <div className="modal-header">
+          <h4 className="modal-title bootstrap-dialog-title">
+            Routing
+          </h4>
+          <div className="bootstrap-dialog-close-button">
+            <button className="close"
+                    onClick={this.onClickClose.bind(this)}>×</button>
+          </div>
+        </div>
+
+        <div className="modal-body bootstrap-dialog-message">
+
+          <div className="row margin-md-bottom">
+            <label className="col-md-3 control-label">Device IP</label>
+            <div className="col-md-9">
+              <select className="form-control" ref="filterType"
+                      defaultValue={routing ? routing.filterType : ''}>
+                <option value="ip">Device IP</option>
+                <option value="text">Text</option>
+              </select>
+            </div>
+          </div>
+          <div className="row margin-md-bottom">
+            <label className="col-md-3 control-label">Value</label>
+            <div className="col-md-9">
+              <input type="text" className="form-control" ref="value"
+                     defaultValue={routing ? routing.value : ''}/>
+            </div>
+          </div>
+
+          <div className="row">
+            <div className="col-md-12">
+              <a className="margin-sm-right" onClick={this.onClickAddGroup.bind(this)}>
+                <i className="fa fa-lg fa-users" title="Add Group" />
+              </a>
+              <a className="margin-sm-right" onClick={this.onClickAddUser.bind(this)}>
+                <i className="fa fa-lg fa-user" title="Add User" />
+              </a>
+
+              <a className="margin-sm-right" onClick={this.onClickRemove.bind(this)}>
+                <i className="fa fa-lg fa-trash-o" title="Remove" />
+              </a>
+            </div>
+          </div>
+
+          <div className="margin-md-bottom" style={{height: '250px'}}>
+            <table className="table table-hover" ref="targets">
+              <thead>
+              <tr>
+                <th>Groups and Users</th>
+              </tr>
+              </thead>
+              <tbody>
+              {
+                this.state.targets.map((item, i) =>
+                  <tr key={i} onClick={() => { this.setState({selected: item}) }}
+                      className={this.state.selected === item ? 'selected' : ''}>
+                    <td>{item.targetName}</td>
+                  </tr>
+                )
+              }
+              </tbody>
+            </table>
+          </div>
+
+          <div className="text-right">
+            <Button className="btn-primary btn-sm"
+                    onClick={this.onClickSave.bind(this)}>Save</Button>
+            <Button className="btn-sm margin-sm-left"
+                    onClick={this.onClickClose.bind(this)}>Cancel</Button>
+          </div>
+        </div>
+      </Modal>
+    )
   }
 }
 

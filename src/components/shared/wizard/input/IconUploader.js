@@ -31,38 +31,6 @@ export default class IconUploader extends React.Component {
   componentWillMount () {
   }
 
-  render () {
-    let config = this.props.config
-    let values = this.props.values
-
-    let label, input
-    let width = util.calcWidth(config.width)
-
-    if (config.label !== null) {
-      if (config.label.type === 'place') {
-
-      } else {
-        label = this.props.buildLabel(config.label)
-        width = util.calcWidth(config.width) - util.calcWidth(config.label.width)
-      }
-    }
-
-    let uploader = (
-            <div className={`col-md-${width}`}>
-                <img className="file-preview" src={this.state.currentIcon.url}/>
-                <a href="javascript:;" style={{position: 'relative', cursor: 'pointer'}} onClick={this.onClickChange.bind(this)}>
-                    Change
-                </a>
-                <InputField type="hidden"
-                  value={this.state.currentIcon.filename}
-                  name={config.name}
-                  ref="field"/>
-            </div>
-        )
-
-    return util.wrapInputs(label, uploader, config['useColumn'])
-  }
-
   onClickChange () {
     appendComponent(
             <IconSelectModal selected={this.state.currentIcon} onClose={this.onCloseChangeModal.bind(this)}/>
@@ -145,7 +113,7 @@ export default class IconUploader extends React.Component {
   }
 
   onChangeFile (e) {
-    let formData = new FormData()
+    let formData = new FormData() // eslint-disable-line no-undef
     let input = e.target
 
     let name = input.attributes['name'].value
@@ -158,8 +126,8 @@ export default class IconUploader extends React.Component {
     input.value = ''
         // upload/uploadImage
 
-    $.ajax({
-      url: Api.upload.uploadImage,
+    $.ajax({ // eslint-disable-line no-undef
+      url: Api.upload.uploadImage, // eslint-disable-line no-undef
       type: 'POST',
       data: formData,
       cache: false,
@@ -182,13 +150,46 @@ export default class IconUploader extends React.Component {
 
           this.refs.field.updateValue(url)
         } else {
-          alert('Failed to upload.')
+          window.alert('Failed to upload.')
         }
       },
       error: (jqXHR, textStatus, errorThrown) => {
-        alert('Failed to upload.')
+        window.alert('Failed to upload.')
       }
     })
+  }
+
+  render () {
+    let config = this.props.config
+    // let values = this.props.values // Never used
+
+    let label
+    // let input //  Never used
+    let width = util.calcWidth(config.width)
+
+    if (config.label !== null) {
+      if (config.label.type === 'place') {
+
+      } else {
+        label = this.props.buildLabel(config.label)
+        width = util.calcWidth(config.width) - util.calcWidth(config.label.width)
+      }
+    }
+
+    let uploader = (
+      <div className={`col-md-${width}`}>
+        <img className="file-preview" src={this.state.currentIcon.url}/>
+        <a href="javascript:;" style={{position: 'relative', cursor: 'pointer'}} onClick={this.onClickChange.bind(this)}>
+          Change
+        </a>
+        <InputField type="hidden"
+                    value={this.state.currentIcon.filename}
+                    name={config.name}
+                    ref="field"/>
+      </div>
+    )
+
+    return util.wrapInputs(label, uploader, config['useColumn'])
   }
 
     // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////

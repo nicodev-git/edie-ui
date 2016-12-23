@@ -48,23 +48,6 @@ class DeviceList extends Component {
     )
   }
 
-  render () {
-    return (
-            <div style={{background: 'white'}} className="padding-md">
-                <div className="padding-sm fa-lg">
-                    <a href="javascript:;" className="margin-sm-right" onClick={this.onClickAdd.bind(this)}>
-                        <i className="fa fa-plus" /></a>
-                    <a href="javascript:;" className="margin-sm-right" onClick={this.onClickEdit.bind(this)}>
-                        <i className="fa fa-edit" /></a>
-                    <a href="javascript:;" className="margin-sm-right" onClick={this.onClickDelete.bind(this)}>
-                        <i className="fa fa-trash-o" /></a>
-                </div>
-                {this.renderDevices()}
-                {this.renderModal()}
-            </div>
-    )
-  }
-
   renderModal () {
     if (!this.props.openModal) return null
     return (
@@ -85,16 +68,33 @@ class DeviceList extends Component {
   onClickEdit () {
     const {selected} = this.state
     const device = this.props.devices[selected]
-    if (!device) return alert('Please selected device.')
+    if (!device) return window.alert('Please selected device.')
     this.props.openDeviceEditModal(device)
   }
 
   onClickDelete () {
     const {selected} = this.state
     const device = this.props.devices[selected]
-    if (!device) return alert('Please selected device.')
+    if (!device) return window.alert('Please selected device.')
     const url = device._links.self.href
     this.props.deleteDevice(url)
+  }
+
+  render () {
+    return (
+      <div style={{background: 'white'}} className="padding-md">
+        <div className="padding-sm fa-lg">
+          <a href="javascript:;" className="margin-sm-right" onClick={this.onClickAdd.bind(this)}>
+            <i className="fa fa-plus" /></a>
+          <a href="javascript:;" className="margin-sm-right" onClick={this.onClickEdit.bind(this)}>
+            <i className="fa fa-edit" /></a>
+          <a href="javascript:;" className="margin-sm-right" onClick={this.onClickDelete.bind(this)}>
+            <i className="fa fa-trash-o" /></a>
+        </div>
+        {this.renderDevices()}
+        {this.renderModal()}
+      </div>
+    )
   }
 }
 function mapStateToProps (state) {
