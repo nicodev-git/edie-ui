@@ -15,10 +15,15 @@ export default function (ComposedComponent) {
         this.context.router.push('/signin')
       }
     }
+
     render () {
       return <ComposedComponent {...this.props} />
     }
-    }
+  }
+
+  Authentication.contextTypes = {
+    router: React.PropTypes.object
+  }
 
   function mapStateToProps (state) {
     return { authenticated: state.auth.authenticated }
