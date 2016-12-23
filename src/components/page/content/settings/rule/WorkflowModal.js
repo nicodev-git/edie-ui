@@ -26,41 +26,6 @@ class WorkflowModal extends React.Component {
     }
   }
 
-  render () {
-    const { handleSubmit } = this.props
-
-    return (
-            <Modal show onHide={this.onHide.bind(this)}
-              aria-labelledby="ModalHeader" className="bootstrap-dialog type-primary">
-
-                <div className="modal-header">
-                    <h4 className="modal-title bootstrap-dialog-title">
-                        Workflow
-                    </h4>
-                    <div className="bootstrap-dialog-close-button">
-                        <button className="close"
-                          onClick={this.onClickClose.bind(this)}>×</button>
-                    </div>
-                </div>
-
-                <div className="modal-body bootstrap-dialog-message">
-
-                    <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
-                        <Field name="name" component={renderInput} type="text" label="Name"/>
-                        <Field name="desc" component={renderInput} type="text" label="Description"/>
-                        <Field name="present" component={renderInput} type="text" label="Present"/>
-
-                        <div className="text-right">
-                            <Button className="btn-primary btn-sm" type="submit">Save</Button>
-                            <Button className="btn-sm margin-sm-left"
-                              onClick={this.onClickClose.bind(this)}>Cancel</Button>
-                        </div>
-                    </form>
-                </div>
-            </Modal>
-    )
-  }
-
   onHide () {
     this.onClickClose()
   }
@@ -86,15 +51,49 @@ class WorkflowModal extends React.Component {
       this.props.addWorkflow(props)
     }
   }
+
+  render () {
+    const { handleSubmit } = this.props
+
+    return (
+      <Modal
+        show
+        onHide={this.onHide.bind(this)}
+        aria-labelledby="ModalHeader"
+        className="bootstrap-dialog type-primary"
+      >
+
+        <div className="modal-header">
+          <h4 className="modal-title bootstrap-dialog-title">
+            Workflow
+          </h4>
+          <div className="bootstrap-dialog-close-button">
+            <button className="close" onClick={this.onClickClose.bind(this)}>×</button>
+          </div>
+        </div>
+
+        <div className="modal-body bootstrap-dialog-message">
+
+          <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
+            <Field name="name" component={renderInput} type="text" label="Name"/>
+            <Field name="desc" component={renderInput} type="text" label="Description"/>
+            <Field name="present" component={renderInput} type="text" label="Present"/>
+
+            <div className="text-right">
+              <Button className="btn-primary btn-sm" type="submit">Save</Button>
+              <Button className="btn-sm margin-sm-left"
+                      onClick={this.onClickClose.bind(this)}>Cancel</Button>
+            </div>
+          </form>
+        </div>
+      </Modal>
+    )
+  }
 }
 
 WorkflowModal.defaultProps = {
   credentials: null
 }
-
-WorkflowModal = reduxForm({
-  form: 'workflowEditForm'
-})(WorkflowModal)
 
 function mapStateToProps (state) {
   return {
@@ -105,8 +104,13 @@ function mapStateToProps (state) {
 
 const actions = {
   fetchWorkflows,
-  addWorkflow, updateWorkflow,
+  addWorkflow,
+  updateWorkflow,
   closeWorkflowModal
 }
 
-export default connect(mapStateToProps, actions)(WorkflowModal)
+export default connect(mapStateToProps, actions)(
+  reduxForm({
+    form: 'workflowEditForm'
+  })(WorkflowModal)
+)

@@ -29,40 +29,6 @@ class PasswordModal extends React.Component {
     }
   }
 
-  render () {
-    const { handleSubmit } = this.props
-
-    return (
-            <Modal show onHide={this.onHide.bind(this)}
-              aria-labelledby="ModalHeader" className="bootstrap-dialog type-primary">
-
-                <div className="modal-header">
-                    <h4 className="modal-title bootstrap-dialog-title">
-                        User Password
-                    </h4>
-                    <div className="bootstrap-dialog-close-button">
-                        <button className="close"
-                          onClick={this.onClickClose.bind(this)}>×</button>
-                    </div>
-                </div>
-
-                <div className="modal-body bootstrap-dialog-message">
-                    <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
-
-                        <Field name="password" component={renderInput} type="password" label="Password"/>
-                        <Field name="confirm" component={renderInput} type="password" label="Confirm"/>
-
-                        <div className="text-center">
-                            <Button className="btn-primary btn-sm" type="submit">Save</Button>
-                            <Button className="btn-sm margin-sm-left"
-                              onClick={this.onClickClose.bind(this)}>Cancel</Button>
-                        </div>
-                    </form>
-                </div>
-            </Modal>
-    )
-  }
-
   onHide () {
     this.onClickClose()
   }
@@ -86,11 +52,41 @@ class PasswordModal extends React.Component {
 
     this.props.updateSettingUser(user)
   }
-}
 
-PasswordModal = reduxForm({
-  form: 'userPasswordForm'
-})(PasswordModal)
+  render () {
+    const { handleSubmit } = this.props
+
+    return (
+      <Modal show onHide={this.onHide.bind(this)}
+             aria-labelledby="ModalHeader" className="bootstrap-dialog type-primary">
+
+        <div className="modal-header">
+          <h4 className="modal-title bootstrap-dialog-title">
+            User Password
+          </h4>
+          <div className="bootstrap-dialog-close-button">
+            <button className="close"
+                    onClick={this.onClickClose.bind(this)}>×</button>
+          </div>
+        </div>
+
+        <div className="modal-body bootstrap-dialog-message">
+          <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
+
+            <Field name="password" component={renderInput} type="password" label="Password"/>
+            <Field name="confirm" component={renderInput} type="password" label="Confirm"/>
+
+            <div className="text-center">
+              <Button className="btn-primary btn-sm" type="submit">Save</Button>
+              <Button className="btn-sm margin-sm-left"
+                      onClick={this.onClickClose.bind(this)}>Cancel</Button>
+            </div>
+          </form>
+        </div>
+      </Modal>
+    )
+  }
+}
 
 function mapStateToProps (state) {
   return {
@@ -103,4 +99,8 @@ const actions = {
   closeUserPasswordModal
 }
 
-export default connect(mapStateToProps, actions)(PasswordModal)
+export default connect(mapStateToProps, actions)(
+  reduxForm({
+    form: 'userPasswordForm'
+  })(PasswordModal)
+)

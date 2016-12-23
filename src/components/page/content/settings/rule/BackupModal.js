@@ -13,57 +13,13 @@ class BackupModal extends React.Component {
     }
   }
 
-  render () {
-    return (
-            <Modal show={this.state.open} onHide={this.onHide.bind(this)}
-              aria-labelledby="ModalHeader" className="bootstrap-dialog type-primary">
-
-                <div className="modal-header">
-                    <h4 className="modal-title bootstrap-dialog-title">
-                        Backup
-                    </h4>
-                    <div className="bootstrap-dialog-close-button">
-                        <button className="close"
-                          onClick={this.onClickClose.bind(this)}>×</button>
-                    </div>
-                </div>
-
-                <div className="modal-body bootstrap-dialog-message">
-
-                    <div className="row margin-md-bottom">
-                        <label className="control-label col-md-3">Name</label>
-                        <div className="col-md-9">
-                            <input type="text" className="form-control" ref="name" />
-                        </div>
-                    </div>
-
-                    <div className="row margin-md-bottom">
-                        <label className="control-label col-md-3">Description</label>
-                        <div className="col-md-9">
-                            <input type="text" className="form-control" ref="desc" />
-                        </div>
-                    </div>
-
-                    <div className="text-right p-none">
-                        <Button className="btn-primary"
-                          onClick={this.onClickSave.bind(this)}>Save</Button>
-                        <Button className="margin-sm-left"
-                          onClick={this.onClickClose.bind(this)}>Cancel</Button>
-                    </div>
-
-                </div>
-            </Modal>
-    )
-  }
-
   onHide () {
     this.onClickClose()
   }
 
   closeModal (data) {
-    this.setState({ open: false}, () => {
-      this.props.onClose &&
-            this.props.onClose(this, data)
+    this.setState({ open: false }, () => {
+      this.props.onClose && this.props.onClose(this, data)
     })
   }
 
@@ -80,7 +36,7 @@ class BackupModal extends React.Component {
       return
     }
 
-    $.get(Api.rule.backupRules, {
+    $.get(Api.rule.backupRules, { // eslint-disable-line no-undef
       exportName: name,
       description: desc
     }).done((res) => {
@@ -90,6 +46,50 @@ class BackupModal extends React.Component {
     }).fail(() => {
       showAlert('Backup failed!')
     })
+  }
+
+  render () {
+    return (
+      <Modal
+        show={this.state.open}
+        onHide={this.onHide.bind(this)}
+        aria-labelledby="ModalHeader"
+        className="bootstrap-dialog type-primary"
+      >
+
+        <div className="modal-header">
+          <h4 className="modal-title bootstrap-dialog-title">
+            Backup
+          </h4>
+          <div className="bootstrap-dialog-close-button">
+            <button className="close" onClick={this.onClickClose.bind(this)}>×</button>
+          </div>
+        </div>
+
+        <div className="modal-body bootstrap-dialog-message">
+
+          <div className="row margin-md-bottom">
+            <label className="control-label col-md-3">Name</label>
+            <div className="col-md-9">
+              <input type="text" className="form-control" ref="name" />
+            </div>
+          </div>
+
+          <div className="row margin-md-bottom">
+            <label className="control-label col-md-3">Description</label>
+            <div className="col-md-9">
+              <input type="text" className="form-control" ref="desc" />
+            </div>
+          </div>
+
+          <div className="text-right p-none">
+            <Button className="btn-primary" onClick={this.onClickSave.bind(this)}>Save</Button>
+            <Button className="margin-sm-left" onClick={this.onClickClose.bind(this)}>Cancel</Button>
+          </div>
+
+        </div>
+      </Modal>
+    )
   }
 }
 

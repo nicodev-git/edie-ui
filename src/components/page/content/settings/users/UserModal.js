@@ -3,7 +3,11 @@ import Modal from 'react-bootstrap-modal'
 import {
     Button
 } from 'react-bootstrap'
-import { findIndex, assign, clone } from 'lodash'
+import {
+  // findIndex, // Never used
+  assign
+  // clone // Never used
+} from 'lodash'
 import { connect } from 'react-redux'
 import { reduxForm, Field, change } from 'redux-form'
 import axios from 'axios'
@@ -32,7 +36,7 @@ class UserModal extends React.Component {
   }
 
   loadDefaultMaps () {
-    return $.get(`${Api.dashboard.getMaps}?draw=1`).done(res => {
+    return $.get(`${Api.dashboard.getMaps}?draw=1`).done(res => { // eslint-disable-line no-undef
       this.setState({
         defaultMaps: res.data
       })
@@ -40,7 +44,7 @@ class UserModal extends React.Component {
   }
 
   loadRoles () {
-    return $.get(Api.user.getRoles, {
+    return $.get(Api.user.getRoles, { // eslint-disable-line no-undef
       sid: this.context.sid
     }).done(res => {
       if (!res.object) return
@@ -57,10 +61,11 @@ class UserModal extends React.Component {
                     <input {...field.input} type={field.type} className="form-control"/>
                 </div>
 
-                {field.name === 'pincode' ?
-                    <div className="col-md-3 margin-xs-top">
+                {field.name === 'pincode'
+                  ? <div className="col-md-3 margin-xs-top">
                         <a href="javascript:;" className="btn btn-default btn-sm" onClick={this.onClickPin.bind(this)}>Generate</a>
-                    </div> : null
+                    </div>
+                  : null
                 }
             </div>
     )
@@ -112,28 +117,6 @@ class UserModal extends React.Component {
     )
   }
 
-  render () {
-    return (
-            <Modal show={this.state.open} onHide={this.onHide.bind(this)}
-              aria-labelledby="ModalHeader" className="bootstrap-dialog type-primary">
-
-                <div className="modal-header">
-                    <h4 className="modal-title bootstrap-dialog-title">
-                        User Detail
-                    </h4>
-                    <div className="bootstrap-dialog-close-button">
-                        <button className="close"
-                          onClick={this.onClickClose.bind(this)}>×</button>
-                    </div>
-                </div>
-
-                <div className="modal-body bootstrap-dialog-message">
-                    {this.renderContent()}
-                </div>
-            </Modal>
-    )
-  }
-
   onHide () {
     this.onClickClose()
   }
@@ -165,15 +148,36 @@ class UserModal extends React.Component {
       this.props.dispatch(change('userEditForm', 'pincode', response.data))
     })
   }
+
+  render () {
+    return (
+      <Modal
+        show={this.state.open}
+        onHide={this.onHide.bind(this)}
+        aria-labelledby="ModalHeader"
+        className="bootstrap-dialog type-primary"
+      >
+
+        <div className="modal-header">
+          <h4 className="modal-title bootstrap-dialog-title">
+            User Detail
+          </h4>
+          <div className="bootstrap-dialog-close-button">
+            <button className="close" onClick={this.onClickClose.bind(this)}>×</button>
+          </div>
+        </div>
+
+        <div className="modal-body bootstrap-dialog-message">
+          {this.renderContent()}
+        </div>
+      </Modal>
+    )
+  }
 }
 
 UserModal.defaultProps = {
 
 }
-
-UserModal = reduxForm({
-  form: 'userEditForm'
-})(UserModal)
 
 function mapStateToProps (state) {
   return {
@@ -188,4 +192,8 @@ const actions = {
   closeSettingUserModal
 }
 
-export default connect(mapStateToProps, actions)(UserModal)
+export default connect(mapStateToProps, actions)(
+  reduxForm({
+    form: 'userEditForm'
+  })(UserModal)
+)

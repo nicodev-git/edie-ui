@@ -31,41 +31,6 @@ class MapModal extends React.Component {
     }
   }
 
-  render () {
-    const { map, handleSubmit } = this.props
-    const isDefault = false// map ? user.defaultmap === map.id : false
-
-    return (
-            <Modal show onHide={this.onHide.bind(this)}
-              aria-labelledby="ModalHeader" className="bootstrap-dialog type-primary">
-
-                <div className="modal-header">
-                    <h4 className="modal-title bootstrap-dialog-title">
-                        Map
-                    </h4>
-                    <div className="bootstrap-dialog-close-button">
-                        <button className="close"
-                          onClick={this.onClickClose.bind(this)}>×</button>
-                    </div>
-                </div>
-
-                <div className="modal-body bootstrap-dialog-message">
-
-                    <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
-                        <Field name="name" component={renderInput} type="text" label="Name"/>
-                        <Field name="mapgroup" component={renderInput} type="text" label="Group"/>
-
-                        <div className="text-right p-none">
-                            <Button className="btn-primary" type="submit">Save</Button>
-                            <Button className="margin-sm-left"
-                              onClick={this.onClickClose.bind(this)}>Cancel</Button>
-                        </div>
-                    </form>
-                </div>
-            </Modal>
-    )
-  }
-
   onHide () {
     this.onClickClose()
   }
@@ -104,15 +69,49 @@ class MapModal extends React.Component {
     }
   }
 
+  render () {
+    const { handleSubmit } = this.props
+    // const { map, handleSubmit } = this.props // Never used
+    // const isDefault = false// map ? user.defaultmap === map.id : false // Never used
+
+    return (
+      <Modal
+        show
+        onHide={this.onHide.bind(this)}
+        aria-labelledby="ModalHeader"
+        className="bootstrap-dialog type-primary"
+      >
+
+        <div className="modal-header">
+          <h4 className="modal-title bootstrap-dialog-title">
+            Map
+          </h4>
+          <div className="bootstrap-dialog-close-button">
+            <button className="close" onClick={this.onClickClose.bind(this)}>×</button>
+          </div>
+        </div>
+
+        <div className="modal-body bootstrap-dialog-message">
+
+          <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
+            <Field name="name" component={renderInput} type="text" label="Name"/>
+            <Field name="mapgroup" component={renderInput} type="text" label="Group"/>
+
+            <div className="text-right p-none">
+              <Button className="btn-primary" type="submit">Save</Button>
+              <Button className="margin-sm-left"
+                      onClick={this.onClickClose.bind(this)}>Cancel</Button>
+            </div>
+          </form>
+        </div>
+      </Modal>
+    )
+  }
 }
 
 MapModal.defaultProps = {
 
 }
-
-MapModal = reduxForm({
-  form: 'mapEditForm'
-})(MapModal)
 
 function mapStateToProps (state) {
   return {
@@ -127,4 +126,8 @@ const actions = {
   closeSettingMapModal
 }
 
-export default connect(mapStateToProps, actions)(MapModal)
+export default connect(mapStateToProps, actions)(
+  reduxForm({
+    form: 'mapEditForm'
+  })(MapModal)
+)

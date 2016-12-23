@@ -3,7 +3,11 @@ import Modal from 'react-bootstrap-modal'
 import {
     Button
 } from 'react-bootstrap'
-import { findIndex, assign, clone } from 'lodash'
+import {
+  findIndex,
+  // assign, // Never used
+  clone
+} from 'lodash'
 
 import { showAlert } from '../../../../shared/Alert'
 
@@ -24,13 +28,13 @@ class GroupModal extends React.Component {
   }
 
   loadGroups () {
-    $.get(Api.user.getUsers, {
+    $.get(Api.user.getUsers, { // eslint-disable-line no-undef
       draw: 1,
       start: 0,
       length: 100
     }).done(res => {
       const { group } = this.props
-      let groupId = 0
+      let groupId = 0 // eslint-disable-line no-unused-vars
       if (group) groupId = group.id
       let selected = []
 
@@ -49,86 +53,13 @@ class GroupModal extends React.Component {
     })
   }
 
-  render () {
-    const { group } = this.props
-    let groupId = 0
-    if (group) groupId = group.id
-
-    return (
-            <Modal show={this.state.open} onHide={this.onHide.bind(this)}
-              aria-labelledby="ModalHeader" className="bootstrap-dialog type-primary">
-
-                <div className="modal-header">
-                    <h4 className="modal-title bootstrap-dialog-title">
-                        Group
-                    </h4>
-                    <div className="bootstrap-dialog-close-button">
-                        <button className="close"
-                          onClick={this.onClickClose.bind(this)}>×</button>
-                    </div>
-                </div>
-
-                <div className="modal-body bootstrap-dialog-message">
-                    <div className="row form-group margin-md-bottom">
-                        <div className="col-xs-12">
-                            <label className="control-label">Group Name</label>
-                            <input type="text" className="form-control input-sm"
-                              style={{width: '30%', marginLeft: '10px', display: 'inline-block'}}
-                              defaultValue={group ? group.name : ''}
-                              ref="name"/>
-                        </div>
-                    </div>
-
-                    <div style={{maxHeight: '400px', overflow: 'auto'}}>
-                        <table className="table table-hover">
-                            <thead>
-                                <tr>
-                                    <th />
-                                    <th>User Name</th>
-                                    <th>Full Name</th>
-                                    <th>Email</th>
-                                    <th>Phone</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            {
-                                this.state.data.map(item =>
-                                <tr key={item.id}>
-                                    <td className="text-right groupcheck">
-                                        <input type="checkbox"
-                                          defaultChecked={group ? (findIndex(group.groupUsers, {userId: item.id}) >= 0) : false}
-                                          onChange={this.onChangeCheck.bind(this, item.id)}/>
-                                    </td>
-                                    <td>{item.username}</td>
-                                    <td>{item.fullname}</td>
-                                    <td>{item.email}</td>
-                                    <td>{item.phone}</td>
-                                </tr>
-                                )
-                            }
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <div className="text-right p-none">
-                        <Button className="btn-primary btn-sm"
-                          onClick={this.onClickSave.bind(this)}>Save</Button>
-                        <Button className="btn-sm margin-sm-left"
-                          onClick={this.onClickClose.bind(this)}>Cancel</Button>
-                    </div>
-                </div>
-            </Modal>
-    )
-  }
-
   onHide () {
     this.onClickClose()
   }
 
   closeModal (data) {
-    this.setState({ open: false}, () => {
-      this.props.onClose &&
-            this.props.onClose(this, data)
+    this.setState({ open: false }, () => {
+      this.props.onClose && this.props.onClose(this, data)
     })
   }
 
@@ -147,7 +78,7 @@ class GroupModal extends React.Component {
       params.description = group.description
     }
 
-    let url = group ? Api.group.modifyGroup : Api.group.addGroup
+    let url = group ? Api.group.modifyGroup : Api.group.addGroup // eslint-disable-line no-undef
 
     let added = clone(this.state.selected)
     let removed = []
@@ -164,24 +95,24 @@ class GroupModal extends React.Component {
     }
 
         // url += "?" + this.state.selected.map(id => "uids=" + id).join('&')
-    $.get(url, params).done(res => {
+    $.get(url, params).done(res => { // eslint-disable-line no-undef
       if (!res.success) return showAlert('Save failed!')
 
       let newGroup = res.object
 
       let calls = []
       added.forEach(userId => {
-        calls.push($.get(Api.group.addGroupAlloc, {
+        calls.push($.get(Api.group.addGroupAlloc, { // eslint-disable-line no-undef
           groupId: newGroup.id,
           userId: userId
         }))
       })
 
       removed.forEach(id => {
-        calls.push($.get(Api.group.removeGroupAlloc, { id }))
+        calls.push($.get(Api.group.removeGroupAlloc, { id })) // eslint-disable-line no-undef
       })
 
-      $.when.apply(null, calls).always(() => {
+      $.when.apply(null, calls).always(() => { // eslint-disable-line no-undef
         this.closeModal(newGroup)
       })
     })
@@ -199,6 +130,86 @@ class GroupModal extends React.Component {
     }
 
     this.setState({ selected })
+  }
+
+  render () {
+    const { group } = this.props
+    let groupId = 0 // eslint-disable-line no-unused-vars
+    if (group) groupId = group.id
+
+    return (
+      <Modal
+        show={this.state.open}
+        onHide={this.onHide.bind(this)}
+        aria-labelledby="ModalHeader"
+        className="bootstrap-dialog type-primary"
+      >
+
+        <div className="modal-header">
+          <h4 className="modal-title bootstrap-dialog-title">
+            Group
+          </h4>
+          <div className="bootstrap-dialog-close-button">
+            <button className="close" onClick={this.onClickClose.bind(this)}>×</button>
+          </div>
+        </div>
+
+        <div className="modal-body bootstrap-dialog-message">
+          <div className="row form-group margin-md-bottom">
+            <div className="col-xs-12">
+              <label className="control-label">Group Name</label>
+              <input
+                type="text" className="form-control input-sm"
+                style={{width: '30%', marginLeft: '10px', display: 'inline-block'}}
+                defaultValue={group ? group.name : ''}
+                ref="name"
+              />
+            </div>
+          </div>
+
+          <div style={{maxHeight: '400px', overflow: 'auto'}}>
+            <table className="table table-hover">
+              <thead>
+              <tr>
+                <th />
+                <th>User Name</th>
+                <th>Full Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+              </tr>
+              </thead>
+              <tbody>
+              {
+                this.state.data.map(item =>
+                  <tr key={item.id}>
+                    <td className="text-right groupcheck">
+                      <input
+                        type="checkbox"
+                        defaultChecked={group ? (findIndex(group.groupUsers, {userId: item.id}) >= 0) : false}
+                        onChange={this.onChangeCheck.bind(this, item.id)}
+                      />
+                    </td>
+                    <td>{item.username}</td>
+                    <td>{item.fullname}</td>
+                    <td>{item.email}</td>
+                    <td>{item.phone}</td>
+                  </tr>
+                )
+              }
+              </tbody>
+            </table>
+          </div>
+
+          <div className="text-right p-none">
+            <Button
+              className="btn-primary btn-sm"
+              onClick={this.onClickSave.bind(this)}>Save</Button>
+            <Button className="btn-sm margin-sm-left"
+              onClick={this.onClickClose.bind(this)}>Cancel</Button>
+          </div>
+        </div>
+      </Modal>
+    )
   }
 }
 

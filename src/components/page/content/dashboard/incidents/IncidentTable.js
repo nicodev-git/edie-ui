@@ -58,34 +58,35 @@ class IncidentTable extends React.Component {
           ReactTooltip.rebuild()
         }, 1)
         return (
-                    <div>
-                        <a href="javascript:;" onClick={() => { this.props.ackIncident(row) }}>
-                            <img style={{height: '30px'}} title="Acknowledge"
-                              src={`/images/${row.acknowledged ? 'ack.png' : 'noack.png'}`} />
-                        </a>
-                        &nbsp;
+          <div>
+            <a href="javascript:;" onClick={() => { this.props.ackIncident(row) }}>
+                <img style={{height: '30px'}} title="Acknowledge"
+                  src={`/images/${row.acknowledged ? 'ack.png' : 'noack.png'}`} />
+            </a>
+            &nbsp;
 
-                        <a href="javascript:;" onClick={() => { this.props.fixIncident(row) }}>
-                            <img style={{height: '30px'}} title="Acknowledge"
-                              src={`/images/${row.fixed ? 'ok.png' : 'notok.png'}`} />
-                        </a>
-                        &nbsp;
+            <a href="javascript:;" onClick={() => { this.props.fixIncident(row) }}>
+                <img style={{height: '30px'}} title="Acknowledge"
+                  src={`/images/${row.fixed ? 'ok.png' : 'notok.png'}`} />
+            </a>
+            &nbsp;
 
-                        <a href="javascript:;" onClick={showIncidentRaw.bind(null, row)}>
-                            <img style={{height: '34px'}} title="Raw" src="/images/rawtext.png"/>
-                        </a>
-                        &nbsp;
+            <a href="javascript:;" onClick={showIncidentRaw.bind(null, row)}>
+                <img style={{height: '34px'}} title="Raw" src="/images/rawtext.png"/>
+            </a>
+            &nbsp;
 
-                        {
-                            (row.fixed && !row.whathappened) ?
-                                <a href="javascript:;" onClick={showIncidentComments.bind(null, this.context.sid, row, this.reloadTable.bind(this))}>
-                                    <img style={{height: '25px'}} title="Reason"
-                                      src={`/images/${row.lastcomment ? 'reason-icon.png' : 'reason-x.png'}`} />
-                                </a>
-                                : null
-                        }
+            {
+              (row.fixed && !row.whathappened)
+                ? <a href="javascript:;"
+                    onClick={showIncidentComments.bind(null, this.context.sid, row, this.reloadTable.bind(this))}>
+                  <img style={{height: '25px'}} title="Reason"
+                    src={`/images/${row.lastcomment ? 'reason-icon.png' : 'reason-x.png'}`} />
+                  </a>
+                : null
+            }
 
-                    </div>
+          </div>
         )
       }
     }]
@@ -96,45 +97,18 @@ class IncidentTable extends React.Component {
         this.refs.table.refresh()
   }
 
-  render () {
-    return (
-            <div style={{width: '100%', height: '100%', padding: '0px', border: '0px', overflow: 'auto'}}>
-                <Griddle
-                  id={this.props.id}
-
-                  enableSort={false}
-
-                  columns={this.cells.map(item => item.columnName)}
-                  columnMetadata={this.cells}
-
-                  tableClassName="table table-hover"
-
-                  useFixedHeader={false}
-                  noDataMessage=""
-                  useGriddleStyles={false}
-
-                  bodyHeight={this.props.containerHeight}
-                  rowMetadata={{'key': 'id'}}
-                  ref="table"
-                  results={this.props.incidents}
-                  resultsPerPage={100}
-                />
-            </div>
-    )
-  }
-
   render2 () {
     return (
-            <InfiniteTable
-              url="/incidentstable/getLatestIncidentsDataTable?severity=High&severity=Medium"
-              params={{}}
-              cells={this.cells}
-              ref="table"
-              rowMetadata={{'key': 'incidentid'}}
-              selectable
-              bodyHeight={this.props.containerHeight}
-              onRowDblClick={this.onRowDblClick.bind(this)}
-            />
+      <InfiniteTable
+        url="/incidentstable/getLatestIncidentsDataTable?severity=High&severity=Medium"
+        params={{}}
+        cells={this.cells}
+        ref="table"
+        rowMetadata={{'key': 'incidentid'}}
+        selectable
+        bodyHeight={this.props.containerHeight}
+        onRowDblClick={this.onRowDblClick.bind(this)}
+      />
     )
   }
 
@@ -146,6 +120,33 @@ class IncidentTable extends React.Component {
 
   onRowDblClick () {
     console.log(arguments)
+  }
+
+  render () {
+    return (
+      <div style={{width: '100%', height: '100%', padding: '0px', border: '0px', overflow: 'auto'}}>
+        <Griddle
+          id={this.props.id}
+
+          enableSort={false}
+
+          columns={this.cells.map(item => item.columnName)}
+          columnMetadata={this.cells}
+
+          tableClassName="table table-hover"
+
+          useFixedHeader={false}
+          noDataMessage=""
+          useGriddleStyles={false}
+
+          bodyHeight={this.props.containerHeight}
+          rowMetadata={{'key': 'id'}}
+          ref="table"
+          results={this.props.incidents}
+          resultsPerPage={100}
+        />
+      </div>
+    )
   }
 }
 

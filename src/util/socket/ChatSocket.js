@@ -21,7 +21,7 @@ export const chatSocket = {
     }
 
     try {
-      me.ws = new WebSocket(`ws://${document.location.host}/incidentchat`)
+      me.ws = new WebSocket(`ws://${document.location.host}/incidentchat`) // eslint-disable-line no-undef
       me.ws.onopen = me.onOpen.bind(me)
       me.ws.onmessage = me.onMessage.bind(me)
       me.ws.onclose = me.onClose.bind(me)
@@ -77,7 +77,7 @@ export const chatSocket = {
   },
 
   onMessage: function (e) {
-    let me = this
+    // let me = this // Never used
         // console.log(e.data);
         // console.log('New Chat Socket Message');
     try {

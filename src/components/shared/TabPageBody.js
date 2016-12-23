@@ -7,29 +7,29 @@ class TabPageBody extends React.Component {
     this.state = {}
   }
 
+  onClickTab () {
+
+  }
+
   render () {
     const {tab, tabs} = this.props
 
     return (
-            <div className="tabs-custom flex-vertical flex-1">
-                <ul className="nav nav-tabs">
-                    {tabs.map((item, i) =>
-                        <li key={i} className={tab === i ? 'active' : ''}>
-                            <Link to={{pathname: item.path/*, state: props */}}
-                              onClick={this.onClickTab.bind(this)}>{item.title}</Link>
-                        </li>
-                    )}
-                </ul>
+      <div className="tabs-custom flex-vertical flex-1">
+        <ul className="nav nav-tabs">
+          {tabs.map((item, i) =>
+            <li key={i} className={tab === i ? 'active' : ''}>
+              <Link to={{pathname: item.path/*, state: props */}}
+                onClick={this.onClickTab.bind(this)}>{item.title}</Link>
+            </li>
+          )}
+        </ul>
 
-                <div className="tab-content">
-                    {this.props.children}
-                </div>
-            </div>
+        <div className="tab-content">
+          {this.props.children}
+        </div>
+      </div>
     )
-  }
-
-  onClickTab () {
-
   }
 }
 

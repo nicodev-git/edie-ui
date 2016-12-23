@@ -28,42 +28,6 @@ class IdentityModal extends React.Component {
     }
   }
 
-  render () {
-    const { handleSubmit } = this.props
-
-    return (
-            <Modal show={this.state.open} onHide={this.onHide.bind(this)}
-              aria-labelledby="ModalHeader" className="bootstrap-dialog type-primary">
-
-                <div className="modal-header">
-                    <h4 className="modal-title bootstrap-dialog-title">
-                        Identity
-                    </h4>
-                    <div className="bootstrap-dialog-close-button">
-                        <button className="close"
-                          onClick={this.onClickClose.bind(this)}>×</button>
-                    </div>
-                </div>
-
-                <div className="modal-body bootstrap-dialog-message">
-                    <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
-                        <Field name="name" component={renderInput} type="text" label="Name"/>
-                        <Field name="desc" component={renderInput} type="text" label="Description"/>
-                        <Field name="ip" component={renderInput} type="text" label="IP"/>
-                        <Field name="segment" component={renderInput} type="text" label="Segment"/>
-                        <Field name="country" component={renderInput} type="text" label="Country"/>
-
-                        <div className="text-center">
-                            <Button className="btn-primary btn-sm" type="submit">Save</Button>
-                            <Button className="btn-sm margin-sm-left"
-                              onClick={this.onClickClose.bind(this)}>Cancel</Button>
-                        </div>
-                    </form>
-                </div>
-            </Modal>
-    )
-  }
-
   onHide () {
     this.onClickClose()
   }
@@ -87,15 +51,51 @@ class IdentityModal extends React.Component {
       this.props.addIdentity(props)
     }
   }
+
+  render () {
+    const { handleSubmit } = this.props
+
+    return (
+      <Modal
+        show={this.state.open}
+        onHide={this.onHide.bind(this)}
+        aria-labelledby="ModalHeader"
+        className="bootstrap-dialog type-primary"
+      >
+
+        <div className="modal-header">
+          <h4 className="modal-title bootstrap-dialog-title">
+            Identity
+          </h4>
+          <div className="bootstrap-dialog-close-button">
+            <button className="close"
+                    onClick={this.onClickClose.bind(this)}>×</button>
+          </div>
+        </div>
+
+        <div className="modal-body bootstrap-dialog-message">
+          <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
+            <Field name="name" component={renderInput} type="text" label="Name"/>
+            <Field name="desc" component={renderInput} type="text" label="Description"/>
+            <Field name="ip" component={renderInput} type="text" label="IP"/>
+            <Field name="segment" component={renderInput} type="text" label="Segment"/>
+            <Field name="country" component={renderInput} type="text" label="Country"/>
+
+            <div className="text-center">
+              <Button className="btn-primary btn-sm" type="submit">Save</Button>
+              <Button className="btn-sm margin-sm-left"
+                      onClick={this.onClickClose.bind(this)}>Cancel</Button>
+            </div>
+          </form>
+        </div>
+      </Modal>
+    )
+  }
 }
 
 IdentityModal.defaultProps = {
 
 }
-
-IdentityModal = reduxForm({
-  form: 'identityEditForm'
-})(IdentityModal)
 
 function mapStateToProps (state) {
   const {editIdentity} = state.settings
@@ -107,7 +107,12 @@ function mapStateToProps (state) {
 
 const actions = {
   closeIdentityModal,
-  addIdentity, updateIdentity
+  addIdentity,
+  updateIdentity
 }
 
-export default connect(mapStateToProps, actions)(IdentityModal)
+export default connect(mapStateToProps, actions)(
+  reduxForm({
+    form: 'identityEditForm'
+  })(IdentityModal)
+)
