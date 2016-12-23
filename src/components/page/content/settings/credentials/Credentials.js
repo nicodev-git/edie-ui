@@ -48,41 +48,6 @@ class Credentials extends React.Component {
     this.props.fetchCredentials()
   }
 
-  render () {
-    return (
-            <TabPage>
-                <TabPageHeader title="Settings">
-                    <div className="text-center margin-md-top">
-                        <div className="pull-right">
-                            <ButtonGroup>
-
-                                <Button onClick={this.onAddCred.bind(this)}>Add</Button>
-                                <Button onClick={this.onEditCred.bind(this)}>Edit</Button>
-                                <Button onClick={this.onRemoveCred.bind(this)}>Remove</Button>
-
-                            </ButtonGroup>
-                        </div>
-
-                        <div className="inline">
-                            <input type="text" placeholder="Search" className="form-control"
-                              style={{width: '220px', paddingLeft: '35px'}}
-                              onKeyUp={this.onSearchKeyUp.bind(this)}/>
-                            <a className="btn" href="javascript:;"
-                              style={{position: 'absolute', left: 0, top: 0}}>
-                                <i className="fa fa-search" />
-                            </a>
-                        </div>
-                    </div>
-                </TabPageHeader>
-
-                <TabPageBody tabs={SettingTabs} tab={6}>
-                    {this.renderContent()}
-                    {this.renderCredentialsModal()}
-                </TabPageBody>
-            </TabPage>
-    )
-  }
-
   renderContent () {
     return (
             <ResponsiveInfiniteTable
@@ -157,8 +122,43 @@ class Credentials extends React.Component {
     clearTimeout(this.searchTimer)
     const value = e.target.value
     this.searchTimer = setTimeout(() => {
-      emit(EVENTS.CREDENTIALS_KEYWORD_CHANGED, value)
+      emit(EVENTS.CREDENTIALS_KEYWORD_CHANGED, value) // eslint-disable-line no-undef
     }, 200)
+  }
+
+  render () {
+    return (
+      <TabPage>
+        <TabPageHeader title="Settings">
+          <div className="text-center margin-md-top">
+            <div className="pull-right">
+              <ButtonGroup>
+
+                <Button onClick={this.onAddCred.bind(this)}>Add</Button>
+                <Button onClick={this.onEditCred.bind(this)}>Edit</Button>
+                <Button onClick={this.onRemoveCred.bind(this)}>Remove</Button>
+
+              </ButtonGroup>
+            </div>
+
+            <div className="inline">
+              <input type="text" placeholder="Search" className="form-control"
+                     style={{width: '220px', paddingLeft: '35px'}}
+                     onKeyUp={this.onSearchKeyUp.bind(this)}/>
+              <a className="btn" href="javascript:;"
+                 style={{position: 'absolute', left: 0, top: 0}}>
+                <i className="fa fa-search" />
+              </a>
+            </div>
+          </div>
+        </TabPageHeader>
+
+        <TabPageBody tabs={SettingTabs} tab={6}>
+          {this.renderContent()}
+          {this.renderCredentialsModal()}
+        </TabPageBody>
+      </TabPage>
+    )
   }
 }
 

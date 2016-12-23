@@ -1,6 +1,9 @@
 import React from 'react'
 import Slider from 'rc-slider'
-import { findIndex, assign } from 'lodash'
+import {
+  // findIndex, // Never used
+  assign
+} from 'lodash'
 import d3 from 'd3'
 import moment from 'moment'
 import Transition from 'react-addons-css-transition-group'
@@ -8,9 +11,9 @@ import Transition from 'react-addons-css-transition-group'
 import 'react-datepicker/dist/react-datepicker.css'
 import DatePicker from 'react-datepicker'
 import {lookup} from 'country-data'
-// import country_latlng from 'shared/data/country-latlng.json'
+// import countryLatlng from 'shared/data/country-latlng.json'
 
-const country_latlng = null
+const countryLatlng = null
 
 import { appendComponent, removeComponent } from '../../../../util/Component'
 import Preloader from '../../../shared/Preloader'
@@ -87,7 +90,7 @@ class ThreatMap extends React.Component {
   componentDidMount () {
     let me = this
 
-    me.vmap = $(this.refs.mapDiv).vectorMap({
+    me.vmap = $(this.refs.mapDiv).vectorMap({ // eslint-disable-line no-undef
       map: 'world_mill_en',
 
       backgroundColor: '#193341',
@@ -112,7 +115,7 @@ class ThreatMap extends React.Component {
       }
     }).vectorMap('get', 'mapObject')
 
-    const $svg = $(this.refs.mapDiv).find('svg')
+    const $svg = $(this.refs.mapDiv).find('svg') // eslint-disable-line no-undef
     me.svg = d3.select($svg[0])
     me.svg.append('text').attr('class', 'layer')
 
@@ -164,107 +167,6 @@ class ThreatMap extends React.Component {
         // setTimeout(function(){
         //     if (fullscreen) fullscreen.cancel();
         // }, 1);
-  }
-
-  render () {
-    return (
-            <div style={{flex: 1}} className="flex-vertical">
-                <div className="form-inline padding-sm">
-                    <label className="pt-none control-label margin-sm-right">Mode</label>
-                    <select className="form-control input-sm margin-lg-right"
-                      value={this.state.mode} onChange={this.onChangeMode.bind(this)}>
-                        <option value="real">Real/History</option>
-                        <option value="demo">Demo</option>
-                    </select>
-
-                    <div className={`form-group ${this.state.mode === 'real' ? '' : 'hidden'}`}>
-
-                        <div className="checkbox">
-                            <label><input type="checkbox" checked={this.state.history} ref="history"
-                              onChange={this.onChangeHistoryCheck.bind(this)}/>History</label>
-                        </div>
-
-                        <div className={`inline margin-md-left ${this.state.history ? '' : 'hidden'}`}>
-                            <label className="pt-none control-label">From: </label>
-                            <DatePicker ref="dateFrom" readOnly
-                              selected={this.state.startDate} onChange={this.onChangeStartDate.bind(this)} />
-                            <label className="pt-none control-label margin-sm-left">To: </label>
-                            <DatePicker ref="dateFrom" readOnly
-                              selected={this.state.endDate} onChange={this.onChangeEndDate.bind(this)} />
-                        </div>
-                    </div>
-
-                    <div className="form-group pull-right inline">
-                        <select ref="severity" className="hidden" multiple="multiple">
-                            <option>High</option>
-                            <option>Medium</option>
-                            <option>Low</option>
-                            <option>Audit</option>
-                        </select>
-                        <a href="javascript:;" onClick={this.onClickSettings.bind(this)}>
-                            <i className="fa fa-x fa-cog valign-middle" />
-                        </a>
-                    </div>
-
-                </div>
-                <div style={{flex: 1, position: 'relative'}} className={(this.state.history || this.state.mode === 'demo') ? 'slider-visible' : ''}>
-                    <div ref="mapDiv" style={{position: 'absolute', left: 0, top: 0, right: 0, bottom: 0}} />
-
-                    <div id="latestAttacksContainer">
-                        <div id="latestAttacksContainerLeft" className="pinkBorder">
-                            <div id="tableContainer">
-                                <div id="tableHeaderRow">
-                                    <div id="latestAttacksTimeCol">TIME</div>
-                                    <div id="latestAttacksAttackCol">ATTACK</div>
-                                    <div id="latestAttacksActionCol">ACTION</div>
-                                    <div id="latestSeverityCol">SEVERITY</div>
-                                    <div id="latestAttacksSourceCol">ATTACKING COUNTRY</div>
-                                    <div id="latestAttacksDestCol">TARGET DEVICE</div>
-                                </div>
-                                <div className="attackRow" id="spacerRow">
-                                    <div>
-                                        &nbsp;
-                                    </div>
-                                </div>
-                                {
-                                    this.state.latestAttacks.map(item => this.renderRow(item))
-                                }
-                            </div>
-                        </div>
-                    </div>
-
-                    {this.renderInfoPopup()}
-
-                    <div className="play-controls">
-                        <div className="inline">
-                            {
-                                this.state.playing ?
-                                    (<a href="javascript:;" style={{padding: '2px'}}>
-                                        <img src="/images/btn_pause.png" style={{width: '23px'}} onClick={this.onClickPause.bind(this)}/>
-                                    </a>)
-                                    :
-                                    (<a href="javascript:;" style={{padding: '2px'}}>
-                                        <img src="/images/btn_play.png" style={{width: '23px'}} onClick={this.onClickPlay.bind(this)}/>
-                                    </a>)
-                            }
-
-                            <a href="javascript:;" style={{padding: '2px'}}>
-                                <img src="/images/btn_stop.png" style={{width: '23px'}} onClick={this.onClickStop.bind(this)}/>
-                            </a>
-
-                            {this.renderTime()}
-
-                        </div>
-                        <div className="incident-time hidden" style={{color: 'white', paddingTop: '3px'}} />
-
-                        <div className="play-timeline" style={{flex: 1, padding: '9px 20px'}}>
-                            {this.renderSlider()}
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-    )
   }
 
   renderSlider () {
@@ -739,7 +641,7 @@ class ThreatMap extends React.Component {
 
   reset () {
     let me = this
-    let p = $(this.refs.mapDiv)
+    let p = $(this.refs.mapDiv) // eslint-disable-line no-undef
 
     p.find('.map-item').remove()
     p.find('.attacker-popup').remove()
@@ -775,7 +677,7 @@ class ThreatMap extends React.Component {
 
   clear () {
     let me = this
-    let p = me.div
+    // let p = me.div // Never used
 
     me.cancelled = true
     me.onPlayEnd()
@@ -927,7 +829,7 @@ class ThreatMap extends React.Component {
   }
 
   updateBlastPosition (blast) {
-    let me = this
+    // let me = this // Never used
     let data = blast.data()[0]
 
     blast.attr('x', data.device.x - parseFloat(blast.attr('width')) / 2)
@@ -976,8 +878,10 @@ class ThreatMap extends React.Component {
                 attack.from,
                 attack.to,
                 moment(screen.time).format('HH:mm:ss'),
-                attack.type || (((parseInt(Math.random() * 10) % 3) === 0) ?
-                    'Possible Bot HTTP Request.AA' : 'Trojan-Banker.Win32.Bancos.N'),
+                attack.type || (((parseInt(Math.random() * 10) % 3) === 0)
+                  ? 'Possible Bot HTTP Request.AA'
+                  : 'Trojan-Banker.Win32.Bancos.N'
+                ),
                 attack.action || '',
                 attack.severity)
 
@@ -999,15 +903,15 @@ class ThreatMap extends React.Component {
   onTickReal () {
     let me = this
 
-    let colors = {
-      'high': 'red',
-      'medium': 'yellow',
-      'low': 'blue',
-      'audit': 'green'
-    }
+    // let colors = {
+    //   'high': 'red',
+    //   'medium': 'yellow',
+    //   'low': 'blue',
+    //   'audit': 'green'
+    // } // Never used
 
     if (me.currentPlay.stopped/* || me.currentPlay.paused */) return
-    $.get(`${Api.bi.threatMapEventsReal}?minutes=1`, {
+    $.get(`${Api.bi.threatMapEventsReal}?minutes=1`, { // eslint-disable-line no-undef
 
     }).done((res) => {
       if (me.cancelled) return
@@ -1120,13 +1024,13 @@ class ThreatMap extends React.Component {
         //     container: 'body',
         // });
 
-    if (me.buffer.length > 10) {
-      let removed = me.buffer.splice(5)
-            // $.each(removed, function(i, item){
-            //     item.find('.sourceCol p').tooltip('destroy');
-            //     item.find('.destCol p').tooltip('destroy');
-            // });
-    }
+    // if (me.buffer.length > 10) {
+      // let removed = me.buffer.splice(5) // Never used
+      // $.each(removed, function(i, item){
+      //     item.find('.sourceCol p').tooltip('destroy');
+      //     item.find('.destCol p').tooltip('destroy');
+      // });
+    // }
     me.buffer.push({
       id: id,
       time: time,
@@ -1142,7 +1046,7 @@ class ThreatMap extends React.Component {
 
   findCountry (attack) {
     const found = lookup.countries({name: attack.country})
-    let iso_code
+    // let iso_code // Never used
     if (found.length === 0) {
       return {
         name: '',
@@ -1367,17 +1271,17 @@ class ThreatMap extends React.Component {
   drawConnection (from, to, type, arcSharpness) {
     let midXY = [(from.x + to.x) / 2, (from.y + to.y) / 2]
     let sameCountry = (to.x === from.x && to.y === from.y)
-    let x = from.x,
-      y = from.y,
-      tx = to.x,
-      ty = to.y,
-      mx = midXY[0],
-      my = midXY[1]
+    let x = from.x
+    let y = from.y
+    let tx = to.x
+    let ty = to.y
+    let mx = midXY[0]
+    let my = midXY[1]
     let cx = mx + (50 * arcSharpness)
     let cy = Math.abs(my - (50 * arcSharpness))
 
     if (type === 'straight') {
-      var str = 'M{0},{1}L{2},{3}'
+      const str = 'M{0},{1}L{2},{3}'
       return format(str, from.x, from.y, to.x, to.y)
     }
 
@@ -1385,11 +1289,11 @@ class ThreatMap extends React.Component {
       if (sameCountry) {
         let widthConst = 10
         let heightConst = 10
-        var str = 'M{0},{1}T{2},{3}T{4},{5}T{6},{7}T{8},{9}'
+        const str = 'M{0},{1}T{2},{3}T{4},{5}T{6},{7}T{8},{9}'
         return format(str, x, y, x + widthConst, y - heightConst, x, y - (2 * heightConst), x - widthConst, y - heightConst, x, y)
       }
 
-      var str = 'M{0},{1}S{2},{3},{4},{5}'
+      const str = 'M{0},{1}S{2},{3},{4},{5}'
       return format(str, x, y, cx, cy, tx, ty)
     }
 
@@ -1404,7 +1308,7 @@ class ThreatMap extends React.Component {
 
     let loader = appendComponent(<Preloader/>)
 
-    $.get(Api.bi.threatMapEventsHistory, {
+    $.get(Api.bi.threatMapEventsHistory, { // eslint-disable-line no-undef
       from: datefrom,
       to: dateto
     }).done((res) => {
@@ -1472,7 +1376,7 @@ class ThreatMap extends React.Component {
       }
 
       let time = item['starttimestamp']
-      if (!screen || screen.time !== time); {
+      if (!screen || screen.time !== time) {
         screen = {
           time: time,
           attacks: []
@@ -1520,10 +1424,112 @@ class ThreatMap extends React.Component {
     let code = found[0].alpha2
     if (!code) return null
 
-    let latlng = country_latlng[code]
+    let latlng = countryLatlng[code]
     if (!latlng || !latlng.length) return null
 
     return latlng
+  }
+
+  render () {
+    return (
+      <div style={{flex: 1}} className="flex-vertical">
+        <div className="form-inline padding-sm">
+          <label className="pt-none control-label margin-sm-right">Mode</label>
+          <select className="form-control input-sm margin-lg-right"
+            value={this.state.mode} onChange={this.onChangeMode.bind(this)}>
+            <option value="real">Real/History</option>
+            <option value="demo">Demo</option>
+          </select>
+
+          <div className={`form-group ${this.state.mode === 'real' ? '' : 'hidden'}`}>
+
+            <div className="checkbox">
+              <label>
+                <input type="checkbox" checked={this.state.history} ref="history"
+                  onChange={this.onChangeHistoryCheck.bind(this)}/>History
+              </label>
+            </div>
+
+            <div className={`inline margin-md-left ${this.state.history ? '' : 'hidden'}`}>
+              <label className="pt-none control-label">From: </label>
+              <DatePicker ref="dateFrom" readOnly
+                selected={this.state.startDate} onChange={this.onChangeStartDate.bind(this)} />
+              <label className="pt-none control-label margin-sm-left">To: </label>
+              <DatePicker ref="dateFrom" readOnly
+                selected={this.state.endDate} onChange={this.onChangeEndDate.bind(this)} />
+            </div>
+          </div>
+
+          <div className="form-group pull-right inline">
+            <select ref="severity" className="hidden" multiple="multiple">
+              <option>High</option>
+              <option>Medium</option>
+              <option>Low</option>
+              <option>Audit</option>
+            </select>
+            <a href="javascript:;" onClick={this.onClickSettings.bind(this)}>
+              <i className="fa fa-x fa-cog valign-middle" />
+            </a>
+          </div>
+
+        </div>
+        <div style={{flex: 1, position: 'relative'}} className={(this.state.history || this.state.mode === 'demo') ? 'slider-visible' : ''}>
+          <div ref="mapDiv" style={{position: 'absolute', left: 0, top: 0, right: 0, bottom: 0}} />
+
+          <div id="latestAttacksContainer">
+            <div id="latestAttacksContainerLeft" className="pinkBorder">
+              <div id="tableContainer">
+                <div id="tableHeaderRow">
+                  <div id="latestAttacksTimeCol">TIME</div>
+                  <div id="latestAttacksAttackCol">ATTACK</div>
+                  <div id="latestAttacksActionCol">ACTION</div>
+                  <div id="latestSeverityCol">SEVERITY</div>
+                  <div id="latestAttacksSourceCol">ATTACKING COUNTRY</div>
+                  <div id="latestAttacksDestCol">TARGET DEVICE</div>
+                </div>
+                <div className="attackRow" id="spacerRow">
+                  <div>
+                    &nbsp;
+                  </div>
+                </div>
+                {
+                  this.state.latestAttacks.map(item => this.renderRow(item))
+                }
+              </div>
+            </div>
+          </div>
+
+          {this.renderInfoPopup()}
+
+          <div className="play-controls">
+            <div className="inline">
+              {
+                this.state.playing
+                  ? (<a href="javascript:;" style={{padding: '2px'}}>
+                      <img src="/images/btn_pause.png" style={{width: '23px'}} onClick={this.onClickPause.bind(this)}/>
+                    </a>)
+                  : (<a href="javascript:;" style={{padding: '2px'}}>
+                      <img src="/images/btn_play.png" style={{width: '23px'}} onClick={this.onClickPlay.bind(this)}/>
+                    </a>)
+              }
+
+              <a href="javascript:;" style={{padding: '2px'}}>
+                <img src="/images/btn_stop.png" style={{width: '23px'}} onClick={this.onClickStop.bind(this)}/>
+              </a>
+
+              {this.renderTime()}
+
+            </div>
+            <div className="incident-time hidden" style={{color: 'white', paddingTop: '3px'}} />
+
+            <div className="play-timeline" style={{flex: 1, padding: '9px 20px'}}>
+              {this.renderSlider()}
+            </div>
+          </div>
+        </div>
+
+      </div>
+    )
   }
 }
 

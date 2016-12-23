@@ -1,16 +1,16 @@
 import React from 'react'
 import InlineEdit from 'react-edit-inline'
-import {
-    ButtonGroup,
-    Button
-} from 'react-bootstrap'
+// import {
+//     ButtonGroup,
+//     Button
+// } from 'react-bootstrap' // Never used
 import { connect } from 'react-redux'
 import { assign } from 'lodash'
 
-import SettingTabs from '../SettingTabs'
-import TabPage from '../../../../shared/TabPage'
-import TabPageBody from '../../../../shared/TabPageBody'
-import TabPageHeader from '../../../../shared/TabPageHeader'
+// import SettingTabs from '../SettingTabs' // Never used
+// import TabPage from '../../../../shared/TabPage' // Never used
+// import TabPageBody from '../../../../shared/TabPageBody' // Never used
+// import TabPageHeader from '../../../../shared/TabPageHeader' // Never used
 
 import { fetchEnvVars, addEnvVar, updateEnvVar } from '../../../../../actions'
 
@@ -36,117 +36,93 @@ class General extends React.Component {
     this.props.fetchEnvVars()
   }
 
-  render () {
-    return (
-            <TabPage>
-                <TabPageHeader title="Settings">
-                    <div className="text-center margin-md-top">
-                        <div style={{position: 'absolute', right: '25px'}}>
-                            <ButtonGroup>
-
-                                <Button>System Backup</Button>
-
-                                <Button>System Restore</Button>
-
-                            </ButtonGroup>
-                        </div>
-                    </div>
-                </TabPageHeader>
-
-                <TabPageBody tabs={SettingTabs} tab={0}>
-                    {this.renderContent()}
-                </TabPageBody>
-            </TabPage>
-    )
-  }
-
   renderContent () {
     return (
-            <div className="padding-md-top form-inline">
-                <div className="col-md-12 margin-md-bottom">
-                    <label className="margin-sm-top margin-sm-bottom" style={{width: '150px'}}>System Name:</label>
-                    <InlineEdit
-                      text={this.getOptionValue('SYSTEM_NAME') || '[Empty]'}
-                      paramName="message"
-                      change={this.onChangeSysName.bind(this)}
-                      className="inline"
-                      minLength={0}
-                    />
-                </div>
+      <div className="padding-md-top form-inline">
+        <div className="col-md-12 margin-md-bottom">
+          <label className="margin-sm-top margin-sm-bottom" style={{width: '150px'}}>System Name:</label>
+          <InlineEdit
+            text={this.getOptionValue('SYSTEM_NAME') || '[Empty]'}
+            paramName="message"
+            change={this.onChangeSysName.bind(this)}
+            className="inline"
+            minLength={0}
+          />
+        </div>
 
-                <div className="col-md-12 margin-md-bottom">
-                    <div className="checkbox">
-                        <label style={{width: '150px'}} className="margin-sm-top margin-sm-bottom">
-                            <input type="checkbox" className="margin-xs-right" ref="dmz"
-                              checked={this.getOptionValue('DMZ') === 'true'}
-                              onChange={this.onChangeDmz.bind(this)}/>
-                            Enable DMZ
-                        </label>
-                    </div>
+        <div className="col-md-12 margin-md-bottom">
+          <div className="checkbox">
+            <label style={{width: '150px'}} className="margin-sm-top margin-sm-bottom">
+              <input type="checkbox" className="margin-xs-right" ref="dmz"
+                checked={this.getOptionValue('DMZ') === 'true'}
+                onChange={this.onChangeDmz.bind(this)}/>
+              Enable DMZ
+            </label>
+          </div>
 
-                    <label className="margin-md-left hidden">DMZ IP Address:</label>
-                    <InlineEdit
-                      text={this.getOptionValue('DMZ', 'value2')}
-                      paramName="message"
-                      change={this.onChangeDmzIP.bind(this)}
-                      className="inline"
-                      ref="dmzIp"
-                    />
-                </div>
-                <div className="col-md-12 margin-md-bottom">
-                    <div className="checkbox">
-                        <label className="margin-sm-top margin-sm-bottom">
-                            <input type="checkbox" className="margin-xs-right"
-                              checked={this.getOptionValue('PAUSE') === 'true'} onChange={this.onChangePause.bind(this)}/>
-                            Pause System
-                        </label>
-                    </div>
-                </div>
-                <div className="col-md-12 margin-md-bottom">
-                    <div className="checkbox">
-                        <label className="margin-sm-top margin-sm-bottom">
-                            <input type="checkbox" className="margin-xs-right"
-                              checked={this.getOptionValue('NETWORK_TRAFFIC') === 'true'} onChange={this.onChangeTraffic.bind(this)}/>
-                            Display Network Traffic
-                        </label>
-                    </div>
-                </div>
-                <div className="col-md-12 margin-md-bottom">
-                    <div className="checkbox">
-                        <label style={{width: '150px'}} className="margin-sm-top margin-sm-bottom">
-                            <input type="checkbox" className="margin-xs-right"
-                              checked={this.getOptionValue('REMOTE_LOG_ENABLED') === 'true'} onChange={this.onChangeLogEnabled.bind(this)}/>
-                            Send Error Logs With
-                        </label>
+          <label className="margin-md-left hidden">DMZ IP Address:</label>
+          <InlineEdit
+            text={this.getOptionValue('DMZ', 'value2')}
+            paramName="message"
+            change={this.onChangeDmzIP.bind(this)}
+            className="inline"
+            ref="dmzIp"
+          />
+        </div>
+        <div className="col-md-12 margin-md-bottom">
+          <div className="checkbox">
+            <label className="margin-sm-top margin-sm-bottom">
+              <input type="checkbox" className="margin-xs-right"
+                checked={this.getOptionValue('PAUSE') === 'true'} onChange={this.onChangePause.bind(this)}/>
+              Pause System
+            </label>
+          </div>
+        </div>
+        <div className="col-md-12 margin-md-bottom">
+          <div className="checkbox">
+            <label className="margin-sm-top margin-sm-bottom">
+              <input type="checkbox" className="margin-xs-right"
+                checked={this.getOptionValue('NETWORK_TRAFFIC') === 'true'} onChange={this.onChangeTraffic.bind(this)}/>
+              Display Network Traffic
+            </label>
+          </div>
+        </div>
+        <div className="col-md-12 margin-md-bottom">
+          <div className="checkbox">
+            <label style={{width: '150px'}} className="margin-sm-top margin-sm-bottom">
+              <input type="checkbox" className="margin-xs-right"
+                checked={this.getOptionValue('REMOTE_LOG_ENABLED') === 'true'} onChange={this.onChangeLogEnabled.bind(this)}/>
+              Send Error Logs With
+            </label>
 
-                        <label className="margin-md-left hidden">Error Logs Batch:</label>
-                        <InlineEdit
-                          text={this.getOptionValue('REMOTE_LOG_BATCH') || '[Empty]'}
-                          paramName="message"
-                          change={this.onChangeLogBatch.bind(this)}
-                          className="inline"
-                        />
-                    </div>
-                </div>
+            <label className="margin-md-left hidden">Error Logs Batch:</label>
+            <InlineEdit
+              text={this.getOptionValue('REMOTE_LOG_BATCH') || '[Empty]'}
+              paramName="message"
+              change={this.onChangeLogBatch.bind(this)}
+              className="inline"
+            />
+          </div>
+        </div>
 
-                <div className="col-md-12 margin-md-bottom">
-                    <div className="checkbox">
-                        <label style={{width: '150px'}} className="margin-sm-top margin-sm-bottom">
-                            <input type="checkbox" className="margin-xs-right"
-                              checked={!!this.getOptionValue('IMMOBILE')} onChange={this.onChangeSendMobile.bind(this)}/>
-                            Send to mobile
-                        </label>
-                        <InlineEdit
-                          text={this.getOptionValue('IMMOBILE')}
-                          paramName="message"
-                          change={this.onChangeMobileIP.bind(this)}
-                          className="inline"
-                          ref="mobileIp"
-                          minLength={0}
-                        />
-                    </div>
-                </div>
-            </div>
+        <div className="col-md-12 margin-md-bottom">
+          <div className="checkbox">
+            <label style={{width: '150px'}} className="margin-sm-top margin-sm-bottom">
+              <input type="checkbox" className="margin-xs-right"
+                checked={!!this.getOptionValue('IMMOBILE')} onChange={this.onChangeSendMobile.bind(this)}/>
+              Send to mobile
+            </label>
+            <InlineEdit
+              text={this.getOptionValue('IMMOBILE')}
+              paramName="message"
+              change={this.onChangeMobileIP.bind(this)}
+              className="inline"
+              ref="mobileIp"
+              minLength={0}
+            />
+          </div>
+        </div>
+      </div>
     )
   }
 
@@ -252,7 +228,8 @@ function mapStateToProps (state) {
 
 const actions = {
   fetchEnvVars,
-  addEnvVar, updateEnvVar
+  addEnvVar,
+  updateEnvVar
 }
 
 export default connect(mapStateToProps, actions)(General)

@@ -6,7 +6,7 @@ import {
 import { connect } from 'react-redux'
 
 import InfiniteTable from '../../../../shared/InfiniteTable'
-import {ResponsiveInfiniteTable} from '../../../../shared/InfiniteTable'
+const ResponsiveInfiniteTable = InfiniteTable
 import { appendComponent, removeComponent } from '../../../../../util/Component'
 import { showAlert, showConfirm } from '../../../../shared/Alert'
 
@@ -19,9 +19,11 @@ import TabPage from '../../../../shared/TabPage'
 import TabPageBody from '../../../../shared/TabPageBody'
 import TabPageHeader from '../../../../shared/TabPageHeader'
 
-import { fetchSettingMaps,
-    openSettingMapModal, deleteSettingMap,
-    openMapUsersModal
+import {
+  fetchSettingMaps,
+  openSettingMapModal,
+  deleteSettingMap,
+  openMapUsersModal
 } from '../../../../../actions'
 
 class Maps extends React.Component {
@@ -65,45 +67,18 @@ class Maps extends React.Component {
     this.props.fetchSettingMaps()
   }
 
-  render () {
-    let table
-    const {tabIndex} = this.state
-    return (
-            <TabPage>
-                <TabPageHeader title="Settings">
-                    <div className="text-center margin-md-top">
-                        <div style={{position: 'absolute', right: '25px'}}>
-                            <ButtonGroup>
-                                <Button onClick={this.onMapAdd.bind(this)}>Add Map</Button>
-                                <Button onClick={this.onMapEdit.bind(this)}>Edit Map</Button>
-                                <Button onClick={this.onMapDelete.bind(this)}>Delete Map</Button>
-                                <Button onClick={this.onMapUsers.bind(this)}>Edit Map Users</Button>
-                            </ButtonGroup>
-                        </div>
-                    </div>
-                </TabPageHeader>
-
-                <TabPageBody tabs={SettingTabs} tab={3}>
-                    {this.renderContent()}
-                    {this.renderMapModal()}
-                    {this.renderMapUsersModal()}
-                </TabPageBody>
-            </TabPage>
-    )
-  }
-
   renderContent () {
     return (
-            <ResponsiveInfiniteTable
-              cells={this.cells}
-              ref="maps"
-              rowMetadata={{'key': 'id'}}
-              selectable
-              onRowDblClick={this.onMapEdit.bind(this)}
+      <ResponsiveInfiniteTable
+        cells={this.cells}
+        ref="maps"
+        rowMetadata={{'key': 'id'}}
+        selectable
+        onRowDblClick={this.onMapEdit.bind(this)}
 
-              useExternal={false}
-              data={this.props.maps}
-            />
+        useExternal={false}
+        data={this.props.maps}
+      />
     )
   }
 
@@ -190,6 +165,33 @@ class Maps extends React.Component {
 
     this.props.openMapUsersModal(selected)
   }
+
+  render () {
+    // let table // Never used
+    // const {tabIndex} = this.state // Never used
+    return (
+      <TabPage>
+        <TabPageHeader title="Settings">
+          <div className="text-center margin-md-top">
+            <div style={{position: 'absolute', right: '25px'}}>
+              <ButtonGroup>
+                <Button onClick={this.onMapAdd.bind(this)}>Add Map</Button>
+                <Button onClick={this.onMapEdit.bind(this)}>Edit Map</Button>
+                <Button onClick={this.onMapDelete.bind(this)}>Delete Map</Button>
+                <Button onClick={this.onMapUsers.bind(this)}>Edit Map Users</Button>
+              </ButtonGroup>
+            </div>
+          </div>
+        </TabPageHeader>
+
+        <TabPageBody tabs={SettingTabs} tab={3}>
+          {this.renderContent()}
+          {this.renderMapModal()}
+          {this.renderMapUsersModal()}
+        </TabPageBody>
+      </TabPage>
+    )
+  }
 }
 
 Maps.defaultProps = {}
@@ -203,7 +205,9 @@ function mapStateToProps (state) {
 }
 
 const actions = {
-  fetchSettingMaps, openSettingMapModal, deleteSettingMap,
+  fetchSettingMaps,
+  openSettingMapModal,
+  deleteSettingMap,
   openMapUsersModal
 }
 

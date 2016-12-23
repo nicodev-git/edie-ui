@@ -140,7 +140,7 @@ class Templates extends React.Component {
   }
 
   render () {
-    const {tabIndex} = this.state
+    // const {tabIndex} = this.state // Never used
     return (
       <TabPage>
         <TabPageHeader title="Settings" />
@@ -172,7 +172,8 @@ function mapStateToProps (state) {
 }
 
 const actions = {
-  fetchDeviceTemplates, fetchMonitorTemplates,
+  fetchDeviceTemplates,
+  fetchMonitorTemplates,
   openDeviceTplModal,
   deleteDeviceTemplate,
   openMonitorTplModal,

@@ -153,65 +153,6 @@ class Agents extends React.Component {
     }]
   }
 
-  render () {
-    let table
-    const {tabIndex} = this.state
-    return (
-            <TabPage>
-                <TabPageHeader title="Settings">
-                    <div className="text-center margin-md-top">
-                        <div className="pull-left form-inline">
-                            <select className={`form-control ${tabIndex === 1 ? '' : 'hidden'}`}
-                              onChange={this.onChangeInstall.bind(this)}>
-                                <option value="all">All</option>
-                                <option value="installed">Installed</option>
-                                <option value="notinstalled">Not Installed</option>
-                            </select>
-                        </div>
-
-                        <div style={{position: 'absolute', right: '25px'}}>
-                            <ButtonGroup className={tabIndex === 1 ? '' : 'hidden'}>
-
-                                <Button>Default Config</Button>
-                                <Button>Edit Config</Button>
-                                <Button>Download Config</Button>
-
-                            </ButtonGroup>
-
-                            <ButtonGroup className={tabIndex === 2 ? '' : 'hidden'}>
-
-                                <Button>Add Collector</Button>
-                                <Button>Edit Collector</Button>
-                                <Button>Remove Collector</Button>
-                                <Button>Edit Config</Button>
-                                <Button>Download Config</Button>
-
-                            </ButtonGroup>
-
-                            <DropdownButton title={<i className="fa fa-gear"/>} id="dd-setting-agents" pullRight>
-
-                                <MenuItem eventKey="1" onClick={this.onClickAgentTab.bind(this, 1)}>
-                                    <span className={tabIndex === 1 ? 'text-bold' : ''}>Agents</span>
-                                </MenuItem>
-
-                                <MenuItem eventKey="2" onClick={this.onClickAgentTab.bind(this, 2)}>
-                                    <span className={tabIndex === 2 ? 'text-bold' : ''}>Collectors</span>
-                                </MenuItem>
-
-                                <MenuItem eventKey="3" onClick={this.onClickAgentTab.bind(this, 3)}>
-                                    <span className={tabIndex === 3 ? 'text-bold' : ''}>Agent Logs</span>
-                                </MenuItem>
-
-                            </DropdownButton>
-                        </div>
-                    </div>
-                </TabPageHeader>
-
-                <TabPageBody tabs={SettingTabs} tab={1} />
-            </TabPage>
-    )
-  }
-
   render2 () {
     let table
     const {tabIndex} = this.state
@@ -278,17 +219,17 @@ class Agents extends React.Component {
 
   onClickEditAgentConfig () {
     let selected = this.refs.agents.getSelected()
-    if (!selected) return showAlert('Please choose agent.')
+    if (!selected) return showAlert('Please choose agent.') // eslint-disable-line no-undef
 
     this.showAgentConfigModal(selected)
   }
 
   showAgentConfigModal (data) {
-    $.get(Api.admin.getOptions, {
+    $.get(Api.admin.getOptions, { // eslint-disable-line no-undef
 
     }).done(res => {
       const index = findIndex(res.data, {name: 'agent_default_config'})
-      if (index < 0) return alert('No default agent config.')
+      if (index < 0) return window.alert('No default agent config.')
 
       let defaultConfig = null
       try {
@@ -305,15 +246,15 @@ class Agents extends React.Component {
 
       if (!config) config = defaultConfig
 
-      appendComponent(
-                <AgentConfigModal
-                  agent={data}
-                  config={config}
-                  onClose={(modal) => {
-                    removeComponent(modal)
-                    this.refs.agents.refresh()
-                  }}/>
-            )
+      appendComponent( // eslint-disable-line no-undef
+        <AgentConfigModal
+          agent={data}
+          config={config}
+          onClose={(modal) => {
+            removeComponent(modal) // eslint-disable-line no-undef
+            this.refs.agents.refresh()
+          }}/>
+      )
     })
   }
 
@@ -323,13 +264,13 @@ class Agents extends React.Component {
 
   onClickDlAgentConfig () {
     let selected = this.refs.agents.getSelected()
-    if (!selected) return showAlert('Please choose agent.')
+    if (!selected) return showAlert('Please choose agent.') // eslint-disable-line no-undef
 
     this.downloadAgentConfig(selected)
   }
 
   downloadAgentConfig (selected) {
-    let url = `${Api.devices.downloadAgentConfig}?id=${selected.id}&server=${document.location.hostname}`
+    let url = `${Api.devices.downloadAgentConfig}?id=${selected.id}&server=${document.location.hostname}` // eslint-disable-line no-undef
     window.open(url, '_blank')
   }
 
@@ -357,6 +298,65 @@ class Agents extends React.Component {
 
   onClickAgentTab () {
 
+  }
+
+  render () {
+    // let table // Never used
+    const {tabIndex} = this.state
+    return (
+      <TabPage>
+        <TabPageHeader title="Settings">
+          <div className="text-center margin-md-top">
+            <div className="pull-left form-inline">
+              <select className={`form-control ${tabIndex === 1 ? '' : 'hidden'}`}
+                onChange={this.onChangeInstall.bind(this)}>
+                <option value="all">All</option>
+                <option value="installed">Installed</option>
+                <option value="notinstalled">Not Installed</option>
+              </select>
+            </div>
+
+            <div style={{position: 'absolute', right: '25px'}}>
+              <ButtonGroup className={tabIndex === 1 ? '' : 'hidden'}>
+
+                <Button>Default Config</Button>
+                <Button>Edit Config</Button>
+                <Button>Download Config</Button>
+
+              </ButtonGroup>
+
+              <ButtonGroup className={tabIndex === 2 ? '' : 'hidden'}>
+
+                <Button>Add Collector</Button>
+                <Button>Edit Collector</Button>
+                <Button>Remove Collector</Button>
+                <Button>Edit Config</Button>
+                <Button>Download Config</Button>
+
+              </ButtonGroup>
+
+              <DropdownButton title={<i className="fa fa-gear"/>} id="dd-setting-agents" pullRight>
+
+                <MenuItem eventKey="1" onClick={this.onClickAgentTab.bind(this, 1)}>
+                  <span className={tabIndex === 1 ? 'text-bold' : ''}>Agents</span>
+                </MenuItem>
+
+                <MenuItem eventKey="2" onClick={this.onClickAgentTab.bind(this, 2)}>
+                  <span className={tabIndex === 2 ? 'text-bold' : ''}>Collectors</span>
+                </MenuItem>
+
+                <MenuItem eventKey="3" onClick={this.onClickAgentTab.bind(this, 3)}>
+                  <span className={tabIndex === 3 ? 'text-bold' : ''}>Agent Logs</span>
+                </MenuItem>
+
+              </DropdownButton>
+            </div>
+          </div>
+        </TabPageHeader>
+
+        <TabPageBody tabs={SettingTabs} tab={1} />
+      </TabPage>
+    )
   }
 
     // //////////////////////////////////////////////////////////////////////////////////////////////////

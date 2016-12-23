@@ -89,31 +89,6 @@ class Rules extends React.Component {
     this.props.fetchWorkflows()
   }
 
-  render () {
-    const {tabIndex} = this.state
-    return (
-            <TabPage>
-                <TabPageHeader title="Settings">
-                    <div className="text-center margin-md-top">
-                        <div className="pull-right">
-                            <ButtonGroup>
-
-                                <Button onClick={this.onAddWorkflow.bind(this)}>Add</Button>
-                                <Button onClick={this.onEditWorkflow.bind(this)}>Edit</Button>
-                                <Button onClick={this.onRemoveWorkflow.bind(this)}>Remove</Button>
-                            </ButtonGroup>
-                        </div>
-                    </div>
-                </TabPageHeader>
-
-                <TabPageBody tabs={SettingTabs} tab={2}>
-                    {this.renderContent()}
-                    {this.renderWorkflowModal()}
-                </TabPageBody>
-            </TabPage>
-    )
-  }
-
   renderContent () {
     return (
             <ResponsiveInfiniteTable
@@ -203,7 +178,7 @@ class Rules extends React.Component {
       logicalRuleId: selected.id,
       tabIndex: 2
     })
-    emit(EVENTS.RULE_LOGICAL_OPENED)
+    emit(EVENTS.RULE_LOGICAL_OPENED) // eslint-disable-line no-undef
   }
 
   onShowLogical () {
@@ -223,7 +198,7 @@ class Rules extends React.Component {
   }
 
   onClickBack () {
-    emit(EVENTS.RULE_SHOW_LOGICAL)
+    emit(EVENTS.RULE_SHOW_LOGICAL) // eslint-disable-line no-undef
     this.setState({ tabIndex: 1 })
   }
 
@@ -231,7 +206,7 @@ class Rules extends React.Component {
     clearTimeout(this.searchTimer)
     const keyword = this.refs.search.value
     this.searchTimer = setTimeout(() => {
-      emit(EVENTS.RULE_KEYWORD_CHANGED, keyword)
+      emit(EVENTS.RULE_KEYWORD_CHANGED, keyword) // eslint-disable-line no-undef
     }, 200)
   }
 
@@ -274,7 +249,7 @@ class Rules extends React.Component {
 
     const selected = this.refs.logicalRules.getSelected()
 
-    $.get(Api.rule.changeCategory, {
+    $.get(Api.rule.changeCategory, { // eslint-disable-line no-undef
       id: selected.id,
       newCategory: category
     }).done(data => {
@@ -304,6 +279,31 @@ class Rules extends React.Component {
                 this.refs.logicalRules.refresh()
             }}/>
         )
+  }
+
+  render () {
+    // const {tabIndex} = this.state // Never used
+    return (
+      <TabPage>
+        <TabPageHeader title="Settings">
+          <div className="text-center margin-md-top">
+            <div className="pull-right">
+              <ButtonGroup>
+
+                <Button onClick={this.onAddWorkflow.bind(this)}>Add</Button>
+                <Button onClick={this.onEditWorkflow.bind(this)}>Edit</Button>
+                <Button onClick={this.onRemoveWorkflow.bind(this)}>Remove</Button>
+              </ButtonGroup>
+            </div>
+          </div>
+        </TabPageHeader>
+
+        <TabPageBody tabs={SettingTabs} tab={2}>
+          {this.renderContent()}
+          {this.renderWorkflowModal()}
+        </TabPageBody>
+      </TabPage>
+    )
   }
 }
 
