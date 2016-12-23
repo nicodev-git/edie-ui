@@ -17,55 +17,10 @@ class MonitorLogOptions extends React.Component {
     this.loadFiles()
   }
 
-  render () {
-    return (
-            <div className="text-center margin-md-top">
-                <div style={{position: 'absolute'}}>
-                    <div className="pull-left" style={{marginTop: '9px', marginRight: '5px'}}>
-                        <a href="javascript:;" className="text-primary inline" onClick={this.onClickBack.bind(this)}>
-                            <i className="fa fa-arrow-left" /></a>
-                    </div>
-
-                    <div className="pull-left form-inline">
-                        <select className="form-control margin-sm-left pull-left"
-                          value={this.state.selectedType}
-                          onChange={this.onChangeType.bind(this)}>
-                            <option value="error">Error</option>
-                            <option value="all">All</option>
-                        </select>
-
-                        <select className="pull-left form-control" style={{marginLeft: '4px', maxWidth: '140px'}}
-                          onChange={this.onChangeFile.bind(this)}>
-                            {
-                                this.state.files.map(item =>
-                                    <option key={item.name} value={item.value}>{item.name}</option>
-                                )
-                            }
-                        </select>
-                        <label style={{marginTop: '8px', marginLeft: '4px'}}>
-                            <input type="checkbox" checked={this.state.heb7} onChange={this.onChangeHeb7.bind(this)}/>Translate
-                        </label>
-                    </div>
-                </div>
-
-                <div className="inline" style={{position: 'relative'}}>
-                    <input type="text" placeholder="Search" className="form-control"
-                      style={{width: '220px', paddingLeft: '35px'}}
-                      value={this.state.keyword}
-                      onChange={this.onFilterChange.bind(this)}
-                      ref="search"/>
-                    <a className="btn" href="javascript:;" style={{position: 'absolute', left: 0, top: 0}}>
-                        <i className="fa fa-search" />
-                    </a>
-                </div>
-            </div>
-    )
-  }
-
     // //////////////////////////////////////////////////////
 
   onClickBack () {
-    emit(EVENTS.DEV_MONITOR_SHOW_CLICKED)
+    emit(EVENTS.DEV_MONITOR_SHOW_CLICKED) // eslint-disable-line no-undef
   }
 
     // //////////////////////////////////////////////////////
@@ -105,15 +60,15 @@ class MonitorLogOptions extends React.Component {
     // /////////////////////////////////////////////////////
 
   loadFiles () {
-    let url = this.state.selectedType === 'all' ?
-            Api.log.getFiles :
-            Api.log.getErrorFiles
+    let url = this.state.selectedType === 'all'
+      ? Api.log.getFiles // eslint-disable-line no-undef
+      : Api.log.getErrorFiles // eslint-disable-line no-undef
 
-    $.get(url, {
+    $.get(url, { // eslint-disable-line no-undef
       deviceid: this.props.device.id
     }).done((data) => {
       if (!data) {
-        hideLoading()
+        hideLoading() // eslint-disable-line no-undef
         return
       }
 
@@ -148,7 +103,61 @@ class MonitorLogOptions extends React.Component {
   }
 
   reloadTable () {
-    emit(EVENTS.DEV_MONITOR_LOG_FILTER_CHANGED, this.getFilter())
+    emit(EVENTS.DEV_MONITOR_LOG_FILTER_CHANGED, this.getFilter()) // eslint-disable-line no-undef
+  }
+
+  render () {
+    return (
+      <div className="text-center margin-md-top">
+        <div style={{position: 'absolute'}}>
+          <div className="pull-left" style={{marginTop: '9px', marginRight: '5px'}}>
+            <a href="javascript:;" className="text-primary inline" onClick={this.onClickBack.bind(this)}>
+              <i className="fa fa-arrow-left" /></a>
+          </div>
+
+          <div className="pull-left form-inline">
+            <select
+              className="form-control margin-sm-left pull-left"
+              value={this.state.selectedType}
+              onChange={this.onChangeType.bind(this)}
+            >
+              <option value="error">Error</option>
+              <option value="all">All</option>
+            </select>
+
+            <select
+              className="pull-left form-control"
+              style={{marginLeft: '4px', maxWidth: '140px'}}
+              onChange={this.onChangeFile.bind(this)}
+            >
+              {
+                this.state.files.map(item =>
+                  <option key={item.name} value={item.value}>{item.name}</option>
+                )
+              }
+            </select>
+            <label style={{marginTop: '8px', marginLeft: '4px'}}>
+              <input type="checkbox" checked={this.state.heb7} onChange={this.onChangeHeb7.bind(this)}/>Translate
+            </label>
+          </div>
+        </div>
+
+        <div className="inline" style={{position: 'relative'}}>
+          <input
+            type="text"
+            placeholder="Search"
+            className="form-control"
+            style={{width: '220px', paddingLeft: '35px'}}
+            value={this.state.keyword}
+            onChange={this.onFilterChange.bind(this)}
+            ref="search"
+          />
+          <a className="btn" href="javascript:;" style={{position: 'absolute', left: 0, top: 0}}>
+            <i className="fa fa-search" />
+          </a>
+        </div>
+      </div>
+    )
   }
 }
 

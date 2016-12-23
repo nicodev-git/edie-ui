@@ -1,7 +1,7 @@
 import React from 'react'
 import {Tabs, Tab} from 'react-bootstrap'
 import {assign} from 'lodash'
-import { Field, reduxForm, submit } from 'redux-form'
+import { reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
 
 import {wizardEditConfig} from './WizardConfig'
@@ -42,39 +42,6 @@ class DeviceEditWizard extends React.Component {
     }
   }
 
-  render () {
-    const { handleSubmit } = this.props
-    return (
-            <div>
-                <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
-                    <div className="tab-options">
-                        <div className="pull-right margin-md-right margin-md-top">
-                            <button action="submit" className="btn btn-white text-primary">
-                                Save</button>
-                        </div>
-                    </div>
-
-                    <div className="panel panel-default panel-noborder tab-panel" style={{background: 'transparent'}}>
-                        <div className="panel-body p-none">
-                                <Tabs defaultActiveKey={0} animation={false}
-                                  className="tabs-custom"
-                                  onSelect={this.onSelectTab.bind(this)}
-                                  id="tabs-device-incidents">
-                                    {
-                                        this.props.tabs.map((tab, i) => (
-                                            <Tab eventKey={i} key={i} title={tab.title}>
-                                                {this.buildContent(tab, i)}
-                                            </Tab>
-                                        ))
-                                    }
-                                </Tabs>
-                        </div>
-                    </div>
-                </form>
-            </div>
-    )
-  }
-
     // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   onSelectTab () {
@@ -101,7 +68,7 @@ class DeviceEditWizard extends React.Component {
     // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   buildContent (tab, index) {
-    const include = tab.include
+    // const include = tab.include // Never used
     const currentDevice = this.state.currentDevice
     let items = []
 
@@ -193,14 +160,14 @@ class DeviceEditWizard extends React.Component {
 
   buildPassword (config) {
     let text = []
-    let width = util.calcWidth(config.width)
+    // let width = util.calcWidth(config.width) // Never used
 
     if (config.label !== null) {
       if (config.label.type === 'place') {
                 // input.attr('placeholder', config.label.text || '');
       } else {
         text.push(this.buildLabel(config.label))
-        width = util.calcWidth(config.width) - util.calcWidth(config.label.width)
+        // width = util.calcWidth(config.width) - util.calcWidth(config.label.width) // Never used
       }
     }
 
@@ -255,6 +222,39 @@ class DeviceEditWizard extends React.Component {
     return null
   }
 
+  render () {
+    const { handleSubmit } = this.props
+    return (
+      <div>
+        <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
+          <div className="tab-options">
+            <div className="pull-right margin-md-right margin-md-top">
+              <button action="submit" className="btn btn-white text-primary">
+                Save</button>
+            </div>
+          </div>
+
+          <div className="panel panel-default panel-noborder tab-panel" style={{background: 'transparent'}}>
+            <div className="panel-body p-none">
+              <Tabs defaultActiveKey={0} animation={false}
+                className="tabs-custom"
+                onSelect={this.onSelectTab.bind(this)}
+                id="tabs-device-incidents">
+                {
+                  this.props.tabs.map((tab, i) => (
+                    <Tab eventKey={i} key={i} title={tab.title}>
+                      {this.buildContent(tab, i)}
+                    </Tab>
+                  ))
+                }
+              </Tabs>
+            </div>
+          </div>
+        </form>
+      </div>
+    )
+  }
+
     // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 }
@@ -291,12 +291,6 @@ DeviceEditWizard.defaultProps = {
   }]
 }
 
-DeviceEditWizard = reduxForm({
-  form: 'deviceEditForm'
-    // destroyOnUnmount: false,
-    // validate
-})(DeviceEditWizard)
-
 function mapStateToProps (state) {
   return {
     initialValues: state.dashboard.selectedDevice
@@ -307,4 +301,10 @@ const actions = {
 
 }
 
-export default connect(mapStateToProps, actions)(DeviceEditWizard)
+export default connect(mapStateToProps, actions)(
+  reduxForm({
+    form: 'deviceEditForm'
+    // destroyOnUnmount: false,
+    // validate
+  })(DeviceEditWizard)
+)

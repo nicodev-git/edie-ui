@@ -31,7 +31,7 @@ class MonitorTplModal extends React.Component {
 
   handleFormSubmit (formProps) {
     const {monitorTpl, selectedTplImage} = this.props
-    const tpl = assign({}, monitorTpl ? monitorTpl : {}, formProps)
+    const tpl = assign({}, (monitorTpl || {}), formProps)
 
     if (selectedTplImage) tpl.image = selectedTplImage.filename
 
@@ -40,40 +40,6 @@ class MonitorTplModal extends React.Component {
     } else {
       this.props.addMonitorTemplate(tpl)
     }
-  }
-
-  render () {
-    const { handleSubmit } = this.props
-
-    return (
-            <Modal show onHide={this.onHide.bind(this)}
-              aria-labelledby="ModalHeader" className="bootstrap-dialog type-primary">
-                <div className="modal-header">
-                    <h4 className="modal-title bootstrap-dialog-title">
-                        Monitor Template
-                    </h4>
-                    <div className="bootstrap-dialog-close-button">
-                        <button className="close" onClick={this.onClickClose.bind(this)}>×</button>
-                    </div>
-                </div>
-                <div className="modal-body bootstrap-dialog-message">
-
-                    <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
-
-                        <Field label="Name:" name="name" component={Input} type="text"/>
-                        <Field label="Type:" name="monitortype" component={Input} type="text"/>
-                        {this.renderImageUploader()}
-
-                        <div className="text-right p-none">
-                            <button action="submit" className="btn btn-primary btn-sm margin-sm-right">Save</button>
-                            <a href="javascript:;" className="btn btn-default btn-sm"
-                              onClick={this.onClickClose.bind(this)}>Close</a>
-                        </div>
-                    </form>
-
-                </div>
-            </Modal>
-    )
   }
 
   renderImageUploader () {
@@ -110,6 +76,43 @@ class MonitorTplModal extends React.Component {
   onClickChangeImage () {
     this.props.openTplImageModal()
   }
+
+  render () {
+    const { handleSubmit } = this.props
+
+    return (
+      <Modal
+        show onHide={this.onHide.bind(this)}
+        aria-labelledby="ModalHeader"
+        className="bootstrap-dialog type-primary"
+      >
+        <div className="modal-header">
+          <h4 className="modal-title bootstrap-dialog-title">
+            Monitor Template
+          </h4>
+          <div className="bootstrap-dialog-close-button">
+            <button className="close" onClick={this.onClickClose.bind(this)}>×</button>
+          </div>
+        </div>
+        <div className="modal-body bootstrap-dialog-message">
+
+          <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
+
+            <Field label="Name:" name="name" component={Input} type="text"/>
+            <Field label="Type:" name="monitortype" component={Input} type="text"/>
+            {this.renderImageUploader()}
+
+            <div className="text-right p-none">
+              <button action="submit" className="btn btn-primary btn-sm margin-sm-right">Save</button>
+              <a href="javascript:;" className="btn btn-default btn-sm"
+                 onClick={this.onClickClose.bind(this)}>Close</a>
+            </div>
+          </form>
+
+        </div>
+      </Modal>
+    )
+  }
 }
 
 MonitorTplModal.defaultProps = {
@@ -126,13 +129,15 @@ function mapStateToProps (state) {
 }
 
 const actions = {
-  closeMonitorTplModal, addMonitorTemplate, updateMonitorTemplate,
+  closeMonitorTplModal,
+  addMonitorTemplate,
+  updateMonitorTemplate,
   openTplImageModal
 }
 
-MonitorTplModal = reduxForm({
-  form: 'monitorTplEdit'
+export default connect(mapStateToProps, actions)(
+  reduxForm({
+    form: 'monitorTplEdit'
     /* validate */
-})(MonitorTplModal)
-
-export default connect(mapStateToProps, actions)(MonitorTplModal)
+  })(MonitorTplModal)
+)

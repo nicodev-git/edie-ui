@@ -15,7 +15,7 @@ class MonitorLogTable extends React.Component {
         //
 
     this.listeners = {
-      [EVENTS.DEV_MONITOR_LOG_FILTER_CHANGED]: this.onFilterChanged.bind(this)
+      [EVENTS.DEV_MONITOR_LOG_FILTER_CHANGED]: this.onFilterChanged.bind(this) // eslint-disable-line no-undef
     }
 
     this.cellAll = [{
@@ -33,11 +33,15 @@ class MonitorLogTable extends React.Component {
   }
 
   componentDidMount () {
-    listen(this.listeners)
+    listen(this.listeners) // eslint-disable-line no-undef
   }
 
   componentWillUnmount () {
-    unlisten(this.listeners)
+    unlisten(this.listeners) // eslint-disable-line no-undef
+  }
+
+  onFilterChanged (filter) {
+    this.setState(filter)
   }
 
   render () {
@@ -45,39 +49,35 @@ class MonitorLogTable extends React.Component {
 
     if (selectedType === 'error') {
       return (
-                <InfiniteTable
-                  url="/logs/getErrorsInLog"
-                  params={{
-                    id: this.props.device.id,
-                    filename: selectedFile,
-                    search: keyword,
-                    heb7: heb7
-                  }}
-                  cells={this.cellError}
-                  bodyHeight={400}
-                />
+        <InfiniteTable
+          url="/logs/getErrorsInLog"
+          params={{
+            id: this.props.device.id,
+            filename: selectedFile,
+            search: keyword,
+            heb7: heb7
+          }}
+          cells={this.cellError}
+          bodyHeight={400}
+        />
       )
     } else if (selectedType === 'all') {
       return (
-                <InfiniteTable
-                  url="/logs/getLogContent"
-                  params={{
-                    id: this.props.device.id,
-                    filename: selectedFile,
-                    search: keyword,
-                    heb7: heb7
-                  }}
-                  cells={this.cellAll}
-                  bodyHeight={400}
-                />
+        <InfiniteTable
+          url="/logs/getLogContent"
+          params={{
+            id: this.props.device.id,
+            filename: selectedFile,
+            search: keyword,
+            heb7: heb7
+          }}
+          cells={this.cellAll}
+          bodyHeight={400}
+        />
       )
     }
 
     return null
-  }
-
-  onFilterChanged (filter) {
-    this.setState(filter)
   }
 }
 

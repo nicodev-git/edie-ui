@@ -33,7 +33,7 @@ class DeviceTplModal extends React.Component {
 
   handleFormSubmit (formProps) {
     const {deviceTpl, selectedTplImage} = this.props
-    const tpl = assign({}, deviceTpl ? deviceTpl : {}, formProps, {
+    const tpl = assign({}, (deviceTpl || {}), formProps, {
       monitors: this.state.monitors
     })
 
@@ -42,47 +42,6 @@ class DeviceTplModal extends React.Component {
     if (deviceTpl) { this.props.updateDeviceTemplate(tpl) } else {
       this.props.addDeviceTemplate(tpl)
     }
-  }
-
-  render () {
-    const { handleSubmit } = this.props
-
-    return (
-            <Modal show onHide={this.onHide.bind(this)}
-              aria-labelledby="ModalHeader" className="bootstrap-dialog type-primary">
-                <div className="modal-header">
-                    <h4 className="modal-title bootstrap-dialog-title">
-                        Device Template
-                    </h4>
-                    <div className="bootstrap-dialog-close-button">
-                        <button className="close" onClick={this.onClickClose.bind(this)}>×</button>
-                    </div>
-                </div>
-                <div className="modal-body bootstrap-dialog-message">
-
-                    <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
-                        <Field label="Name:" name="name" component={Input} type="text"/>
-                        {this.renderImageUploader()}
-
-                        <label>Monitors</label>
-                        <div className="row">
-                            <div className="col-md-6">
-                                {this.renderMonitors()}
-                            </div>
-                            <div className="col-md-6">
-                                {this.renderMonitorTemplates()}
-                            </div>
-                        </div>
-
-                        <div className="text-right p-none">
-                            <button action="submit" className="btn btn-primary btn-sm margin-sm-right">Save</button>
-                            <a href="javascript:;" className="btn btn-default btn-sm"
-                              onClick={this.onClickClose.bind(this)}>Close</a>
-                        </div>
-                    </form>
-                </div>
-            </Modal>
-    )
   }
 
   renderMonitors () {
@@ -176,6 +135,51 @@ class DeviceTplModal extends React.Component {
   onClickChangeImage () {
     this.props.openTplImageModal()
   }
+
+  render () {
+    const { handleSubmit } = this.props
+
+    return (
+      <Modal
+        show
+        onHide={this.onHide.bind(this)}
+        aria-labelledby="ModalHeader"
+        className="bootstrap-dialog type-primary"
+      >
+        <div className="modal-header">
+          <h4 className="modal-title bootstrap-dialog-title">
+            Device Template
+          </h4>
+          <div className="bootstrap-dialog-close-button">
+            <button className="close" onClick={this.onClickClose.bind(this)}>×</button>
+          </div>
+        </div>
+        <div className="modal-body bootstrap-dialog-message">
+
+          <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
+            <Field label="Name:" name="name" component={Input} type="text"/>
+            {this.renderImageUploader()}
+
+            <label>Monitors</label>
+            <div className="row">
+              <div className="col-md-6">
+                {this.renderMonitors()}
+              </div>
+              <div className="col-md-6">
+                {this.renderMonitorTemplates()}
+              </div>
+            </div>
+
+            <div className="text-right p-none">
+              <button action="submit" className="btn btn-primary btn-sm margin-sm-right">Save</button>
+              <a href="javascript:;" className="btn btn-default btn-sm"
+                onClick={this.onClickClose.bind(this)}>Close</a>
+            </div>
+          </form>
+        </div>
+      </Modal>
+    )
+  }
 }
 
 function mapStateToProps (state) {
@@ -195,9 +199,9 @@ const actions = {
   openTplImageModal
 }
 
-DeviceTplModal = reduxForm({
-  form: 'deviceTplEdit'
+export default connect(mapStateToProps, actions)(
+  reduxForm({
+    form: 'deviceTplEdit'
     /* validate */
-})(DeviceTplModal)
-
-export default connect(mapStateToProps, actions)(DeviceTplModal)
+  })(DeviceTplModal)
+)

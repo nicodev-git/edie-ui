@@ -1,12 +1,12 @@
 import React from 'react'
 import Modal from 'react-bootstrap-modal'
-import { Field, reduxForm, submit } from 'redux-form'
+import { reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
 import {
-    assign,
-    keys,
-    forIn,
-    hasIn
+    assign
+    // keys, // Never used
+    // forIn, // Never used
+    // hasIn // Never used
 } from 'lodash'
 
 import TextInput from './input/TextInput'
@@ -73,58 +73,6 @@ class DeviceWizard extends React.Component {
 
   componentDidMount () {
     this.props.clearDeviceWizardInitialValues()
-  }
-
-  render () {
-    const { handleSubmit, onStep0 } = this.props
-    const { current, steps } = this.state
-    let cssPrevious = ''
-    if (current < 2) cssPrevious = onStep0 ? '' : 'hidden'
-
-    return (
-            <Modal show
-              onHide={this.onHide.bind(this)}
-              aria-labelledby="ModalHeader"
-              className="bootstrap-dialog type-primary modal-device-wizard"
-              style={{width: '740px'}}>
-                <div className="modal-header">
-                    <h4 className="modal-title bootstrap-dialog-title">
-                        {this.props.title || this.state.currentDevice.title || ''}
-                    </h4>
-                </div>
-                <div className="modal-body bootstrap-dialog-message p-none">
-
-                    <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
-                      className="wizard-container"
-                      ref="form">
-                        {this.buildProgressBar()}
-
-                        {this.buildContent()}
-
-                        <div className="text-right mb-none">
-
-                            <a href="javascript:;"
-                              className="btn btn-default btn-sm"
-                              onClick={this.onClickClose.bind(this)}>Cancel</a>
-
-                            <a href="javascript:;"
-                              className={`btn btn-default btn-sm margin-sm-left ${cssPrevious}`}
-                              onClick={this.onClickPrevious.bind(this)}>Previous</a>
-
-                            {
-                                current < steps ?
-                                    <a href="javascript:;" className="btn btn-primary btn-sm margin-sm-left"
-                                      onClick={this.onClickNext.bind(this)}>Next</a>
-                                    :
-                                    <button action="submit" className="btn btn-primary btn-sm margin-sm-right">
-                                        Finish</button>
-                            }
-
-                        </div>
-                    </form>
-                </div>
-            </Modal>
-    )
   }
 
   handleFormSubmit (formProps) {
@@ -260,7 +208,7 @@ class DeviceWizard extends React.Component {
 
   buildPassword (config, values) {
     let text = []
-    let width = util.calcWidth(config.width)
+    let width = util.calcWidth(config.width) // eslint-disable-line no-unused-vars
 
     if (config.label !== null) {
       if (config.label.type === 'place') {
@@ -381,6 +329,60 @@ class DeviceWizard extends React.Component {
     this.setState({ current })
   }
 
+  render () {
+    const { handleSubmit, onStep0 } = this.props
+    const { current, steps } = this.state
+    let cssPrevious = ''
+    if (current < 2) cssPrevious = onStep0 ? '' : 'hidden'
+
+    return (
+      <Modal show
+             onHide={this.onHide.bind(this)}
+             aria-labelledby="ModalHeader"
+             className="bootstrap-dialog type-primary modal-device-wizard"
+             style={{width: '740px'}}>
+        <div className="modal-header">
+          <h4 className="modal-title bootstrap-dialog-title">
+            {this.props.title || this.state.currentDevice.title || ''}
+          </h4>
+        </div>
+        <div className="modal-body bootstrap-dialog-message p-none">
+
+          <form
+            onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
+            className="wizard-container"
+            ref="form"
+          >
+            {this.buildProgressBar()}
+
+            {this.buildContent()}
+
+            <div className="text-right mb-none">
+
+              <a href="javascript:;"
+                 className="btn btn-default btn-sm"
+                 onClick={this.onClickClose.bind(this)}>Cancel</a>
+
+              <a href="javascript:;"
+                 className={`btn btn-default btn-sm margin-sm-left ${cssPrevious}`}
+                 onClick={this.onClickPrevious.bind(this)}>Previous</a>
+
+              {
+                current < steps
+                  ? <a href="javascript:;" className="btn btn-primary btn-sm margin-sm-left"
+                     onClick={this.onClickNext.bind(this)}>Next</a>
+                  : <button action="submit" className="btn btn-primary btn-sm margin-sm-right">
+                      Finish
+                    </button>
+              }
+
+            </div>
+          </form>
+        </div>
+      </Modal>
+    )
+  }
+
     // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 }
 
@@ -402,12 +404,6 @@ DeviceWizard.defaultProps = {
   onFinish: null
 }
 
-DeviceWizard = reduxForm({
-  form: 'deviceForm'
-    // destroyOnUnmount: false,
-    // validate
-})(DeviceWizard)
-
 function mapStateToProps (state) {
   return {
     monitorTemplates: state.settings.monitorTemplates
@@ -419,4 +415,10 @@ const actions = {
   clearDeviceWizardInitialValues
 }
 
-export default connect(mapStateToProps, actions)(DeviceWizard)
+export default connect(mapStateToProps, actions)(
+  reduxForm({
+    form: 'deviceForm'
+    // destroyOnUnmount: false,
+    // validate
+  })(DeviceWizard)
+)

@@ -1,13 +1,12 @@
 import React from 'react'
 import Griddle from 'griddle-react'
 import TimeAgo from 'react-timeago'
-import { connect} from 'react-redux'
+import { connect } from 'react-redux'
 import { assign, concat } from 'lodash'
 
 import DeviceWizard from '../../../../shared/wizard/DeviceWizard'
 
 import { appendComponent, removeComponent } from '../../../../../util/Component'
-import { findIndex, escape } from 'lodash'
 import { showAlert } from '../../../../shared/Alert'
 
 import MonitorPicker from './MonitorPicker'
@@ -41,7 +40,7 @@ class MonitorTable extends React.Component {
       'columnName': 'devicestatustext',
       'customComponent': (props) => {
         try {
-          let statusObj = JSON.parse(val)
+          let statusObj = JSON.parse(val) // eslint-disable-line no-undef
           if (!statusObj['text']) return (<span />)
           return (<span>{statusObj['text']}</span>)
         } catch (e) {}
@@ -79,20 +78,21 @@ class MonitorTable extends React.Component {
         let devtype = row.type
 
         return (
-                    <span>
-                        <a href="javascript:;" className="option">
-                            <i className="fa fa-comment" data-tip={row.devicestatustext} />
-                        </a>
-                        <a href="javascript:;" className="option" onClick={this.onClickCal.bind(this, props.rowData)}>
-                            <i className="fa fa-calendar-o" data-tip="History" />
-                        </a>
-                    {
-                        (devtype === 'LogFile' || devtype === 'LogCheck') ?
-                            <a href="javascript:;" className="option" onClick={this.onClickLog.bind(this, props.rowData)}>
-                                <i className="fa fa-list" title="Log" /></a>
-                            : null
-                    }
-                    </span>
+          <span>
+            <a href="javascript:;" className="option">
+              <i className="fa fa-comment" data-tip={row.devicestatustext} />
+            </a>
+            <a href="javascript:;" className="option" onClick={this.onClickCal.bind(this, props.rowData)}>
+              <i className="fa fa-calendar-o" data-tip="History" />
+            </a>
+          {
+            (devtype === 'LogFile' || devtype === 'LogCheck')
+              ? <a href="javascript:;" className="option" onClick={this.onClickLog.bind(this, props.rowData)}>
+                    <i className="fa fa-list" title="Log" />
+                </a>
+              : null
+          }
+          </span>
         )
       }
     }]
@@ -143,32 +143,6 @@ class MonitorTable extends React.Component {
     }
 
     return label
-  }
-
-  render () {
-    return (
-            <div className="flex-1">
-                <Griddle
-                  results={this.props.device.monitors}
-                  tableClassName="table tab-table"
-                  showFilter={false}
-                  showSettings={false}
-                  columns={this.columns.map(item => item.columnName)}
-                  columnMetadata={this.columns}
-                  rowMetadata={{key: 'name', 'bodyCssClassName': this.getBodyCssClassName.bind(this)}}
-                  useGriddleStyles={false}
-                  resultsPerPage={100}
-                  useFixedHeader={false}
-                  onRowClick={this.onRowClick.bind(this)}
-                  onRowDblClick={this.onRowDblClick.bind(this)}
-                  bodyHeight={this.props.containerHeight}
-                />
-
-                {this.renderMonitorPicker()}
-
-                {this.renderMonitorWizard()}
-            </div>
-    )
   }
 
   renderMonitorPicker () {
@@ -250,7 +224,7 @@ class MonitorTable extends React.Component {
         //         />
         // )
 
-    emit(EVENTS.DEV_MONITOR_LOG_CLICKED, data, this.props.device)
+    emit(EVENTS.DEV_MONITOR_LOG_CLICKED, data, this.props.device) // eslint-disable-line no-undef
   }
 
     // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -330,6 +304,32 @@ class MonitorTable extends React.Component {
     if (index >= 0) device.monitors.splice(index, 1)
 
     this.props.updateMapDevice(device)
+  }
+
+  render () {
+    return (
+      <div className="flex-1">
+        <Griddle
+          results={this.props.device.monitors}
+          tableClassName="table tab-table"
+          showFilter={false}
+          showSettings={false}
+          columns={this.columns.map(item => item.columnName)}
+          columnMetadata={this.columns}
+          rowMetadata={{key: 'name', 'bodyCssClassName': this.getBodyCssClassName.bind(this)}}
+          useGriddleStyles={false}
+          resultsPerPage={100}
+          useFixedHeader={false}
+          onRowClick={this.onRowClick.bind(this)}
+          onRowDblClick={this.onRowDblClick.bind(this)}
+          bodyHeight={this.props.containerHeight}
+        />
+
+        {this.renderMonitorPicker()}
+
+        {this.renderMonitorWizard()}
+      </div>
+    )
   }
 }
 
