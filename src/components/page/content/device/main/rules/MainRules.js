@@ -1,7 +1,7 @@
 import React from 'react'
 import { withRouter } from 'react-router'
 import { connect } from 'react-redux'
-import { findIndex, concat } from 'lodash'
+// import { findIndex, concat } from 'lodash' // Never used
 import Select from 'react-select'
 import {
     DropdownButton,
@@ -41,7 +41,7 @@ class MainRules extends React.Component {
       selectedCategoryName: '',
             // ///////////////////////////////////
 
-      url: Api.rule.getRulesForDevice,
+      url: Api.rule.getRulesForDevice, // eslint-disable-line no-undef
       params: {
         deviceid: device.id,
         ruleCategory: 0,
@@ -97,78 +97,6 @@ class MainRules extends React.Component {
     //     unlisten(this.listeners)
     // }
 
-  render () {
-    const {device} = this.props
-    return (
-            <TabPage>
-                <TabPageHeader title={device.name}>
-                    <div className="text-center margin-md-top">
-
-                        <div className="pull-left">
-                            <Select
-                              options={this.state.ruleCategories}
-                              value={this.state.selectedCategory}
-                              onChange={this.onChangeRuleCategory}
-                              style={{minWidth: '150px'}}
-                              className="select-severity text-left"
-                              clearable={false}
-                              searchable={false}
-                              autosize={false}
-                            />
-                            <a href="javascript:;" className="btn btn-default text-primary margin-sm-left"
-                              onClick={this.onClickDeleteCategory.bind(this)}>
-                                <i className="fa fa-trash-o" /></a>
-                        </div>
-
-                        <div className="pull-right">
-                            <ButtonGroup>
-
-                                <Button onClick={this.onClickAddRules.bind(this)}>Add</Button>
-                                <Button onClick={this.onClickEditRule.bind(this)}>Edit</Button>
-                                <Button onClick={this.onClickDeleteRule.bind(this)}>Delete</Button>
-
-                                <DropdownButton title="Actions" id="dd-dev-rules">
-
-                                    <MenuItem eventKey="1" onClick={this.onClickDuplicate.bind(this)}>
-                                        <i className="fa fa-copy" />&nbsp;Duplicate
-                                    </MenuItem>
-
-                                    <MenuItem eventKey="2" onClick={this.onClickCopyToTemplate.bind(this)}>
-                                        <i className="fa fa-tags" />&nbsp;Copy Rule To Template
-                                    </MenuItem>
-
-                                    <MenuItem eventKey="3" onClick={this.onClickResetRule.bind(this)}>
-                                        <i className="fa fa-refresh" />&nbsp;Reset
-                                    </MenuItem>
-
-                                    <MenuItem eventKey="4" onClick={this.onClickCopyToDevice.bind(this)}>
-                                        <i className="fa fa-copy" />&nbsp;Copy Rules to Device
-                                    </MenuItem>
-
-                                    <MenuItem eventKey="5" onClick={this.onClickShareRule.bind(this)}>
-                                        <i className="fa fa-share" />&nbsp;Share
-                                    </MenuItem>
-
-                                    <MenuItem eventKey="6" onClick={this.onClickAddRule.bind(this)}>
-                                        <i className="fa fa-plus-square" />&nbsp;Create Rule
-                                    </MenuItem>
-
-                                </DropdownButton>
-
-                                <Button onClick={this.onClickAddCategory.bind(this)}>Add Category</Button>
-
-                            </ButtonGroup>
-                        </div>
-
-                    </div>
-                </TabPageHeader>
-
-                <TabPageBody tabs={MainTabs} tab={1}>
-                    {this.renderTable()}
-                </TabPageBody>
-            </TabPage>
-    )
-  }
   renderTable () {
     return (
             <ResponsiveInfiniteTable
@@ -226,7 +154,7 @@ class MainRules extends React.Component {
     showPrompt('Please input category name.', 'New Category', name => {
       if (!name) return
 
-      $.get(Api.rule.addCategory, {
+      $.get(Api.rule.addCategory, { // eslint-disable-line no-undef
         name: name
       }).done(data => {
         if (!data.success) return
@@ -242,7 +170,7 @@ class MainRules extends React.Component {
     showConfirm('Click OK to remove selected category.', btn => {
       if (btn !== 'ok') return
 
-      $.get(Api.rule.deleteACategory, {
+      $.get(Api.rule.deleteACategory, { // eslint-disable-line no-undef
         id: categoryId
       }).done(data => {
         if (!data.success) {
@@ -324,7 +252,7 @@ class MainRules extends React.Component {
     const config = {
       mapid: this.props.device.mapid,
       fatherid: 0,
-      url: Api.rule.updateARuleToADevice
+      url: Api.rule.updateARuleToADevice // eslint-disable-line no-undef
     }
 
     appendComponent(
@@ -385,7 +313,7 @@ class MainRules extends React.Component {
     showConfirm(`Click OK to delete: ${selected.name}`, btn => {
       if (btn !== 'ok') return
 
-      $.get(Api.rule.deleteARuleForADevice, {
+      $.get(Api.rule.deleteARuleForADevice, { // eslint-disable-line no-undef
         idRulesNew: selected.idrulesNew
       }).done(() => {
         cb && cb()
@@ -402,17 +330,17 @@ class MainRules extends React.Component {
       return
     }
 
-    $.get(Api.rule.copyRule, {
+    $.get(Api.rule.copyRule, { // eslint-disable-line no-undef
       id: selected.idrulesNew
     }).done(res => {
       if (!res.success) {
-        alert('Failed!')
+        window.alert('Failed!')
         return
       }
 
       this.getTable().refresh()
     }).fail(() => {
-      alert('Failed!')
+      window.alert('Failed!')
     })
   }
 
@@ -420,7 +348,7 @@ class MainRules extends React.Component {
     showConfirm('Click OK to reset rules.', btn => {
       if (btn !== 'ok') return
 
-      $.get(Api.rule.applyTemplateToDevices, {
+      $.get(Api.rule.applyTemplateToDevices, { // eslint-disable-line no-undef
         deviceids: this.props.device.id
       }).done(() => {
         this.getTable().refresh()
@@ -459,7 +387,7 @@ class MainRules extends React.Component {
       return
     }
 
-    $.get(Api.rule.shareRule, {
+    $.get(Api.rule.shareRule, { // eslint-disable-line no-undef
       ids: [selected.idrulesNew]
     }).done(res => {
       if (!res.success) {
@@ -477,6 +405,79 @@ class MainRules extends React.Component {
     this.props.router.push({
       pathname: '/device/main/ruleAdd'
     })
+  }
+
+  render () {
+    const {device} = this.props
+    return (
+      <TabPage>
+        <TabPageHeader title={device.name}>
+          <div className="text-center margin-md-top">
+
+            <div className="pull-left">
+              <Select
+                options={this.state.ruleCategories}
+                value={this.state.selectedCategory}
+                onChange={this.onChangeRuleCategory}
+                style={{minWidth: '150px'}}
+                className="select-severity text-left"
+                clearable={false}
+                searchable={false}
+                autosize={false}
+              />
+              <a href="javascript:;" className="btn btn-default text-primary margin-sm-left"
+                onClick={this.onClickDeleteCategory.bind(this)}>
+                <i className="fa fa-trash-o" /></a>
+            </div>
+
+            <div className="pull-right">
+              <ButtonGroup>
+
+                <Button onClick={this.onClickAddRules.bind(this)}>Add</Button>
+                <Button onClick={this.onClickEditRule.bind(this)}>Edit</Button>
+                <Button onClick={this.onClickDeleteRule.bind(this)}>Delete</Button>
+
+                <DropdownButton title="Actions" id="dd-dev-rules">
+
+                  <MenuItem eventKey="1" onClick={this.onClickDuplicate.bind(this)}>
+                    <i className="fa fa-copy" />&nbsp;Duplicate
+                  </MenuItem>
+
+                  <MenuItem eventKey="2" onClick={this.onClickCopyToTemplate.bind(this)}>
+                    <i className="fa fa-tags" />&nbsp;Copy Rule To Template
+                  </MenuItem>
+
+                  <MenuItem eventKey="3" onClick={this.onClickResetRule.bind(this)}>
+                    <i className="fa fa-refresh" />&nbsp;Reset
+                  </MenuItem>
+
+                  <MenuItem eventKey="4" onClick={this.onClickCopyToDevice.bind(this)}>
+                    <i className="fa fa-copy" />&nbsp;Copy Rules to Device
+                  </MenuItem>
+
+                  <MenuItem eventKey="5" onClick={this.onClickShareRule.bind(this)}>
+                    <i className="fa fa-share" />&nbsp;Share
+                  </MenuItem>
+
+                  <MenuItem eventKey="6" onClick={this.onClickAddRule.bind(this)}>
+                    <i className="fa fa-plus-square" />&nbsp;Create Rule
+                  </MenuItem>
+
+                </DropdownButton>
+
+                <Button onClick={this.onClickAddCategory.bind(this)}>Add Category</Button>
+
+              </ButtonGroup>
+            </div>
+
+          </div>
+        </TabPageHeader>
+
+        <TabPageBody tabs={MainTabs} tab={1}>
+          {this.renderTable()}
+        </TabPageBody>
+      </TabPage>
+    )
   }
 }
 

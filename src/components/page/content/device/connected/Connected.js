@@ -20,20 +20,6 @@ class Connected extends React.Component {
     this.loadNetStats(this.buildDevices.bind(this))
   }
 
-  render () {
-    const {props} = this
-    const {device} = props
-
-    return (
-            <TabPage>
-                <TabPageHeader title={device.name} />
-                <TabPageBody>
-                    {this.renderMap()}
-                </TabPageBody>
-            </TabPage>
-    )
-  }
-
   renderMap () {
     const {device} = this.props
 
@@ -106,7 +92,7 @@ class Connected extends React.Component {
     // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   buildDevices (stats) {
-    let icons = $('#devicediv #devcollapse2 li .item-icon img')
+    let icons = $('#devicediv #devcollapse2 li .item-icon img') // eslint-disable-line no-undef
 
     let devices = []
 
@@ -148,10 +134,10 @@ class Connected extends React.Component {
       let x = o.center.x + Math.cos(alpha) * o.center.x * 0.5
       let y = o.center.y + Math.sin(alpha) * o.center.y * 0.5
 
-      let arcSharpness = 4 * Math.random()
+      // let arcSharpness = 4 * Math.random() // Never used
       let midXY = [(from.x + x) / 2, (from.y + y) / 2]
-      let cx = midXY[0] + (50 * arcSharpness)
-      let cy = Math.abs(midXY[1] - (50 * arcSharpness))
+      // let cx = midXY[0] + (50 * arcSharpness) // Never used
+      // let cy = Math.abs(midXY[1] - (50 * arcSharpness)) // Never used
 
       let textAngle = 0
       if (x > from.x) {
@@ -162,48 +148,62 @@ class Connected extends React.Component {
       textAngle *= 180 / Math.PI
 
       items.push(
-                <text key={`dev-port-${device.id}`}
-                  textAnchor="middle"
-                  x={midXY[0]}
-                  y={midXY[1]}
-                  fill="white"
-                  transform={`rotate(${textAngle} ${midXY[0]},${midXY[1] + 10})`}
-                  fontSize=".8em">
-                    {device.data['foreignPort']}
-                </text>
-            )
+        <text key={`dev-port-${device.id}`}
+          textAnchor="middle"
+          x={midXY[0]}
+          y={midXY[1]}
+          fill="white"
+          transform={`rotate(${textAngle} ${midXY[0]},${midXY[1] + 10})`}
+          fontSize=".8em">
+            {device.data['foreignPort']}
+        </text>
+      )
 
       items.push(
-                <path key={`line-${device.id}`}
-                  style={{strokeLinecap: 'round', stroke: 'red', fill: 'none', strokeWidth: '2'}}
-                  d={pos.format(from.x, from.y, x, y)} />
-            )
+        <path key={`line-${device.id}`}
+          style={{strokeLinecap: 'round', stroke: 'red', fill: 'none', strokeWidth: '2'}}
+          d={pos.format(from.x, from.y, x, y)} />
+      )
 
       items.push(
-                <image key={`dev-${device.id}`}
-                  x={x - 21}
-                  y={y - 30}
-                  width="42"
-                  height="42"
-                  href={device.img}
-                  style={{cursor: 'pointer', opacity: '1'}} />
-            )
+        <image key={`dev-${device.id}`}
+          x={x - 21}
+          y={y - 30}
+          width="42"
+          height="42"
+          href={device.img}
+          style={{cursor: 'pointer', opacity: '1'}} />
+      )
 
       items.push(
-                <text key={`label-${device.id}`}
-                  textAnchor="middle"
-                  x={x}
-                  y={y + 21}
-                  width="80"
-                  height="24"
-                  fill="#fff"
-                  fontSize="0.9em">
-                    {device.name}
-                </text>
-            )
+        <text key={`label-${device.id}`}
+          textAnchor="middle"
+          x={x}
+          y={y + 21}
+          width="80"
+          height="24"
+          fill="#fff"
+          fontSize="0.9em">
+            {device.name}
+        </text>
+      )
     })
 
     return items
+  }
+
+  render () {
+    const {props} = this
+    const {device} = props
+
+    return (
+      <TabPage>
+        <TabPageHeader title={device.name} />
+        <TabPageBody>
+          {this.renderMap()}
+        </TabPageBody>
+      </TabPage>
+    )
   }
 
     // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////

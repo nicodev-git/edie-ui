@@ -1,5 +1,8 @@
 import React from 'react'
-import {withRouter, Link} from 'react-router'
+import {
+  withRouter
+  // Link // Never used
+} from 'react-router'
 
 class Main extends React.Component {
   constructor (props) {

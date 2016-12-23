@@ -159,7 +159,7 @@ export function fetchDevices () {
   }
 }
 
-function getAuthConfig () {
+function getAuthConfig () { // eslint-disable-line no-unused-vars
   let config = {
     headers: {
       'Cache-Control': 'no-cache',
@@ -229,7 +229,7 @@ export function fetchUserInfo () {
       }
     }
     axios.get('/api/me', config).then(response => {
-      dispatch({ type: FETCH_USER_INFO, data: response.data})
+      dispatch({ type: FETCH_USER_INFO, data: response.data }) // eslint-disable-line no-unused-vars
     }).catch(error => {
       dispatch({type: API_ERROR, msg: error})
     })
@@ -1027,7 +1027,7 @@ export function closeUserPasswordModal () {
 export function generatePincode () {
   return function (dispatch) {
     axios.get('/genpin').then(response => {
-      dispatch({type: GENERATE_PINCODE, data: response.data})
+      dispatch({type: GENERATE_PINCODE, data: response.data}) // eslint-disable-line no-undef
     }).catch(error => {
       dispatch({type: API_ERROR, msg: error})
     })
@@ -1260,7 +1260,7 @@ export function fetchDevicePhysicalRules () {
 
 export function fetchDeviceBasicMonitors () {
   return function (dispatch) {
-    const res = []
+    // const res = [] // Never used
 
     dispatch({
       type: FETCH_DEVICE_BASIC_MONITORS,

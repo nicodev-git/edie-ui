@@ -15,31 +15,9 @@ class MainAdvanced extends React.Component {
     }
   }
 
-  render () {
-    const {device} = this.props
-    return (
-            <TabPage>
-                <TabPageHeader title={device.name}>
-                    <div className="text-center margin-md-top" />
-                </TabPageHeader>
-
-                <TabPageBody tabs={MainTabs} tab={3}>
-                    <div className="row">
-                        <label className="control-label col-md-12"><b>Simulate Incident</b></label>
-                        <label className="control-label col-md-1">Text: </label>
-                        <div className="col-md-9">
-                            <textarea className="form-control col-md-12" style={{height: '120px'}} ref="message" />
-                        </div>
-                        <a href="javascript:;" className="btn btn-primary" onClick={this.onClickSend.bind(this)}>Send</a>
-                    </div>
-                </TabPageBody>
-            </TabPage>
-    )
-  }
-
   onClickSend () {
     let ip = this.state.device.ipaddress
-    $.get(Api.server.simulation, {
+    $.get(Api.server.simulation, { // eslint-disable-line no-undef
       data: this.refs.message.value,
       ipaddress: ip
     }).done(function (res) {
@@ -47,6 +25,28 @@ class MainAdvanced extends React.Component {
     }).fail(function () {
       showAlert('Failed!')
     })
+  }
+
+  render () {
+    const {device} = this.props
+    return (
+      <TabPage>
+        <TabPageHeader title={device.name}>
+          <div className="text-center margin-md-top" />
+        </TabPageHeader>
+
+        <TabPageBody tabs={MainTabs} tab={3}>
+          <div className="row">
+            <label className="control-label col-md-12"><b>Simulate Incident</b></label>
+            <label className="control-label col-md-1">Text: </label>
+            <div className="col-md-9">
+              <textarea className="form-control col-md-12" style={{height: '120px'}} ref="message" />
+            </div>
+            <a href="javascript:;" className="btn btn-primary" onClick={this.onClickSend.bind(this)}>Send</a>
+          </div>
+        </TabPageBody>
+      </TabPage>
+    )
   }
 }
 

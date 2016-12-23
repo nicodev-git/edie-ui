@@ -38,11 +38,18 @@ class InfiniteTable extends React.Component {
       const index = $(e.target).closest('tr').index() - 1
       const data = this.getCurrentData()
       if (data && data[index]) {
-        let row = { props: { data: data[index]}}
+        let row = { props: { data: data[index] } }
         this.onRowClick(row)
         this.onRowDblClick(row)
       }
     })
+  }
+
+  componentDidUpdate (prevProps, prevState) {
+    const {url, params} = this.props
+    if (url !== prevProps.url || !isEqual(params, prevProps.params)) {
+      this.refresh()
+    }
   }
 
   componentWillUnmount () {
@@ -50,13 +57,6 @@ class InfiniteTable extends React.Component {
     if (this.lastRequest) {
       this.lastRequest.abort()
       this.lastRequest = null
-    }
-  }
-
-  componentDidUpdate (prevProps, prevState) {
-    const {url, params} = this.props
-    if (url !== prevProps.url || !isEqual(params, prevProps.params)) {
-      this.refresh()
     }
   }
 
@@ -114,53 +114,6 @@ class InfiniteTable extends React.Component {
     return this.state.useExternal ? this.state.total : this.props.data.length
   }
 
-  render () {
-    let rowMetadata = assign({}
-            , this.defaultRowMetaData
-            , this.props.rowMetadata || {})
-
-    return (
-            <Griddle
-              id={this.props.id}
-              useExternal={this.props.useExternal}
-
-              enableSort={false}
-              enableInfiniteScroll
-
-              columns={this.props.cells.map(item => item.columnName)}
-              columnMetadata={this.props.cells}
-              rowMetadata={rowMetadata}
-
-              externalSetPage={this.setPage.bind(this)}
-              externalSetPageSize={this.setPageSize.bind(this)}
-              externalMaxPage={this.state.maxPages}
-              externalChangeSort={function () {}}
-              externalSetFilter={function () {}}
-              externalCurrentPage={this.state.currentPage}
-              externalSortColumn={this.state.externalSortColumn}
-              externalSortAscending={this.state.externalSortAscending}
-              externalLoadingComponent={() => <div>Loading...</div>}
-              externalIsLoading={this.state.isLoading}
-
-              results={this.getCurrentData()}
-              resultsPerPage={this.props.pageSize}
-
-              tableClassName="table table-hover"
-
-              useFixedHeader={false}
-              noDataMessage={this.props.noDataMessage}
-              bodyHeight={this.props.containerHeight || this.props.bodyHeight}
-              useGriddleStyles={false}
-
-              onRowClick={this.onRowClick.bind(this)}
-
-              onRowDblClick={this.onRowDblClick.bind(this)}
-
-              ref="griddle"
-            />
-    )
-  }
-
   onRowClick (row) {
     if (!this.props.selectable) return
     this.setState({
@@ -212,6 +165,53 @@ class InfiniteTable extends React.Component {
     if (this.props.useExternal) {
       this.getExternalData(1, true)
     }
+  }
+
+  render () {
+    let rowMetadata = assign({}
+      , this.defaultRowMetaData
+      , this.props.rowMetadata || {})
+
+    return (
+      <Griddle
+        id={this.props.id}
+        useExternal={this.props.useExternal}
+
+        enableSort={false}
+        enableInfiniteScroll
+
+        columns={this.props.cells.map(item => item.columnName)}
+        columnMetadata={this.props.cells}
+        rowMetadata={rowMetadata}
+
+        externalSetPage={this.setPage.bind(this)}
+        externalSetPageSize={this.setPageSize.bind(this)}
+        externalMaxPage={this.state.maxPages}
+        externalChangeSort={function () {}}
+        externalSetFilter={function () {}}
+        externalCurrentPage={this.state.currentPage}
+        externalSortColumn={this.state.externalSortColumn}
+        externalSortAscending={this.state.externalSortAscending}
+        externalLoadingComponent={() => <div>Loading...</div>}
+        externalIsLoading={this.state.isLoading}
+
+        results={this.getCurrentData()}
+        resultsPerPage={this.props.pageSize}
+
+        tableClassName="table table-hover"
+
+        useFixedHeader={false}
+        noDataMessage={this.props.noDataMessage}
+        bodyHeight={this.props.containerHeight || this.props.bodyHeight}
+        useGriddleStyles={false}
+
+        onRowClick={this.onRowClick.bind(this)}
+
+        onRowDblClick={this.onRowDblClick.bind(this)}
+
+        ref="griddle"
+      />
+    )
   }
 }
 

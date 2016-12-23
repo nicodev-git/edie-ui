@@ -29,61 +29,18 @@ class Monitors extends React.Component {
     }
   }
 
-  render () {
-    const {props} = this
-    const {device} = props
-
-    return (
-            <TabPage>
-                <TabPageHeader title={device.name}>
-                    {this.renderOptions()}
-                </TabPageHeader>
-                <TabPageBody>
-                    {
-                        this.state.selected !== 'monitors' ? null :
-                            <div className="flex-vertical" style={{height: '100%'}}>
-                                <div className="flex-1" style={{background: 'white'}}>
-                                    <MonitorTable {...props} ref="monitor"/>
-                                </div>
-                            </div>
-                    }
-
-                    {
-                        this.state.selected !== 'eventlog' ? null :
-                            <EventLogTable {...props}/>
-                    }
-
-                    {
-                        this.state.selected !== 'application' ? null :
-                            <ApplicationTable {...props}/>
-                    }
-
-                    {
-                        this.state.selected !== 'process' ? null :
-                            <ProcessTable {...props}/>
-                    }
-
-                    {
-                        this.state.selected !== 'monitorlog' ? null :
-                            <MonitorLogTable device={this.state.currentMonitor} father={device}/>
-                    }
-                </TabPageBody>
-            </TabPage>
-    )
-  }
-
   render2 () {
     const {device} = this.props
     return (
-            <div className="flex-vertical flex-1">
-                <div className="tab-header">
-                    <div>
-                        <span className="tab-title">{device.name || ''}</span>
-                    </div>
-                </div>
+      <div className="flex-vertical flex-1">
+        <div className="tab-header">
+          <div>
+              <span className="tab-title">{device.name || ''}</span>
+          </div>
+        </div>
 
-                <div id="div-monitors" className="flex-vertical flex-1 margin-lg-top" />
-            </div>
+        <div id="div-monitors" className="flex-vertical flex-1 margin-lg-top" />
+      </div>
     )
   }
 
@@ -192,6 +149,54 @@ class Monitors extends React.Component {
       'selected': 'monitorlog',
       'currentMonitor': monitor
     })
+  }
+
+  render () {
+    const {props} = this
+    const {device} = props
+
+    return (
+      <TabPage>
+        <TabPageHeader title={device.name}>
+          {this.renderOptions()}
+        </TabPageHeader>
+        <TabPageBody>
+          {
+            this.state.selected !== 'monitors'
+              ? null
+              : <div className="flex-vertical" style={{height: '100%'}}>
+                  <div className="flex-1" style={{background: 'white'}}>
+                    <MonitorTable {...props} ref="monitor"/>
+                  </div>
+                </div>
+          }
+
+          {
+            this.state.selected !== 'eventlog'
+              ? null
+              : <EventLogTable {...props}/>
+          }
+
+          {
+            this.state.selected !== 'application'
+              ? null
+              : <ApplicationTable {...props}/>
+          }
+
+          {
+            this.state.selected !== 'process'
+              ? null
+              : <ProcessTable {...props}/>
+          }
+
+          {
+            this.state.selected !== 'monitorlog'
+              ? null
+              : <MonitorLogTable device={this.state.currentMonitor} father={device}/>
+          }
+        </TabPageBody>
+      </TabPage>
+    )
   }
 }
 

@@ -19,7 +19,7 @@ class TabPageBody extends React.Component {
         <ul className="nav nav-tabs">
           {tabs.map((item, i) =>
             <li key={i} className={tab === i ? 'active' : ''}>
-              <Link to={{pathname: item.path/*, state: props */}}
+              <Link to={{ pathname: item.path }}
                 onClick={this.onClickTab.bind(this)}>{item.title}</Link>
             </li>
           )}

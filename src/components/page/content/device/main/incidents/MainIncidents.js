@@ -1,7 +1,10 @@
 import React from 'react'
 import moment from 'moment'
 import { withRouter } from 'react-router'
-import { findIndex, assign } from 'lodash'
+import {
+  findIndex
+  // assign // Never used
+} from 'lodash'
 import { connect } from 'react-redux'
 import Select from 'react-select'
 import {
@@ -21,7 +24,7 @@ import CommentsModal from '../../../../../shared/incident/CommentsModal'
 
 import { showAlert, showPrompt } from '../../../../../shared/Alert'
 import { getSeverityIcon } from '../../../../../../shared/Global'
-
+const encodeUrlParams = getSeverityIcon
 import MainTabs from '../MainTabs'
 import TabPage from '../../../../../shared/TabPage'
 import TabPageBody from '../../../../../shared/TabPageBody'
@@ -37,22 +40,20 @@ import {
     showIncidentRaw
 } from '../../../../../shared/incident/Incident'
 
-import { encodeUrlParams } from '../../../../../../shared/Global'
-
 class MainIncidents extends React.Component {
   constructor (props) {
     super(props)
 
-    const {device} = this.props
+    // const {device} = this.props // Never used
 
     this.state = {
 
       severities: [
-                { label: 'High', value: 'HIGH'},
-                { label: 'Medium', value: 'MEDIUM'},
-                { label: 'Low', value: 'LOW'},
-                { label: 'Audit', value: 'AUDIT'},
-                { label: 'Ignore', value: 'IGNORE'}
+        { label: 'High', value: 'HIGH' },
+        { label: 'Medium', value: 'MEDIUM' },
+        { label: 'Low', value: 'LOW' },
+        { label: 'Audit', value: 'AUDIT' },
+        { label: 'Ignore', value: 'IGNORE' }
       ],
 
       selectedSeverity: ['HIGH', 'MEDIUM'],
@@ -98,7 +99,7 @@ class MainIncidents extends React.Component {
           str += `<br/><b>Reason:</b> ${props.rowData.lastcomment}`
         }
 
-        return <span dangerouslySetInnerHTML={{__html: str }} />
+        return <span dangerouslySetInnerHTML={{ __html: str }} />
       }
     }, {
       'displayName': 'Actions',
@@ -110,38 +111,38 @@ class MainIncidents extends React.Component {
           ReactTooltip.rebuild()
         }, 1)
         return (
-                    <div>
-                        <a href="javascript:;" onClick={showIncidentDetail.bind(null, row)}>
-                            <img style={{height: '30px'}} title="Detail" src="/images/openicon.png" />
-                        </a>
-                        &nbsp;
+          <div>
+            <a href="javascript:;" onClick={showIncidentDetail.bind(null, row)}>
+              <img style={{height: '30px'}} title="Detail" src="/images/openicon.png" />
+            </a>
+            &nbsp;
 
-                        <a href="javascript:;" onClick={() => { props.ackIncident(row) }}>
-                            <img style={{height: '30px'}} title="Acknowledge"
-                              src={`/images/${row.acknowledged ? 'ack.png' : 'noack.png'}`} />
-                        </a>
-                        &nbsp;
+            <a href="javascript:;" onClick={() => { props.ackIncident(row) }}>
+              <img style={{height: '30px'}} title="Acknowledge"
+                src={`/images/${row.acknowledged ? 'ack.png' : 'noack.png'}`} />
+            </a>
+            &nbsp;
 
-                        <a href="javascript:;" onClick={() => { props.fixIncident(row) }}>
-                            <img style={{height: '30px'}} title="Acknowledge"
-                              src={`/images/${row.fixed ? 'ok.png' : 'notok.png'}`} />
-                        </a>
-                        &nbsp;
+            <a href="javascript:;" onClick={() => { props.fixIncident(row) }}>
+              <img style={{height: '30px'}} title="Acknowledge"
+                src={`/images/${row.fixed ? 'ok.png' : 'notok.png'}`} />
+            </a>
+            &nbsp;
 
-                        <button className="btn btn-primary btn-xs"
-                          onClick={showIncidentRaw.bind(null, row)}>Raw</button>
-                        &nbsp;
+            <button className="btn btn-primary btn-xs"
+              onClick={showIncidentRaw.bind(null, row)}>Raw</button>
+            &nbsp;
 
-                        {
-                            (row.fixed & !row.whathappened) ?
-                                <a href="javascript:;" onClick={this.showIncidentComments.bind(this, row)}>
-                                    <img style={{height: '25px'}} title="Reason"
-                                      src={`/images/${row.lastcomment ? 'reason-icon.png' : 'reason-x.png'}`} />
-                                </a>
-                                : null
-                        }
+            {
+              (row.fixed & !row.whathappened)
+                ? <a href="javascript:;" onClick={this.showIncidentComments.bind(this, row)}>
+                    <img style={{height: '25px'}} title="Reason"
+                      src={`/images/${row.lastcomment ? 'reason-icon.png' : 'reason-x.png'}`} />
+                  </a>
+                : null
+            }
 
-                    </div>
+          </div>
         )
       }
     }]
@@ -152,108 +153,6 @@ class MainIncidents extends React.Component {
 
   componentDidMount () {
     this.onFilterChange()
-  }
-
-  render () {
-    const {device, incidents} = this.props
-    const {selectedIndex} = this.state
-
-    let selectedIncident = selectedIndex < 0 ? null : incidents[selectedIndex]
-
-    return (
-            <TabPage>
-                <TabPageHeader title={device.name}>
-                    <div className="text-center margin-md-top">
-
-                        <div className="pull-left">
-                            <div className="form-inline">
-                                <Select
-                                  value={this.state.selectedSeverity.join(',')}
-                                  options={this.state.severities}
-                                  onChange={this.onChangeSeverity.bind(this)}
-                                  multi
-                                  clearable={false}
-                                  className="select-severity"
-                                  style={{minWidth: '85px'}}
-                                  searchable={false}
-                                  autosize={false}
-                                  backspaceRemoves={false}
-                                />
-
-                                <select className="fixtype form-control inline text-primary margin-md-left"
-                                  style={{maxWidth: '150px'}}
-                                  onChange={this.onFilterChange}
-                                  ref="fixed" defaultValue="false">
-                                    <option value="">Any</option>
-                                    <option value="false">Unfixed</option>
-                                    <option value="true">Fixed</option>
-                                </select>
-
-                                <DateRangePicker onClickRange={this.onFilterChange} className="margin-md-left"
-                                  default={moment().startOf('years').format('YYYY')} ref="dp">
-                                    <i className="fa fa-caret-down margin-xs-left" />
-                                </DateRangePicker>
-
-                                <a href="javascript:;" title="Export" style={{display: 'none'}}><img
-                                  width="26" src="/images/btn-export.jpg"/></a>
-                            </div>
-                        </div>
-
-                        <div className="pull-right">
-                            <ButtonGroup>
-
-                                <Button onClick={this.onClickOpen.bind(this)}>Open</Button>
-
-                                <Button onClick={this.onClickFixAll.bind(this)}>Fix All</Button>
-
-                                <DropdownButton title="More" id="dd-dev-incidents" pullRight>
-
-                                    <MenuItem eventKey="1" onClick={this.onClickAddIncident.bind(this)}>
-                                        Add Incident
-                                    </MenuItem>
-
-                                    <MenuItem eventKey="2" onClick={this.onClickAddException.bind(this)}>
-                                        Add Exception
-                                    </MenuItem>
-
-                                    <MenuItem eventKey="3" onClick={this.onClickPDF.bind(this)}>
-                                        Export PDF
-                                    </MenuItem>
-
-                                </DropdownButton>
-
-                            </ButtonGroup>
-                        </div>
-
-                        <div style={{margin: '0 auto', position: 'relative', display: 'inline-block', textAlign: 'center'}}>
-                            <div className="inline" style={{position: 'relative'}}>
-                                <input type="text" placeholder="Search" className="form-control"
-                                  style={{width: '100%', paddingLeft: '35px'}}
-                                  onChange={this.onFilterChange}
-                                  ref="search"/>
-                                <a className="btn" href="javascript:;" style={{position: 'absolute', left: 0, top: 0}}>
-                                    <i className="fa fa-search" /></a>
-                            </div>
-                        </div>
-                    </div>
-                </TabPageHeader>
-
-                <TabPageBody tabs={MainTabs} tab={0}>
-                    {this.renderTable()}
-                    {this.props.addIncidentModalVisible &&
-                    <AddIncidentModal open device={this.state.device}/>}
-                    {this.state.openExceptionModal &&
-                    <AddExceptionModal open incident={selectedIncident}
-                      onClose={this.onCloseExceptionModal.bind(this)}/>}
-
-                    {this.state.commentModalVisible &&
-                    <CommentsModal incident={selectedIncident}
-                      onClose={() => { this.setState({commentModalVisible: false}) }}/>}
-
-                    <ReactTooltip />
-                </TabPageBody>
-            </TabPage>
-    )
   }
 
   renderColHeader (col) {
@@ -291,7 +190,10 @@ class MainIncidents extends React.Component {
     // ///////////////////////////////////////////////////////////
 
   onClickColHeader (col) {
-    const {columnName, displayName} = col
+    const {
+      columnName
+      // displayName // Never used
+    } = col
     let { currentSortCol, currentSortDir } = this.state
 
     if (columnName === currentSortCol) {
@@ -319,7 +221,7 @@ class MainIncidents extends React.Component {
     // /////////////////////////////////////////////////////////////
 
   onClickFixAll () {
-    let deviceid = this.props.device.id
+    // let deviceid = this.props.device.id // Never used
 
     showPrompt('Please type comment for all incidents.', '', text => {
       if (text === null) return
@@ -406,6 +308,108 @@ class MainIncidents extends React.Component {
       selectedIndex: findIndex(this.props.incidents, {id: incident.id}),
       commentModalVisible: true
     })
+  }
+
+  render () {
+    const {device, incidents} = this.props
+    const {selectedIndex} = this.state
+
+    let selectedIncident = selectedIndex < 0 ? null : incidents[selectedIndex]
+
+    return (
+      <TabPage>
+        <TabPageHeader title={device.name}>
+          <div className="text-center margin-md-top">
+
+            <div className="pull-left">
+              <div className="form-inline">
+                <Select
+                  value={this.state.selectedSeverity.join(',')}
+                  options={this.state.severities}
+                  onChange={this.onChangeSeverity.bind(this)}
+                  multi
+                  clearable={false}
+                  className="select-severity"
+                  style={{minWidth: '85px'}}
+                  searchable={false}
+                  autosize={false}
+                  backspaceRemoves={false}
+                />
+
+                <select className="fixtype form-control inline text-primary margin-md-left"
+                  style={{maxWidth: '150px'}}
+                  onChange={this.onFilterChange}
+                  ref="fixed" defaultValue="false">
+                  <option value="">Any</option>
+                  <option value="false">Unfixed</option>
+                  <option value="true">Fixed</option>
+                </select>
+
+                <DateRangePicker onClickRange={this.onFilterChange} className="margin-md-left"
+                  default={moment().startOf('years').format('YYYY')} ref="dp">
+                  <i className="fa fa-caret-down margin-xs-left" />
+                </DateRangePicker>
+
+                <a href="javascript:;" title="Export" style={{display: 'none'}}><img
+                  width="26" src="/images/btn-export.jpg"/></a>
+              </div>
+            </div>
+
+            <div className="pull-right">
+              <ButtonGroup>
+
+                <Button onClick={this.onClickOpen.bind(this)}>Open</Button>
+
+                <Button onClick={this.onClickFixAll.bind(this)}>Fix All</Button>
+
+                <DropdownButton title="More" id="dd-dev-incidents" pullRight>
+
+                  <MenuItem eventKey="1" onClick={this.onClickAddIncident.bind(this)}>
+                    Add Incident
+                  </MenuItem>
+
+                  <MenuItem eventKey="2" onClick={this.onClickAddException.bind(this)}>
+                    Add Exception
+                  </MenuItem>
+
+                  <MenuItem eventKey="3" onClick={this.onClickPDF.bind(this)}>
+                    Export PDF
+                  </MenuItem>
+
+                </DropdownButton>
+
+              </ButtonGroup>
+            </div>
+
+            <div style={{margin: '0 auto', position: 'relative', display: 'inline-block', textAlign: 'center'}}>
+              <div className="inline" style={{position: 'relative'}}>
+                <input type="text" placeholder="Search" className="form-control"
+                  style={{width: '100%', paddingLeft: '35px'}}
+                  onChange={this.onFilterChange}
+                  ref="search"/>
+                <a className="btn" href="javascript:;" style={{position: 'absolute', left: 0, top: 0}}>
+                  <i className="fa fa-search" /></a>
+              </div>
+            </div>
+          </div>
+        </TabPageHeader>
+
+        <TabPageBody tabs={MainTabs} tab={0}>
+          {this.renderTable()}
+          {this.props.addIncidentModalVisible &&
+          <AddIncidentModal open device={this.state.device}/>}
+          {this.state.openExceptionModal &&
+          <AddExceptionModal open incident={selectedIncident}
+            onClose={this.onCloseExceptionModal.bind(this)}/>}
+
+          {this.state.commentModalVisible &&
+          <CommentsModal incident={selectedIncident}
+            onClose={() => { this.setState({commentModalVisible: false}) }}/>}
+
+          <ReactTooltip />
+        </TabPageBody>
+      </TabPage>
+    )
   }
 }
 

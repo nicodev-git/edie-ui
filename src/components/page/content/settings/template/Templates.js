@@ -31,27 +31,6 @@ class Templates extends React.Component {
     this.props.fetchMonitorTemplates()
   }
 
-  render () {
-    const {tabIndex} = this.state
-    return (
-            <TabPage>
-                <TabPageHeader title="Settings" />
-
-                <TabPageBody tabs={SettingTabs} tab={7}>
-                    <div className="row padding-md">
-                        <div className="col-md-3">
-                            {this.renderDeviceTemplates()}
-                        </div>
-                        <div className="col-md-3">
-                            {this.renderMonitorTemplates()}
-                        </div>
-                    </div>
-
-                </TabPageBody>
-            </TabPage>
-    )
-  }
-
   renderDeviceTemplates () {
     return (
             <div>
@@ -158,6 +137,27 @@ class Templates extends React.Component {
 
   onClickDeleteMonitorTpl (item) {
     this.props.deleteMonitorTemplate(item)
+  }
+
+  render () {
+    const {tabIndex} = this.state
+    return (
+      <TabPage>
+        <TabPageHeader title="Settings" />
+
+        <TabPageBody tabs={SettingTabs} tab={7}>
+          <div className="row padding-md">
+            <div className="col-md-3">
+              {this.renderDeviceTemplates()}
+            </div>
+            <div className="col-md-3">
+              {this.renderMonitorTemplates()}
+            </div>
+          </div>
+
+        </TabPageBody>
+      </TabPage>
+    )
   }
 }
 

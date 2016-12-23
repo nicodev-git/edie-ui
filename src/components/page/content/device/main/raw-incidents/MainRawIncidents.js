@@ -1,5 +1,5 @@
 import React from 'react'
-import Dimensions from 'react-dimensions'
+// import Dimensions from 'react-dimensions' // Never used
 import {withRouter} from 'react-router'
 import { escapeRegExp } from 'lodash'
 import { connect } from 'react-redux'
@@ -91,44 +91,7 @@ class MainRawIncidents extends React.Component {
       })
     }
 
-    return <span style={{fontSize: '11px'}} dangerouslySetInnerHTML={{__html: data }}/>
-  }
-
-  render () {
-    const {device} = this.props
-    return (
-            <TabPage>
-                <TabPageHeader title={device.name}>
-                    <div className="text-center margin-md-top">
-                        <div className="pull-right">
-                            <ButtonGroup>
-
-                                <Button onClick={this.onClickMakeRule.bind(this)}>Make Rule</Button>
-                                <Button onClick={this.onClickDeleteRaw.bind(this)}>Delete All</Button>
-                                <Button onClick={this.onClickMarkIgnored.bind(this)}>Mark as ignored</Button>
-                                <Button onClick={this.onClickRawSimulator.bind(this)}>Simulator</Button>
-
-                            </ButtonGroup>
-                        </div>
-
-                        <div style={{margin: '0 auto', position: 'relative', width: '550px', textAlign: 'center'}}>
-                            <div className="inline" style={{position: 'relative'}}>
-                                <input type="text" placeholder="Search" className="form-control"
-                                  style={{width: '100%', paddingLeft: '35px'}}
-                                  onChange={this.onFilterChange}
-                                  ref="search"/>
-                                <a className="btn" href="javascript:;" style={{position: 'absolute', left: 0, top: 0}}>
-                                    <i className="fa fa-search" /></a>
-                            </div>
-                        </div>
-                    </div>
-                </TabPageHeader>
-
-                <TabPageBody tabs={MainTabs} tab={2}>
-                    {this.renderTable()}
-                </TabPageBody>
-            </TabPage>
-    )
+    return <span style={{ fontSize: '11px' }} dangerouslySetInnerHTML={{ __html: data }}/>
   }
 
   renderTable () {
@@ -186,14 +149,14 @@ class MainRawIncidents extends React.Component {
   onClickDeleteRaw () {
     let count = this.getTable().getTotalCount()
 
-    if (count === 0) return alert('No incidents.')
+    if (count === 0) return window.alert('No incidents.')
     showConfirm(`Do you want to delete ${count} raw incident${
              count > 1 ? 's' : ''}?`, btn => {
       if (btn !== 'ok') return
 
-      setLoadingState(true)
-      showLoading()
-      $.get(Api.incidents.deleteRawIncidents, {
+      setLoadingState(true) // eslint-disable-line no-undef
+      showLoading() // eslint-disable-line no-undef
+      $.get(Api.incidents.deleteRawIncidents, { // eslint-disable-line no-undef
         deviceid: this.props.device.id,
         text: this.state.params.text
       }).done(res => {
@@ -205,7 +168,7 @@ class MainRawIncidents extends React.Component {
       }).fail(() => {
         showAlert('Failed!')
       }).always(() => {
-        hideLoading()
+        hideLoading() // eslint-disable-line no-undef
       })
     })
   }
@@ -336,6 +299,43 @@ class MainRawIncidents extends React.Component {
               onFinish={() => {}}
             />
         )
+  }
+
+  render () {
+    const {device} = this.props
+    return (
+      <TabPage>
+        <TabPageHeader title={device.name}>
+          <div className="text-center margin-md-top">
+            <div className="pull-right">
+              <ButtonGroup>
+
+                <Button onClick={this.onClickMakeRule.bind(this)}>Make Rule</Button>
+                <Button onClick={this.onClickDeleteRaw.bind(this)}>Delete All</Button>
+                <Button onClick={this.onClickMarkIgnored.bind(this)}>Mark as ignored</Button>
+                <Button onClick={this.onClickRawSimulator.bind(this)}>Simulator</Button>
+
+              </ButtonGroup>
+            </div>
+
+            <div style={{margin: '0 auto', position: 'relative', width: '550px', textAlign: 'center'}}>
+              <div className="inline" style={{position: 'relative'}}>
+                <input type="text" placeholder="Search" className="form-control"
+                  style={{width: '100%', paddingLeft: '35px'}}
+                  onChange={this.onFilterChange}
+                  ref="search"/>
+                <a className="btn" href="javascript:;" style={{position: 'absolute', left: 0, top: 0}}>
+                  <i className="fa fa-search" /></a>
+              </div>
+            </div>
+          </div>
+        </TabPageHeader>
+
+        <TabPageBody tabs={MainTabs} tab={2}>
+          {this.renderTable()}
+        </TabPageBody>
+      </TabPage>
+    )
   }
 }
 
