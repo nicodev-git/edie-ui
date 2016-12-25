@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-
+import $ from 'jquery'
 import { mainMenu, deviceMenu, contentType } from '../Config'
 
 class Sidebar extends React.Component {

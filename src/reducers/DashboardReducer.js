@@ -139,7 +139,7 @@ export default function (state = {}, action) {
         if (u.id === action.data.id) return action.data
         return u
       })
-      return {...state, incidents}
+      return { ...state, incidents }
     }
 
     case FETCH_IMAGES:
