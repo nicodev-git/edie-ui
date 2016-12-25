@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { reduxForm, Field } from 'redux-form'
 import { connect } from 'react-redux'
 
-import { signUser } from '../../actions/types'
+import { signUser } from '../../actions'
 
 const renderInput = field =>   // Define stateless component to render input and errors
     <div>
