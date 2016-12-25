@@ -121,7 +121,12 @@ class MapCanvas extends React.Component {
   }
 
   render () {
-    // const { x, y, connectDropTarget, dropTargetMonitor } = this.props // Never used
+    const {
+      // x, // Never used
+      // y, // Never used
+      // dropTargetMonitor, // Never used
+      connectDropTarget
+    } = this.props
 
     const style = {backgroundColor: '#23272D', height: '100%', position: 'relative'}
     return connectDropTarget( // eslint-disable-line no-undef
