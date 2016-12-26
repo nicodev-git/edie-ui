@@ -7,6 +7,6 @@
   if (hostname === "localhost" || hostname === "127.0.0.1") bundleName = 'bundle.js';
   var s = document.createElement("script");
   s.type = "text/javascript";
-  s.src = "/" + bundleName;
+  s.src = "/static/" + bundleName;
   document.body.appendChild(s);
 })();
