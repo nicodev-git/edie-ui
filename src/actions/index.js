@@ -132,6 +132,8 @@ import {
     OPEN_WORKFLOW_MODAL,
     CLOSE_WORKFLOW_MODAL,
 
+    GENERATE_PINCODE,
+
     API_ERROR
 } from './types'
 import { encodeUrlParams } from '../shared/Global'
@@ -254,7 +256,7 @@ export function fetchUserInfo () {
         'X-Authorization': window.localStorage.getItem('token')
       }
     }
-    axios.get('/api/me', config).then(response => {
+    axios.get(`${ROOT_URL}/api/me`, config).then(response => {
       dispatch({ type: FETCH_USER_INFO, data: response.data }) // eslint-disable-line no-unused-vars
     }).catch(error => {
       dispatch({type: API_ERROR, msg: error})
@@ -288,7 +290,7 @@ export function fetchMessage () {
 
 export function updateUserProfile (props) {
   return function (dispatch) {
-    axios.put(`/user/${props.id}`, props)
+    axios.put(`${ROOT_URL}/user/${props.id}`, props)
             .then(response => {
               dispatch({ type: UPDATE_USER_INFO, data: response.data })
               dispatch(closeProfileModal())
@@ -313,7 +315,7 @@ export function closeProfileModal () {
 
 export function fetchMaps (initial) {
   return function (dispatch) {
-    axios.get('/map')
+    axios.get(`${ROOT_URL}/map`)
             .then(response => {
               const maps = response.data._embedded.maps
               dispatch({type: FETCH_MAPS, data: maps})
@@ -335,7 +337,7 @@ export function changeMap (map) {
 
 export function addMap (props) {
   return function (dispatch) {
-    axios.post('/map', props)
+    axios.post(`${ROOT_URL}/map`, props)
         .then(response => {
           dispatch({ type: ADD_MAP, data: response.data })
         })
@@ -384,7 +386,7 @@ export function closeMapImportModal () {
 
 export function importMap (form) {
   return function (dispatch) {
-    axios.post('/importmap', form).then(response => {
+    axios.post(`${ROOT_URL}/importmap`, form).then(response => {
       dispatch({type: IMPORT_MAP, data: response.data})
       dispatch(closeMapImportModal())
     }).catch(error => {
@@ -409,13 +411,13 @@ export function fetchMapDevicesAndLines (mapid) {
       return
     }
 
-    const req1 = axios.get('/device/search/findDevicesByMapid', {
+    const req1 = axios.get(`${ROOT_URL}/device/search/findDevicesByMapid`, {
       params: { mapid }
     }).then(response => {
       return response.data._embedded.devices
     })
 
-    const req2 = axios.get('/device/search/findLinesByMapid', {
+    const req2 = axios.get(`${ROOT_URL}/device/search/findLinesByMapid`, {
       params: { mapid }
     }).then(response => {
       return response.data._embedded.devices
@@ -431,7 +433,7 @@ export function fetchMapDevicesAndLines (mapid) {
 
 export function addMapDevice (props) {
   return function (dispatch) {
-    axios.post('/device', props)
+    axios.post(`${ROOT_URL}/device`, props)
             .then(response => {
               dispatch({type: ADD_MAP_DEVICE, data: response.data})
             })
@@ -467,7 +469,7 @@ export function deleteMapDevice (entity) {
 
 export function addMapLine (props, cb) {
   return function (dispatch) {
-    axios.post('/device', props)
+    axios.post(`${ROOT_URL}/device`, props)
             .then(response => {
               dispatch({type: ADD_MAP_LINE, data: response.data})
               cb && cb(response.data)
@@ -506,7 +508,7 @@ export function deleteMapLine (entity) {
 
 export function fetchIncidents () {
   return function (dispatch) {
-    axios.get('/incident', {
+    axios.get(`${ROOT_URL}/incident`, {
       params: { }
     }).then(response => {
       dispatch({ type: FETCH_DASHBOARD_INCIDENTS, data: response.data._embedded.incidents })
@@ -518,7 +520,7 @@ export function fetchIncidents () {
 
 export function fetchBigIncidents (params) {
   return function (dispatch) {
-    axios.get(`/incident/search/findBy?${encodeUrlParams(params)}`).then(response => {
+    axios.get(`${ROOT_URL}/incident/search/findBy?${encodeUrlParams(params)}`).then(response => {
       dispatch({ type: FETCH_DASHBOARD_BIGINCIDENTS, data: response.data._embedded.incidents })
     }).catch(error => {
       dispatch({type: API_ERROR, msg: error})
@@ -528,7 +530,7 @@ export function fetchBigIncidents (params) {
 
 export function fetchAttackers () {
   return function (dispatch) {
-    axios.get('/attacker', {
+    axios.get(`${ROOT_URL}/attacker`, {
       params: { }
     }).then(response => {
       dispatch({ type: FETCH_ATTACKERS, data: response.data._embedded.attackers })
@@ -558,7 +560,7 @@ export function closeNewIncidentModal () {
 
 export function fetchDeviceTemplates () {
   return function (dispatch) {
-    axios.get('/devicetemplate').then(response => {
+    axios.get(`${ROOT_URL}/devicetemplate`).then(response => {
       dispatch({type: FETCH_DEVICE_TEMPLATES, data: response.data._embedded.deviceTemplates})
     })
         .catch(error => {
@@ -569,7 +571,7 @@ export function fetchDeviceTemplates () {
 
 export function addDeviceTemplate (props) {
   return function (dispatch) {
-    axios.post('/devicetemplate', props)
+    axios.post(`${ROOT_URL}/devicetemplate`, props)
             .then(response => {
               dispatch({type: ADD_DEVICE_TEMPLATE, data: response.data})
               dispatch(closeDeviceTplModal())
@@ -619,7 +621,7 @@ export function closeDeviceTplModal () {
 
 export function fetchMonitorTemplates () {
   return function (dispatch) {
-    axios.get('/monitortemplate').then(response => {
+    axios.get(`${ROOT_URL}/monitortemplate`).then(response => {
       dispatch({type: FETCH_MONITOR_TEMPLATES, data: response.data._embedded.monitorTemplates})
     })
             .catch(error => {
@@ -630,7 +632,7 @@ export function fetchMonitorTemplates () {
 
 export function addMonitorTemplate (props) {
   return function (dispatch) {
-    axios.post('/monitortemplate', props)
+    axios.post(`${ROOT_URL}/monitortemplate`, props)
             .then(response => {
               dispatch({type: ADD_MONITOR_TEMPLATE, data: response.data})
               dispatch(closeMonitorTplModal())
@@ -713,7 +715,7 @@ export function closeDevice () {
 
 export function fetchDeviceIncidents (params) {
   return function (dispatch) {
-    axios.get(`/incident/search/findBy?${encodeUrlParams(params)}`).then(response => {
+    axios.get(`${ROOT_URL}/incident/search/findBy?${encodeUrlParams(params)}`).then(response => {
       dispatch({type: FETCH_DEVICE_INCIDENTS, data: response.data._embedded.incidents})
     })
         .catch(error => {
@@ -724,7 +726,7 @@ export function fetchDeviceIncidents (params) {
 
 export function addDeviceIncident (props) {
   return function (dispatch) {
-    axios.post('/incident', props)
+    axios.post(`${ROOT_URL}/incident`, props)
             .then(response => {
               dispatch({type: ADD_DEVICE_INCIDENT, data: response.data})
               dispatch(closeAddDeviceIncident())
@@ -822,7 +824,7 @@ export function clearDeviceWizardInitialValues () {
 
 export function uploadImage (formData) {
   return dispatch => {
-    axios.post('/upload', formData)
+    axios.post(`${ROOT_URL}/upload`, formData)
         .then(response => {
           dispatch({type: UPLOAD_IMAGE, data: response.data})
         })
@@ -834,7 +836,7 @@ export function uploadImage (formData) {
 
 export function fetchImages () {
   return dispatch => {
-    axios.get('/customImage')
+    axios.get(`${ROOT_URL}/customImage`)
             .then(response => {
               dispatch({type: FETCH_IMAGES, data: response.data._embedded.customImages})
             })
@@ -848,7 +850,7 @@ export function fetchImages () {
 
 export function searchIncidents (params) {
   return dispatch => {
-    axios.get(`/incident/search/findBy?${encodeUrlParams(params)}`).then(response => {
+    axios.get(`${ROOT_URL}/incident/search/findBy?${encodeUrlParams(params)}`).then(response => {
       dispatch({type: SEARCH_INCIDENTS, data: response.data._embedded.incidents})
     }).catch(error => {
       dispatch({type: API_ERROR, msg: error})
@@ -858,7 +860,7 @@ export function searchIncidents (params) {
 
 export function searchIncidentDevices (params) {
   return dispatch => {
-    axios.get(`/device/search/findByName?${encodeUrlParams(params)}`).then(response => {
+    axios.get(`${ROOT_URL}/device/search/findByName?${encodeUrlParams(params)}`).then(response => {
       dispatch({type: SEARCH_INCIDENT_DEVICES, data: response.data._embedded.devices})
     }).catch(error => {
       dispatch({type: API_ERROR, msg: error})
@@ -870,7 +872,7 @@ export function searchIncidentDevices (params) {
 
 export function fetchSettingMaps () {
   return function (dispatch) {
-    axios.get('/map').then(response => {
+    axios.get(`${ROOT_URL}/map`).then(response => {
       dispatch({type: FETCH_SETTING_MAPS, data: response.data._embedded.maps})
     }).catch(error => {
       dispatch({type: API_ERROR, msg: error})
@@ -892,7 +894,7 @@ export function closeSettingMapModal () {
 
 export function addSettingMap (props) {
   return function (dispatch) {
-    axios.post('/map', props)
+    axios.post(`${ROOT_URL}/map`, props)
             .then(response => {
               dispatch({ type: ADD_SETTING_MAP, data: response.data })
               dispatch(closeSettingMapModal())
@@ -943,7 +945,7 @@ export function closeMapUsersModal () {
 
 export function fetchMapUsers (mapId) {
   return function (dispatch) {
-    axios.get(`/user/search/findByMap?mapid=${mapId}`).then(response => {
+    axios.get(`${ROOT_URL}/user/search/findByMap?mapid=${mapId}`).then(response => {
       dispatch({type: FETCH_MAP_USERS, data: response.data._embedded.users})
     }).catch(error => {
       dispatch({type: API_ERROR, msg: error})
@@ -983,7 +985,7 @@ export function fetchSettingUsers () {
   return function (dispatch) {
     dispatch({type: FETCH_SETTING_USERS, data: []})
 
-    axios.get('/user').then(response => {
+    axios.get(`${ROOT_URL}/user`).then(response => {
       dispatch({type: FETCH_SETTING_USERS, data: response.data._embedded.users})
     }).catch(error => {
       dispatch({type: API_ERROR, msg: error})
@@ -993,7 +995,7 @@ export function fetchSettingUsers () {
 
 export function addSettingUser (props) {
   return function (dispatch) {
-    axios.post('/user', props)
+    axios.post(`${ROOT_URL}/user`, props)
             .then(response => {
               dispatch({ type: ADD_SETTING_USER, data: response.data })
               dispatch(closeSettingUserModal())
@@ -1052,8 +1054,8 @@ export function closeUserPasswordModal () {
 
 export function generatePincode () {
   return function (dispatch) {
-    axios.get('/genpin').then(response => {
-      dispatch({type: GENERATE_PINCODE, data: response.data}) // eslint-disable-line no-undef
+    axios.get(`${ROOT_URL}/genpin`).then(response => {
+      dispatch({type: GENERATE_PINCODE, data: response.data})
     }).catch(error => {
       dispatch({type: API_ERROR, msg: error})
     })
@@ -1062,7 +1064,7 @@ export function generatePincode () {
 
 export function fetchEnvVars () {
   return function (dispatch) {
-    axios.get('/setting/search/envvars').then(response => {
+    axios.get(`${ROOT_URL}/setting/search/envvars`).then(response => {
       dispatch({type: FETCH_ENV_VARS, data: response.data._embedded.settingses})
     }).catch(error => {
       dispatch({type: API_ERROR, msg: error})
@@ -1082,7 +1084,7 @@ export function updateEnvVar (entity) {
 
 export function addEnvVar (entity) {
   return function (dispatch) {
-    axios.post('/setting', entity).then(response => {
+    axios.post(`${ROOT_URL}/setting`, entity).then(response => {
       dispatch({type: ADD_ENV_VAR, data: response.data})
     }).catch(error => {
       dispatch({type: API_ERROR, msg: error})
@@ -1092,7 +1094,7 @@ export function addEnvVar (entity) {
 
 export function fetchIdentities () {
   return function (dispatch) {
-    axios.get('/setting/search/identities').then(response => {
+    axios.get(`${ROOT_URL}/setting/search/identities`).then(response => {
       dispatch({type: FETCH_IDENTITIES, data: response.data._embedded.settingses})
     }).catch(error => {
       dispatch({type: API_ERROR, msg: error})
@@ -1102,7 +1104,7 @@ export function fetchIdentities () {
 
 export function addIdentity (props) {
   return function (dispatch) {
-    axios.post('/setting', props).then(response => {
+    axios.post(`${ROOT_URL}/setting`, props).then(response => {
       dispatch({type: ADD_IDENTITY, data: response.data})
       dispatch(closeIdentityModal())
     }).catch(error => {
@@ -1148,7 +1150,7 @@ export function closeIdentityModal () {
 
 export function fetchCredentials () {
   return function (dispatch) {
-    axios.get('/credential').then(response => {
+    axios.get(`${ROOT_URL}/credential`).then(response => {
       dispatch({ type: FETCH_CREDENTIALS, data: response.data._embedded.credentials })
     }).catch(error => {
       dispatch({type: API_ERROR, msg: error})
@@ -1158,7 +1160,7 @@ export function fetchCredentials () {
 
 export function addCredentials (props) {
   return function (dispatch) {
-    axios.post('/credential', props).then(response => {
+    axios.post(`${ROOT_URL}/credential`, props).then(response => {
       dispatch({type: ADD_CREDENTIALS, data: response.data})
       dispatch(closeCredentialsModal())
     }).catch(error => {
@@ -1204,7 +1206,7 @@ export function closeCredentialsModal () {
 
 export function fetchWorkflows () {
   return function (dispatch) {
-    axios.get('/workflow').then(response => {
+    axios.get(`${ROOT_URL}/workflow`).then(response => {
       dispatch({ type: FETCH_WORKFLOWS, data: response.data._embedded.workflows })
     }).catch(error => {
       dispatch({type: API_ERROR, msg: error})
@@ -1214,7 +1216,7 @@ export function fetchWorkflows () {
 
 export function addWorkflow (props) {
   return function (dispatch) {
-    axios.post('/workflow', props).then(response => {
+    axios.post(`${ROOT_URL}/workflow`, props).then(response => {
       dispatch({type: ADD_WORKFLOW, data: response.data})
       dispatch(closeWorkflowModal())
     }).catch(error => {
