@@ -174,31 +174,29 @@ function getAuthConfig () { // eslint-disable-line no-unused-vars
 export function signUser ({ email, password }) {
     // //console.log('signUser', email, password);
   return function (dispatch) {
-    // let config = {
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //     'X-Requested-With': 'XMLHttpRequest'
-    //   }
-    // }
-    //     // //console.log(email, password);
-    // axios.post(`${ROOT_URL}/api/auth/login`,
-    //   {
-    //     username: email,
-    //     password: password
-    //   }, config
-    //         )
-    //         .then(response => {
-    //           console.log(response)
-    //           dispatch({type: AUTH_USER})
-    //             // console.log('token:', response.data.token);
-    //           window.localStorage.setItem('token', response.data.token)
-    //
-    //           hashHistory.push('/')
-    //         })
-    //         .catch((err) => {
-    //           console.log('err', err)
-    //           dispatch({type: AUTH_ERROR, msg: 'Wrong credentials.'})
-    //         })
+  //   let config = {
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //       'X-Requested-With': 'XMLHttpRequest'
+  //     }
+  //   }
+  //   // //console.log(email, password);
+  //   axios.post(`${ROOT_URL}/api/auth/login`,
+  //     {
+  //       username: email,
+  //       password: password
+  //     }, config
+  //     )
+  //     .then(response => {
+  //       dispatch({type: AUTH_USER})
+  //       // console.log('token:', response.data.token);
+  //       window.localStorage.setItem('token', response.data.token)
+  //
+  //       hashHistory.push('/')
+  //     })
+  //     .catch(() => {
+  //       dispatch({type: AUTH_ERROR, msg: 'Wrong credentials.'})
+  //     })
 
     const api = new XMLHttpRequest() // eslint-disable-line no-undef
     api.onreadystatechange = () => {
