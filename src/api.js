@@ -2,7 +2,7 @@
  * Created by Cheng on 9/8/16.
  */
 
-const Api = {
+var Api = { // eslint-disable-line no-unused-vars
   admin: {
     getOptions: '/admin/getOptions',
     updateOptions: '/admin/updateOptions',
@@ -237,4 +237,4 @@ const Api = {
   }
 }
 
-export default Api
+// export default Api
