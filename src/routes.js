@@ -1,5 +1,5 @@
 import React from 'react'
-import { Router, hashHistory, Route } from 'react-router'
+import { Router, browserHistory, Route } from 'react-router'
 
 import Main from './components/page/Main'
 import Signin from './components/auth/signin'
@@ -49,7 +49,7 @@ const onMainEnter = (prevState, nextState, replace, callback) => {
 }
 
 export default(
-    <Router history={hashHistory}>
+    <Router history={browserHistory}>
         <Route path="/" component={RequireAuth(Main)} onChange={onMainEnter}>
             <Route path="chat" component={Chat} />
             <Route path="search" component={Search}>
