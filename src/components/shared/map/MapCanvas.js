@@ -1,7 +1,5 @@
 import React from 'react'
-import { findIndex } from 'lodash'
-
-const uniqueId = findIndex
+import { findIndex, uniqueId } from 'lodash'
 
 import {
     DropTarget
