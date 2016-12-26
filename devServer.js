@@ -8,8 +8,15 @@ const webpackHotMiddleware = require('webpack-hot-middleware')
 
 const app = express()
 const port = 8123
+
+app.get('/externalpictures', (req, res, next) => {
+  return res.redirect(302, `/images/${req.query.name}`)
+  return next()
+})
+
 app.use(express.static('src'))
 app.use(express.static('static'))
+
 const compiler = webpack(config)
 app.use(webpackDevMiddleware(compiler, {
   noInfo: true,
