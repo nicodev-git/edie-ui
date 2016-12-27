@@ -48,16 +48,19 @@ class UsersModal extends React.Component {
 
   render () {
     return (
-      <Modal show={this.state.open} onHide={this.onHide.bind(this)}
-             aria-labelledby="ModalHeader" className="bootstrap-dialog type-primary">
+      <Modal
+        show={this.state.open}
+        onHide={this.onHide.bind(this)}
+        aria-labelledby="ModalHeader"
+        className="bootstrap-dialog type-primary"
+      >
 
         <div className="modal-header">
           <h4 className="modal-title bootstrap-dialog-title">
             Users
           </h4>
           <div className="bootstrap-dialog-close-button">
-            <button className="close"
-                    onClick={this.onClickClose.bind(this)}>×</button>
+            <button className="close" onClick={this.onClickClose.bind(this)}>×</button>
           </div>
         </div>
 
@@ -74,10 +77,8 @@ class UsersModal extends React.Component {
           />
 
           <div className="text-right">
-            <Button className="btn-primary btn-sm"
-                    onClick={this.onClickSave.bind(this)}>OK</Button>
-            <Button className="btn-sm margin-sm-left"
-                    onClick={this.onClickClose.bind(this)}>Cancel</Button>
+            <Button className="btn-primary btn-sm" onClick={this.onClickSave.bind(this)}>OK</Button>
+            <Button className="btn-sm margin-sm-left" onClick={this.onClickClose.bind(this)}>Cancel</Button>
           </div>
         </div>
       </Modal>

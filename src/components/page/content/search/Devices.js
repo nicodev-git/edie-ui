@@ -68,8 +68,8 @@ class Devices extends React.Component {
 
             <div style={{ position: 'relative', display: 'inline-block' }}>
               <input type="text" placeholder="Search" className="form-control"
-                     style={{width: '220px', paddingLeft: '35px'}}
-                     ref="search"/>
+                style={{width: '220px', paddingLeft: '35px'}}
+                ref="search"/>
               <a className="btn" href="javascript:;" style={{position: 'absolute', left: 0, top: 0}}>
                 <i className="fa fa-search" />
               </a>

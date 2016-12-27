@@ -25,7 +25,7 @@ class IncidentTable extends React.Component {
       'columnName': 'severity',
       'cssClassName': 'text-center width-60',
       'customComponent': (props) => {
-        return <span dangerouslySetInnerHTML={{__html: getSeverityIcon(props.data)}}/>
+        return <span dangerouslySetInnerHTML={{__html: getSeverityIcon(props.data)}}/> // eslint-disable-line react/no-danger
       }
     }, {
       'displayName': 'Date/Time',
@@ -79,7 +79,7 @@ class IncidentTable extends React.Component {
             {
               (row.fixed && !row.whathappened)
                 ? <a href="javascript:;"
-                    onClick={showIncidentComments.bind(null, this.context.sid, row, this.reloadTable.bind(this))}>
+                  onClick={showIncidentComments.bind(null, this.context.sid, row, this.reloadTable.bind(this))}>
                   <img style={{height: '25px'}} title="Reason"
                     src={`/images/${row.lastcomment ? 'reason-icon.png' : 'reason-x.png'}`} />
                   </a>

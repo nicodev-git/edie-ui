@@ -85,7 +85,7 @@ class ProcessModal extends React.Component {
           </h4>
           <div className="bootstrap-dialog-close-button">
             <button className="close"
-                    onClick={this.onClickClose.bind(this)}>×
+              onClick={this.onClickClose.bind(this)}>×
             </button>
           </div>
         </div>

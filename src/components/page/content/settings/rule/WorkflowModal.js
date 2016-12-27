@@ -19,7 +19,7 @@ const renderInput = field => (
     </div>
 )
 
-class WorkflowModal extends React.Component {
+class WorkflowModal extends React.Component { // eslint-disable-line react/no-multi-comp
   constructor (props) {
     super(props)
     this.state = {
@@ -82,7 +82,7 @@ class WorkflowModal extends React.Component {
             <div className="text-right">
               <Button className="btn-primary btn-sm" type="submit">Save</Button>
               <Button className="btn-sm margin-sm-left"
-                      onClick={this.onClickClose.bind(this)}>Cancel</Button>
+                onClick={this.onClickClose.bind(this)}>Cancel</Button>
             </div>
           </form>
         </div>

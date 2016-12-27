@@ -28,38 +28,6 @@ class MonitorPicker extends React.Component {
     this.props.fetchMonitorTemplates()
   }
 
-  render () {
-    return (
-            <Modal show onHide={this.onHide.bind(this)}
-              aria-labelledby="ModalHeader" className="bootstrap-dialog type-primary">
-
-                <div className="modal-header">
-                    <h4 className="modal-title bootstrap-dialog-title">
-                        Choose Monitor
-                    </h4>
-                    <div className="bootstrap-dialog-close-button">
-                        <button className="close" onClick={this.onClickClose.bind(this)}>×</button>
-                    </div>
-                </div>
-
-                <div className="modal-body bootstrap-dialog-message">
-                    <div className="monitor-types text-center">
-                        <ul>
-                            {
-                                this.props.monitorTemplates.map(item =>
-                                    <li key={item.id}><a href="javascript:;" onClick={this.onClickItem.bind(this, item)}>
-                                        <img src={`/images/${item.image}`}/>
-                                        <span>{item.name}</span>
-                                    </a></li>
-                                )
-                            }
-                        </ul>
-                    </div>
-                </div>
-            </Modal>
-    )
-  }
-
   onHide () {
     this.onClickClose()
   }
@@ -75,6 +43,40 @@ class MonitorPicker extends React.Component {
     if (this.props.onClickItem(item)) {
       this.onClickClose()
     }
+  }
+
+  render () {
+    return (
+      <Modal show onHide={this.onHide.bind(this)}
+        aria-labelledby="ModalHeader" className="bootstrap-dialog type-primary">
+
+        <div className="modal-header">
+          <h4 className="modal-title bootstrap-dialog-title">
+            Choose Monitor
+          </h4>
+          <div className="bootstrap-dialog-close-button">
+            <button className="close" onClick={this.onClickClose.bind(this)}>×</button>
+          </div>
+        </div>
+
+        <div className="modal-body bootstrap-dialog-message">
+          <div className="monitor-types text-center">
+            <ul>
+              {
+                this.props.monitorTemplates.map(item =>
+                  <li key={item.id}>
+                    <a href="javascript:;" onClick={this.onClickItem.bind(this, item)}>
+                      <img src={`/images/${item.image}`}/>
+                      <span>{item.name}</span>
+                    </a>
+                  </li>
+                )
+              }
+            </ul>
+          </div>
+        </div>
+      </Modal>
+    )
   }
 }
 

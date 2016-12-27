@@ -22,7 +22,7 @@ const renderInput = field => (
     </div>
 )
 
-class PasswordModal extends React.Component {
+class PasswordModal extends React.Component { // eslint-disable-line react/no-multi-comp
   constructor (props) {
     super(props)
     this.state = {
@@ -58,7 +58,7 @@ class PasswordModal extends React.Component {
 
     return (
       <Modal show onHide={this.onHide.bind(this)}
-             aria-labelledby="ModalHeader" className="bootstrap-dialog type-primary">
+        aria-labelledby="ModalHeader" className="bootstrap-dialog type-primary">
 
         <div className="modal-header">
           <h4 className="modal-title bootstrap-dialog-title">
@@ -66,7 +66,7 @@ class PasswordModal extends React.Component {
           </h4>
           <div className="bootstrap-dialog-close-button">
             <button className="close"
-                    onClick={this.onClickClose.bind(this)}>×</button>
+              onClick={this.onClickClose.bind(this)}>×</button>
           </div>
         </div>
 
@@ -79,7 +79,7 @@ class PasswordModal extends React.Component {
             <div className="text-center">
               <Button className="btn-primary btn-sm" type="submit">Save</Button>
               <Button className="btn-sm margin-sm-left"
-                      onClick={this.onClickClose.bind(this)}>Cancel</Button>
+                onClick={this.onClickClose.bind(this)}>Cancel</Button>
             </div>
           </form>
         </div>

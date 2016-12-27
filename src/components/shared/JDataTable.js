@@ -79,9 +79,9 @@ class JDataTable extends React.Component {
           {
             this.state.data.map((row, i) =>
               <tr key={i}
-                  onClick={this.onClickRow.bind(this, i)}
-                  onDoubleClick={this.props.onRowDblClick}
-                  className={this.state.selected === i ? 'selected' : ''}>
+                onClick={this.onClickRow.bind(this, i)}
+                onDoubleClick={this.props.onRowDblClick}
+                className={this.state.selected === i ? 'selected' : ''}>
                 {this.props.columns.map((col, index) =>
                   <td key={index}>
                     {

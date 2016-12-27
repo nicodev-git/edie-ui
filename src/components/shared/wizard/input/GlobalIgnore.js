@@ -63,16 +63,15 @@ export default class GlobalIgnore extends InputBase {
                             <tbody>
                             {
                                 this.state.data.map((item, i) =>
-                                    item.ignore.includes(this.state.keyword) ?
-                                        (
-                                            <tr key={i}
-                                              className={this.state.selected === i ? 'selected' : ''}
-                                              onClick={() => { this.setState({selected: i}) }}>
-
-                                                <td>{item.ignore}</td>
-
-                                            </tr>
-                                        ) : null
+                                    item.ignore.includes(this.state.keyword)
+                                      ? (
+                                          <tr key={i}
+                                            className={this.state.selected === i ? 'selected' : ''}
+                                            onClick={() => { this.setState({selected: i}) }}>
+                                            <td>{item.ignore}</td>
+                                          </tr>
+                                        )
+                                      : null
                                 )
                             }
                             </tbody>
@@ -94,10 +93,10 @@ export default class GlobalIgnore extends InputBase {
 
   onClickAdd () {
     appendComponent(
-            <GlobalIgnoreModal
-              onClose={this.onCloseAdd.bind(this)}
-            />
-        )
+      <GlobalIgnoreModal
+        onClose={this.onCloseAdd.bind(this)}
+      />
+    )
   }
 
   onCloseAdd (modal, item) {
@@ -113,17 +112,17 @@ export default class GlobalIgnore extends InputBase {
 
   onClickEdit () {
     if (this.state.selected < 0) {
-      alert('Please select row.')
+      window.alert('Please select row.')
       return
     }
 
     appendComponent(
-            <GlobalIgnoreModal
-              onClose={this.onCloseEdit.bind(this)}
-              data = {this.state.data[this.state.selected]}
-              item={this.state.data[this.state.selected]}
-            />
-        )
+      <GlobalIgnoreModal
+        onClose={this.onCloseEdit.bind(this)}
+        data = {this.state.data[this.state.selected]}
+        item={this.state.data[this.state.selected]}
+      />
+    )
   }
 
   onCloseEdit (modal, item) {
@@ -139,7 +138,7 @@ export default class GlobalIgnore extends InputBase {
 
   onClickDelete () {
     if (this.state.selected < 0) {
-      alert('Please select row.')
+      window.alert('Please select row.')
       return
     }
     let data = this.state.data

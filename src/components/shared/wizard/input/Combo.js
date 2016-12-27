@@ -178,12 +178,12 @@ export default class Combo extends React.Component {
 
     input = (
       <div className={`col-md-${width}`}
-           style={util.convertStyle(config.style)}>
+        style={util.convertStyle(config.style)}>
         <SelectField className={`form-control ${config.cls || ''}`}
-                     name={config.name}
-                     validation={config.required ? 'required' : null}
-                     defaultValue={defaultValue}
-                     options={options}
+          name={config.name}
+          validation={config.required ? 'required' : null}
+          defaultValue={defaultValue}
+          options={options}
         />
         {this.renderSidebar()}
       </div>

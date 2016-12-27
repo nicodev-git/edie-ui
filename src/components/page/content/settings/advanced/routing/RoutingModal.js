@@ -191,7 +191,7 @@ class RoutingModal extends React.Component {
 
     return (
       <Modal show={this.state.open} onHide={this.onHide.bind(this)}
-             aria-labelledby="ModalHeader" className="bootstrap-dialog type-primary">
+        aria-labelledby="ModalHeader" className="bootstrap-dialog type-primary">
 
         <div className="modal-header">
           <h4 className="modal-title bootstrap-dialog-title">
@@ -199,7 +199,7 @@ class RoutingModal extends React.Component {
           </h4>
           <div className="bootstrap-dialog-close-button">
             <button className="close"
-                    onClick={this.onClickClose.bind(this)}>×</button>
+              onClick={this.onClickClose.bind(this)}>×</button>
           </div>
         </div>
 
@@ -209,7 +209,7 @@ class RoutingModal extends React.Component {
             <label className="col-md-3 control-label">Device IP</label>
             <div className="col-md-9">
               <select className="form-control" ref="filterType"
-                      defaultValue={routing ? routing.filterType : ''}>
+                defaultValue={routing ? routing.filterType : ''}>
                 <option value="ip">Device IP</option>
                 <option value="text">Text</option>
               </select>
@@ -219,7 +219,7 @@ class RoutingModal extends React.Component {
             <label className="col-md-3 control-label">Value</label>
             <div className="col-md-9">
               <input type="text" className="form-control" ref="value"
-                     defaultValue={routing ? routing.value : ''}/>
+                defaultValue={routing ? routing.value : ''}/>
             </div>
           </div>
 
@@ -249,7 +249,7 @@ class RoutingModal extends React.Component {
               {
                 this.state.targets.map((item, i) =>
                   <tr key={i} onClick={() => { this.setState({selected: item}) }}
-                      className={this.state.selected === item ? 'selected' : ''}>
+                    className={this.state.selected === item ? 'selected' : ''}>
                     <td>{item.targetName}</td>
                   </tr>
                 )
@@ -259,10 +259,8 @@ class RoutingModal extends React.Component {
           </div>
 
           <div className="text-right">
-            <Button className="btn-primary btn-sm"
-                    onClick={this.onClickSave.bind(this)}>Save</Button>
-            <Button className="btn-sm margin-sm-left"
-                    onClick={this.onClickClose.bind(this)}>Cancel</Button>
+            <Button className="btn-primary btn-sm" onClick={this.onClickSave.bind(this)}>Save</Button>
+            <Button className="btn-sm margin-sm-left" onClick={this.onClickClose.bind(this)}>Cancel</Button>
           </div>
         </div>
       </Modal>

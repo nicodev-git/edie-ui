@@ -4,14 +4,14 @@ import { MAX_WIDTH } from './WizardConfig'
 
 export const util = {
 
-  calcWidth: function (width) {
+  calcWidth (width) {
     width = width || MAX_WIDTH
     if (width > MAX_WIDTH) width = MAX_WIDTH
     if (width < 1) width = 1
     return width
   },
 
-  convertStyle: function (style) {
+  convertStyle (style) {
     let newStyle = {}
     style && $.each(style, (k, v) => { // eslint-disable-line no-undef
       let name = k.replace(/(-)(\w)/g, (match, m1, m2) => {
@@ -24,13 +24,13 @@ export const util = {
     return newStyle
   },
 
-  wrapInputs: function (label, input, useColumn) {
+  wrapInputs (label, input, useColumn) {
     if (useColumn) return input
     return (
-            <div className="row margin-md-bottom">
-                {label}
-                {input}
-            </div>
+      <div className="row margin-md-bottom">
+          {label}
+          {input}
+      </div>
     )
   }
 }

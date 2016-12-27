@@ -3,7 +3,7 @@ import Modal from 'react-bootstrap-modal'
 import {
     Button
 } from 'react-bootstrap'
-import countries from 'country-data/data/countries.json'
+import countries from 'country-data/data/countries'
 
 import { showAlert } from '../../../../shared/Alert'
 

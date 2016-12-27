@@ -101,10 +101,11 @@ class MapSelect extends React.Component {
   render () {
     const {selectedMap} = this.props
     return (
-      <select className="input-sm map-select margin-sm-left"
-              style={{marginTop: '-9px'}}
-              value={selectedMap ? selectedMap.id : ''}
-              onChange={this.onChange.bind(this)}>
+      <select
+        className="input-sm map-select margin-sm-left"
+        style={{marginTop: '-9px'}}
+        value={selectedMap ? selectedMap.id : ''}
+        onChange={this.onChange.bind(this)}>
         {
           this.props.maps.map(map =>
             <option value={map.id} key={map.id}>

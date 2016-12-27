@@ -401,17 +401,12 @@ export default class Toolbar extends React.Component {
             </li>
 
             <li>
-              <a href="javascript:;"
-                 className="option p-none" style={{display: hub ? 'block' : 'none'}}>
+              <a href="javascript:;" className="option p-none" style={{display: hub ? 'block' : 'none'}}>
                 <i className="fa fa-rotate-left" title="Rotate Left" />
               </a>
             </li>
             <li>
-              <a
-                href="javascript:;"
-                className="option p-none"
-                style={{display: hub ? 'block' : 'none'}}
-              >
+              <a href="javascript:;" className="option p-none" style={{display: hub ? 'block' : 'none'}}>
                 <i className="fa fa-rotate-right" title="Rotate Right" />
               </a>
             </li>
@@ -445,7 +440,7 @@ export default class Toolbar extends React.Component {
               <ul className="dropdown-menu drop-right">
                 <li>
                   <a href="javascript:;" onClick={this.props.onClickEdit}
-                     className={`option ${this.props.editable ? 'option-active' : ''}`}
+                    className={`option ${this.props.editable ? 'option-active' : ''}`}
                   >
                     <i className="fa fa-edit margin-md-right" />Edit
                   </a>
@@ -472,7 +467,7 @@ export default class Toolbar extends React.Component {
               <ul className="dropdown-menu drop-right">
                 <li>
                   <a href="javascript:logout();"
-                     className="option"> <i className="fa fa-sign-out margin-md-right" />Log Out
+                    className="option"> <i className="fa fa-sign-out margin-md-right" />Log Out
                   </a>
                 </li>
               </ul>

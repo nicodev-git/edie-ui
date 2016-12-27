@@ -24,7 +24,7 @@ Panel.defaultProps = {
 
 // /////////////////////////////////////////////////////////
 
-export class PanelHeader extends React.Component {
+export class PanelHeader extends React.Component { // eslint-disable-line react/no-multi-comp
   render () {
     const {className, title} = this.props
 
@@ -43,7 +43,7 @@ PanelHeader.defaultProps = {
 
 // /////////////////////////////////////////////////////////
 
-export class PanelOptions extends React.Component {
+export class PanelOptions extends React.Component { // eslint-disable-line react/no-multi-comp
   render () {
     return (
             <div className="panel-options">
@@ -55,7 +55,7 @@ export class PanelOptions extends React.Component {
 
 // /////////////////////////////////////////////////////////
 
-export class PanelBody extends React.Component {
+export class PanelBody extends React.Component { // eslint-disable-line react/no-multi-comp
   render () {
     const className = this.props.className
     const style = this.props.style

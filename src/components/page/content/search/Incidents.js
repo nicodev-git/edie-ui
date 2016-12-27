@@ -56,7 +56,7 @@ class Incidents extends React.Component {
       'columnName': 'severity',
       'cssClassName': 'text-center width-60',
       'customComponent': (props) => {
-        return <span dangerouslySetInnerHTML={{__html: getSeverityIcon(props.data)}}/>
+        return <span dangerouslySetInnerHTML={{__html: getSeverityIcon(props.data)}}/> // eslint-disable-line react/no-danger
       }
     }, {
       'displayName': 'Date/Time',
@@ -80,7 +80,7 @@ class Incidents extends React.Component {
           str += `<br/><b>Reason:</b> ${props.rowData.lastcomment}`
         }
 
-        return <span dangerouslySetInnerHTML={{ __html: str }} />
+        return <span dangerouslySetInnerHTML={{ __html: str }} /> // eslint-disable-line react/no-danger
       }
     }, {
       'displayName': 'Actions',
@@ -217,7 +217,7 @@ class Incidents extends React.Component {
     const { currentSortCol, currentSortDir } = this.state
 
     let params = {
-      description: search.value || '""',
+      description: search ? search.value : '""',
       severity: this.state.selectedSeverity,
       afterStartTimestamp: dp.getStartDate().valueOf(),
       beforeStartTimestamp: dp.getEndDate().valueOf(),
@@ -282,7 +282,7 @@ class Incidents extends React.Component {
         <TabPageHeader title="Search">
           <div className="form-inline" style={{margin: '0 auto', position: 'relative', textAlign: 'center'}}>
             <div className="text-left"
-                 style={{'verticalAlign': 'middle', 'lineHeight': 2.2}}>
+              style={{'verticalAlign': 'middle', 'lineHeight': 2.2}}>
               <Select
                 value={this.state.selectedSeverity.join(',')}
                 options={this.state.severities}
@@ -297,14 +297,14 @@ class Incidents extends React.Component {
               />
 
               <select className="form-control inline text-primary margin-md-left"
-                      onChange={this.onFilterChange}
-                      ref="fixed" defaultValue="false">
+                onChange={this.onFilterChange}
+                ref="fixed" defaultValue="false">
                 <option value="">Any</option>
                 <option value="false">Unfixed</option>
                 <option value="true">Fixed</option>
               </select>
               <DateRangePicker onClickRange={this.onFilterChange} className="margin-md-left"
-                               default={defaultDate} ref="dp">
+                default={defaultDate} ref="dp">
                 <i className="fa fa-caret-down margin-xs-left" />
               </DateRangePicker>
 

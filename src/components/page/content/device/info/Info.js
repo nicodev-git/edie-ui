@@ -24,19 +24,6 @@ class Info extends React.Component {
     }
   }
 
-  render () {
-    const {device} = this.props
-
-    return (
-            <TabPage>
-                <TabPageHeader title={device.name} />
-                <TabPageBody>
-                    {this.renderContent()}
-                </TabPageBody>
-            </TabPage>
-    )
-  }
-
   renderContent () {
     const {device} = this.props
 
@@ -61,6 +48,19 @@ class Info extends React.Component {
   onFinish (params) {
     const device = assign({}, this.props.device, params)
     this.props.updateMapDevice(device)
+  }
+
+  render () {
+    const {device} = this.props
+
+    return (
+      <TabPage>
+        <TabPageHeader title={device.name} />
+        <TabPageBody>
+          {this.renderContent()}
+        </TabPageBody>
+      </TabPage>
+    )
   }
 }
 

@@ -50,20 +50,6 @@ class Routing extends React.Component {
         // }
   }
 
-  render () {
-    return (
-            <InfiniteTable
-              url="/routing/getRoutingsDT"
-              params={{}}
-              cells={this.cells}
-              rowMetadata={{'key': 'id'}}
-              selectable
-              bodyHeight={this.props.containerHeight}
-              ref="routings"
-            />
-    )
-  }
-
     // ////////////////////////
 
   onAddRouting () {
@@ -91,6 +77,20 @@ class Routing extends React.Component {
               routing={selected}
             />
         )
+  }
+
+  render () {
+    return (
+      <InfiniteTable
+        url="/routing/getRoutingsDT"
+        params={{}}
+        cells={this.cells}
+        rowMetadata={{'key': 'id'}}
+        selectable
+        bodyHeight={this.props.containerHeight}
+        ref="routings"
+      />
+    )
   }
 }
 

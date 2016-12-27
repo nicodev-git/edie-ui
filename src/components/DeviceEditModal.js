@@ -17,7 +17,7 @@ const Input = ({ input, label, type, meta: { touched, error } }) => (
     </fieldset>
 )
 
-class DeviceEditModal extends React.Component {
+class DeviceEditModal extends React.Component { // eslint-disable-line react/no-multi-comp
   constructor (props) {
     super(props)
     this.state = {
@@ -37,11 +37,11 @@ class DeviceEditModal extends React.Component {
     const {updateDeviceError} = this.props
     if (!updateDeviceError) return null
     return (
-            <div className="alert alert-danger" role="alert">
-                <span className="glyphicon glyphicon-exclamation-sign" aria-hidden="true" />
-                <span className="sr-only">Error:</span>
-                {updateDeviceError}
-            </div>
+      <div className="alert alert-danger" role="alert">
+        <span className="glyphicon glyphicon-exclamation-sign" aria-hidden="true" />
+        <span className="sr-only">Error:</span>
+        {updateDeviceError}
+      </div>
     )
   }
 
@@ -72,7 +72,7 @@ class DeviceEditModal extends React.Component {
 
     return (
       <Modal show onHide={this.onHide.bind(this)}
-             aria-labelledby="ModalHeader" className="bootstrap-dialog type-primary">
+        aria-labelledby="ModalHeader" className="bootstrap-dialog type-primary">
         <div className="modal-header">
           <h4 className="modal-title bootstrap-dialog-title">
             Device
@@ -85,18 +85,15 @@ class DeviceEditModal extends React.Component {
 
           <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
 
-            <Field label="Name:" name="name" component={Input} type="text"
-                   defaultValue={device ? device.name : ''}/>
+            <Field label="Name:" name="name" component={Input} type="text" defaultValue={device ? device.name : ''}/>
 
-            <Field label="LAN IP:" name="lanIP" component={Input} type="text"
-                   defaultValue={device ? device.lanIP : ''}/>
+            <Field label="LAN IP:" name="lanIP" component={Input} type="text" defaultValue={device ? device.lanIP : ''}/>
 
             {this.renderError()}
 
             <div className="text-right p-none">
               <button action="submit" className="btn btn-primary btn-sm margin-sm-right">Save</button>
-              <a href="javascript:;" className="btn btn-default btn-sm"
-                 onClick={this.onClickClose.bind(this)}>Close</a>
+              <a href="javascript:;" className="btn btn-default btn-sm" onClick={this.onClickClose.bind(this)}>Close</a>
             </div>
           </form>
 

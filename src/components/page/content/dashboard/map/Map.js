@@ -43,7 +43,8 @@ class Map extends React.Component {
       mapHeight: 520,
 
       deviceWizardConfig: {},
-      deviceWizardVisible: false
+      deviceWizardVisible: false,
+      cmap: null
     }
 
         // /////////////////////////////////////////////
@@ -179,7 +180,7 @@ class Map extends React.Component {
     if (e.key === 'Escape') {
       if (this.state.editable) {
         this.onClickEdit()
-        this.refs.toolbar.hideDeviceMenu()
+        this.toolbar.hideDeviceMenu()
       }
     }
   }
@@ -304,14 +305,14 @@ class Map extends React.Component {
     // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   onMapObjectSelected (cmap, obj) {
-    this.refs.toolbar.setState({
+    this.setState({
       cmap: cmap,
       selectedObj: obj
     })
   }
 
   onMapSelectionCleared () {
-    this.refs.toolbar.setState({
+    this.setState({
       selectedObj: null
     })
   }
@@ -612,7 +613,7 @@ class Map extends React.Component {
     let cmap = this.getCanvasMap()
     cmap.changeStrokeColor(color)
 
-    this.refs.toolbar.setState({cmap})
+    this.setState({cmap})
   }
 
   onChangeLineType (type, imgUrl, deviceTypeId) {
@@ -627,7 +628,7 @@ class Map extends React.Component {
     let cmap = this.getCanvasMap()
     cmap.setZooming(!cmap.zooming)
 
-    this.refs.toolbar.setState({cmap})
+    this.setState({cmap})
   }
 
   onClickZoomIn () {
@@ -879,7 +880,7 @@ class Map extends React.Component {
             {...events}
             {...this.state}
             selectedItem={selectedItem}
-            ref="toolbar"
+            ref={(toolbar) => { this.toolbar = toolbar }}
           />
 
           <div className="panel-body p-none"

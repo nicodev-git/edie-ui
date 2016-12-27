@@ -21,10 +21,12 @@ export default class IconUploader extends React.Component {
 
     if (config.name && values[config.name] !== undefined) {
       let defaultValue = values[config.name]
-      this.state.currentIcon = {
-        filename: defaultValue,
-        url: defaultValue.startsWith('/') ? defaultValue : (`/externalpictures?name=${defaultValue}`)
-      }
+      this.setState({
+        currentIcon: {
+          filename: defaultValue,
+          url: defaultValue.startsWith('/') ? defaultValue : (`/externalpictures?name=${defaultValue}`)
+        }
+      })
     }
   }
 
@@ -183,9 +185,9 @@ export default class IconUploader extends React.Component {
           Change
         </a>
         <InputField type="hidden"
-                    value={this.state.currentIcon.filename}
-                    name={config.name}
-                    ref="field"/>
+          value={this.state.currentIcon.filename}
+          name={config.name}
+          ref="field"/>
       </div>
     )
 

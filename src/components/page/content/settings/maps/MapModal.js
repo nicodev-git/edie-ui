@@ -24,7 +24,7 @@ const renderInput = field => (
     </div>
 )
 
-class MapModal extends React.Component {
+class MapModal extends React.Component { // eslint-disable-line react/no-multi-comp
   constructor (props) {
     super(props)
     this.state = {
@@ -100,7 +100,7 @@ class MapModal extends React.Component {
             <div className="text-right p-none">
               <Button className="btn-primary" type="submit">Save</Button>
               <Button className="margin-sm-left"
-                      onClick={this.onClickClose.bind(this)}>Cancel</Button>
+                onClick={this.onClickClose.bind(this)}>Cancel</Button>
             </div>
           </form>
         </div>

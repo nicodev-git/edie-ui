@@ -113,21 +113,21 @@ class MainRules extends React.Component {
     )
   }
 
-  render2 () {
-    return (
-            <InfiniteTable
-              id="rule1"
-              url={this.state.url}
-              params={this.state.params}
-              cells={this.cells}
-              ref="table"
-              rowMetadata={{'key': 'idrulesNew'}}
-              bodyHeight={this.props.containerHeight}
-              selectable
-              onRowDblClick={this.onRowDblClick.bind(this)}
-            />
-    )
-  }
+  // render2 () {
+  //   return (
+  //           <InfiniteTable
+  //             id="rule1"
+  //             url={this.state.url}
+  //             params={this.state.params}
+  //             cells={this.cells}
+  //             ref="table"
+  //             rowMetadata={{'key': 'idrulesNew'}}
+  //             bodyHeight={this.props.containerHeight}
+  //             selectable
+  //             onRowDblClick={this.onRowDblClick.bind(this)}
+  //           />
+  //   )
+  // }
 
   onRowDblClick (sel) {
     this.onClickEditRule()

@@ -4,7 +4,7 @@ import { findIndex } from 'lodash'
 import { connect } from 'react-redux'
 
 import InfiniteTable from '../../../../shared/InfiniteTable'
-import countries from 'country-data/data/countries.json'
+import countries from 'country-data/data/countries'
 
 import { fetchAttackers } from '../../../../../actions'
 
@@ -132,15 +132,14 @@ class AttackersModal extends React.Component {
   render () {
     return (
       <Modal show={this.state.open} onHide={this.onHide.bind(this)}
-             aria-labelledby="ModalHeader" className="bootstrap-dialog type-primary modal-md">
+        aria-labelledby="ModalHeader" className="bootstrap-dialog type-primary modal-md">
 
         <div className="modal-header">
           <h4 className="modal-title bootstrap-dialog-title">
             Attackers Today
           </h4>
           <div className="bootstrap-dialog-close-button">
-            <button className="close"
-                    onClick={this.onClickClose.bind(this)}>×</button>
+            <button className="close" onClick={this.onClickClose.bind(this)}>×</button>
           </div>
         </div>
 

@@ -11,7 +11,7 @@ const renderInput = field =>   // Define stateless component to render input and
           placeholder={field.label}/>
     </div>
 
-class Signin extends Component {
+class Signin extends Component { // eslint-disable-line react/no-multi-comp
 
   handleFormSubmit ({ email, password }) {
     this.props.signUser({email, password})

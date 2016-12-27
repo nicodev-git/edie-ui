@@ -115,10 +115,11 @@ class IconSelectModal extends React.Component {
     const {currentIcon} = this.state
 
     return (
-      <Modal show={this.state.open}
-             onHide={this.onHide.bind(this)}
-             aria-labelledby="ModalHeader"
-             className="bootstrap-dialog type-primary">
+      <Modal
+        show={this.state.open}
+        onHide={this.onHide.bind(this)}
+        aria-labelledby="ModalHeader"
+        className="bootstrap-dialog type-primary">
         <div className="modal-header">
           <h4 className="modal-title bootstrap-dialog-title">
             Change Image
@@ -128,9 +129,10 @@ class IconSelectModal extends React.Component {
 
           <div className="dropdown-image">
             {this.state.icons.map(item => (
-              <div key={item.url}
-                   className={currentIcon.url === item.url ? 'active' : ''}
-                   onClick={this.onClickItem.bind(this, item)}>
+              <div
+                key={item.url}
+                className={currentIcon.url === item.url ? 'active' : ''}
+                onClick={this.onClickItem.bind(this, item)}>
                 <img src={item.url}/>
               </div>
             ))}
@@ -158,9 +160,9 @@ class IconSelectModal extends React.Component {
             </a>
 
             <a href="javascript:;" className="btn btn-default btn-sm"
-               onClick={this.onClickClose.bind(this)}>Cancel</a>
+              onClick={this.onClickClose.bind(this)}>Cancel</a>
             <a href="javascript:;" className="btn btn-primary btn-sm margin-sm-left"
-               onClick={this.onClickSave.bind(this)}>OK</a>
+              onClick={this.onClickSave.bind(this)}>OK</a>
           </div>
         </div>
       </Modal>

@@ -23,10 +23,10 @@ class MainIncidentPanel extends React.Component {
 
   renderTable () {
     return (
-            <IncidentTable ref="table"
-              incidents={this.props.incidents}
-              fixIncident={this.props.fixIncident}
-              ackIncident={this.props.ackIncident}/>
+      <IncidentTable ref="table"
+        incidents={this.props.incidents}
+        fixIncident={this.props.fixIncident}
+        ackIncident={this.props.ackIncident}/>
     )
   }
 
@@ -59,7 +59,7 @@ class MainIncidentPanel extends React.Component {
 
     return (
       <div className="incidents-row margin-sm-top flex-vertical flex-1"
-           style={{minHeight: '600px'}}>
+        style={{minHeight: '600px'}}>
         <Panel className="margin-sm-bottom flex-vertical flex-1">
           <PanelHeader title="Incidents">
             <PanelOptions>
@@ -67,7 +67,7 @@ class MainIncidentPanel extends React.Component {
                 <i className="fa fa-search" />
               </a>
               <a href="javascript:;" className="margin-sm-left"
-                 onClick={this.onClickOpenModal.bind(this)}>
+                onClick={this.onClickOpenModal.bind(this)}>
                 <i className="fa fa-external-link" /></a>
             </PanelOptions>
           </PanelHeader>

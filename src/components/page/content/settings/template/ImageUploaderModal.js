@@ -127,9 +127,9 @@ class ImageUploaderModal extends React.Component {
             </a>
 
             <a href="javascript:;" className="btn btn-default btn-sm"
-               onClick={this.onClickClose.bind(this)}>Cancel</a>
+              onClick={this.onClickClose.bind(this)}>Cancel</a>
             <a href="javascript:;" className="btn btn-primary btn-sm margin-sm-left"
-               onClick={this.onClickSave.bind(this)}>OK</a>
+              onClick={this.onClickSave.bind(this)}>OK</a>
           </div>
         </div>
       </Modal>

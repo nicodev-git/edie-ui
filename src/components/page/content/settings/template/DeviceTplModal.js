@@ -23,7 +23,7 @@ const Input = ({ input, label, type, meta: { touched, error } }) => (
     </fieldset>
 )
 
-class DeviceTplModal extends React.Component {
+class DeviceTplModal extends React.Component { // eslint-disable-line react/no-multi-comp
   constructor (props) {
     super(props)
     this.state = {

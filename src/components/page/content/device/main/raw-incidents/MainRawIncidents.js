@@ -91,7 +91,7 @@ class MainRawIncidents extends React.Component {
       })
     }
 
-    return <span style={{ fontSize: '11px' }} dangerouslySetInnerHTML={{ __html: data }}/>
+    return <span style={{ fontSize: '11px' }} dangerouslySetInnerHTML={{ __html: data }}/> // eslint-disable-line react/no-danger
   }
 
   renderTable () {
@@ -109,20 +109,20 @@ class MainRawIncidents extends React.Component {
     )
   }
 
-  render2 () {
-    return (
-            <InfiniteTable
-              url={this.state.url}
-              params={this.state.params}
-              cells={this.state.cells}
-              ref="table"
-              rowMetadata={{'key': 'id'}}
-              bodyHeight={this.props.containerHeight}
-              selectable
-              onRowDblClick={this.onRowDblClick.bind(this)}
-            />
-    )
-  }
+  // render2 () {
+  //   return (
+  //           <InfiniteTable
+  //             url={this.state.url}
+  //             params={this.state.params}
+  //             cells={this.state.cells}
+  //             ref="table"
+  //             rowMetadata={{'key': 'id'}}
+  //             bodyHeight={this.props.containerHeight}
+  //             selectable
+  //             onRowDblClick={this.onRowDblClick.bind(this)}
+  //           />
+  //   )
+  // }
 
   getTable () {
     return this.refs.table.refs.wrappedInstance

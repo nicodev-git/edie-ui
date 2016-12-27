@@ -19,7 +19,7 @@ const renderInput = field => (
     </div>
 )
 
-class CredentialModal extends React.Component {
+class CredentialModal extends React.Component { // eslint-disable-line react/no-multi-comp
   constructor (props) {
     super(props)
     this.state = {
@@ -58,7 +58,7 @@ class CredentialModal extends React.Component {
 
     return (
       <Modal show={this.state.open} onHide={this.onHide.bind(this)}
-             aria-labelledby="ModalHeader" className="bootstrap-dialog type-primary">
+        aria-labelledby="ModalHeader" className="bootstrap-dialog type-primary">
 
         <div className="modal-header">
           <h4 className="modal-title bootstrap-dialog-title">
@@ -66,7 +66,7 @@ class CredentialModal extends React.Component {
           </h4>
           <div className="bootstrap-dialog-close-button">
             <button className="close"
-                    onClick={this.onClickClose.bind(this)}>×</button>
+              onClick={this.onClickClose.bind(this)}>×</button>
           </div>
         </div>
 
@@ -81,7 +81,7 @@ class CredentialModal extends React.Component {
             <div className="text-right">
               <Button className="btn-primary btn-sm" type="submit">Save</Button>
               <Button className="btn-sm margin-sm-left"
-                      onClick={this.onClickClose.bind(this)}>Cancel</Button>
+                onClick={this.onClickClose.bind(this)}>Cancel</Button>
             </div>
           </form>
         </div>

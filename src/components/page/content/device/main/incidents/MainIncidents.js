@@ -74,7 +74,7 @@ class MainIncidents extends React.Component {
       'cssClassName': 'text-center width-80',
       'customHeaderComponent': this.renderColHeader.bind(this),
       'customComponent': (props) => {
-        return <span dangerouslySetInnerHTML={{__html: getSeverityIcon(props.data)}}/>
+        return <span dangerouslySetInnerHTML={{__html: getSeverityIcon(props.data)}}/> // eslint-disable-line react/no-danger
       }
     }, {
       'displayName': 'Date/Time',
@@ -99,7 +99,7 @@ class MainIncidents extends React.Component {
           str += `<br/><b>Reason:</b> ${props.rowData.lastcomment}`
         }
 
-        return <span dangerouslySetInnerHTML={{ __html: str }} />
+        return <span dangerouslySetInnerHTML={{ __html: str }} /> // eslint-disable-line react/no-danger
       }
     }, {
       'displayName': 'Actions',

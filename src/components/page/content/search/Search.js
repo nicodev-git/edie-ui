@@ -1,10 +1,10 @@
 import React from 'react'
-import {
-    ButtonGroup
+// import {
+//    ButtonGroup
 //    Button,
 //    Tabs,
 //    Tab
-} from 'react-bootstrap'
+// } from 'react-bootstrap'
 import {withRouter} from 'react-router'
 
 class Search extends React.Component {
@@ -20,26 +20,26 @@ class Search extends React.Component {
     }
   }
 
-  render2 () {
-    return (
-      <TabPage>
-        <TabPageHeader title="Search">
-          <div style={{margin: '0 auto', position: 'relative', textAlign: 'center'}}>
-            <div className="pull-left">
-              <div className="form-inline" />
-            </div>
-            <div className="pull-right">
-              <ButtonGroup />
-            </div>
-          </div>
-        </TabPageHeader>
-
-        <TabPageBody>
-          <div style={{backgroundColor: 'white'}} className="padding-sm" />
-        </TabPageBody>
-      </TabPage>
-    )
-  }
+  // render2 () { // Never used
+  //   return (
+  //     <TabPage>
+  //       <TabPageHeader title="Search">
+  //         <div style={{margin: '0 auto', position: 'relative', textAlign: 'center'}}>
+  //           <div className="pull-left">
+  //             <div className="form-inline" />
+  //           </div>
+  //           <div className="pull-right">
+  //             <ButtonGroup />
+  //           </div>
+  //         </div>
+  //       </TabPageHeader>
+  //
+  //       <TabPageBody>
+  //         <div style={{backgroundColor: 'white'}} className="padding-sm" />
+  //       </TabPageBody>
+  //     </TabPage>
+  //   )
+  // }
 
   render () {
     return this.props.children

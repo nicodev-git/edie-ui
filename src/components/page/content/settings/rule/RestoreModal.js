@@ -80,10 +80,8 @@ class RestoreModal extends React.Component {
           </div>
 
           <div className="text-right p-none">
-            <Button className="btn-primary"
-                    onClick={this.onClickSave.bind(this)}>Restore</Button>
-            <Button className="margin-sm-left"
-                    onClick={this.onClickClose.bind(this)}>Cancel</Button>
+            <Button className="btn-primary" onClick={this.onClickSave.bind(this)}>Restore</Button>
+            <Button className="margin-sm-left" onClick={this.onClickClose.bind(this)}>Cancel</Button>
           </div>
         </div>
       </Modal>

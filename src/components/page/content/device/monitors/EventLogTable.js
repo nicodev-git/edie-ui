@@ -40,31 +40,31 @@ class EventLogTable extends React.Component {
     this.props.fetchDeviceEventLog()
   }
 
+  // render2 () {
+  //   return (
+  //     <InfiniteTable
+  //       url={this.state.url}
+  //       params={this.state.params}
+  //       cells={this.state.columns}
+  //       ref="table"
+  //       rowMetadata={{'key': 'id'}}
+  //       selectable
+  //     />
+  //   )
+  // }
+
   render () {
     return (
-            <ResponsiveInfiniteTable
-              cells={this.state.columns}
-              ref="table"
-              rowMetadata={{'key': 'id'}}
-              bodyHeight={this.props.containerHeight}
-              selectable
+      <ResponsiveInfiniteTable
+        cells={this.state.columns}
+        ref="table"
+        rowMetadata={{'key': 'id'}}
+        bodyHeight={this.props.containerHeight}
+        selectable
 
-              useExternal={false}
-              data={this.props.eventLogs}
-            />
-    )
-  }
-
-  render2 () {
-    return (
-            <InfiniteTable
-              url={this.state.url}
-              params={this.state.params}
-              cells={this.state.columns}
-              ref="table"
-              rowMetadata={{'key': 'id'}}
-              selectable
-            />
+        useExternal={false}
+        data={this.props.eventLogs}
+      />
     )
   }
 }

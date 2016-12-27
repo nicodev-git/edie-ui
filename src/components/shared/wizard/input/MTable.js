@@ -34,9 +34,9 @@ class MTable extends InputBase {
 
   render () {
     let config = this.props.config
-    let values = this.props.values
+    // let values = this.props.values // Never used
 
-    let width = util.calcWidth(config.width)
+    // let width = util.calcWidth(config.width) // Never used
         //
         // let defaultValue = config.value
         // if (config.name && values[config.name] !== undefined)

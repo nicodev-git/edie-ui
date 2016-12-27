@@ -75,7 +75,7 @@ class CommentsModal extends React.Component {
 
             <div className="col-md-2">
               <a href="javascript:;" className="btn btn-primary btn-sm"
-                 onClick={this.onClickAdd.bind(this)}>Add</a>
+                onClick={this.onClickAdd.bind(this)}>Add</a>
             </div>
           </div>
 
@@ -104,7 +104,7 @@ class CommentsModal extends React.Component {
 
           <div className="text-right p-none">
             <a href="javascript:;" className="btn btn-default btn-sm"
-               onClick={this.onClickClose.bind(this)}>Close</a>
+              onClick={this.onClickClose.bind(this)}>Close</a>
           </div>
 
         </div>

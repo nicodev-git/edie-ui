@@ -14,45 +14,6 @@ class Alert extends React.Component {
     }
   }
 
-  render () {
-    return (
-            <Modal show={this.state.open} onHide={this.onHide.bind(this)}
-              aria-labelledby="ModalHeader" className="bootstrap-dialog type-primary">
-
-                <div className="modal-header">
-                    <h4 className="modal-title bootstrap-dialog-title">
-                        {this.props.title}
-                    </h4>
-                </div>
-
-                <div className="modal-body bootstrap-dialog-message">
-
-                    <div className="row">
-                        <label className="col-md-12">{this.props.message}</label>
-
-                        <div className={`col-md-12 ${this.props.type === TYPE_PROMPT ? '' : 'hidden'}`}>
-                            <input type="text" className="form-control"
-                              defaultValue={this.props.default}
-                              onKeyUp={this.onKeyUp.bind(this)}
-                              ref="input"/>
-                        </div>
-                    </div>
-
-                    <div className="text-right margin-md-top">
-
-                        <a href="javascript:;" className="btn btn-primary btn-sm margin-sm-right"
-                          onClick={this.onClickSave.bind(this)}>OK</a>
-
-                        <a href="javascript:;"
-                          className={`btn btn-default btn-sm ${this.props.type === TYPE_ALERT ? 'hidden' : ''}`}
-                          onClick={this.onClickClose.bind(this)}>Cancel</a>
-
-                    </div>
-                </div>
-            </Modal>
-    )
-  }
-
     // ////////////////////////////
 
   componentDidMount () {
@@ -93,6 +54,45 @@ class Alert extends React.Component {
         this.props.onClose(this, btn === 'ok' ? result : null)
       } else if (type === TYPE_CONFIRM) { this.props.onClose(this, btn) }
     })
+  }
+
+  render () {
+    return (
+      <Modal show={this.state.open} onHide={this.onHide.bind(this)}
+        aria-labelledby="ModalHeader" className="bootstrap-dialog type-primary">
+
+        <div className="modal-header">
+          <h4 className="modal-title bootstrap-dialog-title">
+            {this.props.title}
+          </h4>
+        </div>
+
+        <div className="modal-body bootstrap-dialog-message">
+
+          <div className="row">
+            <label className="col-md-12">{this.props.message}</label>
+
+            <div className={`col-md-12 ${this.props.type === TYPE_PROMPT ? '' : 'hidden'}`}>
+              <input type="text" className="form-control"
+                defaultValue={this.props.default}
+                onKeyUp={this.onKeyUp.bind(this)}
+                ref="input"/>
+            </div>
+          </div>
+
+          <div className="text-right margin-md-top">
+
+            <a href="javascript:;" className="btn btn-primary btn-sm margin-sm-right"
+              onClick={this.onClickSave.bind(this)}>OK</a>
+
+            <a href="javascript:;"
+              className={`btn btn-default btn-sm ${this.props.type === TYPE_ALERT ? 'hidden' : ''}`}
+              onClick={this.onClickClose.bind(this)}>Cancel</a>
+
+          </div>
+        </div>
+      </Modal>
+    )
   }
 }
 

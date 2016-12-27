@@ -100,22 +100,18 @@ class CredentialModal extends React.Component {
             Credentials
           </h4>
           <div className="bootstrap-dialog-close-button">
-            <button className="close"
-                    onClick={this.onClickClose.bind(this)}>×</button>
+            <button className="close" onClick={this.onClickClose.bind(this)}>×</button>
           </div>
         </div>
 
         <div className="modal-body bootstrap-dialog-message p-none">
           <div className="panel panel-default panel-noborder">
             <div className="panel-heading">
-              <a href="javascript:;" className="margin-xs-left"
-                 onClick={this.onClickAdd.bind(this)}>
+              <a href="javascript:;" className="margin-xs-left" onClick={this.onClickAdd.bind(this)}>
                 <i className="fa fa-x fa-plus-square" title="Add" /></a>
-              <a href="javascript:;" className="margin-xs-left"
-                 onClick={this.onClickEdit.bind(this)}>
+              <a href="javascript:;" className="margin-xs-left" onClick={this.onClickEdit.bind(this)}>
                 <i className="fa fa-x fa-edit" title="Edit" /></a>
-              <a href="javascript:;" className="margin-xs-left"
-                 onClick={this.onClickRemove.bind(this)}>
+              <a href="javascript:;" className="margin-xs-left" onClick={this.onClickRemove.bind(this)}>
                 <i className="fa fa-x fa-trash-o" title="Remove" /></a>
             </div>
             <div className="panel-body">

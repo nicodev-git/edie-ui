@@ -52,32 +52,32 @@ class ApplicationTable extends React.Component {
 
   }
 
+  // render2 () {
+  //   return (
+  //           <InfiniteTable
+  //             url={this.state.url}
+  //             params={this.state.params}
+  //             cells={this.columns}
+  //             ref="table"
+  //             rowMetadata={{'key': 'id'}}
+  //             bodyHeight={this.props.containerHeight}
+  //             selectable
+  //           />
+  //   )
+  // }
+
   render () {
     return (
-            <ResponsiveInfiniteTable
-              cells={this.state.columns}
-              ref="table"
-              rowMetadata={{'key': 'id'}}
-              bodyHeight={this.props.containerHeight}
-              selectable
+      <ResponsiveInfiniteTable
+        cells={this.state.columns}
+        ref="table"
+        rowMetadata={{'key': 'id'}}
+        bodyHeight={this.props.containerHeight}
+        selectable
 
-              useExternal={false}
-              data={this.props.apps}
-            />
-    )
-  }
-
-  render2 () {
-    return (
-            <InfiniteTable
-              url={this.state.url}
-              params={this.state.params}
-              cells={this.columns}
-              ref="table"
-              rowMetadata={{'key': 'id'}}
-              bodyHeight={this.props.containerHeight}
-              selectable
-            />
+        useExternal={false}
+        data={this.props.apps}
+      />
     )
   }
 }

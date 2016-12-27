@@ -50,34 +50,34 @@ class Credentials extends React.Component {
 
   renderContent () {
     return (
-            <ResponsiveInfiniteTable
-              cells={this.cells}
-              ref="credentials"
-              rowMetadata={{'key': 'id'}}
-              selectable
-              onRowDblClick={this.onEditCred.bind(this)}
+      <ResponsiveInfiniteTable
+        cells={this.cells}
+        ref="credentials"
+        rowMetadata={{'key': 'id'}}
+        selectable
+        onRowDblClick={this.onEditCred.bind(this)}
 
-              useExternal={false}
-              data={this.props.credentials}
-            />
+        useExternal={false}
+        data={this.props.credentials}
+      />
     )
   }
 
-  renderContent2 () {
-    return (
-            <InfiniteTable
-              url="/devices/getCredentials"
-              params={{filter: this.state.filter}}
-              cells={this.cells}
-              rowMetadata={{'key': 'id'}}
-              selectable
-              bodyHeight={this.props.containerHeight}
-              ref="credentials"
-
-              onRowDblClick={this.onEditCred.bind(this)}
-            />
-    )
-  }
+  // renderContent2 () {
+  //   return (
+  //     <InfiniteTable
+  //       url="/devices/getCredentials"
+  //       params={{filter: this.state.filter}}
+  //       cells={this.cells}
+  //       rowMetadata={{'key': 'id'}}
+  //       selectable
+  //       bodyHeight={this.props.containerHeight}
+  //       ref="credentials"
+  //
+  //       onRowDblClick={this.onEditCred.bind(this)}
+  //     />
+  //   )
+  // }
 
   renderCredentialsModal () {
     if (!this.props.credentialsModalVisible) return null
@@ -143,10 +143,10 @@ class Credentials extends React.Component {
 
             <div className="inline">
               <input type="text" placeholder="Search" className="form-control"
-                     style={{width: '220px', paddingLeft: '35px'}}
-                     onKeyUp={this.onSearchKeyUp.bind(this)}/>
+                style={{width: '220px', paddingLeft: '35px'}}
+                onKeyUp={this.onSearchKeyUp.bind(this)}/>
               <a className="btn" href="javascript:;"
-                 style={{position: 'absolute', left: 0, top: 0}}>
+                style={{position: 'absolute', left: 0, top: 0}}>
                 <i className="fa fa-search" />
               </a>
             </div>

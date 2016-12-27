@@ -26,44 +26,6 @@ class UsersModal extends React.Component {
     this.props.fetchSettingUsers()
   }
 
-  render () {
-    return (
-            <Modal show onHide={this.onHide.bind(this)}
-              aria-labelledby="ModalHeader" className="bootstrap-dialog type-primary">
-
-                <div className="modal-header">
-                    <h4 className="modal-title bootstrap-dialog-title">
-                        Users
-                    </h4>
-                    <div className="bootstrap-dialog-close-button">
-                        <button className="close"
-                          onClick={this.onClickClose.bind(this)}>×</button>
-                    </div>
-                </div>
-
-                <div className="modal-body bootstrap-dialog-message" style={{minHeight: '400px'}}>
-                    <InfiniteTable
-                      cells={this.cells}
-                      ref="users"
-                      rowMetadata={{'key': 'id'}}
-                      bodyHeight={400}
-                      selectable
-
-                      useExternal={false}
-                      data={this.props.users}
-                    />
-
-                    <div className="text-right">
-                        <a href="javascript:;" className="btn btn-primary margin-sm"
-                          onClick={this.onClickOK.bind(this)}>OK</a>
-                        <a href="javascript:;" className="btn btn-default"
-                          onClick={this.onClickClose.bind(this)}>Cancel</a>
-                    </div>
-                </div>
-            </Modal>
-    )
-  }
-
   onHide () {
     this.onClickClose()
   }
@@ -82,6 +44,42 @@ class UsersModal extends React.Component {
 
   onClickClose () {
     this.closeModal()
+  }
+
+  render () {
+    return (
+      <Modal show onHide={this.onHide.bind(this)}
+        aria-labelledby="ModalHeader" className="bootstrap-dialog type-primary">
+
+        <div className="modal-header">
+          <h4 className="modal-title bootstrap-dialog-title">
+            Users
+          </h4>
+          <div className="bootstrap-dialog-close-button">
+            <button className="close"
+              onClick={this.onClickClose.bind(this)}>×</button>
+          </div>
+        </div>
+
+        <div className="modal-body bootstrap-dialog-message" style={{minHeight: '400px'}}>
+          <InfiniteTable
+            cells={this.cells}
+            ref="users"
+            rowMetadata={{'key': 'id'}}
+            bodyHeight={400}
+            selectable
+
+            useExternal={false}
+            data={this.props.users}
+          />
+
+          <div className="text-right">
+            <a href="javascript:;" className="btn btn-primary margin-sm" onClick={this.onClickOK.bind(this)}>OK</a>
+            <a href="javascript:;" className="btn btn-default" onClick={this.onClickClose.bind(this)}>Cancel</a>
+          </div>
+        </div>
+      </Modal>
+    )
   }
 
 }

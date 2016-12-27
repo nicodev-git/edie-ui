@@ -11,7 +11,15 @@ import {
 
 import TextInput from './input/TextInput'
 import Checkbox from './input/Checkbox'
+import Combo from './input/Combo'
+import RadioCombo from './input/RadioCombo'
+import PortList from './input/PortList'
+import Password from './input/Password'
 import MonitorTable from './input/MonitorTable'
+import AdvancedForm from './input/AdvancedForm'
+import MatchIgnore from './input/MatchIgnore'
+import GlobalIgnore from './input/GlobalIgnore'
+import MTable from './input/MTable'
 
 import {wizardConfig} from './WizardConfig'
 import {util} from './WizardUtil'
@@ -233,7 +241,7 @@ class DeviceWizard extends React.Component {
             <div className={`col-md-${util.calcWidth(config.width)}`}
               style={util.convertStyle(config.style)}>
                 <label className={`control-label ${config.cls || ''}`}
-                  dangerouslySetInnerHTML={{__html: config.html || config.text || ''}}
+                  dangerouslySetInnerHTML={{__html: config.html || config.text || ''}} // eslint-disable-line react/no-danger
                 />
             </div>
     )
@@ -337,10 +345,10 @@ class DeviceWizard extends React.Component {
 
     return (
       <Modal show
-             onHide={this.onHide.bind(this)}
-             aria-labelledby="ModalHeader"
-             className="bootstrap-dialog type-primary modal-device-wizard"
-             style={{width: '740px'}}>
+        onHide={this.onHide.bind(this)}
+        aria-labelledby="ModalHeader"
+        className="bootstrap-dialog type-primary modal-device-wizard"
+        style={{width: '740px'}}>
         <div className="modal-header">
           <h4 className="modal-title bootstrap-dialog-title">
             {this.props.title || this.state.currentDevice.title || ''}
@@ -360,17 +368,17 @@ class DeviceWizard extends React.Component {
             <div className="text-right mb-none">
 
               <a href="javascript:;"
-                 className="btn btn-default btn-sm"
-                 onClick={this.onClickClose.bind(this)}>Cancel</a>
+                className="btn btn-default btn-sm"
+                onClick={this.onClickClose.bind(this)}>Cancel</a>
 
               <a href="javascript:;"
-                 className={`btn btn-default btn-sm margin-sm-left ${cssPrevious}`}
-                 onClick={this.onClickPrevious.bind(this)}>Previous</a>
+                className={`btn btn-default btn-sm margin-sm-left ${cssPrevious}`}
+                onClick={this.onClickPrevious.bind(this)}>Previous</a>
 
               {
                 current < steps
                   ? <a href="javascript:;" className="btn btn-primary btn-sm margin-sm-left"
-                     onClick={this.onClickNext.bind(this)}>Next</a>
+                    onClick={this.onClickNext.bind(this)}>Next</a>
                   : <button action="submit" className="btn btn-primary btn-sm margin-sm-right">
                       Finish
                     </button>

@@ -53,7 +53,7 @@ export default class PortList extends InputBase {
 
     let extra = []
     config.extra.forEach(item => {
-      let itemConfig = $.extend({}, item, {useColumn: true})
+      let itemConfig = $.extend({}, item, {useColumn: true}) // eslint-disable-line no-undef
       extra.push(this.props.buildInput(itemConfig, values))
     })
 

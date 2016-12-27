@@ -139,68 +139,68 @@ class Websocket extends React.Component {
         <div className="form-inline margin-md-bottom">
           <label className="width-120">Open Incidents:</label>
           <input type="text" className="form-control input-sm margin-md-right"
-                 defaultValue="1"
-                 ref="openIncident"/>
+            defaultValue="1"
+            ref="openIncident"/>
 
           <a href="javascript:;" className="btn btn-primary btn-sm"
-             onClick={this.onClickUpdateOpenIncident.bind(this)}>Update</a>
+            onClick={this.onClickUpdateOpenIncident.bind(this)}>Update</a>
         </div>
         <div className="form-inline margin-md-bottom">
           <label className="width-120">Today Incidents:</label>
           <input type="text" className="form-control input-sm margin-md-right"
-                 defaultValue="1"
-                 ref="todayIncident"/>
+            defaultValue="1"
+            ref="todayIncident"/>
 
           <a href="javascript:;" className="btn btn-primary btn-sm"
-             onClick={this.onClickUpdateTodayIncident.bind(this)}>Update</a>
+            onClick={this.onClickUpdateTodayIncident.bind(this)}>Update</a>
         </div>
         <div className="form-inline margin-md-bottom">
           <label className="width-120">Attackers Today:</label>
           <input type="text" className="form-control input-sm margin-md-right"
-                 ref="attackerToday" defaultValue="1" />
+            ref="attackerToday" defaultValue="1" />
 
           <a href="javascript:;" className="btn btn-primary btn-sm"
-             onClick={this.onClickUpdateAttackerToday.bind(this)}>Update</a>
+            onClick={this.onClickUpdateAttackerToday.bind(this)}>Update</a>
         </div>
         <div className="form-inline margin-md-bottom">
           <label className="width-120">Month Incidents:</label>
           <input type="text" className="form-control input-sm margin-md-right"
-                 ref="monthIncident" defaultValue="1" />
+            ref="monthIncident" defaultValue="1" />
 
           <a href="javascript:;" className="btn btn-primary btn-sm"
-             onClick={this.onClickUpdateMonthIncident.bind(this)}>Update</a>
+            onClick={this.onClickUpdateMonthIncident.bind(this)}>Update</a>
         </div>
 
         <div className="form-inline margin-md-bottom">
           <label className="width-120">Incident News:</label>
           <input type="text" className="form-control input-sm margin-md-right"
-                 ref="news" style={{width: '300px'}} />
+            ref="news" style={{width: '300px'}} />
 
           <a href="javascript:;" className="btn btn-primary btn-sm"
-             onClick={this.onClickPushNews.bind(this)}>Push</a>
+            onClick={this.onClickPushNews.bind(this)}>Push</a>
         </div>
 
         <h4>Device</h4>
         <div className="form-inline margin-md-bottom">
           <label className="width-120">Device ID:</label>
           <input type="text" className="form-control input-sm margin-md-right"
-                 ref="deviceId" />
+            ref="deviceId" />
 
           <select className="form-control input-sm margin-md-right" ref="deviceStatus">
             <option value="up">Up</option>
             <option value="down">Down</option>
           </select>
           <a href="javascript:;" className="btn btn-primary btn-sm"
-             onClick={this.onClickUpdateDeviceStatus.bind(this)}>Update</a>
+            onClick={this.onClickUpdateDeviceStatus.bind(this)}>Update</a>
         </div>
         <div className="form-inline margin-md-bottom">
           <label className="width-120">Connection ID:</label>
           <input type="text" className="form-control input-sm margin-md-right"
-                 ref="connectorId" />
+            ref="connectorId" />
 
           <div className="inline valign-middle">
             <div className="input-group colorpicker-element"
-                 onClick={this.onClickColorPicker.bind(this)}>
+              onClick={this.onClickColorPicker.bind(this)}>
               <div className="input-group-addon">
                 <i className="color-preview" style={{background: this.state.lineColor}} />
               </div>
@@ -210,13 +210,13 @@ class Websocket extends React.Component {
               this.state.displayColorPicker ? <div style={popover}>
                 <div style={cover} onClick={this.onCloseColorPicker.bind(this)}/>
                 <ChromePicker color={this.state.lineColor}
-                              onChangeComplete={this.onChangeColorPicker.bind(this)}/>
+                  onChangeComplete={this.onChangeColorPicker.bind(this)}/>
               </div> : null
             }
           </div>
 
           <a href="javascript:;" className="btn btn-primary btn-sm margin-md-left"
-             onClick={this.onClickUpdateColor.bind(this)}>Update</a>
+            onClick={this.onClickUpdateColor.bind(this)}>Update</a>
         </div>
       </div>
     )

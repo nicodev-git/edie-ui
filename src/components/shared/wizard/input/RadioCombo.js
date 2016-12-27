@@ -20,66 +20,18 @@ export default class RadioCombo extends React.Component {
     if (defaultValue) {
       props.config.items.forEach((item, i) => {
         if (item.value === defaultValue) {
-          this.state.selected = i
+          this.setState({ selected: i })
           return false
         }
       })
     } else {
       props.config.items.forEach((item, i) => {
         if (item.checked) {
-          this.state.selected = i
+          this.setState({ selected: i })
           return false
         }
       })
     }
-  }
-
-  render () {
-    let config = this.props.config
-
-    let label, input, content
-
-    let width = util.calcWidth(config.width)
-
-    if (config.label !== null) {
-      label = this.props.buildLabel(config.label)
-      width = util.calcWidth(config.width) - util.calcWidth(config.label.width)
-    }
-
-    let options = config.items.map(item => {
-      return {
-        text: item.label,
-        value: item.value
-      }
-    })
-
-    let defaultValue = options[this.state.selected].value
-
-    input = (
-            <div className={`col-md-${util.calcWidth(width)}`}
-              style={util.convertStyle(config.style)}>
-
-                <SelectField className={`form-control ${config.cls || ''}`}
-                  name={config.name}
-                  validation={config.required ? 'required' : null}
-                  defaultValue={defaultValue}
-                  options={options}
-                  onChange={this.onSelectChange.bind(this)}
-                  ref="select"
-                />
-            </div>
-        )
-
-    content = this.buildContent()
-
-        // /////////////////////////////////////////////////////////////////////
-
-    return (
-            <div className="">
-                {util.wrapInputs(label, input, false)}
-                {content}
-            </div>
-    )
   }
 
     // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -109,6 +61,54 @@ export default class RadioCombo extends React.Component {
     this.setState({
       selected: index
     })
+  }
+
+  render () {
+    let config = this.props.config
+
+    let label, input, content
+
+    let width = util.calcWidth(config.width)
+
+    if (config.label !== null) {
+      label = this.props.buildLabel(config.label)
+      width = util.calcWidth(config.width) - util.calcWidth(config.label.width)
+    }
+
+    let options = config.items.map(item => {
+      return {
+        text: item.label,
+        value: item.value
+      }
+    })
+
+    let defaultValue = options[this.state.selected].value
+
+    input = (
+      <div className={`col-md-${util.calcWidth(width)}`}
+        style={util.convertStyle(config.style)}>
+
+        <SelectField className={`form-control ${config.cls || ''}`}
+          name={config.name}
+          validation={config.required ? 'required' : null}
+          defaultValue={defaultValue}
+          options={options}
+          onChange={this.onSelectChange.bind(this)}
+          ref="select"
+        />
+      </div>
+    )
+
+    content = this.buildContent()
+
+    // /////////////////////////////////////////////////////////////////////
+
+    return (
+      <div className="">
+        {util.wrapInputs(label, input, false)}
+        {content}
+      </div>
+    )
   }
 }
 

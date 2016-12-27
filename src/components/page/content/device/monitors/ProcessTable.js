@@ -52,42 +52,42 @@ class ProcessTable extends React.Component {
     }]
   }
 
-  render () {
-    return (
-            <ResponsiveInfiniteTable
-              cells={this.columns}
-              ref="table"
-              rowMetadata={{'key': 'id'}}
-              selectable
-
-              onRowDblClick={this.onRowDblClick.bind(this)}
-
-              useExternal={false}
-              data={[]}
-            />
-    )
-  }
-
-  render2 () {
-    return (
-            <InfiniteTable
-              url={this.state.url}
-              params={this.state.params}
-              cells={this.state.columns}
-              ref="table"
-              rowMetadata={{'key': 'id'}}
-              bodyHeight={this.props.containerHeight}
-              selectable
-              onRowDblClick={this.onRowDblClick.bind(this)}
-            />
-    )
-  }
+  // render2 () {
+  //   return (
+  //     <InfiniteTable
+  //       url={this.state.url}
+  //       params={this.state.params}
+  //       cells={this.state.columns}
+  //       ref="table"
+  //       rowMetadata={{'key': 'id'}}
+  //       bodyHeight={this.props.containerHeight}
+  //       selectable
+  //       onRowDblClick={this.onRowDblClick.bind(this)}
+  //     />
+  //   )
+  // }
 
   onRowDblClick () {
     const selected = this.refs.table.refs.wrappedInstance.getSelected()
     appendComponent(
-            <ProcessModal process={selected} onClose={removeComponent}/>
-        )
+      <ProcessModal process={selected} onClose={removeComponent}/>
+    )
+  }
+
+  render () {
+    return (
+      <ResponsiveInfiniteTable
+        cells={this.columns}
+        ref="table"
+        rowMetadata={{'key': 'id'}}
+        selectable
+
+        onRowDblClick={this.onRowDblClick.bind(this)}
+
+        useExternal={false}
+        data={[]}
+      />
+    )
   }
 }
 

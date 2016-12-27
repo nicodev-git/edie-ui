@@ -22,135 +22,133 @@ class Agents extends React.Component {
     super(props)
     this.state = {
       install: 'all',
-      tabIndex: 1
+      tabIndex: 1,
+      cellAgents: [{
+        'displayName': 'Name',
+        'columnName': 'name'
+      }, {
+        'displayName': 'Map',
+        'columnName': 'mapName'
+      }, {
+        'displayName': 'OS',
+        'columnName': 'osname'
+      }, {
+        'displayName': 'Agent',
+        'columnName': 'agentLastSeen',
+        'customComponent': (props) => {
+          let val = props.data
+          let installed = false
+          if (val) {
+            let diff = new Date().getTime() - val
+            installed = diff <= 3600 * 1000
+          }
+
+          if (installed) return <span>Installed</span>
+          return <span>Not Installed</span>
+        }
+      }, {
+        'displayName': 'Version',
+        'columnName': 'agentVersion',
+        'customComponent': (props) => {
+          let val = props.data
+          let installed = false
+
+          if (props.rowData.agentLastSeen) {
+            let diff = new Date().getTime() - props.rowData.agentLastSeen
+            installed = diff <= 3600 * 1000
+          }
+
+          return <span>{installed ? val : ''}</span>
+        }
+      }, {
+        'displayName': 'Last Seen',
+        'columnName': 'agentExist',
+        'customComponent': (props) => {
+          let val = props.rowData.agentLastSeen
+          if (!val) return <span />
+          return <TimeAgo date={val}/>
+        }
+      }, {
+        'displayName': 'Action',
+        'columnName': 'agentUUID',
+        'customComponent': (props) => {
+          const row = props.rowData
+          return (
+            <div>
+              <a href="javascript:;" onClick={this.showAgentConfigModal.bind(this, row)}>
+                <i className="fa fa-edit fa-x"/></a>
+              <a href="javascript:;" className="margin-md-left" onClick={this.downloadAgentConfig.bind(this, row)}>
+                <i className="fa fa-download fa-x"/></a>
+            </div>
+          )
+        }
+      }],
+
+      cellCollectors: [{
+        'displayName': 'Name',
+        'columnName': 'name'
+      }, {
+        'displayName': 'OS',
+        'columnName': 'hostname', // osname
+        'customComponent': (props) => {
+          return <span />
+        }
+      }, {
+        'displayName': 'Agent',
+        'columnName': 'proxyHost', // lastSeen
+        'customComponent': (props) => {
+          return <span />
+          // let val = props.data
+          // let installed = false;
+          // if (val) {
+          //     let diff = new Date().getTime() - val;
+          //     installed = diff / (3600 * 1000.0) <= 1;
+          // }
+          //
+          // if (installed) return <span>Installed</span>
+          // return <span>Not Installed</span>
+        }
+      }, {
+        'displayName': 'Version',
+        'columnName': 'version',
+        'customComponent': (props) => {
+          let val = props.data
+          let installed = false
+
+          if (props.rowData.lastSeen) {
+            let diff = new Date().getTime() - props.rowData.lastSeen
+            installed = diff <= 3600 * 1000
+          }
+
+          return <span>{installed ? val : ''}</span>
+        }
+      }, {
+        'displayName': 'Last Seen',
+        'columnName': 'type',
+        'customComponent': (props) => {
+          let val = props.rowData.lastSeen
+          if (!val) return <span />
+          return <TimeAgo date={val}/>
+        }
+      }],
+
+      cellLog: [{
+        'displayName': 'Severity',
+        'columnName': 'severity'
+      }, {
+        'displayName': 'Time',
+        'columnName': 'mydatetime',
+        'customComponent': (props) => {
+          return <span>{moment(new Date(props.data)).format('YYYY-MM-DD HH:mm:ss')}</span>
+        }
+      }, {
+        'displayName': 'Category',
+        'columnName': 'category'
+      }, {
+        'displayName': 'Message',
+        'columnName': 'message'
+      }]
     }
-
-    this.state.cellAgents = [{
-      'displayName': 'Name',
-      'columnName': 'name'
-    }, {
-      'displayName': 'Map',
-      'columnName': 'mapName'
-    }, {
-      'displayName': 'OS',
-      'columnName': 'osname'
-    }, {
-      'displayName': 'Agent',
-      'columnName': 'agentLastSeen',
-      'customComponent': (props) => {
-        let val = props.data
-        let installed = false
-        if (val) {
-          let diff = new Date().getTime() - val
-          installed = diff <= 3600 * 1000
-        }
-
-        if (installed) return <span>Installed</span>
-        return <span>Not Installed</span>
-      }
-    }, {
-      'displayName': 'Version',
-      'columnName': 'agentVersion',
-      'customComponent': (props) => {
-        let val = props.data
-        let installed = false
-
-        if (props.rowData.agentLastSeen) {
-          let diff = new Date().getTime() - props.rowData.agentLastSeen
-          installed = diff <= 3600 * 1000
-        }
-
-        return <span>{installed ? val : ''}</span>
-      }
-    }, {
-      'displayName': 'Last Seen',
-      'columnName': 'agentExist',
-      'customComponent': (props) => {
-        let val = props.rowData.agentLastSeen
-        if (!val) return <span />
-        return <TimeAgo date={val} />
-      }
-    }, {
-      'displayName': 'Action',
-      'columnName': 'agentUUID',
-      'customComponent': (props) => {
-        const row = props.rowData
-        return (
-                    <div>
-                        <a href="javascript:;" onClick={this.showAgentConfigModal.bind(this, row)}>
-                            <i className="fa fa-edit fa-x" /></a>
-                        <a href="javascript:;" className="margin-md-left"
-                          onClick={this.downloadAgentConfig.bind(this, row)}>
-                            <i className="fa fa-download fa-x" /></a>
-                    </div>
-        )
-      }
-    }]
-
-    this.state.cellCollectors = [{
-      'displayName': 'Name',
-      'columnName': 'name'
-    }, {
-      'displayName': 'OS',
-      'columnName': 'hostname', // osname
-      'customComponent': (props) => {
-        return <span />
-      }
-    }, {
-      'displayName': 'Agent',
-      'columnName': 'proxyHost', // lastSeen
-      'customComponent': (props) => {
-        return <span />
-                // let val = props.data
-                // let installed = false;
-                // if (val) {
-                //     let diff = new Date().getTime() - val;
-                //     installed = diff / (3600 * 1000.0) <= 1;
-                // }
-                //
-                // if (installed) return <span>Installed</span>
-                // return <span>Not Installed</span>
-      }
-    }, {
-      'displayName': 'Version',
-      'columnName': 'version',
-      'customComponent': (props) => {
-        let val = props.data
-        let installed = false
-
-        if (props.rowData.lastSeen) {
-          let diff = new Date().getTime() - props.rowData.lastSeen
-          installed = diff <= 3600 * 1000
-        }
-
-        return <span>{installed ? val : ''}</span>
-      }
-    }, {
-      'displayName': 'Last Seen',
-      'columnName': 'type',
-      'customComponent': (props) => {
-        let val = props.rowData.lastSeen
-        if (!val) return <span />
-        return <TimeAgo date={val} />
-      }
-    }]
-
-    this.state.cellLog = [{
-      'displayName': 'Severity',
-      'columnName': 'severity'
-    }, {
-      'displayName': 'Time',
-      'columnName': 'mydatetime',
-      'customComponent': (props) => {
-        return <span>{moment(new Date(props.data)).format('YYYY-MM-DD HH:mm:ss')}</span>
-      }
-    }, {
-      'displayName': 'Category',
-      'columnName': 'category'
-    }, {
-      'displayName': 'Message',
-      'columnName': 'message'
-    }]
   }
 
   render2 () {
@@ -246,15 +244,15 @@ class Agents extends React.Component {
 
       if (!config) config = defaultConfig
 
-      appendComponent( // eslint-disable-line no-undef
-        <AgentConfigModal
-          agent={data}
-          config={config}
-          onClose={(modal) => {
-            removeComponent(modal) // eslint-disable-line no-undef
-            this.refs.agents.refresh()
-          }}/>
-      )
+      // appendComponent( // AgentConfigModal is not created
+      //   <AgentConfigModal
+      //     agent={data}
+      //     config={config}
+      //     onClose={(modal) => {
+      //       removeComponent(modal) // eslint-disable-line no-undef
+      //       this.refs.agents.refresh()
+      //     }}/>
+      // )
     })
   }
 

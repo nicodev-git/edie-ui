@@ -56,40 +56,6 @@ class Identities extends React.Component {
     this.props.fetchIdentities()
   }
 
-  render () {
-    return (
-            <TabPage>
-                <TabPageHeader title="Settings">
-                    <div className="text-center margin-md-top">
-                        <div className="pull-right">
-                            <ButtonGroup>
-
-                                <Button onClick={this.onAddIdentity.bind(this)}>Add</Button>
-                                <Button onClick={this.onEditIdentity.bind(this)}>Edit</Button>
-                                <Button onClick={this.onRemoveIdentity.bind(this)}>Remove</Button>
-                                <Button onClick={this.onClickSegments.bind(this)}>Segments</Button>
-
-                            </ButtonGroup>
-                        </div>
-
-                        <div className="inline">
-                            <input type="text" placeholder="Search" className="form-control"
-                              style={{width: '220px', paddingLeft: '35px'}}/>
-                            <a className="btn" href="javascript:;" style={{position: 'absolute', left: 0, top: 0}}>
-                                <i className="fa fa-search" />
-                            </a>
-                        </div>
-                    </div>
-                </TabPageHeader>
-
-                <TabPageBody tabs={SettingTabs} tab={5}>
-                    {this.renderContent()}
-                    {this.renderIdentityModal()}
-                </TabPageBody>
-            </TabPage>
-    )
-  }
-
   renderContent () {
     return (
             <ResponsiveInfiniteTable
@@ -105,20 +71,20 @@ class Identities extends React.Component {
     )
   }
 
-  renderContent2 () {
-    return (
-            <JDataTable
-              url="/admin/getIdentities"
-              className="table-hover"
-              columns={this.cells}
-              height={`${this.props.containerHeight}px`}
-              length={1000}
-              ref="identities"
-
-              onRowDblClick={this.onEditIdentity.bind(this)}
-            />
-    )
-  }
+  // renderContent2 () {
+  //   return (
+  //     <JDataTable
+  //       url="/admin/getIdentities"
+  //       className="table-hover"
+  //       columns={this.cells}
+  //       height={`${this.props.containerHeight}px`}
+  //       length={1000}
+  //       ref="identities"
+  //
+  //       onRowDblClick={this.onEditIdentity.bind(this)}
+  //     />
+  //   )
+  // }
 
   renderIdentityModal () {
     if (!this.props.identityModalVisible) return null
@@ -168,6 +134,40 @@ class Identities extends React.Component {
     appendComponent(
             <SegmentListModal onClose={removeComponent}/>
         )
+  }
+
+  render () {
+    return (
+      <TabPage>
+        <TabPageHeader title="Settings">
+          <div className="text-center margin-md-top">
+            <div className="pull-right">
+              <ButtonGroup>
+
+                <Button onClick={this.onAddIdentity.bind(this)}>Add</Button>
+                <Button onClick={this.onEditIdentity.bind(this)}>Edit</Button>
+                <Button onClick={this.onRemoveIdentity.bind(this)}>Remove</Button>
+                <Button onClick={this.onClickSegments.bind(this)}>Segments</Button>
+
+              </ButtonGroup>
+            </div>
+
+            <div className="inline">
+              <input type="text" placeholder="Search" className="form-control"
+                style={{width: '220px', paddingLeft: '35px'}}/>
+              <a className="btn" href="javascript:;" style={{position: 'absolute', left: 0, top: 0}}>
+                <i className="fa fa-search" />
+              </a>
+            </div>
+          </div>
+        </TabPageHeader>
+
+        <TabPageBody tabs={SettingTabs} tab={5}>
+          {this.renderContent()}
+          {this.renderIdentityModal()}
+        </TabPageBody>
+      </TabPage>
+    )
   }
 }
 

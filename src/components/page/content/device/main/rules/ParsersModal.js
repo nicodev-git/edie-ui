@@ -65,7 +65,7 @@ export default class ParsersModal extends React.Component {
   render () {
     return (
       <Modal show={this.state.open} onHide={this.onHide.bind(this)}
-             aria-labelledby="ModalHeader" className="bootstrap-dialog type-primary">
+        aria-labelledby="ModalHeader" className="bootstrap-dialog type-primary">
 
         <div className="modal-header">
           <h4 className="modal-title bootstrap-dialog-title">
@@ -87,8 +87,8 @@ export default class ParsersModal extends React.Component {
             {
               this.state.data.map((item, i) =>
                 <tr key={i}
-                    className={this.state.selectedIndex === i ? 'selected' : ''}
-                    onClick={() => { this.setState({selectedIndex: i}) }}>
+                  className={this.state.selectedIndex === i ? 'selected' : ''}
+                  onClick={() => { this.setState({selectedIndex: i}) }}>
                   <td>{item}</td>
                 </tr>
               )

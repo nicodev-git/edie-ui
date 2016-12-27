@@ -28,41 +28,6 @@ class MonitorHistoryModal extends React.Component {
     }]
   }
 
-  render () {
-    return (
-            <Modal show={this.state.open} onHide={this.onHide.bind(this)}
-              aria-labelledby="ModalHeader" className="bootstrap-dialog type-primary">
-
-                <div className="modal-header">
-                    <h4 className="modal-title bootstrap-dialog-title">
-                        Monitor History
-                    </h4>
-                    <div className="bootstrap-dialog-close-button">
-                        <button className="close" onClick={this.onClickClose.bind(this)}>×</button>
-                    </div>
-                </div>
-
-                <div className="modal-body bootstrap-dialog-message">
-                    <div className="form-inline">
-                        <label>Search:</label>
-                        <input className="form-control input-sm" ref="search" onKeyUp={this.onSearchKeyUp.bind(this)}/>
-                    </div>
-                    <InfiniteTable
-                      url="/incidentstable/getIncidentsForMonitor?severity=High&severity=Medium"
-                      params={{
-                        id: this.props.device.id,
-                        searchValue: this.state.search
-                      }}
-                      cells={this.cells}
-                      ref="table"
-                      rowMetadata={{'key': 'id'}}
-                      bodyHeight={400}
-                    />
-                </div>
-            </Modal>
-    )
-  }
-
   onHide () {
     this.onClickClose()
   }
@@ -79,6 +44,41 @@ class MonitorHistoryModal extends React.Component {
     this.setState({
       search: e.target.value
     })
+  }
+
+  render () {
+    return (
+      <Modal show={this.state.open} onHide={this.onHide.bind(this)}
+        aria-labelledby="ModalHeader" className="bootstrap-dialog type-primary">
+
+        <div className="modal-header">
+          <h4 className="modal-title bootstrap-dialog-title">
+            Monitor History
+          </h4>
+          <div className="bootstrap-dialog-close-button">
+            <button className="close" onClick={this.onClickClose.bind(this)}>×</button>
+          </div>
+        </div>
+
+        <div className="modal-body bootstrap-dialog-message">
+          <div className="form-inline">
+            <label>Search:</label>
+            <input className="form-control input-sm" ref="search" onKeyUp={this.onSearchKeyUp.bind(this)}/>
+          </div>
+          <InfiniteTable
+            url="/incidentstable/getIncidentsForMonitor?severity=High&severity=Medium"
+            params={{
+              id: this.props.device.id,
+              searchValue: this.state.search
+            }}
+            cells={this.cells}
+            ref="table"
+            rowMetadata={{'key': 'id'}}
+            bodyHeight={400}
+          />
+        </div>
+      </Modal>
+    )
   }
 }
 

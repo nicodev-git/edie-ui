@@ -18,7 +18,7 @@ const renderInput = field => (
     </div>
 )
 
-class IdentityModal extends React.Component {
+class IdentityModal extends React.Component { // eslint-disable-line react/no-multi-comp
   constructor (props) {
     super(props)
     this.state = {
@@ -69,7 +69,7 @@ class IdentityModal extends React.Component {
           </h4>
           <div className="bootstrap-dialog-close-button">
             <button className="close"
-                    onClick={this.onClickClose.bind(this)}>×</button>
+              onClick={this.onClickClose.bind(this)}>×</button>
           </div>
         </div>
 
@@ -84,7 +84,7 @@ class IdentityModal extends React.Component {
             <div className="text-center">
               <Button className="btn-primary btn-sm" type="submit">Save</Button>
               <Button className="btn-sm margin-sm-left"
-                      onClick={this.onClickClose.bind(this)}>Cancel</Button>
+                onClick={this.onClickClose.bind(this)}>Cancel</Button>
             </div>
           </form>
         </div>

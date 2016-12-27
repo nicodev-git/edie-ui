@@ -65,31 +65,6 @@ export default class DateRangePicker extends React.Component {
 
   }
 
-  render () {
-        // dateRangePicker.daterangepicker(, function(start, end, label) {
-        //     table && table.fnDraw();
-        // });
-        //
-        // dateRangePicker.change(function(){
-        //     $(this).attr('size', $(this).val().length || 1);
-        // });
-        // dateRangePicker.prev('i').click(function(){
-        //     dateRangePicker.click();
-        // });
-        // dateRangePicker.val("Last 7 Days").change();
-
-    return (
-            <ReactDateRangePicker {...this.state.config}
-              style={{display: 'inline-block'}}
-              className={this.props.className}
-              onApply={this.onApply.bind(this)}>
-
-                <a href="javascript:;">{this.state.label}{this.props.children}</a>
-
-            </ReactDateRangePicker>
-    )
-  }
-
   onApply (e, dp) {
         // console.log(dp)
 
@@ -99,11 +74,12 @@ export default class DateRangePicker extends React.Component {
                  dp.endDate.format('DD/MM/YYYY')}`
     }
 
-    this.state.config.startDate = dp.startDate
-    this.state.config.endDate = dp.endDate
     this.setState({
       label: label,
-      config: this.state.config
+      config: {
+        startDate: dp.startDate,
+        endDate: dp.endDate
+      }
     }, () => {
       this.props.onClickRange && this.props.onClickRange()
     })
@@ -115,6 +91,31 @@ export default class DateRangePicker extends React.Component {
 
   getEndDate () {
     return this.state.config.endDate
+  }
+
+  render () {
+    // dateRangePicker.daterangepicker(, function(start, end, label) {
+    //     table && table.fnDraw();
+    // });
+    //
+    // dateRangePicker.change(function(){
+    //     $(this).attr('size', $(this).val().length || 1);
+    // });
+    // dateRangePicker.prev('i').click(function(){
+    //     dateRangePicker.click();
+    // });
+    // dateRangePicker.val("Last 7 Days").change();
+
+    return (
+      <ReactDateRangePicker {...this.state.config}
+        style={{display: 'inline-block'}}
+        className={this.props.className}
+        onApply={this.onApply.bind(this)}>
+
+        <a href="javascript:;">{this.state.label}{this.props.children}</a>
+
+      </ReactDateRangePicker>
+    )
   }
 }
 

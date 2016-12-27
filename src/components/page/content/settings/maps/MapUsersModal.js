@@ -7,7 +7,7 @@ import InfiniteTable from '../../../../shared/InfiniteTable'
 import UsersModal from './UsersModal'
 import { closeMapUsersModal, addMapUser, removeMapUser } from '../../../../../actions'
 
-class MapUsersModal extends React.Component {
+class MapUsersModal extends React.Component { // eslint-disable-line react/no-multi-comp
   constructor (props) {
     super(props)
     this.state = {
@@ -23,69 +23,34 @@ class MapUsersModal extends React.Component {
     }]
   }
 
-  render () {
-    return (
-            <Modal show onHide={this.onHide.bind(this)}
-              aria-labelledby="ModalHeader" className="bootstrap-dialog type-primary">
-
-                <div className="modal-header">
-                    <h4 className="modal-title bootstrap-dialog-title">
-                        Map Users
-                    </h4>
-                    <div className="bootstrap-dialog-close-button">
-                        <button className="close"
-                          onClick={this.onClickClose.bind(this)}>×</button>
-                    </div>
-                </div>
-
-                <div className="modal-body bootstrap-dialog-message p-none" style={{minHeight: '400px'}}>
-                    <div className="panel panel-default panel-noborder">
-                        <div className="panel-heading">
-                            <a href="javascript:;" onClick={this.onClickAdd.bind(this)}>
-                                <i className="fa fa-x fa-plus-square" title="Add" /></a>
-                            <a href="javascript:;" className="margin-sm-left" onClick={this.onClickDelete.bind(this)}>
-                                <i className="fa fa-x fa-trash-o" title="Remove" /></a>
-                        </div>
-
-                        <div className="panel-body">
-                            {this.renderTable()}
-                        </div>
-                    </div>
-
-                    {this.renderUsersModal()}
-                </div>
-            </Modal>
-    )
-  }
-
   renderTable () {
     return (
-            <InfiniteTable
-              cells={this.cells}
-              ref="mapusers"
-              rowMetadata={{'key': 'id'}}
-              bodyHeight={400}
-              selectable
+      <InfiniteTable
+        cells={this.cells}
+        ref="mapusers"
+        rowMetadata={{'key': 'id'}}
+        bodyHeight={400}
+        selectable
 
-              useExternal={false}
-              data={this.props.mapUsers}
-            />
+        useExternal={false}
+        data={this.props.mapUsers}
+      />
     )
   }
 
   renderTable2 () {
     return (
-            <InfiniteTable
-              url="/map/getMapUsersDT"
-              params={{
-                mapId: this.props.map.id
-              }}
-              cells={this.cells}
-              rowMetadata={{'key': 'id'}}
-              selectable
-              bodyHeight={400}
-              ref="mapusers"
-            />
+      <InfiniteTable
+        url="/map/getMapUsersDT"
+        params={{
+          mapId: this.props.map.id
+        }}
+        cells={this.cells}
+        rowMetadata={{'key': 'id'}}
+        selectable
+        bodyHeight={400}
+        ref="mapusers"
+      />
     )
   }
 
@@ -131,6 +96,41 @@ class MapUsersModal extends React.Component {
     if (!user) return showAlert('Please select user')
 
     this.props.removeMapUser(this.props.editMap, user)
+  }
+
+  render () {
+    return (
+      <Modal show onHide={this.onHide.bind(this)}
+        aria-labelledby="ModalHeader" className="bootstrap-dialog type-primary">
+
+        <div className="modal-header">
+          <h4 className="modal-title bootstrap-dialog-title">
+            Map Users
+          </h4>
+          <div className="bootstrap-dialog-close-button">
+            <button className="close"
+              onClick={this.onClickClose.bind(this)}>×</button>
+          </div>
+        </div>
+
+        <div className="modal-body bootstrap-dialog-message p-none" style={{minHeight: '400px'}}>
+          <div className="panel panel-default panel-noborder">
+            <div className="panel-heading">
+              <a href="javascript:;" onClick={this.onClickAdd.bind(this)}>
+                <i className="fa fa-x fa-plus-square" title="Add" /></a>
+              <a href="javascript:;" className="margin-sm-left" onClick={this.onClickDelete.bind(this)}>
+                <i className="fa fa-x fa-trash-o" title="Remove" /></a>
+            </div>
+
+            <div className="panel-body">
+              {this.renderTable()}
+            </div>
+          </div>
+
+          {this.renderUsersModal()}
+        </div>
+      </Modal>
+    )
   }
 }
 

@@ -44,28 +44,12 @@ class MapCanvas extends React.Component {
     this.currentMapLines = []
 
     this.updateDimensions = this.updateDimensions.bind(this)
+    this.initMap = this.initMap.bind(this)
   }
 
   componentDidMount () {
-    let cmap = $.extend(true, {}, mapObject) // eslint-disable-line no-undef
-
-    cmap.initialize({
-      canvas: this.state.canvasId,
-      editable: this.state.editable,
-      trafficVisible: this.props.showTraffic,
-      listener: this.props.listener || {}
-    })
-    cmap.needReset = true
-
-    this.setState({cmap})
-
-    this.respondCanvas(cmap)
-
+    this.initMap()
     window.addEventListener('resize', this.updateDimensions)
-  }
-
-  componentWillUnmount () {
-    window.removeEventListener('resize', this.updateDimensions)
   }
 
   componentWillUpdate (nextProps, nextState) {
@@ -106,8 +90,28 @@ class MapCanvas extends React.Component {
     }
   }
 
+  componentWillUnmount () {
+    window.removeEventListener('resize', this.updateDimensions)
+  }
+
   updateDimensions () {
     this.respondCanvas(this.state.cmap)
+  }
+
+  initMap () {
+    let cmap = $.extend(true, {}, mapObject) // eslint-disable-line no-undef
+
+    cmap.initialize({
+      canvas: this.state.canvasId,
+      editable: this.state.editable,
+      trafficVisible: this.props.showTraffic,
+      listener: this.props.listener || {}
+    })
+    cmap.needReset = true
+
+    this.setState({cmap})
+
+    this.respondCanvas(cmap)
   }
 
   getMapObject () {
@@ -116,32 +120,6 @@ class MapCanvas extends React.Component {
 
   getOffset () {
     return $(`#${this.state.containerId}`).offset() // eslint-disable-line no-undef
-  }
-
-  render () {
-    const {
-      // x, // Never used
-      // y, // Never used
-      // dropTargetMonitor, // Never used
-      connectDropTarget
-    } = this.props
-
-    const style = {backgroundColor: '#23272D', height: '100%', position: 'relative'}
-    return connectDropTarget( // eslint-disable-line no-undef
-            <div style={style}
-              onMouseMove={this.onMouseMove.bind(this)}
-              onClick={this.onClickContainer.bind(this)}
-              ref={this.onContainerRef.bind(this)}>
-                <div id={this.state.containerId}
-                  style={{backgroundColor: '#23272D', height: '100%', position: 'relative'}}>
-
-                    <canvas id={this.state.canvasId} />
-                </div>
-
-                {this.renderDrag()}
-                {this.renderDropItem()}
-            </div>
-        )
   }
 
   respondCanvas (cmap) {
@@ -520,7 +498,7 @@ class MapCanvas extends React.Component {
           graphdata: graphdata
         })
       } else if (charttype === 'line') {
-        var graphdata = [{
+        const graphdata = [{
           label: 'New1',
           values: [
                         [0, 10],
@@ -872,6 +850,32 @@ class MapCanvas extends React.Component {
 
   isNormalLine (type) {
     return !type || type === 'line' || type === 'Dashed Line'
+  }
+
+  render () {
+    const {
+      // x, // Never used
+      // y, // Never used
+      // dropTargetMonitor, // Never used
+      connectDropTarget
+    } = this.props
+
+    const style = {backgroundColor: '#23272D', height: '100%', position: 'relative'}
+    return connectDropTarget( // eslint-disable-line no-undef
+      <div style={style}
+        onMouseMove={this.onMouseMove.bind(this)}
+        onClick={this.onClickContainer.bind(this)}
+        ref={this.onContainerRef.bind(this)}>
+        <div id={this.state.containerId}
+          style={{backgroundColor: '#23272D', height: '100%', position: 'relative'}}>
+
+          <canvas id={this.state.canvasId} />
+        </div>
+
+        {this.renderDrag()}
+        {this.renderDropItem()}
+      </div>
+    )
   }
 }
 

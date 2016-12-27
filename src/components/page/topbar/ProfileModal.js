@@ -12,15 +12,15 @@ import { showAlert } from '../../shared/Alert'
 import { fetchUserInfo, updateUserProfile, closeProfileModal } from '../../../actions'
 
 const renderInput = field => (
-    <div className="row margin-md-bottom">
-        <label className="control-label col-md-3 text-right">{field.label}</label>
-        <div className="col-md-9">
-            <input {...field.input} type={field.type} className="form-control" disabled={field.disabled}/>
-        </div>
+  <div className="row margin-md-bottom">
+    <label className="control-label col-md-3 text-right">{field.label}</label>
+    <div className="col-md-9">
+      <input {...field.input} type={field.type} className="form-control" disabled={field.disabled}/>
     </div>
+  </div>
 )
 
-class ProfileModal extends React.Component {
+class ProfileModal extends React.Component { // eslint-disable-line react/no-multi-comp
   constructor (props) {
     super(props)
 
@@ -187,7 +187,7 @@ class ProfileModal extends React.Component {
 
     return (
       <Modal show onHide={this.onHide.bind(this)}
-             aria-labelledby="ModalHeader" className="bootstrap-dialog type-primary">
+        aria-labelledby="ModalHeader" className="bootstrap-dialog type-primary">
 
         <div className="modal-header">
           <h4 className="modal-title bootstrap-dialog-title">
@@ -195,7 +195,7 @@ class ProfileModal extends React.Component {
           </h4>
           <div className="bootstrap-dialog-close-button">
             <button className="close"
-                    onClick={this.onClickClose.bind(this)}>×</button>
+              onClick={this.onClickClose.bind(this)}>×</button>
           </div>
         </div>
 

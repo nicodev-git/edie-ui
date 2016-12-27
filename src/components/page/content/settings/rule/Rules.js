@@ -104,50 +104,50 @@ class Rules extends React.Component {
     )
   }
 
-  renderContent2 () {
-    const {tabIndex} = this.state
-    let table
-    if (tabIndex === 1) {
-      table = (
-                <InfiniteTable
-                  url="/rules/getLogicalName"
-                  params={{
-                    search: this.state.keyword,
-                    category: this.state.category
-                  }}
-                  cells={this.cellLogicals}
-                  rowMetadata={{'key': 'id'}}
-                  selectable
-                  bodyHeight={this.props.containerHeight}
-                  ref="logicalRules"
-
-                  onRowDblClick={this.onClickOpenLogical.bind(this)}
-                />
-            )
-    } else if (tabIndex === 2) {
-      table = (
-                <InfiniteTable
-                  url="/rules/getByLogicalRuleId"
-                  params={{
-                    search: this.state.keyword,
-                    logicalRuleId: this.state.logicalRuleId,
-                    devicetype: this.state.deviceType
-                  }}
-                  cells={this.cellPhysicals}
-                  rowMetadata={{'key': 'id'}}
-                  selectable
-                  bodyHeight={this.props.containerHeight}
-                  ref="physicalRules"
-                />
-            )
-    }
-
-    return (
-            <div>
-                {table}
-            </div>
-    )
-  }
+  // renderContent2 () {
+  //   const {tabIndex} = this.state
+  //   let table
+  //   if (tabIndex === 1) {
+  //     table = (
+  //       <InfiniteTable
+  //         url="/rules/getLogicalName"
+  //         params={{
+  //           search: this.state.keyword,
+  //           category: this.state.category
+  //         }}
+  //         cells={this.cellLogicals}
+  //         rowMetadata={{'key': 'id'}}
+  //         selectable
+  //         bodyHeight={this.props.containerHeight}
+  //         ref="logicalRules"
+  //
+  //         onRowDblClick={this.onClickOpenLogical.bind(this)}
+  //       />
+  //     )
+  //   } else if (tabIndex === 2) {
+  //     table = (
+  //         <InfiniteTable
+  //           url="/rules/getByLogicalRuleId"
+  //           params={{
+  //             search: this.state.keyword,
+  //             logicalRuleId: this.state.logicalRuleId,
+  //             devicetype: this.state.deviceType
+  //           }}
+  //           cells={this.cellPhysicals}
+  //           rowMetadata={{'key': 'id'}}
+  //           selectable
+  //           bodyHeight={this.props.containerHeight}
+  //           ref="physicalRules"
+  //         />
+  //     )
+  //   }
+  //
+  //   return (
+  //           <div>
+  //               {table}
+  //           </div>
+  //   )
+  // }
 
   renderWorkflowModal () {
     if (!this.props.workflowModalVisible) return null

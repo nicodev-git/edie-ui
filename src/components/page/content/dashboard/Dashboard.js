@@ -27,20 +27,20 @@ class Dashboard extends React.Component {
         // incidentSocket.close()
   }
 
-  render () {
-    const {hidden} = this.props
-    return (
-            <div className={`flex-vertical flex-1 ${hidden ? 'hidden' : ''}`}>
-                <MetricPanel />
-                <Map hidden={hidden}/>
-                <MainIncidentPanel hidden={hidden}/>
-            </div>
-    )
-  }
-
   onDashboardUpdate (msg) {
     console.log('Dashboard message received.')
     this.props.updateDashboard(msg.data)
+  }
+
+  render () {
+    const {hidden} = this.props
+    return (
+      <div className={`flex-vertical flex-1 ${hidden ? 'hidden' : ''}`}>
+        <MetricPanel />
+        <Map hidden={hidden}/>
+        <MainIncidentPanel hidden={hidden}/>
+      </div>
+    )
   }
 }
 Dashboard.defaultProps = {

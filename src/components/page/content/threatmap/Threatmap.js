@@ -193,7 +193,7 @@ class ThreatMap extends React.Component {
       )
     }
     CustomHandle.propTypes = {
-      value: React.PropTypes.any,
+      value: React.PropTypes.any, // eslint-disable-line react/forbid-prop-types
       offset: React.PropTypes.number
     }
 

@@ -23,7 +23,7 @@ const Input = ({ input, label, type, meta: { touched, error } }) => (
     </fieldset>
 )
 
-class MonitorTplModal extends React.Component {
+class MonitorTplModal extends React.Component { // eslint-disable-line react/no-multi-comp
   constructor (props) {
     super(props)
     this.state = { }
@@ -105,7 +105,7 @@ class MonitorTplModal extends React.Component {
             <div className="text-right p-none">
               <button action="submit" className="btn btn-primary btn-sm margin-sm-right">Save</button>
               <a href="javascript:;" className="btn btn-default btn-sm"
-                 onClick={this.onClickClose.bind(this)}>Close</a>
+                onClick={this.onClickClose.bind(this)}>Close</a>
             </div>
           </form>
 

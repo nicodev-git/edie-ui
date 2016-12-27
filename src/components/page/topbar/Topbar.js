@@ -3,7 +3,7 @@ import React from 'react'
 import NewsLine from './NewsLine'
 import ProfileModal from './ProfileModal'
 import { connect } from 'react-redux'
-import { appendComponent, removeComponent } from '../../../util/Component'
+// import { appendComponent, removeComponent } from '../../../util/Component' // Never used
 
 import { signOut, openProfileModal, closeProfileModal } from '../../../actions'
 
@@ -28,11 +28,11 @@ class Topbar extends React.Component {
   }
 
   onClickMessages () {
-    appendComponent(
-      <MessagesModal
-        onClose={removeComponent}
-      />
-    )
+    // appendComponent( // Is not defined
+    //   <MessagesModal
+    //     onClose={removeComponent}
+    //   />
+    // )
   }
 
   render () {
@@ -91,7 +91,7 @@ class Topbar extends React.Component {
               <li className="unread">
                 <a href="javascript:;" className="message">
                   <img className="message-image img-circle"
-                       src="/images/avatars/1.jpg"/>
+                    src="/images/avatars/1.jpg"/>
 
                   <div className="message-body">
                     <strong>Ernest Kerry</strong><br/> Hello, You there?<br/>
