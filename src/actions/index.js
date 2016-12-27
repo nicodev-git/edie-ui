@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { hashHistory } from 'react-router'
+import { browserHistory } from 'react-router'
 import { assign, concat } from 'lodash'
 import {
     AUTH_USER, AUTH_ERROR, INVALIDATE_USER,
@@ -192,7 +192,7 @@ export function signUser ({ email, password }) {
   //       // console.log('token:', response.data.token);
   //       window.localStorage.setItem('token', response.data.token)
   //
-  //       hashHistory.push('/')
+  //       browserHistory.push('/')
   //     })
   //     .catch(() => {
   //       dispatch({type: AUTH_ERROR, msg: 'Wrong credentials.'})
@@ -210,7 +210,7 @@ export function signUser ({ email, password }) {
 
           window.localStorage.setItem('token', JSON.parse(api.responseText).token)
 
-          hashHistory.push('/')
+          browserHistory.push('/')
         }
       }
     }
@@ -238,7 +238,7 @@ export function signup ({ email, password }) {
             .then(response => {
               dispatch({type: AUTH_USER})
               window.localStorage.setItem('token', response.data.token)
-              hashHistory.push('/feature')
+              browserHistory.push('/feature')
             })
             .catch(error => {
               dispatch({type: AUTH_ERROR, msg: error})
