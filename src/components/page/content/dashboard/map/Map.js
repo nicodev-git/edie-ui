@@ -14,10 +14,17 @@ import { wizardConfig } from '../../../../shared/wizard/WizardConfig'
 import { showConfirm } from '../../../../shared/Alert'
 
 import {
-    openDevice,
-    addMapDevice, deleteMapDevice, updateMapDevice,
-    addMapLine, deleteMapLine, updateMapLine
-} from '../../../../../actions'
+  openDevice
+} from '../../../../../actions/DeviceActions'
+
+import {
+  addMapDevice, 
+  deleteMapDevice, 
+  updateMapDevice,
+  addMapLine, 
+  deleteMapLine, 
+  updateMapLine
+} from '../../../../../actions/MapActions'
 
 class Map extends React.Component {
   constructor (props) {

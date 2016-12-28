@@ -22,9 +22,11 @@ import TabPageHeader from '../../../../shared/TabPageHeader'
 import {
   fetchSettingMaps,
   openSettingMapModal,
-  deleteSettingMap,
+  deleteSettingMap
+} from '../../../../../actions/SettingsActions'
+import {
   openMapUsersModal
-} from '../../../../../actions'
+} from '../../../../../actions/MapActions'
 
 class Maps extends React.Component {
   constructor (props) {

@@ -19,7 +19,7 @@ import { showAlert, showConfirm } from '../../../../shared/Alert'
 import IdentityModal from './IdentityModal'
 import SegmentListModal from './SegmentListModal'
 
-import { fetchIdentities, openIdentityModal, removeIdentity } from '../../../../../actions'
+import { fetchIdentities, openIdentityModal, removeIdentity } from '../../../../../actions/IdentityActions'
 
 class Identities extends React.Component {
   constructor (props) {

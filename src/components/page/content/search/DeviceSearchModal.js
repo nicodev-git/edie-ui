@@ -4,7 +4,7 @@ import Autocomplete from 'react-autocomplete'
 import {findIndex} from 'lodash'
 import { connect } from 'react-redux'
 
-import { searchIncidentDevices } from '../../../../actions'
+import { searchIncidentDevices } from '../../../../actions/IncidentActions'
 
 const styles = {
   item: {

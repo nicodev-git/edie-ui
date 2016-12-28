@@ -11,7 +11,7 @@ import {
 import { connect } from 'react-redux'
 import { reduxForm, Field, change } from 'redux-form'
 import axios from 'axios'
-import { closeSettingUserModal, addSettingUser, updateSettingUser } from '../../../../../actions'
+import { closeSettingUserModal, addSettingUser, updateSettingUser } from '../../../../../actions/SettingsActions'
 
 class UserModal extends React.Component {
   constructor (props) {

@@ -7,12 +7,16 @@ import TabPage from '../../../../shared/TabPage'
 import TabPageBody from '../../../../shared/TabPageBody'
 import TabPageHeader from '../../../../shared/TabPageHeader'
 
-import { fetchDeviceTemplates, fetchMonitorTemplates,
-    openDeviceTplModal,
-    deleteDeviceTemplate,
-    openMonitorTplModal,
-    deleteMonitorTemplate
-} from '../../../../../actions'
+import {
+  fetchDeviceTemplates,
+  deleteDeviceTemplate,
+  openDeviceTplModal
+} from '../../../../../actions/DeviceActions'
+import {
+  fetchMonitorTemplates,
+  openMonitorTplModal,
+  deleteMonitorTemplate
+} from '../../../../../actions/MonitorActions'
 
 import DeviceTplModal from './DeviceTplModal'
 import MonitorTplModal from './MonitorTplModal'

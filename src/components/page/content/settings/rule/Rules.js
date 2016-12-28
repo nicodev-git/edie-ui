@@ -18,7 +18,7 @@ import MoveModal from './MoveModal'
 import BackupModal from './BackupModal'
 import RestoreModal from './RestoreModal'
 import WorkflowModal from './WorkflowModal'
-import { fetchWorkflows, openWorkflowModal, removeWorkflow } from '../../../../../actions'
+import { fetchWorkflows, openWorkflowModal, removeWorkflow } from '../../../../../actions/WorkflowActions'
 
 class Rules extends React.Component {
   constructor (props) {

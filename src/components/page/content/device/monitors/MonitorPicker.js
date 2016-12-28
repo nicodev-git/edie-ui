@@ -2,7 +2,8 @@ import React from 'react'
 import Modal from 'react-bootstrap-modal'
 import { connect } from 'react-redux'
 
-import {closeDeviceMonitorPicker, fetchMonitorTemplates} from '../../../../../actions'
+import { closeDeviceMonitorPicker } from '../../../../../actions/DeviceActions'
+import { fetchMonitorTemplates } from '../../../../../actions/MonitorActions'
 
 class MonitorPicker extends React.Component {
   constructor (props) {

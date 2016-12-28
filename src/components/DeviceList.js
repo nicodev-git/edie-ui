@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {fetchDevices, openDeviceEditModal, deleteDevice} from '../actions'
+import {fetchDevices, openDeviceEditModal, deleteDevice} from '../actions/DeviceActions'
 
 import DeviceEditModal from './DeviceEditModal'
 

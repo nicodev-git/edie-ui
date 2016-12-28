@@ -2,7 +2,7 @@ import React from 'react'
 import Modal from 'react-bootstrap-modal'
 import {connect} from 'react-redux'
 
-import { importMap, closeMapImportModal } from '../../../../../actions'
+import { importMap, closeMapImportModal } from '../../../../../actions/MapActions'
 import { showAlert } from '../../../../shared/Alert'
 
 class MapImportModal extends React.Component {

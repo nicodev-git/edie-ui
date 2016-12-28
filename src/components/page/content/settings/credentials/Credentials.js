@@ -15,7 +15,11 @@ import TabPage from '../../../../shared/TabPage'
 import TabPageBody from '../../../../shared/TabPageBody'
 import TabPageHeader from '../../../../shared/TabPageHeader'
 
-import { fetchCredentials, openCredentialsModal, removeCredentials } from '../../../../../actions'
+import { 
+  fetchCredentials, 
+  openCredentialsModal, 
+  removeCredentials 
+} from '../../../../../actions/CredentialsActions'
 
 class Credentials extends React.Component {
   constructor (props) {

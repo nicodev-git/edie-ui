@@ -5,7 +5,8 @@ import {withRouter} from 'react-router'
 import {Panel, PanelHeader, PanelOptions, PanelBody} from '../../../../shared/Panel'
 import IncidentTable from './IncidentTable'
 
-import { fetchIncidents, fixIncident, ackIncident } from '../../../../../actions'
+import { fetchIncidents } from '../../../../../actions/DashboardActions'
+import { fixIncident, ackIncident } from '../../../../../actions/IncidentActions'
 
 class MainIncidentPanel extends React.Component {
   constructor (props) {

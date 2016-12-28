@@ -8,7 +8,12 @@ import { connect } from 'react-redux'
 import { assign } from 'lodash'
 import { showAlert } from '../../../../shared/Alert'
 
-import { fetchCredentials, addCredentials, updateCredentials, closeCredentialsModal } from '../../../../../actions'
+import {
+  fetchCredentials,
+  addCredentials,
+  updateCredentials,
+  closeCredentialsModal
+} from '../../../../../actions/CredentialsActions'
 
 const renderInput = field => (
     <div className="row margin-md-bottom">

@@ -3,7 +3,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 // import { findIndex } from 'lodash'
 
-import { fetchMaps, changeMap } from '../../../../../actions'
+import { fetchMaps, changeMap } from '../../../../../actions/MapActions'
 
 class MapSelect extends React.Component {
   constructor (props) {

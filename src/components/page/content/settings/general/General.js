@@ -12,7 +12,11 @@ import { assign } from 'lodash'
 // import TabPageBody from '../../../../shared/TabPageBody' // Never used
 // import TabPageHeader from '../../../../shared/TabPageHeader' // Never used
 
-import { fetchEnvVars, addEnvVar, updateEnvVar } from '../../../../../actions'
+import {
+  fetchEnvVars,
+  addEnvVar,
+  updateEnvVar
+} from '../../../../../actions/EnvActions'
 
 class General extends React.Component {
   constructor (props) {

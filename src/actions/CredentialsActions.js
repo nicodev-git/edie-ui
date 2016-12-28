@@ -6,7 +6,7 @@ import {
   UPDATE_CREDENTIALS,
   REMOVE_CREDENTIALS,
   OPEN_CREDENTIALS_MODAL,
-  CLOSE_CREDENTIALS_MODAL
+  CLOSE_CREDENTIALS_MODAL,
 } from './types'
 
 import { apiError } from './errors'

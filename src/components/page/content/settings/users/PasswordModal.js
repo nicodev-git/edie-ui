@@ -11,7 +11,7 @@ import { showAlert } from '../../../../shared/Alert'
 import {
     updateSettingUser,
     closeUserPasswordModal
-} from '../../../../../actions'
+} from '../../../../../actions/SettingsActions'
 
 const renderInput = field => (
     <div className="form-group col-md-12">

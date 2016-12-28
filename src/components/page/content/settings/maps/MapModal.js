@@ -13,7 +13,7 @@ import {
     addSettingMap,
     updateSettingMap,
     closeSettingMapModal
-} from '../../../../../actions'
+} from '../../../../../actions/SettingsActions'
 
 const renderInput = field => (
     <div className="row margin-md-bottom">

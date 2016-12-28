@@ -9,7 +9,7 @@ import { concat } from 'lodash'
 import DeviceImg from './DeviceImg'
 import {
     fetchDeviceTemplates
-} from '../../../../../actions'
+} from '../../../../../actions/DeviceActions'
 
 class DeviceMenu extends React.Component {
   constructor (props) {

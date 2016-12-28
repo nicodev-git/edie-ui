@@ -12,10 +12,12 @@ import { showAlert } from '../../../../shared/Alert'
 import MonitorPicker from './MonitorPicker'
 import MonitorHistoryModal from './MonitorHistoryModal'
 
-import {openDeviceMonitorPicker,
-    openDeviceMonitorWizard, closeDeviceMonitorWizard,
-    updateMapDevice
-} from '../../../../../actions'
+import {
+  openDeviceMonitorPicker,
+  openDeviceMonitorWizard,
+  closeDeviceMonitorWizard
+} from '../../../../../actions/DeviceActions'
+import { updateMapDevice } from '../../../../../actions/MapActions'
 
 class MonitorTable extends React.Component {
   constructor (props) {

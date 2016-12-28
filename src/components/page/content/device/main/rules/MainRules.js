@@ -24,7 +24,7 @@ import TabPage from '../../../../../shared/TabPage'
 import TabPageBody from '../../../../../shared/TabPageBody'
 import TabPageHeader from '../../../../../shared/TabPageHeader'
 
-import {fetchDeviceRules} from '../../../../../../actions'
+import {fetchDeviceRules} from '../../../../../../actions/DeviceActions'
 
 class MainRules extends React.Component {
   constructor (props) {

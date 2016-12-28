@@ -23,7 +23,11 @@ import {
     showIncidentDetail,
     showIncidentRaw
 } from '../../../shared/incident/Incident'
-import { searchIncidents, fixIncident, ackIncident } from '../../../../actions'
+import {
+  searchIncidents,
+  fixIncident,
+  ackIncident
+} from '../../../../actions/IncidentActions'
 
 class Incidents extends React.Component {
   constructor (props) {

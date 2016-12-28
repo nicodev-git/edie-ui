@@ -3,7 +3,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import {ResponsiveInfiniteTable} from '../../../../shared/InfiniteTable'
-import { fetchDeviceApps } from '../../../../../actions'
+import { fetchDeviceApps } from '../../../../../actions/DeviceActions'
 
 class ApplicationTable extends React.Component {
   constructor (props) {

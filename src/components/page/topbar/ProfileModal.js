@@ -9,7 +9,7 @@ import { assign } from 'lodash'
 import $ from 'jquery'
 
 import { showAlert } from '../../shared/Alert'
-import { fetchUserInfo, updateUserProfile, closeProfileModal } from '../../../actions'
+import { fetchUserInfo, updateUserProfile, closeProfileModal } from '../../../actions/AuthActions'
 
 const renderInput = field => (
   <div className="row margin-md-bottom">

@@ -3,7 +3,7 @@ import Modal from 'react-bootstrap-modal'
 import { reduxForm, Field } from 'redux-form'
 import {connect} from 'react-redux'
 
-import {closeDeviceEditModal, updateDevice, addDevice} from '../actions'
+import {closeDeviceEditModal, updateDevice, addDevice} from '../actions/DeviceActions'
 
 import { validate } from './DeviceValidation'
 

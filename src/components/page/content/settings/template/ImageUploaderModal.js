@@ -3,7 +3,7 @@ import Modal from 'react-bootstrap-modal'
 import { connect } from 'react-redux'
 import { concat } from 'lodash'
 
-import { closeTplImageModal, uploadImage, fetchImages } from '../../../../../actions'
+import { closeTplImageModal, uploadImage, fetchImages } from '../../../../../actions/ImageActions'
 
 class ImageUploaderModal extends React.Component {
   constructor (props) {

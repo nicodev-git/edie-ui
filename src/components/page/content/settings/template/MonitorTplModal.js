@@ -7,11 +7,13 @@ import {assign} from 'lodash'
 import { extImageBaseUrl } from '../../../../../shared/Global'
 
 import {
-    addMonitorTemplate,
-    updateMonitorTemplate,
-    closeMonitorTplModal,
-    openTplImageModal
-} from '../../../../../actions'
+  addMonitorTemplate,
+  updateMonitorTemplate,
+  closeMonitorTplModal
+} from '../../../../../actions/MonitorActions'
+import {
+  openTplImageModal
+} from '../../../../../actions/ImageActions'
 
 const Input = ({ input, label, type, meta: { touched, error } }) => (
     <fieldset className="form-group">

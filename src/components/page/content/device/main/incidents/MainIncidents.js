@@ -31,13 +31,15 @@ import TabPageBody from '../../../../../shared/TabPageBody'
 import TabPageHeader from '../../../../../shared/TabPageHeader'
 
 import {
-    fixIncident, ackIncident,
-    fetchDeviceIncidents, openAddDeviceIncident
-} from '../../../../../../actions'
+  fixIncident,
+  ackIncident,
+  fetchDeviceIncidents,
+  openAddDeviceIncident
+} from '../../../../../../actions/IncidentActions'
 
 import {
-    showIncidentDetail,
-    showIncidentRaw
+  showIncidentDetail,
+  showIncidentRaw
 } from '../../../../../shared/incident/Incident'
 
 class MainIncidents extends React.Component {
