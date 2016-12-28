@@ -6,6 +6,7 @@ import { connect } from 'react-redux'
 import InfiniteTable from '../../../../shared/InfiniteTable'
 import countries from 'country-data/data/countries'
 
+import { ROOT_URL } from '../../../../../actions/config'
 import { fetchAttackers } from '../../../../../actions'
 
 class AttackersModal extends React.Component {
@@ -145,7 +146,7 @@ class AttackersModal extends React.Component {
 
         <div className="modal-body bootstrap-dialog-message">
           <InfiniteTable
-            url="/bi/getAllAttackers"
+            url={`${ROOT_URL}/bi/getAllAttackers`}
             params={this.state.params}
             cells={this.cells}
             ref="table"

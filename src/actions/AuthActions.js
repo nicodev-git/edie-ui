@@ -59,11 +59,11 @@ export function signUser ({ email, password }) {
   }
 }
 
-const signUserSuccess = (dispatch) => {
+const signUserSuccess = (dispatch, response) => {
   dispatch({
     type: AUTH_USER
   })
-  window.localStorage.setItem('token', JSON.parse(response).token) // eslint-disable-line no-undef
+  window.localStorage.setItem('token', JSON.parse(response).token)
   browserHistory.push('/')
 }
 
