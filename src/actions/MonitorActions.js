@@ -6,10 +6,10 @@ import {
   UPDATE_MONITOR_TEMPLATE,
   DELETE_MONITOR_TEMPLATE,
   OPEN_MONITOR_TEMPLATE_MODAL,
-  CLOSE_MONITOR_TEMPLATE_MODAL,
-
-  API_ERROR
+  CLOSE_MONITOR_TEMPLATE_MODAL
 } from './types'
+
+import { apiError } from './errors'
 
 import { ROOT_URL } from './config'
 
@@ -17,14 +17,7 @@ export const fetchMonitorTemplates = () => {
   return (dispatch) => {
     axios.get(`${ROOT_URL}/monitortemplate`)
       .then(response => fetchMonitorTemplatesSuccess(dispatch, response))
-      .catch(error => fetchMonitorTemplatesFail(dispatch, error))
-  }
-
-  const fetchMonitorTemplatesFail = (dispatch, error) => {
-    dispatch({
-      type: API_ERROR, 
-      msg: error
-    })
+      .catch(error => apiError(dispatch, error))
   }
 
   const fetchMonitorTemplatesSuccess = (dispatch, response) => {
@@ -39,14 +32,7 @@ export const addMonitorTemplate = (props) => {
   return (dispatch) => {
     axios.post(`${ROOT_URL}/monitortemplate`, props)
       .then(response => addMonitorTemplateSuccess(dispatch, response))
-      .catch(error => addMonitorTemplateFail(dispatch, error))
-  }
-
-  const addMonitorTemplateFail = (dispatch, error) => {
-    dispatch({
-      type: API_ERROR,
-      msg: error
-    })
+      .catch(error => apiError(dispatch, error))
   }
 
   const addMonitorTemplateSuccess = (dispatch, response) => {
@@ -62,14 +48,7 @@ export const updateMonitorTemplate = (entity) => {
   return (dispatch) => {
     axios.put(entity._links.self.href, entity)
       .then(response => updateMonitorTemplateSuccess(dispatch, response))
-      .catch(error => updateMonitorTemplateFail(dispatch, error))
-  }
-
-  const updateMonitorTemplateFail = (dispatch, error) => {
-    dispatch({
-      type: API_ERROR,
-      msg: error
-    })
+      .catch(error => apiError(dispatch, error))
   }
 
   const updateMonitorTemplateSuccess = (dispatch, response) => {
@@ -85,14 +64,7 @@ export const deleteMonitorTemplate = (entity) => {
   return (dispatch) => {
     axios.delete(entity._links.self.href, entity)
       .then(() => deleteMonitorTemplateSuccess(dispatch, entity))
-      .catch(error => deleteMonitorTemplateFail(dispatch, error))
-  }
-
-  const deleteMonitorTemplateFail = (dispatch, error) => {
-    dispatch({
-      type: API_ERROR,
-      msg: error
-    })
+      .catch(error => apiError(dispatch, error))
   }
 
   const deleteMonitorTemplateSuccess = (dispatch, entity) => {

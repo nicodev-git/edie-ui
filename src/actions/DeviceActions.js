@@ -29,10 +29,10 @@ import {
   UPDATE_DEVICE_TEMPLATE,
   DELETE_DEVICE_TEMPLATE,
   OPEN_DEVICE_TEMPLATE_MODAL,
-  CLOSE_DEVICE_TEMPLATE_MODAL,
-
-  API_ERROR
+  CLOSE_DEVICE_TEMPLATE_MODAL
 } from './types'
+
+import { apiError } from './errors'
 
 import { ROOT_URL } from './config'
 
@@ -46,14 +46,7 @@ export const fetchDevices = () => {
     }
     axios.get(`${ROOT_URL}/device`, config)
       .then(response => fetchDevicesSuccess(dispatch, response))
-      .catch(error => fetchDevicesFail(dispatch, error))
-  }
-
-  const fetchDevicesFail = (dispatch, error) => {
-    dispatch({
-      type: API_ERROR,
-      msg: error
-    })
+      .catch(error => apiError(dispatch, error))
   }
 
   const fetchDevicesSuccess = (dispatch, response) => {
@@ -257,14 +250,7 @@ export const fetchDeviceTemplates = () => {
   return (dispatch) => {
     axios.get(`${ROOT_URL}/devicetemplate`)
       .then(response => fetchDeviceTemplatesSuccess(dispatch, response))
-      .catch(error => fetchDeviceTemplatesFail(dispatch, error))
-  }
-
-  const fetchDeviceTemplatesFail = (dispatch, error) => {
-    dispatch({
-      type: API_ERROR,
-      msg: error
-    })
+      .catch(error => apiError(dispatch, error))
   }
 
   const fetchDeviceTemplatesSuccess = (dispatch, response) => {
@@ -279,14 +265,7 @@ export const addDeviceTemplate = (props) => {
   return (dispatch) => {
     axios.post(`${ROOT_URL}/devicetemplate`, props)
       .then(response => addDeviceTemplateSuccess(dispatch, response))
-      .catch(error => addDeviceTemplateFail(dispatch, error))
-  }
-
-  const addDeviceTemplateFail = (dispatch, error) => {
-    dispatch({
-      type: API_ERROR,
-      msg: error
-    })
+      .catch(error => apiError(dispatch, error))
   }
 
   const addDeviceTemplateSuccess = (dispatch, response) => {
@@ -302,14 +281,7 @@ export const updateDeviceTemplate = (entity) => {
   return (dispatch) => {
     axios.put(entity._links.self.href, entity)
       .then(response => updateDeviceTemplateSuccess(dispatch, response))
-      .catch(error => updateDeviceTemplateFail(dispatch, error))
-  }
-
-  const updateDeviceTemplateFail = (dispatch, error) => {
-    dispatch({
-      type: API_ERROR,
-      msg: error
-    })
+      .catch(error => apiError(dispatch, error))
   }
 
   const updateDeviceTemplateSuccess = (dispatch, response) => {
@@ -325,14 +297,7 @@ export const deleteDeviceTemplate = (entity) => {
   return (dispatch) => {
     axios.delete(entity._links.self.href, entity)
       .then(() => deleteDeviceTemplateSuccess(dispatch, entity))
-      .catch(error => deleteDeviceTemplateFail(dispatch, error))
-  }
-
-  const deleteDeviceTemplateFail = (dispatch, error) => {
-    dispatch({
-      type: API_ERROR,
-      msg: error
-    })
+      .catch(error => apiError(dispatch, error))
   }
 
   const deleteDeviceTemplateSuccess = (dispatch, entity) => {

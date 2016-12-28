@@ -3,10 +3,10 @@ import { assign, concat } from 'lodash'
 import {
   FETCH_ENV_VARS,
   ADD_ENV_VAR,
-  UPDATE_ENV_VAR,
-
-  API_ERROR
+  UPDATE_ENV_VAR
 } from './types'
+
+import { apiError } from './errors'
 
 import { ROOT_URL } from './config'
 
@@ -14,14 +14,7 @@ export const fetchEnvVars = () => {
   return (dispatch) => {
     axios.get(`${ROOT_URL}/setting/search/envvars`)
       .then(response => fetchEnvVarsSuccess(dispatch, response))
-      .catch(error => fetchEnvVarsFail(dispatch, error))
-  }
-
-  const fetchEnvVarsFail = (dispatch, error) => {
-    dispatch({
-      type: API_ERROR,
-      msg: error
-    })
+      .catch(error => apiError(dispatch, error))
   }
 
   const fetchEnvVarsSuccess = (dispatch, response) => {
@@ -36,14 +29,7 @@ export const updateEnvVar = (entity) => {
   return (dispatch) => {
     axios.put(entity._links.self.href, entity)
       .then(response => updateEnvVarSuccess(dispatch, response))
-      .catch(error => updateEnvVarFail(dispatch, error))
-  }
-
-  const updateEnvVarFail = (dispatch, error) => {
-    dispatch({
-      type: API_ERROR,
-      msg: error
-    })
+      .catch(error => apiError(dispatch, error))
   }
 
   const updateEnvVarSuccess = (dispatch, response) => {
@@ -58,14 +44,7 @@ export const addEnvVar = (entity) => {
   return (dispatch) => {
     axios.post(`${ROOT_URL}/setting`, entity)
       .then(response => addEnvVarSuccess(dispatch, response))
-      .catch(error => addEnvVarFail(dispatch, error))
-  }
-
-  const addEnvVarFail = (dispatch, error) => {
-    dispatch({
-      type: API_ERROR, 
-      msg: error
-    })
+      .catch(error => apiError(dispatch, error))
   }
 
   const addEnvVarSuccess = (dispatch, response) => {

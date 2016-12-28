@@ -4,10 +4,10 @@ import {
   UPDATE_DASHBOARD,
 
   FETCH_DASHBOARD_INCIDENTS,
-  FETCH_DASHBOARD_BIGINCIDENTS,
-
-  API_ERROR
+  FETCH_DASHBOARD_BIGINCIDENTS
 } from './types'
+
+import { apiError } from './errors'
 
 import { ROOT_URL } from './config'
 
@@ -26,14 +26,7 @@ export const fetchIncidents = () => {
   return (dispatch) => {
     axios.get(`${ROOT_URL}/incident`, { params: { } })
       .then(response => fetchIncidentsSuccess(dispatch, response))
-      .catch(error => fetchIncidentsFail(dispatch, error))
-  }
-
-  const fetchIncidentsFail = (dispatch, error) => {
-    dispatch({
-      type: API_ERROR, 
-      msg: error
-    })
+      .catch(error => apiError(dispatch, error))
   }
 
   const fetchIncidentsSuccess = (dispatch, response) => {
@@ -48,14 +41,7 @@ export const fetchBigIncidents = (params) => {
   return (dispatch) => {
     axios.get(`${ROOT_URL}/incident/search/findBy?${encodeUrlParams(params)}`)
       .then(response => fetchBigIncidentsSuccess(dispatch, response))
-      .catch(error => fetchBigIncidentsFail(dispatch, error))
-  }
-
-  const fetchBigIncidentsFail = (dispatch, error) => {
-    dispatch({
-      type: API_ERROR, 
-      msg: error
-    })
+      .catch(error => apiError(dispatch, error))
   }
 
   const fetchBigIncidentsSuccess = (dispatch, response) => {

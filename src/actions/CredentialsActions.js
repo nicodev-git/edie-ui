@@ -6,10 +6,10 @@ import {
   UPDATE_CREDENTIALS,
   REMOVE_CREDENTIALS,
   OPEN_CREDENTIALS_MODAL,
-  CLOSE_CREDENTIALS_MODAL,
-
-  API_ERROR
+  CLOSE_CREDENTIALS_MODAL
 } from './types'
+
+import { apiError } from './errors'
 
 import { ROOT_URL } from './config'
 
@@ -17,14 +17,7 @@ export const fetchCredentials = () => {
   return (dispatch) => {
     axios.get(`${ROOT_URL}/credential`)
       .then(response => fetchCredentialsSuccess(dispatch, response))
-      .catch(error => fetchCredentialsFail(dispatch, error))
-  }
-
-  const fetchCredentialsFail = (dispatch, error) => {
-    dispatch({
-      type: API_ERROR, 
-      msg: error
-    })
+      .catch(error => apiError(dispatch, error))
   }
 
   const fetchCredentialsSuccess = (dispatch, response) => {
@@ -39,14 +32,7 @@ export const addCredentials = (props) => {
   return (dispatch) => {
     axios.post(`${ROOT_URL}/credential`, props)
       .then(response => addCredentialsSuccess(dispatch, response))
-      .catch(error => addCredentialsFail(dispatch, error))
-  }
-
-  const addCredentialsFail = (dispatch, error) => {
-    dispatch({
-      type: API_ERROR, 
-      msg: error
-    })
+      .catch(error => apiError(dispatch, error))
   }
 
   const addCredentialsSuccess = (dispatch, response) => {
@@ -62,14 +48,7 @@ export const updateCredentials = (entity) => {
   return (dispatch) => {
     axios.put(entity._links.self.href, entity)
       .then(response => updateCredentialsSuccess(dispatch, response))
-      .catch(error => updateCredentialsFail(dispatch, error))
-  }
-
-  const updateCredentialsFail = (dispatch, error) => {
-    dispatch({
-      type: API_ERROR, 
-      msg: error
-    })
+      .catch(error => apiError(dispatch, error))
   }
 
   const updateCredentialsSuccess = (dispatch, response) => {
@@ -85,14 +64,7 @@ export const removeCredentials = (entity) => {
   return (dispatch) => {
     axios.delete(entity._links.self.href)
       .then(() => removeCredentialsSuccess(dispatch, entity))
-      .catch(error => removeCredentialsFail(dispatch, error))
-  }
-
-  const removeCredentialsFail = (dispatch, error) => {
-    dispatch({
-      type: API_ERROR, 
-      msg: error
-    })
+      .catch(error => apiError(dispatch, error))
   }
 
   const removeCredentialsSuccess = (dispatch, entity) => {

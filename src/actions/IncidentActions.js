@@ -12,10 +12,10 @@ import {
   CLOSE_ADD_DEVICE_INCIDENT,
 
   SEARCH_INCIDENTS,
-  SEARCH_INCIDENT_DEVICES,
-
-  API_ERROR
+  SEARCH_INCIDENT_DEVICES
 } from './types'
+
+import { apiError } from './errors'
 
 import { ROOT_URL } from './config'
 
@@ -41,14 +41,7 @@ export const fetchDeviceIncidents = (params) => {
   return (dispatch) => {
     axios.get(`${ROOT_URL}/incident/search/findBy?${encodeUrlParams(params)}`)
       .then(response => fetchDeviceIncidentsSuccess(dispatch, response))
-      .catch(error => fetchDeviceIncidentsFail(dispatch, error))
-  }
-
-  const fetchDeviceIncidentsFail = (dispatch, error) => {
-    dispatch({
-      type: API_ERROR,
-      msg: error
-    })
+      .catch(error => apiError(dispatch, error))
   }
 
   const fetchDeviceIncidentsSuccess = (dispatch, response) => {
@@ -63,14 +56,7 @@ export const addDeviceIncident = (props) => {
   return (dispatch) => {
     axios.post(`${ROOT_URL}/incident`, props)
       .then(response => addDeviceIncidentSuccess(dispatch, response))
-      .catch(error => addDeviceIncidentFail(dispatch, error))
-  }
-
-  const addDeviceIncidentFail = (dispatch, error) => {
-    dispatch({
-      type: API_ERROR,
-      msg: error
-    })
+      .catch(error => apiError(dispatch, error))
   }
 
   const addDeviceIncidentSuccess = (dispatch, response) => {
@@ -86,14 +72,7 @@ export const updateDeviceIncident = (entity) => {
   return (dispatch) => {
     axios.put(entity._links.self.href, entity)
       .then(response => updateDeviceIncidentSuccess(dispatch, response))
-      .catch(error => updateDeviceIncidentFail(dispatch, error))
-  }
-
-  const updateDeviceIncidentFail = (dispatch, error) => {
-    dispatch({
-      type: API_ERROR,
-      msg: error
-    })
+      .catch(error => apiError(dispatch, error))
   }
 
   const updateDeviceIncidentSuccess = (dispatch, response) => {
@@ -139,14 +118,7 @@ export const searchIncidents = (params) => {
   return dispatch => {
     axios.get(`${ROOT_URL}/incident/search/findBy?${encodeUrlParams(params)}`)
       .then(response => searchIncidentsSuccess(dispatch, response))
-      .catch(error => searchIncidentsFail(dispatch, error))
-  }
-
-  const searchIncidentsFail = (dispatch, error) => {
-    dispatch({
-      type: API_ERROR,
-      msg: error
-    })
+      .catch(error => apiError(dispatch, error))
   }
 
   const searchIncidentsSuccess = (dispatch, response) => {
@@ -161,14 +133,7 @@ export const searchIncidentDevices = (params) => {
   return dispatch => {
     axios.get(`${ROOT_URL}/device/search/findByName?${encodeUrlParams(params)}`)
       .then(response => searchIncidentDevicesSuccess(dispatch, response))
-      .catch(error => searchIncidentDevicesFail(dispatch, error))
-  }
-
-  const searchIncidentDevicesFail = (dispatch, error) => {
-    dispatch({
-      type: API_ERROR, 
-      msg: error
-    })
+      .catch(error => apiError(dispatch, error))
   }
 
   const searchIncidentDevicesSuccess = (dispatch, response) => {

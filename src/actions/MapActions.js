@@ -24,10 +24,10 @@ import {
   UPDATE_MAP_LINE,
   DELETE_MAP_LINE,
 
-  FETCH_MAP_DEVICES_LINES,
-
-  API_ERROR
+  FETCH_MAP_DEVICES_LINES
 } from './types'
+
+import { apiError } from './errors'
 
 import { ROOT_URL } from './config'
 
@@ -35,14 +35,7 @@ export const fetchMaps = (initial) => {
   return (dispatch) => {
     axios.get(`${ROOT_URL}/map`)
       .then(response => fetchMapsSuccess(dispatch, response))
-      .catch(error => fetchMapsFail(dispatch, error))
-  }
-
-  const fetchMapsFail = (dispatch, error) => {
-    dispatch({
-      type: API_ERROR,
-      msg: error
-    })
+      .catch(error => apiError(dispatch, error))
   }
 
   const fetchMapsSuccess = (dispatch, response) => {
@@ -71,14 +64,7 @@ export const addMap = (props) => {
   return (dispatch) => {
     axios.post(`${ROOT_URL}/map`, props)
       .then(response => addMapSuccess(dispatch, response))
-      .catch(error => addMapFail(dispatch, error))
-  }
-
-  const addMapFail = (dispatch, error) => {
-    dispatch({
-      type: API_ERROR,
-      msg: error
-    })
+      .catch(error => apiError(dispatch, error))
   }
 
   const addMapSuccess = (dispatch, response) => {
@@ -93,14 +79,7 @@ export const updateMap = (entity) => {
   return (dispatch) => {
     axios.put(entity._links.self.href, entity)
       .then(response => updateMapSuccess(dispatch, response))
-      .catch(error => updateMapFail(dispatch, error))
-  }
-
-  const updateMapFail = (dispatch, error) => {
-    dispatch({
-      type: API_ERROR,
-      msg: error
-    })
+      .catch(error => apiError(dispatch, error))
   }
 
   const updateMapSuccess = (dispatch, response) => {
@@ -115,14 +94,7 @@ export const deleteMap = (entity) => {
   return (dispatch) => {
     axios.delete(entity._links.self.href)
       .then(() => deleteMapSuccess(dispatch, entity))
-      .catch(error => deleteMapFail(dispatch, error))
-  }
-
-  const deleteMapFail = (dispatch, error) => {
-    dispatch({
-      type: API_ERROR,
-      msg: error
-    })
+      .catch(error => apiError(dispatch, error))
   }
 
   const deleteMapSuccess = (dispatch, entity) => {
@@ -154,14 +126,7 @@ export const importMap = (form) => {
   return (dispatch) => {
     axios.post(`${ROOT_URL}/importmap`, form)
       .then(response => importMapSuccess(dispatch, response))
-      .catch(error => importMapFail(dispatch, error))
-  }
-
-  const importMapFail = (dispatch, error) => {
-    dispatch({
-      type: API_ERROR,
-      msg: error
-    })
+      .catch(error => apiError(dispatch, error))
   }
 
   const importMapSuccess = (dispatch, response) => {
@@ -195,14 +160,7 @@ export const fetchMapUsers = (mapId) => {
   return (dispatch) => {
     axios.get(`${ROOT_URL}/user/search/findByMap?mapid=${mapId}`)
       .then(response => fetchMapUsersSuccess(dispatch, response))
-      .catch(error => fetchMapUsersFail(dispatch, error))
-  }
-
-  const fetchMapUsersFail = (dispatch, error) => {
-    dispatch({
-      type: API_ERROR,
-      msg: error
-    })
+      .catch(error => apiError(dispatch, error))
   }
 
   const fetchMapUsersSuccess = (dispatch, response) => {
@@ -220,14 +178,7 @@ export const addMapUser = (map, user) => {
 
     axios.put(entity._links.self.href, entity)
       .then(response => addMapUserSuccess(dispatch, response))
-      .catch(error => addMapUserFail(dispatch, error))
-  }
-
-  const addMapUserFail = (dispatch, error) => {
-    dispatch({
-      type: API_ERROR,
-      msg: error
-    })
+      .catch(error => apiError(dispatch, error))
   }
 
   const addMapUserSuccess = (dispatch, response) => {
@@ -245,14 +196,7 @@ export const removeMapUser = (map, user) => {
 
     axios.put(entity._links.self.href, entity)
       .then(() => removeMapUserSuccess(dispatch, user))
-      .catch(error => removeMapUserFail(dispatch, error))
-  }
-
-  const removeMapUserFail = (dispatch, error) => {
-    dispatch({
-      type: API_ERROR,
-      msg: error
-    })
+      .catch(error => apiError(dispatch, error))
   }
 
   const removeMapUserSuccess = (dispatch, user) => {
@@ -278,7 +222,7 @@ export const fetchMapDevicesAndLines = (mapid) => {
 
     axios.all([req1, req2])
       .then(response => fetchMapDevicesAndLinesSuccess(dispatch, response))
-      .catch(error => fetchMapDevicesAndLinesFail(dispatch, error))
+      .catch(error => apiError(dispatch, error))
   }
 
   const fetchMapId = (dispatch) => {
@@ -297,13 +241,6 @@ export const fetchMapDevicesAndLines = (mapid) => {
     return response.data._embedded.devices
   }
 
-  const fetchMapDevicesAndLinesFail = (dispatch, error) => {
-    dispatch({
-      type: API_ERROR,
-      msg: error
-    })
-  }
-
   const fetchMapDevicesAndLinesSuccess = (dispatch, response) => {
     dispatch({
       type: FETCH_MAP_DEVICES_LINES,
@@ -317,14 +254,7 @@ export const addMapDevice = (props) => {
   return (dispatch) => {
     axios.post(`${ROOT_URL}/device`, props)
       .then(response => addMapDeviceSuccess(dispatch, response))
-      .catch(error => addMapDeviceFail(dispatch, error))
-  }
-
-  const addMapDeviceFail = (dispatch, error) => {
-    dispatch({
-      type: API_ERROR,
-      msg: error
-    })
+      .catch(error => apiError(dispatch, error))
   }
 
   const addMapDeviceSuccess = (dispatch, response) => {
@@ -339,14 +269,7 @@ export const updateMapDevice = (entity) => {
   return (dispatch) => {
     axios.put(entity._links.self.href, entity)
       .then(response => updateMapDeviceSuccess(dispatch, response))
-      .catch(error => updateMapDeviceFail(dispatch, error))
-  }
-
-  const updateMapDeviceFail = (dispatch, error) => {
-    dispatch({
-      type: API_ERROR,
-      msg: error
-    })
+      .catch(error => apiError(dispatch, error))
   }
 
   const updateMapDeviceSuccess = (dispatch, response) => {
@@ -361,14 +284,7 @@ export const deleteMapDevice = (entity) => {
   return (dispatch) => {
     axios.delete(entity._links.self.href)
       .then(() => deleteMapDeviceSuccess(dispatch, entity))
-      .catch(error => deleteMapDeviceFail(dispatch, error))
-  }
-
-  const deleteMapDeviceFail = (dispatch, error) => {
-    dispatch({
-      type: API_ERROR,
-      msg: error
-    })
+      .catch(error => apiError(dispatch, error))
   }
 
   const deleteMapDeviceSuccess = (dispatch, entity) => {
@@ -383,14 +299,7 @@ export const addMapLine = (props, cb) => {
   return (dispatch) => {
     axios.post(`${ROOT_URL}/device`, props)
       .then(response => addMapLineSuccess(dispatch, response))
-      .catch(error => addMapLineFail(dispatch, error))
-  }
-
-  const addMapLineFail = (dispatch, error) => {
-    dispatch({
-      type: API_ERROR,
-      msg: error
-    })
+      .catch(error => apiError(dispatch, error))
   }
 
   const addMapLineSuccess = (dispatch, response) => {
@@ -406,14 +315,7 @@ export const updateMapLine = (entity) => {
   return (dispatch) => {
     axios.put(entity._links.self.href, entity)
       .then(response => updateMapLineSuccess(dispatch, response))
-      .catch(error => updateMapLineFail(dispatch, error))
-  }
-
-  const updateMapLineFail = (dispatch, error) => {
-    dispatch({
-      type: API_ERROR,
-      msg: error
-    })
+      .catch(error => apiError(dispatch, error))
   }
 
   const updateMapLineSuccess = (dispatch, response) => {
@@ -428,14 +330,7 @@ export const deleteMapLine = (entity) => {
   return (dispatch) => {
     axios.delete(entity._links.self.href)
       .then(() => deleteMapLineSuccess(dispatch, entity))
-      .catch(error => deleteMapLineFail(dispatch, error))
-  }
-
-  const deleteMapLineFail = (dispatch, error) => {
-    dispatch({
-      type: API_ERROR,
-      msg: error
-    })
+      .catch(error => apiError(dispatch, error))
   }
 
   const deleteMapLineSuccess = (dispatch, entity) => {

@@ -4,10 +4,10 @@ import {
     FETCH_MESSAGE,
     FETCH_ATTACKERS,
 
-    GENERATE_PINCODE,
-
-    API_ERROR
+    GENERATE_PINCODE
 } from './types'
+
+import { apiError } from './errors'
 
 import { ROOT_URL } from './config'
 
@@ -20,40 +20,44 @@ export const fetchMessage = () => {
       }
     }
     axios.get(`${ROOT_URL}/api/me`, config)
-    .then(response => {
-      dispatch({
-        type: FETCH_MESSAGE,
-        payload: response.data.username
-      })
+    .then(response => fetchMessageSuccess(dispatch, response))
+    .catch(error => authError(error)) // TODO: here may be another error action
+  }
+
+  const fetchMessageSuccess = (dispatch, response) => {
+    dispatch({
+      type: FETCH_MESSAGE,
+      payload: response.data.username
     })
-// .catch(error => {
-//    dispatch(authError(error));
-// });
   }
 }
 
-export function fetchAttackers () {
+export const fetchAttackers = () => {
+  return (dispatch) => {
+    axios.get(`${ROOT_URL}/attacker`, { params: { } })
+      .then(response => fetchAttackersSuccess(dispatch, response))
+      .catch(error => apiError(dispatch, error))
+  }
+
+  const fetchAttackersSuccess = (dispatch, response) => {
+    dispatch({
+      type: FETCH_ATTACKERS,
+      data: response.data._embedded.attackers
+    })
+  }
+}
+
+export const generatePincode = () => {
   return function (dispatch) {
-    axios.get(`${ROOT_URL}/attacker`, {
-      params: { }
-    }).then(response => {
-      dispatch({ type: FETCH_ATTACKERS, data: response.data._embedded.attackers })
-    }).catch(error => {
-      dispatch({type: API_ERROR, msg: error})
+    axios.get(`${ROOT_URL}/genpin`)
+      .then(response => generatePincodeSuccess(dispatch, response))
+      .catch(error => apiError(dispatch, error))
+  }
+
+  const generatePincodeSuccess = (dispatch, response) => {
+    dispatch({
+      type: GENERATE_PINCODE,
+      data: response.data
     })
   }
 }
-
-
-
-export function generatePincode () {
-  return function (dispatch) {
-    axios.get(`${ROOT_URL}/genpin`).then(response => {
-      dispatch({type: GENERATE_PINCODE, data: response.data})
-    }).catch(error => {
-      dispatch({type: API_ERROR, msg: error})
-    })
-  }
-}
-
-

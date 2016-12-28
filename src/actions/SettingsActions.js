@@ -15,10 +15,10 @@ import {
   OPEN_SETTING_USER_MODAL,
   CLOSE_SETTING_USER_MODAL,
   OPEN_USER_PASSWORD_MODAL,
-  CLOSE_USER_PASSWORD_MODAL,
-
-  API_ERROR
+  CLOSE_USER_PASSWORD_MODAL
 } from './types'
+
+import { apiError } from './errors'
 
 import { ROOT_URL } from './config'
 
@@ -26,14 +26,7 @@ export const fetchSettingMaps = () => {
   return (dispatch) => {
     axios.get(`${ROOT_URL}/map`)
       .then(response => fetchSettingMapsSuccess(dispatch, response))
-      .catch(error => fetchSettingMapsFail(dispatch, error))
-  }
-
-  const fetchSettingMapsFail = (dispatch, error) => {
-    dispatch({
-      type: API_ERROR,
-      msg: error
-    })
+      .catch(error => apiError(dispatch, error))
   }
 
   const fetchSettingMapsSuccess = (dispatch, response) => {
@@ -65,14 +58,7 @@ export const addSettingMap = (props) => {
   return (dispatch) => {
     axios.post(`${ROOT_URL}/map`, props)
       .then(response => addSettingMapSuccess(dispatch, response))
-      .catch(error => addSettingMapFail(dispatch, error))
-  }
-
-  const addSettingMapFail = (dispatch, error) => {
-    dispatch({
-      type: API_ERROR,
-      msg: error
-    })
+      .catch(error => apiError(dispatch, error))
   }
 
   const addSettingMapSuccess = (dispatch, response) => {
@@ -88,14 +74,7 @@ export const updateSettingMap = (entity) => {
   return (dispatch) => {
     axios.put(entity._links.self.href, entity)
       .then(response => updateSettingMapSuccess(dispatch, response))
-      .catch(error => updateSettingMapFail(dispatch, error))
-  }
-
-  const updateSettingMapFail = (dispatch, error) => {
-    dispatch({
-      type: API_ERROR,
-      msg: error
-    })
+      .catch(error => apiError(dispatch, error))
   }
 
   const updateSettingMapSuccess = (dispatch, response) => {
@@ -111,14 +90,7 @@ export const deleteSettingMap = (entity) => {
   return (dispatch) => {
     axios.delete(entity._links.self.href)
       .then(() => deleteSettingMapSuccess(dispatch, entity))
-      .catch(error => deleteSettingMapFail(dispatch, error))
-  }
-
-  const deleteSettingMapFail = (dispatch, error) => {
-    dispatch({
-      type: API_ERROR,
-      msg: error
-    })
+      .catch(error => apiError(dispatch, error))
   }
 
   const deleteSettingMapSuccess = (dispatch, response) => {
@@ -135,14 +107,7 @@ export const fetchSettingUsers = () => {
 
     axios.get(`${ROOT_URL}/user`)
       .then(response => fetchSettingUsersSuccess(dispatch, response))
-      .catch(error => fetchSettingUsersFail(dispatch, error))
-  }
-
-  const fetchSettingUsersFail = (dispatch, error) => {
-    dispatch({
-      type: API_ERROR,
-      msg: error
-    })
+      .catch(error => apiError(dispatch, error))
   }
 
   const fetchSettingUsersSuccess = (dispatch, response) => {
@@ -157,14 +122,7 @@ export const addSettingUser = (props) => {
   return (dispatch) => {
     axios.post(`${ROOT_URL}/user`, props)
       .then(response => addSettingUserSuccess(dispatch, response))
-      .catch(error => addSettingUserFail(dispatch, error))
-  }
-
-  const addSettingUserFail = (dispatch, error) => {
-    dispatch({
-      type: API_ERROR,
-      msg: error
-    })
+      .catch(error => apiError(dispatch, error))
   }
 
   const addSettingUserSuccess = (dispatch, response) => {
@@ -180,14 +138,7 @@ export const updateSettingUser = (entity) => {
   return (dispatch) => {
     axios.put(entity._links.self.href, entity)
       .then(response => updateSettingUserSuccess(dispatch, response))
-      .catch(error => updateSettingUserFail(dispatch, error))
-  }
-
-  const updateSettingUserFail = (dispatch, error) => {
-    dispatch({
-      type: API_ERROR,
-      msg: error
-    })
+      .catch(error => apiError(dispatch, error))
   }
 
   const updateSettingUserSuccess = (dispatch, response) => {
@@ -204,14 +155,7 @@ export const deleteSettingUser = (entity) => {
   return (dispatch) => {
     axios.delete(entity._links.self.href)
       .then(response => deleteSettingUserSuccess(dispatch, response))
-      .catch(error => deleteSettingUserFail(dispatch, error))
-  }
-
-  const deleteSettingUserFail = (dispatch, error) => {
-    dispatch({
-      type: API_ERROR,
-      msg: error
-    })
+      .catch(error => apiError(dispatch, error))
   }
 
   const deleteSettingUserSuccess = (dispatch, response) => {

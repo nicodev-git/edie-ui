@@ -6,10 +6,10 @@ import {
   UPDATE_IDENTITY,
   REMOVE_IDENTITY,
   OPEN_IDENTITY_MODAL,
-  CLOSE_IDENTITY_MODAL,
-
-  API_ERROR
+  CLOSE_IDENTITY_MODAL
 } from './types'
+
+import { apiError } from './errors'
 
 import { ROOT_URL } from './config'
 
@@ -17,14 +17,7 @@ export const fetchIdentities = () => {
   return (dispatch) => {
     axios.get(`${ROOT_URL}/setting/search/identities`)
       .then(response => fetchIdentitiesSuccess(dispatch, response))
-      .catch(error => fetchIdentitiesFail(dispatch, error))
-  }
-
-  const fetchIdentitiesFail = (dispatch, error) => {
-    dispatch({
-      type: API_ERROR, 
-      msg: error
-    })
+      .catch(error => apiError(dispatch, error))
   }
 
   const fetchIdentitiesSuccess = (dispatch, response) => {
@@ -39,14 +32,7 @@ export const addIdentity = (props) => {
   return (dispatch) => {
     axios.post(`${ROOT_URL}/setting`, props)
       .then(response => addIdentitySuccess(dispatch, response))
-      .catch(error => addIdentityFail(dispatch, error))
-  }
-
-  const addIdentityFail = (dispatch, error) => {
-    dispatch({
-      type: API_ERROR, 
-      msg: error
-    })
+      .catch(error => apiError(dispatch, error))
   }
 
   const addIdentitySuccess = (dispatch, response) => {
@@ -62,14 +48,7 @@ export const updateIdentity = (entity) => {
   return (dispatch) => {
     axios.put(entity._links.self.href, entity)
       .then(response => updateIdentitySuccess(dispatch, response))
-      .catch(error => updateIdentityFail(dispatch, error))
-  }
-
-  const updateIdentityFail = (dispatch, error) => {
-    dispatch({
-      type: API_ERROR, 
-      msg: error
-    })
+      .catch(error => apiError(dispatch, error))
   }
 
   const updateIdentitySuccess = (dispatch, response) => {
@@ -85,14 +64,7 @@ export const removeIdentity = (entity) => {
   return (dispatch) => {
     axios.delete(entity._links.self.href)
       .then(() => removeIdentitySuccess(dispatch, entity))
-      .catch(error => removeIdentityFail(dispatch, error))
-  }
-
-  const removeIdentityFail = (dispatch, error) => {
-    dispatch({
-      type: API_ERROR, 
-      msg: error
-    })
+      .catch(error => apiError(dispatch, error))
   }
 
   const removeIdentitySuccess = (dispatch, entity) => {

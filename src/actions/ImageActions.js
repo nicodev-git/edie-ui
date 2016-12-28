@@ -5,10 +5,10 @@ import {
   CLOSE_TPL_IMAGE_MODAL,
 
   FETCH_IMAGES,
-  UPLOAD_IMAGE,
-
-  API_ERROR
+  UPLOAD_IMAGE
 } from './types'
+
+import { apiError } from './errors'
 
 import { ROOT_URL } from './config'
 
@@ -33,14 +33,7 @@ export const uploadImage = (formData) => {
   return (dispatch) => {
     axios.post(`${ROOT_URL}/upload`, formData)
       .then(response => uploadImageSuccess(dispatch, response))
-      .catch(error => uploadImageFail(dispatch, error))
-  }
-
-  const uploadImageFail = (dispatch, error) => {
-    dispatch({
-      type: API_ERROR,
-      msg: error
-    })
+      .catch(error => apiError(dispatch, error))
   }
 
   const uploadImageSuccess = (dispatch, response) => {
@@ -55,14 +48,7 @@ export const fetchImages = () => {
   return (dispatch) => {
     axios.get(`${ROOT_URL}/customImage`)
       .then(response => fetchImagesSuccess(dispatch, response))
-      .catch(error => fetchImagesFail(dispatch, error))
-  }
-
-  const fetchImagesFail = (dispatch, error) => {
-    dispatch({
-      type: API_ERROR,
-      msg: error
-    })
+      .catch(error => apiError(dispatch, error))
   }
 
   const fetchImagesSuccess = (dispatch, response) => {

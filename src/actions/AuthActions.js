@@ -8,10 +8,10 @@ import {
   FETCH_USER_INFO,
   UPDATE_USER_INFO,
   OPEN_PROFILE_MODAL,
-  CLOSE_PROFILE_MODAL,
-
-  API_ERROR
+  CLOSE_PROFILE_MODAL
 } from './types'
+
+import { apiError, authError } from './errors'
 
 import { ROOT_URL } from './config'
 
@@ -31,14 +31,7 @@ export function signUser ({ email, password }) {
           config
         )
         .then(response => signUserSuccess(dispatch, response))
-        .catch(() => signUserFail(dispatch))
-
-    const signUserFail = (dispatch) => {
-      dispatch({
-        type: AUTH_ERROR,
-        msg: 'Wrong credentials.'
-      })
-    }
+        .catch(() => authError(dispatch))
 
     const signUserSuccess = (dispatch, response) => {
       dispatch({
@@ -111,14 +104,7 @@ export const fetchUserInfo = () => {
     }
     axios.get(`${ROOT_URL}/api/me`, config)
       .then(response => fetchUserInfoSuccess(dispatch, response))
-      .catch(error => fetchUserInfoFail(dispatch, error))
-  }
-
-  const fetchUserInfoFail = (dispatch, error) => {
-    dispatch({
-      type: API_ERROR,
-      msg: error
-    })
+      .catch(error => apiError(dispatch, error))
   }
 
   const fetchUserInfoSuccess = (dispatch, response) => {
@@ -133,14 +119,7 @@ export const updateUserProfile = (props) => {
   return (dispatch) => {
     axios.put(`${ROOT_URL}/user/${props.id}`, props)
       .then(response => updateUserProfileSuccess(dispatch, response))
-      .catch(error => updateUserProfileFail(dispatch, error))
-  }
-
-  const updateUserProfileFail = (dispatch, error) => {
-    dispatch({
-      type: API_ERROR,
-      msg: error
-    })
+      .catch(error => apiError(dispatch, error))
   }
 
   const updateUserProfileSuccess = (dispatch, response) => {
