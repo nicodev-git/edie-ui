@@ -36,8 +36,8 @@ export default class DeviceWizard extends React.Component {
     this.state = {
       current: 1,
       steps: config.steps.length,
-
       open: true,
+
       currentDevice: config,
 
       inputs: {

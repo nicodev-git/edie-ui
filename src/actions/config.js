@@ -1,5 +1,9 @@
+export const getServerDomain = () => {
+  return 'imp.dev.securegion.com'
+}
+
 export const getServerURL = () => {
-  return 'http://imp.dev.securegion.com'
+  return `http://${getServerDomain()}`
 }
 
 export const ROOT_URL = getServerURL()

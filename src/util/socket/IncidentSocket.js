@@ -2,6 +2,8 @@ import React from 'react'
 
 const fake = true
 
+import { getServerDomain } from '../../actions/config'
+
 export const incidentSocket = {
   ws: null,
 
@@ -29,7 +31,7 @@ export const incidentSocket = {
 
     try {
       console.log('Incident Socket Connecting...')
-      me.ws = new WebSocket(`ws://${document.location.host}/incident`)
+      me.ws = new WebSocket(`ws://${getServerDomain()}/incident`)
       me.ws.onopen = me.onOpen.bind(me)
       me.ws.onmessage = me.onMessage.bind(me)
       me.ws.onclose = me.onClose.bind(me)
