@@ -1,6 +1,7 @@
 import React from 'react'
 import Modal from 'react-bootstrap-modal'
 import { showAlert } from '../../../../../shared/Alert'
+import { ROOT_URL } from '../../../../../../actions/config'
 
 export default class ParsersModal extends React.Component {
   constructor (props) {
@@ -21,7 +22,7 @@ export default class ParsersModal extends React.Component {
     // //////////////////////////////////////////
 
   loadParsers () {
-    $.get(Api.rule.getParsersForDevice, { // eslint-disable-line no-undef
+    $.get(`${ROOT_URL}${Api.rule.getParsersForDevice}`, { // eslint-disable-line no-undef
       deviceid: this.props.device.id // eslint-disable-line no-undef
     }).done(res => {
       this.setState({

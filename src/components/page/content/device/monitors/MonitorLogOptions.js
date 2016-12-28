@@ -1,4 +1,5 @@
 import React from 'react'
+import { ROOT_URL } from '../../../../../actions/config'
 
 class MonitorLogOptions extends React.Component {
   constructor (props) {
@@ -64,7 +65,7 @@ class MonitorLogOptions extends React.Component {
       ? Api.log.getFiles // eslint-disable-line no-undef
       : Api.log.getErrorFiles // eslint-disable-line no-undef
 
-    $.get(url, { // eslint-disable-line no-undef
+    $.get(`${ROOT_URL}${url}`, { // eslint-disable-line no-undef
       deviceid: this.props.device.id
     }).done((data) => {
       if (!data) {

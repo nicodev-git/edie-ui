@@ -1,5 +1,6 @@
 import React from 'react'
 import Modal from 'react-bootstrap-modal'
+import { ROOT_URL } from '../../../../../../actions/config'
 
 export default class MarkIgnoreModal extends React.Component {
   constructor (props) {
@@ -23,7 +24,7 @@ export default class MarkIgnoreModal extends React.Component {
   }
 
   onClickSave () {
-    $.get(Api.rule.addIgnoreRuleForDevice, { // eslint-disable-line no-undef
+    $.get(`${ROOT_URL}${Api.rule.addIgnoreRuleForDevice}`, { // eslint-disable-line no-undef
       deviceid: this.props.device.id,
       name: this.refs.name.value,
       filter: this.refs.filter.value,

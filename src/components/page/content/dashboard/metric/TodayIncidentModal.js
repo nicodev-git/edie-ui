@@ -3,7 +3,7 @@ import Modal from 'react-bootstrap-modal'
 import { Button } from 'react-bootstrap'
 import Select from 'react-select'
 import { assign } from 'lodash'
-
+import { ROOT_URL } from '../../../../../actions/config'
 import InfiniteTable from '../../../../shared/InfiniteTable'
 import AddExceptionModal from './AddExceptionModal'
 
@@ -237,7 +237,7 @@ class TodayIncidentModal extends React.Component {
     showPrompt('Please type comment for all incidents.', '', (text) => {
       if (text === null) return
 
-      $.get(Api.incidents.fixTodayIncidents, {
+      $.get(`${ROOT_URL}${Api.incidents.fixTodayIncidents}`, {
         comment: text
       }).done(res => {
         this.reloadTable()

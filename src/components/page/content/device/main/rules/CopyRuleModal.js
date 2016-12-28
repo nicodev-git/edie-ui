@@ -11,6 +11,7 @@ import {appendComponent, removeComponent} from '../../../../../../util/Component
 import DeviceWizard from '../../../../../shared/wizard/DeviceWizard'
 
 import Api from '../../../../../../api'
+import { ROOT_URL } from '../../../../../../actions/config'
 
 class CopyRuleModal extends React.Component {
   constructor (props) {
@@ -46,7 +47,7 @@ class CopyRuleModal extends React.Component {
   }
 
   loadCategories () {
-    return $.get(Api.rule.getCategories).done(res => { // eslint-disable-line no-undef
+    return $.get(`${ROOT_URL}${Api.rule.getCategories}`).done(res => { // eslint-disable-line no-undef
       this.setState({
         categories: res
       })
@@ -58,7 +59,7 @@ class CopyRuleModal extends React.Component {
   }
 
   loadGroups () {
-    return $.get(Api.dashboard.getDevicesByType, { // eslint-disable-line no-undef
+    return $.get(`${ROOT_URL}${Api.dashboard.getDevicesByType}`, { // eslint-disable-line no-undef
       devicetype: 'group'
     }).done(res => {
       res.splice(0, 0, {
@@ -77,7 +78,7 @@ class CopyRuleModal extends React.Component {
   }
 
   loadDevicesLeft () {
-    return $.get(Api.dashboard.getDevices, { // eslint-disable-line no-undef
+    return $.get(`${ROOT_URL}${Api.dashboard.getDevices}`, { // eslint-disable-line no-undef
             // fatherid: 0,
     }).done(res => {
       const items = this.filterDevices(res, true)
@@ -91,7 +92,7 @@ class CopyRuleModal extends React.Component {
   }
 
   loadDevicesRight (groupId) {
-    $.get(Api.dashboard.getDevicesByGroup, { groupId }) // eslint-disable-line no-undef
+    $.get(`${ROOT_URL}${Api.dashboard.getDevicesByGroup}`, { groupId }) // eslint-disable-line no-undef
         .done(res => {
           const items = this.filterDevices(res, false)
           this.setState({
@@ -106,7 +107,7 @@ class CopyRuleModal extends React.Component {
   }
 
   loadLogicals (catId) {
-    return $.get(Api.rule.getLogicalName, { // eslint-disable-line no-undef
+    return $.get(`${ROOT_URL}${Api.rule.getLogicalName}`, { // eslint-disable-line no-undef
       draw: 1,
       start: 0,
       length: 100,
@@ -534,7 +535,7 @@ class CopyRuleModal extends React.Component {
       if (btn !== 'ok') return
 
       let calls = data.map(item =>
-        $.get(`${Api.rule.deleteARuleForADevice}?idRulesNew=${item.idrulesNew}`) // eslint-disable-line no-undef
+        $.get(`${ROOT_URL}${Api.rule.deleteARuleForADevice}?idRulesNew=${item.idrulesNew}`) // eslint-disable-line no-undef
       )
 
       $.when.apply(this, calls).done(() => { // eslint-disable-line no-undef
@@ -616,7 +617,7 @@ class CopyRuleModal extends React.Component {
       if (btn !== 'ok') return
 
       let calls = data.map(item =>
-                $.get(`${Api.rule.deletePhysicalName}?id=${item.id}`) // eslint-disable-line no-undef
+                $.get(`${ROOT_URL}${Api.rule.deletePhysicalName}?id=${item.id}`) // eslint-disable-line no-undef
             )
 
       $.when.apply(this, calls).done(() => { // eslint-disable-line no-undef

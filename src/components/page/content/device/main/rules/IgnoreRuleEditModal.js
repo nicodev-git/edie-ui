@@ -1,6 +1,7 @@
 import React from 'react'
 import Modal from 'react-bootstrap-modal'
 import { showAlert } from '../../../../../shared/Alert'
+import { ROOT_URL } from '../../../../../../actions/config'
 
 export default class IgnoreRuleEditModal extends React.Component {
   constructor (props) {
@@ -30,7 +31,7 @@ export default class IgnoreRuleEditModal extends React.Component {
   }
 
   onClickSave () {
-    $.get(Api.rule.updateARuleToADevice, { // eslint-disable-line no-undef
+    $.get(`${ROOT_URL}${Api.rule.updateARuleToADevice}`, { // eslint-disable-line no-undef
       deviceid: this.props.device.id,
       idrulesNew: this.props.rule.idrulesNew,
       ruleCategory: this.props.categoryId,

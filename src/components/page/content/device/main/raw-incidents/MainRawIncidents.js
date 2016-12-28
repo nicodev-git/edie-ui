@@ -23,6 +23,8 @@ import TabPageHeader from '../../../../../shared/TabPageHeader'
 
 import {fetchDeviceRawIncidents} from '../../../../../../actions'
 
+import { ROOT_URL } from '../../../../../../actions/config'
+
 class MainRawIncidents extends React.Component {
   constructor (props) {
     super(props)
@@ -156,7 +158,7 @@ class MainRawIncidents extends React.Component {
 
       setLoadingState(true) // eslint-disable-line no-undef
       showLoading() // eslint-disable-line no-undef
-      $.get(Api.incidents.deleteRawIncidents, { // eslint-disable-line no-undef
+      $.get(`${ROOT_URL}${Api.incidents.deleteRawIncidents}`, { // eslint-disable-line no-undef
         deviceid: this.props.device.id,
         text: this.state.params.text
       }).done(res => {

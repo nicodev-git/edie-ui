@@ -4,6 +4,7 @@ import {
     Button
 } from 'react-bootstrap'
 import { showAlert } from '../../../../shared/Alert'
+import { ROOT_URL } from '../../../../../actions/config'
 
 class RestoreModal extends React.Component {
   constructor (props) {
@@ -15,7 +16,7 @@ class RestoreModal extends React.Component {
   }
 
   componentWillMount () {
-    $.get(Api.rule.listOfBackupFiles, (res) => { // eslint-disable-line no-undef
+    $.get(`${ROOT_URL}${Api.rule.listOfBackupFiles}`, (res) => { // eslint-disable-line no-undef
       this.setState({ files: res.object })
     })
   }
@@ -38,7 +39,7 @@ class RestoreModal extends React.Component {
     const name = this.refs.name.value
     if (!name) return showAlert('Please choose backup.')
 
-    $.get(Api.rule.restoreRules, { // eslint-disable-line no-undef
+    $.get(`${ROOT_URL}${Api.rule.restoreRules}`, { // eslint-disable-line no-undef
       exportName: name
     }).done((res) => {
       showAlert('Restored successfully.')

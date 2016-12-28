@@ -4,6 +4,7 @@ import Select from 'react-select'
 import moment from 'moment'
 import DeviceSearchModal from './DeviceSearchModal'
 import { appendComponent, removeComponent } from '../../../../util/Component'
+import { ROOT_URL } from '../../../../actions/config'
 
 class IncidentOptions extends React.Component {
   constructor (props) {
@@ -35,7 +36,7 @@ class IncidentOptions extends React.Component {
   }
 
   loadDevices () {
-    $.get(Api.bi.searchDevicesDT, {
+    $.get(`${ROOT_URL}${Api.bi.searchDevicesDT}`, {
       draw: 1,
       start: 0,
       length: 1000,

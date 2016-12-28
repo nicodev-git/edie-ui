@@ -6,6 +6,7 @@ import {
 import countries from 'country-data/data/countries'
 
 import { showAlert } from '../../../../shared/Alert'
+import { ROOT_URL } from '../../../../../actions/config'
 
 class SegmentModal extends React.Component {
   constructor (props) {
@@ -48,7 +49,7 @@ class SegmentModal extends React.Component {
     if (segment) data.id = segment.id
 
     const url = segment ? Api.admin.editSegment : Api.admin.addSegment // eslint-disable-line no-undef
-    $.get(url, data).done(res => { // eslint-disable-line no-undef
+    $.get(`${ROOT_URL}${url}`, data).done(res => { // eslint-disable-line no-undef
       if (!res.success) return showAlert('Save failed!')
       this.closeModal(res.object)
     }).fail(() => {

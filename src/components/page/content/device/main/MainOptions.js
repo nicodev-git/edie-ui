@@ -7,6 +7,7 @@ import {
     unlisten
 } from 'shared/event/Emitter'
 import { EVENTS } from 'shared/event/Events'
+import { ROOT_URL } from '../../../../../actions/config'
 
 class MainOptions extends React.Component {
   constructor (props) {
@@ -83,7 +84,7 @@ class MainOptions extends React.Component {
     // ////////////////////////////////////////////////////////////////////////////////
 
   loadRuleCategories () {
-    $.get(Api.rule.getCategories, {})
+    $.get(`${ROOT_URL}${Api.rule.getCategories}`, {})
             .done(res => {
               let data = [{
                 label: '[All Categories]', value: 0

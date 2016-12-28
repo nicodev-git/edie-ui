@@ -17,6 +17,7 @@ import { wizardConfig } from '../../../../shared/wizard/WizardConfig'
 import { showAlert, showConfirm } from '../../../../shared/Alert'
 
 import DeviceDragLayer from './DeviceDragLayer'
+import { ROOT_URL } from '../../../../../actions/config'
 
 export default class Topology extends React.Component {
     constructor(props) {
@@ -146,13 +147,13 @@ export default class Topology extends React.Component {
     }
 
     componentDidMount() {
-        let callLoadMap = $.get(Api.dashboard.getDevicesForMap, {
+        let callLoadMap = $.get(`${ROOT_URL}${Api.dashboard.getDevicesForMap}`, {
             mapid: this.state.device.mapid,
             fatherid: this.state.device.id,
             sid: this.context.sid
         })
 
-        let callLoadLines = $.get(Api.dashboard.getLineByLine, {
+        let callLoadLines = $.get(`${ROOT_URL}${Api.dashboard.getLineByLine}`, {
             mapid: this.state.device.mapid,
         })
 
@@ -259,7 +260,7 @@ export default class Topology extends React.Component {
                 fatherid: 0,
             };
 
-            $.get(url, param)
+            $.get(`${ROOT_URL}${url}`, param)
                 .done(res => {
                     if(!res || !res.success) return;
                     let obj = res.object;
@@ -293,7 +294,7 @@ export default class Topology extends React.Component {
         var lineId = lineObj.id;
         if (!lineId) return
 
-        $.get(Api.devices.updateLine, {
+        $.get(`${ROOT_URL}${Api.devices.updateLine}`, {
 
             lineId: lineId,
             linecolor: style.color,
@@ -306,7 +307,7 @@ export default class Topology extends React.Component {
 
     onMapTextChanged(map, id, text, isLabel) {
         this.addMapUploading(map, id);
-        let url = Api.devices.renameDevice;
+        let url = `${ROOT_URL}${Api.devices.renameDevice}`;
         $.get(url, {
             id: id,
             name: text
@@ -525,7 +526,7 @@ export default class Topology extends React.Component {
             };
         }
 
-        return $.get(url, params).always(() => {
+        return $.get(`${ROOT_URL}${url}`, params).always(() => {
             this.removeMapUploading(map, params.deviceid);
         });
     }
@@ -561,7 +562,7 @@ export default class Topology extends React.Component {
             item = "connection";
         }
 
-        $.get(Api.deviceadmin.countDeviceData, {
+        $.get(`${ROOT_URL}${Api.deviceadmin.countDeviceData}`, {
             deviceid: object.id,
         }).done(function(res) {
             if (!res.success) {
@@ -632,7 +633,7 @@ export default class Topology extends React.Component {
     }
 
     changeLineType(id, typeid) {
-        $.get(Api.deviceadmin.updateLine, {
+        $.get(`${ROOT_URL}${Api.deviceadmin.updateLine}`, {
             id: id,
             type: typeid,
         }).done(() => {
@@ -644,7 +645,7 @@ export default class Topology extends React.Component {
 
     showAddWizard(options, callback, closeCallback) {
         if (options.type === 'longhub') {
-            const url = Api.deviceadmin.addDevice;
+            const url = `${ROOT_URL}${Api.deviceadmin.addDevice}`;
             const param = {
                 devicetype: 'longhub',
                 name: 'longhub',

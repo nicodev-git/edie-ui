@@ -3,6 +3,7 @@ import Modal from 'react-bootstrap-modal'
 import { assign } from 'lodash'
 
 import { showAlert } from '../../../shared/Alert'
+import { ROOT_URL } from '../../../../actions/config'
 
 class CredentialEditModal extends React.Component {
   constructor (props) {
@@ -43,7 +44,7 @@ class CredentialEditModal extends React.Component {
 
     const url = this.props.data ? Api.devices.editCredential : Api.devices.addCredential // eslint-disable-line no-undef
 
-    $.get(url, cred).done((res) => { // eslint-disable-line no-undef
+    $.get(`${ROOT_URL}${url}`, cred).done((res) => { // eslint-disable-line no-undef
       if (res.success) {
         this.closeModal(res.object)
       } else {

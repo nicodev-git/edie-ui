@@ -6,6 +6,8 @@ import { appendComponent, removeComponent } from '../../../../../util/Component'
 
 import SegmentModal from './SegmentModal'
 
+import { ROOT_URL } from '../../../../../actions/config'
+
 class SegmentListModal extends React.Component {
   constructor (props) {
     super(props)
@@ -80,7 +82,7 @@ class SegmentListModal extends React.Component {
 
     showConfirm('Click OK to remove.', (btn) => {
       if (btn !== 'ok') return
-      $.get(Api.admin.removeSegment, { // eslint-disable-line no-undef
+      $.get(`${ROOT_URL}${Api.admin.removeSegment}`, { // eslint-disable-line no-undef
         id: selected.id
       }).done((res) => {
         if (!res.success) return showAlert('Remove failed!')

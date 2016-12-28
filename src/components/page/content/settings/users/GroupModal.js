@@ -10,6 +10,7 @@ import {
 } from 'lodash'
 
 import { showAlert } from '../../../../shared/Alert'
+import { ROOT_URL } from '../../../../../actions/config'
 
 class GroupModal extends React.Component {
   constructor (props) {
@@ -28,7 +29,7 @@ class GroupModal extends React.Component {
   }
 
   loadGroups () {
-    $.get(Api.user.getUsers, { // eslint-disable-line no-undef
+    $.get(`${ROOT_URL}${Api.user.getUsers}`, { // eslint-disable-line no-undef
       draw: 1,
       start: 0,
       length: 100
@@ -95,21 +96,21 @@ class GroupModal extends React.Component {
     }
 
         // url += "?" + this.state.selected.map(id => "uids=" + id).join('&')
-    $.get(url, params).done(res => { // eslint-disable-line no-undef
+    $.get(`${ROOT_URL}${url}`, params).done(res => { // eslint-disable-line no-undef
       if (!res.success) return showAlert('Save failed!')
 
       let newGroup = res.object
 
       let calls = []
       added.forEach(userId => {
-        calls.push($.get(Api.group.addGroupAlloc, { // eslint-disable-line no-undef
+        calls.push($.get(`${ROOT_URL}${Api.group.addGroupAlloc}`, { // eslint-disable-line no-undef
           groupId: newGroup.id,
           userId: userId
         }))
       })
 
       removed.forEach(id => {
-        calls.push($.get(Api.group.removeGroupAlloc, { id })) // eslint-disable-line no-undef
+        calls.push($.get(`${ROOT_URL}${Api.group.removeGroupAlloc}`, { id })) // eslint-disable-line no-undef
       })
 
       $.when.apply(null, calls).always(() => { // eslint-disable-line no-undef

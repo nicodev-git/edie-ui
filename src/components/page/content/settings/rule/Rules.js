@@ -19,6 +19,7 @@ import BackupModal from './BackupModal'
 import RestoreModal from './RestoreModal'
 import WorkflowModal from './WorkflowModal'
 import { fetchWorkflows, openWorkflowModal, removeWorkflow } from '../../../../../actions'
+import { ROOT_URL } from '../../../../../actions/config'
 
 class Rules extends React.Component {
   constructor (props) {
@@ -249,7 +250,7 @@ class Rules extends React.Component {
 
     const selected = this.refs.logicalRules.getSelected()
 
-    $.get(Api.rule.changeCategory, { // eslint-disable-line no-undef
+    $.get(`${ROOT_URL}${Api.rule.changeCategory}`, { // eslint-disable-line no-undef
       id: selected.id,
       newCategory: category
     }).done(data => {

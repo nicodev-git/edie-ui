@@ -1,6 +1,8 @@
 import React from 'react'
 import GriddleWithCallback from './GriddleWithCallback'
 
+import { ROOT_URL } from '../../actions/config'
+
 class InfiniteTable extends React.Component {
   constructor (props) {
     super(props)
@@ -32,7 +34,7 @@ class InfiniteTable extends React.Component {
       length: pageSize
     })
 
-    $.get(url, urlParams).done(res => {
+    $.get(`${ROOT_URL}${url}`, urlParams).done(res => {
             // if (currentDraw !== this.state.draw) return;
       callback({
         results: res.data,

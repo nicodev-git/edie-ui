@@ -6,7 +6,7 @@ import {
   findIndex
 } from 'lodash'
 import moment from 'moment'
-
+import { ROOT_URL } from '../../../../actions/config'
 import { chatSocket } from '../../../../util/socket/ChatSocket'
 import { showAlert } from '../../../shared/Alert'
 
@@ -156,7 +156,7 @@ class Chat extends React.Component {
     // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   loadIncidents () {
-    $.get(Api.incidents.getUnfixedIncidentsQuick, { // eslint-disable-line no-undef
+    $.get(`${ROOT_URL}${Api.incidents.getUnfixedIncidentsQuick}`, { // eslint-disable-line no-undef
       draw: 1,
       start: 0,
       length: 150,
@@ -165,21 +165,23 @@ class Chat extends React.Component {
       msgcount: true
     }).done((res) => {
       let {rooms} = this.state
-      res.data.forEach(item => {
-        rooms[item.id] = {
-          unread: item.unread || 0,
-          lastMsgId: 0,
-          messages: [],
+      if (typeof res.data !== 'undefined') {
+        res.data.forEach(item => {
+          rooms[item.id] = {
+            unread: item.unread || 0,
+            lastMsgId: 0,
+            messages: [],
 
-          timerScroll: 0,
-          timerSync: 0,
+            timerScroll: 0,
+            timerSync: 0,
 
-          usersTyping: [],
-          userNamesTyping: [],
+            usersTyping: [],
+            userNamesTyping: [],
 
-          joined: false
-        }
-      })
+            joined: false
+          }
+        })
+      }
       this.setState({
         incidents: res.data,
         rooms: rooms
@@ -302,7 +304,7 @@ class Chat extends React.Component {
     this.setState({
       roomUsers: []
     })
-    $.get(Api.chat.users, { // eslint-disable-line no-undef
+    $.get(`${ROOT_URL}${Api.chat.users}`, { // eslint-disable-line no-undef
       sid: this.context.sid,
       incidentId: incidentId
     }).done(res => {

@@ -3,7 +3,7 @@ import {extend} from 'lodash'
 import ReactTooltip from 'react-tooltip'
 import { connect } from 'react-redux'
 import {withRouter} from 'react-router'
-
+import { ROOT_URL } from '../../../../../actions/config'
 import MapCanvas from '../../../../shared/map/MapCanvas'
 
 import MapToolbar from './MapToolbar'
@@ -206,13 +206,13 @@ class Map extends React.Component {
     $('.option.loader').show() // eslint-disable-line no-undef
     $('.option.mapalert').hide() // eslint-disable-line no-undef
 
-    let callLoadMap = $.get(Api.dashboard.getDevicesForMap, { // eslint-disable-line no-undef
+    let callLoadMap = $.get(`${ROOT_URL}${Api.dashboard.getDevicesForMap}`, { // eslint-disable-line no-undef
       mapid: currentmap,
       fatherid: 0,
       sid: this.context.sid
     })
 
-    let callLoadLines = $.get(Api.dashboard.getLineByLine, { // eslint-disable-line no-undef
+    let callLoadLines = $.get(`${ROOT_URL}${Api.dashboard.getLineByLine}`, { // eslint-disable-line no-undef
       mapid: currentmap
     })
 
@@ -425,7 +425,7 @@ class Map extends React.Component {
     let lineId = lineObj.id
     if (!lineId) return
 
-    $.get(Api.devices.updateLine, { // eslint-disable-line no-undef
+    $.get(`${ROOT_URL}${Api.devices.updateLine}`, { // eslint-disable-line no-undef
 
       lineId: lineId,
       linecolor: style.color,
@@ -777,7 +777,7 @@ class Map extends React.Component {
   }
 
   changeLineType (id, typeid) {
-    $.get(Api.deviceadmin.updateLine, { // eslint-disable-line no-undef
+    $.get(`${ROOT_URL}${Api.deviceadmin.updateLine}`, { // eslint-disable-line no-undef
       id: id,
       type: typeid
     }).done(() => {
@@ -795,7 +795,7 @@ class Map extends React.Component {
 
   showAddWizard (options, callback, closeCallback) {
     if (options.type === 'longhub') {
-      const url = Api.deviceadmin.addDevice // eslint-disable-line no-undef
+      const url = `${ROOT_URL}${Api.deviceadmin.addDevice}` // eslint-disable-line no-undef
       const param = {
         devicetype: 'longhub',
         name: 'longhub',

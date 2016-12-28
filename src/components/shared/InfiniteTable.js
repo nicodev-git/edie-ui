@@ -5,6 +5,7 @@ import { concat, assign, isEqual } from 'lodash'
 import Dimensions from 'react-dimensions'
 
 import $ from 'jquery'
+import { ROOT_URL } from '../../actions/config'
 
 class InfiniteTable extends React.Component {
   constructor (props) {
@@ -79,7 +80,7 @@ class InfiniteTable extends React.Component {
       isLoading: true
     })
 
-    this.lastRequest = $.get(url, urlParams).done(res => {
+    this.lastRequest = $.get(`${ROOT_URL}${url}`, urlParams).done(res => {
       let state = {
         results: concat((clear ? [] : this.state.results), res.data),
         currentPage: page - 1,

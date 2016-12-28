@@ -12,6 +12,7 @@ import {
 } from 'shared/event/Emitter'
 
 import { EVENTS } from 'shared/event/Events'
+import { ROOT_URL } from '../../../../../actions/config'
 
 class RuleOptions extends React.Component {
   constructor (props) {
@@ -30,7 +31,7 @@ class RuleOptions extends React.Component {
   }
 
   componentWillMount () {
-    $.get(Api.rule.getCategories).done(res => {
+    $.get(`${ROOT_URL}${Api.rule.getCategories}`).done(res => {
       this.setState({
         categories: res
       })
@@ -38,7 +39,7 @@ class RuleOptions extends React.Component {
       this.onChangeCategory({ target: { value: res[0].id } })
     })
 
-    $.get(Api.devices.getDeviceTypes).done(res => {
+    $.get(`${ROOT_URL}${Api.devices.getDeviceTypes}`).done(res => {
       this.setState({
         deviceTypes: res.object
       })

@@ -1,6 +1,6 @@
 import React from 'react'
 import Modal from 'react-bootstrap-modal'
-
+import { ROOT_URL } from '../../../../../actions/config'
 import { showAlert } from '../../../../shared/Alert'
 
 class NewIncidentModal extends React.Component {
@@ -127,7 +127,7 @@ class NewIncidentModal extends React.Component {
   }
 
   addIncident (name, desc, severity, img) {
-    $.get(Api.incidents.addIncident, {
+    $.get(`${ROOT_URL}${Api.incidents.addIncident}`, {
       name: name,
       description: desc,
       severity: severity,

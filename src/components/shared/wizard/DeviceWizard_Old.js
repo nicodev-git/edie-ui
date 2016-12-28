@@ -24,6 +24,8 @@ import MonitorTable from './input/MonitorTable'
 
 import {util} from './WizardUtil'
 
+import { ROOT_URL } from '../../../actions/config'
+
 export default class DeviceWizard extends React.Component {
   constructor (props) {
     super(props)
@@ -583,7 +585,7 @@ export default class DeviceWizard extends React.Component {
 
   callAddMonitors (monitors, device) {
     monitors.forEach(item => {
-      $.get(Api.deviceadmin.addDevice, assign({}, item, {
+      $.get(`${ROOT_URL}${Api.deviceadmin.addDevice}`, assign({}, item, {
         mapid: device.mapid,
         fatherid: device.id
       }))

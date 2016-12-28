@@ -3,6 +3,7 @@ import Modal from 'react-bootstrap-modal'
 import {
     Button
 } from 'react-bootstrap'
+import { ROOT_URL } from '../../../../../actions/config'
 
 class MoveModal extends React.Component {
   constructor (props) {
@@ -14,7 +15,7 @@ class MoveModal extends React.Component {
   }
 
   componentWillMount () {
-    $.get(Api.rule.getCategories).done(res => { // eslint-disable-line no-undef
+    $.get(`${ROOT_URL}${Api.rule.getCategories}`).done(res => { // eslint-disable-line no-undef
       this.setState({ categories: res })
     })
   }

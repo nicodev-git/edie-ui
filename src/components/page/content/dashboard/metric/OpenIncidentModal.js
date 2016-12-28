@@ -4,7 +4,7 @@ import { Button } from 'react-bootstrap'
 import moment from 'moment'
 import Select from 'react-select'
 import { assign } from 'lodash'
-
+import { ROOT_URL } from '../../../../../actions/config'
 import InfiniteTable from '../../../../shared/InfiniteTable'
 import DateRangePicker from '../../../../shared/DateRangePicker'
 import AddExceptionModal from './AddExceptionModal'
@@ -237,7 +237,7 @@ class OpenIncidentModal extends React.Component {
     showPrompt('Please type comment for all incidents.', '', (text) => {
       if (text === null) return
 
-      $.get(Api.incidents.fixAllOpenIncidents, {
+      $.get(`${ROOT_URL}${Api.incidents.fixAllOpenIncidents}`, {
         comment: text
       }).done(res => {
         this.reloadTable()

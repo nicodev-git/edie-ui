@@ -8,6 +8,8 @@ import LogMatchModal from './LogMatchModal'
 
 import { appendComponent, removeComponent } from '../../../../../util/Component'
 
+import { ROOT_URL } from '../../../../../actions/config'
+
 class MonitorLogModal extends React.Component {
   constructor (props) {
     super(props)
@@ -241,7 +243,7 @@ class MonitorLogModal extends React.Component {
 
     let loader = appendComponent(<Preloader/>)
 
-    $.get(url, {
+    $.get(`${ROOT_URL}${url}`, {
       deviceid: this.props.device.id
     }).done((data) => {
       if (!data) {
@@ -300,7 +302,7 @@ class MonitorLogModal extends React.Component {
 
     let loader = appendComponent(<Preloader/>)
 
-    $.get(url, params).done((res) => {
+    $.get(`${ROOT_URL}${url}`, params).done((res) => {
       let totalPages = parseInt(Math.ceil(res.recordsTotal / this.state.pageLength))
       if (type === 'all') {
         let text = ''

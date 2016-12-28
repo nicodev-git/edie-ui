@@ -1,4 +1,5 @@
 import React from 'react'
+import { ROOT_URL } from '../../../../../actions/config'
 
 class MainSettings extends React.Component {
   constructor (props) {
@@ -9,7 +10,7 @@ class MainSettings extends React.Component {
   }
 
   componentWillMount () {
-    $.get(Api.admin.getOptions, {}).done((res) => { // eslint-disable-line no-undef
+    $.get(`${ROOT_URL}${Api.admin.getOptions}`, {}).done((res) => { // eslint-disable-line no-undef
       let state = {}
 
       res.data.forEach(item => {
@@ -37,7 +38,7 @@ class MainSettings extends React.Component {
     if (!name) return false
     value = value || ''
     param = param || ''
-    return $.get(Api.admin.updateOptions, {name, value, param}) // eslint-disable-line no-undef
+    return $.get(`${ROOT_URL}${Api.admin.updateOptions}`, {name, value, param}) // eslint-disable-line no-undef
   }
 
   render () {

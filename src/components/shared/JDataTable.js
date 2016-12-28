@@ -1,5 +1,6 @@
 import React from 'react'
 import { isEqual, assign } from 'lodash'
+import { ROOT_URL } from '../../actions/config'
 
 class JDataTable extends React.Component {
   constructor (props) {
@@ -29,7 +30,7 @@ class JDataTable extends React.Component {
     if (!url) return
     let draw = this.draw++
 
-    $.get(url, assign({}, {draw, start, length}, params)) // eslint-disable-line no-undef
+    $.get(`${ROOT_URL}${url}`, assign({}, {draw, start, length}, params)) // eslint-disable-line no-undef
         .done(res => {
           this.setState({
             data: res.data,

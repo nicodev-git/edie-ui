@@ -1,5 +1,6 @@
 import React from 'react'
 import { BootstrapTable } from 'react-bootstrap-table'
+import { ROOT_URL } from '../../actions/config'
 
 export default class DataTable extends React.Component {
 
@@ -62,7 +63,7 @@ export default class DataTable extends React.Component {
       return
     }
 
-    $.get(this.props.url, {
+    $.get(`${ROOT_URL}${this.props.url}`, {
       draw: this.state.draw,
       start: (page - 1) * this.props.pageLength,
       length: this.props.pageLength

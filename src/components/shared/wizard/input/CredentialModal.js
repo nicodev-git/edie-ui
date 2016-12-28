@@ -6,6 +6,7 @@ import { appendComponent, removeComponent } from '../../../../util/Component'
 
 import CredentialEditModal from './CredentialEditModal'
 import { showAlert, showConfirm } from '../../../shared/Alert'
+import { ROOT_URL } from '../../../../actions/config'
 
 class CredentialModal extends React.Component {
   constructor (props) {
@@ -75,7 +76,7 @@ class CredentialModal extends React.Component {
     showConfirm('Click OK to remove.', (btn) => {
       if (btn !== 'ok') return
 
-      $.get(Api.devices.removeCredential, selected).done((res) => { // eslint-disable-line no-undef
+      $.get(`${ROOT_URL}${Api.devices.removeCredential}`, selected).done((res) => { // eslint-disable-line no-undef
         if (!res.success) {
           showAlert('Failed!')
           return

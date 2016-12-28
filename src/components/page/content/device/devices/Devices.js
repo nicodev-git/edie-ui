@@ -1,6 +1,7 @@
 import React from 'react'
 import Griddle from 'griddle-react'
 import {withRouter, Link} from 'react-router'
+import { ROOT_URL } from '../../../../../actions/config'
 
 class Devices extends React.Component {
   constructor (props) {
@@ -85,7 +86,7 @@ class Devices extends React.Component {
   loadTable () {
     const {state} = this.props.location
 
-    $.get(Api.dashboard.getMonitorsByMapAndDeviceDT, {
+    $.get(`${ROOT_URL}${Api.dashboard.getMonitorsByMapAndDeviceDT}`, {
       fatherid: state.device.id,
       mapid: state.device.mapid,
       rows: 0,

@@ -4,6 +4,7 @@ import {
     Button
 } from 'react-bootstrap'
 import { showAlert } from '../../../../shared/Alert'
+import { ROOT_URL } from '../../../../../actions/config'
 
 class BackupModal extends React.Component {
   constructor (props) {
@@ -36,7 +37,7 @@ class BackupModal extends React.Component {
       return
     }
 
-    $.get(Api.rule.backupRules, { // eslint-disable-line no-undef
+    $.get(`${ROOT_URL}${Api.rule.backupRules}`, { // eslint-disable-line no-undef
       exportName: name,
       description: desc
     }).done((res) => {

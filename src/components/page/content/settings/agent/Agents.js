@@ -17,6 +17,8 @@ import TabPageHeader from '../../../../shared/TabPageHeader'
 
 import InfiniteTable from '../../../../shared/InfiniteTable'
 
+import { ROOT_URL } from '../../../../../actions/config'
+
 class Agents extends React.Component {
   constructor (props) {
     super(props)
@@ -223,7 +225,7 @@ class Agents extends React.Component {
   }
 
   showAgentConfigModal (data) {
-    $.get(Api.admin.getOptions, { // eslint-disable-line no-undef
+    $.get(`${ROOT_URL}${Api.admin.getOptions}`, { // eslint-disable-line no-undef
 
     }).done(res => {
       const index = findIndex(res.data, {name: 'agent_default_config'})

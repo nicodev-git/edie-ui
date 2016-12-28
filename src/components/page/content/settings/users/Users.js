@@ -28,6 +28,8 @@ import {
   openUserPasswordModal
 } from '../../../../../actions'
 
+import { ROOT_URL } from '../../../../../actions/config'
+
 class Users extends React.Component {
   constructor (props) {
     super(props)
@@ -167,7 +169,7 @@ class Users extends React.Component {
 
     let groups = this.state.groups
     const group = groups[selected]
-    $.get(Api.group.removeGroup, { // eslint-disable-line no-undef
+    $.get(`${ROOT_URL}${Api.group.removeGroup}`, { // eslint-disable-line no-undef
       id: group.id
     }).done(res => {
       if (!res.success) return showAlert('Remove failed!')
@@ -218,7 +220,7 @@ class Users extends React.Component {
     const selected = this.refs.users.getSelected()
     if (!selected) return showAlert('Please select user.')
 
-    $.get(Api.user.resetPin, { // eslint-disable-line no-undef
+    $.get(`${ROOT_URL}${Api.user.resetPin}`, { // eslint-disable-line no-undef
       id: selected.id
     }).done(res => {
       if (res.success) {

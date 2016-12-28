@@ -1,6 +1,8 @@
 import React from 'react'
 import Modal from 'react-bootstrap-modal'
 
+import { ROOT_URL } from '../../../../actions/config'
+
 class IconSelectModal extends React.Component {
   constructor (props) {
     super(props)
@@ -13,7 +15,7 @@ class IconSelectModal extends React.Component {
   }
 
   componentWillMount () {
-    $.get(Api.devices.getIcons, { // eslint-disable-line no-undef
+    $.get(`${ROOT_URL}${Api.devices.getIcons}`, { // eslint-disable-line no-undef
 
     }).done(res => {
       if (!res.length) return
@@ -100,7 +102,7 @@ class IconSelectModal extends React.Component {
 
                     // ///////////////////////////////////
 
-          $.get(Api.devices.addIcon, { filename }) // eslint-disable-line no-undef
+          $.get(`${ROOT_URL}${Api.devices.addIcon}`, { filename }) // eslint-disable-line no-undef
         } else {
           window.alert('Failed to upload.')
         }

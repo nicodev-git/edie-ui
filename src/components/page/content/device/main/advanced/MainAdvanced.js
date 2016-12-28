@@ -8,6 +8,8 @@ import TabPage from '../../../../../shared/TabPage'
 import TabPageBody from '../../../../../shared/TabPageBody'
 import TabPageHeader from '../../../../../shared/TabPageHeader'
 
+import { ROOT_URL } from '../../../../../../actions/config'
+
 class MainAdvanced extends React.Component {
   constructor (props) {
     super(props)
@@ -17,7 +19,7 @@ class MainAdvanced extends React.Component {
 
   onClickSend () {
     let ip = this.state.device.ipaddress
-    $.get(Api.server.simulation, { // eslint-disable-line no-undef
+    $.get(`${ROOT_URL}${Api.server.simulation}`, { // eslint-disable-line no-undef
       data: this.refs.message.value,
       ipaddress: ip
     }).done(function (res) {

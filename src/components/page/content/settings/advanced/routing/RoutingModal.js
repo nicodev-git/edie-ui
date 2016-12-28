@@ -11,6 +11,8 @@ import { appendComponent, removeComponent } from '../../../../../../util/Compone
 import UsersModal from './UsersModal'
 import GroupsModal from './GroupsModal'
 
+import { ROOT_URL } from '../../../../../../actions/config'
+
 class RoutingModal extends React.Component {
   constructor (props) {
     super(props)
@@ -89,7 +91,7 @@ class RoutingModal extends React.Component {
       addlist.forEach(item => {
         item.routingId = obj.id
 
-        calls.push($.get(Api.routing.addTarget, item).done(res => { // eslint-disable-line no-undef
+        calls.push($.get(`${ROOT_URL}${Api.routing.addTarget}`, item).done(res => { // eslint-disable-line no-undef
           if (!res.success) {
             console.log('Add routing target failed!')
             return false
@@ -100,7 +102,7 @@ class RoutingModal extends React.Component {
       })
 
       removelist.forEach(item => {
-        calls.push($.get(Api.routing.removeTarget, item).done((res) => { // eslint-disable-line no-undef
+        calls.push($.get(`${ROOT_URL}${Api.routing.removeTarget}`, item).done((res) => { // eslint-disable-line no-undef
           if (!res.success) {
             console.log('Remove routing target failed!')
             return false
@@ -123,7 +125,7 @@ class RoutingModal extends React.Component {
       ? (Api.routing.modifyRouting)  // eslint-disable-line no-undef
       : (Api.routing.addRouting) // eslint-disable-line no-undef
 
-    return $.get(url, params).done(function (res) { // eslint-disable-line no-undef
+    return $.get(`${ROOT_URL}${url}`, params).done(function (res) { // eslint-disable-line no-undef
       if (!res.success) return showAlert('Save failed!')
 
       callback && callback(res.object)

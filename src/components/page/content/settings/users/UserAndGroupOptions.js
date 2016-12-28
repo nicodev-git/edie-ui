@@ -15,6 +15,7 @@ import { EVENTS } from 'shared/event/Events'
 import { appendComponent, removeComponent } from '../../../../../util/Component'
 import { showAlert } from '../../../../shared/Alert'
 import GroupModal from './GroupModal'
+import { ROOT_URL } from '../../../../../actions/config'
 
 class UserAndGroupOptions extends React.Component {
   constructor (props) {
@@ -44,7 +45,7 @@ class UserAndGroupOptions extends React.Component {
   }
 
   loadGroups () {
-    $.get(Api.group.getGroupsDT, {
+    $.get(`${ROOT_URL}${Api.group.getGroupsDT}`, {
       draw: 1,
       start: 0,
       length: 100
@@ -169,7 +170,7 @@ class UserAndGroupOptions extends React.Component {
 
     let groups = this.state.groups
     const group = groups[selected]
-    $.get(Api.group.removeGroup, {
+    $.get(`${ROOT_URL}${Api.group.removeGroup}`, {
       id: group.id
     }).done(res => {
       if (!res.success) return showAlert('Remove failed!')

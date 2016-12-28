@@ -6,6 +6,7 @@ import { showAlert } from '../../../../../shared/Alert'
 
 import ParsersModal from './ParsersModal'
 import MTypeModal from './MTypeModal'
+import { ROOT_URL } from '../../../../../../actions/config'
 
 export default class SimulatorModal extends React.Component {
   constructor (props) {
@@ -177,7 +178,7 @@ export default class SimulatorModal extends React.Component {
       params[`m${item.number}`] = item.value
     })
 
-    $.get(Api.rule.runSimulator, params) // eslint-disable-line no-undef
+    $.get(`${ROOT_URL}${Api.rule.runSimulator}`, params) // eslint-disable-line no-undef
       .done(res => {
         $.each(res.object, (key, value) => { // eslint-disable-line no-undef
           let match = /^m(\d*)$/.exec(key)

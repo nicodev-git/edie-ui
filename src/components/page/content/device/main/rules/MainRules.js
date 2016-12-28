@@ -25,6 +25,7 @@ import TabPageBody from '../../../../../shared/TabPageBody'
 import TabPageHeader from '../../../../../shared/TabPageHeader'
 
 import {fetchDeviceRules} from '../../../../../../actions'
+import { ROOT_URL } from '../../../../../../actions/config'
 
 class MainRules extends React.Component {
   constructor (props) {
@@ -154,7 +155,7 @@ class MainRules extends React.Component {
     showPrompt('Please input category name.', 'New Category', name => {
       if (!name) return
 
-      $.get(Api.rule.addCategory, { // eslint-disable-line no-undef
+      $.get(`${ROOT_URL}${Api.rule.addCategory}`, { // eslint-disable-line no-undef
         name: name
       }).done(data => {
         if (!data.success) return
@@ -170,7 +171,7 @@ class MainRules extends React.Component {
     showConfirm('Click OK to remove selected category.', btn => {
       if (btn !== 'ok') return
 
-      $.get(Api.rule.deleteACategory, { // eslint-disable-line no-undef
+      $.get(`${ROOT_URL}${Api.rule.deleteACategory}`, { // eslint-disable-line no-undef
         id: categoryId
       }).done(data => {
         if (!data.success) {
@@ -313,7 +314,7 @@ class MainRules extends React.Component {
     showConfirm(`Click OK to delete: ${selected.name}`, btn => {
       if (btn !== 'ok') return
 
-      $.get(Api.rule.deleteARuleForADevice, { // eslint-disable-line no-undef
+      $.get(`${ROOT_URL}${Api.rule.deleteARuleForADevice}`, { // eslint-disable-line no-undef
         idRulesNew: selected.idrulesNew
       }).done(() => {
         cb && cb()
@@ -330,7 +331,7 @@ class MainRules extends React.Component {
       return
     }
 
-    $.get(Api.rule.copyRule, { // eslint-disable-line no-undef
+    $.get(`${ROOT_URL}${Api.rule.copyRule}`, { // eslint-disable-line no-undef
       id: selected.idrulesNew
     }).done(res => {
       if (!res.success) {
@@ -348,7 +349,7 @@ class MainRules extends React.Component {
     showConfirm('Click OK to reset rules.', btn => {
       if (btn !== 'ok') return
 
-      $.get(Api.rule.applyTemplateToDevices, { // eslint-disable-line no-undef
+      $.get(`${ROOT_URL}${Api.rule.applyTemplateToDevices}`, { // eslint-disable-line no-undef
         deviceids: this.props.device.id
       }).done(() => {
         this.getTable().refresh()
@@ -387,7 +388,7 @@ class MainRules extends React.Component {
       return
     }
 
-    $.get(Api.rule.shareRule, { // eslint-disable-line no-undef
+    $.get(`${ROOT_URL}${Api.rule.shareRule}`, { // eslint-disable-line no-undef
       ids: [selected.idrulesNew]
     }).done(res => {
       if (!res.success) {

@@ -15,6 +15,7 @@ import TabPageBody from '../../../../../shared/TabPageBody'
 import TabPageHeader from '../../../../../shared/TabPageHeader'
 
 import {fetchDevicePhysicalRules} from '../../../../../../actions'
+import { ROOT_URL } from '../../../../../../actions/config'
 
 class MainRulesAdd extends React.Component {
   constructor (props) {
@@ -117,7 +118,7 @@ class MainRulesAdd extends React.Component {
 
     let calls = []
     selected.forEach(id => {
-      calls.push($.get(Api.rule.addDeviceRuleFromPhysical, { // eslint-disable-line no-undef
+      calls.push($.get(`${ROOT_URL}${Api.rule.addDeviceRuleFromPhysical}`, { // eslint-disable-line no-undef
         physicalUuid: id,
         deviceId: this.props.device.id
       }))

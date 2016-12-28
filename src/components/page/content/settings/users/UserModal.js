@@ -12,6 +12,7 @@ import { connect } from 'react-redux'
 import { reduxForm, Field, change } from 'redux-form'
 import axios from 'axios'
 import { closeSettingUserModal, addSettingUser, updateSettingUser } from '../../../../../actions'
+import { ROOT_URL } from '../../../../../actions/config'
 
 class UserModal extends React.Component {
   constructor (props) {
@@ -36,7 +37,7 @@ class UserModal extends React.Component {
   }
 
   loadDefaultMaps () {
-    return $.get(`${Api.dashboard.getMaps}?draw=1`).done(res => { // eslint-disable-line no-undef
+    return $.get(`${ROOT_URL}${Api.dashboard.getMaps}?draw=1`).done(res => { // eslint-disable-line no-undef
       this.setState({
         defaultMaps: res.data
       })
@@ -44,7 +45,7 @@ class UserModal extends React.Component {
   }
 
   loadRoles () {
-    return $.get(Api.user.getRoles, { // eslint-disable-line no-undef
+    return $.get(`${ROOT_URL}${Api.user.getRoles}`, { // eslint-disable-line no-undef
       sid: this.context.sid
     }).done(res => {
       if (!res.object) return

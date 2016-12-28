@@ -5,6 +5,7 @@ import { findIndex } from 'lodash'
 
 import DeviceMenu from './DeviceMenu'
 import { lineTypes } from '../../../../../shared/Global'
+import { ROOT_URL } from '../../../../../actions/config'
 
 export default class Toolbar extends React.Component {
   constructor (props) {
@@ -35,7 +36,7 @@ export default class Toolbar extends React.Component {
   }
 
   loadLineTypes () {
-    $.get(Api.deviceadmin.getShapeTypes)
+    $.get(`${ROOT_URL}${Api.deviceadmin.getShapeTypes}`)
         .done((res) => {
           let lineTypes = this.lineTypes
 

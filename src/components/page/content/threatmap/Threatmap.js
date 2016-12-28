@@ -19,6 +19,7 @@ import { appendComponent, removeComponent } from '../../../../util/Component'
 import Preloader from '../../../shared/Preloader'
 
 import { format } from '../../../../shared/Global'
+import { ROOT_URL } from '../../../../actions/config'
 
 class ThreatMap extends React.Component {
 
@@ -911,7 +912,7 @@ class ThreatMap extends React.Component {
     // } // Never used
 
     if (me.currentPlay.stopped/* || me.currentPlay.paused */) return
-    $.get(`${Api.bi.threatMapEventsReal}?minutes=1`, { // eslint-disable-line no-undef
+    $.get(`${ROOT_URL}${Api.bi.threatMapEventsReal}?minutes=1`, { // eslint-disable-line no-undef
 
     }).done((res) => {
       if (me.cancelled) return
@@ -1308,7 +1309,7 @@ class ThreatMap extends React.Component {
 
     let loader = appendComponent(<Preloader/>)
 
-    $.get(Api.bi.threatMapEventsHistory, { // eslint-disable-line no-undef
+    $.get(`${ROOT_URL}${Api.bi.threatMapEventsHistory}`, { // eslint-disable-line no-undef
       from: datefrom,
       to: dateto
     }).done((res) => {

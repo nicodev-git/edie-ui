@@ -3,6 +3,7 @@ import Modal from 'react-bootstrap-modal'
 import TimeAgo from 'react-timeago'
 
 import InfiniteTable from '../../../shared/InfiniteTable'
+import { ROOT_URL } from '../../../../actions/config'
 
 class ProcessModal extends React.Component {
   constructor (props) {
@@ -27,7 +28,7 @@ class ProcessModal extends React.Component {
   }
 
   componentWillMount () {
-    $.get(Api.incidents.getProcessRunTimes, { // eslint-disable-line no-undef
+    $.get(`${ROOT_URL}${Api.incidents.getProcessRunTimes}`, { // eslint-disable-line no-undef
       processId: this.props.process.id
     }).done(res => {
       this.setState({
@@ -35,7 +36,7 @@ class ProcessModal extends React.Component {
       })
     })
 
-    $.get(Api.incidents.getProcessChildren, { // eslint-disable-line no-undef
+    $.get(`${ROOT_URL}${Api.incidents.getProcessChildren}`, { // eslint-disable-line no-undef
       processId: this.props.process.id
     }).done(res => {
       this.setState({
