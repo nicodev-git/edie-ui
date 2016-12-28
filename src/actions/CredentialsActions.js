@@ -13,8 +13,8 @@ import {
 
 import { ROOT_URL } from './config'
 
-export function fetchCredentials () {
-  return function (dispatch) {
+export const fetchCredentials = () => {
+  return (dispatch) => {
     axios.get(`${ROOT_URL}/credential`)
       .then(response => fetchCredentialsSuccess(dispatch, response))
       .catch(error => fetchCredentialsFail(dispatch, error))
@@ -35,8 +35,8 @@ export function fetchCredentials () {
   }
 }
 
-export function addCredentials (props) {
-  return function (dispatch) {
+export const addCredentials = (props) => {
+  return (dispatch) => {
     axios.post(`${ROOT_URL}/credential`, props)
       .then(response => addCredentialsSuccess(dispatch, response))
       .catch(error => addCredentialsFail(dispatch, error))
@@ -58,8 +58,8 @@ export function addCredentials (props) {
   }
 }
 
-export function updateCredentials (entity) {
-  return function (dispatch) {
+export const updateCredentials = (entity) => {
+  return (dispatch) => {
     axios.put(entity._links.self.href, entity)
       .then(response => updateCredentialsSuccess(dispatch, response))
       .catch(error => updateCredentialsFail(dispatch, error))
@@ -81,8 +81,8 @@ export function updateCredentials (entity) {
   }
 }
 
-export function removeCredentials (entity) {
-  return function (dispatch) {
+export const removeCredentials = (entity) => {
+  return (dispatch) => {
     axios.delete(entity._links.self.href)
       .then(() => removeCredentialsSuccess(dispatch, entity))
       .catch(error => removeCredentialsFail(dispatch, error))
@@ -103,8 +103,8 @@ export function removeCredentials (entity) {
   }
 }
 
-export function openCredentialsModal (entity) {
-  return function (dispatch) {
+export const openCredentialsModal = (entity) => {
+  return (dispatch) => {
     dispatch({ 
       type: OPEN_CREDENTIALS_MODAL, 
       data: entity 
@@ -112,8 +112,8 @@ export function openCredentialsModal (entity) {
   }
 }
 
-export function closeCredentialsModal () {
-  return function (dispatch) {
+export const closeCredentialsModal = () => {
+  return (dispatch) => {
     dispatch({ 
       type: CLOSE_CREDENTIALS_MODAL 
     })

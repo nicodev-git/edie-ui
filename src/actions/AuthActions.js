@@ -125,7 +125,7 @@ export const fetchUserInfo = () => {
     dispatch({
       type: FETCH_USER_INFO,
       data: response.data
-    }) // eslint-disable-line no-unused-vars
+    })
   }
 }
 

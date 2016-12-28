@@ -21,7 +21,6 @@ export const fetchMessage = () => {
     }
     axios.get(`${ROOT_URL}/api/me`, config)
     .then(response => {
-        // console.log(response);
       dispatch({
         type: FETCH_MESSAGE,
         payload: response.data.username

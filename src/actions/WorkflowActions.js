@@ -13,8 +13,8 @@ import {
 
 import { ROOT_URL } from './config'
 
-export function fetchWorkflows () {
-  return function (dispatch) {
+export const fetchWorkflows = () => {
+  return (dispatch) => {
     axios.get(`${ROOT_URL}/workflow`)
       .then(response => fetchWorkflowsSuccess(dispatch, response))
       .catch(error => fetchWorkflowsFail(dispatch, error))
@@ -35,8 +35,8 @@ export function fetchWorkflows () {
   }
 }
 
-export function addWorkflow (props) {
-  return function (dispatch) {
+export const addWorkflow = (props) => {
+  return (dispatch) => {
     axios.post(`${ROOT_URL}/workflow`, props)
       .then(response => addWorkflowSuccess(dispatch, response))
       .catch(error => addWorkflowFail(dispatch, error))
@@ -58,8 +58,8 @@ export function addWorkflow (props) {
   }
 }
 
-export function updateWorkflow (entity) {
-  return function (dispatch) {
+export const updateWorkflow = (entity) => {
+  return (dispatch) => {
     axios.put(entity._links.self.href, entity)
       .then(response => updateWorkflowSuccess(dispatch, response))
       .catch(error => updateWorkflowFail(dispatch, error))
@@ -81,8 +81,8 @@ export function updateWorkflow (entity) {
   }
 }
 
-export function removeWorkflow (entity) {
-  return function (dispatch) {
+export const removeWorkflow = (entity) => {
+  return (dispatch) => {
     axios.delete(entity._links.self.href)
       .then(() => updateWorkflowSuccess(dispatch, entity))
       .catch(error => updateWorkflowFail(dispatch, error))
@@ -103,8 +103,8 @@ export function removeWorkflow (entity) {
   }
 }
 
-export function openWorkflowModal (entity) {
-  return function (dispatch) {
+export const openWorkflowModal = (entity) => {
+  return (dispatch) => {
     dispatch({
       type: OPEN_WORKFLOW_MODAL,
       data: entity
@@ -112,8 +112,8 @@ export function openWorkflowModal (entity) {
   }
 }
 
-export function closeWorkflowModal () {
-  return function (dispatch) {
+export const closeWorkflowModal = () => {
+  return (dispatch) => {
     dispatch({
       type: CLOSE_WORKFLOW_MODAL
     })

@@ -13,8 +13,8 @@ import {
 
 import { ROOT_URL } from './config'
 
-export function fetchIdentities () {
-  return function (dispatch) {
+export const fetchIdentities = () => {
+  return (dispatch) => {
     axios.get(`${ROOT_URL}/setting/search/identities`)
       .then(response => fetchIdentitiesSuccess(dispatch, response))
       .catch(error => fetchIdentitiesFail(dispatch, error))
@@ -35,8 +35,8 @@ export function fetchIdentities () {
   }
 }
 
-export function addIdentity (props) {
-  return function (dispatch) {
+export const addIdentity = (props) => {
+  return (dispatch) => {
     axios.post(`${ROOT_URL}/setting`, props)
       .then(response => addIdentitySuccess(dispatch, response))
       .catch(error => addIdentityFail(dispatch, error))
@@ -58,8 +58,8 @@ export function addIdentity (props) {
   }
 }
 
-export function updateIdentity (entity) {
-  return function (dispatch) {
+export const updateIdentity = (entity) => {
+  return (dispatch) => {
     axios.put(entity._links.self.href, entity)
       .then(response => updateIdentitySuccess(dispatch, response))
       .catch(error => updateIdentityFail(dispatch, error))
@@ -81,8 +81,8 @@ export function updateIdentity (entity) {
   }
 }
 
-export function removeIdentity (entity) {
-  return function (dispatch) {
+export const removeIdentity = (entity) => {
+  return (dispatch) => {
     axios.delete(entity._links.self.href)
       .then(() => removeIdentitySuccess(dispatch, entity))
       .catch(error => removeIdentityFail(dispatch, error))
@@ -103,8 +103,8 @@ export function removeIdentity (entity) {
   }
 }
 
-export function openIdentityModal (entity) {
-  return function (dispatch) {
+export const openIdentityModal = (entity) => {
+  return (dispatch) => {
     dispatch({ 
       type: OPEN_IDENTITY_MODAL, 
       data: entity 
@@ -112,8 +112,8 @@ export function openIdentityModal (entity) {
   }
 }
 
-export function closeIdentityModal () {
-  return function (dispatch) {
+export const closeIdentityModal = () => {
+  return (dispatch) => {
     dispatch({ 
       type: CLOSE_IDENTITY_MODAL 
     })
