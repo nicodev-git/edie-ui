@@ -1,5 +1,5 @@
-export function getServerURL () {
+export const getServerURL = () => {
   return 'http://imp.dev.securegion.com'
 }
 
-// const ROOT_URL = getBackendURL();
+export const ROOT_URL = getServerURL();

@@ -11,6 +11,8 @@ import {
   API_ERROR
 } from './types'
 
+import { ROOT_URL } from './config'
+
 export const fetchMonitorTemplates = () => {
   return (dispatch) => {
     axios.get(`${ROOT_URL}/monitortemplate`)

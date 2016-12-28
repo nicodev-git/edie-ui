@@ -8,6 +8,8 @@ import {
   API_ERROR
 } from './types'
 
+import { ROOT_URL } from './config'
+
 export const fetchEnvVars = () => {
   return (dispatch) => {
     axios.get(`${ROOT_URL}/setting/search/envvars`)

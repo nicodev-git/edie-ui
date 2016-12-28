@@ -20,6 +20,8 @@ import {
   API_ERROR
 } from './types'
 
+import { ROOT_URL } from './config'
+
 export const fetchSettingMaps = () => {
   return (dispatch) => {
     axios.get(`${ROOT_URL}/map`)

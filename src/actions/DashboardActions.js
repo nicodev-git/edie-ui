@@ -9,6 +9,10 @@ import {
   API_ERROR
 } from './types'
 
+import { ROOT_URL } from './config'
+
+import { encodeUrlParams } from '../shared/Global'
+
 export const updateDashboard = (data) => {
   return (dispatch) => {
     dispatch({

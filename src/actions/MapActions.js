@@ -29,6 +29,8 @@ import {
   API_ERROR
 } from './types'
 
+import { ROOT_URL } from './config'
+
 export const fetchMaps = (initial) => {
   return (dispatch) => {
     axios.get(`${ROOT_URL}/map`)
