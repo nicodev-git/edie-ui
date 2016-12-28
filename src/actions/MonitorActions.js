@@ -7,7 +7,6 @@ import {
   DELETE_MONITOR_TEMPLATE,
   OPEN_MONITOR_TEMPLATE_MODAL,
   CLOSE_MONITOR_TEMPLATE_MODAL
-  CLOSE_MONITOR_TEMPLATE_MODAL
 } from './types'
 
 import { apiError } from './errors'
