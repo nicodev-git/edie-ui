@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { showAlert } from '../../../../shared/Alert'
 import InfiniteTable from '../../../../shared/InfiniteTable'
 import UsersModal from './UsersModal'
-import { closeMapUsersModal, addMapUser, removeMapUser } from '../../../../../actions/MapActions'
+import { closeMapUsersModal, addMapUser, removeMapUser } from '../../../../../actions'
 
 class MapUsersModal extends React.Component { // eslint-disable-line react/no-multi-comp
   constructor (props) {

@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import {ResponsiveInfiniteTable} from '../../../../shared/InfiniteTable'
-import { fetchDeviceEventLog } from '../../../../../actions/DeviceActions'
+import { fetchDeviceEventLog } from '../../../../../actions'
 
 class EventLogTable extends React.Component {
   constructor (props) {

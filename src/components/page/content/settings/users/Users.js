@@ -22,11 +22,11 @@ import TabPageBody from '../../../../shared/TabPageBody'
 import TabPageHeader from '../../../../shared/TabPageHeader'
 
 import {
-  fetchSettingUsers, 
-  openSettingUserModal, 
+  fetchSettingUsers,
+  openSettingUserModal,
   deleteSettingUser,
   openUserPasswordModal
-} from '../../../../../actions/SettingsActions'
+} from '../../../../../actions'
 
 class Users extends React.Component {
   constructor (props) {

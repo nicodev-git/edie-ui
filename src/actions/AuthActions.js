@@ -1,9 +1,7 @@
 import axios from 'axios'
 import { browserHistory } from 'react-router'
-import { assign, concat } from 'lodash'
 import {
   AUTH_USER,
-  AUTH_ERROR,
   INVALIDATE_USER,
   FETCH_USER_INFO,
   UPDATE_USER_INFO,
@@ -17,51 +15,56 @@ import { ROOT_URL } from './config'
 
 export function signUser ({ email, password }) {
   return function (dispatch) {
-      let config = {
-        headers: {
-          'Content-Type': 'application/json',
-          'X-Requested-With': 'XMLHttpRequest'
-        }
-      }
-      axios.post(`${ROOT_URL}/api/auth/login`,
-          {
-            username: email,
-            password: password
-          },
-          config
-        )
-        .then(response => signUserSuccess(dispatch, response))
-        .catch(() => authError(dispatch))
-
-    const signUserSuccess = (dispatch, response) => {
-      dispatch({
-        type: AUTH_USER
-      })
-      window.localStorage.setItem('token', response.data.token)
-      browserHistory.push('/')
-    }
-
-    // const api = new XMLHttpRequest() // eslint-disable-line no-undef
-    // api.onreadystatechange = () => {
-    //   if (api.readyState === 4) {
-    //     if (api.status !== 200) {
-    //       dispatch({type: AUTH_ERROR, msg: 'Wrong credentials.'})
-    //     } else {
-    //       dispatch({type: AUTH_USER})
-    //       window.localStorage.setItem('token', JSON.parse(api.responseText).token)
-    //
-    //       browserHistory.push('/')
-    //     }
+    // let config = {
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //     'X-Requested-With': 'XMLHttpRequest'
     //   }
     // }
-    // api.open('POST', `${ROOT_URL}/api/auth/login`, true)
-    // // api.setRequestHeader('Origin', ROOT_URL)
-    // api.setRequestHeader('X-Requested-With', 'XMLHttpRequest')
-    // api.send(JSON.stringify({
-    //   username: email,
-    //   password: password
-    // }))
+    // axios.post(`${ROOT_URL}/api/auth/login`,
+    //   {
+    //     username: email,
+    //     password: password
+    //   },
+    //   config
+    // )
+    // .then(response => signUserSuccess(dispatch, response))
+    // .catch(() => authError(dispatch))
+    //
+    // const signUserSuccess = (dispatch, response) => {
+    //   dispatch({
+    //     type: AUTH_USER
+    //   })
+    //   window.localStorage.setItem('token', response.data.token)
+    //   browserHistory.push('/')
+    // }
+
+    const api = new XMLHttpRequest() // eslint-disable-line no-undef
+    api.onreadystatechange = () => {
+      if (api.readyState === 4) {
+        if (api.status !== 200) {
+          authError(dispatch)
+        } else {
+          signUserSuccess(dispatch)
+        }
+      }
+    }
+    api.open('POST', `${ROOT_URL}/api/auth/login`, true)
+    // api.setRequestHeader('Origin', ROOT_URL)
+    api.setRequestHeader('X-Requested-With', 'XMLHttpRequest')
+    api.send(JSON.stringify({
+      username: email,
+      password: password
+    }))
   }
+}
+
+const signUserSuccess = (dispatch) => {
+  dispatch({
+    type: AUTH_USER
+  })
+  window.localStorage.setItem('token', JSON.parse(api.responseText).token) // eslint-disable-line no-undef
+  browserHistory.push('/')
 }
 
 export const signOut = () => {
@@ -75,23 +78,16 @@ export const signup = ({ email, password }) => {
   return (dispatch) => {
     axios.post(`${ROOT_URL}/signup`, {email, password})
       .then(response => signupSuccess(dispatch, response))
-      .catch(error => signupFail(dispatch, error))
+      .catch(error => authError(dispatch, error))
   }
+}
 
-  const signupFail = (dispatch, error) => {
-    dispatch({
-      type: AUTH_ERROR,
-      msg: error
-    })
-  }
-
-  const signupSuccess = (dispatch, response) => {
-    dispatch({
-      type: AUTH_USER
-    })
-    window.localStorage.setItem('token', response.data.token)
-    browserHistory.push('/feature')
-  }
+const signupSuccess = (dispatch, response) => {
+  dispatch({
+    type: AUTH_USER
+  })
+  window.localStorage.setItem('token', response.data.token)
+  browserHistory.push('/feature')
 }
 
 export const fetchUserInfo = () => {
@@ -106,13 +102,13 @@ export const fetchUserInfo = () => {
       .then(response => fetchUserInfoSuccess(dispatch, response))
       .catch(error => apiError(dispatch, error))
   }
+}
 
-  const fetchUserInfoSuccess = (dispatch, response) => {
-    dispatch({
-      type: FETCH_USER_INFO,
-      data: response.data
-    })
-  }
+const fetchUserInfoSuccess = (dispatch, response) => {
+  dispatch({
+    type: FETCH_USER_INFO,
+    data: response.data
+  })
 }
 
 export const updateUserProfile = (props) => {
@@ -121,14 +117,14 @@ export const updateUserProfile = (props) => {
       .then(response => updateUserProfileSuccess(dispatch, response))
       .catch(error => apiError(dispatch, error))
   }
+}
 
-  const updateUserProfileSuccess = (dispatch, response) => {
-    dispatch({
-      type: UPDATE_USER_INFO,
-      data: response.data
-    })
-    dispatch(closeProfileModal())
-  }
+const updateUserProfileSuccess = (dispatch, response) => {
+  dispatch({
+    type: UPDATE_USER_INFO,
+    data: response.data
+  })
+  dispatch(closeProfileModal())
 }
 
 export const openProfileModal = () => {

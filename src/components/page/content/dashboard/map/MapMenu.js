@@ -7,7 +7,7 @@ import MapSaveModal from './MapSaveModal'
 import MapImportModal from './MapImportModal'
 import { showAlert, showPrompt, showConfirm } from '../../../../shared/Alert'
 
-import {addMap, updateMap, deleteMap, openMapImportModal} from '../../../../../actions/MapActions'
+import {addMap, updateMap, deleteMap, openMapImportModal} from '../../../../../actions'
 
 class MapMenu extends React.Component {
   constructor (props) {

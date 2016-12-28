@@ -9,11 +9,9 @@ import { extImageBaseUrl } from '../../../../../shared/Global'
 import {
   addMonitorTemplate,
   updateMonitorTemplate,
-  closeMonitorTplModal
-} from '../../../../../actions/MonitorActions'
-import {
+  closeMonitorTplModal,
   openTplImageModal
-} from '../../../../../actions/ImageActions'
+} from '../../../../../actions'
 
 const Input = ({ input, label, type, meta: { touched, error } }) => (
     <fieldset className="form-group">

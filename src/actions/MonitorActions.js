@@ -1,5 +1,4 @@
 import axios from 'axios'
-import { assign, concat } from 'lodash'
 import {
   FETCH_MONITOR_TEMPLATES,
   ADD_MONITOR_TEMPLATE,
@@ -19,13 +18,13 @@ export const fetchMonitorTemplates = () => {
       .then(response => fetchMonitorTemplatesSuccess(dispatch, response))
       .catch(error => apiError(dispatch, error))
   }
+}
 
-  const fetchMonitorTemplatesSuccess = (dispatch, response) => {
-    dispatch({
-      type: FETCH_MONITOR_TEMPLATES, 
-      data: response.data._embedded.monitorTemplates
-    })
-  }
+const fetchMonitorTemplatesSuccess = (dispatch, response) => {
+  dispatch({
+    type: FETCH_MONITOR_TEMPLATES,
+    data: response.data._embedded.monitorTemplates
+  })
 }
 
 export const addMonitorTemplate = (props) => {
@@ -34,14 +33,14 @@ export const addMonitorTemplate = (props) => {
       .then(response => addMonitorTemplateSuccess(dispatch, response))
       .catch(error => apiError(dispatch, error))
   }
+}
 
-  const addMonitorTemplateSuccess = (dispatch, response) => {
-    dispatch({
-      type: ADD_MONITOR_TEMPLATE,
-      data: response.data
-    })
-    dispatch(closeMonitorTplModal())
-  }
+const addMonitorTemplateSuccess = (dispatch, response) => {
+  dispatch({
+    type: ADD_MONITOR_TEMPLATE,
+    data: response.data
+  })
+  dispatch(closeMonitorTplModal())
 }
 
 export const updateMonitorTemplate = (entity) => {
@@ -50,14 +49,14 @@ export const updateMonitorTemplate = (entity) => {
       .then(response => updateMonitorTemplateSuccess(dispatch, response))
       .catch(error => apiError(dispatch, error))
   }
+}
 
-  const updateMonitorTemplateSuccess = (dispatch, response) => {
-    dispatch({
-      type: UPDATE_MONITOR_TEMPLATE,
-      data: response.data
-    })
-    dispatch(closeMonitorTplModal())
-  }
+const updateMonitorTemplateSuccess = (dispatch, response) => {
+  dispatch({
+    type: UPDATE_MONITOR_TEMPLATE,
+    data: response.data
+  })
+  dispatch(closeMonitorTplModal())
 }
 
 export const deleteMonitorTemplate = (entity) => {
@@ -66,13 +65,13 @@ export const deleteMonitorTemplate = (entity) => {
       .then(() => deleteMonitorTemplateSuccess(dispatch, entity))
       .catch(error => apiError(dispatch, error))
   }
+}
 
-  const deleteMonitorTemplateSuccess = (dispatch, entity) => {
-    dispatch({
-      type: DELETE_MONITOR_TEMPLATE,
-      data: entity
-    })
-  }
+const deleteMonitorTemplateSuccess = (dispatch, entity) => {
+  dispatch({
+    type: DELETE_MONITOR_TEMPLATE,
+    data: entity
+  })
 }
 
 export const openMonitorTplModal = (tpl) => {

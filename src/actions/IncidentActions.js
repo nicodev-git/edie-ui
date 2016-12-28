@@ -1,5 +1,4 @@
 import axios from 'axios'
-import { assign, concat } from 'lodash'
 import {
   OPEN_NEW_INCIDENT_MODAL,
   CLOSE_NEW_INCIDENT_MODAL,
@@ -43,13 +42,13 @@ export const fetchDeviceIncidents = (params) => {
       .then(response => fetchDeviceIncidentsSuccess(dispatch, response))
       .catch(error => apiError(dispatch, error))
   }
+}
 
-  const fetchDeviceIncidentsSuccess = (dispatch, response) => {
-    dispatch({
-      type: FETCH_DEVICE_INCIDENTS,
-      data: response.data._embedded.incidents
-    })
-  }
+const fetchDeviceIncidentsSuccess = (dispatch, response) => {
+  dispatch({
+    type: FETCH_DEVICE_INCIDENTS,
+    data: response.data._embedded.incidents
+  })
 }
 
 export const addDeviceIncident = (props) => {
@@ -58,14 +57,14 @@ export const addDeviceIncident = (props) => {
       .then(response => addDeviceIncidentSuccess(dispatch, response))
       .catch(error => apiError(dispatch, error))
   }
+}
 
-  const addDeviceIncidentSuccess = (dispatch, response) => {
-    dispatch({
-      type: ADD_DEVICE_INCIDENT,
-      data: response.data
-    })
-    dispatch(closeAddDeviceIncident())
-  }
+const addDeviceIncidentSuccess = (dispatch, response) => {
+  dispatch({
+    type: ADD_DEVICE_INCIDENT,
+    data: response.data
+  })
+  dispatch(closeAddDeviceIncident())
 }
 
 export const updateDeviceIncident = (entity) => {
@@ -74,13 +73,13 @@ export const updateDeviceIncident = (entity) => {
       .then(response => updateDeviceIncidentSuccess(dispatch, response))
       .catch(error => apiError(dispatch, error))
   }
+}
 
-  const updateDeviceIncidentSuccess = (dispatch, response) => {
-    dispatch({
-      type: UPDATE_DEVICE_INCIDENT,
-      data: response.data
-    })
-  }
+const updateDeviceIncidentSuccess = (dispatch, response) => {
+  dispatch({
+    type: UPDATE_DEVICE_INCIDENT,
+    data: response.data
+  })
 }
 
 export const openAddDeviceIncident = () => {
@@ -120,13 +119,13 @@ export const searchIncidents = (params) => {
       .then(response => searchIncidentsSuccess(dispatch, response))
       .catch(error => apiError(dispatch, error))
   }
+}
 
-  const searchIncidentsSuccess = (dispatch, response) => {
-    dispatch({
-      type: SEARCH_INCIDENTS,
-      data: response.data._embedded.incidents
-    })
-  }
+const searchIncidentsSuccess = (dispatch, response) => {
+  dispatch({
+    type: SEARCH_INCIDENTS,
+    data: response.data._embedded.incidents
+  })
 }
 
 export const searchIncidentDevices = (params) => {
@@ -135,11 +134,11 @@ export const searchIncidentDevices = (params) => {
       .then(response => searchIncidentDevicesSuccess(dispatch, response))
       .catch(error => apiError(dispatch, error))
   }
+}
 
-  const searchIncidentDevicesSuccess = (dispatch, response) => {
-    dispatch({
-      type: SEARCH_INCIDENT_DEVICES,
-      data: response.data._embedded.devices
-    })
-  }
+const searchIncidentDevicesSuccess = (dispatch, response) => {
+  dispatch({
+    type: SEARCH_INCIDENT_DEVICES,
+    data: response.data._embedded.devices
+  })
 }

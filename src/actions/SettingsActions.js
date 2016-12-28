@@ -1,5 +1,4 @@
 import axios from 'axios'
-import { assign, concat } from 'lodash'
 import {
   FETCH_SETTING_MAPS,
   ADD_SETTING_MAP,
@@ -28,13 +27,13 @@ export const fetchSettingMaps = () => {
       .then(response => fetchSettingMapsSuccess(dispatch, response))
       .catch(error => apiError(dispatch, error))
   }
+}
 
-  const fetchSettingMapsSuccess = (dispatch, response) => {
-    dispatch({
-      type: FETCH_SETTING_MAPS,
-      data: response.data._embedded.maps
-    })
-  }
+const fetchSettingMapsSuccess = (dispatch, response) => {
+  dispatch({
+    type: FETCH_SETTING_MAPS,
+    data: response.data._embedded.maps
+  })
 }
 
 export const openSettingMapModal = (map) => {
@@ -60,14 +59,14 @@ export const addSettingMap = (props) => {
       .then(response => addSettingMapSuccess(dispatch, response))
       .catch(error => apiError(dispatch, error))
   }
+}
 
-  const addSettingMapSuccess = (dispatch, response) => {
-    dispatch({
-      type: ADD_SETTING_MAP,
-      data: response.data
-    })
-    dispatch(closeSettingMapModal())
-  }
+const addSettingMapSuccess = (dispatch, response) => {
+  dispatch({
+    type: ADD_SETTING_MAP,
+    data: response.data
+  })
+  dispatch(closeSettingMapModal())
 }
 
 export const updateSettingMap = (entity) => {
@@ -76,14 +75,14 @@ export const updateSettingMap = (entity) => {
       .then(response => updateSettingMapSuccess(dispatch, response))
       .catch(error => apiError(dispatch, error))
   }
+}
 
-  const updateSettingMapSuccess = (dispatch, response) => {
-    dispatch({
-      type: UPDATE_SETTING_MAP,
-      data: response.data
-    })
-    dispatch(closeSettingMapModal())
-  }
+const updateSettingMapSuccess = (dispatch, response) => {
+  dispatch({
+    type: UPDATE_SETTING_MAP,
+    data: response.data
+  })
+  dispatch(closeSettingMapModal())
 }
 
 export const deleteSettingMap = (entity) => {
@@ -92,13 +91,13 @@ export const deleteSettingMap = (entity) => {
       .then(() => deleteSettingMapSuccess(dispatch, entity))
       .catch(error => apiError(dispatch, error))
   }
+}
 
-  const deleteSettingMapSuccess = (dispatch, response) => {
-    dispatch({
-      type: REMOVE_SETTING_MAP,
-      data: entity
-    })
-  }
+const deleteSettingMapSuccess = (dispatch, entity) => {
+  dispatch({
+    type: REMOVE_SETTING_MAP,
+    data: entity
+  })
 }
 
 export const fetchSettingUsers = () => {
@@ -109,13 +108,13 @@ export const fetchSettingUsers = () => {
       .then(response => fetchSettingUsersSuccess(dispatch, response))
       .catch(error => apiError(dispatch, error))
   }
+}
 
-  const fetchSettingUsersSuccess = (dispatch, response) => {
-    dispatch({
-      type: FETCH_SETTING_USERS,
-      data: response.data._embedded.users
-    })
-  }
+const fetchSettingUsersSuccess = (dispatch, response) => {
+  dispatch({
+    type: FETCH_SETTING_USERS,
+    data: response.data._embedded.users
+  })
 }
 
 export const addSettingUser = (props) => {
@@ -124,14 +123,14 @@ export const addSettingUser = (props) => {
       .then(response => addSettingUserSuccess(dispatch, response))
       .catch(error => apiError(dispatch, error))
   }
+}
 
-  const addSettingUserSuccess = (dispatch, response) => {
-    dispatch({
-      type: ADD_SETTING_USER,
-      data: response.data
-    })
-    dispatch(closeSettingUserModal())
-  }
+const addSettingUserSuccess = (dispatch, response) => {
+  dispatch({
+    type: ADD_SETTING_USER,
+    data: response.data
+  })
+  dispatch(closeSettingUserModal())
 }
 
 export const updateSettingUser = (entity) => {
@@ -140,30 +139,30 @@ export const updateSettingUser = (entity) => {
       .then(response => updateSettingUserSuccess(dispatch, response))
       .catch(error => apiError(dispatch, error))
   }
+}
 
-  const updateSettingUserSuccess = (dispatch, response) => {
-    dispatch({
-      type: UPDATE_SETTING_USER,
-      data: response.data
-    })
-    dispatch(closeSettingUserModal())
-    dispatch(closeUserPasswordModal())
-  }
+const updateSettingUserSuccess = (dispatch, response) => {
+  dispatch({
+    type: UPDATE_SETTING_USER,
+    data: response.data
+  })
+  dispatch(closeSettingUserModal())
+  dispatch(closeUserPasswordModal())
 }
 
 export const deleteSettingUser = (entity) => {
   return (dispatch) => {
     axios.delete(entity._links.self.href)
-      .then(response => deleteSettingUserSuccess(dispatch, response))
+      .then(() => deleteSettingUserSuccess(dispatch, entity))
       .catch(error => apiError(dispatch, error))
   }
+}
 
-  const deleteSettingUserSuccess = (dispatch, response) => {
-    dispatch({
-      type: REMOVE_SETTING_USER,
-      data: entity
-    })
-  }
+const deleteSettingUserSuccess = (dispatch, entity) => {
+  dispatch({
+    type: REMOVE_SETTING_USER,
+    data: entity
+  })
 }
 
 export const openSettingUserModal = (user) => {

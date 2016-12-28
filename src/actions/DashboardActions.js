@@ -1,5 +1,4 @@
 import axios from 'axios'
-import { assign, concat } from 'lodash'
 import {
   UPDATE_DASHBOARD,
 
@@ -24,17 +23,17 @@ export const updateDashboard = (data) => {
 
 export const fetchIncidents = () => {
   return (dispatch) => {
-    axios.get(`${ROOT_URL}/incident`, { params: { } })
+    axios.get(`${ROOT_URL}/incident`, {params: {}})
       .then(response => fetchIncidentsSuccess(dispatch, response))
       .catch(error => apiError(dispatch, error))
   }
+}
 
-  const fetchIncidentsSuccess = (dispatch, response) => {
-    dispatch({ 
-      type: FETCH_DASHBOARD_INCIDENTS, 
-      data: c.data._embedded.incidents 
-    })
-  }
+const fetchIncidentsSuccess = (dispatch, response) => {
+  dispatch({
+    type: FETCH_DASHBOARD_INCIDENTS,
+    data: response.data._embedded.incidents
+  })
 }
 
 export const fetchBigIncidents = (params) => {
@@ -43,11 +42,11 @@ export const fetchBigIncidents = (params) => {
       .then(response => fetchBigIncidentsSuccess(dispatch, response))
       .catch(error => apiError(dispatch, error))
   }
+}
 
-  const fetchBigIncidentsSuccess = (dispatch, response) => {
-    dispatch({ 
-      type: FETCH_DASHBOARD_BIGINCIDENTS, 
-      data: response.data._embedded.incidents 
-    })
-  }
+const fetchBigIncidentsSuccess = (dispatch, response) => {
+  dispatch({
+    type: FETCH_DASHBOARD_BIGINCIDENTS,
+    data: response.data._embedded.incidents
+  })
 }

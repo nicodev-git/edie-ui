@@ -16,7 +16,7 @@ import {
   fetchEnvVars,
   addEnvVar,
   updateEnvVar
-} from '../../../../../actions/EnvActions'
+} from '../../../../../actions'
 
 class General extends React.Component {
   constructor (props) {

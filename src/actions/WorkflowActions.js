@@ -1,5 +1,4 @@
 import axios from 'axios'
-import { assign, concat } from 'lodash'
 import {
   FETCH_WORKFLOWS,
   ADD_WORKFLOW,
@@ -19,13 +18,13 @@ export const fetchWorkflows = () => {
       .then(response => fetchWorkflowsSuccess(dispatch, response))
       .catch(error => apiError(dispatch, error))
   }
+}
 
-  const fetchWorkflowsSuccess = (dispatch, response) => {
-    dispatch({
-      type: FETCH_WORKFLOWS,
-      data: response.data._embedded.workflows
-    })
-  }
+const fetchWorkflowsSuccess = (dispatch, response) => {
+  dispatch({
+    type: FETCH_WORKFLOWS,
+    data: response.data._embedded.workflows
+  })
 }
 
 export const addWorkflow = (props) => {
@@ -34,14 +33,14 @@ export const addWorkflow = (props) => {
       .then(response => addWorkflowSuccess(dispatch, response))
       .catch(error => apiError(dispatch, error))
   }
+}
 
-  const addWorkflowSuccess = (dispatch, response) => {
-    dispatch({
-      type: ADD_WORKFLOW,
-      data: response.data
-    })
-    dispatch(closeWorkflowModal())
-  }
+const addWorkflowSuccess = (dispatch, response) => {
+  dispatch({
+    type: ADD_WORKFLOW,
+    data: response.data
+  })
+  dispatch(closeWorkflowModal())
 }
 
 export const updateWorkflow = (entity) => {
@@ -50,29 +49,29 @@ export const updateWorkflow = (entity) => {
       .then(response => updateWorkflowSuccess(dispatch, response))
       .catch(error => apiError(dispatch, error))
   }
+}
 
-  const updateWorkflowSuccess = (dispatch, response) => {
-    dispatch({
-      type: UPDATE_WORKFLOW,
-      data: response.data
-    })
-    dispatch(closeWorkflowModal())
-  }
+const updateWorkflowSuccess = (dispatch, response) => {
+  dispatch({
+    type: UPDATE_WORKFLOW,
+    data: response.data
+  })
+  dispatch(closeWorkflowModal())
 }
 
 export const removeWorkflow = (entity) => {
   return (dispatch) => {
     axios.delete(entity._links.self.href)
-      .then(() => updateWorkflowSuccess(dispatch, entity))
+      .then(() => removeWorkflowSuccess(dispatch, entity))
       .catch(error => apiError(dispatch, error))
   }
+}
 
-  const updateWorkflowSuccess = (dispatch, entity) => {
-    dispatch({
-      type: REMOVE_WORKFLOW,
-      data: entity
-    })
-  }
+const removeWorkflowSuccess = (dispatch, entity) => {
+  dispatch({
+    type: REMOVE_WORKFLOW,
+    data: entity
+  })
 }
 
 export const openWorkflowModal = (entity) => {

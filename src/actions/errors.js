@@ -11,8 +11,11 @@ export const apiError = (dispatch, error) => {
   })
 }
 
-export const updateDeviceError = () => {
-
+export const updateDeviceError = (dispatch, error) => {
+  dispatch({
+    type: UPDATE_DEVICE_ERROR,
+    msg: error
+  })
 }
 
 export const authError = (dispatch) => {

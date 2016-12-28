@@ -1,5 +1,4 @@
 import axios from 'axios'
-import { assign, concat } from 'lodash'
 import {
   FETCH_IDENTITIES,
   ADD_IDENTITY,
@@ -19,13 +18,13 @@ export const fetchIdentities = () => {
       .then(response => fetchIdentitiesSuccess(dispatch, response))
       .catch(error => apiError(dispatch, error))
   }
+}
 
-  const fetchIdentitiesSuccess = (dispatch, response) => {
-    dispatch({
-      type: FETCH_IDENTITIES, 
-      data: response.data._embedded.settingses
-    })
-  }
+const fetchIdentitiesSuccess = (dispatch, response) => {
+  dispatch({
+    type: FETCH_IDENTITIES,
+    data: response.data._embedded.settingses
+  })
 }
 
 export const addIdentity = (props) => {
@@ -34,14 +33,14 @@ export const addIdentity = (props) => {
       .then(response => addIdentitySuccess(dispatch, response))
       .catch(error => apiError(dispatch, error))
   }
+}
 
-  const addIdentitySuccess = (dispatch, response) => {
-    dispatch({
-      type: ADD_IDENTITY, 
-      data: response.data
-    })
-    dispatch(closeIdentityModal())
-  }
+const addIdentitySuccess = (dispatch, response) => {
+  dispatch({
+    type: ADD_IDENTITY,
+    data: response.data
+  })
+  dispatch(closeIdentityModal())
 }
 
 export const updateIdentity = (entity) => {
@@ -50,14 +49,14 @@ export const updateIdentity = (entity) => {
       .then(response => updateIdentitySuccess(dispatch, response))
       .catch(error => apiError(dispatch, error))
   }
+}
 
-  const updateIdentitySuccess = (dispatch, response) => {
-    dispatch({
-      type: UPDATE_IDENTITY, 
-      data: response.data
-    })
-    dispatch(closeIdentityModal())
-  }
+const updateIdentitySuccess = (dispatch, response) => {
+  dispatch({
+    type: UPDATE_IDENTITY,
+    data: response.data
+  })
+  dispatch(closeIdentityModal())
 }
 
 export const removeIdentity = (entity) => {
@@ -66,28 +65,28 @@ export const removeIdentity = (entity) => {
       .then(() => removeIdentitySuccess(dispatch, entity))
       .catch(error => apiError(dispatch, error))
   }
+}
 
-  const removeIdentitySuccess = (dispatch, entity) => {
-    dispatch({
-      type: REMOVE_IDENTITY, 
-      data: entity
-    })
-  }
+const removeIdentitySuccess = (dispatch, entity) => {
+  dispatch({
+    type: REMOVE_IDENTITY,
+    data: entity
+  })
 }
 
 export const openIdentityModal = (entity) => {
   return (dispatch) => {
-    dispatch({ 
-      type: OPEN_IDENTITY_MODAL, 
-      data: entity 
+    dispatch({
+      type: OPEN_IDENTITY_MODAL,
+      data: entity
     })
   }
 }
 
 export const closeIdentityModal = () => {
   return (dispatch) => {
-    dispatch({ 
-      type: CLOSE_IDENTITY_MODAL 
+    dispatch({
+      type: CLOSE_IDENTITY_MODAL
     })
   }
 }

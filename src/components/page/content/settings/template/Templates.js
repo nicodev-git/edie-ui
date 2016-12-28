@@ -10,13 +10,11 @@ import TabPageHeader from '../../../../shared/TabPageHeader'
 import {
   fetchDeviceTemplates,
   deleteDeviceTemplate,
-  openDeviceTplModal
-} from '../../../../../actions/DeviceActions'
-import {
+  openDeviceTplModal,
   fetchMonitorTemplates,
   openMonitorTplModal,
   deleteMonitorTemplate
-} from '../../../../../actions/MonitorActions'
+} from '../../../../../actions'
 
 import DeviceTplModal from './DeviceTplModal'
 import MonitorTplModal from './MonitorTplModal'

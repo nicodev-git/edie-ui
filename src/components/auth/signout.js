@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-import { signOut } from '../../actions/AuthActions'
+import { signOut } from '../../actions'
 
 class Signout extends Component {
 

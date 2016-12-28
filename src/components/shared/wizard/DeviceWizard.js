@@ -24,8 +24,7 @@ import MTable from './input/MTable'
 import {wizardConfig} from './WizardConfig'
 import {util} from './WizardUtil'
 
-import { fetchMonitorTemplates } from '../../../actions/MonitorActions'
-import { clearDeviceWizardInitialValues } from '../../../actions/DeviceActions'
+import { fetchMonitorTemplates, clearDeviceWizardInitialValues } from '../../../actions'
 
 class DeviceWizard extends React.Component {
   constructor (props) {

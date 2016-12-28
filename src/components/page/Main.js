@@ -5,7 +5,7 @@ import { startsWith } from 'lodash'
 import { DragDropContext } from 'react-dnd'
 import TouchBackend from 'react-dnd-touch-backend'
 
-import {closeDevice} from '../../actions/DeviceActions'
+import {closeDevice} from '../../actions'
 
 import Topbar from './topbar/Topbar'
 import Sidebar from './sidebar/Sidebar'

@@ -13,7 +13,7 @@ import {
   addCredentials,
   updateCredentials,
   closeCredentialsModal
-} from '../../../../../actions/CredentialsActions'
+} from '../../../../../actions'
 
 const renderInput = field => (
     <div className="row margin-md-bottom">

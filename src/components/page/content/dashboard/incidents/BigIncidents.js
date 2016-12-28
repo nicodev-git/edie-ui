@@ -8,7 +8,7 @@ import {connect} from 'react-redux'
 import {withRouter} from 'react-router'
 import IncidentTable from './IncidentTable'
 
-import { fetchBigIncidents } from '../../../../../actions/DashboardActions'
+import { fetchBigIncidents } from '../../../../../actions'
 
 class BigIncidents extends React.Component {
   constructor (props) {

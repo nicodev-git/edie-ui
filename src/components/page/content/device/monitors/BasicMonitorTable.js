@@ -5,7 +5,7 @@ import enStrings from 'react-timeago/lib/language-strings/en'
 import buildFormatter from 'react-timeago/lib/formatters/buildFormatter'
 import {connect} from 'react-redux'
 
-import {fetchDeviceBasicMonitors} from '../../../../../actions/DeviceActions'
+import {fetchDeviceBasicMonitors} from '../../../../../actions'
 
 class BasicMonitorTable extends React.Component {
   constructor (props) {

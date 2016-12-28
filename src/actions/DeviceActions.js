@@ -1,9 +1,8 @@
 import axios from 'axios'
-import { assign, concat } from 'lodash'
 import {
   FETCH_DEVICES,
-  
-  OPEN_DEVICE, 
+
+  OPEN_DEVICE,
   CLOSE_DEVICE,
 
   OPEN_DEVICE_MONITOR_PICKER,
@@ -22,7 +21,6 @@ import {
 
   OPEN_DEVICE_EDIT_MODAL,
   CLOSE_DEVICE_EDIT_MODAL,
-  UPDATE_DEVICE_ERROR,
 
   FETCH_DEVICE_TEMPLATES,
   ADD_DEVICE_TEMPLATE,
@@ -32,7 +30,7 @@ import {
   CLOSE_DEVICE_TEMPLATE_MODAL
 } from './types'
 
-import { apiError } from './errors'
+import { apiError, updateDeviceError } from './errors'
 
 import { ROOT_URL } from './config'
 
@@ -48,14 +46,14 @@ export const fetchDevices = () => {
       .then(response => fetchDevicesSuccess(dispatch, response))
       .catch(error => apiError(dispatch, error))
   }
+}
 
-  const fetchDevicesSuccess = (dispatch, response) => {
-    console.log('Response DATA:', response.data._embedded.devices)
-    dispatch({
-      type: FETCH_DEVICES,
-      payload: response.data._embedded.devices
-    })
-  }
+const fetchDevicesSuccess = (dispatch, response) => {
+  console.log('Response DATA:', response.data._embedded.devices)
+  dispatch({
+    type: FETCH_DEVICES,
+    payload: response.data._embedded.devices
+  })
 }
 
 export const openDevice = (device) => {
@@ -191,59 +189,38 @@ export const addDevice = (url, props) => {
   return (dispatch) => {
     axios.post(url, props)
       .then(() => addDeviceSuccess(dispatch))
-      .catch(error => addDeviceFail(dispatch, error))
+      .catch(error => updateDeviceError(dispatch, error))
   }
+}
 
-  const addDeviceFail = (dispatch, error) => {
-    dispatch({
-      type: UPDATE_DEVICE_ERROR,
-      msg: error
-    })
-  }
-
-  const addDeviceSuccess = (dispatch) => {
-    dispatch(closeDeviceEditModal())
-    dispatch(fetchDevices())
-  }
+const addDeviceSuccess = (dispatch) => {
+  dispatch(closeDeviceEditModal())
+  dispatch(fetchDevices())
 }
 
 export const updateDevice = (url, props) => {
   return (dispatch) => {
     axios.put(url, props)
       .then(response => updateDeviceSuccess(dispatch))
-      .catch(error => updateDeviceFail(dispatch, error))
+      .catch(error => updateDeviceError(dispatch, error))
   }
+}
 
-  const updateDeviceFail = (dispatch, error) => {
-    dispatch({
-      type: UPDATE_DEVICE_ERROR,
-      msg: error
-    })
-  }
-
-  const updateDeviceSuccess = (dispatch) => {
-    dispatch(closeDeviceEditModal())
-    dispatch(fetchDevices())
-  }
+const updateDeviceSuccess = (dispatch) => {
+  dispatch(closeDeviceEditModal())
+  dispatch(fetchDevices())
 }
 
 export const deleteDevice = (url) => {
   return (dispatch) => {
     axios.delete(url)
       .then(() => deleteDeviceSuccess(dispatch))
-      .catch(error => deleteDeviceFail(dispatch, error))
+      .catch(error => updateDeviceError(dispatch, error))
   }
+}
 
-  const deleteDeviceFail = (dispatch, error) => {
-    dispatch({
-      type: UPDATE_DEVICE_ERROR,
-      msg: error
-    })
-  }
-
-  const deleteDeviceSuccess = (dispatch) => {
-    dispatch(fetchDevices())
-  }
+const deleteDeviceSuccess = (dispatch) => {
+  dispatch(fetchDevices())
 }
 
 export const fetchDeviceTemplates = () => {
@@ -252,13 +229,13 @@ export const fetchDeviceTemplates = () => {
       .then(response => fetchDeviceTemplatesSuccess(dispatch, response))
       .catch(error => apiError(dispatch, error))
   }
+}
 
-  const fetchDeviceTemplatesSuccess = (dispatch, response) => {
-    dispatch({
-      type: FETCH_DEVICE_TEMPLATES,
-      data: response.data._embedded.deviceTemplates
-    })
-  }
+const fetchDeviceTemplatesSuccess = (dispatch, response) => {
+  dispatch({
+    type: FETCH_DEVICE_TEMPLATES,
+    data: response.data._embedded.deviceTemplates
+  })
 }
 
 export const addDeviceTemplate = (props) => {
@@ -267,14 +244,14 @@ export const addDeviceTemplate = (props) => {
       .then(response => addDeviceTemplateSuccess(dispatch, response))
       .catch(error => apiError(dispatch, error))
   }
+}
 
-  const addDeviceTemplateSuccess = (dispatch, response) => {
-    dispatch({
-      type: ADD_DEVICE_TEMPLATE,
-      data: response.data
-    })
-    dispatch(closeDeviceTplModal())
-  }
+const addDeviceTemplateSuccess = (dispatch, response) => {
+  dispatch({
+    type: ADD_DEVICE_TEMPLATE,
+    data: response.data
+  })
+  dispatch(closeDeviceTplModal())
 }
 
 export const updateDeviceTemplate = (entity) => {
@@ -283,14 +260,14 @@ export const updateDeviceTemplate = (entity) => {
       .then(response => updateDeviceTemplateSuccess(dispatch, response))
       .catch(error => apiError(dispatch, error))
   }
+}
 
-  const updateDeviceTemplateSuccess = (dispatch, response) => {
-    dispatch({
-      type: UPDATE_DEVICE_TEMPLATE,
-      data: response.data
-    })
-    dispatch(closeDeviceTplModal())
-  }
+const updateDeviceTemplateSuccess = (dispatch, response) => {
+  dispatch({
+    type: UPDATE_DEVICE_TEMPLATE,
+    data: response.data
+  })
+  dispatch(closeDeviceTplModal())
 }
 
 export const deleteDeviceTemplate = (entity) => {
@@ -299,13 +276,13 @@ export const deleteDeviceTemplate = (entity) => {
       .then(() => deleteDeviceTemplateSuccess(dispatch, entity))
       .catch(error => apiError(dispatch, error))
   }
+}
 
-  const deleteDeviceTemplateSuccess = (dispatch, entity) => {
-    dispatch({
-      type: DELETE_DEVICE_TEMPLATE,
-      data: entity
-    })
-  }
+const deleteDeviceTemplateSuccess = (dispatch, entity) => {
+  dispatch({
+    type: DELETE_DEVICE_TEMPLATE,
+    data: entity
+  })
 }
 
 export const openDeviceTplModal = (tpl) => {

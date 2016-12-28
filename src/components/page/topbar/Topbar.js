@@ -5,7 +5,7 @@ import ProfileModal from './ProfileModal'
 import { connect } from 'react-redux'
 // import { appendComponent, removeComponent } from '../../../util/Component' // Never used
 
-import { signOut, openProfileModal, closeProfileModal } from '../../../actions/AuthActions'
+import { signOut, openProfileModal, closeProfileModal } from '../../../actions'
 
 class Topbar extends React.Component {
   constructor (props) {

@@ -5,7 +5,7 @@ import MetricPanel from './metric/MetricPanel'
 import Map from './map/Map'
 import MainIncidentPanel from './incidents/MainIncidentPanel'
 
-import { updateDashboard } from '../../../../actions/DashboardActions'
+import { updateDashboard } from '../../../../actions'
 
 class Dashboard extends React.Component {
   constructor (props) {

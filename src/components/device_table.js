@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {fetchDevices} from '../actions/DeviceActions'
+import {fetchDevices} from '../actions'
 import {Link} from 'react-router'
 import Griddle from 'griddle-react'
 import SearchBar from '../containers/search_bar'

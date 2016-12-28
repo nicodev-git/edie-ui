@@ -10,7 +10,7 @@ import TabPageHeader from '../../../../shared/TabPageHeader'
 import DeviceEditWizard from '../../../../shared/wizard/DeviceEditWizard'
 import { deviceTypeMap } from '../../../../shared/wizard/WizardConfig'
 
-import { updateMapDevice } from '../../../../../actions/MapActions'
+import { updateMapDevice } from '../../../../../actions'
 
 class Info extends React.Component {
   constructor (props) {

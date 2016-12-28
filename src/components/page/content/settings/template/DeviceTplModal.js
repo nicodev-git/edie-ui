@@ -9,11 +9,9 @@ import { extImageBaseUrl } from '../../../../../shared/Global'
 import {
   addDeviceTemplate,
   updateDeviceTemplate,
-  closeDeviceTplModal
-} from '../../../../../actions/DeviceActions'
-import {
+  closeDeviceTplModal,
   openTplImageModal
-} from '../../../../../actions/ImageActions'
+} from '../../../../../actions'
 
 const Input = ({ input, label, type, meta: { touched, error } }) => (
     <fieldset className="form-group">

@@ -34,19 +34,19 @@ import { ROOT_URL } from './config'
 export const fetchMaps = (initial) => {
   return (dispatch) => {
     axios.get(`${ROOT_URL}/map`)
-      .then(response => fetchMapsSuccess(dispatch, response))
+      .then(response => fetchMapsSuccess(dispatch, response, initial))
       .catch(error => apiError(dispatch, error))
   }
+}
 
-  const fetchMapsSuccess = (dispatch, response) => {
-    const maps = response.data._embedded.maps
-    dispatch({
-      type: FETCH_MAPS,
-      data: maps
-    })
-    if (initial && maps.length) {
-      dispatch(changeMap(maps[0]))
-    }
+const fetchMapsSuccess = (dispatch, response, initial) => {
+  const maps = response.data._embedded.maps
+  dispatch({
+    type: FETCH_MAPS,
+    data: maps
+  })
+  if (initial && maps.length) {
+    dispatch(changeMap(maps[0]))
   }
 }
 
@@ -66,13 +66,13 @@ export const addMap = (props) => {
       .then(response => addMapSuccess(dispatch, response))
       .catch(error => apiError(dispatch, error))
   }
+}
 
-  const addMapSuccess = (dispatch, response) => {
-    dispatch({
-      type: ADD_MAP,
-      data: response.data
-    })
-  }
+const addMapSuccess = (dispatch, response) => {
+  dispatch({
+    type: ADD_MAP,
+    data: response.data
+  })
 }
 
 export const updateMap = (entity) => {
@@ -81,13 +81,13 @@ export const updateMap = (entity) => {
       .then(response => updateMapSuccess(dispatch, response))
       .catch(error => apiError(dispatch, error))
   }
+}
 
-  const updateMapSuccess = (dispatch, response) => {
-    dispatch({
-      type: UPDATE_MAP,
-      data: response.data
-    })
-  }
+const updateMapSuccess = (dispatch, response) => {
+  dispatch({
+    type: UPDATE_MAP,
+    data: response.data
+  })
 }
 
 export const deleteMap = (entity) => {
@@ -96,14 +96,14 @@ export const deleteMap = (entity) => {
       .then(() => deleteMapSuccess(dispatch, entity))
       .catch(error => apiError(dispatch, error))
   }
+}
 
-  const deleteMapSuccess = (dispatch, entity) => {
-    dispatch(fetchMaps(true))
-    dispatch({
-      type: REMOVE_MAP, // TODO: check this action later
-      data: entity
-    })
-  }
+const deleteMapSuccess = (dispatch, entity) => {
+  dispatch(fetchMaps(true))
+  dispatch({
+    type: REMOVE_MAP, // TODO: check this action later
+    data: entity
+  })
 }
 
 export const openMapImportModal = () => {
@@ -128,14 +128,14 @@ export const importMap = (form) => {
       .then(response => importMapSuccess(dispatch, response))
       .catch(error => apiError(dispatch, error))
   }
+}
 
-  const importMapSuccess = (dispatch, response) => {
-    dispatch({
-      type: IMPORT_MAP,
-      data: response.data
-    })
-    dispatch(closeMapImportModal())
-  }
+const importMapSuccess = (dispatch, response) => {
+  dispatch({
+    type: IMPORT_MAP,
+    data: response.data
+  })
+  dispatch(closeMapImportModal())
 }
 
 export const openMapUsersModal = (map) => {
@@ -162,49 +162,49 @@ export const fetchMapUsers = (mapId) => {
       .then(response => fetchMapUsersSuccess(dispatch, response))
       .catch(error => apiError(dispatch, error))
   }
+}
 
-  const fetchMapUsersSuccess = (dispatch, response) => {
-    dispatch({
-      type: FETCH_MAP_USERS,
-      data: response.data._embedded.users
-    })
-  }
+const fetchMapUsersSuccess = (dispatch, response) => {
+  dispatch({
+    type: FETCH_MAP_USERS,
+    data: response.data._embedded.users
+  })
 }
 
 export const addMapUser = (map, user) => {
   return (dispatch) => {
-    const entity = assign({ }, user)
+    const entity = assign({}, user)
     entity.mapids = concat(entity.mapids || [], map.id)
 
     axios.put(entity._links.self.href, entity)
       .then(response => addMapUserSuccess(dispatch, response))
       .catch(error => apiError(dispatch, error))
   }
+}
 
-  const addMapUserSuccess = (dispatch, response) => {
-    dispatch({
-      type: ADD_MAP_USER,
-      data: response.data
-    })
-  }
+const addMapUserSuccess = (dispatch, response) => {
+  dispatch({
+    type: ADD_MAP_USER,
+    data: response.data
+  })
 }
 
 export const removeMapUser = (map, user) => {
   return (dispatch) => {
-    const entity = assign({ mapids: [] }, user)
+    const entity = assign({mapids: []}, user)
     entity.mapids = (entity.mapids || []).filter(u => u !== map.id)
 
     axios.put(entity._links.self.href, entity)
       .then(() => removeMapUserSuccess(dispatch, user))
       .catch(error => apiError(dispatch, error))
   }
+}
 
-  const removeMapUserSuccess = (dispatch, user) => {
-    dispatch({
-      type: REMOVE_MAP_USER,
-      data: user
-    })
-  }
+const removeMapUserSuccess = (dispatch, user) => {
+  dispatch({
+    type: REMOVE_MAP_USER,
+    data: user
+  })
 }
 
 export const fetchMapDevicesAndLines = (mapid) => {
@@ -214,40 +214,40 @@ export const fetchMapDevicesAndLines = (mapid) => {
       return
     }
 
-    const req1 = axios.get(`${ROOT_URL}/device/search/findDevicesByMapid`, { params: { mapid } })
+    const req1 = axios.get(`${ROOT_URL}/device/search/findDevicesByMapid`, {params: {mapid}})
       .then(response => fetchDevicesByMapid(response))
 
-    const req2 = axios.get(`${ROOT_URL}/device/search/findLinesByMapid`, { params: { mapid } })
+    const req2 = axios.get(`${ROOT_URL}/device/search/findLinesByMapid`, {params: {mapid}})
       .then(response => fetchLinesByMapid(response))
 
     axios.all([req1, req2])
       .then(response => fetchMapDevicesAndLinesSuccess(dispatch, response))
       .catch(error => apiError(dispatch, error))
   }
+}
 
-  const fetchMapId = (dispatch) => {
-    dispatch({
-      type: FETCH_MAP_DEVICES_LINES,
-      maps: [],
-      lines: []
-    })
-  }
+const fetchMapId = (dispatch) => {
+  dispatch({
+    type: FETCH_MAP_DEVICES_LINES,
+    maps: [],
+    lines: []
+  })
+}
 
-  const fetchDevicesByMapid = (response) => {
-    return response.data._embedded.devices
-  }
+const fetchDevicesByMapid = (response) => {
+  return response.data._embedded.devices
+}
 
-  const fetchLinesByMapid = (response) => {
-    return response.data._embedded.devices
-  }
+const fetchLinesByMapid = (response) => {
+  return response.data._embedded.devices
+}
 
-  const fetchMapDevicesAndLinesSuccess = (dispatch, response) => {
-    dispatch({
-      type: FETCH_MAP_DEVICES_LINES,
-      maps: response[0],
-      lines: response[1]
-    })
-  }
+const fetchMapDevicesAndLinesSuccess = (dispatch, response) => {
+  dispatch({
+    type: FETCH_MAP_DEVICES_LINES,
+    maps: response[0],
+    lines: response[1]
+  })
 }
 
 export const addMapDevice = (props) => {
@@ -256,13 +256,13 @@ export const addMapDevice = (props) => {
       .then(response => addMapDeviceSuccess(dispatch, response))
       .catch(error => apiError(dispatch, error))
   }
+}
 
-  const addMapDeviceSuccess = (dispatch, response) => {
-    dispatch({
-      type: ADD_MAP_DEVICE,
-      data: response.data
-    })
-  }
+const addMapDeviceSuccess = (dispatch, response) => {
+  dispatch({
+    type: ADD_MAP_DEVICE,
+    data: response.data
+  })
 }
 
 export const updateMapDevice = (entity) => {
@@ -271,13 +271,13 @@ export const updateMapDevice = (entity) => {
       .then(response => updateMapDeviceSuccess(dispatch, response))
       .catch(error => apiError(dispatch, error))
   }
+}
 
-  const updateMapDeviceSuccess = (dispatch, response) => {
-    dispatch({
-      type: UPDATE_MAP_DEVICE,
-      data: response.data
-    })
-  }
+const updateMapDeviceSuccess = (dispatch, response) => {
+  dispatch({
+    type: UPDATE_MAP_DEVICE,
+    data: response.data
+  })
 }
 
 export const deleteMapDevice = (entity) => {
@@ -286,29 +286,29 @@ export const deleteMapDevice = (entity) => {
       .then(() => deleteMapDeviceSuccess(dispatch, entity))
       .catch(error => apiError(dispatch, error))
   }
+}
 
-  const deleteMapDeviceSuccess = (dispatch, entity) => {
-    dispatch({
-      type: DELETE_MAP_DEVICE,
-      data: entity
-    })
-  }
+const deleteMapDeviceSuccess = (dispatch, entity) => {
+  dispatch({
+    type: DELETE_MAP_DEVICE,
+    data: entity
+  })
 }
 
 export const addMapLine = (props, cb) => {
   return (dispatch) => {
     axios.post(`${ROOT_URL}/device`, props)
-      .then(response => addMapLineSuccess(dispatch, response))
+      .then(response => addMapLineSuccess(dispatch, response, cb))
       .catch(error => apiError(dispatch, error))
   }
+}
 
-  const addMapLineSuccess = (dispatch, response) => {
-    dispatch({
-      type: ADD_MAP_LINE,
-      data: response.data
-    })
-    cb && cb(response.data)
-  }
+const addMapLineSuccess = (dispatch, response, cb) => {
+  dispatch({
+    type: ADD_MAP_LINE,
+    data: response.data
+  })
+  cb && cb(response.data)
 }
 
 export const updateMapLine = (entity) => {
@@ -317,13 +317,13 @@ export const updateMapLine = (entity) => {
       .then(response => updateMapLineSuccess(dispatch, response))
       .catch(error => apiError(dispatch, error))
   }
+}
 
-  const updateMapLineSuccess = (dispatch, response) => {
-    dispatch({
-      type: UPDATE_MAP_LINE,
-      data: response.data
-    })
-  }
+const updateMapLineSuccess = (dispatch, response) => {
+  dispatch({
+    type: UPDATE_MAP_LINE,
+    data: response.data
+  })
 }
 
 export const deleteMapLine = (entity) => {
@@ -332,11 +332,11 @@ export const deleteMapLine = (entity) => {
       .then(() => deleteMapLineSuccess(dispatch, entity))
       .catch(error => apiError(dispatch, error))
   }
+}
 
-  const deleteMapLineSuccess = (dispatch, entity) => {
-    dispatch({
-      type: DELETE_MAP_LINE,
-      data: entity
-    })
-  }
+const deleteMapLineSuccess = (dispatch, entity) => {
+  dispatch({
+    type: DELETE_MAP_LINE,
+    data: entity
+  })
 }

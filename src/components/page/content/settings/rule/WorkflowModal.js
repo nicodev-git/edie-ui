@@ -8,7 +8,7 @@ import { connect } from 'react-redux'
 import { assign } from 'lodash'
 import { showAlert } from '../../../../shared/Alert'
 
-import { fetchWorkflows, addWorkflow, updateWorkflow, closeWorkflowModal } from '../../../../../actions/WorkflowActions'
+import { fetchWorkflows, addWorkflow, updateWorkflow, closeWorkflowModal } from '../../../../../actions'
 
 const renderInput = field => (
     <div className="row margin-md-bottom">

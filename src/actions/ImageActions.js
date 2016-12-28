@@ -1,5 +1,4 @@
 import axios from 'axios'
-import { assign, concat } from 'lodash'
 import {
   OPEN_TPL_IMAGE_MODAL,
   CLOSE_TPL_IMAGE_MODAL,
@@ -35,13 +34,13 @@ export const uploadImage = (formData) => {
       .then(response => uploadImageSuccess(dispatch, response))
       .catch(error => apiError(dispatch, error))
   }
+}
 
-  const uploadImageSuccess = (dispatch, response) => {
-    dispatch({
-      type: UPLOAD_IMAGE,
-      data: response.data
-    })
-  }
+const uploadImageSuccess = (dispatch, response) => {
+  dispatch({
+    type: UPLOAD_IMAGE,
+    data: response.data
+  })
 }
 
 export const fetchImages = () => {
@@ -50,11 +49,11 @@ export const fetchImages = () => {
       .then(response => fetchImagesSuccess(dispatch, response))
       .catch(error => apiError(dispatch, error))
   }
+}
 
-  const fetchImagesSuccess = (dispatch, response) => {
-    dispatch({
-      type: FETCH_IMAGES,
-      data: response.data._embedded.customImages
-    })
-  }
+const fetchImagesSuccess = (dispatch, response) => {
+  dispatch({
+    type: FETCH_IMAGES,
+    data: response.data._embedded.customImages
+  })
 }

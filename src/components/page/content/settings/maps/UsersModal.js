@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import InfiniteTable from '../../../../shared/InfiniteTable'
 import { showAlert } from '../../../../shared/Alert'
 
-import { fetchSettingUsers } from '../../../../../actions/SettingsActions'
+import { fetchSettingUsers } from '../../../../../actions'
 
 class UsersModal extends React.Component {
   constructor (props) {

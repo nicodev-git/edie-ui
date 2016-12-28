@@ -15,9 +15,9 @@ import MonitorHistoryModal from './MonitorHistoryModal'
 import {
   openDeviceMonitorPicker,
   openDeviceMonitorWizard,
-  closeDeviceMonitorWizard
-} from '../../../../../actions/DeviceActions'
-import { updateMapDevice } from '../../../../../actions/MapActions'
+  closeDeviceMonitorWizard,
+  updateMapDevice
+} from '../../../../../actions'
 
 class MonitorTable extends React.Component {
   constructor (props) {

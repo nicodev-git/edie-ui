@@ -7,7 +7,7 @@ import { reduxForm, Field } from 'redux-form'
 import { connect } from 'react-redux'
 import { assign } from 'lodash'
 
-import { closeIdentityModal, addIdentity, updateIdentity } from '../../../../../actions/IdentityActions'
+import { closeIdentityModal, addIdentity, updateIdentity } from '../../../../../actions'
 
 const renderInput = field => (
     <div className="row margin-md-bottom">

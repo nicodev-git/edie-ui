@@ -35,7 +35,7 @@ import {
   ackIncident,
   fetchDeviceIncidents,
   openAddDeviceIncident
-} from '../../../../../../actions/IncidentActions'
+} from '../../../../../../actions'
 
 import {
   showIncidentDetail,

@@ -4,7 +4,7 @@ import moment from 'moment'
 import { connect } from 'react-redux'
 import { assign, concat } from 'lodash'
 
-import { updateDeviceIncident } from '../../../actions/IncidentActions'
+import { updateDeviceIncident } from '../../../actions'
 
 class CommentsModal extends React.Component {
   constructor (props) {

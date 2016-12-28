@@ -21,7 +21,7 @@ import TabPage from '../../../../../shared/TabPage'
 import TabPageBody from '../../../../../shared/TabPageBody'
 import TabPageHeader from '../../../../../shared/TabPageHeader'
 
-import {fetchDeviceRawIncidents} from '../../../../../../actions/DeviceActions'
+import {fetchDeviceRawIncidents} from '../../../../../../actions'
 
 class MainRawIncidents extends React.Component {
   constructor (props) {

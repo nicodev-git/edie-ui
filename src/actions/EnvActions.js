@@ -1,5 +1,4 @@
 import axios from 'axios'
-import { assign, concat } from 'lodash'
 import {
   FETCH_ENV_VARS,
   ADD_ENV_VAR,
@@ -16,13 +15,13 @@ export const fetchEnvVars = () => {
       .then(response => fetchEnvVarsSuccess(dispatch, response))
       .catch(error => apiError(dispatch, error))
   }
+}
 
-  const fetchEnvVarsSuccess = (dispatch, response) => {
-    dispatch({
-      type: FETCH_ENV_VARS, 
-      data: response.data._embedded.settingses
-    })
-  }
+const fetchEnvVarsSuccess = (dispatch, response) => {
+  dispatch({
+    type: FETCH_ENV_VARS,
+    data: response.data._embedded.settingses
+  })
 }
 
 export const updateEnvVar = (entity) => {
@@ -31,13 +30,13 @@ export const updateEnvVar = (entity) => {
       .then(response => updateEnvVarSuccess(dispatch, response))
       .catch(error => apiError(dispatch, error))
   }
+}
 
-  const updateEnvVarSuccess = (dispatch, response) => {
-    dispatch({
-      type: UPDATE_ENV_VAR, 
-      data: response.data
-    })
-  }
+const updateEnvVarSuccess = (dispatch, response) => {
+  dispatch({
+    type: UPDATE_ENV_VAR,
+    data: response.data
+  })
 }
 
 export const addEnvVar = (entity) => {
@@ -46,11 +45,11 @@ export const addEnvVar = (entity) => {
       .then(response => addEnvVarSuccess(dispatch, response))
       .catch(error => apiError(dispatch, error))
   }
+}
 
-  const addEnvVarSuccess = (dispatch, response) => {
-    dispatch({
-      type: ADD_ENV_VAR, 
-      data: response.data
-    })
-  }
+const addEnvVarSuccess = (dispatch, response) => {
+  dispatch({
+    type: ADD_ENV_VAR,
+    data: response.data
+  })
 }

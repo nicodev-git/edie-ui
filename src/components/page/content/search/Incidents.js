@@ -27,7 +27,7 @@ import {
   searchIncidents,
   fixIncident,
   ackIncident
-} from '../../../../actions/IncidentActions'
+} from '../../../../actions'
 
 class Incidents extends React.Component {
   constructor (props) {

@@ -2,7 +2,7 @@ import React from 'react'
 import Modal from 'react-bootstrap-modal'
 import { connect } from 'react-redux'
 
-import { closeAddDeviceIncident, addDeviceIncident } from '../../../../../../actions/IncidentActions'
+import { closeAddDeviceIncident, addDeviceIncident } from '../../../../../../actions'
 
 class AddIncidentModal extends React.Component {
   constructor (props) {
