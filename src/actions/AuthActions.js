@@ -45,7 +45,7 @@ export function signUser ({ email, password }) {
         if (api.status !== 200) {
           authError(dispatch)
         } else {
-          signUserSuccess(dispatch)
+          signUserSuccess(dispatch, api.responseText)
         }
       }
     }
@@ -63,7 +63,7 @@ const signUserSuccess = (dispatch) => {
   dispatch({
     type: AUTH_USER
   })
-  window.localStorage.setItem('token', JSON.parse(api.responseText).token) // eslint-disable-line no-undef
+  window.localStorage.setItem('token', JSON.parse(response).token) // eslint-disable-line no-undef
   browserHistory.push('/')
 }
 
