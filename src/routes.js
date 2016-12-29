@@ -2,9 +2,9 @@ import React from 'react'
 import { Router, browserHistory, Route } from 'react-router'
 
 import Main from './components/page/Main'
-import Signin from './components/auth/signin'
-import Signup from './components/auth/signup'
-import Signout from './components/auth/signout'
+import Signin from './components/auth/Signin'
+import Signup from './components/auth/Signup'
+import Signout from './components/auth/Signout'
 
 import Search from './components/page/content/search/Search'
 import SearchIncidents from './components/page/content/search/Incidents'
@@ -38,7 +38,7 @@ import DeviceInfo from './components/page/content/device/info/Info'
 
 import DeviceList from './components/DeviceList'
 
-import RequireAuth from './components/auth/require_auth'
+import RequireAuth from './components/auth/RequireAuth'
 
 const onMainEnter = (prevState, nextState, replace, callback) => {
   console.log('On Main Change')

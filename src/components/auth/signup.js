@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import { reduxForm, Field } from 'redux-form'
 import { connect } from 'react-redux'
-import { validate } from './signupvalidation'
+import { validate } from './SignupValidation'
 
 import { signup } from '../../actions'
-import Input from '../input'
+import Input from '../Input'
 
 class Signup extends Component {
 
