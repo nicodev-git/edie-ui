@@ -2,7 +2,7 @@ import React from 'react'
 import { Router, browserHistory, Route } from 'react-router'
 
 import Main from './components/page/Main'
-import Signin from './components/auth/Signin'
+import SigninContainer from './containers/auth/SigninContainer'
 import Signup from './components/auth/Signup'
 import Signout from './components/auth/Signout'
 
@@ -86,7 +86,7 @@ export default(
             </Route>
 
         </Route>
-        <Route path="/signin" component={Signin} />
+        <Route path="/signin" component={SigninContainer} />
         <Route path="/signout" component={Signout} />
         <Route path="/signup" component={Signup} />
         <Route path="/devicelist" component={DeviceList} />
