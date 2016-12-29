@@ -6,7 +6,7 @@ import {
     GENERATE_PINCODE
 } from './types'
 
-import { apiError, authError } from './errors'
+import { apiError, authError } from './Errors'
 
 import { ROOT_URL } from './config'
 

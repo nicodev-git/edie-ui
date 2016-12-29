@@ -27,7 +27,7 @@ import {
   FETCH_MAP_DEVICES_LINES
 } from './types'
 
-import { apiError } from './errors'
+import { apiError } from './Errors'
 
 import { ROOT_URL } from './config'
 

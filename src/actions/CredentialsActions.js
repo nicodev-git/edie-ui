@@ -8,7 +8,7 @@ import {
   CLOSE_CREDENTIALS_MODAL
 } from './types'
 
-import { apiError } from './errors'
+import { apiError } from './Errors'
 
 import { ROOT_URL } from './config'
 

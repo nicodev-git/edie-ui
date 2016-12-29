@@ -14,7 +14,7 @@ import {
   SEARCH_INCIDENT_DEVICES
 } from './types'
 
-import { apiError } from './errors'
+import { apiError } from './Errors'
 
 import { ROOT_URL } from './config'
 

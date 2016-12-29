@@ -5,7 +5,7 @@ import {
   UPDATE_ENV_VAR
 } from './types'
 
-import { apiError } from './errors'
+import { apiError } from './Errors'
 
 import { ROOT_URL } from './config'
 

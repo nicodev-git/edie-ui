@@ -9,7 +9,7 @@ import {
   CLOSE_PROFILE_MODAL
 } from './types'
 
-import { apiError, authError } from './errors'
+import { apiError, authError } from './Errors'
 
 import { ROOT_URL } from './config'
 

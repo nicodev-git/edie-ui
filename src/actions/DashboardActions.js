@@ -6,7 +6,7 @@ import {
   FETCH_DASHBOARD_BIGINCIDENTS
 } from './types'
 
-import { apiError } from './errors'
+import { apiError } from './Errors'
 
 import { ROOT_URL } from './config'
 

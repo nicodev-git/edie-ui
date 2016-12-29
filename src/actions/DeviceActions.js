@@ -30,7 +30,7 @@ import {
   CLOSE_DEVICE_TEMPLATE_MODAL
 } from './types'
 
-import { apiError, updateDeviceError } from './errors'
+import { apiError, updateDeviceError } from './Errors'
 
 import { ROOT_URL } from './config'
 
