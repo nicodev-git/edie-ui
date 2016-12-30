@@ -9,10 +9,7 @@ class Signin extends Component {
   }
 
   renderAlert () {
-    let { errorMessage } = this.props
-
-    console.log(errorMessage, this.props)
-
+    let { errorMessage } = this.context
     if (errorMessage) {
       return (
         <div className="alert alert-danger">
@@ -68,6 +65,10 @@ class Signin extends Component {
       </div>
     )
   }
+}
+
+Signin.contextTypes = {
+  errorMessage: React.PropTypes.string
 }
 
 export default reduxForm({
