@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Signin from '../../components/auth/Signin'
 import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 import { signUser } from '../../actions'
 
 class SigninContainer extends Component {
@@ -13,11 +14,7 @@ class SigninContainer extends Component {
 
 export default connect(
   state => ({ errorMessage: state.auth.error }),
-  dispatch => {
-    return {
-      signUser: ({email, password}) => {
-        dispatch(signUser({email, password}))
-      }
-    }
-  }
+  dispatch => ({
+    signUser: bindActionCreators(signUser, dispatch)
+  })
 )(SigninContainer)

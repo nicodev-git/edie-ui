@@ -11,7 +11,7 @@ class Signup extends Component {
   }
 
   renderAlert () {
-    let { errorMessage } = this.context
+    let { errorMessage } = this.props
     if (errorMessage) {
       return (
         <div className="alert alert-danger">
@@ -54,10 +54,6 @@ class Signup extends Component {
       </form>
     )
   }
-}
-
-Signup.contextTypes = {
-  errorMessage: React.PropTypes.string
 }
 
 export default reduxForm({
