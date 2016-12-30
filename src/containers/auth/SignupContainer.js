@@ -19,7 +19,7 @@ export default class SignupContainer extends Component {
 
   render () {
     return (
-      <Signup signup={signup} {...this.props} />
+      <Signup {...this.props} />
     )
   }
 }

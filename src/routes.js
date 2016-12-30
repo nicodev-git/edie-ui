@@ -4,7 +4,7 @@ import { Router, browserHistory, Route } from 'react-router'
 import MainContainer from './containers/page/MainContainer'
 import SigninContainer from './containers/auth/SigninContainer'
 import SignupContainer from './containers/auth/SignupContainer'
-import Signout from './components/auth/Signout'
+import SignoutContainer from './containers/auth/SignoutContainer'
 
 import Search from './components/page/content/search/Search'
 import SearchIncidents from './components/page/content/search/Incidents'
@@ -87,7 +87,7 @@ export default(
 
         </Route>
         <Route path="/signin" component={SigninContainer} />
-        <Route path="/signout" component={Signout} />
+        <Route path="/signout" component={SignoutContainer} />
         <Route path="/signup" component={SignupContainer} />
         <Route path="/devicelist" component={DeviceList} />
     </Router>
