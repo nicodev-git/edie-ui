@@ -13,8 +13,8 @@ import { apiError, authError } from './Errors'
 
 import { ROOT_URL } from './config'
 
-export function signUser ({ email, password }) {
-  return function (dispatch) {
+export const signUser = ({ email, password }) => {
+  return (dispatch) => {
     // let config = {
     //   headers: {
     //     'Content-Type': 'application/json',
@@ -39,31 +39,31 @@ export function signUser ({ email, password }) {
     //   browserHistory.push('/')
     // }
 
-    const api = new XMLHttpRequest() // eslint-disable-line no-undef
-    api.onreadystatechange = () => {
-      if (api.readyState === 4) {
-        if (api.status !== 200) {
-          authError(dispatch)
+    const request = new XMLHttpRequest() // eslint-disable-line no-undef
+    request.onreadystatechange = () => {
+      if (request.readyState === 4) {
+        if (request.status !== 200) {
+          authError(dispatch, JSON.parse(request.responseText).message)
         } else {
-          signUserSuccess(dispatch, api.responseText)
+          signUserSuccess(dispatch, JSON.parse(request.responseText).token)
         }
       }
     }
-    api.open('POST', `${ROOT_URL}/api/auth/login`, true)
+    request.open('POST', `${ROOT_URL}/api/auth/login`, true)
     // api.setRequestHeader('Origin', ROOT_URL)
-    api.setRequestHeader('X-Requested-With', 'XMLHttpRequest')
-    api.send(JSON.stringify({
+    request.setRequestHeader('X-Requested-With', 'XMLHttpRequest')
+    request.send(JSON.stringify({
       username: email,
       password: password
     }))
   }
 }
 
-const signUserSuccess = (dispatch, response) => {
+const signUserSuccess = (dispatch, token) => {
   dispatch({
     type: AUTH_USER
   })
-  window.localStorage.setItem('token', JSON.parse(response).token)
+  window.localStorage.setItem('token', token)
   browserHistory.push('/')
 }
 
@@ -75,6 +75,7 @@ export const signOut = () => {
 }
 
 export const signup = ({ email, password }) => {
+  console.log(email, password)
   return (dispatch) => {
     axios.post(`${ROOT_URL}/signup`, {email, password})
       .then(response => signupSuccess(dispatch, response))
@@ -83,6 +84,7 @@ export const signup = ({ email, password }) => {
 }
 
 const signupSuccess = (dispatch, response) => {
+  console.log(response)
   dispatch({
     type: AUTH_USER
   })

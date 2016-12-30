@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import Signin from '../../components/auth/Signin'
+import Signup from '../../components/auth/Signup'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { signUser } from '../../actions'
+import { signup } from '../../actions'
 
 @connect((state) => {
   return {
@@ -10,21 +10,20 @@ import { signUser } from '../../actions'
   }
 },
 dispatch => bindActionCreators({
-  signUser
+  signup
 }))
-export default class SigninContainer extends Component {
+export default class SignupContainer extends Component {
   getChildContext () {
     return {errorMessage: this.props.errorMessage}
   }
 
   render () {
     return (
-      <Signin signUser={signUser} {...this.props} />
+      <Signup signup={signup} {...this.props} />
     )
   }
 }
 
-SigninContainer.childContextTypes = {
+SignupContainer.childContextTypes = {
   errorMessage: React.PropTypes.string
 }
-// TODO: Reducer don't fires event 'connect' can't to listen it. Need to solve.

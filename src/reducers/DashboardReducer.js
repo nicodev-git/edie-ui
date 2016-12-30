@@ -166,7 +166,6 @@ export default function (state = {}, action) {
       return { ...state }
 
     case API_ERROR:
-      console.log(action.msg)
       return { ...state }
   }
   return state

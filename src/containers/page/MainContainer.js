@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import Main from '../../components/page/Main'
 import { withRouter } from 'react-router'
 import { connect } from 'react-redux'
@@ -17,7 +17,7 @@ dispatch => bindActionCreators({
   closeDevice
 }))
 @withRouter
-class MainContainer extends React.Component {
+class MainContainer extends Component {
   render () {
     return (
       <Main closeDevice={closeDevice} {...this.props} />
