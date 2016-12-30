@@ -4,18 +4,18 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { signUser } from '../../actions'
 
-@connect((state) => ({
-  errorMessage: state.auth.error
-}),
-(dispatch) => ({
-  ...bindActionCreators({ signUser })
-}))
-export default class SigninContainer extends Component {
+class SigninContainer extends Component {
   getChildContext () {
-    return {errorMessage: this.props.errorMessage}
+    console.log(this.props)
+    return {
+      errorMessage: this.props.errorMessage,
+      signUser: this.props.signUser,
+      dispatch: this.props.dispatch
+    }
   }
 
   render () {
+    console.log(this.props)
     return (
       <Signin {...this.props} />
     )
@@ -23,5 +23,14 @@ export default class SigninContainer extends Component {
 }
 
 SigninContainer.childContextTypes = {
-  errorMessage: React.PropTypes.string
+  errorMessage: React.PropTypes.string,
+  signUser: React.PropTypes.func,
+  dispatch: React.PropTypes.func
 }
+
+export default connect((state) => ({
+  errorMessage: state.auth.error
+}),
+(dispatch) => ({
+  ...bindActionCreators({ signUser }, dispatch)
+}))(SigninContainer)
