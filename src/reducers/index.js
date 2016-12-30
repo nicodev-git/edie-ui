@@ -1,18 +1,18 @@
 import { combineReducers } from 'redux'
-import {reducer as formReducer} from 'redux-form'
-import authReducer from './auth_reducer'
-import dashboardReducer from './DashboardReducer'
-import settingsReducer from './SettingsReducer'
-import deviceReducer from './DeviceReducer'
-import searchReducer from './SearchReducer'
+import {reducer as FormReducer} from 'redux-form'
+import AuthReducer from './AuthReducer'
+import DashboardReducer from './DashboardReducer'
+import SettingsReducer from './SettingsReducer'
+import DeviceReducer from './DeviceReducer'
+import SearchReducer from './SearchReducer'
 
 const rootReducer = combineReducers({
-  form: formReducer,
-  auth: authReducer,
-  settings: settingsReducer,
-  dashboard: dashboardReducer,
-  devices: deviceReducer,
-  search: searchReducer
+  form: FormReducer,
+  auth: AuthReducer,
+  settings: SettingsReducer,
+  dashboard: DashboardReducer,
+  devices: DeviceReducer,
+  search: SearchReducer
 })
 
 export default rootReducer

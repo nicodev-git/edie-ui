@@ -1,22 +1,16 @@
 import React from 'react'
-import {withRouter} from 'react-router'
-import { connect } from 'react-redux'
 import { startsWith } from 'lodash'
-import { DragDropContext } from 'react-dnd'
-import TouchBackend from 'react-dnd-touch-backend'
-
-import {closeDevice} from '../../actions'
 
 import Topbar from './topbar/Topbar'
 import Sidebar from './sidebar/Sidebar'
 import Dashboard from './content/dashboard/Dashboard'
-import {scrollTop} from '../../util/Scroll'
+import { scrollTop } from '../../util/Scroll'
 
-import {mainMenu, deviceMenu, contentType} from './Config'
+import { mainMenu, deviceMenu, contentType } from './Config'
 
 const dashboardId = mainMenu[0].id
 
-class Main extends React.Component {
+export default class Main extends React.Component {
 
   constructor (props) {
     super(props)
@@ -29,7 +23,7 @@ class Main extends React.Component {
   renderDashboard () {
     const hidden = !!this.props.children
     return (
-            <Dashboard hidden={hidden}/>
+      <Dashboard hidden={hidden}/>
     )
   }
 
@@ -78,12 +72,12 @@ class Main extends React.Component {
     }
 
     return (
-            <Sidebar
-              pageId={pageId}
-              pageType={pageType}
-              device={device}
-              onClickItem={this.onClickMenuItem.bind(this)}
-            />
+      <Sidebar
+        pageId={pageId}
+        pageType={pageType}
+        device={device}
+        onClickItem={this.onClickMenuItem.bind(this)}
+      />
     )
   }
 
@@ -95,27 +89,18 @@ class Main extends React.Component {
     if (!children) style = {minHeight: `${minHeight}px`}
 
     return (
-            <div style={style}>
-                <Topbar/>
-                {this.renderSidebar()}
-                <div className="page-content flex-vertical" style={{overflow: 'auto'}} ref="content">
-                    {this.renderDashboard()}
-                    {children || null}
-                </div>
-            </div>
+      <div style={style}>
+        <Topbar/>
+        {this.renderSidebar()}
+        <div className="page-content flex-vertical" style={{overflow: 'auto'}} ref="content">
+          {this.renderDashboard()}
+          {children || null}
+        </div>
+      </div>
     )
 
-        //
-        // <IncidentAlert />
-        // {this.state.loading ? <Loader /> : null}
-        // <ReactTooltip />
+    // <IncidentAlert />
+    // {this.state.loading ? <Loader /> : null}
+    // <ReactTooltip />
   }
 }
-
-Main.defaultProps = {}
-
-function mapStateToProps (state) {
-  return {device: state.dashboard.selectedDevice}
-}
-
-export default withRouter(connect(mapStateToProps, {closeDevice})(DragDropContext(TouchBackend({ enableMouseEvents: true }))(Main)))

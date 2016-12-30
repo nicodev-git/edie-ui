@@ -1,7 +1,7 @@
 import React from 'react'
 import { Router, browserHistory, Route } from 'react-router'
 
-import Main from './components/page/Main'
+import MainContainer from './containers/page/MainContainer'
 import SigninContainer from './containers/auth/SigninContainer'
 import Signup from './components/auth/Signup'
 import Signout from './components/auth/Signout'
@@ -50,7 +50,7 @@ const onMainEnter = (prevState, nextState, replace, callback) => {
 
 export default(
     <Router history={browserHistory}>
-        <Route path="/" component={RequireAuth(Main)} onChange={onMainEnter}>
+        <Route path="/" component={RequireAuth(MainContainer)} onChange={onMainEnter}>
             <Route path="chat" component={Chat} />
             <Route path="search" component={Search}>
                 <Route path="incidents" component={SearchIncidents} />
