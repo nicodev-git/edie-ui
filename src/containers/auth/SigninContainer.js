@@ -4,13 +4,11 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { signUser } from '../../actions'
 
-@connect((state) => {
-  return {
-    errorMessage: state.auth.error
-  }
-},
-dispatch => bindActionCreators({
-  signUser
+@connect((state) => ({
+  errorMessage: state.auth.error
+}),
+(dispatch) => ({
+  ...bindActionCreators({ signUser })
 }))
 export default class SigninContainer extends Component {
   getChildContext () {
@@ -27,4 +25,3 @@ export default class SigninContainer extends Component {
 SigninContainer.childContextTypes = {
   errorMessage: React.PropTypes.string
 }
-// TODO: Reducer don't fires event 'connect' can't to listen it. Need to solve.
