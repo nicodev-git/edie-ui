@@ -4,12 +4,12 @@ import { reduxForm, Field } from 'redux-form'
 class Signin extends Component {
 
   handleFormSubmit ({ email, password }) {
-    let { signUser, dispatch } = this.props
-    dispatch(signUser({ email, password }))
+    let { signUser } = this.props
+    signUser({ email, password })
   }
 
   renderAlert () {
-    let { errorMessage } = this.context
+    let { errorMessage } = this.props
     if (errorMessage) {
       return (
         <div className="alert alert-danger">
@@ -65,10 +65,6 @@ class Signin extends Component {
       </div>
     )
   }
-}
-
-Signin.contextTypes = {
-  errorMessage: React.PropTypes.string
 }
 
 export default reduxForm({
