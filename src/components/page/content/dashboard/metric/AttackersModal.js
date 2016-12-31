@@ -1,20 +1,16 @@
 import React from 'react'
 import Modal from 'react-bootstrap-modal'
 import { findIndex } from 'lodash'
-import { connect } from 'react-redux'
-
 import InfiniteTable from '../../../../shared/InfiniteTable'
-import countries from 'country-data/data/countries'
 
-import { ROOT_URL } from '../../../../../actions/config'
-import { fetchAttackers } from '../../../../../actions'
-
-class AttackersModal extends React.Component {
+export default class AttackersModal extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
       open: true
     }
+
+    let { countries } = this.props
 
     this.cells = [{
       'displayName': 'Source IP',
@@ -65,16 +61,13 @@ class AttackersModal extends React.Component {
 
   closeModal (data) {
     this.setState({ open: false }, () => {
-      this.props.onClose &&
-            this.props.onClose(this, data)
+      this.props.onClose && this.props.onClose(this, data)
     })
   }
 
   onClickClose () {
     this.closeModal()
   }
-
-    // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   dateFormatter (date) {
     let serverTZ = '+0300'
@@ -131,6 +124,7 @@ class AttackersModal extends React.Component {
   }
 
   render () {
+    let { ROOT_URL } = this.props
     return (
       <Modal show={this.state.open} onHide={this.onHide.bind(this)}
         aria-labelledby="ModalHeader" className="bootstrap-dialog type-primary modal-md">
@@ -159,13 +153,3 @@ class AttackersModal extends React.Component {
     )
   }
 }
-
-AttackersModal.defaultProps = {
-  onClose: null
-}
-
-function mapStateToProps (state) {
-  return {attackers: state.dashboard.attackers}
-}
-
-export default connect(mapStateToProps, { fetchAttackers })(AttackersModal)

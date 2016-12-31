@@ -1,7 +1,7 @@
 import React from 'react'
 import Metric from '../../../../shared/Metric'
 
-import AttackersModal from './AttackersModal'
+import AttackersModalContainer from '../../../../../containers/page/content/dashboard/metric/AttackersModalContainer'
 
 export default class MetricPanel extends React.Component {
   constructor (props) {
@@ -46,7 +46,7 @@ export default class MetricPanel extends React.Component {
   renderAttackers () {
     if (!this.state.showAttackers) return
     return (
-      <AttackersModal onClose={() => {
+      <AttackersModalContainer onClose={() => {
         this.setState({ showAttackers: false })
       }} />
     )
