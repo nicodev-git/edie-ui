@@ -1,5 +1,5 @@
 import React from 'react'
-import NewsLine from './NewsLine'
+import NewsLineContainer from '../../../containers/page/topbar/NewsLineContainer'
 import ProfileModalContainer from '../../../containers/page/topbar/ProfileModalContainer'
 
 export default class Topbar extends React.Component {
@@ -57,7 +57,7 @@ export default class Topbar extends React.Component {
           </li>
         </ul>
 
-        <NewsLine />
+        <NewsLineContainer />
 
         <ul className="nav navbar-nav navbar-nav-expanded nav-user-info">
 
