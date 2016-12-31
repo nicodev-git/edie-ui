@@ -1,7 +1,6 @@
 import React from 'react'
-
 import NewsLine from './NewsLine'
-import ProfileModal from './ProfileModal'
+import ProfileModalContainer from '../../../containers/page/topbar/ProfileModalContainer'
 
 export default class Topbar extends React.Component {
   constructor (props) {
@@ -15,7 +14,7 @@ export default class Topbar extends React.Component {
     if (!this.props.profileModalVisible) return
 
     return (
-      <ProfileModal/>
+      <ProfileModalContainer />
     )
   }
 

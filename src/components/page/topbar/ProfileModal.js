@@ -1,35 +1,18 @@
 import React from 'react'
 import Modal from 'react-bootstrap-modal'
-import {
-    Button
-} from 'react-bootstrap'
-import { connect } from 'react-redux'
+import { Button } from 'react-bootstrap'
 import { reduxForm, Field } from 'redux-form'
 import { assign } from 'lodash'
 import $ from 'jquery'
-
-import { showAlert } from '../../shared/Alert'
-import { fetchUserInfo, updateUserProfile, closeProfileModal } from '../../../actions'
-
-const renderInput = field => (
-  <div className="row margin-md-bottom">
-    <label className="control-label col-md-3 text-right">{field.label}</label>
-    <div className="col-md-9">
-      <input {...field.input} type={field.type} className="form-control" disabled={field.disabled}/>
-    </div>
-  </div>
-)
+import { showAlert } from '../../../components/shared/Alert'
 
 class ProfileModal extends React.Component { // eslint-disable-line react/no-multi-comp
   constructor (props) {
     super(props)
-
     // const {user} = props // Never used
-
     this.state = {
       imgSrc: '',
-            // defaultmap: props.user.defaultmap,
-
+      // defaultmap: props.user.defaultmap,
       maps: []
     }
   }
@@ -38,69 +21,76 @@ class ProfileModal extends React.Component { // eslint-disable-line react/no-mul
     this.props.fetchUserInfo()
   }
 
+  renderInput (field) {
+    return (
+      <div className="row margin-md-bottom">
+        <label className="control-label col-md-3 text-right">{field.label}</label>
+        <div className="col-md-9">
+          <input {...field.input} type={field.type} className="form-control" disabled={field.disabled}/>
+        </div>
+      </div>
+    )
+  }
+
   renderForm () {
     let {user, handleSubmit} = this.props
     if (!user) return null
 
     return (
-            <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
+      <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
 
-                <div className="row margin-md-bottom text-center">
-                    <div className="fileinput-button">
-                        <img className="img-circle profile-image" src={this.state.imgSrc || (`/externalpictures?name=${user.image}`)} width="128" height="128"/>
-                        <input type="file" ref="file" onChange={this.onChangeImage.bind(this)}/>
-                    </div>
+        <div className="row margin-md-bottom text-center">
+          <div className="fileinput-button">
+            <img className="img-circle profile-image" src={this.state.imgSrc || (`/externalpictures?name=${user.image}`)} width="128" height="128"/>
+            <input type="file" ref="file" onChange={this.onChangeImage.bind(this)}/>
+          </div>
 
-                </div>
+        </div>
 
-                <Field name="username" component={renderInput} type="text" label="User Name" disabled/>
-                <Field name="fullname" component={renderInput} type="text" label="Full Name"/>
-                <Field name="password" component={renderInput} type="password" label="Password"/>
-                <Field name="email" component={renderInput} type="text" label="Email"/>
-                <Field name="phone" component={renderInput} type="text" label="Phone"/>
+        <Field name="username" component={this.renderInput} type="text" label="User Name" disabled/>
+        <Field name="fullname" component={this.renderInput} type="text" label="Full Name"/>
+        <Field name="password" component={this.renderInput} type="password" label="Password"/>
+        <Field name="email" component={this.renderInput} type="text" label="Email"/>
+        <Field name="phone" component={this.renderInput} type="text" label="Phone"/>
 
-                <div className="row margin-md-bottom">
-                    <label className="control-label col-md-3  text-right">Default
-                        Map</label>
-                    <div className="col-md-9">
-                        <select className="form-control" ref="defaultmap"
-                          onChange={this.onChangeMap.bind(this)}>{
-                            this.props.maps.map(item =>
-                                <option key={item.id} value={item.id}>
-                                    {item.name}
-                                </option>
-                            )
-                        }</select>
-                    </div>
-                </div>
+        <div className="row margin-md-bottom">
+          <label className="control-label col-md-3  text-right">Default Map</label>
+          <div className="col-md-9">
+            <select className="form-control" ref="defaultmap"
+              onChange={this.onChangeMap.bind(this)}>{
+                this.props.maps.map(item =>
+                  <option key={item.id} value={item.id}>
+                    {item.name}
+                  </option>
+                )
+            }</select>
+          </div>
+        </div>
 
-                <div className="row margin-md-bottom">
-                    <label className="control-label col-md-3  text-right">Role</label>
-                    <div className="col-md-9">
-                        <select className="form-control"
-                          value={(user.role || '').toLowerCase()}
-                          disabled="disabled">
-                            <option value="user">User</option>
-                            <option value="admin">Admin</option>
-                        </select>
-                    </div>
-                </div>
+        <div className="row margin-md-bottom">
+          <label className="control-label col-md-3  text-right">Role</label>
+          <div className="col-md-9">
+            <select className="form-control" value={(user.role || '').toLowerCase()} disabled="disabled">
+              <option value="user">User</option>
+              <option value="admin">Admin</option>
+            </select>
+          </div>
+        </div>
 
-                <div className="row margin-md-bottom">
-                    <label className="control-label col-md-3  text-right">Enabled</label>
-                    <div className="col-md-9 checkbox" style={{marginTop: '8px'}}>
-                        <label> <input type="checkbox"
-                          ref="enabled" disabled="disabled" defaultChecked={user.enabled === true}/>
-                        </label>
-                    </div>
-                </div>
+        <div className="row margin-md-bottom">
+          <label className="control-label col-md-3  text-right">Enabled</label>
+          <div className="col-md-9 checkbox" style={{marginTop: '8px'}}>
+            <label>
+              <input type="checkbox" ref="enabled" disabled="disabled" defaultChecked={user.enabled === true}/>
+            </label>
+          </div>
+        </div>
 
-                <div className="text-right p-none">
-                    <Button className="btn-primary btn-sm" type="submit">Save</Button>
-                    <Button className="margin-sm-left btn-sm"
-                      onClick={this.onClickClose.bind(this)}>Cancel</Button>
-                </div>
-            </form>
+        <div className="text-right p-none">
+            <Button className="btn-primary btn-sm" type="submit">Save</Button>
+            <Button className="margin-sm-left btn-sm" onClick={this.onClickClose.bind(this)}>Cancel</Button>
+        </div>
+      </form>
     )
   }
 
@@ -129,7 +119,6 @@ class ProfileModal extends React.Component { // eslint-disable-line react/no-mul
       this.props.updateUserProfile(props)
     })
   }
-    // ////////////////////////////////////////////////////////
 
   uploadUserImage (cb) {
     let input = this.refs.file
@@ -158,8 +147,6 @@ class ProfileModal extends React.Component { // eslint-disable-line react/no-mul
       }
     })
   }
-
-    // ////////////////////////////////////////////////////////
 
   onChangeImage (e) {
     const input = e.target
@@ -190,17 +177,13 @@ class ProfileModal extends React.Component { // eslint-disable-line react/no-mul
         aria-labelledby="ModalHeader" className="bootstrap-dialog type-primary">
 
         <div className="modal-header">
-          <h4 className="modal-title bootstrap-dialog-title">
-            Profile
-          </h4>
+          <h4 className="modal-title bootstrap-dialog-title">Profile</h4>
           <div className="bootstrap-dialog-close-button">
-            <button className="close"
-              onClick={this.onClickClose.bind(this)}>×</button>
+            <button className="close" onClick={this.onClickClose.bind(this)}>×</button>
           </div>
         </div>
 
         <div className="modal-body bootstrap-dialog-message">
-
           {this.renderForm()}
         </div>
       </Modal>
@@ -208,20 +191,6 @@ class ProfileModal extends React.Component { // eslint-disable-line react/no-mul
   }
 }
 
-ProfileModal.defaultProps = {
-}
-
-function mapStateToProps (state) {
-  const user = state.dashboard.userInfo
-  return {
-    user,
-    maps: state.dashboard.maps,
-    initialValues: user
-  }
-}
-
-export default connect(mapStateToProps, { fetchUserInfo, updateUserProfile, closeProfileModal })(
-  reduxForm({
-    form: 'userProfileForm'
-  })(ProfileModal)
-)
+export default reduxForm({
+  form: 'userProfileForm'
+})(ProfileModal)
