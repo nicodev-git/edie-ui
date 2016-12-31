@@ -1,10 +1,8 @@
 import React from 'react'
 import {extend} from 'lodash'
 import ReactTooltip from 'react-tooltip'
-import { connect } from 'react-redux'
-import {withRouter} from 'react-router'
-import { ROOT_URL } from '../../../../../actions/config'
 import MapCanvas from '../../../../shared/map/MapCanvas'
+import {withRouter} from 'react-router'
 
 import MapToolbar from './MapToolbar'
 import DeviceDragLayer from './DeviceDragLayer'
@@ -13,17 +11,8 @@ import DeviceWizard from '../../../../shared/wizard/DeviceWizard'
 import { wizardConfig } from '../../../../shared/wizard/WizardConfig'
 import { showConfirm } from '../../../../shared/Alert'
 
-import {
-  openDevice,
-  addMapDevice,
-  deleteMapDevice,
-  updateMapDevice,
-  addMapLine,
-  deleteMapLine,
-  updateMapLine
-} from '../../../../../actions'
-
-class Map extends React.Component {
+@withRouter
+export default class Map extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -195,6 +184,7 @@ class Map extends React.Component {
   getMap (force) {
     this.curMapDraw++
     let callDraw = this.curMapDraw
+    let { ROOT_URL } = this.props
 
     let currentmap = this.state.mapId
     if (typeof currentmap === 'object') {
@@ -326,6 +316,8 @@ class Map extends React.Component {
       this.setState({maximized: false})
     }
 
+    console.log(this.props)
+
     this.props.openDevice(obj.data)
         // emit(EVENTS.MAP_DEVICE_CLICKED, obj.data)
     this.props.router.push('/device/')
@@ -425,7 +417,7 @@ class Map extends React.Component {
     let lineId = lineObj.id
     if (!lineId) return
 
-    $.get(`${ROOT_URL}${Api.devices.updateLine}`, { // eslint-disable-line no-undef
+    $.get(`${this.props.ROOT_URL}${Api.devices.updateLine}`, { // eslint-disable-line no-undef
 
       lineId: lineId,
       linecolor: style.color,
@@ -777,7 +769,7 @@ class Map extends React.Component {
   }
 
   changeLineType (id, typeid) {
-    $.get(`${ROOT_URL}${Api.deviceadmin.updateLine}`, { // eslint-disable-line no-undef
+    $.get(`${this.props.ROOT_URL}${Api.deviceadmin.updateLine}`, { // eslint-disable-line no-undef
       id: id,
       type: typeid
     }).done(() => {
@@ -795,7 +787,7 @@ class Map extends React.Component {
 
   showAddWizard (options, callback, closeCallback) {
     if (options.type === 'longhub') {
-      const url = `${ROOT_URL}${Api.deviceadmin.addDevice}` // eslint-disable-line no-undef
+      const url = `${this.props.ROOT_URL}${Api.deviceadmin.addDevice}` // eslint-disable-line no-undef
       const param = {
         devicetype: 'longhub',
         name: 'longhub',
@@ -923,22 +915,3 @@ Map.contextTypes = {
   user: React.PropTypes.object,
   sid: React.PropTypes.string
 }
-
-function mapStateToProps (state) {
-  const {mapDevices, mapLines, selectedMap} = state.dashboard
-  const {showTraffic} = state.settings
-
-  return {mapDevices, mapLines, selectedMap, showTraffic}
-}
-
-const actions = {
-  openDevice,
-  addMapDevice,
-  deleteMapDevice,
-  updateMapDevice,
-  addMapLine,
-  deleteMapLine,
-  updateMapLine
-}
-
-export default withRouter(connect(mapStateToProps, actions)(Map))

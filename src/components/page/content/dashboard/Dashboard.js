@@ -1,6 +1,6 @@
 import React from 'react'
 import MetricPanelContainer from '../../../../containers/page/content/dashboard/metric/MetricPanelContainer'
-import Map from './map/Map'
+import MapContainer from '../../../../containers/page/content/dashboard/map/MapContainer'
 import MainIncidentPanel from './incidents/MainIncidentPanel'
 
 export default class Dashboard extends React.Component {
@@ -32,7 +32,7 @@ export default class Dashboard extends React.Component {
     return (
       <div className={`flex-vertical flex-1 ${hidden ? 'hidden' : ''}`}>
         <MetricPanelContainer />
-        <Map hidden={hidden}/>
+        <MapContainer hidden={hidden}/>
         <MainIncidentPanel hidden={hidden}/>
       </div>
     )
