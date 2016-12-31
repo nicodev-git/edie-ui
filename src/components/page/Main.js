@@ -3,7 +3,7 @@ import { startsWith } from 'lodash'
 
 import TopbarContainer from '../../containers/page/topbar/TopbarContainer'
 import SidebarContainer from '../../containers/page/sidebar/SidebarContainer'
-import Dashboard from './content/dashboard/Dashboard'
+import DashboardContainer from '../../containers/page/content/dashboard/DashboardContainer'
 import { scrollTop } from '../../util/Scroll'
 
 import { mainMenu, deviceMenu, contentType } from './Config'
@@ -23,7 +23,7 @@ export default class Main extends React.Component {
   renderDashboard () {
     const hidden = !!this.props.children
     return (
-      <Dashboard hidden={hidden}/>
+      <DashboardContainer hidden={hidden}/>
     )
   }
 

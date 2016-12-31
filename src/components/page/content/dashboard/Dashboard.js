@@ -1,30 +1,25 @@
 import React from 'react'
-import { connect } from 'react-redux'
-
 import MetricPanel from './metric/MetricPanel'
 import Map from './map/Map'
 import MainIncidentPanel from './incidents/MainIncidentPanel'
 
-import { updateDashboard } from '../../../../actions'
-
-class Dashboard extends React.Component {
+export default class Dashboard extends React.Component {
   constructor (props) {
     super(props)
     this.state = {}
-
     this.onDashboardUpdate = this.onDashboardUpdate.bind(this)
   }
 
   componentDidMount () {
-        // incidentSocket.init('MainIncident')
-        // incidentSocket.addListener('dashboard', this.onDashboardUpdate)
-        //
-        // incidentSocket.connect()
+    // incidentSocket.init('MainIncident')
+    // incidentSocket.addListener('dashboard', this.onDashboardUpdate)
+    //
+    // incidentSocket.connect()
   }
 
   componentWillUnmount () {
-        // incidentSocket.removeListener('dashboard', this.onDashboardUpdate)
-        // incidentSocket.close()
+    // incidentSocket.removeListener('dashboard', this.onDashboardUpdate)
+    // incidentSocket.close()
   }
 
   onDashboardUpdate (msg) {
@@ -33,7 +28,7 @@ class Dashboard extends React.Component {
   }
 
   render () {
-    const {hidden} = this.props
+    const { hidden } = this.props
     return (
       <div className={`flex-vertical flex-1 ${hidden ? 'hidden' : ''}`}>
         <MetricPanel />
@@ -43,7 +38,3 @@ class Dashboard extends React.Component {
     )
   }
 }
-Dashboard.defaultProps = {
-  hidden: false
-}
-export default connect(null, {updateDashboard})(Dashboard)
