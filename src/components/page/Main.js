@@ -1,8 +1,8 @@
 import React from 'react'
 import { startsWith } from 'lodash'
 
-import Topbar from './topbar/Topbar'
-import Sidebar from './sidebar/Sidebar'
+import TopbarContainer from '../../containers/page/topbar/TopbarContainer'
+import SidebarContainer from '../../containers/page/sidebar/SidebarContainer'
 import Dashboard from './content/dashboard/Dashboard'
 import { scrollTop } from '../../util/Scroll'
 
@@ -72,7 +72,7 @@ export default class Main extends React.Component {
     }
 
     return (
-      <Sidebar
+      <SidebarContainer
         pageId={pageId}
         pageType={pageType}
         device={device}
@@ -90,7 +90,7 @@ export default class Main extends React.Component {
 
     return (
       <div style={style}>
-        <Topbar/>
+        <TopbarContainer />
         {this.renderSidebar()}
         <div className="page-content flex-vertical" style={{overflow: 'auto'}} ref="content">
           {this.renderDashboard()}

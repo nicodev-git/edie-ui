@@ -1,9 +1,7 @@
 import React from 'react'
-import { connect } from 'react-redux'
 import $ from 'jquery'
-import { mainMenu, deviceMenu, contentType } from '../Config'
 
-class Sidebar extends React.Component {
+export default class Sidebar extends React.Component {
   constructor (props) {
     super(props)
 
@@ -20,8 +18,6 @@ class Sidebar extends React.Component {
   componentWillUnmount () {
     this.destoryMenuItemHover()
   }
-
-    // ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   initMenuItemHover () {
     const nav = this.nav
@@ -52,20 +48,18 @@ class Sidebar extends React.Component {
     $(nav).off('touchend', 'li') // eslint-disable-line no-undef
   }
 
-    // ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
   onClickToggleSidebar () {
     $('body').toggleClass('sidebar-condensed') // eslint-disable-line no-undef
   }
 
   onClickDeviceMenu (index) {
     this.setState({ tooltipText: '' })
-    this.props.onClickItem(contentType.Device, deviceMenu[index])
+    this.props.onClickItem(this.props.contentType.Device, this.props.deviceMenu[index])
   }
 
   onClickMainMenu (index) {
     this.setState({ tooltipText: '' })
-    this.props.onClickItem(contentType.Main, mainMenu[index])
+    this.props.onClickItem(this.props.contentType.Main, this.props.mainMenu[index])
   }
 
   onMapDeviceClicked (device) {
@@ -90,9 +84,9 @@ class Sidebar extends React.Component {
           </a>
         </div>
         <nav ref={nav => { this.nav = nav }}>
-          <ul className="nav nav-pills nav-stacked" style={{display: contentType.Main === pageType ? 'block' : 'none'}}>
+          <ul className="nav nav-pills nav-stacked" style={{display: this.props.contentType.Main === pageType ? 'block' : 'none'}}>
 
-            {mainMenu.map((item, index) =>
+            {this.props.mainMenu.map((item, index) =>
               <li key={index}
                 className={pageId === item.id ? 'active open' : ''}
                 onClick={this.onClickMainMenu.bind(this, index)}>
@@ -106,9 +100,9 @@ class Sidebar extends React.Component {
           </ul>
 
           <ul className="nav nav-pills nav-stacked"
-            style={{display: contentType.Device === pageType ? 'block' : 'none'}}>
+            style={{display: this.props.contentType.Device === pageType ? 'block' : 'none'}}>
 
-            {deviceMenu.map((item, index) => {
+            {this.props.deviceMenu.map((item, index) => {
               if (item.group && !group) return null
               return (
                 <li key={index} className={pageId === item.id ? 'active open' : ''}
@@ -144,11 +138,3 @@ class Sidebar extends React.Component {
     )
   }
 }
-
-Sidebar.defaultProps = {
-  device: null,
-  pageId: 'dashboard',
-  pageType: 'main'
-}
-
-export default connect()(Sidebar)

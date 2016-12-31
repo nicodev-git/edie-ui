@@ -2,12 +2,8 @@ import React from 'react'
 
 import NewsLine from './NewsLine'
 import ProfileModal from './ProfileModal'
-import { connect } from 'react-redux'
-// import { appendComponent, removeComponent } from '../../../util/Component' // Never used
 
-import { signOut, openProfileModal, closeProfileModal } from '../../../actions'
-
-class Topbar extends React.Component {
+export default class Topbar extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -28,14 +24,15 @@ class Topbar extends React.Component {
   }
 
   onClickMessages () {
-    // appendComponent( // Is not defined
+    // this.props.appendComponent(
     //   <MessagesModal
-    //     onClose={removeComponent}
+    //     onClose={this.props.removeComponent}
     //   />
     // )
   }
 
   render () {
+    console.log(this.props)
     const {user} = this.props
     return (
       <nav className="navbar navbar-default navbar-static-top no-margin"
@@ -135,16 +132,3 @@ class Topbar extends React.Component {
     )
   }
 }
-
-Topbar.defaultProps = {
-}
-
-function mapStateToProps (state) {
-  const user = state.dashboard.userInfo || {}
-  return {
-    profileModalVisible: state.dashboard.profileModalVisible,
-    user
-  }
-}
-
-export default connect(mapStateToProps, { signOut, openProfileModal, closeProfileModal })(Topbar)
