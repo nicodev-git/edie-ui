@@ -1,12 +1,9 @@
 import React from 'react'
-import { connect } from 'react-redux'
-import { withRouter } from 'react-router'
-
 import Metric from '../../../../shared/Metric'
 
 import AttackersModal from './AttackersModal'
 
-class MetricPanel extends React.Component {
+export default class MetricPanel extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -18,8 +15,7 @@ class MetricPanel extends React.Component {
     this.loadCounts()
   }
 
-  loadCounts () {
-  }
+  loadCounts () { }
 
   showOpenIncidentsDiv () {
     this.showIncidentSearch('')
@@ -83,9 +79,3 @@ class MetricPanel extends React.Component {
     )
   }
 }
-
-function mapStateToProps (state) {
-  return {stats: state.dashboard.stats}
-}
-
-export default withRouter(connect(mapStateToProps)(MetricPanel))
