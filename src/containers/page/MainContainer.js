@@ -13,7 +13,7 @@ import { bindActionCreators } from 'redux'
 },
 dispatch => bindActionCreators({
   closeDevice
-}))
+}, dispatch))
 @withRouter
 export default class MainContainer extends Component {
   render () {

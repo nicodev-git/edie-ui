@@ -30,12 +30,12 @@ class Main extends React.Component {
   }
 
   onClickMenuItem (type, item) {
-    const {router} = this.props
+    const { router, closeDevice } = this.props
 
     scrollTop(this.refs.content)
 
     if (item.id === 'dashboard') {
-      this.props.closeDevice()
+      closeDevice()
     }
 
     router.push({
