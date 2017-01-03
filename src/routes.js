@@ -7,7 +7,7 @@ import SignupContainer from './containers/auth/SignupContainer'
 import SignoutContainer from './containers/auth/SignoutContainer'
 
 import Search from './components/page/content/search/Search'
-import SearchIncidents from './components/page/content/search/Incidents'
+import SearchIncidentsContainer from './containers/page/content/search/IncidentsContainer'
 import SearchDevices from './components/page/content/search/Devices'
 import SearchProcess from './components/page/content/search/Processes'
 import Chat from './components/page/content/chat/Chat'
@@ -53,7 +53,7 @@ export default(
     <Route path="/" component={RequireAuth(MainContainer)} onChange={onMainEnter}>
       <Route path="chat" component={Chat} />
       <Route path="search" component={Search}>
-        <Route path="incidents" component={SearchIncidents} />
+        <Route path="incidents" component={SearchIncidentsContainer} />
         <Route path="devices" component={SearchDevices} />
         <Route path="process" component={SearchProcess} />
       </Route>

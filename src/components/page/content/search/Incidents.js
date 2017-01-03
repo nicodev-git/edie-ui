@@ -2,7 +2,6 @@ import React from 'react'
 // import {assign} from 'lodash'
 import Select from 'react-select'
 import moment from 'moment'
-import { connect } from 'react-redux'
 import TimeAgo from 'react-timeago'
 import ReactTooltip from 'react-tooltip'
 
@@ -23,13 +22,8 @@ import {
     showIncidentDetail,
     showIncidentRaw
 } from '../../../shared/incident/Incident'
-import {
-  searchIncidents,
-  fixIncident,
-  ackIncident
-} from '../../../../actions'
 
-class Incidents extends React.Component {
+export default class Incidents extends React.Component {
   constructor (props) {
     super(props)
 
@@ -70,9 +64,9 @@ class Incidents extends React.Component {
         const {data} = props
         if (!data) return <span/>
         return (
-                    <span data-tip={moment(new Date(data)).format('YYYY-MM-DD HH:mm:ss')}>
-                        <TimeAgo date={data}/>
-                    </span>
+          <span data-tip={moment(new Date(data)).format('YYYY-MM-DD HH:mm:ss')}>
+            <TimeAgo date={data}/>
+          </span>
         )
       }
     }, {
@@ -254,8 +248,6 @@ class Incidents extends React.Component {
     })
   }
 
-    // ////////////////////////////////////////////////////////////////
-
   showIncidentComments (incident) {
     this.setState({
       selectedIndex: findIndex(this.props.incidents, {id: incident.id}), // eslint-disable-line no-undef
@@ -321,21 +313,3 @@ class Incidents extends React.Component {
     )
   }
 }
-
-Incidents.defaultProps = {
-  filter: null
-}
-
-function mapStateToProps (state) {
-  return {
-    incidents: state.search.incidents
-  }
-}
-
-const actions = {
-  searchIncidents,
-  fixIncident,
-  ackIncident
-}
-
-export default connect(mapStateToProps, actions)(Incidents)
