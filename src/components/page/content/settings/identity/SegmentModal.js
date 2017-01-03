@@ -8,7 +8,7 @@ import countries from 'country-data/data/countries'
 import { showAlert } from '../../../../shared/Alert'
 import { ROOT_URL } from '../../../../../actions/config'
 
-class SegmentModal extends React.Component {
+export default class SegmentModal extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -140,5 +140,3 @@ class SegmentModal extends React.Component {
 SegmentModal.defaultProps = {
   segment: null
 }
-
-export default SegmentModal

@@ -3,7 +3,6 @@ import {
     ButtonGroup,
     Button
 } from 'react-bootstrap'
-import { connect } from 'react-redux'
 import { assign } from 'lodash'
 
 import {ResponsiveInfiniteTable} from '../../../../shared/InfiniteTable'
@@ -19,9 +18,7 @@ import { showAlert, showConfirm } from '../../../../shared/Alert'
 import IdentityModal from './IdentityModal'
 import SegmentListModal from './SegmentListModal'
 
-import { fetchIdentities, openIdentityModal, removeIdentity } from '../../../../../actions'
-
-class Identities extends React.Component {
+export default class Identities extends React.Component {
   constructor (props) {
     super(props)
     this.state = {}
@@ -43,13 +40,13 @@ class Identities extends React.Component {
       'columnName': 'country'
     }]
 
-        // this.listeners = {
-        //     [EVENTS.IDENTITY_ADD_CLICKED]: this.onAddIdentity.bind(this),
-        //     [EVENTS.IDENTITY_EDIT_CLICKED]: this.onEditIdentity.bind(this),
-        //     [EVENTS.IDENTITY_REMOVE_CLICKED]: this.onRemoveIdentity.bind(this),
-        //
-        //     [EVENTS.IDENTITY_SEGMENTS_CLICKED]: this.onClickSegments.bind(this),
-        // }
+    // this.listeners = {
+    //     [EVENTS.IDENTITY_ADD_CLICKED]: this.onAddIdentity.bind(this),
+    //     [EVENTS.IDENTITY_EDIT_CLICKED]: this.onEditIdentity.bind(this),
+    //     [EVENTS.IDENTITY_REMOVE_CLICKED]: this.onRemoveIdentity.bind(this),
+    //
+    //     [EVENTS.IDENTITY_SEGMENTS_CLICKED]: this.onClickSegments.bind(this),
+    // }
   }
 
   componentWillMount () {
@@ -58,16 +55,16 @@ class Identities extends React.Component {
 
   renderContent () {
     return (
-            <ResponsiveInfiniteTable
-              cells={this.cells}
-              ref="identities"
-              rowMetadata={{'key': 'id'}}
-              selectable
-              onRowDblClick={this.onEditIdentity.bind(this)}
+      <ResponsiveInfiniteTable
+        cells={this.cells}
+        ref="identities"
+        rowMetadata={{'key': 'id'}}
+        selectable
+        onRowDblClick={this.onEditIdentity.bind(this)}
 
-              useExternal={false}
-              data={this.props.identities.map(u => { return assign({ id: u.id }, u.identities) })}
-            />
+        useExternal={false}
+        data={this.props.identities.map(u => { return assign({ id: u.id }, u.identities) })}
+      />
     )
   }
 
@@ -89,11 +86,9 @@ class Identities extends React.Component {
   renderIdentityModal () {
     if (!this.props.identityModalVisible) return null
     return (
-            <IdentityModal />
+      <IdentityModal />
     )
   }
-
-    // ///////////////////////////////////////////////////////////////////
 
   getTable () {
     return this.refs.identities.refs.wrappedInstance
@@ -121,8 +116,6 @@ class Identities extends React.Component {
     })
   }
 
-    // ///////////////////////
-
   onCloseIdentityModal (modal, identity) {
     removeComponent(modal)
     if (!identity) return
@@ -132,8 +125,8 @@ class Identities extends React.Component {
 
   onClickSegments () {
     appendComponent(
-            <SegmentListModal onClose={removeComponent}/>
-        )
+      <SegmentListModal onClose={removeComponent}/>
+    )
   }
 
   render () {
@@ -170,20 +163,3 @@ class Identities extends React.Component {
     )
   }
 }
-
-Identities.defaultProps = {}
-
-function mapStateToProps (state) {
-  return {
-    identities: state.settings.identities,
-    identityModalVisible: state.settings.identityModalVisible
-  }
-}
-
-const actions = {
-  fetchIdentities,
-  openIdentityModal,
-  removeIdentity
-}
-
-export default connect(mapStateToProps, actions)(Identities)

@@ -8,7 +8,7 @@ import SegmentModal from './SegmentModal'
 
 import { ROOT_URL } from '../../../../../actions/config'
 
-class SegmentListModal extends React.Component {
+export default class SegmentListModal extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -40,8 +40,7 @@ class SegmentListModal extends React.Component {
 
   closeModal (data) {
     this.setState({ open: false }, () => {
-      this.props.onClose &&
-            this.props.onClose(this, data)
+      this.props.onClose && this.props.onClose(this, data)
     })
   }
 
@@ -49,12 +48,10 @@ class SegmentListModal extends React.Component {
     this.closeModal()
   }
 
-    // ///////////////////////////
-
   onClickAdd () {
     appendComponent(
-            <SegmentModal onClose={this.onCloseModal.bind(this)}/>
-        )
+        <SegmentModal onClose={this.onCloseModal.bind(this)}/>
+    )
   }
 
   onClickEdit () {
@@ -62,9 +59,8 @@ class SegmentListModal extends React.Component {
     if (!selected) return showAlert('Please select segment.')
 
     appendComponent(
-            <SegmentModal onClose={this.onCloseModal.bind(this)}
-              segment={selected}/>
-        )
+      <SegmentModal onClose={this.onCloseModal.bind(this)} segment={selected}/>
+    )
   }
 
   onCloseModal (modal, segment) {
@@ -73,8 +69,6 @@ class SegmentListModal extends React.Component {
 
     this.refs.segments.refresh()
   }
-
-    // ////////////////////////////
 
   onClickDelete () {
     const selected = this.refs.segments.getSelected()
@@ -142,7 +136,3 @@ class SegmentListModal extends React.Component {
     )
   }
 }
-
-SegmentListModal.defaultProps = {}
-
-export default SegmentListModal
