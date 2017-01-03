@@ -1,27 +1,9 @@
 import React from 'react'
 import Modal from 'react-bootstrap-modal'
 import { reduxForm, Field } from 'redux-form'
-import {connect} from 'react-redux'
-import {assign} from 'lodash'
+import { assign } from 'lodash'
 
 import { extImageBaseUrl } from '../../../../../shared/Global'
-
-import {
-  addMonitorTemplate,
-  updateMonitorTemplate,
-  closeMonitorTplModal,
-  openTplImageModal
-} from '../../../../../actions'
-
-const Input = ({ input, label, type, meta: { touched, error } }) => (
-    <fieldset className="form-group">
-        <label className="col-md-3 margin-sm-top">{label}</label>
-        <div className="col-md-9">
-            <input {...input} className="form-control" type={type}/>
-            {touched && error && <span className="error">{error}</span>}
-        </div>
-    </fieldset>
-)
 
 class MonitorTplModal extends React.Component { // eslint-disable-line react/no-multi-comp
   constructor (props) {
@@ -48,20 +30,19 @@ class MonitorTplModal extends React.Component { // eslint-disable-line react/no-
     if (selectedTplImage) imgUrl = selectedTplImage.url
     else if (monitorTpl && monitorTpl.image) imgUrl = extImageBaseUrl + monitorTpl.image
     return (
-            <fieldset className="form-group">
-                <label className="col-md-3 margin-sm-top">Image:</label>
-                <div className="col-md-9">
-                    <img className="file-preview" src={imgUrl}/>
-                    <a href="javascript:;" className="margin-sm-left"
-                      style={{position: 'relative', cursor: 'pointer'}}
-                      onClick={this.onClickChangeImage.bind(this)}>
-                        Change
-                    </a>
-                </div>
-            </fieldset>
+      <fieldset className="form-group">
+        <label className="col-md-3 margin-sm-top">Image:</label>
+        <div className="col-md-9">
+          <img className="file-preview" src={imgUrl}/>
+          <a href="javascript:;" className="margin-sm-left"
+            style={{position: 'relative', cursor: 'pointer'}}
+            onClick={this.onClickChangeImage.bind(this)}>
+            Change
+          </a>
+        </div>
+      </fieldset>
     )
   }
-    // / //////////////////////////////////////////////////////////
 
   onHide () {
 
@@ -71,14 +52,21 @@ class MonitorTplModal extends React.Component { // eslint-disable-line react/no-
     this.props.closeMonitorTplModal()
   }
 
-    // ////////////////////////////////////////////////////////////
-
   onClickChangeImage () {
     this.props.openTplImageModal()
   }
 
   render () {
     const { handleSubmit } = this.props
+    const Input = ({ input, label, type, meta: { touched, error } }) => (
+      <fieldset className="form-group">
+        <label className="col-md-3 margin-sm-top">{label}</label>
+        <div className="col-md-9">
+          <input {...input} className="form-control" type={type}/>
+          {touched && error && <span className="error">{error}</span>}
+        </div>
+      </fieldset>
+    )
 
     return (
       <Modal
@@ -115,29 +103,7 @@ class MonitorTplModal extends React.Component { // eslint-disable-line react/no-
   }
 }
 
-MonitorTplModal.defaultProps = {
-  onClose: null
-}
-
-function mapStateToProps (state) {
-  return {
-    monitorTpl: state.settings.monitorTpl,
-    selectedTplImage: state.settings.selectedTplImage,
-
-    initialValues: state.settings.monitorTpl || {}
-  }
-}
-
-const actions = {
-  closeMonitorTplModal,
-  addMonitorTemplate,
-  updateMonitorTemplate,
-  openTplImageModal
-}
-
-export default connect(mapStateToProps, actions)(
-  reduxForm({
-    form: 'monitorTplEdit'
-    /* validate */
-  })(MonitorTplModal)
-)
+export default reduxForm({
+  form: 'monitorTplEdit'
+  /* validate */
+})(MonitorTplModal)

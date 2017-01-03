@@ -17,7 +17,7 @@ import {
 } from '../../../../../actions'
 
 import DeviceTplModalContainer from '../../../../../containers/page/content/settings/template/DeviceTplModalContainer'
-import MonitorTplModal from './MonitorTplModal'
+import MonitorTplModalContainer from '../../../../../containers/page/content/settings/template/MonitorTplModalContainer'
 import ImageUploaderModalContainer from '../../../../../containers/page/content/settings/template/ImageUploaderModalContainer'
 
 class Templates extends React.Component {
@@ -104,7 +104,7 @@ class Templates extends React.Component {
   renderMonitorTplModal () {
     if (!this.props.monitorTplModalVisible) return null
     return (
-      <MonitorTplModal />
+      <MonitorTplModalContainer />
     )
   }
 
