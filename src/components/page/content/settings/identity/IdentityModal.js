@@ -90,6 +90,6 @@ class IdentityModal extends React.Component { // eslint-disable-line react/no-mu
   }
 }
 
-export default  reduxForm({
+export default reduxForm({
   form: 'identityEditForm'
 })(IdentityModal)
