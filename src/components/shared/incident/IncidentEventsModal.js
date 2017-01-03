@@ -2,7 +2,7 @@ import React from 'react'
 import Modal from 'react-bootstrap-modal'
 import moment from 'moment'
 
-class IncidentEventsModal extends React.Component {
+export default class IncidentEventsModal extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -60,5 +60,3 @@ IncidentEventsModal.defaultProps = {
   incident: null,
   onClose: null
 }
-
-export default IncidentEventsModal

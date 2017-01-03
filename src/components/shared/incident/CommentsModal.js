@@ -1,12 +1,9 @@
-import React from 'react'
+import React, { Component } from 'react'
 import Modal from 'react-bootstrap-modal'
 import moment from 'moment'
-import { connect } from 'react-redux'
 import { assign, concat } from 'lodash'
 
-import { updateDeviceIncident } from '../../../actions'
-
-class CommentsModal extends React.Component {
+export default class CommentsModal extends Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -17,8 +14,6 @@ class CommentsModal extends React.Component {
 
   }
 
-    // ///////////////////////////////////////////////////////////
-
   onHide () {
     this.onClickClose()
   }
@@ -27,8 +22,6 @@ class CommentsModal extends React.Component {
     this.props.onClose &&
         this.props.onClose(this)
   }
-
-    // ///////////////////////////////////////////////////////////
 
   onClickAdd () {
     const text = this.refs.comment.value
@@ -112,20 +105,3 @@ class CommentsModal extends React.Component {
     )
   }
 }
-
-CommentsModal.defaultProps = {
-  onClose: null,
-  incident: {}
-}
-
-function mapStateToProps (state) {
-  return {
-
-  }
-}
-
-const actions = {
-  updateDeviceIncident
-}
-
-export default connect(mapStateToProps, actions)(CommentsModal)
