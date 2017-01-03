@@ -1,7 +1,7 @@
 import React from 'react'
 import {assign} from 'lodash'
 
-import MapSelect from './MapSelect'
+import MapSelectContainer from '../../../../../containers/page/content/dashboard/map/MapSelectContainer'
 import MapSaveModal from './MapSaveModal'
 import MapImportModalContainer from '../../../../../containers/page/content/dashboard/map/MapImportModalContainer'
 import { showAlert, showPrompt, showConfirm } from '../../../../shared/Alert'
@@ -73,7 +73,7 @@ export default class MapMenu extends React.Component {
   render () {
     return (
       <div style={{position: 'absolute', left: '7px', top: '15px'}}>
-        <MapSelect ref="select"/>
+        <MapSelectContainer ref="select"/>
 
         <ul className="nav nav-tabs" style={{background: 'transparent', display: 'inline-block'}}>
           <li className="dropdown">
