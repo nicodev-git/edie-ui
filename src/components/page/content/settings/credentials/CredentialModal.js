@@ -4,25 +4,8 @@ import {
     Button
 } from 'react-bootstrap'
 import { reduxForm, Field } from 'redux-form'
-import { connect } from 'react-redux'
 import { assign } from 'lodash'
 import { showAlert } from '../../../../shared/Alert'
-
-import {
-  fetchCredentials,
-  addCredentials,
-  updateCredentials,
-  closeCredentialsModal
-} from '../../../../../actions'
-
-const renderInput = field => (
-    <div className="row margin-md-bottom">
-        <label className="control-label col-md-3">{field.label}</label>
-        <div className="col-md-9">
-            <input {...field.input} type={field.type} className="form-control"/>
-        </div>
-    </div>
-)
 
 class CredentialModal extends React.Component { // eslint-disable-line react/no-multi-comp
   constructor (props) {
@@ -60,6 +43,14 @@ class CredentialModal extends React.Component { // eslint-disable-line react/no-
 
   render () {
     const { handleSubmit } = this.props
+    const renderInput = field => (
+      <div className="row margin-md-bottom">
+        <label className="control-label col-md-3">{field.label}</label>
+        <div className="col-md-9">
+          <input {...field.input} type={field.type} className="form-control"/>
+        </div>
+      </div>
+    )
 
     return (
       <Modal show={this.state.open} onHide={this.onHide.bind(this)}
@@ -95,26 +86,6 @@ class CredentialModal extends React.Component { // eslint-disable-line react/no-
   }
 }
 
-CredentialModal.defaultProps = {
-  credentials: null
-}
-
-function mapStateToProps (state) {
-  return {
-    editCredentials: state.settings.editCredentials,
-    initialValues: state.settings.editCredentials
-  }
-}
-
-const actions = {
-  fetchCredentials,
-  addCredentials,
-  updateCredentials,
-  closeCredentialsModal
-}
-
-export default connect(mapStateToProps, actions)(
-  reduxForm({
-    form: 'credentialsEditForm'
-  })(CredentialModal)
-)
+export default reduxForm({
+  form: 'credentialsEditForm'
+})(CredentialModal)

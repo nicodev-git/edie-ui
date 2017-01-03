@@ -2,7 +2,7 @@ import React from 'react'
 import { util } from '../WizardUtil'
 import { SelectField } from 'react-serial-forms'
 
-import CredentialModal from './CredentialModal'
+import CredentialModalContainer from '../../../../containers/page/content/settings/credentials/CredentialModalContainer'
 import { appendComponent, removeComponent } from '../../../../util/Component'
 
 export default class Combo extends React.Component {
@@ -128,7 +128,7 @@ export default class Combo extends React.Component {
   onSidebarItem (button) {
     if (button.click === 'credentialModal') {
       appendComponent(
-        <CredentialModal onClose={(modal) => {
+        <CredentialModalContainer onClose={(modal) => {
           removeComponent(modal)
 
           const config = this.props.config

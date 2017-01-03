@@ -7,7 +7,7 @@ import {
 import { ResponsiveInfiniteTable } from '../../../../shared/InfiniteTable'
 import { showAlert, showConfirm } from '../../../../shared/Alert'
 
-import CredentialModal from './CredentialModal'
+import CredentialModalContainer from '../../../../../containers/page/content/settings/credentials/CredentialModalContainer'
 
 import SettingTabs from '../SettingTabs'
 import TabPage from '../../../../shared/TabPage'
@@ -79,7 +79,7 @@ export default class Credentials extends React.Component {
   renderCredentialsModal () {
     if (!this.props.credentialsModalVisible) return null
     return (
-      <CredentialModal />
+      <CredentialModalContainer />
     )
   }
 
