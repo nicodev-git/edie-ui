@@ -116,28 +116,28 @@ function alertCallback (cb, modal, res) {
 
 export function showAlert (msg, width, cb) {
   appendComponent(
-        <Alert message={msg}
-          onClose={alertCallback.bind(this, cb)}
-        />
-    )
+    <Alert message={msg}
+      onClose={alertCallback.bind(this, cb)}
+    />
+  )
 }
 
 export function showConfirm (msg, cb) {
   appendComponent(
-        <Alert message={msg}
-          type={TYPE_CONFIRM}
-          onClose={alertCallback.bind(this, cb)}
-        />
+    <Alert message={msg}
+      type={TYPE_CONFIRM}
+      onClose={alertCallback.bind(this, cb)}
+    />
     )
 }
 
 export function showPrompt (msg, initial, cb) {
   appendComponent(
-        <Alert message={msg}
-          default={initial}
-          type={TYPE_PROMPT}
-          onClose={alertCallback.bind(this, cb)}
-        />
+    <Alert message={msg}
+      default={initial}
+      type={TYPE_PROMPT}
+      onClose={alertCallback.bind(this, cb)}
+    />
     )
 }
 

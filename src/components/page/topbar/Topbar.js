@@ -31,7 +31,6 @@ export default class Topbar extends React.Component {
   }
 
   render () {
-    console.log(this.props)
     const {user} = this.props
     return (
       <nav className="navbar navbar-default navbar-static-top no-margin"

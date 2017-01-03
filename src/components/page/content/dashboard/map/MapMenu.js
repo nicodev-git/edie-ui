@@ -1,5 +1,4 @@
 import React from 'react'
-import {connect} from 'react-redux'
 import {assign} from 'lodash'
 
 import MapSelect from './MapSelect'
@@ -7,9 +6,7 @@ import MapSaveModal from './MapSaveModal'
 import MapImportModal from './MapImportModal'
 import { showAlert, showPrompt, showConfirm } from '../../../../shared/Alert'
 
-import {addMap, updateMap, deleteMap, openMapImportModal} from '../../../../../actions'
-
-class MapMenu extends React.Component {
+export default class MapMenu extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -20,15 +17,15 @@ class MapMenu extends React.Component {
   renderMapExportModal () {
     if (!this.state.mapExportModalVisible) return
     return (
-            <MapSaveModal mapId={this.props.selectedMap.id}
-              onClose={() => { this.setState({ mapExportModalVisible: false }) }}/>
+      <MapSaveModal mapId={this.props.selectedMap.id}
+        onClose={() => { this.setState({ mapExportModalVisible: false }) }}/>
     )
   }
 
   renderMapImportModal () {
     if (!this.props.mapImportModalVisible) return
     return (
-            <MapImportModal />
+      <MapImportModal />
     )
   }
 
@@ -37,7 +34,6 @@ class MapMenu extends React.Component {
   onClickAdd () {
     showPrompt('Please input map name.', 'New Map', name => {
       if (!name) return
-
       this.props.addMap({name})
     })
   }
@@ -66,7 +62,6 @@ class MapMenu extends React.Component {
 
   onClickRename () {
     const { selectedMap } = this.props
-    console.log(selectedMap)
     if (!selectedMap) {
       showAlert('Please choose a map.')
       return
@@ -118,12 +113,4 @@ class MapMenu extends React.Component {
       </div>
     )
   }
-    // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 }
-
-function mapStateToProps (state) {
-  const {maps, selectedMap, mapImportModalVisible} = state.dashboard
-  return {maps, selectedMap, mapImportModalVisible}
-}
-
-export default connect(mapStateToProps, { addMap, updateMap, deleteMap, openMapImportModal })(MapMenu)

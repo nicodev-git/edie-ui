@@ -3,7 +3,7 @@ import React from 'react'
 import { ChromePicker } from 'react-color'
 // import { findIndex } from 'lodash'
 
-import MapMenu from './MapMenu'
+import MapMenu from '../../../../../containers/page/content/dashboard/map/MapMenuContainer'
 import DeviceMenu from './DeviceMenu'
 
 import { lineTypes } from '../../../../../shared/Global'
@@ -40,19 +40,19 @@ export default class Toolbar extends React.Component {
 
   loadLineTypes () {
 
-        // $.get(Api.deviceadmin.getShapeTypes)
-        // .done((res) => {
-        //
-        //     let lineTypes = this.lineTypes
-        //
-        //     $.each(res || [], function(i, type){
-        //
-        //         let index = findIndex(lineTypes, {typename: type.devicename})
-        //         if (index >= 0) lineTypes[index]['typeid'] = type.devicetype
-        //     });
-        //
-        //     this.setState({lineTypes})
-        // });
+    // $.get(Api.deviceadmin.getShapeTypes)
+    // .done((res) => {
+    //
+    //     let lineTypes = this.lineTypes
+    //
+    //     $.each(res || [], function(i, type){
+    //
+    //         let index = findIndex(lineTypes, {typename: type.devicename})
+    //         if (index >= 0) lineTypes[index]['typeid'] = type.devicetype
+    //     });
+    //
+    //     this.setState({lineTypes})
+    // });
   }
 
   renderLineTypes () {
@@ -74,27 +74,27 @@ export default class Toolbar extends React.Component {
     }
 
     return (
-            <div style={popover}>
-                <div style={cover} onClick={this.toggleLineTypes.bind(this)}/>
-                <div id="linetypediv" className="panel-group">
-                    <div className="panel panel-default">
-                        <div className="panel-body"><ul>
-                        {
-                            this.lineTypes.map(item =>
-                                <li key={item.typename}><a href="javascript:;" onClick={this.onClickLineType.bind(this, item)}>
-                                    <div className="pull-left item-icon">
-                                        <img src={item.image} data-type={item.type} data-typename={item.typename}/>
-                                    </div>
-                                    <div className="item-text">
-                                        <strong>{item.title}</strong>
-                                    </div>
-                                </a></li>
-                            )
-                        }
-                        </ul></div>
-                    </div>
-                </div>
-            </div>
+      <div style={popover}>
+        <div style={cover} onClick={this.toggleLineTypes.bind(this)}/>
+        <div id="linetypediv" className="panel-group">
+          <div className="panel panel-default">
+            <div className="panel-body"><ul>
+            {
+              this.lineTypes.map(item =>
+                <li key={item.typename}><a href="javascript:;" onClick={this.onClickLineType.bind(this, item)}>
+                  <div className="pull-left item-icon">
+                    <img src={item.image} data-type={item.type} data-typename={item.typename}/>
+                  </div>
+                  <div className="item-text">
+                    <strong>{item.title}</strong>
+                  </div>
+                </a></li>
+              )
+            }
+            </ul></div>
+          </div>
+        </div>
+      </div>
     )
   }
 
@@ -155,29 +155,29 @@ export default class Toolbar extends React.Component {
     // ///////////////////////////////////////
 
   renderBody () {
-        /* return (
-            <div class="panel panel-default mb-none" id="mapeditdiv">
+    /* return (
+      <div class="panel panel-default mb-none" id="mapeditdiv">
 
-                <div class="panel-body" style="overflow: hidden;padding: 0;position:relative;">
+        <div class="panel-body" style="overflow: hidden;padding: 0;position:relative;">
 
-                    <div id="map-context-menu">
-                        <ul class="dropdown-menu" role="menu" id="menu-firewall">
-                            <li><a tabindex="-1" href="javascript:;"><i class="fa fa-edit fa-lg margin-sm-right"></i>Firewall Option1</a></li>
-                        </ul>
-                        <ul class="dropdown-menu" role="menu" id="menu-linux">
-                            <li><a tabindex="-1" href="javascript:;"><i class="fa fa-edit fa-lg margin-sm-right"></i>Linux Option1</a></li>
-                        </ul>
-                        <ul class="dropdown-menu" role="menu" id="menu-longhub">
-                            <li><a tabindex="-1" href="javascript:;" id="menuitem-longhub-edit"><i class="fa fa-edit fa-lg margin-sm-right"></i>Edit Segments</a></li>
-                        </ul>
-                        <ul class="dropdown-menu" role="menu" id="menu-normal">
-                            <li><a tabindex="-1" href="javascript:;"><i class="fa fa-edit fa-lg margin-sm-right"></i>Normal Option1</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <!-- div class="trash"><img src="/images/trash.png" width="70px"></div-->
-            </div>
-        ) */
+          <div id="map-context-menu">
+            <ul class="dropdown-menu" role="menu" id="menu-firewall">
+              <li><a tabindex="-1" href="javascript:;"><i class="fa fa-edit fa-lg margin-sm-right"></i>Firewall Option1</a></li>
+            </ul>
+            <ul class="dropdown-menu" role="menu" id="menu-linux">
+              <li><a tabindex="-1" href="javascript:;"><i class="fa fa-edit fa-lg margin-sm-right"></i>Linux Option1</a></li>
+            </ul>
+            <ul class="dropdown-menu" role="menu" id="menu-longhub">
+              <li><a tabindex="-1" href="javascript:;" id="menuitem-longhub-edit"><i class="fa fa-edit fa-lg margin-sm-right"></i>Edit Segments</a></li>
+            </ul>
+            <ul class="dropdown-menu" role="menu" id="menu-normal">
+              <li><a tabindex="-1" href="javascript:;"><i class="fa fa-edit fa-lg margin-sm-right"></i>Normal Option1</a></li>
+            </ul>
+          </div>
+        </div>
+        <!-- div class="trash"><img src="/images/trash.png" width="70px"></div-->
+      </div>
+    ) */
   }
 
   handleClick (e) {
