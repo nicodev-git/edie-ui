@@ -31,7 +31,7 @@ import DeviceMainIncidentsContainer from './containers/page/content/device/main/
 import DeviceMainRulesContainer from './containers/page/content/device/main/rules/MainRulesContainer'
 import DeviceMainRawIncidentsContainer from './containers/page/content/device/main/raw-incidents/MainRawIncidentsContainer'
 import DeviceMainAdvancedContainer from './containers/page/content/device/main/advanced/MainAdvancedContainer'
-import DeviceMainRuleAdd from './components/page/content/device/main/rules/MainRulesAdd'
+import DeviceMainRuleAddContainer from './containers/page/content/device/main/rules/MainRulesAddContainer'
 import DeviceMonitors from './components/page/content/device/monitors/Monitors'
 import DeviceConnectedContainer from './containers/page/content/device/connected/ConnectedContainer'
 import DeviceInfo from './components/page/content/device/info/Info'
@@ -49,47 +49,47 @@ const onMainEnter = (prevState, nextState, replace, callback) => {
 }
 
 export default(
-    <Router history={browserHistory}>
-        <Route path="/" component={RequireAuth(MainContainer)} onChange={onMainEnter}>
-            <Route path="chat" component={Chat} />
-            <Route path="search" component={Search}>
-                <Route path="incidents" component={SearchIncidents} />
-                <Route path="devices" component={SearchDevices} />
-                <Route path="process" component={SearchProcess} />
-            </Route>
-            <Route path="incidents" component={Incidents}/>
-            <Route path="bigincidents" component={BigIncidentsContainer}/>
-            <Route path="threatmap" component={ThreatMap}/>
-            <Route path="settings" component={Settings}>
-                <Route path="general" component={SettingGeneral} />
-                <Route path="agents" component={SettingAgent} />
-                <Route path="rules" component={SettingRules} />
-                <Route path="maps" component={SettingMaps} />
-                <Route path="users" component={SettingUsers} />
-                <Route path="identities" component={SettingIdentity} />
-                <Route path="credentials" component={SettingCredentials} />
-                <Route path="templates" component={SettingTemplates} />
-                <Route path="advanced" component={SettingAdvanced} />
-            </Route>
+  <Router history={browserHistory}>
+    <Route path="/" component={RequireAuth(MainContainer)} onChange={onMainEnter}>
+      <Route path="chat" component={Chat} />
+      <Route path="search" component={Search}>
+        <Route path="incidents" component={SearchIncidents} />
+        <Route path="devices" component={SearchDevices} />
+        <Route path="process" component={SearchProcess} />
+      </Route>
+      <Route path="incidents" component={Incidents}/>
+      <Route path="bigincidents" component={BigIncidentsContainer}/>
+      <Route path="threatmap" component={ThreatMap}/>
+      <Route path="settings" component={Settings}>
+        <Route path="general" component={SettingGeneral} />
+        <Route path="agents" component={SettingAgent} />
+        <Route path="rules" component={SettingRules} />
+        <Route path="maps" component={SettingMaps} />
+        <Route path="users" component={SettingUsers} />
+        <Route path="identities" component={SettingIdentity} />
+        <Route path="credentials" component={SettingCredentials} />
+        <Route path="templates" component={SettingTemplates} />
+        <Route path="advanced" component={SettingAdvanced} />
+      </Route>
 
-            <Route path="device" component={Device}>
-                <Route path="main" component={DeviceMain}>
-                    <Route path="incidents" component={DeviceMainIncidentsContainer}/>
-                    <Route path="rules" component={DeviceMainRulesContainer}/>
-                    <Route path="rawIncidents" component={DeviceMainRawIncidentsContainer}/>
-                    <Route path="advanced" component={DeviceMainAdvancedContainer}/>
-                    <Route path="ruleAdd" component={DeviceMainRuleAdd}/>
-                </Route>
-                <Route path="monitor" component={DeviceMonitors}/>
-                <Route path="connected" component={DeviceConnectedContainer}/>
-                <Route path="info" component={DeviceInfo}/>
-            </Route>
-
+      <Route path="device" component={Device}>
+        <Route path="main" component={DeviceMain}>
+          <Route path="incidents" component={DeviceMainIncidentsContainer}/>
+          <Route path="rules" component={DeviceMainRulesContainer}/>
+          <Route path="rawIncidents" component={DeviceMainRawIncidentsContainer}/>
+          <Route path="advanced" component={DeviceMainAdvancedContainer}/>
+          <Route path="ruleAdd" component={DeviceMainRuleAddContainer}/>
         </Route>
-        <Route path="/signin" component={SigninContainer} />
-        <Route path="/signout" component={SignoutContainer} />
-        <Route path="/signup" component={SignupContainer} />
-        <Route path="/devicelist" component={DeviceListContainer} />
-    </Router>
+        <Route path="monitor" component={DeviceMonitors}/>
+        <Route path="connected" component={DeviceConnectedContainer}/>
+        <Route path="info" component={DeviceInfo}/>
+      </Route>
+
+    </Route>
+    <Route path="/signin" component={SigninContainer} />
+    <Route path="/signout" component={SignoutContainer} />
+    <Route path="/signup" component={SignupContainer} />
+    <Route path="/devicelist" component={DeviceListContainer} />
+  </Router>
 )
 

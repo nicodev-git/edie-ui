@@ -1,7 +1,5 @@
-import React from 'react'
-import {withRouter} from 'react-router'
+import React, { Component } from 'react'
 // import { findIndex, concat } from 'lodash' // Never used
-import { connect } from 'react-redux'
 import Switch from 'react-bootstrap-switch'
 import {
     ButtonGroup,
@@ -14,16 +12,13 @@ import TabPage from '../../../../../shared/TabPage'
 import TabPageBody from '../../../../../shared/TabPageBody'
 import TabPageHeader from '../../../../../shared/TabPageHeader'
 
-import {fetchDevicePhysicalRules} from '../../../../../../actions'
 import { ROOT_URL } from '../../../../../../actions/config'
 
-class MainRulesAdd extends React.Component {
+export default class MainRulesAdd extends Component {
   constructor (props) {
     super(props)
     const {device} = this.props
     this.state = {
-
-            // ///////////////////////////////////
 
       url: Api.rule.getPhysicalRulesNotApplied, // eslint-disable-line no-undef
       params: {
@@ -31,8 +26,6 @@ class MainRulesAdd extends React.Component {
         ruleCategory: 0,
         severity: ''
       },
-
-            // ///////////////////////////////////
 
       categoryName: '',
       selectedPhysicals: []
@@ -179,14 +172,3 @@ class MainRulesAdd extends React.Component {
     )
   }
 }
-
-MainRulesAdd.defaultProps = {}
-
-function mapStateToProps (state) {
-  return {
-    device: state.dashboard.selectedDevice,
-    physicalRules: state.devices.physicalRules
-  }
-}
-
-export default withRouter(connect(mapStateToProps, {fetchDevicePhysicalRules})(MainRulesAdd))
