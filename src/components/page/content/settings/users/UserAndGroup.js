@@ -1,5 +1,5 @@
 import React from 'react'
-import Users from './Users'
+import UsersContainer from '../../../../../containers/page/content/settings/users/UsersContainer'
 import Groups from '../groups/Groups'
 import {
   emit,
@@ -40,7 +40,7 @@ export default class UserAndGroup extends React.Component {
   }
 
   render () {
-    if (this.state.userPage) return <Users />
+    if (this.state.userPage) return <UsersContainer />
     return <Groups/>
   }
 }

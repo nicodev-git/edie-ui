@@ -6,9 +6,8 @@ import {
     MenuItem
 } from 'react-bootstrap'
 // import { findIndex } from 'lodash' // Never used
-import { connect } from 'react-redux'
 
-import {ResponsiveInfiniteTable} from '../../../../shared/InfiniteTable'
+import { ResponsiveInfiniteTable } from '../../../../shared/InfiniteTable'
 import { appendComponent, removeComponent } from '../../../../../util/Component'
 import { showAlert, showConfirm } from '../../../../shared/Alert'
 
@@ -21,16 +20,9 @@ import TabPage from '../../../../shared/TabPage'
 import TabPageBody from '../../../../shared/TabPageBody'
 import TabPageHeader from '../../../../shared/TabPageHeader'
 
-import {
-  fetchSettingUsers,
-  openSettingUserModal,
-  deleteSettingUser,
-  openUserPasswordModal
-} from '../../../../../actions'
-
 import { ROOT_URL } from '../../../../../actions/config'
 
-class Users extends React.Component {
+export default class Users extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -78,29 +70,29 @@ class Users extends React.Component {
   }
 
   loadGroups () {
-        // $.get(Api.group.getGroupsDT, {
-        //     draw: 1,
-        //     start: 0,
-        //     length: 100,
-        // }).done(res => {
-        //     this.setState({
-        //         groups: res.data
-        //     })
-        // })
+    // $.get(Api.group.getGroupsDT, {
+    //     draw: 1,
+    //     start: 0,
+    //     length: 100,
+    // }).done(res => {
+    //     this.setState({
+    //         groups: res.data
+    //     })
+    // })
   }
 
   renderContent () {
     return (
-            <ResponsiveInfiniteTable
-              cells={this.cells}
-              ref="users"
-              rowMetadata={{'key': 'id'}}
-              selectable
-              onRowDblClick={this.onEditUser.bind(this)}
+      <ResponsiveInfiniteTable
+        cells={this.cells}
+        ref="users"
+        rowMetadata={{'key': 'id'}}
+        selectable
+        onRowDblClick={this.onEditUser.bind(this)}
 
-              useExternal={false}
-              data={this.props.users}
-            />
+        useExternal={false}
+        data={this.props.users}
+      />
     )
   }
 
@@ -121,8 +113,6 @@ class Users extends React.Component {
   getUsers () {
     return this.refs.users.refs.wrappedInstance
   }
-
-    // //////////////////////////////////////////////////////////
 
   onChangeGroup (groupId) {
     this.setState({ groupId })
@@ -201,7 +191,7 @@ class Users extends React.Component {
       this.props.deleteSettingUser(selected)
     })
   }
-  
+
   onChangePassword () {
     const selected = this.getUsers().getSelected()
     if (!selected) return showAlert('Please select user.')
@@ -284,22 +274,3 @@ class Users extends React.Component {
     )
   }
 }
-
-Users.defaultProps = {}
-
-function mapStateToProps (state) {
-  return {
-    users: state.settings.users,
-    userModalVisible: state.settings.userModalVisible,
-    userPasswordModalVisible: state.settings.userPasswordModalVisible
-  }
-}
-
-const actions = {
-  fetchSettingUsers,
-  openSettingUserModal,
-  deleteSettingUser,
-  openUserPasswordModal
-}
-
-export default connect(mapStateToProps, actions)(Users)
