@@ -18,7 +18,7 @@ import Settings from './components/page/content/settings/Settings'
 import SettingGeneralContainer from './containers/page/content/settings/general/GeneralContainer'
 import SettingAgent from './components/page/content/settings/agent/Agents'
 import SettingRules from './components/page/content/settings/rule/Rules'
-import SettingMaps from './components/page/content/settings/maps/Maps'
+import SettingMapsContainer from './containers/page/content/settings/maps/MapsContainer'
 import SettingUsers from './components/page/content/settings/users/Users'
 import SettingIdentitiesContainer from './containers/page/content/settings/identity/IdentitiesContainer'
 import SettingCredentialsContainer from './containers/page/content/settings/credentials/CredentialsContainer'
@@ -64,7 +64,7 @@ export default(
         <Route path="general" component={SettingGeneralContainer} />
         <Route path="agents" component={SettingAgent} />
         <Route path="rules" component={SettingRules} />
-        <Route path="maps" component={SettingMaps} />
+        <Route path="maps" component={SettingMapsContainer} />
         <Route path="users" component={SettingUsers} />
         <Route path="identities" component={SettingIdentitiesContainer} />
         <Route path="credentials" component={SettingCredentialsContainer} />

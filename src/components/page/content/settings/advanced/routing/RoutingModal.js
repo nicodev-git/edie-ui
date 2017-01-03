@@ -8,7 +8,7 @@ import { findIndex } from 'lodash'
 import { showAlert } from '../../../../../shared/Alert'
 import { appendComponent, removeComponent } from '../../../../../../util/Component'
 
-import UsersModal from './UsersModal'
+import UsersModalContainer from '../../../../../../containers/page/content/settings/maps/UsersModalContainer'
 import GroupsModal from './GroupsModal'
 
 import { ROOT_URL } from '../../../../../../actions/config'
@@ -157,20 +157,20 @@ export default class RoutingModal extends Component {
 
   onClickAddUser () {
     appendComponent(
-            <UsersModal onClose={(modal, user) => {
-              removeComponent(modal)
-              if (!user) return
+      <UsersModalContainer onClose={(modal, user) => {
+        removeComponent(modal)
+        if (!user) return
 
-              let { targets } = this.state
-              targets.push({
-                targetType: 'user',
-                targetName: user.username,
-                targetId: user.id
-              })
+        let { targets } = this.state
+        targets.push({
+          targetType: 'user',
+          targetName: user.username,
+          targetId: user.id
+        })
 
-              this.setState({ targets })
-            }}/>
-        )
+        this.setState({ targets })
+      }}/>
+    )
   }
 
   onClickRemove () {

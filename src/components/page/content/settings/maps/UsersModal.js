@@ -1,13 +1,10 @@
 import React from 'react'
 import Modal from 'react-bootstrap-modal'
-import { connect } from 'react-redux'
 
 import InfiniteTable from '../../../../shared/InfiniteTable'
 import { showAlert } from '../../../../shared/Alert'
 
-import { fetchSettingUsers } from '../../../../../actions'
-
-class UsersModal extends React.Component {
+export default class UsersModal extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -87,15 +84,3 @@ class UsersModal extends React.Component {
 UsersModal.defaultProps = {
   onClose: null
 }
-
-function mapStateToProps (state) {
-  return {
-    users: state.settings.users
-  }
-}
-
-const actions = {
-  fetchSettingUsers
-}
-
-export default connect(mapStateToProps, actions)(UsersModal)

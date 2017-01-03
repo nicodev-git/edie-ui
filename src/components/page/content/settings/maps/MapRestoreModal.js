@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { Component } from 'react'
 import Modal from 'react-bootstrap-modal'
 
-class MapRestoreModal extends React.Component {
+export default class MapRestoreModal extends Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -64,5 +64,3 @@ class MapRestoreModal extends React.Component {
 MapRestoreModal.defaultProps = {
   onClose: null
 }
-
-export default MapRestoreModal

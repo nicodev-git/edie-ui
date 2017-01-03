@@ -1,30 +1,14 @@
-import React from 'react'
+import React, { Component } from 'react'
 import Modal from 'react-bootstrap-modal'
 import {
     Button
 } from 'react-bootstrap'
 import { reduxForm, Field } from 'redux-form'
-import { connect } from 'react-redux'
 import { assign } from 'lodash'
 
 import { showAlert } from '../../../../shared/Alert'
 
-import {
-    addSettingMap,
-    updateSettingMap,
-    closeSettingMapModal
-} from '../../../../../actions'
-
-const renderInput = field => (
-    <div className="row margin-md-bottom">
-        <label className="control-label col-md-3 padding-sm-top">{field.label}</label>
-        <div className="col-md-9 margin-sm-bottom">
-            <input {...field.input} type={field.type} className="form-control"/>
-        </div>
-    </div>
-)
-
-class MapModal extends React.Component { // eslint-disable-line react/no-multi-comp
+class MapModal extends Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -61,8 +45,6 @@ class MapModal extends React.Component { // eslint-disable-line react/no-multi-c
     this.closeModal()
   }
 
-    // ///////////////////////////////////////////////////////////////////////
-
   onKeyUpInput (e) {
     if (e.keyCode === 13) {
       this.onClickSave()
@@ -73,6 +55,14 @@ class MapModal extends React.Component { // eslint-disable-line react/no-multi-c
     const { handleSubmit } = this.props
     // const { map, handleSubmit } = this.props // Never used
     // const isDefault = false// map ? user.defaultmap === map.id : false // Never used
+    const renderInput = field => (
+      <div className="row margin-md-bottom">
+        <label className="control-label col-md-3 padding-sm-top">{field.label}</label>
+        <div className="col-md-9 margin-sm-bottom">
+          <input {...field.input} type={field.type} className="form-control"/>
+        </div>
+      </div>
+    )
 
     return (
       <Modal
@@ -109,25 +99,6 @@ class MapModal extends React.Component { // eslint-disable-line react/no-multi-c
   }
 }
 
-MapModal.defaultProps = {
-
-}
-
-function mapStateToProps (state) {
-  return {
-    editMap: state.settings.editMap,
-    initialValues: state.settings.editMap
-  }
-}
-
-const actions = {
-  addSettingMap,
-  updateSettingMap,
-  closeSettingMapModal
-}
-
-export default connect(mapStateToProps, actions)(
-  reduxForm({
-    form: 'mapEditForm'
-  })(MapModal)
-)
+export default reduxForm({
+  form: 'mapEditForm'
+})(MapModal)

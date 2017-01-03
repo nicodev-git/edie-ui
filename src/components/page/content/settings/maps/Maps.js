@@ -3,30 +3,22 @@ import {
     ButtonGroup,
     Button
 } from 'react-bootstrap'
-import { connect } from 'react-redux'
 
 import InfiniteTable from '../../../../shared/InfiniteTable'
 const ResponsiveInfiniteTable = InfiniteTable
 import { appendComponent, removeComponent } from '../../../../../util/Component'
 import { showAlert, showConfirm } from '../../../../shared/Alert'
 
-import MapModal from './MapModal'
+import MapModalContainer from '../../../../../containers/page/content/settings/maps/MapModalContainer'
 import MapRestoreModal from './MapRestoreModal'
-import MapUsersModal from './MapUsersModal'
+import MapUsersModalContainer from '../../../../../containers/page/content/settings/maps/MapUsersModalContainer'
 
 import SettingTabs from '../SettingTabs'
 import TabPage from '../../../../shared/TabPage'
 import TabPageBody from '../../../../shared/TabPageBody'
 import TabPageHeader from '../../../../shared/TabPageHeader'
 
-import {
-  fetchSettingMaps,
-  openSettingMapModal,
-  deleteSettingMap,
-  openMapUsersModal
-} from '../../../../../actions'
-
-class Maps extends React.Component {
+export default class Maps extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -84,38 +76,36 @@ class Maps extends React.Component {
 
   renderContent2 () {
     return (
-            <InfiniteTable
-              url="/dashboard/getMaps"
-              params={{}}
-              cells={this.cells}
-              rowMetadata={{'key': 'id'}}
-              selectable
-              ref="maps"
+      <InfiniteTable
+        url="/dashboard/getMaps"
+        params={{}}
+        cells={this.cells}
+        rowMetadata={{'key': 'id'}}
+        selectable
+        ref="maps"
 
-              onRowDblClick={this.onMapEdit.bind(this)}
-            />
+        onRowDblClick={this.onMapEdit.bind(this)}
+      />
     )
   }
 
   renderMapModal () {
     if (!this.props.mapModalVisible) return
     return (
-            <MapModal/>
+      <MapModalContainer />
     )
   }
 
   renderMapUsersModal () {
     if (!this.props.mapUsersModalVisible) return
     return (
-            <MapUsersModal/>
+      <MapUsersModalContainer />
     )
   }
 
   getMaps () {
     return this.refs.maps.refs.wrappedInstance
   }
-
-    // //////////////////////////////////
 
   onMapAdd () {
     this.props.openSettingMapModal()
@@ -128,16 +118,12 @@ class Maps extends React.Component {
     }
   }
 
-    // //////////////////////////////////
-
   onMapEdit () {
     const selected = this.getMaps().getSelected()
     if (!selected) return showAlert('Please select map.')
 
     this.props.openSettingMapModal(selected)
   }
-
-    // ////////////////////////////////////
 
   onMapDelete () {
     const selected = this.getMaps().getSelected()
@@ -151,12 +137,10 @@ class Maps extends React.Component {
     })
   }
 
-    // ///////////////////////////////////////
-
   onMapRestore () {
     appendComponent(
-            <MapRestoreModal onClose={removeComponent}/>
-        )
+      <MapRestoreModal onClose={removeComponent}/>
+    )
   }
 
   onMapUsers () {
@@ -193,22 +177,3 @@ class Maps extends React.Component {
     )
   }
 }
-
-Maps.defaultProps = {}
-
-function mapStateToProps (state) {
-  return {
-    maps: state.settings.maps,
-    mapModalVisible: state.settings.mapModalVisible,
-    mapUsersModalVisible: state.settings.mapUsersModalVisible
-  }
-}
-
-const actions = {
-  fetchSettingMaps,
-  openSettingMapModal,
-  deleteSettingMap,
-  openMapUsersModal
-}
-
-export default connect(mapStateToProps, actions)(Maps)

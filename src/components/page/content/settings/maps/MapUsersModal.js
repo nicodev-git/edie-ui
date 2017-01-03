@@ -1,13 +1,10 @@
 import React from 'react'
 import Modal from 'react-bootstrap-modal'
-import { connect } from 'react-redux'
-
 import { showAlert } from '../../../../shared/Alert'
 import InfiniteTable from '../../../../shared/InfiniteTable'
-import UsersModal from './UsersModal'
-import { closeMapUsersModal, addMapUser, removeMapUser } from '../../../../../actions'
+import UsersModalContainer from '../../../../../containers/page/content/settings/maps/UsersModalContainer'
 
-class MapUsersModal extends React.Component { // eslint-disable-line react/no-multi-comp
+export default class MapUsersModal extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -57,7 +54,7 @@ class MapUsersModal extends React.Component { // eslint-disable-line react/no-mu
   renderUsersModal () {
     if (!this.state.usersModalVisible) return null
     return (
-            <UsersModal onClose={this.onSelectUser.bind(this)}/>
+      <UsersModalContainer onClose={this.onSelectUser.bind(this)}/>
     )
   }
 
@@ -72,8 +69,6 @@ class MapUsersModal extends React.Component { // eslint-disable-line react/no-mu
   onClickClose () {
     this.closeModal()
   }
-
-    // ////////////////////////////////////////////////
 
   onClickAdd () {
     this.setState({
@@ -133,21 +128,3 @@ class MapUsersModal extends React.Component { // eslint-disable-line react/no-mu
     )
   }
 }
-
-MapUsersModal.defaultProps = {
-}
-
-function mapStateToProps (state) {
-  return {
-    editMap: state.settings.editMap,
-    mapUsers: state.settings.mapUsers
-  }
-}
-
-const actions = {
-  closeMapUsersModal,
-  addMapUser,
-  removeMapUser
-}
-
-export default connect(mapStateToProps, actions)(MapUsersModal)
