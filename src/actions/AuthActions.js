@@ -15,47 +15,21 @@ import { ROOT_URL } from './config'
 
 export const signUser = ({ email, password }) => {
   return (dispatch) => {
-    // let config = {
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //     'X-Requested-With': 'XMLHttpRequest'
-    //   }
-    // }
-    // axios.post(`${ROOT_URL}/api/auth/login`,
-    //   {
-    //     username: email,
-    //     password: password
-    //   },
-    //   config
-    // )
-    // .then(response => signUserSuccess(dispatch, response))
-    // .catch(() => authError(dispatch))
-    //
-    // const signUserSuccess = (dispatch, response) => {
-    //   dispatch({
-    //     type: AUTH_USER
-    //   })
-    //   window.localStorage.setItem('token', response.data.token)
-    //   browserHistory.push('/')
-    // }
-
-    const request = new XMLHttpRequest() // eslint-disable-line no-undef
-    request.onreadystatechange = () => {
-      if (request.readyState === 4) {
-        if (request.status !== 200) {
-          authError(dispatch, JSON.parse(request.responseText).message)
-        } else {
-          signUserSuccess(dispatch, JSON.parse(request.responseText).token)
-        }
+    let config = {
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Requested-With': 'XMLHttpRequest'
       }
     }
-    request.open('POST', `${ROOT_URL}/api/auth/login`, true)
-    // api.setRequestHeader('Origin', ROOT_URL)
-    request.setRequestHeader('X-Requested-With', 'XMLHttpRequest')
-    request.send(JSON.stringify({
-      username: email,
-      password: password
-    }))
+    axios.post(`${ROOT_URL}/api/auth/login`,
+      {
+        username: email,
+        password: password
+      },
+      config
+    )
+    .then(response => signUserSuccess(dispatch, response))
+    .catch(() => authError(dispatch))
   }
 }
 
