@@ -19,8 +19,6 @@ export default class ParsersModal extends React.Component {
     this.loadParsers()
   }
 
-    // //////////////////////////////////////////
-
   loadParsers () {
     $.get(`${ROOT_URL}${Api.rule.getParsersForDevice}`, { // eslint-disable-line no-undef
       deviceid: this.props.device.id // eslint-disable-line no-undef
@@ -30,8 +28,6 @@ export default class ParsersModal extends React.Component {
       })
     })
   }
-
-    // //////////////////////////////////////////
 
   openModal () {
     this.setState({

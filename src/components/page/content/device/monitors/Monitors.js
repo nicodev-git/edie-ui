@@ -10,7 +10,7 @@ import { connect } from 'react-redux'
 
 import MonitorTable from './MonitorTable'
 import EventLogTable from './EventLogTable'
-import ApplicationTable from './ApplicationTable'
+import ApplicationTableContainer from '../../../../../containers/page/content/device/monitors/ApplicationTableContainer'
 import ProcessTable from './ProcessTable'
 import MonitorLogTable from './MonitorLogTable'
 
@@ -180,7 +180,7 @@ class Monitors extends React.Component {
           {
             this.state.selected !== 'application'
               ? null
-              : <ApplicationTable {...props}/>
+              : <ApplicationTableContainer {...props}/>
           }
 
           {

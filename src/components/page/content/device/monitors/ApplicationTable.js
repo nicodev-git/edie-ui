@@ -1,11 +1,8 @@
-import React from 'react'
+import React, { Component  } from 'react'
 
-import { connect } from 'react-redux'
+import { ResponsiveInfiniteTable } from '../../../../shared/InfiniteTable'
 
-import {ResponsiveInfiniteTable} from '../../../../shared/InfiniteTable'
-import { fetchDeviceApps } from '../../../../../actions'
-
-class ApplicationTable extends React.Component {
+export default class ApplicationTable extends Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -81,14 +78,3 @@ class ApplicationTable extends React.Component {
     )
   }
 }
-
-ApplicationTable.defaultProps = {
-  device: {}
-}
-
-function mapStateToProps (state) {
-  return {apps: state.devices.apps}
-}
-
-// export default EventLogTable
-export default connect(mapStateToProps, {fetchDeviceApps})(ApplicationTable)

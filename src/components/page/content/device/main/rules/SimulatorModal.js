@@ -1,7 +1,7 @@
 import React from 'react'
 import Modal from 'react-bootstrap-modal'
 
-import {appendComponent, removeComponent} from '../../../../../../util/Component'
+import { appendComponent, removeComponent } from '../../../../../../util/Component'
 import { showAlert } from '../../../../../shared/Alert'
 
 import ParsersModal from './ParsersModal'
@@ -20,8 +20,6 @@ export default class SimulatorModal extends React.Component {
       selectedIndex: -1
     }
   }
-
-    // //////////////////////////////////////////////////////////////////////////
 
   openModal () {
     this.setState({
@@ -60,18 +58,16 @@ export default class SimulatorModal extends React.Component {
 
   showParsers (callback) {
     appendComponent(
-            <ParsersModal
-              device={this.props.device}
-              onClose={(modal, data) => {
-                removeComponent(modal)
+      <ParsersModal
+        device={this.props.device}
+        onClose={(modal, data) => {
+          removeComponent(modal)
 
-                if (data && callback) callback(data)
-              }}
-            />
-        )
+          if (data && callback) callback(data)
+        }}
+      />
+    )
   }
-
-    // //////////////////////////////////////////////////////////////////////////
 
   onClickAddM () {
     this.showEditM(null, item => {
@@ -144,16 +140,17 @@ export default class SimulatorModal extends React.Component {
 
   showEditM (item, callback, num) {
     appendComponent(
-            <MTypeModal
-              item={item}
-              number={num}
-              onClose={(modal, data) => {
-                removeComponent(modal)
-
-                if (data && callback) callback(data)
-              }}
-            />
-        )
+      <MTypeModal
+        item={item}
+        number={num}
+        onClose={(modal, data) => {
+          removeComponent(modal)
+          if (data && callback) {
+            callback(data)
+          }
+        }}
+      />
+    )
   }
 
   updateNumbers (mdata) {
@@ -163,7 +160,6 @@ export default class SimulatorModal extends React.Component {
 
     return mdata
   }
-    // //////////////////////////////////////////////////////////////////////////
 
   onClickRun () {
     let params = {

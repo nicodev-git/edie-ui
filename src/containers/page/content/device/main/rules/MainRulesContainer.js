@@ -1,5 +1,8 @@
 import React from 'react'
 import MainRules from '../../../../../../components/page/content/device/main/rules/MainRules'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { withRouter } from 'react-router'
 import { fetchDeviceRules } from '../../../../../../actions'
 
 @connect(
