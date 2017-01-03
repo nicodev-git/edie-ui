@@ -1,8 +1,5 @@
 import React from 'react'
 import Modal from 'react-bootstrap-modal'
-import { connect } from 'react-redux'
-
-import { closeAddDeviceIncident, addDeviceIncident } from '../../../../../../actions'
 
 class AddIncidentModal extends React.Component {
   constructor (props) {
@@ -17,8 +14,6 @@ class AddIncidentModal extends React.Component {
   onClickClose () {
     this.props.closeAddDeviceIncident()
   }
-
-    // /////////////////////////////////////////////////////////////////////////////////////////////////
 
   onClickSave () {
     this.props.addDeviceIncident({
@@ -82,11 +77,3 @@ class AddIncidentModal extends React.Component {
     )
   }
 }
-
-function mapStateToProps (state) {
-  return {
-    device: state.dashboard.selectedDevice
-  }
-}
-
-export default connect(mapStateToProps, { closeAddDeviceIncident, addDeviceIncident })(AddIncidentModal)

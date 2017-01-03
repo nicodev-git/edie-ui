@@ -17,8 +17,8 @@ import TimeAgo from 'react-timeago'
 import ReactTooltip from 'react-tooltip'
 
 import DateRangePicker from '../../../../../shared/DateRangePicker'
-import {ResponsiveInfiniteTable} from '../../../../../shared/InfiniteTable'
-import AddIncidentModal from './AddIncidentModal'
+import { ResponsiveInfiniteTable } from '../../../../../shared/InfiniteTable'
+import AddIncidentModalContainer from '../../../../../../containers/page/content/device/main/incidents/AddIncidentModalContainer'
 import AddExceptionModal from './AddExceptionModal'
 import CommentsModal from '../../../../../shared/incident/CommentsModal'
 
@@ -399,7 +399,7 @@ class MainIncidents extends React.Component {
         <TabPageBody tabs={MainTabs} tab={0}>
           {this.renderTable()}
           {this.props.addIncidentModalVisible &&
-          <AddIncidentModal open device={this.state.device}/>}
+          <AddIncidentModalContainer open device={this.state.device}/>}
           {this.state.openExceptionModal &&
           <AddExceptionModal open incident={selectedIncident}
             onClose={this.onCloseExceptionModal.bind(this)}/>}
