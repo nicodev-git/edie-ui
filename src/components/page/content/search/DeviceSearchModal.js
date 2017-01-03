@@ -1,10 +1,7 @@
-import React from 'react'
+import React, { Component } from 'react'
 import Modal from 'react-bootstrap-modal'
 import Autocomplete from 'react-autocomplete'
-import {findIndex} from 'lodash'
-import { connect } from 'react-redux'
-
-import { searchIncidentDevices } from '../../../../actions'
+import { findIndex } from 'lodash'
 
 const styles = {
   item: {
@@ -24,7 +21,7 @@ const styles = {
   }
 }
 
-class DeviceSearchModal extends React.Component {
+export default class DeviceSearchModal extends Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -55,8 +52,6 @@ class DeviceSearchModal extends React.Component {
   onClickClose () {
     this.closeModal(this.state.selected)
   }
-
-    // ///////////////////////////////////////
 
   searchDevice (keyword) {
     this.props.searchIncidentDevices({
@@ -162,20 +157,3 @@ class DeviceSearchModal extends React.Component {
     )
   }
 }
-
-DeviceSearchModal.defaultProps = {
-  onClose: null,
-  selected: []
-}
-
-function mapStateToProps (state) {
-  return {
-    incidentDevices: state.search.incidentDevices
-  }
-}
-
-const actions = {
-  searchIncidentDevices
-}
-
-export default connect(mapStateToProps, actions)(DeviceSearchModal)

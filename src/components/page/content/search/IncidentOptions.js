@@ -1,21 +1,21 @@
-import React from 'react'
+import React, { Component } from 'react'
 import DateRangePicker from '../../../shared/DateRangePicker'
 import Select from 'react-select'
 import moment from 'moment'
-import DeviceSearchModal from './DeviceSearchModal'
+import DeviceSearchModalContainer from '../../../../containers/page/content/search/DeviceSearchModalContainer'
 import { appendComponent, removeComponent } from '../../../../util/Component'
 import { ROOT_URL } from '../../../../actions/config'
 
-class IncidentOptions extends React.Component {
+export default class IncidentOptions extends Component {
   constructor (props) {
     super(props)
     this.state = {
       severities: [
-                { label: 'High', value: 'High'},
-                { label: 'Medium', value: 'Medium'},
-                { label: 'Low', value: 'Low'},
-                { label: 'Audit', value: 'Audit'},
-                { label: 'Ignore', value: 'Ignore'}
+        { label: 'High', value: 'High'},
+        { label: 'Medium', value: 'Medium'},
+        { label: 'Low', value: 'Low'},
+        { label: 'Audit', value: 'Audit'},
+        { label: 'Ignore', value: 'Ignore'}
       ],
 
       selectedSeverity: ['High', 'Medium'],
@@ -67,56 +67,56 @@ class IncidentOptions extends React.Component {
     }
 
     return (
-            <div className="tab-header">
-                <div>
-                    <span className="tab-title">Search</span>
-                </div>
-                <div className="text-center margin-md-top" >
+      <div className="tab-header">
+        <div>
+          <span className="tab-title">Search</span>
+        </div>
+        <div className="text-center margin-md-top" >
 
-                    <div className="form-inline" style={{position: 'absolute'}}>
+          <div className="form-inline" style={{position: 'absolute'}}>
 
-                        <div className="text-left"
-                          style={{'verticalAlign': 'middle', 'lineHeight': 2.2}}>
-                            <Select
-                              value={this.state.selectedSeverity.join(',')}
-                              options={this.state.severities}
-                              onChange={this.onChangeSeverity.bind(this)}
-                              multi
-                              clearable={false}
-                              className="select-severity"
-                              style={{minWidth: '85px'}}
-                              searchable={false}
-                              autosize={false}
-                            />
+            <div className="text-left"
+              style={{'verticalAlign': 'middle', 'lineHeight': 2.2}}>
+                <Select
+                  value={this.state.selectedSeverity.join(',')}
+                  options={this.state.severities}
+                  onChange={this.onChangeSeverity.bind(this)}
+                  multi
+                  clearable={false}
+                  className="select-severity"
+                  style={{minWidth: '85px'}}
+                  searchable={false}
+                  autosize={false}
+                />
 
-                            <select className="form-control inline text-primary margin-md-left"
-                              onChange={this.onFilterChange}
-                              ref="fixed" defaultValue="false">
-                                <option value="">Any</option>
-                                <option value="false">Unfixed</option>
-                                <option value="true">Fixed</option>
-                            </select>
+                <select className="form-control inline text-primary margin-md-left"
+                  onChange={this.onFilterChange}
+                  ref="fixed" defaultValue="false">
+                    <option value="">Any</option>
+                    <option value="false">Unfixed</option>
+                    <option value="true">Fixed</option>
+                </select>
 
-                            <DateRangePicker onClickRange={this.onFilterChange} className="margin-md-left"
-                              default={defaultDate} ref="dp">
-                                <i className="fa fa-caret-down margin-xs-left" />
-                            </DateRangePicker>
+                <DateRangePicker onClickRange={this.onFilterChange} className="margin-md-left"
+                  default={defaultDate} ref="dp">
+                    <i className="fa fa-caret-down margin-xs-left" />
+                </DateRangePicker>
 
-                            {this.renderDeviceSearch()}
-                        </div>
-                    </div>
-
-                    <div style={{ position: 'relative', display: 'inline-block'}}>
-                        <input type="text" placeholder="Search" className="form-control"
-                          style={{width: '220px', paddingLeft: '35px'}}
-                          onChange={this.onSearchKeyUp.bind(this)}
-                          ref="search"/>
-                        <a className="btn" href="javascript:;" style={{position: 'absolute', left: 0, top: 0}}>
-                            <i className="fa fa-search" />
-                        </a>
-                    </div>
-                </div>
+                {this.renderDeviceSearch()}
             </div>
+          </div>
+
+          <div style={{ position: 'relative', display: 'inline-block'}}>
+            <input type="text" placeholder="Search" className="form-control"
+              style={{width: '220px', paddingLeft: '35px'}}
+              onChange={this.onSearchKeyUp.bind(this)}
+              ref="search"/>
+            <a className="btn" href="javascript:;" style={{position: 'absolute', left: 0, top: 0}}>
+              <i className="fa fa-search" />
+            </a>
+          </div>
+        </div>
+      </div>
     )
   }
 
@@ -134,14 +134,12 @@ class IncidentOptions extends React.Component {
         // if (selectedDevices.length)
 
     return (
-            <a href="javascript:;" className="margin-md-left"
-              onClick={this.onClickSearchDevice.bind(this)}>
-                {label}
-            </a>
+      <a href="javascript:;" className="margin-md-left"
+        onClick={this.onClickSearchDevice.bind(this)}>
+          {label}
+      </a>
     )
   }
-
-    // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   onChangeSeverity (selected) {
     this.setState({
@@ -165,10 +163,10 @@ class IncidentOptions extends React.Component {
 
   onClickSearchDevice () {
     appendComponent(
-            <DeviceSearchModal
-              devices={this.state.selectedDevices}
-              onClose={this.onCloseSearchDevice.bind(this)}/>
-        )
+      <DeviceSearchModalContainer
+        devices={this.state.selectedDevices}
+        onClose={this.onCloseSearchDevice.bind(this)}/>
+    )
   }
 
   onCloseSearchDevice (modal, selectedDevices) {
@@ -203,5 +201,3 @@ IncidentOptions.defaultProps = {
   onFilterChange: null,
   filterType: null
 }
-
-export default IncidentOptions

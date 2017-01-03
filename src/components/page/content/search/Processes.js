@@ -12,7 +12,7 @@ import TabPage from '../../../shared/TabPage'
 import TabPageBody from '../../../shared/TabPageBody'
 import TabPageHeader from '../../../shared/TabPageHeader'
 
-class Processes extends React.Component {
+export default class Processes extends React.Component {
   constructor (props) {
     super(props)
     this.state = {}
@@ -51,16 +51,16 @@ class Processes extends React.Component {
 
   renderTable () {
     return (
-            <InfiniteTable
-              url="/incidentstable/getAllProcessDT"
-              params={this.props.filter}
-              cells={this.cells}
-              ref="table"
-              rowMetadata={{'key': 'id'}}
-              selectable
-              bodyHeight={this.props.containerHeight}
-              onRowDblClick={this.onRowDblClick.bind(this)}
-            />
+      <InfiniteTable
+        url="/incidentstable/getAllProcessDT"
+        params={this.props.filter}
+        cells={this.cells}
+        ref="table"
+        rowMetadata={{'key': 'id'}}
+        selectable
+        bodyHeight={this.props.containerHeight}
+        onRowDblClick={this.onRowDblClick.bind(this)}
+      />
     )
   }
 
@@ -71,12 +71,9 @@ class Processes extends React.Component {
 
   showProcessModal (item) {
     appendComponent(
-            <ProcessModal process={item} onClose={removeComponent}
-              onChildClicked={this.showProcessModal.bind(this)}/>
-        )
+      <ProcessModal process={item} onClose={removeComponent} onChildClicked={this.showProcessModal.bind(this)}/>
+    )
   }
-
-    // //////////////////////////////////////////
 
   onSearchKeyUp (e) {
     clearTimeout(this.timer)
@@ -86,8 +83,7 @@ class Processes extends React.Component {
   }
 
   onFilterChange () {
-    this.props.onFilterChange &&
-        this.props.onFilterChange(this.getOptions())
+    this.props.onFilterChange && this.props.onFilterChange(this.getOptions())
   }
 
   render () {
@@ -126,4 +122,3 @@ class Processes extends React.Component {
 }
 
 Processes.defaultProps = {}
-export default Processes

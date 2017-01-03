@@ -5,7 +5,7 @@ import TimeAgo from 'react-timeago'
 import InfiniteTable from '../../../shared/InfiniteTable'
 import { ROOT_URL } from '../../../../actions/config'
 
-class ProcessModal extends React.Component {
+export default class ProcessModal extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -154,5 +154,3 @@ ProcessModal.defaultProps = {
   process: {},
   onChildClicked: null
 }
-
-export default ProcessModal

@@ -118,8 +118,8 @@ class Incidents extends React.Component {
             {
               (row.fixed & !row.whathappened)
                 ? <a href="javascript:;" onClick={this.showIncidentComments.bind(this, row)}>
-                    <img style={{height: '25px'}} title="Reason"
-                      src={`/images/${row.lastcomment ? 'reason-icon.png' : 'reason-x.png'}`} />
+                      <img style={{height: '25px'}} title="Reason"
+                        src={`/images/${row.lastcomment ? 'reason-icon.png' : 'reason-x.png'}`} />
                   </a>
                 : null
             }
@@ -254,8 +254,6 @@ class Incidents extends React.Component {
     })
   }
 
-    // ////////////////////////////////////////////////////////////////
-
   showIncidentComments (incident) {
     this.setState({
       selectedIndex: findIndex(this.props.incidents, {id: incident.id}), // eslint-disable-line no-undef
@@ -320,6 +318,8 @@ class Incidents extends React.Component {
       </TabPage>
     )
   }
+
+    // //////////////////////////////////////////////////
 }
 
 Incidents.defaultProps = {

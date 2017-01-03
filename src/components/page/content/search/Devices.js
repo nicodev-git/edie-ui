@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import {
     Button
 } from 'react-bootstrap'
@@ -12,7 +12,7 @@ import TabPage from '../../../shared/TabPage'
 import TabPageBody from '../../../shared/TabPageBody'
 import TabPageHeader from '../../../shared/TabPageHeader'
 
-class Devices extends React.Component {
+export default class Devices extends Component {
   constructor (props) {
     super(props)
 
@@ -33,16 +33,16 @@ class Devices extends React.Component {
 
   renderTable () {
     return (
-            <InfiniteTable
-              url="/bi/searchDevicesDT"
-              params={this.props.filter || {search: ''}}
-              cells={this.cellIPs}
-              ref="table"
-              rowMetadata={{'key': 'id'}}
-              selectable
-              bodyHeight={this.props.containerHeight}
-              onRowDblClick={this.onRowDblClick.bind(this)}
-            />
+      <InfiniteTable
+        url="/bi/searchDevicesDT"
+        params={this.props.filter || {search: ''}}
+        cells={this.cellIPs}
+        ref="table"
+        rowMetadata={{'key': 'id'}}
+        selectable
+        bodyHeight={this.props.containerHeight}
+        onRowDblClick={this.onRowDblClick.bind(this)}
+      />
     )
   }
 
@@ -86,5 +86,3 @@ class Devices extends React.Component {
 Devices.defaultProps = {
   filter: null
 }
-
-export default Devices

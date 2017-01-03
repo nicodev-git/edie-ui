@@ -5,9 +5,10 @@ import React from 'react'
 //    Tabs,
 //    Tab
 // } from 'react-bootstrap'
-import {withRouter} from 'react-router'
+import { withRouter } from 'react-router'
 
-class Search extends React.Component {
+@withRouter
+export default class Search extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -45,8 +46,3 @@ class Search extends React.Component {
     return this.props.children
   }
 }
-
-Search.defaultProps = {
-}
-
-export default withRouter(Search)
