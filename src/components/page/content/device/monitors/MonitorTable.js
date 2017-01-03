@@ -1,7 +1,6 @@
-import React from 'react'
+import React, { Component } from 'react'
 import Griddle from 'griddle-react'
 import TimeAgo from 'react-timeago'
-import { connect } from 'react-redux'
 import { assign, concat } from 'lodash'
 
 import DeviceWizard from '../../../../shared/wizard/DeviceWizard'
@@ -12,14 +11,7 @@ import { showAlert } from '../../../../shared/Alert'
 import MonitorPickerContainer from '../../../../../containers/page/content/device/monitors/MonitorPickerContainer'
 import MonitorHistoryModal from './MonitorHistoryModal'
 
-import {
-  openDeviceMonitorPicker,
-  openDeviceMonitorWizard,
-  closeDeviceMonitorWizard,
-  updateMapDevice
-} from '../../../../../actions'
-
-class MonitorTable extends React.Component {
+export default class MonitorTable extends Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -111,10 +103,9 @@ class MonitorTable extends React.Component {
       color = 'red'
     }
     return (
-            <div style={{width: '100%', textAlign: 'center'}}>
-                <i className={`fa ${cls}`}
-                  style={{color: color, fontSize: '20px', verticalAlign: 'middle'}} />
-            </div>
+      <div style={{width: '100%', textAlign: 'center'}}>
+        <i className={`fa ${cls}`} style={{color: color, fontSize: '20px', verticalAlign: 'middle'}} />
+      </div>
     )
   }
 
@@ -151,14 +142,14 @@ class MonitorTable extends React.Component {
     if (!this.props.monitorPickerVisible) return null
 
     return (
-            <MonitorPickerContainer
-              onClickItem={monitorConfig => {
-                this.setState({monitorConfig}, () => {
-                  this.addMonitor()
-                })
-                return true
-              }}
-            />
+      <MonitorPickerContainer
+        onClickItem={monitorConfig => {
+          this.setState({monitorConfig}, () => {
+            this.addMonitor()
+          })
+          return true
+        }}
+      />
     )
   }
 
@@ -168,21 +159,19 @@ class MonitorTable extends React.Component {
     const {monitorConfig} = this.state
     const type = 'monitor-custom'
     return (
-            <DeviceWizard
-              deviceType={type}
-              title={monitorConfig ? monitorConfig.name : ''}
-              onClose={() => {
-                this.props.closeDeviceMonitorWizard()
-              }}
-              onStep0={this.onStep0.bind(this)}
-              extraParams={{}}
-              configParams={{}}
-              onFinish={this.onFinishMonitorWizard.bind(this)}
-            />
+      <DeviceWizard
+        deviceType={type}
+        title={monitorConfig ? monitorConfig.name : ''}
+        onClose={() => {
+          this.props.closeDeviceMonitorWizard()
+        }}
+        onStep0={this.onStep0.bind(this)}
+        extraParams={{}}
+        configParams={{}}
+        onFinish={this.onFinishMonitorWizard.bind(this)}
+      />
     )
   }
-
-    // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   onRowClick (row) {
     this.setState({
@@ -201,35 +190,31 @@ class MonitorTable extends React.Component {
     this.onClickEditMonitor()
   }
 
-    // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
   onClickCal (row) {
     let data = row
 
-        // MonitorHistoryModal
+    // MonitorHistoryModal
     appendComponent(
-            <MonitorHistoryModal
-              device={data}
-              onClose={removeComponent}
-            />
-        )
+      <MonitorHistoryModal
+        device={data}
+        onClose={removeComponent}
+      />
+    )
   }
 
   onClickLog (row) {
     let data = row
 
-        // appendComponent(
-        //     <MonitorLogModal
-        //         device={ data }
-        //         father={ this.props.device }
-        //         onClose={ removeComponent }
-        //         />
-        // )
+    // appendComponent(
+    //     <MonitorLogModal
+    //         device={ data }
+    //         father={ this.props.device }
+    //         onClose={ removeComponent }
+    //         />
+    // )
 
     emit(EVENTS.DEV_MONITOR_LOG_CLICKED, data, this.props.device) // eslint-disable-line no-undef
   }
-
-    // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   onClickAddMonitor () {
     this.showMonitorAdd()
@@ -252,11 +237,11 @@ class MonitorTable extends React.Component {
     let monitor = assign({}, editMonitor, params)
 
     if (editMonitor) {
-            // Edit
+      // Edit
       const index = device.monitors.indexOf(editMonitor)
       if (index >= 0) device.monitors[index] = monitor
     } else {
-            // Add
+      // Add
 
       const {monitorConfig} = this.state
       assign(monitor, {
@@ -274,8 +259,6 @@ class MonitorTable extends React.Component {
     this.onClickAddMonitor()
   }
 
-    // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
   onClickEditMonitor () {
     let selected = this.state.selected
 
@@ -286,8 +269,6 @@ class MonitorTable extends React.Component {
     })
   }
 
-    // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
   editPortMonitors (type) {
 
   }
@@ -296,7 +277,6 @@ class MonitorTable extends React.Component {
 
   }
 
-    // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   onClickDeleteMonitor () {
     let data = this.state.selected
     if (!data) return showAlert('Please choose monitor.')
@@ -334,21 +314,3 @@ class MonitorTable extends React.Component {
     )
   }
 }
-
-function mapStateToProps (state) {
-  return {
-    monitorPickerVisible: state.devices.monitorPickerVisible,
-    monitorWizardVisible: state.devices.monitorWizardVisible,
-    device: state.dashboard.selectedDevice
-
-  }
-}
-
-const actions = {
-  openDeviceMonitorPicker,
-  openDeviceMonitorWizard,
-  closeDeviceMonitorWizard,
-  updateMapDevice
-}
-
-export default connect(mapStateToProps, actions, null, { withRef: true })(MonitorTable)

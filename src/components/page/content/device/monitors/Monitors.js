@@ -6,7 +6,7 @@ import {
     Button
 } from 'react-bootstrap'
 
-import MonitorTable from './MonitorTable'
+import MonitorTableContainer from '../../../../../containers/page/content/device/monitors/MonitorTableContainer'
 import EventLogTableContainer from '../../../../../containers/page/content/device/monitors/EventLogTableContainer'
 import ApplicationTableContainer from '../../../../../containers/page/content/device/monitors/ApplicationTableContainer'
 import ProcessTable from './ProcessTable'
@@ -160,7 +160,7 @@ export default class Monitors extends React.Component {
               ? null
               : <div className="flex-vertical" style={{height: '100%'}}>
                   <div className="flex-1" style={{background: 'white'}}>
-                    <MonitorTable {...props} ref="monitor"/>
+                    <MonitorTableContainer {...props} ref="monitor"/>
                   </div>
                 </div>
           }

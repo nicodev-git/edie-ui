@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Monitors from '../../../../../components/page/content/device/monitors/Monitors'
-import {withRouter} from 'react-router'
+import { withRouter } from 'react-router'
 import { connect } from 'react-redux'
 
 @connect(

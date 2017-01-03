@@ -14,7 +14,7 @@ import { closeDeviceMonitorPicker, fetchMonitorTemplates } from '../../../../../
     }, dispatch)
   })
 )
-export default class MonitorPicker extends React.Component {
+export default class MonitorPickerContainer extends React.Component {
   render () {
     return (
       <MonitorPicker {...this.props} />
