@@ -5,12 +5,14 @@ import TopbarContainer from '../../containers/page/topbar/TopbarContainer'
 import SidebarContainer from '../../containers/page/sidebar/SidebarContainer'
 import DashboardContainer from '../../containers/page/content/dashboard/DashboardContainer'
 import { scrollTop } from '../../util/Scroll'
+import { DragDropContext } from 'react-dnd'
+import TouchBackend from 'react-dnd-touch-backend'
 
 import { mainMenu, deviceMenu, contentType } from './Config'
 
 const dashboardId = mainMenu[0].id
 
-export default class Main extends React.Component {
+class Main extends React.Component {
 
   constructor (props) {
     super(props)
@@ -104,3 +106,5 @@ export default class Main extends React.Component {
     // <ReactTooltip />
   }
 }
+
+export default DragDropContext(TouchBackend({ enableMouseEvents: true }))(Main)

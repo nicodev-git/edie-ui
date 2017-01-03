@@ -2,7 +2,6 @@ import React from 'react'
 import {extend} from 'lodash'
 import ReactTooltip from 'react-tooltip'
 import MapCanvas from '../../../../shared/map/MapCanvas'
-import {withRouter} from 'react-router'
 
 import MapToolbar from './MapToolbar'
 import DeviceDragLayer from './DeviceDragLayer'
@@ -11,7 +10,6 @@ import DeviceWizard from '../../../../shared/wizard/DeviceWizard'
 import { wizardConfig } from '../../../../shared/wizard/WizardConfig'
 import { showConfirm } from '../../../../shared/Alert'
 
-@withRouter
 export default class Map extends React.Component {
   constructor (props) {
     super(props)

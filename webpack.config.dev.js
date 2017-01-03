@@ -41,7 +41,7 @@ module.exports = {
           path.resolve(__dirname, 'src')
         ],
         test: /\.js$/,
-        plugins: ['transform-runtime']
+        plugins: ['transform-runtime', 'transform-decorators-legacy']
       },
       {
         test: /\.(png|jpg)$/,

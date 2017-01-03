@@ -12,7 +12,7 @@ import { showAlert } from '../../../shared/Alert'
 
 import { scrollBottom } from '../../../../util/Scroll'
 
-class ChatContainer extends React.Component {
+export default class ChatContainer extends React.Component {
 
   constructor (props) {
     super(props)
@@ -575,5 +575,3 @@ Chat.contextTypes = {
   user: React.PropTypes.object,
   sid: React.PropTypes.string
 }
-
-export default Chat

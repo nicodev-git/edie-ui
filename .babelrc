@@ -15,14 +15,16 @@
             "transform": "react-transform-catch-errors",
             "imports": ["react", "redbox-react"]
           }]
-        }]
+        }],
+        ["transform-decorators-legacy"]
       ]
     },
     "production": {
       "plugins": [
         ["transform-object-rest-spread"],
         ["transform-es2015-spread"],
-        ["transform-react-display-name"]
+        ["transform-react-display-name"],
+        ["transform-decorators-legacy"]
       ]
     }
   }

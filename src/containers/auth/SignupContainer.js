@@ -4,19 +4,16 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { signup } from '../../actions'
 
-class SignupContainer extends Component {
+@connect(
+  state => ({ errorMessage: state.auth.error }),
+  dispatch => ({
+    signup: bindActionCreators(signup, dispatch)
+  })
+)
+export default class SignupContainer extends Component {
   render () {
     return (
       <Signup {...this.props} />
     )
   }
 }
-
-export default connect(
-  state => ({ errorMessage: state.auth.error }),
-  dispatch => {
-    return {
-      signup: bindActionCreators(signup, dispatch)
-    }
-  }
-)(SignupContainer)

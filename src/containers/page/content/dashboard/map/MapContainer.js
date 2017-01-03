@@ -1,6 +1,7 @@
 import React from 'react'
 import Map from '../../../../../components/page/content/dashboard/map/Map'
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router'
 import { bindActionCreators } from 'redux'
 import { ROOT_URL } from '../../../../../actions/config'
 
@@ -14,15 +15,7 @@ import {
   updateMapLine
 } from '../../../../../actions'
 
-class MapContainer extends React.Component {
-  render () {
-    return (
-      <Map {...this.props} />
-    )
-  }
-}
-
-export default connect(
+@connect(
   state => ({
     mapDevices: state.dashboard.mapDevices,
     mapLines: state.dashboard.mapLines,
@@ -41,4 +34,12 @@ export default connect(
       updateMapLine
     }, dispatch)
   })
-)(MapContainer)
+)
+@withRouter
+export default class MapContainer extends React.Component {
+  render () {
+    return (
+      <Map {...this.props} />
+    )
+  }
+}
