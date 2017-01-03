@@ -12,7 +12,7 @@ import { fetchMaps, changeMap } from '../../../../../actions'
     selectedMap: state.dashboard.selectedMap
   }),
   dispatch => ({
-    signUser: bindActionCreators({
+    ...bindActionCreators({
       fetchMaps,
       changeMap
     }, dispatch)

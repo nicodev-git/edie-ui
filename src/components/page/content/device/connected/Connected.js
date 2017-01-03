@@ -1,14 +1,10 @@
 import React from 'react'
 
-import Dimensions from 'react-dimensions'
-import {withRouter} from 'react-router'
-import { connect } from 'react-redux'
-
 import TabPage from '../../../../shared/TabPage'
 import TabPageBody from '../../../../shared/TabPageBody'
 import TabPageHeader from '../../../../shared/TabPageHeader'
 
-class Connected extends React.Component {
+export default class Connected extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -42,35 +38,35 @@ class Connected extends React.Component {
     })
 
     return (
-            <svg style={{width: '100%', height: `${height}px`, backgroundColor: 'rgb(35, 39, 45)'}}>
-                {deviceObjs}
-                {deviceImage}
-                {deviceLabel}
-            </svg>
+      <svg style={{width: '100%', height: `${height}px`, backgroundColor: 'rgb(35, 39, 45)'}}>
+        {deviceObjs}
+        {deviceImage}
+        {deviceLabel}
+      </svg>
     )
   }
 
   deviceLabel (label, pos) {
     return (
-            <text textAnchor="middle"
-              x={pos.x}
-              y={pos.y + 30}
-              height="24"
-              fill="#fff"
-              fontSize="0.9em">
-                {label}
-            </text>
+      <text textAnchor="middle"
+        x={pos.x}
+        y={pos.y + 30}
+        height="24"
+        fill="#fff"
+        fontSize="0.9em">
+          {label}
+      </text>
     )
   }
 
   deviceImage (imageUrl, pos) {
     return (
-            <image x={pos.x - 21}
-              y={pos.y - 21}
-              width="42"
-              height="42"
-              href={imageUrl}
-              style={{cursor: 'pointer', opacity: '1'}} />
+      <image x={pos.x - 21}
+        y={pos.y - 21}
+        width="42"
+        height="42"
+        href={imageUrl}
+        style={{cursor: 'pointer', opacity: '1'}} />
     )
   }
 
@@ -78,15 +74,15 @@ class Connected extends React.Component {
 
   loadNetStats (cb) {
     cb([])
-        // const {location} = this.props
-        // let props = location.state || {}
-        // const {device} = props
-        //
-        // $.get(Api.incidents.getNetStats, {
-        //     deviceid: device.id,
-        // }).done(res => {
-        //     cb && cb(res)
-        // })
+    // const {location} = this.props
+    // let props = location.state || {}
+    // const {device} = props
+    //
+    // $.get(Api.incidents.getNetStats, {
+    //     deviceid: device.id,
+    // }).done(res => {
+    //     cb && cb(res)
+    // })
   }
 
     // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -205,15 +201,4 @@ class Connected extends React.Component {
       </TabPage>
     )
   }
-
-    // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 }
-
-Connected.defaultProps = {
-}
-
-function mapStateToProps (state) {
-  return {device: state.dashboard.selectedDevice}
-}
-
-export default withRouter(connect(mapStateToProps)(Dimensions()(Connected)))

@@ -19,7 +19,7 @@ import {
     showIncidentComments
 } from '../../../../shared/action/IncidentAction'
 
-class MonthIncidentModal extends React.Component {
+export default class MonthIncidentModal extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -32,11 +32,11 @@ class MonthIncidentModal extends React.Component {
       },
 
       severities: [
-                { label: 'High', value: 'High'},
-                { label: 'Medium', value: 'Medium'},
-                { label: 'Low', value: 'Low'},
-                { label: 'Audit', value: 'Audit'},
-                { label: 'Ignore', value: 'Ignore'}
+        { label: 'High', value: 'High'},
+        { label: 'Medium', value: 'Medium'},
+        { label: 'Low', value: 'Low'},
+        { label: 'Audit', value: 'Audit'},
+        { label: 'Ignore', value: 'Ignore'}
       ],
 
       selectedSeverity: ['High', 'Medium']
@@ -95,20 +95,20 @@ class MonthIncidentModal extends React.Component {
       'customComponent': (props) => {
         const row = props.rowData
         return (
-                    <div>
-                        <a href="javascript:;" onClick={() => { ackIncident(row, this.reloadTable.bind(this)) }}>
-                            <img style={{height: '30px'}} title="Acknowledge"
-                              src={`/images/${row.acknowledged ? 'ack.png' : 'noack.png'}`} />
-                        </a>
-                        &nbsp;
+          <div>
+            <a href="javascript:;" onClick={() => { ackIncident(row, this.reloadTable.bind(this)) }}>
+              <img style={{height: '30px'}} title="Acknowledge"
+                src={`/images/${row.acknowledged ? 'ack.png' : 'noack.png'}`} />
+            </a>
+            &nbsp;
 
-                        <a href="javascript:;" onClick={() => { fixIncident(this.context.sid, row, this.reloadTable.bind(this)) }}>
-                            <img style={{height: '30px'}} title="Acknowledge"
-                              src={`/images/${row.fixed ? 'ok.png' : 'notok.png'}`} />
-                        </a>
-                        &nbsp;
+            <a href="javascript:;" onClick={() => { fixIncident(this.context.sid, row, this.reloadTable.bind(this)) }}>
+              <img style={{height: '30px'}} title="Acknowledge"
+                src={`/images/${row.fixed ? 'ok.png' : 'notok.png'}`} />
+            </a>
+            &nbsp;
 
-                    </div>
+          </div>
         )
       }
     }]
@@ -118,68 +118,67 @@ class MonthIncidentModal extends React.Component {
 
   render () {
     return (
-            <Modal show={this.state.open} onHide={this.onHide.bind(this)}
-              aria-labelledby="ModalHeader" className="bootstrap-dialog type-primary modal-md">
+      <Modal show={this.state.open} onHide={this.onHide.bind(this)}
+        aria-labelledby="ModalHeader" className="bootstrap-dialog type-primary modal-md">
 
-                <div className="modal-header">
-                    <h4 className="modal-title bootstrap-dialog-title">
-                        Month Incidents
-                    </h4>
-                    <div className="bootstrap-dialog-close-button">
-                        <button className="close"
-                          onClick={this.onClickClose.bind(this)}>×</button>
-                    </div>
-                </div>
+          <div className="modal-header">
+              <h4 className="modal-title bootstrap-dialog-title">
+                Month Incidents
+              </h4>
+              <div className="bootstrap-dialog-close-button">
+                <button className="close" onClick={this.onClickClose.bind(this)}>×</button>
+              </div>
+          </div>
 
-                <div className="modal-body bootstrap-dialog-message">
+          <div className="modal-body bootstrap-dialog-message">
 
-                    <div className="form-inline"
-                      style={{'verticalAlign': 'middle', 'lineHeight': 2.2}}>
+            <div className="form-inline"
+              style={{'verticalAlign': 'middle', 'lineHeight': 2.2}}>
 
-                        <input type="text" placeholder="Search" className="form-control input-sm"
-                          onChange={this.onFilterChange}
-                          ref="search"/>
+                <input type="text" placeholder="Search" className="form-control input-sm"
+                  onChange={this.onFilterChange}
+                  ref="search"/>
 
-                        <Select
-                          value={this.state.selectedSeverity.join(',')}
-                          options={this.state.severities}
-                          onChange={this.onChangeSeverity.bind(this)}
-                          multi
-                          clearable={false}
-                          className="select-severity"
-                          style={{minWidth: '85px'}}
-                          searchable={false}
-                          autosize={false}
-                        />
+                <Select
+                  value={this.state.selectedSeverity.join(',')}
+                  options={this.state.severities}
+                  onChange={this.onChangeSeverity.bind(this)}
+                  multi
+                  clearable={false}
+                  className="select-severity"
+                  style={{minWidth: '85px'}}
+                  searchable={false}
+                  autosize={false}
+                />
 
-                        <select className="form-control text-primary margin-md-left input-sm"
-                          onChange={this.onFilterChange}
-                          ref="fixed" defaultValue="0">
-                            <option value="-1">Any</option>
-                            <option value="0">Unfixed</option>
-                            <option value="1">Fixed</option>
-                        </select>
-                    </div>
+                <select className="form-control text-primary margin-md-left input-sm"
+                  onChange={this.onFilterChange}
+                  ref="fixed" defaultValue="0">
+                    <option value="-1">Any</option>
+                    <option value="0">Unfixed</option>
+                    <option value="1">Fixed</option>
+                </select>
+            </div>
 
-                    <InfiniteTable
-                      url="/incidentstable/getMonthIncidents"
-                      params={this.state.params}
-                      cells={this.cells}
-                      ref="table"
-                      rowMetadata={{'key': 'incidentid'}}
-                      bodyHeight={500}
-                      selectable
-                    />
+            <InfiniteTable
+              url="/incidentstable/getMonthIncidents"
+              params={this.state.params}
+              cells={this.cells}
+              ref="table"
+              rowMetadata={{'key': 'incidentid'}}
+              bodyHeight={500}
+              selectable
+            />
 
-                    <div style={{borderTop: '1px solid gray', paddingTop: '4px'}}>
-                        <Button bsStyle="primary" onClick={this.onClickFixAll.bind(this)}>Fix All</Button>
-                        <Button bsStyle="primary" className="margin-sm-left"
-                          onClick={this.onClickAddException.bind(this)}>Add Exception</Button>
-                        <Button bsStyle="primary" className="margin-sm-left"
-                          onClick={this.onClickOpen.bind(this)}>Open</Button>
-                    </div>
-                </div>
-            </Modal>
+            <div style={{borderTop: '1px solid gray', paddingTop: '4px'}}>
+              <Button bsStyle="primary" onClick={this.onClickFixAll.bind(this)}>Fix All</Button>
+              <Button bsStyle="primary" className="margin-sm-left"
+                onClick={this.onClickAddException.bind(this)}>Add Exception</Button>
+              <Button bsStyle="primary" className="margin-sm-left"
+                onClick={this.onClickOpen.bind(this)}>Open</Button>
+            </div>
+          </div>
+      </Modal>
     )
   }
 
@@ -197,8 +196,6 @@ class MonthIncidentModal extends React.Component {
   onClickClose () {
     this.closeModal()
   }
-
-    // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   onChangeSeverity (selected) {
     this.setState({
@@ -220,8 +217,6 @@ class MonthIncidentModal extends React.Component {
     this.setState({ params })
   }
 
-    // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
   updateTable () {
     this.refs.table &&
         this.refs.table.refresh()
@@ -230,8 +225,6 @@ class MonthIncidentModal extends React.Component {
   reloadTable () {
     this.updateTable()
   }
-
-    // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   onClickFixAll () {
     showPrompt('Please type comment for all incidents.', '', (text) => {
@@ -250,9 +243,8 @@ class MonthIncidentModal extends React.Component {
     if (!sel) return showAlert('Please select incident.')
 
     appendComponent(
-            <AddExceptionModal incident={sel}
-              onClose={removeComponent}/>
-        )
+      <AddExceptionModal incident={sel} onClose={removeComponent}/>
+    )
   }
 
   onClickOpen () {
@@ -262,7 +254,3 @@ class MonthIncidentModal extends React.Component {
     showIncidentDetail(sel)
   }
 }
-
-MonthIncidentModal.defaultProps = {}
-
-export default MonthIncidentModal

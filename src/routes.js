@@ -33,10 +33,10 @@ import DeviceMainRawIncidents from './components/page/content/device/main/raw-in
 import DeviceMainAdvanced from './components/page/content/device/main/advanced/MainAdvanced'
 import DeviceMainRuleAdd from './components/page/content/device/main/rules/MainRulesAdd'
 import DeviceMonitors from './components/page/content/device/monitors/Monitors'
-import DeviceConnected from './components/page/content/device/connected/Connected'
+import DeviceConnectedContainer from './containers/page/content/device/connected/ConnectedContainer'
 import DeviceInfo from './components/page/content/device/info/Info'
 
-import DeviceList from './components/DeviceList'
+import DeviceListContainer from './containers/DeviceListContainer'
 
 import RequireAuth from './components/auth/RequireAuth'
 
@@ -81,7 +81,7 @@ export default(
                     <Route path="ruleAdd" component={DeviceMainRuleAdd}/>
                 </Route>
                 <Route path="monitor" component={DeviceMonitors}/>
-                <Route path="connected" component={DeviceConnected}/>
+                <Route path="connected" component={DeviceConnectedContainer}/>
                 <Route path="info" component={DeviceInfo}/>
             </Route>
 
@@ -89,7 +89,7 @@ export default(
         <Route path="/signin" component={SigninContainer} />
         <Route path="/signout" component={SignoutContainer} />
         <Route path="/signup" component={SignupContainer} />
-        <Route path="/devicelist" component={DeviceList} />
+        <Route path="/devicelist" component={DeviceListContainer} />
     </Router>
 )
 
