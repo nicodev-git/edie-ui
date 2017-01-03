@@ -1,6 +1,4 @@
 import React from 'react'
-import {withRouter} from 'react-router'
-import { connect } from 'react-redux'
 import { assign } from 'lodash'
 
 import TabPage from '../../../../shared/TabPage'
@@ -10,13 +8,11 @@ import TabPageHeader from '../../../../shared/TabPageHeader'
 import DeviceEditWizardContainer from '../../../../../containers/shared/wizard/DeviceEditWizardContainer'
 import { deviceTypeMap } from '../../../../shared/wizard/WizardConfig'
 
-import { updateMapDevice } from '../../../../../actions'
-
-class Info extends React.Component {
+export default class Info extends React.Component {
   constructor (props) {
     super(props)
 
-    const {location} = props
+    const { location } = props
     const loc = location.state || {}
 
     this.state = {
@@ -32,8 +28,8 @@ class Info extends React.Component {
 
     }
 
-        // let values = $.extend(true, {}, device)
-        // values['notes'] = values['devicenotes']
+    // let values = $.extend(true, {}, device)
+    // values['notes'] = values['devicenotes']
 
     return (
       <DeviceEditWizardContainer
@@ -63,14 +59,3 @@ class Info extends React.Component {
     )
   }
 }
-
-Info.defaultProps = {
-
-}
-
-function mapStateToProps (state) {
-  return {device: state.dashboard.selectedDevice}
-}
-
-export default withRouter(connect(mapStateToProps, {updateMapDevice})(Info))
-// export default withRouter(Info)

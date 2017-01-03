@@ -1,8 +1,9 @@
 import React from 'react'
 import Griddle from 'griddle-react'
-import {withRouter, Link} from 'react-router'
+import { withRouter } from 'react-router'
 import { ROOT_URL } from '../../../../../actions/config'
 
+@withRouter
 class Devices extends React.Component {
   constructor (props) {
     super(props)
@@ -54,15 +55,15 @@ class Devices extends React.Component {
         }
 
       }, /* {
-                "displayName": "Disk",
-                "columnName": "disks",
-                "customComponent": (props) => {
-                    return (<div>
-                        {this.progressbarFormatter(parseInt(Math.random() * 1000) % 100 + 1)}
-                        {this.progressbarFormatter(parseInt(Math.random() * 1000) % 100 + 1)}
-                        {this.progressbarFormatter(parseInt(Math.random() * 1000) % 100 + 1)}
-                    </div>)
-                }
+          "displayName": "Disk",
+          "columnName": "disks",
+          "customComponent": (props) => {
+              return (<div>
+                  {this.progressbarFormatter(parseInt(Math.random() * 1000) % 100 + 1)}
+                  {this.progressbarFormatter(parseInt(Math.random() * 1000) % 100 + 1)}
+                  {this.progressbarFormatter(parseInt(Math.random() * 1000) % 100 + 1)}
+              </div>)
+          }
 
       }, */{
         'displayName': 'Health',
@@ -111,12 +112,12 @@ class Devices extends React.Component {
     }
 
     return (
-            <div className="progress" style={{height: '12px', position: 'relative'}} title={title || ''}>
-                <div className="progress-label"
-                  style={{fontSize: '9px', top: '1px', textAlign: 'center', position: 'absolute', width: '100%', color: textcolor}}>{val}%</div>
-                <div className="progress-bar progress-bar-info" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"
-                  style={{width: `${val}%`, backgroundColor: color}} />
-            </div>
+      <div className="progress" style={{height: '12px', position: 'relative'}} title={title || ''}>
+        <div className="progress-label"
+          style={{fontSize: '9px', top: '1px', textAlign: 'center', position: 'absolute', width: '100%', color: textcolor}}>{val}%</div>
+        <div className="progress-bar progress-bar-info" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"
+          style={{width: `${val}%`, backgroundColor: color}} />
+      </div>
     )
   }
 
@@ -166,33 +167,29 @@ class Devices extends React.Component {
 
   render () {
     return (
-            <div>
-                <div className="tab-header" style={{minHeight: '40px'}}>
-                    <div>
-                        <span className="tab-title">{this.props.device.name || ''}</span>
-                    </div>
-                </div>
+      <div>
+        <div className="tab-header" style={{minHeight: '40px'}}>
+          <div>
+            <span className="tab-title">{this.props.device.name || ''}</span>
+          </div>
+        </div>
 
-                <Griddle
-                  results={this.state.data}
-                  tableClassName="table tab-table"
-                  showFilter={false}
-                  showSettings={false}
-                  columns={this.state.columns.map(item => item.columnName)}
-                  columnMetadata={this.state.columns}
-                  rowMetadata={{key: 'id'}}
-                  useGriddleStyles={false}
-                  resultsPerPage={100}
-                  bodyHeight={500}
-                />
-            </div>
+        <Griddle
+          results={this.state.data}
+          tableClassName="table tab-table"
+          showFilter={false}
+          showSettings={false}
+          columns={this.state.columns.map(item => item.columnName)}
+          columnMetadata={this.state.columns}
+          rowMetadata={{key: 'id'}}
+          useGriddleStyles={false}
+          resultsPerPage={100}
+          bodyHeight={500}
+        />
+      </div>
     )
   }
-
-    // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 }
 Devices.defaultProps = {
   device: {}
 }
-
-export default withRouter(Devices)
