@@ -13,7 +13,7 @@ import { appendComponent, removeComponent } from '../../../../../util/Component'
 import { showAlert, showConfirm } from '../../../../shared/Alert'
 
 import GroupModal from './GroupModal'
-import UserModal from './UserModal'
+import UserModalContainer from '../../../../../containers/page/content/settings/users/UserModalContainer'
 import PasswordModalContainer from '../../../../../containers/page/content/settings/users/PasswordModalContainer'
 
 import SettingTabs from '../SettingTabs'
@@ -107,14 +107,14 @@ class Users extends React.Component {
   renderUserModal () {
     if (!this.props.userModalVisible) return null
     return (
-            <UserModal/>
+      <UserModalContainer />
     )
   }
 
   renderPasswordModal () {
     if (!this.props.userPasswordModalVisible) return null
     return (
-            <PasswordModalContainer />
+      <PasswordModalContainer />
     )
   }
 
@@ -130,10 +130,8 @@ class Users extends React.Component {
 
   onAddGroup () {
     appendComponent(
-            <GroupModal
-              sid={this.context.sid}
-              onClose={this.onGroupAdded.bind(this)}/>
-        )
+      <GroupModal sid={this.context.sid} onClose={this.onGroupAdded.bind(this)}/>
+    )
   }
 
   onGroupAdded (modal, group) {
@@ -146,11 +144,9 @@ class Users extends React.Component {
     if (selected < 0) return showAlert('Please select a group.')
 
     appendComponent(
-            <GroupModal
-              group={this.state.groups[selected]}
-              onClose={this.onCloseEditGroup.bind(this)}
-            />
-        )
+      <GroupModal group={this.state.groups[selected]} onClose={this.onCloseEditGroup.bind(this)}
+      />
+    )
   }
 
   onCloseEditGroup (modal, group) {
@@ -184,8 +180,6 @@ class Users extends React.Component {
     })
   }
 
-    // //////////////////////////////////////////////////////////
-
   onAddUser () {
     this.props.openSettingUserModal()
   }
@@ -207,9 +201,7 @@ class Users extends React.Component {
       this.props.deleteSettingUser(selected)
     })
   }
-
-    // ///////////////////////////////////////////////////////////
-
+  
   onChangePassword () {
     const selected = this.getUsers().getSelected()
     if (!selected) return showAlert('Please select user.')

@@ -1,17 +1,15 @@
 import React from 'react'
 import Modal from 'react-bootstrap-modal'
 import {
-    Button
+  Button
 } from 'react-bootstrap'
 import {
   // findIndex, // Never used
   assign
   // clone // Never used
 } from 'lodash'
-import { connect } from 'react-redux'
 import { reduxForm, Field, change } from 'redux-form'
 import axios from 'axios'
-import { closeSettingUserModal, addSettingUser, updateSettingUser } from '../../../../../actions'
 import { ROOT_URL } from '../../../../../actions/config'
 
 class UserModal extends React.Component {
@@ -27,12 +25,12 @@ class UserModal extends React.Component {
   }
 
   componentWillMount () {
-        // $.when(
-        //     this.loadDefaultMaps(),
-        //     this.loadRoles()
-        // ).always(() => {
-        //     this.setState({ loading: false })
-        // })
+    // $.when(
+    //     this.loadDefaultMaps(),
+    //     this.loadRoles()
+    // ).always(() => {
+    //     this.setState({ loading: false })
+    // })
 
   }
 
@@ -76,45 +74,47 @@ class UserModal extends React.Component {
     const { handleSubmit } = this.props
 
     return (
-            <div>
-                <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
-                    <Field name="username" component={this.renderInput} type="text" label="Username"/>
-                    <Field name="fullname" component={this.renderInput} type="text" label="Full Name"/>
-                    <Field name="password" component={this.renderInput} type="password" label="Password"/>
-                    <Field name="email" component={this.renderInput} type="text" label="Email"/>
-                    <Field name="phone" component={this.renderInput} type="text" label="Phone"/>
-                    <Field name="pincode" component={this.renderInput} type="text" label="Pin Code"/>
+      <div>
+        <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
+          <Field name="username" component={this.renderInput} type="text" label="Username"/>
+          <Field name="fullname" component={this.renderInput} type="text" label="Full Name"/>
+          <Field name="password" component={this.renderInput} type="password" label="Password"/>
+          <Field name="email" component={this.renderInput} type="text" label="Email"/>
+          <Field name="phone" component={this.renderInput} type="text" label="Phone"/>
+          <Field name="pincode" component={this.renderInput} type="text" label="Pin Code"/>
 
-                    <div className="row margin-md-bottom">
-                        <label className="control-label col-md-3 text-right">Default
-                            Map</label>
-                        <div className="col-md-6">
-                            <select className="form-control" ref="defaultmap">{
-                                this.state.defaultMaps.map(item =>
-                                    <option key={item.id} value={item.id}>{item.mapname}</option>
-                                )
-                            }</select>
-                        </div>
-                    </div>
-
-                    <div className="row margin-md-bottom">
-                        <label className="control-label col-md-3 text-right">Role</label>
-                        <div className="col-md-6">
-                            <select className="form-control" ref="role">{
-                                this.state.roles.map(item =>
-                                    <option key={item} value={item}>{item}</option>
-                                )
-                            }</select>
-                        </div>
-                    </div>
-
-                    <div className="text-center">
-                        <Button className="btn-primary btn-sm" type="submit">Save</Button>
-                        <Button className="btn-sm margin-sm-left"
-                          onClick={this.onClickClose.bind(this)}>Cancel</Button>
-                    </div>
-                </form>
+          <div className="row margin-md-bottom">
+            <label className="control-label col-md-3 text-right">Default Map</label>
+            <div className="col-md-6">
+              <select className="form-control" ref="defaultmap">
+              {
+                this.state.defaultMaps.map(item =>
+                  <option key={item.id} value={item.id}>{item.mapname}</option>
+                )
+              }
+              </select>
             </div>
+          </div>
+
+          <div className="row margin-md-bottom">
+              <label className="control-label col-md-3 text-right">Role</label>
+              <div className="col-md-6">
+                <select className="form-control" ref="role">
+                {
+                  this.state.roles.map(item =>
+                    <option key={item} value={item}>{item}</option>
+                  )
+                }
+                </select>
+              </div>
+          </div>
+
+          <div className="text-center">
+            <Button className="btn-primary btn-sm" type="submit">Save</Button>
+            <Button className="btn-sm margin-sm-left" onClick={this.onClickClose.bind(this)}>Cancel</Button>
+          </div>
+        </form>
+      </div>
     )
   }
 
@@ -134,8 +134,6 @@ class UserModal extends React.Component {
     const { editUser } = this.props
 
     let user = assign({}, editUser, values)
-
-    console.log(values)
 
     if (editUser) {
       this.props.updateSettingUser(user)
@@ -176,25 +174,6 @@ class UserModal extends React.Component {
   }
 }
 
-UserModal.defaultProps = {
-
-}
-
-function mapStateToProps (state) {
-  return {
-    editUser: state.settings.editUser,
-    initialValues: state.settings.editUser
-  }
-}
-
-const actions = {
-  addSettingUser,
-  updateSettingUser,
-  closeSettingUserModal
-}
-
-export default connect(mapStateToProps, actions)(
-  reduxForm({
-    form: 'userEditForm'
-  })(UserModal)
-)
+export default reduxForm({
+  form: 'userEditForm'
+})(UserModal)

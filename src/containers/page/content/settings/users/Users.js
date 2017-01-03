@@ -13,7 +13,7 @@ import { appendComponent, removeComponent } from '../../../../../util/Component'
 import { showAlert, showConfirm } from '../../../../shared/Alert'
 
 import GroupModal from './GroupModal'
-import UserModal from './UserModal'
+import UserModalContainer from '../../../../../containers/page/content/settings/users/UserModalContainer'
 import PasswordModalContainer from '../../../../../containers/page/content/settings/users/PasswordModalContainer'
 
 import SettingTabs from '../SettingTabs'
@@ -91,23 +91,23 @@ class Users extends React.Component {
 
   renderContent () {
     return (
-            <ResponsiveInfiniteTable
-              cells={this.cells}
-              ref="users"
-              rowMetadata={{'key': 'id'}}
-              selectable
-              onRowDblClick={this.onEditUser.bind(this)}
+      <ResponsiveInfiniteTable
+        cells={this.cells}
+        ref="users"
+        rowMetadata={{'key': 'id'}}
+        selectable
+        onRowDblClick={this.onEditUser.bind(this)}
 
-              useExternal={false}
-              data={this.props.users}
-            />
+        useExternal={false}
+        data={this.props.users}
+      />
     )
   }
 
   renderUserModal () {
     if (!this.props.userModalVisible) return null
     return (
-            <UserModal/>
+      <UserModalContainer />
     )
   }
 
@@ -122,18 +122,14 @@ class Users extends React.Component {
     return this.refs.users.refs.wrappedInstance
   }
 
-    // //////////////////////////////////////////////////////////
-
   onChangeGroup (groupId) {
     this.setState({ groupId })
   }
 
   onAddGroup () {
     appendComponent(
-            <GroupModal
-              sid={this.context.sid}
-              onClose={this.onGroupAdded.bind(this)}/>
-        )
+      <GroupModal sid={this.context.sid} onClose={this.onGroupAdded.bind(this)}/>
+    )
   }
 
   onGroupAdded (modal, group) {

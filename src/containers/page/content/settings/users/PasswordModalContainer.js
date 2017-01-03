@@ -4,14 +4,14 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 import {
-    updateSettingUser,
-    closeUserPasswordModal
+  updateSettingUser,
+  closeUserPasswordModal
 } from '../../../../../actions'
 
 @connect(
   state => ({ editUser: state.settings.editUser }),
   dispatch => ({
-    signUser: bindActionCreators({
+    ...bindActionCreators({
       updateSettingUser,
       closeUserPasswordModal
     }, dispatch)
