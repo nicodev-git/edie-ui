@@ -124,7 +124,6 @@ export default class AttackersModal extends React.Component {
   }
 
   render () {
-    let { ROOT_URL } = this.props
     return (
       <Modal show={this.state.open} onHide={this.onHide.bind(this)}
         aria-labelledby="ModalHeader" className="bootstrap-dialog type-primary modal-md">
@@ -140,7 +139,7 @@ export default class AttackersModal extends React.Component {
 
         <div className="modal-body bootstrap-dialog-message">
           <InfiniteTable
-            url={`${ROOT_URL}/bi/getAllAttackers`}
+            url="/bi/getAllAttackers"
             params={this.state.params}
             cells={this.cells}
             ref="table"

@@ -3,8 +3,8 @@ import React from 'react'
 import { ChromePicker } from 'react-color'
 // import { findIndex } from 'lodash'
 
-import MapMenu from '../../../../../containers/page/content/dashboard/map/MapMenuContainer'
-import DeviceMenu from './DeviceMenu'
+import MapMenuContainer from '../../../../../containers/page/content/dashboard/map/MapMenuContainer'
+import DeviceMenuContainer from '../../../../../containers/page/content/dashboard/map/DeviceMenuContainer'
 
 import { lineTypes } from '../../../../../shared/Global'
 
@@ -228,7 +228,7 @@ export default class Toolbar extends React.Component {
 
     return (
       <div className={`panel-heading text-center map-heading ${this.state.headerCollapsed ? 'collapsed' : ''}`}>
-        <MapMenu />
+        <MapMenuContainer />
 
         <a href="javascript:;" className="btn-new-incident" onClick={this.onClickNewIncident.bind(this)}>
           <i className="fa fa-book" title="New Incident" />
@@ -456,7 +456,7 @@ export default class Toolbar extends React.Component {
               </ul>
 
               { this.state.displayDevices
-                ? <DeviceMenu onClickItem={this.props.onClickDeviceItem} selectedItem={this.props.selectedItem}/>
+                ? <DeviceMenuContainer onClickItem={this.props.onClickDeviceItem} selectedItem={this.props.selectedItem}/>
                 : null }
             </li>
 

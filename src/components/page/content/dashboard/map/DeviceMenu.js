@@ -3,15 +3,11 @@ import {
     PanelGroup,
     Panel
 } from 'react-bootstrap'
-import { connect } from 'react-redux'
 import { concat } from 'lodash'
 
 import DeviceImg from './DeviceImg'
-import {
-    fetchDeviceTemplates
-} from '../../../../../actions'
 
-class DeviceMenu extends React.Component {
+export default class DeviceMenu extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -23,12 +19,12 @@ class DeviceMenu extends React.Component {
       }, {
         title: 'Group',
         items: [
-                    {title: 'Group', img: 'group.png', type: 'group'},
-                    {title: 'Telephony', img: 'telephony.png', type: 'group'},
-                    {title: 'Jetro', img: 'jetro.png', type: 'group'},
-                    {title: 'Customers', img: 'building2.png', type: 'group'},
-                    {title: 'DR Site', img: 'building1.png', type: 'group'},
-                    {title: 'Partners', img: 'partners.png', type: 'group'}
+          {title: 'Group', img: 'group.png', type: 'group'},
+          {title: 'Telephony', img: 'telephony.png', type: 'group'},
+          {title: 'Jetro', img: 'jetro.png', type: 'group'},
+          {title: 'Customers', img: 'building2.png', type: 'group'},
+          {title: 'DR Site', img: 'building1.png', type: 'group'},
+          {title: 'Partners', img: 'partners.png', type: 'group'}
         ]
       }, {
         title: 'Devices',
@@ -165,21 +161,4 @@ class DeviceMenu extends React.Component {
       </div>
     )
   }
-    // //////////////////////////////////////////////////////////////
 }
-
-DeviceMenu.defaultProps = {
-  selectedItem: {},
-  onClickItem: null
-}
-
-function mapStateToProps (state) {
-  return {
-    deviceTemplates: state.settings.deviceTemplates
-  }
-}
-
-const actions = {
-  fetchDeviceTemplates
-}
-export default connect(mapStateToProps, actions)(DeviceMenu)
