@@ -4,11 +4,8 @@ import {
     Button
 } from 'react-bootstrap'
 import { reduxForm, Field } from 'redux-form'
-import { connect } from 'react-redux'
 import { assign } from 'lodash'
 import { showAlert } from '../../../../shared/Alert'
-
-import { fetchWorkflows, addWorkflow, updateWorkflow, closeWorkflowModal } from '../../../../../actions'
 
 const renderInput = field => (
     <div className="row margin-md-bottom">
@@ -91,26 +88,6 @@ class WorkflowModal extends React.Component { // eslint-disable-line react/no-mu
   }
 }
 
-WorkflowModal.defaultProps = {
-  credentials: null
-}
-
-function mapStateToProps (state) {
-  return {
-    editWorkflow: state.settings.editWorkflow,
-    initialValues: state.settings.editWorkflow
-  }
-}
-
-const actions = {
-  fetchWorkflows,
-  addWorkflow,
-  updateWorkflow,
-  closeWorkflowModal
-}
-
-export default connect(mapStateToProps, actions)(
-  reduxForm({
-    form: 'workflowEditForm'
-  })(WorkflowModal)
-)
+export default reduxForm({
+  form: 'workflowEditForm'
+})(WorkflowModal)

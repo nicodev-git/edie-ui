@@ -16,7 +16,7 @@ import TabPageHeader from '../../../../shared/TabPageHeader'
 import MoveModal from './MoveModal'
 import BackupModal from './BackupModal'
 import RestoreModal from './RestoreModal'
-import WorkflowModal from './WorkflowModal'
+import WorkflowModalContainer from '../../../../../containers/page/content/settings/rule/WorkflowModalContainer'
 import { ROOT_URL } from '../../../../../actions/config'
 
 export default class Rules extends React.Component {
@@ -151,7 +151,7 @@ export default class Rules extends React.Component {
   renderWorkflowModal () {
     if (!this.props.workflowModalVisible) return null
     return (
-            <WorkflowModal/>
+      <WorkflowModalContainer />
     )
   }
 
