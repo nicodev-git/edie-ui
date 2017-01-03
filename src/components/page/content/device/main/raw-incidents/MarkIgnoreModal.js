@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { Component } from 'react'
 import Modal from 'react-bootstrap-modal'
 import { ROOT_URL } from '../../../../../../actions/config'
 
-export default class MarkIgnoreModal extends React.Component {
+export default class MarkIgnoreModal extends Component {
   constructor (props) {
     super(props)
     this.state = {

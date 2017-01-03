@@ -1,6 +1,4 @@
 import React from 'react'
-import { withRouter } from 'react-router'
-import { connect } from 'react-redux'
 // import { findIndex, concat } from 'lodash' // Never used
 import Select from 'react-select'
 import {
@@ -10,9 +8,9 @@ import {
     Button
 } from 'react-bootstrap'
 
-import {appendComponent, removeComponent} from '../../../../../../util/Component'
+import { appendComponent, removeComponent } from '../../../../../../util/Component'
 
-import {ResponsiveInfiniteTable} from '../../../../../shared/InfiniteTable'
+import { ResponsiveInfiniteTable } from '../../../../../shared/InfiniteTable'
 import IgnoreRuleEditModal from './IgnoreRuleEditModal'
 import SimulatorModal from './SimulatorModal'
 import { showAlert, showPrompt, showConfirm } from '../../../../../shared/Alert'
@@ -24,10 +22,9 @@ import TabPage from '../../../../../shared/TabPage'
 import TabPageBody from '../../../../../shared/TabPageBody'
 import TabPageHeader from '../../../../../shared/TabPageHeader'
 
-import {fetchDeviceRules} from '../../../../../../actions'
 import { ROOT_URL } from '../../../../../../actions/config'
 
-class MainRules extends React.Component {
+export default class MainRules extends React.Component {
   constructor (props) {
     super(props)
 
@@ -40,7 +37,6 @@ class MainRules extends React.Component {
       }],
       selectedCategory: 0,
       selectedCategoryName: '',
-            // ///////////////////////////////////
 
       url: Api.rule.getRulesForDevice, // eslint-disable-line no-undef
       params: {
@@ -49,8 +45,6 @@ class MainRules extends React.Component {
         severity: ''
       },
       deviceRules: true,
-
-            // ///////////////////////////////////
 
       categoryName: ''
     }
@@ -72,45 +66,45 @@ class MainRules extends React.Component {
       'columnName': 'version'
     }]
 
-        // this.listeners = {
-        //     [EVENTS.DEV_FILTER_CHANGED]: this.filter.bind(this),
-        //
-        //     [EVENTS.DEV_RULE_ADD_CLICKED]: this.onClickAddRule.bind(this),
-        //     [EVENTS.DEV_RULE_EDIT_CLICKED]: this.onClickEditRule.bind(this),
-        //     [EVENTS.DEV_RULE_REMOVE_CLICKED]: this.onClickDeleteRule.bind(this),
-        //     [EVENTS.DEV_RULE_DUPLICATE_CLICKED]: this.onClickDuplicate.bind(this),
-        //     [EVENTS.DEV_RULE_RESET_CLICKED]: this.onClickResetRule.bind(this),
-        //     [EVENTS.DEV_RULE_COPY_TPL_CLICKED]: this.onClickCopyToTemplate.bind(this),
-        //     [EVENTS.DEV_RULE_COPY_DEV_CLICKED]: this.onClickCopyToDevice.bind(this),
-        //     [EVENTS.DEV_RULE_SHARE_CLICKED]: this.onClickShareRule.bind(this),
-        //
-        //     [EVENTS.DEV_RULE_ADD_CATEGORY_CLICKED]: this.onClickAddCategory.bind(this),
-        //     [EVENTS.DEV_RULE_REMOVE_CATEGORY_CLICKED]: this.onClickDeleteCategory.bind(this),
-        // }
+    // this.listeners = {
+    //     [EVENTS.DEV_FILTER_CHANGED]: this.filter.bind(this),
+    //
+    //     [EVENTS.DEV_RULE_ADD_CLICKED]: this.onClickAddRule.bind(this),
+    //     [EVENTS.DEV_RULE_EDIT_CLICKED]: this.onClickEditRule.bind(this),
+    //     [EVENTS.DEV_RULE_REMOVE_CLICKED]: this.onClickDeleteRule.bind(this),
+    //     [EVENTS.DEV_RULE_DUPLICATE_CLICKED]: this.onClickDuplicate.bind(this),
+    //     [EVENTS.DEV_RULE_RESET_CLICKED]: this.onClickResetRule.bind(this),
+    //     [EVENTS.DEV_RULE_COPY_TPL_CLICKED]: this.onClickCopyToTemplate.bind(this),
+    //     [EVENTS.DEV_RULE_COPY_DEV_CLICKED]: this.onClickCopyToDevice.bind(this),
+    //     [EVENTS.DEV_RULE_SHARE_CLICKED]: this.onClickShareRule.bind(this),
+    //
+    //     [EVENTS.DEV_RULE_ADD_CATEGORY_CLICKED]: this.onClickAddCategory.bind(this),
+    //     [EVENTS.DEV_RULE_REMOVE_CATEGORY_CLICKED]: this.onClickDeleteCategory.bind(this),
+    // }
   }
 
   componentWillMount () {
         // listen(this.listeners)
     this.props.fetchDeviceRules()
   }
-    //
-    // componentWillUnmount() {
-    //     unlisten(this.listeners)
-    // }
+  //
+  // componentWillUnmount() {
+  //     unlisten(this.listeners)
+  // }
 
   renderTable () {
     return (
-            <ResponsiveInfiniteTable
-              id="rule1"
-              cells={this.cells}
-              ref="table"
-              rowMetadata={{'key': 'idrulesNew'}}
-              selectable
-              onRowDblClick={this.onRowDblClick.bind(this)}
+      <ResponsiveInfiniteTable
+        id="rule1"
+        cells={this.cells}
+        ref="table"
+        rowMetadata={{'key': 'idrulesNew'}}
+        selectable
+        onRowDblClick={this.onRowDblClick.bind(this)}
 
-              useExternal={false}
-              data={this.props.rules}
-            />
+        useExternal={false}
+        data={this.props.rules}
+      />
     )
   }
 
@@ -138,8 +132,6 @@ class MainRules extends React.Component {
     return this.refs.table.refs.wrappedInstance
   }
 
-    // //////////////////////////////////////////////////////////////////////////////////////
-
   filter (params) {
     this.setState({
       params: Object.assign({}, this.state.params, {
@@ -148,8 +140,6 @@ class MainRules extends React.Component {
       categoryName: params.categoryName
     })
   }
-
-    // //////////////////////////////////////////////////////////////////////////////////////
 
   onClickAddCategory () {
     showPrompt('Please input category name.', 'New Category', name => {
@@ -184,8 +174,6 @@ class MainRules extends React.Component {
     })
   }
 
-    // //////////////////////////////////////////////////////////////////////////////////////
-
   onClickAddRule () {
     this.showDeviceRuleAdd(this.props.device.id, {}, () => {
       this.getTable().refresh()
@@ -219,14 +207,14 @@ class MainRules extends React.Component {
     }
 
     appendComponent(
-            <DeviceWizard
-              deviceType="devicerule"
-              onClose={removeComponent}
-              extraParams={extra}
-              configParams={config}
-              onFinish={cb}
-            />
-        )
+      <DeviceWizard
+        deviceType="devicerule"
+        onClose={removeComponent}
+        extraParams={extra}
+        configParams={config}
+        onFinish={cb}
+      />
+    )
   }
 
   showDeviceRuleEdit (tbl, deviceId, cb) {
@@ -257,15 +245,15 @@ class MainRules extends React.Component {
     }
 
     appendComponent(
-            <DeviceWizard
-              deviceType="devicerule"
-              onClose={removeComponent}
-              extraParams={extra}
-              configParams={config}
-              onFinish={cb}
-              values={data}
-            />
-        )
+      <DeviceWizard
+        deviceType="devicerule"
+        onClose={removeComponent}
+        extraParams={extra}
+        configParams={config}
+        onFinish={cb}
+        values={data}
+      />
+    )
   }
 
   showIgnoredRuleEdit () {
@@ -275,17 +263,15 @@ class MainRules extends React.Component {
       return
     }
 
-        // /////////////////////////////////////////////////////////////////
-
     appendComponent(
-            <IgnoreRuleEditModal
-              open
-              rule={data}
-              device={this.props.device}
-              categoryId={this.state.params.ruleCategory}
-              onClose={this.onCloseIgnoreRuleEdit.bind(this)}
-            />
-        )
+      <IgnoreRuleEditModal
+        open
+        rule={data}
+        device={this.props.device}
+        categoryId={this.state.params.ruleCategory}
+        onClose={this.onCloseIgnoreRuleEdit.bind(this)}
+      />
+    )
   }
 
   onCloseIgnoreRuleEdit (modal, success) {
@@ -296,12 +282,12 @@ class MainRules extends React.Component {
 
   showSimulator (options) {
     appendComponent(
-            <SimulatorModal
-              options={options}
-              device={this.props.device}
-              onClose={removeComponent}
-            />
-        )
+      <SimulatorModal
+        options={options}
+        device={this.props.device}
+        onClose={removeComponent}
+      />
+    )
   }
 
   showDeviceRuleRemove (tbl, cb) {
@@ -321,8 +307,6 @@ class MainRules extends React.Component {
       })
     })
   }
-
-    // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   onClickDuplicate () {
     let selected = this.getTable().getSelected()
@@ -357,29 +341,25 @@ class MainRules extends React.Component {
     })
   }
 
-    // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
   onClickCopyToTemplate () {
     appendComponent(
-            <CopyRuleModal
-              onClose = {removeComponent}
-              copyType = "template"
-              device = {this.props.device}
-            />
-        )
+      <CopyRuleModal
+        onClose = {removeComponent}
+        copyType = "template"
+        device = {this.props.device}
+      />
+    )
   }
 
   onClickCopyToDevice () {
     appendComponent(
-            <CopyRuleModal
-              onClose = {removeComponent}
-              copyType = "device"
-              device = {this.props.device}
-            />
-        )
+      <CopyRuleModal
+        onClose = {removeComponent}
+        copyType = "device"
+        device = {this.props.device}
+      />
+    )
   }
-
-    // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   onClickShareRule () {
     let selected = this.getTable().getSelected()
@@ -481,16 +461,3 @@ class MainRules extends React.Component {
     )
   }
 }
-
-MainRules.defaultProps = {
-  onUpdateCategory: null
-}
-
-function mapStateToProps (state) {
-  return {
-    device: state.dashboard.selectedDevice,
-    rules: state.devices.rules
-  }
-}
-
-export default withRouter(connect(mapStateToProps, {fetchDeviceRules})(MainRules))

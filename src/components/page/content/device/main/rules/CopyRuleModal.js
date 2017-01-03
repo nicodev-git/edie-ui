@@ -7,13 +7,13 @@ import JDataTable from '../../../../../shared/JDataTable'
 import { showAlert, showConfirm } from '../../../../../shared/Alert'
 import { sortBy, join } from 'lodash'
 
-import {appendComponent, removeComponent} from '../../../../../../util/Component'
+import { appendComponent, removeComponent } from '../../../../../../util/Component'
 import DeviceWizard from '../../../../../shared/wizard/DeviceWizard'
 
 import Api from '../../../../../../api'
 import { ROOT_URL } from '../../../../../../actions/config'
 
-class CopyRuleModal extends React.Component {
+export default class CopyRuleModal extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -40,8 +40,6 @@ class CopyRuleModal extends React.Component {
     this.loadGroups()
     this.loadDevicesLeft()
   }
-
-    // ///////////////////////////////////////////////////////////
 
   loadTable () {
   }
@@ -79,7 +77,7 @@ class CopyRuleModal extends React.Component {
 
   loadDevicesLeft () {
     return $.get(`${ROOT_URL}${Api.dashboard.getDevices}`, { // eslint-disable-line no-undef
-            // fatherid: 0,
+      // fatherid: 0,
     }).done(res => {
       const items = this.filterDevices(res, true)
       this.setState({
@@ -93,17 +91,17 @@ class CopyRuleModal extends React.Component {
 
   loadDevicesRight (groupId) {
     $.get(`${ROOT_URL}${Api.dashboard.getDevicesByGroup}`, { groupId }) // eslint-disable-line no-undef
-        .done(res => {
-          const items = this.filterDevices(res, false)
-          this.setState({
-            devicesRight: items,
-            selectedDeviceRight: items[0] ? items[0].id : 0
-          })
-
-            // me.tbRight && me.tbRight.fnDraw();
-        }).fail(function () {
-
+      .done(res => {
+        const items = this.filterDevices(res, false)
+        this.setState({
+          devicesRight: items,
+          selectedDeviceRight: items[0] ? items[0].id : 0
         })
+
+          // me.tbRight && me.tbRight.fnDraw();
+      }).fail(function () {
+
+      })
   }
 
   loadLogicals (catId) {
@@ -143,8 +141,6 @@ class CopyRuleModal extends React.Component {
     return sortBy(items, ['name'])
   }
 
-    // ///////////////////////////////////////////////////////////
-
   onHide () {
     this.onClickClose()
   }
@@ -157,8 +153,6 @@ class CopyRuleModal extends React.Component {
             this.props.onClose(this)
     })
   }
-
-    // ////////////////////////////////////////////////////////////
 
   onChangeCopyType (e) {
     this.setState({ copyType: e.target.value })
@@ -189,67 +183,65 @@ class CopyRuleModal extends React.Component {
     this.setState({ selectedDeviceRight: val })
   }
 
-    // ///////////////////////////////////////////////////////////
-
   onClickCopyLeft () {
     if (this.state.copyType === 'device') {
       this.checkIfSameTarget() &&
-            this.copyRules(
-                this.refs.ruleDeviceLeft,
-                this.state.selectedDeviceRight,
-                this.reloadTables
-            )
+        this.copyRules(
+          this.refs.ruleDeviceLeft,
+          this.state.selectedDeviceRight,
+          this.reloadTables
+        )
     } else {
       this.createRulesFromTemplates(
-                this.refs.ruleTplLeft,
-                this.state.selectedDeviceRight,
-                false,
-                this.reloadTables
-            )
+        this.refs.ruleTplLeft,
+        this.state.selectedDeviceRight,
+        false,
+        this.reloadTables
+      )
     }
   }
 
   onClickMoveLeft () {
     if (this.state.copyType === 'device') {
       this.checkIfSameTarget() &&
-            this.moveRules(
-                this.refs.ruleDeviceLeft,
-                this.state.selectedDeviceRight,
-                this.reloadTables
-            )
+        this.moveRules(
+          this.refs.ruleDeviceLeft,
+          this.state.selectedDeviceRight,
+          this.reloadTables
+        )
     } else {
       this.createRulesFromTemplates(
-                this.refs.ruleTplLeft,
-                this.state.selectedDeviceRight,
-                true,
-                this.reloadTables
-            )
+        this.refs.ruleTplLeft,
+        this.state.selectedDeviceRight,
+        true,
+        this.reloadTables
+      )
     }
   }
 
   onClickAddLeft () {
     if (this.state.copyType === 'device') {
       this.showDeviceRuleAdd(
-                this.state.selectedDeviceLeft,
-                {},
-                this.reloadTables
-            )
+        this.state.selectedDeviceLeft,
+        {},
+        this.reloadTables
+      )
     } else {
       this.showAddRuleTpl(
-                this.refs.category.value,
-                this.state.selectedLogical,
-                this.reloadTables
-            )
+        this.refs.category.value,
+        this.state.selectedLogical,
+        this.reloadTables
+      )
     }
   }
 
   onClickEditLeft () {
     if (this.state.copyType === 'device') {
       this.showDeviceRuleEdit(
-                this.refs.ruleDeviceLeft,
-                this.state.selectedDeviceLeft,
-                this.reloadTables
-            )
+        this.refs.ruleDeviceLeft,
+        this.state.selectedDeviceLeft,
+        this.reloadTables
+      )
     } else {
       this.showEditRuleTpl(this.refs.ruleTplLeft, this.reloadTables)
     }
@@ -263,41 +255,41 @@ class CopyRuleModal extends React.Component {
     }
   }
 
-    // ///////////////////////////////////////////////////////////
-
   onClickCopyRight () {
     if (this.state.copyType === 'device') {
       this.checkIfSameTarget() &&
-            this.copyRules(
-                this.refs.ruleDeviceRight,
-                this.state.selectedDeviceLeft,
-                this.reloadTables)
+        this.copyRules(
+          this.refs.ruleDeviceRight,
+          this.state.selectedDeviceLeft,
+          this.reloadTables
+        )
     } else {
       this.createTemplatesFromRules(
-                this.refs.ruleDeviceRight,
-                this.state.selectedLogical,
-                this.refs.category.value,
-                false,
-                this.reloadTables)
+        this.refs.ruleDeviceRight,
+        this.state.selectedLogical,
+        this.refs.category.value,
+        false,
+        this.reloadTables
+      )
     }
   }
 
   onClickMoveRight () {
     if (this.state.copyType === 'device') {
       this.checkIfSameTarget() &&
-            this.moveRules(
-                this.refs.ruleDeviceRight,
-                this.state.selectedDeviceLeft,
-                this.reloadTables
-            )
+        this.moveRules(
+          this.refs.ruleDeviceRight,
+          this.state.selectedDeviceLeft,
+          this.reloadTables
+        )
     } else {
       this.createTemplatesFromRules(
-                this.refs.ruleDeviceRight,
-                this.state.selectedLogical,
-                this.refs.category.value,
-                true,
-                this.reloadTables
-            )
+        this.refs.ruleDeviceRight,
+        this.state.selectedLogical,
+        this.refs.category.value,
+        true,
+        this.reloadTables
+      )
     }
   }
 
@@ -307,17 +299,15 @@ class CopyRuleModal extends React.Component {
 
   onClickEditRight () {
     this.showDeviceRuleEdit(
-            this.refs.ruleDeviceRight,
-            this.state.selectedDeviceRight,
-            this.reloadTables
-        )
+      this.refs.ruleDeviceRight,
+      this.state.selectedDeviceRight,
+      this.reloadTables
+    )
   }
 
   onClickDeleteRight () {
     this.showDeviceRuleRemove(this.refs.ruleDeviceRight, this.reloadTables)
   }
-
-    // /////////////////////////////////////////////////////////////
 
   reloadTables () {
     this.refs.ruleDeviceLeft.reload()
@@ -463,8 +453,6 @@ class CopyRuleModal extends React.Component {
     })
   }
 
-    // ///////////////////////////////////////////////////////////////////
-
   showDeviceRuleAdd (deviceid, val, cb) {
     const extra = {
       deviceid: deviceid
@@ -476,14 +464,14 @@ class CopyRuleModal extends React.Component {
     }
 
     appendComponent(
-            <DeviceWizard
-              deviceType="devicerule"
-              onClose={removeComponent}
-              extraParams={extra}
-              configParams={config}
-              onFinish={cb}
-            />
-        )
+      <DeviceWizard
+        deviceType="devicerule"
+        onClose={removeComponent}
+        extraParams={extra}
+        configParams={config}
+        onFinish={cb}
+      />
+    )
   }
 
   showDeviceRuleEdit (tbl, deviceId, cb) {
@@ -544,8 +532,6 @@ class CopyRuleModal extends React.Component {
     })
   }
 
-    // //////////////////////////////////////////////////////////////////////////////
-
   showAddRuleTpl (categoryId, logicalId, cb) {
     const extra = {
       ruleCategory: categoryId,
@@ -593,15 +579,15 @@ class CopyRuleModal extends React.Component {
     }
 
     appendComponent(
-            <DeviceWizard
-              deviceType="tplrule"
-              onClose={removeComponent}
-              extraParams={extra}
-              configParams={config}
-              onFinish={cb}
-              values={data}
-            />
-        )
+      <DeviceWizard
+        deviceType="tplrule"
+        onClose={removeComponent}
+        extraParams={extra}
+        configParams={config}
+        onFinish={cb}
+        values={data}
+      />
+    )
   }
 
   showDeleteRuleTpl (tbl, cb) {
@@ -617,8 +603,8 @@ class CopyRuleModal extends React.Component {
       if (btn !== 'ok') return
 
       let calls = data.map(item =>
-                $.get(`${ROOT_URL}${Api.rule.deletePhysicalName}?id=${item.id}`) // eslint-disable-line no-undef
-            )
+        $.get(`${ROOT_URL}${Api.rule.deletePhysicalName}?id=${item.id}`) // eslint-disable-line no-undef
+      )
 
       $.when.apply(this, calls).done(() => { // eslint-disable-line no-undef
         cb && cb()
@@ -815,5 +801,3 @@ CopyRuleModal.defaultProps = {
   device: {},
   copyType: 'device'
 }
-
-export default CopyRuleModal
