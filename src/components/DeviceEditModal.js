@@ -1,23 +1,9 @@
 import React from 'react'
 import Modal from 'react-bootstrap-modal'
 import { reduxForm, Field } from 'redux-form'
-import {connect} from 'react-redux'
-
-import {closeDeviceEditModal, updateDevice, addDevice} from '../actions'
-
 import { validate } from './DeviceValidation'
 
-const Input = ({ input, label, type, meta: { touched, error } }) => (
-    <fieldset className="form-group">
-        <label className="col-md-3">{label}</label>
-        <div className="col-md-9">
-            <input {...input} className="form-control" type={type}/>
-            {touched && error && <span className="error">{error}</span>}
-        </div>
-    </fieldset>
-)
-
-class DeviceEditModal extends React.Component { // eslint-disable-line react/no-multi-comp
+class DeviceEditModal extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -45,8 +31,6 @@ class DeviceEditModal extends React.Component { // eslint-disable-line react/no-
     )
   }
 
-    // ///////////////////////////////////////////////////////////
-
   onHide () {
 
   }
@@ -59,8 +43,6 @@ class DeviceEditModal extends React.Component { // eslint-disable-line react/no-
 
   }
 
-    // ////////////////////////////////////////////////////////////
-
   onChangeProperty (prop, e) {
     let {device} = this.state
     device[prop] = e.target.value
@@ -69,6 +51,15 @@ class DeviceEditModal extends React.Component { // eslint-disable-line react/no-
 
   render () {
     const { handleSubmit, device } = this.props
+    const Input = ({ input, label, type, meta: { touched, error } }) => (
+      <fieldset className="form-group">
+        <label className="col-md-3">{label}</label>
+        <div className="col-md-9">
+          <input {...input} className="form-control" type={type}/>
+          {touched && error && <span className="error">{error}</span>}
+        </div>
+      </fieldset>
+    )
 
     return (
       <Modal show onHide={this.onHide.bind(this)}
@@ -103,25 +94,7 @@ class DeviceEditModal extends React.Component { // eslint-disable-line react/no-
   }
 }
 
-DeviceEditModal.defaultProps = {
-
-}
-
-function mapStateToProps (state) {
-    // console.log('DATA', state.devices);
-  return {
-    device: state.devices.editDevice,
-    initialValues: state.devices.editDevice || {},
-    updateDeviceError: state.devices.updateDeviceError
-  }
-}
-
-export default connect(mapStateToProps, { closeDeviceEditModal, addDevice, updateDevice })(
-  reduxForm({
-    form: 'deviceEdit',
-    validate
-  })(DeviceEditModal)
-)
-
-// export default connect(mapStateToProps, {closeDeviceEditModal})(DeviceEditModal);
-// export default DeviceEditModal
+export default reduxForm({
+  form: 'deviceEdit',
+  validate
+})(DeviceEditModal)

@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {fetchDevices, openDeviceEditModal, deleteDevice} from '../actions'
 
-import DeviceEditModal from './DeviceEditModal'
+import DeviceEditModalContainer from '../containers/DeviceEditModalContainer'
 
 class DeviceList extends Component {
 
@@ -27,31 +27,31 @@ class DeviceList extends Component {
     const {selected} = this.state
 
     return (
-            <table className="table table-hover dataTable">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>LAN IP</th>
-                    </tr>
-                </thead>
-                <tbody>{
-                    this.props.devices.map((device, index) =>
-                        <tr key={index} className={selected === index ? 'selected' : ''}
-                          onClick={this.onClickRow.bind(this, index)}>
-                            <td>{device.name}</td>
-                            <td>{device.lanIP}</td>
-                        </tr>
-                    )
-                }
-                </tbody>
-            </table>
+      <table className="table table-hover dataTable">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>LAN IP</th>
+          </tr>
+        </thead>
+        <tbody>{
+          this.props.devices.map((device, index) =>
+            <tr key={index} className={selected === index ? 'selected' : ''}
+              onClick={this.onClickRow.bind(this, index)}>
+                <td>{device.name}</td>
+                <td>{device.lanIP}</td>
+            </tr>
+          )
+        }
+        </tbody>
+      </table>
     )
   }
 
   renderModal () {
     if (!this.props.openModal) return null
     return (
-            <DeviceEditModal />
+      <DeviceEditModalContainer />
     )
   }
 
