@@ -24,6 +24,7 @@ class Main extends React.Component {
 
   renderDashboard () {
     const hidden = !!this.props.children
+    console.log(hidden)
     return (
       <DashboardContainer hidden={hidden}/>
     )

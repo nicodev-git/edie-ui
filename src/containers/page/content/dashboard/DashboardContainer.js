@@ -7,7 +7,7 @@ import { updateDashboard } from '../../../../actions'
 class DashboardContainer extends React.Component {
   render () {
     return (
-      <Dashboard />
+      <Dashboard {...this.props} />
     )
   }
 }
