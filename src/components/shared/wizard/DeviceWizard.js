@@ -165,7 +165,7 @@ class DeviceWizard extends React.Component {
     config.type = config.type || ''
     let func = this.mapping[config.type.toLowerCase()]
 
-    if (func !== null) {
+    if (typeof func !== 'undefined') {
       items = func(config, values || {})
     } else {
       console.error(`Mapping not found! : ${config.type}`)
