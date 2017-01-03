@@ -1,16 +1,16 @@
 import React from 'react'
 import {
-    ButtonGroup,
-    Button,
-    DropdownButton,
-    MenuItem
+  ButtonGroup,
+  Button,
+  DropdownButton,
+  MenuItem
 } from 'react-bootstrap'
 import { findIndex } from 'lodash'
 
 import {
-    emit,
-    listen,
-    unlisten
+  emit,
+  listen,
+  unlisten
 } from 'shared/event/Emitter'
 import { EVENTS } from 'shared/event/Events'
 import { appendComponent, removeComponent } from '../../../../../util/Component'
@@ -18,7 +18,7 @@ import { showAlert } from '../../../../shared/Alert'
 import GroupModal from './GroupModal'
 import { ROOT_URL } from '../../../../../actions/config'
 
-class UserOptions extends React.Component {
+export default class UserOptions extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -57,49 +57,49 @@ class UserOptions extends React.Component {
 
   render () {
     return (
-            <div className="tab-header">
-                <div>
-                    <span className="tab-title">Settings</span>
-                </div>
-                <div className="text-center margin-md-top">
-                    <div className="pull-left">
-                        <select className="form-control"
-                          onChange={this.onChangeGroup.bind(this)}
-                          ref="groups">
-                            <option value="">All groups</option>
-                            {
-                                this.state.groups.map(item =>
-                                    <option key={item.id} value={item.id}>{item.name}</option>
-                                )
-                            }
-                        </select>
-                    </div>
+      <div className="tab-header">
+        <div>
+            <span className="tab-title">Settings</span>
+        </div>
+        <div className="text-center margin-md-top">
+          <div className="pull-left">
+            <select className="form-control"
+              onChange={this.onChangeGroup.bind(this)}
+              ref="groups">
+              <option value="">All groups</option>
+              {
+                this.state.groups.map(item =>
+                  <option key={item.id} value={item.id}>{item.name}</option>
+                )
+              }
+            </select>
+          </div>
 
-                    <div style={{position: 'absolute', right: '25px'}}>
-                        <ButtonGroup>
+          <div style={{position: 'absolute', right: '25px'}}>
+            <ButtonGroup>
 
-                            <DropdownButton title="Group" id="dd-setting-groups" pullRight>
+              <DropdownButton title="Group" id="dd-setting-groups" pullRight>
 
-                                <MenuItem eventKey="1" onClick={emit.bind(null, EVENTS.USERS_GROUP_ADD_CLICKED)}>Add</MenuItem>
-                                <MenuItem eventKey="2" onClick={this.onClickEditGroup.bind(this)}>Edit</MenuItem>
-                                <MenuItem eventKey="3" onClick={this.onClickRemoveGroup.bind(this)}>Remove</MenuItem>
+                <MenuItem eventKey="1" onClick={emit.bind(null, EVENTS.USERS_GROUP_ADD_CLICKED)}>Add</MenuItem>
+                <MenuItem eventKey="2" onClick={this.onClickEditGroup.bind(this)}>Edit</MenuItem>
+                <MenuItem eventKey="3" onClick={this.onClickRemoveGroup.bind(this)}>Remove</MenuItem>
 
-                            </DropdownButton>
+              </DropdownButton>
 
-                            <DropdownButton title="User" id="dd-setting-users" pullRight>
+              <DropdownButton title="User" id="dd-setting-users" pullRight>
 
-                                <MenuItem eventKey="1" onClick={emit.bind(null, EVENTS.USERS_ADD_CLICKED)}>Add</MenuItem>
-                                <MenuItem eventKey="2" onClick={emit.bind(null, EVENTS.USERS_EDIT_CLICKED)}>Edit</MenuItem>
-                                <MenuItem eventKey="3" onClick={emit.bind(null, EVENTS.USERS_REMOVE_CLICKED)}>Remove</MenuItem>
-                                <MenuItem eventKey="4" onClick={emit.bind(null, EVENTS.USERS_PASSWORD_CLICKED)}>Change Password</MenuItem>
-                                <MenuItem eventKey="5" onClick={emit.bind(null, EVENTS.USERS_PINCODE_CLICKED)}>Regenerate Pin</MenuItem>
+                <MenuItem eventKey="1" onClick={emit.bind(null, EVENTS.USERS_ADD_CLICKED)}>Add</MenuItem>
+                <MenuItem eventKey="2" onClick={emit.bind(null, EVENTS.USERS_EDIT_CLICKED)}>Edit</MenuItem>
+                <MenuItem eventKey="3" onClick={emit.bind(null, EVENTS.USERS_REMOVE_CLICKED)}>Remove</MenuItem>
+                <MenuItem eventKey="4" onClick={emit.bind(null, EVENTS.USERS_PASSWORD_CLICKED)}>Change Password</MenuItem>
+                <MenuItem eventKey="5" onClick={emit.bind(null, EVENTS.USERS_PINCODE_CLICKED)}>Regenerate Pin</MenuItem>
 
-                            </DropdownButton>
+              </DropdownButton>
 
-                        </ButtonGroup>
-                    </div>
-                </div>
-            </div>
+            </ButtonGroup>
+          </div>
+        </div>
+      </div>
     )
   }
 
@@ -107,8 +107,7 @@ class UserOptions extends React.Component {
     emit(EVENTS.USERS_GROUP_CHANGED, e.target.value)
 
     this.setState({
-      selected: findIndex(this.state.groups,
-                {id: parseInt(e.target.value)})
+      selected: findIndex(this.state.groups, {id: parseInt(e.target.value)})
     })
   }
 
@@ -118,18 +117,16 @@ class UserOptions extends React.Component {
     this.setState({ group })
   }
 
-    // ////////////////////////////////////
-
   onClickEditGroup () {
     const selected = this.state.selected
     if (selected < 0) return showAlert('Please select a group.')
 
     appendComponent(
-            <GroupModal
-              group={this.state.groups[selected]}
-              onClose={this.onCloseEditGroup.bind(this)}
-            />
-        )
+      <GroupModal
+        group={this.state.groups[selected]}
+        onClose={this.onCloseEditGroup.bind(this)}
+      />
+    )
   }
 
   onCloseEditGroup (modal, group) {
@@ -141,8 +138,6 @@ class UserOptions extends React.Component {
 
     this.loadGroups()
   }
-
-    // /////////////////////////////////////
 
   onClickRemoveGroup () {
     const selected = this.state.selected
@@ -165,7 +160,3 @@ class UserOptions extends React.Component {
     })
   }
 }
-
-UserOptions.defaultProps = {}
-
-export default UserOptions

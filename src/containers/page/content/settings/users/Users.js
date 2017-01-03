@@ -114,7 +114,7 @@ class Users extends React.Component {
   renderPasswordModal () {
     if (!this.props.userPasswordModalVisible) return null
     return (
-            <PasswordModalContainer />
+      <PasswordModalContainer/>
     )
   }
 

@@ -1,15 +1,15 @@
 import React from 'react'
 import {
-    ButtonGroup,
-    DropdownButton,
-    MenuItem
+  ButtonGroup,
+  DropdownButton,
+  MenuItem
 } from 'react-bootstrap'
 import { findIndex } from 'lodash'
 
 import {
-    emit,
-    listen,
-    unlisten
+  emit,
+  listen,
+  unlisten
 } from 'shared/event/Emitter'
 import { EVENTS } from 'shared/event/Events'
 import { appendComponent, removeComponent } from '../../../../../util/Component'
@@ -17,7 +17,7 @@ import { showAlert } from '../../../../shared/Alert'
 import GroupModal from './GroupModal'
 import { ROOT_URL } from '../../../../../actions/config'
 
-class UserAndGroupOptions extends React.Component {
+export default class UserAndGroupOptions extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -60,56 +60,57 @@ class UserAndGroupOptions extends React.Component {
     const {userPage} = this.state
 
     return (
-            <div className="tab-header">
-                <div>
-                    <span className="tab-title">Settings</span>
-                </div>
-                <div className="text-center margin-md-top">
-                    <div className="pull-left">
-                        <select className={`form-control ${userPage ? '' : 'hidden'}`}
-                          onChange={this.onChangeGroup.bind(this)}
-                          ref="groups">
-                            <option value="">All groups</option>
-                            {
-                                this.state.groups.map(item =>
-                                    <option key={item.id} value={item.id}>{item.name}</option>
-                                )
-                            }
-                        </select>
-                    </div>
+      <div className="tab-header">
+        <div>
+          <span className="tab-title">Settings</span>
+        </div>
+        <div className="text-center margin-md-top">
+          <div className="pull-left">
+            <select className={`form-control ${userPage ? '' : 'hidden'}`}
+              onChange={this.onChangeGroup.bind(this)}
+              ref="groups">
+                <option value="">All groups</option>
+                {
+                  this.state.groups.map(item =>
+                    <option key={item.id} value={item.id}>{item.name}</option>
+                  )
+                }
+            </select>
+          </div>
 
-                    <div style={{position: 'absolute', right: '25px'}}>
-                        <ButtonGroup>
+          <div style={{position: 'absolute', right: '25px'}}>
+            <ButtonGroup>
 
-                            {
-                                userPage ?
-                                    <DropdownButton title="Edit" id="dd-setting-group-edit" pullRight>
-                                        <MenuItem eventKey="1" onClick={emit.bind(null, EVENTS.USERS_ADD_CLICKED)}>Add</MenuItem>
-                                        <MenuItem eventKey="2" onClick={emit.bind(null, EVENTS.USERS_EDIT_CLICKED)}>Edit</MenuItem>
-                                        <MenuItem eventKey="3" onClick={emit.bind(null, EVENTS.USERS_REMOVE_CLICKED)}>Remove</MenuItem>
-                                        <MenuItem eventKey="4" onClick={emit.bind(null, EVENTS.USERS_PASSWORD_CLICKED)}>Change Password</MenuItem>
-                                        <MenuItem eventKey="5" onClick={emit.bind(null, EVENTS.USERS_PINCODE_CLICKED)}>Regenerate Pin</MenuItem>
-                                    </DropdownButton> :
-                                    <DropdownButton title="Edit" id="dd-setting-user-edit" pullRight>
-                                        <MenuItem eventKey="1" onClick={emit.bind(null, EVENTS.GROUP_ADD_CLICKED)}>Add</MenuItem>
-                                        <MenuItem eventKey="2" onClick={emit.bind(null, EVENTS.GROUP_EDIT_CLICKED)}>Edit</MenuItem>
-                                        <MenuItem eventKey="3" onClick={emit.bind(null, EVENTS.GROUP_REMOVE_CLICKED)}>Remove</MenuItem>
-                                    </DropdownButton>
-                            }
+              {
+                userPage
+                ? <DropdownButton title="Edit" id="dd-setting-group-edit" pullRight>
+                      <MenuItem eventKey="1" onClick={emit.bind(null, EVENTS.USERS_ADD_CLICKED)}>Add</MenuItem>
+                      <MenuItem eventKey="2" onClick={emit.bind(null, EVENTS.USERS_EDIT_CLICKED)}>Edit</MenuItem>
+                      <MenuItem eventKey="3" onClick={emit.bind(null, EVENTS.USERS_REMOVE_CLICKED)}>Remove</MenuItem>
+                      <MenuItem eventKey="4" onClick={emit.bind(null, EVENTS.USERS_PASSWORD_CLICKED)}>Change Password</MenuItem>
+                      <MenuItem eventKey="5" onClick={emit.bind(null, EVENTS.USERS_PINCODE_CLICKED)}>Regenerate Pin</MenuItem>
+                  </DropdownButton>
+                : <DropdownButton title="Edit" id="dd-setting-user-edit" pullRight>
+                      <MenuItem eventKey="1" onClick={emit.bind(null, EVENTS.GROUP_ADD_CLICKED)}>Add</MenuItem>
+                      <MenuItem eventKey="2" onClick={emit.bind(null, EVENTS.GROUP_EDIT_CLICKED)}>Edit</MenuItem>
+                      <MenuItem eventKey="3" onClick={emit.bind(null, EVENTS.GROUP_REMOVE_CLICKED)}>Remove</MenuItem>
+                  </DropdownButton>
+              }
 
-                            <DropdownButton title={<i className="fa fa-gear"/>}
-                              id="dd-setting-user-more" pullRight>
-                                <MenuItem eventKey="2" onClick={this.onClickUsers.bind(this)}>
-                                    <span className={userPage ? 'text-bold' : ''}> Users </span>
-                                </MenuItem>
-                                <MenuItem eventKey="1" onClick={this.onClickGroups.bind(this)}>
-                                    <span className={userPage ? '' : 'text-bold'}> Groups </span></MenuItem>
-                            </DropdownButton>
+              <DropdownButton title={<i className="fa fa-gear"/>}
+                id="dd-setting-user-more" pullRight>
+                <MenuItem eventKey="2" onClick={this.onClickUsers.bind(this)}>
+                  <span className={userPage ? 'text-bold' : ''}> Users </span>
+                </MenuItem>
+                <MenuItem eventKey="1" onClick={this.onClickGroups.bind(this)}>
+                  <span className={userPage ? '' : 'text-bold'}> Groups </span>
+                </MenuItem>
+              </DropdownButton>
 
-                        </ButtonGroup>
-                    </div>
-                </div>
-            </div>
+            </ButtonGroup>
+          </div>
+        </div>
+      </div>
     )
   }
 
@@ -117,8 +118,7 @@ class UserAndGroupOptions extends React.Component {
     emit(EVENTS.USERS_GROUP_CHANGED, e.target.value)
 
     this.setState({
-      selected: findIndex(this.state.groups,
-                {id: parseInt(e.target.value)})
+      selected: findIndex(this.state.groups, {id: parseInt(e.target.value)})
     })
   }
 
@@ -137,8 +137,6 @@ class UserAndGroupOptions extends React.Component {
     this.setState({ userPage: false })
     emit(EVENTS.GROUPS_MORE_CLICKED)
   }
-
-    // ////////////////////////////////////
 
   onClickEditGroup () {
     const selected = this.state.selected
@@ -162,8 +160,6 @@ class UserAndGroupOptions extends React.Component {
     this.loadGroups()
   }
 
-    // /////////////////////////////////////
-
   onClickRemoveGroup () {
     const selected = this.state.selected
     if (selected < 0) return showAlert('Please select a group.')
@@ -185,7 +181,3 @@ class UserAndGroupOptions extends React.Component {
     })
   }
 }
-
-UserAndGroupOptions.defaultProps = {}
-
-export default UserAndGroupOptions

@@ -2,13 +2,13 @@ import React from 'react'
 import Users from './Users'
 import Groups from '../groups/Groups'
 import {
-    emit,
-    listen,
-    unlisten
+  emit,
+  listen,
+  unlisten
 } from 'shared/event/Emitter'
 import { EVENTS } from 'shared/event/Events'
 
-class UserAndGroup extends React.Component {
+export default class UserAndGroup extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -44,9 +44,3 @@ class UserAndGroup extends React.Component {
     return <Groups/>
   }
 }
-
-UserAndGroup.defaultProps = {
-
-}
-
-export default UserAndGroup

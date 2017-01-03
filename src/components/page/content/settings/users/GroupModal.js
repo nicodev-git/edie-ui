@@ -12,7 +12,7 @@ import {
 import { showAlert } from '../../../../shared/Alert'
 import { ROOT_URL } from '../../../../../actions/config'
 
-class GroupModal extends React.Component {
+export default class GroupModal extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -219,5 +219,3 @@ GroupModal.defaultProps = {
   group: null,
   sid: ''
 }
-
-export default GroupModal
