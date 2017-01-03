@@ -1,27 +1,9 @@
 import React from 'react'
 import Modal from 'react-bootstrap-modal'
 import { reduxForm, Field } from 'redux-form'
-import {connect} from 'react-redux'
-import {assign} from 'lodash'
+import { assign } from 'lodash'
 
 import { extImageBaseUrl } from '../../../../../shared/Global'
-
-import {
-  addDeviceTemplate,
-  updateDeviceTemplate,
-  closeDeviceTplModal,
-  openTplImageModal
-} from '../../../../../actions'
-
-const Input = ({ input, label, type, meta: { touched, error } }) => (
-    <fieldset className="form-group">
-        <label className="col-md-3 margin-sm-top">{label}</label>
-        <div className="col-md-9">
-            <input {...input} className="form-control" type={type}/>
-            {touched && error && <span className="error">{error}</span>}
-        </div>
-    </fieldset>
-)
 
 class DeviceTplModal extends React.Component { // eslint-disable-line react/no-multi-comp
   constructor (props) {
@@ -46,43 +28,43 @@ class DeviceTplModal extends React.Component { // eslint-disable-line react/no-m
 
   renderMonitors () {
     return (
-            <div>
-                <table className="table table-hover dataTable">
-                    <tbody>{
-                        this.state.monitors.map((item, index) =>
-                            <tr key={item.id}>
-                                <td>{item.name}</td>
-                                <td>
-                                    <a href="javascript:;" onClick={this.onClickRemoveMonitor.bind(this, index)}>
-                                        <i className="fa fa-trash-o" /></a>
-                                </td>
-                            </tr>
-                        )
-                    }
-                    </tbody>
-                </table>
-            </div>
+      <div>
+        <table className="table table-hover dataTable">
+          <tbody>{
+            this.state.monitors.map((item, index) =>
+              <tr key={item.id}>
+                <td>{item.name}</td>
+                <td>
+                  <a href="javascript:;" onClick={this.onClickRemoveMonitor.bind(this, index)}>
+                      <i className="fa fa-trash-o" /></a>
+                </td>
+              </tr>
+            )
+          }
+          </tbody>
+        </table>
+      </div>
     )
   }
 
   renderMonitorTemplates () {
     return (
-            <div>
-                <table className="table table-hover dataTable">
-                    <tbody>{
-                        this.props.monitorTemplates.map(item =>
-                            <tr key={item.id}>
-                                <td>{item.name}</td>
-                                <td>
-                                    <a href="javascript:;" onClick={this.onClickAddMonitor.bind(this, item)}>
-                                        <i className="fa fa-plus-square" /></a>
-                                </td>
-                            </tr>
-                        )
-                    }
-                    </tbody>
-                </table>
-            </div>
+      <div>
+        <table className="table table-hover dataTable">
+          <tbody>{
+            this.props.monitorTemplates.map(item =>
+              <tr key={item.id}>
+                <td>{item.name}</td>
+                <td>
+                  <a href="javascript:;" onClick={this.onClickAddMonitor.bind(this, item)}>
+                      <i className="fa fa-plus-square" /></a>
+                </td>
+              </tr>
+            )
+          }
+          </tbody>
+        </table>
+      </div>
     )
   }
 
@@ -92,21 +74,19 @@ class DeviceTplModal extends React.Component { // eslint-disable-line react/no-m
     if (selectedTplImage) imgUrl = selectedTplImage.url
     else if (deviceTpl && deviceTpl.image) imgUrl = extImageBaseUrl + deviceTpl.image
     return (
-            <fieldset className="form-group">
-                <label className="col-md-3 margin-sm-top">Image:</label>
-                <div className="col-md-9">
-                    <img className="file-preview" src={imgUrl}/>
-                    <a href="javascript:;" className="margin-sm-left"
-                      style={{position: 'relative', cursor: 'pointer'}}
-                      onClick={this.onClickChangeImage.bind(this)}>
-                        Change
-                    </a>
-                </div>
-            </fieldset>
+      <fieldset className="form-group">
+        <label className="col-md-3 margin-sm-top">Image:</label>
+        <div className="col-md-9">
+          <img className="file-preview" src={imgUrl}/>
+          <a href="javascript:;" className="margin-sm-left"
+            style={{position: 'relative', cursor: 'pointer'}}
+            onClick={this.onClickChangeImage.bind(this)}>
+              Change
+          </a>
+        </div>
+      </fieldset>
     )
   }
-
-    // ///////////////////////////////////////////////////////////
 
   onHide () {
 
@@ -115,8 +95,6 @@ class DeviceTplModal extends React.Component { // eslint-disable-line react/no-m
   onClickClose () {
     this.props.closeDeviceTplModal()
   }
-
-    // ////////////////////////////////////////////////////////////
 
   onClickAddMonitor (item) {
     let {monitors} = this.state
@@ -130,14 +108,21 @@ class DeviceTplModal extends React.Component { // eslint-disable-line react/no-m
     this.setState({monitors})
   }
 
-    // /////////////////////////////////////////////////////////////
-
   onClickChangeImage () {
     this.props.openTplImageModal()
   }
 
   render () {
     const { handleSubmit } = this.props
+    const Input = ({ input, label, type, meta: { touched, error } }) => (
+      <fieldset className="form-group">
+        <label className="col-md-3 margin-sm-top">{label}</label>
+        <div className="col-md-9">
+          <input {...input} className="form-control" type={type}/>
+          {touched && error && <span className="error">{error}</span>}
+        </div>
+      </fieldset>
+    )
 
     return (
       <Modal
@@ -182,26 +167,7 @@ class DeviceTplModal extends React.Component { // eslint-disable-line react/no-m
   }
 }
 
-function mapStateToProps (state) {
-  return {
-    monitorTemplates: state.settings.monitorTemplates,
-    deviceTpl: state.settings.deviceTpl,
-    selectedTplImage: state.settings.selectedTplImage,
-
-    initialValues: state.settings.deviceTpl || {}
-  }
-}
-
-const actions = {
-  addDeviceTemplate,
-  updateDeviceTemplate,
-  closeDeviceTplModal,
-  openTplImageModal
-}
-
-export default connect(mapStateToProps, actions)(
-  reduxForm({
-    form: 'deviceTplEdit'
-    /* validate */
-  })(DeviceTplModal)
-)
+export default reduxForm({
+  form: 'deviceTplEdit'
+  /* validate */
+})(DeviceTplModal)
