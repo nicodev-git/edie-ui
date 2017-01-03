@@ -4,7 +4,6 @@ import InlineEdit from 'react-edit-inline'
 //     ButtonGroup,
 //     Button
 // } from 'react-bootstrap' // Never used
-import { connect } from 'react-redux'
 import { assign } from 'lodash'
 
 // import SettingTabs from '../SettingTabs' // Never used
@@ -12,13 +11,7 @@ import { assign } from 'lodash'
 // import TabPageBody from '../../../../shared/TabPageBody' // Never used
 // import TabPageHeader from '../../../../shared/TabPageHeader' // Never used
 
-import {
-  fetchEnvVars,
-  addEnvVar,
-  updateEnvVar
-} from '../../../../../actions'
-
-class General extends React.Component {
+export default class General extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -130,8 +123,6 @@ class General extends React.Component {
     )
   }
 
-    // ///////////////////////////////////////////
-
   getOption (key) {
     const list = (this.props.envVars || []).filter(u => u.envvars && u.envvars.key === key)
     if (list.length) return list[0]
@@ -144,13 +135,9 @@ class General extends React.Component {
     return option.envvars[value]
   }
 
-    // ///////////////////////////////////////////
-
   onChangeSysName (value) {
     this.updateOption('SYSTEM_NAME', value.message)
   }
-
-    // ///////////////////////////////////////////
 
   onChangeDmz (e) {
     let {checked} = e.target
@@ -162,21 +149,15 @@ class General extends React.Component {
     this.updateOption('DMZ', `${checked}`, value.message)
   }
 
-    // ///////////////////////////////////////////
-
   onChangePause (e) {
     let {checked} = e.target
     this.updateOption('PAUSE', `${checked}`)
   }
 
-    // ///////////////////////////////////////////
-
   onChangeTraffic (e) {
     let {checked} = e.target
     this.updateOption('NETWORK_TRAFFIC', `${checked}`)
   }
-
-    // ///////////////////////////////////////////
 
   onChangeLogEnabled (e) {
     let {checked} = e.target
@@ -187,8 +168,6 @@ class General extends React.Component {
     this.updateOption('REMOTE_LOG_BATCH', value.message)
   }
 
-    // ///////////////////////////////////////////
-
   onChangeSendMobile (e) {
     let {checked} = e.target
     this.updateOption('IMMOBILE', checked ? (this.refs.mobileIp.state.text || '127.0.0.1') : '')
@@ -197,8 +176,6 @@ class General extends React.Component {
   onChangeMobileIP (value) {
     this.updateOption('IMMOBILE', value.message)
   }
-
-    // ///////////////////////////////////////////
 
   updateOption (name, value1, value2 = '') {
     if (!name) return false
@@ -221,19 +198,3 @@ class General extends React.Component {
     }
   }
 }
-
-General.defaultProps = {}
-
-function mapStateToProps (state) {
-  return {
-    envVars: state.settings.envVars
-  }
-}
-
-const actions = {
-  fetchEnvVars,
-  addEnvVar,
-  updateEnvVar
-}
-
-export default connect(mapStateToProps, actions)(General)

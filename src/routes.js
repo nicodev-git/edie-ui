@@ -15,7 +15,7 @@ import Incidents from './components/page/content/incidents/Incidents'
 import BigIncidentsContainer from './containers/page/content/dashboard/incidents/BigIncidentsContainer'
 import ThreatMap from './components/page/content/threatmap/Threatmap'
 import Settings from './components/page/content/settings/Settings'
-import SettingGeneral from './components/page/content/settings/general/General'
+import SettingGeneralContainer from './containers/page/content/settings/general/GeneralContainer'
 import SettingAgent from './components/page/content/settings/agent/Agents'
 import SettingRules from './components/page/content/settings/rule/Rules'
 import SettingMaps from './components/page/content/settings/maps/Maps'
@@ -61,7 +61,7 @@ export default(
       <Route path="bigincidents" component={BigIncidentsContainer}/>
       <Route path="threatmap" component={ThreatMap}/>
       <Route path="settings" component={Settings}>
-        <Route path="general" component={SettingGeneral} />
+        <Route path="general" component={SettingGeneralContainer} />
         <Route path="agents" component={SettingAgent} />
         <Route path="rules" component={SettingRules} />
         <Route path="maps" component={SettingMaps} />
