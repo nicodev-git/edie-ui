@@ -4,7 +4,8 @@ import {
   // Link // Never used
 } from 'react-router'
 
-class Main extends React.Component {
+@withRouter
+export default class Main extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -22,5 +23,3 @@ class Main extends React.Component {
     return this.props.children
   }
 }
-
-export default withRouter(Main)

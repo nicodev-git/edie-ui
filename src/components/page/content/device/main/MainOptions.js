@@ -9,16 +9,17 @@ import {
 import { EVENTS } from 'shared/event/Events'
 import { ROOT_URL } from '../../../../../actions/config'
 
-class MainOptions extends React.Component {
+@withRouter
+export default class MainOptions extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
       severities: [
-                { label: 'High', value: 'High'},
-                { label: 'Medium', value: 'Medium'},
-                { label: 'Low', value: 'Low'},
-                { label: 'Audit', value: 'Audit'},
-                { label: 'Ignore', value: 'Ignore'}
+        { label: 'High', value: 'High'},
+        { label: 'Medium', value: 'Medium'},
+        { label: 'Low', value: 'Low'},
+        { label: 'Audit', value: 'Audit'},
+        { label: 'Ignore', value: 'Ignore'}
       ],
 
       selectedSeverity: ['High', 'Medium'],
@@ -30,8 +31,6 @@ class MainOptions extends React.Component {
       selectedCategoryName: ''
     }
 
-        // /////////////////////////////////////////
-
     this.onFilterChange = this.onFilterChange.bind(this)
     this.onChangeRuleCategory = this.onChangeRuleCategory.bind(this)
   }
@@ -39,8 +38,6 @@ class MainOptions extends React.Component {
   componentWillMount () {
     this.loadRuleCategories()
   }
-
-    // ////////////////////////////////////////////////////////////////////////////////
 
   onChangeSeverity (selected) {
     this.setState({
@@ -81,33 +78,31 @@ class MainOptions extends React.Component {
     }
   }
 
-    // ////////////////////////////////////////////////////////////////////////////////
-
   loadRuleCategories () {
     $.get(`${ROOT_URL}${Api.rule.getCategories}`, {})
-            .done(res => {
-              let data = [{
-                label: '[All Categories]', value: 0
-              }]
+      .done(res => {
+        let data = [{
+          label: '[All Categories]', value: 0
+        }]
 
-              let selected
-              res.forEach(item => {
-                data.push({
-                  label: item.name,
-                  value: item.id
-                })
+        let selected
+        res.forEach(item => {
+          data.push({
+            label: item.name,
+            value: item.id
+          })
 
-                if (item.id === this.state.selectedCategory) {
-                  selected = item
-                }
-              })
+          if (item.id === this.state.selectedCategory) {
+            selected = item
+          }
+        })
 
-              this.setState({
-                ruleCategories: data,
-                selectedCategory: selected ? selected.id : 0,
-                selectedCategoryName: selected ? selected.name : ''
-              })
-            })
+        this.setState({
+          ruleCategories: data,
+          selectedCategory: selected ? selected.id : 0,
+          selectedCategoryName: selected ? selected.name : ''
+        })
+      })
   }
 
   onChangeRuleCategory (selected) {
@@ -127,8 +122,6 @@ class MainOptions extends React.Component {
     return this.state.selectedCategory
   }
 
-    // ////////////////////////////////////////////////////////////////////////////////
-
   renderTitle () {
     const {device, selectedTab} = this.props
 
@@ -142,32 +135,32 @@ class MainOptions extends React.Component {
   render () {
     const {device, selectedTab} = this.props
     return (
-            <div className="tab-header">
-                <div>
-                    <span className="tab-title">{this.renderTitle()}</span>
-                </div>
-                <div className="margin-md-top" style={{width: '100%'}}>
-                    <div className="pull-left">
-                        <div className="form-inline" style={{display: selectedTab === 1 ? 'block' : 'none'}} />
+      <div className="tab-header">
+        <div>
+          <span className="tab-title">{this.renderTitle()}</span>
+        </div>
+        <div className="margin-md-top" style={{width: '100%'}}>
+          <div className="pull-left">
+            <div className="form-inline" style={{display: selectedTab === 1 ? 'block' : 'none'}} />
+            <div style={{display: selectedTab === 2 ? 'inline-block' : 'none'}} />
+          </div>
 
-                        <div style={{display: selectedTab === 2 ? 'inline-block' : 'none'}} />
-                    </div>
+          <div className="pull-right" />
 
-                    <div className="pull-right" />
-
-                    <div style={{display: (selectedTab === 1 || selectedTab === 3) ? 'block' : 'none',
-                      margin: '0 auto', position: 'relative', width: '550px', textAlign: 'center'}}>
-                        <div className="inline" style={{position: 'relative'}}>
-                            <input type="text" placeholder="Search" className="form-control"
-                              style={{width: '100%', paddingLeft: '35px'}}
-                              onChange={this.onFilterChange}
-                              ref="search"/>
-                            <a className="btn" href="javascript:;" style={{position: 'absolute', left: 0, top: 0}}>
-                                <i className="fa fa-search" /></a>
-                        </div>
-                    </div>
-                </div>
+          <div style={{display: (selectedTab === 1 || selectedTab === 3) ? 'block' : 'none',
+            margin: '0 auto', position: 'relative', width: '550px', textAlign: 'center'}}>
+            <div className="inline" style={{position: 'relative'}}>
+              <input type="text" placeholder="Search" className="form-control"
+                style={{width: '100%', paddingLeft: '35px'}}
+                onChange={this.onFilterChange}
+                ref="search"/>
+              <a className="btn" href="javascript:;" style={{position: 'absolute', left: 0, top: 0}}>
+                <i className="fa fa-search" />
+              </a>
             </div>
+          </div>
+        </div>
+      </div>
     )
   }
 
@@ -195,5 +188,3 @@ MainOptions.defaultProps = {
   selectedTab: 1,
   device: {}
 }
-
-export default withRouter(MainOptions)

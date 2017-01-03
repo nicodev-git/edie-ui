@@ -1,6 +1,4 @@
 import React from 'react'
-import {withRouter} from 'react-router'
-import { connect } from 'react-redux'
 import { showAlert } from '../../../../../shared/Alert'
 
 import MainTabs from '../MainTabs'
@@ -10,7 +8,7 @@ import TabPageHeader from '../../../../../shared/TabPageHeader'
 
 import { ROOT_URL } from '../../../../../../actions/config'
 
-class MainAdvanced extends React.Component {
+export default class MainAdvanced extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -51,12 +49,3 @@ class MainAdvanced extends React.Component {
     )
   }
 }
-
-MainAdvanced.defaultProps = {
-}
-
-function mapStateToProps (state) {
-  return {device: state.dashboard.selectedDevice}
-}
-
-export default withRouter(connect(mapStateToProps)(MainAdvanced))
