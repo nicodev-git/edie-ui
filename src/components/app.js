@@ -1,14 +1,13 @@
 import React, { Component } from 'react'
-import Header from './Header'
+import HeaderContainer from '../containers/HeaderContainer'
 
 export default class App extends Component {
   render () {
     return (
-            <div>
-                <Header />
-                {this.props.children}
-            </div>
-
+      <div>
+        <HeaderContainer />
+        {this.props.children}
+      </div>
     )
   }
 }
