@@ -7,7 +7,7 @@ import { fetchDevices } from '../actions'
 @connect(
   state => ({ resources: state.resources.all }),
   dispatch => ({
-    signUser: bindActionCreators(fetchDevices, dispatch)
+    fetchDevices: bindActionCreators(fetchDevices, dispatch)
   })
 )
 export default class DeviceTableContainer extends Component {

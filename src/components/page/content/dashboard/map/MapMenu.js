@@ -3,7 +3,7 @@ import {assign} from 'lodash'
 
 import MapSelect from './MapSelect'
 import MapSaveModal from './MapSaveModal'
-import MapImportModal from './MapImportModal'
+import MapImportModalContainer from '../../../../../containers/page/content/dashboard/map/MapImportModalContainer'
 import { showAlert, showPrompt, showConfirm } from '../../../../shared/Alert'
 
 export default class MapMenu extends React.Component {
@@ -25,11 +25,9 @@ export default class MapMenu extends React.Component {
   renderMapImportModal () {
     if (!this.props.mapImportModalVisible) return
     return (
-      <MapImportModal />
+      <MapImportModalContainer />
     )
   }
-
-    // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   onClickAdd () {
     showPrompt('Please input map name.', 'New Map', name => {

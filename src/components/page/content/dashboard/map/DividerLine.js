@@ -33,8 +33,8 @@ function getEventClientOffset (e) {
 const ELEMENT_NODE = 1
 function getNodeClientOffset (node) {
   const el = node.nodeType === ELEMENT_NODE
-        ? node
-        : node.parentElement
+    ? node
+    : node.parentElement
 
   if (!el) {
     return null
@@ -44,7 +44,7 @@ function getNodeClientOffset (node) {
   return { x: left, y: top }
 }
 
-class DividerLine extends React.Component {
+export default class DividerLine extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -67,8 +67,6 @@ class DividerLine extends React.Component {
   componentWillUnmount () {
     this.teardown(this.refs.divider)
   }
-
-    // /////////////////////////////////////////////////////
 
   setup (node) {
     if (typeof node === 'undefined') {
@@ -102,8 +100,6 @@ class DividerLine extends React.Component {
     })
   }
 
-    // /////////////////////////////////////////////////////
-
   render () {
     const style = {
       position: 'absolute',
@@ -116,11 +112,9 @@ class DividerLine extends React.Component {
     }
 
     return (
-            <div style={style} ref="divider" />
+      <div style={style} ref="divider" />
     )
   }
-
-    // /////////////////////////////////////////////////////
 
   handleTopMoveStart (e) {
     const clientOffset = getEventClientOffset(e)
@@ -166,5 +160,3 @@ DividerLine.defaultProps = {
   onDragMove: null,
   onDragEnd: null
 }
-
-export default DividerLine

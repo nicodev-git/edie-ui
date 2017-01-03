@@ -7,7 +7,7 @@ import { updateDeviceIncident } from '../../../actions'
 @connect(
   state => ({ }),
   dispatch => ({
-    signUser: bindActionCreators(updateDeviceIncident, dispatch)
+    updateDeviceIncident: bindActionCreators(updateDeviceIncident, dispatch)
   })
 )
 export default class CommentsModalContainer extends React.Component {

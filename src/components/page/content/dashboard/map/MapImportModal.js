@@ -1,11 +1,8 @@
 import React from 'react'
 import Modal from 'react-bootstrap-modal'
-import {connect} from 'react-redux'
-
-import { importMap, closeMapImportModal } from '../../../../../actions'
 import { showAlert } from '../../../../shared/Alert'
 
-class MapImportModal extends React.Component {
+export default class MapImportModal extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -113,13 +110,3 @@ class MapImportModal extends React.Component {
     )
   }
 }
-
-MapImportModal.defaultProps = {
-
-}
-
-function mapStateToProps () {
-  return {}
-}
-
-export default connect(mapStateToProps, { importMap, closeMapImportModal })(MapImportModal)
