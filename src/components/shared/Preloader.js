@@ -1,6 +1,6 @@
 import React from 'react'
 
-class Preloader extends React.Component {
+export default class Preloader extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -9,8 +9,7 @@ class Preloader extends React.Component {
   }
 
   onClickClose () {
-    this.props.onClose &&
-        this.props.onClose(this)
+    this.props.onClose && this.props.onClose(this)
   }
 
   render () {
@@ -18,7 +17,6 @@ class Preloader extends React.Component {
       <div className="preloader">
         <div className="overlay" />
         <div className="content">
-
           {
             this.state.loading
               ? <div className="row">
@@ -48,5 +46,3 @@ Preloader.defaultProps = {
   onClose: null,
   message: 'Loading...'
 }
-
-export default Preloader

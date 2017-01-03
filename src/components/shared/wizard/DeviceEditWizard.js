@@ -1,11 +1,10 @@
 import React from 'react'
 import {Tabs, Tab} from 'react-bootstrap'
-import {assign} from 'lodash'
+import { assign } from 'lodash'
 import { reduxForm } from 'redux-form'
-import { connect } from 'react-redux'
 
-import {wizardEditConfig} from './WizardConfig'
-import {util} from './WizardUtil'
+import { wizardEditConfig } from './WizardConfig'
+import { util } from './WizardUtil'
 
 import TextInput from './input/TextInput'
 import TextArea from './input/TextArea'
@@ -42,8 +41,6 @@ class DeviceEditWizard extends React.Component {
     }
   }
 
-    // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
   onSelectTab () {
 
   }
@@ -64,8 +61,6 @@ class DeviceEditWizard extends React.Component {
 
     this.didSave(params)
   }
-
-    // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   buildContent (tab, index) {
     // const include = tab.include // Never used
@@ -103,21 +98,21 @@ class DeviceEditWizard extends React.Component {
     }
 
     return (
-            <div className="row margin-xs-left padding-md-top">
-                <div className="col-md-6">
-                    {items}
-                </div>
-            </div>
+      <div className="row margin-xs-left padding-md-top">
+        <div className="col-md-6">
+          {items}
+        </div>
+      </div>
     )
   }
 
   buildInput (config) {
     let items = []
 
-        // if (this.props.hideNames && config.name) {
-        //     let found = this.props.hideNames.indexOf(config.name) >= 0
-        //     if (found) return items
-        // }
+    // if (this.props.hideNames && config.name) {
+    //     let found = this.props.hideNames.indexOf(config.name) >= 0
+    //     if (found) return items
+    // }
 
     config.type = config.type || ''
     let func = this.mapping[config.type.toLowerCase()]
@@ -130,8 +125,6 @@ class DeviceEditWizard extends React.Component {
 
     return items
   }
-
-    // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   buildText (config) {
     return (<TextInput key={config.name}
@@ -172,22 +165,22 @@ class DeviceEditWizard extends React.Component {
     }
 
     text.push(
-            <div className={`col-md-${util.calcWidth(config.width)}`}
-              style={util.convertStyle(config.style)}>
-                <Password config={config}/>
-            </div>
-        )
+      <div className={`col-md-${util.calcWidth(config.width)}`}
+        style={util.convertStyle(config.style)}>
+          <Password config={config}/>
+      </div>
+    )
     return text
   }
 
   buildLabel (config) {
     return (
-            <div className={`col-md-${util.calcWidth(config.width)}`}
-              style={util.convertStyle(config.style)}>
-                <label className={`control-label ${config.cls || ''}`}
-                  dangerouslySetInnerHTML={{__html: config.html || config.text || ''}} // eslint-disable-line react/no-danger
-                />
-            </div>
+      <div className={`col-md-${util.calcWidth(config.width)}`}
+        style={util.convertStyle(config.style)}>
+          <label className={`control-label ${config.cls || ''}`}
+            dangerouslySetInnerHTML={{__html: config.html || config.text || ''}} // eslint-disable-line react/no-danger
+          />
+      </div>
     )
   }
 
@@ -200,9 +193,9 @@ class DeviceEditWizard extends React.Component {
     })
 
     return (
-            <div className="row margin-md-bottom">
-                {children}
-            </div>
+      <div className="row margin-md-bottom">
+        {children}
+      </div>
     )
   }
 
@@ -254,57 +247,10 @@ class DeviceEditWizard extends React.Component {
       </div>
     )
   }
-
-    // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 }
 
-DeviceEditWizard.defaultProps = {
-  deviceType: '',
-
-  extraParams: {},
-  configParams: {},
-
-  onSaved: null,
-  onFinish: null,
-
-  tabs: [{
-    title: 'General',
-    include: ['name', 'agentid', 'ipaddress', 'wanip', 'lanip', 'hostname', 'port', 'dbtype', 'sql', 'disabled', 'customimage', 'url']
-  }, {
-    title: 'Credentials',
-    include: ['credentialid']
-  }, {
-    title: 'Info',
-    include: ['notes']
-  }, {
-    title: 'Advanced',
-    id: 'tab-devinfo-advanced',
-    include: ['server_url', 'deviceid', 'devicetype', 'response', 'checkinterval', 'status', 'basicchecks', 'externalIP'],
-    extra: [{
-      name: 'id',
-      title: 'DeviceId'
-    }, {
-      name: 'devicetype',
-      title: 'DeviceType'
-    }]
-  }]
-}
-
-function mapStateToProps (state) {
-  return {
-    initialValues: state.dashboard.selectedDevice
-  }
-}
-
-const actions = {
-
-}
-
-export default connect(mapStateToProps, actions)(
-  reduxForm({
-    form: 'deviceEditForm'
-    // destroyOnUnmount: false,
-    // validate
-  })(DeviceEditWizard)
-)
+export default reduxForm({
+  form: 'deviceEditForm'
+  // destroyOnUnmount: false,
+  // validate
+})(DeviceEditWizard)

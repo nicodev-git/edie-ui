@@ -7,7 +7,7 @@ import TabPage from '../../../../shared/TabPage'
 import TabPageBody from '../../../../shared/TabPageBody'
 import TabPageHeader from '../../../../shared/TabPageHeader'
 
-import DeviceEditWizard from '../../../../shared/wizard/DeviceEditWizard'
+import DeviceEditWizardContainer from '../../../../../containers/shared/wizard/DeviceEditWizardContainer'
 import { deviceTypeMap } from '../../../../shared/wizard/WizardConfig'
 
 import { updateMapDevice } from '../../../../../actions'
@@ -36,12 +36,12 @@ class Info extends React.Component {
         // values['notes'] = values['devicenotes']
 
     return (
-            <DeviceEditWizard
-              deviceType={type}
-              values={device}
-              extraParams={extraParams}
-              onFinish={this.onFinish.bind(this)}
-            />
+      <DeviceEditWizardContainer
+        deviceType={type}
+        values={device}
+        extraParams={extraParams}
+        onFinish={this.onFinish.bind(this)}
+      />
     )
   }
 

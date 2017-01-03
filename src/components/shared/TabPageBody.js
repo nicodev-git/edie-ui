@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router'
 
-class TabPageBody extends React.Component {
+export default class TabPageBody extends React.Component {
   constructor (props) {
     super(props)
     this.state = {}
@@ -37,5 +37,3 @@ TabPageBody.defaultProps = {
   tabs: [],
   tab: -1
 }
-
-export default TabPageBody

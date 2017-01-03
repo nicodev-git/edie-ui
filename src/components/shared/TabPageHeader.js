@@ -1,6 +1,6 @@
 import React from 'react'
 
-class TabPageHeader extends React.Component {
+export default class TabPageHeader extends React.Component {
   constructor (props) {
     super(props)
     this.state = {}
@@ -8,14 +8,14 @@ class TabPageHeader extends React.Component {
 
   render () {
     return (
-            <div className="tab-header">
-                <div>
-                    <span className="tab-title">{this.props.title}</span>
-                </div>
-                <div className="margin-md-top" style={{width: '100%'}}>
-                    {this.props.children}
-                </div>
-            </div>
+      <div className="tab-header">
+        <div>
+          <span className="tab-title">{this.props.title}</span>
+        </div>
+        <div className="margin-md-top" style={{width: '100%'}}>
+          {this.props.children}
+        </div>
+      </div>
     )
   }
 }
@@ -23,5 +23,3 @@ class TabPageHeader extends React.Component {
 TabPageHeader.defaultProps = {
   title: ''
 }
-
-export default TabPageHeader

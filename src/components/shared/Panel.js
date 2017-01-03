@@ -10,9 +10,9 @@ export class Panel extends React.Component {
     const {className, bsStyle} = this.props
 
     return (
-            <div className={`panel panel-${bsStyle || 'default'} ${className || ''}`} >
-                {this.props.children}
-            </div>
+      <div className={`panel panel-${bsStyle || 'default'} ${className || ''}`} >
+        {this.props.children}
+      </div>
     )
   }
 }
@@ -29,10 +29,10 @@ export class PanelHeader extends React.Component { // eslint-disable-line react/
     const {className, title} = this.props
 
     return (
-            <div className={`panel-heading ${className}`}>
-                <span className="panel-title">{title}</span>
-                {this.props.children}
-            </div>
+      <div className={`panel-heading ${className}`}>
+        <span className="panel-title">{title}</span>
+        {this.props.children}
+      </div>
     )
   }
 }
