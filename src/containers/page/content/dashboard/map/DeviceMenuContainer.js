@@ -10,7 +10,7 @@ import {
 @connect(
   state => ({ deviceTemplates: state.settings.deviceTemplates }),
   dispatch => ({
-    signUser: bindActionCreators(fetchDeviceTemplates, dispatch)
+    fetchDeviceTemplates: bindActionCreators(fetchDeviceTemplates, dispatch)
   })
 )
 export default class DeviceMenuContainer extends React.Component {
