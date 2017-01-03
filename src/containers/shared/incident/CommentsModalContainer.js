@@ -5,12 +5,12 @@ import { bindActionCreators } from 'redux'
 import { updateDeviceIncident } from '../../../actions'
 
 @connect(
-  state => ({  }),
+  state => ({ }),
   dispatch => ({
     signUser: bindActionCreators(updateDeviceIncident, dispatch)
   })
 )
-export default class CommentsModal extends React.Component {
+export default class CommentsModalContainer extends React.Component {
   render () {
     return (
       <CommentsModal {...this.props} />

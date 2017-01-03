@@ -12,7 +12,7 @@ import SearchDevices from './components/page/content/search/Devices'
 import SearchProcess from './components/page/content/search/Processes'
 import Chat from './components/page/content/chat/Chat'
 import Incidents from './components/page/content/incidents/Incidents'
-import BigIncidents from './components/page/content/dashboard/incidents/BigIncidents'
+import BigIncidentsContainer from './containers/page/content/dashboard/incidents/BigIncidentsContainer'
 import ThreatMap from './components/page/content/threatmap/Threatmap'
 import Settings from './components/page/content/settings/Settings'
 import SettingGeneral from './components/page/content/settings/general/General'
@@ -58,7 +58,7 @@ export default(
                 <Route path="process" component={SearchProcess} />
             </Route>
             <Route path="incidents" component={Incidents}/>
-            <Route path="bigincidents" component={BigIncidents}/>
+            <Route path="bigincidents" component={BigIncidentsContainer}/>
             <Route path="threatmap" component={ThreatMap}/>
             <Route path="settings" component={Settings}>
                 <Route path="general" component={SettingGeneral} />

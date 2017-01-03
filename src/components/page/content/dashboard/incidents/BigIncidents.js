@@ -1,35 +1,29 @@
 import React from 'react'
 import Modal from 'react-bootstrap-modal'
 import DateRangePicker from '../../../../shared/DateRangePicker'
-import {ResponsiveInfiniteTable} from '../../../../shared/InfiniteTable'
+import { ResponsiveInfiniteTable } from '../../../../shared/InfiniteTable'
 import Select from 'react-select'
 import moment from 'moment'
-import {connect} from 'react-redux'
-import {withRouter} from 'react-router'
 import IncidentTable from './IncidentTable'
 
-import { fetchBigIncidents } from '../../../../../actions'
-
-class BigIncidents extends React.Component {
+export default class BigIncidents extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
       open: true,
 
       severities: [
-                { label: 'High', value: 'HIGH' },
-                { label: 'Medium', value: 'MEDIUM' },
-                { label: 'Low', value: 'LOW' },
-                { label: 'Audit', value: 'AUDIT' },
-                { label: 'Ignore', value: 'IGNORE' }
+        { label: 'High', value: 'HIGH' },
+        { label: 'Medium', value: 'MEDIUM' },
+        { label: 'Low', value: 'LOW' },
+        { label: 'Audit', value: 'AUDIT' },
+        { label: 'Ignore', value: 'IGNORE' }
       ],
 
       selectedSeverity: ['HIGH', 'MEDIUM'],
 
       selectWidth: 26,
       templateText: 'Any',
-
-            // ///////////////////////////////////
 
       params: {
         text: '',
@@ -84,23 +78,24 @@ class BigIncidents extends React.Component {
 
   renderTable () {
     return (
-            <IncidentTable ref="table"
-              incidents={this.props.incidents}
-              fixIncident={this.props.fixIncident}
-              ackIncident={this.props.ackIncident}/>
+      <IncidentTable ref="table"
+        incidents={this.props.incidents}
+        fixIncident={this.props.fixIncident}
+        ackIncident={this.props.ackIncident}
+      />
     )
   }
 
   renderTable2 () {
     return (
-            <ResponsiveInfiniteTable
-              url={this.state.url}
-              params={this.state.params}
-              cells={this.state.cells}
-              ref="table"
-              rowMetadata={{'key': 'incidentid'}}
-              bodyHeight={this.state.tableHeight}
-            />
+      <ResponsiveInfiniteTable
+        url={this.state.url}
+        params={this.state.params}
+        cells={this.state.cells}
+        ref="table"
+        rowMetadata={{'key': 'incidentid'}}
+        bodyHeight={this.state.tableHeight}
+      />
     )
   }
 
@@ -113,8 +108,6 @@ class BigIncidents extends React.Component {
   onHide () {
     this.props.router.goBack()
   }
-
-    // //////////////////////////////////////////////////////////////////////
 
   onFilterChange () {
     const refs = this.refs
@@ -217,14 +210,3 @@ class BigIncidents extends React.Component {
     )
   }
 }
-
-const mapStateToProps = (state) => {
-  const { bigIncidents } = state.dashboard
-  return { incidents: bigIncidents }
-}
-
-const actions = {
-  fetchBigIncidents
-}
-
-export default withRouter(connect(mapStateToProps, actions)(BigIncidents))
