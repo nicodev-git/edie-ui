@@ -3,11 +3,8 @@ import Griddle from 'griddle-react'
 import ReactTooltip from 'react-tooltip'
 import enStrings from 'react-timeago/lib/language-strings/en'
 import buildFormatter from 'react-timeago/lib/formatters/buildFormatter'
-import {connect} from 'react-redux'
 
-import {fetchDeviceBasicMonitors} from '../../../../../actions'
-
-class BasicMonitorTable extends React.Component {
+export default class BasicMonitorTable extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -100,18 +97,18 @@ class BasicMonitorTable extends React.Component {
     let textcolor = 'black'
     if (val < 70) {
       color = 'green'
-            // if (val > 40) textcolor = 'white';
+      // if (val > 40) textcolor = 'white';
     } else if (val < 90) {
       color = '#fec835'
     }
 
     return (
-            <div key={key || title} className="progress" style={{height: '12px', position: 'relative'}} title={title || ''}>
-                <div className="progress-label"
-                  style={{fontSize: '9px', top: '1px', textAlign: 'center', position: 'absolute', width: '100%', color: textcolor}}>{val}%</div>
-                <div className="progress-bar progress-bar-info" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"
-                  style={{width: `${val}%`, backgroundColor: color}} />
-            </div>
+      <div key={key || title} className="progress" style={{height: '12px', position: 'relative'}} title={title || ''}>
+        <div className="progress-label"
+          style={{fontSize: '9px', top: '1px', textAlign: 'center', position: 'absolute', width: '100%', color: textcolor}}>{val}%</div>
+        <div className="progress-bar progress-bar-info" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"
+          style={{width: `${val}%`, backgroundColor: color}} />
+      </div>
     )
   }
 
@@ -160,67 +157,56 @@ class BasicMonitorTable extends React.Component {
     }
 
     return (
-            <div style={{width: '100%', textAlign: 'center'}}>
-                <i className={`fa ${cls}`} style={{color: color, fontSize: '20px', verticalAlign: 'middle'}} data-tip={tooltip} />
-            </div>
+      <div style={{width: '100%', textAlign: 'center'}}>
+        <i className={`fa ${cls}`} style={{color: color, fontSize: '20px', verticalAlign: 'middle'}} data-tip={tooltip} />
+      </div>
     )
   }
 
   actionFormatter (val) {
     if (!val) return (<span />)
     return (
-            <div style={{width: '100%', textAlign: 'center', marginTop: '-3px'}}>
-                <a href="javascript:;">
-                    <i className="fa fa-tasks" style={{color: 'black', fontSize: '20px'}} />
-                </a>
-            </div>
+      <div style={{width: '100%', textAlign: 'center', marginTop: '-3px'}}>
+        <a href="javascript:;">
+          <i className="fa fa-tasks" style={{color: 'black', fontSize: '20px'}} />
+        </a>
+      </div>
     )
   }
 
   componentWillMount () {
 
-        // $.get(Api.devices.getDevicesAndProps, {
-        //     id: this.props.device.id
-        // }).done(res => {
-        //     if (!res.length) return
-        //
-        //     res.forEach(item => {
-        //         if (item.id !== this.props.device.id) return true
-        //         this.setState({
-        //             data: [item]
-        //         })
-        //         return false
-        //     })
-        // });
+    // $.get(Api.devices.getDevicesAndProps, {
+    //     id: this.props.device.id
+    // }).done(res => {
+    //     if (!res.length) return
+    //
+    //     res.forEach(item => {
+    //         if (item.id !== this.props.device.id) return true
+    //         this.setState({
+    //             data: [item]
+    //         })
+    //         return false
+    //     })
+    // });
 
   }
 
   render () {
     return (
-            <div>
-                <Griddle
-                  results={this.props.basicMonitors}
-                  tableClassName="table tab-table"
-                  showFilter={false}
-                  showSettings={false}
-                  columns={this.columns.map(item => item.columnName)}
-                  columnMetadata={this.columns}
-                  rowMetadata={{key: 'id'}}
-                  useGriddleStyles={false}
-                  bodyHeight={100}
-                />
-            </div>
+      <div>
+        <Griddle
+          results={this.props.basicMonitors}
+          tableClassName="table tab-table"
+          showFilter={false}
+          showSettings={false}
+          columns={this.columns.map(item => item.columnName)}
+          columnMetadata={this.columns}
+          rowMetadata={{key: 'id'}}
+          useGriddleStyles={false}
+          bodyHeight={100}
+        />
+      </div>
     )
   }
 }
-
-BasicMonitorTable.defaultProps = {
-  device: {}
-}
-
-function mapStateToProps (state) {
-  let {basicMonitors} = state.devices
-  return {basicMonitors}
-}
-
-export default connect(mapStateToProps, {fetchDeviceBasicMonitors})(BasicMonitorTable)

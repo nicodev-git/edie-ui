@@ -10,7 +10,7 @@ import { fetchDeviceApps } from '../../../../../actions'
     fetchDeviceApps: bindActionCreators(fetchDeviceApps, dispatch)
   })
 )
-export default class ApplicationTable extends Component {
+export default class ApplicationTableContainer extends Component {
   render () {
     return (
       <ApplicationTable {...this.props} />
