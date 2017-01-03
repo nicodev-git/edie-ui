@@ -3,7 +3,7 @@ import Modal from 'react-bootstrap-modal'
 import { Pagination } from 'react-bootstrap'
 
 import Preloader from '../../../../shared/Preloader'
-import DeviceWizard from '../../../../shared/wizard/DeviceWizard'
+import DeviceWizardContainer from '../../../../../containers/shared/wizard/DeviceWizardContainer'
 import LogMatchModal from './LogMatchModal'
 
 import { appendComponent, removeComponent } from '../../../../../util/Component'
@@ -173,7 +173,7 @@ export default class MonitorLogModal extends Component {
     }
 
     appendComponent(
-      <DeviceWizard
+      <DeviceWizardContainer
         deviceType={'monitor-log-file'}
         onClose={removeComponent}
         extraParams={extraParams}

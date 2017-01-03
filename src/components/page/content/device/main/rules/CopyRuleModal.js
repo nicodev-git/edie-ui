@@ -8,7 +8,7 @@ import { showAlert, showConfirm } from '../../../../../shared/Alert'
 import { sortBy, join } from 'lodash'
 
 import { appendComponent, removeComponent } from '../../../../../../util/Component'
-import DeviceWizard from '../../../../../shared/wizard/DeviceWizard'
+import DeviceWizardContainer from '../../../../../../containers/shared/wizard/DeviceWizardContainer'
 
 import Api from '../../../../../../api'
 import { ROOT_URL } from '../../../../../../actions/config'
@@ -464,7 +464,7 @@ export default class CopyRuleModal extends React.Component {
     }
 
     appendComponent(
-      <DeviceWizard
+      <DeviceWizardContainer
         deviceType="devicerule"
         onClose={removeComponent}
         extraParams={extra}
@@ -499,7 +499,7 @@ export default class CopyRuleModal extends React.Component {
     }
 
     appendComponent(
-      <DeviceWizard
+      <DeviceWizardContainer
         deviceType="devicerule"
         onClose={removeComponent}
         extraParams={extra}
@@ -545,7 +545,7 @@ export default class CopyRuleModal extends React.Component {
     }
 
     appendComponent(
-      <DeviceWizard
+      <DeviceWizardContainer
         deviceType="tplrule"
         onClose={removeComponent}
         extraParams={extra}
@@ -579,7 +579,7 @@ export default class CopyRuleModal extends React.Component {
     }
 
     appendComponent(
-      <DeviceWizard
+      <DeviceWizardContainer
         deviceType="tplrule"
         onClose={removeComponent}
         extraParams={extra}

@@ -3,7 +3,7 @@ import Griddle from 'griddle-react'
 import TimeAgo from 'react-timeago'
 import { assign, concat } from 'lodash'
 
-import DeviceWizard from '../../../../shared/wizard/DeviceWizard'
+import DeviceWizardContainer from '../../../../../containers/shared/wizard/DeviceWizardContainer'
 
 import { appendComponent, removeComponent } from '../../../../../util/Component'
 import { showAlert } from '../../../../shared/Alert'
@@ -159,7 +159,7 @@ export default class MonitorTable extends Component {
     const {monitorConfig} = this.state
     const type = 'monitor-custom'
     return (
-      <DeviceWizard
+      <DeviceWizardContainer
         deviceType={type}
         title={monitorConfig ? monitorConfig.name : ''}
         onClose={() => {

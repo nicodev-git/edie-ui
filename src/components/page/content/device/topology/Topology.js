@@ -11,7 +11,7 @@ import {
 } from 'shared/event/Emitter'
 import {EVENTS} from 'shared/event/Events'
 
-import DeviceWizard from '../../../../shared/wizard/DeviceWizard'
+import DeviceWizardContainer from '../../../../../containers/shared/wizard/DeviceWizardContainer'
 import { appendComponent, removeComponent } from '../../../../../util/Component'
 import { wizardConfig } from '../../../../shared/wizard/WizardConfig'
 import { showAlert, showConfirm } from '../../../../shared/Alert'
@@ -692,7 +692,7 @@ export default class Topology extends React.Component {
 
 
             appendComponent(
-                <DeviceWizard
+                <DeviceWizardContainer
                     deviceType={options.type}
                     onClose={(modal) => {
                         removeComponent(modal)

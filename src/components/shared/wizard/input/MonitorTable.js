@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Panel } from 'react-bootstrap'
 
-import DeviceWizard from '../../../shared/wizard/DeviceWizard'
+import DeviceWizardContainer from '../../../../containers/shared/wizard/DeviceWizardContainer'
 
 export default class MonitorTable extends Component {
   constructor (props) {
@@ -64,7 +64,7 @@ export default class MonitorTable extends Component {
     const type = 'monitor-custom'
 
     return (
-      <DeviceWizard
+      <DeviceWizardContainer
         deviceType={type}
         title={monitorConfig ? monitorConfig.name : ''}
         onClose={() => { this.setState({ monitorWizardVisible: false }) }}

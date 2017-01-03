@@ -1,7 +1,6 @@
 import React from 'react'
 import Modal from 'react-bootstrap-modal'
 import { reduxForm } from 'redux-form'
-import { connect } from 'react-redux'
 import {
     assign
     // keys, // Never used
@@ -23,8 +22,6 @@ import MTable from './input/MTable'
 
 import {wizardConfig} from './WizardConfig'
 import {util} from './WizardUtil'
-
-import { fetchMonitorTemplates, clearDeviceWizardInitialValues } from '../../../actions'
 
 class DeviceWizard extends React.Component {
   constructor (props) {
@@ -71,8 +68,8 @@ class DeviceWizard extends React.Component {
 
   componentWillMount () {
     const hasMonitors = this.state.currentDevice.steps.filter(s =>
-            s.items.filter(i => i.type === 'monitors').length > 0
-        ).length > 0
+        s.items.filter(i => i.type === 'monitors').length > 0
+    ).length > 0
 
     if (hasMonitors) {
       this.props.fetchMonitorTemplates()
@@ -84,8 +81,6 @@ class DeviceWizard extends React.Component {
   }
 
   handleFormSubmit (formProps) {
-    console.log(formProps)
-
     const { extraParams, onFinish } = this.props
     const { monitors } = this.state
 
@@ -101,21 +96,21 @@ class DeviceWizard extends React.Component {
     let markers = []
     for (let i = 1; i <= this.state.steps; i++) {
       markers.push(
-                <div className={`marker ${i <= this.state.current ? 'marker-checked' : ''}`}
-                  style={{left: `${100 / this.state.steps * (i - 0.5)}%`}}
-                  key={i}>
-                    <div className="marker-label">{i}</div>
-                </div>
-            )
+        <div className={`marker ${i <= this.state.current ? 'marker-checked' : ''}`}
+          style={{left: `${100 / this.state.steps * (i - 0.5)}%`}}
+          key={i}>
+            <div className="marker-label">{i}</div>
+        </div>
+      )
     }
 
     return (
-            <div className="wizard-progress">
-                {markers}
-                <div className="progress progress-striped progress-xs" style={{margin: '10px 0'}}>
-                    <div className="progress-bar" style={{width: `${100 * this.state.current / this.state.steps}%`}} />
-                </div>
-            </div>
+      <div className="wizard-progress">
+        {markers}
+        <div className="progress progress-striped progress-xs" style={{margin: '10px 0'}}>
+          <div className="progress-bar" style={{width: `${100 * this.state.current / this.state.steps}%`}} />
+        </div>
+      </div>
     )
   }
 
@@ -128,9 +123,9 @@ class DeviceWizard extends React.Component {
     }
 
     return (
-            <div className="tab-content">
-                {tabs}
-            </div>
+      <div className="tab-content">
+          {tabs}
+      </div>
     )
   }
 
@@ -148,9 +143,9 @@ class DeviceWizard extends React.Component {
     })
 
     return (
-            <div key={index} className={`tab-pane p-none${(index === (this.state.current - 1)) ? ' active' : ''}`}>
-                {items}
-            </div>
+      <div key={index} className={`tab-pane p-none${(index === (this.state.current - 1)) ? ' active' : ''}`}>
+          {items}
+      </div>
     )
   }
 
@@ -173,8 +168,6 @@ class DeviceWizard extends React.Component {
 
     return items
   }
-
-    // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   buildText (config, values) {
     return (<TextInput key={config.name}
@@ -228,22 +221,21 @@ class DeviceWizard extends React.Component {
     }
 
     text.push(
-            <div className={`col-md-${util.calcWidth(config.width)}`}
-              style={util.convertStyle(config.style)}>
-                <Password config={config} values={values}/>
-            </div>
-        )
+      <div className={`col-md-${util.calcWidth(config.width)}`} style={util.convertStyle(config.style)}>
+          <Password config={config} values={values}/>
+      </div>
+    )
     return text
   }
 
   buildLabel (config) {
     return (
-            <div className={`col-md-${util.calcWidth(config.width)}`}
-              style={util.convertStyle(config.style)}>
-                <label className={`control-label ${config.cls || ''}`}
-                  dangerouslySetInnerHTML={{__html: config.html || config.text || ''}} // eslint-disable-line react/no-danger
-                />
-            </div>
+      <div className={`col-md-${util.calcWidth(config.width)}`}
+        style={util.convertStyle(config.style)}>
+          <label className={`control-label ${config.cls || ''}`}
+            dangerouslySetInnerHTML={{__html: config.html || config.text || ''}} // eslint-disable-line react/no-danger
+          />
+      </div>
     )
   }
 
@@ -296,17 +288,14 @@ class DeviceWizard extends React.Component {
     })
 
     return (
-            <div className="row margin-md-bottom">
-                {children}
-            </div>
+      <div className="row margin-md-bottom">
+        {children}
+      </div>
     )
   }
 
-    // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
   closeModal (data) {
-    this.props.onClose &&
-        this.props.onClose(this, data)
+    this.props.onClose && this.props.onClose(this, data)
   }
 
   onHide () {
@@ -325,8 +314,7 @@ class DeviceWizard extends React.Component {
       this.setState({current})
     } else {
       this.closeModal()
-      this.props.onStep0 &&
-                this.props.onStep0()
+      this.props.onStep0 && this.props.onStep0()
     }
   }
 
@@ -390,43 +378,10 @@ class DeviceWizard extends React.Component {
       </Modal>
     )
   }
-
-    // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 }
 
-DeviceWizard.defaultProps = {
-  title: '',
-
-  deviceType: '',
-
-  extraParams: {},
-  configParams: {},
-
-  hideNames: [],
-
-  monitors: [],
-
-  values: {},
-
-  onStep0: null,
-  onFinish: null
-}
-
-function mapStateToProps (state) {
-  return {
-    monitorTemplates: state.settings.monitorTemplates
-  }
-}
-
-const actions = {
-  fetchMonitorTemplates,
-  clearDeviceWizardInitialValues
-}
-
-export default connect(mapStateToProps, actions)(
-  reduxForm({
-    form: 'deviceForm'
-    // destroyOnUnmount: false,
-    // validate
-  })(DeviceWizard)
-)
+export default reduxForm({
+  form: 'deviceForm'
+  // destroyOnUnmount: false,
+  // validate
+})(DeviceWizard)

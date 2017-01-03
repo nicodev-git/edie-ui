@@ -12,7 +12,7 @@ import { showAlert, showConfirm } from '../../../../../shared/Alert'
 import {ResponsiveInfiniteTable} from '../../../../../shared/InfiniteTable'
 import MarkIgnoreModal from './MarkIgnoreModal'
 import SimulatorModal from '../rules/SimulatorModal'
-import DeviceWizard from '../../../../../shared/wizard/DeviceWizard'
+import DeviceWizardContainer from '../../../../../../containers/shared/wizard/DeviceWizardContainer'
 
 import MainTabs from '../MainTabs'
 import TabPage from '../../../../../shared/TabPage'
@@ -210,7 +210,7 @@ export default class MainRawIncidents extends React.Component {
     }
 
     appendComponent(
-      <DeviceWizard
+      <DeviceWizardContainer
         deviceType="devicerule"
         onClose={removeComponent}
         extraParams={extra}
@@ -286,7 +286,7 @@ export default class MainRawIncidents extends React.Component {
     }
 
     appendComponent(
-      <DeviceWizard
+      <DeviceWizardContainer
         deviceType="devicerule"
         onClose={removeComponent}
         extraParams={extra}

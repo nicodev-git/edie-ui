@@ -14,7 +14,7 @@ import { ResponsiveInfiniteTable } from '../../../../../shared/InfiniteTable'
 import IgnoreRuleEditModal from './IgnoreRuleEditModal'
 import SimulatorModal from './SimulatorModal'
 import { showAlert, showPrompt, showConfirm } from '../../../../../shared/Alert'
-import DeviceWizard from '../../../../../shared/wizard/DeviceWizard'
+import DeviceWizardContainer from '../../../../../../containers/shared/wizard/DeviceWizardContainer'
 import CopyRuleModal from './CopyRuleModal'
 
 import MainTabs from '../MainTabs'
@@ -207,7 +207,7 @@ export default class MainRules extends React.Component {
     }
 
     appendComponent(
-      <DeviceWizard
+      <DeviceWizardContainer
         deviceType="devicerule"
         onClose={removeComponent}
         extraParams={extra}
@@ -245,7 +245,7 @@ export default class MainRules extends React.Component {
     }
 
     appendComponent(
-      <DeviceWizard
+      <DeviceWizardContainer
         deviceType="devicerule"
         onClose={removeComponent}
         extraParams={extra}

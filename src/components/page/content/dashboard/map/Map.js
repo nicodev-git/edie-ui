@@ -6,7 +6,7 @@ import MapCanvas from '../../../../shared/map/MapCanvas'
 import MapToolbar from './MapToolbar'
 import DeviceDragLayer from './DeviceDragLayer'
 
-import DeviceWizard from '../../../../shared/wizard/DeviceWizard'
+import DeviceWizardContainer from '../../../../../containers/shared/wizard/DeviceWizardContainer'
 import { wizardConfig } from '../../../../shared/wizard/WizardConfig'
 import { showConfirm } from '../../../../shared/Alert'
 
@@ -149,18 +149,18 @@ export default class Map extends React.Component {
     }
 
     return (
-            <DeviceWizard
-              deviceType={options.type}
-              onClose={() => {
-                this.setState({deviceWizardVisible: false})
-                closeCallback && closeCallback()
-              }}
-              title={options.title}
-              monitors={options.monitors}
-              extraParams={extra}
-              configParams={config}
-              onFinish={this.onFinishAddWizard.bind(this, callback)}
-            />
+      <DeviceWizardContainer
+        deviceType={options.type}
+        onClose={() => {
+          this.setState({deviceWizardVisible: false})
+          closeCallback && closeCallback()
+        }}
+        title={options.title}
+        monitors={options.monitors}
+        extraParams={extra}
+        configParams={config}
+        onFinish={this.onFinishAddWizard.bind(this, callback)}
+      />
     )
   }
 
