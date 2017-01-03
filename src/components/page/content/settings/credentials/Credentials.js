@@ -1,9 +1,8 @@
 import React from 'react'
 import {
-    ButtonGroup,
-    Button
+  ButtonGroup,
+  Button
 } from 'react-bootstrap'
-import { connect } from 'react-redux'
 
 import { ResponsiveInfiniteTable } from '../../../../shared/InfiniteTable'
 import { showAlert, showConfirm } from '../../../../shared/Alert'
@@ -15,13 +14,7 @@ import TabPage from '../../../../shared/TabPage'
 import TabPageBody from '../../../../shared/TabPageBody'
 import TabPageHeader from '../../../../shared/TabPageHeader'
 
-import {
-  fetchCredentials,
-  openCredentialsModal,
-  removeCredentials
-} from '../../../../../actions'
-
-class Credentials extends React.Component {
+export default class Credentials extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -39,13 +32,13 @@ class Credentials extends React.Component {
       'columnName': 'username'
     }]
 
-        // this.listeners = {
-        //     [EVENTS.CREDENTIALS_ADD_CLICKED]: this.onAddCred.bind(this),
-        //     [EVENTS.CREDENTIALS_EDIT_CLICKED]: this.onEditCred.bind(this),
-        //     [EVENTS.CREDENTIALS_REMOVE_CLICKED]: this.onRemoveCred.bind(this),
-        //
-        //     [EVENTS.CREDENTIALS_KEYWORD_CHANGED]: this.onKeywordChanged.bind(this),
-        // }
+    // this.listeners = {
+    //     [EVENTS.CREDENTIALS_ADD_CLICKED]: this.onAddCred.bind(this),
+    //     [EVENTS.CREDENTIALS_EDIT_CLICKED]: this.onEditCred.bind(this),
+    //     [EVENTS.CREDENTIALS_REMOVE_CLICKED]: this.onRemoveCred.bind(this),
+    //
+    //     [EVENTS.CREDENTIALS_KEYWORD_CHANGED]: this.onKeywordChanged.bind(this),
+    // }
   }
 
   componentWillMount () {
@@ -86,11 +79,9 @@ class Credentials extends React.Component {
   renderCredentialsModal () {
     if (!this.props.credentialsModalVisible) return null
     return (
-            <CredentialModal />
+      <CredentialModal />
     )
   }
-
-    // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   getTable () {
     return this.refs.credentials.refs.wrappedInstance
@@ -165,20 +156,3 @@ class Credentials extends React.Component {
     )
   }
 }
-
-Credentials.defaultProps = {}
-
-function mapStateToProps (state) {
-  return {
-    credentials: state.settings.credentials,
-    credentialsModalVisible: state.settings.credentialsModalVisible
-  }
-}
-
-const actions = {
-  fetchCredentials,
-  openCredentialsModal,
-  removeCredentials
-}
-
-export default connect(mapStateToProps, actions)(Credentials)

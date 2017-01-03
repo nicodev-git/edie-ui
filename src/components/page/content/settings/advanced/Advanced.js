@@ -14,16 +14,16 @@ import TabPage from '../../../../shared/TabPage'
 import TabPageBody from '../../../../shared/TabPageBody'
 import TabPageHeader from '../../../../shared/TabPageHeader'
 
-class Advanced extends React.Component {
+export default class Advanced extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
       pageIndex: 0
     }
 
-        // this.listeners = {
-        //     [EVENTS.ADVANCED_TAB_CLICKED]: this.onTabClicked.bind(this),
-        // }
+    // this.listeners = {
+    //     [EVENTS.ADVANCED_TAB_CLICKED]: this.onTabClicked.bind(this),
+    // }
   }
 
   renderContent () {
@@ -34,8 +34,6 @@ class Advanced extends React.Component {
 
     return <MainSettings />
   }
-
-    // ///////////////////////////////////////////
 
   onClickTab (pageIndex) {
     this.setState({ pageIndex })
@@ -88,7 +86,3 @@ class Advanced extends React.Component {
     )
   }
 }
-
-Advanced.defaultProps = {}
-
-export default Advanced

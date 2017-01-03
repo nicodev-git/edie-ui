@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import Modal from 'react-bootstrap-modal'
 import {
     Button
@@ -13,7 +13,7 @@ import GroupsModal from './GroupsModal'
 
 import { ROOT_URL } from '../../../../../../actions/config'
 
-class RoutingModal extends React.Component {
+export default class RoutingModal extends Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -274,5 +274,3 @@ RoutingModal.defaultProps = {
   onClose: null,
   routing: null
 }
-
-export default RoutingModal

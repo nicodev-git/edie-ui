@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import Slider from 'rc-slider'
 import {
   // findIndex, // Never used
@@ -21,7 +21,7 @@ import Preloader from '../../../shared/Preloader'
 import { format } from '../../../../shared/Global'
 import { ROOT_URL } from '../../../../actions/config'
 
-class ThreatMap extends React.Component {
+export default class ThreatMap extends Component {
 
   constructor (props) {
     super(props)
@@ -1533,7 +1533,3 @@ class ThreatMap extends React.Component {
     )
   }
 }
-
-ThreatMap.defaultProps = {}
-
-export default ThreatMap

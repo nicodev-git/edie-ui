@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { ROOT_URL } from '../../../../../actions/config'
 
-class MainSettings extends React.Component {
+export default class MainSettings extends Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -32,8 +32,6 @@ class MainSettings extends React.Component {
     })
   }
 
-    // ///////////////////////////////////////////
-
   updateOption (name, value, param) {
     if (!name) return false
     value = value || ''
@@ -63,7 +61,3 @@ class MainSettings extends React.Component {
     )
   }
 }
-
-MainSettings.defaultProps = {}
-
-export default MainSettings

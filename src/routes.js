@@ -21,7 +21,7 @@ import SettingRules from './components/page/content/settings/rule/Rules'
 import SettingMaps from './components/page/content/settings/maps/Maps'
 import SettingUsers from './components/page/content/settings/users/Users'
 import SettingIdentity from './components/page/content/settings/identity/Identities'
-import SettingCredentials from './components/page/content/settings/credentials/Credentials'
+import SettingCredentialsContainer from './containers/page/content/settings/credentials/CredentialsContainer'
 import SettingTemplates from './components/page/content/settings/template/Templates'
 import SettingAdvanced from './components/page/content/settings/advanced/Advanced'
 
@@ -67,7 +67,7 @@ export default(
         <Route path="maps" component={SettingMaps} />
         <Route path="users" component={SettingUsers} />
         <Route path="identities" component={SettingIdentity} />
-        <Route path="credentials" component={SettingCredentials} />
+        <Route path="credentials" component={SettingCredentialsContainer} />
         <Route path="templates" component={SettingTemplates} />
         <Route path="advanced" component={SettingAdvanced} />
       </Route>

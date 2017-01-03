@@ -44,20 +44,16 @@ class Routing extends React.Component {
       }
     }]
 
-        // this.listeners = {
-        //     [EVENTS.ROUTING_ADD_CLICKED]: this.onAddRouting.bind(this),
-        //     [EVENTS.ROUTING_EDIT_CLICKED]: this.onEditRouting.bind(this),
-        // }
+    // this.listeners = {
+    //     [EVENTS.ROUTING_ADD_CLICKED]: this.onAddRouting.bind(this),
+    //     [EVENTS.ROUTING_EDIT_CLICKED]: this.onEditRouting.bind(this),
+    // }
   }
-
-    // ////////////////////////
 
   onAddRouting () {
     appendComponent(
-            <RoutingModal
-              onClose={this.onCloseRoutingModal.bind(this)}
-            />
-        )
+      <RoutingModal onClose={this.onCloseRoutingModal.bind(this)} />
+    )
   }
 
   onCloseRoutingModal (modal, routing) {

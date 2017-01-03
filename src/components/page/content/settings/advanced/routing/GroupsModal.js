@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 
 import Modal from 'react-bootstrap-modal'
 import {
@@ -8,7 +8,7 @@ import {
 import InfiniteTable from '../../../../../shared/InfiniteTable'
 import { showAlert } from '../../../../../shared/Alert'
 
-class GroupsModal extends React.Component {
+export default class GroupsModal extends Component {
   constructor (props) {
     super(props)
 
@@ -90,5 +90,3 @@ class GroupsModal extends React.Component {
 GroupsModal.defaultProps = {
   onClose: null
 }
-
-export default GroupsModal

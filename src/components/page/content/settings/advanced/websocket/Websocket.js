@@ -3,7 +3,7 @@ import { ChromePicker } from 'react-color'
 import { showAlert } from '../../../../../shared/Alert'
 import { ROOT_URL } from '../../../../../../actions/config'
 
-class Websocket extends React.Component {
+export default class Websocket extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -76,8 +76,6 @@ class Websocket extends React.Component {
       showAlert(res.success ? 'Notified!' : 'Failed!')
     })
   }
-
-    // //////////////////////////////////////
 
   onClickUpdateColor () {
     $.get(`${ROOT_URL}${Api.test.changeConnectorColor}`, { // eslint-disable-line no-undef
@@ -223,7 +221,3 @@ class Websocket extends React.Component {
     )
   }
 }
-
-Websocket.defaultProps = {}
-
-export default Websocket

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import {
     ButtonGroup,
     Button,
@@ -13,7 +13,7 @@ import {
 } from 'shared/event/Emitter'
 import { EVENTS } from 'shared/event/Events'
 
-class AdvancedOptions extends React.Component {
+export default class AdvancedOptions extends Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -25,37 +25,35 @@ class AdvancedOptions extends React.Component {
     const { pageIndex } = this.state
 
     return (
-            <div className="tab-header">
-                <div>
-                    <span className="tab-title">Settings</span>
-                </div>
-                <div className="text-center margin-md-top">
+      <div className="tab-header">
+        <div>
+          <span className="tab-title">Settings</span>
+        </div>
+        <div className="text-center margin-md-top">
 
-                    <div style={{position: 'absolute', right: '25px'}}>
-                        <ButtonGroup>
+          <div style={{position: 'absolute', right: '25px'}}>
+            <ButtonGroup>
 
-                            <DropdownButton title="Routing" id="dd-setting-routing" pullRight
-                              className={pageIndex === 2 ? '' : 'hidden'}>
-                                <MenuItem eventKey="1" onClick={emit.bind(null, EVENTS.ROUTING_ADD_CLICKED)}>Add</MenuItem>
-                                <MenuItem eventKey="2" onClick={emit.bind(null, EVENTS.ROUTING_EDIT_CLICKED)}>Edit</MenuItem>
-                            </DropdownButton>
+              <DropdownButton title="Routing" id="dd-setting-routing" pullRight className={pageIndex === 2 ? '' : 'hidden'}>
+                <MenuItem eventKey="1" onClick={emit.bind(null, EVENTS.ROUTING_ADD_CLICKED)}>Add</MenuItem>
+                <MenuItem eventKey="2" onClick={emit.bind(null, EVENTS.ROUTING_EDIT_CLICKED)}>Edit</MenuItem>
+              </DropdownButton>
 
-                            <DropdownButton title={<i className="fa fa-gear"/>}
-                              id="dd-setting-adv-more" pullRight>
+              <DropdownButton title={<i className="fa fa-gear"/>} id="dd-setting-adv-more" pullRight>
 
-                                <MenuItem eventKey="1" onClick={this.onClickTab.bind(this, 0)}>
-                                    <span className={pageIndex === 0 ? 'text-bold' : ''}>Main</span></MenuItem>
-                                <MenuItem eventKey="2" onClick={this.onClickTab.bind(this, 1)}>
-                                    <span className={pageIndex === 1 ? 'text-bold' : ''}>Websocket</span></MenuItem>
-                                <MenuItem eventKey="3" onClick={this.onClickTab.bind(this, 2)}>
-                                    <span className={pageIndex === 2 ? 'text-bold' : ''}>Routing</span></MenuItem>
+                <MenuItem eventKey="1" onClick={this.onClickTab.bind(this, 0)}>
+                    <span className={pageIndex === 0 ? 'text-bold' : ''}>Main</span></MenuItem>
+                <MenuItem eventKey="2" onClick={this.onClickTab.bind(this, 1)}>
+                    <span className={pageIndex === 1 ? 'text-bold' : ''}>Websocket</span></MenuItem>
+                <MenuItem eventKey="3" onClick={this.onClickTab.bind(this, 2)}>
+                    <span className={pageIndex === 2 ? 'text-bold' : ''}>Routing</span></MenuItem>
 
-                            </DropdownButton>
+              </DropdownButton>
 
-                        </ButtonGroup>
-                    </div>
-                </div>
-            </div>
+            </ButtonGroup>
+          </div>
+        </div>
+      </div>
     )
   }
 
@@ -65,7 +63,3 @@ class AdvancedOptions extends React.Component {
   }
 
 }
-
-AdvancedOptions.defaultProps = {}
-
-export default AdvancedOptions

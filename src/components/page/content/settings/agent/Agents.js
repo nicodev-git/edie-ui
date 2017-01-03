@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import TimeAgo from 'react-timeago'
 import moment from 'moment'
 import {
@@ -8,7 +8,7 @@ import {
     MenuItem
 } from 'react-bootstrap'
 
-import {findIndex, assign} from 'lodash'
+import { findIndex, assign } from 'lodash'
 
 import SettingTabs from '../SettingTabs'
 import TabPage from '../../../../shared/TabPage'
@@ -19,7 +19,7 @@ import InfiniteTable from '../../../../shared/InfiniteTable'
 
 import { ROOT_URL } from '../../../../../actions/config'
 
-class Agents extends React.Component {
+export default class Agents extends Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -159,51 +159,51 @@ class Agents extends React.Component {
 
     if (tabIndex === 1) {
       table = (
-                <InfiniteTable
-                  url="/devices/getAgentDevicesDT"
-                  params={{
-                    installed: this.state.install
-                  }}
-                  cells={this.state.cellAgents}
-                  rowMetadata={{'key': 'id'}}
-                  selectable
-                  bodyHeight={this.props.containerHeight}
-                  pageSize={500}
-                  ref="agents"
+        <InfiniteTable
+          url="/devices/getAgentDevicesDT"
+          params={{
+            installed: this.state.install
+          }}
+          cells={this.state.cellAgents}
+          rowMetadata={{'key': 'id'}}
+          selectable
+          bodyHeight={this.props.containerHeight}
+          pageSize={500}
+          ref="agents"
 
-                  onRowDblClick={this.onClickEditAgentConfig.bind(this)}
-                />
-            )
+          onRowDblClick={this.onClickEditAgentConfig.bind(this)}
+        />
+      )
     } else if (tabIndex === 2) {
       table = (
-                <InfiniteTable
-                  url="/devices/getAgentsTable"
-                  params={{}}
-                  cells={this.state.cellCollectors}
-                  rowMetadata={{'key': 'id'}}
-                  selectable
-                  bodyHeight={this.props.containerHeight}
-                  ref="collectors"
-                />
-            )
+        <InfiniteTable
+          url="/devices/getAgentsTable"
+          params={{}}
+          cells={this.state.cellCollectors}
+          rowMetadata={{'key': 'id'}}
+          selectable
+          bodyHeight={this.props.containerHeight}
+          ref="collectors"
+        />
+      )
     } else if (tabIndex === 3) {
       table = (
-                <InfiniteTable
-                  url="/admin/getAgentsLogs"
-                  params={{}}
-                  cells={this.state.cellLog}
-                  rowMetadata={{'key': 'idagentslog'}}
-                  selectable
-                  bodyHeight={this.props.containerHeight}
-                  ref="agentlogs"
-                />
-            )
+        <InfiniteTable
+          url="/admin/getAgentsLogs"
+          params={{}}
+          cells={this.state.cellLog}
+          rowMetadata={{'key': 'idagentslog'}}
+          selectable
+          bodyHeight={this.props.containerHeight}
+          ref="agentlogs"
+        />
+      )
     }
 
     return (
-            <div>
-                {table}
-            </div>
+      <div>
+          {table}
+      </div>
     )
   }
 
@@ -273,8 +273,6 @@ class Agents extends React.Component {
     let url = `${Api.devices.downloadAgentConfig}?id=${selected.id}&server=${document.location.hostname}` // eslint-disable-line no-undef
     window.open(url, '_blank')
   }
-
-    // //////////////////////////////////////////////////////////////////////////////////////////////////
 
   onClickAddCollector () {
 
@@ -358,10 +356,4 @@ class Agents extends React.Component {
       </TabPage>
     )
   }
-
-    // //////////////////////////////////////////////////////////////////////////////////////////////////
 }
-
-Agents.defaultProps = {}
-
-export default Agents
