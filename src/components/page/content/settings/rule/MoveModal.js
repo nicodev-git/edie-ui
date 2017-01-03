@@ -1,11 +1,11 @@
-import React from 'react'
+import React, { Component } from 'react'
 import Modal from 'react-bootstrap-modal'
 import {
     Button
 } from 'react-bootstrap'
 import { ROOT_URL } from '../../../../../actions/config'
 
-class MoveModal extends React.Component {
+export default class MoveModal extends Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -33,8 +33,6 @@ class MoveModal extends React.Component {
   onClickClose () {
     this.closeModal()
   }
-
-    // ////////////////////////////////////////////////////////////////////////
 
   onClickMove () {
     this.closeModal(this.refs.category.value)
@@ -80,7 +78,3 @@ class MoveModal extends React.Component {
     )
   }
 }
-
-MoveModal.defaultProps = {}
-
-export default MoveModal

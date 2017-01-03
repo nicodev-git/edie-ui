@@ -14,7 +14,7 @@ import {
 import { EVENTS } from 'shared/event/Events'
 import { ROOT_URL } from '../../../../../actions/config'
 
-class RuleOptions extends React.Component {
+export default class RuleOptions extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -58,65 +58,65 @@ class RuleOptions extends React.Component {
     const props = this.props
 
     return (
-            <div className="tab-header">
-                <div className="margin-md-bottom">
-                    <span className="tab-title">Settings</span>
-                </div>
-                <div className="text-center col-md-12 p-none">
-                    <div className="pull-left form-inline">
-                        <select className={`form-control ${tabIndex === 1 ? '' : 'hidden'}`}
-                          onChange={this.onChangeCategory.bind(this)}>
-                            {
-                                this.state.categories.map(item =>
-                                    <option value={item.id} key={item.id}>{item.name}</option>
-                                )
-                            }
-                        </select>
+      <div className="tab-header">
+        <div className="margin-md-bottom">
+            <span className="tab-title">Settings</span>
+        </div>
+        <div className="text-center col-md-12 p-none">
+          <div className="pull-left form-inline">
+            <select className={`form-control ${tabIndex === 1 ? '' : 'hidden'}`}
+              onChange={this.onChangeCategory.bind(this)}>
+                {
+                    this.state.categories.map(item =>
+                        <option value={item.id} key={item.id}>{item.name}</option>
+                    )
+                }
+            </select>
 
-                        <Button className={tabIndex === 1 ? '' : 'hidden'}
-                          onClick={this.onClickEditCategory.bind(this)}>Edit</Button>
-                    </div>
+            <Button className={tabIndex === 1 ? '' : 'hidden'}
+              onClick={this.onClickEditCategory.bind(this)}>Edit</Button>
+          </div>
 
-                    <div style={{position: 'absolute', right: '25px'}}>
-                        <ButtonGroup className={tabIndex === 1 ? '' : 'hidden'}>
+          <div style={{position: 'absolute', right: '25px'}}>
+            <ButtonGroup className={tabIndex === 1 ? '' : 'hidden'}>
 
-                            <Button onClick={emit.bind(null, EVENTS.RULE_OPEN_LOGICAL_CLICKED)}>Open</Button>
-                            <Button onClick={emit.bind(null, EVENTS.RULE_MOVE_LOGICAL_CLICKED)}>Move</Button>
-                            <Button onClick={emit.bind(null, EVENTS.RULE_BACKUP_CLICKED)}>Backup</Button>
-                            <Button onClick={emit.bind(null, EVENTS.RULE_RESTORE_CLICKED)}>Restore</Button>
+              <Button onClick={emit.bind(null, EVENTS.RULE_OPEN_LOGICAL_CLICKED)}>Open</Button>
+              <Button onClick={emit.bind(null, EVENTS.RULE_MOVE_LOGICAL_CLICKED)}>Move</Button>
+              <Button onClick={emit.bind(null, EVENTS.RULE_BACKUP_CLICKED)}>Backup</Button>
+              <Button onClick={emit.bind(null, EVENTS.RULE_RESTORE_CLICKED)}>Restore</Button>
 
-                        </ButtonGroup>
+            </ButtonGroup>
 
-                        <select className={`form-control ${tabIndex === -1 ? '' : 'hidden'}`}
-                          onChange={this.onChangeDeviceType.bind(this)}>
-                            {
-                                this.state.deviceTypes.map(item =>
-                                    <option value={item.id} key={item.id}>{item.devicename}</option>
-                                )
-                            }
-                        </select>
+            <select className={`form-control ${tabIndex === -1 ? '' : 'hidden'}`}
+              onChange={this.onChangeDeviceType.bind(this)}>
+                {
+                  this.state.deviceTypes.map(item =>
+                    <option value={item.id} key={item.id}>{item.devicename}</option>
+                  )
+                }
+            </select>
 
-                        <ButtonGroup className={tabIndex === 2 ? '' : 'hidden'}>
+            <ButtonGroup className={tabIndex === 2 ? '' : 'hidden'}>
 
-                            <Button onClick={this.onClickBack.bind(this)}>Back</Button>
-                            <Button onClick={emit.bind(null, EVENTS.RULE_BACKUP_CLICKED)}>Backup</Button>
-                            <Button onClick={emit.bind(null, EVENTS.RULE_RESTORE_CLICKED)}>Restore</Button>
+              <Button onClick={this.onClickBack.bind(this)}>Back</Button>
+              <Button onClick={emit.bind(null, EVENTS.RULE_BACKUP_CLICKED)}>Backup</Button>
+              <Button onClick={emit.bind(null, EVENTS.RULE_RESTORE_CLICKED)}>Restore</Button>
 
-                        </ButtonGroup>
+            </ButtonGroup>
 
-                    </div>
+          </div>
 
-                    <div className="inline">
-                        <input type="text" placeholder="Search" className="form-control"
-                          style={{width: '220px', paddingLeft: '35px'}}
-                          onKeyUp={this.onSearchKeyUp.bind(this)}
-                          ref="search"/>
-                        <a className="btn" href="javascript:;" style={{position: 'absolute', left: 0, top: 0}}>
-                            <i className="fa fa-search" />
-                        </a>
-                    </div>
-                </div>
-            </div>
+          <div className="inline">
+            <input type="text" placeholder="Search" className="form-control"
+              style={{width: '220px', paddingLeft: '35px'}}
+              onKeyUp={this.onSearchKeyUp.bind(this)}
+              ref="search"/>
+            <a className="btn" href="javascript:;" style={{position: 'absolute', left: 0, top: 0}}>
+                <i className="fa fa-search" />
+            </a>
+          </div>
+        </div>
+      </div>
     )
   }
 
@@ -149,9 +149,3 @@ class RuleOptions extends React.Component {
 
   }
 }
-
-RuleOptions.defaultProps = {
-
-}
-
-export default RuleOptions

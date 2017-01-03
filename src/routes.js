@@ -17,7 +17,7 @@ import ThreatMap from './components/page/content/threatmap/Threatmap'
 import Settings from './components/page/content/settings/Settings'
 import SettingGeneralContainer from './containers/page/content/settings/general/GeneralContainer'
 import SettingAgent from './components/page/content/settings/agent/Agents'
-import SettingRules from './components/page/content/settings/rule/Rules'
+import SettingRulesContainer from './containers/page/content/settings/rule/RulesContainer'
 import SettingMapsContainer from './containers/page/content/settings/maps/MapsContainer'
 import SettingUsers from './components/page/content/settings/users/Users'
 import SettingIdentitiesContainer from './containers/page/content/settings/identity/IdentitiesContainer'
@@ -63,7 +63,7 @@ export default(
       <Route path="settings" component={Settings}>
         <Route path="general" component={SettingGeneralContainer} />
         <Route path="agents" component={SettingAgent} />
-        <Route path="rules" component={SettingRules} />
+        <Route path="rules" component={SettingRulesContainer} />
         <Route path="maps" component={SettingMapsContainer} />
         <Route path="users" component={SettingUsers} />
         <Route path="identities" component={SettingIdentitiesContainer} />

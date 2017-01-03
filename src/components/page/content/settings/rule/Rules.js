@@ -1,11 +1,10 @@
 import React from 'react'
 import {
-    ButtonGroup,
-    Button
+  ButtonGroup,
+  Button
 } from 'react-bootstrap'
-import { connect } from 'react-redux'
 
-import {ResponsiveInfiniteTable} from '../../../../shared/InfiniteTable'
+import { ResponsiveInfiniteTable } from '../../../../shared/InfiniteTable'
 import { appendComponent, removeComponent } from '../../../../../util/Component'
 import { showAlert } from '../../../../shared/Alert'
 
@@ -18,10 +17,9 @@ import MoveModal from './MoveModal'
 import BackupModal from './BackupModal'
 import RestoreModal from './RestoreModal'
 import WorkflowModal from './WorkflowModal'
-import { fetchWorkflows, openWorkflowModal, removeWorkflow } from '../../../../../actions'
 import { ROOT_URL } from '../../../../../actions/config'
 
-class Rules extends React.Component {
+export default class Rules extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -92,16 +90,16 @@ class Rules extends React.Component {
 
   renderContent () {
     return (
-            <ResponsiveInfiniteTable
-              cells={this.cellLogicals}
-              ref="logicalRules"
-              rowMetadata={{'key': 'id'}}
-              selectable
-              onRowDblClick={this.onEditWorkflow.bind(this)}
+      <ResponsiveInfiniteTable
+        cells={this.cellLogicals}
+        ref="logicalRules"
+        rowMetadata={{'key': 'id'}}
+        selectable
+        onRowDblClick={this.onEditWorkflow.bind(this)}
 
-              useExternal={false}
-              data={this.props.workflows}
-            />
+        useExternal={false}
+        data={this.props.workflows}
+      />
     )
   }
 
@@ -160,8 +158,6 @@ class Rules extends React.Component {
   getTable () {
     return this.refs.logicalRules.refs.wrappedInstance
   }
-
-    // /////////////////////////////////////
 
   onChangeDeviceType () {
 
@@ -233,15 +229,13 @@ class Rules extends React.Component {
     this.props.removeWorkflow(selected)
   }
 
-    // ////////////////////////////////////////
-
   onMoveRule () {
     const selected = this.refs.logicalRules.getSelected()
     if (!selected) return showAlert('Please select row.')
 
     appendComponent(
-            <MoveModal onClose={this.onCloseMoveModal.bind(this)}/>
-        )
+      <MoveModal onClose={this.onCloseMoveModal.bind(this)}/>
+    )
   }
 
   onCloseMoveModal (modal, category) {
@@ -263,23 +257,21 @@ class Rules extends React.Component {
     })
   }
 
-    // ////////////////////////////////////////
-
   onBackup () {
     appendComponent(
-            <BackupModal onClose={removeComponent}/>
-        )
+      <BackupModal onClose={removeComponent}/>
+    )
   }
 
   onRestore () {
     appendComponent(
-            <RestoreModal onClose={(modal, success) => {
-              removeComponent(modal)
-              success &&
-                this.refs.logicalRules &&
-                this.refs.logicalRules.refresh()
-            }}/>
-        )
+      <RestoreModal onClose={(modal, success) => {
+        removeComponent(modal)
+        success &&
+          this.refs.logicalRules &&
+          this.refs.logicalRules.refresh()
+      }}/>
+    )
   }
 
   render () {
@@ -307,18 +299,3 @@ class Rules extends React.Component {
     )
   }
 }
-
-Rules.defaultProps = {}
-
-function mapStateToProps (state) {
-  return {
-    workflows: state.settings.workflows,
-    workflowModalVisible: state.settings.workflowModalVisible
-  }
-}
-
-const actions = {
-  fetchWorkflows, openWorkflowModal, removeWorkflow
-}
-
-export default connect(mapStateToProps, actions)(Rules)

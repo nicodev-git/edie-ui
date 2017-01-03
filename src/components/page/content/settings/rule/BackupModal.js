@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import Modal from 'react-bootstrap-modal'
 import {
     Button
@@ -6,7 +6,7 @@ import {
 import { showAlert } from '../../../../shared/Alert'
 import { ROOT_URL } from '../../../../../actions/config'
 
-class BackupModal extends React.Component {
+export default class BackupModal extends Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -93,7 +93,3 @@ class BackupModal extends React.Component {
     )
   }
 }
-
-BackupModal.defaultProps = {}
-
-export default BackupModal
