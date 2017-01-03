@@ -15,7 +15,7 @@ import TabPageHeader from '../../../../shared/TabPageHeader'
 import { appendComponent, removeComponent } from '../../../../../util/Component'
 import { showAlert, showConfirm } from '../../../../shared/Alert'
 
-import IdentityModal from './IdentityModal'
+import IdentityModalContainer from '../../../../../containers/page/content/settings/identity/IdentityModalContainer'
 import SegmentListModal from './SegmentListModal'
 
 export default class Identities extends React.Component {
@@ -86,7 +86,7 @@ export default class Identities extends React.Component {
   renderIdentityModal () {
     if (!this.props.identityModalVisible) return null
     return (
-      <IdentityModal />
+      <IdentityModalContainer />
     )
   }
 

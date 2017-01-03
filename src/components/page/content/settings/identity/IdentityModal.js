@@ -4,10 +4,7 @@ import {
     Button
 } from 'react-bootstrap'
 import { reduxForm, Field } from 'redux-form'
-import { connect } from 'react-redux'
 import { assign } from 'lodash'
-
-import { closeIdentityModal, addIdentity, updateIdentity } from '../../../../../actions'
 
 const renderInput = field => (
     <div className="row margin-md-bottom">
@@ -93,26 +90,6 @@ class IdentityModal extends React.Component { // eslint-disable-line react/no-mu
   }
 }
 
-IdentityModal.defaultProps = {
-
-}
-
-function mapStateToProps (state) {
-  const {editIdentity} = state.settings
-  return {
-    editIdentity,
-    initialValues: (editIdentity || {}).identities
-  }
-}
-
-const actions = {
-  closeIdentityModal,
-  addIdentity,
-  updateIdentity
-}
-
-export default connect(mapStateToProps, actions)(
-  reduxForm({
-    form: 'identityEditForm'
-  })(IdentityModal)
-)
+export default  reduxForm({
+  form: 'identityEditForm'
+})(IdentityModal)
