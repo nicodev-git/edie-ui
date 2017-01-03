@@ -1,5 +1,5 @@
 import React from 'react'
-import {appendComponent, removeComponent} from '../../../../util/Component'
+import { appendComponent, removeComponent } from '../../../../util/Component'
 import { InputBase } from 'react-serial-forms'
 import PortModal from './PortModal'
 
@@ -39,16 +39,16 @@ export default class PortList extends InputBase {
 
     this.state.items.forEach((item, i) => {
       ports.push(
-                <div className="col-md-4 p-none pb-custom" key={i}>
-                    <label>
-                        <input type="checkbox"
-                          value={item.value}
-                          checked={this.state.selected.indexOf(i) >= 0}
-                          onChange={this.onChange.bind(this, i)}/>
-                        <span className="margin-xs-left">{item.display}</span>
-                    </label>
-                </div>
-            )
+        <div className="col-md-4 p-none pb-custom" key={i}>
+          <label>
+            <input type="checkbox"
+              value={item.value}
+              checked={this.state.selected.indexOf(i) >= 0}
+              onChange={this.onChange.bind(this, i)}/>
+            <span className="margin-xs-left">{item.display}</span>
+          </label>
+        </div>
+      )
     })
 
     let extra = []
@@ -58,17 +58,17 @@ export default class PortList extends InputBase {
     })
 
     return (
-            <div data-name={config.name}>
-                <div className="row" style={{margin: '8px 0 0 0'}}>
-                    {ports}
-                </div>
-                <div className="row" style={{margin: 0}}>
-                    <div className="col-md-1">
-                        <a href="javascript:;" onClick={this.onClickAdd.bind(this)}>Add</a>
-                    </div>
-                    {extra}
-                </div>
-            </div>
+      <div data-name={config.name}>
+        <div className="row" style={{margin: '8px 0 0 0'}}>
+          {ports}
+        </div>
+        <div className="row" style={{margin: 0}}>
+          <div className="col-md-1">
+              <a href="javascript:;" onClick={this.onClickAdd.bind(this)}>Add</a>
+          </div>
+          {extra}
+        </div>
+      </div>
     )
   }
 
@@ -76,8 +76,8 @@ export default class PortList extends InputBase {
 
   onClickAdd () {
     appendComponent(
-            <PortModal onClose={this.onCloseModal.bind(this)}/>
-        )
+      <PortModal onClose={this.onCloseModal.bind(this)}/>
+    )
   }
 
   onCloseModal (modal, data) {

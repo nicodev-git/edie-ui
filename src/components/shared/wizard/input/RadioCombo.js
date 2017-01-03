@@ -34,8 +34,6 @@ export default class RadioCombo extends React.Component {
     }
   }
 
-    // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
   buildContent () {
     let config = this.props.config
     let optionItems = config.items || []
@@ -100,8 +98,6 @@ export default class RadioCombo extends React.Component {
     )
 
     content = this.buildContent()
-
-    // /////////////////////////////////////////////////////////////////////
 
     return (
       <div className="">

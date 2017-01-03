@@ -27,69 +27,67 @@ export default class MatchIgnore extends InputBase {
   render () {
     return (
       <div className="panel-body p-none" style={{minHeight: '300px'}}>
-          <div className="panel panel-default panel-noborder">
-              <div className="panel-heading">
-                  <h4 className="panel-title">Match List</h4>
-                  <div className="panel-options">
-                      <a href="javascript:;"
-                        className="option"
-                        onClick={this.onClickDelete.bind(this)}>
-                          <i className="fa fa-trash-o" />
-                      </a>
-                      <a href="javascript:;"
-                        className="option"
-                        onClick={this.onClickAdd.bind(this)}>
-                          <i className="fa fa-plus-square" />
-                      </a>
-                      <a href="javascript:;"
-                        className="option"
-                        onClick={this.onClickEdit.bind(this)}>
-                          <i className="fa fa-edit" />
-                      </a>
-                  </div>
-              </div>
-              <div className="panel-body" style={{maxHeight: '250px', overflowY: 'auto', overflowX: 'hidden'}}>
-                  <div className="form-inline text-right">
-                      <input type="text" className="input-sm form-control" placeholder="Search..."
-                        ref="search"
-                        onChange={this.filter.bind(this)}/>
-                  </div>
-                  <table className="table dataTable hover">
-                      <thead>
-                      <tr>
-                          <th width="5%">Match</th>
-                          <th width="5%">Ignore</th>
-                          <th width="5%">Occurrence</th>
-                      </tr>
-                      </thead>
-                      <tbody>
-                      {
-                          this.state.data.map((item, i) =>
-                              (item.match.includes(this.state.keyword) ||
-                              item.ignore.includes(this.state.keyword))
-                                ? (
-                                      <tr key={i}
-                                        className={this.state.selected === i ? 'selected' : ''}
-                                        onClick={() => { this.setState({selected: i}) }}>
-
-                                          <td>{item.match}</td>
-                                          <td>{item.ignore}</td>
-                                          <td>{item.occurrence}</td>
-
-                                      </tr>
-                                  )
-                                : null
-                          )
-                      }
-                      </tbody>
-                  </table>
-              </div>
+        <div className="panel panel-default panel-noborder">
+          <div className="panel-heading">
+            <h4 className="panel-title">Match List</h4>
+            <div className="panel-options">
+              <a href="javascript:;"
+                className="option"
+                onClick={this.onClickDelete.bind(this)}>
+                  <i className="fa fa-trash-o" />
+              </a>
+              <a href="javascript:;"
+                className="option"
+                onClick={this.onClickAdd.bind(this)}>
+                  <i className="fa fa-plus-square" />
+              </a>
+              <a href="javascript:;"
+                className="option"
+                onClick={this.onClickEdit.bind(this)}>
+                  <i className="fa fa-edit" />
+              </a>
+            </div>
           </div>
+          <div className="panel-body" style={{maxHeight: '250px', overflowY: 'auto', overflowX: 'hidden'}}>
+            <div className="form-inline text-right">
+                <input type="text" className="input-sm form-control" placeholder="Search..."
+                  ref="search"
+                  onChange={this.filter.bind(this)}/>
+            </div>
+            <table className="table dataTable hover">
+              <thead>
+              <tr>
+                <th width="5%">Match</th>
+                <th width="5%">Ignore</th>
+                <th width="5%">Occurrence</th>
+              </tr>
+              </thead>
+              <tbody>
+              {
+                this.state.data.map((item, i) =>
+                  (item.match.includes(this.state.keyword) ||
+                  item.ignore.includes(this.state.keyword))
+                    ? (
+                      <tr key={i}
+                        className={this.state.selected === i ? 'selected' : ''}
+                        onClick={() => { this.setState({selected: i}) }}>
+
+                          <td>{item.match}</td>
+                          <td>{item.ignore}</td>
+                          <td>{item.occurrence}</td>
+
+                      </tr>
+                      )
+                    : null
+                )
+              }
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
     )
   }
-
-    // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   filter () {
     this.setState({

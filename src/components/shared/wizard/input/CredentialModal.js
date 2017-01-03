@@ -8,7 +8,7 @@ import CredentialEditModal from './CredentialEditModal'
 import { showAlert, showConfirm } from '../../../shared/Alert'
 import { ROOT_URL } from '../../../../actions/config'
 
-class CredentialModal extends React.Component {
+export default class CredentialModal extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -47,11 +47,11 @@ class CredentialModal extends React.Component {
 
   onClickAdd () {
     appendComponent(
-            <CredentialEditModal onClose={modal => {
-              removeComponent(modal)
-              this.refreshTable()
-            }}/>
-        )
+      <CredentialEditModal onClose={modal => {
+        removeComponent(modal)
+        this.refreshTable()
+      }}/>
+    )
   }
 
   onClickEdit () {
@@ -59,14 +59,14 @@ class CredentialModal extends React.Component {
     if (!selected) return showAlert('Please select credentionals.')
 
     appendComponent(
-            <CredentialEditModal
-              data={selected}
-              onClose={modal => {
-                removeComponent(modal)
-                this.refreshTable()
-              }}
-            />
-        )
+      <CredentialEditModal
+        data={selected}
+        onClose={modal => {
+          removeComponent(modal)
+          this.refreshTable()
+        }}
+      />
+    )
   }
 
   onClickRemove () {
@@ -130,12 +130,8 @@ class CredentialModal extends React.Component {
       </Modal>
     )
   }
-
-    // ////////////////////////////////////////////////////////////////
 }
 
 CredentialModal.defaultProps = {
   onClose: null
 }
-
-export default CredentialModal

@@ -2,13 +2,6 @@ import React from 'react'
 import {InputField} from 'react-serial-forms'
 
 export default class Password extends React.Component {
-  constructor (props) {
-    super(props)
-    this.state = {
-
-    }
-  }
-
   render () {
     let config = this.props.config
     let values = this.props.values
@@ -20,11 +13,11 @@ export default class Password extends React.Component {
     }
 
     return (
-            <InputField type="password"
-              className={'form-control'}
-              name={config.name}
-              defaultValue={defaultValue}
-              validation={config.required ? 'required' : null}/>
+      <InputField type="password"
+        className={'form-control'}
+        name={config.name}
+        defaultValue={defaultValue}
+        validation={config.required ? 'required' : null} />
     )
   }
 }

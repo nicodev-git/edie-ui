@@ -3,7 +3,7 @@ import { Panel } from 'react-bootstrap'
 
 import DeviceWizard from '../../../shared/wizard/DeviceWizard'
 
-class MonitorTable extends React.Component {
+export default class MonitorTable extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -29,31 +29,31 @@ class MonitorTable extends React.Component {
     if (this.state.menuHidden) return null
 
     return (
-            <div className="dropdown">
-                <div id="dropdown-monitor" className="panel-group">
-                    <Panel>
-                        <ul ref="liDevices">
-                            {this.props.templates.map(item => this.renderMenuItem(item))}
-                        </ul>
-                    </Panel>
-                </div>
-            </div>
+      <div className="dropdown">
+        <div id="dropdown-monitor" className="panel-group">
+          <Panel>
+            <ul ref="liDevices">
+              {this.props.templates.map(item => this.renderMenuItem(item))}
+            </ul>
+          </Panel>
+        </div>
+      </div>
     )
   }
 
   renderMenuItem (item) {
     return (
-            <li key={item.id} onClick={this.onClickItem.bind(this, item)}>
-                <a href="javascript:;">
-                    <span className="pull-left item-icon" ref="div">
-                        <img src={`/images/${item.image}`}/>
-                    </span>
+      <li key={item.id} onClick={this.onClickItem.bind(this, item)}>
+        <a href="javascript:;">
+          <span className="pull-left item-icon" ref="div">
+            <img src={`/images/${item.image}`}/>
+          </span>
 
-                    <span className="item-text">
-                        <strong>{item.name}</strong>
-                    </span>
-                </a>
-            </li>
+          <span className="item-text">
+            <strong>{item.name}</strong>
+          </span>
+        </a>
+      </li>
     )
   }
 
@@ -64,22 +64,16 @@ class MonitorTable extends React.Component {
     const type = 'monitor-custom'
 
     return (
-            <DeviceWizard
-              deviceType={type}
-              title={monitorConfig ? monitorConfig.name : ''}
-              onClose={() => {
-                this.setState({ monitorWizardVisible: false })
-              }}
-              extraParams={{
-                monitortype: monitorConfig.monitortype
-              }}
-              configParams={{}}
-              onFinish={this.onFinishMonitorWizard.bind(this)}
-            />
+      <DeviceWizard
+        deviceType={type}
+        title={monitorConfig ? monitorConfig.name : ''}
+        onClose={() => { this.setState({ monitorWizardVisible: false }) }}
+        extraParams={{ monitortype: monitorConfig.monitortype }}
+        configParams={{}}
+        onFinish={this.onFinishMonitorWizard.bind(this)}
+      />
     )
   }
-
-    // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   handleClick (e) {
         // Detect device menu outer click
@@ -114,17 +108,13 @@ class MonitorTable extends React.Component {
         // this.updateValue(monitors)
   }
 
-    // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
   addMonitor (monitorConfig) {
     this.setState({ monitorWizardVisible: true, monitorConfig })
   }
 
   onFinishMonitorWizard (res, params) {
     const { monitors, onChanged } = this.props
-
     monitors.push(params)
-
     onChanged && onChanged(monitors)
   }
 
@@ -184,5 +174,3 @@ MonitorTable.defaultProps = {
   templates: [],
   onChanged: null
 }
-
-export default MonitorTable

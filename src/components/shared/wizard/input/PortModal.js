@@ -44,37 +44,36 @@ export default class PortModal extends React.Component {
 
   render () {
     return (
-            <Modal show={this.state.open}
-              onHide={this.onHide.bind(this)}
-              aria-labelledby="ModalHeader"
-              className="bootstrap-dialog type-primary">
-                <div className="modal-header">
-                    <h4 className="modal-title bootstrap-dialog-title">
-                        Add Port
-                    </h4>
-                </div>
-                <div className="modal-body bootstrap-dialog-message">
-                    <div className="row margin-md-bottom">
-                        <label className="col-md-3">Name:</label>
-                        <div className="col-md-9">
-                            <input className="form-control" ref="name"/>
-                        </div>
-                    </div>
+      <Modal show={this.state.open}
+        onHide={this.onHide.bind(this)}
+        aria-labelledby="ModalHeader"
+        className="bootstrap-dialog type-primary">
+          <div className="modal-header">
+            <h4 className="modal-title bootstrap-dialog-title">
+              Add Port
+            </h4>
+          </div>
+          <div className="modal-body bootstrap-dialog-message">
+            <div className="row margin-md-bottom">
+              <label className="col-md-3">Name:</label>
+              <div className="col-md-9">
+                  <input className="form-control" ref="name"/>
+              </div>
+            </div>
 
-                    <div className="row margin-md-bottom">
-                        <label className="col-md-3">Port:</label>
-                        <div className="col-md-9">
-                            <input className="form-control" ref="port"/>
-                        </div>
-                    </div>
+            <div className="row margin-md-bottom">
+              <label className="col-md-3">Port:</label>
+              <div className="col-md-9">
+                  <input className="form-control" ref="port"/>
+              </div>
+            </div>
 
-                    <div className="text-right mb-none">
-
-                        <a href="javascript:;" className="btn btn-default btn-sm" onClick={this.onClickClose.bind(this)}>Cancel</a>
-                        <a href="javascript:;" className="btn btn-primary btn-sm margin-sm-left" onClick={this.onClickSave.bind(this)}>OK</a>
-                    </div>
-                </div>
-            </Modal>
+            <div className="text-right mb-none">
+              <a href="javascript:;" className="btn btn-default btn-sm" onClick={this.onClickClose.bind(this)}>Cancel</a>
+              <a href="javascript:;" className="btn btn-primary btn-sm margin-sm-left" onClick={this.onClickSave.bind(this)}>OK</a>
+            </div>
+          </div>
+      </Modal>
     )
   }
 }

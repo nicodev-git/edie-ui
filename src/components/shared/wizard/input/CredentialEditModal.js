@@ -5,7 +5,7 @@ import { assign } from 'lodash'
 import { showAlert } from '../../../shared/Alert'
 import { ROOT_URL } from '../../../../actions/config'
 
-class CredentialEditModal extends React.Component {
+export default class CredentialEditModal extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -23,12 +23,9 @@ class CredentialEditModal extends React.Component {
 
   closeModal (data) {
     this.setState({ open: false }, () => {
-      this.props.onClose &&
-            this.props.onClose(this, data)
+      this.props.onClose && this.props.onClose(this, data)
     })
   }
-
-    // ////////////////////////////////////////////
 
   onClickSave () {
     let cred = {}
@@ -112,13 +109,9 @@ class CredentialEditModal extends React.Component {
       </Modal>
     )
   }
-
-    // ////////////////////////////////////////////
 }
 
 CredentialEditModal.defaultProps = {
   onClose: null,
   data: null
 }
-
-export default CredentialEditModal

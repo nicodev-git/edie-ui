@@ -21,20 +21,18 @@ export default class Checkbox extends React.Component {
       width = util.calcWidth(config.width) - util.calcWidth(config.label.width)
     }
 
-        // let defaultValue = config.checked === true
-        //
-        // if (config.name && values[config.name] !== undefined)
-        //     defaultValue = values[config.name] === "true" || values[config.name] === true
+    // let defaultValue = config.checked === true
+    //
+    // if (config.name && values[config.name] !== undefined)
+    //     defaultValue = values[config.name] === "true" || values[config.name] === true
 
     const field = (
-            <div className={`col-md-${width}`} style={util.convertStyle(config.style)}>
-                <label className="control-label">
-                    <input {...input} type={type}
-                      className={config.cls}/>
-                </label>
-
-            </div>
-        )
+      <div className={`col-md-${width}`} style={util.convertStyle(config.style)}>
+        <label className="control-label">
+          <input {...input} type={type} className={config.cls}/>
+        </label>
+      </div>
+    )
 
     return util.wrapInputs(label, field, config.useColumn)
   }

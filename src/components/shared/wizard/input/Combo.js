@@ -1,6 +1,6 @@
 import React from 'react'
-import {util} from '../WizardUtil'
-import {SelectField} from 'react-serial-forms'
+import { util } from '../WizardUtil'
+import { SelectField } from 'react-serial-forms'
 
 import CredentialModal from './CredentialModal'
 import { appendComponent, removeComponent } from '../../../../util/Component'
@@ -59,31 +59,31 @@ export default class Combo extends React.Component {
             }
 
             sidebarItems.push(
-                            <a href="javascript:;" className="margin-md-left" style={style}
-                              onClick={this.onSidebarItem.bind(this, button)}>
-                                <i className="fa fa-plus fa-lg" />
-                            </a>
-                        )
+              <a href="javascript:;" className="margin-md-left" style={style}
+                onClick={this.onSidebarItem.bind(this, button)}>
+                  <i className="fa fa-plus fa-lg" />
+              </a>
+            )
           } else if (button.type === 'edit') {
-                        // var btn = $('<a href="javascript:;" class="margin-md-left"><i class="fa fa-edit fa-lg"></i></a>');
-                        // btn.css({
-                        //     position: 'absolute',
-                        //     top: '9px',
-                        //     right: (-7 - i * 20) + 'px'
-                        // });
-                        //
-                        // btn.click(function(){
-                        //     var option = input.find(':selected');
-                        //     var obj = option.data('object');
-                        //     button.click && button.click(obj, function(cred){
-                        //         console.log(cred);
-                        //         option.text(cred[config.server.display]);
-                        //         option.attr('value', cred[config.server.value]);
-                        //         option.data('object', cred);
-                        //     });
-                        // });
-                        //
-                        // sidebarItems.push(btn);
+            // var btn = $('<a href="javascript:;" class="margin-md-left"><i class="fa fa-edit fa-lg"></i></a>');
+            // btn.css({
+            //     position: 'absolute',
+            //     top: '9px',
+            //     right: (-7 - i * 20) + 'px'
+            // });
+            //
+            // btn.click(function(){
+            //     var option = input.find(':selected');
+            //     var obj = option.data('object');
+            //     button.click && button.click(obj, function(cred){
+            //         console.log(cred);
+            //         option.text(cred[config.server.display]);
+            //         option.attr('value', cred[config.server.value]);
+            //         option.data('object', cred);
+            //     });
+            // });
+            //
+            // sidebarItems.push(btn);
           }
         })
       }
@@ -95,50 +95,50 @@ export default class Combo extends React.Component {
     // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   loadComboOptions (config, url) {
-        // $.ajax({
-        //     dataType : "json",
-        //     url : url,
-        //     async : false,
-        //     success : (data, status, jqXHR) => {
-        //         var root = config.server.root;
-        //         if(typeof root === 'string') {
-        //             data  = data[root];
-        //         } else if(root && root.length) {
-        //             $.each(root, function(i, prop){
-        //                 data = data[prop];
-        //                 if(!data) return false;
-        //             });
-        //         }
-        //
-        //         let options = []
-        //
-        //         data.forEach((d, i) => {
-        //             options.push({
-        //                 label: d[config.server.display],
-        //                 value: d[config.server.value],
-        //                 object: d
-        //             })
-        //         })
-        //
-        //         this.setState({options});
-        //     }
-        // });
+    // $.ajax({
+    //     dataType : "json",
+    //     url : url,
+    //     async : false,
+    //     success : (data, status, jqXHR) => {
+    //         var root = config.server.root;
+    //         if(typeof root === 'string') {
+    //             data  = data[root];
+    //         } else if(root && root.length) {
+    //             $.each(root, function(i, prop){
+    //                 data = data[prop];
+    //                 if(!data) return false;
+    //             });
+    //         }
+    //
+    //         let options = []
+    //
+    //         data.forEach((d, i) => {
+    //             options.push({
+    //                 label: d[config.server.display],
+    //                 value: d[config.server.value],
+    //                 object: d
+    //             })
+    //         })
+    //
+    //         this.setState({options});
+    //     }
+    // });
   }
 
   onSidebarItem (button) {
     if (button.click === 'credentialModal') {
       appendComponent(
-                <CredentialModal onClose={(modal) => {
-                  removeComponent(modal)
+        <CredentialModal onClose={(modal) => {
+          removeComponent(modal)
 
-                  const config = this.props.config
+          const config = this.props.config
 
-                  if (config.remote === true) {
-                    let url = config.server.url
-                    this.loadComboOptions(config, url)
-                  }
-                }}/>
-            )
+          if (config.remote === true) {
+            let url = config.server.url
+            this.loadComboOptions(config, url)
+          }
+        }}/>
+      )
     }
   }
 

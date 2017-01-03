@@ -32,24 +32,24 @@ export default class TextArea extends React.Component {
     }
 
     input = (
-            <div className={`col-md-${width}`}
-              style={util.convertStyle(config.style)}>
+      <div className={`col-md-${width}`}
+        style={util.convertStyle(config.style)}>
 
-                <TextareaField className={`form-control ${config.cls || ''}`}
-                  name={config.name}
-                  defaultValue={defaultValue}
-                  style={util.convertStyle(config.inputStyle)}
-                  placeholder={placeholder}/>
+        <TextareaField className={`form-control ${config.cls || ''}`}
+          name={config.name}
+          defaultValue={defaultValue}
+          style={util.convertStyle(config.inputStyle)}
+          placeholder={placeholder}/>
 
-            </div>
-        )
+      </div>
+    )
 
-        // if(typeof(config.onPageShow) === 'function') {
-        //     pageListeners.push({
-        //         row: text,
-        //         func: config.onPageShow
-        //     });
-        // }
+    // if(typeof(config.onPageShow) === 'function') {
+    //     pageListeners.push({
+    //         row: text,
+    //         func: config.onPageShow
+    //     });
+    // }
 
     return util.wrapInputs(label, input, config['useColumn'])
   }

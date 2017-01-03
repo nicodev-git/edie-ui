@@ -13,31 +13,31 @@ export default class RadioGroup extends React.Component {
     $.each(config.items || [], function (i, radioItem) {
       let radio, content
 
-            // Default Value
-            // if(i === 0) radioItem.checked = true;
-            // else radioItem.checked = false;
+      // Default Value
+      // if(i === 0) radioItem.checked = true;
+      // else radioItem.checked = false;
 
       radio = this.props.buildRadio(radioItem, config.name)
       content = this.props.buildRadioContent(radioItem.items)
 
-            // radioboxes.append(radio);
+      // radioboxes.append(radio);
       text.push(radio)
 
-            // Event
+      // Event
       radio.find('input').first().change(function () {
         let previous = text[(config.label ? 1 : 0) + config.items.length - 1]// col;
         let parent = previous.parent()
 
         if (contents.length) {
           $.each(contents, function (j, div) {
-                        // div.hide();
+            // div.hide();
             div.detach()
           })
         }
 
         if (content.length) {
           $.each(content, function (j, div) {
-                        // div.show();
+            // div.show();
             div.insertAfter(previous)
             previous = div
           })
@@ -58,7 +58,7 @@ export default class RadioGroup extends React.Component {
             body.append(rows)
           }
 
-                    // Dialog Show
+          // Dialog Show
           let dlg = mainDiv.dialog({
             modal: true,
             width: 520,
@@ -67,7 +67,7 @@ export default class RadioGroup extends React.Component {
           })
           refineDialog(dlg)
 
-                    // Dialog Close
+          // Dialog Close
           $('#stepadvanced > .panel > .panel-heading [data-rel=close]').off('click').click(function (e) {
             dlg.dialog('destroy')
           })
@@ -119,8 +119,8 @@ export default class RadioGroup extends React.Component {
     })
     text = text.concat(curcontent)
 
-        // Init
-        // $(radioboxes.children().first()).change();
+    // Init
+    // $(radioboxes.children().first()).change();
     text[config.label ? 1 : 0].find('input').first().change()
 
     col.addClass(template['col-xs'] + calcWidth(config.width))

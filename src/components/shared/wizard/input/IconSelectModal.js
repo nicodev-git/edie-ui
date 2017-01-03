@@ -3,7 +3,7 @@ import Modal from 'react-bootstrap-modal'
 
 import { ROOT_URL } from '../../../../actions/config'
 
-class IconSelectModal extends React.Component {
+export default class IconSelectModal extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -53,10 +53,6 @@ class IconSelectModal extends React.Component {
     })
   }
 
-    // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
   onClickItem (item, e) {
     let currentIcon = item
     this.setState({currentIcon})
@@ -75,7 +71,7 @@ class IconSelectModal extends React.Component {
     formData.append('thumb', 'true')
 
     input.value = ''
-        // upload/uploadImage
+    // upload/uploadImage
 
     $.ajax({ // eslint-disable-line no-undef
       url: Api.upload.uploadImage, // eslint-disable-line no-undef
@@ -99,8 +95,6 @@ class IconSelectModal extends React.Component {
             icons: icons,
             currentIcon: icons[icons.length - 1]
           })
-
-                    // ///////////////////////////////////
 
           $.get(`${ROOT_URL}${Api.devices.addIcon}`, { filename }) // eslint-disable-line no-undef
         } else {
@@ -175,5 +169,3 @@ class IconSelectModal extends React.Component {
 IconSelectModal.defaultProps = {
   selected: {}
 }
-
-export default IconSelectModal

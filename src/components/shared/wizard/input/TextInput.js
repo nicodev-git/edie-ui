@@ -6,15 +6,15 @@ import { util } from '../WizardUtil'
 const renderField2 = ({ input, type, label, cls, useColumn, disabled, width, style, placeholder }) => { // eslint-disable-line no-unused-vars
 // const renderField2 = ({ input, type, label, cls, useColumn, disabled, width, style, placeholder, meta: { touched, error } }) => { // Never used "touched", "error"
   const field = (
-        <div className={`col-md-${width}`}
-          style={util.convertStyle(style)}>
-            <input {...input} type={type}
-              className={`form-control ${cls || ''}`}
-              disabled={disabled ? 'disabled' : null}
-              placeholder={placeholder}/>
+    <div className={`col-md-${width}`}
+      style={util.convertStyle(style)}>
+        <input {...input} type={type}
+          className={`form-control ${cls || ''}`}
+          disabled={disabled ? 'disabled' : null}
+          placeholder={placeholder}/>
 
-        </div>
-    )
+    </div>
+  )
 
   return util.wrapInputs(label, field, useColumn)
 }
@@ -30,15 +30,14 @@ export default class TextInput extends React.Component {
     // const { input, type, label, cls, useColumn, disabled, width, style, placeholder, meta: { touched, error } } = config // Never used touched, error
 
     const field = (
-            <div className={`col-md-${width}`}
-              style={util.convertStyle(style)}>
-                <input {...input} type={type}
-                  className={`form-control ${cls || ''}`}
-                  disabled={disabled ? 'disabled' : null}
-                  placeholder={placeholder}/>
-
-            </div>
-        )
+      <div className={`col-md-${width}`}
+        style={util.convertStyle(style)}>
+        <input {...input} type={type}
+          className={`form-control ${cls || ''}`}
+          disabled={disabled ? 'disabled' : null}
+          placeholder={placeholder}/>
+      </div>
+    )
 
     return util.wrapInputs(label, field, useColumn)
   }

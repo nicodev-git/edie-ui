@@ -2,12 +2,12 @@ import React from 'react'
 import { forIn } from 'lodash'
 import { InputBase } from 'react-serial-forms'
 
-import {util} from '../WizardUtil'
-import {appendComponent, removeComponent} from '../../../../util/Component'
+import { util } from '../WizardUtil'
+import { appendComponent, removeComponent } from '../../../../util/Component'
 
 import MTypeModal from './MTypeModal'
 
-class MTable extends InputBase {
+export default class MTable extends InputBase {
   constructor (props) {
     super(props)
 
@@ -37,53 +37,53 @@ class MTable extends InputBase {
     // let values = this.props.values // Never used
 
     // let width = util.calcWidth(config.width) // Never used
-        //
-        // let defaultValue = config.value
-        // if (config.name && values[config.name] !== undefined)
-        //     defaultValue = values[config.name]
+    //
+    // let defaultValue = config.value
+    // if (config.name && values[config.name] !== undefined)
+    //     defaultValue = values[config.name]
 
     let input = (
-            <div className="panel panel-default panel-noborder">
-                <div className="panel-heading" style={{height: '35px'}}>
-                    <h4 className="panel-title" />
-                    <div className="panel-options">
-                        <a href="javascript:;"
-                          onClick={this.onClickAdd.bind(this)}><i className="fa fa-x fa-plus-square" /></a>
-                        <a href="javascript:;" className="margin-xs-left"
-                          onClick={this.onClickEdit.bind(this)}><i className="fa fa-x fa-edit" /></a>
-                        <a href="javascript:;" className="margin-xs-left"
-                          onClick={this.onClickRemove.bind(this)}><i className="fa fa-x fa-trash-o" /></a>
-                        <a href="javascript:;" className="margin-xs-left"
-                          onClick={this.onClickUp.bind(this)}><i className="fa fa-x fa-caret-square-o-up" /></a>
-                        <a href="javascript:;" className="margin-xs-left"
-                          onClick={this.onClickDown.bind(this)}><i className="fa fa-x fa-caret-square-o-down" /></a>
-                    </div>
-                </div>
-                <div className="panel-body"
-                  style={{maxHeight: '250px', minHeight: '70px', overflowY: 'auto', overflowX: 'hidden'}}>
-                    <table className="table table-hover dataTable">
-                        <thead>
-                        <tr>
-                            <th>Number</th>
-                            <th>Type</th>
-                        </tr>
-                        </thead>
-                        <tbody>{
-                            this.state.mdata.map((item, i) =>
-                                <tr key={i}
-                                  className={this.state.selectedIndex === i ? 'selected' : ''}
-                                  onClick={() => { this.setState({selectedIndex: i}) }}>
-
-                                    <td>{item.number}</td>
-                                    <td>{item.value}</td>
-
-                                </tr>
-                            )
-                        }</tbody>
-                    </table>
-                </div>
-            </div>
-        )
+      <div className="panel panel-default panel-noborder">
+        <div className="panel-heading" style={{height: '35px'}}>
+          <h4 className="panel-title" />
+          <div className="panel-options">
+            <a href="javascript:;"
+              onClick={this.onClickAdd.bind(this)}><i className="fa fa-x fa-plus-square" /></a>
+            <a href="javascript:;" className="margin-xs-left"
+              onClick={this.onClickEdit.bind(this)}><i className="fa fa-x fa-edit" /></a>
+            <a href="javascript:;" className="margin-xs-left"
+              onClick={this.onClickRemove.bind(this)}><i className="fa fa-x fa-trash-o" /></a>
+            <a href="javascript:;" className="margin-xs-left"
+              onClick={this.onClickUp.bind(this)}><i className="fa fa-x fa-caret-square-o-up" /></a>
+            <a href="javascript:;" className="margin-xs-left"
+              onClick={this.onClickDown.bind(this)}><i className="fa fa-x fa-caret-square-o-down" /></a>
+          </div>
+        </div>
+        <div className="panel-body"
+          style={{maxHeight: '250px', minHeight: '70px', overflowY: 'auto', overflowX: 'hidden'}}>
+          <table className="table table-hover dataTable">
+            <thead>
+              <tr>
+                <th>Number</th>
+                <th>Type</th>
+              </tr>
+            </thead>
+            <tbody>
+            {
+              this.state.mdata.map((item, i) =>
+                <tr key={i}
+                  className={this.state.selectedIndex === i ? 'selected' : ''}
+                  onClick={() => { this.setState({selectedIndex: i}) }} >
+                    <td>{item.number}</td>
+                    <td>{item.value}</td>
+                </tr>
+              )
+            }
+            </tbody>
+          </table>
+        </div>
+      </div>
+    )
 
     return util.wrapInputs(null, input, config['useColumn'])
   }
@@ -164,16 +164,17 @@ class MTable extends InputBase {
 
   showEditM (item, callback, num) {
     appendComponent(
-            <MTypeModal
-              item={item}
-              number={num}
-              onClose={(modal, data) => {
-                removeComponent(modal)
-
-                if (data && callback) callback(data)
-              }}
-            />
-        )
+      <MTypeModal
+        item={item}
+        number={num}
+        onClose={(modal, data) => {
+          removeComponent(modal)
+          if (data && callback) {
+            callback(data)
+          }
+        }}
+      />
+    )
   }
 
   updateNumbers (mdata) {
@@ -183,8 +184,6 @@ class MTable extends InputBase {
 
     return mdata
   }
-
-    // ////////////////////////////////////////////////
 
   getCurrentValue () {
     let value = {}
@@ -203,5 +202,3 @@ MTable.defaultProps = {
   config: {},
   values: {}
 }
-
-export default MTable

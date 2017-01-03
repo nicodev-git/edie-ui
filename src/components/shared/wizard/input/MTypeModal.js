@@ -1,6 +1,6 @@
 import React from 'react'
 import Modal from 'react-bootstrap-modal'
-import {commonconfig} from '../../../shared/wizard/WizardConfig'
+import { commonconfig } from '../../../shared/wizard/WizardConfig'
 
 export default class MTypeModal extends React.Component {
   constructor (props) {
@@ -14,8 +14,7 @@ export default class MTypeModal extends React.Component {
     this.setState({
       open: false
     }, () => {
-      this.props.onClose &&
-            this.props.onClose(this, data)
+      this.props.onClose && this.props.onClose(this, data)
     })
   }
 
@@ -75,7 +74,6 @@ export default class MTypeModal extends React.Component {
 
 MTypeModal.defaultProps = {
   onClose: null,
-
   number: 1,
   item: null
 }
