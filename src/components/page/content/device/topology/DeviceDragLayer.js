@@ -1,6 +1,6 @@
-import React, { PropTypes } from 'react'
+import React, { Component, PropTypes } from 'react'
 import { DragLayer } from 'react-dnd'
-import {DragTypes} from '../../../../../shared/Global'
+import { DragTypes } from '../../../../../shared/Global'
 
 function collect (monitor) {
   return {
@@ -37,12 +37,12 @@ function getItemStyles (props) {
   }
 }
 
-class DeviceDragLayer extends React.Component {
+class DeviceDragLayer extends Component {
   renderItem (type, item, style) {
     switch (type) {
       case DragTypes.DEVICE:
         return (
-                    <img src={`/images/${item.img}`} width="48" height="48" style={style}/>
+          <img src={`/images/${item.img}`} width="48" height="48" style={style}/>
         )
     }
   }
@@ -54,12 +54,12 @@ class DeviceDragLayer extends React.Component {
     }
 
     return (
-            <div style={layerStyles}>
-                {this.renderItem(itemType, item, getItemStyles(this.props))}
-            </div>
+      <div style={layerStyles}>
+        {this.renderItem(itemType, item, getItemStyles(this.props))}
+      </div>
     )
 
-        // return this.renderItem(itemType, item, getItemStyles(this.props))
+    // return this.renderItem(itemType, item, getItemStyles(this.props))
   }
 }
 

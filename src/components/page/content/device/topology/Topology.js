@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactTooltip from 'react-tooltip'
-import {assign} from 'lodash'
+import { assign } from 'lodash'
 
 import MapCanvas from '../../../../shared/map/MapCanvas'
 import MapToolbar from './MapToolbar'
@@ -44,7 +44,6 @@ export default class Topology extends React.Component {
             tipObject: null,
         }
 
-        ///////////////////////////////////////////////
         this.curMapDraw = 1
         this.mapTimer = 0
 
@@ -56,8 +55,6 @@ export default class Topology extends React.Component {
         this.arrLines = {}
         this.arrLastLines = {}
         this.strLastLines = ''
-
-        ///////////////////////////////////////////////
 
         this.mapListener = {
             onObjectSelected:   this.onMapObjectSelected.bind(this),
@@ -741,6 +738,3 @@ Topology.defaultProps = {
 Topology.contextTypes = {
     sid: React.PropTypes.string,
 }
-
-
-export default Topology

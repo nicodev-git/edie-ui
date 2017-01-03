@@ -37,16 +37,16 @@ export default class Toolbar extends React.Component {
 
   loadLineTypes () {
     $.get(`${ROOT_URL}${Api.deviceadmin.getShapeTypes}`)
-        .done((res) => {
-          let lineTypes = this.lineTypes
+      .done((res) => {
+        let lineTypes = this.lineTypes
 
-          $.each(res || [], function (i, type) {
-            let index = findIndex(lineTypes, {typename: type.devicename})
-            if (index >= 0) lineTypes[index]['typeid'] = type.devicetype
-          })
-
-          this.setState({lineTypes})
+        $.each(res || [], function (i, type) {
+          let index = findIndex(lineTypes, {typename: type.devicename})
+          if (index >= 0) lineTypes[index]['typeid'] = type.devicetype
         })
+
+        this.setState({lineTypes})
+      })
   }
 
   render () {
@@ -74,126 +74,128 @@ export default class Toolbar extends React.Component {
     }
 
     return (
-            <div className="panel-heading map-heading">
-                <h4 className="panel-title">Topology</h4>
-                <div className="panel-options main-map-options" style={{top: '9px'}}>
-                    <ul className="nav nav-tabs" style={{background: 'transparent'}}>
+      <div className="panel-heading map-heading">
+        <h4 className="panel-title">Topology</h4>
+        <div className="panel-options main-map-options" style={{top: '9px'}}>
+          <ul className="nav nav-tabs" style={{background: 'transparent'}}>
 
-                        <li>
-                            <a href="javascript:"
-                              className="option trash p-none" style={{display: obj ? 'block' : 'none'}}
-                              onClick={this.props.onClickDelete}>
-                                <i className="fa fa-trash-o" title="Delete" />
-                            </a>
-                        </li>
-                        <li>
-                            <div className="input-group colorpicker-element" style={{display: lineGroup ? 'block' : 'none'}}
-                              onClick={this.onClickColorPicker.bind(this)}>
-                                <div className="input-group-addon">
-                                    <i className="color-preview" style={{background: lineGroup ? line.getStrokeColor() : 'black'}} />
-                                </div>
-                            </div>
-
-                            {
-                                this.state.displayColorPicker ? <div style={popover}>
-                                    <div style={cover} onClick={this.onCloseColorPicker.bind(this)}/>
-                                    <ChromePicker color={lineGroup ? line.getStrokeColor() : 'black'}
-                                      onChangeComplete={this.onChangeColorPicker.bind(this)}/>
-                                </div> : null
-                            }
-
-                        </li>
-                        <li>
-                            <a href="javascript:;"
-                              className="option p-none" style={{display: lineGroup ? 'block' : 'none'}}
-                              onClick={this.props.onClickLineWidthInc}>
-                                <i className="fa fa-expand" title="Increase Line Width" />
-                            </a>
-                        </li>
-                        <li>
-                            <a href="javascript:;"
-                              className="option p-none" style={{display: lineGroup ? 'block' : 'none'}}
-                              onClick={this.props.onClickLineWidthDec}>
-                                <i className="fa fa-compress" title="Decrease Line Width" />
-                            </a>
-                        </li>
-                        <li>
-                            <a href="javascript:;"
-                              className="option p-none" style={{display: text ? 'block' : 'none'}}
-                              onClick={this.props.onClickFontSizeUp}> <i className="fa fa-arrow-up" title="Increase Font Size" />
-                            </a>
-                        </li>
-                        <li>
-                            <a href="javascript:;"
-                              className="option p-none" style={{display: text ? 'block' : 'none'}}
-                              onClick={this.props.onClickFontSizeDown}> <i className="fa fa-arrow-down" title="Decrease Font Size" />
-                            </a>
-                        </li>
-                        <li>
-                            <a href="javascript:;"
-                              className="option p-none" style={{display: text ? 'block' : 'none'}}
-                              onClick={this.props.onClickAlignLeft}> <i className="fa fa-align-left" title="Align Left" />
-                            </a>
-                        </li>
-                        <li>
-                            <a href="javascript:;"
-                              className="option p-none" style={{display: text ? 'block' : 'none'}}
-                              onClick={this.props.onClickAlignCenter}> <i className="fa fa-align-center" title="Align Center" />
-                            </a>
-
-                        </li>
-                        <li>
-                            <a href="javascript:;"
-                              className="option p-none" style={{display: text ? 'block' : 'none'}}
-                              onClick={this.props.onClickAlignRight}> <i className="fa fa-align-right" title="Align Right" />
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="javascript:;"
-                              className="option p-none" style={{display: hub ? 'block' : 'none'}}>
-                                <i className="fa fa-rotate-left" title="Rotate Left" />
-                            </a>
-                        </li>
-                        <li>
-                            <a href="javascript:;"
-                              className="option p-none" style={{display: hub ? 'block' : 'none'}}>
-                                <i className="fa fa-rotate-right" title="Rotate Right" />
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="javascript:;" onClick={this.toggleLineTypes.bind(this)}
-                              className="option p-none" style={{display: line ? 'block' : 'none'}}>
-                                <i className="fa fa-reply" title="Change Type" />
-                            </a>
-
-                            {this.renderLineTypes()}
-                        </li>
-
-                        <li>
-                            <a href="javascript:;" onClick={this.props.onClickEdit}
-                              className={`option p-none ${this.props.editable ? 'option-active' : ''}`}>
-                                <i className="fa fa-edit" />
-                            </a>
-                        </li>
-
-                        <li className={this.state.displayDevices ? '' : 'dropdown'} ref="liDevices">
-                            <a href="javascript:" onClick={this.onClickAdd.bind(this)}
-                              className={`option p-none ${this.state.displayDevices ? 'option-active' : ''}`}>
-                                <i className="fa fa-plus-square" title="Add" />
-                            </a>
-                            {this.state.displayDevices ?
-                                <DeviceMenu onClickItem={this.props.onClickDeviceItem} selectedItem={this.props.selectedItem}/> : null}
-                        </li>
-
-                        <li className="dropdown active">
-                            <a href="#" data-toggle="dropdown" className="dropdown-toggle" style={{display: 'none'}} />
-                            <ul className="dropdown-menu" />
-                        </li>
-                    </ul>
+            <li>
+              <a href="javascript:"
+                className="option trash p-none" style={{display: obj ? 'block' : 'none'}}
+                onClick={this.props.onClickDelete}>
+                <i className="fa fa-trash-o" title="Delete" />
+              </a>
+            </li>
+            <li>
+              <div className="input-group colorpicker-element" style={{display: lineGroup ? 'block' : 'none'}}
+                onClick={this.onClickColorPicker.bind(this)}>
+                <div className="input-group-addon">
+                  <i className="color-preview" style={{background: lineGroup ? line.getStrokeColor() : 'black'}} />
                 </div>
-            </div>
+              </div>
+
+              {
+                this.state.displayColorPicker
+                  ? <div style={popover}>
+                    <div style={cover} onClick={this.onCloseColorPicker.bind(this)}/>
+                    <ChromePicker color={lineGroup ? line.getStrokeColor() : 'black'}
+                      onChangeComplete={this.onChangeColorPicker.bind(this)}/>
+                    </div>
+                  : null
+              }
+
+            </li>
+            <li>
+              <a href="javascript:;"
+                className="option p-none" style={{display: lineGroup ? 'block' : 'none'}}
+                onClick={this.props.onClickLineWidthInc}>
+                <i className="fa fa-expand" title="Increase Line Width" />
+              </a>
+            </li>
+            <li>
+              <a href="javascript:;"
+                className="option p-none" style={{display: lineGroup ? 'block' : 'none'}}
+                onClick={this.props.onClickLineWidthDec}>
+                <i className="fa fa-compress" title="Decrease Line Width" />
+              </a>
+            </li>
+            <li>
+              <a href="javascript:;"
+                className="option p-none" style={{display: text ? 'block' : 'none'}}
+                onClick={this.props.onClickFontSizeUp}> <i className="fa fa-arrow-up" title="Increase Font Size" />
+              </a>
+            </li>
+            <li>
+              <a href="javascript:;"
+                className="option p-none" style={{display: text ? 'block' : 'none'}}
+                onClick={this.props.onClickFontSizeDown}> <i className="fa fa-arrow-down" title="Decrease Font Size" />
+              </a>
+            </li>
+            <li>
+              <a href="javascript:;"
+                className="option p-none" style={{display: text ? 'block' : 'none'}}
+                onClick={this.props.onClickAlignLeft}> <i className="fa fa-align-left" title="Align Left" />
+              </a>
+            </li>
+            <li>
+              <a href="javascript:;"
+                className="option p-none" style={{display: text ? 'block' : 'none'}}
+                onClick={this.props.onClickAlignCenter}> <i className="fa fa-align-center" title="Align Center" />
+              </a>
+            </li>
+            <li>
+              <a href="javascript:;"
+                className="option p-none" style={{display: text ? 'block' : 'none'}}
+                onClick={this.props.onClickAlignRight}> <i className="fa fa-align-right" title="Align Right" />
+              </a>
+            </li>
+
+            <li>
+              <a href="javascript:;" className="option p-none" style={{display: hub ? 'block' : 'none'}}>
+                <i className="fa fa-rotate-left" title="Rotate Left" />
+              </a>
+            </li>
+            <li>
+              <a href="javascript:;" className="option p-none" style={{display: hub ? 'block' : 'none'}}>
+                <i className="fa fa-rotate-right" title="Rotate Right" />
+              </a>
+            </li>
+
+            <li>
+              <a href="javascript:;" onClick={this.toggleLineTypes.bind(this)}
+                className="option p-none" style={{display: line ? 'block' : 'none'}}>
+                  <i className="fa fa-reply" title="Change Type" />
+              </a>
+
+              {this.renderLineTypes()}
+            </li>
+
+            <li>
+              <a href="javascript:;" onClick={this.props.onClickEdit}
+                className={`option p-none ${this.props.editable ? 'option-active' : ''}`}>
+                <i className="fa fa-edit" />
+              </a>
+            </li>
+
+            <li className={this.state.displayDevices ? '' : 'dropdown'} ref="liDevices">
+              <a href="javascript:" onClick={this.onClickAdd.bind(this)}
+                className={`option p-none ${this.state.displayDevices ? 'option-active' : ''}`}>
+                  <i className="fa fa-plus-square" title="Add" />
+              </a>
+              {
+                this.state.displayDevices
+                ? <DeviceMenu onClickItem={this.props.onClickDeviceItem} selectedItem={this.props.selectedItem}/>
+                : null
+              }
+            </li>
+
+            <li className="dropdown active">
+              <a href="#" data-toggle="dropdown" className="dropdown-toggle" style={{display: 'none'}} />
+              <ul className="dropdown-menu" />
+            </li>
+          </ul>
+        </div>
+      </div>
     )
   }
 
@@ -216,31 +218,33 @@ export default class Toolbar extends React.Component {
     }
 
     return (
-            <div style={popover}>
-                <div style={cover} onClick={this.toggleLineTypes.bind(this)}/>
-                <div id="linetypediv" className="panel-group">
-                    <div className="panel panel-default">
-                        <div className="panel-body"><ul>
-                        {
-                            this.lineTypes.map(item =>
-                                <li key={item.typename}><a href="javascript:;" onClick={this.onClickLineType.bind(this, item)}>
-                                    <div className="pull-left item-icon">
-                                        <img src={item.image} data-type={item.type} data-typename={item.typename}/>
-                                    </div>
-                                    <div className="item-text">
-                                        <strong>{item.title}</strong>
-                                    </div>
-                                </a></li>
-                            )
-                        }
-                        </ul></div>
-                    </div>
-                </div>
+      <div style={popover}>
+        <div style={cover} onClick={this.toggleLineTypes.bind(this)}/>
+        <div id="linetypediv" className="panel-group">
+          <div className="panel panel-default">
+            <div className="panel-body">
+              <ul>
+              {
+                this.lineTypes.map(item =>
+                  <li key={item.typename}>
+                    <a href="javascript:;" onClick={this.onClickLineType.bind(this, item)}>
+                      <div className="pull-left item-icon">
+                        <img src={item.image} data-type={item.type} data-typename={item.typename}/>
+                      </div>
+                      <div className="item-text">
+                        <strong>{item.title}</strong>
+                      </div>
+                    </a>
+                  </li>
+                )
+              }
+              </ul>
             </div>
+          </div>
+        </div>
+      </div>
     )
   }
-
-    // ///////////////////////////////////////
 
   onClickAdd () {
     this.setState({
@@ -256,8 +260,6 @@ export default class Toolbar extends React.Component {
     })
   }
 
-    // ///////////////////////////////////////
-
   onClickColorPicker () {
     this.setState({ displayColorPicker: !this.state.displayColorPicker })
   }
@@ -269,8 +271,6 @@ export default class Toolbar extends React.Component {
   onChangeColorPicker (color) {
     this.props.onChangeLineColor(color.hex)
   }
-
-    // ///////////////////////////////////////
 
   toggleLineTypes () {
     this.setState({ displayLineType: !this.state.displayLineType})

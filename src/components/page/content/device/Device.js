@@ -1,8 +1,6 @@
 import React from 'react'
-import { connect } from 'react-redux'
-import { withRouter } from 'react-router'
 
-class Device extends React.Component {
+export default class Device extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -25,14 +23,3 @@ class Device extends React.Component {
     return this.props.children
   }
 }
-
-Device.defaultProps = {
-
-}
-
-function mapStateToProps (state) {
-  const {selectedDevice} = state.dashboard
-  return {selectedDevice}
-}
-
-export default withRouter(connect(mapStateToProps)(Device))

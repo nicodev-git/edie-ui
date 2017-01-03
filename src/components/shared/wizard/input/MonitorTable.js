@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { Panel } from 'react-bootstrap'
 
 import DeviceWizard from '../../../shared/wizard/DeviceWizard'
 
-export default class MonitorTable extends React.Component {
+export default class MonitorTable extends Component {
   constructor (props) {
     super(props)
     this.state = {

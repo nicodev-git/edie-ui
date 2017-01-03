@@ -1,11 +1,11 @@
 import React from 'react'
 import TimeAgo from 'react-timeago'
 
-import {ResponsiveInfiniteTable} from '../../../../shared/InfiniteTable'
+import { ResponsiveInfiniteTable } from '../../../../shared/InfiniteTable'
 import ProcessModal from './ProcessModal'
 import { appendComponent, removeComponent } from '../../../../../util/Component'
 
-class ProcessTable extends React.Component {
+export default class ProcessTable extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -19,7 +19,7 @@ class ProcessTable extends React.Component {
     this.columns = [{
       'displayName': 'Name',
       'columnName': 'name',
-            // "cssClassName": "nowrap",
+      // "cssClassName": "nowrap",
       'cssClassName': 'width-180'
     }, {
       'displayName': 'Id',
@@ -94,5 +94,3 @@ class ProcessTable extends React.Component {
 ProcessTable.defaultProps = {
   device: {}
 }
-
-export default ProcessTable

@@ -25,7 +25,7 @@ import SettingCredentials from './components/page/content/settings/credentials/C
 import SettingTemplates from './components/page/content/settings/template/Templates'
 import SettingAdvanced from './components/page/content/settings/advanced/Advanced'
 
-import Device from './components/page/content/device/Device'
+import DeviceContainer from './containers/page/content/device/DeviceContainer'
 import DeviceMain from './components/page/content/device/main/Main'
 import DeviceMainIncidentsContainer from './containers/page/content/device/main/incidents/MainIncidentsContainer'
 import DeviceMainRulesContainer from './containers/page/content/device/main/rules/MainRulesContainer'
@@ -72,7 +72,7 @@ export default(
         <Route path="advanced" component={SettingAdvanced} />
       </Route>
 
-      <Route path="device" component={Device}>
+      <Route path="device" component={DeviceContainer}>
         <Route path="main" component={DeviceMain}>
           <Route path="incidents" component={DeviceMainIncidentsContainer}/>
           <Route path="rules" component={DeviceMainRulesContainer}/>

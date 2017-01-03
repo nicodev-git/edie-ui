@@ -15,7 +15,7 @@ import { showAlert } from '../../../shared/Alert'
 
 import { format } from '../../../../shared/Global'
 
-class Incidents extends React.Component {
+export default class Incidents extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -85,10 +85,9 @@ class Incidents extends React.Component {
     }
 
     return (
-            <select className="form-control input-sm margin-md-left"
-              ref="scenario">
-                {items}
-            </select>
+      <select className="form-control input-sm margin-md-left" ref="scenario">
+        {items}
+      </select>
     )
   }
 
@@ -97,36 +96,34 @@ class Incidents extends React.Component {
     let tx = new Date('2016-1-1 00:00:00') - 0
 
     return (
-            <div className="inline margin-md-left" style={{color: 'white'}}>
-                <span>{moment(tx + me.state.sliderPos * 1000).format('m:ss')}</span>
-                <span>/</span>
-                <span>{moment(tx + me.state.sliderMax * 1000).format('m:ss')}</span>
-            </div>
+      <div className="inline margin-md-left" style={{color: 'white'}}>
+        <span>{moment(tx + me.state.sliderPos * 1000).format('m:ss')}</span>
+        <span>/</span>
+        <span>{moment(tx + me.state.sliderMax * 1000).format('m:ss')}</span>
+      </div>
     )
   }
 
   renderAttackInfo () {
     return (
-            <div style={{position: 'absolute', left: 0, top: 0}}>
-                {this.state.attackInfo.map(info =>
-                    <Transition transitionName="example" transitionEnterTimeout={500} transitionLeaveTimeout={500}
-                      transitionAppear transitionAppearTimeout={500} key={`${info.id}transition`}>
-                        <div className="attacker-bubble-in"
-                          style={{left: `${info.left}px`, top: `${info.top}px`}}
-                          key={info.id}>
-                            <div className="text-content">
-                                <span className="sectionHeadline">IP: {info.ip}</span><br/>
-                                <span className="sectionHeadline">Time: {info.time}</span><br/>
-                                <span className="sectionHeadline">Incident: {info.type}</span><br/>
-                            </div>
-                        </div>
-                    </Transition>
-                )}
-            </div>
+      <div style={{position: 'absolute', left: 0, top: 0}}>
+        {this.state.attackInfo.map(info =>
+          <Transition transitionName="example" transitionEnterTimeout={500} transitionLeaveTimeout={500}
+            transitionAppear transitionAppearTimeout={500} key={`${info.id}transition`}>
+              <div className="attacker-bubble-in"
+                style={{left: `${info.left}px`, top: `${info.top}px`}}
+                key={info.id}>
+                  <div className="text-content">
+                    <span className="sectionHeadline">IP: {info.ip}</span><br/>
+                    <span className="sectionHeadline">Time: {info.time}</span><br/>
+                    <span className="sectionHeadline">Incident: {info.type}</span><br/>
+                  </div>
+              </div>
+          </Transition>
+        )}
+      </div>
     )
   }
-
-    // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   onChangeMode (e) {
     this.setState({ mode: e.target.value })
@@ -554,12 +551,12 @@ class Incidents extends React.Component {
             else y -= 65 * Math.ceil(row / 2)
           }
           attacker.bubbles[seat] = me.showAttackInfo(
-                        attack.id,
-                        x, y,
-                        attack.from.name,
-                        moment(attackTime).format('YYYY-MM-DD HH:mm:ss'),
-                        attack.type,
-                        afterBubbleFade)
+            attack.id,
+            x, y,
+            attack.from.name,
+            moment(attackTime).format('YYYY-MM-DD HH:mm:ss'),
+            attack.type,
+            afterBubbleFade)
         })
       })
     })
@@ -583,48 +580,48 @@ class Incidents extends React.Component {
     let cy = Math.abs(my - (50 * arcSharpness))
 
     let line = s.insert('svg:path', 'text.layer')
-            .style('stroke-linecap', 'round')
-            .style('stroke', color || 'red')
-            .style('fill', 'none')
-            .style('stroke-width', $scope.arcThickness)
-            .attr('d', (datum) => {
-              if (type === 'straight') {
-                const str = 'M{0},{1}L{2},{3}'
-                return format(str, from.x, from.y, to.x, to.y)
-              }
+      .style('stroke-linecap', 'round')
+      .style('stroke', color || 'red')
+      .style('fill', 'none')
+      .style('stroke-width', $scope.arcThickness)
+      .attr('d', (datum) => {
+        if (type === 'straight') {
+          const str = 'M{0},{1}L{2},{3}'
+          return format(str, from.x, from.y, to.x, to.y)
+        }
 
-              if (type === 'curve') {
-                if (sameCountry) {
-                  let widthConst = 10
-                  let heightConst = 10
-                  const str = 'M{0},{1}T{2},{3}T{4},{5}T{6},{7}T{8},{9}'
-                  return format(str, x, y, x + widthConst, y - heightConst, x, y - (2 * heightConst), x - widthConst, y - heightConst, x, y)
-                }
+        if (type === 'curve') {
+          if (sameCountry) {
+            let widthConst = 10
+            let heightConst = 10
+            const str = 'M{0},{1}T{2},{3}T{4},{5}T{6},{7}T{8},{9}'
+            return format(str, x, y, x + widthConst, y - heightConst, x, y - (2 * heightConst), x - widthConst, y - heightConst, x, y)
+          }
 
-                const str = 'M{0},{1}S{2},{3},{4},{5}'
-                return format(str, x, y, cx, cy, tx, ty)
-              }
+          const str = 'M{0},{1}S{2},{3},{4},{5}'
+          return format(str, x, y, cx, cy, tx, ty)
+        }
 
-              return ''
-            }).data([{callback: callback}])
+        return ''
+      }).data([{callback: callback}])
 
     let length = line.node().getTotalLength()
     line.style('stroke-dasharray', `${length} ${length}`)
-            .style('stroke-dashoffset', length)
-            .attr('trans', 0)
-            .transition().duration($scope.fadeOutSpeed * 2)
-            .style('stroke-dashoffset', 0)
-            .attr('trans', 1)
-            .transition().duration($scope.fadeOutSpeed / 2)
-            .style('opacity', 0)
-            .attr('trans', 2)
-            .remove()
-            .each('end', (d) => {
-              let callback = d.callback
-              let index = me.connections.indexOf(line)
-              if (index >= 0) me.connections.splice(index, 1)
-              if (callback) callback()
-            })
+      .style('stroke-dashoffset', length)
+      .attr('trans', 0)
+      .transition().duration($scope.fadeOutSpeed * 2)
+      .style('stroke-dashoffset', 0)
+      .attr('trans', 1)
+      .transition().duration($scope.fadeOutSpeed / 2)
+      .style('opacity', 0)
+      .attr('trans', 2)
+      .remove()
+      .each('end', (d) => {
+        let callback = d.callback
+        let index = me.connections.indexOf(line)
+        if (index >= 0) me.connections.splice(index, 1)
+        if (callback) callback()
+      })
 
     me.connections.push(line)
 
@@ -667,26 +664,26 @@ class Incidents extends React.Component {
       bt.y -= 6
 
       let labelObj = s.insert('text', 'text.layer')
-                .attr('text-anchor', 'middle')
-                .attr('x', bt.x)
-                .attr('y', bt.y)
-                .attr('transform', `rotate(${angle} ${bt.x},${bt.y})`)
-                .attr('width', 50)
-                .attr('height', 24)
-                .text(`X${attacks}`)
-                .attr('fill', color)
-                .attr('font-size', '0.8em')
+        .attr('text-anchor', 'middle')
+        .attr('x', bt.x)
+        .attr('y', bt.y)
+        .attr('transform', `rotate(${angle} ${bt.x},${bt.y})`)
+        .attr('width', 50)
+        .attr('height', 24)
+        .text(`X${attacks}`)
+        .attr('fill', color)
+        .attr('font-size', '0.8em')
 
       labelObj.style('opacity', 0)
-                .attr('trans', 0)
-                .transition()
-                .duration($scope.fadeOutSpeed * 2)
-                .style('opacity', 1)
-                .attr('trans', 1)
-                .transition().duration($scope.fadeOutSpeed / 2)
-                .style('opacity', 0)
-                .attr('trans', 2)
-                .remove()
+        .attr('trans', 0)
+        .transition()
+        .duration($scope.fadeOutSpeed * 2)
+        .style('opacity', 1)
+        .attr('trans', 1)
+        .transition().duration($scope.fadeOutSpeed / 2)
+        .style('opacity', 0)
+        .attr('trans', 2)
+        .remove()
 
       line.data()[0].labelObj = labelObj
     }
@@ -706,19 +703,19 @@ class Incidents extends React.Component {
     } else {
       img = s.append('svg:image')
       img.attr('x', device.x - 21)
-                .attr('y', device.y - 21)
-                .attr('width', 42)
-                .attr('height', 42)
-                .style('cursor', 'pointer')
-                .style('opacity', 0)
-                .attr('xlink:href', device.img)
+        .attr('y', device.y - 21)
+        .attr('width', 42)
+        .attr('height', 42)
+        .style('cursor', 'pointer')
+        .style('opacity', 0)
+        .attr('xlink:href', device.img)
 
       if (anim) {
         img.transition().duration($scope.fadeOutSpeed / 6)
-                    .style('opacity', 1)
-                    .each('end', () => {
-                      if (callback) callback()
-                    })
+          .style('opacity', 1)
+          .each('end', () => {
+            if (callback) callback()
+          })
       } else {
         img.style('opacity', 1)
         if (callback) callback()
@@ -729,18 +726,18 @@ class Incidents extends React.Component {
       if (device.name) {
         txt = s.append('text')
         txt.attr('text-anchor', 'middle')
-                    .attr('x', device.x)
-                    .attr('y', device.y + 30)
-                    .attr('width', 80)
-                    .attr('height', 24)
-                    .text(device.name)
-                    .attr('fill', '#fff')
-                    .attr('font-size', '0.9em')
+          .attr('x', device.x)
+          .attr('y', device.y + 30)
+          .attr('width', 80)
+          .attr('height', 24)
+          .text(device.name)
+          .attr('fill', '#fff')
+          .attr('font-size', '0.9em')
 
         if (anim) {
           txt.style('opacity', 0)
-                        .transition().duration($scope.fadeOutSpeed / 6)
-                        .style('opacity', 1)
+            .transition().duration($scope.fadeOutSpeed / 6)
+            .style('opacity', 1)
         } else {
 
         }
@@ -838,22 +835,22 @@ class Incidents extends React.Component {
       let trans = parseFloat(obj.attr('trans'))
       if (trans < 1) {
         obj = obj.transition().duration($scope.fadeOutSpeed * 2 * (1 - trans))
-                    .style('stroke-dashoffset', 0)
-                    .attr('trans', 1)
+          .style('stroke-dashoffset', 0)
+          .attr('trans', 1)
       }
 
       if (trans < 2) {
         obj.transition()
-                    .duration($scope.fadeOutSpeed / 2 * (trans <= 1 ? 1 : (2 - trans)))
-                    .style('opacity', 0)
-                    .attr('trans', 2)
-                    .remove()
-                    .each('end', (d) => {
-                      let callback = d.callback
-                      let index = me.connections.indexOf(line)
-                      if (index >= 0) me.connections.splice(index, 1)
-                      if (callback) callback()
-                    })
+          .duration($scope.fadeOutSpeed / 2 * (trans <= 1 ? 1 : (2 - trans)))
+          .style('opacity', 0)
+          .attr('trans', 2)
+          .remove()
+          .each('end', (d) => {
+            let callback = d.callback
+            let index = me.connections.indexOf(line)
+            if (index >= 0) me.connections.splice(index, 1)
+            if (callback) callback()
+          })
       }
 
             // Label
@@ -864,16 +861,16 @@ class Incidents extends React.Component {
 
       if (trans < 1) {
         obj = obj.transition().duration($scope.fadeOutSpeed * 2 * (1 - trans))
-                    .style('opacity', 1)
-                    .attr('trans', 1)
+          .style('opacity', 1)
+          .attr('trans', 1)
       }
 
       if (trans < 2) {
         obj.transition()
-                    .duration($scope.fadeOutSpeed / 2 * (trans <= 1 ? 1 : (2 - trans)))
-                    .style('opacity', 0)
-                    .attr('trans', 2)
-                    .remove()
+          .duration($scope.fadeOutSpeed / 2 * (trans <= 1 ? 1 : (2 - trans)))
+          .style('opacity', 0)
+          .attr('trans', 2)
+          .remove()
       }
     })
 
@@ -887,20 +884,20 @@ class Incidents extends React.Component {
 
         if (trans < 1) {
           obj = obj.transition().duration($scope.fadeOutSpeed * 2 * (1 - trans))
-                        .style('opacity', 1)
-                        .attr('trans', 1)
+            .style('opacity', 1)
+            .attr('trans', 1)
         }
 
         if (trans < 2) {
           obj.transition()
-                        .duration($scope.fadeOutSpeed / 2 * (trans <= 1 ? 1 : (2 - trans)))
-                        .style('opacity', 0)
-                        .attr('trans', 2)
-                        .remove()
-                        .each('end', (d) => {
-                          let callback = d.callback
-                          if (callback) callback()
-                        })
+            .duration($scope.fadeOutSpeed / 2 * (trans <= 1 ? 1 : (2 - trans)))
+            .style('opacity', 0)
+            .attr('trans', 2)
+            .remove()
+            .each('end', (d) => {
+              let callback = d.callback
+              if (callback) callback()
+            })
         }
       })
     })
@@ -1035,5 +1032,3 @@ class Incidents extends React.Component {
 }
 
 Incidents.defaultProps = {}
-
-export default Incidents
