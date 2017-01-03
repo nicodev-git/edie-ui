@@ -12,7 +12,7 @@ import {
 @connect(
   state => ({ envVars: state.settings.envVars }),
   dispatch => ({
-    signUser: bindActionCreators({
+    ...bindActionCreators({
       fetchEnvVars,
       addEnvVar,
       updateEnvVar
