@@ -1,10 +1,10 @@
-import React from 'react'
+import React, { Component } from 'react'
 import Griddle from 'griddle-react'
 import ReactTooltip from 'react-tooltip'
 import enStrings from 'react-timeago/lib/language-strings/en'
 import buildFormatter from 'react-timeago/lib/formatters/buildFormatter'
 
-export default class BasicMonitorTable extends React.Component {
+export default class BasicMonitorTable extends Component {
   constructor (props) {
     super(props)
     this.state = {

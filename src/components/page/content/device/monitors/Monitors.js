@@ -5,11 +5,9 @@ import {
     MenuItem,
     Button
 } from 'react-bootstrap'
-import {withRouter} from 'react-router'
-import { connect } from 'react-redux'
 
 import MonitorTable from './MonitorTable'
-import EventLogTable from './EventLogTable'
+import EventLogTableContainer from '../../../../../containers/page/content/device/monitors/EventLogTableContainer'
 import ApplicationTableContainer from '../../../../../containers/page/content/device/monitors/ApplicationTableContainer'
 import ProcessTable from './ProcessTable'
 import MonitorLogTable from './MonitorLogTable'
@@ -20,7 +18,7 @@ import TabPage from '../../../../shared/TabPage'
 import TabPageBody from '../../../../shared/TabPageBody'
 import TabPageHeader from '../../../../shared/TabPageHeader'
 
-class Monitors extends React.Component {
+export default class Monitors extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -52,56 +50,54 @@ class Monitors extends React.Component {
     switch (selected) {
       case 'monitorlog':
         toolbar = (
-                   <MonitorLogOptions device={currentMonitor} father={this.props.device}/>
-                )
+         <MonitorLogOptions device={currentMonitor} father={this.props.device}/>
+        )
         break
       default:
         toolbar = (
-                    <div className="text-center margin-md-top">
-                        <div style={{position: 'absolute'}}>
-                            <div className="pull-left">
-                                <a href="javascript:;"
-                                  className={`btn btn-white text-primary ${selected === 'monitors' ? 'hidden' : ''}`}
-                                  onClick={this.onClickShowMonitors.bind(this)}
-                                >Show Monitors</a>
-                            </div>
-                        </div>
+          <div className="text-center margin-md-top">
+            <div style={{position: 'absolute'}}>
+              <div className="pull-left">
+                <a href="javascript:;"
+                  className={`btn btn-white text-primary ${selected === 'monitors' ? 'hidden' : ''}`}
+                  onClick={this.onClickShowMonitors.bind(this)}
+                >Show Monitors</a>
+              </div>
+            </div>
 
-                        <div style={{position: 'absolute', right: '25px'}}>
-                            <ButtonGroup>
+            <div style={{position: 'absolute', right: '25px'}}>
+              <ButtonGroup>
 
-                                <Button onClick={this.onClickAddMonitor.bind(this)} className={selected === 'monitors' ? '' : 'hidden'} >Add</Button>
+                <Button onClick={this.onClickAddMonitor.bind(this)} className={selected === 'monitors' ? '' : 'hidden'} >Add</Button>
 
-                                <Button onClick={this.onClickEditMonitor.bind(this)} className={selected === 'monitors' ? '' : 'hidden'}>Edit</Button>
+                <Button onClick={this.onClickEditMonitor.bind(this)} className={selected === 'monitors' ? '' : 'hidden'}>Edit</Button>
 
-                                <Button onClick={this.onClickDeleteMonitor.bind(this)} className={selected === 'monitors' ? '' : 'hidden'}>Delete</Button>
+                <Button onClick={this.onClickDeleteMonitor.bind(this)} className={selected === 'monitors' ? '' : 'hidden'}>Delete</Button>
 
-                                <DropdownButton title="System" id="dd-dev-monitors" pullRight>
+                <DropdownButton title="System" id="dd-dev-monitors" pullRight>
 
-                                    <MenuItem eventKey="1" onClick={this.onClickEventLog.bind(this)}>
-                                        <i className="fa fa-edit" />&nbsp;Event Log
-                                    </MenuItem>
+                  <MenuItem eventKey="1" onClick={this.onClickEventLog.bind(this)}>
+                    <i className="fa fa-edit" />&nbsp;Event Log
+                  </MenuItem>
 
-                                    <MenuItem eventKey="2" onClick={this.onClickApplication.bind(this)}>
-                                        <i className="fa fa-edit" />&nbsp;Installed Applications
-                                    </MenuItem>
+                  <MenuItem eventKey="2" onClick={this.onClickApplication.bind(this)}>
+                    <i className="fa fa-edit" />&nbsp;Installed Applications
+                  </MenuItem>
 
-                                    <MenuItem eventKey="3" onClick={this.onClickProcess.bind(this)}>
-                                        <i className="fa fa-edit" />&nbsp;Process
-                                    </MenuItem>
+                  <MenuItem eventKey="3" onClick={this.onClickProcess.bind(this)}>
+                    <i className="fa fa-edit" />&nbsp;Process
+                  </MenuItem>
 
-                                </DropdownButton>
-                            </ButtonGroup>
-                        </div>
-                    </div>
-                )
+                </DropdownButton>
+              </ButtonGroup>
+            </div>
+          </div>
+        )
         break
     }
 
     return toolbar
   }
-
-    // //////////////////////////////////////////////////////////////////////
 
   getMonitorTable () {
     return this.refs.monitor.getWrappedInstance()
@@ -118,8 +114,6 @@ class Monitors extends React.Component {
   onClickDeleteMonitor () {
     this.getMonitorTable().onClickDeleteMonitor()
   }
-
-    // ///////////////////////////////////////////////////////////////////////
 
   onClickShowMonitors () {
     this.setState({
@@ -174,7 +168,7 @@ class Monitors extends React.Component {
           {
             this.state.selected !== 'eventlog'
               ? null
-              : <EventLogTable {...props}/>
+              : <EventLogTableContainer {...props}/>
           }
 
           {
@@ -199,12 +193,3 @@ class Monitors extends React.Component {
     )
   }
 }
-
-Monitors.defaultProps = {
-}
-
-function mapStateToProps (state) {
-  return {device: state.dashboard.selectedDevice}
-}
-
-export default withRouter(connect(mapStateToProps)(Monitors))

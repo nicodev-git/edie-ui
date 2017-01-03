@@ -32,7 +32,7 @@ import DeviceMainRulesContainer from './containers/page/content/device/main/rule
 import DeviceMainRawIncidentsContainer from './containers/page/content/device/main/raw-incidents/MainRawIncidentsContainer'
 import DeviceMainAdvancedContainer from './containers/page/content/device/main/advanced/MainAdvancedContainer'
 import DeviceMainRuleAddContainer from './containers/page/content/device/main/rules/MainRulesAddContainer'
-import DeviceMonitors from './components/page/content/device/monitors/Monitors'
+import DeviceMonitorsContainer from './containers/page/content/device/monitors/MonitorsContainer'
 import DeviceConnectedContainer from './containers/page/content/device/connected/ConnectedContainer'
 import DeviceInfo from './components/page/content/device/info/Info'
 
@@ -80,7 +80,7 @@ export default(
           <Route path="advanced" component={DeviceMainAdvancedContainer}/>
           <Route path="ruleAdd" component={DeviceMainRuleAddContainer}/>
         </Route>
-        <Route path="monitor" component={DeviceMonitors}/>
+        <Route path="monitor" component={DeviceMonitorsContainer}/>
         <Route path="connected" component={DeviceConnectedContainer}/>
         <Route path="info" component={DeviceInfo}/>
       </Route>

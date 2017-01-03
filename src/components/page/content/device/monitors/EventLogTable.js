@@ -1,10 +1,7 @@
-import React from 'react'
-import { connect } from 'react-redux'
+import React, { Component } from 'react'
+import { ResponsiveInfiniteTable } from '../../../../shared/InfiniteTable'
 
-import {ResponsiveInfiniteTable} from '../../../../shared/InfiniteTable'
-import { fetchDeviceEventLog } from '../../../../../actions'
-
-class EventLogTable extends React.Component {
+export default class EventLogTable extends Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -68,14 +65,3 @@ class EventLogTable extends React.Component {
     )
   }
 }
-
-EventLogTable.defaultProps = {
-  device: {}
-}
-
-function mapStateToProps (state) {
-  return {eventLogs: state.devices.eventLogs}
-}
-
-// export default EventLogTable
-export default connect(mapStateToProps, {fetchDeviceEventLog})(EventLogTable)
