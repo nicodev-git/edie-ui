@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import Griddle from 'griddle-react'
 import TimeAgo from 'react-timeago'
 import moment from 'moment'
@@ -15,7 +15,7 @@ import {
 
 import ReactTooltip from 'react-tooltip'
 
-class IncidentTable extends React.Component {
+export default class IncidentTable extends Component {
   constructor (props) {
     super(props)
     this.state = {}
@@ -153,5 +153,3 @@ class IncidentTable extends React.Component {
 IncidentTable.defaultProps = {
   incidents: []
 }
-
-export default IncidentTable

@@ -1,13 +1,8 @@
 import React from 'react'
-import {connect} from 'react-redux'
-import {withRouter} from 'react-router'
-
-import {Panel, PanelHeader, PanelOptions, PanelBody} from '../../../../shared/Panel'
+import { Panel, PanelHeader, PanelOptions, PanelBody } from '../../../../shared/Panel'
 import IncidentTable from './IncidentTable'
 
-import { fetchIncidents, fixIncident, ackIncident } from '../../../../../actions'
-
-class MainIncidentPanel extends React.Component {
+export default class MainIncidentPanel extends React.Component {
   constructor (props) {
     super(props)
 
@@ -30,27 +25,19 @@ class MainIncidentPanel extends React.Component {
     )
   }
 
-    // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
   onClickOpenModal (e) {
     e.preventDefault()
 
     this.props.router.push('/bigincidents')
   }
 
-    // ///////////////////////////////////
-
   onClickSearch () {
-        // emit(EVENTS.SEARCH_CLICKED, '')
+    // emit(EVENTS.SEARCH_CLICKED, '')
   }
 
-    // ////////////////////////////////////
-
   refreshTable () {
-        // console.log("Received Incident Fixed!")
-    this.refs.table &&
-        this.refs.table.getWrappedInstance() &&
-        this.refs.table.getWrappedInstance().refresh()
+    // console.log("Received Incident Fixed!")
+    this.refs.table && this.refs.table.getWrappedInstance() && this.refs.table.getWrappedInstance().refresh()
   }
 
   render () {
@@ -83,16 +70,3 @@ class MainIncidentPanel extends React.Component {
 MainIncidentPanel.defaultProps = {
   hidden: false
 }
-
-const mapStateToProps = (state) => {
-  const { incidents } = state.dashboard
-  return { incidents }
-}
-
-const actions = {
-  fetchIncidents,
-  fixIncident,
-  ackIncident
-}
-
-export default withRouter(connect(mapStateToProps, actions)(MainIncidentPanel))
