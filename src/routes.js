@@ -27,7 +27,7 @@ import SettingAdvanced from './components/page/content/settings/advanced/Advance
 
 import Device from './components/page/content/device/Device'
 import DeviceMain from './components/page/content/device/main/Main'
-import DeviceMainIncidents from './components/page/content/device/main/incidents/MainIncidents'
+import DeviceMainIncidentsContainer from './containers/page/content/device/main/incidents/MainIncidentsContainer'
 import DeviceMainRules from './components/page/content/device/main/rules/MainRules'
 import DeviceMainRawIncidents from './components/page/content/device/main/raw-incidents/MainRawIncidents'
 import DeviceMainAdvancedContainer from './containers/page/content/device/main/advanced/MainAdvancedContainer'
@@ -74,7 +74,7 @@ export default(
 
             <Route path="device" component={Device}>
                 <Route path="main" component={DeviceMain}>
-                    <Route path="incidents" component={DeviceMainIncidents}/>
+                    <Route path="incidents" component={DeviceMainIncidentsContainer}/>
                     <Route path="rules" component={DeviceMainRules}/>
                     <Route path="rawIncidents" component={DeviceMainRawIncidents}/>
                     <Route path="advanced" component={DeviceMainAdvancedContainer}/>

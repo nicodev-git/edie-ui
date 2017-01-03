@@ -1,7 +1,7 @@
 import React from 'react'
 import Modal from 'react-bootstrap-modal'
 
-class AddIncidentModal extends React.Component {
+export default class AddIncidentModal extends React.Component {
   constructor (props) {
     super(props)
     this.state = {

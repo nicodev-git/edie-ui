@@ -1,11 +1,9 @@
-import React from 'react'
+import React, { Component } from 'react'
 import moment from 'moment'
-import { withRouter } from 'react-router'
 import {
   findIndex
   // assign // Never used
 } from 'lodash'
-import { connect } from 'react-redux'
 import Select from 'react-select'
 import {
     DropdownButton,
@@ -29,20 +27,12 @@ import MainTabs from '../MainTabs'
 import TabPage from '../../../../../shared/TabPage'
 import TabPageBody from '../../../../../shared/TabPageBody'
 import TabPageHeader from '../../../../../shared/TabPageHeader'
-
-import {
-  fixIncident,
-  ackIncident,
-  fetchDeviceIncidents,
-  openAddDeviceIncident
-} from '../../../../../../actions'
-
 import {
   showIncidentDetail,
   showIncidentRaw
 } from '../../../../../shared/incident/Incident'
 
-class MainIncidents extends React.Component {
+class MainIncidents extends Component {
   constructor (props) {
     super(props)
 
@@ -59,8 +49,6 @@ class MainIncidents extends React.Component {
       ],
 
       selectedSeverity: ['HIGH', 'MEDIUM'],
-
-            // ///////////////////////////////////
 
       selectedIndex: -1,
       currentSortCol: 'startTimestamp',
@@ -87,9 +75,9 @@ class MainIncidents extends React.Component {
         const {data} = props
         if (!data) return <span/>
         return (
-                    <span data-tip={moment(new Date(data)).format('YYYY-MM-DD HH:mm:ss')}>
-                        <TimeAgo date={data}/>
-                    </span>
+          <span data-tip={moment(new Date(data)).format('YYYY-MM-DD HH:mm:ss')}>
+            <TimeAgo date={data}/>
+          </span>
         )
       }
     }, {
@@ -168,28 +156,26 @@ class MainIncidents extends React.Component {
     }
 
     return (
-            <a href="javascript:;" className="text-black" onClick={this.onClickColHeader.bind(this, col)}>
-                <span className="nowrap">{displayName}{caretEl}</span>
-            </a>
+      <a href="javascript:;" className="text-black" onClick={this.onClickColHeader.bind(this, col)}>
+        <span className="nowrap">{displayName}{caretEl}</span>
+      </a>
     )
   }
 
   renderTable () {
     return (
-            <ResponsiveInfiniteTable
-              cells={this.cells}
-              ref="table"
-              rowMetadata={{'key': 'id'}}
-              selectable
-              onRowDblClick={this.onRowDblClick.bind(this)}
+      <ResponsiveInfiniteTable
+        cells={this.cells}
+        ref="table"
+        rowMetadata={{'key': 'id'}}
+        selectable
+        onRowDblClick={this.onRowDblClick.bind(this)}
 
-              useExternal={false}
-              data={this.props.incidents}
-            />
+        useExternal={false}
+        data={this.props.incidents}
+      />
     )
   }
-
-    // ///////////////////////////////////////////////////////////
 
   onClickColHeader (col) {
     const {
@@ -220,33 +206,27 @@ class MainIncidents extends React.Component {
     showIncidentDetail(sel)
   }
 
-    // /////////////////////////////////////////////////////////////
-
   onClickFixAll () {
     // let deviceid = this.props.device.id // Never used
 
     showPrompt('Please type comment for all incidents.', '', text => {
       if (text === null) return
 
-            // $.get(Api.incidents.fixSelectIncidents, assign({}, this.state.params, {
-            //     comment: text,
-            //     sid: this.context.sid,
-            //     deviceid: deviceid,
-            // })).done(() => {
-            //
-            //     this.reloadTable()
-            //
-            // })
+      // $.get(Api.incidents.fixSelectIncidents, assign({}, this.state.params, {
+      //     comment: text,
+      //     sid: this.context.sid,
+      //     deviceid: deviceid,
+      // })).done(() => {
+      //
+      //     this.reloadTable()
+      //
+      // })
     })
   }
-
-    // /////////////////////////////////////////////////////////////
 
   onClickAddIncident () {
     this.props.openAddDeviceIncident()
   }
-
-    // /////////////////////////////////////////////////////////////
 
   onClickAddException () {
     const selected = this.refs.table.getSelected()
@@ -265,8 +245,6 @@ class MainIncidents extends React.Component {
       openExceptionModal: false
     })
   }
-
-    // //////////////////////////////////////////////////////////////
 
   onClickPDF () {
     const params = this.getParams()
@@ -302,8 +280,6 @@ class MainIncidents extends React.Component {
 
     return params
   }
-
-    // ////////////////////////////////////////////////////////////////
 
   showIncidentComments (incident) {
     this.setState({
@@ -414,23 +390,3 @@ class MainIncidents extends React.Component {
     )
   }
 }
-
-MainIncidents.defaultProps = {
-}
-
-function mapStateToProps (state) {
-  return {
-    device: state.dashboard.selectedDevice,
-    incidents: state.devices.incidents,
-    addIncidentModalVisible: state.devices.addIncidentModalVisible
-  }
-}
-
-const actions = {
-  fetchDeviceIncidents,
-  fixIncident,
-  ackIncident,
-  openAddDeviceIncident
-}
-
-export default withRouter(connect(mapStateToProps, actions)(MainIncidents))

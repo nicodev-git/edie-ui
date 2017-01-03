@@ -1,6 +1,5 @@
 import React from 'react'
 import AddIncidentModal from '../../../../../../components/page/content/device/main/incidents/AddIncidentModal'
-import Modal from 'react-bootstrap-modal'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
