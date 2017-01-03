@@ -1,10 +1,7 @@
 import React, {Component} from 'react'
-import {connect} from 'react-redux'
-import {fetchDevices, openDeviceEditModal, deleteDevice} from '../actions'
-
 import DeviceEditModalContainer from '../containers/DeviceEditModalContainer'
 
-class DeviceList extends Component {
+export default class DeviceList extends Component {
 
   constructor (props) {
     super(props)
@@ -18,11 +15,11 @@ class DeviceList extends Component {
   }
 
   renderDevices () {
-        // console.log('DEVICES: ',this.props.devices);
-        // if (this.props.devices && this.props.devices.length > 0) {
-        //         console.log(this.props.devices[0].name);
-        //     return <div>{this.props.devices[0].name}</div>
-        // }
+    // console.log('DEVICES: ',this.props.devices);
+    // if (this.props.devices && this.props.devices.length > 0) {
+    //         console.log(this.props.devices[0].name);
+    //     return <div>{this.props.devices[0].name}</div>
+    // }
 
     const {selected} = this.state
 
@@ -54,8 +51,6 @@ class DeviceList extends Component {
       <DeviceEditModalContainer />
     )
   }
-
-    // ////////////////////
 
   onClickRow (selected) {
     this.setState({ selected })
@@ -97,12 +92,3 @@ class DeviceList extends Component {
     )
   }
 }
-function mapStateToProps (state) {
-    // console.log('DATA', state.devices);
-  return {
-    devices: state.devices.devices,
-    openModal: state.devices.openModal
-  }
-}
-export default connect(mapStateToProps,
-    {fetchDevices, openDeviceEditModal, deleteDevice})(DeviceList)
