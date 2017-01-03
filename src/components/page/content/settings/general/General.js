@@ -1,15 +1,15 @@
 import React from 'react'
 import InlineEdit from 'react-edit-inline'
-// import {
-//     ButtonGroup,
-//     Button
-// } from 'react-bootstrap' // Never used
+import {
+    ButtonGroup,
+    Button
+} from 'react-bootstrap' // Never used
 import { assign } from 'lodash'
 
-// import SettingTabs from '../SettingTabs' // Never used
-// import TabPage from '../../../../shared/TabPage' // Never used
-// import TabPageBody from '../../../../shared/TabPageBody' // Never used
-// import TabPageHeader from '../../../../shared/TabPageHeader' // Never used
+import SettingTabs from '../SettingTabs' // Never used
+import TabPage from '../../../../shared/TabPage' // Never used
+import TabPageBody from '../../../../shared/TabPageBody' // Never used
+import TabPageHeader from '../../../../shared/TabPageHeader' // Never used
 
 export default class General extends React.Component {
   constructor (props) {
@@ -196,5 +196,29 @@ export default class General extends React.Component {
 
       this.props.updateEnvVar(option)
     }
+  }
+
+  render () {
+    return (
+      <TabPage>
+        <TabPageHeader title="Settings">
+          <div className="text-center margin-md-top">
+            <div style={{position: 'absolute', right: '25px'}}>
+              <ButtonGroup>
+
+                <Button>System Backup</Button>
+
+                <Button>System Restore</Button>
+
+              </ButtonGroup>
+            </div>
+          </div>
+        </TabPageHeader>
+
+        <TabPageBody tabs={SettingTabs} tab={0}>
+          {this.renderContent()}
+        </TabPageBody>
+      </TabPage>
+    )
   }
 }
