@@ -19,7 +19,7 @@ import {
     }, dispatch)
   })
 )
-export default class Incidents extends Component {
+export default class IncidentsContainer extends Component {
   render () {
     return (
       <Incidents {...this.props} />
