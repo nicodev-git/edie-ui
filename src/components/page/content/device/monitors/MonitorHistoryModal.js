@@ -1,10 +1,10 @@
-import React from 'react'
+import React, { Component } from 'react'
 import Modal from 'react-bootstrap-modal'
 import moment from 'moment'
 
 import InfiniteTable from '../../../../shared/InfiniteTable'
 
-class MonitorHistoryModal extends React.Component {
+export default class MonitorHistoryModal extends Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -35,8 +35,6 @@ class MonitorHistoryModal extends React.Component {
   onClickClose () {
     this.props.onClose && this.props.onClose(this)
   }
-
-    // ///////////////////////////////////
 
   onSearchKeyUp (e) {
     if (this.state.search === e.target.value) return
@@ -86,5 +84,3 @@ MonitorHistoryModal.defaultProps = {
   onClose: null,
   device: {}
 }
-
-export default MonitorHistoryModal

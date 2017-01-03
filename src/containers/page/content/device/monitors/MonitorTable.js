@@ -9,7 +9,7 @@ import DeviceWizard from '../../../../shared/wizard/DeviceWizard'
 import { appendComponent, removeComponent } from '../../../../../util/Component'
 import { showAlert } from '../../../../shared/Alert'
 
-import MonitorPicker from './MonitorPicker'
+import MonitorPicker from './MonitorPickerContainer'
 import MonitorHistoryModal from './MonitorHistoryModal'
 
 import {

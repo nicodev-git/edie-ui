@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { Component } from 'react'
 import Modal from 'react-bootstrap-modal'
 
-class MatchEditModal extends React.Component {
+export default class MatchEditModal extends Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -11,21 +11,20 @@ class MatchEditModal extends React.Component {
 
   render () {
     return (
-            <Modal show={this.state.open} onHide={this.onHide.bind(this)}
-              aria-labelledby="ModalHeader" className="bootstrap-dialog type-primary">
+      <Modal show={this.state.open} onHide={this.onHide.bind(this)}
+        aria-labelledby="ModalHeader" className="bootstrap-dialog type-primary">
 
-                <div className="modal-header">
-                    <h4 className="modal-title bootstrap-dialog-title">
-                        Match
-                    </h4>
-                    <div className="bootstrap-dialog-close-button">
-                        <button className="close"
-                          onClick={this.onClickClose.bind(this)}>×</button>
-                    </div>
-                </div>
+          <div className="modal-header">
+            <h4 className="modal-title bootstrap-dialog-title">
+              Match
+            </h4>
+            <div className="bootstrap-dialog-close-button">
+              <button className="close" onClick={this.onClickClose.bind(this)}>×</button>
+            </div>
+          </div>
 
-                <div className="modal-body bootstrap-dialog-message p-none" />
-            </Modal>
+          <div className="modal-body bootstrap-dialog-message p-none" />
+      </Modal>
     )
   }
 
@@ -35,8 +34,7 @@ class MatchEditModal extends React.Component {
 
   onClickClose () {
     this.setState({open: false}, () => {
-      this.props.onClose &&
-            this.props.onClose(this)
+      this.props.onClose && this.props.onClose(this)
     })
   }
 }
@@ -44,5 +42,3 @@ class MatchEditModal extends React.Component {
 MatchEditModal.defaultProps = {
   onClose: null
 }
-
-export default MatchEditModal

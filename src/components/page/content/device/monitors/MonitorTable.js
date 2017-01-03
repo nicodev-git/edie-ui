@@ -9,7 +9,7 @@ import DeviceWizard from '../../../../shared/wizard/DeviceWizard'
 import { appendComponent, removeComponent } from '../../../../../util/Component'
 import { showAlert } from '../../../../shared/Alert'
 
-import MonitorPicker from './MonitorPicker'
+import MonitorPickerContainer from '../../../../../containers/page/content/device/monitors/MonitorPickerContainer'
 import MonitorHistoryModal from './MonitorHistoryModal'
 
 import {
@@ -151,7 +151,7 @@ class MonitorTable extends React.Component {
     if (!this.props.monitorPickerVisible) return null
 
     return (
-            <MonitorPicker
+            <MonitorPickerContainer
               onClickItem={monitorConfig => {
                 this.setState({monitorConfig}, () => {
                   this.addMonitor()

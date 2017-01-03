@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { ROOT_URL } from '../../../../../actions/config'
 
-class MonitorLogOptions extends React.Component {
+export default class MonitorLogOptions extends Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -18,13 +18,9 @@ class MonitorLogOptions extends React.Component {
     this.loadFiles()
   }
 
-    // //////////////////////////////////////////////////////
-
   onClickBack () {
     emit(EVENTS.DEV_MONITOR_SHOW_CLICKED) // eslint-disable-line no-undef
   }
-
-    // //////////////////////////////////////////////////////
 
   onChangeType (e) {
     this.setState({
@@ -57,8 +53,6 @@ class MonitorLogOptions extends React.Component {
       this.reloadTable()
     })
   }
-
-    // /////////////////////////////////////////////////////
 
   loadFiles () {
     let url = this.state.selectedType === 'all'
@@ -166,5 +160,3 @@ MonitorLogOptions.defaultProps = {
   device: {},
   father: {}
 }
-
-export default MonitorLogOptions

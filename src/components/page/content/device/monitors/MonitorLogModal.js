@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import Modal from 'react-bootstrap-modal'
 import { Pagination } from 'react-bootstrap'
 
@@ -10,7 +10,7 @@ import { appendComponent, removeComponent } from '../../../../../util/Component'
 
 import { ROOT_URL } from '../../../../../actions/config'
 
-class MonitorLogModal extends React.Component {
+export default class MonitorLogModal extends Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -37,110 +37,109 @@ class MonitorLogModal extends React.Component {
     const { selectedType } = this.state
 
     return (
-            <Modal show={this.state.open} onHide={this.onHide.bind(this)}
-              aria-labelledby="ModalHeader" className="bootstrap-dialog type-primary">
+      <Modal show={this.state.open} onHide={this.onHide.bind(this)}
+        aria-labelledby="ModalHeader" className="bootstrap-dialog type-primary">
 
-                <div className="modal-header">
-                    <h4 className="modal-title bootstrap-dialog-title">
-                        Log
-                    </h4>
-                    <div className="bootstrap-dialog-close-button">
-                        <button className="close"
-                          onClick={this.onClickClose.bind(this)}>×</button>
-                    </div>
+          <div className="modal-header">
+            <h4 className="modal-title bootstrap-dialog-title">
+              Log
+            </h4>
+            <div className="bootstrap-dialog-close-button">
+              <button className="close" onClick={this.onClickClose.bind(this)}>×</button>
+            </div>
+          </div>
+
+          <div className="modal-body bootstrap-dialog-message p-none">
+            <div className="panel panel-default mb-none">
+              <div className="panel-heading" style={{height: '40px'}}>
+
+                <a href="javascript:"
+                  className="pull-left margin-sm-left"
+                  style={{marginTop: '2px'}}
+                  onClick={this.onClickNew.bind(this)}>
+                  <i className="fa fa-plus-square fa-lg" title="Add New File" />
+                </a>
+                <a href="javascript:"
+                  className="pull-left margin-sm-left hidden"
+                  style={{marginTop: '2px'}}
+                  onClick={this.onClickMatch.bind(this)}>
+                  <i className="fa fa-credit-card fa-lg" title="Add New Matcher" />
+                </a>
+
+                <select className="input-sm margin-md-left"
+                  style={{marginTop: '-3px'}}
+                  value={this.state.selectedFile}
+                  onChange={this.onChangeFile.bind(this)}>
+                    {
+                      this.state.files.map(item =>
+                        <option key={item.name} value={item.value}>{item.name}</option>
+                      )
+                    }
+                </select>
+
+                <select className="input-sm margin-sm-left"
+                  style={{marginTop: '-3px'}}
+                  value={this.state.selectedType}
+                  onChange={this.onChangeType.bind(this)}>
+                  <option value="error">Error</option>
+                  <option value="all">All</option>
+                </select>
+
+                <div className="navbar-search"
+                  style={{display: 'inline-block', marginTop: '-3px', padding: 0}}>
+                  <input type="text" placeholder="Search …"
+                    className="form-control"
+                    ref="search"
+                    onKeyUp={this.onSearchKeyUp.bind(this)}/>
+                  <button className="btn" type="submit">
+                      <i className="fa fa-search" />
+                  </button>
                 </div>
 
-                <div className="modal-body bootstrap-dialog-message p-none">
-                    <div className="panel panel-default mb-none">
-                        <div className="panel-heading" style={{height: '40px'}}>
-
-                            <a href="javascript:"
-                              className="pull-left margin-sm-left"
-                              style={{marginTop: '2px'}}
-                              onClick={this.onClickNew.bind(this)}>
-                                <i className="fa fa-plus-square fa-lg" title="Add New File" />
-                            </a>
-                            <a href="javascript:"
-                              className="pull-left margin-sm-left hidden"
-                              style={{marginTop: '2px'}}
-                              onClick={this.onClickMatch.bind(this)}>
-                                <i className="fa fa-credit-card fa-lg" title="Add New Matcher" />
-                            </a>
-
-                            <select className="input-sm margin-md-left"
-                              style={{marginTop: '-3px'}}
-                              value={this.state.selectedFile}
-                              onChange={this.onChangeFile.bind(this)}>
-                                {
-                                    this.state.files.map(item =>
-                                        <option key={item.name} value={item.value}>{item.name}</option>
-                                    )
-                                }
-                            </select>
-
-                            <select className="input-sm margin-sm-left"
-                              style={{marginTop: '-3px'}}
-                              value={this.state.selectedType}
-                              onChange={this.onChangeType.bind(this)}>
-                                <option value="error">Error</option>
-                                <option value="all">All</option>
-                            </select>
-
-                            <div className="navbar-search"
-                              style={{display: 'inline-block', marginTop: '-3px', padding: 0}}>
-                                <input type="text" placeholder="Search …"
-                                  className="form-control"
-                                  ref="search"
-                                  onKeyUp={this.onSearchKeyUp.bind(this)}/>
-                                    <button className="btn" type="submit">
-                                        <i className="fa fa-search" />
-                                    </button>
-                            </div>
-
-                            <label>
-                                <input type="checkbox" id="input-translate"
-                                  value={this.state.translate}
-                                  onChange={this.onChangeTranslate.bind(this)}/>Translate
-                            </label>
-                        </div>
-                        <div className="panel-body">
-                            <div className="row">
-                                <div className="controls col-sm-12">
-                                    <div style={{position: 'absolute', left: 0, top: '50%', right: 0, textAlign: 'center', display: 'none'}}>No Results!</div>
-                                    <div style={{height: '445px', overflow: 'auto'}}>
-                                        <table className={`table table-hover dataTable ${selectedType === 'error' ? '' : 'hidden'}`}>
-                                            <tbody>{
-                                                this.state.lines.map((item, index) => <tr key={index}>
-                                                    <td dangerouslySetInnerHTML={{__html: item }} />
-                                                </tr>)
-                                            }</tbody>
-                                        </table>
-                                        <div className={`log-content ${selectedType === 'all' ? '' : 'hidden'}`}
-                                          dangerouslySetInnerHTML={{__html: this.state.text }} />
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="row">
-                                <div className="col-sm-12">
-                                    <Pagination
-                                      prev
-                                      next
-                                      first
-                                      last
-                                      ellipsis
-                                      boundaryLinks
-                                      items={this.state.totalPages}
-                                      maxButtons={5}
-                                      activePage={this.state.activePage}
-                                      onSelect={this.onChangePage.bind(this)}
-                                    />
-                                </div>
-                            </div>
-                        </div>
+                <label>
+                  <input type="checkbox" id="input-translate"
+                    value={this.state.translate}
+                    onChange={this.onChangeTranslate.bind(this)}/>Translate
+                </label>
+              </div>
+              <div className="panel-body">
+                <div className="row">
+                  <div className="controls col-sm-12">
+                    <div style={{position: 'absolute', left: 0, top: '50%', right: 0, textAlign: 'center', display: 'none'}}>No Results!</div>
+                    <div style={{height: '445px', overflow: 'auto'}}>
+                      <table className={`table table-hover dataTable ${selectedType === 'error' ? '' : 'hidden'}`}>
+                        <tbody>{
+                          this.state.lines.map((item, index) => <tr key={index}>
+                            <td dangerouslySetInnerHTML={{__html: item }} />
+                          </tr>)
+                        }</tbody>
+                      </table>
+                      <div className={`log-content ${selectedType === 'all' ? '' : 'hidden'}`}
+                        dangerouslySetInnerHTML={{__html: this.state.text }} />
                     </div>
-
+                  </div>
                 </div>
-            </Modal>
+                <div className="row">
+                  <div className="col-sm-12">
+                    <Pagination
+                      prev
+                      next
+                      first
+                      last
+                      ellipsis
+                      boundaryLinks
+                      items={this.state.totalPages}
+                      maxButtons={5}
+                      activePage={this.state.activePage}
+                      onSelect={this.onChangePage.bind(this)}
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+      </Modal>
     )
   }
 
@@ -165,7 +164,7 @@ class MonitorLogModal extends React.Component {
       width: 48,
       height: 48,
       timeout: 60000
-            // agentid: curDeviceInfo
+      // agentid: curDeviceInfo
     }
 
     let configParams = {
@@ -174,24 +173,20 @@ class MonitorLogModal extends React.Component {
     }
 
     appendComponent(
-            <DeviceWizard
-              deviceType={'monitor-log-file'}
-              onClose={removeComponent}
-              extraParams={extraParams}
-              configParams={configParams}
-            />
-        )
+      <DeviceWizard
+        deviceType={'monitor-log-file'}
+        onClose={removeComponent}
+        extraParams={extraParams}
+        configParams={configParams}
+      />
+    )
   }
 
   onClickMatch () {
     appendComponent(
-            <LogMatchModal
-              onClose={removeComponent}
-                />
-        )
+      <LogMatchModal onClose={removeComponent} />
+    )
   }
-
-    // /////////////////////////////////////////////////////////////////////////////////
 
   onChangeType (e) {
     this.setState({
@@ -233,8 +228,6 @@ class MonitorLogModal extends React.Component {
       this.loadLines()
     })
   }
-
-    // /////////////////////////////////////////////////////////////////////////////////
 
   loadFiles () {
     let url = this.state.selectedType === 'all' ?
@@ -317,11 +310,11 @@ class MonitorLogModal extends React.Component {
         this.setState({ lines, totalPages })
       }
 
-            // if (res.recordsTotal === 0) {
-            //     p.find('#div-no-results').show();
-            // } else {
-            //     p.find('#div-no-results').hide();
-            // }
+      // if (res.recordsTotal === 0) {
+      //     p.find('#div-no-results').show();
+      // } else {
+      //     p.find('#div-no-results').hide();
+      // }
     }).always(function () {
       removeComponent(loader)
     })
@@ -343,5 +336,3 @@ MonitorLogModal.defaultProps = {
   device: {},
   father: {}
 }
-
-export default MonitorLogModal

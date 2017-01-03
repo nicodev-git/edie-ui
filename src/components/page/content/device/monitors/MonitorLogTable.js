@@ -2,7 +2,7 @@ import React from 'react'
 
 import InfiniteTable from '../../../../shared/InfiniteTable'
 
-class MonitorLogTable extends React.Component {
+export default class MonitorLogTable extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -11,8 +11,6 @@ class MonitorLogTable extends React.Component {
       keyword: '',
       heb7: false
     }
-
-        //
 
     this.listeners = {
       [EVENTS.DEV_MONITOR_LOG_FILTER_CHANGED]: this.onFilterChanged.bind(this) // eslint-disable-line no-undef
@@ -85,5 +83,3 @@ MonitorLogTable.defaultProps = {
   device: {},
   father: {}
 }
-
-export default MonitorLogTable
