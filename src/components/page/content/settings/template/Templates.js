@@ -1,26 +1,15 @@
-import React from 'react'
-
-import { connect } from 'react-redux'
+import React, { Component } from 'react'
 
 import SettingTabs from '../SettingTabs'
 import TabPage from '../../../../shared/TabPage'
 import TabPageBody from '../../../../shared/TabPageBody'
 import TabPageHeader from '../../../../shared/TabPageHeader'
 
-import {
-  fetchDeviceTemplates,
-  deleteDeviceTemplate,
-  openDeviceTplModal,
-  fetchMonitorTemplates,
-  openMonitorTplModal,
-  deleteMonitorTemplate
-} from '../../../../../actions'
-
 import DeviceTplModalContainer from '../../../../../containers/page/content/settings/template/DeviceTplModalContainer'
 import MonitorTplModalContainer from '../../../../../containers/page/content/settings/template/MonitorTplModalContainer'
 import ImageUploaderModalContainer from '../../../../../containers/page/content/settings/template/ImageUploaderModalContainer'
 
-class Templates extends React.Component {
+export default class Templates extends Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -35,62 +24,67 @@ class Templates extends React.Component {
 
   renderDeviceTemplates () {
     return (
-            <div>
-                <div className="fa-lg">
-                    <span>Device Templates</span>
-                    <a href="javascript:;" className="fa fa-plus-square margin-md-left"
-                      onClick={this.onClickAddDeviceTpl.bind(this)} />
-                </div>
-                <table className="table table-hover dataTable">
-                    <tbody>{
-                        this.props.deviceTemplates.map(item =>
-                            <tr key={item.id}>
-                                <td>{item.name}</td>
-                                <td className="text-right fa-lg">
-                                    <a href="javascript:;" onClick={this.onClickEditDeviceTpl.bind(this, item)}>
-                                        <i className="fa fa-edit" /></a>
-                                    <a href="javascript:;" className="margin-sm-left" onClick={this.onClickDeleteDeviceTpl.bind(this, item)}>
-                                        <i className="fa fa-trash-o" /></a>
-                                </td>
-                            </tr>
-                        )
-                    }
-                    </tbody>
-                </table>
+      <div>
+        <div className="fa-lg">
+          <span>Device Templates</span>
+          <a href="javascript:;" className="fa fa-plus-square margin-md-left"
+            onClick={this.onClickAddDeviceTpl.bind(this)} />
+        </div>
+        <table className="table table-hover dataTable">
+          <tbody>
+          {
+            this.props.deviceTemplates.map(item =>
+              <tr key={item.id}>
+                <td>{item.name}</td>
+                <td className="text-right fa-lg">
+                  <a href="javascript:;" onClick={this.onClickEditDeviceTpl.bind(this, item)}>
+                      <i className="fa fa-edit" />
+                  </a>
+                  <a href="javascript:;" className="margin-sm-left" onClick={this.onClickDeleteDeviceTpl.bind(this, item)}>
+                      <i className="fa fa-trash-o" />
+                  </a>
+                </td>
+              </tr>
+            )
+          }
+          </tbody>
+        </table>
 
-                {this.renderDeviceTplModal()}
-                {this.renderTplImageModal()}
-            </div>
+        {this.renderDeviceTplModal()}
+        {this.renderTplImageModal()}
+      </div>
     )
   }
 
   renderMonitorTemplates () {
     return (
-            <div>
-                <div className="fa-lg">
-                    <span>Monitor Templates</span>
-                    <a href="javascript:;" className="fa fa-plus-square margin-md-left"
-                      onClick={this.onClickAddMonitorTpl.bind(this)} />
-                </div>
-                <table className="table table-hover dataTable">
-                    <tbody>{
-                        this.props.monitorTemplates.map(item =>
-                            <tr key={item.id}>
-                                <td>{item.name}</td>
-                                <td className="text-right fa-lg">
-                                    <a href="javascript:;" onClick={this.onClickEditMonitorTpl.bind(this, item)}>
-                                        <i className="fa fa-edit" /></a>
-                                    <a href="javascript:;" className="margin-sm-left" onClick={this.onClickDeleteMonitorTpl.bind(this, item)}>
-                                        <i className="fa fa-trash-o" /></a>
-                                </td>
-                            </tr>
-                        )
-                    }
-                    </tbody>
-                </table>
+      <div>
+        <div className="fa-lg">
+          <span>Monitor Templates</span>
+          <a href="javascript:;" className="fa fa-plus-square margin-md-left" onClick={this.onClickAddMonitorTpl.bind(this)} />
+        </div>
+        <table className="table table-hover dataTable">
+          <tbody>
+          {
+            this.props.monitorTemplates.map(item =>
+              <tr key={item.id}>
+                <td>{item.name}</td>
+                <td className="text-right fa-lg">
+                  <a href="javascript:;" onClick={this.onClickEditMonitorTpl.bind(this, item)}>
+                      <i className="fa fa-edit" />
+                  </a>
+                  <a href="javascript:;" className="margin-sm-left" onClick={this.onClickDeleteMonitorTpl.bind(this, item)}>
+                      <i className="fa fa-trash-o" />
+                  </a>
+                </td>
+              </tr>
+            )
+          }
+          </tbody>
+        </table>
 
-                {this.renderMonitorTplModal()}
-            </div>
+        {this.renderMonitorTplModal()}
+      </div>
     )
   }
 
@@ -114,8 +108,6 @@ class Templates extends React.Component {
       <ImageUploaderModalContainer />
     )
   }
-
-    // ///////////////////////////////////////////////////////////////////////////
 
   onClickAddDeviceTpl () {
     this.props.openDeviceTplModal()
@@ -142,7 +134,6 @@ class Templates extends React.Component {
   }
 
   render () {
-    // const {tabIndex} = this.state // Never used
     return (
       <TabPage>
         <TabPageHeader title="Settings" />
@@ -162,23 +153,3 @@ class Templates extends React.Component {
     )
   }
 }
-
-function mapStateToProps (state) {
-  return {
-    monitorTemplates: state.settings.monitorTemplates,
-    deviceTemplates: state.settings.deviceTemplates,
-    deviceTplModalVisible: state.settings.deviceTplModalVisible,
-    monitorTplModalVisible: state.settings.monitorTplModalVisible,
-    tplImageModalVisible: state.settings.tplImageModalVisible
-  }
-}
-
-const actions = {
-  fetchDeviceTemplates,
-  fetchMonitorTemplates,
-  openDeviceTplModal,
-  deleteDeviceTemplate,
-  openMonitorTplModal,
-  deleteMonitorTemplate
-}
-export default connect(mapStateToProps, actions)(Templates)
