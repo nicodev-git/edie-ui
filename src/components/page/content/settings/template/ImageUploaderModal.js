@@ -1,11 +1,8 @@
 import React from 'react'
 import Modal from 'react-bootstrap-modal'
-import { connect } from 'react-redux'
 import { concat } from 'lodash'
 
-import { closeTplImageModal, uploadImage, fetchImages } from '../../../../../actions'
-
-class ImageUploaderModal extends React.Component {
+export default class ImageUploaderModal extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -19,10 +16,10 @@ class ImageUploaderModal extends React.Component {
   componentWillMount () {
     this.setState({
       icons: [
-                { url: '/images/window.png', filename: 'window.png' },
-                { url: '/images/linux.png', filename: 'linux.png' },
-                { url: '/images/inticon.png', filename: 'inticon.png' },
-                { url: '/images/pcs.png', filename: 'pcs.png' }
+        { url: '/images/window.png', filename: 'window.png' },
+        { url: '/images/linux.png', filename: 'linux.png' },
+        { url: '/images/inticon.png', filename: 'inticon.png' },
+        { url: '/images/pcs.png', filename: 'pcs.png' }
       ]
     })
 
@@ -44,10 +41,6 @@ class ImageUploaderModal extends React.Component {
   closeModal (data) {
     this.props.closeTplImageModal(data)
   }
-
-    // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   onClickItem (item, e) {
     let currentIcon = item
@@ -136,20 +129,3 @@ class ImageUploaderModal extends React.Component {
     )
   }
 }
-
-ImageUploaderModal.defaultProps = {
-  selected: {}
-}
-
-function mapStateToProps (state) {
-  return {
-    customImages: state.dashboard.images
-  }
-}
-
-const actions = {
-  closeTplImageModal,
-  fetchImages,
-  uploadImage
-}
-export default connect(mapStateToProps, actions)(ImageUploaderModal)
