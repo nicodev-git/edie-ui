@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import MainIncidents from '../../../../../../components/page/content/device/main/incidents/MainIncidents'
 import { withRouter } from 'react-router'
 import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 
 import {
   fixIncident,

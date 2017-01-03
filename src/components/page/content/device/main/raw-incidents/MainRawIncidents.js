@@ -1,14 +1,12 @@
 import React from 'react'
 // import Dimensions from 'react-dimensions' // Never used
-import {withRouter} from 'react-router'
 import { escapeRegExp } from 'lodash'
-import { connect } from 'react-redux'
 import {
     ButtonGroup,
     Button
 } from 'react-bootstrap'
 
-import {appendComponent, removeComponent} from '../../../../../../util/Component'
+import { appendComponent, removeComponent } from '../../../../../../util/Component'
 import { showAlert, showConfirm } from '../../../../../shared/Alert'
 
 import {ResponsiveInfiniteTable} from '../../../../../shared/InfiniteTable'
@@ -21,11 +19,9 @@ import TabPage from '../../../../../shared/TabPage'
 import TabPageBody from '../../../../../shared/TabPageBody'
 import TabPageHeader from '../../../../../shared/TabPageHeader'
 
-import {fetchDeviceRawIncidents} from '../../../../../../actions'
-
 import { ROOT_URL } from '../../../../../../actions/config'
 
-class MainRawIncidents extends React.Component {
+export default class MainRawIncidents extends React.Component {
   constructor (props) {
     super(props)
 
@@ -74,10 +70,10 @@ class MainRawIncidents extends React.Component {
   componentWillMount () {
     this.props.fetchDeviceRawIncidents()
   }
-    //
-    // componentWillUnmount() {
-    //     unlisten(this.listeners)
-    // }
+  //
+  // componentWillUnmount() {
+  //     unlisten(this.listeners)
+  // }
 
   highlightRender (props) {
     let data = props.data || ''
@@ -98,16 +94,16 @@ class MainRawIncidents extends React.Component {
 
   renderTable () {
     return (
-            <ResponsiveInfiniteTable
-              cells={this.cells}
-              ref="table"
-              rowMetadata={{'key': 'id'}}
-              selectable
-              onRowDblClick={this.onRowDblClick.bind(this)}
+      <ResponsiveInfiniteTable
+        cells={this.cells}
+        ref="table"
+        rowMetadata={{'key': 'id'}}
+        selectable
+        onRowDblClick={this.onRowDblClick.bind(this)}
 
-              useExternal={false}
-              data={this.props.rawIncidents}
-            />
+        useExternal={false}
+        data={this.props.rawIncidents}
+      />
     )
   }
 
@@ -141,8 +137,6 @@ class MainRawIncidents extends React.Component {
   onRowDblClick (sel) {
     this.onClickMakeRule()
   }
-
-    // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   onClickMakeRule () {
     this.showMakeRule()
@@ -183,12 +177,12 @@ class MainRawIncidents extends React.Component {
     }
 
     appendComponent(
-            <MarkIgnoreModal
-              device={this.props.device}
-              message={data.message}
-              onClose={this.onCloseMarkIgnore.bind(this)}
-            />
-        )
+      <MarkIgnoreModal
+        device={this.props.device}
+        message={data.message}
+        onClose={this.onCloseMarkIgnore.bind(this)}
+      />
+    )
   }
 
   onCloseMarkIgnore (modal, success) {
@@ -216,69 +210,69 @@ class MainRawIncidents extends React.Component {
     }
 
     appendComponent(
-            <DeviceWizard
-              deviceType="devicerule"
-              onClose={removeComponent}
-              extraParams={extra}
-              configParams={config}
-              onFinish={() => {
-                this.getTable().refresh()
-              }}
-              values={data}
-            />
-        )
+      <DeviceWizard
+        deviceType="devicerule"
+        onClose={removeComponent}
+        extraParams={extra}
+        configParams={config}
+        onFinish={() => {
+          this.getTable().refresh()
+        }}
+        values={data}
+      />
+    )
 
-        // let wizard = $('#devicerules-wizard');
-        // wizard.stepwizard('devicerule', (finished, config) => {
-        //     if(finished){
-        //         this.getTable().refresh()
-        //     } else {;
-        //
-        //     }
-        //     $('#devicerules-wizard').hide();
-        // }, {
-        //     deviceid: this.props.device.id,
-        //     idrulesNew: data.idrulesNew,
-        //     remoteip: data.remoteip,
-        // }, {
-        //     mapid: this.props.device.mapid,
-        //     fatherid : 0,
-        // }, 'Add Rule', [
-        //     '<div style="display: inline-block; width: 105px; padding-top: 10px; text-align: center;" class="btn btn-primary btn-wizard-rawmsg">'+
-        //     '<div style="width: 100%; text-align: center; font-size: 11px;"><i class="fa fa-book" style="font-size: 15px;"></i> Raw Message</div></div>'
-        // ]);
-        //
-        // $.each(data, (key, value) => {
-        //     let input = $('#devicerules-wizard').find('[name=' + key +  ']');
-        //     if(!input.length) return;
-        //     let tag = input.prop('tagName').toLowerCase();
-        //     let monitortype = input.attr('monitortype');
-        //     if(tag =='input' && type === 'text'){
-        //         input.val(value);
-        //     } else if(tag === 'select') {
-        //         input.val(value);
-        //     } else if(tag === 'input' && type === 'checkbox'){
-        //         input.prop('checked', value === 1);
-        //     }
-        // });
-        //
-        // wizard.find('.btn-wizard-rawmsg').off('click').click(function(){
-        //     $('#rawtextdiv').center().show();
-        //     $('#rawtextdiv').find('.rawtext').text(data.message);
-        // });
+    // let wizard = $('#devicerules-wizard');
+    // wizard.stepwizard('devicerule', (finished, config) => {
+    //     if(finished){
+    //         this.getTable().refresh()
+    //     } else {;
+    //
+    //     }
+    //     $('#devicerules-wizard').hide();
+    // }, {
+    //     deviceid: this.props.device.id,
+    //     idrulesNew: data.idrulesNew,
+    //     remoteip: data.remoteip,
+    // }, {
+    //     mapid: this.props.device.mapid,
+    //     fatherid : 0,
+    // }, 'Add Rule', [
+    //     '<div style="display: inline-block; width: 105px; padding-top: 10px; text-align: center;" class="btn btn-primary btn-wizard-rawmsg">'+
+    //     '<div style="width: 100%; text-align: center; font-size: 11px;"><i class="fa fa-book" style="font-size: 15px;"></i> Raw Message</div></div>'
+    // ]);
+    //
+    // $.each(data, (key, value) => {
+    //     let input = $('#devicerules-wizard').find('[name=' + key +  ']');
+    //     if(!input.length) return;
+    //     let tag = input.prop('tagName').toLowerCase();
+    //     let monitortype = input.attr('monitortype');
+    //     if(tag =='input' && type === 'text'){
+    //         input.val(value);
+    //     } else if(tag === 'select') {
+    //         input.val(value);
+    //     } else if(tag === 'input' && type === 'checkbox'){
+    //         input.prop('checked', value === 1);
+    //     }
+    // });
+    //
+    // wizard.find('.btn-wizard-rawmsg').off('click').click(function(){
+    //     $('#rawtextdiv').center().show();
+    //     $('#rawtextdiv').find('.rawtext').text(data.message);
+    // });
   }
 
   onClickRawSimulator () {
     let options = this.getTable().getSelected() || {}
 
     appendComponent(
-            <SimulatorModal
-              options={options}
-              device={this.props.device}
-              onClose={removeComponent}
-              onAddRule={this.onAddRule.bind(this)}
-            />
-        )
+      <SimulatorModal
+        options={options}
+        device={this.props.device}
+        onClose={removeComponent}
+        onAddRule={this.onAddRule.bind(this)}
+      />
+    )
   }
 
   onAddRule (values) {
@@ -292,15 +286,15 @@ class MainRawIncidents extends React.Component {
     }
 
     appendComponent(
-            <DeviceWizard
-              deviceType="devicerule"
-              onClose={removeComponent}
-              extraParams={extra}
-              configParams={config}
-              values={values || {}}
-              onFinish={() => {}}
-            />
-        )
+      <DeviceWizard
+        deviceType="devicerule"
+        onClose={removeComponent}
+        extraParams={extra}
+        configParams={config}
+        values={values || {}}
+        onFinish={() => {}}
+      />
+    )
   }
 
   render () {
@@ -340,15 +334,3 @@ class MainRawIncidents extends React.Component {
     )
   }
 }
-
-MainRawIncidents.defaultProps = {
-}
-
-function mapStateToProps (state) {
-  return {
-    device: state.dashboard.selectedDevice,
-    rawIncidents: state.devices.rawIncidents
-  }
-}
-
-export default withRouter(connect(mapStateToProps, {fetchDeviceRawIncidents})(MainRawIncidents))

@@ -32,7 +32,7 @@ import {
   showIncidentRaw
 } from '../../../../../shared/incident/Incident'
 
-class MainIncidents extends Component {
+export default class MainIncidents extends Component {
   constructor (props) {
     super(props)
 
