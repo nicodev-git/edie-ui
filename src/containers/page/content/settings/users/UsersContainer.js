@@ -17,7 +17,7 @@ import {
     userPasswordModalVisible: state.settings.userPasswordModalVisible
   }),
   dispatch => ({
-    signUser: bindActionCreators({
+    ...bindActionCreators({
       fetchSettingUsers,
       openSettingUserModal,
       deleteSettingUser,

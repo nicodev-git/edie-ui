@@ -2,7 +2,9 @@ import axios from 'axios'
 import {
   FETCH_ENV_VARS,
   ADD_ENV_VAR,
-  UPDATE_ENV_VAR
+  UPDATE_ENV_VAR,
+
+  NO_AUTH_ERROR
 } from './types'
 
 import { apiError } from './Errors'
@@ -10,6 +12,9 @@ import { apiError } from './Errors'
 import { ROOT_URL } from './config'
 
 export const fetchEnvVars = () => {
+  if (!window.localStorage.getItem('token')) {
+    return dispatch => dispatch({ type: NO_AUTH_ERROR })
+  }
   return (dispatch) => {
     axios.get(`${ROOT_URL}/setting/search/envvars`)
       .then(response => fetchEnvVarsSuccess(dispatch, response))
@@ -25,6 +30,9 @@ const fetchEnvVarsSuccess = (dispatch, response) => {
 }
 
 export const updateEnvVar = (entity) => {
+  if (!window.localStorage.getItem('token')) {
+    return dispatch => dispatch({ type: NO_AUTH_ERROR })
+  }
   return (dispatch) => {
     axios.put(entity._links.self.href, entity)
       .then(response => updateEnvVarSuccess(dispatch, response))
@@ -40,6 +48,9 @@ const updateEnvVarSuccess = (dispatch, response) => {
 }
 
 export const addEnvVar = (entity) => {
+  if (!window.localStorage.getItem('token')) {
+    return dispatch => dispatch({ type: NO_AUTH_ERROR })
+  }
   return (dispatch) => {
     axios.post(`${ROOT_URL}/setting`, entity)
       .then(response => addEnvVarSuccess(dispatch, response))

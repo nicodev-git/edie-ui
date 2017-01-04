@@ -11,7 +11,7 @@ import { fetchWorkflows, addWorkflow, updateWorkflow, closeWorkflowModal } from 
     initialValues: state.settings.editWorkflow
   }),
   dispatch => ({
-    signUser: bindActionCreators({
+    ...bindActionCreators({
       fetchWorkflows,
       addWorkflow,
       updateWorkflow,

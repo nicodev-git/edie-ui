@@ -14,7 +14,9 @@ import {
   OPEN_SETTING_USER_MODAL,
   CLOSE_SETTING_USER_MODAL,
   OPEN_USER_PASSWORD_MODAL,
-  CLOSE_USER_PASSWORD_MODAL
+  CLOSE_USER_PASSWORD_MODAL,
+
+  NO_AUTH_ERROR
 } from './types'
 
 import { apiError } from './Errors'
@@ -22,6 +24,9 @@ import { apiError } from './Errors'
 import { ROOT_URL } from './config'
 
 export const fetchSettingMaps = () => {
+  if (!window.localStorage.getItem('token')) {
+    return dispatch => dispatch({ type: NO_AUTH_ERROR })
+  }
   return (dispatch) => {
     axios.get(`${ROOT_URL}/map`)
       .then(response => fetchSettingMapsSuccess(dispatch, response))
@@ -54,6 +59,9 @@ export const closeSettingMapModal = () => {
 }
 
 export const addSettingMap = (props) => {
+  if (!window.localStorage.getItem('token')) {
+    return dispatch => dispatch({ type: NO_AUTH_ERROR })
+  }
   return (dispatch) => {
     axios.post(`${ROOT_URL}/map`, props)
       .then(response => addSettingMapSuccess(dispatch, response))
@@ -70,6 +78,9 @@ const addSettingMapSuccess = (dispatch, response) => {
 }
 
 export const updateSettingMap = (entity) => {
+  if (!window.localStorage.getItem('token')) {
+    return dispatch => dispatch({ type: NO_AUTH_ERROR })
+  }
   return (dispatch) => {
     axios.put(entity._links.self.href, entity)
       .then(response => updateSettingMapSuccess(dispatch, response))
@@ -86,6 +97,9 @@ const updateSettingMapSuccess = (dispatch, response) => {
 }
 
 export const deleteSettingMap = (entity) => {
+  if (!window.localStorage.getItem('token')) {
+    return dispatch => dispatch({ type: NO_AUTH_ERROR })
+  }
   return (dispatch) => {
     axios.delete(entity._links.self.href)
       .then(() => deleteSettingMapSuccess(dispatch, entity))
@@ -101,6 +115,9 @@ const deleteSettingMapSuccess = (dispatch, entity) => {
 }
 
 export const fetchSettingUsers = () => {
+  if (!window.localStorage.getItem('token')) {
+    return dispatch => dispatch({ type: NO_AUTH_ERROR })
+  }
   return (dispatch) => {
     dispatch({type: FETCH_SETTING_USERS, data: []})
 
@@ -118,6 +135,9 @@ const fetchSettingUsersSuccess = (dispatch, response) => {
 }
 
 export const addSettingUser = (props) => {
+  if (!window.localStorage.getItem('token')) {
+    return dispatch => dispatch({ type: NO_AUTH_ERROR })
+  }
   return (dispatch) => {
     axios.post(`${ROOT_URL}/user`, props)
       .then(response => addSettingUserSuccess(dispatch, response))
@@ -134,6 +154,9 @@ const addSettingUserSuccess = (dispatch, response) => {
 }
 
 export const updateSettingUser = (entity) => {
+  if (!window.localStorage.getItem('token')) {
+    return dispatch => dispatch({ type: NO_AUTH_ERROR })
+  }
   return (dispatch) => {
     axios.put(entity._links.self.href, entity)
       .then(response => updateSettingUserSuccess(dispatch, response))
@@ -151,6 +174,9 @@ const updateSettingUserSuccess = (dispatch, response) => {
 }
 
 export const deleteSettingUser = (entity) => {
+  if (!window.localStorage.getItem('token')) {
+    return dispatch => dispatch({ type: NO_AUTH_ERROR })
+  }
   return (dispatch) => {
     axios.delete(entity._links.self.href)
       .then(() => deleteSettingUserSuccess(dispatch, entity))

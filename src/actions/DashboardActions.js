@@ -3,7 +3,9 @@ import {
   UPDATE_DASHBOARD,
 
   FETCH_DASHBOARD_INCIDENTS,
-  FETCH_DASHBOARD_BIGINCIDENTS
+  FETCH_DASHBOARD_BIGINCIDENTS,
+
+  NO_AUTH_ERROR
 } from './types'
 
 import { apiError } from './Errors'
@@ -22,6 +24,9 @@ export const updateDashboard = (data) => {
 }
 
 export const fetchIncidents = () => {
+  if (!window.localStorage.getItem('token')) {
+    return dispatch => dispatch({ type: NO_AUTH_ERROR })
+  }
   return (dispatch) => {
     axios.get(`${ROOT_URL}/incident`, {params: {}})
       .then(response => fetchIncidentsSuccess(dispatch, response))
@@ -37,6 +42,9 @@ const fetchIncidentsSuccess = (dispatch, response) => {
 }
 
 export const fetchBigIncidents = (params) => {
+  if (!window.localStorage.getItem('token')) {
+    return dispatch => dispatch({ type: NO_AUTH_ERROR })
+  }
   return (dispatch) => {
     axios.get(`${ROOT_URL}/incident/search/findBy?${encodeUrlParams(params)}`)
       .then(response => fetchBigIncidentsSuccess(dispatch, response))

@@ -11,7 +11,9 @@ import {
   CLOSE_ADD_DEVICE_INCIDENT,
 
   SEARCH_INCIDENTS,
-  SEARCH_INCIDENT_DEVICES
+  SEARCH_INCIDENT_DEVICES,
+
+  NO_AUTH_ERROR
 } from './types'
 
 import { apiError } from './Errors'
@@ -37,6 +39,9 @@ export const closeNewIncidentModal = () => {
 }
 
 export const fetchDeviceIncidents = (params) => {
+  if (!window.localStorage.getItem('token')) {
+    return dispatch => dispatch({ type: NO_AUTH_ERROR })
+  }
   return (dispatch) => {
     axios.get(`${ROOT_URL}/incident/search/findBy?${encodeUrlParams(params)}`)
       .then(response => fetchDeviceIncidentsSuccess(dispatch, response))
@@ -52,6 +57,9 @@ const fetchDeviceIncidentsSuccess = (dispatch, response) => {
 }
 
 export const addDeviceIncident = (props) => {
+  if (!window.localStorage.getItem('token')) {
+    return dispatch => dispatch({ type: NO_AUTH_ERROR })
+  }
   return (dispatch) => {
     axios.post(`${ROOT_URL}/incident`, props)
       .then(response => addDeviceIncidentSuccess(dispatch, response))
@@ -68,6 +76,9 @@ const addDeviceIncidentSuccess = (dispatch, response) => {
 }
 
 export const updateDeviceIncident = (entity) => {
+  if (!window.localStorage.getItem('token')) {
+    return dispatch => dispatch({ type: NO_AUTH_ERROR })
+  }
   return (dispatch) => {
     axios.put(entity._links.self.href, entity)
       .then(response => updateDeviceIncidentSuccess(dispatch, response))
@@ -114,6 +125,9 @@ export const ackIncident = (incident) => {
 }
 
 export const searchIncidents = (params) => {
+  if (!window.localStorage.getItem('token')) {
+    return dispatch => dispatch({ type: NO_AUTH_ERROR })
+  }
   return dispatch => {
     axios.get(`${ROOT_URL}/incident/search/findBy?${encodeUrlParams(params)}`)
       .then(response => searchIncidentsSuccess(dispatch, response))
@@ -129,6 +143,9 @@ const searchIncidentsSuccess = (dispatch, response) => {
 }
 
 export const searchIncidentDevices = (params) => {
+  if (!window.localStorage.getItem('token')) {
+    return dispatch => dispatch({ type: NO_AUTH_ERROR })
+  }
   return dispatch => {
     axios.get(`${ROOT_URL}/device/search/findByName?${encodeUrlParams(params)}`)
       .then(response => searchIncidentDevicesSuccess(dispatch, response))

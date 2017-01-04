@@ -5,7 +5,9 @@ import {
   UPDATE_MONITOR_TEMPLATE,
   DELETE_MONITOR_TEMPLATE,
   OPEN_MONITOR_TEMPLATE_MODAL,
-  CLOSE_MONITOR_TEMPLATE_MODAL
+  CLOSE_MONITOR_TEMPLATE_MODAL,
+
+  NO_AUTH_ERROR
 } from './types'
 
 import { apiError } from './Errors'
@@ -13,6 +15,9 @@ import { apiError } from './Errors'
 import { ROOT_URL } from './config'
 
 export const fetchMonitorTemplates = () => {
+  if (!window.localStorage.getItem('token')) {
+    return dispatch => dispatch({ type: NO_AUTH_ERROR })
+  }
   return (dispatch) => {
     axios.get(`${ROOT_URL}/monitortemplate`)
       .then(response => fetchMonitorTemplatesSuccess(dispatch, response))
@@ -28,6 +33,9 @@ const fetchMonitorTemplatesSuccess = (dispatch, response) => {
 }
 
 export const addMonitorTemplate = (props) => {
+  if (!window.localStorage.getItem('token')) {
+    return dispatch => dispatch({ type: NO_AUTH_ERROR })
+  }
   return (dispatch) => {
     axios.post(`${ROOT_URL}/monitortemplate`, props)
       .then(response => addMonitorTemplateSuccess(dispatch, response))
@@ -44,6 +52,9 @@ const addMonitorTemplateSuccess = (dispatch, response) => {
 }
 
 export const updateMonitorTemplate = (entity) => {
+  if (!window.localStorage.getItem('token')) {
+    return dispatch => dispatch({ type: NO_AUTH_ERROR })
+  }
   return (dispatch) => {
     axios.put(entity._links.self.href, entity)
       .then(response => updateMonitorTemplateSuccess(dispatch, response))
@@ -60,6 +71,9 @@ const updateMonitorTemplateSuccess = (dispatch, response) => {
 }
 
 export const deleteMonitorTemplate = (entity) => {
+  if (!window.localStorage.getItem('token')) {
+    return dispatch => dispatch({ type: NO_AUTH_ERROR })
+  }
   return (dispatch) => {
     axios.delete(entity._links.self.href, entity)
       .then(() => deleteMonitorTemplateSuccess(dispatch, entity))

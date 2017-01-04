@@ -5,7 +5,9 @@ import {
   UPDATE_IDENTITY,
   REMOVE_IDENTITY,
   OPEN_IDENTITY_MODAL,
-  CLOSE_IDENTITY_MODAL
+  CLOSE_IDENTITY_MODAL,
+
+  NO_AUTH_ERROR
 } from './types'
 
 import { apiError } from './Errors'
@@ -13,6 +15,9 @@ import { apiError } from './Errors'
 import { ROOT_URL } from './config'
 
 export const fetchIdentities = () => {
+  if (!window.localStorage.getItem('token')) {
+    return dispatch => dispatch({ type: NO_AUTH_ERROR })
+  }
   return (dispatch) => {
     axios.get(`${ROOT_URL}/setting/search/identities`)
       .then(response => fetchIdentitiesSuccess(dispatch, response))
@@ -28,6 +33,9 @@ const fetchIdentitiesSuccess = (dispatch, response) => {
 }
 
 export const addIdentity = (props) => {
+  if (!window.localStorage.getItem('token')) {
+    return dispatch => dispatch({ type: NO_AUTH_ERROR })
+  }
   return (dispatch) => {
     axios.post(`${ROOT_URL}/setting`, props)
       .then(response => addIdentitySuccess(dispatch, response))
@@ -44,6 +52,9 @@ const addIdentitySuccess = (dispatch, response) => {
 }
 
 export const updateIdentity = (entity) => {
+  if (!window.localStorage.getItem('token')) {
+    return dispatch => dispatch({ type: NO_AUTH_ERROR })
+  }
   return (dispatch) => {
     axios.put(entity._links.self.href, entity)
       .then(response => updateIdentitySuccess(dispatch, response))
@@ -60,6 +71,9 @@ const updateIdentitySuccess = (dispatch, response) => {
 }
 
 export const removeIdentity = (entity) => {
+  if (!window.localStorage.getItem('token')) {
+    return dispatch => dispatch({ type: NO_AUTH_ERROR })
+  }
   return (dispatch) => {
     axios.delete(entity._links.self.href)
       .then(() => removeIdentitySuccess(dispatch, entity))

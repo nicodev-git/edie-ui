@@ -24,7 +24,9 @@ import {
   UPDATE_MAP_LINE,
   DELETE_MAP_LINE,
 
-  FETCH_MAP_DEVICES_LINES
+  FETCH_MAP_DEVICES_LINES,
+
+  NO_AUTH_ERROR
 } from './types'
 
 import { apiError } from './Errors'
@@ -32,6 +34,9 @@ import { apiError } from './Errors'
 import { ROOT_URL } from './config'
 
 export const fetchMaps = (initial) => {
+  if (!window.localStorage.getItem('token')) {
+    return dispatch => dispatch({ type: NO_AUTH_ERROR })
+  }
   return (dispatch) => {
     axios.get(`${ROOT_URL}/map`)
       .then(response => fetchMapsSuccess(dispatch, response, initial))
@@ -61,6 +66,9 @@ export const changeMap = (map) => {
 }
 
 export const addMap = (props) => {
+  if (!window.localStorage.getItem('token')) {
+    return dispatch => dispatch({ type: NO_AUTH_ERROR })
+  }
   return (dispatch) => {
     axios.post(`${ROOT_URL}/map`, props)
       .then(response => addMapSuccess(dispatch, response))
@@ -76,6 +84,9 @@ const addMapSuccess = (dispatch, response) => {
 }
 
 export const updateMap = (entity) => {
+  if (!window.localStorage.getItem('token')) {
+    return dispatch => dispatch({ type: NO_AUTH_ERROR })
+  }
   return (dispatch) => {
     axios.put(entity._links.self.href, entity)
       .then(response => updateMapSuccess(dispatch, response))
@@ -91,6 +102,9 @@ const updateMapSuccess = (dispatch, response) => {
 }
 
 export const deleteMap = (entity) => {
+  if (!window.localStorage.getItem('token')) {
+    return dispatch => dispatch({ type: NO_AUTH_ERROR })
+  }
   return (dispatch) => {
     axios.delete(entity._links.self.href)
       .then(() => deleteMapSuccess(dispatch, entity))
@@ -123,6 +137,9 @@ export const closeMapImportModal = () => {
 }
 
 export const importMap = (form) => {
+  if (!window.localStorage.getItem('token')) {
+    return dispatch => dispatch({ type: NO_AUTH_ERROR })
+  }
   return (dispatch) => {
     axios.post(`${ROOT_URL}/importmap`, form)
       .then(response => importMapSuccess(dispatch, response))
@@ -157,6 +174,9 @@ export const closeMapUsersModal = () => {
 }
 
 export const fetchMapUsers = (mapId) => {
+  if (!window.localStorage.getItem('token')) {
+    return dispatch => dispatch({ type: NO_AUTH_ERROR })
+  }
   return (dispatch) => {
     axios.get(`${ROOT_URL}/user/search/findByMap?mapid=${mapId}`)
       .then(response => fetchMapUsersSuccess(dispatch, response))
@@ -172,6 +192,9 @@ const fetchMapUsersSuccess = (dispatch, response) => {
 }
 
 export const addMapUser = (map, user) => {
+  if (!window.localStorage.getItem('token')) {
+    return dispatch => dispatch({ type: NO_AUTH_ERROR })
+  }
   return (dispatch) => {
     const entity = assign({}, user)
     entity.mapids = concat(entity.mapids || [], map.id)
@@ -190,6 +213,9 @@ const addMapUserSuccess = (dispatch, response) => {
 }
 
 export const removeMapUser = (map, user) => {
+  if (!window.localStorage.getItem('token')) {
+    return dispatch => dispatch({ type: NO_AUTH_ERROR })
+  }
   return (dispatch) => {
     const entity = assign({mapids: []}, user)
     entity.mapids = (entity.mapids || []).filter(u => u !== map.id)
@@ -208,6 +234,9 @@ const removeMapUserSuccess = (dispatch, user) => {
 }
 
 export const fetchMapDevicesAndLines = (mapid) => {
+  if (!window.localStorage.getItem('token')) {
+    return dispatch => dispatch({ type: NO_AUTH_ERROR })
+  }
   return (dispatch) => {
     if (!mapid) {
       fetchMapId(dispatch)
@@ -251,6 +280,9 @@ const fetchMapDevicesAndLinesSuccess = (dispatch, response) => {
 }
 
 export const addMapDevice = (props) => {
+  if (!window.localStorage.getItem('token')) {
+    return dispatch => dispatch({ type: NO_AUTH_ERROR })
+  }
   return (dispatch) => {
     axios.post(`${ROOT_URL}/device`, props)
       .then(response => addMapDeviceSuccess(dispatch, response))
@@ -266,6 +298,9 @@ const addMapDeviceSuccess = (dispatch, response) => {
 }
 
 export const updateMapDevice = (entity) => {
+  if (!window.localStorage.getItem('token')) {
+    return dispatch => dispatch({ type: NO_AUTH_ERROR })
+  }
   return (dispatch) => {
     axios.put(entity._links.self.href, entity)
       .then(response => updateMapDeviceSuccess(dispatch, response))
@@ -281,6 +316,9 @@ const updateMapDeviceSuccess = (dispatch, response) => {
 }
 
 export const deleteMapDevice = (entity) => {
+  if (!window.localStorage.getItem('token')) {
+    return dispatch => dispatch({ type: NO_AUTH_ERROR })
+  }
   return (dispatch) => {
     axios.delete(entity._links.self.href)
       .then(() => deleteMapDeviceSuccess(dispatch, entity))
@@ -296,6 +334,9 @@ const deleteMapDeviceSuccess = (dispatch, entity) => {
 }
 
 export const addMapLine = (props, cb) => {
+  if (!window.localStorage.getItem('token')) {
+    return dispatch => dispatch({ type: NO_AUTH_ERROR })
+  }
   return (dispatch) => {
     axios.post(`${ROOT_URL}/device`, props)
       .then(response => addMapLineSuccess(dispatch, response, cb))
@@ -312,6 +353,9 @@ const addMapLineSuccess = (dispatch, response, cb) => {
 }
 
 export const updateMapLine = (entity) => {
+  if (!window.localStorage.getItem('token')) {
+    return dispatch => dispatch({ type: NO_AUTH_ERROR })
+  }
   return (dispatch) => {
     axios.put(entity._links.self.href, entity)
       .then(response => updateMapLineSuccess(dispatch, response))
@@ -327,6 +371,9 @@ const updateMapLineSuccess = (dispatch, response) => {
 }
 
 export const deleteMapLine = (entity) => {
+  if (!window.localStorage.getItem('token')) {
+    return dispatch => dispatch({ type: NO_AUTH_ERROR })
+  }
   return (dispatch) => {
     axios.delete(entity._links.self.href)
       .then(() => deleteMapLineSuccess(dispatch, entity))

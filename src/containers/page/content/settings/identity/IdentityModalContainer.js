@@ -10,7 +10,7 @@ import { closeIdentityModal, addIdentity, updateIdentity } from '../../../../../
     initialValues: (state.settings.editIdentity || {}).identities
   }),
   dispatch => ({
-    signUser: bindActionCreators({
+    ...bindActionCreators({
       closeIdentityModal,
       addIdentity,
       updateIdentity

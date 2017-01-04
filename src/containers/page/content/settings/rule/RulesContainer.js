@@ -10,7 +10,7 @@ import { fetchWorkflows, openWorkflowModal, removeWorkflow } from '../../../../.
     workflowModalVisible: state.settings.workflowModalVisible
   }),
   dispatch => ({
-    signUser: bindActionCreators({
+    ...bindActionCreators({
       fetchWorkflows,
       openWorkflowModal,
       removeWorkflow

@@ -4,7 +4,9 @@ import {
   CLOSE_TPL_IMAGE_MODAL,
 
   FETCH_IMAGES,
-  UPLOAD_IMAGE
+  UPLOAD_IMAGE,
+
+  NO_AUTH_ERROR
 } from './types'
 
 import { apiError } from './Errors'
@@ -29,6 +31,9 @@ export const closeTplImageModal = (selectedImage) => {
 }
 
 export const uploadImage = (formData) => {
+  if (!window.localStorage.getItem('token')) {
+    return dispatch => dispatch({ type: NO_AUTH_ERROR })
+  }
   return (dispatch) => {
     axios.post(`${ROOT_URL}/upload`, formData)
       .then(response => uploadImageSuccess(dispatch, response))
@@ -44,6 +49,9 @@ const uploadImageSuccess = (dispatch, response) => {
 }
 
 export const fetchImages = () => {
+  if (!window.localStorage.getItem('token')) {
+    return dispatch => dispatch({ type: NO_AUTH_ERROR })
+  }
   return (dispatch) => {
     axios.get(`${ROOT_URL}/customImage`)
       .then(response => fetchImagesSuccess(dispatch, response))

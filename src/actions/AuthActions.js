@@ -49,7 +49,6 @@ export const signOut = () => {
 }
 
 export const signup = ({ email, password }) => {
-  console.log(email, password)
   return (dispatch) => {
     axios.post(`${ROOT_URL}/signup`, {email, password})
       .then(response => signupSuccess(dispatch, response))

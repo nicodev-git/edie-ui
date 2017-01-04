@@ -5,7 +5,9 @@ import {
   UPDATE_CREDENTIALS,
   REMOVE_CREDENTIALS,
   OPEN_CREDENTIALS_MODAL,
-  CLOSE_CREDENTIALS_MODAL
+  CLOSE_CREDENTIALS_MODAL,
+
+  NO_AUTH_ERROR
 } from './types'
 
 import { apiError } from './Errors'
@@ -13,6 +15,9 @@ import { apiError } from './Errors'
 import { ROOT_URL } from './config'
 
 export const fetchCredentials = () => {
+  if (!window.localStorage.getItem('token')) {
+    return dispatch => dispatch({ type: NO_AUTH_ERROR })
+  }
   return (dispatch) => {
     axios.get(`${ROOT_URL}/credential`)
       .then(response => fetchCredentialsSuccess(dispatch, response))
@@ -28,6 +33,9 @@ const fetchCredentialsSuccess = (dispatch, response) => {
 }
 
 export const addCredentials = (props) => {
+  if (!window.localStorage.getItem('token')) {
+    return dispatch => dispatch({ type: NO_AUTH_ERROR })
+  }
   return (dispatch) => {
     axios.post(`${ROOT_URL}/credential`, props)
       .then(response => addCredentialsSuccess(dispatch, response))
@@ -44,6 +52,9 @@ const addCredentialsSuccess = (dispatch, response) => {
 }
 
 export const updateCredentials = (entity) => {
+  if (!window.localStorage.getItem('token')) {
+    return dispatch => dispatch({ type: NO_AUTH_ERROR })
+  }
   return (dispatch) => {
     axios.put(entity._links.self.href, entity)
       .then(response => updateCredentialsSuccess(dispatch, response))
@@ -60,6 +71,9 @@ const updateCredentialsSuccess = (dispatch, response) => {
 }
 
 export const removeCredentials = (entity) => {
+  if (!window.localStorage.getItem('token')) {
+    return dispatch => dispatch({ type: NO_AUTH_ERROR })
+  }
   return (dispatch) => {
     axios.delete(entity._links.self.href)
       .then(() => removeCredentialsSuccess(dispatch, entity))

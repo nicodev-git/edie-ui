@@ -1,9 +1,11 @@
 import axios from 'axios'
 import {
-    FETCH_MESSAGE,
-    FETCH_ATTACKERS,
+  FETCH_MESSAGE,
+  FETCH_ATTACKERS,
 
-    GENERATE_PINCODE
+  GENERATE_PINCODE,
+
+  NO_AUTH_ERROR
 } from './types'
 
 import { apiError, authError } from './Errors'
@@ -24,6 +26,9 @@ export * from './SettingsActions'
 export * from './WorkflowActions'
 
 export const fetchMessage = () => {
+  if (!window.localStorage.getItem('token')) {
+    return dispatch => dispatch({ type: NO_AUTH_ERROR })
+  }
   return (dispatch) => {
     let config = {
       headers: {
@@ -45,6 +50,9 @@ const fetchMessageSuccess = (dispatch, response) => {
 }
 
 export const fetchAttackers = () => {
+  if (!window.localStorage.getItem('token')) {
+    return dispatch => dispatch({ type: NO_AUTH_ERROR })
+  }
   return (dispatch) => {
     axios.get(`${ROOT_URL}/attacker`, {params: {}})
       .then(response => fetchAttackersSuccess(dispatch, response))
@@ -60,6 +68,9 @@ const fetchAttackersSuccess = (dispatch, response) => {
 }
 
 export const generatePincode = () => {
+  if (!window.localStorage.getItem('token')) {
+    return dispatch => dispatch({ type: NO_AUTH_ERROR })
+  }
   return function (dispatch) {
     axios.get(`${ROOT_URL}/genpin`)
       .then(response => generatePincodeSuccess(dispatch, response))

@@ -27,7 +27,9 @@ import {
   UPDATE_DEVICE_TEMPLATE,
   DELETE_DEVICE_TEMPLATE,
   OPEN_DEVICE_TEMPLATE_MODAL,
-  CLOSE_DEVICE_TEMPLATE_MODAL
+  CLOSE_DEVICE_TEMPLATE_MODAL,
+
+  NO_AUTH_ERROR
 } from './types'
 
 import { apiError, updateDeviceError } from './Errors'
@@ -35,6 +37,9 @@ import { apiError, updateDeviceError } from './Errors'
 import { ROOT_URL } from './config'
 
 export const fetchDevices = () => {
+  if (!window.localStorage.getItem('token')) {
+    return dispatch => dispatch({ type: NO_AUTH_ERROR })
+  }
   return (dispatch) => {
     let config = {
       headers: {
@@ -186,6 +191,9 @@ export const closeDeviceEditModal = () => {
 }
 
 export const addDevice = (url, props) => {
+  if (!window.localStorage.getItem('token')) {
+    return dispatch => dispatch({ type: NO_AUTH_ERROR })
+  }
   return (dispatch) => {
     axios.post(url, props)
       .then(() => addDeviceSuccess(dispatch))
@@ -199,6 +207,9 @@ const addDeviceSuccess = (dispatch) => {
 }
 
 export const updateDevice = (url, props) => {
+  if (!window.localStorage.getItem('token')) {
+    return dispatch => dispatch({ type: NO_AUTH_ERROR })
+  }
   return (dispatch) => {
     axios.put(url, props)
       .then(response => updateDeviceSuccess(dispatch))
@@ -212,6 +223,9 @@ const updateDeviceSuccess = (dispatch) => {
 }
 
 export const deleteDevice = (url) => {
+  if (!window.localStorage.getItem('token')) {
+    return dispatch => dispatch({ type: NO_AUTH_ERROR })
+  }
   return (dispatch) => {
     axios.delete(url)
       .then(() => deleteDeviceSuccess(dispatch))
@@ -224,6 +238,9 @@ const deleteDeviceSuccess = (dispatch) => {
 }
 
 export const fetchDeviceTemplates = () => {
+  if (!window.localStorage.getItem('token')) {
+    return dispatch => dispatch({ type: NO_AUTH_ERROR })
+  }
   return (dispatch) => {
     axios.get(`${ROOT_URL}/devicetemplate`)
       .then(response => fetchDeviceTemplatesSuccess(dispatch, response))
@@ -239,6 +256,9 @@ const fetchDeviceTemplatesSuccess = (dispatch, response) => {
 }
 
 export const addDeviceTemplate = (props) => {
+  if (!window.localStorage.getItem('token')) {
+    return dispatch => dispatch({ type: NO_AUTH_ERROR })
+  }
   return (dispatch) => {
     axios.post(`${ROOT_URL}/devicetemplate`, props)
       .then(response => addDeviceTemplateSuccess(dispatch, response))
@@ -255,6 +275,9 @@ const addDeviceTemplateSuccess = (dispatch, response) => {
 }
 
 export const updateDeviceTemplate = (entity) => {
+  if (!window.localStorage.getItem('token')) {
+    return dispatch => dispatch({ type: NO_AUTH_ERROR })
+  }
   return (dispatch) => {
     axios.put(entity._links.self.href, entity)
       .then(response => updateDeviceTemplateSuccess(dispatch, response))
@@ -271,6 +294,9 @@ const updateDeviceTemplateSuccess = (dispatch, response) => {
 }
 
 export const deleteDeviceTemplate = (entity) => {
+  if (!window.localStorage.getItem('token')) {
+    return dispatch => dispatch({ type: NO_AUTH_ERROR })
+  }
   return (dispatch) => {
     axios.delete(entity._links.self.href, entity)
       .then(() => deleteDeviceTemplateSuccess(dispatch, entity))
