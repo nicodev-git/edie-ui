@@ -33,11 +33,11 @@ export const signUser = ({ email, password }) => {
   }
 }
 
-const signUserSuccess = (dispatch, token) => {
+const signUserSuccess = (dispatch, response) => {
   dispatch({
     type: AUTH_USER
   })
-  window.localStorage.setItem('token', token)
+  window.localStorage.setItem('token', response.data.token)
   browserHistory.push('/')
 }
 
