@@ -13,7 +13,8 @@ import {
   CLEAR_DEVICE_WIZARD_INITIAL_VALUES,
 
   FETCH_DEVICE_RULES,
-  FETCH_DEVICE_RAW_INCIDENTS,
+  // FETCH_DEVICE_RAW_INCIDENTS,
+  FETCH_DEVICE_EVENTS,
   FETCH_DEVICE_PHYSICAL_RULES,
   FETCH_DEVICE_BASIC_MONITORS,
   FETCH_DEVICE_EVENTLOG,
@@ -128,11 +129,38 @@ export const fetchDeviceRules = () => {
   }
 }
 
-export const fetchDeviceRawIncidents = () => {
+// export const fetchDeviceRawIncidents = () => {
+//   return (dispatch) => {
+//     dispatch({
+//       type: FETCH_DEVICE_RAW_INCIDENTS,
+//       data: []
+//     })
+//   }
+// }
+
+export const fetchDeviceEvents = () => {
+  if (!window.localStorage.getItem('token')) {
+    return dispatch => dispatch({ type: NO_AUTH_ERROR })
+  }
+  return (dispatch) => {
+    let config = {
+      headers: {
+        'Cache-Control': 'no-cache',
+        'X-Authorization': window.localStorage.getItem('token')
+      }
+    }
+    axios.post(`${ROOT_URL}/events`, config)
+      .then((response) => fetchDeviceEventsSuccess(dispatch, response))
+      .catch(error => apiError(dispatch, error))
+  }
+}
+
+const fetchDeviceEventsSuccess = (dispatch, response) => {
+  console.log(response)
   return (dispatch) => {
     dispatch({
-      type: FETCH_DEVICE_RAW_INCIDENTS,
-      data: []
+      type: FETCH_DEVICE_EVENTS,
+      data: response.data
     })
   }
 }
