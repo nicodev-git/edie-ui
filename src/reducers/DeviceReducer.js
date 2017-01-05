@@ -6,7 +6,8 @@ import {
     UPDATE_DEVICE_INCIDENT,
     CLOSE_ADD_DEVICE_INCIDENT,
 
-    FETCH_DEVICE_RULES,
+    // FETCH_DEVICE_RULES,
+    FETCH_DEVICE_WORKFLOWS,
     // FETCH_DEVICE_RAW_INCIDENTS,
     FETCH_DEVICE_EVENTS,
     FETCH_DEVICE_PHYSICAL_RULES,
@@ -74,8 +75,11 @@ export default function (state = INITIAL_STATE, action) {
     case CLEAR_DEVICE_WIZARD_INITIAL_VALUES:
       return { ...state, wizardInitialValues: null }
 
-    case FETCH_DEVICE_RULES:
-      return { ...state, rules: action.data }
+    // case FETCH_DEVICE_RULES:
+    //   return { ...state, rules: action.data }
+
+    case FETCH_DEVICE_WORKFLOWS:
+      return { ...state, workflows: action.data }
 
     // case FETCH_DEVICE_RAW_INCIDENTS:
     //   return { ...state, rawIncidents: action.data }

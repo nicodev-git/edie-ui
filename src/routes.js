@@ -28,9 +28,10 @@ import SettingAdvanced from './components/page/content/settings/advanced/Advance
 import DeviceContainer from './containers/page/content/device/DeviceContainer'
 import DeviceMain from './components/page/content/device/main/Main'
 import DeviceMainIncidentsContainer from './containers/page/content/device/main/incidents/MainIncidentsContainer'
-import DeviceMainRulesContainer from './containers/page/content/device/main/rules/MainRulesContainer'
-import DeviceMainEventsContainer from './containers/page/content/device/main/events/MainEventsContainer'
+// import DeviceMainRulesContainer from './containers/page/content/device/main/rules/MainRulesContainer'
+import DeviceMainWorkflowsContainer from './containers/page/content/device/main/workflows/MainWorkflowsContainer'
 // import DeviceMainRawIncidentsContainer from './containers/page/content/device/main/raw-incidents/MainRawIncidentsContainer'
+import DeviceMainEventsContainer from './containers/page/content/device/main/events/MainEventsContainer'
 import DeviceMainAdvancedContainer from './containers/page/content/device/main/advanced/MainAdvancedContainer'
 import DeviceMainRuleAddContainer from './containers/page/content/device/main/rules/MainRulesAddContainer'
 import DeviceMonitorsContainer from './containers/page/content/device/monitors/MonitorsContainer'
@@ -76,7 +77,8 @@ export default(
       <Route path="device" component={DeviceContainer}>
         <Route path="main" component={DeviceMain}>
           <Route path="incidents" component={DeviceMainIncidentsContainer}/>
-          <Route path="rules" component={DeviceMainRulesContainer}/>
+          {/* <Route path="rules" component={DeviceMainRulesContainer}/> */}
+          <Route path="workflows" component={DeviceMainWorkflowsContainer}/>
           {/* <Route path="rawIncidents" component={DeviceMainRawIncidentsContainer}/> */}
           <Route path="events" component={DeviceMainEventsContainer}/>
           <Route path="advanced" component={DeviceMainAdvancedContainer}/>

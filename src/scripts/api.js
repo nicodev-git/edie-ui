@@ -196,6 +196,10 @@ var Api = { // eslint-disable-line no-unused-vars
 
   },
 
+  workflow: {
+    getWorkflowsForDevice: '/workflow/search/findById',
+  },
+
   log: {
     getFiles: '/logs/getFiles',
     getErrorFiles: '/logs/getErrorFiles',

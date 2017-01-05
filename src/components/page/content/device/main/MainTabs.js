@@ -3,9 +3,13 @@ const tabs = [
     title: 'Incidents',
     path: '/device/main/incidents'
   },
+  // {
+  //   title: 'Rules',
+  //   path: '/device/main/rules'
+  // },
   {
-    title: 'Rules',
-    path: '/device/main/rules'
+    title: 'Workflows',
+    path: '/device/main/workflows'
   },
   // {
   //   title: 'Raw Incidents',

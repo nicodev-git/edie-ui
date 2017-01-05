@@ -12,7 +12,8 @@ import {
   CLOSE_DEVICE_MONITOR_WIZARD,
   CLEAR_DEVICE_WIZARD_INITIAL_VALUES,
 
-  FETCH_DEVICE_RULES,
+  // FETCH_DEVICE_RULES,
+  FETCH_DEVICE_WORKFLOWS,
   // FETCH_DEVICE_RAW_INCIDENTS,
   FETCH_DEVICE_EVENTS,
   FETCH_DEVICE_PHYSICAL_RULES,
@@ -36,6 +37,8 @@ import {
 import { apiError, updateDeviceError } from './Errors'
 
 import { ROOT_URL } from './config'
+
+import { encodeUrlParams } from '../shared/Global'
 
 export const fetchDevices = () => {
   if (!window.localStorage.getItem('token')) {
@@ -120,11 +123,36 @@ export const clearDeviceWizardInitialValues = () => {
   }
 }
 
-export const fetchDeviceRules = () => {
+// export const fetchDeviceRules = () => {
+//   return (dispatch) => {
+//     dispatch({
+//       type: FETCH_DEVICE_RULES,
+//       data: []
+//     })
+//   }
+// }
+
+export const fetchDeviceWorkflows = (params) => {
+  if (!window.localStorage.getItem('token')) {
+    return dispatch => dispatch({ type: NO_AUTH_ERROR })
+  }
+  return (dispatch) => {
+    let config = {
+      headers: {
+        'Content-Type': 'application/hal+json;charset=UTF-8'
+      }
+    }
+    axios.get(`${ROOT_URL}/workflow/search/findById?${encodeUrlParams(params)}`, config)
+      .then((response) => fetchDeviceWorkflowsSuccess(dispatch, response))
+      .catch(error => apiError(dispatch, error))
+  }
+}
+
+const fetchDeviceWorkflowsSuccess = (dispatch, response) => {
   return (dispatch) => {
     dispatch({
-      type: FETCH_DEVICE_RULES,
-      data: []
+      type: FETCH_DEVICE_WORKFLOWS,
+      data: response.data._embedded.workflows
     })
   }
 }
@@ -143,24 +171,17 @@ export const fetchDeviceEvents = () => {
     return dispatch => dispatch({ type: NO_AUTH_ERROR })
   }
   return (dispatch) => {
-    let config = {
-      headers: {
-        'Cache-Control': 'no-cache',
-        'X-Authorization': window.localStorage.getItem('token')
-      }
-    }
-    axios.post(`${ROOT_URL}/events`, config)
+    axios.get(`${ROOT_URL}/event`)
       .then((response) => fetchDeviceEventsSuccess(dispatch, response))
       .catch(error => apiError(dispatch, error))
   }
 }
 
 const fetchDeviceEventsSuccess = (dispatch, response) => {
-  console.log(response)
   return (dispatch) => {
     dispatch({
       type: FETCH_DEVICE_EVENTS,
-      data: response.data
+      data: response.data._embedded.events
     })
   }
 }
