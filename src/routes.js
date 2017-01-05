@@ -19,10 +19,10 @@ import SettingGeneralContainer from './containers/page/content/settings/general/
 import SettingAgent from './components/page/content/settings/agent/Agents'
 import SettingRulesContainer from './containers/page/content/settings/rule/RulesContainer'
 import SettingMapsContainer from './containers/page/content/settings/maps/MapsContainer'
-import SettingUsers from './components/page/content/settings/users/Users'
+import SettingUsersContainer from './containers/page/content/settings/users/UsersContainer'
 import SettingIdentitiesContainer from './containers/page/content/settings/identity/IdentitiesContainer'
 import SettingCredentialsContainer from './containers/page/content/settings/credentials/CredentialsContainer'
-import SettingTemplates from './components/page/content/settings/template/Templates'
+import SettingTemplatesContainer from './containers/page/content/settings/template/TemplatesContainer'
 import SettingAdvanced from './components/page/content/settings/advanced/Advanced'
 
 import DeviceContainer from './containers/page/content/device/DeviceContainer'
@@ -34,7 +34,7 @@ import DeviceMainAdvancedContainer from './containers/page/content/device/main/a
 import DeviceMainRuleAddContainer from './containers/page/content/device/main/rules/MainRulesAddContainer'
 import DeviceMonitorsContainer from './containers/page/content/device/monitors/MonitorsContainer'
 import DeviceConnectedContainer from './containers/page/content/device/connected/ConnectedContainer'
-import DeviceInfo from './components/page/content/device/info/Info'
+import DeviceInfoContainer from './containers/page/content/device/info/InfoContainer'
 
 import DeviceListContainer from './containers/DeviceListContainer'
 
@@ -65,10 +65,10 @@ export default(
         <Route path="agents" component={SettingAgent} />
         <Route path="rules" component={SettingRulesContainer} />
         <Route path="maps" component={SettingMapsContainer} />
-        <Route path="users" component={SettingUsers} />
+        <Route path="users" component={SettingUsersContainer} />
         <Route path="identities" component={SettingIdentitiesContainer} />
         <Route path="credentials" component={SettingCredentialsContainer} />
-        <Route path="templates" component={SettingTemplates} />
+        <Route path="templates" component={SettingTemplatesContainer} />
         <Route path="advanced" component={SettingAdvanced} />
       </Route>
 
@@ -82,7 +82,7 @@ export default(
         </Route>
         <Route path="monitor" component={DeviceMonitorsContainer}/>
         <Route path="connected" component={DeviceConnectedContainer}/>
-        <Route path="info" component={DeviceInfo}/>
+        <Route path="info" component={DeviceInfoContainer}/>
       </Route>
 
     </Route>

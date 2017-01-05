@@ -12,7 +12,7 @@ import { showAlert } from '../../../shared/Alert'
 
 import { scrollBottom } from '../../../../util/Scroll'
 
-class Chat extends React.Component {
+export default class Chat extends React.Component {
 
   constructor (props) {
     super(props)
@@ -55,16 +55,16 @@ class Chat extends React.Component {
     const room = this.state.rooms[item.id]
     const unread = room.unread
     return (
-            <li className={`room${this.state.selected === item ? ' active open' : ''}`}
-              key={item.id}
-              onClick={this.onClickIncident.bind(this, item)}>
-                <a href="javascript:;">
-                    <strong>#</strong><span className="room-title">
-                        {name}(<TimeAgo date={new Date(item.starttimestamp)}/>)
-                    </span>
-                    <span className={`badge pull-right badge-message ${unread ? '' : 'hidden'}`}>{unread}</span>
-                </a>
-            </li>
+      <li className={`room${this.state.selected === item ? ' active open' : ''}`}
+        key={item.id}
+        onClick={this.onClickIncident.bind(this, item)}>
+          <a href="javascript:;">
+            <strong>#</strong><span className="room-title">
+              {name}(<TimeAgo date={new Date(item.starttimestamp)}/>)
+            </span>
+            <span className={`badge pull-right badge-message ${unread ? '' : 'hidden'}`}>{unread}</span>
+          </a>
+      </li>
     )
   }
 
@@ -74,39 +74,39 @@ class Chat extends React.Component {
     let text, accessory
     if (content.startsWith('picture:')) {
       accessory = (
-                <div className="attachment-image">
-                    <a href="javascript:;">
-                        <img className="image" src={`/externalpictures?name=${content.substring(8)}`} height="300px" />
-                    </a>
-                </div>
-            )
+        <div className="attachment-image">
+          <a href="javascript:;">
+            <img className="image" src={`/externalpictures?name=${content.substring(8)}`} height="300px" />
+          </a>
+        </div>
+      )
     } else {
       text = content
     }
 
     return (
-            <div className="message-group" key={item.id}>
-                <div className="avatar-large"
-                  style={{backgroundImage: `url(/externalpictures?name=${pictureId})`}} />
-                <div className="comment">
-                    <div className="message first">
-                        <div className="body">
-                            <h2>
-                                <span><strong className="user-name">{senderName}</strong></span>
-                                <span className="highlightSeparator"> - </span>
-                                <span className="timestamp">{moment(new Date(timestamp)).format('h:mm A')}</span>
-                            </h2>
-                            <div className="message-text">
-                                <div className="btn-option" />
-                                <div className="markup">
-                                    <span>{text}</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="accessory">{accessory}</div>
-                    </div>
+      <div className="message-group" key={item.id}>
+        <div className="avatar-large"
+          style={{backgroundImage: `url(/externalpictures?name=${pictureId})`}} />
+        <div className="comment">
+          <div className="message first">
+            <div className="body">
+              <h2>
+                <span><strong className="user-name">{senderName}</strong></span>
+                <span className="highlightSeparator"> - </span>
+                <span className="timestamp">{moment(new Date(timestamp)).format('h:mm A')}</span>
+              </h2>
+              <div className="message-text">
+                <div className="btn-option" />
+                <div className="markup">
+                  <span>{text}</span>
                 </div>
+              </div>
             </div>
+            <div className="accessory">{accessory}</div>
+          </div>
+        </div>
+      </div>
     )
   }
 
@@ -118,17 +118,17 @@ class Chat extends React.Component {
     })
 
     return (
-            <div className={`typing ${list.length ? 'animate' : 'hidden'}`}>
-                <div className="ellipsis">
-                    <div />
-                    <div />
-                    <div />
-                </div>
-                <strong>
-                    <span>{list.join(', ')}</span>
-                </strong>
-                <span>{list.length === 1 ? ' is typing...' : ' are typing...'}</span>
-            </div>
+      <div className={`typing ${list.length ? 'animate' : 'hidden'}`}>
+        <div className="ellipsis">
+          <div />
+          <div />
+          <div />
+        </div>
+        <strong>
+          <span>{list.join(', ')}</span>
+        </strong>
+        <span>{list.length === 1 ? ' is typing...' : ' are typing...'}</span>
+      </div>
     )
   }
 
@@ -152,8 +152,6 @@ class Chat extends React.Component {
             </div>
     )
   }
-
-    // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   loadIncidents () {
     $.get(`${ROOT_URL}${Api.incidents.getUnfixedIncidentsQuick}`, { // eslint-disable-line no-undef
@@ -234,8 +232,6 @@ class Chat extends React.Component {
     this.setState({ incidents })
   }
 
-    // ///////////////////////////////////////////////////////////
-
   onTextKeyUp (e) {
     if (e.keyCode === 13) {
       let msg = e.target.value
@@ -298,8 +294,6 @@ class Chat extends React.Component {
     input.value = null
   }
 
-    // ///////////////////////////////////////////////////////////
-
   loadIncidentUsers (incidentId) {
     this.setState({
       roomUsers: []
@@ -337,8 +331,6 @@ class Chat extends React.Component {
     this.setState({roomUsers})
   }
 
-    // ///////////////////////////////////////////////////////////
-
   onSocketOpen () {
     console.log('Local Chat Socket Opened')
     this.registerSocket()
@@ -350,7 +342,6 @@ class Chat extends React.Component {
   }
 
   onSocketMessage (sockMsg) {
-        // console.log(data);
     if (sockMsg.messagetype === 'MessageToGroup') {
       let {rooms} = this.state
       let room = rooms[sockMsg.incidentid]
@@ -398,19 +389,19 @@ class Chat extends React.Component {
         this.setState({ rooms })
       }, 50)
 
-            // Notification
-            // if (document['hidden'] && !sockMsg.history && user.id !== sockMsg['userId']) {
-            //     var msg = sockMsg['message'];
-            //     if (msg.startsWith("picture:")) msg = sockMsg['fullname'] + " has sent an image.";
-            //     else msg = sockMsg['fullname'] + ": " + sockMsg['message'];
-            //
-            //     var title = sockMsg['incident'];
-            //     chatNotification.notify(title, msg, {
-            //         onclick: function(){
-            //             me.onClickIncidentItem(room.liRoom);
-            //         },
-            //     });
-            // }
+      // Notification
+      // if (document['hidden'] && !sockMsg.history && user.id !== sockMsg['userId']) {
+      //     var msg = sockMsg['message'];
+      //     if (msg.startsWith("picture:")) msg = sockMsg['fullname'] + " has sent an image.";
+      //     else msg = sockMsg['fullname'] + ": " + sockMsg['message'];
+      //
+      //     var title = sockMsg['incident'];
+      //     chatNotification.notify(title, msg, {
+      //         onclick: function(){
+      //             me.onClickIncidentItem(room.liRoom);
+      //         },
+      //     });
+      // }
     } else if (sockMsg.messagetype === 'TypingStatus') {
       let {rooms} = this.state
       let room = rooms[sockMsg.incidentid]
@@ -441,22 +432,20 @@ class Chat extends React.Component {
         this.updateUserOnlineStatus(user, false)
       }
     } else if (sockMsg.messagetype === 'NewIncident') {
-            // try {
-            //     var incident = JSON.parse(sockMsg['message']);
-            //     var title = incident.description;
-            //     var msg = incident.descriptioninfo;
-            //     chatNotification.notify(title, msg, {
-            //         onclick: function(){
-            //         },
-            //     });
-            // } catch (e) {
-            //
-            // }
+      // try {
+      //     var incident = JSON.parse(sockMsg['message']);
+      //     var title = incident.description;
+      //     var msg = incident.descriptioninfo;
+      //     chatNotification.notify(title, msg, {
+      //         onclick: function(){
+      //         },
+      //     });
+      // } catch (e) {
+      //
+      // }
 
     }
   }
-
-    // ///////////////////////////////////////////////////////////
 
   registerSocket () {
     chatSocket.send({
@@ -509,8 +498,6 @@ class Chat extends React.Component {
       'id': msgId
     })
   }
-
-    // ///////////////////////////////////////////////////////////
 
   playBeep () {
     if (!this.beepSound) this.beepSound = new Audio('/snd/beep.mp3') // eslint-disable-line no-undef
@@ -575,5 +562,3 @@ Chat.contextTypes = {
   user: React.PropTypes.object,
   sid: React.PropTypes.string
 }
-
-export default Chat

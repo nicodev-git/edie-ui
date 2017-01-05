@@ -65,6 +65,7 @@ export default class Users extends React.Component {
   }
 
   componentWillMount () {
+    console.log(this.props)
     this.loadGroups()
     this.props.fetchSettingUsers()
   }
