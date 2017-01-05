@@ -13,7 +13,7 @@ const Input = ({ input, label, type, meta: { touched, error } }) => (
   </fieldset>
 )
 
-class DeviceEditModal extends React.Component {
+class DeviceEditModal extends React.Component { // eslint-disable-line react/no-multi-comp
   constructor (props) {
     super(props)
     this.state = {

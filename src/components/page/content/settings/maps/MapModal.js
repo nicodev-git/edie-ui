@@ -17,7 +17,7 @@ const renderInput = field => (
   </div>
 )
 
-class MapModal extends Component {
+class MapModal extends Component { // eslint-disable-line react/no-multi-comp
   constructor (props) {
     super(props)
     this.state = {

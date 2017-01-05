@@ -12,8 +12,8 @@ export default class Toolbar extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      selectedObj: null,
-      cmap: null,
+      selectedObj: props.selectedObj || null,
+      cmap: props.cmap || null,
 
       displayColorPicker: false,
 
@@ -201,8 +201,8 @@ export default class Toolbar extends React.Component {
   }
 
   render () {
-    const cmap = this.state.cmap
-    const obj = this.state.selectedObj
+    const cmap = this.props.cmap
+    const obj = this.props.selectedObj
 
     const line = obj ? cmap.selectedLine() : null
     const lineGroup = line ? line.objectSubType === MapItemType.ShapeLineGroup : false // eslint-disable-line no-undef

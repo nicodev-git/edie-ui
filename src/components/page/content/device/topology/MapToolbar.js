@@ -73,6 +73,8 @@ export default class Toolbar extends React.Component {
       left: 0
     }
 
+    console.log('Obj topology', obj)
+
     return (
       <div className="panel-heading map-heading">
         <h4 className="panel-title">Topology</h4>
