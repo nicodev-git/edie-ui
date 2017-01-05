@@ -9,6 +9,8 @@ import { withRouter } from 'react-router'
 @withRouter
 export default class DeviceContainer extends React.Component {
   render () {
-    <Device {...this.props} />
+    return (
+      <Device {...this.props} />
+    )
   }
 }
