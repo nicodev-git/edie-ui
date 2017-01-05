@@ -75,11 +75,11 @@ export default class MainRawIncidents extends React.Component {
   //     unlisten(this.listeners)
   // }
 
-  highlightRender (props) {
-    let data = props.data || ''
-    data = data.replace(/(\\r\\n)+/gi, '<br/>')
-    data = data.replace(/(\\n)+/gi, '<br/>')
-    data = data.replace(/\\t/gi, '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;')
+    highlightRender (props) {
+      let data = props.data || ''
+      data = data.replace(/(\\r\\n)+/gi, '<br/>')
+      data = data.replace(/(\\n)+/gi, '<br/>')
+      data = data.replace(/\\t/gi, '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;')
 
     let keyword = this.state.params.text
 

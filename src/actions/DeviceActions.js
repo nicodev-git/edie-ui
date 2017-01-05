@@ -149,12 +149,10 @@ export const fetchDeviceWorkflows = (params) => {
 }
 
 const fetchDeviceWorkflowsSuccess = (dispatch, response) => {
-  return (dispatch) => {
-    dispatch({
-      type: FETCH_DEVICE_WORKFLOWS,
-      data: response.data._embedded.workflows
-    })
-  }
+  dispatch({
+    type: FETCH_DEVICE_WORKFLOWS,
+    data: response.data._embedded.workflows
+  })
 }
 
 // export const fetchDeviceRawIncidents = () => {
@@ -178,12 +176,10 @@ export const fetchDeviceEvents = () => {
 }
 
 const fetchDeviceEventsSuccess = (dispatch, response) => {
-  return (dispatch) => {
-    dispatch({
-      type: FETCH_DEVICE_EVENTS,
-      data: response.data._embedded.events
-    })
-  }
+  dispatch({
+    type: FETCH_DEVICE_EVENTS,
+    data: response.data._embedded.events
+  })
 }
 
 export const fetchDevicePhysicalRules = () => {

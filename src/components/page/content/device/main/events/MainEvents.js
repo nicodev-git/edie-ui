@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 // import Dimensions from 'react-dimensions' // Never used
 import { escapeRegExp } from 'lodash'
+import moment from 'moment'
 import {
     ButtonGroup,
     Button
@@ -31,29 +32,32 @@ export default class MainEvents extends Component {
 
       url: '/incidentstable/getRawIncidentsForDeviceidInDatatable',
       params: {
-        deviceid: device.id,
-        rawSeverity: '',
-        text: ''
+        deviceid: device.id
       }
     }
 
     this.cells = [{
       'displayName': 'IP Address',
-      'columnName': 'ipaddress',
+      'columnName': 'ip',
       'cssClassName': 'width-140',
       'customComponent': props => {
         const row = props.rowData
         let data = ''
         const {externalIP} = this.props.device || {}
         if (externalIP) data += `WANIP: ${externalIP}<br/>`
-        data = `${data}LAN IP:${row.ipaddress}`
+        data = `${data}LAN IP:${row.ip}`
 
         return this.highlightRender({data})
       }
     }, {
       'displayName': 'Datetime',
       'columnName': 'datetime',
-      'customComponent': this.highlightRender.bind(this)
+      'customComponent': props => {
+        console.log(props)
+        const row = props.rowData
+        let data = moment(row.datetime).format('YYYY-MM-DD HH:mm:ss').toString()
+        return this.highlightRender({data})
+      }
     }, {
       'displayName': 'Rawdata',
       'columnName': 'rawdata',
@@ -70,10 +74,6 @@ export default class MainEvents extends Component {
   componentWillMount () {
     this.props.fetchDeviceEvents()
   }
-  //
-  // componentWillUnmount() {
-  //     unlisten(this.listeners)
-  // }
 
   highlightRender (props) {
     let data = props.data || ''
@@ -97,12 +97,12 @@ export default class MainEvents extends Component {
       <ResponsiveInfiniteTable
         cells={this.cells}
         ref="table"
-        rowMetadata={{'key': 'id'}}
+        rowMetadata={{'key': 'datetime'}}
         selectable
         onRowDblClick={this.onRowDblClick.bind(this)}
 
         useExternal={false}
-        data={this.props.rawIncidents}
+        data={this.props.events}
       />
     )
   }
@@ -244,6 +244,9 @@ export default class MainEvents extends Component {
 
   render () {
     const {device} = this.props
+
+    console.log(this.props)
+
     return (
       <TabPage>
         <TabPageHeader title={device.name}>
