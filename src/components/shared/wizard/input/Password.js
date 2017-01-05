@@ -1,5 +1,5 @@
 import React from 'react'
-import {InputField} from 'react-serial-forms'
+import { InputField } from 'react-serial-forms'
 
 export default class Password extends React.Component {
   render () {

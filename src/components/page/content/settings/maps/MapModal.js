@@ -8,6 +8,15 @@ import { assign } from 'lodash'
 
 import { showAlert } from '../../../../shared/Alert'
 
+const renderInput = field => (
+  <div className="row margin-md-bottom">
+    <label className="control-label col-md-3 padding-sm-top">{field.label}</label>
+    <div className="col-md-9 margin-sm-bottom">
+      <input {...field.input} type={field.type} className="form-control"/>
+    </div>
+  </div>
+)
+
 class MapModal extends Component {
   constructor (props) {
     super(props)
@@ -55,14 +64,6 @@ class MapModal extends Component {
     const { handleSubmit } = this.props
     // const { map, handleSubmit } = this.props // Never used
     // const isDefault = false// map ? user.defaultmap === map.id : false // Never used
-    const renderInput = field => (
-      <div className="row margin-md-bottom">
-        <label className="control-label col-md-3 padding-sm-top">{field.label}</label>
-        <div className="col-md-9 margin-sm-bottom">
-          <input {...field.input} type={field.type} className="form-control"/>
-        </div>
-      </div>
-    )
 
     return (
       <Modal

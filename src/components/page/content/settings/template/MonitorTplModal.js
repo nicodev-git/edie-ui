@@ -5,6 +5,16 @@ import { assign } from 'lodash'
 
 import { extImageBaseUrl } from '../../../../../shared/Global'
 
+const Input = ({ input, label, type, meta: { touched, error } }) => (
+  <fieldset className="form-group">
+    <label className="col-md-3 margin-sm-top">{label}</label>
+    <div className="col-md-9">
+      <input {...input} className="form-control" type={type}/>
+      {touched && error && <span className="error">{error}</span>}
+    </div>
+  </fieldset>
+)
+
 class MonitorTplModal extends React.Component { // eslint-disable-line react/no-multi-comp
   constructor (props) {
     super(props)
@@ -58,15 +68,6 @@ class MonitorTplModal extends React.Component { // eslint-disable-line react/no-
 
   render () {
     const { handleSubmit } = this.props
-    const Input = ({ input, label, type, meta: { touched, error } }) => (
-      <fieldset className="form-group">
-        <label className="col-md-3 margin-sm-top">{label}</label>
-        <div className="col-md-9">
-          <input {...input} className="form-control" type={type}/>
-          {touched && error && <span className="error">{error}</span>}
-        </div>
-      </fieldset>
-    )
 
     return (
       <Modal

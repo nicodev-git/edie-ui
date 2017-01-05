@@ -7,6 +7,15 @@ import { reduxForm, Field } from 'redux-form'
 import { assign } from 'lodash'
 import { showAlert } from '../../../../shared/Alert'
 
+const renderInput = field => (
+  <div className="row margin-md-bottom">
+    <label className="control-label col-md-3">{field.label}</label>
+    <div className="col-md-9">
+      <input {...field.input} type={field.type} className="form-control"/>
+    </div>
+  </div>
+)
+
 class CredentialModal extends React.Component { // eslint-disable-line react/no-multi-comp
   constructor (props) {
     super(props)
@@ -43,14 +52,6 @@ class CredentialModal extends React.Component { // eslint-disable-line react/no-
 
   render () {
     const { handleSubmit } = this.props
-    const renderInput = field => (
-      <div className="row margin-md-bottom">
-        <label className="control-label col-md-3">{field.label}</label>
-        <div className="col-md-9">
-          <input {...field.input} type={field.type} className="form-control"/>
-        </div>
-      </div>
-    )
 
     return (
       <Modal show={this.state.open} onHide={this.onHide.bind(this)}

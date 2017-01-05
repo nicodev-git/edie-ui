@@ -54,19 +54,19 @@ class UserModal extends React.Component {
 
   renderInput (field) {
     return (
-            <div className="row margin-md-bottom">
-                <label className="control-label col-md-3 text-right">{field.label}</label>
-                <div className="col-md-6">
-                    <input {...field.input} type={field.type} className="form-control"/>
-                </div>
+      <div className="row margin-md-bottom">
+        <label className="control-label col-md-3 text-right">{field.label}</label>
+        <div className="col-md-6">
+            <input {...field.input} type={field.type} className="form-control"/>
+        </div>
 
-                {field.name === 'pincode'
-                  ? <div className="col-md-3 margin-xs-top">
-                        <a href="javascript:;" className="btn btn-default btn-sm" onClick={this.onClickPin.bind(this)}>Generate</a>
-                    </div>
-                  : null
-                }
+        {field.name === 'pincode'
+          ? <div className="col-md-3 margin-xs-top">
+              <a href="javascript:;" className="btn btn-default btn-sm" onClick={this.onClickPin.bind(this)}>Generate</a>
             </div>
+          : null
+        }
+      </div>
     )
   }
 

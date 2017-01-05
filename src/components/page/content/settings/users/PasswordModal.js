@@ -8,6 +8,15 @@ import { assign } from 'lodash'
 
 import { showAlert } from '../../../../shared/Alert'
 
+const renderInput = field => (
+  <div className="form-group col-md-12">
+    <label className="control-label col-md-3 padding-sm-top text-right">{field.label}</label>
+    <div className="col-md-9">
+      <input {...field.input} type={field.type} className="form-control"/>
+    </div>
+  </div>
+)
+
 class PasswordModal extends React.Component { // eslint-disable-line react/no-multi-comp
   constructor (props) {
     super(props)
@@ -41,14 +50,6 @@ class PasswordModal extends React.Component { // eslint-disable-line react/no-mu
 
   render () {
     const { handleSubmit } = this.props
-    const renderInput = field => (
-      <div className="form-group col-md-12">
-        <label className="control-label col-md-3 padding-sm-top text-right">{field.label}</label>
-        <div className="col-md-9">
-          <input {...field.input} type={field.type} className="form-control"/>
-        </div>
-      </div>
-    )
 
     return (
       <Modal show onHide={this.onHide.bind(this)}

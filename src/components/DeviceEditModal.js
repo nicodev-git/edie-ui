@@ -3,6 +3,16 @@ import Modal from 'react-bootstrap-modal'
 import { reduxForm, Field } from 'redux-form'
 import { validate } from './DeviceValidation'
 
+const Input = ({ input, label, type, meta: { touched, error } }) => (
+  <fieldset className="form-group">
+    <label className="col-md-3">{label}</label>
+    <div className="col-md-9">
+      <input {...input} className="form-control" type={type}/>
+      {touched && error && <span className="error">{error}</span>}
+    </div>
+  </fieldset>
+)
+
 class DeviceEditModal extends React.Component {
   constructor (props) {
     super(props)
@@ -51,15 +61,6 @@ class DeviceEditModal extends React.Component {
 
   render () {
     const { handleSubmit, device } = this.props
-    const Input = ({ input, label, type, meta: { touched, error } }) => (
-      <fieldset className="form-group">
-        <label className="col-md-3">{label}</label>
-        <div className="col-md-9">
-          <input {...input} className="form-control" type={type}/>
-          {touched && error && <span className="error">{error}</span>}
-        </div>
-      </fieldset>
-    )
 
     return (
       <Modal show onHide={this.onHide.bind(this)}
