@@ -61,8 +61,11 @@ class Main extends React.Component {
       }
     })
 
+    console.log('Sidebar', this.props.device)
     if (!found) {
-      deviceMenu.forEach(item => {
+      let deviceId = device ? device.id : 'main'
+      deviceMenu(deviceId).forEach(item => {
+        console.log(item.path, pathname)
         if (item.id === dashboardId) return true
         if (startsWith(pathname, item.path)) {
           pageId = item.id

@@ -102,7 +102,7 @@ export default class Sidebar extends React.Component {
           <ul className="nav nav-pills nav-stacked"
             style={{display: this.props.contentType.Device === pageType ? 'block' : 'none'}}>
 
-            {this.props.deviceMenu.map((item, index) => {
+            {this.props.deviceMenu(device ? device.id : 'main').map((item, index) => {
               if (item.group && !group) return null
               return (
                 <li key={index} className={pageId === item.id ? 'active open' : ''}
