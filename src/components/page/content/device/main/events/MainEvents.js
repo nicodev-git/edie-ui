@@ -53,7 +53,6 @@ export default class MainEvents extends Component {
       'displayName': 'Datetime',
       'columnName': 'datetime',
       'customComponent': props => {
-        console.log(props)
         const row = props.rowData
         let data = moment(row.datetime).format('YYYY-MM-DD HH:mm:ss').toString()
         return this.highlightRender({data})
@@ -97,7 +96,7 @@ export default class MainEvents extends Component {
       <ResponsiveInfiniteTable
         cells={this.cells}
         ref="table"
-        rowMetadata={{'key': 'datetime'}}
+        rowMetadata={{'key': 'id'}}
         selectable
         onRowDblClick={this.onRowDblClick.bind(this)}
 
