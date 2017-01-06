@@ -318,7 +318,7 @@ export default class Map extends React.Component {
 
     this.props.openDevice(obj.data)
         // emit(EVENTS.MAP_DEVICE_CLICKED, obj.data)
-    this.props.router.push('/device/')
+    this.props.router.push(`/device/${obj.data.id}/incidents`)
   }
 
   onMapObjectMoving () {
@@ -865,6 +865,8 @@ export default class Map extends React.Component {
     const { selectedItem, dropItem, dropItemPos, editable, maximized, mapHeight } = this.state
     // const {tooltip, tipLeft, tipTop, tipWidth, tipHeight, selectedItem, // Never used
     //   dropItem, dropItemPos, editable, maximized, mapHeight} = this.state
+
+    console.log(this.props.mapDevices)
 
     return (
       <div className={`map-row${maximized ? ' map-maximized' : ''}`}

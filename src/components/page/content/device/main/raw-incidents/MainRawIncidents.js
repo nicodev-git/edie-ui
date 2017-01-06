@@ -327,7 +327,7 @@ export default class MainRawIncidents extends React.Component {
           </div>
         </TabPageHeader>
 
-        <TabPageBody tabs={MainTabs} tab={2}>
+        <TabPageBody tabs={MainTabs(device.id)} tab={2}>
           {this.renderTable()}
         </TabPageBody>
       </TabPage>

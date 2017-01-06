@@ -454,7 +454,7 @@ export default class MainRules extends React.Component {
           </div>
         </TabPageHeader>
 
-        <TabPageBody tabs={MainTabs} tab={1}>
+        <TabPageBody tabs={MainTabs(device.id)} tab={1}>
           {this.renderTable()}
         </TabPageBody>
       </TabPage>
