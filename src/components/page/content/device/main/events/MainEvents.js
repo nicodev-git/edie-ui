@@ -71,7 +71,8 @@ export default class MainEvents extends Component {
   }
 
   componentWillMount () {
-    this.props.fetchDeviceEvents()
+    const {device} = this.props
+    this.props.fetchDeviceEvents(device.id)
   }
 
   highlightRender (props) {

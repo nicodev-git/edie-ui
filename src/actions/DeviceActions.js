@@ -164,12 +164,16 @@ const fetchDeviceWorkflowsSuccess = (dispatch, response) => {
 //   }
 // }
 
-export const fetchDeviceEvents = () => {
+export const fetchDeviceEvents = (deviceid) => {
   if (!window.localStorage.getItem('token')) {
     return dispatch => dispatch({ type: NO_AUTH_ERROR })
   }
   return (dispatch) => {
-    axios.get(`${ROOT_URL}/event`)
+    axios.get(`${ROOT_URL}/event/search/findBy`, {
+      params: {
+        deviceid
+      }
+    })
       .then((response) => fetchDeviceEventsSuccess(dispatch, response))
       .catch(error => apiError(dispatch, error))
   }
