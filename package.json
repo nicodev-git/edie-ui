@@ -90,6 +90,7 @@
     "redux": "^3.5.2",
     "redux-form": "^6.2.0",
     "redux-thunk": "^2.1.0",
+    "rimraf": "^2.5.4",
     "style-loader": "^0.13.1",
     "stylus": "^0.54.5",
     "stylus-loader": "^2.4.0",
