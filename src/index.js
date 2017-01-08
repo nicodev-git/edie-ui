@@ -85,7 +85,7 @@ if (token) {
   store.dispatch({ type: AUTH_USER })
 }
 
-console.log('Version: 0.6.2')
+console.log('Version: 0.6.3')
 
 ReactDOM.render(
     <Provider store={store}>
