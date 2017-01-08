@@ -61,7 +61,19 @@ export default class MainWorkflows extends React.Component {
     const {device} = this.props
     return (
       <TabPage>
-        <TabPageHeader title={device.name} />
+        <TabPageHeader title={device.name}>
+          <div className="text-center margin-md-top">
+            <div className="pull-right">
+              <ButtonGroup>
+
+                <Button>Add</Button>
+                <Button>Edit</Button>
+                <Button>Remove</Button>
+
+              </ButtonGroup>
+            </div>
+          </div>
+        </TabPageHeader>
 
         <TabPageBody tabs={MainTabs(device.id)} tab={1}>
           {this.renderTable()}
