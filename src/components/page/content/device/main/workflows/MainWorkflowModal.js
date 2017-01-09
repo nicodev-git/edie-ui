@@ -123,9 +123,9 @@ class MainWorkflowModal extends React.Component {
           </div>
 
           <div className="row margin-md-bottom">
-            <label className="col-md-3">Present</label>
+            <label className="col-md-3">Display Incident Description</label>
             <div className="col-md-9">
-              <Field name="present" component="input" className="form-control"/>
+              <Field name="display_incident_desc" component="input" className="form-control"/>
             </div>
           </div>
 

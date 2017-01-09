@@ -42,8 +42,8 @@ export default class Rules extends React.Component {
       'displayName': 'Description',
       'columnName': 'desc'
     }, {
-      'displayName': 'Present',
-      'columnName': 'present'
+      'displayName': 'Display Incident Description',
+      'columnName': 'display_incident_desc'
     }]
 
     this.cellPhysicals = [{
