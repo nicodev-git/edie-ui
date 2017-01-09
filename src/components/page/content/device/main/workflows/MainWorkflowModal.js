@@ -281,7 +281,7 @@ class MainWorkflowModal extends React.Component {
 
     return (
       <Modal
-        show={true}
+        show
         onHide={this.onHide.bind(this)}
         aria-labelledby="ModalHeader"
         className="bootstrap-dialog type-primary">

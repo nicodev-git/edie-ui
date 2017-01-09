@@ -66,7 +66,7 @@ export default class MainWorkflows extends React.Component {
         ref="table"
         rowMetadata={{'key': 'idrulesNew'}}
         selectable
-        // onRowDblClick={this.onRowDblClick.bind(this)}
+        onRowDblClick={this.onClickEdit.bind(this)}
 
         useExternal={false}
         data={this.props.workflows}

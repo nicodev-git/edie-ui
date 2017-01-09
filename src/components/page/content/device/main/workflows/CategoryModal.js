@@ -29,7 +29,7 @@ class CategoryModal extends React.Component {
     const {handleSubmit} = this.props
     return (
       <Modal
-        show={true}
+        show
         onHide={this.onHide.bind(this)}
         aria-labelledby="ModalHeader"
         className="bootstrap-dialog type-primary">
