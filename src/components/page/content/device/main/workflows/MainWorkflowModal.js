@@ -1,7 +1,7 @@
 import React from 'react'
 import Modal from 'react-bootstrap-modal'
 import {reduxForm, Field} from 'redux-form'
-import {assign, concat} from 'lodash'
+import {assign, concat, forOwn} from 'lodash'
 import InlineEdit from 'react-edit-inline'
 
 import RuleModalContainer from '../../../../../../containers/page/content/device/main/workflows/RuleModalContainer'
@@ -11,16 +11,21 @@ class MainWorkflowModal extends React.Component {
 
   constructor (props) {
     super(props)
+
+    let rules = []
+    if (props.editWorkflow) {
+      forOwn(props.editWorkflow.rules || {}, (value, key) => {
+        rules.push({key, value})
+      })
+    }
+    rules.push({key: '', value: ''})
+
     this.state = {
       current: 1,
       steps: 2,
 
-      rules: [{key: '', value: ''}],
+      rules,
       selectedRuleIndex: -1
-    }
-
-    if (props.editWorkflow) {
-
     }
   }
 
