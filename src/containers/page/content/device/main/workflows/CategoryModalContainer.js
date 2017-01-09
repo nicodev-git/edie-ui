@@ -17,7 +17,7 @@ import {
 )
 @withRouter
 export default class CategoryModalContainer extends React.Component {
-  render() {
+  render () {
     return (
       <CategoryModal {...this.props} />
     )

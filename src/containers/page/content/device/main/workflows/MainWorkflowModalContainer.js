@@ -19,6 +19,7 @@ import {
     editWorkflow: state.devices.editWorkflow,
     workflowCategories: state.devices.workflowCategories,
     ruleModalOpen: state.devices.ruleModalOpen,
+    wfCategoryModalOpen: state.devices.wfCategoryModalOpen,
     initialValues: assign({
       enable: true,
       severity: 'HIGH'

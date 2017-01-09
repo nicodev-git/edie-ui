@@ -4,7 +4,7 @@ import {reduxForm, Field} from 'redux-form'
 import {assign, concat} from 'lodash'
 
 import RuleModalContainer from '../../../../../../containers/page/content/device/main/workflows/RuleModalContainer'
-// import CategoryModalContainer from 'containers/page/content/device/main/workflows/CategoryModalContainer'
+import CategoryModalContainer from 'containers/page/content/device/main/workflows/CategoryModalContainer'
 
 class MainWorkflowModal extends React.Component {
 
@@ -84,18 +84,21 @@ class MainWorkflowModal extends React.Component {
   }
 
   onClickAddCategory () {
-
+    this.props.openWfCategoryModal()
   }
 
   renderRuleModal () {
     if (!this.props.ruleModalOpen) return null
     return (
-      <RuleModalContainer onClose={this.onCloseRuleModal.bind(this)}/>
+      <RuleModalContainer onClose={this.onCloseRuleModal.bind(this)} />
     )
   }
 
   renderCategoryModal () {
-
+    if (!this.props.wfCategoryModalOpen) return null
+    return (
+      <CategoryModalContainer onClose={this.onCloseCategoryModal.bind(this)} />
+    )
   }
 
   renderStep () {
@@ -133,8 +136,8 @@ class MainWorkflowModal extends React.Component {
                 {this.props.workflowCategories.map(c => <option key={c.name} value={c.name}>{c.name}</option>)}
               </Field>
             </div>
-            <div className="col-md-1 text-right pl-none margin-xs-top">
-              <a href="javascript:;" onClick={this.onClickAddCategory.bind(this)}><i className="fa fa-plus-square fa-2x"/></a>
+            <div className="col-md-1 text-right pl-none margin-sm-top">
+              <a href="javascript:;" onClick={this.onClickAddCategory.bind(this)}><i className="fa fa-plus-square fa-x"/></a>
             </div>
           </div>
 

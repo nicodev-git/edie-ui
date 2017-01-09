@@ -1,5 +1,7 @@
 import React from 'react'
 import Modal from 'react-bootstrap-modal'
+import { assign } from 'lodash'
+import {reduxForm, Field} from 'redux-form'
 
 class CategoryModal extends React.Component {
   onHide () {
