@@ -9,20 +9,17 @@ class RuleModal extends React.Component {
   }
 
   handleFormSubmit (values) {
-    const {editWorkflow} = this.props
-    let props = assign({}, editWorkflow, values)
+    const {editRule} = this.props
+    let props = assign({}, editRule, values)
 
-    if (!props.name) return window.alert('Please type name.')
+    if (!props.key) return window.alert('Please type key.')
 
-    if (editWorkflow) {
-      this.props.updateDeviceWorkflow(props)
-    } else {
-      this.props.addDeviceWorkflow(props)
-    }
+    this.props.onClose(props, editRule)
+    this.props.closeDeviceRuleModal()
   }
 
   onClickClose () {
-
+    this.props.closeDeviceRuleModal()
   }
 
   render () {
@@ -41,9 +38,8 @@ class RuleModal extends React.Component {
             <button className="close" onClick={this.onClickClose.bind(this)}>×</button>
           </div>
         </div>
-        <div className="modal-body bootstrap-dialog-message p-none">
+        <div className="modal-body bootstrap-dialog-message">
           <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
-
             <div className="row margin-md-bottom">
               <label className="col-md-3">Key</label>
               <div className="col-md-9">
@@ -56,6 +52,11 @@ class RuleModal extends React.Component {
               <div className="col-md-9">
                 <Field name="value" component="input" className="form-control"/>
               </div>
+            </div>
+
+            <div className="text-right">
+              <button className="btn btn-primary btn-sm margin-sm-right" type="submit">OK</button>
+              <a href="javascript:;" className="btn btn-default btn-sm" onClick={this.onClickClose.bind(this)}>Cancel</a>
             </div>
           </form>
         </div>

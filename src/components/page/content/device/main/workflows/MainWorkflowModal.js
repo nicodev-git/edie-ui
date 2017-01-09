@@ -1,7 +1,7 @@
 import React from 'react'
 import Modal from 'react-bootstrap-modal'
 import {reduxForm, Field} from 'redux-form'
-import {assign} from 'lodash'
+import {assign, concat} from 'lodash'
 
 import RuleModalContainer from '../../../../../../containers/page/content/device/main/workflows/RuleModalContainer'
 
@@ -11,7 +11,10 @@ class MainWorkflowModal extends React.Component {
     super(props)
     this.state = {
       current: 1,
-      steps: 2
+      steps: 2,
+
+      rules: [],
+      selectedRuleIndex: -1
     }
   }
 
@@ -57,22 +60,36 @@ class MainWorkflowModal extends React.Component {
   }
 
   onClickEditRule () {
-
+    const { selectedRuleIndex, rules } = this.state
+    if (selectedRuleIndex < 0) return window.alert('Please select rule.')
+    this.props.openDeviceRuleModal(rules[selectedRuleIndex])
   }
 
   onClickRemoveRule () {
 
   }
 
+  onCloseRuleModal (data, isEdit) {
+    if (!data) return
+
+    const { rules, selectedRuleIndex } = this.state
+    if (isEdit) {
+      this.setState({rules: rules.map((r, index) => index === selectedRuleIndex ? data : r)})
+    } else {
+      this.setState({rules: concat(rules, data)})
+    }
+  }
+
   renderRuleModal () {
     if (!this.props.ruleModalOpen) return null
     return (
-      <RuleModalContainer />
+      <RuleModalContainer onClose={this.onCloseRuleModal.bind(this)}/>
     )
   }
 
   renderStep () {
-    const {current} = this.state
+    const {current, rules, selectedRuleIndex} = this.state
+
     if (current === 1) {
       return (
         <div>
@@ -136,13 +153,9 @@ class MainWorkflowModal extends React.Component {
         <div>
           <div>
             <span className="margin-md-right"><b>Rules</b></span>
-            <a href="javascript:;" onClick={this.onClickAddRule.bind(this)} className="margin-sm-right">
-              <i className="fa fa-plus-square"></i></a>
-            <a href="javascript:;" onClick={this.onClickEditRule.bind(this)} className="margin-sm-right">
-              <i className="fa fa-edit"></i></a>
-            <a href="javascript:;" onClick={this.onClickRemoveRule.bind(this)} className="margin-sm-right">
-              <i className="fa fa-trash-o"></i>
-            </a>
+            <a href="javascript:;" onClick={this.onClickAddRule.bind(this)} className="margin-sm-right"><i className="fa fa-plus-square"/></a>
+            <a href="javascript:;" onClick={this.onClickEditRule.bind(this)} className="margin-sm-right"><i className="fa fa-edit"/></a>
+            <a href="javascript:;" onClick={this.onClickRemoveRule.bind(this)} className="margin-sm-right"><i className="fa fa-trash-o"/></a>
           </div>
           <div className="margin-md-bottom">
             <table className="table table-hover">
@@ -152,6 +165,13 @@ class MainWorkflowModal extends React.Component {
                   <th>Value</th>
                 </tr>
               </thead>
+              <tbody>
+              {rules.map((r, index) =>
+                <tr key={r.key} className={selectedRuleIndex === index ? 'selected' : ''} onClick={() => { this.setState({ selectedRuleIndex: index }) }}>
+                  <td>{r.key}</td>
+                  <td>{r.value}</td>
+                </tr>)}
+              </tbody>
             </table>
           </div>
 
