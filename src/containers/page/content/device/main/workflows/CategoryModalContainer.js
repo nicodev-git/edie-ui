@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
 
 import {
+  addWfCategory,
   closeWfCategoryModal
 } from 'actions'
 
@@ -12,6 +13,7 @@ import {
     editWfCategory: state.devices.editWfCategory,
     initialValues: state.devices.editWfCategory
   }), {
+    addWfCategory,
     closeWfCategoryModal
   }
 )

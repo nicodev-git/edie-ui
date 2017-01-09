@@ -97,7 +97,7 @@ class MainWorkflowModal extends React.Component {
   renderCategoryModal () {
     if (!this.props.wfCategoryModalOpen) return null
     return (
-      <CategoryModalContainer onClose={this.onCloseCategoryModal.bind(this)} />
+      <CategoryModalContainer />
     )
   }
 
@@ -162,6 +162,7 @@ class MainWorkflowModal extends React.Component {
               <Field name="enable" component="input" type="checkbox"/>
             </div>
           </div>
+          {this.renderCategoryModal()}
         </div>
       )
     } else if (current === 2) {

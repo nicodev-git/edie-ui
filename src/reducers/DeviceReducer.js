@@ -38,6 +38,7 @@ import {
     FETCH_WORKFLOW_CATEGORIES,
     OPEN_WF_CATEGORY_MODAL,
     CLOSE_WF_CATEGORY_MODAL,
+    ADD_WF_CATEGORY,
 
     UPDATE_DEVICE_ERROR
 } from '../actions/types'
@@ -152,6 +153,9 @@ export default function (state = INITIAL_STATE, action) {
 
     case CLOSE_WF_CATEGORY_MODAL:
       return { ...state, wfCategoryModalOpen: false }
+
+    case ADD_WF_CATEGORY:
+      return { ...state, workflowCategories: concat(state.workflowCategories, action.data) }
   }
   return state
 }

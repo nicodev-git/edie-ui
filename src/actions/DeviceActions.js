@@ -41,6 +41,7 @@ import {
   FETCH_WORKFLOW_CATEGORIES,
   OPEN_WF_CATEGORY_MODAL,
   CLOSE_WF_CATEGORY_MODAL,
+  ADD_WF_CATEGORY,
 
   NO_AUTH_ERROR
 } from './types'
@@ -493,4 +494,23 @@ export const closeWfCategoryModal = () => {
       type: CLOSE_WF_CATEGORY_MODAL
     })
   }
+}
+
+export const addWfCategory = (props) => {
+  if (!window.localStorage.getItem('token')) {
+    return dispatch => dispatch({ type: NO_AUTH_ERROR })
+  }
+  return (dispatch) => {
+    axios.post(`${ROOT_URL}/workflowcategory`, props)
+      .then(response => addWfCategorySuccess(dispatch, response))
+      .catch(error => apiError(dispatch, error))
+  }
+}
+
+const addWfCategorySuccess = (dispatch, response) => {
+  dispatch({
+    type: ADD_WF_CATEGORY,
+    data: response.data
+  })
+  dispatch(closeWfCategoryModal())
 }

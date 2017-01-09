@@ -14,8 +14,11 @@ class CategoryModal extends React.Component {
 
     if (!props.name) return window.alert('Please type name.')
 
-    this.props.onClose(props, editWfCategory)
-    this.props.closeWfCategoryModal()
+    if (editWfCategory) {
+
+    } else {
+      this.props.addWfCategory(props)
+    }
   }
 
   onClickClose () {
