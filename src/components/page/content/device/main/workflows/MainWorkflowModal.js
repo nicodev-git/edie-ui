@@ -15,7 +15,7 @@ class MainWorkflowModal extends React.Component {
       current: 1,
       steps: 2,
 
-      rules: [],
+      rules: [{key: '', value: ''}],
       selectedRuleIndex: -1
     }
   }
@@ -30,7 +30,11 @@ class MainWorkflowModal extends React.Component {
 
   handleFormSubmit (values) {
     const {editWorkflow} = this.props
-    let props = assign({}, editWorkflow, values)
+    const { rules } = this.state
+    let props = assign({}, editWorkflow, values, { rules: {} })
+    rules.forEach(r => {
+      if (r.key) props.rules[r.key] = r.value
+    })
 
     if (!props.name) return window.alert('Please type name.')
 
@@ -70,7 +74,7 @@ class MainWorkflowModal extends React.Component {
   onClickRemoveRule () {
     const { selectedRuleIndex, rules } = this.state
     if (selectedRuleIndex < 0) return window.alert('Please select rule.')
-    this.setState({rules: rules.filter((r, index) => index !== selectedRuleIndex)})
+    this.setState({rules: rules.filter((r, index) => index !== selectedRuleIndex), selectedRuleIndex: -1})
   }
 
   onCloseRuleModal (data, isEdit) {
@@ -90,10 +94,11 @@ class MainWorkflowModal extends React.Component {
 
   onRuleChange (index, value) {
     console.log(value)
-    const { rules } = this.state
-    this.setState({
-      rules: rules.map((r, i) => i === index ? assign({}, r, value) : r)
-    })
+    let { rules } = this.state
+
+    rules = rules.map((r, i) => i === index ? assign({}, r, value) : r)
+    if (index === rules.length - 1) rules.push({key: '', value: ''})
+    this.setState({ rules })
   }
 
   renderRuleModal () {
@@ -179,7 +184,6 @@ class MainWorkflowModal extends React.Component {
         <div>
           <div>
             <span className="margin-md-right"><b>Rules</b></span>
-            <a href="javascript:;" onClick={this.onClickAddRule.bind(this)} className="margin-sm-right"><i className="fa fa-plus-square"/></a>
             <a href="javascript:;" onClick={this.onClickRemoveRule.bind(this)} className="margin-sm-right"><i className="fa fa-trash-o"/></a>
           </div>
           <div className="margin-md-bottom">
@@ -192,21 +196,29 @@ class MainWorkflowModal extends React.Component {
               </thead>
               <tbody>
               {rules.map((r, index) =>
-                <tr key={r.key} className={selectedRuleIndex === index ? 'selected' : ''} onClick={() => { this.setState({ selectedRuleIndex: index }) }}>
+                <tr key={index} className={selectedRuleIndex === index ? 'selected' : ''} onClick={() => { if (index !== rules.length - 1) this.setState({ selectedRuleIndex: index }) }}>
                   <td width="50%">
                     <InlineEdit
                       activeClassName="editing"
-                      text={r.key}
+                      text={r.key || '\u00a0'}
                       paramName="key"
                       change={this.onRuleChange.bind(this, index)}
+                      style={{
+                        width: '100%',
+                        display: 'block'
+                      }}
                     />
                   </td>
                   <td width="50%">
                     <InlineEdit
                       activeClassName="editing"
-                      text={r.value}
+                      text={r.value || '\u00a0'}
                       paramName="value"
                       change={this.onRuleChange.bind(this, index)}
+                      style={{
+                        width: '100%',
+                        display: 'block'
+                      }}
                     />
                   </td>
                 </tr>
