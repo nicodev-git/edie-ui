@@ -35,6 +35,9 @@ import {
   OPEN_DEVICE_TEMPLATE_MODAL,
   CLOSE_DEVICE_TEMPLATE_MODAL,
 
+  OPEN_DEVICE_RULE_MODAL,
+  CLOSE_DEVICE_RULE_MODAL,
+
   NO_AUTH_ERROR
 } from './types'
 
@@ -432,6 +435,23 @@ export const closeDeviceTplModal = () => {
   return (dispatch) => {
     dispatch({
       type: CLOSE_DEVICE_TEMPLATE_MODAL
+    })
+  }
+}
+
+export const openDeviceRuleModal = (rule) => {
+  return (dispatch) => {
+    dispatch({
+      type: OPEN_DEVICE_RULE_MODAL,
+      data: rule
+    })
+  }
+}
+
+export const closeDeviceRuleModal = () => {
+  return (dispatch) => {
+    dispatch({
+      type: CLOSE_DEVICE_RULE_MODAL
     })
   }
 }

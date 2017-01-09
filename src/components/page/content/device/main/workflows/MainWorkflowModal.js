@@ -35,7 +35,15 @@ class MainWorkflowModal extends React.Component {
   }
 
   onClickPrev () {
+    let { current } = this.state
+    current -= 1
+    this.setState({ current })
+  }
 
+  onClickNext () {
+    let { current } = this.state
+    current += 1
+    this.setState({ current })
   }
 
   renderStep () {
@@ -93,19 +101,19 @@ class MainWorkflowModal extends React.Component {
               <Field name="enable" component="input" type="checkbox"/>
             </div>
           </div>
-
-          <div className="margin-md-bottom">
-            <table className="table table-hover">
-
-            </table>
-          </div>
-
-          <div>
-            <div className="text-right">
-              <button className="btn btn-primary margin-sm-right" type="submit">OK</button>
-              <a href="javascript:;" className="btn btn-default" onClick={this.onClickClose.bind(this)}>Cancel</a>
-            </div>
-          </div>
+        </div>
+      )
+    } else if (current === 2) {
+      return (
+        <div className="margin-md-bottom">
+          <table className="table table-hover">
+            <thead>
+              <tr>
+                <th>Key</th>
+                <th>Value</th>
+              </tr>
+            </thead>
+          </table>
         </div>
       )
     }
@@ -171,7 +179,7 @@ class MainWorkflowModal extends React.Component {
             <button className="close" onClick={this.onClickClose.bind(this)}>×</button>
           </div>
         </div>
-        <div className="modal-body bootstrap-dialog-message">
+        <div className="modal-body bootstrap-dialog-message p-none">
           <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
             { this.renderWizard() }
           </form>
