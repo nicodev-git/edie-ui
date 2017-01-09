@@ -14,6 +14,10 @@ import {
 
   // FETCH_DEVICE_RULES,
   FETCH_DEVICE_WORKFLOWS,
+  OPEN_DEVICE_WORKFLOW_MODAL,
+  CLOSE_DEVICE_WORKFLOW_MODAL,
+  ADD_DEVICE_WORKFLOW,
+  UPDATE_DEVICE_WORKFLOW,
   // FETCH_DEVICE_RAW_INCIDENTS,
   FETCH_DEVICE_EVENTS,
   FETCH_DEVICE_PHYSICAL_RULES,
@@ -153,6 +157,61 @@ const fetchDeviceWorkflowsSuccess = (dispatch, response) => {
     type: FETCH_DEVICE_WORKFLOWS,
     data: response.data._embedded.workflows
   })
+}
+
+export const addDeviceWorkflow = (props) => {
+  if (!window.localStorage.getItem('token')) {
+    return dispatch => dispatch({ type: NO_AUTH_ERROR })
+  }
+  return (dispatch) => {
+    axios.post(`${ROOT_URL}/workflow`, props)
+      .then(response => addDeviceWorkflowSuccess(dispatch, response))
+      .catch(error => apiError(dispatch, error))
+  }
+}
+
+const addDeviceWorkflowSuccess = (dispatch, response) => {
+  dispatch({
+    type: ADD_DEVICE_WORKFLOW,
+    data: response.data
+  })
+  dispatch(closeDeviceWorkflowModal())
+}
+
+export const updateDeviceWorkflow = (entity) => {
+  if (!window.localStorage.getItem('token')) {
+    return dispatch => dispatch({ type: NO_AUTH_ERROR })
+  }
+  return (dispatch) => {
+    axios.put(entity._links.self.href, entity)
+      .then(response => updateDeviceWorkflowSuccess(dispatch, response))
+      .catch(error => apiError(dispatch, error))
+  }
+}
+
+const updateDeviceWorkflowSuccess = (dispatch, response) => {
+  dispatch({
+    type: UPDATE_DEVICE_WORKFLOW,
+    data: response.data
+  })
+  dispatch(closeDeviceWorkflowModal())
+}
+
+export const openDeviceWorkflowModal = (entity) => {
+  return (dispatch) => {
+    dispatch({
+      type: OPEN_DEVICE_WORKFLOW_MODAL,
+      data: entity
+    })
+  }
+}
+
+export const closeDeviceWorkflowModal = () => {
+  return (dispatch) => {
+    dispatch({
+      type: CLOSE_DEVICE_WORKFLOW_MODAL
+    })
+  }
 }
 
 // export const fetchDeviceRawIncidents = () => {

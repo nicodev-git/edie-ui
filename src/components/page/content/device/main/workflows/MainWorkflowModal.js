@@ -1,18 +1,28 @@
 import React from 'react'
 import Modal from 'react-bootstrap-modal'
 import { reduxForm, Field } from 'redux-form'
+import { assign } from 'lodash'
 
 class MainWorkflowModal extends React.Component {
   onHide () {
 
   }
 
-  handleFormSubmit () {
+  handleFormSubmit (values) {
+    const { editWorkflow } = this.props
+    let props = assign({}, editWorkflow, values)
 
+    if (!props.name) return window.alert('Please type name.')
+
+    if (editWorkflow) {
+      this.props.updateDeviceWorkflow(props)
+    } else {
+      this.props.addDeviceWorkflow(props)
+    }
   }
 
   onClickClose () {
-
+    this.props.closeDeviceWorkflowModal()
   }
 
   render () {
@@ -44,13 +54,6 @@ class MainWorkflowModal extends React.Component {
               <label className="col-md-3">Description</label>
               <div className="col-md-9">
                 <Field name="desc" component="input" className="form-control" />
-              </div>
-            </div>
-
-            <div className="row margin-md-bottom">
-              <label className="col-md-3">Name</label>
-              <div className="col-md-9">
-                <Field name="name" component="input" className="form-control" />
               </div>
             </div>
 

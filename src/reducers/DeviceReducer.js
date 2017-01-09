@@ -27,8 +27,10 @@ import {
     OPEN_DEVICE_EDIT_MODAL,
     CLOSE_DEVICE_EDIT_MODAL,
 
-    OPEN_WORKFLOW_MODAL,
-    CLOSE_WORKFLOW_MODAL,
+    OPEN_DEVICE_WORKFLOW_MODAL,
+    CLOSE_DEVICE_WORKFLOW_MODAL,
+    ADD_DEVICE_WORKFLOW,
+    UPDATE_DEVICE_WORKFLOW,
 
     UPDATE_DEVICE_ERROR
 } from '../actions/types'
@@ -85,12 +87,17 @@ export default function (state = INITIAL_STATE, action) {
     case FETCH_DEVICE_WORKFLOWS:
       return { ...state, workflows: action.data }
 
-    case OPEN_WORKFLOW_MODAL:
+    case OPEN_DEVICE_WORKFLOW_MODAL:
       return { ...state, workflowModalOpen: true, editWorkflow: action.data }
 
-    case CLOSE_WORKFLOW_MODAL:
+    case CLOSE_DEVICE_WORKFLOW_MODAL:
       return { ...state, workflowModalOpen: false }
 
+    case ADD_DEVICE_WORKFLOW:
+      return { ...state, workflows: concat(state.workflows || [], action.data) }
+
+    case UPDATE_DEVICE_WORKFLOW:
+      return { ...state, workflows: state.workflows.map(w => w.id === action.data.id ? action.data : w) }
     // case FETCH_DEVICE_RAW_INCIDENTS:
     //   return { ...state, rawIncidents: action.data }
 

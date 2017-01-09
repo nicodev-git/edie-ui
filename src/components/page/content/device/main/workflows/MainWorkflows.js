@@ -26,7 +26,7 @@ export default class MainWorkflows extends React.Component {
 
     this.cells = [{
       'displayName': 'Category',
-      'columnName': 'categoryName'
+      'columnName': 'category'
     }, {
       'displayName': 'Name',
       'columnName': 'name'
@@ -34,11 +34,8 @@ export default class MainWorkflows extends React.Component {
       'displayName': 'Severity',
       'columnName': 'severity'
     }, {
-      'displayName': 'Origin',
-      'columnName': 'origin'
-    }, {
-      'displayName': 'Version',
-      'columnName': 'version'
+      'displayName': 'Description',
+      'columnName': 'desc'
     }]
   }
 
@@ -48,7 +45,7 @@ export default class MainWorkflows extends React.Component {
   }
 
   onClickAdd () {
-    this.props.openWorkflowModal()
+    this.props.openDeviceWorkflowModal()
   }
 
   renderTable () {
