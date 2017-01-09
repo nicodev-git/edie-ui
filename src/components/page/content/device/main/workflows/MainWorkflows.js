@@ -25,11 +25,11 @@ export default class MainWorkflows extends React.Component {
     }
 
     this.cells = [{
-      'displayName': 'Category',
-      'columnName': 'category'
-    }, {
       'displayName': 'Name',
       'columnName': 'name'
+    }, {
+      'displayName': 'Category',
+      'columnName': 'category'
     }, {
       'displayName': 'Severity',
       'columnName': 'severity'
@@ -46,6 +46,16 @@ export default class MainWorkflows extends React.Component {
 
   onClickAdd () {
     this.props.openDeviceWorkflowModal()
+  }
+
+  onClickEdit () {
+    const selected = this.getTable().getSelected()
+    if (!selected) return window.alert('Please select workflow.')
+    this.props.openDeviceWorkflowModal(selected)
+  }
+
+  getTable () {
+    return this.refs.table.refs.wrappedInstance
   }
 
   renderTable () {
@@ -79,7 +89,7 @@ export default class MainWorkflows extends React.Component {
               <ButtonGroup>
 
                 <Button onClick={this.onClickAdd.bind(this)}>Add</Button>
-                <Button>Edit</Button>
+                <Button onClick={this.onClickEdit.bind(this)}>Edit</Button>
                 <Button>Remove</Button>
 
               </ButtonGroup>
