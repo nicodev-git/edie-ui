@@ -4,6 +4,7 @@ import {reduxForm, Field} from 'redux-form'
 import {assign, concat} from 'lodash'
 
 import RuleModalContainer from '../../../../../../containers/page/content/device/main/workflows/RuleModalContainer'
+// import CategoryModalContainer from 'containers/page/content/device/main/workflows/CategoryModalContainer'
 
 class MainWorkflowModal extends React.Component {
 
@@ -91,6 +92,10 @@ class MainWorkflowModal extends React.Component {
     return (
       <RuleModalContainer onClose={this.onCloseRuleModal.bind(this)}/>
     )
+  }
+
+  renderCategoryModal () {
+
   }
 
   renderStep () {

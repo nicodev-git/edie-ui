@@ -39,6 +39,8 @@ import {
   CLOSE_DEVICE_RULE_MODAL,
 
   FETCH_WORKFLOW_CATEGORIES,
+  OPEN_WF_CATEGORY_MODAL,
+  CLOSE_WF_CATEGORY_MODAL,
 
   NO_AUTH_ERROR
 } from './types'
@@ -474,4 +476,21 @@ const fetchWorkflowCategoriesSuccess = (dispatch, response) => {
     type: FETCH_WORKFLOW_CATEGORIES,
     data: response.data._embedded.workflowCategories
   })
+}
+
+export const openWfCategoryModal = (rule) => {
+  return (dispatch) => {
+    dispatch({
+      type: OPEN_WF_CATEGORY_MODAL,
+      data: rule
+    })
+  }
+}
+
+export const closeWfCategoryModal = () => {
+  return (dispatch) => {
+    dispatch({
+      type: CLOSE_WF_CATEGORY_MODAL
+    })
+  }
 }

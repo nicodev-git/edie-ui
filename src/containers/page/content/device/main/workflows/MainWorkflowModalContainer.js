@@ -10,7 +10,8 @@ import {
   addDeviceWorkflow,
   updateDeviceWorkflow,
   fetchWorkflowCategories,
-  openDeviceRuleModal
+  openDeviceRuleModal,
+  openWfCategoryModal
 } from '../../../../../../actions'
 
 @connect(
@@ -27,7 +28,8 @@ import {
     addDeviceWorkflow,
     updateDeviceWorkflow,
     fetchWorkflowCategories,
-    openDeviceRuleModal
+    openDeviceRuleModal,
+    openWfCategoryModal
   }
 )
 @withRouter
