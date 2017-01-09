@@ -1,6 +1,7 @@
 import React from 'react'
 import Modal from 'react-bootstrap-modal'
 import {reduxForm, Field} from 'redux-form'
+import { assign } from 'lodash'
 
 class RuleModal extends React.Component {
   onHide () {
@@ -24,7 +25,7 @@ class RuleModal extends React.Component {
 
   }
 
-  render() {
+  render () {
     const {handleSubmit} = this.props
     return (
       <Modal

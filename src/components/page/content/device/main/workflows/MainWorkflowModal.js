@@ -3,6 +3,8 @@ import Modal from 'react-bootstrap-modal'
 import {reduxForm, Field} from 'redux-form'
 import {assign} from 'lodash'
 
+import RuleModalContainer from '../../../../../../containers/page/content/device/main/workflows/RuleModalContainer'
+
 class MainWorkflowModal extends React.Component {
 
   constructor (props) {
@@ -159,6 +161,13 @@ class MainWorkflowModal extends React.Component {
           </div>
         </div>
       </div>
+    )
+  }
+
+  renderRuleModal () {
+    if (!this.props.ruleModalOpen) return null
+    return (
+      <RuleModalContainer />
     )
   }
 

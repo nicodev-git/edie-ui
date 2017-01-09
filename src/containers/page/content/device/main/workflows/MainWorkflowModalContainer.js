@@ -8,6 +8,7 @@ import { closeDeviceWorkflowModal, addDeviceWorkflow, updateDeviceWorkflow } fro
 @connect(
   state => ({
     editWorkflow: state.devices.editWorkflow,
+    ruleModalOpen: state.devices.ruleModalOpen,
     initialValues: state.devices.editWorkflow
   }), {
     closeDeviceWorkflowModal, addDeviceWorkflow, updateDeviceWorkflow

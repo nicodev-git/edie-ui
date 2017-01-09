@@ -14,4 +14,10 @@ import { closeDeviceRuleModal } from '../../../../../../actions'
   }
 )
 @withRouter
-export default RuleModal
+export default class RuleModalContainer extends React.Component {
+  render () {
+    return (
+      <RuleModal {...this.props} />
+    )
+  }
+}
