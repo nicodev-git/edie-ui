@@ -3,15 +3,31 @@ import MainWorkflowModal from '../../../../../../components/page/content/device/
 import { connect } from 'react-redux'
 // import { bindActionCreators } from 'redux'
 import { withRouter } from 'react-router'
-import { closeDeviceWorkflowModal, addDeviceWorkflow, updateDeviceWorkflow } from '../../../../../../actions'
+import { assign } from 'lodash'
+
+import {
+  closeDeviceWorkflowModal,
+  addDeviceWorkflow,
+  updateDeviceWorkflow,
+  fetchWorkflowCategories,
+  openDeviceRuleModal
+} from '../../../../../../actions'
 
 @connect(
   state => ({
     editWorkflow: state.devices.editWorkflow,
+    workflowCategories: state.devices.workflowCategories,
     ruleModalOpen: state.devices.ruleModalOpen,
-    initialValues: state.devices.editWorkflow
+    initialValues: assign({
+      enable: true,
+      severity: 'HIGH'
+    }, state.devices.editWorkflow)
   }), {
-    closeDeviceWorkflowModal, addDeviceWorkflow, updateDeviceWorkflow
+    closeDeviceWorkflowModal,
+    addDeviceWorkflow,
+    updateDeviceWorkflow,
+    fetchWorkflowCategories,
+    openDeviceRuleModal
   }
 )
 @withRouter

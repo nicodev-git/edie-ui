@@ -15,6 +15,10 @@ class MainWorkflowModal extends React.Component {
     }
   }
 
+  componentWillMount () {
+    this.props.fetchWorkflowCategories()
+  }
+
   onHide () {
 
   }
@@ -48,6 +52,25 @@ class MainWorkflowModal extends React.Component {
     this.setState({ current })
   }
 
+  onClickAddRule () {
+    this.props.openDeviceRuleModal()
+  }
+
+  onClickEditRule () {
+
+  }
+
+  onClickRemoveRule () {
+
+  }
+
+  renderRuleModal () {
+    if (!this.props.ruleModalOpen) return null
+    return (
+      <RuleModalContainer />
+    )
+  }
+
   renderStep () {
     const {current} = this.state
     if (current === 1) {
@@ -78,7 +101,10 @@ class MainWorkflowModal extends React.Component {
           <div className="row margin-md-bottom">
             <label className="col-md-3">Category</label>
             <div className="col-md-9">
-              <Field name="category" component="input" className="form-control"/>
+              <Field name="category" component="select" className="form-control">
+                {this.props.workflowCategories.map(c => <option key={c.name} value={c.name}>{c.name}</option>)}
+              </Field>
+
             </div>
           </div>
 
@@ -107,15 +133,29 @@ class MainWorkflowModal extends React.Component {
       )
     } else if (current === 2) {
       return (
-        <div className="margin-md-bottom">
-          <table className="table table-hover">
-            <thead>
-              <tr>
-                <th>Key</th>
-                <th>Value</th>
-              </tr>
-            </thead>
-          </table>
+        <div>
+          <div>
+            <span className="margin-md-right"><b>Rules</b></span>
+            <a href="javascript:;" onClick={this.onClickAddRule.bind(this)} className="margin-sm-right">
+              <i className="fa fa-plus-square"></i></a>
+            <a href="javascript:;" onClick={this.onClickEditRule.bind(this)} className="margin-sm-right">
+              <i className="fa fa-edit"></i></a>
+            <a href="javascript:;" onClick={this.onClickRemoveRule.bind(this)} className="margin-sm-right">
+              <i className="fa fa-trash-o"></i>
+            </a>
+          </div>
+          <div className="margin-md-bottom">
+            <table className="table table-hover">
+              <thead>
+                <tr>
+                  <th>Key</th>
+                  <th>Value</th>
+                </tr>
+              </thead>
+            </table>
+          </div>
+
+          {this.renderRuleModal()}
         </div>
       )
     }
@@ -161,13 +201,6 @@ class MainWorkflowModal extends React.Component {
           </div>
         </div>
       </div>
-    )
-  }
-
-  renderRuleModal () {
-    if (!this.props.ruleModalOpen) return null
-    return (
-      <RuleModalContainer />
     )
   }
 

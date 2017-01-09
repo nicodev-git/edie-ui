@@ -51,7 +51,9 @@ const initialState = {
 
     eventLogs: [],
     apps: [],
-    processes: []
+    processes: [],
+
+    workflowCategories: []
   },
 
   search: {

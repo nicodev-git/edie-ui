@@ -35,6 +35,8 @@ import {
     OPEN_DEVICE_RULE_MODAL,
     CLOSE_DEVICE_RULE_MODAL,
 
+    FETCH_WORKFLOW_CATEGORIES,
+
     UPDATE_DEVICE_ERROR
 } from '../actions/types'
 
@@ -139,6 +141,9 @@ export default function (state = INITIAL_STATE, action) {
 
     case UPDATE_DEVICE_ERROR:
       return { ...state, updateDeviceError: action.msg }
+
+    case FETCH_WORKFLOW_CATEGORIES:
+      return { ...state, workflowCategories: action.data }
   }
   return state
 }

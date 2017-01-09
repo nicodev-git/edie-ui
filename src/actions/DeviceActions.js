@@ -38,6 +38,8 @@ import {
   OPEN_DEVICE_RULE_MODAL,
   CLOSE_DEVICE_RULE_MODAL,
 
+  FETCH_WORKFLOW_CATEGORIES,
+
   NO_AUTH_ERROR
 } from './types'
 
@@ -454,4 +456,22 @@ export const closeDeviceRuleModal = () => {
       type: CLOSE_DEVICE_RULE_MODAL
     })
   }
+}
+
+export const fetchWorkflowCategories = () => {
+  if (!window.localStorage.getItem('token')) {
+    return dispatch => dispatch({ type: NO_AUTH_ERROR })
+  }
+  return (dispatch) => {
+    axios.get(`${ROOT_URL}/workflowcategory`)
+      .then((response) => fetchWorkflowCategoriesSuccess(dispatch, response))
+      .catch(error => apiError(dispatch, error))
+  }
+}
+
+const fetchWorkflowCategoriesSuccess = (dispatch, response) => {
+  dispatch({
+    type: FETCH_WORKFLOW_CATEGORIES,
+    data: response.data._embedded.workflowCategories
+  })
 }
