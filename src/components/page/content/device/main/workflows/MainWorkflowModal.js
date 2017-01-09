@@ -88,8 +88,12 @@ class MainWorkflowModal extends React.Component {
     this.props.openWfCategoryModal()
   }
 
-  onRuleChange () {
-
+  onRuleChange (index, value) {
+    console.log(value)
+    const { rules } = this.state
+    this.setState({
+      rules: rules.map((r, i) => i === index ? assign({}, r, value) : r)
+    })
   }
 
   renderRuleModal () {
@@ -138,7 +142,7 @@ class MainWorkflowModal extends React.Component {
             <label className="col-md-3">Category</label>
             <div className="col-md-8 pr-none">
               <Field name="category" component="select" className="form-control">
-                {this.props.workflowCategories.map(c => <option key={c.name} value={c.name}>{c.name}</option>)}
+                {this.props.workflowCategories.map(c => <option key={c.id} value={c.name}>{c.name}</option>)}
               </Field>
             </div>
             <div className="col-md-1 text-right pl-none margin-sm-top">
@@ -176,7 +180,6 @@ class MainWorkflowModal extends React.Component {
           <div>
             <span className="margin-md-right"><b>Rules</b></span>
             <a href="javascript:;" onClick={this.onClickAddRule.bind(this)} className="margin-sm-right"><i className="fa fa-plus-square"/></a>
-            <a href="javascript:;" onClick={this.onClickEditRule.bind(this)} className="margin-sm-right"><i className="fa fa-edit"/></a>
             <a href="javascript:;" onClick={this.onClickRemoveRule.bind(this)} className="margin-sm-right"><i className="fa fa-trash-o"/></a>
           </div>
           <div className="margin-md-bottom">
@@ -190,20 +193,20 @@ class MainWorkflowModal extends React.Component {
               <tbody>
               {rules.map((r, index) =>
                 <tr key={r.key} className={selectedRuleIndex === index ? 'selected' : ''} onClick={() => { this.setState({ selectedRuleIndex: index }) }}>
-                  <td>
+                  <td width="50%">
                     <InlineEdit
                       activeClassName="editing"
                       text={r.key}
                       paramName="key"
-                      change={this.onRuleChange.bind(this, index, 'key')}
+                      change={this.onRuleChange.bind(this, index)}
                     />
                   </td>
-                  <td>
+                  <td width="50%">
                     <InlineEdit
                       activeClassName="editing"
                       text={r.value}
                       paramName="value"
-                      change={this.onRuleChange.bind(this, index, 'value')}
+                      change={this.onRuleChange.bind(this, index)}
                     />
                   </td>
                 </tr>
