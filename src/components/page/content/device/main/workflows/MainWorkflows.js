@@ -9,6 +9,8 @@ import TabPage from '../../../../../shared/TabPage'
 import TabPageBody from '../../../../../shared/TabPageBody'
 import TabPageHeader from '../../../../../shared/TabPageHeader'
 
+import MainWorkflowModalContainer from '../../../../../../containers/page/content/device/main/workflows/MainWorkflowModalContainer'
+
 export default class MainWorkflows extends React.Component {
   constructor (props) {
     super(props)
@@ -45,6 +47,10 @@ export default class MainWorkflows extends React.Component {
     this.props.fetchDeviceWorkflows(this.state.params)
   }
 
+  onClickAdd () {
+    this.props.openWorkflowModal()
+  }
+
   renderTable () {
     return (
       <ResponsiveInfiniteTable
@@ -61,6 +67,11 @@ export default class MainWorkflows extends React.Component {
     )
   }
 
+  renderWorkflowModal () {
+    if (!this.props.workflowModalOpen) return null
+    return <MainWorkflowModalContainer />
+  }
+
   render () {
     const {device} = this.props
     return (
@@ -70,7 +81,7 @@ export default class MainWorkflows extends React.Component {
             <div className="pull-right">
               <ButtonGroup>
 
-                <Button>Add</Button>
+                <Button onClick={this.onClickAdd.bind(this)}>Add</Button>
                 <Button>Edit</Button>
                 <Button>Remove</Button>
 
@@ -81,6 +92,7 @@ export default class MainWorkflows extends React.Component {
 
         <TabPageBody tabs={MainTabs(device.id)} tab={1}>
           {this.renderTable()}
+          {this.renderWorkflowModal()}
         </TabPageBody>
       </TabPage>
     )

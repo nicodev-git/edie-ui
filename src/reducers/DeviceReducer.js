@@ -85,11 +85,11 @@ export default function (state = INITIAL_STATE, action) {
     case FETCH_DEVICE_WORKFLOWS:
       return { ...state, workflows: action.data }
 
-      case OPEN_WORKFLOW_MODAL:
-          return { ...state, workflowModalOpen: true, editWorkflow: action.data }
+    case OPEN_WORKFLOW_MODAL:
+      return { ...state, workflowModalOpen: true, editWorkflow: action.data }
 
-      case CLOSE_WORKFLOW_MODAL:
-          return { ...state, workflowModalOpen: false}
+    case CLOSE_WORKFLOW_MODAL:
+      return { ...state, workflowModalOpen: false }
 
     // case FETCH_DEVICE_RAW_INCIDENTS:
     //   return { ...state, rawIncidents: action.data }
