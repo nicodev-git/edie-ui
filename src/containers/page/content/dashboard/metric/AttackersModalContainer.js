@@ -2,7 +2,7 @@ import React from 'react'
 import AttackersModal from '../../../../../components/page/content/dashboard/metric/AttackersModal'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import countries from 'country-data/data/countries'
+// import countries from 'country-data/data/countries'
 
 import { ROOT_URL } from '../../../../../actions/config'
 import { fetchAttackers } from '../../../../../actions'
@@ -23,7 +23,7 @@ export default connect(
   state => ({
     attackers: state.dashboard.attackers,
     ROOT_URL,
-    countries
+    countries: []
   }),
   dispatch => ({
     ...bindActionCreators({ fetchAttackers }, dispatch)

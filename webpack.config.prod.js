@@ -7,6 +7,12 @@ module.exports = {
     'babel-polyfill',
     './src/index'
   ],
+  resolve: {
+    root: [
+      path.resolve(__dirname, 'src'),
+    ],
+    extensions: ['', '.js', '.jsx']
+  },
   output: {
     path: path.join(__dirname, 'static'),
     filename: 'bundle.js',

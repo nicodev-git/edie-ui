@@ -66,7 +66,9 @@ class MainWorkflowModal extends React.Component {
   }
 
   onClickRemoveRule () {
-
+    const { selectedRuleIndex, rules } = this.state
+    if (selectedRuleIndex < 0) return window.alert('Please select rule.')
+    this.setState({rules: rules.filter((r, index) => index !== selectedRuleIndex)})
   }
 
   onCloseRuleModal (data, isEdit) {
@@ -78,6 +80,10 @@ class MainWorkflowModal extends React.Component {
     } else {
       this.setState({rules: concat(rules, data)})
     }
+  }
+
+  onClickAddCategory () {
+
   }
 
   renderRuleModal () {
@@ -117,11 +123,13 @@ class MainWorkflowModal extends React.Component {
 
           <div className="row margin-md-bottom">
             <label className="col-md-3">Category</label>
-            <div className="col-md-9">
+            <div className="col-md-8 pr-none">
               <Field name="category" component="select" className="form-control">
                 {this.props.workflowCategories.map(c => <option key={c.name} value={c.name}>{c.name}</option>)}
               </Field>
-
+            </div>
+            <div className="col-md-1 text-right pl-none margin-xs-top">
+              <a href="javascript:;" onClick={this.onClickAddCategory.bind(this)}><i className="fa fa-plus-square fa-2x"/></a>
             </div>
           </div>
 
