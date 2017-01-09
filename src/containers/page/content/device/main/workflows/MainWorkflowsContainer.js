@@ -3,16 +3,18 @@ import MainWorkflows from '../../../../../../components/page/content/device/main
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { withRouter } from 'react-router'
-import { fetchDeviceWorkflows } from '../../../../../../actions'
+import { fetchDeviceWorkflows, openWorkflowModal } from '../../../../../../actions'
 
 @connect(
   state => ({
     device: state.dashboard.selectedDevice,
-    workflows: state.devices.workflows
+    workflows: state.devices.workflows,
+    workflowModalOpen: state.devices.workflowModalOpen
   }),
-  dispatch => ({
-    fetchDeviceWorkflows: bindActionCreators(fetchDeviceWorkflows, dispatch)
-  })
+    {
+        openWorkflowModal,
+        fetchDeviceWorkflows,
+    }
 )
 @withRouter
 export default class MainRulesContainer extends React.Component {
