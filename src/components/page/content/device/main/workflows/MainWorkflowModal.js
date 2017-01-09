@@ -2,6 +2,7 @@ import React from 'react'
 import Modal from 'react-bootstrap-modal'
 import {reduxForm, Field} from 'redux-form'
 import {assign, concat} from 'lodash'
+import InlineEdit from 'react-edit-inline'
 
 import RuleModalContainer from '../../../../../../containers/page/content/device/main/workflows/RuleModalContainer'
 import CategoryModalContainer from 'containers/page/content/device/main/workflows/CategoryModalContainer'
@@ -85,6 +86,10 @@ class MainWorkflowModal extends React.Component {
 
   onClickAddCategory () {
     this.props.openWfCategoryModal()
+  }
+
+  onRuleChange () {
+
   }
 
   renderRuleModal () {
@@ -185,9 +190,24 @@ class MainWorkflowModal extends React.Component {
               <tbody>
               {rules.map((r, index) =>
                 <tr key={r.key} className={selectedRuleIndex === index ? 'selected' : ''} onClick={() => { this.setState({ selectedRuleIndex: index }) }}>
-                  <td>{r.key}</td>
-                  <td>{r.value}</td>
-                </tr>)}
+                  <td>
+                    <InlineEdit
+                      activeClassName="editing"
+                      text={r.key}
+                      paramName="key"
+                      change={this.onRuleChange.bind(this, index, 'key')}
+                    />
+                  </td>
+                  <td>
+                    <InlineEdit
+                      activeClassName="editing"
+                      text={r.value}
+                      paramName="value"
+                      change={this.onRuleChange.bind(this, index, 'value')}
+                    />
+                  </td>
+                </tr>
+              )}
               </tbody>
             </table>
           </div>
