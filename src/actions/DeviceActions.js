@@ -167,23 +167,30 @@ const fetchDeviceWorkflowsSuccess = (dispatch, response) => {
   })
 }
 
-export const addDeviceWorkflow = (props) => {
+export const addDeviceWorkflow = (props, device) => {
   if (!window.localStorage.getItem('token')) {
     return dispatch => dispatch({ type: NO_AUTH_ERROR })
   }
   return (dispatch) => {
     axios.post(`${ROOT_URL}/workflow`, props)
-      .then(response => addDeviceWorkflowSuccess(dispatch, response))
+      .then(response => addDeviceWorkflowSuccess(dispatch, response, device))
       .catch(error => apiError(dispatch, error))
   }
 }
 
-const addDeviceWorkflowSuccess = (dispatch, response) => {
-  dispatch({
-    type: ADD_DEVICE_WORKFLOW,
-    data: response.data
-  })
-  dispatch(closeDeviceWorkflowModal())
+const addDeviceWorkflowSuccess = (dispatch, response, device) => {
+  if (!device.workflowids) device.workflowids = []
+  device.workflowids.push(response.data.id)
+
+  axios.put(device._links.self.href, device)
+    .then(response2 => {
+      dispatch({
+        type: ADD_DEVICE_WORKFLOW,
+        data: response.data
+      })
+      dispatch(closeDeviceWorkflowModal())
+    })
+    .catch(error => updateDeviceError(dispatch, error))
 }
 
 export const updateDeviceWorkflow = (entity) => {

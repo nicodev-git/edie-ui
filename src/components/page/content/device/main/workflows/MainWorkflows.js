@@ -20,7 +20,7 @@ export default class MainWorkflows extends React.Component {
     this.state = {
       url: Api.workflow.getWorkflowsForDevice, // eslint-disable-line no-undef
       params: {
-        id: device.id
+        id: device.workflowids || []
       }
     }
 
@@ -64,7 +64,7 @@ export default class MainWorkflows extends React.Component {
         id="rule1"
         cells={this.cells}
         ref="table"
-        rowMetadata={{'key': 'idrulesNew'}}
+        rowMetadata={{'key': 'id'}}
         selectable
         onRowDblClick={this.onClickEdit.bind(this)}
 

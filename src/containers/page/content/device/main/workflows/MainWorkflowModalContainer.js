@@ -16,6 +16,7 @@ import {
 
 @connect(
   state => ({
+    device: state.dashboard.selectedDevice,
     editWorkflow: state.devices.editWorkflow,
     workflowCategories: state.devices.workflowCategories,
     ruleModalOpen: state.devices.ruleModalOpen,

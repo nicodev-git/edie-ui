@@ -18,6 +18,10 @@ class MainWorkflowModal extends React.Component {
       rules: [{key: '', value: ''}],
       selectedRuleIndex: -1
     }
+
+    if (props.editWorkflow) {
+
+    }
   }
 
   componentWillMount () {
@@ -41,7 +45,7 @@ class MainWorkflowModal extends React.Component {
     if (editWorkflow) {
       this.props.updateDeviceWorkflow(props)
     } else {
-      this.props.addDeviceWorkflow(props)
+      this.props.addDeviceWorkflow(props, this.props.device)
     }
   }
 
