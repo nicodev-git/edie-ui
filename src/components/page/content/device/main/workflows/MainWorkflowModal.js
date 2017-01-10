@@ -28,7 +28,7 @@ class MainWorkflowModal extends React.Component {
       rules,
       selectedRuleIndex: -1,
 
-      actions: [],
+      actions: props.editWorkflow ? (props.editWorkflow.actions || []) : [],
       selectedActionIndex: -1
     }
   }
@@ -43,8 +43,8 @@ class MainWorkflowModal extends React.Component {
 
   handleFormSubmit (values) {
     const {editWorkflow} = this.props
-    const { rules } = this.state
-    let props = assign({}, editWorkflow, values, { rules: {} })
+    const { rules, actions } = this.state
+    let props = assign({}, editWorkflow, values, { rules: {}, actions: actions })
     rules.forEach(r => {
       if (r.key) props.rules[r.key] = r.value
     })
@@ -119,15 +119,26 @@ class MainWorkflowModal extends React.Component {
   }
 
   onClickEditAction () {
-
+    const { selectedActionIndex, actions } = this.state
+    if (selectedActionIndex < 0) return window.alert('Please select action.')
+    this.props.openWfActionModal(actions[selectedActionIndex])
   }
 
   onClickRemoveAction () {
-
+    const { selectedActionIndex, actions } = this.state
+    if (selectedActionIndex < 0) return window.alert('Please select action.')
+    this.setState({actions: actions.filter((r, index) => index !== selectedActionIndex), selectedActionIndex: -1})
   }
 
-  onCloseActionModal () {
+  onCloseActionModal (data, isEdit) {
+    if (!data) return
 
+    const { actions, selectedActionIndex } = this.state
+    if (isEdit) {
+      this.setState({actions: actions.map((r, index) => index === selectedActionIndex ? data : r)})
+    } else {
+      this.setState({actions: concat(actions, data)})
+    }
   }
 
   renderRuleModal () {
