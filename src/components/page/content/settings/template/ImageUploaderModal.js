@@ -19,7 +19,11 @@ export default class ImageUploaderModal extends React.Component {
         { url: '/images/window.png', filename: 'window.png' },
         { url: '/images/linux.png', filename: 'linux.png' },
         { url: '/images/inticon.png', filename: 'inticon.png' },
-        { url: '/images/pcs.png', filename: 'pcs.png' }
+        { url: '/images/pcs.png', filename: 'pcs.png' },
+        { url: '/images/db2.png', filename: 'db2.png' },
+        { url: '/images/antivirus.png', filename: 'antivirus.png' },
+        { url: '/images/nac.png', filename: 'nac.png' },
+        { url: '/images/usb.png', filename: 'usb.png' }
       ]
     })
 
