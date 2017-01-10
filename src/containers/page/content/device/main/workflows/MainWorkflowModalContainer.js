@@ -27,7 +27,8 @@ import {
 
     initialValues: assign({
       enable: true,
-      severity: 'HIGH'
+      severity: 'HIGH',
+      category: (state.devices.workflowCategories || [''])[0]
     }, state.devices.editWorkflow)
   }), {
     closeDeviceWorkflowModal,

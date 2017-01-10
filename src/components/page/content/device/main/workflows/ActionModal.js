@@ -14,7 +14,8 @@ class ActionModal extends React.Component {
 
     if (!props.name) return window.alert('Please type name.')
 
-    this.props.onClose(props)
+    this.props.onClose(props, editWfAction)
+    this.onClickClose()
   }
 
   onClickClose () {
