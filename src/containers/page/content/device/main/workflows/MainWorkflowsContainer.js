@@ -2,7 +2,7 @@ import React from 'react'
 import MainWorkflows from '../../../../../../components/page/content/device/main/workflows/MainWorkflows'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
-import { fetchDeviceWorkflows, openDeviceWorkflowModal } from '../../../../../../actions'
+import { fetchDeviceWorkflows, openDeviceWorkflowModal, removeDeviceWorkflow } from '../../../../../../actions'
 
 @connect(
   state => ({
@@ -11,7 +11,8 @@ import { fetchDeviceWorkflows, openDeviceWorkflowModal } from '../../../../../..
     workflowModalOpen: state.devices.workflowModalOpen
   }), {
     openDeviceWorkflowModal,
-    fetchDeviceWorkflows
+    fetchDeviceWorkflows,
+    removeDeviceWorkflow
   }
 )
 @withRouter

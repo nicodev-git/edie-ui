@@ -51,7 +51,13 @@ export default class MainWorkflows extends React.Component {
   onClickEdit () {
     const selected = this.getTable().getSelected()
     if (!selected) return window.alert('Please select workflow.')
-    this.props.openDeviceWorkflowModal(selected)
+    this.props.openDeviceWorkflowModal(selected, this.props.device)
+  }
+
+  onClickRemove () {
+    const selected = this.getTable().getSelected()
+    if (!selected) return window.alert('Please select workflow.')
+    this.props.removeDeviceWorkflow(selected, this.props.device)
   }
 
   getTable () {
@@ -90,7 +96,7 @@ export default class MainWorkflows extends React.Component {
 
                 <Button onClick={this.onClickAdd.bind(this)}>Add</Button>
                 <Button onClick={this.onClickEdit.bind(this)}>Edit</Button>
-                <Button>Remove</Button>
+                <Button onClick={this.onClickRemove.bind(this)}>Remove</Button>
 
               </ButtonGroup>
             </div>

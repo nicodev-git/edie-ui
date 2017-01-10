@@ -31,6 +31,7 @@ import {
     CLOSE_DEVICE_WORKFLOW_MODAL,
     ADD_DEVICE_WORKFLOW,
     UPDATE_DEVICE_WORKFLOW,
+    REMOVE_DEVICE_WORKFLOW,
 
     OPEN_DEVICE_RULE_MODAL,
     CLOSE_DEVICE_RULE_MODAL,
@@ -106,6 +107,9 @@ export default function (state = INITIAL_STATE, action) {
 
     case UPDATE_DEVICE_WORKFLOW:
       return { ...state, workflows: state.workflows.map(w => w.id === action.data.id ? action.data : w) }
+
+    case REMOVE_DEVICE_WORKFLOW:
+      return { ...state, workflows: state.workflows.filter(w => w.id !== action.data.id) }
     // case FETCH_DEVICE_RAW_INCIDENTS:
     //   return { ...state, rawIncidents: action.data }
 

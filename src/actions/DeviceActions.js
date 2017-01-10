@@ -18,6 +18,7 @@ import {
   CLOSE_DEVICE_WORKFLOW_MODAL,
   ADD_DEVICE_WORKFLOW,
   UPDATE_DEVICE_WORKFLOW,
+  REMOVE_DEVICE_WORKFLOW,
   // FETCH_DEVICE_RAW_INCIDENTS,
   FETCH_DEVICE_EVENTS,
   FETCH_DEVICE_PHYSICAL_RULES,
@@ -215,15 +216,24 @@ const updateDeviceWorkflowSuccess = (dispatch, response) => {
 export const removeDeviceWorkflow = (entity, device) => {
   return dispatch => {
     axios.delete(entity._links.self.href)
-      .then(() => removeDeviceWorkflowSuccess(dispatch, entity))
+      .then(() => removeDeviceWorkflowSuccess(dispatch, entity, device))
       .catch(error => apiError(dispatch, error))
   }
 }
 
-const removeDeviceWorkflowSuccess = (dispatch, response) => {
-  dispatch({
+const removeDeviceWorkflowSuccess = (dispatch, entity, device) => {
+  if (!device.workflowids) device.workflowids = []
+  const index = device.workflowids.indexOf(entity.id)
+  device.workflowids.splice(index, 1)
 
-  })
+  axios.put(device._links.self.href, device)
+    .then(response => {
+      dispatch({
+        type: REMOVE_DEVICE_WORKFLOW,
+        data: entity
+      })
+    })
+    .catch(error => updateDeviceError(dispatch, error))
 }
 
 export const openDeviceWorkflowModal = (entity) => {
