@@ -5,6 +5,7 @@ import { concat, assign, isEqual, keys } from 'lodash'
 import Dimensions from 'react-dimensions'
 
 import $ from 'jquery'
+import { encodeUrlParams } from 'shared/Global'
 import { ROOT_URL } from '../../actions/config'
 
 class InfiniteTable extends React.Component {
@@ -79,7 +80,7 @@ class InfiniteTable extends React.Component {
       isLoading: true
     })
 
-    this.lastRequest = $.get(`${ROOT_URL}${url}`, urlParams).done(res => {
+    this.lastRequest = $.get(`${ROOT_URL}${url}?${encodeUrlParams(urlParams)}`).done(res => {
       const embedded = res._embedded
       const data = embedded[keys(embedded)[0]]
 

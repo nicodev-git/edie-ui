@@ -55,7 +55,8 @@ export default class MainIncidents extends Component {
       currentSortDir: 'desc',
 
       openExceptionModal: false,
-      commentModalVisible: false
+      commentModalVisible: false,
+      params: {}
     }
 
     this.cells = [{
@@ -171,8 +172,8 @@ export default class MainIncidents extends Component {
         selectable
         onRowDblClick={this.onRowDblClick.bind(this)}
 
-        useExternal={false}
-        data={this.props.incidents}
+        url="/incident/search/findBy"
+        params={this.state.params}
       />
     )
   }
@@ -260,23 +261,26 @@ export default class MainIncidents extends Component {
   }
 
   onFilterChange () {
-    this.props.fetchDeviceIncidents(this.getParams())
+    // this.props.fetchDeviceIncidents(this.getParams())
+    this.setState({
+      params: this.getParams()
+    })
   }
 
   getParams () {
     const refs = this.refs
     const {search, fixed, dp} = refs
-    const { currentSortCol, currentSortDir } = this.state
+    const { currentSortCol, currentSortDir, selectedSeverity } = this.state
 
     let params = {
-      description: search.value || '""',
-      severity: this.state.selectedSeverity,
-      afterStartTimestamp: dp.getStartDate().valueOf(),
-      beforeStartTimestamp: dp.getEndDate().valueOf(),
+      description: (search ? search.value : '') || '""',
+      severity: selectedSeverity,
+      afterStartTimestamp: dp ? dp.getStartDate().valueOf() : 1454256000000,
+      beforeStartTimestamp: dp ? dp.getEndDate().valueOf() : (new Date()).getTime(),
       deviceid: this.props.device.id,
       sort: `${currentSortCol},${currentSortDir}`
     }
-    if (fixed.value) params.fixed = fixed.value
+    if (fixed && fixed.value) params.fixed = fixed.value
 
     return params
   }
@@ -286,6 +290,10 @@ export default class MainIncidents extends Component {
       selectedIndex: findIndex(this.props.incidents, {id: incident.id}),
       commentModalVisible: true
     })
+  }
+
+  getTable () {
+    return this.refs.table.refs.wrappedInstance
   }
 
   render () {
