@@ -22,10 +22,13 @@ class MainWorkflowModal extends React.Component {
 
     this.state = {
       current: 1,
-      steps: 2,
+      steps: 3,
 
       rules,
-      selectedRuleIndex: -1
+      selectedRuleIndex: -1,
+
+      actions: [],
+      selectedActionIndex: -1
     }
   }
 
@@ -110,6 +113,18 @@ class MainWorkflowModal extends React.Component {
     this.setState({ rules })
   }
 
+  onClickAddAction () {
+
+  }
+
+  onClickEditAction () {
+
+  }
+
+  onClickRemoveAction () {
+
+  }
+
   renderRuleModal () {
     if (!this.props.ruleModalOpen) return null
     return (
@@ -125,7 +140,7 @@ class MainWorkflowModal extends React.Component {
   }
 
   renderStep () {
-    const {current, rules, selectedRuleIndex} = this.state
+    const {current, rules, selectedRuleIndex, actions, selectedActionIndex} = this.state
 
     if (current === 1) {
       return (
@@ -237,6 +252,38 @@ class MainWorkflowModal extends React.Component {
           </div>
 
           {this.renderRuleModal()}
+        </div>
+      )
+    } else if (current === 3) {
+      return (
+        <div>
+          <div>
+            <span className="margin-md-right"><b>Actions</b></span>
+            <a href="javascript:;" onClick={this.onClickAddAction.bind(this)} className="margin-sm-right"><i className="fa fa-plus-square"/></a>
+            <a href="javascript:;" onClick={this.onClickEditAction.bind(this)} className="margin-sm-right"><i className="fa fa-edit"/></a>
+            <a href="javascript:;" onClick={this.onClickRemoveAction.bind(this)} className="margin-sm-right"><i className="fa fa-trash-o"/></a>
+          </div>
+
+          <div>
+            <table className="table table-hover">
+              <thead>
+              <tr>
+                <th>Name</th>
+                <th>Type</th>
+              </tr>
+              </thead>
+              <tbody>
+              {
+                actions.map((a, index) =>
+                  <tr key={a.name} className={selectedActionIndex === index ? 'selected' : ''} onClick={() => { this.setState({ selectedActionIndex: index }) }}>
+                    <td>{a.name}</td>
+                    <td>{a.type}</td>
+                  </tr>
+                )
+              }
+              </tbody>
+            </table>
+          </div>
         </div>
       )
     }
