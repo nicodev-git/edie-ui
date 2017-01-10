@@ -163,7 +163,7 @@ class DeviceWizard extends React.Component {
     if (typeof func !== 'undefined') {
       items = func(config, values || {})
     } else {
-      console.error(`Mapping not found! : ${config.type}`)
+      // console.error(`Mapping not found! : ${config.type}`)
     }
 
     return items
