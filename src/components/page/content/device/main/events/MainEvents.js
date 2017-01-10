@@ -70,10 +70,10 @@ export default class MainEvents extends Component {
     }]
   }
 
-  componentWillMount () {
-    const {device} = this.props
-    this.props.fetchDeviceEvents(device.id)
-  }
+  // componentWillMount () {
+  //   const {device} = this.props
+  //   this.props.fetchDeviceEvents(device.id)
+  // }
 
   highlightRender (props) {
     let data = props.data || ''
@@ -93,6 +93,7 @@ export default class MainEvents extends Component {
   }
 
   renderTable () {
+    const {device} = this.props
     return (
       <ResponsiveInfiniteTable
         cells={this.cells}
@@ -101,8 +102,11 @@ export default class MainEvents extends Component {
         selectable
         onRowDblClick={this.onRowDblClick.bind(this)}
 
-        useExternal={false}
-        data={this.props.events}
+        url="/event/search/findBy"
+        params={{
+          deviceid: device.id
+        }}
+        pageSize={20}
       />
     )
   }

@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import Griddle from 'griddle-react'
-import { concat, assign, isEqual } from 'lodash'
+import { concat, assign, isEqual, keys } from 'lodash'
 import Dimensions from 'react-dimensions'
 
 import $ from 'jquery'
@@ -80,11 +80,14 @@ class InfiniteTable extends React.Component {
     })
 
     this.lastRequest = $.get(`${ROOT_URL}${url}`, urlParams).done(res => {
+      const embedded = res._embedded
+      const data = embedded[keys(embedded)[0]]
+
       let state = {
-        results: concat((clear ? [] : this.state.results), res.data),
+        results: concat((clear ? [] : this.state.results), data),
         currentPage: page - 1,
-        maxPages: Math.round(res.recordsTotal / pageSize),
-        total: res.recordsTotal,
+        maxPages: res.page.totalPages,
+        total: res.page.totalElements,
         isLoading: false
       }
 
