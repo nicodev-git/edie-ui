@@ -212,6 +212,20 @@ const updateDeviceWorkflowSuccess = (dispatch, response) => {
   dispatch(closeDeviceWorkflowModal())
 }
 
+export const removeDeviceWorkflow = (entity, device) => {
+  return dispatch => {
+    axios.delete(entity._links.self.href)
+      .then(() => removeDeviceWorkflowSuccess(dispatch, entity))
+      .catch(error => apiError(dispatch, error))
+  }
+}
+
+const removeDeviceWorkflowSuccess = (dispatch, response) => {
+  dispatch({
+
+  })
+}
+
 export const openDeviceWorkflowModal = (entity) => {
   return (dispatch) => {
     dispatch({
