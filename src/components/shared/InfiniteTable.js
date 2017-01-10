@@ -71,9 +71,8 @@ class InfiniteTable extends React.Component {
     const {url, params, pageSize} = this.props
 
     let urlParams = assign({
-      draw: 1,
-      start: (page - 1) * pageSize,
-      length: pageSize || 10
+      page: page - 1,
+      size: pageSize || 10
     }, params)
 
     this.setState({
