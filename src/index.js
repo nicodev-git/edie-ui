@@ -28,7 +28,10 @@ const initialState = {
 
     selectedDevice: null,
 
-    images: []
+    images: [],
+
+    apiErrorModalOpen: false,
+    apiError: ''
   },
 
   devices: {

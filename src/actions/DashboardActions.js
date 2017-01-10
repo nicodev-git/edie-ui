@@ -5,6 +5,8 @@ import {
   FETCH_DASHBOARD_INCIDENTS,
   FETCH_DASHBOARD_BIGINCIDENTS,
 
+  CLOSE_API_ERROR_MODAL,
+
   NO_AUTH_ERROR
 } from './types'
 
@@ -57,4 +59,12 @@ const fetchBigIncidentsSuccess = (dispatch, response) => {
     type: FETCH_DASHBOARD_BIGINCIDENTS,
     data: response.data._embedded.incidents
   })
+}
+
+export const closeApiErrorModal = () => {
+  return dispatch => {
+    dispatch({
+      type: CLOSE_API_ERROR_MODAL
+    })
+  }
 }

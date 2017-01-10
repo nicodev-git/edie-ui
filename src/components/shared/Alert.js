@@ -6,7 +6,7 @@ const TYPE_ALERT = 'alert'
 const TYPE_CONFIRM = 'confirm'
 const TYPE_PROMPT = 'prompt'
 
-class Alert extends React.Component {
+export default class Alert extends React.Component {
   constructor (props) {
     super(props)
     this.state = {

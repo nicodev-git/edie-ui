@@ -8,6 +8,8 @@ import { scrollTop } from '../../util/Scroll'
 import { DragDropContext } from 'react-dnd'
 import TouchBackend from 'react-dnd-touch-backend'
 
+import Alert from 'components/shared/Alert'
+
 import { mainMenu, deviceMenu, contentType } from './Config'
 
 const dashboardId = mainMenu[0].id
@@ -86,6 +88,17 @@ class Main extends React.Component {
     )
   }
 
+  onCloseAlert () {
+    this.props.closeApiErrorModal()
+  }
+
+  renderApiError () {
+    if (!this.props.apiErrorModalOpen) return null
+    return (
+      <Alert message={this.props.apiError.message} onClose={this.onCloseAlert.bind(this)}/>
+    )
+  }
+
   render () {
     const {children} = this.props
     const {minHeight} = this.state
@@ -101,6 +114,7 @@ class Main extends React.Component {
           {this.renderDashboard()}
           {children || null}
         </div>
+        {this.renderApiError()}
       </div>
     )
 

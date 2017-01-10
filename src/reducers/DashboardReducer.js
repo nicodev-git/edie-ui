@@ -33,6 +33,8 @@ import {
 
     OPEN_NEW_INCIDENT_MODAL,
 
+    CLOSE_API_ERROR_MODAL,
+
     API_ERROR
 } from '../actions/types'
 
@@ -166,7 +168,10 @@ export default function (state = {}, action) {
       return { ...state }
 
     case API_ERROR:
-      return { ...state }
+      return { ...state, apiErrorModalOpen: true, apiError: action.msg }
+
+    case CLOSE_API_ERROR_MODAL:
+      return { ...state, apiErrorModalOpen: false }
   }
   return state
 }
