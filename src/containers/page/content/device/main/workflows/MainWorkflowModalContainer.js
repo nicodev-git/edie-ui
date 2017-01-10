@@ -11,16 +11,20 @@ import {
   updateDeviceWorkflow,
   fetchWorkflowCategories,
   openDeviceRuleModal,
-  openWfCategoryModal
+  openWfCategoryModal,
+  openWfActionModal
 } from '../../../../../../actions'
 
 @connect(
   state => ({
     device: state.dashboard.selectedDevice,
     editWorkflow: state.devices.editWorkflow,
+
     workflowCategories: state.devices.workflowCategories,
     ruleModalOpen: state.devices.ruleModalOpen,
     wfCategoryModalOpen: state.devices.wfCategoryModalOpen,
+    wfActionModalOpen: state.devices.wfActionModalOpen,
+
     initialValues: assign({
       enable: true,
       severity: 'HIGH'
@@ -31,7 +35,8 @@ import {
     updateDeviceWorkflow,
     fetchWorkflowCategories,
     openDeviceRuleModal,
-    openWfCategoryModal
+    openWfCategoryModal,
+    openWfActionModal
   }
 )
 @withRouter

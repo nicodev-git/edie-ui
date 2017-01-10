@@ -6,6 +6,7 @@ import InlineEdit from 'react-edit-inline'
 
 import RuleModalContainer from '../../../../../../containers/page/content/device/main/workflows/RuleModalContainer'
 import CategoryModalContainer from 'containers/page/content/device/main/workflows/CategoryModalContainer'
+import ActionModalContainer from 'containers/page/content/device/main/workflows/ActionModalContainer'
 
 class MainWorkflowModal extends React.Component {
 
@@ -114,7 +115,7 @@ class MainWorkflowModal extends React.Component {
   }
 
   onClickAddAction () {
-
+    this.props.openWfActionModal()
   }
 
   onClickEditAction () {
@@ -122,6 +123,10 @@ class MainWorkflowModal extends React.Component {
   }
 
   onClickRemoveAction () {
+
+  }
+
+  onCloseActionModal () {
 
   }
 
@@ -136,6 +141,13 @@ class MainWorkflowModal extends React.Component {
     if (!this.props.wfCategoryModalOpen) return null
     return (
       <CategoryModalContainer />
+    )
+  }
+
+  renderActionModal () {
+    if (!this.props.wfActionModalOpen) return null
+    return (
+      <ActionModalContainer onClose={this.onCloseActionModal.bind(this)} />
     )
   }
 
@@ -284,6 +296,8 @@ class MainWorkflowModal extends React.Component {
               </tbody>
             </table>
           </div>
+
+          {this.renderActionModal()}
         </div>
       )
     }

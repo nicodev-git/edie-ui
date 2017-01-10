@@ -44,6 +44,9 @@ import {
   CLOSE_WF_CATEGORY_MODAL,
   ADD_WF_CATEGORY,
 
+  OPEN_WF_ACTION_MODAL,
+  CLOSE_WF_ACTION_MODAL,
+
   NO_AUTH_ERROR
 } from './types'
 
@@ -544,4 +547,21 @@ const addWfCategorySuccess = (dispatch, response) => {
     data: response.data
   })
   dispatch(closeWfCategoryModal())
+}
+
+export const openWfActionModal = (action) => {
+  return (dispatch) => {
+    dispatch({
+      type: OPEN_WF_ACTION_MODAL,
+      data: action
+    })
+  }
+}
+
+export const closeWfActionModal = () => {
+  return (dispatch) => {
+    dispatch({
+      type: CLOSE_WF_ACTION_MODAL
+    })
+  }
 }
