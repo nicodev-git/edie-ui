@@ -117,7 +117,7 @@ class DeviceEditWizard extends React.Component {
     config.type = config.type || ''
     let func = this.mapping[config.type.toLowerCase()]
 
-    if (func !== null) {
+    if (typeof func === 'function') {
       items = func(config, {})
     } else {
       console.error(`Mapping not found! : ${config.type}`)

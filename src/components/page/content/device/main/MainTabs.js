@@ -2,27 +2,27 @@ export default (deviceId) => {
   return [
     {
       title: 'Incidents',
-      path: `/device/${deviceId}/incidents`
+      path: `/device/main/incidents`
     },
     // {
     //   title: 'Rules',
-    //   path: `/device/${deviceId}/rules`
+    //   path: `/device/main/rules`
     // },
     {
       title: 'Workflows',
-      path: `/device/${deviceId}/workflows`
+      path: `/device/main/workflows`
     },
     // {
     //   title: 'Raw Incidents',
-    //   path: `/device/${deviceId}/rawIncidents`
+    //   path: `/device/main/rawIncidents`
     // },
     {
       title: 'Events',
-      path: `/device/${deviceId}/events`
+      path: `/device/main/events`
     },
     {
       title: 'Advanced',
-      path: `/device/${deviceId}/advanced`
+      path: `/device/main/advanced`
     }
   ]
 }
