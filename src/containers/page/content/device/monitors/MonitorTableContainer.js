@@ -23,12 +23,14 @@ import {
       closeDeviceMonitorWizard,
       updateMapDevice
     }, dispatch)
-  })
+  }),
+  null,
+  { withRef: true }
 )
 export default class MonitorTableContainer extends Component {
   render () {
     return (
-      <MonitorTable {...this.props} />
+      <MonitorTable {...this.props} ref="table"/>
     )
   }
 }
