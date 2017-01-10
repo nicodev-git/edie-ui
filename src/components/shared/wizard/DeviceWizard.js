@@ -360,7 +360,7 @@ class DeviceWizard extends React.Component {
                 onClick={this.onClickClose.bind(this)}>Cancel</a>
 
               <a href="javascript:;"
-                className={`btn btn-default btn-sm margin-sm-left ${cssPrevious}`}
+                className={`btn btn-default btn-sm margin-sm-left margin-sm-right ${cssPrevious}`}
                 onClick={this.onClickPrevious.bind(this)}>Previous</a>
 
               {

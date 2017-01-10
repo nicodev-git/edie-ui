@@ -159,7 +159,7 @@ export default class Monitors extends React.Component {
             this.state.selected !== 'monitors'
               ? null
               : <div className="flex-vertical" style={{height: '100%'}}>
-                  <div className="flex-1" style={{background: 'white'}}>
+                  <div className="flex-1 flex-vertical" style={{background: 'white'}}>
                     <MonitorTableContainer {...props} ref="monitor"/>
                   </div>
                 </div>

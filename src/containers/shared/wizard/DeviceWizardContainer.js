@@ -5,7 +5,10 @@ import { bindActionCreators } from 'redux'
 import { fetchMonitorTemplates, clearDeviceWizardInitialValues } from '../../../actions'
 
 @connect(
-  state => ({ monitorTemplates: state.settings.monitorTemplates }),
+  state => ({
+    monitorTemplates: state.settings.monitorTemplates,
+    initialValues: state.devices.wizardInitialValues
+  }),
   dispatch => ({
     ...bindActionCreators({
       fetchMonitorTemplates,

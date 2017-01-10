@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-import Griddle from 'griddle-react'
 import TimeAgo from 'react-timeago'
 import { assign, concat } from 'lodash'
 
 import DeviceWizardContainer from '../../../../../containers/shared/wizard/DeviceWizardContainer'
+import { ResponsiveInfiniteTable } from 'components/shared/InfiniteTable'
 
 import { appendComponent, removeComponent } from '../../../../../util/Component'
 import { showAlert } from '../../../../shared/Alert'
@@ -15,8 +15,6 @@ export default class MonitorTable extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      selected: '',
-
       editMonitor: null,
 
       monitorConfig: null
@@ -173,19 +171,6 @@ export default class MonitorTable extends Component {
     )
   }
 
-  onRowClick (row) {
-    this.setState({
-      selected: row.props.data
-    })
-  }
-
-  getBodyCssClassName (data) {
-    if (this.state.selected === data) {
-      return 'selected'
-    }
-    return ''
-  }
-
   onRowDblClick () {
     this.onClickEditMonitor()
   }
@@ -260,7 +245,7 @@ export default class MonitorTable extends Component {
   }
 
   onClickEditMonitor () {
-    let selected = this.state.selected
+    let selected = this.getTable().getSelected()
 
     if (!selected) return showAlert('Please select monitor.')
 
@@ -278,7 +263,7 @@ export default class MonitorTable extends Component {
   }
 
   onClickDeleteMonitor () {
-    let data = this.state.selected
+    let data = this.getTable().getSelected()
     if (!data) return showAlert('Please choose monitor.')
 
     let device = assign({}, this.props.device)
@@ -288,23 +273,22 @@ export default class MonitorTable extends Component {
     this.props.updateMapDevice(device)
   }
 
+  getTable () {
+    return this.refs.table.refs.wrappedInstance
+  }
+
   render () {
     return (
-      <div className="flex-1">
-        <Griddle
-          results={this.props.device.monitors}
-          tableClassName="table tab-table"
-          showFilter={false}
-          showSettings={false}
-          columns={this.columns.map(item => item.columnName)}
-          columnMetadata={this.columns}
-          rowMetadata={{key: 'name', 'bodyCssClassName': this.getBodyCssClassName.bind(this)}}
-          useGriddleStyles={false}
-          resultsPerPage={100}
-          useFixedHeader={false}
-          onRowClick={this.onRowClick.bind(this)}
+      <div className="flex-1 flex-vertical">
+        <ResponsiveInfiniteTable
+          cells={this.columns}
+          ref="table"
+          rowMetadata={{'key': 'name'}}
+          selectable
           onRowDblClick={this.onRowDblClick.bind(this)}
-          bodyHeight={this.props.containerHeight}
+
+          useExternal={false}
+          data={this.props.device.monitors}
         />
 
         {this.renderMonitorPicker()}
