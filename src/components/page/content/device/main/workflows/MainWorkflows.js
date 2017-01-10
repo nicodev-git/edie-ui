@@ -39,11 +39,6 @@ export default class MainWorkflows extends React.Component {
     }]
   }
 
-  componentWillMount () {
-    console.log(this.props)
-    this.props.fetchDeviceWorkflows(this.state.params)
-  }
-
   onClickAdd () {
     this.props.openDeviceWorkflowModal()
   }
@@ -74,8 +69,8 @@ export default class MainWorkflows extends React.Component {
         selectable
         onRowDblClick={this.onClickEdit.bind(this)}
 
-        useExternal={false}
-        data={this.props.workflows}
+        url="/workflow/search/findById"
+        params={this.state.params}
       />
     )
   }
