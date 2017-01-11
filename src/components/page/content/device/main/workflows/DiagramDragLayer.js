@@ -1,7 +1,7 @@
 import React from 'react'
 import { DragLayer } from 'react-dnd'
 
-import { DragTypes } from 'shared/Global'
+import { DragTypes, workflowItems } from 'shared/Global'
 
 function collect (monitor) {
   return {
@@ -32,8 +32,10 @@ function getItemStyles (currentOffset) {
   const { x, y } = currentOffset
   return {
     position: 'absolute',
-    left: `${x - 24}px`,
-    top: `${y - 24}px`
+    left: `${x - 18}px`,
+    top: `${y - 18}px`,
+    width: '36px',
+    height: '36px'
   }
 }
 
@@ -47,16 +49,16 @@ class DiagramDragLayer extends React.Component {
     switch (type) {
       case DragTypes.WORKFLOW:
         return (
-          <img src={`/images/${item.img}`} width="48" height="48" style={style}/>
+          <svg style={style}>
+            {workflowItems[item.imgIndex]}
+          </svg>
         )
     }
   }
 
   render () {
     const { item, itemType, isDragging, currentOffset } = this.props
-    if (!isDragging) {
-      return null
-    }
+    if (!isDragging || !currentOffset) return null
 
     const rt = this.containerEl ? this.containerEl.getClientRects()[0] : {left: 0, top: 0}
 

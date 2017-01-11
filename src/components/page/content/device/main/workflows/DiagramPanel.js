@@ -25,11 +25,9 @@ class DiagramPanel extends React.Component {
   render () {
     const { connectDropTarget } = this.props
 
-    const style = {backgroundColor: 'whitesmoke', height: '100%', position: 'relative'}
+    const style = {backgroundColor: 'whitesmoke'}
     return connectDropTarget(
-      <div style={style}>
-
-      </div>
+      <div className="draw-panel" style={style} />
     )
   }
 }

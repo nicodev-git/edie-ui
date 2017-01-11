@@ -6,9 +6,7 @@ import { DragTypes } from 'shared/Global'
 const dragSource = {
   beginDrag (props) {
     const item = {
-      img: props.img,
-      title: props.title,
-      type: props.type
+      imgIndex: props.imgIndex
     }
     return item
   },
@@ -42,9 +40,7 @@ class DiagramDragItem extends React.Component {
 }
 
 DiagramDragItem.defaultProps = {
-  img: '',
-  type: '',
-  title: ''
+  imgIndex: 0
 }
 
 export default DragSource(DragTypes.WORKFLOW, dragSource, collect)(DiagramDragItem)

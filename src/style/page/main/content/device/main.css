@@ -12,7 +12,7 @@
     text-align: center;
 }
 .diagram .draw-panel {
+    position: relative;
     min-height: 500px;
-
     border: 1px solid black;
 }

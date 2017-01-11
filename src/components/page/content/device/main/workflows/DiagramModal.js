@@ -4,13 +4,7 @@ import DiagramPanel from './DiagramPanel'
 import DiagramDragLayer from './DiagramDragLayer'
 import DiagramDragItem from './DiagramDragItem'
 
-const items = [
-  <g key="1"><g /><g><g transform="translate(0.5,0.5)"><rect x="2" y="10" width="31" height="16" fill="#ffffff" stroke="#000000"/></g></g><g/><g/></g>,
-  <g key="2"><g /><g><g transform="translate(0.5,0.5)"><rect x="2" y="10" width="31" height="16" rx="2" ry="2" fill="#ffffff" stroke="#000000"/></g></g><g/><g/></g>,
-  <g key="3"><g /><g><g transform="translate(0.5,0.5)"><ellipse cx="18" cy="18" rx="15.6" ry="10.4" fill="#ffffff" stroke="#000000"/></g></g><g/><g/></g>,
-  <g key="4"><g /><g><g transform="translate(0.5,0.5)"><path d="M 18 2 L 34 18 L 18 34 L 2 18 Z" fill="#ffffff" stroke="#000000" strokeMiterlimit="10"/></g></g><g/><g/></g>,
-  <g key="5"><g /><g><g transform="translate(0.5,0.5)"><path d="M 2 26 L 9 10 L 34 10 L 27 26 Z" fill="#ffffff" stroke="#000000" strokeMiterlimit="10"/></g></g><g/><g/></g>
-]
+import { workflowItems } from 'shared/Global'
 
 class DiagramModal extends React.Component {
   onHide () {
@@ -40,8 +34,8 @@ class DiagramModal extends React.Component {
     }
     return (
       <div style={{background: 'whiteSmoke'}}>
-        {items.map((m, index) =>
-          <DiagramDragItem key={index} img="inticon.png">
+        {workflowItems.map((m, index) =>
+          <DiagramDragItem key={index} imgIndex={index}>
             <svg style={itemStyle}>
               {m}
             </svg>
@@ -53,9 +47,7 @@ class DiagramModal extends React.Component {
 
   renderPanel () {
     return (
-      <div className="draw-panel">
-        <DiagramPanel onDrop={this.onDrop.bind(this)}/>
-      </div>
+      <DiagramPanel onDrop={this.onDrop.bind(this)}/>
     )
   }
 
