@@ -9,7 +9,29 @@ import TabPage from '../../../../shared/TabPage'
 import TabPageBody from '../../../../shared/TabPageBody'
 import TabPageHeader from '../../../../shared/TabPageHeader'
 
+import { ResponsiveInfiniteTable } from '../../../../shared/InfiniteTable'
+
 class parserTypes extends React.Component {
+  constructor (props) {
+    super(props)
+    this.state = {}
+
+    this.cells = [{
+      'displayName': 'Name',
+      'columnName': 'name'
+    }, {
+      'displayName': 'Filters',
+      'columnName': 'filters'
+    }]
+  }
+  componentWillMount () {
+    this.props.fetchParserTypes()
+  }
+
+  onClickEdit () {
+
+  }
+
   render () {
     return (
       <TabPage>
@@ -28,7 +50,16 @@ class parserTypes extends React.Component {
         </TabPageHeader>
 
         <TabPageBody tabs={SettingTabs} tab={8}>
-          Parser Types
+          <ResponsiveInfiniteTable
+            cells={this.cells}
+            ref="table"
+            rowMetadata={{'key': 'id'}}
+            selectable
+            onRowDblClick={this.onClickEdit.bind(this)}
+
+            useExternal={false}
+            data={this.props.parserTypes}
+          />
         </TabPageBody>
       </TabPage>
     )
