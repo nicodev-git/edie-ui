@@ -32,6 +32,8 @@ import {
   ADD_DEVICE_WORKFLOW,
   UPDATE_DEVICE_WORKFLOW,
   REMOVE_DEVICE_WORKFLOW,
+  OPEN_DEVICE_WF_DIAGRAM_MODAL,
+  CLOSE_DEVICE_WF_DIAGRAM_MODAL,
 
   OPEN_DEVICE_RULE_MODAL,
   CLOSE_DEVICE_RULE_MODAL,
@@ -113,8 +115,12 @@ export default function (state = INITIAL_STATE, action) {
 
     case REMOVE_DEVICE_WORKFLOW:
       return { ...state, workflows: state.workflows.filter(w => w.id !== action.data.id) }
-    // case FETCH_DEVICE_RAW_INCIDENTS:
-    //   return { ...state, rawIncidents: action.data }
+
+    case OPEN_DEVICE_WF_DIAGRAM_MODAL:
+      return { ...state, wfDiagramModalOpen: true, editDiagram: action.data }
+
+    case CLOSE_DEVICE_WF_DIAGRAM_MODAL:
+      return { ...state, wfDiagramModalOpen: false }
 
     case OPEN_DEVICE_RULE_MODAL:
       return { ...state, ruleModalOpen: true, editRule: action.data }

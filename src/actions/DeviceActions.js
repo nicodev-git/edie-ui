@@ -43,6 +43,8 @@ import {
   OPEN_WF_CATEGORY_MODAL,
   CLOSE_WF_CATEGORY_MODAL,
   ADD_WF_CATEGORY,
+  OPEN_DEVICE_WF_DIAGRAM_MODAL,
+  CLOSE_DEVICE_WF_DIAGRAM_MODAL,
 
   OPEN_WF_ACTION_MODAL,
   CLOSE_WF_ACTION_MODAL,
@@ -252,6 +254,23 @@ export const closeDeviceWorkflowModal = () => {
   return (dispatch) => {
     dispatch({
       type: CLOSE_DEVICE_WORKFLOW_MODAL
+    })
+  }
+}
+
+export const openDeviceWfDiagramModal = (dispatch, diagram) => {
+  return (dispatch) => {
+    dispatch({
+      type: OPEN_DEVICE_WF_DIAGRAM_MODAL,
+      data: diagram
+    })
+  }
+}
+
+export const closeDeviceWfDiagramModal = (dispatch) => {
+  return (dispatch) => {
+    dispatch({
+      type: CLOSE_DEVICE_WF_DIAGRAM_MODAL
     })
   }
 }

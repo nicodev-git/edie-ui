@@ -141,6 +141,10 @@ class MainWorkflowModal extends React.Component {
     }
   }
 
+  onClickDiagram () {
+
+  }
+
   renderRuleModal () {
     if (!this.props.ruleModalOpen) return null
     return (
@@ -344,6 +348,8 @@ class MainWorkflowModal extends React.Component {
           <div className="text-right mb-none">
             <a href="javascript:;" className="btn btn-default btn-sm margin-sm-right"
               onClick={this.onClickClose.bind(this)}>Cancel</a>
+            <a href="javascript:;" className="btn btn-default btn-sm margin-sm-right"
+               onClick={this.onClickDiagram.bind(this)}>Diagram</a>
             <a href="javascript:;" className="btn btn-default btn-sm margin-sm-right"
               disabled={current === 1}
               onClick={this.onClickPrev.bind(this)}>Previous</a>
