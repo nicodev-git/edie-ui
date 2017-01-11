@@ -22,15 +22,13 @@ const layerStyles = {
   height: '100%'
 }
 
-function getItemStyles (props) {
-  const { currentOffset } = props
+function getItemStyles (currentOffset) {
   if (!currentOffset) {
     return {
       display: 'none'
     }
   }
 
-  console.log(currentOffset)
   const { x, y } = currentOffset
   return {
     position: 'absolute',
@@ -40,6 +38,11 @@ function getItemStyles (props) {
 }
 
 class DiagramDragLayer extends React.Component {
+
+  onRefContainer (el) {
+    this.containerEl = el
+  }
+
   renderItem (type, item, style) {
     switch (type) {
       case DragTypes.WORKFLOW:
@@ -50,14 +53,19 @@ class DiagramDragLayer extends React.Component {
   }
 
   render () {
-    const { item, itemType, isDragging } = this.props
+    const { item, itemType, isDragging, currentOffset } = this.props
     if (!isDragging) {
       return null
     }
 
+    const rt = this.containerEl ? this.containerEl.getClientRects()[0] : {left: 0, top: 0}
+
     return (
-      <div style={layerStyles}>
-        {this.renderItem(itemType, item, getItemStyles(this.props))}
+      <div style={layerStyles} ref={this.onRefContainer.bind(this)}>
+        {this.renderItem(itemType, item, getItemStyles({
+          x: currentOffset.x - rt.left,
+          y: currentOffset.y - rt.top
+        }))}
       </div>
     )
   }
