@@ -4,10 +4,20 @@ import {
   Button
 } from 'react-bootstrap'
 import { reduxForm, Field } from 'redux-form'
-import { assign } from 'lodash'
+import { assign, concat } from 'lodash'
 import { showAlert } from 'components/shared/Alert'
 
+import ParserPatternModal from './ParserPatternModal'
+
 class ParserTypeModal extends React.Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      patterns: [],
+      selectedPatternIndex: -1
+    }
+  }
+
   onHide () {
     this.onClickClose()
   }
@@ -30,7 +40,35 @@ class ParserTypeModal extends React.Component {
     }
   }
 
+  onClickAddPattern () {
+    this.props.openParserPatternModal()
+  }
+
+  onClickEditPattern () {
+    this.props.openParserPatternModal()
+  }
+
+  onClickRemovePattern () {
+
+  }
+
+  onPatternModalClose (data) {
+    this.props.closeParserPatternModal()
+    if (!data) return
+
+    const { patterns } = this.state
+    this.setState({ patterns: concat(patterns, data) })
+  }
+
+  renderPatternModal () {
+    if (!this.props.patternModalOpen) return null
+    return (
+      <ParserPatternModal editPattern={this.props.editPattern} onClose={this.onPatternModalClose.bind(this)}/>
+    )
+  }
+
   render () {
+    const { patterns, selectedPatternIndex } = this.state
     const { handleSubmit } = this.props
 
     return (
@@ -60,6 +98,36 @@ class ParserTypeModal extends React.Component {
               <label className="col-md-3">Filters</label>
               <div className="col-md-9">
                 <Field name="filters" component="input" type="text" label="Filters" className="form-control"/>
+              </div>
+            </div>
+
+            <div>
+              <div>
+                <span className="margin-sm-right">Patterns</span>
+                <a href="javascript:;" className="margin-sm-right" onClick={this.onClickAddPattern.bind(this)}><i className="fa fa-plus-square" /></a>
+                <a href="javascript:;" className="margin-sm-right" onClick={this.onClickEditPattern.bind(this)}><i className="fa fa-edit" /></a>
+                <a href="javascript:;" className="margin-sm-right" onClick={this.onClickRemovePattern.bind(this)}><i className="fa fa-trash-o" /></a>
+              </div>
+
+              <div>
+                <table className="table table-hover">
+                  <thead>
+                  <tr>
+                    <th>Name</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  {
+                    patterns.map((a, index) =>
+                      <tr key={a} className={selectedPatternIndex === index ? 'selected' : ''} onClick={() => { this.setState({ selectedPatternIndex: index }) }}>
+                        <td>{a}</td>
+                      </tr>
+                    )
+                  }
+                  </tbody>
+                </table>
+
+                {this.renderPatternModal()}
               </div>
             </div>
 

@@ -5,17 +5,26 @@ import ParserTypeModal from 'components/page/content/settings/parserTypes/Parser
 import {
   addParserType,
   updateParserType,
-  closeParserTypeModal
+  closeParserTypeModal,
+
+  openParserPatternModal,
+  closeParserPatternModal
 } from 'actions'
 
 @connect(
   state => ({
     editParserType: state.settings.editParserType,
+
+    editPattern: state.settings.editParserPattern,
+    patternModalOpen: state.settings.parserPatternModalOpen,
+
     initialValues: state.settings.editParserType
   }), {
     addParserType,
     updateParserType,
-    closeParserTypeModal
+    closeParserTypeModal,
+    openParserPatternModal,
+    closeParserPatternModal
   }
 )
 export default class ParserTypeModalContainer extends React.Component {
