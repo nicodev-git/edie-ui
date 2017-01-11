@@ -11,6 +11,7 @@ import TabPageHeader from '../../../../shared/TabPageHeader'
 
 import { ResponsiveInfiniteTable } from '../../../../shared/InfiniteTable'
 import ParserTypeModalContainer from 'containers/page/content/settings/parserTypes/ParserTypeModalContainer'
+import { showAlert } from 'components/shared/Alert'
 
 class ParserTypes extends React.Component {
   constructor (props) {
@@ -29,12 +30,18 @@ class ParserTypes extends React.Component {
     this.props.fetchParserTypes()
   }
 
+  getTable () {
+    return this.refs.table.refs.wrappedInstance
+  }
+
   onClickAdd () {
     this.props.openParserTypeModal()
   }
 
   onClickEdit () {
-
+    const selected = this.getTable().getSelected()
+    if (!selected) return showAlert('Please select parser type.')
+    this.props.openParserTypeModal(selected)
   }
 
   renderParserTypeModal () {
@@ -53,7 +60,7 @@ class ParserTypes extends React.Component {
               <ButtonGroup>
 
                 <Button onClick={this.onClickAdd.bind(this)}>Add</Button>
-                <Button>Edit</Button>
+                <Button onClick={this.onClickEdit.bind(this)}>Edit</Button>
                 <Button>Remove</Button>
 
               </ButtonGroup>

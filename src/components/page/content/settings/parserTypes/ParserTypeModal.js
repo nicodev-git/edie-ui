@@ -4,16 +4,21 @@ import {
   Button
 } from 'react-bootstrap'
 import { reduxForm, Field } from 'redux-form'
-import { assign, concat } from 'lodash'
-import { showAlert } from 'components/shared/Alert'
+import { assign } from 'lodash'
+import InlineEdit from 'react-edit-inline'
 
-import ParserPatternModal from './ParserPatternModal'
+import { showAlert } from 'components/shared/Alert'
 
 class ParserTypeModal extends React.Component {
   constructor (props) {
     super(props)
+
+    let patterns = []
+    if (props.editParserType) patterns = props.editParserType.patterns || []
+    patterns.push('')
+
     this.state = {
-      patterns: [],
+      patterns,
       selectedPatternIndex: -1
     }
   }
@@ -29,7 +34,9 @@ class ParserTypeModal extends React.Component {
   handleFormSubmit (values) {
     const { editParserType } = this.props
 
-    let props = assign({}, editParserType, values)
+    let props = assign({}, editParserType, values, {
+      patterns: this.state.patterns.filter(p => !!p)
+    })
 
     if (!props.name) return showAlert('Please type name.')
 
@@ -40,40 +47,18 @@ class ParserTypeModal extends React.Component {
     }
   }
 
-  onClickAddPattern () {
-    this.props.openParserPatternModal()
-  }
-
-  onClickEditPattern () {
-    const { patterns, selectedPatternIndex } = this.state
-    if (selectedPatternIndex < 0) return showAlert('Please select pattern.')
-    this.props.openParserPatternModal(patterns[selectedPatternIndex])
-  }
-
   onClickRemovePattern () {
     const { patterns, selectedPatternIndex } = this.state
     if (selectedPatternIndex < 0) return showAlert('Please select pattern.')
-    this.setState({ patterns: patterns.filter((m, index) => index !== selectedPatternIndex) })
+    this.setState({ patterns: patterns.filter((m, index) => index !== selectedPatternIndex), selectedPatternIndex: -1 })
   }
 
-  onPatternModalClose (data, isEdit) {
-    this.props.closeParserPatternModal()
-    if (!data) return
+  onPatternChange (index, data) {
+    let { patterns } = this.state
 
-    const { patterns, selectedPatternIndex } = this.state
-
-    if (isEdit) {
-      this.setState({ patterns: patterns.map((m, index) => index === selectedPatternIndex ? data : m) })
-    } else {
-      this.setState({ patterns: concat(patterns, data) })
-    }
-  }
-
-  renderPatternModal () {
-    if (!this.props.patternModalOpen) return null
-    return (
-      <ParserPatternModal editPattern={this.props.editPattern} onClose={this.onPatternModalClose.bind(this)}/>
-    )
+    patterns = patterns.map((r, i) => i === index ? data.pattern : r)
+    if (index === patterns.length - 1) patterns.push('')
+    this.setState({ patterns })
   }
 
   render () {
@@ -113,30 +98,32 @@ class ParserTypeModal extends React.Component {
             <div>
               <div>
                 <span className="margin-sm-right">Patterns</span>
-                <a href="javascript:;" className="margin-sm-right" onClick={this.onClickAddPattern.bind(this)}><i className="fa fa-plus-square" /></a>
-                <a href="javascript:;" className="margin-sm-right" onClick={this.onClickEditPattern.bind(this)}><i className="fa fa-edit" /></a>
                 <a href="javascript:;" className="margin-sm-right" onClick={this.onClickRemovePattern.bind(this)}><i className="fa fa-trash-o" /></a>
               </div>
 
               <div>
                 <table className="table table-hover">
-                  <thead>
-                  <tr>
-                    <th>Name</th>
-                  </tr>
-                  </thead>
                   <tbody>
                   {
                     patterns.map((a, index) =>
-                      <tr key={a} className={selectedPatternIndex === index ? 'selected' : ''} onClick={() => { this.setState({ selectedPatternIndex: index }) }}>
-                        <td>{a}</td>
+                      <tr key={index} className={selectedPatternIndex === index ? 'selected' : ''} onClick={() => { if (index !== patterns.length - 1) this.setState({ selectedPatternIndex: index }) }}>
+                        <td>
+                          <InlineEdit
+                            activeClassName="editing"
+                            text={a || '\u00a0'}
+                            paramName="pattern"
+                            change={this.onPatternChange.bind(this, index)}
+                            style={{
+                              width: '100%',
+                              display: 'block'
+                            }}
+                          />
+                        </td>
                       </tr>
                     )
                   }
                   </tbody>
                 </table>
-
-                {this.renderPatternModal()}
               </div>
             </div>
 
