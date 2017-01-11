@@ -1,5 +1,8 @@
 import React from 'react'
 import Modal from 'react-bootstrap-modal'
+import DiagramPanel from './DiagramPanel'
+import DiagramDragLayer from './DiagramDragLayer'
+import DiagramDragItem from './DiagramDragItem'
 
 const items = [
   <g key="1"><g /><g><g transform="translate(0.5,0.5)"><rect x="2" y="10" width="31" height="16" fill="#ffffff" stroke="#000000"/></g></g><g/><g/></g>,
@@ -22,6 +25,14 @@ class DiagramModal extends React.Component {
 
   }
 
+  // ////////////////////////////////////////////////////
+
+  onDrop () {
+    console.log('Dropped')
+  }
+
+  // ////////////////////////////////////////////////////
+
   renderSidebar () {
     const itemStyle = {
       width: '36px',
@@ -30,11 +41,11 @@ class DiagramModal extends React.Component {
     return (
       <div style={{background: 'whiteSmoke'}}>
         {items.map((m, index) =>
-          <a href="javascript:;" key={index} className="sidebar-item">
+          <DiagramDragItem key={index} img="inticon.png">
             <svg style={itemStyle}>
               {m}
             </svg>
-          </a>
+          </DiagramDragItem>
         )}
       </div>
     )
@@ -43,8 +54,14 @@ class DiagramModal extends React.Component {
   renderPanel () {
     return (
       <div className="draw-panel">
-
+        <DiagramPanel onDrop={this.onDrop.bind(this)}/>
       </div>
+    )
+  }
+
+  renderDragLayer () {
+    return (
+      <DiagramDragLayer/>
     )
   }
 
@@ -73,7 +90,10 @@ class DiagramModal extends React.Component {
               Panel
               {this.renderPanel()}
             </div>
+
+            {this.renderDragLayer()}
           </div>
+
           <div className="text-right margin-md-top">
             <a href="javascript:;" className="btn btn-primary btn-sm margin-sm-right" onClick={this.onClickSave.bind(this)}>OK</a>
             <a href="javascript:;" className="btn btn-default btn-sm" onClick={this.onClickClose.bind(this)}>Cancel</a>

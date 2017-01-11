@@ -2,6 +2,10 @@
     margin-top: 8px;
 }
 
+.diagram {
+    overflow: hidden;
+    position: relative;
+}
 .diagram .sidebar-item {
     display: inline-block;
     width: 25%;
