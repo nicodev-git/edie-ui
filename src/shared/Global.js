@@ -6,7 +6,8 @@ export const extImageBaseUrl = '/externalpictures?name='
 
 export const DragTypes = {
   DEVICE: 'device',
-  DIVIDER: 'divider'
+  DIVIDER: 'divider',
+  WORKFLOW: 'workflow'
 }
 
 export const lineTypes = [{
