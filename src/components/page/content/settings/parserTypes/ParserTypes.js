@@ -44,6 +44,12 @@ class ParserTypes extends React.Component {
     this.props.openParserTypeModal(selected)
   }
 
+  onClickRemove () {
+    const selected = this.getTable().getSelected()
+    if (!selected) return showAlert('Please select parser type.')
+    this.props.removeParserType(selected)
+  }
+
   renderParserTypeModal () {
     if (!this.props.parserTypeModalOpen) return null
     return (
@@ -61,7 +67,7 @@ class ParserTypes extends React.Component {
 
                 <Button onClick={this.onClickAdd.bind(this)}>Add</Button>
                 <Button onClick={this.onClickEdit.bind(this)}>Edit</Button>
-                <Button>Remove</Button>
+                <Button onClick={this.onClickRemove.bind(this)}>Remove</Button>
 
               </ButtonGroup>
             </div>
@@ -76,8 +82,10 @@ class ParserTypes extends React.Component {
             selectable
             onRowDblClick={this.onClickEdit.bind(this)}
 
-            useExternal={false}
-            data={this.props.parserTypes}
+            url="/parsertype"
+            params={{
+              draw: this.props.parserTypeDraw
+            }}
           />
 
           {this.renderParserTypeModal()}

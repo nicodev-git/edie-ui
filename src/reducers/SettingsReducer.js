@@ -63,6 +63,9 @@ import {
     CLOSE_USER_PASSWORD_MODAL,
 
     FETCH_PARSER_TYPES,
+    ADD_PARSER_TYPE,
+    UPDATE_PARSER_TYPE,
+    REMOVE_PARSER_TYPE,
     OPEN_PARSER_TYPE_MODAL,
     CLOSE_PARSER_TYPE_MODAL,
     OPEN_PARSER_PATTERN_MODAL,
@@ -307,6 +310,11 @@ export default function (state = {}, action) {
 
     case FETCH_PARSER_TYPES:
       return { ...state, parserTypes: action.data }
+
+    case ADD_PARSER_TYPE:
+    case UPDATE_PARSER_TYPE:
+    case REMOVE_PARSER_TYPE:
+      return { ...state, parserTypeDraw: state.parserTypeDraw + 1 }
 
     case OPEN_PARSER_TYPE_MODAL:
       return { ...state, parserTypeModalOpen: true, editParserType: action.data }

@@ -79,6 +79,7 @@ const initialState = {
     editUser: null,
     editUserPin: '',
 
+    parserTypeDraw: 1,
     parserTypes: [],
 
     showTraffic: true

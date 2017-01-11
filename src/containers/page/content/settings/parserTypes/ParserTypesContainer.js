@@ -6,17 +6,20 @@ import { bindActionCreators } from 'redux'
 
 import {
   openParserTypeModal,
-  fetchParserTypes
+  fetchParserTypes,
+  removeParserType
 } from 'actions'
 
 @connect(
   state => ({
     parserTypes: state.settings.parserTypes,
+    parserTypeDraw: state.settings.parserTypeDraw,
     parserTypeModalOpen: state.settings.parserTypeModalOpen
   }),
   dispatch => ({
     ...bindActionCreators({
       openParserTypeModal,
+      removeParserType,
       fetchParserTypes
     }, dispatch)
   })
