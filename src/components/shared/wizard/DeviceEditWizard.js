@@ -221,7 +221,7 @@ class DeviceEditWizard extends React.Component {
       <div>
         <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
           <div className="tab-options">
-            <div className="pull-right margin-md-right margin-md-top">
+            <div className="margin-md-right margin-md-top" style={{position: 'absolute', top: '40px', right: '20px'}}>
               <button action="submit" className="btn btn-white text-primary">
                 Save</button>
             </div>
