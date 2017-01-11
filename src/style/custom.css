@@ -106,6 +106,15 @@ table.table tbody tr.selected {
     background-color: #B0BED9;
 }
 
+.table.table-p-sm>tbody>tr>td,
+.table.table-p-sm>tbody>tr>th,
+.table.table-p-sm>tfoot>tr>td,
+.table.table-p-sm>tfoot>tr>th,
+.table.table-p-sm>thead>tr>td,
+.table.table-p-sm>thead>tr>th {
+    padding: 4px;
+}
+
 /* Dropdown */
 
 .dropdown:hover>.dropdown-menu {

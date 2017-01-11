@@ -101,7 +101,7 @@ class ParserTypeModal extends React.Component {
               </div>
 
               <div>
-                <table className="table table-hover">
+                <table className="table table-hover table-p-sm">
                   <tbody>
                   {
                     patterns.map((a, index) =>
