@@ -79,7 +79,7 @@ export default class Advanced extends React.Component {
           </div>
         </TabPageHeader>
 
-        <TabPageBody tabs={SettingTabs} tab={8}>
+        <TabPageBody tabs={SettingTabs} tab={9}>
           {this.renderContent()}
         </TabPageBody>
       </TabPage>

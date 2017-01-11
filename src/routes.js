@@ -23,6 +23,7 @@ import SettingUsersContainer from './containers/page/content/settings/users/User
 import SettingIdentitiesContainer from './containers/page/content/settings/identity/IdentitiesContainer'
 import SettingCredentialsContainer from './containers/page/content/settings/credentials/CredentialsContainer'
 import SettingTemplatesContainer from './containers/page/content/settings/template/TemplatesContainer'
+import SettingParserTypesContainer from './containers/page/content/settings/parserTypes/ParserTypesContainer'
 import SettingAdvanced from './components/page/content/settings/advanced/Advanced'
 
 import DeviceContainer from './containers/page/content/device/DeviceContainer'
@@ -71,6 +72,7 @@ export default(
         <Route path="identities" component={SettingIdentitiesContainer} />
         <Route path="credentials" component={SettingCredentialsContainer} />
         <Route path="templates" component={SettingTemplatesContainer} />
+        <Route path="parserTypes" component={SettingParserTypesContainer} />
         <Route path="advanced" component={SettingAdvanced} />
       </Route>
 

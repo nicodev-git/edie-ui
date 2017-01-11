@@ -16,6 +16,13 @@ import {
   OPEN_USER_PASSWORD_MODAL,
   CLOSE_USER_PASSWORD_MODAL,
 
+  FETCH_PARSER_TYPES,
+  ADD_PARSER_TYPE,
+  UPDATE_PARSER_TYPE,
+  REMOVE_PARSER_TYPE,
+  OPEN_PARSER_TYPE_MODAL,
+  CLOSE_PARSER_TYPE_MODAL
+
   NO_AUTH_ERROR
 } from './types'
 
@@ -221,6 +228,97 @@ export const closeUserPasswordModal = () => {
   return (dispatch) => {
     dispatch({
       type: CLOSE_USER_PASSWORD_MODAL
+    })
+  }
+}
+
+export const fetchParserTypes = () => {
+  if (!window.localStorage.getItem('token')) {
+    return dispatch => dispatch({ type: NO_AUTH_ERROR })
+  }
+  return (dispatch) => {
+    axios.get(`${ROOT_URL}/parsertype`)
+      .then(response => fetchParserTypesSuccess(dispatch, response))
+      .catch(error => apiError(dispatch, error))
+  }
+}
+
+function fetchParserTypesSuccess(dispatch, response) {
+  dispatch({
+    type: FETCH_PARSER_TYPES,
+    data: response.data._embedded.parserTypes
+  })
+}
+
+export const addParserType = (props) => {
+  if (!window.localStorage.getItem('token')) {
+    return dispatch => dispatch({ type: NO_AUTH_ERROR })
+  }
+  return (dispatch) => {
+    axios.post(`${ROOT_URL}/parsertype`, props)
+      .then(response => addParserTypeSuccess(dispatch, response))
+      .catch(error => apiError(dispatch, error))
+  }
+}
+
+const addParserTypeSuccess = (dispatch, response) => {
+  dispatch({
+    type: ADD_PARSER_TYPE,
+    data: response.data
+  })
+  dispatch(closeParserTypeModal())
+}
+
+export const updateParserType = (entity) => {
+  if (!window.localStorage.getItem('token')) {
+    return dispatch => dispatch({ type: NO_AUTH_ERROR })
+  }
+  return (dispatch) => {
+    axios.put(entity._links.self.href, entity)
+      .then(response => updateParserTypeSuccess(dispatch, response))
+      .catch(error => apiError(dispatch, error))
+  }
+}
+
+const updateParserTypeSuccess = (dispatch, response) => {
+  dispatch({
+    type: UPDATE_PARSER_TYPE,
+    data: response.data
+  })
+  dispatch(closeParserTypeModal())
+}
+
+export const removeParserType = (entity) => {
+  if (!window.localStorage.getItem('token')) {
+    return dispatch => dispatch({ type: NO_AUTH_ERROR })
+  }
+  return (dispatch) => {
+    axios.delete(entity._links.self.href)
+      .then(() => removeParserTypeSuccess(dispatch, entity))
+      .catch(error => apiError(dispatch, error))
+  }
+}
+
+const removeParserTypeSuccess = (dispatch, entity) => {
+  dispatch({
+    type: REMOVE_PARSER_TYPE,
+    data: entity
+  })
+}
+
+export const openParserTypeModal = (parserType) => {
+  return (dispatch) => {
+    dispatch({
+      type: OPEN_PARSER_TYPE_MODAL,
+      data: parserType
+    })
+  }
+}
+
+export const closeParserTypeModal = () => {
+  return (dispatch) => {
+    dispatch({
+      type: CLOSE_PARSER_TYPE_MODAL
     })
   }
 }
