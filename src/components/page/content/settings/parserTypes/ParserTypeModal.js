@@ -45,19 +45,28 @@ class ParserTypeModal extends React.Component {
   }
 
   onClickEditPattern () {
-    this.props.openParserPatternModal()
+    const { patterns, selectedPatternIndex } = this.state
+    if (selectedPatternIndex < 0) return showAlert('Please select pattern.')
+    this.props.openParserPatternModal(patterns[selectedPatternIndex])
   }
 
   onClickRemovePattern () {
-
+    const { patterns, selectedPatternIndex } = this.state
+    if (selectedPatternIndex < 0) return showAlert('Please select pattern.')
+    this.setState({ patterns: patterns.filter((m, index) => index !== selectedPatternIndex) })
   }
 
-  onPatternModalClose (data) {
+  onPatternModalClose (data, isEdit) {
     this.props.closeParserPatternModal()
     if (!data) return
 
-    const { patterns } = this.state
-    this.setState({ patterns: concat(patterns, data) })
+    const { patterns, selectedPatternIndex } = this.state
+
+    if (isEdit) {
+      this.setState({ patterns: patterns.map((m, index) => index === selectedPatternIndex ? data : m) })
+    } else {
+      this.setState({ patterns: concat(patterns, data) })
+    }
   }
 
   renderPatternModal () {
