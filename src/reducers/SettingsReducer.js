@@ -60,7 +60,11 @@ import {
     OPEN_SETTING_USER_MODAL,
     CLOSE_SETTING_USER_MODAL,
     OPEN_USER_PASSWORD_MODAL,
-    CLOSE_USER_PASSWORD_MODAL
+    CLOSE_USER_PASSWORD_MODAL,
+
+    FETCH_PARSER_TYPES,
+    OPEN_PARSER_TYPE_MODAL,
+    CLOSE_PARSER_TYPE_MODAL
 
 } from '../actions/types'
 
@@ -298,6 +302,15 @@ export default function (state = {}, action) {
 
     case CLOSE_USER_PASSWORD_MODAL:
       return { ...state, userPasswordModalVisible: false }
+
+    case FETCH_PARSER_TYPES:
+      return { ...state, parserTypes: action.data }
+
+    case OPEN_PARSER_TYPE_MODAL:
+      return { ...state, parserTypeModalOpen: true, editParserType: action.data }
+
+    case CLOSE_PARSER_TYPE_MODAL:
+      return { ...state, parserTypeModalOpen: false }
   }
   return state
 }
