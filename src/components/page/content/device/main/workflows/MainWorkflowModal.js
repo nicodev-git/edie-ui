@@ -7,6 +7,7 @@ import InlineEdit from 'react-edit-inline'
 import RuleModalContainer from '../../../../../../containers/page/content/device/main/workflows/RuleModalContainer'
 import CategoryModalContainer from 'containers/page/content/device/main/workflows/CategoryModalContainer'
 import ActionModalContainer from 'containers/page/content/device/main/workflows/ActionModalContainer'
+import DiagramModalContainer from 'containers/page/content/device/main/workflows/DiagramModalContainer'
 
 class MainWorkflowModal extends React.Component {
 
@@ -142,7 +143,7 @@ class MainWorkflowModal extends React.Component {
   }
 
   onClickDiagram () {
-
+    this.props.openDeviceWfDiagramModal()
   }
 
   renderRuleModal () {
@@ -163,6 +164,13 @@ class MainWorkflowModal extends React.Component {
     if (!this.props.wfActionModalOpen) return null
     return (
       <ActionModalContainer onClose={this.onCloseActionModal.bind(this)} />
+    )
+  }
+
+  renderDiagramModal () {
+    if (!this.props.wfDiagramModalOpen) return null
+    return (
+      <DiagramModalContainer />
     )
   }
 
@@ -349,7 +357,7 @@ class MainWorkflowModal extends React.Component {
             <a href="javascript:;" className="btn btn-default btn-sm margin-sm-right"
               onClick={this.onClickClose.bind(this)}>Cancel</a>
             <a href="javascript:;" className="btn btn-default btn-sm margin-sm-right"
-               onClick={this.onClickDiagram.bind(this)}>Diagram</a>
+              onClick={this.onClickDiagram.bind(this)}>Diagram</a>
             <a href="javascript:;" className="btn btn-default btn-sm margin-sm-right"
               disabled={current === 1}
               onClick={this.onClickPrev.bind(this)}>Previous</a>
@@ -359,6 +367,8 @@ class MainWorkflowModal extends React.Component {
 
           </div>
         </div>
+
+        {this.renderDiagramModal()}
       </div>
     )
   }

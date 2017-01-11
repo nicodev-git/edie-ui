@@ -12,7 +12,8 @@ import {
   fetchWorkflowCategories,
   openDeviceRuleModal,
   openWfCategoryModal,
-  openWfActionModal
+  openWfActionModal,
+  openDeviceWfDiagramModal
 } from '../../../../../../actions'
 
 @connect(
@@ -24,6 +25,7 @@ import {
     ruleModalOpen: state.devices.ruleModalOpen,
     wfCategoryModalOpen: state.devices.wfCategoryModalOpen,
     wfActionModalOpen: state.devices.wfActionModalOpen,
+    wfDiagramModalOpen: state.devices.wfDiagramModalOpen,
 
     initialValues: assign({
       enable: true,
@@ -37,7 +39,8 @@ import {
     fetchWorkflowCategories,
     openDeviceRuleModal,
     openWfCategoryModal,
-    openWfActionModal
+    openWfActionModal,
+    openDeviceWfDiagramModal
   }
 )
 @withRouter
