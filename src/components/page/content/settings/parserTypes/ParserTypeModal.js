@@ -23,7 +23,7 @@ class ParserTypeModal extends React.Component {
   }
 
   onHide () {
-    this.onClickClose()
+
   }
 
   onClickClose () {
