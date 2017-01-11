@@ -4,7 +4,7 @@ import {
   Button
 } from 'react-bootstrap'
 import { reduxForm, Field } from 'redux-form'
-import { assign } from 'lodash'
+import { assign, concat } from 'lodash'
 import InlineEdit from 'react-edit-inline'
 
 import { showAlert } from 'components/shared/Alert'
@@ -13,9 +13,8 @@ class ParserTypeModal extends React.Component {
   constructor (props) {
     super(props)
 
-    let patterns = []
-    if (props.editParserType) patterns = props.editParserType.patterns || []
-    patterns.push('')
+    let patterns = ['']
+    if (props.editParserType) patterns = concat([], props.editParserType.patterns || [], '')
 
     this.state = {
       patterns,
