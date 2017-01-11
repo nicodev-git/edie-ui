@@ -9,6 +9,7 @@
 .diagram .sidebar-item {
     display: inline-block;
     width: 25%;
+    text-align: center;
 }
 .diagram .draw-panel {
     min-height: 500px;

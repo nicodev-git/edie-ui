@@ -81,17 +81,14 @@ class DiagramModal extends React.Component {
           </div>
         </div>
         <div className="modal-body bootstrap-dialog-message">
-          <div className="row diagram">
+          <div className="diagram">
+            {this.renderDragLayer()}
             <div className="col-md-3">
-              General
               {this.renderSidebar()}
             </div>
             <div className="col-md-9">
-              Panel
               {this.renderPanel()}
             </div>
-
-            {this.renderDragLayer()}
           </div>
 
           <div className="text-right margin-md-top">

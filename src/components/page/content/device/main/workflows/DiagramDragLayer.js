@@ -30,6 +30,7 @@ function getItemStyles (props) {
     }
   }
 
+  console.log(currentOffset)
   const { x, y } = currentOffset
   return {
     position: 'absolute',
