@@ -23,6 +23,9 @@ import {
   OPEN_PARSER_TYPE_MODAL,
   CLOSE_PARSER_TYPE_MODAL,
 
+  OPEN_PARSER_PATTERN_MODAL,
+  CLOSE_PARSER_PATTERN_MODAL,
+
   NO_AUTH_ERROR
 } from './types'
 
@@ -319,6 +322,23 @@ export const closeParserTypeModal = () => {
   return (dispatch) => {
     dispatch({
       type: CLOSE_PARSER_TYPE_MODAL
+    })
+  }
+}
+
+export const openParserPatternModal = (pattern) => {
+  return (dispatch) => {
+    dispatch({
+      type: OPEN_PARSER_PATTERN_MODAL,
+      data: pattern
+    })
+  }
+}
+
+export const closeParserPatternModal = () => {
+  return (dispatch) => {
+    dispatch({
+      type: CLOSE_PARSER_PATTERN_MODAL
     })
   }
 }

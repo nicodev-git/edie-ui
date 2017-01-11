@@ -64,7 +64,9 @@ import {
 
     FETCH_PARSER_TYPES,
     OPEN_PARSER_TYPE_MODAL,
-    CLOSE_PARSER_TYPE_MODAL
+    CLOSE_PARSER_TYPE_MODAL,
+    OPEN_PARSER_PATTERN_MODAL,
+    CLOSE_PARSER_PATTERN_MODAL
 
 } from '../actions/types'
 
@@ -311,6 +313,12 @@ export default function (state = {}, action) {
 
     case CLOSE_PARSER_TYPE_MODAL:
       return { ...state, parserTypeModalOpen: false }
+
+    case OPEN_PARSER_PATTERN_MODAL:
+      return { ...state, parserPatternModalOpen: true, editParserPattern: action.data }
+
+    case CLOSE_PARSER_PATTERN_MODAL:
+      return { ...state, parserPatternModalOpen: false }
   }
   return state
 }
