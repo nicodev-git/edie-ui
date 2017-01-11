@@ -243,7 +243,7 @@ export const fetchParserTypes = () => {
   }
 }
 
-function fetchParserTypesSuccess(dispatch, response) {
+function fetchParserTypesSuccess (dispatch, response) {
   dispatch({
     type: FETCH_PARSER_TYPES,
     data: response.data._embedded.parserTypes

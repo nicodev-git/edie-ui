@@ -5,14 +5,19 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 import {
-
+  openParserTypeModal,
+  fetchParserTypes
 } from 'actions'
 
 @connect(
-  state => ({ envVars: state.settings.envVars }),
+  state => ({
+    parserTypes: state.settings.parserTypes,
+    parserTypeModalOpen: state.settings.parserTypeModalOpen
+  }),
   dispatch => ({
     ...bindActionCreators({
-
+      openParserTypeModal,
+      fetchParserTypes
     }, dispatch)
   })
 )
