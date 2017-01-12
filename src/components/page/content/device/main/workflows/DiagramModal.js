@@ -63,7 +63,9 @@ class DiagramModal extends React.Component {
 
   renderPanel () {
     return (
-      <DiagramPanel onDrop={this.onDrop.bind(this)}/>
+      <DiagramPanel
+        objects={this.props.objects}
+        onDrop={this.onDrop.bind(this)}/>
     )
   }
 
