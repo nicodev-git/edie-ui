@@ -33,12 +33,18 @@ class DiagramModal extends React.Component {
     const node = ReactDOM.findDOMNode(component)
     const rt = node.getClientRects()[0]
 
-    const componentOffset = {
+    const object = {
+      imgIndex: item.imgIndex,
+
       x: offset.x - rt.left,
-      y: offset.y - rt.top
+      y: offset.y - rt.top,
+      w: 80,
+      h: 50,
+
+      id: this.props.lastId + 1
     }
 
-    console.log(componentOffset)
+    this.props.addDiagramObject(object)
   }
 
   // ////////////////////////////////////////////////////

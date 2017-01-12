@@ -4,14 +4,19 @@ import { connect } from 'react-redux'
 import DiagramModal from 'components/page/content/device/main/workflows/DiagramModal'
 
 import {
-  closeDeviceWfDiagramModal
+  closeDeviceWfDiagramModal,
+
+  addDiagramObject
 } from 'actions'
 
 @connect(
   state => ({
-    editWfDiagram: state.devices.editWfDiagram
+    editWfDiagram: state.devices.editWfDiagram,
+    objects: state.diagram.objects,
+    lastId: state.diagram.lastId
   }), {
-    closeDeviceWfDiagramModal
+    closeDeviceWfDiagramModal,
+    addDiagramObject
   }
 )
 export default class DiagramModalContainer extends React.Component {
