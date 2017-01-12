@@ -1,10 +1,16 @@
 import React from 'react'
+import ReactDOM from 'react-dom'
 import Modal from 'react-bootstrap-modal'
 import DiagramPanel from './DiagramPanel'
 import DiagramDragLayer from './DiagramDragLayer'
 import DiagramDragItem from './DiagramDragItem'
 
 import { workflowItems } from 'shared/Global'
+
+const itemStyle = {
+  width: '36px',
+  height: '36px'
+}
 
 class DiagramModal extends React.Component {
   onHide () {
@@ -21,17 +27,23 @@ class DiagramModal extends React.Component {
 
   // ////////////////////////////////////////////////////
 
-  onDrop () {
-    console.log('Dropped')
+  onDrop (item, offset, component) {
+    console.log('Dropped.')
+
+    const node = ReactDOM.findDOMNode(component)
+    const rt = node.getClientRects()[0]
+
+    const componentOffset = {
+      x: offset.x - rt.left,
+      y: offset.y - rt.top
+    }
+
+    console.log(componentOffset)
   }
 
   // ////////////////////////////////////////////////////
 
   renderSidebar () {
-    const itemStyle = {
-      width: '36px',
-      height: '36px'
-    }
     return (
       <div style={{background: 'whiteSmoke'}}>
         {workflowItems.map((m, index) =>

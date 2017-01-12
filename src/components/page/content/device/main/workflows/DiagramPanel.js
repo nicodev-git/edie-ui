@@ -16,8 +16,8 @@ const canvasTarget = {
     return true
   },
 
-  drop (props, monitor) {
-    props.onDrop(monitor.getItem(), monitor.getClientOffset())
+  drop (props, monitor, component) {
+    props.onDrop(monitor.getItem(), monitor.getClientOffset(), component)
   }
 }
 
