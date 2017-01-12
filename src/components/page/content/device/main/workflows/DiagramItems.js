@@ -2,7 +2,29 @@ import React from 'react'
 
 export const workflowItems = [{
   title: 'Rectangle',
-  img: <g key="1"><g /><g><g transform="translate(0.5,0.5)"><rect x="2" y="10" width="31" height="16" fill="#ffffff" stroke="#000000"/></g></g><g/><g/></g>
+  img: <g key="1"><g /><g><g transform="translate(0.5,0.5)"><rect x="2" y="10" width="31" height="16" fill="#ffffff" stroke="#000000"/></g></g><g/><g/></g>,
+  connectionPoints: 12,
+  getConnectionPoint: (object, point) => {
+    const { x, y, w, h } = object
+    const p = [
+      {x: 0.25, y: 0},
+      {x: 0.5, y: 0},
+      {x: 0.75, y: 0},
+      {x: 0, y: 0.25},
+      {x: 1, y: 0.25},
+      {x: 0, y: 0.5},
+      {x: 1, y: 0.5},
+      {x: 0, y: 0.75},
+      {x: 1, y: 0.75},
+      {x: 0.25, y: 1},
+      {x: 0.5, y: 1},
+      {x: 0.75, y: 1}
+    ]
+    return {
+      x: x + w * p[point].x,
+      y: y + h * p[point].y
+    }
+  }
 }, {
   title: 'Rounded Rectangle',
   img: <g key="2"><g /><g><g transform="translate(0.5,0.5)"><rect x="2" y="10" width="31" height="16" rx="2" ry="2" fill="#ffffff" stroke="#000000"/></g></g><g/><g/></g>

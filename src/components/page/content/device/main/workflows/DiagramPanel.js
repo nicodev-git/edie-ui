@@ -12,6 +12,8 @@ import DDiamond from './diagram/DDiamond'
 import DParallel from './diagram/DParallel'
 import DTriangle from './diagram/DTriangle'
 
+import { workflowItems } from './DiagramItems'
+
 function collect (connect) {
   return {
     connectDropTarget: connect.dropTarget()
@@ -54,12 +56,19 @@ class DiagramPanel extends React.Component {
     this.props.clearHoverDiagramObject(obj)
   }
 
+  // ///////////////////////////////////////////////////
+
+  onMouseOverHoverPoint (object, point) {
+
+  }
+
+  // ///////////////////////////////////////////////////
+
   renderObject (obj) {
     const ItemObject = objectComponents[obj.imgIndex] || DRect
     const listeners = {
       onClick: this.onClickObject.bind(this, obj),
-      onMouseOver: this.onMouseOverObject.bind(this, obj),
-      onMouseOut: this.onMouseOutObject.bind(this, obj)
+      onMouseOver: this.onMouseOverObject.bind(this, obj)
     }
 
     return (
@@ -101,10 +110,23 @@ class DiagramPanel extends React.Component {
     const { hovered } = this.props
     if (!hovered) return null
 
-    const { x, y, w, h } = hovered
+    const item = workflowItems[hovered.imgIndex]
+
+    let points = []
+    for (let i = 0; i < item.connectionPoints; i++) {
+      const xy = item.getConnectionPoint(hovered, i)
+      points.push(
+        <g key={i}>
+          <image x={xy.x - 2.5} y={xy.y - 2.5} width="5" height="5" href="/images/point.gif" preserveAspectRatio="none"
+            pointerEvents="all"
+            onMouseOver={this.onMouseOverHoverPoint.bind(this, object, )}/>
+        </g>
+      )
+    }
     return (
-      <g>
-        <image x={x + w / 2 - 2.5} y={y + h / 2 - 2.5} width="5" height="5" href="/images/point.gif" preserveAspectRatio="none"/>
+      <g pointerEvents="all"
+        onMouseOut={this.onMouseOutObject.bind(this, hovered)}>
+        {points}
       </g>
     )
   }
