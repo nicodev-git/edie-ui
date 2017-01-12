@@ -5,8 +5,7 @@ import DiagramPanel from './DiagramPanel'
 import DiagramDragLayer from './DiagramDragLayer'
 import DiagramDragItem from './DiagramDragItem'
 import DiagramToolbar from './DiagramToolbar'
-
-import { workflowItems } from 'shared/Global'
+import { workflowItems } from './DiagramItems'
 
 const itemStyle = {
   width: '36px',
@@ -73,7 +72,7 @@ class DiagramModal extends React.Component {
         <div className="padding-sm-top">
           {workflowItems.map((m, index) =>
             <DiagramDragItem key={index} imgIndex={index}>
-              <svg style={itemStyle}>{m}</svg>
+              <svg style={itemStyle}>{m.img}</svg>
             </DiagramDragItem>
           )}
         </div>

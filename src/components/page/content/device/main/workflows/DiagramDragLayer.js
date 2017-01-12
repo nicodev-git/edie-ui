@@ -1,7 +1,8 @@
 import React from 'react'
 import { DragLayer } from 'react-dnd'
 
-import { DragTypes, workflowItems } from 'shared/Global'
+import { DragTypes } from 'shared/Global'
+import { workflowItems } from './DiagramItems'
 
 function collect (monitor) {
   return {
@@ -50,7 +51,7 @@ class DiagramDragLayer extends React.Component {
       case DragTypes.WORKFLOW:
         return (
           <svg style={style}>
-            {workflowItems[item.imgIndex]}
+            {workflowItems[item.imgIndex].img}
           </svg>
         )
     }
