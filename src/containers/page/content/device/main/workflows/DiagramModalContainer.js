@@ -13,7 +13,8 @@ import {
   state => ({
     editWfDiagram: state.devices.editWfDiagram,
     objects: state.diagram.objects,
-    lastId: state.diagram.lastId
+    lastId: state.diagram.lastId,
+    backImg: state.diagram.backImg
   }), {
     closeDeviceWfDiagramModal,
     addDiagramObject

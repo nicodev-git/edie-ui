@@ -44,11 +44,19 @@ class DiagramPanel extends React.Component {
   }
 
   render () {
-    const { connectDropTarget } = this.props
+    const { connectDropTarget, backImg } = this.props
 
+    const style = {
+      backgroundImage: `url(data:image/svg+xml;base64,${backImg})`,
+      position: 'absolute',
+      width: '100%',
+      height: '100%',
+      // backgroundPosition: '-15px -26px',
+      backgroundColor: 'rgb(255, 255, 255)'
+    }
     return connectDropTarget(
       <div className="draw-panel">
-        <svg style={{position: 'absolute', width: '100%', height: '100%'}}>
+        <svg style={style}>
           {this.renderObjects()}
         </svg>
 

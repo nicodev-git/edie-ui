@@ -73,7 +73,7 @@ class DiagramModal extends React.Component {
   renderPanel () {
     return (
       <DiagramPanel
-        objects={this.props.objects}
+        {...this.props}
         onDrop={this.onDrop.bind(this)}/>
     )
   }
@@ -104,15 +104,15 @@ class DiagramModal extends React.Component {
             {this.renderDragLayer()}
 
             {this.renderToolbar()}
-            <div className="col-md-3 pr-none">
+            <div className="col-md-3 p-none">
               {this.renderSidebar()}
             </div>
-            <div className="col-md-9">
+            <div className="col-md-9 p-none">
               {this.renderPanel()}
             </div>
           </div>
 
-          <div className="text-right margin-md-top padding-md">
+          <div className="text-right panel-footer">
             <a href="javascript:;" className="btn btn-primary btn-sm margin-sm-right" onClick={this.onClickSave.bind(this)}>OK</a>
             <a href="javascript:;" className="btn btn-default btn-sm" onClick={this.onClickClose.bind(this)}>Cancel</a>
           </div>
