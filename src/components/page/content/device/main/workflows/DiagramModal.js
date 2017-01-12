@@ -61,11 +61,24 @@ class DiagramModal extends React.Component {
   renderSidebar () {
     return (
       <div style={{background: 'whiteSmoke'}}>
-        {workflowItems.map((m, index) =>
-          <DiagramDragItem key={index} imgIndex={index}>
-            <svg style={itemStyle}>{m}</svg>
-          </DiagramDragItem>
-        )}
+        <div style={{display: 'block'}}>
+          <div className="geSidebar" style={{boxSizing: 'border-box', overflow: 'hidden', width: '100%', padding: '14px 8px 0px'}}>
+            <div style={{whiteSpace: 'nowrap', textOverflow: 'clip', paddingBottom: '8px', cursor: 'default'}}>
+              <input placeholder="Search Shapes" type="text"
+                style={{fontSize: '12px', overflow: 'hidden', boxSizing: 'border-box', border: '1px solid rgb(213, 213, 213)', borderRadius: '4px', width: '100%', outline: 'none', padding: '6px 20px 6px 6px'}} />
+                <img src="/images/search2.png" style={{position: 'relative', left: '-18px', top: '1px'}} />
+            </div>
+          </div>
+        </div>
+
+        <a href="javascript:void(0);" className="geTitle">General</a>
+        <div className="padding-sm-top">
+          {workflowItems.map((m, index) =>
+            <DiagramDragItem key={index} imgIndex={index}>
+              <svg style={itemStyle}>{m}</svg>
+            </DiagramDragItem>
+          )}
+        </div>
       </div>
     )
   }

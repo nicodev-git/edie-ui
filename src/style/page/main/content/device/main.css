@@ -83,6 +83,20 @@
     margin-top: -2px;
 }
 
+.geTitle {
+    display: block;
+    font-size: 9pt;
+    border-bottom: 1px solid #e5e5e5;
+    font-weight: normal;
+    padding: 6px 0px 6px 14px;
+    margin: 0px;
+    background: #eeeeee;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.4em;
+}
+
 .mxDisabled {
     opacity: 0.2 !important;
     cursor: default !important;
