@@ -33,13 +33,15 @@ class DiagramModal extends React.Component {
     const node = ReactDOM.findDOMNode(component)
     const rt = node.getClientRects()[0]
 
+    const w = 80
+    const h = 50
     const object = {
       imgIndex: item.imgIndex,
 
-      x: offset.x - rt.left,
-      y: offset.y - rt.top,
-      w: 80,
-      h: 50,
+      x: offset.x - rt.left - w / 2,
+      y: offset.y - rt.top - h / 2,
+      w,
+      h,
 
       id: this.props.lastId + 1
     }
