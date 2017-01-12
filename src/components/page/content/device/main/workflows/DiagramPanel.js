@@ -65,6 +65,7 @@ class DiagramPanel extends React.Component {
   // ///////////////////////////////////////////////////
 
   onMouseDownPanel (e) {
+    for (const className of e.target.classList) if (className === 'object') return
     this.props.selectDiagramObject(null)
   }
 
@@ -79,6 +80,7 @@ class DiagramPanel extends React.Component {
   renderObject (obj) {
     const ItemObject = objectComponents[obj.imgIndex] || DRect
     const listeners = {
+      className: 'object',
       onMouseDown: this.onClickObject.bind(this, obj),
       onMouseOver: this.onMouseOverObject.bind(this, obj)
     }
@@ -166,9 +168,8 @@ class DiagramPanel extends React.Component {
       backgroundColor: 'rgb(255, 255, 255)'
     }
     return connectDropTarget(
-      <div className="draw-panel" onMouseMove={this.onMouseMovePanel.bind(this)}>
+      <div className="draw-panel" onMouseDown={this.onMouseDownPanel.bind(this)} onMouseMove={this.onMouseMovePanel.bind(this)}>
         <svg style={style}>
-          <g onMouseDown={this.onMouseDownPanel.bind(this)} pointerEvents="all"/>
           {this.renderObjects()}
           {this.renderSelected()}
           {this.renderHovered()}
