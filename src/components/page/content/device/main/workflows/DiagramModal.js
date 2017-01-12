@@ -29,8 +29,6 @@ class DiagramModal extends React.Component {
   // ////////////////////////////////////////////////////
 
   onDrop (item, offset, component) {
-    console.log('Dropped.')
-
     const node = ReactDOM.findDOMNode(component)
     const rt = node.getClientRects()[0]
 

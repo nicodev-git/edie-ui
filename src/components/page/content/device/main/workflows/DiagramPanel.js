@@ -31,11 +31,16 @@ const canvasTarget = {
 }
 
 class DiagramPanel extends React.Component {
+
+  onClickObject (obj) {
+    this.props.selectDiagramObject(obj)
+  }
+
   renderObject (obj) {
     const ItemObject = objectComponents[obj.imgIndex] || DRect
 
     return (
-      <ItemObject key={obj.id} {...obj} />
+      <ItemObject key={obj.id} {...obj} onClick={this.onClickObject.bind(this, obj)}/>
     )
   }
 
@@ -43,6 +48,23 @@ class DiagramPanel extends React.Component {
     const { objects } = this.props
 
     return objects.map(obj => this.renderObject(obj))
+  }
+
+  renderSelection (obj) {
+    const { x, y, w, h } = obj
+
+    return (
+      <g key={`sel-${obj.id}`}>
+        <g style={{cursor: 'move'}}>
+          <rect x={x} y={y} width={w} height={h} fill="none" stroke="#00a8ff" strokeDasharray="3 3" pointerEvents="none"/>
+        </g>
+      </g>
+    )
+  }
+
+  renderSelected () {
+    const { selected } = this.props
+    return selected.map(obj => this.renderSelection(obj))
   }
 
   render () {
@@ -53,13 +75,13 @@ class DiagramPanel extends React.Component {
       position: 'absolute',
       width: '100%',
       height: '100%',
-      // backgroundPosition: '-15px -26px',
       backgroundColor: 'rgb(255, 255, 255)'
     }
     return connectDropTarget(
       <div className="draw-panel">
         <svg style={style}>
           {this.renderObjects()}
+          {this.renderSelected()}
         </svg>
 
       </div>

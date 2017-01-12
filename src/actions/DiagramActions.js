@@ -1,5 +1,8 @@
 import {
-  ADD_DIAGRAM_OBJECT
+
+  ADD_DIAGRAM_OBJECT,
+  SELECT_DIAGRAM_OBJECT
+
 } from './types'
 
 export function addDiagramObject (object) {
@@ -7,6 +10,15 @@ export function addDiagramObject (object) {
     dispatch({
       type: ADD_DIAGRAM_OBJECT,
       data: object
+    })
+  }
+}
+
+export function selectDiagramObject (object) {
+  return dispatch => {
+    dispatch({
+      type: SELECT_DIAGRAM_OBJECT,
+      data: [object]
     })
   }
 }

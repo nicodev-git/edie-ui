@@ -6,7 +6,8 @@ import DiagramModal from 'components/page/content/device/main/workflows/DiagramM
 import {
   closeDeviceWfDiagramModal,
 
-  addDiagramObject
+  addDiagramObject,
+  selectDiagramObject
 } from 'actions'
 
 @connect(
@@ -14,10 +15,14 @@ import {
     editWfDiagram: state.devices.editWfDiagram,
     objects: state.diagram.objects,
     lastId: state.diagram.lastId,
-    backImg: state.diagram.backImg
+
+    backImg: state.diagram.backImg,
+
+    selected: state.diagram.selected
   }), {
     closeDeviceWfDiagramModal,
-    addDiagramObject
+    addDiagramObject,
+    selectDiagramObject
   }
 )
 export default class DiagramModalContainer extends React.Component {
