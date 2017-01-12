@@ -2,7 +2,9 @@ import { concat } from 'lodash'
 import {
   ADD_DIAGRAM_OBJECT,
   OPEN_DEVICE_WF_DIAGRAM_MODAL,
-  SELECT_DIAGRAM_OBJECT
+  SELECT_DIAGRAM_OBJECT,
+  SET_HOVER_DIAGRAM_OBJECT,
+  CLEAR_HOVER_DIAGRAM_OBJECT
 } from 'actions/types'
 
 export default function (state = {}, action) {
@@ -16,6 +18,15 @@ export default function (state = {}, action) {
 
     case SELECT_DIAGRAM_OBJECT:
       return { ...state, selected: action.data }
+
+    case SET_HOVER_DIAGRAM_OBJECT:
+      return { ...state, hovered: action.data }
+
+    case CLEAR_HOVER_DIAGRAM_OBJECT: {
+      const {hovered} = state
+      return { ...state, hovered: hovered && hovered.id === action.data.id ? null : hovered }
+    }
+
   }
   return state
 }

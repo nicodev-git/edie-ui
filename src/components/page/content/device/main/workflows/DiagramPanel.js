@@ -46,10 +46,20 @@ class DiagramPanel extends React.Component {
     this.props.selectDiagramObject(obj)
   }
 
+  onMouseOverObject (obj) {
+    this.props.setHoverDiagramObject(obj)
+  }
+
+  onMouseOutObject (obj) {
+    this.props.clearHoverDiagramObject(obj)
+  }
+
   renderObject (obj) {
     const ItemObject = objectComponents[obj.imgIndex] || DRect
     const listeners = {
-      onClick: this.onClickObject.bind(this, obj)
+      onClick: this.onClickObject.bind(this, obj),
+      onMouseOver: this.onMouseOverObject.bind(this, obj),
+      onMouseOut: this.onMouseOutObject.bind(this, obj)
     }
 
     return (
@@ -87,6 +97,18 @@ class DiagramPanel extends React.Component {
     return selected.map(obj => this.renderSelection(obj))
   }
 
+  renderHovered () {
+    const { hovered } = this.props
+    if (!hovered) return null
+
+    const { x, y, w, h } = hovered
+    return (
+      <g>
+        <image x={x + w / 2 - 2.5} y={y + h / 2 - 2.5} width="5" height="5" href="/images/point.gif" preserveAspectRatio="none"/>
+      </g>
+    )
+  }
+
   render () {
     const { connectDropTarget, backImg } = this.props
 
@@ -102,6 +124,7 @@ class DiagramPanel extends React.Component {
         <svg style={style}>
           {this.renderObjects()}
           {this.renderSelected()}
+          {this.renderHovered()}
         </svg>
 
       </div>
