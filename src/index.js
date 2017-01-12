@@ -83,6 +83,11 @@ const initialState = {
     parserTypes: [],
 
     showTraffic: true
+  },
+
+  diagram: {
+    objects: [],
+    lastId: 0
   }
 }
 const store = createStoreWithMiddleware(reducers, initialState)

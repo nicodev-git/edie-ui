@@ -3,7 +3,7 @@ import {
   DropTarget
 } from 'react-dnd'
 
-import { DragTypes } from 'shared/Global'
+import { DragTypes, workflowItems } from 'shared/Global'
 
 function collect (connect) {
   return {
@@ -22,12 +22,43 @@ const canvasTarget = {
 }
 
 class DiagramPanel extends React.Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      objects: [],
+      lastId: 100
+    }
+  }
+
+  renderObject (obj) {
+    const style = {
+      position: 'absolute',
+      left: `${obj.x}px`,
+      top: `${obj.y}px`,
+      width: `${obj.w}px`,
+      height: `${obj.h}px`
+    }
+
+    return (
+      <svg style={style}>
+        {workflowItems[obj.imgIndex]}
+      </svg>
+    )
+  }
+
+  renderObjects () {
+    const { objects } = this.state
+
+    return objects.map(obj => this.renderObject(obj))
+  }
+
   render () {
     const { connectDropTarget } = this.props
 
-    const style = {backgroundColor: 'whitesmoke'}
     return connectDropTarget(
-      <div className="draw-panel" style={style} />
+      <div className="draw-panel">
+        {this.renderObjects()}
+      </div>
     )
   }
 }

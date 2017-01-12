@@ -9,8 +9,7 @@ import {
 
 @connect(
   state => ({
-    editWfDiagram: state.devices.editWfDiagram,
-    initialValues: state.devices.editWfDiagram
+    editWfDiagram: state.devices.editWfDiagram
   }), {
     closeDeviceWfDiagramModal
   }

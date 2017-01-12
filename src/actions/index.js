@@ -24,6 +24,7 @@ export * from './MapActions'
 export * from './MonitorActions'
 export * from './SettingsActions'
 export * from './WorkflowActions'
+export * from './DiagramActions'
 
 export const fetchMessage = () => {
   if (!window.localStorage.getItem('token')) {

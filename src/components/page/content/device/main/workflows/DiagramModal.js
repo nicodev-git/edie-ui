@@ -48,9 +48,7 @@ class DiagramModal extends React.Component {
       <div style={{background: 'whiteSmoke'}}>
         {workflowItems.map((m, index) =>
           <DiagramDragItem key={index} imgIndex={index}>
-            <svg style={itemStyle}>
-              {m}
-            </svg>
+            <svg style={itemStyle}>{m}</svg>
           </DiagramDragItem>
         )}
       </div>
