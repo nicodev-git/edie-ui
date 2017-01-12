@@ -9,6 +9,8 @@ import DRect from './diagram/DRect'
 import DRoundRect from './diagram/DRoundRect'
 import DEllipse from './diagram/DEllipse'
 import DDiamond from './diagram/DDiamond'
+import DParallel from './diagram/DParallel'
+import DTriangle from './diagram/DTriangle'
 
 function collect (connect) {
   return {
@@ -16,7 +18,7 @@ function collect (connect) {
   }
 }
 
-const objectComponents = [DRect, DRoundRect, DEllipse, DDiamond]
+const objectComponents = [DRect, DRoundRect, DEllipse, DDiamond, DParallel, DTriangle]
 
 const canvasTarget = {
   canDrop () {
