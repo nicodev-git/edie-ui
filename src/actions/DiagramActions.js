@@ -23,7 +23,7 @@ export function selectDiagramObject (object) {
   return dispatch => {
     dispatch({
       type: SELECT_DIAGRAM_OBJECT,
-      data: [object]
+      data: object ? [object] : []
     })
   }
 }

@@ -18,7 +18,7 @@ export default function (state = {}, action) {
       return { ...state, objects: concat(state.objects, action.data), lastId: state.lastId + 1 }
 
     case SELECT_DIAGRAM_OBJECT:
-      return { ...state, selected: action.data }
+      return { ...state, selected: action.data, hovered: null }
 
     case SET_HOVER_DIAGRAM_OBJECT:
       return { ...state, hovered: action.data, hoverPoint: -1 }
