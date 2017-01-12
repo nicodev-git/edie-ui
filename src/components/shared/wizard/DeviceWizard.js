@@ -84,7 +84,7 @@ class DeviceWizard extends React.Component {
     const { extraParams, onFinish } = this.props
     const { monitors } = this.state
 
-    let props = assign({}, formProps, extraParams, { monitors })
+    let props = assign({}, formProps, extraParams, {monitors: monitors.map(m => assign({}, m, {id: null}))})
 
     this.closeModal(true)
     onFinish && onFinish(null, props)
