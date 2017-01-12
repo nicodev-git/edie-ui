@@ -9,7 +9,8 @@ import {
   addDiagramObject,
   selectDiagramObject,
   setHoverDiagramObject,
-  clearHoverDiagramObject
+  clearHoverDiagramObject,
+  setHoverPoint
 } from 'actions'
 
 @connect(
@@ -21,13 +22,15 @@ import {
     backImg: state.diagram.backImg,
 
     selected: state.diagram.selected,
-    hovered: state.diagram.hovered
+    hovered: state.diagram.hovered,
+    hoverPoint: state.diagram.hoverPoint
   }), {
     closeDeviceWfDiagramModal,
     addDiagramObject,
     selectDiagramObject,
     setHoverDiagramObject,
-    clearHoverDiagramObject
+    clearHoverDiagramObject,
+    setHoverPoint
   }
 )
 export default class DiagramModalContainer extends React.Component {

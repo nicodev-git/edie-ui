@@ -142,11 +142,11 @@ export default class MonitorTable extends Component {
               <i className="fa fa-plus-square" />
             </a>
             <a href="javascript:;" className="option edit-device"
-               onClick={this.onClickEdit.bind(this)}>
+              onClick={this.onClickEdit.bind(this)}>
               <i className="fa fa-edit" />
             </a>
             <a href="javascript:;" className="option trash"
-               onClick={this.onClickRemove.bind(this)}>
+              onClick={this.onClickRemove.bind(this)}>
               <i className="fa fa-trash-o" />
             </a>
           </div>

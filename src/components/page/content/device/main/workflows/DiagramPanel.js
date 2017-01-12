@@ -59,7 +59,7 @@ class DiagramPanel extends React.Component {
   // ///////////////////////////////////////////////////
 
   onMouseOverHoverPoint (object, point) {
-
+    this.props.setHoverPoint(point)
   }
 
   // ///////////////////////////////////////////////////
@@ -107,26 +107,38 @@ class DiagramPanel extends React.Component {
   }
 
   renderHovered () {
-    const { hovered } = this.props
+    const { hovered, selected, hoverPoint } = this.props
     if (!hovered) return null
+    if (selected && selected.filter(s => s.id === hovered.id).length > 0) return null
 
     const item = workflowItems[hovered.imgIndex]
 
     let points = []
+    let hoverPointComp
     for (let i = 0; i < item.connectionPoints; i++) {
       const xy = item.getConnectionPoint(hovered, i)
       points.push(
         <g key={i}>
-          <image x={xy.x - 2.5} y={xy.y - 2.5} width="5" height="5" href="/images/point.gif" preserveAspectRatio="none"
+          <image x={xy.x - 2.5} y={xy.y - 2.5}
+            width="5" height="5" href="/images/point.gif" preserveAspectRatio="none"
             pointerEvents="all"
             onMouseOver={this.onMouseOverHoverPoint.bind(this, hovered, i)}/>
         </g>
       )
+
+      if (i === hoverPoint) {
+        hoverPointComp = (
+          <g>
+            <ellipse cx={xy.x} cy={xy.y} rx="10" ry="10" fillOpacity="0.3" fill="#00ff00" stroke="#00ff00" strokeOpacity="0.3" pointerEvents="none"/>
+          </g>
+        )
+      }
     }
     return (
       <g pointerEvents="all"
         onMouseOut={this.onMouseOutObject.bind(this, hovered)}>
         {points}
+        {hoverPointComp}
       </g>
     )
   }

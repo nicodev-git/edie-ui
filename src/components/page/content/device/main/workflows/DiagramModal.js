@@ -114,10 +114,10 @@ class DiagramModal extends React.Component {
             {this.renderDragLayer()}
 
             {this.renderToolbar()}
-            <div className="col-md-3 p-none">
+            <div className="col-md-2 p-none">
               {this.renderSidebar()}
             </div>
-            <div className="col-md-9 p-none">
+            <div className="col-md-10 p-none">
               {this.renderPanel()}
             </div>
           </div>

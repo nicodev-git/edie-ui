@@ -4,7 +4,8 @@ import {
   OPEN_DEVICE_WF_DIAGRAM_MODAL,
   SELECT_DIAGRAM_OBJECT,
   SET_HOVER_DIAGRAM_OBJECT,
-  CLEAR_HOVER_DIAGRAM_OBJECT
+  CLEAR_HOVER_DIAGRAM_OBJECT,
+  SET_HOVER_POINT
 } from 'actions/types'
 
 export default function (state = {}, action) {
@@ -20,13 +21,15 @@ export default function (state = {}, action) {
       return { ...state, selected: action.data }
 
     case SET_HOVER_DIAGRAM_OBJECT:
-      return { ...state, hovered: action.data }
+      return { ...state, hovered: action.data, hoverPoint: -1 }
 
     case CLEAR_HOVER_DIAGRAM_OBJECT: {
       const {hovered} = state
       return { ...state, hovered: hovered && hovered.id === action.data.id ? null : hovered }
     }
 
+    case SET_HOVER_POINT:
+      return { ...state, hoverPoint: action.data }
   }
   return state
 }

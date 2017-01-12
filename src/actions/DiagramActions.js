@@ -4,7 +4,9 @@ import {
   SELECT_DIAGRAM_OBJECT,
 
   SET_HOVER_DIAGRAM_OBJECT,
-  CLEAR_HOVER_DIAGRAM_OBJECT
+  CLEAR_HOVER_DIAGRAM_OBJECT,
+
+  SET_HOVER_POINT
 
 } from './types'
 
@@ -40,6 +42,15 @@ export function clearHoverDiagramObject (object) {
     dispatch({
       type: CLEAR_HOVER_DIAGRAM_OBJECT,
       data: object
+    })
+  }
+}
+
+export function setHoverPoint (point) {
+  return dispatch => {
+    dispatch({
+      type: SET_HOVER_POINT,
+      data: point
     })
   }
 }
