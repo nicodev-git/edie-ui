@@ -6,12 +6,17 @@ import {
 import { DragTypes } from 'shared/Global'
 
 import DRect from './diagram/DRect'
+import DRoundRect from './diagram/DRoundRect'
+import DEllipse from './diagram/DEllipse'
+import DDiamond from './diagram/DDiamond'
 
 function collect (connect) {
   return {
     connectDropTarget: connect.dropTarget()
   }
 }
+
+const objectComponents = [DRect, DRoundRect, DEllipse, DDiamond]
 
 const canvasTarget = {
   canDrop () {
@@ -25,8 +30,10 @@ const canvasTarget = {
 
 class DiagramPanel extends React.Component {
   renderObject (obj) {
+    const ItemObject = objectComponents[obj.imgIndex] || DRect
+
     return (
-      <DRect {...obj} />
+      <ItemObject key={obj.id} {...obj} />
     )
   }
 

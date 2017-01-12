@@ -17,3 +17,12 @@
     border: 1px solid black;
     background: whitesmoke;
 }
+
+.diagram .toolbar-container {
+    background: whiteSmoke;
+    border-bottom: 1px solid #e0e0e0;
+    overflow: hidden;
+    cursor: default;
+
+    height: 34px;
+}

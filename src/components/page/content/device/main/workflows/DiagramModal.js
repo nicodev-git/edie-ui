@@ -4,6 +4,7 @@ import Modal from 'react-bootstrap-modal'
 import DiagramPanel from './DiagramPanel'
 import DiagramDragLayer from './DiagramDragLayer'
 import DiagramDragItem from './DiagramDragItem'
+import DiagramToolbar from './DiagramToolbar'
 
 import { workflowItems } from 'shared/Global'
 
@@ -51,6 +52,12 @@ class DiagramModal extends React.Component {
 
   // ////////////////////////////////////////////////////
 
+  renderToolbar () {
+    return (
+      <DiagramToolbar/>
+    )
+  }
+
   renderSidebar () {
     return (
       <div style={{background: 'whiteSmoke'}}>
@@ -92,10 +99,12 @@ class DiagramModal extends React.Component {
             <button className="close" onClick={this.onClickClose.bind(this)}>×</button>
           </div>
         </div>
-        <div className="modal-body bootstrap-dialog-message">
+        <div className="modal-body bootstrap-dialog-message p-none">
           <div className="diagram">
             {this.renderDragLayer()}
-            <div className="col-md-3">
+
+            {this.renderToolbar()}
+            <div className="col-md-3 pr-none">
               {this.renderSidebar()}
             </div>
             <div className="col-md-9">
@@ -103,7 +112,7 @@ class DiagramModal extends React.Component {
             </div>
           </div>
 
-          <div className="text-right margin-md-top">
+          <div className="text-right margin-md-top padding-md">
             <a href="javascript:;" className="btn btn-primary btn-sm margin-sm-right" onClick={this.onClickSave.bind(this)}>OK</a>
             <a href="javascript:;" className="btn btn-default btn-sm" onClick={this.onClickClose.bind(this)}>Cancel</a>
           </div>
