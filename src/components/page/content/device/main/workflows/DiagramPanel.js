@@ -119,7 +119,7 @@ class DiagramPanel extends React.Component {
         <g key={i}>
           <image x={xy.x - 2.5} y={xy.y - 2.5} width="5" height="5" href="/images/point.gif" preserveAspectRatio="none"
             pointerEvents="all"
-            onMouseOver={this.onMouseOverHoverPoint.bind(this, object, )}/>
+            onMouseOver={this.onMouseOverHoverPoint.bind(this, hovered, i)}/>
         </g>
       )
     }
