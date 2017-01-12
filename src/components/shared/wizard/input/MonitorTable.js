@@ -127,6 +127,10 @@ export default class MonitorTable extends Component {
     onChanged && onChanged(monitors)
   }
 
+  onRowDblClick () {
+    this.onClickEdit()
+  }
+
   render () {
     return (
       <div className="panel panel-default panel-noborder">
@@ -164,7 +168,8 @@ export default class MonitorTable extends Component {
               this.props.monitors.map((item, index) =>
                 <tr key={index}
                   className={index === this.state.selected ? 'selected' : ''}
-                  onClick={() => this.setState({selected: index})}>
+                  onClick={() => this.setState({selected: index})}
+                  onDoubleClick={this.onRowDblClick.bind(this)}>
                   <td>{item.monitortype}</td>
                   <td>{item.name}</td>
                 </tr>
