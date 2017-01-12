@@ -2,7 +2,7 @@ import React from 'react'
 import DeviceWizard from '../../../components/shared/wizard/DeviceWizard'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { fetchMonitorTemplates, clearDeviceWizardInitialValues } from '../../../actions'
+import { fetchMonitorTemplates, clearDeviceWizardInitialValues, openDeviceMonitorWizard } from '../../../actions'
 
 @connect(
   state => ({
@@ -12,7 +12,8 @@ import { fetchMonitorTemplates, clearDeviceWizardInitialValues } from '../../../
   dispatch => ({
     ...bindActionCreators({
       fetchMonitorTemplates,
-      clearDeviceWizardInitialValues
+      clearDeviceWizardInitialValues,
+      openDeviceMonitorWizard
     }, dispatch)
   })
 )

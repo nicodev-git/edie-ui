@@ -270,7 +270,9 @@ class DeviceWizard extends React.Component {
       templates={this.props.monitorTemplates}
       onChanged={monitors => { this.setState({ monitors }) }}
       values={values}
-      config={config}/>)
+      config={config}
+      openDeviceMonitorWizard={this.props.openDeviceMonitorWizard}
+    />)
   }
 
   buildMTable (config, values) {

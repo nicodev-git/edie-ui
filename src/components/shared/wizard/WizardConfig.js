@@ -1306,21 +1306,21 @@ export const wizardConfig = {
       }, {
         type: 'text',
         label: {
-          text: 'LAN IP',
-          type: 'attach',
-          width: 3
-        },
-        width: MAX_WIDTH,
-        name: 'lanip'
-      }, {
-        type: 'text',
-        label: {
           text: 'WAN IP',
           type: 'attach',
           width: 3
         },
         width: MAX_WIDTH,
         name: 'wanip'
+      }, {
+        type: 'text',
+        label: {
+          text: 'LAN IP',
+          type: 'attach',
+          width: 3
+        },
+        width: MAX_WIDTH,
+        name: 'lanip'
       }, {
         type: 'label',
         text: '',
@@ -2565,11 +2565,11 @@ export const wizardConfig = {
       }, {
         type: 'check',
         label: {
-          text: 'Executable',
+          text: 'Enabled',
           type: 'attach',
           width: 3
         },
-        name: 'executable',
+        name: 'enable',
                 // checked: true,
         width: MAX_WIDTH
       }, {
@@ -4620,21 +4620,21 @@ export const wizardEditConfig = {
       }, {
         type: 'text',
         label: {
-          text: 'LAN IP',
-          type: 'attach',
-          width: 3
-        },
-        width: MAX_WIDTH,
-        name: 'lanip'
-      }, {
-        type: 'text',
-        label: {
           text: 'WAN IP',
           type: 'attach',
           width: 3
         },
         width: MAX_WIDTH,
         name: 'wanip'
+      }, {
+        type: 'text',
+        label: {
+          text: 'LAN IP',
+          type: 'attach',
+          width: 3
+        },
+        width: MAX_WIDTH,
+        name: 'lanip'
       }, {
         type: 'uploader',
         label: {

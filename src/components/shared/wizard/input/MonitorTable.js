@@ -96,6 +96,15 @@ export default class MonitorTable extends Component {
     e.nativeEvent.stopImmediatePropagation()
   }
 
+  onClickEdit (e) {
+    let {selected} = this.state
+    const {monitors} = this.props
+    if (selected < 0) return
+
+    this.setState({ monitorWizardVisible: true, monitorConfig: monitors[selected] })
+    this.props.openDeviceMonitorWizard(monitors[selected])
+  }
+
   onClickRemove () {
     let {selected} = this.state
     const {monitors, onChanged} = this.props
@@ -124,13 +133,17 @@ export default class MonitorTable extends Component {
         <div className="panel-heading drag-handle">
           <h4 className="panel-title">Monitors</h4>
           <div className="panel-options">
-            <a href="javascript:;" className="option trash"
-              onClick={this.onClickRemove.bind(this)}>
-              <i className="fa fa-trash-o" />
-            </a>
             <a href="javascript:;" className="option add-device"
               onClick={this.onClickAdd.bind(this)}>
               <i className="fa fa-plus-square" />
+            </a>
+            <a href="javascript:;" className="option edit-device"
+               onClick={this.onClickEdit.bind(this)}>
+              <i className="fa fa-edit" />
+            </a>
+            <a href="javascript:;" className="option trash"
+               onClick={this.onClickRemove.bind(this)}>
+              <i className="fa fa-trash-o" />
             </a>
           </div>
 
