@@ -50,7 +50,7 @@ export default function (state = {}, action) {
         mouseDownObject: action.downOn,
         isDragging: false,
         isResizing: false,
-        isLineDrawing: false,
+        isLineDrawing: action.data ? state.isLineDrawing : false,
         resizePoint: action.data ? state.resizePoint : -1,
         cursorPos: action.pos
       }

@@ -40,16 +40,16 @@ class DiagramPanel extends React.Component {
   }
 
   onMouseOutObject (obj) {
-    //const {  } = this.props
     this.props.clearHoverDiagramObject(obj)
   }
 
   // ///////////////////////////////////////////////////
 
-  onMouseDownLineHandle (point) {
+  onMouseDownLineHandle (point, pos) {
     console.log(`onMouseDownLineHandle ${point}`)
-    this.props.setDiagramLineStartPoint(point)
-    this.props.setDiagramLineEndPoint(point)
+    this.props.setDiagramLineDrawing(true)
+    this.props.setDiagramLineStartPoint(pos)
+    this.props.setDiagramLineEndPoint(pos)
   }
 
   onMouseOverHoverPoint (object, point) {
@@ -110,7 +110,6 @@ class DiagramPanel extends React.Component {
   }
 
   onLineDraw (pos) {
-    console.log('onLineDraw')
     this.props.setDiagramLineEndPoint(pos)
   }
 
@@ -139,7 +138,7 @@ class DiagramPanel extends React.Component {
     const { isMouseDown, selected, isDragging, isResizing, isLineDrawing, mouseDownObject, cursorPos } = this.props
 
     // Object dragging
-    if (e.buttons === 1 && isMouseDown && selected.length) {
+    if (e.buttons === 1 && isMouseDown) {
       const pos = this.convertEventPosition(e)
       const offset = {
         x: pos.x - cursorPos.x,
@@ -148,15 +147,18 @@ class DiagramPanel extends React.Component {
 
       this.props.setDiagramCursorPos(pos)
 
-      if (mouseDownObject === 'object') {
-        if (!isDragging) this.onDragObjectStart(e)
-        this.onDraggingObject(e)
-      } else if (mouseDownObject === 'resize-handle') {
-        if (!isResizing) this.onResizeObjectStart(e)
-        this.onResizeObject(offset)
-      } else if (mouseDownObject === 'line-handle') {
-        if (!isLineDrawing) this.onLineDrawStart(e)
-        this.onLineDraw(cursorPos)
+      if (selected.length) {
+        if (mouseDownObject === 'object') {
+          if (!isDragging) this.onDragObjectStart(e)
+          this.onDraggingObject(e)
+        } else if (mouseDownObject === 'resize-handle') {
+          if (!isResizing) this.onResizeObjectStart(e)
+          this.onResizeObject(offset)
+        }
+      } else if (isLineDrawing) {
+        if (mouseDownObject === 'line-handle') {
+          this.onLineDraw(cursorPos)
+        }
       }
     } else {
       if (isDragging || isResizing) this.props.setDiagramMouseDown(false)
@@ -204,7 +206,7 @@ class DiagramPanel extends React.Component {
 
     return (
       <path d={`M ${lineStart.x} ${lineStart.y} L ${lineEnd.x} ${lineEnd.y} Z`} stroke="#000000"
-            fill="#ffffff" strokeMiterlimit="10"/>
+        fill="#ffffff" strokeMiterlimit="10"/>
     )
   }
 
