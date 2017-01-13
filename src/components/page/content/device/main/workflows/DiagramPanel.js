@@ -25,6 +25,12 @@ const canvasTarget = {
 
 class DiagramPanel extends React.Component {
 
+  onSvgRef (el) {
+    this.svgEl = el
+  }
+
+  // //////////////////////////////////////////////////
+
   onClickObject (obj, e) {
     this.props.selectDiagramObject(obj)
   }
@@ -45,18 +51,39 @@ class DiagramPanel extends React.Component {
 
   // ///////////////////////////////////////////////////
 
+  convertEventPosition (e) {
+    const rt = this.svgEl.getClientRects()[0]
+    return {
+      x: e.clientX - rt.left,
+      y: e.clientY - rt.top
+    }
+  }
+
+  onDragObjectStart (e) {
+    this.props.setDiagramDragging(true)
+  }
+
+  onDraggingObject (e) {
+    const pos = this.convertEventPosition(e)
+    this.props.setCursorPos()
+  }
+
+  // ///////////////////////////////////////////////////
+
   onMouseDownPanel (e) {
-    this.props.setDiagramMouseDown(true)
+    this.props.setDiagramMouseDown(true, this.convertEventPosition(e))
 
     for (const className of e.target.classList) if (className === 'object') return
     this.props.selectDiagramObject(null)
   }
 
   onMouseMovePanel (e) {
-    const { isMouseDown, selected } = this.props
-    // Object dragging
-    if (e.buttons === 1 && isMouseDown && selected) {
+    const { isMouseDown, selected, isDragging } = this.props
 
+    // Object dragging
+    if (e.buttons === 1 && isMouseDown && selected.length) {
+      if (!isDragging) this.onDragObjectStart(e)
+      this.onDraggingObject(e)
     }
   }
 
@@ -161,7 +188,7 @@ class DiagramPanel extends React.Component {
         onMouseDown={this.onMouseDownPanel.bind(this)}
         onMouseMove={this.onMouseMovePanel.bind(this)}
         onMouseUp={this.onMouseUpPanel.bind(this)}>
-        <svg style={style}>
+        <svg style={style} ref={this.onSvgRef.bind(this)}>
           {this.renderObjects()}
           {this.renderSelected()}
           {this.renderHovered()}

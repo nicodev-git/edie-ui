@@ -8,14 +8,13 @@ import {
   SET_HOVER_POINT,
   SET_DIAGRAM_MOUSE_DOWN,
   SET_DIAGRAM_DRAGGING
-
 } from 'actions/types'
 
 export default function (state = {}, action) {
   switch (action.type) {
 
     case OPEN_DEVICE_WF_DIAGRAM_MODAL:
-      return { ...state, objects: [], lastId: 100, selected: [] }
+      return { ...state, objects: [], lastId: 100, selected: [], hovered: null, isDragging: false }
 
     case ADD_DIAGRAM_OBJECT:
       return { ...state, objects: concat(state.objects, action.data), lastId: state.lastId + 1 }
@@ -35,7 +34,7 @@ export default function (state = {}, action) {
       return { ...state, hoverPoint: action.data }
 
     case SET_DIAGRAM_MOUSE_DOWN:
-      return { ...state, isMouseDown: action.data }
+      return { ...state, isMouseDown: action.data, mouseDownPos: action.data ? action.pos : state.mouseDownPos, isDragging: false }
 
     case SET_DIAGRAM_DRAGGING:
       return { ...state, isDragging: action.data }

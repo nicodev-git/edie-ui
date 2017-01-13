@@ -9,7 +9,8 @@ import {
   SET_HOVER_POINT,
 
   SET_DIAGRAM_MOUSE_DOWN,
-  SET_DIAGRAM_DRAGGING
+  SET_DIAGRAM_DRAGGING,
+  SET_DIAGRAM_SET_CURSOR
 
 } from './types'
 
@@ -58,11 +59,12 @@ export function setHoverPoint (point) {
   }
 }
 
-export function setDiagramMouseDown (isDown) {
+export function setDiagramMouseDown (isDown, pos) {
   return dispatch => {
     dispatch({
       type: SET_DIAGRAM_MOUSE_DOWN,
-      data: isDown
+      data: isDown,
+      pos: pos
     })
   }
 }
@@ -72,6 +74,15 @@ export function setDiagramDragging (dragging) {
     dispatch({
       type: SET_DIAGRAM_DRAGGING,
       data: dragging
+    })
+  }
+}
+
+export function setDiagramCursorPos (pos) {
+  return dispatch => {
+    dispatch({
+      type: SET_DIAGRAM_SET_CURSOR,
+      data: pos
     })
   }
 }
