@@ -16,7 +16,12 @@ import {
 
   SET_DIAGRAM_RESIZING,
   SET_DIAGRAM_RESIZING_POINT,
-  RESIZE_DIAGRAM_SELECTED_OBJECTS
+  RESIZE_DIAGRAM_SELECTED_OBJECTS,
+
+  SET_DIAGRAM_LINE_DRAWING,
+  SET_DIAGRAM_LINE_START_POINT,
+  SET_DIAGRAM_LINE_END_POINT
+
 } from './types'
 
 export function addDiagramObject (object) {
@@ -125,6 +130,33 @@ export function resizeDiagramSelectedObjects (offset) {
     dispatch({
       type: RESIZE_DIAGRAM_SELECTED_OBJECTS,
       data: offset
+    })
+  }
+}
+
+export function setDiagramLineDrawing (isDrawing) {
+  return dispatch => {
+    dispatch({
+      type: SET_DIAGRAM_LINE_DRAWING,
+      data: isDrawing
+    })
+  }
+}
+
+export function setDiagramLineStartPoint (point) {
+  return dispatch => {
+    dispatch({
+      type: SET_DIAGRAM_LINE_START_POINT,
+      data: point
+    })
+  }
+}
+
+export function setDiagramLineEndPoint (point) {
+  return dispatch => {
+    dispatch({
+      type: SET_DIAGRAM_LINE_END_POINT,
+      data: point
     })
   }
 }

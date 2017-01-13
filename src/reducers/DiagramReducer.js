@@ -12,14 +12,18 @@ import {
   MOVE_DIAGRAM_SELECTED_OBJECTS,
   SET_DIAGRAM_RESIZING,
   SET_DIAGRAM_RESIZING_POINT,
-  RESIZE_DIAGRAM_SELECTED_OBJECTS
+  RESIZE_DIAGRAM_SELECTED_OBJECTS,
+
+  SET_DIAGRAM_LINE_DRAWING,
+  SET_DIAGRAM_LINE_START_POINT,
+  SET_DIAGRAM_LINE_END_POINT
 } from 'actions/types'
 
 export default function (state = {}, action) {
   switch (action.type) {
 
     case OPEN_DEVICE_WF_DIAGRAM_MODAL:
-      return { ...state, objects: [], lastId: 100, selected: [], hovered: null, isDragging: false, isResizing: false }
+      return { ...state, objects: [], lastId: 100, selected: [], hovered: null, isDragging: false, isResizing: false, isLineDrawing: false }
 
     case ADD_DIAGRAM_OBJECT:
       return { ...state, objects: concat(state.objects, action.data), lastId: state.lastId + 1 }
@@ -46,6 +50,7 @@ export default function (state = {}, action) {
         mouseDownObject: action.downOn,
         isDragging: false,
         isResizing: false,
+        isLineDrawing: false,
         resizePoint: action.data ? state.resizePoint : -1,
         cursorPos: action.pos
       }
@@ -122,6 +127,15 @@ export default function (state = {}, action) {
           return obj
         })
       }
+
+    case SET_DIAGRAM_LINE_DRAWING:
+      return { ...state, isLineDrawing: action.data }
+
+    case SET_DIAGRAM_LINE_START_POINT:
+      return { ...state, lineStart: action.data }
+
+    case SET_DIAGRAM_LINE_END_POINT:
+      return { ...state, lineEnd: action.data }
   }
   return state
 }

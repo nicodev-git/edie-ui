@@ -46,7 +46,7 @@ class DiagramPanel extends React.Component {
   // ///////////////////////////////////////////////////
 
   onMouseDownLineHandle (point) {
-
+    this.props.setDiagramLineStartPoint(point)
   }
 
   onMouseOverHoverPoint (object, point) {
@@ -101,6 +101,19 @@ class DiagramPanel extends React.Component {
 
   // ///////////////////////////////////////////////////
 
+  onLineDrawStart (e) {
+    this.props.setDiagramLineDraw(true)
+  }
+
+  onLineDraw (pos) {
+    this.props.setDiagramLineEndPoint(pos)
+  }
+
+  onLineDrawEnd (e) {
+
+  }
+
+  // ///////////////////////////////////////////////////
   onMouseDownPanel (e) {
     let objectType = ''
 
@@ -117,7 +130,7 @@ class DiagramPanel extends React.Component {
   }
 
   onMouseMovePanel (e) {
-    const { isMouseDown, selected, isDragging, isResizing, mouseDownObject, cursorPos } = this.props
+    const { isMouseDown, selected, isDragging, isResizing, isLineDrawing, mouseDownObject, cursorPos } = this.props
 
     // Object dragging
     if (e.buttons === 1 && isMouseDown && selected.length) {
@@ -135,6 +148,9 @@ class DiagramPanel extends React.Component {
       } else if (mouseDownObject === 'resize-handle') {
         if (!isResizing) this.onResizeObjectStart(e)
         this.onResizeObject(offset)
+      } else if (mouseDownObject === 'line-handle') {
+        if (!isLineDrawing) this.onLineDrawStart(e)
+        this.onLineDraw(cursorPos)
       }
     } else {
       if (isDragging || isResizing) this.props.setDiagramMouseDown(false)
@@ -142,12 +158,15 @@ class DiagramPanel extends React.Component {
   }
 
   onMouseUpPanel (e) {
-    const { isDragging, isResizing } = this.props
+    const { isDragging, isResizing, isLineDrawing } = this.props
     if (isDragging) {
       this.onDragObjectEnd(e)
     }
     if (isResizing) {
       this.onResizeObjectEnd(e)
+    }
+    if (isLineDrawing) {
+      this.onLineDrawEnd(e)
     }
     this.props.setDiagramMouseDown(false)
   }
@@ -220,7 +239,7 @@ class DiagramPanel extends React.Component {
             width="5" height="5" href="/images/point.gif" preserveAspectRatio="none"
             className="line-handle"
             pointerEvents="all"
-            onMouseDown={this.onMouseDownLineHandle.bind(this, i)}
+            onMouseDown={this.onMouseDownLineHandle.bind(this, i, xy)}
             onMouseOver={this.onMouseOverHoverPoint.bind(this, hovered, i)}/>
         </g>
       )

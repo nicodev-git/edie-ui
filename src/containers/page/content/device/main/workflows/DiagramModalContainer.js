@@ -17,7 +17,10 @@ import {
   moveDiagramSelectedObjects,
   setDiagramResizingPoint,
   setDiagramResizing,
-  resizeDiagramSelectedObjects
+  resizeDiagramSelectedObjects,
+  setDiagramLineDrawing,
+  setDiagramLineStartPoint,
+  setDiagramLineEndPoint
 } from 'actions'
 
 @connect(
@@ -37,7 +40,10 @@ import {
     resizePoint: state.diagram.resizePoint,
     isDragging: state.diagram.isDragging,
     cursorPos: state.diagram.cursorPos,
-    isResizing: state.diagram.isResizing
+    isResizing: state.diagram.isResizing,
+    isLineDrawing: state.diagram.isLineDrawing,
+    lineStart: state.diagram.lineStart,
+    lineEnd: state.diagram.lineEnd
   }), {
     closeDeviceWfDiagramModal,
     addDiagramObject,
@@ -51,7 +57,10 @@ import {
     moveDiagramSelectedObjects,
     setDiagramResizingPoint,
     setDiagramResizing,
-    resizeDiagramSelectedObjects
+    resizeDiagramSelectedObjects,
+    setDiagramLineDrawing,
+    setDiagramLineStartPoint,
+    setDiagramLineEndPoint
   }
 )
 export default class DiagramModalContainer extends React.Component {
