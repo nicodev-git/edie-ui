@@ -20,7 +20,9 @@ import {
 
   SET_DIAGRAM_LINE_DRAWING,
   SET_DIAGRAM_LINE_START_POINT,
-  SET_DIAGRAM_LINE_END_POINT
+  SET_DIAGRAM_LINE_END_POINT,
+
+  ADD_DIAGRAM_LINE
 
 } from './types'
 
@@ -157,6 +159,15 @@ export function setDiagramLineEndPoint (point) {
     dispatch({
       type: SET_DIAGRAM_LINE_END_POINT,
       data: point
+    })
+  }
+}
+
+export function addDiagramLine (line) {
+  return dispatch => {
+    dispatch({
+      type: ADD_DIAGRAM_LINE,
+      data: line
     })
   }
 }

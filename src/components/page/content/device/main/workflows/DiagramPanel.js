@@ -332,11 +332,8 @@ class DiagramPanel extends React.Component {
         onMouseMove={this.onMouseMovePanel.bind(this)}
         onMouseUp={this.onMouseUpPanel.bind(this)}>
         <svg style={style} ref={this.onSvgRef.bind(this)}>
-          <g>
-            {this.renderObjects()}
-            {this.renderDrawingLines()}
-          </g>
-
+          {this.renderObjects()}
+          {this.renderDrawingLines()}
           <g>
             {this.renderSelected()}
             {this.renderHovered()}
