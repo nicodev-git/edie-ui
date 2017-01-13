@@ -15,6 +15,7 @@ import {
   setDiagramDragging,
   setDiagramCursorPos,
   moveDiagramSelectedObjects,
+  setDiagramResizingPoint,
   setDiagramResizing
 } from 'actions'
 
@@ -31,6 +32,8 @@ import {
     hoverPoint: state.diagram.hoverPoint,
     isMouseDown: state.diagram.isMouseDown,
     mouseDownPos: state.diagram.mouseDownPos,
+    mouseDownObject: state.diagram.mouseDownObject,
+    resizePoint: state.diagram.resizePoint,
     isDragging: state.diagram.isDragging,
     cursorPos: state.diagram.cursorPos,
     isResizing: state.diagram.isResizing
@@ -45,6 +48,7 @@ import {
     setDiagramDragging,
     setDiagramCursorPos,
     moveDiagramSelectedObjects,
+    setDiagramResizingPoint,
     setDiagramResizing
   }
 )

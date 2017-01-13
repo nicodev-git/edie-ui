@@ -10,7 +10,8 @@ import {
   SET_DIAGRAM_DRAGGING,
   SET_DIAGRAM_CURSOR_POS,
   MOVE_DIAGRAM_SELECTED_OBJECTS,
-  SET_DIAGRAM_RESIZING
+  SET_DIAGRAM_RESIZING,
+  SET_DIAGRAM_RESIZING_POINT
 } from 'actions/types'
 
 export default function (state = {}, action) {
@@ -43,7 +44,8 @@ export default function (state = {}, action) {
         mouseDownPos: action.data ? action.pos : state.mouseDownPos,
         mouseDownObject: action.downOn,
         isDragging: false,
-        isResizing: false
+        isResizing: false,
+        resizePoint: -1
       }
 
     case SET_DIAGRAM_DRAGGING:
@@ -61,6 +63,9 @@ export default function (state = {}, action) {
           return obj
         })
       }
+
+    case SET_DIAGRAM_RESIZING_POINT:
+      return { ...state, resizePoint: action.data }
 
     case SET_DIAGRAM_RESIZING:
       return { ...state, isResizing: action.data }

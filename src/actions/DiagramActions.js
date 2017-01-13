@@ -14,7 +14,8 @@ import {
 
   MOVE_DIAGRAM_SELECTED_OBJECTS,
 
-  SET_DIAGRAM_RESIZING
+  SET_DIAGRAM_RESIZING,
+  SET_DIAGRAM_RESIZING_POINT
 
 } from './types'
 
@@ -106,6 +107,15 @@ export function setDiagramResizing (resizing) {
     dispatch({
       type: SET_DIAGRAM_RESIZING,
       data: resizing
+    })
+  }
+}
+
+export function setDiagramResizingPoint (point) {
+  return dispatch => {
+    dispatch({
+      type: SET_DIAGRAM_RESIZING_POINT,
+      data: point
     })
   }
 }

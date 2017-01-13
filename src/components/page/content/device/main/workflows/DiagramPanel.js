@@ -52,7 +52,7 @@ class DiagramPanel extends React.Component {
   // ///////////////////////////////////////////////////
 
   onMouseDownHandlePoint (point, e) {
-
+    this.props.setDiagramResizingPoint(point)
   }
 
   // ///////////////////////////////////////////////////
@@ -70,8 +70,6 @@ class DiagramPanel extends React.Component {
   }
 
   onDraggingObject (e) {
-    const pos = this.convertEventPosition(e)
-    this.props.setDiagramCursorPos(pos)
   }
 
   onDragObjectEnd (e) {
@@ -85,29 +83,71 @@ class DiagramPanel extends React.Component {
 
   // ///////////////////////////////////////////////////
 
-  onMouseDownPanel (e) {
-    this.props.setDiagramMouseDown(true, this.convertEventPosition(e), '')
+  onResizeObjectStart (e) {
+    this.props.setDiagramResizing(true)
+  }
 
-    for (const className of e.target.classList) if (className === 'object' || className === 'handle-point') return
+  onResizeObject (e, offset) {
+    const { selected, resizePoint } = this.props
+    selected.forEach(obj => {
+
+    })
+  }
+
+  onResizeObjectEnd (e) {
+
+  }
+
+  // ///////////////////////////////////////////////////
+
+  onMouseDownPanel (e) {
+    let objectType = ''
+
+    for (const className of e.target.classList) {
+      if (className === 'object') objectType = 'object'
+      else if (className === 'resize-handle') objectType = 'resize-handle'
+    }
+
+    this.props.setDiagramMouseDown(true, this.convertEventPosition(e), objectType)
+    if (objectType) return
+
     this.props.selectDiagramObject(null)
   }
 
   onMouseMovePanel (e) {
-    const { isMouseDown, selected, isDragging } = this.props
+    const { isMouseDown, selected, isDragging, isResizing, mouseDownObject, cursorPos } = this.props
 
     // Object dragging
     if (e.buttons === 1 && isMouseDown && selected.length) {
-      if (!isDragging) this.onDragObjectStart(e)
-      this.onDraggingObject(e)
+
+      const pos = this.convertEventPosition(e)
+      const offset = {
+        x: pos.x - cursorPos.x,
+        y: pos.y - cursorPos.y
+      }
+
+      this.props.setDiagramCursorPos(pos)
+
+      if (mouseDownObject === 'object') {
+        if (!isDragging) this.onDragObjectStart(e)
+        this.onDraggingObject(e)
+      } else if (mouseDownObject === 'resize-handle') {
+        if (!isResizing) this.onResizeObjectStart(e)
+        this.onResizeObject(e, offset)
+      }
+
     } else {
-      if (isDragging) this.props.setDiagramMouseDown(false)
+      if (isDragging || isResizing) this.props.setDiagramMouseDown(false)
     }
   }
 
   onMouseUpPanel (e) {
-    const { isDragging } = this.props
+    const { isDragging, isResizing } = this.props
     if (isDragging) {
       this.onDragObjectEnd(e)
+    }
+    if (isResizing) {
+      this.onResizeObjectEnd(e)
     }
     this.props.setDiagramMouseDown(false)
   }
@@ -145,7 +185,7 @@ class DiagramPanel extends React.Component {
           handlePoints.map((p, index) =>
             <g key={index} style={{cursor: p.cursor}}>
               <image x={x + w * p.x - 8.5} y={y + h * p.y - 8.5}
-                className="handle-point"
+                className="resize-handle"
                 onMouseDown={this.onMouseDownHandlePoint.bind(this, index)}
                 width="17"
                 height="17"
