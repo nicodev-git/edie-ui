@@ -12,7 +12,8 @@ import {
   clearHoverDiagramObject,
   setHoverPoint,
   setDiagramMouseDown,
-  setDiagramDragging
+  setDiagramDragging,
+  setDiagramCursorPos
 } from 'actions'
 
 @connect(
@@ -27,7 +28,9 @@ import {
     hovered: state.diagram.hovered,
     hoverPoint: state.diagram.hoverPoint,
     isMouseDown: state.diagram.isMouseDown,
-    isDragging: state.diagram.isDragging
+    mouseDownPos: state.diagram.mouseDownPos,
+    isDragging: state.diagram.isDragging,
+    cursorPos: state.diagram.cursorPos
   }), {
     closeDeviceWfDiagramModal,
     addDiagramObject,
@@ -36,7 +39,8 @@ import {
     clearHoverDiagramObject,
     setHoverPoint,
     setDiagramMouseDown,
-    setDiagramDragging
+    setDiagramDragging,
+    setDiagramCursorPos
   }
 )
 export default class DiagramModalContainer extends React.Component {

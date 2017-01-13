@@ -31,7 +31,7 @@ class DiagramPanel extends React.Component {
 
   // //////////////////////////////////////////////////
 
-  onClickObject (obj, e) {
+  onClickObject (obj) {
     this.props.selectDiagramObject(obj)
   }
 
@@ -65,7 +65,7 @@ class DiagramPanel extends React.Component {
 
   onDraggingObject (e) {
     const pos = this.convertEventPosition(e)
-    this.props.setCursorPos()
+    this.props.setDiagramCursorPos(pos)
   }
 
   // ///////////////////////////////////////////////////
@@ -137,8 +137,8 @@ class DiagramPanel extends React.Component {
   }
 
   renderHovered () {
-    const { hovered, selected, hoverPoint } = this.props
-    if (!hovered) return null
+    const { hovered, selected, hoverPoint, isDragging } = this.props
+    if (!hovered || isDragging) return null
     if (selected && selected.filter(s => s.id === hovered.id).length > 0) return null
 
     const item = workflowItems[hovered.imgIndex]
@@ -173,6 +173,20 @@ class DiagramPanel extends React.Component {
     )
   }
 
+  renderDragging () {
+    const { isDragging, mouseDownPos, cursorPos, selected } = this.props
+    if (!isDragging) return null
+
+    const offsetX = cursorPos.x - mouseDownPos.x
+    const offsetY = cursorPos.y - mouseDownPos.y
+
+    return selected.map(obj =>
+      <g key={`dragging-${obj.id}`} style={{cursor: 'move'}}>
+        <rect x={obj.x + offsetX} y={obj.y + offsetY} width={obj.w} height={obj.h} fill="none" stroke="#00a8ff" strokeDasharray="3 3" pointerEvents="none"/>
+      </g>
+    )
+  }
+
   render () {
     const { connectDropTarget, backImg } = this.props
 
@@ -190,8 +204,11 @@ class DiagramPanel extends React.Component {
         onMouseUp={this.onMouseUpPanel.bind(this)}>
         <svg style={style} ref={this.onSvgRef.bind(this)}>
           {this.renderObjects()}
-          {this.renderSelected()}
-          {this.renderHovered()}
+          <g>
+            {this.renderSelected()}
+            {this.renderHovered()}
+            {this.renderDragging()}
+          </g>
         </svg>
 
       </div>

@@ -7,7 +7,8 @@ import {
   CLEAR_HOVER_DIAGRAM_OBJECT,
   SET_HOVER_POINT,
   SET_DIAGRAM_MOUSE_DOWN,
-  SET_DIAGRAM_DRAGGING
+  SET_DIAGRAM_DRAGGING,
+  SET_DIAGRAM_CURSOR_POS
 } from 'actions/types'
 
 export default function (state = {}, action) {
@@ -38,6 +39,9 @@ export default function (state = {}, action) {
 
     case SET_DIAGRAM_DRAGGING:
       return { ...state, isDragging: action.data }
+
+    case SET_DIAGRAM_CURSOR_POS:
+      return { ...state, cursorPos: action.data }
   }
   return state
 }

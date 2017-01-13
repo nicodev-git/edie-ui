@@ -10,7 +10,7 @@ import {
 
   SET_DIAGRAM_MOUSE_DOWN,
   SET_DIAGRAM_DRAGGING,
-  SET_DIAGRAM_SET_CURSOR
+  SET_DIAGRAM_CURSOR_POS
 
 } from './types'
 
@@ -81,7 +81,7 @@ export function setDiagramDragging (dragging) {
 export function setDiagramCursorPos (pos) {
   return dispatch => {
     dispatch({
-      type: SET_DIAGRAM_SET_CURSOR,
+      type: SET_DIAGRAM_CURSOR_POS,
       data: pos
     })
   }
