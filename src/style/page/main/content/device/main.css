@@ -8,7 +8,7 @@
 }
 .diagram .sidebar-item {
     display: inline-block;
-    width: 50%;
+    padding: 2px 4px;
     text-align: center;
 }
 .diagram .draw-panel {

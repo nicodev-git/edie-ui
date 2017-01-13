@@ -69,7 +69,7 @@ class DiagramModal extends React.Component {
         </div>
 
         <a href="javascript:void(0);" className="geTitle">General</a>
-        <div className="padding-sm-top">
+        <div style={{padding: '5px'}}>
           {workflowItems.map((m, index) =>
             <DiagramDragItem key={index} imgIndex={index}>
               <svg style={itemStyle}>{m.img}</svg>
