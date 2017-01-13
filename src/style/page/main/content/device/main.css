@@ -95,6 +95,14 @@
     overflow: hidden;
     text-overflow: ellipsis;
     line-height: 1.4em;
+    color: black;
+}
+
+.geTitle:hover,
+.geTitle:active,
+.geTitle:focus{
+    background: #e5e5e5;
+    color: black;
 }
 
 .mxDisabled {

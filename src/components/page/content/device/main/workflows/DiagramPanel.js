@@ -68,6 +68,15 @@ class DiagramPanel extends React.Component {
     this.props.setDiagramCursorPos(pos)
   }
 
+  onDragObjectEnd (e) {
+    const { mouseDownPos, cursorPos } = this.props
+
+    this.props.moveDiagramSelectedObjects({
+      x: cursorPos.x - mouseDownPos.x,
+      y: cursorPos.y - mouseDownPos.y
+    })
+  }
+
   // ///////////////////////////////////////////////////
 
   onMouseDownPanel (e) {
@@ -88,6 +97,10 @@ class DiagramPanel extends React.Component {
   }
 
   onMouseUpPanel (e) {
+    const { isDragging } = this.props
+    if (isDragging) {
+      this.onDragObjectEnd(e)
+    }
     this.props.setDiagramMouseDown(false)
   }
 
@@ -123,7 +136,7 @@ class DiagramPanel extends React.Component {
         {
           handlePoints.map((p, index) =>
             <g key={index} style={{cursor: p.cursor}}>
-              <image x={x + w * p.x - 8.5} y={y + h * p.y - 8.5} width="17" height="17" xmlnsXlink="http://www.w3.org/1999/xlink" xlinkHref="/images/handle.png" preserveAspectRatio="none"/>
+              <image x={x + w * p.x - 8.5} y={y + h * p.y - 8.5} width="17" height="17" href="/images/handle.png" preserveAspectRatio="none"/>
             </g>
           )
         }
@@ -182,9 +195,13 @@ class DiagramPanel extends React.Component {
 
     return selected.map(obj =>
       <g key={`dragging-${obj.id}`} style={{cursor: 'move'}}>
-        <rect x={obj.x + offsetX} y={obj.y + offsetY} width={obj.w} height={obj.h} fill="none" stroke="#00a8ff" strokeDasharray="3 3" pointerEvents="none"/>
+        <rect x={obj.x + offsetX} y={obj.y + offsetY} width={obj.w} height={obj.h} fill="none" stroke="#000000" strokeDasharray="3 3" pointerEvents="none"/>
       </g>
     )
+  }
+
+  renderDraggingHint () {
+    // <div class="geHint" style="white-space: nowrap; position: absolute; left: 1519px; top: 747px;">310, 140</div>
   }
 
   render () {
@@ -210,7 +227,7 @@ class DiagramPanel extends React.Component {
             {this.renderDragging()}
           </g>
         </svg>
-
+        {this.renderDraggingHint()}
       </div>
     )
   }

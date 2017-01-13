@@ -13,7 +13,8 @@ import {
   setHoverPoint,
   setDiagramMouseDown,
   setDiagramDragging,
-  setDiagramCursorPos
+  setDiagramCursorPos,
+  moveDiagramSelectedObjects
 } from 'actions'
 
 @connect(
@@ -40,7 +41,8 @@ import {
     setHoverPoint,
     setDiagramMouseDown,
     setDiagramDragging,
-    setDiagramCursorPos
+    setDiagramCursorPos,
+    moveDiagramSelectedObjects
   }
 )
 export default class DiagramModalContainer extends React.Component {

@@ -10,7 +10,9 @@ import {
 
   SET_DIAGRAM_MOUSE_DOWN,
   SET_DIAGRAM_DRAGGING,
-  SET_DIAGRAM_CURSOR_POS
+  SET_DIAGRAM_CURSOR_POS,
+
+  MOVE_DIAGRAM_SELECTED_OBJECTS
 
 } from './types'
 
@@ -83,6 +85,15 @@ export function setDiagramCursorPos (pos) {
     dispatch({
       type: SET_DIAGRAM_CURSOR_POS,
       data: pos
+    })
+  }
+}
+
+export function moveDiagramSelectedObjects (offset) {
+  return dispatch => {
+    dispatch({
+      type: MOVE_DIAGRAM_SELECTED_OBJECTS,
+      data: offset
     })
   }
 }

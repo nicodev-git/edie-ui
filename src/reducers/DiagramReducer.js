@@ -8,7 +8,8 @@ import {
   SET_HOVER_POINT,
   SET_DIAGRAM_MOUSE_DOWN,
   SET_DIAGRAM_DRAGGING,
-  SET_DIAGRAM_CURSOR_POS
+  SET_DIAGRAM_CURSOR_POS,
+  MOVE_DIAGRAM_SELECTED_OBJECTS
 } from 'actions/types'
 
 export default function (state = {}, action) {
@@ -42,6 +43,16 @@ export default function (state = {}, action) {
 
     case SET_DIAGRAM_CURSOR_POS:
       return { ...state, cursorPos: action.data }
+
+    case MOVE_DIAGRAM_SELECTED_OBJECTS:
+      return {
+        ...state,
+        selected: state.selected.map(obj => {
+          obj.x += action.data.x
+          obj.y += action.data.y
+          return obj
+        })
+      }
   }
   return state
 }
