@@ -31,7 +31,7 @@ class DiagramPanel extends React.Component {
 
   // //////////////////////////////////////////////////
 
-  onClickObject (obj) {
+  onMouseDownObject (obj) {
     this.props.selectDiagramObject(obj)
   }
 
@@ -44,6 +44,10 @@ class DiagramPanel extends React.Component {
   }
 
   // ///////////////////////////////////////////////////
+
+  onMouseDownLineHandle (point) {
+
+  }
 
   onMouseOverHoverPoint (object, point) {
     this.props.setHoverPoint(point)
@@ -103,6 +107,7 @@ class DiagramPanel extends React.Component {
     for (const className of e.target.classList) {
       if (className === 'object') objectType = 'object'
       else if (className === 'resize-handle') objectType = 'resize-handle'
+      else if (className === 'line-handle') objectType = 'line-handle'
     }
 
     this.props.setDiagramMouseDown(true, this.convertEventPosition(e), objectType)
@@ -153,7 +158,7 @@ class DiagramPanel extends React.Component {
     const ItemObject = workflowItems[obj.imgIndex].component || DRect
     const listeners = {
       className: 'object',
-      onMouseDown: this.onClickObject.bind(this, obj),
+      onMouseDown: this.onMouseDownObject.bind(this, obj),
       onMouseOver: this.onMouseOverObject.bind(this, obj)
     }
 
@@ -213,7 +218,9 @@ class DiagramPanel extends React.Component {
         <g key={i}>
           <image x={xy.x - 2.5} y={xy.y - 2.5}
             width="5" height="5" href="/images/point.gif" preserveAspectRatio="none"
+            className="line-handle"
             pointerEvents="all"
+            onMouseDown={this.onMouseDownLineHandle.bind(this, i)}
             onMouseOver={this.onMouseOverHoverPoint.bind(this, hovered, i)}/>
         </g>
       )
@@ -226,11 +233,20 @@ class DiagramPanel extends React.Component {
         )
       }
     }
+
+    const {x, y, w, h} = hovered
+
     return (
       <g pointerEvents="all"
         onMouseOut={this.onMouseOutObject.bind(this, hovered)}>
-        {points}
-        {hoverPointComp}
+        <g style={{cursor: 'move'}}>
+          <rect x={x - 10} y={y - 10} width={w + 20} height={h + 20} fill="none" stroke="transparent" className="object"
+            onMouseDown={this.onMouseDownObject.bind(this, hovered)}/>
+          {hoverPointComp}
+        </g>
+        <g>
+          {points}
+        </g>
       </g>
     )
   }
