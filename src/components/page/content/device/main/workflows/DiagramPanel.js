@@ -93,6 +93,8 @@ class DiagramPanel extends React.Component {
     if (e.buttons === 1 && isMouseDown && selected.length) {
       if (!isDragging) this.onDragObjectStart(e)
       this.onDraggingObject(e)
+    } else {
+      if (isDragging) this.props.setDiagramMouseDown(false)
     }
   }
 
@@ -201,7 +203,17 @@ class DiagramPanel extends React.Component {
   }
 
   renderDraggingHint () {
-    // <div class="geHint" style="white-space: nowrap; position: absolute; left: 1519px; top: 747px;">310, 140</div>
+    const { isDragging, mouseDownPos, cursorPos, selected } = this.props
+    if (!isDragging) return null
+
+    const {w, h} = selected[0]
+    const x = parseInt(selected[0].x + cursorPos.x - mouseDownPos.x)
+    const y = parseInt(selected[0].y + cursorPos.y - mouseDownPos.y)
+
+    const text = `${x}, ${y}`
+    return (
+      <div className="geHint" style={{left: `${x + w / 2 - 6.1 * text.length / 2 - 16}px`, top: `${y + h + 16}px`}}>{text}</div>
+    )
   }
 
   render () {
