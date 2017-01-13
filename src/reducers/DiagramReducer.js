@@ -16,7 +16,9 @@ import {
 
   SET_DIAGRAM_LINE_DRAWING,
   SET_DIAGRAM_LINE_START_POINT,
-  SET_DIAGRAM_LINE_END_POINT
+  SET_DIAGRAM_LINE_END_POINT,
+
+  ADD_DIAGRAM_LINE
 } from 'actions/types'
 
 export default function (state = {}, action) {
@@ -132,10 +134,13 @@ export default function (state = {}, action) {
       return { ...state, isLineDrawing: action.data }
 
     case SET_DIAGRAM_LINE_START_POINT:
-      return { ...state, lineStart: action.data }
+      return { ...state, lineStart: action.pos, lineStartObject: action.object, lineStartObjectPoint: action.connectionPoint }
 
     case SET_DIAGRAM_LINE_END_POINT:
       return { ...state, lineEnd: action.data }
+
+    case ADD_DIAGRAM_LINE:
+      return { ...state, lines: concat(state.lines, action.data), lastId: state.lastId + 1 }
   }
   return state
 }

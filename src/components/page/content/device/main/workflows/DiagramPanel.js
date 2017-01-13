@@ -45,10 +45,10 @@ class DiagramPanel extends React.Component {
 
   // ///////////////////////////////////////////////////
 
-  onMouseDownLineHandle (point, pos) {
+  onMouseDownLineHandle (point, pos, object) {
     console.log(`onMouseDownLineHandle ${point}`)
     this.props.setDiagramLineDrawing(true)
-    this.props.setDiagramLineStartPoint(pos)
+    this.props.setDiagramLineStartPoint(pos, object, point)
     this.props.setDiagramLineEndPoint(pos)
   }
 
@@ -114,7 +114,15 @@ class DiagramPanel extends React.Component {
   }
 
   onLineDrawEnd (e) {
-
+    const { hovered, hoverPoint, lineStartObject, lineStartObjectPoint, lastId } = this.props
+    if (!hovered || hoverPoint < 0) return
+    this.props.addDiagramLine({
+      id: lastId + 1,
+      startObject: lineStartObject,
+      startPoint: lineStartObjectPoint,
+      endObject: hovered,
+      endPoint: hoverPoint
+    })
   }
 
   // ///////////////////////////////////////////////////
@@ -200,6 +208,25 @@ class DiagramPanel extends React.Component {
     return objects.map(obj => this.renderObject(obj))
   }
 
+  renderLine (line) {
+
+    const startItem = workflowItems[line.startObject.imgIndex]
+    const startPos = startItem.getConnectionPoint(line.startObject, line.startPoint)
+    const endItem = workflowItems[line.endObject.imgIndex]
+    const endPos = endItem.getConnectionPoint(line.endObject, line.endPoint)
+
+    return (
+      <path key={`line-${line.id}`} d={`M ${startPos.x} ${startPos.y} L ${endPos.x} ${endPos.y} Z`} stroke="#000000"
+            fill="#ffffff" strokeMiterlimit="10"/>
+    )
+  }
+
+  renderLines () {
+    const { lines } = this.props
+
+    return lines.map(line => this.renderLine(line))
+  }
+
   renderDrawingLines () {
     const { isLineDrawing, lineStart, lineEnd } = this.props
     if (!isLineDrawing) return null
@@ -257,7 +284,7 @@ class DiagramPanel extends React.Component {
             width="5" height="5" href="/images/point.gif" preserveAspectRatio="none"
             className="line-handle"
             pointerEvents="all"
-            onMouseDown={this.onMouseDownLineHandle.bind(this, i, xy)}
+            onMouseDown={this.onMouseDownLineHandle.bind(this, i, xy, hovered)}
             onMouseOver={this.onMouseOverHoverPoint.bind(this, hovered, i)}/>
         </g>
       )

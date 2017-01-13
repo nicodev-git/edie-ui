@@ -145,11 +145,13 @@ export function setDiagramLineDrawing (isDrawing) {
   }
 }
 
-export function setDiagramLineStartPoint (point) {
+export function setDiagramLineStartPoint (pos, object, connectionPoint) {
   return dispatch => {
     dispatch({
       type: SET_DIAGRAM_LINE_START_POINT,
-      data: point
+      pos,
+      object,
+      connectionPoint
     })
   }
 }

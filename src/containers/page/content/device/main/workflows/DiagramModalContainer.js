@@ -20,7 +20,8 @@ import {
   resizeDiagramSelectedObjects,
   setDiagramLineDrawing,
   setDiagramLineStartPoint,
-  setDiagramLineEndPoint
+  setDiagramLineEndPoint,
+  addDiagramLine
 } from 'actions'
 
 @connect(
@@ -60,7 +61,8 @@ import {
     resizeDiagramSelectedObjects,
     setDiagramLineDrawing,
     setDiagramLineStartPoint,
-    setDiagramLineEndPoint
+    setDiagramLineEndPoint,
+    addDiagramLine
   }
 )
 export default class DiagramModalContainer extends React.Component {
