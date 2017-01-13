@@ -82,7 +82,7 @@ class DiagramPanel extends React.Component {
   onMouseDownPanel (e) {
     this.props.setDiagramMouseDown(true, this.convertEventPosition(e))
 
-    for (const className of e.target.classList) if (className === 'object') return
+    for (const className of e.target.classList) if (className === 'object' || className === 'handle-point') return
     this.props.selectDiagramObject(null)
   }
 
@@ -138,7 +138,9 @@ class DiagramPanel extends React.Component {
         {
           handlePoints.map((p, index) =>
             <g key={index} style={{cursor: p.cursor}}>
-              <image x={x + w * p.x - 8.5} y={y + h * p.y - 8.5} width="17" height="17" href="/images/handle.png" preserveAspectRatio="none"/>
+              <image x={x + w * p.x - 8.5} y={y + h * p.y - 8.5}
+                className="handle-point"
+                width="17" height="17" href="/images/handle.png" preserveAspectRatio="none"/>
             </g>
           )
         }
