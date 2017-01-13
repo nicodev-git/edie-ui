@@ -16,7 +16,8 @@ import {
   setDiagramCursorPos,
   moveDiagramSelectedObjects,
   setDiagramResizingPoint,
-  setDiagramResizing
+  setDiagramResizing,
+  resizeDiagramSelectedObjects
 } from 'actions'
 
 @connect(
@@ -49,7 +50,8 @@ import {
     setDiagramCursorPos,
     moveDiagramSelectedObjects,
     setDiagramResizingPoint,
-    setDiagramResizing
+    setDiagramResizing,
+    resizeDiagramSelectedObjects
   }
 )
 export default class DiagramModalContainer extends React.Component {

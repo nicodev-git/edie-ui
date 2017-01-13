@@ -87,11 +87,8 @@ class DiagramPanel extends React.Component {
     this.props.setDiagramResizing(true)
   }
 
-  onResizeObject (e, offset) {
-    const { selected, resizePoint } = this.props
-    selected.forEach(obj => {
-
-    })
+  onResizeObject (offset) {
+    this.props.resizeDiagramSelectedObjects(offset)
   }
 
   onResizeObjectEnd (e) {
@@ -119,7 +116,6 @@ class DiagramPanel extends React.Component {
 
     // Object dragging
     if (e.buttons === 1 && isMouseDown && selected.length) {
-
       const pos = this.convertEventPosition(e)
       const offset = {
         x: pos.x - cursorPos.x,
@@ -133,9 +129,8 @@ class DiagramPanel extends React.Component {
         this.onDraggingObject(e)
       } else if (mouseDownObject === 'resize-handle') {
         if (!isResizing) this.onResizeObjectStart(e)
-        this.onResizeObject(e, offset)
+        this.onResizeObject(offset)
       }
-
     } else {
       if (isDragging || isResizing) this.props.setDiagramMouseDown(false)
     }
