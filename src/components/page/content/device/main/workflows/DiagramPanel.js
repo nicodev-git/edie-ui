@@ -4,33 +4,14 @@ import {
 } from 'react-dnd'
 
 import { DragTypes } from 'shared/Global'
-
 import DRect from './diagram/DRect'
-import DRoundRect from './diagram/DRoundRect'
-import DEllipse from './diagram/DEllipse'
-import DDiamond from './diagram/DDiamond'
-import DParallel from './diagram/DParallel'
-import DTriangle from './diagram/DTriangle'
-
-import { workflowItems } from './DiagramItems'
+import { workflowItems, handlePoints } from './DiagramItems'
 
 function collect (connect) {
   return {
     connectDropTarget: connect.dropTarget()
   }
 }
-
-const objectComponents = [DRect, DRoundRect, DEllipse, DDiamond, DParallel, DTriangle]
-const handlePoints = [
-  {x: 0, y: 0, cursor: 'nw-resize'},
-  {x: 0.5, y: 0, cursor: 'n-resize'},
-  {x: 1, y: 0, cursor: 'ne-resize'},
-  {x: 0, y: 0.5, cursor: 'w-resize'},
-  {x: 1, y: 0.5, cursor: 'e-resize'},
-  {x: 0, y: 1, cursor: 'sw-resize'},
-  {x: 0.5, y: 1, cursor: 's-resize'},
-  {x: 1, y: 1, cursor: 'se-resize'}
-]
 
 const canvasTarget = {
   canDrop () {
@@ -78,7 +59,7 @@ class DiagramPanel extends React.Component {
   // ///////////////////////////////////////////////////
 
   renderObject (obj) {
-    const ItemObject = objectComponents[obj.imgIndex] || DRect
+    const ItemObject = workflowItems[obj.imgIndex].component || DRect
     const listeners = {
       className: 'object',
       onMouseDown: this.onClickObject.bind(this, obj),
