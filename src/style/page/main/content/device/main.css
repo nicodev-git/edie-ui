@@ -17,6 +17,11 @@
     background: whitesmoke;
 }
 
+.diagram .draw-sidebar {
+    background: whitesmoke;
+    width: 100px;
+}
+
 .diagram .toolbar-container {
     background: whiteSmoke;
     border-bottom: 1px solid #e0e0e0;

@@ -57,7 +57,7 @@ class DiagramModal extends React.Component {
 
   renderSidebar () {
     return (
-      <div style={{background: 'whiteSmoke'}}>
+      <div className="draw-sidebar">
         <div style={{display: 'block'}}>
           <div className="geSidebar" style={{boxSizing: 'border-box', overflow: 'hidden', width: '100%', padding: '14px 8px 0px'}}>
             <div style={{whiteSpace: 'nowrap', textOverflow: 'clip', paddingBottom: '8px', cursor: 'default'}}>
@@ -112,12 +112,9 @@ class DiagramModal extends React.Component {
         <div className="modal-body bootstrap-dialog-message p-none">
           <div className="diagram">
             {this.renderDragLayer()}
-
             {this.renderToolbar()}
-            <div className="col-md-2 p-none">
+            <div className="flex-horizontal">
               {this.renderSidebar()}
-            </div>
-            <div className="col-md-10 p-none">
               {this.renderPanel()}
             </div>
           </div>

@@ -272,7 +272,7 @@ table.table tbody tr.selected {
 
 /* Flex layout */
 
-.flex-vertical{
+.flex-vertical {
     display: -webkit-box;
     display: -webkit-flex;
     display: -ms-flexbox;
@@ -283,6 +283,11 @@ table.table tbody tr.selected {
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
     flex-direction: column;
+}
+
+.flex-horizontal {
+    display: flex;
+    flex-direction: row;
 }
 
 .flex-1,

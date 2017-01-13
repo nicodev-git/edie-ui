@@ -215,7 +215,7 @@ class DiagramPanel extends React.Component {
       backgroundColor: 'rgb(255, 255, 255)'
     }
     return connectDropTarget(
-      <div className="draw-panel"
+      <div className="draw-panel flex-1"
         onMouseDown={this.onMouseDownPanel.bind(this)}
         onMouseMove={this.onMouseMovePanel.bind(this)}
         onMouseUp={this.onMouseUpPanel.bind(this)}>
