@@ -40,13 +40,16 @@ class DiagramPanel extends React.Component {
   }
 
   onMouseOutObject (obj) {
+    //const {  } = this.props
     this.props.clearHoverDiagramObject(obj)
   }
 
   // ///////////////////////////////////////////////////
 
   onMouseDownLineHandle (point) {
+    console.log(`onMouseDownLineHandle ${point}`)
     this.props.setDiagramLineStartPoint(point)
+    this.props.setDiagramLineEndPoint(point)
   }
 
   onMouseOverHoverPoint (object, point) {
@@ -102,10 +105,12 @@ class DiagramPanel extends React.Component {
   // ///////////////////////////////////////////////////
 
   onLineDrawStart (e) {
+    console.log('onLineDrawStart')
     this.props.setDiagramLineDraw(true)
   }
 
   onLineDraw (pos) {
+    console.log('onLineDraw')
     this.props.setDiagramLineEndPoint(pos)
   }
 
@@ -123,6 +128,7 @@ class DiagramPanel extends React.Component {
       else if (className === 'line-handle') objectType = 'line-handle'
     }
 
+    console.log(`onMouseDownPanel ${objectType}`)
     this.props.setDiagramMouseDown(true, this.convertEventPosition(e), objectType)
     if (objectType) return
 
@@ -190,6 +196,16 @@ class DiagramPanel extends React.Component {
     const { objects } = this.props
 
     return objects.map(obj => this.renderObject(obj))
+  }
+
+  renderDrawingLines () {
+    const { isLineDrawing, lineStart, lineEnd } = this.props
+    if (!isLineDrawing) return null
+
+    return (
+      <path d={`M ${lineStart.x} ${lineStart.y} L ${lineEnd.x} ${lineEnd.y} Z`} stroke="#000000"
+            fill="#ffffff" strokeMiterlimit="10"/>
+    )
   }
 
   renderSelection (obj) {
@@ -314,7 +330,11 @@ class DiagramPanel extends React.Component {
         onMouseMove={this.onMouseMovePanel.bind(this)}
         onMouseUp={this.onMouseUpPanel.bind(this)}>
         <svg style={style} ref={this.onSvgRef.bind(this)}>
-          {this.renderObjects()}
+          <g>
+            {this.renderObjects()}
+            {this.renderDrawingLines()}
+          </g>
+
           <g>
             {this.renderSelected()}
             {this.renderHovered()}
