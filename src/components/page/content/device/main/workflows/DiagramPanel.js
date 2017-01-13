@@ -46,14 +46,22 @@ class DiagramPanel extends React.Component {
   // ///////////////////////////////////////////////////
 
   onMouseDownPanel (e) {
+    this.props.setDiagramMouseDown(true)
+
     for (const className of e.target.classList) if (className === 'object') return
     this.props.selectDiagramObject(null)
   }
 
   onMouseMovePanel (e) {
-    if (e.buttons === 1) {
-      console.log('drag')
+    const { isMouseDown, selected } = this.props
+    // Object dragging
+    if (e.buttons === 1 && isMouseDown && selected) {
+
     }
+  }
+
+  onMouseUpPanel (e) {
+    this.props.setDiagramMouseDown(false)
   }
 
   // ///////////////////////////////////////////////////
@@ -149,7 +157,10 @@ class DiagramPanel extends React.Component {
       backgroundColor: 'rgb(255, 255, 255)'
     }
     return connectDropTarget(
-      <div className="draw-panel" onMouseDown={this.onMouseDownPanel.bind(this)} onMouseMove={this.onMouseMovePanel.bind(this)}>
+      <div className="draw-panel"
+        onMouseDown={this.onMouseDownPanel.bind(this)}
+        onMouseMove={this.onMouseMovePanel.bind(this)}
+        onMouseUp={this.onMouseUpPanel.bind(this)}>
         <svg style={style}>
           {this.renderObjects()}
           {this.renderSelected()}

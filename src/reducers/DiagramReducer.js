@@ -5,7 +5,10 @@ import {
   SELECT_DIAGRAM_OBJECT,
   SET_HOVER_DIAGRAM_OBJECT,
   CLEAR_HOVER_DIAGRAM_OBJECT,
-  SET_HOVER_POINT
+  SET_HOVER_POINT,
+  SET_DIAGRAM_MOUSE_DOWN,
+  SET_DIAGRAM_DRAGGING
+
 } from 'actions/types'
 
 export default function (state = {}, action) {
@@ -30,6 +33,12 @@ export default function (state = {}, action) {
 
     case SET_HOVER_POINT:
       return { ...state, hoverPoint: action.data }
+
+    case SET_DIAGRAM_MOUSE_DOWN:
+      return { ...state, isMouseDown: action.data }
+
+    case SET_DIAGRAM_DRAGGING:
+      return { ...state, isDragging: action.data }
   }
   return state
 }

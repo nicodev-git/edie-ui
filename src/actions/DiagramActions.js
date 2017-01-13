@@ -6,7 +6,10 @@ import {
   SET_HOVER_DIAGRAM_OBJECT,
   CLEAR_HOVER_DIAGRAM_OBJECT,
 
-  SET_HOVER_POINT
+  SET_HOVER_POINT,
+
+  SET_DIAGRAM_MOUSE_DOWN,
+  SET_DIAGRAM_DRAGGING
 
 } from './types'
 
@@ -51,6 +54,24 @@ export function setHoverPoint (point) {
     dispatch({
       type: SET_HOVER_POINT,
       data: point
+    })
+  }
+}
+
+export function setDiagramMouseDown (isDown) {
+  return dispatch => {
+    dispatch({
+      type: SET_DIAGRAM_MOUSE_DOWN,
+      data: isDown
+    })
+  }
+}
+
+export function setDiagramDragging (dragging) {
+  return dispatch => {
+    dispatch({
+      type: SET_DIAGRAM_DRAGGING,
+      data: dragging
     })
   }
 }
