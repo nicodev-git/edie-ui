@@ -209,7 +209,6 @@ class DiagramPanel extends React.Component {
   }
 
   renderLine (line) {
-
     const startItem = workflowItems[line.startObject.imgIndex]
     const startPos = startItem.getConnectionPoint(line.startObject, line.startPoint)
     const endItem = workflowItems[line.endObject.imgIndex]
@@ -217,7 +216,7 @@ class DiagramPanel extends React.Component {
 
     return (
       <path key={`line-${line.id}`} d={`M ${startPos.x} ${startPos.y} L ${endPos.x} ${endPos.y} Z`} stroke="#000000"
-            fill="#ffffff" strokeMiterlimit="10"/>
+        fill="#ffffff" strokeMiterlimit="10"/>
     )
   }
 
