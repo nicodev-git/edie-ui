@@ -83,6 +83,41 @@ export default function (state = {}, action) {
               obj.w -= action.data.x
               obj.h -= action.data.y
               break
+
+            case 1:
+              obj.y += action.data.y
+              obj.h -= action.data.y
+              break
+
+            case 2:
+              obj.y += action.data.y
+              obj.w += action.data.x
+              obj.h -= action.data.y
+              break
+
+            case 3:
+              obj.x += action.data.x
+              obj.w -= action.data.x
+              break
+
+            case 4:
+              obj.w += action.data.x
+              break
+
+            case 5:
+              obj.x += action.data.x
+              obj.w -= action.data.x
+              obj.h += action.data.y
+              break
+
+            case 6:
+              obj.h += action.data.y
+              break
+
+            case 7:
+              obj.w += action.data.x
+              obj.h += action.data.y
+              break
           }
           return obj
         })
