@@ -51,6 +51,12 @@ class DiagramPanel extends React.Component {
 
   // ///////////////////////////////////////////////////
 
+  onMouseDownHandlePoint (point, e) {
+
+  }
+
+  // ///////////////////////////////////////////////////
+
   convertEventPosition (e) {
     const rt = this.svgEl.getClientRects()[0]
     return {
@@ -80,7 +86,7 @@ class DiagramPanel extends React.Component {
   // ///////////////////////////////////////////////////
 
   onMouseDownPanel (e) {
-    this.props.setDiagramMouseDown(true, this.convertEventPosition(e))
+    this.props.setDiagramMouseDown(true, this.convertEventPosition(e), '')
 
     for (const className of e.target.classList) if (className === 'object' || className === 'handle-point') return
     this.props.selectDiagramObject(null)
@@ -140,7 +146,11 @@ class DiagramPanel extends React.Component {
             <g key={index} style={{cursor: p.cursor}}>
               <image x={x + w * p.x - 8.5} y={y + h * p.y - 8.5}
                 className="handle-point"
-                width="17" height="17" href="/images/handle.png" preserveAspectRatio="none"/>
+                onMouseDown={this.onMouseDownHandlePoint.bind(this, index)}
+                width="17"
+                height="17"
+                href="/images/handle.png"
+                preserveAspectRatio="none"/>
             </g>
           )
         }

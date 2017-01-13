@@ -12,7 +12,9 @@ import {
   SET_DIAGRAM_DRAGGING,
   SET_DIAGRAM_CURSOR_POS,
 
-  MOVE_DIAGRAM_SELECTED_OBJECTS
+  MOVE_DIAGRAM_SELECTED_OBJECTS,
+
+  SET_DIAGRAM_RESIZING
 
 } from './types'
 
@@ -61,12 +63,13 @@ export function setHoverPoint (point) {
   }
 }
 
-export function setDiagramMouseDown (isDown, pos) {
+export function setDiagramMouseDown (isDown, pos, downOn) {
   return dispatch => {
     dispatch({
       type: SET_DIAGRAM_MOUSE_DOWN,
       data: isDown,
-      pos: pos
+      pos,
+      downOn
     })
   }
 }
@@ -94,6 +97,15 @@ export function moveDiagramSelectedObjects (offset) {
     dispatch({
       type: MOVE_DIAGRAM_SELECTED_OBJECTS,
       data: offset
+    })
+  }
+}
+
+export function setDiagramResizing (resizing) {
+  return dispatch => {
+    dispatch({
+      type: SET_DIAGRAM_RESIZING,
+      data: resizing
     })
   }
 }

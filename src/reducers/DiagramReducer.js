@@ -9,14 +9,15 @@ import {
   SET_DIAGRAM_MOUSE_DOWN,
   SET_DIAGRAM_DRAGGING,
   SET_DIAGRAM_CURSOR_POS,
-  MOVE_DIAGRAM_SELECTED_OBJECTS
+  MOVE_DIAGRAM_SELECTED_OBJECTS,
+  SET_DIAGRAM_RESIZING
 } from 'actions/types'
 
 export default function (state = {}, action) {
   switch (action.type) {
 
     case OPEN_DEVICE_WF_DIAGRAM_MODAL:
-      return { ...state, objects: [], lastId: 100, selected: [], hovered: null, isDragging: false }
+      return { ...state, objects: [], lastId: 100, selected: [], hovered: null, isDragging: false, isResizing: false }
 
     case ADD_DIAGRAM_OBJECT:
       return { ...state, objects: concat(state.objects, action.data), lastId: state.lastId + 1 }
@@ -36,7 +37,14 @@ export default function (state = {}, action) {
       return { ...state, hoverPoint: action.data }
 
     case SET_DIAGRAM_MOUSE_DOWN:
-      return { ...state, isMouseDown: action.data, mouseDownPos: action.data ? action.pos : state.mouseDownPos, isDragging: false }
+      return {
+        ...state,
+        isMouseDown: action.data,
+        mouseDownPos: action.data ? action.pos : state.mouseDownPos,
+        mouseDownObject: action.downOn,
+        isDragging: false,
+        isResizing: false
+      }
 
     case SET_DIAGRAM_DRAGGING:
       return { ...state, isDragging: action.data }
@@ -53,6 +61,9 @@ export default function (state = {}, action) {
           return obj
         })
       }
+
+    case SET_DIAGRAM_RESIZING:
+      return { ...state, isResizing: action.data }
   }
   return state
 }

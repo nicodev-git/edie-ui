@@ -14,7 +14,8 @@ import {
   setDiagramMouseDown,
   setDiagramDragging,
   setDiagramCursorPos,
-  moveDiagramSelectedObjects
+  moveDiagramSelectedObjects,
+  setDiagramResizing
 } from 'actions'
 
 @connect(
@@ -31,7 +32,8 @@ import {
     isMouseDown: state.diagram.isMouseDown,
     mouseDownPos: state.diagram.mouseDownPos,
     isDragging: state.diagram.isDragging,
-    cursorPos: state.diagram.cursorPos
+    cursorPos: state.diagram.cursorPos,
+    isResizing: state.diagram.isResizing
   }), {
     closeDeviceWfDiagramModal,
     addDiagramObject,
@@ -42,7 +44,8 @@ import {
     setDiagramMouseDown,
     setDiagramDragging,
     setDiagramCursorPos,
-    moveDiagramSelectedObjects
+    moveDiagramSelectedObjects,
+    setDiagramResizing
   }
 )
 export default class DiagramModalContainer extends React.Component {
