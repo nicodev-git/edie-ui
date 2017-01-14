@@ -52,13 +52,6 @@ class DiagramPanel extends React.Component {
 
   // ///////////////////////////////////////////////////
 
-  onMouseDownLineHandle (point, pos, object) {
-    console.log(`onMouseDownLineHandle ${point}`)
-    this.props.setDiagramLineDrawing(true)
-    this.props.setDiagramLineStartPoint(pos, object, point)
-    this.props.setDiagramLineEndPoint(null)
-  }
-
   onMouseOverHoverPoint (object, point) {
     this.props.setHoverPoint(point)
   }
@@ -111,13 +104,21 @@ class DiagramPanel extends React.Component {
 
   // ///////////////////////////////////////////////////
 
+  onMouseDownLineHandle (point, pos, object) {
+    console.log(`onMouseDownLineHandle ${point}`)
+    this.props.setDiagramLineDrawing(true)
+    this.props.setDiagramLineStartPoint(pos, object, point)
+    this.props.setDiagramLineEndPoint(null)
+  }
+
   onLineDrawStart (e) {
     console.log('onLineDrawStart')
     this.props.setDiagramLineDraw(true)
   }
 
   onLineDraw (pos) {
-    this.props.setDiagramLineEndPoint(pos)
+    const { hovered, hoverPoint } = this.props
+    this.props.setDiagramLineEndPoint(pos, hovered, hoverPoint)
   }
 
   onLineDrawEnd (e) {
@@ -248,14 +249,14 @@ class DiagramPanel extends React.Component {
     const { isLineDrawing, lineStart, lineEnd, lineStartObjectPoint } = this.props
     if (!isLineDrawing) return null
 
-    const points = []
-
+    const points = [{ x: lineStart.x, y: lineStart.y }]
     if (lineStartObjectPoint > 4) {
       points.push({ x: lineStart.x, y: lineStart.y + 15 })
     } else if (lineStartObjectPoint < 3) {
       points.push({ x: lineStart.x, y: lineStart.y - 15 })
     }
 
+    // let point = points[points.length - 1]
 
     return (
       <path d={`M ${lineStart.x} ${lineStart.y} L ${lineEnd.x} ${lineEnd.y} Z`} stroke="#000000"

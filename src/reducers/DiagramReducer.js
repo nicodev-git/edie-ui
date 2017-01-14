@@ -147,7 +147,7 @@ export default function (state = {}, action) {
       return { ...state, lineStart: action.pos, lineStartObject: action.object, lineStartObjectPoint: action.connectionPoint }
 
     case SET_DIAGRAM_LINE_END_POINT:
-      return { ...state, lineEnd: action.data }
+      return { ...state, lineEnd: action.pos, lineEndObject: action.object, lineEndObjectPoint: action.connectionPoint }
 
     case ADD_DIAGRAM_LINE:
       return { ...state, lines: concat(state.lines, action.data), lastId: state.lastId + 1 }
