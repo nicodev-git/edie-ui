@@ -245,8 +245,16 @@ class DiagramPanel extends React.Component {
   }
 
   renderDrawingLines () {
-    const { isLineDrawing, lineStart, lineEnd } = this.props
+    const { isLineDrawing, lineStart, lineEnd, lineStartObjectPoint } = this.props
     if (!isLineDrawing) return null
+
+    const points = []
+
+    if (lineStartObjectPoint >= 2) {
+      points.push({ x: lineStart.x, y: lineStart.y - 15 })
+    } else {
+      points.push({ x: lineStart.x, y: lineStart.y + 15 })
+    }
 
     return (
       <path d={`M ${lineStart.x} ${lineStart.y} L ${lineEnd.x} ${lineEnd.y} Z`} stroke="#000000"
