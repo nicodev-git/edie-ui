@@ -21,7 +21,10 @@ import {
   setDiagramLineDrawing,
   setDiagramLineStartPoint,
   setDiagramLineEndPoint,
-  addDiagramLine
+  addDiagramLine,
+
+  openDiagramObjectModal,
+  closeDiagramObjectModal
 } from 'actions'
 
 @connect(
@@ -48,7 +51,10 @@ import {
     lineStart: state.diagram.lineStart,
     lineEnd: state.diagram.lineEnd,
     lineStartObject: state.diagram.lineStartObject,
-    lineStartObjectPoint: state.diagram.lineStartObjectPoint
+    lineStartObjectPoint: state.diagram.lineStartObjectPoint,
+
+    objectModalOpen: state.diagram.objectModalOpen,
+    objectConfig: state.diagram.objectConfig
   }), {
     closeDeviceWfDiagramModal,
     addDiagramObject,
@@ -66,7 +72,10 @@ import {
     setDiagramLineDrawing,
     setDiagramLineStartPoint,
     setDiagramLineEndPoint,
-    addDiagramLine
+    addDiagramLine,
+
+    openDiagramObjectModal,
+    closeDiagramObjectModal
   }
 )
 export default class DiagramModalContainer extends React.Component {

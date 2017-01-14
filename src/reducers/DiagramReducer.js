@@ -19,7 +19,10 @@ import {
   SET_DIAGRAM_LINE_START_POINT,
   SET_DIAGRAM_LINE_END_POINT,
 
-  ADD_DIAGRAM_LINE
+  ADD_DIAGRAM_LINE,
+
+  OPEN_DIAGRAM_OBJECT_MODAL,
+  CLOSE_DIAGRAM_OBJECT_MODAL
 } from 'actions/types'
 
 export default function (state = {}, action) {
@@ -146,6 +149,12 @@ export default function (state = {}, action) {
 
     case ADD_DIAGRAM_LINE:
       return { ...state, lines: concat(state.lines, action.data), lastId: state.lastId + 1 }
+
+    case OPEN_DIAGRAM_OBJECT_MODAL:
+      return { ...state, objectModalOpen: true, objectConfig: action.config }
+
+    case CLOSE_DIAGRAM_OBJECT_MODAL:
+      return { ...state, objectModalOpen: false }
   }
   return state
 }

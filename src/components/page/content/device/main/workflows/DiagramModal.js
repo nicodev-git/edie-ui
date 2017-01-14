@@ -8,6 +8,8 @@ import DiagramToolbar from './DiagramToolbar'
 import { workflowItems } from './DiagramItems'
 import { DiagramTypes } from 'shared/Global'
 
+import DiagramObjectModal from './DiagramObjectModal'
+
 const itemStyle = {
   width: '36px',
   height: '36px'
@@ -46,7 +48,8 @@ class DiagramModal extends React.Component {
       type: DiagramTypes.OBJECT
     }
 
-    this.props.addDiagramObject(object)
+    this.props.openDiagramObjectModal(object)
+    // this.props.addDiagramObject(object)
   }
 
   // ////////////////////////////////////////////////////
@@ -96,6 +99,17 @@ class DiagramModal extends React.Component {
     )
   }
 
+  renderObjectModal () {
+    if (!this.props.objectModalOpen) return null
+
+    const { closeDiagramObjectModal, objectConfig } = this.props
+    return (
+      <DiagramObjectModal
+        closeModal={closeDiagramObjectModal}
+        objectConfig={objectConfig}/>
+    )
+  }
+
   render () {
     return (
       <Modal
@@ -120,6 +134,8 @@ class DiagramModal extends React.Component {
               {this.renderPanel()}
             </div>
           </div>
+
+          {this.renderObjectModal()}
 
           <div className="text-right panel-footer">
             <a href="javascript:;" className="btn btn-primary btn-sm margin-sm-right" onClick={this.onClickSave.bind(this)}>OK</a>

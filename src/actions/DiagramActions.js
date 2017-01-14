@@ -22,7 +22,10 @@ import {
   SET_DIAGRAM_LINE_START_POINT,
   SET_DIAGRAM_LINE_END_POINT,
 
-  ADD_DIAGRAM_LINE
+  ADD_DIAGRAM_LINE,
+
+  OPEN_DIAGRAM_OBJECT_MODAL,
+  CLOSE_DIAGRAM_OBJECT_MODAL
 
 } from './types'
 
@@ -170,6 +173,23 @@ export function addDiagramLine (line) {
     dispatch({
       type: ADD_DIAGRAM_LINE,
       data: line
+    })
+  }
+}
+
+export function openDiagramObjectModal (config) {
+  return dispatch => {
+    dispatch({
+      type: OPEN_DIAGRAM_OBJECT_MODAL,
+      config
+    })
+  }
+}
+
+export function closeDiagramObjectModal () {
+  return dispatch => {
+    dispatch({
+      type: CLOSE_DIAGRAM_OBJECT_MODAL
     })
   }
 }
