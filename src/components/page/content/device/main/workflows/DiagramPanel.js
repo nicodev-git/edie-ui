@@ -130,9 +130,9 @@ class DiagramPanel extends React.Component {
 
   // ///////////////////////////////////////////////////
 
-  onMouseDownLine (e) {
-    console.log('onMouseDownObject')
-    // this.props.selectDiagramObject(obj)
+  onMouseDownLine (line, e) {
+    console.log('onMouseDownLine')
+    this.props.selectDiagramObject(line)
   }
 
   // ///////////////////////////////////////////////////
@@ -225,9 +225,9 @@ class DiagramPanel extends React.Component {
       <g key={`line-${line.id}`} style={{cursor: 'move'}}>
         <path d={`M ${startPos.x} ${startPos.y} L ${endPos.x} ${endPos.y} Z`} stroke="white"
           strokeMiterlimit="10" pointerEvents="stroke" visibility="hidden" strokeWidth="9"
-          onMouseDown={this.onMouseDownLine.bind(this)}/>
-        <path d={`M ${startPos.x} ${startPos.y} L ${endPos.x} ${endPos.y} Z`} stroke="#000000"
-          fill="#ffffff" strokeMiterlimit="10"/>
+          onMouseDown={this.onMouseDownLine.bind(this, line)}/>
+        <line x1={startPos.x} y1={startPos.y} x2={endPos.x} y2={endPos.y} stroke="#000000"
+          fill="#ffffff" strokeMiterlimit="10" markerEnd="url(#arrowEnd)"/>
       </g>
     )
   }
@@ -251,28 +251,32 @@ class DiagramPanel extends React.Component {
   renderSelection (obj) {
     const { x, y, w, h, type } = obj
 
-    if (type !== DiagramTypes.OBJECT) return null
-
-    return (
-      <g key={`sel-${obj.id}`}>
-        <g style={{cursor: 'move'}}>
-          <rect x={x} y={y} width={w} height={h} fill="none" stroke="#00a8ff" strokeDasharray="3 3" pointerEvents="none"/>
+    if (type === DiagramTypes.OBJECT) {
+      return (
+        <g key={`sel-${obj.id}`}>
+          <g style={{cursor: 'move'}}>
+            <rect x={x} y={y} width={w} height={h} fill="none" stroke="#00a8ff" strokeDasharray="3 3" pointerEvents="none"/>
+          </g>
+          {
+            handlePoints.map((p, index) =>
+              <g key={index} style={{cursor: p.cursor}}>
+                <image x={x + w * p.x - 8.5} y={y + h * p.y - 8.5}
+                  className="resize-handle"
+                  onMouseDown={this.onMouseDownHandlePoint.bind(this, index)}
+                  width="17"
+                  height="17"
+                  href="/images/handle.png"
+                  preserveAspectRatio="none"/>
+              </g>
+            )
+          }
         </g>
-        {
-          handlePoints.map((p, index) =>
-            <g key={index} style={{cursor: p.cursor}}>
-              <image x={x + w * p.x - 8.5} y={y + h * p.y - 8.5}
-                className="resize-handle"
-                onMouseDown={this.onMouseDownHandlePoint.bind(this, index)}
-                width="17"
-                height="17"
-                href="/images/handle.png"
-                preserveAspectRatio="none"/>
-            </g>
-          )
-        }
-      </g>
-    )
+      )
+    } else if (type === DiagramTypes.LINE) {
+      return (
+        <g key={`sel-${obj.id}`} />
+      )
+    }
   }
 
   renderSelected () {
@@ -315,7 +319,7 @@ class DiagramPanel extends React.Component {
 
     return (
       <g pointerEvents="all"
-        onMouseOut={this.onMouseOutObject.bind(this, hovered)}>
+        onMouseLeave={this.onMouseOutObject.bind(this, hovered)}>
         <g style={{cursor: 'move'}}>
           <rect x={x - 10} y={y - 10} width={w + 20} height={h + 20} fill="none" stroke="transparent" className="object"
             onMouseDown={this.onMouseDownObject.bind(this, hovered)}/>
@@ -357,6 +361,16 @@ class DiagramPanel extends React.Component {
     )
   }
 
+  renderDefs () {
+    return (
+      <defs>
+        <marker colorid="RGB(0,0,0)" id="arrowEnd" viewBox="0 0 8000 8000" refX="280" refY="150" markerUnits="strokeWidth" markerWidth="300" markerHeight="300" orient="auto" fill="RGB(0,0,0)" strokeLinejoin="bevel">
+          <path stroke="RGB(0,0,0)" strokeWidth="5" d="M2 59,293 148,1 243,121 151,Z"/>
+        </marker>
+      </defs>
+    )
+  }
+
   render () {
     const { connectDropTarget, backImg } = this.props
 
@@ -373,6 +387,7 @@ class DiagramPanel extends React.Component {
         onMouseMove={this.onMouseMovePanel.bind(this)}
         onMouseUp={this.onMouseUpPanel.bind(this)}>
         <svg style={style} ref={this.onSvgRef.bind(this)}>
+          {this.renderDefs()}
           {this.renderLines()}
           {this.renderObjects()}
           {this.renderDrawingLines()}
