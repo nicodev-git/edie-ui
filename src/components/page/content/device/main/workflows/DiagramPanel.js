@@ -110,7 +110,7 @@ class DiagramPanel extends React.Component {
     console.log(`onMouseDownLineHandle ${point}`)
     this.props.setDiagramLineDrawing(true)
     this.props.setDiagramLineStartPoint(pos, object, point)
-    this.props.setDiagramLineEndPoint(null)
+    this.props.setDiagramLineEndPoint(null, null, -1)
   }
 
   onLineDrawStart (e) {
@@ -248,21 +248,18 @@ class DiagramPanel extends React.Component {
   }
 
   renderDrawingLines () {
-    const { isLineDrawing, lineStart, lineEnd, lineStartObjectPoint } = this.props
+    const { isLineDrawing, lineStart, lineEnd, lineStartObjectPoint, lineEndObjectPoint } = this.props
     if (!isLineDrawing || !lineEnd) return null
 
-    const points = [{ x: lineStart.x, y: lineStart.y }]
-    if (lineStartObjectPoint > 4) {
-      points.push({ x: lineStart.x, y: lineStart.y + 15 })
-    } else if (lineStartObjectPoint < 3) {
-      points.push({ x: lineStart.x, y: lineStart.y - 15 })
+    if (lineEndObjectPoint < 0) {
+      return (
+        <path d={`M ${lineStart.x} ${lineStart.y} L ${lineEnd.x} ${lineEnd.y}`} stroke="#000000"
+          fill="#ffffff" strokeMiterlimit="10"/>
+      )
     }
-
-    // let point = points[points.length - 1]
-
+    const points = findStepLines(lineStart, lineStartObjectPoint, lineEnd, lineEndObjectPoint)
     return (
-      <path d={`M ${lineStart.x} ${lineStart.y} L ${lineEnd.x} ${lineEnd.y} Z`} stroke="#000000"
-        fill="#ffffff" strokeMiterlimit="10"/>
+      <path d={`M ${points.map(p => `${p.x} ${p.y}`).join(' L ')}`} stroke="#000000" fill="#ffffff" strokeMiterlimit="10"/>
     )
   }
 

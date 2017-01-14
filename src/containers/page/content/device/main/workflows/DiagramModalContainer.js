@@ -52,6 +52,8 @@ import {
     lineEnd: state.diagram.lineEnd,
     lineStartObject: state.diagram.lineStartObject,
     lineStartObjectPoint: state.diagram.lineStartObjectPoint,
+    lineEndObject: state.diagram.lineEndObject,
+    lineEndObjectPoint: state.diagram.lineEndObjectPoint,
 
     objectModalOpen: state.diagram.objectModalOpen,
     objectConfig: state.diagram.objectConfig
