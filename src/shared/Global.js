@@ -10,6 +10,11 @@ export const DragTypes = {
   WORKFLOW: 'workflow'
 }
 
+export const DiagramTypes = {
+  OBJECT: 'object',
+  LINE: 'line'
+}
+
 export const lineTypes = [{
   title: 'Lightning',
   image: '/images/light.svg',

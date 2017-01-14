@@ -3,7 +3,7 @@ import {
   DropTarget
 } from 'react-dnd'
 
-import { DragTypes } from 'shared/Global'
+import { DragTypes, DiagramTypes } from 'shared/Global'
 import DRect from './diagram/DRect'
 import { workflowItems, handlePoints } from './DiagramItems'
 
@@ -118,6 +118,7 @@ class DiagramPanel extends React.Component {
     if (!hovered || hoverPoint < 0) return
     this.props.addDiagramLine({
       id: lastId + 1,
+      type: DiagramTypes.LINE,
       startObject: lineStartObject,
       startPoint: lineStartObjectPoint,
       endObject: hovered,
@@ -143,7 +144,7 @@ class DiagramPanel extends React.Component {
   }
 
   onMouseMovePanel (e) {
-    const { isMouseDown, selected, isDragging, isResizing, isLineDrawing, mouseDownObject, cursorPos } = this.props
+    const { isMouseDown, isDragging, isResizing, isLineDrawing, mouseDownObject, cursorPos } = this.props
 
     // Object dragging
     if (e.buttons === 1 && isMouseDown) {
@@ -155,21 +156,17 @@ class DiagramPanel extends React.Component {
 
       this.props.setDiagramCursorPos(pos)
 
-      if (selected.length) {
-        if (mouseDownObject === 'object') {
-          if (!isDragging) this.onDragObjectStart(e)
-          this.onDraggingObject(e)
-        } else if (mouseDownObject === 'resize-handle') {
-          if (!isResizing) this.onResizeObjectStart(e)
-          this.onResizeObject(offset)
-        }
-      } else if (isLineDrawing) {
-        if (mouseDownObject === 'line-handle') {
-          this.onLineDraw(cursorPos)
-        }
+      if (mouseDownObject === 'object') {
+        if (!isDragging) this.onDragObjectStart(e)
+        this.onDraggingObject(e)
+      } else if (mouseDownObject === 'resize-handle') {
+        if (!isResizing) this.onResizeObjectStart(e)
+        this.onResizeObject(offset)
+      } else if (mouseDownObject === 'line-handle') {
+        this.onLineDraw(cursorPos)
       }
     } else {
-      if (isDragging || isResizing) this.props.setDiagramMouseDown(false)
+      if (isDragging || isResizing || isLineDrawing) this.props.setDiagramMouseDown(false)
     }
   }
 
@@ -241,7 +238,9 @@ class DiagramPanel extends React.Component {
   }
 
   renderSelection (obj) {
-    const { x, y, w, h } = obj
+    const { x, y, w, h, type } = obj
+
+    if (type !== DiagramTypes.OBJECT) return null
 
     return (
       <g key={`sel-${obj.id}`}>
@@ -325,7 +324,7 @@ class DiagramPanel extends React.Component {
     const offsetX = cursorPos.x - mouseDownPos.x
     const offsetY = cursorPos.y - mouseDownPos.y
 
-    return selected.map(obj =>
+    return selected.filter(obj => obj.type === DiagramTypes.OBJECT).map(obj =>
       <g key={`dragging-${obj.id}`} style={{cursor: 'move'}}>
         <rect x={obj.x + offsetX} y={obj.y + offsetY} width={obj.w} height={obj.h} fill="none" stroke="#000000" strokeDasharray="3 3" pointerEvents="none"/>
       </g>
@@ -336,9 +335,10 @@ class DiagramPanel extends React.Component {
     const { isDragging, mouseDownPos, cursorPos, selected } = this.props
     if (!isDragging) return null
 
-    const {w, h} = selected[0]
-    const x = parseInt(selected[0].x + cursorPos.x - mouseDownPos.x)
-    const y = parseInt(selected[0].y + cursorPos.y - mouseDownPos.y)
+    const object = selected.filter(obj => obj.type === DiagramTypes.OBJECT)[0]
+    const {w, h} = object
+    const x = parseInt(object.x + cursorPos.x - mouseDownPos.x)
+    const y = parseInt(object.y + cursorPos.y - mouseDownPos.y)
 
     const text = `${x}, ${y}`
     return (
@@ -362,9 +362,9 @@ class DiagramPanel extends React.Component {
         onMouseMove={this.onMouseMovePanel.bind(this)}
         onMouseUp={this.onMouseUpPanel.bind(this)}>
         <svg style={style} ref={this.onSvgRef.bind(this)}>
+          {this.renderLines()}
           {this.renderObjects()}
           {this.renderDrawingLines()}
-          {this.renderLines()}
           <g>
             {this.renderSelected()}
             {this.renderHovered()}

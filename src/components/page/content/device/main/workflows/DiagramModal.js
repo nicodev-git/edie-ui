@@ -6,6 +6,7 @@ import DiagramDragLayer from './DiagramDragLayer'
 import DiagramDragItem from './DiagramDragItem'
 import DiagramToolbar from './DiagramToolbar'
 import { workflowItems } from './DiagramItems'
+import { DiagramTypes } from 'shared/Global'
 
 const itemStyle = {
   width: '36px',
@@ -41,7 +42,8 @@ class DiagramModal extends React.Component {
       w,
       h,
 
-      id: this.props.lastId + 1
+      id: this.props.lastId + 1,
+      type: DiagramTypes.OBJECT
     }
 
     this.props.addDiagramObject(object)

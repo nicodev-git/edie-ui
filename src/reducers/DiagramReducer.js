@@ -1,4 +1,5 @@
 import { concat } from 'lodash'
+import { DiagramTypes } from 'shared/Global'
 import {
   ADD_DIAGRAM_OBJECT,
   OPEN_DEVICE_WF_DIAGRAM_MODAL,
@@ -25,7 +26,7 @@ export default function (state = {}, action) {
   switch (action.type) {
 
     case OPEN_DEVICE_WF_DIAGRAM_MODAL:
-      return { ...state, objects: [], lastId: 100, selected: [], hovered: null, isDragging: false, isResizing: false, isLineDrawing: false }
+      return { ...state, objects: [], lastId: 100, selected: [], lines: [], hovered: null, isDragging: false, isResizing: false, isLineDrawing: false }
 
     case ADD_DIAGRAM_OBJECT:
       return { ...state, objects: concat(state.objects, action.data), lastId: state.lastId + 1 }
@@ -67,6 +68,8 @@ export default function (state = {}, action) {
       return {
         ...state,
         selected: state.selected.map(obj => {
+          if (obj.type !== DiagramTypes.OBJECT) return obj
+
           obj.x += action.data.x
           obj.y += action.data.y
           return obj
@@ -83,6 +86,8 @@ export default function (state = {}, action) {
       return {
         ...state,
         selected: state.selected.map(obj => {
+          if (obj.type !== DiagramTypes.OBJECT) return obj
+
           switch (state.resizePoint) {
             case 0:
               obj.x += action.data.x
@@ -131,7 +136,7 @@ export default function (state = {}, action) {
       }
 
     case SET_DIAGRAM_LINE_DRAWING:
-      return { ...state, isLineDrawing: action.data }
+      return { ...state, isLineDrawing: action.data, selected: [] }
 
     case SET_DIAGRAM_LINE_START_POINT:
       return { ...state, lineStart: action.pos, lineStartObject: action.object, lineStartObjectPoint: action.connectionPoint }
