@@ -1,5 +1,6 @@
 import React from 'react'
 import Modal from 'react-bootstrap-modal'
+import { assign } from 'lodash'
 
 class DiagramObjectModal extends React.Component {
   onHide () {
@@ -11,7 +12,10 @@ class DiagramObjectModal extends React.Component {
   }
 
   onClickSave () {
-
+    const name = this.refs.name.value
+    if (!name) return window.alert('Please type name.')
+    this.props.addDiagramObject(assign({ name }, this.props.objectConfig))
+    this.props.closeModal()
   }
 
   render () {

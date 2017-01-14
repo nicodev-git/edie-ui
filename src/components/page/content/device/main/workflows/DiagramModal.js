@@ -102,11 +102,12 @@ class DiagramModal extends React.Component {
   renderObjectModal () {
     if (!this.props.objectModalOpen) return null
 
-    const { closeDiagramObjectModal, objectConfig } = this.props
+    const { closeDiagramObjectModal, objectConfig, addDiagramObject } = this.props
     return (
       <DiagramObjectModal
         closeModal={closeDiagramObjectModal}
-        objectConfig={objectConfig}/>
+        objectConfig={objectConfig}
+        addDiagramObject={addDiagramObject}/>
     )
   }
 
