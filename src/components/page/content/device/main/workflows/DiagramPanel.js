@@ -215,8 +215,12 @@ class DiagramPanel extends React.Component {
     const endPos = endItem.getConnectionPoint(line.endObject, line.endPoint)
 
     return (
-      <path key={`line-${line.id}`} d={`M ${startPos.x} ${startPos.y} L ${endPos.x} ${endPos.y} Z`} stroke="#000000"
-        fill="#ffffff" strokeMiterlimit="10"/>
+      <g key={`line-${line.id}`} style={{cursor: 'move'}}>
+        <path d={`M ${startPos.x} ${startPos.y} L ${endPos.x} ${endPos.y} Z`} stroke="white"
+          strokeMiterlimit="10" pointerEvents="stroke" visibility="hidden" strokeWidth="9"/>
+        <path d={`M ${startPos.x} ${startPos.y} L ${endPos.x} ${endPos.y} Z`} stroke="#000000"
+          fill="#ffffff" strokeMiterlimit="10"/>
+      </g>
     )
   }
 
@@ -360,6 +364,7 @@ class DiagramPanel extends React.Component {
         <svg style={style} ref={this.onSvgRef.bind(this)}>
           {this.renderObjects()}
           {this.renderDrawingLines()}
+          {this.renderLines()}
           <g>
             {this.renderSelected()}
             {this.renderHovered()}

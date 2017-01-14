@@ -42,9 +42,13 @@ import {
     isDragging: state.diagram.isDragging,
     cursorPos: state.diagram.cursorPos,
     isResizing: state.diagram.isResizing,
+
+    lines: state.diagram.lines,
     isLineDrawing: state.diagram.isLineDrawing,
     lineStart: state.diagram.lineStart,
-    lineEnd: state.diagram.lineEnd
+    lineEnd: state.diagram.lineEnd,
+    lineStartObject: state.diagram.lineStartObject,
+    lineStartObjectPoint: state.diagram.lineStartObjectPoint
   }), {
     closeDeviceWfDiagramModal,
     addDiagramObject,
