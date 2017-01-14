@@ -7,6 +7,8 @@ import { DragTypes, DiagramTypes } from 'shared/Global'
 import DRect from './diagram/DRect'
 import { workflowItems, handlePoints } from './DiagramItems'
 
+import { findStepLines } from './diagram/LineUtil'
+
 function collect (connect) {
   return {
     connectDropTarget: connect.dropTarget()
@@ -247,7 +249,7 @@ class DiagramPanel extends React.Component {
 
   renderDrawingLines () {
     const { isLineDrawing, lineStart, lineEnd, lineStartObjectPoint } = this.props
-    if (!isLineDrawing) return null
+    if (!isLineDrawing || !lineEnd) return null
 
     const points = [{ x: lineStart.x, y: lineStart.y }]
     if (lineStartObjectPoint > 4) {

@@ -1,0 +1,39 @@
+import { concat } from 'lodash'
+
+function get2StepLinePoints(start, end) {
+  const points = []
+  points.push({ x: start.x, y: start.y + (end.y - start.y) / 2})
+  points.push({ x: end.x, y: start.y + (end.y - start.y) / 2})
+  return points
+}
+
+function isTopPoint(point) {
+  return point < 3
+}
+
+function isLeftPoint(point) {
+  return point == 0 || point == 3 || point == 5
+}
+
+function isRightPoint(point) {
+  return point == 2 || point == 4 || point == 7
+}
+
+function isBottomPoint(point) {
+  return point > 4 && point < 8
+}
+
+export function findStepLines(startPos, startPoint, endPos, endPoint) {
+  let points = [{ x: startPos.x, y: startPos.y }]
+
+  // Case 1 : 2-step lines
+  if ((isTopPoint(startPoint) && isBottomPoint(endPoint) && startPos.y > endPos.y)
+    || (isLeftPoint(startPoint) && isRightPoint(endPoint) && startPos.x > endPos.x)
+    || (isRightPoint(startPoint) && isLeftPoint(endPoint) && startPos.x < endPos.x)
+    || (isBottomPoint(startPoint) && isTopPoint(endPoint) && startPos.y < endPos.y))
+    return concat(points, get2StepLinePoints(startPos, endPoint), endPoint)
+
+  // Case 2 : 3-step lines
+
+  return concat(points, endPoint)
+}
