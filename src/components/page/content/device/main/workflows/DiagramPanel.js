@@ -56,7 +56,7 @@ class DiagramPanel extends React.Component {
     console.log(`onMouseDownLineHandle ${point}`)
     this.props.setDiagramLineDrawing(true)
     this.props.setDiagramLineStartPoint(pos, object, point)
-    this.props.setDiagramLineEndPoint(pos)
+    this.props.setDiagramLineEndPoint(null)
   }
 
   onMouseOverHoverPoint (object, point) {
@@ -250,11 +250,12 @@ class DiagramPanel extends React.Component {
 
     const points = []
 
-    if (lineStartObjectPoint >= 2) {
-      points.push({ x: lineStart.x, y: lineStart.y - 15 })
-    } else {
+    if (lineStartObjectPoint > 4) {
       points.push({ x: lineStart.x, y: lineStart.y + 15 })
+    } else if (lineStartObjectPoint < 3) {
+      points.push({ x: lineStart.x, y: lineStart.y - 15 })
     }
+
 
     return (
       <path d={`M ${lineStart.x} ${lineStart.y} L ${lineEnd.x} ${lineEnd.y} Z`} stroke="#000000"
