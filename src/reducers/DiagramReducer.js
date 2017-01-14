@@ -22,7 +22,9 @@ import {
   ADD_DIAGRAM_LINE,
 
   OPEN_DIAGRAM_OBJECT_MODAL,
-  CLOSE_DIAGRAM_OBJECT_MODAL
+  CLOSE_DIAGRAM_OBJECT_MODAL,
+
+  SET_DIAGRAM_EDITING_TEXT
 } from 'actions/types'
 
 export default function (state = {}, action) {
@@ -155,6 +157,9 @@ export default function (state = {}, action) {
 
     case CLOSE_DIAGRAM_OBJECT_MODAL:
       return { ...state, objectModalOpen: false }
+
+    case SET_DIAGRAM_EDITING_TEXT:
+      return { ...state, object: action.object }
   }
   return state
 }

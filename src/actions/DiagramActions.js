@@ -25,7 +25,9 @@ import {
   ADD_DIAGRAM_LINE,
 
   OPEN_DIAGRAM_OBJECT_MODAL,
-  CLOSE_DIAGRAM_OBJECT_MODAL
+  CLOSE_DIAGRAM_OBJECT_MODAL,
+
+  SET_DIAGRAM_EDITING_TEXT
 
 } from './types'
 
@@ -190,6 +192,15 @@ export function closeDiagramObjectModal () {
   return dispatch => {
     dispatch({
       type: CLOSE_DIAGRAM_OBJECT_MODAL
+    })
+  }
+}
+
+export function setDiagramEditingText (object) {
+  return dispatch => {
+    dispatch({
+      type: SET_DIAGRAM_EDITING_TEXT,
+      object
     })
   }
 }

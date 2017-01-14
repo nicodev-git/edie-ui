@@ -45,6 +45,11 @@ class DiagramPanel extends React.Component {
     this.props.clearHoverDiagramObject(obj)
   }
 
+  onDblClickObject (obj) {
+    this.props.selectDiagramObject(obj)
+    // this.props.
+  }
+
   // ///////////////////////////////////////////////////
 
   onMouseDownLineHandle (point, pos, object) {
@@ -201,7 +206,8 @@ class DiagramPanel extends React.Component {
     const listeners = {
       className: 'object',
       onMouseDown: this.onMouseDownObject.bind(this, obj),
-      onMouseOver: this.onMouseOverObject.bind(this, obj)
+      onMouseOver: this.onMouseOverObject.bind(this, obj),
+      onDoubleClick: this.onDblClickObject.bind(this, obj)
     }
 
     return (
