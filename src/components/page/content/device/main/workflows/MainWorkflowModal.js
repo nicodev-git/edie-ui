@@ -46,7 +46,7 @@ class MainWorkflowModal extends React.Component {
 
   handleFormSubmit (values) {
     const {editWorkflow} = this.props
-    const { rules, actions } = this.state
+    const { rules, actions, diagram } = this.state
     let props = assign({}, editWorkflow, values, { rules: {}, actions: actions, flowchart: diagram })
     rules.forEach(r => {
       if (r.key) props.rules[r.key] = r.value
