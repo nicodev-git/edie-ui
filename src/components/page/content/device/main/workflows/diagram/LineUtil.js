@@ -3,9 +3,11 @@ import { concat } from 'lodash'
 function get2StepLinePoints (start, end, isSidePoint) {
   const points = []
   if (isSidePoint) {
+    if (start.y === end.y) return points
     points.push({ x: start.x + (end.x - start.x) / 2, y: start.y })
     points.push({ x: start.x + (end.x - start.x) / 2, y: end.y })
   } else {
+    if (start.x === end.x) return points
     points.push({ x: start.x, y: start.y + (end.y - start.y) / 2 })
     points.push({ x: end.x, y: start.y + (end.y - start.y) / 2 })
   }

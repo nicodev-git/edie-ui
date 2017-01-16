@@ -126,6 +126,8 @@ class DiagramPanel extends React.Component {
   onLineDrawEnd (e) {
     const { hovered, hoverPoint, lineStartObject, lineStartObjectPoint, lastId } = this.props
     if (!hovered || hoverPoint < 0) return
+    if (lineStartObject.id === hovered.id) return
+
     this.props.addDiagramLine({
       id: lastId + 1,
       type: DiagramTypes.LINE,

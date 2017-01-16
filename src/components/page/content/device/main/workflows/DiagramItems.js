@@ -59,8 +59,8 @@ export const workflowItems = [{
       {x: 0, y: 0.5},
       {x: 1, y: 0.5},
       {x: 0.25, y: 0.75},
-      {x: 0.5, y: 1},
-      {x: 0.75, y: 0.75}
+      {x: 0.75, y: 0.75},
+      {x: 0.5, y: 1}
     ]
     return {
       x: x + w * p[point].x,
