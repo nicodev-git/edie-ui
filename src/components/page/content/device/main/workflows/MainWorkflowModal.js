@@ -30,7 +30,9 @@ class MainWorkflowModal extends React.Component {
       selectedRuleIndex: -1,
 
       actions: props.editWorkflow ? (props.editWorkflow.actions || []) : [],
-      selectedActionIndex: -1
+      selectedActionIndex: -1,
+
+      diagram: ''
     }
   }
 
@@ -143,7 +145,14 @@ class MainWorkflowModal extends React.Component {
   }
 
   onClickDiagram () {
-    this.props.openDeviceWfDiagramModal()
+    this.props.openDeviceWfDiagramModal(this.state.diagram)
+  }
+
+  onDiagramModalClose (data) {
+    if (!data) return
+    this.setState({
+      diagram: data
+    })
   }
 
   renderRuleModal () {
@@ -170,7 +179,7 @@ class MainWorkflowModal extends React.Component {
   renderDiagramModal () {
     if (!this.props.wfDiagramModalOpen) return null
     return (
-      <DiagramModalContainer />
+      <DiagramModalContainer onClose={this.onDiagramModalClose.bind(this)}/>
     )
   }
 

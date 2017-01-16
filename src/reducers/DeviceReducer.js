@@ -117,7 +117,7 @@ export default function (state = INITIAL_STATE, action) {
       return { ...state, workflows: state.workflows.filter(w => w.id !== action.data.id) }
 
     case OPEN_DEVICE_WF_DIAGRAM_MODAL:
-      return { ...state, wfDiagramModalOpen: true, editWfDiagram: action.data }
+      return { ...state, wfDiagramModalOpen: true }
 
     case CLOSE_DEVICE_WF_DIAGRAM_MODAL:
       return { ...state, wfDiagramModalOpen: false }

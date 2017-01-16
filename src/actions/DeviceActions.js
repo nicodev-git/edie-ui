@@ -258,7 +258,7 @@ export const closeDeviceWorkflowModal = () => {
   }
 }
 
-export const openDeviceWfDiagramModal = (dispatch, diagram) => {
+export const openDeviceWfDiagramModal = (diagram) => {
   return (dispatch) => {
     dispatch({
       type: OPEN_DEVICE_WF_DIAGRAM_MODAL,

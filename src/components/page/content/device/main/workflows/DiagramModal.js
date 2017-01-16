@@ -25,7 +25,13 @@ class DiagramModal extends React.Component {
   }
 
   onClickSave () {
+    const { objects, lines, lastId, onClose } = this.props
+    const data = {
+      objects, lines, lastId
+    }
 
+    onClose && onClose(JSON.stringify(data))
+    this.props.closeDeviceWfDiagramModal()
   }
 
   // ////////////////////////////////////////////////////

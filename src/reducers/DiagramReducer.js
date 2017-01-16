@@ -30,8 +30,23 @@ import {
 export default function (state = {}, action) {
   switch (action.type) {
 
-    case OPEN_DEVICE_WF_DIAGRAM_MODAL:
-      return { ...state, objects: [], lastId: 100, selected: [], lines: [], hovered: null, isDragging: false, isResizing: false, isLineDrawing: false }
+    case OPEN_DEVICE_WF_DIAGRAM_MODAL: {
+      const {data} = action
+      let objects = []
+      let lastId = 100
+      let lines = []
+      if (data) {
+        try {
+          let parsed = JSON.parse(data)
+          if (parsed.objects) objects = parsed.objects
+          if (parsed.lines) lines = parsed.lines
+          if (parsed.lastId) lastId = parsed.lastId
+        } catch (e) {
+          console.log(e)
+        }
+      }
+      return { ...state, objects, lastId, lines, selected: [], hovered: null, isDragging: false, isResizing: false, isLineDrawing: false }
+    }
 
     case ADD_DIAGRAM_OBJECT:
       return { ...state, objects: concat(state.objects, action.data), lastId: state.lastId + 1 }

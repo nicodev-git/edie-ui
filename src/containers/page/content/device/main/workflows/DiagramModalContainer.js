@@ -29,7 +29,6 @@ import {
 
 @connect(
   state => ({
-    editWfDiagram: state.devices.editWfDiagram,
     objects: state.diagram.objects,
     lastId: state.diagram.lastId,
 
