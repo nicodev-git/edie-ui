@@ -5,6 +5,7 @@ import DEllipse from './diagram/DEllipse'
 import DDiamond from './diagram/DDiamond'
 import DParallel from './diagram/DParallel'
 import DTriangle from './diagram/DTriangle'
+import DText from './diagram/DText'
 
 export const workflowItems = [{
   title: 'Rectangle',
@@ -173,6 +174,44 @@ export const workflowItems = [{
   },
   isBottomPoint: (point) => {
     return point === 5
+  }
+}, {
+  title: 'Text',
+  component: DText,
+  img: <g key="1"><g><text x="18" y="18" textAnchor="middle" dominantBaseline="central" fontSize="12">Text</text></g></g>,
+  connectionPoints: 12,
+  getConnectionPoint: (object, point) => {
+    const { x, y, w, h } = object
+    const p = [
+      {x: 0.25, y: 0},
+      {x: 0.5, y: 0},
+      {x: 0.75, y: 0},
+      {x: 0, y: 0.25},
+      {x: 1, y: 0.25},
+      {x: 0, y: 0.5},
+      {x: 1, y: 0.5},
+      {x: 0, y: 0.75},
+      {x: 1, y: 0.75},
+      {x: 0.25, y: 1},
+      {x: 0.5, y: 1},
+      {x: 0.75, y: 1}
+    ]
+    return {
+      x: x + w * p[point].x,
+      y: y + h * p[point].y
+    }
+  },
+  isTopPoint: (point) => {
+    return point === 0 || point === 1 || point === 2
+  },
+  isLeftPoint: (point) => {
+    return point === 3 || point === 5 || point === 7
+  },
+  isRightPoint: (point) => {
+    return point === 4 || point === 6 || point === 8
+  },
+  isBottomPoint: (point) => {
+    return point === 9 || point === 10 || point === 11
   }
 }]
 
