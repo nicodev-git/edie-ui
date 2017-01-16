@@ -13,19 +13,6 @@ function get2StepLinePoints (start, end, isSidePoint) {
   return points
 }
 
-function get3StepLinesPoints (start, end, isSidePoint) {
-  const points = []
-  if (isSidePoint) {
-    points.push({ x: start.x + 20, y: start.y })
-    points.push({ x: start.x + 20, y: start.y + 50 })
-    points.push({ x: end.x - 20, y: start.y + 50 })
-    points.push({ x: end.x - 20, y: end.y })
-  } else {
-
-  }
-  return points
-}
-
 export function findStepLines (startObject, startPos, startPoint, endObject, endPos, endPoint) {
   let points = [{ x: startPos.x, y: startPos.y }]
 
@@ -40,7 +27,22 @@ export function findStepLines (startObject, startPos, startPoint, endObject, end
 
     // Case 2 : 3-step lines
     if (startObject.isRightPoint(startPoint) && endObject.isLeftPoint(endPoint) && startPos.x > endPos.x) {
-      return concat(points, get3StepLinesPoints(startPos, endPos, true), endPos)
+      points.push({ x: startPos.x + 20, y: startPos.y })
+      points.push({ x: startPos.x + 20, y: startPos.y + 50 })
+      points.push({ x: endPos.x - 20, y: startPos.y + 50 })
+      points.push({ x: endPos.x - 20, y: endPos.y })
+    } else if (startObject.isLeftPoint(startPoint) && endObject.isRightPoint(endPoint) && startPos.x < endPos.x) {
+      points.push({ x: startPos.x - 20, y: startPos.y })
+      points.push({ x: startPos.x - 20, y: startPos.y + 50 })
+      points.push({ x: endPos.x + 20, y: startPos.y + 50 })
+      points.push({ x: endPos.x + 20, y: endPos.y })
+    } else if (startObject.isTopPoint(startPoint) && endObject.isBottomPoint(endPoint) && startPos.y < endPos.y) {
+      points.push({ x: startPos.x, y: startPos.y  - 20})
+      points.push({ x: startPos.x - 50, y: startPos.y - 20 })
+      points.push({ x: endPos.x - 50, y: endPo.y + 20 })
+      points.push({ x: endPos.x - 20, y: endPos.y })
+    } else if (startObject.isTopPoint(startPoint) && endObject.isBottomPoint(endPoint) && startPos.y < endPos.y) {
+
     }
   }
 
