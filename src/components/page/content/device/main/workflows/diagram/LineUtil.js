@@ -13,6 +13,19 @@ function get2StepLinePoints (start, end, isSidePoint) {
   return points
 }
 
+function get3StepLinesPoints (start, end, isSidePoint) {
+  const points = []
+  if (isSidePoint) {
+    points.push({ x: start.x + 20, y: start.y })
+    points.push({ x: start.x + 20, y: start.y + 50 })
+    points.push({ x: end.x - 20, y: start.y + 50 })
+    points.push({ x: end.x - 20, y: end.y })
+  } else {
+
+  }
+  return points
+}
+
 function isTopPoint (point) {
   return point >= 0 && point < 3
 }
@@ -41,6 +54,9 @@ export function findStepLines (startPos, startPoint, endPos, endPoint) {
   }
 
   // Case 2 : 3-step lines
+  if (isRightPoint(startPoint) && isLeftPoint(endPoint) && startPos.x > endPos.x) {
+    return concat(points, get3StepLinesPoints(startPos, endPos, true), endPos)
+  }
 
   return concat(points, endPos)
 }
