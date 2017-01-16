@@ -33,16 +33,16 @@ export const workflowItems = [{
     }
   },
   isTopPoint: (point) => {
-    return point >= 0 && point < 3
+    return point === 0 || point === 1 || point === 2
   },
   isLeftPoint: (point) => {
     return point === 3 || point === 5 || point === 7
   },
-  isBottomPoint: (point) => {
-    return point === 9 || point === 10 || point === 11
-  },
   isRightPoint: (point) => {
     return point === 4 || point === 6 || point === 8
+  },
+  isBottomPoint: (point) => {
+    return point === 9 || point === 10 || point === 11
   }
 }, {
   title: 'Diamond',
@@ -67,16 +67,16 @@ export const workflowItems = [{
     }
   },
   isTopPoint: (point) => {
-    return point >= 0 && point < 3
+    return point === 0 || point === 1 || point === 2
   },
   isLeftPoint: (point) => {
     return point === 1 || point === 3 || point === 5
   },
+  isRightPoint: (point) => {
+    return point === 2 || point === 4 || point === 6
+  },
   isBottomPoint: (point) => {
     return point === 5 || point === 6 || point === 7
-  },
-  isRightPoint: (point) => {
-    return point === 4 || point === 6 || point === 8
   }
 }, {
   title: 'Ellipse',
@@ -85,11 +85,24 @@ export const workflowItems = [{
   connectionPoints: 8,
   getConnectionPoint: (object, point) => {
     const { x, y, w, h } = object
-    const rad = Math.PI * 90 * point / 360
+    const angles = [270, 45, 135, 180, 0, 315, 225, 90]
+    const rad = 2 * Math.PI * 45 * angles[point] / 360
     return {
       x: x + w * (1 + Math.cos(rad)) / 2,
       y: y + h * (1 + Math.sin(rad)) / 2
     }
+  },
+  isTopPoint: (point) => {
+    return point === 0 || point === 1 || point === 2
+  },
+  isLeftPoint: (point) => {
+    return point === 1 || point === 3 || point === 5
+  },
+  isRightPoint: (point) => {
+    return point === 2 || point === 4 || point === 6
+  },
+  isBottomPoint: (point) => {
+    return point === 5 || point === 6 || point === 7
   }
 }, {
   title: 'Parallelogram',
@@ -116,6 +129,18 @@ export const workflowItems = [{
       x: x + w * p[point].x,
       y: y + h * p[point].y
     }
+  },
+  isTopPoint: (point) => {
+    return point === 0 || point === 1 || point === 2
+  },
+  isLeftPoint: (point) => {
+    return point === 3 || point === 5 || point === 7
+  },
+  isRightPoint: (point) => {
+    return point === 4 || point === 6 || point === 8
+  },
+  isBottomPoint: (point) => {
+    return point === 9 || point === 10 || point === 11
   }
 }, {
   title: 'Triangle',
@@ -126,16 +151,28 @@ export const workflowItems = [{
     const { x, y, w, h } = object
     const p = [
       {x: 0, y: 0.25},
-      {x: 0, y: 0.5},
-      {x: 0, y: 0.75},
       {x: 0.5, y: 0.25},
-      {x: 0.5, y: 0.75},
-      {x: 1, y: 0.5}
+      {x: 0, y: 0.5},
+      {x: 1, y: 0.5},
+      {x: 0, y: 0.75},
+      {x: 0.5, y: 0.75}
     ]
     return {
       x: x + w * p[point].x,
       y: y + h * p[point].y
     }
+  },
+  isTopPoint: (point) => {
+    return point === 1
+  },
+  isLeftPoint: (point) => {
+    return point === 0 || point === 2 || point === 4
+  },
+  isRightPoint: (point) => {
+    return point === 3
+  },
+  isBottomPoint: (point) => {
+    return point === 5
   }
 }]
 
