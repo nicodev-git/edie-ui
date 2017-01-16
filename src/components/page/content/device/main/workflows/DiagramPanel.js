@@ -159,6 +159,8 @@ class DiagramPanel extends React.Component {
     if (objectType) return
 
     this.props.selectDiagramObject(null)
+
+    e.preventDefault()
   }
 
   onMouseMovePanel (e) {
@@ -230,13 +232,11 @@ class DiagramPanel extends React.Component {
     const endItem = workflowItems[line.endObject.imgIndex]
     const endPos = endItem.getConnectionPoint(line.endObject, line.endPoint)
 
+    const points = findStepLines(startPos, line.startPoint, endPos, line.endPoint)
+
     return (
       <g key={`line-${line.id}`} style={{cursor: 'move'}}>
-        <path d={`M ${startPos.x} ${startPos.y} L ${endPos.x} ${endPos.y} Z`} stroke="white"
-          strokeMiterlimit="10" pointerEvents="stroke" visibility="hidden" strokeWidth="9"
-          onMouseDown={this.onMouseDownLine.bind(this, line)}/>
-        <line x1={startPos.x} y1={startPos.y} x2={endPos.x} y2={endPos.y} stroke="#000000"
-          fill="#ffffff" strokeMiterlimit="10" markerEnd="url(#arrowEnd)"/>
+        <path d={`M ${points.map(p => `${p.x} ${p.y}`).join(' L ')}`} stroke="#000000" fill="none" strokeMiterlimit="10" markerEnd="url(#arrowEnd)"/>
       </g>
     )
   }
@@ -259,7 +259,7 @@ class DiagramPanel extends React.Component {
     }
     const points = findStepLines(lineStart, lineStartObjectPoint, lineEnd, lineEndObjectPoint)
     return (
-      <path d={`M ${points.map(p => `${p.x} ${p.y}`).join(' L ')}`} stroke="#000000" fill="#ffffff" strokeMiterlimit="10"/>
+      <path d={`M ${points.map(p => `${p.x} ${p.y}`).join(' L ')}`} stroke="#000000" fill="none" strokeMiterlimit="10"/>
     )
   }
 
@@ -379,7 +379,7 @@ class DiagramPanel extends React.Component {
   renderDefs () {
     return (
       <defs>
-        <marker colorid="RGB(0,0,0)" id="arrowEnd" viewBox="0 0 8000 8000" refX="280" refY="150" markerUnits="strokeWidth" markerWidth="300" markerHeight="300" orient="auto" fill="RGB(0,0,0)" strokeLinejoin="bevel">
+        <marker id="arrowEnd" viewBox="0 0 8000 8000" refX="280" refY="150" markerUnits="strokeWidth" markerWidth="300" markerHeight="300" orient="auto" fill="RGB(0,0,0)" strokeLinejoin="bevel">
           <path stroke="RGB(0,0,0)" strokeWidth="5" d="M2 59,293 148,1 243,121 151,Z"/>
         </marker>
       </defs>

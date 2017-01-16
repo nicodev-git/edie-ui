@@ -1,9 +1,15 @@
 import { concat } from 'lodash'
 
-function get2StepLinePoints (start, end) {
+function get2StepLinePoints (start, end, isSidePoint) {
   const points = []
-  points.push({ x: start.x, y: start.y + (end.y - start.y) / 2 })
-  points.push({ x: end.x, y: start.y + (end.y - start.y) / 2 })
+  if (isSidePoint) {
+    points.push({ x: start.x + (end.x - start.x) / 2, y: start.y })
+    points.push({ x: start.x + (end.x - start.x) / 2, y: end.y })
+  } else {
+    points.push({ x: start.x, y: start.y + (end.y - start.y) / 2 })
+    points.push({ x: end.x, y: start.y + (end.y - start.y) / 2 })
+  }
+
   return points
 }
 
@@ -31,7 +37,7 @@ export function findStepLines (startPos, startPoint, endPos, endPoint) {
     (isLeftPoint(startPoint) && isRightPoint(endPoint) && startPos.x > endPos.x) ||
     (isRightPoint(startPoint) && isLeftPoint(endPoint) && startPos.x < endPos.x) ||
     (isBottomPoint(startPoint) && isTopPoint(endPoint) && startPos.y < endPos.y)) {
-    return concat(points, get2StepLinePoints(startPos, endPos), endPos)
+    return concat(points, get2StepLinePoints(startPos, endPos, isLeftPoint(startPoint) || isRightPoint(startPoint)), endPos)
   }
 
   // Case 2 : 3-step lines
