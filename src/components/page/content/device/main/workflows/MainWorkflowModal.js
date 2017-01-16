@@ -32,7 +32,7 @@ class MainWorkflowModal extends React.Component {
       actions: props.editWorkflow ? (props.editWorkflow.actions || []) : [],
       selectedActionIndex: -1,
 
-      diagram: ''
+      diagram: props.editWorkflow ? props.editWorkflow.flowchart : ''
     }
   }
 
@@ -47,7 +47,7 @@ class MainWorkflowModal extends React.Component {
   handleFormSubmit (values) {
     const {editWorkflow} = this.props
     const { rules, actions } = this.state
-    let props = assign({}, editWorkflow, values, { rules: {}, actions: actions })
+    let props = assign({}, editWorkflow, values, { rules: {}, actions: actions, flowchart: diagram })
     rules.forEach(r => {
       if (r.key) props.rules[r.key] = r.value
     })
