@@ -28,21 +28,24 @@ export function findStepLines (startObject, startPos, startPoint, endObject, end
     // Case 2 : 3-step lines
     if (startObject.isRightPoint(startPoint) && endObject.isLeftPoint(endPoint) && startPos.x > endPos.x) {
       points.push({ x: startPos.x + 20, y: startPos.y })
-      points.push({ x: startPos.x + 20, y: startPos.y + 50 })
-      points.push({ x: endPos.x - 20, y: startPos.y + 50 })
+      points.push({ x: startPos.x + 20, y: startPos.y + 100 })
+      points.push({ x: endPos.x - 20, y: startPos.y + 100 })
       points.push({ x: endPos.x - 20, y: endPos.y })
     } else if (startObject.isLeftPoint(startPoint) && endObject.isRightPoint(endPoint) && startPos.x < endPos.x) {
       points.push({ x: startPos.x - 20, y: startPos.y })
-      points.push({ x: startPos.x - 20, y: startPos.y + 50 })
-      points.push({ x: endPos.x + 20, y: startPos.y + 50 })
+      points.push({ x: startPos.x - 20, y: startPos.y + 100 })
+      points.push({ x: endPos.x + 20, y: startPos.y + 100 })
       points.push({ x: endPos.x + 20, y: endPos.y })
     } else if (startObject.isTopPoint(startPoint) && endObject.isBottomPoint(endPoint) && startPos.y < endPos.y) {
-      points.push({ x: startPos.x, y: startPos.y  - 20})
-      points.push({ x: startPos.x - 50, y: startPos.y - 20 })
-      points.push({ x: endPos.x - 50, y: endPo.y + 20 })
-      points.push({ x: endPos.x - 20, y: endPos.y })
-    } else if (startObject.isTopPoint(startPoint) && endObject.isBottomPoint(endPoint) && startPos.y < endPos.y) {
-
+      points.push({ x: startPos.x, y: startPos.y - 20 })
+      points.push({ x: startPos.x - 100, y: startPos.y - 20 })
+      points.push({ x: startPos.x - 100, y: endPos.y + 20 })
+      points.push({ x: endPos.x, y: endPos.y + 20 })
+    } else if (startObject.isBottomPoint(startPoint) && endObject.isTopPoint(endPoint) && startPos.y > endPos.y) {
+      points.push({ x: startPos.x, y: startPos.y + 20 })
+      points.push({ x: startPos.x + 100, y: startPos.y + 20 })
+      points.push({ x: startPos.x + 100, y: endPos.y - 20 })
+      points.push({ x: endPos.x, y: endPos.y - 20 })
     }
   }
 
