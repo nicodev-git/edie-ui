@@ -232,7 +232,7 @@ class DiagramPanel extends React.Component {
     const endItem = workflowItems[line.endObject.imgIndex]
     const endPos = endItem.getConnectionPoint(line.endObject, line.endPoint)
 
-    const points = findStepLines(startPos, line.startPoint, endPos, line.endPoint)
+    const points = findStepLines(startItem, startPos, line.startPoint, endItem, endPos, line.endPoint)
 
     return (
       <g key={`line-${line.id}`} style={{cursor: 'move'}}>
@@ -248,7 +248,7 @@ class DiagramPanel extends React.Component {
   }
 
   renderDrawingLines () {
-    const { isLineDrawing, lineStart, lineEnd, lineStartObjectPoint, lineEndObjectPoint } = this.props
+    const { isLineDrawing, lineStart, lineEnd, lineStartObject, lineEndObject, lineStartObjectPoint, lineEndObjectPoint } = this.props
     if (!isLineDrawing || !lineEnd) return null
 
     if (lineEndObjectPoint < 0) {
@@ -257,7 +257,11 @@ class DiagramPanel extends React.Component {
           fill="#ffffff" strokeMiterlimit="10"/>
       )
     }
-    const points = findStepLines(lineStart, lineStartObjectPoint, lineEnd, lineEndObjectPoint)
+
+    const startItem = workflowItems[lineStartObject.imgIndex]
+    const endItem = lineEndObject ? workflowItems[lineEndObject.imgIndex] : null
+
+    const points = findStepLines(startItem, lineStart, lineStartObjectPoint, endItem, lineEnd, lineEndObjectPoint)
     return (
       <path d={`M ${points.map(p => `${p.x} ${p.y}`).join(' L ')}`} stroke="#000000" fill="none" strokeMiterlimit="10"/>
     )

@@ -26,36 +26,22 @@ function get3StepLinesPoints (start, end, isSidePoint) {
   return points
 }
 
-function isTopPoint (point) {
-  return point >= 0 && point < 3
-}
-
-function isLeftPoint (point) {
-  return point === 3 || point === 5 || point === 7
-}
-
-function isRightPoint (point) {
-  return point === 4 || point === 6 || point === 8
-}
-
-function isBottomPoint (point) {
-  return point === 9 || point === 10 || point === 11
-}
-
-export function findStepLines (startPos, startPoint, endPos, endPoint) {
+export function findStepLines (startObject, startPos, startPoint, endObject, endPos, endPoint) {
   let points = [{ x: startPos.x, y: startPos.y }]
 
-  // Case 1 : 2-step lines
-  if ((isTopPoint(startPoint) && isBottomPoint(endPoint) && startPos.y > endPos.y) ||
-    (isLeftPoint(startPoint) && isRightPoint(endPoint) && startPos.x > endPos.x) ||
-    (isRightPoint(startPoint) && isLeftPoint(endPoint) && startPos.x < endPos.x) ||
-    (isBottomPoint(startPoint) && isTopPoint(endPoint) && startPos.y < endPos.y)) {
-    return concat(points, get2StepLinePoints(startPos, endPos, isLeftPoint(startPoint) || isRightPoint(startPoint)), endPos)
-  }
+  if (startObject && endObject) {
+    // Case 1 : 2-step lines
+    if ((startObject.isTopPoint(startPoint) && endObject.isBottomPoint(endPoint) && startPos.y > endPos.y) ||
+      (startObject.isLeftPoint(startPoint) && endObject.isRightPoint(endPoint) && startPos.x > endPos.x) ||
+      (startObject.isRightPoint(startPoint) && endObject.isLeftPoint(endPoint) && startPos.x < endPos.x) ||
+      (startObject.isBottomPoint(startPoint) && endObject.isTopPoint(endPoint) && startPos.y < endPos.y)) {
+      return concat(points, get2StepLinePoints(startPos, endPos, startObject.isLeftPoint(startPoint) || startObject.isRightPoint(startPoint)), endPos)
+    }
 
-  // Case 2 : 3-step lines
-  if (isRightPoint(startPoint) && isLeftPoint(endPoint) && startPos.x > endPos.x) {
-    return concat(points, get3StepLinesPoints(startPos, endPos, true), endPos)
+    // Case 2 : 3-step lines
+    if (startObject.isRightPoint(startPoint) && endObject.isLeftPoint(endPoint) && startPos.x > endPos.x) {
+      return concat(points, get3StepLinesPoints(startPos, endPos, true), endPos)
+    }
   }
 
   return concat(points, endPos)
