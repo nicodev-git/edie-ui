@@ -31,6 +31,18 @@ export const workflowItems = [{
       x: x + w * p[point].x,
       y: y + h * p[point].y
     }
+  },
+  isTopPoint: (point) => {
+    return point >= 0 && point < 3
+  },
+  isLeftPoint: (point) => {
+    return point === 3 || point === 5 || point === 7
+  },
+  isBottomPoint: (point) => {
+    return point === 9 || point === 10 || point === 11
+  },
+  isRightPoint: (point) => {
+    return point === 4 || point === 6 || point === 8
   }
 }, {
   title: 'Diamond',
@@ -40,19 +52,31 @@ export const workflowItems = [{
   getConnectionPoint: (object, point) => {
     const { x, y, w, h } = object
     const p = [
-      {x: 0, y: 0.5},
-      {x: 0.5, y: 1},
-      {x: 1, y: 0.5},
       {x: 0.5, y: 0},
       {x: 0.25, y: 0.25},
-      {x: 0.25, y: 0.75},
       {x: 0.75, y: 0.25},
+      {x: 0, y: 0.5},
+      {x: 1, y: 0.5},
+      {x: 0.25, y: 0.75},
+      {x: 0.5, y: 1},
       {x: 0.75, y: 0.75}
     ]
     return {
       x: x + w * p[point].x,
       y: y + h * p[point].y
     }
+  },
+  isTopPoint: (point) => {
+    return point >= 0 && point < 3
+  },
+  isLeftPoint: (point) => {
+    return point === 1 || point === 3 || point === 5
+  },
+  isBottomPoint: (point) => {
+    return point === 5 || point === 6 || point === 7
+  },
+  isRightPoint: (point) => {
+    return point === 4 || point === 6 || point === 8
   }
 }, {
   title: 'Ellipse',
