@@ -151,6 +151,13 @@ class DiagramPanel extends React.Component {
     e.stopPropagation()
   }
 
+  onMouseDownLineMove (line, isStart, e) {
+    console.log('onMouseDownLineMove')
+    this.props.setDiagramMouseDown(true, this.convertEventPosition(e), 'line-move')
+
+    e.stopPropagation()
+  }
+
   // ///////////////////////////////////////////////////
 
   onMouseDownPanel (e) {
@@ -289,7 +296,10 @@ class DiagramPanel extends React.Component {
         </g>
       )
     } else if (type === DiagramTypes.LINE) {
-      const { startObject, startPoint, endObject, endPoint } = obj
+      const { objects } = this.props
+      const { startPoint, endPoint } = obj
+      const startObject = objects[findIndex(objects, { id: obj.startObject.id })]
+      const endObject = objects[findIndex(objects, { id: obj.endObject.id })]
       const startItem = workflowItems[startObject.imgIndex]
       const endItem = workflowItems[endObject.imgIndex]
       const startPos = startItem.getConnectionPoint(startObject, startPoint)
@@ -298,10 +308,12 @@ class DiagramPanel extends React.Component {
       return (
         <g key={`sel-${obj.id}`}>
           <g style={{cursor: 'move'}}>
-            <image x={startPos.x - 8.5} y={startPos.y - 8.5} width="17" height="17" href="/images/handle.png" preserveAspectRatio="none"/>
+            <image x={startPos.x - 8.5} y={startPos.y - 8.5} width="17" height="17" href="/images/handle.png" preserveAspectRatio="none"
+              onMouseDown={this.onMouseDownLineMove.bind(this, obj, true)}/>
           </g>
           <g style={{cursor: 'move'}}>
-            <image x={endPos.x - 8.5} y={endPos.y - 8.5} width="17" height="17" href="/images/handle.png" preserveAspectRatio="none"/>
+            <image x={endPos.x - 8.5} y={endPos.y - 8.5} width="17" height="17" href="/images/handle.png" preserveAspectRatio="none"
+              onMouseDown={this.onMouseDownLineMove.bind(this, obj, false)}/>
           </g>
         </g>
       )
