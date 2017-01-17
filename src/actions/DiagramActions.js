@@ -23,6 +23,7 @@ import {
   SET_DIAGRAM_LINE_END_POINT,
 
   ADD_DIAGRAM_LINE,
+  UPDATE_DIAGRAM_LINE,
 
   OPEN_DIAGRAM_OBJECT_MODAL,
   CLOSE_DIAGRAM_OBJECT_MODAL,
@@ -142,11 +143,13 @@ export function resizeDiagramSelectedObjects (offset) {
   }
 }
 
-export function setDiagramLineDrawing (isDrawing) {
+export function setDiagramLineDrawing (isDrawing, isDrawingStart, drawingLine) {
   return dispatch => {
     dispatch({
       type: SET_DIAGRAM_LINE_DRAWING,
-      data: isDrawing
+      data: isDrawing,
+      isDrawingStart,
+      drawingLine
     })
   }
 }
@@ -178,6 +181,15 @@ export function addDiagramLine (line) {
     dispatch({
       type: ADD_DIAGRAM_LINE,
       data: line
+    })
+  }
+}
+
+export function updateDiagramLine (line) {
+  return dispatch => {
+    dispatch({
+      type: UPDATE_DIAGRAM_LINE,
+      line
     })
   }
 }

@@ -1,6 +1,6 @@
 import React from 'react'
 import { DropTarget } from 'react-dnd'
-import { findIndex } from 'lodash'
+import { findIndex, assign } from 'lodash'
 
 import { DragTypes, DiagramTypes } from 'shared/Global'
 import DRect from './diagram/DRect'
@@ -111,35 +111,43 @@ class DiagramPanel extends React.Component {
   onMouseDownLineHandle (point, pos, object, e) {
     console.log(`onMouseDownLineHandle ${point}`)
     this.props.setDiagramMouseDown(true, this.convertEventPosition(e), 'line-handle')
-    this.props.setDiagramLineDrawing(true)
+    this.props.setDiagramLineDrawing(true, false, null)
     this.props.setDiagramLineStartPoint(pos, object, point)
     this.props.setDiagramLineEndPoint(null, null, -1)
     e.stopPropagation()
   }
 
-  onLineDrawStart (e) {
-    console.log('onLineDrawStart')
-    this.props.setDiagramLineDraw(true)
-  }
-
   onLineDraw (pos) {
-    const { hovered, hoverPoint } = this.props
-    this.props.setDiagramLineEndPoint(pos, hovered, hoverPoint)
+    const { hovered, hoverPoint, isLineDrawingStart } = this.props
+    if (isLineDrawingStart) {
+      this.props.setDiagramLineStartPoint(pos, hovered, hoverPoint)
+    } else {
+      this.props.setDiagramLineEndPoint(pos, hovered, hoverPoint)
+    }
   }
 
   onLineDrawEnd (e) {
-    const { hovered, hoverPoint, lineStartObject, lineStartObjectPoint, lastId } = this.props
-    if (!hovered || hoverPoint < 0) return
-    if (lineStartObject.id === hovered.id) return
+    const { lineEndObject, lineEndObjectPoint, lineStartObject, lineStartObjectPoint, lastId, drawingLine } = this.props
+    if (!lineEndObject || lineEndObjectPoint < 0 || !lineStartObject || lineStartObjectPoint < 0) return
+    if (lineStartObject.id === lineEndObject.id) return
 
-    this.props.addDiagramLine({
-      id: lastId + 1,
-      type: DiagramTypes.LINE,
-      startObject: lineStartObject,
-      startPoint: lineStartObjectPoint,
-      endObject: hovered,
-      endPoint: hoverPoint
-    })
+    if (drawingLine) {
+      this.props.updateDiagramLine(assign({}, drawingLine, {
+        startObject: lineStartObject,
+        startPoint: lineStartObjectPoint,
+        endObject: lineEndObject,
+        endPoint: lineEndObjectPoint
+      }))
+    } else {
+      this.props.addDiagramLine({
+        id: lastId + 1,
+        type: DiagramTypes.LINE,
+        startObject: lineStartObject,
+        startPoint: lineStartObjectPoint,
+        endObject: lineEndObject,
+        endPoint: lineEndObjectPoint
+      })
+    }
   }
 
   // ///////////////////////////////////////////////////
@@ -151,9 +159,18 @@ class DiagramPanel extends React.Component {
     e.stopPropagation()
   }
 
-  onMouseDownLineMove (line, isStart, e) {
+  onMouseDownLineMove (line, isStart, otherPos, e) {
     console.log('onMouseDownLineMove')
-    this.props.setDiagramMouseDown(true, this.convertEventPosition(e), 'line-move')
+
+    this.props.setDiagramMouseDown(true, this.convertEventPosition(e), 'line-handle')
+    this.props.setDiagramLineDrawing(true, isStart, line)
+    if (isStart) {
+      this.props.setDiagramLineStartPoint(null, null, -1)
+      this.props.setDiagramLineEndPoint(otherPos, line.endObject, line.endPoint)
+    } else {
+      this.props.setDiagramLineStartPoint(otherPos, line.startObject, line.startPoint)
+      this.props.setDiagramLineEndPoint(null, null, -1)
+    }
 
     e.stopPropagation()
   }
@@ -252,22 +269,30 @@ class DiagramPanel extends React.Component {
   }
 
   renderDrawingLines () {
-    const { isLineDrawing, lineStart, lineEnd, lineStartObject, lineEndObject, lineStartObjectPoint, lineEndObjectPoint } = this.props
-    if (!isLineDrawing || !lineEnd) return null
+    const { isLineDrawing, lineStart, lineEnd, lineStartObject, lineEndObject, lineStartObjectPoint, lineEndObjectPoint, drawingLine } = this.props
+    if (!isLineDrawing || !lineEnd || !lineStart) return null
 
-    if (lineEndObjectPoint < 0) {
+    const attrs = {
+      stroke: drawingLine ? '#00a8ff' : '#000000',
+      fill: 'none',
+      strokeMiterlimit: '10'
+    }
+    if (drawingLine) {
+      assign(attrs, { strokeDasharray: '3 3' })
+    }
+
+    if (lineEndObjectPoint < 0 || lineStartObjectPoint < 0) {
       return (
-        <path d={`M ${lineStart.x} ${lineStart.y} L ${lineEnd.x} ${lineEnd.y}`} stroke="#000000"
-          fill="#ffffff" strokeMiterlimit="10"/>
+        <path d={`M ${lineStart.x} ${lineStart.y} L ${lineEnd.x} ${lineEnd.y}`} {...attrs}/>
       )
     }
 
-    const startItem = workflowItems[lineStartObject.imgIndex]
+    const startItem = lineStartObject ? workflowItems[lineStartObject.imgIndex] : null
     const endItem = lineEndObject ? workflowItems[lineEndObject.imgIndex] : null
 
     const points = findStepLines(startItem, lineStart, lineStartObjectPoint, endItem, lineEnd, lineEndObjectPoint)
     return (
-      <path d={`M ${points.map(p => `${p.x} ${p.y}`).join(' L ')}`} stroke="#000000" fill="none" strokeMiterlimit="10"/>
+      <path d={`M ${points.map(p => `${p.x} ${p.y}`).join(' L ')}`} {...attrs}/>
     )
   }
 
@@ -309,11 +334,11 @@ class DiagramPanel extends React.Component {
         <g key={`sel-${obj.id}`}>
           <g style={{cursor: 'move'}}>
             <image x={startPos.x - 8.5} y={startPos.y - 8.5} width="17" height="17" href="/images/handle.png" preserveAspectRatio="none"
-              onMouseDown={this.onMouseDownLineMove.bind(this, obj, true)}/>
+              onMouseDown={this.onMouseDownLineMove.bind(this, obj, true, endPos)}/>
           </g>
           <g style={{cursor: 'move'}}>
             <image x={endPos.x - 8.5} y={endPos.y - 8.5} width="17" height="17" href="/images/handle.png" preserveAspectRatio="none"
-              onMouseDown={this.onMouseDownLineMove.bind(this, obj, false)}/>
+              onMouseDown={this.onMouseDownLineMove.bind(this, obj, false, startPos)}/>
           </g>
         </g>
       )

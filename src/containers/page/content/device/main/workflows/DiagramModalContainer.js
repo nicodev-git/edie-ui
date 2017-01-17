@@ -22,6 +22,7 @@ import {
   setDiagramLineStartPoint,
   setDiagramLineEndPoint,
   addDiagramLine,
+  updateDiagramLine,
 
   openDiagramObjectModal,
   closeDiagramObjectModal,
@@ -48,6 +49,8 @@ import {
 
     lines: state.diagram.lines,
     isLineDrawing: state.diagram.isLineDrawing,
+    isLineDrawingStart: state.diagram.isLineDrawingStart,
+    drawingLine: state.diagram.drawingLine,
     lineStart: state.diagram.lineStart,
     lineEnd: state.diagram.lineEnd,
     lineStartObject: state.diagram.lineStartObject,
@@ -75,6 +78,7 @@ import {
     setDiagramLineStartPoint,
     setDiagramLineEndPoint,
     addDiagramLine,
+    updateDiagramLine,
     removeDiagramSelectedObjects,
 
     openDiagramObjectModal,

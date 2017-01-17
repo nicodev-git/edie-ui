@@ -20,6 +20,7 @@ import {
   SET_DIAGRAM_LINE_END_POINT,
 
   ADD_DIAGRAM_LINE,
+  UPDATE_DIAGRAM_LINE,
 
   OPEN_DIAGRAM_OBJECT_MODAL,
   CLOSE_DIAGRAM_OBJECT_MODAL,
@@ -157,7 +158,7 @@ export default function (state = {}, action) {
       }
 
     case SET_DIAGRAM_LINE_DRAWING:
-      return { ...state, isLineDrawing: action.data, selected: [] }
+      return { ...state, isLineDrawing: action.data, isLineDrawingStart: action.isDrawingStart, drawingLine: action.drawingLine, selected: [] }
 
     case SET_DIAGRAM_LINE_START_POINT:
       return { ...state, lineStart: action.pos, lineStartObject: action.object, lineStartObjectPoint: action.connectionPoint }
@@ -167,6 +168,9 @@ export default function (state = {}, action) {
 
     case ADD_DIAGRAM_LINE:
       return { ...state, lines: concat(state.lines, action.data), lastId: state.lastId + 1 }
+
+    case UPDATE_DIAGRAM_LINE:
+      return { ...state, lines: state.lines.map(m => m.id === action.line.id ? action.line : m) }
 
     case OPEN_DIAGRAM_OBJECT_MODAL:
       return { ...state, objectModalOpen: true, objectConfig: action.config }
