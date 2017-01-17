@@ -27,7 +27,8 @@ import {
   OPEN_DIAGRAM_OBJECT_MODAL,
   CLOSE_DIAGRAM_OBJECT_MODAL,
 
-  SET_DIAGRAM_EDITING_TEXT
+  SET_DIAGRAM_EDITING_TEXT,
+  REMOVE_DIAGRAM_SELECTED_OBJECTS
 
 } from './types'
 
@@ -203,6 +204,14 @@ export function setDiagramEditingText (object) {
     dispatch({
       type: SET_DIAGRAM_EDITING_TEXT,
       object
+    })
+  }
+}
+
+export function removeDiagramSelectedObjects () {
+  return dispatch => {
+    dispatch({
+      type: REMOVE_DIAGRAM_SELECTED_OBJECTS
     })
   }
 }

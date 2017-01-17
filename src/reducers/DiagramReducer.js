@@ -1,4 +1,4 @@
-import { concat } from 'lodash'
+import { concat, findIndex } from 'lodash'
 import { DiagramTypes } from 'shared/Global'
 import {
   ADD_DIAGRAM_OBJECT,
@@ -24,7 +24,8 @@ import {
   OPEN_DIAGRAM_OBJECT_MODAL,
   CLOSE_DIAGRAM_OBJECT_MODAL,
 
-  SET_DIAGRAM_EDITING_TEXT
+  SET_DIAGRAM_EDITING_TEXT,
+  REMOVE_DIAGRAM_SELECTED_OBJECTS
 } from 'actions/types'
 
 export default function (state = {}, action) {
@@ -175,6 +176,26 @@ export default function (state = {}, action) {
 
     case SET_DIAGRAM_EDITING_TEXT:
       return { ...state, object: action.object }
+
+    case REMOVE_DIAGRAM_SELECTED_OBJECTS: {
+      const { objects, lines, selected } = state
+      return {
+        ...state,
+        objects: objects.filter(obj => findIndex(selected, { id: obj.id, type: DiagramTypes.OBJECT }) < 0),
+        lines: lines.filter(line => {
+          if (findIndex(selected, { id: line.id, type: DiagramTypes.LINE }) >= 0) return false
+          if (findIndex(selected, { id: line.startObject.id, type: DiagramTypes.OBJECT }) >= 0) return false
+          if (findIndex(selected, { id: line.endObject.id, type: DiagramTypes.OBJECT }) >= 0) return false
+          return true
+        }),
+        selected: [],
+
+        hovered: null,
+        isDragging: false,
+        isResizing: false,
+        isLineDrawing: false
+      }
+    }
   }
   return state
 }
