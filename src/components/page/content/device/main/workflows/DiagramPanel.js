@@ -49,7 +49,6 @@ class DiagramPanel extends React.Component {
 
   onDblClickObject (obj) {
     this.props.selectDiagramObject(obj)
-    // this.props.
   }
 
   // ///////////////////////////////////////////////////
@@ -85,7 +84,6 @@ class DiagramPanel extends React.Component {
 
   onDragObjectEnd (e) {
     const { mouseDownPos, cursorPos } = this.props
-
     this.props.moveDiagramSelectedObjects({
       x: cursorPos.x - mouseDownPos.x,
       y: cursorPos.y - mouseDownPos.y
