@@ -35,8 +35,9 @@ class DiagramPanel extends React.Component {
 
   onMouseDownObject (obj, e) {
     console.log('onMouseDownObject')
+    this.props.setDiagramMouseDown(true, this.convertEventPosition(e), 'object')
     this.props.selectDiagramObject(obj)
-    // e.stopPropagation()
+    e.stopPropagation()
   }
 
   onMouseOverObject (obj) {
@@ -61,7 +62,9 @@ class DiagramPanel extends React.Component {
   // ///////////////////////////////////////////////////
 
   onMouseDownHandlePoint (point, e) {
+    this.props.setDiagramMouseDown(true, this.convertEventPosition(e), 'resize-handle')
     this.props.setDiagramResizingPoint(point)
+    e.stopPropagation()
   }
 
   // ///////////////////////////////////////////////////
@@ -106,11 +109,13 @@ class DiagramPanel extends React.Component {
 
   // ///////////////////////////////////////////////////
 
-  onMouseDownLineHandle (point, pos, object) {
+  onMouseDownLineHandle (point, pos, object, e) {
     console.log(`onMouseDownLineHandle ${point}`)
+    this.props.setDiagramMouseDown(true, this.convertEventPosition(e), 'line-handle')
     this.props.setDiagramLineDrawing(true)
     this.props.setDiagramLineStartPoint(pos, object, point)
     this.props.setDiagramLineEndPoint(null, null, -1)
+    e.stopPropagation()
   }
 
   onLineDrawStart (e) {
@@ -148,21 +153,7 @@ class DiagramPanel extends React.Component {
   // ///////////////////////////////////////////////////
 
   onMouseDownPanel (e) {
-    let objectType = ''
-
-    for (const className of e.target.classList) {
-      if (className === 'object') objectType = 'object'
-      else if (className === 'resize-handle') objectType = 'resize-handle'
-      else if (className === 'line-handle') objectType = 'line-handle'
-    }
-
-    console.log(`onMouseDownPanel ${objectType}`)
-    this.props.setDiagramMouseDown(true, this.convertEventPosition(e), objectType)
-    if (objectType) return
-
     this.props.selectDiagramObject(null)
-
-    e.preventDefault()
   }
 
   onMouseMovePanel (e) {

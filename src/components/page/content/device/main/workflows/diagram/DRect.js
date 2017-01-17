@@ -8,7 +8,7 @@ class DRect extends BaseObject {
     return (
       <g style={{visibility: 'visible', cursor: 'move'}}>
         <rect x={x} y={y} width={w} height={h} fill="#ffffff" stroke="#000000" pointerEvents="all" {...listeners}/>
-        <text x={x + w / 2} y={y + h / 2} textAnchor="middle" dominantBaseline="central">{name}</text>
+        <text x={x + w / 2} y={y + h / 2} textAnchor="middle" dominantBaseline="central" pointerEvents="none">{name}</text>
       </g>
     )
   }
