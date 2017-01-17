@@ -24,7 +24,8 @@ import {
   addDiagramLine,
 
   openDiagramObjectModal,
-  closeDiagramObjectModal
+  closeDiagramObjectModal,
+  removeDiagramSelectedObjects
 } from 'actions'
 
 @connect(
@@ -74,6 +75,7 @@ import {
     setDiagramLineStartPoint,
     setDiagramLineEndPoint,
     addDiagramLine,
+    removeDiagramSelectedObjects,
 
     openDiagramObjectModal,
     closeDiagramObjectModal

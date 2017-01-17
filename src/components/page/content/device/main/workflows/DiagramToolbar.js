@@ -1,7 +1,16 @@
 import React from 'react'
 
 class DiagramToolbar extends React.Component {
+
+  onClickDelete () {
+    this.props.removeDiagramSelectedObjects()
+  }
+
   render () {
+    const { selected } = this.props
+
+    // //////////////////////////////////////////////////////////////////////////
+
     return (
       <div className="toolbar-container">
         <a href="javascript:void(0);" className="geLabel"
@@ -28,7 +37,10 @@ class DiagramToolbar extends React.Component {
 
         <div className="geSeparator"/>
 
-        <a href="javascript:void(0);" className="geButton mxDisabled"><div className="geSprite geSprite-delete"/></a>
+        <a href="javascript:void(0);" className={`geButton ${selected.length ? '' : 'mxDisabled'}`}
+          onClick={this.onClickDelete.bind(this)}>
+          <div className="geSprite geSprite-delete"/>
+        </a>
 
         <div className="geSeparator"/>
 

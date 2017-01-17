@@ -62,7 +62,7 @@ class DiagramModal extends React.Component {
 
   renderToolbar () {
     return (
-      <DiagramToolbar/>
+      <DiagramToolbar {...this.props}/>
     )
   }
 
