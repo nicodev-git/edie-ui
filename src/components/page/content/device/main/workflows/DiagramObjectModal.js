@@ -39,13 +39,7 @@ class DiagramObjectModal extends React.Component {
               <label className="col-md-3">Name</label>
               <div className="col-md-9">
                 <select className="form-control" ref="name">
-                  <option>Command1</option>
-                  <option>Command2</option>
-                  <option>Command3</option>
-                  <option>Command4</option>
-                  <option>Command5</option>
-                  <option>Command6</option>
-                  <option>Command7</option>
+                  {this.props.commands.map((c, index) => <option key={index}>{c}</option>)}
                 </select>
               </div>
             </div>

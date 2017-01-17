@@ -179,7 +179,9 @@ class MainWorkflowModal extends React.Component {
   renderDiagramModal () {
     if (!this.props.wfDiagramModalOpen) return null
     return (
-      <DiagramModalContainer onClose={this.onDiagramModalClose.bind(this)}/>
+      <DiagramModalContainer
+        commands={this.state.actions.map(a => a.command)}
+        onClose={this.onDiagramModalClose.bind(this)}/>
     )
   }
 
