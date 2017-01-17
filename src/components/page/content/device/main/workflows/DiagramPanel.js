@@ -1,7 +1,6 @@
 import React from 'react'
-import {
-  DropTarget
-} from 'react-dnd'
+import { DropTarget } from 'react-dnd'
+import { findIndex } from 'lodash'
 
 import { DragTypes, DiagramTypes } from 'shared/Global'
 import DRect from './diagram/DRect'
@@ -222,10 +221,12 @@ class DiagramPanel extends React.Component {
   }
 
   renderLine (line) {
-    const startItem = workflowItems[line.startObject.imgIndex]
-    const startPos = startItem.getConnectionPoint(line.startObject, line.startPoint)
-    const endItem = workflowItems[line.endObject.imgIndex]
-    const endPos = endItem.getConnectionPoint(line.endObject, line.endPoint)
+    const startObject = this.props.objects[findIndex(this.props.objects, {id: line.startObject.id})]
+    const endObject = this.props.objects[findIndex(this.props.objects, {id: line.endObject.id})]
+    const startItem = workflowItems[startObject.imgIndex]
+    const startPos = startItem.getConnectionPoint(startObject, line.startPoint)
+    const endItem = workflowItems[endObject.imgIndex]
+    const endPos = endItem.getConnectionPoint(endObject, line.endPoint)
 
     const points = findStepLines(startItem, startPos, line.startPoint, endItem, endPos, line.endPoint)
 
