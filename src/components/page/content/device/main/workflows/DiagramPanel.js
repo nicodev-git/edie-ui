@@ -49,6 +49,7 @@ class DiagramPanel extends React.Component {
 
   onDblClickObject (obj) {
     this.props.selectDiagramObject(obj)
+    this.props.openDiagramObjectModal(obj)
   }
 
   // ///////////////////////////////////////////////////

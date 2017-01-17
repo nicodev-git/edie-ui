@@ -13,12 +13,15 @@ class DiagramObjectModal extends React.Component {
 
   onClickSave () {
     const name = this.refs.name.value
+    const { objectConfig } = this.props
     if (!name) return window.alert('Please type name.')
-    this.props.addDiagramObject(assign({ name }, this.props.objectConfig))
+
+    this.props.addDiagramObject(assign({}, objectConfig, { name }))
     this.props.closeModal()
   }
 
   render () {
+    const {objectConfig} = this.props
     return (
       <Modal
         show
@@ -38,7 +41,7 @@ class DiagramObjectModal extends React.Component {
             <div className="row">
               <label className="col-md-3">Name</label>
               <div className="col-md-9">
-                <select className="form-control" ref="name">
+                <select className="form-control" ref="name" defaultValue={objectConfig ? objectConfig.name : ''}>
                   {this.props.commands.map((c, index) => <option key={index}>{c}</option>)}
                 </select>
               </div>

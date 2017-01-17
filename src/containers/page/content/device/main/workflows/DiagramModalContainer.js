@@ -7,6 +7,7 @@ import {
   closeDeviceWfDiagramModal,
 
   addDiagramObject,
+  updateDiagramObject,
   selectDiagramObject,
   setHoverDiagramObject,
   clearHoverDiagramObject,
@@ -63,6 +64,8 @@ import {
   }), {
     closeDeviceWfDiagramModal,
     addDiagramObject,
+    updateDiagramObject,
+
     selectDiagramObject,
     setHoverDiagramObject,
     clearHoverDiagramObject,

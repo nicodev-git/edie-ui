@@ -2,6 +2,8 @@ import { concat, findIndex } from 'lodash'
 import { DiagramTypes } from 'shared/Global'
 import {
   ADD_DIAGRAM_OBJECT,
+  UPDATE_DIAGRAM_OBJECT,
+
   OPEN_DEVICE_WF_DIAGRAM_MODAL,
   SELECT_DIAGRAM_OBJECT,
   SET_HOVER_DIAGRAM_OBJECT,
@@ -52,6 +54,9 @@ export default function (state = {}, action) {
 
     case ADD_DIAGRAM_OBJECT:
       return { ...state, objects: concat(state.objects, action.data), lastId: state.lastId + 1 }
+
+    case UPDATE_DIAGRAM_OBJECT:
+      return { ...state, objects: state.objects.map(m => m.id === action.data.id ? action.data : m) }
 
     case SELECT_DIAGRAM_OBJECT:
       return { ...state, selected: action.data, hovered: null }

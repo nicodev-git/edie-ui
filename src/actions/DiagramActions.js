@@ -1,6 +1,7 @@
 import {
 
   ADD_DIAGRAM_OBJECT,
+  UPDATE_DIAGRAM_OBJECT,
   SELECT_DIAGRAM_OBJECT,
 
   SET_HOVER_DIAGRAM_OBJECT,
@@ -37,6 +38,15 @@ export function addDiagramObject (object) {
   return dispatch => {
     dispatch({
       type: ADD_DIAGRAM_OBJECT,
+      data: object
+    })
+  }
+}
+
+export function updateDiagramObject (object) {
+  return dispatch => {
+    dispatch({
+      type: UPDATE_DIAGRAM_OBJECT,
       data: object
     })
   }
