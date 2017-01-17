@@ -147,7 +147,9 @@ class DiagramPanel extends React.Component {
 
   onMouseDownLine (line, e) {
     console.log('onMouseDownLine')
+    this.props.setDiagramMouseDown(true, this.convertEventPosition(e), 'line')
     this.props.selectDiagramObject(line)
+    e.stopPropagation()
   }
 
   // ///////////////////////////////////////////////////
@@ -229,7 +231,8 @@ class DiagramPanel extends React.Component {
 
     return (
       <g key={`line-${line.id}`} style={{cursor: 'move'}}>
-        <path d={`M ${points.map(p => `${p.x} ${p.y}`).join(' L ')}`} stroke="#000000" fill="none" strokeMiterlimit="10" markerEnd="url(#arrowEnd)"/>
+        <path d={`M ${points.map(p => `${p.x} ${p.y}`).join(' L ')}`} stroke="#000000" fill="none" strokeMiterlimit="10" markerEnd="url(#arrowEnd)"
+          onMouseDown={this.onMouseDownLine.bind(this, line)} pointerEvents="all"/>
       </g>
     )
   }
@@ -285,8 +288,21 @@ class DiagramPanel extends React.Component {
         </g>
       )
     } else if (type === DiagramTypes.LINE) {
+      const { startObject, startPoint, endObject, endPoint } = obj
+      const startItem = workflowItems[startObject.imgIndex]
+      const endItem = workflowItems[endObject.imgIndex]
+      const startPos = startItem.getConnectionPoint(startObject, startPoint)
+      const endPos = endItem.getConnectionPoint(endObject, endPoint)
+
       return (
-        <g key={`sel-${obj.id}`} />
+        <g key={`sel-${obj.id}`}>
+          <g style={{cursor: 'move'}}>
+            <image x={startPos.x - 8.5} y={startPos.y - 8.5} width="17" height="17" href="/images/handle.png" preserveAspectRatio="none"/>
+          </g>
+          <g style={{cursor: 'move'}}>
+            <image x={endPos.x - 8.5} y={endPos.y - 8.5} width="17" height="17" href="/images/handle.png" preserveAspectRatio="none"/>
+          </g>
+        </g>
       )
     }
   }
