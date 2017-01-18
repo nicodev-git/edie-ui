@@ -36,6 +36,14 @@ class DiagramModal extends React.Component {
 
   // ////////////////////////////////////////////////////
 
+  onSearchKeyPress (e) {
+    if (e.keyCode === 13) {
+      console.log(this.refs.search.value)
+    }
+  }
+
+  // ////////////////////////////////////////////////////
+
   onDrop (item, offset, component) {
     const node = ReactDOM.findDOMNode(component)
     const rt = node.getClientRects()[0]
@@ -72,8 +80,9 @@ class DiagramModal extends React.Component {
         <div style={{display: 'block'}}>
           <div className="geSidebar" style={{boxSizing: 'border-box', overflow: 'hidden', width: '100%', padding: '14px 8px 0px'}}>
             <div style={{whiteSpace: 'nowrap', textOverflow: 'clip', paddingBottom: '8px', cursor: 'default'}}>
-              <input placeholder="Search Shapes" type="text"
-                style={{fontSize: '12px', overflow: 'hidden', boxSizing: 'border-box', border: '1px solid rgb(213, 213, 213)', borderRadius: '4px', width: '100%', outline: 'none', padding: '6px 20px 6px 6px'}} />
+              <input placeholder="Search Shapes" type="text" ref="search"
+                style={{fontSize: '12px', overflow: 'hidden', boxSizing: 'border-box', border: '1px solid rgb(213, 213, 213)', borderRadius: '4px', width: '100%', outline: 'none', padding: '6px 20px 6px 6px'}}
+                onKeyUp={this.onSearchKeyPress.bind(this)}/>
                 <img src="/images/search2.png" style={{position: 'relative', left: '-18px', top: '1px'}} />
             </div>
           </div>
