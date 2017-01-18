@@ -16,7 +16,7 @@ class DiagramObjectModal extends React.Component {
     const { objectConfig } = this.props
     if (!name) return window.alert('Please type name.')
 
-    if (objectConfig.id) {
+    if (objectConfig.name) {
       this.props.updateDiagramObject(assign({}, objectConfig, { name }))
     } else {
       this.props.addDiagramObject(assign({}, objectConfig, { name }))
