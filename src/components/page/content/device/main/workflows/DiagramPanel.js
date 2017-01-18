@@ -256,7 +256,7 @@ class DiagramPanel extends React.Component {
     return (
       <g key={`line-${line.id}`} style={{cursor: 'move'}}>
         <path d={`M ${points.map(p => `${p.x} ${p.y}`).join(' L ')}`} stroke="#000000" fill="none" strokeMiterlimit="10" markerEnd="url(#arrowEnd)"
-          onMouseDown={this.onMouseDownLine.bind(this, line)} pointerEvents="all"/>
+          onMouseDown={this.onMouseDownLine.bind(this, line)} pointerEvents="stroke"/>
       </g>
     )
   }
