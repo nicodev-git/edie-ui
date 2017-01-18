@@ -18,7 +18,6 @@ export default class MainWorkflows extends React.Component {
     const {device} = this.props
 
     this.state = {
-      url: Api.workflow.getWorkflowsForDevice, // eslint-disable-line no-undef
       params: {
         id: device.workflowids || []
       }
@@ -60,6 +59,7 @@ export default class MainWorkflows extends React.Component {
   }
 
   renderTable () {
+    const { device, workflowListDraw } = this.props
     return (
       <ResponsiveInfiniteTable
         id="rule1"
@@ -70,7 +70,10 @@ export default class MainWorkflows extends React.Component {
         onRowDblClick={this.onClickEdit.bind(this)}
 
         url="/workflow/search/findById"
-        params={this.state.params}
+        params={{
+          id: device.workflowids || [],
+          draw: workflowListDraw
+        }}
       />
     )
   }

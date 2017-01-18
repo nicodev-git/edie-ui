@@ -57,7 +57,8 @@ const initialState = {
     processes: [],
 
     workflowCategories: [],
-    workflows: []
+    workflows: [],
+    workflowListDraw: 1
   },
 
   search: {

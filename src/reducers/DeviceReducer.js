@@ -108,13 +108,9 @@ export default function (state = INITIAL_STATE, action) {
       return { ...state, workflowModalOpen: false }
 
     case ADD_DEVICE_WORKFLOW:
-      return { ...state, workflows: concat(state.workflows || [], action.data) }
-
     case UPDATE_DEVICE_WORKFLOW:
-      return { ...state, workflows: state.workflows.map(w => w.id === action.data.id ? action.data : w) }
-
     case REMOVE_DEVICE_WORKFLOW:
-      return { ...state, workflows: state.workflows.filter(w => w.id !== action.data.id) }
+      return { ...state, workflowListDraw: state.workflowListDraw + 1 }
 
     case OPEN_DEVICE_WF_DIAGRAM_MODAL:
       return { ...state, wfDiagramModalOpen: true }

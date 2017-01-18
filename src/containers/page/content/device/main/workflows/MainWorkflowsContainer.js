@@ -8,7 +8,8 @@ import { fetchDeviceWorkflows, openDeviceWorkflowModal, removeDeviceWorkflow } f
   state => ({
     device: state.dashboard.selectedDevice,
     workflows: state.devices.workflows,
-    workflowModalOpen: state.devices.workflowModalOpen
+    workflowModalOpen: state.devices.workflowModalOpen,
+    workflowListDraw: state.devices.workflowListDraw
   }), {
     openDeviceWorkflowModal,
     fetchDeviceWorkflows,
