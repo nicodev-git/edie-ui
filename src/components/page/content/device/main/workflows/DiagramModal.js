@@ -110,9 +110,9 @@ class DiagramModal extends React.Component {
 
     let searchBtn
     if (text) {
-      searchBtn = <img src="/images/close2.png" style={{position: 'relative', left: '-18px', top: '1px'}} onClick={this.onClickClear.bind(this)}/>
+      searchBtn = <img src="/images/close2.png" style={{position: 'relative', left: '-18px', top: '-1px'}} onClick={this.onClickClear.bind(this)}/>
     } else {
-      searchBtn = <img src="/images/search2.png" style={{position: 'relative', left: '-18px', top: '1px'}} />
+      searchBtn = <img src="/images/search2.png" style={{position: 'relative', left: '-18px', top: '-1px'}} />
     }
 
     return (
