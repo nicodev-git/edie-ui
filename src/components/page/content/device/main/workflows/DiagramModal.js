@@ -16,6 +16,13 @@ const itemStyle = {
 }
 
 class DiagramModal extends React.Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      text: '',
+      keyword: ''
+    }
+  }
   onHide () {
 
   }
@@ -35,11 +42,21 @@ class DiagramModal extends React.Component {
   }
 
   // ////////////////////////////////////////////////////
+  onSearchChange (e) {
+    const text = e.target.value
+    if (this.state.text !== text) this.setState({ text })
+  }
 
   onSearchKeyPress (e) {
     if (e.keyCode === 13) {
-      console.log(this.refs.search.value)
+      this.setState({
+        keyword: this.refs.search.value
+      })
     }
+  }
+
+  onClickClear (e) {
+    this.setState({ text: '', keyword: '' })
   }
 
   // ////////////////////////////////////////////////////
@@ -74,19 +91,50 @@ class DiagramModal extends React.Component {
     )
   }
 
+  renderSearch () {
+    const { keyword, text } = this.state
+    const filtered = keyword ? workflowItems.filter(m => m.title.toLowerCase().indexOf(keyword.toLowerCase()) >= 0) : null
+
+    let result = null
+    if (filtered) {
+      if (filtered.length) {
+        result = filtered.map((m, index) =>
+          <DiagramDragItem key={index} imgIndex={index}>
+            <svg style={itemStyle}>{m.img}</svg>
+          </DiagramDragItem>
+        )
+      } else {
+        result = `No results for '${keyword}'`
+      }
+    }
+
+    let searchBtn
+    if (text) {
+      searchBtn = <img src="/images/close2.png" style={{position: 'relative', left: '-18px', top: '1px'}} onClick={this.onClickClear.bind(this)}/>
+    } else {
+      searchBtn = <img src="/images/search2.png" style={{position: 'relative', left: '-18px', top: '1px'}} />
+    }
+
+    return (
+      <div style={{display: 'block'}}>
+        <div className="geSidebar" style={{boxSizing: 'border-box', overflow: 'hidden', width: '100%', padding: '5px'}}>
+          <div style={{whiteSpace: 'nowrap', textOverflow: 'clip', paddingBottom: '8px', cursor: 'default'}}>
+            <input placeholder="Search Shapes" type="text" ref="search"
+              style={{fontSize: '12px', overflow: 'hidden', boxSizing: 'border-box', border: '1px solid rgb(213, 213, 213)', borderRadius: '4px', width: '100%', outline: 'none', padding: '6px 20px 6px 6px'}}
+              onKeyUp={this.onSearchKeyPress.bind(this)} onChange={this.onSearchChange.bind(this)} value={text}/>
+            { searchBtn }
+          </div>
+
+          {result}
+        </div>
+      </div>
+    )
+  }
+
   renderSidebar () {
     return (
       <div className="draw-sidebar">
-        <div style={{display: 'block'}}>
-          <div className="geSidebar" style={{boxSizing: 'border-box', overflow: 'hidden', width: '100%', padding: '14px 8px 0px'}}>
-            <div style={{whiteSpace: 'nowrap', textOverflow: 'clip', paddingBottom: '8px', cursor: 'default'}}>
-              <input placeholder="Search Shapes" type="text" ref="search"
-                style={{fontSize: '12px', overflow: 'hidden', boxSizing: 'border-box', border: '1px solid rgb(213, 213, 213)', borderRadius: '4px', width: '100%', outline: 'none', padding: '6px 20px 6px 6px'}}
-                onKeyUp={this.onSearchKeyPress.bind(this)}/>
-                <img src="/images/search2.png" style={{position: 'relative', left: '-18px', top: '1px'}} />
-            </div>
-          </div>
-        </div>
+        {this.renderSearch()}
 
         <a href="javascript:void(0);" className="geTitle">General</a>
         <div style={{padding: '5px'}}>
