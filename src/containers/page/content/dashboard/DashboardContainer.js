@@ -1,24 +1,88 @@
-import React from 'react'
 import Dashboard from '../../../../components/page/content/dashboard/Dashboard'
 import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
-import { updateDashboard } from '../../../../actions'
+import {
+  fetchBigIncidents,
 
-class DashboardContainer extends React.Component {
-  render () {
-    return (
-      <Dashboard {...this.props} />
-    )
-  }
-}
+  fetchIncidents,
+  fixIncident,
+  ackIncident,
 
-DashboardContainer.defaultProps = {
-  hidden: false
-}
+  fetchDeviceTemplates,
+
+  openDevice,
+  addMapDevice,
+  deleteMapDevice,
+  updateMapDevice,
+  addMapLine,
+  deleteMapLine,
+  updateMapLine,
+
+  importMap,
+  openMapImportModal,
+  closeMapImportModal,
+
+  addMap,
+  updateMap,
+  deleteMap,
+
+  fetchMaps,
+  changeMap,
+
+  fetchAttackers,
+
+  updateDashboard
+} from 'actions'
 
 export default connect(
-  state => ({ /* ... */ }),
-  dispatch => ({
-    updateDashboard: bindActionCreators(updateDashboard, dispatch)
-  })
-)(DashboardContainer)
+  state => ({
+    bigIncidents: state.dashboard.bigIncidents,
+    incidents: state.dashboard.incidents,
+
+    deviceTemplates: state.settings.deviceTemplates,
+
+    mapDevices: state.dashboard.mapDevices,
+    mapLines: state.dashboard.mapLines,
+    selectedMap: state.dashboard.selectedMap,
+    showTraffic: state.settings.showTraffic,
+
+    maps: state.dashboard.maps,
+    mapImportModalVisible: state.dashboard.mapImportModalVisible,
+
+    attackers: state.dashboard.attackers,
+    countries: [],
+
+    stats: state.dashboard.stats
+  }), {
+
+    fetchBigIncidents,
+
+    fetchIncidents,
+    fixIncident,
+    ackIncident,
+
+    fetchDeviceTemplates,
+
+    openDevice,
+    addMapDevice,
+    deleteMapDevice,
+    updateMapDevice,
+    addMapLine,
+    deleteMapLine,
+    updateMapLine,
+
+    importMap,
+    openMapImportModal,
+    closeMapImportModal,
+
+    addMap,
+    updateMap,
+    deleteMap,
+
+    fetchMaps,
+    changeMap,
+
+    fetchAttackers,
+
+    updateDashboard
+  }
+)(Dashboard)
