@@ -5,6 +5,7 @@ import {
 } from 'react-bootstrap'
 import { reduxForm, Field } from 'redux-form'
 import { assign } from 'lodash'
+import { connect } from 'react-redux'
 
 const renderInput = field => (
     <div className="row margin-md-bottom">
@@ -90,6 +91,8 @@ class IdentityModal extends React.Component { // eslint-disable-line react/no-mu
   }
 }
 
-export default reduxForm({
-  form: 'identityEditForm'
-})(IdentityModal)
+export default connect(
+  state => ({
+    initialValues: (state.settings.editIdentity || {}).identities
+  })
+)(reduxForm({form: 'identityEditForm'})(IdentityModal))

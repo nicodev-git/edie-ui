@@ -18,7 +18,7 @@ import {
     credentials: state.settings.credentials,
     credentialsModalVisible: state.settings.credentialsModalVisible,
 
-    editCredentials: state.settings.editCredentials,
+    editCredentials: state.settings.editCredentials
   }),
   dispatch => ({
     ...bindActionCreators({
