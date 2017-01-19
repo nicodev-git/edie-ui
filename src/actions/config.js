@@ -1,5 +1,5 @@
 export const getServerDomain = () => {
-  return 'imp.dev.securegion.com'
+  return 'localhost'
 }
 
 export const getServerURL = () => {
