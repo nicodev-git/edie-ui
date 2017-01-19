@@ -66,7 +66,7 @@ class Main extends React.Component {
     if (!found) {
       let deviceId = device ? device.id : 'main'
       deviceMenu(deviceId).forEach(item => {
-        console.log(item.path, pathname)
+        // console.log(item.path, pathname)
         if (item.id === dashboardId) return true
         if (startsWith(pathname, item.path)) {
           pageId = item.id

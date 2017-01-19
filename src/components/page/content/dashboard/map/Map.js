@@ -867,9 +867,6 @@ class Map extends React.Component {
     const { selectedItem, dropItem, dropItemPos, editable, maximized, mapHeight } = this.state
     // const {tooltip, tipLeft, tipTop, tipWidth, tipHeight, selectedItem, // Never used
     //   dropItem, dropItemPos, editable, maximized, mapHeight} = this.state
-
-    console.log(this.props.mapDevices)
-
     return (
       <div className={`map-row${maximized ? ' map-maximized' : ''}`}
         tabIndex="-1" style={{ outline: 0 }} onKeyUp={this.onMapKeyUp.bind(this)}>

@@ -16,7 +16,7 @@ import TabPage from '../../../shared/TabPage'
 import TabPageBody from '../../../shared/TabPageBody'
 import TabPageHeader from '../../../shared/TabPageHeader'
 
-import DeviceSearchModalContainer from '../../../../containers/page/content/search/DeviceSearchModalContainer'
+import DeviceSearchModal from './DeviceSearchModal'
 
 import {
     showIncidentDetail,
@@ -185,7 +185,8 @@ export default class Incidents extends React.Component {
     if (!this.state.deviceModalVisible) return null
 
     return (
-      <DeviceSearchModalContainer
+      <DeviceSearchModal
+        {...this.props}
         devices={this.state.selectedDevices}
         onClose={this.onCloseSearchDevice.bind(this)}/>
     )

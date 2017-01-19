@@ -6,16 +6,21 @@ import { bindActionCreators } from 'redux'
 import {
   searchIncidents,
   fixIncident,
-  ackIncident
+  ackIncident,
+  searchIncidentDevices
 } from '../../../../actions'
 
 @connect(
-  state => ({ incidents: state.search.incidents }),
+  state => ({
+    incidents: state.search.incidents,
+    incidentDevices: state.search.incidentDevices
+  }),
   dispatch => ({
     ...bindActionCreators({
       searchIncidents,
       fixIncident,
-      ackIncident
+      ackIncident,
+      searchIncidentDevices
     }, dispatch)
   })
 )

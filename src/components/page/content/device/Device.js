@@ -28,7 +28,7 @@ export default class Device extends React.Component {
       return null
     }
 
-    console.log(this.props.devices)
+    // console.log(this.props.devices)
 
     if (!this.props.selectedDevice) return null
     return this.props.children
