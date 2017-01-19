@@ -2,6 +2,7 @@ import React from 'react'
 import Modal from 'react-bootstrap-modal'
 import {reduxForm, Field} from 'redux-form'
 import { assign } from 'lodash'
+import { connect } from 'react-redux'
 
 class RuleModal extends React.Component {
   onHide () {
@@ -65,4 +66,8 @@ class RuleModal extends React.Component {
   }
 }
 
-export default reduxForm({form: 'workflowRuleForm'})(RuleModal)
+export default connect(
+  state => ({
+    initialValues: state.devices.editRule
+  })
+)(reduxForm({form: 'workflowRuleForm'})(RuleModal))

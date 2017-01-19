@@ -1,6 +1,7 @@
 import React from 'react'
 import Modal from 'react-bootstrap-modal'
 import { assign } from 'lodash'
+import { connect } from 'react-redux'
 import {reduxForm, Field} from 'redux-form'
 
 class CategoryModal extends React.Component {
@@ -68,4 +69,8 @@ class CategoryModal extends React.Component {
   }
 }
 
-export default reduxForm({form: 'workflowCategoryForm'})(CategoryModal)
+export default connect(
+  state => ({
+    initialValues: state.devices.editWfCategory
+  })
+)(reduxForm({form: 'workflowCategoryForm'})(CategoryModal))

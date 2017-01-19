@@ -2,6 +2,7 @@ import React from 'react'
 import Modal from 'react-bootstrap-modal'
 import { assign } from 'lodash'
 import {reduxForm, Field} from 'redux-form'
+import { connect } from 'react-redux'
 
 class ActionModal extends React.Component {
   onHide () {
@@ -78,4 +79,9 @@ class ActionModal extends React.Component {
     )
   }
 }
-export default reduxForm({form: 'workflowActionForm'})(ActionModal)
+
+export default connect(
+  state => ({
+    initialValues: state.devices.editWfAction
+  })
+)(reduxForm({form: 'workflowActionForm'})(ActionModal))

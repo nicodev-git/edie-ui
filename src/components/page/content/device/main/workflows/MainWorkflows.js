@@ -9,7 +9,7 @@ import TabPage from '../../../../../shared/TabPage'
 import TabPageBody from '../../../../../shared/TabPageBody'
 import TabPageHeader from '../../../../../shared/TabPageHeader'
 
-import MainWorkflowModalContainer from '../../../../../../containers/page/content/device/main/workflows/MainWorkflowModalContainer'
+import MainWorkflowModal from './MainWorkflowModal'
 
 export default class MainWorkflows extends React.Component {
   constructor (props) {
@@ -80,7 +80,7 @@ export default class MainWorkflows extends React.Component {
 
   renderWorkflowModal () {
     if (!this.props.workflowModalOpen) return null
-    return <MainWorkflowModalContainer />
+    return <MainWorkflowModal {...this.props} />
   }
 
   render () {

@@ -5,9 +5,9 @@ import {assign, concat, forOwn} from 'lodash'
 import InlineEdit from 'react-edit-inline'
 import { connect } from 'react-redux'
 
-import RuleModalContainer from '../../../../../../containers/page/content/device/main/workflows/RuleModalContainer'
-import CategoryModalContainer from 'containers/page/content/device/main/workflows/CategoryModalContainer'
-import ActionModalContainer from 'containers/page/content/device/main/workflows/ActionModalContainer'
+import RuleModal from './RuleModal'
+import CategoryModal from './CategoryModal'
+import ActionModal from './ActionModal'
 import DiagramModalContainer from 'containers/page/content/device/main/workflows/DiagramModalContainer'
 
 class MainWorkflowModal extends React.Component {
@@ -159,21 +159,21 @@ class MainWorkflowModal extends React.Component {
   renderRuleModal () {
     if (!this.props.ruleModalOpen) return null
     return (
-      <RuleModalContainer onClose={this.onCloseRuleModal.bind(this)} />
+      <RuleModal {...this.props} onClose={this.onCloseRuleModal.bind(this)} />
     )
   }
 
   renderCategoryModal () {
     if (!this.props.wfCategoryModalOpen) return null
     return (
-      <CategoryModalContainer />
+      <CategoryModal {...this.props} />
     )
   }
 
   renderActionModal () {
     if (!this.props.wfActionModalOpen) return null
     return (
-      <ActionModalContainer onClose={this.onCloseActionModal.bind(this)} />
+      <ActionModal {...this.props} onClose={this.onCloseActionModal.bind(this)} />
     )
   }
 
