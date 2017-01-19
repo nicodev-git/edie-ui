@@ -79,7 +79,7 @@ export default class BigIncidents extends React.Component {
   renderTable () {
     return (
       <IncidentTable ref="table"
-        incidents={this.props.incidents}
+        incidents={this.props.bigIncidents}
         fixIncident={this.props.fixIncident}
         ackIncident={this.props.ackIncident}
       />

@@ -1,6 +1,8 @@
 import React from 'react'
 import {extend} from 'lodash'
 import ReactTooltip from 'react-tooltip'
+import { withRouter } from 'react-router'
+
 import MapCanvas from '../../../../shared/map/MapCanvas'
 
 import MapToolbar from './MapToolbar'
@@ -10,7 +12,7 @@ import DeviceWizardContainer from '../../../../../containers/shared/wizard/Devic
 import { wizardConfig } from '../../../../shared/wizard/WizardConfig'
 import { showConfirm } from '../../../../shared/Alert'
 
-export default class Map extends React.Component {
+class Map extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -916,3 +918,5 @@ Map.contextTypes = {
   user: React.PropTypes.object,
   sid: React.PropTypes.string
 }
+
+export default withRouter(Map)
