@@ -5,6 +5,8 @@ import {
 } from 'react-bootstrap'
 import { reduxForm, Field } from 'redux-form'
 import { assign } from 'lodash'
+import { connect } from 'react-redux'
+
 import { showAlert } from '../../../../shared/Alert'
 
 const renderInput = field => (
@@ -86,7 +88,8 @@ class CredentialModal extends React.Component { // eslint-disable-line react/no-
     )
   }
 }
-
-export default reduxForm({
-  form: 'credentialsEditForm'
-})(CredentialModal)
+export default connect(
+  state => ({
+    initialValues: state.settings.editCredentials
+  })
+)(reduxForm({form: 'credentialsEditForm'})(CredentialModal))

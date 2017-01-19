@@ -6,19 +6,29 @@ import { bindActionCreators } from 'redux'
 import {
   fetchCredentials,
   openCredentialsModal,
-  removeCredentials
+  removeCredentials,
+
+  addCredentials,
+  updateCredentials,
+  closeCredentialsModal
 } from '../../../../../actions'
 
 @connect(
   state => ({
     credentials: state.settings.credentials,
-    credentialsModalVisible: state.settings.credentialsModalVisible
+    credentialsModalVisible: state.settings.credentialsModalVisible,
+
+    editCredentials: state.settings.editCredentials,
   }),
   dispatch => ({
     ...bindActionCreators({
       fetchCredentials,
       openCredentialsModal,
-      removeCredentials
+      removeCredentials,
+
+      addCredentials,
+      updateCredentials,
+      closeCredentialsModal
     }, dispatch)
   })
 )
