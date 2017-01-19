@@ -2,7 +2,7 @@ import React from 'react'
 import Modal from 'react-bootstrap-modal'
 import { showAlert } from '../../../../shared/Alert'
 import InfiniteTable from '../../../../shared/InfiniteTable'
-import UsersModalContainer from '../../../../../containers/page/content/settings/maps/UsersModalContainer'
+import UsersModal from './UsersModal'
 
 export default class MapUsersModal extends React.Component {
   constructor (props) {
@@ -54,7 +54,7 @@ export default class MapUsersModal extends React.Component {
   renderUsersModal () {
     if (!this.state.usersModalVisible) return null
     return (
-      <UsersModalContainer onClose={this.onSelectUser.bind(this)}/>
+      <UsersModal {...this.props} onClose={this.onSelectUser.bind(this)}/>
     )
   }
 

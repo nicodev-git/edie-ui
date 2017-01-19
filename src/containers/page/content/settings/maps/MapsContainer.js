@@ -15,7 +15,9 @@ import {
 
   closeMapUsersModal,
   addMapUser,
-  removeMapUser
+  removeMapUser,
+
+  fetchSettingUsers
 } from '../../../../../actions'
 
 @connect(
@@ -26,7 +28,8 @@ import {
 
     editMap: state.settings.editMap,
 
-    mapUsers: state.settings.mapUsers
+    mapUsers: state.settings.mapUsers,
+    users: state.settings.users
   }),
   dispatch => ({
     ...bindActionCreators({
@@ -41,7 +44,9 @@ import {
 
       closeMapUsersModal,
       addMapUser,
-      removeMapUser
+      removeMapUser,
+
+      fetchSettingUsers
     }, dispatch)
   })
 )
