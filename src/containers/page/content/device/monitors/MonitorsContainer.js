@@ -10,7 +10,17 @@ import {
 } from 'actions'
 
 @connect(
-  state => ({ device: state.dashboard.selectedDevice })
+  state => ({
+    device: state.dashboard.selectedDevice,
+    monitorPickerVisible: state.devices.monitorPickerVisible,
+    monitorWizardVisible: state.devices.monitorWizardVisible,
+  }),
+  {
+    openDeviceMonitorPicker,
+    openDeviceMonitorWizard,
+    closeDeviceMonitorWizard,
+    updateMapDevice
+  }
 )
 @withRouter
 export default class MonitorsContainer extends Component {
