@@ -8,7 +8,7 @@ import { ResponsiveInfiniteTable } from 'components/shared/InfiniteTable'
 import { appendComponent, removeComponent } from '../../../../../util/Component'
 import { showAlert } from '../../../../shared/Alert'
 
-import MonitorPickerContainer from '../../../../../containers/page/content/device/monitors/MonitorPickerContainer'
+import MonitorPicker from './MonitorPicker'
 import MonitorHistoryModal from './MonitorHistoryModal'
 
 export default class MonitorTable extends Component {
@@ -140,7 +140,8 @@ export default class MonitorTable extends Component {
     if (!this.props.monitorPickerVisible) return null
 
     return (
-      <MonitorPickerContainer
+      <MonitorPicker
+        {...this.props}
         onClickItem={monitorConfig => {
           this.setState({monitorConfig}, () => {
             this.addMonitor()

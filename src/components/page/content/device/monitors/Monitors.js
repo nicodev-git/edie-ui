@@ -6,9 +6,9 @@ import {
     Button
 } from 'react-bootstrap'
 
-import MonitorTableContainer from '../../../../../containers/page/content/device/monitors/MonitorTableContainer'
-import EventLogTableContainer from '../../../../../containers/page/content/device/monitors/EventLogTableContainer'
-import ApplicationTableContainer from '../../../../../containers/page/content/device/monitors/ApplicationTableContainer'
+import MonitorTable from './MonitorTable'
+import EventLogTable from './EventLogTable'
+import ApplicationTable from './ApplicationTable'
 import ProcessTable from './ProcessTable'
 import MonitorLogTable from './MonitorLogTable'
 
@@ -160,7 +160,7 @@ export default class Monitors extends React.Component {
               ? null
               : <div className="flex-vertical" style={{height: '100%'}}>
                   <div className="flex-1 flex-vertical" style={{background: 'white'}}>
-                    <MonitorTableContainer {...props} ref="monitor"/>
+                    <MonitorTable {...props} ref="monitor"/>
                   </div>
                 </div>
           }
@@ -168,13 +168,13 @@ export default class Monitors extends React.Component {
           {
             this.state.selected !== 'eventlog'
               ? null
-              : <EventLogTableContainer {...props}/>
+              : <EventLogTable {...props}/>
           }
 
           {
             this.state.selected !== 'application'
               ? null
-              : <ApplicationTableContainer {...props}/>
+              : <ApplicationTable {...props}/>
           }
 
           {

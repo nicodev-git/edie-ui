@@ -6,7 +6,12 @@ import {
   openDeviceMonitorPicker,
   openDeviceMonitorWizard,
   closeDeviceMonitorWizard,
-  updateMapDevice
+  updateMapDevice,
+
+  fetchDeviceEventLog,
+  fetchDeviceApps,
+  fetchMonitorTemplates,
+  closeDeviceMonitorPicker
 } from 'actions'
 
 @connect(
@@ -14,12 +19,21 @@ import {
     device: state.dashboard.selectedDevice,
     monitorPickerVisible: state.devices.monitorPickerVisible,
     monitorWizardVisible: state.devices.monitorWizardVisible,
+
+    eventLogs: state.devices.eventLogs,
+    apps: state.devices.apps,
+    monitorTemplates: state.settings.monitorTemplates
   }),
   {
     openDeviceMonitorPicker,
     openDeviceMonitorWizard,
     closeDeviceMonitorWizard,
-    updateMapDevice
+    updateMapDevice,
+
+    fetchDeviceEventLog,
+    fetchDeviceApps,
+    fetchMonitorTemplates,
+    closeDeviceMonitorPicker
   }
 )
 @withRouter
