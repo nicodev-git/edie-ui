@@ -873,6 +873,7 @@ export default class Map extends React.Component {
         tabIndex="-1" style={{ outline: 0 }} onKeyUp={this.onMapKeyUp.bind(this)}>
         <div className="panel panel-default mb-none" id="mapeditdiv">
           <MapToolbar
+            {...this.props}
             {...events}
             {...this.state}
             selectedItem={selectedItem}
