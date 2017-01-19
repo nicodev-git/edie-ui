@@ -3,6 +3,7 @@ import Modal from 'react-bootstrap-modal'
 import {reduxForm, Field} from 'redux-form'
 import {assign, concat, forOwn} from 'lodash'
 import InlineEdit from 'react-edit-inline'
+import { connect } from 'react-redux'
 
 import RuleModalContainer from '../../../../../../containers/page/content/device/main/workflows/RuleModalContainer'
 import CategoryModalContainer from 'containers/page/content/device/main/workflows/CategoryModalContainer'
@@ -412,4 +413,12 @@ class MainWorkflowModal extends React.Component {
   }
 }
 
-export default reduxForm({form: 'workflowForm'})(MainWorkflowModal)
+export default connect(
+  state => ({
+    initialValues: assign({
+      enable: true,
+      severity: 'HIGH',
+      category: (state.devices.workflowCategories || [''])[0]
+    }, state.devices.editWorkflow)
+  })
+)(reduxForm({form: 'workflowForm'})(MainWorkflowModal))
