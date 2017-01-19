@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import MainRulesAdd from '../../../../../../components/page/content/device/main/rules/MainRulesAdd'
+import MainRulesAdd from '../../../../../../components/page/content/device/main/ruleAdd/MainRulesAdd'
 import { withRouter } from 'react-router'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'

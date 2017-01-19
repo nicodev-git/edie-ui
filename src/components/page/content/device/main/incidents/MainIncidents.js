@@ -16,7 +16,7 @@ import ReactTooltip from 'react-tooltip'
 
 import DateRangePicker from '../../../../../shared/DateRangePicker'
 import { ResponsiveInfiniteTable } from '../../../../../shared/InfiniteTable'
-import AddIncidentModalContainer from '../../../../../../containers/page/content/device/main/incidents/AddIncidentModalContainer'
+import AddIncidentModal from './AddIncidentModal'
 import AddExceptionModal from './AddExceptionModal'
 import CommentsModal from '../../../../../shared/incident/CommentsModal'
 
@@ -195,7 +195,7 @@ export default class MainIncidents extends Component {
   }
 
   onClickOpen () {
-    const selected = this.refs.table.getSelected()
+    const selected = this.getTable().getSelected()
     if (selected) {
       showIncidentDetail(selected)
     } else {
@@ -230,7 +230,7 @@ export default class MainIncidents extends Component {
   }
 
   onClickAddException () {
-    const selected = this.refs.table.getSelected()
+    const selected = this.getTable().getSelected()
     if (selected) {
       this.setState({
         selectedIndex: findIndex(this.props.incidents, {id: selected.id}),
@@ -383,7 +383,7 @@ export default class MainIncidents extends Component {
         <TabPageBody tabs={MainTabs(device.id)} tab={0}>
           {this.renderTable()}
           {this.props.addIncidentModalVisible &&
-          <AddIncidentModalContainer open device={this.state.device}/>}
+          <AddIncidentModal {...this.props} open device={this.state.device}/>}
           {this.state.openExceptionModal &&
           <AddExceptionModal open incident={selectedIncident}
             onClose={this.onCloseExceptionModal.bind(this)}/>}

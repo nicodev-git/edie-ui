@@ -34,7 +34,7 @@ import DeviceMainWorkflowsContainer from './containers/page/content/device/main/
 // import DeviceMainRawIncidentsContainer from './containers/page/content/device/main/raw-incidents/MainRawIncidentsContainer'
 import DeviceMainEventsContainer from './containers/page/content/device/main/events/MainEventsContainer'
 import DeviceMainAdvancedContainer from './containers/page/content/device/main/advanced/MainAdvancedContainer'
-import DeviceMainRuleAddContainer from './containers/page/content/device/main/rules/MainRulesAddContainer'
+import DeviceMainRuleAddContainer from './containers/page/content/device/main/ruleAdd/MainRulesAddContainer'
 import DeviceMonitorsContainer from './containers/page/content/device/monitors/MonitorsContainer'
 import DeviceConnectedContainer from './containers/page/content/device/connected/ConnectedContainer'
 import DeviceInfoContainer from './containers/page/content/device/info/InfoContainer'
