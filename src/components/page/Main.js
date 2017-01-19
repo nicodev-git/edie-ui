@@ -63,7 +63,6 @@ class Main extends React.Component {
       }
     })
 
-    console.log('Sidebar', this.props.device)
     if (!found) {
       let deviceId = device ? device.id : 'main'
       deviceMenu(deviceId).forEach(item => {

@@ -1,10 +1,10 @@
 import React from 'react'
 import Modal from 'react-bootstrap-modal'
-import DateRangePicker from '../../../../shared/DateRangePicker'
-import { ResponsiveInfiniteTable } from '../../../../shared/InfiniteTable'
+import DateRangePicker from 'components/shared/DateRangePicker'
+import { ResponsiveInfiniteTable } from 'components/shared/InfiniteTable'
 import Select from 'react-select'
 import moment from 'moment'
-import IncidentTable from './IncidentTable'
+import IncidentTable from '../dashboard/incidents/IncidentTable'
 
 export default class BigIncidents extends React.Component {
   constructor (props) {
