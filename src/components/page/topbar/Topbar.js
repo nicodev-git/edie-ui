@@ -1,6 +1,6 @@
 import React from 'react'
-import NewsLineContainer from '../../../containers/page/topbar/NewsLineContainer'
-import ProfileModalContainer from '../../../containers/page/topbar/ProfileModalContainer'
+import NewsLine from './NewsLine'
+import ProfileModal from './ProfileModal'
 
 export default class Topbar extends React.Component {
   constructor (props) {
@@ -14,7 +14,7 @@ export default class Topbar extends React.Component {
     if (!this.props.profileModalVisible) return
 
     return (
-      <ProfileModalContainer />
+      <ProfileModal {...this.props} />
     )
   }
 
@@ -56,7 +56,7 @@ export default class Topbar extends React.Component {
           </li>
         </ul>
 
-        <NewsLineContainer />
+        <NewsLine {...this.props} />
 
         <ul className="nav navbar-nav navbar-nav-expanded nav-user-info">
 

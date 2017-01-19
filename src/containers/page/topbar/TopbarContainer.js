@@ -3,7 +3,7 @@ import Topbar from '../../../components/page/topbar/Topbar'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { appendComponent, removeComponent } from '../../../util/Component'
-import { signOut, openProfileModal, closeProfileModal } from '../../../actions'
+import { signOut, openProfileModal, closeProfileModal, fetchUserInfo, updateUserProfile } from '../../../actions'
 
 class TopbarContainer extends React.Component {
   render () {
@@ -16,7 +16,8 @@ class TopbarContainer extends React.Component {
 export default connect(
   state => ({
     user: state.dashboard.userInfo || {},
-    profileModalVisible: state.dashboard.profileModalVisible
+    profileModalVisible: state.dashboard.profileModalVisible,
+    maps: state.dashboard.maps
   }),
   dispatch => ({
     ...bindActionCreators({
@@ -24,7 +25,9 @@ export default connect(
       openProfileModal,
       closeProfileModal,
       appendComponent,
-      removeComponent
+      removeComponent,
+      fetchUserInfo,
+      updateUserProfile
     }, dispatch)
   })
 )(TopbarContainer)

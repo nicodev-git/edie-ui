@@ -8,7 +8,9 @@ import {
   fixIncident,
   ackIncident,
   fetchDeviceIncidents,
-  openAddDeviceIncident
+  openAddDeviceIncident,
+  closeAddDeviceIncident,
+  addDeviceIncident
 } from '../../../../../../actions'
 
 @connect(
@@ -22,7 +24,9 @@ import {
       fetchDeviceIncidents,
       fixIncident,
       ackIncident,
-      openAddDeviceIncident
+      openAddDeviceIncident,
+      closeAddDeviceIncident,
+      addDeviceIncident
     }, dispatch)
   })
 )
