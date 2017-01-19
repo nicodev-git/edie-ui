@@ -23,7 +23,7 @@ module.exports = {
     new webpack.DefinePlugin({
       'process.env': {
         'NODE_ENV': "'production'",
-        'BACKEND_URL': JSON.stringify(process.env.BACKEND_URL || 'http://localhost:8080/')
+        'BACKEND_URL': JSON.stringify(process.env.BACKEND_URL || 'http://imp.dev.securegion.com/')
       }
     }),
     new webpack.optimize.UglifyJsPlugin({
