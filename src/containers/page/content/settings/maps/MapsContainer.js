@@ -7,21 +7,41 @@ import {
   fetchSettingMaps,
   openSettingMapModal,
   deleteSettingMap,
-  openMapUsersModal
+  openMapUsersModal,
+
+  addSettingMap,
+  updateSettingMap,
+  closeSettingMapModal,
+
+  closeMapUsersModal,
+  addMapUser,
+  removeMapUser
 } from '../../../../../actions'
 
 @connect(
   state => ({
     maps: state.settings.maps,
     mapModalVisible: state.settings.mapModalVisible,
-    mapUsersModalVisible: state.settings.mapUsersModalVisible
+    mapUsersModalVisible: state.settings.mapUsersModalVisible,
+
+    editMap: state.settings.editMap,
+
+    mapUsers: state.settings.mapUsers
   }),
   dispatch => ({
     ...bindActionCreators({
       fetchSettingMaps,
       openSettingMapModal,
       deleteSettingMap,
-      openMapUsersModal
+      openMapUsersModal,
+
+      addSettingMap,
+      updateSettingMap,
+      closeSettingMapModal,
+
+      closeMapUsersModal,
+      addMapUser,
+      removeMapUser
     }, dispatch)
   })
 )

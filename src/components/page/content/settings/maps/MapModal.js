@@ -5,6 +5,7 @@ import {
 } from 'react-bootstrap'
 import { reduxForm, Field } from 'redux-form'
 import { assign } from 'lodash'
+import { connect } from 'react-redux'
 
 import { showAlert } from '../../../../shared/Alert'
 
@@ -99,7 +100,8 @@ class MapModal extends Component { // eslint-disable-line react/no-multi-comp
     )
   }
 }
-
-export default reduxForm({
-  form: 'mapEditForm'
-})(MapModal)
+export default connect(
+  state => ({
+    initialValues: state.settings.editMap
+  })
+)(reduxForm({form: 'mapEditForm'})(MapModal))

@@ -9,9 +9,9 @@ const ResponsiveInfiniteTable = InfiniteTable
 import { appendComponent, removeComponent } from '../../../../../util/Component'
 import { showAlert, showConfirm } from '../../../../shared/Alert'
 
-import MapModalContainer from '../../../../../containers/page/content/settings/maps/MapModalContainer'
+import MapModal from './MapModal'
 import MapRestoreModal from './MapRestoreModal'
-import MapUsersModalContainer from '../../../../../containers/page/content/settings/maps/MapUsersModalContainer'
+import MapUsersModal from './MapUsersModal'
 
 import SettingTabs from '../SettingTabs'
 import TabPage from '../../../../shared/TabPage'
@@ -92,19 +92,19 @@ export default class Maps extends React.Component {
   renderMapModal () {
     if (!this.props.mapModalVisible) return
     return (
-      <MapModalContainer />
+      <MapModal {...this.props}/>
     )
   }
 
   renderMapUsersModal () {
     if (!this.props.mapUsersModalVisible) return
     return (
-      <MapUsersModalContainer />
+      <MapUsersModal {...this.props} />
     )
   }
 
   getMaps () {
-    return this.refs.maps.refs.wrappedInstance
+    return this.refs.maps
   }
 
   onMapAdd () {
