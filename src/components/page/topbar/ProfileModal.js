@@ -3,6 +3,7 @@ import Modal from 'react-bootstrap-modal'
 import { Button } from 'react-bootstrap'
 import { reduxForm, Field } from 'redux-form'
 import { assign } from 'lodash'
+import { connect } from 'react-redux'
 import $ from 'jquery'
 import { showAlert } from '../../../components/shared/Alert'
 
@@ -191,6 +192,10 @@ class ProfileModal extends React.Component { // eslint-disable-line react/no-mul
   }
 }
 
-export default reduxForm({
+export default connect(
+  state => ({
+    initialValues: state.dashboard.userInfo
+  })
+)(reduxForm({
   form: 'userProfileForm'
-})(ProfileModal)
+})(ProfileModal))
