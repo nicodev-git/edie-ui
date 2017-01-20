@@ -7,20 +7,39 @@ import { bindActionCreators } from 'redux'
 import {
   openParserTypeModal,
   fetchParserTypes,
-  removeParserType
+  removeParserType,
+
+  addParserType,
+  updateParserType,
+  closeParserTypeModal,
+
+  openParserPatternModal,
+  closeParserPatternModal
 } from 'actions'
 
 @connect(
   state => ({
     parserTypes: state.settings.parserTypes,
     parserTypeDraw: state.settings.parserTypeDraw,
-    parserTypeModalOpen: state.settings.parserTypeModalOpen
+    parserTypeModalOpen: state.settings.parserTypeModalOpen,
+
+    editParserType: state.settings.editParserType,
+
+    editPattern: state.settings.editParserPattern,
+    patternModalOpen: state.settings.parserPatternModalOpen
   }),
   dispatch => ({
     ...bindActionCreators({
       openParserTypeModal,
       removeParserType,
-      fetchParserTypes
+      fetchParserTypes,
+
+      addParserType,
+      updateParserType,
+      closeParserTypeModal,
+
+      openParserPatternModal,
+      closeParserPatternModal
     }, dispatch)
   })
 )

@@ -6,6 +6,7 @@ import {
 import { reduxForm, Field } from 'redux-form'
 import { assign, concat } from 'lodash'
 import InlineEdit from 'react-edit-inline'
+import { connect } from 'react-redux'
 
 import { showAlert } from 'components/shared/Alert'
 
@@ -137,4 +138,8 @@ class ParserTypeModal extends React.Component {
   }
 }
 
-export default reduxForm({form: 'parserTypeForm'})(ParserTypeModal)
+export default connect(
+  state => ({
+    initialValues: state.settings.editParserType
+  })
+)(reduxForm({form: 'parserTypeForm'})(ParserTypeModal))

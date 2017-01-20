@@ -10,7 +10,7 @@ import TabPageBody from '../../../../shared/TabPageBody'
 import TabPageHeader from '../../../../shared/TabPageHeader'
 
 import { ResponsiveInfiniteTable } from '../../../../shared/InfiniteTable'
-import ParserTypeModalContainer from 'containers/page/content/settings/parserTypes/ParserTypeModalContainer'
+import ParserTypeModal from './ParserTypeModal'
 import { showAlert } from 'components/shared/Alert'
 
 class ParserTypes extends React.Component {
@@ -53,7 +53,7 @@ class ParserTypes extends React.Component {
   renderParserTypeModal () {
     if (!this.props.parserTypeModalOpen) return null
     return (
-      <ParserTypeModalContainer />
+      <ParserTypeModal {...this.props}/>
     )
   }
 
