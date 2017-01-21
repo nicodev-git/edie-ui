@@ -3,6 +3,7 @@ import Modal from 'react-bootstrap-modal'
 import {
   Button
 } from 'react-bootstrap'
+import { connect } from 'react-redux'
 import {
   // findIndex, // Never used
   assign
@@ -174,6 +175,8 @@ class UserModal extends React.Component {
   }
 }
 
-export default reduxForm({
-  form: 'userEditForm'
-})(UserModal)
+export default connect(
+  state => ({
+    initialValues: state.settings.editUser
+  })
+)(reduxForm({form: 'userEditForm'})(UserModal))

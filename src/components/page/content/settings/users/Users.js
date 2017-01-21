@@ -5,15 +5,13 @@ import {
     DropdownButton,
     MenuItem
 } from 'react-bootstrap'
-// import { findIndex } from 'lodash' // Never used
-
 import { ResponsiveInfiniteTable } from '../../../../shared/InfiniteTable'
 import { appendComponent, removeComponent } from '../../../../../util/Component'
 import { showAlert, showConfirm } from '../../../../shared/Alert'
 
 import GroupModal from './GroupModal'
-import UserModalContainer from '../../../../../containers/page/content/settings/users/UserModalContainer'
-import PasswordModalContainer from '../../../../../containers/page/content/settings/users/PasswordModalContainer'
+import UserModal from './UserModal'
+import PasswordModal from './PasswordModal'
 
 import SettingTabs from '../SettingTabs'
 import TabPage from '../../../../shared/TabPage'
@@ -100,14 +98,14 @@ export default class Users extends React.Component {
   renderUserModal () {
     if (!this.props.userModalVisible) return null
     return (
-      <UserModalContainer />
+      <UserModal {...this.props}/>
     )
   }
 
   renderPasswordModal () {
     if (!this.props.userPasswordModalVisible) return null
     return (
-      <PasswordModalContainer />
+      <PasswordModal {...this.props}/>
     )
   }
 
