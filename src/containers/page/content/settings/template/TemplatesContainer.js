@@ -14,7 +14,15 @@ import {
   addDeviceTemplate,
   updateDeviceTemplate,
   closeDeviceTplModal,
-  openTplImageModal
+  openTplImageModal,
+
+  addMonitorTemplate,
+  updateMonitorTemplate,
+  closeMonitorTplModal,
+
+  closeTplImageModal,
+  fetchImages,
+  uploadImage
 } from '../../../../../actions'
 
 @connect(
@@ -26,7 +34,11 @@ import {
     tplImageModalVisible: state.settings.tplImageModalVisible,
 
     deviceTpl: state.settings.deviceTpl,
-    selectedTplImage: state.settings.selectedTplImage
+    selectedTplImage: state.settings.selectedTplImage,
+
+    monitorTpl: state.settings.monitorTpl,
+
+    customImages: state.dashboard.images
   }),
   dispatch => ({
     ...bindActionCreators({
@@ -40,7 +52,15 @@ import {
       addDeviceTemplate,
       updateDeviceTemplate,
       closeDeviceTplModal,
-      openTplImageModal
+      openTplImageModal,
+
+      addMonitorTemplate,
+      updateMonitorTemplate,
+      closeMonitorTplModal,
+
+      closeTplImageModal,
+      fetchImages,
+      uploadImage
     }, dispatch)
   })
 )

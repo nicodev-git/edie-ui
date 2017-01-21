@@ -6,8 +6,8 @@ import TabPageBody from '../../../../shared/TabPageBody'
 import TabPageHeader from '../../../../shared/TabPageHeader'
 
 import DeviceTplModal from './DeviceTplModal'
-import MonitorTplModalContainer from '../../../../../containers/page/content/settings/template/MonitorTplModalContainer'
-import ImageUploaderModalContainer from '../../../../../containers/page/content/settings/template/ImageUploaderModalContainer'
+import MonitorTplModal from './MonitorTplModal'
+import ImageUploaderModal from './ImageUploaderModal'
 
 export default class Templates extends Component {
   constructor (props) {
@@ -98,14 +98,14 @@ export default class Templates extends Component {
   renderMonitorTplModal () {
     if (!this.props.monitorTplModalVisible) return null
     return (
-      <MonitorTplModalContainer />
+      <MonitorTplModal {...this.props} />
     )
   }
 
   renderTplImageModal () {
     if (!this.props.tplImageModalVisible) return null
     return (
-      <ImageUploaderModalContainer />
+      <ImageUploaderModal {...this.props} />
     )
   }
 

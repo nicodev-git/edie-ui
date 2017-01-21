@@ -9,7 +9,7 @@ export default class ImageUploaderModal extends React.Component {
       open: true,
 
       icons: [],
-      currentIcon: props.selected
+      currentIcon: props.selected || {}
     }
   }
 
@@ -105,7 +105,7 @@ export default class ImageUploaderModal extends React.Component {
             <a href="javascript:;" style={{position: 'relative', cursor: 'pointer'}} className="pull-left">
               Upload File
               <input
-                ype="file"
+                type="file"
                 name="file"
                 onChange={this.onChangeFile.bind(this)}
                 style={{

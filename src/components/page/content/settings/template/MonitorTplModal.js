@@ -2,6 +2,7 @@ import React from 'react'
 import Modal from 'react-bootstrap-modal'
 import { reduxForm, Field } from 'redux-form'
 import { assign } from 'lodash'
+import { connect } from 'react-redux'
 
 import { extImageBaseUrl } from '../../../../../shared/Global'
 
@@ -104,7 +105,8 @@ class MonitorTplModal extends React.Component { // eslint-disable-line react/no-
   }
 }
 
-export default reduxForm({
-  form: 'monitorTplEdit'
-  /* validate */
-})(MonitorTplModal)
+export default connect(
+  state => ({
+    initialValues: state.settings.monitorTpl || {}
+  })
+)(reduxForm({form: 'monitorTplEdit'})(MonitorTplModal))
