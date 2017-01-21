@@ -5,7 +5,7 @@ import TabPage from '../../../../shared/TabPage'
 import TabPageBody from '../../../../shared/TabPageBody'
 import TabPageHeader from '../../../../shared/TabPageHeader'
 
-import DeviceTplModalContainer from '../../../../../containers/page/content/settings/template/DeviceTplModalContainer'
+import DeviceTplModal from './DeviceTplModal'
 import MonitorTplModalContainer from '../../../../../containers/page/content/settings/template/MonitorTplModalContainer'
 import ImageUploaderModalContainer from '../../../../../containers/page/content/settings/template/ImageUploaderModalContainer'
 
@@ -91,7 +91,7 @@ export default class Templates extends Component {
   renderDeviceTplModal () {
     if (!this.props.deviceTplModalVisible) return null
     return (
-      <DeviceTplModalContainer />
+      <DeviceTplModal {...this.props} />
     )
   }
 

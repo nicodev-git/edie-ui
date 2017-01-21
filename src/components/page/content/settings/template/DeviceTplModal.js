@@ -2,6 +2,7 @@ import React from 'react'
 import Modal from 'react-bootstrap-modal'
 import { reduxForm, Field } from 'redux-form'
 import { assign } from 'lodash'
+import { connect } from 'react-redux'
 
 import { extImageBaseUrl } from '../../../../../shared/Global'
 
@@ -169,7 +170,8 @@ class DeviceTplModal extends React.Component { // eslint-disable-line react/no-m
   }
 }
 
-export default reduxForm({
-  form: 'deviceTplEdit'
-  /* validate */
-})(DeviceTplModal)
+export default connect(
+  state => ({
+    initialValues: state.settings.deviceTpl || {}
+  })
+)(reduxForm({form: 'deviceTplEdit'})(DeviceTplModal))

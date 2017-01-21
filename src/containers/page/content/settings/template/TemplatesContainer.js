@@ -9,7 +9,12 @@ import {
   openDeviceTplModal,
   fetchMonitorTemplates,
   openMonitorTplModal,
-  deleteMonitorTemplate
+  deleteMonitorTemplate,
+
+  addDeviceTemplate,
+  updateDeviceTemplate,
+  closeDeviceTplModal,
+  openTplImageModal
 } from '../../../../../actions'
 
 @connect(
@@ -18,7 +23,10 @@ import {
     deviceTemplates: state.settings.deviceTemplates,
     deviceTplModalVisible: state.settings.deviceTplModalVisible,
     monitorTplModalVisible: state.settings.monitorTplModalVisible,
-    tplImageModalVisible: state.settings.tplImageModalVisible
+    tplImageModalVisible: state.settings.tplImageModalVisible,
+
+    deviceTpl: state.settings.deviceTpl,
+    selectedTplImage: state.settings.selectedTplImage
   }),
   dispatch => ({
     ...bindActionCreators({
@@ -27,7 +35,12 @@ import {
       openDeviceTplModal,
       deleteDeviceTemplate,
       openMonitorTplModal,
-      deleteMonitorTemplate
+      deleteMonitorTemplate,
+
+      addDeviceTemplate,
+      updateDeviceTemplate,
+      closeDeviceTplModal,
+      openTplImageModal
     }, dispatch)
   })
 )
