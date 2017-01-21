@@ -1,7 +1,9 @@
 import React from 'react'
+import {withRouter} from 'react-router'
 import { Panel, PanelHeader, PanelOptions, PanelBody } from '../../../../shared/Panel'
 import IncidentTable from './IncidentTable'
 
+@withRouter
 export default class MainIncidentPanel extends React.Component {
   constructor (props) {
     super(props)
