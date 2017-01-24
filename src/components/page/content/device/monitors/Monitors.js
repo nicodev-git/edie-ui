@@ -100,7 +100,7 @@ export default class Monitors extends React.Component {
   }
 
   getMonitorTable () {
-    return this.refs.monitor.getWrappedInstance().refs.table
+    return this.refs.monitor
   }
 
   onClickAddMonitor () {
