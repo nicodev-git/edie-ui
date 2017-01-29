@@ -83,7 +83,7 @@ class WorkflowModal extends React.Component { // eslint-disable-line react/no-mu
             <Field name="name" component={renderInput} type="text" label="Name"/>
             <Field name="desc" component={renderInput} type="text" label="Description"/>
             <Field name="display_incident_desc" component={renderInput} type="text" label="Display Incident Description"/>
-            <Field name="isGlobal" component={renderInput} type="checkbox" label="Global"/>
+            <Field name="isglobal" component={renderInput} type="checkbox" label="Global"/>
 
             <div className="row margin-md-bottom">
               <label className="col-md-3">Category</label>
