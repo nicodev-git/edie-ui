@@ -4,8 +4,9 @@ import {
     Button
 } from 'react-bootstrap'
 import { reduxForm, Field } from 'redux-form'
-import { assign } from 'lodash'
-import { showAlert } from '../../../../shared/Alert'
+import { assign, forOwn } from 'lodash'
+
+// import { showAlert } from 'components/shared/Alert'
 
 const renderInput = field => (
     <div className="row margin-md-bottom">
@@ -19,7 +20,25 @@ const renderInput = field => (
 class WorkflowModal extends React.Component { // eslint-disable-line react/no-multi-comp
   constructor (props) {
     super(props)
+    let rules = []
+    if (props.editWorkflow) {
+      forOwn(props.editWorkflow.rules || {}, (value, key) => {
+        rules.push({key, value})
+      })
+    }
+    rules.push({key: '', value: ''})
+
     this.state = {
+      current: 1,
+      steps: 3,
+
+      rules,
+      selectedRuleIndex: -1,
+
+      actions: props.editWorkflow ? (props.editWorkflow.actions || []) : [],
+      selectedActionIndex: -1,
+
+      diagram: props.editWorkflow ? props.editWorkflow.flowchart : ''
     }
   }
 
@@ -45,16 +64,31 @@ class WorkflowModal extends React.Component { // eslint-disable-line react/no-mu
 
   handleFormSubmit (values) {
     const { editWorkflow } = this.props
+    const { rules, actions, diagram } = this.state
+    let props = assign({}, editWorkflow, values, { rules: {}, actions: actions, flowchart: diagram })
+    rules.forEach(r => {
+      if (r.key) props.rules[r.key] = r.value
+    })
 
-    let props = assign({}, editWorkflow, values)
-
-    if (!props.name) return showAlert('Please type name.')
+    if (!props.name) return window.alert('Please type name.')
 
     if (editWorkflow) {
       this.props.updateWorkflow(props)
     } else {
       this.props.addWorkflow(props)
     }
+  }
+
+  onClickPrev () {
+    let { current } = this.state
+    current -= 1
+    this.setState({ current })
+  }
+
+  onClickNext () {
+    let { current } = this.state
+    current += 1
+    this.setState({ current })
   }
 
   render () {
