@@ -23,6 +23,10 @@ class WorkflowModal extends React.Component { // eslint-disable-line react/no-mu
     }
   }
 
+  componentWillMount () {
+    this.props.fetchWorkflowCategories()
+  }
+
   onHide () {
     this.onClickClose()
   }
@@ -33,6 +37,10 @@ class WorkflowModal extends React.Component { // eslint-disable-line react/no-mu
 
   onClickClose () {
     this.closeModal()
+  }
+
+  onClickAddCategory () {
+
   }
 
   handleFormSubmit (values) {
@@ -76,6 +84,40 @@ class WorkflowModal extends React.Component { // eslint-disable-line react/no-mu
             <Field name="desc" component={renderInput} type="text" label="Description"/>
             <Field name="display_incident_desc" component={renderInput} type="text" label="Display Incident Description"/>
             <Field name="isGlobal" component={renderInput} type="checkbox" label="Global"/>
+
+            <div className="row margin-md-bottom">
+              <label className="col-md-3">Category</label>
+              <div className="col-md-8 pr-none">
+                <Field name="category" component="select" className="form-control">
+                  {this.props.workflowCategories.map(c => <option key={c.id} value={c.name}>{c.name}</option>)}
+                </Field>
+              </div>
+              <div className="col-md-1 text-right pl-none margin-sm-top">
+                <a href="javascript:;" onClick={this.onClickAddCategory.bind(this)}><i className="fa fa-plus-square fa-x"/></a>
+              </div>
+            </div>
+
+            <div className="row margin-md-bottom">
+              <label className="col-md-3">Severity</label>
+              <div className="col-md-9">
+                <Field name="severity" component="select" className="form-control">
+                  <option>HIGH</option>
+                  <option>MEDIUM</option>
+                  <option>LOW</option>
+                  <option>AUDIT</option>
+                  <option>IGNORE</option>
+                  <option>IGNOREDELETE</option>
+                  <option>DEVICE</option>
+                </Field>
+              </div>
+            </div>
+
+            <div className="row margin-md-bottom">
+              <label className="col-md-3">Enabled</label>
+              <div className="col-md-9">
+                <Field name="enable" component="input" type="checkbox"/>
+              </div>
+            </div>
 
             <div className="text-right">
               <Button className="btn-primary btn-sm" type="submit">Save</Button>

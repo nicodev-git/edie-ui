@@ -3,11 +3,12 @@ import WorkflowModal from '../../../../../components/page/content/settings/rule/
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-import { fetchWorkflows, addWorkflow, updateWorkflow, closeWorkflowModal } from '../../../../../actions'
+import { fetchWorkflows, addWorkflow, updateWorkflow, closeWorkflowModal, fetchWorkflowCategories } from '../../../../../actions'
 
 @connect(
   state => ({
     editWorkflow: state.settings.editWorkflow,
+    workflowCategories: state.devices.workflowCategories,
     initialValues: state.settings.editWorkflow
   }),
   dispatch => ({
@@ -15,7 +16,8 @@ import { fetchWorkflows, addWorkflow, updateWorkflow, closeWorkflowModal } from 
       fetchWorkflows,
       addWorkflow,
       updateWorkflow,
-      closeWorkflowModal
+      closeWorkflowModal,
+      fetchWorkflowCategories
     }, dispatch)
   })
 )
