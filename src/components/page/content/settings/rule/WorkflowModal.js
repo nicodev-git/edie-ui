@@ -9,9 +9,9 @@ import { showAlert } from '../../../../shared/Alert'
 
 const renderInput = field => (
     <div className="row margin-md-bottom">
-        <label className="control-label col-md-3">{field.label}</label>
+        <label className={`col-md-3 ${field.type === 'checkbox' ? '' : 'control-label'}`}>{field.label}</label>
         <div className="col-md-9">
-            <input {...field.input} type={field.type} className="form-control"/>
+            <input {...field.input} type={field.type} className={field.type === 'text' ? 'form-control' : ''}/>
         </div>
     </div>
 )
@@ -75,6 +75,7 @@ class WorkflowModal extends React.Component { // eslint-disable-line react/no-mu
             <Field name="name" component={renderInput} type="text" label="Name"/>
             <Field name="desc" component={renderInput} type="text" label="Description"/>
             <Field name="display_incident_desc" component={renderInput} type="text" label="Display Incident Description"/>
+            <Field name="isGlobal" component={renderInput} type="checkbox" label="Global"/>
 
             <div className="text-right">
               <Button className="btn-primary btn-sm" type="submit">Save</Button>
