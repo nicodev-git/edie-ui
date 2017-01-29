@@ -51,7 +51,9 @@ class ActionModal extends React.Component {
             <div className="row margin-md-bottom">
               <label className="col-md-3">Type</label>
               <div className="col-md-9">
-                <Field name="type" component="input" className="form-control"/>
+                <Field name="type" component="select" className="form-control">
+                  <option>OPEN_INCIDENT</option>
+                </Field>
               </div>
             </div>
 
