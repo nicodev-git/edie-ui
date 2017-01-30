@@ -13,7 +13,8 @@ import {
   openWfCategoryModal,
   closeWfCategoryModal,
 
-  openWfActionModal
+  openWfActionModal,
+  openDeviceWfDiagramModal
 
 } from '../../../../../actions'
 
@@ -23,6 +24,7 @@ import {
     workflowCategories: state.devices.workflowCategories,
     wfCategoryModalOpen: state.devices.wfCategoryModalOpen,
     wfActionModalOpen: state.devices.wfActionModalOpen,
+    wfDiagramModalOpen: state.devices.wfDiagramModalOpen,
 
     initialValues: state.settings.editWorkflow
   }),
@@ -37,7 +39,8 @@ import {
       openWfCategoryModal,
       closeWfCategoryModal,
 
-      openWfActionModal
+      openWfActionModal,
+      openDeviceWfDiagramModal
     }, dispatch)
   })
 )

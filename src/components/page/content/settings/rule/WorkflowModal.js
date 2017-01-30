@@ -7,6 +7,7 @@ import InlineEdit from 'react-edit-inline'
 // import { showAlert } from 'components/shared/Alert'
 import CategoryModal from './CategoryModal'
 import ActionModal from './ActionModal'
+import DiagramModalContainer from 'containers/page/content/device/main/workflows/DiagramModalContainer'
 
 const renderInput = field => (
     <div className="row margin-md-bottom">
@@ -107,7 +108,14 @@ class WorkflowModal extends React.Component { // eslint-disable-line react/no-mu
   }
 
   onClickDiagram () {
+    this.props.openDeviceWfDiagramModal(this.state.diagram)
+  }
 
+  onDiagramModalClose (data) {
+    if (!data) return
+    this.setState({
+      diagram: data
+    })
   }
 
   onClickAddAction () {
@@ -145,6 +153,12 @@ class WorkflowModal extends React.Component { // eslint-disable-line react/no-mu
   }
 
   renderDiagramModal () {
+    if (!this.props.wfDiagramModalOpen) return null
+    return (
+      <DiagramModalContainer
+        commands={this.state.actions.map(a => a.command)}
+        onClose={this.onDiagramModalClose.bind(this)}/>
+    )
   }
 
   renderActionModal () {
