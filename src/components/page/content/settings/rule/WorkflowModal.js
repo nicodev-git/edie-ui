@@ -7,6 +7,7 @@ import { reduxForm, Field } from 'redux-form'
 import { assign, forOwn } from 'lodash'
 
 // import { showAlert } from 'components/shared/Alert'
+import CategoryModal from './CategoryModal'
 
 const renderInput = field => (
     <div className="row margin-md-bottom">
@@ -59,7 +60,7 @@ class WorkflowModal extends React.Component { // eslint-disable-line react/no-mu
   }
 
   onClickAddCategory () {
-
+    this.props.openWfCategoryModal()
   }
 
   handleFormSubmit (values) {
@@ -89,6 +90,13 @@ class WorkflowModal extends React.Component { // eslint-disable-line react/no-mu
     let { current } = this.state
     current += 1
     this.setState({ current })
+  }
+
+  renderCategoryModal () {
+    if (!this.props.wfCategoryModalOpen) return null
+    return (
+      <CategoryModal />
+    )
   }
 
   render () {
@@ -152,6 +160,8 @@ class WorkflowModal extends React.Component { // eslint-disable-line react/no-mu
                 <Field name="enable" component="input" type="checkbox"/>
               </div>
             </div>
+
+            {this.renderCategoryModal()}
 
             <div className="text-right">
               <Button className="btn-primary btn-sm" type="submit">Save</Button>
