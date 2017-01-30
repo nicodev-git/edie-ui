@@ -383,7 +383,7 @@ export default class MainIncidents extends Component {
         <TabPageBody tabs={MainTabs(device.id)} tab={0}>
           {this.renderTable()}
           {this.props.addIncidentModalVisible &&
-          <AddIncidentModal {...this.props} open device={this.state.device}/>}
+          <AddIncidentModal {...this.props} open device={this.props.device}/>}
           {this.state.openExceptionModal &&
           <AddExceptionModal open incident={selectedIncident}
             onClose={this.onCloseExceptionModal.bind(this)}/>}
