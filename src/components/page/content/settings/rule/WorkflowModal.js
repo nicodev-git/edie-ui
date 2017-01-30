@@ -307,7 +307,7 @@ class WorkflowModal extends React.Component { // eslint-disable-line react/no-mu
                 actions.map((a, index) =>
                   <tr key={a.name} className={selectedActionIndex === index ? 'selected' : ''} onClick={() => { this.setState({ selectedActionIndex: index }) }}>
                     <td>{a.name}</td>
-                    <td>{a.type}</td>
+                    <td>{a.actionType}</td>
                   </tr>
                 )
               }

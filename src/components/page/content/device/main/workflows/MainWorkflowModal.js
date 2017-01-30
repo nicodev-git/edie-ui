@@ -336,7 +336,7 @@ class MainWorkflowModal extends React.Component {
                 actions.map((a, index) =>
                   <tr key={a.name} className={selectedActionIndex === index ? 'selected' : ''} onClick={() => { this.setState({ selectedActionIndex: index }) }}>
                     <td>{a.name}</td>
-                    <td>{a.type}</td>
+                    <td>{a.actionType}</td>
                   </tr>
                 )
               }
