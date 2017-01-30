@@ -1,11 +1,12 @@
 import React from 'react'
 import Modal from 'react-bootstrap-modal'
 import { reduxForm, Field } from 'redux-form'
-import { assign, forOwn } from 'lodash'
+import { concat, assign, forOwn } from 'lodash'
 import InlineEdit from 'react-edit-inline'
 
 // import { showAlert } from 'components/shared/Alert'
 import CategoryModal from './CategoryModal'
+import ActionModal from './ActionModal'
 
 const renderInput = field => (
     <div className="row margin-md-bottom">
@@ -105,6 +106,37 @@ class WorkflowModal extends React.Component { // eslint-disable-line react/no-mu
     this.setState({ current })
   }
 
+  onClickDiagram () {
+
+  }
+
+  onClickAddAction () {
+    this.props.openWfActionModal()
+  }
+
+  onClickEditAction () {
+    const { selectedActionIndex, actions } = this.state
+    if (selectedActionIndex < 0) return window.alert('Please select action.')
+    this.props.openWfActionModal(actions[selectedActionIndex])
+  }
+
+  onClickRemoveAction () {
+    const { selectedActionIndex, actions } = this.state
+    if (selectedActionIndex < 0) return window.alert('Please select action.')
+    this.setState({actions: actions.filter((r, index) => index !== selectedActionIndex), selectedActionIndex: -1})
+  }
+
+  onCloseActionModal (data, isEdit) {
+    if (!data) return
+
+    const { actions, selectedActionIndex } = this.state
+    if (isEdit) {
+      this.setState({actions: actions.map((r, index) => index === selectedActionIndex ? data : r)})
+    } else {
+      this.setState({actions: concat(actions, data)})
+    }
+  }
+
   renderCategoryModal () {
     if (!this.props.wfCategoryModalOpen) return null
     return (
@@ -113,6 +145,13 @@ class WorkflowModal extends React.Component { // eslint-disable-line react/no-mu
   }
 
   renderDiagramModal () {
+  }
+
+  renderActionModal () {
+    if (!this.props.wfActionModalOpen) return null
+    return (
+      <ActionModal onClose={this.onCloseActionModal.bind(this)} />
+    )
   }
 
   renderStep () {
@@ -210,8 +249,6 @@ class WorkflowModal extends React.Component { // eslint-disable-line react/no-mu
               </tbody>
             </table>
           </div>
-
-          {this.renderRuleModal()}
         </div>
       )
     } else if (current === 3) {

@@ -11,7 +11,10 @@ import {
   fetchWorkflowCategories,
 
   openWfCategoryModal,
-  closeWfCategoryModal
+  closeWfCategoryModal,
+
+  openWfActionModal
+
 } from '../../../../../actions'
 
 @connect(
@@ -19,6 +22,8 @@ import {
     editWorkflow: state.settings.editWorkflow,
     workflowCategories: state.devices.workflowCategories,
     wfCategoryModalOpen: state.devices.wfCategoryModalOpen,
+    wfActionModalOpen: state.devices.wfActionModalOpen,
+
     initialValues: state.settings.editWorkflow
   }),
   dispatch => ({
@@ -30,7 +35,9 @@ import {
       fetchWorkflowCategories,
 
       openWfCategoryModal,
-      closeWfCategoryModal
+      closeWfCategoryModal,
+
+      openWfActionModal
     }, dispatch)
   })
 )
