@@ -1,10 +1,8 @@
 import React from 'react'
 import Modal from 'react-bootstrap-modal'
-import {
-    Button
-} from 'react-bootstrap'
 import { reduxForm, Field } from 'redux-form'
 import { assign, forOwn } from 'lodash'
+import InlineEdit from 'react-edit-inline'
 
 // import { showAlert } from 'components/shared/Alert'
 import CategoryModal from './CategoryModal'
@@ -63,6 +61,21 @@ class WorkflowModal extends React.Component { // eslint-disable-line react/no-mu
     this.props.openWfCategoryModal()
   }
 
+  onClickRemoveRule () {
+    const { selectedRuleIndex, rules } = this.state
+    if (selectedRuleIndex < 0) return window.alert('Please select rule.')
+    this.setState({rules: rules.filter((r, index) => index !== selectedRuleIndex), selectedRuleIndex: -1})
+  }
+
+  onRuleChange (index, value) {
+    console.log(value)
+    let { rules } = this.state
+
+    rules = rules.map((r, i) => i === index ? assign({}, r, value) : r)
+    if (index === rules.length - 1) rules.push({key: '', value: ''})
+    this.setState({ rules })
+  }
+
   handleFormSubmit (values) {
     const { editWorkflow } = this.props
     const { rules, actions, diagram } = this.state
@@ -99,6 +112,192 @@ class WorkflowModal extends React.Component { // eslint-disable-line react/no-mu
     )
   }
 
+  renderDiagramModal () {
+  }
+
+  renderStep () {
+    const {current, rules, selectedRuleIndex, actions, selectedActionIndex} = this.state
+
+    if (current === 1) {
+      return (
+        <div>
+          <Field name="name" component={renderInput} type="text" label="Name"/>
+          <Field name="desc" component={renderInput} type="text" label="Description"/>
+          <Field name="display_incident_desc" component={renderInput} type="text" label="Display Incident Description"/>
+          <Field name="isglobal" component={renderInput} type="checkbox" label="Global"/>
+
+          <div className="row margin-md-bottom">
+            <label className="col-md-3">Category</label>
+            <div className="col-md-8 pr-none">
+              <Field name="category" component="select" className="form-control">
+                {this.props.workflowCategories.map(c => <option key={c.id} value={c.name}>{c.name}</option>)}
+              </Field>
+            </div>
+            <div className="col-md-1 text-right pl-none margin-sm-top">
+              <a href="javascript:;" onClick={this.onClickAddCategory.bind(this)}><i className="fa fa-plus-square fa-x"/></a>
+            </div>
+          </div>
+
+          <div className="row margin-md-bottom">
+            <label className="col-md-3">Severity</label>
+            <div className="col-md-9">
+              <Field name="severity" component="select" className="form-control">
+                <option>HIGH</option>
+                <option>MEDIUM</option>
+                <option>LOW</option>
+                <option>AUDIT</option>
+                <option>IGNORE</option>
+                <option>IGNOREDELETE</option>
+                <option>DEVICE</option>
+              </Field>
+            </div>
+          </div>
+
+          <div className="row margin-md-bottom">
+            <label className="col-md-3">Enabled</label>
+            <div className="col-md-9">
+              <Field name="enable" component="input" type="checkbox"/>
+            </div>
+          </div>
+
+          {this.renderCategoryModal()}
+        </div>
+      )
+    } else if (current === 2) {
+      return (
+        <div>
+          <div>
+            <span className="margin-md-right"><b>Rules</b></span>
+            <a href="javascript:;" onClick={this.onClickRemoveRule.bind(this)} className="margin-sm-right"><i className="fa fa-trash-o"/></a>
+          </div>
+          <div className="margin-md-bottom">
+            <table className="table table-hover">
+              <thead>
+              <tr>
+                <th>Key</th>
+                <th>Value</th>
+              </tr>
+              </thead>
+              <tbody>
+              {rules.map((r, index) =>
+                <tr key={index} className={selectedRuleIndex === index ? 'selected' : ''} onClick={() => { if (index !== rules.length - 1) this.setState({ selectedRuleIndex: index }) }}>
+                  <td width="50%">
+                    <InlineEdit
+                      activeClassName="editing"
+                      text={r.key || '\u00a0'}
+                      paramName="key"
+                      change={this.onRuleChange.bind(this, index)}
+                      style={{
+                        width: '100%',
+                        display: 'block'
+                      }}
+                    />
+                  </td>
+                  <td width="50%">
+                    <InlineEdit
+                      activeClassName="editing"
+                      text={r.value || '\u00a0'}
+                      paramName="value"
+                      change={this.onRuleChange.bind(this, index)}
+                      style={{
+                        width: '100%',
+                        display: 'block'
+                      }}
+                    />
+                  </td>
+                </tr>
+              )}
+              </tbody>
+            </table>
+          </div>
+
+          {this.renderRuleModal()}
+        </div>
+      )
+    } else if (current === 3) {
+      return (
+        <div>
+          <div>
+            <span className="margin-md-right"><b>Actions</b></span>
+            <a href="javascript:;" onClick={this.onClickAddAction.bind(this)} className="margin-sm-right"><i className="fa fa-plus-square"/></a>
+            <a href="javascript:;" onClick={this.onClickEditAction.bind(this)} className="margin-sm-right"><i className="fa fa-edit"/></a>
+            <a href="javascript:;" onClick={this.onClickRemoveAction.bind(this)} className="margin-sm-right"><i className="fa fa-trash-o"/></a>
+          </div>
+
+          <div>
+            <table className="table table-hover">
+              <thead>
+              <tr>
+                <th>Name</th>
+                <th>Type</th>
+              </tr>
+              </thead>
+              <tbody>
+              {
+                actions.map((a, index) =>
+                  <tr key={a.name} className={selectedActionIndex === index ? 'selected' : ''} onClick={() => { this.setState({ selectedActionIndex: index }) }}>
+                    <td>{a.name}</td>
+                    <td>{a.type}</td>
+                  </tr>
+                )
+              }
+              </tbody>
+            </table>
+          </div>
+
+          {this.renderActionModal()}
+        </div>
+      )
+    }
+    return null
+  }
+
+  renderWizard () {
+    const {current, steps} = this.state
+
+    let markers = []
+    for (let i = 0; i < steps; i++) {
+      const cls = `marker ${current >= (i + 1) ? 'marker-checked' : ''}`
+      markers.push(
+        <div key={i} className={cls} style={{left: `${100 / steps * (i + 0.5)}%`}}>
+          <div className="marker-label">{i + 1}</div>
+        </div>
+      )
+    }
+
+    return (
+      <div>
+
+        <div className="wizard-container m-none">
+          <div className="wizard-progress hidden">
+            {markers}
+
+            <div className="progress progress-striped progress-xs" style={{margin: '10px 0'}}>
+              <div className="progress-bar" style={{width: `${current * 100 / steps}%`}} />
+            </div>
+          </div>
+          {this.renderStep()}
+
+          <div className="text-right mb-none">
+            <a href="javascript:;" className="btn btn-default btn-sm margin-sm-right"
+              onClick={this.onClickClose.bind(this)}>Cancel</a>
+            <a href="javascript:;" className="btn btn-default btn-sm margin-sm-right"
+              onClick={this.onClickDiagram.bind(this)}>Diagram</a>
+            <a href="javascript:;" className="btn btn-default btn-sm margin-sm-right"
+              disabled={current === 1}
+              onClick={this.onClickPrev.bind(this)}>Previous</a>
+
+            { current < steps ? <a href="javascript:;" className="btn btn-default btn-sm" onClick={this.onClickNext.bind(this)}>Next</a> : null}
+            { current === steps ? <button className="btn btn-primary btn-sm" type="submit">Finish</button> : null}
+
+          </div>
+        </div>
+
+        {this.renderDiagramModal()}
+      </div>
+    )
+  }
+
   render () {
     const { handleSubmit } = this.props
 
@@ -119,55 +318,10 @@ class WorkflowModal extends React.Component { // eslint-disable-line react/no-mu
           </div>
         </div>
 
-        <div className="modal-body bootstrap-dialog-message">
+        <div className="modal-body bootstrap-dialog-message p-none">
 
           <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
-            <Field name="name" component={renderInput} type="text" label="Name"/>
-            <Field name="desc" component={renderInput} type="text" label="Description"/>
-            <Field name="display_incident_desc" component={renderInput} type="text" label="Display Incident Description"/>
-            <Field name="isglobal" component={renderInput} type="checkbox" label="Global"/>
-
-            <div className="row margin-md-bottom">
-              <label className="col-md-3">Category</label>
-              <div className="col-md-8 pr-none">
-                <Field name="category" component="select" className="form-control">
-                  {this.props.workflowCategories.map(c => <option key={c.id} value={c.name}>{c.name}</option>)}
-                </Field>
-              </div>
-              <div className="col-md-1 text-right pl-none margin-sm-top">
-                <a href="javascript:;" onClick={this.onClickAddCategory.bind(this)}><i className="fa fa-plus-square fa-x"/></a>
-              </div>
-            </div>
-
-            <div className="row margin-md-bottom">
-              <label className="col-md-3">Severity</label>
-              <div className="col-md-9">
-                <Field name="severity" component="select" className="form-control">
-                  <option>HIGH</option>
-                  <option>MEDIUM</option>
-                  <option>LOW</option>
-                  <option>AUDIT</option>
-                  <option>IGNORE</option>
-                  <option>IGNOREDELETE</option>
-                  <option>DEVICE</option>
-                </Field>
-              </div>
-            </div>
-
-            <div className="row margin-md-bottom">
-              <label className="col-md-3">Enabled</label>
-              <div className="col-md-9">
-                <Field name="enable" component="input" type="checkbox"/>
-              </div>
-            </div>
-
-            {this.renderCategoryModal()}
-
-            <div className="text-right">
-              <Button className="btn-primary btn-sm" type="submit">Save</Button>
-              <Button className="btn-sm margin-sm-left"
-                onClick={this.onClickClose.bind(this)}>Cancel</Button>
-            </div>
+            { this.renderWizard() }
           </form>
         </div>
       </Modal>
