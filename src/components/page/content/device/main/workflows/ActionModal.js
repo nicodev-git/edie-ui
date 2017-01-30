@@ -3,6 +3,7 @@ import Modal from 'react-bootstrap-modal'
 import { assign } from 'lodash'
 import {reduxForm, Field} from 'redux-form'
 import { connect } from 'react-redux'
+import { closeWfActionModal } from 'actions'
 
 class ActionModal extends React.Component {
   onHide () {
@@ -73,7 +74,7 @@ class ActionModal extends React.Component {
 
             <div className="text-right">
               <button className="btn btn-primary btn-sm margin-sm-right" type="submit">OK</button>
-              <a href="javascript:;" className="btn btn-default btn-sm" onClick={this.onClickClose.bind(this)}>Cancel</a>
+              <a href="javascript:;" className="btn btn-defa  ult btn-sm" onClick={this.onClickClose.bind(this)}>Cancel</a>
             </div>
           </form>
         </div>
@@ -84,6 +85,11 @@ class ActionModal extends React.Component {
 
 export default connect(
   state => ({
-    initialValues: state.devices.editWfAction
-  })
+    editWfAction: state.devices.editWfAction,
+    initialValues: assign({
+      type: 'OPEN_INCIDENT'
+    }, state.devices.editWfAction)
+  }), {
+    closeWfActionModal
+  }
 )(reduxForm({form: 'workflowActionForm'})(ActionModal))

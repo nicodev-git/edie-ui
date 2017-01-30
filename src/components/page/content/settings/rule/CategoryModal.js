@@ -76,6 +76,7 @@ class CategoryModal extends React.Component {
 
 export default connect(
   state => ({
+    editWfCategory: state.devices.editWfCategory,
     initialValues: state.devices.editWfCategory
   }), {
     addWfCategory,

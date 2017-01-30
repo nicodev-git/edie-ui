@@ -85,8 +85,11 @@ class ActionModal extends React.Component {
 
 export default connect(
   state => ({
-    initialValues: state.devices.editWfAction
+    editWfAction: state.devices.editWfAction,
+    initialValues: assign({
+      type: 'OPEN_INCIDENT'
+    }, state.devices.editWfAction)
   }), {
     closeWfActionModal
   }
-)(reduxForm({form: 'workflowActionForm'})(ActionModal))
+)(reduxForm({form: 'workflowActionForm2'})(ActionModal))

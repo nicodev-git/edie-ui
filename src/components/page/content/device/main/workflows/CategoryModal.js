@@ -4,6 +4,11 @@ import { assign } from 'lodash'
 import { connect } from 'react-redux'
 import {reduxForm, Field} from 'redux-form'
 
+import {
+  addWfCategory,
+  closeWfCategoryModal
+} from 'actions'
+
 class CategoryModal extends React.Component {
   onHide () {
 
@@ -71,6 +76,10 @@ class CategoryModal extends React.Component {
 
 export default connect(
   state => ({
+    editWfCategory: state.devices.editWfCategory,
     initialValues: state.devices.editWfCategory
-  })
+  }), {
+    addWfCategory,
+    closeWfCategoryModal
+  }
 )(reduxForm({form: 'workflowCategoryForm'})(CategoryModal))
