@@ -87,7 +87,7 @@ export default connect(
   state => ({
     editWfAction: state.devices.editWfAction,
     initialValues: assign({
-      type: 'OPEN_INCIDENT'
+      actionType: 'OPEN_INCIDENT'
     }, state.devices.editWfAction)
   }), {
     closeWfActionModal
