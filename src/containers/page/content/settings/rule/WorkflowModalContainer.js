@@ -2,6 +2,7 @@ import React from 'react'
 import WorkflowModal from '../../../../../components/page/content/settings/rule/WorkflowModal'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import { assign } from 'lodash'
 
 import {
   fetchWorkflows,
@@ -26,7 +27,10 @@ import {
     wfActionModalOpen: state.devices.wfActionModalOpen,
     wfDiagramModalOpen: state.devices.wfDiagramModalOpen,
 
-    initialValues: state.settings.editWorkflow
+    initialValues: assign({
+      enable: true,
+      severity: 'HIGH'
+    }, state.settings.editWorkflow)
   }),
   dispatch => ({
     ...bindActionCreators({

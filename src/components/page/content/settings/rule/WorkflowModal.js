@@ -79,9 +79,13 @@ class WorkflowModal extends React.Component { // eslint-disable-line react/no-mu
   }
 
   handleFormSubmit (values) {
-    const { editWorkflow } = this.props
+    const { editWorkflow, workflowCategories } = this.props
     const { rules, actions, diagram } = this.state
     let props = assign({}, editWorkflow, values, { rules: {}, actions: actions, flowchart: diagram })
+    if (workflowCategories && workflowCategories.length) {
+      props.category = props.category || workflowCategories[0].name
+    }
+
     rules.forEach(r => {
       if (r.key) props.rules[r.key] = r.value
     })

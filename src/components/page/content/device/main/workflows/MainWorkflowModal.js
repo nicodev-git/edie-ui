@@ -46,9 +46,13 @@ class MainWorkflowModal extends React.Component {
   }
 
   handleFormSubmit (values) {
-    const {editWorkflow} = this.props
+    const {editWorkflow, workflowCategories} = this.props
     const { rules, actions, diagram } = this.state
     let props = assign({}, editWorkflow, values, { isglobal: false, rules: {}, actions: actions, flowchart: diagram })
+    if (workflowCategories && workflowCategories.length) {
+      props.category = props.category || workflowCategories[0].name
+    }
+
     rules.forEach(r => {
       if (r.key) props.rules[r.key] = r.value
     })
@@ -166,14 +170,14 @@ class MainWorkflowModal extends React.Component {
   renderCategoryModal () {
     if (!this.props.wfCategoryModalOpen) return null
     return (
-      <CategoryModal {...this.props} />
+      <CategoryModal />
     )
   }
 
   renderActionModal () {
     if (!this.props.wfActionModalOpen) return null
     return (
-      <ActionModal {...this.props} onClose={this.onCloseActionModal.bind(this)} />
+      <ActionModal onClose={this.onCloseActionModal.bind(this)} />
     )
   }
 
@@ -417,8 +421,7 @@ export default connect(
   state => ({
     initialValues: assign({
       enable: true,
-      severity: 'HIGH',
-      category: (state.devices.workflowCategories || [''])[0]
+      severity: 'HIGH'
     }, state.devices.editWorkflow)
   })
 )(reduxForm({form: 'workflowForm'})(MainWorkflowModal))
