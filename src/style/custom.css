@@ -345,3 +345,9 @@ table.table tbody tr.selected {
 
     font-size: 18px;
 }
+
+/* Tooltip */
+.tt-workflow {
+    min-width: 250px !important;
+    white-space: nowrap;
+}

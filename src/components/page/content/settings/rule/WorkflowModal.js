@@ -3,6 +3,7 @@ import Modal from 'react-bootstrap-modal'
 import { reduxForm, Field } from 'redux-form'
 import { concat, assign, forOwn } from 'lodash'
 import InlineEdit from 'react-edit-inline'
+import Tooltip from 'react-tooltip'
 
 // import { showAlert } from 'components/shared/Alert'
 import CategoryModal from './CategoryModal'
@@ -180,7 +181,21 @@ class WorkflowModal extends React.Component { // eslint-disable-line react/no-mu
         <div>
           <Field name="name" component={renderInput} type="text" label="Name"/>
           <Field name="desc" component={renderInput} type="text" label="Description"/>
-          <Field name="display_incident_desc" component={renderInput} type="text" label="Display Incident Description"/>
+
+          <div className="row margin-md-bottom">
+            <label className="col-md-3 control-label">Display Incident Description</label>
+            <div className="col-md-8 pr-none">
+              <Field name="display_incident_desc" component="input" className="form-control"/>
+            </div>
+            <div className="col-md-1 text-right pl-none margin-sm-top">
+              <a href="javascript:;">
+                <i className="fa fa-question-circle fa-x"
+                  data-class="tt-workflow"
+                  data-tip={`Use \${KEY} for show key’s value.<br/>Example: 'User \${user} was blocked at: \${datetime}'`}/>
+              </a>
+            </div>
+          </div>
+
           <Field name="isglobal" component={renderInput} type="checkbox" label="Global"/>
 
           <div className="row margin-md-bottom">
@@ -349,6 +364,8 @@ class WorkflowModal extends React.Component { // eslint-disable-line react/no-mu
         </div>
 
         {this.renderDiagramModal()}
+
+        <Tooltip place="right" event="mouseover" eventOff="mouseout" multiline effect="solid"/>
       </div>
     )
   }

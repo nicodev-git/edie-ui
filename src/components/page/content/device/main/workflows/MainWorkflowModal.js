@@ -4,6 +4,7 @@ import {reduxForm, Field} from 'redux-form'
 import {assign, concat, forOwn} from 'lodash'
 import InlineEdit from 'react-edit-inline'
 import { connect } from 'react-redux'
+import Tooltip from 'react-tooltip'
 
 import RuleModal from './RuleModal'
 import CategoryModal from './CategoryModal'
@@ -212,9 +213,16 @@ class MainWorkflowModal extends React.Component {
           </div>
 
           <div className="row margin-md-bottom">
-            <label className="col-md-3">Display Incident Description</label>
-            <div className="col-md-9">
+            <label className="col-md-3 control-label">Display Incident Description</label>
+            <div className="col-md-8 pr-none">
               <Field name="display_incident_desc" component="input" className="form-control"/>
+            </div>
+            <div className="col-md-1 text-right pl-none margin-sm-top">
+              <a href="javascript:;">
+                <i className="fa fa-question-circle fa-x"
+                  data-class="tt-workflow"
+                  data-tip={`Use \${KEY} for show key’s value.<br/>Example: 'User \${user} was blocked at: \${datetime}'`}/>
+              </a>
             </div>
           </div>
 
@@ -385,6 +393,8 @@ class MainWorkflowModal extends React.Component {
         </div>
 
         {this.renderDiagramModal()}
+
+        <Tooltip place="right" event="mouseover" eventOff="mouseout" multiline effect="solid"/>
       </div>
     )
   }
