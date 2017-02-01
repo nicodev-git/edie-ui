@@ -54,7 +54,7 @@ export default class Sidebar extends React.Component {
 
   onClickDeviceMenu (index) {
     this.setState({ tooltipText: '' })
-    this.props.onClickItem(this.props.contentType.Device, this.props.deviceMenu(this.props.device.id)[index])
+    this.props.onClickItem(this.props.contentType.Device, this.props.deviceMenu[index])
   }
 
   onClickMainMenu (index) {

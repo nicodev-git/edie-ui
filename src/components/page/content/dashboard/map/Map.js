@@ -320,7 +320,7 @@ class Map extends React.Component {
 
     this.props.openDevice(obj.data)
         // emit(EVENTS.MAP_DEVICE_CLICKED, obj.data)
-    this.props.router.push('/device/main/incidents')
+    this.props.router.push(`/device/${obj.data.id}/incidents`)
   }
 
   onMapObjectMoving () {
