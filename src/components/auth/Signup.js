@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { reduxForm, Field } from 'redux-form'
-import { validate } from './SignupValidation'
+import { validate } from './Signupvalidation'
 import Input from '../Input'
 
 class Signup extends Component {

@@ -1,0 +1,8 @@
+impweb:
+  container_name: impweb
+  build: .
+  ports:
+    - 8080:8080
+#  external_links:
+#    - dev_implatform:dev_implatform
+  restart: unless-stopped
