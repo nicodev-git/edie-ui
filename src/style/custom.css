@@ -180,6 +180,10 @@ table.table tbody tr.selected {
     margin-bottom: 0;
 }
 
+.devicediv .panel-collapse {
+    background: darkcyan;
+}
+
 /*Table column size */
 
 .width-40 {
