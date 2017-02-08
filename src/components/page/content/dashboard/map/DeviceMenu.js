@@ -29,7 +29,7 @@ export default class DeviceMenu extends React.Component {
       }, {
         title: 'Devices',
         items: [{
-          title: 'Windows Server', img: 'window.png', type: 'server'
+          title: 'Windows Server', img: 'windows.png', type: 'server'
         }, {
           title: 'Linux Server', img: 'linux.png', type: 'linuxserver'
         }, {
