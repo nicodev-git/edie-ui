@@ -24,7 +24,6 @@
   },
   "homepage": "",
   "dependencies": {
-    "autoprefixer": "^6.5.3",
     "axios": "^0.15.2",
     "babel-core": "^6.18.2",
     "babel-eslint": "^7.1.1",
@@ -43,7 +42,6 @@
     "bootstrap": "^3.3.7",
     "country-data": "0.0.31",
     "css-loader": "^0.26.1",
-    "d3": "^3.5.17",
     "eslint": "^3.10.2",
     "eslint-config-standard": "^6.2.1",
     "eslint-loader": "^1.6.1",
