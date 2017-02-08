@@ -146,6 +146,18 @@ class DeviceTplModal extends React.Component { // eslint-disable-line react/no-m
 
           <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
             <Field label="Name:" name="name" component={Input} type="text"/>
+            <fieldset className="form-group">
+              <label className="col-md-3 margin-sm-top">Group:</label>
+              <div className="col-md-9">
+                <Field name="devicetemplategroup" component="select" className="form-control">
+                  <option>GROUPS</option>
+                  <option>DEVICES</option>
+                  <option>BI</option>
+                  <option>SHAPES</option>
+                </Field>
+              </div>
+            </fieldset>
+
             {this.renderImageUploader()}
 
             <label>Monitors</label>
