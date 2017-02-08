@@ -119,10 +119,12 @@ class Map extends React.Component {
   }
 
   componentDidMount () {
-    if (!window.react) window.react = {}
-    window.react.map = this
+    // if (!window.react) window.react = {}
+    // window.react.map = this
 
     window.addEventListener('resize', this.updateDimensions)
+
+    this.props.fetchDeviceTemplates()
   }
 
   componentWillUnmount () {

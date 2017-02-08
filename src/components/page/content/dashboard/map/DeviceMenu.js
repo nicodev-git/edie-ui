@@ -7,6 +7,13 @@ import { concat } from 'lodash'
 
 import DeviceImg from './DeviceImg'
 
+const sections = [
+  ['Group', 'GROUPS'],
+  ['Device', 'DEVICES'],
+  ['BI', 'BI'],
+  ['Shape', 'SHAPES']
+]
+
 export default class DeviceMenu extends React.Component {
   constructor (props) {
     super(props)
@@ -16,7 +23,7 @@ export default class DeviceMenu extends React.Component {
       deviceTypes: [{
         title: 'New Devices',
         items: []
-      }, {
+      }/*, {
         title: 'Group',
         items: [
           {title: 'Group', img: 'group.png', type: 'group'},
@@ -79,15 +86,15 @@ export default class DeviceMenu extends React.Component {
         }, {
           title: 'Free Text', img: 'text.png', type: 'usertext'
         }]
-      }]
+      } */]
     }
 
         // ///////////////////////////////////////////////
   }
 
-  componentWillMount () {
-    this.props.fetchDeviceTemplates()
-  }
+  // componentWillMount () {
+  //   this.props.fetchDeviceTemplates()
+  // }
 
   onChangeDeviceSearch (e) {
     let keyword = e.target.value
@@ -105,12 +112,17 @@ export default class DeviceMenu extends React.Component {
   render () {
     let devicePanels = []
 
-    let deviceTypes = concat(this.state.deviceTypes, {
-      title: 'Template',
-      items: this.props.deviceTemplates.map(u => {
+    let deviceTypes = concat([], this.state.deviceTypes)
+    sections.forEach(section => {
+      const items = this.props.deviceTemplates.filter(i => i.devicetemplategroup === section[1]).map(u => {
         return {
-          title: u.name, img: u.image || 'window.png', type: 'custom', monitors: u.monitors
+          title: u.name, img: u.image || 'windows.png', type: 'custom', monitors: u.monitors
         }
+      })
+      if (items.length === 0) return
+      deviceTypes = concat(deviceTypes, {
+        title: section[0],
+        items
       })
     })
 
