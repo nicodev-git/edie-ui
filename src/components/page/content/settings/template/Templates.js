@@ -13,7 +13,7 @@ export default class Templates extends Component {
   constructor (props) {
     super(props)
     this.state = {
-
+      type: 'Device'
     }
   }
 
@@ -25,11 +25,6 @@ export default class Templates extends Component {
   renderDeviceTemplates () {
     return (
       <div>
-        <div className="fa-lg">
-          <span>Device Templates</span>
-          <a href="javascript:;" className="fa fa-plus-square margin-md-left"
-            onClick={this.onClickAddDeviceTpl.bind(this)} />
-        </div>
         <table className="table table-hover dataTable">
           <tbody>
           {
@@ -51,7 +46,6 @@ export default class Templates extends Component {
         </table>
 
         {this.renderDeviceTplModal()}
-        {this.renderTplImageModal()}
       </div>
     )
   }
@@ -59,10 +53,6 @@ export default class Templates extends Component {
   renderMonitorTemplates () {
     return (
       <div>
-        <div className="fa-lg">
-          <span>Monitor Templates</span>
-          <a href="javascript:;" className="fa fa-plus-square margin-md-left" onClick={this.onClickAddMonitorTpl.bind(this)} />
-        </div>
         <table className="table table-hover dataTable">
           <tbody>
           {
@@ -133,20 +123,36 @@ export default class Templates extends Component {
     this.props.deleteMonitorTemplate(item)
   }
 
+  onChangeType (e) {
+    this.setState({ type: e.target.value })
+  }
+
+  onClickAdd () {
+    if (this.state.type === 'Device') this.onClickAddDeviceTpl()
+    else this.onClickAddMonitorTpl()
+  }
+
   render () {
+    const {type} = this.state
     return (
       <TabPage>
         <TabPageHeader title="Settings" />
 
         <TabPageBody tabs={SettingTabs} tab={7}>
+          <div className="form-inline padding-md">
+            <select className="form-control" value={type} onChange={this.onChangeType.bind(this)}>
+              <option>Device</option>
+              <option>Monitor</option>
+            </select>
+            <a href="javascript:;" className="fa fa-plus-square margin-md-left fa-lg"
+              onClick={this.onClickAdd.bind(this)} />
+          </div>
           <div className="row padding-md">
             <div className="col-md-3">
-              {this.renderDeviceTemplates()}
-            </div>
-            <div className="col-md-3">
-              {this.renderMonitorTemplates()}
+              {type === 'Device' ? this.renderDeviceTemplates() : this.renderMonitorTemplates()}
             </div>
           </div>
+          {this.renderTplImageModal()}
 
         </TabPageBody>
       </TabPage>
