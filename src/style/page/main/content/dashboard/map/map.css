@@ -42,7 +42,11 @@
 .devicediv ul li .item-text {
     padding: 3px;
     float: left;
-    color: #333;
+    color: white;
+}
+
+.devicediv .panel-collapse {
+    background: black;
 }
 
 img.longhub {
