@@ -2,6 +2,8 @@ import React from 'react'
 import Modal from 'react-bootstrap-modal'
 import { concat } from 'lodash'
 
+const images = ['group.png', 'telephony.png', 'jetro.png', 'building2.png', 'building1.png', 'partners.png', 'windows.png', 'linux.png', 'router.png', 'firewall.png', 'inticon.png', 'website.png', 'db2.png', 'pcs.png', 'antivirus.png', 'nac.png', 'usb.png', 'ips.png', 'graph.png', 'sqlgaugeicon.png', 'thermo.png', 'longhub.png', 'text.png']
+
 export default class ImageUploaderModal extends React.Component {
   constructor (props) {
     super(props)
@@ -15,16 +17,7 @@ export default class ImageUploaderModal extends React.Component {
 
   componentWillMount () {
     this.setState({
-      icons: [
-        { url: '/images/window.png', filename: 'window.png' },
-        { url: '/images/linux.png', filename: 'linux.png' },
-        { url: '/images/inticon.png', filename: 'inticon.png' },
-        { url: '/images/pcs.png', filename: 'pcs.png' },
-        { url: '/images/db2.png', filename: 'db2.png' },
-        { url: '/images/antivirus.png', filename: 'antivirus.png' },
-        { url: '/images/nac.png', filename: 'nac.png' },
-        { url: '/images/usb.png', filename: 'usb.png' }
-      ]
+      icons: images.map(i => ({ url: `/images/${i}`, filename: i }))
     })
 
     this.props.fetchImages()
