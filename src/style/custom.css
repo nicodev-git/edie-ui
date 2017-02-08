@@ -181,7 +181,7 @@ table.table tbody tr.selected {
 }
 
 .devicediv .panel-collapse {
-    background: darkcyan;
+    background: darkgray;
 }
 
 /*Table column size */
