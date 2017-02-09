@@ -15,7 +15,8 @@ export default class Templates extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      type: 'Device'
+      type: 'Device',
+      selected: -1
     }
   }
 
@@ -24,19 +25,22 @@ export default class Templates extends Component {
     this.props.fetchMonitorTemplates()
   }
 
+  onClickRow (selected) {
+    this.setState({ selected })
+  }
+
   renderDeviceTemplates () {
     return (
       <div>
         <table className="table table-hover dataTable">
           <tbody>
           {
-            this.props.deviceTemplates.map(item =>
-              <tr key={item.id}>
+            this.props.deviceTemplates.map((item, index) =>
+              <tr key={item.id}
+                className={index === this.state.selected ? 'selected' : ''}
+                onClick={this.onClickRow.bind(this, index)}>
                 <td>{item.name}</td>
                 <td className="text-right fa-lg">
-                  <a href="javascript:;" onClick={this.onClickEditDeviceTpl.bind(this, item)}>
-                      <i className="fa fa-edit" />
-                  </a>
                   <a href="javascript:;" className="margin-sm-left" onClick={this.onClickDeleteDeviceTpl.bind(this, item)}>
                       <i className="fa fa-trash-o" />
                   </a>
@@ -58,13 +62,12 @@ export default class Templates extends Component {
         <table className="table table-hover dataTable">
           <tbody>
           {
-            this.props.monitorTemplates.map(item =>
-              <tr key={item.id}>
+            this.props.monitorTemplates.map((item, index) =>
+              <tr key={item.id}
+                className={index === this.state.selected ? 'selected' : ''}
+                onClick={this.onClickRow.bind(this, index)}>
                 <td>{item.name}</td>
                 <td className="text-right fa-lg">
-                  <a href="javascript:;" onClick={this.onClickEditMonitorTpl.bind(this, item)}>
-                      <i className="fa fa-edit" />
-                  </a>
                   <a href="javascript:;" className="margin-sm-left" onClick={this.onClickDeleteMonitorTpl.bind(this, item)}>
                       <i className="fa fa-trash-o" />
                   </a>
@@ -126,7 +129,7 @@ export default class Templates extends Component {
   }
 
   onChangeType (e) {
-    this.setState({ type: e.target.value })
+    this.setState({ type: e.target.value, selected: -1 })
   }
 
   onClickAdd () {
@@ -135,8 +138,15 @@ export default class Templates extends Component {
   }
 
   onClickEdit () {
-
+    const { selected, type } = this.state
+    if (selected < 0) return window.alert('Please select item.')
+    if (type === 'Device') {
+      this.onClickEditDeviceTpl(this.props.deviceTemplates[selected])
+    } else {
+      this.onClickEditMonitorTpl(this.props.monitorTemplates[selected])
+    }
   }
+
   render () {
     const {type} = this.state
     return (
