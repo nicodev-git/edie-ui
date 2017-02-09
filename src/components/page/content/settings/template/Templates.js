@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 
+import { ButtonGroup, Button } from 'react-bootstrap'
+
 import SettingTabs from '../SettingTabs'
 import TabPage from '../../../../shared/TabPage'
 import TabPageBody from '../../../../shared/TabPageBody'
@@ -132,21 +134,32 @@ export default class Templates extends Component {
     else this.onClickAddMonitorTpl()
   }
 
+  onClickEdit () {
+
+  }
   render () {
     const {type} = this.state
     return (
       <TabPage>
-        <TabPageHeader title="Settings" />
+        <TabPageHeader title="Settings">
+          <div className="text-center margin-md-top">
+            <div className="pull-left">
+              <select className="form-control" value={type} onChange={this.onChangeType.bind(this)}>
+                <option>Device</option>
+                <option>Monitor</option>
+              </select>
+            </div>
+
+            <div style={{position: 'absolute', right: '25px'}}>
+              <ButtonGroup>
+                <Button onClick={this.onClickAdd.bind(this)}>Add</Button>
+                <Button onClick={this.onClickEdit.bind(this)}>Edit</Button>
+              </ButtonGroup>
+            </div>
+          </div>
+        </TabPageHeader>
 
         <TabPageBody tabs={SettingTabs} tab={7}>
-          <div className="form-inline padding-md">
-            <select className="form-control" value={type} onChange={this.onChangeType.bind(this)}>
-              <option>Device</option>
-              <option>Monitor</option>
-            </select>
-            <a href="javascript:;" className="fa fa-plus-square margin-md-left fa-lg"
-              onClick={this.onClickAdd.bind(this)} />
-          </div>
           <div className="row padding-md">
             <div className="col-md-3">
               {type === 'Device' ? this.renderDeviceTemplates() : this.renderMonitorTemplates()}
