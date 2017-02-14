@@ -137,21 +137,21 @@ export default class BasicMonitorTable extends Component {
   }
 
   healthFormatter (val) {
-    let status = 'down'
+    let status = 'DOWN'
     let tooltip = 'Never seen'
     if (val) {
       let diff = new Date().getTime() - val
-      if (diff / (60 * 1000.0) <= 5) status = 'up'
+      if (diff / (60 * 1000.0) <= 5) status = 'UP'
 
       tooltip = `Last seen ${this.timeAgo(val)}`
     }
 
     let cls = 'fa-question'
     let color = '#FDB422'
-    if (status === 'up') {
+    if (status === 'UP') {
       cls = 'fa-check-square'
       color = 'green'
-    } else if (status === 'down') {
+    } else if (status === 'DOWN') {
       cls = 'fa-times'
       color = 'red'
     }

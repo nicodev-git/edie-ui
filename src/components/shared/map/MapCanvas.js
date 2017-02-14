@@ -366,7 +366,7 @@ class MapCanvas extends React.Component {
     let deviceid = device.id
     let devicetype = device.type
     let devname = device.name
-    let devicestatus = device.devicestatus || 'unknown'
+    let devicestatus = device.status || 'unknown'
 
     let x = device.x || 0
     let y = device.y || 0
@@ -842,8 +842,8 @@ class MapCanvas extends React.Component {
 
   deviceStatusImageName (status) {
     let okurl = 'question1.png'
-    if (status === 'up') okurl = 'ok.gif'
-    if (status === 'down') okurl = 'error.gif'
+    if (status === 'UP') okurl = 'ok.gif'
+    if (status === 'DOWN') okurl = 'error.gif'
 
     return okurl
   }

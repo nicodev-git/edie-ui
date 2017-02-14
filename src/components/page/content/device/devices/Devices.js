@@ -124,10 +124,10 @@ class Devices extends React.Component {
   healthFormatter (val) {
     let cls = 'fa-question'
     let color = '#FDB422'
-    if (val === 'up') {
+    if (val === 'UP') {
       cls = 'fa-check-square'
       color = 'green'
-    } else if (val === 'down') {
+    } else if (val === 'DOWN') {
       cls = 'fa-times'
       color = 'red'
     }
