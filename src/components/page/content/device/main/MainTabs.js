@@ -1,7 +1,7 @@
 export default (deviceId) => {
   return [{
     title: 'Incidents',
-    path: `/device/${deviceId}/incidents`
+    path: `/device/${deviceId}/main/incidents`
   },
   // {
   //   title: 'Rules',
@@ -9,7 +9,7 @@ export default (deviceId) => {
   // },
   {
     title: 'Workflows',
-    path: `/device/${deviceId}/workflows`
+    path: `/device/${deviceId}/main/workflows`
   },
   // {
   //   title: 'Raw Incidents',
@@ -17,10 +17,10 @@ export default (deviceId) => {
   // },
   {
     title: 'Events',
-    path: `/device/${deviceId}/events`
+    path: `/device/${deviceId}/main/events`
   },
   {
     title: 'Advanced',
-    path: `/device/${deviceId}/advanced`
+    path: `/device/${deviceId}/main/advanced`
   }]
 }

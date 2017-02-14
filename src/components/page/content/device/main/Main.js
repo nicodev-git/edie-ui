@@ -15,7 +15,7 @@ export default class Main extends React.Component {
 
   componentWillMount () {
     if (!this.props.children) {
-      this.props.router.replace('/device/main/incidents')
+      this.props.router.replace(`${this.props.router.location.pathname}/incidents`)
     }
   }
 

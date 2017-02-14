@@ -10,12 +10,12 @@ export const mainMenu = [
 export const deviceMenu = (deviceId) => {
   return [
     {id: 'dashboard', title: 'Dashboard', icon: 'fa-home', path: '/'},
-    {id: 'topology', title: 'Topology', icon: 'fa-sitemap', group: true, path: '/device/topology'},
-    {id: 'devices', title: 'Devices', icon: 'fa-tablet', group: true, path: '/device/list'},
-    {id: 'incidents', title: 'Incidents', icon: 'fa-th-list', path: `/device/${deviceId}/incidents`},
-    {id: 'monitors', title: 'Monitors', icon: 'fa-desktop', path: '/device/monitor'},
-    {id: 'connected', title: 'Connected Devices', icon: 'fa-code-fork', path: '/device/connected'},
-    {id: 'deviceinfo', title: 'Device Info', icon: 'fa-wrench', path: '/device/info'}
+    {id: 'topology', title: 'Topology', icon: 'fa-sitemap', group: true, path: `/device/${deviceId}/topology`},
+    {id: 'devices', title: 'Devices', icon: 'fa-tablet', group: true, path: `/device/${deviceId}/list`},
+    {id: 'incidents', title: 'Incidents', icon: 'fa-th-list', path: `/device/${deviceId}/main`},
+    {id: 'monitors', title: 'Monitors', icon: 'fa-desktop', path: `/device/${deviceId}/monitor`},
+    {id: 'connected', title: 'Connected Devices', icon: 'fa-code-fork', path: `/device/${deviceId}/connected`},
+    {id: 'deviceinfo', title: 'Device Info', icon: 'fa-wrench', path: `/device/${deviceId}/info`}
   ]
 }
 
