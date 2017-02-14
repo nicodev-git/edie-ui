@@ -116,7 +116,10 @@ export default class DeviceMenu extends React.Component {
     sections.forEach(section => {
       const items = this.props.deviceTemplates.filter(i => i.devicetemplategroup === section[1]).map(u => {
         return {
-          title: u.name, img: u.image || 'windows.png', type: 'custom', monitors: u.monitors
+          title: u.name,
+          img: u.image || 'windows.png',
+          type: u.devicetemplategroup === 'GROUPS' ? 'group' : 'custom',
+          monitors: u.monitors
         }
       })
       if (items.length === 0) return

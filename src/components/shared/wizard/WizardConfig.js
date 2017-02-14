@@ -706,7 +706,7 @@ export const wizardConfig = {
     server: {
       url: Api.deviceadmin.addDevice,
       params: {
-        type: 'group'
+        isgroup: true
       }
     },
     steps: [{
