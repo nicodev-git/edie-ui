@@ -196,7 +196,6 @@ export default class General extends React.Component {
   }
 
   onChangeCustomerId (value) {
-    let {value} = e.target
     this.updateOption('CUSTOMER_ID', value.message)
   }
 
