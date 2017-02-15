@@ -25,7 +25,9 @@ export default class General extends React.Component {
       logEnabled: false,
       logBatch: '',
       sendMobile: false,
-      mobileIP: ''
+      mobileIP: '',
+
+      customerId: ''
     }
   }
 
@@ -119,6 +121,22 @@ export default class General extends React.Component {
             />
           </div>
         </div>
+
+        <div className="col-md-12 margin-md-bottom">
+          <div className="checkbox">
+            <label style={{width: '150px'}} className="margin-sm-top margin-sm-bottom">
+              Customer ID
+            </label>
+            <InlineEdit
+              text={this.getOptionValue('CUSTOMER_ID') || '[None]'}
+              paramName="message"
+              change={this.onChangeCustomerId.bind(this)}
+              className="inline"
+              ref="mobileIp"
+              minLength={0}
+            />
+          </div>
+        </div>
       </div>
     )
   }
@@ -175,6 +193,11 @@ export default class General extends React.Component {
 
   onChangeMobileIP (value) {
     this.updateOption('IMMOBILE', value.message)
+  }
+
+  onChangeCustomerId (value) {
+    let {value} = e.target
+    this.updateOption('CUSTOMER_ID', value.message)
   }
 
   updateOption (name, value1, value2 = '') {
