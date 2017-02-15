@@ -26,7 +26,7 @@ export default class MonitorTable extends Component {
       'cssClassName': 'nowrap'
     }, {
       'displayName': 'Type',
-      'columnName': 'devicetype'
+      'columnName': 'monitortype'
     }, {
       'displayName': 'Result',
       'columnName': 'devicestatustext',
@@ -40,14 +40,14 @@ export default class MonitorTable extends Component {
       }
     }, {
       'displayName': 'Status',
-      'columnName': 'devicestatus',
+      'columnName': 'status',
       'cssClassName': 'text-center',
       'customComponent': (props) => {
         return this.healthFormatter(props.data)
       }
     }, {
       'displayName': 'Last Seen',
-      'columnName': 'devicestatustimestamp',
+      'columnName': 'lastrun',
       'cssClassName': 'nowrap',
       'customComponent': (props) => {
         if (!props.data) return <span />
@@ -55,7 +55,7 @@ export default class MonitorTable extends Component {
       }
     }, {
       'displayName': 'Last Failed',
-      'columnName': 'lastfailed',
+      'columnName': 'lastfalure',
       'cssClassName': 'nowrap',
       'customComponent': (props) => {
         if (!props.data) return <span />
