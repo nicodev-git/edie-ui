@@ -29,15 +29,7 @@ export default class MonitorTable extends Component {
       'columnName': 'monitortype'
     }, {
       'displayName': 'Result',
-      'columnName': 'devicestatustext',
-      'customComponent': (props) => {
-        try {
-          let statusObj = JSON.parse(val) // eslint-disable-line no-undef
-          if (!statusObj['text']) return (<span />)
-          return (<span>{statusObj['text']}</span>)
-        } catch (e) {}
-        return (<span />)
-      }
+      'columnName': 'checkResult.resultdata'
     }, {
       'displayName': 'Status',
       'columnName': 'status',
