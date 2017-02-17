@@ -53,7 +53,14 @@ export default class MonitorTable extends Component {
         if (!props.data) return <span />
         return <TimeAgo date={props.data}/>
       }
-
+    }, {
+      'displayName': 'Last Success',
+      'columnName': 'lastsuccess',
+      'cssClassName': 'nowrap',
+      'customComponent': (props) => {
+        if (!props.data) return <span />
+        return <TimeAgo date={props.data}/>
+      }
     }, {
       'displayName': 'Actions',
       'columnName': 'action',
