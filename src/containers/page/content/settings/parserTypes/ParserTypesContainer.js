@@ -14,7 +14,10 @@ import {
   closeParserTypeModal,
 
   openParserPatternModal,
-  closeParserPatternModal
+  closeParserPatternModal,
+
+  openSimulationModal,
+  closeSimulationModal
 } from 'actions'
 
 @connect(
@@ -26,7 +29,8 @@ import {
     editParserType: state.settings.editParserType,
 
     editPattern: state.settings.editParserPattern,
-    patternModalOpen: state.settings.parserPatternModalOpen
+    patternModalOpen: state.settings.parserPatternModalOpen,
+    simulationModalOpen: state.settings.simulationModalOpen
   }),
   dispatch => ({
     ...bindActionCreators({
@@ -39,7 +43,10 @@ import {
       closeParserTypeModal,
 
       openParserPatternModal,
-      closeParserPatternModal
+      closeParserPatternModal,
+
+      openSimulationModal,
+      closeSimulationModal
     }, dispatch)
   })
 )

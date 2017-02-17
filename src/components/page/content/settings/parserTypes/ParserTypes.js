@@ -11,6 +11,8 @@ import TabPageHeader from '../../../../shared/TabPageHeader'
 
 import { ResponsiveInfiniteTable } from '../../../../shared/InfiniteTable'
 import ParserTypeModal from './ParserTypeModal'
+import SimulationModal from './SimulationModal'
+
 import { showAlert } from 'components/shared/Alert'
 
 class ParserTypes extends React.Component {
@@ -50,10 +52,21 @@ class ParserTypes extends React.Component {
     this.props.removeParserType(selected)
   }
 
+  onClickSimulation () {
+    this.props.openSimulationModal()
+  }
+
   renderParserTypeModal () {
     if (!this.props.parserTypeModalOpen) return null
     return (
       <ParserTypeModal {...this.props}/>
+    )
+  }
+
+  renderSimulationModal () {
+    if (!this.props.simulationModalOpen) return null
+    return (
+      <SimulationModal {...this.props}/>
     )
   }
 
@@ -68,6 +81,7 @@ class ParserTypes extends React.Component {
                 <Button onClick={this.onClickAdd.bind(this)}>Add</Button>
                 <Button onClick={this.onClickEdit.bind(this)}>Edit</Button>
                 <Button onClick={this.onClickRemove.bind(this)}>Remove</Button>
+                <Button onClick={this.onClickSimulation.bind(this)}>Simulation</Button>
 
               </ButtonGroup>
             </div>
@@ -89,6 +103,7 @@ class ParserTypes extends React.Component {
           />
 
           {this.renderParserTypeModal()}
+          {this.renderSimulationModal()}
         </TabPageBody>
       </TabPage>
     )

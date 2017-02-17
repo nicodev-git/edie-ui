@@ -26,6 +26,9 @@ import {
   OPEN_PARSER_PATTERN_MODAL,
   CLOSE_PARSER_PATTERN_MODAL,
 
+  OPEN_SIMULATION_MODAL,
+  CLOSE_SIMULATION_MODAL,
+
   NO_AUTH_ERROR
 } from './types'
 
@@ -323,6 +326,18 @@ export const closeParserTypeModal = () => {
     dispatch({
       type: CLOSE_PARSER_TYPE_MODAL
     })
+  }
+}
+
+export const openSimulationModal = () => {
+  return dispatch => {
+    dispatch({type: OPEN_SIMULATION_MODAL})
+  }
+}
+
+export const closeSimulationModal = () => {
+  return dispatch => {
+    dispatch({type: CLOSE_SIMULATION_MODAL})
   }
 }
 

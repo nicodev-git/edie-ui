@@ -69,7 +69,9 @@ import {
     OPEN_PARSER_TYPE_MODAL,
     CLOSE_PARSER_TYPE_MODAL,
     OPEN_PARSER_PATTERN_MODAL,
-    CLOSE_PARSER_PATTERN_MODAL
+    CLOSE_PARSER_PATTERN_MODAL,
+    OPEN_SIMULATION_MODAL,
+    CLOSE_SIMULATION_MODAL
 
 } from '../actions/types'
 
@@ -327,6 +329,12 @@ export default function (state = {}, action) {
 
     case CLOSE_PARSER_PATTERN_MODAL:
       return { ...state, parserPatternModalOpen: false }
+
+    case OPEN_SIMULATION_MODAL:
+      return { ...state, simulationModalOpen: true }
+
+    case CLOSE_SIMULATION_MODAL:
+      return { ...state, simulationModalOpen: false }
   }
   return state
 }
