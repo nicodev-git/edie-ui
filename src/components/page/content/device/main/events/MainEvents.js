@@ -52,6 +52,7 @@ export default class MainEvents extends Component {
     }, {
       'displayName': 'Datetime',
       'columnName': 'datetime',
+      'cssClassName': 'width-200',
       'customComponent': props => {
         const row = props.rowData
         let data = moment(row.datetime).format('YYYY-MM-DD HH:mm:ss').toString()
@@ -60,12 +61,10 @@ export default class MainEvents extends Component {
     }, {
       'displayName': 'Rawdata',
       'columnName': 'rawdata',
-      'cssClassName': 'width-160',
       'customComponent': this.highlightRender.bind(this)
     }, {
       'displayName': 'Description',
       'columnName': 'description',
-      'cssClassName': 'width-200',
       'customComponent': this.highlightRender.bind(this)
     }]
   }
@@ -104,7 +103,8 @@ export default class MainEvents extends Component {
 
         url="/event/search/findBy"
         params={{
-          deviceid: device.id
+          deviceid: device.id,
+          sort: 'datetime,desc'
         }}
         pageSize={20}
       />

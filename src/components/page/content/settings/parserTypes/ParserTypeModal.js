@@ -101,7 +101,7 @@ class ParserTypeModal extends React.Component {
                 <a href="javascript:;" className="margin-sm-right" onClick={this.onClickRemovePattern.bind(this)}><i className="fa fa-trash-o" /></a>
               </div>
 
-              <div>
+              <div style={{maxHeight: '300px', overflow: 'scroll'}}>
                 <table className="table table-hover table-p-sm">
                   <tbody>
                   {
