@@ -841,9 +841,9 @@ class MapCanvas extends React.Component {
   }
 
   deviceStatusImageName (status) {
-    let okurl = 'question1.png'
-    if (status === 'UP') okurl = 'ok.gif'
-    if (status === 'DOWN') okurl = 'error.gif'
+    let okurl = 'status_unknown.png'
+    if (status === 'UP') okurl = 'status_up.png'
+    if (status === 'DOWN') okurl = 'status_down.png'
 
     return okurl
   }

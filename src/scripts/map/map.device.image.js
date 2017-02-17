@@ -43,8 +43,8 @@ fabric.DeviceImage = fabric.util.createClass(fabric.Image, {
     if(!me.statusImageObj) return;
 
     me.statusImageObj.set({
-      width: 16,
-      height: 16,
+      width: 24,
+      height: 24,
       left: Math.ceil(me.left + me.width * me.scaleX + me.statusImageLeft * me.width * me.scaleX/50 + (group ? (group.left + group.width / 2): 0)),
       top: Math.ceil(me.top + me.statusImageTop * me.height * me.scaleY/50 + (group ? (group.top + group.height / 2): 0)),
     });
