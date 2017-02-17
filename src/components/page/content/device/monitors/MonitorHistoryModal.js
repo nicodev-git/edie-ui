@@ -20,11 +20,24 @@ export default class MonitorHistoryModal extends Component {
       }
     }, {
       'displayName': 'Status',
-      'columnName': 'incidenttype',
-      'cssClassName': 'width-140'
+      'columnName': 'lastResult.status',
+      'cssClassName': 'width-140',
+      'customComponent': props => {
+        const val = props.data
+        let cls = 'fa-question'
+        let color = '#FDB422'
+        if (val === 'UP') {
+          cls = 'fa-check-square'
+          color = 'green'
+        } else if (val === 'DOWN') {
+          cls = 'fa-times'
+          color = 'red'
+        }
+        return <i className={`fa ${cls}`} style={{color: color, fontSize: '20px', verticalAlign: 'middle'}} />
+      }
     }, {
       'displayName': 'Response',
-      'columnName': 'description'
+      'columnName': 'lastResult.resultdata'
     }]
   }
 
@@ -59,15 +72,11 @@ export default class MonitorHistoryModal extends Component {
         </div>
 
         <div className="modal-body bootstrap-dialog-message">
-          <div className="form-inline">
-            <label>Search:</label>
-            <input className="form-control input-sm" ref="search" onKeyUp={this.onSearchKeyUp.bind(this)}/>
-          </div>
           <InfiniteTable
-            url="/incidentstable/getIncidentsForMonitor?severity=High&severity=Medium"
+            url="/event/search/findBy"
             params={{
-              id: this.props.device.id,
-              searchValue: this.state.search
+              monitorid: this.props.device.id,
+              sort: 'timestamp,desc'
             }}
             cells={this.cells}
             ref="table"
