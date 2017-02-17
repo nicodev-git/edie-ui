@@ -10,7 +10,7 @@ fabric.ShapeLine = fabric.util.createClass(fabric.Object, {
     for (var i = 0; i < 1; i++) {
       var line = new fabric.ShapeLineItem([0, 0, 0, 0], {
         strokeWidth: parseInt(options.strokeWidth || 1),
-        stroke: options.strokeColor || 'rgb(102,153,255)',
+        stroke: options.strokeColor || 'rgb(255,255,255)',
         originX: 'center',
         originY: 'center',
 
