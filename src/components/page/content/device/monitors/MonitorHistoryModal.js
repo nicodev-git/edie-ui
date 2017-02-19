@@ -75,7 +75,7 @@ export default class MonitorHistoryModal extends Component {
           <InfiniteTable
             url="/event/search/findBy"
             params={{
-              monitorid: this.props.device.id,
+              monitorid: this.props.device.uid,
               sort: 'timestamp,desc'
             }}
             cells={this.cells}
