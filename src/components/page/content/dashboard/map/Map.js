@@ -12,6 +12,8 @@ import DeviceWizardContainer from '../../../../../containers/shared/wizard/Devic
 import { wizardConfig } from '../../../../shared/wizard/WizardConfig'
 import { showConfirm } from '../../../../shared/Alert'
 
+import { fullScreen } from 'shared/FullScreen'
+
 class Map extends React.Component {
   constructor (props) {
     super(props)
@@ -119,16 +121,21 @@ class Map extends React.Component {
   }
 
   componentDidMount () {
-    // if (!window.react) window.react = {}
-    // window.react.map = this
+    if (fullScreen.supportsFullScreen) {
+      document.body.addEventListener(fullScreen.fullScreenEventName, this.onFullScreenChange, true)
+    }
 
-    window.addEventListener('resize', this.updateDimensions)
+    // window.addEventListener('resize', this.updateDimensions)
 
     this.props.fetchDeviceTemplates()
   }
 
   componentWillUnmount () {
-    window.removeEventListener('resize', this.updateDimensions)
+    if (fullScreen.supportsFullScreen) {
+      document.body.removeEventListener(fullScreen.fullScreenEventName, this.onFullScreenChange, true)
+    }
+
+    // window.removeEventListener('resize', this.updateDimensions)
   }
 
   renderDeviceWizard () {
@@ -314,9 +321,9 @@ class Map extends React.Component {
   }
 
   onMapMouseDown (map, obj) {
-    if (this.state.maximized) {
-      this.setState({maximized: false})
-    }
+    // if (this.props.isFullScreen) {
+    //   this.props.requireFullScreen(false)
+    // }
 
     console.log(obj.data)
     this.props.openDevice(obj.data)
@@ -648,23 +655,18 @@ class Map extends React.Component {
   }
 
   onClickMaximize () {
-        // this.setState({maximized: !this.state.maximized}, () => {
-        //
-        //     globalState.fullscreen = this.state.maximized
-        //
-        //     if (fullScreen.supportsFullScreen) {
-        //         if (this.state.maximized) {
-        //             fullScreen.requestFullScreen(document.body)
-        //         } else {
-        //             fullScreen.cancelFullScreen()
-        //         }
-        //     } else {
-        //         // setTimeout(() => {
-        //         //     this.onClickZoomReset()
-        //         // }, 200)
-        //         window.dispatchEvent(new Event('resize'))
-        //     }
-        // })
+    const {isFullScreen} = this.props
+    this.props.requireFullScreen(!isFullScreen)
+
+    if (fullScreen.supportsFullScreen) {
+      if (isFullScreen) {
+        fullScreen.cancelFullScreen()
+      } else {
+        fullScreen.requestFullScreen(document.body)
+      }
+    } else {
+      // window.dispatchEvent(new window.Event('resize'))
+    }
   }
 
     // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -838,10 +840,24 @@ class Map extends React.Component {
     // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   onFullScreenChange () {
+    if (fullScreen.isFullScreen()) {
+      if (!this.props.isFullScreen) this.onClickMaximize()
+    } else {
+      if (this.props.isFullScreen) this.onClickMaximize()
+    }
 
+    // setTimeout(() => {
+    //   window.dispatchEvent(new Event('resize'))
+    // }, 500)
   }
 
   updateDimensions () {
+    // if (globalState.fullscreen && !this.state.maximized) {
+    //   this.onClickMaximize()
+    //   setTimeout(() => {
+    //     window.dispatchEvent(new Event('resize'))
+    //   }, 500)
+    // }
   }
 
     // //////////////////////////////////////////////////////
@@ -864,12 +880,13 @@ class Map extends React.Component {
   }
 
   onDragEndDivider () {
-    window.dispatchEvent(new Event('resize')) // eslint-disable-line no-undef
+    window.dispatchEvent(new window.Event('resize')) // eslint-disable-line no-undef
   }
 
   render () {
     let events = this.mapEvents
-    const { selectedItem, dropItem, dropItemPos, editable, maximized, mapHeight } = this.state
+    const { selectedItem, dropItem, dropItemPos, editable, mapHeight } = this.state
+    const maximized = this.props.isFullScreen
     // const {tooltip, tipLeft, tipTop, tipWidth, tipHeight, selectedItem, // Never used
     //   dropItem, dropItemPos, editable, maximized, mapHeight} = this.state
     return (

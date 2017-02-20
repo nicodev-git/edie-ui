@@ -30,7 +30,8 @@ import {
 
   fetchAttackers,
 
-  updateDashboard
+  updateDashboard,
+  requireFullScreen
 } from 'actions'
 
 export default connect(
@@ -44,6 +45,8 @@ export default connect(
     mapLines: state.dashboard.mapLines,
     selectedMap: state.dashboard.selectedMap,
     showTraffic: state.settings.showTraffic,
+
+    isFullScreen: state.dashboard.isFullScreen,
 
     maps: state.dashboard.maps,
     mapImportModalVisible: state.dashboard.mapImportModalVisible,
@@ -83,6 +86,7 @@ export default connect(
 
     fetchAttackers,
 
-    updateDashboard
+    updateDashboard,
+    requireFullScreen
   }
 )(Dashboard)

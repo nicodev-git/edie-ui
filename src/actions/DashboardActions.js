@@ -7,6 +7,8 @@ import {
 
   CLOSE_API_ERROR_MODAL,
 
+  REQUIRE_FULLSCREEN,
+
   NO_AUTH_ERROR
 } from './types'
 
@@ -65,6 +67,15 @@ export const closeApiErrorModal = () => {
   return dispatch => {
     dispatch({
       type: CLOSE_API_ERROR_MODAL
+    })
+  }
+}
+
+export function requireFullScreen (enabled) {
+  return dispatch => {
+    dispatch({
+      type: REQUIRE_FULLSCREEN,
+      enabled
     })
   }
 }
