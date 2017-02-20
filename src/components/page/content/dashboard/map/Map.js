@@ -7,8 +7,9 @@ import MapCanvas from '../../../../shared/map/MapCanvas'
 
 import MapToolbar from './MapToolbar'
 import DeviceDragLayer from './DeviceDragLayer'
+import DividerLine from './DividerLine'
 
-import DeviceWizardContainer from '../../../../../containers/shared/wizard/DeviceWizardContainer'
+import DeviceWizardContainer from 'containers/shared/wizard/DeviceWizardContainer'
 import { wizardConfig } from '../../../../shared/wizard/WizardConfig'
 import { showConfirm } from '../../../../shared/Alert'
 
@@ -380,49 +381,6 @@ class Map extends React.Component {
         this.props.updateMapLine(props)
       }
     }
-
-        // if(!lineId) {
-        //     var param = {
-        //         type: 'line',
-        //         name: 'line',
-        //         angle: 0,
-        //         x : 0,
-        //         y : 0,
-        //         width : 50,
-        //         height : 1,
-        //
-        //         mapid: this.state.mapId,
-        //         fatherid: 0,
-        //     };
-        //
-        //     $.get(Api.deviceadmin.addDevice, param)
-        //     .done(res => {
-        //         if(!res || !res.success) return;
-        //         let obj = res.object;
-        //         if (obj.length) obj = obj[0];
-        //         lineId = obj.id;
-        //
-        //         this.arrLines[lineId] = {
-        //             fromDeviceid: lineObj.startObj.id,
-        //             fromPoint: lineObj.startPoint,
-        //             toDeviceid: lineObj.endObj.id,
-        //             toPoint: lineObj.endPoint,
-        //         }
-        //
-        //         lineObj.id = lineId;
-        //
-        //         this.updateLineConnectionDB(lineId);
-        //         if (callback) callback(lineId, this.arrLines[lineId]);
-        //     });
-        // } else {
-        //     let con = this.arrLines[lineId];
-        //     con.fromDeviceid = lineObj.startObj.id;
-        //     con.fromPoint = lineObj.startPoint;
-        //     con.toDeviceid = lineObj.endObj.id;
-        //     con.toPoint = lineObj.endPoint;
-        //
-        //     this.updateLineConnectionDB(lineId);
-        // }
   }
 
   onMapLineStyleChange (lineObj, style) {
@@ -735,46 +693,6 @@ class Map extends React.Component {
     })
   }
 
-  updateLineConnectionDB (lineid) {
-    let con = this.arrLines[lineid]
-    if (con.id) {
-      $.ajax({ // eslint-disable-line no-undef
-        dataType: 'json',
-        url: '/devices/updateConnection',
-        data: {
-          id: con.id,
-          fromDevice: con.fromDeviceid,
-          fromPoint: con.fromPoint,
-          toDevice: con.toDeviceid,
-          toPoint: con.toPoint,
-          lineId: lineid
-        },
-        success: (data, status, jqXHR) => {
-        }
-      })
-    } else {
-      $.ajax({ // eslint-disable-line no-undef
-        dataType: 'json',
-        url: '/devices/addConnection',
-        data: {
-          from: con.fromDeviceid,
-          connectionPoint: con.fromPoint,
-          lineId: lineid
-        },
-        success: (data, status, jqXHR) => {
-          if (data.success) {
-            con.id = data.info
-            if (con.toDeviceid) {
-              this.updateLineConnectionDB(lineid)
-            }
-          } else {
-            console.log('Connection Add Failed!')
-          }
-        }
-      })
-    }
-  }
-
   changeLineType (id, typeid) {
     $.get(`${this.props.ROOT_URL}${Api.deviceadmin.updateLine}`, { // eslint-disable-line no-undef
       id: id,
@@ -871,12 +789,9 @@ class Map extends React.Component {
 
   onChangeDivider (diffY) {
     let {mapHeight} = this.state
-    // const oldHeight = mapHeight // Never used
     mapHeight += diffY
     if (mapHeight < 250) mapHeight = 250
     this.setState({mapHeight})
-
-        // ///////////////
   }
 
   onDragEndDivider () {
@@ -915,6 +830,7 @@ class Map extends React.Component {
               showTraffic={this.props.showTraffic}
               ref="map"/>
             <DeviceDragLayer />
+            {maximized ? null : <DividerLine onDragMove={this.onChangeDivider} onDragEnd={this.onDragEndDivider}/>}
           </div>
         </div>
 

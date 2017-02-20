@@ -30,20 +30,6 @@ function getEventClientOffset (e) {
   }
 }
 
-const ELEMENT_NODE = 1
-function getNodeClientOffset (node) {
-  const el = node.nodeType === ELEMENT_NODE
-    ? node
-    : node.parentElement
-
-  if (!el) {
-    return null
-  }
-
-  const { top, left } = el.getBoundingClientRect()
-  return { x: left, y: top }
-}
-
 export default class DividerLine extends React.Component {
   constructor (props) {
     super(props)
@@ -100,36 +86,20 @@ export default class DividerLine extends React.Component {
     })
   }
 
-  render () {
-    const style = {
-      position: 'absolute',
-      width: '100%',
-      height: '10px',
-      cursor: 'row-resize',
-      bottom: 0,
-      zIndex: 100,
-      borderBottom: '1px solid #E91E63'
-    }
-
-    return (
-      <div style={style} ref="divider" />
-    )
-  }
-
   handleTopMoveStart (e) {
     const clientOffset = getEventClientOffset(e)
     if (clientOffset) {
       this._mouseClientOffset = clientOffset
     }
 
-    console.log('drag start')
+    // console.log('drag start')
     this.setState({dragging: true})
   }
 
   handleTopMoveCapture (e) {
     if (!this.state.dragging) return
     e.preventDefault()
-    console.log('drag move')
+    // console.log('drag move')
 
     const clientOffset = getEventClientOffset(e)
     if (clientOffset) {
@@ -147,12 +117,28 @@ export default class DividerLine extends React.Component {
     if (!this.state.dragging) return
     e.preventDefault()
 
-    console.log('drag end')
+    // console.log('drag end')
 
     this.setState({dragging: false})
 
     const {onDragEnd} = this.props
     onDragEnd && onDragEnd()
+  }
+
+  render () {
+    const style = {
+      position: 'absolute',
+      width: '100%',
+      height: '10px',
+      cursor: 'row-resize',
+      bottom: 0,
+      zIndex: 100,
+      borderBottom: '1px solid #E91E63'
+    }
+
+    return (
+      <div style={style} ref="divider" />
+    )
   }
 }
 
