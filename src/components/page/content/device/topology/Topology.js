@@ -639,7 +639,7 @@ export default class Topology extends React.Component {
   }
 
   onFinishAddWizard (callback, res, params) {
-    //this.props.addMapDevice(params)
+    // this.props.addMapDevice(params)
   }
 
   // ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
