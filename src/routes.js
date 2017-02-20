@@ -38,7 +38,7 @@ import DeviceMainRuleAddContainer from './containers/page/content/device/main/ru
 import DeviceMonitorsContainer from './containers/page/content/device/monitors/MonitorsContainer'
 import DeviceConnectedContainer from './containers/page/content/device/connected/ConnectedContainer'
 import DeviceInfoContainer from './containers/page/content/device/info/InfoContainer'
-
+import DeviceTopology from './components/page/content/device/topology/Topology'
 import DeviceListContainer from './containers/DeviceListContainer'
 
 import RequireAuth from './components/auth/RequireAuth'
@@ -81,6 +81,7 @@ export default(
           <Route path="incidents" component={DeviceMainIncidentsContainer}/>
           {/* <Route path="rules" component={DeviceMainRulesContainer}/> */}
           <Route path="workflows" component={DeviceMainWorkflowsContainer}/>
+          <Route path="topology" component={DeviceTopology}/>
           {/* <Route path="rawIncidents" component={DeviceMainRawIncidentsContainer}/> */}
           <Route path="events" component={DeviceMainEventsContainer}/>
           <Route path="advanced" component={DeviceMainAdvancedContainer}/>

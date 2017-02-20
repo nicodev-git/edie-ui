@@ -1,11 +1,9 @@
 import React from 'react'
 
 import { ChromePicker } from 'react-color'
-import { findIndex } from 'lodash'
 
 import DeviceMenu from './DeviceMenu'
 import { lineTypes } from '../../../../../shared/Global'
-import { ROOT_URL } from '../../../../../actions/config'
 
 export default class Toolbar extends React.Component {
   constructor (props) {
@@ -36,17 +34,28 @@ export default class Toolbar extends React.Component {
   }
 
   loadLineTypes () {
-    $.get(`${ROOT_URL}${Api.deviceadmin.getShapeTypes}`)
-      .done((res) => {
-        let lineTypes = this.lineTypes
+    // $.get(`${ROOT_URL}${Api.deviceadmin.getShapeTypes}`)
+    //   .done((res) => {
+    //     let lineTypes = this.lineTypes
+    //
+    //     $.each(res || [], function (i, type) {
+    //       let index = findIndex(lineTypes, {typename: type.devicename})
+    //       if (index >= 0) lineTypes[index]['typeid'] = type.devicetype
+    //     })
+    //
+    //     this.setState({lineTypes})
+    //   })
+  }
 
-        $.each(res || [], function (i, type) {
-          let index = findIndex(lineTypes, {typename: type.devicename})
-          if (index >= 0) lineTypes[index]['typeid'] = type.devicetype
+  handleClick (e) {
+    // Detect device menu outer click
+    if (this.state.displayDevices) {
+      if (!this.refs.liDevices.contains(e.target)) {
+        this.setState({ displayDevices: false }, () => {
+          this.props.onClickAdd(this.state.displayDevices)
         })
-
-        this.setState({lineTypes})
-      })
+      }
+    }
   }
 
   render () {
@@ -286,17 +295,6 @@ export default class Toolbar extends React.Component {
     let imgUrl = item['image']
 
     this.props.onChangeLineType(type, imgUrl, deviceTypeId)
-  }
-
-  handleClick (e) {
-        // Detect device menu outer click
-    if (this.state.displayDevices) {
-      if (!this.refs.liDevices.contains(e.target)) {
-        this.setState({ displayDevices: false }, () => {
-          this.props.onClickAdd(this.state.displayDevices)
-        })
-      }
-    }
   }
 }
 

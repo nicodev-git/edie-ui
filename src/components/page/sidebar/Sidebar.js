@@ -73,7 +73,7 @@ export default class Sidebar extends React.Component {
 
   render () {
     const {device, pageId, pageType} = this.props
-    const group = device && device.type === 'group'
+    const group = device && (device.type === 'group' || device.isgroup)
 
     return (
       <aside className="sidebar sidebar-default">

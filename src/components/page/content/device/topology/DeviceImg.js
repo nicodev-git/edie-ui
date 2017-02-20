@@ -55,7 +55,7 @@ class DeviceImg extends Component {
     // img.src = "/images/" + this.props.img
   }
   render () {
-    const { connectDragSource, isDragging } = this.props
+    const { connectDragSource } = this.props
 
     return (
       connectDragSource(
