@@ -5,7 +5,6 @@ import MapCanvas from '../../../../shared/map/MapCanvas'
 import MapToolbar from './MapToolbar'
 
 import DeviceWizardContainer from '../../../../../containers/shared/wizard/DeviceWizardContainer'
-import {appendComponent, removeComponent} from '../../../../../util/Component'
 import {wizardConfig} from '../../../../shared/wizard/WizardConfig'
 import {showAlert} from '../../../../shared/Alert'
 
@@ -287,34 +286,20 @@ export default class Topology extends React.Component {
   }
 
   onDrop (item, offset) {
-    const doc = document.documentElement
-    const left = (window.pageXOffset || doc.scrollLeft) - (doc.clientLeft || 0)
-    const top = (window.pageYOffset || doc.scrollTop) - (doc.clientTop || 0)
+    let doc = document.documentElement
+    let left = (window.pageXOffset || doc.scrollLeft) - (doc.clientLeft || 0)
+    let top = (window.pageYOffset || doc.scrollTop) - (doc.clientTop || 0)
 
-    const cmap = this.getCanvasMap()
+    let cmap = this.getCanvasMap()
     let pos = cmap.canvas.getPointer({
       clientX: offset.x + left,
       clientY: offset.y + top
     })
     let {x, y} = pos
 
-    // if (item.hasClass('item-newdev')) {
-    //     var device = item.data('device')
-    //
-    //     var x=device.x
-    //     var y=device.y
-    //
-    //     addMapItem(cmap, device, function(obj){
-    //         obj.notifyMoved()
-    //
-    //         removeNewDeviceItem(item.closest('li'))
-    //     })
-    //     drawNewDeviceConnection(cmap, device)
-    //
-    //     return
-    // }
-
-    let options = {
+    let options = options || {}
+    $.extend(options, { // eslint-disable-line no-undef
+      title: item.title,
       type: item.type,
       imgName: item.img,
       imageUrl: `/externalpictures?name=${item.img}`,
@@ -322,8 +307,9 @@ export default class Topology extends React.Component {
       y: y,
       width: 50,
       height: 50,
-      fatherid: this.props.device.id
-    }
+
+      monitors: item.monitors
+    })
 
     if (options.type === 'longhub') {
       options.width = 20
@@ -578,82 +564,82 @@ export default class Topology extends React.Component {
 
   // ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+  renderDeviceWizard () {
+    if (!this.state.deviceWizardVisible) return null
+
+    const {options, callback, closeCallback} = this.state.deviceWizardConfig
+
+    let extra = {
+      x: options.x,
+      y: options.y,
+      width: options.width,
+      height: options.height,
+      image: options.imgName
+    }
+
+    let config = {
+
+    }
+
+    return (
+      <DeviceWizardContainer
+        deviceType={options.type}
+        onClose={() => {
+          this.setState({deviceWizardVisible: false})
+          closeCallback && closeCallback()
+        }}
+        title={options.title}
+        monitors={options.monitors}
+        extraParams={extra}
+        configParams={config}
+        onFinish={this.onFinishAddWizard.bind(this, callback)}
+      />
+    )
+  }
+
   showAddWizard (options, callback, closeCallback) {
     if (options.type === 'longhub') {
-      // const url = `${ROOT_URL}${Api.deviceadmin.addDevice}`
-      // const param = {
-      //   devicetype: 'longhub',
-      //   name: 'longhub',
-      //   angle: 0,
-      //   x: options.x,
-      //   y: options.y,
-      //   width: options.width,
-      //   height: options.height,
-      //   fatherid: options.fatherid || 0,
-      //   mapid: this.props.device.mapid
-      // }
-      //
-      // $.get(url, param).done((res) => {
-      //   if (!res || !res.success || !res.object.length) {
-      //     showAlert('Add Failed!')
-      //     return
-      //   }
-      //
-      //   const data = res.object[0]
-      //   if (callback) callback(data.id, data.name, data)
-      // }).always(() => {
-      //   closeCallback && closeCallback()
-      // })
-    } else {
-      if (wizardConfig[options.type] === null) {
-        showAlert(`Unrecognized Type: ${options.type}`)
-        return
-      }
-
-      const extra = {
-        mapid: this.props.device.mapid,
+      const url = `${this.props.ROOT_URL}${Api.deviceadmin.addDevice}` // eslint-disable-line no-undef
+      const param = {
+        devicetype: 'longhub',
+        name: 'longhub',
+        angle: 0,
         x: options.x,
         y: options.y,
         width: options.width,
         height: options.height,
         fatherid: options.fatherid || 0,
-        timeout: 60000
+        mapid: this.state.mapId
       }
 
-      extra.image = options.imgName
+      $.get(url, param).done((res) => { // eslint-disable-line no-undef
+        if (!res || !res.success || !res.object.length) {
+          showAlert('Add Failed!') // eslint-disable-line no-undef
+          return
+        }
 
-      const config = {
-        fatherid: options.fatherid || 0,
-        mapid: this.props.device.mapid
+        const data = res.object[0]
+        callback && callback(data.id, data.name, data)
+      }).always(() => {
+        closeCallback && closeCallback()
+      })
+    } else {
+      if (wizardConfig[options.type] === null) {
+        showAlert(`Unrecognized Type: ${options.type}`) // eslint-disable-line no-undef
+        return
       }
 
-      appendComponent(
-        <DeviceWizardContainer
-          deviceType={options.type}
-          onClose={(modal) => {
-            removeComponent(modal)
-            closeCallback && closeCallback()
-          }}
-          extraParams={extra}
-          configParams={config}
-          onFinish={this.onFinishAddWizard.bind(this, callback)}
-        />
-      )
+      this.setState({
+        deviceWizardConfig: {
+          options, callback, closeCallback
+        },
+        deviceWizardVisible: true
+      })
     }
   }
 
-  onFinishAddWizard (callback, res, req) {
-    let data = res.object
-    if (!data) {
-      showAlert('Add Failed!')
-      return
-    }
-
-    if (data.length) data = data[0]
-    const id = data.id
-    const name = data.name
-
-    callback && callback(id, name, data)
+  onFinishAddWizard (callback, res, params) {
+    //this.props.addMapDevice(params)
   }
 
   // ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -707,6 +693,7 @@ export default class Topology extends React.Component {
             <ReactTooltip/>
           </div>
         </div>
+        {this.renderDeviceWizard()}
       </div>
     )
   }
