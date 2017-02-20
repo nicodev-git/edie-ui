@@ -6,66 +6,18 @@ import {
     Panel
 } from 'react-bootstrap'
 
+const sections = [
+  ['Device', 'DEVICES'],
+  ['BI', 'BI'],
+  ['Shape', 'SHAPES']
+]
 export default class DeviceMenu extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
 
       keyword: '',
-      deviceTypes: [{
-        title: 'Devices',
-        items: [{
-          title: 'Windows Server', img: 'window.png', type: 'server'
-        }, {
-          title: 'Linux Server', img: 'linux.png', type: 'linuxserver'
-        }, {
-          title: 'Router', img: 'router.png', type: 'router'
-        }, {
-          title: 'Firewall', img: 'firewall.png', type: 'firewall'
-        }, {
-          title: 'Internet', img: 'inticon.png', type: 'internet'
-        }, {
-          title: 'Website', img: 'website.png', type: 'website'
-        }, {
-          title: 'Custom Device', img: 'pcs.png', type: 'custom'
-        }, {
-          title: 'Oracle DB', img: 'db2.png', type: 'db-oracle'
-        }, {
-          title: 'MSSQL DB', img: 'db2.png', type: 'db-mssql'
-        }, {
-          title: 'MySQL DB', img: 'db2.png', type: 'db-mysql'
-        }, {
-          title: 'PC', img: 'pcs.png', type: 'pc'
-        }, {
-          title: 'Antivirus', img: 'antivirus.png', type: 'antivirus'
-        }, {
-          title: 'NAC', img: 'nac.png', type: 'nac'
-        }, {
-          title: 'Safend', img: 'usb.png', type: 'safend'
-        }, {
-          title: 'IPS', img: 'ips.png', type: 'ips'
-        }]
-      }, {
-        title: 'BI',
-        items: [{
-          title: 'Pie Chart', img: 'graph.png', type: 'bi-pie'
-        }, {
-          title: 'Bar Chart', img: 'graph.png', type: 'bi-bar'
-        }, {
-          title: 'Line Chart', img: 'graph.png', type: 'bi-line'
-        }, {
-          title: 'Gauge', img: 'sqlgaugeicon.png', type: 'bi-gauge'
-        }, {
-          title: 'Temperature', img: 'thermo.png', type: 'bi-temperature'
-        }]
-      }, {
-        title: 'Shapes',
-        items: [{
-          title: 'Long hub', img: 'longhub.png', type: 'longhub'
-        }, {
-          title: 'Free Text', img: 'text.png', type: 'usertext'
-        }]
-      }]
+      deviceTypes: []
     }
   }
 
@@ -85,7 +37,25 @@ export default class DeviceMenu extends React.Component {
   render () {
     let devicePanels = []
 
-    this.state.deviceTypes.forEach((section, sectionIndex) => {
+    let deviceTypes = []
+    sections.forEach(section => {
+      const items = this.props.deviceTemplates.filter(i => i.devicetemplategroup === section[1]).map(u => {
+        return {
+          title: u.name,
+          img: u.image || 'windows.png',
+          type: u.devicetemplategroup === 'GROUPS' ? 'group' : 'custom',
+          monitors: u.monitors
+        }
+      })
+      if (items.length === 0) return
+
+      deviceTypes.push({
+        title: section[0],
+        items
+      })
+    })
+
+    deviceTypes.forEach((section, sectionIndex) => {
       let deviceItems = []
 
       section.items.forEach((item, typeIndex) => {

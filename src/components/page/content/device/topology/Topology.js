@@ -683,6 +683,7 @@ export default class Topology extends React.Component {
         <div className="panel panel-default mb-none" id="mapeditdiv"
           style={{borderLeft: '1px solid white'}}>
           <MapToolbar
+            {...this.props}
             {...events}
             {...this.state}
             ref="toolbar"

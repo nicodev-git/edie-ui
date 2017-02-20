@@ -169,8 +169,6 @@ export default class Toolbar extends React.Component {
       left: 0
     }
 
-    console.log('Obj topology', obj)
-
     return (
       <div className="panel-heading map-heading">
         <h4 className="panel-title">Topology</h4>
@@ -269,7 +267,7 @@ export default class Toolbar extends React.Component {
               </a>
               {
                 this.state.displayDevices
-                  ? <DeviceMenu onClickItem={this.props.onClickDeviceItem} selectedItem={this.props.selectedItem}/>
+                  ? <DeviceMenu {...this.props} onClickItem={this.props.onClickDeviceItem} selectedItem={this.props.selectedItem}/>
                   : null
               }
             </li>

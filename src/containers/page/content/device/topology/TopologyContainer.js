@@ -7,7 +7,10 @@ import { updateMapDevice } from 'actions'
 import Topology from 'components/page/content/device/topology/Topology'
 
 @connect(
-  state => ({ device: state.dashboard.selectedDevice }),
+  state => ({
+    device: state.dashboard.selectedDevice,
+    deviceTemplates: state.settings.deviceTemplates
+  }),
   dispatch => ({
     updateMapDevice: bindActionCreators(updateMapDevice, dispatch)
   })
