@@ -434,23 +434,9 @@ export default class Topology extends React.Component {
   // ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   moveMapItem (map, params, type) {
-    // if (!params) return true
-    //
-    // this.addMapUploading(map, params.deviceid)
-    //
-    // var url = type === 'lightning' ? Api.devices.updateLine : Api.admin.moveDevice
-    //
-    // if (type === 'lightning') {
-    //   params = {
-    //     lineId: params.id,
-    //     linecolor: 'black',
-    //     linewidth: params.scaleX,
-    //   }
-    // }
-    //
-    // return $.get(`${ROOT_URL}${url}`, params).always(() => {
-    //   this.removeMapUploading(map, params.deviceid)
-    // })
+    if (!params) return true
+
+    this.props.updateGroupDevice(params)
   }
 
   addMapUploading (map, id) {
@@ -467,51 +453,36 @@ export default class Topology extends React.Component {
     // if (!cmap) return
     // if (!cmap.editable) return
     //
-    // var object = cmap.getSelected()
+    // let object = cmap.getSelected()
     // if (!object) {
-    //   showAlert("Please select a device to remove.")
+    //   showAlert('Please select a device to remove.') // eslint-disable-line no-undef
     //   return
     // }
     //
-    // var item = ""
-    // var name = ""
-    // if (object.objectType === MapItemType.Device) {
-    //   item = "device"
-    //   name = "Name: " + object.data.name
-    // } else if (object.objectType === MapItemType.BI) {
-    //   item = "bi"
-    // } else if (object.objectType === MapItemType.Shape) {
-    //   item = "connection"
+    // let item = '' // eslint-disable-line no-unused-vars
+    // let name = '' // eslint-disable-line no-unused-vars
+    // let {data} = object
+    // if (object.objectType === MapItemType.Device) { // eslint-disable-line no-undef
+    //   item = 'device'
+    //   name = `Name: ${object.data.name}`
+    // } else if (object.objectType === MapItemType.BI) { // eslint-disable-line no-undef
+    //   item = 'bi'
+    // } else if (object.objectType === MapItemType.Shape) { // eslint-disable-line no-undef
+    //   item = 'connection'
+    //   data = this.findMapLine(object.id)
     // }
     //
-    // $.get(`${ROOT_URL}${Api.deviceadmin.countDeviceData}`, {
-    //   deviceid: object.id,
-    // }).done(function (res) {
-    //   if (!res.success) {
-    //     showAlert("Failed to get device data!")
-    //     return
-    //   }
-    //   showConfirm(res.object, (btn) => {
-    //     if (btn !== 'ok') return
+    // showConfirm('Click OK to delete.', (btn) => {
+    //   if (btn !== 'ok') return
     //
-    //     var url
-    //
-    //     url = Api.deviceadmin.removeDevice + '?monitorid=' + object.id
-    //     if (object.objectType === MapItemType.Device) {
-    //
-    //     } else if (object.objectType === MapItemType.Shape) {
-    //
+    //   if (data) {
+    //     if (object.objectType === MapItemType.Shape) { // eslint-disable-line no-undef
+    //       this.props.deleteMapLine(data)
+    //     } else {
+    //       this.props.deleteMapDevice(data)
     //     }
-    //
-    //     if (!url) return
-    //
-    //     cmap.removeMapItem(object, true)
-    //     $.getJSON(url, function () {
-    //
-    //     })
-    //   })
-    // }).fail(function () {
-    //   showAlert('Failed to get device data!')
+    //   }
+    //   cmap.removeMapItem(object, true)
     // })
   }
 

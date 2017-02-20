@@ -610,3 +610,33 @@ const addGroupDeviceSuccess = (dispatch, group, device) => {
     dispatch({type: UPDATE_MAP_DEVICE, data: res.data})
   }).catch(error => apiError(dispatch, error))
 }
+
+export const updateGroupDevice = (group, props) => {
+  return dispatch => {
+    const devices = (group.group || {}).devices || []
+
+    const entity = assign({}, group, {
+      group: assign({}, group.group, {
+        devices: devices.map(d => d.id === props.id ? props : d)
+      })
+    })
+    axios.put(entity._links.self.href, entity).then(res => {
+      dispatch({type: UPDATE_MAP_DEVICE, data: res.data})
+    }).catch(error => apiError(dispatch, error))
+  }
+}
+
+export const removeGroupDevice = (group, props) => {
+  return dispatch => {
+    const devices = (group.group || {}).devices || []
+
+    const entity = assign({}, group, {
+      group: assign({}, group.group, {
+        devices: devices.filter(d => d.id === props.id ? props : d)
+      })
+    })
+    axios.put(entity._links.self.href, entity).then(res => {
+      dispatch({type: UPDATE_MAP_DEVICE, data: res.data})
+    }).catch(error => apiError(dispatch, error))
+  }
+}
