@@ -40,6 +40,7 @@ import DeviceConnectedContainer from './containers/page/content/device/connected
 import DeviceInfoContainer from './containers/page/content/device/info/InfoContainer'
 import DeviceTopology from './containers/page/content/device/topology/TopologyContainer'
 import DeviceListContainer from './containers/DeviceListContainer'
+import GroupDevicesContainer from './containers/page/content/device/devices/DevicesContainer'
 
 import RequireAuth from './components/auth/RequireAuth'
 
@@ -89,6 +90,7 @@ export default(
         <Route path="monitor" component={DeviceMonitorsContainer}/>
         <Route path="connected" component={DeviceConnectedContainer}/>
         <Route path="info" component={DeviceInfoContainer}/>
+        <Route path="list" component={GroupDevicesContainer}/>
       </Route>
 
     </Route>
