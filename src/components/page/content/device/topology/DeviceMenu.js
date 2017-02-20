@@ -69,6 +69,19 @@ export default class DeviceMenu extends React.Component {
     }
   }
 
+  onChangeDeviceSearch (e) {
+    let keyword = e.target.value
+    this.setState({keyword})
+  }
+
+  onClickItem (item, e) {
+    const {onClickItem} = this.props
+    onClickItem && onClickItem(item, {
+      clientX: e.clientX,
+      clientY: e.clientY
+    })
+  }
+
   render () {
     let devicePanels = []
 
@@ -102,8 +115,7 @@ export default class DeviceMenu extends React.Component {
         <div className="panel panel-default">
           <div className="panel-body">
             <div className="navbar-search" style={{paddingLeft: '5px', paddingRight: '5px'}}>
-              <input type="text" placeholder="Search …" className="form-control"
-                onChange={this.onChangeDeviceSearch.bind(this)}/>
+              <input type="text" placeholder="Search …" className="form-control" onChange={this.onChangeDeviceSearch.bind(this)}/>
               <button className="btn" type="submit" disabled>
                 <i className="fa fa-search" />
               </button>
@@ -116,19 +128,6 @@ export default class DeviceMenu extends React.Component {
         </PanelGroup>
       </div>
     )
-  }
-
-  onChangeDeviceSearch (e) {
-    let keyword = e.target.value
-    this.setState({keyword})
-  }
-
-  onClickItem (item, e) {
-    const {onClickItem} = this.props
-    onClickItem && onClickItem(item, {
-      clientX: e.clientX,
-      clientY: e.clientY
-    })
   }
 }
 DeviceMenu.defaultProps = {

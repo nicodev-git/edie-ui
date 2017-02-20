@@ -38,7 +38,7 @@ import DeviceMainRuleAddContainer from './containers/page/content/device/main/ru
 import DeviceMonitorsContainer from './containers/page/content/device/monitors/MonitorsContainer'
 import DeviceConnectedContainer from './containers/page/content/device/connected/ConnectedContainer'
 import DeviceInfoContainer from './containers/page/content/device/info/InfoContainer'
-import DeviceTopology from './components/page/content/device/topology/Topology'
+import DeviceTopology from './containers/page/content/device/topology/TopologyContainer'
 import DeviceListContainer from './containers/DeviceListContainer'
 
 import RequireAuth from './components/auth/RequireAuth'

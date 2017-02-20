@@ -179,14 +179,14 @@ export default class Toolbar extends React.Component {
 
             <li>
               <a href="javascript:"
-                 className="option trash p-none" style={{display: obj ? 'block' : 'none'}}
-                 onClick={this.props.onClickDelete}>
+                className="option trash p-none" style={{display: obj ? 'block' : 'none'}}
+                onClick={this.props.onClickDelete}>
                 <i className="fa fa-trash-o" title="Delete" />
               </a>
             </li>
             <li>
               <div className="input-group colorpicker-element" style={{display: lineGroup ? 'block' : 'none'}}
-                   onClick={this.onClickColorPicker.bind(this)}>
+                onClick={this.onClickColorPicker.bind(this)}>
                 <div className="input-group-addon">
                   <i className="color-preview" style={{background: lineGroup ? line.getStrokeColor() : 'black'}} />
                 </div>
@@ -196,55 +196,45 @@ export default class Toolbar extends React.Component {
                 this.state.displayColorPicker
                   ? <div style={popover}>
                     <div style={cover} onClick={this.onCloseColorPicker.bind(this)}/>
-                    <ChromePicker color={lineGroup ? line.getStrokeColor() : 'black'}
-                                  onChangeComplete={this.onChangeColorPicker.bind(this)}/>
+                    <ChromePicker color={lineGroup ? line.getStrokeColor() : 'black'} onChangeComplete={this.onChangeColorPicker.bind(this)}/>
                   </div>
                   : null
               }
 
             </li>
             <li>
-              <a href="javascript:;"
-                 className="option p-none" style={{display: lineGroup ? 'block' : 'none'}}
-                 onClick={this.props.onClickLineWidthInc}>
+              <a href="javascript:;" className="option p-none" style={{display: lineGroup ? 'block' : 'none'}} onClick={this.props.onClickLineWidthInc}>
                 <i className="fa fa-expand" title="Increase Line Width" />
               </a>
             </li>
             <li>
-              <a href="javascript:;"
-                 className="option p-none" style={{display: lineGroup ? 'block' : 'none'}}
-                 onClick={this.props.onClickLineWidthDec}>
+              <a href="javascript:;" className="option p-none" style={{display: lineGroup ? 'block' : 'none'}} onClick={this.props.onClickLineWidthDec}>
                 <i className="fa fa-compress" title="Decrease Line Width" />
               </a>
             </li>
             <li>
-              <a href="javascript:;"
-                 className="option p-none" style={{display: text ? 'block' : 'none'}}
-                 onClick={this.props.onClickFontSizeUp}> <i className="fa fa-arrow-up" title="Increase Font Size" />
+              <a href="javascript:;" className="option p-none" style={{display: text ? 'block' : 'none'}} onClick={this.props.onClickFontSizeUp}>
+                <i className="fa fa-arrow-up" title="Increase Font Size" />
               </a>
             </li>
             <li>
-              <a href="javascript:;"
-                 className="option p-none" style={{display: text ? 'block' : 'none'}}
-                 onClick={this.props.onClickFontSizeDown}> <i className="fa fa-arrow-down" title="Decrease Font Size" />
+              <a href="javascript:;" className="option p-none" style={{display: text ? 'block' : 'none'}} onClick={this.props.onClickFontSizeDown}>
+                <i className="fa fa-arrow-down" title="Decrease Font Size" />
               </a>
             </li>
             <li>
-              <a href="javascript:;"
-                 className="option p-none" style={{display: text ? 'block' : 'none'}}
-                 onClick={this.props.onClickAlignLeft}> <i className="fa fa-align-left" title="Align Left" />
+              <a href="javascript:;" className="option p-none" style={{display: text ? 'block' : 'none'}} onClick={this.props.onClickAlignLeft}>
+                <i className="fa fa-align-left" title="Align Left" />
               </a>
             </li>
             <li>
-              <a href="javascript:;"
-                 className="option p-none" style={{display: text ? 'block' : 'none'}}
-                 onClick={this.props.onClickAlignCenter}> <i className="fa fa-align-center" title="Align Center" />
+              <a href="javascript:;" className="option p-none" style={{display: text ? 'block' : 'none'}} onClick={this.props.onClickAlignCenter}>
+                <i className="fa fa-align-center" title="Align Center" />
               </a>
             </li>
             <li>
-              <a href="javascript:;"
-                 className="option p-none" style={{display: text ? 'block' : 'none'}}
-                 onClick={this.props.onClickAlignRight}> <i className="fa fa-align-right" title="Align Right" />
+              <a href="javascript:;" className="option p-none" style={{display: text ? 'block' : 'none'}} onClick={this.props.onClickAlignRight}>
+                <i className="fa fa-align-right" title="Align Right" />
               </a>
             </li>
 
@@ -260,8 +250,7 @@ export default class Toolbar extends React.Component {
             </li>
 
             <li>
-              <a href="javascript:;" onClick={this.toggleLineTypes.bind(this)}
-                 className="option p-none" style={{display: line ? 'block' : 'none'}}>
+              <a href="javascript:;" onClick={this.toggleLineTypes.bind(this)} className="option p-none" style={{display: line ? 'block' : 'none'}}>
                 <i className="fa fa-reply" title="Change Type" />
               </a>
 
@@ -269,15 +258,13 @@ export default class Toolbar extends React.Component {
             </li>
 
             <li>
-              <a href="javascript:;" onClick={this.props.onClickEdit}
-                 className={`option p-none ${this.props.editable ? 'option-active' : ''}`}>
+              <a href="javascript:;" onClick={this.props.onClickEdit} className={`option p-none ${this.props.editable ? 'option-active' : ''}`}>
                 <i className="fa fa-edit" />
               </a>
             </li>
 
             <li className={this.state.displayDevices ? '' : 'dropdown'} ref="liDevices">
-              <a href="javascript:" onClick={this.onClickAdd.bind(this)}
-                 className={`option p-none ${this.state.displayDevices ? 'option-active' : ''}`}>
+              <a href="javascript:" onClick={this.onClickAdd.bind(this)} className={`option p-none ${this.state.displayDevices ? 'option-active' : ''}`}>
                 <i className="fa fa-plus-square" title="Add" />
               </a>
               {
