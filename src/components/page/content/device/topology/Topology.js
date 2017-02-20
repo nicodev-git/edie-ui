@@ -7,13 +7,12 @@ import MapToolbar from './MapToolbar'
 import DeviceWizardContainer from '../../../../../containers/shared/wizard/DeviceWizardContainer'
 import {appendComponent, removeComponent} from '../../../../../util/Component'
 import {wizardConfig} from '../../../../shared/wizard/WizardConfig'
-import {showAlert, showConfirm} from '../../../../shared/Alert'
+import {showAlert} from '../../../../shared/Alert'
 
 import DeviceDragLayer from './DeviceDragLayer'
-import {ROOT_URL} from '../../../../../actions/config'
 
 export default class Topology extends React.Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
     this.state = {
       editable: false,
@@ -30,12 +29,11 @@ export default class Topology extends React.Component {
       tipWidth: 0,
       tipHeight: 0,
 
-      tipObject: null,
+      tipObject: null
     }
 
     this.curMapDraw = 1
     this.mapTimer = 0
-
 
     this.arrDevices = []
     this.arrLastDevices = []
@@ -62,7 +60,7 @@ export default class Topology extends React.Component {
       onMouseOut: this.onMapMouseOut.bind(this),
       onZoomRect: this.onMapZoomRect.bind(this),
 
-      onDrop: this.onDrop.bind(this),
+      onDrop: this.onDrop.bind(this)
     }
 
     this.mapEvents = {
@@ -82,59 +80,11 @@ export default class Topology extends React.Component {
       onClickLineWidthDec: this.onClickLineWidthDec.bind(this),
       onChangeLineColor: this.onChangeLineColor.bind(this),
       onChangeLineType: this.onChangeLineType.bind(this),
-      onClickDeviceItem: this.onClickDeviceItem.bind(this),
+      onClickDeviceItem: this.onClickDeviceItem.bind(this)
     }
   }
 
-  render() {
-
-    let events = this.mapEvents
-
-    const {
-      tooltip, tipLeft, tipTop, tipWidth, tipHeight, selectedItem,
-      dropItem, dropItemPos, editable
-    } = this.state
-
-    return (
-      <div>
-        <div className="tab-header" style={{minHeight: "40px"}}>
-          <div>
-            <span className="tab-title">{this.props.device.name || ''}</span>
-          </div>
-        </div>
-
-        <div className="panel panel-default mb-none" id="mapeditdiv"
-             style={{borderLeft: "1px solid white"}}>
-          <MapToolbar
-            {...events}
-            {...this.state}
-            ref="toolbar"
-          />
-
-          <div className="panel-body p-none"
-               style={{height: this.state.maximized ? "100%" : "520px", position: "relative"}}>
-            <MapCanvas
-              listener={this.mapListener}
-              editable={this.state.editable}
-              dragItem={this.state.selectedItem}
-              dropItem={dropItem}
-              dropItemPos={dropItemPos}
-              ref="map"/>
-            <DeviceDragLayer />
-            <div className={"map-hover " + (tooltip ? '' : 'hidden')}
-                 data-tip={tooltip}
-                 data-html={true}
-                 style={{left: tipLeft, top: tipTop, width: tipWidth, height: tipHeight}}
-                 onClick={this.onClickTooltip.bind(this)}>
-            </div>
-            <ReactTooltip/>
-          </div>
-        </div>
-      </div>
-    )
-  }
-
-  componentDidMount() {
+  componentDidMount () {
     // let callLoadMap = $.get(`${ROOT_URL}${Api.dashboard.getDevicesForMap}`, {
     //   mapid: this.props.device.mapid,
     //   fatherid: this.props.device.id,
@@ -180,34 +130,34 @@ export default class Topology extends React.Component {
     // })
   }
 
-  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  // ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  getDivMap() {
+  getDivMap () {
     return this.refs.map.getDecoratedComponentInstance()
   }
 
-  getCanvasMap() {
+  getCanvasMap () {
     return this.getDivMap().getMapObject()
   }
 
-  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  // ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  onMapObjectSelected(cmap, obj) {
+  onMapObjectSelected (cmap, obj) {
     this.refs.toolbar.setState({
       cmap: cmap,
       selectedObj: obj
     })
   }
 
-  onMapSelectionCleared() {
+  onMapSelectionCleared () {
     this.refs.toolbar.setState({
       selectedObj: null
     })
   }
 
-  onMapMouseDown(map, obj) {
+  onMapMouseDown (map, obj) {
 
-    emit(EVENTS.MAP_DEVICE_CLICKED, obj.data)
+    // emit(EVENTS.MAP_DEVICE_CLICKED, obj.data)
 
     // mainDeviceClick({
     //     id: obj.id,
@@ -217,11 +167,11 @@ export default class Topology extends React.Component {
 
   }
 
-  onMapObjectMoving() {
+  onMapObjectMoving () {
 
   }
 
-  onMapObjectMoved(map, options, type) {
+  onMapObjectMoved (map, options, type) {
     if (!options) return
 
     options.mapid = this.props.device.mapid
@@ -230,89 +180,88 @@ export default class Topology extends React.Component {
     return this.moveMapItem(map, options, type)
   }
 
-  onMapLineUpdate(lineObj, callback) {
-    let lineId = lineObj.id
-
-    if (!lineId) {
-      var url = Api.deviceadmin.addDevice
-      var param = {
-        devicetype: 'line',
-        name: 'line',
-        angle: 0,
-        x: 0,
-        y: 0,
-        width: 50,
-        height: 1,
-
-        mapid: this.props.device.mapid,
-        fatherid: 0,
-      }
-
-      $.get(`${ROOT_URL}${url}`, param)
-        .done(res => {
-          if (!res || !res.success) return
-          let obj = res.object
-          if (obj.length) obj = obj[0]
-          lineId = obj.id
-
-          this.arrLines[lineId] = {
-            fromDeviceid: lineObj.startObj.id,
-            fromPoint: lineObj.startPoint,
-            toDeviceid: lineObj.endObj.id,
-            toPoint: lineObj.endPoint,
-          }
-
-          lineObj.id = lineId
-
-          this.updateLineConnectionDB(lineId)
-          if (callback) callback(lineId, this.arrLines[lineId])
-        })
-    } else {
-      let con = this.arrLines[lineId]
-      con.fromDeviceid = lineObj.startObj.id
-      con.fromPoint = lineObj.startPoint
-      con.toDeviceid = lineObj.endObj.id
-      con.toPoint = lineObj.endPoint
-
-      this.updateLineConnectionDB(lineId)
-    }
+  onMapLineUpdate (lineObj, callback) {
+    // let lineId = lineObj.id
+    //
+    // if (!lineId) {
+    //   var url = Api.deviceadmin.addDevice
+    //   var param = {
+    //     devicetype: 'line',
+    //     name: 'line',
+    //     angle: 0,
+    //     x: 0,
+    //     y: 0,
+    //     width: 50,
+    //     height: 1,
+    //
+    //     mapid: this.props.device.mapid,
+    //     fatherid: 0,
+    //   }
+    //
+    //   $.get(`${ROOT_URL}${url}`, param)
+    //     .done(res => {
+    //       if (!res || !res.success) return
+    //       let obj = res.object
+    //       if (obj.length) obj = obj[0]
+    //       lineId = obj.id
+    //
+    //       this.arrLines[lineId] = {
+    //         fromDeviceid: lineObj.startObj.id,
+    //         fromPoint: lineObj.startPoint,
+    //         toDeviceid: lineObj.endObj.id,
+    //         toPoint: lineObj.endPoint,
+    //       }
+    //
+    //       lineObj.id = lineId
+    //
+    //       this.updateLineConnectionDB(lineId)
+    //       if (callback) callback(lineId, this.arrLines[lineId])
+    //     })
+    // } else {
+    //   let con = this.arrLines[lineId]
+    //   con.fromDeviceid = lineObj.startObj.id
+    //   con.fromPoint = lineObj.startPoint
+    //   con.toDeviceid = lineObj.endObj.id
+    //   con.toPoint = lineObj.endPoint
+    //
+    //   this.updateLineConnectionDB(lineId)
+    // }
   }
 
-  onMapLineStyleChange(lineObj, style) {
-    var lineId = lineObj.id
-    if (!lineId) return
-
-    $.get(`${ROOT_URL}${Api.devices.updateLine}`, {
-
-      lineId: lineId,
-      linecolor: style.color,
-      linewidth: style.width,
-
-    }).done((res) => {
-
-    })
+  onMapLineStyleChange (lineObj, style) {
+    // var lineId = lineObj.id
+    // if (!lineId) return
+    //
+    // $.get(`${ROOT_URL}${Api.devices.updateLine}`, {
+    //
+    //   lineId: lineId,
+    //   linecolor: style.color,
+    //   linewidth: style.width,
+    //
+    // }).done((res) => {
+    //
+    // })
   }
 
-  onMapTextChanged(map, id, text, isLabel) {
-    this.addMapUploading(map, id)
-    let url = `${ROOT_URL}${Api.devices.renameDevice}`
-    $.get(url, {
-      id: id,
-      name: text
-    }).done((res) => {
-
-    }).always(() => {
-      this.removeMapUploading(map, id)
-    })
+  onMapTextChanged (map, id, text, isLabel) {
+    // this.addMapUploading(map, id)
+    // let url = `${ROOT_URL}${Api.devices.renameDevice}`
+    // $.get(url, {
+    //   id: id,
+    //   name: text
+    // }).done((res) => {
+    //
+    // }).always(() => {
+    //   this.removeMapUploading(map, id)
+    // })
   }
 
-  onMapMouseOver(map, obj) {
-
+  onMapMouseOver (map, obj) {
     if (this.state.editable) return
 
     let rect = obj.getBoundingRect()
     let tooltip = obj.tooltip || ''
-    if (tooltip) tooltip = "<div class='text-center'>" + tooltip + "</div>"
+    if (tooltip) tooltip = `<div class='text-center'>${tooltip}</div>`
 
     this.setState({
       tooltip: tooltip,
@@ -320,29 +269,29 @@ export default class Topology extends React.Component {
       tipTop: rect.top,
       tipWidth: rect.width,
       tipHeight: rect.height,
-      tipObject: obj,
+      tipObject: obj
     }, () => {
       ReactTooltip.rebuild()
     })
   }
 
-  onMapMouseOut() {
+  onMapMouseOut () {
     if (!this.state.tooltip) return
     this.setState({
       tooltip: null
     })
   }
 
-  onMapZoomRect() {
+  onMapZoomRect () {
 
   }
 
-  onDrop(item, offset) {
-    var doc = document.documentElement
-    var left = (window.pageXOffset || doc.scrollLeft) - (doc.clientLeft || 0)
-    var top = (window.pageYOffset || doc.scrollTop) - (doc.clientTop || 0)
+  onDrop (item, offset) {
+    const doc = document.documentElement
+    const left = (window.pageXOffset || doc.scrollLeft) - (doc.clientLeft || 0)
+    const top = (window.pageYOffset || doc.scrollTop) - (doc.clientTop || 0)
 
-    let cmap = this.getCanvasMap()
+    const cmap = this.getCanvasMap()
     let pos = cmap.canvas.getPointer({
       clientX: offset.x + left,
       clientY: offset.y + top
@@ -365,31 +314,30 @@ export default class Topology extends React.Component {
     //     return
     // }
 
-    let options = options || {}
-    $.extend(options, {
+    let options = {
       type: item.type,
       imgName: item.img,
-      imageUrl: '/externalpictures?name=' + item.img,
+      imageUrl: `/externalpictures?name=${item.img}`,
       x: x,
       y: y,
       width: 50,
       height: 50,
-      fatherid: this.props.device.id,
-    })
+      fatherid: this.props.device.id
+    }
 
-    if ('longhub' === options.type) {
+    if (options.type === 'longhub') {
       options.width = 20
       options.height = 400
-    } else if ('bi-pie' === options.type) {
+    } else if (options.type === 'bi-pie') {
       options.width = 200
       options.height = 200
-    } else if ('bi-bar' === options.type) {
+    } else if (options.type === 'bi-bar') {
       options.width = 200
       options.height = 200
-    } else if ('bi-line' === options.type) {
+    } else if (options.type === 'bi-line') {
       options.width = 200
       options.height = 200
-    } else if ('usertext' === options.type) {
+    } else if (options.type === 'usertext') {
       options.width = 100
       options.height = 30
     }
@@ -399,7 +347,7 @@ export default class Topology extends React.Component {
 
     this.setState({
       dropItem: item,
-      dropItemPos: offset,
+      dropItemPos: offset
     })
 
     this.showAddWizard(options, (id, name, data) => {
@@ -413,14 +361,14 @@ export default class Topology extends React.Component {
     })
   }
 
-  onClickTooltip() {
+  onClickTooltip () {
     this.onMapMouseDown(null, this.state.tipObject)
     this.setState({tooltip: null})
   }
 
-  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  // ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  onClickAdd(displayMenu) {
+  onClickAdd (displayMenu) {
     if (displayMenu) {
       if (!this.state.editable) this.onClickEdit()
     } else {
@@ -428,68 +376,68 @@ export default class Topology extends React.Component {
     }
 
     this.setState({
-      selectedItem: {},
+      selectedItem: {}
     })
   }
 
-  onClickEdit() {
+  onClickEdit () {
     let cmap = this.getCanvasMap()
     cmap.zooming && cmap.setZooming(false)
 
     this.setState({
       editable: !this.state.editable,
-      selectedItem: {},
+      selectedItem: {}
     })
   }
 
-  onClickDelete() {
+  onClickDelete () {
     let cmap = this.getCanvasMap()
     this.promptRemoveMapItem(cmap)
   }
 
-  onClickFontSizeUp() {
+  onClickFontSizeUp () {
     let cmap = this.getCanvasMap()
     cmap.changeFontSize(true)
   }
 
-  onClickFontSizeDown() {
+  onClickFontSizeDown () {
     let cmap = this.getCanvasMap()
     cmap.changeFontSize(false)
   }
 
-  onClickAlignLeft() {
+  onClickAlignLeft () {
     let cmap = this.getCanvasMap()
     cmap.changeAlign('left')
   }
 
-  onClickAlignCenter() {
+  onClickAlignCenter () {
     let cmap = this.getCanvasMap()
     cmap.changeAlign('center')
   }
 
-  onClickAlignRight() {
+  onClickAlignRight () {
     let cmap = this.getCanvasMap()
     cmap.changeAlign('right')
   }
 
-  onClickLineWidthInc() {
+  onClickLineWidthInc () {
     let cmap = this.getCanvasMap()
     cmap.changeStrokeWidth(true)
   }
 
-  onClickLineWidthDec() {
+  onClickLineWidthDec () {
     let cmap = this.getCanvasMap()
     cmap.changeStrokeWidth(false)
   }
 
-  onChangeLineColor(color) {
+  onChangeLineColor (color) {
     let cmap = this.getCanvasMap()
     cmap.changeStrokeColor(color)
 
     this.refs.toolbar.setState({cmap})
   }
 
-  onChangeLineType(type, imgUrl, deviceTypeId) {
+  onChangeLineType (type, imgUrl, deviceTypeId) {
     let cmap = this.getCanvasMap()
     const lineId = cmap.changeConnectorType(type, imgUrl)
     if (!lineId) return
@@ -497,190 +445,187 @@ export default class Topology extends React.Component {
     this.changeLineType(lineId, deviceTypeId)
   }
 
-  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  // ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  moveMapItem(map, params, type) {
-    if (!params) return true
-
-    this.addMapUploading(map, params.deviceid)
-
-    var url = type === 'lightning' ? Api.devices.updateLine : Api.admin.moveDevice
-
-    if (type === 'lightning') {
-      params = {
-        lineId: params.id,
-        linecolor: 'black',
-        linewidth: params.scaleX,
-      }
-    }
-
-    return $.get(`${ROOT_URL}${url}`, params).always(() => {
-      this.removeMapUploading(map, params.deviceid)
-    })
+  moveMapItem (map, params, type) {
+    // if (!params) return true
+    //
+    // this.addMapUploading(map, params.deviceid)
+    //
+    // var url = type === 'lightning' ? Api.devices.updateLine : Api.admin.moveDevice
+    //
+    // if (type === 'lightning') {
+    //   params = {
+    //     lineId: params.id,
+    //     linecolor: 'black',
+    //     linewidth: params.scaleX,
+    //   }
+    // }
+    //
+    // return $.get(`${ROOT_URL}${url}`, params).always(() => {
+    //   this.removeMapUploading(map, params.deviceid)
+    // })
   }
 
-  addMapUploading(map, id) {
+  addMapUploading (map, id) {
     if (!map) return
     map.addUploading(id)
   }
 
-  removeMapUploading(map, id) {
+  removeMapUploading (map, id) {
     if (!map) return
     map.removeUploading(id)
   }
 
-  promptRemoveMapItem(cmap) {
-    if (!cmap) return
-    if (!cmap.editable) return
-
-    var object = cmap.getSelected()
-    if (!object) {
-      showAlert("Please select a device to remove.")
-      return
-    }
-
-    var item = ""
-    var name = ""
-    if (object.objectType === MapItemType.Device) {
-      item = "device"
-      name = "Name: " + object.data.name
-    } else if (object.objectType === MapItemType.BI) {
-      item = "bi"
-    } else if (object.objectType === MapItemType.Shape) {
-      item = "connection"
-    }
-
-    $.get(`${ROOT_URL}${Api.deviceadmin.countDeviceData}`, {
-      deviceid: object.id,
-    }).done(function (res) {
-      if (!res.success) {
-        showAlert("Failed to get device data!")
-        return
-      }
-      showConfirm(res.object, (btn) => {
-        if (btn !== 'ok') return
-
-        var url
-
-        url = Api.deviceadmin.removeDevice + '?monitorid=' + object.id
-        if (object.objectType === MapItemType.Device) {
-
-        } else if (object.objectType === MapItemType.Shape) {
-
-        }
-
-        if (!url) return
-
-        cmap.removeMapItem(object, true)
-        $.getJSON(url, function () {
-
-        })
-      })
-    }).fail(function () {
-      showAlert("Failed to get device data!")
-    })
+  promptRemoveMapItem (cmap) {
+    // if (!cmap) return
+    // if (!cmap.editable) return
+    //
+    // var object = cmap.getSelected()
+    // if (!object) {
+    //   showAlert("Please select a device to remove.")
+    //   return
+    // }
+    //
+    // var item = ""
+    // var name = ""
+    // if (object.objectType === MapItemType.Device) {
+    //   item = "device"
+    //   name = "Name: " + object.data.name
+    // } else if (object.objectType === MapItemType.BI) {
+    //   item = "bi"
+    // } else if (object.objectType === MapItemType.Shape) {
+    //   item = "connection"
+    // }
+    //
+    // $.get(`${ROOT_URL}${Api.deviceadmin.countDeviceData}`, {
+    //   deviceid: object.id,
+    // }).done(function (res) {
+    //   if (!res.success) {
+    //     showAlert("Failed to get device data!")
+    //     return
+    //   }
+    //   showConfirm(res.object, (btn) => {
+    //     if (btn !== 'ok') return
+    //
+    //     var url
+    //
+    //     url = Api.deviceadmin.removeDevice + '?monitorid=' + object.id
+    //     if (object.objectType === MapItemType.Device) {
+    //
+    //     } else if (object.objectType === MapItemType.Shape) {
+    //
+    //     }
+    //
+    //     if (!url) return
+    //
+    //     cmap.removeMapItem(object, true)
+    //     $.getJSON(url, function () {
+    //
+    //     })
+    //   })
+    // }).fail(function () {
+    //   showAlert('Failed to get device data!')
+    // })
   }
 
-  updateLineConnectionDB(lineid) {
-    let con = this.arrLines[lineid]
-    if (con.id) {
-      $.ajax({
-        dataType: "json",
-        url: "/devices/updateConnection",
-        data: {
-          id: con.id,
-          fromDevice: con.fromDeviceid,
-          fromPoint: con.fromPoint,
-          toDevice: con.toDeviceid,
-          toPoint: con.toPoint,
-          lineId: lineid
-        },
-        success: (data, status, jqXHR) => {
-        }
-      })
-    } else {
-      $.ajax({
-        dataType: "json",
-        url: "/devices/addConnection",
-        data: {
-          from: con.fromDeviceid,
-          connectionPoint: con.fromPoint,
-          lineId: lineid
-        },
-        success: (data, status, jqXHR) => {
-          if (data.success) {
-            con.id = data.info
-            if (con.toDeviceid)
-              this.updateLineConnectionDB(lineid)
-          } else {
-            console.log('Connection Add Failed!')
-          }
-        }
-      })
-    }
+  updateLineConnectionDB (lineid) {
+    // let con = this.arrLines[lineid]
+    // if (con.id) {
+    //   $.ajax({
+    //     dataType: "json",
+    //     url: "/devices/updateConnection",
+    //     data: {
+    //       id: con.id,
+    //       fromDevice: con.fromDeviceid,
+    //       fromPoint: con.fromPoint,
+    //       toDevice: con.toDeviceid,
+    //       toPoint: con.toPoint,
+    //       lineId: lineid
+    //     },
+    //     success: (data, status, jqXHR) => {
+    //     }
+    //   })
+    // } else {
+    //   $.ajax({
+    //     dataType: "json",
+    //     url: "/devices/addConnection",
+    //     data: {
+    //       from: con.fromDeviceid,
+    //       connectionPoint: con.fromPoint,
+    //       lineId: lineid
+    //     },
+    //     success: (data, status, jqXHR) => {
+    //       if (data.success) {
+    //         con.id = data.info
+    //         if (con.toDeviceid) this.updateLineConnectionDB(lineid)
+    //       } else {
+    //         console.log('Connection Add Failed!')
+    //       }
+    //     }
+    //   })
+    // }
   }
 
-  changeLineType(id, typeid) {
-    $.get(`${ROOT_URL}${Api.deviceadmin.updateLine}`, {
-      id: id,
-      type: typeid,
-    }).done(() => {
-
-    })
+  changeLineType (id, typeid) {
+    // $.get(`${ROOT_URL}${Api.deviceadmin.updateLine}`, {
+    //   id: id,
+    //   type: typeid,
+    // }).done(() => {
+    //
+    // })
   }
 
-  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  // ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  showAddWizard(options, callback, closeCallback) {
+  showAddWizard (options, callback, closeCallback) {
     if (options.type === 'longhub') {
-      const url = `${ROOT_URL}${Api.deviceadmin.addDevice}`
-      const param = {
-        devicetype: 'longhub',
-        name: 'longhub',
-        angle: 0,
-        x: options.x,
-        y: options.y,
-        width: options.width,
-        height: options.height,
-        fatherid: options.fatherid || 0,
-        mapid: this.props.device.mapid,
-      }
-
-      $.get(url, param).done((res) => {
-        if (!res || !res.success || !res.object.length) {
-          showAlert('Add Failed!')
-          return
-        }
-
-        const data = res.object[0]
-        if (callback) callback(data.id, data.name, data)
-      }).always(() => {
-        closeCallback && closeCallback()
-      })
-
+      // const url = `${ROOT_URL}${Api.deviceadmin.addDevice}`
+      // const param = {
+      //   devicetype: 'longhub',
+      //   name: 'longhub',
+      //   angle: 0,
+      //   x: options.x,
+      //   y: options.y,
+      //   width: options.width,
+      //   height: options.height,
+      //   fatherid: options.fatherid || 0,
+      //   mapid: this.props.device.mapid
+      // }
+      //
+      // $.get(url, param).done((res) => {
+      //   if (!res || !res.success || !res.object.length) {
+      //     showAlert('Add Failed!')
+      //     return
+      //   }
+      //
+      //   const data = res.object[0]
+      //   if (callback) callback(data.id, data.name, data)
+      // }).always(() => {
+      //   closeCallback && closeCallback()
+      // })
     } else {
       if (wizardConfig[options.type] === null) {
-        showAlert('Unrecognized Type: ' + options.type)
+        showAlert(`Unrecognized Type: ${options.type}`)
         return
       }
 
-      var extra = {
+      const extra = {
         mapid: this.props.device.mapid,
         x: options.x,
         y: options.y,
         width: options.width,
         height: options.height,
         fatherid: options.fatherid || 0,
-        timeout: 60000,
+        timeout: 60000
       }
 
       extra.image = options.imgName
 
-      var config = {
+      const config = {
         fatherid: options.fatherid || 0,
-        mapid: this.props.device.mapid,
+        mapid: this.props.device.mapid
       }
-
 
       appendComponent(
         <DeviceWizardContainer
@@ -697,34 +642,71 @@ export default class Topology extends React.Component {
     }
   }
 
-  onFinishAddWizard(callback, res, req) {
-    var data = res.object
-    var params = req.params
+  onFinishAddWizard (callback, res, req) {
+    let data = res.object
     if (!data) {
-      showAlert("Add Failed!")
+      showAlert('Add Failed!')
       return
     }
 
     if (data.length) data = data[0]
-    var id = data.id
-    var name = data.name
+    const id = data.id
+    const name = data.name
 
     callback && callback(id, name, data)
   }
 
-  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  // ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  ////////////////////////////////////////////////////////
-
-  onClickDeviceItem(selectedItem, e) {
-    //dragItem:
+  onClickDeviceItem (selectedItem, e) {
     this.setState({selectedItem}, () => {
-      //this.refs.map.onMouseMove(e)
+      // this.refs.map.onMouseMove(e)
     })
   }
-}
-Topology.defaultProps = {}
 
-Topology.contextTypes = {
-  sid: React.PropTypes.string,
+  render () {
+    let events = this.mapEvents
+
+    const {
+      tooltip, tipLeft, tipTop, tipWidth, tipHeight, selectedItem,
+      dropItem, dropItemPos, editable
+    } = this.state
+
+    return (
+      <div>
+        <div className="tab-header" style={{minHeight: '40px'}}>
+          <div>
+            <span className="tab-title">{this.props.device.name || ''}</span>
+          </div>
+        </div>
+
+        <div className="panel panel-default mb-none" id="mapeditdiv"
+          style={{borderLeft: '1px solid white'}}>
+          <MapToolbar
+            {...events}
+            {...this.state}
+            ref="toolbar"
+          />
+
+          <div className="panel-body p-none"
+            style={{height: this.state.maximized ? '100%' : '520px', position: 'relative'}}>
+            <MapCanvas
+              listener={this.mapListener}
+              editable={editable}
+              dragItem={selectedItem}
+              dropItem={dropItem}
+              dropItemPos={dropItemPos}
+              ref="map"/>
+            <DeviceDragLayer />
+            <div className={`map-hover ${tooltip ? '' : 'hidden'}`}
+              data-tip={tooltip}
+              data-html
+              style={{left: tipLeft, top: tipTop, width: tipWidth, height: tipHeight}}
+              onClick={this.onClickTooltip.bind(this)} />
+            <ReactTooltip/>
+          </div>
+        </div>
+      </div>
+    )
+  }
 }

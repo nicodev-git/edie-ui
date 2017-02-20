@@ -81,12 +81,12 @@ export default(
           <Route path="incidents" component={DeviceMainIncidentsContainer}/>
           {/* <Route path="rules" component={DeviceMainRulesContainer}/> */}
           <Route path="workflows" component={DeviceMainWorkflowsContainer}/>
-          <Route path="topology" component={DeviceTopology}/>
           {/* <Route path="rawIncidents" component={DeviceMainRawIncidentsContainer}/> */}
           <Route path="events" component={DeviceMainEventsContainer}/>
           <Route path="advanced" component={DeviceMainAdvancedContainer}/>
           <Route path="ruleAdd" component={DeviceMainRuleAddContainer}/>
         </Route>
+        <Route path="topology" component={DeviceTopology}/>
         <Route path="monitor" component={DeviceMonitorsContainer}/>
         <Route path="connected" component={DeviceConnectedContainer}/>
         <Route path="info" component={DeviceInfoContainer}/>
