@@ -44,7 +44,6 @@ import DeviceListContainer from './containers/DeviceListContainer'
 import RequireAuth from './components/auth/RequireAuth'
 
 const onMainEnter = (prevState, nextState, replace, callback) => {
-  console.log('On Main Change')
   setTimeout(() => {
     window.dispatchEvent(new window.Event('resize'))
   }, 150)

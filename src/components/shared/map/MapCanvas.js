@@ -48,7 +48,12 @@ class MapCanvas extends React.Component {
   }
 
   componentDidMount () {
-    this.initMap()
+    this.initMap(() => {
+      if (this.props.mapDevices && this.props.mapDevices.length) {
+        this.drawMap(this.props.mapDevices, this.props.mapLines, [], [], true)
+      }
+    })
+
     window.addEventListener('resize', this.updateDimensions)
   }
 
@@ -98,7 +103,7 @@ class MapCanvas extends React.Component {
     this.respondCanvas(this.state.cmap)
   }
 
-  initMap () {
+  initMap (cb) {
     let cmap = $.extend(true, {}, mapObject) // eslint-disable-line no-undef
 
     cmap.initialize({
@@ -109,7 +114,7 @@ class MapCanvas extends React.Component {
     })
     cmap.needReset = true
 
-    this.setState({cmap})
+    this.setState({cmap}, cb)
 
     this.respondCanvas(cmap)
   }

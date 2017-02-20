@@ -574,12 +574,11 @@ export default class Topology extends React.Component {
       y: options.y,
       width: options.width,
       height: options.height,
-      image: options.imgName,
-      mapid: this.props.device.mapid
+      image: options.imgName
     }
 
     let config = {
-      mapid: this.props.device.mapid
+      // mapid: this.props.device.mapid
     }
 
     return (
@@ -608,9 +607,7 @@ export default class Topology extends React.Component {
         x: options.x,
         y: options.y,
         width: options.width,
-        height: options.height,
-        fatherid: options.fatherid || 0,
-        mapid: this.state.mapId
+        height: options.height
       }
 
       $.get(url, param).done((res) => { // eslint-disable-line no-undef
@@ -659,11 +656,16 @@ export default class Topology extends React.Component {
       dropItem, dropItemPos, editable
     } = this.state
 
+    const { device } = this.props
+    const groupDevices = (device.group || {}).devices || []
+    const mapDevices = groupDevices.filter(g => !g.line)
+    const mapLines = groupDevices.filter(g => !!g.line)
+
     return (
       <div>
         <div className="tab-header" style={{minHeight: '40px'}}>
           <div>
-            <span className="tab-title">{this.props.device.name || ''}</span>
+            <span className="tab-title">{device.name || ''}</span>
           </div>
         </div>
 
@@ -684,6 +686,8 @@ export default class Topology extends React.Component {
               dragItem={selectedItem}
               dropItem={dropItem}
               dropItemPos={dropItemPos}
+              mapDevices={mapDevices}
+              mapLines={mapLines}
               ref="map"/>
             <DeviceDragLayer />
             <div className={`map-hover ${tooltip ? '' : 'hidden'}`}

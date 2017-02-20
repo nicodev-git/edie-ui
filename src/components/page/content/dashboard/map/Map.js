@@ -318,8 +318,7 @@ class Map extends React.Component {
       this.setState({maximized: false})
     }
 
-    console.log(this.props)
-
+    console.log(obj.data)
     this.props.openDevice(obj.data)
 
     if (obj.data.isgroup) {

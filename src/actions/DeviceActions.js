@@ -593,9 +593,10 @@ export const addGroupDevice = (group, props) => {
     return dispatch => dispatch({ type: NO_AUTH_ERROR })
   }
   return (dispatch) => {
-    axios.post(`${ROOT_URL}/device`, props)
-      .then(response => addGroupDeviceSuccess(dispatch, group, response.data))
-      .catch(error => apiError(dispatch, error))
+    // axios.post(`${ROOT_URL}/device`, props)
+    //   .then(response => addGroupDeviceSuccess(dispatch, group, response.data))
+    //   .catch(error => apiError(dispatch, error))
+    addGroupDeviceSuccess(dispatch, group, props)
   }
 }
 

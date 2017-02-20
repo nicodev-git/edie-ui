@@ -250,8 +250,6 @@ export default class MainEvents extends Component {
   render () {
     const {device} = this.props
 
-    console.log(this.props)
-
     return (
       <TabPage>
         <TabPageHeader title={device.name}>
