@@ -846,9 +846,9 @@ class Map extends React.Component {
       if (this.props.isFullScreen) this.onClickMaximize()
     }
 
-    // setTimeout(() => {
-    //   window.dispatchEvent(new Event('resize'))
-    // }, 500)
+    setTimeout(() => {
+      window.dispatchEvent(new window.Event('resize'))
+    }, 500)
   }
 
   updateDimensions () {
