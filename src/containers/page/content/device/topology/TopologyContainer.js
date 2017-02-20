@@ -1,8 +1,7 @@
 import React from 'react'
 import { withRouter } from 'react-router'
 import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
-import { updateMapDevice } from 'actions'
+import { addGroupDevice } from 'actions'
 
 import Topology from 'components/page/content/device/topology/Topology'
 
@@ -10,10 +9,9 @@ import Topology from 'components/page/content/device/topology/Topology'
   state => ({
     device: state.dashboard.selectedDevice,
     deviceTemplates: state.settings.deviceTemplates
-  }),
-  dispatch => ({
-    updateMapDevice: bindActionCreators(updateMapDevice, dispatch)
-  })
+  }), {
+    addGroupDevice
+  }
 )
 @withRouter
 export default class TopologyContainer extends React.Component {

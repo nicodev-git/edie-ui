@@ -574,11 +574,12 @@ export default class Topology extends React.Component {
       y: options.y,
       width: options.width,
       height: options.height,
-      image: options.imgName
+      image: options.imgName,
+      mapid: this.props.device.mapid
     }
 
     let config = {
-
+      mapid: this.props.device.mapid
     }
 
     return (
@@ -639,7 +640,7 @@ export default class Topology extends React.Component {
   }
 
   onFinishAddWizard (callback, res, params) {
-    // this.props.addMapDevice(params)
+    this.props.addGroupDevice(this.props.device, params)
   }
 
   // ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////

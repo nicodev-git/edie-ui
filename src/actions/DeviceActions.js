@@ -1,4 +1,5 @@
 import axios from 'axios'
+import {assign, concat} from 'lodash'
 import {
   FETCH_DEVICES,
 
@@ -48,6 +49,8 @@ import {
 
   OPEN_WF_ACTION_MODAL,
   CLOSE_WF_ACTION_MODAL,
+
+  UPDATE_MAP_DEVICE,
 
   NO_AUTH_ERROR
 } from './types'
@@ -583,4 +586,26 @@ export const closeWfActionModal = () => {
       type: CLOSE_WF_ACTION_MODAL
     })
   }
+}
+
+export const addGroupDevice = (group, props) => {
+  if (!window.localStorage.getItem('token')) {
+    return dispatch => dispatch({ type: NO_AUTH_ERROR })
+  }
+  return (dispatch) => {
+    axios.post(`${ROOT_URL}/device`, props)
+      .then(response => addGroupDeviceSuccess(dispatch, group, response.data))
+      .catch(error => apiError(dispatch, error))
+  }
+}
+
+const addGroupDeviceSuccess = (dispatch, group, device) => {
+  const entity = assign({}, group, {
+    group: assign({}, group.group, {
+      devices: concat((group.group || {}).devices || [], device)
+    })
+  })
+  axios.put(entity._links.self.href, entity).then(res => {
+    dispatch({type: UPDATE_MAP_DEVICE, data: res.data})
+  }).catch(error => apiError(dispatch, error))
 }
