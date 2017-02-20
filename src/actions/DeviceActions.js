@@ -632,7 +632,7 @@ export const removeGroupDevice = (group, props) => {
 
     const entity = assign({}, group, {
       group: assign({}, group.group, {
-        devices: devices.filter(d => d.id === props.id ? props : d)
+        devices: devices.filter(d => d.id !== props.id)
       })
     })
     axios.put(entity._links.self.href, entity).then(res => {

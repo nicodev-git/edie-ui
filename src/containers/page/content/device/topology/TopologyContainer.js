@@ -1,7 +1,7 @@
 import React from 'react'
 import { withRouter } from 'react-router'
 import { connect } from 'react-redux'
-import { addGroupDevice } from 'actions'
+import { updateGroupDevice, removeGroupDevice } from 'actions'
 
 import Topology from 'components/page/content/device/topology/Topology'
 
@@ -10,7 +10,8 @@ import Topology from 'components/page/content/device/topology/Topology'
     device: state.dashboard.selectedDevice,
     deviceTemplates: state.settings.deviceTemplates
   }), {
-    addGroupDevice
+    updateGroupDevice,
+    removeGroupDevice
   }
 )
 @withRouter

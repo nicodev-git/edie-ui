@@ -6,7 +6,7 @@ import MapToolbar from './MapToolbar'
 
 import DeviceWizardContainer from '../../../../../containers/shared/wizard/DeviceWizardContainer'
 import {wizardConfig} from '../../../../shared/wizard/WizardConfig'
-import {showAlert} from '../../../../shared/Alert'
+import {showAlert, showConfirm} from '../../../../shared/Alert'
 
 import DeviceDragLayer from './DeviceDragLayer'
 
@@ -242,17 +242,8 @@ export default class Topology extends React.Component {
     // })
   }
 
-  onMapTextChanged (map, id, text, isLabel) {
-    // this.addMapUploading(map, id)
-    // let url = `${ROOT_URL}${Api.devices.renameDevice}`
-    // $.get(url, {
-    //   id: id,
-    //   name: text
-    // }).done((res) => {
-    //
-    // }).always(() => {
-    //   this.removeMapUploading(map, id)
-    // })
+  onMapTextChanged (map, props, isLabel) {
+    this.props.updateGroupDevice(this.props.device, props)
   }
 
   onMapMouseOver (map, obj) {
@@ -436,7 +427,7 @@ export default class Topology extends React.Component {
   moveMapItem (map, params, type) {
     if (!params) return true
 
-    this.props.updateGroupDevice(params)
+    this.props.updateGroupDevice(this.props.device, params)
   }
 
   addMapUploading (map, id) {
@@ -450,40 +441,36 @@ export default class Topology extends React.Component {
   }
 
   promptRemoveMapItem (cmap) {
-    // if (!cmap) return
-    // if (!cmap.editable) return
-    //
-    // let object = cmap.getSelected()
-    // if (!object) {
-    //   showAlert('Please select a device to remove.') // eslint-disable-line no-undef
-    //   return
-    // }
-    //
-    // let item = '' // eslint-disable-line no-unused-vars
-    // let name = '' // eslint-disable-line no-unused-vars
-    // let {data} = object
-    // if (object.objectType === MapItemType.Device) { // eslint-disable-line no-undef
-    //   item = 'device'
-    //   name = `Name: ${object.data.name}`
-    // } else if (object.objectType === MapItemType.BI) { // eslint-disable-line no-undef
-    //   item = 'bi'
-    // } else if (object.objectType === MapItemType.Shape) { // eslint-disable-line no-undef
-    //   item = 'connection'
-    //   data = this.findMapLine(object.id)
-    // }
-    //
-    // showConfirm('Click OK to delete.', (btn) => {
-    //   if (btn !== 'ok') return
-    //
-    //   if (data) {
-    //     if (object.objectType === MapItemType.Shape) { // eslint-disable-line no-undef
-    //       this.props.deleteMapLine(data)
-    //     } else {
-    //       this.props.deleteMapDevice(data)
-    //     }
-    //   }
-    //   cmap.removeMapItem(object, true)
-    // })
+    if (!cmap) return
+    if (!cmap.editable) return
+
+    let object = cmap.getSelected()
+    if (!object) {
+      showAlert('Please select a device to remove.') // eslint-disable-line no-undef
+      return
+    }
+
+    let item = '' // eslint-disable-line no-unused-vars
+    let name = '' // eslint-disable-line no-unused-vars
+    let {data} = object
+    if (object.objectType === MapItemType.Device) { // eslint-disable-line no-undef
+      item = 'device'
+      name = `Name: ${object.data.name}`
+    } else if (object.objectType === MapItemType.BI) { // eslint-disable-line no-undef
+      item = 'bi'
+    } else if (object.objectType === MapItemType.Shape) { // eslint-disable-line no-undef
+      item = 'connection'
+      data = this.findMapLine(object.id)
+    }
+
+    showConfirm('Click OK to delete.', (btn) => {
+      if (btn !== 'ok') return
+
+      if (data) {
+        this.props.removeGroupDevice(this.props.device, data)
+      }
+      cmap.removeMapItem(object, true)
+    })
   }
 
   updateLineConnectionDB (lineid) {
