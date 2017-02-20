@@ -588,7 +588,7 @@ export const closeWfActionModal = () => {
   }
 }
 
-export const addGroupDevice = (group, props) => {
+export const addGroupDevice = (group, props, cb) => {
   if (!window.localStorage.getItem('token')) {
     return dispatch => dispatch({ type: NO_AUTH_ERROR })
   }
@@ -596,11 +596,11 @@ export const addGroupDevice = (group, props) => {
     // axios.post(`${ROOT_URL}/device`, props)
     //   .then(response => addGroupDeviceSuccess(dispatch, group, response.data))
     //   .catch(error => apiError(dispatch, error))
-    addGroupDeviceSuccess(dispatch, group, props)
+    addGroupDeviceSuccess(dispatch, group, props, cb)
   }
 }
 
-const addGroupDeviceSuccess = (dispatch, group, device) => {
+const addGroupDeviceSuccess = (dispatch, group, device, cb) => {
   const entity = assign({}, group, {
     group: assign({}, group.group, {
       devices: concat((group.group || {}).devices || [], device)
@@ -608,6 +608,7 @@ const addGroupDeviceSuccess = (dispatch, group, device) => {
   })
   axios.put(entity._links.self.href, entity).then(res => {
     dispatch({type: UPDATE_MAP_DEVICE, data: res.data})
+    cb && cb(res.data)
   }).catch(error => apiError(dispatch, error))
 }
 

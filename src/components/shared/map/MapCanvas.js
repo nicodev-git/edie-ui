@@ -779,8 +779,8 @@ class MapCanvas extends React.Component {
       startPoint: line.fromPoint,
       endObj: line.to,
       endPoint: line.toPoint,
-      strokeWidth: line.linewidth,
-      strokeColor: line.linecolor,
+      strokeWidth: line.width,
+      strokeColor: line.color,
       lineType: line.type
     }
 
@@ -798,8 +798,8 @@ class MapCanvas extends React.Component {
   updateConnection (cmap, id, line) {
     let config = {
       id: id,
-      strokeWidth: line.linewidth,
-      strokeColor: line.linecolor,
+      strokeWidth: line.width,
+      strokeColor: line.color,
       lineType: line.type
     }
 

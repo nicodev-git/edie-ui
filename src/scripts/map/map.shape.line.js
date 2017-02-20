@@ -249,7 +249,7 @@ fabric.ShapeLine = fabric.util.createClass(fabric.Object, {
     $.each(me.steps, function(i, step){
       step.set({
         strokeWidth: parseInt(config.strokeWidth || 1),
-        stroke: config.strokeColor || 'rgb(102,153,255)',
+        stroke: config.strokeColor || 'rgb(255,255,255)',
       });
     });
 

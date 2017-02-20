@@ -1,5 +1,6 @@
 import React from 'react'
 import ReactTooltip from 'react-tooltip'
+import { assign } from 'lodash'
 
 import MapCanvas from '../../../../shared/map/MapCanvas'
 import MapToolbar from './MapToolbar'
@@ -180,66 +181,60 @@ export default class Topology extends React.Component {
   }
 
   onMapLineUpdate (lineObj, callback) {
-    // let lineId = lineObj.id
-    //
-    // if (!lineId) {
-    //   var url = Api.deviceadmin.addDevice
-    //   var param = {
-    //     devicetype: 'line',
-    //     name: 'line',
-    //     angle: 0,
-    //     x: 0,
-    //     y: 0,
-    //     width: 50,
-    //     height: 1,
-    //
-    //     mapid: this.props.device.mapid,
-    //     fatherid: 0,
-    //   }
-    //
-    //   $.get(`${ROOT_URL}${url}`, param)
-    //     .done(res => {
-    //       if (!res || !res.success) return
-    //       let obj = res.object
-    //       if (obj.length) obj = obj[0]
-    //       lineId = obj.id
-    //
-    //       this.arrLines[lineId] = {
-    //         fromDeviceid: lineObj.startObj.id,
-    //         fromPoint: lineObj.startPoint,
-    //         toDeviceid: lineObj.endObj.id,
-    //         toPoint: lineObj.endPoint,
-    //       }
-    //
-    //       lineObj.id = lineId
-    //
-    //       this.updateLineConnectionDB(lineId)
-    //       if (callback) callback(lineId, this.arrLines[lineId])
-    //     })
-    // } else {
-    //   let con = this.arrLines[lineId]
-    //   con.fromDeviceid = lineObj.startObj.id
-    //   con.fromPoint = lineObj.startPoint
-    //   con.toDeviceid = lineObj.endObj.id
-    //   con.toPoint = lineObj.endPoint
-    //
-    //   this.updateLineConnectionDB(lineId)
-    // }
+    let lineId = lineObj.id
+
+    if (!lineId) {
+      let props = {
+        line: {
+          from: lineObj.startObj.id,
+          fromPoint: lineObj.startPoint,
+          to: lineObj.endObj.id,
+          toPoint: lineObj.endPoint
+        }
+      }
+
+      this.props.addGroupDevice(this.props.device, props, (res) => {
+        if (res) lineObj.id = res.id
+      })
+    } else {
+      let con = this.findMapLine(lineId)
+      if (con) {
+        const props = assign({}, con, {
+          line: {
+            from: lineObj.startObj.id,
+            fromPoint: lineObj.startPoint,
+            to: lineObj.endObj.id,
+            toPoint: lineObj.endPoint
+          }
+        })
+
+        this.props.updateGroupDevice(this.props.device, props)
+      }
+    }
+  }
+
+  findMapLine (lineId) {
+    const groupDevices = (this.props.device.group || {}).devices || []
+    let con = groupDevices.filter(u => u.id === lineId)
+    if (con.length) return con[0]
+    return null
   }
 
   onMapLineStyleChange (lineObj, style) {
-    // var lineId = lineObj.id
-    // if (!lineId) return
-    //
-    // $.get(`${ROOT_URL}${Api.devices.updateLine}`, {
-    //
-    //   lineId: lineId,
-    //   linecolor: style.color,
-    //   linewidth: style.width,
-    //
-    // }).done((res) => {
-    //
-    // })
+    let lineId = lineObj.id
+    if (!lineId) return
+
+    const obj = this.findMapLine(lineId)
+    if (!obj) return
+
+    const props = assign({}, obj, {
+      line: assign(obj.line, {
+        width: style.width,
+        color: style.color
+      })
+    })
+
+    this.props.updateGroupDevice(this.props.device, props)
   }
 
   onMapTextChanged (map, props, isLabel) {
@@ -410,8 +405,6 @@ export default class Topology extends React.Component {
   onChangeLineColor (color) {
     let cmap = this.getCanvasMap()
     cmap.changeStrokeColor(color)
-
-    this.refs.toolbar.setState({cmap})
   }
 
   onChangeLineType (type, imgUrl, deviceTypeId) {
@@ -471,44 +464,6 @@ export default class Topology extends React.Component {
       }
       cmap.removeMapItem(object, true)
     })
-  }
-
-  updateLineConnectionDB (lineid) {
-    // let con = this.arrLines[lineid]
-    // if (con.id) {
-    //   $.ajax({
-    //     dataType: "json",
-    //     url: "/devices/updateConnection",
-    //     data: {
-    //       id: con.id,
-    //       fromDevice: con.fromDeviceid,
-    //       fromPoint: con.fromPoint,
-    //       toDevice: con.toDeviceid,
-    //       toPoint: con.toPoint,
-    //       lineId: lineid
-    //     },
-    //     success: (data, status, jqXHR) => {
-    //     }
-    //   })
-    // } else {
-    //   $.ajax({
-    //     dataType: "json",
-    //     url: "/devices/addConnection",
-    //     data: {
-    //       from: con.fromDeviceid,
-    //       connectionPoint: con.fromPoint,
-    //       lineId: lineid
-    //     },
-    //     success: (data, status, jqXHR) => {
-    //       if (data.success) {
-    //         con.id = data.info
-    //         if (con.toDeviceid) this.updateLineConnectionDB(lineid)
-    //       } else {
-    //         console.log('Connection Add Failed!')
-    //       }
-    //     }
-    //   })
-    // }
   }
 
   changeLineType (id, typeid) {

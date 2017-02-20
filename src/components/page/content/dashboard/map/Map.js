@@ -1,5 +1,5 @@
 import React from 'react'
-import {extend} from 'lodash'
+import {assign, extend} from 'lodash'
 import ReactTooltip from 'react-tooltip'
 import { withRouter } from 'react-router'
 
@@ -387,15 +387,17 @@ class Map extends React.Component {
     let lineId = lineObj.id
     if (!lineId) return
 
-    $.get(`${this.props.ROOT_URL}${Api.devices.updateLine}`, { // eslint-disable-line no-undef
+    const obj = this.findMapLine(lineId)
+    if (!obj) return
 
-      lineId: lineId,
-      linecolor: style.color,
-      linewidth: style.width
-
-    }).done((res) => {
-
+    const props = assign({}, obj, {
+      line: assign(obj.line, {
+        width: style.width,
+        color: style.color
+      })
     })
+
+    this.props.updateMapLine(props)
   }
 
   onMapTextChanged (map, props, isLabel) {
@@ -578,8 +580,6 @@ class Map extends React.Component {
   onChangeLineColor (color) {
     let cmap = this.getCanvasMap()
     cmap.changeStrokeColor(color)
-
-    this.setState({cmap})
   }
 
   onChangeLineType (type, imgUrl, deviceTypeId) {
