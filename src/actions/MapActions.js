@@ -81,6 +81,7 @@ const addMapSuccess = (dispatch, response) => {
     type: ADD_MAP,
     data: response.data
   })
+  dispatch(changeMap(response.data))
 }
 
 export const updateMap = (entity) => {
