@@ -64,7 +64,7 @@ export default class DeviceMenu extends React.Component {
         if (item.title.toLowerCase().indexOf(this.state.keyword.toLowerCase()) < 0) return
         deviceItems.push(
           <li key={typeIndex} className={selected ? 'active' : ''} onClick={this.onClickItem.bind(this, item)}>
-            <DeviceImg img={item.img} type={item.type} title={item.title}/>
+            <DeviceImg {...item}/>
           </li>
         )
       })

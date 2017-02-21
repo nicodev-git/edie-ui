@@ -9,7 +9,8 @@ const deviceSource = {
     const item = {
       img: props.img,
       title: props.title,
-      type: props.type
+      type: props.type,
+      monitors: props.monitors
     }
     return item
   },
