@@ -377,7 +377,7 @@ class MapCanvas extends React.Component {
     let y = device.y || 0
     let width = device.width || 50
     let height = device.height || 50
-    let textwidth = device.textWidth || 50
+    let textwidth = device.textWidth || Math.min(devname.length * 8, 50)
     let textx = device.textX || x
     let texty = device.textY || (y + height + 5)
     let textSize = device.textSize || 13
