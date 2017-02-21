@@ -31,11 +31,12 @@ import {
   OPEN_PROFILE_MODAL,
   CLOSE_PROFILE_MODAL,
 
-  OPEN_NEW_INCIDENT_MODAL,
-
   CLOSE_API_ERROR_MODAL,
 
   REQUIRE_FULLSCREEN,
+
+  OPEN_NEW_INCIDENT_MODAL,
+  CLOSE_NEW_INCIDENT_MODAL,
 
   API_ERROR
 } from '../actions/types'
@@ -166,9 +167,6 @@ export default function (state = {}, action) {
     case CLOSE_PROFILE_MODAL:
       return { ...state, profileModalVisible: false }
 
-    case OPEN_NEW_INCIDENT_MODAL:
-      return { ...state }
-
     case API_ERROR:
       return { ...state, apiErrorModalOpen: true, apiError: action.msg }
 
@@ -177,6 +175,11 @@ export default function (state = {}, action) {
 
     case REQUIRE_FULLSCREEN:
       return { ...state, isFullScreen: action.enabled }
+
+    case OPEN_NEW_INCIDENT_MODAL:
+      return { ...state, newIncidentModalOpen: true }
+    case CLOSE_NEW_INCIDENT_MODAL:
+      return { ...state, newIncidentModalOpen: false }
   }
   return state
 }

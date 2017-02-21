@@ -193,11 +193,16 @@ export default class Toolbar extends React.Component {
     // ////////////////////////////////////////////////////////////////////////
 
   onClickNewIncident () {
+    this.props.openNewIncidentModal()
         // appendComponent(
         //     <NewIncidentModal
         //         onClose={removeComponent}
         //         sid={this.context.sid}/>
         // )
+  }
+
+  renderNewIncidentModal () {
+    if (!this.props.newIncidentModalOpen) return
   }
 
   render () {
@@ -485,6 +490,8 @@ export default class Toolbar extends React.Component {
           <img src="/images/arrow-up.png" width="14" height="14" className="up" />
           <img src="/images/arrow-down.png" width="14" height="14" className="down" />
         </a>
+
+        {this.renderNewIncidentModal()}
       </div>
     )
   }

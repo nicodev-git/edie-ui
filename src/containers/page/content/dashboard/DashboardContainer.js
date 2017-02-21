@@ -31,7 +31,10 @@ import {
   fetchAttackers,
 
   updateDashboard,
-  requireFullScreen
+  requireFullScreen,
+
+  openNewIncidentModal,
+  closeNewIncidentModal
 } from 'actions'
 
 export default connect(
@@ -87,6 +90,9 @@ export default connect(
     fetchAttackers,
 
     updateDashboard,
-    requireFullScreen
+    requireFullScreen,
+
+    openNewIncidentModal,
+    closeNewIncidentModal
   }
 )(Dashboard)

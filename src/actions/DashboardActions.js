@@ -9,6 +9,9 @@ import {
 
   REQUIRE_FULLSCREEN,
 
+  OPEN_NEW_INCIDENT_MODAL,
+  CLOSE_NEW_INCIDENT_MODAL,
+
   NO_AUTH_ERROR
 } from './types'
 
@@ -79,3 +82,20 @@ export function requireFullScreen (enabled) {
     })
   }
 }
+
+export const openNewIncidentModal = () => {
+  return dispatch => {
+    dispatch({
+      type: OPEN_NEW_INCIDENT_MODAL
+    })
+  }
+}
+
+export const closeNewIncidentModal = () => {
+  return dispatach => {
+    dispatach({
+      type: CLOSE_NEW_INCIDENT_MODAL
+    })
+  }
+}
+
