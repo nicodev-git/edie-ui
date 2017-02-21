@@ -96,7 +96,7 @@ export default function (state = {}, action) {
       })
 
       let {selectedDevice} = state
-      if (selectedDevice.id === action.data.id) selectedDevice = action.data
+      if (selectedDevice && selectedDevice.id === action.data.id) selectedDevice = action.data
 
       return {...state, mapDevices, selectedDevice}
     }
