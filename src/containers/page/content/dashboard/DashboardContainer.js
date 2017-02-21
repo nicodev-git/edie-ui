@@ -33,8 +33,8 @@ import {
   updateDashboard,
   requireFullScreen,
 
-  openNewIncidentModal,
-  closeNewIncidentModal
+  openDashboardNewIncidentModal,
+  closeDashboardNewIncidentModal
 } from 'actions'
 
 export default connect(
@@ -48,6 +48,8 @@ export default connect(
     mapLines: state.dashboard.mapLines,
     selectedMap: state.dashboard.selectedMap,
     showTraffic: state.settings.showTraffic,
+
+    newIncidentModalOpen: state.dashboard.newIncidentModalOpen,
 
     isFullScreen: state.dashboard.isFullScreen,
 
@@ -92,7 +94,7 @@ export default connect(
     updateDashboard,
     requireFullScreen,
 
-    openNewIncidentModal,
-    closeNewIncidentModal
+    openDashboardNewIncidentModal,
+    closeDashboardNewIncidentModal
   }
 )(Dashboard)

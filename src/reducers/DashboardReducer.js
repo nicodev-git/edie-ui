@@ -35,8 +35,8 @@ import {
 
   REQUIRE_FULLSCREEN,
 
-  OPEN_NEW_INCIDENT_MODAL,
-  CLOSE_NEW_INCIDENT_MODAL,
+  OPEN_DASHBOARD_NEW_INCIDENT_MODAL,
+  CLOSE_DASHBOARD_NEW_INCIDENT_MODAL,
 
   API_ERROR
 } from '../actions/types'
@@ -176,9 +176,9 @@ export default function (state = {}, action) {
     case REQUIRE_FULLSCREEN:
       return { ...state, isFullScreen: action.enabled }
 
-    case OPEN_NEW_INCIDENT_MODAL:
+    case OPEN_DASHBOARD_NEW_INCIDENT_MODAL:
       return { ...state, newIncidentModalOpen: true }
-    case CLOSE_NEW_INCIDENT_MODAL:
+    case CLOSE_DASHBOARD_NEW_INCIDENT_MODAL:
       return { ...state, newIncidentModalOpen: false }
   }
   return state

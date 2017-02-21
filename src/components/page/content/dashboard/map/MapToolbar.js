@@ -5,6 +5,7 @@ import { ChromePicker } from 'react-color'
 
 import MapMenu from './MapMenu'
 import DeviceMenu from './DeviceMenu'
+import NewIncidentModal from './NewIncidentModal'
 
 import { lineTypes } from '../../../../../shared/Global'
 
@@ -193,7 +194,7 @@ export default class Toolbar extends React.Component {
     // ////////////////////////////////////////////////////////////////////////
 
   onClickNewIncident () {
-    this.props.openNewIncidentModal()
+    this.props.openDashboardNewIncidentModal()
         // appendComponent(
         //     <NewIncidentModal
         //         onClose={removeComponent}
@@ -203,6 +204,9 @@ export default class Toolbar extends React.Component {
 
   renderNewIncidentModal () {
     if (!this.props.newIncidentModalOpen) return
+    return (
+      <NewIncidentModal onClose={this.props.closeDashboardNewIncidentModal} />
+    )
   }
 
   render () {

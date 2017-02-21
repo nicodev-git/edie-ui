@@ -9,8 +9,8 @@ import {
 
   REQUIRE_FULLSCREEN,
 
-  OPEN_NEW_INCIDENT_MODAL,
-  CLOSE_NEW_INCIDENT_MODAL,
+  OPEN_DASHBOARD_NEW_INCIDENT_MODAL,
+  CLOSE_DASHBOARD_NEW_INCIDENT_MODAL,
 
   NO_AUTH_ERROR
 } from './types'
@@ -83,18 +83,18 @@ export function requireFullScreen (enabled) {
   }
 }
 
-export const openNewIncidentModal = () => {
+export const openDashboardNewIncidentModal = () => {
   return dispatch => {
     dispatch({
-      type: OPEN_NEW_INCIDENT_MODAL
+      type: OPEN_DASHBOARD_NEW_INCIDENT_MODAL
     })
   }
 }
 
-export const closeNewIncidentModal = () => {
+export const closeDashboardNewIncidentModal = () => {
   return dispatach => {
     dispatach({
-      type: CLOSE_NEW_INCIDENT_MODAL
+      type: CLOSE_DASHBOARD_NEW_INCIDENT_MODAL
     })
   }
 }
