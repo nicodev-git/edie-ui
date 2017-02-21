@@ -2,7 +2,7 @@ import React from 'react'
 import Modal from 'react-bootstrap-modal'
 import { concat } from 'lodash'
 
-const images = ['group.png', 'telephony.png', 'jetro.png', 'building2.png', 'building1.png', 'partners.png', 'windows.png', 'linux.png', 'router.png', 'firewall.png', 'inticon.png', 'website.png', 'db2.png', 'pcs.png', 'antivirus.png', 'nac.png', 'usb.png', 'ips.png', 'graph.png', 'sqlgaugeicon.png', 'thermo.png', 'longhub.png', 'text.png']
+const images = ['group.png', 'telephony.png', 'jetro.png', 'building2.png', 'building1.png', 'partners.png', 'windows.png', 'linux.png', 'router.png', 'firewall.png', 'inticon.png', 'website.png', 'db2.png', 'pcs.png', 'antivirus.png', 'nac.png', 'usb.png', 'ips.png', 'graph.png', 'sqlgaugeicon.png', 'thermo.png', 'longhub.png', 'text.png', 'port.png']
 
 export default class ImageUploaderModal extends React.Component {
   constructor (props) {
