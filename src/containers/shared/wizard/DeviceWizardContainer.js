@@ -1,8 +1,9 @@
 import React from 'react'
-import DeviceWizard from '../../../components/shared/wizard/DeviceWizard'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { fetchMonitorTemplates, clearDeviceWizardInitialValues, openDeviceMonitorWizard } from '../../../actions'
+
+import DeviceWizard from 'components/shared/wizard/DeviceWizard'
+import { fetchMonitorTemplates, clearDeviceWizardInitialValues, openDeviceMonitorWizard } from 'actions'
 
 @connect(
   state => ({
@@ -17,22 +18,11 @@ import { fetchMonitorTemplates, clearDeviceWizardInitialValues, openDeviceMonito
     }, dispatch)
   })
 )
+
 export default class DeviceWizardContainer extends React.Component {
   render () {
     return (
       <DeviceWizard {...this.props} />
     )
   }
-}
-
-DeviceWizard.defaultProps = {
-  title: '',
-  deviceType: '',
-  extraParams: {},
-  configParams: {},
-  hideNames: [],
-  monitors: [],
-  values: {},
-  onStep0: null,
-  onFinish: null
 }

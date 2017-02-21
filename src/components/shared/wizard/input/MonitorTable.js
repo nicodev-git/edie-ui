@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { Panel } from 'react-bootstrap'
+import { assign } from 'lodash'
 
-import DeviceWizardContainer from '../../../../containers/shared/wizard/DeviceWizardContainer'
+import MonitorWizardContainer from 'containers/shared/wizard/MonitorWizardContainer'
 
 export default class MonitorTable extends Component {
   constructor (props) {
@@ -11,7 +12,8 @@ export default class MonitorTable extends Component {
       selected: -1,
 
       monitorConfig: null,
-      monitorWizardVisible: false
+      monitorWizardVisible: false,
+      isEditMonitor: false
     }
 
     this.handleClick = this.handleClick.bind(this)
@@ -64,7 +66,7 @@ export default class MonitorTable extends Component {
     const type = 'monitor-custom'
 
     return (
-      <DeviceWizardContainer
+      <MonitorWizardContainer
         deviceType={type}
         title={monitorConfig ? monitorConfig.name : ''}
         onClose={() => { this.setState({ monitorWizardVisible: false }) }}
@@ -85,8 +87,8 @@ export default class MonitorTable extends Component {
   }
 
   onClickItem (item) {
-    this.setState({ menuHidden: true })
-    this.addMonitor(item)
+    this.setState({ menuHidden: true, isEditMonitor: false })
+    this.addMonitor(assign({}, item, {enable: true}))
   }
 
   onClickAdd (e) {
@@ -101,7 +103,7 @@ export default class MonitorTable extends Component {
     const {monitors} = this.props
     if (selected < 0) return
 
-    this.setState({ monitorWizardVisible: true, monitorConfig: monitors[selected] })
+    this.setState({ monitorWizardVisible: true, isEditMonitor: true, monitorConfig: monitors[selected] })
     this.props.openDeviceMonitorWizard(monitors[selected])
   }
 
@@ -118,12 +120,19 @@ export default class MonitorTable extends Component {
   }
 
   addMonitor (monitorConfig) {
+    this.props.openDeviceMonitorWizard(monitorConfig)
     this.setState({ monitorWizardVisible: true, monitorConfig })
   }
 
   onFinishMonitorWizard (res, params) {
     const { monitors, onChanged } = this.props
-    monitors.push(params)
+
+    let {selected, isEditMonitor} = this.state
+    if (isEditMonitor) {
+      monitors[selected] = assign({}, monitors[selected], params)
+    } else {
+      monitors.push(params)
+    }
     onChanged && onChanged(monitors)
   }
 

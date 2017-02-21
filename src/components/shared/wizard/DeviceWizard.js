@@ -1,12 +1,12 @@
 import React from 'react'
 import Modal from 'react-bootstrap-modal'
-import { reduxForm } from 'redux-form'
 import {
     assign
     // keys, // Never used
     // forIn, // Never used
     // hasIn // Never used
 } from 'lodash'
+import { reduxForm } from 'redux-form'
 
 import TextInput from './input/TextInput'
 import Checkbox from './input/Checkbox'
@@ -77,7 +77,7 @@ class DeviceWizard extends React.Component {
   }
 
   componentDidMount () {
-    this.props.clearDeviceWizardInitialValues()
+    // this.props.clearDeviceWizardInitialValues()
   }
 
   handleFormSubmit (formProps) {
@@ -365,11 +365,11 @@ class DeviceWizard extends React.Component {
             <div className="text-right mb-none">
 
               <a href="javascript:;"
-                className="btn btn-default btn-sm"
+                className="btn btn-default btn-sm margin-sm-right"
                 onClick={this.onClickClose.bind(this)}>Cancel</a>
 
               <a href="javascript:;"
-                className={`btn btn-default btn-sm margin-sm-left margin-sm-right ${cssPrevious}`}
+                className={`btn btn-default btn-sm margin-sm-right ${cssPrevious}`}
                 onClick={this.onClickPrevious.bind(this)}>Previous</a>
 
               {
@@ -389,8 +389,22 @@ class DeviceWizard extends React.Component {
   }
 }
 
+DeviceWizard.defaultProps = {
+  title: '',
+  deviceType: '',
+  extraParams: {},
+  configParams: {},
+  hideNames: [],
+  monitors: [],
+  values: {},
+  onStep0: null,
+  onFinish: null
+}
+
+export const MonitorWizard = reduxForm({
+  form: 'monitorWizardForm'
+})(DeviceWizard)
+
 export default reduxForm({
   form: 'deviceForm'
-  // destroyOnUnmount: false,
-  // validate
 })(DeviceWizard)

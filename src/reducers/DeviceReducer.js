@@ -87,10 +87,10 @@ export default function (state = INITIAL_STATE, action) {
       return { ...state, monitorPickerVisible: false }
 
     case OPEN_DEVICE_MONITOR_WIZARD:
-      return { ...state, monitorWizardVisible: true, wizardInitialValues: action.data }
+      return { ...state, monitorWizardVisible: true, monitorInitialValues: action.data }
 
     case CLOSE_DEVICE_MONITOR_WIZARD:
-      return { ...state, monitorWizardVisible: false, wizardInitialValues: null }
+      return { ...state, monitorWizardVisible: false }
 
     case CLEAR_DEVICE_WIZARD_INITIAL_VALUES:
       return { ...state, wizardInitialValues: null }
