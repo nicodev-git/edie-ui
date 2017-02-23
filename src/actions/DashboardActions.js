@@ -12,6 +12,8 @@ import {
   OPEN_DASHBOARD_NEW_INCIDENT_MODAL,
   CLOSE_DASHBOARD_NEW_INCIDENT_MODAL,
 
+  FIX_ALL_INCIDENTS_BY_TYPE,
+
   NO_AUTH_ERROR
 } from './types'
 
@@ -99,3 +101,10 @@ export const closeDashboardNewIncidentModal = () => {
   }
 }
 
+export function fixAllIncidentsByType (type) {
+  return dispatch => {
+    axios.get(`/incident/fixall/${type}`).then(res => {
+      dispatch({ type: FIX_ALL_INCIDENTS_BY_TYPE })
+    }).catch(error => apiError(dispatch, error))
+  }
+}

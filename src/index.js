@@ -38,6 +38,7 @@ const initialState = {
     devices: [],
 
     incidents: [],
+    incidentDraw: 1,
     addIncidentModalVisible: false,
 
     rules: [],
@@ -63,7 +64,8 @@ const initialState = {
 
   search: {
     incidents: [],
-    incidentDevices: []
+    incidentDevices: [],
+    incidentDraw: 1
   },
 
   settings: {

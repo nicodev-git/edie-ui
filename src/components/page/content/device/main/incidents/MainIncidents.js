@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import moment from 'moment'
 import {
-  findIndex
-  // assign // Never used
+  findIndex,
+  assign
 } from 'lodash'
 import Select from 'react-select'
 import {
@@ -164,6 +164,10 @@ export default class MainIncidents extends Component {
   }
 
   renderTable () {
+    const params = assign({}, this.state.params, {
+      draw: this.props.incidentDraw
+    })
+
     return (
       <ResponsiveInfiniteTable
         cells={this.cells}
@@ -173,7 +177,7 @@ export default class MainIncidents extends Component {
         onRowDblClick={this.onRowDblClick.bind(this)}
 
         url="/incident/search/findBy"
-        params={this.state.params}
+        params={params}
       />
     )
   }

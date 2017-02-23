@@ -4,17 +4,20 @@ import Select from 'react-select'
 import moment from 'moment'
 import TimeAgo from 'react-timeago'
 import ReactTooltip from 'react-tooltip'
+import {
+  ButtonGroup,
+  Button
+} from 'react-bootstrap'
 
 import DateRangePicker from '../../../shared/DateRangePicker'
-import InfiniteTable from '../../../shared/InfiniteTable'
-// import {ResponsiveInfiniteTable} from '../../../shared/InfiniteTable'
-const ResponsiveInfiniteTable = InfiniteTable
+import {ResponsiveInfiniteTable} from '../../../shared/InfiniteTable'
 
 import { getSeverityIcon } from '../../../../shared/Global'
 import SearchTabs from './SearchTabs'
 import TabPage from '../../../shared/TabPage'
 import TabPageBody from '../../../shared/TabPageBody'
 import TabPageHeader from '../../../shared/TabPageHeader'
+import { showConfirm } from 'components/shared/Alert'
 
 import DeviceSearchModal from './DeviceSearchModal'
 
@@ -141,8 +144,6 @@ export default class Incidents extends React.Component {
     } else {
       label = `${selectedDevices.length} Devices`
     }
-        // if (selectedDevices.length)
-
     return (
       <a href="javascript:;" className="margin-md-left"
         onClick={this.onClickSearchDevice.bind(this)}>
@@ -159,24 +160,8 @@ export default class Incidents extends React.Component {
         rowMetadata={{'key': 'id'}}
         selectable
         onRowDblClick={this.onRowDblClick.bind(this)}
-
         useExternal={false}
         data={this.props.incidents}
-      />
-    )
-  }
-
-  renderTable2 () {
-    return (
-      <InfiniteTable
-        url="/incidentstable/getIncidentsDataTable"
-        params={this.props.filter}
-        cells={this.cellIncidents}
-        ref="table"
-        rowMetadata={{'key': 'incidentid'}}
-        selectable
-        bodyHeight={this.props.containerHeight}
-        onRowDblClick={this.onRowDblClick.bind(this)}
       />
     )
   }
@@ -256,6 +241,18 @@ export default class Incidents extends React.Component {
     })
   }
 
+  onClickFixAll () {
+    const {location} = this.props
+    const {state} = location || {}
+    const {filterType} = state || {}
+
+    const type = filterType || 'open'
+    showConfirm(`Click OK to fix all ${type} incidents.`, btn => {
+      if (btn !== 'ok') return
+      this.props.fixAllIncidentsByType(type)
+    })
+  }
+
   render () {
     const {location} = this.props
     const {state} = location || {}
@@ -301,6 +298,12 @@ export default class Incidents extends React.Component {
               </DateRangePicker>
 
               {this.renderDeviceSearch()}
+            </div>
+
+            <div className="pull-right">
+              <ButtonGroup>
+                <Button onClick={this.onClickFixAll.bind(this)}>Fix All</Button>
+              </ButtonGroup>
             </div>
           </div>
         </TabPageHeader>

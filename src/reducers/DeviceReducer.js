@@ -46,6 +46,8 @@ import {
   OPEN_WF_ACTION_MODAL,
   CLOSE_WF_ACTION_MODAL,
 
+  FIX_ALL_DEVICE_INCIDENTS,
+
   UPDATE_DEVICE_ERROR
 } from '../actions/types'
 
@@ -171,6 +173,9 @@ export default function (state = INITIAL_STATE, action) {
 
     case CLOSE_WF_ACTION_MODAL:
       return { ...state, wfActionModalOpen: false }
+
+    case FIX_ALL_DEVICE_INCIDENTS:
+      return { ...state, incidentDraw: state.incidentDraw + 1 }
   }
   return state
 }

@@ -19,6 +19,7 @@ import MainIncidents from 'components/page/content/device/main/incidents/MainInc
   state => ({
     device: state.dashboard.selectedDevice,
     incidents: state.devices.incidents,
+    incidentDraw: state.devices.incidentDraw,
     addIncidentModalVisible: state.devices.addIncidentModalVisible
   }),
   dispatch => ({
