@@ -6,7 +6,7 @@ import MapCanvas from '../../../../shared/map/MapCanvas'
 import MapToolbar from './MapToolbar'
 
 import DeviceWizardContainer from '../../../../../containers/shared/wizard/DeviceWizardContainer'
-import {wizardConfig} from '../../../../shared/wizard/WizardConfig'
+import { wizardConfig, getDeviceType } from 'components/shared/wizard/WizardConfig'
 import {showAlert, showConfirm} from '../../../../shared/Alert'
 
 import DeviceDragLayer from './DeviceDragLayer'
@@ -283,10 +283,9 @@ export default class Topology extends React.Component {
     })
     let {x, y} = pos
 
-    let options = options || {}
-    $.extend(options, { // eslint-disable-line no-undef
+    let options = {
       title: item.title,
-      type: item.type,
+      type: getDeviceType(item.template.name),
       imgName: item.img,
       imageUrl: `/externalpictures?name=${item.img}`,
       x: x,
@@ -294,8 +293,9 @@ export default class Topology extends React.Component {
       width: 50,
       height: 50,
 
-      monitors: item.monitors
-    })
+      monitors: item.template.monitors,
+      templateName: item.template.name
+    }
 
     if (options.type === 'longhub') {
       options.width = 20
@@ -487,7 +487,8 @@ export default class Topology extends React.Component {
       y: options.y,
       width: options.width,
       height: options.height,
-      image: options.imgName
+      image: options.imgName,
+      templateName: options.templateName
     }
 
     let config = {
@@ -512,28 +513,21 @@ export default class Topology extends React.Component {
 
   showAddWizard (options, callback, closeCallback) {
     if (options.type === 'longhub') {
-      const url = `${this.props.ROOT_URL}${Api.deviceadmin.addDevice}` // eslint-disable-line no-undef
-      const param = {
-        devicetype: 'longhub',
+      const params = {
         name: 'longhub',
         angle: 0,
         x: options.x,
         y: options.y,
         width: options.width,
-        height: options.height
+        height: options.height,
+        templateName: options.templateName
       }
 
-      $.get(url, param).done((res) => { // eslint-disable-line no-undef
-        if (!res || !res.success || !res.object.length) {
-          showAlert('Add Failed!') // eslint-disable-line no-undef
-          return
-        }
+      this.onClickEdit()
+      this.props.addGroupDevice(this.props.device, params)
 
-        const data = res.object[0]
-        callback && callback(data.id, data.name, data)
-      }).always(() => {
-        closeCallback && closeCallback()
-      })
+      this.setState({dropItem: null})
+      closeCallback && closeCallback()
     } else {
       if (wizardConfig[options.type] === null) {
         showAlert(`Unrecognized Type: ${options.type}`) // eslint-disable-line no-undef

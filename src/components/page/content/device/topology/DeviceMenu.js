@@ -43,8 +43,7 @@ export default class DeviceMenu extends React.Component {
         return {
           title: u.name,
           img: u.image || 'windows.png',
-          type: u.devicetemplategroup === 'GROUPS' ? 'group' : 'custom',
-          monitors: u.monitors
+          template: u
         }
       })
       if (items.length === 0) return
