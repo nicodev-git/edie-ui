@@ -10,7 +10,8 @@ const deviceSource = {
       img: props.img,
       title: props.title,
       type: props.type,
-      monitors: props.monitors
+      monitors: props.monitors,
+      template: props.template
     }
     return item
   },
@@ -69,7 +70,7 @@ class DeviceImg extends React.Component {
       connectDragSource(
         <a href="javascript:;">
           <span className="pull-left item-icon" ref="div">
-            <img src={`/externalpictures?name=${this.props.img}`} data-type={this.props.type}/>
+            <img src={`/externalpictures?name=${this.props.img}`}/>
           </span>
 
           <span className="item-text">
@@ -94,12 +95,6 @@ class DeviceImg extends React.Component {
   //         </a>
   //     )
   // }
-}
-DeviceImg.defaultProps = {
-  img: '',
-  type: '',
-  title: '',
-  selected: false
 }
 
 export default DragSource(DragTypes.DEVICE, deviceSource, collect)(DeviceImg)
