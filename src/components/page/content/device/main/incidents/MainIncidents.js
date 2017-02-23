@@ -20,7 +20,7 @@ import AddIncidentModal from './AddIncidentModal'
 import AddExceptionModal from './AddExceptionModal'
 import CommentsModal from '../../../../../shared/incident/CommentsModal'
 
-import { showAlert, showPrompt } from '../../../../../shared/Alert'
+import { showAlert, showConfirm } from '../../../../../shared/Alert'
 import { getSeverityIcon } from '../../../../../../shared/Global'
 const encodeUrlParams = getSeverityIcon
 import MainTabs from '../MainTabs'
@@ -208,20 +208,9 @@ export default class MainIncidents extends Component {
   }
 
   onClickFixAll () {
-    // let deviceid = this.props.device.id // Never used
-
-    showPrompt('Please type comment for all incidents.', '', text => {
-      if (text === null) return
-
-      // $.get(Api.incidents.fixSelectIncidents, assign({}, this.state.params, {
-      //     comment: text,
-      //     sid: this.context.sid,
-      //     deviceid: deviceid,
-      // })).done(() => {
-      //
-      //     this.reloadTable()
-      //
-      // })
+    showConfirm('Click OK to fix all device incidents.', btn => {
+      if (btn !== 'ok') return
+      this.props.fixAllDeviceIncidents(this.props.device)
     })
   }
 

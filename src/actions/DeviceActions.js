@@ -52,6 +52,8 @@ import {
 
   UPDATE_MAP_DEVICE,
 
+  FIX_ALL_DEVICE_INCIDENTS,
+
   NO_AUTH_ERROR
 } from './types'
 
@@ -638,6 +640,14 @@ export const removeGroupDevice = (group, props) => {
     })
     axios.put(entity._links.self.href, entity).then(res => {
       dispatch({type: UPDATE_MAP_DEVICE, data: res.data})
+    }).catch(error => apiError(dispatch, error))
+  }
+}
+
+export const fixAllDeviceIncidents = (device) => {
+  return dispatch => {
+    axios.get(`/incident/fixall/bydeviceid/${device.id}`).then(res => {
+      dispatch({type: FIX_ALL_DEVICE_INCIDENTS})
     }).catch(error => apiError(dispatch, error))
   }
 }
