@@ -4,37 +4,43 @@ export const MAX_WIDTH = 12
 const POPUP_WIDTH_SM = 600
 
 export const deviceTypeMap = {
-  'transaction': 'group',
-  'Windows Server': 'server',
-  'Linux Server': 'server',
-  'Router': 'router',
+  'Group': 'group',
+  'Long hub': 'longhub'
+  // 'Windows Server': 'server',
+  // 'Linux Server': 'server',
+  // 'Router': 'router',
+  //
+  // 'website': 'website',
+  // 'Web Site': 'website',
+  // 'Firewall': 'firewall',
+  // 'Internet': 'internet',
+  //
+  // 'Webservice': 'monitor-web',
+  // 'port': 'monitor-port',
+  // 'File': 'monitor-file',
+  // 'FileExist': 'monitor-file',
+  // 'sqlQuery': 'monitor-sql',
+  // 'jdbc_query': 'monitor-sql',
+  // 'sqlQueryGauge': 'monitor-sqlgauge',
+  // 'http': 'monitor-http',
+  // 'LogFile': 'monitor-log-file',
+  // 'LogCheck': 'monitor-log-file',
+  // 'eventlog': 'monitor-eventlog',
+  //
+  // 'MSSQLDB': 'db-mssql',
+  // 'MYSQLDB': 'db-mysql',
+  // 'OracleDB': 'db-oracle',
+  // 'Custom Device': 'custom',
+  //
+  // 'Antivirus': 'antivirus',
+  // 'Windows': 'antivirus',
+  //
+  // 'IPS': 'ips'
+}
 
-  'website': 'website',
-  'Web Site': 'website',
-  'Firewall': 'firewall',
-  'Internet': 'internet',
-
-  'Webservice': 'monitor-web',
-  'port': 'monitor-port',
-  'File': 'monitor-file',
-  'FileExist': 'monitor-file',
-  'sqlQuery': 'monitor-sql',
-  'jdbc_query': 'monitor-sql',
-  'sqlQueryGauge': 'monitor-sqlgauge',
-  'http': 'monitor-http',
-  'LogFile': 'monitor-log-file',
-  'LogCheck': 'monitor-log-file',
-  'eventlog': 'monitor-eventlog',
-
-  'MSSQLDB': 'db-mssql',
-  'MYSQLDB': 'db-mysql',
-  'OracleDB': 'db-oracle',
-  'Custom Device': 'custom',
-
-  'Antivirus': 'antivirus',
-  'Windows': 'antivirus',
-
-  'IPS': 'ips'
+export function getDeviceType (templateName) {
+  if (!templateName) return 'custom'
+  return deviceTypeMap[templateName] || 'custom'
 }
 
 export const commonconfig = {
