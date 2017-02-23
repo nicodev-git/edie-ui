@@ -150,13 +150,11 @@ class Map extends React.Component {
       y: options.y,
       width: options.width,
       height: options.height,
-      fatherid: options.fatherid || 0,
-      timeout: 60000,
-      image: options.imgName
+      image: options.imgName,
+      templateName: options.templateName
     }
 
     let config = {
-      fatherid: options.fatherid || 0,
       mapid: this.props.selectedMap.id
     }
 
@@ -467,7 +465,8 @@ class Map extends React.Component {
       width: 50,
       height: 50,
 
-      monitors: item.monitors
+      monitors: item.monitors,
+      templateName: item.template.name
     })
 
     if (options.type === 'longhub') {
