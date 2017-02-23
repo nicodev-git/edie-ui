@@ -103,7 +103,7 @@ export const closeDashboardNewIncidentModal = () => {
 
 export function fixAllIncidentsByType (type) {
   return dispatch => {
-    axios.get(`/incident/fixall/${type}`).then(res => {
+    axios.get(`${ROOT_URL}/incident/fixall/${type}/deviceid`).then(res => {
       dispatch({ type: FIX_ALL_INCIDENTS_BY_TYPE })
     }).catch(error => apiError(dispatch, error))
   }

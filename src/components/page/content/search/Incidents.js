@@ -42,9 +42,10 @@ export default class Incidents extends React.Component {
 
       selectedSeverity: ['HIGH', 'MEDIUM'],
       selectedDevices: [],
-
-      currentSortCol: 'startTimestamp',
-      currentSortDir: 'desc',
+      afterStartTimestamp: '',
+      beforeStartTimestamp: '',
+      fixed: false,
+      search: '',
 
       selectedIndex: -1,
       commentModalVisible: false,
@@ -125,12 +126,10 @@ export default class Incidents extends React.Component {
         )
       }
     }]
-
-    this.onFilterChange = this.onFilterChange.bind(this)
   }
 
   componentDidMount () {
-    this.onFilterChange()
+    this.onChangeRange()
   }
 
   renderDeviceSearch () {
@@ -153,15 +152,27 @@ export default class Incidents extends React.Component {
   }
 
   renderTable () {
+    const { search, fixed, selectedSeverity, afterStartTimestamp, beforeStartTimestamp } = this.state
+    const params = {
+      description: search,
+      severity: selectedSeverity,
+      afterStartTimestamp,
+      beforeStartTimestamp,
+      fixed,
+      deviceid: this.state.selectedDevices.map(item => item.id),
+      sort: 'startTimestamp,desc',
+      draw: this.props.incidentDraw
+    }
+
     return (
       <ResponsiveInfiniteTable
+        url="/incident/search/findBy"
         cells={this.cellIncidents}
         ref="table"
         rowMetadata={{'key': 'id'}}
         selectable
         onRowDblClick={this.onRowDblClick.bind(this)}
-        useExternal={false}
-        data={this.props.incidents}
+        params={params}
       />
     )
   }
@@ -184,38 +195,43 @@ export default class Incidents extends React.Component {
   onChangeSeverity (selected) {
     this.setState({
       selectedSeverity: selected.map(item => item.value)
-    }, () => {
-      this.onFilterChange()
     })
   }
 
-  onFilterChange () {
-    const refs = this.refs
-    const {search, fixed, dp} = refs
+  onFixedChange (e) {
+    this.setState({
+      fixed: e.target.value || null
+    })
+  }
 
-    const { currentSortCol, currentSortDir } = this.state
-
-    let params = {
-      description: search ? search.value : '""',
-      severity: this.state.selectedSeverity,
+  onChangeRange (e) {
+    const {dp} = this.refs
+    this.setState({
       afterStartTimestamp: dp.getStartDate().valueOf(),
-      beforeStartTimestamp: dp.getEndDate().valueOf(),
-
-      deviceid: this.state.selectedDevices.map(item => item.id),
-      sort: `${currentSortCol},${currentSortDir}`
-    }
-
-    if (fixed.value) params.fixed = fixed.value
-
-    this.props.searchIncidents(params)
+      beforeStartTimestamp: dp.getEndDate().valueOf()
+    })
   }
 
-  onSearchKeyUp (e) {
-    clearTimeout(this.timer)
-    this.timer = setTimeout(() => {
-      this.onFilterChange()
-    }, 200)
-  }
+  // onFilterChange () {
+  //   const refs = this.refs
+  //   const {search, fixed, dp} = refs
+  //
+  //   const { currentSortCol, currentSortDir } = this.state
+  //
+  //   let params = {
+  //     description: search ? search.value : '""',
+  //     severity: this.state.selectedSeverity,
+  //     afterStartTimestamp: dp.getStartDate().valueOf(),
+  //     beforeStartTimestamp: dp.getEndDate().valueOf(),
+  //
+  //     deviceid: this.state.selectedDevices.map(item => item.id),
+  //     sort: `${currentSortCol},${currentSortDir}`
+  //   }
+  //
+  //   if (fixed.value) params.fixed = fixed.value
+  //
+  //   this.props.searchIncidents(params)
+  // }
 
   onClickSearchDevice () {
     this.setState({
@@ -229,8 +245,6 @@ export default class Incidents extends React.Component {
     this.setState({
       deviceModalVisible: false,
       selectedDevices
-    }, () => {
-      this.onFilterChange()
     })
   }
 
@@ -286,13 +300,12 @@ export default class Incidents extends React.Component {
               />
 
               <select className="form-control inline text-primary margin-md-left"
-                onChange={this.onFilterChange}
-                ref="fixed" defaultValue="false">
+                onChange={this.onFixedChange.bind(this)} value={`${this.state.fixed}`}>
                 <option value="">Any</option>
                 <option value="false">Unfixed</option>
                 <option value="true">Fixed</option>
               </select>
-              <DateRangePicker onClickRange={this.onFilterChange} className="margin-md-left"
+              <DateRangePicker onClickRange={this.onChangeRange.bind(this)} className="margin-md-left"
                 default={defaultDate} ref="dp">
                 <i className="fa fa-caret-down margin-xs-left" />
               </DateRangePicker>
