@@ -5,6 +5,12 @@ const POPUP_WIDTH_SM = 600
 
 export const deviceTypeMap = {
   'Group': 'group',
+  'Telephony': 'group',
+  'Jetro': 'group',
+  'Customers': 'group',
+  'DR Site': 'group',
+  'Partners': 'group',
+
   'Long hub': 'longhub'
   // 'Windows Server': 'server',
   // 'Linux Server': 'server',
