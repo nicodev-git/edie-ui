@@ -107,7 +107,7 @@ if (token) {
   store.dispatch({ type: AUTH_USER })
 }
 
-console.log('Version: 0.7.0')
+console.log('Version: 0.8.0')
 
 ReactDOM.render(
     <Provider store={store}>
@@ -115,7 +115,3 @@ ReactDOM.render(
     </Provider>
     , document.getElementById('app')
 )
-
-// _$(document).ready(function () {
-//   React.render(<App />, document.body);
-// });

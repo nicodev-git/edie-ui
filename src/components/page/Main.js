@@ -4,6 +4,7 @@ import { startsWith } from 'lodash'
 import TopbarContainer from '../../containers/page/topbar/TopbarContainer'
 import SidebarContainer from '../../containers/page/sidebar/SidebarContainer'
 import DashboardContainer from '../../containers/page/content/dashboard/DashboardContainer'
+import ActivationModal from 'components/auth/ActivationModal'
 import { scrollTop } from '../../util/Scroll'
 import { DragDropContext } from 'react-dnd'
 import TouchBackend from 'react-dnd-touch-backend'
@@ -91,6 +92,12 @@ class Main extends React.Component {
     this.props.closeApiErrorModal()
   }
 
+  renderActivationModal () {
+    return (
+      <ActivationModal {...this.props}/>
+    )
+  }
+
   renderApiError () {
     if (!this.props.apiErrorModalOpen) return null
     return (
@@ -113,6 +120,7 @@ class Main extends React.Component {
           {this.renderDashboard()}
           {children || null}
         </div>
+        {this.renderActivationModal()}
         {this.renderApiError()}
       </div>
     )

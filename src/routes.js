@@ -3,7 +3,6 @@ import { Router, browserHistory, Route } from 'react-router'
 
 import MainContainer from './containers/page/MainContainer'
 import SigninContainer from './containers/auth/SigninContainer'
-import SignupContainer from './containers/auth/SignupContainer'
 import SignoutContainer from './containers/auth/SignoutContainer'
 
 import Search from './components/page/content/search/Search'
@@ -93,7 +92,6 @@ export default(
     </Route>
     <Route path="/signin" component={SigninContainer} />
     <Route path="/signout" component={SignoutContainer} />
-    <Route path="/signup" component={SignupContainer} />
   </Router>
 )
 

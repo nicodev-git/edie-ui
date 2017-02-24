@@ -1,5 +1,3 @@
-import Api from '../../../api'
-
 export const MAX_WIDTH = 12
 const POPUP_WIDTH_SM = 600
 
@@ -314,14 +312,12 @@ export const commonconfig = {
     },
     server: {
       get: {
-        url: Api.devices.getDeviceNotes,
         params: [{
           name: 'deviceid',
           configvalue: 'id'
         }]
       },
       update: {
-        url: Api.devices.updateDeviceNotes,
         params: [{
           name: 'deviceid',
           configvalue: 'id'
@@ -333,7 +329,6 @@ export const commonconfig = {
 
   ipvalidation: {
     type: 'server',
-    url: Api.deviceadmin.checkExistsIp,
     param: 'ip',
     fn: function (res) {
       return !res.success
@@ -370,7 +365,6 @@ export const commonconfig = {
 
       remote: true,
       server: {
-        url: `${Api.devices.getCredentials}?start=0&length=1000`,
         root: 'data',
         display: 'name',
         value: 'id'
@@ -391,7 +385,6 @@ export const commonconfig = {
       type: 'monitors',
       title: 'Monitors',
       defaults: {
-        url: Api.deviceadmin.showDefaultMonitorsForDevice,
         params: {
           type: type
         },
@@ -445,7 +438,6 @@ export const wizardConfig = {
     title: 'Server',
     width: POPUP_WIDTH_SM,
     server: {
-      url: Api.deviceadmin.addDevice,
       params: {
         type: 'Windows Server'
       }
@@ -485,7 +477,6 @@ export const wizardConfig = {
           type: 'combo',
           remote: true,
           server: {
-            url: Api.devices.getAgents,
             display: 'name',
             title: 'description',
             value: 'id'
@@ -543,7 +534,6 @@ export const wizardConfig = {
     title: 'Linux Server',
     width: POPUP_WIDTH_SM,
     server: {
-      url: Api.deviceadmin.addDevice,
       params: {
         type: 'Linux Server'
       }
@@ -582,7 +572,6 @@ export const wizardConfig = {
           type: 'combo',
           remote: true,
           server: {
-            url: Api.devices.getAgents,
             display: 'name',
             title: 'description',
             value: 'id'
@@ -641,7 +630,6 @@ export const wizardConfig = {
     width: POPUP_WIDTH_SM,
 
     server: {
-      url: Api.deviceadmin.addDevice,
       params: {
         type: 'Web Site',
         monitorNames: 'http'
@@ -687,7 +675,6 @@ export const wizardConfig = {
           type: 'combo',
           remote: true,
           server: {
-            url: Api.devices.getAgents,
             display: 'name',
             title: 'description',
             value: 'id'
@@ -716,7 +703,6 @@ export const wizardConfig = {
     title: 'Group',
     width: POPUP_WIDTH_SM,
     server: {
-      url: Api.deviceadmin.addDevice,
       params: {
         isgroup: true
       }
@@ -741,7 +727,6 @@ export const wizardConfig = {
     title: 'Router',
     width: POPUP_WIDTH_SM,
     server: {
-      url: Api.deviceadmin.addDevice,
       params: {
         type: 'Router'
       }
@@ -781,7 +766,6 @@ export const wizardConfig = {
           type: 'combo',
           remote: true,
           server: {
-            url: Api.devices.getAgents,
             display: 'name',
             title: 'description',
             value: 'id'
@@ -813,7 +797,6 @@ export const wizardConfig = {
     title: 'Firewall',
     width: POPUP_WIDTH_SM,
     server: {
-      url: Api.deviceadmin.addDevice,
       params: {
         type: 'Firewall',
         credentialid: -1
@@ -854,7 +837,6 @@ export const wizardConfig = {
           type: 'combo',
           remote: true,
           server: {
-            url: Api.devices.getAgents,
             display: 'name',
             title: 'description',
             value: 'id'
@@ -886,7 +868,6 @@ export const wizardConfig = {
     title: 'Internet',
     width: POPUP_WIDTH_SM,
     server: {
-      url: Api.deviceadmin.addDevice,
       params: {
         credentialid: -1,
         type: 'Internet'
@@ -927,7 +908,6 @@ export const wizardConfig = {
           type: 'combo',
           remote: true,
           server: {
-            url: Api.devices.getAgents,
             display: 'name',
             title: 'description',
             value: 'id'
@@ -955,7 +935,6 @@ export const wizardConfig = {
   'db-mysql': {
     title: 'MySQL DB',
     server: {
-      url: Api.deviceadmin.addDevice,
       params: {
         type: 'MYSQLDB'
       }
@@ -1030,7 +1009,6 @@ export const wizardConfig = {
           type: 'combo',
           remote: true,
           server: {
-            url: Api.devices.getAgents,
             display: 'name',
             title: 'description',
             value: 'id'
@@ -1069,7 +1047,6 @@ export const wizardConfig = {
   'db-oracle': {
     title: 'Oracle DB',
     server: {
-      url: Api.deviceadmin.addDevice,
       params: {
         type: 'OracleDB'
       }
@@ -1144,7 +1121,6 @@ export const wizardConfig = {
           type: 'combo',
           remote: true,
           server: {
-            url: Api.devices.getAgents,
             display: 'name',
             title: 'description',
             value: 'id'
@@ -1183,7 +1159,6 @@ export const wizardConfig = {
   'db-mssql': {
     title: 'MSSQL DB',
     server: {
-      url: Api.deviceadmin.addDevice,
       params: {
         type: 'MSSQLDB'
       }
@@ -1258,7 +1233,6 @@ export const wizardConfig = {
           type: 'combo',
           remote: true,
           server: {
-            url: Api.devices.getAgents,
             display: 'name',
             title: 'description',
             value: 'id'
@@ -1298,7 +1272,6 @@ export const wizardConfig = {
     title: 'Custom',
     width: POPUP_WIDTH_SM,
     server: {
-      url: Api.deviceadmin.addDevice,
       params: {
         type: 'Custom Device'
       }
@@ -1345,7 +1318,6 @@ export const wizardConfig = {
           type: 'combo',
           remote: true,
           server: {
-            url: Api.devices.getAgents,
             display: 'name',
             title: 'description',
             value: 'id'
@@ -1380,7 +1352,6 @@ export const wizardConfig = {
     title: 'PC',
     width: POPUP_WIDTH_SM,
     server: {
-      url: Api.deviceadmin.addDevice,
       params: {
         credentialid: -1,
         type: 'PC'
@@ -1439,7 +1410,6 @@ export const wizardConfig = {
           type: 'combo',
           remote: true,
           server: {
-            url: Api.devices.getAgents,
             display: 'name',
             title: 'description',
             value: 'id'
@@ -1468,7 +1438,6 @@ export const wizardConfig = {
     title: 'Antivirus',
     width: POPUP_WIDTH_SM,
     server: {
-      url: Api.deviceadmin.addDevice,
       params: {
         type: 'Antivirus'
       }
@@ -1505,7 +1474,6 @@ export const wizardConfig = {
           type: 'combo',
           remote: true,
           server: {
-            url: Api.devices.getAgents,
             display: 'name',
             title: 'description',
             value: 'id'
@@ -1536,7 +1504,6 @@ export const wizardConfig = {
     title: 'NAC',
     width: POPUP_WIDTH_SM,
     server: {
-      url: Api.deviceadmin.addDevice,
       params: {
         type: 'NAC'
       }
@@ -1573,7 +1540,6 @@ export const wizardConfig = {
           type: 'combo',
           remote: true,
           server: {
-            url: Api.devices.getAgents,
             display: 'name',
             title: 'description',
             value: 'id'
@@ -1604,7 +1570,6 @@ export const wizardConfig = {
     title: 'Safend',
     width: POPUP_WIDTH_SM,
     server: {
-      url: Api.deviceadmin.addDevice,
       params: {
         type: 'Safend'
       }
@@ -1641,7 +1606,6 @@ export const wizardConfig = {
           type: 'combo',
           remote: true,
           server: {
-            url: Api.devices.getAgents,
             display: 'name',
             title: 'description',
             value: 'id'
@@ -1670,7 +1634,6 @@ export const wizardConfig = {
     title: 'telephony',
     width: POPUP_WIDTH_SM,
     server: {
-      url: Api.deviceadmin.addDevice,
       params: {
         type: 'Telephony'
       }
@@ -1698,7 +1661,6 @@ export const wizardConfig = {
           type: 'combo',
           remote: true,
           server: {
-            url: Api.devices.getAgents,
             display: 'name',
             title: 'description',
             value: 'id'
@@ -1727,7 +1689,6 @@ export const wizardConfig = {
     title: 'Jetro',
     width: POPUP_WIDTH_SM,
     server: {
-      url: Api.deviceadmin.addDevice,
       params: {
         type: 'Jetro'
       }
@@ -1755,7 +1716,6 @@ export const wizardConfig = {
           type: 'combo',
           remote: true,
           server: {
-            url: Api.devices.getAgents,
             display: 'name',
             title: 'description',
             value: 'id'
@@ -1784,7 +1744,6 @@ export const wizardConfig = {
     title: 'Customers',
     width: POPUP_WIDTH_SM,
     server: {
-      url: Api.deviceadmin.addDevice,
       params: {
         type: 'Customers'
       }
@@ -1812,7 +1771,6 @@ export const wizardConfig = {
           type: 'combo',
           remote: true,
           server: {
-            url: Api.devices.getAgents,
             display: 'name',
             title: 'description',
             value: 'id'
@@ -1841,7 +1799,6 @@ export const wizardConfig = {
     title: 'DR Site',
     width: POPUP_WIDTH_SM,
     server: {
-      url: Api.deviceadmin.addDevice,
       params: {
         type: 'DR Site'
       }
@@ -1869,7 +1826,6 @@ export const wizardConfig = {
           type: 'combo',
           remote: true,
           server: {
-            url: Api.devices.getAgents,
             display: 'name',
             title: 'description',
             value: 'id'
@@ -1898,7 +1854,6 @@ export const wizardConfig = {
     title: 'Partners',
     width: POPUP_WIDTH_SM,
     server: {
-      url: Api.deviceadmin.addDevice,
       params: {
         type: 'Partners'
       }
@@ -1926,7 +1881,6 @@ export const wizardConfig = {
           type: 'combo',
           remote: true,
           server: {
-            url: Api.devices.getAgents,
             display: 'name',
             title: 'description',
             value: 'id'
@@ -1955,7 +1909,6 @@ export const wizardConfig = {
     title: 'IPS',
     width: POPUP_WIDTH_SM,
     server: {
-      url: Api.deviceadmin.addDevice,
       params: {
         type: 'IPS'
       }
@@ -1992,7 +1945,6 @@ export const wizardConfig = {
           type: 'combo',
           remote: true,
           server: {
-            url: Api.devices.getAgents,
             display: 'name',
             title: 'description',
             value: 'id'
@@ -2037,7 +1989,6 @@ export const wizardConfig = {
   'bi-gauge': {
     title: 'Gauge',
     server: {
-      url: Api.deviceadmin.addDevice,
       params: {
         type: 'SQLQueryGauge'
       }
@@ -2125,7 +2076,6 @@ export const wizardConfig = {
           type: 'combo',
           remote: true,
           server: {
-            url: Api.devices.getAgents,
             display: 'name',
             title: 'description',
             value: 'id'
@@ -2152,7 +2102,6 @@ export const wizardConfig = {
     title: 'Chart',
     width: 600,
     server: {
-      url: Api.deviceadmin.addDevice,
       params: {
         type: 'genericdevice',
         chartType: 'temperature'
@@ -2175,7 +2124,6 @@ export const wizardConfig = {
   'bi-line': {
     title: 'Chart',
     server: {
-      url: Api.deviceadmin.addDevice,
       params: {
         type: 'SQLBI',
         chartType: 'line'
@@ -2264,7 +2212,6 @@ export const wizardConfig = {
           type: 'combo',
           remote: true,
           server: {
-            url: Api.devices.getAgents,
             display: 'name',
             title: 'description',
             value: 'id'
@@ -2292,7 +2239,6 @@ export const wizardConfig = {
   'bi-bar': {
     title: 'Chart',
     server: {
-      url: Api.deviceadmin.addDevice,
       params: {
         type: 'SQLBI',
         chartType: 'bar'
@@ -2381,7 +2327,6 @@ export const wizardConfig = {
           type: 'combo',
           remote: true,
           server: {
-            url: Api.devices.getAgents,
             display: 'name',
             title: 'description',
             value: 'id'
@@ -2409,7 +2354,6 @@ export const wizardConfig = {
   'bi-pie': {
     title: 'Chart',
     server: {
-      url: Api.deviceadmin.addDevice,
       params: {
         type: 'SQLBI',
         chartType: 'pie'
@@ -2498,7 +2442,6 @@ export const wizardConfig = {
           type: 'combo',
           remote: true,
           server: {
-            url: Api.devices.getAgents,
             display: 'name',
             title: 'description',
             value: 'id'
@@ -2528,7 +2471,6 @@ export const wizardConfig = {
   'usertext': {
     title: 'Free Text',
     server: {
-      url: Api.deviceadmin.addDevice,
       params: {
         type: 'Text',
         checkinterval: 86400000,
@@ -2557,7 +2499,6 @@ export const wizardConfig = {
     title: 'Custom',
     width: POPUP_WIDTH_SM,
     server: {
-      url: Api.deviceadmin.addCustomDevice,
       params: {
 
       }
@@ -2596,7 +2537,6 @@ export const wizardConfig = {
           type: 'combo',
           remote: true,
           server: {
-            url: Api.devices.getAgents,
             display: 'name',
             title: 'description',
             value: 'id'
@@ -2625,7 +2565,6 @@ export const wizardConfig = {
     title: 'Security',
     width: POPUP_WIDTH_SM,
     server: {
-      url: Api.deviceadmin.addDevice,
       params: {
         agentid: 1,
         type: 'security'
@@ -2644,7 +2583,6 @@ export const wizardConfig = {
     title: 'Ping',
     width: POPUP_WIDTH_SM,
     server: {
-      url: Api.deviceadmin.addDevice,
       params: {
         agentid: 1,
         type: 'ping'
@@ -2663,7 +2601,6 @@ export const wizardConfig = {
     title: 'Http',
     width: POPUP_WIDTH_SM,
     server: {
-      url: Api.deviceadmin.addDevice,
       params: {
         type: 'http'
       }
@@ -2704,7 +2641,6 @@ export const wizardConfig = {
           type: 'combo',
           remote: true,
           server: {
-            url: Api.devices.getAgents,
             display: 'name',
             title: 'description',
             value: 'id'
@@ -2752,7 +2688,6 @@ export const wizardConfig = {
   'monitor-log-file': {
     title: 'Log',
     server: {
-      url: Api.deviceadmin.addDevice,
       params: {
         type: 'LogCheck'
       }
@@ -2882,7 +2817,6 @@ export const wizardConfig = {
           type: 'combo',
           remote: true,
           server: {
-            url: Api.devices.getAgents,
             display: 'name',
             title: 'description',
             value: 'id'
@@ -2958,7 +2892,6 @@ export const wizardConfig = {
   'monitor-file': {
     title: 'File',
     server: {
-      url: Api.deviceadmin.addDevice,
       params: {
         // type: 'File', // Duplicate
         type: 'file'
@@ -3015,7 +2948,6 @@ export const wizardConfig = {
           type: 'combo',
           remote: true,
           server: {
-            url: Api.devices.getAgents,
             display: 'name',
             title: 'description',
             value: 'id'
@@ -3054,7 +2986,6 @@ export const wizardConfig = {
     title: 'EventLog',
     width: POPUP_WIDTH_SM,
     server: {
-      url: Api.deviceadmin.addDevice,
       params: {
         agentid: 1,
         type: 'eventlog'
@@ -3086,7 +3017,6 @@ export const wizardConfig = {
     title: 'Port',
     width: POPUP_WIDTH_SM,
     server: {
-      url: Api.deviceadmin.addDevice,
       params: {
         type: 'port'
       }
@@ -3107,7 +3037,6 @@ export const wizardConfig = {
             type: 'combo',
             remote: true,
             server: {
-              url: Api.devices.getAgents,
               display: 'name',
               title: 'description',
               value: 'id'
@@ -3146,7 +3075,6 @@ export const wizardConfig = {
   'monitor-sql': {
     title: 'SQL',
     server: {
-      url: Api.deviceadmin.addDevice,
       params: {
         type: 'jdbc_query'
       }
@@ -3184,7 +3112,6 @@ export const wizardConfig = {
               width: 2
             },
             server: {
-              url: `${Api.devices.getDevicesByShape}?shape=Devices`,
               display: 'name',
                             // params : ['fatherid', 'mapid'],
               value: 'id'
@@ -3214,7 +3141,6 @@ export const wizardConfig = {
             type: 'combo',
             remote: true,
             server: {
-              url: Api.devices.getAgents,
               display: 'name',
               title: 'description',
               value: 'id'
@@ -3278,7 +3204,6 @@ export const wizardConfig = {
           type: 'combo',
           remote: true,
           server: {
-            url: Api.devices.getAgents,
             display: 'name',
             title: 'description',
             value: 'id'
@@ -3326,7 +3251,6 @@ export const wizardConfig = {
   'monitor-web': {
     title: 'WebService',
     server: {
-      url: Api.deviceadmin.addDevice,
       params: {
         type: 'Webservice'
       }
@@ -3392,7 +3316,6 @@ export const wizardConfig = {
           type: 'combo',
           remote: true,
           server: {
-            url: Api.devices.getAgents,
             display: 'name',
             title: 'description',
             value: 'id'
@@ -3430,7 +3353,6 @@ export const wizardConfig = {
   'monitor-db-table': {
     title: 'SQL',
     server: {
-      url: Api.deviceadmin.addDevice,
       params: {
         type: 'DBTableMonitor'
       }
@@ -3483,7 +3405,6 @@ export const wizardConfig = {
             type: 'combo',
             remote: true,
             server: {
-              url: Api.devices.getAgents,
               display: 'name',
               title: 'description',
               value: 'id'
@@ -3534,7 +3455,6 @@ export const wizardConfig = {
   'devicerule': {
     title: 'Rule',
     server: {
-      url: Api.rule.addNewRuleForDevice,
       params: {}
     },
     steps: [ {
@@ -3588,7 +3508,6 @@ export const wizardConfig = {
           width: 2
         },
         server: {
-          url: Api.rule.getCategories,
           display: 'name',
           value: 'id'
         }
@@ -3661,7 +3580,6 @@ export const wizardConfig = {
   'tplrule': {
     title: 'Rule',
     server: {
-      url: Api.rule.addNewPhysicalName,
       params: {}
     },
     steps: [ {
@@ -3710,7 +3628,6 @@ export const wizardConfig = {
         remote: true,
         multiple: true,
         server: {
-          url: Api.devices.getDeviceTypes,
           root: ['object'],
           display: 'devicename',
           value: 'id'
@@ -3823,7 +3740,6 @@ export const wizardEditConfig = {
   'server': {
     title: 'Server',
     server: {
-      url: Api.deviceadmin.addWindowsServer,
       params: {}
     },
     steps: [{
@@ -3842,7 +3758,6 @@ export const wizardEditConfig = {
         type: 'combo',
         remote: true,
         server: {
-          url: Api.devices.getAgents,
           display: 'name',
           title: 'description',
           value: 'id'
@@ -3892,7 +3807,6 @@ export const wizardEditConfig = {
             type: 'attach',
             width: 3
           },
-          url: Api.upload.uploadImage,
 
           name: 'customimage'
         }, {
@@ -3910,7 +3824,6 @@ export const wizardEditConfig = {
   'website': {
     title: 'Website',
     server: {
-      url: Api.deviceadmin.addWebsite,
       params: {
         credential: -1
       }
@@ -3931,7 +3844,6 @@ export const wizardEditConfig = {
         type: 'combo',
         remote: true,
         server: {
-          url: Api.devices.getAgents,
           display: 'name',
           title: 'description',
           value: 'id'
@@ -3969,7 +3881,6 @@ export const wizardEditConfig = {
           type: 'attach',
           width: 3
         },
-        url: Api.upload.uploadImage,
 
         name: 'customimage'
       }, commonconfig.info, commonconfig.enablecheck]
@@ -3979,7 +3890,6 @@ export const wizardEditConfig = {
   'group': {
     title: 'Group',
     server: {
-      url: Api.deviceadmin.addGroup,
       params: {}
     },
     steps: [{
@@ -4001,7 +3911,6 @@ export const wizardEditConfig = {
           type: 'attach',
           width: 3
         },
-        url: Api.upload.uploadImage,
 
         name: 'customimage'
       }]
@@ -4011,7 +3920,6 @@ export const wizardEditConfig = {
   'router': {
     title: 'Router',
     server: {
-      url: Api.deviceadmin.addRouter,
       params: {
         credential: -1
       }
@@ -4032,7 +3940,6 @@ export const wizardEditConfig = {
         type: 'combo',
         remote: true,
         server: {
-          url: Api.devices.getAgents,
           display: 'name',
           title: 'description',
           value: 'id'
@@ -4071,7 +3978,6 @@ export const wizardEditConfig = {
           type: 'attach',
           width: 3
         },
-        url: Api.upload.uploadImage,
 
         name: 'customimage'
       }]
@@ -4081,7 +3987,6 @@ export const wizardEditConfig = {
   'firewall': {
     title: 'Firewall',
     server: {
-      url: Api.deviceadmin.addFirewall,
       params: {
         credential: -1
       }
@@ -4102,7 +4007,6 @@ export const wizardEditConfig = {
         type: 'combo',
         remote: true,
         server: {
-          url: Api.devices.getAgents,
           display: 'name',
           title: 'description',
           value: 'id'
@@ -4141,7 +4045,6 @@ export const wizardEditConfig = {
           type: 'attach',
           width: 3
         },
-        url: Api.upload.uploadImage,
 
         name: 'customimage'
       }]
@@ -4151,7 +4054,6 @@ export const wizardEditConfig = {
   'internet': {
     title: 'Internet',
     server: {
-      url: Api.deviceadmin.addInternet,
       params: {
         credential: -1
       }
@@ -4172,7 +4074,6 @@ export const wizardEditConfig = {
         type: 'combo',
         remote: true,
         server: {
-          url: Api.devices.getAgents,
           display: 'name',
           title: 'description',
           value: 'id'
@@ -4211,7 +4112,6 @@ export const wizardEditConfig = {
           type: 'attach',
           width: 3
         },
-        url: Api.upload.uploadImage,
 
         name: 'customimage'
       }]
@@ -4221,7 +4121,6 @@ export const wizardEditConfig = {
   'db-mysql': {
     title: 'MySQL DB',
     server: {
-      url: Api.deviceadmin.addMYSQLDB,
       params: {}
     },
     steps: [{
@@ -4315,7 +4214,6 @@ export const wizardEditConfig = {
           type: 'attach',
           width: 3
         },
-        url: Api.upload.uploadImage,
 
         name: 'customimage'
       }]
@@ -4324,7 +4222,6 @@ export const wizardEditConfig = {
       type: 'combo',
       remote: true,
       server: {
-        url: Api.devices.getAgents,
         display: 'name',
         title: 'description',
         value: 'id'
@@ -4350,7 +4247,6 @@ export const wizardEditConfig = {
   'db-oracle': {
     title: 'Oracle DB',
     server: {
-      url: Api.deviceadmin.addOracleDB,
       params: {}
     },
     steps: [{
@@ -4444,7 +4340,6 @@ export const wizardEditConfig = {
           type: 'attach',
           width: 3
         },
-        url: Api.upload.uploadImage,
 
         name: 'customimage'
       }]
@@ -4453,7 +4348,6 @@ export const wizardEditConfig = {
       type: 'combo',
       remote: true,
       server: {
-        url: Api.devices.getAgents,
         display: 'name',
         title: 'description',
         value: 'id'
@@ -4480,7 +4374,6 @@ export const wizardEditConfig = {
   'db-mssql': {
     title: 'Oracle DB',
     server: {
-      url: Api.deviceadmin.addMSSQLDB,
       params: {}
     },
     steps: [{
@@ -4574,7 +4467,6 @@ export const wizardEditConfig = {
           type: 'attach',
           width: 3
         },
-        url: Api.upload.uploadImage,
 
         name: 'customimage'
       }]
@@ -4583,7 +4475,6 @@ export const wizardEditConfig = {
       type: 'combo',
       remote: true,
       server: {
-        url: Api.devices.getAgents,
         display: 'name',
         title: 'description',
         value: 'id'
@@ -4612,7 +4503,6 @@ export const wizardEditConfig = {
     title: 'Custom',
     width: POPUP_WIDTH_SM,
     server: {
-      url: Api.deviceadmin.addCustomDevice,
       params: {
 
       }
@@ -4654,7 +4544,6 @@ export const wizardEditConfig = {
           type: 'attach',
           width: 3
         },
-        url: Api.upload.uploadImage,
 
         name: 'customimage'
       }, {
@@ -4669,7 +4558,6 @@ export const wizardEditConfig = {
           type: 'combo',
           remote: true,
           server: {
-            url: Api.devices.getAgents,
             display: 'name',
             title: 'description',
             value: 'id'
@@ -4698,7 +4586,6 @@ export const wizardEditConfig = {
     title: 'PC',
     width: POPUP_WIDTH_SM,
     server: {
-      url: Api.deviceadmin.addpc,
       params: {
         credentialid: -1
       }
@@ -4761,7 +4648,6 @@ export const wizardEditConfig = {
           form: [{
             type: 'form', // specific for windows
             server: {
-              url: Api.devices.addCredentials,
               value: 'id',
               label: 'username'
             },
@@ -4829,7 +4715,6 @@ export const wizardEditConfig = {
           width: 3
         },
         server: {
-          url: `${Api.devices.getDevicesCredentials}?start=0&length=10`,
           root: 'data',
           display: 'userDescription',
           value: 'id'
@@ -4841,7 +4726,6 @@ export const wizardEditConfig = {
           type: 'attach',
           width: 3
         },
-        url: Api.upload.uploadImage,
 
         name: 'customimage'
       }, {
@@ -4856,7 +4740,6 @@ export const wizardEditConfig = {
           type: 'combo',
           remote: true,
           server: {
-            url: Api.devices.getAgents,
             display: 'name',
             title: 'description',
             value: 'id'
@@ -4885,7 +4768,6 @@ export const wizardEditConfig = {
     title: 'Antivirus',
     width: POPUP_WIDTH_SM,
     server: {
-      url: Api.deviceadmin.addAntivirus,
       params: {}
     },
     steps: [{
@@ -4917,7 +4799,6 @@ export const wizardEditConfig = {
           type: 'attach',
           width: 3
         },
-        url: Api.upload.uploadImage,
 
         name: 'customimage'
       }]
@@ -4928,7 +4809,6 @@ export const wizardEditConfig = {
     title: 'NAC',
     width: POPUP_WIDTH_SM,
     server: {
-      url: Api.deviceadmin.addNAC,
       params: {}
     },
     steps: [{
@@ -4958,7 +4838,6 @@ export const wizardEditConfig = {
           type: 'attach',
           width: 3
         },
-        url: Api.upload.uploadImage,
 
         name: 'customimage'
       }, {
@@ -4973,7 +4852,6 @@ export const wizardEditConfig = {
           type: 'combo',
           remote: true,
           server: {
-            url: Api.devices.getAgents,
             display: 'name',
             title: 'description',
             value: 'id'
@@ -5002,7 +4880,6 @@ export const wizardEditConfig = {
           },
           remote: true,
           server: {
-            url: `${Api.devices.getDevicesCredentials}?start=0&length=10`,
             root: 'data',
             display: 'userDescription',
             value: 'id'
@@ -5016,7 +4893,6 @@ export const wizardEditConfig = {
     title: 'Safend',
     width: POPUP_WIDTH_SM,
     server: {
-      url: Api.deviceadmin.addCustomDevice,
       params: {}
     },
     steps: [{
@@ -5051,7 +4927,6 @@ export const wizardEditConfig = {
           type: 'combo',
           remote: true,
           server: {
-            url: Api.devices.getAgents,
             display: 'name',
             title: 'description',
             value: 'id'
@@ -5080,7 +4955,6 @@ export const wizardEditConfig = {
     title: 'telephony',
     width: POPUP_WIDTH_SM,
     server: {
-      url: Api.deviceadmin.addCustomDevice,
       params: {}
     },
     steps: [{
@@ -5110,7 +4984,6 @@ export const wizardEditConfig = {
           type: 'attach',
           width: 3
         },
-        url: Api.upload.uploadImage,
 
         name: 'customimage'
       }, {
@@ -5125,7 +4998,6 @@ export const wizardEditConfig = {
           type: 'combo',
           remote: true,
           server: {
-            url: Api.devices.getAgents,
             display: 'name',
             title: 'description',
             value: 'id'
@@ -5154,7 +5026,6 @@ export const wizardEditConfig = {
     title: 'Jetro',
     width: POPUP_WIDTH_SM,
     server: {
-      url: Api.deviceadmin.addCustomDevice,
       params: {}
     },
     steps: [{
@@ -5184,7 +5055,6 @@ export const wizardEditConfig = {
           type: 'attach',
           width: 3
         },
-        url: Api.upload.uploadImage,
 
         name: 'customimage'
       }, commonconfig.info, commonconfig.enablecheck, {
@@ -5199,7 +5069,6 @@ export const wizardEditConfig = {
           type: 'combo',
           remote: true,
           server: {
-            url: Api.devices.getAgents,
             display: 'name',
             title: 'description',
             value: 'id'
@@ -5228,7 +5097,6 @@ export const wizardEditConfig = {
     title: 'Customers',
     width: POPUP_WIDTH_SM,
     server: {
-      url: Api.deviceadmin.addCustomDevice,
       params: {}
     },
     steps: [{
@@ -5258,7 +5126,6 @@ export const wizardEditConfig = {
           type: 'attach',
           width: 3
         },
-        url: Api.upload.uploadImage,
 
         name: 'customimage'
       }, {
@@ -5273,7 +5140,6 @@ export const wizardEditConfig = {
           type: 'combo',
           remote: true,
           server: {
-            url: Api.devices.getAgents,
             display: 'name',
             title: 'description',
             value: 'id'
@@ -5302,7 +5168,6 @@ export const wizardEditConfig = {
     title: 'DR Site',
     width: POPUP_WIDTH_SM,
     server: {
-      url: Api.deviceadmin.addCustomDevice,
       params: {}
     },
     steps: [{
@@ -5332,7 +5197,6 @@ export const wizardEditConfig = {
           type: 'attach',
           width: 3
         },
-        url: Api.upload.uploadImage,
 
         name: 'customimage'
       }, {
@@ -5347,7 +5211,6 @@ export const wizardEditConfig = {
           type: 'combo',
           remote: true,
           server: {
-            url: Api.devices.getAgents,
             display: 'name',
             title: 'description',
             value: 'id'
@@ -5376,7 +5239,6 @@ export const wizardEditConfig = {
     title: 'Partners',
     width: POPUP_WIDTH_SM,
     server: {
-      url: Api.deviceadmin.addCustomDevice,
       params: {}
     },
     steps: [{
@@ -5406,7 +5268,6 @@ export const wizardEditConfig = {
           type: 'attach',
           width: 3
         },
-        url: Api.upload.uploadImage,
 
         name: 'customimage'
       }, {
@@ -5421,7 +5282,6 @@ export const wizardEditConfig = {
           type: 'combo',
           remote: true,
           server: {
-            url: Api.devices.getAgents,
             display: 'name',
             title: 'description',
             value: 'id'
@@ -5450,7 +5310,6 @@ export const wizardEditConfig = {
     title: 'IPS',
     width: POPUP_WIDTH_SM,
     server: {
-      url: Api.deviceadmin.addIPS,
       params: {}
     },
     steps: [{
@@ -5480,7 +5339,6 @@ export const wizardEditConfig = {
           type: 'attach',
           width: 3
         },
-        url: Api.upload.uploadImage,
 
         name: 'customimage'
       }, {
@@ -5495,7 +5353,6 @@ export const wizardEditConfig = {
           type: 'combo',
           remote: true,
           server: {
-            url: Api.devices.getAgents,
             display: 'name',
             title: 'description',
             value: 'id'
@@ -5524,7 +5381,6 @@ export const wizardEditConfig = {
           },
           remote: true,
           server: {
-            url: `${Api.devices.getDevicesCredentials}?start=0&length=10`,
             root: 'data',
             display: 'userDescription',
             value: 'id'

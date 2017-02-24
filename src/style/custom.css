@@ -305,6 +305,10 @@ table.table tbody tr.selected {
     width: 900px;
 }
 
+.modal-w-wrap .modal-dialog {
+    width: initial;
+}
+
 .img-input {
     display: inline-block;
     position: relative;
