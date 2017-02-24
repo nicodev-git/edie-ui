@@ -29,9 +29,7 @@ import SettingAdvanced from './components/page/content/settings/advanced/Advance
 import DeviceContainer from './containers/page/content/device/DeviceContainer'
 import DeviceMain from './components/page/content/device/main/Main'
 import DeviceMainIncidentsContainer from './containers/page/content/device/main/incidents/MainIncidentsContainer'
-// import DeviceMainRulesContainer from './containers/page/content/device/main/rules/MainRulesContainer'
 import DeviceMainWorkflowsContainer from './containers/page/content/device/main/workflows/MainWorkflowsContainer'
-// import DeviceMainRawIncidentsContainer from './containers/page/content/device/main/raw-incidents/MainRawIncidentsContainer'
 import DeviceMainEventsContainer from './containers/page/content/device/main/events/MainEventsContainer'
 import DeviceMainAdvancedContainer from './containers/page/content/device/main/advanced/MainAdvancedContainer'
 import DeviceMainRuleAddContainer from './containers/page/content/device/main/ruleAdd/MainRulesAddContainer'
@@ -39,7 +37,6 @@ import DeviceMonitorsContainer from './containers/page/content/device/monitors/M
 import DeviceConnectedContainer from './containers/page/content/device/connected/ConnectedContainer'
 import DeviceInfoContainer from './containers/page/content/device/info/InfoContainer'
 import DeviceTopology from './containers/page/content/device/topology/TopologyContainer'
-import DeviceListContainer from './containers/DeviceListContainer'
 import GroupDevicesContainer from './containers/page/content/device/devices/DevicesContainer'
 
 import RequireAuth from './components/auth/RequireAuth'
@@ -97,7 +94,6 @@ export default(
     <Route path="/signin" component={SigninContainer} />
     <Route path="/signout" component={SignoutContainer} />
     <Route path="/signup" component={SignupContainer} />
-    <Route path="/devicelist" component={DeviceListContainer} />
   </Router>
 )
 
