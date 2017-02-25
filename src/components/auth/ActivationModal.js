@@ -1,7 +1,15 @@
 import React from 'react'
 import Modal from 'react-bootstrap-modal'
+import {showAlert} from 'components/shared/Alert'
 
 class ActivationModal extends React.Component {
+  componentWillUpdate (nextProps, nextState) {
+    const {activationMsg} = this.props
+    if (nextProps.activationMsg && activationMsg !== nextProps.activationMsg) {
+      showAlert(nextProps.activationMsg)
+    }
+  }
+
   onClickSignup () {
     const params = {
       email: this.refs.email.value,
@@ -16,6 +24,7 @@ class ActivationModal extends React.Component {
     //
     // const {host, port} = imadminConfig
     // this.props.register(`http://${host}:${port}/signup`, params)
+    this.props.activateUser(params)
   }
 
   onHide () {
@@ -23,6 +32,7 @@ class ActivationModal extends React.Component {
   }
 
   onClickClose () {
+
   }
 
   render () {

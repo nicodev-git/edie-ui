@@ -6,7 +6,10 @@ import {
   FETCH_USER_INFO,
   UPDATE_USER_INFO,
   OPEN_PROFILE_MODAL,
-  CLOSE_PROFILE_MODAL
+  CLOSE_PROFILE_MODAL,
+
+  ACTIVATE_USER,
+  ACTIVATE_MSG
 } from './types'
 
 import { apiError, authError } from './Errors'
@@ -114,6 +117,22 @@ export const closeProfileModal = () => {
   return (dispatch) => {
     dispatch({
       type: CLOSE_PROFILE_MODAL
+    })
+  }
+}
+
+export function activateUser (params) {
+  return dispatch => {
+    dispatch({type: ACTIVATE_MSG, msg: ''})
+    axios.get(`${ROOT_URL}/activate`, params).then(res => {
+      if (res.success) {
+        dispatch({type: ACTIVATE_USER})
+      } else {
+        dispatch({type: ACTIVATE_MSG, msg: res.info})
+      }
+    }).catch(e => {
+      console.log(e)
+      dispatch({type: ACTIVATE_MSG, msg: 'Server connection failed.'})
     })
   }
 }
