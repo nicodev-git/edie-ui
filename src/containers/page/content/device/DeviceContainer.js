@@ -4,14 +4,14 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { withRouter } from 'react-router'
 
-import { openDevice, fetchDevices } from '../../../../actions'
+import { openDevice, fetchDevices, fetchDevice } from '../../../../actions'
 
 @connect(
   state => ({
     devices: state.devices.devices,
     selectedDevice: state.dashboard.selectedDevice }),
   dispatch => ({
-    ...bindActionCreators({ openDevice, fetchDevices }, dispatch)
+    ...bindActionCreators({ openDevice, fetchDevices, fetchDevice }, dispatch)
   })
 )
 @withRouter

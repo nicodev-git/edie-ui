@@ -14,7 +14,7 @@ export default class Device extends React.Component {
     if (!this.props.selectedDevice) {
       if (!this.props.devices.length) {
         console.log('fetch devices')
-        this.props.fetchDevices()
+        this.props.fetchDevice(this.props.params.deviceId)
       } else {
         console.log('no fetching')
         // let deviceExists = false

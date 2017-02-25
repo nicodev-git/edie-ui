@@ -63,6 +63,28 @@ import { ROOT_URL } from './config'
 
 import { encodeUrlParams } from '../shared/Global'
 
+export const fetchDevice = (id) => {
+  if (!window.localStorage.getItem('token')) {
+    return dispatch => dispatch({ type: NO_AUTH_ERROR })
+  }
+  return (dispatch) => {
+    let config = {
+      headers: {
+        'Cache-Control': 'no-cache',
+        'X-Authorization': window.localStorage.getItem('token')
+      }
+    }
+    axios.get(`${ROOT_URL}/device/${id}`, config)
+      .then(response => {
+        dispatch({
+          type: FETCH_DEVICES,
+          payload: [response.data]
+        })
+      })
+      .catch(error => apiError(dispatch, error))
+  }
+}
+
 export const fetchDevices = () => {
   if (!window.localStorage.getItem('token')) {
     return dispatch => dispatch({ type: NO_AUTH_ERROR })
