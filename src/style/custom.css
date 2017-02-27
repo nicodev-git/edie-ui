@@ -355,3 +355,9 @@ table.table tbody tr.selected {
     min-width: 250px !important;
     white-space: nowrap;
 }
+
+/* Misc */
+.icon-black {
+    background: black;
+    border: 1px solid black;
+}

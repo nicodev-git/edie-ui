@@ -1,8 +1,13 @@
 import moment from 'moment'
 import {reduce, isNull, isUndefined, isArray} from 'lodash'
+import { ROOT_URL } from 'actions/config'
 
-export const imageBaseUrl = '/images/'
-export const extImageBaseUrl = '/externalpictures?name='
+export const imageBaseUrl = `${ROOT_URL}/images/`
+export const extImageBaseUrl = `${ROOT_URL}/externalpictures?name=`
+
+export function getCustomImageUrl (img) {
+  return `data:${img.mimeType};base64,${img.content}`
+}
 
 export const DragTypes = {
   DEVICE: 'device',
