@@ -12,6 +12,9 @@ import { AUTH_USER } from './actions/types'
 const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore)
 
 const initialState = {
+  auth: {
+    activationChecked: false
+  },
   dashboard: {
     stats: {
       open: 0,
@@ -69,6 +72,7 @@ const initialState = {
   },
 
   settings: {
+    envVarAvailable: false,
     envVars: [],
     identities: [],
     credentials: [],

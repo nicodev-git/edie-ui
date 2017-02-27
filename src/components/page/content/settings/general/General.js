@@ -127,17 +127,23 @@ export default class General extends React.Component {
             <label style={{width: '150px'}} className="margin-sm-top margin-sm-bottom">
               Customer ID
             </label>
-            <InlineEdit
-              text={this.getOptionValue('CUSTOMER_ID') || '[None]'}
-              paramName="message"
-              change={this.onChangeCustomerId.bind(this)}
-              className="inline"
-              ref="mobileIp"
-              minLength={0}
-            />
+            <label>{this.getOptionValue('CUSTOMER_ID') || '[None]'}</label>
           </div>
         </div>
       </div>
+    )
+  }
+
+  renderCustomerIdEdit () {
+    return (
+      <InlineEdit
+        text={this.getOptionValue('CUSTOMER_ID') || '[None]'}
+        paramName="message"
+        change={this.onChangeCustomerId.bind(this)}
+        className="inline"
+        ref="mobileIp"
+        minLength={0}
+      />
     )
   }
 

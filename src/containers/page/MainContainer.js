@@ -8,7 +8,10 @@ import {
   closeDevice,
   closeApiErrorModal,
 
-  activateUser
+  fetchEnvVars,
+  activateUser,
+  openActivationModal,
+  closeActivationModal
 } from 'actions'
 
 @connect((state) => {
@@ -17,21 +20,26 @@ import {
     apiErrorModalOpen: state.dashboard.apiErrorModalOpen,
     apiError: state.dashboard.apiError,
 
-    activated: state.auth.activated,
-    activationMsg: state.auth.activationMsg
+    activationModalOpen: state.auth.activationModalOpen,
+    activationMsg: state.auth.activationMsg,
+    envVarAvailable: state.settings.envVarAvailable,
+    envVars: state.settings.envVars
   }
 },
 dispatch => bindActionCreators({
   closeDevice,
   closeApiErrorModal,
 
-  activateUser
+  fetchEnvVars,
+  activateUser,
+  openActivationModal,
+  closeActivationModal
 }, dispatch))
 @withRouter
 export default class MainContainer extends Component {
   render () {
     return (
-      <Main closeDevice={closeDevice} {...this.props} />
+      <Main {...this.props} />
     )
   }
 }

@@ -1,5 +1,5 @@
 import React from 'react'
-import { startsWith } from 'lodash'
+import { findIndex, startsWith } from 'lodash'
 
 import TopbarContainer from '../../containers/page/topbar/TopbarContainer'
 import SidebarContainer from '../../containers/page/sidebar/SidebarContainer'
@@ -22,6 +22,21 @@ class Main extends React.Component {
     this.state = {
       user: null,
       minHeight: 1300
+    }
+  }
+
+  componentWillMount () {
+    this.props.fetchEnvVars()
+  }
+
+  componentWillUpdate (nextProps, nextState) {
+    if (nextProps.envVarAvailable && !this.props.envVarAvailable) {
+      const index = findIndex(nextProps.envVars, {envvars: {key: 'CUSTOMER_ID'}})
+      const customerId = index >= 0 ? nextProps.envVars[index].envvars.key : null
+      if (!customerId) {
+        // User is not activated yet.
+        this.props.openActivationModal()
+      }
     }
   }
 
@@ -93,6 +108,7 @@ class Main extends React.Component {
   }
 
   renderActivationModal () {
+    if (!this.props.activationModalOpen) return null
     return (
       <ActivationModal {...this.props}/>
     )
