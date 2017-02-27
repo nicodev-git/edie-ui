@@ -26,7 +26,7 @@ class MonitorTplModal extends React.Component { // eslint-disable-line react/no-
     const {monitorTpl, selectedTplImage} = this.props
     const tpl = assign({}, (monitorTpl || {}), formProps)
 
-    if (selectedTplImage) tpl.image = selectedTplImage.filename
+    if (selectedTplImage) tpl.image = selectedTplImage.uuid
 
     if (monitorTpl) {
       this.props.updateMonitorTemplate(tpl)

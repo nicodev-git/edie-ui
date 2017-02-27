@@ -30,7 +30,7 @@ class DeviceTplModal extends React.Component { // eslint-disable-line react/no-m
       monitors: this.state.monitors
     })
 
-    if (selectedTplImage) tpl.image = selectedTplImage.filename
+    if (selectedTplImage) tpl.image = selectedTplImage.uuid
 
     if (deviceTpl) { this.props.updateDeviceTemplate(tpl) } else {
       this.props.addDeviceTemplate(tpl)

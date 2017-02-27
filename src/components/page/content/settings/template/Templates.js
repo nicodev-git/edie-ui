@@ -11,6 +11,8 @@ import DeviceTplModal from './DeviceTplModal'
 import MonitorTplModal from './MonitorTplModal'
 import ImageUploaderModal from './ImageUploaderModal'
 
+import { showConfirm } from 'components/shared/Alert'
+
 export default class Templates extends Component {
   constructor (props) {
     super(props)
@@ -41,7 +43,7 @@ export default class Templates extends Component {
                 onClick={this.onClickRow.bind(this, index)}>
                 <td>{item.name}</td>
                 <td className="text-right fa-lg">
-                  <a href="javascript:;" className="margin-sm-left" onClick={this.onClickDeleteDeviceTpl.bind(this, item)}>
+                  <a href="javascript:;" className={`margin-sm-left ${item.origin === 'SYSTEM' ? 'hidden' : ''}`} onClick={this.onClickDeleteDeviceTpl.bind(this, item)}>
                       <i className="fa fa-trash-o" />
                   </a>
                 </td>
@@ -68,7 +70,7 @@ export default class Templates extends Component {
                 onClick={this.onClickRow.bind(this, index)}>
                 <td>{item.name}</td>
                 <td className="text-right fa-lg">
-                  <a href="javascript:;" className="margin-sm-left" onClick={this.onClickDeleteMonitorTpl.bind(this, item)}>
+                  <a href="javascript:;" className={`margin-sm-left ${item.origin === 'SYSTEM' ? 'hidden' : ''}`} onClick={this.onClickDeleteMonitorTpl.bind(this, item)}>
                       <i className="fa fa-trash-o" />
                   </a>
                 </td>
@@ -113,7 +115,10 @@ export default class Templates extends Component {
   }
 
   onClickDeleteDeviceTpl (item) {
-    this.props.deleteDeviceTemplate(item)
+    showConfirm('Click OK to remove.', btn => {
+      if (btn !== 'ok') return
+      this.props.deleteDeviceTemplate(item)
+    })
   }
 
   onClickAddMonitorTpl () {
@@ -125,7 +130,10 @@ export default class Templates extends Component {
   }
 
   onClickDeleteMonitorTpl (item) {
-    this.props.deleteMonitorTemplate(item)
+    showConfirm('Click OK to remove.', btn => {
+      if (btn !== 'ok') return
+      this.props.deleteMonitorTemplate(item)
+    })
   }
 
   onChangeType (e) {
