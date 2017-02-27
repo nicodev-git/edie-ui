@@ -104,7 +104,7 @@ fabric.BiGauge.create = function(options){
     deviceObj.onEditStateChange(config.canvas.map.editable);
     config.canvas.map.refinePosition(deviceObj);
     config.canvas.add(deviceObj);
-  });
+  }, {crossOrigin: 'anonymous'});
 
   return deviceObj;
 };

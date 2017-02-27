@@ -4,7 +4,7 @@ import { reduxForm, Field } from 'redux-form'
 import { assign } from 'lodash'
 import { connect } from 'react-redux'
 
-import { extImageBaseUrl } from '../../../../../shared/Global'
+import { getCustomImageUrl, extImageBaseUrl } from 'shared/Global'
 
 const Input = ({ input, label, type, meta: { touched, error } }) => (
   <fieldset className="form-group">
@@ -38,16 +38,14 @@ class MonitorTplModal extends React.Component { // eslint-disable-line react/no-
   renderImageUploader () {
     const {selectedTplImage, monitorTpl} = this.props
     let imgUrl = ''
-    if (selectedTplImage) imgUrl = selectedTplImage.url
+    if (selectedTplImage) imgUrl = getCustomImageUrl(selectedTplImage)
     else if (monitorTpl && monitorTpl.image) imgUrl = extImageBaseUrl + monitorTpl.image
     return (
       <fieldset className="form-group">
         <label className="col-md-3 margin-sm-top">Image:</label>
         <div className="col-md-9">
-          <img className="file-preview" src={imgUrl}/>
-          <a href="javascript:;" className="margin-sm-left"
-            style={{position: 'relative', cursor: 'pointer'}}
-            onClick={this.onClickChangeImage.bind(this)}>
+          <img className="file-preview icon-black" src={imgUrl}/>
+          <a href="javascript:;" className="margin-sm-left" style={{position: 'relative', cursor: 'pointer'}} onClick={this.onClickChangeImage.bind(this)}>
             Change
           </a>
         </div>

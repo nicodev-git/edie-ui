@@ -38,7 +38,7 @@ import {
 
     monitorTpl: state.settings.monitorTpl,
 
-    customImages: state.dashboard.images
+    images: state.dashboard.images
   }),
   dispatch => ({
     ...bindActionCreators({

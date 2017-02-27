@@ -288,10 +288,6 @@ fabric.ShapeLightning = fabric.util.createClass(fabric.Image, {
       id: config.id || me.id,
       scaleX: scaleX
     });
-
-//        	me.setSrc(config.imageUrl, function(){
-//        		me.reset();
-//        	});
   },
 
   remove: function () {
@@ -346,7 +342,7 @@ fabric.ShapeLightning.create = function(options){
     light.onEditStateChange(config.canvas.map.editable);
     light.setCoords();
     config.canvas.add(light);
-  });
+  }, {crossOrigin: 'anonymous'});
 
   return light;
 };

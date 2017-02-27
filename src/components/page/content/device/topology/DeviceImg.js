@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { DragSource } from 'react-dnd'
-import { DragTypes } from '../../../../../shared/Global'
+import { extImageBaseUrl, DragTypes } from 'shared/Global'
 
 const deviceSource = {
   beginDrag (props) {
@@ -68,7 +68,7 @@ class DeviceImg extends React.Component {
       connectDragSource(
         <a href="javascript:;">
           <span className="pull-left item-icon" ref="div">
-            <img src={`/externalpictures?name=${this.props.img}`}/>
+            <img src={`${extImageBaseUrl}${this.props.img}`}/>
           </span>
 
           <span className="item-text">

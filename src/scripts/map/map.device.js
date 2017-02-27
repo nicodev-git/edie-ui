@@ -270,7 +270,7 @@ fabric.Device = fabric.util.createClass(fabric.Object, {
     var statusImageObj = me.imageObj.statusImageObj;
     statusImageObj.setSrc(src, function(){
 
-    });
+    }, {crossOrigin: 'anonymous'});
   },
 
   updateLines: function(group, diff, object) {
@@ -306,7 +306,7 @@ fabric.Device = fabric.util.createClass(fabric.Object, {
 
         scaleX: 1,
         scaleY: 1,
-      });
+      }, {crossOrigin: 'anonymous'});
       if(config.type == "genericdevice"){
         imageObj.setFill('red');
       }
@@ -345,11 +345,11 @@ fabric.Device = fabric.util.createClass(fabric.Object, {
       me.updateLines();
 
       me.canvas.renderAll();
-    });
+    }, {crossOrigin: 'anonymous'});
 
     statusImageObj.setSrc(config.statusImageUrl, function(){
       me.canvas.renderAll();
-    });
+    }, {crossOrigin: 'anonymous'});
   },
 
   updateImageByFilter: function(z) {
@@ -486,7 +486,7 @@ fabric.Device.create = function(options, callback){
     }
 
     callback && callback(deviceObj);
-  });
+  }, {crossOrigin: 'anonymous'});
 
   //Label
   var labelObj = new fabric.DeviceLabel.create({
@@ -514,7 +514,7 @@ fabric.Device.create = function(options, callback){
     imageObj.updateStatusImage();
 
     config.canvas.add(statusImageObj);
-  });
+  }, {crossOrigin: 'anonymous'});
 
   //Now Create
   var deviceObj = new fabric.Device({

@@ -1,8 +1,7 @@
 import React from 'react'
 import Modal from 'react-bootstrap-modal'
-import { concat } from 'lodash'
 
-const images = ['group.png', 'telephony.png', 'jetro.png', 'building2.png', 'building1.png', 'partners.png', 'windows.png', 'linux.png', 'router.png', 'firewall.png', 'inticon.png', 'website.png', 'db2.png', 'pcs.png', 'antivirus.png', 'nac.png', 'usb.png', 'ips.png', 'graph.png', 'sqlgaugeicon.png', 'thermo.png', 'longhub.png', 'text.png', 'port.png']
+import { getCustomImageUrl } from 'shared/Global'
 
 export default class ImageUploaderModal extends React.Component {
   constructor (props) {
@@ -10,16 +9,11 @@ export default class ImageUploaderModal extends React.Component {
     this.state = {
       open: true,
 
-      icons: [],
       currentIcon: props.selected || {}
     }
   }
 
   componentWillMount () {
-    this.setState({
-      icons: images.map(i => ({ url: `/images/${i}`, filename: i }))
-    })
-
     this.props.fetchImages()
   }
 
@@ -61,13 +55,6 @@ export default class ImageUploaderModal extends React.Component {
   render () {
     const {currentIcon} = this.state
 
-    const images = concat(this.state.icons, this.props.customImages.map(p => {
-      return {
-        url: `/externalpictures?name=${p.filename}`,
-        filename: p.filename
-      }
-    }))
-
     return (
       <Modal
         show={this.state.open}
@@ -80,15 +67,12 @@ export default class ImageUploaderModal extends React.Component {
             Change Image
           </h4>
         </div>
-        <div className="modal-body bootstrap-dialog-message">
+        <div className="modal-body bootstrap-dialog-message" style={{background: 'black'}}>
 
           <div className="dropdown-image">
-            {images.map(item => (
-              <div key={item.url}
-                className={currentIcon.url === item.url ? 'active' : ''}
-                onClick={this.onClickItem.bind(this, item)}
-              >
-                <img src={item.url}/>
+            {this.props.images.map(item => (
+              <div key={item.id} className={currentIcon.id === item.id ? 'active' : ''} onClick={this.onClickItem.bind(this, item)}>
+                <img src={getCustomImageUrl(item)}/>
               </div>
             ))}
           </div>
@@ -116,10 +100,8 @@ export default class ImageUploaderModal extends React.Component {
               />
             </a>
 
-            <a href="javascript:;" className="btn btn-default btn-sm"
-              onClick={this.onClickClose.bind(this)}>Cancel</a>
-            <a href="javascript:;" className="btn btn-primary btn-sm margin-sm-left"
-              onClick={this.onClickSave.bind(this)}>OK</a>
+            <a href="javascript:;" className="btn btn-default btn-sm" onClick={this.onClickClose.bind(this)}>Cancel</a>
+            <a href="javascript:;" className="btn btn-primary btn-sm margin-sm-left" onClick={this.onClickSave.bind(this)}>OK</a>
           </div>
         </div>
       </Modal>

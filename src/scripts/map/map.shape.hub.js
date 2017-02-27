@@ -123,7 +123,7 @@ fabric.ShapeHub.create = function(options){
       width: config.width,
       height:config.height,
       angle: config.angle || 0,
-    });
+    }, {crossOrigin: 'anonymous'});
 
     hub.onEditStateChange(config.canvas.map.editable);
 
