@@ -129,6 +129,8 @@ class Map extends React.Component {
     // window.addEventListener('resize', this.updateDimensions)
 
     this.props.fetchDeviceTemplates()
+
+
   }
 
   componentWillUnmount () {
@@ -184,104 +186,6 @@ class Map extends React.Component {
         this.toolbar.hideDeviceMenu()
       }
     }
-  }
-
-  onUserInfoLoaded (user) {
-  }
-
-  getMap (force) {
-    this.curMapDraw++
-    let callDraw = this.curMapDraw
-    let { ROOT_URL } = this.props
-
-    let currentmap = this.state.mapId
-    if (typeof currentmap === 'object') {
-      console.error('Found object for map id.')
-      console.log(currentmap)
-      return
-    }
-
-    $('.option.loader').show() // eslint-disable-line no-undef
-    $('.option.mapalert').hide() // eslint-disable-line no-undef
-
-    let callLoadMap = $.get(`${ROOT_URL}${Api.dashboard.getDevicesForMap}`, { // eslint-disable-line no-undef
-      mapid: currentmap,
-      fatherid: 0,
-      sid: this.context.sid
-    })
-
-    let callLoadLines = $.get(`${ROOT_URL}${Api.dashboard.getLineByLine}`, { // eslint-disable-line no-undef
-      mapid: currentmap
-    })
-
-    return $.when(callLoadMap, callLoadLines).done((resMap, resLines) => { // eslint-disable-line no-undef
-      if (callDraw !== this.curMapDraw) return
-
-      $('.option.loader').hide() // eslint-disable-line no-undef
-
-            // Cancel when device adding
-      if (!force && this.state.editable) return
-
-            // Cancel when map changed;
-      if (currentmap !== this.state.mapId) return
-
-      let [arrNewDevices, , xhrMap] = resMap
-      let [arrNewLines, , xhrLines] = resLines
-
-            // Devices
-      const strNewDevices = xhrMap.responseText
-      let mapUpdated = this.strLastDevices !== strNewDevices
-      this.arrLastDevices = this.arrDevices
-      if (mapUpdated) {
-        this.arrDevices = arrNewDevices
-        this.strLastDevices = strNewDevices
-      }
-
-            // Lines
-      const strNewLines = xhrLines.responseText
-      let connUpdated = this.strLastLines !== strNewLines
-      this.arrLastLines = this.arrLines
-      if (connUpdated) {
-        this.strLastLines = strNewLines
-                // this.arrLines = arrNewLines
-
-        this.arrLines = {}// assign({}, this.arrLastLines)
-        $.each(arrNewLines, (i, item) => { // eslint-disable-line no-undef
-          this.arrLines[item.lineId] = {
-            'id': item.id,
-            'type': item.type,
-            'fromDeviceid': item.fromDevice,
-            'fromPoint': item.fromPoint,
-            'toDeviceid': item.toDevice,
-            'toPoint': item.toPoint,
-            'linecolor': item.linecolor,
-            'linewidth': item.linewidth
-          }
-        })
-      }
-
-            // Draw
-      if (mapUpdated || connUpdated) {
-        this.drawMap(this.arrDevices, this.arrLines, this.arrLastDevices, this.arrLastLines, force)
-      }
-    }).fail(() => {
-      if (callDraw !== curMapDraw) return // eslint-disable-line no-undef
-
-      $('.option.loader').hide() // eslint-disable-line no-undef
-      $('.option.mapalert').show() // eslint-disable-line no-undef
-    }).always(() => {
-
-            // if (!this.state.editable) this.enqueueMapLoad()
-    })
-  }
-
-  enqueueMapLoad () {
-    clearTimeout(this.mapTimer)
-        // this.mapTimer = setTimeout(() => {
-        //
-        //     this.getMap()
-        //
-        // }, 100/*this.props.drawMapInterval*/)
   }
 
   drawMap (deviceData, lineData, prevDeviceData, prevLineData, force) {
@@ -530,8 +434,6 @@ class Map extends React.Component {
     this.setState({
       editable: !this.state.editable,
       selectedItem: {}
-    }, () => {
-      if (!this.state.editable) { this.enqueueMapLoad() }
     })
   }
 
@@ -630,10 +532,6 @@ class Map extends React.Component {
   onReceiveMapUpdated (msg) {
     const mapId = parseInt(msg.content)
     if (!mapId) return
-
-    if (this.state.mapId === mapId && !this.state.editable) {
-      this.enqueueMapLoad()
-    }
   }
 
     // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
