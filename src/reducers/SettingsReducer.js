@@ -183,7 +183,7 @@ export default function (state = {}, action) {
         // ///////////////////////////////////////////////////
 
     case FETCH_ENV_VARS:
-      return { ...state, envVars: action.data }
+      return { ...state, envVars: action.data, envVarAvailable: true }
 
     case ADD_ENV_VAR: {
       const envVars = concat(state.envVars || [], action.data)

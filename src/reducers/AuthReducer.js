@@ -4,6 +4,8 @@ import {
   AUTH_ERROR,
   FETCH_MESSAGE,
 
+  OPEN_ACTIVATION_MODAL,
+  CLOSE_ACTIVATION_MODAL,
   ACTIVATE_USER,
   ACTIVATE_MSG
 } from '../actions/types'
@@ -20,9 +22,14 @@ export default function (state = {}, action) {
       return { ...state, message: action.payload }
 
     case ACTIVATE_USER:
-      return { ...state, activated: true }
+      return { ...state }
     case ACTIVATE_MSG:
       return { ...state, activationMsg: action.msg }
+
+    case OPEN_ACTIVATION_MODAL:
+      return { ...state, activationModalOpen: true }
+    case CLOSE_ACTIVATION_MODAL:
+      return { ...state, activationModalOpen: false }
   }
   return state
 }

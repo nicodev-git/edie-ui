@@ -8,6 +8,8 @@ import {
   OPEN_PROFILE_MODAL,
   CLOSE_PROFILE_MODAL,
 
+  OPEN_ACTIVATION_MODAL,
+  CLOSE_ACTIVATION_MODAL,
   ACTIVATE_USER,
   ACTIVATE_MSG
 } from './types'
@@ -124,9 +126,11 @@ export const closeProfileModal = () => {
 export function activateUser (params) {
   return dispatch => {
     dispatch({type: ACTIVATE_MSG, msg: ''})
-    axios.get(`${ROOT_URL}/activate`, params).then(res => {
+    axios.get(`${ROOT_URL}/activate`, {params}).then(response => {
+      const res = response.data
       if (res.success) {
         dispatch({type: ACTIVATE_USER})
+        dispatch(closeActivationModal())
       } else {
         dispatch({type: ACTIVATE_MSG, msg: res.info})
       }
@@ -134,5 +138,17 @@ export function activateUser (params) {
       console.log(e)
       dispatch({type: ACTIVATE_MSG, msg: 'Server connection failed.'})
     })
+  }
+}
+
+export function openActivationModal () {
+  return dispatch => {
+    dispatch({type: OPEN_ACTIVATION_MODAL})
+  }
+}
+
+export function closeActivationModal () {
+  return dispatch => {
+    dispatch({type: CLOSE_ACTIVATION_MODAL})
   }
 }
