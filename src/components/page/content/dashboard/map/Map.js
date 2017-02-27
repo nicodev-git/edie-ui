@@ -129,8 +129,6 @@ class Map extends React.Component {
     // window.addEventListener('resize', this.updateDimensions)
 
     this.props.fetchDeviceTemplates()
-
-
   }
 
   componentWillUnmount () {
