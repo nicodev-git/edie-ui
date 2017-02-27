@@ -127,6 +127,12 @@ class Map extends React.Component {
     }
 
     // window.addEventListener('resize', this.updateDimensions)
+    const mapHeight = Math.max(parseInt(window.innerWidth / 3), this.state.mapHeight)
+    setTimeout(() => {
+      this.setState({ mapHeight }, () => {
+        window.dispatchEvent(new window.Event('resize'))
+      })
+    }, 10)
 
     this.props.fetchDeviceTemplates()
   }
