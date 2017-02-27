@@ -53,7 +53,7 @@ export const fetchImages = () => {
     return dispatch => dispatch({ type: NO_AUTH_ERROR })
   }
   return (dispatch) => {
-    axios.get(`${ROOT_URL}/customImage`)
+    axios.get(`${ROOT_URL}/customImage?size=100`)
       .then(response => fetchImagesSuccess(dispatch, response))
       .catch(error => apiError(dispatch, error))
   }
