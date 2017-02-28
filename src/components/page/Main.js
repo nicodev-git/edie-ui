@@ -1,5 +1,6 @@
 import React from 'react'
 import { findIndex, startsWith } from 'lodash'
+import ReactTooltip from 'react-tooltip'
 
 import TopbarContainer from '../../containers/page/topbar/TopbarContainer'
 import SidebarContainer from '../../containers/page/sidebar/SidebarContainer'
@@ -136,6 +137,7 @@ class Main extends React.Component {
           {this.renderDashboard()}
           {children || null}
         </div>
+        <ReactTooltip />
         {this.renderActivationModal()}
         {this.renderApiError()}
       </div>
