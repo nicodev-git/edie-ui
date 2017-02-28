@@ -23,5 +23,4 @@ export default connect(
     deviceMenu,
     contentType
   })
-  // dispatch => ({  }) // Not needed now
 )(SidebarContainer)

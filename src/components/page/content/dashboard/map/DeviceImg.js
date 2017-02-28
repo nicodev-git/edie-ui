@@ -15,7 +15,7 @@ const deviceSource = {
   },
 
   endDrag () {
-    // console.log(arguments)
+
   }
 }
 
@@ -38,31 +38,11 @@ class DeviceImg extends React.Component {
   }
 
   componentDidMount () {
-    // let img = new Image()
-    //
-    // img.onload = () => {
-    //
-    //     var oc = document.createElement('canvas'),
-    //         octx = oc.getContext('2d');
-    //     oc.width = 48;
-    //     oc.height = 48;
-    //     octx.drawImage(img, 0, 0, oc.width, oc.height);
-    //
-    //     let img2 = new Image()
-    //     img2.src = oc.toDataURL()
-    //
-    //     this.props.connectDragPreview(
-    //         img2//this.refs.img
-    //     )
-    //
-    //     oc.remove()
-    // }
-    //
-    // img.src = "/images/" + this.props.img
+
   }
 
   render () {
-    const { connectDragSource } = this.props // { connectDragSource, isDragging }
+    const { connectDragSource } = this.props
 
     return (
       connectDragSource(
@@ -78,22 +58,6 @@ class DeviceImg extends React.Component {
       )
     )
   }
-
-  // render() {
-  //
-  //     return (
-  //         <a href="javascript:;">
-  //             <span className="pull-left item-icon" ref="div">
-  //                 <img src={"/images/" + this.props.img} data-monitortype={this.props.monitortype}/>
-  //             </span>
-  //
-  //             <span className="item-text">
-  //                 <strong>{this.props.title}</strong>
-  //             </span>
-  //         </a>
-  //     )
-  // }
 }
 
 export default DragSource(DragTypes.DEVICE, deviceSource, collect)(DeviceImg)
-// export default DeviceImg;

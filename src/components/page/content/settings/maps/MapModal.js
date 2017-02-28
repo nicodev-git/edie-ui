@@ -63,9 +63,6 @@ class MapModal extends Component { // eslint-disable-line react/no-multi-comp
 
   render () {
     const { handleSubmit } = this.props
-    // const { map, handleSubmit } = this.props // Never used
-    // const isDefault = false// map ? user.defaultmap === map.id : false // Never used
-
     return (
       <Modal
         show

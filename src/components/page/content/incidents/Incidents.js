@@ -1,7 +1,6 @@
 import React from 'react'
 
 import {
-  // findIndex, // Never used
   assign,
   concat
 } from 'lodash'
@@ -147,8 +146,6 @@ export default class Incidents extends React.Component {
 
         x: x,
         y: me.targetCenter.y + y,
-                // x: me.targetCenter.x + (Math.random() - 0.5) * 2 * me.targetCenter.x * 0.8,
-                // y: me.targetCenter.y + (Math.random() - 0.5) * 2 * me.targetCenter.y * 0.8,
         img: '/images/ninja.png',
 
         visible: false,
@@ -218,8 +215,6 @@ export default class Incidents extends React.Component {
 
         x: x,
         y: me.targetCenter.y + y,
-                // x: me.targetCenter.x + (Math.random() - 0.5) * 2 * me.targetCenter.x * 0.8,
-                // y: me.targetCenter.y + (Math.random() - 0.5) * 2 * me.targetCenter.y * 0.8,
         img: `/images/${icon.img}`,
         devicetype: icon.type,
         visible: false,
@@ -455,8 +450,6 @@ export default class Incidents extends React.Component {
       })
     })
 
-        // me.updateProgress();
-
     me.currentPlay.scene = scene
     me.currentPlay.stopped = false
     me.currentPlay.screen = 0
@@ -470,8 +463,6 @@ export default class Incidents extends React.Component {
     let me = this
     $(me.refs.mapsvg).children().remove() // eslint-disable-line no-undef
     me.svg.append('text').attr('class', 'layer')
-        // p.find('.attacker-popup').remove();
-
     me.connections = []
     me.setState({
       sliderPos: 0
@@ -546,7 +537,6 @@ export default class Incidents extends React.Component {
           let y = attack.from.y - 20
           let row = seat
           if (row > 0) {
-                        // + parseInt(seat / 3) * 65
             if (row % 2 === 0) y += 65 * Math.ceil(row / 2)
             else y -= 65 * Math.ceil(row / 2)
           }
@@ -741,9 +731,6 @@ export default class Incidents extends React.Component {
         } else {
 
         }
-
-                // .transition().duration($scope.fadeOutSpeed * 2);
-
         device.labelObj = txt
       }
     }
@@ -783,45 +770,6 @@ export default class Incidents extends React.Component {
     })
 
     return info
-
-        // var me = this;
-        // var $scope = me.scope;
-        // countryDrillDownContainer
-
-        // var div = p.find('#attackerInfo').clone().removeAttr('id').addClass('attacker-popup');
-        // in
-        // div.find('#inc-ip').text("IP: " + ip);
-        // div.find('#inc-time').text("Time: " +
-        //     $.format.date(time, 'HH:mm:ss'));
-        // div.find('#inc-monitortype').text("Incident: " + monitortype);
-        //
-        // div.insertAfter(p.find('#attackerInfo'));
-        // div.css({
-        //     position: 'absolute',
-        //     left: left,
-        //     top: top,
-        // });
-
-        // var bubble = d3.select(div[0]);
-        //
-        // bubble.data([{callback: callback}])
-        //     .style('opacity', 0)
-        //     .attr('trans', 0)
-        //     .transition().duration($scope.fadeOutSpeed * 2)
-        //     .style('opacity', 1)
-        //     .attr('trans', 1)
-        //     .transition().duration($scope.fadeOutSpeed / 2)
-        //     .style('opacity', 0)
-        //     .attr('trans', 2)
-        //     .remove()
-        //     .each('end', (d) => {
-        //         var callback = d.callback;
-        //         if(callback) callback();
-        //     });
-        //
-        // div.show();
-        //
-        // return bubble;
   }
 
     // /////////////////////////////////////////////////////////////////////////
@@ -938,11 +886,6 @@ export default class Incidents extends React.Component {
     let me = this
 
     if (me.currentPlay && !me.currentPlay.paused && !me.currentPlay.stopped) {
-            // me.slider.update({
-            //     from: me.slider.options.from + 1
-            // });
-            //
-            // me.updateProgress();
       me.setState({
         sliderPos: me.state.sliderPos + 1
       }, () => {
@@ -974,7 +917,6 @@ export default class Incidents extends React.Component {
     let me = this
     const {
       mode
-      // scenarioCount // Never used
     } = this.state
 
     let currenttime = ''

@@ -77,7 +77,6 @@ export default class CopyRuleModal extends React.Component {
 
   loadDevicesLeft () {
     return $.get(`${ROOT_URL}${Api.dashboard.getDevices}`, { // eslint-disable-line no-undef
-      // fatherid: 0,
     }).done(res => {
       const items = this.filterDevices(res, true)
       this.setState({
@@ -97,8 +96,6 @@ export default class CopyRuleModal extends React.Component {
           devicesRight: items,
           selectedDeviceRight: items[0] ? items[0].id : 0
         })
-
-          // me.tbRight && me.tbRight.fnDraw();
       }).fail(function () {
 
       })

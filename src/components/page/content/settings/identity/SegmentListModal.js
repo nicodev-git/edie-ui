@@ -89,8 +89,6 @@ export default class SegmentListModal extends React.Component {
   }
 
   render () {
-    // const { identity } = this.props // Never used
-
     return (
       <Modal
         show={this.state.open}

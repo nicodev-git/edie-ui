@@ -76,7 +76,6 @@ fabric.BiPieChart.create = function(options){
 
   /////////
   var svgDiv = $('<div/>').css({position: 'absolute', width: 200, height: 200, top: 0});
-  //$('body').append(svgDiv);
   $(config.canvas.lowerCanvasEl).parent().prepend(svgDiv);
 
   var plot = $.plot(svgDiv, config.graphdata, {
@@ -134,31 +133,6 @@ fabric.BiPieChart.create = function(options){
       }, 0);
     }
   });
-
-
-
-  /*
-   fabric.parseSVGDocument(svgDiv.find('svg')[0], function(objects, meta){
-   for(var i = objects.length - 1; i >=0; i--) {
-   objects[i].hasBorders = false;
-   objects[i].canvas = config.canvas;
-   deviceObj.addWithUpdate(objects[i]);
-   }
-   plot.destroy();
-   svgDiv.remove();
-
-   deviceObj.left = config.left;
-   deviceObj.top = config.top;
-   //deviceObj.width = 95;
-   //deviceObj.height = 140;
-   deviceObj.scaleX = config.width / deviceObj.width;
-   deviceObj.scaleY = config.height / deviceObj.height;
-
-   config.canvas.add(deviceObj);
-   config.canvas.renderAll();
-   });
-   */
-  /////////
 
   return deviceObj;
 };

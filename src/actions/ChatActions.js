@@ -11,17 +11,11 @@ import {
 import { apiError } from './Errors'
 import { showAlert } from '../components/shared/Alert'
 import { ROOT_URL } from './config'
+import { getAuthConfig, getParamsConfig } from './util'
 
 export const loadIncidents = (params, rooms) => {
   return (dispatch) => {
-    let config = {
-      headers: {
-        'Cache-Control': 'no-cache',
-        'X-Authorization': window.localStorage.getItem('token')
-      },
-      params: params
-    }
-    axios.get(`${ROOT_URL}/api/incidents/getUnfixedIncidentsQuick`, config)
+    axios.get(`${ROOT_URL}/api/incidents/getUnfixedIncidentsQuick`, getParamsConfig(params))
       .then(response => loadIncidentsSuccess(dispatch, response, rooms))
       .catch(error => apiError(dispatch, error))
   }
@@ -52,14 +46,7 @@ const loadIncidentsSuccess = (dispatch, response, rooms) => {
 
 export const loadIncidentUsers = (params) => {
   return (dispatch) => {
-    let config = {
-      headers: {
-        'Cache-Control': 'no-cache',
-        'X-Authorization': window.localStorage.getItem('token')
-      },
-      params: params
-    }
-    axios.get(`${ROOT_URL}/api/chat/users`, config)
+    axios.get(`${ROOT_URL}/api/chat/users`, getParamsConfig(params))
       .then(response => loadIncidentUsersSuccess(dispatch, response))
       .catch(error => apiError(dispatch, error))
   }
@@ -87,13 +74,7 @@ const loadIncidentUsersSuccess = (dispatch, response) => {
 
 export const uploadChatImage = (data) => {
   return (dispatch) => {
-    let config = {
-      headers: {
-        'Cache-Control': 'no-cache',
-        'X-Authorization': window.localStorage.getItem('token')
-      }
-    }
-    axios.post(`${ROOT_URL}/api/upload/uploadImage`, data, config)
+    axios.post(`${ROOT_URL}/api/upload/uploadImage`, data, getAuthConfig())
       .then(response => uploadImageSuccess(dispatch, response))
       .catch(error => uploadError(dispatch, error))
   }

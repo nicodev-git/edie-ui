@@ -113,7 +113,6 @@ export default class DeviceSearchModal extends Component {
               items={this.props.incidentDevices}
               getItemValue={(item) => item.name}
               onSelect={(value, item) => {
-                // this.setState({ value, devices: [ item ] })
                 let {selected} = this.state
                 const index = findIndex(selected, {id: value})
                 if (index >= 0) return

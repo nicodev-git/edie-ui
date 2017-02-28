@@ -2,8 +2,6 @@ import React from 'react'
 import {
     ButtonGroup,
     Button,
-    // DropdownButton,
-    // MenuItem
 } from 'react-bootstrap'
 import { findIndex } from 'lodash'
 

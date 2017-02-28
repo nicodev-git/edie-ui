@@ -58,8 +58,6 @@ class DeviceDragLayer extends React.Component {
         {this.renderItem(itemType, item, getItemStyles(this.props))}
       </div>
     )
-
-    // return this.renderItem(itemType, item, getItemStyles(this.props))
   }
 }
 

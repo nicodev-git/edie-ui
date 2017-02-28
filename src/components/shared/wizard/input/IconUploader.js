@@ -46,66 +46,6 @@ export default class IconUploader extends React.Component {
     })
   }
 
-  // render2() {
-  //     let config = this.props.config
-  //     let values = this.props.values
-  //
-  //     let label, input
-  //     let width = util.calcWidth(config.width);
-  //
-  //     if(config.label !== null) {
-  //         if(config.label.type === 'place'){
-  //
-  //         } else {
-  //             label = this.props.buildLabel(config.label)
-  //             width = util.calcWidth(config.width) - util.calcWidth(config.label.width)
-  //         }
-  //     }
-  //
-  //     let uploader = (
-  //         <div className={"col-md-" + width}>
-  //             <img className="file-preview" src={this.state.currentIcon.url}/>
-  //             <ul className="dropdown-image">
-  //                 <li className="dropdown">
-  //                     <a href="#"><b className="caret"></b></a>
-  //                     <ul className="dropdown-menu">
-  //                         {this.state.icons.map(item => (
-  //                             <li key={item.url} onClick={this.onClickItem.bind(this, item)}>
-  //                                 <img src={item.url} />
-  //                             </li>
-  //                         ))}
-  //                     </ul>
-  //                 </li>
-  //             </ul>
-  //             <a href="javascript:;" style={{position: "relative", cursor: "pointer"}}>
-  //                 Add
-  //                 <input type="file" name="file"
-  //                        onChange={this.onChangeFile.bind(this)}
-  //                        style={{
-  //                             position: "absolute",
-  //                             top: 0,
-  //                             left: 0,
-  //                             right: 0,
-  //                             bottom: 0,
-  //                             margin: 0,
-  //                             padding: 0,
-  //                             fontSize: "20px",
-  //                             cursor: "pointer",
-  //                             opacity: 0,
-  //                        }}
-  //                 />
-  //             </a>
-  //
-  //             <InputField type="hidden"
-  //                         value={this.state.currentIcon.filename}
-  //                         name={config.name}
-  //                         ref="field"/>
-  //         </div>
-  //     )
-  //
-  //     return util.wrapInputs(label, uploader, config['useColumn'])
-  // }
-
   onClickItem (item, e) {
     let currentIcon = item
     this.setState({currentIcon})
@@ -123,7 +63,6 @@ export default class IconUploader extends React.Component {
     formData.append('sid', this.props.sid)
 
     input.value = ''
-    // upload/uploadImage
 
     $.ajax({ // eslint-disable-line no-undef
       url: Api.upload.uploadImage, // eslint-disable-line no-undef
@@ -160,10 +99,7 @@ export default class IconUploader extends React.Component {
 
   render () {
     let config = this.props.config
-    // let values = this.props.values // Never used
-
     let label
-    // let input //  Never used
     let width = util.calcWidth(config.width)
 
     if (config.label !== null) {

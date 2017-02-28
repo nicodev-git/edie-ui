@@ -6,19 +6,6 @@ export default class MonitorPicker extends React.Component {
     super(props)
     this.state = {
     }
-
-    // this.items = [
-    //     {title: 'Ping Monitor', img: 'port.png', type: 'monitor-ping'},
-    //     {title: 'Http Monitor', img: 'port.png', type: 'monitor-http'},
-    //     {title: 'Log Monitor', img: 'log-file.png', type: 'monitor-log-file'},
-    //     {title: 'File Monitor', img: 'file-monitor.png', type: 'monitor-file'},
-    //     {title: 'EventLog Monitor', img: 'port.png', type: 'monitor-eventlog'},
-    //     {title: 'Port Monitor', img: 'port.png', type: 'monitor-port'},
-    //     {title: 'Security Monitor', img: 'sql.png', type: 'monitor-security'},
-    //     {title: 'SQL Query', img: 'sql.png', type: 'monitor-sql'},
-    //     {title: 'Web Service', img: 'webservice.png', type: 'monitor-web'},
-    //     {title: 'DB Table Monitor', img: 'sql.png', type: 'monitor-db-table'},
-    // ]
   }
 
   componentWillMount () {

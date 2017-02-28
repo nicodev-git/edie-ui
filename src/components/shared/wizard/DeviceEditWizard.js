@@ -27,16 +27,7 @@ class DeviceEditWizard extends React.Component {
 
     this.mapping = {
       'text': this.buildText.bind(this),
-            // 'combo'     : this.buildCombo.bind(this),
-            // 'radiocombo': this.buildRadioCombo.bind(this),
       'check': this.buildCheck.bind(this),
-            // 'label'     : this.buildLabel.bind(this),
-            // 'password'  : this.buildPassword.bind(this),
-            // 'textarea'  : this.buildTextArea.bind(this),
-            //
-            // 'form'      : this.buildForm.bind(this),
-            // 'uploader'  : this.buildIconUploader.bind(this),
-
       'row': this.buildRow.bind(this)
     }
   }
@@ -63,7 +54,6 @@ class DeviceEditWizard extends React.Component {
   }
 
   buildContent (tab, index) {
-    // const include = tab.include // Never used
     const currentDevice = this.state.currentDevice
     let items = []
 
@@ -108,12 +98,6 @@ class DeviceEditWizard extends React.Component {
 
   buildInput (config) {
     let items = []
-
-    // if (this.props.hideNames && config.name) {
-    //     let found = this.props.hideNames.indexOf(config.name) >= 0
-    //     if (found) return items
-    // }
-
     config.type = config.type || ''
     let func = this.mapping[config.type.toLowerCase()]
 
@@ -153,14 +137,11 @@ class DeviceEditWizard extends React.Component {
 
   buildPassword (config) {
     let text = []
-    // let width = util.calcWidth(config.width) // Never used
-
     if (config.label !== null) {
       if (config.label.type === 'place') {
-                // input.attr('placeholder', config.label.text || '');
+
       } else {
         text.push(this.buildLabel(config.label))
-        // width = util.calcWidth(config.width) - util.calcWidth(config.label.width) // Never used
       }
     }
 
@@ -251,6 +232,4 @@ class DeviceEditWizard extends React.Component {
 
 export default reduxForm({
   form: 'deviceEditForm'
-  // destroyOnUnmount: false,
-  // validate
 })(DeviceEditWizard)

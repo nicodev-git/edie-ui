@@ -74,15 +74,6 @@ export default class Connected extends React.Component {
 
   loadNetStats (cb) {
     cb([])
-    // const {location} = this.props
-    // let props = location.state || {}
-    // const {device} = props
-    //
-    // $.get(Api.incidents.getNetStats, {
-    //     deviceid: device.id,
-    // }).done(res => {
-    //     cb && cb(res)
-    // })
   }
 
     // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -129,12 +120,7 @@ export default class Connected extends React.Component {
       let alpha = device.alpha
       let x = o.center.x + Math.cos(alpha) * o.center.x * 0.5
       let y = o.center.y + Math.sin(alpha) * o.center.y * 0.5
-
-      // let arcSharpness = 4 * Math.random() // Never used
       let midXY = [(from.x + x) / 2, (from.y + y) / 2]
-      // let cx = midXY[0] + (50 * arcSharpness) // Never used
-      // let cy = Math.abs(midXY[1] - (50 * arcSharpness)) // Never used
-
       let textAngle = 0
       if (x > from.x) {
         textAngle = Math.atan2(y - from.y, x - from.x)

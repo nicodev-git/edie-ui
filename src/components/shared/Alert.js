@@ -14,14 +14,9 @@ export default class Alert extends React.Component {
     }
   }
 
-    // ////////////////////////////
-
   componentDidMount () {
-        // const {type} = this.props
 
   }
-
-    // ////////////////////////////
 
   onKeyUp (e) {
     if (e.keyCode === 13) {
@@ -29,7 +24,6 @@ export default class Alert extends React.Component {
     }
   }
 
-    // ////////////////////////////
   onHide () {
     this.onClickClose()
   }
@@ -140,4 +134,3 @@ export function showPrompt (msg, initial, cb) {
     />
     )
 }
-

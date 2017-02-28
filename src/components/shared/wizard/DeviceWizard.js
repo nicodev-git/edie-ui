@@ -2,9 +2,6 @@ import React from 'react'
 import Modal from 'react-bootstrap-modal'
 import {
     assign
-    // keys, // Never used
-    // forIn, // Never used
-    // hasIn // Never used
 } from 'lodash'
 import { reduxForm } from 'redux-form'
 
@@ -45,23 +42,8 @@ class DeviceWizard extends React.Component {
 
     this.mapping = {
       'text': this.buildText.bind(this),
-            // 'combo'     : this.buildCombo.bind(this),
-            // 'radiogroup': this.buildRadioGroup.bind(this),
-            // 'radiocombo': this.buildRadioCombo.bind(this),
       'check': this.buildCheck.bind(this),
-            // 'checklist' : this.buildCheckList.bind(this),
-            // 'label'     : this.buildLabel.bind(this),
-            // 'password'  : this.buildPassword.bind(this),
-            //
-            // 'advanced'  : this.buildAdvanced.bind(this),
-            // 'form'      : this.buildForm.bind(this),
-            //
-            // 'matchignore'   : this.buildMatchIgnore.bind(this),
-            // 'globalignore'  : this.buildGlobalIgnore.bind(this),
-            //
       'monitors': this.buildMonitors.bind(this),
-            // 'mtable'    : this.buildMTable.bind(this),
-
       'row': this.buildRow.bind(this)
     }
   }
@@ -77,7 +59,7 @@ class DeviceWizard extends React.Component {
   }
 
   componentDidMount () {
-    // this.props.clearDeviceWizardInitialValues()
+
   }
 
   handleFormSubmit (formProps) {
@@ -170,7 +152,7 @@ class DeviceWizard extends React.Component {
     if (typeof func !== 'undefined') {
       items = func(config, values || {})
     } else {
-      // console.error(`Mapping not found! : ${config.type}`)
+
     }
 
     return items
@@ -220,7 +202,7 @@ class DeviceWizard extends React.Component {
 
     if (config.label !== null) {
       if (config.label.type === 'place') {
-                // input.attr('placeholder', config.label.text || '');
+
       } else {
         text.push(this.buildLabel(config.label))
         width = util.calcWidth(config.width) - util.calcWidth(config.label.width)

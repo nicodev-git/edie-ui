@@ -75,9 +75,7 @@ export default(
       <Route path="device/:deviceId" component={DeviceContainer}>
         <Route path="main" component={DeviceMain}>
           <Route path="incidents" component={DeviceMainIncidentsContainer}/>
-          {/* <Route path="rules" component={DeviceMainRulesContainer}/> */}
           <Route path="workflows" component={DeviceMainWorkflowsContainer}/>
-          {/* <Route path="rawIncidents" component={DeviceMainRawIncidentsContainer}/> */}
           <Route path="events" component={DeviceMainEventsContainer}/>
           <Route path="advanced" component={DeviceMainAdvancedContainer}/>
           <Route path="ruleAdd" component={DeviceMainRuleAddContainer}/>

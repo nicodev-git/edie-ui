@@ -20,10 +20,6 @@ fabric.ShapeLine = fabric.util.createClass(fabric.Object, {
 
         canvas: this.canvas,
 
-        //cornerColor: 'green',
-        //cornerSize: 6,
-        //transparentCorners: false,
-
         selectable: false,
         hasBorders: false,
         hasControls: false,
@@ -32,13 +28,9 @@ fabric.ShapeLine = fabric.util.createClass(fabric.Object, {
         lockScalingX: true,
         lockScalingY: true,
 
-        //lockMovementX: true,
-        //lockMovementY: true,
-
         line: this,
       });
       this.steps.push(line);
-      //groupItems.push(line);
 
       this.canvas.add(line);
     }
@@ -127,13 +119,6 @@ fabric.ShapeLine = fabric.util.createClass(fabric.Object, {
 
   updatePosition: function (group, diff, object) {
     var me = this;
-    //if (!me.startObj) return;
-
-//            if (me.group) {
-//                me.group.remove();
-//                me.canvas.remove(me.group);
-//                me.group = null;
-//            }
 
     if (!me.steps || !me.steps.length) return;
 
@@ -178,22 +163,7 @@ fabric.ShapeLine = fabric.util.createClass(fabric.Object, {
       y2: endY,
     });
     step.updatePosition(null, group);
-    //groupItems.push(line);
-    //me.canvas.add(line);
-
     step.anim && step.anim.updatePosition();
-
-
-    /*
-     me.group = new fabric.Group(groupItems, {
-     hasControls: false,
-     hasBorders: false,
-     selectable: false,
-     });
-
-     me.canvas.add(me.group);
-     me.canvas.sendToBack(me.group);
-     */
   },
 
   //////////////////////////////////////////////////////////////////////////////////////

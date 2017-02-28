@@ -5,7 +5,6 @@ import {
 } from 'react-bootstrap'
 import {
   findIndex,
-  // assign, // Never used
   clone
 } from 'lodash'
 
@@ -95,7 +94,6 @@ export default class GroupModal extends React.Component {
       })
     }
 
-        // url += "?" + this.state.selected.map(id => "uids=" + id).join('&')
     $.get(`${ROOT_URL}${url}`, params).done(res => { // eslint-disable-line no-undef
       if (!res.success) return showAlert('Save failed!')
 

@@ -7,31 +7,27 @@ import {
   UPDATE_USER_INFO,
   OPEN_PROFILE_MODAL,
   CLOSE_PROFILE_MODAL,
-
   OPEN_ACTIVATION_MODAL,
   CLOSE_ACTIVATION_MODAL,
   ACTIVATE_USER,
-  ACTIVATE_MSG
+  ACTIVATE_MSG,
+  FETCH_MESSAGE,
+  NO_AUTH_ERROR
 } from './types'
 
 import { apiError, authError } from './Errors'
 
 import { ROOT_URL } from './config'
+import { getAuthConfig, getRequestConfig } from './util'
 
 export const signUser = ({ email, password }) => {
   return (dispatch) => {
-    let config = {
-      headers: {
-        'Content-Type': 'application/json',
-        'X-Requested-With': 'XMLHttpRequest'
-      }
-    }
     axios.post(`${ROOT_URL}/api/auth/login`,
       {
         username: email,
         password: password
       },
-      config
+      getRequestConfig()
     )
     .then(response => signUserSuccess(dispatch, response))
     .catch(() => authError(dispatch))
@@ -72,13 +68,7 @@ const signupSuccess = (dispatch, response) => {
 
 export const fetchUserInfo = () => {
   return (dispatch) => {
-    let config = {
-      headers: {
-        'Cache-Control': 'no-cache',
-        'X-Authorization': window.localStorage.getItem('token')
-      }
-    }
-    axios.get(`${ROOT_URL}/api/me`, config)
+    axios.get(`${ROOT_URL}/api/me`, getAuthConfig())
       .then(response => fetchUserInfoSuccess(dispatch, response))
       .catch(error => apiError(dispatch, error))
   }
@@ -151,4 +141,22 @@ export function closeActivationModal () {
   return dispatch => {
     dispatch({type: CLOSE_ACTIVATION_MODAL})
   }
+}
+
+export const fetchMessage = () => {
+  if (!window.localStorage.getItem('token')) {
+    return dispatch => dispatch({ type: NO_AUTH_ERROR })
+  }
+  return (dispatch) => {
+    axios.get(`${ROOT_URL}/api/me`, getAuthConfig())
+      .then(response => fetchMessageSuccess(dispatch, response))
+      .catch(error => authError(error)) // TODO: here may be another error action
+  }
+}
+
+const fetchMessageSuccess = (dispatch, response) => {
+  dispatch({
+    type: FETCH_MESSAGE,
+    payload: response.data.username
+  })
 }

@@ -1,6 +1,4 @@
 import React, { Component } from 'react'
-// import Dimensions from 'react-dimensions' // Never used
-// import { escapeRegExp } from 'lodash'
 import moment from 'moment'
 import {
     ButtonGroup,
@@ -69,27 +67,9 @@ export default class MainEvents extends Component {
     }]
   }
 
-  // componentWillMount () {
-  //   const {device} = this.props
-  //   this.props.fetchDeviceEvents(device.id)
-  // }
-
   highlightRender (props) {
     let data = props.data || ''
     return <span>{data}</span>
-    // data = data.replace(/(\\r\\n)+/gi, '<br/>')
-    // data = data.replace(/(\\n)+/gi, '<br/>')
-    // data = data.replace(/\\t/gi, '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;')
-    //
-    // let keyword = this.state.params.text
-    //
-    // if (keyword) {
-    //   data = data.replace(new RegExp(escapeRegExp(keyword), 'gi'), function (v) {
-    //     return `<span class="bg-highlight">${v}</span>`
-    //   })
-    // }
-    //
-    // return <span style={{ fontSize: '11px' }} dangerouslySetInnerHTML={{ __html: data }}/> // eslint-disable-line react/no-danger
   }
 
   renderTable () {

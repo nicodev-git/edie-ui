@@ -19,7 +19,6 @@ export default class ProcessTable extends React.Component {
     this.columns = [{
       'displayName': 'Name',
       'columnName': 'name',
-      // "cssClassName": "nowrap",
       'cssClassName': 'width-180'
     }, {
       'displayName': 'Id',
@@ -51,21 +50,6 @@ export default class ProcessTable extends React.Component {
       'cssClassName': 'width-180'
     }]
   }
-
-  // render2 () {
-  //   return (
-  //     <InfiniteTable
-  //       url={this.state.url}
-  //       params={this.state.params}
-  //       cells={this.state.columns}
-  //       ref="table"
-  //       rowMetadata={{'key': 'id'}}
-  //       bodyHeight={this.props.containerHeight}
-  //       selectable
-  //       onRowDblClick={this.onRowDblClick.bind(this)}
-  //     />
-  //   )
-  // }
 
   onRowDblClick () {
     const selected = this.refs.table.refs.wrappedInstance.getSelected()

@@ -31,14 +31,6 @@ export default class Credentials extends React.Component {
       'displayName': 'User Name',
       'columnName': 'username'
     }]
-
-    // this.listeners = {
-    //     [EVENTS.CREDENTIALS_ADD_CLICKED]: this.onAddCred.bind(this),
-    //     [EVENTS.CREDENTIALS_EDIT_CLICKED]: this.onEditCred.bind(this),
-    //     [EVENTS.CREDENTIALS_REMOVE_CLICKED]: this.onRemoveCred.bind(this),
-    //
-    //     [EVENTS.CREDENTIALS_KEYWORD_CHANGED]: this.onKeywordChanged.bind(this),
-    // }
   }
 
   componentWillMount () {
@@ -59,22 +51,6 @@ export default class Credentials extends React.Component {
       />
     )
   }
-
-  // renderContent2 () {
-  //   return (
-  //     <InfiniteTable
-  //       url="/devices/getCredentials"
-  //       params={{filter: this.state.filter}}
-  //       cells={this.cells}
-  //       rowMetadata={{'key': 'id'}}
-  //       selectable
-  //       bodyHeight={this.props.containerHeight}
-  //       ref="credentials"
-  //
-  //       onRowDblClick={this.onEditCred.bind(this)}
-  //     />
-  //   )
-  // }
 
   renderCredentialsModal () {
     if (!this.props.credentialsModalVisible) return null

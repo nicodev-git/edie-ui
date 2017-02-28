@@ -14,15 +14,11 @@ export default class Dashboard extends React.Component {
   }
 
   componentDidMount () {
-    // incidentSocket.init('MainIncident')
-    // incidentSocket.addListener('dashboard', this.onDashboardUpdate)
-    //
-    // incidentSocket.connect()
+
   }
 
   componentWillUnmount () {
-    // incidentSocket.removeListener('dashboard', this.onDashboardUpdate)
-    // incidentSocket.close()
+
   }
 
   onDashboardUpdate (msg) {

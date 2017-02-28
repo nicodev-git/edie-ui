@@ -1,6 +1,5 @@
 import React from 'react'
 import Modal from 'react-bootstrap-modal'
-// import moment from 'moment'
 
 export default class MapSaveModal extends React.Component {
   constructor (props) {

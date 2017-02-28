@@ -13,34 +13,11 @@ export default class MapSelect extends Component {
   }
 
   removeSelected () {
-    // let index = findIndex(this.state.maps, {id: this.state.selected})
-    // let maps = this.state.maps
-    // maps.splice(index, 1)
-    // let selected = maps.length ? maps[0].id : 0
-    // this.setState({maps, selected}, () => {
-    //     emit(EVENTS.MAP_CHANGED, selected)
-    // })
+
   }
 
   renameSelected (newname) {
-    // if (!newname) return
-    //
-    // let index = findIndex(this.state.maps, {id: this.state.selected})
-    //
-    // $.get(Api.dashboard.renameMap, {
-    //     sid: this.context.sid,
-    //     id: this.getSelected(),
-    //     name: newname
-    // }).done(res => {
-    //     if (!res.success) return showAlert('Save Failed!');
-    //
-    //     let {maps} = this.state
-    //     maps[index].mapname = newname
-    //     this.setState({maps})
-    //
-    // }).fail(function(res, data){
-    //     showAlert('Save Failed!');
-    // });
+
   }
 
   onUserInfoLoaded () {
@@ -48,15 +25,7 @@ export default class MapSelect extends Component {
   }
 
   onMapAdded (map) {
-    // let maps = this.state.maps
-    // maps.push(map)
-    //
-    // this.setState({
-    //     selected: map.id,
-    //     maps: maps
-    // }, () => {
-    //     emit(EVENTS.MAP_CHANGED, map.id)
-    // })
+
   }
 
   onChange (e) {
@@ -65,29 +34,7 @@ export default class MapSelect extends Component {
   }
 
   loadMaps () {
-    // const {user} = this.context
-    //
-    // $.get(Api.map.getMapsByUserDT, {
-    //     draw: 1,
-    //     start: 0,
-    //     length: 50,
-    //     userId: user.id,
-    // }).done(res => {
-    //
-    //
-    //     //userDefaultAction();
-    //
-    //     let mapId = 0
-    //     if (user.defaultmap) mapId = parseInt(user.defaultmap)
-    //     mapId = mapId || this.state.value
-    //
-    //     this.setState({
-    //         maps: res.data,
-    //         selected: mapId
-    //     }, () => {
-    //         emit(EVENTS.MAP_CHANGED, mapId)
-    //     })
-    // });
+
   }
   render () {
     const {selectedMap} = this.props

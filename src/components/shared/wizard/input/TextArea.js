@@ -43,14 +43,6 @@ export default class TextArea extends React.Component {
 
       </div>
     )
-
-    // if(typeof(config.onPageShow) === 'function') {
-    //     pageListeners.push({
-    //         row: text,
-    //         func: config.onPageShow
-    //     });
-    // }
-
     return util.wrapInputs(label, input, config['useColumn'])
   }
 }

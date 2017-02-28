@@ -7,6 +7,8 @@ import SettingsReducer from './SettingsReducer'
 import DeviceReducer from './DeviceReducer'
 import SearchReducer from './SearchReducer'
 import DiagramReducer from './DiagramReducer'
+import AttackersReducer from './AttackersReducer'
+import PincodeReducer from './PincodeReducer'
 
 const rootReducer = combineReducers({
   form: FormReducer,
@@ -16,7 +18,9 @@ const rootReducer = combineReducers({
   devices: DeviceReducer,
   search: SearchReducer,
   diagram: DiagramReducer,
-  chat: ChatReducer
+  chat: ChatReducer,
+  attackers: AttackersReducer,
+  pincode: PincodeReducer
 })
 
 export default rootReducer

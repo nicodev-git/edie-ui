@@ -3,7 +3,6 @@ import Modal from 'react-bootstrap-modal'
 import {
     Button
 } from 'react-bootstrap'
-// import countries from 'country-data/data/countries.json'
 
 import { showAlert } from '../../../../shared/Alert'
 import { ROOT_URL } from '../../../../../actions/config'

@@ -131,7 +131,6 @@ export default class IncidentOptions extends Component {
     } else {
       label = `${selectedDevices.length} Devices`
     }
-        // if (selectedDevices.length)
 
     return (
       <a href="javascript:;" className="margin-md-left"

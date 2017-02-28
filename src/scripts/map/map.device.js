@@ -37,20 +37,16 @@ fabric.Device = fabric.util.createClass(fabric.Object, {
       diffY -= me.imageObj.lastTop - me.imageObj.top;
 
       //Move Text Together
-      //me.labelObj.left += diff.x;
       me.labelObj.top += diffY;
-      //me.labelObj.fontSize += me.labelObj.fontSize * diff.height / me.imageObj.height;
       me.labelObj.fontSize += diff.height / 2;
       if (me.labelObj.fontSize < 5) me.labelObj.fontSize = 5;
       me.labelObj.width += diff.width;
       me.labelObj.left -= diff.width / 2;
-      //me.labelObj.setCoords();
 
       var len = me.labelObj._textLines.length;
       while(me.labelObj._splitTextIntoLines().length > len){
         me.labelObj.width += 30;
         me.labelObj.left -= 15;
-        //me.labelObj.setCoords();
       };
 
       me.labelObj.refineWidth();
@@ -95,8 +91,6 @@ fabric.Device = fabric.util.createClass(fabric.Object, {
   notifyMoved: function(group){
     var me = this;
     var map = me.canvas.map;
-
-    // me.showLoading(true);
 
     var imgGroup = group ? group.getObjects().indexOf(me.imageObj) >= 0 : false;
     var labelGroup = group ? group.getObjects().indexOf(me.labelObj) >= 0 : false;
@@ -180,10 +174,6 @@ fabric.Device = fabric.util.createClass(fabric.Object, {
       if (width > maxwidth) maxwidth = width;
     });
     ctx.restore();
-
-
-    //label.setWidth(Math.ceil(maxwidth) + 1);
-    //label.refineWidth();
     label.left = image.left + image.width / 2 - maxwidth / 2;
     label.setCoords();
 
@@ -335,13 +325,6 @@ fabric.Device = fabric.util.createClass(fabric.Object, {
 
       imageObj.updateStatusImage();
       labelObj.refineWidth();
-
-//    	        me.canvas.add(imageObj);
-//    			if (imageObj.statusImageObj) {
-//    				me.canvas.remove(imageObj.statusImageObj);
-//    				me.canvas.add(imageObj.statusImageObj);
-//    			}
-
       me.updateLines();
 
       me.canvas.renderAll();
@@ -429,18 +412,7 @@ fabric.Device.create = function(options, callback){
     canvas: config.canvas,
   });
   imageObj.setCoords();
-
-  // imageObj.filters.push(new fabric.Image.filters.Resize({
-  //     resizeType: 'sliceHack', scaleX: 1, scaleY: 1
-  // // //resizeType: 'lanczos', lanczosLobes: 3
-  // // //resizeType: 'bilinear'
-  // }))
-  // imageObj.resizeFilters.push(new fabric.Image.filters.Resize({
-  //     resizeType: 'sliceHack', scaleX: 1, scaleY: 1
-  // //resizeType: 'lanczos', lanczosLobes: 3
-  // }))
   imageObj.setSrc(config.imageUrl, function(){
-    //console.log(imageObj.width + ':' + imageObj.height)
 
     imageObj.orgWidth = imageObj.width;
     imageObj.orgHeight = imageObj.height;

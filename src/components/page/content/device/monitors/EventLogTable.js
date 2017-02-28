@@ -37,19 +37,6 @@ export default class EventLogTable extends Component {
     this.props.fetchDeviceEventLog()
   }
 
-  // render2 () {
-  //   return (
-  //     <InfiniteTable
-  //       url={this.state.url}
-  //       params={this.state.params}
-  //       cells={this.state.columns}
-  //       ref="table"
-  //       rowMetadata={{'key': 'id'}}
-  //       selectable
-  //     />
-  //   )
-  // }
-
   render () {
     return (
       <ResponsiveInfiniteTable

@@ -25,34 +25,10 @@ export default class Maps extends React.Component {
 
     }
 
-    this.cells = [/* {
-            "displayName": "ID",
-            "columnName": "id",
-            "cssClassName": "width-120",
-      }, */{
-        'displayName': 'Name',
-        'columnName': 'name'
-      }/*, {
-            "displayName": "Users",
-            "columnName": "users",
-            "customComponent": (props) => {
-                const val = props.data
-                return (
-                    <div>
-                        {val.join(', ')}
-                    </div>
-                )
-            }
-    } */]
-
-        // this.listeners = {
-        //     [EVENTS.MAPS_ADD_CLICKED]: this.onMapAdd.bind(this),
-        //     [EVENTS.MAPS_EDIT_CLICKED]: this.onMapEdit.bind(this),
-        //     [EVENTS.MAPS_DELETE_CLICKED]: this.onMapDelete.bind(this),
-        //
-        //     [EVENTS.MAPS_RESTORE_CLICKED]: this.onMapRestore.bind(this),
-        //     [EVENTS.MAPS_USERS_CLICKED]: this.onMapUsers.bind(this),
-        // }
+    this.cells = [{
+      'displayName': 'Name',
+      'columnName': 'name'
+    }]
   }
 
   componentWillMount () {
@@ -151,8 +127,6 @@ export default class Maps extends React.Component {
   }
 
   render () {
-    // let table // Never used
-    // const {tabIndex} = this.state // Never used
     return (
       <TabPage>
         <TabPageHeader title="Settings">

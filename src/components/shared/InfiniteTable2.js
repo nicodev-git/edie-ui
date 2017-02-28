@@ -23,8 +23,6 @@ class InfiniteTable extends React.Component {
     let currentDraw = this.state.draw
     let url = this.props.url
     let params = this.props.params || {}
-        // let pageSize = this.state.pageSize;
-
     page = Math.max(page, 0)
     pageSize = Math.max(pageSize, 10)
 
@@ -35,7 +33,6 @@ class InfiniteTable extends React.Component {
     })
 
     $.get(`${ROOT_URL}${url}`, urlParams).done(res => {
-            // if (currentDraw !== this.state.draw) return;
       callback({
         results: res.data,
         totalResults: res.recordsTotal,

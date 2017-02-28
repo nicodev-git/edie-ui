@@ -60,8 +60,6 @@ var mapObject = {
 
   timerTextChange: 0,
 
-  //handOverObj: null,
-
   pan: null,
   zooming: false,
   editableBeforeZoom: false,
@@ -76,10 +74,6 @@ var mapObject = {
     me.initCanvasEvents();
 
     me.onSelectionCleared();
-
-    //me.render();
-
-    //allMaps.push(me);
 
     if(me.trafficVisible) me.starLineAnim();
   },
@@ -106,7 +100,6 @@ var mapObject = {
 
     canvas.renderOnAddRemove = false;
 
-    //canvas.backgroundColor = "white";
     canvas.map = me;
     me.canvas = canvas;
 
@@ -122,7 +115,6 @@ var mapObject = {
       visible: false,
       selectable: false,
     });
-    //canvas.add(me.highlightRect);
     me.highlightLine = fabric.ShapeLine.create({
       canvas: me.canvas,
       strokeDashArray: [2, 2],
@@ -159,7 +151,6 @@ var mapObject = {
         lockScalingX: true,
         lockScalingY: true,
         hasRotatingPoint: false,
-        //hasBorders: false,
         hasControls: false,
       });
 
@@ -197,8 +188,6 @@ var mapObject = {
       if(objects.length == 0) {
         me.onSelectionCleared(ev);
       }
-
-      //me.canvas.renderAll();
 
       me.lastX = obj.left;
       me.lastY = obj.top;
@@ -258,15 +247,6 @@ var mapObject = {
     obj.top = Math.ceil(obj.top);
 
     obj.setCoords();
-    //var rect = obj.getBoundingRect();
-    //console.log(obj.getBoundingRect());
-    /*
-     var z = me.canvas.getZoom();
-     if(obj.left < 5) obj.left = 10;
-     if(obj.top < 5) obj.top = 10;
-     if(obj.left + obj.width > me.canvas.width / z - 5) obj.left = Math.ceil(me.canvas.width / z - 10 - obj.width);
-     if(obj.top + obj.height> me.canvas.height / z - 5) obj.top = Math.ceil(me.canvas.height / z - 10 - obj.height);
-     */
   },
 
   onObjectSelected: function (e) {
@@ -318,10 +298,7 @@ var mapObject = {
     }
 
     if(selObj && selObj.getObjects && !selObj.objectSubType) {
-//	    	var objects = selObj.getObjects();
-//	    	$.each(objects, function(i, item){
-//	    		item.onMoving && item.onMoving(e, {x: 0, y: 0});
-//	    	});
+
     }
 
     me.selObj = null;
@@ -339,12 +316,6 @@ var mapObject = {
     if (!obj) return;
 
     var listener = me.listener;
-    /*
-     obj.set({
-     left: Math.round(obj.left / grid) * grid,
-     top: Math.round(obj.top / grid) * grid
-     });
-     */
     me.movingObject = obj;
     me.refinePosition(obj);
 
@@ -367,8 +338,6 @@ var mapObject = {
     }
 
     canvas.renderAll();
-
-    //me.updateCanvasSize(obj);
 
     me.lastX = obj.left;
     me.lastY = obj.top;
@@ -395,16 +364,6 @@ var mapObject = {
       me.canvas.renderAll();
       return;
     }
-    /*
-     grid *= 2;
-     obj.set({
-     scaleX: 1,
-     scaleY: 1,
-     width: Math.round(obj.scaleX * obj.width / grid) * grid,
-     height: Math.round(obj.scaleY * obj.height / grid) * grid,
-     });
-     grid /= 2;
-     */
 
     obj.setCoords();
 
@@ -415,7 +374,6 @@ var mapObject = {
 
     me.movingObject = obj;
     obj.onScaling && obj.onScaling(e, diff);
-    //me.updateCanvasSize(obj);
 
     me.lastSX = obj.scaleX;
     me.lastSY = obj.scaleY;
@@ -559,19 +517,6 @@ var mapObject = {
           obj && me.canvas.setCursor('pointer');
         }
       }
-
-//			if (me.handOverObj) {
-//				var mouse = me.canvas.getPointer(o.e);
-//				
-//				me.handOverObj.left = mouse.x;
-//				me.handOverObj.top = mouse.y;
-//				me.handOverObj.setCoords();
-//				
-//				
-//				me.canvas.fire('object:moving', {
-//					target: me.handOverObj
-//				});
-//			}
     }
   },
 
@@ -581,15 +526,10 @@ var mapObject = {
     me.lastMouseEvent = e;
 
     if (!me.isMouseDown) {
-      //Assumes already finished
-      // e.target.scaleX = me.lastSX;
-      // e.target.scaleY = me.lastSY;
-      // me.canvas.renderAll();
       return;
     }
 
     me.isMouseDown = false;
-    //me.handOverObj = null;
     if (me.zooming) {
       me.zoomRect.visible = false;
       if (me.zoomRect.width < 50 || me.zoomRect.height < 50) {
@@ -599,8 +539,6 @@ var mapObject = {
         var py = me.canvas.height / me.zoomRect.height;
 
         var z = Math.min(px, py);
-
-        //if (z > 1) z = 1;
 
         me.changeZoom(z, {
           x: me.zoomRect.left + me.zoomRect.width / 2,
@@ -711,11 +649,6 @@ var mapObject = {
           $.when.apply(this, requests).done(function(){
             me.listener.onMouseDown && me.listener.onMouseDown(me, groupObj);
           });
-          // setTimeout(function(){
-          // 	//Open Group
-          // 	me.listener.onMouseDown && me.listener.onMouseDown(me, groupObj);
-          //
-          // }, 300);
         } else {
           if(obj.objectType) {
             obj.onMoved && obj.onMoved();
@@ -727,7 +660,6 @@ var mapObject = {
           }
         }
       }
-      //console.log(me.movingObject);
       me.movingObject = null;
     }
   },
@@ -787,25 +719,6 @@ var mapObject = {
     });
 
     return me.listener.onObjectMoved(me, props, type);
-
-    // return me.listener.onObjectMoved(me, {
-    // 	id: id,
-    // 	deviceid: id,
-    // 	x: parseInt(pos.left || 10),
-    // 	y: parseInt(pos.top || 10),
-    // 	width: parseInt(pos.width || 50),
-    // 	height: parseInt(pos.height || 50),
-    // 	angle: pos.angle || 0,
-    // 	align: text.align || 'left',
-    // 	textX: parseInt(text.left || 0),
-    // 	textY: parseInt(text.top || 0),
-    // 	textSize: text.size || 13,
-    // 	textWidth: parseInt(text.width || 50),
-    //
-    //    scaleX: pos.scaleX || 1,
-    //
-    // 	fatherid: fatherid,
-    // }, type);
   },
 
   notifyLineUpdate: function(lineObj) {
@@ -946,14 +859,6 @@ var mapObject = {
     var me = this;
     var nearestObj;
     var pointRadius = me.selRect.pointRadius;
-
-    /*
-     if (hoverObj && hoverObj.getAngle && hoverObj.getAngle()
-     && me.objects.indexOf(hoverObj) >= 0) {
-     return hoverObj;
-     }
-     */
-
     var group = me.canvas.getActiveGroup();
     var groupObjs = [];
     group && (groupObjs = group.getObjects());
@@ -967,8 +872,6 @@ var mapObject = {
       if (dropObj == me.movingObject) return;
       if (groupObjs.indexOf(dropObj) >= 0) return;
       if (filter && filter(dropObj) == false) return;
-
-      //if (dropObj.getAngle()) return;
       if (dropObj.getAngle()) {
         var r = dropObj.getBoundingRect();
         var offset = me.canvas.map.getPanOffset();
@@ -981,7 +884,6 @@ var mapObject = {
 
         var d = Math.sqrt((cy - p.y) * (cy - p.y) + (cx - p.x) * (cx - p.x));
         var a = Math.atan2(cy - p.y, p.x - cx) + dropObj.getAngle() * Math.PI / 180;
-        //var a = Math.atan2(p.x - cx, p.y - cy) - (dropObj.getAngle() - 90) * Math.PI / 180;
 
         var c = {
           x: cx + Math.cos(a) * d,
@@ -1111,12 +1013,6 @@ var mapObject = {
   },
   addTempGauge: function(o){
     var me = this;
-    // var config = $.extend(true, {}, o, {
-    // 	 canvas: me.canvas,
-    // });
-    // var gauge = new fabric.BiGauge.create(config);
-    // me.objects.push(gauge);
-
     jQuery('.tempgauge').tempGauge({width:40, borderWidth:3, showLabel:true,canvas: me.canvas});
     return gauge;
   },
@@ -1153,7 +1049,6 @@ var mapObject = {
       line.addAnim(false);
     } else if(endObj.objectSubType == MapItemType.ShapeHub &&
       startObj.objectSubType != MapItemType.ShapeHub){
-      //line.addAnim(true);
       if (!templine) {
         templine = true;
         line.addAnim(true, '#f55');
@@ -1257,7 +1152,6 @@ var mapObject = {
         me.lastMouseEvent.target = me.movingObject;
         me.movingObject.scalingX = false;
         me.movingObject.scalingY = false;
-        // me.canvas.trigger('mouse:up', me.lastMouseEvent);
         me.onMouseUp(me.lastMouseEvent);
       }
 
@@ -1324,19 +1218,6 @@ var mapObject = {
     }
 
     me.highlightLine.updatePosition();
-    /*if(obj) {
-     //highlightLine
-     me.highlightRect.set({
-     left: obj.left,
-     top: obj.top,
-     width: obj.width * obj.scaleX,
-     height: obj.height * obj.scaleY,
-     visible: true,
-     });
-     me.highlightRect.setCoords();
-     } else {
-     me.highlightRect.visible = false;
-     }*/
   },
 
   /////////////////////////////////////////////////////////////
@@ -1458,8 +1339,6 @@ var mapObject = {
 
   setZooming: function(zooming) {
     var me = this;
-
-    //if (zooming && !me.editable) return;
     me.canvas.deactivateAllWithDispatch();
 
     me.zooming = zooming;
@@ -1519,8 +1398,8 @@ var mapObject = {
       } else {
         left = Math.min(br.left, left);
         top = Math.min(br.top, top);
-        right = Math.max(br.left + br.width/* / me.canvas.getZoom()*/, right);
-        bottom = Math.max(br.top + br.height/* / me.canvas.getZoom()*/, bottom);
+        right = Math.max(br.left + br.width, right);
+        bottom = Math.max(br.top + br.height, bottom);
       }
     }
 
@@ -1555,7 +1434,6 @@ var mapObject = {
 
     var z = Math.min(px, py);
 
-    //if (z > 1) z = Math.floor(z);
     if (z > 3) z = 3;
 
     me.changeZoom(z, {
@@ -1722,9 +1600,6 @@ var mapObject = {
 
     me.stopLineAnim();
 
-    // var index = allMaps.indexOf(me);
-    // if (index >= 0) allMaps.splice(index, 1);
-
     canvas.off('selection:created');
 
     canvas.off('object:selected');
@@ -1788,26 +1663,6 @@ var mapObject = {
 
     if(hub) {
       var r = obj.getBoundingRect();
-      //var offset = me.getPanOffset();
-      //var z = me.canvas ? me.canvas.getZoom() : 1;
-      //
-      //var w = obj.width * obj.scaleX;
-      //var h = obj.height * obj.scaleY;
-      //var cx = (r.left + r.width / 2  + offset.x) / z;
-      //var cy = (r.top + r.height / 2  + offset.y) / z;
-      //
-      //var p = {
-      //	x: w * props[point][0] / 2.0 - w / 2,
-      //	y: h * props[point][1] / 60.0 - h / 2,
-      //}
-      //
-      //var d = Math.sqrt(p.x * p.x + p.y * p.y);
-      //var a = Math.atan2(-p.y, p.x) - obj.getAngle() * Math.PI / 180;
-      //
-      //var pos = {
-      //	x: cx + Math.cos(a) * d,
-      //	y: cy + Math.sin(a) * d,
-      //};
 
       if (obj.id == '3214984')
         obj.left += 0;

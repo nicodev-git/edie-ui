@@ -79,8 +79,6 @@ export default class DeviceWizard extends React.Component {
     if (current < 2) {
       cssPrevious = this.props.onStep0 ? '' : 'hidden'
     }
-
-        // <form className="wizard-container"></form>
     return (
             <Modal show={this.state.open}
               onHide={this.onHide.bind(this)}
@@ -250,7 +248,7 @@ export default class DeviceWizard extends React.Component {
 
     if (config.label !== null) {
       if (config.label.type === 'place') {
-                // input.attr('placeholder', config.label.text || '');
+
       } else {
         text.push(this.buildLabel(config.label))
         width = util.calcWidth(config.width) - util.calcWidth(config.label.width)
@@ -425,26 +423,9 @@ export default class DeviceWizard extends React.Component {
     let theform = this.refs.form
     let formValues = theform.serialize()
 
-        // tweak multipleselects
-
-        // var selectParams = [];
-        // $.each(multipleSelects, function(i, item){
-        //     var $item = $(item);
-        //     var values = $item.multipleSelect('getSelects');
-        //     if(values.length > 1) {
-        //         $.each(values, function(j, val){
-        //             //var p = {};
-        //             //p[$(item).attr('name')] = val;
-        //             selectParams.push([$(item).attr('name'), val]);
-        //         });
-        //     }
-        //     //$item.parent().hide();
-        // });
-
     assign(params, currentDevice.server.params)
     assign(params, this.props.extraParams)
 
-        // assign(params, $.deparam($(wizard).serialize()));
     forIn(formValues, (value, key) => {
       if (key === 'advanced') {
         assign(params, value)
@@ -479,47 +460,11 @@ export default class DeviceWizard extends React.Component {
       }
     })
 
-        // forms
-        // $.each(forms, function(i, form) {
-        //     var $form = $([]);
-        //     var serverparam;
-        //     if(!form.parent.is(':checked')) return;
-        //
-        //     $.each(form.items, function(j, item){
-        //         $form = $form.add(item);
-        //     });
-        //     serverparam = $form.find(':input').serialize();
-        //     var result = $.ajax({
-        //         type: 'GET',
-        //         url: form.config.server.url + "?" + serverparam,
-        //         dataType: 'json',
-        //         async: false
-        //     }).responseJSON;
-        //
-        //     if(result[form.config.server.value] !== null){
-        //         var param = {};
-        //         params[form.config.name] = result[form.config.server.value];
-        //         //param[form.config.name] = result[form.config.server.value];
-        //         //if(formparams !== '') formparams += "&";
-        //         //formparams += $.param(param);
-        //     }
-        //
-        //     $form.remove();
-        // });
-
     let jsonMapping = ['protocol', 'path', 'file', 'type', 'tolog', 'textToMatch', 'textToIgnore',
       'dayskeep', 'chartType', 'dbtype', 'threshHold', 'text', 'contains',
       'dbname', 'query', 'expectedType', 'expectedResponse', 'db', 'table', 'id']
 
     let addParam = (key, value) => {
-            // let input = $(wizard).find('input[name=' + key + ']');
-            // if(input.attr('type') === 'checkbox') {
-            //     if (input.data('checked-value') !== null) {
-            //         value = input.data(input.prop('checked') ? 'checked-value' : 'unchecked-value');
-            //     }
-            //
-            // }
-
       let mapped = jsonMapping.indexOf(key) >= 0
 
       if (mapped) {
@@ -535,45 +480,10 @@ export default class DeviceWizard extends React.Component {
     $.each(params, (key, value) => {
       addParam(key, value)
     })
-
-        // //Add Unchecked Checkboxes
-        // $.each($(wizard).find('input[type=checkbox]'), function(i, item){
-        //     var $item = $(item);
-        //     if($item.prop('checked') === false && $item.data('checked-value') !== null) {
-        //         addParam($item.attr('name'));
-        //     }
-        // });
-
-        // if(selectParams.length) {
-        //     //if(paramString) paramString += "&";
-        //     //paramString += selectParams.join('&');
-        //     $.each(selectParams, function(i, item){
-        //         addParam(item[0], item[1]);
-        //     });
-        // }
-
-        // var checklists = $(wizard).find('.row-checklist');
-        // if (checklists.length) {
-        //     if (configParams.update) {
-        //         addParam('port', configParams.port);
-        //     } else {
-        //         var name = checklists.data("name");
-        //         var values = [];
-        //         var result;
-        //         checklists.find('input[type=checkbox]:checked').each(function(i, input){
-        //             var value = $(input).val();
-        //             values.push(value);
-        //         });
-        //         addParam(name, JSON.stringify(values));
-        //     }
-        //
-        // }
     addParam('json', JSON.stringify(jsonParams))
     params['json'] = jsonParams
 
     params.monitors = this.props.monitors
-
-        // console.log($.deserialize(paramString))
 
     return {
       url: this.props.configParams.url || currentDevice.server.url,
@@ -611,16 +521,6 @@ DeviceWizard.defaultProps = {
   values: {},
 
   onStep0: null,
-
-    /*
-        function(req, res)
-
-        req: {
-            params: object,
-            paramString: string,
-            url: string,
-        }
-    */
   onFinish: null
 
 }

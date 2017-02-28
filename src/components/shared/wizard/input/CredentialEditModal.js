@@ -30,7 +30,6 @@ export default class CredentialEditModal extends React.Component {
   onClickSave () {
     let cred = {}
     const refs = this.refs
-    // const isEdit = !!cred
 
     assign(cred, this.props.data, {
       name: refs.name.value,

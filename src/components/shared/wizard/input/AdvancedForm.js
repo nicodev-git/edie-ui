@@ -19,15 +19,6 @@ export default class AdvancedForm extends InputBase {
     return {}
   }
 
-  // componentDidMount() {
-  //     this.updateValue(this.refs.form.serialize() || {})
-  // }
-  //
-  // componentDidUpdate() {
-  //     if (!this.state.hasValue && !this.state.open)
-  //         this.updateValue(this.refs.form.serialize() || {})
-  // }
-
   render () {
     let config = this.props.config
     let label, input, modal

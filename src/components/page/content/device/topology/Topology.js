@@ -85,49 +85,7 @@ export default class Topology extends React.Component {
   }
 
   componentDidMount () {
-    // let callLoadMap = $.get(`${ROOT_URL}${Api.dashboard.getDevicesForMap}`, {
-    //   mapid: this.props.device.mapid,
-    //   fatherid: this.props.device.id,
-    //   sid: this.context.sid
-    // })
-    //
-    // let callLoadLines = $.get(`${ROOT_URL}${Api.dashboard.getLineByLine}`, {
-    //   mapid: this.props.device.mapid,
-    // })
-    //
-    // return $.when(callLoadMap, callLoadLines).done((resMap, resLines) => {
-    //
-    //   let [arrNewDevices] = resMap
-    //   let [arrNewLines] = resLines
-    //
-    //   let arrLines = {}
-    //   $.each(arrNewLines, (i, item) => {
-    //     arrLines[item.lineId] = {
-    //       "id": item.id,
-    //       "type": item.type,
-    //
-    //       "fromDeviceid": item.fromDevice,
-    //       "fromPoint": item.fromPoint,
-    //       "toDeviceid": item.toDevice,
-    //       "toPoint": item.toPoint,
-    //
-    //       "linecolor": item.linecolor,
-    //       "linewidth": item.linewidth,
-    //     }
-    //   })
-    //
-    //   //Draw
-    //   const refMap = this.getDivMap()
-    //   if (!refMap) return
-    //
-    //   refMap.drawMap(arrNewDevices, arrLines, [], {}, false)
-    //
-    //
-    // }).fail(() => {
-    //   alert("Map load failed!")
-    // }).always(() => {
-    //
-    // })
+
   }
 
   // ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -156,14 +114,6 @@ export default class Topology extends React.Component {
   }
 
   onMapMouseDown (map, obj) {
-
-    // emit(EVENTS.MAP_DEVICE_CLICKED, obj.data)
-
-    // mainDeviceClick({
-    //     id: obj.id,
-    //     title: obj.data.name,
-    //     src: obj.imageObj ? obj.imageObj.getSrc() : '',
-    // }, obj.data.devicetype, false, null, obj.data)
 
   }
 
@@ -467,12 +417,7 @@ export default class Topology extends React.Component {
   }
 
   changeLineType (id, typeid) {
-    // $.get(`${ROOT_URL}${Api.deviceadmin.updateLine}`, {
-    //   id: id,
-    //   type: typeid,
-    // }).done(() => {
-    //
-    // })
+
   }
 
   // ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -491,9 +436,7 @@ export default class Topology extends React.Component {
       templateName: options.templateName
     }
 
-    let config = {
-      // mapid: this.props.device.mapid
-    }
+    let config = {}
 
     return (
       <DeviceWizardContainer
@@ -551,7 +494,6 @@ export default class Topology extends React.Component {
 
   onClickDeviceItem (selectedItem, e) {
     this.setState({selectedItem}, () => {
-      // this.refs.map.onMouseMove(e)
     })
   }
 

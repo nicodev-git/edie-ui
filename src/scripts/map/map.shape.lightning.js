@@ -70,7 +70,6 @@ fabric.ShapeLightning = fabric.util.createClass(fabric.Image, {
   onMoving: function(e, diff, group){
     var me = this;
     if(group) return;
-    //me.updatePosition(diff);
     me.reset();
   },
 
@@ -131,8 +130,8 @@ fabric.ShapeLightning = fabric.util.createClass(fabric.Image, {
     var centerY = (startY + endY) / 2.0;
 
     me.height = map.calcDistance(startX, startY, endX, endY) || 1;
-    me.left = centerX;//centerX - me.width / 2.0;
-    me.top = centerY;//centerY - me.height / 2.0;
+    me.left = centerX;
+    me.top = centerY;
     me.angle = map.calcAngle(centerX, centerY, startX, startY) + 90;
     me.setCoords();
 
@@ -143,8 +142,6 @@ fabric.ShapeLightning = fabric.util.createClass(fabric.Image, {
     me.handles[0].set({
       left: (me.oCoords.mt.x + offset.x) / z,
       top: (me.oCoords.mt.y + offset.y) / z,
-      //left: me.oCoords.mt.x,
-      //top: me.oCoords.mt.y,
     });
     me.handles[0].setCoords();
 
@@ -240,8 +237,8 @@ fabric.ShapeLightning = fabric.util.createClass(fabric.Image, {
     var centerY = (startY + endY) / 2.0;
 
     me.height = map.calcDistance(startX, startY, endX, endY) || 1;
-    me.left = centerX;//centerX - me.width / 2.0;
-    me.top = centerY;//centerY - me.height / 2.0;
+    me.left = centerX;
+    me.top = centerY;
     me.angle = map.calcAngle(centerX, centerY, startX, startY) + 90;
 
     if(group) {
@@ -254,8 +251,8 @@ fabric.ShapeLightning = fabric.util.createClass(fabric.Image, {
         }
       });
       if(found) {
-        me.left -= group.left + group.width / 2;//group.oCoords.mt.x;
-        me.top -= group.top + group.height / 2;//group.oCoords.ml.y;
+        me.left -= group.left + group.width / 2;
+        me.top -= group.top + group.height / 2;
       }
     }
     me.setCoords();

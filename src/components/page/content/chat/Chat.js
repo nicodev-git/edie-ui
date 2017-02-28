@@ -10,7 +10,7 @@ import { chatSocket } from '../../../../util/socket/ChatSocket'
 import { showAlert } from '../../../shared/Alert'
 
 import { scrollBottom } from '../../../../util/Scroll'
-
+// do not delete comments for now: Igor Skakun, vozni4iy
 export default class Chat extends React.Component {
 
   constructor (props) {

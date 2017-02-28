@@ -34,14 +34,6 @@ export default class MTable extends InputBase {
 
   render () {
     let config = this.props.config
-    // let values = this.props.values // Never used
-
-    // let width = util.calcWidth(config.width) // Never used
-    //
-    // let defaultValue = config.value
-    // if (config.name && values[config.name] !== undefined)
-    //     defaultValue = values[config.name]
-
     let input = (
       <div className="panel panel-default panel-noborder">
         <div className="panel-heading" style={{height: '35px'}}>

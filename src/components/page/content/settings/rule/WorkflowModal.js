@@ -4,8 +4,6 @@ import { reduxForm, Field } from 'redux-form'
 import { concat, assign, forOwn } from 'lodash'
 import InlineEdit from 'react-edit-inline'
 import Tooltip from 'react-tooltip'
-
-// import { showAlert } from 'components/shared/Alert'
 import CategoryModal from './CategoryModal'
 import ActionModal from './ActionModal'
 import DiagramModalContainer from 'containers/page/content/device/main/workflows/DiagramModalContainer'

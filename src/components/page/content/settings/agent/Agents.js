@@ -91,24 +91,15 @@ export default class Agents extends Component {
         'columnName': 'name'
       }, {
         'displayName': 'OS',
-        'columnName': 'hostname', // osname
+        'columnName': 'hostname',
         'customComponent': (props) => {
           return <span />
         }
       }, {
         'displayName': 'Agent',
-        'columnName': 'proxyHost', // lastSeen
+        'columnName': 'proxyHost',
         'customComponent': (props) => {
           return <span />
-          // let val = props.data
-          // let installed = false;
-          // if (val) {
-          //     let diff = new Date().getTime() - val;
-          //     installed = diff / (3600 * 1000.0) <= 1;
-          // }
-          //
-          // if (installed) return <span>Installed</span>
-          // return <span>Not Installed</span>
         }
       }, {
         'displayName': 'Version',
@@ -245,16 +236,6 @@ export default class Agents extends Component {
       }
 
       if (!config) config = defaultConfig
-
-      // appendComponent( // AgentConfigModal is not created
-      //   <AgentConfigModal
-      //     agent={data}
-      //     config={config}
-      //     onClose={(modal) => {
-      //       removeComponent(modal) // eslint-disable-line no-undef
-      //       this.refs.agents.refresh()
-      //     }}/>
-      // )
     })
   }
 
@@ -299,7 +280,6 @@ export default class Agents extends Component {
   }
 
   render () {
-    // let table // Never used
     const {tabIndex} = this.state
     return (
       <TabPage>

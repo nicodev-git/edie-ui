@@ -71,7 +71,6 @@ export default class IconSelectModal extends React.Component {
     formData.append('thumb', 'true')
 
     input.value = ''
-    // upload/uploadImage
 
     $.ajax({ // eslint-disable-line no-undef
       url: Api.upload.uploadImage, // eslint-disable-line no-undef

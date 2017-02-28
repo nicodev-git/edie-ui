@@ -134,8 +134,6 @@ export function dateFormatter (datetime) {
   str += ` ${time}`
 
   return str
-
-    // return $.timeago(date) + " " + time;
 }
 
 export function format () {
