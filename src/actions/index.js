@@ -25,6 +25,7 @@ export * from './MonitorActions'
 export * from './SettingsActions'
 export * from './WorkflowActions'
 export * from './DiagramActions'
+export * from './ChatActions'
 
 export const fetchMessage = () => {
   if (!window.localStorage.getItem('token')) {

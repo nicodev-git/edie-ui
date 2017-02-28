@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux'
 import {reducer as FormReducer} from 'redux-form'
 import AuthReducer from './AuthReducer'
+import ChatReducer from './ChatReducer'
 import DashboardReducer from './DashboardReducer'
 import SettingsReducer from './SettingsReducer'
 import DeviceReducer from './DeviceReducer'
@@ -14,7 +15,8 @@ const rootReducer = combineReducers({
   dashboard: DashboardReducer,
   devices: DeviceReducer,
   search: SearchReducer,
-  diagram: DiagramReducer
+  diagram: DiagramReducer,
+  chat: ChatReducer
 })
 
 export default rootReducer

@@ -6,7 +6,6 @@ import {
   findIndex
 } from 'lodash'
 import moment from 'moment'
-import { ROOT_URL } from '../../../../actions/config'
 import { chatSocket } from '../../../../util/socket/ChatSocket'
 import { showAlert } from '../../../shared/Alert'
 
@@ -16,12 +15,6 @@ export default class Chat extends React.Component {
 
   constructor (props) {
     super(props)
-    this.state = {
-      incidents: [],
-      selected: null,
-      rooms: {},
-      roomUsers: []
-    }
 
     this.socketEvents = {
       open: this.onSocketOpen.bind(this),
@@ -39,8 +32,29 @@ export default class Chat extends React.Component {
       chatSocket.addListener(key, value)
     })
     chatSocket.connect()
+    let params = {
+      draw: 1,
+      start: 0,
+      length: 150,
+      sid: this.context.sid,
+      type: 'web',
+      msgcount: true
+    }
+    let rooms = this.props.rooms
+    this.props.loadIncidents(params, rooms)
+  }
 
-    this.loadIncidents()
+  componentWillReceiveProps (nextProps) {
+    if (this.props.incidents !== nextProps.incidents) {
+      this.showDefaultIncident()
+    }
+    if (this.props.image !== nextProps.image) {
+      let img = nextProps.image
+      this.sendGroupMessage(`picture:${img}`)
+    }
+    if (this.props.selected !== nextProps.selected) {
+      this.refs && scrollBottom(this.refs.messages)
+    }
   }
 
   componentWillUnmount () {
@@ -52,10 +66,10 @@ export default class Chat extends React.Component {
 
   renderIncident (item) {
     const name = item.description || item.name || 'Incident'
-    const room = this.state.rooms[item.id]
+    const room = this.props.rooms[item.id]
     const unread = room.unread
     return (
-      <li className={`room${this.state.selected === item ? ' active open' : ''}`}
+      <li className={`room${this.props.selected === item ? ' active open' : ''}`}
         key={item.id}
         onClick={this.onClickIncident.bind(this, item)}>
           <a href="javascript:;">
@@ -153,7 +167,7 @@ export default class Chat extends React.Component {
     )
   }
 
-  loadIncidents () {
+  /* loadIncidents () {
     $.get(`${ROOT_URL}${Api.incidents.getUnfixedIncidentsQuick}`, { // eslint-disable-line no-undef
       draw: 1,
       start: 0,
@@ -187,7 +201,7 @@ export default class Chat extends React.Component {
         this.showDefaultIncident()
       })
     })
-  }
+  } */
 
   onClickIncident (incident) {
     if (!chatSocket.connected) {
@@ -195,7 +209,7 @@ export default class Chat extends React.Component {
     }
 
     const id = incident.id
-    let {rooms} = this.state
+    let {rooms} = this.props
     let room = rooms[id]
 
     if (!room.joined) {
@@ -203,33 +217,31 @@ export default class Chat extends React.Component {
       room.joined = true
     }
 
-    this.loadIncidentUsers(id)
+    let params = {
+      sid: this.context.sid,
+      incidentId: id
+    }
+    this.props.loadIncidentUsers(params)
     room.unread = 0
-
-    this.setState({
-      selected: incident,
-      rooms: rooms
-    }, () => {
-      this.refs && scrollBottom(this.refs.messages)
-    })
+    this.props.selectIncident(incident, rooms)
   }
 
   showDefaultIncident () {
     if (!chatSocket.connected) return
-    if (this.state.selected) return
+    if (this.props.selected) return
 
-    if (this.state.incidents.length) { this.onClickIncident(this.state.incidents[0]) }
+    if (this.props.incidents.length) { this.onClickIncident(this.props.incidents[0]) }
   }
 
   moveCurrentToTop () {
-    const {selected, incidents} = this.state
+    const {selected, incidents} = this.props
     if (!selected) return
     const index = incidents.indexOf(selected)
     if (index < 0) return
     incidents.splice(index, 1)
     incidents.splice(0, 0, selected)
 
-    this.setState({ incidents })
+    this.props.setIncidents(incidents)
   }
 
   onTextKeyUp (e) {
@@ -270,7 +282,9 @@ export default class Chat extends React.Component {
     formData.append('file', file, input.value.split(/(\\|\/)/g).pop())
     formData.append('sid', this.context.sid)
 
-    $.ajax({ // eslint-disable-line no-undef
+    this.props.uploadChatImage(formData)
+
+    /* $.ajax({ // eslint-disable-line no-undef
       url: Api.upload.uploadImage, // eslint-disable-line no-undef
       type: 'POST',
       data: formData,
@@ -290,11 +304,11 @@ export default class Chat extends React.Component {
       error: () => {
         showAlert('Failed to upload.')
       }
-    })
+    }) */
     input.value = null
   }
 
-  loadIncidentUsers (incidentId) {
+  /* loadIncidentUsers (incidentId) {
     this.setState({
       roomUsers: []
     })
@@ -317,10 +331,10 @@ export default class Chat extends React.Component {
         })
       })
     })
-  }
+  } */
 
   updateUserOnlineStatus (userId, online) {
-    let {roomUsers} = this.state
+    let {roomUsers} = this.props
     const index = findIndex(roomUsers, { userId })
     if (index < 0) return
 
@@ -328,7 +342,7 @@ export default class Chat extends React.Component {
     if (roomUser.online === online) return
     roomUser.online = online
 
-    this.setState({roomUsers})
+    this.setRoomUsers(roomUsers)
   }
 
   onSocketOpen () {
@@ -343,7 +357,7 @@ export default class Chat extends React.Component {
 
   onSocketMessage (sockMsg) {
     if (sockMsg.messagetype === 'MessageToGroup') {
-      let {rooms} = this.state
+      let {rooms} = this.props
       let room = rooms[sockMsg.incidentid]
       if (!room) return
 
@@ -361,8 +375,8 @@ export default class Chat extends React.Component {
         })
 
                 // Play Beep
-        if (this.state.selected &&
-                    this.state.selected.id === sockMsg.incidentid && !sockMsg.history) {
+        if (this.props.selected &&
+                    this.props.selected.id === sockMsg.incidentid && !sockMsg.history) {
           this.playBeep()
         }
 
@@ -380,13 +394,13 @@ export default class Chat extends React.Component {
       }
 
             // Add badge for real time messages
-      if (!sockMsg.history && (!this.state.selected || sockMsg.incidentid !== this.state.selected.id)) {
+      if (!sockMsg.history && (!this.props.selected || sockMsg.incidentid !== this.props.selected.id)) {
         room.unread += 1
       }
 
       clearTimeout(this.msgTimer)
       this.msgTimer = setTimeout(() => {
-        this.setState({ rooms })
+        this.props.setRooms(rooms)
       }, 50)
 
       // Notification
@@ -403,7 +417,7 @@ export default class Chat extends React.Component {
       //     });
       // }
     } else if (sockMsg.messagetype === 'TypingStatus') {
-      let {rooms} = this.state
+      let {rooms} = this.props
       let room = rooms[sockMsg.incidentid]
       if (!room) return
 
@@ -423,7 +437,7 @@ export default class Chat extends React.Component {
         return
       }
 
-      this.setState({rooms})
+      this.props.setRooms(rooms)
     } else if (sockMsg.messagetype === 'status') {
       const user = sockMsg.userId
       if (sockMsg.message === 'online') {
@@ -465,14 +479,14 @@ export default class Chat extends React.Component {
   }
 
   sendGroupMessage (text) {
-    if (!this.state.selected) {
+    if (!this.props.selected) {
       return showAlert('Please select incident first.')
     }
 
     chatSocket.send({
       'messagetype': 'MessageToGroup',
       'sid': this.context.sid,
-      'incidentid': this.state.selected.id,
+      'incidentid': this.props.selected.id,
       'message': text
     })
 
@@ -480,12 +494,12 @@ export default class Chat extends React.Component {
   }
 
   sendTypingStatus (typing) {
-    if (!this.state.selected) return
+    if (!this.props.selected) return
 
     chatSocket.send({
       'messagetype': 'TypingStatus',
       'sid': this.context.sid,
-      'incidentid': this.state.selected.id,
+      'incidentid': this.props.selected.id,
       'message': typing ? 'typing' : 'idle'
     })
   }
@@ -505,7 +519,7 @@ export default class Chat extends React.Component {
   }
 
   render () {
-    let {rooms, selected} = this.state
+    let {rooms, selected} = this.props
     let room = null
     let messages = []
     if (selected) room = rooms[selected.id]
@@ -515,7 +529,7 @@ export default class Chat extends React.Component {
       <div className="chat-content">
         <section className="incidents">
           <ul className="nav nav-stacked" id="nav-incidents">{
-            this.state.incidents.map(item => this.renderIncident(item))
+            this.props.incidents.map(item => this.renderIncident(item))
           }
           </ul>
         </section>
@@ -548,8 +562,8 @@ export default class Chat extends React.Component {
           <h2>
             <span>Users</span>
             <span>—</span>
-            <span className="online-count">{this.state.roomUsers.length}</span>{
-            this.state.roomUsers.map(item => this.renderUser(item, room))
+            <span className="online-count">{this.props.roomUsers.length}</span>{
+            this.props.roomUsers.map(item => this.renderUser(item, room))
           }
           </h2>
         </section>
