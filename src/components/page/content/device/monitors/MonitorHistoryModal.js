@@ -14,7 +14,7 @@ export default class MonitorHistoryModal extends Component {
 
     this.cells = [{
       'displayName': 'Date/Time',
-      'columnName': 'starttimestamp',
+      'columnName': 'timestamp',
       'customComponent': (props) => {
         return <span>{moment(props.data).format('YYYY-MM-DD HH:mm:ss')}</span>
       }
