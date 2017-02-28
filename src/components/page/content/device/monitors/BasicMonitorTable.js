@@ -167,10 +167,6 @@ export default class BasicMonitorTable extends Component {
     )
   }
 
-  componentWillMount () {
-
-  }
-
   render () {
     return (
       <div>

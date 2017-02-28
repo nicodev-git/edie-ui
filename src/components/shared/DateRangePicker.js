@@ -61,10 +61,6 @@ export default class DateRangePicker extends React.Component {
     }
   }
 
-  componentDidMount () {
-
-  }
-
   onApply (e, dp) {
     let label = dp.chosenLabel
     if (label === 'Custom Range') {

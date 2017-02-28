@@ -13,14 +13,6 @@ export default class Dashboard extends React.Component {
     this.onDashboardUpdate = this.onDashboardUpdate.bind(this)
   }
 
-  componentDidMount () {
-
-  }
-
-  componentWillUnmount () {
-
-  }
-
   onDashboardUpdate (msg) {
     console.log('Dashboard message received.')
     this.props.updateDashboard(msg.data)

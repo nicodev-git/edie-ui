@@ -14,10 +14,6 @@ export default class Alert extends React.Component {
     }
   }
 
-  componentDidMount () {
-
-  }
-
   onKeyUp (e) {
     if (e.keyCode === 13) {
       this.onClickSave()

@@ -37,10 +37,6 @@ class DeviceImg extends React.Component {
     this.state = {}
   }
 
-  componentDidMount () {
-
-  }
-
   render () {
     const { connectDragSource } = this.props
 

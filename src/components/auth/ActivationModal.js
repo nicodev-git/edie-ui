@@ -25,10 +25,6 @@ class ActivationModal extends React.Component {
 
   }
 
-  onClickClose () {
-
-  }
-
   render () {
     return (
       <Modal

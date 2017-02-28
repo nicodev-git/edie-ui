@@ -68,10 +68,6 @@ export default class DeviceWizard extends React.Component {
     }
   }
 
-  componentWillMount () {
-
-  }
-
   render () {
     let current = this.state.current
     let cssPrevious = ''

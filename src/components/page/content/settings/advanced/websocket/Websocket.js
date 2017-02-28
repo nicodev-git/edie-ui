@@ -12,10 +12,6 @@ export default class Websocket extends React.Component {
     }
   }
 
-  componentDidMount () {
-
-  }
-
   onClickAddIncident () {
     const refs = this.refs
 

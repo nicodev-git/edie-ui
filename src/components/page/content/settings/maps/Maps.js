@@ -50,21 +50,6 @@ export default class Maps extends React.Component {
     )
   }
 
-  renderContent2 () {
-    return (
-      <InfiniteTable
-        url="/dashboard/getMaps"
-        params={{}}
-        cells={this.cells}
-        rowMetadata={{'key': 'id'}}
-        selectable
-        ref="maps"
-
-        onRowDblClick={this.onMapEdit.bind(this)}
-      />
-    )
-  }
-
   renderMapModal () {
     if (!this.props.mapModalVisible) return
     return (

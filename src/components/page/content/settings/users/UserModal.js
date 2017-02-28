@@ -23,10 +23,6 @@ class UserModal extends React.Component {
     this.renderInput = this.renderInput.bind(this)
   }
 
-  componentWillMount () {
-
-  }
-
   loadDefaultMaps () {
     return $.get(`${ROOT_URL}${Api.dashboard.getMaps}?draw=1`).done(res => { // eslint-disable-line no-undef
       this.setState({

@@ -78,22 +78,6 @@ export default class MainRulesAdd extends Component {
     )
   }
 
-  render2 () {
-    return (
-      <ResponsiveInfiniteTable
-        id="rule2"
-        url={this.state.url}
-        params={this.state.params}
-        cells={this.cells}
-        ref="table"
-        rowMetadata={{'key': 'id'}}
-        bodyHeight={this.props.containerHeight}
-        selectable={false}
-        onRowDblClick={this.onRowDblClick.bind(this)}
-      />
-    )
-  }
-
   onRowDblClick () {
 
   }

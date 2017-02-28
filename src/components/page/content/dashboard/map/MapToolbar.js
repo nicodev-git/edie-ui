@@ -159,11 +159,6 @@ export default class Toolbar extends React.Component {
 
   onClickNewIncident () {
     this.props.openDashboardNewIncidentModal()
-        // appendComponent(
-        //     <NewIncidentModal
-        //         onClose={removeComponent}
-        //         sid={this.context.sid}/>
-        // )
   }
 
   renderNewIncidentModal () {

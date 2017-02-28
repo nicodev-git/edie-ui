@@ -29,9 +29,6 @@ export default class IconUploader extends React.Component {
     }
   }
 
-  componentWillMount () {
-  }
-
   onClickChange () {
     appendComponent(
       <IconSelectModal selected={this.state.currentIcon} onClose={this.onCloseChangeModal.bind(this)}/>

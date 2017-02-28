@@ -27,21 +27,6 @@ export default class Monitors extends React.Component {
     }
   }
 
-  render2 () {
-    const {device} = this.props
-    return (
-      <div className="flex-vertical flex-1">
-        <div className="tab-header">
-          <div>
-              <span className="tab-title">{device.name || ''}</span>
-          </div>
-        </div>
-
-        <div id="div-monitors" className="flex-vertical flex-1 margin-lg-top" />
-      </div>
-    )
-  }
-
   renderOptions () {
     const {selected, currentMonitor} = this.state
 

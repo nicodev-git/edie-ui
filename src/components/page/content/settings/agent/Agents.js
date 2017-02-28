@@ -15,8 +15,6 @@ import TabPage from '../../../../shared/TabPage'
 import TabPageBody from '../../../../shared/TabPageBody'
 import TabPageHeader from '../../../../shared/TabPageHeader'
 
-import InfiniteTable from '../../../../shared/InfiniteTable'
-
 import { ROOT_URL } from '../../../../../actions/config'
 
 export default class Agents extends Component {
@@ -142,60 +140,6 @@ export default class Agents extends Component {
         'columnName': 'message'
       }]
     }
-  }
-
-  render2 () {
-    let table
-    const {tabIndex} = this.state
-
-    if (tabIndex === 1) {
-      table = (
-        <InfiniteTable
-          url="/devices/getAgentDevicesDT"
-          params={{
-            installed: this.state.install
-          }}
-          cells={this.state.cellAgents}
-          rowMetadata={{'key': 'id'}}
-          selectable
-          bodyHeight={this.props.containerHeight}
-          pageSize={500}
-          ref="agents"
-
-          onRowDblClick={this.onClickEditAgentConfig.bind(this)}
-        />
-      )
-    } else if (tabIndex === 2) {
-      table = (
-        <InfiniteTable
-          url="/devices/getAgentsTable"
-          params={{}}
-          cells={this.state.cellCollectors}
-          rowMetadata={{'key': 'id'}}
-          selectable
-          bodyHeight={this.props.containerHeight}
-          ref="collectors"
-        />
-      )
-    } else if (tabIndex === 3) {
-      table = (
-        <InfiniteTable
-          url="/admin/getAgentsLogs"
-          params={{}}
-          cells={this.state.cellLog}
-          rowMetadata={{'key': 'idagentslog'}}
-          selectable
-          bodyHeight={this.props.containerHeight}
-          ref="agentlogs"
-        />
-      )
-    }
-
-    return (
-      <div>
-          {table}
-      </div>
-    )
   }
 
   onChangeInstall (install) {
