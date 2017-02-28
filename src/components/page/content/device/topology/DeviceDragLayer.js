@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react'
 import { DragLayer } from 'react-dnd'
-import { DragTypes } from 'shared/Global'
+import { extImageBaseUrl, DragTypes } from 'shared/Global'
 
 function collect (monitor) {
   return {
@@ -42,7 +42,7 @@ class DeviceDragLayer extends React.Component {
     switch (type) {
       case DragTypes.DEVICE:
         return (
-          <img src={`/externalpictures?name=${item.img}`} width="48" height="48" style={style}/>
+          <img src={`${extImageBaseUrl}${item.img}`} width="48" height="48" style={style}/>
         )
     }
   }

@@ -84,52 +84,6 @@ export default class Topology extends React.Component {
     }
   }
 
-  componentDidMount () {
-    // let callLoadMap = $.get(`${ROOT_URL}${Api.dashboard.getDevicesForMap}`, {
-    //   mapid: this.props.device.mapid,
-    //   fatherid: this.props.device.id,
-    //   sid: this.context.sid
-    // })
-    //
-    // let callLoadLines = $.get(`${ROOT_URL}${Api.dashboard.getLineByLine}`, {
-    //   mapid: this.props.device.mapid,
-    // })
-    //
-    // return $.when(callLoadMap, callLoadLines).done((resMap, resLines) => {
-    //
-    //   let [arrNewDevices] = resMap
-    //   let [arrNewLines] = resLines
-    //
-    //   let arrLines = {}
-    //   $.each(arrNewLines, (i, item) => {
-    //     arrLines[item.lineId] = {
-    //       "id": item.id,
-    //       "type": item.type,
-    //
-    //       "fromDeviceid": item.fromDevice,
-    //       "fromPoint": item.fromPoint,
-    //       "toDeviceid": item.toDevice,
-    //       "toPoint": item.toPoint,
-    //
-    //       "linecolor": item.linecolor,
-    //       "linewidth": item.linewidth,
-    //     }
-    //   })
-    //
-    //   //Draw
-    //   const refMap = this.getDivMap()
-    //   if (!refMap) return
-    //
-    //   refMap.drawMap(arrNewDevices, arrLines, [], {}, false)
-    //
-    //
-    // }).fail(() => {
-    //   alert("Map load failed!")
-    // }).always(() => {
-    //
-    // })
-  }
-
   // ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   getDivMap () {
@@ -156,15 +110,13 @@ export default class Topology extends React.Component {
   }
 
   onMapMouseDown (map, obj) {
+    this.props.openDevice(obj.data)
 
-    // emit(EVENTS.MAP_DEVICE_CLICKED, obj.data)
-
-    // mainDeviceClick({
-    //     id: obj.id,
-    //     title: obj.data.name,
-    //     src: obj.imageObj ? obj.imageObj.getSrc() : '',
-    // }, obj.data.devicetype, false, null, obj.data)
-
+    if (obj.data.isgroup) {
+      this.props.router.push(`/device/${obj.data.id}/topology`)
+    } else {
+      this.props.router.push(`/device/${obj.data.id}/main/incidents`)
+    }
   }
 
   onMapObjectMoving () {
