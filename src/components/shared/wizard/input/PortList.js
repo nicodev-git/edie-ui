@@ -1,11 +1,10 @@
 import React from 'react'
 import { appendComponent, removeComponent } from '../../../../util/Component'
-import { InputBase } from 'react-serial-forms'
 import PortModal from './PortModal'
 
 import {findIndex} from 'lodash'
 
-export default class PortList extends InputBase {
+export default class PortList extends React.Component {
   constructor (props) {
     super(props)
 
@@ -28,13 +27,8 @@ export default class PortList extends InputBase {
     }
   }
 
-  getInitialValue () {
-    return []
-  }
-
   render () {
-    let config = this.props.config
-    let values = this.props.values
+    let {config, values} = this.props
     let ports = []
 
     this.state.items.forEach((item, i) => {

@@ -75,8 +75,12 @@ class DeviceWizard extends React.Component {
       }
     )
 
-    this.closeModal(true)
-    onFinish && onFinish(null, props)
+    console.log(props)
+
+    if (!onFinish) {
+      this.closeModal(true)
+      onFinish && onFinish(null, props)
+    }
   }
 
   buildProgressBar () {

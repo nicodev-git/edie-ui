@@ -11,6 +11,8 @@ import { showAlert } from '../../../../shared/Alert'
 import MonitorPicker from './MonitorPicker'
 import MonitorHistoryModal from './MonitorHistoryModal'
 
+import { getMonitorType } from 'components/shared/wizard/WizardConfig'
+
 export default class MonitorTable extends Component {
   constructor (props) {
     super(props)
@@ -155,7 +157,7 @@ export default class MonitorTable extends Component {
     if (!this.props.monitorWizardVisible) return null
 
     const {monitorConfig} = this.state
-    const type = 'monitor-custom'
+    const type = getMonitorType(monitorConfig.monitortype)
     return (
       <DeviceWizardContainer
         deviceType={type}

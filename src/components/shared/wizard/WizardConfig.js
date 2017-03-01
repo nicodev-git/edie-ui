@@ -2978,10 +2978,15 @@ export const wizardConfig = {
     steps: [{
       title: 'step 1',
       items: [{
-        type: 'checklist',
+        type: 'text',
         required: true,
-        items: commonconfig.port.values,
-        name: 'json',
+        name: 'params.port',
+        label: {
+          text: 'Port',
+          width: 2
+        },
+        // items: commonconfig.port.values,
+        // name: 'json',
 
         extra: [{
           type: 'advanced',
