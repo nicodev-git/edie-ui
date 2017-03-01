@@ -2979,54 +2979,63 @@ export const wizardConfig = {
       title: 'step 1',
       items: [{
         type: 'text',
+        label: {
+          text: 'Name',
+          type: 'attach',
+          width: 2
+        },
+        name: 'name',
+        required: true
+      }, {
+        type: 'portlist',
         required: true,
         name: 'params.port',
         label: {
           text: 'Port',
           width: 2
         },
-        // items: commonconfig.port.values,
+        items: commonconfig.port.values
         // name: 'json',
 
-        extra: [{
-          type: 'advanced',
-          text: 'Advanced',
-          width: 2,
-          items: [{
-            type: 'combo',
-            remote: true,
-            server: {
-              display: 'name',
-              title: 'description',
-              value: 'id'
-            },
-            label: {
-              text: 'Agent',
-              type: 'attach',
-              width: 3
-            },
-            name: 'agentid'
-          }, {
-            type: 'combo',
-            label: {
-              text: 'Check Interval',
-              width: 3
-            },
-            items: commonconfig.checkinterval.values,
-            width: MAX_WIDTH,
-            name: 'checkinterval'
-          }, {
-            type: 'check',
-            label: {
-              text: 'Enabled',
-              width: 3
-            },
-            name: 'enabled',
-            checked: true,
-            value: 1,
-            width: 9
-          }]
-        }]
+        // extra: [{
+        //   type: 'advanced',
+        //   text: 'Advanced',
+        //   width: 2,
+        //   items: [{
+        //     type: 'combo',
+        //     remote: true,
+        //     server: {
+        //       display: 'name',
+        //       title: 'description',
+        //       value: 'id'
+        //     },
+        //     label: {
+        //       text: 'Agent',
+        //       type: 'attach',
+        //       width: 3
+        //     },
+        //     name: 'agentid'
+        //   }, {
+        //     type: 'combo',
+        //     label: {
+        //       text: 'Check Interval',
+        //       width: 3
+        //     },
+        //     items: commonconfig.checkinterval.values,
+        //     width: MAX_WIDTH,
+        //     name: 'checkinterval'
+        //   }, {
+        //     type: 'check',
+        //     label: {
+        //       text: 'Enabled',
+        //       width: 3
+        //     },
+        //     name: 'enabled',
+        //     checked: true,
+        //     value: 1,
+        //     width: 9
+        //   }]
+        // }]
       }]
     }]
   },

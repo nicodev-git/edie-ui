@@ -44,6 +44,7 @@ class DeviceWizard extends React.Component {
       'text': this.buildText.bind(this),
       'check': this.buildCheck.bind(this),
       'monitors': this.buildMonitors.bind(this),
+      'portlist': this.buildPortList.bind(this),
       'row': this.buildRow.bind(this)
     }
   }
@@ -72,9 +73,9 @@ class DeviceWizard extends React.Component {
       this.state.currentDevice.server.params || {},
       extraParams, {monitors: monitors.map(m => assign({}, m, {id: null}))}
     )
-    // console.log (props)
-    this.closeModal(true)
-    onFinish && onFinish(null, props)
+    console.log(props)
+    // this.closeModal(true)
+    !onFinish && onFinish(null, props)
   }
 
   buildProgressBar () {
@@ -187,8 +188,9 @@ class DeviceWizard extends React.Component {
       buildLabel={this.buildLabel.bind(this)}/>)
   }
 
-  buildCheckList (config, values) {
+  buildPortList (config, values) {
     return (<PortList config={config}
+      change={this.props.change}
       values={values}
       name="portList"
       buildInput={this.buildInput.bind(this)}/>)
