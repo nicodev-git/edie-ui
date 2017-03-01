@@ -1,9 +1,7 @@
 import React from 'react'
-import Modal from 'react-bootstrap-modal'
-import DateRangePicker from 'components/shared/DateRangePicker'
-import Select from 'react-select'
 import moment from 'moment'
 import IncidentTable from '../dashboard/incidents/IncidentTable'
+import BigIncidentsView from '../../../modal/BigIncidentsView'
 
 export default class BigIncidents extends React.Component {
   constructor (props) {
@@ -135,64 +133,19 @@ export default class BigIncidents extends React.Component {
   }
 
   render () {
+    let table = this.renderTable()
     return (
-      <Modal show={this.state.open}
+      <BigIncidentsView
+        show={this.state.open}
         onHide={this.onHide.bind(this)}
-        aria-labelledby="ModalHeader"
-        className="bootstrap-dialog type-default modal-fit modal-flex">
-        <div className="modal-header">
-          <div className="bootstrap-dialog-close-button">
-            <button className="close" onClick={this.onHide.bind(this)}>×</button>
-          </div>
-          <h4 className="modal-title bootstrap-dialog-title">Incidents</h4>
-        </div>
-        <div className="modal-body bootstrap-dialog-message">
-          <div className="form-inline">
-
-            <label>Show</label>&nbsp;
-            <Select
-              value={this.state.selectedSeverity.join(',')}
-              options={this.state.severities}
-              onChange={this.onChangeSeverity.bind(this)}
-              multi
-              clearable={false}
-              className="select-severity"
-              style={{minWidth: '85px'}}
-              searchable={false}
-              autosize={false}
-              backspaceRemoves={false}
-            />
-            &nbsp;<label>incidents from</label>&nbsp;
-            <DateRangePicker onClickRange={this.onFilterChange} ref="dp"/>
-            &nbsp;<label>having</label>&nbsp;
-            <select className="fixtype form-control inline select-custom text-primary"
-              onChange={this.onChangeFixed}
-              ref="fixed" defaultValue="false">
-              <option value="">Any</option>
-              <option value="false">Unfixed</option>
-              <option value="true">Fixed</option>
-            </select>
-            &nbsp;<label>status that contains</label>&nbsp;
-            <input
-              onChange={this.onFilterChange}
-              placeholder="search"
-              className="form-control p-none noborder text-primary"
-              style={{marginTop: '-2px'}}
-              ref="search"
-            />
-
-            <select ref="templateSelect"
-              className="fixtype form-control inline select-custom text-primary"
-              style={{display: 'none'}}>
-              <option ref="templateOption">{this.state.templateText}</option>
-            </select>
-          </div>
-          <div className="flex-1 flex-vertical" ref="tableContainer">
-            {this.renderTable()}
-          </div>
-
-        </div>
-      </Modal>
+        value={this.state.selectedSeverity.join(',')}
+        options={this.state.severities}
+        onChange={this.onChangeSeverity.bind(this)}
+        onFilter={this.onFilterChange}
+        onSelect={this.onChangeFixed}
+        text={this.state.templateText}
+        table={table}
+      />
     )
   }
 }
