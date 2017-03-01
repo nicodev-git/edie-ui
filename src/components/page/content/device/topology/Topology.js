@@ -114,7 +114,13 @@ export default class Topology extends React.Component {
   }
 
   onMapMouseDown (map, obj) {
+    this.props.openDevice(obj.data)
 
+    if (obj.data.isgroup) {
+      this.props.router.push(`/device/${obj.data.id}/topology`)
+    } else {
+      this.props.router.push(`/device/${obj.data.id}/main/incidents`)
+    }
   }
 
   onMapObjectMoving () {
