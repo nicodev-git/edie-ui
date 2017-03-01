@@ -80,7 +80,6 @@ class DiagramModal extends React.Component {
     }
 
     this.props.openDiagramObjectModal(object)
-    // this.props.addDiagramObject(object)
   }
 
   // ////////////////////////////////////////////////////

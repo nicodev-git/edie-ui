@@ -1,11 +1,14 @@
 import { combineReducers } from 'redux'
 import {reducer as FormReducer} from 'redux-form'
 import AuthReducer from './AuthReducer'
+import ChatReducer from './ChatReducer'
 import DashboardReducer from './DashboardReducer'
 import SettingsReducer from './SettingsReducer'
 import DeviceReducer from './DeviceReducer'
 import SearchReducer from './SearchReducer'
 import DiagramReducer from './DiagramReducer'
+import AttackersReducer from './AttackersReducer'
+import PincodeReducer from './PincodeReducer'
 
 const rootReducer = combineReducers({
   form: FormReducer,
@@ -14,7 +17,10 @@ const rootReducer = combineReducers({
   dashboard: DashboardReducer,
   devices: DeviceReducer,
   search: SearchReducer,
-  diagram: DiagramReducer
+  diagram: DiagramReducer,
+  chat: ChatReducer,
+  attackers: AttackersReducer,
+  pincode: PincodeReducer
 })
 
 export default rootReducer

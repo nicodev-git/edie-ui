@@ -73,15 +73,11 @@ export const chatSocket = {
     // /////////////////////////////////
 
   onOpen: function (e) {
-        // console.log("Chat Socket Opened");
     this.connected = true
     this.notifyListeners('open')
   },
 
   onMessage: function (e) {
-    // let me = this // Never used
-        // console.log(e.data);
-        // console.log('New Chat Socket Message');
     try {
       let msgObj = JSON.parse(e.data)
       this.notifyListeners('message', msgObj)
@@ -101,7 +97,6 @@ export const chatSocket = {
 
   onClose: function (e) {
     let me = this
-        // console.log("Chat Socket Closed");
     if (this.connected) {
       this.notifyListeners('close')
     }

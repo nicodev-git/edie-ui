@@ -15,7 +15,6 @@ function createTempGauge(gauge, callback) {
   var padding = 4;
   var canvas = document.createElement("canvas"), ctx = canvas
     .getContext("2d"), currentTempText = gauge, currentTemp = parseInt(currentTempText);
-//	console.log(currentTemp);
   canvas.width = tempOpts.width;
   canvas.height = tempOpts.width * 2 + tempOpts.labelSize;
 
@@ -39,8 +38,6 @@ function createTempGauge(gauge, callback) {
   fillTempGauge(ctx, 0, 20, tempOpts.width, tempOpts.width * 2 - padding,
     percentage);
   strokeTempGauge(ctx, 0, 20, tempOpts.width, tempOpts.width * 2 - padding);
-
-//	console.log(canvas.toDataURL());
   callback(canvas.toDataURL());
 }
 

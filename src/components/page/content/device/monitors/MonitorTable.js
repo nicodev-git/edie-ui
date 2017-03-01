@@ -177,8 +177,6 @@ export default class MonitorTable extends Component {
 
   onClickCal (row) {
     let data = row
-
-    // MonitorHistoryModal
     appendComponent(
       <MonitorHistoryModal
         device={data}
@@ -189,15 +187,6 @@ export default class MonitorTable extends Component {
 
   onClickLog (row) {
     let data = row
-
-    // appendComponent(
-    //     <MonitorLogModal
-    //         device={ data }
-    //         father={ this.props.device }
-    //         onClose={ removeComponent }
-    //         />
-    // )
-
     emit(EVENTS.DEV_MONITOR_LOG_CLICKED, data, this.props.device) // eslint-disable-line no-undef
   }
 

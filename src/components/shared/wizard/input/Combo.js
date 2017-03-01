@@ -65,25 +65,7 @@ export default class Combo extends React.Component {
               </a>
             )
           } else if (button.type === 'edit') {
-            // var btn = $('<a href="javascript:;" class="margin-md-left"><i class="fa fa-edit fa-lg"></i></a>');
-            // btn.css({
-            //     position: 'absolute',
-            //     top: '9px',
-            //     right: (-7 - i * 20) + 'px'
-            // });
-            //
-            // btn.click(function(){
-            //     var option = input.find(':selected');
-            //     var obj = option.data('object');
-            //     button.click && button.click(obj, function(cred){
-            //         console.log(cred);
-            //         option.text(cred[config.server.display]);
-            //         option.attr('value', cred[config.server.value]);
-            //         option.data('object', cred);
-            //     });
-            // });
-            //
-            // sidebarItems.push(btn);
+
           }
         })
       }
@@ -95,34 +77,7 @@ export default class Combo extends React.Component {
     // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   loadComboOptions (config, url) {
-    // $.ajax({
-    //     dataType : "json",
-    //     url : url,
-    //     async : false,
-    //     success : (data, status, jqXHR) => {
-    //         var root = config.server.root;
-    //         if(typeof root === 'string') {
-    //             data  = data[root];
-    //         } else if(root && root.length) {
-    //             $.each(root, function(i, prop){
-    //                 data = data[prop];
-    //                 if(!data) return false;
-    //             });
-    //         }
-    //
-    //         let options = []
-    //
-    //         data.forEach((d, i) => {
-    //             options.push({
-    //                 label: d[config.server.display],
-    //                 value: d[config.server.value],
-    //                 object: d
-    //             })
-    //         })
-    //
-    //         this.setState({options});
-    //     }
-    // });
+
   }
 
   onSidebarItem (button) {

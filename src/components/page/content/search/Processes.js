@@ -20,7 +20,6 @@ export default class Processes extends React.Component {
     this.cells = [{
       'displayName': 'Name',
       'columnName': 'name',
-            // "cssClassName": "nowrap",
       'cssClassName': 'width-180'
     }, {
       'displayName': 'Device',
@@ -87,7 +86,7 @@ export default class Processes extends React.Component {
   }
 
   render () {
-    const defaultDate = 'Last 7 Days'// moment().startOf("month").format("MMMM")
+    const defaultDate = 'Last 7 Days'
 
     return (
       <TabPage>

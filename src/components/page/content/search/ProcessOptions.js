@@ -24,7 +24,7 @@ export default class ProcessOptions extends React.Component {
   }
 
   render () {
-    const defaultDate = 'Last 7 Days'// moment().startOf("month").format("MMMM")
+    const defaultDate = 'Last 7 Days'
 
     return (
       <div className="tab-header">

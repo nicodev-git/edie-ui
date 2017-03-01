@@ -159,13 +159,6 @@ class InfiniteTable extends React.Component {
   }
 
   refresh () {
-        // this.setState({
-        //     results: [],
-        //     currentPage: 0,
-        //     maxPages: 0,
-        // }, () => {
-        //     this.getExternalData()
-        // })
     if (this.props.useExternal) {
       this.getExternalData(1, true)
     }

@@ -83,7 +83,6 @@ class Main extends React.Component {
     if (!found) {
       let deviceId = device ? device.id : 'main'
       deviceMenu(deviceId).forEach(item => {
-        // console.log(item.path, pathname)
         if (item.id === dashboardId) return true
         if (startsWith(pathname, item.path)) {
           pageId = item.id
@@ -142,10 +141,6 @@ class Main extends React.Component {
         {this.renderApiError()}
       </div>
     )
-
-    // <IncidentAlert />
-    // {this.state.loading ? <Loader /> : null}
-    // <ReactTooltip />
   }
 }
 

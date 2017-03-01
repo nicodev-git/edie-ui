@@ -63,12 +63,7 @@ export default class Sidebar extends React.Component {
   }
 
   onMapDeviceClicked (device) {
-        // this.setState({device}, () => {
-        //     var menuItems = $('#tab-device li').not(':eq(0)');
-        //     menuItems.removeClass('active');
-        //
-        //     $('.btn-main').click()
-        // })
+
   }
 
   render () {

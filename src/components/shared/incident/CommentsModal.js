@@ -10,10 +10,6 @@ export default class CommentsModal extends Component {
     }
   }
 
-  componentWillMount () {
-
-  }
-
   onHide () {
     this.onClickClose()
   }

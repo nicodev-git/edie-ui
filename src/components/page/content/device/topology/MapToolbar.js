@@ -34,17 +34,7 @@ export default class Toolbar extends React.Component {
   }
 
   loadLineTypes () {
-    // $.get(`${ROOT_URL}${Api.deviceadmin.getShapeTypes}`)
-    //   .done((res) => {
-    //     let lineTypes = this.lineTypes
-    //
-    //     $.each(res || [], function (i, type) {
-    //       let index = findIndex(lineTypes, {typename: type.devicename})
-    //       if (index >= 0) lineTypes[index]['typeid'] = type.devicetype
-    //     })
-    //
-    //     this.setState({lineTypes})
-    //   })
+
   }
 
   handleClick (e) {

@@ -36,46 +36,13 @@ export default class NewIncidentModal extends React.Component {
 
       let formData = new window.FormData()
       formData.append('file', img, img.name)
-
-      // $.ajax({
-      //   url: Api.upload.uploadImage,
-      //   type: 'POST',
-      //   data: formData,
-      //   cache: false,
-      //   processData: false,
-      //   contentType: false,
-      //
-      //   success: (res, textStatus, jqXHR) => {
-      //     if (res.success) {
-      //       this.addIncident(name, desc, severity, res.info)
-      //     } else {
-      //       showAlert('Failed to upload.')
-      //     }
-      //   },
-      //
-      //   error: (jqXHR, textStatus, errorThrown) => {
-      //     showAlert('Failed to upload.')
-      //   }
-      // })
     } else {
       this.addIncident(name, desc, severity, '')
     }
   }
 
   addIncident (name, desc, severity, img) {
-    // $.get(`${ROOT_URL}${Api.incidents.addIncident}`, {
-    //   name: name,
-    //   description: desc,
-    //   severity: severity,
-    //   picture: img,
-    //   sid: this.props.sid
-    // }).done(res => {
-    //   if (!res.success) return showAlert('Incident add failed.')
-    //   showAlert('Successfully Added!')
-    //   this.onClickClose()
-    // }).fail(() => {
-    //   showAlert('Incident add failed.')
-    // })
+
   }
 
     // /////////////////////////

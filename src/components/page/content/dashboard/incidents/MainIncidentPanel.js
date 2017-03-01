@@ -34,11 +34,10 @@ export default class MainIncidentPanel extends React.Component {
   }
 
   onClickSearch () {
-    // emit(EVENTS.SEARCH_CLICKED, '')
+
   }
 
   refreshTable () {
-    // console.log("Received Incident Fixed!")
     this.refs.table && this.refs.table.getWrappedInstance() && this.refs.table.getWrappedInstance().refresh()
   }
 

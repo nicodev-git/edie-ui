@@ -10,36 +10,6 @@ export const deviceTypeMap = {
   'Partners': 'group',
 
   'Long hub': 'longhub'
-  // 'Windows Server': 'server',
-  // 'Linux Server': 'server',
-  // 'Router': 'router',
-  //
-  // 'website': 'website',
-  // 'Web Site': 'website',
-  // 'Firewall': 'firewall',
-  // 'Internet': 'internet',
-  //
-  // 'Webservice': 'monitor-web',
-  // 'port': 'monitor-port',
-  // 'File': 'monitor-file',
-  // 'FileExist': 'monitor-file',
-  // 'sqlQuery': 'monitor-sql',
-  // 'jdbc_query': 'monitor-sql',
-  // 'sqlQueryGauge': 'monitor-sqlgauge',
-  // 'http': 'monitor-http',
-  // 'LogFile': 'monitor-log-file',
-  // 'LogCheck': 'monitor-log-file',
-  // 'eventlog': 'monitor-eventlog',
-  //
-  // 'MSSQLDB': 'db-mssql',
-  // 'MYSQLDB': 'db-mysql',
-  // 'OracleDB': 'db-oracle',
-  // 'Custom Device': 'custom',
-  //
-  // 'Antivirus': 'antivirus',
-  // 'Windows': 'antivirus',
-  //
-  // 'IPS': 'ips'
 }
 
 export function getDeviceType (templateName) {
@@ -296,15 +266,6 @@ export const commonconfig = {
     },
     rows: 5,
     name: 'notes',
-
-        // cls: 'padding-sm',
-        // style: {
-        //     width: '400px',
-        //     height: '105px',
-        //     border: '1px solid black',
-        //     overflow: 'auto',
-        // },
-
     inputStyle: {
       width: '400px',
       height: '105px',
@@ -461,9 +422,7 @@ export const wizardConfig = {
           width: 3
         },
         required: true,
-        // pattern: /((^|\.)((25[0-5])|(2[0-4]\d)|(1\d\d)|([1-9]?\d))){4}$/,
         name: 'ipaddress'
-        // validation: [commonconfig.ipvalidation],
       }, commonconfig.credentialsMenu(3),
       {
         type: 'label',
@@ -516,7 +475,6 @@ export const wizardConfig = {
                 text: 'External IP',
                 type: 'attach',
                 width: 3
-                                    // type: 'place'
               },
               name: 'externalIP'
             }]
@@ -557,7 +515,6 @@ export const wizardConfig = {
           width: 3
         },
         required: true,
-                // pattern: /((^|\.)((25[0-5])|(2[0-4]\d)|(1\d\d)|([1-9]?\d))){4}$/,
         name: 'ipaddress'
       }, commonconfig.credentialsMenu(3),
       {
@@ -611,7 +568,6 @@ export const wizardConfig = {
                 text: 'External IP',
                 type: 'attach',
                 width: 3
-                                    // type: 'place'
               },
               name: 'externalIP'
             }]
@@ -751,7 +707,6 @@ export const wizardConfig = {
           width: 3
         },
         required: true,
-                // pattern: /((^|\.)((25[0-5])|(2[0-4]\d)|(1\d\d)|([1-9]?\d))){4}$/,
         width: MAX_WIDTH,
         name: 'ipaddress'
       }, {
@@ -822,7 +777,6 @@ export const wizardConfig = {
           width: 3
         },
         required: true,
-                // pattern: /((^|\.)((25[0-5])|(2[0-4]\d)|(1\d\d)|([1-9]?\d))){4}$/,
         width: MAX_WIDTH,
         name: 'ipaddress'
       }, {
@@ -893,7 +847,6 @@ export const wizardConfig = {
           width: 3
         },
         required: true,
-                // pattern: /((^|\.)((25[0-5])|(2[0-4]\d)|(1\d\d)|([1-9]?\d))){4}$/,
         width: MAX_WIDTH,
         name: 'ipaddress'
       }, {
@@ -971,7 +924,6 @@ export const wizardConfig = {
           width: 2
         },
         name: 'ipaddress',
-        // pattern: /((^|\.)((25[0-5])|(2[0-4]\d)|(1\d\d)|([1-9]?\d))){4}$/,
         required: true,
         width: 6
       }, {
@@ -1083,7 +1035,6 @@ export const wizardConfig = {
           width: 2
         },
         name: 'ipaddress',
-        // pattern: /((^|\.)((25[0-5])|(2[0-4]\d)|(1\d\d)|([1-9]?\d))){4}$/,
         required: true,
         width: 6
       }, {
@@ -1195,7 +1146,6 @@ export const wizardConfig = {
           width: 2
         },
         name: 'ipaddress',
-        // pattern: /((^|\.)((25[0-5])|(2[0-4]\d)|(1\d\d)|([1-9]?\d))){4}$/,
         required: true,
         width: 6
       }, {
@@ -2006,7 +1956,6 @@ export const wizardConfig = {
         width: 6,
         required: true
       }, {
-        // type: 'text', // Duplicate
         label: {
           text: 'Threshold',
           type: 'attach',
@@ -2142,7 +2091,6 @@ export const wizardConfig = {
         width: 6,
         required: true
       }, {
-        // type: 'text', // Duplicate
         label: {
           text: 'Threshold',
           type: 'attach',
@@ -2257,7 +2205,6 @@ export const wizardConfig = {
         width: 6,
         required: true
       }, {
-        // type: 'text', // Duplicate
         label: {
           text: 'Threshold',
           type: 'attach',
@@ -2372,7 +2319,6 @@ export const wizardConfig = {
         width: 6,
         required: true
       }, {
-        // type: 'text', // Duplicate
         label: {
           text: 'Threshold',
           type: 'attach',
@@ -2893,7 +2839,6 @@ export const wizardConfig = {
     title: 'File',
     server: {
       params: {
-        // type: 'File', // Duplicate
         type: 'file'
       }
     },
@@ -3132,7 +3077,6 @@ export const wizardConfig = {
               width: 2
             },
             name: 'ipaddress',
-            // pattern: /((^|\.)((25[0-5])|(2[0-4]\d)|(1\d\d)|([1-9]?\d))){4}$/,
             required: true,
             style: {
               'padding-right': '40%'
@@ -3537,7 +3481,6 @@ export const wizardConfig = {
       items: [{
         type: 'text',
         name: 'filter1',
-                // required : true,
         label: {
           text: 'Filter1',
           type: 'attach',
@@ -3546,7 +3489,6 @@ export const wizardConfig = {
       }, {
         type: 'text',
         name: 'filter2',
-                // required : true,
         label: {
           text: 'Filter2',
           type: 'attach',
@@ -3555,7 +3497,6 @@ export const wizardConfig = {
       }, {
         type: 'text',
         name: 'parser',
-                // required : true,
         label: {
           text: 'Parser',
           type: 'attach',
@@ -3654,7 +3595,6 @@ export const wizardConfig = {
       items: [{
         type: 'text',
         name: 'filter1',
-                // required : true,
         label: {
           text: 'Filter1',
           type: 'attach',
@@ -3663,7 +3603,6 @@ export const wizardConfig = {
       }, {
         type: 'text',
         name: 'filter2',
-                // required : true,
         label: {
           text: 'Filter2',
           type: 'attach',
@@ -3672,7 +3611,6 @@ export const wizardConfig = {
       }, {
         type: 'text',
         name: 'parser',
-                // required : true,
         label: {
           text: 'Parser',
           type: 'attach',
@@ -3786,8 +3724,6 @@ export const wizardEditConfig = {
           width: 3
         },
         required: true,
-                // pattern: /((^|\.)((25[0-5])|(2[0-4]\d)|(1\d\d)|([1-9]?\d))){4}$/,
-
         name: 'ipaddress'
       }, {
         type: 'text',
@@ -3855,17 +3791,8 @@ export const wizardEditConfig = {
         },
 
         name: 'agentid'
-      }, /*, {
-                monitortype: 'text',
-                label: {
-                    text: 'URL',
-                    monitortype: 'attach',
-                    width: 3
-                },
-                required: true,
-                name: 'url',
-
-      } */ {
+      },
+      {
         type: 'combo',
         label: {
           text: 'Check Interval',
@@ -3959,8 +3886,6 @@ export const wizardEditConfig = {
           width: 3
         },
         required: true,
-                // pattern: /((^|\.)((25[0-5])|(2[0-4]\d)|(1\d\d)|([1-9]?\d))){4}$/,
-
         name: 'ipaddress'
       }, {
         type: 'text',
@@ -4026,8 +3951,6 @@ export const wizardEditConfig = {
           width: 3
         },
         required: true,
-                // pattern: /((^|\.)((25[0-5])|(2[0-4]\d)|(1\d\d)|([1-9]?\d))){4}$/,
-
         name: 'ipaddress'
       }, {
         type: 'text',
@@ -4093,8 +4016,6 @@ export const wizardEditConfig = {
           width: 3
         },
         required: true,
-                // pattern: /((^|\.)((25[0-5])|(2[0-4]\d)|(1\d\d)|([1-9]?\d))){4}$/,
-
         name: 'ipaddress'
       }, {
         type: 'text',
@@ -4628,7 +4549,6 @@ export const wizardEditConfig = {
           width: 3
         },
         required: true,
-                // pattern: /((^|\.)((25[0-5])|(2[0-4]\d)|(1\d\d)|([1-9]?\d))){4}$/,
         name: 'ipaddress'
       }, {
         type: 'combo',
@@ -4697,7 +4617,6 @@ export const wizardEditConfig = {
                   text: 'Domain Name',
                   type: 'attach',
                   width: 3
-                                    // type: 'place'
                 },
                 name: 'domainName',
                 required: true

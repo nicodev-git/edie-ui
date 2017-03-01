@@ -49,20 +49,6 @@ export default class ApplicationTable extends Component {
 
   }
 
-  // render2 () {
-  //   return (
-  //           <InfiniteTable
-  //             url={this.state.url}
-  //             params={this.state.params}
-  //             cells={this.columns}
-  //             ref="table"
-  //             rowMetadata={{'key': 'id'}}
-  //             bodyHeight={this.props.containerHeight}
-  //             selectable
-  //           />
-  //   )
-  // }
-
   render () {
     return (
       <ResponsiveInfiniteTable

@@ -20,10 +20,6 @@ export default class Advanced extends React.Component {
     this.state = {
       pageIndex: 0
     }
-
-    // this.listeners = {
-    //     [EVENTS.ADVANCED_TAB_CLICKED]: this.onTabClicked.bind(this),
-    // }
   }
 
   renderContent () {

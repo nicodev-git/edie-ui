@@ -10,7 +10,6 @@ fabric.ShapeLightningHandle = fabric.util.createClass(fabric.Circle, {
       originX: 'center',
       originY: 'center',
 
-      //selectable: false,
       hasBorders: false,
       hasControls: false,
       hasRotatingPoint: false,

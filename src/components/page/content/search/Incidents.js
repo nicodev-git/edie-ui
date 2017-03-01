@@ -1,5 +1,4 @@
 import React from 'react'
-// import {assign} from 'lodash'
 import Select from 'react-select'
 import moment from 'moment'
 import TimeAgo from 'react-timeago'
@@ -211,27 +210,6 @@ export default class Incidents extends React.Component {
       beforeStartTimestamp: dp.getEndDate().valueOf()
     })
   }
-
-  // onFilterChange () {
-  //   const refs = this.refs
-  //   const {search, fixed, dp} = refs
-  //
-  //   const { currentSortCol, currentSortDir } = this.state
-  //
-  //   let params = {
-  //     description: search ? search.value : '""',
-  //     severity: this.state.selectedSeverity,
-  //     afterStartTimestamp: dp.getStartDate().valueOf(),
-  //     beforeStartTimestamp: dp.getEndDate().valueOf(),
-  //
-  //     deviceid: this.state.selectedDevices.map(item => item.id),
-  //     sort: `${currentSortCol},${currentSortDir}`
-  //   }
-  //
-  //   if (fixed.value) params.fixed = fixed.value
-  //
-  //   this.props.searchIncidents(params)
-  // }
 
   onClickSearchDevice () {
     this.setState({

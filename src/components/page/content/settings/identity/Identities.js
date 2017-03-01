@@ -39,14 +39,6 @@ export default class Identities extends React.Component {
       'displayName': 'Country',
       'columnName': 'country'
     }]
-
-    // this.listeners = {
-    //     [EVENTS.IDENTITY_ADD_CLICKED]: this.onAddIdentity.bind(this),
-    //     [EVENTS.IDENTITY_EDIT_CLICKED]: this.onEditIdentity.bind(this),
-    //     [EVENTS.IDENTITY_REMOVE_CLICKED]: this.onRemoveIdentity.bind(this),
-    //
-    //     [EVENTS.IDENTITY_SEGMENTS_CLICKED]: this.onClickSegments.bind(this),
-    // }
   }
 
   componentWillMount () {
@@ -67,21 +59,6 @@ export default class Identities extends React.Component {
       />
     )
   }
-
-  // renderContent2 () {
-  //   return (
-  //     <JDataTable
-  //       url="/admin/getIdentities"
-  //       className="table-hover"
-  //       columns={this.cells}
-  //       height={`${this.props.containerHeight}px`}
-  //       length={1000}
-  //       ref="identities"
-  //
-  //       onRowDblClick={this.onEditIdentity.bind(this)}
-  //     />
-  //   )
-  // }
 
   renderIdentityModal () {
     if (!this.props.identityModalVisible) return null

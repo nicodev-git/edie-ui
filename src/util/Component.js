@@ -15,7 +15,7 @@ export function removeComponent (component) {
     console.error('Missing component to remove.')
     return
   }
-  let div = component.div// ReactDOM.findDOMNode(component)
+  let div = component.div
 
   if (!div) {
     console.error('Missing component dom to remove.')

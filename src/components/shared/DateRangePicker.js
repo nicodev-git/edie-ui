@@ -61,13 +61,7 @@ export default class DateRangePicker extends React.Component {
     }
   }
 
-  componentDidMount () {
-
-  }
-
   onApply (e, dp) {
-        // console.log(dp)
-
     let label = dp.chosenLabel
     if (label === 'Custom Range') {
       label = `${dp.startDate.format('DD/MM/YYYY')} - ${
@@ -94,18 +88,6 @@ export default class DateRangePicker extends React.Component {
   }
 
   render () {
-    // dateRangePicker.daterangepicker(, function(start, end, label) {
-    //     table && table.fnDraw();
-    // });
-    //
-    // dateRangePicker.change(function(){
-    //     $(this).attr('size', $(this).val().length || 1);
-    // });
-    // dateRangePicker.prev('i').click(function(){
-    //     dateRangePicker.click();
-    // });
-    // dateRangePicker.val("Last 7 Days").change();
-
     return (
       <ReactDateRangePicker {...this.state.config}
         style={{display: 'inline-block'}}

@@ -1,10 +1,4 @@
 import React from 'react'
-// import {
-//    ButtonGroup
-//    Button,
-//    Tabs,
-//    Tab
-// } from 'react-bootstrap'
 import { withRouter } from 'react-router'
 
 @withRouter
@@ -20,27 +14,6 @@ export default class Search extends React.Component {
       this.props.router.replace('/search/incidents')
     }
   }
-
-  // render2 () { // Never used
-  //   return (
-  //     <TabPage>
-  //       <TabPageHeader title="Search">
-  //         <div style={{margin: '0 auto', position: 'relative', textAlign: 'center'}}>
-  //           <div className="pull-left">
-  //             <div className="form-inline" />
-  //           </div>
-  //           <div className="pull-right">
-  //             <ButtonGroup />
-  //           </div>
-  //         </div>
-  //       </TabPageHeader>
-  //
-  //       <TabPageBody>
-  //         <div style={{backgroundColor: 'white'}} className="padding-sm" />
-  //       </TabPageBody>
-  //     </TabPage>
-  //   )
-  // }
 
   render () {
     return this.props.children

@@ -29,9 +29,6 @@ export default class Info extends React.Component {
 
     }
 
-    // let values = $.extend(true, {}, device)
-    // values['notes'] = values['devicenotes']
-
     return (
       <div>
         <div className="tab-header">

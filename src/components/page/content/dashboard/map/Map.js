@@ -126,7 +126,6 @@ class Map extends React.Component {
       document.body.addEventListener(fullScreen.fullScreenEventName, this.onFullScreenChange, true)
     }
 
-    // window.addEventListener('resize', this.updateDimensions)
     const mapHeight = Math.max(parseInt(window.innerWidth / 3), this.state.mapHeight)
     setTimeout(() => {
       this.setState({ mapHeight }, () => {
@@ -141,8 +140,6 @@ class Map extends React.Component {
     if (fullScreen.supportsFullScreen) {
       document.body.removeEventListener(fullScreen.fullScreenEventName, this.onFullScreenChange, true)
     }
-
-    // window.removeEventListener('resize', this.updateDimensions)
   }
 
   renderDeviceWizard () {
@@ -205,7 +202,6 @@ class Map extends React.Component {
 
   getDivMap () {
     return this.refs.map.getDecoratedComponentInstance()
-        // return this.refs.map
   }
 
   getCanvasMap () {
@@ -228,10 +224,6 @@ class Map extends React.Component {
   }
 
   onMapMouseDown (map, obj) {
-    // if (this.props.isFullScreen) {
-    //   this.props.requireFullScreen(false)
-    // }
-
     console.log(obj.data)
     this.props.openDevice(obj.data)
 
@@ -248,10 +240,6 @@ class Map extends React.Component {
 
   onMapObjectMoved (map, options, type) {
     if (!options) return
-
-        // options.mapid = this.state.mapId;
-        // options.fatherid = options.fatherid || 0;
-
     return this.moveMapItem(map, options, type)
   }
 
@@ -308,15 +296,6 @@ class Map extends React.Component {
 
   onMapTextChanged (map, props, isLabel) {
     this.props.updateMapDevice(props)
-        // this.addMapUploading(map, id);
-        // $.get(Api.devices.renameDevice, {
-        //     id: id,
-        //     name: text
-        // }).done((res) => {
-        //
-        // }).always(() =>{
-        //     this.removeMapUploading(map, id);
-        // })
   }
 
   onMapMouseOver (map, obj) {
@@ -527,7 +506,7 @@ class Map extends React.Component {
         fullScreen.requestFullScreen(document.body)
       }
     } else {
-      // window.dispatchEvent(new window.Event('resize'))
+
     }
   }
 
@@ -664,12 +643,7 @@ class Map extends React.Component {
   }
 
   updateDimensions () {
-    // if (globalState.fullscreen && !this.state.maximized) {
-    //   this.onClickMaximize()
-    //   setTimeout(() => {
-    //     window.dispatchEvent(new Event('resize'))
-    //   }, 500)
-    // }
+
   }
 
     // //////////////////////////////////////////////////////
@@ -696,7 +670,6 @@ class Map extends React.Component {
     let events = this.mapEvents
     const { selectedItem, dropItem, dropItemPos, editable, mapHeight } = this.state
     const maximized = this.props.isFullScreen
-    const { tooltip, tipLeft, tipTop, tipWidth, tipHeight } = this.state
     return (
       <div className={`map-row${maximized ? ' map-maximized' : ''}`}
         tabIndex="-1" style={{ outline: 0 }} onKeyUp={this.onMapKeyUp.bind(this)}>
@@ -724,11 +697,6 @@ class Map extends React.Component {
               ref="map"/>
             <DeviceDragLayer />
             {maximized ? null : <DividerLine onDragMove={this.onChangeDivider} onDragEnd={this.onDragEndDivider}/>}
-            <div className={`map-hover ${tooltip ? '' : 'hidden'}`}
-              data-tip={tooltip}
-              data-html
-              style={{ left: tipLeft, top: tipTop, width: tipWidth, height: tipHeight }}
-              onClick={this.onClickTooltip.bind(this)} />
           </div>
         </div>
 

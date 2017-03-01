@@ -15,8 +15,6 @@ import TabPage from '../../../../shared/TabPage'
 import TabPageBody from '../../../../shared/TabPageBody'
 import TabPageHeader from '../../../../shared/TabPageHeader'
 
-import InfiniteTable from '../../../../shared/InfiniteTable'
-
 import { ROOT_URL } from '../../../../../actions/config'
 
 export default class Agents extends Component {
@@ -91,24 +89,15 @@ export default class Agents extends Component {
         'columnName': 'name'
       }, {
         'displayName': 'OS',
-        'columnName': 'hostname', // osname
+        'columnName': 'hostname',
         'customComponent': (props) => {
           return <span />
         }
       }, {
         'displayName': 'Agent',
-        'columnName': 'proxyHost', // lastSeen
+        'columnName': 'proxyHost',
         'customComponent': (props) => {
           return <span />
-          // let val = props.data
-          // let installed = false;
-          // if (val) {
-          //     let diff = new Date().getTime() - val;
-          //     installed = diff / (3600 * 1000.0) <= 1;
-          // }
-          //
-          // if (installed) return <span>Installed</span>
-          // return <span>Not Installed</span>
         }
       }, {
         'displayName': 'Version',
@@ -153,60 +142,6 @@ export default class Agents extends Component {
     }
   }
 
-  render2 () {
-    let table
-    const {tabIndex} = this.state
-
-    if (tabIndex === 1) {
-      table = (
-        <InfiniteTable
-          url="/devices/getAgentDevicesDT"
-          params={{
-            installed: this.state.install
-          }}
-          cells={this.state.cellAgents}
-          rowMetadata={{'key': 'id'}}
-          selectable
-          bodyHeight={this.props.containerHeight}
-          pageSize={500}
-          ref="agents"
-
-          onRowDblClick={this.onClickEditAgentConfig.bind(this)}
-        />
-      )
-    } else if (tabIndex === 2) {
-      table = (
-        <InfiniteTable
-          url="/devices/getAgentsTable"
-          params={{}}
-          cells={this.state.cellCollectors}
-          rowMetadata={{'key': 'id'}}
-          selectable
-          bodyHeight={this.props.containerHeight}
-          ref="collectors"
-        />
-      )
-    } else if (tabIndex === 3) {
-      table = (
-        <InfiniteTable
-          url="/admin/getAgentsLogs"
-          params={{}}
-          cells={this.state.cellLog}
-          rowMetadata={{'key': 'idagentslog'}}
-          selectable
-          bodyHeight={this.props.containerHeight}
-          ref="agentlogs"
-        />
-      )
-    }
-
-    return (
-      <div>
-          {table}
-      </div>
-    )
-  }
-
   onChangeInstall (install) {
     this.setState({ install })
   }
@@ -245,16 +180,6 @@ export default class Agents extends Component {
       }
 
       if (!config) config = defaultConfig
-
-      // appendComponent( // AgentConfigModal is not created
-      //   <AgentConfigModal
-      //     agent={data}
-      //     config={config}
-      //     onClose={(modal) => {
-      //       removeComponent(modal) // eslint-disable-line no-undef
-      //       this.refs.agents.refresh()
-      //     }}/>
-      // )
     })
   }
 
@@ -299,7 +224,6 @@ export default class Agents extends Component {
   }
 
   render () {
-    // let table // Never used
     const {tabIndex} = this.state
     return (
       <TabPage>

@@ -13,14 +13,12 @@ import {
   CLOSE_DEVICE_MONITOR_WIZARD,
   CLEAR_DEVICE_WIZARD_INITIAL_VALUES,
 
-  // FETCH_DEVICE_RULES,
   FETCH_DEVICE_WORKFLOWS,
   OPEN_DEVICE_WORKFLOW_MODAL,
   CLOSE_DEVICE_WORKFLOW_MODAL,
   ADD_DEVICE_WORKFLOW,
   UPDATE_DEVICE_WORKFLOW,
   REMOVE_DEVICE_WORKFLOW,
-  // FETCH_DEVICE_RAW_INCIDENTS,
   FETCH_DEVICE_EVENTS,
   FETCH_DEVICE_PHYSICAL_RULES,
   FETCH_DEVICE_BASIC_MONITORS,
@@ -58,23 +56,16 @@ import {
 } from './types'
 
 import { apiError, updateDeviceError } from './Errors'
-
 import { ROOT_URL } from './config'
-
 import { encodeUrlParams } from '../shared/Global'
+import { getAuthConfig, getWorkflowConfig } from './util'
 
 export const fetchDevice = (id) => {
   if (!window.localStorage.getItem('token')) {
     return dispatch => dispatch({ type: NO_AUTH_ERROR })
   }
   return (dispatch) => {
-    let config = {
-      headers: {
-        'Cache-Control': 'no-cache',
-        'X-Authorization': window.localStorage.getItem('token')
-      }
-    }
-    axios.get(`${ROOT_URL}/device/${id}`, config)
+    axios.get(`${ROOT_URL}/device/${id}`, getAuthConfig())
       .then(response => {
         dispatch({
           type: FETCH_DEVICES,
@@ -90,13 +81,7 @@ export const fetchDevices = () => {
     return dispatch => dispatch({ type: NO_AUTH_ERROR })
   }
   return (dispatch) => {
-    let config = {
-      headers: {
-        'Cache-Control': 'no-cache',
-        'X-Authorization': window.localStorage.getItem('token')
-      }
-    }
-    axios.get(`${ROOT_URL}/device`, config)
+    axios.get(`${ROOT_URL}/device`, getAuthConfig())
       .then(response => fetchDevicesSuccess(dispatch, response))
       .catch(error => apiError(dispatch, error))
   }
@@ -168,26 +153,12 @@ export const clearDeviceWizardInitialValues = () => {
   }
 }
 
-// export const fetchDeviceRules = () => {
-//   return (dispatch) => {
-//     dispatch({
-//       type: FETCH_DEVICE_RULES,
-//       data: []
-//     })
-//   }
-// }
-
 export const fetchDeviceWorkflows = (params) => {
   if (!window.localStorage.getItem('token')) {
     return dispatch => dispatch({ type: NO_AUTH_ERROR })
   }
   return (dispatch) => {
-    let config = {
-      headers: {
-        'Content-Type': 'application/hal+json;charset=UTF-8'
-      }
-    }
-    axios.get(`${ROOT_URL}/workflow/search/findById?${encodeUrlParams(params)}`, config)
+    axios.get(`${ROOT_URL}/workflow/search/findById?${encodeUrlParams(params)}`, getWorkflowConfig())
       .then((response) => fetchDeviceWorkflowsSuccess(dispatch, response))
       .catch(error => apiError(dispatch, error))
   }
@@ -301,15 +272,6 @@ export const closeDeviceWfDiagramModal = (dispatch) => {
     })
   }
 }
-
-// export const fetchDeviceRawIncidents = () => {
-//   return (dispatch) => {
-//     dispatch({
-//       type: FETCH_DEVICE_RAW_INCIDENTS,
-//       data: []
-//     })
-//   }
-// }
 
 export const fetchDeviceEvents = (deviceid) => {
   if (!window.localStorage.getItem('token')) {
@@ -617,9 +579,6 @@ export const addGroupDevice = (group, props, cb) => {
     return dispatch => dispatch({ type: NO_AUTH_ERROR })
   }
   return (dispatch) => {
-    // axios.post(`${ROOT_URL}/device`, props)
-    //   .then(response => addGroupDeviceSuccess(dispatch, group, response.data))
-    //   .catch(error => apiError(dispatch, error))
     addGroupDeviceSuccess(dispatch, group, props, cb)
   }
 }

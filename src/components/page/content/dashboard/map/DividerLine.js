@@ -91,16 +91,12 @@ export default class DividerLine extends React.Component {
     if (clientOffset) {
       this._mouseClientOffset = clientOffset
     }
-
-    // console.log('drag start')
     this.setState({dragging: true})
   }
 
   handleTopMoveCapture (e) {
     if (!this.state.dragging) return
     e.preventDefault()
-    // console.log('drag move')
-
     const clientOffset = getEventClientOffset(e)
     if (clientOffset) {
       if (this._mouseClientOffset) {
@@ -116,11 +112,7 @@ export default class DividerLine extends React.Component {
   handleTopMoveEndCapture (e) {
     if (!this.state.dragging) return
     e.preventDefault()
-
-    // console.log('drag end')
-
     this.setState({dragging: false})
-
     const {onDragEnd} = this.props
     onDragEnd && onDragEnd()
   }

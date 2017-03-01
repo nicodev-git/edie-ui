@@ -116,7 +116,6 @@ export default class MonitorTable extends Component {
     this.setState({selected, monitors})
 
     onChanged && onChanged(monitors)
-        // this.updateValue(monitors)
   }
 
   addMonitor (monitorConfig) {

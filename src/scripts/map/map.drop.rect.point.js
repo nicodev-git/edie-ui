@@ -18,6 +18,5 @@ fabric.DropRectPoint = fabric.util.createClass(fabric.Circle, {
 
   onMouseDown: function(o){
     var me = this;
-    //me.rectObj.onMouseDownPoint(me, o);
   },
 });

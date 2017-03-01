@@ -36,8 +36,6 @@ export default class MainIncidents extends Component {
   constructor (props) {
     super(props)
 
-    // const {device} = this.props // Never used
-
     this.state = {
 
       severities: [
@@ -185,7 +183,6 @@ export default class MainIncidents extends Component {
   onClickColHeader (col) {
     const {
       columnName
-      // displayName // Never used
     } = col
     let { currentSortCol, currentSortDir } = this.state
 
@@ -254,7 +251,6 @@ export default class MainIncidents extends Component {
   }
 
   onFilterChange () {
-    // this.props.fetchDeviceIncidents(this.getParams())
     this.setState({
       params: this.getParams()
     })

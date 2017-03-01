@@ -12,32 +12,23 @@ export default class RadioGroup extends React.Component {
 
     $.each(config.items || [], function (i, radioItem) {
       let radio, content
-
-      // Default Value
-      // if(i === 0) radioItem.checked = true;
-      // else radioItem.checked = false;
-
       radio = this.props.buildRadio(radioItem, config.name)
       content = this.props.buildRadioContent(radioItem.items)
-
-      // radioboxes.append(radio);
       text.push(radio)
 
       // Event
       radio.find('input').first().change(function () {
-        let previous = text[(config.label ? 1 : 0) + config.items.length - 1]// col;
+        let previous = text[(config.label ? 1 : 0) + config.items.length - 1]
         let parent = previous.parent()
 
         if (contents.length) {
           $.each(contents, function (j, div) {
-            // div.hide();
             div.detach()
           })
         }
 
         if (content.length) {
           $.each(content, function (j, div) {
-            // div.show();
             div.insertAfter(previous)
             previous = div
           })
@@ -52,7 +43,6 @@ export default class RadioGroup extends React.Component {
           body.children().remove()
           let items = radioItem.form[0].items
           for (let i = 0; i < items.length; i++) {
-                        // var row = $(template['row']);
             let rows = buildInput(items[i])
             if (!rows) continue
             body.append(rows)
@@ -120,7 +110,6 @@ export default class RadioGroup extends React.Component {
     text = text.concat(curcontent)
 
     // Init
-    // $(radioboxes.children().first()).change();
     text[config.label ? 1 : 0].find('input').first().change()
 
     col.addClass(template['col-xs'] + calcWidth(config.width))

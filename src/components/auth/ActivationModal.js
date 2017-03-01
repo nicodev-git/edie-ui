@@ -18,20 +18,10 @@ class ActivationModal extends React.Component {
 
     if (!params.email) return window.alert('Email can\'t be blank.')
     if (!params.license) return window.alert('License can\'t be blank.')
-
-    // const {imadminConfig} = this.props
-    // if (!imadminConfig) return alert('Please try again later.')
-    //
-    // const {host, port} = imadminConfig
-    // this.props.register(`http://${host}:${port}/signup`, params)
     this.props.activateUser(params)
   }
 
   onHide () {
-
-  }
-
-  onClickClose () {
 
   }
 

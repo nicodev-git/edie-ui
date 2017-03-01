@@ -164,7 +164,6 @@ export default class MonitorLogModal extends Component {
       width: 48,
       height: 48,
       timeout: 60000
-      // agentid: curDeviceInfo
     }
 
     let configParams = {
@@ -309,12 +308,6 @@ export default class MonitorLogModal extends Component {
         let lines = res.data.map(item => this.highlightRender(item.logfileline))
         this.setState({ lines, totalPages })
       }
-
-      // if (res.recordsTotal === 0) {
-      //     p.find('#div-no-results').show();
-      // } else {
-      //     p.find('#div-no-results').hide();
-      // }
     }).always(function () {
       removeComponent(loader)
     })

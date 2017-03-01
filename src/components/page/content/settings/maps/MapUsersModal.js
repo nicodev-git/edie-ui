@@ -35,22 +35,6 @@ export default class MapUsersModal extends React.Component {
     )
   }
 
-  renderTable2 () {
-    return (
-      <InfiniteTable
-        url="/map/getMapUsersDT"
-        params={{
-          mapId: this.props.map.id
-        }}
-        cells={this.cells}
-        rowMetadata={{'key': 'id'}}
-        selectable
-        bodyHeight={400}
-        ref="mapusers"
-      />
-    )
-  }
-
   renderUsersModal () {
     if (!this.state.usersModalVisible) return null
     return (

@@ -5,9 +5,7 @@ import {
 } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import {
-  // findIndex, // Never used
   assign
-  // clone // Never used
 } from 'lodash'
 import { reduxForm, Field, change } from 'redux-form'
 import axios from 'axios'
@@ -23,16 +21,6 @@ class UserModal extends React.Component {
     }
 
     this.renderInput = this.renderInput.bind(this)
-  }
-
-  componentWillMount () {
-    // $.when(
-    //     this.loadDefaultMaps(),
-    //     this.loadRoles()
-    // ).always(() => {
-    //     this.setState({ loading: false })
-    // })
-
   }
 
   loadDefaultMaps () {

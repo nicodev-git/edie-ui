@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import Slider from 'rc-slider'
 import {
-  // findIndex, // Never used
   assign
 } from 'lodash'
 import d3 from 'd3'
@@ -11,7 +10,6 @@ import Transition from 'react-addons-css-transition-group'
 import 'react-datepicker/dist/react-datepicker.css'
 import DatePicker from 'react-datepicker'
 import {lookup} from 'country-data'
-// import countryLatlng from 'shared/data/country-latlng.json'
 
 const countryLatlng = null
 
@@ -108,8 +106,6 @@ export default class ThreatMap extends Component {
       },
 
       onViewportChange: () => {
-                // var height = $(window).height() - map.offset().top - 26;
-                // map.css('height', height)
         setTimeout(() => {
           me.onViewportChange()
         }, 1)
@@ -119,22 +115,12 @@ export default class ThreatMap extends Component {
     const $svg = $(this.refs.mapDiv).find('svg') // eslint-disable-line no-undef
     me.svg = d3.select($svg[0])
     me.svg.append('text').attr('class', 'layer')
-
-        // $svg.off('click').click(function(){
-        //     //p.click();
-        //     p.focus();
-        // });
-
     me.buffertimer = setInterval(() => {
       let $scope = me.scope
 
       if (!me.buffer.length) return
       let row = me.buffer[0]
       me.buffer.splice(0, 1)
-
-            // row.insertAfter(p.find('#tableContainer #spacerRow'));
-            // row.children().css("opacity", 0.1).fadeTo(500, 1, 'swing');
-            //
 
       let {latestAttacks} = this.state
 
@@ -145,29 +131,14 @@ export default class ThreatMap extends Component {
 
       this.setState({ latestAttacks })
     }, 500)
-
-        // p.find('#select-mode').change();
   }
 
   componentWillUnmount () {
     let me = this
-
-        // var removed = me.buffer.splice(0);
-        // $.each(removed, function(i, item){
-        //     item.find('.sourceCol p').tooltip('destroy');
-        //     item.find('.destCol p').tooltip('destroy');
-        // });
-
     me.cancelled = true
     me.stop()
     clearInterval(me.buffertimer)
     me.vmap.remove()
-
-        // offIncidentAlert = false;
-
-        // setTimeout(function(){
-        //     if (fullscreen) fullscreen.cancel();
-        // }, 1);
   }
 
   renderSlider () {
@@ -208,11 +179,6 @@ export default class ThreatMap extends Component {
   renderTime () {
     let me = this
     let tx = new Date('2016-1-1 00:00:00') - 0
-
-        // var currenttime = '';
-        // if (me.currentPlay && me.currentPlay.scene) {
-        //     currenttime = $.format.date(me.currentPlay.scene[0].time + me.slider.options.from * 1000, 'HH:mm:ss');
-        // }
     return (
             <div className="inline" style={{color: 'white'}}>
                 <span>{moment(tx + me.state.sliderPos * 1000).format('m:ss')}</span>
@@ -427,7 +393,7 @@ export default class ThreatMap extends Component {
         ip: `${Math.ceil(Math.random() * 255)}.${Math.ceil(Math.random() * 255)
                  }.${Math.ceil(Math.random() * 255)}.${Math.ceil(Math.random() * 255)}`,
 
-        country: demoCountries[i % 3], // countries[parseInt(Math.random() * 1000) % countries.length].name,
+        country: demoCountries[i % 3],
 
         img: '/images/threatmap/RoundedPin.png',
 
@@ -450,7 +416,7 @@ export default class ThreatMap extends Component {
 
         ip: `${Math.ceil(Math.random() * 255)}.${Math.ceil(Math.random() * 255)
                  }.${Math.ceil(Math.random() * 255)}.${Math.ceil(Math.random() * 255)}`,
-        country: demoCountries[i % 3], // countries[parseInt(Math.random() * 1000) % countries.length].name,
+        country: demoCountries[i % 3],
 
         img: '/images/threatmap/SquarePin.png',
 
@@ -678,8 +644,6 @@ export default class ThreatMap extends Component {
 
   clear () {
     let me = this
-    // let p = me.div // Never used
-
     me.cancelled = true
     me.onPlayEnd()
     me.reset()
@@ -830,7 +794,6 @@ export default class ThreatMap extends Component {
   }
 
   updateBlastPosition (blast) {
-    // let me = this // Never used
     let data = blast.data()[0]
 
     blast.attr('x', data.device.x - parseFloat(blast.attr('width')) / 2)
@@ -843,7 +806,6 @@ export default class ThreatMap extends Component {
     if (!device.visible) return
     let img = device.imgObj
     if (img) {
-            // device.country
       let latlng = me.getCountryLatLng(device.country)
       if (!latlng) return
       let xy = me.latLngToXY(latlng[0], latlng[1])
@@ -903,15 +865,7 @@ export default class ThreatMap extends Component {
 
   onTickReal () {
     let me = this
-
-    // let colors = {
-    //   'high': 'red',
-    //   'medium': 'yellow',
-    //   'low': 'blue',
-    //   'audit': 'green'
-    // } // Never used
-
-    if (me.currentPlay.stopped/* || me.currentPlay.paused */) return
+    if (me.currentPlay.stopped) return
     $.get(`${ROOT_URL}${Api.bi.threatMapEventsReal}?minutes=1`, { // eslint-disable-line no-undef
 
     }).done((res) => {
@@ -1002,36 +956,6 @@ export default class ThreatMap extends Component {
 
   addAttackRow (id, attacker, target, time, type, action, severity) {
     let me = this
-        // var $scope = me.scope;
-        //
-        // var row = $($('#attack-row-template').html());
-        //
-        // row.find('.timeCol p').text(time);
-        // row.find('.attackCol p').text(type);
-        // row.find('.actionCol p').text(action);
-        // row.find('.severityCol p').text(severity);
-        // row.find('.sourceCol p').html(attacker.name || attacker.ip);
-        // row.find('.sourceCol').append($(me.renderCountryFlag(attacker)));
-        // row.find('.destCol p').html(target.name || target.ip);
-        // row.find('.destCol').append($(me.renderCountryFlag(target)));
-        //
-        //
-        // row.find('.sourceCol p').tooltip({
-        //     title: attacker.ip,
-        //     container: 'body',
-        // });
-        // row.find('.destCol p').tooltip({
-        //     title: target.ip,
-        //     container: 'body',
-        // });
-
-    // if (me.buffer.length > 10) {
-      // let removed = me.buffer.splice(5) // Never used
-      // $.each(removed, function(i, item){
-      //     item.find('.sourceCol p').tooltip('destroy');
-      //     item.find('.destCol p').tooltip('destroy');
-      // });
-    // }
     me.buffer.push({
       id: id,
       time: time,
@@ -1047,7 +971,6 @@ export default class ThreatMap extends Component {
 
   findCountry (attack) {
     const found = lookup.countries({name: attack.country})
-    // let iso_code // Never used
     if (found.length === 0) {
       return {
         name: '',
@@ -1059,8 +982,6 @@ export default class ThreatMap extends Component {
       name: found[0].name,
       code: found[0].alpha2.toLowerCase()
     }
-
-        // if(iso_code) flag = "<img src='/images/flags/32/" + iso_code + ".png' title='" + attack.country + "' width='20' style='margin-top: -5px;'>";
   }
 
     // ///////////////////////////////////////////////////////////////////
@@ -1075,7 +996,6 @@ export default class ThreatMap extends Component {
       img = device.imgObj
       txt = device.labelObj
     } else {
-            // device.country
       let latlng = me.getCountryLatLng(device.country)
       if (!latlng) return
 
@@ -1112,9 +1032,6 @@ export default class ThreatMap extends Component {
         img.style('opacity', 1)
         if (callback) callback()
       }
-
-            // .transition().duration($scope.fadeOutSpeed * 2);
-
       device.imgObj = img
 
       if (device.name) {
@@ -1136,9 +1053,6 @@ export default class ThreatMap extends Component {
         } else {
 
         }
-
-                // .transition().duration($scope.fadeOutSpeed * 2);
-
         device.labelObj = txt
       }
     }

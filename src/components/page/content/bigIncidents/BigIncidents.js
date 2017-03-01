@@ -1,7 +1,6 @@
 import React from 'react'
 import Modal from 'react-bootstrap-modal'
 import DateRangePicker from 'components/shared/DateRangePicker'
-import { ResponsiveInfiniteTable } from 'components/shared/InfiniteTable'
 import Select from 'react-select'
 import moment from 'moment'
 import IncidentTable from '../dashboard/incidents/IncidentTable'
@@ -82,19 +81,6 @@ export default class BigIncidents extends React.Component {
         incidents={this.props.bigIncidents}
         fixIncident={this.props.fixIncident}
         ackIncident={this.props.ackIncident}
-      />
-    )
-  }
-
-  renderTable2 () {
-    return (
-      <ResponsiveInfiniteTable
-        url={this.state.url}
-        params={this.state.params}
-        cells={this.state.cells}
-        ref="table"
-        rowMetadata={{'key': 'incidentid'}}
-        bodyHeight={this.state.tableHeight}
       />
     )
   }

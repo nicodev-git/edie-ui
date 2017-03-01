@@ -68,21 +68,6 @@ export default class Rules extends React.Component {
       'displayName': 'Parser',
       'columnName': 'parser'
     }]
-        //
-        // this.listeners = {
-        //     [EVENTS.RULE_CATEGORY_CHANGED]: this.onChangeCategory.bind(this),
-        //     [EVENTS.RULE_OPEN_LOGICAL_CLICKED]: this.onClickOpenLogical.bind(this),
-        //     [EVENTS.RULE_SHOW_LOGICAL]: this.onShowLogical.bind(this),
-        //     [EVENTS.RULE_MOVE_LOGICAL_CLICKED]: this.onMoveRule.bind(this),
-        //
-        //     [EVENTS.RULE_DEVICE_TYPE_CHANGED]: this.onDeviceTypeChange.bind(this),
-        //     [EVENTS.RULE_KEYWORD_CHANGED]: this.onKeywordChange.bind(this),
-        //
-        //     [EVENTS.RULE_BACKUP_CLICKED]: this.onBackup.bind(this),
-        //     [EVENTS.RULE_RESTORE_CLICKED]: this.onRestore.bind(this),
-        //
-        //
-        // }
   }
   componentWillMount () {
     this.props.fetchWorkflows()
@@ -102,51 +87,6 @@ export default class Rules extends React.Component {
       />
     )
   }
-
-  // renderContent2 () {
-  //   const {tabIndex} = this.state
-  //   let table
-  //   if (tabIndex === 1) {
-  //     table = (
-  //       <InfiniteTable
-  //         url="/rules/getLogicalName"
-  //         params={{
-  //           search: this.state.keyword,
-  //           category: this.state.category
-  //         }}
-  //         cells={this.cellLogicals}
-  //         rowMetadata={{'key': 'id'}}
-  //         selectable
-  //         bodyHeight={this.props.containerHeight}
-  //         ref="logicalRules"
-  //
-  //         onRowDblClick={this.onClickOpenLogical.bind(this)}
-  //       />
-  //     )
-  //   } else if (tabIndex === 2) {
-  //     table = (
-  //         <InfiniteTable
-  //           url="/rules/getByLogicalRuleId"
-  //           params={{
-  //             search: this.state.keyword,
-  //             logicalRuleId: this.state.logicalRuleId,
-  //             devicetype: this.state.deviceType
-  //           }}
-  //           cells={this.cellPhysicals}
-  //           rowMetadata={{'key': 'id'}}
-  //           selectable
-  //           bodyHeight={this.props.containerHeight}
-  //           ref="physicalRules"
-  //         />
-  //     )
-  //   }
-  //
-  //   return (
-  //           <div>
-  //               {table}
-  //           </div>
-  //   )
-  // }
 
   renderWorkflowModal () {
     if (!this.props.workflowModalVisible) return null
@@ -275,7 +215,6 @@ export default class Rules extends React.Component {
   }
 
   render () {
-    // const {tabIndex} = this.state // Never used
     return (
       <TabPage>
         <TabPageHeader title="Settings">

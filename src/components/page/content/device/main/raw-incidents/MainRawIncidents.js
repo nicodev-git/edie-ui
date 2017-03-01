@@ -1,5 +1,4 @@
 import React from 'react'
-// import Dimensions from 'react-dimensions' // Never used
 import { escapeRegExp } from 'lodash'
 import {
     ButtonGroup,
@@ -70,10 +69,6 @@ export default class MainRawIncidents extends React.Component {
   componentWillMount () {
     this.props.fetchDeviceRawIncidents()
   }
-  //
-  // componentWillUnmount() {
-  //     unlisten(this.listeners)
-  // }
 
     highlightRender (props) {
       let data = props.data || ''
@@ -106,21 +101,6 @@ export default class MainRawIncidents extends React.Component {
       />
     )
   }
-
-  // render2 () {
-  //   return (
-  //           <InfiniteTable
-  //             url={this.state.url}
-  //             params={this.state.params}
-  //             cells={this.state.cells}
-  //             ref="table"
-  //             rowMetadata={{'key': 'id'}}
-  //             bodyHeight={this.props.containerHeight}
-  //             selectable
-  //             onRowDblClick={this.onRowDblClick.bind(this)}
-  //           />
-  //   )
-  // }
 
   getTable () {
     return this.refs.table.refs.wrappedInstance
@@ -221,45 +201,6 @@ export default class MainRawIncidents extends React.Component {
         values={data}
       />
     )
-
-    // let wizard = $('#devicerules-wizard');
-    // wizard.stepwizard('devicerule', (finished, config) => {
-    //     if(finished){
-    //         this.getTable().refresh()
-    //     } else {;
-    //
-    //     }
-    //     $('#devicerules-wizard').hide();
-    // }, {
-    //     deviceid: this.props.device.id,
-    //     idrulesNew: data.idrulesNew,
-    //     remoteip: data.remoteip,
-    // }, {
-    //     mapid: this.props.device.mapid,
-    //     fatherid : 0,
-    // }, 'Add Rule', [
-    //     '<div style="display: inline-block; width: 105px; padding-top: 10px; text-align: center;" class="btn btn-primary btn-wizard-rawmsg">'+
-    //     '<div style="width: 100%; text-align: center; font-size: 11px;"><i class="fa fa-book" style="font-size: 15px;"></i> Raw Message</div></div>'
-    // ]);
-    //
-    // $.each(data, (key, value) => {
-    //     let input = $('#devicerules-wizard').find('[name=' + key +  ']');
-    //     if(!input.length) return;
-    //     let tag = input.prop('tagName').toLowerCase();
-    //     let monitortype = input.attr('monitortype');
-    //     if(tag =='input' && type === 'text'){
-    //         input.val(value);
-    //     } else if(tag === 'select') {
-    //         input.val(value);
-    //     } else if(tag === 'input' && type === 'checkbox'){
-    //         input.prop('checked', value === 1);
-    //     }
-    // });
-    //
-    // wizard.find('.btn-wizard-rawmsg').off('click').click(function(){
-    //     $('#rawtextdiv').center().show();
-    //     $('#rawtextdiv').find('.rawtext').text(data.message);
-    // });
   }
 
   onClickRawSimulator () {

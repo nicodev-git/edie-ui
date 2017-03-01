@@ -116,8 +116,6 @@ export default class IncidentTable extends Component {
     this.refresh()
   }
 
-    // ////////////////////////
-
   onRowDblClick () {
     console.log(arguments)
   }

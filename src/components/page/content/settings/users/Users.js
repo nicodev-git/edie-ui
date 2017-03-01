@@ -1,7 +1,6 @@
 import React from 'react'
 import {
     ButtonGroup,
-    // Button, // Never used
     DropdownButton,
     MenuItem
 } from 'react-bootstrap'
@@ -48,18 +47,6 @@ export default class Users extends React.Component {
       'displayName': 'Phone',
       'columnName': 'phone'
     }]
-
-        // this.listeners = {
-        //     [EVENTS.USERS_GROUP_CHANGED]: this.onChangeGroup.bind(this),
-        //     [EVENTS.USERS_GROUP_ADD_CLICKED]: this.onAddGroup.bind(this),
-        //
-        //     [EVENTS.USERS_ADD_CLICKED]: this.onAddUser.bind(this),
-        //     [EVENTS.USERS_EDIT_CLICKED]: this.onEditUser.bind(this),
-        //     [EVENTS.USERS_REMOVE_CLICKED]: this.onRemoveUser.bind(this),
-        //
-        //     [EVENTS.USERS_PASSWORD_CLICKED]: this.onChangePassword.bind(this),
-        //     [EVENTS.USERS_PINCODE_CLICKED]: this.onClickPin.bind(this),
-        // }
   }
 
   componentWillMount () {
@@ -68,15 +55,7 @@ export default class Users extends React.Component {
   }
 
   loadGroups () {
-    // $.get(Api.group.getGroupsDT, {
-    //     draw: 1,
-    //     start: 0,
-    //     length: 100,
-    // }).done(res => {
-    //     this.setState({
-    //         groups: res.data
-    //     })
-    // })
+
   }
 
   renderContent () {
@@ -218,8 +197,6 @@ export default class Users extends React.Component {
   }
 
   render () {
-    // let table // Never used
-    // const {tabIndex} = this.state // Never used
     return (
       <TabPage>
         <TabPageHeader title="Settings">

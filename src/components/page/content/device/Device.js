@@ -17,24 +17,16 @@ export default class Device extends React.Component {
         this.props.fetchDevice(this.props.params.deviceId)
       } else {
         console.log('no fetching')
-        // let deviceExists = false
         for (let device of this.props.devices) {
           if (device.id === this.props.params.deviceId) {
-            // deviceExists = true
             console.log('open device')
             this.props.openDevice(device)
           }
         }
-
-        /* if (!deviceExists) {
-          this.props.router.replace('/')
-        } */
       }
 
       return null
     }
-
-    // console.log(this.props.devices)
 
     if (!this.props.selectedDevice) return null
     return this.props.children

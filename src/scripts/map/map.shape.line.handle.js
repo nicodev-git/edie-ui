@@ -10,8 +10,6 @@ fabric.ShapeLineHandle = fabric.util.createClass(fabric.Circle, {
       left: 0,
       originX: 'center',
       originY: 'center',
-
-      //selectable: false,
       hasBorders: false,
       hasControls: false,
       hasRotatingPoint: false,

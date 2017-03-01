@@ -43,11 +43,6 @@ class Routing extends React.Component {
         return <span>{str}</span>
       }
     }]
-
-    // this.listeners = {
-    //     [EVENTS.ROUTING_ADD_CLICKED]: this.onAddRouting.bind(this),
-    //     [EVENTS.ROUTING_EDIT_CLICKED]: this.onEditRouting.bind(this),
-    // }
   }
 
   onAddRouting () {

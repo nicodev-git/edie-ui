@@ -23,11 +23,7 @@ export default class Topbar extends React.Component {
   }
 
   onClickMessages () {
-    // this.props.appendComponent(
-    //   <MessagesModal
-    //     onClose={this.props.removeComponent}
-    //   />
-    // )
+
   }
 
   render () {

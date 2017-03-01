@@ -84,7 +84,6 @@ class MapCanvas extends React.Component {
         if (this.state.cmap.editable) return
 
                 // Cancel when map changed;
-                // if(currentmap !== this.state.mapId) return;
         console.log('Map needs to update.')
         this.drawMap(nextProps.mapDevices, nextProps.mapLines, this.currentMapDevices, this.currentMapLines, true, () => {
           console.log('Map updated.')
@@ -215,12 +214,6 @@ class MapCanvas extends React.Component {
   }
 
   onClickContainer () {
-        // const {dragItem} = this.props
-        // if (dragItem && dragItem.img)  {
-        //     console.log('Dropped Device.')
-        //     // this.props.listener.onDrop(this.props.dragItem, this.state.clientCursorPos)
-        // }
-        // console.log("Clicked Container")
     return false
   }
 
@@ -292,20 +285,9 @@ class MapCanvas extends React.Component {
     // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   updateMapDevices (cmap, deviceData, prevDeviceData) {
-        // Clear New Devices
-        // $('#devicediv #devcollapse0 ul').children().remove();
-        // $('#devicediv #devcollapse0').closest('.panel').addClass('hidden');
-
     let existingDevices = []
     deviceData.forEach(device => {
             // Check for new devices
-
-            // if (this.isNewDevice(device)) {
-            //     if (this.addNewDeviceItem(device))
-            //         $('#devicediv #devcollapse0').closest('.panel').removeClass('hidden');
-            //     return;
-            // }
-
             // Find if already exists
       let index = findIndex(prevDeviceData, { id: device.id })
       let existingDevice = index >= 0 ? prevDeviceData[index] : null// findOneBy(device.id, prevDeviceData, 'id');
@@ -384,8 +366,6 @@ class MapCanvas extends React.Component {
     let textSize = device.textSize || 13
     let angle = device.angle || 0
     let textAlign = device.align || 'center'
-
-        // var propsEntity = device.propsEntity || [];
     let propsEntity = JSON.parse(device.json || '[]') || []
 
     if (devicetype === 'longhub') {
@@ -451,7 +431,7 @@ class MapCanvas extends React.Component {
           str = str.replace(/'/g, '"')
           orgdata = JSON.parse(str)
         } catch (e) {
-          // console.log(e);
+
         }
       }
 
@@ -553,20 +533,15 @@ class MapCanvas extends React.Component {
       let okurl = this.deviceStatusImageName(devicestatus)
       let statusImageLeft = -4
       let statusImageTop = -4
-            // if (devicetype === 'Firewall') {
-            //     statusImageLeft = -10;
-            //     statusImageTop = 2;
-            // }
-
-      // IP
-      let tooltip = ''
-      if (device['wanip'] || device['lanip']) {
-        if (device['wanip']) tooltip = `WAN: ${device['wanip']}`
-        if (device['lanip']) {
-          if (tooltip) tooltip = `${tooltip}<br/>`
-          tooltip = `${tooltip}LAN: ${device['lanip']}`
+            // IP
+      let notes = device['devicenotes'] || ''
+      $.each(propsEntity, function (i, item) { // eslint-disable-line no-undef
+        if (item.prop === 'image' && item.value) {
+          imageUrl = item.value
         }
-      }
+      })
+      let tooltip = device['hostname'] || device['ipaddress']
+      if (notes) tooltip += `<div style="border-bottom:1px solid white; height:5px;">&nbsp;</div>${notes}`
 
       let devconfig = {
         id: deviceid,
@@ -677,23 +652,17 @@ class MapCanvas extends React.Component {
         mapObject.update({
           left: x,
           top: y
-          // width: width,
-          // height: height,
         })
       } else if (charttype === 'bar') {
         mapObject.update({
           left: x,
           top: y,
-          // width: width,
-          // height: height,
           graphdata: graphdata
         })
       } else if (charttype === 'line') {
         mapObject.update({
           left: x,
           top: y,
-          // width: width,
-          // height: height,
           graphdata: graphdata
         })
       }
@@ -710,20 +679,16 @@ class MapCanvas extends React.Component {
       let okurl = this.deviceStatusImageName(devicestatus)
       let statusImageLeft = -4
       let statusImageTop = -4
-            // if (devicetype === 'Firewall') {
-            //     statusImageLeft = -10;
-            //     statusImageTop = 2;
-            // }
 
-      // IP
-      let tooltip = ''
-      if (device['wanip'] || device['lanip']) {
-        if (device['wanip']) tooltip = `WAN: ${device['wanip']}`
-        if (device['lanip']) {
-          if (tooltip) tooltip = `${tooltip}<br/>`
-          tooltip = `${tooltip}LAN: ${device['lanip']}`
+            // IP
+      let notes = device['devicenotes'] || ''
+      $.each(propsEntity, function (i, item) { // eslint-disable-line no-undef
+        if (item.prop === 'image' && item.value) {
+          imageUrl = item.value
         }
-      }
+      })
+      let tooltip = device['hostname'] || device['ipaddress']
+      if (notes) tooltip += `<div style="border-bottom:1px solid white; height:5px;">&nbsp;</div>${notes}`
 
       let devconfig = {
         data: device,
@@ -860,9 +825,6 @@ class MapCanvas extends React.Component {
 
   render () {
     const {
-      // x, // Never used
-      // y, // Never used
-      // dropTargetMonitor, // Never used
       connectDropTarget
     } = this.props
 
@@ -901,5 +863,4 @@ MapCanvas.defaultProps = {
   mapLines: []
 }
 
-// export default MapCanvas
 export default DropTarget(DragTypes.DEVICE, canvasTarget, collect)(MapCanvas)

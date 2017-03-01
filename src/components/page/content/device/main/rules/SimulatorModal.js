@@ -224,8 +224,6 @@ export default class SimulatorModal extends React.Component {
   }
 
   render () {
-    // let rule = this.props.rule // Never used
-
     return (
       <Modal
         show={this.state.open}

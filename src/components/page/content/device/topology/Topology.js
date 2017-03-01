@@ -84,6 +84,10 @@ export default class Topology extends React.Component {
     }
   }
 
+  componentDidMount () {
+
+  }
+
   // ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   getDivMap () {
@@ -110,13 +114,7 @@ export default class Topology extends React.Component {
   }
 
   onMapMouseDown (map, obj) {
-    this.props.openDevice(obj.data)
 
-    if (obj.data.isgroup) {
-      this.props.router.push(`/device/${obj.data.id}/topology`)
-    } else {
-      this.props.router.push(`/device/${obj.data.id}/main/incidents`)
-    }
   }
 
   onMapObjectMoving () {
@@ -419,12 +417,7 @@ export default class Topology extends React.Component {
   }
 
   changeLineType (id, typeid) {
-    // $.get(`${ROOT_URL}${Api.deviceadmin.updateLine}`, {
-    //   id: id,
-    //   type: typeid,
-    // }).done(() => {
-    //
-    // })
+
   }
 
   // ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -443,9 +436,7 @@ export default class Topology extends React.Component {
       templateName: options.templateName
     }
 
-    let config = {
-      // mapid: this.props.device.mapid
-    }
+    let config = {}
 
     return (
       <DeviceWizardContainer
@@ -503,7 +494,6 @@ export default class Topology extends React.Component {
 
   onClickDeviceItem (selectedItem, e) {
     this.setState({selectedItem}, () => {
-      // this.refs.map.onMouseMove(e)
     })
   }
 

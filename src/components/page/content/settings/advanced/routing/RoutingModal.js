@@ -55,7 +55,6 @@ export default class RoutingModal extends Component {
         // ////////////////////////////////////////////////////
 
     let addlist = []
-    // let modifylist = [] // Never used
     let removelist = []
 
     targets.forEach(item => {

@@ -81,13 +81,7 @@ export default class BasicMonitorTable extends Component {
         }, 1)
         return this.healthFormatter(props.data)
       }
-    }/*, {
-         "displayName": "Actions",
-         "columnName": "actions",
-         "customComponent": (props) => {
-         return this.actionFormatter(props.data)
-         }
-    } */]
+    }]
 
     this.formatter = buildFormatter(enStrings)
   }
@@ -97,7 +91,6 @@ export default class BasicMonitorTable extends Component {
     let textcolor = 'black'
     if (val < 70) {
       color = 'green'
-      // if (val > 40) textcolor = 'white';
     } else if (val < 90) {
       color = '#fec835'
     }
@@ -172,24 +165,6 @@ export default class BasicMonitorTable extends Component {
         </a>
       </div>
     )
-  }
-
-  componentWillMount () {
-
-    // $.get(Api.devices.getDevicesAndProps, {
-    //     id: this.props.device.id
-    // }).done(res => {
-    //     if (!res.length) return
-    //
-    //     res.forEach(item => {
-    //         if (item.id !== this.props.device.id) return true
-    //         this.setState({
-    //             data: [item]
-    //         })
-    //         return false
-    //     })
-    // });
-
   }
 
   render () {

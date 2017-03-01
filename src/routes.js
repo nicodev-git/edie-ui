@@ -9,7 +9,7 @@ import Search from './components/page/content/search/Search'
 import SearchIncidentsContainer from './containers/page/content/search/IncidentsContainer'
 import SearchDevices from './components/page/content/search/Devices'
 import SearchProcess from './components/page/content/search/Processes'
-import Chat from './components/page/content/chat/Chat'
+import ChatContainer from './containers/page/content/chat/ChatContainer'
 import Incidents from './components/page/content/incidents/Incidents'
 import BigIncidentsContainer from './containers/page/content/dashboard/BigIncidentsContainer'
 import ThreatMap from './components/page/content/threatmap/Threatmap'
@@ -50,7 +50,7 @@ const onMainEnter = (prevState, nextState, replace, callback) => {
 export default(
   <Router history={browserHistory}>
     <Route path="/" component={RequireAuth(MainContainer)} onChange={onMainEnter}>
-      <Route path="chat" component={Chat} />
+      <Route path="chat" component={ChatContainer} />
       <Route path="search" component={Search}>
         <Route path="incidents" component={SearchIncidentsContainer} />
         <Route path="devices" component={SearchDevices} />
@@ -75,9 +75,7 @@ export default(
       <Route path="device/:deviceId" component={DeviceContainer}>
         <Route path="main" component={DeviceMain}>
           <Route path="incidents" component={DeviceMainIncidentsContainer}/>
-          {/* <Route path="rules" component={DeviceMainRulesContainer}/> */}
           <Route path="workflows" component={DeviceMainWorkflowsContainer}/>
-          {/* <Route path="rawIncidents" component={DeviceMainRawIncidentsContainer}/> */}
           <Route path="events" component={DeviceMainEventsContainer}/>
           <Route path="advanced" component={DeviceMainAdvancedContainer}/>
           <Route path="ruleAdd" component={DeviceMainRuleAddContainer}/>
@@ -94,4 +92,3 @@ export default(
     <Route path="/signout" component={SignoutContainer} />
   </Router>
 )
-

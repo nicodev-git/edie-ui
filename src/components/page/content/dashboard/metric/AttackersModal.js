@@ -37,7 +37,7 @@ export default class AttackersModal extends React.Component {
       'customComponent': (props) => {
         let row = props.rowData
         let val = props.data
-        let from = this.dateFormatter2(val)
+        let from = this.dateFormatter(val)
         let to = this.dateFormatter(row.max)
         return <span>{`${from} - ${to}`}</span>
       }
@@ -81,34 +81,6 @@ export default class AttackersModal extends React.Component {
     } else if (diff < 3600) {
       diff = parseInt(diff / 60)
       if (diff === 1) { label = `${diff} minute ago` } else {
-        label = `${diff} minutes ago`
-      }
-    } else {
-      diff = parseInt(diff / 3600)
-      if (diff === 1) {
-        label = `${diff} hour ago`
-      } else {
-        label = `${diff} hours ago`
-      }
-    }
-
-    return label
-  }
-
-  dateFormatter2 (date) {
-    let serverTZ = '+0300'
-    let diff = (new Date() - new Date(`${date} ${serverTZ}`)) / 1000
-    diff = diff.toFixed(0)
-    if (diff < 1) diff = 1
-    let label = ''
-
-    if (diff < 60) {
-      label = 'Attacking Now'
-    } else if (diff < 3600) {
-      diff = parseInt(diff / 60)
-      if (diff === 1) {
-        label = `${diff} minute ago`
-      } else {
         label = `${diff} minutes ago`
       }
     } else {

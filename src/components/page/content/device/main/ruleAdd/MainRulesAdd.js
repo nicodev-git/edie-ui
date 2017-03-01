@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-// import { findIndex, concat } from 'lodash' // Never used
 import Switch from 'react-bootstrap-switch'
 import {
     ButtonGroup,
@@ -54,9 +53,6 @@ export default class MainRulesAdd extends Component {
       'cssClassName': 'text-left',
       'columnName': 'uuid',
       'customComponent': (props) => {
-        // const checked = this.state.selectedPhysicals.indexOf(props.data) >= 0 // Never used
-                // return <label><input type="checkbox" checked={checked}
-                //                      onChange={this.onClickCheck.bind(this, props.data)}/></label>
         return <Switch size="mini" onChange={this.onChangeSwitch.bind(this, props.data)}/>
       }
     }]
@@ -78,22 +74,6 @@ export default class MainRulesAdd extends Component {
 
         useExternal={false}
         data={this.props.physicalRules}
-      />
-    )
-  }
-
-  render2 () {
-    return (
-      <ResponsiveInfiniteTable
-        id="rule2"
-        url={this.state.url}
-        params={this.state.params}
-        cells={this.cells}
-        ref="table"
-        rowMetadata={{'key': 'id'}}
-        bodyHeight={this.props.containerHeight}
-        selectable={false}
-        onRowDblClick={this.onRowDblClick.bind(this)}
       />
     )
   }

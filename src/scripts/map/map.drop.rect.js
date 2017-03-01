@@ -35,12 +35,6 @@ fabric.DropRect = fabric.util.createClass(fabric.Rect, {
 
     var offset = me.canvas.map.getPanOffset();
     var z = me.canvas.getZoom();
-
-    //me.left = (dropObj.oCoords.mt.x  + offset.x) / z- dropObj.width / 2;
-    //me.top = (dropObj.oCoords.ml.y  + offset.y) / z - dropObj.height / 2;
-    //me.width = dropObj.width * dropObj.scaleX;
-    //me.height = dropObj.height * dropObj.scaleY;
-
     me.setAngle(dropObj.getAngle());
 
     me.left = dropObj.left;
@@ -97,8 +91,5 @@ fabric.DropRect = fabric.util.createClass(fabric.Rect, {
   onMouseDownPoint: function(pointObj, o) {
     var me = this;
     var map = me.canvas.map;
-
-    //if(me.nearPoint < 0) return;
-    //map.startNewLine(me.nearObject, me.nearPoint);
   },
 });

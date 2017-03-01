@@ -29,7 +29,6 @@ fabric.ShapeLineItem = fabric.util.createClass(fabric.Line, {
   onMoving: function(e, diff, group){
     var me = this;
     if(group) {
-      //me.updatePosition(diff, group);
       return;
     }
     me.reset();
@@ -115,20 +114,6 @@ fabric.ShapeLineItem = fabric.util.createClass(fabric.Line, {
         y2: me.y2 + diff.y,
       });
     }
-
-//        	if(group) {
-//        		var objects = group.getObjects();
-//        		if (objects.indexOf(me) < 0) group = false;	
-//        	}
-//        	
-//        	if(group) {
-//        		me.set({
-//        			x1: me.x1 - (group.left + group.width / 2),
-//        			y1: me.y1 - (group.top + group.height / 2),
-//        			x2: me.x2 - (group.left + group.width / 2),
-//        			y2: me.y2 - (group.top + group.height / 2),
-//        		});
-//        	}
 
     me.handles[0].set({
       left: me.x1,

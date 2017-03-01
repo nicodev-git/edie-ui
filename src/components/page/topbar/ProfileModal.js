@@ -10,10 +10,8 @@ import { showAlert } from '../../../components/shared/Alert'
 class ProfileModal extends React.Component { // eslint-disable-line react/no-multi-comp
   constructor (props) {
     super(props)
-    // const {user} = props // Never used
     this.state = {
       imgSrc: '',
-      // defaultmap: props.user.defaultmap,
       maps: []
     }
   }
@@ -171,8 +169,6 @@ class ProfileModal extends React.Component { // eslint-disable-line react/no-mul
   }
 
   render () {
-    // let {user, handleSubmit} = this.props // Never used
-
     return (
       <Modal show onHide={this.onHide.bind(this)}
         aria-labelledby="ModalHeader" className="bootstrap-dialog type-primary">

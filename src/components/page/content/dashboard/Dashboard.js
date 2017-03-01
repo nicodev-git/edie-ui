@@ -13,18 +13,6 @@ export default class Dashboard extends React.Component {
     this.onDashboardUpdate = this.onDashboardUpdate.bind(this)
   }
 
-  componentDidMount () {
-    // incidentSocket.init('MainIncident')
-    // incidentSocket.addListener('dashboard', this.onDashboardUpdate)
-    //
-    // incidentSocket.connect()
-  }
-
-  componentWillUnmount () {
-    // incidentSocket.removeListener('dashboard', this.onDashboardUpdate)
-    // incidentSocket.close()
-  }
-
   onDashboardUpdate (msg) {
     console.log('Dashboard message received.')
     this.props.updateDashboard(msg.data)

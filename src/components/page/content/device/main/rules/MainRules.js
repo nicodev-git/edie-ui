@@ -1,5 +1,4 @@
 import React from 'react'
-// import { findIndex, concat } from 'lodash' // Never used
 import Select from 'react-select'
 import {
     DropdownButton,
@@ -65,32 +64,11 @@ export default class MainRules extends React.Component {
       'displayName': 'Version',
       'columnName': 'version'
     }]
-
-    // this.listeners = {
-    //     [EVENTS.DEV_FILTER_CHANGED]: this.filter.bind(this),
-    //
-    //     [EVENTS.DEV_RULE_ADD_CLICKED]: this.onClickAddRule.bind(this),
-    //     [EVENTS.DEV_RULE_EDIT_CLICKED]: this.onClickEditRule.bind(this),
-    //     [EVENTS.DEV_RULE_REMOVE_CLICKED]: this.onClickDeleteRule.bind(this),
-    //     [EVENTS.DEV_RULE_DUPLICATE_CLICKED]: this.onClickDuplicate.bind(this),
-    //     [EVENTS.DEV_RULE_RESET_CLICKED]: this.onClickResetRule.bind(this),
-    //     [EVENTS.DEV_RULE_COPY_TPL_CLICKED]: this.onClickCopyToTemplate.bind(this),
-    //     [EVENTS.DEV_RULE_COPY_DEV_CLICKED]: this.onClickCopyToDevice.bind(this),
-    //     [EVENTS.DEV_RULE_SHARE_CLICKED]: this.onClickShareRule.bind(this),
-    //
-    //     [EVENTS.DEV_RULE_ADD_CATEGORY_CLICKED]: this.onClickAddCategory.bind(this),
-    //     [EVENTS.DEV_RULE_REMOVE_CATEGORY_CLICKED]: this.onClickDeleteCategory.bind(this),
-    // }
   }
 
   componentWillMount () {
-        // listen(this.listeners)
     this.props.fetchDeviceRules()
   }
-  //
-  // componentWillUnmount() {
-  //     unlisten(this.listeners)
-  // }
 
   renderTable () {
     return (
@@ -107,22 +85,6 @@ export default class MainRules extends React.Component {
       />
     )
   }
-
-  // render2 () {
-  //   return (
-  //           <InfiniteTable
-  //             id="rule1"
-  //             url={this.state.url}
-  //             params={this.state.params}
-  //             cells={this.cells}
-  //             ref="table"
-  //             rowMetadata={{'key': 'idrulesNew'}}
-  //             bodyHeight={this.props.containerHeight}
-  //             selectable
-  //             onRowDblClick={this.onRowDblClick.bind(this)}
-  //           />
-  //   )
-  // }
 
   onRowDblClick (sel) {
     this.onClickEditRule()
