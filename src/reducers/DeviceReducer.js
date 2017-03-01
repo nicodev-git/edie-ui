@@ -22,6 +22,15 @@ import {
   CLOSE_DEVICE_MONITOR_WIZARD,
   CLEAR_DEVICE_WIZARD_INITIAL_VALUES,
 
+  OPEN_PARAMS_MODAL,
+  CLOSE_PARAMS_MODAL,
+  OPEN_PARAM_EDIT_MODAL,
+  CLOSE_PARAM_EDIT_MODAL,
+  ADD_PARAM,
+  UPDATE_PARAM,
+  REMOVE_PARAM,
+  UPDATE_MONITOR_PARAMS,
+
   OPEN_DEVICE_EDIT_MODAL,
   CLOSE_DEVICE_EDIT_MODAL,
 
@@ -87,7 +96,7 @@ export default function (state = INITIAL_STATE, action) {
       return { ...state, monitorPickerVisible: false }
 
     case OPEN_DEVICE_MONITOR_WIZARD:
-      return { ...state, monitorWizardVisible: true, monitorInitialValues: action.data }
+      return { ...state, monitorWizardVisible: true, monitorInitialValues: action.data, monitorParams: action.data ? (action.data.params || {}) : {} }
 
     case CLOSE_DEVICE_MONITOR_WIZARD:
       return { ...state, monitorWizardVisible: false }
@@ -174,6 +183,26 @@ export default function (state = INITIAL_STATE, action) {
 
     case FIX_ALL_DEVICE_INCIDENTS:
       return { ...state, incidentDraw: state.incidentDraw + 1 }
+
+    case OPEN_PARAMS_MODAL:
+      return { ...state, paramsModalOpen: true, editParams: action.params || [] }
+    case CLOSE_PARAMS_MODAL:
+      return { ...state, paramsModalOpen: false }
+
+    case OPEN_PARAM_EDIT_MODAL:
+      return { ...state, paramEditModalOpen: true, editParam: action.param }
+    case CLOSE_PARAM_EDIT_MODAL:
+      return { ...state, paramEditModalOpen: false }
+
+    case ADD_PARAM:
+      return { ...state, editParams: concat(state.editParams, action.param) }
+    case UPDATE_PARAM:
+      return { ...state, editParams: state.editParams.map(p => p.key === action.param.key ? action.param : p) }
+    case REMOVE_PARAM:
+      return { ...state, editParams: state.editParams.filter(p => p.key !== action.param.key) }
+
+    case UPDATE_MONITOR_PARAMS:
+      return { ...state, monitorParams: action.params }
   }
   return state
 }

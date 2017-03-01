@@ -13,6 +13,15 @@ import {
   CLOSE_DEVICE_MONITOR_WIZARD,
   CLEAR_DEVICE_WIZARD_INITIAL_VALUES,
 
+  OPEN_PARAMS_MODAL,
+  CLOSE_PARAMS_MODAL,
+  OPEN_PARAM_EDIT_MODAL,
+  CLOSE_PARAM_EDIT_MODAL,
+  ADD_PARAM,
+  UPDATE_PARAM,
+  REMOVE_PARAM,
+  UPDATE_MONITOR_PARAMS,
+
   FETCH_DEVICE_WORKFLOWS,
   OPEN_DEVICE_WORKFLOW_MODAL,
   CLOSE_DEVICE_WORKFLOW_MODAL,
@@ -150,6 +159,57 @@ export const clearDeviceWizardInitialValues = () => {
     dispatch({
       type: CLEAR_DEVICE_WIZARD_INITIAL_VALUES
     })
+  }
+}
+
+export function openParamsModal (params) {
+  return dispatch => {
+    dispatch({type: OPEN_PARAMS_MODAL, params})
+  }
+}
+
+export function closeParamsModal () {
+  return dispatch => {
+    dispatch({type: CLOSE_PARAMS_MODAL})
+  }
+}
+
+export function openParamEditModal (param) {
+  return dispatch => {
+    dispatch({type: OPEN_PARAM_EDIT_MODAL, param})
+  }
+}
+
+export function closeParamEditModal () {
+  return dispatch => {
+    dispatch({type: CLOSE_PARAM_EDIT_MODAL})
+  }
+}
+
+export function addParam (param) {
+  return dispatch => {
+    dispatch({type: ADD_PARAM, param})
+    dispatch(closeParamEditModal())
+  }
+}
+
+export function updateParam (param) {
+  return dispatch => {
+    dispatch({type: UPDATE_PARAM, param})
+    dispatch(closeParamEditModal())
+  }
+}
+
+export function removeParam (param) {
+  return dispatch => {
+    dispatch({type: REMOVE_PARAM, param})
+  }
+}
+
+export function updateMonitorParams (params) {
+  return dispatch => {
+    dispatch({type: UPDATE_MONITOR_PARAMS, params})
+    dispatch(closeParamsModal())
   }
 }
 

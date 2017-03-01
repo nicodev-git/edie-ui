@@ -4,15 +4,20 @@ import { bindActionCreators } from 'redux'
 
 import {MonitorWizard} from 'components/shared/wizard/DeviceWizard'
 
-import { fetchMonitorTemplates } from 'actions'
+import { fetchMonitorTemplates, openParamsModal } from 'actions'
 
 @connect(
   state => ({
-    initialValues: state.devices.monitorInitialValues
+    initialValues: state.devices.monitorInitialValues,
+    monitorParams: state.devices.monitorParams,
+
+    paramsModalOpen: state.devices.paramsModalOpen,
+    paramEditModalOpen: state.devices.paramEditModalOpen
   }),
   dispatch => ({
     ...bindActionCreators({
-      fetchMonitorTemplates
+      fetchMonitorTemplates,
+      openParamsModal
     }, dispatch)
   })
 )
@@ -20,7 +25,7 @@ import { fetchMonitorTemplates } from 'actions'
 export default class MonitorWizardContainer extends React.Component {
   render () {
     return (
-      <MonitorWizard {...this.props} />
+      <MonitorWizard showMonitorParams {...this.props} />
     )
   }
 }

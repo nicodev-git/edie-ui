@@ -2451,7 +2451,7 @@ export const wizardConfig = {
     // Monitors
 
   'monitor-custom': {
-    title: 'Custom',
+    title: 'Monitor',
     width: POPUP_WIDTH_SM,
     server: {
       params: {

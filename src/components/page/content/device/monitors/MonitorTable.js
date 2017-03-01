@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import TimeAgo from 'react-timeago'
 import { assign, concat } from 'lodash'
 
-import DeviceWizardContainer from '../../../../../containers/shared/wizard/DeviceWizardContainer'
+import MonitorWizardContainer from '../../../../../containers/shared/wizard/MonitorWizardContainer'
 import { ResponsiveInfiniteTable } from 'components/shared/InfiniteTable'
 
 import { appendComponent, removeComponent } from '../../../../../util/Component'
@@ -10,8 +10,6 @@ import { showAlert } from '../../../../shared/Alert'
 
 import MonitorPicker from './MonitorPicker'
 import MonitorHistoryModal from './MonitorHistoryModal'
-
-import { getMonitorType } from 'components/shared/wizard/WizardConfig'
 
 export default class MonitorTable extends Component {
   constructor (props) {
@@ -157,9 +155,9 @@ export default class MonitorTable extends Component {
     if (!this.props.monitorWizardVisible) return null
 
     const {monitorConfig} = this.state
-    const type = getMonitorType(monitorConfig.monitortype)
+    const type = 'monitor-custom'
     return (
-      <DeviceWizardContainer
+      <MonitorWizardContainer
         deviceType={type}
         title={monitorConfig ? monitorConfig.name : ''}
         onClose={() => {

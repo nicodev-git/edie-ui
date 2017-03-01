@@ -1,7 +1,7 @@
 import React from 'react'
 import Modal from 'react-bootstrap-modal'
 import {
-    assign
+    keys, assign
 } from 'lodash'
 import { reduxForm } from 'redux-form'
 
@@ -16,6 +16,8 @@ import AdvancedForm from './input/AdvancedForm'
 import MatchIgnore from './input/MatchIgnore'
 import GlobalIgnore from './input/GlobalIgnore'
 import MTable from './input/MTable'
+import ParamsModal from './input/ParamsModal'
+import ParamEditModal from './input/ParamEditModal'
 
 import {wizardConfig} from './WizardConfig'
 import {util} from './WizardUtil'
@@ -33,11 +35,7 @@ class DeviceWizard extends React.Component {
 
       currentDevice: config,
 
-      monitors: props.monitors || [],
-
-      inputs: {
-
-      }
+      monitors: props.monitors || []
     }
 
     this.mapping = {
@@ -71,11 +69,14 @@ class DeviceWizard extends React.Component {
       {},
       formProps,
       this.state.currentDevice.server.params || {},
-      extraParams, {monitors: monitors.map(m => assign({}, m, {id: null}))}
+      extraParams, {
+        monitors: monitors.map(m => assign({}, m, {id: null})),
+        params: this.props.monitorParams
+      }
     )
     console.log(props)
-    // this.closeModal(true)
-    !onFinish && onFinish(null, props)
+    this.closeModal(true)
+    onFinish && onFinish(null, props)
   }
 
   buildProgressBar () {
@@ -316,8 +317,30 @@ class DeviceWizard extends React.Component {
     this.setState({ current })
   }
 
+  onClickParams () {
+    const params = this.props.monitorParams || {}
+    this.props.openParamsModal(keys(params).map(key => ({
+      key,
+      value: params[key]
+    })))
+  }
+
+  renderParamsModal () {
+    if (!this.props.paramsModalOpen) return null
+    return (
+      <ParamsModal/>
+    )
+  }
+
+  renderParamEditModal () {
+    if (!this.props.paramEditModalOpen) return null
+    return (
+      <ParamEditModal/>
+    )
+  }
+
   render () {
-    const { handleSubmit, onStep0 } = this.props
+    const { handleSubmit, onStep0, showMonitorParams } = this.props
     const { current, steps } = this.state
     let cssPrevious = ''
     if (current < 2) cssPrevious = onStep0 ? '' : 'hidden'
@@ -345,7 +368,9 @@ class DeviceWizard extends React.Component {
             {this.buildContent()}
 
             <div className="text-right mb-none">
-
+              <div className="pull-left">
+                {showMonitorParams ? <a href="javascript:;" className="btn btn-default btn-sm" onClick={this.onClickParams.bind(this)}>Params</a> : null}
+              </div>
               <a href="javascript:;"
                 className="btn btn-default btn-sm margin-sm-right"
                 onClick={this.onClickClose.bind(this)}>Cancel</a>
@@ -366,6 +391,9 @@ class DeviceWizard extends React.Component {
             </div>
           </form>
         </div>
+
+        {this.renderParamsModal()}
+        {this.renderParamEditModal()}
       </Modal>
     )
   }
