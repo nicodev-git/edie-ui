@@ -70,17 +70,11 @@ class DeviceWizard extends React.Component {
       {},
       formProps,
       this.state.currentDevice.server.params || {},
-      extraParams, {
-        monitors: monitors.map(m => assign({}, m, {id: null}))
-      }
+      extraParams, {monitors: monitors.map(m => assign({}, m, {id: null}))}
     )
-
-    console.log(props)
-
-    if (!onFinish) {
-      this.closeModal(true)
-      onFinish && onFinish(null, props)
-    }
+    // console.log (props)
+    this.closeModal(true)
+    onFinish && onFinish(null, props)
   }
 
   buildProgressBar () {

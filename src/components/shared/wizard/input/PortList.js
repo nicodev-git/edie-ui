@@ -27,45 +27,6 @@ export default class PortList extends React.Component {
     }
   }
 
-  render () {
-    let {config, values} = this.props
-    let ports = []
-
-    this.state.items.forEach((item, i) => {
-      ports.push(
-        <div className="col-md-4 p-none pb-custom" key={i}>
-          <label>
-            <input type="checkbox"
-              value={item.value}
-              checked={this.state.selected.indexOf(i) >= 0}
-              onChange={this.onChange.bind(this, i)}/>
-            <span className="margin-xs-left">{item.display}</span>
-          </label>
-        </div>
-      )
-    })
-
-    let extra = []
-    config.extra.forEach(item => {
-      let itemConfig = $.extend({}, item, {useColumn: true}) // eslint-disable-line no-undef
-      extra.push(this.props.buildInput(itemConfig, values))
-    })
-
-    return (
-      <div data-name={config.name}>
-        <div className="row" style={{margin: '8px 0 0 0'}}>
-          {ports}
-        </div>
-        <div className="row" style={{margin: 0}}>
-          <div className="col-md-1">
-              <a href="javascript:;" onClick={this.onClickAdd.bind(this)}>Add</a>
-          </div>
-          {extra}
-        </div>
-      </div>
-    )
-  }
-
     // ////////////////////////////////////////////////////////////////
 
   onClickAdd () {
@@ -100,6 +61,42 @@ export default class PortList extends React.Component {
     this.setState({selected})
 
     this.updateValue(selected.map(item => this.state.items[item].value))
+  }
+
+  render () {
+    let {config, values} = this.props
+    let ports = []
+
+    this.state.items.forEach((item, i) => {
+      ports.push(
+        <div className="col-md-4 p-none pb-custom" key={i}>
+          <label>
+            <input type="checkbox" value={item.value} checked={this.state.selected.indexOf(i) >= 0} onChange={this.onChange.bind(this, i)}/>
+            <span className="margin-xs-left">{item.display}</span>
+          </label>
+        </div>
+      )
+    })
+
+    let extra = []
+    config.extra.forEach(item => {
+      let itemConfig = $.extend({}, item, {useColumn: true}) // eslint-disable-line no-undef
+      extra.push(this.props.buildInput(itemConfig, values))
+    })
+
+    return (
+      <div data-name={config.name}>
+        <div className="row" style={{margin: '8px 0 0 0'}}>
+          {ports}
+        </div>
+        <div className="row" style={{margin: 0}}>
+          <div className="col-md-1">
+            <a href="javascript:;" onClick={this.onClickAdd.bind(this)}>Add</a>
+          </div>
+          {extra}
+        </div>
+      </div>
+    )
   }
 }
 
