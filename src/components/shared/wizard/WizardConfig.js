@@ -12,9 +12,18 @@ export const deviceTypeMap = {
   'Long hub': 'longhub'
 }
 
+export const monitorTypeMap = {
+  'port': 'monitor-port'
+}
+
 export function getDeviceType (templateName) {
   if (!templateName) return 'custom'
   return deviceTypeMap[templateName] || 'custom'
+}
+
+export function getMonitorType (monitorType) {
+  if (!monitorType) return 'monitor-custom'
+  return monitorTypeMap[monitorType] || 'monitor-custom'
 }
 
 export const commonconfig = {
