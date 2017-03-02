@@ -3,7 +3,7 @@ import Modal from 'react-bootstrap-modal'
 import InfiniteTable from '../shared/InfiniteTable'
 import { Button } from 'react-bootstrap'
 import Select from 'react-select'
-import { Header } from './parts'
+import { Header, Selector } from './parts'
 
 const IncidentsModalView = ({show, onHide, onClose, header, onFilter, onChange,
   value, options, params, cells, picker, url, onClick1, onClick2, onClick3}) => (
@@ -42,6 +42,13 @@ const IncidentsModalView = ({show, onHide, onClose, header, onFilter, onChange,
               <option value="0">Unfixed</option>
               <option value="1">Fixed</option>
           </select>
+          <Selector
+            label="incidents"
+            onChange={onFilter}
+            options={['Any', 'Unfixed', 'Fixed']}
+            values={['-1', '0', '1']}
+            defaultValue="0"
+          />
           {picker}
       </div>
 
