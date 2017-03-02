@@ -55,6 +55,8 @@ import {
 
   FIX_ALL_DEVICE_INCIDENTS,
 
+  CLOSE_DEVICE,
+
   UPDATE_DEVICE_ERROR
 } from '../actions/types'
 
@@ -69,6 +71,9 @@ export default function (state = INITIAL_STATE, action) {
 
     case FETCH_DEVICE_INCIDENTS:
       return { ...state, incidents: action.data }
+
+    case CLOSE_DEVICE:
+      return { ...state, devices: [] }
 
     case ADD_DEVICE_INCIDENT: {
       const incidents = concat(action.data, state.incidents || [])
