@@ -2,19 +2,19 @@ import React from 'react'
 import Modal from 'react-bootstrap-modal'
 import { Header } from './parts'
 
-const MapSaveModalView = ({show, onHide, onSave, onClose}) => (
+const MapSaveModalView = ({show, onHide, onSave, onClose, onChange, imgSrc}) => (
   <Modal
     show={show}
     onHide={onHide}
     aria-labelledby="ModalHeader"
     className="bootstrap-dialog type-primary"
   >
-    <Header name="Export Map" onClick={onClose} />
+    <Header name="New Incident" onClick={onClose} />
     <div className="modal-body bootstrap-dialog-message">
       <div className="row text-center margin-md-bottom">
         <div className="img-input" style={{width: '60px'}}>
-          <img src={this.state.img}/>
-          <input type="file" accept="image/*;capture=camera" onChange={this.onChangeFile.bind(this)} ref="file"/>
+          <img src={imgSrc}/>
+          <input type="file" accept="image/*;capture=camera" onChange={onChange} ref="file"/>
         </div>
       </div>
 
@@ -45,8 +45,8 @@ const MapSaveModalView = ({show, onHide, onSave, onClose}) => (
       </div>
 
       <div className="text-center mb-none">
-        <a href="javascript:;" className="btn btn-default btn-sm margin-sm-right" onClick={this.onClickSave.bind(this)}>Add</a>
-        <a href="javascript:;" className="btn btn-default btn-sm" onClick={this.onClickClose.bind(this)}>Cancel</a>
+        <a href="javascript:;" className="btn btn-default btn-sm margin-sm-right" onClick={onSave}>Add</a>
+        <a href="javascript:;" className="btn btn-default btn-sm" onClick={onClose}>Cancel</a>
       </div>
     </div>
   </Modal>
