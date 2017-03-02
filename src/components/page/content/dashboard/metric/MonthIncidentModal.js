@@ -6,6 +6,7 @@ import { assign } from 'lodash'
 import { ROOT_URL } from '../../../../../actions/config'
 import InfiniteTable from '../../../../shared/InfiniteTable'
 import AddExceptionModal from './AddExceptionModal'
+import IncidentsModalView from '../../../../modal'
 
 import { showAlert, showPrompt } from '../../../../shared/Alert'
 import { dateFormatter, getSeverityIcon, getIncidenttypeIcon } from '../../../../../shared/Global'
@@ -118,6 +119,21 @@ export default class MonthIncidentModal extends React.Component {
 
   render () {
     return (
+      <IncidentsModalView
+        show={this.state.open}
+        header="Month Incidents"
+        onHide={this.onHide.bind(this)}
+        onClose={this.onClickClose.bind(this)}
+        onFilter={this.onFilterChange}
+        value={this.state.selectedSeverity.join(',')}
+        options={this.state.severities}
+        onChange={this.onChangeSeverity.bind(this)}
+        params={this.state.params}
+        cells={this.cells}
+        onClick1={this.onClickFixAll.bind(this)}
+        onClick2={this.onClickAddException.bind(this)}
+        onClick3={this.onClickOpen.bind(this)}
+      />
       <Modal show={this.state.open} onHide={this.onHide.bind(this)}
         aria-labelledby="ModalHeader" className="bootstrap-dialog type-primary modal-md">
 
