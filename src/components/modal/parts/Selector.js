@@ -4,11 +4,11 @@ import MenuItem from 'material-ui/MenuItem'
 import injectTapEventPlugin from 'react-tap-event-plugin'
 injectTapEventPlugin()
 
-const styles = {
+/* const styles = {
   customWidth: {
     width: 150
   }
-}
+} */
 
 export default class Selector extends Component {
   constructor (props) {
@@ -22,7 +22,7 @@ export default class Selector extends Component {
     this.setState({
       value: value
     })
-    this.props.onChange()
+    this.props.onChange(event)
   }
 
   renderList () {
@@ -39,10 +39,9 @@ export default class Selector extends Component {
     let menuItemsList = this.renderList()
     return (
       <SelectField
-        floatingLabelText=""
+        floatingLabelText={this.props.label}
         value={this.state.value}
         onChange={this.handleChange.bind(this)}
-        style={styles.customWidth}
       >
         {menuItemsList}
       </SelectField>
