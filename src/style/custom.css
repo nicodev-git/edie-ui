@@ -361,3 +361,13 @@ table.table tbody tr.selected {
     background: black;
     border: 1px solid black;
 }
+
+.material-selector {
+    padding: 0px;
+}
+
+.material-selector button {
+    width: 34px !important;
+    height: 34px !important;
+    padding: 0px !important;
+}

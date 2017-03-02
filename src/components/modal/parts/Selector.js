@@ -5,7 +5,7 @@ import injectTapEventPlugin from 'react-tap-event-plugin'
 injectTapEventPlugin()
 
 const style = {
-  width: 110,
+  width: 128,
   height: '100%',
   verticalAlign: 'top',
   lineHeight: 0,
@@ -13,8 +13,9 @@ const style = {
 }
 
 const labelStyle = {
-  lineHeight: 1.5,
-  paddingRight: 5
+  lineHeight: 2.5,
+  paddingRight: 5,
+  paddingLeft: 10
 }
 
 const listStyle = {
@@ -25,7 +26,7 @@ export default class Selector extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      value: ''
+      value: this.props.values[0]
     }
   }
 
