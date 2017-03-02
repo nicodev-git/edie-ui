@@ -1,9 +1,12 @@
 import React from 'react'
 import Modal from 'react-bootstrap-modal'
 import InfiniteTable from '../shared/InfiniteTable'
+import { Button } from 'react-bootstrap'
+import Select from 'react-select'
 import { Header } from './parts'
 
-const AddExceptionModalView = ({show, onHide, onClose, params, cells}) => (
+const IncidentsModalView = ({show, onHide, onClose, header, onFilter, onChange,
+  value, options, params, cells, onClick1, onClick2, onClick3}) => (
   <Modal
     show={show}
     onHide={onHide}
@@ -17,13 +20,13 @@ const AddExceptionModalView = ({show, onHide, onClose, params, cells}) => (
         style={{'verticalAlign': 'middle', 'lineHeight': 2.2}}>
 
           <input type="text" placeholder="Search" className="form-control input-sm"
-            onChange={this.onFilterChange}
+            onChange={onFilter}
             ref="search"/>
 
           <Select
-            value={this.state.selectedSeverity.join(',')}
-            options={this.state.severities}
-            onChange={this.onChangeSeverity.bind(this)}
+            value={value}
+            options={options}
+            onChange={onChange}
             multi
             clearable={false}
             className="select-severity"
@@ -33,7 +36,7 @@ const AddExceptionModalView = ({show, onHide, onClose, params, cells}) => (
           />
 
           <select className="form-control text-primary margin-md-left input-sm"
-            onChange={this.onFilterChange}
+            onChange={onFilter}
             ref="fixed" defaultValue="0">
               <option value="-1">Any</option>
               <option value="0">Unfixed</option>
@@ -43,8 +46,8 @@ const AddExceptionModalView = ({show, onHide, onClose, params, cells}) => (
 
       <InfiniteTable
         url="/incidentstable/getMonthIncidents"
-        params={this.state.params}
-        cells={this.cells}
+        params={params}
+        cells={cells}
         ref="table"
         rowMetadata={{'key': 'incidentid'}}
         bodyHeight={500}
@@ -52,14 +55,14 @@ const AddExceptionModalView = ({show, onHide, onClose, params, cells}) => (
       />
 
       <div style={{borderTop: '1px solid gray', paddingTop: '4px'}}>
-        <Button bsStyle="primary" onClick={this.onClickFixAll.bind(this)}>Fix All</Button>
+        <Button bsStyle="primary" onClick={onClick1}>Fix All</Button>
         <Button bsStyle="primary" className="margin-sm-left"
-          onClick={this.onClickAddException.bind(this)}>Add Exception</Button>
+          onClick={onClick2}>Add Exception</Button>
         <Button bsStyle="primary" className="margin-sm-left"
-          onClick={this.onClickOpen.bind(this)}>Open</Button>
+          onClick={onClick3}>Open</Button>
       </div>
     </div>
   </Modal>
 )
 
-export default AddExceptionModalView
+export default IncidentsModalView
