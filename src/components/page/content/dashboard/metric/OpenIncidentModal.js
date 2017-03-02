@@ -1,11 +1,7 @@
 import React from 'react'
-import Modal from 'react-bootstrap-modal'
-import { Button } from 'react-bootstrap'
 import moment from 'moment'
-import Select from 'react-select'
 import { assign } from 'lodash'
 import { ROOT_URL } from '../../../../../actions/config'
-import InfiniteTable from '../../../../shared/InfiniteTable'
 import DateRangePicker from '../../../../shared/DateRangePicker'
 import AddExceptionModal from './AddExceptionModal'
 
@@ -109,75 +105,35 @@ export default class OpenIncidentModal extends React.Component {
     this.onFilterChange = this.onFilterChange.bind(this)
   }
 
-  render () {
+  renderPicker() {
     return (
-      <Modal show={this.state.open} onHide={this.onHide.bind(this)}
-        aria-labelledby="ModalHeader" className="bootstrap-dialog type-primary modal-md">
+      <DateRangePicker onClickRange={this.onFilterChange} className="margin-md-left"
+        default={moment().startOf('years').format('YYYY')} ref="dp">
+        <i className="fa fa-caret-down margin-xs-left" />
+      </DateRangePicker>
+    )
+  }
 
-          <div className="modal-header">
-              <h4 className="modal-title bootstrap-dialog-title">
-                  Open Incidents
-              </h4>
-              <div className="bootstrap-dialog-close-button">
-                  <button className="close"
-                    onClick={this.onClickClose.bind(this)}>×</button>
-              </div>
-          </div>
-
-          <div className="modal-body bootstrap-dialog-message">
-
-            <div className="form-inline"
-              style={{'verticalAlign': 'middle', 'lineHeight': 2.2}}>
-
-              <input type="text" placeholder="Search" className="form-control input-sm"
-                onChange={this.onFilterChange}
-                ref="search"/>
-
-              <Select
-                value={this.state.selectedSeverity.join(',')}
-                options={this.state.severities}
-                onChange={this.onChangeSeverity.bind(this)}
-                multi
-                clearable={false}
-                className="select-severity"
-                style={{minWidth: '85px'}}
-                searchable={false}
-                autosize={false}
-              />
-
-              <select className="form-control text-primary margin-md-left input-sm"
-                onChange={this.onFilterChange}
-                ref="fixed" defaultValue="0">
-                <option value="-1">Any</option>
-                <option value="0">Unfixed</option>
-                <option value="1">Fixed</option>
-              </select>
-
-              <DateRangePicker onClickRange={this.onFilterChange} className="margin-md-left"
-                default={moment().startOf('years').format('YYYY')} ref="dp">
-                <i className="fa fa-caret-down margin-xs-left" />
-              </DateRangePicker>
-            </div>
-
-            <InfiniteTable
-              url="/incidentstable/getOpenIncidents"
-              params={this.state.params}
-              cells={this.cells}
-              ref="table"
-              rowMetadata={{'key': 'incidentid'}}
-              bodyHeight={500}
-              selectable
-            />
-
-            <div style={{borderTop: '1px solid gray', paddingTop: '4px'}}>
-              <Button bsStyle="primary" onClick={this.onClickFixAll.bind(this)}>Fix All</Button>
-              <Button bsStyle="primary" className="margin-sm-left"
-                onClick={this.onClickAddException.bind(this)}>Add Exception</Button>
-              <Button bsStyle="primary" className="margin-sm-left"
-                onClick={this.onClickOpen.bind(this)}>Open</Button>
-            </div>
-          </div>
-      </Modal>
+  render () {
+    let picker = this.renderPicker();
+    return (
+      <IncidentsModalView
+        show={this.state.open}
+        header="Open Incidents"
+        onHide={this.onHide.bind(this)}
+        onClose={this.onClickClose.bind(this)}
+        onFilter={this.onFilterChange}
+        value={this.state.selectedSeverity.join(',')}
+        options={this.state.severities}
+        onChange={this.onChangeSeverity.bind(this)}
+        params={this.state.params}
+        cells={this.cells}
+        picker={picker}
+        url="/incidentstable/getOpenIncidents"
+        onClick1={this.onClickFixAll.bind(this)}
+        onClick2={this.onClickAddException.bind(this)}
+        onClick3={this.onClickOpen.bind(this)}
+      />
     )
   }
 

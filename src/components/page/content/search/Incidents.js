@@ -17,6 +17,7 @@ import TabPage from '../../../shared/TabPage'
 import TabPageBody from '../../../shared/TabPageBody'
 import TabPageHeader from '../../../shared/TabPageHeader'
 import { showConfirm } from 'components/shared/Alert'
+import { Selector } from '../../../modal/parts'
 
 import DeviceSearchModal from './DeviceSearchModal'
 
@@ -283,6 +284,12 @@ export default class Incidents extends React.Component {
                 <option value="false">Unfixed</option>
                 <option value="true">Fixed</option>
               </select>
+              <div className="form-control inline">
+                <Selector
+                  onChange={this.onFixedChange.bind(this)}
+                  options={['Any', 'Unfixed', 'Fixed']}
+                />
+              </div>
               <DateRangePicker onClickRange={this.onChangeRange.bind(this)} className="margin-md-left"
                 default={defaultDate} ref="dp">
                 <i className="fa fa-caret-down margin-xs-left" />

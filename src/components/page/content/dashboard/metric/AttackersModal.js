@@ -1,7 +1,6 @@
 import React from 'react'
-import Modal from 'react-bootstrap-modal'
 import { findIndex } from 'lodash'
-import InfiniteTable from '../../../../shared/InfiniteTable'
+import { AttackersModalView } from '../../../../modal'
 
 export default class AttackersModal extends React.Component {
   constructor (props) {
@@ -97,30 +96,13 @@ export default class AttackersModal extends React.Component {
 
   render () {
     return (
-      <Modal show={this.state.open} onHide={this.onHide.bind(this)}
-        aria-labelledby="ModalHeader" className="bootstrap-dialog type-primary modal-md">
-
-        <div className="modal-header">
-          <h4 className="modal-title bootstrap-dialog-title">
-            Attackers Today
-          </h4>
-          <div className="bootstrap-dialog-close-button">
-            <button className="close" onClick={this.onClickClose.bind(this)}>×</button>
-          </div>
-        </div>
-
-        <div className="modal-body bootstrap-dialog-message">
-          <InfiniteTable
-            url="/bi/getAllAttackers"
-            params={this.state.params}
-            cells={this.cells}
-            ref="table"
-            rowMetadata={{'key': 'ipaddress'}}
-            bodyHeight={500}
-            selectable
-          />
-        </div>
-      </Modal>
+      <AttackersModalView
+        show={this.state.open}
+        onHide={this.onHide.bind(this)}
+        onClose={this.onClickClose.bind(this)}
+        params={this.state.params}
+        cells={this.cells}
+      />
     )
   }
 }
