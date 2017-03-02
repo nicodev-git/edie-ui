@@ -6,7 +6,7 @@ import Select from 'react-select'
 import { Header } from './parts'
 
 const IncidentsModalView = ({show, onHide, onClose, header, onFilter, onChange,
-  value, options, params, cells, onClick1, onClick2, onClick3}) => (
+  value, options, params, cells, picker, url, onClick1, onClick2, onClick3}) => (
   <Modal
     show={show}
     onHide={onHide}
@@ -42,10 +42,11 @@ const IncidentsModalView = ({show, onHide, onClose, header, onFilter, onChange,
               <option value="0">Unfixed</option>
               <option value="1">Fixed</option>
           </select>
+          {picker}
       </div>
 
       <InfiniteTable
-        url="/incidentstable/getMonthIncidents"
+        url={url}
         params={params}
         cells={cells}
         ref="table"

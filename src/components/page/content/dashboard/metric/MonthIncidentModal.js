@@ -1,5 +1,4 @@
 import React from 'react'
-import Modal from 'react-bootstrap-modal'
 import { assign } from 'lodash'
 import { ROOT_URL } from '../../../../../actions/config'
 import AddExceptionModal from './AddExceptionModal'
@@ -127,6 +126,8 @@ export default class MonthIncidentModal extends React.Component {
         onChange={this.onChangeSeverity.bind(this)}
         params={this.state.params}
         cells={this.cells}
+        picker=null
+        url="/incidentstable/getMonthIncidents"
         onClick1={this.onClickFixAll.bind(this)}
         onClick2={this.onClickAddException.bind(this)}
         onClick3={this.onClickOpen.bind(this)}
