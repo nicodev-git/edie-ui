@@ -1,6 +1,7 @@
 import React from 'react'
 import Modal from 'react-bootstrap-modal'
 import { showAlert } from '../../../../shared/Alert'
+import { NewIncidentModalView } from '../../../../modal'
 
 export default class NewIncidentModal extends React.Component {
   constructor (props) {
@@ -54,6 +55,13 @@ export default class NewIncidentModal extends React.Component {
 
   render () {
     return (
+      <NewIncidentModalView
+        show
+        onHide={this.onHide.bind(this)}
+        onClose={this.onClickClose.bind(this)}
+        onChange={this.onChangeFile.bind(this)}
+        onSave={this.onClickSave.bind(this)}
+      />
       <Modal show onHide={this.onHide.bind(this)} aria-labelledby="ModalHeader" className="bootstrap-dialog type-primary">
 
         <div className="modal-header">
