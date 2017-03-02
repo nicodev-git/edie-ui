@@ -28,7 +28,7 @@ export default class AddExceptionModal extends React.Component {
 
   render () {
     return (
-      <NewIncidentModalView
+      <AddExceptionModalView
         show
         onHide={this.onHide.bind(this)}
         onClose={this.onClickClose.bind(this)}
