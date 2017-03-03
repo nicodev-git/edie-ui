@@ -2,10 +2,12 @@ import React from 'react'
 import Modal from 'react-bootstrap-modal'
 import JDataTable from '../shared/JDataTable'
 import { Header, FiveButtonsBlock } from './parts'
+import { Button } from 'react-bootstrap'
 
 const CopyRuleModalView = ({show, onHide, onSave, onClose, onChangeCopy, onChangeCategory,
-   onChangeLogical, onChangeLeft, selectedLogical, logicals, defaultValue, categories, copyType,
-   selectedLeft, devicesLeft, onClickBlockLeft, onClickBlockRight}) => (
+   onChangeLogical, onChangeLeft, onChangeRight, onChangeGroups, electedLogical, logicals, defaultValue,
+   categories, copyType, groups, selectedLeft, selectedRight, devicesLeft, devicesRight,
+   selectedLogical, onClickBlockLeft, onClickBlockRight}) => (
   <Modal
     show={show}
     onHide={onHide}
@@ -117,9 +119,9 @@ const CopyRuleModalView = ({show, onHide, onSave, onClose, onChangeCopy, onChang
                 <div className="col-md-5">
                   <select
                     className="form-control"
-                    onChange={this.onChangeGroups.bind(this)}
+                    onChange={onChangeGroups}
                   >
-                    {this.state.groups.map(item =>
+                    {groups.map(item =>
                       <option key={item.id} value={item.id}>{item.name}</option>
                     )}
                   </select>
@@ -127,11 +129,11 @@ const CopyRuleModalView = ({show, onHide, onSave, onClose, onChangeCopy, onChang
                 <div className="col-md-5">
                   <select
                     className="form-control"
-                    onChange={this.onChangeDevicesRight.bind(this)}
-                    value={this.state.selectedDeviceRight}
+                    onChange={onChangeRight}
+                    value={selectedRight}
                     ref="deviceRight"
                   >
-                    {this.state.devicesRight.map(item =>
+                    {devicesRight.map(item =>
                       <option key={item.id} value={item.id}>{item.name}</option>
                     )}
                   </select>
@@ -142,14 +144,14 @@ const CopyRuleModalView = ({show, onHide, onSave, onClose, onChangeCopy, onChang
                 height="350px"
                 className="table-hover"
 
-                url={Api.rule.getRulesForDevice}
+                url="Api.rule.getRulesForDevice"
                 columns = {[{
                   title: 'Category', data: 'categoryName'
                 }, {
                   title: 'Name', data: 'name'
                 }]}
                 params = {{
-                  deviceid: this.state.selectedDeviceRight,
+                  deviceid: selectedRight,
                   ruleCategory: 0,
                   severity: ''
                 }}

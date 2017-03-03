@@ -634,13 +634,18 @@ export default class CopyRuleModal extends React.Component {
         onChangeCategory={this.onChangeCategory.bind(this)}
         onChangeLogical={this.onChangeLogical.bind(this)}
         onChangeLeft={this.onChangeDevicesLeft.bind(this)}
+        onChangeRight={this.onChangeDevicesRight.bind(this)}
+        onChangeGroups={this.onChangeGroups.bind(this)}
         defaultValue={this.state.copyType}
         selectedLogical={this.state.selectedLogical}
         selectedLeft={this.state.selectedDeviceLeft}
+        selectedRight={this.state.selectedDeviceRight}
         logicals={this.state.logicals}
         categories={this.state.categories}
         copyType={this.state.copyType}
+        groups={this.state.groups}
         devicesLeft={this.state.devicesLeft}
+        deviceRight={this.state.devicesRight}
         onClickBlockLeft={onClickBlockLeft}
         onClickBlockRight={onClickBlockRight}
       />
@@ -650,30 +655,6 @@ export default class CopyRuleModal extends React.Component {
         aria-labelledby="ModalHeader"
         className="bootstrap-dialog type-primary modal-copy-rules"
       >
-
-
-                  <div className="text-center padding-md">
-                    <Button className="btn-sm margin-sm-right" onClick={this.onClickCopyLeft.bind(this)}>Copy</Button>
-                    <Button className="btn-sm margin-sm-right" onClick={this.onClickMoveLeft.bind(this)}>Move</Button>
-                    <Button className="btn-sm margin-sm-right" onClick={this.onClickAddLeft.bind(this)}>Add</Button>
-                    <Button className="btn-sm margin-sm-right" onClick={this.onClickEditLeft.bind(this)}>Edit</Button>
-                    <Button className="btn-sm margin-sm-right" onClick={this.onClickDeleteLeft.bind(this)}>Delete</Button>
-                  </div>
-                </div>
-
-                <div className="col-md-6">
-                  <div className="row">
-                    <label className="control-label col-md-2">To: </label>
-                    <div className="col-md-5">
-                      <select
-                        className="form-control"
-                        onChange={this.onChangeGroups.bind(this)}
-                      >
-                        {this.state.groups.map(item =>
-                          <option key={item.id} value={item.id}>{item.name}</option>
-                        )}
-                      </select>
-                    </div>
                     <div className="col-md-5">
                       <select
                         className="form-control"
