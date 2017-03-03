@@ -649,57 +649,6 @@ export default class CopyRuleModal extends React.Component {
         onClickBlockLeft={onClickBlockLeft}
         onClickBlockRight={onClickBlockRight}
       />
-      <Modal
-        show={this.state.open}
-        onHide={this.onHide.bind(this)}
-        aria-labelledby="ModalHeader"
-        className="bootstrap-dialog type-primary modal-copy-rules"
-      >
-                    <div className="col-md-5">
-                      <select
-                        className="form-control"
-                        onChange={this.onChangeDevicesRight.bind(this)}
-                        value={this.state.selectedDeviceRight}
-                        ref="deviceRight"
-                      >
-                        {this.state.devicesRight.map(item =>
-                          <option key={item.id} value={item.id}>{item.name}</option>
-                        )}
-                      </select>
-                    </div>
-                  </div>
-
-                  <JDataTable
-                    height="350px"
-                    className="table-hover"
-
-                    url={Api.rule.getRulesForDevice}
-                    columns = {[{
-                      title: 'Category', data: 'categoryName'
-                    }, {
-                      title: 'Name', data: 'name'
-                    }]}
-                    params = {{
-                      deviceid: this.state.selectedDeviceRight,
-                      ruleCategory: 0,
-                      severity: ''
-                    }}
-                    ref="ruleDeviceRight"
-                  />
-
-                  <div className="text-center padding-md">
-                    <Button className="btn-sm margin-sm-right" onClick={this.onClickCopyRight.bind(this)}>Copy</Button>
-                    <Button className="btn-sm margin-sm-right" onClick={this.onClickMoveRight.bind(this)}>Move</Button>
-                    <Button className="btn-sm margin-sm-right" onClick={this.onClickAddRight.bind(this)}>Add</Button>
-                    <Button className="btn-sm margin-sm-right" onClick={this.onClickEditRight.bind(this)}>Edit</Button>
-                    <Button className="btn-sm margin-sm-right" onClick={this.onClickDeleteRight.bind(this)}>Delete</Button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </Modal>
     )
   }
 }

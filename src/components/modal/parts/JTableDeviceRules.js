@@ -1,12 +1,23 @@
 import React from 'react'
+import JDataTable from '../../shared/JDataTable'
 
-const JTableDeviceRules = ({name, onClick}) => (
-  <div className="modal-header">
-    <h4 className="modal-title bootstrap-dialog-title">{name}</h4>
-    <div className="bootstrap-dialog-close-button">
-      <button className="close" onClick={onClick}>×</button>
-    </div>
-  </div>
+const JTableDeviceRules = ({ref, deviceId}) => (
+  <JDataTable
+    height="350px"
+    className="table-hover"
+    url="Api.rule.getRulesForDevice"
+    columns = {[{
+      title: 'Category', data: 'categoryName'
+    }, {
+      title: 'Name', data: 'name'
+    }]}
+    params = {{
+      deviceid: deviceId,
+      ruleCategory: 0,
+      severity: ''
+    }}
+    ref={ref}
+  />
 )
 
 export default JTableDeviceRules

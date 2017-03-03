@@ -1,8 +1,7 @@
 import React from 'react'
 import Modal from 'react-bootstrap-modal'
 import JDataTable from '../shared/JDataTable'
-import { Header, FiveButtonsBlock } from './parts'
-import { Button } from 'react-bootstrap'
+import { Header, FiveButtonsBlock, JTableDeviceRules } from './parts'
 
 const CopyRuleModalView = ({show, onHide, onSave, onClose, onChangeCopy, onChangeCategory,
    onChangeLogical, onChangeLeft, onChangeRight, onChangeGroups, electedLogical, logicals, defaultValue,
@@ -76,22 +75,7 @@ const CopyRuleModalView = ({show, onHide, onSave, onClose, onChangeCopy, onChang
               </div>
               <div className={`${copyType === 'device' ? '' : 'hidden'}`}>
 
-                <JDataTable
-                  height="350px"
-                  className="table-hover"
-                  url="Api.rule.getRulesForDevice"
-                  columns = {[{
-                    title: 'Category', data: 'categoryName'
-                  }, {
-                    title: 'Name', data: 'name'
-                  }]}
-                  params = {{
-                    deviceid: selectedLeft,
-                    ruleCategory: 0,
-                    severity: ''
-                  }}
-                  ref="ruleDeviceLeft"
-                />
+                <JTableDeviceRules ref="ruleDeviceLeft" deviceId={selectedLeft}/>
               </div>
 
               <div className={`${copyType === 'template' ? '' : 'hidden'}`}>
@@ -140,31 +124,8 @@ const CopyRuleModalView = ({show, onHide, onSave, onClose, onChangeCopy, onChang
                 </div>
               </div>
 
-              <JDataTable
-                height="350px"
-                className="table-hover"
-
-                url="Api.rule.getRulesForDevice"
-                columns = {[{
-                  title: 'Category', data: 'categoryName'
-                }, {
-                  title: 'Name', data: 'name'
-                }]}
-                params = {{
-                  deviceid: selectedRight,
-                  ruleCategory: 0,
-                  severity: ''
-                }}
-                ref="ruleDeviceRight"
-              />
-
-              <div className="text-center padding-md">
-                <Button className="btn-sm margin-sm-right" onClick={this.onClickCopyRight.bind(this)}>Copy</Button>
-                <Button className="btn-sm margin-sm-right" onClick={this.onClickMoveRight.bind(this)}>Move</Button>
-                <Button className="btn-sm margin-sm-right" onClick={this.onClickAddRight.bind(this)}>Add</Button>
-                <Button className="btn-sm margin-sm-right" onClick={this.onClickEditRight.bind(this)}>Edit</Button>
-                <Button className="btn-sm margin-sm-right" onClick={this.onClickDeleteRight.bind(this)}>Delete</Button>
-              </div>
+              <JTableDeviceRules ref="ruleDeviceRight" deviceId={selectedRight}/>
+              <FiveButtonsBlock onClickArray={onClickBlockRight} />
             </div>
           </div>
         </div>
