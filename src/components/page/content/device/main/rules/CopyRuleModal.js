@@ -610,6 +610,20 @@ export default class CopyRuleModal extends React.Component {
   }
 
   render () {
+    let onClickBlockLeft = [
+      this.onClickCopyLeft.bind(this),
+      this.onClickMoveLeft.bind(this),
+      this.onClickAddLeft.bind(this),
+      this.onClickEditLeft.bind(this),
+      this.onClickDeleteLeft.bind(this)
+    ]
+    let onClickBlockRight = [
+      this.onClickCopyRight.bind(this),
+      this.onClickMoveRight.bind(this),
+      this.onClickAddRight.bind(this),
+      this.onClickEditRight.bind(this),
+      this.onClickDeleteRight.bind(this)
+    ]
     return (
       <CopyRuleModalView
         show={this.state.open}
@@ -619,10 +633,16 @@ export default class CopyRuleModal extends React.Component {
         onChangeCopy={this.onChangeCopyType.bind(this)}
         onChangeCategory={this.onChangeCategory.bind(this)}
         onChangeLogical={this.onChangeLogical.bind(this)}
+        onChangeLeft={this.onChangeDevicesLeft.bind(this)}
         defaultValue={this.state.copyType}
         selectedLogical={this.state.selectedLogical}
+        selectedLeft={this.state.selectedDeviceLeft}
         logicals={this.state.logicals}
         categories={this.state.categories}
+        copyType={this.state.copyType}
+        devicesLeft={this.state.devicesLeft}
+        onClickBlockLeft={onClickBlockLeft}
+        onClickBlockRight={onClickBlockRight}
       />
       <Modal
         show={this.state.open}
@@ -631,73 +651,6 @@ export default class CopyRuleModal extends React.Component {
         className="bootstrap-dialog type-primary modal-copy-rules"
       >
 
-                    <div className="col-md-5">
-                      <select
-                        className="form-control"
-                        onChange={this.onChangeLogical.bind(this)}
-                        value={this.state.selectedLogical}
-                        ref="logical"
-                      >
-                        {this.state.logicals.map(item =>
-                          <option key={item.id} value={item.id}>{item.name}</option>
-                        )}
-                      </select>
-                    </div>
-                  </div>
-
-                  <div className={`row ${this.state.copyType === 'device' ? '' : 'hidden'}`}>
-                    <label className="control-label col-md-2">From: </label>
-                    <div className="col-md-10">
-                      <select
-                        className="form-control"
-                        value={this.state.selectedDeviceLeft}
-                        onChange={this.onChangeDevicesLeft.bind(this)}
-                        ref="deviceLeft"
-                      >
-                        {this.state.devicesLeft.map(item =>
-                          <option key={item.id} value={item.id}>{item.name}</option>
-                        )}
-                      </select>
-                    </div>
-                  </div>
-                  <div className={`${this.state.copyType === 'device' ? '' : 'hidden'}`}>
-
-                    <JDataTable
-                      height="350px"
-                      className="table-hover"
-
-                      url={Api.rule.getRulesForDevice}
-                      columns = {[{
-                        title: 'Category', data: 'categoryName'
-                      }, {
-                        title: 'Name', data: 'name'
-                      }]}
-                      params = {{
-                        deviceid: this.state.selectedDeviceLeft,
-                        ruleCategory: 0,
-                        severity: ''
-                      }}
-                      ref="ruleDeviceLeft"
-                    />
-                  </div>
-
-                  <div className={`${this.state.copyType === 'template' ? '' : 'hidden'}`}>
-
-                    <JDataTable
-                      className="table-hover"
-                      height="350px"
-
-                      url={Api.rule.getByLogicalRuleId}
-                      columns = {[{
-                        title: 'Name', data: 'name'
-                      }]}
-                      params = {{
-                        logicalRuleId: this.state.selectedLogical,
-                        severity: ''
-                      }}
-                      ref="ruleTplLeft"
-                    />
-                  </div>
 
                   <div className="text-center padding-md">
                     <Button className="btn-sm margin-sm-right" onClick={this.onClickCopyLeft.bind(this)}>Copy</Button>

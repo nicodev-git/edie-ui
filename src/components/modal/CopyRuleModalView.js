@@ -1,9 +1,11 @@
 import React from 'react'
 import Modal from 'react-bootstrap-modal'
-import { Header } from './parts'
+import JDataTable from '../shared/JDataTable'
+import { Header, FiveButtonsBlock } from './parts'
 
 const CopyRuleModalView = ({show, onHide, onSave, onClose, onChangeCopy, onChangeCategory,
-   onChangeLogical, selectedLogical, logicals, defaultValue, categories}) => (
+   onChangeLogical, onChangeLeft, selectedLogical, logicals, defaultValue, categories, copyType,
+   selectedLeft, devicesLeft, onClickBlockLeft, onClickBlockRight}) => (
   <Modal
     show={show}
     onHide={onHide}
@@ -55,35 +57,34 @@ const CopyRuleModalView = ({show, onHide, onSave, onClose, onChangeCopy, onChang
                 </div>
               </div>
 
-              <div className={`row ${this.state.copyType === 'device' ? '' : 'hidden'}`}>
+              <div className={`row ${copyType === 'device' ? '' : 'hidden'}`}>
                 <label className="control-label col-md-2">From: </label>
                 <div className="col-md-10">
                   <select
                     className="form-control"
-                    value={this.state.selectedDeviceLeft}
-                    onChange={this.onChangeDevicesLeft.bind(this)}
+                    value={selectedLeft}
+                    onChange={onChangeLeft}
                     ref="deviceLeft"
                   >
-                    {this.state.devicesLeft.map(item =>
+                    {devicesLeft.map(item =>
                       <option key={item.id} value={item.id}>{item.name}</option>
                     )}
                   </select>
                 </div>
               </div>
-              <div className={`${this.state.copyType === 'device' ? '' : 'hidden'}`}>
+              <div className={`${copyType === 'device' ? '' : 'hidden'}`}>
 
                 <JDataTable
                   height="350px"
                   className="table-hover"
-
-                  url={Api.rule.getRulesForDevice}
+                  url="Api.rule.getRulesForDevice"
                   columns = {[{
                     title: 'Category', data: 'categoryName'
                   }, {
                     title: 'Name', data: 'name'
                   }]}
                   params = {{
-                    deviceid: this.state.selectedDeviceLeft,
+                    deviceid: selectedLeft,
                     ruleCategory: 0,
                     severity: ''
                   }}
@@ -91,31 +92,23 @@ const CopyRuleModalView = ({show, onHide, onSave, onClose, onChangeCopy, onChang
                 />
               </div>
 
-              <div className={`${this.state.copyType === 'template' ? '' : 'hidden'}`}>
+              <div className={`${copyType === 'template' ? '' : 'hidden'}`}>
 
                 <JDataTable
                   className="table-hover"
                   height="350px"
-
-                  url={Api.rule.getByLogicalRuleId}
+                  url="Api.rule.getByLogicalRuleId"
                   columns = {[{
                     title: 'Name', data: 'name'
                   }]}
                   params = {{
-                    logicalRuleId: this.state.selectedLogical,
+                    logicalRuleId: selectedLogical,
                     severity: ''
                   }}
                   ref="ruleTplLeft"
                 />
               </div>
-
-              <div className="text-center padding-md">
-                <Button className="btn-sm margin-sm-right" onClick={this.onClickCopyLeft.bind(this)}>Copy</Button>
-                <Button className="btn-sm margin-sm-right" onClick={this.onClickMoveLeft.bind(this)}>Move</Button>
-                <Button className="btn-sm margin-sm-right" onClick={this.onClickAddLeft.bind(this)}>Add</Button>
-                <Button className="btn-sm margin-sm-right" onClick={this.onClickEditLeft.bind(this)}>Edit</Button>
-                <Button className="btn-sm margin-sm-right" onClick={this.onClickDeleteLeft.bind(this)}>Delete</Button>
-              </div>
+              <FiveButtonsBlock onClickArray={onClickBlockLeft} />
             </div>
 
             <div className="col-md-6">
