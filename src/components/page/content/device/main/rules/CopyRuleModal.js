@@ -611,50 +611,26 @@ export default class CopyRuleModal extends React.Component {
 
   render () {
     return (
+      <CopyRuleModalView
+        show={this.state.open}
+        onHide={this.onHide.bind(this)}
+        onClose={this.onClickClose.bind(this)}
+        onSave={this.onClickSave.bind(this)}
+        onChangeCopy={this.onChangeCopyType.bind(this)}
+        onChangeCategory={this.onChangeCategory.bind(this)}
+        onChangeLogical={this.onChangeLogical.bind(this)}
+        defaultValue={this.state.copyType}
+        selectedLogical={this.state.selectedLogical}
+        logicals={this.state.logicals}
+        categories={this.state.categories}
+      />
       <Modal
         show={this.state.open}
         onHide={this.onHide.bind(this)}
         aria-labelledby="ModalHeader"
         className="bootstrap-dialog type-primary modal-copy-rules"
       >
-        <div className="modal-header">
-          <h4 className="modal-title bootstrap-dialog-title">
-            Copy/Move Rules
-          </h4>
-          <div className="bootstrap-dialog-close-button">
-            <button className="close" onClick={this.onClickClose.bind(this)}>×</button>
-          </div>
-        </div>
-        <div className="modal-body bootstrap-dialog-message p-none">
-          <div className="panel panel-default panel-noborder">
-            <div className="panel-heading">
-              <span className="panel-title">&nbsp;</span>
-              <select
-                className="input-sm"
-                onChange={this.onChangeCopyType.bind(this)}
-                defaultValue={this.state.copyType}
-              >
-                <option value="device">Device</option>
-                <option value="template">Template</option>
-              </select>
-              <div className="panel-options" />
-            </div>
-            <div className="panel-body pb-none">
-              <div className="row">
-                <div className="col-md-6">
-                  <div className={`row ${this.state.copyType === 'template' ? '' : 'hidden'}`}>
-                    <label className="control-label col-md-2">From: </label>
-                    <div className="col-md-5">
-                      <select
-                        className="form-control"
-                        onChange={this.onChangeCategory.bind(this)}
-                        ref="category"
-                      >
-                        {this.state.categories.map(item =>
-                          <option key={item.id} value={item.id}>{item.name}</option>
-                        )}
-                      </select>
-                    </div>
+
                     <div className="col-md-5">
                       <select
                         className="form-control"
