@@ -4,6 +4,9 @@ import MapImportModalView from './MapImportModalView'
 import NewIncidentModalView from './NewIncidentModalView'
 import AttackersModalView from './AttackersModalView'
 import IncidentsModalView from './InsidentsModalView'
+import AddIncidentModalView from './AddIncidentModalView'
+import MarkIgnoreModalView from './MarkIgnoreModalView'
+import CopyRuleModalView from './CopyRuleModalView'
 
 export {
     ActivationModalView,
@@ -11,5 +14,8 @@ export {
     MapImportModalView,
     NewIncidentModalView,
     AttackersModalView,
-    IncidentsModalView
+    IncidentsModalView,
+    AddIncidentModalView,
+    MarkIgnoreModalView,
+    CopyRuleModalView
 }

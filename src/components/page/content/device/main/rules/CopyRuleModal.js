@@ -610,186 +610,45 @@ export default class CopyRuleModal extends React.Component {
   }
 
   render () {
+    let onClickBlockLeft = [
+      this.onClickCopyLeft.bind(this),
+      this.onClickMoveLeft.bind(this),
+      this.onClickAddLeft.bind(this),
+      this.onClickEditLeft.bind(this),
+      this.onClickDeleteLeft.bind(this)
+    ]
+    let onClickBlockRight = [
+      this.onClickCopyRight.bind(this),
+      this.onClickMoveRight.bind(this),
+      this.onClickAddRight.bind(this),
+      this.onClickEditRight.bind(this),
+      this.onClickDeleteRight.bind(this)
+    ]
     return (
-      <Modal
+      <CopyRuleModalView
         show={this.state.open}
         onHide={this.onHide.bind(this)}
-        aria-labelledby="ModalHeader"
-        className="bootstrap-dialog type-primary modal-copy-rules"
-      >
-        <div className="modal-header">
-          <h4 className="modal-title bootstrap-dialog-title">
-            Copy/Move Rules
-          </h4>
-          <div className="bootstrap-dialog-close-button">
-            <button className="close" onClick={this.onClickClose.bind(this)}>×</button>
-          </div>
-        </div>
-        <div className="modal-body bootstrap-dialog-message p-none">
-          <div className="panel panel-default panel-noborder">
-            <div className="panel-heading">
-              <span className="panel-title">&nbsp;</span>
-              <select
-                className="input-sm"
-                onChange={this.onChangeCopyType.bind(this)}
-                defaultValue={this.state.copyType}
-              >
-                <option value="device">Device</option>
-                <option value="template">Template</option>
-              </select>
-              <div className="panel-options" />
-            </div>
-            <div className="panel-body pb-none">
-              <div className="row">
-                <div className="col-md-6">
-                  <div className={`row ${this.state.copyType === 'template' ? '' : 'hidden'}`}>
-                    <label className="control-label col-md-2">From: </label>
-                    <div className="col-md-5">
-                      <select
-                        className="form-control"
-                        onChange={this.onChangeCategory.bind(this)}
-                        ref="category"
-                      >
-                        {this.state.categories.map(item =>
-                          <option key={item.id} value={item.id}>{item.name}</option>
-                        )}
-                      </select>
-                    </div>
-                    <div className="col-md-5">
-                      <select
-                        className="form-control"
-                        onChange={this.onChangeLogical.bind(this)}
-                        value={this.state.selectedLogical}
-                        ref="logical"
-                      >
-                        {this.state.logicals.map(item =>
-                          <option key={item.id} value={item.id}>{item.name}</option>
-                        )}
-                      </select>
-                    </div>
-                  </div>
-
-                  <div className={`row ${this.state.copyType === 'device' ? '' : 'hidden'}`}>
-                    <label className="control-label col-md-2">From: </label>
-                    <div className="col-md-10">
-                      <select
-                        className="form-control"
-                        value={this.state.selectedDeviceLeft}
-                        onChange={this.onChangeDevicesLeft.bind(this)}
-                        ref="deviceLeft"
-                      >
-                        {this.state.devicesLeft.map(item =>
-                          <option key={item.id} value={item.id}>{item.name}</option>
-                        )}
-                      </select>
-                    </div>
-                  </div>
-                  <div className={`${this.state.copyType === 'device' ? '' : 'hidden'}`}>
-
-                    <JDataTable
-                      height="350px"
-                      className="table-hover"
-
-                      url={Api.rule.getRulesForDevice}
-                      columns = {[{
-                        title: 'Category', data: 'categoryName'
-                      }, {
-                        title: 'Name', data: 'name'
-                      }]}
-                      params = {{
-                        deviceid: this.state.selectedDeviceLeft,
-                        ruleCategory: 0,
-                        severity: ''
-                      }}
-                      ref="ruleDeviceLeft"
-                    />
-                  </div>
-
-                  <div className={`${this.state.copyType === 'template' ? '' : 'hidden'}`}>
-
-                    <JDataTable
-                      className="table-hover"
-                      height="350px"
-
-                      url={Api.rule.getByLogicalRuleId}
-                      columns = {[{
-                        title: 'Name', data: 'name'
-                      }]}
-                      params = {{
-                        logicalRuleId: this.state.selectedLogical,
-                        severity: ''
-                      }}
-                      ref="ruleTplLeft"
-                    />
-                  </div>
-
-                  <div className="text-center padding-md">
-                    <Button className="btn-sm margin-sm-right" onClick={this.onClickCopyLeft.bind(this)}>Copy</Button>
-                    <Button className="btn-sm margin-sm-right" onClick={this.onClickMoveLeft.bind(this)}>Move</Button>
-                    <Button className="btn-sm margin-sm-right" onClick={this.onClickAddLeft.bind(this)}>Add</Button>
-                    <Button className="btn-sm margin-sm-right" onClick={this.onClickEditLeft.bind(this)}>Edit</Button>
-                    <Button className="btn-sm margin-sm-right" onClick={this.onClickDeleteLeft.bind(this)}>Delete</Button>
-                  </div>
-                </div>
-
-                <div className="col-md-6">
-                  <div className="row">
-                    <label className="control-label col-md-2">To: </label>
-                    <div className="col-md-5">
-                      <select
-                        className="form-control"
-                        onChange={this.onChangeGroups.bind(this)}
-                      >
-                        {this.state.groups.map(item =>
-                          <option key={item.id} value={item.id}>{item.name}</option>
-                        )}
-                      </select>
-                    </div>
-                    <div className="col-md-5">
-                      <select
-                        className="form-control"
-                        onChange={this.onChangeDevicesRight.bind(this)}
-                        value={this.state.selectedDeviceRight}
-                        ref="deviceRight"
-                      >
-                        {this.state.devicesRight.map(item =>
-                          <option key={item.id} value={item.id}>{item.name}</option>
-                        )}
-                      </select>
-                    </div>
-                  </div>
-
-                  <JDataTable
-                    height="350px"
-                    className="table-hover"
-
-                    url={Api.rule.getRulesForDevice}
-                    columns = {[{
-                      title: 'Category', data: 'categoryName'
-                    }, {
-                      title: 'Name', data: 'name'
-                    }]}
-                    params = {{
-                      deviceid: this.state.selectedDeviceRight,
-                      ruleCategory: 0,
-                      severity: ''
-                    }}
-                    ref="ruleDeviceRight"
-                  />
-
-                  <div className="text-center padding-md">
-                    <Button className="btn-sm margin-sm-right" onClick={this.onClickCopyRight.bind(this)}>Copy</Button>
-                    <Button className="btn-sm margin-sm-right" onClick={this.onClickMoveRight.bind(this)}>Move</Button>
-                    <Button className="btn-sm margin-sm-right" onClick={this.onClickAddRight.bind(this)}>Add</Button>
-                    <Button className="btn-sm margin-sm-right" onClick={this.onClickEditRight.bind(this)}>Edit</Button>
-                    <Button className="btn-sm margin-sm-right" onClick={this.onClickDeleteRight.bind(this)}>Delete</Button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </Modal>
+        onClose={this.onClickClose.bind(this)}
+        onSave={this.onClickSave.bind(this)}
+        onChangeCopy={this.onChangeCopyType.bind(this)}
+        onChangeCategory={this.onChangeCategory.bind(this)}
+        onChangeLogical={this.onChangeLogical.bind(this)}
+        onChangeLeft={this.onChangeDevicesLeft.bind(this)}
+        onChangeRight={this.onChangeDevicesRight.bind(this)}
+        onChangeGroups={this.onChangeGroups.bind(this)}
+        defaultValue={this.state.copyType}
+        selectedLogical={this.state.selectedLogical}
+        selectedLeft={this.state.selectedDeviceLeft}
+        selectedRight={this.state.selectedDeviceRight}
+        logicals={this.state.logicals}
+        categories={this.state.categories}
+        copyType={this.state.copyType}
+        groups={this.state.groups}
+        devicesLeft={this.state.devicesLeft}
+        deviceRight={this.state.devicesRight}
+        onClickBlockLeft={onClickBlockLeft}
+        onClickBlockRight={onClickBlockRight}
+      />
     )
   }
 }

@@ -284,10 +284,11 @@ export default class Incidents extends React.Component {
                 <option value="false">Unfixed</option>
                 <option value="true">Fixed</option>
               </select>
-              <div className="form-control inline">
+              <div className="form-control material-selector">
                 <Selector
                   onChange={this.onFixedChange.bind(this)}
                   options={['Any', 'Unfixed', 'Fixed']}
+                  values={[0, -1, 1]}
                 />
               </div>
               <DateRangePicker onClickRange={this.onChangeRange.bind(this)} className="margin-md-left"

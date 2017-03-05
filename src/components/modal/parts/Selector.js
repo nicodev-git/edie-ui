@@ -4,11 +4,29 @@ import MenuItem from 'material-ui/MenuItem'
 import injectTapEventPlugin from 'react-tap-event-plugin'
 injectTapEventPlugin()
 
+const style = {
+  width: 128,
+  height: '100%',
+  verticalAlign: 'top',
+  lineHeight: 0,
+  paddingRight: 0
+}
+
+const labelStyle = {
+  lineHeight: 2.5,
+  paddingRight: 5,
+  paddingLeft: 10
+}
+
+const listStyle = {
+  width: 110
+}
+
 export default class Selector extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      value: 1
+      value: this.props.values[0]
     }
   }
 
@@ -25,19 +43,26 @@ export default class Selector extends Component {
 
   renderList () {
     let options = this.props.options
+    let values = this.props.values
     let list = []
     for (let i = 0; i < options.length; i++) {
-      list.push(<MenuItem key={i} value={i + 1} primaryText={options[i]} />)
+      list.push(<MenuItem key={i} value={values[i]} primaryText={options[i]} />)
     }
     return list
   }
 
   render () {
     let menuItemsList = this.renderList()
+    let autoWidth = true
     return (
       <SelectField
         value={this.state.value}
+        autoWidth={autoWidth}
         onChange={this.handleChange.bind(this)}
+        style={style}
+        labelStyle={labelStyle}
+        listStyle={listStyle}
+        underlineStyle={{display: 'none'}}
       >
         {menuItemsList}
       </SelectField>
