@@ -1,55 +1,36 @@
 import React from 'react'
 import Modal from 'react-bootstrap-modal'
-import { Header } from './parts'
+import { Field } from 'redux-form'
+import MenuItem from 'material-ui/MenuItem'
+import { Header, FormInput, FormSelect, FormImg } from './parts'
 
-const MapSaveModalView = ({show, onHide, onSave, onClose, onChange, imgSrc}) => (
+const NewIncidentModalView = ({show, onHide, onSubmit}) => (
   <Modal
     show={show}
     onHide={onHide}
     aria-labelledby="ModalHeader"
     className="bootstrap-dialog type-primary"
   >
-    <Header name="New Incident" onClick={onClose} />
+    <Header name="New Incident" onClick={onHide} />
     <div className="modal-body bootstrap-dialog-message">
-      <div className="row text-center margin-md-bottom">
-        <div className="img-input" style={{width: '60px'}}>
-          <img src={imgSrc}/>
-          <input type="file" accept="image/*;capture=camera" onChange={onChange} ref="file"/>
+      <form onSubmit={onSubmit}>
+        <Field name="files" component={FormImg}/>
+        <Field name="name" component={FormInput} label="Enter Name"/>
+        <Field name="desc" component={FormInput} label="Enter Description"
+          multiLine rows={3}/>
+        <Field name="select" component={FormSelect} label="Choose Severity">
+          <MenuItem value={'High'} primaryText="High"/>
+          <MenuItem value={'Medium'} primaryText="Medium"/>
+          <MenuItem value={'Low'} primaryText="Low"/>
+          <MenuItem value={'Audit'} primaryText="Audit"/>
+        </Field>
+        <div className="text-right">
+          <button type="submit">Save</button>
+          <button type="button" onClick={onHide}>Close</button>
         </div>
-      </div>
-
-      <div className="row margin-md-bottom">
-        <label className="control-label col-md-3">Name</label>
-        <div className="col-md-9">
-          <input type="text" className="form-control" ref="name" />
-        </div>
-      </div>
-
-      <div className="row margin-md-bottom">
-        <label className="control-label col-md-3">Description</label>
-        <div className="col-md-9">
-          <textarea className="form-control" ref="desc" />
-        </div>
-      </div>
-
-      <div className="row margin-md-bottom">
-        <label className="control-label col-md-3 pt-none mb-none">Severity</label>
-        <div className="col-md-9">
-          <select ref="severity" className="form-control">
-            <option>High</option>
-            <option>Medium</option>
-            <option>Low</option>
-            <option>Audit</option>
-          </select>
-        </div>
-      </div>
-
-      <div className="text-center mb-none">
-        <a href="javascript:;" className="btn btn-default btn-sm margin-sm-right" onClick={onSave}>Add</a>
-        <a href="javascript:;" className="btn btn-default btn-sm" onClick={onClose}>Cancel</a>
-      </div>
+      </form>
     </div>
   </Modal>
 )
 
-export default MapSaveModalView
+export default NewIncidentModalView
