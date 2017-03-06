@@ -57,7 +57,6 @@
     "json-loader": "^0.5.4",
     "lodash": "^4.11.1",
     "material-ui": "^0.17.0",
-    "material-ui-upload": "^1.0.0",
     "moment": "^2.13.0",
     "postcss-custom-selectors": "*",
     "postcss-loader": "^1.1.1",
