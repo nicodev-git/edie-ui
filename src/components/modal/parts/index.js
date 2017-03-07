@@ -8,6 +8,8 @@ import FormInput from './FormInput'
 import FormSelect from './FormSelect'
 import FormImg from './FormImg'
 import SubmitBlock from './SubmitBlock'
+import HeaderNoClose from './HeaderNoClose'
+import SubmitSingle from './SubmitSingle'
 
 export {
     BottomLinks,
@@ -19,5 +21,7 @@ export {
     FormInput,
     FormSelect,
     FormImg,
-    SubmitBlock
+    SubmitBlock,
+    HeaderNoClose,
+    SubmitSingle
 }

@@ -14,7 +14,7 @@ const NewIncidentModalView = ({show, onHide, onSubmit, options}) => (
     <div className="modal-body bootstrap-dialog-message">
       <form onSubmit={onSubmit}>
         <Field name="files" component={FormImg}/>
-        <div className="form-column">
+        <div className="form-column form-column-shift">
           <Field name="name" component={FormInput} label="Name"/>
           <Field name="desc" component={FormInput} label="Description"
             multiLine rows={3}/>
