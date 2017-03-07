@@ -1,22 +1,15 @@
 import React from 'react'
-import SelectField from 'material-ui/SelectField'
 import SuperSelectField from 'material-ui-superselectfield'
-import MenuItem from 'material-ui/MenuItem'
-import { labelStyle, labelFocusStyle, errorStyle, underlineFocusStyle,
-   selectedItemStyle } from './materialStyles'
 
-const FormMultiSelect = ({input, label, meta: { touched, error }, options}) => (
-  <SelectField
-    floatingLabelText={label}
-    floatingLabelStyle={labelStyle}
-    floatingLabelFocusStyle={labelFocusStyle}
+const FormMultiSelect = ({input, label, meta: { touched, error }, options, name}) => (
+  <SuperSelectField
+    name={name}
+    hintText={label}
     errorText={touched && error}
-    errorStyle={errorStyle}
-    underlineStyle={underlineFocusStyle}
-    selectedMenuItemStyle={selectedItemStyle}
+    multiple
     {...input}
-    onChange={(event, index, value) => input.onChange(value)}>
-    {options.map(option => <MenuItem key={option.value} value={option.value} primaryText={option.label}/>)}
+    onChange={(values, name) => input.onChange(values)}>
+    {options.map(option => (<div key={option.value} value={option.value} primaryText={option.label}></div>))}
   </SelectField>
 )
 
