@@ -32,3 +32,11 @@ export const underlineStyle = {
 export const selectedItemStyle = {
   color: primeColor
 }
+
+export const buttonStyle = {
+  backgroundColor: primeColor
+}
+
+export const headerStyle = {
+  backgroundColor: primeColor
+}

@@ -1,7 +1,7 @@
 import React from 'react'
 import Modal from 'react-bootstrap-modal'
 import { Field } from 'redux-form'
-import { Header, FormInput, FormSelect, FormImg } from './parts'
+import { Header, FormInput, FormSelect, FormImg, SubmitBlock } from './parts'
 
 const NewIncidentModalView = ({show, onHide, onSubmit, options}) => (
   <Modal
@@ -19,10 +19,7 @@ const NewIncidentModalView = ({show, onHide, onSubmit, options}) => (
           multiLine rows={3}/>
         <Field name="select" component={FormSelect} label="Choose Severity"
           options={options}/>
-        <div className="text-right">
-          <button type="submit">Save</button>
-          <button type="button" onClick={onHide}>Close</button>
-        </div>
+        <SubmitBlock onClick={onHide}/>
       </form>
     </div>
   </Modal>

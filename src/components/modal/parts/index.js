@@ -7,6 +7,7 @@ import JTableDeviceRules from './JTableDeviceRules'
 import FormInput from './FormInput'
 import FormSelect from './FormSelect'
 import FormImg from './FormImg'
+import SubmitBlock from './SubmitBlock'
 
 export {
     BottomLinks,
@@ -17,5 +18,6 @@ export {
     JTableDeviceRules,
     FormInput,
     FormSelect,
-    FormImg
+    FormImg,
+    SubmitBlock
 }
