@@ -10,7 +10,17 @@ const errorStyle = {
 }
 
 const inputStyle = {
-  color: '#777777'
+  color: '#777777',
+  fontSize: '18pt'
+}
+
+const textareaStyle = {
+  color: '#777777',
+  fontSize: '18pt'
+}
+
+const underlineStyle = {
+  borderColor: '#5683bb'
 }
 
 const FormInput = ({input, label, meta: { touched, error }, ...custom}) => (
@@ -20,7 +30,8 @@ const FormInput = ({input, label, meta: { touched, error }, ...custom}) => (
     errorText={touched && error}
     errorStyle={errorStyle}
     inputStyle={inputStyle}
-    underlineFocusStyle={labelStyle}
+    textareaStyle={textareaStyle}
+    underlineFocusStyle={underlineStyle}
     {...input}
     {...custom}
   />
