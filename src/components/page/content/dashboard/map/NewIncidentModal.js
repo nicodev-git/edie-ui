@@ -46,6 +46,12 @@ class NewIncidentModal extends Component {
 
   render () {
     let show = (this.props) ? (this.props.open) : true
+    let options = [
+      { value: 'High', text: 'High' },
+      { value: 'Medium', text: 'Medium' },
+      { value: 'Low', text: 'Low' },
+      { value: 'Audit', text: 'Audit' }
+    ]
     const { handleSubmit } = this.props
     return (
       <NewIncidentModalView
@@ -53,6 +59,7 @@ class NewIncidentModal extends Component {
         onHide={this.onHide.bind(this)}
         onChangeImg={this.onChangeFile.bind(this)}
         onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
+        options={options}
       />
     )
   }

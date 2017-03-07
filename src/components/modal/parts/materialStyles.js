@@ -1,5 +1,10 @@
+const primeColor = '#5683bb'
+const textColor = '#777777'
+const errorColor = '#d32f2f'
+const fontSize = '18pt'
+
 export const labelStyle = {
-  color: '#5683bb'
+  color: primeColor
 }
 
 export const labelFocusStyle = {
@@ -7,19 +12,23 @@ export const labelFocusStyle = {
 }
 
 export const errorStyle = {
-  color: '#d32f2f'
+  color: errorColor
 }
 
 export const inputStyle = {
-  color: '#777777',
-  fontSize: '18pt'
+  color: textColor,
+  fontSize: fontSize
 }
 
 export const textareaStyle = {
-  color: '#777777',
-  fontSize: '18pt'
+  color: textColor,
+  fontSize: fontSize
 }
 
 export const underlineStyle = {
-  borderColor: '#5683bb'
+  borderColor: primeColor
+}
+
+export const selectedItemStyle = {
+  color: primeColor
 }

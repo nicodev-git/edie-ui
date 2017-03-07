@@ -1,10 +1,9 @@
 import React from 'react'
 import Modal from 'react-bootstrap-modal'
 import { Field } from 'redux-form'
-import MenuItem from 'material-ui/MenuItem'
 import { Header, FormInput, FormSelect, FormImg } from './parts'
 
-const NewIncidentModalView = ({show, onHide, onSubmit}) => (
+const NewIncidentModalView = ({show, onHide, onSubmit, options}) => (
   <Modal
     show={show}
     onHide={onHide}
@@ -18,12 +17,8 @@ const NewIncidentModalView = ({show, onHide, onSubmit}) => (
         <Field name="name" component={FormInput} label="Enter Name"/>
         <Field name="desc" component={FormInput} label="Enter Description"
           multiLine rows={3}/>
-        <Field name="select" component={FormSelect} label="Choose Severity">
-          <MenuItem value={'High'} primaryText="High"/>
-          <MenuItem value={'Medium'} primaryText="Medium"/>
-          <MenuItem value={'Low'} primaryText="Low"/>
-          <MenuItem value={'Audit'} primaryText="Audit"/>
-        </Field>
+        <Field name="select" component={FormSelect} label="Choose Severity"
+          options={options}/>
         <div className="text-right">
           <button type="submit">Save</button>
           <button type="button" onClick={onHide}>Close</button>
