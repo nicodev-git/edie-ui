@@ -6,8 +6,12 @@ import { validate } from '../../../../modal/validation/NameValidation'
 import { NewIncidentModalView } from '../../../../modal'
 
 class NewIncidentModal extends Component {
-  handleFormSubmit (values) {
-    console.log(values)
+  handleFormSubmit (name, desc, select, files) {
+    console.log('form submitting')
+    console.log('name: ', name)
+    console.log('desc: ', desc)
+    console.log('select: ', select)
+    console.log('file: ', files)
   }
 
   onHide () {
