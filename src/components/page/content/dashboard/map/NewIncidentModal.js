@@ -6,7 +6,7 @@ import { validate } from '../../../../modal/validation/NameValidation'
 import { NewIncidentModalView } from '../../../../modal'
 
 class NewIncidentModal extends Component {
-  handleFormSubmit (name, desc, select, files) {
+  handleFormSubmit ({name, desc, select, files}) {
     console.log('form submitting')
     console.log('name: ', name)
     console.log('desc: ', desc)
@@ -46,12 +46,13 @@ class NewIncidentModal extends Component {
 
   render () {
     let show = (this.props) ? (this.props.open) : true
+    const { handleSubmit } = this.props
     return (
       <NewIncidentModalView
         show={show}
         onHide={this.onHide.bind(this)}
         onChangeImg={this.onChangeFile.bind(this)}
-        onSubmit={this.handleFormSubmit.bind(this)}
+        onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
       />
     )
   }
