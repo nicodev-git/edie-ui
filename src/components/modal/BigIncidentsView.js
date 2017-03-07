@@ -16,7 +16,7 @@ const BigIncidentsView = ({show, onHide, value, options, onChange, onFilter, onS
       <form onSubmit={onSubmit}>
         <div className="form-column">
           <Field name="select" component={FormMultiSelect} label="Severity"
-            options={options} value={value}/>
+            options={options}/>
         </div>
         <SubmitBlock onClick={onHide}/>
       </form>
