@@ -1,38 +1,14 @@
-import React from 'react'
+import React, { Component } from 'react'
 import moment from 'moment'
+import { reduxForm } from 'redux-form'
+import { connect } from 'react-redux'
 import IncidentTable from '../dashboard/incidents/IncidentTable'
 import BigIncidentsView from '../../../modal/BigIncidentsView'
+import { validate } from '../../../modal/validation/NameValidation'
 
-export default class BigIncidents extends React.Component {
+class BigIncidents extends Component {
   constructor (props) {
     super(props)
-    this.state = {
-      open: true,
-
-      severities: [
-        { label: 'High', value: 'HIGH' },
-        { label: 'Medium', value: 'MEDIUM' },
-        { label: 'Low', value: 'LOW' },
-        { label: 'Audit', value: 'AUDIT' },
-        { label: 'Ignore', value: 'IGNORE' }
-      ],
-
-      selectedSeverity: ['HIGH', 'MEDIUM'],
-
-      selectWidth: 26,
-      templateText: 'Any',
-
-      params: {
-        text: '',
-        fixed: '-1',
-        severity: ['High', 'Medium'],
-        startTime: moment().add(-6, 'days').format('YYYY-MM-DD HH:mm:ss'),
-        endTime: moment().format('YYYY-MM-DD HH:mm:ss')
-      },
-
-      tableHeight: 200
-    }
-
     this.onFilterChange = this.onFilterChange.bind(this)
     this.onResize = this.onResize.bind(this)
     this.onChangeFixed = this.onChangeFixed.bind(this)
@@ -66,7 +42,7 @@ export default class BigIncidents extends React.Component {
       throw new Error('Cannot find container div')
     }
 
-    if (this.state.tableHeight === container.clientHeight) return
+    if (this.props.tableHeight === container.clientHeight) return
 
     this.setState({
       tableHeight: container.clientHeight
@@ -99,7 +75,7 @@ export default class BigIncidents extends React.Component {
 
     let params = {
       description: search.value || '""',
-      severity: this.state.selectedSeverity,
+      severity: this.props.selectedSeverity,
       afterStartTimestamp: dp.getStartDate().valueOf(),
       beforeStartTimestamp: dp.getEndDate().valueOf(),
       sort: 'startTimestamp,desc'
@@ -136,16 +112,42 @@ export default class BigIncidents extends React.Component {
     let table = this.renderTable()
     return (
       <BigIncidentsView
-        show={this.state.open}
+        show={this.props.open}
         onHide={this.onHide.bind(this)}
-        value={this.state.selectedSeverity.join(',')}
-        options={this.state.severities}
+        value={this.props.selectedSeverity.join(',')}
+        options={this.props.severities}
         onChange={this.onChangeSeverity.bind(this)}
         onFilter={this.onFilterChange}
         onSelect={this.onChangeFixed}
-        text={this.state.templateText}
+        text={this.props.templateText}
         table={table}
       />
     )
   }
 }
+
+export default connect(
+  state => ({
+    open: true,
+    severities: [
+      { label: 'High', value: 'HIGH' },
+      { label: 'Medium', value: 'MEDIUM' },
+      { label: 'Low', value: 'LOW' },
+      { label: 'Audit', value: 'AUDIT' },
+      { label: 'Ignore', value: 'IGNORE' }
+    ],
+    selectedSeverity: ['HIGH', 'MEDIUM'],
+    selectWidth: 26,
+    templateText: 'Any',
+    params: {
+      text: '',
+      fixed: '-1',
+      severity: ['High', 'Medium'],
+      startTime: moment().add(-6, 'days').format('YYYY-MM-DD HH:mm:ss'),
+      endTime: moment().format('YYYY-MM-DD HH:mm:ss')
+    },
+    tableHeight: 200
+  }), {})(reduxForm({
+    form: 'bigIncidents',
+    validate
+  })(BigIncidents))

@@ -31,10 +31,10 @@ class NewIncidentModal extends Component {
   render () {
     let show = (this.props) ? (this.props.open) : true
     let options = [
-      { value: 'High', text: 'High' },
-      { value: 'Medium', text: 'Medium' },
-      { value: 'Low', text: 'Low' },
-      { value: 'Audit', text: 'Audit' }
+      { value: 'High', label: 'High' },
+      { value: 'Medium', label: 'Medium' },
+      { value: 'Low', label: 'Low' },
+      { value: 'Audit', label: 'Audit' }
     ]
     const { handleSubmit } = this.props
     return (

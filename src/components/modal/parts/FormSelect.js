@@ -15,7 +15,7 @@ const FormSelect = ({input, label, meta: { touched, error }, options}) => (
     selectedMenuItemStyle={selectedItemStyle}
     {...input}
     onChange={(event, index, value) => input.onChange(value)}>
-    {options.map(option => <MenuItem key={option.value} value={option.value} primaryText={option.text}/>)}
+    {options.map(option => <MenuItem key={option.value} value={option.value} primaryText={option.label}/>)}
   </SelectField>
 )
 
