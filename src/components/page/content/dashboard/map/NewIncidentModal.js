@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { showAlert } from '../../../../shared/Alert'
 import { reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
 import { validate } from '../../../../modal/validation/NameValidation'
@@ -12,6 +11,7 @@ class NewIncidentModal extends Component {
     console.log('desc: ', desc)
     console.log('select: ', select)
     console.log('file: ', files)
+    this.onHide()
   }
 
   onHide () {
@@ -23,26 +23,10 @@ class NewIncidentModal extends Component {
     })
   }
 
-  onClickClose () {
-    this.onHide()
-  }
-
-  onClickSave () {
-    let name = this.state.name
-    if (!name) return showAlert('Please input name.')
-    let desc = this.state.desc
-    let severity = this.state.severity
-    this.addIncident(name, desc, severity, '')
-  }
-
-  addIncident (name, desc, severity, img) {
-    console.log('name: ', name)
-  }
-
-  onChangeFile (e) {
+  /* onChangeFile (e) {
     const img = window.URL.createObjectURL(e.target.files[0])
     this.setState({ img: img })
-  }
+  } */
 
   render () {
     let show = (this.props) ? (this.props.open) : true
@@ -57,7 +41,6 @@ class NewIncidentModal extends Component {
       <NewIncidentModalView
         show={show}
         onHide={this.onHide.bind(this)}
-        onChangeImg={this.onChangeFile.bind(this)}
         onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
         options={options}
       />
