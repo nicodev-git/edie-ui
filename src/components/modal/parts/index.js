@@ -10,6 +10,7 @@ import FormImg from './FormImg'
 import SubmitBlock from './SubmitBlock'
 import HeaderNoClose from './HeaderNoClose'
 import SubmitSingle from './SubmitSingle'
+import FormMultiSelect from './FormMultiSelect'
 
 export {
     BottomLinks,
@@ -23,5 +24,6 @@ export {
     FormImg,
     SubmitBlock,
     HeaderNoClose,
-    SubmitSingle
+    SubmitSingle,
+    FormMultiSelect
 }
