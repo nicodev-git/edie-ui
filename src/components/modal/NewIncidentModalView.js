@@ -14,11 +14,13 @@ const NewIncidentModalView = ({show, onHide, onSubmit, options}) => (
     <div className="modal-body bootstrap-dialog-message">
       <form onSubmit={onSubmit}>
         <Field name="files" component={FormImg}/>
-        <Field name="name" component={FormInput} label="Enter Name"/>
-        <Field name="desc" component={FormInput} label="Enter Description"
-          multiLine rows={3}/>
-        <Field name="select" component={FormSelect} label="Choose Severity"
-          options={options}/>
+        <div className="form-column">
+          <Field name="name" component={FormInput} label="Enter Name"/>
+          <Field name="desc" component={FormInput} label="Enter Description"
+            multiLine rows={3}/>
+          <Field name="select" component={FormSelect} label="Choose Severity"
+            options={options}/>
+        </div>
         <SubmitBlock onClick={onHide}/>
       </form>
     </div>

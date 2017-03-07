@@ -3,7 +3,7 @@ import RaisedButton from 'material-ui/RaisedButton'
 import { buttonStyle } from './materialStyles'
 
 const SubmitBlock = ({onClick}) => (
-  <div className="text-right">
+  <div className="form-buttons">
     <RaisedButton type="submit" label="Submit" buttonStyle={buttonStyle} primary/>
     <RaisedButton label="Close" onClick={onClick} buttonStyle={buttonStyle} primary/>
   </div>

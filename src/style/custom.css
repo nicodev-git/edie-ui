@@ -371,3 +371,17 @@ table.table tbody tr.selected {
     height: 34px !important;
     padding: 0px !important;
 }
+
+.form-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.form-buttons {
+    text-align: right;
+}
+
+.form-buttons > div {
+    margin-left: 20px;
+}
