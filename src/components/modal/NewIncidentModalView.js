@@ -15,10 +15,10 @@ const NewIncidentModalView = ({show, onHide, onSubmit, options}) => (
       <form onSubmit={onSubmit}>
         <Field name="files" component={FormImg}/>
         <div className="form-column">
-          <Field name="name" component={FormInput} label="Enter Name"/>
-          <Field name="desc" component={FormInput} label="Enter Description"
+          <Field name="name" component={FormInput} label="Name"/>
+          <Field name="desc" component={FormInput} label="Description"
             multiLine rows={3}/>
-          <Field name="select" component={FormSelect} label="Choose Severity"
+          <Field name="select" component={FormSelect} label="Severity"
             options={options}/>
         </div>
         <SubmitBlock onClick={onHide}/>

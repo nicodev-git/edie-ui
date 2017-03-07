@@ -378,6 +378,10 @@ table.table tbody tr.selected {
     justify-content: space-around;
 }
 
+.form-column > div:first-child {
+    flex-basis: 100px;
+}
+
 .form-buttons {
     text-align: right;
 }
