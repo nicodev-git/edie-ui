@@ -46,8 +46,6 @@ class NewIncidentModal extends Component {
 
   render () {
     let show = (this.props) ? (this.props.open) : true
-    // let img = (this.props) ? (this.props.img) : '/images/adminlogin.png'
-    console.log(this.props)
     return (
       <NewIncidentModalView
         show={show}
