@@ -1,5 +1,6 @@
 import React from 'react'
 import Modal from 'react-bootstrap-modal'
+import { Header, FormInput, SubmitBlock } from './parts'
 
 const ActivationModalView = ({onHide, onSignup}) => (
   <Modal
