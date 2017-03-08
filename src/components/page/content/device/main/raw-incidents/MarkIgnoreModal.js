@@ -1,26 +1,27 @@
 import React, { Component } from 'react'
+import { reduxForm } from 'redux-form'
+import { connect } from 'react-redux'
+import { validate } from '../../../../../modal/validation/NameValidation'
 import { ROOT_URL } from '../../../../../../actions/config'
-import MarkIgnoreModalView from '../../../../../modal'
+import { MarkIgnoreModalView } from '../../../../../modal'
 
-export default class MarkIgnoreModal extends Component {
-  constructor (props) {
-    super(props)
-    this.state = {
-      open: true
-    }
+class MarkIgnoreModal extends Component {
+
+  handleFormSubmit ({name, filter, severity}) {
+    console.log('form submitting')
+    console.log('name: ', name)
+    console.log('filter: ', filter)
+    console.log('severity: ', severity)
+    this.onHide()
   }
 
-  onHide (data) {
+  onHide () {
     this.setState({
       open: false
     }, () => {
       this.props.onClose &&
-            this.props.onClose(this, data)
+            this.props.onClose(this, true)
     })
-  }
-
-  onClickClose () {
-    this.onHide()
   }
 
   onClickSave () {
@@ -30,28 +31,35 @@ export default class MarkIgnoreModal extends Component {
       filter: this.refs.filter.value,
       severity: this.refs.severity.value
     }).done(res => {
-      this.onHide(true)
+      this.onHide()
     }).fail(() => {
 
     })
   }
 
   render () {
+    const { handleSubmit } = this.props
+    let text = (this.props.message) ? (this.props.message) : ''
+    let options = [
+      { value: 'Ignore', label: 'Ignore' },
+      { value: 'IgnoreDelete', label: 'IgnoreDelete' }
+    ]
     return (
       <MarkIgnoreModalView
-        show={this.state.open}
+        show={this.props.open}
         onHide={this.onHide.bind(this)}
-        onClose={this.onClickClose.bind(this)}
-        onSave={this.onClickSave.bind(this)}
-        text={this.props.message}
+        onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
+        text={text}
+        options={options}
       />
     )
   }
 }
 
-MarkIgnoreModal.defaultProps = {
-  message: '',
-  device: {},
-
-  onClose: null
-}
+export default connect(
+  state => ({
+    open: true
+  }), {})(reduxForm({
+    form: 'markIgnoreModal',
+    validate
+  })(MarkIgnoreModal))

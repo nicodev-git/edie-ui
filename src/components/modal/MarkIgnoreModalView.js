@@ -1,51 +1,27 @@
 import React from 'react'
 import Modal from 'react-bootstrap-modal'
-import { Header } from './parts'
+import { Field } from 'redux-form'
+import { Header, SubHeader, FormInput, FormSelect, SubmitBlock } from './parts'
 
-const MarkIgnoreModalView = ({show, onHide, onSave, onClose, text}) => (
+const MarkIgnoreModalView = ({show, onHide, onSubmit, text, options}) => (
   <Modal
     show={show}
     onHide={onHide}
     aria-labelledby="ModalHeader"
     className="bootstrap-dialog type-primary"
   >
-    <Header name="Mark as ignored" onClick={onClose} />
+    <Header name="Mark as ignored" onClick={onHide} />
     <div className="modal-body bootstrap-dialog-message">
-      <div className="row margin-md-bottom">
-        <div className="col-md-12">
-          <label className="control-label">{text}</label>
+      <SubHeader name={text}/>
+      <form onSubmit={onSubmit}>
+        <div className="form-column">
+          <Field name="severity" component={FormSelect} label="Severity"
+            options={options}/>
+          <Field name="name" component={FormInput} label="Name"/>
+          <Field name="filter" component={FormInput} label="Filter"/>
         </div>
-      </div>
-
-      <div className="row margin-md-bottom">
-        <label className="col-md-3 control-label">Severity</label>
-        <div className="col-md-9">
-          <select className="form-control" ref="severity">
-            <option value="Ignore">Ignore</option>
-            <option value="IgnoreDelete">Ignore Delete</option>
-          </select>
-        </div>
-      </div>
-
-      <div className="row margin-md-bottom">
-        <label className="col-md-3 control-label">Name</label>
-        <div className="col-md-9">
-          <input type="text" className="form-control" ref="name" />
-        </div>
-      </div>
-
-      <div className="row margin-md-bottom">
-        <div className="col-md-3">
-          <label className="control-label margin-sm-top">Filter</label>
-        </div>
-        <div className="col-md-9">
-          <input type="text" className="form-control" ref="filter"/>
-        </div>
-      </div>
-      <div className="text-right mb-none">
-        <a href="javascript:;" className="btn btn-primary btn-sm" onClick={onSave}>Save</a>
-        <a href="javascript:;" className="btn btn-default btn-sm margin-sm-left" onClick={onClose}>Cancel</a>
-      </div>
+        <SubmitBlock name="Save" onClick={onHide}/>
+      </form>
     </div>
   </Modal>
 )
