@@ -1,48 +1,27 @@
 import React from 'react'
 import Modal from 'react-bootstrap-modal'
 import { Field } from 'redux-form'
-import { Header } from './parts'
+import { Header, FormInput, FormSelect, SubmitBlock } from './parts'
 
-const AddIncidentModalView = ({show, onHide, onSave, onClose}) => (
+const AddIncidentModalView = ({show, onHide, onSubmit, options}) => (
   <Modal
     show={show}
     onHide={onHide}
     aria-labelledby="ModalHeader"
     className="bootstrap-dialog type-primary"
   >
-    <Header name="Add Incident" onClick={onClose} />
+    <Header name="Add Incident" onClick={onHide} />
     <div className="modal-body bootstrap-dialog-message">
-      <div className="row margin-md-bottom">
-        <label className="col-md-3">Name:</label>
-        <div className="col-md-9">
-          <input type="text" className="form-control" ref="name"/>
+      <form onSubmit={onSubmit}>
+        <div className="form-column form-column-shift">
+          <Field name="name" component={FormInput} label="Name"/>
+          <Field name="desc" component={FormInput} label="Description"
+            multiLine rows={3}/>
+          <Field name="severity" component={FormSelect} label="Severity"
+            options={options}/>
         </div>
-      </div>
-
-      <div className="row margin-md-bottom">
-        <label className="col-md-3">Description:</label>
-        <div className="col-md-9">
-          <textarea className="form-control" style={{height: '150px'}} ref="desc" />
-        </div>
-      </div>
-
-      <div className="row margin-md-bottom">
-        <label className="col-md-3">Severity:</label>
-        <div className="col-md-9">
-          <select className="form-control" ref="severity">
-            <option value="HIGH">High</option>
-            <option value="MEDIUM">Medium</option>
-            <option value="LOW">Low</option>
-            <option value="AUDIT">Audit</option>
-          </select>
-        </div>
-      </div>
-      <div className="text-right mb-none">
-        <a href="javascript:;" className="btn btn-primary btn-sm"
-          onClick={onSave}>Add Incident</a>
-        <a href="javascript:;" className="btn btn-default btn-sm margin-sm-left"
-          onClick={onClose}>Cancel</a>
-      </div>
+        <SubmitBlock name="Add Incident" onClick={onHide}/>
+      </form>
     </div>
   </Modal>
 )

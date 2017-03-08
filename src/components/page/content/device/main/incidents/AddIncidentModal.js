@@ -6,24 +6,26 @@ import { AddIncidentModalView } from '../../../../../modal'
 
 class AddIncidentModal extends Component {
 
-  handleFormSubmit ({name, files}) {
+  handleFormSubmit ({name, desc, severity}) {
     console.log('form submitting')
     console.log('name: ', name)
-    console.log('file: ', files)
-    this.onHide()
+    console.log('desc: ', desc)
+    console.log('severity: ', severity)
+    this.onClickSave(name, desc, severity)
+    this.onClickClose()
   }
 
   onClickClose () {
     this.props.closeAddDeviceIncident()
   }
 
-  onClickSave () {
+  onClickSave (name, description, severity) {
     this.props.addDeviceIncident({
       deviceid: this.props.device.id,
-      name: this.refs.name.value,
-      description: this.refs.desc.value,
+      name: name,
+      description: description,
       category: 'simulation',
-      severity: this.refs.severity.value,
+      severity: severity,
       acknowledged: 0,
       startTimestamp: new Date().getTime(),
       fixed: 0
@@ -31,6 +33,12 @@ class AddIncidentModal extends Component {
   }
 
   render () {
+    let options = [
+      { value: 'HIGH', label: 'High' },
+      { value: 'MEDIUM', label: 'Medium' },
+      { value: 'LOW', label: 'Low' },
+      { value: 'AUDIT', label: 'Audit' }
+    ]
     const { handleSubmit } = this.props
     return (
       <AddIncidentModalView
@@ -38,6 +46,7 @@ class AddIncidentModal extends Component {
         onHide={this.onClickClose.bind(this)}
         onSave={this.onClickSave.bind(this)}
         onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
+        options={options}
       />
     )
   }
