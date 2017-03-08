@@ -16,7 +16,6 @@ const AddExceptionModalView = ({show, onHide, onClose, params, cells}) => (
         url="/bi/getAllAttackers"
         params={params}
         cells={cells}
-        ref="table"
         rowMetadata={{'key': 'ipaddress'}}
         bodyHeight={500}
         selectable
