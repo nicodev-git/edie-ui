@@ -1,18 +1,18 @@
-import React from 'react'
+import React, { Component } from 'react'
+import { reduxForm } from 'redux-form'
+import { connect } from 'react-redux'
+import { validate } from '../../../../../modal/validation/NameValidation'
 import AddExceptionModalView from '../../../../../modal'
 
-export default class AddExceptionModal extends React.Component {
-  constructor (props) {
-    super(props)
-    this.state = {
-      open: props.open
-    }
+class AddExceptionModal extends Component {
+  handleFormSubmit ({name}) {
+    console.log('form submitting')
+    console.log('filter: ', name)
+    this.onHide()
   }
 
-  openModal () {
-    this.setState({
-      open: true
-    })
+  onClickSave () {
+    // TODO
   }
 
   onHide (success) {
@@ -20,35 +20,28 @@ export default class AddExceptionModal extends React.Component {
       open: false
     }, () => {
       this.props.onClose &&
-            this.props.onClose(success)
+            this.props.onClose(this, success)
     })
   }
 
-  onClickClose () {
-    this.onHide()
-  }
-
-  onClickSave () {
-
-  }
-
   render () {
+    const { handleSubmit } = this.props
+    let text = (this.props.incident) ? (this.props.incident.rawtext) : ''
     return (
       <AddExceptionModalView
-        show={this.state.open}
+        show={this.props.open}
         onHide={this.onHide.bind(this)}
-        onClose={this.onClickClose.bind(this)}
-        onChange={this.onChangeFile.bind(this)}
-        onSave={this.onClickSave.bind(this)}
-        text={this.props.incident.rawtext}
+        text={text}
+        onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
       />
     )
   }
 }
 
-AddExceptionModal.defaultProps = {
-  open: false,
-
-  incident: {},
-  onClose: null
-}
+export default connect(
+  state => ({
+    open: true
+  }), {})(reduxForm({
+    form: 'addExceptionModal',
+    validate
+  })(AddExceptionModal))

@@ -1,14 +1,16 @@
-import React from 'react'
-import AddIncidentModalView from '../../../../../modal'
+import React, { Component } from 'react'
+import { reduxForm } from 'redux-form'
+import { connect } from 'react-redux'
+import { validate } from '../../../../../modal/validation/NameValidation'
+import { AddIncidentModalView } from '../../../../../modal'
 
-export default class AddIncidentModal extends React.Component {
-  constructor (props) {
-    super(props)
-    this.state = {
-    }
-  }
+class AddIncidentModal extends Component {
 
-  onHide () {
+  handleFormSubmit ({name, files}) {
+    console.log('form submitting')
+    console.log('name: ', name)
+    console.log('file: ', files)
+    this.onHide()
   }
 
   onClickClose () {
@@ -29,13 +31,22 @@ export default class AddIncidentModal extends React.Component {
   }
 
   render () {
+    const { handleSubmit } = this.props
     return (
       <AddIncidentModalView
-        show
-        onHide={this.onHide.bind(this)}
-        onClose={this.onClickClose.bind(this)}
+        show={this.props.open}
+        onHide={this.onClickClose.bind(this)}
         onSave={this.onClickSave.bind(this)}
+        onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
       />
     )
   }
 }
+
+export default connect(
+  state => ({
+    open: true
+  }), {})(reduxForm({
+    form: 'addIncidentModal',
+    validate
+  })(AddIncidentModal))

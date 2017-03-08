@@ -1,5 +1,6 @@
 import React from 'react'
 import Modal from 'react-bootstrap-modal'
+import { Field } from 'redux-form'
 import { Header } from './parts'
 
 const AddIncidentModalView = ({show, onHide, onSave, onClose}) => (
