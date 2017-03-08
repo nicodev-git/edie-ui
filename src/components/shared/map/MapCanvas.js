@@ -533,15 +533,20 @@ class MapCanvas extends React.Component {
       let okurl = this.deviceStatusImageName(devicestatus)
       let statusImageLeft = -4
       let statusImageTop = -4
-            // IP
-      let notes = device['devicenotes'] || ''
-      $.each(propsEntity, function (i, item) { // eslint-disable-line no-undef
-        if (item.prop === 'image' && item.value) {
-          imageUrl = item.value
+            // if (devicetype === 'Firewall') {
+            //     statusImageLeft = -10;
+            //     statusImageTop = 2;
+            // }
+
+      // IP
+      let tooltip = ''
+      if (device['wanip'] || device['lanip']) {
+        if (device['wanip']) tooltip = `WAN: ${device['wanip']}`
+        if (device['lanip']) {
+          if (tooltip) tooltip = `${tooltip}<br/>`
+          tooltip = `${tooltip}LAN: ${device['lanip']}`
         }
-      })
-      let tooltip = device['hostname'] || device['ipaddress']
-      if (notes) tooltip += `<div style="border-bottom:1px solid white; height:5px;">&nbsp;</div>${notes}`
+      }
 
       let devconfig = {
         id: deviceid,
@@ -680,15 +685,15 @@ class MapCanvas extends React.Component {
       let statusImageLeft = -4
       let statusImageTop = -4
 
-            // IP
-      let notes = device['devicenotes'] || ''
-      $.each(propsEntity, function (i, item) { // eslint-disable-line no-undef
-        if (item.prop === 'image' && item.value) {
-          imageUrl = item.value
+      // IP
+      let tooltip = ''
+      if (device['wanip'] || device['lanip']) {
+        if (device['wanip']) tooltip = `WAN: ${device['wanip']}`
+        if (device['lanip']) {
+          if (tooltip) tooltip = `${tooltip}<br/>`
+          tooltip = `${tooltip}LAN: ${device['lanip']}`
         }
-      })
-      let tooltip = device['hostname'] || device['ipaddress']
-      if (notes) tooltip += `<div style="border-bottom:1px solid white; height:5px;">&nbsp;</div>${notes}`
+      }
 
       let devconfig = {
         data: device,

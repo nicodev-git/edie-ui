@@ -52,8 +52,7 @@ export default class MainEvents extends Component {
       'columnName': 'datetime',
       'cssClassName': 'width-200',
       'customComponent': props => {
-        const row = props.rowData
-        let data = moment(row.datetime).format('YYYY-MM-DD HH:mm:ss').toString()
+        let data = moment(props.data).format('YYYY-MM-DD HH:mm:ss').toString()
         return this.highlightRender({data})
       }
     }, {

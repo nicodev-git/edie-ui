@@ -670,6 +670,7 @@ class Map extends React.Component {
     let events = this.mapEvents
     const { selectedItem, dropItem, dropItemPos, editable, mapHeight } = this.state
     const maximized = this.props.isFullScreen
+    const { tooltip, tipLeft, tipTop, tipWidth, tipHeight } = this.state
     return (
       <div className={`map-row${maximized ? ' map-maximized' : ''}`}
         tabIndex="-1" style={{ outline: 0 }} onKeyUp={this.onMapKeyUp.bind(this)}>
@@ -697,6 +698,11 @@ class Map extends React.Component {
               ref="map"/>
             <DeviceDragLayer />
             {maximized ? null : <DividerLine onDragMove={this.onChangeDivider} onDragEnd={this.onDragEndDivider}/>}
+            <div className={`map-hover ${tooltip ? '' : 'hidden'}`}
+              data-tip={tooltip}
+              data-html
+              style={{ left: tipLeft, top: tipTop, width: tipWidth, height: tipHeight }}
+              onClick={this.onClickTooltip.bind(this)} />
           </div>
         </div>
 
