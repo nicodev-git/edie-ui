@@ -1,6 +1,7 @@
 import React from 'react'
 import Modal from 'react-bootstrap-modal'
-import { Header, FileUpload, FormInput } from './parts'
+import { Field } from 'redux-form'
+import { Header, FileUpload, FormInput, SubmitBlock } from './parts'
 
 const MapImportModalView = ({show, onHide, onSubmit}) => (
   <Modal
