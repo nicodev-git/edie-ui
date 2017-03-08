@@ -1,30 +1,21 @@
 import React from 'react'
 import { showAlert } from '../../../../shared/Alert'
+import { reduxForm } from 'redux-form'
+import { connect } from 'react-redux'
+import { validate } from '../../../../modal/validation/NameValidation'
 import { MapImportModalView } from '../../../../modal'
 
-export default class MapImportModal extends React.Component {
-  constructor (props) {
-    super(props)
-    this.state = {
-      open: true,
-      fileName: ''
-    }
+class MapImportModal extends React.Component {
+
+  handleFormSubmit ({name, files}) {
+    console.log('form submitting')
+    console.log('name: ', name)
+    console.log('file: ', files)
+    this.onHide()
   }
 
   onHide () {
     this.props.closeMapImportModal()
-  }
-
-  onClickClose () {
-    this.onHide()
-  }
-
-  onChangeFile (e) {
-    let input = e.target
-
-    let fileName = input.value.split(/(\\|\/)/g).pop()
-
-    this.setState({fileName})
   }
 
   onClickImport () {
@@ -45,15 +36,22 @@ export default class MapImportModal extends React.Component {
   }
 
   render () {
+    const { handleSubmit } = this.props
     return (
       <MapImportModalView
         show={this.state.open}
         onHide={this.onHide.bind(this)}
-        onChange={this.onChangeFile.bind(this)}
-        fileName={this.state.fileName}
-        onImport={this.onClickImport.bind(this)}
-        onClose={this.onClickClose.bind(this)}
+        onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
       />
     )
   }
 }
+
+export default connect(
+  state => ({
+    open: true,
+    fileName: ''
+  }), {})(reduxForm({
+    form: 'mapImportModal',
+    validate
+  })(MapImportModal))

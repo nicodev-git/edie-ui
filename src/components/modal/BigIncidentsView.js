@@ -18,7 +18,7 @@ const BigIncidentsView = ({show, onHide, value, options, onChange, onFilter, onS
           <Field name="select" component={FormMultiSelect} label="Severity"
             options={options}/>
         </div>
-        <SubmitBlock onClick={onHide}/>
+        <SubmitBlock name="Filter" onClick={onHide}/>
       </form>
       <div className="form-inline">
 
