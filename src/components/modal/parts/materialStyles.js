@@ -40,3 +40,8 @@ export const buttonStyle = {
 export const headerStyle = {
   backgroundColor: primeColor
 }
+
+export const subHeaderStyle = {
+  color: primeColor,
+  fontSize: fontSize
+}
