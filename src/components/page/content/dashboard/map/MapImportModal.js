@@ -1,5 +1,4 @@
 import React from 'react'
-import { showAlert } from '../../../../shared/Alert'
 import { reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
 import { validate } from '../../../../modal/validation/NameValidation'
@@ -11,6 +10,7 @@ class MapImportModal extends React.Component {
     console.log('form submitting')
     console.log('name: ', name)
     console.log('file: ', files)
+    this.onClickImport(name, files[0])
     this.onHide()
   }
 
@@ -18,19 +18,12 @@ class MapImportModal extends React.Component {
     this.props.closeMapImportModal()
   }
 
-  onClickImport () {
-    let input = this.refs.file
-    const name = this.refs.name.value
-    if (!name) return showAlert('Please type name.')
-    if (!input.files || !input.files.length) return showAlert('Please choose map file.')
-
-    let file = input.files[0]
-
+  onClickImport (name, file) {
     if (typeof FormData !== 'undefined') {
       let formData = new FormData() // eslint-disable-line no-undef
-      formData.append('file', file, input.value.split(/(\\|\/)/g).pop())
-      formData.append('name', this.refs.name.value)
-
+      // formData.append('file', file, input.value.split(/(\\|\/)/g).pop()) what does this regex do?
+      formData.append('file', file, file.name)
+      formData.append('name', name)
       this.props.importMap(formData)
     }
   }
@@ -39,7 +32,7 @@ class MapImportModal extends React.Component {
     const { handleSubmit } = this.props
     return (
       <MapImportModalView
-        show={this.state.open}
+        show={this.props.open}
         onHide={this.onHide.bind(this)}
         onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
       />
