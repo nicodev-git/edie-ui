@@ -1,10 +1,11 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
 import { MapSaveModalView } from '../../../../modal'
 import { validate } from '../../../../modal/validation/NameValidation'
 
-class MapSaveModal extends Component {
+class MapSaveModal extends React.Component {
+
   handleFormSubmit ({name, description}) {
     console.log('form submitting')
     console.log('name: ', name)
@@ -17,18 +18,12 @@ class MapSaveModal extends Component {
         this.props.onClose(this)
   }
 
-  onClickSave () {
-    /* let name = this.refs.name.value
-    if (!name) {
-      window.alert('Please input map name.')
-      return
-    }
-
+  onClickSave (name) {
+    // TODO
     document.location.href = `${'/exportmap' + '?'}$.param({
       ${name},
       mapid: ${this.props.mapId}
-    })` */
-
+    })`
     this.onHide()
   }
 
@@ -36,7 +31,7 @@ class MapSaveModal extends Component {
     const { handleSubmit } = this.props
     return (
       <MapSaveModalView
-        show
+        show={this.props.open}
         onHide={this.onHide.bind(this)}
         onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
       />
@@ -45,7 +40,9 @@ class MapSaveModal extends Component {
 }
 
 export default connect(
-  state => ({}), {})(reduxForm({
+  state => ({
+    open: true
+  }), {})(reduxForm({
     form: 'mapSaveModal',
     validate
   })(MapSaveModal))
