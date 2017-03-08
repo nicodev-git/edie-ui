@@ -21,7 +21,7 @@ const NewIncidentModalView = ({show, onHide, onSubmit, options}) => (
           <Field name="select" component={FormSelect} label="Severity"
             options={options}/>
         </div>
-        <SubmitBlock onClick={onHide}/>
+        <SubmitBlock name="Submit" onClick={onHide}/>
       </form>
     </div>
   </Modal>

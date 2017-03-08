@@ -11,6 +11,7 @@ import SubmitBlock from './SubmitBlock'
 import HeaderNoClose from './HeaderNoClose'
 import SubmitSingle from './SubmitSingle'
 import FormMultiSelect from './FormMultiSelect'
+import FileUpload from './FileUpload'
 
 export {
     BottomLinks,
@@ -25,5 +26,6 @@ export {
     SubmitBlock,
     HeaderNoClose,
     SubmitSingle,
-    FormMultiSelect
+    FormMultiSelect,
+    FileUpload
 }

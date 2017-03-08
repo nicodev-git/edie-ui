@@ -1,59 +1,50 @@
 import React from 'react'
-import { showAlert } from '../../../../shared/Alert'
+import { reduxForm } from 'redux-form'
+import { connect } from 'react-redux'
+import { validate } from '../../../../modal/validation/NameValidation'
 import { MapImportModalView } from '../../../../modal'
 
-export default class MapImportModal extends React.Component {
-  constructor (props) {
-    super(props)
-    this.state = {
-      open: true,
-      fileName: ''
-    }
+class MapImportModal extends React.Component {
+
+  handleFormSubmit ({name, files}) {
+    console.log('form submitting')
+    console.log('name: ', name)
+    console.log('file: ', files)
+    this.onClickImport(name, files[0])
+    this.onHide()
   }
 
   onHide () {
     this.props.closeMapImportModal()
   }
 
-  onClickClose () {
-    this.onHide()
-  }
-
-  onChangeFile (e) {
-    let input = e.target
-
-    let fileName = input.value.split(/(\\|\/)/g).pop()
-
-    this.setState({fileName})
-  }
-
-  onClickImport () {
-    let input = this.refs.file
-    const name = this.refs.name.value
-    if (!name) return showAlert('Please type name.')
-    if (!input.files || !input.files.length) return showAlert('Please choose map file.')
-
-    let file = input.files[0]
-
+  onClickImport (name, file) {
     if (typeof FormData !== 'undefined') {
       let formData = new FormData() // eslint-disable-line no-undef
-      formData.append('file', file, input.value.split(/(\\|\/)/g).pop())
-      formData.append('name', this.refs.name.value)
-
+      // formData.append('file', file, input.value.split(/(\\|\/)/g).pop()) what does this regex do?
+      formData.append('file', file, file.name)
+      formData.append('name', name)
       this.props.importMap(formData)
     }
   }
 
   render () {
+    const { handleSubmit } = this.props
     return (
       <MapImportModalView
-        show={this.state.open}
+        show={this.props.open}
         onHide={this.onHide.bind(this)}
-        onChange={this.onChangeFile.bind(this)}
-        fileName={this.state.fileName}
-        onImport={this.onClickImport.bind(this)}
-        onClose={this.onClickClose.bind(this)}
+        onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
       />
     )
   }
 }
+
+export default connect(
+  state => ({
+    open: true,
+    fileName: ''
+  }), {})(reduxForm({
+    form: 'mapImportModal',
+    validate
+  })(MapImportModal))
