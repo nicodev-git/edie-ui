@@ -1,4 +1,5 @@
 import React from 'react'
+import Subheader from 'material-ui/Subheader'
 import { subHeaderStyle } from './materialStyles'
 
 const SubHeader = ({name}) => (
