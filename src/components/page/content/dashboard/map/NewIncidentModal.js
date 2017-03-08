@@ -1,13 +1,17 @@
-import React from 'react'
-import { showAlert } from '../../../../shared/Alert'
+import React, { Component } from 'react'
+import { reduxForm } from 'redux-form'
+import { connect } from 'react-redux'
+import { validate } from '../../../../modal/validation/NameValidation'
 import { NewIncidentModalView } from '../../../../modal'
 
-export default class NewIncidentModal extends React.Component {
-  constructor (props) {
-    super(props)
-    this.state = {
-      img: '/images/adminlogin.png'
-    }
+class NewIncidentModal extends Component {
+  handleFormSubmit ({name, desc, select, files}) {
+    console.log('form submitting')
+    console.log('name: ', name)
+    console.log('desc: ', desc)
+    console.log('select: ', select)
+    console.log('file: ', files)
+    this.onHide()
   }
 
   onHide () {
@@ -19,49 +23,36 @@ export default class NewIncidentModal extends React.Component {
     })
   }
 
-  onClickClose () {
-    this.onHide()
-  }
-
-  onClickSave () {
-    const refs = this.refs
-    const input = refs.file
-    const name = refs.name.value
-    const desc = refs.desc.value
-    const severity = refs.severity.value
-
-    if (!name) return showAlert('Please input name.')
-    if (input.files.length) {
-      let img = input.files[0]
-
-      let formData = new window.FormData()
-      formData.append('file', img, img.name)
-    } else {
-      this.addIncident(name, desc, severity, '')
-    }
-  }
-
-  addIncident (name, desc, severity, img) {
-
-  }
-
-    // /////////////////////////
-
-  onChangeFile (e) {
+  /* onChangeFile (e) {
     const img = window.URL.createObjectURL(e.target.files[0])
-    this.setState({ img })
-  }
+    this.setState({ img: img })
+  } */
 
   render () {
+    let show = (this.props) ? (this.props.open) : true
+    let options = [
+      { value: 'High', label: 'High' },
+      { value: 'Medium', label: 'Medium' },
+      { value: 'Low', label: 'Low' },
+      { value: 'Audit', label: 'Audit' }
+    ]
+    const { handleSubmit } = this.props
     return (
       <NewIncidentModalView
-        show
+        show={show}
         onHide={this.onHide.bind(this)}
-        onClose={this.onClickClose.bind(this)}
-        onChange={this.onChangeFile.bind(this)}
-        onSave={this.onClickSave.bind(this)}
-        imgSrc={this.state.img}
+        onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
+        options={options}
       />
     )
   }
 }
+
+export default connect(
+  state => ({
+    open: true,
+    img: '/images/adminlogin.png'
+  }), {})(reduxForm({
+    form: 'newIncidentModal',
+    validate
+  })(NewIncidentModal))
