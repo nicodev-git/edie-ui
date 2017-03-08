@@ -2,7 +2,7 @@ import React from 'react'
 import Modal from 'react-bootstrap-modal'
 import { Header } from './parts'
 
-const AddExceptionModalView = ({show, onHide, onSave, onClose, text}) => (
+const AddExceptionModalView = ({show, onHide, onSubmit, text}) => (
   <Modal
     show={show}
     onHide={onHide}

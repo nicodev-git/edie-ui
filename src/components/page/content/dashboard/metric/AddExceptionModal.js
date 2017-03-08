@@ -5,6 +5,13 @@ import { validate } from '../../../../modal/validation/NameValidation'
 import AddExceptionModalView from '../../../../modal'
 
 class AddExceptionModal extends Component {
+  handleFormSubmit ({name, files}) {
+    console.log('form submitting')
+    console.log('name: ', name)
+    console.log('file: ', files)
+    this.onHide()
+  }
+
   onClickSave() {
 
   }
@@ -23,6 +30,8 @@ class AddExceptionModal extends Component {
   }
 
   render () {
+    const { handleSubmit } = this.props
+    let text = (this.props.incident) ? (this.props.incident.rawtext) : ''
     return (
       <AddExceptionModalView
         show
@@ -30,15 +39,11 @@ class AddExceptionModal extends Component {
         onClose={this.onClickClose.bind(this)}
         onChange={this.onChangeFile.bind(this)}
         onSave={this.onClickSave.bind(this)}
-        text={this.props.incident.rawtext}
+        text={text}
+        onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
       />
     )
   }
-}
-
-AddExceptionModal.defaultProps = {
-  incident: {},
-  onClose: null
 }
 
 export default connect(
