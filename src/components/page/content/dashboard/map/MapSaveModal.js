@@ -1,11 +1,15 @@
-import React from 'react'
+import React, { Component } from 'react'
+import { reduxForm } from 'redux-form'
+import { connect } from 'react-redux'
 import { MapSaveModalView } from '../../../../modal'
+import { validate } from '../../../../modal/validation/NameValidation'
 
-export default class MapSaveModal extends React.Component {
-  constructor (props) {
-    super(props)
-    this.state = {
-    }
+class MapSaveModal extends Component {
+  handleFormSubmit ({name, description}) {
+    console.log('form submitting')
+    console.log('name: ', name)
+    console.log('description: ', description)
+    this.onHide()
   }
 
   onHide () {
@@ -13,12 +17,8 @@ export default class MapSaveModal extends React.Component {
         this.props.onClose(this)
   }
 
-  onClickClose () {
-    this.onHide()
-  }
-
   onClickSave () {
-    let name = this.refs.name.value
+    /* let name = this.refs.name.value
     if (!name) {
       window.alert('Please input map name.')
       return
@@ -27,24 +27,25 @@ export default class MapSaveModal extends React.Component {
     document.location.href = `${'/exportmap' + '?'}$.param({
       ${name},
       mapid: ${this.props.mapId}
-    })`
+    })` */
 
     this.onHide()
   }
 
   render () {
+    const { handleSubmit } = this.props
     return (
       <MapSaveModalView
         show
         onHide={this.onHide.bind(this)}
-        onSave={this.onClickSave.bind(this)}
-        onClose={this.onClickClose.bind(this)}
+        onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
       />
     )
   }
 }
 
-MapSaveModal.defaultProps = {
-  onClose: null,
-  mapId: ''
-}
+export default connect(
+  state => ({}), {})(reduxForm({
+    form: 'mapSaveModal',
+    validate
+  })(MapSaveModal))
