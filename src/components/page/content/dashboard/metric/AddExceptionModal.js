@@ -1,14 +1,10 @@
-import React from 'react'
+import React, { Component } from 'react'
+import { reduxForm } from 'redux-form'
+import { connect } from 'react-redux'
+import { validate } from '../../../../modal/validation/NameValidation'
 import AddExceptionModalView from '../../../../modal'
 
-export default class AddExceptionModal extends React.Component {
-  constructor (props) {
-    super(props)
-    this.state = {
-      open: true
-    }
-  }
-
+class AddExceptionModal extends Component {
   onClickSave() {
 
   }
@@ -44,3 +40,11 @@ AddExceptionModal.defaultProps = {
   incident: {},
   onClose: null
 }
+
+export default connect(
+  state => ({
+    open: true
+  }), {})(reduxForm({
+    form: 'addExceptionModal',
+    validate
+  })(AddExceptionModal))
