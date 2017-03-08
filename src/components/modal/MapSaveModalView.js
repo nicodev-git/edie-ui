@@ -1,34 +1,24 @@
 import React from 'react'
 import Modal from 'react-bootstrap-modal'
-import { Header } from './parts'
+import { Field } from 'redux-form'
+import { Header, FormInput, SubmitBlock } from './parts'
 
-const MapSaveModalView = ({show, onHide, onSave, onClose}) => (
+const MapSaveModalView = ({show, onHide, onSubmit}) => (
   <Modal
     show={show}
     onHide={onHide}
     aria-labelledby="ModalHeader"
     className="bootstrap-dialog type-primary"
   >
-    <Header name="Export Map" onClick={onClose} />
+    <Header name="Export Map" onClick={onHide}/>
     <div className="modal-body bootstrap-dialog-message">
-      <div className="row margin-md-bottom">
-        <label className="control-label col-md-2 padding-sm-top">Name</label>
-        <div className="col-md-10">
-          <input type="text" className="form-control" ref="name" />
+      <form onSubmit={onSubmit}>
+        <div className="form-column">
+          <Field name="name" component={FormInput} label="Name"/>
+          <Field name="description" component={FormInput} label="Description"/>
         </div>
-      </div>
-
-      <div className="row margin-md-bottom hidden">
-        <label className="control-label col-md-3 padding-sm-top text-right">Description</label>
-        <div className="col-md-9">
-          <input type="text" className="form-control"/>
-        </div>
-      </div>
-
-      <div className="text-right p-none">
-        <a href="javascript:;" className="btn btn-primary btn-sm margin-sm-right" onClick={onSave}>Save</a>
-        <a href="javascript:;" className="btn btn-default btn-sm" onClick={onClose}>Cancel</a>
-      </div>
+        <SubmitBlock name="Save" onClick={onHide}/>
+      </form>
     </div>
   </Modal>
 )

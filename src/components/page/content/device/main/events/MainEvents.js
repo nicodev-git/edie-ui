@@ -49,10 +49,10 @@ export default class MainEvents extends Component {
       }
     }, {
       'displayName': 'Datetime',
-      'columnName': 'timestamp',
+      'columnName': 'datetime',
       'cssClassName': 'width-200',
       'customComponent': props => {
-        const data = moment(props.data).format('YYYY-MM-DD HH:mm:ss')
+        let data = moment(props.data).format('YYYY-MM-DD HH:mm:ss').toString()
         return this.highlightRender({data})
       }
     }, {
