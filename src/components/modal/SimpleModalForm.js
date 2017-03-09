@@ -22,13 +22,14 @@ const SimpleModalForm = ({show, onHide, onSubmit, header, subheader, buttonText,
           {content.map(elem => {
             switch (elem.type) {
               case 'textarea':
-                return (<Field name={elem.name.toLowerCase()} component={FormInput}
-                  label={elem.name} multiLine rows={3}/>)
+                return (<Field key={elem.name} name={elem.name.toLowerCase()}
+                  component={FormInput} label={elem.name} multiLine rows={3}/>)
               case 'select':
-                return (<Field name={elem.name.toLowerCase()} component={FormSelect}
-                  label={elem.name} options={elem.options}/>)
+                return (<Field key={elem.name} name={elem.name.toLowerCase()}
+                  component={FormSelect} label={elem.name} options={elem.options}/>)
               default:
-                return <Field name={elem.name.toLowerCase()} component={FormInput} label={elem.name}/>
+                return (<Field key={elem.name} name={elem.name.toLowerCase()}
+                  component={FormInput} label={elem.name}/>)
             }
           })}
         </div>

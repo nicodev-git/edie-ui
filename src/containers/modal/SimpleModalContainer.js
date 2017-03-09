@@ -1,32 +1,25 @@
 import React, { Component } from 'react'
 import { reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
-import { validate } from '../../../../modal/validation/NameValidation'
+import { validate } from '../../components/modal/validation/NameValidation'
 import { SimpleModalForm } from '../../components/modal'
 
 class SimpleModalContainer extends Component {
   handleFormSubmit (event) {
-    console.log(event)
-    this.props.doAction()
+    this.props.doAction(event)
     this.onHide()
   }
 
   onHide () {
-    if (!this.props.onClose) {
-      this.setState({open: false}, () => {
-        this.props.onClose && this.props.onClose(this)
-      })
-    } else {
-      this.props.onClose()
-    }
+    this.setState({open: false}, () => {
+      this.props.onClose && this.props.onClose(this)
+    })
   }
 
   render () {
-    const { handleSubmit, content, header } = this.props
+    const { handleSubmit, content, header, imageUpload, fileUpload } = this.props
     let buttonText = (this.props.buttonText) ? (this.props.buttonText) : 'Save'
     let subheader = (this.props.subheader) ? (this.props.subheader) : null
-    let imageUpload = (this.props.imageUpload) ? true : false
-    let fileUpload = (this.props.imageUpload) ? true : false
     return (
       <SimpleModalForm
         show={this.props.open}
@@ -45,8 +38,8 @@ class SimpleModalContainer extends Component {
 
 export default connect(
   state => ({
-    open: true,
+    open: true
   }), {})(reduxForm({
     form: 'simpleModalForm',
-    validate
+    this.props.validate
   })(SimpleModalContainer))
