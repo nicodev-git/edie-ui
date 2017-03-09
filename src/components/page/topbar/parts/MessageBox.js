@@ -1,18 +1,51 @@
 import React from 'react'
-import Messages from './Messages'
 import Badge from 'material-ui/Badge'
 import IconButton from 'material-ui/IconButton'
-import MailOutlineIcon from 'material-ui/svg-icons/communication/mail-outline'
+import IconMenu from 'material-ui/IconMenu'
+import MenuItem from 'material-ui/MenuItem'
+import EmailIcon from 'material-ui/svg-icons/communication/email'
+
+const badgeStyle = {
+  backgroundColor: '#d32f2f',
+  color: '#f5f5f5',
+  width: 15,
+  height: 15,
+  padding: 0
+}
+
+const rootStyle = {
+  paddingTop: '10px',
+  paddingBottom: '10px'
+}
+
+const iconStyle = {
+  width: 45,
+  height: 45
+}
 
 const MessageBox = () => (
   <li className="dropdown">
     <Badge
       badgeContent={4}
-      primary
+      badgeStyle={badgeStyle}
+      style={rootStyle}
       >
-        <IconButton tooltip={<Messages/>}>
-          <MailOutlineIcon />
-        </IconButton>
+        <IconMenu
+          iconButtonElement={
+            <IconButton
+              iconStyle={iconStyle}>
+                <EmailIcon color="#777777"/>
+            </IconButton>
+          }
+          anchorOrigin={{horizontal: 'left', vertical: 'top'}}
+          targetOrigin={{horizontal: 'left', vertical: 'top'}}
+        >
+          <MenuItem primaryText="Refresh" />
+          <MenuItem primaryText="Send feedback" />
+          <MenuItem primaryText="Settings" />
+          <MenuItem primaryText="Help" />
+          <MenuItem primaryText="Sign out" />
+        </IconMenu>
     </Badge>
   </li>
 )
