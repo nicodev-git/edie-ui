@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
-import { validate } from '../../components/modal/validation/NameValidation'
 import { SimpleModalForm } from '../../components/modal'
+import { validate } from '../../components/modal/validation/SimpleFormValidation'
 
 class SimpleModalContainer extends Component {
   handleFormSubmit (event) {
@@ -41,5 +41,5 @@ export default connect(
     open: true
   }), {})(reduxForm({
     form: 'simpleModalForm',
-    this.props.validate
+    validate
   })(SimpleModalContainer))
