@@ -10,17 +10,31 @@ const badgeStyle = {
   color: '#f5f5f5',
   width: 15,
   height: 15,
-  padding: 0
+  padding: 0,
+  top: 7,
+  right: 7,
+  zIndex: 2
 }
 
 const rootStyle = {
-  paddingTop: '10px',
-  paddingBottom: '10px'
+  padding: '8px 8px 8px 8px',
+  height: 50
+}
+
+const menuStyle = {
+  width: '100%',
+  height: '100%'
+}
+
+const buttonStyle = {
+  padding: '4px',
+  width: '100%',
+  height: '100%'
 }
 
 const iconStyle = {
-  width: 45,
-  height: 45
+  width: 30,
+  height: 30
 }
 
 const MessageBox = () => (
@@ -31,8 +45,10 @@ const MessageBox = () => (
       style={rootStyle}
       >
         <IconMenu
+          style={menuStyle}
           iconButtonElement={
             <IconButton
+              style={buttonStyle}
               iconStyle={iconStyle}>
                 <EmailIcon color="#777777"/>
             </IconButton>
