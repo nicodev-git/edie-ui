@@ -22,9 +22,11 @@ class SimpleModalContainer extends Component {
   }
 
   render () {
-
-    const { handleSubmit, content, header, subheader, buttonText, 
-      imageUpload, fileUpload } = this.props
+    const { handleSubmit, content, header } = this.props
+    let buttonText = (this.props.buttonText) ? (this.props.buttonText) : 'Save'
+    let subheader = (this.props.subheader) ? (this.props.subheader) : null
+    let imageUpload = (this.props.imageUpload) ? true : false
+    let fileUpload = (this.props.imageUpload) ? true : false
     return (
       <SimpleModalForm
         show={this.props.open}
@@ -34,6 +36,8 @@ class SimpleModalContainer extends Component {
         header={header}
         subheader={subheader}
         buttonText={buttonText}
+        imageUpload={imageUpload}
+        fileUpload={fileUpload}
       />
     )
   }
@@ -43,6 +47,6 @@ export default connect(
   state => ({
     open: true,
   }), {})(reduxForm({
-    form: 'newIncidentModal',
+    form: 'simpleModalForm',
     validate
-  })(NewIncidentModal))
+  })(SimpleModalContainer))

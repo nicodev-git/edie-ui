@@ -1,4 +1,36 @@
 import React, { Component } from 'react'
+import SimpleModalContainer from '../../../../../containers/modal/SimpleModalContainer'
+
+export default class NewIncidentModal extends Component {
+  doAction() {
+    console.log('doing some action when form submitted')
+  }
+
+  render() {
+    let header = "New Incident"
+    let options = [
+      { value: 'High', label: 'High' },
+      { value: 'Medium', label: 'Medium' },
+      { value: 'Low', label: 'Low' },
+      { value: 'Audit', label: 'Audit' }
+    ]
+    let content = [
+      {name: 'Name'},
+      {type: 'textarea', name: 'Description'},
+      {type: 'select', name: 'Severity', options: options}
+    ]
+    return (
+      <SimpleModalContainer
+        header={header}
+        content={content}
+        doAction={this.doAction.bind(this)}
+        imageUpload
+      />
+    )
+  }
+}
+
+/* import React, { Component } from 'react'
 import { reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
 import { validate } from '../../../../modal/validation/NameValidation'
@@ -23,10 +55,10 @@ class NewIncidentModal extends Component {
     })
   }
 
-  /* onChangeFile (e) {
+  onChangeFile (e) {
     const img = window.URL.createObjectURL(e.target.files[0])
     this.setState({ img: img })
-  } */
+  }
 
   render () {
     let show = (this.props) ? (this.props.open) : true
@@ -55,4 +87,4 @@ export default connect(
   }), {})(reduxForm({
     form: 'newIncidentModal',
     validate
-  })(NewIncidentModal))
+  })(NewIncidentModal)) */
