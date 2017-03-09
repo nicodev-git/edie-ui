@@ -28,7 +28,7 @@ const menuStyle = {
 }
 
 const menuItemStyle = {
-  width: 185,
+  width: 240,
   paddingTop: '5px'
 }
 
