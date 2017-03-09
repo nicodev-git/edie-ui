@@ -1,6 +1,6 @@
 import React from 'react'
 import NewsLine from './NewsLine'
-import { TopHeader, SearchBar, Messages, ProfileMenu } from './parts'
+import { TopHeader, SearchBar, MessageBox, ProfileMenu } from './parts'
 
 const TopbarComponent = ({user, profile, paused, onSearch, onSignOut,
   onClickProfile, onClickMessages}) => (
@@ -24,7 +24,7 @@ const TopbarComponent = ({user, profile, paused, onSearch, onSignOut,
           src="/images/ajax-loader.gif"
           style={{float: 'left', width: '18px', display: 'none', opacity: 0.5}} />
       </li>
-      <Messages />
+      <MessageBox />
       <ProfileMenu
         user={user}
         onClickProfile={onClickProfile}
