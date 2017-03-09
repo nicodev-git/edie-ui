@@ -1,50 +1,34 @@
-import React from 'react'
-import { reduxForm } from 'redux-form'
-import { connect } from 'react-redux'
+import React, { Component } from 'react'
+import SimpleModalContainer from '../../../../../containers/modal/SimpleModalContainer'
 import { validate } from '../../../../modal/validation/NameValidation'
-import { MapImportModalView } from '../../../../modal'
 
-class MapImportModal extends React.Component {
-
-  handleFormSubmit ({name, files}) {
-    console.log('form submitting')
-    console.log('name: ', name)
-    console.log('file: ', files)
-    this.onClickImport(name, files[0])
-    this.onHide()
-  }
-
-  onHide () {
-    this.props.closeMapImportModal()
-  }
-
-  onClickImport (name, file) {
+export default class MapImportModal extends Component {
+  doAction (values) {
+    console.log('doing some action when form submitted')
+    console.log(values)
     if (typeof FormData !== 'undefined') {
       let formData = new FormData() // eslint-disable-line no-undef
       // formData.append('file', file, input.value.split(/(\\|\/)/g).pop()) what does this regex do?
-      formData.append('file', file, file.name)
-      formData.append('name', name)
+      formData.append('file', values.file, values.file.name)
+      formData.append('name', values.name)
       this.props.importMap(formData)
     }
   }
 
   render () {
-    const { handleSubmit } = this.props
+    let header = 'Import Map'
+    let content = [
+      {name: 'Name'}
+    ]
     return (
-      <MapImportModalView
-        show={this.props.open}
-        onHide={this.onHide.bind(this)}
-        onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
+      <SimpleModalContainer
+        header={header}
+        content={content}
+        doAction={this.doAction.bind(this)}
+        onClose={this.props.closeMapImportModal}
+        validate={validate}
+        fileUpload
       />
     )
   }
 }
-
-export default connect(
-  state => ({
-    open: true,
-    fileName: ''
-  }), {})(reduxForm({
-    form: 'mapImportModal',
-    validate
-  })(MapImportModal))

@@ -17,7 +17,7 @@ const SimpleModalForm = ({show, onHide, onSubmit, header, subheader, buttonText,
     {(subheader) ? (<SubHeader name={subheader}/>) : null}
       <form onSubmit={onSubmit}>
         {(imageUpload) ? (<Field name="image" component={FormImg}/>) : null}
-        {(fileUpload) ? (<Field name="files" component={FileUpload}/>) : null}
+        {(fileUpload) ? (<Field name="file" component={FileUpload}/>) : null}
         <div className="form-column">
           {content.map(elem => {
             switch (elem.type) {
