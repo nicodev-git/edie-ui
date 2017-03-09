@@ -4,8 +4,7 @@ import IconButton from 'material-ui/IconButton'
 import IconMenu from 'material-ui/IconMenu'
 import MenuItem from 'material-ui/MenuItem'
 import EmailIcon from 'material-ui/svg-icons/communication/email'
-import Avatar from 'material-ui/Avatar'
-import Chip from 'material-ui/Chip'
+import Message from './Message'
 
 const badgeStyle = {
   backgroundColor: '#d32f2f',
@@ -28,6 +27,11 @@ const menuStyle = {
   height: '100%'
 }
 
+const menuItemStyle = {
+  width: 185,
+  paddingTop: '5px'
+}
+
 const buttonStyle = {
   padding: '4px',
   width: '100%',
@@ -48,6 +52,7 @@ const MessageBox = () => (
       >
         <IconMenu
           style={menuStyle}
+          menuStyle={menuItemStyle}
           iconButtonElement={
             <IconButton
               style={buttonStyle}
@@ -60,15 +65,21 @@ const MessageBox = () => (
         >
           <MenuItem primaryText="New messages" />
           <MenuItem>
-            <Chip>
-              <Avatar src="/images/avatars/1.jpg" />
-              <div className="message-body">
-                <strong>Ernest Kerry</strong><br/> Hello, You there?<br/>
-                <small className="text-muted">8 minutes ago</small>
-              </div>
-            </Chip>
+            <Message
+              avatar="/images/avatars/1.jpg"
+              name="Ernest Kerry"
+              message=" Hello, You there?"
+              time="8 minutes ago"
+            />
           </MenuItem>
-          <MenuItem primaryText="Settings" />
+          <MenuItem>
+            <Message
+              avatar="/images/avatars/3.jpg"
+              name="Don Mark"
+              message=" I really appreciate your&hellip;"
+              time="21 hours"
+            />
+          </MenuItem>
         </IconMenu>
     </Badge>
   </li>
