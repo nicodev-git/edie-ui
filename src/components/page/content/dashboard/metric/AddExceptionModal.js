@@ -1,47 +1,29 @@
 import React, { Component } from 'react'
-import { reduxForm } from 'redux-form'
-import { connect } from 'react-redux'
-import { validate } from '../../../../modal/validation/NameValidation'
-import AddExceptionModalView from '../../../../modal'
+import SimpleModalContainer from '../../../../../containers/modal/SimpleModalContainer'
+import { validate } from '../../../../modal/validation/FilterValidation'
 
-class AddExceptionModal extends Component {
-  handleFormSubmit ({name}) {
-    console.log('form submitting')
-    console.log('filter: ', name)
-    this.onHide()
-  }
-
-  onClickSave() {
+export default class AddExceptionModal extends Component {
+  doAction (values) {
+    console.log('doing some action when form submitted')
+    console.log(values)
     // TODO
   }
 
-  onHide (success) {
-    this.setState({
-      open: false
-    }, () => {
-      this.props.onClose &&
-            this.props.onClose(this, success)
-    })
-  }
-
   render () {
-    const { handleSubmit } = this.props
-    let text = (this.props.incident) ? (this.props.incident.rawtext) : ''
+    let header = 'Add Exception'
+    let subheader = (this.props.incident) ? (this.props.incident.rawtext) : ''
+    let content = [
+      {name: 'Filter'}
+    ]
     return (
-      <AddExceptionModalView
-        show={this.props.open}
-        onHide={this.onHide.bind(this)}
-        text={text}
-        onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
+      <SimpleModalContainer
+        header={header}
+        subheader={subheader}
+        content={content}
+        doAction={this.doAction.bind(this)}
+        onClose={this.props.onClose}
+        validate={validate}
       />
     )
   }
 }
-
-export default connect(
-  state => ({
-    open: true
-  }), {})(reduxForm({
-    form: 'addExceptionModal',
-    validate
-  })(AddExceptionModal))

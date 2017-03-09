@@ -1,48 +1,32 @@
-import React from 'react'
-import { reduxForm } from 'redux-form'
-import { connect } from 'react-redux'
-import { MapSaveModalView } from '../../../../modal'
+import React, { Component } from 'react'
+import SimpleModalContainer from '../../../../../containers/modal/SimpleModalContainer'
 import { validate } from '../../../../modal/validation/NameValidation'
 
-class MapSaveModal extends React.Component {
-
-  handleFormSubmit ({name, description}) {
-    console.log('form submitting')
-    console.log('name: ', name)
-    console.log('description: ', description)
-    this.onHide()
-  }
-
-  onHide () {
-    this.props.onClose &&
-        this.props.onClose(this)
-  }
-
-  onClickSave (name) {
+export default class MapSaveModal extends Component {
+  doAction (values) {
+    console.log('doing some action when form submitted')
+    console.log(values)
     // TODO
-    document.location.href = `${'/exportmap' + '?'}$.param({
+    /* document.location.href = `${'/exportmap' + '?'}$.param({
       ${name},
       mapid: ${this.props.mapId}
-    })`
-    this.onHide()
+    })` */
   }
 
   render () {
-    const { handleSubmit } = this.props
+    let header = 'Export map'
+    let content = [
+      {name: 'Name'},
+      {name: 'Description'}
+    ]
     return (
-      <MapSaveModalView
-        show={this.props.open}
-        onHide={this.onHide.bind(this)}
-        onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
+      <SimpleModalContainer
+        header={header}
+        content={content}
+        doAction={this.doAction.bind(this)}
+        onClose={this.props.onClose}
+        validate={validate}
       />
     )
   }
 }
-
-export default connect(
-  state => ({
-    open: true
-  }), {})(reduxForm({
-    form: 'mapSaveModal',
-    validate
-  })(MapSaveModal))
