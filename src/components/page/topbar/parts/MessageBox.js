@@ -4,6 +4,8 @@ import IconButton from 'material-ui/IconButton'
 import IconMenu from 'material-ui/IconMenu'
 import MenuItem from 'material-ui/MenuItem'
 import EmailIcon from 'material-ui/svg-icons/communication/email'
+import Avatar from 'material-ui/Avatar'
+import Chip from 'material-ui/Chip'
 
 const badgeStyle = {
   backgroundColor: '#d32f2f',
@@ -56,11 +58,17 @@ const MessageBox = () => (
           anchorOrigin={{horizontal: 'left', vertical: 'top'}}
           targetOrigin={{horizontal: 'left', vertical: 'top'}}
         >
-          <MenuItem primaryText="Refresh" />
-          <MenuItem primaryText="Send feedback" />
+          <MenuItem primaryText="New messages" />
+          <MenuItem>
+            <Chip>
+              <Avatar src="/images/avatars/1.jpg" />
+              <div className="message-body">
+                <strong>Ernest Kerry</strong><br/> Hello, You there?<br/>
+                <small className="text-muted">8 minutes ago</small>
+              </div>
+            </Chip>
+          </MenuItem>
           <MenuItem primaryText="Settings" />
-          <MenuItem primaryText="Help" />
-          <MenuItem primaryText="Sign out" />
         </IconMenu>
     </Badge>
   </li>
