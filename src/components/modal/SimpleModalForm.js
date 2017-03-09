@@ -4,7 +4,7 @@ import { Field } from 'redux-form'
 import { Header, SubHeader, FormInput, FormSelect, FormImg, FileUpload,
   SubmitBlock } from './parts'
 
-const SimpleModalForm = ({show, onHide, onSubmit, header, subheader,
+const SimpleModalForm = ({show, onHide, onSubmit, header, subheader, buttonText,
   content, imageUpload, fileUpload}) => (
   <Modal
     show={show}
@@ -19,18 +19,20 @@ const SimpleModalForm = ({show, onHide, onSubmit, header, subheader,
         {(imageUpload) ? (<Field name="image" component={FormImg}/>) : null}
         {(fileUpload) ? (<Field name="files" component={FileUpload}/>) : null}
         <div className="form-column">
-          {content.map(element => {
+          {content.map(elem => {
             switch (elem.type) {
-              
+              case 'textarea':
+                return (<Field name={elem.name.toLowerCase()} component={FormInput}
+                  label={elem.name} multiLine rows={3}/>)
+              case 'select':
+                return (<Field name={elem.name.toLowerCase()} component={FormSelect}
+                  label={elem.name} options={elem.options}/>)
+              default:
+                return <Field name={elem.name.toLowerCase()} component={FormInput} label={elem.name}/>
             }
-          }}
-          <Field name="name" component={FormInput} label="Name"/>
-          <Field name="desc" component={FormInput} label="Description"
-            multiLine rows={3}/>
-          <Field name="select" component={FormSelect} label="Severity"
-            options={options}/>
+          })}
         </div>
-        <SubmitBlock name="Submit" onClick={onHide}/>
+        <SubmitBlock name={buttonText} onClick={onHide}/>
       </form>
     </div>
   </Modal>
