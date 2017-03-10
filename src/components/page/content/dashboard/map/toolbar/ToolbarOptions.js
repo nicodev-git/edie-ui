@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { ZoomOptions, DeleteObject, ColorPicker, LineWidthInc, LineWidthDec,
-  TextChange, RotateHubLeft, RotateHubRight, ChangeLineType, OptionUploader} from './index'
+  TextChange, RotateHubLeft, RotateHubRight, ChangeLineType, OptionUploader,
+  EditMapMenu} from './index'
 
 class ToolbarOptions extends Component {
   render () {
@@ -71,48 +72,12 @@ class ToolbarOptions extends Component {
             onChange={this.props.toggleLineTypes}
           />
           <OptionUploader />
+          <EditMapMenu {...this.props}/>
         </ul>
       </div>
     )
   }
 }
-
-      <li>
-        <img className="option uploader" src="/images/uploading.gif"
-          style={{float: 'left', width: '18px', display: 'none', opacity: 0.5, marginLeft: '10px'}}/>
-      </li>
-
-      <li className={this.state.displayDevices ? '' : 'dropdown'} ref="liDevices">
-        <a
-          href="javascript:"
-          onClick={this.onClickAdd.bind(this)}
-          className={`option p-none ${this.state.displayDevices ? 'option-active' : ''}`}
-        >
-          <i className="fa fa-plus-square" title="Add" />
-          <b className="caret" style={{position: 'absolute', left: '48%', top: '23px'}} />
-        </a>
-        <ul className="dropdown-menu drop-right">
-          <li>
-            <a href="javascript:;" onClick={this.props.onClickEdit}
-              className={`option ${this.props.editable ? 'option-active' : ''}`}
-            >
-              <i className="fa fa-edit margin-md-right" />Edit
-            </a>
-          </li>
-          <li>
-            <a
-              href="javascript:;"
-              className="option edit-undo"
-            >
-              <i className="fa fa-undo margin-md-right" />Undo
-            </a>
-          </li>
-        </ul>
-
-        { this.state.displayDevices
-          ? <DeviceMenu {...this.props} onClickItem={this.props.onClickDeviceItem} selectedItem={this.props.selectedItem}/>
-          : null }
-      </li>
 
       <li className="dropdown dropdown-settings">
         <a href="javascript:;" className="option p-none"><i className="fa fa-cog" title="Add" />

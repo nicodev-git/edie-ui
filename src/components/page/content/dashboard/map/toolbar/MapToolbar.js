@@ -188,6 +188,8 @@ export default class Toolbar extends React.Component {
           onPickerClose={this.onCloseColorPicker().bind(this)}
           onPickerChange={this.onChangeColorPicker().bind(this)}
           toggleLineTypes={this.toggleLineTypes().bind(this)}
+          onAdd={this.onClickAdd().bind(this)}
+          onEdit={this.onClickEdit().bind(this)}
           obj={obj}
           line={line}
           lineGroup={lineGroup}
@@ -198,6 +200,7 @@ export default class Toolbar extends React.Component {
           popover={popover}
           cover={cover}
           isPickerDisplayed={this.state.displayColorPicker}
+          isDevicesDisplayed={this.state.displayDevices}
           {...this.props}
         />
         <ToolbarToggle onToggle={this.onClickToggleMapHeader().bind(this)}/>

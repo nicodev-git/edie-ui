@@ -10,6 +10,7 @@ import TextChange from './TextChange'
 import RotateHubLeft from './RotateHubLeft'
 import RotateHubRight from './RotateHubRight'
 import ChangeLineType from './ChangeLineType'
+import OptionUploader from './OptionUploader'
 
 export {
   MapMenu,
@@ -23,5 +24,6 @@ export {
   TextChange,
   RotateHubLeft,
   RotateHubRight,
-  ChangeLineType
+  ChangeLineType,
+  OptionUploader
 }
