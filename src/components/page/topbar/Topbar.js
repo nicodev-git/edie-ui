@@ -26,13 +26,17 @@ export default class Topbar extends React.Component {
     console.log('messages clicked')
   }
 
+  onClickSearch (e) {
+    console.log('searchig for... ', e)
+  }
+
   render () {
     const {user} = this.props
     return (
       <TopbarComponent
         user={user}
         profile={this.renderProfileModal()}
-        onSearch={this.props.onClickSearch}
+        onSearch={this.onClickSearch.bind(this)}
         paused={this.context.paused}
         onClickProfile={this.onClickProfile.bind(this)}
         onClickMessages={this.onClickMessages.bind(this)}

@@ -1,13 +1,13 @@
 import React from 'react'
 import NewsLine from './NewsLine'
-import { TopHeader, SearchBar, MessageBox, ProfileMenu } from './parts'
+import { TopHeader, SearchBarContainer, MessageBox, ProfileMenu } from './parts'
 
 const TopbarComponent = ({user, profile, paused, onSearch, onSignOut,
   onClickProfile, onClickMessages}) => (
   <nav className="navbar navbar-default navbar-static-top no-margin"
     role="navigation" style={{zIndex: 21}}>
     <TopHeader name="Incident Manager" />
-    <SearchBar onSearch={onSearch} />
+    <SearchBarContainer onSearch={onSearch} />
     <NewsLine />
     <ul className="nav navbar-nav navbar-nav-expanded nav-user-info">
       <li className="dropdown padding-md">

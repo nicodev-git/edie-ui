@@ -8,10 +8,14 @@ const searchStyle = {
   alignItems: 'center'
 }
 
-const SearchBar = ({onSearch}) => (
+const iconStyle = {
+  lineHeight: 50
+}
+
+const SearchBar = ({onSearch, color}) => (
   <div className="searchbar-container">
     <Chip style={searchStyle}>
-      <SearchIcon color="#ffffff"/>
+      <SearchIcon color={color} style={iconStyle}/>
     </Chip>
   </div>
 )
