@@ -1,6 +1,32 @@
 import React from 'react'
+import IconButton from 'material-ui/IconButton'
+import IconMenu from 'material-ui/IconMenu'
+import MenuItem from 'material-ui/MenuItem'
+import Divider from 'material-ui/Divider'
+import AccoutCircleIcon from 'material-ui/svg-icons/action/account-circle'
 
 const ProfileMenu = ({user, onClickProfile, onClickMessages, onSignOut}) => (
+  <li className="dropdown">
+    <IconMenu
+      iconButtonElement={
+        <IconButton>
+            <AccoutCircleIcon color="#777777"/>
+        </IconButton>
+      }
+      anchorOrigin={{horizontal: 'left', vertical: 'top'}}
+      targetOrigin={{horizontal: 'left', vertical: 'top'}}
+    >
+      <MenuItem primaryText="Profile" onTouchTap={onClickProfile}/>
+      <MenuItem primaryText="Messages" onTouchTap={onClickMessages}/>
+      <Divider />
+      <MenuItem primaryText="Log out" onTouchTap={onSignOut}/>
+    </IconMenu>
+  </li>
+)
+
+export default ProfileMenu
+
+/* const ProfileMenu = ({user, onClickProfile, onClickMessages, onSignOut}) => (
   <li className="dropdown">
     <a data-toggle="dropdown" className="dropdown-toggle navbar-user" href="javascript:;">
       <img className="img-circle profile-image"
@@ -20,4 +46,4 @@ const ProfileMenu = ({user, onClickProfile, onClickMessages, onSignOut}) => (
   </li>
 )
 
-export default ProfileMenu
+export default ProfileMenu */

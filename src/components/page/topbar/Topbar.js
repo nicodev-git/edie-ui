@@ -23,7 +23,7 @@ export default class Topbar extends React.Component {
   }
 
   onClickMessages () {
-
+    console.log('messages clicked')
   }
 
   render () {
