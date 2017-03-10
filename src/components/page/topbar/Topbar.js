@@ -26,8 +26,8 @@ export default class Topbar extends React.Component {
     console.log('messages clicked')
   }
 
-  onClickSearch (e) {
-    console.log('searchig for... ', e)
+  onClickSearch (value) {
+    console.log('making a request... ', value)
   }
 
   render () {

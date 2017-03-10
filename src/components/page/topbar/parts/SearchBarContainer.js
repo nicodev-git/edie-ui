@@ -17,8 +17,14 @@ export default class SearchBarContainer extends Component {
   }
 
   onEnter (e) {
-    console.log('pressed')
-    console.log(e.currentTarget)
+    if (e.charCode === 13) {
+      let value = e.currentTarget.value
+      console.log('searching for...', value)
+      let input = document.getElementById('searchInput')
+      input.value = ''
+      input.blur()
+      this.props.onSearch(value)
+    }
   }
 
   render () {

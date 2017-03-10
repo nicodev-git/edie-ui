@@ -20,7 +20,10 @@ const SearchBar = ({onSearch, active, onBackgroundChange}) => (
     onBlur={onBackgroundChange}>
     <div className="searchbar" style={active ? activeStyle : defaultStyle}>
       <SearchIcon color={active ? '#000000' : '#ffffff'} style={iconStyle}/>
-      <input className="searchbar-input" style={active ? activeStyle : defaultStyle}
+      <input
+        id="searchInput"
+        className="searchbar-input"
+        style={active ? activeStyle : defaultStyle}
         onKeyPress={onSearch}/>
     </div>
   </div>
