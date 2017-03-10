@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { ZoomOptions, DeleteObject, ColorPicker, LineWidthInc, LineWidthDec,
-  TextChange, RotateHubLeft, RotateHubRight} from './index'
+  TextChange, RotateHubLeft, RotateHubRight, ChangeLineType, OptionUploader} from './index'
 
 class ToolbarOptions extends Component {
   render () {
@@ -65,25 +65,18 @@ class ToolbarOptions extends Component {
           />
           <RotateHubLeft hub={this.props.hub} />
           <RotateHubRight hub={this.props.hub} />
-          <ChangeLineType />
+          <ChangeLineType
+            line={this.props.line}
+            lineTypes={this.props.lineTypes}
+            onChange={this.props.toggleLineTypes}
+          />
+          <OptionUploader />
         </ul>
       </div>
     )
   }
 }
 
-      <li>
-        <a
-          href="javascript:;"
-          onClick={this.toggleLineTypes.bind(this)}
-          className="option p-none"
-          style={{display: line ? 'block' : 'none'}}
-        >
-          <i className="fa fa-reply" title="Change Type" />
-        </a>
-
-        {this.renderLineTypes()}
-      </li>
       <li>
         <img className="option uploader" src="/images/uploading.gif"
           style={{float: 'left', width: '18px', display: 'none', opacity: 0.5, marginLeft: '10px'}}/>

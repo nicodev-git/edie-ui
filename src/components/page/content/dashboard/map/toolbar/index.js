@@ -9,6 +9,7 @@ import LineWidthDec from './LineWidthDec'
 import TextChange from './TextChange'
 import RotateHubLeft from './RotateHubLeft'
 import RotateHubRight from './RotateHubRight'
+import ChangeLineType from './ChangeLineType'
 
 export {
   MapMenu,
@@ -21,5 +22,6 @@ export {
   LineWidthDec,
   TextChange,
   RotateHubLeft,
-  RotateHubRight
+  RotateHubRight,
+  ChangeLineType
 }
