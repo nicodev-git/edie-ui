@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import { ZoomOptions, DeleteObject } from './index'
+import { ZoomOptions, DeleteObject, ColorPicker, LineWidthInc, LineWidthDec,
+  TextChange, RotateHubLeft, RotateHubRight} from './index'
 
 class ToolbarOptions extends Component {
   render () {
@@ -15,7 +16,7 @@ class ToolbarOptions extends Component {
             onZoomOut={this.props.onClickZoomOut}
             onZoomReset={this.props.onClickZoomReset}
           />
-          <DeleteObject obj={this.props.obj}
+          <DeleteObject obj={this.props.obj} />
           <ColorPicker
             line={this.props.line}
             lineGroup={this.props.lineGroup}
@@ -24,115 +25,52 @@ class ToolbarOptions extends Component {
             onPickerChange={this.props.onPickerChange}
             onPickerClose={this.props.onPickerClose}
           />
+          <LineWidthInc
+            lineGroup={this.props.lineGroup}
+            onLineWidthInc={this.props.onClickLineWidthInc}
+          />
+          <LineWidthDec
+            lineGroup={this.props.lineGroup}
+            onLineWidthInc={this.props.onClickLineWidthDec}
+          />
+          <TextChange
+            text={this.props.text}
+            onChange={this.props.onClickFontSizeUp}
+            icon="fa fa-arrow-up"
+            title="Increase Font Size"
+          />
+          <TextChange
+            text={this.props.text}
+            onChange={this.props.onClickFontSizeDown}
+            icon="fa fa-arrow-down"
+            title="Decrease Font Size"
+          />
+          <TextChange
+            text={this.props.text}
+            onChange={this.props.onClickAlignLeft}
+            icon="fa fa-align-left"
+            title="Align Left"
+          />
+          <TextChange
+            text={this.props.text}
+            onChange={this.props.onClickAlignCenter}
+            icon="fa fa-align-center"
+            title="Align Center"
+          />
+          <TextChange
+            text={this.props.text}
+            onChange={this.props.onClickAlignLeft}
+            icon="fa fa-align-right"
+            title="Align Right"
+          />
+          <RotateHubLeft hub={this.props.hub} />
+          <RotateHubRight hub={this.props.hub} />
+          <ChangeLineType />
         </ul>
       </div>
     )
   }
 }
-      <li>
-        <div
-          className="input-group colorpicker-element"
-          style={{display: lineGroup ? 'block' : 'none'}}
-          onClick={this.onClickColorPicker.bind(this)}
-        >
-          <div className="input-group-addon">
-            <i className="color-preview" style={{background: lineGroup ? line.getStrokeColor() : 'black'}} />
-          </div>
-        </div>
-
-        {
-          this.state.displayColorPicker ? <div style={popover}>
-            <div style={cover} onClick={this.onCloseColorPicker.bind(this)}/>
-            <ChromePicker
-              color={lineGroup ? line.getStrokeColor() : 'black'}
-              onChangeComplete={this.onChangeColorPicker.bind(this)}
-            />
-          </div> : null
-        }
-
-      </li>
-      <li>
-        <a
-          href="javascript:;"
-          className="option p-none"
-          style={{display: lineGroup ? 'block' : 'none'}}
-          onClick={this.props.onClickLineWidthInc}
-        >
-          <i className="fa fa-expand" title="Increase Line Width" />
-        </a>
-      </li>
-      <li>
-        <a
-          href="javascript:;"
-          className="option p-none"
-          style={{display: lineGroup ? 'block' : 'none'}}
-          onClick={this.props.onClickLineWidthDec}
-        >
-          <i className="fa fa-compress" title="Decrease Line Width" />
-        </a>
-      </li>
-      <li>
-        <a
-          href="javascript:;"
-          className="option p-none"
-          style={{display: text ? 'block' : 'none'}}
-          onClick={this.props.onClickFontSizeUp}
-        >
-          <i className="fa fa-arrow-up" title="Increase Font Size" />
-        </a>
-      </li>
-      <li>
-        <a
-          href="javascript:;"
-          className="option p-none"
-          style={{display: text ? 'block' : 'none'}}
-          onClick={this.props.onClickFontSizeDown}
-        >
-          <i className="fa fa-arrow-down" title="Decrease Font Size" />
-        </a>
-      </li>
-      <li>
-        <a
-          href="javascript:;"
-          className="option p-none"
-          style={{display: text ? 'block' : 'none'}}
-          onClick={this.props.onClickAlignLeft}
-        >
-          <i className="fa fa-align-left" title="Align Left" />
-        </a>
-      </li>
-      <li>
-        <a
-          href="javascript:;"
-          className="option p-none"
-          style={{display: text ? 'block' : 'none'}}
-          onClick={this.props.onClickAlignCenter}
-        >
-          <i className="fa fa-align-center" title="Align Center" />
-        </a>
-
-      </li>
-      <li>
-        <a
-          href="javascript:;"
-          className="option p-none"
-          style={{display: text ? 'block' : 'none'}}
-          onClick={this.props.onClickAlignRight}
-        >
-          <i className="fa fa-align-right" title="Align Right" />
-        </a>
-      </li>
-
-      <li>
-        <a href="javascript:;" className="option p-none" style={{display: hub ? 'block' : 'none'}}>
-          <i className="fa fa-rotate-left" title="Rotate Left" />
-        </a>
-      </li>
-      <li>
-        <a href="javascript:;" className="option p-none" style={{display: hub ? 'block' : 'none'}}>
-          <i className="fa fa-rotate-right" title="Rotate Right" />
-        </a>
-      </li>
 
       <li>
         <a

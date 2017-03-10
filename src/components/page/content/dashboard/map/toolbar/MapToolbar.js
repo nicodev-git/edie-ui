@@ -163,6 +163,7 @@ export default class Toolbar extends React.Component {
     const text = obj ? cmap.selectedText() : null
     const hub = obj ? cmap.selectedLonghub() : null
     const zooming = cmap && cmap.zooming === true
+    const lineTypes = this.renderLineTypes()
     const popover = {
       position: 'absolute',
       zIndex: '2',
@@ -186,38 +187,22 @@ export default class Toolbar extends React.Component {
           onColorPick={this.onClickColorPicker().bind(this)}
           onPickerClose={this.onCloseColorPicker().bind(this)}
           onPickerChange={this.onChangeColorPicker().bind(this)}
+          toggleLineTypes={this.toggleLineTypes().bind(this)}
           obj={obj}
           line={line}
           lineGroup={lineGroup}
+          lineTypes={lineTypes}
           zooming={zooming}
+          text={text}
+          hub={hub}
+          popover={popover}
+          cover={cover}
           isPickerDisplayed={this.state.displayColorPicker}
           {...this.props}
         />
         <ToolbarToggle onToggle={this.onClickToggleMapHeader().bind(this)}/>
         {this.renderNewIncidentModal()}
       </div>
-      /* <ToolbarComponent
-        headerCollapsed={this.state.headerCollapsed}
-        newIncidentModal={this.renderNewIncidentModal().bind(this)}
-        mapExportModal={this.renderMapExportModal().bind(this)}
-        mapImportModal={this.renderMapImportModal().bind(this)}
-        onColorPick={this.onClickColorPicker().bind(this)}
-        selectedMap={this.props.selectedMap}
-        mapImportModalVisible={this.props.mapImportModalVisible}
-        addMap={this.props.addMap}
-        deleteMap={this.props.deleteMap}
-        updateMap={this.props.updateMap}
-        openMapImportModal={this.props.openMapImportModal}
-        onNewIncident={this.onClickNewIncident().bind(this)}
-        onMaximize={this.onClickMaximize().bind(this)}
-        maximized={this.props.maximized}
-        zooming={zooming}
-        onZoomRect={this.props.onClickZoomRect}
-        onZoomIn={this.props.onClickZoomIn}
-        onZoomOut={this.props.onClickZoomOut}
-        onZoomReset={this.props.onClickZoomReset}
-        onDelete={this.props.onClickDelete}
-      /> */
     )
   }
 }

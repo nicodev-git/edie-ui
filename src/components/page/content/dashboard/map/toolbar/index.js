@@ -3,11 +3,23 @@ import NewIncidentLabel from './NewIncidentLabel'
 import ToolbarOptions from './ToolbarOptions'
 import ToolbarToggle from './ToolbarToggle'
 import DeleteObject from './DeleteObject'
+import ColorPicker from './ColorPicker'
+import LineWidthInc from './LineWidthInc'
+import LineWidthDec from './LineWidthDec'
+import TextChange from './TextChange'
+import RotateHubLeft from './RotateHubLeft'
+import RotateHubRight from './RotateHubRight'
 
 export {
   MapMenu,
   NewIncidentLabel,
   ToolbarOptions,
   ToolbarToggle,
-  DeleteObject
+  DeleteObject,
+  ColorPicker,
+  LineWidthInc,
+  LineWidthDec,
+  TextChange,
+  RotateHubLeft,
+  RotateHubRight
 }

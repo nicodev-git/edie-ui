@@ -14,10 +14,10 @@ const ColorPicker = ({ line, lineGroup, isPickerDisplayed,
     </div>
     {
       isPickerDisplayed ? <div style={popover}>
-        <div style={cover} onClick={this.onCloseColorPicker.bind(this)}/>
+        <div style={cover} onClick={onPickerClose}/>
         <ChromePicker
           color={lineGroup ? line.getStrokeColor() : 'black'}
-          onChangeComplete={this.onChangeColorPicker.bind(this)}
+          onChangeComplete={onPickerChange}
         />
       </div> : null
     }
