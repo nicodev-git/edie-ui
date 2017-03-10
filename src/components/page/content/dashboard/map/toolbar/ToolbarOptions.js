@@ -1,24 +1,10 @@
 import React from 'react'
 import MapMenu from './MapMenu'
 
-const ToolbarComponent = ({selectedMap, mapImportModalVisible, addMap, deleteMap,
-  openMapImportModal, updateMap, mapImportModal, mapExportModal, headerCollapsed,
-  onNewIncident, onMaximize, maximized}) => (
-  <div className={`panel-heading text-center map-heading ${headerCollapsed ? 'collapsed' : ''}`}>
-    <MapMenu
-      mapExportModal={mapExportModal}
-      mapImportModal={mapImportModal}
-      selectedMap={selectedMap}
-      mapImportModalVisible={mapImportModalVisible}
-      addMap={addMap}
-      deleteMap={deleteMap}
-      updateMap={updateMap}
-      openMapImportModal={MaopenMapImportModal}
-    />
+const ToolbarOptions = ({ onNewIncident, onMaximize, maximized, zooming, onZoomRect, onZoomIn, onZoomOut,
+  onZoomReset, onDelete}) => (
 
-    <a href="javascript:;" className="btn-new-incident" onClick={onNewIncident}>
-      <i className="fa fa-book" title="New Incident" />
-    </a>
+
 
     <div className="panel-options main-map-options" style={{top: '15px'}}>
       <ul className="nav nav-tabs" style={{background: 'transparent'}}>
@@ -36,8 +22,8 @@ const ToolbarComponent = ({selectedMap, mapImportModalVisible, addMap, deleteMap
           <a
             href="javascript:;"
             className="option restore p-none"
-            style={{display: this.props.maximized ? 'block' : 'none'}}
-            onClick={this.onClickMaximize.bind(this)}
+            style={{display: maximized ? 'block' : 'none'}}
+            onClick={onMaximize}
           >
             <i className="fa fa fa-compress" title="Restore" />
             <b className="caret" style={{position: 'absolute', left: '48%', top: '23px'}} />
@@ -47,7 +33,7 @@ const ToolbarComponent = ({selectedMap, mapImportModalVisible, addMap, deleteMap
               <a
                 href="javascript:;"
                 className={`option ${zooming ? 'option-active' : ''}`}
-                onClick={this.props.onClickZoomRect}
+                onClick={onZoomRect}
               >
                 <i className="fa fa-search margin-md-right" />Zoom Rect
               </a>
@@ -56,7 +42,7 @@ const ToolbarComponent = ({selectedMap, mapImportModalVisible, addMap, deleteMap
               <a
                 href="javascript:;"
                 className="option"
-                onClick={this.props.onClickZoomIn}
+                onClick={onZoomIn}
               >
                 <i className="fa fa-search-plus margin-md-right" />Zoom In
               </a>
@@ -65,7 +51,7 @@ const ToolbarComponent = ({selectedMap, mapImportModalVisible, addMap, deleteMap
               <a
                 href="javascript:;"
                 className="option"
-                onClick={this.props.onClickZoomOut}
+                onClick={onZoomOut}
               >
                 <i className="fa fa-search-minus margin-md-right" />Zoom Out
               </a>
@@ -74,7 +60,7 @@ const ToolbarComponent = ({selectedMap, mapImportModalVisible, addMap, deleteMap
               <a
                 href="javascript:;"
                 className="option"
-                onClick={this.props.onClickZoomReset}
+                onClick={onZoomReset}
               >
                 <i className="fa fa fa-square-o margin-md-right" />Reset
               </a>
@@ -87,7 +73,7 @@ const ToolbarComponent = ({selectedMap, mapImportModalVisible, addMap, deleteMap
             href="javascript:"
             className="option trash p-none"
             style={{display: obj ? 'block' : 'none'}}
-            onClick={this.props.onClickDelete}
+            onClick={onDelete}
           >
             <i className="fa fa-trash-o" title="Delete" />
           </a>
@@ -271,9 +257,6 @@ const ToolbarComponent = ({selectedMap, mapImportModalVisible, addMap, deleteMap
       <img src="/images/arrow-up.png" width="14" height="14" className="up" />
       <img src="/images/arrow-down.png" width="14" height="14" className="down" />
     </a>
-
-    {this.renderNewIncidentModal()}
-  </div>
 )
 
-export default ToolbarComponent
+export default ToolbarOptions

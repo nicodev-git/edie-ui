@@ -178,11 +178,19 @@ export default class Toolbar extends React.Component {
     }
 
     return (
-      <ToolbarComponent
+      <div className={`panel-heading text-center map-heading ${this.state.headerCollapsed ? 'collapsed' : ''}`}>
+        <MapMenu {...this.props}/>
+        <NewIncidentLabel />
+        <ToolbarOptions />
+        <ToolbarToggle onToggle={this.onClickToggleMapHeader().bind(this)}/>
+        {this.renderNewIncidentModal()}
+      </div>
+      /* <ToolbarComponent
         headerCollapsed={this.state.headerCollapsed}
         newIncidentModal={this.renderNewIncidentModal().bind(this)}
         mapExportModal={this.renderMapExportModal().bind(this)}
         mapImportModal={this.renderMapImportModal().bind(this)}
+        onColorPick={this.onClickColorPicker().bind(this)}
         selectedMap={this.props.selectedMap}
         mapImportModalVisible={this.props.mapImportModalVisible}
         addMap={this.props.addMap}
@@ -192,7 +200,13 @@ export default class Toolbar extends React.Component {
         onNewIncident={this.onClickNewIncident().bind(this)}
         onMaximize={this.onClickMaximize().bind(this)}
         maximized={this.props.maximized}
-      />
+        zooming={zooming}
+        onZoomRect={this.props.onClickZoomRect}
+        onZoomIn={this.props.onClickZoomIn}
+        onZoomOut={this.props.onClickZoomOut}
+        onZoomReset={this.props.onClickZoomReset}
+        onDelete={this.props.onClickDelete}
+      /> */
     )
   }
 }
