@@ -389,3 +389,10 @@ table.table tbody tr.selected {
 .form-buttons > div {
     margin-left: 20px;
 }
+
+.searchbar-container {
+    width: 250px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+}
