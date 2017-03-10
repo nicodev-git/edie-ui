@@ -181,7 +181,11 @@ export default class Toolbar extends React.Component {
       <div className={`panel-heading text-center map-heading ${this.state.headerCollapsed ? 'collapsed' : ''}`}>
         <MapMenu {...this.props}/>
         <NewIncidentLabel />
-        <ToolbarOptions />
+        <ToolbarOptions
+          onMaximize={this.onClickMaximize().bind(this)}
+          zooming={zooming}
+          {...this.props}
+        />
         <ToolbarToggle onToggle={this.onClickToggleMapHeader().bind(this)}/>
         {this.renderNewIncidentModal()}
       </div>
