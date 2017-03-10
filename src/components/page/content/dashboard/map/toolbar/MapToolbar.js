@@ -152,8 +152,6 @@ export default class Toolbar extends Component {
     return (
       <div className={`panel-heading text-center map-heading ${this.state.headerCollapsed ? 'collapsed' : ''}`}>
         <MapMenu
-          mapExportModal={this.renderMapExportModal().bind(this)}
-          mapImportModal={this.renderMapImportModal().bind(this)}
           onAdd={this.onClickAdd.bind(this)}
           onRename={this.onClickRename.bind(this)}
           onDelete={this.onClickDelete.bind(this)}

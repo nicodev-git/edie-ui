@@ -82,8 +82,8 @@ export default class MapMenu extends Component {
           onSave={this.props.onSave}
           onImport={this.props.onImport}
         />
-        {this.props.mapExportModal}
-        {this.props.mapImportModal}
+        {this.renderMapExportModal()}
+        {this.renderMapImportModal()}
       </div>
     )
   }
