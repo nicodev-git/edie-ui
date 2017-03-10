@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { ZoomOptions, DeleteObject, ColorPicker, LineWidthInc, LineWidthDec,
   TextChange, RotateHubLeft, RotateHubRight, ChangeLineType, OptionUploader,
-  EditMapMenu} from './index'
+  EditMapMenu, LogOut, DropdownToggle} from './index'
 
 class ToolbarOptions extends Component {
   render () {
@@ -73,32 +73,12 @@ class ToolbarOptions extends Component {
           />
           <OptionUploader />
           <EditMapMenu {...this.props}/>
+          <LogOut />
+          <DropdownToggle />
         </ul>
       </div>
     )
   }
 }
-
-      <li className="dropdown dropdown-settings">
-        <a href="javascript:;" className="option p-none"><i className="fa fa-cog" title="Add" />
-          <b className="caret" style ={{position: 'absolute', left: '48%', top: '23px'}} />
-        </a>
-        <ul className="dropdown-menu drop-right">
-          <li>
-            <a href="javascript:logout();"
-              className="option"> <i className="fa fa-sign-out margin-md-right" />Log Out
-            </a>
-          </li>
-        </ul>
-      </li>
-
-      <li className="dropdown active">
-        <a href="#" data-toggle="dropdown" className="dropdown-toggle" style={{display: 'none'}} />
-        <ul className="dropdown-menu" />
-      </li>
-    </ul>
-    {}
-  </div>
-)
 
 export default ToolbarOptions

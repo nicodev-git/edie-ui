@@ -4,6 +4,7 @@ import {assign} from 'lodash'
 import MapSelect from './MapSelect'
 import MapSaveModal from './MapSaveModal'
 import MapImportModal from './MapImportModal'
+import MapMenuList from './MapMenuList'
 import { showAlert, showPrompt, showConfirm } from '../../../../shared/Alert'
 
 export default class MapMenu extends Component {
@@ -74,40 +75,15 @@ export default class MapMenu extends Component {
     return (
       <div style={{position: 'absolute', left: '7px', top: '15px'}}>
         <MapSelect {...this.props} ref="select"/>
-
-        <ul className="nav nav-tabs" style={{background: 'transparent', display: 'inline-block'}}>
-          <li className="dropdown">
-            <a href="javascript:;" className="option p-none" onClick={this.onClickAdd.bind(this)}>
-              <i className="fa fa-plus-square" title="Add Map" />
-              <b className="caret" style={{position: 'absolute', left: '44%', top: '23px'}} />
-            </a>
-            <ul className="dropdown-menu">
-              <li>
-                <a href="javascript:;" className="option" onClick={this.onClickRename.bind(this)}>
-                  <i className="fa fa-edit margin-md-right" />Rename Map
-                </a>
-              </li>
-              <li>
-                <a href="javascript:;" className="option" onClick={this.onClickDelete.bind(this)}>
-                  <i className="fa fa-trash-o margin-md-right" />Delete Map
-                </a>
-              </li>
-              <li>
-                <a href="javascript:;" className="option" onClick={this.onClickSave.bind(this)}>
-                  <i className="fa fa-save margin-md-right" />Export Map
-                </a>
-              </li>
-              <li>
-                <a href="javascript:;" className="option" onClick={this.onClickImport.bind(this)}>
-                  <i className="fa fa-upload margin-md-right" />Import Map
-                </a>
-              </li>
-            </ul>
-          </li>
-        </ul>
-
-        {mapExportModal}
-        {mapImportModal}
+        <MapMenuList
+          onAdd={this.props.onAdd}
+          onRename={this.props.onRename}
+          onDelete={this.props.onDelete}
+          onSave={this.props.onSave}
+          onImport={this.props.onImport}
+        />
+        {this.props.mapExportModal}
+        {this.props.mapImportModal}
       </div>
     )
   }

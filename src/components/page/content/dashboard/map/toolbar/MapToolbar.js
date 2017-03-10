@@ -4,8 +4,9 @@ import MapMenu from '../MapMenu'
 import DeviceMenu from '../DeviceMenu'
 import NewIncidentModal from '../NewIncidentModal'
 import { lineTypes } from '../../../../../../shared/Global'
+import LineTypesMenu from './LineTypesMenu'
 
-export default class Toolbar extends React.Component {
+export default class Toolbar extends Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -34,46 +35,16 @@ export default class Toolbar extends React.Component {
 
   }
 
-  renderLineTypes () {
+  renderLineTypes (popover, cover) {
     if (!this.state.displayLineType) return null
-
-    const popover = {
-      position: 'absolute',
-      zIndex: '2',
-      right: '-10px',
-      top: '30px'
-    }
-
-    const cover = {
-      position: 'fixed',
-      top: 0,
-      right: 0,
-      bottom: 0,
-      left: 0
-    }
-
     return (
-      <div style={popover}>
-        <div style={cover} onClick={this.toggleLineTypes.bind(this)}/>
-        <div id="linetypediv" className="panel-group">
-          <div className="panel panel-default">
-            <div className="panel-body"><ul>
-            {
-              this.lineTypes.map(item =>
-                <li key={item.typename}><a href="javascript:;" onClick={this.onClickLineType.bind(this, item)}>
-                  <div className="pull-left item-icon">
-                    <img src={item.image} data-type={item.type} data-typename={item.typename}/>
-                  </div>
-                  <div className="item-text">
-                    <strong>{item.title}</strong>
-                  </div>
-                </a></li>
-              )
-            }
-            </ul></div>
-          </div>
-        </div>
-      </div>
+      <LineTypesMenu
+        popover={popover}
+        cover={cover}
+        lineTypes={this.lineTypes}
+        toogle={this.toggleLineTypes().bind(this)}
+        onChoose={this.onClickLineType.bind(this)}
+      />
     )
   }
 
@@ -163,7 +134,6 @@ export default class Toolbar extends React.Component {
     const text = obj ? cmap.selectedText() : null
     const hub = obj ? cmap.selectedLonghub() : null
     const zooming = cmap && cmap.zooming === true
-    const lineTypes = this.renderLineTypes()
     const popover = {
       position: 'absolute',
       zIndex: '2',
@@ -177,10 +147,19 @@ export default class Toolbar extends React.Component {
       bottom: 0,
       left: 0
     }
+    const lineTypes = this.renderLineTypes(popover, cover)
 
     return (
       <div className={`panel-heading text-center map-heading ${this.state.headerCollapsed ? 'collapsed' : ''}`}>
-        <MapMenu {...this.props}/>
+        <MapMenu
+          mapExportModal={this.renderMapExportModal().bind(this)}
+          mapImportModal={this.renderMapImportModal().bind(this)}
+          onAdd={this.onClickAdd.bind(this)}
+          onRename={this.onClickRename.bind(this)}
+          onDelete={this.onClickDelete.bind(this)}
+          onSave={this.onClickSave.bind(this)}
+          onImport={this.onClickImport.bind(this)}
+          {...this.props}/>
         <NewIncidentLabel />
         <ToolbarOptions
           onMaximize={this.onClickMaximize().bind(this)}

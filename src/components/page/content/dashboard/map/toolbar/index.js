@@ -11,6 +11,10 @@ import RotateHubLeft from './RotateHubLeft'
 import RotateHubRight from './RotateHubRight'
 import ChangeLineType from './ChangeLineType'
 import OptionUploader from './OptionUploader'
+import EditMapMenu from './EditMapMenu'
+import LogOut from './LogOut'
+import DropdownToggle from './DropdownToggle'
+import LineTypesMenu from './LineTypes'
 
 export {
   MapMenu,
@@ -25,5 +29,9 @@ export {
   RotateHubLeft,
   RotateHubRight,
   ChangeLineType,
-  OptionUploader
+  OptionUploader,
+  EditMapMenu,
+  LogOut,
+  DropdownToggle,
+  LineTypesMenu
 }
