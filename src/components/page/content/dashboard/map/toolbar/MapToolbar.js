@@ -183,7 +183,14 @@ export default class Toolbar extends React.Component {
         <NewIncidentLabel />
         <ToolbarOptions
           onMaximize={this.onClickMaximize().bind(this)}
+          onColorPick={this.onClickColorPicker().bind(this)}
+          onPickerClose={this.onCloseColorPicker().bind(this)}
+          onPickerChange={this.onChangeColorPicker().bind(this)}
+          obj={obj}
+          line={line}
+          lineGroup={lineGroup}
           zooming={zooming}
+          isPickerDisplayed={this.state.displayColorPicker}
           {...this.props}
         />
         <ToolbarToggle onToggle={this.onClickToggleMapHeader().bind(this)}/>

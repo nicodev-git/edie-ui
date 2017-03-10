@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { ZoomOptions, DeleteObject } from './index'
 
 class ToolbarOptions extends Component {
   render () {
@@ -8,90 +9,26 @@ class ToolbarOptions extends Component {
           <ZoomOptions
             onMaximize={this.props.onMaximize}
             maximized={this.props.maximized}
+            zooming={this.props.zooming}
             onZoomRect={this.props.onClickZoomRect}
             onZoomIn={this.props.onClickZoomIn}
             onZoomOut={this.props.onClickZoomOut}
             onZoomReset={this.props.onClickZoomReset}
+          />
+          <DeleteObject obj={this.props.obj}
+          <ColorPicker
+            line={this.props.line}
+            lineGroup={this.props.lineGroup}
+            isPickerDisplayed={this.props.isPickerDisplayed}
+            onColorPick={this.props.onColorPick}
+            onPickerChange={this.props.onPickerChange}
+            onPickerClose={this.props.onPickerClose}
           />
         </ul>
       </div>
     )
   }
 }
-
-= ({ onMaximize, maximized, zooming, onZoomRect, onZoomIn, onZoomOut,
-  onZoomReset, onDelete}) => (
-  <div className="panel-options main-map-options" style={{top: '15px'}}>
-    <ul className="nav nav-tabs" style={{background: 'transparent'}}>
-      <li className="dropdown margin-sm-left">
-        <a
-          href="javascript:;"
-          className="option maximize p-none"
-          onClick={onMaximize}
-          style={{display: maximized ? 'none' : 'block'}}
-        >
-          <i className="fa fa fa-arrows-alt" title="Maximize" />
-          <b className="caret" style={{position: 'absolute', left: '48%', top: '23px'}} />
-        </a>
-        <a
-          href="javascript:;"
-          className="option restore p-none"
-          style={{display: maximized ? 'block' : 'none'}}
-          onClick={onMaximize}
-        >
-          <i className="fa fa fa-compress" title="Restore" />
-          <b className="caret" style={{position: 'absolute', left: '48%', top: '23px'}} />
-        </a>
-        <ul className="dropdown-menu drop-right">
-          <li>
-            <a
-              href="javascript:;"
-              className={`option ${zooming ? 'option-active' : ''}`}
-              onClick={onZoomRect}
-            >
-              <i className="fa fa-search margin-md-right" />Zoom Rect
-            </a>
-          </li>
-          <li>
-            <a
-              href="javascript:;"
-              className="option"
-              onClick={onZoomIn}
-            >
-              <i className="fa fa-search-plus margin-md-right" />Zoom In
-            </a>
-          </li>
-          <li>
-            <a
-              href="javascript:;"
-              className="option"
-              onClick={onZoomOut}
-            >
-              <i className="fa fa-search-minus margin-md-right" />Zoom Out
-            </a>
-          </li>
-          <li>
-            <a
-              href="javascript:;"
-              className="option"
-              onClick={onZoomReset}
-            >
-              <i className="fa fa fa-square-o margin-md-right" />Reset
-            </a>
-          </li>
-        </ul>
-      </li>
-
-      <li>
-        <a
-          href="javascript:"
-          className="option trash p-none"
-          style={{display: obj ? 'block' : 'none'}}
-          onClick={onDelete}
-        >
-          <i className="fa fa-trash-o" title="Delete" />
-        </a>
-      </li>
       <li>
         <div
           className="input-group colorpicker-element"
