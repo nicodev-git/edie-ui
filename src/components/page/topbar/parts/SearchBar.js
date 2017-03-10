@@ -1,22 +1,20 @@
 import React from 'react'
-import Chip from 'material-ui/Chip'
 import SearchIcon from 'material-ui/svg-icons/action/search'
 
 const searchStyle = {
-  width: 250,
-  borderRadius: 10,
-  alignItems: 'center'
+  backgroundColor: '#d1d1d1'
 }
 
 const iconStyle = {
-  lineHeight: 50
+  lineHeight: 50,
+  verticalAlign: 'middle'
 }
 
 const SearchBar = ({onSearch, color}) => (
   <div className="searchbar-container">
-    <Chip style={searchStyle}>
+    <div className="searchbar" style={searchStyle}>
       <SearchIcon color={color} style={iconStyle}/>
-    </Chip>
+    </div>
   </div>
 )
 
