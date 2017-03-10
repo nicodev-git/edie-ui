@@ -5,14 +5,30 @@ export default class SearchBarContainer extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      color: '#ffffff'
+      active: false
     }
   }
 
+  onBackgroundChange () {
+    let active = this.state.active
+    this.setState({
+      active: !active
+    })
+  }
+
+  onEnter (e) {
+    console.log('pressed')
+    console.log(e.currentTarget)
+  }
+
   render () {
-    const { onSearch } = this.props
     return (
-      <SearchBar onSearch={onSearch} color={this.state.color} />
+      <SearchBar
+        onSearch={this.onEnter.bind(this)}
+        color={this.state.color}
+        active={this.state.active}
+        onBackgroundChange={this.onBackgroundChange.bind(this)}
+      />
     )
   }
 }

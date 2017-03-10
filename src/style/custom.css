@@ -406,3 +406,9 @@ table.table tbody tr.selected {
     justify-content: flex-start;
     align-items: center
 }
+
+.searchbar-input {
+    width: 80%;
+    border: 0;
+    outline-width: 0;
+}

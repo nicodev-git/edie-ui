@@ -1,8 +1,12 @@
 import React from 'react'
 import SearchIcon from 'material-ui/svg-icons/action/search'
 
-const searchStyle = {
+const defaultStyle = {
   backgroundColor: '#d1d1d1'
+}
+
+const activeStyle = {
+  backgroundColor: '#eaeaea'
 }
 
 const iconStyle = {
@@ -10,28 +14,16 @@ const iconStyle = {
   verticalAlign: 'middle'
 }
 
-const SearchBar = ({onSearch, color}) => (
-  <div className="searchbar-container">
-    <div className="searchbar" style={searchStyle}>
-      <SearchIcon color={color} style={iconStyle}/>
+const SearchBar = ({onSearch, active, onBackgroundChange}) => (
+  <div className="searchbar-container"
+    onFocus={onBackgroundChange}
+    onBlur={onBackgroundChange}>
+    <div className="searchbar" style={active ? activeStyle : defaultStyle}>
+      <SearchIcon color={active ? '#000000' : '#ffffff'} style={iconStyle}/>
+      <input className="searchbar-input" style={active ? activeStyle : defaultStyle}
+        onKeyPress={onSearch}/>
     </div>
   </div>
 )
 
 export default SearchBar
-
-/* const SearchBar = ({onSearch}) => (
-  <ul className="nav navbar-nav navbar-nav-expanded pull-left">
-    <li className="hidden-xs" style={{ marginTop: '4px' }}>
-      <div className="navbar-form">
-        <div className="navbar-search">
-          <a onClick={onSearch}>
-            <i className="fa fa-search" />
-          </a>
-        </div>
-      </div>
-    </li>
-  </ul>
-)
-
-export default SearchBar */
