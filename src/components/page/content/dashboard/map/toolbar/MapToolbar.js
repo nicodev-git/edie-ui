@@ -178,7 +178,21 @@ export default class Toolbar extends React.Component {
     }
 
     return (
-      <ToolbarComponent />
+      <ToolbarComponent
+        headerCollapsed={this.state.headerCollapsed}
+        newIncidentModal={this.renderNewIncidentModal().bind(this)}
+        mapExportModal={this.renderMapExportModal().bind(this)}
+        mapImportModal={this.renderMapImportModal().bind(this)}
+        selectedMap={this.props.selectedMap}
+        mapImportModalVisible={this.props.mapImportModalVisible}
+        addMap={this.props.addMap}
+        deleteMap={this.props.deleteMap}
+        updateMap={this.props.updateMap}
+        openMapImportModal={this.props.openMapImportModal}
+        onNewIncident={this.onClickNewIncident().bind(this)}
+        onMaximize={this.onClickMaximize().bind(this)}
+        maximized={this.props.maximized}
+      />
     )
   }
 }

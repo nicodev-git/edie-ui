@@ -1,11 +1,22 @@
 import React from 'react'
+import MapMenu from './MapMenu'
 
 const ToolbarComponent = ({selectedMap, mapImportModalVisible, addMap, deleteMap,
-  openMapImportModal, updateMap, mapImportModal, mapExportModal}) => (
-  <div className={`panel-heading text-center map-heading ${this.state.headerCollapsed ? 'collapsed' : ''}`}>
-    <MapMenu {...this.props}/>
+  openMapImportModal, updateMap, mapImportModal, mapExportModal, headerCollapsed,
+  onNewIncident, onMaximize, maximized}) => (
+  <div className={`panel-heading text-center map-heading ${headerCollapsed ? 'collapsed' : ''}`}>
+    <MapMenu
+      mapExportModal={mapExportModal}
+      mapImportModal={mapImportModal}
+      selectedMap={selectedMap}
+      mapImportModalVisible={mapImportModalVisible}
+      addMap={addMap}
+      deleteMap={deleteMap}
+      updateMap={updateMap}
+      openMapImportModal={MaopenMapImportModal}
+    />
 
-    <a href="javascript:;" className="btn-new-incident" onClick={this.onClickNewIncident.bind(this)}>
+    <a href="javascript:;" className="btn-new-incident" onClick={onNewIncident}>
       <i className="fa fa-book" title="New Incident" />
     </a>
 
@@ -16,8 +27,8 @@ const ToolbarComponent = ({selectedMap, mapImportModalVisible, addMap, deleteMap
           <a
             href="javascript:;"
             className="option maximize p-none"
-            onClick={this.onClickMaximize.bind(this)}
-            style={{display: this.props.maximized ? 'none' : 'block'}}
+            onClick={onMaximize}
+            style={{display: maximized ? 'none' : 'block'}}
           >
             <i className="fa fa fa-arrows-alt" title="Maximize" />
             <b className="caret" style={{position: 'absolute', left: '48%', top: '23px'}} />
