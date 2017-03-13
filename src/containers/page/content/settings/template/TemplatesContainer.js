@@ -22,11 +22,14 @@ import {
 
   closeTplImageModal,
   fetchImages,
-  uploadImage
+  uploadImage,
+
+  fetchDeviceCategories
 } from '../../../../../actions'
 
 @connect(
   state => ({
+    deviceCategories: state.settings.deviceCategories,
     monitorTemplates: state.settings.monitorTemplates,
     deviceTemplates: state.settings.deviceTemplates,
     deviceTplModalVisible: state.settings.deviceTplModalVisible,
@@ -60,7 +63,8 @@ import {
 
       closeTplImageModal,
       fetchImages,
-      uploadImage
+      uploadImage,
+      fetchDeviceCategories
     }, dispatch)
   })
 )

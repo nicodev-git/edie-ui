@@ -29,6 +29,8 @@ import {
   OPEN_SIMULATION_MODAL,
   CLOSE_SIMULATION_MODAL,
 
+  FETCH_DEVICE_CATEGORIES,
+
   NO_AUTH_ERROR
 } from './types'
 
@@ -355,5 +357,16 @@ export const closeParserPatternModal = () => {
     dispatch({
       type: CLOSE_PARSER_PATTERN_MODAL
     })
+  }
+}
+
+export const fetchDeviceCategories = () => {
+  if (!window.localStorage.getItem('token')) {
+    return dispatch => dispatch({ type: NO_AUTH_ERROR })
+  }
+  return (dispatch) => {
+    axios.get(`${ROOT_URL}/devicecategory`).then(response => {
+      dispatch({type: FETCH_DEVICE_CATEGORIES, data: response.data._embedded.deviceCategories})
+    }).catch(error => apiError(dispatch, error))
   }
 }

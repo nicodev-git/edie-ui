@@ -78,6 +78,7 @@ const initialState = {
     identities: [],
     credentials: [],
 
+    deviceCategories: [],
     deviceTemplates: [],
     monitorTemplates: [],
     tplImageModalVisible: false,

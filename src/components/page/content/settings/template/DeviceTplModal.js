@@ -148,10 +148,9 @@ class DeviceTplModal extends React.Component { // eslint-disable-line react/no-m
               <label className="col-md-3 margin-sm-top">Group:</label>
               <div className="col-md-9">
                 <Field name="devicetemplategroup" component="select" className="form-control">
-                  <option>GROUPS</option>
-                  <option>DEVICES</option>
-                  <option>BI</option>
-                  <option>SHAPES</option>
+                  {this.props.deviceCategories.map(m =>
+                    <option key={m.name}>{m.name}</option>
+                  )}
                 </Field>
               </div>
             </fieldset>

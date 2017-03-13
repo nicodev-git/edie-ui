@@ -71,7 +71,9 @@ import {
     OPEN_PARSER_PATTERN_MODAL,
     CLOSE_PARSER_PATTERN_MODAL,
     OPEN_SIMULATION_MODAL,
-    CLOSE_SIMULATION_MODAL
+    CLOSE_SIMULATION_MODAL,
+
+    FETCH_DEVICE_CATEGORIES
 
 } from '../actions/types'
 
@@ -335,6 +337,9 @@ export default function (state = {}, action) {
 
     case CLOSE_SIMULATION_MODAL:
       return { ...state, simulationModalOpen: false }
+
+    case FETCH_DEVICE_CATEGORIES:
+      return { ...state, deviceCategories: action.data }
   }
   return state
 }
