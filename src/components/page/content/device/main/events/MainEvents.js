@@ -62,11 +62,6 @@ export default class MainEvents extends Component {
       'columnName': 'rawdata',
       'customComponent': this.highlightRender.bind(this)
     }, {
-      'displayName': 'Description',
-      'columnName': 'description',
-      'cssClassName': 'width-100',
-      'customComponent': this.highlightRender.bind(this)
-    }, {
       'displayName': 'Params',
       'columnName': 'params',
       'cssClassName': 'width-100',
