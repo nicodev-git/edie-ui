@@ -17,6 +17,7 @@ import DropdownToggle from './DropdownToggle'
 import LineTypesMenu from './LineTypesMenu'
 import ZoomOptions from './ZoomOptions'
 import DeviceMenuContainer from './DeviceMenuContainer'
+import MapSelectView from './MapSelectView'
 
 export {
   MapMenu,
@@ -37,5 +38,6 @@ export {
   DropdownToggle,
   LineTypesMenu,
   ZoomOptions,
-  DeviceMenuContainer
+  DeviceMenuContainer,
+  MapSelectView
 }
