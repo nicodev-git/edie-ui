@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { MapMenu, ToolbarOptions, ToolbarToggle, LineTypesMenu } from './index'
+import { MapMenu, ToolbarOptions, LineTypesMenu } from './index'
 import NewIncidentModal from '../NewIncidentModal'
 import { lineTypes } from '../../../../../../shared/Global'
 
@@ -95,7 +95,8 @@ export default class Toolbar extends Component {
   }
 
   onClickToggleMapHeader () {
-    this.setState({ headerCollapsed: !this.state.headerCollapsed })
+    // TODO
+    // this.setState({ headerCollapsed: !this.state.headerCollapsed })
   }
 
   onClickMapEdit () {
@@ -167,6 +168,7 @@ export default class Toolbar extends Component {
           onMapEdit={this.onClickMapEdit.bind(this)}
           onEditMapUndo={this.onClickEditMapUndo.bind(this)}
           onDeviceMenu={this.onClickDeviceMenu.bind(this)}
+          onToggle={this.onClickToggleMapHeader.bind(this)}
           obj={obj}
           line={line}
           lineGroup={lineGroup}
@@ -180,7 +182,6 @@ export default class Toolbar extends Component {
           isDevicesDisplayed={this.state.displayDevices}
           {...this.props}
         />
-        <ToolbarToggle onToggle={this.onClickToggleMapHeader.bind(this)}/>
         {this.renderNewIncidentModal()}
       </div>
     )

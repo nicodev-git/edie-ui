@@ -1,6 +1,39 @@
 import React from 'react'
+import IconButton from 'material-ui/IconButton'
+import IconMenu from 'material-ui/IconMenu'
+import MenuItem from 'material-ui/MenuItem'
+import ZoomInIcon from 'material-ui/svg-icons/action/zoom-in'
 
-const ZoomOptions = ({maximized, zooming, onMaximize, onZoomIn, onZoomOut,
+const buttonStyle = {
+  padding: '4px',
+  width: 50,
+  height: 50
+}
+
+const iconStyle = {
+  width: 30,
+  height: 30
+}
+
+const ZoomOptions = ({onZoomIn, onZoomOut, onZoomRect, onZoomReset}) => (
+    <li>
+      <IconMenu
+        iconButtonElement={
+          <IconButton style={buttonStyle} iconStyle={iconStyle}>
+              <ZoomInIcon color="#545454"/>
+          </IconButton>
+        }
+        anchorOrigin={{horizontal: 'left', vertical: 'top'}}
+        targetOrigin={{horizontal: 'left', vertical: 'top'}}
+      >
+        <MenuItem onTouchTap={onZoomIn}>Zoom in</MenuItem>
+        <MenuItem onTouchTap={onZoomOut}>Zoom Out</MenuItem>
+        <MenuItem onTouchTap={onZoomRect}>Zoom Rect</MenuItem>
+        <MenuItem onTouchTap={onZoomReset}>Reset</MenuItem>
+      </IconMenu>
+    </li>
+)
+/* const ZoomOptions = ({maximized, zooming, onMaximize, onZoomIn, onZoomOut,
   onZoomRect, onZoomReset}) => (
   <li className="dropdown margin-sm-left">
     <a
@@ -60,6 +93,6 @@ const ZoomOptions = ({maximized, zooming, onMaximize, onZoomIn, onZoomOut,
       </li>
     </ul>
   </li>
-)
+) */
 
 export default ZoomOptions

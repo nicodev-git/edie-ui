@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { ZoomOptions, DeleteObject, ColorPicker, LineWidthInc, LineWidthDec,
   TextChange, RotateHubLeft, RotateHubRight, ChangeLineType, OptionUploader,
-  EditMapMenu, LogOut, DropdownToggle, DeviceMenuContainer, NewIncidentLabel} from './index'
+  EditMapMenu, LogOut, DropdownToggle, DeviceMenuContainer, NewIncidentLabel,
+  ToolbarToggle} from './index'
 
 class ToolbarOptions extends Component {
   render () {
@@ -14,9 +15,6 @@ class ToolbarOptions extends Component {
             onUndo={this.props.onEditMapUndo}/>
           <DeviceMenuContainer {...this.props}/>
           <ZoomOptions
-            onMaximize={this.props.onMaximize}
-            maximized={this.props.maximized}
-            zooming={this.props.zooming}
             onZoomRect={this.props.onClickZoomRect}
             onZoomIn={this.props.onClickZoomIn}
             onZoomOut={this.props.onClickZoomOut}
@@ -81,6 +79,7 @@ class ToolbarOptions extends Component {
           <OptionUploader />
           <LogOut />
           <DropdownToggle />
+          <ToolbarToggle onToggle={this.props.onToggle}/>
         </ul>
       </div>
     )
