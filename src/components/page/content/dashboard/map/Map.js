@@ -122,6 +122,7 @@ class Map extends React.Component {
   }
 
   componentDidMount () {
+    console.log('map did mount')
     if (fullScreen.supportsFullScreen) {
       document.body.addEventListener(fullScreen.fullScreenEventName, this.onFullScreenChange, true)
     }
