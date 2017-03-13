@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { ZoomOptions, DeleteObject, ColorPicker, LineWidthInc, LineWidthDec,
   TextChange, RotateHubLeft, RotateHubRight, ChangeLineType, OptionUploader,
-  EditMapMenu, LogOut, DropdownToggle} from './index'
+  EditMapMenu, LogOut, DropdownToggle, DeviceMenuContainer} from './index'
 
 class ToolbarOptions extends Component {
   render () {
@@ -74,9 +74,8 @@ class ToolbarOptions extends Component {
             onChange={this.props.toggleLineTypes}
           />
           <OptionUploader />
-          <EditMapMenu
-            onMapEdit={this.props.onMapEdit}
-            {...this.props}/>
+          <EditMapMenu {...this.props}/>
+          <DeviceMenuContainer {...this.props}/>
           <LogOut />
           <DropdownToggle />
         </ul>

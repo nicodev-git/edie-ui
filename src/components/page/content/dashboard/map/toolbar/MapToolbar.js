@@ -105,6 +105,10 @@ export default class Toolbar extends Component {
     })
   }
 
+  onClickDeviceMenu () {
+
+  }
+
   renderBody () {
 
   }
@@ -166,6 +170,7 @@ export default class Toolbar extends Component {
           onPickerChange={this.onChangeColorPicker.bind(this)}
           toggleLineTypes={this.toggleLineTypes.bind(this)}
           onMapEdit={this.onClickMapEdit.bind(this)}
+          onDeviceMenu={this.onClickDeviceMenu.bind(this)}
           obj={obj}
           line={line}
           lineGroup={lineGroup}

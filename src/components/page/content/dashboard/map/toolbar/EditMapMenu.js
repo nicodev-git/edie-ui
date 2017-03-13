@@ -1,26 +1,24 @@
 import React, { Component } from 'react'
-import DeviceMenu from '../DeviceMenu'
 import EditMapHeader from './EditMapHeader'
 import EditMapItems from './EditMapItems'
 
 class EditMapMenu extends Component {
+  onClick () {
+    console.log('edit menu clicked')
+  }
+
   render () {
     let isDevicesDisplayed = this.props.isDevicesDisplayed
     return (
-      <li className={isDevicesDisplayed ? '' : 'dropdown'} ref="liDevices">
+      <li className={isDevicesDisplayed ? '' : 'dropdown'}>
         <EditMapHeader
           isDevicesDisplayed={isDevicesDisplayed}
-          onClick={this.props.onAdd}
+          onClick={this.onClick.bind(this)}
         />
         <EditMapItems
           onClick={this.props.onMapEdit}
           editable={this.props.editable}
         />
-        { this.props.isDevicesDisplayed
-          ? <DeviceMenu {...this.props}
-            onClickItem={this.props.onClickDeviceItem}
-            selectedItem={this.props.selectedItem}/>
-          : null }
       </li>
     )
   }
