@@ -1,7 +1,5 @@
 import React from 'react'
 import { ChromePicker } from 'react-color'
-import { showAlert } from '../../../../../shared/Alert'
-import { ROOT_URL } from '../../../../../../actions/config'
 
 export default class Websocket extends React.Component {
   constructor (props) {
@@ -13,73 +11,73 @@ export default class Websocket extends React.Component {
   }
 
   onClickAddIncident () {
-    const refs = this.refs
-
-    $.get(`${ROOT_URL}${Api.test.addIncident}`, { // eslint-disable-line no-undef
-      name: refs.incidentName.value,
-      description: refs.incidentDesc.value,
-      severity: refs.incidentSeverity.value
-    }).done((res) => {
-      showAlert(res.success ? 'Added successfully!' : 'Add failed!')
-    })
+    // const refs = this.refs
+    //
+    // $.get(`${ROOT_URL}${Api.test.addIncident}`, { // eslint-disable-line no-undef
+    //   name: refs.incidentName.value,
+    //   description: refs.incidentDesc.value,
+    //   severity: refs.incidentSeverity.value
+    // }).done((res) => {
+    //   showAlert(res.success ? 'Added successfully!' : 'Add failed!')
+    // })
   }
 
   onClickUpdateOpenIncident () {
-    $.get(`${ROOT_URL}${Api.test.changeOpenIncidentCount}`, { // eslint-disable-line no-undef
-      count: this.refs.openIncident.value || 0
-    }).done((res) => {
-      showAlert(res.success ? 'Notified!' : 'Failed!')
-    })
+    // $.get(`${ROOT_URL}${Api.test.changeOpenIncidentCount}`, { // eslint-disable-line no-undef
+    //   count: this.refs.openIncident.value || 0
+    // }).done((res) => {
+    //   showAlert(res.success ? 'Notified!' : 'Failed!')
+    // })
   }
 
   onClickUpdateTodayIncident () {
-    $.get(`${ROOT_URL}${Api.test.changeTodayIncidentCount}`, { // eslint-disable-line no-undef
-      count: this.refs.todayIncident.value || 0
-    }).done((res) => {
-      showAlert(res.success ? 'Notified!' : 'Failed!')
-    })
+    // $.get(`${ROOT_URL}${Api.test.changeTodayIncidentCount}`, { // eslint-disable-line no-undef
+    //   count: this.refs.todayIncident.value || 0
+    // }).done((res) => {
+    //   showAlert(res.success ? 'Notified!' : 'Failed!')
+    // })
   }
 
   onClickUpdateAttackerToday () {
-    $.get(`${ROOT_URL}${Api.test.changeAttackerTodayCount}`, { // eslint-disable-line no-undef
-      count: this.refs.attackerToday.value || 0
-    }).done((res) => {
-      showAlert(res.success ? 'Notified!' : 'Failed!')
-    })
+    // $.get(`${ROOT_URL}${Api.test.changeAttackerTodayCount}`, { // eslint-disable-line no-undef
+    //   count: this.refs.attackerToday.value || 0
+    // }).done((res) => {
+    //   showAlert(res.success ? 'Notified!' : 'Failed!')
+    // })
   }
 
   onClickUpdateMonthIncident () {
-    $.get(`${ROOT_URL}${Api.test.changeMonthIncidentCount}`, { // eslint-disable-line no-undef
-      count: this.refs.monthIncident.value || 0
-    }).done((res) => {
-      showAlert(res.success ? 'Notified!' : 'Failed!')
-    })
+    // $.get(`${ROOT_URL}${Api.test.changeMonthIncidentCount}`, { // eslint-disable-line no-undef
+    //   count: this.refs.monthIncident.value || 0
+    // }).done((res) => {
+    //   showAlert(res.success ? 'Notified!' : 'Failed!')
+    // })
   }
 
   onClickPushNews () {
-    $.get(`${ROOT_URL}${Api.test.pushNews}`, { // eslint-disable-line no-undef
-      news: this.refs.news.value
-    }).done(function (res) {
-      showAlert(res.success ? 'Notified!' : 'Failed!')
-    })
+    // $.get(`${ROOT_URL}${Api.test.pushNews}`, { // eslint-disable-line no-undef
+    //   news: this.refs.news.value
+    // }).done(function (res) {
+    //   showAlert(res.success ? 'Notified!' : 'Failed!')
+    // })
   }
 
   onClickUpdateDeviceStatus () {
-    $.get(`${ROOT_URL}${Api.test.changeDeviceStatus}`, { // eslint-disable-line no-undef
-      deviceId: this.refs.deviceId.value || 0,
-      status: this.refs.deviceStatus.value
-    }).done(function (res) {
-      showAlert(res.success ? 'Notified!' : 'Failed!')
-    })
+    // $.get(`${ROOT_URL}${Api.test.changeDeviceStatus}`, { // eslint-disable-line no-undef
+    //   deviceId: this.refs.deviceId.value || 0,
+    //   status: this.refs.deviceStatus.value
+    // }).done(function (res) {
+    //   showAlert(res.success ? 'Notified!' : 'Failed!')
+    // })
   }
 
   onClickUpdateColor () {
-    $.get(`${ROOT_URL}${Api.test.changeConnectorColor}`, { // eslint-disable-line no-undef
-      connectorId: this.refs.connectorId.value || 0,
-      color: this.state.lineColor
-    }).done(function (res) {
-      showAlert(res.success ? 'Notified!' : 'Failed!')
-    })
+    // $.get(`${ROOT_URL}${Api.test.changeConnectorColor}`, { // eslint-disable-line no-undef
+    //   connectorId: this.refs.connectorId.value || 0,
+    //   color: this.state.lineColor
+    // }).done(function (res) {
+    //   showAlert(res.success ? 'Notified!' : 'Failed!')
+    // })
   }
 
   onClickColorPicker () {

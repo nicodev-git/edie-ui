@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { ROOT_URL } from '../../../../../actions/config'
 
 export default class MainSettings extends Component {
   constructor (props) {
@@ -10,19 +9,19 @@ export default class MainSettings extends Component {
   }
 
   componentWillMount () {
-    $.get(`${ROOT_URL}${Api.admin.getOptions}`, {}).done((res) => { // eslint-disable-line no-undef
-      let state = {}
-
-      res.data.forEach(item => {
-        switch (item.name) {
-          case 'enable_translate_from_heb7':
-            state.translate = item.value === 'true'
-            break
-        }
-      })
-
-      this.setState(state)
-    })
+    // $.get(`${ROOT_URL}${Api.admin.getOptions}`, {}).done((res) => { // eslint-disable-line no-undef
+    //   let state = {}
+    //
+    //   res.data.forEach(item => {
+    //     switch (item.name) {
+    //       case 'enable_translate_from_heb7':
+    //         state.translate = item.value === 'true'
+    //         break
+    //     }
+    //   })
+    //
+    //   this.setState(state)
+    // })
   }
 
   onChangeTranslate (e) {
@@ -33,10 +32,10 @@ export default class MainSettings extends Component {
   }
 
   updateOption (name, value, param) {
-    if (!name) return false
-    value = value || ''
-    param = param || ''
-    return $.get(`${ROOT_URL}${Api.admin.updateOptions}`, {name, value, param}) // eslint-disable-line no-undef
+    // if (!name) return false
+    // value = value || ''
+    // param = param || ''
+    // return $.get(`${ROOT_URL}${Api.admin.updateOptions}`, {name, value, param}) // eslint-disable-line no-undef
   }
 
   render () {
