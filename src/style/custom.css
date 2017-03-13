@@ -417,3 +417,7 @@ table.table tbody tr.selected {
   background-color: #333333 !important;
   border: 0px !important;
 }
+
+.toolbar-options {
+  right: 5px !important;
+}

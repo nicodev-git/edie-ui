@@ -1,6 +1,6 @@
 import React from 'react'
 import IconButton from 'material-ui/IconButton'
-import FullscreenIcon from 'material-ui/svg-icons/navigation/fullscreen'
+import CropFreeIcon from 'material-ui/svg-icons/image/crop-free'
 
 const buttonStyle = {
   padding: '4px',
@@ -19,7 +19,7 @@ const ToolbarToggle = ({onToggle}) => (
       style={buttonStyle}
       iconStyle={iconStyle}
       onTouchTap={onToggle}>
-        <FullscreenIcon color="#545454"/>
+        <CropFreeIcon color="#545454"/>
     </IconButton>
   </li>
 )

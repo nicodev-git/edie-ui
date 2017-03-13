@@ -7,7 +7,7 @@ import { ZoomOptions, DeleteObject, ColorPicker, LineWidthInc, LineWidthDec,
 class ToolbarOptions extends Component {
   render () {
     return (
-      <div className="panel-options main-map-options" style={{top: '0px'}}>
+      <div className="panel-options main-map-options toolbar-options" style={{top: '0px'}}>
         <ul className="nav nav-tabs" style={{background: 'transparent'}}>
           <NewIncidentLabel onNewIncident={this.props.onNewIncident}/>
           <EditMapMenu
