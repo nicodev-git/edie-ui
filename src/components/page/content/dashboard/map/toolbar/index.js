@@ -16,6 +16,7 @@ import LogOut from './LogOut'
 import DropdownToggle from './DropdownToggle'
 import LineTypesMenu from './LineTypesMenu'
 import ZoomOptions from './ZoomOptions'
+import DeviceMenuContainer from './DeviceMenuContainer'
 
 export {
   MapMenu,
@@ -35,5 +36,6 @@ export {
   LogOut,
   DropdownToggle,
   LineTypesMenu,
-  ZoomOptions
+  ZoomOptions,
+  DeviceMenuContainer
 }
