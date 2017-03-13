@@ -73,6 +73,10 @@ export default class Incidents extends React.Component {
         )
       }
     }, {
+      'displayName': 'Device',
+      'columnName': 'devicename',
+      'cssClassName': 'nowrap text-center width-140'
+    }, {
       'displayName': 'Description',
       'columnName': 'description',
       'customComponent': (props) => {
