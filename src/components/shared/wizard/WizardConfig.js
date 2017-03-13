@@ -4482,6 +4482,15 @@ export const wizardEditConfig = {
         width: MAX_WIDTH,
         name: 'lanip'
       }, {
+        type: 'text',
+        label: {
+          text: 'Info',
+          type: 'attach',
+          width: 3
+        },
+        width: MAX_WIDTH,
+        name: 'info'
+      }, {
         type: 'uploader',
         label: {
           text: 'Image',

@@ -30,7 +30,7 @@ DeviceEditWizard.defaultProps = {
     include: ['credentialid']
   }, {
     title: 'Info',
-    include: ['notes']
+    include: ['info']
   }, {
     title: 'Advanced',
     id: 'tab-devinfo-advanced',
