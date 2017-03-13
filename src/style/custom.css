@@ -415,4 +415,5 @@ table.table tbody tr.selected {
 
 .map-toolbar {
   background-color: #333333 !important;
+  border: 0px !important;
 }

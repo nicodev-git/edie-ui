@@ -833,14 +833,14 @@ class MapCanvas extends React.Component {
       connectDropTarget
     } = this.props
 
-    const style = {backgroundColor: '#23272D', height: '100%', position: 'relative'}
+    const style = {backgroundColor: '#333333', height: '100%', position: 'relative'}
     return connectDropTarget( // eslint-disable-line no-undef
       <div style={style}
         onMouseMove={this.onMouseMove.bind(this)}
         onClick={this.onClickContainer.bind(this)}
         ref={this.onContainerRef.bind(this)}>
         <div id={this.state.containerId}
-          style={{backgroundColor: '#23272D', height: '100%', position: 'relative'}}>
+          style={{backgroundColor: '#333333', height: '100%', position: 'relative'}}>
 
           <canvas id={this.state.canvasId} />
         </div>
