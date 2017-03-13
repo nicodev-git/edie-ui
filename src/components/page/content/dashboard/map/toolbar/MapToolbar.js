@@ -48,6 +48,7 @@ export default class Toolbar extends Component {
     // ///////////////////////////////////////
 
   onClickAdd () {
+    console.log('on click add')
     this.setState({
       displayDevices: !this.state.displayDevices
     }, () => {
@@ -97,6 +98,13 @@ export default class Toolbar extends Component {
     this.setState({ headerCollapsed: !this.state.headerCollapsed })
   }
 
+  onClickMapEdit () {
+    console.log('edit map')
+    this.setState({ displayDevices: false }, () => {
+      this.props.onClickAdd(this.state.displayDevices)
+    })
+  }
+
   renderBody () {
 
   }
@@ -104,7 +112,6 @@ export default class Toolbar extends Component {
   handleClick (e) {
         // Detect device menu outer click
     console.log('handle click')
-    console.log(this.refs)
     if (this.state.displayDevices) {
       if (!this.refs.liDevices.contains(e.target)) {
         this.setState({ displayDevices: false }, () => {
@@ -158,7 +165,7 @@ export default class Toolbar extends Component {
           onPickerClose={this.onCloseColorPicker.bind(this)}
           onPickerChange={this.onChangeColorPicker.bind(this)}
           toggleLineTypes={this.toggleLineTypes.bind(this)}
-          onAdd={this.onClickAdd.bind(this)}
+          onMapEdit={this.onClickMapEdit.bind(this)}
           obj={obj}
           line={line}
           lineGroup={lineGroup}

@@ -13,7 +13,7 @@ class EditMapMenu extends Component {
           onClick={this.props.onAdd}
         />
         <EditMapItems
-          onClick={this.props.onEdit}
+          onClick={this.props.onMapEdit}
           editable={this.props.editable}
         />
         { this.props.isDevicesDisplayed

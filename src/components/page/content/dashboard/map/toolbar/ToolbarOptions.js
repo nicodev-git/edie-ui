@@ -74,7 +74,9 @@ class ToolbarOptions extends Component {
             onChange={this.props.toggleLineTypes}
           />
           <OptionUploader />
-          <EditMapMenu {...this.props}/>
+          <EditMapMenu
+            onMapEdit={this.props.onMapEdit}
+            {...this.props}/>
           <LogOut />
           <DropdownToggle />
         </ul>
