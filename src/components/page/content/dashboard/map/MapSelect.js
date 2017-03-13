@@ -29,8 +29,10 @@ export default class MapSelect extends Component {
 
   }
 
-  onChange (e) {
-    let selectedMap = this.props.maps.filter(u => u.id === e.target.value)[0]
+  onChange (event, child) {
+    console.log(event)
+    console.log(child.props)
+    let selectedMap = this.props.maps.filter(u => u.id === child.props.value)[0]
     this.props.changeMap(selectedMap)
   }
 

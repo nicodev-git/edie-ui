@@ -412,3 +412,7 @@ table.table tbody tr.selected {
     border: 0;
     outline-width: 0;
 }
+
+.map-toolbar {
+  background-color: #333333 !important;
+}

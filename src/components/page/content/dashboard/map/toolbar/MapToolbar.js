@@ -150,7 +150,8 @@ export default class Toolbar extends Component {
     const lineTypes = this.renderLineTypes(popover, cover)
 
     return (
-      <div className={`panel-heading text-center map-heading ${this.state.headerCollapsed ? 'collapsed' : ''}`}>
+      <div className={`panel-heading map-toolbar text-center map-heading
+        ${this.state.headerCollapsed ? 'collapsed' : ''}`}>
         <MapMenu {...this.props}/>
         <NewIncidentLabel onNewIncident={this.onClickNewIncident.bind(this)}/>
         <ToolbarOptions

@@ -19,7 +19,7 @@ const MapSelectView = ({ onChange, maps }) => (
   <IconMenu
     iconButtonElement={
       <IconButton style={buttonStyle} iconStyle={iconStyle}>
-          <ChromeReaderModeIcon color="#777777"/>
+          <ChromeReaderModeIcon color="#545454"/>
       </IconButton>
     }
     anchorOrigin={{horizontal: 'left', vertical: 'top'}}

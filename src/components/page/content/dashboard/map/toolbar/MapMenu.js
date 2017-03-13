@@ -77,7 +77,7 @@ export default class MapMenu extends Component {
 
   render () {
     return (
-      <div style={{position: 'absolute', left: '7px', top: '15px'}}>
+      <div style={{position: 'absolute', left: '0px', top: '0px'}}>
         <MapSelect {...this.props} ref="select"/>
         <MapMenuList
           onAdd={this.onClickAdd}
