@@ -103,6 +103,7 @@ export default class Toolbar extends Component {
 
   handleClick (e) {
         // Detect device menu outer click
+    console.log('handle click')
     if (this.state.displayDevices) {
       if (!this.refs.liDevices.contains(e.target)) {
         this.setState({ displayDevices: false }, () => {
@@ -156,8 +157,7 @@ export default class Toolbar extends Component {
           onPickerClose={this.onCloseColorPicker.bind(this)}
           onPickerChange={this.onChangeColorPicker.bind(this)}
           toggleLineTypes={this.toggleLineTypes.bind(this)}
-          onAdd={this.onClickAdd}
-          onEdit={this.onClickEdit.bind(this)}
+          onAdd={this.onClickAdd.bind(this)}
           obj={obj}
           line={line}
           lineGroup={lineGroup}

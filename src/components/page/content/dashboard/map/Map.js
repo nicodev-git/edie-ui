@@ -412,6 +412,7 @@ class Map extends React.Component {
   }
 
   onClickEdit () {
+    console.log('edit button clicked')
     let cmap = this.getCanvasMap()
     cmap.zooming && cmap.setZooming(false)
 

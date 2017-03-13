@@ -15,6 +15,7 @@ import EditMapMenu from './EditMapMenu'
 import LogOut from './LogOut'
 import DropdownToggle from './DropdownToggle'
 import LineTypesMenu from './LineTypesMenu'
+import ZoomOptions from './ZoomOptions'
 
 export {
   MapMenu,
@@ -33,5 +34,6 @@ export {
   EditMapMenu,
   LogOut,
   DropdownToggle,
-  LineTypesMenu
+  LineTypesMenu,
+  ZoomOptions
 }
