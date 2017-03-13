@@ -5,7 +5,7 @@ import { withRouter } from 'react-router'
 
 import MapCanvas from '../../../../shared/map/MapCanvas'
 
-import MapToolbar from './MapToolbar'
+import MapToolbar from './toolbar/MapToolbar'
 import DeviceDragLayer from './DeviceDragLayer'
 import DividerLine from './DividerLine'
 

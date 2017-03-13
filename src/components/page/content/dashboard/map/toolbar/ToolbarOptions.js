@@ -17,9 +17,11 @@ class ToolbarOptions extends Component {
             onZoomOut={this.props.onClickZoomOut}
             onZoomReset={this.props.onClickZoomReset}
           />
-          <DeleteObject obj={this.props.obj} />
+        <DeleteObject obj={this.props.obj} onDelete={this.props.onClickDelete}/>
           <ColorPicker
             line={this.props.line}
+            popover={this.props.popover}
+            cover={this.props.cover}
             lineGroup={this.props.lineGroup}
             isPickerDisplayed={this.props.isPickerDisplayed}
             onColorPick={this.props.onColorPick}
@@ -32,7 +34,7 @@ class ToolbarOptions extends Component {
           />
           <LineWidthDec
             lineGroup={this.props.lineGroup}
-            onLineWidthInc={this.props.onClickLineWidthDec}
+            onLineWidthDec={this.props.onClickLineWidthDec}
           />
           <TextChange
             text={this.props.text}

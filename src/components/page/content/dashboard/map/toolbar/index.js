@@ -1,4 +1,4 @@
-import MapMenu  from './MapMenu'
+import MapMenu from './MapMenu'
 import NewIncidentLabel from './NewIncidentLabel'
 import ToolbarOptions from './ToolbarOptions'
 import ToolbarToggle from './ToolbarToggle'
@@ -14,7 +14,7 @@ import OptionUploader from './OptionUploader'
 import EditMapMenu from './EditMapMenu'
 import LogOut from './LogOut'
 import DropdownToggle from './DropdownToggle'
-import LineTypesMenu from './LineTypes'
+import LineTypesMenu from './LineTypesMenu'
 
 export {
   MapMenu,

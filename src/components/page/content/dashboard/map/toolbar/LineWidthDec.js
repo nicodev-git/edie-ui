@@ -1,6 +1,6 @@
 import React from 'react'
 
-const LineWidthDec = ({ lineGroup, onLineWidthInc }) => (
+const LineWidthDec = ({ lineGroup, onLineWidthDec }) => (
   <li>
     <a
       href="javascript:;"

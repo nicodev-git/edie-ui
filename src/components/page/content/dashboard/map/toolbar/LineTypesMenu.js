@@ -1,6 +1,6 @@
 import React from 'react'
 
-const LineTypesMenu = ({ popover, cover, toggle, lineTypes }) => (
+const LineTypesMenu = ({ popover, cover, toggle, lineTypes, onChoose }) => (
   <div style={popover}>
     <div style={cover} onClick={toggle}/>
     <div id="linetypediv" className="panel-group">

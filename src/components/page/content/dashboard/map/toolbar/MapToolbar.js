@@ -1,10 +1,7 @@
 import React, { Component } from 'react'
-import { ChromePicker } from 'react-color'
-import MapMenu from '../MapMenu'
-import DeviceMenu from '../DeviceMenu'
+import { MapMenu, NewIncidentLabel, ToolbarOptions, ToolbarToggle, LineTypesMenu } from './index'
 import NewIncidentModal from '../NewIncidentModal'
 import { lineTypes } from '../../../../../../shared/Global'
-import LineTypesMenu from './LineTypesMenu'
 
 export default class Toolbar extends Component {
   constructor (props) {
@@ -158,7 +155,7 @@ export default class Toolbar extends Component {
           onSave={this.onClickSave.bind(this)}
           onImport={this.onClickImport.bind(this)}
           {...this.props}/>
-        <NewIncidentLabel />
+        <NewIncidentLabel onNewIncident={this.onClickNewIncident().bind(this)}/>
         <ToolbarOptions
           onMaximize={this.onClickMaximize().bind(this)}
           onColorPick={this.onClickColorPicker().bind(this)}

@@ -1,6 +1,6 @@
 import React from 'react'
 
-const DeleteObject = ({ obj }) => (
+const DeleteObject = ({ obj, onDelete }) => (
   <li>
     <a
       href="javascript:"

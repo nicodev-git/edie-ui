@@ -1,6 +1,7 @@
 import React from 'react'
+import { ChromePicker } from 'react-color'
 
-const ColorPicker = ({ line, lineGroup, isPickerDisplayed,
+const ColorPicker = ({popover, cover, line, lineGroup, isPickerDisplayed,
   onColorPick, onPickerChange, onPickerClose }) => (
   <li>
     <div

@@ -1,11 +1,10 @@
 import React, { Component } from 'react'
 import {assign} from 'lodash'
-
-import MapSelect from './MapSelect'
-import MapSaveModal from './MapSaveModal'
-import MapImportModal from './MapImportModal'
+import MapSelect from '../MapSelect'
+import MapSaveModal from '../MapSaveModal'
+import MapImportModal from '../MapImportModal'
 import MapMenuList from './MapMenuList'
-import { showAlert, showPrompt, showConfirm } from '../../../../shared/Alert'
+import { showAlert, showPrompt, showConfirm } from '../../../../../shared/Alert'
 
 export default class MapMenu extends Component {
   constructor (props) {
