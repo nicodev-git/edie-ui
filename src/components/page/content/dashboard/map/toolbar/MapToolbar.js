@@ -103,6 +103,10 @@ export default class Toolbar extends Component {
     this.props.onClickEdit()
   }
 
+  onClickEditMapUndo () {
+    // TODO
+  }
+
   onClickDeviceMenu () {
     console.log('device menu clicked')
     let isDevicesDisplayed = this.state.displayDevices
@@ -161,6 +165,7 @@ export default class Toolbar extends Component {
           onPickerChange={this.onChangeColorPicker.bind(this)}
           toggleLineTypes={this.toggleLineTypes.bind(this)}
           onMapEdit={this.onClickMapEdit.bind(this)}
+          onEditMapUndo={this.onClickEditMapUndo.bind(this)}
           onDeviceMenu={this.onClickDeviceMenu.bind(this)}
           obj={obj}
           line={line}

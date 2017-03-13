@@ -9,6 +9,10 @@ class ToolbarOptions extends Component {
       <div className="panel-options main-map-options" style={{top: '0px'}}>
         <ul className="nav nav-tabs" style={{background: 'transparent'}}>
           <NewIncidentLabel onNewIncident={this.props.onNewIncident}/>
+          <EditMapMenu
+            onEdit={this.props.onMapEdit}
+            onUndo={this.props.onEditMapUndo}/>
+          <DeviceMenuContainer {...this.props}/>
           <ZoomOptions
             onMaximize={this.props.onMaximize}
             maximized={this.props.maximized}
@@ -75,8 +79,6 @@ class ToolbarOptions extends Component {
             onChange={this.props.toggleLineTypes}
           />
           <OptionUploader />
-          <EditMapMenu {...this.props}/>
-          <DeviceMenuContainer {...this.props}/>
           <LogOut />
           <DropdownToggle />
         </ul>

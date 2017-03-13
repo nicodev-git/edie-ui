@@ -1,8 +1,40 @@
-import React, { Component } from 'react'
-import EditMapHeader from './EditMapHeader'
-import EditMapItems from './EditMapItems'
+import React from 'react'
+import IconButton from 'material-ui/IconButton'
+import IconMenu from 'material-ui/IconMenu'
+import MenuItem from 'material-ui/MenuItem'
+import CreateIcon from 'material-ui/svg-icons/content/create'
 
-class EditMapMenu extends Component {
+const buttonStyle = {
+  padding: '4px',
+  width: 50,
+  height: 50
+}
+
+const iconStyle = {
+  width: 30,
+  height: 30
+}
+
+const EditMapMenu = ({ onEdit, onUndo }) => (
+  <li>
+    <IconMenu
+      iconButtonElement={
+        <IconButton style={buttonStyle} iconStyle={iconStyle}>
+            <CreateIcon color="#545454"/>
+        </IconButton>
+      }
+      anchorOrigin={{horizontal: 'left', vertical: 'top'}}
+      targetOrigin={{horizontal: 'left', vertical: 'top'}}
+    >
+      <MenuItem onTouchTap={onEdit}>Edit</MenuItem>
+      <MenuItem onTouchTap={onUndo}>Undo</MenuItem>
+    </IconMenu>
+  </li>
+)
+
+export default EditMapMenu
+
+/* class EditMapMenu extends Component {
   onClick () {
     console.log('edit menu clicked')
   }
@@ -24,4 +56,4 @@ class EditMapMenu extends Component {
   }
 }
 
-export default EditMapMenu
+export default EditMapMenu */
