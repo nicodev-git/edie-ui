@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { MapMenu, NewIncidentLabel, ToolbarOptions, ToolbarToggle, LineTypesMenu } from './index'
+import { MapMenu, ToolbarOptions, ToolbarToggle, LineTypesMenu } from './index'
 import NewIncidentModal from '../NewIncidentModal'
 import { lineTypes } from '../../../../../../shared/Global'
 
@@ -153,8 +153,8 @@ export default class Toolbar extends Component {
       <div className={`panel-heading map-toolbar text-center map-heading
         ${this.state.headerCollapsed ? 'collapsed' : ''}`}>
         <MapMenu {...this.props}/>
-        <NewIncidentLabel onNewIncident={this.onClickNewIncident.bind(this)}/>
         <ToolbarOptions
+          onNewIncident={this.onClickNewIncident.bind(this)}
           onMaximize={this.onClickMaximize.bind(this)}
           onColorPick={this.onClickColorPicker.bind(this)}
           onPickerClose={this.onCloseColorPicker.bind(this)}

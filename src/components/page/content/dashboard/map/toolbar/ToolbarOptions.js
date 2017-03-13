@@ -1,13 +1,14 @@
 import React, { Component } from 'react'
 import { ZoomOptions, DeleteObject, ColorPicker, LineWidthInc, LineWidthDec,
   TextChange, RotateHubLeft, RotateHubRight, ChangeLineType, OptionUploader,
-  EditMapMenu, LogOut, DropdownToggle, DeviceMenuContainer} from './index'
+  EditMapMenu, LogOut, DropdownToggle, DeviceMenuContainer, NewIncidentLabel} from './index'
 
 class ToolbarOptions extends Component {
   render () {
     return (
-      <div className="panel-options main-map-options" style={{top: '15px'}}>
+      <div className="panel-options main-map-options" style={{top: '0px'}}>
         <ul className="nav nav-tabs" style={{background: 'transparent'}}>
+          <NewIncidentLabel onNewIncident={this.props.onNewIncident}/>
           <ZoomOptions
             onMaximize={this.props.onMaximize}
             maximized={this.props.maximized}
