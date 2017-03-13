@@ -42,8 +42,10 @@ export default class MainEvents extends Component {
         const row = props.rowData
         let data = ''
         const {externalIP} = this.props.device || {}
-        if (externalIP) data += `WANIP: ${externalIP}<br/>`
-        data = `${data}LAN IP:${row.ip}`
+        // if (externalIP) data += `WANIP: ${externalIP}<br/>`
+        // if (row.ip) data = `${data}LAN IP:${row.ip}`
+        if (externalIP) data += `${externalIP}<br/>`
+        if (row.ip) data = row.ip
 
         return this.highlightRender({data})
       }
@@ -62,7 +64,20 @@ export default class MainEvents extends Component {
     }, {
       'displayName': 'Description',
       'columnName': 'description',
+      'cssClassName': 'width-100',
       'customComponent': this.highlightRender.bind(this)
+    }, {
+      'displayName': 'Params',
+      'columnName': 'params',
+      'cssClassName': 'width-100',
+      'customComponent': this.highlightRender.bind(this)
+    }, {
+      'displayName': 'Result',
+      'columnName': 'lastResult.description',
+      'customComponent': props => {
+        const data = props.rowData.lastResult
+        return <span>{data ? JSON.stringify(data) : ''}</span>
+      }
     }]
   }
 
@@ -84,7 +99,7 @@ export default class MainEvents extends Component {
         url="/event/search/findBy"
         params={{
           deviceid: device.id,
-          sort: 'datetime,desc'
+          sort: 'timestamp,desc'
         }}
         pageSize={20}
       />
