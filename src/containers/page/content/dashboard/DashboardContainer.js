@@ -7,6 +7,7 @@ import {
   fixIncident,
   ackIncident,
 
+  fetchDeviceCategories,
   fetchDeviceTemplates,
 
   openDevice,
@@ -42,6 +43,7 @@ export default connect(
     bigIncidents: state.dashboard.bigIncidents,
     incidents: state.dashboard.incidents,
 
+    deviceCategories: state.settings.deviceCategories,
     deviceTemplates: state.settings.deviceTemplates,
 
     mapDevices: state.dashboard.mapDevices,
@@ -68,6 +70,7 @@ export default connect(
     fixIncident,
     ackIncident,
 
+    fetchDeviceCategories,
     fetchDeviceTemplates,
 
     openDevice,

@@ -7,13 +7,6 @@ import { concat } from 'lodash'
 
 import DeviceImg from './DeviceImg'
 
-const sections = [
-  ['Group', 'GROUPS'],
-  ['Device', 'DEVICES'],
-  ['BI', 'BI'],
-  ['Shape', 'SHAPES']
-]
-
 export default class DeviceMenu extends React.Component {
   constructor (props) {
     super(props)
@@ -44,8 +37,8 @@ export default class DeviceMenu extends React.Component {
     let devicePanels = []
 
     let deviceTypes = concat([], this.state.deviceTypes)
-    sections.forEach(section => {
-      const items = this.props.deviceTemplates.filter(i => i.devicetemplategroup === section[1]).map(u => {
+    this.props.deviceCategories.forEach(deviceCategory => {
+      const items = this.props.deviceTemplates.filter(i => i.devicetemplategroup === deviceCategory.name).map(u => {
         return {
           title: u.name,
           img: u.image || 'windows.png',
@@ -54,7 +47,7 @@ export default class DeviceMenu extends React.Component {
       })
       if (items.length === 0) return
       deviceTypes = concat(deviceTypes, {
-        title: section[0],
+        title: deviceCategory.name,
         items
       })
     })

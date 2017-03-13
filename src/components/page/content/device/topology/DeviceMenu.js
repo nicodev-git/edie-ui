@@ -6,11 +6,6 @@ import {
     Panel
 } from 'react-bootstrap'
 
-const sections = [
-  ['Device', 'DEVICES'],
-  ['BI', 'BI'],
-  ['Shape', 'SHAPES']
-]
 export default class DeviceMenu extends React.Component {
   constructor (props) {
     super(props)
@@ -38,8 +33,9 @@ export default class DeviceMenu extends React.Component {
     let devicePanels = []
 
     let deviceTypes = []
-    sections.forEach(section => {
-      const items = this.props.deviceTemplates.filter(i => i.devicetemplategroup === section[1]).map(u => {
+    this.props.deviceCategories.forEach(deviceCategory => {
+      if (deviceCategory.name === 'GROUPS') return
+      const items = this.props.deviceTemplates.filter(i => i.devicetemplategroup === deviceCategory.name).map(u => {
         return {
           title: u.name,
           img: u.image || 'windows.png',
@@ -49,7 +45,7 @@ export default class DeviceMenu extends React.Component {
       if (items.length === 0) return
 
       deviceTypes.push({
-        title: section[0],
+        title: deviceCategory.name,
         items
       })
     })

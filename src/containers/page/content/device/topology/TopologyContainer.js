@@ -8,6 +8,7 @@ import Topology from 'components/page/content/device/topology/Topology'
 @connect(
   state => ({
     device: state.dashboard.selectedDevice,
+    deviceCategories: state.settings.deviceCategories,
     deviceTemplates: state.settings.deviceTemplates
   }), {
     addGroupDevice,
