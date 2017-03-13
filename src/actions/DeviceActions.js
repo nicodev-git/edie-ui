@@ -460,7 +460,7 @@ export const fetchDeviceTemplates = () => {
     return dispatch => dispatch({ type: NO_AUTH_ERROR })
   }
   return (dispatch) => {
-    axios.get(`${ROOT_URL}/devicetemplate?size=1000`)
+    axios.get(`${ROOT_URL}/devicetemplate?size=1000&sort=order`)
       .then(response => fetchDeviceTemplatesSuccess(dispatch, response))
       .catch(error => apiError(dispatch, error))
   }
