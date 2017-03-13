@@ -365,7 +365,7 @@ export const fetchDeviceCategories = () => {
     return dispatch => dispatch({ type: NO_AUTH_ERROR })
   }
   return (dispatch) => {
-    axios.get(`${ROOT_URL}/devicecategory`).then(response => {
+    axios.get(`${ROOT_URL}/devicecategory?sort=order`).then(response => {
       dispatch({type: FETCH_DEVICE_CATEGORIES, data: response.data._embedded.deviceCategories})
     }).catch(error => apiError(dispatch, error))
   }
