@@ -17,7 +17,7 @@ export default class Toolbar extends Component {
 
     this.lineTypes = lineTypes
     this.loadLineTypes()
-    this.handleClick = this.handleClick.bind(this)
+    // this.handleClick = this.handleClick.bind(this)
   }
 
   componentWillMount () {
@@ -47,14 +47,14 @@ export default class Toolbar extends Component {
 
     // ///////////////////////////////////////
 
-  onClickAdd () {
+  /* onClickAdd () {
     console.log('on click add')
     this.setState({
       displayDevices: !this.state.displayDevices
     }, () => {
       this.props.onClickAdd(this.state.displayDevices)
     })
-  }
+  } */
 
   hideDeviceMenu () {
     this.setState({
@@ -100,29 +100,19 @@ export default class Toolbar extends Component {
 
   onClickMapEdit () {
     console.log('edit map')
-    this.setState({ displayDevices: false }, () => {
-      this.props.onClickAdd(this.state.displayDevices)
-    })
+    this.props.onClickEdit()
   }
 
   onClickDeviceMenu () {
-
+    console.log('device menu clicked')
+    let isDevicesDisplayed = this.state.displayDevices
+    this.setState({
+      displayDevices: !isDevicesDisplayed
+    })
   }
 
   renderBody () {
 
-  }
-
-  handleClick (e) {
-        // Detect device menu outer click
-    console.log('handle click')
-    if (this.state.displayDevices) {
-      if (!this.refs.liDevices.contains(e.target)) {
-        this.setState({ displayDevices: false }, () => {
-          this.props.onClickAdd(this.state.displayDevices)
-        })
-      }
-    }
   }
 
   onClickNewIncident () {

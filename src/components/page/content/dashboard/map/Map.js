@@ -79,7 +79,7 @@ class Map extends React.Component {
 
     this.mapEvents = {
 
-      onClickAdd: this.onClickAdd.bind(this),
+      // onClickAdd: this.onClickAdd.bind(this),
       onClickEdit: this.onClickEdit.bind(this),
       onClickDelete: this.onClickDelete.bind(this),
 
@@ -400,7 +400,7 @@ class Map extends React.Component {
 
     // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  onClickAdd (displayMenu) {
+  /* onClickAdd (displayMenu) {
     if (displayMenu) {
       if (!this.state.editable) this.onClickEdit()
     } else {
@@ -410,7 +410,7 @@ class Map extends React.Component {
     this.setState({
       selectedItem: {}
     })
-  }
+  } */
 
   onClickEdit () {
     console.log('edit button clicked')

@@ -17,7 +17,7 @@ class ToolbarOptions extends Component {
             onZoomOut={this.props.onClickZoomOut}
             onZoomReset={this.props.onClickZoomReset}
           />
-        <DeleteObject obj={this.props.obj} onDelete={this.props.onClickDelete}/>
+          <DeleteObject obj={this.props.obj} onDelete={this.props.onClickDelete}/>
           <ColorPicker
             line={this.props.line}
             popover={this.props.popover}
