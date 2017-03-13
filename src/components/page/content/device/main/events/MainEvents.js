@@ -99,7 +99,8 @@ export default class MainEvents extends Component {
         url="/event/search/findBy"
         params={{
           deviceid: device.id,
-          sort: 'timestamp,desc'
+          sort: 'timestamp,desc',
+          keyword: this.state.text
         }}
         pageSize={20}
       />
@@ -110,11 +111,9 @@ export default class MainEvents extends Component {
     return this.refs.table.refs.wrappedInstance
   }
 
-  onFilterChange (params) {
+  onFilterChange (e) {
     this.setState({
-      params: Object.assign({}, this.state.params, {
-        text: params.text
-      })
+      text: e.target.value
     })
   }
 
@@ -263,7 +262,7 @@ export default class MainEvents extends Component {
               <div className="inline" style={{position: 'relative'}}>
                 <input type="text" placeholder="Search" className="form-control"
                   style={{width: '100%', paddingLeft: '35px'}}
-                  onChange={this.onFilterChange}
+                  onChange={this.onFilterChange.bind(this)}
                   ref="search"/>
                 <a className="btn" href="javascript:;" style={{position: 'absolute', left: 0, top: 0}}>
                   <i className="fa fa-search" /></a>
