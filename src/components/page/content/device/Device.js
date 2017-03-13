@@ -8,9 +8,6 @@ export default class Device extends React.Component {
   }
 
   render () {
-    console.log('in device: ')
-    console.log(this.props)
-    console.log(this.props.devices.length)
     if (!this.props.selectedDevice) {
       if (!this.props.devices.length) {
         console.log('fetch devices')

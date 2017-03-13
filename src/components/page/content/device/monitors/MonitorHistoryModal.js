@@ -15,13 +15,14 @@ export default class MonitorHistoryModal extends Component {
     this.cells = [{
       'displayName': 'Date/Time',
       'columnName': 'timestamp',
+      'cssClassName': 'width-140',
       'customComponent': (props) => {
         return <span>{moment(props.data).format('YYYY-MM-DD HH:mm:ss')}</span>
       }
     }, {
       'displayName': 'Status',
       'columnName': 'lastResult.status',
-      'cssClassName': 'width-140',
+      'cssClassName': 'width-80 text-center',
       'customComponent': props => {
         const val = props.data
         let cls = 'fa-question'
@@ -37,7 +38,10 @@ export default class MonitorHistoryModal extends Component {
       }
     }, {
       'displayName': 'Response',
-      'columnName': 'lastResult.resultdata'
+      'columnName': 'lastResult.resultdata',
+      'customComponent': props => {
+        return <span>{JSON.stringify(props.rowData.lastResult)}</span>
+      }
     }]
   }
 

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import TimeAgo from 'react-timeago'
-import { assign, concat } from 'lodash'
+import { assign, concat, debounce } from 'lodash'
+import ReactTooltip from 'react-tooltip'
 
 import MonitorWizardContainer from '../../../../../containers/shared/wizard/MonitorWizardContainer'
 import { ResponsiveInfiniteTable } from 'components/shared/InfiniteTable'
@@ -19,6 +20,7 @@ export default class MonitorTable extends Component {
 
       monitorConfig: null
     }
+    let tooltipRebuild = debounce(ReactTooltip.rebuild, 200)
 
     this.columns = [{
       'displayName': 'Monitor Name',
@@ -68,10 +70,12 @@ export default class MonitorTable extends Component {
         let row = props.rowData
         let devtype = row.type
 
+        tooltipRebuild()
+
         return (
           <span>
             <a href="javascript:;" className="option">
-              <i className="fa fa-comment" data-tip={row.devicestatustext} />
+              <i className="fa fa-comment" data-tip={row.checkResult ? JSON.stringify(row.checkResult) : ''} />
             </a>
             <a href="javascript:;" className="option" onClick={this.onClickCal.bind(this, props.rowData)}>
               <i className="fa fa-calendar-o" data-tip="History" />
@@ -283,6 +287,7 @@ export default class MonitorTable extends Component {
         {this.renderMonitorPicker()}
 
         {this.renderMonitorWizard()}
+        <ReactTooltip/>
       </div>
     )
   }
