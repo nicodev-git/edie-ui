@@ -104,6 +104,7 @@ export default class Toolbar extends Component {
   handleClick (e) {
         // Detect device menu outer click
     console.log('handle click')
+    console.log(this.refs)
     if (this.state.displayDevices) {
       if (!this.refs.liDevices.contains(e.target)) {
         this.setState({ displayDevices: false }, () => {
