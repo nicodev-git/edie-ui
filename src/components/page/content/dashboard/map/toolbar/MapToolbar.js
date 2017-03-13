@@ -148,13 +148,7 @@ export default class Toolbar extends Component {
 
     return (
       <div className={`panel-heading text-center map-heading ${this.state.headerCollapsed ? 'collapsed' : ''}`}>
-        <MapMenu
-          onAdd={this.onClickAdd.bind(this)}
-          onRename={this.onClickRename.bind(this)}
-          onDelete={this.onClickDelete.bind(this)}
-          onSave={this.onClickSave.bind(this)}
-          onImport={this.onClickImport.bind(this)}
-          {...this.props}/>
+        <MapMenu {...this.props}/>
         <NewIncidentLabel onNewIncident={this.onClickNewIncident.bind(this)}/>
         <ToolbarOptions
           onMaximize={this.onClickMaximize.bind(this)}
@@ -162,7 +156,7 @@ export default class Toolbar extends Component {
           onPickerClose={this.onCloseColorPicker.bind(this)}
           onPickerChange={this.onChangeColorPicker.bind(this)}
           toggleLineTypes={this.toggleLineTypes.bind(this)}
-          onAdd={this.onClickAdd.bind(this)}
+          onAdd={this.onClickAdd}
           onEdit={this.onClickEdit.bind(this)}
           obj={obj}
           line={line}

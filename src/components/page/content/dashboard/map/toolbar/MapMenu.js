@@ -12,6 +12,11 @@ export default class MapMenu extends Component {
     this.state = {
       mapExportModalVisible: false
     }
+    this.onClickAdd = this.onClickAdd.bind(this)
+    this.onClickRename = this.onClickRename.bind(this)
+    this.onClickDelete = this.onClickDelete.bind(this)
+    this.onClickSave = this.onClickSave.bind(this)
+    this.onClickImport = this.onClickImport.bind(this)
   }
 
   renderMapExportModal () {
@@ -75,11 +80,11 @@ export default class MapMenu extends Component {
       <div style={{position: 'absolute', left: '7px', top: '15px'}}>
         <MapSelect {...this.props} ref="select"/>
         <MapMenuList
-          onAdd={this.props.onAdd}
-          onRename={this.props.onRename}
-          onDelete={this.props.onDelete}
-          onSave={this.props.onSave}
-          onImport={this.props.onImport}
+          onAdd={this.onClickAdd}
+          onRename={this.onClickRename}
+          onDelete={this.onClickDelete}
+          onSave={this.onClickSave}
+          onImport={this.onClickImport}
         />
         {this.renderMapExportModal()}
         {this.renderMapImportModal()}
