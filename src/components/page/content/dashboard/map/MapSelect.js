@@ -38,10 +38,9 @@ export default class MapSelect extends Component {
 
   }
   render () {
-    const {selectedMap} = this.props
+    // const {selectedMap} = this.props
     return (
       <MapSelectView
-        selectedMap={selectedMap}
         onChange={this.onChange.bind(this)}
         maps={this.props.maps}
       />
