@@ -34,7 +34,10 @@ class Main extends React.Component {
     if (nextProps.envVarAvailable && !this.props.envVarAvailable) {
       const index = findIndex(nextProps.envVars, {envvars: {key: 'CUSTOMER_ID'}})
       const customerId = index >= 0 ? nextProps.envVars[index].envvars.key : null
-      if (!customerId) {
+
+      const licenseIndex = findIndex(nextProps.envVars, {envvars: {key: 'CUSTOMER_LICENSE_RESPONSE'}})
+      const license = licenseIndex >= 0 ? nextProps.envVars[licenseIndex].envvars.key : null
+      if (!customerId || !license) {
         // User is not activated yet.
         this.props.openActivationModal()
       }
