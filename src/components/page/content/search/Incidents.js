@@ -222,10 +222,13 @@ export default class Incidents extends React.Component {
   }
 
   onCloseSearchDevice (modal, selectedDevices) {
+    this.setState({
+      deviceModalVisible: false
+    })
+
     if (!selectedDevices) return
 
     this.setState({
-      deviceModalVisible: false,
       selectedDevices
     })
   }

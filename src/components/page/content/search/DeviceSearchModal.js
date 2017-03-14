@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Modal from 'react-bootstrap-modal'
 import Autocomplete from 'react-autocomplete'
-import { findIndex } from 'lodash'
+import { findIndex, concat } from 'lodash'
 
 const styles = {
   item: {
@@ -30,7 +30,7 @@ export default class DeviceSearchModal extends Component {
       value: '',
       loading: false,
 
-      selected: props.selected || []
+      selected: props.devices || []
     }
   }
 
@@ -38,15 +38,22 @@ export default class DeviceSearchModal extends Component {
     this.searchDevice('')
   }
 
+  componentWillUpdate (nextProps, nextState) {
+    const {incidentDevices} = this.props
+    if (incidentDevices && incidentDevices !== nextProps.incidentDevices && nextState.selected.length === 0) {
+      this.setState({
+        selected: concat([], nextProps.incidentDevices)
+      })
+    }
+  }
+
   onHide () {
     this.closeModal()
   }
 
   closeModal (data) {
-    this.setState({open: false}, () => {
-      this.props.onClose &&
-            this.props.onClose(this, data)
-    })
+    this.props.onClose &&
+    this.props.onClose(this, data)
   }
 
   onClickClose () {
@@ -71,7 +78,7 @@ export default class DeviceSearchModal extends Component {
   render () {
     return (
       <Modal
-        show={this.state.open}
+        show
         onHide={this.onHide.bind(this)}
         aria-labelledby="ModalHeader"
         className="bootstrap-dialog type-primary">
@@ -133,7 +140,7 @@ export default class DeviceSearchModal extends Component {
             />
           </div>
 
-          <div className="margin-md-top" style={{minHeight: '200px'}}>
+          <div className="margin-md-top" style={{height: '300px', overflow: 'auto'}}>
             <table className="table table-hover">
               <tbody>
               {
