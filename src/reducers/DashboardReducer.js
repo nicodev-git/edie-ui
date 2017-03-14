@@ -38,6 +38,9 @@ import {
   OPEN_DASHBOARD_NEW_INCIDENT_MODAL,
   CLOSE_DASHBOARD_NEW_INCIDENT_MODAL,
 
+  OPEN_INCIDENT_EVENTS_MODAL,
+  CLOSE_INCIDENT_EVENTS_MODAL,
+
   API_ERROR
 } from '../actions/types'
 
@@ -180,6 +183,11 @@ export default function (state = {}, action) {
       return { ...state, newIncidentModalOpen: true }
     case CLOSE_DASHBOARD_NEW_INCIDENT_MODAL:
       return { ...state, newIncidentModalOpen: false }
+
+    case OPEN_INCIDENT_EVENTS_MODAL:
+      return { ...state, incidentEventsModalOpen: true, selectedIncident: action.incident }
+    case CLOSE_INCIDENT_EVENTS_MODAL:
+      return { ...state, incidentEventsModalOpen: false }
   }
   return state
 }

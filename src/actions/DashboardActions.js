@@ -14,6 +14,9 @@ import {
 
   FIX_ALL_INCIDENTS_BY_TYPE,
 
+  OPEN_INCIDENT_EVENTS_MODAL,
+  CLOSE_INCIDENT_EVENTS_MODAL,
+
   NO_AUTH_ERROR
 } from './types'
 
@@ -106,5 +109,17 @@ export function fixAllIncidentsByType (type) {
     axios.get(`${ROOT_URL}/incident/fixall/${type}/deviceid`).then(res => {
       dispatch({ type: FIX_ALL_INCIDENTS_BY_TYPE })
     }).catch(error => apiError(dispatch, error))
+  }
+}
+
+export function openIncidentEventsModal (incident) {
+  return dispatch => {
+    dispatch({type: OPEN_INCIDENT_EVENTS_MODAL, incident})
+  }
+}
+
+export function closeIncidentEventsModal () {
+  return dispatch => {
+    dispatch({type: CLOSE_INCIDENT_EVENTS_MODAL})
   }
 }

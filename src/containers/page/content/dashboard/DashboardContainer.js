@@ -34,6 +34,9 @@ import {
   updateDashboard,
   requireFullScreen,
 
+  openIncidentEventsModal,
+  closeIncidentEventsModal,
+
   openDashboardNewIncidentModal,
   closeDashboardNewIncidentModal
 } from 'actions'
@@ -60,6 +63,9 @@ export default connect(
 
     attackers: state.dashboard.attackers,
     countries: [],
+
+    incidentEventsModalOpen: state.dashboard.incidentEventsModalOpen,
+    selectedIncident: state.dashboard.selectedIncident,
 
     stats: state.dashboard.stats
   }), {
@@ -96,6 +102,9 @@ export default connect(
 
     updateDashboard,
     requireFullScreen,
+
+    openIncidentEventsModal,
+    closeIncidentEventsModal,
 
     openDashboardNewIncidentModal,
     closeDashboardNewIncidentModal

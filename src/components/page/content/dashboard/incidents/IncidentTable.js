@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Griddle from 'griddle-react'
 import TimeAgo from 'react-timeago'
 import moment from 'moment'
+import IncidentEventsModal from './IncidentEventsModal'
 
 import InfiniteTable from '../../../../shared/InfiniteTable'
 import {
@@ -120,6 +121,13 @@ export default class IncidentTable extends Component {
     console.log(arguments)
   }
 
+  renderIncidentEventsModal () {
+    if (!this.props.incidentEventsModalOpen) return null
+    return (
+      <IncidentEventsModal {...this.props}/>
+    )
+  }
+
   render () {
     return (
       <div style={{width: '100%', height: '100%', padding: '0px', border: '0px', overflow: 'auto'}}>
@@ -143,6 +151,7 @@ export default class IncidentTable extends Component {
           results={this.props.incidents}
           resultsPerPage={100}
         />
+        {this.renderIncidentEventsModal()}
       </div>
     )
   }
