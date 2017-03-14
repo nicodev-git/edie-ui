@@ -20,10 +20,7 @@ export default class MainIncidentPanel extends React.Component {
 
   renderTable () {
     return (
-      <IncidentTable ref="table"
-        incidents={this.props.incidents}
-        fixIncident={this.props.fixIncident}
-        ackIncident={this.props.ackIncident}/>
+      <IncidentTable {...this.props} ref="table"/>
     )
   }
 

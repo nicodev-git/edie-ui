@@ -1,21 +1,45 @@
 import React from 'react'
 import Modal from 'react-bootstrap-modal'
 import moment from 'moment'
+import InfiniteTable from 'components/shared/InfiniteTable'
 
 export default class IncidentEventsModal extends React.Component {
+  constructor (props) {
+    super(props)
+
+    this.cells = [{
+      'displayName': 'Datetime',
+      'columnName': 'timestamp',
+      'cssClassName': 'width-200',
+      'customComponent': props => {
+        let data = moment(props.data).format('YYYY-MM-DD HH:mm:ss').toString()
+        return <span>{data}</span>
+      }
+    }, {
+      'displayName': 'Result',
+      'columnName': 'lastResult.description',
+      'customComponent': props => {
+        const data = props.rowData.lastResult
+        return <span>{data ? JSON.stringify(data) : ''}</span>
+      }
+    }]
+  }
+
   renderTable () {
-    const {events} = this.props.selectedIncident
     return (
-      <table className="table table-hover dataTable">
-        <tbody>{
-          (events || []).map((e, i) =>
-            <tr key={i}>
-              <td>{moment(e.datetime).format('YYYY-MM-DD HH:mm:ss')}</td>
-              <td>{e.severity}</td>
-              <td>{e.description}</td>
-            </tr>)
-        }</tbody>
-      </table>
+      <InfiniteTable
+        cells={this.cells}
+        ref="table"
+        rowMetadata={{'key': 'id'}}
+
+        url="/event/search/findBy"
+        params={{
+          deviceid: this.props.selectedIncident.deviceid,
+          sort: 'timestamp,desc'
+        }}
+        bodyHeight={400}
+        pageSize={20}
+      />
     )
   }
 

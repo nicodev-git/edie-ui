@@ -10,7 +10,6 @@ import {
 } from '../../../../../shared/Global'
 
 import {
-    showIncidentRaw,
     showIncidentComments
 } from '../../../../shared/incident/Incident'
 
@@ -72,7 +71,7 @@ export default class IncidentTable extends Component {
             </a>
             &nbsp;
 
-            <a href="javascript:;" onClick={showIncidentRaw.bind(null, row)}>
+            <a href="javascript:;" onClick={this.props.openIncidentEventsModal.bind(null, row)}>
                 <img style={{height: '34px'}} title="Raw" src="/images/rawtext.png"/>
             </a>
             &nbsp;
