@@ -441,5 +441,23 @@ table.table tbody tr.selected {
 
 .topbar-message {
   display: flex;
-  justify-content: space-around;
+  justify-content: flex-start;
+}
+
+.message-avatar {
+  display: flex;
+  align-items: center;
+}
+
+.message-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  width: 150px;
+  line-height: 16px;
+}
+
+.message-text div {
+  width: 100%;
 }
