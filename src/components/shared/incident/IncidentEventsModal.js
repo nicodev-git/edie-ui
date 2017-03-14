@@ -13,11 +13,19 @@ export default class IncidentEventsModal extends React.Component {
     const {events} = this.props.incident
     return (
       <table className="table table-hover dataTable">
+        <thead>
+          <tr>
+            <th>Date/Time</th>
+            <th>Rawdata</th>
+            <th>Parsed Json</th>
+          </tr>
+        </thead>
         <tbody>{
           (events || []).map((e, i) =>
           <tr key={i}>
-            <td>{moment(e.datetime).format('YYYY-MM-DD HH:mm:ss')}</td>
+            <td className="nowrap">{moment(e.datetime).format('YYYY-MM-DD HH:mm:ss')}</td>
             <td>{e.rawdata}</td>
+            <td>{e.json}</td>
           </tr>)
         }</tbody>
       </table>
@@ -36,7 +44,7 @@ export default class IncidentEventsModal extends React.Component {
   render () {
     return (
       <Modal show onHide={this.onHide.bind(this)}
-        aria-labelledby="ModalHeader" className="bootstrap-dialog type-primary">
+        aria-labelledby="ModalHeader" className="bootstrap-dialog type-primary modal-w-9">
         <div className="modal-header">
           <h4 className="modal-title bootstrap-dialog-title">
             Incident Events
@@ -46,7 +54,7 @@ export default class IncidentEventsModal extends React.Component {
           </div>
         </div>
         <div className="modal-body bootstrap-dialog-message">
-          <div style={{maxHeight: '300px', overflow: 'auto'}}>
+          <div style={{height: '600px', overflow: 'auto'}}>
             {this.renderTable()}
           </div>
         </div>
