@@ -3,7 +3,7 @@ import {
     Button
 } from 'react-bootstrap'
 
-import InfiniteTable from '../../../shared/InfiniteTable'
+import InfiniteTable, {ResponsiveInfiniteTable} from '../../../shared/InfiniteTable'
 
 import { showAlert } from '../../../shared/Alert'
 
@@ -32,6 +32,20 @@ export default class Devices extends Component {
   }
 
   renderTable () {
+    return (
+      <ResponsiveInfiniteTable
+        cells={this.cellIPs}
+        ref="table"
+        rowMetadata={{'key': 'id'}}
+        selectable
+        onRowDblClick={this.onRowDblClick.bind(this)}
+        useExternal={false}
+        data={[]}
+      />
+    )
+  }
+
+  renderTable2 () {
     return (
       <InfiniteTable
         url="/bi/searchDevicesDT"
@@ -77,7 +91,9 @@ export default class Devices extends Component {
           </div>
         </TabPageHeader>
 
-        <TabPageBody tabs={SearchTabs} tab={1} />
+        <TabPageBody tabs={SearchTabs} tab={1}>
+          {this.renderTable()}
+        </TabPageBody>
       </TabPage>
     )
   }
