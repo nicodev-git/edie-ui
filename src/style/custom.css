@@ -421,3 +421,10 @@ table.table tbody tr.selected {
 .toolbar-options {
   right: 5px !important;
 }
+
+.incident-button-value {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 24pt;
+}

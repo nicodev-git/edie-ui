@@ -1,6 +1,20 @@
 import React from 'react'
+import FlatButton from 'material-ui/FlatButton'
 
-export default class Metric extends React.Component {
+export const Metric = ({icon, value, title, onClick}) => (
+  <FlatButton
+    label={title}
+    labelPosition="before"
+    onTouchTap={onClick}
+    icon={icon}
+  >
+    <div className="incident-button-value">{value}</div>
+  </FlatButton>
+)
+
+export default Metric
+
+/* export default class Metric extends React.Component {
   constructor (props) {
     super(props)
     this.state = {}
@@ -23,4 +37,4 @@ export default class Metric extends React.Component {
       </div>
     )
   }
-}
+} */
