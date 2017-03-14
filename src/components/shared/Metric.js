@@ -1,12 +1,18 @@
 import React from 'react'
 import FlatButton from 'material-ui/FlatButton'
 
+const style = {
+  width: '80%',
+  color: '#7c7c7e'
+}
+
 export const Metric = ({icon, value, title, onClick}) => (
   <FlatButton
     label={title}
     labelPosition="before"
     onTouchTap={onClick}
     icon={icon}
+    style={style}
   >
     <div className="incident-button-value">{value}</div>
   </FlatButton>
