@@ -33,6 +33,13 @@ class DeviceEditWizard extends React.Component {
     }
   }
 
+  componentWillReceiveProps (nextProps) {
+    if (nextProps.dirty) {
+      let elem = document.getElementById('submitButton')
+      elem.style.backgroundColor = '#ffffff'
+    }
+  }
+
   onSelectTab () {
 
   }
