@@ -46,6 +46,7 @@ import {
   CLOSE_DEVICE_RULE_MODAL,
 
   FETCH_WORKFLOW_CATEGORIES,
+  SELECT_WORKFLOW_CATEGORY,
   OPEN_WF_CATEGORY_MODAL,
   CLOSE_WF_CATEGORY_MODAL,
   ADD_WF_CATEGORY,
@@ -170,6 +171,9 @@ export default function (state = INITIAL_STATE, action) {
 
     case FETCH_WORKFLOW_CATEGORIES:
       return { ...state, workflowCategories: action.data }
+
+    case SELECT_WORKFLOW_CATEGORY:
+      return { ...state, selectedWorkflowCategory: action.category }
 
     case OPEN_WF_CATEGORY_MODAL:
       return { ...state, wfCategoryModalOpen: true, editWfCategory: action.data }

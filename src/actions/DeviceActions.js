@@ -48,6 +48,7 @@ import {
   CLOSE_DEVICE_RULE_MODAL,
 
   FETCH_WORKFLOW_CATEGORIES,
+  SELECT_WORKFLOW_CATEGORY,
   OPEN_WF_CATEGORY_MODAL,
   CLOSE_WF_CATEGORY_MODAL,
   ADD_WF_CATEGORY,
@@ -579,6 +580,12 @@ const fetchWorkflowCategoriesSuccess = (dispatch, response) => {
     type: FETCH_WORKFLOW_CATEGORIES,
     data: response.data._embedded.workflowCategories
   })
+}
+
+export const selectWorkflowCategory = (category) => {
+  return dispatch => {
+    dispatch({type: SELECT_WORKFLOW_CATEGORY, category})
+  }
 }
 
 export const openWfCategoryModal = (rule) => {

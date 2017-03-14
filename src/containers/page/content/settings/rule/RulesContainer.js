@@ -3,9 +3,11 @@ import Rules from '../../../../../components/page/content/settings/rule/Rules'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import {
+  fetchWorkflowCategories,
   fetchWorkflows,
   openWorkflowModal,
   removeWorkflow,
+  selectWorkflowCategory,
 
   addWorkflow,
   updateWorkflow,
@@ -16,13 +18,17 @@ import {
   state => ({
     workflows: state.settings.workflows,
     editWorkflow: state.settings.editWorkflow,
-    workflowModalVisible: state.settings.workflowModalVisible
+    workflowModalVisible: state.settings.workflowModalVisible,
+    workflowCategories: state.devices.workflowCategories,
+    selectedWorkflowCategory: state.devices.selectedWorkflowCategory
   }),
   dispatch => ({
     ...bindActionCreators({
+      fetchWorkflowCategories,
       fetchWorkflows,
       openWorkflowModal,
       removeWorkflow,
+      selectWorkflowCategory,
 
       addWorkflow,
       updateWorkflow,
