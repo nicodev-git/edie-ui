@@ -80,6 +80,7 @@ const MessageBox = () => (
               time="21 hours"
             />
           </MenuItem>
+          <MenuItem primaryText="See all messages" />
         </IconMenu>
     </Badge>
   </li>

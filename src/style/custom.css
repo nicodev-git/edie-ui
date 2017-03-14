@@ -438,3 +438,8 @@ table.table tbody tr.selected {
   margin-top: 0px !important;
   margin-bottom: 0px !important;
 }
+
+.topbar-message {
+  display: flex;
+  justify-content: space-around;
+}

@@ -1,19 +1,15 @@
 import React from 'react'
 import Avatar from 'material-ui/Avatar'
-import Chip from 'material-ui/Chip'
-
-const style = {
-  width: '100%'
-}
 
 const Message = ({avatar, name, message, time}) => (
-  <Chip style={style}>
-    <Avatar src={avatar} />
-    <div className="message-body">
-      <strong>{name}</strong><br/>{message}<br/>
-      <small className="text-muted">{time}</small>
+  <div className="topbar-message">
+    <div><Avatar src={avatar} /></div>
+    <div>
+      <div><strong>{name}</strong></div>
+      <div>{message}</div>
     </div>
-  </Chip>
+    <div><small className="text-muted">{time}</small></div>
+  </div>
 )
 
 export default Message
