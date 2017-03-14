@@ -452,7 +452,7 @@ table.table tbody tr.selected {
 .message-text {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-around;
   align-items: flex-start;
   width: 150px;
   line-height: 16px;
