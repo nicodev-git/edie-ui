@@ -38,10 +38,17 @@ export default class MainSettings extends Component {
     // return $.get(`${ROOT_URL}${Api.admin.updateOptions}`, {name, value, param}) // eslint-disable-line no-undef
   }
 
+  onClickSync () {
+    this.props.syncData()
+  }
+
   render () {
     return (
-      <div className="padding-md-top">
-        <div className="form-inline">
+      <div className="padding-md">
+        <div>
+          <a href="javascript:;" onClick={this.onClickSync.bind(this)} className="btn btn-primary">Sync</a>
+        </div>
+        <div className="form-inline hidden">
           <div className="col-md-12 margin-md-bottom">
             <div className="checkbox">
               <label className="margin-sm-top margin-sm-bottom">

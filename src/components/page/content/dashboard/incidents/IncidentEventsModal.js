@@ -29,8 +29,7 @@ export default class IncidentEventsModal extends React.Component {
 
   render () {
     return (
-      <Modal show onHide={this.onHide.bind(this)}
-             aria-labelledby="ModalHeader" className="bootstrap-dialog type-primary">
+      <Modal show onHide={this.onHide.bind(this)} aria-labelledby="ModalHeader" className="bootstrap-dialog type-primary">
         <div className="modal-header">
           <h4 className="modal-title bootstrap-dialog-title">
             Incident Events

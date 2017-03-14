@@ -31,6 +31,8 @@ import {
 
   FETCH_DEVICE_CATEGORIES,
 
+  SYNC_DATA,
+
   NO_AUTH_ERROR
 } from './types'
 
@@ -367,6 +369,17 @@ export const fetchDeviceCategories = () => {
   return (dispatch) => {
     axios.get(`${ROOT_URL}/devicecategory?sort=order`).then(response => {
       dispatch({type: FETCH_DEVICE_CATEGORIES, data: response.data._embedded.deviceCategories})
+    }).catch(error => apiError(dispatch, error))
+  }
+}
+
+export const syncData = () => {
+  if (!window.localStorage.getItem('token')) {
+    return dispatch => dispatch({ type: NO_AUTH_ERROR })
+  }
+  return dispatch => {
+    axios.get(`${ROOT_URL}/pullSyncDataFromImadmin`).then(response => {
+      dispatch({type: SYNC_DATA, data: response.data})
     }).catch(error => apiError(dispatch, error))
   }
 }

@@ -28,7 +28,7 @@ export default class Advanced extends React.Component {
       case 2: return <Routing />
     }
 
-    return <MainSettings />
+    return <MainSettings {...this.props} />
   }
 
   onClickTab (pageIndex) {

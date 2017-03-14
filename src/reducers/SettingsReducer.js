@@ -73,6 +73,8 @@ import {
     OPEN_SIMULATION_MODAL,
     CLOSE_SIMULATION_MODAL,
 
+    SYNC_DATA,
+
     FETCH_DEVICE_CATEGORIES
 
 } from '../actions/types'
@@ -340,6 +342,9 @@ export default function (state = {}, action) {
 
     case FETCH_DEVICE_CATEGORIES:
       return { ...state, deviceCategories: action.data }
+
+    case SYNC_DATA:
+      return { ...state, syncStatus: action.data }
   }
   return state
 }
