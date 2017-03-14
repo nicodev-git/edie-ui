@@ -6,10 +6,15 @@ const style = {
   color: '#7c7c7e'
 }
 
+const labelStyle = {
+  paddingLeft: '30px'
+}
+
 export const Metric = ({icon, value, title, onClick}) => (
   <FlatButton
     label={title}
     labelPosition="before"
+    labelStyle={labelStyle}
     onTouchTap={onClick}
     icon={icon}
     style={style}

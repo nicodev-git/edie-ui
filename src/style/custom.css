@@ -428,3 +428,8 @@ table.table tbody tr.selected {
   left: 10px;
   font-size: 24pt;
 }
+
+.metric-container {
+  display: flex;
+  justify-content: center;
+}
