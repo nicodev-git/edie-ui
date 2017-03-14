@@ -109,9 +109,12 @@ export default class Toolbar extends Component {
   }
 
   onClickDeviceMenu (e) {
-    console.log('device menu clicked')
-    console.log(e)
-    e.stopPropagation()
+    let event = e.nativeEvent
+    event.stopPropagation()
+    this.toggleDevices()
+  }
+
+  toggleDevices () {
     let isDevicesDisplayed = this.state.displayDevices
     this.setState({
       displayDevices: !isDevicesDisplayed
@@ -134,20 +137,16 @@ export default class Toolbar extends Component {
   }
 
   handleClick (e) {
-    console.log('clicked')
-    console.log(this.state.displayDevices)
     if (this.state.displayDevices) {
       let path = e.path
-      console.log(path)
       let deviceMenuClicked = false
       for (let i = 0; i < path.length; i++) {
-        if (path[i].id === 'device-menu') {
-          console.log('device menu')
+        if ((path[i].id === 'device-menu') || (path[i].id === 'device-menu-button')) {
           deviceMenuClicked = true
         }
       }
       if (!deviceMenuClicked) {
-        this.onClickDeviceMenu(e)
+        this.toggleDevices()
       }
     }
   }

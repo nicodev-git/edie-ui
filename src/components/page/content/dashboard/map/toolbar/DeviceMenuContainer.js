@@ -19,6 +19,7 @@ class DeviceMenuContainer extends Component {
     return (
       <li>
         <IconButton
+          id="device-menu-button"
           style={buttonStyle}
           iconStyle={iconStyle}
           onTouchTap={this.props.onDeviceMenu}>
