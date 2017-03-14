@@ -17,8 +17,7 @@ export default class IncidentEventsModal extends React.Component {
           (events || []).map((e, i) =>
           <tr key={i}>
             <td>{moment(e.datetime).format('YYYY-MM-DD HH:mm:ss')}</td>
-            <td>{e.severity}</td>
-            <td>{e.description}</td>
+            <td>{e.rawdata}</td>
           </tr>)
         }</tbody>
       </table>
