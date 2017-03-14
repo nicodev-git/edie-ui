@@ -23,11 +23,6 @@ const rootStyle = {
   height: 50
 }
 
-const menuStyle = {
-  width: '100%',
-  height: '100%'
-}
-
 const buttonStyle = {
   padding: '4px',
   width: '100%',
@@ -47,7 +42,6 @@ const MessageBox = () => (
       style={rootStyle}
       >
         <IconMenu
-          style={menuStyle}
           iconButtonElement={
             <IconButton
               style={buttonStyle}
@@ -73,7 +67,7 @@ const MessageBox = () => (
             <Message
               avatar="/images/avatars/3.jpg"
               name="Don Mark"
-              message="I really appreciate your&hellip;"
+              message="Hello? How are you? Do you want to go to my birthday party?"
               time="21 hours"
             />
           </MenuItem>

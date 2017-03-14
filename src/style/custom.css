@@ -463,3 +463,11 @@ table.table tbody tr.selected {
 .message-text div {
   width: 150px;
 }
+
+.inner-text {
+  white-space: normal;
+}
+
+.message-time {
+  padding-left: 15px;
+}

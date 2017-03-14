@@ -6,9 +6,9 @@ const Message = ({avatar, name, message, time}) => (
     <div className="message-avatar"><Avatar src={avatar} /></div>
     <div className="message-text">
       <div><strong>{name}</strong></div>
-      <div>{message}</div>
+      <div className="inner-text">{message}</div>
     </div>
-    <div><small className="text-muted">{time}</small></div>
+    <div className="message-time"><small className="text-muted">{time}</small></div>
   </div>
 )
 
