@@ -433,3 +433,8 @@ table.table tbody tr.selected {
   display: flex;
   justify-content: center;
 }
+
+.metric-panel {
+  margin-top: 0px !important;
+  margin-bottom: 0px !important;
+}

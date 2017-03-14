@@ -7,7 +7,7 @@ import FlagIcon from 'material-ui/svg-icons/content/flag'
 
 const MetricPanelView = ({stats, showOpen, showToday, showAttackers, showMonth,
   attackers}) => (
-  <div className="row news-info">
+  <div className="row news-info metric-panel">
     <div className="col-sm-3 col-lg-3 col-xs-6 metric-container">
       <Metric icon={<FlagIcon/>} title="Open Incidents" value={stats.open}
         onClick={showOpen}/>
