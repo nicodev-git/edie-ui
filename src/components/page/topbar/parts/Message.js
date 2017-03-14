@@ -3,8 +3,8 @@ import Avatar from 'material-ui/Avatar'
 
 const Message = ({avatar, name, message, time}) => (
   <div className="topbar-message">
-    <div><Avatar src={avatar} /></div>
-    <div>
+    <div className="message-avatar"><Avatar src={avatar} /></div>
+    <div className="message-text">
       <div><strong>{name}</strong></div>
       <div>{message}</div>
     </div>

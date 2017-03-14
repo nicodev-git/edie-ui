@@ -27,11 +27,6 @@ const menuStyle = {
   height: '100%'
 }
 
-const menuItemStyle = {
-  width: 240,
-  paddingTop: '5px'
-}
-
 const buttonStyle = {
   padding: '4px',
   width: '100%',
@@ -52,7 +47,6 @@ const MessageBox = () => (
       >
         <IconMenu
           style={menuStyle}
-          menuStyle={menuItemStyle}
           iconButtonElement={
             <IconButton
               style={buttonStyle}
@@ -60,15 +54,15 @@ const MessageBox = () => (
                 <EmailIcon color="#777777"/>
             </IconButton>
           }
-          anchorOrigin={{horizontal: 'left', vertical: 'top'}}
-          targetOrigin={{horizontal: 'left', vertical: 'top'}}
+          anchorOrigin={{horizontal: 'right', vertical: 'bottom'}}
+          targetOrigin={{horizontal: 'right', vertical: 'top'}}
         >
           <MenuItem primaryText="New messages" />
           <MenuItem>
             <Message
               avatar="/images/avatars/1.jpg"
               name="Ernest Kerry"
-              message=" Hello, You there?"
+              message="Hello, You there?"
               time="8 minutes ago"
             />
           </MenuItem>
@@ -76,7 +70,7 @@ const MessageBox = () => (
             <Message
               avatar="/images/avatars/3.jpg"
               name="Don Mark"
-              message=" I really appreciate your&hellip;"
+              message="I really appreciate your&hellip;"
               time="21 hours"
             />
           </MenuItem>
