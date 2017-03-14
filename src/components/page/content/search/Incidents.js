@@ -162,7 +162,7 @@ export default class Incidents extends React.Component {
       afterStartTimestamp,
       beforeStartTimestamp,
       fixed,
-      deviceid: this.state.selectedDevices.map(item => item.id),
+      deviceid: this.state.selectedDevices.length == 0 ? '*' : this.state.selectedDevices.map(item => item.id),
       sort: 'startTimestamp,desc',
       draw: this.props.incidentDraw
     }
