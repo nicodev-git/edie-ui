@@ -17,7 +17,7 @@ export default class Toolbar extends Component {
 
     this.lineTypes = lineTypes
     this.loadLineTypes()
-    // this.handleClick = this.handleClick.bind(this)
+    this.handleClick = this.handleClick.bind(this)
   }
 
   componentWillMount () {
@@ -108,8 +108,10 @@ export default class Toolbar extends Component {
     // TODO
   }
 
-  onClickDeviceMenu () {
+  onClickDeviceMenu (e) {
     console.log('device menu clicked')
+    console.log(e)
+    e.stopPropagation()
     let isDevicesDisplayed = this.state.displayDevices
     this.setState({
       displayDevices: !isDevicesDisplayed
@@ -129,6 +131,25 @@ export default class Toolbar extends Component {
     return (
       <NewIncidentModal onClose={this.props.closeDashboardNewIncidentModal} />
     )
+  }
+
+  handleClick (e) {
+    console.log('clicked')
+    console.log(this.state.displayDevices)
+    if (this.state.displayDevices) {
+      let path = e.path
+      console.log(path)
+      let deviceMenuClicked = false
+      for (let i = 0; i < path.length; i++) {
+        if (path[i].id === 'device-menu') {
+          console.log('device menu')
+          deviceMenuClicked = true
+        }
+      }
+      if (!deviceMenuClicked) {
+        this.onClickDeviceMenu(e)
+      }
+    }
   }
 
   render () {
