@@ -1,6 +1,5 @@
 import React from 'react'
-import Metric from '../../../../shared/Metric'
-
+import MetricPanelView from './MetricPanelView'
 import AttackersModal from './AttackersModal'
 
 export default class MetricPanel extends React.Component {
@@ -54,28 +53,16 @@ export default class MetricPanel extends React.Component {
 
   render () {
     const {stats} = this.props
-
+    let attackers = this.renderAttackers()
     return (
-      <div className="row news-info">
-        <div className="col-sm-3 col-lg-3 col-xs-6">
-          <Metric icon="fa-tags" title="Open Incidents" value={stats.open} className="panel-body-inverse"
-            onClick={this.showOpenIncidentsDiv.bind(this)}/>
-        </div>
-        <div className="col-sm-3 col-lg-3 col-xs-6">
-          <Metric icon="fa-trophy" title="Today's Incidents" value={stats.today} className="panel-body-inverse"
-            onClick={this.showTodayIncidentsDiv.bind(this)}/>
-        </div>
-        <div className="col-sm-3 col-lg-3 col-xs-6">
-          <Metric icon="fa-chain-broken" title="Attackers Today" value={stats.attackers} className="panel-body-inverse"
-            onClick={this.showIpIncidentsDiv.bind(this)}/>
-        </div>
-        <div className="col-sm-3 col-lg-3 col-xs-6">
-          <Metric icon="fa-users" title="Month Incidents" value={stats.month} className="panel-body-inverse"
-            onClick={this.showMonthIncidentsDiv.bind(this)}/>
-        </div>
-
-        {this.renderAttackers()}
-      </div>
+      <MetricPanelView
+        stats={stats}
+        showOpen={this.showOpenIncidentsDiv.bind(this)}
+        showToday={this.showTodayIncidentsDiv.bind(this)}
+        showAttackers={this.showIpIncidentsDiv.bind(this)}
+        showMonth={this.showMonthIncidentsDiv.bind(this)}
+        attackers={attackers}
+      />
     )
   }
 }
