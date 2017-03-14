@@ -1,22 +1,27 @@
 import React from 'react'
 import Metric from '../../../../shared/Metric'
+import HistoryIcon from 'material-ui/svg-icons/action/history'
+import AlarmIcon from 'material-ui/svg-icons/action/alarm'
+import BugReportIcon from 'material-ui/svg-icons/action/bug-report'
+import FlagIcon from 'material-ui/svg-icons/content/flag'
 
-const MetricPanelView = ({stats, showOpen, showToday, showAttackers, showMonth, attackers}) => (
+const MetricPanelView = ({stats, showOpen, showToday, showAttackers, showMonth,
+  attackers}) => (
   <div className="row news-info">
     <div className="col-sm-3 col-lg-3 col-xs-6">
-      <Metric icon="fa-tags" title="Open Incidents" value={stats.open} className="panel-body-inverse"
+      <Metric icon={<FlagIcon/>} title="Open Incidents" value={stats.open}
         onClick={showOpen}/>
     </div>
     <div className="col-sm-3 col-lg-3 col-xs-6">
-      <Metric icon="fa-trophy" title="Today's Incidents" value={stats.today} className="panel-body-inverse"
+      <Metric icon={<AlarmIcon/>} title="Today's Incidents" value={stats.today}
         onClick={showToday}/>
     </div>
     <div className="col-sm-3 col-lg-3 col-xs-6">
-      <Metric icon="fa-chain-broken" title="Attackers Today" value={stats.attackers} className="panel-body-inverse"
+      <Metric icon={<BugReportIcon/>} title="Attackers Today" value={stats.attackers}
         onClick={showAttackers}/>
     </div>
     <div className="col-sm-3 col-lg-3 col-xs-6">
-      <Metric icon="fa-users" title="Month Incidents" value={stats.month} className="panel-body-inverse"
+      <Metric icon={<HistoryIcon/>} title="Month Incidents" value={stats.month}
         onClick={showMonth}/>
     </div>
     {attackers}
