@@ -13,6 +13,7 @@ import Password from './input/Password'
 import RadioCombo from './input/RadioCombo'
 import Checkbox from './input/Checkbox'
 import IconUploader from './input/IconUploader'
+import RaisedButton from 'material-ui/RaisedButton'
 
 class DeviceEditWizard extends React.Component {
   constructor (props) {
@@ -44,9 +45,10 @@ class DeviceEditWizard extends React.Component {
 
   handleFormSubmit (params) {
     const {currentDevice} = this.state
-
+    console.log('handle submit')
     console.log(params)
-
+    let elem = document.getElementById('submitButton')
+    elem.style.backgroundColor = '#d1d1d1'
     assign(params, currentDevice.server.params)
     assign(params, this.props.extraParams)
 
@@ -202,9 +204,9 @@ class DeviceEditWizard extends React.Component {
       <div>
         <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
           <div className="tab-options">
-            <div className="margin-md-right margin-md-top" style={{position: 'absolute', top: '40px', right: '20px'}}>
-              <button action="submit" className="btn btn-white text-primary">
-                Save</button>
+            <div className="margin-md-right margin-md-top"
+              style={{position: 'absolute', top: '40px', right: '20px'}}>
+              <RaisedButton id="submitButton" type="submit" label="Save"/>
             </div>
           </div>
 
