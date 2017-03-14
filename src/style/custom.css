@@ -456,8 +456,10 @@ table.table tbody tr.selected {
   align-items: flex-start;
   width: 150px;
   line-height: 16px;
+  padding-left: 5px;
+  word-wrap: break-word;
 }
 
 .message-text div {
-  width: 100%;
+  width: 150px;
 }

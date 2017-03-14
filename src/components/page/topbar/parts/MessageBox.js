@@ -3,6 +3,7 @@ import Badge from 'material-ui/Badge'
 import IconButton from 'material-ui/IconButton'
 import IconMenu from 'material-ui/IconMenu'
 import MenuItem from 'material-ui/MenuItem'
+import Divider from 'material-ui/Divider'
 import EmailIcon from 'material-ui/svg-icons/communication/email'
 import Message from './Message'
 
@@ -58,6 +59,7 @@ const MessageBox = () => (
           targetOrigin={{horizontal: 'right', vertical: 'top'}}
         >
           <MenuItem primaryText="New messages" />
+          <Divider/>
           <MenuItem>
             <Message
               avatar="/images/avatars/1.jpg"
@@ -66,6 +68,7 @@ const MessageBox = () => (
               time="8 minutes ago"
             />
           </MenuItem>
+          <Divider/>
           <MenuItem>
             <Message
               avatar="/images/avatars/3.jpg"
@@ -74,6 +77,7 @@ const MessageBox = () => (
               time="21 hours"
             />
           </MenuItem>
+          <Divider/>
           <MenuItem primaryText="See all messages" />
         </IconMenu>
     </Badge>
