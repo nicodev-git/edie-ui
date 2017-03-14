@@ -20,6 +20,11 @@ export default class DeviceMenu extends React.Component {
     }
   }
 
+  componentWillMount () {
+    this.props.fetchDeviceCategories()
+    this.props.fetchDeviceTemplates()
+  }
+
   onChangeDeviceSearch (e) {
     let keyword = e.target.value
     this.setState({keyword})

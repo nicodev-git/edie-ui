@@ -3,14 +3,8 @@ import Modal from 'react-bootstrap-modal'
 import moment from 'moment'
 
 export default class IncidentEventsModal extends React.Component {
-  constructor (props) {
-    super(props)
-    this.state = {
-    }
-  }
-
   renderTable () {
-    const {events} = this.props.incident
+    const {events} = this.props.selectedIncident
     return (
       <table className="table table-hover dataTable">
         <tbody>{
@@ -30,8 +24,7 @@ export default class IncidentEventsModal extends React.Component {
   }
 
   onClickClose () {
-    this.props.onClose &&
-    this.props.onClose(this)
+    this.props.closeIncidentEventsModal()
   }
 
   render () {
@@ -54,9 +47,4 @@ export default class IncidentEventsModal extends React.Component {
       </Modal>
     )
   }
-}
-
-IncidentEventsModal.defaultProps = {
-  incident: null,
-  onClose: null
 }
