@@ -34,9 +34,15 @@ class DeviceEditWizard extends React.Component {
   }
 
   componentWillReceiveProps (nextProps) {
+    console.log('receive props')
+    console.log(this.props.dirty)
+    console.log(nextProps.dirty)
+    let elem = document.getElementById('submitButton')
     if (nextProps.dirty) {
-      let elem = document.getElementById('submitButton')
+      console.log('dirty')
       elem.style.backgroundColor = '#ffffff'
+    } else {
+      elem.style.backgroundColor = '#d1d1d1'
     }
   }
 
@@ -52,7 +58,6 @@ class DeviceEditWizard extends React.Component {
 
   handleFormSubmit (params) {
     const {currentDevice} = this.state
-    console.log('handle submit')
     console.log(params)
     let elem = document.getElementById('submitButton')
     elem.style.backgroundColor = '#d1d1d1'
