@@ -3,7 +3,7 @@ import {
     Button
 } from 'react-bootstrap'
 
-import InfiniteTable, {ResponsiveInfiniteTable} from '../../../shared/InfiniteTable'
+import {ResponsiveInfiniteTable} from '../../../shared/InfiniteTable'
 
 import { showAlert } from '../../../shared/Alert'
 
@@ -21,7 +21,7 @@ export default class Devices extends Component {
       'columnName': 'name'
     }, {
       'displayName': 'IP',
-      'columnName': 'ipaddress'
+      'columnName': 'lanip'
     }, {
       'displayName': 'Segment',
       'columnName': 'segment'
@@ -34,27 +34,14 @@ export default class Devices extends Component {
   renderTable () {
     return (
       <ResponsiveInfiniteTable
+        url="/device/search/findByName"
+        params={{
+          name: ''
+        }}
         cells={this.cellIPs}
         ref="table"
         rowMetadata={{'key': 'id'}}
         selectable
-        onRowDblClick={this.onRowDblClick.bind(this)}
-        useExternal={false}
-        data={[]}
-      />
-    )
-  }
-
-  renderTable2 () {
-    return (
-      <InfiniteTable
-        url="/bi/searchDevicesDT"
-        params={this.props.filter || {search: ''}}
-        cells={this.cellIPs}
-        ref="table"
-        rowMetadata={{'key': 'id'}}
-        selectable
-        bodyHeight={this.props.containerHeight}
         onRowDblClick={this.onRowDblClick.bind(this)}
       />
     )
