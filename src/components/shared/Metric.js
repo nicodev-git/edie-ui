@@ -2,12 +2,12 @@ import React from 'react'
 import FlatButton from 'material-ui/FlatButton'
 
 const style = {
-  width: '80%',
+  width: '100%',
   color: '#7c7c7e'
 }
 
 const labelStyle = {
-  paddingLeft: '30px'
+  paddingLeft: '10px'
 }
 
 export const Metric = ({icon, value, title, onClick}) => (
