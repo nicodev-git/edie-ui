@@ -13,12 +13,21 @@ import SettingTabs from '../SettingTabs'
 import TabPage from '../../../../shared/TabPage'
 import TabPageBody from '../../../../shared/TabPageBody'
 import TabPageHeader from '../../../../shared/TabPageHeader'
+import {showAlert} from 'components/shared/Alert'
 
 export default class Advanced extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
       pageIndex: 0
+    }
+  }
+
+  componentWillUpdate (nextProps, nextState) {
+    const {syncStatus} = this.props
+    if (nextProps.syncStatus && syncStatus !== nextProps.syncStatus) {
+      if (nextProps.syncStatus === 'OK') showAlert('Sync completed successfully!')
+      else showAlert('Sync failed!')
     }
   }
 

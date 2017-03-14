@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import RaisedButton from 'material-ui/RaisedButton'
 
 export default class MainSettings extends Component {
   constructor (props) {
@@ -45,8 +46,9 @@ export default class MainSettings extends Component {
   render () {
     return (
       <div className="padding-md">
-        <div>
-          <a href="javascript:;" onClick={this.onClickSync.bind(this)} className="btn btn-primary">Sync</a>
+        <div className="padding-md-top">
+          <label className="margin-sm-right">Update The System</label>
+          <RaisedButton label="Update" onTouchTap={this.onClickSync.bind(this)}/>
         </div>
         <div className="form-inline hidden">
           <div className="col-md-12 margin-md-bottom">

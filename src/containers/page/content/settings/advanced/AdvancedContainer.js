@@ -11,7 +11,10 @@ import {
 } from 'actions'
 
 @connect(
-  state => ({ envVars: state.settings.envVars }),
+  state => ({
+    envVars: state.settings.envVars,
+    syncStatus: state.settings.syncStatus
+  }),
   dispatch => ({
     ...bindActionCreators({
       fetchEnvVars,

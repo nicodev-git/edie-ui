@@ -378,6 +378,7 @@ export const syncData = () => {
     return dispatch => dispatch({ type: NO_AUTH_ERROR })
   }
   return dispatch => {
+    dispatch({type: SYNC_DATA, data: null})
     axios.get(`${ROOT_URL}/pullSyncDataFromImadmin`).then(response => {
       dispatch({type: SYNC_DATA, data: response.data})
     }).catch(error => apiError(dispatch, error))
