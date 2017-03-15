@@ -4,6 +4,8 @@ const badgeTextColor = '#f5f5f5'
 const errorColor = '#d32f2f'
 const fontSize = '18pt'
 
+export const sidebarIconsColor = '#838489'
+
 export const labelStyle = {
   color: primeColor
 }
