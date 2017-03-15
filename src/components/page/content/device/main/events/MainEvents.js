@@ -63,9 +63,11 @@ export default class MainEvents extends Component {
       'customComponent': this.highlightRender.bind(this)
     }, {
       'displayName': 'Params',
-      'columnName': 'params',
-      'cssClassName': 'width-100',
-      'customComponent': this.highlightRender.bind(this)
+      'columnName': 'params.ip',
+      'customComponent': props => {
+        const data = props.rowData.params
+        return <span>{data ? JSON.stringify(data) : ''}</span>
+      }
     }, {
       'displayName': 'Result',
       'columnName': 'lastResult.description',
