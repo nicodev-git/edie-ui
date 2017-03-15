@@ -63,12 +63,12 @@ class DeviceWizard extends React.Component {
 
   handleFormSubmit (formProps) {
     const { extraParams, onFinish } = this.props
-    const { monitors } = this.state
+    const { monitors, currentDevice } = this.state
 
     let props = assign(
       {},
       formProps,
-      this.state.currentDevice.server.params || {},
+      currentDevice.server.params || {},
       extraParams, {
         monitors: monitors.map(m => assign({}, m, {id: null})),
         params: this.props.monitorParams
@@ -76,7 +76,7 @@ class DeviceWizard extends React.Component {
     )
     console.log(props)
     this.closeModal(true)
-    onFinish && onFinish(null, props)
+    onFinish && onFinish(null, props, currentDevice.server.url)
   }
 
   buildProgressBar () {

@@ -668,6 +668,7 @@ export const wizardConfig = {
     title: 'Group',
     width: POPUP_WIDTH_SM,
     server: {
+      url: '/group',
       params: {
         isgroup: true
       }
@@ -1231,6 +1232,7 @@ export const wizardConfig = {
     title: 'Custom',
     width: POPUP_WIDTH_SM,
     server: {
+      url: '/device',
       params: {
         type: 'Custom Device'
       }
@@ -3840,6 +3842,7 @@ export const wizardEditConfig = {
   'group': {
     title: 'Group',
     server: {
+      url: '/group',
       params: {}
     },
     steps: [{
@@ -4447,6 +4450,7 @@ export const wizardEditConfig = {
     title: 'Custom',
     width: POPUP_WIDTH_SM,
     server: {
+      url: '/device',
       params: {
 
       }

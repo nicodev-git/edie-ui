@@ -625,10 +625,11 @@ class Map extends React.Component {
     }
   }
 
-  onFinishAddWizard (callback, res, params) {
+  onFinishAddWizard (callback, res, params, url) {
     params.textWidth = Math.max(8 * params.name.length, 50)
     params.textX = params.x + params.width / 2 - params.textWidth / 2
-    this.props.addMapDevice(params)
+    console.log(arguments)
+    // this.props.addMapDevice(params, url)
   }
 
     // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -282,17 +282,17 @@ const fetchGroupsByMapid = (response) => {
 const fetchMapDevicesAndLinesSuccess = (dispatch, response) => {
   dispatch({
     type: FETCH_MAP_DEVICES_LINES,
-    maps: response[0],
+    maps: concat([], response[0], response[2]),
     lines: response[1]
   })
 }
 
-export const addMapDevice = (props) => {
+export const addMapDevice = (props, url) => {
   if (!window.localStorage.getItem('token')) {
     return dispatch => dispatch({ type: NO_AUTH_ERROR })
   }
   return (dispatch) => {
-    axios.post(`${ROOT_URL}/device`, props)
+    axios.post(`${ROOT_URL}${url || '/device'}`, props)
       .then(response => addMapDeviceSuccess(dispatch, response))
       .catch(error => apiError(dispatch, error))
   }
