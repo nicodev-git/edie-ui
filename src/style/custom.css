@@ -476,8 +476,11 @@ table.table tbody tr.selected {
 
 .see-all-messages:hover {
   background-color: #b8b7b7 !important;
-  color: #ffffff !important;
+}
+
+.see-all-messages:hover svg path, .see-all-messages:hover {
   fill: #ffffff !important;
+  color: #ffffff !important;
 }
 
 .see-all-messages>div>div {
