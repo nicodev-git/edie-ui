@@ -1,17 +1,51 @@
 import React, { Component } from 'react'
+import IconButton from 'material-ui/IconButton'
+import Badge from 'material-ui/Badge'
+import MenuIcon from 'material-ui/svg-icons/navigation/menu'
+import {badgeStyle, badgeRootStyle, iconStyle, iconButtonStyle} from '../../../style/materialStyles'
 
 class SidebarView extends Component {
+  constructor (props) {
+    super(props)
+    this.renderBadge = this.renderBadge.bind(this)
+    this.renderButton = this.renderButton.bind(this)
+  }
+
+  renderBadge (item) {
+    return (
+      <Badge
+        badgeContent={4}
+        badgeStyle={badgeStyle}
+        style={badgeRootStyle}
+      >
+        {item.icon}
+      </Badge>
+    )
+  }
+
+  renderButton (item) {
+    return (
+      <IconButton
+        style={iconButtonStyle}
+        iconStyle={iconStyle}>
+          {item.icon}
+      </IconButton>
+    )
+  }
+
   render () {
     const {onToggle, contentType, mainMenu, deviceMenu, onMainMenu, onDeviceMenu,
     device, pageId, pageType, tooltipText, tooltipTop, group} = this.props
 
     return (
       <aside className="sidebar sidebar-default">
-        <div className="sidebar-minimize">
-          <a href="javascript:;"
-            style={{color: 'white'}} onClick={onToggle}>
-            <i className="fa fa-lg fa-fw fa-bars" />
-          </a>
+        <div>
+          <IconButton
+            style={iconButtonStyle}
+            iconStyle={iconStyle}
+            onTouchTap={onToggle}>
+            <MenuIcon color="#ffffff"/>
+          </IconButton>
         </div>
         <nav id="main-navigation">
           <ul className="nav nav-pills nav-stacked"
@@ -21,10 +55,7 @@ class SidebarView extends Component {
               <li key={index}
                 className={pageId === item.id ? 'active open' : ''}
                 onClick={onMainMenu.bind(this, index)}>
-
-                <a href="javascript:;">
-                  <i className={`fa fa-lg fa-fw ${item.icon}`} />{item.title}
-                </a>
+                {item.badge ? this.renderBadge(item) : this.renderButton(item)}
               </li>
             )}
 

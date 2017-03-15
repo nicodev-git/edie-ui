@@ -5,13 +5,14 @@ import ChatIcon from 'material-ui/svg-icons/communication/chat'
 import BugReportIcon from 'material-ui/svg-icons/action/bug-report'
 import NotificationsNoneIcon from 'material-ui/svg-icons/social/notifications-none'
 import SettingsIcon from 'material-ui/svg-icons/action/settings'
+import { sidebarIconsColor } from '../../style/materialStyles'
 
-const home = <HomeIcon />
-const search = <SearchIcon />
-const chat = <ChatIcon />
-const threatmap = <BugReportIcon />
-const incidents = <NotificationsNoneIcon />
-const settings = <SettingsIcon />
+const home = <HomeIcon color={sidebarIconsColor}/>
+const search = <SearchIcon color={sidebarIconsColor}/>
+const chat = <ChatIcon color={sidebarIconsColor}/>
+const threatmap = <BugReportIcon color={sidebarIconsColor}/>
+const incidents = <NotificationsNoneIcon color={sidebarIconsColor}/>
+const settings = <SettingsIcon color={sidebarIconsColor}/>
 
 export const mainMenu = [
   {id: 'dashboard', title: 'Dashboard', icon: home, path: '/'},
