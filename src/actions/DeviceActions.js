@@ -62,6 +62,8 @@ import {
 
   FIX_ALL_DEVICE_INCIDENTS,
 
+  FETCH_GROUP_DEVICES_LINES,
+
   NO_AUTH_ERROR
 } from './types'
 
@@ -700,4 +702,33 @@ export const fixAllDeviceIncidents = (device) => {
       dispatch({type: FIX_ALL_DEVICE_INCIDENTS})
     }).catch(error => apiError(dispatch, error))
   }
+}
+
+export const fetchGroupDevicesAndLines = (groupid) => {
+  if (!window.localStorage.getItem('token')) {
+    return dispatch => dispatch({ type: NO_AUTH_ERROR })
+  }
+  return (dispatch) => {
+    const req1 = axios.get(`${ROOT_URL}/device/search/findByGroupid`, {params: {groupid}})
+      .then(response => {
+        return response.data._embedded.devices
+      })
+
+    const req2 = axios.get(`${ROOT_URL}/device/search/findLinesByMapid`, {params: {groupid}})
+      .then(response => {
+        return response.data._embedded.devices
+      })
+
+    axios.all([req1, req2])
+      .then(response => fetchGroupDevicesAndLinesSuccess(dispatch, response))
+      .catch(error => apiError(dispatch, error))
+  }
+}
+
+const fetchGroupDevicesAndLinesSuccess = (dispatch, response) => {
+  dispatch({
+    type: FETCH_GROUP_DEVICES_LINES,
+    devices: response[0],
+    lines: response[1]
+  })
 }
