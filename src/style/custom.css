@@ -490,6 +490,12 @@ table.table tbody tr.selected {
 .sidebar-item-container {
   display: flex;
   justify-content: flex-start;
+  cursor: pointer;
+  padding-left: 20px;
+}
+
+.sidebar-condensed .sidebar-item-container {
+  padding-left: 0px;
 }
 
 .sidebar-title {
@@ -500,4 +506,28 @@ table.table tbody tr.selected {
 
 .sidebar-condensed .sidebar-title {
   display: none;
+}
+
+.sidebar-item-container button>div>div {
+  display: none;
+}
+
+.sidebar-condensed .sidebar-item-container button>div>div {
+  display: block;
+}
+
+.sidebar-chosen {
+  background-color: #000000;
+}
+
+.sidebar-chosen .sidebar-title {
+  color: #ffffff;
+}
+
+.sidebar-chosen svg {
+  fill: #ffffff !important;
+}
+
+#main-navigation {
+  padding-top: 30px;
 }
