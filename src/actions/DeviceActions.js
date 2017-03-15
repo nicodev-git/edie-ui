@@ -66,6 +66,9 @@ import {
   ADD_GROUP_DEVICE,
   UPDATE_GROUP_DEVICE,
   REMOVE_GROUP_DEVICE,
+  ADD_GROUP_LINE,
+  UPDATE_GROUP_LINE,
+  REMOVE_GROUP_LINE,
 
   NO_AUTH_ERROR
 } from './types'
@@ -646,40 +649,6 @@ export const closeWfActionModal = () => {
   }
 }
 
-export const addGroupDevice = (props, url, cb) => {
-  if (!window.localStorage.getItem('token')) {
-    return dispatch => dispatch({ type: NO_AUTH_ERROR })
-  }
-  return (dispatch) => {
-    axios.post(`${ROOT_URL}${url || '/device'}`, props).then(response => {
-      dispatch({type: ADD_GROUP_DEVICE, data: response.data})
-      cb && cb(response.data)
-    }).catch(error => apiError(dispatch, error))
-  }
-}
-
-export const updateGroupDevice = (entity) => {
-  if (!window.localStorage.getItem('token')) {
-    return dispatch => dispatch({ type: NO_AUTH_ERROR })
-  }
-  return (dispatch) => {
-    axios.put(entity._links.self.href, entity).then(response => {
-      dispatch({type: UPDATE_GROUP_DEVICE, data: response.data})
-    }).catch(error => apiError(dispatch, error))
-  }
-}
-
-export const removeGroupDevice = (entity) => {
-  if (!window.localStorage.getItem('token')) {
-    return dispatch => dispatch({ type: NO_AUTH_ERROR })
-  }
-  return (dispatch) => {
-    axios.delete(entity._links.self.href).then(() => {
-      dispatch({type: REMOVE_GROUP_DEVICE, data: entity})
-    }).catch(error => apiError(dispatch, error))
-  }
-}
-
 export const fixAllDeviceIncidents = (device) => {
   return dispatch => {
     axios.get(`/incident/fixall/bydeviceid/${device.id}`).then(res => {
@@ -722,4 +691,72 @@ const fetchGroupDevicesAndLinesSuccess = (dispatch, response) => {
     devices: response[0],
     lines: response[1]
   })
+}
+
+export const addGroupDevice = (props, url, cb) => {
+  if (!window.localStorage.getItem('token')) {
+    return dispatch => dispatch({ type: NO_AUTH_ERROR })
+  }
+  return (dispatch) => {
+    axios.post(`${ROOT_URL}${url || '/device'}`, props).then(response => {
+      dispatch({type: ADD_GROUP_DEVICE, data: response.data})
+      cb && cb(response.data)
+    }).catch(error => apiError(dispatch, error))
+  }
+}
+
+export const updateGroupDevice = (entity) => {
+  if (!window.localStorage.getItem('token')) {
+    return dispatch => dispatch({ type: NO_AUTH_ERROR })
+  }
+  return (dispatch) => {
+    axios.put(entity._links.self.href, entity).then(response => {
+      dispatch({type: UPDATE_GROUP_DEVICE, data: response.data})
+    }).catch(error => apiError(dispatch, error))
+  }
+}
+
+export const removeGroupDevice = (entity) => {
+  if (!window.localStorage.getItem('token')) {
+    return dispatch => dispatch({ type: NO_AUTH_ERROR })
+  }
+  return (dispatch) => {
+    axios.delete(entity._links.self.href).then(() => {
+      dispatch({type: REMOVE_GROUP_DEVICE, data: entity})
+    }).catch(error => apiError(dispatch, error))
+  }
+}
+
+export const addGroupLine = (props, cb) => {
+  if (!window.localStorage.getItem('token')) {
+    return dispatch => dispatch({ type: NO_AUTH_ERROR })
+  }
+  return (dispatch) => {
+    axios.post(`${ROOT_URL}'/device'`, props).then(response => {
+      dispatch({type: ADD_GROUP_LINE, data: response.data})
+      cb && cb(response.data)
+    }).catch(error => apiError(dispatch, error))
+  }
+}
+
+export const updateGroupLine = (entity) => {
+  if (!window.localStorage.getItem('token')) {
+    return dispatch => dispatch({ type: NO_AUTH_ERROR })
+  }
+  return (dispatch) => {
+    axios.put(entity._links.self.href, entity).then(response => {
+      dispatch({type: UPDATE_GROUP_LINE, data: response.data})
+    }).catch(error => apiError(dispatch, error))
+  }
+}
+
+export const removeGroupLine = (entity) => {
+  if (!window.localStorage.getItem('token')) {
+    return dispatch => dispatch({ type: NO_AUTH_ERROR })
+  }
+  return (dispatch) => {
+    axios.delete(entity._links.self.href).then(() => {
+      dispatch({type: REMOVE_GROUP_LINE, data: entity})
+    }).catch(error => apiError(dispatch, error))
+  }
 }

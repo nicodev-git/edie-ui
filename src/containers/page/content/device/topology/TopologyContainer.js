@@ -1,7 +1,19 @@
 import React from 'react'
 import { withRouter } from 'react-router'
 import { connect } from 'react-redux'
-import { addGroupDevice, updateGroupDevice, removeGroupDevice, openDevice, closeDevice, fetchGroupDevicesAndLines } from 'actions'
+import {
+  addGroupDevice,
+  updateGroupDevice,
+  removeGroupDevice,
+
+  addGroupLine,
+  updateGroupLine,
+  removeGroupLine,
+
+  openDevice,
+  closeDevice,
+  fetchGroupDevicesAndLines
+} from 'actions'
 
 import Topology from 'components/page/content/device/topology/Topology'
 
@@ -16,6 +28,9 @@ import Topology from 'components/page/content/device/topology/Topology'
     addGroupDevice,
     updateGroupDevice,
     removeGroupDevice,
+    addGroupLine,
+    updateGroupLine,
+    removeGroupLine,
     openDevice,
     closeDevice,
     fetchGroupDevicesAndLines

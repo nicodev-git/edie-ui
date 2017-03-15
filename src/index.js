@@ -41,6 +41,9 @@ const initialState = {
   devices: {
     devices: [],
 
+    mapDevices: [],
+    mapLines: [],
+
     incidents: [],
     incidentDraw: 1,
     addIncidentModalVisible: false,

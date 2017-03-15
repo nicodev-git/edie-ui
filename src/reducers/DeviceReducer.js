@@ -7,6 +7,12 @@ import {
   CLOSE_ADD_DEVICE_INCIDENT,
 
   FETCH_GROUP_DEVICES_LINES,
+  ADD_GROUP_DEVICE,
+  UPDATE_GROUP_DEVICE,
+  REMOVE_GROUP_DEVICE,
+  ADD_GROUP_LINE,
+  UPDATE_GROUP_LINE,
+  REMOVE_GROUP_LINE,
 
   FETCH_DEVICE_WORKFLOWS,
   FETCH_DEVICE_EVENTS,
@@ -217,6 +223,20 @@ export default function (state = INITIAL_STATE, action) {
 
     case FETCH_GROUP_DEVICES_LINES:
       return { ...state, mapDevices: action.devices, mapLines: action.lines }
+
+    case ADD_GROUP_DEVICE:
+      return { ...state, mapDevices: concat(state.mapDevices, action.data) }
+    case UPDATE_GROUP_DEVICE:
+      return { ...state, mapDevices: state.mapDevices.map(m => m.id === action.data.id ? action.data : m) }
+    case REMOVE_GROUP_DEVICE:
+      return { ...state, mapDevices: state.mapDevices.filter(m => m.id !== action.data.id) }
+
+    case ADD_GROUP_LINE:
+      return { ...state, mapLines: concat(state.mapLines, action.data) }
+    case UPDATE_GROUP_LINE:
+      return { ...state, mapLines: state.mapLines.map(m => m.id === action.data.id ? action.data : m) }
+    case REMOVE_GROUP_LINE:
+      return { ...state, mapLines: state.mapLines.filter(m => m.id !== action.data.id) }
   }
   return state
 }

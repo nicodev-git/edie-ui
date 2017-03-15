@@ -137,10 +137,11 @@ export default class Topology extends React.Component {
           fromPoint: lineObj.startPoint,
           to: lineObj.endObj.id,
           toPoint: lineObj.endPoint
-        }
+        },
+        groupid: this.props.id
       }
 
-      this.props.addGroupDevice(this.props.device, props, null, (res) => {
+      this.props.addGroupLine(props, (res) => {
         if (res) lineObj.id = res.id
       })
     } else {
@@ -155,14 +156,13 @@ export default class Topology extends React.Component {
           }
         })
 
-        this.props.updateGroupDevice(this.props.device, props)
+        this.props.updateGroupLine(props)
       }
     }
   }
 
   findMapLine (lineId) {
-    const groupDevices = (this.props.device.group || {}).devices || []
-    let con = groupDevices.filter(u => u.id === lineId)
+    let con = this.props.mapLines.filter(u => u.id === lineId)
     if (con.length) return con[0]
     return null
   }
@@ -181,11 +181,11 @@ export default class Topology extends React.Component {
       })
     })
 
-    this.props.updateGroupDevice(this.props.device, props)
+    this.props.updateGroupLine(props)
   }
 
   onMapTextChanged (map, props, isLabel) {
-    this.props.updateGroupDevice(this.props.device, props)
+    this.props.updateGroupDevice(props)
   }
 
   onMapMouseOver (map, obj) {
@@ -367,7 +367,7 @@ export default class Topology extends React.Component {
   moveMapItem (map, params, type) {
     if (!params) return true
 
-    this.props.updateGroupDevice(this.props.device, params)
+    this.props.updateGroupDevice(params)
   }
 
   addMapUploading (map, id) {
@@ -393,6 +393,7 @@ export default class Topology extends React.Component {
     let item = '' // eslint-disable-line no-unused-vars
     let name = '' // eslint-disable-line no-unused-vars
     let {data} = object
+    let isLine = false
     if (object.objectType === MapItemType.Device) { // eslint-disable-line no-undef
       item = 'device'
       name = `Name: ${object.data.name}`
@@ -401,13 +402,15 @@ export default class Topology extends React.Component {
     } else if (object.objectType === MapItemType.Shape) { // eslint-disable-line no-undef
       item = 'connection'
       data = this.findMapLine(object.id)
+      isLine = true
     }
 
     showConfirm('Click OK to delete.', (btn) => {
       if (btn !== 'ok') return
 
       if (data) {
-        this.props.removeGroupDevice(this.props.device, data)
+        if (isLine) this.props.removeGroupLine(data)
+        else this.props.removeGroupDevice(data)
       }
       cmap.removeMapItem(object, true)
     })
