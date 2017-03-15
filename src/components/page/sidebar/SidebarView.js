@@ -18,11 +18,7 @@ class SidebarView extends Component {
         badgeStyle={badgeStyle}
         style={badgeRootStyle}
       >
-        <IconButton
-          style={iconButtonStyle}
-          iconStyle={iconStyle}>
-            {item.icon}
-        </IconButton>
+        {this.renderButton(item)}
       </Badge>
     )
   }
@@ -30,6 +26,8 @@ class SidebarView extends Component {
   renderButton (item) {
     return (
       <IconButton
+        tooltip={item.title}
+        tooltipPosition="top-right"
         style={iconButtonStyle}
         iconStyle={iconStyle}>
           {item.icon}
