@@ -16,6 +16,7 @@ export default class IncidentEventsModal extends React.Component {
         <thead>
           <tr>
             <th>Date/Time</th>
+            <th>Description</th>
             <th>Rawdata</th>
             <th>Parsed Json</th>
           </tr>
@@ -24,6 +25,7 @@ export default class IncidentEventsModal extends React.Component {
           (events || []).map((e, i) =>
           <tr key={i}>
             <td className="nowrap">{moment(e.datetime).format('YYYY-MM-DD HH:mm:ss')}</td>
+            <td>{e.description}</td>
             <td>{e.rawdata}</td>
             <td>{e.json}</td>
           </tr>)
@@ -44,7 +46,7 @@ export default class IncidentEventsModal extends React.Component {
   render () {
     return (
       <Modal show onHide={this.onHide.bind(this)}
-        aria-labelledby="ModalHeader" className="bootstrap-dialog type-primary modal-w-9">
+        aria-labelledby="ModalHeader" className="bootstrap-dialog type-primary modal-w-fit">
         <div className="modal-header">
           <h4 className="modal-title bootstrap-dialog-title">
             Incident Events
