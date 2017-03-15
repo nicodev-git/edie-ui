@@ -122,7 +122,7 @@ export default class Topology extends React.Component {
     if (!options) return
 
     options.mapid = this.props.device.mapid
-    options.fatherid = options.fatherid || this.props.device.id
+    options.groupid = options.groupid || this.props.device.id
 
     return this.moveMapItem(map, options, type)
   }

@@ -620,7 +620,7 @@ var mapObject = {
               deviceObj.labelObj.left = deviceObj.imageObj.left + offsetX;
               deviceObj.labelObj.top = deviceObj.imageObj.top + offsetY;
 
-              deviceObj.data.fatherid = groupObj.data.id;
+              deviceObj.data.groupid = groupObj.data.id;
               //Now Move
               if (deviceObj.onLabelObjMoved) {
                 var req = deviceObj.onLabelObjMoved(null);
@@ -631,7 +631,7 @@ var mapObject = {
               deviceObj.left = deviceObj.left - startX + 100;
               deviceObj.top = deviceObj.top - startY + 100;
 
-              deviceObj.data.fatherid = groupObj.data.id;
+              deviceObj.data.groupid = groupObj.data.id;
               //Now Move
               if (deviceObj.onMoved) {
                 var req = deviceObj.onMoved();

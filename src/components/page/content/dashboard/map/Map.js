@@ -44,19 +44,7 @@ class Map extends React.Component {
       cmap: null
     }
 
-        // /////////////////////////////////////////////
-    this.curMapDraw = 1
-    this.mapTimer = 0
-
-    this.arrDevices = []
-    this.arrLastDevices = []
-    this.strLastDevices = ''
-
-    this.arrLines = {}
-    this.arrLastLines = {}
-    this.strLastLines = ''
-
-        // /////////////////////////////////////////////
+    // /////////////////////////////////////////////
 
     this.mapListener = {
       onObjectSelected: this.onMapObjectSelected.bind(this),
@@ -525,7 +513,7 @@ class Map extends React.Component {
 
   moveMapItem (map, params, type) {
     if (!params) return true
-
+    if (params.groupid) params.mapid = null
     this.props.updateMapDevice(params)
   }
 
