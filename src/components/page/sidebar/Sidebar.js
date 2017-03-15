@@ -1,7 +1,7 @@
 import React from 'react'
 import $ from 'jquery'
-
 import { isGroup } from 'shared/Global'
+import SidebarView from './SidebarView'
 
 export default class Sidebar extends React.Component {
   constructor (props) {
@@ -22,7 +22,9 @@ export default class Sidebar extends React.Component {
   }
 
   initMenuItemHover () {
-    const nav = this.nav
+    // const nav = this.nav
+    let nav = document.getElementById('main-navigation')
+    console.log(nav)
     $(nav).on('mouseover', 'li', (e) => { // eslint-disable-line no-undef
       if (!$('body').hasClass('sidebar-condensed')) return // eslint-disable-line no-undef
 
@@ -44,7 +46,8 @@ export default class Sidebar extends React.Component {
   }
 
   destoryMenuItemHover () {
-    const nav = this.nav
+    // const nav = this.nav
+    let nav = document.getElementById('main-navigation')
     $(nav).off('mouseover', 'li') // eslint-disable-line no-undef
     $(nav).off('mouseout', 'li') // eslint-disable-line no-undef
     $(nav).off('touchend', 'li') // eslint-disable-line no-undef
@@ -73,6 +76,13 @@ export default class Sidebar extends React.Component {
     const group = isGroup(device)
 
     return (
+      <SidebarView
+        onToggle={this.onClickToggleSidebar.bind(this)}
+        contentType={this.props.contentType}
+        mainMenu={this.props.mainMenu}
+        onMainMenu={this.onClickMainMenu.bind(this)}
+        onDeviceMenu={this.onClickDeviceMenu.bind(this, index)}
+      />
       <aside className="sidebar sidebar-default">
         <div className="sidebar-minimize">
           <a href="javascript:;"
