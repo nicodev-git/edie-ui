@@ -45,6 +45,13 @@ const dividerStyle = {
   marginBottom: '0px'
 }
 
+const newStyle = {
+  backgroundColor: '#52a1bf',
+  color: '#ffffff',
+  paddingTop: '3px',
+  paddingBottom: '3px'
+}
+
 const seeAllStyle = {
   backgroundColor: '#e8e6e6',
   paddingTop: '3px',
@@ -75,7 +82,7 @@ const MessageBox = () => (
           targetOrigin={{horizontal: 'right', vertical: 'top'}}
           listStyle={iconMenuStyle}
         >
-          <MenuItem style={seeAllStyle} primaryText="New messages" />
+          <MenuItem style={newStyle} primaryText="New messages" />
           <Divider style={dividerStyle}/>
           <MenuItem style={messageStyle}>
             <Message
