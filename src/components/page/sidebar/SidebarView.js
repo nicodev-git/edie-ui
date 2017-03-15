@@ -57,7 +57,10 @@ class SidebarView extends Component {
               <li key={index}
                 className={pageId === item.id ? 'active open' : ''}
                 onClick={onMainMenu.bind(this, index)}>
-                {item.badge ? this.renderBadge(item) : this.renderButton(item)}
+                <div className="sidebar-item-container">
+                  {item.badge ? this.renderBadge(item) : this.renderButton(item)}
+                  <div className="sidebar-title">{item.title}</div>
+                </div>
               </li>
             )}
 

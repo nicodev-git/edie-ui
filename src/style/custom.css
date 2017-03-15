@@ -486,3 +486,18 @@ table.table tbody tr.selected {
 .see-all-messages>div>div {
   padding-left: 50px !important;
 }
+
+.sidebar-item-container {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.sidebar-title {
+  color: #838489;
+  padding-top: 15px;
+  padding-left: 20px;
+}
+
+.sidebar-condensed .sidebar-title {
+  display: none;
+}
