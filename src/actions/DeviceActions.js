@@ -708,13 +708,20 @@ export const fetchGroupDevicesAndLines = (groupid) => {
   if (!window.localStorage.getItem('token')) {
     return dispatch => dispatch({ type: NO_AUTH_ERROR })
   }
+
   return (dispatch) => {
-    const req1 = axios.get(`${ROOT_URL}/device/search/findByGroupid`, {params: {groupid}})
+    dispatch({
+      type: FETCH_GROUP_DEVICES_LINES,
+      devices: [],
+      lines: []
+    })
+
+    const req1 = axios.get(`${ROOT_URL}/device/search/findDevicesByGroupid`, {params: {groupid}})
       .then(response => {
         return response.data._embedded.devices
       })
 
-    const req2 = axios.get(`${ROOT_URL}/device/search/findLinesByMapid`, {params: {groupid}})
+    const req2 = axios.get(`${ROOT_URL}/device/search/findLinesByGroupid`, {params: {groupid}})
       .then(response => {
         return response.data._embedded.devices
       })

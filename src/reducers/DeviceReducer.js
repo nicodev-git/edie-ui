@@ -6,6 +6,8 @@ import {
   UPDATE_DEVICE_INCIDENT,
   CLOSE_ADD_DEVICE_INCIDENT,
 
+  FETCH_GROUP_DEVICES_LINES,
+
   FETCH_DEVICE_WORKFLOWS,
   FETCH_DEVICE_EVENTS,
   FETCH_DEVICE_PHYSICAL_RULES,
@@ -212,6 +214,9 @@ export default function (state = INITIAL_STATE, action) {
 
     case UPDATE_MONITOR_PARAMS:
       return { ...state, monitorParams: action.params }
+
+    case FETCH_GROUP_DEVICES_LINES:
+      return { ...state, mapDevices: action.devices, mapLines: action.lines }
   }
   return state
 }

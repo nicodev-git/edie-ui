@@ -1,7 +1,7 @@
 import React from 'react'
 import { withRouter } from 'react-router'
 import { connect } from 'react-redux'
-import { addGroupDevice, updateGroupDevice, removeGroupDevice, openDevice, closeDevice } from 'actions'
+import { addGroupDevice, updateGroupDevice, removeGroupDevice, openDevice, closeDevice, fetchGroupDevicesAndLines } from 'actions'
 
 import Topology from 'components/page/content/device/topology/Topology'
 
@@ -9,13 +9,16 @@ import Topology from 'components/page/content/device/topology/Topology'
   state => ({
     device: state.dashboard.selectedDevice,
     deviceCategories: state.settings.deviceCategories,
-    deviceTemplates: state.settings.deviceTemplates
+    deviceTemplates: state.settings.deviceTemplates,
+    mapDevices: state.devices.mapDevices,
+    mapLines: state.devices.mapLines
   }), {
     addGroupDevice,
     updateGroupDevice,
     removeGroupDevice,
     openDevice,
-    closeDevice
+    closeDevice,
+    fetchGroupDevicesAndLines
   }
 )
 @withRouter

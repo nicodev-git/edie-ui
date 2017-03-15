@@ -74,8 +74,8 @@ export default class Topology extends React.Component {
     }
   }
 
-  componentDidMount () {
-
+  componentWillMount () {
+    this.props.fetchGroupDevicesAndLines(this.props.device.id)
   }
 
   // ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -503,9 +503,6 @@ export default class Topology extends React.Component {
     } = this.state
 
     const { device } = this.props
-    const groupDevices = (device.group || {}).devices || []
-    const mapDevices = groupDevices.filter(g => !g.line)
-    const mapLines = groupDevices.filter(g => !!g.line)
 
     return (
       <div>
@@ -532,8 +529,8 @@ export default class Topology extends React.Component {
               dragItem={selectedItem}
               dropItem={dropItem}
               dropItemPos={dropItemPos}
-              mapDevices={mapDevices}
-              mapLines={mapLines}
+              mapDevices={this.props.mapDevices}
+              mapLines={this.props.mapLines}
               ref="map"/>
             <DeviceDragLayer />
             <div className={`map-hover ${tooltip ? '' : 'hidden'}`}
