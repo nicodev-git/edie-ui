@@ -1,3 +1,16 @@
+import Badge from 'material-ui/Badge'
+import IconButton from 'material-ui/IconButton'
+import HomeIcon from 'material-ui/svg-icons/action/home'
+import SearchIcon from 'material-ui/svg-icons/action/search'
+import ChatIcon from 'material-ui/svg-icons/communication/chat'
+import BugReportIcon from 'material-ui/svg-icons/action/bug-report'
+import NotificationsNoneIcon from 'material-ui/svg-icons/social/notifications-none'
+import SettingsIcon from 'material-ui/svg-icons/action/settings'
+
+const dashboard = <HomeIcon />
+const search = <SearchIcon />
+const chat = <ChatIcon />
+const threatmap = <BugReportIcon />
 
 
 export const mainMenu = [
