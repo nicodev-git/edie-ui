@@ -250,7 +250,10 @@ export const fetchMapDevicesAndLines = (mapid) => {
     const req2 = axios.get(`${ROOT_URL}/device/search/findLinesByMapid`, {params: {mapid}})
       .then(response => fetchLinesByMapid(response))
 
-    axios.all([req1, req2])
+    const req3 = axios.get(`${ROOT_URL}/group/search/findByMapid`, {params: {mapid}})
+      .then(response => fetchGroupsByMapid(response))
+
+    axios.all([req1, req2, req3])
       .then(response => fetchMapDevicesAndLinesSuccess(dispatch, response))
       .catch(error => apiError(dispatch, error))
   }
@@ -270,6 +273,10 @@ const fetchDevicesByMapid = (response) => {
 
 const fetchLinesByMapid = (response) => {
   return response.data._embedded.devices
+}
+
+const fetchGroupsByMapid = (response) => {
+  return response.data._embedded.groups
 }
 
 const fetchMapDevicesAndLinesSuccess = (dispatch, response) => {
