@@ -72,76 +72,18 @@ export default class Sidebar extends React.Component {
   }
 
   render () {
-    const {device, pageId, pageType} = this.props
+    const device = this.props.device
     const group = isGroup(device)
-
     return (
       <SidebarView
         onToggle={this.onClickToggleSidebar.bind(this)}
-        contentType={this.props.contentType}
-        mainMenu={this.props.mainMenu}
         onMainMenu={this.onClickMainMenu.bind(this)}
-        onDeviceMenu={this.onClickDeviceMenu.bind(this, index)}
+        onDeviceMenu={this.onClickDeviceMenu.bind(this)}
+        tooltipText={this.state.tooltipText}
+        tooltipTop={this.state.tooltipTop}
+        group={group}
+        {...this.props}
       />
-      <aside className="sidebar sidebar-default">
-        <div className="sidebar-minimize">
-          <a href="javascript:;"
-            style={{color: 'white'}} onClick={this.onClickToggleSidebar.bind(this)}>
-            <i className="fa fa-lg fa-fw fa-bars" />
-          </a>
-        </div>
-        <nav ref={nav => { this.nav = nav }}>
-          <ul className="nav nav-pills nav-stacked" style={{display: this.props.contentType.Main === pageType ? 'block' : 'none'}}>
-
-            {this.props.mainMenu.map((item, index) =>
-              <li key={index}
-                className={pageId === item.id ? 'active open' : ''}
-                onClick={this.onClickMainMenu.bind(this, index)}>
-
-                <a href="javascript:;">
-                  <i className={`fa fa-lg fa-fw ${item.icon}`} />{item.title}
-                </a>
-              </li>
-            )}
-
-          </ul>
-
-          <ul className="nav nav-pills nav-stacked"
-            style={{display: this.props.contentType.Device === pageType ? 'block' : 'none'}}>
-
-            {this.props.deviceMenu(device ? device.id : 'main').map((item, index) => {
-              if (item.group && !group) return null
-              return (
-                <li key={index} className={pageId === item.id ? 'active open' : ''}
-                  onClick={this.onClickDeviceMenu.bind(this, index)}>
-                  <a href="javascript:;">
-                    <i className={`fa fa-lg fa-fw ${item.icon}`} />{item.title}
-                  </a>
-                </li>
-              )
-            })}
-          </ul>
-        </nav>
-        <h5 className="sidebar-header hidden">Incidents</h5>
-        <div style={{padding: '0 10px 10px 10px'}} className="padding-sm graph-stack hidden">
-          <span className="graph-title">Incidents By Type</span>
-          <div id="maingraph" style={{background: 'white'}} />
-
-          <span className="graph-title">Incidents By IP</span>
-          <div id="maingraph2" style={{background: 'white'}} />
-        </div>
-
-        <div className={`sidebar-tooltip${this.state.tooltipText ? '' : ' hidden'}`}
-          style={{top: `${this.state.tooltipTop}px`}}
-          ref="tooltipBody">
-
-          <div className="forceIcon">
-            <i className="fa fa-caret-left fa-2x" />
-          </div>
-          <span>{this.state.tooltipText}</span>
-
-        </div>
-      </aside>
     )
   }
 }
