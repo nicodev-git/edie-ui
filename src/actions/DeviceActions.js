@@ -63,6 +63,9 @@ import {
   FIX_ALL_DEVICE_INCIDENTS,
 
   FETCH_GROUP_DEVICES_LINES,
+  ADD_GROUP_DEVICE,
+  UPDATE_GROUP_DEVICE,
+  REMOVE_GROUP_DEVICE,
 
   NO_AUTH_ERROR
 } from './types'
@@ -643,56 +646,37 @@ export const closeWfActionModal = () => {
   }
 }
 
-export const addGroupDevice = (group, props, url, cb) => {
+export const addGroupDevice = (props, url, cb) => {
   if (!window.localStorage.getItem('token')) {
     return dispatch => dispatch({ type: NO_AUTH_ERROR })
   }
   return (dispatch) => {
-    axios.post(`${ROOT_URL}${url || '/device'}`, props)
-      .then(response => addGroupDeviceSuccess(dispatch, group, response.data, cb))
-      .catch(error => apiError(dispatch, error))
+    axios.post(`${ROOT_URL}${url || '/device'}`, props).then(response => {
+      dispatch({type: ADD_GROUP_DEVICE, data: response.data})
+      cb && cb(response.data)
+    }).catch(error => apiError(dispatch, error))
   }
 }
 
-const addGroupDeviceSuccess = (dispatch, group, device, cb) => {
-  // const entity = assign({}, group, {
-  //   group: assign({}, group.group, {
-  //     devices: concat((group.group || {}).devices || [], device)
-  //   })
-  // })
-  // axios.put(entity._links.self.href, entity).then(res => {
-  //   dispatch({type: UPDATE_MAP_DEVICE, data: res.data})
-  //   cb && cb(res.data)
-  // }).catch(error => apiError(dispatch, error))
-}
-
-export const updateGroupDevice = (group, props) => {
-  return dispatch => {
-    // const devices = (group.group || {}).devices || []
-    //
-    // const entity = assign({}, group, {
-    //   group: assign({}, group.group, {
-    //     devices: devices.map(d => d.id === props.id ? props : d)
-    //   })
-    // })
-    // axios.put(entity._links.self.href, entity).then(res => {
-    //   dispatch({type: UPDATE_MAP_DEVICE, data: res.data})
-    // }).catch(error => apiError(dispatch, error))
+export const updateGroupDevice = (entity) => {
+  if (!window.localStorage.getItem('token')) {
+    return dispatch => dispatch({ type: NO_AUTH_ERROR })
+  }
+  return (dispatch) => {
+    axios.put(entity._links.self.href, entity).then(response => {
+      dispatch({type: UPDATE_GROUP_DEVICE, data: response.data})
+    }).catch(error => apiError(dispatch, error))
   }
 }
 
-export const removeGroupDevice = (group, props) => {
-  return dispatch => {
-    // const devices = (group.group || {}).devices || []
-    //
-    // const entity = assign({}, group, {
-    //   group: assign({}, group.group, {
-    //     devices: devices.filter(d => d.id !== props.id)
-    //   })
-    // })
-    // axios.put(entity._links.self.href, entity).then(res => {
-    //   dispatch({type: UPDATE_MAP_DEVICE, data: res.data})
-    // }).catch(error => apiError(dispatch, error))
+export const removeGroupDevice = (entity) => {
+  if (!window.localStorage.getItem('token')) {
+    return dispatch => dispatch({ type: NO_AUTH_ERROR })
+  }
+  return (dispatch) => {
+    axios.delete(entity._links.self.href).then(() => {
+      dispatch({type: REMOVE_GROUP_DEVICE, data: entity})
+    }).catch(error => apiError(dispatch, error))
   }
 }
 

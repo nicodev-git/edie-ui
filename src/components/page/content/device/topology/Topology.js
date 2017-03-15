@@ -466,7 +466,7 @@ export default class Topology extends React.Component {
       }
 
       this.onClickEdit()
-      this.props.addGroupDevice(this.props.device, params)
+      this.props.addGroupDevice(params)
       closeCallback && closeCallback()
     } else {
       if (wizardConfig[options.type] === null) {
@@ -484,7 +484,7 @@ export default class Topology extends React.Component {
   }
 
   onFinishAddWizard (callback, res, params, url) {
-    this.props.addGroupDevice(this.props.device, params, url)
+    this.props.addGroupDevice(params, url)
   }
 
   // ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
