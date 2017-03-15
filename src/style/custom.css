@@ -517,7 +517,7 @@ table.table tbody tr.selected {
 }
 
 .sidebar-chosen {
-  background-color: #000000;
+  background-color: #2b2c31;
 }
 
 .sidebar-chosen .sidebar-title {
@@ -530,4 +530,16 @@ table.table tbody tr.selected {
 
 #main-navigation {
   padding-top: 30px;
+}
+
+.sidebar-custom {
+  background-color: #33363d !important;
+}
+
+.sidebar-custom hr {
+  margin-left: 10px !important;
+}
+
+.sidebar-condensed .sidebar-custom hr {
+  margin-left: 0px !important;
 }

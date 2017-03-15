@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import IconButton from 'material-ui/IconButton'
 import Badge from 'material-ui/Badge'
+import Divider from 'material-ui/Divider'
 import MenuIcon from 'material-ui/svg-icons/navigation/menu'
 import {badgeStyle, badgeRootStyle, iconStyle, iconButtonStyle} from '../../../style/materialStyles'
 
@@ -40,7 +41,7 @@ class SidebarView extends Component {
     device, pageId, pageType, tooltipText, tooltipTop, group} = this.props
 
     return (
-      <aside className="sidebar sidebar-default">
+      <aside className="sidebar sidebar-default sidebar-custom">
         <div>
           <IconButton
             style={iconButtonStyle}
@@ -57,9 +58,12 @@ class SidebarView extends Component {
               <li key={index}
                 className={pageId === item.id ? 'sidebar-chosen' : ''}
                 onClick={onMainMenu.bind(this, index)}>
-                <div className="sidebar-item-container">
-                  {item.badge ? this.renderBadge(item) : this.renderButton(item)}
-                  <div className="sidebar-title">{item.title}</div>
+                <div>
+                  {(index !== 0) ? (<Divider style={{margin: 0, backgroundColor: '#393b42'}}/>) : null}
+                  <div className="sidebar-item-container">
+                    {item.badge ? this.renderBadge(item) : this.renderButton(item)}
+                    <div className="sidebar-title">{item.title}</div>
+                  </div>
                 </div>
               </li>
             )}
