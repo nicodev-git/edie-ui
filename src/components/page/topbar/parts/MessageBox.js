@@ -35,13 +35,25 @@ const iconStyle = {
   height: 30
 }
 
+const iconMenuStyle = {
+  paddingTop: '0px',
+  paddingBottom: '0px'
+}
+
 const dividerStyle = {
-  marginTop: '3px',
-  marginBottom: '3px'
+  marginTop: '0px',
+  marginBottom: '0px'
 }
 
 const seeAllStyle = {
-  backgroundColor: '#e8e6e6'
+  backgroundColor: '#e8e6e6',
+  paddingTop: '3px',
+  paddingBottom: '3px'
+}
+
+const messageStyle = {
+  paddingTop: '3px',
+  paddingBottom: '3px'
 }
 
 const MessageBox = () => (
@@ -61,10 +73,11 @@ const MessageBox = () => (
           }
           anchorOrigin={{horizontal: 'right', vertical: 'bottom'}}
           targetOrigin={{horizontal: 'right', vertical: 'top'}}
+          listStyle={iconMenuStyle}
         >
-          <MenuItem primaryText="New messages" />
+          <MenuItem style={seeAllStyle} primaryText="New messages" />
           <Divider style={dividerStyle}/>
-          <MenuItem>
+          <MenuItem style={messageStyle}>
             <Message
               avatar="/images/avatars/1.jpg"
               name="Ernest Kerry"
@@ -73,7 +86,7 @@ const MessageBox = () => (
             />
           </MenuItem>
           <Divider style={dividerStyle}/>
-          <MenuItem>
+          <MenuItem style={messageStyle}>
             <Message
               avatar="/images/avatars/3.jpg"
               name="Don Mark"
