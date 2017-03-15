@@ -1,5 +1,5 @@
 import axios from 'axios'
-import {assign, concat} from 'lodash'
+// import {assign, concat} from 'lodash'
 import {
   FETCH_DEVICES,
 
@@ -58,7 +58,7 @@ import {
   OPEN_WF_ACTION_MODAL,
   CLOSE_WF_ACTION_MODAL,
 
-  UPDATE_MAP_DEVICE,
+  // UPDATE_MAP_DEVICE,
 
   FIX_ALL_DEVICE_INCIDENTS,
 
@@ -641,54 +641,56 @@ export const closeWfActionModal = () => {
   }
 }
 
-export const addGroupDevice = (group, props, cb) => {
+export const addGroupDevice = (group, props, url, cb) => {
   if (!window.localStorage.getItem('token')) {
     return dispatch => dispatch({ type: NO_AUTH_ERROR })
   }
   return (dispatch) => {
-    addGroupDeviceSuccess(dispatch, group, props, cb)
+    axios.post(`${ROOT_URL}${url || '/device'}`, props)
+      .then(response => addGroupDeviceSuccess(dispatch, group, response.data, cb))
+      .catch(error => apiError(dispatch, error))
   }
 }
 
 const addGroupDeviceSuccess = (dispatch, group, device, cb) => {
-  const entity = assign({}, group, {
-    group: assign({}, group.group, {
-      devices: concat((group.group || {}).devices || [], device)
-    })
-  })
-  axios.put(entity._links.self.href, entity).then(res => {
-    dispatch({type: UPDATE_MAP_DEVICE, data: res.data})
-    cb && cb(res.data)
-  }).catch(error => apiError(dispatch, error))
+  // const entity = assign({}, group, {
+  //   group: assign({}, group.group, {
+  //     devices: concat((group.group || {}).devices || [], device)
+  //   })
+  // })
+  // axios.put(entity._links.self.href, entity).then(res => {
+  //   dispatch({type: UPDATE_MAP_DEVICE, data: res.data})
+  //   cb && cb(res.data)
+  // }).catch(error => apiError(dispatch, error))
 }
 
 export const updateGroupDevice = (group, props) => {
   return dispatch => {
-    const devices = (group.group || {}).devices || []
-
-    const entity = assign({}, group, {
-      group: assign({}, group.group, {
-        devices: devices.map(d => d.id === props.id ? props : d)
-      })
-    })
-    axios.put(entity._links.self.href, entity).then(res => {
-      dispatch({type: UPDATE_MAP_DEVICE, data: res.data})
-    }).catch(error => apiError(dispatch, error))
+    // const devices = (group.group || {}).devices || []
+    //
+    // const entity = assign({}, group, {
+    //   group: assign({}, group.group, {
+    //     devices: devices.map(d => d.id === props.id ? props : d)
+    //   })
+    // })
+    // axios.put(entity._links.self.href, entity).then(res => {
+    //   dispatch({type: UPDATE_MAP_DEVICE, data: res.data})
+    // }).catch(error => apiError(dispatch, error))
   }
 }
 
 export const removeGroupDevice = (group, props) => {
   return dispatch => {
-    const devices = (group.group || {}).devices || []
-
-    const entity = assign({}, group, {
-      group: assign({}, group.group, {
-        devices: devices.filter(d => d.id !== props.id)
-      })
-    })
-    axios.put(entity._links.self.href, entity).then(res => {
-      dispatch({type: UPDATE_MAP_DEVICE, data: res.data})
-    }).catch(error => apiError(dispatch, error))
+    // const devices = (group.group || {}).devices || []
+    //
+    // const entity = assign({}, group, {
+    //   group: assign({}, group.group, {
+    //     devices: devices.filter(d => d.id !== props.id)
+    //   })
+    // })
+    // axios.put(entity._links.self.href, entity).then(res => {
+    //   dispatch({type: UPDATE_MAP_DEVICE, data: res.data})
+    // }).catch(error => apiError(dispatch, error))
   }
 }
 

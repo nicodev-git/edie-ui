@@ -670,7 +670,6 @@ export const wizardConfig = {
     server: {
       url: '/group',
       params: {
-        isgroup: true
       }
     },
     steps: [{

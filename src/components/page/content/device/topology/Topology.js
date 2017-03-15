@@ -10,6 +10,7 @@ import { wizardConfig, getDeviceType } from 'components/shared/wizard/WizardConf
 import {showAlert, showConfirm} from '../../../../shared/Alert'
 
 import DeviceDragLayer from './DeviceDragLayer'
+import { isGroup } from 'shared/Global'
 
 export default class Topology extends React.Component {
   constructor (props) {
@@ -31,17 +32,6 @@ export default class Topology extends React.Component {
 
       tipObject: null
     }
-
-    this.curMapDraw = 1
-    this.mapTimer = 0
-
-    this.arrDevices = []
-    this.arrLastDevices = []
-    this.strLastDevices = ''
-
-    this.arrLines = {}
-    this.arrLastLines = {}
-    this.strLastLines = ''
 
     this.mapListener = {
       onObjectSelected: this.onMapObjectSelected.bind(this),
@@ -117,7 +107,7 @@ export default class Topology extends React.Component {
     // this.props.openDevice(obj.data)
     this.props.closeDevice()
 
-    if (obj.data.isgroup) {
+    if (isGroup(obj.data)) {
       this.props.router.push(`/device/${obj.data.id}/topology`)
     } else {
       this.props.router.push(`/device/${obj.data.id}/main/incidents`)
@@ -150,7 +140,7 @@ export default class Topology extends React.Component {
         }
       }
 
-      this.props.addGroupDevice(this.props.device, props, (res) => {
+      this.props.addGroupDevice(this.props.device, props, null, (res) => {
         if (res) lineObj.id = res.id
       })
     } else {
@@ -440,7 +430,8 @@ export default class Topology extends React.Component {
       width: options.width,
       height: options.height,
       image: options.imgName,
-      templateName: options.templateName
+      templateName: options.templateName,
+      groupid: this.props.device.id
     }
 
     let config = {}
@@ -470,13 +461,12 @@ export default class Topology extends React.Component {
         y: options.y,
         width: options.width,
         height: options.height,
-        templateName: options.templateName
+        templateName: options.templateName,
+        groupid: this.props.device.id
       }
 
       this.onClickEdit()
       this.props.addGroupDevice(this.props.device, params)
-
-      this.setState({dropItem: null})
       closeCallback && closeCallback()
     } else {
       if (wizardConfig[options.type] === null) {
@@ -493,8 +483,8 @@ export default class Topology extends React.Component {
     }
   }
 
-  onFinishAddWizard (callback, res, params) {
-    this.props.addGroupDevice(this.props.device, params)
+  onFinishAddWizard (callback, res, params, url) {
+    this.props.addGroupDevice(this.props.device, params, url)
   }
 
   // ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
