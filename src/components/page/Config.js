@@ -1,5 +1,4 @@
-import Badge from 'material-ui/Badge'
-import IconButton from 'material-ui/IconButton'
+import React from 'react'
 import HomeIcon from 'material-ui/svg-icons/action/home'
 import SearchIcon from 'material-ui/svg-icons/action/search'
 import ChatIcon from 'material-ui/svg-icons/communication/chat'
@@ -7,19 +6,20 @@ import BugReportIcon from 'material-ui/svg-icons/action/bug-report'
 import NotificationsNoneIcon from 'material-ui/svg-icons/social/notifications-none'
 import SettingsIcon from 'material-ui/svg-icons/action/settings'
 
-const dashboard = <HomeIcon />
+const home = <HomeIcon />
 const search = <SearchIcon />
 const chat = <ChatIcon />
 const threatmap = <BugReportIcon />
-
+const incidents = <NotificationsNoneIcon />
+const settings = <SettingsIcon />
 
 export const mainMenu = [
-  {id: 'dashboard', title: 'Dashboard', icon: 'fa-home', path: '/'},
-  {id: 'search', title: 'Search', icon: 'fa-search', path: '/search'},
-  {id: 'chat', title: 'Chat', icon: 'fa-comment', path: '/chat'},
-  {id: 'threatmap', title: 'Threat Map', icon: 'fa-bolt', path: '/threatmap'},
-  {id: 'incidents', title: 'Incidents', icon: ' fa-exclamation-triangle', path: '/incidents'},
-  {id: 'settings', title: 'Settings', icon: 'fa-wrench', path: '/settings'}
+  {id: 'dashboard', title: 'Dashboard', icon: home, path: '/'},
+  {id: 'search', title: 'Search', icon: search, path: '/search'},
+  {id: 'chat', title: 'Chat', icon: chat, path: '/chat'},
+  {id: 'threatmap', title: 'Threat Map', icon: threatmap, path: '/threatmap'},
+  {id: 'incidents', title: 'Incidents', icon: incidents, path: '/incidents', badge: true},
+  {id: 'settings', title: 'Settings', icon: settings, path: '/settings'}
 ]
 
 export const deviceMenu = (deviceId) => {
