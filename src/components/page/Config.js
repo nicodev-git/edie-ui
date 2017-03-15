@@ -1,3 +1,5 @@
+
+
 export const mainMenu = [
   {id: 'dashboard', title: 'Dashboard', icon: 'fa-home', path: '/'},
   {id: 'search', title: 'Search', icon: 'fa-search', path: '/search'},

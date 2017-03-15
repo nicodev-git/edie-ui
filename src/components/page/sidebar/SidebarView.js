@@ -7,6 +7,25 @@ class SidebarView extends Component {
 
     return (
       <aside className="sidebar sidebar-default">
+        <IconMenu
+          iconButtonElement={
+            <IconButton style={buttonStyle} iconStyle={iconStyle}>
+                <ZoomInIcon color="#545454"/>
+            </IconButton>
+          }
+          anchorOrigin={{horizontal: 'left', vertical: 'top'}}
+          targetOrigin={{horizontal: 'left', vertical: 'top'}}
+        >
+          <MenuItem onTouchTap={onZoomIn}>Zoom in</MenuItem>
+          <MenuItem onTouchTap={onZoomOut}>Zoom Out</MenuItem>
+          <MenuItem onTouchTap={onZoomRect}>Zoom Rect</MenuItem>
+          <MenuItem onTouchTap={onZoomReset}>Reset</MenuItem>
+        </IconMenu>
+      </aside>
+    )
+
+/*    return (
+      <aside className="sidebar sidebar-default">
         <div className="sidebar-minimize">
           <a href="javascript:;"
             style={{color: 'white'}} onClick={onToggle}>
@@ -67,6 +86,6 @@ class SidebarView extends Component {
       </aside>
     )
   }
-}
+} */
 
 export default SidebarView
