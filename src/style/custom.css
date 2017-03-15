@@ -473,3 +473,13 @@ table.table tbody tr.selected {
 .message-time {
   padding-left: 15px;
 }
+
+.see-all-messages:hover {
+  background-color: #b8b7b7 !important;
+  color: #ffffff !important;
+  fill: #ffffff !important;
+}
+
+.see-all-messages>div>div {
+  padding-left: 50px !important;
+}

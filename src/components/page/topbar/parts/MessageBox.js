@@ -96,6 +96,7 @@ const MessageBox = () => (
           </MenuItem>
           <Divider style={dividerStyle}/>
           <MenuItem
+            className="see-all-messages"
             primaryText="See all messages"
             leftIcon={<InboxIcon/>}
             style={seeAllStyle}/>
