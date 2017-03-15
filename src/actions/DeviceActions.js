@@ -732,7 +732,7 @@ export const addGroupLine = (props, cb) => {
     return dispatch => dispatch({ type: NO_AUTH_ERROR })
   }
   return (dispatch) => {
-    axios.post(`${ROOT_URL}'/device'`, props).then(response => {
+    axios.post(`${ROOT_URL}/device`, props).then(response => {
       dispatch({type: ADD_GROUP_LINE, data: response.data})
       cb && cb(response.data)
     }).catch(error => apiError(dispatch, error))

@@ -138,7 +138,7 @@ export default class Topology extends React.Component {
           to: lineObj.endObj.id,
           toPoint: lineObj.endPoint
         },
-        groupid: this.props.id
+        groupid: this.props.device.id
       }
 
       this.props.addGroupLine(props, (res) => {
