@@ -18,7 +18,11 @@ class SidebarView extends Component {
         badgeStyle={badgeStyle}
         style={badgeRootStyle}
       >
-        {item.icon}
+        <IconButton
+          style={iconButtonStyle}
+          iconStyle={iconStyle}>
+            {item.icon}
+        </IconButton>
       </Badge>
     )
   }
@@ -48,7 +52,7 @@ class SidebarView extends Component {
           </IconButton>
         </div>
         <nav id="main-navigation">
-          <ul className="nav nav-pills nav-stacked"
+          <ul className="nav nav-stacked"
             style={{display: contentType.Main === pageType ? 'block' : 'none'}}>
 
             {mainMenu.map((item, index) =>

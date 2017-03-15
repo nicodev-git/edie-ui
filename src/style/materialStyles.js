@@ -72,6 +72,7 @@ export const badgeStyle = {
 }
 
 export const badgeRootStyle = {
-  padding: '8px 8px 8px 8px',
+  padding: 0,
+  width: 50,
   height: 50
 }
