@@ -14,6 +14,7 @@ import { wizardConfig, getDeviceType } from '../../../../shared/wizard/WizardCon
 import { showConfirm } from '../../../../shared/Alert'
 
 import { fullScreen } from 'shared/FullScreen'
+import { isGroup } from 'shared/Global'
 
 class Map extends React.Component {
   constructor (props) {
@@ -229,7 +230,7 @@ class Map extends React.Component {
     console.log(obj.data)
     this.props.openDevice(obj.data)
 
-    if (obj.data.isgroup) {
+    if (isGroup(obj.data)) {
       this.props.router.push(`/device/${obj.data.id}/topology`)
     } else {
       this.props.router.push(`/device/${obj.data.id}/main/incidents`)
@@ -628,8 +629,7 @@ class Map extends React.Component {
   onFinishAddWizard (callback, res, params, url) {
     params.textWidth = Math.max(8 * params.name.length, 50)
     params.textX = params.x + params.width / 2 - params.textWidth / 2
-    console.log(arguments)
-    // this.props.addMapDevice(params, url)
+    this.props.addMapDevice(params, url)
   }
 
     // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////

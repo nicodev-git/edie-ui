@@ -1,6 +1,8 @@
 import React from 'react'
 import $ from 'jquery'
 
+import { isGroup } from 'shared/Global'
+
 export default class Sidebar extends React.Component {
   constructor (props) {
     super(props)
@@ -68,7 +70,7 @@ export default class Sidebar extends React.Component {
 
   render () {
     const {device, pageId, pageType} = this.props
-    const group = device && (device.type === 'group' || device.isgroup)
+    const group = isGroup(device)
 
     return (
       <aside className="sidebar sidebar-default">
