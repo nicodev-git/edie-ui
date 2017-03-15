@@ -5,6 +5,7 @@ import IconMenu from 'material-ui/IconMenu'
 import MenuItem from 'material-ui/MenuItem'
 import Divider from 'material-ui/Divider'
 import EmailIcon from 'material-ui/svg-icons/communication/email'
+import InboxIcon from 'material-ui/svg-icons/content/inbox'
 import Message from './Message'
 
 const badgeStyle = {
@@ -34,6 +35,15 @@ const iconStyle = {
   height: 30
 }
 
+const dividerStyle = {
+  marginTop: '3px',
+  marginBottom: '3px'
+}
+
+const seeAllStyle = {
+  backgroundColor: '#e8e6e6'
+}
+
 const MessageBox = () => (
   <li className="dropdown">
     <Badge
@@ -53,7 +63,7 @@ const MessageBox = () => (
           targetOrigin={{horizontal: 'right', vertical: 'top'}}
         >
           <MenuItem primaryText="New messages" />
-          <Divider/>
+          <Divider style={dividerStyle}/>
           <MenuItem>
             <Message
               avatar="/images/avatars/1.jpg"
@@ -62,7 +72,7 @@ const MessageBox = () => (
               time="8 minutes ago"
             />
           </MenuItem>
-          <Divider/>
+          <Divider style={dividerStyle}/>
           <MenuItem>
             <Message
               avatar="/images/avatars/3.jpg"
@@ -71,19 +81,14 @@ const MessageBox = () => (
               time="21 hours"
             />
           </MenuItem>
-          <Divider/>
-          <MenuItem primaryText="See all messages" />
+          <Divider style={dividerStyle}/>
+          <MenuItem
+            primaryText="See all messages"
+            leftIcon={<InboxIcon/>}
+            style={seeAllStyle}/>
         </IconMenu>
     </Badge>
   </li>
 )
 
 export default MessageBox
-
-/* <li className="dropdown">
-  <a data-toggle="dropdown" className="dropdown-toggle" href="javascript:;">
-    <i className="glyphicon glyphicon-envelope" style={{padding: '2px'}} />
-    <span className="badge badge-up badge-dark badge-small">3</span>
-  </a>
-  <Messages />
-</li> */

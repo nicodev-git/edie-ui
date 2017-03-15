@@ -24,7 +24,6 @@ export default class Sidebar extends React.Component {
   initMenuItemHover () {
     // const nav = this.nav
     let nav = document.getElementById('main-navigation')
-    console.log(nav)
     $(nav).on('mouseover', 'li', (e) => { // eslint-disable-line no-undef
       if (!$('body').hasClass('sidebar-condensed')) return // eslint-disable-line no-undef
 
