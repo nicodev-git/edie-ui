@@ -7,6 +7,8 @@ import {
   OPEN_WORKFLOW_MODAL,
   CLOSE_WORKFLOW_MODAL,
 
+  UPDATE_WORKFLOW_EDIT_TYPE,
+
   NO_AUTH_ERROR
 } from './types'
 
@@ -101,6 +103,14 @@ export const closeWorkflowModal = () => {
   return (dispatch) => {
     dispatch({
       type: CLOSE_WORKFLOW_MODAL
+    })
+  }
+}
+
+export const updateWorkflowEditType = (editType) => {
+  return dispatch => {
+    dispatch({
+      type: UPDATE_WORKFLOW_EDIT_TYPE, editType
     })
   }
 }

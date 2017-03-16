@@ -15,13 +15,16 @@ import {
   closeWfCategoryModal,
 
   openWfActionModal,
-  openDeviceWfDiagramModal
+  openDeviceWfDiagramModal,
+  updateWorkflowEditType
 
 } from '../../../../../actions'
 
 @connect(
   state => ({
     editWorkflow: state.settings.editWorkflow,
+    workflowEditType: state.settings.workflowEditType,
+
     workflowCategories: state.devices.workflowCategories,
     wfCategoryModalOpen: state.devices.wfCategoryModalOpen,
     wfActionModalOpen: state.devices.wfActionModalOpen,
@@ -44,7 +47,8 @@ import {
       closeWfCategoryModal,
 
       openWfActionModal,
-      openDeviceWfDiagramModal
+      openDeviceWfDiagramModal,
+      updateWorkflowEditType
     }, dispatch)
   })
 )

@@ -40,6 +40,7 @@ import {
     REMOVE_WORKFLOW,
     OPEN_WORKFLOW_MODAL,
     CLOSE_WORKFLOW_MODAL,
+    UPDATE_WORKFLOW_EDIT_TYPE,
 
     FETCH_SETTING_MAPS,
     ADD_SETTING_MAP,
@@ -274,13 +275,15 @@ export default function (state = {}, action) {
     }
 
     case OPEN_WORKFLOW_MODAL: {
-      return { ...state, workflowModalVisible: true, editWorkflow: action.data }
+      return { ...state, workflowModalVisible: true, editWorkflow: action.data, workflowEditType: '' }
     }
 
     case CLOSE_WORKFLOW_MODAL: {
       return { ...state, workflowModalVisible: false }
     }
 
+    case UPDATE_WORKFLOW_EDIT_TYPE:
+      return { ...state, workflowEditType: action.editType }
         // ///////////////////////////////////////////////////
 
     case FETCH_SETTING_USERS:
