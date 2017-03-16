@@ -14,10 +14,7 @@ export default class TabPageBody extends Component {
   getPath () {
     let url = document.location.href
     let urlArray = url.split('/')
-    let path = ''
-    for (let i = 1; i < urlArray.length; i++) {
-      path += urlArray[i]
-    }
+    let path = urlArray[urlArray.length - 1]
     console.log(path)
     return path
   }
@@ -29,15 +26,17 @@ export default class TabPageBody extends Component {
   render () {
     const tabs = this.props.tabs
     let pagePath = this.getPath()
+    console.log(pagePath)
     return (
       <div className="tabs-custom flex-vertical flex-1">
-        <ul className="nav nav-tabs">
+        <ul className="nav nav-tabs tab-container">
           {tabs.map((item, i) =>
               <div
                 key={i}
                 onClick={this.navigate.bind(this, item)}
-                className={pagePath === item.path ? 'tab-chosen' : ''}>
-                {item.title}
+              >
+                <div>{item.title}</div>
+                <div className={pagePath === item.title.toLowerCase() ? 'tab-chosen' : 'tab-blank'}/>
               </div>
           )}
         </ul>
