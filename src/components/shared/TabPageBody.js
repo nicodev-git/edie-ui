@@ -8,6 +8,9 @@ export default class TabPageBody extends Component {
 
   constructor (props) {
     super(props)
+    this.state = {
+      value: 0
+    }
     this.onClickTab = this.onClickTab.bind(this)
     this.handleClick = this.handleClick.bind(this)
     this.navigate = this.navigate.bind(this)
@@ -17,10 +20,13 @@ export default class TabPageBody extends Component {
     document.addEventListener('click', this.handleClick, false)
   }
 
-  componentDidMount () {
-    console.log('tabs mount')
-    let elem = document.getElementById('tabs')
-    console.log(elem)
+  componentWillReceiveProps (nextProps) {
+    let url = document.location.href
+    let urlArray = url.split('/')
+    let target = urlArray[urlArray.length - 1]
+    console.log('receive props')
+    console.log(target)
+    console.log(nextProps.tabs)
   }
 
   componentWillUnmount () {
@@ -46,10 +52,11 @@ export default class TabPageBody extends Component {
   }
 
   navigate (item, number) {
-    console.log('navigate')
     this.context.router.push(item.path)
-    let elem = document.getElementById('tabs')
-    elem.value = number
+    // let elem = document.getElementById('tabs')
+    // elem.value = number
+    console.log('number in navigate: ', number)
+    console.log('value in navigate: ', this.state.value)
   }
 
   render () {
@@ -57,7 +64,7 @@ export default class TabPageBody extends Component {
 
     return (
       <div className="tabs-custom flex-vertical flex-1">
-        <Tabs id="tabs" value={this.state.value} className="nav nav-tabs">
+        <Tabs value={this.state.value} id="tabs" className="nav nav-tabs">
           {tabs.map((item, i) =>
               <Tab
                 key={i}
