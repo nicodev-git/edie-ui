@@ -25,9 +25,9 @@ class BigIncidents extends Component {
     this.props.updateBigIncidentParams({
       text: '',
       fixed: '-1',
-      severity: ['High', 'Medium'],
-      startTime: moment().add(-6, 'days').format('YYYY-MM-DD HH:mm:ss'),
-      endTime: moment().format('YYYY-MM-DD HH:mm:ss'),
+      severity: ['HIGH', 'MEDIUM'],
+      startTimestamp: moment().add(-6, 'days').valueOf(),
+      endTimestamp: moment().valueOf(),
       sort: 'startTimestamp,desc'
     })
   }
@@ -127,20 +127,31 @@ class BigIncidents extends Component {
     this.onFilterChange()
   }
 
+  onChangeDateRange ({startDate, endDate}) {
+
+  }
+
+  onChangeKeyword () {
+
+  }
+
   render () {
-    let table = this.renderTable()
     const { bigIncidentParams } = this.props
-    console.log(bigIncidentParams.severity)
+    if (!bigIncidentParams) return null
+
     return (
       <BigIncidentsView
         onHide={this.onHide.bind(this)}
         severities={bigIncidentParams.severity.join(',')}
         severityOptions={severities}
         onChangeSeverity={this.onChangeSeverity.bind(this)}
-        onFilter={this.onFilterChange}
+
+        onChangeDateRange={this.onChangeDateRange.bind(this)}
+
+        onChangeKeyword={this.onChangeKeyword.bind(this)}
         onSelect={this.onChangeFixed}
         text={this.props.templateText}
-        table={table}
+        table={this.renderTable()}
       />
     )
   }

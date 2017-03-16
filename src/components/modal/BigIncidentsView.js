@@ -1,10 +1,10 @@
 import React from 'react'
 import Modal from 'react-bootstrap-modal'
-import DateRangePicker from 'components/shared/DateRangePicker'
+import DateRangePicker2 from 'components/shared/DateRangePicker2'
 import Select from 'react-select'
 import { Header } from './parts'
 
-const BigIncidentsView = ({onHide, severities, severityOptions, onChangeSeverity, onFilter, onSelect,
+const BigIncidentsView = ({onHide, severities, severityOptions, onChangeSeverity, onChangeDateRange, onChangeKeyword, onSelect,
   text, table, onSubmit}) => (
   <Modal show
     onHide={onHide}
@@ -12,10 +12,10 @@ const BigIncidentsView = ({onHide, severities, severityOptions, onChangeSeverity
     className="bootstrap-dialog type-default modal-fit modal-flex">
     <Header name="Incidents" onClick={onHide}/>
     <div className="modal-body bootstrap-dialog-message">
-
       <div className="form-inline">
+        <label>Show</label>
+        &nbsp;
 
-        <label>Show</label>&nbsp;
         <Select
           value={severities}
           options={severityOptions}
@@ -28,9 +28,17 @@ const BigIncidentsView = ({onHide, severities, severityOptions, onChangeSeverity
           autosize={false}
           backspaceRemoves={false}
         />
-        &nbsp;<label>incidents from</label>&nbsp;
-        <DateRangePicker onClickRange={onFilter}/>
-        &nbsp;<label>having</label>&nbsp;
+        &nbsp;
+
+        <label>incidents from</label>
+        &nbsp;
+
+        <DateRangePicker2 onApply={onChangeDateRange}/>
+        &nbsp;
+
+        <label>having</label>
+        &nbsp;
+
         <select className="fixtype form-control inline select-custom text-primary"
           onChange={onSelect}
           defaultValue="false">
@@ -38,9 +46,13 @@ const BigIncidentsView = ({onHide, severities, severityOptions, onChangeSeverity
           <option value="false">Unfixed</option>
           <option value="true">Fixed</option>
         </select>
-        &nbsp;<label>status that contains</label>&nbsp;
+        &nbsp;
+
+        <label>status that contains</label>
+        &nbsp;
+
         <input
-          onChange={onFilter}
+          onChange={onChangeKeyword}
           placeholder="search"
           className="form-control p-none noborder text-primary"
           style={{marginTop: '-2px'}}
@@ -55,7 +67,6 @@ const BigIncidentsView = ({onHide, severities, severityOptions, onChangeSeverity
       <div className="flex-1 flex-vertical">
         {table}
       </div>
-
     </div>
   </Modal>
 )
