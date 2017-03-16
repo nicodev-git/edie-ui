@@ -4,6 +4,7 @@ import {
 
   FETCH_DASHBOARD_INCIDENTS,
   FETCH_DASHBOARD_BIGINCIDENTS,
+  UPDATE_BIGINCIDENTS_PARAMS,
 
   CLOSE_API_ERROR_MODAL,
 
@@ -69,6 +70,12 @@ const fetchBigIncidentsSuccess = (dispatch, response) => {
     type: FETCH_DASHBOARD_BIGINCIDENTS,
     data: response.data._embedded.incidents
   })
+}
+
+export const updateBigIncidentParams = (params) => {
+  return dispatch => {
+    dispatch({type: UPDATE_BIGINCIDENTS_PARAMS, params})
+  }
 }
 
 export const closeApiErrorModal = () => {

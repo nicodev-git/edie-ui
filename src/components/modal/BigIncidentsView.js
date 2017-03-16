@@ -4,9 +4,9 @@ import DateRangePicker from 'components/shared/DateRangePicker'
 import Select from 'react-select'
 import { Header } from './parts'
 
-const BigIncidentsView = ({show, onHide, value, options, onChange, onFilter, onSelect,
+const BigIncidentsView = ({onHide, severities, severityOptions, onChangeSeverity, onFilter, onSelect,
   text, table, onSubmit}) => (
-  <Modal show={show}
+  <Modal show
     onHide={onHide}
     aria-labelledby="ModalHeader"
     className="bootstrap-dialog type-default modal-fit modal-flex">
@@ -17,9 +17,9 @@ const BigIncidentsView = ({show, onHide, value, options, onChange, onFilter, onS
 
         <label>Show</label>&nbsp;
         <Select
-          value={value}
-          options={options}
-          onChange={onChange}
+          value={severities}
+          options={severityOptions}
+          onChange={onChangeSeverity}
           multi
           clearable={false}
           className="select-severity"

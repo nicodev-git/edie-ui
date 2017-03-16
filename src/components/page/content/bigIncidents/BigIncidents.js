@@ -1,10 +1,17 @@
 import React, { Component } from 'react'
 import moment from 'moment'
-import { reduxForm } from 'redux-form'
-import { connect } from 'react-redux'
+import { assign } from 'lodash'
+
 import IncidentTable from '../dashboard/incidents/IncidentTable'
 import BigIncidentsView from '../../../modal/BigIncidentsView'
-import { validate } from '../../../modal/validation/NameValidation'
+
+const severities = [
+  { label: 'High', value: 'HIGH' },
+  { label: 'Medium', value: 'MEDIUM' },
+  { label: 'Low', value: 'LOW' },
+  { label: 'Audit', value: 'AUDIT' },
+  { label: 'Ignore', value: 'IGNORE' }
+]
 
 class BigIncidents extends Component {
   constructor (props) {
@@ -12,6 +19,17 @@ class BigIncidents extends Component {
     this.onFilterChange = this.onFilterChange.bind(this)
     this.onResize = this.onResize.bind(this)
     this.onChangeFixed = this.onChangeFixed.bind(this)
+  }
+
+  componentWillMount () {
+    this.props.updateBigIncidentParams({
+      text: '',
+      fixed: '-1',
+      severity: ['High', 'Medium'],
+      startTime: moment().add(-6, 'days').format('YYYY-MM-DD HH:mm:ss'),
+      endTime: moment().format('YYYY-MM-DD HH:mm:ss'),
+      sort: 'startTimestamp,desc'
+    })
   }
 
   componentDidMount () {
@@ -29,8 +47,6 @@ class BigIncidents extends Component {
   }
 
   handleFormSubmit ({select}) {
-    console.log('form submit')
-    console.log(select)
   }
 
   onResize () {
@@ -91,11 +107,9 @@ class BigIncidents extends Component {
   }
 
   onChangeSeverity (selected) {
-    this.setState({
-      selectedSeverity: selected.map(item => item.value)
-    }, () => {
-      this.onFilterChange()
-    })
+    this.props.updateBigIncidentParams(assign({}, this.props.bigIncidentParams, {
+      severity: selected.map(item => item.value)
+    }))
   }
 
   onChangeFixed (event) {
@@ -115,17 +129,16 @@ class BigIncidents extends Component {
 
   render () {
     let table = this.renderTable()
-    const { handleSubmit } = this.props
+    const { bigIncidentParams } = this.props
+    console.log(bigIncidentParams.severity)
     return (
       <BigIncidentsView
-        show={this.props.open}
         onHide={this.onHide.bind(this)}
-        value={this.props.selectedSeverity.join(',')}
-        options={this.props.severities}
-        onChange={this.onChangeSeverity.bind(this)}
+        severities={bigIncidentParams.severity.join(',')}
+        severityOptions={severities}
+        onChangeSeverity={this.onChangeSeverity.bind(this)}
         onFilter={this.onFilterChange}
         onSelect={this.onChangeFixed}
-        onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
         text={this.props.templateText}
         table={table}
       />
@@ -133,7 +146,9 @@ class BigIncidents extends Component {
   }
 }
 
-export default connect(
+export default BigIncidents
+/*
+connect(
   state => ({
     open: true,
     severities: [
@@ -158,3 +173,4 @@ export default connect(
     form: 'bigIncidents',
     validate
   })(BigIncidents))
+*/

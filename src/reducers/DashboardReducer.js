@@ -23,6 +23,8 @@ import {
   FETCH_DASHBOARD_BIGINCIDENTS,
   UPDATE_DEVICE_INCIDENT,
 
+  UPDATE_BIGINCIDENTS_PARAMS,
+
   FETCH_IMAGES,
   UPLOAD_IMAGE,
 
@@ -150,6 +152,8 @@ export default function (state = {}, action) {
       return { ...state, incidents }
     }
 
+    case UPDATE_BIGINCIDENTS_PARAMS:
+      return { ...state, bigIncidentParams: action.params }
     case FETCH_IMAGES:
       return { ...state, images: action.data }
 
