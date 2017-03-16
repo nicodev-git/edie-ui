@@ -11,7 +11,7 @@ import ActionTrendingUp from 'material-ui/svg-icons/action/trending-up'
 
 import CategoryModal from './CategoryModal'
 import ActionModal from './ActionModal'
-import DiagramModalContainer from 'containers/page/content/device/main/workflows/DiagramModalContainer'
+import DiagramViewContainer from 'containers/page/content/settings/rule/DiagramViewContainer'
 
 const renderInput = field => (
   <div className="row margin-md-bottom">
@@ -160,12 +160,12 @@ class WorkflowModal extends React.Component { // eslint-disable-line react/no-mu
   }
 
   renderDiagramModal () {
-    if (!this.props.wfDiagramModalOpen) return null
-    return (
-      <DiagramModalContainer
-        commands={this.state.actions.map(a => a.command)}
-        onClose={this.onDiagramModalClose.bind(this)}/>
-    )
+  //   if (!this.props.wfDiagramModalOpen) return null
+  //   return (
+  //     <DiagramModalContainer
+  //       commands={this.state.actions.map(a => a.command)}
+  //       onClose={this.onDiagramModalClose.bind(this)}/>
+  //   )
   }
 
   renderActionModal () {
@@ -176,7 +176,11 @@ class WorkflowModal extends React.Component { // eslint-disable-line react/no-mu
   }
 
   renderDiagramStep (current) {
-
+    if (current === 2) {
+      return (
+        <DiagramViewContainer />
+      )
+    }
   }
 
   renderWizardStep (current) {
