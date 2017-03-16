@@ -4,7 +4,15 @@ import { bindActionCreators } from 'redux'
 
 import {MonitorWizard} from 'components/shared/wizard/DeviceWizard'
 
-import { fetchMonitorTemplates, openParamsModal } from 'actions'
+import {
+  fetchMonitorTemplates,
+  openParamsModal,
+
+  openParamEditModal,
+  closeParamsModal,
+  removeParam,
+  updateMonitorParams
+} from 'actions'
 
 @connect(
   state => ({
@@ -12,12 +20,19 @@ import { fetchMonitorTemplates, openParamsModal } from 'actions'
     monitorParams: state.devices.monitorParams,
 
     paramsModalOpen: state.devices.paramsModalOpen,
-    paramEditModalOpen: state.devices.paramEditModalOpen
+    paramEditModalOpen: state.devices.paramEditModalOpen,
+
+    editParams: state.devices.editParams
   }),
   dispatch => ({
     ...bindActionCreators({
       fetchMonitorTemplates,
-      openParamsModal
+      openParamsModal,
+
+      openParamEditModal,
+      closeParamsModal,
+      removeParam,
+      updateMonitorParams
     }, dispatch)
   })
 )

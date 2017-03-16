@@ -43,6 +43,7 @@ class DeviceWizard extends React.Component {
       'check': this.buildCheck.bind(this),
       'monitors': this.buildMonitors.bind(this),
       'portlist': this.buildPortList.bind(this),
+      'paramlist': this.buildParamList.bind(this),
       'row': this.buildRow.bind(this)
     }
   }
@@ -269,6 +270,21 @@ class DeviceWizard extends React.Component {
     return (<MTable name="mTable"
       values={values}
       config={config}/>)
+  }
+
+  buildParamList (config, values) {
+    return (
+      <ParamList
+        name="mParams"
+        config={config}
+        values={values}
+        editParams={this.props.editParams}
+        openParamEditModal={this.props.openParamEditModal}
+        closeParamsModal={this.props.closeParamsModal}
+        removeParam={this.props.removeParam}
+        updateMonitorParams={this.props.updateMonitorParams}
+      />
+    )
   }
 
   buildRow (config, values) {
