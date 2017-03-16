@@ -8,41 +8,48 @@ export default class TabPageBody extends Component {
 
   constructor (props) {
     super(props)
-    this.state = {
-      value: 0
-    }
-    this.handleChange = this.handleChange.bind(this)
     this.onClickTab = this.onClickTab.bind(this)
     this.handleClick = this.handleClick.bind(this)
+    this.navigate = this.navigate.bind(this)
   }
 
   componentWillMount () {
     document.addEventListener('click', this.handleClick, false)
   }
 
+  componentDidMount () {
+    console.log('tabs mount')
+    let elem = document.getElementById('tabs')
+    console.log(elem)
+  }
+
   componentWillUnmount () {
     document.removeEventListener('click', this.handleClick, false)
   }
 
-  handleChange = (value) => {
-    console.log('changing value: ', value)
-    let tabs = this.props.tabs
-    let path = tabs[value].path
-    this.context.router.push(path)
-    this.setState({
-      value: value
-    })
-  }
-
   onClickTab (item) {
-    console.log('value: ', this.state.value)
-    console.log(item)
+
   }
 
   handleClick (e) {
-    console.log('click')
     let path = e.path
-    console.log(path)
+    for (let i = 0; i < path.length; i++) {
+      let name = path[i].className
+      let number = (+name)
+      if ((number > 0) && (number < 100)) {
+        let tabs = this.props.tabs
+        if (number <= tabs.length) {
+          this.navigate(tabs[number - 1], (number - 1))
+        }
+      }
+    }
+  }
+
+  navigate (item, number) {
+    console.log('navigate')
+    this.context.router.push(item.path)
+    let elem = document.getElementById('tabs')
+    elem.value = number
   }
 
   render () {
@@ -50,12 +57,12 @@ export default class TabPageBody extends Component {
 
     return (
       <div className="tabs-custom flex-vertical flex-1">
-        <Tabs value={this.state.value} onChange={this.handleChange} className="nav nav-tabs">
+        <Tabs id="tabs" value={this.state.value} className="nav nav-tabs">
           {tabs.map((item, i) =>
               <Tab
                 key={i}
                 value={i}
-                className={i.toString()}
+                className={(i + 1).toString()}
                 label={item.title}
                 onActive={this.onClickTab.bind(this, item)}
               />
