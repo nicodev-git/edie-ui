@@ -502,6 +502,7 @@ table.table tbody tr.selected {
   color: #838489;
   padding-top: 15px;
   padding-left: 20px;
+  font-weight: 600;
 }
 
 .sidebar-condensed .sidebar-title {
