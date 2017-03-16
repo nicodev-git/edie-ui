@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react'
 import {Tabs, Tab} from 'material-ui/Tabs'
-import MonkeyPatchLink from './MonkeyPatchLink'
 
 export default class TabPageBody extends Component {
   static contextTypes = {
@@ -14,6 +13,15 @@ export default class TabPageBody extends Component {
     }
     this.handleChange = this.handleChange.bind(this)
     this.onClickTab = this.onClickTab.bind(this)
+    this.handleClick = this.handleClick.bind(this)
+  }
+
+  componentWillMount () {
+    document.addEventListener('click', this.handleClick, false)
+  }
+
+  componentWillUnmount () {
+    document.removeEventListener('click', this.handleClick, false)
   }
 
   handleChange = (value) => {
@@ -31,6 +39,14 @@ export default class TabPageBody extends Component {
     console.log(item)
   }
 
+  handleClick (e) {
+    console.log('click')
+    let path = e.path
+    for (let i = 0; i < path.length; i++) {
+      console.log(path[i])
+    }
+  }
+
   render () {
     const tabs = this.props.tabs
 
@@ -41,9 +57,9 @@ export default class TabPageBody extends Component {
               <Tab
                 key={i}
                 value={i}
+                className={i.toString()}
                 label={item.title}
                 onActive={this.onClickTab.bind(this, item)}
-                containerElement={<MonkeyPatchLink to={item.path}/>}
               />
           )}
         </Tabs>

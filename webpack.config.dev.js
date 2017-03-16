@@ -42,11 +42,22 @@ module.exports = {
     ],
     loaders: [
       {
-        loaders: ['babel-loader'],
-        include: [
-          path.resolve(__dirname, 'src')
-        ],
-        plugins: ['transform-runtime', 'transform-decorators-legacy']
+      test: /\.jsx?$/,
+      exclude: /node_modules/,
+      loader: 'babel',
+      query: {
+        plugins: ['transform-decorators-legacy','transform-react-jsx','transform-object-assign'],
+        presets: ['react', 'es2015', 'stage-0']
+        }
+      },
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: 'babel',
+        query: {
+          plugins: ['transform-decorators-legacy','transform-react-jsx','transform-object-assign'],
+          presets: ['react', 'es2015', 'stage-0']
+          }
       },
       {
         test: /\.(png|jpg)$/,
