@@ -1,5 +1,18 @@
 import React from 'react'
+import Chip from 'material-ui/Chip'
 
+const styles = {
+  chip: {
+    margin: 4
+  },
+  wrapper: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    maxHeight: '300px',
+    overflow: 'auto',
+    marginBottom: '12px'
+  }
+}
 class ParamList extends React.Component {
   onClickAdd () {
     this.props.openParamEditModal()
@@ -27,22 +40,16 @@ class ParamList extends React.Component {
               onClick={this.onClickAdd.bind(this)}>Add</a>
           </span>
         </div>
-        <div style={{maxHeight: '300px', overflow: 'auto'}}>
-          <table className="table table-hover">
-            <tbody>
-            {this.props.editParams.map(p =>
-              <tr key={p.key}>
-                <td>{p.key}</td>
-                <td>{p.value}</td>
-                <td className="text-right">
-                  <a href="javascript:;" onClick={this.onClickRemove.bind(this, p)}>
-                    <i className="fa fa-trash-o"/>
-                  </a>
-                </td>
-              </tr>
-            )}
-            </tbody>
-          </table>
+        <div style={styles.wrapper}>
+          {this.props.editParams.map(p =>
+            <Chip
+              key={p.key}
+              style={styles.chip}
+              onRequestDelete={this.onClickRemove.bind(this, p)}
+            >
+              {p.key}:{p.value}
+            </Chip>
+          )}
         </div>
 
       </div>

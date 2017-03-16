@@ -3,6 +3,8 @@ import Modal from 'react-bootstrap-modal'
 import {reduxForm, Field} from 'redux-form'
 import {connect} from 'react-redux'
 import {assign} from 'lodash'
+import Chip from 'material-ui/Chip'
+
 import {
   closeParamEditModal,
   updateParam,
@@ -12,6 +14,18 @@ import {
 const defaultKeys = [
   'port', 'user', 'password', 'hostname'
 ]
+
+const styles = {
+  chip: {
+    margin: 4
+  },
+  wrapper: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    maxHeight: '300px',
+    overflow: 'auto'
+  }
+}
 
 @connect(state => ({
   initialValues: state.devices.editParam,
@@ -65,10 +79,15 @@ export default class ParamEditModal extends React.Component {
         </div>
         <div className="modal-body bootstrap-dialog-message">
           <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
-            <div className="margin-md-bottom">
+            <div className="margin-md-bottom" style={styles.wrapper}>
               {defaultKeys.map(k =>
-                <a href="javascript:" key={k} className="btn btn-sm btn-default margin-sm-right"
-                  onClick={this.onClickDefaultKey.bind(this, k)}>{k}</a>
+                <Chip
+                  key={k}
+                  style={styles.chip}
+                  onTouchTap={this.onClickDefaultKey.bind(this, k)}
+                >
+                  {k}
+                </Chip>
               )}
             </div>
             <div className="row margin-md-bottom">
