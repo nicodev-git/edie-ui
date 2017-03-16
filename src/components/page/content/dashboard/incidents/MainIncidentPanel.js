@@ -1,6 +1,6 @@
 import React from 'react'
 import {withRouter} from 'react-router'
-import { Panel, PanelHeader, PanelOptions, PanelBody } from '../../../../shared/Panel'
+import { Panel, PanelBody } from '../../../../shared/Panel'
 import IncidentTable from './IncidentTable'
 
 @withRouter
@@ -45,17 +45,7 @@ export default class MainIncidentPanel extends React.Component {
     return (
       <div className="incidents-row margin-sm-top flex-vertical flex-1"
         style={{minHeight: '600px'}}>
-        <Panel className="margin-sm-bottom flex-vertical flex-1">
-          <PanelHeader title="Incidents">
-            <PanelOptions>
-              <a href="javascript:;" onClick={this.onClickSearch.bind(this)}>
-                <i className="fa fa-search" />
-              </a>
-              <a href="javascript:;" className="margin-sm-left"
-                onClick={this.onClickOpenModal.bind(this)}>
-                <i className="fa fa-external-link" /></a>
-            </PanelOptions>
-          </PanelHeader>
+        <Panel className="margin-sm-bottom flex-vertical flex-1 main-panel">
           <PanelBody className="padding-xs flex-vertical flex-1">
             {this.renderTable()}
           </PanelBody>
