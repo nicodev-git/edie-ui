@@ -581,3 +581,7 @@ table.table tbody tr.selected {
   background-color: #78a8ca;
   border-radius: 15%;
 }
+
+.main-panel {
+  margin-top: 50px;
+}
