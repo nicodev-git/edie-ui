@@ -2,8 +2,7 @@ import React from 'react'
 import Modal from 'react-bootstrap-modal'
 import DateRangePicker from 'components/shared/DateRangePicker'
 import Select from 'react-select'
-import { Field } from 'redux-form'
-import { Header, FormMultiSelect, SubmitBlock } from './parts'
+import { Header } from './parts'
 
 const BigIncidentsView = ({show, onHide, value, options, onChange, onFilter, onSelect,
   text, table, onSubmit}) => (
@@ -13,13 +12,7 @@ const BigIncidentsView = ({show, onHide, value, options, onChange, onFilter, onS
     className="bootstrap-dialog type-default modal-fit modal-flex">
     <Header name="Incidents" onClick={onHide}/>
     <div className="modal-body bootstrap-dialog-message">
-      <form onSubmit={onSubmit}>
-        <div className="form-column">
-          <Field name="select" component={FormMultiSelect} label="Severity"
-            options={options}/>
-        </div>
-        <SubmitBlock name="Filter" onClick={onHide}/>
-      </form>
+
       <div className="form-inline">
 
         <label>Show</label>&nbsp;
