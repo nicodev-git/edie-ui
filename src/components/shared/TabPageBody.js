@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import {Tabs, Tab} from 'material-ui/Tabs'
+import { Link } from 'react-router'
 
 export default class TabPageBody extends Component {
   constructor (props) {
@@ -36,7 +37,7 @@ export default class TabPageBody extends Component {
               label={item.title}
               onActive={this.onClickTab.bind(this, item)}
             >
-              <div>1</div>
+              <div><Link to={item.path}/></div>
             </Tab>
           )}
         </Tabs>
