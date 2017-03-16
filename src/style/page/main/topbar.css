@@ -58,6 +58,14 @@
         white-space: nowrap;
     }
 }
+
+.navbar-search {
+    display: inline-block;
+}
+.navbar-search .form-control {
+    width: 120px;
+}
+/*
 .navbar-search .form-control {
     width: 160px;
     -webkit-transition: width 0.5s ease;
@@ -67,10 +75,11 @@
     transition: width 0.5s ease;
 }
 .navbar-search .form-control:focus {
-    width: 200px;
+    width: 180px;
     -webkit-transition: width 0.5s ease;
     -moz-transition: width 0.5s ease;
     -o-transition: width 0.5s ease;
     -ms-transition: width 0.5s ease;
     transition: width 0.5s ease;
 }
+*/

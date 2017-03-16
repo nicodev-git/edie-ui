@@ -9,6 +9,8 @@ import MapToolbar from './toolbar/MapToolbar'
 import DeviceDragLayer from './DeviceDragLayer'
 import DividerLine from './DividerLine'
 
+import { ZoomOptions, ToolbarToggle } from './toolbar'
+
 import DeviceWizardContainer from 'containers/shared/wizard/DeviceWizardContainer'
 import { wizardConfig, getDeviceType } from '../../../../shared/wizard/WizardConfig'
 import { showConfirm } from '../../../../shared/Alert'
@@ -689,6 +691,15 @@ class Map extends React.Component {
               ref="map"/>
             <DeviceDragLayer />
             {maximized ? null : <DividerLine onDragMove={this.onChangeDivider} onDragEnd={this.onDragEndDivider}/>}
+            <div className="map-bottom-bar">
+              <ZoomOptions
+                onZoomRect={this.onClickZoomRect.bind(this)}
+                onZoomIn={this.onClickZoomIn.bind(this)}
+                onZoomOut={this.onClickZoomOut.bind(this)}
+                onZoomReset={this.onClickZoomReset.bind(this)}
+              />
+              <ToolbarToggle onToggle={this.onClickMaximize.bind(this)}/>
+            </div>
             <div className={`map-hover ${tooltip ? '' : 'hidden'}`}
               data-tip={tooltip}
               data-html

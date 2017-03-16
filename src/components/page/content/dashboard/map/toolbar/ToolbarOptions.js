@@ -1,25 +1,17 @@
 import React, { Component } from 'react'
-import { ZoomOptions, DeleteObject, ColorPicker, LineWidthInc, LineWidthDec,
+import { DeleteObject, ColorPicker, LineWidthInc, LineWidthDec,
   TextChange, RotateHubLeft, RotateHubRight, ChangeLineType, OptionUploader,
-  EditMapMenu, LogOut, DropdownToggle, DeviceMenuContainer, NewIncidentLabel,
-  ToolbarToggle} from './index'
+  EditMapMenu, LogOut, DropdownToggle, DeviceMenuContainer } from './index'
 
 class ToolbarOptions extends Component {
   render () {
     return (
       <div className="panel-options main-map-options toolbar-options" style={{top: '0px'}}>
         <ul className="nav nav-tabs" style={{background: 'transparent'}}>
-          <NewIncidentLabel onNewIncident={this.props.onNewIncident}/>
           <EditMapMenu
             onEdit={this.props.onMapEdit}
             onUndo={this.props.onEditMapUndo}/>
           <DeviceMenuContainer {...this.props}/>
-          <ZoomOptions
-            onZoomRect={this.props.onClickZoomRect}
-            onZoomIn={this.props.onClickZoomIn}
-            onZoomOut={this.props.onClickZoomOut}
-            onZoomReset={this.props.onClickZoomReset}
-          />
           <DeleteObject obj={this.props.obj} onDelete={this.props.onClickDelete}/>
           <ColorPicker
             line={this.props.line}
@@ -79,7 +71,6 @@ class ToolbarOptions extends Component {
           <OptionUploader />
           <LogOut />
           <DropdownToggle />
-          <ToolbarToggle onToggle={this.props.onToggle}/>
         </ul>
       </div>
     )

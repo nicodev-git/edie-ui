@@ -1,7 +1,7 @@
 .devicediv {
     position: absolute;
-    width: 220px;
-    right: -40px;
+    width: 230px;
+    right: 0;
     top: 0;
     border-radius: 3px;
     z-index: 61;
@@ -227,4 +227,10 @@ li.dropdown-settings {
 .map-hover {
     position: absolute;
     cursor: pointer;
+}
+
+.map-bottom-bar {
+    position: absolute;
+    right: 0;
+    bottom: 0;
 }

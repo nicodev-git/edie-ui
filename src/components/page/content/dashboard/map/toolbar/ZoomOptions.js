@@ -16,22 +16,20 @@ const iconStyle = {
 }
 
 const ZoomOptions = ({onZoomIn, onZoomOut, onZoomRect, onZoomReset}) => (
-    <li>
-      <IconMenu
-        iconButtonElement={
-          <IconButton style={buttonStyle} iconStyle={iconStyle}>
-              <ZoomInIcon color="#545454"/>
-          </IconButton>
-        }
-        anchorOrigin={{horizontal: 'left', vertical: 'top'}}
-        targetOrigin={{horizontal: 'left', vertical: 'top'}}
-      >
-        <MenuItem onTouchTap={onZoomIn}>Zoom in</MenuItem>
-        <MenuItem onTouchTap={onZoomOut}>Zoom Out</MenuItem>
-        <MenuItem onTouchTap={onZoomRect}>Zoom Rect</MenuItem>
-        <MenuItem onTouchTap={onZoomReset}>Reset</MenuItem>
-      </IconMenu>
-    </li>
+  <IconMenu
+    iconButtonElement={
+      <IconButton style={buttonStyle} iconStyle={iconStyle}>
+        <ZoomInIcon color="#545454"/>
+      </IconButton>
+    }
+    anchorOrigin={{horizontal: 'left', vertical: 'top'}}
+    targetOrigin={{horizontal: 'left', vertical: 'top'}}
+  >
+    <MenuItem onTouchTap={onZoomIn}>Zoom in</MenuItem>
+    <MenuItem onTouchTap={onZoomOut}>Zoom Out</MenuItem>
+    <MenuItem onTouchTap={onZoomRect}>Zoom Rect</MenuItem>
+    <MenuItem onTouchTap={onZoomReset}>Reset</MenuItem>
+  </IconMenu>
 )
 /* const ZoomOptions = ({maximized, zooming, onMaximize, onZoomIn, onZoomOut,
   onZoomRect, onZoomReset}) => (

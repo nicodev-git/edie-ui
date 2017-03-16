@@ -14,14 +14,12 @@ const iconStyle = {
 }
 
 const ToolbarToggle = ({onToggle}) => (
-  <li>
-    <IconButton
-      style={buttonStyle}
-      iconStyle={iconStyle}
-      onTouchTap={onToggle}>
-        <CropFreeIcon color="#545454"/>
-    </IconButton>
-  </li>
+  <IconButton
+    style={buttonStyle}
+    iconStyle={iconStyle}
+    onTouchTap={onToggle}>
+    <CropFreeIcon color="#545454"/>
+  </IconButton>
 )
 
 /* const ToolbarToggle = ({ onToggle }) => (

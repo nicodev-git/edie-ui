@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import DeviceMenu from '../DeviceMenu'
 import IconButton from 'material-ui/IconButton'
-import DevicesIcon from 'material-ui/svg-icons/device/devices'
+import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
 
 const buttonStyle = {
   padding: '4px',
@@ -23,7 +23,7 @@ class DeviceMenuContainer extends Component {
           style={buttonStyle}
           iconStyle={iconStyle}
           onTouchTap={this.props.onDeviceMenu}>
-            <DevicesIcon color="#545454"/>
+            <AddCircleIcon color="#545454"/>
         </IconButton>
         { this.props.isDevicesDisplayed
           ? <DeviceMenu {...this.props}
