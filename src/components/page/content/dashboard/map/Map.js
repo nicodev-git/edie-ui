@@ -172,7 +172,6 @@ class Map extends React.Component {
     // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   onMapKeyUp (e) {
-    console.log(e.key)
     if (e.key === 'Escape') {
       if (this.state.editable) {
         this.onClickEdit()

@@ -9,12 +9,12 @@ import ActionModal from './ActionModal'
 import DiagramModalContainer from 'containers/page/content/device/main/workflows/DiagramModalContainer'
 
 const renderInput = field => (
-  <div className="row margin-md-bottom">
-    <label className={`col-md-3 ${field.type === 'checkbox' ? '' : 'control-label'}`}>{field.label}</label>
-    <div className="col-md-9">
-      <input {...field.input} type={field.type} className={field.type === 'text' ? 'form-control' : ''}/>
+    <div className="row margin-md-bottom">
+        <label className={`col-md-3 ${field.type === 'checkbox' ? '' : 'control-label'}`}>{field.label}</label>
+        <div className="col-md-9">
+            <input {...field.input} type={field.type} className={field.type === 'text' ? 'form-control' : ''}/>
+        </div>
     </div>
-  </div>
 )
 
 class WorkflowModal extends React.Component { // eslint-disable-line react/no-multi-comp
@@ -187,7 +187,9 @@ class WorkflowModal extends React.Component { // eslint-disable-line react/no-mu
             </div>
             <div className="col-md-1 text-right pl-none margin-sm-top">
               <a href="javascript:;">
-                <i className="fa fa-question-circle fa-x" data-class="tt-workflow" data-tip={`Use \${KEY} for show key’s value.<br/>Example: 'User \${user} was blocked at: \${datetime}'`}/>
+                <i className="fa fa-question-circle fa-x"
+                  data-class="tt-workflow"
+                  data-tip={`Use \${KEY} for show key’s value.<br/>Example: 'User \${user} was blocked at: \${datetime}'`}/>
               </a>
             </div>
           </div>
@@ -345,9 +347,13 @@ class WorkflowModal extends React.Component { // eslint-disable-line react/no-mu
           {this.renderStep()}
 
           <div className="text-right mb-none">
-            <a href="javascript:;" className="btn btn-default btn-sm margin-sm-right" onClick={this.onClickClose.bind(this)}>Cancel</a>
-            <a href="javascript:;" className="btn btn-default btn-sm margin-sm-right" onClick={this.onClickDiagram.bind(this)}>Diagram</a>
-            <a href="javascript:;" className="btn btn-default btn-sm margin-sm-right" disabled={current === 1} onClick={this.onClickPrev.bind(this)}>Previous</a>
+            <a href="javascript:;" className="btn btn-default btn-sm margin-sm-right"
+              onClick={this.onClickClose.bind(this)}>Cancel</a>
+            <a href="javascript:;" className="btn btn-default btn-sm margin-sm-right"
+              onClick={this.onClickDiagram.bind(this)}>Diagram</a>
+            <a href="javascript:;" className="btn btn-default btn-sm margin-sm-right"
+              disabled={current === 1}
+              onClick={this.onClickPrev.bind(this)}>Previous</a>
 
             { current < steps ? <a href="javascript:;" className="btn btn-default btn-sm" onClick={this.onClickNext.bind(this)}>Next</a> : null}
             { current === steps ? <button className="btn btn-primary btn-sm" type="submit">Finish</button> : null}

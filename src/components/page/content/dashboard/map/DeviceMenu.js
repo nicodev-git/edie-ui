@@ -16,7 +16,9 @@ export default class DeviceMenu extends React.Component {
       deviceTypes: [{
         title: 'New Devices',
         items: []
-      }]
+      }],
+
+      activePanel: 2
     }
   }
 
@@ -38,6 +40,10 @@ export default class DeviceMenu extends React.Component {
     })
   }
 
+  handleSelect (activePanel) {
+    this.setState({ activePanel })
+  }
+
   render () {
     let devicePanels = []
 
@@ -57,6 +63,8 @@ export default class DeviceMenu extends React.Component {
       })
     })
 
+    let hasActive = false
+    let firstPanelIndex = -1
     deviceTypes.forEach((section, sectionIndex) => {
       let deviceItems = []
 
@@ -73,6 +81,9 @@ export default class DeviceMenu extends React.Component {
         })
 
         if (!deviceItems.length) return
+
+        if (firstPanelIndex < 0) firstPanelIndex = sectionIndex
+        if (sectionIndex === this.state.activePanel) hasActive = true
       }
 
       devicePanels.push(
@@ -101,7 +112,7 @@ export default class DeviceMenu extends React.Component {
           </div>
         </div>
 
-        <PanelGroup defaultActiveKey={2} accordion>
+        <PanelGroup activeKey={!hasActive && firstPanelIndex >= 0 ? firstPanelIndex : this.state.activePanel} onSelect={this.handleSelect.bind(this)} accordion>
           {devicePanels}
         </PanelGroup>
       </div>
