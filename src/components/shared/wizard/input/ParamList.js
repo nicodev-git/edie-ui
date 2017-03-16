@@ -17,7 +17,7 @@ class ParamList extends React.Component {
     this.props.removeParam(p)
   }
 
-  render() {
+  render () {
     return (
       <div>
         <div style={{}}>
@@ -39,11 +39,7 @@ class ParamList extends React.Component {
         </div>
         <div className="text-right p-none">
           <a href="javascript:;" className="btn btn-default btn-sm margin-sm-right"
-             onClick={this.onClickAdd.bind(this)}>Add</a>
-
-          <a href="javascript:;" className="btn btn-primary btn-sm margin-sm-right"
-             onClick={this.onClickSave.bind(this)}>Save</a>
-          <a href="javascript:;" className="btn btn-default btn-sm" onClick={this.onClickClose.bind(this)}>Close</a>
+            onClick={this.onClickAdd.bind(this)}>Add</a>
         </div>
       </div>
     )
