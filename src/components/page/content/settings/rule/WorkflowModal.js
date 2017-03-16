@@ -4,6 +4,7 @@ import { reduxForm, Field } from 'redux-form'
 import { concat, assign, forOwn } from 'lodash'
 import Tooltip from 'react-tooltip'
 import FlatButton from 'material-ui/FlatButton'
+import InlineEdit from 'react-edit-inline'
 
 import ActionList from 'material-ui/svg-icons/action/list'
 import ActionTrendingUp from 'material-ui/svg-icons/action/trending-up'
@@ -34,7 +35,6 @@ class WorkflowModal extends React.Component { // eslint-disable-line react/no-mu
 
     this.state = {
       current: 1,
-      steps: 1,
 
       rules,
       selectedRuleIndex: -1,
@@ -175,8 +175,162 @@ class WorkflowModal extends React.Component { // eslint-disable-line react/no-mu
     )
   }
 
+  renderDiagramStep (current) {
+
+  }
+
+  renderWizardStep (current) {
+    const {rules, selectedRuleIndex, actions, selectedActionIndex} = this.state
+
+    if (current === 2) {
+      return (
+        <div>
+          <Field name="desc" component={renderInput} type="text" label="Description"/>
+
+          <div className="row margin-md-bottom">
+            <label className="col-md-3 control-label">Display Incident Description</label>
+            <div className="col-md-8 pr-none">
+              <Field name="display_incident_desc" component="input" className="form-control"/>
+            </div>
+            <div className="col-md-1 text-right pl-none margin-sm-top">
+              <a href="javascript:;">
+                <i
+                  className="fa fa-question-circle fa-x"
+                  data-class="tt-workflow"
+                  data-tip={`Use \${KEY} for show key’s value.<br/>Example: 'User \${user} was blocked at: \${datetime}'`}/>
+              </a>
+            </div>
+          </div>
+
+          <Field name="isglobal" component={renderInput} type="checkbox" label="Global"/>
+
+          <div className="row margin-md-bottom">
+            <label className="col-md-3">Category</label>
+            <div className="col-md-8 pr-none">
+              <Field name="category" component="select" className="form-control">
+                {this.props.workflowCategories.map(c => <option key={c.id} value={c.name}>{c.name}</option>)}
+              </Field>
+            </div>
+            <div className="col-md-1 text-right pl-none margin-sm-top">
+              <a href="javascript:;" onClick={this.onClickAddCategory.bind(this)}><i className="fa fa-plus-square fa-x"/></a>
+            </div>
+          </div>
+
+          <div className="row margin-md-bottom">
+            <label className="col-md-3">Severity</label>
+            <div className="col-md-9">
+              <Field name="severity" component="select" className="form-control">
+                <option>HIGH</option>
+                <option>MEDIUM</option>
+                <option>LOW</option>
+                <option>AUDIT</option>
+                <option>IGNORE</option>
+                <option>IGNOREDELETE</option>
+                <option>DEVICE</option>
+              </Field>
+            </div>
+          </div>
+
+          <div className="row margin-md-bottom">
+            <label className="col-md-3">Enabled</label>
+            <div className="col-md-9">
+              <Field name="enable" component="input" type="checkbox"/>
+            </div>
+          </div>
+
+          {this.renderCategoryModal()}
+        </div>
+      )
+    } else if (current === 3) {
+      return (
+        <div>
+          <div>
+            <span className="margin-md-right"><b>Rules</b></span>
+            <a href="javascript:;" onClick={this.onClickRemoveRule.bind(this)} className="margin-sm-right"><i className="fa fa-trash-o"/></a>
+          </div>
+          <div className="margin-md-bottom">
+            <table className="table table-hover">
+              <thead>
+              <tr>
+                <th>Key</th>
+                <th>Value</th>
+              </tr>
+              </thead>
+              <tbody>
+              {
+                rules.map((r, index) =>
+                  <tr key={index} className={selectedRuleIndex === index ? 'selected' : ''} onClick={() => { if (index !== rules.length - 1) this.setState({ selectedRuleIndex: index }) }}>
+                    <td width="50%">
+                      <InlineEdit
+                        activeClassName="editing"
+                        text={r.key || '\u00a0'}
+                        paramName="key"
+                        change={this.onRuleChange.bind(this, index)}
+                        style={{
+                          width: '100%',
+                          display: 'block'
+                        }}
+                      />
+                    </td>
+                    <td width="50%">
+                      <InlineEdit
+                        activeClassName="editing"
+                        text={r.value || '\u00a0'}
+                        paramName="value"
+                        change={this.onRuleChange.bind(this, index)}
+                        style={{
+                          width: '100%',
+                          display: 'block'
+                        }}
+                      />
+                    </td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      )
+    } else if (current === 4) {
+      return (
+        <div>
+          <div>
+            <span className="margin-md-right"><b>Actions</b></span>
+            <a href="javascript:;" onClick={this.onClickAddAction.bind(this)} className="margin-sm-right"><i className="fa fa-plus-square"/></a>
+            <a href="javascript:;" onClick={this.onClickEditAction.bind(this)} className="margin-sm-right"><i className="fa fa-edit"/></a>
+            <a href="javascript:;" onClick={this.onClickRemoveAction.bind(this)} className="margin-sm-right"><i className="fa fa-trash-o"/></a>
+          </div>
+
+          <div>
+            <table className="table table-hover">
+              <thead>
+              <tr>
+                <th>Name</th>
+                <th>Type</th>
+              </tr>
+              </thead>
+              <tbody>
+              {
+                actions.map((a, index) =>
+                  <tr key={a.name} className={selectedActionIndex === index ? 'selected' : ''} onClick={() => { this.setState({ selectedActionIndex: index }) }}>
+                    <td>{a.name}</td>
+                    <td>{a.actionType}</td>
+                  </tr>
+                )
+              }
+              </tbody>
+            </table>
+          </div>
+
+          {this.renderActionModal()}
+        </div>
+      )
+    }
+  }
+
   renderStep () {
     const {current} = this.state
+    const {workflowEditType, updateWorkflowEditType} = this.props
 
     if (current === 1) {
       return (
@@ -185,30 +339,33 @@ class WorkflowModal extends React.Component { // eslint-disable-line react/no-mu
           <div className="row">
             <label className="col-md-3">Add By</label>
             <div className="col-md-9">
-              <FlatButton icon={<ActionList />} backgroundColor="#C0C0C0"/>
-              <FlatButton icon={<ActionTrendingUp />}/>
+              <FlatButton
+                icon={<ActionList />}
+                onTouchTap={updateWorkflowEditType.bind(null, 'wizard')}
+                backgroundColor={workflowEditType === 'wizard' ? '#C0C0C0' : null}/>
+              <FlatButton
+                icon={<ActionTrendingUp />}
+                onTouchTap={updateWorkflowEditType.bind(null, 'diagram')}
+                backgroundColor={workflowEditType === 'diagram' ? '#C0C0C0' : null}/>
             </div>
           </div>
         </div>
       )
-    } else if (current === 2) {
-      return (
-        <div>
-          Step 2
-        </div>
-      )
-    } else if (current === 3) {
-      return (
-        <div>
-          Step 3
-        </div>
-      )
+    } else {
+      if (workflowEditType === 'wizard') return this.renderWizardStep(current)
+      return this.renderDiagramStep(current)
     }
-    return null
+  }
+
+  getSteps () {
+    const { workflowEditType } = this.props
+    if (workflowEditType === 'wizard') return 4
+    return 2
   }
 
   renderWizard () {
-    const {current, steps} = this.state
+    const {current} = this.state
+    const steps = this.getSteps()
 
     let markers = []
     for (let i = 0; i < steps; i++) {

@@ -275,7 +275,7 @@ export default function (state = {}, action) {
     }
 
     case OPEN_WORKFLOW_MODAL: {
-      return { ...state, workflowModalVisible: true, editWorkflow: action.data, workflowEditType: '' }
+      return { ...state, workflowModalVisible: true, editWorkflow: action.data, workflowEditType: 'wizard' }
     }
 
     case CLOSE_WORKFLOW_MODAL: {
