@@ -35,8 +35,10 @@ export default class TabPageBody extends Component {
                 key={i}
                 onClick={this.navigate.bind(this, item)}
               >
-                <div>{item.title}</div>
-                <div className={pagePath === item.title.toLowerCase() ? 'tab-chosen' : 'tab-blank'}/>
+                <div>
+                  <div className="tab-label">{item.title}</div>
+                  <div className={pagePath === item.title.toLowerCase() ? 'tab-chosen' : 'tab-blank'}/>
+                </div>
               </div>
           )}
         </ul>

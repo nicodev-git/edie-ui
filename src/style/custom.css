@@ -552,21 +552,31 @@ table.table tbody tr.selected {
 
 .tab-container>div {
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   height: 100%;
   width: 120px;
-  padding-top: 10px;
-  padding-left: 10px;
   cursor: pointer;
+}
+
+.tab-container>div>div {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.tab-label {
+  padding-top: 10px;
 }
 
 .tab-blank {
   width: 100%;
-  height: 10px;
+  height: 8px;
 }
 
 .tab-chosen {
   width: 100%;
-  height: 10px;
-  background-color: #52a1bf;
+  height: 6px;
+  background-color: #78a8ca;
+  border-radius: 20%;
 }
