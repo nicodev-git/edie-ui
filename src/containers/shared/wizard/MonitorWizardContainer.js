@@ -17,7 +17,6 @@ import {
 @connect(
   state => ({
     initialValues: state.devices.monitorInitialValues,
-    monitorParams: state.devices.monitorParams,
 
     paramsModalOpen: state.devices.paramsModalOpen,
     paramEditModalOpen: state.devices.paramEditModalOpen,
@@ -40,7 +39,7 @@ import {
 export default class MonitorWizardContainer extends React.Component {
   render () {
     return (
-      <MonitorWizard showMonitorParams {...this.props} />
+      <MonitorWizard {...this.props} />
     )
   }
 }

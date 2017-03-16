@@ -2514,6 +2514,11 @@ export const wizardConfig = {
           name: 'checkinterval'
         }]
       }]
+    }, {
+      title: 'Step 2',
+      items: [{
+        type: 'paramlist'
+      }]
     }]
   },
 

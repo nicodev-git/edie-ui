@@ -1,5 +1,6 @@
 import React from 'react'
 import Modal from 'react-bootstrap-modal'
+import { extImageBaseUrl } from 'shared/Global'
 
 export default class MonitorPicker extends React.Component {
   constructor (props) {
@@ -50,7 +51,7 @@ export default class MonitorPicker extends React.Component {
                 this.props.monitorTemplates.map(item =>
                   <li key={item.id}>
                     <a href="javascript:;" onClick={this.onClickItem.bind(this, item)}>
-                      <img src={`/images/${item.image}`}/>
+                      <img src={`${extImageBaseUrl}${item.image}`}/>
                       <span>{item.name}</span>
                     </a>
                   </li>

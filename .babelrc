@@ -24,6 +24,8 @@
     "production": {
       "plugins": [
         ["transform-object-rest-spread"],
+        ["transform-react-jsx"],
+        ["transform-object-assign"],
         ["transform-es2015-spread"],
         ["transform-react-display-name"],
         ["transform-decorators-legacy"]

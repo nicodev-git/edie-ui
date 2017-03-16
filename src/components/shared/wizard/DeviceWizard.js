@@ -1,8 +1,6 @@
 import React from 'react'
 import Modal from 'react-bootstrap-modal'
-import {
-    keys, assign
-} from 'lodash'
+import { assign } from 'lodash'
 import { reduxForm } from 'redux-form'
 
 import TextInput from './input/TextInput'
@@ -16,8 +14,8 @@ import AdvancedForm from './input/AdvancedForm'
 import MatchIgnore from './input/MatchIgnore'
 import GlobalIgnore from './input/GlobalIgnore'
 import MTable from './input/MTable'
-import ParamsModal from './input/ParamsModal'
 import ParamEditModal from './input/ParamEditModal'
+import ParamList from './input/ParamList'
 
 import {wizardConfig} from './WizardConfig'
 import {util} from './WizardUtil'
@@ -66,13 +64,18 @@ class DeviceWizard extends React.Component {
     const { extraParams, onFinish } = this.props
     const { monitors, currentDevice } = this.state
 
+    let params = {}
+    this.props.editParams.forEach(p => {
+      params[p.key] = p.value
+    })
+
     let props = assign(
       {},
       formProps,
       currentDevice.server.params || {},
       extraParams, {
         monitors: monitors.map(m => assign({}, m, {id: null})),
-        params: this.props.monitorParams
+        params
       }
     )
     console.log(props)
@@ -275,7 +278,7 @@ class DeviceWizard extends React.Component {
   buildParamList (config, values) {
     return (
       <ParamList
-        name="mParams"
+        key="paramList"
         config={config}
         values={values}
         editParams={this.props.editParams}
@@ -333,21 +336,6 @@ class DeviceWizard extends React.Component {
     this.setState({ current })
   }
 
-  onClickParams () {
-    const params = this.props.monitorParams || {}
-    this.props.openParamsModal(keys(params).map(key => ({
-      key,
-      value: params[key]
-    })))
-  }
-
-  renderParamsModal () {
-    if (!this.props.paramsModalOpen) return null
-    return (
-      <ParamsModal/>
-    )
-  }
-
   renderParamEditModal () {
     if (!this.props.paramEditModalOpen) return null
     return (
@@ -356,7 +344,7 @@ class DeviceWizard extends React.Component {
   }
 
   render () {
-    const { handleSubmit, onStep0, showMonitorParams } = this.props
+    const { handleSubmit, onStep0 } = this.props
     const { current, steps } = this.state
     let cssPrevious = ''
     if (current < 2) cssPrevious = onStep0 ? '' : 'hidden'
@@ -384,9 +372,6 @@ class DeviceWizard extends React.Component {
             {this.buildContent()}
 
             <div className="text-right mb-none">
-              <div className="pull-left">
-                {showMonitorParams ? <a href="javascript:;" className="btn btn-default btn-sm" onClick={this.onClickParams.bind(this)}>Params</a> : null}
-              </div>
               <a href="javascript:;"
                 className="btn btn-default btn-sm margin-sm-right"
                 onClick={this.onClickClose.bind(this)}>Cancel</a>
@@ -408,7 +393,6 @@ class DeviceWizard extends React.Component {
           </form>
         </div>
 
-        {this.renderParamsModal()}
         {this.renderParamEditModal()}
       </Modal>
     )

@@ -20,7 +20,14 @@ class ParamList extends React.Component {
   render () {
     return (
       <div>
-        <div style={{}}>
+        <div className="margin-sm-bottom">
+          <span>Params</span>
+          <span className="padding-lg-left">
+            <a href="javascript:;" className="btn btn-default btn-sm margin-sm-right"
+              onClick={this.onClickAdd.bind(this)}>Add</a>
+          </span>
+        </div>
+        <div style={{maxHeight: '300px', overflow: 'auto'}}>
           <table className="table table-hover">
             <tbody>
             {this.props.editParams.map(p =>
@@ -37,10 +44,7 @@ class ParamList extends React.Component {
             </tbody>
           </table>
         </div>
-        <div className="text-right p-none">
-          <a href="javascript:;" className="btn btn-default btn-sm margin-sm-right"
-            onClick={this.onClickAdd.bind(this)}>Add</a>
-        </div>
+
       </div>
     )
   }

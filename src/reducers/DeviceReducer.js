@@ -69,7 +69,7 @@ import {
   UPDATE_DEVICE_ERROR
 } from '../actions/types'
 
-import { concat } from 'lodash'
+import { concat, keys } from 'lodash'
 
 const INITIAL_STATE = { devices: [] }
 
@@ -109,8 +109,15 @@ export default function (state = INITIAL_STATE, action) {
     case CLOSE_DEVICE_MONITOR_PICKER:
       return { ...state, monitorPickerVisible: false }
 
-    case OPEN_DEVICE_MONITOR_WIZARD:
-      return { ...state, monitorWizardVisible: true, monitorInitialValues: action.data, monitorParams: action.data ? (action.data.params || {}) : {} }
+    case OPEN_DEVICE_MONITOR_WIZARD: {
+      const params = action.data ? (action.data.params || {}) : {}
+      const editParams = keys(params).map(key => ({
+        key,
+        value: params[key]
+      }))
+
+      return { ...state, monitorWizardVisible: true, monitorInitialValues: action.data, editParams }
+    }
 
     case CLOSE_DEVICE_MONITOR_WIZARD:
       return { ...state, monitorWizardVisible: false }
