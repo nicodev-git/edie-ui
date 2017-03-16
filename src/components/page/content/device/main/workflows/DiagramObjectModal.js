@@ -46,9 +46,7 @@ class DiagramObjectModal extends React.Component {
             <div className="row">
               <label className="col-md-3">Name</label>
               <div className="col-md-9">
-                <select className="form-control" ref="name" defaultValue={objectConfig ? objectConfig.name : ''}>
-                  {this.props.commands.map((c, index) => <option key={index}>{c}</option>)}
-                </select>
+                <input className="form-control" ref="name" defaultValue={objectConfig ? objectConfig.name : ''}/>
               </div>
             </div>
           </div>

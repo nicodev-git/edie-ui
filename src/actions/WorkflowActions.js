@@ -12,6 +12,8 @@ import {
   NO_AUTH_ERROR
 } from './types'
 
+import { openDeviceWfDiagramModal } from './DeviceActions'
+
 import { apiError } from './Errors'
 
 import { ROOT_URL } from './config'
@@ -96,6 +98,7 @@ export const openWorkflowModal = (entity) => {
       type: OPEN_WORKFLOW_MODAL,
       data: entity
     })
+    dispatch(openDeviceWfDiagramModal(entity ? entity.flowchart : null))
   }
 }
 

@@ -33,7 +33,6 @@ import {
 
 export default function (state = {}, action) {
   switch (action.type) {
-
     case OPEN_DEVICE_WF_DIAGRAM_MODAL: {
       const {data} = action
       let objects = []

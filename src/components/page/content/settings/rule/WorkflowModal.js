@@ -178,7 +178,9 @@ class WorkflowModal extends React.Component { // eslint-disable-line react/no-mu
   renderDiagramStep (current) {
     if (current === 2) {
       return (
-        <DiagramViewContainer />
+        <div style={{margin: '-28px -40px 10px -40px'}}>
+          <DiagramViewContainer />
+        </div>
       )
     }
   }
