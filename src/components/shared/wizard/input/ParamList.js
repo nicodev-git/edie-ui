@@ -5,12 +5,14 @@ const styles = {
   chip: {
     margin: 4
   },
+  chipLabel: {
+    fontSize: '12px'
+  },
   wrapper: {
     display: 'flex',
     flexWrap: 'wrap',
     maxHeight: '300px',
-    overflow: 'auto',
-    marginBottom: '12px'
+    overflow: 'auto'
   }
 }
 class ParamList extends React.Component {
@@ -24,6 +26,10 @@ class ParamList extends React.Component {
       params[p.key] = p.value
     })
     this.props.updateMonitorParams(params)
+  }
+
+  onClickEdit (p) {
+    this.props.openParamEditModal(p)
   }
 
   onClickRemove (p) {
@@ -40,14 +46,16 @@ class ParamList extends React.Component {
               onClick={this.onClickAdd.bind(this)}>Add</a>
           </span>
         </div>
-        <div style={styles.wrapper}>
+        <div style={styles.wrapper} className="margin-lg-bottom margin-md-top">
           {this.props.editParams.map(p =>
             <Chip
               key={p.key}
               style={styles.chip}
+              labelStyle={styles.chipLabel}
+              onTouchTap={this.onClickEdit.bind(this, p)}
               onRequestDelete={this.onClickRemove.bind(this, p)}
             >
-              {p.key}:{p.value}
+              <b>{p.key}</b>: {p.value}
             </Chip>
           )}
         </div>

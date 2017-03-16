@@ -202,9 +202,9 @@ export function addParam (param) {
   }
 }
 
-export function updateParam (param) {
+export function updateParam (oldParam, newParam) {
   return dispatch => {
-    dispatch({type: UPDATE_PARAM, param})
+    dispatch({type: UPDATE_PARAM, oldParam, newParam})
     dispatch(closeParamEditModal())
   }
 }

@@ -221,7 +221,7 @@ export default function (state = INITIAL_STATE, action) {
     case ADD_PARAM:
       return { ...state, editParams: concat(state.editParams, action.param) }
     case UPDATE_PARAM:
-      return { ...state, editParams: state.editParams.map(p => p.key === action.param.key ? action.param : p) }
+      return { ...state, editParams: state.editParams.map(p => p.key === action.oldParam.key ? action.newParam : p) }
     case REMOVE_PARAM:
       return { ...state, editParams: state.editParams.filter(p => p.key !== action.param.key) }
 

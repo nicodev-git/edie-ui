@@ -56,7 +56,7 @@ export default class ParamEditModal extends React.Component {
   handleFormSubmit (props) {
     const param = assign({}, this.props.editParam, props)
     if (this.props.editParam) {
-      this.props.updateParam(param)
+      this.props.updateParam(this.props.editParam, param)
     } else {
       this.props.addParam(param)
     }
