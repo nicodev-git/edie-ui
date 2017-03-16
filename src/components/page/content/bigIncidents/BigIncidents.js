@@ -26,8 +26,8 @@ class BigIncidents extends Component {
       text: '',
       fixed: '-1',
       severity: ['HIGH', 'MEDIUM'],
-      startTimestamp: moment().add(-6, 'days').valueOf(),
-      endTimestamp: moment().valueOf(),
+      afterStartTimestamp: moment().add(-6, 'days').valueOf(),
+      beforeStartTimestamp: moment().valueOf(),
       sort: 'startTimestamp,desc'
     })
   }
@@ -44,9 +44,6 @@ class BigIncidents extends Component {
 
   componentWillUnmount () {
     window.removeEventListener('resize', this.onResize)
-  }
-
-  handleFormSubmit ({select}) {
   }
 
   onResize () {
@@ -78,12 +75,6 @@ class BigIncidents extends Component {
         ackIncident={this.props.ackIncident}
       />
     )
-  }
-
-  openModal () {
-    this.setState({
-      open: true
-    })
   }
 
   onHide () {
@@ -128,7 +119,16 @@ class BigIncidents extends Component {
   }
 
   onChangeDateRange ({startDate, endDate}) {
+    this.props.updateBigIncidentParams(assign({}, this.props.bigIncidentParams, {
+      afterStartTimestamp: startDate.valueOf(),
+      beforeStartTimestamp: endDate.valueOf()
+    }))
+  }
 
+  onChangeFixedStatus (e) {
+    this.props.updateBigIncidentParams(assign({}, this.props.bigIncidentParams, {
+      fixed: e.target.value
+    }))
   }
 
   onChangeKeyword () {
@@ -146,7 +146,12 @@ class BigIncidents extends Component {
         severityOptions={severities}
         onChangeSeverity={this.onChangeSeverity.bind(this)}
 
+        startDate={moment(bigIncidentParams.afterStartTimestamp)}
+        endDate={moment(bigIncidentParams.beforeStartTimestamp)}
         onChangeDateRange={this.onChangeDateRange.bind(this)}
+
+        fixedStatus={bigIncidentParams.fixed}
+        onChangeFixedStatus={this.onChangeFixedStatus.bind(this)}
 
         onChangeKeyword={this.onChangeKeyword.bind(this)}
         onSelect={this.onChangeFixed}

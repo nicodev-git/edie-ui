@@ -33,8 +33,8 @@ export default class DateRangePicker2 extends React.Component {
       moment().endOf('month')
     ]
     rangeConfig[moment().add('-1', 'months').format('MMMM')] = [
-      moment().startOf('month'),
-      moment().endOf('month')
+      moment().add(-1, 'months').startOf('month'),
+      moment().add(-1, 'months').endOf('month')
     ]
 
     rangeConfig[moment().startOf('years').format('YYYY')] = [

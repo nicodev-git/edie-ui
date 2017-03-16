@@ -4,7 +4,10 @@ import DateRangePicker2 from 'components/shared/DateRangePicker2'
 import Select from 'react-select'
 import { Header } from './parts'
 
-const BigIncidentsView = ({onHide, severities, severityOptions, onChangeSeverity, onChangeDateRange, onChangeKeyword, onSelect,
+const BigIncidentsView = ({onHide, severities, severityOptions, onChangeSeverity,
+  startDate, endDate, onChangeDateRange,
+  fixedStatus, onChangeFixedStatus,
+  onChangeKeyword, onSelect,
   text, table, onSubmit}) => (
   <Modal show
     onHide={onHide}
@@ -33,16 +36,19 @@ const BigIncidentsView = ({onHide, severities, severityOptions, onChangeSeverity
         <label>incidents from</label>
         &nbsp;
 
-        <DateRangePicker2 onApply={onChangeDateRange}/>
+        <DateRangePicker2
+          startDate={startDate}
+          endDate={endDate}
+          onApply={onChangeDateRange}/>
         &nbsp;
 
         <label>having</label>
         &nbsp;
 
         <select className="fixtype form-control inline select-custom text-primary"
-          onChange={onSelect}
-          defaultValue="false">
-          <option value="">Any</option>
+          onChange={onChangeFixedStatus}
+          value={fixedStatus}>
+          <option value="-1">Any</option>
           <option value="false">Unfixed</option>
           <option value="true">Fixed</option>
         </select>
