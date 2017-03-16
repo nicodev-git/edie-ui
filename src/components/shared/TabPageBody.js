@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import {Tabs, Tab} from 'material-ui/Tabs'
+import MonkeyPatchLink from './MonkeyPatchLink'
 
 export default class TabPageBody extends Component {
   static contextTypes = {
@@ -42,6 +43,7 @@ export default class TabPageBody extends Component {
                 value={i}
                 label={item.title}
                 onActive={this.onClickTab.bind(this, item)}
+                containerElement={<MonkeyPatchLink to={item.path}/>}
               />
           )}
         </Tabs>
