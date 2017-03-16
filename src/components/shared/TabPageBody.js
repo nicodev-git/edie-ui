@@ -1,8 +1,11 @@
-import React, { Component } from 'react'
+import React, { Component, PropTypes } from 'react'
 import {Tabs, Tab} from 'material-ui/Tabs'
-import { Link } from 'react-router'
 
 export default class TabPageBody extends Component {
+  static contextTypes = {
+    router: PropTypes.object
+  }
+
   constructor (props) {
     super(props)
     this.state = {
@@ -14,6 +17,9 @@ export default class TabPageBody extends Component {
 
   handleChange = (value) => {
     console.log('changing value: ', value)
+    let tabs = this.props.tabs
+    let path = tabs[value].path
+    this.context.router.push(path)
     this.setState({
       value: value
     })
@@ -31,14 +37,12 @@ export default class TabPageBody extends Component {
       <div className="tabs-custom flex-vertical flex-1">
         <Tabs value={this.state.value} onChange={this.handleChange} className="nav nav-tabs">
           {tabs.map((item, i) =>
-            <Tab
-              key={i}
-              value={i}
-              label={item.title}
-              onActive={this.onClickTab.bind(this, item)}
-            >
-              <div><Link to={item.path}/></div>
-            </Tab>
+              <Tab
+                key={i}
+                value={i}
+                label={item.title}
+                onActive={this.onClickTab.bind(this, item)}
+              />
           )}
         </Tabs>
         <div className="tab-content">
