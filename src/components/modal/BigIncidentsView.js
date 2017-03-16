@@ -4,11 +4,12 @@ import DateRangePicker2 from 'components/shared/DateRangePicker2'
 import Select from 'react-select'
 import { Header } from './parts'
 
-const BigIncidentsView = ({onHide, severities, severityOptions, onChangeSeverity,
+const BigIncidentsView = ({onHide,
+  severities, severityOptions, onChangeSeverity,
   startDate, endDate, onChangeDateRange,
   fixedStatus, onChangeFixedStatus,
-  onChangeKeyword, onSelect,
-  text, table, onSubmit}) => (
+  keyword, onChangeKeyword,
+  table}) => (
   <Modal show
     onHide={onHide}
     aria-labelledby="ModalHeader"
@@ -47,8 +48,8 @@ const BigIncidentsView = ({onHide, severities, severityOptions, onChangeSeverity
 
         <select className="fixtype form-control inline select-custom text-primary"
           onChange={onChangeFixedStatus}
-          value={fixedStatus}>
-          <option value="-1">Any</option>
+          value={fixedStatus || ''}>
+          <option value="">Any</option>
           <option value="false">Unfixed</option>
           <option value="true">Fixed</option>
         </select>
@@ -58,17 +59,12 @@ const BigIncidentsView = ({onHide, severities, severityOptions, onChangeSeverity
         &nbsp;
 
         <input
+          value={keyword}
           onChange={onChangeKeyword}
           placeholder="search"
           className="form-control p-none noborder text-primary"
           style={{marginTop: '-2px'}}
         />
-
-        <select
-          className="fixtype form-control inline select-custom text-primary"
-          style={{display: 'none'}}>
-          <option>{text}</option>
-        </select>
       </div>
       <div className="flex-1 flex-vertical">
         {table}

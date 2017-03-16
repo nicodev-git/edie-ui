@@ -18,13 +18,13 @@ class BigIncidents extends Component {
     super(props)
     this.onFilterChange = this.onFilterChange.bind(this)
     this.onResize = this.onResize.bind(this)
-    this.onChangeFixed = this.onChangeFixed.bind(this)
   }
 
   componentWillMount () {
     this.props.updateBigIncidentParams({
-      text: '',
-      fixed: '-1',
+      deviceid: '*',
+      description: '',
+      fixed: null,
       severity: ['HIGH', 'MEDIUM'],
       afterStartTimestamp: moment().add(-6, 'days').valueOf(),
       beforeStartTimestamp: moment().valueOf(),
@@ -70,7 +70,7 @@ class BigIncidents extends Component {
   renderTable () {
     return (
       <IncidentTable
-        incidents={this.props.bigIncidents}
+        incidents={this.props.incidents}
         fixIncident={this.props.fixIncident}
         ackIncident={this.props.ackIncident}
       />
@@ -114,8 +114,6 @@ class BigIncidents extends Component {
         selectWidth: $(this.refs.templateSelect).width() * 1.03 // eslint-disable-line no-undef
       })
     }) */
-
-    this.onFilterChange()
   }
 
   onChangeDateRange ({startDate, endDate}) {
@@ -127,12 +125,14 @@ class BigIncidents extends Component {
 
   onChangeFixedStatus (e) {
     this.props.updateBigIncidentParams(assign({}, this.props.bigIncidentParams, {
-      fixed: e.target.value
+      fixed: e.target.value || null
     }))
   }
 
-  onChangeKeyword () {
-
+  onChangeKeyword (e) {
+    this.props.updateBigIncidentParams(assign({}, this.props.bigIncidentParams, {
+      description: e.target.value
+    }))
   }
 
   render () {
@@ -153,9 +153,9 @@ class BigIncidents extends Component {
         fixedStatus={bigIncidentParams.fixed}
         onChangeFixedStatus={this.onChangeFixedStatus.bind(this)}
 
+        keyword={bigIncidentParams.description}
         onChangeKeyword={this.onChangeKeyword.bind(this)}
-        onSelect={this.onChangeFixed}
-        text={this.props.templateText}
+
         table={this.renderTable()}
       />
     )
@@ -163,30 +163,3 @@ class BigIncidents extends Component {
 }
 
 export default BigIncidents
-/*
-connect(
-  state => ({
-    open: true,
-    severities: [
-      { label: 'High', value: 'HIGH' },
-      { label: 'Medium', value: 'MEDIUM' },
-      { label: 'Low', value: 'LOW' },
-      { label: 'Audit', value: 'AUDIT' },
-      { label: 'Ignore', value: 'IGNORE' }
-    ],
-    selectedSeverity: ['HIGH', 'MEDIUM'],
-    selectWidth: 26,
-    templateText: 'Any',
-    params: {
-      text: '',
-      fixed: '-1',
-      severity: ['High', 'Medium'],
-      startTime: moment().add(-6, 'days').format('YYYY-MM-DD HH:mm:ss'),
-      endTime: moment().format('YYYY-MM-DD HH:mm:ss')
-    },
-    tableHeight: 200
-  }), {})(reduxForm({
-    form: 'bigIncidents',
-    validate
-  })(BigIncidents))
-*/
