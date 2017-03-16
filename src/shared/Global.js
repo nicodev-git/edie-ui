@@ -78,7 +78,7 @@ export function getIncidenttypeIcon (incidenttype) {
 }
 
 export function getSeverityIcon (severity) {
-  let src = ''
+  /* let src = ''
 
   switch ((severity || '').toLowerCase()) {
     case 'high':
@@ -95,7 +95,8 @@ export function getSeverityIcon (severity) {
       break
   }
 
-  return `<img src='/images/${src}' title='${severity}' width=25>`
+  return `<img src='/images/${src}' title='${severity}' width=25>` */
+  return `<WarningIcon style={iconStyle} color="#ef9f15"/>`
 }
 
 export function dateFormatter (datetime) {

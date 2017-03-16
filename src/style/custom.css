@@ -585,3 +585,9 @@ table.table tbody tr.selected {
 .main-panel {
   margin-top: 50px;
 }
+
+.table-icons-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}

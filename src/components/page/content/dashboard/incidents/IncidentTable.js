@@ -3,11 +3,19 @@ import Griddle from 'griddle-react'
 import TimeAgo from 'react-timeago'
 import moment from 'moment'
 import IncidentEventsModal from './IncidentEventsModal'
+import { iconStyle } from '../../../../../style/materialStyles'
+import WarningIcon from 'material-ui/svg-icons/alert/warning'
+import ThumbUpIcon from 'material-ui/svg-icons/action/thumb-up'
+import ThumbDownIcon from 'material-ui/svg-icons/action/thumb-down'
+import InsertInvitationIcon from 'material-ui/svg-icons/editor/insert-invitation'
+import DoneIcon from 'material-ui/svg-icons/action/done'
+import ClearIcon from 'material-ui/svg-icons/content/clear'
+import AssignmentIcon from 'material-ui/svg-icons/action/assignment'
 
 import InfiniteTable from '../../../../shared/InfiniteTable'
-import {
+/* import {
     getSeverityIcon
-} from '../../../../../shared/Global'
+} from '../../../../../shared/Global' */
 
 import {
   showIncidentRaw,
@@ -15,6 +23,13 @@ import {
 } from '../../../../shared/incident/Incident'
 
 import ReactTooltip from 'react-tooltip'
+
+const thumbup = <ThumbUpIcon style={iconStyle} color="#90df50"/>
+const thumpdown = <ThumbDownIcon style={iconStyle} color="#ed1c24"/>
+const done = <DoneIcon style={iconStyle} color="#90df50"/>
+const clear = <ClearIcon style={iconStyle} color="#ed1c24"/>
+const rawtext = <InsertInvitationIcon style={iconStyle} color="#52a1be"/>
+const reason = <AssignmentIcon style={iconStyle} color="#e13e3e"/>
 
 export default class IncidentTable extends Component {
   constructor (props) {
@@ -26,7 +41,7 @@ export default class IncidentTable extends Component {
       'columnName': 'severity',
       'cssClassName': 'text-center width-60',
       'customComponent': (props) => {
-        return <span dangerouslySetInnerHTML={{__html: getSeverityIcon(props.data)}}/> // eslint-disable-line react/no-danger
+        return <span><WarningIcon style={iconStyle} color="#ef9f15"/></span> // eslint-disable-line react/no-danger
       }
     }, {
       'displayName': 'Date/Time',
@@ -59,31 +74,25 @@ export default class IncidentTable extends Component {
           ReactTooltip.rebuild()
         }, 1)
         return (
-          <div>
-            <a href="javascript:;" onClick={() => { this.props.ackIncident(row) }}>
-                <img style={{height: '30px'}} title="Acknowledge"
-                  src={`/images/${row.acknowledged ? 'ack.png' : 'noack.png'}`} />
-            </a>
-            &nbsp;
+          <div className = "table-icons-container">
+            <div onClick={() => { this.props.ackIncident(row) }}>
+              {row.acknowledged ? thumbup : thumpdown}
+            </div>
 
-            <a href="javascript:;" onClick={() => { this.props.fixIncident(row) }}>
-                <img style={{height: '30px'}} title="Acknowledge"
-                  src={`/images/${row.fixed ? 'ok.png' : 'notok.png'}`} />
-            </a>
-            &nbsp;
+            <div onClick={() => { this.props.fixIncident(row) }}>
+                {row.fixed ? done : clear}
+            </div>
 
-            <a href="javascript:;" onClick={showIncidentRaw.bind(null, row)}>
-                <img style={{height: '34px'}} title="Raw" src="/images/rawtext.png"/>
-            </a>
-            &nbsp;
+            <div onClick={showIncidentRaw.bind(null, row)}>
+                {rawtext}
+            </div>
 
             {
               (row.fixed && !row.whathappened)
-                ? <a href="javascript:;"
+                ? <div
                   onClick={showIncidentComments.bind(null, this.context.sid, row, this.reloadTable.bind(this))}>
-                  <img style={{height: '25px'}} title="Reason"
-                    src={`/images/${row.lastcomment ? 'reason-icon.png' : 'reason-x.png'}`} />
-                  </a>
+                  {reason}
+                </div>
                 : null
             }
 
