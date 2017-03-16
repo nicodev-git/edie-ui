@@ -4,7 +4,7 @@
     "development": {
       "plugins": [
         ["transform-object-rest-spread"],
-        ["transfrom-react-jsx"],
+        ["transform-react-jsx"],
         ["transform-object-assign"],
         ["transform-es2015-spread"],
         ["transform-react-display-name"],

@@ -42,9 +42,7 @@ export default class TabPageBody extends Component {
   handleClick (e) {
     console.log('click')
     let path = e.path
-    for (let i = 0; i < path.length; i++) {
-      console.log(path[i])
-    }
+    console.log(path)
   }
 
   render () {
