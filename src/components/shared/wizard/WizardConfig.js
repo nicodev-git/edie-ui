@@ -2482,6 +2482,8 @@ export const wizardConfig = {
                 // checked: true,
         width: MAX_WIDTH
       }, {
+        type: 'paramlist'
+      }, {
         type: 'label',
         text: '',
         width: 3
@@ -2513,11 +2515,6 @@ export const wizardConfig = {
           width: MAX_WIDTH,
           name: 'checkinterval'
         }]
-      }]
-    }, {
-      title: 'Step 2',
-      items: [{
-        type: 'paramlist'
       }]
     }]
   },
