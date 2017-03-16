@@ -95,7 +95,7 @@ export default class DeviceMenu extends React.Component {
                 <i className="fa fa-search" />
               </button>
             </div>
-            <a href="javascript:;" className="btn btn-default btn-sm">
+            <a href="javascript:;" className="btn btn-default btn-sm" onClick={this.props.onNewIncident}>
               Add Incident
             </a>
           </div>

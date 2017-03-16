@@ -28,7 +28,8 @@ class DeviceMenuContainer extends Component {
         { this.props.isDevicesDisplayed
           ? <DeviceMenu {...this.props}
             onClickItem={this.props.onClickDeviceItem}
-            selectedItem={this.props.selectedItem}/>
+            selectedItem={this.props.selectedItem}
+            onNewIncident={this.props.onNewIncident}/>
           : null }
       </li>
     )
