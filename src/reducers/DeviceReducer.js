@@ -115,7 +115,7 @@ export default function (state = INITIAL_STATE, action) {
         key,
         value: params[key]
       }))
-
+      console.log(action.data)
       return { ...state, monitorWizardVisible: true, monitorInitialValues: action.data, editParams }
     }
 

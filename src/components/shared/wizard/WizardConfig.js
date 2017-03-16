@@ -2478,7 +2478,7 @@ export const wizardConfig = {
           type: 'attach',
           width: 3
         },
-        name: 'enable',
+        name: 'enabled',
                 // checked: true,
         width: MAX_WIDTH
       }, {
