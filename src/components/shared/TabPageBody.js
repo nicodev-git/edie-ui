@@ -1,30 +1,45 @@
-import React from 'react'
-import { Link } from 'react-router'
+import React, { Component } from 'react'
+import {Tabs, Tab} from 'material-ui/Tabs'
 
-export default class TabPageBody extends React.Component {
+export default class TabPageBody extends Component {
   constructor (props) {
     super(props)
-    this.state = {}
+    this.state = {
+      value: 0
+    }
+    this.handleChange = this.handleChange.bind(this)
+    this.onClickTab = this.onClickTab.bind(this)
   }
 
-  onClickTab () {
+  handleChange = (value) => {
+    console.log('changing value: ', value)
+    this.setState({
+      value: value
+    })
+  }
 
+  onClickTab (item) {
+    console.log('value: ', this.state.value)
+    console.log(item)
   }
 
   render () {
-    const {tab, tabs} = this.props
+    const tabs = this.props.tabs
 
     return (
       <div className="tabs-custom flex-vertical flex-1">
-        <ul className="nav nav-tabs">
+        <Tabs value={this.state.value} onChange={this.handleChange} className="nav nav-tabs">
           {tabs.map((item, i) =>
-            <li key={i} className={tab === i ? 'active' : ''}>
-              <Link to={{ pathname: item.path }}
-                onClick={this.onClickTab.bind(this)}>{item.title}</Link>
-            </li>
+            <Tab
+              key={i}
+              value={i}
+              label={item.title}
+              onActive={this.onClickTab.bind(this, item)}
+            >
+              <div>1</div>
+            </Tab>
           )}
-        </ul>
-
+        </Tabs>
         <div className="tab-content">
           {this.props.children}
         </div>
@@ -34,6 +49,5 @@ export default class TabPageBody extends React.Component {
 }
 
 TabPageBody.defaultProps = {
-  tabs: [],
-  tab: -1
+  tabs: []
 }

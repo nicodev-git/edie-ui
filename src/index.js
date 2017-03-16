@@ -7,6 +7,8 @@ import reducers from './reducers'
 import Routes from './routes'
 import reduxThunk from 'redux-thunk'
 import './style/style.styl'
+import injectTapEventPlugin from 'react-tap-event-plugin'
+injectTapEventPlugin()
 
 import { AUTH_USER } from './actions/types'
 
