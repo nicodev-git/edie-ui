@@ -603,10 +603,13 @@ table.table tbody tr.selected {
   align-items: center;
 }
 
-.main-panel thead {
+.main-panel th>span {
   font-size: 16pt;
+  color: #939395 !important;
 }
 
-.main-panel tbody {
+.main-panel td,
+.main-panel td>span {
   font-size: 14pt;
+  color: #939395 !important;
 }

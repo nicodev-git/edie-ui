@@ -5,12 +5,6 @@ import moment from 'moment'
 import IncidentEventsModal from './IncidentEventsModal'
 import { iconStyle } from '../../../../../style/materialStyles'
 import WarningIcon from 'material-ui/svg-icons/alert/warning'
-import ThumbUpIcon from 'material-ui/svg-icons/action/thumb-up'
-import ThumbDownIcon from 'material-ui/svg-icons/action/thumb-down'
-import InsertInvitationIcon from 'material-ui/svg-icons/editor/insert-invitation'
-import DoneIcon from 'material-ui/svg-icons/action/done'
-import ClearIcon from 'material-ui/svg-icons/content/clear'
-import AssignmentIcon from 'material-ui/svg-icons/action/assignment'
 
 import InfiniteTable from '../../../../shared/InfiniteTable'
 /* import {
@@ -24,12 +18,12 @@ import {
 
 import ReactTooltip from 'react-tooltip'
 
-const thumbup = <ThumbUpIcon style={iconStyle} color="#90df50"/>
-const thumpdown = <ThumbDownIcon style={iconStyle} color="#ed1c24"/>
-const done = <DoneIcon style={iconStyle} color="#90df50"/>
-const clear = <ClearIcon style={iconStyle} color="#ed1c24"/>
-const rawtext = <InsertInvitationIcon style={iconStyle} color="#52a1be"/>
-const reason = <AssignmentIcon style={iconStyle} color="#e13e3e"/>
+const thumbup = <img src="/images/ack.png" />
+const thumpdown = <img src="/images/noack.png" />
+const done = <img src="/images/ok.png" />
+const clear = <img src="/images/notok.png" />
+const rawtext = <img src="/images/rawtext.png" />
+const reason = <img src="/images/reason.png" />
 
 export default class IncidentTable extends Component {
   constructor (props) {
@@ -67,7 +61,7 @@ export default class IncidentTable extends Component {
     }, {
       'displayName': 'Actions',
       'columnName': 'actions',
-      'cssClassName': 'width-160',
+      'cssClassName': 'width-200',
       'customComponent': (p) => {
         const row = p.rowData
         setTimeout(() => {
