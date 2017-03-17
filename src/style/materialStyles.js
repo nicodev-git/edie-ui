@@ -7,14 +7,14 @@ const fontSize = '18pt'
 
 export const sidebarIconsColor = '#838489'
 
-export const thumbup = <img title="Acknowledge" src="/images/ack.png" />
-export const thumpdown = <img title="Acknowledge" src="/images/noack.png" />
-export const done = <img title="State" src="/images/ok.png" />
-export const notdone = <img title="State" src="/images/notok.png" />
-export const rawtext = <img title="Detail" src="/images/rawtext.png" />
-export const reason = <img title="Reason" src="/images/reason.png" />
-export const openicon = <img title="Details" src="/images/openicon.png" />
-export const reasonx = <img title="Reason" src="/images/reason-x.png" />
+export const thumbup = <img title="Acknowledge" src="/images/thumbup.png" />
+export const thumpdown = <img title="Acknowledge" src="/images/thumbdown.png" />
+export const done = <img title="State" src="/images/isdone.png" />
+export const notdone = <img title="State" src="/images/notdone.png" />
+export const rawtext = <img title="Detail" src="/images/rawstext.png" />
+export const reason = <img title="Reason" src="/images/reason1.png" />
+export const openicon = <img title="Details" src="/images/showicon.png" />
+export const reasonx = <img title="Reason" src="/images/reason2.png" />
 
 export const labelStyle = {
   color: primeColor
