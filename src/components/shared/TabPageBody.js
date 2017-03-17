@@ -8,13 +8,27 @@ export default class TabPageBody extends Component {
   constructor (props) {
     super(props)
     this.navigate = this.navigate.bind(this)
-    this.getPage = this.getPage.bind(this)
+    this.checkPath = this.checkPath.bind(this)
   }
 
-  getPage (url) {
+  checkPath (url, number) {
     let urlArray = url.split('/')
     let path = urlArray[urlArray.length - 1]
-    return path
+    let pageUrl = document.location.href
+    let pageArray = pageUrl.split('/')
+    let page = pageArray[pageArray.length - 1]
+    console.log('check path')
+    console.log(path)
+    console.log(page)
+    if (path === page) {
+      return true
+    } else {
+      let rootPath = urlArray[urlArray.length - 2]
+      if ((rootPath === page) && (number === 0)) {
+        return true
+      }
+    }
+    return false
   }
 
   navigate (item) {
@@ -23,7 +37,6 @@ export default class TabPageBody extends Component {
 
   render () {
     const tabs = this.props.tabs
-    let pagePath = this.getPage(document.location.href)
     return (
       <div className="tabs-custom flex-vertical flex-1">
         <ul className="nav nav-tabs tab-container">
@@ -34,7 +47,7 @@ export default class TabPageBody extends Component {
               >
                 <div>
                   <div className="tab-label">{item.title}</div>
-                  <div className={pagePath === this.getPage(item.path) ? 'tab-chosen' : 'tab-blank'}/>
+                  <div className={(this.checkPath(item.path, i)) ? 'tab-chosen' : 'tab-blank'}/>
                 </div>
               </div>
           )}

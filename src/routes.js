@@ -61,6 +61,7 @@ export default(
       <Route path="bigincidents" component={BigIncidentsContainer}/>
       <Route path="threatmap" component={ThreatMap}/>
       <Route path="settings" component={Settings}>
+        <IndexRoute component={SettingGeneralContainer} />
         <Route path="general" component={SettingGeneralContainer} />
         <Route path="agents" component={SettingAgent} />
         <Route path="rules" component={SettingRulesContainer} />
@@ -75,6 +76,7 @@ export default(
 
       <Route path="device/:deviceId" component={DeviceContainer}>
         <Route path="main" component={DeviceMain}>
+          <IndexRoute component= {DeviceMainIncidentsContainer}/>
           <Route path="incidents" component={DeviceMainIncidentsContainer}/>
           <Route path="workflows" component={DeviceMainWorkflowsContainer}/>
           <Route path="events" component={DeviceMainEventsContainer}/>
