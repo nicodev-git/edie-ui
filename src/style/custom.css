@@ -591,3 +591,11 @@ table.table tbody tr.selected {
   justify-content: flex-start;
   align-items: center;
 }
+
+.main-panel thead {
+  font-size: 16pt;
+}
+
+.main-panel tbody {
+  font-size: 14pt;
+}
