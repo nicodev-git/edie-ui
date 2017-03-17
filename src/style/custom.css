@@ -154,6 +154,16 @@ table.table tbody tr.selected {
     margin-top: 20px;
 }
 
+.tabs-custom .nav-tabs>li {
+  padding-left: 14px;
+  padding-right: 14px;
+}
+
+.tabs-custom .nav-tabs>li>a {
+  padding-left: 0px !important;
+  padding-right: 0px !important;
+}
+
 .tabs-custom .nav-tabs>li.active>a,
 .tabs-custom .nav-tabs>li.active>a:hover,
 .tabs-custom .nav-tabs>li.active>a:focus {
@@ -161,7 +171,8 @@ table.table tbody tr.selected {
     border-top:none;
     border-left:none;
     border-right:none;
-    border-bottom: 2px solid rgb(38, 38, 234);
+    border-bottom: 4px solid;
+    border-color: #78a8ca;
 }
 
 .tabs-custom{
