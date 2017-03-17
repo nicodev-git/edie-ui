@@ -229,6 +229,10 @@ table.table tbody tr.selected {
     width: 200px;
 }
 
+.width-300 {
+    width: 300px;
+}
+
 /* Color picker */
 .colorpicker-element{
     display: inline-block;
@@ -617,4 +621,12 @@ table.table tbody tr.selected {
 .table-panel img {
   margin-right: 5px;
   cursor: pointer;
+}
+
+.table-panel>div {
+  height: 100%;
+}
+
+.griddle .table>tbody>tr>td {
+  word-break: normal !important;
 }

@@ -17,9 +17,6 @@ export default class TabPageBody extends Component {
     let pageUrl = document.location.href
     let pageArray = pageUrl.split('/')
     let page = pageArray[pageArray.length - 1]
-    console.log('check path')
-    console.log(path)
-    console.log(page)
     if (path === page) {
       return true
     } else {

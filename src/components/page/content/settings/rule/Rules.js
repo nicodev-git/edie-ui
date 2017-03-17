@@ -27,7 +27,8 @@ export default class Rules extends React.Component {
       'columnName': 'desc'
     }, {
       'displayName': 'Display Incident Description',
-      'columnName': 'display_incident_desc'
+      'columnName': 'display_incident_desc',
+      'cssClassName': 'width-300'
     }, {
       'displayName': 'Origin',
       'columnName': 'origin',
