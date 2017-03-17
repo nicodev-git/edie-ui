@@ -604,12 +604,16 @@ table.table tbody tr.selected {
 }
 
 .main-panel th>span {
-  font-size: 16pt;
+  font-size: 14pt;
   color: #939395 !important;
 }
 
 .main-panel td,
 .main-panel td>span {
-  font-size: 14pt;
+  font-size: 12pt;
   color: #939395 !important;
+}
+
+.main-panel img {
+  margin-right: 5px;
 }

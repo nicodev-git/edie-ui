@@ -61,7 +61,7 @@ export default class IncidentTable extends Component {
     }, {
       'displayName': 'Actions',
       'columnName': 'actions',
-      'cssClassName': 'width-200',
+      'cssClassName': 'width-180',
       'customComponent': (p) => {
         const row = p.rowData
         setTimeout(() => {
