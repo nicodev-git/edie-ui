@@ -1,6 +1,10 @@
 import moment from 'moment'
+import React from 'react'
 import {reduce, isNull, isUndefined, isArray} from 'lodash'
 import { ROOT_URL } from 'actions/config'
+import WarningIcon from 'material-ui/svg-icons/alert/warning'
+import AssignmentIcon from 'material-ui/svg-icons/action/assignment'
+import { iconStyle } from '../style/materialStyles'
 
 export const imageBaseUrl = `${ROOT_URL}/images/`
 export const extImageBaseUrl = `${ROOT_URL}/externalpictures?name=`
@@ -78,25 +82,16 @@ export function getIncidenttypeIcon (incidenttype) {
 }
 
 export function getSeverityIcon (severity) {
-  /* let src = ''
-
   switch ((severity || '').toLowerCase()) {
     case 'high':
-      src = 'high.png'
-      break
+      return <WarningIcon style={iconStyle} color="#e13e3e"/>
     case 'low':
-      src = 'low.png'
-      break
+      return <WarningIcon style={iconStyle} color="#ef9f15"/>
     case 'medium':
-      src = 'medium.png'
-      break
+      return <WarningIcon style={iconStyle} color="#52a1be"/>
     default:
-      src = 'audit.png'
-      break
+      return <AssignmentIcon style={iconStyle} color="#52a1be"/>
   }
-
-  return `<img src='/images/${src}' title='${severity}' width=25>` */
-  return `<WarningIcon style={iconStyle} color="#ef9f15"/>`
 }
 
 export function dateFormatter (datetime) {

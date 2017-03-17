@@ -57,7 +57,7 @@ export default class Incidents extends React.Component {
       'columnName': 'severity',
       'cssClassName': 'text-center width-60',
       'customComponent': (props) => {
-        return <span dangerouslySetInnerHTML={{__html: getSeverityIcon(props.data)}}/> // eslint-disable-line react/no-danger
+        return <span>{getSeverityIcon(props.data)}</span> // eslint-disable-line react/no-danger
       }
     }, {
       'displayName': 'Date/Time',

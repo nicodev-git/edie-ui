@@ -3,27 +3,17 @@ import Griddle from 'griddle-react'
 import TimeAgo from 'react-timeago'
 import moment from 'moment'
 import IncidentEventsModal from './IncidentEventsModal'
-import { iconStyle } from '../../../../../style/materialStyles'
-import WarningIcon from 'material-ui/svg-icons/alert/warning'
-
+import { thumbup, thumpdown, done, notdone,
+  rawtext, reason } from '../../../../../style/materialStyles'
 import InfiniteTable from '../../../../shared/InfiniteTable'
-/* import {
+import {
     getSeverityIcon
-} from '../../../../../shared/Global' */
-
+} from '../../../../../shared/Global'
 import {
   showIncidentRaw,
   showIncidentComments
 } from '../../../../shared/incident/Incident'
-
 import ReactTooltip from 'react-tooltip'
-
-const thumbup = <img src="/images/ack.png" />
-const thumpdown = <img src="/images/noack.png" />
-const done = <img src="/images/ok.png" />
-const clear = <img src="/images/notok.png" />
-const rawtext = <img src="/images/rawtext.png" />
-const reason = <img src="/images/reason.png" />
 
 export default class IncidentTable extends Component {
   constructor (props) {
@@ -35,7 +25,7 @@ export default class IncidentTable extends Component {
       'columnName': 'severity',
       'cssClassName': 'text-center width-80',
       'customComponent': (props) => {
-        return <span><WarningIcon style={iconStyle} color="#ef9f15"/></span> // eslint-disable-line react/no-danger
+        return <span>{getSeverityIcon(props.data)}</span> // eslint-disable-line react/no-danger
       }
     }, {
       'displayName': 'Date/Time',
@@ -74,7 +64,7 @@ export default class IncidentTable extends Component {
             </div>
 
             <div onClick={() => { this.props.fixIncident(row) }}>
-                {row.fixed ? done : clear}
+                {row.fixed ? done : notdone}
             </div>
 
             <div onClick={showIncidentRaw.bind(null, row)}>

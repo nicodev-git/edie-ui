@@ -616,4 +616,5 @@ table.table tbody tr.selected {
 
 .main-panel img {
   margin-right: 5px;
+  cursor: pointer;
 }
