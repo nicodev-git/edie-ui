@@ -1,5 +1,5 @@
 import React from 'react'
-import { Router, browserHistory, Route } from 'react-router'
+import { Router, browserHistory, Route, IndexRoute } from 'react-router'
 
 import MainContainer from './containers/page/MainContainer'
 import SigninContainer from './containers/auth/SigninContainer'
@@ -52,6 +52,7 @@ export default(
     <Route path="/" component={RequireAuth(MainContainer)} onChange={onMainEnter}>
       <Route path="chat" component={ChatContainer} />
       <Route path="search" component={Search}>
+        <IndexRoute component={SearchIncidentsContainer} />
         <Route path="incidents" component={SearchIncidentsContainer} />
         <Route path="devices" component={SearchDevices} />
         <Route path="process" component={SearchProcess} />

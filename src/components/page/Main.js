@@ -59,7 +59,7 @@ class Main extends React.Component {
     if (item.id === 'dashboard') {
       closeDevice()
     }
-
+    console.log('on click menu item: ', item.path)
     router.push({
       pathname: item.path
     })
