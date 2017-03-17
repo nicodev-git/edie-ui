@@ -173,7 +173,6 @@ class InfiniteTable extends React.Component {
       <Griddle
         id={this.props.id}
         useExternal={this.props.useExternal}
-
         enableSort={false}
         enableInfiniteScroll
 
@@ -195,7 +194,7 @@ class InfiniteTable extends React.Component {
         results={this.getCurrentData()}
         resultsPerPage={this.props.pageSize}
 
-        tableClassName="table table-hover"
+        tableClassName="table table-hover table-panel"
 
         useFixedHeader={false}
         noDataMessage={this.props.noDataMessage}

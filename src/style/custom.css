@@ -623,8 +623,9 @@ table.table tbody tr.selected {
   cursor: pointer;
 }
 
-.table-panel>div {
-  height: 100%;
+.griddle-body>div {
+  height: 100% !important;
+  overflow-y: auto !important;
 }
 
 .griddle .table>tbody>tr>td {
