@@ -563,7 +563,7 @@ table.table tbody tr.selected {
 .tab-container {
   display: flex;
   justify-content: flex-start;
-  height: 50px;
+  height: 50px !important;
 }
 
 .tab-container>div {
@@ -608,13 +608,23 @@ table.table tbody tr.selected {
 }
 
 .table-panel th>span {
+  font-size: 12pt;
+  color: #939395 !important;
+}
+
+.main-panel th>span {
   font-size: 14pt;
+}
+
+.main-panel td,
+.main-panel td>span {
+  font-size: 12pt;
   color: #939395 !important;
 }
 
 .table-panel td,
 .table-panel td>span {
-  font-size: 12pt;
+  font-size: 11pt;
   color: #939395 !important;
 }
 
@@ -623,7 +633,7 @@ table.table tbody tr.selected {
   cursor: pointer;
 }
 
-.griddle-body>div {
+.small-table .griddle-body>div {
   height: 100% !important;
   overflow-y: auto !important;
 }

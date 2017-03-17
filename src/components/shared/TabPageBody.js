@@ -33,7 +33,8 @@ export default class TabPageBody extends Component {
   }
 
   render () {
-    const tabs = this.props.tabs
+    const {tabs, tclass} = this.props
+    let tableclass = tclass || ''
     return (
       <div className="tabs-custom flex-vertical flex-1">
         <ul className="nav nav-tabs tab-container">
@@ -49,7 +50,7 @@ export default class TabPageBody extends Component {
               </div>
           )}
         </ul>
-        <div className="tab-content table-panel">
+        <div className={`tab-content ${tableclass}`}>
           {this.props.children}
         </div>
       </div>
