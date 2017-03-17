@@ -597,6 +597,18 @@ table.table tbody tr.selected {
   border-radius: 15%;
 }
 
+.modal-dialog th,
+.modal-dialog th>span {
+  font-size: 9pt;
+  color: #939395 !important;
+}
+
+.modal-dialog td,
+.modal-dialog td>span {
+  font-size: 8pt;
+  color: #939395 !important;
+}
+
 .main-panel {
   margin-top: 50px;
 }
