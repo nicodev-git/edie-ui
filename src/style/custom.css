@@ -607,7 +607,8 @@ table.table tbody tr.selected {
   align-items: center;
 }
 
-.table-panel th>span {
+.table-panel th>span,
+.table-panel th>a>span {
   font-size: 12pt;
   color: #939395 !important;
 }
@@ -633,11 +634,26 @@ table.table tbody tr.selected {
   cursor: pointer;
 }
 
+.small-modal-table th>span {
+  font-size: 9pt;
+  color: #939395 !important;
+}
+
+.small-modal-table td,
+.small-modal-table td>span {
+  font-size: 8pt;
+  color: #939395 !important;
+}
+
 .small-table .griddle-body>div {
   height: 100% !important;
   overflow-y: auto !important;
 }
 
 .griddle .table>tbody>tr>td {
-  word-break: normal !important;
+  word-break: normal;
+}
+
+.object-table .table>tbody>tr>td {
+  word-break: break-all;
 }

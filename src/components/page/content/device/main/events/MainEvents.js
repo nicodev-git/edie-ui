@@ -268,7 +268,7 @@ export default class MainEvents extends Component {
           </div>
         </TabPageHeader>
 
-        <TabPageBody tabs={MainTabs(device.id)} tab={2}>
+        <TabPageBody tabs={MainTabs(device.id)} tab={2} tclass="object-table">
           {this.renderTable()}
         </TabPageBody>
       </TabPage>

@@ -14,6 +14,7 @@ export default class AttackersModal extends React.Component {
     this.cells = [{
       'displayName': 'Source IP',
       'columnName': 'ipaddress',
+      'cssClassName': 'width-80',
       'customComponent': (props) => {
         let row = props.rowData
         let val = props.data
@@ -29,7 +30,8 @@ export default class AttackersModal extends React.Component {
       }
     }, {
       'displayName': '# Of Attacks',
-      'columnName': 'result'
+      'columnName': 'result',
+      'cssClassName': 'width-100'
     }, {
       'displayName': 'Attack Duration',
       'columnName': 'min',
@@ -46,7 +48,8 @@ export default class AttackersModal extends React.Component {
       'cssClassName': 'text-center'
     }, {
       'displayName': 'Attacked Systems',
-      'columnName': 'devicename'
+      'columnName': 'devicename',
+      'cssClassName': 'width-140'
     }]
   }
 

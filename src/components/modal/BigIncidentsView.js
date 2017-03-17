@@ -13,7 +13,7 @@ const BigIncidentsView = ({onHide,
   <Modal show
     onHide={onHide}
     aria-labelledby="ModalHeader"
-    className="bootstrap-dialog type-default modal-fit modal-flex">
+    className="bootstrap-dialog type-default modal-fit modal-flex table-panel">
     <Header name="Incidents" onClick={onHide}/>
     <div className="modal-body bootstrap-dialog-message">
       <div className="form-inline">

@@ -11,7 +11,7 @@ const AddExceptionModalView = ({show, onHide, onClose, params, cells}) => (
     className="bootstrap-dialog type-primary"
   >
     <Header name="Attackers Today" onClick={onClose} />
-    <div className="modal-body bootstrap-dialog-message">
+    <div className="modal-body bootstrap-dialog-message small-modal-table">
       <InfiniteTable
         url="/bi/getAllAttackers"
         params={params}
