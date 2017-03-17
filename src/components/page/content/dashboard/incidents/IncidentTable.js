@@ -39,14 +39,14 @@ export default class IncidentTable extends Component {
     this.cells = [{
       'displayName': 'Severity',
       'columnName': 'severity',
-      'cssClassName': 'text-center width-60',
+      'cssClassName': 'text-center width-80',
       'customComponent': (props) => {
         return <span><WarningIcon style={iconStyle} color="#ef9f15"/></span> // eslint-disable-line react/no-danger
       }
     }, {
       'displayName': 'Date/Time',
       'columnName': 'startTimestamp',
-      'cssClassName': 'nowrap text-center width-140',
+      'cssClassName': 'nowrap text-center width-180',
       'customComponent': (props) => {
         const {data} = props
         if (!data) return <span/>
@@ -59,7 +59,7 @@ export default class IncidentTable extends Component {
     }, {
       'displayName': 'System',
       'columnName': 'devicename',
-      'cssClassName': 'width-140'
+      'cssClassName': 'width-180'
     }, {
       'displayName': 'Description',
       'columnName': 'description',
