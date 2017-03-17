@@ -211,7 +211,7 @@ class DeviceEditWizard extends React.Component {
   }
 
   render () {
-    const { handleSubmit } = this.props
+    const { handleSubmit, tabs } = this.props
     return (
       <div>
         <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
@@ -229,7 +229,7 @@ class DeviceEditWizard extends React.Component {
                 onSelect={this.onSelectTab.bind(this)}
                 id="tabs-device-incidents">
                 {
-                  this.props.tabs.map((tab, i) => (
+                  tabs.map((tab, i) => (
                     <Tab eventKey={i} key={i} title={tab.title}>
                       {this.buildContent(tab, i)}
                     </Tab>
