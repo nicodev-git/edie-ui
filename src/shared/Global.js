@@ -3,7 +3,7 @@ import React from 'react'
 import {reduce, isNull, isUndefined, isArray} from 'lodash'
 import { ROOT_URL } from 'actions/config'
 import WarningIcon from 'material-ui/svg-icons/alert/warning'
-import AssignmentIcon from 'material-ui/svg-icons/action/assignment'
+import DescriptionIcon from 'material-ui/svg-icons/action/description'
 import { iconStyle } from '../style/materialStyles'
 
 export const imageBaseUrl = `${ROOT_URL}/images/`
@@ -90,7 +90,7 @@ export function getSeverityIcon (severity) {
     case 'medium':
       return <WarningIcon style={iconStyle} color="#52a1be"/>
     default:
-      return <AssignmentIcon style={iconStyle} color="#52a1be"/>
+      return <DescriptionIcon style={iconStyle} color="#52a1be"/>
   }
 }
 

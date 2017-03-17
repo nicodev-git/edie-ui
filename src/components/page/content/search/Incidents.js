@@ -24,7 +24,7 @@ import {
     showIncidentDetail,
     showIncidentRaw
 } from '../../../shared/incident/Incident'
-import { thumbup, thumpdown, done, notdone,
+import { thumbup, thumpdown, done, notdone, openicon, reasonx,
   rawtext, reason } from '../../../../style/materialStyles'
 
 export default class Incidents extends React.Component {
@@ -101,7 +101,7 @@ export default class Incidents extends React.Component {
         return (
           <div className = "table-icons-container">
             <div onClick={showIncidentDetail.bind(null, row)}>
-                {rawtext}
+                {openicon}
             </div>
 
             <div onClick={() => { props.ackIncident(row) }}>
@@ -119,7 +119,7 @@ export default class Incidents extends React.Component {
               (row.fixed && !row.whathappened)
                 ? <div
                   onClick={this.showIncidentComments.bind(this, row)}>
-                  {row.lastcomment ? reason : rawtext}
+                  {row.lastcomment ? reason : reasonx}
                 </div>
                 : null
             }

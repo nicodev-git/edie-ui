@@ -13,6 +13,8 @@ export const done = <img title="State" src="/images/ok.png" />
 export const notdone = <img title="State" src="/images/notok.png" />
 export const rawtext = <img title="Detail" src="/images/rawtext.png" />
 export const reason = <img title="Reason" src="/images/reason.png" />
+export const openicon = <img title="Details" src="/images/openicon.png" />
+export const reasonx = <img title="Reason" src="/images/reason-x.png" />
 
 export const labelStyle = {
   color: primeColor
