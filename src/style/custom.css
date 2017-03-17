@@ -603,18 +603,18 @@ table.table tbody tr.selected {
   align-items: center;
 }
 
-.main-panel th>span {
+.table-panel th>span {
   font-size: 14pt;
   color: #939395 !important;
 }
 
-.main-panel td,
-.main-panel td>span {
+.table-panel td,
+.table-panel td>span {
   font-size: 12pt;
   color: #939395 !important;
 }
 
-.main-panel img {
+.table-panel img {
   margin-right: 5px;
   cursor: pointer;
 }

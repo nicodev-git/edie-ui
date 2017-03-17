@@ -45,7 +45,7 @@ export default class MainIncidentPanel extends React.Component {
     return (
       <div className="incidents-row margin-sm-top flex-vertical flex-1"
         style={{minHeight: '600px'}}>
-        <Panel className="margin-sm-bottom flex-vertical flex-1 main-panel">
+        <Panel className="margin-sm-bottom flex-vertical flex-1 main-panel table-panel">
           <PanelBody className="padding-xs flex-vertical flex-1">
             {this.renderTable()}
           </PanelBody>

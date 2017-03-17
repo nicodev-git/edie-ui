@@ -24,6 +24,8 @@ import {
     showIncidentDetail,
     showIncidentRaw
 } from '../../../shared/incident/Incident'
+import { thumbup, thumpdown, done, notdone,
+  rawtext, reason } from '../../../../style/materialStyles'
 
 export default class Incidents extends React.Component {
   constructor (props) {
@@ -55,7 +57,7 @@ export default class Incidents extends React.Component {
     this.cellIncidents = [{
       'displayName': 'Severity',
       'columnName': 'severity',
-      'cssClassName': 'text-center width-60',
+      'cssClassName': 'text-center width-80',
       'customComponent': (props) => {
         return <span>{getSeverityIcon(props.data)}</span> // eslint-disable-line react/no-danger
       }
@@ -97,34 +99,30 @@ export default class Incidents extends React.Component {
           ReactTooltip.rebuild()
         }, 1)
         return (
-          <div>
-            <a href="javascript:;" onClick={showIncidentDetail.bind(null, row)}>
-              <img style={{height: '30px'}} title="Detail" src="/images/openicon.png" />
-            </a>
-            &nbsp;
+          <div className = "table-icons-container">
+            <div onClick={showIncidentDetail.bind(null, row)}>
+                {rawtext}
+            </div>
 
-            <a href="javascript:;" onClick={() => { props.ackIncident(row) }}>
-              <img style={{height: '30px'}} title="Acknowledge" src={`/images/${row.acknowledged ? 'ack.png' : 'noack.png'}`} />
-            </a>
-            &nbsp;
+            <div onClick={() => { props.ackIncident(row) }}>
+              {row.acknowledged ? thumbup : thumpdown}
+            </div>
 
-            <a href="javascript:;" onClick={() => { props.fixIncident(row) }}>
-              <img style={{height: '30px'}} title="Acknowledge" src={`/images/${row.fixed ? 'ok.png' : 'notok.png'}`} />
-            </a>
-            &nbsp;
+            <div onClick={() => { props.fixIncident(row) }}>
+                {row.fixed ? done : notdone}
+            </div>
 
-            <button className="btn btn-primary btn-xs" onClick={showIncidentRaw.bind(null, row)}>Raw</button>
-            &nbsp;
-
+            <div onClick={showIncidentRaw.bind(null, row)}>
+                {rawtext}
+            </div>
             {
-              (row.fixed & !row.whathappened)
-                ? <a href="javascript:;" onClick={this.showIncidentComments.bind(this, row)}>
-                    <img style={{height: '25px'}} title="Reason"
-                      src={`/images/${row.lastcomment ? 'reason-icon.png' : 'reason-x.png'}`} />
-                  </a>
+              (row.fixed && !row.whathappened)
+                ? <div
+                  onClick={this.showIncidentComments.bind(this, row)}>
+                  {row.lastcomment ? reason : rawtext}
+                </div>
                 : null
             }
-
           </div>
         )
       }

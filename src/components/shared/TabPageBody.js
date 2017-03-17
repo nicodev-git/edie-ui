@@ -39,7 +39,7 @@ export default class TabPageBody extends Component {
               </div>
           )}
         </ul>
-        <div className="tab-content">
+        <div className="tab-content table-panel">
           {this.props.children}
         </div>
       </div>
