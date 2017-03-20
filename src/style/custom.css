@@ -700,3 +700,8 @@ table.table tbody tr.selected {
 .form-buttons button:hover {
   background-color: #d7d8d9 !important;
 }
+
+.close-block {
+  margin-bottom: 20px;
+  padding-right: 20px;
+}

@@ -1,7 +1,7 @@
 import React from 'react'
 import Modal from 'react-bootstrap-modal'
 import { Field } from 'redux-form'
-import { HeaderNoClose, FormInput, SubmitSingle } from './parts'
+import { Header, FormInput, SubmitSingle } from './parts'
 
 const ActivationModalView = ({onHide, onSignup}) => (
   <Modal
@@ -9,7 +9,7 @@ const ActivationModalView = ({onHide, onSignup}) => (
     onHide={onHide}
     className="bootstrap-dialog type-primary modal-w-wrap">
     <div>
-      <HeaderNoClose name="License Activation"/>
+      <Header name="License Activation"/>
       <div style={{background: '#d9d9dc', minWidth: '300px'}} className="padding-md">
         <form onSubmit={onSignup}>
           <div className="form-column">
