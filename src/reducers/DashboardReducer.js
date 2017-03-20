@@ -20,6 +20,7 @@ import {
   FETCH_MAP_DEVICES_LINES,
 
   FETCH_DASHBOARD_INCIDENTS,
+  ADD_DASHBOARD_INCIDENT,
   FETCH_DASHBOARD_BIGINCIDENTS,
   UPDATE_DEVICE_INCIDENT,
 
@@ -197,6 +198,9 @@ export default function (state = {}, action) {
 
     case UPDATE_DASHBOARD_STATS:
       return { ...state, stats: action.stats }
+
+    case ADD_DASHBOARD_INCIDENT:
+      return { ...state, incidents: concat([], action.incident, state.incidents || []) }
   }
   return state
 }

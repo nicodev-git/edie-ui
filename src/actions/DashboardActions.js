@@ -3,6 +3,7 @@ import {
   UPDATE_DASHBOARD,
 
   FETCH_DASHBOARD_INCIDENTS,
+  ADD_DASHBOARD_INCIDENT,
   FETCH_DASHBOARD_BIGINCIDENTS,
   UPDATE_BIGINCIDENTS_PARAMS,
 
@@ -54,6 +55,12 @@ const fetchIncidentsSuccess = (dispatch, response) => {
     type: FETCH_DASHBOARD_INCIDENTS,
     data: response.data._embedded.incidents
   })
+}
+
+export const addDashboardIncident = incident => {
+  return dispatch => {
+    dispatch({type: ADD_DASHBOARD_INCIDENT, incident})
+  }
 }
 
 export const fetchBigIncidents = (params) => {
@@ -131,6 +138,18 @@ export function openIncidentEventsModal (incident) {
 export function closeIncidentEventsModal () {
   return dispatch => {
     dispatch({type: CLOSE_INCIDENT_EVENTS_MODAL})
+  }
+}
+
+export function fetchDashboardStats () {
+  return dispatch => {
+    axios.get(`${ROOT_URL}/incident/dashboardinfo`).then(({data}) => {
+      dispatch(updateDashboardStats({
+        open: data.openincidents || 0,
+        today: data.todayincidents || 0,
+        month: data.monthincidents || 0
+      }))
+    }).catch(error => apiError(dispatch, error))
   }
 }
 

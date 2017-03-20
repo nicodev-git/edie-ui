@@ -7,15 +7,8 @@ import MainIncidentPanel from './incidents/MainIncidentPanel'
 
 @withRouter
 export default class Dashboard extends React.Component {
-  constructor (props) {
-    super(props)
-    this.state = {}
-    this.onDashboardUpdate = this.onDashboardUpdate.bind(this)
-  }
-
-  onDashboardUpdate (msg) {
-    console.log('Dashboard message received.')
-    this.props.updateDashboard(msg.data)
+  componentWillMount () {
+    this.props.fetchDashboardStats()
   }
 
   render () {
