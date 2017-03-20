@@ -1,6 +1,6 @@
 import React from 'react'
 import { findIndex } from 'lodash'
-import { AttackersModalView } from '../../../../modal'
+import { SmallModalTable } from '../../../../modal'
 
 export default class AttackersModal extends React.Component {
   constructor (props) {
@@ -99,12 +99,16 @@ export default class AttackersModal extends React.Component {
 
   render () {
     return (
-      <AttackersModalView
+      <SmallModalTable
         show={this.state.open}
         onHide={this.onHide.bind(this)}
         onClose={this.onClickClose.bind(this)}
         params={this.state.params}
         cells={this.cells}
+        header="Attackers Today"
+        url="/bi/getAllAttackers"
+        row={{'key': 'ipaddress'}}
+        height={500}
       />
     )
   }
