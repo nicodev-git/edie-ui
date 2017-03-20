@@ -22,11 +22,18 @@ const SimpleModalForm = ({show, onHide, onSubmit, header, subheader, buttonText,
           {content.map(elem => {
             switch (elem.type) {
               case 'select':
-                return (<Field key={elem.name} name={elem.name.toLowerCase()}
-                  component={FormSelect} label={elem.name} options={elem.options}/>)
+                return (<Field
+                  key={elem.name.replace(/\s+/g, '')}
+                  name={elem.name.toLowerCase().replace(/\s+/g, '')}
+                  component={FormSelect}
+                  label={elem.name}
+                  options={elem.options}/>)
               default:
-                return (<Field key={elem.name} name={elem.name.toLowerCase()}
-                  component={FormInput} label={elem.name}/>)
+                return (<Field
+                  key={elem.name.replace(/\s+/g, '')}
+                  name={elem.name.toLowerCase().replace(/\s+/g, '')}
+                  component={FormInput}
+                  label={elem.name}/>)
             }
           })}
         </div>
