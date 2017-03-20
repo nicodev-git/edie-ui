@@ -1,28 +1,9 @@
 import React, { Component } from 'react'
-import { reduxForm } from 'redux-form'
-import { connect } from 'react-redux'
 import { validate } from '../../../../../modal/validation/NameValidation'
 import { ROOT_URL } from '../../../../../../actions/config'
-import { MarkIgnoreModalView } from '../../../../../modal'
+import SimpleModalContainer from '../../../../../../containers/modal/SimpleModalContainer'
 
-class MarkIgnoreModal extends Component {
-
-  handleFormSubmit ({name, filter, severity}) {
-    console.log('form submitting')
-    console.log('name: ', name)
-    console.log('filter: ', filter)
-    console.log('severity: ', severity)
-    this.onHide()
-  }
-
-  onHide () {
-    this.setState({
-      open: false
-    }, () => {
-      this.props.onClose &&
-            this.props.onClose(this, true)
-    })
-  }
+export default class MarkIgnoreModal extends Component {
 
   onClickSave () {
     $.get(`${ROOT_URL}${Api.rule.addIgnoreRuleForDevice}`, { // eslint-disable-line no-undef
@@ -38,28 +19,26 @@ class MarkIgnoreModal extends Component {
   }
 
   render () {
-    const { handleSubmit } = this.props
-    let text = (this.props.message) ? (this.props.message) : ''
+    let header = 'Mark as Ignored'
+    let subheader = (this.props.message) ? (this.props.message) : ''
     let options = [
       { value: 'Ignore', label: 'Ignore' },
       { value: 'IgnoreDelete', label: 'IgnoreDelete' }
     ]
+    let content = [
+      {type: 'select', name: 'Severity', options: options},
+      {name: 'Name'},
+      {name: 'Filter'}
+    ]
     return (
-      <MarkIgnoreModalView
-        show={this.props.open}
-        onHide={this.onHide.bind(this)}
-        onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
-        text={text}
-        options={options}
+      <SimpleModalContainer
+        header={header}
+        subheader={subheader}
+        content={content}
+        doAction={this.onClickSave.bind(this)}
+        onClose={this.props.onClose}
+        validate={validate}
       />
     )
   }
 }
-
-export default connect(
-  state => ({
-    open: true
-  }), {})(reduxForm({
-    form: 'markIgnoreModal',
-    validate
-  })(MarkIgnoreModal))
