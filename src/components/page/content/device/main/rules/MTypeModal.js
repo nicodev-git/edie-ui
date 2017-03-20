@@ -1,7 +1,8 @@
-import React from 'react'
-import Modal from 'react-bootstrap-modal'
+import React, { Component } from 'react'
+import { validate } from '../../../../../modal/validation/NameValidation'
+import SimpleModalContainer from '../../../../../../containers/modal/SimpleModalContainer'
 
-export default class MTypeModal extends React.Component {
+export default class MTypeModal extends Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -22,62 +23,50 @@ export default class MTypeModal extends React.Component {
     this.onHide()
   }
 
-  onClickSave () {
+  onClickSave ({ type }) {
     let item = this.props.item || {
       result: ''
     }
-
     item.number = this.props.number
-    item.value = this.refs.type.value
-
+    item.value = type
     this.onHide(item)
   }
 
   render () {
+    let header = 'Rule'
+    let subheader = `M${this.props.number}`
+    let options = [
+      { value: 'Not Used', label: 'Not Used' },
+      { value: 'Source IP', label: 'Source IP' },
+      { value: 'Mac', label: 'Mac' },
+      { value: 'Username', label: 'User Name' },
+      { value: 'Destination IP', label: 'Destination IP' },
+      { value: 'Severity', label: 'Severity' },
+      { value: 'Message', label: 'Message' }
+    ]
+    let content = [
+      {type: 'select', name: 'type', options: options}
+    ]
+    let initialType = this.props.item ? this.props.item.value : 'Not Used'
+    let initialValues = {
+      type: initialType
+    }
     return (
-      <Modal show={this.state.open} onHide={this.onHide.bind(this)}
-        aria-labelledby="ModalHeader" className="bootstrap-dialog type-primary">
-
-        <div className="modal-header">
-          <h4 className="modal-title bootstrap-dialog-title">
-            Type
-          </h4>
-          <div className="bootstrap-dialog-close-button">
-            <button className="close"
-              onClick={this.onClickClose.bind(this)}>×</button>
-          </div>
-        </div>
-
-        <div className="modal-body bootstrap-dialog-message">
-          <div className="row margin-md-bottom">
-            <label className="col-md-2 control-label">M{this.props.number}</label>
-            <div className="col-md-10">
-              <select className="form-control valid" ref="type"
-                defaultValue={this.props.item ? this.props.item.value : 'Not Used'}>
-                <option value="Not Used">Not Used</option>
-                <option value="Source IP">Source IP</option>
-                <option value="Mac">Mac</option>
-                <option value="Username">User Name</option>
-                <option value="Destination IP">Destination IP</option>
-                <option value="Severity">Severity</option>
-                <option value="Message">Message</option>
-              </select>
-            </div>
-          </div>
-
-          <div className="text-right">
-            <a href="javascript:;" className="btn btn-primary btn-sm" onClick={this.onClickSave.bind(this)}>Save</a>
-            <a href="javascript:;" className="btn btn-default btn-sm" onClick={this.onClickClose.bind(this)}>Close</a>
-          </div>
-        </div>
-      </Modal>
+      <SimpleModalContainer
+        header={header}
+        subheader={subheader}
+        content={content}
+        doAction={this.onClickSave.bind(this)}
+        onClose={this.props.onClose}
+        validate={validate}
+        initialValues={initialValues}
+      />
     )
   }
 }
 
 MTypeModal.defaultProps = {
   onClose: null,
-
   number: 1,
   item: null
 }
