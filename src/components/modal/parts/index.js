@@ -11,6 +11,7 @@ import SubmitSingle from './SubmitSingle'
 import FormMultiSelect from './FormMultiSelect'
 import FileUpload from './FileUpload'
 import SubHeader from './SubHeader'
+import CloseButton from './CloseButton'
 
 export {
     Header,
@@ -25,5 +26,6 @@ export {
     SubmitSingle,
     FormMultiSelect,
     FileUpload,
-    SubHeader
+    SubHeader,
+    CloseButton
 }

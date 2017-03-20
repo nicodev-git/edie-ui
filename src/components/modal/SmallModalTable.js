@@ -1,7 +1,7 @@
 import React from 'react'
 import Modal from 'react-bootstrap-modal'
 import InfiniteTable from '../shared/InfiniteTable'
-import { Header } from './parts'
+import { Header, CloseButton } from './parts'
 
 const SmallModalTable = ({show, header, url, row, height, onHide, onClose, params, cells}) => (
   <Modal
@@ -22,6 +22,7 @@ const SmallModalTable = ({show, header, url, row, height, onHide, onClose, param
         selectable
       />
     </div>
+    <CloseButton onClose={onHide} />
   </Modal>
 )
 
