@@ -705,3 +705,7 @@ table.table tbody tr.selected {
   margin-bottom: 20px;
   padding-right: 20px;
 }
+
+.alert-buttons {
+  padding-right: 40px;
+}

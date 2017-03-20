@@ -4,6 +4,7 @@ import {appendComponent, removeComponent} from '../../util/Component'
 import { Header, SubHeader } from '../modal/parts'
 import TextField from 'material-ui/TextField'
 import FlatButton from 'material-ui/FlatButton'
+import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import { inputStyle, underlineStyle, buttonStyle, buttonTextStyle } from '../../style/materialStyles'
 
 const TYPE_ALERT = 'alert'
@@ -11,10 +12,20 @@ const TYPE_CONFIRM = 'confirm'
 const TYPE_PROMPT = 'prompt'
 
 export default class Alert extends React.Component {
+  static childContextTypes = {
+    muiTheme: React.PropTypes.object
+  }
+
   constructor (props) {
     super(props)
     this.state = {
       open: true
+    }
+  }
+
+  getChildContext () {
+    return {
+      muiTheme: getMuiTheme()
     }
   }
 
@@ -59,6 +70,7 @@ export default class Alert extends React.Component {
           <SubHeader name={this.props.message}/>
           <div className={`form-column ${this.props.type === TYPE_PROMPT ? '' : 'hidden'}`}>
             <TextField
+              name="input"
               defaultValue={this.props.default}
               inputStyle={inputStyle}
               underlineFocusStyle={underlineStyle}
@@ -66,7 +78,7 @@ export default class Alert extends React.Component {
               ref="input"
             />
           </div>
-          <div className="form-buttons">
+          <div className="form-buttons alert-buttons">
             <FlatButton
               onClick={this.onClickSave.bind(this)}
               label="Ok"
