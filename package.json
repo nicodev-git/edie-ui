@@ -61,6 +61,7 @@
     "material-ui": "^0.17.0",
     "material-ui-superselectfield": "^1.1.0",
     "moment": "^2.13.0",
+    "net": "^1.0.2",
     "postcss-custom-selectors": "*",
     "postcss-loader": "^1.1.1",
     "precss": "^1.4.0",
