@@ -9,7 +9,7 @@ export default class AddIncidentModal extends Component {
     this.props.closeAddDeviceIncident()
   }
 
-  onClickSave (name, description, severity) {
+  onClickSave ({name, description, severity}) {
     this.props.addDeviceIncident({
       deviceid: this.props.device.id,
       name: name,

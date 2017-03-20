@@ -1,4 +1,5 @@
 import Stomp from 'stompjs'
+import {keys} from 'lodash'
 
 import { getLocation } from 'util/Location'
 import { ROOT_URL } from 'actions/config'
@@ -6,9 +7,9 @@ import { ROOT_URL } from 'actions/config'
 export default class IncidentSocket {
   constructor (props) {
     this.ws = null
-    this.mappings = {}
     this.reconnectOnClose = false
     this.connected = false
+    this.listeners = props.listeners
     this.id = props.id || ''
   }
 
@@ -26,13 +27,47 @@ export default class IncidentSocket {
       me.ws = new window.WebSocket(`ws://${domain}/frontendupdates`)
       me.stompClient = Stomp.over(me.ws)
       me.stompClient.connect('', '', (frame) => {
-        me.stompClient.subscribe('/frontendupdates', message => {
-          console.log(JSON.parse(message.body))
+        keys(me.listeners).forEach(path => {
+          me.stompClient.subscribe(`/frontendupdates/${path}`, me.onMessage.bind(me, me.listeners[path]))
         })
       })
+      me.stompClient.debug = null
     } catch (e) {
       console.log(e)
     }
+  }
+
+  onMessage (func, e) {
+    if (!func) return
+    try {
+      const msgObj = JSON.parse(e.body)
+      func(msgObj)
+    } catch (e) {
+      console.log(e)
+    }
+  }
+
+  addListener (msg, cb) {
+    const me = this
+    if (!msg || !cb) return
+    if (!me.mappings[msg]) me.mappings[msg] = []
+
+    me.mappings[msg].push(cb)
+  }
+
+  removeListener (msg, cb) {
+    const me = this
+    if (!msg || !cb) return
+
+    let mappings = me.mappings[msg]
+    if (!mappings) return
+
+    const index = mappings.indexOf(cb)
+    if (index >= 0) {
+      mappings.splice(index, 1)
+    }
+
+    return true
   }
 
   close () {

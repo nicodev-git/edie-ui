@@ -41,7 +41,11 @@ export default class MainContainer extends Component {
 
   componentDidMount () {
     this.incidentSocket = new IncidentSocket({
-      onMessage: this.onIncidentSocketMessage.bind(this)
+      listeners: {
+        'incidents': this.onReceiveIncidents.bind(this),
+        'statuses': this.onReceiveStatus.bind(this),
+        'dashboard': this.onReceiveNewIncident.bind(this)
+      }
     })
     this.incidentSocket.connect()
   }
@@ -50,7 +54,16 @@ export default class MainContainer extends Component {
     this.incidentSocket.close()
   }
 
-  onIncidentSocketMessage (msg) {
+  onReceiveIncidents (msg) {
+    console.log(msg)
+  }
+
+  onReceiveStatus (msg) {
+    console.log(msg)
+  }
+
+  onReceiveNewIncident (msg) {
+    console.log(msg)
   }
 
   render () {
