@@ -393,6 +393,7 @@ table.table tbody tr.selected {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+    margin-bottom: 20px;
 }
 
 .form-column-shift > div:first-child {
@@ -686,4 +687,8 @@ table.table tbody tr.selected {
 
 .main-incident-toggle svg {
   fill: #939395 !important;
+}
+
+.form-column>div {
+  width:100% !important;
 }

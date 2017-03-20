@@ -23,7 +23,7 @@ const SimpleModalForm = ({show, onHide, onSubmit, header, subheader, buttonText,
             switch (elem.type) {
               case 'textarea':
                 return (<Field key={elem.name} name={elem.name.toLowerCase()}
-                  component={FormInput} label={elem.name} multiLine rows={3}/>)
+                  component={FormInput} label={elem.name} multiLine rows={2}/>)
               case 'select':
                 return (<Field key={elem.name} name={elem.name.toLowerCase()}
                   component={FormSelect} label={elem.name} options={elem.options}/>)
