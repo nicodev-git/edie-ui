@@ -3,7 +3,6 @@ import BigIncidentsView from './BigIncidentsView'
 import MapImportModalView from './MapImportModalView'
 import MapSaveModalView from './MapSaveModalView'
 import NewIncidentModalView from './NewIncidentModalView'
-import AttackersModalView from './AttackersModalView'
 import IncidentsModalView from './InsidentsModalView'
 import AddIncidentModalView from './AddIncidentModalView'
 import MarkIgnoreModalView from './MarkIgnoreModalView'
@@ -18,7 +17,6 @@ export {
     MapImportModalView,
     MapSaveModalView,
     NewIncidentModalView,
-    AttackersModalView,
     IncidentsModalView,
     AddIncidentModalView,
     MarkIgnoreModalView,
