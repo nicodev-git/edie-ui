@@ -38,7 +38,8 @@ class SimpleModalContainer extends Component {
 export default connect(
   (state, props) => ({
     open: true,
-    validate: props.validate
+    validate: props.validate,
+    initialValues: props.initialValues
   }), {})(reduxForm({
     form: 'simpleModalForm'
   })(SimpleModalContainer))

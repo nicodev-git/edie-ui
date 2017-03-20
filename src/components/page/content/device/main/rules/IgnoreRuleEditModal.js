@@ -1,33 +1,13 @@
-import React from 'react'
+import React, { Component } from 'react'
 import Modal from 'react-bootstrap-modal'
 import { showAlert } from '../../../../../shared/Alert'
 import { ROOT_URL } from '../../../../../../actions/config'
+import { validate } from '../../../../../modal/validation/NameValidation'
+import SimpleModalContainer from '../../../../../../containers/modal/SimpleModalContainer'
 
-export default class IgnoreRuleEditModal extends React.Component {
+export default class IgnoreRuleEditModal extends Component {
   constructor (props) {
     super(props)
-    this.state = {
-      open: props.open
-    }
-  }
-
-  openModal () {
-    this.setState({
-      open: true
-    })
-  }
-
-  onHide (success) {
-    this.setState({
-      open: false
-    }, () => {
-      this.props.onClose &&
-            this.props.onClose(this, success)
-    })
-  }
-
-  onClickClose () {
-    this.onHide()
   }
 
   onClickSave () {
@@ -47,69 +27,39 @@ export default class IgnoreRuleEditModal extends React.Component {
 
   render () {
     let rule = this.props.rule
-
+    let header = 'Rule'
+    let subheader = (this.props.message) ? (this.props.message) : ''
+    let options = [
+      { value: 'Ignore', label: 'Ignore' },
+      { value: 'IgnoreDelete', label: 'IgnoreDelete' }
+    ]
+    let content = [
+      {type: 'select', name: 'Severity', options: options},
+      {name: 'Name'},
+      {name: 'Filter'}
+    ]
+    let initialValues = {
+      select: rule.severity,
+      name: rule.name,
+      filter: rule.prefilter1
+    }
     return (
-      <Modal
-        show={this.state.open}
-        onHide={this.onHide.bind(this)}
-        aria-labelledby="ModalHeader"
-        className="bootstrap-dialog type-primary"
-      >
-        <div className="modal-header">
-          <h4 className="modal-title bootstrap-dialog-title">
-            Rule
-          </h4>
-          <div className="bootstrap-dialog-close-button">
-            <button className="close" onClick={this.onClickClose.bind(this)}>×</button>
-          </div>
-        </div>
-        <div className="modal-body bootstrap-dialog-message">
-          <div className="row margin-md-bottom">
-            <div className="col-md-12">
-              <label className="control-label message-label" />
-            </div>
-          </div>
-
-          <div className="row margin-md-bottom">
-            <label className="col-md-3 control-label">Severity</label>
-            <div className="col-md-9">
-              <select className="form-control" ref="severity" defaultValue={rule.severity}>
-                <option value="Ignore">Ignore</option>
-                <option value="IgnoreDelete">Ignore Delete</option>
-              </select>
-            </div>
-          </div>
-
-          <div className="row margin-md-bottom">
-            <label className="col-md-3 control-label">Name</label>
-            <div className="col-md-9">
-              <input type="text" className="form-control" ref="name" defaultValue={rule.name}/>
-            </div>
-          </div>
-
-          <div className="row margin-md-bottom">
-            <label className="col-md-3 control-label">Filter</label>
-            <div className="col-md-9">
-              <input type="text" className="form-control" ref="filter" defaultValue={rule.prefilter1}/>
-            </div>
-          </div>
-
-          <div className="text-right">
-            <a href="javascript:;" className="btn btn-primary btn-sm" onClick={this.onClickSave.bind(this)}>Save</a>
-            <a href="javascript:;" className="btn btn-default btn-sm" onClick={this.onClickClose.bind(this)}>Cancel</a>
-          </div>
-        </div>
-      </Modal>
+      <SimpleModalContainer
+        header={header}
+        content={content}
+        doAction={this.onClickSave.bind(this)}
+        onClose={this.props.onClose}
+        validate={validate}
+        initialValues={initialValues}
+      />
     )
   }
 }
 
 IgnoreRuleEditModal.defaultProps = {
   open: false,
-
   rule: {},
   device: {},
   categoryId: 0,
-
   onClose: null
 }
