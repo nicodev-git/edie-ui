@@ -1,18 +1,18 @@
 import React from 'react'
 import SelectField from 'material-ui/SelectField'
 import MenuItem from 'material-ui/MenuItem'
-import { labelStyle, labelFocusStyle, errorStyle, underlineFocusStyle,
+import { errorStyle, underlineFocusStyle, inputStyle,
    selectedItemStyle } from '../../../style/materialStyles'
 
 const FormSelect = ({input, label, meta: { touched, error }, options}) => (
   <SelectField
-    floatingLabelText={label}
-    floatingLabelStyle={labelStyle}
-    floatingLabelFocusStyle={labelFocusStyle}
+    hintText={label}
     errorText={touched && error}
     errorStyle={errorStyle}
     underlineStyle={underlineFocusStyle}
     selectedMenuItemStyle={selectedItemStyle}
+    menuItemStyle={inputStyle}
+    labelStyle={inputStyle}
     {...input}
     onChange={(event, index, value) => input.onChange(value)}>
     {options.map(option => <MenuItem key={option.value} value={option.value} primaryText={option.label}/>)}
