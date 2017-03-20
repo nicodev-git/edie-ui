@@ -5,6 +5,7 @@ import SimpleModalContainer from '../../../../../../containers/modal/SimpleModal
 export default class AddIncidentModal extends Component {
 
   onClickClose () {
+    console.log('trying to close')
     this.props.closeAddDeviceIncident()
   }
 
@@ -31,7 +32,7 @@ export default class AddIncidentModal extends Component {
     ]
     let content = [
       {name: 'Name'},
-      {type: 'textarea', name: 'Description'},
+      {name: 'Description'},
       {type: 'select', name: 'Severity', options: options}
     ]
     return (
@@ -39,7 +40,7 @@ export default class AddIncidentModal extends Component {
         header={header}
         content={content}
         doAction={this.onClickSave.bind(this)}
-        onHide={this.onClickClose.bind(this)}
+        onClose={this.onClickClose.bind(this)}
         validate={validate}
         buttonText="Add Incident"
       />

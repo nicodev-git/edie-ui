@@ -1,12 +1,11 @@
 import React from 'react'
 const primeColor = '#5698c6'
 const textColor = '#777777'
-const cancelColor = '#dedede'
 const badgeTextColor = '#f5f5f5'
 const errorColor = '#d32f2f'
 const backgroundColor = '#ffffff'
 const headerColor = '#000000'
-const fontSize = '18pt'
+const fontSize = '16pt'
 
 export const sidebarIconsColor = '#838489'
 
@@ -19,24 +18,11 @@ export const reason = <img title="Reason" src="/images/reason1.png" />
 export const openicon = <img title="Details" src="/images/showicon.png" />
 export const reasonx = <img title="Reason" src="/images/reason2.png" />
 
-export const labelStyle = {
-  color: primeColor
-}
-
-export const labelFocusStyle = {
-  display: 'none'
-}
-
 export const errorStyle = {
   color: errorColor
 }
 
 export const inputStyle = {
-  color: textColor,
-  fontSize: fontSize
-}
-
-export const textareaStyle = {
   color: textColor,
   fontSize: fontSize
 }
@@ -54,9 +40,8 @@ export const buttonStyle = {
   color: primeColor
 }
 
-export const cancelButtonStyle = {
-  backgroundColor: cancelColor,
-  color: textColor
+export const buttonTextStyle = {
+  fontWeight: 700
 }
 
 export const headerStyle = {

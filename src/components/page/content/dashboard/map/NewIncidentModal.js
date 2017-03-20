@@ -18,7 +18,7 @@ export default class NewIncidentModal extends Component {
     ]
     let content = [
       {name: 'Name'},
-      {type: 'textarea', name: 'Description'},
+      {name: 'Description'},
       {type: 'select', name: 'Severity', options: options}
     ]
     return (
