@@ -571,8 +571,3 @@ export default class Chat extends React.Component {
     )
   }
 }
-
-Chat.contextTypes = {
-  user: React.PropTypes.object,
-  sid: React.PropTypes.string
-}
