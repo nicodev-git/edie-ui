@@ -1,6 +1,10 @@
 import React from 'react'
 import Modal from 'react-bootstrap-modal'
 import {appendComponent, removeComponent} from '../../util/Component'
+import { Header, SubHeader } from '../modal/parts'
+import TextField from 'material-ui/TextField'
+import FlatButton from 'material-ui/FlatButton'
+import { inputStyle, underlineStyle, buttonStyle, buttonTextStyle } from '../../style/materialStyles'
 
 const TYPE_ALERT = 'alert'
 const TYPE_CONFIRM = 'confirm'
@@ -50,35 +54,30 @@ export default class Alert extends React.Component {
     return (
       <Modal show={this.state.open} onHide={this.onHide.bind(this)}
         aria-labelledby="ModalHeader" className="bootstrap-dialog type-primary">
-
-        <div className="modal-header">
-          <h4 className="modal-title bootstrap-dialog-title">
-            {this.props.title}
-          </h4>
-        </div>
-
+        <Header name={this.props.title} />
         <div className="modal-body bootstrap-dialog-message">
-
-          <div className="row">
-            <label className="col-md-12">{this.props.message}</label>
-
-            <div className={`col-md-12 ${this.props.type === TYPE_PROMPT ? '' : 'hidden'}`}>
-              <input type="text" className="form-control"
-                defaultValue={this.props.default}
-                onKeyUp={this.onKeyUp.bind(this)}
-                ref="input"/>
-            </div>
+          <SubHeader name={this.props.message}/>
+          <div className={`form-column ${this.props.type === TYPE_PROMPT ? '' : 'hidden'}`}>
+            <TextField
+              defaultValue={this.props.default}
+              inputStyle={inputStyle}
+              underlineFocusStyle={underlineStyle}
+              onKeyUp={this.onKeyUp.bind(this)}
+              ref="input"
+            />
           </div>
-
-          <div className="text-right margin-md-top">
-
-            <a href="javascript:;" className="btn btn-primary btn-sm margin-sm-right"
-              onClick={this.onClickSave.bind(this)}>OK</a>
-
-            <a href="javascript:;"
-              className={`btn btn-default btn-sm ${this.props.type === TYPE_ALERT ? 'hidden' : ''}`}
-              onClick={this.onClickClose.bind(this)}>Cancel</a>
-
+          <div className="form-buttons">
+            <FlatButton
+              onClick={this.onClickSave.bind(this)}
+              label="Ok"
+              style={buttonStyle}
+              labelStyle={buttonTextStyle}/>
+            <FlatButton
+              className={this.props.type === TYPE_ALERT ? 'hidden' : ''}
+              onClick={this.onClickClose.bind(this)}
+              label="Cancel"
+              style={buttonStyle}
+              labelStyle={buttonTextStyle}/>
           </div>
         </div>
       </Modal>
