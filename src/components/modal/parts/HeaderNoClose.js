@@ -1,5 +1,5 @@
 import React from 'react'
-import { headerStyle } from './materialStyles'
+import { headerStyle } from '../../../style/materialStyles'
 
 const HeaderNoClose = ({name}) => (
   <div className="text-center padding-sm" style={headerStyle}>

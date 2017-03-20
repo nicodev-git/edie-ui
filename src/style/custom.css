@@ -669,3 +669,8 @@ table.table tbody tr.selected {
 .object-table .table>tbody>tr>td {
   word-break: break-all;
 }
+
+.image-container {
+  display: flex;
+  justify-content: center;
+}

@@ -4,7 +4,7 @@ import Dropzone from 'react-dropzone'
 const FormImg = (field) => {
   const files = field.input.value
   return (
-    <div>
+    <div className="image-container">
       <Dropzone
         name={field.name}
         onDrop={(filesToUpload, e) => field.input.onChange(filesToUpload)}
