@@ -1,4 +1,3 @@
-import React from 'react'
 import Stomp from 'stompjs'
 
 import { getLocation } from 'util/Location'
@@ -24,10 +23,10 @@ export default class IncidentSocket {
     try {
       const domain = getLocation(ROOT_URL || document.location.href).host
 
-      me.ws = new WebSocket(`ws://${domain}/frontendupdates`)
+      me.ws = new window.WebSocket(`ws://${domain}/frontendupdates`)
       me.stompClient = Stomp.over(me.ws)
       me.stompClient.connect('', '', (frame) => {
-        stompClient.subscribe('/frontendupdates', message => {
+        me.stompClient.subscribe('/frontendupdates', message => {
           console.log(JSON.parse(message.body))
         })
       })
@@ -40,7 +39,6 @@ export default class IncidentSocket {
     const me = this
     me.stompClient && me.stompClient.disconnect()
   }
-
 }
 
 export const incidentSocket = {
@@ -65,7 +63,7 @@ export const incidentSocket = {
 
     try {
       console.log('Incident Socket Connecting...')
-      me.ws = new WebSocket(`ws://${getServerDomain()}/incident`)
+      me.ws = new window.WebSocket(`ws://domain/incident`)
       me.ws.onopen = me.onOpen.bind(me)
       me.ws.onmessage = me.onMessage.bind(me)
       me.ws.onclose = me.onClose.bind(me)
