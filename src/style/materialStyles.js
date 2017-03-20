@@ -4,6 +4,8 @@ const textColor = '#777777'
 const cancelColor = '#dedede'
 const badgeTextColor = '#f5f5f5'
 const errorColor = '#d32f2f'
+const backgroundColor = '#ffffff'
+const headerColor = '#000000'
 const fontSize = '18pt'
 
 export const sidebarIconsColor = '#838489'
@@ -57,7 +59,8 @@ export const cancelButtonStyle = {
 }
 
 export const headerStyle = {
-  backgroundColor: primeColor
+  backgroundColor: backgroundColor,
+  color: headerColor
 }
 
 export const subHeaderStyle = {

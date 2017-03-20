@@ -692,3 +692,7 @@ table.table tbody tr.selected {
 .form-column>div {
   width:100% !important;
 }
+
+.modal-header h4 {
+  display: inline-block;
+}
