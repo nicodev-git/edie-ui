@@ -200,7 +200,7 @@ export default function (state = {}, action) {
       return { ...state, stats: action.stats }
 
     case ADD_DASHBOARD_INCIDENT:
-      return { ...state, incidents: concat([], action.incident, state.incidents || []) }
+      return { ...state, incidents: concat([], action.incident || [], state.incidents || []) }
   }
   return state
 }

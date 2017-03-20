@@ -14,7 +14,9 @@ import {
   openActivationModal,
   closeActivationModal,
 
-  updateDashboardStats
+  updateDashboardStats,
+  fetchIncidents,
+  addDashboardIncident
 } from 'actions'
 
 @connect((state) => {
@@ -38,7 +40,9 @@ dispatch => bindActionCreators({
   openActivationModal,
   closeActivationModal,
 
-  updateDashboardStats
+  updateDashboardStats,
+  fetchIncidents,
+  addDashboardIncident
 }, dispatch))
 @withRouter
 export default class MainContainer extends Component {
@@ -60,10 +64,13 @@ export default class MainContainer extends Component {
 
   onReceiveIncidents (msg) {
     console.log(msg)
+    if (msg && msg.length) {
+      this.props.addDashboardIncident(msg)
+    }
   }
 
   onReceiveStatus (msg) {
-    console.log(msg)
+    // console.log(msg)
   }
 
   onReceiveDashboard (msg) {

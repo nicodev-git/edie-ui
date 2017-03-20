@@ -38,7 +38,9 @@ import {
   closeIncidentEventsModal,
 
   openDashboardNewIncidentModal,
-  closeDashboardNewIncidentModal
+  closeDashboardNewIncidentModal,
+
+  fetchDashboardStats
 } from 'actions'
 
 export default connect(
@@ -107,6 +109,8 @@ export default connect(
     closeIncidentEventsModal,
 
     openDashboardNewIncidentModal,
-    closeDashboardNewIncidentModal
+    closeDashboardNewIncidentModal,
+
+    fetchDashboardStats
   }
 )(Dashboard)
