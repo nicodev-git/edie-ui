@@ -696,3 +696,7 @@ table.table tbody tr.selected {
 .modal-header h4 {
   display: inline-block;
 }
+
+.form-buttons button:hover {
+  background-color: #d7d8d9 !important;
+}
