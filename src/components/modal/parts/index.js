@@ -1,5 +1,3 @@
-import BottomLinks from './BottomLinks'
-import CellInput from './CellInput'
 import Header from './Header'
 import Selector from './Selector'
 import FiveButtonsBlock from './FiveButtonsBlock'
@@ -15,8 +13,6 @@ import FileUpload from './FileUpload'
 import SubHeader from './SubHeader'
 
 export {
-    BottomLinks,
-    CellInput,
     Header,
     Selector,
     FiveButtonsBlock,

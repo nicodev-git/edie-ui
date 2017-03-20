@@ -1,6 +1,7 @@
 import React from 'react'
-const primeColor = '#5683bb'
+const primeColor = '#5698c6'
 const textColor = '#777777'
+const cancelColor = '#dedede'
 const badgeTextColor = '#f5f5f5'
 const errorColor = '#d32f2f'
 const fontSize = '18pt'
@@ -48,6 +49,11 @@ export const selectedItemStyle = {
 
 export const buttonStyle = {
   backgroundColor: primeColor
+}
+
+export const cancelButtonStyle = {
+  backgroundColor: cancelColor,
+  color: textColor
 }
 
 export const headerStyle = {

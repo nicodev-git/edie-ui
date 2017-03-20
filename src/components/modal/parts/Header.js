@@ -1,5 +1,5 @@
 import React from 'react'
-import { headerStyle } from './materialStyles'
+import { headerStyle } from '../../../style/materialStyles'
 
 const Header = ({name, onClick}) => (
   <div className="modal-header" style={headerStyle}>
