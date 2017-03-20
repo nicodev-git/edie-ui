@@ -1,4 +1,4 @@
-export const getServerURL = () => {
+const getServerURL = () => {
   return process.env.BACKEND_URL
 }
 
