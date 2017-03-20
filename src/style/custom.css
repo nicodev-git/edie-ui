@@ -610,7 +610,7 @@ table.table tbody tr.selected {
 }
 
 .main-panel {
-  margin-top: 50px;
+  margin-top: 5px;
 }
 
 .table-icons-container {
@@ -673,4 +673,17 @@ table.table tbody tr.selected {
 .image-container {
   display: flex;
   justify-content: center;
+}
+
+.main-incident-toggle {
+  position: absolute;
+  top: 585px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  z-index: 3;
+}
+
+.main-incident-toggle svg {
+  fill: #939395 !important;
 }

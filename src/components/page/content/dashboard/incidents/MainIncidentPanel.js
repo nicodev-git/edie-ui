@@ -2,6 +2,7 @@ import React from 'react'
 import {withRouter} from 'react-router'
 import { Panel, PanelBody } from '../../../../shared/Panel'
 import IncidentTable from './IncidentTable'
+import ToolbarToggle from '../map/toolbar/ToolbarToggle'
 
 @withRouter
 export default class MainIncidentPanel extends React.Component {
@@ -12,6 +13,7 @@ export default class MainIncidentPanel extends React.Component {
     }
 
     this.refreshTable = this.refreshTable.bind(this)
+    this.onTableToggle = this.onTableToggle.bind(this)
   }
 
   componentWillMount () {
@@ -22,6 +24,10 @@ export default class MainIncidentPanel extends React.Component {
     return (
       <IncidentTable {...this.props} ref="table"/>
     )
+  }
+
+  onTableToggle () {
+    // TODO
   }
 
   onClickOpenModal (e) {
@@ -47,6 +53,9 @@ export default class MainIncidentPanel extends React.Component {
         style={{minHeight: '600px'}}>
         <Panel className="margin-sm-bottom flex-vertical flex-1 main-panel table-panel">
           <PanelBody className="padding-xs flex-vertical flex-1">
+            <div className="main-incident-toggle">
+              <ToolbarToggle onToggle={this.onTableToggle} />
+            </div>
             {this.renderTable()}
           </PanelBody>
         </Panel>

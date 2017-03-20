@@ -5,7 +5,6 @@ import moment from 'moment'
 import IncidentEventsModal from './IncidentEventsModal'
 import { thumbup, thumpdown, done, notdone,
   rawtext, reason } from '../../../../../style/materialStyles'
-import InfiniteTable from '../../../../shared/InfiniteTable'
 import {
     getSeverityIcon
 } from '../../../../../shared/Global'
@@ -89,21 +88,6 @@ export default class IncidentTable extends Component {
   refresh () {
     this.refs.table &&
         this.refs.table.refresh()
-  }
-
-  render2 () {
-    return (
-      <InfiniteTable
-        url="/incidentstable/getLatestIncidentsDataTable?severity=High&severity=Medium"
-        params={{}}
-        cells={this.cells}
-        ref="table"
-        rowMetadata={{'key': 'incidentid'}}
-        selectable
-        bodyHeight={this.props.containerHeight}
-        onRowDblClick={this.onRowDblClick.bind(this)}
-      />
-    )
   }
 
   reloadTable () {
