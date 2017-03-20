@@ -1,11 +1,11 @@
 import React from 'react'
-import RaisedButton from 'material-ui/RaisedButton'
-import { buttonStyle, cancelButtonStyle } from '../../../style/materialStyles'
+import FlatButton from 'material-ui/FlatButton'
+import { buttonStyle } from '../../../style/materialStyles'
 
 const SubmitBlock = ({name, onClick}) => (
   <div className="form-buttons">
-    <RaisedButton type="submit" label={name} buttonStyle={buttonStyle} primary/>
-    <RaisedButton label="Close" onClick={onClick} buttonStyle={cancelButtonStyle}/>
+    <FlatButton type="submit" label={name} style={buttonStyle}/>
+    <FlatButton label="Close" onClick={onClick} style={buttonStyle}/>
   </div>
 )
 

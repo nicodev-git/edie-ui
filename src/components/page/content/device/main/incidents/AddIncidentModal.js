@@ -1,19 +1,8 @@
 import React, { Component } from 'react'
-import { reduxForm } from 'redux-form'
-import { connect } from 'react-redux'
 import { validate } from '../../../../../modal/validation/NameValidation'
-import { AddIncidentModalView } from '../../../../../modal'
+import SimpleModalContainer from '../../../../../../containers/modal/SimpleModalContainer'
 
-class AddIncidentModal extends Component {
-
-  handleFormSubmit ({name, desc, severity}) {
-    console.log('form submitting')
-    console.log('name: ', name)
-    console.log('desc: ', desc)
-    console.log('severity: ', severity)
-    this.onClickSave(name, desc, severity)
-    this.onClickClose()
-  }
+export default class AddIncidentModal extends Component {
 
   onClickClose () {
     this.props.closeAddDeviceIncident()
@@ -33,29 +22,27 @@ class AddIncidentModal extends Component {
   }
 
   render () {
+    let header = 'Add incident'
     let options = [
       { value: 'HIGH', label: 'High' },
       { value: 'MEDIUM', label: 'Medium' },
       { value: 'LOW', label: 'Low' },
       { value: 'AUDIT', label: 'Audit' }
     ]
-    const { handleSubmit } = this.props
+    let content = [
+      {name: 'Name'},
+      {type: 'textarea', name: 'Description'},
+      {type: 'select', name: 'Severity', options: options}
+    ]
     return (
-      <AddIncidentModalView
-        show={this.props.open}
+      <SimpleModalContainer
+        header={header}
+        content={content}
+        doAction={this.onClickSave.bind(this)}
         onHide={this.onClickClose.bind(this)}
-        onSave={this.onClickSave.bind(this)}
-        onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
-        options={options}
+        validate={validate}
+        buttonText="Add Incident"
       />
     )
   }
 }
-
-export default connect(
-  state => ({
-    open: true
-  }), {})(reduxForm({
-    form: 'addIncidentModal',
-    validate
-  })(AddIncidentModal))

@@ -50,7 +50,8 @@ export const selectedItemStyle = {
 }
 
 export const buttonStyle = {
-  backgroundColor: primeColor
+  backgroundColor: backgroundColor,
+  color: primeColor
 }
 
 export const cancelButtonStyle = {
