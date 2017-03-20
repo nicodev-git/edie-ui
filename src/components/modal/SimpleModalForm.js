@@ -12,7 +12,7 @@ const SimpleModalForm = ({show, onHide, onSubmit, header, subheader, buttonText,
     aria-labelledby="ModalHeader"
     className="bootstrap-dialog type-primary"
   >
-    <Header name={header} onClick={onHide} />
+    <Header name={header} />
     <div className="modal-body bootstrap-dialog-message">
     {(subheader) ? (<SubHeader name={subheader}/>) : null}
       <form onSubmit={onSubmit}>
