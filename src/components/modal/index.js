@@ -10,6 +10,7 @@ import MarkIgnoreModalView from './MarkIgnoreModalView'
 import CopyRuleModalView from './CopyRuleModalView'
 import AddExceptionModalView from './AddExceptionModalView'
 import SimpleModalForm from './SimpleModalForm'
+import SmallModalTable from './SmallModalTable'
 
 export {
     ActivationModalView,
@@ -23,5 +24,6 @@ export {
     MarkIgnoreModalView,
     CopyRuleModalView,
     AddExceptionModalView,
-    SimpleModalForm
+    SimpleModalForm,
+    SmallModalTable
 }

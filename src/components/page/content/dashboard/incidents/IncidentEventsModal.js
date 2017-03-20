@@ -6,6 +6,9 @@ import InfiniteTable from 'components/shared/InfiniteTable'
 export default class IncidentEventsModal extends React.Component {
   constructor (props) {
     super(props)
+    this.state = {
+      open: true
+    }
 
     this.cells = [{
       'displayName': 'Datetime',
