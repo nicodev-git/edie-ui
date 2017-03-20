@@ -18,6 +18,8 @@ import {
   OPEN_INCIDENT_EVENTS_MODAL,
   CLOSE_INCIDENT_EVENTS_MODAL,
 
+  UPDATE_DASHBOARD_STATS,
+
   NO_AUTH_ERROR
 } from './types'
 
@@ -129,5 +131,11 @@ export function openIncidentEventsModal (incident) {
 export function closeIncidentEventsModal () {
   return dispatch => {
     dispatch({type: CLOSE_INCIDENT_EVENTS_MODAL})
+  }
+}
+
+export function updateDashboardStats (stats) {
+  return dispatch => {
+    dispatch({type: UPDATE_DASHBOARD_STATS, stats})
   }
 }

@@ -12,7 +12,9 @@ import {
   fetchEnvVars,
   activateUser,
   openActivationModal,
-  closeActivationModal
+  closeActivationModal,
+
+  updateDashboardStats
 } from 'actions'
 
 @connect((state) => {
@@ -34,7 +36,9 @@ dispatch => bindActionCreators({
   fetchEnvVars,
   activateUser,
   openActivationModal,
-  closeActivationModal
+  closeActivationModal,
+
+  updateDashboardStats
 }, dispatch))
 @withRouter
 export default class MainContainer extends Component {
@@ -44,7 +48,7 @@ export default class MainContainer extends Component {
       listeners: {
         'incidents': this.onReceiveIncidents.bind(this),
         'statuses': this.onReceiveStatus.bind(this),
-        'dashboard': this.onReceiveNewIncident.bind(this)
+        'dashboard': this.onReceiveDashboard.bind(this)
       }
     })
     this.incidentSocket.connect()
@@ -62,8 +66,13 @@ export default class MainContainer extends Component {
     console.log(msg)
   }
 
-  onReceiveNewIncident (msg) {
+  onReceiveDashboard (msg) {
     console.log(msg)
+    this.props.updateDashboardStats({
+      open: msg.openincidents || 0,
+      today: msg.todayincidents || 0,
+      month: msg.monthincidents || 0
+    })
   }
 
   render () {

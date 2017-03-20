@@ -1,5 +1,5 @@
 import {
-  UPDATE_DASHBOARD, OPEN_DEVICE, CLOSE_DEVICE,
+  OPEN_DEVICE, CLOSE_DEVICE,
   FETCH_MAPS,
   ADD_MAP,
   UPDATE_MAP,
@@ -43,6 +43,8 @@ import {
   OPEN_INCIDENT_EVENTS_MODAL,
   CLOSE_INCIDENT_EVENTS_MODAL,
 
+  UPDATE_DASHBOARD_STATS,
+
   API_ERROR
 } from '../actions/types'
 
@@ -50,9 +52,6 @@ import {concat, difference} from 'lodash'
 
 export default function (state = {}, action) {
   switch (action.type) {
-    case UPDATE_DASHBOARD:
-      return { ...state, ...action.data }
-
     case FETCH_MAPS:
       return { ...state, maps: action.data }
 
@@ -195,6 +194,9 @@ export default function (state = {}, action) {
       return { ...state, incidentEventsModalOpen: true, selectedIncident: action.incident }
     case CLOSE_INCIDENT_EVENTS_MODAL:
       return { ...state, incidentEventsModalOpen: false }
+
+    case UPDATE_DASHBOARD_STATS:
+      return { ...state, stats: action.stats }
   }
   return state
 }
