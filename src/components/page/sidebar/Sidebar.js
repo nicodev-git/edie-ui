@@ -8,8 +8,7 @@ export default class Sidebar extends React.Component {
     super(props)
 
     this.state = {
-      tooltipTop: 0,
-      tooltipText: ''
+      searchVisible: false
     }
   }
 
@@ -30,17 +29,16 @@ export default class Sidebar extends React.Component {
       let li = $(e.target).closest('li') // eslint-disable-line no-undef
 
       this.setState({
-        tooltipTop: li.position().top + 5,
-        tooltipText: li.find('a').text()
+        searchVisible: li.index() === 1
       })
     })
 
     $(nav).on('mouseout', 'li', (e) => { // eslint-disable-line no-undef
-      this.setState({ tooltipText: '' })
+      this.setState({ searchVisible: false })
     })
 
     $(nav).on('touchend', 'li', (e) => { // eslint-disable-line no-undef
-      this.setState({ tooltipText: '' })
+      this.setState({ searchVisible: false })
     })
   }
 
@@ -78,8 +76,7 @@ export default class Sidebar extends React.Component {
         onToggle={this.onClickToggleSidebar.bind(this)}
         onMainMenu={this.onClickMainMenu.bind(this)}
         onDeviceMenu={this.onClickDeviceMenu.bind(this)}
-        tooltipText={this.state.tooltipText}
-        tooltipTop={this.state.tooltipTop}
+        searchVisible={this.state.searchVisible}
         group={group}
         {...this.props}
       />
