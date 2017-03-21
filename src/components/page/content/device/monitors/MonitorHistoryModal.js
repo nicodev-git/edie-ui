@@ -64,7 +64,7 @@ export default class MonitorHistoryModal extends Component {
   render () {
     return (
       <Modal show={this.state.open} onHide={this.onHide.bind(this)}
-        aria-labelledby="ModalHeader" className="bootstrap-dialog type-primary">
+        aria-labelledby="ModalHeader" className="bootstrap-dialog type-primary modal-w-10">
 
         <div className="modal-header">
           <h4 className="modal-title bootstrap-dialog-title">
@@ -85,7 +85,7 @@ export default class MonitorHistoryModal extends Component {
             cells={this.cells}
             ref="table"
             rowMetadata={{'key': 'id'}}
-            bodyHeight={400}
+            bodyHeight={520}
           />
         </div>
       </Modal>

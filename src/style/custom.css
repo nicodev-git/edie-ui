@@ -319,6 +319,11 @@ table.table tbody tr.selected {
 .modal-w-9 .modal-dialog {
     width: 900px;
 }
+
+.modal-w-10 .modal-dialog {
+    width: 1000px;
+}
+
 .modal-w-fit .modal-dialog {
     width: 100%;
 }
