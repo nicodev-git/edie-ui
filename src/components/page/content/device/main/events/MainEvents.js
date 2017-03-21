@@ -33,6 +33,7 @@ export default class MainEvents extends Component {
         deviceid: device.id
       }
     }
+    this.highlightRender = this.highlightRender.bind(this)
 
     this.cells = [{
       'displayName': 'IP Address',
@@ -46,7 +47,6 @@ export default class MainEvents extends Component {
         // if (row.ip) data = `${data}LAN IP:${row.ip}`
         if (externalIP) data += `${externalIP}<br/>`
         if (row.ip) data = row.ip
-
         return this.highlightRender({data})
       }
     }, {
@@ -60,12 +60,14 @@ export default class MainEvents extends Component {
     }, {
       'displayName': 'Rawdata',
       'columnName': 'rawdata',
-      'customComponent': this.highlightRender.bind(this)
+      'customComponent': this.highlightRender
     }, {
       'displayName': 'Params',
       'columnName': 'params.ip',
       'customComponent': props => {
-        const data = props.rowData.params
+        let data = props.rowData.params
+        // data = 'jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjkkkkfffffmmmhhhhhhh'
+        // return <span>{data}</span>
         return <span>{data ? JSON.stringify(data) : ''}</span>
       }
     }, {
@@ -73,6 +75,7 @@ export default class MainEvents extends Component {
       'columnName': 'lastResult.description',
       'customComponent': props => {
         const data = props.rowData.lastResult
+        // return <span>Too many Results</span>
         return <span>{data ? JSON.stringify(data) : ''}</span>
       }
     }]
@@ -99,7 +102,7 @@ export default class MainEvents extends Component {
           sort: 'timestamp,desc',
           keyword: this.state.text
         }}
-        pageSize={20}
+        pageSize={10}
       />
     )
   }

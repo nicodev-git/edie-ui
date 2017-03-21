@@ -68,7 +68,6 @@ class InfiniteTable extends React.Component {
 
   getExternalData (page, clear) {
     page = clear ? 1 : (page || 1)
-
     const {url, params, pageSize} = this.props
 
     let urlParams = assign({
@@ -179,7 +178,7 @@ class InfiniteTable extends React.Component {
         columns={this.props.cells.map(item => item.columnName)}
         columnMetadata={this.props.cells}
         rowMetadata={rowMetadata}
-
+        rowHeight={50}
         externalSetPage={this.setPage.bind(this)}
         externalSetPageSize={this.setPageSize.bind(this)}
         externalMaxPage={this.state.maxPages}
@@ -204,7 +203,6 @@ class InfiniteTable extends React.Component {
         onRowClick={this.onRowClick.bind(this)}
 
         onRowDblClick={this.onRowDblClick.bind(this)}
-
         ref="griddle"
       />
     )
