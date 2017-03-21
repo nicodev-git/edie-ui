@@ -1,7 +1,7 @@
 import React from 'react'
-import Modal from 'react-bootstrap-modal'
 import { showAlert } from '../../../../../shared/Alert'
 import { ROOT_URL } from '../../../../../../actions/config'
+import { ParsersModalView } from '../../../../../modal'
 
 export default class ParsersModal extends React.Component {
   constructor (props) {
@@ -44,8 +44,10 @@ export default class ParsersModal extends React.Component {
     })
   }
 
-  onClickClose () {
-    this.onHide()
+  onTableClick (i) {
+    this.setState({
+      selectedIndex: i
+    })
   }
 
   onClickSave () {
@@ -61,49 +63,19 @@ export default class ParsersModal extends React.Component {
 
   render () {
     return (
-      <Modal show={this.state.open} onHide={this.onHide.bind(this)}
-        aria-labelledby="ModalHeader" className="bootstrap-dialog type-primary">
-
-        <div className="modal-header">
-          <h4 className="modal-title bootstrap-dialog-title">
-            Parsers
-          </h4>
-          <div className="bootstrap-dialog-close-button">
-            <button className="close" onClick={this.onClickClose.bind(this)}>×</button>
-          </div>
-        </div>
-
-        <div className="modal-body bootstrap-dialog-message">
-          <table className="table table-hover">
-            <thead>
-            <tr>
-              <th>Parser</th>
-            </tr>
-            </thead>
-            <tbody>
-            {
-              this.state.data.map((item, i) =>
-                <tr key={i}
-                  className={this.state.selectedIndex === i ? 'selected' : ''}
-                  onClick={() => { this.setState({selectedIndex: i}) }}>
-                  <td>{item}</td>
-                </tr>
-              )
-            }
-            </tbody>
-          </table>
-          <div className="text-right p-none">
-            <a href="javascript:;" className="btn btn-primary btn-sm margin-sm-right" onClick={this.onClickSave.bind(this)}>OK</a>
-            <a href="javascript:;" className="btn btn-default btn-sm" onClick={this.onClickClose.bind(this)}>Cancel</a>
-          </div>
-        </div>
-      </Modal>
+      <ParsersModalView
+        show={this.state.open}
+        data={this.state.data}
+        selectedIndex={this.state.selectedIndex}
+        onHide={this.onHide.bind(this)}
+        onSave={this.onClickSave.bind(this)}
+        onClick={this.onTableClick.bind(this)}
+      />
     )
   }
 }
 
 ParsersModal.defaultProps = {
   device: {},
-
   onClose: null
 }
