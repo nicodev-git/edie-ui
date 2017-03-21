@@ -20,6 +20,7 @@ import {
   CLOSE_INCIDENT_EVENTS_MODAL,
 
   UPDATE_DASHBOARD_STATS,
+  UPDATE_NEW_INCIDENT_MSG,
 
   NO_AUTH_ERROR
 } from './types'
@@ -156,5 +157,11 @@ export function fetchDashboardStats () {
 export function updateDashboardStats (stats) {
   return dispatch => {
     dispatch({type: UPDATE_DASHBOARD_STATS, stats})
+  }
+}
+
+export function updateNewIncidentMsg (msg) {
+  return dispatch => {
+    dispatch({type: UPDATE_NEW_INCIDENT_MSG, msg})
   }
 }

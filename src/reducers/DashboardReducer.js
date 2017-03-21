@@ -45,6 +45,7 @@ import {
   CLOSE_INCIDENT_EVENTS_MODAL,
 
   UPDATE_DASHBOARD_STATS,
+  UPDATE_NEW_INCIDENT_MSG,
 
   API_ERROR
 } from '../actions/types'
@@ -201,6 +202,9 @@ export default function (state = {}, action) {
 
     case ADD_DASHBOARD_INCIDENT:
       return { ...state, incidents: concat([], action.incident || [], state.incidents || []) }
+
+    case UPDATE_NEW_INCIDENT_MSG:
+      return { ...state, newIncidentMsg: action.msg }
   }
   return state
 }
