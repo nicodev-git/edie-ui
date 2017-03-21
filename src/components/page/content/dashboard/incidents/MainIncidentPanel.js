@@ -13,7 +13,6 @@ export default class MainIncidentPanel extends React.Component {
     }
 
     this.refreshTable = this.refreshTable.bind(this)
-    this.onTableToggle = this.onTableToggle.bind(this)
   }
 
   componentWillMount () {
@@ -26,13 +25,7 @@ export default class MainIncidentPanel extends React.Component {
     )
   }
 
-  onTableToggle () {
-    // TODO
-  }
-
   onClickOpenModal (e) {
-    e.preventDefault()
-
     this.props.router.push('/bigincidents')
   }
 
@@ -54,7 +47,7 @@ export default class MainIncidentPanel extends React.Component {
         <Panel className="margin-sm-bottom flex-vertical flex-1 main-panel table-panel">
           <PanelBody className="padding-xs flex-vertical flex-1">
             <div className="main-incident-toggle">
-              <ToolbarToggle onToggle={this.onTableToggle} />
+              <ToolbarToggle onToggle={this.onClickOpenModal.bind(this)} />
             </div>
             {this.renderTable()}
           </PanelBody>
