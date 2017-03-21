@@ -4,6 +4,7 @@ import IncidentsModalView from './InsidentsModalView'
 import CopyRuleModalView from './CopyRuleModalView'
 import SimpleModalForm from './SimpleModalForm'
 import SmallModalTable from './SmallModalTable'
+import ParsersModalView from './ParsersModalView'
 
 export {
     ActivationModalView,
@@ -11,5 +12,6 @@ export {
     IncidentsModalView,
     CopyRuleModalView,
     SimpleModalForm,
-    SmallModalTable
+    SmallModalTable,
+    ParsersModalView
 }
