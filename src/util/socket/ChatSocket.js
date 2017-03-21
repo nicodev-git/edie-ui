@@ -1,8 +1,7 @@
 export default class ChatSocket {
-  constructor(props) {
+  // constructor(props) {
 
-  }
-
+  // }
   connect () {
     const me = this
 
@@ -24,7 +23,6 @@ export default class ChatSocket {
     }
   }
 }
-
 
 export const chatSocket = {
 
