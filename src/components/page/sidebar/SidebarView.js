@@ -5,6 +5,8 @@ import Divider from 'material-ui/Divider'
 import MenuIcon from 'material-ui/svg-icons/navigation/menu'
 import {badgeStyle, badgeRootStyle, iconStyle, iconButtonStyle} from '../../../style/materialStyles'
 
+import SearchBarContainer from './parts/SearchBarContainer'
+
 class SidebarView extends Component {
   constructor (props) {
     super(props)
@@ -38,7 +40,7 @@ class SidebarView extends Component {
 
   render () {
     const {onToggle, contentType, mainMenu, deviceMenu, onMainMenu, onDeviceMenu,
-    device, pageId, pageType, searchVisible, group} = this.props
+    device, pageId, pageType, searchVisible, group, onSearch} = this.props
 
     return (
       <aside className="sidebar sidebar-default sidebar-custom">
@@ -67,7 +69,7 @@ class SidebarView extends Component {
                 </div>
                 {
                   index === 1 && searchVisible ? <div className={`sidebar-tooltip`}>
-                      <input type="text" className="form-control input-sm" style={{width: '200px'}} autoFocus/>
+                      <SearchBarContainer onSearch={onSearch}/>
                     </div> : null
                 }
               </li>

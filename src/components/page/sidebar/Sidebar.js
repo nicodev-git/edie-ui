@@ -23,7 +23,7 @@ export default class Sidebar extends React.Component {
   initMenuItemHover () {
     // const nav = this.nav
     let nav = document.getElementById('main-navigation')
-    $(nav).on('mouseover', 'li', (e) => { // eslint-disable-line no-undef
+    $(nav).on('mouseenter', 'li', (e) => { // eslint-disable-line no-undef
       if (!$('body').hasClass('sidebar-condensed')) return // eslint-disable-line no-undef
 
       let li = $(e.target).closest('li') // eslint-disable-line no-undef
@@ -33,7 +33,7 @@ export default class Sidebar extends React.Component {
       })
     })
 
-    $(nav).on('mouseout', 'li', (e) => { // eslint-disable-line no-undef
+    $(nav).on('mouseleave', 'li', (e) => { // eslint-disable-line no-undef
       this.setState({ searchVisible: false })
     })
 
@@ -45,8 +45,8 @@ export default class Sidebar extends React.Component {
   destoryMenuItemHover () {
     // const nav = this.nav
     let nav = document.getElementById('main-navigation')
-    $(nav).off('mouseover', 'li') // eslint-disable-line no-undef
-    $(nav).off('mouseout', 'li') // eslint-disable-line no-undef
+    $(nav).off('mouseenter', 'li') // eslint-disable-line no-undef
+    $(nav).off('mouseleave', 'li') // eslint-disable-line no-undef
     $(nav).off('touchend', 'li') // eslint-disable-line no-undef
   }
 
@@ -68,6 +68,10 @@ export default class Sidebar extends React.Component {
 
   }
 
+  onSearch () {
+
+  }
+
   render () {
     const device = this.props.device
     const group = isGroup(device)
@@ -76,6 +80,7 @@ export default class Sidebar extends React.Component {
         onToggle={this.onClickToggleSidebar.bind(this)}
         onMainMenu={this.onClickMainMenu.bind(this)}
         onDeviceMenu={this.onClickDeviceMenu.bind(this)}
+        onSearch={this.onSearch.bind(this)}
         searchVisible={this.state.searchVisible}
         group={group}
         {...this.props}
