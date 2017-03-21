@@ -22,6 +22,8 @@ import {
   UPDATE_DASHBOARD_STATS,
   UPDATE_NEW_INCIDENT_MSG,
 
+  UPDATE_MAP_DEVICE_STATUS,
+
   NO_AUTH_ERROR
 } from './types'
 
@@ -163,5 +165,11 @@ export function updateDashboardStats (stats) {
 export function updateNewIncidentMsg (msg) {
   return dispatch => {
     dispatch({type: UPDATE_NEW_INCIDENT_MSG, msg})
+  }
+}
+
+export function updateMapDeviceStatus (data) {
+  return dispatch => {
+    dispatch({type: UPDATE_MAP_DEVICE_STATUS, data})
   }
 }

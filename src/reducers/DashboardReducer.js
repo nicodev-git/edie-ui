@@ -47,10 +47,12 @@ import {
   UPDATE_DASHBOARD_STATS,
   UPDATE_NEW_INCIDENT_MSG,
 
+  UPDATE_MAP_DEVICE_STATUS,
+
   API_ERROR
 } from '../actions/types'
 
-import {concat, difference} from 'lodash'
+import {concat, difference, findIndex, assign} from 'lodash'
 
 export default function (state = {}, action) {
   switch (action.type) {
@@ -205,6 +207,15 @@ export default function (state = {}, action) {
 
     case UPDATE_NEW_INCIDENT_MSG:
       return { ...state, newIncidentMsg: action.msg }
+
+    case UPDATE_MAP_DEVICE_STATUS: {
+      const mapDevices = state.mapDevices.map(u => {
+        const index = findIndex(action.data, {id: u.id})
+        return index >= 0 ? assign({}, u, action.data) : u
+      })
+
+      return { ...state, mapDevices }
+    }
   }
   return state
 }
