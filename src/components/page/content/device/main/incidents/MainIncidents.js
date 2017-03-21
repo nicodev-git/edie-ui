@@ -63,7 +63,7 @@ export default class MainIncidents extends Component {
       'cssClassName': 'text-center width-80',
       'customHeaderComponent': this.renderColHeader.bind(this),
       'customComponent': (props) => {
-        return <span dangerouslySetInnerHTML={{__html: getSeverityIcon(props.data)}}/> // eslint-disable-line react/no-danger
+        return getSeverityIcon(props.data)
       }
     }, {
       'displayName': 'Date/Time',

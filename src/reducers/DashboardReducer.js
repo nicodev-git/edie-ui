@@ -52,7 +52,7 @@ import {
   API_ERROR
 } from '../actions/types'
 
-import {concat, difference, findIndex, assign} from 'lodash'
+import {concat, difference, assign} from 'lodash'
 
 export default function (state = {}, action) {
   switch (action.type) {
@@ -210,8 +210,9 @@ export default function (state = {}, action) {
 
     case UPDATE_MAP_DEVICE_STATUS: {
       const mapDevices = state.mapDevices.map(u => {
-        const index = findIndex(action.data, {id: u.id})
-        return index >= 0 ? assign({}, u, action.data) : u
+        const data = ['UP', 'DOWN']
+        const status = data[parseInt(Math.random() * 100) % 2]// action.data[u.id]
+        return status ? assign({}, u, {status}) : u
       })
 
       return { ...state, mapDevices }

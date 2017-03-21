@@ -4,6 +4,7 @@ import { withRouter } from 'react-router'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import IncidentSocket from 'util/socket/IncidentSocket'
+import { debounce } from 'lodash'
 
 import {
   closeDevice,
@@ -17,7 +18,8 @@ import {
   updateDashboardStats,
   fetchIncidents,
   addDashboardIncident,
-  updateNewIncidentMsg
+  updateNewIncidentMsg,
+  updateMapDeviceStatus
 } from 'actions'
 
 @connect((state) => {
@@ -46,7 +48,8 @@ dispatch => bindActionCreators({
   updateDashboardStats,
   fetchIncidents,
   addDashboardIncident,
-  updateNewIncidentMsg
+  updateNewIncidentMsg,
+  updateMapDeviceStatus
 }, dispatch))
 @withRouter
 export default class MainContainer extends Component {
@@ -55,7 +58,7 @@ export default class MainContainer extends Component {
     this.incidentSocket = new IncidentSocket({
       listeners: {
         'incidents': this.onReceiveIncidents.bind(this),
-        'statuses': this.onReceiveStatus.bind(this),
+        'statuses': debounce(this.onReceiveStatus.bind(this), 500),
         'dashboard': this.onReceiveDashboard.bind(this)
       }
     })
@@ -75,6 +78,7 @@ export default class MainContainer extends Component {
 
   onReceiveStatus (msg) {
     // console.log(msg)
+    // this.props.updateMapDeviceStatus(msg)
   }
 
   onReceiveDashboard (msg) {
