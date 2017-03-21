@@ -120,7 +120,7 @@ class Main extends React.Component {
   renderApiError () {
     if (!this.props.apiErrorModalOpen) return null
     return (
-      <Alert message={this.props.apiError.message} onClose={this.onCloseAlert.bind(this)}/>
+      <Alert message={JSON.stringify(this.props.apiError)} onClose={this.onCloseAlert.bind(this)}/>
     )
   }
 
