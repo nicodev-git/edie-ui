@@ -48,6 +48,7 @@ import {
   UPDATE_NEW_INCIDENT_MSG,
 
   UPDATE_MAP_DEVICE_STATUS,
+  RELOAD_DEVICE,
 
   API_ERROR
 } from '../actions/types'
@@ -108,6 +109,8 @@ export default function (state = {}, action) {
 
       return {...state, mapDevices, selectedDevice}
     }
+    case RELOAD_DEVICE:
+      return {...state, selectedDevice: action.data}
 
     case DELETE_MAP_DEVICE: {
       const mapDevices = difference(state.mapDevices, state.mapDevices.filter(u => u.id === action.data.id))

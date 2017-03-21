@@ -26,6 +26,8 @@ import {
 
   FETCH_MAP_DEVICES_LINES,
 
+  RELOAD_DEVICE,
+
   NO_AUTH_ERROR
 } from './types'
 
@@ -397,15 +399,10 @@ const deleteMapLineSuccess = (dispatch, entity) => {
 }
 
 export function reloadDevice (device) {
-  if (!window.localStorage.getItem('token')) {
-    return dispatch => dispatch({ type: NO_AUTH_ERROR })
-  }
   return (dispatch) => {
-    axios.get(`${ROOT_URL}/device/${device.id}?_=${new Date().getTime()}`).then(response => {
-      dispatch({
-        type: UPDATE_MAP_DEVICE,
-        data: response.data
-      })
-    }).catch(error => apiError(dispatch, error))
+    dispatch({
+      type: RELOAD_DEVICE,
+      data: device
+    })
   }
 }

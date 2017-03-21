@@ -11,6 +11,7 @@ import { showAlert } from '../../../../shared/Alert'
 
 import MonitorPicker from './MonitorPicker'
 import MonitorHistoryModal from './MonitorHistoryModal'
+import IncidentSocket from 'util/socket/IncidentSocket'
 
 export default class MonitorTable extends Component {
   constructor (props) {
@@ -94,13 +95,27 @@ export default class MonitorTable extends Component {
   }
 
   componentDidMount () {
-    this.reloadTimer = window.setInterval(() => {
-      this.props.device && this.props.reloadDevice(this.props.device)
-    }, 2000)
+    // this.reloadTimer = window.setInterval(() => {
+    //   this.props.device && this.props.reloadDevice(this.props.device)
+    // }, 2000)
+
+    this.incidentSocket = new IncidentSocket({
+      listeners: {
+        'updatedDevice': this.onDeviceUpdated.bind(this)
+      }
+    })
+    this.incidentSocket.connect()
   }
 
   componentWillUnmount () {
-    window.clearInterval(this.reloadTimer)
+    // window.clearInterval(this.reloadTimer)
+    this.incidentSocket.close()
+  }
+
+  onDeviceUpdated (msg) {
+    const {device} = this.props
+    if (device.id !== msg.id) return
+    this.props.reloadDevice(msg)
   }
 
   healthFormatter (val) {
