@@ -7,6 +7,7 @@ import {
   openDeviceMonitorWizard,
   closeDeviceMonitorWizard,
   updateMapDevice,
+  reloadDevice,
 
   fetchDeviceEventLog,
   fetchDeviceApps,
@@ -29,6 +30,7 @@ import {
     openDeviceMonitorWizard,
     closeDeviceMonitorWizard,
     updateMapDevice,
+    reloadDevice,
 
     fetchDeviceEventLog,
     fetchDeviceApps,

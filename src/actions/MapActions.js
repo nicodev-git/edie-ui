@@ -395,3 +395,17 @@ const deleteMapLineSuccess = (dispatch, entity) => {
     data: entity
   })
 }
+
+export function reloadDevice (device) {
+  if (!window.localStorage.getItem('token')) {
+    return dispatch => dispatch({ type: NO_AUTH_ERROR })
+  }
+  return (dispatch) => {
+    axios.get(`${ROOT_URL}/device/${device.id}`).then(response => {
+      dispatch({
+        type: UPDATE_MAP_DEVICE,
+        data: response.data
+      })
+    }).catch(error => apiError(dispatch, error))
+  }
+}

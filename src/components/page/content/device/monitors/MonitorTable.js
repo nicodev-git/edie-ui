@@ -93,6 +93,16 @@ export default class MonitorTable extends Component {
     }]
   }
 
+  componentDidMount () {
+    this.reloadTimer = window.setInterval(() => {
+      this.props.device && this.props.reloadDevice(this.props.device)
+    }, 2000)
+  }
+
+  componentWillUnmount () {
+    window.clearInterval(this.reloadTimer)
+  }
+
   healthFormatter (val) {
     let cls = 'fa-question'
     let color = '#FDB422'
