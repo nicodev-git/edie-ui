@@ -322,16 +322,13 @@ fabric.Device = fabric.util.createClass(fabric.Object, {
       diff.x = imageObj.left - diff.x;
       diff.y = imageObj.top - diff.y;
       me.onImageObjMoving(null, diff, false);
-
-      imageObj.updateStatusImage();
       labelObj.refineWidth();
       me.updateLines();
 
-      me.canvas.renderAll();
-    }, {crossOrigin: 'anonymous'});
-
-    statusImageObj.setSrc(config.statusImageUrl, function(){
-      me.canvas.renderAll();
+      statusImageObj.setSrc(config.statusImageUrl, function(){
+        imageObj.updateStatusImage();
+        me.canvas.renderAll();
+      }, {crossOrigin: 'anonymous'});
     }, {crossOrigin: 'anonymous'});
   },
 

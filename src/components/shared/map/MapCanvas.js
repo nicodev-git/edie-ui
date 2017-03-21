@@ -592,7 +592,7 @@ class MapCanvas extends React.Component {
     let deviceid = device.id
     let devicetype = getDeviceType(device.templateName)
     let devname = device.name
-    let devicestatus = device.devicestatus || 'unknown'
+    let devicestatus = device.status || 'UNKNOWN'
 
     let x = device.x || 0
     let y = device.y || 0

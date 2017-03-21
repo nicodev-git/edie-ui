@@ -78,7 +78,7 @@ export default class MainContainer extends Component {
 
   onReceiveStatus (msg) {
     // console.log(msg)
-    // this.props.updateMapDeviceStatus(msg)
+    this.props.updateMapDeviceStatus(msg)
   }
 
   onReceiveDashboard (msg) {

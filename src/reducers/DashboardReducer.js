@@ -210,8 +210,8 @@ export default function (state = {}, action) {
 
     case UPDATE_MAP_DEVICE_STATUS: {
       const mapDevices = state.mapDevices.map(u => {
-        const data = ['UP', 'DOWN']
-        const status = data[parseInt(Math.random() * 100) % 2]// action.data[u.id]
+        // const data = ['UP', 'DOWN']
+        const status = action.data[u.id] // data[parseInt(Math.random() * 100) % 2]
         return status ? assign({}, u, {status}) : u
       })
 
