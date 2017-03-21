@@ -267,7 +267,7 @@ export default class Incidents extends React.Component {
       <TabPage>
         <TabPageHeader title="Search">
           <div className="form-inline" style={{margin: '0 auto', position: 'relative', textAlign: 'center'}}>
-            <div className="text-left"
+            <div className="text-left pull-left"
               style={{'verticalAlign': 'middle', 'lineHeight': 2.2}}>
               <Select
                 value={this.state.selectedSeverity.join(',')}

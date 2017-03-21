@@ -14,7 +14,6 @@ export default class Search extends React.Component {
       this.props.router.replace('/search/incidents')
     }
   }
-
   render () {
     return this.props.children
   }
