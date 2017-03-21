@@ -12,6 +12,7 @@ import FormMultiSelect from './FormMultiSelect'
 import FileUpload from './FileUpload'
 import SubHeader from './SubHeader'
 import CloseButton from './CloseButton'
+import TwoButtonsBlock from './TwoButtonsBlock'
 
 export {
     Header,
@@ -27,5 +28,6 @@ export {
     FormMultiSelect,
     FileUpload,
     SubHeader,
-    CloseButton
+    CloseButton,
+    TwoButtonsBlock
 }
