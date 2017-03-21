@@ -401,7 +401,7 @@ export function reloadDevice (device) {
     return dispatch => dispatch({ type: NO_AUTH_ERROR })
   }
   return (dispatch) => {
-    axios.get(`${ROOT_URL}/device/${device.id}`).then(response => {
+    axios.get(`${ROOT_URL}/device/${device.id}?_=${new Date().getTime()}`).then(response => {
       dispatch({
         type: UPDATE_MAP_DEVICE,
         data: response.data

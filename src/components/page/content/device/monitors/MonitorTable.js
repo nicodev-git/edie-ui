@@ -120,35 +120,6 @@ export default class MonitorTable extends Component {
     )
   }
 
-  lastSeenDateFormatter (date, display) {
-    if (!date) return ''
-
-    let diff = (new Date() - new Date(date)) / 1000
-    diff = diff.toFixed(0)
-    if (diff < 1) diff = 1
-    let label = ''
-
-    if (diff < 60) {
-      label = `${diff + (diff > 1 ? ' seconds' : ' second')} ago`
-    } else if (diff < 3600) {
-      diff = parseInt(diff / 60)
-      if (diff === 1) {
-        label = `${diff} minute ago`
-      } else {
-        label = `${diff} minutes ago`
-      }
-    } else {
-      diff = parseInt(diff / 3600)
-      if (diff === 1) {
-        label = `${diff} hour ago`
-      } else {
-        label = `${diff} hours ago`
-      }
-    }
-
-    return label
-  }
-
   renderMonitorPicker () {
     if (!this.props.monitorPickerVisible) return null
 
