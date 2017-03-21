@@ -9,7 +9,7 @@ const BigIncidentsView = ({onHide,
   startDate, endDate, onChangeDateRange,
   fixedStatus, onChangeFixedStatus,
   keyword, onChangeKeyword,
-  table}) => (
+  table, eventsModal}) => (
   <Modal show
     onHide={onHide}
     aria-labelledby="ModalHeader"
@@ -68,6 +68,7 @@ const BigIncidentsView = ({onHide,
       </div>
       <div className="flex-1 flex-vertical">
         {table}
+        {eventsModal}
       </div>
     </div>
   </Modal>

@@ -87,7 +87,7 @@ const fetchBigIncidentsSuccess = (dispatch, response) => {
 export const updateBigIncidentParams = (params) => {
   return dispatch => {
     dispatch({type: UPDATE_BIGINCIDENTS_PARAMS, params})
-    dispatch(fetchBigIncidents(params))
+    // dispatch(fetchBigIncidents(params))
   }
 }
 

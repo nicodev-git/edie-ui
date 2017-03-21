@@ -68,7 +68,7 @@ class SidebarView extends Component {
                   </div>
                 </div>
                 {
-                  index === 1 && searchVisible ? <div className={`sidebar-tooltip`}>
+                  index === 1 && searchVisible && pageId !== item.id ? <div className={`sidebar-tooltip`}>
                       <SearchBarContainer onSearch={onSearch}/>
                     </div> : null
                 }

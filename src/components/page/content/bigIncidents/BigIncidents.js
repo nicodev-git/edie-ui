@@ -1,9 +1,17 @@
 import React, { Component } from 'react'
 import moment from 'moment'
 import { assign } from 'lodash'
+import TimeAgo from 'react-timeago'
 
-import IncidentTable from '../dashboard/incidents/IncidentTable'
+import IncidentEventsModal from 'components/page/content/dashboard/incidents/IncidentEventsModal'
+import { thumbup, thumpdown, done, notdone, rawtext, reason } from 'style/materialStyles'
+import { getSeverityIcon } from 'shared/Global'
+import { showIncidentRaw, showIncidentComments } from 'components/shared/incident/Incident'
+import ReactTooltip from 'react-tooltip'
+
 import BigIncidentsView from '../../../modal/BigIncidentsView'
+
+import { ResponsiveInfiniteTable } from 'components/shared/InfiniteTable'
 
 const severities = [
   { label: 'High', value: 'HIGH' },
@@ -16,12 +24,73 @@ const severities = [
 class BigIncidents extends Component {
   constructor (props) {
     super(props)
-    this.onFilterChange = this.onFilterChange.bind(this)
-    this.onResize = this.onResize.bind(this)
+    this.cells = [{
+      'displayName': 'Severity',
+      'columnName': 'severity',
+      'cssClassName': 'text-center width-80',
+      'customComponent': (props) => {
+        return <span>{getSeverityIcon(props.data)}</span>
+      }
+    }, {
+      'displayName': 'Date/Time',
+      'columnName': 'startTimestamp',
+      'cssClassName': 'nowrap text-center width-180',
+      'customComponent': (props) => {
+        const {data} = props
+        if (!data) return <span/>
+        return (
+          <span data-tip={moment(new Date(data)).format('YYYY-MM-DD HH:mm:ss')}><TimeAgo date={data}/></span>
+        )
+      }
+    }, {
+      'displayName': 'System',
+      'columnName': 'devicename',
+      'cssClassName': 'width-180'
+    }, {
+      'displayName': 'Description',
+      'columnName': 'description',
+      'weight': 1
+    }, {
+      'displayName': 'Actions',
+      'columnName': 'actions',
+      'cssClassName': 'width-180',
+      'customComponent': (p) => {
+        const row = p.rowData
+        setTimeout(() => {
+          ReactTooltip.rebuild()
+        }, 1)
+        return (
+          <div className = "table-icons-container">
+            <div onClick={() => { this.props.ackIncident(row) }}>
+              {row.acknowledged ? thumbup : thumpdown}
+            </div>
+
+            <div onClick={() => { this.props.fixIncident(row) }}>
+              {row.fixed ? done : notdone}
+            </div>
+
+            <div onClick={showIncidentRaw.bind(null, row)}>
+              {rawtext}
+            </div>
+
+            {
+              (row.fixed && !row.whathappened)
+                ? <div
+                  onClick={showIncidentComments.bind(null, this.context.sid, row, this.reloadTable.bind(this))}>
+                  {reason}
+                </div>
+                : null
+            }
+
+          </div>
+        )
+      }
+    }]
   }
 
   componentWillMount () {
     this.props.updateBigIncidentParams({
+      draw: 1,
       deviceid: '*',
       description: '',
       fixed: null,
@@ -32,47 +101,29 @@ class BigIncidents extends Component {
     })
   }
 
-  componentDidMount () {
-    this.updateDimensions()
-    window.addEventListener('resize', this.onResize, false)
-    this.onFilterChange()
+  reloadTable () {
+    this.props.updateBigIncidentParams(assign({}, this.props.bigIncidentParams, {
+      draw: this.props.bigIncidentParams.draw + 1
+    }))
   }
 
-  componentDidUpdate () {
-    this.updateDimensions()
-  }
-
-  componentWillUnmount () {
-    window.removeEventListener('resize', this.onResize)
-  }
-
-  onResize () {
-    if (this.rqf) return
-    this.rqf = window.setTimeout(() => {
-      this.rqf = null
-      this.updateDimensions()
-    }, 50)
-  }
-
-  updateDimensions () {
-    /* const container = this.refs.tableContainer
-    if (!container) {
-      throw new Error('Cannot find container div')
-    }
-
-    if (this.props.tableHeight === container.clientHeight) return
-
-    this.setState({
-      tableHeight: container.clientHeight
-    }) */
+  renderIncidentEventsModal () {
+    if (!this.props.incidentEventsModalOpen) return null
+    return (
+      <IncidentEventsModal {...this.props}/>
+    )
   }
 
   renderTable () {
     return (
-      <IncidentTable
-        incidents={this.props.incidents}
-        fixIncident={this.props.fixIncident}
-        ackIncident={this.props.ackIncident}
+      <ResponsiveInfiniteTable
+        cells={this.cells}
+        ref="table"
+        rowMetadata={{'key': 'id'}}
+        selectable
+
+        url="/incident/search/findBy"
+        params={this.props.bigIncidentParams}
       />
     )
   }
@@ -81,39 +132,10 @@ class BigIncidents extends Component {
     this.props.router.goBack()
   }
 
-  onFilterChange () {
-    /* const refs = this.refs
-    const {search, fixed, dp} = refs
-
-    let params = {
-      description: search.value || '""',
-      severity: this.props.selectedSeverity,
-      afterStartTimestamp: dp.getStartDate().valueOf(),
-      beforeStartTimestamp: dp.getEndDate().valueOf(),
-      sort: 'startTimestamp,desc'
-    }
-    if (fixed.value) params.fixed = fixed.value
-
-    this.props.fetchBigIncidents(params) */
-  }
-
   onChangeSeverity (selected) {
     this.props.updateBigIncidentParams(assign({}, this.props.bigIncidentParams, {
       severity: selected.map(item => item.value)
     }))
-  }
-
-  onChangeFixed (event) {
-    /* let index = event.nativeEvent.target.selectedIndex
-    let text = event.nativeEvent.target[index].text
-
-    this.setState({
-      templateText: text
-    }, () => {
-      this.setState({
-        selectWidth: $(this.refs.templateSelect).width() * 1.03 // eslint-disable-line no-undef
-      })
-    }) */
   }
 
   onChangeDateRange ({startDate, endDate}) {
@@ -157,6 +179,7 @@ class BigIncidents extends Component {
         onChangeKeyword={this.onChangeKeyword.bind(this)}
 
         table={this.renderTable()}
+        eventsModal={this.renderIncidentEventsModal()}
       />
     )
   }
