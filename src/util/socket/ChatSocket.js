@@ -1,4 +1,30 @@
-import { getServerDomain } from '../../actions/config'
+export default class ChatSocket {
+  constructor(props) {
+
+  }
+
+  connect () {
+    const me = this
+
+    if (me.ws) {
+      me.close()
+      return
+    }
+
+    try {
+      me.ws = new WebSocket(`ws://imchat.dev.securegion.com/incidentchat`) // eslint-disable-line no-undef
+      me.ws.onopen = me.onOpen.bind(me)
+      me.ws.onmessage = me.onMessage.bind(me)
+      me.ws.onclose = me.onClose.bind(me)
+      me.reconnectOnClose = true
+    } catch (e) {
+      console.log(e)
+
+      setTimeout(me.connect.bind(me), 3000)
+    }
+  }
+}
+
 
 export const chatSocket = {
 
