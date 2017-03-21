@@ -9,6 +9,7 @@ import Search from './components/page/content/search/Search'
 import SearchIncidentsContainer from './containers/page/content/search/IncidentsContainer'
 import SearchDevices from './components/page/content/search/Devices'
 import SearchProcess from './components/page/content/search/Processes'
+import SearchEvents from './containers/page/content/search/EventsContainer'
 import ChatContainer from './containers/page/content/chat/ChatContainer'
 import Incidents from './components/page/content/incidents/Incidents'
 import BigIncidentsContainer from './containers/page/content/dashboard/BigIncidentsContainer'
@@ -56,6 +57,7 @@ export default(
         <Route path="incidents" component={SearchIncidentsContainer} />
         <Route path="devices" component={SearchDevices} />
         <Route path="process" component={SearchProcess} />
+        <Route path="events" component={SearchEvents} />
       </Route>
       <Route path="incidents" component={Incidents}/>
       <Route path="bigincidents" component={BigIncidentsContainer}/>

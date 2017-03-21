@@ -1,11 +1,8 @@
 import React from 'react'
-import TimeAgo from 'react-timeago'
+import moment from 'moment'
 
-import InfiniteTable from '../../../shared/InfiniteTable'
+import {ResponsiveInfiniteTable} from '../../../shared/InfiniteTable'
 import DateRangePicker from '../../../shared/DateRangePicker'
-
-import { appendComponent, removeComponent } from '../../../../util/Component'
-import ProcessModal from './ProcessModal'
 
 import SearchTabs from './SearchTabs'
 import TabPage from '../../../shared/TabPage'
@@ -18,47 +15,34 @@ class Events extends React.Component {
     this.state = {}
 
     this.cells = [{
-      'displayName': 'Name',
-      'columnName': 'name',
-      'cssClassName': 'width-180'
+      'displayName': 'Datetime',
+      'columnName': 'timestamp',
+      'cssClassName': 'width-200',
+      'customComponent': props => {
+        let data = moment(props.data).format('YYYY-MM-DD HH:mm:ss').toString()
+        return <span>{data}</span>
+      }
     }, {
-      'displayName': 'Device',
-      'columnName': 'devicename',
-      'cssClassName': 'width-180'
-    }, {
-      'displayName': 'Owner',
-      'columnName': 'owner',
-      'cssClassName': 'width-180'
-    }, {
-      'displayName': 'Parent',
-      'columnName': 'parent',
-      'cssClassName': 'width-180'
-    }, {
-      'displayName': 'FilePath',
-      'columnName': 'filepath'
-    }, {
-      'displayName': 'LastSeen',
-      'columnName': 'updated',
-      'customComponent': (props) => {
-        if (!props.data) return <span />
-
-        return <TimeAgo date={props.data} />
-      },
-      'cssClassName': 'width-180'
+      'displayName': 'Result',
+      'columnName': 'lastResult.description',
+      'customComponent': props => {
+        const data = props.rowData.lastResult
+        return <span>{data ? JSON.stringify(data) : ''}</span>
+      }
     }]
   }
 
   renderTable () {
     return (
-      <InfiniteTable
-        url="/incidentstable/getAllProcessDT"
-        params={this.props.filter}
+      <ResponsiveInfiniteTable
         cells={this.cells}
         ref="table"
         rowMetadata={{'key': 'id'}}
         selectable
-        bodyHeight={this.props.containerHeight}
-        onRowDblClick={this.onRowDblClick.bind(this)}
+        url="/event"
+        params={{
+          sort: 'timestamp,desc'
+        }}
       />
     )
   }
@@ -91,10 +75,11 @@ class Events extends React.Component {
             </div>
 
             <div style={{ position: 'relative', display: 'inline-block' }}>
-              <input type="text" placeholder="Search" className="form-control"
-                     style={{width: '220px', paddingLeft: '35px'}}
-                     onChange={this.onSearchKeyUp.bind(this)}
-                     ref="search"/>
+              <input
+                type="text" placeholder="Search" className="form-control"
+                style={{width: '220px', paddingLeft: '35px'}}
+                onChange={this.onSearchKeyUp.bind(this)}
+                ref="search"/>
               <a className="btn" href="javascript:;" style={{position: 'absolute', left: 0, top: 0}}>
                 <i className="fa fa-search" />
               </a>
@@ -103,7 +88,8 @@ class Events extends React.Component {
           </div>
         </TabPageHeader>
 
-        <TabPageBody tabs={SearchTabs} tab={3} />
+        <TabPageBody tabs={SearchTabs} tab={3}>
+        </TabPageBody>
       </TabPage>
     )
   }

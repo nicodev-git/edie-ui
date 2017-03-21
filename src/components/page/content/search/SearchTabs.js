@@ -5,7 +5,7 @@ const tabs = [{
 }, {
   title: 'Process', path: '/search/process'
 }, {
-  title: 'Events', path: '/search/event'
+  title: 'Events', path: '/search/events'
 }]
 
 export default tabs

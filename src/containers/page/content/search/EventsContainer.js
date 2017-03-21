@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { withRouter } from 'react-router'
@@ -10,14 +10,12 @@ import {
   searchIncidentDevices,
   fixAllIncidentsByType
 } from 'actions'
-import Incidents from 'components/page/content/search/Incidents'
+import Events from 'components/page/content/search/Events'
 
 @withRouter
 @connect(
   state => ({
-    incidents: state.search.incidents,
-    incidentDevices: state.search.incidentDevices,
-    incidentDraw: state.search.incidentDraw
+
   }),
   dispatch => ({
     ...bindActionCreators({
@@ -29,10 +27,10 @@ import Incidents from 'components/page/content/search/Incidents'
     }, dispatch)
   })
 )
-export default class IncidentsContainer extends Component {
+export default class EventsContainer extends React.Component {
   render () {
     return (
-      <Incidents {...this.props} />
+      <Events {...this.props} />
     )
   }
 }
