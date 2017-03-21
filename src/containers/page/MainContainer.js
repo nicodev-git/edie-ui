@@ -16,7 +16,8 @@ import {
 
   updateDashboardStats,
   fetchIncidents,
-  addDashboardIncident
+  addDashboardIncident,
+  updateNewIncidentMsg
 } from 'actions'
 
 @connect((state) => {
@@ -24,6 +25,8 @@ import {
     device: state.dashboard.selectedDevice,
     apiErrorModalOpen: state.dashboard.apiErrorModalOpen,
     apiError: state.dashboard.apiError,
+
+    newIncidentMsg: state.dashboard.newIncidentMsg,
 
     activationModalOpen: state.auth.activationModalOpen,
     activationMsg: state.auth.activationMsg,
@@ -42,7 +45,8 @@ dispatch => bindActionCreators({
 
   updateDashboardStats,
   fetchIncidents,
-  addDashboardIncident
+  addDashboardIncident,
+  updateNewIncidentMsg
 }, dispatch))
 @withRouter
 export default class MainContainer extends Component {
@@ -80,6 +84,9 @@ export default class MainContainer extends Component {
       today: msg.todayincidents || 0,
       month: msg.monthincidents || 0
     })
+
+    const incident = msg.latestincident || {}
+    this.props.updateNewIncidentMsg(incident.description)
   }
 
   render () {

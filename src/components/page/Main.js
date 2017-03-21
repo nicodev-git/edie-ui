@@ -1,6 +1,7 @@
 import React from 'react'
 import { findIndex, startsWith } from 'lodash'
 import ReactTooltip from 'react-tooltip'
+import Snackbar from 'material-ui/Snackbar'
 
 import TopbarContainer from '../../containers/page/topbar/TopbarContainer'
 import SidebarContainer from '../../containers/page/sidebar/SidebarContainer'
@@ -123,6 +124,18 @@ class Main extends React.Component {
     )
   }
 
+  renderIncidentAlert () {
+    if (!this.props.newIncidentMsg) return null
+    return (
+      <Snackbar
+        open
+        message={this.props.newIncidentMsg}
+        autoHideDuration={4000}
+        onRequestClose={this.handleRequestClose}
+      />
+    )
+  }
+
   render () {
     const {children} = this.props
     const {minHeight} = this.state
@@ -139,6 +152,7 @@ class Main extends React.Component {
           {children || null}
         </div>
         <ReactTooltip />
+        {this.renderIncidentAlert()}
         {this.renderActivationModal()}
         {this.renderApiError()}
       </div>
