@@ -178,7 +178,7 @@ class InfiniteTable extends React.Component {
         columns={this.props.cells.map(item => item.columnName)}
         columnMetadata={this.props.cells}
         rowMetadata={rowMetadata}
-        rowHeight={50}
+        rowHeight={75}
         externalSetPage={this.setPage.bind(this)}
         externalSetPageSize={this.setPageSize.bind(this)}
         externalMaxPage={this.state.maxPages}

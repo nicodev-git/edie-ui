@@ -6,7 +6,7 @@ import FormInput from './FormInput'
 import FormSelect from './FormSelect'
 import FormImg from './FormImg'
 import SubmitBlock from './SubmitBlock'
-import HeaderNoClose from './HeaderNoClose'
+import HeaderClosing from './HeaderClosing'
 import SubmitSingle from './SubmitSingle'
 import FormMultiSelect from './FormMultiSelect'
 import FileUpload from './FileUpload'
@@ -23,7 +23,7 @@ export {
     FormSelect,
     FormImg,
     SubmitBlock,
-    HeaderNoClose,
+    HeaderClosing,
     SubmitSingle,
     FormMultiSelect,
     FileUpload,

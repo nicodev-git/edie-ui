@@ -2,7 +2,7 @@ import React from 'react'
 import Modal from 'react-bootstrap-modal'
 import DateRangePicker2 from 'components/shared/DateRangePicker2'
 import Select from 'react-select'
-import { Header } from './parts'
+import { HeaderClosing } from './parts'
 
 const BigIncidentsView = ({onHide,
   severities, severityOptions, onChangeSeverity,
@@ -14,7 +14,7 @@ const BigIncidentsView = ({onHide,
     onHide={onHide}
     aria-labelledby="ModalHeader"
     className="bootstrap-dialog type-default modal-fit modal-flex table-panel">
-    <Header name="Incidents" onClick={onHide}/>
+    <HeaderClosing name="Incidents" onClose={onHide}/>
     <div className="modal-body bootstrap-dialog-message">
       <div className="form-inline">
         <label>Show</label>
