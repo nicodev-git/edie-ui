@@ -4,26 +4,18 @@ import { bindActionCreators } from 'redux'
 import { withRouter } from 'react-router'
 
 import {
-  searchIncidents,
-  fixIncident,
-  ackIncident,
-  searchIncidentDevices,
-  fixAllIncidentsByType
+  updateSearchKeyword
 } from 'actions'
 import Events from 'components/page/content/search/Events'
 
 @withRouter
 @connect(
   state => ({
-
+    keyword: state.search.keyword
   }),
   dispatch => ({
     ...bindActionCreators({
-      searchIncidents,
-      fixIncident,
-      ackIncident,
-      searchIncidentDevices,
-      fixAllIncidentsByType
+      updateSearchKeyword
     }, dispatch)
   })
 )

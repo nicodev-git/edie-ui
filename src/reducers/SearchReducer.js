@@ -2,7 +2,8 @@ import {
   SEARCH_INCIDENTS,
   SEARCH_INCIDENT_DEVICES,
   UPDATE_DEVICE_INCIDENT,
-  FIX_ALL_INCIDENTS_BY_TYPE
+  FIX_ALL_INCIDENTS_BY_TYPE,
+  UPDATE_SEARCH_KEYWORD
 } from '../actions/types'
 
 export default function (state = {}, action) {
@@ -23,6 +24,9 @@ export default function (state = {}, action) {
 
     case FIX_ALL_INCIDENTS_BY_TYPE:
       return { ...state, incidentDraw: state.incidentDraw + 1 }
+
+    case UPDATE_SEARCH_KEYWORD:
+      return { ...state, keyword: action.keyword }
   }
   return state
 }

@@ -2,7 +2,6 @@ import React from 'react'
 import moment from 'moment'
 
 import {ResponsiveInfiniteTable} from '../../../shared/InfiniteTable'
-import DateRangePicker from '../../../shared/DateRangePicker'
 
 import SearchTabs from './SearchTabs'
 import TabPage from '../../../shared/TabPage'
@@ -39,8 +38,9 @@ class Events extends React.Component {
         ref="table"
         rowMetadata={{'key': 'id'}}
         selectable
-        url="/event"
+        url="/event/search/findBy"
         params={{
+          keyword: this.props.keyword,
           sort: 'timestamp,desc'
         }}
       />
@@ -48,36 +48,19 @@ class Events extends React.Component {
   }
 
   onSearchKeyUp (e) {
-    clearTimeout(this.timer)
-    this.timer = setTimeout(() => {
-      this.onFilterChange()
-    }, 200)
-  }
-
-  onFilterChange () {
-    this.props.onFilterChange && this.props.onFilterChange(this.getOptions())
+    this.props.updateSearchKeyword(e.target.value)
   }
 
   render () {
-    const defaultDate = 'Last 7 Days'
-
     return (
       <TabPage>
         <TabPageHeader title="Search">
           <div className="text-center margin-md-top" >
-            <div className="form-inline" style={{position: 'absolute'}}>
-
-              <div className="text-left" style={{'verticalAlign': 'middle', 'lineHeight': 2.2}}>
-                <DateRangePicker onClickRange={this.onFilterChange} default={defaultDate} ref="dp">
-                  <i className="fa fa-caret-down margin-xs-left" />
-                </DateRangePicker>
-              </div>
-            </div>
-
             <div style={{ position: 'relative', display: 'inline-block' }}>
               <input
                 type="text" placeholder="Search" className="form-control"
                 style={{width: '220px', paddingLeft: '35px'}}
+                value={this.props.keyword}
                 onChange={this.onSearchKeyUp.bind(this)}
                 ref="search"/>
               <a className="btn" href="javascript:;" style={{position: 'absolute', left: 0, top: 0}}>
@@ -89,6 +72,7 @@ class Events extends React.Component {
         </TabPageHeader>
 
         <TabPageBody tabs={SearchTabs} tab={3}>
+          {this.renderTable()}
         </TabPageBody>
       </TabPage>
     )
