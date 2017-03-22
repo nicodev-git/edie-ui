@@ -378,7 +378,7 @@ class Map extends React.Component {
 
       })
     }, () => {
-      this.setState({dropItem: null})
+      this.setState({dropItem: null, selectedItem: {}})
     })
   }
 
@@ -597,7 +597,7 @@ class Map extends React.Component {
       this.onClickEdit()
       this.props.addMapDevice(params)
 
-      this.setState({dropItem: null})
+      this.setState({dropItem: null, selectedItem: {}})
       closeCallback && closeCallback()
     } else {
       if (wizardConfig[options.type] === null) {

@@ -155,14 +155,14 @@ class MapCanvas extends React.Component {
             <div style={{position: 'absolute', left: 0, right: 0, top: 0, bottom: 0}}
               onClick={this.onDragMouseDown.bind(this)}>
                 <img
-                  src={`/externalpictures?name=${dragItem.img}`}
+                  src={`${extImageBaseUrl}${dragItem.img}`}
                   width={width}
                   height={width}
                   style={{
                     position: 'absolute',
                     left: cursorPos.x - width / 2,
                     top: cursorPos.y - width / 2,
-                    cursor: 'url("/images/cursor_drag_hand.png") 15 15, auto'
+                    cursor: `url("${imageBaseUrl}cursor_drag_hand.png") 15 15, auto`
                   }}
                 />
             </div>
@@ -179,7 +179,7 @@ class MapCanvas extends React.Component {
     if (!rt) return null
 
     return (
-            <img src={`/externalpictures?name=${dropItem.img}`} width={width} height={width}
+            <img src={`${extImageBaseUrl}${dropItem.img}`} width={width} height={width}
               style={{
                 position: 'absolute',
                 left: dropItemPos.x - rt.left - width / 2,
