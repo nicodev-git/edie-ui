@@ -38,6 +38,7 @@ import {
   CLOSE_SYS_WORKFLOWS_MODAL,
   SELECT_SYS_WORKFLOW,
   DESELECT_SYS_WORKFLOW,
+  SELECT_SYS_WORKFLOW_CATEGORY,
 
   OPEN_DEVICE_EDIT_MODAL,
   CLOSE_DEVICE_EDIT_MODAL,
@@ -804,5 +805,11 @@ export const selectSysWorkflow = (workflow) => {
 export const deselectSysWorkflow = (workflow) => {
   return dispatch => {
     dispatch({type: DESELECT_SYS_WORKFLOW, workflow})
+  }
+}
+
+export const selectSysWorkflowCategory = (category) => {
+  return dispatch => {
+    dispatch({type: SELECT_SYS_WORKFLOW_CATEGORY, category})
   }
 }

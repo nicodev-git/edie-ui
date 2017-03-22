@@ -2,10 +2,13 @@ import React from 'react'
 import Modal from 'react-bootstrap-modal'
 import Checkbox from 'material-ui/Checkbox'
 import FlatButton from 'material-ui/FlatButton'
+import SelectField from 'material-ui/SelectField'
+import MenuItem from 'material-ui/MenuItem'
 import { findIndex, assign } from 'lodash'
 
 class SysWorkflowsModal extends React.Component {
   componentWillMount () {
+    this.props.fetchWorkflowCategories()
     this.props.fetchWorkflows()
   }
 
@@ -17,8 +20,13 @@ class SysWorkflowsModal extends React.Component {
     this.props.closeSysWorkflowsModal()
   }
 
+  onChangeCategory (e, i, val) {
+    this.props.selectSysWorkflowCategory(val)
+  }
+
   getSysWorkflows () {
-    return this.props.sysWorkflows.filter(m => m.origin === 'SYSTEM')
+    const { selectedSysWorkflowCategory } = this.props
+    return this.props.sysWorkflows.filter(m => m.origin === 'SYSTEM' && (!selectedSysWorkflowCategory || m.category === selectedSysWorkflowCategory))
   }
 
   onChangeCheck (workflow, e, checked) {
@@ -50,13 +58,25 @@ class SysWorkflowsModal extends React.Component {
           </div>
         </div>
         <div className="modal-body bootstrap-dialog-message">
-          <div style={{maxHeight: '300px', overflow: 'scroll'}}>
+          <div className="padding-md-left">
+            <SelectField
+              value={this.props.selectedSysWorkflowCategory || ''}
+              onChange={this.onChangeCategory.bind(this)}
+            >
+              <MenuItem key="0" value="" primaryText="[All]" />
+              {this.props.workflowCategories.map(c =>
+                <MenuItem key={c.id} value={c.name} primaryText={c.name} />
+              )}
+            </SelectField>
+          </div>
+          <div style={{maxHeight: '400px', overflow: 'scroll'}}>
             <table className="table table-hover">
               <thead>
                 <tr>
+                  <th>Category</th>
+                  <th>Severity</th>
                   <th>Name</th>
                   <th>Description</th>
-                  <th>Category</th>
                   <th>Version</th>
                 </tr>
               </thead>
@@ -66,13 +86,14 @@ class SysWorkflowsModal extends React.Component {
                   <tr key={w.id}>
                     <td>
                       <Checkbox
-                        label={w.name}
+                        label={w.category}
                         checked={findIndex(this.props.selectedSysWorkflows, {id: w.id}) >= 0}
                         onCheck={this.onChangeCheck.bind(this, w)}
                       />
                     </td>
+                    <td>{w.severity}</td>
+                    <td>{w.name}</td>
                     <td>{w.desc}</td>
-                    <td>{w.category}</td>
                     <td>{w.version}</td>
                   </tr>
                 )

@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import SelectField from 'material-ui/SelectField'
 import MenuItem from 'material-ui/MenuItem'
 
-const style = {
+export const style = {
   width: 128,
   height: '100%',
   verticalAlign: 'top',
@@ -10,13 +10,13 @@ const style = {
   paddingRight: 0
 }
 
-const labelStyle = {
+export const labelStyle = {
   lineHeight: 2.5,
   paddingRight: 5,
   paddingLeft: 10
 }
 
-const listStyle = {
+export const listStyle = {
   width: 110
 }
 

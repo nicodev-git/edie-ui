@@ -27,6 +27,7 @@ import {
   CLOSE_SYS_WORKFLOWS_MODAL,
   SELECT_SYS_WORKFLOW,
   DESELECT_SYS_WORKFLOW,
+  SELECT_SYS_WORKFLOW_CATEGORY,
 
   OPEN_DEVICE_MONITOR_PICKER,
   CLOSE_DEVICE_MONITOR_PICKER,
@@ -251,7 +252,7 @@ export default function (state = INITIAL_STATE, action) {
       return { ...state, mapLines: state.mapLines.filter(m => m.id !== action.data.id) }
 
     case OPEN_SYS_WORKFLOWS_MODAL:
-      return { ...state, sysWorkflowsModalOpen: true, selectedSysWorkflows: [] }
+      return { ...state, sysWorkflowsModalOpen: true, selectedSysWorkflows: [], selectedSysWorkflowCategory: '' }
 
     case CLOSE_SYS_WORKFLOWS_MODAL:
       return { ...state, sysWorkflowsModalOpen: false }
@@ -260,6 +261,9 @@ export default function (state = INITIAL_STATE, action) {
       return { ...state, selectedSysWorkflows: concat(state.selectedSysWorkflows, action.workflow) }
     case DESELECT_SYS_WORKFLOW:
       return { ...state, selectedSysWorkflows: state.selectedSysWorkflows.filter(u => u.id !== action.workflow.id) }
+
+    case SELECT_SYS_WORKFLOW_CATEGORY:
+      return { ...state, selectedSysWorkflowCategory: action.category }
   }
   return state
 }
