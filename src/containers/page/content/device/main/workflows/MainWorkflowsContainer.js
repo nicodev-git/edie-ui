@@ -23,7 +23,9 @@ import {
 
   fetchWorkflows,
   openSysWorkflowsModal,
-  closeSysWorkflowsModal
+  closeSysWorkflowsModal,
+  selectSysWorkflow,
+  deselectSysWorkflow
 } from '../../../../../../actions'
 
 @connect(
@@ -68,7 +70,9 @@ import {
 
     fetchWorkflows,
     openSysWorkflowsModal,
-    closeSysWorkflowsModal
+    closeSysWorkflowsModal,
+    selectSysWorkflow,
+    deselectSysWorkflow
   }
 )
 @withRouter
