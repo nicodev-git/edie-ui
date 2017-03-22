@@ -4,7 +4,7 @@ import InfiniteTable from '../shared/InfiniteTable'
 import { Header, CloseButton, TwoButtonsBlock } from './parts'
 
 const SmallModalTable = ({show, header, url, row, height, onHide,
-  params, cells, save, onSave}) => (
+  params, cells, save, onSave, data, useExternal}) => (
   <Modal
     show={show}
     onHide={onHide}
@@ -20,6 +20,8 @@ const SmallModalTable = ({show, header, url, row, height, onHide,
         rowMetadata={row}
         bodyHeight={height}
         pageSize={20}
+        data={data}
+        useExternal={useExternal}
         selectable
       />
     </div>
