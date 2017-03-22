@@ -34,6 +34,9 @@ import {
   FETCH_DEVICE_EVENTLOG,
   FETCH_DEVICE_APPS,
 
+  OPEN_SYS_WORKFLOWS_MODAL,
+  CLOSE_SYS_WORKFLOWS_MODAL,
+
   OPEN_DEVICE_EDIT_MODAL,
   CLOSE_DEVICE_EDIT_MODAL,
 
@@ -758,5 +761,17 @@ export const removeGroupLine = (entity) => {
     axios.delete(entity._links.self.href).then(() => {
       dispatch({type: REMOVE_GROUP_LINE, data: entity})
     }).catch(error => apiError(dispatch, error))
+  }
+}
+
+export const openSysWorkflowsModal = () => {
+  return dispatch => {
+    dispatch({type: OPEN_SYS_WORKFLOWS_MODAL})
+  }
+}
+
+export const closeSysWorkflowsModal = () => {
+  return dispatch => {
+    dispatch({type: CLOSE_SYS_WORKFLOWS_MODAL})
   }
 }
