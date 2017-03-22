@@ -1,12 +1,6 @@
 import React, { Component } from 'react'
-
-import Modal from 'react-bootstrap-modal'
-import {
-    Button
-} from 'react-bootstrap'
-
-import InfiniteTable from '../../../../../shared/InfiniteTable'
-import { showAlert } from '../../../../../shared/Alert'
+import { SmallModalTable } from '../../../../../modal'
+import getMuiTheme from 'material-ui/styles/getMuiTheme'
 
 export default class GroupsModal extends Component {
   constructor (props) {
@@ -25,8 +19,10 @@ export default class GroupsModal extends Component {
     }]
   }
 
-  onHide () {
-    this.onClickClose()
+  getChildContext () {
+    return {
+      muiTheme: getMuiTheme()
+    }
   }
 
   closeModal (data) {
@@ -41,48 +37,31 @@ export default class GroupsModal extends Component {
   }
 
   onClickSave () {
-    let selected = this.refs.groups.getSelected()
+    // TODO
+    /* let selected = this.refs.groups.getSelected()
     if (!selected) return showAlert('Please select group.')
-
-    this.closeModal(selected)
+    this.closeModal(selected) */
+    this.closeModal()
   }
 
   render () {
+    let header = 'Groups'
+    let url = '/group/getGroupsDT'
+    let params = {}
+    let save = true
     return (
-      <Modal
+      <SmallModalTable
         show={this.state.open}
-        onHide={this.onHide.bind(this)}
-        aria-labelledby="ModalHeader"
-        className="bootstrap-dialog type-primary"
-      >
-
-        <div className="modal-header">
-          <h4 className="modal-title bootstrap-dialog-title">
-            Groups
-          </h4>
-          <div className="bootstrap-dialog-close-button">
-            <button className="close" onClick={this.onClickClose.bind(this)}>×</button>
-          </div>
-        </div>
-
-        <div className="modal-body bootstrap-dialog-message">
-
-          <InfiniteTable
-            url="/group/getGroupsDT"
-            params={{}}
-            cells={this.cells}
-            rowMetadata={{'key': 'id'}}
-            selectable
-            bodyHeight={400}
-            ref="groups"
-          />
-
-          <div className="text-right">
-            <Button className="btn-primary btn-sm" onClick={this.onClickSave.bind(this)}>OK</Button>
-            <Button className="btn-sm margin-sm-left" onClick={this.onClickClose.bind(this)}>Cancel</Button>
-          </div>
-        </div>
-      </Modal>
+        onHide={this.onClickClose.bind(this)}
+        params={params}
+        cells={this.cells}
+        header={header}
+        url={url}
+        row={{'key': 'id'}}
+        height={400}
+        save={save}
+        onSave={this.onClickSave.bind(this)}
+      />
     )
   }
 }
