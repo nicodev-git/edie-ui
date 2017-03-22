@@ -722,3 +722,21 @@ table.table tbody tr.selected {
 .text-plus-icon svg:hover {
   fill: #f44336 !important;
 }
+
+.upload-file {
+  position: relative;
+  cursor: pointer !important;
+}
+
+.upload-file input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 16pt;
+  opacity: 0;
+  cursor: pointer !important;
+}
+
+.images-list {
+  background-color: #000000;
+}

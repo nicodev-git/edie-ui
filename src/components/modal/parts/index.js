@@ -13,6 +13,7 @@ import FileUpload from './FileUpload'
 import SubHeader from './SubHeader'
 import CloseButton from './CloseButton'
 import TwoButtonsBlock from './TwoButtonsBlock'
+import UploadFile from './UploadFile'
 
 export {
     Header,
@@ -29,5 +30,6 @@ export {
     FileUpload,
     SubHeader,
     CloseButton,
-    TwoButtonsBlock
+    TwoButtonsBlock,
+    UploadFile
 }
