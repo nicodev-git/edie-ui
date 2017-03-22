@@ -1,20 +1,14 @@
-import React from 'react'
-import Modal from 'react-bootstrap-modal'
-import {reduxForm, Field} from 'redux-form'
+import React, { Component } from 'react'
+import { reduxForm } from 'redux-form'
 import { assign } from 'lodash'
 import { connect } from 'react-redux'
+import { validate } from '../../../../../modal/validation/KeyValue'
+import { SimpleModalForm } from '../../../../../modal'
 
-class RuleModal extends React.Component {
-  onHide () {
-
-  }
-
+class RuleModal extends Component {
   handleFormSubmit (values) {
     const {editRule} = this.props
     let props = assign({}, editRule, values)
-
-    if (!props.key) return window.alert('Please type key.')
-
     this.props.onClose(props, editRule)
     this.props.closeDeviceRuleModal()
   }
@@ -25,49 +19,28 @@ class RuleModal extends React.Component {
 
   render () {
     const {handleSubmit} = this.props
+    let header = 'Rule'
+    let content = [
+      {name: 'Key'},
+      {name: 'Value'}
+    ]
+    let buttonText = 'Save'
     return (
-      <Modal
+      <SimpleModalForm
         show
-        onHide={this.onHide.bind(this)}
-        aria-labelledby="ModalHeader"
-        className="bootstrap-dialog type-primary">
-        <div className="modal-header">
-          <h4 className="modal-title bootstrap-dialog-title">
-            Rule
-          </h4>
-          <div className="bootstrap-dialog-close-button">
-            <button className="close" onClick={this.onClickClose.bind(this)}>×</button>
-          </div>
-        </div>
-        <div className="modal-body bootstrap-dialog-message">
-          <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
-            <div className="row margin-md-bottom">
-              <label className="col-md-3">Key</label>
-              <div className="col-md-9">
-                <Field name="key" component="input" className="form-control"/>
-              </div>
-            </div>
-
-            <div className="row margin-md-bottom">
-              <label className="col-md-3">Value</label>
-              <div className="col-md-9">
-                <Field name="value" component="input" className="form-control"/>
-              </div>
-            </div>
-
-            <div className="text-right">
-              <button className="btn btn-primary btn-sm margin-sm-right" type="submit">OK</button>
-              <a href="javascript:;" className="btn btn-default btn-sm" onClick={this.onClickClose.bind(this)}>Cancel</a>
-            </div>
-          </form>
-        </div>
-      </Modal>
+        onHide={this.onClickClose.bind(this)}
+        onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
+        content={content}
+        header={header}
+        buttonText={buttonText}
+      />
     )
   }
 }
 
 export default connect(
   state => ({
-    initialValues: state.devices.editRule
+    initialValues: state.devices.editRule,
+    validate: validate
   })
 )(reduxForm({form: 'workflowRuleForm'})(RuleModal))
