@@ -1,10 +1,13 @@
 import React, { Component } from 'react'
-import Modal from 'react-bootstrap-modal'
 import moment from 'moment'
-
-import InfiniteTable from '../../../../shared/InfiniteTable'
+import { SmallModalTable } from '../../../../modal'
+import getMuiTheme from 'material-ui/styles/getMuiTheme'
 
 export default class MonitorHistoryModal extends Component {
+  static childContextTypes = {
+    muiTheme: React.PropTypes.object
+  }
+
   constructor (props) {
     super(props)
     this.state = {
@@ -45,8 +48,10 @@ export default class MonitorHistoryModal extends Component {
     }]
   }
 
-  onHide () {
-    this.onClickClose()
+  getChildContext () {
+    return {
+      muiTheme: getMuiTheme()
+    }
   }
 
   onClickClose () {
@@ -62,33 +67,23 @@ export default class MonitorHistoryModal extends Component {
   }
 
   render () {
+    let header = 'Monitor history'
+    let url = '/event/search/findBy'
+    let params = {
+      monitorid: this.props.device.uid,
+      sort: 'timestamp,desc'
+    }
     return (
-      <Modal show={this.state.open} onHide={this.onHide.bind(this)}
-        aria-labelledby="ModalHeader" className="bootstrap-dialog type-primary modal-w-10">
-
-        <div className="modal-header">
-          <h4 className="modal-title bootstrap-dialog-title">
-            Monitor History
-          </h4>
-          <div className="bootstrap-dialog-close-button">
-            <button className="close" onClick={this.onClickClose.bind(this)}>×</button>
-          </div>
-        </div>
-
-        <div className="modal-body bootstrap-dialog-message">
-          <InfiniteTable
-            url="/event/search/findBy"
-            params={{
-              monitorid: this.props.device.uid,
-              sort: 'timestamp,desc'
-            }}
-            cells={this.cells}
-            ref="table"
-            rowMetadata={{'key': 'id'}}
-            bodyHeight={520}
-          />
-        </div>
-      </Modal>
+      <SmallModalTable
+        show={this.state.open}
+        onHide={this.onClickClose.bind(this)}
+        params={params}
+        cells={this.cells}
+        header={header}
+        url={url}
+        row={{'key': 'id'}}
+        height={520}
+      />
     )
   }
 }
