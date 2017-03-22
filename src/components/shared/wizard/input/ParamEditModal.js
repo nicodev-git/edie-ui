@@ -12,7 +12,7 @@ import {
 } from 'actions'
 
 const defaultKeys = [
-  'port', 'user', 'password', 'hostname'
+  'port', 'user', 'password', 'hostname', 'checkinterval', 'timeout', 'url'
 ]
 
 const styles = {
