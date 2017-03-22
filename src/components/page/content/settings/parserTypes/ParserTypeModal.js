@@ -1,14 +1,10 @@
 import React from 'react'
-import Modal from 'react-bootstrap-modal'
-import {
-  Button
-} from 'react-bootstrap'
-import { reduxForm, Field } from 'redux-form'
+import { reduxForm } from 'redux-form'
 import { assign, concat } from 'lodash'
-import InlineEdit from 'react-edit-inline'
 import { connect } from 'react-redux'
-
 import { showAlert } from 'components/shared/Alert'
+import { ParserTypeModalView } from '../../../../modal'
+import { validate } from '../../../../modal/validation/NameValidation'
 
 class ParserTypeModal extends React.Component {
   constructor (props) {
@@ -23,23 +19,15 @@ class ParserTypeModal extends React.Component {
     }
   }
 
-  onHide () {
-
-  }
-
   onClickClose () {
     this.props.closeParserTypeModal()
   }
 
   handleFormSubmit (values) {
     const { editParserType } = this.props
-
     let props = assign({}, editParserType, values, {
       patterns: this.state.patterns.filter(p => !!p)
     })
-
-    if (!props.name) return showAlert('Please type name.')
-
     if (editParserType) {
       this.props.updateParserType(props)
     } else {
@@ -55,91 +43,44 @@ class ParserTypeModal extends React.Component {
 
   onPatternChange (index, data) {
     let { patterns } = this.state
-
     patterns = patterns.map((r, i) => i === index ? data.pattern : r)
     if (index === patterns.length - 1) patterns.push('')
     this.setState({ patterns })
   }
 
+  onItemClick (index) {
+    let patterns = this.state.patterns
+    if (index !== patterns.length - 1) {
+      this.setState({
+        selectedPatternIndex: index
+      })
+    }
+  }
+
   render () {
     const { patterns, selectedPatternIndex } = this.state
     const { handleSubmit } = this.props
-
+    let header = 'Parser Type'
     return (
-      <Modal show onHide={this.onHide.bind(this)}
-        aria-labelledby="ModalHeader" className="bootstrap-dialog type-primary">
-
-        <div className="modal-header">
-          <h4 className="modal-title bootstrap-dialog-title">
-            Parser Type
-          </h4>
-          <div className="bootstrap-dialog-close-button">
-            <button className="close" onClick={this.onClickClose.bind(this)}>×</button>
-          </div>
-        </div>
-
-        <div className="modal-body bootstrap-dialog-message">
-
-          <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
-            <div className="row margin-md-bottom">
-              <label className="col-md-3">Name</label>
-              <div className="col-md-9">
-                <Field name="name" component="input" type="text" label="Name" className="form-control"/>
-              </div>
-            </div>
-
-            <div className="row margin-md-bottom">
-              <label className="col-md-3">Filters</label>
-              <div className="col-md-9">
-                <Field name="filters" component="input" type="text" label="Filters" className="form-control"/>
-              </div>
-            </div>
-
-            <div>
-              <div>
-                <span className="margin-sm-right">Patterns</span>
-                <a href="javascript:;" className="margin-sm-right" onClick={this.onClickRemovePattern.bind(this)}><i className="fa fa-trash-o" /></a>
-              </div>
-
-              <div style={{maxHeight: '300px', overflow: 'scroll'}}>
-                <table className="table table-hover table-p-sm">
-                  <tbody>
-                  {
-                    patterns.map((a, index) =>
-                      <tr key={index} className={selectedPatternIndex === index ? 'selected' : ''} onClick={() => { if (index !== patterns.length - 1) this.setState({ selectedPatternIndex: index }) }}>
-                        <td>
-                          <InlineEdit
-                            activeClassName="editing"
-                            text={a || '\u00a0'}
-                            paramName="pattern"
-                            change={this.onPatternChange.bind(this, index)}
-                            style={{
-                              width: '100%',
-                              display: 'block'
-                            }}
-                          />
-                        </td>
-                      </tr>
-                    )
-                  }
-                  </tbody>
-                </table>
-              </div>
-            </div>
-
-            <div className="text-right">
-              <Button className="btn-primary btn-sm" type="submit">Save</Button>
-              <Button className="btn-sm margin-sm-left" onClick={this.onClickClose.bind(this)}>Cancel</Button>
-            </div>
-          </form>
-        </div>
-      </Modal>
+      <ParserTypeModalView
+        show
+        header={header}
+        patterns={patterns}
+        selectedIndex={selectedPatternIndex}
+        onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
+        onPatternChange={this.onPatternChange.bind(this)}
+        onDelete={this.onClickRemovePattern.bind(this)}
+        onHide={this.onClickClose.bind(this)}
+        onSave={this.onClickOK.bind(this)}
+        onItemClick={this.onItemClick.bind(this)}
+      />
     )
   }
 }
 
 export default connect(
   state => ({
-    initialValues: state.settings.editParserType
+    initialValues: state.settings.editParserType,
+    validate: validate
   })
 )(reduxForm({form: 'parserTypeForm'})(ParserTypeModal))
