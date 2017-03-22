@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
-import Main from '../../components/page/Main'
+import moment from 'moment'
+import { debounce } from 'lodash'
 import { withRouter } from 'react-router'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+
+import Main from '../../components/page/Main'
 import IncidentSocket from 'util/socket/IncidentSocket'
-import { debounce } from 'lodash'
 
 import {
   closeDevice,
@@ -63,6 +65,7 @@ export default class MainContainer extends Component {
       }
     })
     this.incidentSocket.connect()
+    this.clearNewincidentMsg = debounce(() => this.props.updateNewIncidentMsg(''), 4000)
   }
 
   componentWillUnmount () {
@@ -90,7 +93,9 @@ export default class MainContainer extends Component {
     })
 
     const incident = msg.latestincident || {}
-    this.props.updateNewIncidentMsg(incident.description)
+    const time = moment(incident.startTimestamp || new Date()).format('HH:mm:ss')
+    this.props.updateNewIncidentMsg(`${time} ${incident.description || ''}`)
+    this.clearNewincidentMsg()
   }
 
   render () {

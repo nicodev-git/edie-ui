@@ -133,7 +133,6 @@ class Main extends React.Component {
         open
         message={this.props.newIncidentMsg}
         autoHideDuration={4000}
-        onRequestClose={this.handleRequestClose}
       />
     )
   }
