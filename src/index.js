@@ -97,6 +97,8 @@ const initialState = {
     parserTypeDraw: 1,
     parserTypes: [],
 
+    workflows: [],
+
     showTraffic: true
   },
 

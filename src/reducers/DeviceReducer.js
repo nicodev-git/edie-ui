@@ -25,6 +25,8 @@ import {
 
   OPEN_SYS_WORKFLOWS_MODAL,
   CLOSE_SYS_WORKFLOWS_MODAL,
+  SELECT_SYS_WORKFLOW,
+  DESELECT_SYS_WORKFLOW,
 
   OPEN_DEVICE_MONITOR_PICKER,
   CLOSE_DEVICE_MONITOR_PICKER,
@@ -253,6 +255,11 @@ export default function (state = INITIAL_STATE, action) {
 
     case CLOSE_SYS_WORKFLOWS_MODAL:
       return { ...state, sysWorkflowsModalOpen: false }
+
+    case SELECT_SYS_WORKFLOW:
+      return { ...state, selectedSysWorkflows: concat(state.selectedSysWorkflows, action.workflow) }
+    case DESELECT_SYS_WORKFLOW:
+      return { ...state, selectedSysWorkflows: state.selectedSysWorkflows.filter(u => u.id !== action.workflow.id) }
   }
   return state
 }

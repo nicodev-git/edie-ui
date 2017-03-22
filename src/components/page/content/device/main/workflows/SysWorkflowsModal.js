@@ -1,5 +1,6 @@
 import React from 'react'
 import Modal from 'react-bootstrap-modal'
+import { findIndex } from 'lodash'
 
 class SysWorkflowsModal extends React.Component {
   componentWillMount () {
@@ -16,6 +17,14 @@ class SysWorkflowsModal extends React.Component {
 
   getSysWorkflows () {
     return this.props.sysWorkflows.filter(m => m.origin === 'SYSTEM')
+  }
+
+  onChangeCheck (workflow, e) {
+    if (e.target.checked) {
+      this.props.selectSysWorkflow(workflow)
+    } else {
+      this.props.deselectSysWorkflow(workflow)
+    }
   }
 
   render () {
@@ -46,8 +55,14 @@ class SysWorkflowsModal extends React.Component {
               <tbody>
               {
                 this.getSysWorkflows().map(w =>
-                  <tr>
-                    <td><label><input type="checkbox"/>&nbsp;{w.name}</label></td>
+                  <tr key={w.id}>
+                    <td><label>
+                      <input
+                        type="checkbox"
+                        checked={findIndex(this.props.selectedSysWorkflows, {id: w.id}) >= 0}
+                        onChange={this.onChangeCheck.bind(this, w)}/>
+                      &nbsp;{w.name}
+                    </label></td>
                     <td>{w.desc}</td>
                     <td>{w.version}</td>
                   </tr>
@@ -55,6 +70,10 @@ class SysWorkflowsModal extends React.Component {
               }
               </tbody>
             </table>
+          </div>
+          <div className="text-right">
+            <a href="javascript:;" className="btn btn-primary btn-sm margin-sm-right" type="submit">Add</a>
+            <a href="javascript:;" className="btn btn-default btn-sm" onClick={this.onClickClose.bind(this)}>Cancel</a>
           </div>
         </div>
       </Modal>
