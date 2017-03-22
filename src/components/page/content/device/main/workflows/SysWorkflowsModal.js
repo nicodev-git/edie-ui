@@ -10,6 +10,14 @@ class SysWorkflowsModal extends React.Component {
 
   }
 
+  onClickClose () {
+    this.props.closeSysWorkflowsModal()
+  }
+
+  getSysWorkflows () {
+    return this.props.sysWorkflows.filter(m => m.origin === 'SYSTEM')
+  }
+
   render () {
     return (
       <Modal
@@ -25,8 +33,29 @@ class SysWorkflowsModal extends React.Component {
             <button className="close" onClick={this.onClickClose.bind(this)}>×</button>
           </div>
         </div>
-        <div className="modal-body bootstrap-dialog-message p-none">
-          Workflows
+        <div className="modal-body bootstrap-dialog-message">
+          <div style={{maxHeight: '300px', overflow: 'scroll'}}>
+            <table className="table table-hover">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Description</th>
+                  <th>Version</th>
+                </tr>
+              </thead>
+              <tbody>
+              {
+                this.getSysWorkflows().map(w =>
+                  <tr>
+                    <td><label><input type="checkbox"/>&nbsp;{w.name}</label></td>
+                    <td>{w.desc}</td>
+                    <td>{w.version}</td>
+                  </tr>
+                )
+              }
+              </tbody>
+            </table>
+          </div>
         </div>
       </Modal>
     )
