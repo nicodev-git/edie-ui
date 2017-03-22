@@ -7,6 +7,7 @@ import SmallModalTable from './SmallModalTable'
 import ParsersModalView from './ParsersModalView'
 import DiagramModalView from './DiagramModalView'
 import ParserTypeModalView from './ParserTypeModalView'
+import ImageUploaderModalView from './ImageUploaderModalView'
 
 export {
     ActivationModalView,
@@ -17,5 +18,6 @@ export {
     SmallModalTable,
     ParsersModalView,
     DiagramModalView,
-    ParserTypeModalView
+    ParserTypeModalView,
+    ImageUploaderModalView
 }
