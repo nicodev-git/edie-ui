@@ -23,7 +23,7 @@ export const fetchWorkflows = () => {
     return dispatch => dispatch({ type: NO_AUTH_ERROR })
   }
   return (dispatch) => {
-    axios.get(`${ROOT_URL}/workflow?size=1000`)
+    axios.get(`${ROOT_URL}/workflow?size=1000&sort=category&sort=severity`)
       .then(response => fetchWorkflowsSuccess(dispatch, response))
       .catch(error => apiError(dispatch, error))
   }
