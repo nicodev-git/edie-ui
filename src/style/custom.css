@@ -713,3 +713,12 @@ table.table tbody tr.selected {
 .alert-buttons {
   padding-right: 40px;
 }
+
+.text-plus-icon {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.text-plus-icon svg:hover {
+  fill: #f44336 !important;
+}

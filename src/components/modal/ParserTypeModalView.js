@@ -4,13 +4,13 @@ import IconButton from 'material-ui/IconButton'
 import DeleteIcon from 'material-ui/svg-icons/action/delete'
 import InlineEdit from 'react-edit-inline'
 import { Field } from 'redux-form'
-import { Header, SubHeader, TwoButtonsBlock, FormInput } from './parts'
+import { Header, SubHeader, SubmitBlock, FormInput } from './parts'
 import { buttonStyle, iconStyle } from '../../style/materialStyles'
 
 export default class ParserTypeModalView extends Component {
   render () {
     const {show, header, patterns, selectedIndex, onSubmit,
-      onHide, onSave, onPatternChange, onDelete, onItemClick} = this.props
+      onHide, onPatternChange, onDelete, onItemClick} = this.props
     return (
       <Modal
         show={show}
@@ -21,16 +21,18 @@ export default class ParserTypeModalView extends Component {
         <Header name={header} />
         <div className="modal-body bootstrap-dialog-message">
           <form onSubmit={onSubmit}>
-            <Field name="name" component={FormInput} label="name"/>
-            <Field name="filters" component={FormInput} label="filters"/>
-            <div>
-              <SubHeader name="Patterns"/>
-              <IconButton
-                style={buttonStyle}
-                iconStyle={iconStyle}
-                onTouchTap={onDelete}>
-                  <DeleteIcon color="#545454"/>
-              </IconButton>
+            <div className="form-column">
+              <Field name="name" component={FormInput} label="name"/>
+              <Field name="filters" component={FormInput} label="filters"/>
+              <div className="text-plus-icon">
+                <SubHeader name="Patterns"/>
+                <IconButton
+                  style={buttonStyle}
+                  iconStyle={iconStyle}
+                  onTouchTap={onDelete}>
+                    <DeleteIcon color="#545454"/>
+                </IconButton>
+              </div>
             </div>
             <div style={{maxHeight: '300px', overflow: 'scroll'}}>
               <table className="table table-hover table-p-sm">
@@ -59,7 +61,7 @@ export default class ParserTypeModalView extends Component {
                 </tbody>
               </table>
             </div>
-            <TwoButtonsBlock onSave={onSave} onClose={onHide}/>
+            <SubmitBlock name="Save" onClick={onHide}/>
           </form>
         </div>
       </Modal>

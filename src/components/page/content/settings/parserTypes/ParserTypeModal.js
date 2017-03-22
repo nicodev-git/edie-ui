@@ -71,7 +71,6 @@ class ParserTypeModal extends React.Component {
         onPatternChange={this.onPatternChange.bind(this)}
         onDelete={this.onClickRemovePattern.bind(this)}
         onHide={this.onClickClose.bind(this)}
-        onSave={this.onClickOK.bind(this)}
         onItemClick={this.onItemClick.bind(this)}
       />
     )
