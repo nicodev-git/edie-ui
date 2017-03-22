@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { assign } from 'lodash'
 import { connect } from 'react-redux'
 import { reduxForm } from 'redux-form'
@@ -6,7 +6,7 @@ import { SimpleModalForm } from '../../../../../modal'
 import { validate } from '../../../../../modal/validation/NameValidation'
 import {addWfCategory, closeWfCategoryModal} from 'actions'
 
-class CategoryModal extends React.Component {
+class CategoryModal extends Component {
   handleFormSubmit (values) {
     const {editWfCategory} = this.props
     let props = assign({}, editWfCategory, values)

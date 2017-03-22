@@ -1,10 +1,8 @@
 import React, { Component } from 'react'
-import Modal from 'react-bootstrap-modal'
-import {
-    Button
-} from 'react-bootstrap'
 import { showAlert } from '../../../../shared/Alert'
 import { ROOT_URL } from '../../../../../actions/config'
+import SimpleModalContainer from '../../../../../containers/modal/SimpleModalContainer'
+import { validate } from '../../../../modal/validation/NameValidation'
 
 export default class BackupModal extends Component {
   constructor (props) {
@@ -12,10 +10,8 @@ export default class BackupModal extends Component {
     this.state = {
       open: true
     }
-  }
-
-  onHide () {
-    this.onClickClose()
+    this.onClickSave = this.onClickSave.bind(this)
+    this.closeModal = this.closeModal.bind(this)
   }
 
   closeModal (data) {
@@ -24,13 +20,9 @@ export default class BackupModal extends Component {
     })
   }
 
-  onClickClose () {
-    this.closeModal()
-  }
-
-  onClickSave () {
-    const name = this.refs.name.value
-    const desc = this.refs.desc.value
+  onClickSave (values) {
+    const name = values.name
+    const desc = values.description
 
     if (!name) {
       showAlert('Please input backup name.')
@@ -50,46 +42,19 @@ export default class BackupModal extends Component {
   }
 
   render () {
+    let header = 'Backup'
+    let content = [
+      {name: 'Name'},
+      {name: 'Description'}
+    ]
     return (
-      <Modal
-        show={this.state.open}
-        onHide={this.onHide.bind(this)}
-        aria-labelledby="ModalHeader"
-        className="bootstrap-dialog type-primary"
-      >
-
-        <div className="modal-header">
-          <h4 className="modal-title bootstrap-dialog-title">
-            Backup
-          </h4>
-          <div className="bootstrap-dialog-close-button">
-            <button className="close" onClick={this.onClickClose.bind(this)}>×</button>
-          </div>
-        </div>
-
-        <div className="modal-body bootstrap-dialog-message">
-
-          <div className="row margin-md-bottom">
-            <label className="control-label col-md-3">Name</label>
-            <div className="col-md-9">
-              <input type="text" className="form-control" ref="name" />
-            </div>
-          </div>
-
-          <div className="row margin-md-bottom">
-            <label className="control-label col-md-3">Description</label>
-            <div className="col-md-9">
-              <input type="text" className="form-control" ref="desc" />
-            </div>
-          </div>
-
-          <div className="text-right p-none">
-            <Button className="btn-primary" onClick={this.onClickSave.bind(this)}>Save</Button>
-            <Button className="margin-sm-left" onClick={this.onClickClose.bind(this)}>Cancel</Button>
-          </div>
-
-        </div>
-      </Modal>
+      <SimpleModalContainer
+        header={header}
+        content={content}
+        doAction={this.onClickSave}
+        onClose={this.closeModal}
+        validate={validate}
+      />
     )
   }
 }

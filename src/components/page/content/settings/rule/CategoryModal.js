@@ -1,27 +1,17 @@
-import React from 'react'
-import Modal from 'react-bootstrap-modal'
+import React, { Component } from 'react'
 import { assign } from 'lodash'
 import { connect } from 'react-redux'
-import {reduxForm, Field} from 'redux-form'
+import { reduxForm } from 'redux-form'
+import { SimpleModalForm } from '../../../../modal'
+import { validate } from '../../../../modal/validation/NameValidation'
+import {addWfCategory, closeWfCategoryModal} from 'actions'
 
-import {
-  addWfCategory,
-  closeWfCategoryModal
-} from 'actions'
-
-class CategoryModal extends React.Component {
-  onHide () {
-
-  }
-
+class CategoryModal extends Component {
   handleFormSubmit (values) {
     const {editWfCategory} = this.props
     let props = assign({}, editWfCategory, values)
-
-    if (!props.name) return window.alert('Please type name.')
-
     if (editWfCategory) {
-
+      // TODO
     } else {
       this.props.addWfCategory(props)
     }
@@ -33,43 +23,21 @@ class CategoryModal extends React.Component {
 
   render () {
     const {handleSubmit} = this.props
+    let header = 'Category'
+    let content = [
+      {name: 'Name'},
+      {name: 'Description'}
+    ]
+    let buttonText = 'Save'
     return (
-      <Modal
+      <SimpleModalForm
         show
-        onHide={this.onHide.bind(this)}
-        aria-labelledby="ModalHeader"
-        className="bootstrap-dialog type-primary">
-        <div className="modal-header">
-          <h4 className="modal-title bootstrap-dialog-title">
-            Category
-          </h4>
-          <div className="bootstrap-dialog-close-button">
-            <button className="close" onClick={this.onClickClose.bind(this)}>×</button>
-          </div>
-        </div>
-        <div className="modal-body bootstrap-dialog-message">
-          <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
-            <div className="row margin-md-bottom">
-              <label className="col-md-3">Name</label>
-              <div className="col-md-9">
-                <Field name="name" component="input" className="form-control"/>
-              </div>
-            </div>
-
-            <div className="row margin-md-bottom">
-              <label className="col-md-3">Description</label>
-              <div className="col-md-9">
-                <Field name="desc" component="input" className="form-control"/>
-              </div>
-            </div>
-
-            <div className="text-right">
-              <button className="btn btn-primary btn-sm margin-sm-right" type="submit">OK</button>
-              <a href="javascript:;" className="btn btn-default btn-sm" onClick={this.onClickClose.bind(this)}>Cancel</a>
-            </div>
-          </form>
-        </div>
-      </Modal>
+        onHide={this.onClickClose.bind(this)}
+        onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
+        content={content}
+        header={header}
+        buttonText={buttonText}
+      />
     )
   }
 }
@@ -77,7 +45,8 @@ class CategoryModal extends React.Component {
 export default connect(
   state => ({
     editWfCategory: state.devices.editWfCategory,
-    initialValues: state.devices.editWfCategory
+    initialValues: state.devices.editWfCategory,
+    validate: validate
   }), {
     addWfCategory,
     closeWfCategoryModal
