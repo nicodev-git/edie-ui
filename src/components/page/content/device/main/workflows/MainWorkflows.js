@@ -10,6 +10,7 @@ import TabPageBody from '../../../../../shared/TabPageBody'
 import TabPageHeader from '../../../../../shared/TabPageHeader'
 
 import MainWorkflowModal from './MainWorkflowModal'
+import SysWorkflowsModal from './SysWorkflowsModal'
 
 export default class MainWorkflows extends React.Component {
   constructor (props) {
@@ -43,7 +44,7 @@ export default class MainWorkflows extends React.Component {
   }
 
   onClickAddSys () {
-
+    this.props.openSysWorkflowsModal()
   }
 
   onClickEdit () {
@@ -87,6 +88,11 @@ export default class MainWorkflows extends React.Component {
     return <MainWorkflowModal {...this.props} />
   }
 
+  renderSysWorkflowsModal () {
+    if (!this.props.sysWorkflowsModalOpen) return null
+    return <SysWorkflowsModal {...this.props} />
+  }
+
   render () {
     const {device} = this.props
     return (
@@ -109,6 +115,7 @@ export default class MainWorkflows extends React.Component {
         <TabPageBody tabs={MainTabs(device.id)} tab={1}>
           {this.renderTable()}
           {this.renderWorkflowModal()}
+          {this.renderSysWorkflowsModal()}
         </TabPageBody>
       </TabPage>
     )

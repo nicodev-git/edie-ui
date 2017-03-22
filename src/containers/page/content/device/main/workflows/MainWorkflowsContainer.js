@@ -19,7 +19,11 @@ import {
   openDeviceWfDiagramModal,
 
   addWfCategory,
-  closeWfCategoryModal
+  closeWfCategoryModal,
+
+  fetchWorkflows,
+  openSysWorkflowsModal,
+  closeSysWorkflowsModal
 } from '../../../../../../actions'
 
 @connect(
@@ -38,7 +42,11 @@ import {
     ruleModalOpen: state.devices.ruleModalOpen,
     wfCategoryModalOpen: state.devices.wfCategoryModalOpen,
     wfActionModalOpen: state.devices.wfActionModalOpen,
-    wfDiagramModalOpen: state.devices.wfDiagramModalOpen
+    wfDiagramModalOpen: state.devices.wfDiagramModalOpen,
+
+    sysWorkflows: state.settings.workflows,
+    sysWorkflowsModalOpen: state.devices.sysWorkflowsModalOpen,
+    selectedSysWorkflows: state.devices.selectedSysWorkflows
   }), {
     openDeviceWorkflowModal,
     fetchDeviceWorkflows,
@@ -56,7 +64,11 @@ import {
     openDeviceWfDiagramModal,
 
     addWfCategory,
-    closeWfCategoryModal
+    closeWfCategoryModal,
+
+    fetchWorkflows,
+    openSysWorkflowsModal,
+    closeSysWorkflowsModal
   }
 )
 @withRouter

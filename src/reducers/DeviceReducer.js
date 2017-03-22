@@ -23,6 +23,9 @@ import {
   FETCH_DEVICE_APPS,
   FETCH_DEVICE_PROCESS,
 
+  OPEN_SYS_WORKFLOWS_MODAL,
+  CLOSE_SYS_WORKFLOWS_MODAL,
+
   OPEN_DEVICE_MONITOR_PICKER,
   CLOSE_DEVICE_MONITOR_PICKER,
 
@@ -244,6 +247,12 @@ export default function (state = INITIAL_STATE, action) {
       return { ...state, mapLines: state.mapLines.map(m => m.id === action.data.id ? action.data : m) }
     case REMOVE_GROUP_LINE:
       return { ...state, mapLines: state.mapLines.filter(m => m.id !== action.data.id) }
+
+    case OPEN_SYS_WORKFLOWS_MODAL:
+      return { ...state, sysWorkflowsModalOpen: true, selectedSysWorkflows: [] }
+
+    case CLOSE_SYS_WORKFLOWS_MODAL:
+      return { ...state, sysWorkflowsModalOpen: false }
   }
   return state
 }
