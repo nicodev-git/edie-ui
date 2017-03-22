@@ -1,13 +1,12 @@
 import React, { Component } from 'react'
-import Modal from 'react-bootstrap-modal'
-import {
-    Button
-} from 'react-bootstrap'
-
-import InfiniteTable from '../../../../../shared/InfiniteTable'
-import { showAlert } from '../../../../../shared/Alert'
+import { SmallModalTable } from '../../../../../modal'
+import getMuiTheme from 'material-ui/styles/getMuiTheme'
 
 export default class UsersModal extends Component {
+  static childContextTypes = {
+    muiTheme: React.PropTypes.object
+  }
+
   constructor (props) {
     super(props)
 
@@ -24,8 +23,10 @@ export default class UsersModal extends Component {
     }]
   }
 
-  onHide () {
-    this.onClickClose()
+  getChildContext () {
+    return {
+      muiTheme: getMuiTheme()
+    }
   }
 
   closeModal (data) {
@@ -40,48 +41,30 @@ export default class UsersModal extends Component {
   }
 
   onClickSave () {
-    let selected = this.refs.users.getSelected()
+    // TODO
+    /* let selected = this.refs.users.getSelected()
     if (!selected) return showAlert('Please select user.')
-
-    this.closeModal(selected)
+    this.closeModal(selected) */
+    this.closeModal()
   }
 
   render () {
+    let header = 'Users'
+    let url = '/user/getUsers?gid='
+    let params = {}
     return (
-      <Modal
+      <SmallModalTable
         show={this.state.open}
-        onHide={this.onHide.bind(this)}
-        aria-labelledby="ModalHeader"
-        className="bootstrap-dialog type-primary"
-      >
-
-        <div className="modal-header">
-          <h4 className="modal-title bootstrap-dialog-title">
-            Users
-          </h4>
-          <div className="bootstrap-dialog-close-button">
-            <button className="close" onClick={this.onClickClose.bind(this)}>×</button>
-          </div>
-        </div>
-
-        <div className="modal-body bootstrap-dialog-message">
-
-          <InfiniteTable
-            url="/user/getUsers?gid="
-            params={{}}
-            cells={this.cells}
-            rowMetadata={{'key': 'id'}}
-            selectable
-            bodyHeight={400}
-            ref="users"
-          />
-
-          <div className="text-right">
-            <Button className="btn-primary btn-sm" onClick={this.onClickSave.bind(this)}>OK</Button>
-            <Button className="btn-sm margin-sm-left" onClick={this.onClickClose.bind(this)}>Cancel</Button>
-          </div>
-        </div>
-      </Modal>
+        onHide={this.onClickClose.bind(this)}
+        params={params}
+        cells={this.cells}
+        header={header}
+        url={url}
+        row={{'key': 'id'}}
+        height={400}
+        save
+        onSave={this.onClickSave.bind(this)}
+      />
     )
   }
 
