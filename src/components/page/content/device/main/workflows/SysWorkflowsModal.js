@@ -1,6 +1,8 @@
 import React from 'react'
 import Modal from 'react-bootstrap-modal'
-import { findIndex } from 'lodash'
+import Checkbox from 'material-ui/Checkbox'
+import FlatButton from 'material-ui/FlatButton'
+import { findIndex, assign } from 'lodash'
 
 class SysWorkflowsModal extends React.Component {
   componentWillMount () {
@@ -19,12 +21,19 @@ class SysWorkflowsModal extends React.Component {
     return this.props.sysWorkflows.filter(m => m.origin === 'SYSTEM')
   }
 
-  onChangeCheck (workflow, e) {
-    if (e.target.checked) {
+  onChangeCheck (workflow, e, checked) {
+    if (checked) {
       this.props.selectSysWorkflow(workflow)
     } else {
       this.props.deselectSysWorkflow(workflow)
     }
+  }
+
+  onClickAdd () {
+    this.props.selectedSysWorkflows.forEach(workflow => {
+      const props = assign({}, workflow, {id: null, isGlobal: false, origin: 'USER'})
+      this.props.addDeviceWorkflow(props, this.props.device)
+    })
   }
 
   render () {
@@ -33,7 +42,7 @@ class SysWorkflowsModal extends React.Component {
         show
         onHide={this.onHide.bind(this)}
         aria-labelledby="ModalHeader"
-        className="bootstrap-dialog type-primary">
+        className="bootstrap-dialog type-primary modal-w-9">
         <div className="modal-header">
           <h4 className="modal-title bootstrap-dialog-title">
             System Workflows
@@ -49,6 +58,7 @@ class SysWorkflowsModal extends React.Component {
                 <tr>
                   <th>Name</th>
                   <th>Description</th>
+                  <th>Category</th>
                   <th>Version</th>
                 </tr>
               </thead>
@@ -56,14 +66,15 @@ class SysWorkflowsModal extends React.Component {
               {
                 this.getSysWorkflows().map(w =>
                   <tr key={w.id}>
-                    <td><label>
-                      <input
-                        type="checkbox"
+                    <td>
+                      <Checkbox
+                        label={w.name}
                         checked={findIndex(this.props.selectedSysWorkflows, {id: w.id}) >= 0}
-                        onChange={this.onChangeCheck.bind(this, w)}/>
-                      &nbsp;{w.name}
-                    </label></td>
+                        onCheck={this.onChangeCheck.bind(this, w)}
+                      />
+                    </td>
                     <td>{w.desc}</td>
+                    <td>{w.category}</td>
                     <td>{w.version}</td>
                   </tr>
                 )
@@ -72,8 +83,8 @@ class SysWorkflowsModal extends React.Component {
             </table>
           </div>
           <div className="text-right">
-            <a href="javascript:;" className="btn btn-primary btn-sm margin-sm-right" type="submit">Add</a>
-            <a href="javascript:;" className="btn btn-default btn-sm" onClick={this.onClickClose.bind(this)}>Cancel</a>
+            <FlatButton label="Cancel" primary onTouchTap={this.onClickClose.bind(this)}/>
+            <FlatButton label="Add" primary onTouchTap={this.onClickAdd.bind(this)}/>
           </div>
         </div>
       </Modal>
