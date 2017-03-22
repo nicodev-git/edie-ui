@@ -110,7 +110,7 @@ export default function (state = {}, action) {
       return {...state, mapDevices, selectedDevice}
     }
     case RELOAD_DEVICE:
-      return {...state, selectedDevice: action.data}
+      return {...state, selectedDevice: assign({}, state.selectedDevice, action.data)}
 
     case DELETE_MAP_DEVICE: {
       const mapDevices = difference(state.mapDevices, state.mapDevices.filter(u => u.id === action.data.id))
