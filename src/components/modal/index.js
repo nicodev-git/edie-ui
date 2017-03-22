@@ -6,6 +6,7 @@ import SimpleModalForm from './SimpleModalForm'
 import SmallModalTable from './SmallModalTable'
 import ParsersModalView from './ParsersModalView'
 import DiagramModalView from './DiagramModalView'
+import ParserTypeModalView from './ParserTypeModalView'
 
 export {
     ActivationModalView,
@@ -15,5 +16,6 @@ export {
     SimpleModalForm,
     SmallModalTable,
     ParsersModalView,
-    DiagramModalView
+    DiagramModalView,
+    ParserTypeModalView
 }
