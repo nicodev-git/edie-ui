@@ -30,10 +30,8 @@ class SysWorkflowsModal extends React.Component {
   }
 
   onClickAdd () {
-    this.props.selectedSysWorkflows.forEach(workflow => {
-      const props = assign({}, workflow, {id: null, isGlobal: false, origin: 'USER'})
-      this.props.addDeviceWorkflow(props, this.props.device)
-    })
+    const workflows = this.props.selectedSysWorkflows.map(workflow => assign({}, workflow, {id: null, isGlobal: false, origin: 'USER'}))
+    this.props.addDeviceWorkflows(workflows, this.props.device)
   }
 
   render () {
