@@ -1,21 +1,15 @@
-import React from 'react'
-import Modal from 'react-bootstrap-modal'
+import React, { Component } from 'react'
 import { assign } from 'lodash'
-import {reduxForm, Field} from 'redux-form'
+import {reduxForm} from 'redux-form'
 import { connect } from 'react-redux'
 import { closeWfActionModal } from 'actions'
+import { SimpleModalForm } from '../../../../modal'
+import { validate } from '../../../../modal/validation/NameValidation'
 
-class ActionModal extends React.Component {
-  onHide () {
-
-  }
-
+class ActionModal extends Component {
   handleFormSubmit (values) {
     const {editWfAction} = this.props
     let props = assign({}, editWfAction, values)
-
-    if (!props.name) return window.alert('Please type name.')
-
     this.props.onClose(props, editWfAction)
     this.onClickClose()
   }
@@ -26,59 +20,26 @@ class ActionModal extends React.Component {
 
   render () {
     const {handleSubmit} = this.props
+    let header = 'Action'
+    let options = [
+      { value: 'OPEN_INCIDENT', label: 'Open incident' }
+    ]
+    let content = [
+      {name: 'Name'},
+      {type: 'select', name: 'Type', options: options},
+      {name: 'Command'},
+      {name: 'Params'}
+    ]
+    let buttonText = 'Save'
     return (
-      <Modal
+      <SimpleModalForm
         show
-        onHide={this.onHide.bind(this)}
-        aria-labelledby="ModalHeader"
-        className="bootstrap-dialog type-primary">
-        <div className="modal-header">
-          <h4 className="modal-title bootstrap-dialog-title">
-            Action
-          </h4>
-          <div className="bootstrap-dialog-close-button">
-            <button className="close" onClick={this.onClickClose.bind(this)}>×</button>
-          </div>
-        </div>
-        <div className="modal-body bootstrap-dialog-message">
-          <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
-            <div className="row margin-md-bottom">
-              <label className="col-md-3">Name</label>
-              <div className="col-md-9">
-                <Field name="name" component="input" className="form-control"/>
-              </div>
-            </div>
-
-            <div className="row margin-md-bottom">
-              <label className="col-md-3">Type</label>
-              <div className="col-md-9">
-                <Field name="actionType" component="select" className="form-control">
-                  <option>OPEN_INCIDENT</option>
-                </Field>
-              </div>
-            </div>
-
-            <div className="row margin-md-bottom">
-              <label className="col-md-3">Command</label>
-              <div className="col-md-9">
-                <Field name="command" component="input" className="form-control"/>
-              </div>
-            </div>
-
-            <div className="row margin-md-bottom">
-              <label className="col-md-3">Params</label>
-              <div className="col-md-9">
-                <Field name="params" component="input" className="form-control"/>
-              </div>
-            </div>
-
-            <div className="text-right">
-              <button className="btn btn-primary btn-sm margin-sm-right" type="submit">OK</button>
-              <a href="javascript:;" className="btn btn-default btn-sm" onClick={this.onClickClose.bind(this)}>Cancel</a>
-            </div>
-          </form>
-        </div>
-      </Modal>
+        onHide={this.onClickClose.bind(this)}
+        onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
+        content={content}
+        header={header}
+        buttonText={buttonText}
+      />
     )
   }
 }
@@ -86,6 +47,7 @@ class ActionModal extends React.Component {
 export default connect(
   state => ({
     editWfAction: state.devices.editWfAction,
+    validate: validate,
     initialValues: assign({
       actionType: 'OPEN_INCIDENT'
     }, state.devices.editWfAction)
