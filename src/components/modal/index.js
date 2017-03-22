@@ -5,6 +5,7 @@ import CopyRuleModalView from './CopyRuleModalView'
 import SimpleModalForm from './SimpleModalForm'
 import SmallModalTable from './SmallModalTable'
 import ParsersModalView from './ParsersModalView'
+import DiagramModalView from './DiagramModalView'
 
 export {
     ActivationModalView,
@@ -13,5 +14,6 @@ export {
     CopyRuleModalView,
     SimpleModalForm,
     SmallModalTable,
-    ParsersModalView
+    ParsersModalView,
+    DiagramModalView
 }

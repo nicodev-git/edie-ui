@@ -1,12 +1,12 @@
-import React from 'react'
+import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
-import Modal from 'react-bootstrap-modal'
 import DiagramPanel from './DiagramPanel'
 import DiagramDragLayer from './DiagramDragLayer'
 import DiagramDragItem from './DiagramDragItem'
 import DiagramToolbar from './DiagramToolbar'
 import { workflowItems } from './DiagramItems'
 import { DiagramTypes } from 'shared/Global'
+import { DiagramModalView } from '../../../../../modal'
 
 import DiagramObjectModal from './DiagramObjectModal'
 
@@ -15,16 +15,13 @@ const itemStyle = {
   height: '36px'
 }
 
-class DiagramModal extends React.Component {
+class DiagramModal extends Component {
   constructor (props) {
     super(props)
     this.state = {
       text: '',
       keyword: ''
     }
-  }
-  onHide () {
-
   }
 
   onClickClose () {
@@ -176,38 +173,24 @@ class DiagramModal extends React.Component {
   }
 
   render () {
+    let header = 'Workflow'
+    let dragLayer = this.renderDragLayer()
+    let toolbar = this.renderToolbar()
+    let sidebar = this.renderSidebar()
+    let panel = this.renderPanel()
+    let objectModal = this.renderObjectModal()
     return (
-      <Modal
+      <DiagramModalView
         show
-        onHide={this.onHide.bind(this)}
-        aria-labelledby="ModalHeader"
-        className="bootstrap-dialog type-primary modal-md">
-        <div className="modal-header">
-          <h4 className="modal-title bootstrap-dialog-title">
-            Workflow
-          </h4>
-          <div className="bootstrap-dialog-close-button">
-            <button className="close" onClick={this.onClickClose.bind(this)}>×</button>
-          </div>
-        </div>
-        <div className="modal-body bootstrap-dialog-message p-none">
-          <div className="diagram">
-            {this.renderDragLayer()}
-            {this.renderToolbar()}
-            <div className="flex-horizontal">
-              {this.renderSidebar()}
-              {this.renderPanel()}
-            </div>
-          </div>
-
-          {this.renderObjectModal()}
-
-          <div className="text-right panel-footer">
-            <a href="javascript:;" className="btn btn-primary btn-sm margin-sm-right" onClick={this.onClickSave.bind(this)}>OK</a>
-            <a href="javascript:;" className="btn btn-default btn-sm" onClick={this.onClickClose.bind(this)}>Cancel</a>
-          </div>
-        </div>
-      </Modal>
+        onHide={this.onClickClose.bind(this)}
+        onSave={this.onClickSave.bind(this)}
+        header={header}
+        dragLayer={dragLayer}
+        toolbar={toolbar}
+        sidebar={sidebar}
+        panel={panel}
+        objectModal={objectModal}
+      />
     )
   }
 }
