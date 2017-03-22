@@ -1,13 +1,16 @@
-import React from 'react'
-import Modal from 'react-bootstrap-modal'
+import React, { Component } from 'react'
+import { SmallModalTable } from '../../../../modal'
+import getMuiTheme from 'material-ui/styles/getMuiTheme'
 
-import InfiniteTable from '../../../../shared/InfiniteTable'
-import { showAlert } from '../../../../shared/Alert'
+export default class UsersModal extends Component {
+  static childContextTypes = {
+    muiTheme: React.PropTypes.object
+  }
 
-export default class UsersModal extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
+      open: true
     }
 
     this.cells = [{
@@ -17,6 +20,12 @@ export default class UsersModal extends React.Component {
       'displayName': 'Full Name',
       'columnName': 'fullname'
     }]
+  }
+
+  getChildContext () {
+    return {
+      muiTheme: getMuiTheme()
+    }
   }
 
   componentWillMount () {
@@ -33,10 +42,10 @@ export default class UsersModal extends React.Component {
   }
 
   onClickOK () {
-    const user = this.refs.users.getSelected()
+    // TODO
+    /* const user = this.refs.users.getSelected()
     if (!user) return showAlert('Please select user.')
-
-    this.closeModal(user)
+    this.closeModal(user) */
   }
 
   onClickClose () {
@@ -44,38 +53,23 @@ export default class UsersModal extends React.Component {
   }
 
   render () {
+    let header = 'Users'
+    let params = {}
+    let data = this.props.users
     return (
-      <Modal show onHide={this.onHide.bind(this)}
-        aria-labelledby="ModalHeader" className="bootstrap-dialog type-primary">
-
-        <div className="modal-header">
-          <h4 className="modal-title bootstrap-dialog-title">
-            Users
-          </h4>
-          <div className="bootstrap-dialog-close-button">
-            <button className="close"
-              onClick={this.onClickClose.bind(this)}>×</button>
-          </div>
-        </div>
-
-        <div className="modal-body bootstrap-dialog-message" style={{minHeight: '400px'}}>
-          <InfiniteTable
-            cells={this.cells}
-            ref="users"
-            rowMetadata={{'key': 'id'}}
-            bodyHeight={400}
-            selectable
-
-            useExternal={false}
-            data={this.props.users}
-          />
-
-          <div className="text-right">
-            <a href="javascript:;" className="btn btn-primary margin-sm" onClick={this.onClickOK.bind(this)}>OK</a>
-            <a href="javascript:;" className="btn btn-default" onClick={this.onClickClose.bind(this)}>Cancel</a>
-          </div>
-        </div>
-      </Modal>
+      <SmallModalTable
+        show={this.state.open}
+        onHide={this.onClickClose.bind(this)}
+        params={params}
+        cells={this.cells}
+        header={header}
+        row={{'key': 'id'}}
+        height={400}
+        save
+        onSave={this.onClickOK.bind(this)}
+        data={data}
+        useExternal={false}
+      />
     )
   }
 
