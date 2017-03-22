@@ -39,7 +39,7 @@ class CredentialModal extends Component { // eslint-disable-line react/no-multi-
     let buttonText = 'Save'
     return (
       <SimpleModalForm
-        show={this.props.open}
+        show
         onHide={this.closeModal.bind(this)}
         onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
         content={content}
@@ -49,6 +49,7 @@ class CredentialModal extends Component { // eslint-disable-line react/no-multi-
     )
   }
 }
+
 export default connect(
   state => ({
     initialValues: state.settings.editCredentials,
