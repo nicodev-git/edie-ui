@@ -9,6 +9,7 @@ import DiagramModalView from './DiagramModalView'
 import ParserTypeModalView from './ParserTypeModalView'
 import ImageUploaderModalView from './ImageUploaderModalView'
 import MonitorTplModalView from './MonitorTplModalView'
+import ProfileModalView from './ProfileModalView'
 
 export {
     ActivationModalView,
@@ -21,5 +22,6 @@ export {
     DiagramModalView,
     ParserTypeModalView,
     ImageUploaderModalView,
-    MonitorTplModalView
+    MonitorTplModalView,
+    ProfileModalView
 }

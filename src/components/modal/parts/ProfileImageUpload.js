@@ -1,11 +1,10 @@
 import React from 'react'
-import { headerStyle } from '../../../style/materialStyles'
 
 const ProfileImageUpload = ({imgSrc, onChangeImage}) => (
   <div className="row margin-md-bottom text-center">
     <div className="fileinput-button">
       <img className="img-circle profile-image" src={imgSrc} width="128" height="128"/>
-      <input type="file" ref="file" onChange={onChangeImage}/>
+      <input type="file" onChange={onChangeImage}/>
     </div>
   </div>
 )

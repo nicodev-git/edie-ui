@@ -1,7 +1,7 @@
 import React from 'react'
 import Checkbox from 'material-ui/Checkbox'
 
-const Checkbox = ({label, disabled, defaultChecked}) => (
+const CheckboxItem = ({label, disabled, defaultChecked}) => (
   <Checkbox
     label={label}
     disabled={disabled}
@@ -9,4 +9,4 @@ const Checkbox = ({label, disabled, defaultChecked}) => (
   />
 )
 
-export default Checkbox
+export default CheckboxItem
