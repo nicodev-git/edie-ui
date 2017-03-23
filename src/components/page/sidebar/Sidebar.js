@@ -2,6 +2,7 @@ import React from 'react'
 import $ from 'jquery'
 import { isGroup } from 'shared/Global'
 import SidebarView from './SidebarView'
+import ProfileModal from './ProfileModal'
 
 export default class Sidebar extends React.Component {
   constructor (props) {
@@ -72,18 +73,41 @@ export default class Sidebar extends React.Component {
 
   }
 
+  onClickProfile () {
+    this.props.openProfileModal()
+  }
+
+  onClickMessages () {
+    console.log('messages clicked')
+  }
+
+  onClickSearch (value) {
+    console.log('making a request... ', value)
+  }
+
+  renderProfileModal () {
+    if (!this.props.profileModalVisible) return
+    return (
+      <ProfileModal {...this.props} />
+    )
+  }
+
   render () {
     const device = this.props.device
     const group = isGroup(device)
     return (
       <SidebarView
+        {...this.props}
+
         onToggle={this.onClickToggleSidebar.bind(this)}
         onMainMenu={this.onClickMainMenu.bind(this)}
         onDeviceMenu={this.onClickDeviceMenu.bind(this)}
         onSearch={this.onSearch.bind(this)}
         searchVisible={this.state.searchVisible}
         group={group}
-        {...this.props}
+        profile={this.renderProfileModal()}
+        onClickProfile={this.onClickProfile.bind(this)}
+        onClickMessages={this.onClickMessages.bind(this)}
       />
     )
   }

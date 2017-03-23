@@ -1,22 +1,7 @@
 import React from 'react'
-import ProfileModal from './ProfileModal'
 import TopbarComponent from './TopbarComponent'
 
 export default class Topbar extends React.Component {
-  constructor (props) {
-    super(props)
-    this.state = {
-      profileModalVisible: false
-    }
-  }
-
-  renderProfileModal () {
-    if (!this.props.profileModalVisible) return
-
-    return (
-      <ProfileModal {...this.props} />
-    )
-  }
 
   onClickProfile () {
     this.props.openProfileModal()
@@ -35,7 +20,6 @@ export default class Topbar extends React.Component {
     return (
       <TopbarComponent
         user={user}
-        profile={this.renderProfileModal()}
         onSearch={this.onClickSearch.bind(this)}
         paused={this.context.paused}
         onClickProfile={this.onClickProfile.bind(this)}

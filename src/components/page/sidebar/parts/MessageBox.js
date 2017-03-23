@@ -20,7 +20,7 @@ const badgeStyle = {
 }
 
 const rootStyle = {
-  padding: '8px 8px 8px 8px',
+  padding: '6px',
   height: 50
 }
 

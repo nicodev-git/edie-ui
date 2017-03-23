@@ -6,6 +6,9 @@ import MenuIcon from 'material-ui/svg-icons/navigation/menu'
 import {badgeStyle, badgeRootStyle, iconStyle, iconButtonStyle} from '../../../style/materialStyles'
 
 import SearchBarContainer from './parts/SearchBarContainer'
+import MessageBox from './parts/MessageBox'
+import ProfileMenu from './parts/ProfileMenu'
+
 class SidebarView extends Component {
   constructor (props) {
     super(props)
@@ -39,7 +42,8 @@ class SidebarView extends Component {
 
   render () {
     const {onToggle, contentType, mainMenu, deviceMenu, onMainMenu, onDeviceMenu,
-    device, pageId, pageType, searchVisible, group, onSearch} = this.props
+    device, pageId, pageType, searchVisible, group, onSearch,
+    profile, user, onClickProfile, onClickMessages, onSignOut} = this.props
 
     return (
       <aside className="sidebar sidebar-default sidebar-custom">
@@ -73,7 +77,12 @@ class SidebarView extends Component {
                 }
               </li>
             )}
-
+            <MessageBox />
+            <ProfileMenu
+              user={user}
+              onClickProfile={onClickProfile}
+              onClickMessages={onClickMessages}
+              onSignOut={onSignOut}/>
           </ul>
 
           <ul className="nav nav-pills nav-stacked"
@@ -100,6 +109,7 @@ class SidebarView extends Component {
           <span className="graph-title">Incidents By IP</span>
           <div id="maingraph2" style={{background: 'white'}} />
         </div>
+        {profile}
       </aside>
     )
   }

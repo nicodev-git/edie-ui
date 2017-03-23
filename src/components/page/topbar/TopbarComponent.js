@@ -1,9 +1,8 @@
 import React from 'react'
 import NewsLine from './NewsLine'
-import { TopHeader, MessageBox, ProfileMenu } from './parts'
+import { TopHeader } from './parts'
 
-const TopbarComponent = ({user, profile, paused, onSearch, onSignOut,
-  onClickProfile, onClickMessages}) => (
+const TopbarComponent = ({paused, onSearch}) => (
   <nav className="navbar navbar-default navbar-static-top no-margin"
     role="navigation" style={{zIndex: 21}}>
     <TopHeader name="Incident Manager" />
@@ -23,15 +22,7 @@ const TopbarComponent = ({user, profile, paused, onSearch, onSignOut,
           src="/images/ajax-loader.gif"
           style={{float: 'left', width: '18px', display: 'none', opacity: 0.5}} />
       </li>
-      <MessageBox />
-      <ProfileMenu
-        user={user}
-        onClickProfile={onClickProfile}
-        onClickMessages={onClickMessages}
-        onSignOut={onSignOut}
-      />
     </ul>
-    {profile}
   </nav>
 )
 
