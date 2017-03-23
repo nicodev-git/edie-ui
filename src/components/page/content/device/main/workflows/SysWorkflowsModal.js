@@ -41,7 +41,6 @@ class SysWorkflowsModal extends React.Component {
         {...this.props}
         header="System Workflows"
         sysWorkflows={this.getSysWorkflows()}
-        onHide={() => {}}
         onChangeCategory={this.onChangeCategory.bind(this)}
         onChangeCheck={this.onChangeCheck.bind(this)}
         onClickClose={this.onClickClose.bind(this)}

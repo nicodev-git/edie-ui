@@ -9,7 +9,7 @@ import { Header, TwoButtonsBlockCustom } from './parts'
 
 export default class SysWorkflowsModalView extends React.Component {
   render () {
-    const {header, onHide, onChangeCategory, onChangeCheck,
+    const {header, onChangeCategory, onChangeCheck,
       onClickClose, onClickAdd,
       sysWorkflows,
       selectedSysWorkflowCategory, workflowCategories,
@@ -17,7 +17,7 @@ export default class SysWorkflowsModalView extends React.Component {
     return (
       <Modal
         show
-        onHide={onHide}
+        onHide={onClickClose}
         aria-labelledby="ModalHeader"
         className="bootstrap-dialog type-primary modal-w-9">
         <Header name={header} />
