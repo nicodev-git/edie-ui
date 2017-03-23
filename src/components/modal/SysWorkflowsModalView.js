@@ -6,6 +6,8 @@ import MenuItem from 'material-ui/MenuItem'
 import { findIndex } from 'lodash'
 
 import { Header, TwoButtonsBlockCustom } from './parts'
+import { errorStyle, underlineFocusStyle, inputStyle,
+  selectedItemStyle } from 'style/materialStyles'
 
 export default class SysWorkflowsModalView extends React.Component {
   render () {
@@ -24,6 +26,11 @@ export default class SysWorkflowsModalView extends React.Component {
         <div className="modal-body bootstrap-dialog-message">
           <div className="padding-md-left">
             <SelectField
+              errorStyle={errorStyle}
+              underlineStyle={underlineFocusStyle}
+              selectedMenuItemStyle={selectedItemStyle}
+              menuItemStyle={inputStyle}
+              labelStyle={inputStyle}
               value={selectedSysWorkflowCategory || ''}
               onChange={onChangeCategory}
             >
