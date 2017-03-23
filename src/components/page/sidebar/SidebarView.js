@@ -6,7 +6,6 @@ import MenuIcon from 'material-ui/svg-icons/navigation/menu'
 import {badgeStyle, badgeRootStyle, iconStyle, iconButtonStyle} from '../../../style/materialStyles'
 
 import SearchBarContainer from './parts/SearchBarContainer'
-
 class SidebarView extends Component {
   constructor (props) {
     super(props)
