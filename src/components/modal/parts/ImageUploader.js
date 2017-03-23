@@ -5,7 +5,7 @@ import { buttonStyle, buttonTextStyle } from '../../../style/materialStyles'
 const ImageUploader = ({imgUrl, onChange}) => (
   <div className="image-upload-container">
     <img className="file-preview icon-black" src={imgUrl}/>
-    <FlatButton label="Upload" onClick={onChange} style={buttonStyle} labelStyle={buttonTextStyle}/>
+    <FlatButton label="Upload Image" onClick={onChange} style={buttonStyle} labelStyle={buttonTextStyle}/>
   </div>
 )
 

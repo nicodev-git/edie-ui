@@ -28,6 +28,13 @@ const SimpleModalForm = ({show, onHide, onSubmit, header, subheader, buttonText,
                   component={FormSelect}
                   label={elem.name}
                   options={elem.options}/>)
+              case 'password':
+                return (<Field
+                  key={elem.name.replace(/\s+/g, '')}
+                  name={elem.name.toLowerCase().replace(/\s+/g, '')}
+                  type="password"
+                  component={FormInput}
+                  label={elem.name}/>)
               default:
                 return (<Field
                   key={elem.name.replace(/\s+/g, '')}
