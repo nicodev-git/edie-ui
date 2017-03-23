@@ -1,14 +1,16 @@
-import React from 'react'
-import Modal from 'react-bootstrap-modal'
-import InfiniteTable from '../../../../shared/InfiniteTable'
+import React, { Component } from 'react'
 import { showAlert, showConfirm } from '../../../../shared/Alert'
 import { appendComponent, removeComponent } from '../../../../../util/Component'
-
 import SegmentModal from './SegmentModal'
-
 import { ROOT_URL } from '../../../../../actions/config'
+import { SegmentListModalView } from '../../../../modal'
+import getMuiTheme from 'material-ui/styles/getMuiTheme'
 
-export default class SegmentListModal extends React.Component {
+export default class SegmentListModal extends Component {
+  static childContextTypes = {
+    muiTheme: React.PropTypes.object
+  }
+
   constructor (props) {
     super(props)
     this.state = {
@@ -32,20 +34,22 @@ export default class SegmentListModal extends React.Component {
       'displayName': 'Country',
       'columnName': 'country'
     }]
+    this.closeModal = this.closeModal.bind(this)
+    this.onClickAdd = this.onClickAdd.bind(this)
+    this.onClickAdd = this.onClickAdd.bind(this)
+    this.onClickAdd = this.onClickAdd.bind(this)
   }
 
-  onHide () {
-    this.onClickClose()
+  getChildContext () {
+    return {
+      muiTheme: getMuiTheme()
+    }
   }
 
   closeModal (data) {
     this.setState({ open: false }, () => {
       this.props.onClose && this.props.onClose(this, data)
     })
-  }
-
-  onClickClose () {
-    this.closeModal()
   }
 
   onClickAdd () {
@@ -90,47 +94,14 @@ export default class SegmentListModal extends React.Component {
 
   render () {
     return (
-      <Modal
-        show={this.state.open}
-        onHide={this.onHide.bind(this)}
-        aria-labelledby="ModalHeader"
-        className="bootstrap-dialog type-primary"
-      >
-
-        <div className="modal-header">
-          <h4 className="modal-title bootstrap-dialog-title">
-            Segments
-          </h4>
-          <div className="bootstrap-dialog-close-button">
-            <button className="close"
-              onClick={this.onClickClose.bind(this)}>×</button>
-          </div>
-        </div>
-
-        <div className="modal-body bootstrap-dialog-message p-none">
-          <div className="panel panel-default">
-            <div className="panel-heading">
-              <a href="javascript:;" onClick={this.onClickAdd.bind(this)} className="margin-sm-right">
-                <i className="fa fa-lg fa-plus-square" /></a>
-              <a href="javascript:;" onClick={this.onClickEdit.bind(this)} className="margin-sm-right">
-                <i className="fa fa-lg fa-edit" /></a>
-              <a href="javascript:;" onClick={this.onClickDelete.bind(this)} className="margin-sm-right">
-                <i className="fa fa-lg fa-trash-o" /></a>
-            </div>
-            <div className="panel-body">
-              <InfiniteTable
-                url="/admin/getSegments"
-                params={{}}
-                cells={this.cells}
-                rowMetadata={{'key': 'id'}}
-                selectable
-                bodyHeight={400}
-                ref="segments"
-              />
-            </div>
-          </div>
-        </div>
-      </Modal>
+      <SegmentListModalView
+        show
+        onHide={this.closeModal}
+        cells={this.cells}
+        onAdd={this.onClickAdd}
+        onEdit={this.onClickEdit}
+        onDelete={this.onClickDelete}
+      />
     )
   }
 }

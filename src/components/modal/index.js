@@ -12,6 +12,8 @@ import MonitorTplModalView from './MonitorTplModalView'
 import ProfileModalView from './ProfileModalView'
 import DeviceSearchModalView from './DeviceSearchModalView'
 import SysWorkflowsModalView from './SysWorkflowsModalView'
+import SegmentListModalView from './SegmentListModalView'
+
 export {
     ActivationModalView,
     BigIncidentsView,
@@ -26,5 +28,6 @@ export {
     MonitorTplModalView,
     ProfileModalView,
     DeviceSearchModalView,
-    SysWorkflowsModalView
+    SysWorkflowsModalView,
+    SegmentListModalView
 }
