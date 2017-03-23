@@ -16,6 +16,9 @@ class ProfileModal extends React.Component { // eslint-disable-line react/no-mul
       imgSrc: '',
       maps: []
     }
+    this.closeModal = this.closeModal.bind(this)
+    this.handleFormSubmit = this.handleFormSubmit.bind(this)
+    this.onChangeImage = this.onChangeImage.bind(this)
   }
 
   componentWillMount () {
@@ -95,16 +98,8 @@ class ProfileModal extends React.Component { // eslint-disable-line react/no-mul
     )
   }
 
-  onHide () {
-    this.onClickClose()
-  }
-
   closeModal (data) {
     this.props.closeProfileModal()
-  }
-
-  onClickClose () {
-    this.closeModal()
   }
 
   handleFormSubmit (values) {
@@ -171,7 +166,16 @@ class ProfileModal extends React.Component { // eslint-disable-line react/no-mul
   }
 
   render () {
+    let { user, handleSubmit } = this.props
+    let imgSrc = this.state.imgSrc || (`${extImageBaseUrl}${user.image || 'unknown.png'}`)
     return (
+      <ProfileModalView
+        show
+        onHide={this.closeModal}
+        imgSrc={imgSrc}
+        onSubmit={handleSubmit(this.handleFormSubmit)}
+        onChangeImage={this.onChangeImage}
+      />
       <Modal show onHide={this.onHide.bind(this)}
         aria-labelledby="ModalHeader" className="bootstrap-dialog type-primary">
 
