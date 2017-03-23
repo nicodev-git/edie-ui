@@ -1,15 +1,11 @@
 import React from 'react'
-import Modal from 'react-bootstrap-modal'
-import {
-  Button
-} from 'react-bootstrap'
 import { connect } from 'react-redux'
-import {
-  assign
-} from 'lodash'
-import { reduxForm, Field, change } from 'redux-form'
+import { assign } from 'lodash'
+import { reduxForm, change } from 'redux-form'
 import axios from 'axios'
 import { ROOT_URL } from '../../../../../actions/config'
+import { SimpleModalForm } from '../../../../modal'
+import { validate } from '../../../../modal/validation/NameValidation'
 
 class UserModal extends React.Component {
   constructor (props) {
@@ -19,8 +15,10 @@ class UserModal extends React.Component {
       defaultMaps: [],
       roles: []
     }
-
-    this.renderInput = this.renderInput.bind(this)
+    this.closeModal = this.closeModal.bind(this)
+    this.handleFormSubmit = this.handleFormSubmit.bind(this)
+    this.renderMapOptions = this.renderMapOptions.bind(this)
+    this.renderRoleOptions = this.renderRoleOptions.bind(this)
   }
 
   loadDefaultMaps () {
@@ -41,89 +39,13 @@ class UserModal extends React.Component {
     })
   }
 
-  renderInput (field) {
-    return (
-      <div className="row margin-md-bottom">
-        <label className="control-label col-md-3 text-right">{field.label}</label>
-        <div className="col-md-6">
-            <input {...field.input} type={field.type} className="form-control"/>
-        </div>
-
-        {field.name === 'pincode'
-          ? <div className="col-md-3 margin-xs-top">
-              <a href="javascript:;" className="btn btn-default btn-sm" onClick={this.onClickPin.bind(this)}>Generate</a>
-            </div>
-          : null
-        }
-      </div>
-    )
-  }
-
-  renderContent () {
-    const { handleSubmit } = this.props
-
-    return (
-      <div>
-        <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
-          <Field name="username" component={this.renderInput} type="text" label="Username"/>
-          <Field name="fullname" component={this.renderInput} type="text" label="Full Name"/>
-          <Field name="password" component={this.renderInput} type="password" label="Password"/>
-          <Field name="email" component={this.renderInput} type="text" label="Email"/>
-          <Field name="phone" component={this.renderInput} type="text" label="Phone"/>
-          <Field name="pincode" component={this.renderInput} type="text" label="Pin Code"/>
-
-          <div className="row margin-md-bottom">
-            <label className="control-label col-md-3 text-right">Default Map</label>
-            <div className="col-md-6">
-              <select className="form-control" ref="defaultmap">
-              {
-                this.state.defaultMaps.map(item =>
-                  <option key={item.id} value={item.id}>{item.mapname}</option>
-                )
-              }
-              </select>
-            </div>
-          </div>
-
-          <div className="row margin-md-bottom">
-              <label className="control-label col-md-3 text-right">Role</label>
-              <div className="col-md-6">
-                <select className="form-control" ref="role">
-                {
-                  this.state.roles.map(item =>
-                    <option key={item} value={item}>{item}</option>
-                  )
-                }
-                </select>
-              </div>
-          </div>
-
-          <div className="text-center">
-            <Button className="btn-primary btn-sm" type="submit">Save</Button>
-            <Button className="btn-sm margin-sm-left" onClick={this.onClickClose.bind(this)}>Cancel</Button>
-          </div>
-        </form>
-      </div>
-    )
-  }
-
-  onHide () {
-    this.onClickClose()
-  }
-
   closeModal () {
     this.props.closeSettingUserModal()
   }
 
-  onClickClose () {
-    this.closeModal()
-  }
-
   handleFormSubmit (values) {
     const { editUser } = this.props
-
     let user = assign({}, editUser, values)
-
     if (editUser) {
       this.props.updateSettingUser(user)
     } else {
@@ -137,34 +59,50 @@ class UserModal extends React.Component {
     })
   }
 
+  renderMapOptions () {
+    let maps = this.state.defaultMaps
+    let options = maps.map(item => ({value: item.id, label: item.mapname}))
+    return options
+  }
+
+  renderRoleOptions () {
+    let roles = this.state.roles
+    let options = roles.map(item => ({value: item, label: item}))
+    return options
+  }
+
   render () {
+    const { handleSubmit } = this.props
+    let header = 'User Detail'
+    let buttonText = 'Save'
+    let mapOptions = this.renderMapOptions()
+    let roleOptions = this.renderRoleOptions()
+    let content = [
+      {name: 'Name'},
+      {name: 'Full Name'},
+      {type: 'password', name: 'Password'},
+      {name: 'Email'},
+      {name: 'Phone'},
+      {name: 'Pin Code'},
+      {type: 'select', name: 'Default Map', options: mapOptions},
+      {type: 'select', name: 'Role', options: roleOptions}
+    ]
     return (
-      <Modal
+      <SimpleModalForm
         show={this.state.open}
-        onHide={this.onHide.bind(this)}
-        aria-labelledby="ModalHeader"
-        className="bootstrap-dialog type-primary"
-      >
-
-        <div className="modal-header">
-          <h4 className="modal-title bootstrap-dialog-title">
-            User Detail
-          </h4>
-          <div className="bootstrap-dialog-close-button">
-            <button className="close" onClick={this.onClickClose.bind(this)}>×</button>
-          </div>
-        </div>
-
-        <div className="modal-body bootstrap-dialog-message">
-          {this.renderContent()}
-        </div>
-      </Modal>
+        onHide={this.closeModal}
+        onSubmit={handleSubmit(this.handleFormSubmit)}
+        content={content}
+        header={header}
+        buttonText={buttonText}
+      />
     )
   }
 }
 
 export default connect(
   state => ({
-    initialValues: state.settings.editUser
+    initialValues: state.settings.editUser,
+    validate: validate
   })
 )(reduxForm({form: 'userEditForm'})(UserModal))
