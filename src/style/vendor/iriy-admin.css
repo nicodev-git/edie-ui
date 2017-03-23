@@ -2710,7 +2710,6 @@ h1.panel-title, h2.panel-title, h3.panel-title {
   position: absolute;
   top: 0;
   min-height: 100%;
-  padding-top: 55px;
   width: 240px; }
   .sidebar .nav a {
     text-decoration: none; }

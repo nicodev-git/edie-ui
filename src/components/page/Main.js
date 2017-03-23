@@ -3,7 +3,6 @@ import { findIndex, startsWith } from 'lodash'
 import ReactTooltip from 'react-tooltip'
 import Snackbar from 'material-ui/Snackbar'
 
-import TopbarContainer from '../../containers/page/topbar/TopbarContainer'
 import SidebarContainer from '../../containers/page/sidebar/SidebarContainer'
 import DashboardContainer from '../../containers/page/content/dashboard/DashboardContainer'
 import ActivationModal from 'components/auth/ActivationModal'
@@ -146,7 +145,6 @@ class Main extends React.Component {
 
     return (
       <div style={style}>
-        <TopbarContainer />
         {this.renderSidebar()}
         <div className="page-content flex-vertical" style={{overflow: 'auto'}} ref="content">
           {this.renderDashboard()}
