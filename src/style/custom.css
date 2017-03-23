@@ -746,3 +746,9 @@ table.table tbody tr.selected {
   justify-content: flex-start;
   align-items: center;
 }
+
+.search-modal-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
