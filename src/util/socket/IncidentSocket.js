@@ -8,7 +8,8 @@ export default class IncidentSocket {
   constructor (props) {
     this.ws = null
     this.reconnectOnClose = false
-    this.connected = false
+    this.connecting = false
+    this.needDestroy = false
     this.listeners = props.listeners
     this.id = props.id || ''
   }
@@ -26,7 +27,14 @@ export default class IncidentSocket {
 
       me.ws = new window.WebSocket(`ws://${domain}/frontendupdates`)
       me.stompClient = Stomp.over(me.ws)
+      me.connecting = true
       me.stompClient.connect('', '', (frame) => {
+        me.connecting = false
+
+        if (me.needDestroy) {
+          setTimeout(() => me.close(), 1)
+          return
+        }
         keys(me.listeners).forEach(path => {
           me.stompClient.subscribe(`/frontendupdates/${path}`, me.onMessage.bind(me, me.listeners[path]))
         })
@@ -72,7 +80,8 @@ export default class IncidentSocket {
 
   close () {
     const me = this
-    if (me.stompClient) {
+    me.needDestroy = true
+    if (me.stompClient && !me.connecting) {
       me.stompClient.debug = window.console.log
       me.stompClient.disconnect()
     }

@@ -7,6 +7,8 @@ import { connect } from 'react-redux'
 import $ from 'jquery'
 import { showAlert } from '../../../components/shared/Alert'
 
+import { extImageBaseUrl } from 'shared/Global'
+
 class ProfileModal extends React.Component { // eslint-disable-line react/no-multi-comp
   constructor (props) {
     super(props)
@@ -40,7 +42,7 @@ class ProfileModal extends React.Component { // eslint-disable-line react/no-mul
 
         <div className="row margin-md-bottom text-center">
           <div className="fileinput-button">
-            <img className="img-circle profile-image" src={this.state.imgSrc || (`/externalpictures?name=${user.image}`)} width="128" height="128"/>
+            <img className="img-circle profile-image" src={this.state.imgSrc || (`${extImageBaseUrl}${user.image || 'unknown.png'}`)} width="128" height="128"/>
             <input type="file" ref="file" onChange={this.onChangeImage.bind(this)}/>
           </div>
 
