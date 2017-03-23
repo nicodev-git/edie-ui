@@ -10,6 +10,7 @@ import ParserTypeModalView from './ParserTypeModalView'
 import ImageUploaderModalView from './ImageUploaderModalView'
 import MonitorTplModalView from './MonitorTplModalView'
 import ProfileModalView from './ProfileModalView'
+import DeviceSearchModalView from './DeviceSearchModalView'
 
 export {
     ActivationModalView,
@@ -23,5 +24,6 @@ export {
     ParserTypeModalView,
     ImageUploaderModalView,
     MonitorTplModalView,
-    ProfileModalView
+    ProfileModalView,
+    DeviceSearchModalView
 }
