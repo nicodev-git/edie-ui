@@ -740,3 +740,9 @@ table.table tbody tr.selected {
 .images-list {
   background-color: #000000;
 }
+
+.image-upload-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}

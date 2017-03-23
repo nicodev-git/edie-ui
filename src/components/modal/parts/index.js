@@ -14,6 +14,7 @@ import SubHeader from './SubHeader'
 import CloseButton from './CloseButton'
 import TwoButtonsBlock from './TwoButtonsBlock'
 import UploadFile from './UploadFile'
+import ImageUploader from './ImageUploader'
 
 export {
     Header,
@@ -31,5 +32,6 @@ export {
     SubHeader,
     CloseButton,
     TwoButtonsBlock,
-    UploadFile
+    UploadFile,
+    ImageUploader
 }

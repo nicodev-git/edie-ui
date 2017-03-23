@@ -1,33 +1,22 @@
 import React from 'react'
-import Modal from 'react-bootstrap-modal'
-import { reduxForm, Field } from 'redux-form'
+import { reduxForm } from 'redux-form'
 import { assign } from 'lodash'
 import { connect } from 'react-redux'
-
+import { MonitorTplModalView } from '../../../../modal'
 import { getCustomImageUrl, extImageBaseUrl } from 'shared/Global'
-
-const Input = ({ input, label, type, meta: { touched, error } }) => (
-  <fieldset className="form-group">
-    <label className="col-md-3 margin-sm-top">{label}</label>
-    <div className="col-md-9">
-      <input {...input} className="form-control" type={type}/>
-      {touched && error && <span className="error">{error}</span>}
-    </div>
-  </fieldset>
-)
 
 class MonitorTplModal extends React.Component { // eslint-disable-line react/no-multi-comp
   constructor (props) {
     super(props)
-    this.state = { }
+    this.state = {}
+    this.getImageUrl = this.getImageUrl.bind(this)
+    this.onClickChangeImage = this.onClickChangeImage.bind(this)
   }
 
   handleFormSubmit (formProps) {
     const {monitorTpl, selectedTplImage} = this.props
     const tpl = assign({}, (monitorTpl || {}), formProps)
-
     if (selectedTplImage) tpl.image = selectedTplImage.uuid
-
     if (monitorTpl) {
       this.props.updateMonitorTemplate(tpl)
     } else {
@@ -35,26 +24,15 @@ class MonitorTplModal extends React.Component { // eslint-disable-line react/no-
     }
   }
 
-  renderImageUploader () {
+  getImageUrl () {
     const {selectedTplImage, monitorTpl} = this.props
     let imgUrl = ''
-    if (selectedTplImage) imgUrl = getCustomImageUrl(selectedTplImage)
-    else if (monitorTpl && monitorTpl.image) imgUrl = extImageBaseUrl + monitorTpl.image
-    return (
-      <fieldset className="form-group">
-        <label className="col-md-3 margin-sm-top">Image:</label>
-        <div className="col-md-9">
-          <img className="file-preview icon-black" src={imgUrl}/>
-          <a href="javascript:;" className="margin-sm-left" style={{position: 'relative', cursor: 'pointer'}} onClick={this.onClickChangeImage.bind(this)}>
-            Change
-          </a>
-        </div>
-      </fieldset>
-    )
-  }
-
-  onHide () {
-
+    if (selectedTplImage) {
+      imgUrl = getCustomImageUrl(selectedTplImage)
+    } else if (monitorTpl && monitorTpl.image) {
+      imgUrl = extImageBaseUrl + monitorTpl.image
+    }
+    return imgUrl
   }
 
   onClickClose () {
@@ -67,38 +45,17 @@ class MonitorTplModal extends React.Component { // eslint-disable-line react/no-
 
   render () {
     const { handleSubmit } = this.props
-
+    let header = 'Monitor Template'
+    let imgUrl = this.getImageUrl()
     return (
-      <Modal
-        show onHide={this.onHide.bind(this)}
-        aria-labelledby="ModalHeader"
-        className="bootstrap-dialog type-primary"
-      >
-        <div className="modal-header">
-          <h4 className="modal-title bootstrap-dialog-title">
-            Monitor Template
-          </h4>
-          <div className="bootstrap-dialog-close-button">
-            <button className="close" onClick={this.onClickClose.bind(this)}>×</button>
-          </div>
-        </div>
-        <div className="modal-body bootstrap-dialog-message">
-
-          <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
-
-            <Field label="Name:" name="name" component={Input} type="text"/>
-            <Field label="Type:" name="monitortype" component={Input} type="text"/>
-            {this.renderImageUploader()}
-
-            <div className="text-right p-none">
-              <button action="submit" className="btn btn-primary btn-sm margin-sm-right">Save</button>
-              <a href="javascript:;" className="btn btn-default btn-sm"
-                onClick={this.onClickClose.bind(this)}>Close</a>
-            </div>
-          </form>
-
-        </div>
-      </Modal>
+      <MonitorTplModalView
+        show
+        header={header}
+        onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
+        onHide={this.onClickClose.bind(this)}
+        imgUrl={imgUrl}
+        onChange={this.onClickChangeImage}
+      />
     )
   }
 }
