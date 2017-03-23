@@ -11,7 +11,7 @@ import ImageUploaderModalView from './ImageUploaderModalView'
 import MonitorTplModalView from './MonitorTplModalView'
 import ProfileModalView from './ProfileModalView'
 import DeviceSearchModalView from './DeviceSearchModalView'
-
+import SysWorkflowsModalView from './SysWorkflowsModalView'
 export {
     ActivationModalView,
     BigIncidentsView,
@@ -25,5 +25,6 @@ export {
     ImageUploaderModalView,
     MonitorTplModalView,
     ProfileModalView,
-    DeviceSearchModalView
+    DeviceSearchModalView,
+    SysWorkflowsModalView
 }

@@ -1,12 +1,7 @@
 import React from 'react'
-import FlatButton from 'material-ui/FlatButton'
-import { buttonStyle, buttonTextStyle } from '../../../style/materialStyles'
+import TwoButtonsBlockCustom from './TwoButtonsBlockCustom'
 
 const TwoButtonsBlock = ({onSave, onClose}) => (
-  <div className="form-buttons close-block">
-    <FlatButton label="Save" onClick={onSave} style={buttonStyle} labelStyle={buttonTextStyle}/>
-    <FlatButton label="Close" onClick={onClose} style={buttonStyle} labelStyle={buttonTextStyle}/>
-  </div>
+  <TwoButtonsBlockCustom action1={onSave} action2={onClose} name1="Save" name2="Close"/>
 )
-
 export default TwoButtonsBlock

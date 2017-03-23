@@ -17,6 +17,7 @@ import UploadFile from './UploadFile'
 import ImageUploader from './ImageUploader'
 import ProfileImageUpload from './ProfileImageUpload'
 import CheckboxItem from './CheckboxItem'
+import TwoButtonsBlockCustom from './TwoButtonsBlockCustom'
 
 export {
     Header,
@@ -34,6 +35,7 @@ export {
     SubHeader,
     CloseButton,
     TwoButtonsBlock,
+    TwoButtonsBlockCustom,
     UploadFile,
     ImageUploader,
     ProfileImageUpload,
