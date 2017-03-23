@@ -19,6 +19,8 @@ class ProfileModal extends React.Component { // eslint-disable-line react/no-mul
     this.closeModal = this.closeModal.bind(this)
     this.handleFormSubmit = this.handleFormSubmit.bind(this)
     this.onChangeImage = this.onChangeImage.bind(this)
+    this.onChangeMap = this.onChangeMap.bind(this)
+    this.renderMapOptions = this.renderMapOptions.bind(this)
   }
 
   componentWillMount () {
@@ -104,7 +106,6 @@ class ProfileModal extends React.Component { // eslint-disable-line react/no-mul
 
   handleFormSubmit (values) {
     const {user} = this.props
-
     this.uploadUserImage(image => {
       let props = assign({}, user, values, {
         mapids: [this.refs.defaultmap.value]
@@ -114,6 +115,7 @@ class ProfileModal extends React.Component { // eslint-disable-line react/no-mul
       console.log(props)
       this.props.updateUserProfile(props)
     })
+    this.onChangeMap(values.map)
   }
 
   uploadUserImage (cb) {
@@ -159,15 +161,28 @@ class ProfileModal extends React.Component { // eslint-disable-line react/no-mul
     }
   }
 
-  onChangeMap (e) {
+  onChangeMap (map) {
     this.setState({
-      defaultmap: e.target.value
+      defaultmap: map
     })
+  }
+
+  renderMapOptions () {
+    let maps = this.props.maps
+    let options maps.map(item => ({value: item.id, label: item.name}))
+    return options
   }
 
   render () {
     let { user, handleSubmit } = this.props
     let imgSrc = this.state.imgSrc || (`${extImageBaseUrl}${user.image || 'unknown.png'}`)
+    let mapOptions = this.renderMapOptions()
+    let roleOptions = [
+      {value: 'user', label: 'user'},
+      {value: 'admin', label: 'admin'}
+    ]
+    let defaultChecked = (user.enabled === true)
+    let checkboxLabel = 'User Enabled'
     return (
       <ProfileModalView
         show
@@ -175,6 +190,10 @@ class ProfileModal extends React.Component { // eslint-disable-line react/no-mul
         imgSrc={imgSrc}
         onSubmit={handleSubmit(this.handleFormSubmit)}
         onChangeImage={this.onChangeImage}
+        mapOptions={mapOptions}
+        roleOptions={roleOptions}
+        defaultChecked={defaultChecked}
+        checkboxLabel={checkboxLabel}
       />
       <Modal show onHide={this.onHide.bind(this)}
         aria-labelledby="ModalHeader" className="bootstrap-dialog type-primary">

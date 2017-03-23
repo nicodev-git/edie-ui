@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import Modal from 'react-bootstrap-modal'
-import { Header, SubmitBlock, ProfileImageUpload } from './parts'
+import { Header, SubmitBlock, ProfileImageUpload, FormInput, FormSelect, Checkbox } from './parts'
 
 export default class ProfileModalView extends Component {
   render () {
-    const {show, imgSrc, onHide, onSubmit, onChangeImage} = this.props
+    const {show, imgSrc, onHide, onSubmit, onChangeImage, mapOptions, roleOptions,
+      defaultChecked, checkboxLabel} = this.props
     return (
       <Modal
         show={show}
@@ -15,13 +16,16 @@ export default class ProfileModalView extends Component {
         <Header name="Profile" />
         <div className="modal-body bootstrap-dialog-message">
           <form onSubmit={onSubmit}>
+            <ProfileImageUpload src={imgSrc} onChange={onChangeImage} />
             <div className="form-column">
-              <ProfileImageUpload src={imgSrc} onChange={onChangeImage} />
               <Field name="username" component={FormInput} label="User Name"/>
               <Field name="fullname" component={FormInput} label="Full Name"/>
               <Field name="password" component={FormInput} type="password" label="Password"/>
               <Field name="email" component={FormInput} label="Email"/>
               <Field name="phone" component={FormInput} label="Phose"/>
+              <Field name="map" component={FormSelect} label="Default Map" options={mapOptions}/>
+              <Field name="role" component={FormSelect} label="Role" options={roleOptions}/>
+              <Checkbox label={checkboxLabel} disabled defaultChecked={defaultChecked}/>
             </div>
             <SubmitBlock name="Save" onClick={onHide}/>
           </form>
