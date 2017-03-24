@@ -1,17 +1,16 @@
-import React from 'react'
+import React, { Component } from 'react'
 import Modal from 'react-bootstrap-modal'
-import {reduxForm, Field} from 'redux-form'
+import {reduxForm} from 'redux-form'
 import {assign, concat, forOwn} from 'lodash'
-import InlineEdit from 'react-edit-inline'
 import { connect } from 'react-redux'
 import Tooltip from 'react-tooltip'
-
 import RuleModal from './RuleModal'
 import CategoryModal from './CategoryModal'
 import ActionModal from './ActionModal'
 import DiagramModalContainer from 'containers/page/content/device/main/workflows/DiagramModalContainer'
+import { WorkflowStep1, WorkflowStep2 } from 'components/modal'
 
-class MainWorkflowModal extends React.Component {
+class MainWorkflowModal extends Component {
 
   constructor (props) {
     super(props)
@@ -31,6 +30,10 @@ class MainWorkflowModal extends React.Component {
       selectedActionIndex: -1,
       diagram: props.editWorkflow ? props.editWorkflow.flowchart : ''
     }
+    this.onClickAddCategory = this.onClickAddCategory.bind(this)
+    this.onClickRemoveRule = this.onClickRemoveRule.bind(this)
+    this.onRuleChange = this.onRuleChange.bind(this)
+    this.onRuleClick = this.onRuleClick.bind(this)
   }
 
   componentWillMount () {
@@ -180,127 +183,38 @@ class MainWorkflowModal extends React.Component {
     )
   }
 
+  onRuleClick (index) {
+    let rules = this.state.rules
+    if (index !== rules.length - 1) {
+      this.setState({
+        selectedRuleIndex: index
+      })
+    }
+  }
+
   renderStep () {
     const {current, rules, selectedRuleIndex, actions, selectedActionIndex} = this.state
+    let categoryModal = this.renderCategoryModal()
+    let ruleModal = this.renderRuleModal()
 
     if (current === 1) {
       return (
-        <div>
-
-          <div className="row margin-md-bottom">
-            <label className="col-md-3">Name</label>
-            <div className="col-md-9">
-              <Field name="name" component="input" className="form-control"/>
-            </div>
-          </div>
-
-          <div className="row margin-md-bottom">
-            <label className="col-md-3">Description</label>
-            <div className="col-md-9">
-              <Field name="desc" component="input" className="form-control"/>
-            </div>
-          </div>
-
-          <div className="row margin-md-bottom">
-            <label className="col-md-3 control-label">Display Incident Description</label>
-            <div className="col-md-8 pr-none">
-              <Field name="display_incident_desc" component="input" className="form-control"/>
-            </div>
-            <div className="col-md-1 text-right pl-none margin-sm-top">
-              <a href="javascript:;">
-                <i className="fa fa-question-circle fa-x"
-                  data-class="tt-workflow"
-                  data-tip={`Use \${KEY} for show key’s value.<br/>Example: 'User \${user} was blocked at: \${datetime}'`}/>
-              </a>
-            </div>
-          </div>
-
-          <div className="row margin-md-bottom">
-            <label className="col-md-3">Category</label>
-            <div className="col-md-8 pr-none">
-              <Field name="category" component="select" className="form-control">
-                {this.props.workflowCategories.map(c => <option key={c.id} value={c.name}>{c.name}</option>)}
-              </Field>
-            </div>
-            <div className="col-md-1 text-right pl-none margin-sm-top">
-              <a href="javascript:;" onClick={this.onClickAddCategory.bind(this)}><i className="fa fa-plus-square fa-x"/></a>
-            </div>
-          </div>
-
-          <div className="row margin-md-bottom">
-            <label className="col-md-3">Severity</label>
-            <div className="col-md-9">
-              <Field name="severity" component="select" className="form-control">
-                <option>HIGH</option>
-                <option>MEDIUM</option>
-                <option>LOW</option>
-                <option>AUDIT</option>
-                <option>IGNORE</option>
-                <option>IGNOREDELETE</option>
-                <option>DEVICE</option>
-              </Field>
-            </div>
-          </div>
-
-          <div className="row margin-md-bottom">
-            <label className="col-md-3">Enabled</label>
-            <div className="col-md-9">
-              <Field name="enable" component="input" type="checkbox"/>
-            </div>
-          </div>
-          {this.renderCategoryModal()}
-        </div>
+        <WorkflowStep1
+          categories={this.props.workflowCategories}
+          onAddCategory={this.onClickAddCategory}
+          categoryModal={categoryModal}
+        />
       )
     } else if (current === 2) {
       return (
-        <div>
-          <div>
-            <span className="margin-md-right"><b>Rules</b></span>
-            <a href="javascript:;" onClick={this.onClickRemoveRule.bind(this)} className="margin-sm-right"><i className="fa fa-trash-o"/></a>
-          </div>
-          <div className="margin-md-bottom">
-            <table className="table table-hover">
-              <thead>
-                <tr>
-                  <th>Key</th>
-                  <th>Value</th>
-                </tr>
-              </thead>
-              <tbody>
-              {rules.map((r, index) =>
-                <tr key={index} className={selectedRuleIndex === index ? 'selected' : ''} onClick={() => { if (index !== rules.length - 1) this.setState({ selectedRuleIndex: index }) }}>
-                  <td width="50%">
-                    <InlineEdit
-                      activeClassName="editing"
-                      text={r.key || '\u00a0'}
-                      paramName="key"
-                      change={this.onRuleChange.bind(this, index)}
-                      style={{
-                        width: '100%',
-                        display: 'block'
-                      }}
-                    />
-                  </td>
-                  <td width="50%">
-                    <InlineEdit
-                      activeClassName="editing"
-                      text={r.value || '\u00a0'}
-                      paramName="value"
-                      change={this.onRuleChange.bind(this, index)}
-                      style={{
-                        width: '100%',
-                        display: 'block'
-                      }}
-                    />
-                  </td>
-                </tr>
-              )}
-              </tbody>
-            </table>
-          </div>
-
-          {this.renderRuleModal()}
-        </div>
+        <WorkflowStep2
+          onRemoveRule={this.onClickRemoveRule}
+          rules={rules}
+          onRuleChange={this.onRuleChange}
+          onRuleClick={this.onRuleClick}
+          ruleModal={ruleModal}
+          selected={selectedRuleIndex}
+        />
       )
     } else if (current === 3) {
       return (

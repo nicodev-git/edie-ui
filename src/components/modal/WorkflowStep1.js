@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
-import Modal from 'react-bootstrap-modal'
-import { Header, TwoButtonsBlock } from './parts'
+import { Field } from 'redux-form'
 
 export default class WorkflowStep1 extends Component {
   render () {
