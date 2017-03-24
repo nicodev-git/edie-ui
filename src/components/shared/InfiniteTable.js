@@ -167,7 +167,8 @@ class InfiniteTable extends React.Component {
     let rowMetadata = assign({}
       , this.defaultRowMetaData
       , this.props.rowMetadata || {})
-
+    let rowHeight = this.props.rowHeight || 75
+    console.log('row height: ', rowHeight)
     return (
       <Griddle
         id={this.props.id}
@@ -178,7 +179,7 @@ class InfiniteTable extends React.Component {
         columns={this.props.cells.map(item => item.columnName)}
         columnMetadata={this.props.cells}
         rowMetadata={rowMetadata}
-        rowHeight={75}
+        rowHeight={rowHeight}
         externalSetPage={this.setPage.bind(this)}
         externalSetPageSize={this.setPageSize.bind(this)}
         externalMaxPage={this.state.maxPages}

@@ -32,6 +32,7 @@ export default class EventLogTable extends Component {
         cells={this.columns}
         ref="table"
         rowMetadata={{'key': 'id'}}
+        rowHeight={400}
         selectable
         url="/event/search/findAgentEvents"
         params={{
