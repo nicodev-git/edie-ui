@@ -16,22 +16,22 @@ export default class ProcessTable extends React.Component {
     }, {
       'displayName': 'Id',
       'columnName': 'Id',
-      'cssClassName': 'width-100'
+      'cssClassName': 'width-80'
     }, {
       'displayName': 'Owner',
       'columnName': 'Owner',
-      'cssClassName': 'width-180'
+      'cssClassName': 'width-220'
     }, {
       'displayName': 'Parent',
       'columnName': 'Parent',
-      'cssClassName': 'width-180'
+      'cssClassName': 'width-120'
     }, {
       'displayName': 'FilePath',
       'columnName': 'FilePath'
     }, {
       'displayName': 'Status',
       'columnName': 'Status',
-      'cssClassName': 'width-120'
+      'cssClassName': 'width-100'
     }, {
       'displayName': 'LastSeen',
       'columnName': 'timestamp',
@@ -40,7 +40,7 @@ export default class ProcessTable extends React.Component {
 
         return <TimeAgo date={props.data} />
       },
-      'cssClassName': 'width-180'
+      'cssClassName': 'width-160'
     }]
   }
 
@@ -62,7 +62,7 @@ export default class ProcessTable extends React.Component {
         ref="table"
         rowMetadata={{'key': 'id'}}
         selectable
-
+        rowHeight={40}
         onRowDblClick={this.onRowDblClick.bind(this)}
 
         useExternal={false}

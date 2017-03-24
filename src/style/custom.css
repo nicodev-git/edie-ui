@@ -229,6 +229,10 @@ table.table tbody tr.selected {
     width: 200px;
 }
 
+.width-220 {
+    width: 220px;
+}
+
 .width-300 {
     width: 300px;
 }
