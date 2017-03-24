@@ -13,7 +13,9 @@ import {
   fetchDeviceApps,
   fetchDeviceProcesses,
   fetchMonitorTemplates,
-  closeDeviceMonitorPicker
+  closeDeviceMonitorPicker,
+  openProcessModal,
+  closeProcessModal
 } from 'actions'
 
 @connect(
@@ -21,6 +23,7 @@ import {
     device: state.dashboard.selectedDevice,
     monitorPickerVisible: state.devices.monitorPickerVisible,
     monitorWizardVisible: state.devices.monitorWizardVisible,
+    editProcess: state.devices.editProcess,
 
     eventLogs: state.devices.eventLogs,
     apps: state.devices.apps,
@@ -38,7 +41,9 @@ import {
     fetchDeviceApps,
     fetchDeviceProcesses,
     fetchMonitorTemplates,
-    closeDeviceMonitorPicker
+    closeDeviceMonitorPicker,
+    openProcessModal,
+    closeProcessModal
   }
 )
 @withRouter

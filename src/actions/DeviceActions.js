@@ -77,6 +77,8 @@ import {
   REMOVE_GROUP_LINE,
 
   FETCH_DEVICE_PROCESS,
+  OPEN_PROCESS_MODAL,
+  CLOSE_PROCESS_MODAL,
 
   NO_AUTH_ERROR
 } from './types'
@@ -734,6 +736,18 @@ export const fetchDeviceProcesses = (device) => {
       const data = event ? event.agentdata.map((u, i) => assign(u, {id: i, timestamp: event.timestamp})) : []
       dispatch({type: FETCH_DEVICE_PROCESS, data})
     }).catch(error => apiError(dispatch, error))
+  }
+}
+
+export const openProcessModal = (process) => {
+  return dispatch => {
+    dispatch({type: OPEN_PROCESS_MODAL, process})
+  }
+}
+
+export const closeProcessModal = () => {
+  return dispatch => {
+    dispatch({type: CLOSE_PROCESS_MODAL})
   }
 }
 

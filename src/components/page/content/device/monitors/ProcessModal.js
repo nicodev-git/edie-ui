@@ -3,7 +3,6 @@ import Modal from 'react-bootstrap-modal'
 import TimeAgo from 'react-timeago'
 
 import InfiniteTable from '../../../../shared/InfiniteTable'
-import { ROOT_URL } from '../../../../../actions/config'
 
 export default class ProcessModal extends Component {
   constructor (props) {
@@ -28,21 +27,21 @@ export default class ProcessModal extends Component {
   }
 
   componentWillMount () {
-    $.get(`${ROOT_URL}${Api.incidents.getProcessRunTimes}`, { // eslint-disable-line no-undef
-      processId: this.props.process.id
-    }).done(res => {
-      this.setState({
-        runTimes: res
-      })
-    })
-
-    $.get(`${ROOT_URL}${Api.incidents.getProcessChildren}`, { // eslint-disable-line no-undef
-      processId: this.props.process.id
-    }).done(res => {
-      this.setState({
-        children: res
-      })
-    })
+    // $.get(`${ROOT_URL}${Api.incidents.getProcessRunTimes}`, { // eslint-disable-line no-undef
+    //   processId: this.props.process.id
+    // }).done(res => {
+    //   this.setState({
+    //     runTimes: res
+    //   })
+    // })
+    //
+    // $.get(`${ROOT_URL}${Api.incidents.getProcessChildren}`, { // eslint-disable-line no-undef
+    //   processId: this.props.process.id
+    // }).done(res => {
+    //   this.setState({
+    //     children: res
+    //   })
+    // })
   }
 
   onHide () {
@@ -97,6 +96,26 @@ export default class ProcessModal extends Component {
             <label className="col-md-10">{process.processid}</label>
           </div>
 
+          <div style={{maxHeight: '200px', overflow: 'auto'}}>
+            <table>
+              <thead>
+                <tr>
+                  <th>RemoteAddress</th>
+                  <th>Port</th>
+                  <th>State</th>
+                </tr>
+              </thead>
+              <tbody>
+              {process.Connections.map((c, i) =>
+                <tr key={i}>
+                  <td>{c.RemoteAddress}</td>
+                  <td>{c.Port}</td>
+                  <td>{c.State}</td>
+                </tr>
+              )}
+              </tbody>
+            </table>
+          </div>
           <InfiniteTable
             url="/incidentstable/getProcessConnectionDT"
             params={{processId: this.props.process.id}}

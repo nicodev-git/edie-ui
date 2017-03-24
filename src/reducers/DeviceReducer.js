@@ -22,6 +22,8 @@ import {
   FETCH_DEVICE_EVENTLOG,
   FETCH_DEVICE_APPS,
   FETCH_DEVICE_PROCESS,
+  OPEN_PROCESS_MODAL,
+  CLOSE_PROCESS_MODAL,
 
   OPEN_SYS_WORKFLOWS_MODAL,
   CLOSE_SYS_WORKFLOWS_MODAL,
@@ -180,6 +182,11 @@ export default function (state = INITIAL_STATE, action) {
 
     case FETCH_DEVICE_PROCESS:
       return { ...state, processes: action.data }
+
+    case OPEN_PROCESS_MODAL:
+      return { ...state, processModalOpen: true, editProcess: action.process }
+    case CLOSE_PROCESS_MODAL:
+      return { ...state, processModalOpen: false }
 
     case OPEN_DEVICE_EDIT_MODAL:
       return { ...state, openModal: true, editDevice: action.device, updateDeviceError: '' }

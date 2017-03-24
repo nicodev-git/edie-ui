@@ -2,8 +2,6 @@ import React from 'react'
 import TimeAgo from 'react-timeago'
 
 import { ResponsiveInfiniteTable } from '../../../../shared/InfiniteTable'
-import ProcessModal from './ProcessModal'
-import { appendComponent, removeComponent } from '../../../../../util/Component'
 
 export default class ProcessTable extends React.Component {
   constructor (props) {
@@ -50,9 +48,7 @@ export default class ProcessTable extends React.Component {
 
   onRowDblClick () {
     const selected = this.refs.table.refs.wrappedInstance.getSelected()
-    appendComponent(
-      <ProcessModal process={selected} onClose={removeComponent}/>
-    )
+    this.props.openProcessModal(selected)
   }
 
   render () {
