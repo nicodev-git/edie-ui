@@ -168,7 +168,6 @@ class InfiniteTable extends React.Component {
       , this.defaultRowMetaData
       , this.props.rowMetadata || {})
     let rowHeight = this.props.rowHeight || 75
-    console.log('row height: ', rowHeight)
     return (
       <Griddle
         id={this.props.id}
