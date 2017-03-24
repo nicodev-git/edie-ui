@@ -2,13 +2,10 @@ import React, { Component } from 'react'
 import Modal from 'react-bootstrap-modal'
 import TimeAgo from 'react-timeago'
 
-import InfiniteTable from '../../../../shared/InfiniteTable'
-
 export default class ProcessModal extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      open: true,
       runTimes: [],
       children: []
     }
@@ -48,11 +45,8 @@ export default class ProcessModal extends Component {
     this.closeModal()
   }
 
-  closeModal (data) {
-    this.setState({open: false}, () => {
-      this.props.onClose &&
-            this.props.onClose(this, data)
-    })
+  closeModal () {
+    this.props.closeProcessModal()
   }
 
   onClickClose () {
@@ -73,7 +67,7 @@ export default class ProcessModal extends Component {
     const {process} = this.props
     return (
       <Modal
-        show={this.state.open}
+        show
         onHide={this.onHide.bind(this)}
         aria-labelledby="ModalHeader"
         className="bootstrap-dialog type-primary"
@@ -93,11 +87,11 @@ export default class ProcessModal extends Component {
         <div className="modal-body bootstrap-dialog-message form-inline">
           <div className="row">
             <label className="col-md-2">ProcessID:</label>
-            <label className="col-md-10">{process.processid}</label>
+            <label className="col-md-10">{process.Id}</label>
           </div>
 
-          <div style={{maxHeight: '200px', overflow: 'auto'}}>
-            <table>
+          <div style={{maxHeight: '200px', minHeight: '50px', overflow: 'auto'}}>
+            <table className="table table-hover">
               <thead>
                 <tr>
                   <th>RemoteAddress</th>
@@ -109,30 +103,19 @@ export default class ProcessModal extends Component {
               {process.Connections.map((c, i) =>
                 <tr key={i}>
                   <td>{c.RemoteAddress}</td>
-                  <td>{c.Port}</td>
+                  <td>{c.RemotePorts}</td>
                   <td>{c.State}</td>
                 </tr>
               )}
               </tbody>
             </table>
           </div>
-          <InfiniteTable
-            url="/incidentstable/getProcessConnectionDT"
-            params={{processId: this.props.process.id}}
-            cells={this.cells}
-            ref="table"
-            rowMetadata={{'key': 'id'}}
-            selectable
-            noDataMessage="None"
-            bodyHeight={200}
-          />
-
           <div className="row">
             <div className="col-md-4">
               <div className="row">
                 <label className="col-md-12">Last Run Times</label>
               </div>
-              <div style={{maxHeight: '200px', overflow: 'auto'}}>
+              <div style={{height: '150px', overflow: 'auto'}}>
                 <table>
                   <tbody>{
                     this.state.runTimes.map((item, i) =>
@@ -149,7 +132,7 @@ export default class ProcessModal extends Component {
                 <label className="col-md-6">Children</label>
                 <label className="col-md-6">PID</label>
               </div>
-              <div style={{maxHeight: '200px', overflow: 'auto'}}>
+              <div style={{height: '150px', overflow: 'auto'}}>
                 <table>
                   <tbody>{
                     this.state.children.map(item =>

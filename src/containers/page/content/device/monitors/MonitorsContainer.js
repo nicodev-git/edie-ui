@@ -23,7 +23,8 @@ import {
     device: state.dashboard.selectedDevice,
     monitorPickerVisible: state.devices.monitorPickerVisible,
     monitorWizardVisible: state.devices.monitorWizardVisible,
-    editProcess: state.devices.editProcess,
+    process: state.devices.process,
+    processModalOpen: state.devices.processModalOpen,
 
     eventLogs: state.devices.eventLogs,
     apps: state.devices.apps,

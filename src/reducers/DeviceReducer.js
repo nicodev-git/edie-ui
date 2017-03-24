@@ -184,7 +184,7 @@ export default function (state = INITIAL_STATE, action) {
       return { ...state, processes: action.data }
 
     case OPEN_PROCESS_MODAL:
-      return { ...state, processModalOpen: true, editProcess: action.process }
+      return { ...state, processModalOpen: true, process: action.process }
     case CLOSE_PROCESS_MODAL:
       return { ...state, processModalOpen: false }
 
