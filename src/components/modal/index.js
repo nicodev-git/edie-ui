@@ -15,6 +15,7 @@ import SysWorkflowsModalView from './SysWorkflowsModalView'
 import SegmentListModalView from './SegmentListModalView'
 import WorkflowStep1 from './WorkflowStep1'
 import WorkflowStep2 from './WorkflowStep2'
+import WorkflowStep3 from './WorkflowStep3'
 
 export {
     ActivationModalView,
@@ -33,5 +34,6 @@ export {
     SysWorkflowsModalView,
     SegmentListModalView,
     WorkflowStep1,
-    WorkflowStep2
+    WorkflowStep2,
+    WorkflowStep3
 }

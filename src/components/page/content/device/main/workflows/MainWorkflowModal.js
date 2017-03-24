@@ -8,7 +8,7 @@ import RuleModal from './RuleModal'
 import CategoryModal from './CategoryModal'
 import ActionModal from './ActionModal'
 import DiagramModalContainer from 'containers/page/content/device/main/workflows/DiagramModalContainer'
-import { WorkflowStep1, WorkflowStep2 } from 'components/modal'
+import { WorkflowStep1, WorkflowStep2, WorkflowStep3 } from 'components/modal'
 
 class MainWorkflowModal extends Component {
 
@@ -34,6 +34,10 @@ class MainWorkflowModal extends Component {
     this.onClickRemoveRule = this.onClickRemoveRule.bind(this)
     this.onRuleChange = this.onRuleChange.bind(this)
     this.onRuleClick = this.onRuleClick.bind(this)
+    this.onClickAddAction = this.onClickAddAction.bind(this)
+    this.onClickEditAction = this.onClickEditAction.bind(this)
+    this.onClickRemoveAction = this.onClickRemoveAction.bind(this)
+    this.onActionClick = this.onActionClick.bind(this)
   }
 
   componentWillMount () {
@@ -192,10 +196,17 @@ class MainWorkflowModal extends Component {
     }
   }
 
+  onActionClick (index) {
+    this.setState({
+      selectedActionIndex: index
+    })
+  }
+
   renderStep () {
     const {current, rules, selectedRuleIndex, actions, selectedActionIndex} = this.state
     let categoryModal = this.renderCategoryModal()
     let ruleModal = this.renderRuleModal()
+    let actionModal = this.renderActionModal()
 
     if (current === 1) {
       return (
@@ -218,37 +229,15 @@ class MainWorkflowModal extends Component {
       )
     } else if (current === 3) {
       return (
-        <div>
-          <div>
-            <span className="margin-md-right"><b>Actions</b></span>
-            <a href="javascript:;" onClick={this.onClickAddAction.bind(this)} className="margin-sm-right"><i className="fa fa-plus-square"/></a>
-            <a href="javascript:;" onClick={this.onClickEditAction.bind(this)} className="margin-sm-right"><i className="fa fa-edit"/></a>
-            <a href="javascript:;" onClick={this.onClickRemoveAction.bind(this)} className="margin-sm-right"><i className="fa fa-trash-o"/></a>
-          </div>
-
-          <div>
-            <table className="table table-hover">
-              <thead>
-              <tr>
-                <th>Name</th>
-                <th>Type</th>
-              </tr>
-              </thead>
-              <tbody>
-              {
-                actions.map((a, index) =>
-                  <tr key={a.name} className={selectedActionIndex === index ? 'selected' : ''} onClick={() => { this.setState({ selectedActionIndex: index }) }}>
-                    <td>{a.name}</td>
-                    <td>{a.actionType}</td>
-                  </tr>
-                )
-              }
-              </tbody>
-            </table>
-          </div>
-
-          {this.renderActionModal()}
-        </div>
+        <WorkflowStep3
+          onAddAction={this.onClickAddAction}
+          onEditAction={this.onClickEditAction}
+          onRemoveAction={this.onClickRemoveAction}
+          onActionClick={this.onActionClick}
+          actions={actions}
+          selected={selectedActionIndex}
+          actionModal={actionModal}
+        />
       )
     }
     return null
