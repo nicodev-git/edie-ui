@@ -6,8 +6,8 @@ export default class WorkflowStep1 extends Component {
   render () {
     const {categories, onAddCategory, categoryModal} = this.props
     return (
-      <div>
-        <div className="form-column">
+      <div className="wizard-step-1-container">
+        <div className="form-column wizard-step-1">
           <Field name="name" component={FormInput} label="Name"/>
           <Field name="desc" component={FormInput} label="Description"/>
           <Field name="display_incident_desc" component={FormInput} label="Display Incident Description"/>
@@ -23,21 +23,19 @@ export default class WorkflowStep1 extends Component {
               {value: 'IGNOREDELETE', label: 'IGNOREDELETE'},
               {value: 'DEVICE', label: 'DEVICE'}
             ]}/>
+        </div>
+        <div className="width-100">
           <Field name="enable" label="Enabled" component={FormCheckbox}/>
         </div>
-        <div className="row margin-md-bottom">
-          <div className="col-md-1 text-right pl-none margin-sm-top">
+        <div className="wizard-step-1-help">
             <a href="javascript:;">
               <i className="fa fa-question-circle fa-x"
                 data-class="tt-workflow"
                 data-tip={`Use \${KEY} for show key’s value.<br/>Example: 'User \${user} was blocked at: \${datetime}'`}/>
             </a>
-          </div>
         </div>
-        <div className="row margin-md-bottom">
-          <div className="col-md-1 text-right pl-none margin-sm-top">
+        <div className="wizard-step-1-add">
             <a href="javascript:;" onClick={onAddCategory}><i className="fa fa-plus-square fa-x"/></a>
-          </div>
         </div>
         {categoryModal}
       </div>

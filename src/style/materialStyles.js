@@ -46,6 +46,10 @@ export const buttonDisabledStyle = {
   color: disabledColor
 }
 
+export const checkboxStyle = {
+  color: textColor
+}
+
 export const buttonTextStyle = {
   fontWeight: 700
 }
