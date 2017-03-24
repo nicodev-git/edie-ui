@@ -1,14 +1,13 @@
 import React, { Component } from 'react'
-import Modal from 'react-bootstrap-modal'
 import {reduxForm} from 'redux-form'
 import {assign, concat, forOwn} from 'lodash'
 import { connect } from 'react-redux'
-import Tooltip from 'react-tooltip'
 import RuleModal from './RuleModal'
 import CategoryModal from './CategoryModal'
 import ActionModal from './ActionModal'
 import DiagramModalContainer from 'containers/page/content/device/main/workflows/DiagramModalContainer'
-import { WorkflowStep1, WorkflowStep2, WorkflowStep3 } from 'components/modal'
+import { WorkflowStep1, WorkflowStep2, WorkflowStep3, WorkflowWizard,
+  MainWorkflowModalView } from 'components/modal'
 
 class MainWorkflowModal extends Component {
 
@@ -38,14 +37,15 @@ class MainWorkflowModal extends Component {
     this.onClickEditAction = this.onClickEditAction.bind(this)
     this.onClickRemoveAction = this.onClickRemoveAction.bind(this)
     this.onActionClick = this.onActionClick.bind(this)
+    this.onClickClose = this.onClickClose.bind(this)
+    this.onClickPrev = this.onClickPrev.bind(this)
+    this.onClickNext = this.onClickNext.bind(this)
+    this.onClickDiagram = this.onClickDiagram.bind(this)
+    this.handleFormSubmit = this.handleFormSubmit.bind(this)
   }
 
   componentWillMount () {
     this.props.fetchWorkflowCategories()
-  }
-
-  onHide () {
-
   }
 
   handleFormSubmit (values) {
@@ -245,7 +245,8 @@ class MainWorkflowModal extends Component {
 
   renderWizard () {
     const {current, steps} = this.state
-
+    let step = this.renderStep()
+    let diagramModal = this.renderDiagramModal()
     let markers = []
     for (let i = 0; i < steps; i++) {
       const cls = `marker ${current >= (i + 1) ? 'marker-checked' : ''}`
@@ -255,66 +256,31 @@ class MainWorkflowModal extends Component {
         </div>
       )
     }
-
     return (
-      <div>
-
-        <div className="wizard-container m-none">
-          <div className="wizard-progress hidden">
-            {markers}
-
-            <div className="progress progress-striped progress-xs" style={{margin: '10px 0'}}>
-              <div className="progress-bar" style={{width: `${current * 100 / steps}%`}} />
-            </div>
-          </div>
-          {this.renderStep()}
-
-          <div className="text-right mb-none">
-            <a href="javascript:;" className="btn btn-default btn-sm margin-sm-right"
-              onClick={this.onClickClose.bind(this)}>Cancel</a>
-            <a href="javascript:;" className="btn btn-default btn-sm margin-sm-right"
-              onClick={this.onClickDiagram.bind(this)}>Diagram</a>
-            <a href="javascript:;" className="btn btn-default btn-sm margin-sm-right"
-              disabled={current === 1}
-              onClick={this.onClickPrev.bind(this)}>Previous</a>
-
-            { current < steps ? <a href="javascript:;" className="btn btn-default btn-sm" onClick={this.onClickNext.bind(this)}>Next</a> : null}
-            { current === steps ? <button className="btn btn-primary btn-sm" type="submit">Finish</button> : null}
-
-          </div>
-        </div>
-
-        {this.renderDiagramModal()}
-
-        <Tooltip place="right" event="mouseover" eventOff="mouseout" multiline effect="solid"/>
-      </div>
+      <WorkflowWizard
+        markers={markers}
+        step={step}
+        steps={steps}
+        current={current}
+        diagramModal={diagramModal}
+        onClose={this.onClickClose}
+        onDiagram={this.onClickDiagram}
+        onPrev={this.onClickPrev}
+        onNext={this.onClickNext}
+      />
     )
   }
 
   render () {
     const {handleSubmit} = this.props
+    let wizard = this.renderWizard()
 
     return (
-      <Modal
-        show
-        onHide={this.onHide.bind(this)}
-        aria-labelledby="ModalHeader"
-        className="bootstrap-dialog type-primary">
-        <div className="modal-header">
-          <h4 className="modal-title bootstrap-dialog-title">
-            Workflow
-          </h4>
-          <div className="bootstrap-dialog-close-button">
-            <button className="close" onClick={this.onClickClose.bind(this)}>×</button>
-          </div>
-        </div>
-        <div className="modal-body bootstrap-dialog-message p-none">
-          <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
-            { this.renderWizard() }
-          </form>
-        </div>
-      </Modal>
-
+      <MainWorkflowModalView
+        onClose={this.onClickClose}
+        onSubmit={handleSubmit(this.handleFormSubmit)}
+        wizard={wizard}
+      />
     )
   }
 }
