@@ -71,7 +71,7 @@ export default class SegmentListModal extends Component {
     removeComponent(modal)
     if (!segment) return
 
-    this.refs.segments.refresh()
+    // this.refs.segments.refresh()
   }
 
   onClickDelete () {
@@ -85,7 +85,7 @@ export default class SegmentListModal extends Component {
       }).done((res) => {
         if (!res.success) return showAlert('Remove failed!')
 
-        this.refs.segments.refresh()
+        // this.refs.segments.refresh()
       }).fail(() => {
         showAlert('Remove failed!')
       })

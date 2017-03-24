@@ -3,8 +3,12 @@ import { showAlert } from '../../../../shared/Alert'
 import { ROOT_URL } from '../../../../../actions/config'
 import SimpleModalContainer from 'containers/modal/SimpleModalContainer'
 import { validate } from 'components/modal/validation/NameValidation'
+import { getStore } from 'shared/GetStore'
+import { Provider } from 'react-redux'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 
 export default class SegmentModal extends Component {
+
   constructor (props) {
     super(props)
     this.state = {
@@ -41,6 +45,7 @@ export default class SegmentModal extends Component {
   render () {
     const { segment } = this.props
     let header = 'Segment'
+    let store = getStore()
     let countryOptions = this.renderCountryOptions()
     let locOptions = [
       {value: 'LAN', label: 'LAN'},
@@ -64,14 +69,18 @@ export default class SegmentModal extends Component {
       country: segment.country
     } : null
     return (
-      <SimpleModalContainer
-        header={header}
-        content={content}
-        doAction={this.onClickSave}
-        onClose={this.closeModal}
-        validate={validate}
-        initialValues={initialValues}
-      />
+      <MuiThemeProvider>
+        <Provider store={store}>
+          <SimpleModalContainer
+            header={header}
+            content={content}
+            doAction={this.onClickSave}
+            onClose={this.closeModal}
+            validate={validate}
+            initialValues={initialValues}
+          />
+        </Provider>
+    </MuiThemeProvider>
     )
   }
 }
