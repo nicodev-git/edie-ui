@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux'
 import DeviceWizard from 'components/shared/wizard/DeviceWizard'
 import { fetchMonitorTemplates, clearDeviceWizardInitialValues, openDeviceMonitorWizard } from 'actions'
 import { connectWithStore } from 'shared/ConnectWithStore'
+import { store } from 'shared/GetStore'
 
 const mapStateToProps = (state) => {
   return {
@@ -42,4 +43,4 @@ class DeviceWizardContainer extends Component {
   }
 }
 
-export default connectWithStore(DeviceWizardContainer, mapStateToProps, mapDispatchToProps)
+export default connectWithStore(store, DeviceWizardContainer, mapStateToProps, mapDispatchToProps)
