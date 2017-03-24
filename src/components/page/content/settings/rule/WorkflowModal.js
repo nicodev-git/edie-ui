@@ -35,13 +35,10 @@ class WorkflowModal extends React.Component { // eslint-disable-line react/no-mu
 
     this.state = {
       current: 1,
-
       rules,
       selectedRuleIndex: -1,
-
       actions: props.editWorkflow ? (props.editWorkflow.actions || []) : [],
       selectedActionIndex: -1,
-
       diagram: props.editWorkflow ? props.editWorkflow.flowchart : ''
     }
   }
@@ -75,7 +72,6 @@ class WorkflowModal extends React.Component { // eslint-disable-line react/no-mu
   onRuleChange (index, value) {
     console.log(value)
     let { rules } = this.state
-
     rules = rules.map((r, i) => i === index ? assign({}, r, value) : r)
     if (index === rules.length - 1) rules.push({key: '', value: ''})
     this.setState({ rules })

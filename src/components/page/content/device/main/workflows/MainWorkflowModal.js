@@ -15,7 +15,6 @@ class MainWorkflowModal extends React.Component {
 
   constructor (props) {
     super(props)
-
     let rules = []
     if (props.editWorkflow) {
       forOwn(props.editWorkflow.rules || {}, (value, key) => {
@@ -23,17 +22,13 @@ class MainWorkflowModal extends React.Component {
       })
     }
     rules.push({key: '', value: ''})
-
     this.state = {
       current: 1,
       steps: 3,
-
       rules,
       selectedRuleIndex: -1,
-
       actions: props.editWorkflow ? (props.editWorkflow.actions || []) : [],
       selectedActionIndex: -1,
-
       diagram: props.editWorkflow ? props.editWorkflow.flowchart : ''
     }
   }
@@ -53,13 +48,10 @@ class MainWorkflowModal extends React.Component {
     if (workflowCategories && workflowCategories.length) {
       props.category = props.category || workflowCategories[0].name
     }
-
     rules.forEach(r => {
       if (r.key) props.rules[r.key] = r.value
     })
-
     if (!props.name) return window.alert('Please type name.')
-
     if (editWorkflow) {
       this.props.updateDeviceWorkflow(props)
     } else {
@@ -101,7 +93,6 @@ class MainWorkflowModal extends React.Component {
 
   onCloseRuleModal (data, isEdit) {
     if (!data) return
-
     const { rules, selectedRuleIndex } = this.state
     if (isEdit) {
       this.setState({rules: rules.map((r, index) => index === selectedRuleIndex ? data : r)})
@@ -117,7 +108,6 @@ class MainWorkflowModal extends React.Component {
   onRuleChange (index, value) {
     console.log(value)
     let { rules } = this.state
-
     rules = rules.map((r, i) => i === index ? assign({}, r, value) : r)
     if (index === rules.length - 1) rules.push({key: '', value: ''})
     this.setState({ rules })
@@ -141,7 +131,6 @@ class MainWorkflowModal extends React.Component {
 
   onCloseActionModal (data, isEdit) {
     if (!data) return
-
     const { actions, selectedActionIndex } = this.state
     if (isEdit) {
       this.setState({actions: actions.map((r, index) => index === selectedActionIndex ? data : r)})
