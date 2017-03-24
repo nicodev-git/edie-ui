@@ -1,5 +1,5 @@
 import axios from 'axios'
-// import {assign, concat} from 'lodash'
+import {assign} from 'lodash'
 import {
   FETCH_DEVICES,
 
@@ -75,6 +75,8 @@ import {
   ADD_GROUP_LINE,
   UPDATE_GROUP_LINE,
   REMOVE_GROUP_LINE,
+
+  FETCH_DEVICE_PROCESS,
 
   NO_AUTH_ERROR
 } from './types'
@@ -714,6 +716,25 @@ const fetchGroupDevicesAndLinesSuccess = (dispatch, response) => {
     devices: response[0],
     lines: response[1]
   })
+}
+
+export const fetchDeviceProcesses = (device) => {
+  return dispatch => {
+    axios.get(`${ROOT_URL}/event/search/findAgentEvents`, {
+      params: {
+        deviceid: device.id,
+        eventType: 'AGENT',
+        monitortype: 'process',
+        sort: 'timestamp,desc',
+        size: 1
+      }
+    }).then(res => {
+      const {events} = res.data._embedded
+      const event = events.length ? events[0] : null
+      const data = event ? event.agentdata.map((u, i) => assign(u, {id: i, timestamp: event.timestamp})) : []
+      dispatch({type: FETCH_DEVICE_PROCESS, data})
+    }).catch(error => apiError(dispatch, error))
+  }
 }
 
 export const addGroupDevice = (props, url, cb) => {

@@ -119,7 +119,7 @@ class Main extends React.Component {
   renderApiError () {
     if (!this.props.apiErrorModalOpen) return null
     const {apiError} = this.props
-    const msg = `${apiError.message}. Url: ${apiError.config.url}`
+    const msg = `${apiError.message}. Url: ${apiError.config ? apiError.config.url : ''}`
     return (
       <Alert message={msg} onClose={this.onCloseAlert.bind(this)}/>
     )

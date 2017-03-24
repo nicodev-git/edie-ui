@@ -668,10 +668,6 @@ table.table tbody tr.selected {
   overflow-y: auto !important;
 }
 
-.griddle .table>tbody>tr>td {
-  word-break: normal;
-}
-
 .object-table .table>tbody>tr>td {
   word-break: break-all;
 }

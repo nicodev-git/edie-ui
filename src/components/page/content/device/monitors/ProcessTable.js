@@ -8,40 +8,33 @@ import { appendComponent, removeComponent } from '../../../../../util/Component'
 export default class ProcessTable extends React.Component {
   constructor (props) {
     super(props)
-    this.state = {
-      url: '/incidentstable/getProcessDT',
-      params: {
-        deviceid: this.props.device.id,
-        search: ''
-      }
-    }
 
     this.columns = [{
       'displayName': 'Name',
-      'columnName': 'name',
+      'columnName': 'Name',
       'cssClassName': 'width-180'
     }, {
       'displayName': 'Id',
-      'columnName': 'id',
-      'cssClassName': 'width-180'
+      'columnName': 'Id',
+      'cssClassName': 'width-100'
     }, {
       'displayName': 'Owner',
-      'columnName': 'owner',
+      'columnName': 'Owner',
       'cssClassName': 'width-180'
     }, {
       'displayName': 'Parent',
-      'columnName': 'parent',
+      'columnName': 'Parent',
       'cssClassName': 'width-180'
     }, {
       'displayName': 'FilePath',
-      'columnName': 'filepath'
+      'columnName': 'FilePath'
     }, {
       'displayName': 'Status',
-      'columnName': 'status',
+      'columnName': 'Status',
       'cssClassName': 'width-120'
     }, {
       'displayName': 'LastSeen',
-      'columnName': 'updated',
+      'columnName': 'timestamp',
       'customComponent': (props) => {
         if (!props.data) return <span />
 
@@ -49,6 +42,10 @@ export default class ProcessTable extends React.Component {
       },
       'cssClassName': 'width-180'
     }]
+  }
+
+  componentWillMount () {
+    this.props.fetchDeviceProcesses(this.props.device)
   }
 
   onRowDblClick () {
@@ -69,7 +66,7 @@ export default class ProcessTable extends React.Component {
         onRowDblClick={this.onRowDblClick.bind(this)}
 
         useExternal={false}
-        data={[]}
+        data={this.props.processes}
       />
     )
   }

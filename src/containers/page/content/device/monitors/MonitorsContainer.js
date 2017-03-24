@@ -11,6 +11,7 @@ import {
 
   fetchDeviceEventLog,
   fetchDeviceApps,
+  fetchDeviceProcesses,
   fetchMonitorTemplates,
   closeDeviceMonitorPicker
 } from 'actions'
@@ -23,6 +24,7 @@ import {
 
     eventLogs: state.devices.eventLogs,
     apps: state.devices.apps,
+    processes: state.devices.processes,
     monitorTemplates: state.settings.monitorTemplates
   }),
   {
@@ -34,6 +36,7 @@ import {
 
     fetchDeviceEventLog,
     fetchDeviceApps,
+    fetchDeviceProcesses,
     fetchMonitorTemplates,
     closeDeviceMonitorPicker
   }
