@@ -1,16 +1,23 @@
 import React, { Component } from 'react'
 import InlineEdit from 'react-edit-inline'
+import IconButton from 'material-ui/IconButton'
+import DeleteIcon from 'material-ui/svg-icons/action/delete'
+import { SubHeader } from './parts'
+import { buttonStyle, iconStyle } from 'style/materialStyles'
 
 export default class WorkflowStep2 extends Component {
   render () {
     const {onRemoveRule, rules, onRuleChange, onRuleClick, ruleModal, selected} = this.props
     return (
       <div>
-        <div>
-          <span className="margin-md-right"><b>Rules</b></span>
-          <a href="javascript:;" onClick={onRemoveRule} className="margin-sm-right">
-            <i className="fa fa-trash-o"/>
-          </a>
+        <div className="text-plus-icon">
+          <SubHeader name="Rules"/>
+          <IconButton
+            style={buttonStyle}
+            iconStyle={iconStyle}
+            onTouchTap={onRemoveRule}>
+              <DeleteIcon color="#545454"/>
+          </IconButton>
         </div>
         <div className="margin-md-bottom">
           <table className="table table-hover">

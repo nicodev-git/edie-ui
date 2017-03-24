@@ -1,4 +1,10 @@
 import React, { Component } from 'react'
+import IconButton from 'material-ui/IconButton'
+import DeleteIcon from 'material-ui/svg-icons/action/delete'
+import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
+import CreateIcon from 'material-ui/svg-icons/content/create'
+import { SubHeader } from './parts'
+import { buttonStyle, iconStyle } from 'style/materialStyles'
 
 export default class WorkflowStep3 extends Component {
   render () {
@@ -6,11 +12,32 @@ export default class WorkflowStep3 extends Component {
       selected, actionModal} = this.props
     return (
       <div>
-        <div>
-          <span className="margin-md-right"><b>Actions</b></span>
-          <a href="javascript:;" onClick={onAddAction} className="margin-sm-right"><i className="fa fa-plus-square"/></a>
-          <a href="javascript:;" onClick={onEditAction} className="margin-sm-right"><i className="fa fa-edit"/></a>
-          <a href="javascript:;" onClick={onRemoveAction} className="margin-sm-right"><i className="fa fa-trash-o"/></a>
+        <div className="crud-buttons">
+          <SubHeader name="Rules"/>
+          <div className="add-button">
+            <IconButton
+              style={buttonStyle}
+              iconStyle={iconStyle}
+              onTouchTap={onAddAction}>
+                <AddCircleIcon color="#545454"/>
+            </IconButton>
+          </div>
+          <div className="edit-button">
+            <IconButton
+              style={buttonStyle}
+              iconStyle={iconStyle}
+              onTouchTap={onEditAction}>
+                <CreateIcon color="#545454"/>
+            </IconButton>
+          </div>
+          <div className="remove-button">
+            <IconButton
+              style={buttonStyle}
+              iconStyle={iconStyle}
+              onTouchTap={onRemoveAction}>
+                <DeleteIcon color="#545454"/>
+            </IconButton>
+          </div>
         </div>
         <div>
           <table className="table table-hover">

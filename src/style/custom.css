@@ -717,6 +717,11 @@ table.table tbody tr.selected {
 .text-plus-icon {
   display: flex;
   justify-content: flex-start;
+  height: 50px !important;
+}
+
+.text-plus-icon button {
+  padding: 0 !important;
 }
 
 .text-plus-icon svg:hover {
@@ -763,12 +768,34 @@ table.table tbody tr.selected {
 
 .wizard-step-1-help {
   position: absolute;
-  top: 100px;
-  right: 10px;
+  top: 85px;
+  right: 5px;
 }
 
 .wizard-step-1-add {
   position: absolute;
-  top: 150px;
-  right: 10px;
+  top: 130px;
+  right: 5px;
+}
+
+.crud-buttons {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.crud-buttons button {
+  padding: 0 !important;
+}
+
+.add-button svg:hover {
+  fill: #8bc34a !important;
+}
+
+.edit-button svg:hover {
+  fill: #2196f3 !important;
+}
+
+.remove-button svg:hover {
+  fill: #f44336 !important;
 }
