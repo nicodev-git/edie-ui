@@ -1,28 +1,31 @@
 import React, { Component } from 'react'
 import { Field } from 'redux-form'
+import { FormInput, FormSelect, FormCheckbox } from './parts'
 
 export default class WorkflowStep1 extends Component {
   render () {
     const {categories, onAddCategory, categoryModal} = this.props
     return (
       <div>
-        <div className="row margin-md-bottom">
-          <label className="col-md-3">Name</label>
-          <div className="col-md-9">
-            <Field name="name" component="input" className="form-control"/>
-          </div>
+        <div className="form-column">
+          <Field name="name" component={FormInput} label="Name"/>
+          <Field name="desc" component={FormInput} label="Description"/>
+          <Field name="display_incident_desc" component={FormInput} label="Display Incident Description"/>
+          <Field name="category" component={FormSelect} label="Category"
+            options={categories.map(c => ({value: c.name, label: c.name}))}/>
+          <Field name="severity" component={FormSelect} label="Severity"
+            options={[
+              {value: 'HIGH', label: 'HIGH'},
+              {value: 'MEDIUM', label: 'MEDIUM'},
+              {value: 'LOW', label: 'LOW'},
+              {value: 'AUDIT', label: 'AUDIT'},
+              {value: 'IGNORE', label: 'IGNORE'},
+              {value: 'IGNOREDELETE', label: 'IGNOREDELETE'},
+              {value: 'DEVICE', label: 'DEVICE'}
+            ]}/>
+          <Field name="enable" label="Enabled" component={FormCheckbox}/>
         </div>
         <div className="row margin-md-bottom">
-          <label className="col-md-3">Description</label>
-          <div className="col-md-9">
-            <Field name="desc" component="input" className="form-control"/>
-          </div>
-        </div>
-        <div className="row margin-md-bottom">
-          <label className="col-md-3 control-label">Display Incident Description</label>
-          <div className="col-md-8 pr-none">
-            <Field name="display_incident_desc" component="input" className="form-control"/>
-          </div>
           <div className="col-md-1 text-right pl-none margin-sm-top">
             <a href="javascript:;">
               <i className="fa fa-question-circle fa-x"
@@ -32,34 +35,8 @@ export default class WorkflowStep1 extends Component {
           </div>
         </div>
         <div className="row margin-md-bottom">
-          <label className="col-md-3">Category</label>
-          <div className="col-md-8 pr-none">
-            <Field name="category" component="select" className="form-control">
-              {categories.map(c => <option key={c.id} value={c.name}>{c.name}</option>)}
-            </Field>
-          </div>
           <div className="col-md-1 text-right pl-none margin-sm-top">
             <a href="javascript:;" onClick={onAddCategory}><i className="fa fa-plus-square fa-x"/></a>
-          </div>
-        </div>
-        <div className="row margin-md-bottom">
-          <label className="col-md-3">Severity</label>
-          <div className="col-md-9">
-            <Field name="severity" component="select" className="form-control">
-              <option>HIGH</option>
-              <option>MEDIUM</option>
-              <option>LOW</option>
-              <option>AUDIT</option>
-              <option>IGNORE</option>
-              <option>IGNOREDELETE</option>
-              <option>DEVICE</option>
-            </Field>
-          </div>
-        </div>
-        <div className="row margin-md-bottom">
-          <label className="col-md-3">Enabled</label>
-          <div className="col-md-9">
-            <Field name="enable" component="input" type="checkbox"/>
           </div>
         </div>
         {categoryModal}

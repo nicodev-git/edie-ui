@@ -5,6 +5,7 @@ const badgeTextColor = '#f5f5f5'
 const errorColor = '#d32f2f'
 const backgroundColor = '#ffffff'
 const headerColor = '#000000'
+const disabledColor = '#d7d8d9'
 const fontSize = '16pt'
 
 export const sidebarIconsColor = '#838489'
@@ -38,6 +39,11 @@ export const selectedItemStyle = {
 export const buttonStyle = {
   backgroundColor: backgroundColor,
   color: primeColor
+}
+
+export const buttonDisabledStyle = {
+  backgroundColor: backgroundColor,
+  color: disabledColor
 }
 
 export const buttonTextStyle = {
