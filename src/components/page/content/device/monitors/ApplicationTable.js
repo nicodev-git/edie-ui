@@ -5,21 +5,14 @@ import { ResponsiveInfiniteTable } from '../../../../shared/InfiniteTable'
 export default class ApplicationTable extends Component {
   constructor (props) {
     super(props)
-    this.state = {
-      url: '/devices/getInstalledAppsForDevice',
-      params: {
-        deviceid: this.props.device.id,
-        search: ''
-      }
-    }
 
     this.columns = [{
       'displayName': 'Name',
-      'columnName': 'name',
+      'columnName': 'agentdata.Name',
       'cssClassName': 'nowrap'
     }, {
       'displayName': 'InstallDate',
-      'columnName': 'installdate',
+      'columnName': 'agentdata.InstallDate',
       'cssClassName': 'width-140',
       'customComponent': (props) => {
         let val = props.data
@@ -32,34 +25,35 @@ export default class ApplicationTable extends Component {
       }
     }, {
       'displayName': 'Version',
-      'columnName': 'version',
+      'columnName': 'agentdata.Version',
       'cssClassName': 'width-120'
     }, {
       'displayName': 'Publisher',
-      'columnName': 'publisher',
+      'columnName': 'agentdata.Publisher',
       'cssClassName': 'width-200'
     }, {
       'displayName': 'Size',
-      'columnName': 'size',
+      'columnName': 'agentdata.Size',
       'cssClassName': 'width-120'
     }]
-  }
-
-  componentWillMount () {
-
   }
 
   render () {
     return (
       <ResponsiveInfiniteTable
-        cells={this.state.columns}
+        cells={this.columns}
         ref="table"
         rowMetadata={{'key': 'id'}}
-        bodyHeight={this.props.containerHeight}
+        rowHeight={38}
         selectable
 
-        useExternal={false}
-        data={this.props.apps}
+        url="/event/search/findAgentEvents"
+        params={{
+          deviceid: this.props.device.id,
+          eventType: 'AGENT',
+          monitortype: 'app',
+          sort: 'timestamp,desc'
+        }}
       />
     )
   }

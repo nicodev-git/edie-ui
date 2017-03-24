@@ -41,7 +41,6 @@ export default class EventLogTable extends Component {
           monitortype: 'log',
           sort: 'timestamp,desc'
         }}
-        data={this.props.eventLogs}
       />
     )
   }
