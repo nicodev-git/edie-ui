@@ -107,12 +107,10 @@ export default class WorkflowModalInner extends Component {
   }
 
   render () {
-    const {onSubmit, onClickClose} = this.props
+    const {onSubmit} = this.props
     let wizard = this.renderWizard()
-
     return (
       <MainWorkflowModalView
-        onClose={onClickClose}
         onSubmit={onSubmit}
         wizard={wizard}
       />

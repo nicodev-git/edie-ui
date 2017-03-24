@@ -18,6 +18,7 @@ import ImageUploader from './ImageUploader'
 import ProfileImageUpload from './ProfileImageUpload'
 import CheckboxItem from './CheckboxItem'
 import TwoButtonsBlockCustom from './TwoButtonsBlockCustom'
+import WizardButtons from './WizardButtons'
 
 export {
     Header,
@@ -39,5 +40,6 @@ export {
     UploadFile,
     ImageUploader,
     ProfileImageUpload,
-    CheckboxItem
+    CheckboxItem,
+    WizardButtons
 }

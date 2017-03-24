@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Tooltip from 'react-tooltip'
+import { WizardButtons } from './parts'
 
 export default class WorkflowWizard extends Component {
   render () {
@@ -15,17 +16,8 @@ export default class WorkflowWizard extends Component {
             </div>
           </div>
           {step}
-          <div className="text-right mb-none">
-            <a href="javascript:;" className="btn btn-default btn-sm margin-sm-right"
-              onClick={onClose}>Cancel</a>
-            <a href="javascript:;" className="btn btn-default btn-sm margin-sm-right"
-              onClick={onDiagram}>Diagram</a>
-            <a href="javascript:;" className="btn btn-default btn-sm margin-sm-right"
-              disabled={current === 1}
-              onClick={onPrev}>Previous</a>
-            { current < steps ? <a href="javascript:;" className="btn btn-default btn-sm" onClick={onNext}>Next</a> : null}
-            { current === steps ? <button className="btn btn-primary btn-sm" type="submit">Finish</button> : null}
-          </div>
+          <WizardButtons steps={steps} current={current} onClose={onClose}
+            onPrev={onPrev} onNext={onNext} onDiagram={onDiagram}/>
         </div>
         {diagramModal}
         <Tooltip place="right" event="mouseover" eventOff="mouseout" multiline effect="solid"/>
