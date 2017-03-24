@@ -4,49 +4,42 @@ import { ResponsiveInfiniteTable } from '../../../../shared/InfiniteTable'
 export default class EventLogTable extends Component {
   constructor (props) {
     super(props)
-    this.state = {
-      columns: [{
-        'displayName': 'Time',
-        'columnName': 'logtime',
-        'cssClassName': 'nowrap width-140'
-      }, {
-        'displayName': 'LogName',
-        'columnName': 'logname',
-        'cssClassName': 'width-100'
-      }, {
-        'displayName': 'EventID',
-        'columnName': 'eventid',
-        'cssClassName': 'width-80'
-      }, {
-        'displayName': 'User',
-        'columnName': 'user',
-        'cssClassName': 'width-160'
-      }, {
-        'displayName': 'Data',
-        'columnName': 'data'
-      }],
-
-      url: '/devices/getEventLogsForDevice',
-      params: {
-        deviceid: this.props.device.id
-      }
-    }
-  }
-
-  componentWillMount () {
-    this.props.fetchDeviceEventLog()
+    this.columns = [{
+      'displayName': 'Time',
+      'columnName': 'agentdata.LogTime',
+      'cssClassName': 'nowrap width-140'
+    }, {
+      'displayName': 'LogName',
+      'columnName': 'agentdata.LogName',
+      'cssClassName': 'width-100'
+    }, {
+      'displayName': 'EventID',
+      'columnName': 'agentdata.EventID',
+      'cssClassName': 'width-80'
+    }, {
+      'displayName': 'User',
+      'columnName': 'agentdata.User',
+      'cssClassName': 'width-160'
+    }, {
+      'displayName': 'Data',
+      'columnName': 'agentdata.Data'
+    }]
   }
 
   render () {
     return (
       <ResponsiveInfiniteTable
-        cells={this.state.columns}
+        cells={this.columns}
         ref="table"
         rowMetadata={{'key': 'id'}}
-        bodyHeight={this.props.containerHeight}
         selectable
-
-        useExternal={false}
+        url="/event/search/findAgentEvents"
+        params={{
+          deviceid: this.props.device.id,
+          eventType: 'AGENT',
+          monitortype: 'log',
+          sort: 'timestamp,desc'
+        }}
         data={this.props.eventLogs}
       />
     )
