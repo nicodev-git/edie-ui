@@ -103,7 +103,4 @@ const initialState = {
   }
 }
 
-export const getStore = () => {
-  const store = createStoreWithMiddleware(reducers, initialState)
-  return store
-}
+export const store = createStoreWithMiddleware(reducers, initialState)
