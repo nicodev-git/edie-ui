@@ -1,4 +1,6 @@
 const tabs = [{
+  title: 'All', path: '/search'
+}, {
   title: 'Incidents', path: '/search/incidents'
 }, {
   title: 'IP Info', path: '/search/devices'
