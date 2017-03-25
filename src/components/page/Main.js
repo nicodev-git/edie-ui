@@ -65,7 +65,7 @@ class Main extends React.Component {
   }
 
   renderSidebar () {
-    const {location, device} = this.props
+    const {location, device, router} = this.props
     const {pathname} = location
 
     let pageId = dashboardId
@@ -97,6 +97,7 @@ class Main extends React.Component {
 
     return (
       <SidebarContainer
+        router={router}
         pageId={pageId}
         pageType={pageType}
         device={device}

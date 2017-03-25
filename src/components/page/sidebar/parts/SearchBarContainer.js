@@ -30,6 +30,7 @@ export default class SearchBarContainer extends Component {
   render () {
     return (
       <SearchBar
+        defaultKeyword={this.props.defaultKeyword}
         onSearch={this.onEnter.bind(this)}
         color={this.state.color}
         active={this.state.active}

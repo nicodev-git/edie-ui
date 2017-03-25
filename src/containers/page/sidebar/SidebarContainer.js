@@ -8,7 +8,8 @@ import {
   openProfileModal,
   closeProfileModal,
   fetchUserInfo,
-  updateUserProfile
+  updateUserProfile,
+  updateSearchKeyword
 } from 'actions'
 
 class SidebarContainer extends React.Component {
@@ -33,12 +34,14 @@ export default connect(
 
     user: state.dashboard.userInfo || {},
     profileModalVisible: state.dashboard.profileModalVisible,
-    maps: state.dashboard.maps
+    maps: state.dashboard.maps,
+    keyword: state.search.keyword
   }), {
     signOut,
     openProfileModal,
     closeProfileModal,
     fetchUserInfo,
-    updateUserProfile
+    updateUserProfile,
+    updateSearchKeyword
   }
 )(SidebarContainer)

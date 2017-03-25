@@ -14,7 +14,7 @@ const iconStyle = {
   verticalAlign: 'middle'
 }
 
-const SearchBar = ({onSearch, active, onBackgroundChange}) => (
+const SearchBar = ({onSearch, active, onBackgroundChange, defaultKeyword}) => (
   <div className="searchbar-container"
     onFocus={onBackgroundChange}
     onBlur={onBackgroundChange}>
@@ -25,6 +25,7 @@ const SearchBar = ({onSearch, active, onBackgroundChange}) => (
         className="searchbar-input"
         style={active ? activeStyle : defaultStyle}
         autoFocus
+        defaultValue={defaultKeyword}
         onKeyPress={onSearch}/>
     </div>
   </div>
