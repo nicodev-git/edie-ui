@@ -63,6 +63,14 @@ export default class ProcessModal extends Component {
     })
   }
 
+  getRunTimes () {
+    return [this.props.process.StartTime]
+  }
+
+  getChildren () {
+    return this.props.processes.filter(p => p.Parent === this.props.process.Name)
+  }
+
   render () {
     const {process} = this.props
     return (
@@ -75,7 +83,7 @@ export default class ProcessModal extends Component {
 
         <div className="modal-header">
           <h4 className="modal-title bootstrap-dialog-title">
-            Process: {process.name}
+            Process: {process.Name}
           </h4>
           <div className="bootstrap-dialog-close-button">
             <button className="close"
@@ -118,7 +126,7 @@ export default class ProcessModal extends Component {
               <div style={{height: '150px', overflow: 'auto'}}>
                 <table>
                   <tbody>{
-                    this.state.runTimes.map((item, i) =>
+                    this.getRunTimes().map((item, i) =>
                       <tr key={i}>
                         <td><TimeAgo date={item}/></td>
                       </tr>)
@@ -129,16 +137,16 @@ export default class ProcessModal extends Component {
             </div>
             <div className="col-md-8">
               <div className="row">
-                <label className="col-md-6">Children</label>
-                <label className="col-md-6">PID</label>
+                <label className="col-md-9">Children</label>
+                <label className="col-md-3">PID</label>
               </div>
               <div style={{height: '150px', overflow: 'auto'}}>
-                <table>
+                <table style={{width: '100%'}}>
                   <tbody>{
-                    this.state.children.map(item =>
-                      <tr key={item.id} onDoubleClick={this.onChildDblClick.bind(this, item)}>
-                        <td width="200">{item.name}</td>
-                        <td>{item.processid}</td>
+                    this.getChildren().map((item, i) =>
+                      <tr key={`${i}-${item.Id}`} onDoubleClick={this.onChildDblClick.bind(this, item)}>
+                        <td width="75%">{item.Name}</td>
+                        <td width="25%">{item.Id}</td>
                       </tr>)
                   }</tbody>
                 </table>
