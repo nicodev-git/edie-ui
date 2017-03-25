@@ -69,7 +69,7 @@ class GenericSearch extends React.Component {
             <div style={{ position: 'relative', display: 'inline-block' }}>
               <input
                 type="text" placeholder="Search" className="form-control"
-                style={{width: '220px', paddingLeft: '35px'}}
+                style={{width: '400px', paddingLeft: '35px'}}
                 defaultValue={this.props.keyword}
                 onKeyDown={this.onSearchKeyDown.bind(this)}
                 ref="search"/>
