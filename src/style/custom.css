@@ -17,6 +17,10 @@ body {
     margin-left: 0!important;
 }
 
+.mt-none {
+    margin-top: 0!important;
+}
+
 .p-none {
     padding: 0!important;
 }
