@@ -23,6 +23,10 @@ class GenericSearch extends React.Component {
       name: 'Last 24 hours',
       from: moment().add(-24, 'hours').valueOf(),
       to: moment().valueOf()
+    }, {
+      name: 'Any time',
+      from: 0,
+      to: 0
     }]
 
     this.cells = [{
