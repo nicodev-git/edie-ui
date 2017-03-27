@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
 import Modal from 'react-bootstrap-modal'
 import { Field } from 'redux-form'
-import { Header, SubmitBlock, FormInput, FormSelect, ImageUploader } from './parts'
+import { Header, SubHeader, SubmitBlock, FormInput, FormSelect, ImageUploader,
+  Monitors, MonitorTemplates } from './parts'
 
 export default class DeviceTplModalView extends Component {
   render () {
-    const {show, header, options, imgUrl, onSubmit, onHide, onChange} = this.props
+    const {show, header, options, imgUrl, onSubmit, onHide, onChange,
+      monitors, monitorTemplates, onAddMonitor, onRemoveMonitor} = this.props
     return (
       <Modal
         show={show}
@@ -20,6 +22,15 @@ export default class DeviceTplModalView extends Component {
               <Field name="name" component={FormInput} label="Name"/>
               <Field name="devicetemplategroup" component={FormSelect} label="Group" options={options}/>
               <ImageUploader imgUrl={imgUrl} onChange={onChange}/>
+              <SubHeader name="Monitors"/>
+              <div className="row">
+                <div className="col-md-6">
+                  <Monitors monitors={monitors} onRemoveMonitor={onRemoveMonitor} />
+                </div>
+                <div className="col-md-6">
+                  <MonitorTemplates monitorTemplates={monitorTemplates} onAddMonitor={onAddMonitor} />
+                </div>
+              </div>
             </div>
             <SubmitBlock name="Save" onClick={onHide}/>
           </form>

@@ -20,6 +20,8 @@ import CheckboxItem from './CheckboxItem'
 import TwoButtonsBlockCustom from './TwoButtonsBlockCustom'
 import WizardButtons from './WizardButtons'
 import FormCheckbox from './FormCheckbox'
+import Monitors from './Monitors'
+import MonitorTemplates from './MonitorTemplates'
 
 export {
     Header,
@@ -43,5 +45,7 @@ export {
     ProfileImageUpload,
     CheckboxItem,
     WizardButtons,
-    FormCheckbox
+    FormCheckbox,
+    Monitors,
+    MonitorTemplates
 }
