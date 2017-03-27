@@ -3,7 +3,8 @@ import {
   SEARCH_INCIDENT_DEVICES,
   UPDATE_DEVICE_INCIDENT,
   FIX_ALL_INCIDENTS_BY_TYPE,
-  UPDATE_SEARCH_PARAMS
+  UPDATE_SEARCH_PARAMS,
+  OPEN_SEARCH_FIELD
 } from '../actions/types'
 
 export default function (state = {}, action) {
@@ -29,6 +30,9 @@ export default function (state = {}, action) {
       return { ...state, params: action.params }
     }
 
+    case OPEN_SEARCH_FIELD: {
+
+    }
   }
   return state
 }

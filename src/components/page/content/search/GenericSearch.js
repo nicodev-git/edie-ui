@@ -3,6 +3,7 @@ import { reduxForm, submit } from 'redux-form'
 import { connect } from 'react-redux'
 import { assign } from 'lodash'
 import moment from 'moment'
+// import Popover from 'material-ui/Popover'
 
 import {ResponsiveInfiniteTable} from '../../../shared/InfiniteTable'
 import SearchTabs from './SearchTabs'
@@ -75,6 +76,7 @@ class GenericSearch extends React.Component {
             <a href="javascript:;">{f.name}</a>
           </div>
         )}
+
       </div>
     )
   }
