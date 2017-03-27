@@ -795,3 +795,13 @@ table.table tbody tr.selected {
 .remove-button svg:hover {
   fill: #f44336 !important;
 }
+
+.wizard-diagram-choice {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.wizard-diagram-choice button:hover {
+  background-color: #d7d8d9 !important;
+}

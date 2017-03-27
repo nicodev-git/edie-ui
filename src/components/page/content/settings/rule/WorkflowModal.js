@@ -3,15 +3,11 @@ import Modal from 'react-bootstrap-modal'
 import { reduxForm, Field } from 'redux-form'
 import { concat, assign, forOwn } from 'lodash'
 import Tooltip from 'react-tooltip'
-import FlatButton from 'material-ui/FlatButton'
 import InlineEdit from 'react-edit-inline'
-
-import ActionList from 'material-ui/svg-icons/action/list'
-import ActionTrendingUp from 'material-ui/svg-icons/action/trending-up'
-
 import CategoryModal from './CategoryModal'
 import ActionModal from './ActionModal'
 import DiagramViewContainer from 'containers/page/content/settings/rule/DiagramViewContainer'
+import { WorkflowStep0 } from 'components/modal'
 
 const renderInput = field => (
   <div className="row margin-md-bottom">
@@ -333,25 +329,12 @@ class WorkflowModal extends React.Component { // eslint-disable-line react/no-mu
   renderStep () {
     const {current} = this.state
     const {workflowEditType, updateWorkflowEditType} = this.props
-
     if (current === 1) {
       return (
-        <div>
-          <Field name="name" component={renderInput} type="text" label="Name"/>
-          <div className="row">
-            <label className="col-md-3">Add By</label>
-            <div className="col-md-9">
-              <FlatButton
-                icon={<ActionList />}
-                onTouchTap={updateWorkflowEditType.bind(null, 'wizard')}
-                backgroundColor={workflowEditType === 'wizard' ? '#C0C0C0' : null}/>
-              <FlatButton
-                icon={<ActionTrendingUp />}
-                onTouchTap={updateWorkflowEditType.bind(null, 'diagram')}
-                backgroundColor={workflowEditType === 'diagram' ? '#C0C0C0' : null}/>
-            </div>
-          </div>
-        </div>
+        <WorkflowStep0
+          workflowEditType={workflowEditType}
+          updateWorkflowEditType={updateWorkflowEditType}
+        />
       )
     } else {
       if (workflowEditType === 'wizard') return this.renderWizardStep(current)

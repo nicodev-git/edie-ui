@@ -13,6 +13,7 @@ import ProfileModalView from './ProfileModalView'
 import DeviceSearchModalView from './DeviceSearchModalView'
 import SysWorkflowsModalView from './SysWorkflowsModalView'
 import SegmentListModalView from './SegmentListModalView'
+import WorkflowStep0 from './WorkflowStep0'
 import WorkflowStep1 from './WorkflowStep1'
 import WorkflowStep2 from './WorkflowStep2'
 import WorkflowStep3 from './WorkflowStep3'
@@ -35,6 +36,7 @@ export {
     DeviceSearchModalView,
     SysWorkflowsModalView,
     SegmentListModalView,
+    WorkflowStep0,
     WorkflowStep1,
     WorkflowStep2,
     WorkflowStep3,
