@@ -4,6 +4,7 @@ import {
   UPDATE_DEVICE_INCIDENT,
   FIX_ALL_INCIDENTS_BY_TYPE,
   UPDATE_SEARCH_PARAMS,
+  UPDATE_SEARCH_FIELDS,
   OPEN_SEARCH_FIELD
 } from '../actions/types'
 
@@ -26,13 +27,13 @@ export default function (state = {}, action) {
     case FIX_ALL_INCIDENTS_BY_TYPE:
       return { ...state, incidentDraw: state.incidentDraw + 1 }
 
-    case UPDATE_SEARCH_PARAMS: {
+    case UPDATE_SEARCH_PARAMS:
       return { ...state, params: action.params }
-    }
 
-    case OPEN_SEARCH_FIELD: {
-
-    }
+    case UPDATE_SEARCH_FIELDS:
+      return { ...state, fields: action.data }
+    case OPEN_SEARCH_FIELD:
+      return { ...state }
   }
   return state
 }
