@@ -1,5 +1,5 @@
 import React from 'react'
-import { reduxForm } from 'redux-form'
+import { reduxForm, submit } from 'redux-form'
 import { connect } from 'react-redux'
 import { assign } from 'lodash'
 import moment from 'moment'
@@ -49,7 +49,7 @@ class GenericSearch extends React.Component {
 
   onSearchKeyDown (e) {
     if (e.keyCode === 13) {
-      this.props.updateSearchParams(assign({}, this.props.params, {query: e.target.value}))
+      submit('genericSearchForm')
     }
   }
 
@@ -58,6 +58,12 @@ class GenericSearch extends React.Component {
   }
 
   handleFormSubmit (values) {
+    this.props.updateSearchParams({
+      query: values.query,
+      dateFrom: this.dateOptions[values.dateIndex].from,
+      dateTo: this.dateOptions[values.dateIndex].to
+    })
+
     console.log(values)
   }
 

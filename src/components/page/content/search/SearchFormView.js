@@ -20,8 +20,8 @@ export default class SearchFormView extends React.Component {
     return (
       <form onSubmit={onSubmit}>
         <div className="text-center margin-md-top" >
-          <Field name="query" component={FormInput} label="Search" onKeyDown={onSearchKeyDown}/>
-          <Field name="dateIndex" component={FormSelect} label="" options={options}/>
+          <Field name="query" component={FormInput} label="Search" onKeyDown={onSearchKeyDown} style={{verticalAlign: 'top'}}/>
+          <Field name="dateIndex" component={FormSelect} label="" options={options} style={{verticalAlign: 'top'}}/>
           <FlatButton type="submit" icon={<ActionSearch />} style={{marginTop: '4px', verticalAlign: 'top'}}/>
         </div>
       </form>
