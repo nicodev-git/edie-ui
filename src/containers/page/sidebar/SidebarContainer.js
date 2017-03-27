@@ -9,7 +9,7 @@ import {
   closeProfileModal,
   fetchUserInfo,
   updateUserProfile,
-  updateSearchKeyword
+  updateSearchParams
 } from 'actions'
 
 class SidebarContainer extends React.Component {
@@ -42,6 +42,6 @@ export default connect(
     closeProfileModal,
     fetchUserInfo,
     updateUserProfile,
-    updateSearchKeyword
+    updateSearchParams
   }
 )(SidebarContainer)

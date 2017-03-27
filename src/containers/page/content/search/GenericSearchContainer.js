@@ -6,17 +6,17 @@ import { withRouter } from 'react-router'
 import GenericSearch from 'components/page/content/search/GenericSearch'
 
 import {
-  updateSearchKeyword
+  updateSearchParams
 } from 'actions'
 
 @withRouter
 @connect(
   state => ({
-    keyword: state.search.keyword
+    params: state.search.params
   }),
   dispatch => ({
     ...bindActionCreators({
-      updateSearchKeyword
+      updateSearchParams
     }, dispatch)
   })
 )

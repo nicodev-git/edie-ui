@@ -70,7 +70,7 @@ export default class Sidebar extends React.Component {
   }
 
   onSearch (text) {
-    this.props.updateSearchKeyword(text)
+    this.props.updateSearchParams(text)
     this.props.router.push('/search')
   }
 

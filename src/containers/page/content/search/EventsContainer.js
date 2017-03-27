@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux'
 import { withRouter } from 'react-router'
 
 import {
-  updateSearchKeyword
+  updateSearchParams
 } from 'actions'
 import Events from 'components/page/content/search/Events'
 
@@ -15,7 +15,7 @@ import Events from 'components/page/content/search/Events'
   }),
   dispatch => ({
     ...bindActionCreators({
-      updateSearchKeyword
+      updateSearchParams
     }, dispatch)
   })
 )

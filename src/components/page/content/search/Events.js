@@ -48,7 +48,7 @@ class Events extends React.Component {
   }
 
   onSearchKeyUp (e) {
-    this.props.updateSearchKeyword(e.target.value)
+    this.props.updateSearchParams(e.target.value)
   }
 
   render () {

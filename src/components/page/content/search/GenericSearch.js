@@ -1,6 +1,10 @@
 import React from 'react'
 import { assign } from 'lodash'
+import {SelectField, MenuItem, TextField} from 'material-ui'
+import moment from 'moment'
 
+import { errorStyle, underlineFocusStyle, underlineStyle, inputStyle,
+  selectedItemStyle } from 'style/materialStyles'
 import {ResponsiveInfiniteTable} from '../../../shared/InfiniteTable'
 
 import SearchTabs from './SearchTabs'
@@ -13,27 +17,13 @@ class GenericSearch extends React.Component {
     super(props)
 
     this.state = {
-
-      severities: [
-        { label: 'High', value: 'HIGH' },
-        { label: 'Medium', value: 'MEDIUM' },
-        { label: 'Low', value: 'LOW' },
-        { label: 'Audit', value: 'AUDIT' },
-        { label: 'Ignore', value: 'IGNORE' }
-      ],
-
-      selectedSeverity: ['HIGH', 'MEDIUM'],
-      selectedDevices: [],
-      afterStartTimestamp: '',
-      beforeStartTimestamp: '',
-      fixed: false,
-      search: '',
-
-      selectedIndex: -1,
-      commentModalVisible: false,
-
-      deviceModalVisible: false
     }
+
+    this.dateOptions = [{
+      name: 'Last 24 hours',
+      from: moment().add(-24, 'hours').valueOf(),
+      to: moment().valueOf()
+    }]
 
     this.cells = [{
       'displayName': 'Type',
@@ -55,8 +45,12 @@ class GenericSearch extends React.Component {
 
   onSearchKeyDown (e) {
     if (e.keyCode === 13) {
-      this.props.updateSearchKeyword(e.target.value)
+      this.props.updateSearchParams(assign({}, this.props.params, {query: e.target.value}))
     }
+  }
+
+  onChangeDate (event, index, value) {
+    console.log(value)
   }
 
   onRowDblClick () {
@@ -68,18 +62,28 @@ class GenericSearch extends React.Component {
       <TabPage>
         <TabPageHeader title="Search">
           <div className="text-center margin-md-top" >
-            <div style={{ position: 'relative', display: 'inline-block' }}>
-              <input
-                type="text" placeholder="Search" className="form-control"
-                style={{width: '400px', paddingLeft: '35px'}}
-                defaultValue={this.props.keyword}
-                onKeyDown={this.onSearchKeyDown.bind(this)}
-                ref="search"/>
-              <a className="btn" href="javascript:;" style={{position: 'absolute', left: 0, top: 0}}>
-                <i className="fa fa-search" />
-              </a>
-            </div>
-
+            <TextField
+              type="text"
+              hintText="Search"
+              errorStyle={errorStyle}
+              inputStyle={inputStyle}
+              underlineFocusStyle={underlineStyle}
+              style={{width: '400px', verticalAlign: 'top'}}
+              defaultValue={this.props.query}
+              onKeyDown={this.onSearchKeyDown.bind(this)}
+            />
+            <SelectField
+              errorStyle={errorStyle}
+              underlineStyle={underlineFocusStyle}
+              selectedMenuItemStyle={selectedItemStyle}
+              menuItemStyle={inputStyle}
+              labelStyle={inputStyle}
+              value={this.props.dateIndex}
+              onChange={this.onChangeDate.bind(this)}>
+              {this.dateOptions.map((m, index) =>
+                <MenuItem key={index} value={index} primaryText={m.name}/>
+              )}
+            </SelectField>
           </div>
         </TabPageHeader>
 
@@ -91,9 +95,7 @@ class GenericSearch extends React.Component {
             rowMetadata={{'key': 'id'}}
             selectable
             onRowDblClick={this.onRowDblClick.bind(this)}
-            params={{
-              query: this.props.keyword || ''
-            }}
+            params={this.props.params}
           />
         </TabPageBody>
       </TabPage>

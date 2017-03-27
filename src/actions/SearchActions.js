@@ -1,12 +1,12 @@
 import {
-  UPDATE_SEARCH_KEYWORD
+  UPDATE_SEARCH_PARAMS
 } from './types'
 
-export const updateSearchKeyword = (keyword) => {
+export const updateSearchParams = (params) => {
   return function (dispatch) {
     dispatch({
-      type: UPDATE_SEARCH_KEYWORD,
-      keyword
+      type: UPDATE_SEARCH_PARAMS,
+      params
     })
   }
 }

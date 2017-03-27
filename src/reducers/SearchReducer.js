@@ -3,7 +3,7 @@ import {
   SEARCH_INCIDENT_DEVICES,
   UPDATE_DEVICE_INCIDENT,
   FIX_ALL_INCIDENTS_BY_TYPE,
-  UPDATE_SEARCH_KEYWORD
+  UPDATE_SEARCH_PARAMS
 } from '../actions/types'
 
 export default function (state = {}, action) {
@@ -25,14 +25,8 @@ export default function (state = {}, action) {
     case FIX_ALL_INCIDENTS_BY_TYPE:
       return { ...state, incidentDraw: state.incidentDraw + 1 }
 
-    case UPDATE_SEARCH_KEYWORD: {
-      const keyword = action.keyword || ''
-      // const ex = /([^ ()]*)=([^ ()]*)/gi
-      // const matches = keyword.match(ex) || []
-      // const terms = matches.map(m => /([^ ()]*)=([^ ()]*)/gi.exec(m)[2])
-      // if (terms.length === 0 && keyword) terms.push(keyword)
-      // console.log(terms)
-      return { ...state, keyword }
+    case UPDATE_SEARCH_PARAMS: {
+      return { ...state, params: action.params }
     }
 
   }

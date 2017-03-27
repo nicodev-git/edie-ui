@@ -65,8 +65,9 @@ const initialState = {
     incidents: [],
     incidentDevices: [],
     incidentDraw: 1,
-    keyword: '',
-    terms: []
+    params: {
+      keyword: ''
+    }
   },
 
   settings: {
