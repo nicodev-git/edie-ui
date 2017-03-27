@@ -66,14 +66,25 @@ class GenericSearch extends React.Component {
     })
   }
 
+  getTypeChar (type) {
+    switch (type) {
+      case 'long':
+      case 'boolean':
+      case 'int':
+        return '#'
+    }
+    return 'a'
+  }
+
   renderFields () {
     return (
       <div className="padding-sm">
         <h5>Fields</h5>
         {this.props.fields.map(f =>
           <div key={f.name} className="field-item padding-xs-top">
-            <span className="margin-sm-right text-gray">{f.type === 'number' ? '#' : 'a'}</span>
+            <span className="margin-sm-right text-gray">{this.getTypeChar(f.type)}</span>
             <a href="javascript:;">{f.name}</a>
+            <span className="margin-sm-left text-gray">{f.count}</span>
           </div>
         )}
 

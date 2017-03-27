@@ -71,32 +71,7 @@ const initialState = {
       dateFrom: 0,
       dateTo: 0
     },
-    fields: [
-      {name: 'name', type: 'string'},
-      {name: 'devicename', type: 'string'},
-
-      {name: 'incidentid', type: 'string'},
-      {name: 'monitorid', type: 'string'},
-      {name: 'deviceid', type: 'string'},
-
-      {name: 'eventType', type: 'string'},
-      {name: 'json', type: 'string'},
-      {name: 'timestamp', type: 'number'},
-      {name: 'ip', type: 'string'},
-      {name: 'host', type: 'string'},
-      {name: 'agentid', type: 'string'},
-      {name: 'rawdata', type: 'string'},
-      {name: 'monitortype', type: 'string'},
-      {name: 'category', type: 'string'},
-      {name: 'severity', type: 'string'},
-      {name: 'description', type: 'string'},
-
-      {name: 'workflow', type: 'string'},
-      {name: 'startTimestamp', type: 'number'},
-      {name: 'endTimestamp', type: 'number'},
-      {name: 'fixedUsername', type: 'string'},
-      {name: 'fixedTime', type: 'number'}
-    ]
+    fields: []
   },
 
   settings: {
