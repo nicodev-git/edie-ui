@@ -67,8 +67,9 @@ const initialState = {
     incidentDraw: 1,
     params: {
       query: '',
-      dateFrom: '',
-      dateTo: ''
+      dateIndex: 0,
+      dateFrom: 0,
+      dateTo: 0
     }
   },
 

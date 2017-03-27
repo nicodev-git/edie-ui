@@ -1,16 +1,16 @@
 import React from 'react'
+import { reduxForm } from 'redux-form'
+import { connect } from 'react-redux'
 import { assign } from 'lodash'
-import {SelectField, MenuItem, TextField} from 'material-ui'
 import moment from 'moment'
 
-import { errorStyle, underlineFocusStyle, underlineStyle, inputStyle,
-  selectedItemStyle } from 'style/materialStyles'
 import {ResponsiveInfiniteTable} from '../../../shared/InfiniteTable'
-
 import SearchTabs from './SearchTabs'
 import TabPage from '../../../shared/TabPage'
 import TabPageBody from '../../../shared/TabPageBody'
 import TabPageHeader from '../../../shared/TabPageHeader'
+
+import SearchFormView from './SearchFormView'
 
 class GenericSearch extends React.Component {
   constructor (props) {
@@ -45,8 +45,6 @@ class GenericSearch extends React.Component {
         return <span dangerouslySetInnerHTML={{ __html: data }} />
       }
     }]
-
-    this.onChangeDate(null, null, 0)
   }
 
   onSearchKeyDown (e) {
@@ -55,47 +53,24 @@ class GenericSearch extends React.Component {
     }
   }
 
-  onChangeDate (event, index, value) {
-    const option = this.dateOptions[value]
-    this.props.updateSearchParams(assign({}, this.props.params, {
-      dateIndex: value,
-      dateFrom: option.from,
-      dateTo: option.to
-    }))
-  }
-
   onRowDblClick () {
 
   }
 
+  handleFormSubmit (values) {
+    console.log(values)
+  }
+
   render () {
+    const { handleSubmit } = this.props
     return (
       <TabPage>
         <TabPageHeader title="Search">
-          <div className="text-center margin-md-top" >
-            <TextField
-              type="text"
-              hintText="Search"
-              errorStyle={errorStyle}
-              inputStyle={inputStyle}
-              underlineFocusStyle={underlineStyle}
-              style={{width: '400px', verticalAlign: 'top'}}
-              defaultValue={this.props.query}
-              onKeyDown={this.onSearchKeyDown.bind(this)}
-            />
-            <SelectField
-              errorStyle={errorStyle}
-              underlineStyle={underlineFocusStyle}
-              selectedMenuItemStyle={selectedItemStyle}
-              menuItemStyle={inputStyle}
-              labelStyle={inputStyle}
-              value={this.props.params.dateIndex}
-              onChange={this.onChangeDate.bind(this)}>
-              {this.dateOptions.map((m, index) =>
-                <MenuItem key={index} value={index} primaryText={m.name}/>
-              )}
-            </SelectField>
-          </div>
+          <SearchFormView
+            onSearchKeyDown={this.onSearchKeyDown.bind(this)}
+            dateOptions={this.dateOptions}
+            onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
+          />
         </TabPageHeader>
 
         <TabPageBody tabs={SearchTabs} tab={0}>
@@ -114,4 +89,8 @@ class GenericSearch extends React.Component {
   }
 }
 
-export default GenericSearch
+export default connect(
+  state => ({
+    initialValues: state.search.params
+  })
+)(reduxForm({form: 'genericSearchForm'})(GenericSearch))
