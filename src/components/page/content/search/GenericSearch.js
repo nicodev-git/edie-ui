@@ -41,6 +41,8 @@ class GenericSearch extends React.Component {
         return <span dangerouslySetInnerHTML={{ __html: data }} />
       }
     }]
+
+    this.onChangeDate(null, null, 0)
   }
 
   onSearchKeyDown (e) {
@@ -50,7 +52,12 @@ class GenericSearch extends React.Component {
   }
 
   onChangeDate (event, index, value) {
-    console.log(value)
+    const option = this.dateOptions[value]
+    this.props.updateSearchParams(assign({}, this.props.params, {
+      dateIndex: value,
+      dateFrom: option.from,
+      dateTo: option.to
+    }))
   }
 
   onRowDblClick () {
@@ -78,7 +85,7 @@ class GenericSearch extends React.Component {
               selectedMenuItemStyle={selectedItemStyle}
               menuItemStyle={inputStyle}
               labelStyle={inputStyle}
-              value={this.props.dateIndex}
+              value={this.props.params.dateIndex}
               onChange={this.onChangeDate.bind(this)}>
               {this.dateOptions.map((m, index) =>
                 <MenuItem key={index} value={index} primaryText={m.name}/>

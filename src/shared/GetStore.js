@@ -66,7 +66,9 @@ const initialState = {
     incidentDevices: [],
     incidentDraw: 1,
     params: {
-      keyword: ''
+      query: '',
+      dateFrom: '',
+      dateTo: ''
     }
   },
 
