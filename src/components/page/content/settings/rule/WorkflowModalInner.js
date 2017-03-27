@@ -41,7 +41,7 @@ export default class WorkflowModalInner extends Component {
     let ruleModal = null
     let actionModal = this.renderActionModal()
 
-    if (current === 1) {
+    if (current === 2) {
       return (
         <WorkflowStep1
           categories={this.props.workflowCategories}
@@ -49,7 +49,7 @@ export default class WorkflowModalInner extends Component {
           categoryModal={categoryModal}
         />
       )
-    } else if (current === 2) {
+    } else if (current === 3) {
       return (
         <WorkflowStep2
           onRemoveRule={this.props.onClickRemoveRule}
@@ -60,7 +60,7 @@ export default class WorkflowModalInner extends Component {
           selected={selectedRuleIndex}
         />
       )
-    } else if (current === 3) {
+    } else if (current === 4) {
       return (
         <WorkflowStep3
           onAddAction={this.props.onClickAddAction}
@@ -110,6 +110,7 @@ export default class WorkflowModalInner extends Component {
         onDiagram={this.props.onClickDiagram}
         onPrev={this.props.onClickPrev}
         onNext={this.props.onClickNext}
+        isDiagramButton={this.props.isDiagramButton}
       />
     )
   }

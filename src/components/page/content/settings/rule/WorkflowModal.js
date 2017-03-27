@@ -35,10 +35,22 @@ class WorkflowModal extends React.Component { // eslint-disable-line react/no-mu
     this.props.openWfCategoryModal()
   }
 
+  onClickAddRule () {
+    // TODO
+  }
+
+  onClickEditRule () {
+    // TODO
+  }
+
   onClickRemoveRule () {
     const { selectedRuleIndex, rules } = this.state
     if (selectedRuleIndex < 0) return window.alert('Please select rule.')
     this.setState({rules: rules.filter((r, index) => index !== selectedRuleIndex), selectedRuleIndex: -1})
+  }
+
+  onCloseRuleModal (data, isEdit) {
+    // TODO
   }
 
   onRuleChange (index, value) {
@@ -47,6 +59,10 @@ class WorkflowModal extends React.Component { // eslint-disable-line react/no-mu
     rules = rules.map((r, i) => i === index ? assign({}, r, value) : r)
     if (index === rules.length - 1) rules.push({key: '', value: ''})
     this.setState({ rules })
+  }
+
+  onRuleClick (index) {
+    // TODO
   }
 
   handleFormSubmit (values) {
@@ -120,9 +136,11 @@ class WorkflowModal extends React.Component { // eslint-disable-line react/no-mu
   render () {
     const { handleSubmit } = this.props
     let steps = this.getSteps()
+    let isDiagramButton = false
     return (
       <WorkflowModalInner
         current={this.state.current}
+        isDiagramButton={isDiagramButton}
         step={this.state.step}
         steps={steps}
         rules={this.state.rules}

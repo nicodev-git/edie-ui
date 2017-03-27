@@ -98,6 +98,7 @@ export default class WorkflowModalInner extends Component {
         steps={steps}
         current={current}
         diagramModal={diagramModal}
+        isDiagramButton={this.props.isDiagramButton}
         onClose={this.props.onClickClose}
         onDiagram={this.props.onClickDiagram}
         onPrev={this.props.onClickPrev}

@@ -155,9 +155,11 @@ class MainWorkflowModal extends Component {
 
   render () {
     const {handleSubmit} = this.props
+    let isDiagramButton = true
     return (
       <WorkflowModalInner
         current={this.state.current}
+        isDiagramButton={isDiagramButton}
         step={this.state.step}
         steps={this.state.steps}
         rules={this.state.rules}

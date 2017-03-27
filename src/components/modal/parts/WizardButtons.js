@@ -2,10 +2,11 @@ import React from 'react'
 import FlatButton from 'material-ui/FlatButton'
 import { buttonStyle, buttonTextStyle, buttonDisabledStyle } from '../../../style/materialStyles'
 
-const WizardButtons = ({onClose, onDiagram, onPrev, onNext, current, steps}) => (
+const WizardButtons = ({onClose, onDiagram, onPrev, onNext, current, steps, isDiagramButton}) => (
   <div className="text-right mb-none form-buttons">
     <FlatButton label="Cancel" onClick={onClose} style={buttonStyle} labelStyle={buttonTextStyle}/>
-    <FlatButton label="Diagram" onClick={onDiagram} style={buttonStyle} labelStyle={buttonTextStyle}/>
+    { isDiagramButton
+    ? (<FlatButton label="Diagram" onClick={onDiagram} style={buttonStyle} labelStyle={buttonTextStyle}/>) : null}
     <FlatButton label="Previous" disabled={current === 1} onClick={onPrev}
       style={current === 1 ? buttonDisabledStyle : buttonStyle} labelStyle={buttonTextStyle}/>
     { current < steps

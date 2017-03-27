@@ -5,7 +5,7 @@ import { WizardButtons } from './parts'
 export default class WorkflowWizard extends Component {
   render () {
     const {step, steps, current, markers, onClose, onDiagram,
-      onPrev, onNext, diagramModal} = this.props
+      onPrev, onNext, diagramModal, isDiagramButton} = this.props
     return (
       <div>
         <div className="wizard-container m-none">
@@ -16,8 +16,8 @@ export default class WorkflowWizard extends Component {
             </div>
           </div>
           {step}
-          <WizardButtons steps={steps} current={current} onClose={onClose}
-            onPrev={onPrev} onNext={onNext} onDiagram={onDiagram}/>
+          <WizardButtons steps={steps} current={current} onClose={onClose} onPrev={onPrev}
+            onNext={onNext} onDiagram={onDiagram} isDiagramButton={isDiagramButton}/>
         </div>
         {diagramModal}
         <Tooltip place="right" event="mouseover" eventOff="mouseout" multiline effect="solid"/>
