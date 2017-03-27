@@ -80,26 +80,15 @@ class DeviceTplModal extends React.Component { // eslint-disable-line react/no-m
     )
   }
 
-  renderImageUploader () {
+  getImageUrl () {
     const {selectedTplImage, deviceTpl} = this.props
     let imgUrl = ''
-    if (selectedTplImage) imgUrl = getCustomImageUrl(selectedTplImage)
-    else if (deviceTpl && deviceTpl.image) imgUrl = extImageBaseUrl + deviceTpl.image
-    return (
-      <fieldset className="form-group">
-        <label className="col-md-3 margin-sm-top">Image:</label>
-        <div className="col-md-9">
-          <img className="file-preview icon-black" src={imgUrl}/>
-          <a href="javascript:;" className="margin-sm-left" style={{position: 'relative', cursor: 'pointer'}} onClick={this.onClickChangeImage.bind(this)}>
-            Change
-          </a>
-        </div>
-      </fieldset>
-    )
-  }
-
-  onHide () {
-
+    if (selectedTplImage) {
+      imgUrl = getCustomImageUrl(selectedTplImage)
+    } else if (deviceTpl && deviceTpl.image) {
+      imgUrl = extImageBaseUrl + deviceTpl.image
+    }
+    return imgUrl
   }
 
   onClickClose () {
@@ -122,10 +111,30 @@ class DeviceTplModal extends React.Component { // eslint-disable-line react/no-m
     this.props.openTplImageModal()
   }
 
+  renderOptions () {
+    let categories = this.props.deviceCategories
+    let options = categories.map(m => ({value: m.name, label: m.name}))
+    return options
+  }
+
   render () {
     const { handleSubmit } = this.props
-
+    let header = 'Device Template'
+    let imgUrl = this.getImageUrl()
+    let options = this.renderOptions()
     return (
+      <DeviceTplModalView
+        show
+        header={header}
+        monitors={this.state.monitors}
+        monitorTemplates={this.props.monitorTemplates}
+        onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
+        onHide={this.onClickClose.bind(this)}
+        imgUrl={imgUrl}
+        onChange={this.onClickChangeImage.bind(this)}
+        onAddMonitor={this.onClickAddMonitor.bind(this)}
+        onRemoveMonitor={this.onClickRemoveMonitor.bind(this)}
+      />
       <Modal
         show
         onHide={this.onHide.bind(this)}

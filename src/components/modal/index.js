@@ -9,6 +9,7 @@ import DiagramModalView from './DiagramModalView'
 import ParserTypeModalView from './ParserTypeModalView'
 import ImageUploaderModalView from './ImageUploaderModalView'
 import MonitorTplModalView from './MonitorTplModalView'
+import DeviceTplModalView from './DeviceTplModalView'
 import ProfileModalView from './ProfileModalView'
 import DeviceSearchModalView from './DeviceSearchModalView'
 import SysWorkflowsModalView from './SysWorkflowsModalView'
@@ -32,6 +33,7 @@ export {
     ParserTypeModalView,
     ImageUploaderModalView,
     MonitorTplModalView,
+    DeviceTplModalView,
     ProfileModalView,
     DeviceSearchModalView,
     SysWorkflowsModalView,
