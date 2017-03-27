@@ -72,7 +72,7 @@ class SidebarView extends Component {
                 </div>
                 {
                   index === 1 && searchVisible && pageId !== item.id ? <div className={`sidebar-tooltip`}>
-                      <SearchBarContainer defaultKeyword={this.props.keyword} onSearch={onSearch}/>
+                      <SearchBarContainer defaultKeyword={this.props.params.query} onSearch={onSearch}/>
                     </div> : null
                 }
               </li>

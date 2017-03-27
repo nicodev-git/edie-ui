@@ -35,7 +35,7 @@ export default connect(
     user: state.dashboard.userInfo || {},
     profileModalVisible: state.dashboard.profileModalVisible,
     maps: state.dashboard.maps,
-    keyword: state.search.keyword
+    params: state.search.params
   }), {
     signOut,
     openProfileModal,

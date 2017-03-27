@@ -1,5 +1,7 @@
 import React from 'react'
 import $ from 'jquery'
+import { assign } from 'lodash'
+
 import { isGroup } from 'shared/Global'
 import SidebarView from './SidebarView'
 import ProfileModal from './ProfileModal'
@@ -69,8 +71,8 @@ export default class Sidebar extends React.Component {
 
   }
 
-  onSearch (text) {
-    this.props.updateSearchParams(text)
+  onSearch (query) {
+    this.props.updateSearchParams(assign({}, this.props.params, {query}))
     this.props.router.push('/search')
   }
 
