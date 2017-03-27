@@ -63,8 +63,20 @@ class GenericSearch extends React.Component {
       dateFrom: this.dateOptions[values.dateIndex].from,
       dateTo: this.dateOptions[values.dateIndex].to
     })
+  }
 
-    console.log(values)
+  renderFields () {
+    return (
+      <div className="padding-sm">
+        <h5>Fields</h5>
+        {this.props.fields.map(f =>
+          <div key={f.name} className="field-item padding-xs-top">
+            <span className="margin-sm-right text-gray">{f.type === 'number' ? '#' : 'a'}</span>
+            <a href="javascript:;">{f.name}</a>
+          </div>
+        )}
+      </div>
+    )
   }
 
   render () {
@@ -80,15 +92,23 @@ class GenericSearch extends React.Component {
         </TabPageHeader>
 
         <TabPageBody tabs={SearchTabs} tab={0}>
-          <ResponsiveInfiniteTable
-            url="/search/all"
-            cells={this.cells}
-            ref="table"
-            rowMetadata={{'key': 'id'}}
-            selectable
-            onRowDblClick={this.onRowDblClick.bind(this)}
-            params={this.props.params}
-          />
+          <div className="flex-horizontal" style={{height: '100%'}}>
+            <div style={{width: '200px', height: '100%', overflow: 'auto'}}>
+              {this.renderFields()}
+            </div>
+            <div className="flex-1 flex-vertical">
+              <ResponsiveInfiniteTable
+                url="/search/all"
+                cells={this.cells}
+                ref="table"
+                rowMetadata={{'key': 'id'}}
+                selectable
+                onRowDblClick={this.onRowDblClick.bind(this)}
+                params={this.props.params}
+              />
+            </div>
+          </div>
+
         </TabPageBody>
       </TabPage>
     )

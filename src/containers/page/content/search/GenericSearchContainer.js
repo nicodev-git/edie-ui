@@ -12,7 +12,8 @@ import {
 @withRouter
 @connect(
   state => ({
-    params: state.search.params
+    params: state.search.params,
+    fields: state.search.fields
   }),
   dispatch => ({
     ...bindActionCreators({
