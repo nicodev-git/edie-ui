@@ -64,7 +64,9 @@ const initialState = {
   search: {
     incidents: [],
     incidentDevices: [],
-    incidentDraw: 1
+    incidentDraw: 1,
+    keyword: '',
+    terms: []
   },
 
   settings: {

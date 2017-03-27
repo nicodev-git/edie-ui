@@ -319,7 +319,7 @@ table.table tbody tr.selected {
 }
 
 /* Search */
-.bg-highlight {
+.highlight {
     background-color: yellow;
 }
 

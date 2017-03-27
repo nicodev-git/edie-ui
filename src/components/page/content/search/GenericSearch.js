@@ -1,4 +1,5 @@
 import React from 'react'
+import { assign } from 'lodash'
 
 import {ResponsiveInfiniteTable} from '../../../shared/InfiniteTable'
 
@@ -44,9 +45,10 @@ class GenericSearch extends React.Component {
       'customComponent': (props) => {
         const {rowData} = props
         if (!rowData.entity) return <span/>
-        let data = JSON.stringify(rowData.entity)
+
+        let data = JSON.stringify(assign({}, rowData.entity, rowData.highlights))
         if (data.length > 500) data = `${data.substring(0, 500)}...`
-        return <span>{data}</span>
+        return <span dangerouslySetInnerHTML={{ __html: data }} />
       }
     }]
   }
