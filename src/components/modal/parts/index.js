@@ -22,6 +22,7 @@ import WizardButtons from './WizardButtons'
 import FormCheckbox from './FormCheckbox'
 import Monitors from './Monitors'
 import MonitorTemplates from './MonitorTemplates'
+import CrudButtons from './CrudButtons'
 
 export {
     Header,
@@ -47,5 +48,6 @@ export {
     WizardButtons,
     FormCheckbox,
     Monitors,
-    MonitorTemplates
+    MonitorTemplates,
+    CrudButtons
 }

@@ -22,6 +22,7 @@ import WorkflowWizard from './WorklowWizard'
 import MainWorkflowModalView from './MainWorkflowModalView'
 import MapUsersModalView from './MapUsersModalView'
 import DeviceWizardView from './DeviceWizardView'
+import MonitorPickerView from './MonitorPickerView'
 
 export {
     ActivationModalView,
@@ -47,5 +48,6 @@ export {
     WorkflowWizard,
     MainWorkflowModalView,
     MapUsersModalView,
-    DeviceWizardView
+    DeviceWizardView,
+    MonitorPickerView
 }
