@@ -6,7 +6,12 @@ import {
   OPEN_FIELDS_POPOVER,
   CLOSE_FIELDS_POPOVER,
   FETCH_FIELD_TOP_VALUES,
-  UPDATE_QUERY_CHIPS
+  UPDATE_QUERY_CHIPS,
+
+  FETCH_SEARCH_OPTIONS,
+  ADD_SEARCH_OPTION,
+  UPDATE_SEARCH_OPTION,
+  REMOVE_SEARCH_OPTION
 } from './types'
 import { ROOT_URL } from './config'
 import { apiError } from './Errors'
@@ -57,4 +62,16 @@ export const updateQueryChips = (chips) => {
   return dispatch => {
     dispatch({type: UPDATE_QUERY_CHIPS, chips})
   }
+}
+
+export const fetchSearchOptions = () => {
+  return dispatch => {
+    axios.get(`${ROOT_URL}/searchoption`).then(res => {
+      dispatch({type: FETCH_SEARCH_OPTIONS, data: res._embedded.searchOptions})
+    }).catch(error => apiError(dispatch, error))
+  }
+}
+
+export const addSearchOption = (props) => {
+
 }
