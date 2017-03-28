@@ -1,5 +1,6 @@
 import React from 'react'
 import {util} from '../WizardUtil'
+import { FormCheckbox } from 'components/modal/parts'
 import { Field } from 'redux-form'
 
 export default class Checkbox extends React.Component {
@@ -22,12 +23,12 @@ export default class Checkbox extends React.Component {
     const field = (
       <div className={`col-md-${width}`} style={util.convertStyle(config.style)}>
         <label className="control-label">
-          <Field name={config.name} component="input" type="checkbox" className={config.cls}/>
+          <Field name={config.name} component={FormCheckbox} label={label} className={config.cls}/>
         </label>
       </div>
     )
 
-    return util.wrapInputs(label, field, config.useColumn)
+    return util.wrapInputs(field, config.useColumn)
   }
 }
 

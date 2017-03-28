@@ -815,9 +815,25 @@ table.table tbody tr.selected {
 
 .device-wizard-container {
   display: flex;
+}
+
+.tab-content>.active {
+  display: flex !important;
   flex-direction: column;
   justify-content: space-around;
   align-items: flex-start;
+}
+
+.tab-content>.active>div {
+  width: 100%;
+}
+
+.tab-content>.hidden {
+  display: none;
+}
+
+.control-label>div>div {
+  align-items: center;
 }
 
 /* Field Item */
