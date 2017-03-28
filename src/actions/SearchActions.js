@@ -5,7 +5,8 @@ import {
   UPDATE_SEARCH_FIELDS,
   OPEN_FIELDS_POPOVER,
   CLOSE_FIELDS_POPOVER,
-  FETCH_FIELD_TOP_VALUES
+  FETCH_FIELD_TOP_VALUES,
+  UPDATE_QUERY_CHIPS
 } from './types'
 import { ROOT_URL } from './config'
 import { apiError } from './Errors'
@@ -49,5 +50,11 @@ export const fetchFieldTopValues = (name, params) => {
     axios.get(`${ROOT_URL}/search/topValueCount`, config).then(res => {
       dispatch({type: FETCH_FIELD_TOP_VALUES, data: res.data})
     }).catch(error => apiError(dispatch, error))
+  }
+}
+
+export const updateQueryChips = (chips) => {
+  return dispatch => {
+    dispatch({type: UPDATE_QUERY_CHIPS, chips})
   }
 }
