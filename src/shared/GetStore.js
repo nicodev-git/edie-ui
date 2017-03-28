@@ -71,6 +71,7 @@ const initialState = {
       dateFrom: 0,
       dateTo: 0
     },
+    queryChips: [],
     fields: [],
     fieldTopValues: []
   },

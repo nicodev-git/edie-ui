@@ -1,9 +1,9 @@
 import React from 'react'
 import { reduxForm, submit, formValueSelector } from 'redux-form'
-import { connect } from 'react-redux'
+import { connect, concat } from 'react-redux'
 import { assign } from 'lodash'
 import moment from 'moment'
-import {Popover, FlatButton} from 'material-ui'
+import {Popover, FlatButton, Chip} from 'material-ui'
 import NavigationClose from 'material-ui/svg-icons/navigation/close'
 
 import {ResponsiveInfiniteTable} from '../../../shared/InfiniteTable'
@@ -64,12 +64,36 @@ class GenericSearch extends React.Component {
 
   }
 
+  parseQuery (query) {
+    const matches = query.match(/([^ \\(\\)]*)=([^ \\(\\)]*)/gi)
+    if (!matches || !matches.length) {
+      if (query) return [{name: 'description', value: query}]
+      return []
+    }
+
+    return matches.map(m => {
+      const res = m.match(/([^ \\(\\)]*)=([^ \\(\\)]*)/)
+      return {
+        name: res[1],
+        value: res[2]
+      }
+    })
+  }
+
   handleFormSubmit (values) {
+    const { queryChips } = this.props
+    const { query } = values
+    const newChips = this.parseQuery(query)
+
+    this.props.updateQueryChips(concat([], queryChips, newChips))
+
     this.props.updateSearchParams({
       query: values.query,
       dateFrom: this.dateOptions[values.dateIndex].from,
       dateTo: this.dateOptions[values.dateIndex].to
     })
+
+    this.props.change('query', '')
   }
 
   getTypeChar (type) {
@@ -102,6 +126,9 @@ class GenericSearch extends React.Component {
     this.props.change('query', query)
 
     this.props.updateSearchParams(assign({}, params, { query }))
+  }
+
+  onClickRemoveChip () {
   }
 
   renderFields () {
@@ -204,6 +231,19 @@ class GenericSearch extends React.Component {
     return (
       <TabPage>
         <TabPageHeader title="Search">
+          <div className="text-center">
+            <div className="inline">
+              {this.props.queryChips.map(p =>
+                <Chip
+                  key={p.name}
+                  style={{margin: 4}}
+                  onRequestDelete={this.onClickRemoveChip.bind(this, p)}
+                >
+                  <b>{p.name}</b>: {p.value}
+                </Chip>
+              )}
+            </div>
+          </div>
           <SearchFormView
             onSearchKeyDown={this.onSearchKeyDown.bind(this)}
             dateOptions={this.dateOptions}

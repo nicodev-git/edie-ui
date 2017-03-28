@@ -10,13 +10,15 @@ import {
   fetchSearchFields,
   openFieldsPopover,
   closeFieldsPopover,
-  fetchFieldTopValues
+  fetchFieldTopValues,
+  updateQueryChips
 } from 'actions'
 
 @withRouter
 @connect(
   state => ({
     params: state.search.params,
+    queryChips: state.search.params,
     fields: state.search.fields,
     fieldPopoverOpen: state.search.fieldPopoverOpen,
     selectedField: state.search.selectedField,
@@ -29,7 +31,8 @@ import {
       fetchSearchFields,
       openFieldsPopover,
       closeFieldsPopover,
-      fetchFieldTopValues
+      fetchFieldTopValues,
+      updateQueryChips
     }, dispatch)
   })
 )
