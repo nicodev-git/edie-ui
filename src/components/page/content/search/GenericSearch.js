@@ -43,7 +43,7 @@ class GenericSearch extends React.Component {
         if (!rowData.entity) return <span/>
 
         let data = JSON.stringify(assign({}, rowData.entity, rowData.highlights))
-        if (data.length > 500) data = `${data.substring(0, 500)}...`
+        //if (data.length > 500) data = `${data.substring(0, 500)}...`
         return <span dangerouslySetInnerHTML={{ __html: data }} />
       }
     }]
