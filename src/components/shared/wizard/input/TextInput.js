@@ -1,7 +1,8 @@
 import React from 'react'
 import { Field } from 'redux-form'
-
+import TextField from 'material-ui/TextField'
 import { util } from '../WizardUtil'
+import { inputStyle, underlineStyle } from 'style/materialStyles'
 
 export default class TextInput extends React.Component {
   constructor (props) {
@@ -10,14 +11,17 @@ export default class TextInput extends React.Component {
   }
 
   renderField (config) {
-    const { input, type, label, cls, useColumn, disabled, width, style, placeholder } = config
+    const { input, label, cls, useColumn, disabled, width, style } = config
     const field = (
       <div className={`col-md-${width}`}
         style={util.convertStyle(style)}>
-        <input {...input} type={type}
+        <TextField hintText={label}
+          inputStyle={inputStyle}
+          underlineFocusStyle={underlineStyle}
           className={`form-control ${cls || ''}`}
           disabled={disabled ? 'disabled' : null}
-          placeholder={placeholder}/>
+          {...input}
+        />
       </div>
     )
 

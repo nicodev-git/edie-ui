@@ -15,14 +15,15 @@ import GlobalIgnore from './input/GlobalIgnore'
 import MTable from './input/MTable'
 import ParamEditModal from './input/ParamEditModal'
 import ParamList from './input/ParamList'
-
 import {wizardConfig} from './WizardConfig'
 import {util} from './WizardUtil'
 import { Provider } from 'react-redux'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import { store } from 'shared/GetStore'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
+import LinearProgress from 'material-ui/LinearProgress'
 import { DeviceWizardView } from 'components/modal'
+import { primeColor } from 'style/materialStyles'
 
 class DeviceWizard extends Component {
   static childContextTypes = {
@@ -106,12 +107,14 @@ class DeviceWizard extends Component {
         </div>
       )
     }
+    let value = 100 * this.state.current / this.state.steps
+    // <div className="progress-bar" style={{width: `${100 * this.state.current / this.state.steps}%`}} />
 
     return (
       <div className="wizard-progress">
         {markers}
         <div className="progress progress-striped progress-xs" style={{margin: '10px 0'}}>
-          <div className="progress-bar" style={{width: `${100 * this.state.current / this.state.steps}%`}} />
+          <LinearProgress mode="determinate" value={value} color={primeColor}/>
         </div>
       </div>
     )

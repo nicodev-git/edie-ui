@@ -1,5 +1,5 @@
 import React from 'react'
-const primeColor = '#5698c6'
+export const primeColor = '#5698c6'
 const textColor = '#777777'
 const badgeTextColor = '#f5f5f5'
 const errorColor = '#d32f2f'
