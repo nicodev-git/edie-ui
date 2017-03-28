@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
-// import { connect } from 'react-redux'
+import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import DeviceWizard from 'components/shared/wizard/DeviceWizard'
 import { fetchMonitorTemplates, clearDeviceWizardInitialValues, openDeviceMonitorWizard } from 'actions'
-import { connectWithStore } from 'shared/ConnectWithStore'
-import { store } from 'shared/GetStore'
+// import { connectWithStore } from 'shared/ConnectWithStore'
+// import { store } from 'shared/GetStore'
 
-const mapStateToProps = (state) => {
+/* const mapStateToProps = (state) => {
   return {
     monitorTemplates: state.settings.monitorTemplates,
     initialValues: state.devices.wizardInitialValues
@@ -19,12 +19,13 @@ const mapDispatchToProps = (dispatch) => {
     clearDeviceWizardInitialValues,
     openDeviceMonitorWizard
   }, dispatch)
-}
+} */
 
-/* @connect(
-  state => ({
+@connect(
+  (state, props) => ({
     monitorTemplates: state.settings.monitorTemplates,
-    initialValues: state.devices.wizardInitialValues
+    initialValues: state.devices.wizardInitialValues,
+    store: props.store
   }),
   dispatch => ({
     ...bindActionCreators({
@@ -33,9 +34,9 @@ const mapDispatchToProps = (dispatch) => {
       openDeviceMonitorWizard
     }, dispatch)
   })
-) */
+)
 
-class DeviceWizardContainer extends Component {
+export default class DeviceWizardContainer extends Component {
   render () {
     return (
       <DeviceWizard {...this.props} />
@@ -43,4 +44,4 @@ class DeviceWizardContainer extends Component {
   }
 }
 
-export default connectWithStore(store, DeviceWizardContainer, mapStateToProps, mapDispatchToProps)
+// export default connectWithStore(store, DeviceWizardContainer, mapStateToProps, mapDispatchToProps)

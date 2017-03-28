@@ -19,6 +19,7 @@ import TabPageBody from '../../../../../shared/TabPageBody'
 import TabPageHeader from '../../../../../shared/TabPageHeader'
 
 import { ROOT_URL } from '../../../../../../actions/config'
+import { store } from 'shared/GetStore'
 
 export default class MainEvents extends Component {
   constructor (props) {
@@ -200,6 +201,7 @@ export default class MainEvents extends Component {
         onFinish={() => {
           this.getTable().refresh()
         }}
+        store={store}
         values={data}
       />
     )
