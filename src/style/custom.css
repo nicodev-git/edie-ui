@@ -846,6 +846,10 @@ table.table tbody tr.selected {
   align-items: center;
 }
 
+.image-uploader img {
+  width: 100px;
+  height: 100px;
+}
 /* Field Item */
 .field-item.selected {
     background: lightgray;
