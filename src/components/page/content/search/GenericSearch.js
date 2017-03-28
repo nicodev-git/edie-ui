@@ -1,5 +1,5 @@
 import React from 'react'
-import { reduxForm, submit, formValueSelector } from 'redux-form'
+import { reduxForm, submit } from 'redux-form'
 import { connect } from 'react-redux'
 import { assign, concat } from 'lodash'
 import moment from 'moment'
@@ -11,7 +11,7 @@ import SearchTabs from './SearchTabs'
 import TabPage from '../../../shared/TabPage'
 import TabPageBody from '../../../shared/TabPageBody'
 import TabPageHeader from '../../../shared/TabPageHeader'
-import { imageBaseUrl } from 'shared/Global'
+import { imageBaseUrl, parseSearchQuery } from 'shared/Global'
 
 import SearchFormView from './SearchFormView'
 
@@ -79,31 +79,18 @@ class GenericSearch extends React.Component {
 
   }
 
-  parseQuery (query) {
-    const matches = query.match(/([^ \\(\\)]*)=([^ \\(\\)]*)/gi)
-    if (!matches || !matches.length) {
-      if (query) return [{name: 'description', value: query}]
-      return []
-    }
-
-    return matches.map(m => {
-      const res = m.match(/([^ \\(\\)]*)=([^ \\(\\)]*)/)
-      return {
-        name: res[1],
-        value: res[2]
-      }
-    })
-  }
-
   handleFormSubmit (values) {
     const { queryChips } = this.props
     const { query } = values
-    const newChips = this.parseQuery(query)
 
-    this.props.updateQueryChips(concat([], queryChips, newChips))
+    const newChips = parseSearchQuery(query)
+    const newQueryChips = concat([], queryChips, newChips)
+
+    this.props.updateQueryChips(newQueryChips)
 
     this.props.updateSearchParams({
-      query: values.query,
+      query: newQueryChips.map(m => `${m.name}=${m.value}`).join(' and '),
+      dateIndex: values.dateIndex,
       dateFrom: this.dateOptions[values.dateIndex].from,
       dateTo: this.dateOptions[values.dateIndex].to
     })
@@ -131,20 +118,25 @@ class GenericSearch extends React.Component {
   }
 
   onClickValue (value) {
-    const { selectedField, currentQuery, params } = this.props
+    const { selectedField, params, queryChips } = this.props
 
     if (!selectedField) return
-
     this.props.closeFieldsPopover()
+    this.props.change('query', '')
 
-    const query = `${currentQuery}${currentQuery ? ' and ' : ''}${selectedField.name}=${value}`
-    this.props.change('query', query)
-
-    this.props.updateSearchParams(assign({}, params, { query }))
+    const newQueryChips = concat([], queryChips, {name: selectedField.name, value})
+    this.props.updateQueryChips(newQueryChips)
+    this.props.updateSearchParams(assign({}, params, {
+      query: newQueryChips.map(m => `${m.name}=${m.value}`).join(' and ')
+    }))
   }
 
   onClickRemoveChip (index) {
-    this.props.updateQueryChips(this.props.queryChips.filter((p, i) => i !== index))
+    const newQueryChips = this.props.queryChips.filter((p, i) => i !== index)
+    this.props.updateQueryChips(newQueryChips)
+    this.props.updateSearchParams(assign({}, this.props.params, {
+      query: newQueryChips.map(m => `${m.name}=${m.value}`).join(' and ')
+    }))
   }
 
   renderFields () {
@@ -294,10 +286,8 @@ class GenericSearch extends React.Component {
 
 const GenericSearchForm = reduxForm({form: 'genericSearchForm'})(GenericSearch)
 
-const selector = formValueSelector('genericSearchForm')
 export default connect(
   state => ({
-    initialValues: state.search.params,
-    currentQuery: selector(state, 'query')
+    initialValues: assign({}, state.search.params, {query: ''})
   })
 )(GenericSearchForm)

@@ -9,6 +9,7 @@ import {
   closeProfileModal,
   fetchUserInfo,
   updateUserProfile,
+  updateQueryChips,
   updateSearchParams
 } from 'actions'
 
@@ -42,6 +43,7 @@ export default connect(
     closeProfileModal,
     fetchUserInfo,
     updateUserProfile,
+    updateQueryChips,
     updateSearchParams
   }
 )(SidebarContainer)
