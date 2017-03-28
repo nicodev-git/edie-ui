@@ -43,7 +43,7 @@ export default function (state = {}, action) {
     }
 
     case OPEN_FIELDS_POPOVER:
-      return { ...state, fieldPopoverOpen: true }
+      return { ...state, fieldPopoverOpen: true, selectedField: action.selectedField, anchorEl: action.anchorEl }
     case CLOSE_FIELDS_POPOVER:
       return { ...state, fieldPopoverOpen: false }
   }

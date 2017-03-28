@@ -26,9 +26,9 @@ export const fetchSearchFields = (params) => {
   }
 }
 
-export const openFieldsPopover = field => {
+export const openFieldsPopover = (selectedField, anchorEl) => {
   return dispatch => {
-    dispatch({type: OPEN_FIELDS_POPOVER, field})
+    dispatch({type: OPEN_FIELDS_POPOVER, selectedField, anchorEl})
   }
 }
 

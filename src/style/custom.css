@@ -805,3 +805,8 @@ table.table tbody tr.selected {
 .wizard-diagram-choice button:hover {
   background-color: #d7d8d9 !important;
 }
+
+/* Field Item */
+.field-item.selected {
+    background: lightgray;
+}

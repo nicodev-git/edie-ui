@@ -3,7 +3,7 @@ import { reduxForm, submit } from 'redux-form'
 import { connect } from 'react-redux'
 import { assign } from 'lodash'
 import moment from 'moment'
-// import Popover from 'material-ui/Popover'
+import Popover from 'material-ui/Popover'
 
 import {ResponsiveInfiniteTable} from '../../../shared/InfiniteTable'
 import SearchTabs from './SearchTabs'
@@ -76,19 +76,48 @@ class GenericSearch extends React.Component {
     return 'a'
   }
 
+  handleRequestClose () {
+    this.props.closeFieldsPopover()
+  }
+
+  onClickField (field, e) {
+    this.props.openFieldsPopover(field, e.target)
+  }
+
   renderFields () {
+    const {selectedField} = this.props
     return (
       <div className="padding-sm">
         <h5>Fields</h5>
         {this.props.fields.map(f =>
-          <div key={f.name} className="field-item padding-xs-top">
+          <div key={f.name} className={`field-item margin-xs-top ${selectedField && selectedField.name === f.name ? 'selected' : ''}`}>
             <span className="margin-sm-right text-gray">{this.getTypeChar(f.type)}</span>
-            <a href="javascript:;">{f.name}</a>
+            <a href="javascript:;" onClick={this.onClickField.bind(this, f)}>{f.name}</a>
             <span className="margin-sm-left text-gray">{f.count}</span>
           </div>
         )}
 
       </div>
+    )
+  }
+
+  renderFieldPopover () {
+    const { selectedField, fieldPopoverOpen, anchorEl } = this.props
+    if (!selectedField) return
+    return (
+      <Popover
+        open={fieldPopoverOpen}
+        anchorEl={anchorEl}
+        anchorOrigin={{horizontal: 'left', vertical: 'center'}}
+        targetOrigin={{horizontal: 'left', vertical: 'center'}}
+        style={{marginLeft: '100px'}}
+        onRequestClose={this.handleRequestClose.bind(this)}
+      >
+        <h4>{selectedField.name}</h4>
+        <div style={{height: '200px', width: '400px'}}>
+          Content
+        </div>
+      </Popover>
     )
   }
 
@@ -108,6 +137,7 @@ class GenericSearch extends React.Component {
           <div className="flex-horizontal" style={{height: '100%'}}>
             <div style={{width: '200px', height: '100%', overflow: 'auto'}}>
               {this.renderFields()}
+              {this.renderFieldPopover()}
             </div>
             <div className="flex-1 flex-vertical">
               <ResponsiveInfiniteTable

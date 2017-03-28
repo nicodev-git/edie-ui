@@ -6,7 +6,9 @@ import { withRouter } from 'react-router'
 import GenericSearch from 'components/page/content/search/GenericSearch'
 
 import {
-  updateSearchParams
+  updateSearchParams,
+  openFieldsPopover,
+  closeFieldsPopover
 } from 'actions'
 
 @withRouter
@@ -14,11 +16,15 @@ import {
   state => ({
     params: state.search.params,
     fields: state.search.fields,
-    fieldPopoverOpen: state.search.fieldPopoverOpen
+    fieldPopoverOpen: state.search.fieldPopoverOpen,
+    selectedField: state.search.selectedField,
+    anchorEl: state.search.anchorEl
   }),
   dispatch => ({
     ...bindActionCreators({
-      updateSearchParams
+      updateSearchParams,
+      openFieldsPopover,
+      closeFieldsPopover
     }, dispatch)
   })
 )
