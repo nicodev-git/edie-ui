@@ -2,7 +2,8 @@ import axios from 'axios'
 import {
   UPDATE_SEARCH_PARAMS,
   UPDATE_SEARCH_FIELDS,
-  OPEN_SEARCH_FIELD
+  OPEN_FIELDS_POPOVER,
+  CLOSE_FIELDS_POPOVER
 } from './types'
 import { ROOT_URL } from './config'
 import { apiError } from './Errors'
@@ -25,8 +26,14 @@ export const fetchSearchFields = (params) => {
   }
 }
 
-export const openSearchField = field => {
+export const openFieldsPopover = field => {
   return dispatch => {
-    dispatch({type: OPEN_SEARCH_FIELD, field})
+    dispatch({type: OPEN_FIELDS_POPOVER, field})
+  }
+}
+
+export const closeFieldsPopover = () => {
+  return dispatch => {
+    dispatch({type: CLOSE_FIELDS_POPOVER})
   }
 }

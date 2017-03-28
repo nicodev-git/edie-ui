@@ -5,7 +5,8 @@ import {
   FIX_ALL_INCIDENTS_BY_TYPE,
   UPDATE_SEARCH_PARAMS,
   UPDATE_SEARCH_FIELDS,
-  OPEN_SEARCH_FIELD
+  OPEN_FIELDS_POPOVER,
+  CLOSE_FIELDS_POPOVER
 } from '../actions/types'
 import { keys } from 'lodash'
 
@@ -41,8 +42,10 @@ export default function (state = {}, action) {
       return { ...state, fields }
     }
 
-    case OPEN_SEARCH_FIELD:
-      return { ...state }
+    case OPEN_FIELDS_POPOVER:
+      return { ...state, fieldPopoverOpen: true }
+    case CLOSE_FIELDS_POPOVER:
+      return { ...state, fieldPopoverOpen: false }
   }
   return state
 }

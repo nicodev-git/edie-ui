@@ -13,7 +13,8 @@ import {
 @connect(
   state => ({
     params: state.search.params,
-    fields: state.search.fields
+    fields: state.search.fields,
+    fieldPopoverOpen: state.search.fieldPopoverOpen
   }),
   dispatch => ({
     ...bindActionCreators({
