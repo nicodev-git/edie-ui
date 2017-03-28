@@ -139,6 +139,9 @@ class GenericSearch extends React.Component {
     }))
   }
 
+  onClickStar () {
+  }
+
   renderFields () {
     const {selectedField} = this.props
     return (
@@ -242,6 +245,7 @@ class GenericSearch extends React.Component {
           <SearchFormView
             onSearchKeyDown={this.onSearchKeyDown.bind(this)}
             dateOptions={this.dateOptions}
+            onClickStar={this.onClickStar.bind(this)}
             onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
           />
 
