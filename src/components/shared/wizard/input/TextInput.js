@@ -11,23 +11,23 @@ export default class TextInput extends React.Component {
   }
 
   renderField (config) {
-    const { input, label, cls, useColumn, disabled, width, style } = config
+    const { input, label, cls, disabled, width, style, useColumn } = config
     const field = (
       <div className={`col-md-${width}`}
         style={util.convertStyle(style)}>
         <TextField hintText={label}
           inputStyle={inputStyle}
           underlineFocusStyle={underlineStyle}
-          className={`form-control ${cls || ''}`}
+          className={`${cls || ''}`}
           disabled={disabled ? 'disabled' : null}
           {...input}
         />
       </div>
     )
-
-    return util.wrapInputs(label, field, useColumn)
+    return util.wrapInputs(field, useColumn)
   }
 
+  //
   render () {
     const { config } = this.props
 

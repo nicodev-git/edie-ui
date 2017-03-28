@@ -149,7 +149,7 @@ class DeviceWizard extends Component {
     })
 
     return (
-      <div key={index} className={`tab-pane p-none${(index === (this.state.current - 1)) ? ' active' : ''}`}>
+      <div key={index} className={`${(index === (this.state.current - 1)) ? ' active' : ''}`}>
           {items}
       </div>
     )

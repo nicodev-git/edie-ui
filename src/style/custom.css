@@ -809,6 +809,17 @@ table.table tbody tr.selected {
   background-color: #d7d8d9 !important;
 }
 
+.wizard-input>div>div {
+  width: 100% !important;
+}
+
+.device-wizard-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: flex-start;
+}
+
 /* Field Item */
 .field-item.selected {
     background: lightgray;

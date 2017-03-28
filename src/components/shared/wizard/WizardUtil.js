@@ -24,11 +24,10 @@ export const util = {
     return newStyle
   },
 
-  wrapInputs (label, input, useColumn) {
+  wrapInputs (input, useColumn) {
     if (useColumn) return input
     return (
-      <div className="row margin-md-bottom">
-          {label}
+      <div className="wizard-input">
           {input}
       </div>
     )
