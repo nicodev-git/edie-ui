@@ -7,7 +7,7 @@ import ToggleStar from 'material-ui/svg-icons/toggle/star-border'
 
 import { FormInput, FormSelect } from 'components/modal/parts'
 
-const emptySearch = {name: 'None', value: ''}
+const emptySearch = {label: 'None', value: ''}
 export default class SearchFormView extends React.Component {
   render () {
     const { onSearchKeyDown,
@@ -34,7 +34,7 @@ export default class SearchFormView extends React.Component {
           <FlatButton type="submit" icon={<ActionSearch />} style={{marginTop: '4px', verticalAlign: 'top'}}/>
 
           <FlatButton icon={<ToggleStar />} style={{marginTop: '4px', verticalAlign: 'top'}} onClick={onClickStar}/>
-          <Field name="searchOptionIndex" component={FormSelect} label="" options={savedSearchOptions} style={{verticalAlign: 'top'}}/>
+          <Field name="searchOptionIndex" component={FormSelect} label="" options={savedSearchOptions} style={{verticalAlign: 'top', textAlign: 'left'}}/>
         </div>
       </form>
     )

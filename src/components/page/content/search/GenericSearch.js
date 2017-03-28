@@ -142,6 +142,7 @@ class GenericSearch extends React.Component {
   }
 
   onClickStar () {
+
   }
 
   renderFields () {
