@@ -23,6 +23,7 @@ import { Provider } from 'react-redux'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import { store } from 'shared/GetStore'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
+import { DeviceWizardView } from 'components/modal'
 
 class DeviceWizard extends Component {
   static childContextTypes = {
@@ -319,14 +320,6 @@ class DeviceWizard extends Component {
     this.props.onClose && this.props.onClose(this, data)
   }
 
-  onHide () {
-    this.onClickClose()
-  }
-
-  onClickClose () {
-    this.closeModal()
-  }
-
   onClickPrevious () {
     let current = this.state.current
 
@@ -358,9 +351,14 @@ class DeviceWizard extends Component {
     const { current, steps } = this.state
     let cssPrevious = ''
     if (current < 2) cssPrevious = onStep0 ? '' : 'hidden'
+    let header = this.props.title || this.state.currentDevice.title || ''
     return (
       <MuiThemeProvider>
         <Provider store={store}>
+          <DeviceWizardView
+            header={header}
+            onHide={this.closeModal.bind(this)}
+
           <Modal show
             onHide={this.onHide.bind(this)}
             aria-labelledby="ModalHeader"

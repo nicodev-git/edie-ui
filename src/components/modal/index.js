@@ -21,6 +21,7 @@ import WorkflowStep3 from './WorkflowStep3'
 import WorkflowWizard from './WorklowWizard'
 import MainWorkflowModalView from './MainWorkflowModalView'
 import MapUsersModalView from './MapUsersModalView'
+import DeviceWizardView from './DeviceWizardView'
 
 export {
     ActivationModalView,
@@ -45,5 +46,6 @@ export {
     WorkflowStep3,
     WorkflowWizard,
     MainWorkflowModalView,
-    MapUsersModalView
+    MapUsersModalView,
+    DeviceWizardView
 }
