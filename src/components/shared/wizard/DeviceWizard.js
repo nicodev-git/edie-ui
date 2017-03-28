@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import Modal from 'react-bootstrap-modal'
 import { assign } from 'lodash'
 import { reduxForm } from 'redux-form'
@@ -22,8 +22,13 @@ import {util} from './WizardUtil'
 import { Provider } from 'react-redux'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import { store } from 'shared/GetStore'
+import getMuiTheme from 'material-ui/styles/getMuiTheme'
 
-class DeviceWizard extends React.Component {
+class DeviceWizard extends Component {
+  static childContextTypes = {
+    muiTheme: React.PropTypes.object
+  }
+
   constructor (props) {
     super(props)
 
@@ -34,9 +39,7 @@ class DeviceWizard extends React.Component {
     this.state = {
       current: 1,
       steps: config.steps.length,
-
       currentDevice: config,
-
       monitors: props.monitors || []
     }
 
@@ -50,6 +53,12 @@ class DeviceWizard extends React.Component {
     }
   }
 
+  getChildContext () {
+    return {
+      muiTheme: getMuiTheme()
+    }
+  }
+
   componentWillMount () {
     const hasMonitors = this.state.currentDevice.steps.filter(s =>
         s.items.filter(i => i.type === 'monitors').length > 0
@@ -58,10 +67,6 @@ class DeviceWizard extends React.Component {
     if (hasMonitors) {
       this.props.fetchMonitorTemplates()
     }
-  }
-
-  componentDidMount () {
-
   }
 
   handleFormSubmit (formProps) {
@@ -398,7 +403,6 @@ class DeviceWizard extends React.Component {
                 </div>
               </form>
             </div>
-
             {this.renderParamEditModal()}
           </Modal>
         </Provider>

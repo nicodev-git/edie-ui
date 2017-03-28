@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import Modal from 'react-bootstrap-modal'
 import {appendComponent, removeComponent} from '../../util/Component'
 import { Header, SubHeader } from '../modal/parts'
@@ -11,7 +11,7 @@ const TYPE_ALERT = 'alert'
 const TYPE_CONFIRM = 'confirm'
 const TYPE_PROMPT = 'prompt'
 
-export default class Alert extends React.Component {
+export default class Alert extends Component {
   static childContextTypes = {
     muiTheme: React.PropTypes.object
   }

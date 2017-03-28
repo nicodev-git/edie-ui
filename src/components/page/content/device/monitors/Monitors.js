@@ -36,6 +36,7 @@ export default class Monitors extends React.Component {
   }
 
   onClickAddMonitor () {
+    console.log('click add monitor')
     this.getMonitorTable().onClickAddMonitor()
   }
 

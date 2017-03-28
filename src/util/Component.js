@@ -3,8 +3,9 @@ import ReactDOM from 'react-dom'
 export function appendComponent (component) {
   let div = document.createElement('div')
   document.body.appendChild(div)
-
+  console.log('component: ', component)
   let instance = ReactDOM.render(component, div)
+  console.log('instance: ', instance)
   instance.div = div
 
   return instance
