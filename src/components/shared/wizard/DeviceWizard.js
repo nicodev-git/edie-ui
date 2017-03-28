@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import Modal from 'react-bootstrap-modal'
 import { assign } from 'lodash'
 import { reduxForm } from 'redux-form'
 
@@ -347,62 +346,29 @@ class DeviceWizard extends Component {
   }
 
   render () {
-    const { handleSubmit, onStep0 } = this.props
+    const { handleSubmit } = this.props
     const { current, steps } = this.state
-    let cssPrevious = ''
-    if (current < 2) cssPrevious = onStep0 ? '' : 'hidden'
+    /* let cssPrevious = ''
+    if (current < 2) cssPrevious = onStep0 ? '' : 'hidden' */
     let header = this.props.title || this.state.currentDevice.title || ''
+    let progressBar = this.buildProgressBar()
+    let content = this.buildContent()
+    let paramEditModal = this.renderParamEditModal()
     return (
       <MuiThemeProvider>
         <Provider store={store}>
           <DeviceWizardView
             header={header}
+            content={content}
+            progressBar={progressBar}
+            current={current}
+            steps={steps}
+            paramEditModal={paramEditModal}
             onHide={this.closeModal.bind(this)}
-
-          <Modal show
-            onHide={this.onHide.bind(this)}
-            aria-labelledby="ModalHeader"
-            className="bootstrap-dialog type-primary modal-device-wizard"
-            style={{width: '740px'}}>
-            <div className="modal-header">
-              <h4 className="modal-title bootstrap-dialog-title">
-                {this.props.title || this.state.currentDevice.title || ''}
-              </h4>
-            </div>
-            <div className="modal-body bootstrap-dialog-message p-none">
-
-              <form
-                onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
-                className="wizard-container"
-                ref="form"
-              >
-                {this.buildProgressBar()}
-
-                {this.buildContent()}
-
-                <div className="text-right mb-none">
-                  <a href="javascript:;"
-                    className="btn btn-default btn-sm margin-sm-right"
-                    onClick={this.onClickClose.bind(this)}>Cancel</a>
-
-                  <a href="javascript:;"
-                    className={`btn btn-default btn-sm margin-sm-right ${cssPrevious}`}
-                    onClick={this.onClickPrevious.bind(this)}>Previous</a>
-
-                  {
-                    current < steps
-                      ? <a href="javascript:;" className="btn btn-primary btn-sm margin-sm-left"
-                        onClick={this.onClickNext.bind(this)}>Next</a>
-                      : <button action="submit" className="btn btn-primary btn-sm margin-sm-right">
-                          Finish
-                        </button>
-                  }
-
-                </div>
-              </form>
-            </div>
-            {this.renderParamEditModal()}
-          </Modal>
+            onPrev={this.onClickPrevious.bind(this)}
+            onNext={this.onClickNext.bind(this)}
+            onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
+          />
         </Provider>
       </MuiThemeProvider>
     )

@@ -7,8 +7,9 @@ const WizardButtons = ({onClose, onDiagram, onPrev, onNext, current, steps, isDi
     <FlatButton label="Cancel" onClick={onClose} style={buttonStyle} labelStyle={buttonTextStyle}/>
     { isDiagramButton
     ? (<FlatButton label="Diagram" onClick={onDiagram} style={buttonStyle} labelStyle={buttonTextStyle}/>) : null}
-    <FlatButton label="Previous" disabled={current === 1} onClick={onPrev}
-      style={current === 1 ? buttonDisabledStyle : buttonStyle} labelStyle={buttonTextStyle}/>
+    {(steps > 1)
+      ? (<FlatButton label="Previous" disabled={current === 1} onClick={onPrev}
+        style={current === 1 ? buttonDisabledStyle : buttonStyle} labelStyle={buttonTextStyle}/>) : null}
     { current < steps
       ? (<FlatButton label="Next" onClick={onNext} style={buttonStyle} labelStyle={buttonTextStyle}/>) : null}
     { current === steps
