@@ -1,37 +1,31 @@
 import React, { Component } from 'react'
 import Modal from 'react-bootstrap-modal'
-import { Header } from './parts'
+import { Header, WizardButtons } from './parts'
 
 export default class DeviceTplModalView extends Component {
   render () {
-    const {header, onSubmit, onHide} = this.props
+    const {header, progressBar, content, current, steps, onSubmit, onHide,
+      onPrev, onNext, paramEditModal} = this.props
     return (
       <Modal
         show
         onHide={onHide}
         aria-labelledby="ModalHeader"
-        className="bootstrap-dialog type-primary"
+        className="bootstrap-dialog type-primary modal-device-wizard"
+        style={{width: '740px'}}
       >
         <Header name={header} />
         <div className="modal-body bootstrap-dialog-message">
           <form onSubmit={onSubmit}>
+            {progressBar}
             <div className="form-column">
-              <Field name="name" component={FormInput} label="Name"/>
-              <Field name="devicetemplategroup" component={FormSelect} label="Group" options={options}/>
-              <ImageUploader imgUrl={imgUrl} onChange={onChange}/>
-              <SubHeader name="Monitors"/>
-              <div className="row">
-                <div className="col-md-6">
-                  <Monitors monitors={monitors} onRemoveMonitor={onRemoveMonitor} />
-                </div>
-                <div className="col-md-6">
-                  <MonitorTemplates monitorTemplates={monitorTemplates} onAddMonitor={onAddMonitor} />
-                </div>
-              </div>
+              {content}
             </div>
-            <SubmitBlock name="Save" onClick={onHide}/>
+            <WizardButtons current={current} steps={steps} onClose={onHide}
+              onPrev={onPrev} onNext={onNext}/>
           </form>
         </div>
+        {paramEditModal}
       </Modal>
     )
   }
