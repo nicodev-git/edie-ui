@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { assign } from 'lodash'
+import { assign, findIndex } from 'lodash'
 import {
   UPDATE_SEARCH_PARAMS,
   UPDATE_SEARCH_FIELDS,
@@ -8,10 +8,7 @@ import {
   FETCH_FIELD_TOP_VALUES,
   UPDATE_QUERY_CHIPS,
 
-  FETCH_SEARCH_OPTIONS,
-  ADD_SEARCH_OPTION,
-  UPDATE_SEARCH_OPTION,
-  REMOVE_SEARCH_OPTION
+  FETCH_SEARCH_OPTIONS
 } from './types'
 import { ROOT_URL } from './config'
 import { apiError } from './Errors'
@@ -64,14 +61,10 @@ export const updateQueryChips = (chips) => {
   }
 }
 
-export const fetchSearchOptions = () => {
+export const fetchSearchOptions = (envvars) => {
   return dispatch => {
-    axios.get(`${ROOT_URL}/searchoption`).then(res => {
-      dispatch({type: FETCH_SEARCH_OPTIONS, data: res._embedded.searchOptions})
-    }).catch(error => apiError(dispatch, error))
+    const index = findIndex(envvars, {envvars: {key: 'SEARCH_OPTIONS'}})
+    const data = index < 0 ? [] : JSON.parse(envvars[index]['envvars']['value1'] || '[]')
+    dispatch({type: FETCH_SEARCH_OPTIONS, data})
   }
-}
-
-export const addSearchOption = (props) => {
-
 }

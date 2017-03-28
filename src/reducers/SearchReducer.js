@@ -8,7 +8,9 @@ import {
   OPEN_FIELDS_POPOVER,
   CLOSE_FIELDS_POPOVER,
   FETCH_FIELD_TOP_VALUES,
-  UPDATE_QUERY_CHIPS
+  UPDATE_QUERY_CHIPS,
+
+  FETCH_SEARCH_OPTIONS
 } from '../actions/types'
 import { keys } from 'lodash'
 
@@ -53,6 +55,9 @@ export default function (state = {}, action) {
       return { ...state, fieldTopValues: action.data }
     case UPDATE_QUERY_CHIPS:
       return { ...state, queryChips: action.chips }
+
+    case FETCH_SEARCH_OPTIONS:
+      return { ...state, searchOptions: action.data }
   }
   return state
 }

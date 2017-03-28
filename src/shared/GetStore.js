@@ -73,7 +73,9 @@ const initialState = {
     },
     queryChips: [],
     fields: [],
-    fieldTopValues: []
+    fieldTopValues: [],
+
+    searchOptions: []
   },
 
   settings: {

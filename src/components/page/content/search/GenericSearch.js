@@ -63,6 +63,8 @@ class GenericSearch extends React.Component {
         return <span dangerouslySetInnerHTML={{ __html: data }} /> // eslint-disable-line
       }
     }]
+
+    this.props.fetchSearchOptions()
   }
 
   componentDidMount () {
@@ -245,6 +247,7 @@ class GenericSearch extends React.Component {
           <SearchFormView
             onSearchKeyDown={this.onSearchKeyDown.bind(this)}
             dateOptions={this.dateOptions}
+            searchOptions={this.props.searchOptions}
             onClickStar={this.onClickStar.bind(this)}
             onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
           />

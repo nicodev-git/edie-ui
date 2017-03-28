@@ -11,7 +11,9 @@ import {
   openFieldsPopover,
   closeFieldsPopover,
   fetchFieldTopValues,
-  updateQueryChips
+  updateQueryChips,
+
+  fetchSearchOptions
 } from 'actions'
 
 @withRouter
@@ -23,7 +25,8 @@ import {
     fieldPopoverOpen: state.search.fieldPopoverOpen,
     selectedField: state.search.selectedField,
     anchorEl: state.search.anchorEl,
-    fieldTopValues: state.search.fieldTopValues
+    fieldTopValues: state.search.fieldTopValues,
+    searchOptions: state.search.searchOptions
   }),
   dispatch => ({
     ...bindActionCreators({
@@ -32,7 +35,9 @@ import {
       openFieldsPopover,
       closeFieldsPopover,
       fetchFieldTopValues,
-      updateQueryChips
+      updateQueryChips,
+
+      fetchSearchOptions
     }, dispatch)
   })
 )
