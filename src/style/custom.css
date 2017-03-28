@@ -675,11 +675,6 @@ table.table tbody tr.selected {
   word-break: break-all;
 }
 
-.image-container {
-  display: flex;
-  justify-content: center;
-}
-
 .main-incident-toggle {
   position: absolute;
   right: 20px;
@@ -846,9 +841,25 @@ table.table tbody tr.selected {
   align-items: center;
 }
 
-.image-uploader img {
-  width: 100px;
+.image-container {
+  position: relative;
   height: 100px;
+}
+
+.image-uploader {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  height: 100px;
+  margin-left: -80px;
+  z-index: 2;
+}
+
+.image-uploader img {
+  height: auto;
+  width: auto;
+  max-width: 300px;
+  max-height: 100px;
 }
 /* Field Item */
 .field-item.selected {
