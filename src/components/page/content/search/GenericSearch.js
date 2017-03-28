@@ -11,6 +11,7 @@ import SearchTabs from './SearchTabs'
 import TabPage from '../../../shared/TabPage'
 import TabPageBody from '../../../shared/TabPageBody'
 import TabPageHeader from '../../../shared/TabPageHeader'
+import { imageBaseUrl } from 'shared/Global'
 
 import SearchFormView from './SearchFormView'
 
@@ -137,7 +138,7 @@ class GenericSearch extends React.Component {
             <b>Reports</b>
           </div>
           <div className="padding-sm">
-            <div className="row">
+            <div>
               <div className="col-md-4"><a href="javascript:;">Top values</a></div>
               <div className="col-md-4"><a href="javascript:;">Top values by time</a></div>
               <div className="col-md-4"><a href="javascript:;">Rare values</a></div>
@@ -147,7 +148,7 @@ class GenericSearch extends React.Component {
           </div>
         </div>
 
-        <div style={{height: '400px', overflow: 'auto'}}>
+        <div style={{height: '400px', width: '100%', overflowY: 'auto', overflowX: 'hidden'}}>
           <table className="table table-hover">
             <thead>
               <tr>
@@ -161,10 +162,16 @@ class GenericSearch extends React.Component {
             {
               this.props.fieldTopValues.map(m =>
                 <tr key={m.name}>
-                  <td>{m.name}</td>
+                  <td>
+                    <a href="javascript:;">{m.name}</a>
+                  </td>
                   <td>{m.count}</td>
                   <td>{(m.percent || 0).toFixed(2)}%</td>
-                  <td>&nbsp;</td>
+                  <td>
+                    <div style={{width: '200px'}}>
+                      <img src={`${imageBaseUrl}bar.png`} width={`${Math.max(m.percent || 0, 0.5)}%`} height="16"/>
+                    </div>
+                  </td>
                 </tr>
               )
             }
