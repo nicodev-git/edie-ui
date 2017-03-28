@@ -2,7 +2,7 @@ import React from 'react'
 import $ from 'jquery'
 import { assign } from 'lodash'
 
-import { isGroup } from 'shared/Global'
+import { isGroup, parseSearchQuery } from 'shared/Global'
 import SidebarView from './SidebarView'
 import ProfileModal from './ProfileModal'
 
@@ -72,7 +72,12 @@ export default class Sidebar extends React.Component {
   }
 
   onSearch (query) {
-    this.props.updateSearchParams(assign({}, this.props.params, {query}))
+    const newChips = parseSearchQuery(query)
+
+    this.props.updateQueryChips(newChips)
+    this.props.updateSearchParams(assign({}, this.props.params, {
+      query: newChips.map(m => `${m.name}=${m.value}`).join(' and ')
+    }))
     this.props.router.push('/search')
   }
 
