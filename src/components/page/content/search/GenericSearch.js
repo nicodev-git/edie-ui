@@ -163,7 +163,7 @@ class GenericSearch extends React.Component {
                 <tr key={m.name}>
                   <td>{m.name}</td>
                   <td>{m.count}</td>
-                  <td>&nbsp;</td>
+                  <td>{(m.percent || 0).toFixed(2)}%</td>
                   <td>&nbsp;</td>
                 </tr>
               )
