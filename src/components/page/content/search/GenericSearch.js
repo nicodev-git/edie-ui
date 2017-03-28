@@ -119,7 +119,7 @@ class GenericSearch extends React.Component {
             <h4>{selectedField.name}</h4>
           </div>
           <div className="pull-right padding-sm">
-            <FlatButton icon={<NavigationClose />} style={{minWidth: '44px'}}/>
+            <FlatButton icon={<NavigationClose />} style={{minWidth: '44px'}} onTouchTap={this.handleRequestClose.bind(this)}/>
           </div>
         </div>
 
@@ -128,6 +128,21 @@ class GenericSearch extends React.Component {
         <div className="padding-md-left padding-md-top">
           <div className="inline padding-sm">
             {selectedField.count} Values
+          </div>
+        </div>
+
+        <div className="padding-md-left padding-lg-top">
+          <div className="padding-sm">
+            <b>Reports</b>
+          </div>
+          <div className="padding-sm">
+            <div className="row">
+              <div className="col-md-4"><a href="javascript:;">Top values</a></div>
+              <div className="col-md-4"><a href="javascript:;">Top values by time</a></div>
+              <div className="col-md-4"><a href="javascript:;">Rare values</a></div>
+              <div className="col-md-4"><a href="javascript:;">Events with this field</a></div>
+            </div>
+
           </div>
         </div>
 
