@@ -7,6 +7,7 @@ import GenericSearch from 'components/page/content/search/GenericSearch'
 
 import {
   updateSearchParams,
+  fetchSearchFields,
   openFieldsPopover,
   closeFieldsPopover,
   fetchFieldTopValues
@@ -25,6 +26,7 @@ import {
   dispatch => ({
     ...bindActionCreators({
       updateSearchParams,
+      fetchSearchFields,
       openFieldsPopover,
       closeFieldsPopover,
       fetchFieldTopValues

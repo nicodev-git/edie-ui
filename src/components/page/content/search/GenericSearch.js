@@ -1,5 +1,5 @@
 import React from 'react'
-import { reduxForm, submit } from 'redux-form'
+import { reduxForm, submit, formValueSelector } from 'redux-form'
 import { connect } from 'react-redux'
 import { assign } from 'lodash'
 import moment from 'moment'
@@ -50,6 +50,10 @@ class GenericSearch extends React.Component {
     }]
   }
 
+  componentDidMount () {
+    this.props.fetchSearchFields(this.props.params)
+  }
+
   onSearchKeyDown (e) {
     if (e.keyCode === 13) {
       submit('genericSearchForm')
@@ -85,6 +89,19 @@ class GenericSearch extends React.Component {
   onClickField (field, e) {
     this.props.fetchFieldTopValues(field.name, this.props.params)
     this.props.openFieldsPopover(field, e.target)
+  }
+
+  onClickValue (value) {
+    const { selectedField, currentQuery, params } = this.props
+
+    if (!selectedField) return
+
+    this.props.closeFieldsPopover()
+
+    const query = `${currentQuery}${currentQuery ? ' and ' : ''}${selectedField.name}=${value}`
+    this.props.change('query', query)
+
+    this.props.updateSearchParams(assign({}, params, { query }))
   }
 
   renderFields () {
@@ -163,7 +180,7 @@ class GenericSearch extends React.Component {
               this.props.fieldTopValues.map(m =>
                 <tr key={m.name}>
                   <td>
-                    <a href="javascript:;">{m.name}</a>
+                    <a href="javascript:;" onClick={this.onClickValue.bind(this, m.name)}>{m.name}</a>
                   </td>
                   <td>{m.count}</td>
                   <td>{(m.percent || 0).toFixed(2)}%</td>
@@ -219,8 +236,12 @@ class GenericSearch extends React.Component {
   }
 }
 
+const GenericSearchForm = reduxForm({form: 'genericSearchForm'})(GenericSearch)
+
+const selector = formValueSelector('genericSearchForm')
 export default connect(
   state => ({
-    initialValues: state.search.params
+    initialValues: state.search.params,
+    currentQuery: selector(state, 'query')
   })
-)(reduxForm({form: 'genericSearchForm'})(GenericSearch))
+)(GenericSearchForm)
