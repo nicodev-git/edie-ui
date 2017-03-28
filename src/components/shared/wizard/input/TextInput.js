@@ -10,15 +10,16 @@ export default class TextInput extends React.Component {
     this.state = {}
   }
 
+  // className={`col-md-${width}`}
+  // className={`${cls || ''}`}
+
   renderField (config) {
-    const { input, label, cls, disabled, width, style, useColumn } = config
+    const { input, label, disabled, style, useColumn } = config
     const field = (
-      <div className={`col-md-${width}`}
-        style={util.convertStyle(style)}>
+      <div style={util.convertStyle(style)}>
         <TextField hintText={label}
           inputStyle={inputStyle}
           underlineFocusStyle={underlineStyle}
-          className={`${cls || ''}`}
           disabled={disabled ? 'disabled' : null}
           {...input}
         />

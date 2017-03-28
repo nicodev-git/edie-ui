@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Panel } from 'react-bootstrap'
 import { assign } from 'lodash'
+import { SubHeader, CrudButtons } from 'components/modal/parts'
 
 import MonitorWizardContainer from 'containers/shared/wizard/MonitorWizardContainer'
 
@@ -142,23 +143,13 @@ export default class MonitorTable extends Component {
   render () {
     return (
       <div className="panel panel-default panel-noborder">
-        <div className="panel-heading drag-handle">
-          <h4 className="panel-title">Monitors</h4>
-          <div className="panel-options">
-            <a href="javascript:;" className="option add-device"
-              onClick={this.onClickAdd.bind(this)}>
-              <i className="fa fa-plus-square" />
-            </a>
-            <a href="javascript:;" className="option edit-device"
-              onClick={this.onClickEdit.bind(this)}>
-              <i className="fa fa-edit" />
-            </a>
-            <a href="javascript:;" className="option trash"
-              onClick={this.onClickRemove.bind(this)}>
-              <i className="fa fa-trash-o" />
-            </a>
-          </div>
-
+        <div className="monitors-wizard-crud">
+          <SubHeader name="Monitors"/>
+          <CrudButtons
+            onAdd={this.onClickAdd.bind(this)}
+            onEdit={this.onClickEdit.bind(this)}
+            onRemove={this.onClickRemove.bind(this)}
+          />
           {this.renderMenu()}
         </div>
 

@@ -836,6 +836,16 @@ table.table tbody tr.selected {
   align-items: center;
 }
 
+.control-label>div>div>label {
+  width: calc(100% - 40px) !important;
+}
+
+.monitors-wizard-crud {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
 /* Field Item */
 .field-item.selected {
     background: lightgray;

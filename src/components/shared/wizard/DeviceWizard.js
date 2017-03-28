@@ -235,10 +235,11 @@ class DeviceWizard extends Component {
     return text
   }
 
+  // className={`col-md-${util.calcWidth(config.width)}`}
+
   buildLabel (config) {
     return (
-      <div className={`col-md-${util.calcWidth(config.width)}`}
-        style={util.convertStyle(config.style)}>
+      <div style={util.convertStyle(config.style)}>
           <label className={`control-label ${config.cls || ''}`}
             dangerouslySetInnerHTML={{__html: config.html || config.text || ''}} // eslint-disable-line react/no-danger
           />
