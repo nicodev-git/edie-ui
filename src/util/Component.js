@@ -1,20 +1,9 @@
 import ReactDOM from 'react-dom'
-
-function getDiv () {
-  let div = document.createElement('div')
-  document.body.appendChild(div)
-  return div
-}
+import { modalDiv } from './GetDiv'
 
 export function appendComponent (component) {
-  /* let div = document.createElement('div')
-  document.body.appendChild(div)
-  console.log('in append: ', component)
-  console.log(component.type.WrappedComponent) */
-  let div = getDiv()
-  let instance = ReactDOM.render(component, div)
-  // console.log('instance: ', instance)
-  // instance.div = div
+  document.body.appendChild(modalDiv)
+  let instance = ReactDOM.render(component, modalDiv)
   return instance
 }
 
@@ -23,18 +12,8 @@ export function removeComponent (component) {
     console.error('Missing component to remove.')
     return
   }
-  console.log('in remove: ', component)
-  let div = getDiv()
-  // let div = component.div
-
-  if (!div) {
-    console.error('Missing component dom to remove.')
-    return
-  }
-
   setTimeout(() => {
-    ReactDOM.unmountComponentAtNode(div)
-
-    div.parentNode.removeChild(div)
+    ReactDOM.unmountComponentAtNode(modalDiv)
+    modalDiv.parentNode.removeChild(modalDiv)
   }, 1)
 }
