@@ -23,6 +23,7 @@ import MainWorkflowModalView from './MainWorkflowModalView'
 import MapUsersModalView from './MapUsersModalView'
 import DeviceWizardView from './DeviceWizardView'
 import MonitorPickerView from './MonitorPickerView'
+import ParamEditModalView from './ParamEditModalView'
 
 export {
     ActivationModalView,
@@ -49,5 +50,6 @@ export {
     MainWorkflowModalView,
     MapUsersModalView,
     DeviceWizardView,
-    MonitorPickerView
+    MonitorPickerView,
+    ParamEditModalView
 }

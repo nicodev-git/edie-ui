@@ -1,5 +1,7 @@
 import React from 'react'
 import Chip from 'material-ui/Chip'
+import FlatButton from 'material-ui/FlatButton'
+import { buttonStyle, buttonTextStyle } from 'style/materialStyles'
 
 const styles = {
   chip: {
@@ -40,11 +42,8 @@ class ParamList extends React.Component {
     return (
       <div>
         <div className="margin-sm-bottom">
-          <span>Params</span>
-          <span className="padding-lg-left">
-            <a href="javascript:;" className="btn btn-default btn-sm margin-sm-right"
-              onClick={this.onClickAdd.bind(this)}>Add</a>
-          </span>
+          <FlatButton label="Add Params" onClick={this.onClickAdd.bind(this)}
+            style={buttonStyle} labelStyle={buttonTextStyle}/>
         </div>
         <div style={styles.wrapper} className="margin-lg-bottom margin-md-top">
           {this.props.editParams.map(p =>
