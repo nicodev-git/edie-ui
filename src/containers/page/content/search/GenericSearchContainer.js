@@ -18,7 +18,7 @@ import {
 @connect(
   state => ({
     params: state.search.params,
-    queryChips: state.search.params,
+    queryChips: state.search.queryChips,
     fields: state.search.fields,
     fieldPopoverOpen: state.search.fieldPopoverOpen,
     selectedField: state.search.selectedField,

@@ -1,7 +1,7 @@
 import React from 'react'
 import { reduxForm, submit, formValueSelector } from 'redux-form'
-import { connect, concat } from 'react-redux'
-import { assign } from 'lodash'
+import { connect } from 'react-redux'
+import { assign, concat } from 'lodash'
 import moment from 'moment'
 import {Popover, FlatButton, Chip} from 'material-ui'
 import NavigationClose from 'material-ui/svg-icons/navigation/close'
@@ -14,6 +14,21 @@ import TabPageHeader from '../../../shared/TabPageHeader'
 import { imageBaseUrl } from 'shared/Global'
 
 import SearchFormView from './SearchFormView'
+
+const styles = {
+  chip: {
+    margin: 4
+  },
+  chipLabel: {
+    fontSize: '12px'
+  },
+  wrapper: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    maxHeight: '300px',
+    overflow: 'auto'
+  }
+}
 
 class GenericSearch extends React.Component {
   constructor (props) {
@@ -128,7 +143,8 @@ class GenericSearch extends React.Component {
     this.props.updateSearchParams(assign({}, params, { query }))
   }
 
-  onClickRemoveChip () {
+  onClickRemoveChip (index) {
+    this.props.updateQueryChips(this.props.queryChips.filter((p, i) => i !== index))
   }
 
   renderFields () {
@@ -231,24 +247,24 @@ class GenericSearch extends React.Component {
     return (
       <TabPage>
         <TabPageHeader title="Search">
-          <div className="text-center">
-            <div className="inline">
-              {this.props.queryChips.map(p =>
-                <Chip
-                  key={p.name}
-                  style={{margin: 4}}
-                  onRequestDelete={this.onClickRemoveChip.bind(this, p)}
-                >
-                  <b>{p.name}</b>: {p.value}
-                </Chip>
-              )}
-            </div>
-          </div>
           <SearchFormView
             onSearchKeyDown={this.onSearchKeyDown.bind(this)}
             dateOptions={this.dateOptions}
             onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
           />
+
+          <div className="text-center">
+            <div className="inline">
+              <div style={styles.wrapper}>
+                {this.props.queryChips.map((p, i) =>
+                  <Chip key={`${p.name}${p.value}`} style={styles.chip} onRequestDelete={this.onClickRemoveChip.bind(this, i)}>
+                    <b>{p.name}</b>: {p.value}
+                  </Chip>
+                )}
+              </div>
+            </div>
+          </div>
+
         </TabPageHeader>
 
         <TabPageBody tabs={SearchTabs} tab={0}>
