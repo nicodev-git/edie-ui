@@ -71,7 +71,8 @@ const initialState = {
       dateFrom: 0,
       dateTo: 0
     },
-    fields: []
+    fields: [],
+    fieldTopValues: []
   },
 
   settings: {

@@ -8,7 +8,8 @@ import GenericSearch from 'components/page/content/search/GenericSearch'
 import {
   updateSearchParams,
   openFieldsPopover,
-  closeFieldsPopover
+  closeFieldsPopover,
+  fetchFieldTopValues
 } from 'actions'
 
 @withRouter
@@ -18,13 +19,15 @@ import {
     fields: state.search.fields,
     fieldPopoverOpen: state.search.fieldPopoverOpen,
     selectedField: state.search.selectedField,
-    anchorEl: state.search.anchorEl
+    anchorEl: state.search.anchorEl,
+    fieldTopValues: state.search.fieldTopValues
   }),
   dispatch => ({
     ...bindActionCreators({
       updateSearchParams,
       openFieldsPopover,
-      closeFieldsPopover
+      closeFieldsPopover,
+      fetchFieldTopValues
     }, dispatch)
   })
 )
