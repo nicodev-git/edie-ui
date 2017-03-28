@@ -16,6 +16,7 @@ export function removeComponent (component) {
     console.error('Missing component to remove.')
     return
   }
+  console.log('in remove: ', component)
   let div = component.div
 
   if (!div) {
