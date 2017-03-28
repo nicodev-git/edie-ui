@@ -82,6 +82,7 @@ class GenericSearch extends React.Component {
   }
 
   onClickField (field, e) {
+    this.props.fetchFieldTopValues(field.name, this.props.params)
     this.props.openFieldsPopover(field, e.target)
   }
 
@@ -146,8 +147,29 @@ class GenericSearch extends React.Component {
           </div>
         </div>
 
-        <div style={{height: '200px', width: '400px'}}>
-          Content
+        <div style={{height: '400px', overflow: 'auto'}}>
+          <table className="table table-hover">
+            <thead>
+              <tr>
+                <th><b>Top 10 Values</b></th>
+                <th>Count</th>
+                <th>%</th>
+                <th>&nbsp;</th>
+              </tr>
+            </thead>
+            <tbody>
+            {
+              this.props.fieldTopValues.map(m =>
+                <tr key={m.name}>
+                  <td>{m.name}</td>
+                  <td>{m.count}</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                </tr>
+              )
+            }
+            </tbody>
+          </table>
         </div>
       </Popover>
     )

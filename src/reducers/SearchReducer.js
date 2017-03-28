@@ -6,7 +6,8 @@ import {
   UPDATE_SEARCH_PARAMS,
   UPDATE_SEARCH_FIELDS,
   OPEN_FIELDS_POPOVER,
-  CLOSE_FIELDS_POPOVER
+  CLOSE_FIELDS_POPOVER,
+  FETCH_FIELD_TOP_VALUES
 } from '../actions/types'
 import { keys } from 'lodash'
 
@@ -46,6 +47,9 @@ export default function (state = {}, action) {
       return { ...state, fieldPopoverOpen: true, selectedField: action.selectedField, anchorEl: action.anchorEl }
     case CLOSE_FIELDS_POPOVER:
       return { ...state, fieldPopoverOpen: false }
+
+    case FETCH_FIELD_TOP_VALUES:
+      return { ...state, fieldTopValues: action.data }
   }
   return state
 }
