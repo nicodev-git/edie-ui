@@ -3,7 +3,8 @@ import { reduxForm, submit } from 'redux-form'
 import { connect } from 'react-redux'
 import { assign } from 'lodash'
 import moment from 'moment'
-import Popover from 'material-ui/Popover'
+import {Popover, FlatButton} from 'material-ui'
+import NavigationClose from 'material-ui/svg-icons/navigation/close'
 
 import {ResponsiveInfiniteTable} from '../../../shared/InfiniteTable'
 import SearchTabs from './SearchTabs'
@@ -113,7 +114,23 @@ class GenericSearch extends React.Component {
         style={{marginLeft: '100px'}}
         onRequestClose={this.handleRequestClose.bind(this)}
       >
-        <h4>{selectedField.name}</h4>
+        <div className="padding-md-left">
+          <div className="inline padding-sm">
+            <h4>{selectedField.name}</h4>
+          </div>
+          <div className="pull-right padding-sm">
+            <FlatButton icon={<NavigationClose />} style={{minWidth: '44px'}}/>
+          </div>
+        </div>
+
+        <hr className="m-none" style={{borderColor: 'gray'}}/>
+
+        <div className="padding-md-left padding-md-top">
+          <div className="inline padding-sm">
+            {selectedField.count} Values
+          </div>
+        </div>
+
         <div style={{height: '200px', width: '400px'}}>
           Content
         </div>

@@ -20,6 +20,9 @@ body {
 .mt-none {
     margin-top: 0!important;
 }
+.m-none {
+    margin: 0!important;
+}
 
 .p-none {
     padding: 0!important;
