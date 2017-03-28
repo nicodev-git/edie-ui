@@ -18,6 +18,9 @@ import MonitorLogOptions from './MonitorLogOptions'
 import TabPage from '../../../../shared/TabPage'
 import TabPageBody from '../../../../shared/TabPageBody'
 import TabPageHeader from '../../../../shared/TabPageHeader'
+import { Provider } from 'react-redux'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+import { store } from 'shared/GetStore'
 
 export default class Monitors extends React.Component {
   constructor (props) {
@@ -171,17 +174,20 @@ export default class Monitors extends React.Component {
   render () {
     const {props} = this
     const {device} = props
-
     return (
-      <TabPage>
-        <TabPageHeader title={device.name}>
-          {this.renderOptions()}
-        </TabPageHeader>
-        <TabPageBody>
-          {this.renderBody()}
-          {this.renderProcessModal()}
-        </TabPageBody>
-      </TabPage>
+      <MuiThemeProvider>
+        <Provider store={store}>
+          <TabPage>
+            <TabPageHeader title={device.name}>
+              {this.renderOptions()}
+            </TabPageHeader>
+            <TabPageBody>
+              {this.renderBody()}
+              {this.renderProcessModal()}
+            </TabPageBody>
+          </TabPage>
+        </Provider>
+      </MuiThemeProvider>
     )
   }
 }

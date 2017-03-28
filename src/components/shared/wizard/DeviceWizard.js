@@ -21,6 +21,7 @@ import {wizardConfig} from './WizardConfig'
 import {util} from './WizardUtil'
 import { Provider } from 'react-redux'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+import { store } from 'shared/GetStore'
 
 class DeviceWizard extends React.Component {
   constructor (props) {
@@ -348,11 +349,10 @@ class DeviceWizard extends React.Component {
   }
 
   render () {
-    const { handleSubmit, onStep0, store } = this.props
+    const { handleSubmit, onStep0 } = this.props
     const { current, steps } = this.state
     let cssPrevious = ''
     if (current < 2) cssPrevious = onStep0 ? '' : 'hidden'
-
     return (
       <MuiThemeProvider>
         <Provider store={store}>
