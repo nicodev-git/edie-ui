@@ -31,6 +31,7 @@ import {
   showIncidentDetail,
   showIncidentRaw
 } from '../../../../../shared/incident/Incident'
+import MainIncidentsView from './MainIncidentView'
 
 export default class MainIncidents extends Component {
   constructor (props) {
@@ -237,6 +238,12 @@ export default class MainIncidents extends Component {
     })
   }
 
+  onCloseCommentsModal () {
+    this.setState({
+      commentModalVisible: false
+    })
+  }
+
   onClickPDF () {
     const params = this.getParams()
     let url = `/pdfIncidents?${
@@ -290,100 +297,24 @@ export default class MainIncidents extends Component {
     const {selectedIndex} = this.state
 
     let selectedIncident = selectedIndex < 0 ? null : incidents[selectedIndex]
-
+    let table = this.renderTable()
     return (
-      <TabPage>
-        <TabPageHeader title={device.name}>
-          <div className="text-center margin-md-top">
-
-            <div className="pull-left">
-              <div className="form-inline">
-                <Select
-                  value={this.state.selectedSeverity.join(',')}
-                  options={this.state.severities}
-                  onChange={this.onChangeSeverity.bind(this)}
-                  multi
-                  clearable={false}
-                  className="select-severity"
-                  style={{minWidth: '85px'}}
-                  searchable={false}
-                  autosize={false}
-                  backspaceRemoves={false}
-                />
-
-                <select className="fixtype form-control inline text-primary margin-md-left"
-                  style={{maxWidth: '150px'}}
-                  onChange={this.onFilterChange}
-                  ref="fixed" defaultValue="false">
-                  <option value="">Any</option>
-                  <option value="false">Unfixed</option>
-                  <option value="true">Fixed</option>
-                </select>
-
-                <DateRangePicker onClickRange={this.onFilterChange} className="margin-md-left"
-                  default={moment().startOf('years').format('YYYY')} ref="dp">
-                  <i className="fa fa-caret-down margin-xs-left" />
-                </DateRangePicker>
-
-                <a href="javascript:;" title="Export" style={{display: 'none'}}><img
-                  width="26" src="/images/btn-export.jpg"/></a>
-              </div>
-            </div>
-
-            <div className="pull-right">
-              <ButtonGroup>
-
-                <Button onClick={this.onClickOpen.bind(this)}>Open</Button>
-
-                <Button onClick={this.onClickFixAll.bind(this)}>Fix All</Button>
-
-                <DropdownButton title="More" id="dd-dev-incidents" pullRight>
-
-                  <MenuItem eventKey="1" onClick={this.onClickAddIncident.bind(this)}>
-                    Add Incident
-                  </MenuItem>
-
-                  <MenuItem eventKey="2" onClick={this.onClickAddException.bind(this)}>
-                    Add Exception
-                  </MenuItem>
-
-                  <MenuItem eventKey="3" onClick={this.onClickPDF.bind(this)}>
-                    Export PDF
-                  </MenuItem>
-
-                </DropdownButton>
-
-              </ButtonGroup>
-            </div>
-
-            <div style={{margin: '0 auto', position: 'relative', display: 'inline-block', textAlign: 'center'}}>
-              <div className="inline" style={{position: 'relative'}}>
-                <input type="text" placeholder="Search" className="form-control"
-                  style={{width: '100%', paddingLeft: '35px'}}
-                  onChange={this.onFilterChange}
-                  ref="search"/>
-                <a className="btn" href="javascript:;" style={{position: 'absolute', left: 0, top: 0}}>
-                  <i className="fa fa-search" /></a>
-              </div>
-            </div>
-          </div>
-        </TabPageHeader>
-
-        <TabPageBody tabs={MainTabs(device.id)} tab={0}>
-          {this.renderTable()}
-          {this.props.addIncidentModalVisible &&
-          <AddIncidentModal {...this.props} open device={this.props.device}/>}
-          {this.state.openExceptionModal &&
-          <AddExceptionModal open incident={selectedIncident}
-            onClose={this.onCloseExceptionModal.bind(this)}/>}
-
-          {this.state.commentModalVisible &&
-          <CommentsModal incident={selectedIncident}
-            onClose={() => { this.setState({commentModalVisible: false}) }}/>}
-
-          <ReactTooltip />
-        </TabPageBody>
-      </TabPage>
+      <MainIncidentView
+        selectedSeverity={this.state.selectedSeverity}
+        severities={this.state.severities}
+        onChangeSeverity={this.onChangeSeverity.bind(this)}
+        onFilterChange={this.onFilterChange}
+        onClickOpen={this.onClickOpen.bind(this)}
+        onClickFixAll={this.onClickFixAll.bind(this)}
+        onClickAddIncident={this.onClickAddIncident.bind(this)}
+        onClickAddException={this.onClickAddException.bind(this)}
+        onClickPDF={this.onClickPDF.bind(this)}
+        onCloseExceptionModal={this.onCloseExceptionModal.bind(this)}
+        onCloseCommentsModal={this.onCloseCommentsModal.bind(this)}
+        openExceptionModal={this.state.openExceptionModal}
+        table={table}
+        {...this.props}
+      />
     )
   }
 }
