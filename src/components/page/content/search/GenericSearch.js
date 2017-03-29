@@ -14,6 +14,7 @@ import TabPageHeader from '../../../shared/TabPageHeader'
 import { imageBaseUrl, parseSearchQuery } from 'shared/Global'
 
 import SearchFormView from './SearchFormView'
+import SearchSavePopover from './SearchSavePopover'
 
 const styles = {
   chip: {
@@ -147,7 +148,11 @@ class GenericSearch extends React.Component {
     //
     // if (!userInfo.id) return
 
-    // this.props.addSearchOption
+    this.props.openSearchSavePopover(null, e.target)
+  }
+
+  onClickSaveSearch (values) {
+    console.log(values)
   }
 
   renderFields () {
@@ -166,8 +171,16 @@ class GenericSearch extends React.Component {
     )
   }
 
-  renderBookmarkPopover () {
-
+  renderSavePopover () {
+    const { savePopoverOpen, anchorEl, closeSearchSavePopover } = this.props
+    if (!savePopoverOpen) return
+    return (
+      <SearchSavePopover
+        anchorEl={anchorEl}
+        onRequestClose={closeSearchSavePopover}
+        onSubmit={this.onClickSaveSearch.bind(this)}
+      />
+    )
   }
 
   renderFieldPopover () {
@@ -272,7 +285,7 @@ class GenericSearch extends React.Component {
               </div>
             </div>
 
-            {this.renderBookmarkPopover()}
+            {this.renderSavePopover()}
           </div>
 
         </TabPageHeader>
