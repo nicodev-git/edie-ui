@@ -140,7 +140,15 @@ class GenericSearch extends React.Component {
   }
 
   onClickStar (e) {
-    this.props.openSearchSavePopover(null, e.target)
+    const { userInfo, envVars, selectedSearchOption, searchOptions, change, removeSearchOption, openSearchSavePopover } = this.props
+
+    if (selectedSearchOption) {
+      change('searchOptionIndex', '')
+      const found = searchOptions.filter(i => i.id === selectedSearchOption)
+      if (userInfo && found.length) removeSearchOption(envVars, userInfo.id, found[0])
+    } else {
+      openSearchSavePopover(null, e.target)
+    }
   }
 
   onClickSaveSearch (values) {
