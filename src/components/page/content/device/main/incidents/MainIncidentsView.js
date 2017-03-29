@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import moment from 'moment'
 import Select from 'react-select'
-import { DropdownButton, ButtonGroup, MenuItem, Button } from 'react-bootstrap'
+import { ButtonGroup, Button } from 'react-bootstrap'
 import ReactTooltip from 'react-tooltip'
 import DateRangePicker from '../../../../../shared/DateRangePicker'
 import AddIncidentModal from './AddIncidentModal'
@@ -12,17 +12,19 @@ import TabPage from '../../../../../shared/TabPage'
 import TabPageBody from '../../../../../shared/TabPageBody'
 import TabPageHeader from '../../../../../shared/TabPageHeader'
 import SelectField from 'material-ui/SelectField'
-import DropDownMenu from 'material-ui/DropDownMenu'
 import MenuItem from 'material-ui/MenuItem'
+import IconMenu from 'material-ui/IconMenu'
+import IconButton from 'material-ui/IconButton'
+import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert'
 import { underlineFocusStyle, inputStyle, selectedItemStyle } from 'style/materialStyles'
 
 export default class MainIncidentsView extends Component {
   render () {
     const {device, incidents, selectedIndex} = this.props
     let options = [
-      {value: "", label: "Any"},
-      {value: "false", label: "Unfixed"},
-      {value: "true", label: "Fixed"},
+      {value: '', label: 'Any'},
+      {value: 'false', label: 'Unfixed'},
+      {value: 'true', label: 'Fixed'}
     ]
     let selectedIncident = selectedIndex < 0 ? null : incidents[selectedIndex]
     return (
@@ -84,14 +86,12 @@ export default class MainIncidentsView extends Component {
                 <Button onClick={this.props.onClickFixAll}>Fix All</Button>
                 <IconMenu
                   iconButtonElement={<IconButton><MoreVertIcon /></IconButton>}
-                  anchorOrigin={{horizontal: 'left', vertical: 'top'}}
+                  anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
                   targetOrigin={{horizontal: 'left', vertical: 'top'}}
                 >
-                  <MenuItem primaryText="Refresh" />
-                  <MenuItem primaryText="Send feedback" />
-                  <MenuItem primaryText="Settings" />
-                  <MenuItem primaryText="Help" />
-                  <MenuItem primaryText="Sign out" />
+                  <MenuItem primaryText="Add Incident" onTouchTap={this.props.onClickAddIncident}/>
+                  <MenuItem primaryText="Add Exception" onTouchTap={this.props.onClickAddException}/>
+                  <MenuItem primaryText="Export PDF" onTouchTap={this.props.onClickPDF}/>
                 </IconMenu>
 
                 {/* <DropdownButton title="More" id="dd-dev-incidents" pullRight>
