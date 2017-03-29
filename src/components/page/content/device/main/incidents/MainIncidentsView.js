@@ -11,10 +11,19 @@ import MainTabs from '../MainTabs'
 import TabPage from '../../../../../shared/TabPage'
 import TabPageBody from '../../../../../shared/TabPageBody'
 import TabPageHeader from '../../../../../shared/TabPageHeader'
+import SelectField from 'material-ui/SelectField'
+import DropDownMenu from 'material-ui/DropDownMenu'
+import MenuItem from 'material-ui/MenuItem'
+import { underlineFocusStyle, inputStyle, selectedItemStyle } from 'style/materialStyles'
 
 export default class MainIncidentsView extends Component {
   render () {
     const {device, incidents, selectedIndex} = this.props
+    let options = [
+      {value: "", label: "Any"},
+      {value: "false", label: "Unfixed"},
+      {value: "true", label: "Fixed"},
+    ]
     let selectedIncident = selectedIndex < 0 ? null : incidents[selectedIndex]
     return (
       <TabPage>
@@ -36,14 +45,26 @@ export default class MainIncidentsView extends Component {
                   backspaceRemoves={false}
                 />
 
-                <select className="fixtype form-control inline text-primary margin-md-left"
+                <SelectField
+                  underlineStyle={underlineFocusStyle}
+                  selectedMenuItemStyle={selectedItemStyle}
+                  menuItemStyle={inputStyle}
+                  labelStyle={inputStyle}
+                  onChange={this.props.onFilterChange}
+                >
+                  {options.map((option, index) =>
+                    <MenuItem key={index} value={option.value} primaryText={option.label} />
+                  )}
+                </SelectField>
+
+                {/* <select className="fixtype form-control inline text-primary margin-md-left"
                   style={{maxWidth: '150px'}}
                   onChange={this.props.onFilterChange}
                   ref="fixed" defaultValue="false">
                   <option value="">Any</option>
                   <option value="false">Unfixed</option>
                   <option value="true">Fixed</option>
-                </select>
+                </select> */}
 
                 <DateRangePicker onClickRange={this.props.onFilterChange} className="margin-md-left"
                   default={moment().startOf('years').format('YYYY')} ref="dp">
@@ -61,8 +82,19 @@ export default class MainIncidentsView extends Component {
                 <Button onClick={this.props.onClickOpen.bind(this)}>Open</Button>
 
                 <Button onClick={this.props.onClickFixAll}>Fix All</Button>
+                <IconMenu
+                  iconButtonElement={<IconButton><MoreVertIcon /></IconButton>}
+                  anchorOrigin={{horizontal: 'left', vertical: 'top'}}
+                  targetOrigin={{horizontal: 'left', vertical: 'top'}}
+                >
+                  <MenuItem primaryText="Refresh" />
+                  <MenuItem primaryText="Send feedback" />
+                  <MenuItem primaryText="Settings" />
+                  <MenuItem primaryText="Help" />
+                  <MenuItem primaryText="Sign out" />
+                </IconMenu>
 
-                <DropdownButton title="More" id="dd-dev-incidents" pullRight>
+                {/* <DropdownButton title="More" id="dd-dev-incidents" pullRight>
 
                   <MenuItem eventKey="1" onClick={this.props.onClickAddIncident}>
                     Add Incident
@@ -76,7 +108,7 @@ export default class MainIncidentsView extends Component {
                     Export PDF
                   </MenuItem>
 
-                </DropdownButton>
+                </DropdownButton> */}
 
               </ButtonGroup>
             </div>
