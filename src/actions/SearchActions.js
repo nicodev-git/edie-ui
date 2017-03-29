@@ -88,10 +88,10 @@ const saveEnvVar = (envvars, key, value1, cb) => {
   let fnSaveEnvVar
   if (envVar) {
     envVar = setEnvVarValue1(envVar, value1)
-    fnSaveEnvVar = addEnvVar
+    fnSaveEnvVar = updateEnvVar
   } else {
     envVar = createEnvVar(key, value1, '')
-    fnSaveEnvVar = updateEnvVar
+    fnSaveEnvVar = addEnvVar
   }
 
   return fnSaveEnvVar(envVar, cb)

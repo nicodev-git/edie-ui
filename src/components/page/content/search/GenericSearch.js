@@ -11,7 +11,7 @@ import SearchTabs from './SearchTabs'
 import TabPage from '../../../shared/TabPage'
 import TabPageBody from '../../../shared/TabPageBody'
 import TabPageHeader from '../../../shared/TabPageHeader'
-import { imageBaseUrl, parseSearchQuery } from 'shared/Global'
+import { imageBaseUrl, parseSearchQuery, guid } from 'shared/Global'
 
 import SearchFormView from './SearchFormView'
 import SearchSavePopover from './SearchSavePopover'
@@ -140,19 +140,24 @@ class GenericSearch extends React.Component {
   }
 
   onClickStar (e) {
-    // const { userInfo, envVars } = this.props
-    // const { dateIndex, query } = this.props.params
-    // const options = {
-    //   dateIndex, query
-    // }
-    //
-    // if (!userInfo.id) return
-
     this.props.openSearchSavePopover(null, e.target)
   }
 
   onClickSaveSearch (values) {
-    console.log(values)
+    const { userInfo, envVars } = this.props
+    const { dateIndex, query } = this.props.params
+    if (!userInfo.id) return
+    const option = {
+      id: guid(),
+      name: values.name,
+      data: {
+        dateIndex,
+        query
+      }
+    }
+
+    this.props.closeSearchSavePopover()
+    this.props.addSearchOption(envVars, userInfo.id, option)
   }
 
   renderFields () {
@@ -269,7 +274,7 @@ class GenericSearch extends React.Component {
           <SearchFormView
             onSearchKeyDown={this.onSearchKeyDown.bind(this)}
             dateOptions={this.dateOptions}
-            searchOptions={this.props.searchOptions}
+            searchOptions={this.props.searchOptions.map(m => ({label: m.name, value: m.id}))}
             onClickStar={this.onClickStar.bind(this)}
             onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
           />
