@@ -16,7 +16,10 @@ import {
   fetchSearchOptions,
   addSearchOption,
   updateSearchOption,
-  removeSearchOption
+  removeSearchOption,
+
+  openSearchSavePopover,
+  closeSearchSavePopover
 } from 'actions'
 
 @withRouter
@@ -30,6 +33,9 @@ import {
     anchorEl: state.search.anchorEl,
     fieldTopValues: state.search.fieldTopValues,
     searchOptions: state.search.searchOptions,
+
+    savePopoverOpen: state.search.savePopoverOpen,
+    selectedOption: state.search.selectedOption,
 
     userInfo: state.dashboard.userInfo,
     envVars: state.settings.envVars
@@ -46,7 +52,10 @@ import {
       fetchSearchOptions,
       addSearchOption,
       updateSearchOption,
-      removeSearchOption
+      removeSearchOption,
+
+      openSearchSavePopover,
+      closeSearchSavePopover
     }, dispatch)
   })
 )

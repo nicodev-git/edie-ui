@@ -11,7 +11,10 @@ import {
   FETCH_SEARCH_OPTIONS,
   ADD_SEARCH_OPTION,
   UPDATE_SEARCH_OPTION,
-  REMOVE_SEARCH_OPTION
+  REMOVE_SEARCH_OPTION,
+
+  OPEN_SEARCH_SAVE_POPOVER,
+  CLOSE_SEARCH_SAVE_POPOVER
 } from './types'
 import { ROOT_URL } from './config'
 import { apiError } from './Errors'
@@ -134,5 +137,17 @@ export const removeSearchOption = (envvars, userId, option) => {
     dispatch(saveEnvVar(envvars, KEY_SEARCH_OPTIONS, value1, () => {
       dispatch({type: REMOVE_SEARCH_OPTION, option})
     }))
+  }
+}
+
+export const openSearchSavePopover = (option, anchorEl) => {
+  return dispatch => {
+    dispatch({type: OPEN_SEARCH_SAVE_POPOVER, option, anchorEl})
+  }
+}
+
+export const closeSearchSavePopover = () => {
+  return dispatch => {
+    dispatch({type: CLOSE_SEARCH_SAVE_POPOVER})
   }
 }

@@ -65,9 +65,6 @@ class GenericSearch extends React.Component {
     }]
 
     this.props.fetchSearchOptions()
-  }
-
-  componentDidMount () {
     this.props.fetchSearchFields(this.props.params)
   }
 
@@ -141,8 +138,16 @@ class GenericSearch extends React.Component {
     }))
   }
 
-  onClickStar () {
+  onClickStar (e) {
+    // const { userInfo, envVars } = this.props
+    // const { dateIndex, query } = this.props.params
+    // const options = {
+    //   dateIndex, query
+    // }
+    //
+    // if (!userInfo.id) return
 
+    // this.props.addSearchOption
   }
 
   renderFields () {
@@ -157,9 +162,12 @@ class GenericSearch extends React.Component {
             <span className="margin-sm-left text-gray">{f.count}</span>
           </div>
         )}
-
       </div>
     )
+  }
+
+  renderBookmarkPopover () {
+
   }
 
   renderFieldPopover () {
@@ -263,6 +271,8 @@ class GenericSearch extends React.Component {
                 )}
               </div>
             </div>
+
+            {this.renderBookmarkPopover()}
           </div>
 
         </TabPageHeader>

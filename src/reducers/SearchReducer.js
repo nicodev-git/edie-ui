@@ -13,7 +13,10 @@ import {
   FETCH_SEARCH_OPTIONS,
   ADD_SEARCH_OPTION,
   UPDATE_SEARCH_OPTION,
-  REMOVE_SEARCH_OPTION
+  REMOVE_SEARCH_OPTION,
+
+  OPEN_SEARCH_SAVE_POPOVER,
+  CLOSE_SEARCH_SAVE_POPOVER
 } from '../actions/types'
 import { keys, concat } from 'lodash'
 
@@ -67,6 +70,11 @@ export default function (state = {}, action) {
       return { ...state, searchOptions: state.searchOptions.map(u => u.id === action.option.id ? action.option : u) }
     case REMOVE_SEARCH_OPTION:
       return { ...state, searchOptions: state.searchOptions.filter(u => u.id !== action.option.id) }
+
+    case OPEN_SEARCH_SAVE_POPOVER:
+      return { ...state, savePopoverOpen: true, selectedOption: action.option, anchorEl: action.anchorEl }
+    case CLOSE_SEARCH_SAVE_POPOVER:
+      return { ...state, savePopoverOpen: false }
   }
   return state
 }
