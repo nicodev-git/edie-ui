@@ -227,10 +227,14 @@ export default class MainIncidents extends Component {
     window.open(url, '_blank')
   }
 
-  onChangeSeverity (selected) {
-    this.setState({
+  onChangeSeverity (event, index, selected) {
+    /* this.setState({
       selectedSeverity: selected.map(item => item.value)
-    }, this.onFilterChange)
+    }, this.onFilterChange) */
+    this.setState({
+      selectedSeverity: selected,
+      params: this.getParams()
+    })
   }
 
   onFilterChange (event, index, value) {

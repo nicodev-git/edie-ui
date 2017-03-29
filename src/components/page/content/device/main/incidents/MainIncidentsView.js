@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import moment from 'moment'
-import Select from 'react-select'
+// import Select from 'react-select'
 import { ButtonGroup, Button } from 'react-bootstrap'
 import ReactTooltip from 'react-tooltip'
 import DateRangePicker from '../../../../../shared/DateRangePicker'
@@ -20,7 +20,7 @@ import { inputStyle, selectedItemStyle } from 'style/materialStyles'
 
 export default class MainIncidentsView extends Component {
   render () {
-    const {device, incidents, selectedIndex} = this.props
+    const {device, incidents, selectedIndex, severities, selectedSeverity} = this.props
     let selectedIncident = selectedIndex < 0 ? null : incidents[selectedIndex]
     let selectedItem = this.props.selectedItem || 1
     return (
@@ -30,7 +30,7 @@ export default class MainIncidentsView extends Component {
 
             <div className="pull-left">
               <div className="flex-panel width-500">
-                <Select
+                {/* <Select
                   value={this.props.selectedSeverity.join(',')}
                   options={this.props.severities}
                   onChange={this.props.onChangeSeverity}
@@ -41,7 +41,28 @@ export default class MainIncidentsView extends Component {
                   searchable={false}
                   autosize={false}
                   backspaceRemoves={false}
-                />
+                /> */}
+                <SelectField
+                  style={{backgroundColor: '#ffffff', width: '200px'}}
+                  underlineStyle={{display: 'none'}}
+                  selectedMenuItemStyle={selectedItemStyle}
+                  menuItemStyle={inputStyle}
+                  labelStyle={inputStyle}
+                  multiple
+                  hintText="Select severities"
+                  onChange={this.props.onChangeSeverity}
+                  value={selectedSeverity}
+                >
+                  {severities.map(option =>
+                    <MenuItem
+                      key={option.value}
+                      insetChildren
+                      checked={selectedSeverity && selectedSeverity.includes(option.value)}
+                      value={option.value}
+                      primaryText={option.label}
+                    />
+                  )}
+                </SelectField>
 
                 <SelectField
                   style={{backgroundColor: '#ffffff', width: '150px'}}
