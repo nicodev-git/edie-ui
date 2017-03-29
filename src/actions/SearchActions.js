@@ -9,11 +9,13 @@ import {
   UPDATE_QUERY_CHIPS,
 
   FETCH_SEARCH_OPTIONS,
-  ADD_SEARCH_OPTION
+  ADD_SEARCH_OPTION,
+  UPDATE_SEARCH_OPTION,
+  REMOVE_SEARCH_OPTION
 } from './types'
 import { ROOT_URL } from './config'
 import { apiError } from './Errors'
-import { updateEnvVar, addEnvVar } from './EnvActions'
+import { updateEnvVar, addEnvVar, fetchEnvVars } from './EnvActions'
 
 import { KEY_SEARCH_OPTIONS, getEnvVar, getEnvVarValue1, setEnvVarValue1, createEnvVar } from 'shared/Global'
 
@@ -65,12 +67,15 @@ export const updateQueryChips = (chips) => {
   }
 }
 
-export const fetchSearchOptions = (envvars, userId) => {
+export const fetchSearchOptions = (userId) => {
   return dispatch => {
-    const envVar = getEnvVar(envvars, KEY_SEARCH_OPTIONS)
-    const value = getEnvVarValue1(envVar) || '{}'
-    const data = JSON.parse(value)[userId] || []
-    dispatch({type: FETCH_SEARCH_OPTIONS, data})
+    dispatch({type: FETCH_SEARCH_OPTIONS, data: []})
+    dispatch(fetchEnvVars((envvars) => {
+      const envVar = getEnvVar(envvars, KEY_SEARCH_OPTIONS)
+      const value = getEnvVarValue1(envVar) || '{}'
+      const data = JSON.parse(value)[userId] || []
+      dispatch({type: FETCH_SEARCH_OPTIONS, data})
+    }))
   }
 }
 
@@ -93,11 +98,41 @@ export const addSearchOption = (envvars, userId, option) => {
   return dispatch => {
     const envVar = getEnvVar(envvars, KEY_SEARCH_OPTIONS)
     let value1 = JSON.parse(getEnvVarValue1(envVar) || '{}')
-    value1[userId] = option
+    const options = value1[userId] || []
+    options.push(option)
+    value1[userId] = options
     value1 = JSON.stringify(value1)
 
     dispatch(saveEnvVar(envvars, KEY_SEARCH_OPTIONS, value1, () => {
       dispatch({type: ADD_SEARCH_OPTION, option})
+    }))
+  }
+}
+
+export const updateSearchOption = (envvars, userId, option) => {
+  return dispatch => {
+    const envVar = getEnvVar(envvars, KEY_SEARCH_OPTIONS)
+    let value1 = JSON.parse(getEnvVarValue1(envVar) || '{}')
+    const options = value1[userId] || []
+    value1[userId] = options.map(m => m.id === option.id ? option : m)
+    value1 = JSON.stringify(value1)
+
+    dispatch(saveEnvVar(envvars, KEY_SEARCH_OPTIONS, value1, () => {
+      dispatch({type: UPDATE_SEARCH_OPTION, option})
+    }))
+  }
+}
+
+export const removeSearchOption = (envvars, userId, option) => {
+  return dispatch => {
+    const envVar = getEnvVar(envvars, KEY_SEARCH_OPTIONS)
+    let value1 = JSON.parse(getEnvVarValue1(envVar) || '{}')
+    const options = value1[userId] || []
+    value1[userId] = options.filter(m => m.id !== option.id)
+    value1 = JSON.stringify(value1)
+
+    dispatch(saveEnvVar(envvars, KEY_SEARCH_OPTIONS, value1, () => {
+      dispatch({type: REMOVE_SEARCH_OPTION, option})
     }))
   }
 }

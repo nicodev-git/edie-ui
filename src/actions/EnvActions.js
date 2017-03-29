@@ -11,13 +11,16 @@ import { apiError } from './Errors'
 
 import { ROOT_URL } from './config'
 
-export const fetchEnvVars = () => {
+export const fetchEnvVars = (cb) => {
   if (!window.localStorage.getItem('token')) {
     return dispatch => dispatch({ type: NO_AUTH_ERROR })
   }
   return (dispatch) => {
     axios.get(`${ROOT_URL}/setting/search/envvars`)
-      .then(response => fetchEnvVarsSuccess(dispatch, response))
+      .then(response => {
+        fetchEnvVarsSuccess(dispatch, response)
+        cb && cb(response.data._embedded.settingses)
+      })
       .catch(error => apiError(dispatch, error))
   }
 }

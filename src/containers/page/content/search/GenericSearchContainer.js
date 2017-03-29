@@ -13,8 +13,10 @@ import {
   fetchFieldTopValues,
   updateQueryChips,
 
-  fetchEnvVars,
-  fetchSearchOptions
+  fetchSearchOptions,
+  addSearchOption,
+  updateSearchOption,
+  removeSearchOption
 } from 'actions'
 
 @withRouter
@@ -41,8 +43,10 @@ import {
       fetchFieldTopValues,
       updateQueryChips,
 
-      fetchEnvVars,
-      fetchSearchOptions
+      fetchSearchOptions,
+      addSearchOption,
+      updateSearchOption,
+      removeSearchOption
     }, dispatch)
   })
 )
