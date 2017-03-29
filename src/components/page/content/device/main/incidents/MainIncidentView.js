@@ -1,36 +1,16 @@
 import React, { Component } from 'react'
 import moment from 'moment'
-import {
-  findIndex,
-  assign
-} from 'lodash'
 import Select from 'react-select'
-import {
-    DropdownButton,
-    ButtonGroup,
-    MenuItem,
-    Button
-} from 'react-bootstrap'
-import TimeAgo from 'react-timeago'
+import { DropdownButton, ButtonGroup, MenuItem, Button } from 'react-bootstrap'
 import ReactTooltip from 'react-tooltip'
-
 import DateRangePicker from '../../../../../shared/DateRangePicker'
-import { ResponsiveInfiniteTable } from '../../../../../shared/InfiniteTable'
 import AddIncidentModal from './AddIncidentModal'
 import AddExceptionModal from './AddExceptionModal'
 import CommentsModal from '../../../../../shared/incident/CommentsModal'
-
-import { showAlert, showConfirm } from '../../../../../shared/Alert'
-import { getSeverityIcon } from '../../../../../../shared/Global'
-const encodeUrlParams = getSeverityIcon
 import MainTabs from '../MainTabs'
 import TabPage from '../../../../../shared/TabPage'
 import TabPageBody from '../../../../../shared/TabPageBody'
 import TabPageHeader from '../../../../../shared/TabPageHeader'
-import {
-  showIncidentDetail,
-  showIncidentRaw
-} from '../../../../../shared/incident/Incident'
 
 export default class MainIncidentsView extends Component {
   render () {
@@ -44,9 +24,9 @@ export default class MainIncidentsView extends Component {
             <div className="pull-left">
               <div className="form-inline">
                 <Select
-                  value={this.state.selectedSeverity.join(',')}
-                  options={this.state.severities}
-                  onChange={this.onChangeSeverity.bind(this)}
+                  value={this.props.selectedSeverity.join(',')}
+                  options={this.props.severities}
+                  onChange={this.props.onChangeSeverity}
                   multi
                   clearable={false}
                   className="select-severity"
@@ -58,14 +38,14 @@ export default class MainIncidentsView extends Component {
 
                 <select className="fixtype form-control inline text-primary margin-md-left"
                   style={{maxWidth: '150px'}}
-                  onChange={this.onFilterChange}
+                  onChange={this.props.onFilterChange}
                   ref="fixed" defaultValue="false">
                   <option value="">Any</option>
                   <option value="false">Unfixed</option>
                   <option value="true">Fixed</option>
                 </select>
 
-                <DateRangePicker onClickRange={this.onFilterChange} className="margin-md-left"
+                <DateRangePicker onClickRange={this.props.onFilterChange} className="margin-md-left"
                   default={moment().startOf('years').format('YYYY')} ref="dp">
                   <i className="fa fa-caret-down margin-xs-left" />
                 </DateRangePicker>
@@ -78,21 +58,21 @@ export default class MainIncidentsView extends Component {
             <div className="pull-right">
               <ButtonGroup>
 
-                <Button onClick={this.onClickOpen.bind(this)}>Open</Button>
+                <Button onClick={this.props.onClickOpen.bind(this)}>Open</Button>
 
-                <Button onClick={this.onClickFixAll.bind(this)}>Fix All</Button>
+                <Button onClick={this.props.onClickFixAll}>Fix All</Button>
 
                 <DropdownButton title="More" id="dd-dev-incidents" pullRight>
 
-                  <MenuItem eventKey="1" onClick={this.onClickAddIncident.bind(this)}>
+                  <MenuItem eventKey="1" onClick={this.props.onClickAddIncident}>
                     Add Incident
                   </MenuItem>
 
-                  <MenuItem eventKey="2" onClick={this.onClickAddException.bind(this)}>
+                  <MenuItem eventKey="2" onClick={this.props.onClickAddException}>
                     Add Exception
                   </MenuItem>
 
-                  <MenuItem eventKey="3" onClick={this.onClickPDF.bind(this)}>
+                  <MenuItem eventKey="3" onClick={this.props.onClickPDF}>
                     Export PDF
                   </MenuItem>
 
@@ -105,7 +85,7 @@ export default class MainIncidentsView extends Component {
               <div className="inline" style={{position: 'relative'}}>
                 <input type="text" placeholder="Search" className="form-control"
                   style={{width: '100%', paddingLeft: '35px'}}
-                  onChange={this.onFilterChange}
+                  onChange={this.props.onFilterChange}
                   ref="search"/>
                 <a className="btn" href="javascript:;" style={{position: 'absolute', left: 0, top: 0}}>
                   <i className="fa fa-search" /></a>
@@ -115,16 +95,16 @@ export default class MainIncidentsView extends Component {
         </TabPageHeader>
 
         <TabPageBody tabs={MainTabs(device.id)} tab={0}>
-          {this.renderTable()}
+          {this.props.table}
           {this.props.addIncidentModalVisible &&
           <AddIncidentModal {...this.props} open device={this.props.device}/>}
-          {this.state.openExceptionModal &&
+          {this.props.openExceptionModal &&
           <AddExceptionModal open incident={selectedIncident}
-            onClose={this.onCloseExceptionModal.bind(this)}/>}
+            onClose={this.props.onCloseExceptionModal}/>}
 
-          {this.state.commentModalVisible &&
+          {this.props.commentModalVisible &&
           <CommentsModal incident={selectedIncident}
-            onClose={() => { this.setState({commentModalVisible: false}) }}/>}
+            onClose={this.props.onCloseCommentsModal}/>}
 
           <ReactTooltip />
         </TabPageBody>
