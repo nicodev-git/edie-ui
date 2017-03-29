@@ -19,6 +19,9 @@ import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert'
 import { underlineFocusStyle, inputStyle, selectedItemStyle } from 'style/materialStyles'
 
 export default class MainIncidentsView extends Component {
+  onSelectChange (event, index, value) {
+
+  }
   render () {
     const {device, incidents, selectedIndex} = this.props
     let options = [
