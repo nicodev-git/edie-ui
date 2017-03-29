@@ -7,6 +7,7 @@ const backgroundColor = '#ffffff'
 const headerColor = '#000000'
 const disabledColor = '#d7d8d9'
 const fontSize = '16pt'
+const smallFontSize = '12pt'
 
 export const sidebarIconsColor = '#838489'
 
@@ -26,6 +27,11 @@ export const errorStyle = {
 export const inputStyle = {
   color: textColor,
   fontSize: fontSize
+}
+
+export const smallInputStyle = {
+  color: textColor,
+  fontSize: smallFontSize
 }
 
 export const underlineStyle = {

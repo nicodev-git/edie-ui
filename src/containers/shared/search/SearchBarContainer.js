@@ -39,6 +39,7 @@ export default class SearchBarContainer extends Component {
 
   render () {
     console.log('is active? ', this.state.active)
+    let autoFocus = this.props.autoFocus
     return (
       <SearchBar
         defaultKeyword={this.props.defaultKeyword}
@@ -47,6 +48,7 @@ export default class SearchBarContainer extends Component {
         active={this.state.active}
         onFocus={this.onFocus.bind(this)}
         onBlur={this.onBlur.bind(this)}
+        autoFocus={autoFocus}
       />
     )
   }

@@ -15,7 +15,7 @@ import RaisedButton from 'material-ui/RaisedButton'
 import Popover from 'material-ui/Popover'
 import Menu from 'material-ui/Menu'
 import SearchBarContainer from 'containers/shared/search/SearchBarContainer'
-import { inputStyle, selectedItemStyle } from 'style/materialStyles'
+import { smallInputStyle, selectedItemStyle } from 'style/materialStyles'
 
 export default class MainIncidentsView extends Component {
   render () {
@@ -25,16 +25,16 @@ export default class MainIncidentsView extends Component {
     return (
       <TabPage>
         <TabPageHeader title={device.name}>
-          <div className="text-center margin-md-top">
+          <div className="text-center margin-md-top flex-panel">
 
-            <div className="pull-left">
+            <div>
               <div className="flex-panel width-500">
                 <SelectField
-                  style={{backgroundColor: '#ffffff', width: '200px'}}
+                  style={{backgroundColor: '#ffffff', width: '180px'}}
                   underlineStyle={{display: 'none'}}
                   selectedMenuItemStyle={selectedItemStyle}
-                  menuItemStyle={inputStyle}
-                  labelStyle={inputStyle}
+                  menuItemStyle={smallInputStyle}
+                  labelStyle={smallInputStyle}
                   multiple
                   hintText="Select severities"
                   onChange={this.props.onChangeSeverity}
@@ -52,11 +52,11 @@ export default class MainIncidentsView extends Component {
                 </SelectField>
 
                 <SelectField
-                  style={{backgroundColor: '#ffffff', width: '150px'}}
+                  style={{backgroundColor: '#ffffff', width: '120px'}}
                   underlineStyle={{display: 'none'}}
                   selectedMenuItemStyle={selectedItemStyle}
-                  menuItemStyle={inputStyle}
-                  labelStyle={inputStyle}
+                  menuItemStyle={smallInputStyle}
+                  labelStyle={smallInputStyle}
                   value={selectedItem}
                   onChange={this.props.onFilterChange}
                 >
@@ -75,7 +75,11 @@ export default class MainIncidentsView extends Component {
               </div>
             </div>
 
-            <div className="pull-right">
+            <div className="search-wrapper">
+              <SearchBarContainer onSearch={this.props.onFilterChange}/>
+            </div>
+
+            <div>
                 <RaisedButton onTouchTap={this.props.onClickOpen.bind(this)} label="Open"/>
                 <RaisedButton onTouchTap={this.props.onClickFixAll.bind(this)} label="Fix All"/>
                 <RaisedButton
@@ -97,9 +101,6 @@ export default class MainIncidentsView extends Component {
                   </Popover>
             </div>
 
-            <div className="search-wrapper">
-              <SearchBarContainer onSearch={this.props.onFilterChange}/>
-            </div>
           </div>
         </TabPageHeader>
 

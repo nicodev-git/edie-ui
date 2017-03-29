@@ -883,9 +883,6 @@ table.table tbody tr.selected {
 
 .search-wrapper {
   margin: 0 auto;
-  position: relative;
-  display: inline-block;
-  text-align: center;
 }
 
 .search-wrapper>div>div {
