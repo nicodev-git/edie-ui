@@ -1,37 +1,14 @@
 import React, { Component } from 'react'
 import moment from 'moment'
-import {
-  findIndex,
-  assign
-} from 'lodash'
-import Select from 'react-select'
-import {
-    DropdownButton,
-    ButtonGroup,
-    MenuItem,
-    Button
-} from 'react-bootstrap'
+import { findIndex, assign } from 'lodash'
 import TimeAgo from 'react-timeago'
 import ReactTooltip from 'react-tooltip'
-
-import DateRangePicker from '../../../../../shared/DateRangePicker'
 import { ResponsiveInfiniteTable } from '../../../../../shared/InfiniteTable'
-import AddIncidentModal from './AddIncidentModal'
-import AddExceptionModal from './AddExceptionModal'
-import CommentsModal from '../../../../../shared/incident/CommentsModal'
-
 import { showAlert, showConfirm } from '../../../../../shared/Alert'
 import { getSeverityIcon } from '../../../../../../shared/Global'
 const encodeUrlParams = getSeverityIcon
-import MainTabs from '../MainTabs'
-import TabPage from '../../../../../shared/TabPage'
-import TabPageBody from '../../../../../shared/TabPageBody'
-import TabPageHeader from '../../../../../shared/TabPageHeader'
-import {
-  showIncidentDetail,
-  showIncidentRaw
-} from '../../../../../shared/incident/Incident'
-import MainIncidentsView from './MainIncidentView'
+import { showIncidentDetail, showIncidentRaw } from '../../../../../shared/incident/Incident'
+import MainIncidentsView from './MainIncidentsView'
 
 export default class MainIncidents extends Component {
   constructor (props) {
@@ -293,15 +270,12 @@ export default class MainIncidents extends Component {
   }
 
   render () {
-    const {device, incidents} = this.props
-    const {selectedIndex} = this.state
-
-    let selectedIncident = selectedIndex < 0 ? null : incidents[selectedIndex]
     let table = this.renderTable()
     return (
-      <MainIncidentView
+      <MainIncidentsView
         selectedSeverity={this.state.selectedSeverity}
         severities={this.state.severities}
+        selectedIndex={this.state.selectedIndex}
         onChangeSeverity={this.onChangeSeverity.bind(this)}
         onFilterChange={this.onFilterChange}
         onClickOpen={this.onClickOpen.bind(this)}
