@@ -67,6 +67,7 @@ class GenericSearch extends React.Component {
 
     if (props.userInfo) this.props.fetchSearchOptions(props.userInfo.id)
     this.props.fetchSearchFields(props.params)
+    this.props.fetchWorkflows()
   }
 
   onSearchKeyDown (e) {
@@ -189,6 +190,9 @@ class GenericSearch extends React.Component {
     this.props.change('dateIndex', dateIndex)
   }
 
+  onChangeWorkflow () {
+  }
+
   renderFields () {
     const {selectedField} = this.props
     return (
@@ -306,6 +310,8 @@ class GenericSearch extends React.Component {
             searchOptions={this.props.searchOptions.map(m => ({label: m.name, value: m.id}))}
             onClickStar={this.onClickStar.bind(this)}
             starFilled={!!this.props.selectedSearchOption}
+            workflows={this.props.workflows}
+            onChangeWorkflow={this.onChangeWorkflow.bind(this)}
             onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
             onChangeSearchOption={this.onChangeSearchOption.bind(this)}
           />

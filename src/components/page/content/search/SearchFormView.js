@@ -9,6 +9,7 @@ import FilledStar from 'material-ui/svg-icons/toggle/star'
 import { FormInput, FormSelect } from 'components/modal/parts'
 
 const emptySearch = {label: 'None', value: ''}
+const allWorkflows = {label: 'All Workflows', value: ''}
 export default class SearchFormView extends React.Component {
   render () {
     const { onSearchKeyDown,
@@ -17,7 +18,9 @@ export default class SearchFormView extends React.Component {
       starFilled,
       onSubmit,
       searchOptions,
-      onChangeSearchOption
+      onChangeSearchOption,
+      workflows,
+      onChangeWorkflow
     } = this.props
 
     const options = dateOptions.map((m, index) => {
@@ -28,12 +31,14 @@ export default class SearchFormView extends React.Component {
     })
 
     const savedSearchOptions = concat([], emptySearch, searchOptions)
-
+    const workflowOptions = concat([], allWorkflows, workflows.map(m => ({label: m.name, value: m.id})))
     return (
       <form onSubmit={onSubmit}>
         <div className="text-center margin-md-top" >
           <Field name="query" component={FormInput} label="Search" onKeyDown={onSearchKeyDown} style={{verticalAlign: 'top'}}/>
           <Field name="dateIndex" component={FormSelect} label="" options={options} style={{verticalAlign: 'top'}}/>
+          <Field name="workflow" component={FormSelect} label="" options={workflowOptions} style={{verticalAlign: 'top', textAlign: 'left'}} onChange={onChangeWorkflow}/>
+
           <FlatButton type="submit" icon={<ActionSearch />} style={{marginTop: '4px', verticalAlign: 'top'}}/>
 
           <FlatButton icon={starFilled ? <FilledStar/> : <ToggleStar/>} style={{marginTop: '4px', verticalAlign: 'top'}} onClick={onClickStar}/>

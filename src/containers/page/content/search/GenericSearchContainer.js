@@ -19,7 +19,9 @@ import {
   removeSearchOption,
 
   openSearchSavePopover,
-  closeSearchSavePopover
+  closeSearchSavePopover,
+
+  fetchWorkflows
 } from 'actions'
 
 @withRouter
@@ -38,7 +40,9 @@ import {
     selectedOption: state.search.selectedOption,
 
     userInfo: state.dashboard.userInfo,
-    envVars: state.settings.envVars
+    envVars: state.settings.envVars,
+
+    workflows: state.settings.workflows
   }),
   dispatch => ({
     ...bindActionCreators({
@@ -55,7 +59,9 @@ import {
       removeSearchOption,
 
       openSearchSavePopover,
-      closeSearchSavePopover
+      closeSearchSavePopover,
+
+      fetchWorkflows
     }, dispatch)
   })
 )
