@@ -336,6 +336,7 @@ class GenericSearch extends React.Component {
               <ResponsiveInfiniteTable
                 url="/search/all"
                 cells={this.cells}
+                rowHeight={200}
                 ref="table"
                 rowMetadata={{'key': 'id'}}
                 selectable
