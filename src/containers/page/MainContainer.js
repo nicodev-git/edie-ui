@@ -21,7 +21,9 @@ import {
   fetchIncidents,
   addDashboardIncident,
   updateNewIncidentMsg,
-  updateMapDeviceStatus
+  updateMapDeviceStatus,
+
+  fetchUserInfo
 } from 'actions'
 
 @connect((state) => {
@@ -51,10 +53,15 @@ dispatch => bindActionCreators({
   fetchIncidents,
   addDashboardIncident,
   updateNewIncidentMsg,
-  updateMapDeviceStatus
+  updateMapDeviceStatus,
+
+  fetchUserInfo
 }, dispatch))
 @withRouter
 export default class MainContainer extends Component {
+  componentWillMount () {
+    this.props.fetchUserInfo()
+  }
 
   componentDidMount () {
     this.incidentSocket = new IncidentSocket({

@@ -13,6 +13,7 @@ import {
   fetchFieldTopValues,
   updateQueryChips,
 
+  fetchEnvVars,
   fetchSearchOptions
 } from 'actions'
 
@@ -26,7 +27,10 @@ import {
     selectedField: state.search.selectedField,
     anchorEl: state.search.anchorEl,
     fieldTopValues: state.search.fieldTopValues,
-    searchOptions: state.search.searchOptions
+    searchOptions: state.search.searchOptions,
+
+    userInfo: state.dashboard.userInfo,
+    envVars: state.settings.envVars
   }),
   dispatch => ({
     ...bindActionCreators({
@@ -37,6 +41,7 @@ import {
       fetchFieldTopValues,
       updateQueryChips,
 
+      fetchEnvVars,
       fetchSearchOptions
     }, dispatch)
   })

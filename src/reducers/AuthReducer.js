@@ -22,7 +22,7 @@ export default function (state = {}, action) {
       return { ...state, message: action.payload }
 
     case ACTIVATE_USER:
-      return { ...state }
+      return { ...state, authenticated: false }
     case ACTIVATE_MSG:
       return { ...state, activationMsg: action.msg }
 

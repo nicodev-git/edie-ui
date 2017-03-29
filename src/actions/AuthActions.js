@@ -70,7 +70,7 @@ export const fetchUserInfo = () => {
   return (dispatch) => {
     axios.get(`${ROOT_URL}/api/me`, getAuthConfig())
       .then(response => fetchUserInfoSuccess(dispatch, response))
-      .catch(error => apiError(dispatch, error))
+      .catch(error => authError(dispatch, error))
   }
 }
 
