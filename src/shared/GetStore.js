@@ -69,7 +69,8 @@ const initialState = {
       query: '',
       dateIndex: 0,
       dateFrom: 0,
-      dateTo: 0
+      dateTo: 0,
+      workflow: ''
     },
     queryChips: [],
     fields: [],
