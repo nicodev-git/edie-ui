@@ -93,7 +93,8 @@ class GenericSearch extends React.Component {
       query: newQueryChips.map(m => `${m.name}=${m.value}`).join(' and '),
       dateIndex: values.dateIndex,
       dateFrom: this.dateOptions[values.dateIndex].from,
-      dateTo: this.dateOptions[values.dateIndex].to
+      dateTo: this.dateOptions[values.dateIndex].to,
+      workflow: ''
     })
 
     this.props.change('query', '')
