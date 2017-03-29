@@ -15,12 +15,12 @@ const iconStyle = {
 }
 
 const SearchBar = ({onSearch, active, onFocus, onBlur, defaultKeyword}) => (
-  <div className="searchbar-container"
-    onFocus={onFocus}
-    onBlur={onBlur}>
+  <div className="searchbar-container">
     <div className="searchbar" style={active ? activeStyle : defaultStyle}>
       <SearchIcon color={active ? '#000000' : '#ffffff'} style={iconStyle}/>
       <input
+        onFocus={onFocus}
+        onBlur={onBlur}
         id="searchInput"
         className="searchbar-input"
         style={active ? activeStyle : defaultStyle}

@@ -23,6 +23,7 @@ export default class SearchBarContainer extends Component {
     })
     let input = document.getElementById('searchInput')
     input.value = ''
+    input.blur()
   }
 
   onEnter (e) {

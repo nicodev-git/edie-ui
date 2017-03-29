@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
 import moment from 'moment'
-// import Select from 'react-select'
-import { ButtonGroup, Button } from 'react-bootstrap'
 import ReactTooltip from 'react-tooltip'
 import DateRangePicker from '../../../../../shared/DateRangePicker'
 import AddIncidentModal from './AddIncidentModal'
@@ -13,10 +11,9 @@ import TabPageBody from '../../../../../shared/TabPageBody'
 import TabPageHeader from '../../../../../shared/TabPageHeader'
 import SelectField from 'material-ui/SelectField'
 import MenuItem from 'material-ui/MenuItem'
-import IconMenu from 'material-ui/IconMenu'
-import IconButton from 'material-ui/IconButton'
 import RaisedButton from 'material-ui/RaisedButton'
-import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert'
+import Popover from 'material-ui/Popover'
+import Menu from 'material-ui/Menu'
 import SearchBarContainer from 'containers/shared/search/SearchBarContainer'
 import { inputStyle, selectedItemStyle } from 'style/materialStyles'
 
@@ -79,22 +76,25 @@ export default class MainIncidentsView extends Component {
             </div>
 
             <div className="pull-right">
-              <ButtonGroup>
-
-                <Button onClick={this.props.onClickOpen.bind(this)}>Open</Button>
-
-                <Button onClick={this.props.onClickFixAll}>Fix All</Button>
-                <IconMenu
-                  iconButtonElement={<IconButton><MoreVertIcon /></IconButton>}
-                  anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
-                  targetOrigin={{horizontal: 'left', vertical: 'top'}}
-                >
-                  <MenuItem primaryText="Add Incident" onTouchTap={this.props.onClickAddIncident}/>
-                  <MenuItem primaryText="Add Exception" onTouchTap={this.props.onClickAddException}/>
-                  <MenuItem primaryText="Export PDF" onTouchTap={this.props.onClickPDF}/>
-                </IconMenu>
-
-              </ButtonGroup>
+                <RaisedButton onTouchTap={this.props.onClickOpen.bind(this)} label="Open"/>
+                <RaisedButton onTouchTap={this.props.onClickFixAll.bind(this)} label="Fix All"/>
+                <RaisedButton
+                  onTouchTap={this.props.openMore}
+                  label="More"
+                />
+                  <Popover
+                    open={this.props.isMore}
+                    anchorEl={this.props.anchorEl}
+                    anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
+                    targetOrigin={{horizontal: 'left', vertical: 'top'}}
+                    onRequestClose={this.props.closeMore}
+                  >
+                    <Menu>
+                      <MenuItem primaryText="Add Incident" onTouchTap={this.props.onClickAddIncident}/>
+                      <MenuItem primaryText="Add Exception" onTouchTap={this.props.onClickAddException}/>
+                      <MenuItem primaryText="Export PDF" onTouchTap={this.props.onClickPDF}/>
+                    </Menu>
+                  </Popover>
             </div>
 
             <div className="search-wrapper">

@@ -122,8 +122,10 @@ export default class MainIncidents extends Component {
     this.onFilterChange()
   }
 
-  openMore () {
+  openMore (event) {
+    event.preventDefault()
     this.setState({
+      anchorEl: event.currentTarget,
       isMore: true
     })
   }
@@ -306,6 +308,7 @@ export default class MainIncidents extends Component {
         openExceptionModal={this.state.openExceptionModal}
         table={table}
         isMore={this.state.isMore}
+        anchorEl={this.state.anchorEl}
         openMore={this.openMore.bind(this)}
         closeMore={this.closeMore.bind(this)}
         {...this.props}
