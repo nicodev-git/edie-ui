@@ -9,12 +9,20 @@ export default class SearchBarContainer extends Component {
     }
   }
 
-  onBackgroundChange () {
-    let active = this.state.active
-    console.log('on background change')
+  onFocus () {
+    console.log('on focus')
     this.setState({
-      active: !active
+      active: true
     })
+  }
+
+  onBlur () {
+    console.log('on blur')
+    this.setState({
+      active: false
+    })
+    let input = document.getElementById('searchInput')
+    input.value = ''
   }
 
   onEnter (e) {
@@ -36,7 +44,8 @@ export default class SearchBarContainer extends Component {
         onSearch={this.onEnter.bind(this)}
         color={this.state.color}
         active={this.state.active}
-        onBackgroundChange={this.onBackgroundChange.bind(this)}
+        onFocus={this.onFocus.bind(this)}
+        onBlur={this.onBlur.bind(this)}
       />
     )
   }

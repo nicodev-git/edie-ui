@@ -15,6 +15,7 @@ import SelectField from 'material-ui/SelectField'
 import MenuItem from 'material-ui/MenuItem'
 import IconMenu from 'material-ui/IconMenu'
 import IconButton from 'material-ui/IconButton'
+import RaisedButton from 'material-ui/RaisedButton'
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert'
 import SearchBarContainer from 'containers/shared/search/SearchBarContainer'
 import { inputStyle, selectedItemStyle } from 'style/materialStyles'
@@ -31,18 +32,6 @@ export default class MainIncidentsView extends Component {
 
             <div className="pull-left">
               <div className="flex-panel width-500">
-                {/* <Select
-                  value={this.props.selectedSeverity.join(',')}
-                  options={this.props.severities}
-                  onChange={this.props.onChangeSeverity}
-                  multi
-                  clearable={false}
-                  className="select-severity"
-                  style={{minWidth: '85px'}}
-                  searchable={false}
-                  autosize={false}
-                  backspaceRemoves={false}
-                /> */}
                 <SelectField
                   style={{backgroundColor: '#ffffff', width: '200px'}}
                   underlineStyle={{display: 'none'}}
@@ -79,15 +68,6 @@ export default class MainIncidentsView extends Component {
                   <MenuItem value={3} primaryText="Fixed" />
                 </SelectField>
 
-                {/* <select className="fixtype form-control inline text-primary margin-md-left"
-                  style={{maxWidth: '150px'}}
-                  onChange={this.props.onFilterChange}
-                  ref="fixed" defaultValue="false">
-                  <option value="">Any</option>
-                  <option value="false">Unfixed</option>
-                  <option value="true">Fixed</option>
-                </select> */}
-
                 <DateRangePicker onClickRange={this.props.onFilterChange} className="margin-md-left"
                   default={moment().startOf('years').format('YYYY')} ref="dp">
                   <i className="fa fa-caret-down margin-xs-left" />
@@ -114,35 +94,11 @@ export default class MainIncidentsView extends Component {
                   <MenuItem primaryText="Export PDF" onTouchTap={this.props.onClickPDF}/>
                 </IconMenu>
 
-                {/* <DropdownButton title="More" id="dd-dev-incidents" pullRight>
-
-                  <MenuItem eventKey="1" onClick={this.props.onClickAddIncident}>
-                    Add Incident
-                  </MenuItem>
-
-                  <MenuItem eventKey="2" onClick={this.props.onClickAddException}>
-                    Add Exception
-                  </MenuItem>
-
-                  <MenuItem eventKey="3" onClick={this.props.onClickPDF}>
-                    Export PDF
-                  </MenuItem>
-
-                </DropdownButton> */}
-
               </ButtonGroup>
             </div>
 
             <div className="search-wrapper">
               <SearchBarContainer onSearch={this.props.onFilterChange}/>
-              {/* <div className="inline" style={{position: 'relative'}}>
-                <input type="text" placeholder="Search" className="form-control"
-                  style={{width: '100%', paddingLeft: '35px'}}
-                  onChange={this.props.onFilterChange}
-                  ref="search"/>
-                <a className="btn" href="javascript:;" style={{position: 'absolute', left: 0, top: 0}}>
-                  <i className="fa fa-search" /></a>
-              </div> */}
             </div>
           </div>
         </TabPageHeader>

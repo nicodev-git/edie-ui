@@ -31,6 +31,7 @@ export default class MainIncidents extends Component {
       currentSortDir: 'desc',
       openExceptionModal: false,
       commentModalVisible: false,
+      isMore: false,
       params: {}
     }
 
@@ -119,6 +120,18 @@ export default class MainIncidents extends Component {
 
   componentDidMount () {
     this.onFilterChange()
+  }
+
+  openMore () {
+    this.setState({
+      isMore: true
+    })
+  }
+
+  closeMore () {
+    this.setState({
+      isMore: false
+    })
   }
 
   renderColHeader (col) {
@@ -292,6 +305,9 @@ export default class MainIncidents extends Component {
         onCloseCommentsModal={this.onCloseCommentsModal.bind(this)}
         openExceptionModal={this.state.openExceptionModal}
         table={table}
+        isMore={this.state.isMore}
+        openMore={this.openMore.bind(this)}
+        closeMore={this.closeMore.bind(this)}
         {...this.props}
       />
     )
