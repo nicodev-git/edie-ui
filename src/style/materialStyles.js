@@ -81,6 +81,11 @@ export const iconStyle = {
   height: 30
 }
 
+export const smallIconStyle = {
+  width: 10,
+  height: 10
+}
+
 export const badgeStyle = {
   backgroundColor: errorColor,
   color: badgeTextColor,
