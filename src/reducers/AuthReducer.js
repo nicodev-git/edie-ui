@@ -7,7 +7,9 @@ import {
   OPEN_ACTIVATION_MODAL,
   CLOSE_ACTIVATION_MODAL,
   ACTIVATE_USER,
-  ACTIVATE_MSG
+  ACTIVATE_MSG,
+
+  NO_AUTH_ERROR
 } from '../actions/types'
 
 export default function (state = {}, action) {
@@ -16,11 +18,12 @@ export default function (state = {}, action) {
       return { ...state, error: '', authenticated: true }
     case INVALIDATE_USER:
       return { ...state, error: '', authenticated: false }
+    case NO_AUTH_ERROR:
+      return { ...state, error: 'No Auth', authenticated: false }
     case AUTH_ERROR:
       return { ...state, error: action.msg }
     case FETCH_MESSAGE:
       return { ...state, message: action.payload }
-
     case ACTIVATE_USER:
       return { ...state, authenticated: false }
     case ACTIVATE_MSG:

@@ -65,8 +65,8 @@ class GenericSearch extends React.Component {
       }
     }]
 
-    this.props.fetchSearchOptions()
-    this.props.fetchSearchFields(this.props.params)
+    this.props.fetchSearchOptions(props.userInfo.id)
+    this.props.fetchSearchFields(props.params)
   }
 
   onSearchKeyDown (e) {
