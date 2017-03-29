@@ -21,12 +21,14 @@ const FormImg = (field) => {
           return value
         }}
       >
-        {files ? null : (<div>Here should be a nice picture designed by Cvetan</div>)}
-      </Dropzone>
+        {files
+          ? (<div className="dropzone-inner">Drop another image here</div>)
+          : (<div>Here should be a nice picture designed by Cvetan</div>)}
+        </Dropzone>
       {field.meta.touched &&
         field.meta.error &&
         <span className="error">{field.meta.error}</span>}
-      {files && (<div className="image-uploader"><img src={files[0].preview}/></div>)}
+      {files && (<img src={files[0].preview}/>)}
     </div>
   )
 }

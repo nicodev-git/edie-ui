@@ -855,11 +855,20 @@ table.table tbody tr.selected {
   z-index: 2;
 }
 
-.image-uploader img {
+.image-container img {
   height: auto;
   width: auto;
+  position: absolute;
+  top: 0;
+  left: 10px;
   max-width: 300px;
   max-height: 100px;
+}
+
+.dropzone-inner {
+  position: absolute;
+  top: 40%;
+  left: 40%;
 }
 /* Field Item */
 .field-item.selected {
