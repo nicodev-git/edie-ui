@@ -21,7 +21,7 @@ export default class MainIncidentsView extends Component {
   render () {
     const {device, incidents, selectedIndex, severities, selectedSeverity} = this.props
     let selectedIncident = selectedIndex < 0 ? null : incidents[selectedIndex]
-    let selectedItem = this.props.selectedItem || 1
+    let selectedItem = this.props.selectedItem || 'Any'
     return (
       <TabPage>
         <TabPageHeader title={device.name}>
@@ -52,7 +52,7 @@ export default class MainIncidentsView extends Component {
                 </SelectField>
 
                 <SelectField
-                  style={{backgroundColor: '#ffffff', width: '120px'}}
+                  style={{backgroundColor: '#ffffff', width: '125px'}}
                   underlineStyle={{display: 'none'}}
                   selectedMenuItemStyle={selectedItemStyle}
                   menuItemStyle={smallInputStyle}
@@ -60,9 +60,9 @@ export default class MainIncidentsView extends Component {
                   value={selectedItem}
                   onChange={this.props.onFilterChange}
                 >
-                  <MenuItem value={1} primaryText="Any" />
-                  <MenuItem value={2} primaryText="Unfixed" />
-                  <MenuItem value={3} primaryText="Fixed" />
+                  <MenuItem value="Any" primaryText="Any" />
+                  <MenuItem value="Unfixed" primaryText="Unfixed" />
+                  <MenuItem value="Fixed" primaryText="Fixed" />
                 </SelectField>
 
                 <DateRangePicker onClickRange={this.props.onFilterChange} className="margin-md-left"

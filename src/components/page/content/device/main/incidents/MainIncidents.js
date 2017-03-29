@@ -26,7 +26,7 @@ export default class MainIncidents extends Component {
 
       selectedSeverity: ['HIGH', 'MEDIUM'],
       selectedIndex: -1,
-      selectedItem: 1,
+      selectedItem: 'Any',
       currentSortCol: 'startTimestamp',
       currentSortDir: 'desc',
       openExceptionModal: false,
@@ -259,20 +259,29 @@ export default class MainIncidents extends Component {
     })
   }
 
-  getParams () {
-    const refs = this.refs
-    const {search, fixed, dp} = refs
-    const { currentSortCol, currentSortDir, selectedSeverity } = this.state
+  onSearch (value) {
+    this.setState({
+      searchValue: value
+    })
+  }
 
+  getParams () {
+    const dp = this.refs.dp
+    const { currentSortCol, currentSortDir, selectedSeverity,
+      searchValue, selectedItem} = this.state
     let params = {
-      description: (search ? search.value : '') || '""',
+      description: searchValue || '""',
       severity: selectedSeverity,
       afterStartTimestamp: dp ? dp.getStartDate().valueOf() : 1454256000000,
       beforeStartTimestamp: dp ? dp.getEndDate().valueOf() : (new Date()).getTime(),
       deviceid: this.props.device.id,
       sort: `${currentSortCol},${currentSortDir}`
     }
-    if (fixed && fixed.value) params.fixed = fixed.value
+    if (selectedItem === 'Fixed') {
+      params.fixed = true
+    } else if (selectedItem === 'Unfixed') {
+      params.fixed = false
+    }
 
     return params
   }
