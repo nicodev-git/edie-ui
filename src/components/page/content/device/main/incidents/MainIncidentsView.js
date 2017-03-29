@@ -16,6 +16,7 @@ import MenuItem from 'material-ui/MenuItem'
 import IconMenu from 'material-ui/IconMenu'
 import IconButton from 'material-ui/IconButton'
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert'
+import SearchBarContainer from 'containers/shared/search/SearchBarContainer'
 import { inputStyle, selectedItemStyle } from 'style/materialStyles'
 
 export default class MainIncidentsView extends Component {
@@ -132,15 +133,16 @@ export default class MainIncidentsView extends Component {
               </ButtonGroup>
             </div>
 
-            <div style={{margin: '0 auto', position: 'relative', display: 'inline-block', textAlign: 'center'}}>
-              <div className="inline" style={{position: 'relative'}}>
+            <div className="search-wrapper">
+              <SearchBarContainer onSearch={this.props.onFilterChange}/>
+              {/* <div className="inline" style={{position: 'relative'}}>
                 <input type="text" placeholder="Search" className="form-control"
                   style={{width: '100%', paddingLeft: '35px'}}
                   onChange={this.props.onFilterChange}
                   ref="search"/>
                 <a className="btn" href="javascript:;" style={{position: 'absolute', left: 0, top: 0}}>
                   <i className="fa fa-search" /></a>
-              </div>
+              </div> */}
             </div>
           </div>
         </TabPageHeader>

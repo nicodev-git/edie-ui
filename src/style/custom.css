@@ -880,6 +880,17 @@ table.table tbody tr.selected {
   justify-content: space-between;
   align-items: center;
 }
+
+.search-wrapper {
+  margin: 0 auto;
+  position: relative;
+  display: inline-block;
+  text-align: center;
+}
+
+.search-wrapper>div>div {
+  background-color: #ffffff;
+}
 /* Field Item */
 .field-item.selected {
     background: lightgray;
