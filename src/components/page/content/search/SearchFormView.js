@@ -4,6 +4,7 @@ import { concat } from 'lodash'
 import {FlatButton} from 'material-ui'
 import ActionSearch from 'material-ui/svg-icons/action/search'
 import ToggleStar from 'material-ui/svg-icons/toggle/star-border'
+import FilledStar from 'material-ui/svg-icons/toggle/star'
 
 import { FormInput, FormSelect } from 'components/modal/parts'
 
@@ -13,8 +14,10 @@ export default class SearchFormView extends React.Component {
     const { onSearchKeyDown,
       dateOptions,
       onClickStar,
+      starFilled,
       onSubmit,
-      searchOptions
+      searchOptions,
+      onChangeSearchOption
     } = this.props
 
     const options = dateOptions.map((m, index) => {
@@ -33,8 +36,9 @@ export default class SearchFormView extends React.Component {
           <Field name="dateIndex" component={FormSelect} label="" options={options} style={{verticalAlign: 'top'}}/>
           <FlatButton type="submit" icon={<ActionSearch />} style={{marginTop: '4px', verticalAlign: 'top'}}/>
 
-          <FlatButton icon={<ToggleStar />} style={{marginTop: '4px', verticalAlign: 'top'}} onClick={onClickStar}/>
-          <Field name="searchOptionIndex" component={FormSelect} label="" options={savedSearchOptions} style={{verticalAlign: 'top', textAlign: 'left'}}/>
+          <FlatButton icon={starFilled ? <FilledStar/> : <ToggleStar/>} style={{marginTop: '4px', verticalAlign: 'top'}} onClick={onClickStar}/>
+
+          <Field name="searchOptionIndex" component={FormSelect} label="" options={savedSearchOptions} style={{verticalAlign: 'top', textAlign: 'left'}} onChange={onChangeSearchOption}/>
         </div>
       </form>
     )

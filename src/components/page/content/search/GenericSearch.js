@@ -1,5 +1,5 @@
 import React from 'react'
-import { reduxForm, submit } from 'redux-form'
+import { reduxForm, submit, formValueSelector } from 'redux-form'
 import { connect } from 'react-redux'
 import { assign, concat } from 'lodash'
 import moment from 'moment'
@@ -65,7 +65,7 @@ class GenericSearch extends React.Component {
       }
     }]
 
-    this.props.fetchSearchOptions(props.userInfo.id)
+    if (props.userInfo) this.props.fetchSearchOptions(props.userInfo.id)
     this.props.fetchSearchFields(props.params)
   }
 
@@ -158,6 +158,27 @@ class GenericSearch extends React.Component {
 
     this.props.closeSearchSavePopover()
     this.props.addSearchOption(envVars, userInfo.id, option)
+  }
+
+  onChangeSearchOption (m, value) {
+    const found = this.props.searchOptions.filter(i => i.id === value)
+    if (!found.length) {
+      found.push({data: {query: '', dateIndex: 0}})
+    }
+
+    const { query, dateIndex } = found[0].data
+
+    const newQueryChips = parseSearchQuery(query)
+    this.props.updateQueryChips(newQueryChips)
+    this.props.updateSearchParams({
+      query,
+      dateIndex,
+      dateFrom: this.dateOptions[dateIndex].from,
+      dateTo: this.dateOptions[dateIndex].to
+    })
+
+    this.props.change('query', '')
+    this.props.change('dateIndex', dateIndex)
   }
 
   renderFields () {
@@ -276,7 +297,9 @@ class GenericSearch extends React.Component {
             dateOptions={this.dateOptions}
             searchOptions={this.props.searchOptions.map(m => ({label: m.name, value: m.id}))}
             onClickStar={this.onClickStar.bind(this)}
+            starFilled={!!this.props.selectedSearchOption}
             onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
+            onChangeSearchOption={this.onChangeSearchOption.bind(this)}
           />
 
           <div className="text-center">
@@ -321,9 +344,11 @@ class GenericSearch extends React.Component {
 }
 
 const GenericSearchForm = reduxForm({form: 'genericSearchForm'})(GenericSearch)
+const selector = formValueSelector('genericSearchForm')
 
 export default connect(
   state => ({
-    initialValues: assign({}, state.search.params, {query: ''})
+    initialValues: assign({}, state.search.params, {query: ''}),
+    selectedSearchOption: selector(state, 'searchOptionIndex')
   })
 )(GenericSearchForm)
