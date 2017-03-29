@@ -18,7 +18,7 @@ import {
   OPEN_SEARCH_SAVE_POPOVER,
   CLOSE_SEARCH_SAVE_POPOVER
 } from '../actions/types'
-import { keys, concat } from 'lodash'
+import { concat } from 'lodash'
 
 export default function (state = {}, action) {
   switch (action.type) {
@@ -43,13 +43,12 @@ export default function (state = {}, action) {
       return { ...state, params: action.params }
 
     case UPDATE_SEARCH_FIELDS: {
-      const fields = keys(action.data).map(k => ({
-        name: k,
-        type: action.data[k].type,
-        count: action.data[k].count
-      })).filter(k => k.count > 0)
-
-      return { ...state, fields }
+      // const fields = keys(action.data).map(k => ({
+      //   name: k,
+      //   type: action.data[k].type,
+      //   count: action.data[k].count
+      // })).filter(k => k.count > 0)
+      return { ...state, fields: action.data }
     }
 
     case OPEN_FIELDS_POPOVER:

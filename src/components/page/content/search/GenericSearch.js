@@ -115,7 +115,7 @@ class GenericSearch extends React.Component {
   }
 
   onClickField (field, e) {
-    this.props.fetchFieldTopValues(field.name, this.props.params)
+    this.props.fetchFieldTopValues(field.path, this.props.params)
     this.props.openFieldsPopover(field, e.target)
   }
 
@@ -126,7 +126,7 @@ class GenericSearch extends React.Component {
     this.props.closeFieldsPopover()
     this.props.change('query', '')
 
-    const newQueryChips = concat([], queryChips, {name: selectedField.name, value})
+    const newQueryChips = concat([], queryChips, {name: selectedField.path, value})
     this.props.updateQueryChips(newQueryChips)
     this.props.updateSearchParams(assign({}, params, {
       query: newQueryChips.map(m => `${m.name}=${m.value}`).join(' and ')
@@ -197,12 +197,12 @@ class GenericSearch extends React.Component {
   renderFields () {
     const {selectedField} = this.props
     return (
-      <div className="padding-sm">
+      <div className="padding-sm" style={{position: 'absolute', height: '100%'}}>
         <h5>Fields</h5>
         {this.props.fields.map(f =>
-          <div key={f.name} className={`field-item margin-xs-top ${selectedField && selectedField.name === f.name ? 'selected' : ''}`}>
+          <div key={f.path} className={`field-item margin-xs-top ${selectedField && selectedField.path === f.path ? 'selected' : ''}`}>
             <span className="margin-sm-right text-gray">{this.getTypeChar(f.type)}</span>
-            <a href="javascript:;" onClick={this.onClickField.bind(this, f)}>{f.name}</a>
+            <a href="javascript:;" onClick={this.onClickField.bind(this, f)}>{f.path}</a>
             <span className="margin-sm-left text-gray">{f.count}</span>
           </div>
         )}
@@ -236,7 +236,7 @@ class GenericSearch extends React.Component {
       >
         <div className="padding-md-left">
           <div className="inline padding-sm">
-            <h4>{selectedField.name}</h4>
+            <h4>{selectedField.path}</h4>
           </div>
           <div className="pull-right padding-sm">
             <FlatButton icon={<NavigationClose />} style={{minWidth: '44px'}} onTouchTap={this.handleRequestClose.bind(this)}/>
@@ -335,7 +335,7 @@ class GenericSearch extends React.Component {
 
         <TabPageBody tabs={SearchTabs} tab={0}>
           <div className="flex-horizontal" style={{height: '100%'}}>
-            <div style={{width: '200px', height: '100%', overflow: 'auto'}}>
+            <div style={{minWidth: '200px', height: '100%', overflow: 'auto'}}>
               {this.renderFields()}
               {this.renderFieldPopover()}
             </div>
