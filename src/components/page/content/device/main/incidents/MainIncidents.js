@@ -237,7 +237,7 @@ export default class MainIncidents extends Component {
 
   onClickPDF () {
     const params = this.getParams()
-    let url = `/pdfIncidents?${
+    let url = `/incident/pdf?${
              encodeUrlParams(params)}`
     window.open(url, '_blank')
   }
