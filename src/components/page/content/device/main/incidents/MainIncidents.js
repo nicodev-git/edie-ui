@@ -26,7 +26,7 @@ export default class MainIncidents extends Component {
 
       selectedSeverity: ['HIGH', 'MEDIUM'],
       selectedIndex: -1,
-      selectedItem: '1',
+      selectedItem: 1,
       currentSortCol: 'startTimestamp',
       currentSortDir: 'desc',
       openExceptionModal: false,

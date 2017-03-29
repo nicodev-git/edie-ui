@@ -16,17 +16,13 @@ import MenuItem from 'material-ui/MenuItem'
 import IconMenu from 'material-ui/IconMenu'
 import IconButton from 'material-ui/IconButton'
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert'
-import { underlineFocusStyle, inputStyle, selectedItemStyle } from 'style/materialStyles'
+import { inputStyle, selectedItemStyle } from 'style/materialStyles'
 
 export default class MainIncidentsView extends Component {
   render () {
     const {device, incidents, selectedIndex} = this.props
-    let options = [
-      {value: '1', label: 'Any'},
-      {value: '2', label: 'Unfixed'},
-      {value: '3', label: 'Fixed'}
-    ]
     let selectedIncident = selectedIndex < 0 ? null : incidents[selectedIndex]
+    let selectedItem = this.props.selectedItem || 1
     return (
       <TabPage>
         <TabPageHeader title={device.name}>
@@ -49,16 +45,16 @@ export default class MainIncidentsView extends Component {
 
                 <SelectField
                   style={{backgroundColor: '#ffffff', width: '150px'}}
-                  underlineStyle={underlineFocusStyle}
+                  underlineStyle={{display: 'none'}}
                   selectedMenuItemStyle={selectedItemStyle}
                   menuItemStyle={inputStyle}
                   labelStyle={inputStyle}
-                  value={this.props.selectedItem}
+                  value={selectedItem}
                   onChange={this.props.onFilterChange}
                 >
-                  {options.map((option, index) =>
-                    <MenuItem key={index} value={option.value} primaryText={option.label} />
-                  )}
+                  <MenuItem value={1} primaryText="Any" />
+                  <MenuItem value={2} primaryText="Unfixed" />
+                  <MenuItem value={3} primaryText="Fixed" />
                 </SelectField>
 
                 {/* <select className="fixtype form-control inline text-primary margin-md-left"
