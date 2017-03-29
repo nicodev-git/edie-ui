@@ -13,7 +13,7 @@ const WizardButtons = ({onClose, onDiagram, onPrev, onNext, current, steps, isDi
     { current < steps
       ? (<FlatButton label="Next" onClick={onNext} style={buttonStyle} labelStyle={buttonTextStyle}/>) : null}
     { current === steps
-      ? (<FlatButton label="Finish" type="submit" onClick={onClose} style={buttonStyle} labelStyle={buttonTextStyle}/>) : null}
+      ? (<FlatButton label="Finish" type="submit" style={buttonStyle} labelStyle={buttonTextStyle}/>) : null}
   </div>
 )
 export default WizardButtons

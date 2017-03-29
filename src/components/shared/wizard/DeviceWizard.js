@@ -17,9 +17,9 @@ import ParamEditModal from './input/ParamEditModal'
 import ParamList from './input/ParamList'
 import {wizardConfig} from './WizardConfig'
 import {util} from './WizardUtil'
-import { Provider } from 'react-redux'
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
-import { store } from 'shared/GetStore'
+// import { Provider } from 'react-redux'
+// import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+// import { store } from 'shared/GetStore'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import LinearProgress from 'material-ui/LinearProgress'
 import { DeviceWizardView } from 'components/modal'
@@ -359,22 +359,18 @@ class DeviceWizard extends Component {
     let content = this.buildContent()
     let paramEditModal = this.renderParamEditModal()
     return (
-      <MuiThemeProvider>
-        <Provider store={store}>
-          <DeviceWizardView
-            header={header}
-            content={content}
-            progressBar={progressBar}
-            current={current}
-            steps={steps}
-            paramEditModal={paramEditModal}
-            onHide={this.closeModal.bind(this)}
-            onPrev={this.onClickPrevious.bind(this)}
-            onNext={this.onClickNext.bind(this)}
-            onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
-          />
-        </Provider>
-      </MuiThemeProvider>
+        <DeviceWizardView
+          header={header}
+          content={content}
+          progressBar={progressBar}
+          current={current}
+          steps={steps}
+          paramEditModal={paramEditModal}
+          onHide={this.closeModal.bind(this)}
+          onPrev={this.onClickPrevious.bind(this)}
+          onNext={this.onClickNext.bind(this)}
+          onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
+        />
     )
   }
 }

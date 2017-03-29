@@ -24,8 +24,7 @@ const mapDispatchToProps = (dispatch) => {
 @connect(
   (state, props) => ({
     monitorTemplates: state.settings.monitorTemplates,
-    initialValues: state.devices.wizardInitialValues,
-    store: props.store
+    initialValues: state.devices.wizardInitialValues
   }),
   dispatch => ({
     ...bindActionCreators({
