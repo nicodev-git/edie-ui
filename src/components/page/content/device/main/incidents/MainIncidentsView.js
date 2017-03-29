@@ -19,15 +19,12 @@ import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert'
 import { underlineFocusStyle, inputStyle, selectedItemStyle } from 'style/materialStyles'
 
 export default class MainIncidentsView extends Component {
-  onSelectChange (event, index, value) {
-
-  }
   render () {
     const {device, incidents, selectedIndex} = this.props
     let options = [
-      {value: '', label: 'Any'},
-      {value: 'false', label: 'Unfixed'},
-      {value: 'true', label: 'Fixed'}
+      {value: '1', label: 'Any'},
+      {value: '2', label: 'Unfixed'},
+      {value: '3', label: 'Fixed'}
     ]
     let selectedIncident = selectedIndex < 0 ? null : incidents[selectedIndex]
     return (
@@ -36,7 +33,7 @@ export default class MainIncidentsView extends Component {
           <div className="text-center margin-md-top">
 
             <div className="pull-left">
-              <div className="form-inline">
+              <div className="flex-panel width-500">
                 <Select
                   value={this.props.selectedSeverity.join(',')}
                   options={this.props.severities}
@@ -51,10 +48,12 @@ export default class MainIncidentsView extends Component {
                 />
 
                 <SelectField
+                  style={{backgroundColor: '#ffffff', width: '150px'}}
                   underlineStyle={underlineFocusStyle}
                   selectedMenuItemStyle={selectedItemStyle}
                   menuItemStyle={inputStyle}
                   labelStyle={inputStyle}
+                  value={this.props.selectedItem}
                   onChange={this.props.onFilterChange}
                 >
                   {options.map((option, index) =>

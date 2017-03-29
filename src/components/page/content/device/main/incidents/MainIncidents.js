@@ -25,11 +25,10 @@ export default class MainIncidents extends Component {
       ],
 
       selectedSeverity: ['HIGH', 'MEDIUM'],
-
       selectedIndex: -1,
+      selectedItem: '1',
       currentSortCol: 'startTimestamp',
       currentSortDir: 'desc',
-
       openExceptionModal: false,
       commentModalVisible: false,
       params: {}
@@ -234,9 +233,10 @@ export default class MainIncidents extends Component {
     }, this.onFilterChange)
   }
 
-  onFilterChange () {
+  onFilterChange (event, index, value) {
     this.setState({
-      params: this.getParams()
+      params: this.getParams(),
+      selectedItem: value
     })
   }
 
@@ -276,6 +276,7 @@ export default class MainIncidents extends Component {
         selectedSeverity={this.state.selectedSeverity}
         severities={this.state.severities}
         selectedIndex={this.state.selectedIndex}
+        selectedItem={this.state.selectedItem}
         onChangeSeverity={this.onChangeSeverity.bind(this)}
         onFilterChange={this.onFilterChange}
         onClickOpen={this.onClickOpen.bind(this)}
