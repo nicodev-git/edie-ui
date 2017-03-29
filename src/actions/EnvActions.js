@@ -29,13 +29,16 @@ const fetchEnvVarsSuccess = (dispatch, response) => {
   })
 }
 
-export const updateEnvVar = (entity) => {
+export const updateEnvVar = (entity, cb) => {
   if (!window.localStorage.getItem('token')) {
     return dispatch => dispatch({ type: NO_AUTH_ERROR })
   }
   return (dispatch) => {
     axios.put(entity._links.self.href, entity)
-      .then(response => updateEnvVarSuccess(dispatch, response))
+      .then(response => {
+        updateEnvVarSuccess(dispatch, response)
+        cb && cb(dispatch, response.data)
+      })
       .catch(error => apiError(dispatch, error))
   }
 }
@@ -47,13 +50,16 @@ const updateEnvVarSuccess = (dispatch, response) => {
   })
 }
 
-export const addEnvVar = (entity) => {
+export const addEnvVar = (entity, cb) => {
   if (!window.localStorage.getItem('token')) {
     return dispatch => dispatch({ type: NO_AUTH_ERROR })
   }
   return (dispatch) => {
     axios.post(`${ROOT_URL}/setting`, entity)
-      .then(response => addEnvVarSuccess(dispatch, response))
+      .then(response => {
+        addEnvVarSuccess(dispatch, response)
+        cb && cb(dispatch, response.data)
+      })
       .catch(error => apiError(dispatch, error))
   }
 }

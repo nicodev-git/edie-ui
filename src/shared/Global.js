@@ -185,3 +185,31 @@ export function parseSearchQuery (query) {
     }
   })
 }
+
+/* Search Options */
+export const KEY_SEARCH_OPTIONS = 'SEARCH_OPTIONS'
+export function getEnvVar(envvars, key) {
+  const index = findIndex(envvars, {envvars: {key}})
+  return index < 0 ? null : envvars[index]
+}
+
+export function getEnvVarValue1(envVar) {
+  if (!envVar) return null
+  return envVar['envvars']['value1']
+}
+
+export function setEnvVarValue1(envVar, value1) {
+  if (!envVar) return null
+  envVar['envvars']['value1'] = value1
+  return envVar
+}
+
+export function createEnvVar(key, value1, value2) {
+  return {
+    envvars: {
+      key,
+      value1,
+      value2
+    }
+  }
+}

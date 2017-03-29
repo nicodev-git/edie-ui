@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { assign, findIndex } from 'lodash'
+import { assign } from 'lodash'
 import {
   UPDATE_SEARCH_PARAMS,
   UPDATE_SEARCH_FIELDS,
@@ -8,10 +8,14 @@ import {
   FETCH_FIELD_TOP_VALUES,
   UPDATE_QUERY_CHIPS,
 
-  FETCH_SEARCH_OPTIONS
+  FETCH_SEARCH_OPTIONS,
+  ADD_SEARCH_OPTION
 } from './types'
 import { ROOT_URL } from './config'
 import { apiError } from './Errors'
+import { updateEnvVar, addEnvVar } from './EnvActions'
+
+import { KEY_SEARCH_OPTIONS, getEnvVar, getEnvVarValue1, setEnvVarValue1, createEnvVar } from 'shared/Global'
 
 export const updateSearchParams = (params) => {
   return function (dispatch) {
@@ -61,10 +65,39 @@ export const updateQueryChips = (chips) => {
   }
 }
 
-export const fetchSearchOptions = (envvars) => {
+export const fetchSearchOptions = (envvars, userId) => {
   return dispatch => {
-    const index = findIndex(envvars, {envvars: {key: 'SEARCH_OPTIONS'}})
-    const data = index < 0 ? [] : JSON.parse(envvars[index]['envvars']['value1'] || '[]')
+    const envVar = getEnvVar(envvars, KEY_SEARCH_OPTIONS)
+    const value = getEnvVarValue1(envVar) || '{}'
+    const data = JSON.parse(value)[userId] || []
     dispatch({type: FETCH_SEARCH_OPTIONS, data})
+  }
+}
+
+const saveEnvVar = (envvars, key, value1, cb) => {
+  let envVar = getEnvVar(envvars, key)
+
+  let fnSaveEnvVar
+  if (envVar) {
+    envVar = setEnvVarValue1(envVar, value1)
+    fnSaveEnvVar = addEnvVar
+  } else {
+    envVar = createEnvVar(key, value1, '')
+    fnSaveEnvVar = updateEnvVar
+  }
+
+  return fnSaveEnvVar(envVar, cb)
+}
+
+export const addSearchOption = (envvars, userId, option) => {
+  return dispatch => {
+    const envVar = getEnvVar(envvars, KEY_SEARCH_OPTIONS)
+    let value1 = JSON.parse(getEnvVarValue1(envVar) || '{}')
+    value1[userId] = option
+    value1 = JSON.stringify(value1)
+
+    dispatch(saveEnvVar(envvars, KEY_SEARCH_OPTIONS, value1, () => {
+      dispatch({type: ADD_SEARCH_OPTION, option})
+    }))
   }
 }
