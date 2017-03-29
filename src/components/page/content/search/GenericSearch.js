@@ -335,7 +335,7 @@ class GenericSearch extends React.Component {
 
         <TabPageBody tabs={SearchTabs} tab={0}>
           <div className="flex-horizontal" style={{height: '100%'}}>
-            <div style={{minWidth: '200px', height: '100%', overflow: 'auto'}}>
+            <div style={{minWidth: '300px', height: '100%', overflow: 'auto', position: 'relative'}}>
               {this.renderFields()}
               {this.renderFieldPopover()}
             </div>
