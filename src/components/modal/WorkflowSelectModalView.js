@@ -11,8 +11,10 @@ export default class WorkflowSelectModalView extends React.Component {
     const {
       onChangeCategory,
       onClickClose, onClickOK,
-      workflows, selectedWorkflow,
-      selectedCategory, workflowCategories
+      workflows,
+      selectedRowWf, onClickRow,
+      selectedCategory, workflowCategories,
+      workflowFilter, onChangeWorkflowFilter
     } = this.props
     return (
       <Modal
@@ -43,6 +45,8 @@ export default class WorkflowSelectModalView extends React.Component {
               inputStyle={inputStyle}
               underlineFocusStyle={underlineStyle}
               style={{marginLeft: '20px', verticalAlign: 'top'}}
+              value={workflowFilter}
+              onChange={onChangeWorkflowFilter}
             />
           </div>
           <div style={{maxHeight: '400px', overflow: 'auto'}}>
@@ -59,7 +63,11 @@ export default class WorkflowSelectModalView extends React.Component {
               <tbody>
               {
                 workflows.map(w =>
-                  <tr key={w.id} className={selectedWorkflow === w.id ? 'selected' : ''}>
+                  <tr
+                    key={w.id}
+                    className={selectedRowWf === w.id ? 'selected' : ''}
+                    onClick={() => onClickRow(w.id)}
+                  >
                     <td>{w.category}</td>
                     <td>{w.severity}</td>
                     <td>{w.name}</td>

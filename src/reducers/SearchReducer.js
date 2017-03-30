@@ -22,7 +22,8 @@ import {
   CLOSE_SEARCH_WF_MODAL,
   SELECT_SEARCH_WF_CATEGORY,
   CHANGE_SEARCH_WF_FILTER,
-  SELECT_WF_ROW
+  SELECT_WF_ROW,
+  SELECT_SEARCH_WF
 } from '../actions/types'
 import { concat } from 'lodash'
 
@@ -84,6 +85,8 @@ export default function (state = {}, action) {
       return { ...state, workflowFilter: action.filter, selectedRowWf: '' }
     case SELECT_WF_ROW:
       return { ...state, selectedRowWf: action.workflow }
+    case SELECT_SEARCH_WF:
+      return { ...state, selectedWf: action.workflow }
   }
   return state
 }

@@ -27,7 +27,8 @@ import {
   closeSearchWfModal,
   selectSearchWfCategory,
   changeSeachWfFilter,
-  selectWfRow
+  selectWfRow,
+  selectSearchWf
 } from 'actions'
 
 @withRouter
@@ -79,7 +80,8 @@ import {
       closeSearchWfModal,
       selectSearchWfCategory,
       changeSeachWfFilter,
-      selectWfRow
+      selectWfRow,
+      selectSearchWf
     }, dispatch)
   })
 )

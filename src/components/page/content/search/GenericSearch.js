@@ -332,7 +332,9 @@ class GenericSearch extends React.Component {
   }
 
   render () {
-    const { handleSubmit } = this.props
+    const { handleSubmit, selectedWf } = this.props
+    const workflow = this.props.workflows.filter(m => m.id === selectedWf)
+
     return (
       <TabPage>
         <TabPageHeader title="Search">
@@ -342,7 +344,7 @@ class GenericSearch extends React.Component {
             searchOptions={this.props.searchOptions.map(m => ({label: m.name, value: m.id}))}
             onClickStar={this.onClickStar.bind(this)}
             starFilled={!!this.props.selectedSearchOption}
-            workflow={''}
+            workflow={workflow.length ? workflow[0].name : ''}
             onClickWorkflow={this.onClickWorkflow.bind(this)}
             onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
             onChangeSearchOption={this.onChangeSearchOption.bind(this)}

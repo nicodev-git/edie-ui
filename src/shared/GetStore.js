@@ -77,7 +77,8 @@ const initialState = {
     fieldTopValues: [],
 
     searchOptions: [],
-    selectedCategory: ''
+    selectedCategory: '',
+    workflowFilter: ''
   },
 
   settings: {

@@ -16,13 +16,29 @@ class WorkflowSelectModal extends React.Component {
   }
 
   getWorkflows () {
-    const { selectedCategory } = this.props
-    return this.props.workflows.filter(m => (!selectedCategory || m.category === selectedCategory))
+    const { selectedCategory, workflowFilter } = this.props
+    return this.props.workflows.filter(m =>
+      (!selectedCategory || m.category === selectedCategory) &&
+      (
+        !workflowFilter ||
+        !!m.name.match(new RegExp(workflowFilter, 'i')) ||
+        !!m.desc.match(new RegExp(workflowFilter, 'i'))
+      )
+    )
+  }
+
+  onChangeWorkflowFilter (e) {
+    this.props.changeSeachWfFilter(e.target.value)
+  }
+
+  onClickRow (workflow) {
+    this.props.selectWfRow(workflow)
   }
 
   onClickOK () {
-    // const workflows = this.props.selectedSysWorkflows.map(workflow => assign({}, workflow, {id: null, isGlobal: false, origin: 'USER'}))
-    // this.props.addDeviceWorkflows(workflows, this.props.device)
+    if (!this.props.selectedRowWf) return
+    this.props.selectSearchWf(this.props.selectedRowWf)
+    this.props.closeSearchWfModal()
   }
 
   render () {
@@ -30,7 +46,9 @@ class WorkflowSelectModal extends React.Component {
       <WorkflowSelectModalView
         {...this.props}
         workflows={this.getWorkflows()}
+        onChangeWorkflowFilter={this.onChangeWorkflowFilter.bind(this)}
         onChangeCategory={this.onChangeCategory.bind(this)}
+        onClickRow={this.onClickRow.bind(this)}
         onClickClose={this.onClickClose.bind(this)}
         onClickOK={this.onClickOK.bind(this)}
       />
