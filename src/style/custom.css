@@ -898,10 +898,14 @@ table.table tbody tr.selected {
 }
 
 /* Device TPL Modal */
+.modal-row {
+  height: 49px;
+  border-bottom: 1px solid #e0e2e4;
+}
+
 .modal-row>td {
   padding: 0 !important;
   border-top: 0px !important;
-  border-bottom: 1px solid #e0e2e4;
 }
 .table-label {
   text-align: left;
@@ -939,5 +943,9 @@ table.table tbody tr.selected {
 }
 
 .d-none {
-  display: none;
+  display: none !important;
+}
+
+.margin-top-20 {
+  margin-top: 20px;
 }

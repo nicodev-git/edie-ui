@@ -6,7 +6,7 @@ const errorColor = '#d32f2f'
 const backgroundColor = '#ffffff'
 const headerColor = '#000000'
 const disabledColor = '#d7d8d9'
-const fontSize = '16pt'
+const fontSize = '12pt'
 const smallFontSize = '12pt'
 
 export const sidebarIconsColor = '#838489'
