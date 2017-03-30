@@ -8,6 +8,7 @@ export default class DeviceTplModalView extends Component {
   render () {
     const {show, header, options, imgUrl, onSubmit, onHide, onChange,
       monitors, monitorTemplates, onAddMonitor, onRemoveMonitor} = this.props
+    console.log('monitors: ', monitors)
     return (
       <Modal
         show={show}
@@ -22,7 +23,9 @@ export default class DeviceTplModalView extends Component {
               <Field name="name" component={FormInput} label="Name"/>
               <Field name="devicetemplategroup" component={FormSelect} label="Group" options={options}/>
               <ImageUploader imgUrl={imgUrl} onChange={onChange}/>
-              <SubHeader name="Monitors"/>
+              <div className="subheader-wrapper">
+                <SubHeader name="Monitors"/>
+              </div>
               <div className="row">
                 <div className="col-md-6">
                   <Monitors monitors={monitors} onRemoveMonitor={onRemoveMonitor} />
