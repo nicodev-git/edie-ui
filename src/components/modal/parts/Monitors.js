@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import IconButton from 'material-ui/IconButton'
-import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
+import DeleteIcon from 'material-ui/svg-icons/action/delete'
 import { buttonStyle, smallIconStyle } from '../../../style/materialStyles'
 
 export default class Monitors extends Component {
@@ -15,12 +15,14 @@ export default class Monitors extends Component {
               <tr key={item.id}>
                 <td>{item.name}</td>
                 <td>
-                  <IconButton
-                    style={buttonStyle}
-                    iconStyle={smallIconStyle}
-                    onTouchTap={onRemoveMonitor.bind(this, index)}>
-                      <AddCircleIcon color="#545454"/>
-                  </IconButton>
+                  <div className="remove-button">
+                    <IconButton
+                      style={buttonStyle}
+                      iconStyle={smallIconStyle}
+                      onTouchTap={onRemoveMonitor.bind(this, index)}>
+                        <DeleteIcon color="#545454"/>
+                    </IconButton>
+                  </div>
                   {/* <a href="javascript:;" onClick={onRemoveMonitor.bind(this, index)}>
                     <i className="fa fa-trash-o" />
                   </a> */}

@@ -1,4 +1,7 @@
 import React, { Component } from 'react'
+import IconButton from 'material-ui/IconButton'
+import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
+import { buttonStyle, smallIconStyle } from '../../../style/materialStyles'
 
 export default class MonitorTemplates extends Component {
   render () {
@@ -7,13 +10,21 @@ export default class MonitorTemplates extends Component {
       <div>
         <table className="table table-hover dataTable">
           <tbody>{
-            monitorTemplates.map(item =>
+            monitorTemplates.map((item, index) =>
               <tr key={item.id}>
                 <td>{item.name}</td>
                 <td>
-                  <a href="javascript:;" onClick={onAddMonitor.bind(this, item)}>
+                  <div className="add-button">
+                    <IconButton
+                      style={buttonStyle}
+                      iconStyle={smallIconStyle}
+                      onTouchTap={onAddMonitor.bind(this, index)}>
+                        <AddCircleIcon color="#545454"/>
+                    </IconButton>
+                  </div>
+                  {/* <a href="javascript:;" onClick={onAddMonitor.bind(this, item)}>
                     <i className="fa fa-plus-square" />
-                  </a>
+                  </a> */}
                 </td>
               </tr>)
           }
