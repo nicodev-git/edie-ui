@@ -1,7 +1,7 @@
 import React from 'react'
 import { reduxForm, submit, formValueSelector } from 'redux-form'
-import { connect } from 'react-redux'
-import { assign, concat } from 'lodash'
+import { connect, keys } from 'react-redux'
+import { merge, assign, concat, isArray } from 'lodash'
 import moment from 'moment'
 import {Popover, FlatButton, Chip} from 'material-ui'
 import NavigationClose from 'material-ui/svg-icons/navigation/close'
@@ -59,7 +59,8 @@ class GenericSearch extends React.Component {
         const {rowData} = props
         if (!rowData.entity) return <span/>
 
-        let data = JSON.stringify(assign({}, rowData.entity, rowData.highlights))
+        // let data = JSON.stringify(assign({}, rowData.entity, rowData.highlights))
+        const data = this.getHighlighted(rowData.entity, rowData.highlights)
         // if (data.length > 500) data = `${data.substring(0, 500)}...`
         return <span dangerouslySetInnerHTML={{ __html: data }} /> // eslint-disable-line
       }
@@ -68,6 +69,26 @@ class GenericSearch extends React.Component {
     if (props.userInfo) this.props.fetchSearchOptions(props.userInfo.id)
     this.props.fetchSearchFields(props.params)
     this.props.fetchWorkflows()
+  }
+
+  getHighlighted (entity, highlights) {
+    let data = merge({}, entity)
+    keys(highlights).forEach(path => {
+      const highlighted = highlights[path]
+      const pathElements = path.split(".")
+
+      let el = data
+      pathElements.forEach((pathEl, index) => {
+        if (index === pathElements.length - 1) {
+          el[pathEl] = highlighted
+        } else {
+          el = el[pathEl]
+          if (isArray(el)) el = el[0]
+        }
+      })
+    })
+
+    //return JSON.stringify(assign({}, rowData.entity, rowData.highlights))
   }
 
   onSearchKeyDown (e) {
