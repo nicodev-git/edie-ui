@@ -252,6 +252,7 @@ class GenericSearch extends React.Component {
         anchorEl={anchorEl}
         anchorOrigin={{horizontal: 'left', vertical: 'center'}}
         targetOrigin={{horizontal: 'left', vertical: 'center'}}
+        canAutoPosition
         style={{marginLeft: '100px'}}
         onRequestClose={this.handleRequestClose.bind(this)}
       >
