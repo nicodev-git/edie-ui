@@ -18,7 +18,8 @@ import {
 
   OPEN_SEARCH_WF_MODAL,
   CLOSE_SEARCH_WF_MODAL,
-  SELECT_SEARCH_WF_CATEGORY
+  SELECT_SEARCH_WF_CATEGORY,
+  CHANGE_SEARCH_WF_FILTER
 } from './types'
 import { ROOT_URL } from './config'
 import { apiError } from './Errors'
@@ -171,5 +172,11 @@ export const closeSearchWfModal = () => {
 export const selectSearchWfCategory = (categoryId) => {
   return dispatch => {
     dispatch({type: SELECT_SEARCH_WF_CATEGORY, categoryId})
+  }
+}
+
+export const changeSeachWfFilter = (filter) => {
+  return dispatch => {
+    dispatch({type: CHANGE_SEARCH_WF_FILTER, filter})
   }
 }

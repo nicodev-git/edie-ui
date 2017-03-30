@@ -20,7 +20,8 @@ import {
 
   OPEN_SEARCH_WF_MODAL,
   CLOSE_SEARCH_WF_MODAL,
-  SELECT_SEARCH_WF_CATEGORY
+  SELECT_SEARCH_WF_CATEGORY,
+  CHANGE_SEARCH_WF_FILTER
 } from '../actions/types'
 import { concat } from 'lodash'
 
@@ -78,6 +79,8 @@ export default function (state = {}, action) {
       return { ...state, wfModalOpen: false }
     case SELECT_SEARCH_WF_CATEGORY:
       return { ...state, selectedCategory: action.categoryId }
+    case CHANGE_SEARCH_WF_FILTER:
+      return { ...state, workflowFilter: action.filter }
   }
   return state
 }
