@@ -42,15 +42,8 @@ export default function (state = {}, action) {
     case UPDATE_SEARCH_PARAMS:
       return { ...state, params: action.params }
 
-    case UPDATE_SEARCH_FIELDS: {
-      // const fields = keys(action.data).map(k => ({
-      //   name: k,
-      //   type: action.data[k].type,
-      //   count: action.data[k].count
-      // })).filter(k => k.count > 0)
-      return { ...state, fields: action.data }
-    }
-
+    case UPDATE_SEARCH_FIELDS:
+      return { ...state, fields: action.data.filter(k => k.count > 0) }
     case OPEN_FIELDS_POPOVER:
       return { ...state, fieldPopoverOpen: true, selectedField: action.selectedField, anchorEl: action.anchorEl }
     case CLOSE_FIELDS_POPOVER:

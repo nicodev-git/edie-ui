@@ -1,7 +1,7 @@
 import React from 'react'
 import { reduxForm, submit, formValueSelector } from 'redux-form'
-import { connect, keys } from 'react-redux'
-import { merge, assign, concat, isArray } from 'lodash'
+import { connect } from 'react-redux'
+import { merge, assign, concat, isArray, keys } from 'lodash'
 import moment from 'moment'
 import {Popover, FlatButton, Chip} from 'material-ui'
 import NavigationClose from 'material-ui/svg-icons/navigation/close'
@@ -75,7 +75,7 @@ class GenericSearch extends React.Component {
     let data = merge({}, entity)
     keys(highlights).forEach(path => {
       const highlighted = highlights[path]
-      const pathElements = path.split(".")
+      const pathElements = path.split('.')
 
       let el = data
       pathElements.forEach((pathEl, index) => {
@@ -88,7 +88,7 @@ class GenericSearch extends React.Component {
       })
     })
 
-    //return JSON.stringify(assign({}, rowData.entity, rowData.highlights))
+    return JSON.stringify(data)
   }
 
   onSearchKeyDown (e) {
