@@ -894,17 +894,28 @@ table.table tbody tr.selected {
 }
 
 /* Device TPL Modal */
-.table-label {
+.modal-row>td {
   padding: 0 !important;
+  border-top: 0px !important;
+  border-bottom: 1px solid #e0e2e4;
+}
+.table-label {
   text-align: left;
   vertical-align: middle !important;
   font-size: 12pt !important;
 }
 
-.table-icon {
-  padding: 0 !important;
+.table-icon>div {
+  display: flex;
+  justify-content: flex-end;
 }
 
 .table-icon>div>button {
   padding: 0 !important;
+}
+
+.subheader-wrapper>div>div {
+  font-size: 12pt !important;
+  padding-left: 0 !important;
+  font-weight: 600 !important;
 }

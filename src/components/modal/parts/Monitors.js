@@ -12,7 +12,7 @@ export default class Monitors extends Component {
           <tbody>
           {
             monitors.map((item, index) =>
-              <tr key={item.id}>
+              <tr className="modal-row" key={item.id}>
                 <td className="table-label">{item.name}</td>
                 <td className="table-icon">
                   <div className="remove-button">

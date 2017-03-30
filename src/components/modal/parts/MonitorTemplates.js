@@ -11,14 +11,14 @@ export default class MonitorTemplates extends Component {
         <table className="table table-hover dataTable">
           <tbody>{
             monitorTemplates.map((item, index) =>
-              <tr key={item.id}>
+              <tr className="modal-row" key={item.id}>
                 <td className="table-label">{item.name}</td>
                 <td className="table-icon">
                   <div className="add-button">
                     <IconButton
                       style={buttonStyle}
                       iconStyle={iconStyle}
-                      onTouchTap={onAddMonitor.bind(this, index)}>
+                      onTouchTap={onAddMonitor.bind(this, item)}>
                         <AddCircleIcon color="#545454"/>
                     </IconButton>
                   </div>
