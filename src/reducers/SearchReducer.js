@@ -16,7 +16,10 @@ import {
   REMOVE_SEARCH_OPTION,
 
   OPEN_SEARCH_SAVE_POPOVER,
-  CLOSE_SEARCH_SAVE_POPOVER
+  CLOSE_SEARCH_SAVE_POPOVER,
+
+  OPEN_SEARCH_WF_MODAL,
+  CLOSE_SEARCH_WF_MODAL
 } from '../actions/types'
 import { concat } from 'lodash'
 
@@ -67,6 +70,11 @@ export default function (state = {}, action) {
       return { ...state, savePopoverOpen: true, selectedOption: action.option, anchorEl: action.anchorEl }
     case CLOSE_SEARCH_SAVE_POPOVER:
       return { ...state, savePopoverOpen: false }
+
+    case OPEN_SEARCH_WF_MODAL:
+      return { ...state, wfModalOpen: true }
+    case CLOSE_SEARCH_WF_MODAL:
+      return { ...state, wfModalOpen: false }
   }
   return state
 }

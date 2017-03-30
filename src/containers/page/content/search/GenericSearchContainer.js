@@ -21,7 +21,9 @@ import {
   openSearchSavePopover,
   closeSearchSavePopover,
 
-  fetchWorkflows
+  fetchWorkflows,
+  openSearchWfModal,
+  closeSearchWfModal
 } from 'actions'
 
 @withRouter
@@ -42,7 +44,8 @@ import {
     userInfo: state.dashboard.userInfo,
     envVars: state.settings.envVars,
 
-    workflows: state.settings.workflows
+    workflows: state.settings.workflows,
+    wfModalOpen: state.search.wfModalOpen
   }),
   dispatch => ({
     ...bindActionCreators({
@@ -61,7 +64,9 @@ import {
       openSearchSavePopover,
       closeSearchSavePopover,
 
-      fetchWorkflows
+      fetchWorkflows,
+      openSearchWfModal,
+      closeSearchWfModal
     }, dispatch)
   })
 )
