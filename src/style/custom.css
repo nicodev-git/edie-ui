@@ -919,3 +919,11 @@ table.table tbody tr.selected {
   padding-left: 0 !important;
   font-weight: 600 !important;
 }
+
+.modal-left {
+  padding-left: 0 !important;
+}
+
+.modal-right {
+  padding-right: 0 !important;
+}

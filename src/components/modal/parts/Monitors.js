@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 import IconButton from 'material-ui/IconButton'
 import DeleteIcon from 'material-ui/svg-icons/action/delete'
+import CreateIcon from 'material-ui/svg-icons/content/create'
 import { buttonStyle, iconStyle } from '../../../style/materialStyles'
 
 export default class Monitors extends Component {
   render () {
-    const {monitors, onRemoveMonitor} = this.props
+    const {monitors, onRemoveMonitor, onEditMonitor} = this.props
     return (
       <div>
         <table className="table table-hover dataTable">
@@ -15,12 +16,20 @@ export default class Monitors extends Component {
               <tr className="modal-row" key={item.id}>
                 <td className="table-label">{item.name}</td>
                 <td className="table-icon">
+                  <div className="edit-button">
+                    <IconButton
+                      style={buttonStyle}
+                      iconStyle={iconStyle}
+                      onTouchTap={onEditMonitor.bind(this, item)}>
+                        <CreateIcon color="#d4d4d4"/>
+                    </IconButton>
+                  </div>
                   <div className="remove-button">
                     <IconButton
                       style={buttonStyle}
                       iconStyle={iconStyle}
                       onTouchTap={onRemoveMonitor.bind(this, index)}>
-                        <DeleteIcon color="#545454"/>
+                        <DeleteIcon color="#d4d4d4"/>
                     </IconButton>
                   </div>
                 </td>

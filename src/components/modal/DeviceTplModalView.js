@@ -7,7 +7,7 @@ import { Header, SubHeader, SubmitBlock, FormInput, FormSelect, ImageUploader,
 export default class DeviceTplModalView extends Component {
   render () {
     const {show, header, options, imgUrl, onSubmit, onHide, onChange,
-      monitors, monitorTemplates, onAddMonitor, onRemoveMonitor} = this.props
+      monitors, monitorTemplates, onAddMonitor, onEditMonitor, onRemoveMonitor} = this.props
     console.log('monitors: ', monitors)
     return (
       <Modal
@@ -26,11 +26,11 @@ export default class DeviceTplModalView extends Component {
               <div className="subheader-wrapper">
                 <SubHeader name="Monitors"/>
               </div>
-              <div className="row">
-                <div className="col-md-6">
-                  <Monitors monitors={monitors} onRemoveMonitor={onRemoveMonitor} />
+              <div>
+                <div className="col-md-6 modal-left">
+                  <Monitors monitors={monitors} onEditMonitor={onEditMonitor} onRemoveMonitor={onRemoveMonitor} />
                 </div>
-                <div className="col-md-6">
+                <div className="col-md-6 modal-right">
                   <MonitorTemplates monitorTemplates={monitorTemplates} onAddMonitor={onAddMonitor} />
                 </div>
               </div>

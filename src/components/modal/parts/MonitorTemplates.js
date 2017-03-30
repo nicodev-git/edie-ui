@@ -19,7 +19,7 @@ export default class MonitorTemplates extends Component {
                       style={buttonStyle}
                       iconStyle={iconStyle}
                       onTouchTap={onAddMonitor.bind(this, item)}>
-                        <AddCircleIcon color="#545454"/>
+                        <AddCircleIcon color="#d4d4d4"/>
                     </IconButton>
                   </div>
                 </td>

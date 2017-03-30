@@ -79,6 +79,7 @@ class DeviceTplModal extends React.Component { // eslint-disable-line react/no-m
         onChange={this.onClickChangeImage.bind(this)}
         onAddMonitor={this.onClickAddMonitor.bind(this)}
         onRemoveMonitor={this.onClickRemoveMonitor.bind(this)}
+        onEditMonitor={this.onEditMonitor.bind(this)}
       />
     )
   }
