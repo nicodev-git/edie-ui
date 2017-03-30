@@ -22,7 +22,9 @@ export default class DeviceTplModalView extends Component {
             <div className="form-column">
               <Field name="name" component={FormInput} label="Name"/>
               <Field name="devicetemplategroup" component={FormSelect} label="Group" options={options}/>
-              <ImageUploader imgUrl={imgUrl} onChange={onChange}/>
+              <div className="margin-top-20">
+                <ImageUploader imgUrl={imgUrl} onChange={onChange}/>
+              </div>
               <div className="subheader-wrapper">
                 <SubHeader name="Monitors"/>
               </div>
