@@ -45,6 +45,10 @@ class DeviceTplModal extends React.Component { // eslint-disable-line react/no-m
     this.setState({monitors})
   }
 
+  onClickEditMonitor (item) {
+    this.props.openMonitorTplModal(item)
+  }
+
   onClickRemoveMonitor (index) {
     let {monitors} = this.state
     monitors.splice(index, 1)
@@ -79,7 +83,7 @@ class DeviceTplModal extends React.Component { // eslint-disable-line react/no-m
         onChange={this.onClickChangeImage.bind(this)}
         onAddMonitor={this.onClickAddMonitor.bind(this)}
         onRemoveMonitor={this.onClickRemoveMonitor.bind(this)}
-        onEditMonitor={this.onEditMonitor.bind(this)}
+        onEditMonitor={this.onClickEditMonitor.bind(this)}
       />
     )
   }

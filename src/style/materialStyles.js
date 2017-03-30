@@ -47,6 +47,15 @@ export const buttonStyle = {
   color: primeColor
 }
 
+export const primeButtonStyle = {
+  backgroundColor: primeColor
+}
+
+export const primeButtonLabelStyle = {
+  color: backgroundColor,
+  fontWeight: 700
+}
+
 export const buttonDisabledStyle = {
   backgroundColor: backgroundColor,
   color: disabledColor

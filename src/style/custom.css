@@ -905,6 +905,12 @@ table.table tbody tr.selected {
   font-size: 12pt !important;
 }
 
+.table-icon {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
 .table-icon>div {
   display: flex;
   justify-content: flex-end;

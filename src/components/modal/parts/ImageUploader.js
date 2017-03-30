@@ -1,11 +1,12 @@
 import React from 'react'
-import FlatButton from 'material-ui/FlatButton'
-import { buttonStyle, buttonTextStyle } from '../../../style/materialStyles'
+import RaisedButton from 'material-ui/RaisedButton'
+import { primeButtonStyle, primeButtonLabelStyle } from 'style/materialStyles'
 
 const ImageUploader = ({imgUrl, onChange}) => (
   <div className="image-upload-container">
-    <img className="file-preview icon-black" src={imgUrl}/>
-    <FlatButton label="Upload Image" onClick={onChange} style={buttonStyle} labelStyle={buttonTextStyle}/>
+    <RaisedButton label="Upload Image" onClick={onChange}
+      buttonStyle={primeButtonStyle} labelStyle={primeButtonLabelStyle}/>
+    <img src={imgUrl}/>
   </div>
 )
 

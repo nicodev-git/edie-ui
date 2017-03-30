@@ -55,6 +55,7 @@ export default class Templates extends Component {
         </table>
 
         {this.renderDeviceTplModal()}
+        {this.renderMonitorTplModal()}
       </div>
     )
   }
