@@ -6,7 +6,7 @@ const ImageUploader = ({imgUrl, onChange}) => (
   <div className="image-upload-container">
     <RaisedButton label="Upload Image" onClick={onChange}
       buttonStyle={primeButtonStyle} labelStyle={primeButtonLabelStyle}/>
-    <img src={imgUrl}/>
+    <img className={(imgUrl !== '') ? 'file-preview icon-black' : ''} src={imgUrl}/>
   </div>
 )
 

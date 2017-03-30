@@ -5,7 +5,7 @@ import { buttonStyle, iconStyle } from '../../../style/materialStyles'
 
 export default class MonitorTemplates extends Component {
   render () {
-    const {monitorTemplates, onAddMonitor} = this.props
+    const {monitors, monitorTemplates, onAddMonitor} = this.props
     return (
       <div>
         <table className="table table-hover dataTable">
@@ -14,7 +14,7 @@ export default class MonitorTemplates extends Component {
               <tr className="modal-row" key={item.id}>
                 <td className="table-label">{item.name}</td>
                 <td className="table-icon">
-                  <div className="add-button">
+                  <div className={`add-button ${monitors.includes(item) ? '' : 'd-none'}`}>
                     <IconButton
                       style={buttonStyle}
                       iconStyle={iconStyle}

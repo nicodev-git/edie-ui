@@ -28,10 +28,12 @@ export default class DeviceTplModalView extends Component {
               </div>
               <div>
                 <div className="col-md-6 modal-left">
-                  <Monitors monitors={monitors} onEditMonitor={onEditMonitor} onRemoveMonitor={onRemoveMonitor} />
+                  <Monitors monitors={monitors} onEditMonitor={onEditMonitor}
+                    onRemoveMonitor={onRemoveMonitor} />
                 </div>
                 <div className="col-md-6 modal-right">
-                  <MonitorTemplates monitorTemplates={monitorTemplates} onAddMonitor={onAddMonitor} />
+                  <MonitorTemplates monitors={monitors} monitorTemplates={monitorTemplates}
+                    onAddMonitor={onAddMonitor} />
                 </div>
               </div>
             </div>

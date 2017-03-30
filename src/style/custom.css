@@ -750,6 +750,10 @@ table.table tbody tr.selected {
   align-items: center;
 }
 
+.image-upload-container img {
+  margin-left: 20px;
+}
+
 .search-modal-container {
   display: flex;
   justify-content: flex-start;
@@ -932,4 +936,8 @@ table.table tbody tr.selected {
 
 .modal-right {
   padding-right: 0 !important;
+}
+
+.d-none {
+  display: none;
 }
