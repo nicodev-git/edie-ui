@@ -19,7 +19,8 @@ import {
   OPEN_SEARCH_WF_MODAL,
   CLOSE_SEARCH_WF_MODAL,
   SELECT_SEARCH_WF_CATEGORY,
-  CHANGE_SEARCH_WF_FILTER
+  CHANGE_SEARCH_WF_FILTER,
+  SELECT_WF_ROW
 } from './types'
 import { ROOT_URL } from './config'
 import { apiError } from './Errors'
@@ -178,5 +179,11 @@ export const selectSearchWfCategory = (categoryId) => {
 export const changeSeachWfFilter = (filter) => {
   return dispatch => {
     dispatch({type: CHANGE_SEARCH_WF_FILTER, filter})
+  }
+}
+
+export const selectWfRow = (workflow) => {
+  return dispatch => {
+    dispatch({type: SELECT_WF_ROW, workflow})
   }
 }

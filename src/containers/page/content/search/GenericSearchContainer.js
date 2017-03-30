@@ -25,7 +25,9 @@ import {
   fetchWorkflowCategories,
   openSearchWfModal,
   closeSearchWfModal,
-  selectSearchWfCategory
+  selectSearchWfCategory,
+  changeSeachWfFilter,
+  selectWfRow
 } from 'actions'
 
 @withRouter
@@ -49,7 +51,10 @@ import {
     workflows: state.settings.workflows,
     workflowCategories: state.devices.workflowCategories,
     selectedCategory: state.search.selectedCategory,
-    wfModalOpen: state.search.wfModalOpen
+    wfModalOpen: state.search.wfModalOpen,
+    selectedWf: state.search.selectedWf,
+    workflowFilter: state.search.workflowFilter,
+    selectedRowWf: state.search.selectedRowWf
   }),
   dispatch => ({
     ...bindActionCreators({
@@ -72,7 +77,9 @@ import {
       fetchWorkflowCategories,
       openSearchWfModal,
       closeSearchWfModal,
-      selectSearchWfCategory
+      selectSearchWfCategory,
+      changeSeachWfFilter,
+      selectWfRow
     }, dispatch)
   })
 )

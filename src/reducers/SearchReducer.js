@@ -21,7 +21,8 @@ import {
   OPEN_SEARCH_WF_MODAL,
   CLOSE_SEARCH_WF_MODAL,
   SELECT_SEARCH_WF_CATEGORY,
-  CHANGE_SEARCH_WF_FILTER
+  CHANGE_SEARCH_WF_FILTER,
+  SELECT_WF_ROW
 } from '../actions/types'
 import { concat } from 'lodash'
 
@@ -74,13 +75,15 @@ export default function (state = {}, action) {
       return { ...state, savePopoverOpen: false }
 
     case OPEN_SEARCH_WF_MODAL:
-      return { ...state, wfModalOpen: true }
+      return { ...state, wfModalOpen: true, selectedRowWf: '' }
     case CLOSE_SEARCH_WF_MODAL:
       return { ...state, wfModalOpen: false }
     case SELECT_SEARCH_WF_CATEGORY:
-      return { ...state, selectedCategory: action.categoryId }
+      return { ...state, selectedCategory: action.categoryId, selectedRowWf: '' }
     case CHANGE_SEARCH_WF_FILTER:
-      return { ...state, workflowFilter: action.filter }
+      return { ...state, workflowFilter: action.filter, selectedRowWf: '' }
+    case SELECT_WF_ROW:
+      return { ...state, selectedRowWf: action.workflow }
   }
   return state
 }
