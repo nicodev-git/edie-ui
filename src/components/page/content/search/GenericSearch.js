@@ -15,6 +15,7 @@ import { imageBaseUrl, parseSearchQuery, guid } from 'shared/Global'
 
 import SearchFormView from './SearchFormView'
 import SearchSavePopover from './SearchSavePopover'
+import WorkflowSelectModal from './WorkflowSelectModal'
 
 const styles = {
   chip: {
@@ -212,7 +213,8 @@ class GenericSearch extends React.Component {
     this.props.change('dateIndex', dateIndex)
   }
 
-  onChangeWorkflow () {
+  onClickWorkflow () {
+    this.props.openSearchWfModal()
   }
 
   renderFields () {
@@ -322,6 +324,13 @@ class GenericSearch extends React.Component {
     )
   }
 
+  renderWfSelectModal () {
+    if (!this.props.wfModalOpen) return
+    return (
+      <WorkflowSelectModal {...this.props}/>
+    )
+  }
+
   render () {
     const { handleSubmit } = this.props
     return (
@@ -333,8 +342,8 @@ class GenericSearch extends React.Component {
             searchOptions={this.props.searchOptions.map(m => ({label: m.name, value: m.id}))}
             onClickStar={this.onClickStar.bind(this)}
             starFilled={!!this.props.selectedSearchOption}
-            workflows={this.props.workflows}
-            onChangeWorkflow={this.onChangeWorkflow.bind(this)}
+            workflow={''}
+            onClickWorkflow={this.onClickWorkflow.bind(this)}
             onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
             onChangeSearchOption={this.onChangeSearchOption.bind(this)}
           />
@@ -351,6 +360,7 @@ class GenericSearch extends React.Component {
             </div>
 
             {this.renderSavePopover()}
+            {this.renderWfSelectModal()}
           </div>
 
         </TabPageHeader>

@@ -22,6 +22,7 @@ import {
   closeSearchSavePopover,
 
   fetchWorkflows,
+  fetchWorkflowCategories,
   openSearchWfModal,
   closeSearchWfModal
 } from 'actions'
@@ -65,6 +66,7 @@ import {
       closeSearchSavePopover,
 
       fetchWorkflows,
+      fetchWorkflowCategories,
       openSearchWfModal,
       closeSearchWfModal
     }, dispatch)

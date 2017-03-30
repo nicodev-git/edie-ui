@@ -14,7 +14,7 @@ export default class WorkflowSelectModalView extends React.Component {
       onChangeCategory,
       onClickClose, onClickOK,
       workflows, selectedWorkflow,
-      selectedCategory, categories
+      selectedCategory, workflowCategories
     } = this.props
     return (
       <Modal
@@ -35,7 +35,7 @@ export default class WorkflowSelectModalView extends React.Component {
               onChange={onChangeCategory}
             >
               <MenuItem key="0" value="" primaryText="[All]" />
-              {categories.map(c =>
+              {workflowCategories.map(c =>
                 <MenuItem key={c.id} value={c.name} primaryText={c.name} />
               )}
             </SelectField>
