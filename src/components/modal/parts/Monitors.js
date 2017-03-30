@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import IconButton from 'material-ui/IconButton'
 import DeleteIcon from 'material-ui/svg-icons/action/delete'
-import { buttonStyle, smallIconStyle } from '../../../style/materialStyles'
+import { buttonStyle, iconStyle } from '../../../style/materialStyles'
 
 export default class Monitors extends Component {
   render () {
@@ -13,19 +13,16 @@ export default class Monitors extends Component {
           {
             monitors.map((item, index) =>
               <tr key={item.id}>
-                <td>{item.name}</td>
-                <td>
+                <td className="table-label">{item.name}</td>
+                <td className="table-icon">
                   <div className="remove-button">
                     <IconButton
                       style={buttonStyle}
-                      iconStyle={smallIconStyle}
+                      iconStyle={iconStyle}
                       onTouchTap={onRemoveMonitor.bind(this, index)}>
                         <DeleteIcon color="#545454"/>
                     </IconButton>
                   </div>
-                  {/* <a href="javascript:;" onClick={onRemoveMonitor.bind(this, index)}>
-                    <i className="fa fa-trash-o" />
-                  </a> */}
                 </td>
               </tr>)
           }

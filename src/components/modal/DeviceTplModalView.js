@@ -8,6 +8,7 @@ export default class DeviceTplModalView extends Component {
   render () {
     const {show, header, options, imgUrl, onSubmit, onHide, onChange,
       monitors, monitorTemplates, onAddMonitor, onRemoveMonitor} = this.props
+    console.log('monitors: ', monitors)
     return (
       <Modal
         show={show}

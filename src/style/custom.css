@@ -892,3 +892,19 @@ table.table tbody tr.selected {
 .field-item.selected {
     background: lightgray;
 }
+
+/* Device TPL Modal */
+.table-label {
+  padding: 0 !important;
+  text-align: left;
+  vertical-align: middle !important;
+  font-size: 12pt !important;
+}
+
+.table-icon {
+  padding: 0 !important;
+}
+
+.table-icon>div>button {
+  padding: 0 !important;
+}
