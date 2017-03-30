@@ -19,7 +19,8 @@ import {
   CLOSE_SEARCH_SAVE_POPOVER,
 
   OPEN_SEARCH_WF_MODAL,
-  CLOSE_SEARCH_WF_MODAL
+  CLOSE_SEARCH_WF_MODAL,
+  SELECT_SEARCH_WF_CATEGORY
 } from '../actions/types'
 import { concat } from 'lodash'
 
@@ -75,6 +76,8 @@ export default function (state = {}, action) {
       return { ...state, wfModalOpen: true }
     case CLOSE_SEARCH_WF_MODAL:
       return { ...state, wfModalOpen: false }
+    case SELECT_SEARCH_WF_CATEGORY:
+      return { ...state, selectedCategory: action.categoryId }
   }
   return state
 }

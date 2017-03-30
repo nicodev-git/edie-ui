@@ -24,7 +24,8 @@ import {
   fetchWorkflows,
   fetchWorkflowCategories,
   openSearchWfModal,
-  closeSearchWfModal
+  closeSearchWfModal,
+  selectSearchWfCategory
 } from 'actions'
 
 @withRouter
@@ -46,6 +47,8 @@ import {
     envVars: state.settings.envVars,
 
     workflows: state.settings.workflows,
+    workflowCategories: state.devices.workflowCategories,
+    selectedCategory: state.search.selectedCategory,
     wfModalOpen: state.search.wfModalOpen
   }),
   dispatch => ({
@@ -68,7 +71,8 @@ import {
       fetchWorkflows,
       fetchWorkflowCategories,
       openSearchWfModal,
-      closeSearchWfModal
+      closeSearchWfModal,
+      selectSearchWfCategory
     }, dispatch)
   })
 )

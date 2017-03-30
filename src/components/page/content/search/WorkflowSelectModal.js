@@ -12,12 +12,12 @@ class WorkflowSelectModal extends React.Component {
   }
 
   onChangeCategory (e, i, val) {
-    this.props.selectWorkflowCategory(val)
+    this.props.selectSearchWfCategory(val)
   }
 
   getWorkflows () {
-    const { selectedWorkflowCategory } = this.props
-    return this.props.workflows.filter(m => (!selectedWorkflowCategory || m.category === selectedWorkflowCategory))
+    const { selectedCategory } = this.props
+    return this.props.workflows.filter(m => (!selectedCategory || m.category === selectedCategory))
   }
 
   onClickOK () {
