@@ -76,7 +76,8 @@ const initialState = {
     fields: [],
     fieldTopValues: [],
 
-    searchOptions: []
+    searchOptions: [],
+    selectedCategory: ''
   },
 
   settings: {

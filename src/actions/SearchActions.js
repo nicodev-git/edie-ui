@@ -17,7 +17,8 @@ import {
   CLOSE_SEARCH_SAVE_POPOVER,
 
   OPEN_SEARCH_WF_MODAL,
-  CLOSE_SEARCH_WF_MODAL
+  CLOSE_SEARCH_WF_MODAL,
+  SELECT_SEARCH_WF_CATEGORY
 } from './types'
 import { ROOT_URL } from './config'
 import { apiError } from './Errors'
@@ -164,5 +165,11 @@ export const openSearchWfModal = () => {
 export const closeSearchWfModal = () => {
   return dispatch => {
     dispatch({type: CLOSE_SEARCH_WF_MODAL})
+  }
+}
+
+export const selectSearchWfCategory = (categoryId) => {
+  return dispatch => {
+    dispatch({type: SELECT_SEARCH_WF_CATEGORY, categoryId})
   }
 }
