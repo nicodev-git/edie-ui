@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Modal from 'react-bootstrap-modal'
 import Autocomplete from 'react-autocomplete'
-import { Header, SubHeader, CloseButton } from './parts'
+import { HeaderWithCancel, SubHeader } from './parts'
 
 export default class DeviceSearchModalView extends Component {
   render () {
@@ -14,7 +14,7 @@ export default class DeviceSearchModalView extends Component {
         aria-labelledby="ModalHeader"
         className="bootstrap-dialog type-primary"
       >
-        <Header name="Device Search" />
+        <HeaderWithCancel name="Device Search" onClose={onHide}/>
         <div className="modal-body bootstrap-dialog-message">
           <div className="search-modal-container">
             <SubHeader name="Search:"/>
@@ -71,7 +71,6 @@ export default class DeviceSearchModalView extends Component {
               </tbody>
             </table>
           </div>
-          <CloseButton onClose={onHide}/>
         </div>
       </Modal>
     )
