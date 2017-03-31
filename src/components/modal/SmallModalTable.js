@@ -4,12 +4,12 @@ import InfiniteTable from '../shared/InfiniteTable'
 import { Header, CloseButton, TwoButtonsBlock } from './parts'
 
 const SmallModalTable = ({show, header, url, row, height, onHide,
-  params, cells, save, onSave, data, useExternal}) => (
+  params, cells, save, onSave, data, useExternal, customWidth}) => (
   <Modal
     show={show}
     onHide={onHide}
     aria-labelledby="ModalHeader"
-    className="bootstrap-dialog type-primary"
+    className={`bootstrap-dialog type-primary ${customWidth || 'modal-600'}`}
   >
     <Header name={header} />
     <div className="modal-body bootstrap-dialog-message small-modal-table">

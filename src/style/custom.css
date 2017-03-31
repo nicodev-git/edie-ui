@@ -248,6 +248,10 @@ table.table tbody tr.selected {
   width: 500px;
 }
 
+.width-800 {
+  width: 800px;
+}
+
 /* Color picker */
 .colorpicker-element{
     display: inline-block;
@@ -969,4 +973,25 @@ table.table tbody tr.selected {
   margin-top: 20px;
 }
 
-/* Custom scrollbar */
+/* Modal custom width */
+
+.modal-800 > div {
+  width: 800px !important;
+}
+
+.modal-700 > div {
+  width: 700px !important;
+}
+
+.modal-750 > div {
+  width: 750px !important;
+}
+
+.modal-600 > div {
+  width: 600px !important;
+}
+
+/* Griddle header padding */
+.griddle th {
+  padding-left: 6px !important;
+}

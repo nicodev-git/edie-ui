@@ -77,6 +77,7 @@ export default class MonitorHistoryModal extends Component {
       <SmallModalTable
         show={this.state.open}
         onHide={this.onClickClose.bind(this)}
+        customWidth="modal-750"
         params={params}
         cells={this.cells}
         header={header}
