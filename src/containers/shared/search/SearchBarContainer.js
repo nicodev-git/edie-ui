@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import SearchBar from 'components/shared/search/SearchBar'
+import SimpleSearchBar from 'components/shared/search/SimpleSearchBar'
 
 export default class SearchBarContainer extends Component {
   constructor (props) {
@@ -22,7 +23,9 @@ export default class SearchBarContainer extends Component {
       active: false
     })
     let input = document.getElementById('searchInput')
-    input.value = ''
+    if (!this.props.isSimple) {
+      input.value = ''
+    }
     input.blur()
   }
 
@@ -40,16 +43,24 @@ export default class SearchBarContainer extends Component {
   render () {
     console.log('is active? ', this.state.active)
     let autoFocus = this.props.autoFocus
-    return (
-      <SearchBar
+    let isSimple = this.props.isSimple
+    return (isSimple
+      ? (<SimpleSearchBar
         defaultKeyword={this.props.defaultKeyword}
         onSearch={this.onEnter.bind(this)}
         color={this.state.color}
         active={this.state.active}
         onFocus={this.onFocus.bind(this)}
         onBlur={this.onBlur.bind(this)}
-        autoFocus={autoFocus}
-      />
+        autoFocus={autoFocus}/>)
+        : (<SearchBar
+          defaultKeyword={this.props.defaultKeyword}
+          onSearch={this.onEnter.bind(this)}
+          color={this.state.color}
+          active={this.state.active}
+          onFocus={this.onFocus.bind(this)}
+          onBlur={this.onBlur.bind(this)}
+          autoFocus={autoFocus}/>)
     )
   }
 }

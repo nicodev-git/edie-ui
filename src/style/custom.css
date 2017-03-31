@@ -248,6 +248,10 @@ table.table tbody tr.selected {
   width: 500px;
 }
 
+.width-600 {
+  width: 600px;
+}
+
 .width-800 {
   width: 800px;
 }
@@ -887,6 +891,16 @@ table.table tbody tr.selected {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.flex-start {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.flex-start > div {
+  margin-right: 10px !important;
 }
 
 .search-wrapper {

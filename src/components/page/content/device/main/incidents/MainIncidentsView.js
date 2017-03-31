@@ -28,7 +28,7 @@ export default class MainIncidentsView extends Component {
           <div className="text-center margin-md-top flex-panel">
 
             <div>
-              <div className="flex-panel width-500 gray-arrows">
+              <div className="flex-start width-600 gray-arrows">
                 <SelectField
                   style={{width: '180px'}}
                   selectedMenuItemStyle={selectedItemStyle}
@@ -76,10 +76,10 @@ export default class MainIncidentsView extends Component {
             </div>
 
             <div className="search-wrapper">
-              <SearchBarContainer onSearch={this.props.onFilterChange}/>
+              <SearchBarContainer isSimple onSearch={this.props.onFilterChange}/>
             </div>
 
-            <div>
+            <div className="width-300 flex-panel">
                 <RaisedButton onTouchTap={this.props.onClickOpen.bind(this)} label="Open"/>
                 <RaisedButton onTouchTap={this.props.onClickFixAll.bind(this)} label="Fix All"/>
                 <RaisedButton
