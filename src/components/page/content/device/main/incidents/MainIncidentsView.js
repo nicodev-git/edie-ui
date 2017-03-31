@@ -28,10 +28,9 @@ export default class MainIncidentsView extends Component {
           <div className="text-center margin-md-top flex-panel">
 
             <div>
-              <div className="flex-panel width-500">
+              <div className="flex-panel width-500 gray-arrows">
                 <SelectField
-                  style={{backgroundColor: '#ffffff', width: '180px'}}
-                  underlineStyle={{display: 'none'}}
+                  style={{width: '180px'}}
                   selectedMenuItemStyle={selectedItemStyle}
                   menuItemStyle={smallInputStyle}
                   labelStyle={smallInputStyle}
@@ -52,8 +51,7 @@ export default class MainIncidentsView extends Component {
                 </SelectField>
 
                 <SelectField
-                  style={{backgroundColor: '#ffffff', width: '125px'}}
-                  underlineStyle={{display: 'none'}}
+                  style={{width: '125px'}}
                   selectedMenuItemStyle={selectedItemStyle}
                   menuItemStyle={smallInputStyle}
                   labelStyle={smallInputStyle}

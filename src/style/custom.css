@@ -1042,3 +1042,8 @@ table.table tbody tr.selected {
   border-width: 0px 0px 1px;
   outline: none;
 }
+
+/* Device main incidents */
+.gray-arrows svg {
+  fill: #777777 !important;
+}
