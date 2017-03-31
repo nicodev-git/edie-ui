@@ -20,11 +20,13 @@ export default class DeviceTplModalView extends Component {
         <div className="modal-body bootstrap-dialog-message">
           <form onSubmit={onSubmit}>
             <div className="form-column">
-              <Field name="name" component={FormInput} label="Name"/>
-              <Field name="devicetemplategroup" component={FormSelect} label="Group" options={options}/>
-              <ImageUploader imgUrl={imgUrl} onChange={onChange}/>
-              <div className="subheader-wrapper">
-                <SubHeader name="Monitors"/>
+              <div>
+                <Field name="name" component={FormInput} label="Name"/>
+                <Field name="devicetemplategroup" component={FormSelect} label="Group" options={options}/>
+                <ImageUploader imgUrl={imgUrl} onChange={onChange}/>
+                <div className="subheader-wrapper">
+                  <SubHeader name="Monitors"/>
+                </div>
               </div>
               <div>
                 <div className="col-md-6 modal-left">
