@@ -260,6 +260,14 @@ table.table tbody tr.selected {
   width: 600px;
 }
 
+.width-620 {
+  width: 620px;
+}
+
+.width-750 {
+  width: 750px;
+}
+
 .width-800 {
   width: 800px;
 }
@@ -912,7 +920,7 @@ table.table tbody tr.selected {
 }
 
 .search-wrapper {
-  margin: 0 auto;
+  margin: 0;
 }
 
 .search-wrapper>div>div {
@@ -1076,4 +1084,6 @@ table.table tbody tr.selected {
   background-color: #ffffff;
   padding-right: 16px;
   height: 36px;
+  border-radius: 2px;
+  box-shadow: rgba(0, 0, 0, 0.117647) 0px 1px 6px, rgba(0, 0, 0, 0.117647) 0px 1px 4px;
 }

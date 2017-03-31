@@ -75,11 +75,11 @@ export default class MainIncidentsView extends Component {
               </div>
             </div>
 
-            <div className="search-wrapper">
-              <SearchBarContainer isSimple onSearch={this.props.onFilterChange}/>
-            </div>
-
-            <div className="width-280 flex-panel">
+            <div className="width-620 flex-panel">
+              <div className="search-wrapper">
+                <SearchBarContainer isSimple onSearch={this.props.onFilterChange}/>
+              </div>
+              <div className="width-300 flex-panel">
                 <RaisedButton onTouchTap={this.props.onClickOpen.bind(this)} label="Open"/>
                 <RaisedButton onTouchTap={this.props.onClickFixAll.bind(this)} label="Fix All"/>
                 <RaisedButton
@@ -101,6 +101,7 @@ export default class MainIncidentsView extends Component {
                       <MenuItem primaryText="Export PDF" onTouchTap={this.props.onClickPDF}/>
                     </Menu>
                   </Popover>
+                </div>
             </div>
 
           </div>
