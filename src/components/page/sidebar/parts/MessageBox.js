@@ -38,7 +38,7 @@ const messageStyle = {
   paddingBottom: '3px'
 }
 
-const MessageBox = () => (
+const MessageBox = ({open}) => (
   <li className="dropdown">
     <div className="sidebar-item-container">
       <Badge

@@ -26,6 +26,9 @@ const initialState = {
 
     images: [],
 
+    sidebarProfileMenuOpen: false,
+    sidebarMessageMenuOpen: false,
+
     apiErrorModalOpen: false,
     apiError: ''
   },

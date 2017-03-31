@@ -43,7 +43,8 @@ class SidebarView extends Component {
   render () {
     const {onToggle, contentType, mainMenu, deviceMenu, onMainMenu, onDeviceMenu,
     device, pageId, pageType, searchVisible, group, onSearch,
-    profile, user, onClickProfile, onClickMessages, onSignOut} = this.props
+    profile, user, onClickProfile, onClickMessages, onSignOut,
+    sidebarMessageMenuOpen, sidebarProfileMenuOpen} = this.props
 
     return (
       <aside className="sidebar sidebar-default sidebar-custom">
@@ -77,8 +78,9 @@ class SidebarView extends Component {
                 }
               </li>
             )}
-            <MessageBox />
+            <MessageBox open={sidebarMessageMenuOpen}/>
             <ProfileMenu
+              open={sidebarProfileMenuOpen}
               user={user}
               onClickProfile={onClickProfile}
               onClickMessages={onClickMessages}

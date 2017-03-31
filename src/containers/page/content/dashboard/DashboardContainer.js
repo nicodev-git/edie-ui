@@ -69,7 +69,10 @@ export default connect(
     incidentEventsModalOpen: state.dashboard.incidentEventsModalOpen,
     selectedIncident: state.dashboard.selectedIncident,
 
-    stats: state.dashboard.stats
+    stats: state.dashboard.stats,
+
+    sidebarProfileMenuOpen: state.dashboard.sidebarProfileMenuOpen,
+    sidebarMessageMenuOpen: state.dashboard.sidebarMessageMenuOpen
   }), {
 
     fetchBigIncidents,

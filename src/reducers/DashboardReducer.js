@@ -50,6 +50,9 @@ import {
   UPDATE_MAP_DEVICE_STATUS,
   RELOAD_DEVICE,
 
+  SHOW_SIDEBAR_PROFILE_MENU,
+  SHOW_SIDEBAR_MESSAGE_MENU,
+
   API_ERROR
 } from '../actions/types'
 
@@ -220,6 +223,12 @@ export default function (state = {}, action) {
 
       return { ...state, mapDevices }
     }
+
+    case SHOW_SIDEBAR_PROFILE_MENU:
+      return { ...state, sidebarProfileMenuOpen: action.open }
+
+    case SHOW_SIDEBAR_MESSAGE_MENU:
+      return { ...state, sidebarMessageMenuOpen: action.open }
   }
   return state
 }
