@@ -240,12 +240,20 @@ table.table tbody tr.selected {
     width: 220px;
 }
 
+.width-280 {
+  width: 280px;
+}
+
 .width-300 {
     width: 300px;
 }
 
 .width-500 {
   width: 500px;
+}
+
+.width-530 {
+  width: 530px;
 }
 
 .width-600 {

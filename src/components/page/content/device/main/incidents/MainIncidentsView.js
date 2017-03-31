@@ -15,7 +15,7 @@ import RaisedButton from 'material-ui/RaisedButton'
 import Popover from 'material-ui/Popover'
 import Menu from 'material-ui/Menu'
 import SearchBarContainer from 'containers/shared/search/SearchBarContainer'
-import { smallInputStyle, selectedItemStyle } from 'style/materialStyles'
+import { smallInputStyle, selectedItemStyle, primeButtonStyle, primeButtonLabelStyle } from 'style/materialStyles'
 
 export default class MainIncidentsView extends Component {
   render () {
@@ -28,7 +28,7 @@ export default class MainIncidentsView extends Component {
           <div className="text-center margin-md-top flex-panel">
 
             <div>
-              <div className="flex-start width-600 gray-arrows">
+              <div className="flex-start width-530 gray-arrows">
                 <SelectField
                   style={{width: '180px'}}
                   selectedMenuItemStyle={selectedItemStyle}
@@ -79,11 +79,13 @@ export default class MainIncidentsView extends Component {
               <SearchBarContainer isSimple onSearch={this.props.onFilterChange}/>
             </div>
 
-            <div className="width-300 flex-panel">
+            <div className="width-280 flex-panel">
                 <RaisedButton onTouchTap={this.props.onClickOpen.bind(this)} label="Open"/>
                 <RaisedButton onTouchTap={this.props.onClickFixAll.bind(this)} label="Fix All"/>
                 <RaisedButton
                   onTouchTap={this.props.openMore}
+                  buttonStyle={primeButtonStyle}
+                  labelStyle={primeButtonLabelStyle}
                   label="More"
                 />
                   <Popover
