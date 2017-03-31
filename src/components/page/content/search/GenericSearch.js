@@ -62,7 +62,7 @@ class GenericSearch extends React.Component {
 
         // const data = this.getHighlighted(rowData.entity, rowData.highlights)
         // return <span dangerouslySetInnerHTML={{ __html: data }} /> // eslint-disable-line
-        return this.renderData(rowData.entity, rowData.highlights)
+        return this.renderData(rowData.entity)
       }
     }]
 
@@ -71,18 +71,42 @@ class GenericSearch extends React.Component {
     this.props.fetchWorkflows()
   }
 
-  renderData (entity, highlights) {
-    let children = []
-    keys(entity).forEach(key => {
-      children.push(
+  renderValue (val) {
+    let startChar, endChar
+    let children
+    if (typeof val === 'object' && val !== null) {
+      startChar = isArray(val) ? '[' : '{'
+      endChar = isArray(val) ? ']' : '}'
+      if (isArray(val)) {
+        children = val.map(item => this.renderValue(item))
+      } else {
+        children = this.renderData(val, true)
+      }
+
+      return (
         <div className="inline">
-          <span className="field-key">{key} = </span>
-          <span className="field-value">{JSON.stringify(entity[key])}</span>
-          <div className="field-separator"></div>
+          <span className="field-key">{startChar}&nbsp;</span>
+          {children}
+          <span className="field-key">&nbsp;{endChar}</span>
         </div>
       )
+    }
+
+    return (
+      <span className="field-value">{JSON.stringify(val)}</span>
+    )
+  }
+
+  renderData (entity, isChildren) {
+    let children = []
+    const allKeys = keys(entity)
+    allKeys.forEach((key, index) => {
+      children.push(<span className="field-key">{key} = </span>)
+      children = concat(children, this.renderValue(entity[key]))
+      if (index < allKeys.length - 1) children.push(<div className="field-separator"/>)
     })
-    return <div>{children}</div>
+    if (isChildren) return children
+    return <div className="inline">{children}</div>
   }
 
   getHighlighted (entity, highlights) {
