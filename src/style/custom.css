@@ -1014,3 +1014,10 @@ table.table tbody tr.selected {
 .griddle th {
   padding-left: 6px !important;
 }
+
+/* Header with cancel */
+.header-with-cancel {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
