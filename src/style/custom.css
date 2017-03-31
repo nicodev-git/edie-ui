@@ -1026,3 +1026,19 @@ table.table tbody tr.selected {
 .row-no-padding > td{
   padding: 0 !important;
 }
+
+/* Autocomplete styles */
+.autocomplete-wrapper {
+  width: 100%;
+  position: relative;
+}
+
+.autocomplete-wrapper > div {
+  width: 100%;
+}
+
+.autocomplete-wrapper > div > input{
+  width: 95%;
+  border-width: 0px 0px 1px;
+  outline: none;
+}
