@@ -58,7 +58,8 @@ class GenericSearch extends React.Component {
 
         // const data = this.getHighlighted(rowData.entity, rowData.highlights)
         // return <span dangerouslySetInnerHTML={{ __html: data }} /> // eslint-disable-line
-        return this.renderData(rowData.entity, false, rowData.type)
+
+        return this.renderData(this.getHighlighted(rowData.entity, rowData.highlights), false, rowData.type)
       }
     }]
 
@@ -88,14 +89,13 @@ class GenericSearch extends React.Component {
     }
 
     return (
-      <span className="field-value">{JSON.stringify(val)}</span>
+      <span className="field-value" dangerouslySetInnerHTML={{ __html: JSON.stringify(val) }}/> // eslint-disable-line
     )
   }
 
   renderData (entity, isChildren, type) {
     let children = []
     const allKeys = concat([], 'type', keys(entity))
-
     const newEntity = assign({}, entity, {type})
     allKeys.forEach((key, index) => {
       children.push(<span className="field-key">{key} = </span>)
@@ -123,7 +123,7 @@ class GenericSearch extends React.Component {
       })
     })
 
-    return JSON.stringify(data)
+    return data
   }
 
   onSearchKeyDown (e) {
@@ -150,7 +150,7 @@ class GenericSearch extends React.Component {
       dateIndex: values.dateIndex,
       dateFrom: this.dateOptions[values.dateIndex].from,
       dateTo: this.dateOptions[values.dateIndex].to,
-      workflow: ''
+      workflow: this.props.selectedWf || ''
     })
 
     this.props.change('query', '')
@@ -249,6 +249,15 @@ class GenericSearch extends React.Component {
 
   onClickWorkflow () {
     this.props.openSearchWfModal()
+  }
+
+  onClickSelectWorkflow () {
+    if (!this.props.selectedRowWf) return
+    this.props.selectSearchWf(this.props.selectedRowWf)
+    this.props.updateSearchParams(assign({}, this.props.params, {
+      workflow: this.props.selectedRowWf || ''
+    }))
+    this.props.closeSearchWfModal()
   }
 
   renderFields () {
@@ -361,7 +370,7 @@ class GenericSearch extends React.Component {
   renderWfSelectModal () {
     if (!this.props.wfModalOpen) return
     return (
-      <WorkflowSelectModal {...this.props}/>
+      <WorkflowSelectModal {...this.props} onClickOK={this.onClickSelectWorkflow.bind(this)}/>
     )
   }
 

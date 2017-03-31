@@ -1,5 +1,4 @@
 import React from 'react'
-
 import { WorkflowSelectModalView } from 'components/modal'
 
 class WorkflowSelectModal extends React.Component {
@@ -35,12 +34,6 @@ class WorkflowSelectModal extends React.Component {
     this.props.selectWfRow(workflow)
   }
 
-  onClickOK () {
-    if (!this.props.selectedRowWf) return
-    this.props.selectSearchWf(this.props.selectedRowWf)
-    this.props.closeSearchWfModal()
-  }
-
   render () {
     return (
       <WorkflowSelectModalView
@@ -50,7 +43,6 @@ class WorkflowSelectModal extends React.Component {
         onChangeCategory={this.onChangeCategory.bind(this)}
         onClickRow={this.onClickRow.bind(this)}
         onClickClose={this.onClickClose.bind(this)}
-        onClickOK={this.onClickOK.bind(this)}
       />
     )
   }
