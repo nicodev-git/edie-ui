@@ -14,9 +14,8 @@ import MenuItem from 'material-ui/MenuItem'
 import RaisedButton from 'material-ui/RaisedButton'
 import Popover from 'material-ui/Popover'
 import Menu from 'material-ui/Menu'
-
 import SearchBarContainer from 'containers/shared/search/SearchBarContainer'
-import { smallInputStyle, selectedItemStyle, primeButtonStyle, primeButtonLabelStyle } from 'style/materialStyles'
+import { smallInputStyle, selectedItemStyle, primeButtonStyle, primeLabelStyle } from 'style/materialStyles'
 
 export default class MainIncidentsView extends Component {
   render () {
@@ -86,7 +85,7 @@ export default class MainIncidentsView extends Component {
                 <RaisedButton
                   onTouchTap={this.props.openMore}
                   buttonStyle={primeButtonStyle}
-                  labelStyle={primeButtonLabelStyle}
+                  labelStyle={primeLabelStyle}
                   label="More"
                 />
                   <Popover

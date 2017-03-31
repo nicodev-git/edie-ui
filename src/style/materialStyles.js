@@ -51,6 +51,10 @@ export const primeButtonStyle = {
   backgroundColor: primeColor
 }
 
+export const primeLabelStyle = {
+  color: backgroundColor
+}
+
 export const primeButtonLabelStyle = {
   color: backgroundColor,
   fontWeight: 700
