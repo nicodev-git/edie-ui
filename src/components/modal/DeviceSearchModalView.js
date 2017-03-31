@@ -1,7 +1,10 @@
 import React, { Component } from 'react'
 import Modal from 'react-bootstrap-modal'
 import Autocomplete from 'react-autocomplete'
+import IconButton from 'material-ui/IconButton'
+import DeleteIcon from 'material-ui/svg-icons/action/delete'
 import { Header, SubHeader, CloseButton } from './parts'
+import { buttonStyle, iconStyle } from 'style/materialStyles'
 
 export default class DeviceSearchModalView extends Component {
   render () {
@@ -58,12 +61,20 @@ export default class DeviceSearchModalView extends Component {
               <tbody>
               {
                 selected.map(device =>
-                  <tr key={device.id}>
-                    <td>{device.name}</td>
-                    <td style={{width: '40px'}}>
-                      <a href="javascript:;" onClick={onRemove.bind(this, device)}>
+                  <tr className="row-no-padding" key={device.id}>
+                    <td className="table-label">{device.name}</td>
+                    <td className="table-icon">
+                      <div className="remove-button">
+                        <IconButton
+                          style={buttonStyle}
+                          iconStyle={iconStyle}
+                          onTouchTap={onRemove.bind(this, device)}>
+                            <DeleteIcon color="#545454"/>
+                        </IconButton>
+                      </div>
+                      {/* <a href="javascript:;" onClick={onRemove.bind(this, device)}>
                         <i className="fa fa-times" />
-                      </a>
+                      </a> */}
                     </td>
                   </tr>
                 )

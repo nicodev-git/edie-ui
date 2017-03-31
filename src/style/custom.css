@@ -1021,3 +1021,8 @@ table.table tbody tr.selected {
   justify-content: space-between;
   align-items: center;
 }
+
+/* Device search table */
+.row-no-padding > td{
+  padding: 0 !important;
+}
