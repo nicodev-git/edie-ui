@@ -73,22 +73,21 @@ class GenericSearch extends React.Component {
 
   renderValue (val) {
     let startChar, endChar
-    let children
+    let children = []
     if (typeof val === 'object' && val !== null) {
       startChar = isArray(val) ? '[' : '{'
       endChar = isArray(val) ? ']' : '}'
+
       if (isArray(val)) {
         children = val.map(item => this.renderValue(item))
       } else {
         children = this.renderData(val, true)
       }
 
-      return (
-        <div className="inline">
-          <span className="field-key">{startChar}&nbsp;</span>
-          {children}
-          <span className="field-key">&nbsp;{endChar}</span>
-        </div>
+      return concat([],
+        <span className="field-key">{startChar}&nbsp;</span>,
+        children,
+        <span className="field-key">&nbsp;{endChar}</span>
       )
     }
 
