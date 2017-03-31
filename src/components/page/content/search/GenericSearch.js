@@ -60,16 +60,29 @@ class GenericSearch extends React.Component {
         const {rowData} = props
         if (!rowData.entity) return <span/>
 
-        // let data = JSON.stringify(assign({}, rowData.entity, rowData.highlights))
-        const data = this.getHighlighted(rowData.entity, rowData.highlights)
-        // if (data.length > 500) data = `${data.substring(0, 500)}...`
-        return <span dangerouslySetInnerHTML={{ __html: data }} /> // eslint-disable-line
+        // const data = this.getHighlighted(rowData.entity, rowData.highlights)
+        // return <span dangerouslySetInnerHTML={{ __html: data }} /> // eslint-disable-line
+        return this.renderData(rowData.entity, rowData.highlights)
       }
     }]
 
     if (props.userInfo) this.props.fetchSearchOptions(props.userInfo.id)
     this.props.fetchSearchFields(props.params)
     this.props.fetchWorkflows()
+  }
+
+  renderData (entity, highlights) {
+    let children = []
+    keys(entity).forEach(key => {
+      children.push(
+        <div className="inline">
+          <span className="field-key">{key} = </span>
+          <span className="field-value">{JSON.stringify(entity[key])}</span>
+          <div className="field-separator"></div>
+        </div>
+      )
+    })
+    return <div>{children}</div>
   }
 
   getHighlighted (entity, highlights) {
