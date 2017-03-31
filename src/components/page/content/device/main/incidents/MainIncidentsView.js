@@ -14,6 +14,7 @@ import MenuItem from 'material-ui/MenuItem'
 import RaisedButton from 'material-ui/RaisedButton'
 import Popover from 'material-ui/Popover'
 import Menu from 'material-ui/Menu'
+
 import SearchBarContainer from 'containers/shared/search/SearchBarContainer'
 import { smallInputStyle, selectedItemStyle, primeButtonStyle, primeButtonLabelStyle } from 'style/materialStyles'
 
