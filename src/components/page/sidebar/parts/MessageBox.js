@@ -8,32 +8,7 @@ import EmailIcon from 'material-ui/svg-icons/communication/email'
 import InboxIcon from 'material-ui/svg-icons/content/inbox'
 import Message from './Message'
 
-const badgeStyle = {
-  backgroundColor: '#d32f2f',
-  color: '#f5f5f5',
-  width: 15,
-  height: 15,
-  padding: 0,
-  top: 7,
-  right: 7,
-  zIndex: 2
-}
-
-const rootStyle = {
-  padding: '6px',
-  height: 50
-}
-
-const buttonStyle = {
-  padding: '4px',
-  width: '100%',
-  height: '100%'
-}
-
-const iconStyle = {
-  width: 30,
-  height: 30
-}
+import {badgeStyle, badgeRootStyle, iconStyle, iconButtonStyle} from 'style/materialStyles'
 
 const iconMenuStyle = {
   paddingTop: '0px',
@@ -65,15 +40,16 @@ const messageStyle = {
 
 const MessageBox = () => (
   <li className="dropdown">
-    <Badge
-      badgeContent={4}
-      badgeStyle={badgeStyle}
-      style={rootStyle}
+    <div className="sidebar-item-container">
+      <Badge
+        badgeContent={4}
+        badgeStyle={badgeStyle}
+        style={badgeRootStyle}
       >
         <IconMenu
           iconButtonElement={
             <IconButton
-              style={buttonStyle}
+              style={iconButtonStyle}
               iconStyle={iconStyle}>
                 <EmailIcon color="#777777"/>
             </IconButton>
@@ -108,7 +84,9 @@ const MessageBox = () => (
             leftIcon={<InboxIcon/>}
             style={seeAllStyle}/>
         </IconMenu>
-    </Badge>
+      </Badge>
+      <div className="sidebar-title">Messages</div>
+    </div>
   </li>
 )
 
