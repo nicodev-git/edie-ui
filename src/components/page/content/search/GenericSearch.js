@@ -50,10 +50,6 @@ class GenericSearch extends React.Component {
     }]
 
     this.cells = [{
-      'displayName': 'Type',
-      'columnName': 'type',
-      'cssClassName': 'width-80'
-    }, {
       'displayName': 'Content',
       'columnName': 'entity.id',
       'customComponent': (props) => {
@@ -62,7 +58,7 @@ class GenericSearch extends React.Component {
 
         // const data = this.getHighlighted(rowData.entity, rowData.highlights)
         // return <span dangerouslySetInnerHTML={{ __html: data }} /> // eslint-disable-line
-        return this.renderData(rowData.entity)
+        return this.renderData(rowData.entity, false, rowData.type)
       }
     }]
 
@@ -96,12 +92,14 @@ class GenericSearch extends React.Component {
     )
   }
 
-  renderData (entity, isChildren) {
+  renderData (entity, isChildren, type) {
     let children = []
-    const allKeys = keys(entity)
+    const allKeys = concat([], 'type', keys(entity))
+
+    const newEntity = assign({}, entity, {type})
     allKeys.forEach((key, index) => {
       children.push(<span className="field-key">{key} = </span>)
-      children = concat(children, this.renderValue(entity[key]))
+      children = concat(children, this.renderValue(newEntity[key]))
       if (index < allKeys.length - 1) children.push(<div className="field-separator"/>)
     })
     if (isChildren) return children
@@ -405,7 +403,7 @@ class GenericSearch extends React.Component {
 
         <TabPageBody tabs={SearchTabs} tab={0}>
           <div className="flex-horizontal" style={{height: '100%'}}>
-            <div style={{minWidth: '300px', height: '100%', overflow: 'auto', position: 'relative'}}>
+            <div style={{minWidth: '170px', height: '100%', overflow: 'auto', position: 'relative'}}>
               {this.renderFields()}
               {this.renderFieldPopover()}
             </div>
