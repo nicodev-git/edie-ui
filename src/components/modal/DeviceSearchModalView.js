@@ -3,7 +3,7 @@ import Modal from 'react-bootstrap-modal'
 import Autocomplete from 'react-autocomplete'
 import IconButton from 'material-ui/IconButton'
 import DeleteIcon from 'material-ui/svg-icons/action/delete'
-import { Header, SubHeader, CloseButton } from './parts'
+import { Header, CloseButton } from './parts'
 import { buttonStyle, iconStyle } from 'style/materialStyles'
 
 export default class DeviceSearchModalView extends Component {
@@ -20,12 +20,12 @@ export default class DeviceSearchModalView extends Component {
         <Header name="Device Search"/>
         <div className="modal-body bootstrap-dialog-message">
           <div className="search-modal-container">
-            <SubHeader name="Search:"/>
-            <div className="inline" style={{position: 'relative'}}>
+            <div className="autocomplete-wrapper">
               <Autocomplete
                 inputProps={{
                   name: 'Device',
-                  id: 'device-autocomplete'
+                  id: 'device-autocomplete',
+                  placeholder: 'Search...'
                 }}
                 className="form-control input-sm"
                 menuStyle={{
@@ -35,6 +35,7 @@ export default class DeviceSearchModalView extends Component {
                   padding: '2px 0',
                   fontSize: '90%',
                   position: 'absolute',
+                  zIndex: '2',
                   overflow: 'auto',
                   maxHeight: '300px',
                   top: '100%',
