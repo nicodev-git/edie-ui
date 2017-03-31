@@ -1047,3 +1047,11 @@ table.table tbody tr.selected {
 .gray-arrows svg {
   fill: #777777 !important;
 }
+
+.rangedp-wrapper {
+  display: flex;
+  align-items: center;
+  background-color: #ffffff;
+  padding-right: 16px;
+  height: 36px;
+}

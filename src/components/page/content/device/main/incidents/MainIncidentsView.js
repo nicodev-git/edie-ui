@@ -63,10 +63,12 @@ export default class MainIncidentsView extends Component {
                   <MenuItem value="Fixed" primaryText="Fixed" />
                 </SelectField>
 
-                <DateRangePicker onClickRange={this.props.onFilterChange} className="margin-md-left"
-                  default={moment().startOf('years').format('YYYY')} ref="dp">
-                  <i className="fa fa-caret-down margin-xs-left" />
-                </DateRangePicker>
+                <div className="rangedp-wrapper">
+                  <DateRangePicker onClickRange={this.props.onFilterChange} className="margin-md-left"
+                    default={moment().startOf('years').format('YYYY')} ref="dp">
+                    <i className="fa fa-caret-down margin-xs-left" />
+                  </DateRangePicker>
+                </div>
 
                 <a href="javascript:;" title="Export" style={{display: 'none'}}><img
                   width="26" src="/images/btn-export.jpg"/></a>

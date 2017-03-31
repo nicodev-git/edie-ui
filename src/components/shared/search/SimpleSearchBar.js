@@ -1,0 +1,38 @@
+import React from 'react'
+import { inputStyle, underlineStyle } from 'style/materialStyles'
+
+const defaultStyle = {
+  backgroundColor: 'inherit'
+}
+
+const activeStyle = {
+  backgroundColor: '#eaeaea'
+}
+
+const SimpleSearchBar = ({onSearch, active, onFocus, onBlur, defaultKeyword, autoFocus}) => (
+  <div className="searchbar-container" style={active ? activeStyle : defaultStyle}>
+    <TextField hintText="Search..."
+      inputStyle={inputStyle}
+      underlineFocusStyle={underlineStyle}
+      onFocus={onFocus}
+      onBlur={onBlur}
+      autoFocus={autoFocus}
+      defaultValue={defaultKeyword}
+      onChange={onSearch}
+      id="searchInput"
+    />
+    {/* <div className="searchbar" style={active ? activeStyle : defaultStyle}>
+      <input
+        onFocus={onFocus}
+        onBlur={onBlur}
+        id="searchInput"
+        className="searchbar-input"
+        style={active ? activeStyle : defaultStyle}
+        autoFocus={autoFocus}
+        defaultValue={defaultKeyword}
+        onKeyPress={onSearch}/>
+    </div> */}
+  </div>
+)
+
+export default SimpleSearchBar
