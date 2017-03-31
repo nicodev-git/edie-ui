@@ -76,7 +76,10 @@ class GenericSearch extends React.Component {
       endChar = isArray(val) ? ']' : '}'
 
       if (isArray(val)) {
-        children = val.map(item => this.renderValue(item))
+        val.forEach((item, index) => {
+          children.push(this.renderValue(item))
+          if (index < val.length - 1) children.push(<div className="field-separator"/>)
+        })
       } else {
         children = this.renderData(val, true)
       }
@@ -115,7 +118,14 @@ class GenericSearch extends React.Component {
       let el = data
       pathElements.forEach((pathEl, index) => {
         if (index === pathElements.length - 1) {
-          el[pathEl] = highlighted
+          if (isArray(el[pathEl])) {
+            el = el[pathEl]
+            el.forEach((item, index) => {
+              if (highlighted.match(item)) el[index] = highlighted
+            })
+          } else {
+            el[pathEl] = highlighted
+          }
         } else {
           el = el[pathEl]
           if (isArray(el)) el = el[0]
