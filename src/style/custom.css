@@ -984,6 +984,14 @@ table.table tbody tr.selected {
   margin-top: 20px;
 }
 
+.margin-bottom-0 {
+  margin-bottom: 0 !important;
+}
+
+.padding-left-12 {
+  padding-left: 12px;
+}
+
 /* Modal custom width */
 
 .modal-800 > div {

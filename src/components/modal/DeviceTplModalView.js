@@ -19,24 +19,22 @@ export default class DeviceTplModalView extends Component {
         <Header name={header} />
         <div className="modal-body bootstrap-dialog-message">
           <form onSubmit={onSubmit}>
-            <div className="form-column">
-              <div>
-                <Field name="name" component={FormInput} label="Name"/>
-                <Field name="devicetemplategroup" component={FormSelect} label="Group" options={options}/>
-                <ImageUploader imgUrl={imgUrl} onChange={onChange}/>
-                <div className="subheader-wrapper">
-                  <SubHeader name="Monitors"/>
-                </div>
+            <div className="form-column padding-left-12 margin-bottom-0">
+              <Field name="name" component={FormInput} label="Name"/>
+              <Field name="devicetemplategroup" component={FormSelect} label="Group" options={options}/>
+              <ImageUploader imgUrl={imgUrl} onChange={onChange}/>
+              <div className="subheader-wrapper">
+                <SubHeader name="Monitors"/>
               </div>
-              <div>
-                <div className="col-md-6 modal-left">
-                  <Monitors monitors={monitors} onEditMonitor={onEditMonitor}
-                    onRemoveMonitor={onRemoveMonitor} />
-                </div>
-                <div className="col-md-6 modal-right">
-                  <MonitorTemplates monitors={monitors} monitorTemplates={monitorTemplates}
-                    onAddMonitor={onAddMonitor} />
-                </div>
+            </div>
+            <div>
+              <div className="col-md-6 modal-left">
+                <Monitors monitors={monitors} onEditMonitor={onEditMonitor}
+                  onRemoveMonitor={onRemoveMonitor} />
+              </div>
+              <div className="col-md-6 modal-right">
+                <MonitorTemplates monitors={monitors} monitorTemplates={monitorTemplates}
+                  onAddMonitor={onAddMonitor} />
               </div>
             </div>
             <SubmitBlock name="Save" onClick={onHide}/>

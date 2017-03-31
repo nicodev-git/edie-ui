@@ -23,6 +23,7 @@ import FormCheckbox from './FormCheckbox'
 import Monitors from './Monitors'
 import MonitorTemplates from './MonitorTemplates'
 import CrudButtons from './CrudButtons'
+import HeaderWithCancel from './HeaderWithCancel'
 
 export {
     Header,
@@ -49,5 +50,6 @@ export {
     FormCheckbox,
     Monitors,
     MonitorTemplates,
-    CrudButtons
+    CrudButtons,
+    HeaderWithCancel
 }
