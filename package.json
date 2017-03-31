@@ -76,6 +76,7 @@
     "react-bootstrap-switch": "^15.0.3",
     "react-color": "^2.1.0",
     "react-cookie": "^0.4.5",
+    "react-custom-scrollbars": "^4.0.2",
     "react-datepicker": "^0.34.0",
     "react-dimensions": "^1.2.0",
     "react-dnd": "^2.1.4",
