@@ -29,7 +29,7 @@ class ParserTypes extends React.Component {
     }]
   }
   componentWillMount () {
-    this.props.fetchParserTypes()
+    // this.props.fetchParserTypes()
   }
 
   getTable () {
@@ -95,7 +95,7 @@ class ParserTypes extends React.Component {
             rowMetadata={{'key': 'id'}}
             selectable
             onRowDblClick={this.onClickEdit.bind(this)}
-
+            rowHeight={40}
             url="/parsertype"
             params={{
               draw: this.props.parserTypeDraw
