@@ -50,7 +50,7 @@ export const fetchIncidents = () => {
     return dispatch => dispatch({ type: NO_AUTH_ERROR })
   }
   return (dispatch) => {
-    axios.get(`${ROOT_URL}/incident?sort=startTimestamp,desc`, {params: {}})
+    axios.get(`${ROOT_URL}/incident/search/findBySeverity?severity=HIGH&severity=MEDIUM&sort=startTimestamp,desc`, {params: {}})
       .then(response => fetchIncidentsSuccess(dispatch, response))
       .catch(error => apiError(dispatch, error))
   }

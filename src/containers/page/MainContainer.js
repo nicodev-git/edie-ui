@@ -81,7 +81,7 @@ export default class MainContainer extends Component {
 
   onReceiveIncidents (msg) {
     console.log(msg)
-    if (msg && msg.length) {
+    if (msg && msg.length && (msg[0].severity === 'HIGH' || msg[0].severity === 'MEDIUM')) {
       this.props.addDashboardIncident(msg)
     }
   }
