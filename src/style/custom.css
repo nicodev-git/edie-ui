@@ -477,10 +477,10 @@ table.table tbody tr.selected {
 }
 
 .incident-button-value {
-  position: absolute;
-  top: 0;
-  left: 10px;
-  font-size: 24pt;
+    font-size: 24pt;
+    margin-left: 10px;
+    margin-right: 4px;
+    float: left;
 }
 
 .metric-container {

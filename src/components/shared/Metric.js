@@ -12,15 +12,13 @@ const labelStyle = {
 
 export const Metric = ({icon, value, title, onClick}) => (
   <FlatButton
-    label={title}
+    label={<span><span className="incident-button-value">{value}</span><span>{title}</span></span>}
     labelPosition="before"
     labelStyle={labelStyle}
     onTouchTap={onClick}
     icon={icon}
     style={style}
-  >
-    <div className="incident-button-value">{value}</div>
-  </FlatButton>
+  />
 )
 
 export default Metric
