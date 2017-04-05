@@ -203,7 +203,8 @@ class DeviceWizard extends Component {
     return (<Checkbox key={config.name}
       config={config}
       values={values}
-      buildLabel={this.buildLabel.bind(this)}/>)
+      buildLabel={this.buildLabel.bind(this)}
+      change={this.props.change}/>)
   }
 
   buildPortList (config, values) {
