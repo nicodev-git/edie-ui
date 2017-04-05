@@ -29,8 +29,8 @@ export default class ParamEditModalView extends Component {
               )}
             </div>
             <div className="form-column">
-              <Field name="Key" component={FormInput} label="Key"/>
-              <Field name="Value" component={FormInput} label="Value"/>
+              <Field name="key" component={FormInput} label="Key"/>
+              <Field name="value" component={FormInput} label="Value"/>
             </div>
             <SubmitBlock name="Save" onClick={onHide}/>
           </form>
