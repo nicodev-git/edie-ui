@@ -9,10 +9,6 @@ export default class Checkbox extends React.Component {
     this.state = {}
   }
 
-  onChange () {
-    console.log(arguments)
-  }
-
   render () {
     const {config} = this.props
 
@@ -27,7 +23,7 @@ export default class Checkbox extends React.Component {
     const field = (
       <div className={`col-md-${width}`} style={util.convertStyle(config.style)}>
         <label className="control-label">
-          <Field name={config.name} component={FormCheckbox} type="checkbox" label={label} className={config.cls} onChange={this.onChange.bind(this)}/>
+          <Field name={config.name} component={FormCheckbox} type="checkbox" label={label} className={config.cls}/>
         </label>
       </div>
     )

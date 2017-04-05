@@ -8,6 +8,7 @@ const FormCheckbox = ({input, label, meta: { touched, error }, ...custom}) => (
     labelPosition="left"
     labelStyle={checkboxStyle}
     iconStyle={checkboxStyle}
+    onCheck={(e) => input.onChange(e)}
     {...input}
     {...custom}
   />
