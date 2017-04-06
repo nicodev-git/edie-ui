@@ -199,6 +199,13 @@ class GenericSearch extends React.Component {
     }))
   }
 
+  onClickChip (index) {
+    const chip = this.props.queryChips[index]
+    const newQueryChips = this.props.queryChips.filter((p, i) => i !== index)
+    this.props.updateQueryChips(newQueryChips)
+    this.props.change('query', `${chip.name}=${chip.value}`)
+  }
+
   onClickRemoveChip (index) {
     const newQueryChips = this.props.queryChips.filter((p, i) => i !== index)
     this.props.updateQueryChips(newQueryChips)
@@ -407,7 +414,11 @@ class GenericSearch extends React.Component {
             <div className="inline">
               <div style={styles.wrapper}>
                 {this.props.queryChips.map((p, i) =>
-                  <Chip key={`${p.name}${p.value}`} style={styles.chip} onRequestDelete={this.onClickRemoveChip.bind(this, i)}>
+                  <Chip
+                    key={`${p.name}${p.value}`}
+                    style={styles.chip}
+                    onTouchTap={this.onClickChip.bind(this, i)}
+                    onRequestDelete={this.onClickRemoveChip.bind(this, i)}>
                     <b>{p.name}</b>: {p.value}
                   </Chip>
                 )}
