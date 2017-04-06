@@ -98,8 +98,8 @@ class GenericSearch extends React.Component {
 
   renderData (entity, isChildren, type) {
     let children = []
-    const allKeys = concat([], 'type', keys(entity))
-    const newEntity = assign({}, entity, {type})
+    const allKeys = type ? concat([], 'type', keys(entity)) : keys(entity)
+    const newEntity = type ? assign({}, entity, {type}) : entity
     allKeys.forEach((key, index) => {
       children.push(<span className="field-key">{key} = </span>)
       children = concat(children, this.renderValue(newEntity[key]))
