@@ -338,9 +338,9 @@ export const closeParserTypeModal = () => {
   }
 }
 
-export const openSimulationModal = () => {
+export const openSimulationModal = (data) => {
   return dispatch => {
-    dispatch({type: OPEN_SIMULATION_MODAL})
+    dispatch({type: OPEN_SIMULATION_MODAL, data})
   }
 }
 

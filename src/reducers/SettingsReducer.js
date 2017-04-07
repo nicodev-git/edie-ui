@@ -343,7 +343,7 @@ export default function (state = {}, action) {
       return { ...state, parserPatternModalOpen: false }
 
     case OPEN_SIMULATION_MODAL:
-      return { ...state, simulationModalOpen: true }
+      return { ...state, simulationModalOpen: true, editParserType: action.data }
 
     case CLOSE_SIMULATION_MODAL:
       return { ...state, simulationModalOpen: false }
