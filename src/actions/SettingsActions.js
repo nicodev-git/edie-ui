@@ -359,7 +359,7 @@ export const updateSimParserType = (data) => {
 export const matchFilter = (text, filter) => {
   return dispatch => {
     dispatch({type: UPDATE_MATCH_RESULT, data: ''})
-    axios.post('/parsertypes/matchfilter', {text, filter}).then(res => {
+    axios.post(`${ROOT_URL}/parsertypes/matchfilter`, {text, filter}).then(res => {
       dispatch({type: UPDATE_MATCH_RESULT, data: res.data ? 'True' : 'False'})
     }).catch(() => {
       dispatch({type: UPDATE_MATCH_RESULT, data: 'Error'})
@@ -370,7 +370,7 @@ export const matchFilter = (text, filter) => {
 export const parseFilter = (text, parserType) => {
   return dispatch => {
     dispatch({type: UPDATE_PARSE_RESULT, data: ''})
-    axios.post('/parsertypes/parse', {text, parserType}).then(res => {
+    axios.post(`${ROOT_URL}/parsertypes/parse`, {text, parserType}).then(res => {
       dispatch({type: UPDATE_PARSE_RESULT, data: res.data || {}})
     })
   }

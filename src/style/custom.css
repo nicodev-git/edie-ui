@@ -93,7 +93,7 @@ a, a:focus, a:hover {
 }
 
 .inline {
-    display: inline-block;
+    display: inline;
     position: relative;
 }
 

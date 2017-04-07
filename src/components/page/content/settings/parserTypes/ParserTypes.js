@@ -3,6 +3,7 @@ import {
   ButtonGroup,
   Button
 } from 'react-bootstrap'
+import { assign, concat } from 'lodash'
 
 import SettingTabs from '../SettingTabs'
 import TabPage from '../../../../shared/TabPage'
@@ -53,7 +54,23 @@ class ParserTypes extends React.Component {
   }
 
   onClickSimulation () {
-    this.props.openSimulationModal()
+    const selected = this.getTable().getSelected()
+    if (!selected) return showAlert('Please select parser type.')
+
+    let filterChips = selected.filters.split('.*|.*').filter(t => !!t)
+    if (filterChips.length > 1) {
+      filterChips = filterChips.map((t, i) => {
+        if (i === 0) return `${t}.*`
+        if (i === filterChips.length - 1) return `.*${t}`
+        return `.*${t}.*`
+      })
+    }
+
+    const type = assign({}, {
+      filterChips,
+      patterns: concat([], selected.patterns)
+    })
+    this.props.openSimulationModal(type)
   }
 
   renderParserTypeModal () {
