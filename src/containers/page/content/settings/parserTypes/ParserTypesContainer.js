@@ -17,7 +17,13 @@ import {
   closeParserPatternModal,
 
   openSimulationModal,
-  closeSimulationModal
+  closeSimulationModal,
+  matchFilter,
+  parseFilter,
+
+  showFilterEditModal,
+  showPatternEditModal,
+  updateSimParserType
 } from 'actions'
 
 @connect(
@@ -28,9 +34,16 @@ import {
 
     editParserType: state.settings.editParserType,
 
-    editPattern: state.settings.editParserPattern,
-    patternModalOpen: state.settings.parserPatternModalOpen,
-    simulationModalOpen: state.settings.simulationModalOpen
+    simulationModalOpen: state.settings.simulationModalOpen,
+
+    matchResult: state.parserType.matchResult,
+    parseResult: state.parserType.parseResult,
+
+    filterModalOpen: state.parserType.filterModalOpen,
+    editFilter: state.parserType.editFilter,
+
+    patternModalOpen: state.parserType.patternModalOpen,
+    editPattern: state.parserType.editPattern
   }),
   dispatch => ({
     ...bindActionCreators({
@@ -46,7 +59,13 @@ import {
       closeParserPatternModal,
 
       openSimulationModal,
-      closeSimulationModal
+      closeSimulationModal,
+      matchFilter,
+      parseFilter,
+
+      showFilterEditModal,
+      showPatternEditModal,
+      updateSimParserType
     }, dispatch)
   })
 )
