@@ -173,7 +173,7 @@ export function encodeUrlParams (obj) {
 export function parseSearchQuery (query) {
   const matches = query.match(/([^ ()]*)=([^ ()]*)/gi)
   if (!matches || !matches.length) {
-    if (query) return [{name: 'description', value: query}]
+    if (query) return [{name: '_all', value: query}]
     return []
   }
 

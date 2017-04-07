@@ -203,7 +203,9 @@ class GenericSearch extends React.Component {
     const chip = this.props.queryChips[index]
     const newQueryChips = this.props.queryChips.filter((p, i) => i !== index)
     this.props.updateQueryChips(newQueryChips)
-    this.props.change('query', `${chip.name}=${chip.value}`)
+
+    const query = chip.name === '_all' ? chip.value : `${chip.name}=${chip.value}`
+    this.props.change('query', query)
   }
 
   onClickRemoveChip (index) {
@@ -419,7 +421,7 @@ class GenericSearch extends React.Component {
                     style={styles.chip}
                     onTouchTap={this.onClickChip.bind(this, i)}
                     onRequestDelete={this.onClickRemoveChip.bind(this, i)}>
-                    <b>{p.name}</b>: {p.value}
+                    {p.name !== '_all' ? <b>{p.name}: </b> : null}{p.value}
                   </Chip>
                 )}
               </div>
