@@ -36,14 +36,14 @@ import {
 
     simulationModalOpen: state.settings.simulationModalOpen,
 
-    matchResult: state.parserType.matchResult,
-    parseResult: state.parserType.parseResult,
+    matchResult: state.settings.matchResult,
+    parseResult: state.settings.parseResult,
 
-    filterModalOpen: state.parserType.filterModalOpen,
-    editFilter: state.parserType.editFilter,
+    filterModalOpen: state.settings.filterModalOpen,
+    editFilter: state.settings.editFilter,
 
-    patternModalOpen: state.parserType.patternModalOpen,
-    editPattern: state.parserType.editPattern
+    patternModalOpen: state.settings.patternModalOpen,
+    editPattern: state.settings.editPattern
   }),
   dispatch => ({
     ...bindActionCreators({
