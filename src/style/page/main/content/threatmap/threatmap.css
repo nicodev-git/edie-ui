@@ -1,17 +1,11 @@
 #latestAttacksContainer {
-    position: absolute;
-    bottom: 5px;
-    z-index: 999999;
-    right: 5px;
+    position: relative;
     color: #fff;
 }
 #latestAttacksContainerLeft {
-    float: left;
     height: 8.25em;
     border-width: 1px 0px 1px 1px;
-    background-color: #1c1217;
-    padding: 0.5em;
-    width: 70em;
+    background-color: #45484F;
     overflow: hidden;
 }
 #latestAttacksContainerRight {
@@ -71,9 +65,10 @@
 }
 #latestAttacksContainerLeft #tableHeaderRow {
     display: table-row;
+    background: #858180;
 }
 #latestAttacksContainerLeft #tableHeaderRow div {
-    color: #e45785;
+    color: white;
 }
 .attackRow {
     display: table-row;
@@ -96,7 +91,7 @@
 .attackRow div, #latestAttacksContainerLeft #tableHeaderRow div {
     display: table-cell;
     font-size: .85em;
-    padding: 2px 10px;
+    padding: 15px 10px;
 }
 .attackRow div {
     padding: 1pt 10px;
@@ -211,16 +206,8 @@
 }
 
 .play-controls {
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
     height: 30px;
     display: none;
-}
-
-.slider-visible #latestAttacksContainer {
-    bottom: 30px;
 }
 
 .slider-visible .play-controls {
