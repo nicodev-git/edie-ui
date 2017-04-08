@@ -91,7 +91,10 @@ a, a:focus, a:hover {
 .fa-x {
     font-size: 22px;
 }
-
+.inline-block {
+    display: inline-block;
+    position: relative;
+}
 .inline {
     display: inline;
     position: relative;

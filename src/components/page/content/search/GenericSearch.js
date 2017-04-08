@@ -91,8 +91,10 @@ class GenericSearch extends React.Component {
       )
     }
 
+    const html = JSON.stringify(val).replace(/(\\t)|(\\r)|(\\n)/gi, ' ')
+
     return (
-      <span className="field-value" dangerouslySetInnerHTML={{ __html: JSON.stringify(val) }}/> // eslint-disable-line
+      <span className="field-value" dangerouslySetInnerHTML={{ __html: html }}/> // eslint-disable-line
     )
   }
 
@@ -413,7 +415,7 @@ class GenericSearch extends React.Component {
           />
 
           <div className="text-center">
-            <div className="inline">
+            <div className="inline-block">
               <div style={styles.wrapper}>
                 {this.props.queryChips.map((p, i) =>
                   <Chip
