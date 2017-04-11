@@ -75,9 +75,9 @@ class InfiniteTable extends React.Component {
       return
     }
 
-    page = clear ? 1 : (page || 1)
     const {url, params, pageSize} = this.props
-
+    if (!url) return
+    page = clear ? 1 : (page || 1)
     let urlParams = assign({
       page: page - 1,
       size: pageSize || 10

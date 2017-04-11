@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
-import Griddle from 'griddle-react'
 import TimeAgo from 'react-timeago'
 import moment from 'moment'
-import IncidentEventsModal from './IncidentEventsModal'
 import { thumbup, thumpdown, done, notdone,
   rawtext, reason } from '../../../../../style/materialStyles'
 import {
@@ -13,6 +11,7 @@ import {
   showIncidentComments
 } from '../../../../shared/incident/Incident'
 import ReactTooltip from 'react-tooltip'
+import InfiniteTable from 'components/shared/InfiniteTable'
 
 export default class IncidentTable extends Component {
   constructor (props) {
@@ -98,42 +97,22 @@ export default class IncidentTable extends Component {
     console.log(arguments)
   }
 
-  renderIncidentEventsModal () {
-    if (!this.props.incidentEventsModalOpen) return null
-    return (
-      <IncidentEventsModal {...this.props}/>
-    )
-  }
-
   render () {
     return (
-      <div style={{width: '100%', height: '100%', padding: '0px', border: '0px', overflow: 'auto'}}>
-        <Griddle
-          id={this.props.id}
-
-          enableSort={false}
-
-          columns={this.cells.map(item => item.columnName)}
-          columnMetadata={this.cells}
-
-          tableClassName="table table-hover"
-
-          useFixedHeader={false}
-          noDataMessage=""
-          useGriddleStyles={false}
-
-          bodyHeight={this.props.containerHeight}
-          rowMetadata={{'key': 'id'}}
+      <div style={{position: 'absolute', width: '100%', top: 0, bottom: 0, overflow: 'auto'}}>
+        <InfiniteTable
+          url="/incident/search/findBySeverity"
+          cells={this.cells}
           ref="table"
-          results={this.props.incidents}
-          resultsPerPage={100}
+          rowMetadata={{'key': 'id'}}
+          selectable
+          onRowDblClick={this.onRowDblClick.bind(this)}
+          params={{
+            severity: ['HIGH', 'MEDIUM'],
+            sort: 'startTimestamp,desc'
+          }}
         />
-        {this.renderIncidentEventsModal()}
       </div>
     )
   }
-}
-
-IncidentTable.defaultProps = {
-  incidents: []
 }
