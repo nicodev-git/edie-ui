@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import Griddle from 'griddle-react'
 import { concat, assign, isEqual, keys } from 'lodash'
-import Dimensions from 'react-dimensions'
+import ReduxInfiniteScroll from 'redux-infinite-scroll'
 
 import $ from 'jquery'
 import { encodeUrlParams } from 'shared/Global'
@@ -15,10 +15,9 @@ class InfiniteTable extends React.Component {
       currentPage: 0,
       isLoading: false,
       maxPages: 0,
-      externalSortColumn: null,
-      externalSortAscending: true,
       results: [],
       total: 0,
+      hasMore: true,
 
       selected: []
     }
@@ -31,9 +30,9 @@ class InfiniteTable extends React.Component {
   }
 
   componentDidMount () {
-    if (this.props.useExternal) {
-      this.getExternalData()
-    }
+    // if (this.props.useExternal) {
+    //   this.getExternalData()
+    // }
 
     this.domNode = ReactDOM.findDOMNode(this.refs.griddle)
     $(this.domNode).on('dblclick', 'tbody tr', (e) => {
@@ -66,7 +65,16 @@ class InfiniteTable extends React.Component {
     return this.props.useExternal ? this.state.results : this.props.data
   }
 
+  getCountPerPage () {
+    return Math.max(this.props.useExternal ? this.state.results.length : this.props.data.length, this.props.pageSize)
+  }
+
   getExternalData (page, clear) {
+    if (this.state.isLoading) {
+      console.log('Already loading.')
+      return
+    }
+
     page = clear ? 1 : (page || 1)
     const {url, params, pageSize} = this.props
 
@@ -88,23 +96,14 @@ class InfiniteTable extends React.Component {
         currentPage: page - 1,
         maxPages: res.page.totalPages,
         total: res.page.totalElements,
-        isLoading: false
+        isLoading: false,
+        hasMore: data.length > 0
       }
 
       this.setState(state)
     })
 
     return this.lastRequest
-  }
-
-  setPage (index) {
-        // This should interact with the data source to get the page at the given index
-    index = index > this.state.maxPages ? this.state.maxPages : index < 1 ? 1 : index + 1
-    this.getExternalData(index)
-  }
-
-  setPageSize (size) {
-
   }
 
   getBodyCssClassName (data) {
@@ -130,7 +129,7 @@ class InfiniteTable extends React.Component {
       selected: [row.props.data[this.props.rowMetadata.key]]
     }, () => {
       this.props.onRowDblClick &&
-            this.props.onRowDblClick(this.getSelected())
+      this.props.onRowDblClick(this.getSelected())
     })
   }
 
@@ -159,45 +158,47 @@ class InfiniteTable extends React.Component {
 
   refresh () {
     if (this.props.useExternal) {
+      this.setState({
+        hasMore: true
+      })
       this.getExternalData(1, true)
     }
   }
 
-  render () {
-    let rowMetadata = assign({}
+  loadMore () {
+    if (!this.state.hasMore) return
+    this.getExternalData(this.state.currentPage + 2)
+  }
+
+  getBodyHeight () {
+    return parseInt(this.props.bodyHeight || '0')
+  }
+
+  renderTable () {
+    const rowMetadata = assign({}
       , this.defaultRowMetaData
       , this.props.rowMetadata || {})
-    let rowHeight = this.props.rowHeight || 75
+    const bodyHeight = this.getBodyHeight()
     return (
       <Griddle
+        key="0"
         id={this.props.id}
-        useExternal={this.props.useExternal}
+        useExternal={false}
         enableSort={false}
-        enableInfiniteScroll
 
         columns={this.props.cells.map(item => item.columnName)}
         columnMetadata={this.props.cells}
         rowMetadata={rowMetadata}
-        rowHeight={rowHeight}
-        externalSetPage={this.setPage.bind(this)}
-        externalSetPageSize={this.setPageSize.bind(this)}
-        externalMaxPage={this.state.maxPages}
-        externalChangeSort={function () {}}
-        externalSetFilter={function () {}}
-        externalCurrentPage={this.state.currentPage}
-        externalSortColumn={this.state.externalSortColumn}
-        externalSortAscending={this.state.externalSortAscending}
-        externalLoadingComponent={() => <div>Loading...</div>}
-        externalIsLoading={this.state.isLoading}
+        rowHeight={this.props.rowHeight}
+        bodyHeight={bodyHeight || null}
 
         results={this.getCurrentData()}
-        resultsPerPage={this.props.pageSize}
+        resultsPerPage={this.getCountPerPage()}
 
         tableClassName="table table-hover table-panel"
 
         useFixedHeader={false}
         noDataMessage={this.props.noDataMessage}
-        bodyHeight={this.props.containerHeight || this.props.bodyHeight}
         useGriddleStyles={false}
 
         onRowClick={this.onRowClick.bind(this)}
@@ -206,6 +207,20 @@ class InfiniteTable extends React.Component {
         ref="griddle"
       />
     )
+  }
+
+  render () {
+    const table = this.renderTable()
+    if (!this.props.bodyHeight) {
+      return (
+        <ReduxInfiniteScroll
+          children={[table]}
+          loadMore={this.loadMore.bind(this)}
+          loadingMore={this.state.isLoading}
+        />
+      )
+    }
+    return table
   }
 }
 
@@ -219,11 +234,10 @@ InfiniteTable.defaultProps = {
 
   pageSize: 50,
   rowMetadata: {},
-  bodyHeight: 100,
+  rowHeight: 50,
 
   selectable: false,
   noDataMessage: ''
 }
 
-export const ResponsiveInfiniteTable = Dimensions()(InfiniteTable)
 export default InfiniteTable

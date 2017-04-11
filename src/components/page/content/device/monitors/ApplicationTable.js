@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import { ResponsiveInfiniteTable } from '../../../../shared/InfiniteTable'
+import InfiniteTable from '../../../../shared/InfiniteTable'
 
 export default class ApplicationTable extends Component {
   constructor (props) {
@@ -40,7 +40,7 @@ export default class ApplicationTable extends Component {
 
   render () {
     return (
-      <ResponsiveInfiniteTable
+      <InfiniteTable
         cells={this.columns}
         ref="table"
         rowMetadata={{'key': 'id'}}

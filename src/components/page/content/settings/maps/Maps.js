@@ -5,7 +5,6 @@ import {
 } from 'react-bootstrap'
 
 import InfiniteTable from '../../../../shared/InfiniteTable'
-const ResponsiveInfiniteTable = InfiniteTable
 import { appendComponent, removeComponent } from '../../../../../util/Component'
 import { showAlert, showConfirm } from '../../../../shared/Alert'
 
@@ -37,7 +36,7 @@ export default class Maps extends React.Component {
 
   renderContent () {
     return (
-      <ResponsiveInfiniteTable
+      <InfiniteTable
         cells={this.cells}
         ref="maps"
         rowMetadata={{'key': 'id'}}

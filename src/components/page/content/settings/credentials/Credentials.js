@@ -4,7 +4,7 @@ import {
   Button
 } from 'react-bootstrap'
 
-import { ResponsiveInfiniteTable } from '../../../../shared/InfiniteTable'
+import InfiniteTable from '../../../../shared/InfiniteTable'
 import { showAlert, showConfirm } from '../../../../shared/Alert'
 
 import CredentialModal from './CredentialModal'
@@ -39,7 +39,7 @@ export default class Credentials extends React.Component {
 
   renderContent () {
     return (
-      <ResponsiveInfiniteTable
+      <InfiniteTable
         cells={this.cells}
         ref="credentials"
         rowMetadata={{'key': 'id'}}
@@ -112,7 +112,7 @@ export default class Credentials extends React.Component {
               </ButtonGroup>
             </div>
 
-            <div className="inline">
+            <div className="inline-block">
               <input type="text" placeholder="Search" className="form-control"
                 style={{width: '220px', paddingLeft: '35px'}}
                 onKeyUp={this.onSearchKeyUp.bind(this)}/>

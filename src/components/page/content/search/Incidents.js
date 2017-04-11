@@ -9,7 +9,7 @@ import {
 } from 'react-bootstrap'
 
 import DateRangePicker from '../../../shared/DateRangePicker'
-import {ResponsiveInfiniteTable} from '../../../shared/InfiniteTable'
+import InfiniteTable from '../../../shared/InfiniteTable'
 
 import { getSeverityIcon } from '../../../../shared/Global'
 import SearchTabs from './SearchTabs'
@@ -166,7 +166,7 @@ export default class Incidents extends React.Component {
     }
 
     return (
-      <ResponsiveInfiniteTable
+      <InfiniteTable
         url="/incident/search/findBy"
         cells={this.cellIncidents}
         ref="table"

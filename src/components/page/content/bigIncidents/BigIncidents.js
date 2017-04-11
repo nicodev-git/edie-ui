@@ -11,7 +11,7 @@ import ReactTooltip from 'react-tooltip'
 
 import BigIncidentsView from '../../../modal/BigIncidentsView'
 
-import { ResponsiveInfiniteTable } from 'components/shared/InfiniteTable'
+import InfiniteTable from 'components/shared/InfiniteTable'
 
 const severities = [
   { label: 'High', value: 'HIGH' },
@@ -116,7 +116,7 @@ class BigIncidents extends Component {
 
   renderTable () {
     return (
-      <ResponsiveInfiniteTable
+      <InfiniteTable
         cells={this.cells}
         ref="table"
         rowMetadata={{'key': 'id'}}

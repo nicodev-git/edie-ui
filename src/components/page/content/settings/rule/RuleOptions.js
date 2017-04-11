@@ -106,7 +106,7 @@ export default class RuleOptions extends React.Component {
 
           </div>
 
-          <div className="inline">
+          <div className="inline-block">
             <input type="text" placeholder="Search" className="form-control"
               style={{width: '220px', paddingLeft: '35px'}}
               onKeyUp={this.onSearchKeyUp.bind(this)}

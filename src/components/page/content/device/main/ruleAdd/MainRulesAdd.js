@@ -5,7 +5,7 @@ import {
     Button
 } from 'react-bootstrap'
 
-import {ResponsiveInfiniteTable} from '../../../../../shared/InfiniteTable'
+import InfiniteTable from '../../../../../shared/InfiniteTable'
 import { showAlert } from '../../../../../shared/Alert'
 import TabPage from '../../../../../shared/TabPage'
 import TabPageBody from '../../../../../shared/TabPageBody'
@@ -64,7 +64,7 @@ export default class MainRulesAdd extends Component {
 
   renderTable () {
     return (
-      <ResponsiveInfiniteTable
+      <InfiniteTable
         id="rule2"
         cells={this.cells}
         ref="table"

@@ -9,7 +9,7 @@ import {
 
 import { appendComponent, removeComponent } from '../../../../../../util/Component'
 
-import { ResponsiveInfiniteTable } from '../../../../../shared/InfiniteTable'
+import InfiniteTable from '../../../../../shared/InfiniteTable'
 import IgnoreRuleEditModal from './IgnoreRuleEditModal'
 import SimulatorModal from './SimulatorModal'
 import { showAlert, showPrompt, showConfirm } from '../../../../../shared/Alert'
@@ -72,7 +72,7 @@ export default class MainRules extends React.Component {
 
   renderTable () {
     return (
-      <ResponsiveInfiniteTable
+      <InfiniteTable
         id="rule1"
         cells={this.cells}
         ref="table"

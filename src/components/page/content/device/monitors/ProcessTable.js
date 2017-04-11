@@ -1,7 +1,7 @@
 import React from 'react'
 import TimeAgo from 'react-timeago'
 
-import { ResponsiveInfiniteTable } from '../../../../shared/InfiniteTable'
+import InfiniteTable from '../../../../shared/InfiniteTable'
 
 export default class ProcessTable extends React.Component {
   constructor (props) {
@@ -53,7 +53,7 @@ export default class ProcessTable extends React.Component {
 
   render () {
     return (
-      <ResponsiveInfiniteTable
+      <InfiniteTable
         cells={this.columns}
         ref="table"
         rowMetadata={{'key': 'id'}}

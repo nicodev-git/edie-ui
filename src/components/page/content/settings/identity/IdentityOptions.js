@@ -37,7 +37,7 @@ export default class IdentityOptions extends React.Component {
             </ButtonGroup>
           </div>
 
-          <div className="inline">
+          <div className="inline-block">
             <input type="text" placeholder="Search" className="form-control"
               style={{width: '220px', paddingLeft: '35px'}}/>
             <a className="btn" href="javascript:;" style={{position: 'absolute', left: 0, top: 0}}>

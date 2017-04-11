@@ -4,7 +4,7 @@ import { assign, concat, debounce } from 'lodash'
 import ReactTooltip from 'react-tooltip'
 
 import MonitorWizardContainer from '../../../../../containers/shared/wizard/MonitorWizardContainer'
-import { ResponsiveInfiniteTable } from 'components/shared/InfiniteTable'
+import InfiniteTable from 'components/shared/InfiniteTable'
 
 import { appendComponent, removeComponent } from '../../../../../util/Component'
 import { showAlert } from '../../../../shared/Alert'
@@ -274,7 +274,7 @@ export default class MonitorTable extends Component {
       <MuiThemeProvider>
         <Provider store={store}>
           <div className="flex-1 flex-vertical">
-            <ResponsiveInfiniteTable
+            <InfiniteTable
               cells={this.columns}
               ref="table"
               rowMetadata={{'key': 'name'}}

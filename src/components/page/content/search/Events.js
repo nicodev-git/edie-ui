@@ -1,7 +1,7 @@
 import React from 'react'
 import moment from 'moment'
 
-import {ResponsiveInfiniteTable} from '../../../shared/InfiniteTable'
+import InfiniteTable from '../../../shared/InfiniteTable'
 
 import SearchTabs from './SearchTabs'
 import TabPage from '../../../shared/TabPage'
@@ -33,7 +33,7 @@ class Events extends React.Component {
 
   renderTable () {
     return (
-      <ResponsiveInfiniteTable
+      <InfiniteTable
         cells={this.cells}
         ref="table"
         rowMetadata={{'key': 'id'}}

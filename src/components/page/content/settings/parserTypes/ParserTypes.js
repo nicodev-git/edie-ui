@@ -10,7 +10,7 @@ import TabPage from '../../../../shared/TabPage'
 import TabPageBody from '../../../../shared/TabPageBody'
 import TabPageHeader from '../../../../shared/TabPageHeader'
 
-import { ResponsiveInfiniteTable } from '../../../../shared/InfiniteTable'
+import InfiniteTable from '../../../../shared/InfiniteTable'
 import ParserTypeModal from './ParserTypeModal'
 import SimulationModal from './SimulationModal'
 
@@ -106,7 +106,7 @@ class ParserTypes extends React.Component {
         </TabPageHeader>
 
         <TabPageBody tabs={SettingTabs} tab={8}>
-          <ResponsiveInfiniteTable
+          <InfiniteTable
             cells={this.cells}
             ref="table"
             rowMetadata={{'key': 'id'}}

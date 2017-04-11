@@ -3,7 +3,7 @@ import {
     Button
 } from 'react-bootstrap'
 
-import {ResponsiveInfiniteTable} from '../../../shared/InfiniteTable'
+import InfiniteTable from '../../../shared/InfiniteTable'
 
 import { showAlert } from '../../../shared/Alert'
 
@@ -33,7 +33,7 @@ export default class Devices extends Component {
 
   renderTable () {
     return (
-      <ResponsiveInfiniteTable
+      <InfiniteTable
         url="/device/search/findByName"
         params={{
           name: ''

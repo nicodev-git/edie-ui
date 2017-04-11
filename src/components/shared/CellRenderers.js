@@ -44,5 +44,5 @@ function renderData (entity, isChildren, path) {  // eslint-disable-line
     if (index < allKeys.length - 1) children.push(<div className="field-separator" key={`${path}-sep-${index}`}/>)
   })
   if (isChildren) return children
-  return <div className="inline">{children}</div>
+  return <div className="inline-block">{children}</div>
 }

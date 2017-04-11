@@ -5,7 +5,7 @@ import {
 } from 'react-bootstrap'
 import { assign } from 'lodash'
 
-import {ResponsiveInfiniteTable} from '../../../../shared/InfiniteTable'
+import InfiniteTable from '../../../../shared/InfiniteTable'
 
 import SettingTabs from '../SettingTabs'
 import TabPage from '../../../../shared/TabPage'
@@ -47,7 +47,7 @@ export default class Identities extends React.Component {
 
   renderContent () {
     return (
-      <ResponsiveInfiniteTable
+      <InfiniteTable
         cells={this.cells}
         ref="identities"
         rowMetadata={{'key': 'id'}}
@@ -122,7 +122,7 @@ export default class Identities extends React.Component {
               </ButtonGroup>
             </div>
 
-            <div className="inline">
+            <div className="inline-block">
               <input type="text" placeholder="Search" className="form-control"
                 style={{width: '220px', paddingLeft: '35px'}}/>
               <a className="btn" href="javascript:;" style={{position: 'absolute', left: 0, top: 0}}>

@@ -4,7 +4,7 @@ import {
   Button
 } from 'react-bootstrap'
 
-import { ResponsiveInfiniteTable } from '../../../../shared/InfiniteTable'
+import InfiniteTable from '../../../../shared/InfiniteTable'
 import { showAlert } from '../../../../shared/Alert'
 
 import SettingTabs from '../SettingTabs'
@@ -49,7 +49,7 @@ export default class Rules extends React.Component {
   renderContent () {
     const workflows = this.props.selectedWorkflowCategory ? this.props.workflows.filter(m => m.category === this.props.selectedWorkflowCategory) : this.props.workflows
     return (
-      <ResponsiveInfiniteTable
+      <InfiniteTable
         cells={this.cells}
         ref="logicalRules"
         rowMetadata={{'key': 'id'}}

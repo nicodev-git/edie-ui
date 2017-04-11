@@ -6,7 +6,7 @@ import moment from 'moment'
 import {Popover, FlatButton, Chip} from 'material-ui'
 import NavigationClose from 'material-ui/svg-icons/navigation/close'
 
-import InfiniteTable from 'components/shared/InfiniteTable3'
+import InfiniteTable from 'components/shared/InfiniteTable'
 import SearchTabs from './SearchTabs'
 import TabPage from '../../../shared/TabPage'
 import TabPageBody from '../../../shared/TabPageBody'
@@ -415,7 +415,7 @@ class GenericSearch extends React.Component {
           />
 
           <div className="text-center">
-            <div className="inline-block">
+            <div className="inline">
               <div style={styles.wrapper}>
                 {this.props.queryChips.map((p, i) =>
                   <Chip

@@ -3,7 +3,7 @@ import {
   ButtonGroup, Button
 } from 'react-bootstrap'
 
-import { ResponsiveInfiniteTable } from '../../../../../shared/InfiniteTable'
+import InfiniteTable from '../../../../../shared/InfiniteTable'
 import MainTabs from '../MainTabs'
 import TabPage from '../../../../../shared/TabPage'
 import TabPageBody from '../../../../../shared/TabPageBody'
@@ -66,7 +66,7 @@ export default class MainWorkflows extends React.Component {
   renderTable () {
     const { device, workflowListDraw } = this.props
     return (
-      <ResponsiveInfiniteTable
+      <InfiniteTable
         id="rule1"
         cells={this.cells}
         ref="table"

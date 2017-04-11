@@ -137,7 +137,7 @@ export default class MonitorLogOptions extends Component {
           </div>
         </div>
 
-        <div className="inline" style={{position: 'relative'}}>
+        <div className="inline-block" style={{position: 'relative'}}>
           <input
             type="text"
             placeholder="Search"

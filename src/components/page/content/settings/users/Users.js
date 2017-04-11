@@ -4,7 +4,7 @@ import {
     DropdownButton,
     MenuItem
 } from 'react-bootstrap'
-import { ResponsiveInfiniteTable } from '../../../../shared/InfiniteTable'
+import InfiniteTable from '../../../../shared/InfiniteTable'
 import { appendComponent, removeComponent } from '../../../../../util/Component'
 import { showAlert, showConfirm } from '../../../../shared/Alert'
 
@@ -60,7 +60,7 @@ export default class Users extends React.Component {
 
   renderContent () {
     return (
-      <ResponsiveInfiniteTable
+      <InfiniteTable
         cells={this.cells}
         ref="users"
         rowMetadata={{'key': 'id'}}

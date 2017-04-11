@@ -44,7 +44,7 @@ export default class General extends React.Component {
             text={this.getOptionValue('SYSTEM_NAME') || '[Empty]'}
             paramName="message"
             change={this.onChangeSysName.bind(this)}
-            className="inline"
+            className="inline-block"
             minLength={0}
           />
         </div>
@@ -64,7 +64,7 @@ export default class General extends React.Component {
             text={this.getOptionValue('DMZ', 'value2')}
             paramName="message"
             change={this.onChangeDmzIP.bind(this)}
-            className="inline"
+            className="inline-block"
             ref="dmzIp"
           />
         </div>
@@ -99,7 +99,7 @@ export default class General extends React.Component {
               text={this.getOptionValue('REMOTE_LOG_BATCH') || '[Empty]'}
               paramName="message"
               change={this.onChangeLogBatch.bind(this)}
-              className="inline"
+              className="inline-block"
             />
           </div>
         </div>
@@ -115,7 +115,7 @@ export default class General extends React.Component {
               text={this.getOptionValue('IMMOBILE')}
               paramName="message"
               change={this.onChangeMobileIP.bind(this)}
-              className="inline"
+              className="inline-block"
               ref="mobileIp"
               minLength={0}
             />
@@ -140,7 +140,7 @@ export default class General extends React.Component {
         text={this.getOptionValue('CUSTOMER_ID') || '[None]'}
         paramName="message"
         change={this.onChangeCustomerId.bind(this)}
-        className="inline"
+        className="inline-block"
         ref="mobileIp"
         minLength={0}
       />

@@ -180,7 +180,7 @@ export default class ThreatMap extends Component {
     let me = this
     let tx = new Date('2016-1-1 00:00:00') - 0
     return (
-            <div className="inline" style={{color: 'white'}}>
+            <div className="inline-block" style={{color: 'white'}}>
                 <span>{moment(tx + me.state.sliderPos * 1000).format('m:ss')}</span>
                 <span>/</span>
                 <span>{moment(tx + me.state.sliderMax * 1000).format('m:ss')}</span>
@@ -1417,7 +1417,7 @@ export default class ThreatMap extends Component {
           {this.renderInfoPopup()}
 
           <div className="play-controls">
-            <div className="inline">
+            <div className="inline-block">
               {
                 this.state.playing
                   ? (<a href="javascript:;" style={{padding: '2px'}}>

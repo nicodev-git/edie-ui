@@ -3,7 +3,7 @@ import moment from 'moment'
 import { findIndex, assign } from 'lodash'
 import TimeAgo from 'react-timeago'
 import ReactTooltip from 'react-tooltip'
-import { ResponsiveInfiniteTable } from '../../../../../shared/InfiniteTable'
+import InfiniteTable from '../../../../../shared/InfiniteTable'
 import { showAlert, showConfirm } from '../../../../../shared/Alert'
 import { getSeverityIcon } from '../../../../../../shared/Global'
 const encodeUrlParams = getSeverityIcon
@@ -159,7 +159,7 @@ export default class MainIncidents extends Component {
     })
 
     return (
-      <ResponsiveInfiniteTable
+      <InfiniteTable
         cells={this.cells}
         ref="table"
         rowMetadata={{'key': 'id'}}

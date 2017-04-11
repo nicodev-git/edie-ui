@@ -8,7 +8,7 @@ import {
 import { appendComponent, removeComponent } from '../../../../../../util/Component'
 import { showAlert, showConfirm } from '../../../../../shared/Alert'
 
-import { ResponsiveInfiniteTable } from '../../../../../shared/InfiniteTable'
+import InfiniteTable from '../../../../../shared/InfiniteTable'
 import MarkIgnoreModal from '../raw-incidents/MarkIgnoreModal'
 import SimulatorModal from '../rules/SimulatorModal'
 import DeviceWizardContainer from '../../../../../../containers/shared/wizard/DeviceWizardContainer'
@@ -90,7 +90,7 @@ export default class MainEvents extends Component {
   renderTable () {
     const {device} = this.props
     return (
-      <ResponsiveInfiniteTable
+      <InfiniteTable
         cells={this.cells}
         ref="table"
         rowMetadata={{'key': 'id'}}
@@ -261,7 +261,7 @@ export default class MainEvents extends Component {
             </div>
 
             <div style={{margin: '0 auto', position: 'relative', width: '550px', textAlign: 'center'}}>
-              <div className="inline" style={{position: 'relative'}}>
+              <div className="inline-block" style={{position: 'relative'}}>
                 <input type="text" placeholder="Search" className="form-control"
                   style={{width: '100%', paddingLeft: '35px'}}
                   onChange={this.onFilterChange.bind(this)}

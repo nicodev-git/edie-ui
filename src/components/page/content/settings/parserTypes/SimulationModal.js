@@ -192,7 +192,7 @@ class SimulationModal extends React.Component {
               <div className="margin-sm-top pull-left"><b>Result</b></div>
             </div>
             <div className="margin-sm-top">Match Result: {this.props.matchResult}</div>
-            <div><div className="inline">Parse Result:&nbsp;&nbsp;</div>{renderEntity(this.props.parseResult)}</div>
+            <div><div className="inline-block">Parse Result:&nbsp;&nbsp;</div>{renderEntity(this.props.parseResult)}</div>
 
             {this.renderButtons()}
           </form>

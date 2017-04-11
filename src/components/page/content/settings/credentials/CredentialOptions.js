@@ -38,7 +38,7 @@ export default class CredentialOptions extends Component {
             </ButtonGroup>
           </div>
 
-          <div className="inline">
+          <div className="inline-block">
             <input type="text" placeholder="Search" className="form-control"
               style={{width: '220px', paddingLeft: '35px'}}
               onKeyUp={this.onSearchKeyUp.bind(this)}/>
