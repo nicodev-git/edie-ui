@@ -19,7 +19,7 @@ export default function (state = {}, action) {
     case INVALIDATE_USER:
       return { ...state, error: '', authenticated: false }
     case NO_AUTH_ERROR:
-      return { ...state, error: 'No Auth', authenticated: false }
+      return { ...state, error: '', authenticated: false }
     case AUTH_ERROR:
       return { ...state, error: action.msg }
     case FETCH_MESSAGE:
