@@ -6,7 +6,7 @@ import moment from 'moment'
 import {Popover, FlatButton, Chip} from 'material-ui'
 import NavigationClose from 'material-ui/svg-icons/navigation/close'
 
-import {ResponsiveInfiniteTable} from '../../../shared/InfiniteTable'
+import InfiniteTable from 'components/shared/InfiniteTable3'
 import SearchTabs from './SearchTabs'
 import TabPage from '../../../shared/TabPage'
 import TabPageBody from '../../../shared/TabPageBody'
@@ -441,16 +441,16 @@ class GenericSearch extends React.Component {
               {this.renderFields()}
               {this.renderFieldPopover()}
             </div>
-            <div className="flex-1 flex-vertical">
-              <ResponsiveInfiniteTable
+            <div className="flex-1">
+              <InfiniteTable
                 url="/search/all"
                 cells={this.cells}
-                rowHeight={200}
                 ref="table"
                 rowMetadata={{'key': 'id'}}
                 selectable
                 onRowDblClick={this.onRowDblClick.bind(this)}
                 params={this.props.params}
+                pageSize={10}
               />
             </div>
           </div>

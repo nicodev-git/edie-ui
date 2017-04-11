@@ -342,6 +342,7 @@ table.table tbody tr.selected {
 .flex-1,
 .flex-vertical > .tab-content {
     flex: 1;
+    position: relative;
 }
 
 /* Search */
@@ -1089,4 +1090,11 @@ table.table tbody tr.selected {
   height: 36px;
   border-radius: 2px;
   box-shadow: rgba(0, 0, 0, 0.117647) 0px 1px 6px, rgba(0, 0, 0, 0.117647) 0px 1px 4px;
+}
+
+
+.redux-infinite-scroll {
+    position: absolute;
+    width: 100%;
+    overflow: auto;
 }

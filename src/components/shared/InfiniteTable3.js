@@ -2,7 +2,6 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import Griddle from 'griddle-react'
 import { concat, assign, isEqual, keys } from 'lodash'
-import Dimensions from 'react-dimensions'
 import ReduxInfiniteScroll from 'redux-infinite-scroll'
 
 import $ from 'jquery'
@@ -16,8 +15,6 @@ class InfiniteTable extends React.Component {
       currentPage: 0,
       isLoading: false,
       maxPages: 0,
-      externalSortColumn: null,
-      externalSortAscending: true,
       results: [],
       total: 0,
 
@@ -32,9 +29,9 @@ class InfiniteTable extends React.Component {
   }
 
   componentDidMount () {
-    if (this.props.useExternal) {
-      this.getExternalData()
-    }
+    // if (this.props.useExternal) {
+    //   this.getExternalData()
+    // }
 
     this.domNode = ReactDOM.findDOMNode(this.refs.griddle)
     $(this.domNode).on('dblclick', 'tbody tr', (e) => {
@@ -67,7 +64,16 @@ class InfiniteTable extends React.Component {
     return this.props.useExternal ? this.state.results : this.props.data
   }
 
+  getCountPerPage () {
+    return Math.max(this.props.useExternal ? this.state.results.length : this.props.data.length, this.props.pageSize)
+  }
+
   getExternalData (page, clear) {
+    if (this.state.isLoading) {
+      console.log('Already loading.')
+      return
+    }
+
     page = clear ? 1 : (page || 1)
     const {url, params, pageSize} = this.props
 
@@ -96,16 +102,6 @@ class InfiniteTable extends React.Component {
     })
 
     return this.lastRequest
-  }
-
-  setPage (index) {
-    // This should interact with the data source to get the page at the given index
-    index = index > this.state.maxPages ? this.state.maxPages : index < 1 ? 1 : index + 1
-    this.getExternalData(index)
-  }
-
-  setPageSize (size) {
-
   }
 
   getBodyCssClassName (data) {
@@ -164,43 +160,39 @@ class InfiniteTable extends React.Component {
     }
   }
 
+  loadMore () {
+    this.getExternalData(this.state.currentPage + 2)
+  }
 
+  getBodyHeight () {
+    return parseInt(this.props.bodyHeight || '0')
+  }
 
   renderTable () {
-    let rowMetadata = assign({}
+    const rowMetadata = assign({}
       , this.defaultRowMetaData
       , this.props.rowMetadata || {})
-    let rowHeight = this.props.rowHeight || 75
+    const bodyHeight = this.getBodyHeight()
     return (
       <Griddle
+        key="0"
         id={this.props.id}
-        useExternal={this.props.useExternal}
+        useExternal={false}
         enableSort={false}
-        enableInfiniteScroll
 
         columns={this.props.cells.map(item => item.columnName)}
         columnMetadata={this.props.cells}
         rowMetadata={rowMetadata}
-        rowHeight={rowHeight}
-        externalSetPage={this.setPage.bind(this)}
-        externalSetPageSize={this.setPageSize.bind(this)}
-        externalMaxPage={this.state.maxPages}
-        externalChangeSort={function () {}}
-        externalSetFilter={function () {}}
-        externalCurrentPage={this.state.currentPage}
-        externalSortColumn={this.state.externalSortColumn}
-        externalSortAscending={this.state.externalSortAscending}
-        externalLoadingComponent={() => <div>Loading...</div>}
-        externalIsLoading={this.state.isLoading}
+        rowHeight={this.props.rowHeight}
+        bodyHeight={bodyHeight || null}
 
         results={this.getCurrentData()}
-        resultsPerPage={this.props.pageSize}
+        resultsPerPage={this.getCountPerPage()}
 
         tableClassName="table table-hover table-panel"
 
         useFixedHeader={false}
         noDataMessage={this.props.noDataMessage}
-        bodyHeight={this.props.containerHeight || this.props.bodyHeight}
         useGriddleStyles={false}
 
         onRowClick={this.onRowClick.bind(this)}
@@ -212,7 +204,15 @@ class InfiniteTable extends React.Component {
   }
 
   renderInfiniteScroll (table) {
-
+    const bodyHeight = this.getBodyHeight()
+    return (
+      <ReduxInfiniteScroll
+        containerHeight={bodyHeight || '100%'}
+        children={[table]}
+        loadMore={this.loadMore.bind(this)}
+        loadingMore={this.state.isLoading}
+      />
+    )
   }
 
   render () {
@@ -220,9 +220,8 @@ class InfiniteTable extends React.Component {
 
     const table = this.renderTable()
     if (useExternal) {
-
+      return this.renderInfiniteScroll(table)
     }
-
     return table
   }
 }
@@ -237,11 +236,11 @@ InfiniteTable.defaultProps = {
 
   pageSize: 50,
   rowMetadata: {},
-  bodyHeight: 100,
+  rowHeight: 50,
 
   selectable: false,
   noDataMessage: ''
 }
 
-export const ResponsiveInfiniteTable = Dimensions()(InfiniteTable)
+export const ResponsiveInfiniteTable = InfiniteTable
 export default InfiniteTable
