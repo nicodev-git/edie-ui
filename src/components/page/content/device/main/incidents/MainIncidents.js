@@ -1,14 +1,33 @@
 import React, { Component } from 'react'
 import moment from 'moment'
-import { findIndex, assign } from 'lodash'
+import { findIndex } from 'lodash'
+import Select from 'react-select'
+import {
+  DropdownButton,
+  ButtonGroup,
+  MenuItem,
+  Button
+} from 'react-bootstrap'
 import TimeAgo from 'react-timeago'
 import ReactTooltip from 'react-tooltip'
+
+import DateRangePicker from '../../../../../shared/DateRangePicker'
 import InfiniteTable from '../../../../../shared/InfiniteTable'
+import AddIncidentModal from './AddIncidentModal'
+import AddExceptionModal from './AddExceptionModal'
+import CommentsModal from '../../../../../shared/incident/CommentsModal'
+
 import { showAlert, showConfirm } from '../../../../../shared/Alert'
 import { getSeverityIcon } from '../../../../../../shared/Global'
 const encodeUrlParams = getSeverityIcon
-import { showIncidentDetail, showIncidentRaw } from '../../../../../shared/incident/Incident'
-import MainIncidentsView from './MainIncidentsView'
+import MainTabs from '../MainTabs'
+import TabPage from '../../../../../shared/TabPage'
+import TabPageBody from '../../../../../shared/TabPageBody'
+import TabPageHeader from '../../../../../shared/TabPageHeader'
+import {
+  showIncidentDetail,
+  showIncidentRaw
+} from '../../../../../shared/incident/Incident'
 
 export default class MainIncidents extends Component {
   constructor (props) {
@@ -25,13 +44,13 @@ export default class MainIncidents extends Component {
       ],
 
       selectedSeverity: ['HIGH', 'MEDIUM'],
+
       selectedIndex: -1,
-      selectedItem: 'Any',
       currentSortCol: 'startTimestamp',
       currentSortDir: 'desc',
+
       openExceptionModal: false,
       commentModalVisible: false,
-      isMore: false,
       params: {}
     }
 
@@ -85,27 +104,23 @@ export default class MainIncidents extends Component {
             &nbsp;
 
             <a href="javascript:;" onClick={() => { props.ackIncident(row) }}>
-              <img style={{height: '30px'}} title="Acknowledge"
-                src={`/images/${row.acknowledged ? 'ack.png' : 'noack.png'}`} />
+              <img style={{height: '30px'}} title="Acknowledge" src={`/images/${row.acknowledged ? 'ack.png' : 'noack.png'}`} />
             </a>
             &nbsp;
 
             <a href="javascript:;" onClick={() => { props.fixIncident(row) }}>
-              <img style={{height: '30px'}} title="Acknowledge"
-                src={`/images/${row.fixed ? 'ok.png' : 'notok.png'}`} />
+              <img style={{height: '30px'}} title="Acknowledge" src={`/images/${row.fixed ? 'ok.png' : 'notok.png'}`} />
             </a>
             &nbsp;
 
-            <button className="btn btn-primary btn-xs"
-              onClick={showIncidentRaw.bind(null, row)}>Raw</button>
+            <button className="btn btn-primary btn-xs" onClick={showIncidentRaw.bind(null, row)}>Raw</button>
             &nbsp;
 
             {
               (row.fixed & !row.whathappened)
                 ? <a href="javascript:;" onClick={this.showIncidentComments.bind(this, row)}>
-                    <img style={{height: '25px'}} title="Reason"
-                      src={`/images/${row.lastcomment ? 'reason-icon.png' : 'reason-x.png'}`} />
-                  </a>
+                <img style={{height: '25px'}} title="Reason" src={`/images/${row.lastcomment ? 'reason-icon.png' : 'reason-x.png'}`} />
+              </a>
                 : null
             }
 
@@ -113,27 +128,13 @@ export default class MainIncidents extends Component {
         )
       }
     }]
-        // ///////////////////////////////////////
+    // ///////////////////////////////////////
 
     this.onFilterChange = this.onFilterChange.bind(this)
   }
 
   componentDidMount () {
     this.onFilterChange()
-  }
-
-  openMore (event) {
-    event.preventDefault()
-    this.setState({
-      anchorEl: event.currentTarget,
-      isMore: true
-    })
-  }
-
-  closeMore () {
-    this.setState({
-      isMore: false
-    })
   }
 
   renderColHeader (col) {
@@ -154,9 +155,7 @@ export default class MainIncidents extends Component {
   }
 
   renderTable () {
-    const params = assign({}, this.state.params, {
-      draw: this.props.incidentDraw
-    })
+    const params = this.getParams()
 
     return (
       <InfiniteTable
@@ -229,59 +228,40 @@ export default class MainIncidents extends Component {
     })
   }
 
-  onCloseCommentsModal () {
-    this.setState({
-      commentModalVisible: false
-    })
-  }
-
   onClickPDF () {
     const params = this.getParams()
-    let url = `/incident/pdf?${
-             encodeUrlParams(params)}`
+    let url = `/pdfIncidents?${
+      encodeUrlParams(params)}`
     window.open(url, '_blank')
   }
 
-  onChangeSeverity (event, index, selected) {
-    /* this.setState({
-      selectedSeverity: selected.map(item => item.value)
-    }, this.onFilterChange) */
+  onChangeSeverity (selected) {
     this.setState({
-      selectedSeverity: selected,
+      selectedSeverity: selected.map(item => item.value)
+    }, this.onFilterChange)
+  }
+
+  onFilterChange () {
+    this.setState({
       params: this.getParams()
     })
   }
 
-  onFilterChange (event, index, value) {
-    this.setState({
-      params: this.getParams(),
-      selectedItem: value
-    })
-  }
-
-  onSearch (value) {
-    this.setState({
-      searchValue: value
-    })
-  }
-
   getParams () {
-    const dp = this.refs.dp
-    const { currentSortCol, currentSortDir, selectedSeverity,
-      searchValue, selectedItem} = this.state
+    const refs = this.refs
+    const {search, fixed, dp} = refs
+    const { currentSortCol, currentSortDir, selectedSeverity } = this.state
+
+    const time = new Date()
     let params = {
-      description: searchValue || '""',
+      description: (search ? search.value : '') || '""',
       severity: selectedSeverity,
-      afterStartTimestamp: dp ? dp.getStartDate().valueOf() : 1454256000000,
-      beforeStartTimestamp: dp ? dp.getEndDate().valueOf() : (new Date()).getTime(),
+      afterStartTimestamp: dp ? dp.getStartDate().valueOf() : new Date(time.getYear() + 1900, 0, 1).getTime(),
+      beforeStartTimestamp: dp ? dp.getEndDate().valueOf() : time.getTime(),
       deviceid: this.props.device.id,
       sort: `${currentSortCol},${currentSortDir}`
     }
-    if (selectedItem === 'Fixed') {
-      params.fixed = true
-    } else if (selectedItem === 'Unfixed') {
-      params.fixed = false
-    }
+    if (fixed && fixed.value) params.fixed = fixed.value
 
     return params
   }
@@ -298,30 +278,111 @@ export default class MainIncidents extends Component {
   }
 
   render () {
-    let table = this.renderTable()
+    const {device, incidents} = this.props
+    const {selectedIndex} = this.state
+
+    let selectedIncident = selectedIndex < 0 ? null : incidents[selectedIndex]
+
     return (
-      <MainIncidentsView
-        selectedSeverity={this.state.selectedSeverity}
-        severities={this.state.severities}
-        selectedIndex={this.state.selectedIndex}
-        selectedItem={this.state.selectedItem}
-        onChangeSeverity={this.onChangeSeverity.bind(this)}
-        onFilterChange={this.onFilterChange}
-        onClickOpen={this.onClickOpen.bind(this)}
-        onClickFixAll={this.onClickFixAll.bind(this)}
-        onClickAddIncident={this.onClickAddIncident.bind(this)}
-        onClickAddException={this.onClickAddException.bind(this)}
-        onClickPDF={this.onClickPDF.bind(this)}
-        onCloseExceptionModal={this.onCloseExceptionModal.bind(this)}
-        onCloseCommentsModal={this.onCloseCommentsModal.bind(this)}
-        openExceptionModal={this.state.openExceptionModal}
-        table={table}
-        isMore={this.state.isMore}
-        anchorEl={this.state.anchorEl}
-        openMore={this.openMore.bind(this)}
-        closeMore={this.closeMore.bind(this)}
-        {...this.props}
-      />
+      <TabPage>
+        <TabPageHeader title={device.name}>
+          <div className="text-center margin-md-top">
+
+            <div className="pull-left">
+              <div className="form-inline">
+                <Select
+                  value={this.state.selectedSeverity.join(',')}
+                  options={this.state.severities}
+                  onChange={this.onChangeSeverity.bind(this)}
+                  multi
+                  clearable={false}
+                  className="select-severity"
+                  style={{minWidth: '85px'}}
+                  searchable={false}
+                  autosize={false}
+                  backspaceRemoves={false}
+                />
+
+                <select
+                  className="fixtype form-control inline-block text-primary margin-md-left"
+                  style={{maxWidth: '150px'}}
+                  onChange={this.onFilterChange}
+                  ref="fixed" defaultValue="false">
+                  <option value="">Any</option>
+                  <option value="false">Unfixed</option>
+                  <option value="true">Fixed</option>
+                </select>
+
+                <DateRangePicker
+                  onClickRange={this.onFilterChange} className="margin-md-left"
+                  default={moment().startOf('years').format('YYYY')} ref="dp">
+                  <i className="fa fa-caret-down margin-xs-left" />
+                </DateRangePicker>
+
+                <a href="javascript:;" title="Export" style={{display: 'none'}}><img
+                  width="26" src="/images/btn-export.jpg"/></a>
+              </div>
+            </div>
+
+            <div className="pull-right">
+              <ButtonGroup>
+
+                <Button onClick={this.onClickOpen.bind(this)}>Open</Button>
+
+                <Button onClick={this.onClickFixAll.bind(this)}>Fix All</Button>
+
+                <DropdownButton title="More" id="dd-dev-incidents" pullRight>
+
+                  <MenuItem eventKey="1" onClick={this.onClickAddIncident.bind(this)}>
+                    Add Incident
+                  </MenuItem>
+
+                  <MenuItem eventKey="2" onClick={this.onClickAddException.bind(this)}>
+                    Add Exception
+                  </MenuItem>
+
+                  <MenuItem eventKey="3" onClick={this.onClickPDF.bind(this)}>
+                    Export PDF
+                  </MenuItem>
+
+                </DropdownButton>
+
+              </ButtonGroup>
+            </div>
+
+            <div style={{margin: '0 auto', position: 'relative', display: 'inline-block', textAlign: 'center'}}>
+              <div className="inline-block" style={{position: 'relative'}}>
+                <input
+                  type="text" placeholder="Search" className="form-control"
+                  style={{width: '100%', paddingLeft: '35px'}}
+                  onChange={this.onFilterChange}
+                  ref="search"/>
+                <a className="btn" href="javascript:;" style={{position: 'absolute', left: 0, top: 0}}>
+                  <i className="fa fa-search" /></a>
+              </div>
+            </div>
+          </div>
+        </TabPageHeader>
+
+        <TabPageBody tabs={MainTabs(device.id)} tab={0}>
+          {this.renderTable()}
+          {this.props.addIncidentModalVisible &&
+          <AddIncidentModal {...this.props} open device={this.props.device}/>}
+          {this.state.openExceptionModal &&
+          <AddExceptionModal
+            open incident={selectedIncident}
+            onClose={this.onCloseExceptionModal.bind(this)}/>}
+
+          {this.state.commentModalVisible &&
+          <CommentsModal
+            incident={selectedIncident}
+            onClose={() => {
+              this.setState({commentModalVisible: false})
+            }}/>}
+
+          <ReactTooltip />
+        </TabPageBody>
+      </TabPage>
     )
   }
 }
