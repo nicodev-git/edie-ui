@@ -7,7 +7,6 @@ export default class Settings extends React.Component {
     super(props)
     this.state = {}
   }
-
   componentWillMount () {
     if (!this.props.children) {
       this.props.router.replace('/settings/general')
