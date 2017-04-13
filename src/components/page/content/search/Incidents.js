@@ -31,6 +31,18 @@ export default class Incidents extends React.Component {
   constructor (props) {
     super(props)
 
+    const {filterType} = props.location.state
+    const today = new Date()
+    let afterStartTimestamp = ''
+    let beforeStartTimestamp = ''
+    if (filterType === 'today') {
+      afterStartTimestamp = new Date(1900 + today.getYear(), today.getMonth(), today.getDate()).getTime()
+      beforeStartTimestamp = new Date(1900 + today.getYear(), today.getMonth(), today.getDate() + 1).getTime() - 1
+    } else if (filterType === 'month') {
+      afterStartTimestamp = new Date(1900 + today.getYear(), today.getMonth(), 1).getTime()
+      beforeStartTimestamp = new Date(1900 + today.getYear(), today.getMonth() + 1, 1).getTime() - 1
+    }
+
     this.state = {
 
       severities: [
@@ -43,8 +55,8 @@ export default class Incidents extends React.Component {
 
       selectedSeverity: ['HIGH', 'MEDIUM'],
       selectedDevices: [],
-      afterStartTimestamp: '',
-      beforeStartTimestamp: '',
+      afterStartTimestamp,
+      beforeStartTimestamp,
       fixed: false,
       search: '',
 
