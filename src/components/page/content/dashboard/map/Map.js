@@ -537,16 +537,11 @@ class Map extends React.Component {
       return
     }
 
-    let item = '' // eslint-disable-line no-unused-vars
     let name = '' // eslint-disable-line no-unused-vars
     let {data} = object
     if (object.objectType === MapItemType.Device) { // eslint-disable-line no-undef
-      item = 'device'
       name = `Name: ${object.data.name}`
-    } else if (object.objectType === MapItemType.BI) { // eslint-disable-line no-undef
-      item = 'bi'
-    } else if (object.objectType === MapItemType.Shape) { // eslint-disable-line no-undef
-      item = 'connection'
+    } else if (object.objectType === MapItemType.Shape && object.objectSubType !== MapItemType.ShapeHub) { // eslint-disable-line no-undef
       data = this.findMapLine(object.id)
     }
 
