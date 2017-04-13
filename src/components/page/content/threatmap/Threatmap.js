@@ -147,15 +147,15 @@ export default class ThreatMap extends Component {
       transform: 'translate(-50%, -50%)',
       cursor: 'pointer',
       padding: '2px',
-      border: '2px solid #ed5565',
+      border: '2px solid #94EE2E',
       borderRadius: '3px',
-      background: '#ed5565',
+      background: '#94EE2E',
       fontSize: '14px',
       textAlign: 'center',
       zIndex: 3,
 
-      minHeight: '20px',
-      marginTop: '2px'
+      minHeight: '24px',
+      marginTop: '3px'
     }
 
     const CustomHandle = props => {
@@ -180,11 +180,11 @@ export default class ThreatMap extends Component {
     let me = this
     let tx = new Date('2016-1-1 00:00:00') - 0
     return (
-            <div className="inline-block" style={{color: 'white'}}>
-                <span>{moment(tx + me.state.sliderPos * 1000).format('m:ss')}</span>
-                <span>/</span>
-                <span>{moment(tx + me.state.sliderMax * 1000).format('m:ss')}</span>
-            </div>
+      <div className="inline-block valign-middle margin-md-left margin-md-right" style={{color: 'white'}}>
+          <span>{moment(tx + me.state.sliderPos * 1000).format('m:ss')}</span>
+          <span>/</span>
+          <span>{moment(tx + me.state.sliderMax * 1000).format('m:ss')}</span>
+      </div>
     )
   }
 
@@ -1389,7 +1389,9 @@ export default class ThreatMap extends Component {
 
         </div>
         <div style={{position: 'relative'}} className={`flex-1 flex-vertical ${(this.state.history || this.state.mode === 'demo') ? 'slider-visible' : ''}`}>
-          <div ref="mapDiv" className="flex-1" />
+          <div className="flex-1" style={{position: 'relative'}}>
+            <div ref="mapDiv" style={{position: 'absolute', left: 0, right: 0, top: 0, bottom: 0}}/>
+          </div>
 
           <div id="latestAttacksContainer">
             <div id="latestAttacksContainerLeft" className="pinkBorder">
@@ -1413,15 +1415,15 @@ export default class ThreatMap extends Component {
                 {
                   this.state.playing
                     ? (<a href="javascript:;" style={{padding: '2px'}}>
-                    <img src="/images/btn_pause.png" style={{width: '23px'}} onClick={this.onClickPause.bind(this)}/>
+                    <img src="/images/btn_pause.png" width="32" onClick={this.onClickPause.bind(this)}/>
                   </a>)
                     : (<a href="javascript:;" style={{padding: '2px'}}>
-                    <img src="/images/btn_play.png" style={{width: '23px'}} onClick={this.onClickPlay.bind(this)}/>
+                    <img src="/images/btn_play.png" width="32" onClick={this.onClickPlay.bind(this)}/>
                   </a>)
                 }
 
                 <a href="javascript:;" style={{padding: '2px'}}>
-                  <img src="/images/btn_stop.png" style={{width: '23px'}} onClick={this.onClickStop.bind(this)}/>
+                  <img src="/images/btn_stop.png" width="32" onClick={this.onClickStop.bind(this)}/>
                 </a>
 
                 {this.renderTime()}
@@ -1429,7 +1431,7 @@ export default class ThreatMap extends Component {
               </div>
               <div className="incident-time hidden" style={{color: 'white', paddingTop: '3px'}} />
 
-              <div className="play-timeline" style={{flex: 1, padding: '9px 20px'}}>
+              <div className="play-timeline" style={{flex: 1, padding: '12px'}}>
                 {this.renderSlider()}
               </div>
             </div>

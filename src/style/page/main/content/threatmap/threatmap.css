@@ -1,6 +1,6 @@
 #latestAttacksContainer {
     position: relative;
-    color: #fff;
+    color: #DEDFE0;
     background-color: #45484F;
 }
 #latestAttacksContainerLeft {
@@ -91,7 +91,7 @@
 #latestAttacksContainerLeft #tableHeaderRow div {
     display: table-cell;
     font-size: .85em;
-    padding: 15px;
+    padding: 20px 15px;
 }
 .attackRow div {
     display: table-cell;
@@ -198,18 +198,22 @@
 }
 
 .play-controls {
-    height: 30px;
     display: none;
     border-top: 1px solid #555;
     margin: 0 8px;
+    padding: 15px 0;
 }
 
 .slider-visible .play-controls {
     display: flex;
 }
 
+.play-controls .rc-slider,
+.play-controls .rc-slider-track{
+    height: 6px;
+}
 .play-controls .rc-slider-track {
-    background-color: #ed5565;
+    background-color: #94EE2E;
 }
 
 .example-appear {
