@@ -8,7 +8,7 @@ import {
   Button
 } from 'react-bootstrap'
 
-import DateRangePicker from '../../../shared/DateRangePicker'
+import DateRangePicker2 from '../../../shared/DateRangePicker2'
 import InfiniteTable from '../../../shared/InfiniteTable'
 
 import { getSeverityIcon } from '../../../../shared/Global'
@@ -32,15 +32,17 @@ export default class Incidents extends React.Component {
     super(props)
 
     const {filterType} = props.location.state
-    const today = new Date()
     let afterStartTimestamp = ''
     let beforeStartTimestamp = ''
     if (filterType === 'today') {
-      afterStartTimestamp = new Date(1900 + today.getYear(), today.getMonth(), today.getDate()).getTime()
-      beforeStartTimestamp = new Date(1900 + today.getYear(), today.getMonth(), today.getDate() + 1).getTime() - 1
+      afterStartTimestamp = moment().valueOf()
+      beforeStartTimestamp = afterStartTimestamp
     } else if (filterType === 'month') {
-      afterStartTimestamp = new Date(1900 + today.getYear(), today.getMonth(), 1).getTime()
-      beforeStartTimestamp = new Date(1900 + today.getYear(), today.getMonth() + 1, 1).getTime() - 1
+      afterStartTimestamp = moment().startOf('month').valueOf()
+      beforeStartTimestamp = moment().endOf('month').valueOf()
+    } else {
+      afterStartTimestamp = moment().startOf('year').valueOf()
+      beforeStartTimestamp = moment().endOf('year').valueOf()
     }
 
     this.state = {
@@ -141,10 +143,6 @@ export default class Incidents extends React.Component {
     }]
   }
 
-  componentDidMount () {
-    this.onChangeRange()
-  }
-
   renderDeviceSearch () {
     const {selectedDevices} = this.state
     let label = 'All Devices'
@@ -217,11 +215,10 @@ export default class Incidents extends React.Component {
     })
   }
 
-  onChangeRange (e) {
-    const {dp} = this.refs
+  onChangeRange ({startDate, endDate}) {
     this.setState({
-      afterStartTimestamp: dp.getStartDate().valueOf(),
-      beforeStartTimestamp: dp.getEndDate().valueOf()
+      afterStartTimestamp: startDate.valueOf(),
+      beforeStartTimestamp: endDate.valueOf()
     })
   }
 
@@ -263,18 +260,6 @@ export default class Incidents extends React.Component {
   }
 
   render () {
-    const {location} = this.props
-    const {state} = location || {}
-    const {filterType} = state || {}
-
-    let defaultDate = moment().startOf('years').format('YYYY')
-
-    if (filterType === 'today') {
-      defaultDate = 'Today'
-    } else if (filterType === 'month') {
-      defaultDate = moment().startOf('month').format('MMMM')
-    }
-
     return (
       <TabPage>
         <TabPageHeader title="Search">
@@ -294,16 +279,16 @@ export default class Incidents extends React.Component {
                 backspaceRemoves={false}
               />
 
-              <select className="form-control inline text-primary margin-md-left"
+              <select className="form-control inline text-primary margin-md-left margin-md-right"
                 onChange={this.onFixedChange.bind(this)} value={`${this.state.fixed}`}>
                 <option value="">Any</option>
                 <option value="false">Unfixed</option>
                 <option value="true">Fixed</option>
               </select>
-              <DateRangePicker onClickRange={this.onChangeRange.bind(this)} className="margin-md-left"
-                default={defaultDate} ref="dp">
-                <i className="fa fa-caret-down margin-xs-left" />
-              </DateRangePicker>
+              <DateRangePicker2
+                startDate={moment(this.state.afterStartTimestamp)}
+                endDate={moment(this.state.beforeStartTimestamp)}
+                onApply={this.onChangeRange.bind(this)}/>
 
               {this.renderDeviceSearch()}
             </div>
