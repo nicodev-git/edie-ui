@@ -3,7 +3,7 @@
     color: #fff;
 }
 #latestAttacksContainerLeft {
-    height: 8.25em;
+    height: 20em;
     border-width: 1px 0px 1px 1px;
     background-color: #45484F;
     overflow: hidden;
@@ -88,7 +88,12 @@
     font-size: 100%;
     vertical-align: baseline;
 }
-.attackRow div, #latestAttacksContainerLeft #tableHeaderRow div {
+#latestAttacksContainerLeft #tableHeaderRow div {
+    display: table-cell;
+    font-size: .85em;
+    padding: 15px;
+}
+.attackRow div {
     display: table-cell;
     font-size: .85em;
     padding: 15px 10px;
