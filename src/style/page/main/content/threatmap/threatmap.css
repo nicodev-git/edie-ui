@@ -1,11 +1,11 @@
 #latestAttacksContainer {
     position: relative;
     color: #fff;
+    background-color: #45484F;
 }
 #latestAttacksContainerLeft {
-    height: 20em;
+    height: 15em;
     border-width: 1px 0px 1px 1px;
-    background-color: #45484F;
     overflow: hidden;
 }
 #latestAttacksContainerRight {
@@ -95,21 +95,8 @@
 }
 .attackRow div {
     display: table-cell;
-    font-size: .85em;
-    padding: 15px 10px;
+    padding: 10px 15px;
 }
-.attackRow div {
-    padding: 1pt 10px;
-    /*opacity: 0;*/
-    /*transition: opacity 0s linear 0.7s, opacity 0.7s ease-in-out;*/
-}
-
-/*.attackRow.visible div {*/
-
-    /*opacity: 1;*/
-    /*transition: opacity 0s linear 0.7s, opacity 0.7s ease-in-out;*/
-/*}*/
-
 .attackRow .sourceCol p{
     width: 70%;
     display: inline-block;
@@ -213,6 +200,8 @@
 .play-controls {
     height: 30px;
     display: none;
+    border-top: 1px solid #555;
+    margin: 0 8px;
 }
 
 .slider-visible .play-controls {

@@ -221,8 +221,8 @@ export default class ThreatMap extends Component {
                         <p>{item.attacker}</p>
                         <img src={`/images/flags/32/${item.attackerCountry.code}.png`}
                           title={item.attackerCountry.name}
-                          width="20"
-                          style={{marginTop: '-5px', maxHeight: '20px'}}/>
+                          width="28"
+                          style={{marginTop: '-5px', maxHeight: '28px'}}/>
                     </Transition>
                 </div>
                 <div className="destCol">
@@ -231,8 +231,8 @@ export default class ThreatMap extends Component {
                         <p>{item.target}</p>
                         <img src={`/images/flags/32/${item.targetCountry.code}.png`}
                           title={item.targetCountry.name}
-                          width="20"
-                          style={{marginTop: '-5px', maxHeight: '20px'}}/>
+                          width="28"
+                          style={{marginTop: '-5px', maxHeight: '28px'}}/>
                     </Transition>
                 </div>
             </div>
@@ -1347,8 +1347,8 @@ export default class ThreatMap extends Component {
 
   render () {
     return (
-      <div style={{flex: 1}} className="flex-vertical">
-        <div className="form-inline padding-sm">
+      <div className="flex-vertical flex-1">
+        <div className="form-inline padding-sm" style={{background: '#CECECE'}}>
           <label className="pt-none control-label margin-sm-right">Mode</label>
           <select className="form-control input-sm margin-lg-right"
             value={this.state.mode} onChange={this.onChangeMode.bind(this)}>
@@ -1388,8 +1388,8 @@ export default class ThreatMap extends Component {
           </div>
 
         </div>
-        <div style={{flex: 1, position: 'relative'}} className={(this.state.history || this.state.mode === 'demo') ? 'slider-visible' : ''}>
-          <div ref="mapDiv" style={{position: 'absolute', left: 0, top: 0, right: 0, bottom: 0}} />
+        <div style={{position: 'relative'}} className={`flex-1 flex-vertical ${(this.state.history || this.state.mode === 'demo') ? 'slider-visible' : ''}`}>
+          <div ref="mapDiv" className="flex-1" />
 
           <div id="latestAttacksContainer">
             <div id="latestAttacksContainerLeft" className="pinkBorder">
@@ -1402,45 +1402,40 @@ export default class ThreatMap extends Component {
                   <div id="latestAttacksSourceCol">ATTACKING COUNTRY</div>
                   <div id="latestAttacksDestCol">TARGET DEVICE</div>
                 </div>
-                <div className="attackRow" id="spacerRow">
-                  <div>
-                    &nbsp;
-                  </div>
-                </div>
                 {
                   this.state.latestAttacks.map(item => this.renderRow(item))
                 }
               </div>
             </div>
+
+            <div className="play-controls">
+              <div className="inline-block">
+                {
+                  this.state.playing
+                    ? (<a href="javascript:;" style={{padding: '2px'}}>
+                    <img src="/images/btn_pause.png" style={{width: '23px'}} onClick={this.onClickPause.bind(this)}/>
+                  </a>)
+                    : (<a href="javascript:;" style={{padding: '2px'}}>
+                    <img src="/images/btn_play.png" style={{width: '23px'}} onClick={this.onClickPlay.bind(this)}/>
+                  </a>)
+                }
+
+                <a href="javascript:;" style={{padding: '2px'}}>
+                  <img src="/images/btn_stop.png" style={{width: '23px'}} onClick={this.onClickStop.bind(this)}/>
+                </a>
+
+                {this.renderTime()}
+
+              </div>
+              <div className="incident-time hidden" style={{color: 'white', paddingTop: '3px'}} />
+
+              <div className="play-timeline" style={{flex: 1, padding: '9px 20px'}}>
+                {this.renderSlider()}
+              </div>
+            </div>
           </div>
 
           {this.renderInfoPopup()}
-
-          <div className="play-controls">
-            <div className="inline-block">
-              {
-                this.state.playing
-                  ? (<a href="javascript:;" style={{padding: '2px'}}>
-                      <img src="/images/btn_pause.png" style={{width: '23px'}} onClick={this.onClickPause.bind(this)}/>
-                    </a>)
-                  : (<a href="javascript:;" style={{padding: '2px'}}>
-                      <img src="/images/btn_play.png" style={{width: '23px'}} onClick={this.onClickPlay.bind(this)}/>
-                    </a>)
-              }
-
-              <a href="javascript:;" style={{padding: '2px'}}>
-                <img src="/images/btn_stop.png" style={{width: '23px'}} onClick={this.onClickStop.bind(this)}/>
-              </a>
-
-              {this.renderTime()}
-
-            </div>
-            <div className="incident-time hidden" style={{color: 'white', paddingTop: '3px'}} />
-
-            <div className="play-timeline" style={{flex: 1, padding: '9px 20px'}}>
-              {this.renderSlider()}
-            </div>
-          </div>
         </div>
 
       </div>
