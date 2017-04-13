@@ -121,7 +121,7 @@ export default class Topology extends React.Component {
   onMapObjectMoved (map, options, type) {
     if (!options) return
 
-    options.mapid = this.props.device.mapid
+    // options.mapid = this.props.device.mapid
     options.groupid = options.groupid || this.props.device.id
 
     return this.moveMapItem(map, options, type)
