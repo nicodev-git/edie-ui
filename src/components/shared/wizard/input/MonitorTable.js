@@ -93,10 +93,7 @@ export default class MonitorTable extends Component {
   }
 
   onClickAdd (e) {
-    this.setState({ menuHidden: !this.state.menuHidden })
-
-    e.preventDefault()
-    e.nativeEvent.stopImmediatePropagation()
+    this.setState({ menuHidden: false })
   }
 
   onClickEdit (e) {

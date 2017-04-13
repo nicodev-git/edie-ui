@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Modal from 'react-bootstrap-modal'
 import { Header, WizardButtons } from './parts'
 
-export default class DeviceTplModalView extends Component {
+export default class DeviceWizardView extends Component {
   render () {
     const {header, progressBar, content, current, steps, onSubmit, onHide,
       onPrev, onNext, paramEditModal} = this.props
