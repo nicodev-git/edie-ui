@@ -178,6 +178,7 @@ class MainWorkflowModal extends Component {
         onClickAddCategory={this.onClickAddCategory.bind(this)}
         onRuleChange={this.onRuleChange.bind(this)}
         onRuleClick={this.onRuleClick.bind(this)}
+        onActionClick={this.onActionClick.bind(this)}
         onClickAddAction={this.onClickAddAction.bind(this)}
         onClickEditAction={this.onClickEditAction.bind(this)}
         onClickRemoveAction={this.onClickRemoveAction.bind(this)}
