@@ -12,7 +12,7 @@ class InfiniteTable extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      currentPage: 0,
+      currentPage: -1,
       isLoading: false,
       maxPages: 0,
       results: [],
