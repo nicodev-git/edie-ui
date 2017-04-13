@@ -1,5 +1,5 @@
 .login {
-    background: url(/images/background.jpg) repeat;
+    background: #27292F;
     font-family: Arial, Helvetica, sans-serif;
     position: fixed;
     left: 0;
@@ -29,7 +29,7 @@
 
 .box {
     margin: 0 auto;
-    background: url(/images/box_bg.jpg) repeat-x;
+    background: white;
     width: 258px;
     height: 289px;
     border-radius: 10px;
