@@ -92,12 +92,12 @@ export default class ThreatMap extends Component {
     me.vmap = $(this.refs.mapDiv).vectorMap({ // eslint-disable-line no-undef
       map: 'world_mill_en',
 
-      backgroundColor: '#193341',
-      zoomMax: 1,
+      backgroundColor: '#E8E8E9',
+      // zoomMax: 1,
 
       regionStyle: {
         initial: {
-          'fill': '#3C6A81',
+          'fill': '#404047',
           'fill-opacity': 0.8,
           'stroke': 'none',
           'stroke-width': 1,
@@ -164,10 +164,10 @@ export default class ThreatMap extends Component {
                 <div style={style} />
       )
     }
-    CustomHandle.propTypes = {
-      value: React.PropTypes.any, // eslint-disable-line react/forbid-prop-types
-      offset: React.PropTypes.number
-    }
+    // CustomHandle.propTypes = {
+    //   value: React.PropTypes.any, // eslint-disable-line react/forbid-prop-types
+    //   offset: React.PropTypes.number
+    // }
 
     return (
             <Slider min={this.state.sliderMin} max={this.state.sliderMax}

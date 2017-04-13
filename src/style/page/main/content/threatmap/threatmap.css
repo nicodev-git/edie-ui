@@ -233,3 +233,17 @@
     opacity: 0.01;
     transition: opacity 500ms ease-in;
 }
+
+.jvectormap-zoomin, .jvectormap-zoomout {
+    width: 24px;
+    height: 24px;
+    background: #67D623;
+    border-radius: 50%;
+    line-height: 24px;
+    font-size: 30px;
+}
+
+.jvectormap-zoomout {
+    line-height: 20px;
+    top: 45px;
+}
