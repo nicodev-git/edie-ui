@@ -21,6 +21,7 @@ const initialState = {
     mapLines: [],
 
     incidents: [],
+    mainIncidentDraw: 1,
 
     selectedDevice: null,
 

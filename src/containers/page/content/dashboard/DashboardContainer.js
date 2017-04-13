@@ -72,7 +72,9 @@ export default connect(
     stats: state.dashboard.stats,
 
     sidebarProfileMenuOpen: state.dashboard.sidebarProfileMenuOpen,
-    sidebarMessageMenuOpen: state.dashboard.sidebarMessageMenuOpen
+    sidebarMessageMenuOpen: state.dashboard.sidebarMessageMenuOpen,
+
+    mainIncidentDraw: state.dashboard.mainIncidentDraw
   }), {
 
     fetchBigIncidents,

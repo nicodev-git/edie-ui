@@ -108,6 +108,7 @@ export default class IncidentTable extends Component {
           selectable
           onRowDblClick={this.onRowDblClick.bind(this)}
           params={{
+            draw: this.props.mainIncidentDraw,
             severity: ['HIGH', 'MEDIUM'],
             sort: 'startTimestamp,desc'
           }}
