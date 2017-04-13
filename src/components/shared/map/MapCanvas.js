@@ -579,7 +579,6 @@ class MapCanvas extends React.Component {
         if (devicestat === null) devicestat = '0'
         createTempGauge(devicestat.text, function (url) { // eslint-disable-line no-undef
           devconfig.imageUrl = url
-
           cmap.addDevice(devconfig, callback)
         })
       } else {
