@@ -1,7 +1,12 @@
 import React, { Component } from 'react'
-import { Panel } from 'react-bootstrap'
+import IconMenu from 'material-ui/IconMenu'
+import MenuItem from 'material-ui/MenuItem'
+import IconButton from 'material-ui/IconButton'
+import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
 import { assign } from 'lodash'
+
 import { SubHeader, CrudButtons } from 'components/modal/parts'
+import { buttonStyle, iconStyle } from 'style/materialStyles'
 
 import MonitorWizardContainer from 'containers/shared/wizard/MonitorWizardContainer'
 
@@ -16,47 +21,15 @@ export default class MonitorTable extends Component {
       monitorWizardVisible: false,
       isEditMonitor: false
     }
-
-    this.handleClick = this.handleClick.bind(this)
-  }
-
-  componentDidMount () {
-    document.addEventListener('click', this.handleClick, false)
-  }
-
-  componentWillUnmount () {
-    document.removeEventListener('click', this.handleClick, false)
   }
 
   renderMenu () {
-    if (this.state.menuHidden) return null
-
-    return (
-      <div className="dropdown">
-        <div id="dropdown-monitor" className="panel-group">
-          <Panel>
-            <ul ref="liDevices">
-              {this.props.templates.map(item => this.renderMenuItem(item))}
-            </ul>
-          </Panel>
-        </div>
-      </div>
-    )
+    return this.props.templates.map(item => this.renderMenuItem(item))
   }
 
   renderMenuItem (item) {
     return (
-      <li key={item.id} onClick={this.onClickItem.bind(this, item)}>
-        <a href="javascript:;">
-          <span className="pull-left item-icon" ref="div">
-            <img src={`/images/${item.image}`}/>
-          </span>
-
-          <span className="item-text">
-            <strong>{item.name}</strong>
-          </span>
-        </a>
-      </li>
+      <MenuItem key={item.id} primaryText={item.name} onTouchTap={this.onClickItem.bind(this, item)}/>
     )
   }
 
@@ -76,15 +49,6 @@ export default class MonitorTable extends Component {
         onFinish={this.onFinishMonitorWizard.bind(this)}
       />
     )
-  }
-
-  handleClick (e) {
-        // Detect device menu outer click
-    if (!this.state.menuHidden) {
-      if (!this.refs.liDevices.contains(e.target)) {
-        this.setState({ menuHidden: true })
-      }
-    }
   }
 
   onClickItem (item) {
@@ -142,12 +106,26 @@ export default class MonitorTable extends Component {
       <div className="panel panel-default panel-noborder">
         <div className="monitors-wizard-crud">
           <SubHeader name="Monitors"/>
+          <IconMenu
+            iconButtonElement={
+              <div className="add-button">
+                <IconButton
+                  style={buttonStyle}
+                  iconStyle={iconStyle}
+                  onTouchTap={this.onClickAdd.bind(this)}>
+                  <AddCircleIcon color="#545454"/>
+                </IconButton>
+              </div>
+            }
+            anchorOrigin={{horizontal: 'right', vertical: 'bottom'}}
+            targetOrigin={{horizontal: 'left', vertical: 'top'}}
+          >
+            {this.renderMenu()}
+          </IconMenu>
           <CrudButtons
-            onAdd={this.onClickAdd.bind(this)}
             onEdit={this.onClickEdit.bind(this)}
             onRemove={this.onClickRemove.bind(this)}
           />
-          {this.renderMenu()}
         </div>
 
         <div className="panel-body"

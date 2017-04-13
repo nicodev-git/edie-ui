@@ -7,14 +7,14 @@ import { buttonStyle, iconStyle } from '../../../style/materialStyles'
 
 const CrudButtons = ({onAdd, onEdit, onDelete}) => (
   <div className="crud-buttons">
-    <div className="add-button">
+    {onAdd && <div className="add-button">
       <IconButton
         style={buttonStyle}
         iconStyle={iconStyle}
         onTouchTap={onAdd}>
           <AddCircleIcon color="#545454"/>
       </IconButton>
-    </div>
+    </div>}
     <div className="edit-button">
       <IconButton
         style={buttonStyle}
