@@ -279,8 +279,8 @@ export default class Agents extends Component {
               >
                 <Menu>
                   <MenuItem primaryText="Agents" className={tabIndex === 1 ? 'text-bold' : ''}/>
-                  <MenuItem primaryText="Collectors" className={tabIndex === 1 ? 'text-bold' : ''}/>
-                  <MenuItem primaryText="Agent Logs" className={tabIndex === 1 ? 'text-bold' : ''}/>
+                  <MenuItem primaryText="Collectors" className={tabIndex === 2 ? 'text-bold' : ''}/>
+                  <MenuItem primaryText="Agent Logs" className={tabIndex === 3 ? 'text-bold' : ''}/>
                 </Menu>
               </Popover>
             </div>

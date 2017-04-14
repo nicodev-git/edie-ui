@@ -1,9 +1,10 @@
 import React from 'react'
 import {
     ButtonGroup,
-    DropdownButton,
-    MenuItem
+    DropdownButton
 } from 'react-bootstrap'
+import {RaisedButton, Menu, MenuItem, Popover} from 'material-ui'
+import SettingIcon from 'material-ui/svg-icons/action/settings'
 
 import MainSettings from './MainSettings'
 import Websocket from './websocket/Websocket'
@@ -52,6 +53,17 @@ export default class Advanced extends React.Component {
 
   }
 
+  handleTouchTap (event) {
+    this.setState({
+      open: true,
+      anchorEl: event.currentTarget
+    })
+  }
+
+  handleRequestClose () {
+    this.setState({open: false})
+  }
+
   render () {
     const {pageIndex} = this.state
     return (
@@ -67,18 +79,20 @@ export default class Advanced extends React.Component {
                   <MenuItem eventKey="2" onClick={this.onClickEditRouting.bind(this)}>Edit</MenuItem>
                 </DropdownButton>
 
-                <DropdownButton title={<i className="fa fa-gear"/>}
-                  id="dd-setting-adv-more" pullRight>
-
-                  <MenuItem eventKey="1" onClick={this.onClickTab.bind(this, 0)}>
-                    <span className={pageIndex === 0 ? 'text-bold' : ''}>Main</span></MenuItem>
-                  <MenuItem eventKey="2" onClick={this.onClickTab.bind(this, 1)}>
-                    <span className={pageIndex === 1 ? 'text-bold' : ''}>Websocket</span></MenuItem>
-                  <MenuItem eventKey="3" onClick={this.onClickTab.bind(this, 2)}>
-                    <span className={pageIndex === 2 ? 'text-bold' : ''}>Routing</span></MenuItem>
-
-                </DropdownButton>
-
+                <RaisedButton icon={<SettingIcon />} onTouchTap={this.handleTouchTap.bind(this)}/>
+                <Popover
+                  open={this.state.open}
+                  anchorEl={this.state.anchorEl}
+                  anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
+                  targetOrigin={{horizontal: 'left', vertical: 'top'}}
+                  onRequestClose={this.handleRequestClose.bind(this)}
+                >
+                  <Menu>
+                    <MenuItem primaryText="Main" onTouchTap={this.onClickTab.bind(this, 0)}/>
+                    <MenuItem primaryText="Websocket" onTouchTap={this.onClickTab.bind(this, 1)}/>
+                    <MenuItem primaryText="Routing" onTouchTap={this.onClickTab.bind(this, 2)}/>
+                  </Menu>
+                </Popover>
               </ButtonGroup>
             </div>
           </div>
