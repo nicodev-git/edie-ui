@@ -1,12 +1,8 @@
 import React, { Component } from 'react'
 import TimeAgo from 'react-timeago'
 import moment from 'moment'
-import {
-    ButtonGroup,
-    Button,
-    DropdownButton,
-    MenuItem
-} from 'react-bootstrap'
+import {RaisedButton, Popover, MenuItem, Menu} from 'material-ui'
+import SettingIcon from 'material-ui/svg-icons/action/settings'
 
 import { findIndex, assign } from 'lodash'
 
@@ -223,6 +219,10 @@ export default class Agents extends Component {
 
   }
 
+  handleRequestClose () {
+    this.setState({open: false})
+  }
+
   render () {
     const {tabIndex} = this.state
     return (
@@ -239,39 +239,36 @@ export default class Agents extends Component {
             </div>
 
             <div style={{position: 'absolute', right: '25px'}}>
-              <ButtonGroup className={tabIndex === 1 ? '' : 'hidden'}>
+              <div className="inline-block">
+                <div className={tabIndex === 1 ? '' : 'hidden'}>
+                  <RaisedButton label="Default Config"/>
+                  <RaisedButton label="Edit Config"/>
+                  <RaisedButton label="Download Config"/>
+                </div>
 
-                <Button>Default Config</Button>
-                <Button>Edit Config</Button>
-                <Button>Download Config</Button>
+                <div className={tabIndex === 2 ? '' : 'hidden'}>
+                  <RaisedButton label="Add Collector"/>
+                  <RaisedButton label="Edit Collector"/>
+                  <RaisedButton label="Remove Collector"/>
+                  <RaisedButton label="Edit Config"/>
+                  <RaisedButton label="Download Config"/>
+                </div>
+              </div>
 
-              </ButtonGroup>
-
-              <ButtonGroup className={tabIndex === 2 ? '' : 'hidden'}>
-
-                <Button>Add Collector</Button>
-                <Button>Edit Collector</Button>
-                <Button>Remove Collector</Button>
-                <Button>Edit Config</Button>
-                <Button>Download Config</Button>
-
-              </ButtonGroup>
-
-              <DropdownButton title={<i className="fa fa-gear"/>} id="dd-setting-agents" pullRight>
-
-                <MenuItem eventKey="1" onClick={this.onClickAgentTab.bind(this, 1)}>
-                  <span className={tabIndex === 1 ? 'text-bold' : ''}>Agents</span>
-                </MenuItem>
-
-                <MenuItem eventKey="2" onClick={this.onClickAgentTab.bind(this, 2)}>
-                  <span className={tabIndex === 2 ? 'text-bold' : ''}>Collectors</span>
-                </MenuItem>
-
-                <MenuItem eventKey="3" onClick={this.onClickAgentTab.bind(this, 3)}>
-                  <span className={tabIndex === 3 ? 'text-bold' : ''}>Agent Logs</span>
-                </MenuItem>
-
-              </DropdownButton>
+              <RaisedButton icon={<SettingIcon />}/>
+              <Popover
+                open={this.state.open}
+                anchorEl={this.state.anchorEl}
+                anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
+                targetOrigin={{horizontal: 'left', vertical: 'top'}}
+                onRequestClose={this.handleRequestClose}
+              >
+                <Menu>
+                  <MenuItem primaryText="Agents" className={tabIndex === 1 ? 'text-bold' : ''}/>
+                  <MenuItem primaryText="Collectors" className={tabIndex === 1 ? 'text-bold' : ''}/>
+                  <MenuItem primaryText="Agent Logs" className={tabIndex === 1 ? 'text-bold' : ''}/>
+                </Menu>
+              </Popover>
             </div>
           </div>
         </TabPageHeader>
