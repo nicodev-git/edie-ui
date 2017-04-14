@@ -6,7 +6,8 @@ import {
   RaisedButton,
   MenuItem,
   Menu,
-  Popover
+  Popover,
+  SelectField
 } from 'material-ui'
 import TimeAgo from 'react-timeago'
 import ReactTooltip from 'react-tooltip'
@@ -313,16 +314,11 @@ export default class MainIncidents extends Component {
                   autosize={false}
                   backspaceRemoves={false}
                 />
-
-                <select
-                  className="fixtype form-control inline-block text-primary margin-md-left"
-                  style={{maxWidth: '150px'}}
-                  onChange={this.onFilterChange}
-                  ref="fixed" defaultValue="false">
-                  <option value="">Any</option>
-                  <option value="false">Unfixed</option>
-                  <option value="true">Fixed</option>
-                </select>
+                <SelectField onChange={this.onFilterChange}>
+                  <MenuItem primaryText="Any" value=""/>
+                  <MenuItem primaryText="Unfixed" value="false"/>
+                  <MenuItem primaryText="Fixed" value="true"/>
+                </SelectField>
 
                 <DateRangePicker
                   onClickRange={this.onFilterChange} className="margin-md-left"
