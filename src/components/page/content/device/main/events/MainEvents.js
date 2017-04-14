@@ -241,12 +241,13 @@ export default class MainEvents extends Component {
 
             <div style={{margin: '0 auto', position: 'relative', width: '550px', textAlign: 'center'}}>
               <div className="inline-block" style={{position: 'relative'}}>
-                <input type="text" placeholder="Search" className="form-control"
-                  style={{width: '100%', paddingLeft: '35px'}}
+                <TextField
+                  hintText="Search"
+                  errorStyle={errorStyle}
+                  inputStyle={inputStyle}
+                  underlineFocusStyle={underlineStyle}
                   onChange={this.onFilterChange.bind(this)}
-                  ref="search"/>
-                <a className="btn" href="javascript:;" style={{position: 'absolute', left: 0, top: 0}}>
-                  <i className="fa fa-search" /></a>
+                />
               </div>
             </div>
           </div>
