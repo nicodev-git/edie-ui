@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import TimeAgo from 'react-timeago'
 import moment from 'moment'
-import {RaisedButton, Popover, MenuItem, Menu} from 'material-ui'
+import {RaisedButton, Popover, MenuItem, Menu, SelectField} from 'material-ui'
 import SettingIcon from 'material-ui/svg-icons/action/settings'
 
 import { findIndex, assign } from 'lodash'
@@ -12,6 +12,7 @@ import TabPageBody from '../../../../shared/TabPageBody'
 import TabPageHeader from '../../../../shared/TabPageHeader'
 
 import { ROOT_URL } from '../../../../../actions/config'
+import { errorStyle, underlineFocusStyle, inputStyle, selectedItemStyle } from 'style/materialStyles'
 
 export default class Agents extends Component {
   constructor (props) {
@@ -219,6 +220,13 @@ export default class Agents extends Component {
 
   }
 
+  handleTouchTap (event) {
+    this.setState({
+      open: true,
+      anchorEl: event.currentTarget
+    })
+  }
+
   handleRequestClose () {
     this.setState({open: false})
   }
@@ -230,38 +238,44 @@ export default class Agents extends Component {
         <TabPageHeader title="Settings">
           <div className="text-center margin-md-top">
             <div className="pull-left form-inline">
-              <select className={`form-control ${tabIndex === 1 ? '' : 'hidden'}`}
-                onChange={this.onChangeInstall.bind(this)}>
-                <option value="all">All</option>
-                <option value="installed">Installed</option>
-                <option value="notinstalled">Not Installed</option>
-              </select>
+              <SelectField
+                errorStyle={errorStyle}
+                underlineStyle={underlineFocusStyle}
+                selectedMenuItemStyle={selectedItemStyle}
+                menuItemStyle={inputStyle}
+                labelStyle={inputStyle}
+                onChange={this.onChangeInstall.bind(this)}
+                value="all">
+                <MenuItem value="all" primaryText="All"/>
+                <MenuItem value="installed" primaryText="Installed"/>
+                <MenuItem value="notinstalled" primaryText="Not Installed"/>
+              </SelectField>
             </div>
 
             <div style={{position: 'absolute', right: '25px'}}>
               <div className="inline-block">
                 <div className={tabIndex === 1 ? '' : 'hidden'}>
-                  <RaisedButton label="Default Config"/>
-                  <RaisedButton label="Edit Config"/>
-                  <RaisedButton label="Download Config"/>
+                  <RaisedButton label="Default Config"/>&nbsp;
+                  <RaisedButton label="Edit Config"/>&nbsp;
+                  <RaisedButton label="Download Config"/>&nbsp;
                 </div>
 
                 <div className={tabIndex === 2 ? '' : 'hidden'}>
-                  <RaisedButton label="Add Collector"/>
-                  <RaisedButton label="Edit Collector"/>
-                  <RaisedButton label="Remove Collector"/>
-                  <RaisedButton label="Edit Config"/>
-                  <RaisedButton label="Download Config"/>
+                  <RaisedButton label="Add Collector"/>&nbsp;
+                  <RaisedButton label="Edit Collector"/>&nbsp;
+                  <RaisedButton label="Remove Collector"/>&nbsp;
+                  <RaisedButton label="Edit Config"/>&nbsp;
+                  <RaisedButton label="Download Config"/>&nbsp;
                 </div>
               </div>
 
-              <RaisedButton icon={<SettingIcon />}/>
+              <RaisedButton icon={<SettingIcon />} onTouchTap={this.handleTouchTap.bind(this)}/>
               <Popover
                 open={this.state.open}
                 anchorEl={this.state.anchorEl}
                 anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
                 targetOrigin={{horizontal: 'left', vertical: 'top'}}
-                onRequestClose={this.handleRequestClose}
+                onRequestClose={this.handleRequestClose.bind(this)}
               >
                 <Menu>
                   <MenuItem primaryText="Agents" className={tabIndex === 1 ? 'text-bold' : ''}/>
