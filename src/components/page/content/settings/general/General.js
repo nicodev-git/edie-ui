@@ -1,11 +1,6 @@
 import React from 'react'
 import InlineEdit from 'react-edit-inline'
-import {
-    ButtonGroup,
-    Button
-} from 'react-bootstrap' // Never used
-
-import {Checkbox} from 'material-ui'
+import {Checkbox, RaisedButton} from 'material-ui'
 import { assign } from 'lodash'
 
 import SettingTabs from '../SettingTabs' // Never used
@@ -115,11 +110,10 @@ export default class General extends React.Component {
           />
         </div>
 
-        <div className="col-md-12 margin-lg-top text-gray">
-          <label className="margin-sm-top margin-sm-bottom width-200">
-            Customer ID
+        <div className="col-md-12 margin-lg-top" style={{color: '#888'}}>
+          <label className="margin-sm-top margin-sm-bottom">
+            Customer ID: {this.getOptionValue('CUSTOMER_ID') || '[None]'}
           </label>
-          <label>{this.getOptionValue('CUSTOMER_ID') || '[None]'}</label>
         </div>
       </div>
     )
@@ -223,13 +217,8 @@ export default class General extends React.Component {
         <TabPageHeader title="Settings">
           <div className="text-center margin-md-top">
             <div style={{position: 'absolute', right: '25px'}}>
-              <ButtonGroup>
-
-                <Button>System Backup</Button>
-
-                <Button>System Restore</Button>
-
-              </ButtonGroup>
+              <RaisedButton label="System Backup"/>
+              <RaisedButton label="System Restore" className="margin-md-left"/>
             </div>
           </div>
         </TabPageHeader>
