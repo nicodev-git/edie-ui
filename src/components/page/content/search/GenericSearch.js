@@ -50,7 +50,7 @@ class GenericSearch extends React.Component {
     }]
 
     this.cells = [{
-      'displayName': 'Content',
+      'displayName': ' ',
       'columnName': 'entity.id',
       'customComponent': (props) => {
         const {rowData} = props
@@ -441,17 +441,24 @@ class GenericSearch extends React.Component {
               {this.renderFields()}
               {this.renderFieldPopover()}
             </div>
-            <div className="flex-1">
-              <InfiniteTable
-                url="/search/all"
-                cells={this.cells}
-                ref="table"
-                rowMetadata={{'key': 'id'}}
-                selectable
-                onRowDblClick={this.onRowDblClick.bind(this)}
-                params={this.props.params}
-                pageSize={10}
-              />
+            <div className="flex-1 flex-vertical padding-sm">
+              <div className="header-red">
+                Content
+              </div>
+              <div className="flex-1">
+                <InfiniteTable
+                  url="/search/all"
+                  cells={this.cells}
+                  ref="table"
+                  rowMetadata={{'key': 'id'}}
+                  selectable
+                  onRowDblClick={this.onRowDblClick.bind(this)}
+                  params={this.props.params}
+                  pageSize={10}
+                  showTableHeading={false}
+                />
+              </div>
+
             </div>
           </div>
 

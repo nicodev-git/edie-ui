@@ -191,6 +191,7 @@ class InfiniteTable extends React.Component {
         rowMetadata={rowMetadata}
         rowHeight={this.props.rowHeight}
         bodyHeight={bodyHeight || null}
+        showTableHeading={this.props.showTableHeading}
 
         results={this.getCurrentData()}
         resultsPerPage={this.getCountPerPage()}
@@ -235,6 +236,7 @@ InfiniteTable.defaultProps = {
   pageSize: 50,
   rowMetadata: {},
   rowHeight: 50,
+  showTableHeading: true,
 
   selectable: false,
   noDataMessage: ''
