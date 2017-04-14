@@ -110,8 +110,8 @@ export default class Websocket extends React.Component {
     }
 
     return (
-      <div className="padding-md">
-        <div className="form-inline margin-md-bottom form-mui-inline">
+      <div>
+        <div className="padding-md form-mui-inline">
           <TextField floatingLabelText="Name"/>&nbsp;
           <TextField floatingLabelText="Description"/>&nbsp;
           <SelectField
@@ -126,52 +126,35 @@ export default class Websocket extends React.Component {
           <RaisedButton label="Add Incident" onTouchTap={this.onClickAddIncident.bind(this)} primary className="margin-md-top"/>
         </div>
 
-        <h4>BI</h4>
-        <div className="form-inline margin-md-bottom">
-          <label className="width-120">Open Incidents:</label>
-          <input type="text" className="form-control input-sm margin-md-right"
-            defaultValue="1"
-            ref="openIncident"/>
+        <div className="header-red">BI</div>
+        <div className="padding-md-left">
+          <div className="form-mui-inline">
+            <TextField floatingLabelText="Open Incidents"/>&nbsp;
+            <RaisedButton label="Update" onTouchTap={this.onClickUpdateOpenIncident.bind(this)} primary className="margin-md-top"/>
+          </div>
 
-          <a href="javascript:;" className="btn btn-primary btn-sm"
-            onClick={this.onClickUpdateOpenIncident.bind(this)}>Update</a>
-        </div>
-        <div className="form-inline margin-md-bottom">
-          <label className="width-120">Today Incidents:</label>
-          <input type="text" className="form-control input-sm margin-md-right"
-            defaultValue="1"
-            ref="todayIncident"/>
+          <div className="form-mui-inline">
+            <TextField floatingLabelText="Today Incidents"/>&nbsp;
+            <RaisedButton label="Update" onTouchTap={this.onClickUpdateTodayIncident.bind(this)} primary className="margin-md-top"/>
+          </div>
 
-          <a href="javascript:;" className="btn btn-primary btn-sm"
-            onClick={this.onClickUpdateTodayIncident.bind(this)}>Update</a>
-        </div>
-        <div className="form-inline margin-md-bottom">
-          <label className="width-120">Attackers Today:</label>
-          <input type="text" className="form-control input-sm margin-md-right"
-            ref="attackerToday" defaultValue="1" />
+          <div className="form-mui-inline">
+            <TextField floatingLabelText="Attackers Today"/>&nbsp;
+            <RaisedButton label="Update" onTouchTap={this.onClickUpdateAttackerToday.bind(this)} primary className="margin-md-top"/>
+          </div>
 
-          <a href="javascript:;" className="btn btn-primary btn-sm"
-            onClick={this.onClickUpdateAttackerToday.bind(this)}>Update</a>
-        </div>
-        <div className="form-inline margin-md-bottom">
-          <label className="width-120">Month Incidents:</label>
-          <input type="text" className="form-control input-sm margin-md-right"
-            ref="monthIncident" defaultValue="1" />
+          <div className="form-mui-inline">
+            <TextField floatingLabelText="Month Incidents"/>&nbsp;
+            <RaisedButton label="Update" onTouchTap={this.onClickUpdateMonthIncident.bind(this)} primary className="margin-md-top"/>
+          </div>
 
-          <a href="javascript:;" className="btn btn-primary btn-sm"
-            onClick={this.onClickUpdateMonthIncident.bind(this)}>Update</a>
+          <div className="form-mui-inline">
+            <TextField floatingLabelText="Incident News"/>&nbsp;
+            <RaisedButton label="Push" onTouchTap={this.onClickPushNews.bind(this)} primary className="margin-md-top"/>
+          </div>
         </div>
 
-        <div className="form-inline margin-md-bottom">
-          <label className="width-120">Incident News:</label>
-          <input type="text" className="form-control input-sm margin-md-right"
-            ref="news" style={{width: '300px'}} />
-
-          <a href="javascript:;" className="btn btn-primary btn-sm"
-            onClick={this.onClickPushNews.bind(this)}>Push</a>
-        </div>
-
-        <h4>Device</h4>
+        <div className="header-green">Device</div>
         <div className="form-inline margin-md-bottom">
           <label className="width-120">Device ID:</label>
           <input type="text" className="form-control input-sm margin-md-right"

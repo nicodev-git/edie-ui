@@ -205,6 +205,16 @@ table.table tbody tr.selected {
     box-shadow: 0 0px 0px rgba(0,0,0,.05);
     margin-bottom: 0;
 }
+.header-red {
+    background: #E64A4E;
+    padding: 10px;
+    color: white;
+}
+.header-green {
+    background: #90C34E;
+    padding: 10px;
+    color: white;
+}
 
 /*Table column size */
 
