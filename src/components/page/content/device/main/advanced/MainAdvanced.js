@@ -41,7 +41,7 @@ export default class MainAdvanced extends React.Component {
             <label className="control-label col-md-12"><b>Simulate Incident</b></label>
             <label className="control-label col-md-2">Text: </label>
             <div className="col-md-10">
-              <textarea className="form-control col-md-12" style={{height: '120px'}} ref="message" />
+              <textarea className="form-control col-md-12" style={{height: '120px', resize: 'none'}} ref="message"/>
             </div>
             <div className="col-md-offset-3 col-md-9 margin-md-top">
               <RaisedButton label="send" primary onTouchTap={this.onClickSend.bind(this)} className="pull-right"/>
