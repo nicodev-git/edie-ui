@@ -98,7 +98,7 @@ export default class Websocket extends React.Component {
       position: 'absolute',
       zIndex: '2',
       left: '-40px',
-      top: '30px'
+      top: '-250px'
 
     }
     const cover = {
@@ -155,42 +155,35 @@ export default class Websocket extends React.Component {
         </div>
 
         <div className="header-green">Device</div>
-        <div className="form-inline margin-md-bottom">
-          <label className="width-120">Device ID:</label>
-          <input type="text" className="form-control input-sm margin-md-right"
-            ref="deviceId" />
+        <div className="padding-md-left">
+          <div className="form-mui-inline">
+            <TextField floatingLabelText="Device ID"/>&nbsp;
+            <SelectField floatingLabelText="Status" value="up">
+              <MenuItem value="up" primaryText="Up"/>
+              <MenuItem value="down" primaryText="Down"/>
+            </SelectField>
 
-          <select className="form-control input-sm margin-md-right" ref="deviceStatus">
-            <option value="up">Up</option>
-            <option value="down">Down</option>
-          </select>
-          <a href="javascript:;" className="btn btn-primary btn-sm"
-            onClick={this.onClickUpdateDeviceStatus.bind(this)}>Update</a>
-        </div>
-        <div className="form-inline margin-md-bottom">
-          <label className="width-120">Connection ID:</label>
-          <input type="text" className="form-control input-sm margin-md-right"
-            ref="connectorId" />
-
-          <div className="inline valign-middle">
-            <div className="input-group colorpicker-element"
-              onClick={this.onClickColorPicker.bind(this)}>
-              <div className="input-group-addon">
-                <i className="color-preview" style={{background: this.state.lineColor}} />
+            <RaisedButton label="Update" onTouchTap={this.onClickUpdateDeviceStatus.bind(this)} primary className="margin-md-top"/>
+          </div>
+          <div className="form-mui-inline">
+            <TextField floatingLabelText="Connection ID"/>&nbsp;
+            <div className="inline-block margin-md-top margin-md-right">
+              <div className="input-group colorpicker-element" onClick={this.onClickColorPicker.bind(this)}>
+                <div className="input-group-addon">
+                  <i className="color-preview" style={{background: this.state.lineColor}} />
+                </div>
               </div>
+
+              {
+                this.state.displayColorPicker ? <div style={popover}>
+                  <div style={cover} onClick={this.onCloseColorPicker.bind(this)}/>
+                  <ChromePicker color={this.state.lineColor} onChangeComplete={this.onChangeColorPicker.bind(this)}/>
+                </div> : null
+              }
             </div>
 
-            {
-              this.state.displayColorPicker ? <div style={popover}>
-                <div style={cover} onClick={this.onCloseColorPicker.bind(this)}/>
-                <ChromePicker color={this.state.lineColor}
-                  onChangeComplete={this.onChangeColorPicker.bind(this)}/>
-              </div> : null
-            }
+            <RaisedButton label="Update" onTouchTap={this.onClickUpdateColor.bind(this)} primary className="margin-md-top"/>
           </div>
-
-          <a href="javascript:;" className="btn btn-primary btn-sm margin-md-left"
-            onClick={this.onClickUpdateColor.bind(this)}>Update</a>
         </div>
       </div>
     )
