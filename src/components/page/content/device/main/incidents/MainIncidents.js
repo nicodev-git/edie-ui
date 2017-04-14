@@ -48,6 +48,9 @@ export default class MainIncidents extends Component {
 
       selectedIndex: -1,
       fixed: 'false',
+      afterStartTimestamp: moment().startOf('year').valueOf(),
+      beforeStartTimestamp: moment().endOf('year').valueOf(),
+
       currentSortCol: 'startTimestamp',
       currentSortDir: 'desc',
 
@@ -258,16 +261,24 @@ export default class MainIncidents extends Component {
     })
   }
 
-  getParams () {
-    const {search, dp} = this.refs
-    const { currentSortCol, currentSortDir, selectedSeverity, fixed } = this.state
+  onChangeDateRange ({startDate, endDate}) {
+    this.setState({
+      afterStartTimestamp: startDate.valueOf(),
+      beforeStartTimestamp: endDate.valueOf()
+    }, () => {
+      this.onFilterChange()
+    })
+  }
 
-    const time = new Date()
+  getParams () {
+    const {search} = this.refs
+    const { currentSortCol, currentSortDir, selectedSeverity, fixed, afterStartTimestamp, beforeStartTimestamp } = this.state
+
     let params = {
       description: (search ? search.value : '') || '""',
       severity: selectedSeverity,
-      afterStartTimestamp: dp ? dp.getStartDate().valueOf() : new Date(time.getYear() + 1900, 0, 1).getTime(),
-      beforeStartTimestamp: dp ? dp.getEndDate().valueOf() : time.getTime(),
+      afterStartTimestamp,
+      beforeStartTimestamp,
       deviceid: this.props.device.id,
       sort: `${currentSortCol},${currentSortDir}`
     }
@@ -306,7 +317,7 @@ export default class MainIncidents extends Component {
 
   render () {
     const {device, incidents} = this.props
-    const {selectedIndex, selectedSeverity, severities} = this.state
+    const {selectedIndex, selectedSeverity, severities, afterStartTimestamp, beforeStartTimestamp} = this.state
 
     let selectedIncident = selectedIndex < 0 ? null : incidents[selectedIndex]
 
@@ -353,14 +364,10 @@ export default class MainIncidents extends Component {
                 </SelectField>
 
                 <DateRangePicker
-                  renderer={this.renderDateLabel.bind(this)}
-                  onClickRange={this.onFilterChange} className="margin-md-left"
-                  default={moment().startOf('years').format('YYYY')} ref="dp">
-                </DateRangePicker>
-                <DateRangePicker2
-                  startDate={startDate}
-                  endDate={endDate}
-                  onApply={onChangeDateRange}/>
+                  startDate={moment(afterStartTimestamp)}
+                  endDate={moment(beforeStartTimestamp)}
+                  onApply={this.onChangeDateRange.bind(this)}
+                  renderer={this.renderDateLabel.bind(this)}/>
 
                 <a href="javascript:;" title="Export" style={{display: 'none'}}><img
                   width="26" src="/images/btn-export.jpg"/></a>
