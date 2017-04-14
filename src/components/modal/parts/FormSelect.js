@@ -1,8 +1,7 @@
 import React from 'react'
 import SelectField from 'material-ui/SelectField'
 import MenuItem from 'material-ui/MenuItem'
-import { errorStyle, underlineFocusStyle, inputStyle,
-   selectedItemStyle } from '../../../style/materialStyles'
+import { errorStyle, underlineFocusStyle, inputStyle, selectedItemStyle } from 'style/materialStyles'
 
 const FormSelect = ({input, label, style, meta: { touched, error }, options}) => (
   <SelectField

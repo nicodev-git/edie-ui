@@ -29,6 +29,7 @@ import {
   showIncidentDetail,
   showIncidentRaw
 } from '../../../../../shared/incident/Incident'
+import { errorStyle, underlineFocusStyle, inputStyle, selectedItemStyle } from 'style/materialStyles'
 
 export default class MainIncidents extends Component {
   constructor (props) {
@@ -47,6 +48,7 @@ export default class MainIncidents extends Component {
       selectedSeverity: ['HIGH', 'MEDIUM'],
 
       selectedIndex: -1,
+      fixed: 'false',
       currentSortCol: 'startTimestamp',
       currentSortDir: 'desc',
 
@@ -248,10 +250,17 @@ export default class MainIncidents extends Component {
     })
   }
 
+  onFixedChange (e, index, value) {
+    this.setState({
+      fixed: value
+    }, () => {
+      this.onFilterChange()
+    })
+  }
+
   getParams () {
-    const refs = this.refs
-    const {search, fixed, dp} = refs
-    const { currentSortCol, currentSortDir, selectedSeverity } = this.state
+    const {search, dp} = this.refs
+    const { currentSortCol, currentSortDir, selectedSeverity, fixed } = this.state
 
     const time = new Date()
     let params = {
@@ -262,7 +271,7 @@ export default class MainIncidents extends Component {
       deviceid: this.props.device.id,
       sort: `${currentSortCol},${currentSortDir}`
     }
-    if (fixed && fixed.value) params.fixed = fixed.value
+    if (fixed) params.fixed = fixed
 
     return params
   }
@@ -301,7 +310,7 @@ export default class MainIncidents extends Component {
           <div className="text-center margin-md-top">
 
             <div className="pull-left">
-              <div className="form-inline">
+              <div className="text-left form-mui-inline">
                 <Select
                   value={this.state.selectedSeverity.join(',')}
                   options={this.state.severities}
@@ -314,7 +323,15 @@ export default class MainIncidents extends Component {
                   autosize={false}
                   backspaceRemoves={false}
                 />
-                <SelectField onChange={this.onFilterChange}>
+                <SelectField
+                  onChange={this.onFixedChange.bind(this)}
+                  value={this.state.fixed}
+                  className="margin-md-left"
+                  errorStyle={errorStyle}
+                  underlineStyle={underlineFocusStyle}
+                  selectedMenuItemStyle={selectedItemStyle}
+                  menuItemStyle={inputStyle}
+                  labelStyle={inputStyle}>
                   <MenuItem primaryText="Any" value=""/>
                   <MenuItem primaryText="Unfixed" value="false"/>
                   <MenuItem primaryText="Fixed" value="true"/>
