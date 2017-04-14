@@ -4,6 +4,7 @@ import {
     ButtonGroup,
     Button
 } from 'react-bootstrap'
+import MainWorkflowModal from '../workflows/MainWorkflowModal'
 
 import { appendComponent, removeComponent } from '../../../../../../util/Component'
 import { showAlert, showConfirm } from '../../../../../shared/Alert'
@@ -12,7 +13,6 @@ import InfiniteTable from '../../../../../shared/InfiniteTable'
 import MarkIgnoreModal from '../raw-incidents/MarkIgnoreModal'
 import SimulatorModal from '../rules/SimulatorModal'
 import DeviceWizardContainer from 'containers/shared/wizard/DeviceWizardContainer'
-import WorkflowModalContainer from 'containers/page/content/settings/rule/WorkflowModalContainer'
 
 import MainTabs from '../MainTabs'
 import TabPage from '../../../../../shared/TabPage'
@@ -217,10 +217,8 @@ export default class MainEvents extends Component {
   }
 
   renderWorkflowModal () {
-    if (!this.props.workflowModalVisible) return null
-    return (
-      <WorkflowModalContainer />
-    )
+    if (!this.props.workflowModalOpen) return null
+    return <MainWorkflowModal {...this.props} />
   }
 
   render () {
