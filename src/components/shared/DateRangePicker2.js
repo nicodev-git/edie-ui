@@ -60,7 +60,7 @@ export default class DateRangePicker2 extends React.Component {
 
   render () {
     const {rangeConfig} = this.state
-    let { className, startDate, endDate, children } = this.props
+    let { className, startDate, endDate, children, renderer } = this.props
 
     const startDateStr = (startDate || moment()).format('DD/MM/YYYY')
     const endDateStr = (endDate || moment()).format('DD/MM/YYYY')
@@ -90,7 +90,9 @@ export default class DateRangePicker2 extends React.Component {
 
         onApply={this.onApply.bind(this)}
       >
-        <a href="javascript:;">{label}{children}</a>
+        <a href="javascript:;" className={renderer ? 'hidden' : ''}>{label}</a>
+        {renderer ? renderer(label) : null}
+        {children}
       </ReactDateRangePicker>
     )
   }

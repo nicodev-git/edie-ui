@@ -88,14 +88,15 @@ export default class DateRangePicker extends React.Component {
   }
 
   render () {
+    const {renderer} = this.props
     return (
       <ReactDateRangePicker {...this.state.config}
         style={{display: 'inline-block'}}
         className={this.props.className}
         onApply={this.onApply.bind(this)}>
-
-        <a href="javascript:;">{this.state.label}{this.props.children}</a>
-
+        <a href="javascript:;" className={renderer ? 'hidden' : ''}>{this.state.label}</a>
+        {renderer ? renderer(this.state.label) : null}
+        {this.props.children}
       </ReactDateRangePicker>
     )
   }

@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import moment from 'moment'
 import { findIndex } from 'lodash'
-import Select from 'react-select'
 import {
   RaisedButton,
   MenuItem,
@@ -12,7 +11,7 @@ import {
 import TimeAgo from 'react-timeago'
 import ReactTooltip from 'react-tooltip'
 
-import DateRangePicker from '../../../../../shared/DateRangePicker'
+import DateRangePicker from '../../../../../shared/DateRangePicker2'
 import InfiniteTable from '../../../../../shared/InfiniteTable'
 import AddIncidentModal from './AddIncidentModal'
 import AddExceptionModal from './AddExceptionModal'
@@ -299,6 +298,12 @@ export default class MainIncidents extends Component {
     this.setState({open: false})
   }
 
+  renderDateLabel (label) {
+    return (
+      <RaisedButton label={label}/>
+    )
+  }
+
   render () {
     const {device, incidents} = this.props
     const {selectedIndex, selectedSeverity, severities} = this.state
@@ -333,18 +338,6 @@ export default class MainIncidents extends Component {
                   )}
                 </SelectField>
 
-                <Select
-                  value={this.state.selectedSeverity.join(',')}
-                  options={this.state.severities}
-                  onChange={this.onChangeSeverity.bind(this)}
-                  multi
-                  clearable={false}
-                  className="select-severity"
-                  style={{minWidth: '85px'}}
-                  searchable={false}
-                  autosize={false}
-                  backspaceRemoves={false}
-                />
                 <SelectField
                   onChange={this.onFixedChange.bind(this)}
                   value={this.state.fixed}
@@ -360,10 +353,14 @@ export default class MainIncidents extends Component {
                 </SelectField>
 
                 <DateRangePicker
+                  renderer={this.renderDateLabel.bind(this)}
                   onClickRange={this.onFilterChange} className="margin-md-left"
                   default={moment().startOf('years').format('YYYY')} ref="dp">
-                  <i className="fa fa-caret-down margin-xs-left" />
                 </DateRangePicker>
+                <DateRangePicker2
+                  startDate={startDate}
+                  endDate={endDate}
+                  onApply={onChangeDateRange}/>
 
                 <a href="javascript:;" title="Export" style={{display: 'none'}}><img
                   width="26" src="/images/btn-export.jpg"/></a>
