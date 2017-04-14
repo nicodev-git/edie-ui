@@ -11,7 +11,8 @@ import { showAlert, showConfirm } from '../../../../../shared/Alert'
 import InfiniteTable from '../../../../../shared/InfiniteTable'
 import MarkIgnoreModal from '../raw-incidents/MarkIgnoreModal'
 import SimulatorModal from '../rules/SimulatorModal'
-import DeviceWizardContainer from '../../../../../../containers/shared/wizard/DeviceWizardContainer'
+import DeviceWizardContainer from 'containers/shared/wizard/DeviceWizardContainer'
+import WorkflowModalContainer from 'containers/page/content/settings/rule/WorkflowModalContainer'
 
 import MainTabs from '../MainTabs'
 import TabPage from '../../../../../shared/TabPage'
@@ -19,7 +20,6 @@ import TabPageBody from '../../../../../shared/TabPageBody'
 import TabPageHeader from '../../../../../shared/TabPageHeader'
 
 import { ROOT_URL } from '../../../../../../actions/config'
-import { store } from 'shared/GetStore'
 
 export default class MainEvents extends Component {
   constructor (props) {
@@ -178,31 +178,7 @@ export default class MainEvents extends Component {
       showAlert('Please choose a row.')
       return
     }
-
-    const extra = {
-      deviceid: this.props.device.id,
-      idrulesNew: data.idrulesNew,
-      remoteip: data.remoteip
-    }
-
-    const config = {
-      mapid: this.props.device.mapid,
-      fatherid: 0
-    }
-
-    appendComponent(
-      <DeviceWizardContainer
-        deviceType="devicerule"
-        onClose={removeComponent}
-        extraParams={extra}
-        configParams={config}
-        onFinish={() => {
-          this.getTable().refresh()
-        }}
-        store={store}
-        values={data}
-      />
-    )
+    this.props.openWorkflowModal()
   }
 
   onClickRawSimulator () {
@@ -240,6 +216,13 @@ export default class MainEvents extends Component {
     )
   }
 
+  renderWorkflowModal () {
+    if (!this.props.workflowModalVisible) return null
+    return (
+      <WorkflowModalContainer />
+    )
+  }
+
   render () {
     const {device} = this.props
 
@@ -250,7 +233,7 @@ export default class MainEvents extends Component {
             <div className="pull-right">
               <ButtonGroup>
 
-                <Button onClick={this.onClickMakeRule.bind(this)}>Make Rule</Button>
+                <Button onClick={this.onClickMakeRule.bind(this)}>Make Workflow</Button>
                 <Button onClick={this.onClickDeleteRaw.bind(this)}>Delete All</Button>
                 <Button onClick={this.onClickMarkIgnored.bind(this)}>Mark as ignored</Button>
                 <Button onClick={this.onClickRawSimulator.bind(this)}>Simulator</Button>
@@ -273,6 +256,7 @@ export default class MainEvents extends Component {
 
         <TabPageBody tabs={MainTabs(device.id)} tab={2} tclass="object-table">
           {this.renderTable()}
+          {this.renderWorkflowModal()}
         </TabPageBody>
       </TabPage>
     )
