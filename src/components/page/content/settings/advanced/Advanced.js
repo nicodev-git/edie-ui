@@ -63,7 +63,6 @@ export default class Advanced extends React.Component {
   handleRequestClose () {
     this.setState({open: false})
   }
-
   render () {
     const {pageIndex} = this.state
     return (
