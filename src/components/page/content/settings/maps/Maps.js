@@ -1,8 +1,5 @@
 import React from 'react'
-import {
-    ButtonGroup,
-    Button
-} from 'react-bootstrap'
+import {RaisedButton} from 'material-ui'
 
 import InfiniteTable from '../../../../shared/InfiniteTable'
 import { appendComponent, removeComponent } from '../../../../../util/Component'
@@ -116,12 +113,10 @@ export default class Maps extends React.Component {
         <TabPageHeader title="Settings">
           <div className="text-center margin-md-top">
             <div style={{position: 'absolute', right: '25px'}}>
-              <ButtonGroup>
-                <Button onClick={this.onMapAdd.bind(this)}>Add Map</Button>
-                <Button onClick={this.onMapEdit.bind(this)}>Edit Map</Button>
-                <Button onClick={this.onMapDelete.bind(this)}>Delete Map</Button>
-                <Button onClick={this.onMapUsers.bind(this)}>Edit Map Users</Button>
-              </ButtonGroup>
+              <RaisedButton label="Add Map" onTouchTap={this.onMapAdd.bind(this)}/>&nbsp;
+              <RaisedButton label="Edit Map" onTouchTap={this.onMapEdit.bind(this)}/>&nbsp;
+              <RaisedButton label="Delete Map" onTouchTap={this.onMapDelete.bind(this)}/>&nbsp;
+              <RaisedButton label="Edit Map Users" onTouchTap={this.onMapUsers.bind(this)}/>&nbsp;
             </div>
           </div>
         </TabPageHeader>

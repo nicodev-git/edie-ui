@@ -1,9 +1,6 @@
 import React from 'react'
-import {
-    ButtonGroup,
-    DropdownButton,
-    MenuItem
-} from 'react-bootstrap'
+
+import {RaisedButton, Popover, MenuItem, Menu, SelectField} from 'material-ui'
 import InfiniteTable from '../../../../shared/InfiniteTable'
 import { appendComponent, removeComponent } from '../../../../../util/Component'
 import { showAlert, showConfirm } from '../../../../shared/Alert'
@@ -18,6 +15,7 @@ import TabPageBody from '../../../../shared/TabPageBody'
 import TabPageHeader from '../../../../shared/TabPageHeader'
 
 import { ROOT_URL } from '../../../../../actions/config'
+import { errorStyle, underlineFocusStyle, inputStyle, selectedItemStyle } from 'style/materialStyles'
 
 export default class Users extends React.Component {
   constructor (props) {
@@ -196,46 +194,77 @@ export default class Users extends React.Component {
     })
   }
 
+  onClickGroup () {
+
+  }
+
+  onClickUser () {
+
+  }
+
+  handleRequestClose () {
+    this.setState({
+      groupOpen: false,
+      userOpen: false
+    })
+  }
+
   render () {
     return (
       <TabPage>
         <TabPageHeader title="Settings">
           <div className="text-center margin-md-top">
-            <div className="pull-left">
-              <select className="form-control"
+            <div className="pull-left text-left">
+              <SelectField
+                errorStyle={errorStyle}
+                underlineStyle={underlineFocusStyle}
+                selectedMenuItemStyle={selectedItemStyle}
+                menuItemStyle={inputStyle}
+                labelStyle={inputStyle}
                 onChange={this.onChangeGroup.bind(this)}
-                ref="groups">
-                <option value="">All groups</option>
+                value="">
+                <MenuItem value="" primaryText="All groups"/>
                 {
                   this.state.groups.map(item =>
-                    <option key={item.id} value={item.id}>{item.name}</option>
+                    <MenuItem key={item.id} value={item.id} primaryText={item.name}/>
                   )
                 }
-              </select>
+              </SelectField>
             </div>
 
             <div style={{position: 'absolute', right: '25px'}}>
-              <ButtonGroup>
 
-                <DropdownButton title="Group" id="dd-setting-groups" pullRight>
+              <RaisedButton label="Group" onTouchTap={this.onClickGroup.bind(this)}/>
+              <Popover
+                open={this.state.groupOpen}
+                anchorEl={this.state.anchorEl}
+                anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
+                targetOrigin={{horizontal: 'left', vertical: 'top'}}
+                onRequestClose={this.handleRequestClose.bind(this)}
+              >
+                <Menu>
+                  <MenuItem primaryText="Add" onTouchTap={this.onAddGroup.bind(this)}/>
+                  <MenuItem primaryText="Edit" onTouchTap={this.onClickEditGroup.bind(this)}/>
+                  <MenuItem primaryText="Remove" onTouchTap={this.onClickRemoveGroup.bind(this)}/>
+                </Menu>
+              </Popover>
 
-                  <MenuItem eventKey="1" onClick={this.onAddGroup.bind(this)}>Add</MenuItem>
-                  <MenuItem eventKey="2" onClick={this.onClickEditGroup.bind(this)}>Edit</MenuItem>
-                  <MenuItem eventKey="3" onClick={this.onClickRemoveGroup.bind(this)}>Remove</MenuItem>
-
-                </DropdownButton>
-
-                <DropdownButton title="User" id="dd-setting-users" pullRight>
-
-                  <MenuItem eventKey="1" onClick={this.onAddUser.bind(this)}>Add</MenuItem>
-                  <MenuItem eventKey="2" onClick={this.onEditUser.bind(this)}>Edit</MenuItem>
-                  <MenuItem eventKey="3" onClick={this.onRemoveUser.bind(this)}>Remove</MenuItem>
-                  <MenuItem eventKey="4" onClick={this.onChangePassword.bind(this)}>Change Password</MenuItem>
-                  <MenuItem eventKey="5" onClick={this.onClickPin.bind(this)}>Regenerate Pin</MenuItem>
-
-                </DropdownButton>
-
-              </ButtonGroup>
+              <RaisedButton label="User" onTouchTap={this.onClickUser.bind(this)}/>
+              <Popover
+                open={this.state.userOpen}
+                anchorEl={this.state.anchorEl}
+                anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
+                targetOrigin={{horizontal: 'left', vertical: 'top'}}
+                onRequestClose={this.handleRequestClose.bind(this)}
+              >
+                <Menu>
+                  <MenuItem primaryText="Add" onTouchTap={this.onAddUser.bind(this)}/>
+                  <MenuItem primaryText="Edit" onTouchTap={this.onEditUser.bind(this)}/>
+                  <MenuItem primaryText="Remove" onTouchTap={this.onRemoveUser.bind(this)}/>
+                  <MenuItem primaryText="Change Password" onTouchTap={this.onChangePassword.bind(this)}/>
+                  <MenuItem primaryText="Regenerate Pin" onTouchTap={this.onClickPin.bind(this)}/>
+                </Menu>
+              </Popover>
             </div>
           </div>
         </TabPageHeader>
