@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import { ButtonGroup, Button } from 'react-bootstrap'
+import {RaisedButton, MenuItem, SelectField} from 'material-ui'
 
 import SettingTabs from '../SettingTabs'
 import TabPage from '../../../../shared/TabPage'
@@ -12,6 +12,7 @@ import MonitorTplModal from './MonitorTplModal'
 import ImageUploaderModal from './ImageUploaderModal'
 
 import { showConfirm } from 'components/shared/Alert'
+import { errorStyle, underlineFocusStyle, inputStyle, selectedItemStyle } from 'style/materialStyles'
 
 export default class Templates extends Component {
   constructor (props) {
@@ -138,8 +139,8 @@ export default class Templates extends Component {
     })
   }
 
-  onChangeType (e) {
-    this.setState({ type: e.target.value, selected: -1 })
+  onChangeType (e, index, value) {
+    this.setState({ type: value, selected: -1 })
   }
 
   onClickAdd () {
@@ -163,18 +164,23 @@ export default class Templates extends Component {
       <TabPage>
         <TabPageHeader title="Settings">
           <div className="text-center margin-md-top">
-            <div className="pull-left">
-              <select className="form-control" value={type} onChange={this.onChangeType.bind(this)}>
-                <option>Device</option>
-                <option>Monitor</option>
-              </select>
+            <div className="pull-left text-left">
+              <SelectField
+                errorStyle={errorStyle}
+                underlineStyle={underlineFocusStyle}
+                selectedMenuItemStyle={selectedItemStyle}
+                menuItemStyle={inputStyle}
+                labelStyle={inputStyle}
+                onChange={this.onChangeType.bind(this)}
+                value={type}>
+                <MenuItem value="Device" primaryText="Device"/>
+                <MenuItem value="Monitor" primaryText="Monitor"/>
+              </SelectField>
             </div>
 
             <div style={{position: 'absolute', right: '25px'}}>
-              <ButtonGroup>
-                <Button onClick={this.onClickAdd.bind(this)}>Add</Button>
-                <Button onClick={this.onClickEdit.bind(this)}>Edit</Button>
-              </ButtonGroup>
+              <RaisedButton label="Add" onTouchTap={this.onClickAdd.bind(this)}/>&nbsp;
+              <RaisedButton label="Edit" onTouchTap={this.onClickEdit.bind(this)}/>&nbsp;
             </div>
           </div>
         </TabPageHeader>

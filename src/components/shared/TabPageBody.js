@@ -37,7 +37,7 @@ export default class TabPageBody extends Component {
     let tableclass = tclass || ''
     return (
       <div className="tabs-custom flex-vertical flex-1">
-        <ul className={`nav nav-tabs tab-container ${tabs.length ? '' : 'mt-none'}`}>
+        <div className={`nav nav-tabs tab-container ${tabs.length ? '' : 'mt-none'}`}>
           {tabs.map((item, i) =>
               <div
                 key={i}
@@ -49,7 +49,7 @@ export default class TabPageBody extends Component {
                 </div>
               </div>
           )}
-        </ul>
+        </div>
         <div className={`tab-content ${tableclass}`}>
           {this.props.children}
         </div>

@@ -195,6 +195,7 @@ table.table tbody tr.selected {
 
 .tabs-custom .tab-content {
     margin-bottom: 0;
+    overflow: auto;
 }
 
 /* Panel */
