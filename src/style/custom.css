@@ -216,6 +216,12 @@ table.table tbody tr.selected {
     color: white;
 }
 
+.header-blue {
+    background: #3A94F6;
+    padding: 10px;
+    color: white;
+}
+
 /*Table column size */
 
 .width-40 {
