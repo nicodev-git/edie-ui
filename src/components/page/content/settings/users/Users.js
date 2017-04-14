@@ -86,7 +86,7 @@ export default class Users extends React.Component {
   }
 
   getUsers () {
-    return this.refs.users.refs.wrappedInstance
+    return this.refs.users
   }
 
   onChangeGroup (groupId) {
@@ -194,12 +194,18 @@ export default class Users extends React.Component {
     })
   }
 
-  onClickGroup () {
-
+  onClickGroup (e) {
+    this.setState({
+      groupOpen: true,
+      anchorEl: e.currentTarget
+    })
   }
 
-  onClickUser () {
-
+  onClickUser (e) {
+    this.setState({
+      userOpen: true,
+      anchorEl: e.currentTarget
+    })
   }
 
   handleRequestClose () {
@@ -234,7 +240,7 @@ export default class Users extends React.Component {
 
             <div style={{position: 'absolute', right: '25px'}}>
 
-              <RaisedButton label="Group" onTouchTap={this.onClickGroup.bind(this)}/>
+              <RaisedButton label="Group" onTouchTap={this.onClickGroup.bind(this)}/>&nbsp;
               <Popover
                 open={this.state.groupOpen}
                 anchorEl={this.state.anchorEl}
