@@ -238,9 +238,10 @@ export default class MainIncidents extends Component {
     window.open(url, '_blank')
   }
 
-  onChangeSeverity (selected) {
+  onChangeSeverity (e, index, values) {
+    console.log(arguments)
     this.setState({
-      selectedSeverity: selected.map(item => item.value)
+      selectedSeverity: values
     }, this.onFilterChange)
   }
 
@@ -300,7 +301,7 @@ export default class MainIncidents extends Component {
 
   render () {
     const {device, incidents} = this.props
-    const {selectedIndex} = this.state
+    const {selectedIndex, selectedSeverity, severities} = this.state
 
     let selectedIncident = selectedIndex < 0 ? null : incidents[selectedIndex]
 
@@ -308,9 +309,30 @@ export default class MainIncidents extends Component {
       <TabPage>
         <TabPageHeader title={device.name}>
           <div className="text-center margin-md-top">
-
             <div className="pull-left">
               <div className="text-left form-mui-inline">
+                <SelectField
+                  errorStyle={errorStyle}
+                  underlineStyle={underlineFocusStyle}
+                  selectedMenuItemStyle={selectedItemStyle}
+                  menuItemStyle={inputStyle}
+                  labelStyle={inputStyle}
+                  multiple
+                  hintText="Select severities"
+                  onChange={this.onChangeSeverity.bind(this)}
+                  value={selectedSeverity}
+                >
+                  {severities.map(option =>
+                    <MenuItem
+                      key={option.value}
+                      insetChildren
+                      checked={selectedSeverity && selectedSeverity.includes(option.value)}
+                      value={option.value}
+                      primaryText={option.label}
+                    />
+                  )}
+                </SelectField>
+
                 <Select
                   value={this.state.selectedSeverity.join(',')}
                   options={this.state.severities}
