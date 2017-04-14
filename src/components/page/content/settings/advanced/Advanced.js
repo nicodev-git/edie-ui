@@ -78,21 +78,23 @@ export default class Advanced extends React.Component {
                   <MenuItem eventKey="2" onClick={this.onClickEditRouting.bind(this)}>Edit</MenuItem>
                 </DropdownButton>
 
-                <RaisedButton icon={<SettingIcon />} onTouchTap={this.handleTouchTap.bind(this)}/>
-                <Popover
-                  open={this.state.open}
-                  anchorEl={this.state.anchorEl}
-                  anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
-                  targetOrigin={{horizontal: 'left', vertical: 'top'}}
-                  onRequestClose={this.handleRequestClose.bind(this)}
-                >
-                  <Menu>
-                    <MenuItem primaryText="Main" onTouchTap={this.onClickTab.bind(this, 0)}/>
-                    <MenuItem primaryText="Websocket" onTouchTap={this.onClickTab.bind(this, 1)}/>
-                    <MenuItem primaryText="Routing" onTouchTap={this.onClickTab.bind(this, 2)}/>
-                  </Menu>
-                </Popover>
+
               </ButtonGroup>
+
+              <RaisedButton icon={<SettingIcon />} onTouchTap={this.handleTouchTap.bind(this)}/>
+              <Popover
+                open={this.state.open}
+                anchorEl={this.state.anchorEl}
+                anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
+                targetOrigin={{horizontal: 'left', vertical: 'top'}}
+                onRequestClose={this.handleRequestClose.bind(this)}
+              >
+                <Menu>
+                  <MenuItem primaryText="Main" onTouchTap={this.onClickTab.bind(this, 0)}/>
+                  <MenuItem primaryText="Websocket" onTouchTap={this.onClickTab.bind(this, 1)}/>
+                  <MenuItem primaryText="Routing" onTouchTap={this.onClickTab.bind(this, 2)}/>
+                </Menu>
+              </Popover>
             </div>
           </div>
         </TabPageHeader>

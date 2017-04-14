@@ -3,11 +3,11 @@ import moment from 'moment'
 import { findIndex } from 'lodash'
 import Select from 'react-select'
 import {
-  DropdownButton,
-  ButtonGroup,
+  RaisedButton,
   MenuItem,
-  Button
-} from 'react-bootstrap'
+  Menu,
+  Popover
+} from 'material-ui'
 import TimeAgo from 'react-timeago'
 import ReactTooltip from 'react-tooltip'
 
@@ -277,6 +277,17 @@ export default class MainIncidents extends Component {
     return this.refs.table
   }
 
+  handleTouchTap (event) {
+    this.setState({
+      open: true,
+      anchorEl: event.currentTarget
+    })
+  }
+
+  handleRequestClose () {
+    this.setState({open: false})
+  }
+
   render () {
     const {device, incidents} = this.props
     const {selectedIndex} = this.state
@@ -325,29 +336,22 @@ export default class MainIncidents extends Component {
             </div>
 
             <div className="pull-right">
-              <ButtonGroup>
-
-                <Button onClick={this.onClickOpen.bind(this)}>Open</Button>
-
-                <Button onClick={this.onClickFixAll.bind(this)}>Fix All</Button>
-
-                <DropdownButton title="More" id="dd-dev-incidents" pullRight>
-
-                  <MenuItem eventKey="1" onClick={this.onClickAddIncident.bind(this)}>
-                    Add Incident
-                  </MenuItem>
-
-                  <MenuItem eventKey="2" onClick={this.onClickAddException.bind(this)}>
-                    Add Exception
-                  </MenuItem>
-
-                  <MenuItem eventKey="3" onClick={this.onClickPDF.bind(this)}>
-                    Export PDF
-                  </MenuItem>
-
-                </DropdownButton>
-
-              </ButtonGroup>
+              <RaisedButton label="Open" onTouchTap={this.onClickOpen.bind(this)}/>&nbsp;
+              <RaisedButton label="Fix All" onTouchTap={this.onClickFixAll.bind(this)}/>&nbsp;
+              <RaisedButton label="More" primary onTouchTap={this.handleTouchTap.bind(this)}/>&nbsp;
+              <Popover
+                open={this.state.open}
+                anchorEl={this.state.anchorEl}
+                anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
+                targetOrigin={{horizontal: 'left', vertical: 'top'}}
+                onRequestClose={this.handleRequestClose.bind(this)}
+              >
+                <Menu>
+                  <MenuItem primaryText="Add Incident" onTouchTap={this.onClickAddIncident.bind(this)}/>
+                  <MenuItem primaryText="Add Exception" onTouchTap={this.onClickAddException.bind(this)}/>
+                  <MenuItem primaryText="Export PDF" onTouchTap={this.onClickPDF.bind(this)}/>
+                </Menu>
+              </Popover>
             </div>
 
             <div style={{margin: '0 auto', position: 'relative', display: 'inline-block', textAlign: 'center'}}>
