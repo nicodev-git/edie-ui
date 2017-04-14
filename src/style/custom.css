@@ -119,6 +119,9 @@ a, a:focus, a:hover {
 table.table tbody tr.selected {
     background-color: #B0BED9;
 }
+table.table tbody tr.selected td {
+    color: white !important;
+}
 
 .table.table-p-sm>tbody>tr>td,
 .table.table-p-sm>tbody>tr>th,
