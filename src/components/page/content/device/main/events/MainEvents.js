@@ -1,9 +1,6 @@
 import React, { Component } from 'react'
 import moment from 'moment'
-import {
-    ButtonGroup,
-    Button
-} from 'react-bootstrap'
+import {RaisedButton, TextField} from 'material-ui'
 import MainWorkflowModal from '../workflows/MainWorkflowModal'
 
 import { appendComponent, removeComponent } from '../../../../../../util/Component'
@@ -20,6 +17,7 @@ import TabPageBody from '../../../../../shared/TabPageBody'
 import TabPageHeader from '../../../../../shared/TabPageHeader'
 
 import { ROOT_URL } from '../../../../../../actions/config'
+import { errorStyle, inputStyle, underlineStyle } from 'style/materialStyles'
 
 export default class MainEvents extends Component {
   constructor (props) {
@@ -229,14 +227,10 @@ export default class MainEvents extends Component {
         <TabPageHeader title={device.name}>
           <div className="text-center margin-md-top">
             <div className="pull-right">
-              <ButtonGroup>
-
-                <Button onClick={this.onClickMakeRule.bind(this)}>Make Workflow</Button>
-                <Button onClick={this.onClickDeleteRaw.bind(this)}>Delete All</Button>
-                <Button onClick={this.onClickMarkIgnored.bind(this)}>Mark as ignored</Button>
-                <Button onClick={this.onClickRawSimulator.bind(this)}>Simulator</Button>
-
-              </ButtonGroup>
+              <RaisedButton onTouchTap={this.onClickMakeRule.bind(this)}>Make Workflow</RaisedButton>&nbsp;
+              <RaisedButton onTouchTap={this.onClickDeleteRaw.bind(this)}>Delete All</RaisedButton>&nbsp;
+              <RaisedButton onTouchTap={this.onClickMarkIgnored.bind(this)}>Mark as ignored</RaisedButton>&nbsp;
+              <RaisedButton onTouchTap={this.onClickRawSimulator.bind(this)}>Simulator</RaisedButton>&nbsp;
             </div>
 
             <div style={{margin: '0 auto', position: 'relative', width: '550px', textAlign: 'center'}}>
