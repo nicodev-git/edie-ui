@@ -4,6 +4,8 @@ import {
     ButtonGroup,
     Button
 } from 'react-bootstrap' // Never used
+
+import {Checkbox} from 'material-ui'
 import { assign } from 'lodash'
 
 import SettingTabs from '../SettingTabs' // Never used
@@ -39,7 +41,7 @@ export default class General extends React.Component {
     return (
       <div className="padding-md form-inline">
         <div className="col-md-12 margin-md-bottom bt-gray">
-          <label className="margin-sm-top margin-sm-bottom" style={{width: '150px'}}>System Name:</label>
+          <label className="margin-sm-top margin-sm-bottom width-200">System Name:</label>
           <InlineEdit
             text={this.getOptionValue('SYSTEM_NAME') || '[Empty]'}
             paramName="message"
@@ -50,85 +52,74 @@ export default class General extends React.Component {
         </div>
 
         <div className="col-md-12 margin-md-bottom bt-gray">
-          <div className="checkbox">
-            <label style={{width: '150px'}} className="margin-sm-top margin-sm-bottom">
-              <input type="checkbox" className="margin-xs-right" ref="dmz"
-                checked={this.getOptionValue('DMZ') === 'true'}
-                onChange={this.onChangeDmz.bind(this)}/>
-              Enable DMZ
-            </label>
+          <div className="pull-left width-200">
+            <Checkbox
+              label="Enable DMZ"
+              checked={this.getOptionValue('DMZ') === 'true'}
+              onCheck={this.onChangeDmz.bind(this)}/>
           </div>
-
-          <label className="margin-md-left hidden">DMZ IP Address:</label>
           <InlineEdit
             text={this.getOptionValue('DMZ', 'value2')}
             paramName="message"
             change={this.onChangeDmzIP.bind(this)}
-            className="inline-block"
+            className="pull-left margin-xs-top"
             ref="dmzIp"
           />
         </div>
         <div className="col-md-12 margin-md-bottom bt-gray">
-          <div className="checkbox">
-            <label className="margin-sm-top margin-sm-bottom">
-              <input type="checkbox" className="margin-xs-right"
-                checked={this.getOptionValue('PAUSE') === 'true'} onChange={this.onChangePause.bind(this)}/>
-              Pause System
-            </label>
+          <div className="pull-left width-200">
+            <Checkbox
+              label="Pause System"
+              checked={this.getOptionValue('PAUSE') === 'true'}
+              onCheck={this.onChangePause.bind(this)}/>
           </div>
         </div>
         <div className="col-md-12 margin-md-bottom bt-gray">
-          <div className="checkbox">
-            <label className="margin-sm-top margin-sm-bottom">
-              <input type="checkbox" className="margin-xs-right"
-                checked={this.getOptionValue('NETWORK_TRAFFIC') === 'true'} onChange={this.onChangeTraffic.bind(this)}/>
-              Display Network Traffic
-            </label>
+          <div className="pull-left width-200">
+            <Checkbox
+              label="Display Network Traffic"
+              checked={this.getOptionValue('NETWORK_TRAFFIC') === 'true'}
+              onCheck={this.onChangeTraffic.bind(this)}/>
           </div>
         </div>
         <div className="col-md-12 margin-md-bottom bt-gray">
-          <div className="checkbox">
-            <label style={{width: '150px'}} className="margin-sm-top margin-sm-bottom">
-              <input type="checkbox" className="margin-xs-right"
-                checked={this.getOptionValue('REMOTE_LOG_ENABLED') === 'true'} onChange={this.onChangeLogEnabled.bind(this)}/>
-              Send Error Logs With
-            </label>
-
-            <label className="margin-md-left hidden">Error Logs Batch:</label>
-            <InlineEdit
-              text={this.getOptionValue('REMOTE_LOG_BATCH') || '[Empty]'}
-              paramName="message"
-              change={this.onChangeLogBatch.bind(this)}
-              className="inline-block"
-            />
+          <div className="pull-left width-200">
+            <Checkbox
+              label="Send Error Logs With"
+              checked={this.getOptionValue('REMOTE_LOG_ENABLED') === 'true'}
+              onCheck={this.onChangeLogEnabled.bind(this)}/>
           </div>
+          <InlineEdit
+            text={this.getOptionValue('REMOTE_LOG_BATCH') || '[Empty]'}
+            paramName="message"
+            change={this.onChangeLogBatch.bind(this)}
+            className="pull-left margin-xs-top"
+          />
         </div>
 
         <div className="col-md-12 margin-md-bottom bt-gray">
-          <div className="checkbox">
-            <label style={{width: '150px'}} className="margin-sm-top margin-sm-bottom">
-              <input type="checkbox" className="margin-xs-right"
-                checked={!!this.getOptionValue('IMMOBILE')} onChange={this.onChangeSendMobile.bind(this)}/>
-              Send to mobile
-            </label>
-            <InlineEdit
-              text={this.getOptionValue('IMMOBILE')}
-              paramName="message"
-              change={this.onChangeMobileIP.bind(this)}
-              className="inline-block"
-              ref="mobileIp"
-              minLength={0}
-            />
+          <div className="pull-left width-200">
+            <Checkbox
+              label="Send to mobile"
+              checked={this.getOptionValue('IMMOBILE') === 'true'}
+              onCheck={this.onChangeSendMobile.bind(this)}/>
           </div>
+
+          <InlineEdit
+            text={this.getOptionValue('IMMOBILE')}
+            paramName="message"
+            change={this.onChangeMobileIP.bind(this)}
+            className="pull-left margin-xs-top"
+            ref="mobileIp"
+            minLength={0}
+          />
         </div>
 
-        <div className="col-md-12 margin-md-bottom bt-gray">
-          <div className="checkbox">
-            <label style={{width: '150px'}} className="margin-sm-top margin-sm-bottom">
-              Customer ID
-            </label>
-            <label>{this.getOptionValue('CUSTOMER_ID') || '[None]'}</label>
-          </div>
+        <div className="col-md-12 margin-lg-top text-gray">
+          <label className="margin-sm-top margin-sm-bottom width-200">
+            Customer ID
+          </label>
+          <label>{this.getOptionValue('CUSTOMER_ID') || '[None]'}</label>
         </div>
       </div>
     )
