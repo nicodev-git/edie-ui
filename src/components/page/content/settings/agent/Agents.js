@@ -237,7 +237,7 @@ export default class Agents extends Component {
       <TabPage>
         <TabPageHeader title="Settings">
           <div className="text-center margin-md-top">
-            <div className="pull-left form-inline">
+            <div className="pull-left form-inline text-left">
               <SelectField
                 errorStyle={errorStyle}
                 underlineStyle={underlineFocusStyle}

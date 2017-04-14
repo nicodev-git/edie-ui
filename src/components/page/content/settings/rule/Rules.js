@@ -1,8 +1,5 @@
 import React from 'react'
-import {
-  ButtonGroup,
-  Button
-} from 'react-bootstrap'
+import {RaisedButton, MenuItem, SelectField} from 'material-ui'
 
 import InfiniteTable from '../../../../shared/InfiniteTable'
 import { showAlert } from '../../../../shared/Alert'
@@ -12,6 +9,7 @@ import TabPage from '../../../../shared/TabPage'
 import TabPageBody from '../../../../shared/TabPageBody'
 import TabPageHeader from '../../../../shared/TabPageHeader'
 import WorkflowModalContainer from '../../../../../containers/page/content/settings/rule/WorkflowModalContainer'
+import { errorStyle, underlineFocusStyle, inputStyle, selectedItemStyle } from 'style/materialStyles'
 
 export default class Rules extends React.Component {
   constructor (props) {
@@ -70,11 +68,12 @@ export default class Rules extends React.Component {
   }
 
   getTable () {
-    return this.refs.logicalRules.refs.wrappedInstance
+    return this.refs.logicalRules
   }
 
-  onChangeCategory (e) {
-    this.props.selectWorkflowCategory(e.target.value)
+  onChangeCategory (e, index, value) {
+    console.log(arguments)
+    this.props.selectWorkflowCategory(value)
   }
 
   onAddWorkflow () {
@@ -98,21 +97,25 @@ export default class Rules extends React.Component {
       <TabPage>
         <TabPageHeader title="Settings">
           <div className="text-center margin-md-top">
-            <div className="pull-left form-inline">
-              <select className="form-control" value={this.props.selectedWorkflowCategory} onChange={this.onChangeCategory.bind(this)}>
-                <option value="">All</option>
+            <div className="pull-left form-inline text-left">
+              <SelectField
+                errorStyle={errorStyle}
+                underlineStyle={underlineFocusStyle}
+                selectedMenuItemStyle={selectedItemStyle}
+                menuItemStyle={inputStyle}
+                labelStyle={inputStyle}
+                onChange={this.onChangeCategory.bind(this)}
+                value={this.props.selectedWorkflowCategory}>
+                <MenuItem value="" primaryText="All"/>
                 {this.props.workflowCategories.map(m =>
-                  <option key={m.id}>{m.name}</option>
+                  <MenuItem key={m.id} value={m.id} primaryText={m.name}/>
                 )}
-              </select>
+              </SelectField>
             </div>
             <div className="pull-right">
-              <ButtonGroup>
-
-                <Button onClick={this.onAddWorkflow.bind(this)}>Add</Button>
-                <Button onClick={this.onEditWorkflow.bind(this)}>Edit</Button>
-                <Button onClick={this.onRemoveWorkflow.bind(this)}>Remove</Button>
-              </ButtonGroup>
+              <RaisedButton label="Add" onTouchTap={this.onAddWorkflow.bind(this)}/>&nbsp;
+              <RaisedButton label="Edit" onTouchTap={this.onEditWorkflow.bind(this)}/>&nbsp;
+              <RaisedButton label="Remove" onTouchTap={this.onRemoveWorkflow.bind(this)}/>&nbsp;
             </div>
           </div>
         </TabPageHeader>
