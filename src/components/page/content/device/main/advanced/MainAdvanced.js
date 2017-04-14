@@ -1,5 +1,6 @@
 import React from 'react'
 import { showAlert } from '../../../../../shared/Alert'
+import {RaisedButton} from 'material-ui'
 
 import MainTabs from '../MainTabs'
 import TabPage from '../../../../../shared/TabPage'
@@ -36,13 +37,15 @@ export default class MainAdvanced extends React.Component {
         </TabPageHeader>
 
         <TabPageBody tabs={MainTabs(device.id)} tab={3}>
-          <div className="row">
+          <div className="padding-md">
             <label className="control-label col-md-12"><b>Simulate Incident</b></label>
-            <label className="control-label col-md-1">Text: </label>
-            <div className="col-md-9">
+            <label className="control-label col-md-2">Text: </label>
+            <div className="col-md-10">
               <textarea className="form-control col-md-12" style={{height: '120px'}} ref="message" />
             </div>
-            <a href="javascript:;" className="btn btn-primary" onClick={this.onClickSend.bind(this)}>Send</a>
+            <div className="col-md-offset-3 col-md-9 margin-md-top">
+              <RaisedButton label="send" primary onTouchTap={this.onClickSend.bind(this)} className="pull-right"/>
+            </div>
           </div>
         </TabPageBody>
       </TabPage>
