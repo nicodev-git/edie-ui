@@ -1,10 +1,5 @@
 import React from 'react'
-import {
-    DropdownButton,
-    ButtonGroup,
-    MenuItem,
-    Button
-} from 'react-bootstrap'
+import {RaisedButton, Menu, MenuItem, Popover} from 'material-ui'
 
 import MonitorTable from './MonitorTable'
 import EventLogTable from './EventLogTable'
@@ -78,6 +73,19 @@ export default class Monitors extends React.Component {
     })
   }
 
+  handleTouchTap (event) {
+    this.setState({
+      open: true,
+      anchorEl: event.currentTarget
+    })
+  }
+
+  handleRequestClose () {
+    this.setState({
+      open: false
+    })
+  }
+
   renderOptions () {
     const {selected, currentMonitor} = this.state
 
@@ -101,30 +109,24 @@ export default class Monitors extends React.Component {
             </div>
 
             <div style={{position: 'absolute', right: '25px'}}>
-              <ButtonGroup>
+              <RaisedButton label="Add" onTouchTap={this.onClickAddMonitor.bind(this)}/>&nbsp;
+              <RaisedButton label="Edit" onTouchTap={this.onClickEditMonitor.bind(this)}/>&nbsp;
+              <RaisedButton label="Delete" onTouchTap={this.onClickDeleteMonitor.bind(this)}/>&nbsp;
 
-                <Button onClick={this.onClickAddMonitor.bind(this)} className={selected === 'monitors' ? '' : 'hidden'} >Add</Button>
-
-                <Button onClick={this.onClickEditMonitor.bind(this)} className={selected === 'monitors' ? '' : 'hidden'}>Edit</Button>
-
-                <Button onClick={this.onClickDeleteMonitor.bind(this)} className={selected === 'monitors' ? '' : 'hidden'}>Delete</Button>
-
-                <DropdownButton title="System" id="dd-dev-monitors" pullRight>
-
-                  <MenuItem eventKey="1" onClick={this.onClickEventLog.bind(this)}>
-                    <i className="fa fa-edit" />&nbsp;Event Log
-                  </MenuItem>
-
-                  <MenuItem eventKey="2" onClick={this.onClickApplication.bind(this)}>
-                    <i className="fa fa-edit" />&nbsp;Installed Applications
-                  </MenuItem>
-
-                  <MenuItem eventKey="3" onClick={this.onClickProcess.bind(this)}>
-                    <i className="fa fa-edit" />&nbsp;Process
-                  </MenuItem>
-
-                </DropdownButton>
-              </ButtonGroup>
+              <RaisedButton label="System" primary onTouchTap={this.handleTouchTap.bind(this)}/>
+              <Popover
+                open={this.state.open}
+                anchorEl={this.state.anchorEl}
+                anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
+                targetOrigin={{horizontal: 'left', vertical: 'top'}}
+                onRequestClose={this.handleRequestClose.bind(this)}
+              >
+                <Menu>
+                  <MenuItem primaryText="Event Log" onTouchTap={this.onClickEventLog.bind(this)}/>
+                  <MenuItem primaryText="Installed Applications" onTouchTap={this.onClickApplication.bind(this)}/>
+                  <MenuItem primaryText="Process" onTouchTap={this.onClickProcess.bind(this)}/>
+                </Menu>
+              </Popover>
             </div>
           </div>
         )

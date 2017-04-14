@@ -1,8 +1,4 @@
 import React from 'react'
-import {
-    ButtonGroup,
-    DropdownButton
-} from 'react-bootstrap'
 import {RaisedButton, Menu, MenuItem, Popover} from 'material-ui'
 import SettingIcon from 'material-ui/svg-icons/action/settings'
 
@@ -61,7 +57,17 @@ export default class Advanced extends React.Component {
   }
 
   handleRequestClose () {
-    this.setState({open: false})
+    this.setState({
+      open: false,
+      routeOpen: false
+    })
+  }
+
+  onClickRouting (event) {
+    this.setState({
+      routeOpen: true,
+      anchorEl: event.currentTarget
+    })
   }
   render () {
     const {pageIndex} = this.state
@@ -70,17 +76,19 @@ export default class Advanced extends React.Component {
         <TabPageHeader title="Settings">
           <div className="text-center margin-md-top">
             <div style={{position: 'absolute', right: '25px'}}>
-              <ButtonGroup>
-
-                <DropdownButton title="Routing" id="dd-setting-routing" pullRight
-                  className={pageIndex === 2 ? '' : 'hidden'}>
-                  <MenuItem eventKey="1" onClick={this.onClickAddRouting.bind(this)}>Add</MenuItem>
-                  <MenuItem eventKey="2" onClick={this.onClickEditRouting.bind(this)}>Edit</MenuItem>
-                </DropdownButton>
-
-
-              </ButtonGroup>
-
+              {pageIndex === 2 && <RaisedButton label="Routing" onTouchTap={this.onClickRouting.bind(this)}/>}&nbsp;
+              <Popover
+                open={this.state.routeOpen}
+                anchorEl={this.state.anchorEl}
+                anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
+                targetOrigin={{horizontal: 'left', vertical: 'top'}}
+                onRequestClose={this.handleRequestClose.bind(this)}
+              >
+                <Menu>
+                  <MenuItem primaryText="Add" onTouchTap={this.onClickAddRouting.bind(this)}/>
+                  <MenuItem primaryText="Edit" onTouchTap={this.onClickEditRouting.bind(this)}/>
+                </Menu>
+              </Popover>
               <RaisedButton icon={<SettingIcon />} onTouchTap={this.handleTouchTap.bind(this)}/>
               <Popover
                 open={this.state.open}
