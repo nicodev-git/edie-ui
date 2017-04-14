@@ -47,7 +47,7 @@ export default class ProcessTable extends React.Component {
   }
 
   onRowDblClick () {
-    const selected = this.refs.table.refs.wrappedInstance.getSelected()
+    const selected = this.refs.table.getSelected()
     this.props.openProcessModal(selected)
   }
 

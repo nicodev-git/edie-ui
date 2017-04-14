@@ -266,7 +266,7 @@ export default class MonitorTable extends Component {
   }
 
   getTable () {
-    return this.refs.table.refs.wrappedInstance
+    return this.refs.table
   }
 
   render () {

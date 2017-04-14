@@ -1,8 +1,5 @@
 import React from 'react'
-import {
-  ButtonGroup,
-  Button
-} from 'react-bootstrap'
+import {RaisedButton} from 'material-ui'
 import { assign, concat } from 'lodash'
 
 import SettingTabs from '../SettingTabs'
@@ -34,7 +31,7 @@ class ParserTypes extends React.Component {
   }
 
   getTable () {
-    return this.refs.table.refs.wrappedInstance
+    return this.refs.table
   }
 
   onClickAdd () {
@@ -93,14 +90,10 @@ class ParserTypes extends React.Component {
         <TabPageHeader title="Settings">
           <div className="text-center margin-md-top">
             <div style={{position: 'absolute', right: '25px'}}>
-              <ButtonGroup>
-
-                <Button onClick={this.onClickAdd.bind(this)}>Add</Button>
-                <Button onClick={this.onClickEdit.bind(this)}>Edit</Button>
-                <Button onClick={this.onClickRemove.bind(this)}>Remove</Button>
-                <Button onClick={this.onClickSimulation.bind(this)}>Simulation</Button>
-
-              </ButtonGroup>
+              <RaisedButton label="Add" onTouchTap={this.onClickAdd.bind(this)}/>&nbsp;
+              <RaisedButton label="Edit" onTouchTap={this.onClickEdit.bind(this)}/>&nbsp;
+              <RaisedButton label="Remove" onTouchTap={this.onClickRemove.bind(this)}/>&nbsp;
+              <RaisedButton label="Simulation" onTouchTap={this.onClickSimulation.bind(this)}/>&nbsp;
             </div>
           </div>
         </TabPageHeader>

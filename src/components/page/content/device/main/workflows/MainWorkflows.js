@@ -60,7 +60,7 @@ export default class MainWorkflows extends React.Component {
   }
 
   getTable () {
-    return this.refs.table.refs.wrappedInstance
+    return this.refs.table
   }
 
   renderTable () {

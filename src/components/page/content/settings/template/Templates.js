@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 
-import {RaisedButton, MenuItem, SelectField} from 'material-ui'
+import {RaisedButton, MenuItem, SelectField, IconButton} from 'material-ui'
+import DeleteIcon from 'material-ui/svg-icons/action/delete'
 
 import SettingTabs from '../SettingTabs'
 import TabPage from '../../../../shared/TabPage'
@@ -45,9 +46,11 @@ export default class Templates extends Component {
                 onClick={this.onClickRow.bind(this, index)}>
                 <td>{item.name}</td>
                 <td className="text-right fa-lg">
-                  <a href="javascript:;" className={`margin-sm-left ${item.origin === 'SYSTEM' ? 'hidden' : ''}`} onClick={this.onClickDeleteDeviceTpl.bind(this, item)}>
-                      <i className="fa fa-trash-o" />
-                  </a>
+                  {item.origin !== 'SYSTEM' && <IconButton
+                    style={{padding: 0, width: 24, height: 24}}
+                    onTouchTap={this.onClickDeleteDeviceTpl.bind(this, item)}>
+                    <DeleteIcon color="#545454" hoverColor="#f44336"/>
+                  </IconButton>}
                 </td>
               </tr>
             )
@@ -73,9 +76,11 @@ export default class Templates extends Component {
                 onClick={this.onClickRow.bind(this, index)}>
                 <td>{item.name}</td>
                 <td className="text-right fa-lg">
-                  <a href="javascript:;" className={`margin-sm-left ${item.origin === 'SYSTEM' ? 'hidden' : ''}`} onClick={this.onClickDeleteMonitorTpl.bind(this, item)}>
-                      <i className="fa fa-trash-o" />
-                  </a>
+                  {item.origin !== 'SYSTEM' && <IconButton
+                    style={{padding: 0, width: 24, height: 24}}
+                    onTouchTap={this.onClickDeleteMonitorTpl.bind(this, item)}>
+                    <DeleteIcon color="#545454" hoverColor="#f44336"/>
+                  </IconButton>}
                 </td>
               </tr>
             )

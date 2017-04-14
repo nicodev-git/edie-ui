@@ -109,7 +109,7 @@ export default class MainEvents extends Component {
   }
 
   getTable () {
-    return this.refs.table.refs.wrappedInstance
+    return this.refs.table
   }
 
   onFilterChange (e) {

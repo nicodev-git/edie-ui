@@ -274,7 +274,7 @@ export default class MainIncidents extends Component {
   }
 
   getTable () {
-    return this.refs.table.refs.wrappedInstance
+    return this.refs.table
   }
 
   render () {

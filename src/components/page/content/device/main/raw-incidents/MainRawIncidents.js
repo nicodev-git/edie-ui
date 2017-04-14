@@ -103,7 +103,7 @@ export default class MainRawIncidents extends React.Component {
   }
 
   getTable () {
-    return this.refs.table.refs.wrappedInstance
+    return this.refs.table
   }
 
   onFilterChange (params) {

@@ -58,7 +58,7 @@ export default class Credentials extends React.Component {
   }
 
   getTable () {
-    return this.refs.credentials.refs.wrappedInstance
+    return this.refs.credentials
   }
 
   onKeywordChanged (filter) {

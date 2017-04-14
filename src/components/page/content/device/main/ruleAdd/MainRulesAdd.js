@@ -105,7 +105,7 @@ export default class MainRulesAdd extends Component {
       this.setState({
         selectedPhysicals: []
       })
-      this.refs.table.refs.wrappedInstance.refresh()
+      this.refs.table.refresh()
     })
   }
 

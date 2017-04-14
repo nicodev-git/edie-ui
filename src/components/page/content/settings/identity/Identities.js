@@ -66,7 +66,7 @@ export default class Identities extends React.Component {
   }
 
   getTable () {
-    return this.refs.identities.refs.wrappedInstance
+    return this.refs.identities
   }
 
   onAddIdentity () {
