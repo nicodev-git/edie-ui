@@ -36,7 +36,7 @@ class InfiniteTable extends React.Component {
 
     this.domNode = ReactDOM.findDOMNode(this.refs.griddle)
     $(this.domNode).on('dblclick', 'tbody tr', (e) => {
-      const index = $(e.target).closest('tr').index() - 1
+      const index = $(e.target).closest('tr').index()
       const data = this.getCurrentData()
       if (data && data[index]) {
         let row = { props: { data: data[index] } }

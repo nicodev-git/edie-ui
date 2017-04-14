@@ -123,7 +123,7 @@ export default class Websocket extends React.Component {
             <MenuItem value="AUDIT" primaryText="Audit"/>
           </SelectField>
 
-          <RaisedButton label="Add Incident" onTouchTap={this.onClickAddIncident.bind(this)} className="margin-md-top"/>
+          <RaisedButton label="Add Incident" onTouchTap={this.onClickAddIncident.bind(this)} primary className="margin-md-top"/>
         </div>
 
         <h4>BI</h4>
