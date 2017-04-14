@@ -136,7 +136,6 @@ export default class MainIncidents extends Component {
       }
     }]
 
-    this.onTextChangeDeb = debounce(this.onChangeText.bind(this), 300)
     // ///////////////////////////////////////
 
     this.onFilterChange = this.onFilterChange.bind(this)
@@ -265,12 +264,10 @@ export default class MainIncidents extends Component {
     })
   }
 
-  onChangeText (e) {
+  onChangeText (e, text) {
     this.setState({
-      text: e.target.value
-    }, () => {
-      this.onFilterChange()
-    })
+      text
+    }, () => this.onFilterChange())
   }
 
   onChangeDateRange ({startDate, endDate}) {
@@ -411,7 +408,7 @@ export default class MainIncidents extends Component {
                   errorStyle={errorStyle}
                   inputStyle={inputStyle}
                   underlineFocusStyle={underlineStyle}
-                  onChange={this.onTextChangeDeb}
+                  onChange={this.onChangeText.bind(this)}
                   value={text}
                 />
               </div>
