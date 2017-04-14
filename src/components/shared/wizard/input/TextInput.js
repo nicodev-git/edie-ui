@@ -14,18 +14,16 @@ export default class TextInput extends React.Component {
   // className={`${cls || ''}`}
 
   renderField (config) {
-    const { input, label, disabled, style, useColumn } = config
-    const field = (
-      <div style={util.convertStyle(style)}>
-        <TextField hintText={label}
-          inputStyle={inputStyle}
-          underlineFocusStyle={underlineStyle}
-          disabled={disabled ? 'disabled' : null}
-          {...input}
-        />
-      </div>
+    const { input, label, disabled } = config
+    return (
+      <TextField
+        hintText={label}
+        inputStyle={inputStyle}
+        underlineFocusStyle={underlineStyle}
+        disabled={disabled ? 'disabled' : null}
+        {...input}
+      />
     )
-    return util.wrapInputs(field, useColumn)
   }
 
   //
@@ -33,28 +31,21 @@ export default class TextInput extends React.Component {
     const { config } = this.props
 
     let label
-    let width = util.calcWidth(config.width)
-
-    let placeholder = ''
 
     if (config.label !== null) {
       if (config.label.type === 'place') {
-        placeholder = config.label.text || ''
+        label = config.label.text || ''
       } else {
-        label = this.props.buildLabel(config.label)
-        width = util.calcWidth(config.width) - util.calcWidth(config.label.width)
+        label = config.label
       }
     }
 
     return (
       <Field type="text"
         name={config.name} label={label} component={this.renderField}
-        style={config.style}
-        width={width}
         cls={config.cls}
         useColumn={config.useColumn}
         disabled={config.disabled}
-        placeholder={placeholder}
       />
     )
   }

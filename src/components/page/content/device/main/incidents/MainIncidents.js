@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import moment from 'moment'
-import { findIndex, debounce } from 'lodash'
+import { findIndex } from 'lodash'
 import {
   RaisedButton,
   MenuItem,

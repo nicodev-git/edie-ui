@@ -70,10 +70,10 @@ class InfiniteTable extends React.Component {
   }
 
   getExternalData (page, clear) {
-    if (this.state.isLoading) {
-      console.log('Already loading.')
-      return
-    }
+    // if (this.state.isLoading) {
+    //   console.log('Already loading.')
+    //   return
+    // }
 
     const {url, params, pageSize} = this.props
     if (!url) return
