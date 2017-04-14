@@ -1,5 +1,6 @@
 import React from 'react'
 import { ChromePicker } from 'react-color'
+import {TextField, SelectField, MenuItem, RaisedButton} from 'material-ui'
 
 export default class Websocket extends React.Component {
   constructor (props) {
@@ -110,22 +111,19 @@ export default class Websocket extends React.Component {
 
     return (
       <div className="padding-md">
-        <div className="form-inline margin-md-bottom">
-          <label>Name:</label>
-          <input type="text" className="form-control input-sm margin-md-right" ref="incidentName" defaultValue="Test1" />
+        <div className="form-inline margin-md-bottom form-mui-inline">
+          <TextField floatingLabelText="Name"/>&nbsp;
+          <TextField floatingLabelText="Description"/>&nbsp;
+          <SelectField
+            floatingLabelText="Severity"
+            value="HIGH">
+            <MenuItem value="HIGH" primaryText="High"/>
+            <MenuItem value="MEDIUM" primaryText="Medium"/>
+            <MenuItem value="LOW" primaryText="Low"/>
+            <MenuItem value="AUDIT" primaryText="Audit"/>
+          </SelectField>
 
-          <label>Description:</label>
-          <input type="text" className="form-control input-sm margin-md-right" ref="incidentDesc" />
-
-          <label>Severity:</label>
-          <select ref="incidentSeverity" className="form-control input-sm margin-md-right">
-            <option>High</option>
-            <option>Medium</option>
-            <option>Low</option>
-            <option>Audit</option>
-          </select>
-
-          <a href="javascript:;" className="btn btn-primary btn-sm" onClick={this.onClickAddIncident.bind(this)}>Add Incident</a>
+          <RaisedButton label="Add Incident" onTouchTap={this.onClickAddIncident.bind(this)} className="margin-md-top"/>
         </div>
 
         <h4>BI</h4>

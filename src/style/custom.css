@@ -453,6 +453,10 @@ table.table tbody tr.selected {
     margin-left: 20px;
 }
 
+.form-mui-inline > div{
+    vertical-align: middle;
+}
+
 .searchbar-container {
     width: 250px;
     height: 50px;
