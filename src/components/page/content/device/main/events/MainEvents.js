@@ -67,8 +67,6 @@ export default class MainEvents extends Component {
       'columnName': 'params.ip',
       'customComponent': props => {
         let data = props.rowData.params
-        // data = 'jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjkkkkfffffmmmhhhhhhh'
-        // return <span>{data}</span>
         return <span>{data ? JSON.stringify(data) : ''}</span>
       }
     }, {

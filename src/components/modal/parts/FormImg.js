@@ -22,8 +22,8 @@ const FormImg = (field) => {
         }}
       >
         {files
-          ? (<div className="dropzone-inner">Drop another image here</div>)
-          : (<div>Here should be a nice picture designed by Cvetan</div>)}
+          ? (<img src="/images/upload_file.png" style={{position: 'relative'}}/>)
+          : (<img src="/images/upload_file.png" style={{position: 'relative'}}/>)}
         </Dropzone>
       {field.meta.touched &&
         field.meta.error &&
