@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
 import moment from 'moment'
-import { findIndex } from 'lodash'
+import { findIndex, debounce } from 'lodash'
 import {
   RaisedButton,
   MenuItem,
   Menu,
   Popover,
-  SelectField
+  SelectField,
+  TextField
 } from 'material-ui'
 import TimeAgo from 'react-timeago'
 import ReactTooltip from 'react-tooltip'
@@ -28,7 +29,7 @@ import {
   showIncidentDetail,
   showIncidentRaw
 } from '../../../../../shared/incident/Incident'
-import { errorStyle, underlineFocusStyle, inputStyle, selectedItemStyle } from 'style/materialStyles'
+import { errorStyle, underlineFocusStyle, inputStyle, selectedItemStyle, underlineStyle } from 'style/materialStyles'
 
 export default class MainIncidents extends Component {
   constructor (props) {
@@ -48,6 +49,7 @@ export default class MainIncidents extends Component {
 
       selectedIndex: -1,
       fixed: 'false',
+      text: '',
       afterStartTimestamp: moment().startOf('year').valueOf(),
       beforeStartTimestamp: moment().endOf('year').valueOf(),
 
@@ -133,6 +135,8 @@ export default class MainIncidents extends Component {
         )
       }
     }]
+
+    this.onTextChangeDeb = debounce(this.onChangeText.bind(this), 300)
     // ///////////////////////////////////////
 
     this.onFilterChange = this.onFilterChange.bind(this)
@@ -261,6 +265,14 @@ export default class MainIncidents extends Component {
     })
   }
 
+  onChangeText (e) {
+    this.setState({
+      text: e.target.value
+    }, () => {
+      this.onFilterChange()
+    })
+  }
+
   onChangeDateRange ({startDate, endDate}) {
     this.setState({
       afterStartTimestamp: startDate.valueOf(),
@@ -271,11 +283,10 @@ export default class MainIncidents extends Component {
   }
 
   getParams () {
-    const {search} = this.refs
-    const { currentSortCol, currentSortDir, selectedSeverity, fixed, afterStartTimestamp, beforeStartTimestamp } = this.state
+    const { currentSortCol, currentSortDir, selectedSeverity, fixed, afterStartTimestamp, beforeStartTimestamp, text } = this.state
 
     let params = {
-      description: (search ? search.value : '') || '""',
+      description: text || '""',
       severity: selectedSeverity,
       afterStartTimestamp,
       beforeStartTimestamp,
@@ -317,7 +328,7 @@ export default class MainIncidents extends Component {
 
   render () {
     const {device, incidents} = this.props
-    const {selectedIndex, selectedSeverity, severities, afterStartTimestamp, beforeStartTimestamp} = this.state
+    const {selectedIndex, selectedSeverity, severities, afterStartTimestamp, beforeStartTimestamp, text} = this.state
 
     let selectedIncident = selectedIndex < 0 ? null : incidents[selectedIndex]
 
@@ -395,13 +406,14 @@ export default class MainIncidents extends Component {
 
             <div style={{margin: '0 auto', position: 'relative', display: 'inline-block', textAlign: 'center'}}>
               <div className="inline-block" style={{position: 'relative'}}>
-                <input
-                  type="text" placeholder="Search" className="form-control"
-                  style={{width: '100%', paddingLeft: '35px'}}
-                  onChange={this.onFilterChange}
-                  ref="search"/>
-                <a className="btn" href="javascript:;" style={{position: 'absolute', left: 0, top: 0}}>
-                  <i className="fa fa-search" /></a>
+                <TextField
+                  hintText="Search"
+                  errorStyle={errorStyle}
+                  inputStyle={inputStyle}
+                  underlineFocusStyle={underlineStyle}
+                  onChange={this.onTextChangeDeb}
+                  value={text}
+                />
               </div>
             </div>
           </div>
