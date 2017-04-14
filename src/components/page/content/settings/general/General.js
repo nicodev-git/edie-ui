@@ -37,8 +37,8 @@ export default class General extends React.Component {
 
   renderContent () {
     return (
-      <div className="padding-md-top form-inline">
-        <div className="col-md-12 margin-md-bottom">
+      <div className="padding-md form-inline">
+        <div className="col-md-12 margin-md-bottom bt-gray">
           <label className="margin-sm-top margin-sm-bottom" style={{width: '150px'}}>System Name:</label>
           <InlineEdit
             text={this.getOptionValue('SYSTEM_NAME') || '[Empty]'}
@@ -49,7 +49,7 @@ export default class General extends React.Component {
           />
         </div>
 
-        <div className="col-md-12 margin-md-bottom">
+        <div className="col-md-12 margin-md-bottom bt-gray">
           <div className="checkbox">
             <label style={{width: '150px'}} className="margin-sm-top margin-sm-bottom">
               <input type="checkbox" className="margin-xs-right" ref="dmz"
@@ -68,7 +68,7 @@ export default class General extends React.Component {
             ref="dmzIp"
           />
         </div>
-        <div className="col-md-12 margin-md-bottom">
+        <div className="col-md-12 margin-md-bottom bt-gray">
           <div className="checkbox">
             <label className="margin-sm-top margin-sm-bottom">
               <input type="checkbox" className="margin-xs-right"
@@ -77,7 +77,7 @@ export default class General extends React.Component {
             </label>
           </div>
         </div>
-        <div className="col-md-12 margin-md-bottom">
+        <div className="col-md-12 margin-md-bottom bt-gray">
           <div className="checkbox">
             <label className="margin-sm-top margin-sm-bottom">
               <input type="checkbox" className="margin-xs-right"
@@ -86,7 +86,7 @@ export default class General extends React.Component {
             </label>
           </div>
         </div>
-        <div className="col-md-12 margin-md-bottom">
+        <div className="col-md-12 margin-md-bottom bt-gray">
           <div className="checkbox">
             <label style={{width: '150px'}} className="margin-sm-top margin-sm-bottom">
               <input type="checkbox" className="margin-xs-right"
@@ -104,7 +104,7 @@ export default class General extends React.Component {
           </div>
         </div>
 
-        <div className="col-md-12 margin-md-bottom">
+        <div className="col-md-12 margin-md-bottom bt-gray">
           <div className="checkbox">
             <label style={{width: '150px'}} className="margin-sm-top margin-sm-bottom">
               <input type="checkbox" className="margin-xs-right"
@@ -122,7 +122,7 @@ export default class General extends React.Component {
           </div>
         </div>
 
-        <div className="col-md-12 margin-md-bottom">
+        <div className="col-md-12 margin-md-bottom bt-gray">
           <div className="checkbox">
             <label style={{width: '150px'}} className="margin-sm-top margin-sm-bottom">
               Customer ID

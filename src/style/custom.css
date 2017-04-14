@@ -64,6 +64,10 @@ body {
     font-weight: bold;
 }
 
+.bt-gray {
+    border-bottom: 1px solid lightgray;
+}
+
 .option i{
     font-size: 20px;
     width: 30px;
