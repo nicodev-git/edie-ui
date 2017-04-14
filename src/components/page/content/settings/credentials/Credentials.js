@@ -1,8 +1,5 @@
 import React from 'react'
-import {
-  ButtonGroup,
-  Button
-} from 'react-bootstrap'
+import {RaisedButton, TextField} from 'material-ui'
 
 import InfiniteTable from '../../../../shared/InfiniteTable'
 import { showAlert, showConfirm } from '../../../../shared/Alert'
@@ -13,6 +10,7 @@ import SettingTabs from '../SettingTabs'
 import TabPage from '../../../../shared/TabPage'
 import TabPageBody from '../../../../shared/TabPageBody'
 import TabPageHeader from '../../../../shared/TabPageHeader'
+import { errorStyle, inputStyle, underlineStyle } from 'style/materialStyles'
 
 export default class Credentials extends React.Component {
   constructor (props) {
@@ -103,23 +101,19 @@ export default class Credentials extends React.Component {
         <TabPageHeader title="Settings">
           <div className="text-center margin-md-top">
             <div className="pull-right">
-              <ButtonGroup>
-
-                <Button onClick={this.onAddCred.bind(this)}>Add</Button>
-                <Button onClick={this.onEditCred.bind(this)}>Edit</Button>
-                <Button onClick={this.onRemoveCred.bind(this)}>Remove</Button>
-
-              </ButtonGroup>
+              <RaisedButton label="Add" onTouchTap={this.onAddCred.bind(this)}/>&nbsp;
+              <RaisedButton label="Edit" onTouchTap={this.onEditCred.bind(this)}/>&nbsp;
+              <RaisedButton label="Remove" onTouchTap={this.onRemoveCred.bind(this)}/>&nbsp;
             </div>
 
             <div className="inline-block">
-              <input type="text" placeholder="Search" className="form-control"
-                style={{width: '220px', paddingLeft: '35px'}}
-                onKeyUp={this.onSearchKeyUp.bind(this)}/>
-              <a className="btn" href="javascript:;"
-                style={{position: 'absolute', left: 0, top: 0}}>
-                <i className="fa fa-search" />
-              </a>
+              <TextField
+                hintText="Search"
+                errorStyle={errorStyle}
+                inputStyle={inputStyle}
+                underlineFocusStyle={underlineStyle}
+                onKeyUp={this.onSearchKeyUp.bind(this)}
+              />
             </div>
           </div>
         </TabPageHeader>

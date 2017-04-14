@@ -1,8 +1,5 @@
 import React from 'react'
-import {
-    ButtonGroup,
-    Button
-} from 'react-bootstrap'
+import {RaisedButton, TextField} from 'material-ui'
 import { assign } from 'lodash'
 
 import InfiniteTable from '../../../../shared/InfiniteTable'
@@ -14,6 +11,7 @@ import TabPageHeader from '../../../../shared/TabPageHeader'
 
 import { appendComponent, removeComponent } from '../../../../../util/Component'
 import { showAlert, showConfirm } from '../../../../shared/Alert'
+import { errorStyle, inputStyle, underlineStyle } from 'style/materialStyles'
 
 import IdentityModal from './IdentityModal'
 import SegmentListModal from './SegmentListModal'
@@ -112,22 +110,19 @@ export default class Identities extends React.Component {
         <TabPageHeader title="Settings">
           <div className="text-center margin-md-top">
             <div className="pull-right">
-              <ButtonGroup>
-
-                <Button onClick={this.onAddIdentity.bind(this)}>Add</Button>
-                <Button onClick={this.onEditIdentity.bind(this)}>Edit</Button>
-                <Button onClick={this.onRemoveIdentity.bind(this)}>Remove</Button>
-                <Button onClick={this.onClickSegments.bind(this)}>Segments</Button>
-
-              </ButtonGroup>
+              <RaisedButton label="Add" onTouchTap={this.onAddIdentity.bind(this)}/>&nbsp;
+              <RaisedButton label="Edit" onTouchTap={this.onEditIdentity.bind(this)}/>&nbsp;
+              <RaisedButton label="Remove" onTouchTap={this.onRemoveIdentity.bind(this)}/>&nbsp;
+              <RaisedButton label="Segments" onTouchTap={this.onClickSegments.bind(this)}/>&nbsp;
             </div>
 
             <div className="inline-block">
-              <input type="text" placeholder="Search" className="form-control"
-                style={{width: '220px', paddingLeft: '35px'}}/>
-              <a className="btn" href="javascript:;" style={{position: 'absolute', left: 0, top: 0}}>
-                <i className="fa fa-search" />
-              </a>
+              <TextField
+                hintText="Search"
+                errorStyle={errorStyle}
+                inputStyle={inputStyle}
+                underlineFocusStyle={underlineStyle}
+              />
             </div>
           </div>
         </TabPageHeader>
