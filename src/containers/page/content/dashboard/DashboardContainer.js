@@ -118,6 +118,8 @@ export default connect(
     openDashboardNewIncidentModal,
     closeDashboardNewIncidentModal,
 
+    showSidebarMessageMenu,
+
     fetchDashboardStats
   }
 )(Dashboard)

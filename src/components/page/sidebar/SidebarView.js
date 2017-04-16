@@ -45,6 +45,7 @@ class SidebarView extends Component {
       device, pageId, pageType, searchVisible, group, onSearch,
       profile, user, onClickProfile, onClickMessages, onSignOut,
       sidebarMessageMenuOpen, sidebarProfileMenuOpen,
+      showSidebarProfileMenu,
       openSidebarMessageMenu, closeSidebarMessageMenu
     } = this.props
 
@@ -88,7 +89,9 @@ class SidebarView extends Component {
             <Divider style={{margin: 0, backgroundColor: '#393b42'}}/>
             <ProfileMenu
               open={sidebarProfileMenuOpen}
+              showSidebarProfileMenu={showSidebarProfileMenu}
               user={user}
+
               onClickProfile={onClickProfile}
               onClickMessages={onClickMessages}
               onSignOut={onSignOut}/>

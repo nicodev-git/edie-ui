@@ -10,7 +10,10 @@ import {
   fetchUserInfo,
   updateUserProfile,
   updateQueryChips,
-  updateSearchParams
+  updateSearchParams,
+
+  showSidebarMessageMenu,
+  showSidebarProfileMenu
 } from 'actions'
 
 class SidebarContainer extends React.Component {
@@ -36,7 +39,10 @@ export default connect(
     user: state.dashboard.userInfo || {},
     profileModalVisible: state.dashboard.profileModalVisible,
     maps: state.dashboard.maps,
-    params: state.search.params
+    params: state.search.params,
+
+    sidebarMessageMenuOpen: state.dashboard.sidebarMessageMenuOpen,
+    sidebarProfileMenuOpen: state.dashboard.sidebarProfileMenuOpen
   }), {
     signOut,
     openProfileModal,
@@ -44,6 +50,9 @@ export default connect(
     fetchUserInfo,
     updateUserProfile,
     updateQueryChips,
-    updateSearchParams
+    updateSearchParams,
+
+    showSidebarMessageMenu,
+    showSidebarProfileMenu
   }
 )(SidebarContainer)

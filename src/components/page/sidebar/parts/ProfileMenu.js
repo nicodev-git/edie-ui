@@ -7,10 +7,11 @@ import AccoutCircleIcon from 'material-ui/svg-icons/action/account-circle'
 
 import {iconStyle, iconButtonStyle} from 'style/materialStyles'
 
-const ProfileMenu = ({user, onClickProfile, onClickMessages, onSignOut}) => (
+const ProfileMenu = ({open, user, onClickProfile, onClickMessages, onSignOut, showSidebarProfileMenu}) => (
   <li className="dropdown">
     <div className="sidebar-item-container">
       <IconMenu
+        open={open}
         iconButtonElement={
           <IconButton
             style={iconButtonStyle}

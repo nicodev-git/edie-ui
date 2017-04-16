@@ -55,7 +55,7 @@ const MessageBox = ({open, openSidebarMessageMenu, closeSidebarMessageMenu}) => 
             </IconButton>
           }
           open={open}
-          onRequestChange={closeSidebarMessageMenu}
+          onRequestChange={(value) => value ? openSidebarMessageMenu() : closeSidebarMessageMenu()}
           anchorOrigin={{horizontal: 'right', vertical: 'bottom'}}
           targetOrigin={{horizontal: 'right', vertical: 'top'}}
           listStyle={iconMenuStyle}
