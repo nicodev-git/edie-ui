@@ -24,7 +24,8 @@ export const loadIncidents = (params, rooms) => {
 
 const loadIncidentsSuccess = (dispatch, response, rooms) => {
   if (typeof response.data !== 'undefined') {
-    response.data.forEach(item => {
+    const {incidents} = response.data._embedded
+    incidents.forEach(item => {
       rooms[item.id] = {
         unread: item.unread || 0,
         lastMsgId: 0,
@@ -36,13 +37,13 @@ const loadIncidentsSuccess = (dispatch, response, rooms) => {
         joined: false
       }
     })
-  }
 
-  dispatch({
-    type: LOAD_CHAT_INCIDENTS,
-    incidents: response.data,
-    rooms: rooms
-  })
+    dispatch({
+      type: LOAD_CHAT_INCIDENTS,
+      incidents,
+      rooms: rooms
+    })
+  }
 }
 
 export const loadIncidentUsers = (params) => {

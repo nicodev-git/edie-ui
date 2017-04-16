@@ -33,8 +33,17 @@ export default class Chat extends React.Component {
     // })
     // chatSocket.connect()
     const params = {
+      draw: 1,
+      page: 0,
       size: 100,
       deviceid: '*',
+      description: '',
+      fixed: false,
+      afterStartTimestamp: moment().startOf('year').valueOf(),
+      beforeStartTimestamp: moment().endOf('year').valueOf(),
+      severity: ['HIGH', 'MEDIUM'],
+      sort: 'timestamp,desc',
+
       msgcount: true
     }
     let rooms = this.props.rooms
@@ -71,7 +80,7 @@ export default class Chat extends React.Component {
         onClick={this.onClickIncident.bind(this, item)}>
           <a href="javascript:;">
             <strong>#</strong><span className="room-title">
-              {name}(<TimeAgo date={new Date(item.starttimestamp)}/>)
+              {name}(<TimeAgo date={new Date(item.startTimestamp)}/>)
             </span>
             <span className={`badge pull-right badge-message ${unread ? '' : 'hidden'}`}>{unread}</span>
           </a>
