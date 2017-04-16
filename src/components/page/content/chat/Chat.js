@@ -525,7 +525,12 @@ export default class Chat extends React.Component {
   }
 
   getTestMessages () {
-
+    return [{
+      content: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
+      pictureId: 'avatars/1.jpg',
+      senderName: 'Eitan Herman',
+      timestamp: 1492322012741
+    }]
   }
 
   render () {
@@ -535,9 +540,7 @@ export default class Chat extends React.Component {
     if (selected) room = rooms[selected.id]
     if (room) messages = room.messages
     // //////////////////////////////////
-    messages.push({
-
-    })
+    if (messages) messages = this.getTestMessages()
     // //////////////////////////////////
     return (
       <div className="chat-content">
