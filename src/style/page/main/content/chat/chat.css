@@ -250,8 +250,8 @@ a img {
 }
 
 .message-group h2 strong {
-    color: #2e3136;
-    font-size: 15px;
+    color: #575757;
+    font-size: 14px;
     font-weight: 600;
     letter-spacing: 0;
 }
@@ -293,12 +293,12 @@ a img {
     -moz-user-select: text;
     -ms-user-select: text;
     user-select: text;
-    color: #737f8d;
-    font-size: 14px;
-    line-height: 1.1em;
-    /* white-space: pre-wrap; */
+    line-height: 1.5em;
     margin-top: 6px;
     word-wrap: break-word;
+
+    color: #939393;
+    font-size: 12px;
 }
 
 .message {

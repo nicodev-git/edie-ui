@@ -540,14 +540,12 @@ table.table tbody tr.selected td {
   flex-direction: column;
   justify-content: space-around;
   align-items: flex-start;
-  width: 150px;
   line-height: 16px;
-  padding-left: 5px;
   word-wrap: break-word;
 }
 
 .message-text div {
-  width: 150px;
+  max-width: 350px;
 }
 
 .inner-text {
