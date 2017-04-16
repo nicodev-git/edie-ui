@@ -565,10 +565,9 @@ export default class Chat extends React.Component {
         </section>
 
         <section className="channel-members">
-          <div className="padding-md-left">
-            <span>Users</span>
-            <span>—</span>
-            <span className="online-count">{this.props.roomUsers.length}</span>{
+          <div className="padding-md-left margin-md-bottom">
+            <span>Users: </span>
+            <span className="fa-lg"><b>{this.props.roomUsers.length}</b></span>{
             this.props.roomUsers.map(item => this.renderUser(item, room))
           }
           </div>

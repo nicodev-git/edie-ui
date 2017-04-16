@@ -39,7 +39,7 @@ section.incidents {
     position: absolute;
     left: 0;
     width: 240px;
-    background-color: #2e3136;
+    background-color: #4A4B4F;
 
 }
 
@@ -53,7 +53,7 @@ section.channel-members {
     position: absolute;
     right: 0;
     width: 300px;
-    background-color: #f3f3f3;
+    background-color: #E6E7EA;
 
     padding: 20px 0;
     box-sizing: border-box;
@@ -148,9 +148,9 @@ section.channel-members {
 }
 
 .avatar-large {
-    width: 42px;
-    height: 42px;
-    background-size: 42px 42px;
+    width: 50px;
+    height: 50px;
+    background-size: 50px 50px;
     border-radius: 50%;
 }
 
@@ -158,11 +158,11 @@ section.channel-members {
     background-clip: padding-box;
     position: absolute;
     pointer-events: none;
-    width: 14px;
-    height: 14px;
-    border-radius: 9px;
-    right: -4px;
-    bottom: -4px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    right: -14px;
+    top: -4px;
 }
 
 .image {
@@ -560,6 +560,8 @@ a img {
     text-overflow: ellipsis;
     font-size: 14px;
     line-height: 17px;
+    font-weight: 200;
+    padding-left: 20px;
 }
 
 .avatar-small .status {
@@ -581,11 +583,12 @@ a img {
     height: 10px;
     border-radius: 7px;
     display: inline-block;
+    border: 3px solid red;
 }
 .online {
-    background-color: #43b581;
+    border-color: #45D83D;
 }
 
 .idle {
-    background-color: #faa61a;
+    border-color: #faa61a;
 }
