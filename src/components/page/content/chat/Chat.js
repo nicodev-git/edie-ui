@@ -80,7 +80,7 @@ export default class Chat extends React.Component {
         onClick={this.onClickIncident.bind(this, item)}>
           <a href="javascript:;">
             <strong>#</strong><span className="room-title">
-              {name}(<TimeAgo date={new Date(item.startTimestamp)}/>)
+              {name}(<TimeAgo date={item.startTimestamp}/>)
             </span>
             <span className={`badge pull-right badge-message ${unread ? '' : 'hidden'}`}>{unread}</span>
           </a>
@@ -210,9 +210,9 @@ export default class Chat extends React.Component {
   } */
 
   onClickIncident (incident) {
-    if (!chatSocket.connected) {
-      return showAlert('Not connected. Please try later.')
-    }
+    // if (!chatSocket.connected) {
+    //   return showAlert('Not connected. Please try later.')
+    // }
 
     const id = incident.id
     let {rooms} = this.props

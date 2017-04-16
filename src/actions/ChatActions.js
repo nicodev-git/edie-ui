@@ -48,15 +48,41 @@ const loadIncidentsSuccess = (dispatch, response, rooms) => {
 
 export const loadIncidentUsers = (params) => {
   return (dispatch) => {
-    axios.get(`${ROOT_URL}/api/chat/users`, getParamsConfig(params))
-      .then(response => loadIncidentUsersSuccess(dispatch, response))
-      .catch(error => apiError(dispatch, error))
+    // axios.get(`${ROOT_URL}/api/chat/users`, getParamsConfig(params))
+    //   .then(response => loadIncidentUsersSuccess(dispatch, response))
+    //   .catch(error => apiError(dispatch, error))
+    const roomUsers = [{
+      timerTyping: 0,
+      pictureId: 'avatars/1.jpg',
+      userId: '1',
+      userName: 'eitan',
+      fullName: 'Eitan Herman',
+      online: true
+    }, {
+      timerTyping: 0,
+      pictureId: 'avatars/2.jpg',
+      userId: '2',
+      userName: 'cheng',
+      fullName: 'Cheng Li',
+      online: true
+    }, {
+      timerTyping: 0,
+      pictureId: 'avatars/3.jpg',
+      userId: '3',
+      userName: 'serge',
+      fullName: 'Serge Verigin',
+      online: false
+    }]
+    dispatch({
+      type: LOAD_CHAT_INCIDENT_USERS,
+      roomUsers: roomUsers
+    })
   }
 }
 
 const loadIncidentUsersSuccess = (dispatch, response) => {
   if (response.success) {
-    let roomUsers = response.object.map(user => {
+    const roomUsers = response.object.map(user => {
       return {
         'timerTyping': 0,
         'pictureId': user.pictureId,
