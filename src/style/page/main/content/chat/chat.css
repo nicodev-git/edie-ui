@@ -215,7 +215,6 @@ a img {
     margin-left: 20px;
     margin-right: 6px;
     word-wrap: break-word;
-    border-bottom: 1px solid #eceeef;
     box-sizing: border-box;
 }
 
@@ -318,6 +317,8 @@ a img {
 .message-group .image {
     vertical-align: bottom;
     max-width: 520px;
+    border-radius: 4px;
+    background: black;
 }
 
 .message-group .comment .attachment-image a,

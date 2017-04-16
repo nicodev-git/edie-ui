@@ -96,7 +96,7 @@ export default class Chat extends React.Component {
       accessory = (
         <div className="attachment-image">
           <a href="javascript:;">
-            <img className="image" src={`/externalpictures?name=${content.substring(8)}`} height="300px" />
+            <img className="image" src={`${extImageBaseUrl}${content.substring(8)}`} height="300px" />
           </a>
         </div>
       )
@@ -530,6 +530,16 @@ export default class Chat extends React.Component {
       pictureId: 'avatars/1.jpg',
       senderName: 'Eitan Herman',
       timestamp: 1492322012741
+    }, {
+      content: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
+      pictureId: 'avatars/2.jpg',
+      senderName: 'Cheng Li',
+      timestamp: 1492322212741
+    }, {
+      content: 'picture:db_crm.png',
+      pictureId: 'avatars/3.jpg',
+      senderName: 'Serge Verigin',
+      timestamp: 1492322512741
     }]
   }
 
