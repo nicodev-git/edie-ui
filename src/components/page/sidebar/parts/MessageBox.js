@@ -40,7 +40,7 @@ const messageStyle = {
 
 const MessageBox = ({open, openSidebarMessageMenu, closeSidebarMessageMenu}) => (
   <li className="dropdown">
-    <div className="sidebar-item-container">
+    <div className="sidebar-item-container" onClick={openSidebarMessageMenu}>
       <Badge
         badgeContent={4}
         badgeStyle={badgeStyle}
@@ -87,7 +87,7 @@ const MessageBox = ({open, openSidebarMessageMenu, closeSidebarMessageMenu}) => 
             style={seeAllStyle}/>
         </IconMenu>
       </Badge>
-      <div className="sidebar-title" onClick={openSidebarMessageMenu}>Messages</div>
+      <div className="sidebar-title">Messages</div>
     </div>
   </li>
 )

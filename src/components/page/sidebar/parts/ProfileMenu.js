@@ -9,9 +9,10 @@ import {iconStyle, iconButtonStyle} from 'style/materialStyles'
 
 const ProfileMenu = ({open, user, onClickProfile, onClickMessages, onSignOut, showSidebarProfileMenu}) => (
   <li className="dropdown">
-    <div className="sidebar-item-container">
+    <div className="sidebar-item-container" onClick={() => showSidebarProfileMenu(true)}>
       <IconMenu
         open={open}
+        onRequestChange={showSidebarProfileMenu}
         iconButtonElement={
           <IconButton
             style={iconButtonStyle}
