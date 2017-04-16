@@ -10,7 +10,7 @@ import { chatSocket } from '../../../../util/socket/ChatSocket'
 import { showAlert } from '../../../shared/Alert'
 
 import { scrollBottom } from '../../../../util/Scroll'
-// do not delete comments for now: Igor Skakun, vozni4iy
+import {extImageBaseUrl} from 'shared/Global'
 export default class Chat extends React.Component {
 
   constructor (props) {
@@ -103,11 +103,11 @@ export default class Chat extends React.Component {
     } else {
       text = content
     }
-
+    console.log(extImageBaseUrl)
     return (
       <div className="message-group" key={item.id}>
         <div className="avatar-large"
-          style={{backgroundImage: `url(/externalpictures?name=${pictureId})`}} />
+          style={{backgroundImage: `url('${extImageBaseUrl}${pictureId}')`}} />
         <div className="comment">
           <div className="message first">
             <div className="body">
@@ -160,8 +160,8 @@ export default class Chat extends React.Component {
 
     return (
             <div className="member" key={user.userName}>
-                <div className={`avatar-small ${typing ? 'animate' : ''}`}
-                  style={{backgroundImage: `${'url(' + 'externalpictures?name='}${user.pictureId})`}}>
+                <div className={`avatar-large ${typing ? 'animate' : ''}`}
+                  style={{backgroundImage: `url('${extImageBaseUrl}${user.pictureId}')`}}>
                     <div className={`status ${user.online ? 'online' : 'idle'} ${typing ? 'status-typing' : ''}`}>
                         <div className={`ellipsis${typing ? '' : 'hidden'}`}><div /><div /><div /></div>
                     </div>
@@ -565,13 +565,13 @@ export default class Chat extends React.Component {
         </section>
 
         <section className="channel-members">
-          <h2>
+          <div className="padding-md-left">
             <span>Users</span>
             <span>—</span>
             <span className="online-count">{this.props.roomUsers.length}</span>{
             this.props.roomUsers.map(item => this.renderUser(item, room))
           }
-          </h2>
+          </div>
         </section>
       </div>
     )

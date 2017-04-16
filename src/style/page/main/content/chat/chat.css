@@ -52,7 +52,7 @@ section.chat {
 section.channel-members {
     position: absolute;
     right: 0;
-    width: 200px;
+    width: 300px;
     background-color: #f3f3f3;
 
     padding: 20px 0;
@@ -148,10 +148,10 @@ section.channel-members {
 }
 
 .avatar-large {
-    width: 40px;
-    height: 40px;
-    background-size: 40px 40px;
-    border-radius: 20px;
+    width: 42px;
+    height: 42px;
+    background-size: 42px 42px;
+    border-radius: 50%;
 }
 
 .avatar-large .status, .avatar-profile .status, .avatar-small .status, .avatar-xlarge .status, .avatar-xsmall .status, .avatar-xxlarge .status {
