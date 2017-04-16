@@ -28,16 +28,13 @@ export default class Chat extends React.Component {
   }
 
   componentWillMount () {
-    forIn(this.socketEvents, (value, key) => {
-      chatSocket.addListener(key, value)
-    })
-    chatSocket.connect()
-    let params = {
-      draw: 1,
-      start: 0,
-      length: 150,
-      sid: this.context.sid,
-      type: 'web',
+    // forIn(this.socketEvents, (value, key) => {
+    //   chatSocket.addListener(key, value)
+    // })
+    // chatSocket.connect()
+    const params = {
+      size: 100,
+      deviceid: '*',
       msgcount: true
     }
     let rooms = this.props.rooms

@@ -12,10 +12,11 @@ import { apiError } from './Errors'
 import { showAlert } from '../components/shared/Alert'
 import { ROOT_URL } from './config'
 import { getAuthConfig, getParamsConfig } from './util'
+import { encodeUrlParams } from 'shared/Global'
 
 export const loadIncidents = (params, rooms) => {
   return (dispatch) => {
-    axios.get(`${ROOT_URL}/api/incidents/getUnfixedIncidentsQuick`, getParamsConfig(params))
+    axios.get(`${ROOT_URL}/incident/search/findBy?${encodeUrlParams(params)}`)
       .then(response => loadIncidentsSuccess(dispatch, response, rooms))
       .catch(error => apiError(dispatch, error))
   }
