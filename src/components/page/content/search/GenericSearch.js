@@ -284,7 +284,7 @@ class GenericSearch extends React.Component {
   renderFields () {
     const {selectedField} = this.props
     return (
-      <div className="padding-sm" style={{position: 'absolute', height: '100%'}}>
+      <div className="padding-sm" style={{position: 'absolute', height: '100%', minWidth: '100%'}}>
         <div className="header-blue">Fields</div>
         {this.props.fields.map(f =>
           <div key={f.path} className={`field-item margin-xs-top ${selectedField && selectedField.path === f.path ? 'selected' : ''}`}>
