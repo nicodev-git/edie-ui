@@ -11,7 +11,7 @@ import {
 import { apiError } from './Errors'
 import { showAlert } from '../components/shared/Alert'
 import { ROOT_URL } from './config'
-import { getAuthConfig, getParamsConfig } from './util'
+import { getAuthConfig, getParamsConfig } from './util' // eslint-disable-line
 import { encodeUrlParams } from 'shared/Global'
 
 export const loadIncidents = (params, rooms) => {
@@ -80,7 +80,7 @@ export const loadIncidentUsers = (params) => {
   }
 }
 
-const loadIncidentUsersSuccess = (dispatch, response) => {
+const loadIncidentUsersSuccess = (dispatch, response) => { // eslint-disable-line
   if (response.success) {
     const roomUsers = response.object.map(user => {
       return {

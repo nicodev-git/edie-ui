@@ -78,7 +78,9 @@ class SidebarView extends Component {
                 }
               </li>
             )}
+            <Divider style={{margin: 0, backgroundColor: '#393b42'}}/>
             <MessageBox open={sidebarMessageMenuOpen}/>
+            <Divider style={{margin: 0, backgroundColor: '#393b42'}}/>
             <ProfileMenu
               open={sidebarProfileMenuOpen}
               user={user}
