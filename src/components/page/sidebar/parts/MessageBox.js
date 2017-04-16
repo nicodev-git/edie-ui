@@ -38,7 +38,7 @@ const messageStyle = {
   paddingBottom: '3px'
 }
 
-const MessageBox = ({open}) => (
+const MessageBox = ({open, openSidebarMessageMenu, closeSidebarMessageMenu}) => (
   <li className="dropdown">
     <div className="sidebar-item-container">
       <Badge
@@ -54,6 +54,8 @@ const MessageBox = ({open}) => (
                 <EmailIcon color="#777777"/>
             </IconButton>
           }
+          open={open}
+          onRequestChange={closeSidebarMessageMenu}
           anchorOrigin={{horizontal: 'right', vertical: 'bottom'}}
           targetOrigin={{horizontal: 'right', vertical: 'top'}}
           listStyle={iconMenuStyle}
@@ -85,7 +87,7 @@ const MessageBox = ({open}) => (
             style={seeAllStyle}/>
         </IconMenu>
       </Badge>
-      <div className="sidebar-title">Messages</div>
+      <div className="sidebar-title" onClick={openSidebarMessageMenu}>Messages</div>
     </div>
   </li>
 )

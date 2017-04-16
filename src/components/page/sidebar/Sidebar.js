@@ -116,6 +116,9 @@ export default class Sidebar extends React.Component {
         profile={this.renderProfileModal()}
         onClickProfile={this.onClickProfile.bind(this)}
         onClickMessages={this.onClickMessages.bind(this)}
+
+        openSidebarMessageMenu={() => this.props.showSidebarMessageMenu(true)}
+        closeSidebarMessageMenu={() => this.props.showSidebarMessageMenu(false)}
       />
     )
   }

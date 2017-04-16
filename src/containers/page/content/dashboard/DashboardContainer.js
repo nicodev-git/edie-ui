@@ -40,6 +40,8 @@ import {
   openDashboardNewIncidentModal,
   closeDashboardNewIncidentModal,
 
+  showSidebarMessageMenu,
+
   fetchDashboardStats
 } from 'actions'
 
