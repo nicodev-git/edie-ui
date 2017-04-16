@@ -46,7 +46,7 @@ section.incidents {
 section.chat {
     position: absolute;
     left: 240px;
-    right: 200px;
+    right: 300px;
 }
 
 section.channel-members {
@@ -358,14 +358,14 @@ a img {
     border-radius: 3px;
     border: 2px solid #dadddf;
     box-sizing: border-box;
-    background-color: #fff;
+    background-color: #EBEBEB;
 }
 
 .channel-textarea-upload {
     position: relative;
     background: url('/images/upload.svg') 50% no-repeat;
     background-size: 25px 25px;
-    border-right: 1px solid #f0f0f0;
+    border-right: 1px solid #D2D2D2;
     margin: -12px 10px -12px -10px;
     width: 45px;
     -webkit-transition: background-color .1s,border-right .1s;
@@ -400,6 +400,7 @@ a img {
     height: auto;
     margin: 0;
     padding: 0;
+    background: transparent;
 
     overflow: hidden;
 }

@@ -524,13 +524,21 @@ export default class Chat extends React.Component {
     this.beepSound && this.beepSound.play()
   }
 
+  getTestMessages () {
+
+  }
+
   render () {
     let {rooms, selected} = this.props
     let room = null
     let messages = []
     if (selected) room = rooms[selected.id]
     if (room) messages = room.messages
+    // //////////////////////////////////
+    messages.push({
 
+    })
+    // //////////////////////////////////
     return (
       <div className="chat-content">
         <section className="incidents">
@@ -565,9 +573,11 @@ export default class Chat extends React.Component {
         </section>
 
         <section className="channel-members">
-          <div className="padding-md-left margin-md-bottom">
-            <span>Users: </span>
-            <span className="fa-lg"><b>{this.props.roomUsers.length}</b></span>{
+          <div className="padding-md-left">
+            <div className="margin-md-bottom">
+              <span>Users: </span><span className="fa-lg"><b>{this.props.roomUsers.length}</b></span>
+            </div>
+            {
             this.props.roomUsers.map(item => this.renderUser(item, room))
           }
           </div>
