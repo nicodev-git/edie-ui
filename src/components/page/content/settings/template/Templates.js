@@ -11,6 +11,7 @@ import TabPageHeader from '../../../../shared/TabPageHeader'
 import DeviceTplModal from './DeviceTplModal'
 import MonitorTplModal from './MonitorTplModal'
 import ImageUploaderModal from './ImageUploaderModal'
+import DeviceTplView from './DeviceTplView'
 
 import { showConfirm } from 'components/shared/Alert'
 import { errorStyle, underlineFocusStyle, inputStyle, selectedItemStyle } from 'style/materialStyles'
@@ -185,7 +186,7 @@ export default class Templates extends Component {
 
             <div style={{position: 'absolute', right: '25px'}}>
               <RaisedButton label="Add" onTouchTap={this.onClickAdd.bind(this)}/>&nbsp;
-              <RaisedButton label="Edit" onTouchTap={this.onClickEdit.bind(this)}/>&nbsp;
+              <RaisedButton label="Edit" onTouchTap={this.onClickEdit.bind(this)} className="hidden"/>&nbsp;
             </div>
           </div>
         </TabPageHeader>
@@ -194,6 +195,10 @@ export default class Templates extends Component {
           <div className="row padding-md">
             <div className="col-md-3">
               {type === 'Device' ? this.renderDeviceTemplates() : this.renderMonitorTemplates()}
+            </div>
+            
+            <div className="col-md-9">
+              <DeviceTplView />
             </div>
           </div>
           {this.renderTplImageModal()}
