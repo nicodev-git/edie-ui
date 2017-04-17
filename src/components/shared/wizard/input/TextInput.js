@@ -21,7 +21,7 @@ export default class TextInput extends React.Component {
           hintText={<label>{label}</label>}
           inputStyle={inputStyle}
           underlineFocusStyle={underlineStyle}
-          disabled={disabled ? 'disabled' : null}
+          disabled={!!disabled}
           {...input}
         />
       </div>
@@ -39,11 +39,10 @@ export default class TextInput extends React.Component {
     }
     return (
       <Field
-        name={config.name} label={label} component={this.renderField}
+        name={config.name}
+        label={label}
+        component={this.renderField}
         style={config.style}
-        cls={config.cls}
-        useColumn={config.useColumn}
-        disabled={config.disabled}
       />
     )
   }

@@ -29,7 +29,8 @@ class DeviceEditWizard extends React.Component {
     this.mapping = {
       'text': this.buildText.bind(this),
       'check': this.buildCheck.bind(this),
-      'row': this.buildRow.bind(this)
+      'row': this.buildRow.bind(this),
+      'image': this.buildIconUploader.bind(this)
     }
   }
 
@@ -197,7 +198,6 @@ class DeviceEditWizard extends React.Component {
   buildIconUploader (config) {
     return (<IconUploader key={config.name}
       config={config}
-      sid={this.context.sid}
       buildLabel={this.buildLabel.bind(this)}/>)
   }
 
