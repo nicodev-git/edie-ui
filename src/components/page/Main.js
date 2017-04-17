@@ -2,7 +2,6 @@ import React from 'react'
 import { findIndex, startsWith, assign } from 'lodash'
 import ReactTooltip from 'react-tooltip'
 import Snackbar from 'material-ui/Snackbar'
-import SearchIcon from 'material-ui/svg-icons/action/search'
 
 import SidebarContainer from '../../containers/page/sidebar/SidebarContainer'
 import DashboardContainer from '../../containers/page/content/dashboard/DashboardContainer'
@@ -143,10 +142,8 @@ class Main extends React.Component {
     return (
       <Snackbar
         open
-        action={<SearchIcon color="white" style={{marginTop: '6px'}}/>}
-        message={this.props.newIncidentMsg}
+        message={<div onClick={this.onClickAlert.bind(this)} style={{cursor: 'pointer'}}>{this.props.newIncidentMsg}</div>}
         autoHideDuration={4000}
-        onActionTouchTap={this.onClickAlert.bind(this)}
       />
     )
   }
