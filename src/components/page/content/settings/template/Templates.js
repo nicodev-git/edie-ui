@@ -44,7 +44,7 @@ export default class Templates extends Component {
             this.props.deviceTemplates.map((item, index) =>
               <tr key={item.id}
                 className={selectedDeviceTpl && item.id === selectedDeviceTpl.id ? 'selected' : ''}
-                onClick={this.onClickRow.bind(this, index)}>
+                onClick={this.onClickRow.bind(this, item)}>
                 <td>{item.name}</td>
                 <td className="text-right fa-lg">
                   {item.origin !== 'SYSTEM' && <IconButton
@@ -165,6 +165,14 @@ export default class Templates extends Component {
     }
   }
 
+  renderDeviceTplView () {
+    const {selectedDeviceTpl} = this.props
+    if (!selectedDeviceTpl) return
+    return (
+      <DeviceTplView {...this.props} enableReinitialize/>
+    )
+  }
+
   render () {
     const {type} = this.state
     return (
@@ -198,7 +206,7 @@ export default class Templates extends Component {
               {type === 'Device' ? this.renderDeviceTemplates() : null/* this.renderMonitorTemplates() */}
             </div>
             <div className="col-md-9">
-              <DeviceTplView />
+              {this.renderDeviceTplView()}
             </div>
           </div>
           {this.renderTplImageModal()}

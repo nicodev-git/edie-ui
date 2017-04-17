@@ -1,4 +1,5 @@
 import axios from 'axios'
+import {reset} from 'redux-form'
 import {
   FETCH_SETTING_MAPS,
   ADD_SETTING_MAP,
@@ -433,5 +434,6 @@ export const syncData = () => {
 export const selectDeviceTemplate = (tpl) => {
   return dispatch => {
     dispatch({type: SELECT_DEVICE_TEMPLATE, tpl})
+    dispatch(reset('deviceTplView'))
   }
 }
