@@ -27,7 +27,7 @@ export default class IncidentEventsModal extends React.Component {
             <td className="nowrap">{moment(e.datetime).format('YYYY-MM-DD HH:mm:ss')}</td>
             <td>{e.description}</td>
             <td>{e.rawdata}</td>
-            <td>{e.json}</td>
+            <td>{e.dataobj ? JSON.stringify(e.dataobj) : ''}</td>
           </tr>)
         }</tbody>
       </table>
