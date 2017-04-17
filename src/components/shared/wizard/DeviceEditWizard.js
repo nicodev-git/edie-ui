@@ -30,7 +30,7 @@ class DeviceEditWizard extends React.Component {
       'text': this.buildText.bind(this),
       'check': this.buildCheck.bind(this),
       'row': this.buildRow.bind(this),
-      'image': this.buildIconUploader.bind(this)
+      'uploader': this.buildIconUploader.bind(this)
     }
   }
 
@@ -197,7 +197,7 @@ class DeviceEditWizard extends React.Component {
 
   buildIconUploader (config) {
     return (<IconUploader key={config.name}
-      config={config}
+      config={config} values={this.props.initialValues}
       buildLabel={this.buildLabel.bind(this)}/>)
   }
 

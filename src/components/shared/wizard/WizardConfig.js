@@ -4496,6 +4496,15 @@ export const wizardEditConfig = {
         width: MAX_WIDTH,
         name: 'info'
       }, {
+        type: 'uploader',
+        label: {
+          text: 'Image',
+          type: 'attach',
+          width: 3
+        },
+
+        name: 'image'
+      }, {
         type: 'label',
         text: '',
         width: 3
