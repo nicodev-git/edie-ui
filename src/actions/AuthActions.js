@@ -75,10 +75,12 @@ export const fetchUserInfo = () => {
 }
 
 const fetchUserInfoSuccess = (dispatch, response) => {
-  dispatch({
-    type: FETCH_USER_INFO,
-    data: response.data
-  })
+  axios.get(`${ROOT_URL}/user/${response.data.id}`).then(res => {
+    dispatch({
+      type: FETCH_USER_INFO,
+      data: res.data
+    })
+  }).catch(error => authError(dispatch, error))
 }
 
 export const updateUserProfile = (props) => {
