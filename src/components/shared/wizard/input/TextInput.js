@@ -18,7 +18,7 @@ export default class TextInput extends React.Component {
     const field = (
       <div style={util.convertStyle(style)}>
         <TextField
-          hintText={<label>label</label>}
+          hintText={<label>{label}</label>}
           inputStyle={inputStyle}
           underlineFocusStyle={underlineStyle}
           disabled={disabled ? 'disabled' : null}
@@ -34,7 +34,6 @@ export default class TextInput extends React.Component {
     const { config } = this.props
 
     let label
-    let width = util.calcWidth(config.width)
 
     let placeholder = ''
 
@@ -43,16 +42,13 @@ export default class TextInput extends React.Component {
         placeholder = config.label.text || ''
       } else {
         label = config.label// this.props.buildLabel(config.label)
-        width = util.calcWidth(config.width) - util.calcWidth(config.label.width)
       }
     }
 
     return (
       <Field
-        type="text"
         name={config.name} label={label} component={this.renderField}
         style={config.style}
-        width={width}
         cls={config.cls}
         useColumn={config.useColumn}
         disabled={config.disabled}
