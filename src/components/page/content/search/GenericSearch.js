@@ -285,6 +285,13 @@ class GenericSearch extends React.Component {
     this.props.openSearchWfModal()
   }
 
+  onClearWorkflow () {
+    this.props.selectSearchWf('')
+    this.props.updateSearchParams(assign({}, this.props.params, {
+      workflow: ''
+    }))
+  }
+
   onClickSelectWorkflow () {
     if (!this.props.selectedRowWf) return
     this.props.selectSearchWf(this.props.selectedRowWf)
@@ -422,6 +429,7 @@ class GenericSearch extends React.Component {
             onClickStar={this.onClickStar.bind(this)}
             starFilled={!!this.props.selectedSearchOption}
             workflow={workflow.length ? workflow[0].name : ''}
+            onClearWorkflow={this.onClearWorkflow.bind(this)}
             onClickWorkflow={this.onClickWorkflow.bind(this)}
             onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
             onChangeSearchOption={this.onChangeSearchOption.bind(this)}
