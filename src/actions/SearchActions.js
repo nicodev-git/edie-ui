@@ -8,11 +8,6 @@ import {
   FETCH_FIELD_TOP_VALUES,
   UPDATE_QUERY_CHIPS,
 
-  FETCH_SEARCH_OPTIONS,
-  ADD_SEARCH_OPTION,
-  UPDATE_SEARCH_OPTION,
-  REMOVE_SEARCH_OPTION,
-
   OPEN_SEARCH_SAVE_POPOVER,
   CLOSE_SEARCH_SAVE_POPOVER,
 
@@ -21,7 +16,9 @@ import {
   SELECT_SEARCH_WF_CATEGORY,
   CHANGE_SEARCH_WF_FILTER,
   SELECT_WF_ROW,
-  SELECT_SEARCH_WF
+  SELECT_SEARCH_WF,
+
+  UPDATE_USER_INFO
 } from './types'
 import { ROOT_URL } from './config'
 import { apiError } from './Errors'
@@ -74,45 +71,41 @@ export const updateQueryChips = (chips) => {
   }
 }
 
+const updateUserSuccess = (dispatch, response) => {
+  dispatch({
+    type: UPDATE_USER_INFO,
+    data: response.data
+  })
+}
+
 export const addSearchOption = (user, option) => {
   if (!user) return
   return dispatch => {
     const searchOptions = JSON.parse(user.searchOptions || '[]')
     searchOptions.push(option)
-    // axios.post(`${ROOT_URL}`)
-
-
-    dispatch(saveEnvVar(envvars, KEY_SEARCH_OPTIONS, value1, () => {
-      dispatch({type: ADD_SEARCH_OPTION, option})
-    }))
+    axios.put(user._links.self.href, assign({}, user, {
+      searchOptions: JSON.stringify(searchOptions)
+    })).then(res => updateUserSuccess(dispatch, res)).catch(error => apiError(dispatch, error))
   }
 }
 
-export const updateSearchOption = (envvars, userId, option) => {
+export const updateSearchOption = (user, option) => {
+  if (!user) return
   return dispatch => {
-    const envVar = getEnvVar(envvars, KEY_SEARCH_OPTIONS)
-    let value1 = JSON.parse(getEnvVarValue1(envVar) || '{}')
-    const options = value1[userId] || []
-    value1[userId] = options.map(m => m.id === option.id ? option : m)
-    value1 = JSON.stringify(value1)
-
-    dispatch(saveEnvVar(envvars, KEY_SEARCH_OPTIONS, value1, () => {
-      dispatch({type: UPDATE_SEARCH_OPTION, option})
-    }))
+    const searchOptions = JSON.parse(user.searchOptions || '[]')
+    axios.put(user._links.self.href, assign({}, user, {
+      searchOptions: JSON.stringify(searchOptions.map(m => m.id === option.id ? option : m))
+    })).then(res => updateUserSuccess(dispatch, res)).catch(error => apiError(dispatch, error))
   }
 }
 
-export const removeSearchOption = (envvars, userId, option) => {
+export const removeSearchOption = (user, option) => {
+  if (!user) return
   return dispatch => {
-    const envVar = getEnvVar(envvars, KEY_SEARCH_OPTIONS)
-    let value1 = JSON.parse(getEnvVarValue1(envVar) || '{}')
-    const options = value1[userId] || []
-    value1[userId] = options.filter(m => m.id !== option.id)
-    value1 = JSON.stringify(value1)
-
-    dispatch(saveEnvVar(envvars, KEY_SEARCH_OPTIONS, value1, () => {
-      dispatch({type: REMOVE_SEARCH_OPTION, option})
-    }))
+    const searchOptions = JSON.parse(user.searchOptions || '[]')
+    axios.put(user._links.self.href, assign({}, user, {
+      searchOptions: JSON.stringify(searchOptions.filter(m => m.id !== option.id))
+    })).then(res => updateUserSuccess(dispatch, res)).catch(error => apiError(dispatch, error))
   }
 }
 

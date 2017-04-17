@@ -74,7 +74,7 @@ class GenericSearch extends React.Component {
     if (!searchOptions) return []
     try {
       return JSON.parse(searchOptions)
-    } catch(e) {
+    } catch (e) {
       console.log(e)
     }
     return []
@@ -231,22 +231,22 @@ class GenericSearch extends React.Component {
   }
 
   onClickStar (e) {
-    const { userInfo, envVars, selectedSearchOption, change, removeSearchOption, openSearchSavePopover } = this.props
+    const { userInfo, selectedSearchOption, change, removeSearchOption, openSearchSavePopover } = this.props
 
     const searchOptions = this.getSearchOptions()
     if (selectedSearchOption) {
       change('searchOptionIndex', '')
       const found = searchOptions.filter(i => i.id === selectedSearchOption)
-      if (userInfo && found.length) removeSearchOption(envVars, userInfo.id, found[0])
+      if (userInfo && found.length) removeSearchOption(userInfo, found[0])
     } else {
       openSearchSavePopover(null, e.target)
     }
   }
 
   onClickSaveSearch (values) {
-    const { userInfo, envVars } = this.props
+    const { userInfo } = this.props
     const { dateIndex, query } = this.props.params
-    if (!userInfo.id) return
+    if (!userInfo) return
     const option = {
       id: guid(),
       name: values.name,
@@ -257,7 +257,7 @@ class GenericSearch extends React.Component {
     }
 
     this.props.closeSearchSavePopover()
-    this.props.addSearchOption(envVars, userInfo.id, option)
+    this.props.addSearchOption(userInfo, option)
   }
 
   onChangeSearchOption (m, value) {
