@@ -3,7 +3,7 @@ import { ImageUploader } from 'components/modal/parts'
 
 export default class IconUploader extends React.Component {
   onChange () {
-
+    this.props.openTplImageModal()
   }
   render () {
     const {config, values} = this.props

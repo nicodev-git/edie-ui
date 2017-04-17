@@ -15,6 +15,8 @@ import Checkbox from './input/Checkbox'
 import IconUploader from './input/IconUploader'
 import RaisedButton from 'material-ui/RaisedButton'
 
+import ImageUploaderModal from 'components/page/settings/template/ImageUploaderModal'
+
 class DeviceEditWizard extends React.Component {
   constructor (props) {
     super(props)
@@ -196,9 +198,14 @@ class DeviceEditWizard extends React.Component {
   }
 
   buildIconUploader (config) {
-    return (<IconUploader key={config.name}
-      config={config} values={this.props.initialValues}
-      buildLabel={this.buildLabel.bind(this)}/>)
+    return (
+      <IconUploader
+        key={config.name}
+        config={config}
+        values={this.props.initialValues}
+        openTplImageModal={this.props.openTplImageModal}
+      />
+    )
   }
 
   buildTextArea (config) {
@@ -209,7 +216,12 @@ class DeviceEditWizard extends React.Component {
   buildForm (config) {
     return null
   }
-
+  renderTplImageModal () {
+    if (!this.props.tplImageModalVisible) return null
+    return (
+      <ImageUploaderModal {...this.props} />
+    )
+  }
   render () {
     const { handleSubmit, tabs } = this.props
     return (
@@ -236,6 +248,7 @@ class DeviceEditWizard extends React.Component {
                   ))
                 }
               </Tabs>
+              {this.renderTplImageModal()}
             </div>
           </div>
         </form>

@@ -1,9 +1,27 @@
 import React from 'react'
 import DeviceEditWizard from '../../../components/shared/wizard/DeviceEditWizard'
 import { connect } from 'react-redux'
+import {
+  openTplImageModal,
+  closeTplImageModal,
+  fetchImages,
+  uploadImage
+} from 'actions'
 
 @connect(
-  state => ({ initialValues: state.dashboard.selectedDevice })
+  state => ({
+    initialValues: state.dashboard.selectedDevice,
+
+    tplImageModalVisible: state.settings.tplImageModalVisible,
+    selectedTplImage: state.settings.selectedTplImage,
+
+    images: state.dashboard.images
+  }), {
+    openTplImageModal,
+    closeTplImageModal,
+    fetchImages,
+    uploadImage
+  }
 )
 export default class DeviceEditWizardContainer extends React.Component {
   render () {
