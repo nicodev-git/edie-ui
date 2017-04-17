@@ -54,6 +54,7 @@ import {
     selectedCategory: state.search.selectedCategory,
     wfModalOpen: state.search.wfModalOpen,
     selectedWf: state.search.selectedWf,
+    selectedWfs: state.search.selectedWfs,
     workflowFilter: state.search.workflowFilter,
     selectedRowWf: state.search.selectedRowWf
   }),

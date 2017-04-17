@@ -79,6 +79,7 @@ const initialState = {
     queryChips: [],
     fields: [],
     fieldTopValues: [],
+    selectedWfs: [],
 
     searchOptions: [],
     selectedCategory: '',
