@@ -28,7 +28,9 @@ import {
   selectSearchWfCategory,
   changeSeachWfFilter,
   selectWfRow,
-  selectSearchWf
+  selectSearchWf,
+  addSearchWf,
+  removeSearchWf
 } from 'actions'
 
 @withRouter
@@ -82,7 +84,9 @@ import {
       selectSearchWfCategory,
       changeSeachWfFilter,
       selectWfRow,
-      selectSearchWf
+      selectSearchWf,
+      addSearchWf,
+      removeSearchWf
     }, dispatch)
   })
 )

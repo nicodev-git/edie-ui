@@ -17,6 +17,8 @@ import {
   CHANGE_SEARCH_WF_FILTER,
   SELECT_WF_ROW,
   SELECT_SEARCH_WF,
+  ADD_SEARCH_WF,
+  REMOVE_SEARCH_WF,
 
   UPDATE_USER_INFO
 } from './types'
@@ -154,5 +156,17 @@ export const selectWfRow = (workflow) => {
 export const selectSearchWf = (workflow) => {
   return dispatch => {
     dispatch({type: SELECT_SEARCH_WF, workflow})
+  }
+}
+
+export const addSearchWf = (workflow) => {
+  return dispatch => {
+    dispatch({type: ADD_SEARCH_WF, workflow})
+  }
+}
+
+export const removeSearchWf = (workflow) => {
+  return dispatch => {
+    dispatch({type: REMOVE_SEARCH_WF, workflow})
   }
 }

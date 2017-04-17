@@ -23,7 +23,9 @@ import {
   SELECT_SEARCH_WF_CATEGORY,
   CHANGE_SEARCH_WF_FILTER,
   SELECT_WF_ROW,
-  SELECT_SEARCH_WF
+  SELECT_SEARCH_WF,
+  ADD_SEARCH_WF,
+  REMOVE_SEARCH_WF
 } from '../actions/types'
 import { concat } from 'lodash'
 
@@ -87,6 +89,10 @@ export default function (state = {}, action) {
       return { ...state, selectedRowWf: action.workflow }
     case SELECT_SEARCH_WF:
       return { ...state, selectedWf: action.workflow }
+    case ADD_SEARCH_WF:
+      return { ...state, selectedWfs: concat(state.selectedWfs, action.workflow)}
+    case REMOVE_SEARCH_WF:
+      return { ...state, selectedWfs: state.selectedWfs.filter(p => p.id !== action.workflow.id)}
   }
   return state
 }
