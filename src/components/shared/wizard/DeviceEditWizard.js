@@ -15,7 +15,7 @@ import Checkbox from './input/Checkbox'
 import IconUploader from './input/IconUploader'
 import RaisedButton from 'material-ui/RaisedButton'
 
-import ImageUploaderModal from 'components/page/settings/template/ImageUploaderModal'
+import ImageUploaderModal from 'components/page/content/settings/template/ImageUploaderModal'
 
 class DeviceEditWizard extends React.Component {
   constructor (props) {
