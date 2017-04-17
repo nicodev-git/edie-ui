@@ -10,6 +10,7 @@ import {
   fetchMonitorTemplates,
   openMonitorTplModal,
   deleteMonitorTemplate,
+  selectDeviceTemplate,
 
   addDeviceTemplate,
   updateDeviceTemplate,
@@ -37,6 +38,7 @@ import {
     tplImageModalVisible: state.settings.tplImageModalVisible,
 
     deviceTpl: state.settings.deviceTpl,
+    selectedDeviceTpl: state.settings.selectedDeviceTpl,
     selectedTplImage: state.settings.selectedTplImage,
 
     monitorTpl: state.settings.monitorTpl,
@@ -51,6 +53,7 @@ import {
       deleteDeviceTemplate,
       openMonitorTplModal,
       deleteMonitorTemplate,
+      selectDeviceTemplate,
 
       addDeviceTemplate,
       updateDeviceTemplate,

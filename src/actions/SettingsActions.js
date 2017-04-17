@@ -38,6 +38,8 @@ import {
 
   SYNC_DATA,
 
+  SELECT_DEVICE_TEMPLATE,
+
   NO_AUTH_ERROR
 } from './types'
 
@@ -425,5 +427,11 @@ export const syncData = () => {
     axios.get(`${ROOT_URL}/pullSyncDataFromImadmin`).then(response => {
       dispatch({type: SYNC_DATA, data: response.data})
     }).catch(error => apiError(dispatch, error))
+  }
+}
+
+export const selectDeviceTemplate = (tpl) => {
+  return dispatch => {
+    dispatch({type: SELECT_DEVICE_TEMPLATE, tpl})
   }
 }

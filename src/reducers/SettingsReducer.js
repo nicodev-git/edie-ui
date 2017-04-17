@@ -5,6 +5,7 @@ import {
   DELETE_DEVICE_TEMPLATE,
   OPEN_DEVICE_TEMPLATE_MODAL,
   CLOSE_DEVICE_TEMPLATE_MODAL,
+  SELECT_DEVICE_TEMPLATE,
 
   FETCH_MONITOR_TEMPLATES,
   ADD_MONITOR_TEMPLATE,
@@ -91,7 +92,8 @@ export default function (state = {}, action) {
   switch (action.type) {
     case FETCH_DEVICE_TEMPLATES:
       return { ...state, deviceTemplates: action.data }
-
+    case SELECT_DEVICE_TEMPLATE:
+      return { ...state, selectedDeviceTpl: action.tpl }
     case ADD_DEVICE_TEMPLATE: {
       const deviceTemplates = concat(state.deviceTemplates || [], action.data)
       return { ...state, deviceTemplates }

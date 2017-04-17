@@ -20,8 +20,7 @@ export default class Templates extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      type: 'Device',
-      selected: -1
+      type: 'Device'
     }
   }
 
@@ -32,7 +31,7 @@ export default class Templates extends Component {
   }
 
   onClickRow (selected) {
-    this.setState({ selected })
+    this.props.selectDeviceTemplate(selected)
   }
 
   renderDeviceTemplates () {
@@ -43,7 +42,7 @@ export default class Templates extends Component {
           {
             this.props.deviceTemplates.map((item, index) =>
               <tr key={item.id}
-                className={index === this.state.selected ? 'selected' : ''}
+                className={index === this.props.selectedDeviceTpl ? 'selected' : ''}
                 onClick={this.onClickRow.bind(this, index)}>
                 <td>{item.name}</td>
                 <td className="text-right fa-lg">
@@ -196,7 +195,6 @@ export default class Templates extends Component {
             <div className="col-md-3">
               {type === 'Device' ? this.renderDeviceTemplates() : this.renderMonitorTemplates()}
             </div>
-            
             <div className="col-md-9">
               <DeviceTplView />
             </div>
