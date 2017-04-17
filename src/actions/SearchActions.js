@@ -25,9 +25,6 @@ import {
 } from './types'
 import { ROOT_URL } from './config'
 import { apiError } from './Errors'
-import { updateEnvVar, addEnvVar, fetchEnvVars } from './EnvActions'
-
-import { KEY_SEARCH_OPTIONS, getEnvVar, getEnvVarValue1, setEnvVarValue1, createEnvVar } from 'shared/Global'
 
 export const updateSearchParams = (params) => {
   return function (dispatch) {
@@ -77,41 +74,13 @@ export const updateQueryChips = (chips) => {
   }
 }
 
-export const fetchSearchOptions = (userId) => {
+export const addSearchOption = (user, option) => {
+  if (!user) return
   return dispatch => {
-    dispatch({type: FETCH_SEARCH_OPTIONS, data: []})
-    dispatch(fetchEnvVars((envvars) => {
-      const envVar = getEnvVar(envvars, KEY_SEARCH_OPTIONS)
-      const value = getEnvVarValue1(envVar) || '{}'
-      const data = JSON.parse(value)[userId] || []
-      dispatch({type: FETCH_SEARCH_OPTIONS, data})
-    }))
-  }
-}
+    const searchOptions = JSON.parse(user.searchOptions || '[]')
+    searchOptions.push(option)
+    // axios.post(`${ROOT_URL}`)
 
-const saveEnvVar = (envvars, key, value1, cb) => {
-  let envVar = getEnvVar(envvars, key)
-
-  let fnSaveEnvVar
-  if (envVar) {
-    envVar = setEnvVarValue1(envVar, value1)
-    fnSaveEnvVar = updateEnvVar
-  } else {
-    envVar = createEnvVar(key, value1, '')
-    fnSaveEnvVar = addEnvVar
-  }
-
-  return fnSaveEnvVar(envVar, cb)
-}
-
-export const addSearchOption = (envvars, userId, option) => {
-  return dispatch => {
-    const envVar = getEnvVar(envvars, KEY_SEARCH_OPTIONS)
-    let value1 = JSON.parse(getEnvVarValue1(envVar) || '{}')
-    const options = value1[userId] || []
-    options.push(option)
-    value1[userId] = options
-    value1 = JSON.stringify(value1)
 
     dispatch(saveEnvVar(envvars, KEY_SEARCH_OPTIONS, value1, () => {
       dispatch({type: ADD_SEARCH_OPTION, option})

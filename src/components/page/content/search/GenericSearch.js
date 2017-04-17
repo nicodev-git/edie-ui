@@ -63,9 +63,21 @@ class GenericSearch extends React.Component {
       }
     }]
 
-    if (props.userInfo) this.props.fetchSearchOptions(props.userInfo.id)
     this.props.fetchSearchFields(props.params)
     this.props.fetchWorkflows()
+  }
+
+  getSearchOptions () {
+    const {userInfo} = this.props
+    if (!userInfo) return []
+    const {searchOptions} = userInfo
+    if (!searchOptions) return []
+    try {
+      return JSON.parse(searchOptions)
+    } catch(e) {
+      console.log(e)
+    }
+    return []
   }
 
   renderValue (val) {
@@ -219,8 +231,9 @@ class GenericSearch extends React.Component {
   }
 
   onClickStar (e) {
-    const { userInfo, envVars, selectedSearchOption, searchOptions, change, removeSearchOption, openSearchSavePopover } = this.props
+    const { userInfo, envVars, selectedSearchOption, change, removeSearchOption, openSearchSavePopover } = this.props
 
+    const searchOptions = this.getSearchOptions()
     if (selectedSearchOption) {
       change('searchOptionIndex', '')
       const found = searchOptions.filter(i => i.id === selectedSearchOption)
@@ -248,7 +261,7 @@ class GenericSearch extends React.Component {
   }
 
   onChangeSearchOption (m, value) {
-    const found = this.props.searchOptions.filter(i => i.id === value)
+    const found = this.getSearchOptions().filter(i => i.id === value)
     if (!found.length) {
       found.push({data: {query: '', dateIndex: 0}})
     }
@@ -405,7 +418,7 @@ class GenericSearch extends React.Component {
           <SearchFormView
             onSearchKeyDown={this.onSearchKeyDown.bind(this)}
             dateOptions={this.dateOptions}
-            searchOptions={this.props.searchOptions.map(m => ({label: m.name, value: m.id}))}
+            searchOptions={this.getSearchOptions().map(m => ({label: m.name, value: m.id}))}
             onClickStar={this.onClickStar.bind(this)}
             starFilled={!!this.props.selectedSearchOption}
             workflow={workflow.length ? workflow[0].name : ''}
