@@ -65,8 +65,8 @@ export default class WorkflowSelectModalView extends React.Component {
                 workflows.map(w =>
                   <tr
                     key={w.id}
-                    className={selectedRowWf === w.id ? 'selected' : ''}
-                    onClick={() => onClickRow(w.id)}
+                    className={selectedRowWf.id === w.id ? 'selected' : ''}
+                    onClick={() => onClickRow(w)}
                   >
                     <td>{w.category}</td>
                     <td>{w.severity}</td>

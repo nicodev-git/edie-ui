@@ -294,11 +294,19 @@ class GenericSearch extends React.Component {
 
   onClickSelectWorkflow () {
     if (!this.props.selectedRowWf) return
-    this.props.selectSearchWf(this.props.selectedRowWf)
+    this.props.addSearchWf(this.props.selectedRowWf)
     this.props.updateSearchParams(assign({}, this.props.params, {
-      workflow: this.props.selectedRowWf || ''
+      workflow: concat([], this.props.selectedWfs, this.props.selectedRowWf).map(m => m.id).join(',')
     }))
     this.props.closeSearchWfModal()
+  }
+
+  onClickRemoveWfChip (index) {
+    const wf = this.props.selectedWfs[index]
+    this.props.removeSearchWf(wf)
+    this.props.updateSearchParams(assign({}, this.props.params, {
+      workflow: this.props.selectedWfs.filter(m => m.id !== wf.id).map(m => m.id).join(',')
+    }))
   }
 
   renderFields () {
@@ -447,6 +455,14 @@ class GenericSearch extends React.Component {
                     {p.name !== '_all' ? <b>{p.name}: </b> : null}{p.value}
                   </Chip>
                 )}
+                {this.props.selectedWfs.map((p, i) =>
+                  <Chip
+                    key={p.id}
+                    style={styles.chip}
+                    onRequestDelete={this.onClickRemoveWfChip.bind(this, i)}>
+                    {p.name}
+                  </Chip>
+                  )}
               </div>
             </div>
 

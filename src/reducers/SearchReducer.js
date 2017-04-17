@@ -90,9 +90,9 @@ export default function (state = {}, action) {
     case SELECT_SEARCH_WF:
       return { ...state, selectedWf: action.workflow }
     case ADD_SEARCH_WF:
-      return { ...state, selectedWfs: concat(state.selectedWfs, action.workflow)}
+      return { ...state, selectedWfs: concat(state.selectedWfs, action.workflow) }
     case REMOVE_SEARCH_WF:
-      return { ...state, selectedWfs: state.selectedWfs.filter(p => p.id !== action.workflow.id)}
+      return { ...state, selectedWfs: state.selectedWfs.filter(p => p.id !== action.workflow.id) }
   }
   return state
 }
