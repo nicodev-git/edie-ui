@@ -18,7 +18,7 @@ export default class TextInput extends React.Component {
     const field = (
       <div style={util.convertStyle(style)}>
         <TextField
-          hintText={label}
+          hintText={<label>label</label>}
           inputStyle={inputStyle}
           underlineFocusStyle={underlineStyle}
           disabled={disabled ? 'disabled' : null}
