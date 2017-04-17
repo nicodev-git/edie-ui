@@ -2,6 +2,8 @@ import React from 'react'
 import Modal from 'react-bootstrap-modal'
 import moment from 'moment'
 
+import {renderEntity} from 'components/shared/CellRenderers'
+
 export default class IncidentEventsModal extends React.Component {
   constructor (props) {
     super(props)
@@ -27,7 +29,7 @@ export default class IncidentEventsModal extends React.Component {
             <td className="nowrap">{moment(e.datetime).format('YYYY-MM-DD HH:mm:ss')}</td>
             <td>{e.description}</td>
             <td>{e.rawdata}</td>
-            <td>{e.dataobj ? JSON.stringify(e.dataobj) : ''}</td>
+            <td>{renderEntity(e.dataobj)}</td>
           </tr>)
         }</tbody>
       </table>
