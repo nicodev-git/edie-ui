@@ -109,6 +109,9 @@ class Main extends React.Component {
   onCloseAlert () {
     this.props.closeApiErrorModal()
   }
+  onClickAlert () {
+    this.props.router.push('/search')
+  }
 
   renderActivationModal () {
     if (!this.props.activationModalOpen) return null
@@ -131,8 +134,10 @@ class Main extends React.Component {
     return (
       <Snackbar
         open
-        message={this.props.newIncidentMsg}
-        autoHideDuration={4000}
+        message="Ping ip :: 8.8.8.8 :: of device :: asd is FAILED"
+        // message={this.props.newIncidentMsg}
+        // autoHideDuration={4000}
+        onActionTouchTap={this.onClickAlert.bind(this)}
       />
     )
   }
