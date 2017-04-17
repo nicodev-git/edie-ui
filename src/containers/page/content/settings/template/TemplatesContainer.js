@@ -40,6 +40,7 @@ import {
 
     deviceTpl: state.settings.deviceTpl,
     selectedDeviceTpl: state.settings.selectedDeviceTpl,
+    selectedDeviceMonitors: state.settings.selectedDeviceMonitors,
     selectedTplImage: state.settings.selectedTplImage,
 
     monitorTpl: state.settings.monitorTpl,

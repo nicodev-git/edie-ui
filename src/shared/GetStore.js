@@ -96,6 +96,7 @@ const initialState = {
     deviceTemplates: [],
     monitorTemplates: [],
     tplImageModalVisible: false,
+    selectedDeviceMonitors: [],
 
     maps: [],
     editMap: null,

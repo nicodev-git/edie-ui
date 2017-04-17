@@ -94,7 +94,7 @@ export default function (state = {}, action) {
     case FETCH_DEVICE_TEMPLATES:
       return { ...state, deviceTemplates: action.data }
     case SELECT_DEVICE_TEMPLATE:
-      return { ...state, selectedDeviceTpl: action.tpl, selectedDeviceMonitors: action.tpl ? action.tpl.monitors : [] }
+      return { ...state, selectedDeviceTpl: action.tpl, selectedDeviceMonitors: (action.tpl ? action.tpl.monitors : []) || [] }
     case UPDATE_DEVICE_TEMPLATE_MONITORS:
       return { ...state, selectedDeviceMonitors: action.monitors }
     case ADD_DEVICE_TEMPLATE: {
