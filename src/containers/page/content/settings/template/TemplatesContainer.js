@@ -11,6 +11,7 @@ import {
   openMonitorTplModal,
   deleteMonitorTemplate,
   selectDeviceTemplate,
+  updateSelectedDeviceTplMonitors,
 
   addDeviceTemplate,
   updateDeviceTemplate,
@@ -54,6 +55,7 @@ import {
       openMonitorTplModal,
       deleteMonitorTemplate,
       selectDeviceTemplate,
+      updateSelectedDeviceTplMonitors,
 
       addDeviceTemplate,
       updateDeviceTemplate,

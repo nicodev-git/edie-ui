@@ -1,6 +1,6 @@
 import React from 'react'
 import { reduxForm } from 'redux-form'
-import { assign } from 'lodash'
+import { assign, concat } from 'lodash'
 import { connect } from 'react-redux'
 import { getCustomImageUrl, extImageBaseUrl } from 'shared/Global'
 import { DeviceTplModalView } from 'components/modal'
@@ -33,9 +33,8 @@ class DeviceTplView extends React.Component {
   }
 
   onClickAddMonitor (item) {
-    let {monitors} = this.props
-    monitors.push(item)
-    // this.setState({monitors})
+    const monitors = concat([], this.props.monitors, item)
+    this.props.updateSelectedDeviceTplMonitors(monitors)
   }
 
   onClickEditMonitor (item) {
@@ -43,9 +42,8 @@ class DeviceTplView extends React.Component {
   }
 
   onClickRemoveMonitor (index) {
-    let {monitors} = this.props
-    monitors.splice(index, 1)
-    // this.setState({monitors})
+    const monitors = this.props.monitors.filter((m, i) => i !== index)
+    this.props.updateSelectedDeviceTplMonitors(monitors)
   }
 
   onClickChangeImage () {

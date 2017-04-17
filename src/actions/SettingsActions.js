@@ -40,6 +40,7 @@ import {
   SYNC_DATA,
 
   SELECT_DEVICE_TEMPLATE,
+  UPDATE_DEVICE_TEMPLATE_MONITORS,
 
   NO_AUTH_ERROR
 } from './types'
@@ -435,5 +436,11 @@ export const selectDeviceTemplate = (tpl) => {
   return dispatch => {
     dispatch({type: SELECT_DEVICE_TEMPLATE, tpl})
     dispatch(reset('deviceTplView'))
+  }
+}
+
+export const updateSelectedDeviceTplMonitors = (monitors) => {
+  return dispatch => {
+    dispatch({type: UPDATE_DEVICE_TEMPLATE_MONITORS, monitors})
   }
 }
