@@ -6,14 +6,10 @@ import { getCustomImageUrl, extImageBaseUrl } from 'shared/Global'
 import { DeviceTplModalView } from 'components/modal'
 
 class DeviceTplView extends React.Component {
-  getMonitors () {
-    return this.props.deviceTpl ? this.props.deviceTpl.monitors : []
-  }
-
   handleFormSubmit (formProps) {
     const {deviceTpl, selectedTplImage} = this.props
     const tpl = assign({}, (deviceTpl || {}), formProps, {
-      monitors: this.getMonitors()
+      monitors: this.props.monitors
     })
     if (selectedTplImage) tpl.image = selectedTplImage.uuid
     if (deviceTpl) { this.props.updateDeviceTemplate(tpl) } else {
@@ -37,8 +33,8 @@ class DeviceTplView extends React.Component {
   }
 
   onClickAddMonitor (item) {
-    // let {monitors} = this.state
-    // monitors.push(item)
+    let {monitors} = this.props
+    monitors.push(item)
     // this.setState({monitors})
   }
 
@@ -47,8 +43,8 @@ class DeviceTplView extends React.Component {
   }
 
   onClickRemoveMonitor (index) {
-    // let {monitors} = this.state
-    // monitors.splice(index, 1)
+    let {monitors} = this.props
+    monitors.splice(index, 1)
     // this.setState({monitors})
   }
 
@@ -72,7 +68,7 @@ class DeviceTplView extends React.Component {
         show
         innerView
         header={header}
-        monitors={this.getMonitors()}
+        monitors={this.props.monitors}
         monitorTemplates={this.props.monitorTemplates}
         onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
         onHide={this.onClickClose.bind(this)}

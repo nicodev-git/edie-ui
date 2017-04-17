@@ -93,7 +93,7 @@ export default function (state = {}, action) {
     case FETCH_DEVICE_TEMPLATES:
       return { ...state, deviceTemplates: action.data }
     case SELECT_DEVICE_TEMPLATE:
-      return { ...state, selectedDeviceTpl: action.tpl }
+      return { ...state, selectedDeviceTpl: action.tpl, selectedDeviceMonitors: action.tpl ? action.tpl.monitors : [] }
     case ADD_DEVICE_TEMPLATE: {
       const deviceTemplates = concat(state.deviceTemplates || [], action.data)
       return { ...state, deviceTemplates }

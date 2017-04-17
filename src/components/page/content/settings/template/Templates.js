@@ -166,10 +166,15 @@ export default class Templates extends Component {
   }
 
   renderDeviceTplView () {
-    const {selectedDeviceTpl} = this.props
+    const {selectedDeviceTpl, selectedDeviceMonitors} = this.props
     if (!selectedDeviceTpl) return
     return (
-      <DeviceTplView {...this.props} enableReinitialize/>
+      <DeviceTplView
+        {...this.props}
+        enableReinitialize
+        deviceTpl={selectedDeviceTpl}
+        monitors={selectedDeviceMonitors}
+      />
     )
   }
 
@@ -205,7 +210,7 @@ export default class Templates extends Component {
             <div className="col-md-3">
               {type === 'Device' ? this.renderDeviceTemplates() : null/* this.renderMonitorTemplates() */}
             </div>
-            <div className="col-md-9">
+            <div className="col-md-6">
               {this.renderDeviceTplView()}
             </div>
           </div>
