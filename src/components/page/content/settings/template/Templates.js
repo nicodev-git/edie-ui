@@ -35,6 +35,7 @@ export default class Templates extends Component {
   }
 
   renderDeviceTemplates () {
+    const {selectedDeviceTpl} = this.props
     return (
       <div>
         <table className="table table-hover dataTable">
@@ -42,7 +43,7 @@ export default class Templates extends Component {
           {
             this.props.deviceTemplates.map((item, index) =>
               <tr key={item.id}
-                className={index === this.props.selectedDeviceTpl ? 'selected' : ''}
+                className={selectedDeviceTpl && item.id === selectedDeviceTpl.id ? 'selected' : ''}
                 onClick={this.onClickRow.bind(this, index)}>
                 <td>{item.name}</td>
                 <td className="text-right fa-lg">
@@ -145,7 +146,8 @@ export default class Templates extends Component {
   }
 
   onChangeType (e, index, value) {
-    this.setState({ type: value, selected: -1 })
+    this.setState({ type: value })
+    this.props.selectDeviceTemplate(null)
   }
 
   onClickAdd () {
@@ -154,12 +156,12 @@ export default class Templates extends Component {
   }
 
   onClickEdit () {
-    const { selected, type } = this.state
-    if (selected < 0) return window.alert('Please select item.')
+    const { selectedDeviceTpl, type } = this.state
+    if (!selectedDeviceTpl) return window.alert('Please select item.')
     if (type === 'Device') {
-      this.onClickEditDeviceTpl(this.props.deviceTemplates[selected])
+      this.onClickEditDeviceTpl(selectedDeviceTpl)
     } else {
-      this.onClickEditMonitorTpl(this.props.monitorTemplates[selected])
+      // this.onClickEditMonitorTpl(this.props.monitorTemplates[selected])
     }
   }
 
@@ -193,14 +195,13 @@ export default class Templates extends Component {
         <TabPageBody tabs={SettingTabs} tab={7}>
           <div className="row padding-md">
             <div className="col-md-3">
-              {type === 'Device' ? this.renderDeviceTemplates() : this.renderMonitorTemplates()}
+              {type === 'Device' ? this.renderDeviceTemplates() : null/* this.renderMonitorTemplates() */}
             </div>
             <div className="col-md-9">
               <DeviceTplView />
             </div>
           </div>
           {this.renderTplImageModal()}
-
         </TabPageBody>
       </TabPage>
     )
