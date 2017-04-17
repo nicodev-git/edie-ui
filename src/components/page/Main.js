@@ -115,7 +115,7 @@ class Main extends React.Component {
     const query = this.props.newIncidentMsg.substring(9).replace(/:/gi, '')
     const newChips = parseSearchQuery(query)
     this.props.updateQueryChips(newChips)
-    this.props.updateSearchParams(assign({}, this.props.params, {
+    this.props.updateSearchParams(assign({}, this.props.searchParams, {
       query: newChips.map(m => `${m.name}=${m.value}`).join(' and ')
     }))
 

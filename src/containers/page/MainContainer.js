@@ -42,7 +42,7 @@ import {
     envVarAvailable: state.settings.envVarAvailable,
     envVars: state.settings.envVars,
 
-    params: state.search.params
+    searchParams: state.search.params
   }
 },
 dispatch => bindActionCreators({
