@@ -34,6 +34,8 @@ class DeviceEditWizard extends React.Component {
       'row': this.buildRow.bind(this),
       'uploader': this.buildIconUploader.bind(this)
     }
+
+    props.closeTplImageModal('')
   }
 
   componentWillReceiveProps (nextProps) {
@@ -61,12 +63,15 @@ class DeviceEditWizard extends React.Component {
 
   handleFormSubmit (params) {
     const {currentDevice} = this.state
-    console.log(params)
+    const {initialValues, selectedTplImage} = this.props
     let elem = document.getElementById('submitButton')
     elem.style.backgroundColor = '#d1d1d1'
     assign(params, currentDevice.server.params)
     assign(params, this.props.extraParams)
-
+    assign(params, {
+      image: selectedTplImage ? selectedTplImage.uuid : initialValues['image']
+    })
+    console.log(params)
     this.didSave(params)
   }
 
@@ -204,6 +209,7 @@ class DeviceEditWizard extends React.Component {
         config={config}
         values={this.props.initialValues}
         openTplImageModal={this.props.openTplImageModal}
+        selectedTplImage={this.props.selectedTplImage}
       />
     )
   }
