@@ -33,18 +33,10 @@ export default class TextInput extends React.Component {
   render () {
     const { config } = this.props
 
-    let label
-
-    let placeholder = ''
-
+    let label = ''
     if (config.label !== null) {
-      if (config.label.type === 'place') {
-        placeholder = config.label.text || ''
-      } else {
-        label = config.label// this.props.buildLabel(config.label)
-      }
+      label = config.label.text || ''// this.props.buildLabel(config.label)
     }
-
     return (
       <Field
         name={config.name} label={label} component={this.renderField}
@@ -52,7 +44,6 @@ export default class TextInput extends React.Component {
         cls={config.cls}
         useColumn={config.useColumn}
         disabled={config.disabled}
-        placeholder={placeholder}
       />
     )
   }
