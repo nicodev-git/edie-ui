@@ -1,5 +1,5 @@
 import React from 'react'
-import { findIndex, startsWith } from 'lodash'
+import { findIndex, startsWith, assign } from 'lodash'
 import ReactTooltip from 'react-tooltip'
 import Snackbar from 'material-ui/Snackbar'
 import SearchIcon from 'material-ui/svg-icons/action/search'
@@ -12,6 +12,7 @@ import { DragDropContext } from 'react-dnd'
 import TouchBackend from 'react-dnd-touch-backend'
 
 import Alert from 'components/shared/Alert'
+import { parseSearchQuery } from 'shared/Global'
 
 import { mainMenu, deviceMenu, contentType } from './Config'
 
@@ -111,7 +112,13 @@ class Main extends React.Component {
     this.props.closeApiErrorModal()
   }
   onClickAlert () {
-    // this.props.newIncidentMsg
+    const query = this.props.newIncidentMsg.substring(9).replace(/:/gi, '')
+    const newChips = parseSearchQuery(query)
+    this.props.updateQueryChips(newChips)
+    this.props.updateSearchParams(assign({}, this.props.params, {
+      query: newChips.map(m => `${m.name}=${m.value}`).join(' and ')
+    }))
+
     this.props.router.push('/search')
   }
 
@@ -132,14 +139,13 @@ class Main extends React.Component {
   }
 
   renderIncidentAlert () {
-    // if (!this.props.newIncidentMsg) return null
+    if (!this.props.newIncidentMsg) return null
     return (
       <Snackbar
         open
-        message="Ping ip :: 8.8.8.8 :: of device :: asd is FAILED"
         action={<SearchIcon color="white" style={{marginTop: '6px'}}/>}
-        // message={this.props.newIncidentMsg}
-        // autoHideDuration={4000}
+        message={this.props.newIncidentMsg}
+        autoHideDuration={4000}
         onActionTouchTap={this.onClickAlert.bind(this)}
       />
     )

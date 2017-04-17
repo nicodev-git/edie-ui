@@ -23,7 +23,10 @@ import {
   updateNewIncidentMsg,
   updateMapDeviceStatus,
 
-  fetchUserInfo
+  fetchUserInfo,
+
+  updateSearchParams,
+  updateQueryChips
 } from 'actions'
 
 @connect((state) => {
@@ -37,7 +40,9 @@ import {
     activationModalOpen: state.auth.activationModalOpen,
     activationMsg: state.auth.activationMsg,
     envVarAvailable: state.settings.envVarAvailable,
-    envVars: state.settings.envVars
+    envVars: state.settings.envVars,
+
+    params: state.search.params
   }
 },
 dispatch => bindActionCreators({
@@ -55,7 +60,10 @@ dispatch => bindActionCreators({
   updateNewIncidentMsg,
   updateMapDeviceStatus,
 
-  fetchUserInfo
+  fetchUserInfo,
+
+  updateSearchParams,
+  updateQueryChips
 }, dispatch))
 @withRouter
 export default class MainContainer extends Component {
