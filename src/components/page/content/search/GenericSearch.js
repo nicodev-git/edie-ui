@@ -460,7 +460,7 @@ class GenericSearch extends React.Component {
                     key={p.id}
                     style={styles.chip}
                     onRequestDelete={this.onClickRemoveWfChip.bind(this, i)}>
-                    {p.name}
+                    <b>Workflow: </b>{p.name}
                   </Chip>
                   )}
               </div>
