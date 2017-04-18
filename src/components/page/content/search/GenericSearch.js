@@ -32,6 +32,10 @@ const styles = {
   }
 }
 
+const collections = [
+  {label: 'incident', value: 'incident'},
+  {label: 'event', value: 'event'}
+]
 class GenericSearch extends React.Component {
   constructor (props) {
     super(props)
@@ -437,6 +441,8 @@ class GenericSearch extends React.Component {
             onClickStar={this.onClickStar.bind(this)}
             starFilled={!!this.props.selectedSearchOption}
             workflow={workflow.length ? workflow[0].name : ''}
+            collections={collections}
+            selectedCollections={collections}
             onClearWorkflow={this.onClearWorkflow.bind(this)}
             onClickWorkflow={this.onClickWorkflow.bind(this)}
             onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}

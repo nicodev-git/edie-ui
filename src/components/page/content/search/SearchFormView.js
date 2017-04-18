@@ -19,7 +19,9 @@ SearchFormView extends React.Component {
       onSubmit,
       searchOptions,
       onChangeSearchOption,
-      onClickWorkflow
+      onClickWorkflow,
+      collections,
+      selectedCollections
     } = this.props
 
     const options = dateOptions.map((m, index) => {
@@ -35,13 +37,10 @@ SearchFormView extends React.Component {
         <div className="text-center margin-md-top" >
           <Field name="query" component={FormInput} label="Search" onKeyDown={onSearchKeyDown} style={{verticalAlign: 'top'}}/>
           <Field name="dateIndex" component={FormSelect} label="" options={options} style={{verticalAlign: 'top'}}/>
-
+          <Field name="collection" component={FormSelect} label="Collection" options={collections} value={selectedCollections} style={{verticalAlign: 'top'}} multiple/>
           <FlatButton label="Workflow" onTouchTap={onClickWorkflow}/>
-
           <FlatButton type="submit" icon={<ActionSearch />} style={{marginTop: '4px', verticalAlign: 'top'}}/>
-
           <FlatButton icon={starFilled ? <FilledStar/> : <ToggleStar/>} style={{marginTop: '4px', verticalAlign: 'top'}} onClick={onClickStar}/>
-
           <Field name="searchOptionIndex" component={FormSelect} label="" options={savedSearchOptions} style={{verticalAlign: 'top', textAlign: 'left'}} onChange={onChangeSearchOption}/>
         </div>
       </form>
