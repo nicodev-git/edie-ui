@@ -6,7 +6,7 @@ import ActionSearch from 'material-ui/svg-icons/action/search'
 import ToggleStar from 'material-ui/svg-icons/toggle/star-border'
 import FilledStar from 'material-ui/svg-icons/toggle/star'
 
-import { FormInput, FormSelect } from 'components/modal/parts'
+import { FormInput, FormSelect, FormMultiSelect } from 'components/modal/parts'
 
 const emptySearch = {label: 'None', value: ''}
 export default class
@@ -21,7 +21,8 @@ SearchFormView extends React.Component {
       onChangeSearchOption,
       onClickWorkflow,
       collections,
-      selectedCollections
+      selectedCollections,
+      onChangeCollection
     } = this.props
 
     const options = dateOptions.map((m, index) => {
@@ -37,7 +38,7 @@ SearchFormView extends React.Component {
         <div className="text-center margin-md-top" >
           <Field name="query" component={FormInput} label="Search" onKeyDown={onSearchKeyDown} style={{verticalAlign: 'top'}}/>
           <Field name="dateIndex" component={FormSelect} label="" options={options} style={{verticalAlign: 'top'}}/>
-          <Field name="collection" component={FormSelect} label="Collection" options={collections} value={selectedCollections} style={{verticalAlign: 'top'}} multiple/>
+          <Field name="collection" component={FormMultiSelect} label="Collection" options={collections} value={selectedCollections} style={{verticalAlign: 'top'}} onChange={onChangeCollection}/>
           <FlatButton label="Workflow" onTouchTap={onClickWorkflow}/>
           <FlatButton type="submit" icon={<ActionSearch />} style={{marginTop: '4px', verticalAlign: 'top'}}/>
           <FlatButton icon={starFilled ? <FilledStar/> : <ToggleStar/>} style={{marginTop: '4px', verticalAlign: 'top'}} onClick={onClickStar}/>

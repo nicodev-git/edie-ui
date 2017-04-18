@@ -313,6 +313,10 @@ class GenericSearch extends React.Component {
     }))
   }
 
+  onChangeCollection () {
+    console.log(arguments)
+  }
+
   renderFields () {
     const {selectedField} = this.props
     return (
@@ -443,6 +447,7 @@ class GenericSearch extends React.Component {
             workflow={workflow.length ? workflow[0].name : ''}
             collections={collections}
             selectedCollections={collections}
+            onChangeCollection={this.onChangeCollection.bind(this)}
             onClearWorkflow={this.onClearWorkflow.bind(this)}
             onClickWorkflow={this.onClickWorkflow.bind(this)}
             onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}

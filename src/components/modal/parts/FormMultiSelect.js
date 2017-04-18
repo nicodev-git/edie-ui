@@ -1,16 +1,27 @@
 import React from 'react'
-import SuperSelectField from 'material-ui-superselectfield'
+import {SelectField, MenuItem} from 'material-ui'
+import { underlineFocusStyle, inputStyle, selectedItemStyle } from 'style/materialStyles'
 
-const FormMultiSelect = ({input, label, meta: { touched, error }, options, name}) => (
-  <SuperSelectField
-    name={name}
-    hintText={label}
-    errorText={touched && error}
-    multiple
+const FormMultiSelect = ({input, label, meta: { touched, error }, options, value}) => (
+  <SelectField
     {...input}
-    onChange={(values, name) => input.onChange([name] : values)}>
-    {options.map(option => (<div key={option.value} value={option.value}>{option.label}</div>))}
-  </SuperSelectField>
+    underlineStyle={underlineFocusStyle}
+    selectedMenuItemStyle={selectedItemStyle}
+    menuItemStyle={inputStyle}
+    multiple
+    hintText={label}
+    value={value}
+  >
+    {options.map(option =>
+      <MenuItem
+        key={option.value}
+        insetChildren
+        checked={value && value.includes(option.value)}
+        value={option.value}
+        primaryText={option.label}
+      />
+    )}
+  </SelectField>
 )
 
 export default FormMultiSelect
