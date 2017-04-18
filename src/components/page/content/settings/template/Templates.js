@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import {RaisedButton, MenuItem, SelectField, IconButton} from 'material-ui'
+import {RaisedButton, MenuItem, SelectField, IconButton, Chip} from 'material-ui'
 import DeleteIcon from 'material-ui/svg-icons/action/delete'
 
 import SettingTabs from '../SettingTabs'
@@ -14,7 +14,9 @@ import ImageUploaderModal from './ImageUploaderModal'
 import DeviceTplView from './DeviceTplView'
 
 import { showConfirm } from 'components/shared/Alert'
-import { errorStyle, underlineFocusStyle, inputStyle, selectedItemStyle } from 'style/materialStyles'
+import { errorStyle, underlineFocusStyle, inputStyle, selectedItemStyle, chipStyles } from 'style/materialStyles'
+
+import { extImageBaseUrl } from 'shared/Global'
 
 export default class Templates extends Component {
   constructor (props) {
@@ -45,7 +47,24 @@ export default class Templates extends Component {
               <tr key={item.id}
                 className={selectedDeviceTpl && item.id === selectedDeviceTpl.id ? 'selected' : ''}
                 onClick={this.onClickRow.bind(this, item)}>
-                <td>{item.name}</td>
+                <td className="valign-middle">
+                  <img src={`${extImageBaseUrl}${item.image}`} width="32" height="32" className="icon-black"/>
+                  &nbsp;
+                  {item.name}
+                </td>
+                <td>
+                  <div style={chipStyles.wrapper}>
+                    {item.monitors.map(m =>
+                      <Chip
+                        key={m.id}
+                        style={chipStyles.chip}
+                        labelStyle={chipStyles.label}
+                      >
+                        {m.name}
+                      </Chip>
+                    )}
+                  </div>
+                </td>
                 <td className="text-right fa-lg">
                   {item.origin !== 'SYSTEM' && <IconButton
                     style={{padding: 0, width: 24, height: 24}}
@@ -207,7 +226,7 @@ export default class Templates extends Component {
 
         <TabPageBody tabs={SettingTabs} tab={7}>
           <div className="row padding-md">
-            <div className="col-md-3">
+            <div className="col-md-6">
               {type === 'Device' ? this.renderDeviceTemplates() : null/* this.renderMonitorTemplates() */}
             </div>
             <div className="col-md-6">
