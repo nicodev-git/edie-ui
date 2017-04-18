@@ -28,10 +28,6 @@ class DeviceTplView extends React.Component {
     return imgUrl
   }
 
-  onClickClose () {
-    this.props.closeDeviceTplModal()
-  }
-
   onClickAddMonitor (item) {
     const monitors = concat([], this.props.monitors, item)
     this.props.updateSelectedDeviceTplMonitors(monitors)
@@ -69,7 +65,6 @@ class DeviceTplView extends React.Component {
         monitors={this.props.monitors}
         monitorTemplates={this.props.monitorTemplates}
         onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
-        onHide={this.onClickClose.bind(this)}
         options={options}
         imgUrl={imgUrl}
         onChange={this.onClickChangeImage.bind(this)}
