@@ -75,7 +75,7 @@ const initialState = {
       dateFrom: 0,
       dateTo: 0,
       workflow: '',
-      collections: []
+      collections: ['incident', 'event']
     },
     queryChips: [],
     fields: [],

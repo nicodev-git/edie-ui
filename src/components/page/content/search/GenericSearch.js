@@ -314,7 +314,9 @@ class GenericSearch extends React.Component {
   }
 
   onChangeCollection (e, index, values) {
-    console.log(values)
+    this.props.updateSearchParams(assign({}, this.props.params, {
+      collections: values
+    }))
   }
 
   renderFields () {
@@ -446,7 +448,7 @@ class GenericSearch extends React.Component {
             starFilled={!!this.props.selectedSearchOption}
             workflow={workflow.length ? workflow[0].name : ''}
             collections={collections}
-            selectedCollections={[]}
+            selectedCollections={this.props.params.collections}
             onChangeCollection={this.onChangeCollection.bind(this)}
             onClearWorkflow={this.onClearWorkflow.bind(this)}
             onClickWorkflow={this.onClickWorkflow.bind(this)}
