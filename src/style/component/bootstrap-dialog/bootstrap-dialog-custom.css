@@ -33,13 +33,17 @@
 
 .modal.in .modal-dialog {
     -webkit-transform: translate(0,0);
-    -ms-transform: translate(0,0);
+    -ms-transform: transla  te(0,0);
     -o-transform: translate(0,0);
     transform: translate(0,0);
 }
 
 .bootstrap-dialog.type-default .modal-header {
     background-color: #ddd;
+}
+
+.modal-header {
+    border: none;
 }
 
 .bootstrap-dialog .bootstrap-dialog-message {

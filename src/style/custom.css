@@ -117,10 +117,7 @@ a, a:focus, a:hover {
 }
 
 table.table tbody tr.selected {
-    background-color: #B0BED9;
-}
-table.table tbody tr.selected td {
-    color: white !important;
+    background-color: #C7DEFC;
 }
 
 .table.table-p-sm>tbody>tr>td,
@@ -667,13 +664,16 @@ table.table tbody tr.selected td {
 .modal-dialog th,
 .modal-dialog th>span {
   font-size: 9pt;
-  color: #939395 !important;
 }
 
 .modal-dialog td,
 .modal-dialog td>span {
-  font-size: 8pt;
+  font-size: 9pt;
   color: #939395 !important;
+}
+
+.modal-dialog .table>tbody>tr>td {
+    border: none;
 }
 
 .main-panel {
@@ -758,8 +758,7 @@ table.table tbody tr.selected td {
 }
 
 .close-block {
-  margin-bottom: 20px;
-  padding-right: 20px;
+  margin-top: 20px;
 }
 
 .alert-buttons {

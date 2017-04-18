@@ -3,7 +3,7 @@ import { headerStyle } from '../../../style/materialStyles'
 
 const Header = ({name}) => (
   <div className="modal-header" style={headerStyle}>
-    <h4 className="modal-title">{name}</h4>
+    <h3 className="modal-title">{name}</h3>
   </div>
 )
 
