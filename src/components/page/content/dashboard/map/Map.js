@@ -560,12 +560,12 @@ class Map extends React.Component {
   }
 
   changeLineType (id, typeid) {
-    $.get(`${this.props.ROOT_URL}${Api.deviceadmin.updateLine}`, { // eslint-disable-line no-undef
-      id: id,
-      type: typeid
-    }).done(() => {
-
-    })
+    // $.get(`${this.props.ROOT_URL}${Api.deviceadmin.updateLine}`, { // eslint-disable-line no-undef
+    //   id: id,
+    //   type: typeid
+    // }).done(() => {
+    //
+    // })
   }
 
   findMapLine (lineId) {

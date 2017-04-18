@@ -6,7 +6,7 @@ import MapMenu from './MapMenu'
 import DeviceMenu from './DeviceMenu'
 import NewIncidentModal from './NewIncidentModal'
 
-import { lineTypes } from '../../../../../shared/Global'
+import { lineTypes } from 'shared/Global'
 
 export default class Toolbar extends React.Component {
   constructor (props) {

@@ -39,7 +39,7 @@ export default class Toolbar extends Component {
         popover={popover}
         cover={cover}
         lineTypes={this.lineTypes}
-        toogle={this.toggleLineTypes().bind(this)}
+        toogle={this.toggleLineTypes.bind(this)}
         onChoose={this.onClickLineType.bind(this)}
       />
     )
