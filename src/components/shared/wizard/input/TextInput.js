@@ -5,13 +5,8 @@ import { util } from '../WizardUtil'
 import { inputStyle, underlineStyle } from 'style/materialStyles'
 
 export default class TextInput extends React.Component {
-  constructor (props) {
-    super(props)
-    this.state = {}
-  }
-
   renderField (config) {
-    const { input, label, disabled, style, useColumn } = config
+    const {input, label, disabled, style, useColumn} = config
     const field = (
       <div style={util.convertStyle(style)}>
         <TextField
@@ -28,7 +23,7 @@ export default class TextInput extends React.Component {
 
   //
   render () {
-    const { config } = this.props
+    const {config, onChange} = this.props
 
     let label = ''
     if (config.label !== null) {
@@ -40,13 +35,8 @@ export default class TextInput extends React.Component {
         label={label}
         component={this.renderField}
         style={config.style}
+        onChange={onChange}
       />
     )
   }
-}
-
-TextInput.defaultProps = {
-  config: {},
-  values: {},
-  buildLabel: null
 }

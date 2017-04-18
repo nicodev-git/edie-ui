@@ -1,5 +1,5 @@
 import React from 'react'
-import { assign } from 'lodash'
+import { assign, debounce } from 'lodash'
 import { reduxForm } from 'redux-form'
 
 import { wizardEditConfig } from './WizardConfig'
@@ -36,6 +36,8 @@ class DeviceEditWizard extends React.Component {
     }
 
     props.closeTplImageModal('')
+
+    this.fnSaveDeb = debounce(this.onRequestSave.bind(this), 2000)
   }
 
   componentWillReceiveProps (nextProps) {
@@ -53,6 +55,15 @@ class DeviceEditWizard extends React.Component {
 
   onSelectTab () {
 
+  }
+
+  onRequestSave () {
+    console.log('Saving...')
+  }
+
+  onChangeForm (e) {
+    e && e.target && console.log(e.target.value)
+    this.fnSaveDeb()
   }
 
   didSave (res) {
@@ -131,9 +142,14 @@ class DeviceEditWizard extends React.Component {
   }
 
   buildText (config) {
-    return (<TextInput key={config.name}
-      config={config}
-      buildLabel={this.buildLabel.bind(this)}/>)
+    return (
+      <TextInput
+        key={config.name}
+        config={config}
+        buildLabel={this.buildLabel.bind(this)}
+        onChange={this.onChangeForm.bind(this)}
+      />
+    )
   }
 
   buildCombo (config) {
@@ -208,6 +224,7 @@ class DeviceEditWizard extends React.Component {
         values={this.props.initialValues}
         openTplImageModal={this.props.openTplImageModal}
         selectedTplImage={this.props.selectedTplImage}
+        onChange={this.onChangeForm.bind(this)}
       />
     )
   }
@@ -232,7 +249,7 @@ class DeviceEditWizard extends React.Component {
       <div>
         <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
           <div className="tab-options">
-            <div className="margin-md-right margin-md-top"
+            <div className="margin-md-right margin-md-top hidden"
               style={{position: 'absolute', top: '40px', right: '20px'}}>
               <RaisedButton id="submitButton" type="submit" label="Save"/>
             </div>
