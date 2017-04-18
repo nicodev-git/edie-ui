@@ -145,7 +145,7 @@ class Main extends React.Component {
         open
         action={<SearchIcon color="white" style={{marginTop: '6px'}}/>}
         message={<div className="inline-block" onClick={this.onClickAlert.bind(this)} style={{cursor: 'pointer'}}>{this.props.newIncidentMsg}</div>}
-        autoHideDuration={4000}
+        autoHideDuration={8000}
         onActionTouchTap={this.onClickAlert.bind(this)}
       />
     )
