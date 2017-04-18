@@ -47,11 +47,12 @@ export default class Templates extends Component {
               <tr key={item.id}
                 className={selectedDeviceTpl && item.id === selectedDeviceTpl.id ? 'selected' : ''}
                 onClick={this.onClickRow.bind(this, item)}>
-                <td className="valign-middle">
+                <td className="valign-middle nowrap">
                   <img src={`${extImageBaseUrl}${item.image}`} width="32" height="32" className="icon-black"/>
                   &nbsp;
                   {item.name}
                 </td>
+                <td className="valign-middle">{item.devicetemplategroup}</td>
                 <td>
                   <div style={chipStyles.wrapper}>
                     {item.monitors.map(m =>
