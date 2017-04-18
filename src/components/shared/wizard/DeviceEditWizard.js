@@ -59,7 +59,7 @@ class DeviceEditWizard extends React.Component {
 
   onRequestSave () {
     console.log('Saving...')
-    this.props.submit()
+    this.props.submit(this.props.handleSubmit(this.handleFormSubmit.bind(this)))
   }
 
   onChangeForm (e) {
@@ -250,7 +250,7 @@ class DeviceEditWizard extends React.Component {
       <div>
         <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
           <div className="tab-options">
-            <div className="margin-md-right margin-md-top hidden"
+            <div className="margin-md-right margin-md-top"
               style={{position: 'absolute', top: '40px', right: '20px'}}>
               <RaisedButton id="submitButton" type="submit" label="Save"/>
             </div>

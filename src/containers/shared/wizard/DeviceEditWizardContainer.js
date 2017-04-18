@@ -5,8 +5,7 @@ import {
   openTplImageModal,
   closeTplImageModal,
   fetchImages,
-  uploadImage,
-  submitForm
+  uploadImage
 } from 'actions'
 
 @connect(
@@ -21,8 +20,7 @@ import {
     openTplImageModal,
     closeTplImageModal,
     fetchImages,
-    uploadImage,
-    submitForm
+    uploadImage
   }
 )
 export default class DeviceEditWizardContainer extends React.Component {

@@ -1,6 +1,5 @@
 import axios from 'axios'
 import {assign} from 'lodash'
-import {submit} from 'redux-form'
 import {
   FETCH_DEVICES,
 
@@ -847,11 +846,5 @@ export const deselectSysWorkflow = (workflow) => {
 export const selectSysWorkflowCategory = (category) => {
   return dispatch => {
     dispatch({type: SELECT_SYS_WORKFLOW_CATEGORY, category})
-  }
-}
-
-export const submitForm = (form) => {
-  return dispatch => {
-    dispatch(submit(form))
   }
 }
