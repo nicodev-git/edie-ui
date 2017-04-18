@@ -446,7 +446,7 @@ class GenericSearch extends React.Component {
             starFilled={!!this.props.selectedSearchOption}
             workflow={workflow.length ? workflow[0].name : ''}
             collections={collections}
-            selectedCollections={collections}
+            selectedCollections={[]}
             onChangeCollection={this.onChangeCollection.bind(this)}
             onClearWorkflow={this.onClearWorkflow.bind(this)}
             onClickWorkflow={this.onClickWorkflow.bind(this)}

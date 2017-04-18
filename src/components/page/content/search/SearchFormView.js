@@ -1,12 +1,13 @@
 import React from 'react'
 import { Field } from 'redux-form'
 import { concat } from 'lodash'
-import {FlatButton} from 'material-ui'
+import {FlatButton, SelectField, MenuItem} from 'material-ui'
 import ActionSearch from 'material-ui/svg-icons/action/search'
 import ToggleStar from 'material-ui/svg-icons/toggle/star-border'
 import FilledStar from 'material-ui/svg-icons/toggle/star'
 
-import { FormInput, FormSelect, FormMultiSelect } from 'components/modal/parts'
+import { FormInput, FormSelect } from 'components/modal/parts'
+import { underlineFocusStyle, inputStyle, selectedItemStyle } from 'style/materialStyles'
 
 const emptySearch = {label: 'None', value: ''}
 export default class
@@ -38,7 +39,25 @@ SearchFormView extends React.Component {
         <div className="text-center margin-md-top" >
           <Field name="query" component={FormInput} label="Search" onKeyDown={onSearchKeyDown} style={{verticalAlign: 'top'}}/>
           <Field name="dateIndex" component={FormSelect} label="" options={options} style={{verticalAlign: 'top'}}/>
-          <Field name="collection" component={FormMultiSelect} label="Collection" options={collections} value={selectedCollections} style={{verticalAlign: 'top'}} onChange={onChangeCollection}/>
+          <SelectField
+            underlineStyle={underlineFocusStyle}
+            selectedMenuItemStyle={selectedItemStyle}
+            menuItemStyle={inputStyle}
+            multiple
+            hintText="Collection"
+            value={selectedCollections}
+            onChange={onChangeCollection}
+          >
+            {collections.map(option =>
+              <MenuItem
+                key={option.value}
+                insetChildren
+                checked={selectedCollections && selectedCollections.includes(option.value)}
+                value={option.value}
+                primaryText={option.label}
+              />
+            )}
+          </SelectField>
           <FlatButton label="Workflow" onTouchTap={onClickWorkflow}/>
           <FlatButton type="submit" icon={<ActionSearch />} style={{marginTop: '4px', verticalAlign: 'top'}}/>
           <FlatButton icon={starFilled ? <FilledStar/> : <ToggleStar/>} style={{marginTop: '4px', verticalAlign: 'top'}} onClick={onClickStar}/>
