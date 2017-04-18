@@ -20,9 +20,7 @@ export default class IconUploader extends React.Component {
   }
   render () {
     return (
-      <div className="col-md-12">
-        <ImageUploader imgUrl={this.getImageUrl()} onChange={this.onChange.bind(this)}/>
-      </div>
+      <ImageUploader imgUrl={this.getImageUrl()} onChange={this.onChange.bind(this)}/>
     )
   }
 }

@@ -48,7 +48,7 @@ export default class ImageUploaderModal extends Component {
     return (
       <ImageUploaderModalView
         show
-        onHide={this.closeModal}
+        onHide={() => this.closeModal()}
         images={this.props.images}
         currentIcon={currentIcon}
         getCustomImageUrl={getCustomImageUrl}
