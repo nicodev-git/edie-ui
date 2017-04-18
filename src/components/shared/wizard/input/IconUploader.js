@@ -4,9 +4,6 @@ import { ImageUploader } from 'components/modal/parts'
 import { getCustomImageUrl, extImageBaseUrl } from 'shared/Global'
 
 export default class IconUploader extends React.Component {
-  onClickChange () {
-    this.props.openTplImageModal()
-  }
   componentWillReceiveProps (nextProps) {
     const {config, values, selectedTplImage, onChange} = this.props
     if (config && values) {
@@ -14,6 +11,9 @@ export default class IconUploader extends React.Component {
         onChange && onChange()
       }
     }
+  }
+  onClickChange () {
+    this.props.openTplImageModal()
   }
   getImageUrl () {
     const {config, values, selectedTplImage} = this.props

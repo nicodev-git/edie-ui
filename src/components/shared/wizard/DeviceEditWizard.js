@@ -59,6 +59,7 @@ class DeviceEditWizard extends React.Component {
 
   onRequestSave () {
     console.log('Saving...')
+    this.props.submit()
   }
 
   onChangeForm (e) {
