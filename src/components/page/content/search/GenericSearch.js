@@ -315,7 +315,7 @@ class GenericSearch extends React.Component {
 
   onChangeCollection (e, index, values) {
     this.props.updateSearchParams(assign({}, this.props.params, {
-      collections: values
+      collections: values.join(',')
     }))
   }
 
@@ -436,7 +436,7 @@ class GenericSearch extends React.Component {
   render () {
     const { handleSubmit, selectedWf } = this.props
     const workflow = this.props.workflows.filter(m => m.id === selectedWf)
-
+    const selectedCollections = this.props.params.collections
     return (
       <TabPage>
         <TabPageHeader title="Search">
@@ -448,7 +448,7 @@ class GenericSearch extends React.Component {
             starFilled={!!this.props.selectedSearchOption}
             workflow={workflow.length ? workflow[0].name : ''}
             collections={collections}
-            selectedCollections={this.props.params.collections}
+            selectedCollections={selectedCollections ? selectedCollections.split(',') : []}
             onChangeCollection={this.onChangeCollection.bind(this)}
             onClearWorkflow={this.onClearWorkflow.bind(this)}
             onClickWorkflow={this.onClickWorkflow.bind(this)}

@@ -38,7 +38,7 @@ SearchFormView extends React.Component {
       <form onSubmit={onSubmit}>
         <div className="text-center margin-md-top" >
           <Field name="query" component={FormInput} label="Search" onKeyDown={onSearchKeyDown} style={{verticalAlign: 'top'}}/>
-          <Field name="dateIndex" component={FormSelect} label="" options={options} style={{verticalAlign: 'top', maxWidth: '100px'}}/>
+          <Field name="dateIndex" component={FormSelect} label="" options={options} style={{verticalAlign: 'top', maxWidth: '200px'}}/>
           <SelectField
             underlineStyle={underlineFocusStyle}
             selectedMenuItemStyle={selectedItemStyle}
@@ -58,7 +58,7 @@ SearchFormView extends React.Component {
               />
             )}
           </SelectField>
-          <FlatButton label="Workflow" onTouchTap={onClickWorkflow}/>
+          <FlatButton label="Workflow" onTouchTap={onClickWorkflow} style={{marginTop: '4px', verticalAlign: 'top'}}/>
           <FlatButton type="submit" icon={<ActionSearch />} style={{marginTop: '4px', verticalAlign: 'top'}}/>
           <FlatButton icon={starFilled ? <FilledStar/> : <ToggleStar/>} style={{marginTop: '4px', verticalAlign: 'top'}} onClick={onClickStar}/>
           <Field name="searchOptionIndex" component={FormSelect} label="" options={savedSearchOptions} style={{verticalAlign: 'top', textAlign: 'left', maxWidth: '100px'}} onChange={onChangeSearchOption}/>
