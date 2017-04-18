@@ -111,9 +111,15 @@ class Main extends React.Component {
   onCloseAlert () {
     this.props.closeApiErrorModal()
   }
-  onClickAlert () {
-    const query = this.props.newIncidentMsg.substring(9).replace(/:/gi, '')
+  onClickAlert (incident) {
+    const query = (incident.description || '').replace(/:/gi, '')
     const newChips = parseSearchQuery(query)
+    if (incident.devicename) {
+      newChips.push({
+        name: 'devicename',
+        value: incident.devicename
+      })
+    }
     this.props.updateQueryChips(newChips)
     this.props.updateSearchParams(assign({}, this.props.searchParams, {
       query: newChips.map(m => `${m.name}=${m.value}`).join(' and ')
@@ -139,14 +145,15 @@ class Main extends React.Component {
   }
 
   renderIncidentAlert () {
-    if (!this.props.newIncidentMsg) return null
+    const { newIncidentMsg } = this.props
+    if (!newIncidentMsg) return null
     return (
       <Snackbar
         open
         action={<SearchIcon color="white" style={{marginTop: '6px'}}/>}
-        message={<div className="inline-block" onClick={this.onClickAlert.bind(this)} style={{cursor: 'pointer'}}>{this.props.newIncidentMsg}</div>}
+        message={<div className="inline-block" onClick={this.onClickAlert.bind(this, newIncidentMsg.incident)} style={{cursor: 'pointer'}}>{newIncidentMsg.message}</div>}
         autoHideDuration={8000}
-        onActionTouchTap={this.onClickAlert.bind(this)}
+        onActionTouchTap={this.onClickAlert.bind(this, newIncidentMsg.incident)}
       />
     )
   }

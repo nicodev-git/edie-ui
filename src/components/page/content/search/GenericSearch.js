@@ -173,13 +173,13 @@ class GenericSearch extends React.Component {
 
     this.props.updateQueryChips(newQueryChips)
 
-    this.props.updateSearchParams({
+    this.props.updateSearchParams(assign({}, this.props.params, {
       query: newQueryChips.map(m => `${m.name}=${m.value}`).join(' and '),
       dateIndex: values.dateIndex,
       dateFrom: this.dateOptions[values.dateIndex].from,
       dateTo: this.dateOptions[values.dateIndex].to,
       workflow: this.props.selectedWf || ''
-    })
+    }))
 
     this.props.change('query', '')
   }
@@ -274,12 +274,12 @@ class GenericSearch extends React.Component {
 
     const newQueryChips = parseSearchQuery(query)
     this.props.updateQueryChips(newQueryChips)
-    this.props.updateSearchParams({
+    this.props.updateSearchParams(assign({}, this.props.params, {
       query,
       dateIndex,
       dateFrom: this.dateOptions[dateIndex].from,
       dateTo: this.dateOptions[dateIndex].to
-    })
+    }))
 
     this.props.change('query', '')
     this.props.change('dateIndex', dateIndex)

@@ -80,7 +80,7 @@ export default class MainContainer extends Component {
       }
     })
     this.incidentSocket.connect()
-    this.clearNewincidentMsg = debounce(() => this.props.updateNewIncidentMsg(''), 8000)
+    this.clearNewincidentMsg = debounce(() => this.props.updateNewIncidentMsg(null), 8000)
   }
 
   componentWillUnmount () {
@@ -110,7 +110,10 @@ export default class MainContainer extends Component {
     const incident = msg.latestincident || {}
     const device = incident.devicename
     const time = moment(incident.startTimestamp || new Date()).format('HH:mm:ss')
-    this.props.updateNewIncidentMsg(`${time} - ${device} - ${incident.description || ''}`)
+    this.props.updateNewIncidentMsg({
+      message: `${time} - ${device} - ${incident.description || ''}`,
+      incident
+    })
     this.clearNewincidentMsg()
   }
 
