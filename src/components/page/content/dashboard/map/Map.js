@@ -245,12 +245,12 @@ class Map extends React.Component {
       let con = this.findMapLine(lineId)
       if (con) {
         const props = extend({}, con, {
-          line: {
+          line: assign(con.line, {
             from: lineObj.startObj.id,
             fromPoint: lineObj.startPoint,
             to: lineObj.endObj.id,
             toPoint: lineObj.endPoint
-          }
+          })
         })
 
         this.props.updateMapLine(props)
@@ -553,9 +553,9 @@ class Map extends React.Component {
     let con = this.findMapLine(lineId)
     if (con) {
       const props = extend({}, con, {
-        line: {
+        line: assign(con.line, {
           type
-        }
+        })
       })
 
       this.props.updateMapLine(props)

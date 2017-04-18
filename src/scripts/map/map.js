@@ -1033,7 +1033,7 @@ var mapObject = {
       lineType: o.lineType,
     });
 
-    if (config.lineType == 'Dashed Line') {
+    if (config.lineType == 'dashed') {
       config.strokeDashArray = [5, 5];
     }
 
@@ -1256,7 +1256,7 @@ var mapObject = {
 
     var newline;
 
-    if((linetype == 'Yellow Lightning' || linetype == 'lightening') && imageUrl) {
+    if((linetype == 'lightning2' || linetype == 'lightning') && imageUrl) {
       newline = me.addShapeLightning(config);
     } else {
       newline = me.addShapeLine(config);

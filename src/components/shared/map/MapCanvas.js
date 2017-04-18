@@ -752,7 +752,7 @@ class MapCanvas extends React.Component {
     if (this.isNormalLine(line.type)) {
       cmap.addShapeLine(config)
     } else {
-      const typeIndex = findIndex(lineTypes, { typename: line.type })
+      const typeIndex = findIndex(lineTypes, { type: line.type })
       if (typeIndex < 0) return
 
       config.imageUrl = lineTypes[typeIndex].image
@@ -819,7 +819,7 @@ class MapCanvas extends React.Component {
   }
 
   isNormalLine (type) {
-    return !type || type === 'line' || type === 'Dashed Line'
+    return !type || type === 'normal' || type === 'dashed'
   }
 
   render () {
