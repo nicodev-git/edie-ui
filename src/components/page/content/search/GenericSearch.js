@@ -313,8 +313,8 @@ class GenericSearch extends React.Component {
     }))
   }
 
-  onChangeCollection () {
-    console.log(arguments)
+  onChangeCollection (e, index, values) {
+    console.log(values)
   }
 
   renderFields () {
