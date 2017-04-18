@@ -1,6 +1,6 @@
 import React from 'react'
 import { assign, debounce } from 'lodash'
-import { reduxForm } from 'redux-form'
+import { reduxForm, Form } from 'redux-form'
 
 import { wizardEditConfig } from './WizardConfig'
 import { util } from './WizardUtil'
@@ -248,7 +248,7 @@ class DeviceEditWizard extends React.Component {
     const { handleSubmit, tabs } = this.props
     return (
       <div>
-        <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
+        <Form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
           <div className="tab-options">
             <div className="margin-md-right margin-md-top"
               style={{position: 'absolute', top: '40px', right: '20px'}}>
@@ -270,7 +270,7 @@ class DeviceEditWizard extends React.Component {
               {this.renderTplImageModal()}
             </div>
           </div>
-        </form>
+        </Form>
       </div>
     )
   }
