@@ -10,15 +10,12 @@ export default class TextInput extends React.Component {
     this.state = {}
   }
 
-  // className={`col-md-${width}`}
-  // className={`${cls || ''}`}
-
   renderField (config) {
     const { input, label, disabled, style, useColumn } = config
     const field = (
       <div style={util.convertStyle(style)}>
         <TextField
-          hintText={<label>{label}</label>}
+          floatingLabelText={<label>{label}</label>}
           inputStyle={inputStyle}
           underlineFocusStyle={underlineStyle}
           disabled={!!disabled}
