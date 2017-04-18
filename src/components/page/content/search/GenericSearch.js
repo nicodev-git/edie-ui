@@ -314,6 +314,9 @@ class GenericSearch extends React.Component {
   }
 
   onChangeCollection (e, index, values) {
+    if (!values.length) {
+      return
+    }
     this.props.updateSearchParams(assign({}, this.props.params, {
       collections: values.join(',')
     }))
