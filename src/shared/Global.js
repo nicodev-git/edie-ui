@@ -31,23 +31,22 @@ export const DiagramTypes = {
 export const lineTypes = [{
   title: 'Lightning',
   image: '/images/light.svg',
-  type: 'lightning',
-  typename: 'lightening'
+  type: 'lightning'
 }, {
   title: 'Lightning',
   image: '/images/lightning2.png',
-  type: 'lightning',
-  typename: 'Yellow Lightning'
+  type: 'lightning2',
+  visible: true
 }, {
   title: 'Line',
   image: '/images/line.gif',
   type: 'normal',
-  typename: 'line'
+  visible: true
 }, {
   title: 'Dashed Line',
   image: '/images/dashedline.png',
   type: 'dashed',
-  typename: 'Dashed Line'
+  visible: true
 }]
 
 export function getIncidenttypeIcon (incidenttype) {

@@ -4,11 +4,10 @@ const LineTypesMenu = ({ popover, cover, toggle, lineTypes, onChoose }) => (
   <div style={popover}>
     <div style={cover} onClick={toggle}/>
     <div id="linetypediv" className="panel-group">
-      <div className="panel panel-default">
-        <div className="panel-body"><ul>
+      <ul>
         {
           lineTypes.map(item =>
-            <li key={item.typename}><a href="javascript:;" onClick={onChoose.bind(this, item)}>
+            <li key={item.typename} className={item.visible ? '' : 'hidden'}><a href="javascript:;" onClick={onChoose.bind(this, item)}>
               <div className="pull-left item-icon">
                 <img src={item.image} data-type={item.type} data-typename={item.typename}/>
               </div>
@@ -18,8 +17,7 @@ const LineTypesMenu = ({ popover, cover, toggle, lineTypes, onChoose }) => (
             </a></li>
           )
         }
-        </ul></div>
-      </div>
+      </ul>
     </div>
   </div>
 )

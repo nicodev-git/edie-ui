@@ -73,6 +73,10 @@ div.item-icon {
     top: 0;
     border-radius: 3px;
     z-index: 61;
+
+    background: black;
+    border: 1px solid white;
+    color: white;
 }
 
 #linetypediv .panel-body {
@@ -97,7 +101,6 @@ div.item-icon {
 #linetypediv ul li .item-text {
     padding: 3px;
     float: left;
-    color: #333;
 }
 
 #mapeditdiv > .panel-heading .dropdown-menu > li > a {
