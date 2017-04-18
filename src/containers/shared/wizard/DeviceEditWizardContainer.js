@@ -42,13 +42,12 @@ DeviceEditWizard.defaultProps = {
 
   tabs: [{
     title: 'General',
-    include: ['name', 'agentid', 'ipaddress', 'wanip', 'lanip', 'hostname', 'port', 'dbtype', 'sql', 'disabled', 'image', 'url']
-  }, {
-    title: 'Credentials',
-    include: ['credentialid']
+    include: ['name', 'agentid', 'ipaddress', 'wanip', 'lanip', 'hostname', 'port', 'dbtype', 'sql', 'disabled', 'image', 'url'],
+    width: 4
   }, {
     title: 'Info',
-    include: ['info']
+    include: ['info'],
+    width: 4
   }, {
     title: 'Advanced',
     id: 'tab-devinfo-advanced',
@@ -59,6 +58,11 @@ DeviceEditWizard.defaultProps = {
     }, {
       name: 'devicetype',
       title: 'DeviceType'
-    }]
+    }],
+    width: 4
+  }, {
+    title: 'Credentials',
+    include: ['credentialid'],
+    width: 12
   }]
 }

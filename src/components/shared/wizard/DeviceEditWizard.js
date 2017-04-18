@@ -1,5 +1,4 @@
 import React from 'react'
-import {Tabs, Tab} from 'react-bootstrap'
 import { assign } from 'lodash'
 import { reduxForm } from 'redux-form'
 
@@ -16,6 +15,7 @@ import IconUploader from './input/IconUploader'
 import RaisedButton from 'material-ui/RaisedButton'
 
 import ImageUploaderModal from 'components/page/content/settings/template/ImageUploaderModal'
+import ContentPanel from './ContentPanel'
 
 class DeviceEditWizard extends React.Component {
   constructor (props) {
@@ -110,10 +110,8 @@ class DeviceEditWizard extends React.Component {
     }
 
     return (
-      <div className="row margin-xs-left padding-md-top">
-        <div className="col-md-6">
-          {items}
-        </div>
+      <div>
+        {items}
       </div>
     )
   }
@@ -242,18 +240,15 @@ class DeviceEditWizard extends React.Component {
 
           <div className="panel panel-default panel-noborder tab-panel" style={{background: 'transparent'}}>
             <div className="panel-body p-none">
-              <Tabs defaultActiveKey={0} animation={false}
-                className="tabs-custom"
-                onSelect={this.onSelectTab.bind(this)}
-                id="tabs-device-incidents">
+              <div className="row m-none">
                 {
                   tabs.map((tab, i) => (
-                    <Tab eventKey={i} key={i} title={tab.title}>
+                    <ContentPanel key={i} title={tab.title} width={tab.width}>
                       {this.buildContent(tab, i)}
-                    </Tab>
+                    </ContentPanel>
                   ))
                 }
-              </Tabs>
+              </div>
               {this.renderTplImageModal()}
             </div>
           </div>
