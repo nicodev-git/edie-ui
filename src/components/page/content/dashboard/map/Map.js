@@ -97,8 +97,6 @@ class Map extends React.Component {
 
     }
 
-    this.resizeTimer = 0
-
     this.onFullScreenChange = this.onFullScreenChange.bind(this)
     this.onReceiveMapUpdated = this.onReceiveMapUpdated.bind(this)
     this.updateDimensions = this.updateDimensions.bind(this)
@@ -180,15 +178,6 @@ class Map extends React.Component {
     }
   }
 
-  drawMap (deviceData, lineData, prevDeviceData, prevLineData, force) {
-    const refMap = this.getDivMap()
-    if (!refMap) return
-
-    refMap.drawMap(deviceData, lineData, prevDeviceData, prevLineData, force, () => {
-      emit(EVENTS.MAP_LOADED) // eslint-disable-line no-undef
-    })
-  }
-
     // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   getDivMap () {
@@ -244,7 +233,8 @@ class Map extends React.Component {
           from: lineObj.startObj.id,
           fromPoint: lineObj.startPoint,
           to: lineObj.endObj.id,
-          toPoint: lineObj.endPoint
+          toPoint: lineObj.endPoint,
+          type: 'normal'
         }
       }
 
@@ -457,12 +447,12 @@ class Map extends React.Component {
     cmap.changeStrokeColor(color)
   }
 
-  onChangeLineType (type, imgUrl, deviceTypeId) {
+  onChangeLineType (type, imgUrl) {
     let cmap = this.getCanvasMap()
     const lineId = cmap.changeConnectorType(type, imgUrl)
     if (!lineId) return
 
-    this.changeLineType(lineId, deviceTypeId)
+    this.changeLineType(lineId, type)
   }
 
   onClickZoomRect () {
@@ -559,13 +549,17 @@ class Map extends React.Component {
     })
   }
 
-  changeLineType (id, typeid) {
-    // $.get(`${this.props.ROOT_URL}${Api.deviceadmin.updateLine}`, { // eslint-disable-line no-undef
-    //   id: id,
-    //   type: typeid
-    // }).done(() => {
-    //
-    // })
+  changeLineType (lineId, type) {
+    let con = this.findMapLine(lineId)
+    if (con) {
+      const props = extend({}, con, {
+        line: {
+          type
+        }
+      })
+
+      this.props.updateMapLine(props)
+    }
   }
 
   findMapLine (lineId) {

@@ -381,11 +381,6 @@ class MapCanvas extends React.Component {
 
         imageUrl: `${imageBaseUrl}longhub.png`
       })
-    } else if (devicetype === 'line' ||
-            devicetype === 'Yellow Lightning' ||
-            devicetype === 'lightening' ||
-            devicetype === 'Dashed Line') {
-
     } else if (devicetype === 'Text') {
       let label = devname
 

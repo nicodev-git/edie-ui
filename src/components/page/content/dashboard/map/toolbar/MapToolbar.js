@@ -58,7 +58,8 @@ export default class Toolbar extends Component {
 
   hideDeviceMenu () {
     this.setState({
-      displayDevices: false
+      displayDevices: false,
+      displayLineType: false
     })
   }
 
@@ -88,10 +89,9 @@ export default class Toolbar extends Component {
 
   onClickLineType (item) {
     this.toggleLineTypes()
-    let deviceTypeId = item['typeid']
-    let type = item['typename']
+    let type = item['type']
     let imgUrl = item['image']
-    this.props.onChangeLineType(type, imgUrl, deviceTypeId)
+    this.props.onChangeLineType(type, imgUrl)
   }
 
   onClickToggleMapHeader () {
