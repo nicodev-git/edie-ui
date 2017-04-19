@@ -15,6 +15,8 @@ import {
   fetchDeviceTplWorkflows,
   showWfSelectModal,
   selectTplWfRow,
+  addDeviceTplWf,
+  removeDeviceTplWf,
 
   addDeviceTemplate,
   updateDeviceTemplate,
@@ -64,6 +66,8 @@ import {
       fetchDeviceTplWorkflows,
       showWfSelectModal,
       selectTplWfRow,
+      addDeviceTplWf,
+      removeDeviceTplWf,
 
       addDeviceTemplate,
       updateDeviceTemplate,
