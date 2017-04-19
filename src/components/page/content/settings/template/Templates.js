@@ -27,6 +27,7 @@ export default class Templates extends Component {
   }
 
   componentWillMount () {
+    this.props.selectDeviceTemplate(null)
     this.props.fetchDeviceTemplates()
     this.props.fetchMonitorTemplates()
     this.props.fetchDeviceCategories()

@@ -9,6 +9,11 @@ import {
   UPDATE_DEVICE_TEMPLATE_MONITORS,
   FETCH_DEVICE_TPL_WORKFLOWS,
 
+  SELECT_TPL_WF_ROW,
+  SHOW_WF_SELECT_MODAL,
+  ADD_DEVICE_TPL_WF,
+  REMOVE_DEVICE_TPL_WF,
+
   FETCH_MONITOR_TEMPLATES,
   ADD_MONITOR_TEMPLATE,
   UPDATE_MONITOR_TEMPLATE,
@@ -115,13 +120,21 @@ export default function (state = {}, action) {
     }
 
     case OPEN_DEVICE_TEMPLATE_MODAL:
-      return { ...state, deviceTplModalVisible: true, deviceTpl: action.data, selectedTplImage: null }
+      return { ...state, deviceTplModalVisible: true, deviceTpl: action.data, selectedTplImage: null, editTplWorkflows: [] }
 
     case CLOSE_DEVICE_TEMPLATE_MODAL:
-      return { ...state, deviceTplModalVisible: false }
+      return { ...state, deviceTplModalVisible: false, deviceTpl: null }
 
     case FETCH_DEVICE_TPL_WORKFLOWS:
       return { ...state, editTplWorkflows: action.data || [] }
+    case SELECT_TPL_WF_ROW:
+      return { ...state, selectedRowWf: action.workflow }
+    case SHOW_WF_SELECT_MODAL:
+      return { ...state, wfSelectModalOpen: action.visible, selectedRowWf: null }
+    case ADD_DEVICE_TPL_WF:
+      return { ...state, editTplWorkflows: concat(state.editTplWorkflows || [], action.workflow) }
+    case REMOVE_DEVICE_TPL_WF:
+      return { ...state, editTplWorkflows: state.editTplWorkflows.filter(m => m.id !== action.workflow.id) }
 
     case FETCH_MONITOR_TEMPLATES:
       return { ...state, monitorTemplates: action.data }

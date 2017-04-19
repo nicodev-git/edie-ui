@@ -98,6 +98,7 @@ const initialState = {
     monitorTemplates: [],
     tplImageModalVisible: false,
     selectedDeviceMonitors: [],
+    editTplWorkflows: [],
 
     maps: [],
     editMap: null,
