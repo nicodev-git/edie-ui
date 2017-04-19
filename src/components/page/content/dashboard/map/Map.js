@@ -175,6 +175,10 @@ class Map extends React.Component {
         this.onClickEdit()
         this.toolbar.hideDeviceMenu()
       }
+
+      this.setState({
+        selectedItem: null
+      })
     }
   }
 
