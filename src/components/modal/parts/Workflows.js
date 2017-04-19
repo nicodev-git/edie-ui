@@ -1,5 +1,5 @@
 import React from 'react'
-import {Chip} from 'material-ui'
+import {Chip, FlatButton} from 'material-ui'
 
 import {chipStyles} from 'style/materialStyles'
 
@@ -9,11 +9,9 @@ export default class Workflows extends React.Component {
     return (
       <div>
         <div>
-          <label>Workflows</label>
-          <div className="pull-left">
-            <a href="javascript:;" onClick={() => showWfSelectModal(true)}>
-              <i className="fa fa-plus-square"/>
-            </a>
+          <label className="margin-md-bottom"><b>Workflows</b></label>
+          <div className="pull-right">
+            <FlatButton label="Add" onTouchTap={() => showWfSelectModal(true)}/>
           </div>
         </div>
         <div className="margin-md-bottom" style={chipStyles.wrapper}>

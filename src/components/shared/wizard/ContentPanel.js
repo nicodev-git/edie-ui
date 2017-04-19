@@ -2,12 +2,13 @@ import React from 'react'
 
 const style = {
   header: {
-    background: '#B7B8BA',
+    background: '#c5c5c5',
     color: 'white'
   },
   body: {
     minHeight: '250px',
-    paddingTop: 0
+    paddingTop: 0,
+    background: '#f8f8f8'
   }
 }
 export default class ContentPanel extends React.Component {
