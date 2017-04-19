@@ -7,6 +7,7 @@ import {
   CLOSE_DEVICE_TEMPLATE_MODAL,
   SELECT_DEVICE_TEMPLATE,
   UPDATE_DEVICE_TEMPLATE_MONITORS,
+  FETCH_DEVICE_TPL_WORKFLOWS,
 
   FETCH_MONITOR_TEMPLATES,
   ADD_MONITOR_TEMPLATE,
@@ -118,6 +119,9 @@ export default function (state = {}, action) {
 
     case CLOSE_DEVICE_TEMPLATE_MODAL:
       return { ...state, deviceTplModalVisible: false }
+
+    case FETCH_DEVICE_TPL_WORKFLOWS:
+      return { ...state, editTplWorkflows: action.data || [] }
 
     case FETCH_MONITOR_TEMPLATES:
       return { ...state, monitorTemplates: action.data }

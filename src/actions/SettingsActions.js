@@ -49,6 +49,7 @@ import {
 import { apiError } from './Errors'
 
 import { ROOT_URL } from './config'
+import { encodeUrlParams } from 'shared/Global'
 
 export const fetchSettingMaps = () => {
   if (!window.localStorage.getItem('token')) {

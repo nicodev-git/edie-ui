@@ -12,6 +12,7 @@ import {
   deleteMonitorTemplate,
   selectDeviceTemplate,
   updateSelectedDeviceTplMonitors,
+  fetchDeviceTplWorkflows,
 
   addDeviceTemplate,
   updateDeviceTemplate,
@@ -42,6 +43,7 @@ import {
     selectedDeviceTpl: state.settings.selectedDeviceTpl,
     selectedDeviceMonitors: state.settings.selectedDeviceMonitors,
     selectedTplImage: state.settings.selectedTplImage,
+    editTplWorkflows: state.settings.editTplWorkflows,
 
     monitorTpl: state.settings.monitorTpl,
 
@@ -57,6 +59,7 @@ import {
       deleteMonitorTemplate,
       selectDeviceTemplate,
       updateSelectedDeviceTplMonitors,
+      fetchDeviceTplWorkflows,
 
       addDeviceTemplate,
       updateDeviceTemplate,

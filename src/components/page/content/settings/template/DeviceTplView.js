@@ -6,6 +6,14 @@ import { getCustomImageUrl, extImageBaseUrl } from 'shared/Global'
 import { DeviceTplModalView } from 'components/modal'
 
 class DeviceTplView extends React.Component {
+  componentWillMount () {
+    const {initialValues} = this.props
+    const {workflowids} = initialValues
+    if (workflowids && workflowids.length) {
+      this.props.fetchDeviceTplWorkflows(workflowids)
+    }
+  }
+
   handleFormSubmit (formProps) {
     const {deviceTpl, selectedTplImage} = this.props
     const tpl = assign({}, (deviceTpl || {}), formProps, {
