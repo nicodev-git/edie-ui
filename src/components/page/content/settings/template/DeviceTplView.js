@@ -54,6 +54,10 @@ class DeviceTplView extends React.Component {
     this.props.openTplImageModal()
   }
 
+  onClickDeleteWf () {
+
+  }
+
   renderOptions () {
     let categories = this.props.deviceCategories
     let options = categories.map(m => ({value: m.name, label: m.name}))
@@ -72,6 +76,7 @@ class DeviceTplView extends React.Component {
         header={header}
         monitors={this.props.monitors}
         monitorTemplates={this.props.monitorTemplates}
+        workflows={this.props.editTplWorkflows}
         onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
         options={options}
         imgUrl={imgUrl}
@@ -79,6 +84,9 @@ class DeviceTplView extends React.Component {
         onAddMonitor={this.onClickAddMonitor.bind(this)}
         onRemoveMonitor={this.onClickRemoveMonitor.bind(this)}
         onEditMonitor={this.onClickEditMonitor.bind(this)}
+
+        showWfSelectModal={this.props.showWfSelectModal}
+        onClickDeleteWf={this.onClickDeleteWf.bind(this)}
       />
     )
   }

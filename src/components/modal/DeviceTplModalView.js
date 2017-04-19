@@ -2,12 +2,14 @@ import React, { Component } from 'react'
 import Modal from 'react-bootstrap-modal'
 import { Field } from 'redux-form'
 import { Header, SubHeader, SubmitBlock, FormInput, FormSelect, ImageUploader,
-  Monitors, MonitorTemplates } from './parts'
+  Monitors, MonitorTemplates, Workflows } from './parts'
 
 export default class DeviceTplModalView extends Component {
   renderContent () {
     const {options, imgUrl, onSubmit, onHide, onChange,
-      monitors, monitorTemplates, onAddMonitor, onEditMonitor, onRemoveMonitor} = this.props
+      monitors, monitorTemplates, onAddMonitor, onEditMonitor, onRemoveMonitor,
+      workflows, showWfSelectModal, onClickDeleteWf
+    } = this.props
     return (
       <form onSubmit={onSubmit}>
         <div className="form-column padding-left-12 margin-bottom-0">
@@ -21,6 +23,7 @@ export default class DeviceTplModalView extends Component {
         <div>
           <div className="col-md-6 modal-left">
             <Monitors monitors={monitors} onEditMonitor={onEditMonitor} onRemoveMonitor={onRemoveMonitor} />
+            <Workflows workflows={workflows} showWfSelectModal={showWfSelectModal} onClickDeleteWf={onClickDeleteWf}/>
           </div>
           <div className="col-md-6 modal-right">
             <MonitorTemplates monitors={monitors} monitorTemplates={monitorTemplates} onAddMonitor={onAddMonitor} />

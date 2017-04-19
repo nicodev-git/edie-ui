@@ -13,6 +13,7 @@ import {
   selectDeviceTemplate,
   updateSelectedDeviceTplMonitors,
   fetchDeviceTplWorkflows,
+  showWfSelectModal,
 
   addDeviceTemplate,
   updateDeviceTemplate,
@@ -60,6 +61,7 @@ import {
       selectDeviceTemplate,
       updateSelectedDeviceTplMonitors,
       fetchDeviceTplWorkflows,
+      showWfSelectModal,
 
       addDeviceTemplate,
       updateDeviceTemplate,
