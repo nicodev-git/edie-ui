@@ -56,8 +56,8 @@ DeviceEditWizard.defaultProps = {
       name: 'id',
       title: 'DeviceId'
     }, {
-      name: 'devicetype',
-      title: 'DeviceType'
+      name: 'templateName',
+      title: 'Template Name'
     }],
     width: 4
   }, {

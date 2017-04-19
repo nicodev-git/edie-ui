@@ -36,6 +36,7 @@ export default class TextInput extends React.Component {
         component={this.renderField}
         style={config.style}
         onChange={onChange}
+        disabled={config.disabled}
       />
     )
   }
