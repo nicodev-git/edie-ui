@@ -177,7 +177,8 @@ class Map extends React.Component {
       }
 
       this.setState({
-        selectedItem: null
+        selectedItem: {},
+        dropItem: null
       })
     }
   }
