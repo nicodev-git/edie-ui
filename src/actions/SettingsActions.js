@@ -41,6 +41,7 @@ import {
 
   SELECT_DEVICE_TEMPLATE,
   UPDATE_DEVICE_TEMPLATE_MONITORS,
+  FETCH_DEVICE_TPL_WORKFLOWS,
 
   NO_AUTH_ERROR
 } from './types'
@@ -442,5 +443,13 @@ export const selectDeviceTemplate = (tpl) => {
 export const updateSelectedDeviceTplMonitors = (monitors) => {
   return dispatch => {
     dispatch({type: UPDATE_DEVICE_TEMPLATE_MONITORS, monitors})
+  }
+}
+
+export const fetchDeviceTplWorkflows = (workflowIds) => {
+  return dispatch => {
+    axios.get(`/workflow/search/findByIdIn?size=1000&sort=name&${encodeUrlParams({id: workflowIds})}`).then(res => {
+      dispatch({type: FETCH_DEVICE_TPL_WORKFLOWS, data: res.data._embedded.workflows})
+    }).catch(error => apiError(dispatch, error))
   }
 }
