@@ -11,6 +11,7 @@ import {
 } from 'material-ui'
 import TimeAgo from 'react-timeago'
 import ReactTooltip from 'react-tooltip'
+import ArrowBack from 'material-ui/svg-icons/navigation/arrow-back'
 
 import DateRangePicker from '../../../../../shared/DateRangePicker2'
 import InfiniteTable from '../../../../../shared/InfiniteTable'
@@ -323,6 +324,16 @@ export default class MainIncidents extends Component {
     )
   }
 
+  renderHeaderOptions () {
+    const {device} = this.props
+    if (!device.groupid) return null
+    return (
+      <div>
+        <IconButton><ArrowBack /></IconButton>
+      </div>
+    )
+  }
+
   render () {
     const {device, incidents} = this.props
     const {selectedIndex, selectedSeverity, severities, afterStartTimestamp, beforeStartTimestamp, text} = this.state
@@ -331,7 +342,7 @@ export default class MainIncidents extends Component {
 
     return (
       <TabPage>
-        <TabPageHeader title={device.name}>
+        <TabPageHeader title={device.name} headerOptions={this.renderHeaderOptions()}>
           <div className="text-center margin-md-top">
             <div className="pull-left">
               <div className="text-left form-mui-inline">
