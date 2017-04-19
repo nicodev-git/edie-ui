@@ -18,6 +18,8 @@ import {
   addDeviceTplWf,
   removeDeviceTplWf,
 
+  fetchWorkflows,
+
   addDeviceTemplate,
   updateDeviceTemplate,
   closeDeviceTplModal,
@@ -48,6 +50,9 @@ import {
     selectedDeviceMonitors: state.settings.selectedDeviceMonitors,
     selectedTplImage: state.settings.selectedTplImage,
     editTplWorkflows: state.settings.editTplWorkflows,
+    wfSelectModalOpen: state.settings.wfSelectModalOpen,
+    selectedRowWf: state.settings.selectedRowWf,
+    workflows: state.settings.workflows,
 
     monitorTpl: state.settings.monitorTpl,
 
@@ -68,6 +73,8 @@ import {
       selectTplWfRow,
       addDeviceTplWf,
       removeDeviceTplWf,
+
+      fetchWorkflows,
 
       addDeviceTemplate,
       updateDeviceTemplate,

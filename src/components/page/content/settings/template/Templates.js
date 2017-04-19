@@ -12,6 +12,7 @@ import DeviceTplModal from './DeviceTplModal'
 import MonitorTplModal from './MonitorTplModal'
 import ImageUploaderModal from './ImageUploaderModal'
 import DeviceTplView from './DeviceTplView'
+import WorkflowSelectModal from './WorkflowSelectModal'
 
 import { showConfirm } from 'components/shared/Alert'
 import { errorStyle, underlineFocusStyle, inputStyle, selectedItemStyle, chipStyles } from 'style/materialStyles'
@@ -199,6 +200,13 @@ export default class Templates extends Component {
     )
   }
 
+  renderWorkflowSelectModal () {
+    if (!this.props.wfSelectModalOpen) return null
+    return (
+      <WorkflowSelectModal {...this.props}/>
+    )
+  }
+
   render () {
     const {type} = this.state
     return (
@@ -236,6 +244,7 @@ export default class Templates extends Component {
             </div>
           </div>
           {this.renderTplImageModal()}
+          {this.renderWorkflowSelectModal()}
         </TabPageBody>
       </TabPage>
     )
