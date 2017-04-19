@@ -6,14 +6,14 @@ import { getCustomImageUrl, extImageBaseUrl } from 'shared/Global'
 import { DeviceTplModalView } from 'components/modal'
 
 class DeviceTplView extends React.Component {
-  // componentWillMount () {
-  //   const {initialValues} = this.props
-  //   const {workflowids} = initialValues
-  //   if (workflowids && workflowids.length) {
-  //     this.props.fetchDeviceTplWorkflows(workflowids)
-  //   }
-  // }
-  componentWillReceiveProps (nextProps) {
+  componentWillMount () {
+    const {initialValues} = this.props
+    const {workflowids} = initialValues
+    if (workflowids && workflowids.length) {
+      this.props.fetchDeviceTplWorkflows(workflowids)
+    }
+  }
+  componentWillUpdate (nextProps) {
     const {initialValues} = nextProps
     const {workflowids} = initialValues || {}
     if (workflowids && (!this.props.initialValues || workflowids !== this.props.initialValues.workflowids)) {

@@ -94,13 +94,18 @@ export const fetchDevice = (id) => {
   }
   return (dispatch) => {
     axios.get(`${ROOT_URL}/device/${id}`, getAuthConfig())
-      .then(response => {
-        dispatch({
-          type: FETCH_DEVICES,
-          payload: [response.data]
-        })
+      .then(response => dispatch(fetchDeviceSuccess(response)))
+      .catch(() => {
+        axios.get(`${ROOT_URL}/group/${id}`, getAuthConfig())
+          .then(response => dispatch(fetchDeviceSuccess(response)))
+          .catch(error => apiError(dispatch, error))
       })
-      .catch(error => apiError(dispatch, error))
+  }
+}
+
+const fetchDeviceSuccess = (response) => {
+  return dispatch => {
+    dispatch({type: FETCH_DEVICES, payload: [response.data]})
   }
 }
 
