@@ -24,7 +24,8 @@ class DeviceTplView extends React.Component {
   handleFormSubmit (formProps) {
     const {deviceTpl, selectedTplImage} = this.props
     const tpl = assign({}, (deviceTpl || {}), formProps, {
-      monitors: this.props.monitors
+      monitors: this.props.monitors,
+      workflowids: this.props.editTplWorkflows.map(u => u.id)
     })
     if (selectedTplImage) tpl.image = selectedTplImage.uuid
     if (deviceTpl) { this.props.updateDeviceTemplate(tpl) } else {
