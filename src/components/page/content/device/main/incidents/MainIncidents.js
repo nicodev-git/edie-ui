@@ -7,7 +7,8 @@ import {
   Menu,
   Popover,
   SelectField,
-  TextField
+  TextField,
+  FlatButton
 } from 'material-ui'
 import TimeAgo from 'react-timeago'
 import ReactTooltip from 'react-tooltip'
@@ -324,12 +325,17 @@ export default class MainIncidents extends Component {
     )
   }
 
+  onClickGroup (groupId) {
+    this.props.closeDevice()
+    this.props.router.push(`/device/${groupId}/topology`)
+  }
+
   renderHeaderOptions () {
     const {device} = this.props
     if (!device.groupid) return null
     return (
       <div>
-        <IconButton><ArrowBack /></IconButton>
+        <FlatButton icon={<ArrowBack />} label="Group" onClick={this.onClickGroup.bind(this, device.groupid)}/>
       </div>
     )
   }

@@ -10,7 +10,8 @@ import {
   openAddDeviceIncident,
   closeAddDeviceIncident,
   addDeviceIncident,
-  fixAllDeviceIncidents
+  fixAllDeviceIncidents,
+  closeDevice
 } from 'actions'
 
 import MainIncidents from 'components/page/content/device/main/incidents/MainIncidents'
@@ -30,7 +31,8 @@ import MainIncidents from 'components/page/content/device/main/incidents/MainInc
       openAddDeviceIncident,
       closeAddDeviceIncident,
       addDeviceIncident,
-      fixAllDeviceIncidents
+      fixAllDeviceIncidents,
+      closeDevice
     }, dispatch)
   })
 )
