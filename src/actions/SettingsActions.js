@@ -42,6 +42,10 @@ import {
   SELECT_DEVICE_TEMPLATE,
   UPDATE_DEVICE_TEMPLATE_MONITORS,
   FETCH_DEVICE_TPL_WORKFLOWS,
+  SELECT_TPL_WF_ROW,
+  SHOW_WF_SELECT_MODAL,
+  ADD_DEVICE_TPL_WF,
+  REMOVE_DEVICE_TPL_WF,
 
   NO_AUTH_ERROR
 } from './types'
@@ -452,5 +456,29 @@ export const fetchDeviceTplWorkflows = (workflowIds) => {
     axios.get(`/workflow/search/findByIdIn?size=1000&sort=name&${encodeUrlParams({id: workflowIds})}`).then(res => {
       dispatch({type: FETCH_DEVICE_TPL_WORKFLOWS, data: res.data._embedded.workflows})
     }).catch(error => apiError(dispatch, error))
+  }
+}
+
+export const selectTplWfRow = (workflow) => {
+  return dispatch => {
+    dispatch({type: SELECT_TPL_WF_ROW, workflow})
+  }
+}
+
+export const showWfSelectModal = (visible) => {
+  return dispatch => {
+    dispatch({type: SHOW_WF_SELECT_MODAL, visible})
+  }
+}
+
+export const addDeviceTplWf = (workflow) => {
+  return dispatch => {
+    dispatch({type: ADD_DEVICE_TPL_WF, workflow})
+  }
+}
+
+export const removeDeviceTplWf = (workflow) => {
+  return dispatch => {
+    dispatch({type: REMOVE_DEVICE_TPL_WF, workflow})
   }
 }
