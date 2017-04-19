@@ -30,22 +30,23 @@ export const closeTplImageModal = (selectedImage) => {
   }
 }
 
-export const uploadImage = (formData) => {
+export const uploadImage = (formData, cb) => {
   if (!window.localStorage.getItem('token')) {
     return dispatch => dispatch({ type: NO_AUTH_ERROR })
   }
   return (dispatch) => {
     axios.post(`${ROOT_URL}/upload`, formData)
-      .then(response => uploadImageSuccess(dispatch, response))
+      .then(response => uploadImageSuccess(dispatch, response, cb))
       .catch(error => apiError(dispatch, error))
   }
 }
 
-const uploadImageSuccess = (dispatch, response) => {
+const uploadImageSuccess = (dispatch, response, cb) => {
   dispatch({
     type: UPLOAD_IMAGE,
     data: response.data
   })
+  cb && cb(response.data)
 }
 
 export const fetchImages = () => {

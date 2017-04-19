@@ -41,12 +41,8 @@ class DeviceEditWizard extends React.Component {
   }
 
   componentWillReceiveProps (nextProps) {
-    console.log('receive props')
-    console.log(this.props.dirty)
-    console.log(nextProps.dirty)
     let elem = document.getElementById('submitButton')
     if (nextProps.dirty) {
-      console.log('dirty')
       elem.style.backgroundColor = '#ffffff'
     } else {
       elem.style.backgroundColor = '#d1d1d1'
@@ -58,12 +54,10 @@ class DeviceEditWizard extends React.Component {
   }
 
   onRequestSave () {
-    console.log('Saving...')
     this.props.submit(this.props.handleSubmit(this.handleFormSubmit.bind(this)))
   }
 
   onChangeForm (e) {
-    e && e.target && console.log(e.target.value)
     this.fnSaveDeb()
   }
 
@@ -241,7 +235,7 @@ class DeviceEditWizard extends React.Component {
   renderTplImageModal () {
     if (!this.props.tplImageModalVisible) return null
     return (
-      <ImageUploaderModal {...this.props} />
+      <ImageUploaderModal {...this.props} closeOnSelect/>
     )
   }
   render () {
