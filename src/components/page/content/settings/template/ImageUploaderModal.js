@@ -62,7 +62,7 @@ export default class ImageUploaderModal extends Component {
         getCustomImageUrl={getCustomImageUrl}
         onClickItem={this.onClickItem}
         onChangeFile={this.onChangeFile}
-        onSave={this.onClickSave}
+        onSave={this.props.closeOnSelect ? null : this.onClickSave}
       />
     )
   }
