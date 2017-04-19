@@ -21,6 +21,7 @@ import TwoButtonsBlockCustom from './TwoButtonsBlockCustom'
 import WizardButtons from './WizardButtons'
 import FormCheckbox from './FormCheckbox'
 import Monitors from './Monitors'
+import Workflows from './Workflows'
 import MonitorTemplates from './MonitorTemplates'
 import CrudButtons from './CrudButtons'
 import HeaderWithCancel from './HeaderWithCancel'
@@ -49,6 +50,7 @@ export {
     WizardButtons,
     FormCheckbox,
     Monitors,
+    Workflows,
     MonitorTemplates,
     CrudButtons,
     HeaderWithCancel
