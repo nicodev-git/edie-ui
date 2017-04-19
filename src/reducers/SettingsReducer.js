@@ -100,7 +100,7 @@ export default function (state = {}, action) {
     case FETCH_DEVICE_TEMPLATES:
       return { ...state, deviceTemplates: action.data }
     case SELECT_DEVICE_TEMPLATE:
-      return { ...state, selectedDeviceTpl: action.tpl, selectedDeviceMonitors: (action.tpl ? action.tpl.monitors : []) || [] }
+      return { ...state, selectedDeviceTpl: action.tpl, selectedDeviceMonitors: (action.tpl ? action.tpl.monitors : []) || [], editTplWorkflows: [] }
     case UPDATE_DEVICE_TEMPLATE_MONITORS:
       return { ...state, selectedDeviceMonitors: action.monitors }
     case ADD_DEVICE_TEMPLATE: {
@@ -120,7 +120,7 @@ export default function (state = {}, action) {
     }
 
     case OPEN_DEVICE_TEMPLATE_MODAL:
-      return { ...state, deviceTplModalVisible: true, deviceTpl: action.data, selectedTplImage: null, editTplWorkflows: [] }
+      return { ...state, deviceTplModalVisible: true, deviceTpl: action.data, selectedTplImage: null }
 
     case CLOSE_DEVICE_TEMPLATE_MODAL:
       return { ...state, deviceTplModalVisible: false, deviceTpl: null }
