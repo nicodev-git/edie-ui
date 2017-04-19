@@ -35,8 +35,8 @@ export default class Incidents extends React.Component {
     let afterStartTimestamp = ''
     let beforeStartTimestamp = ''
     if (filterType === 'today') {
-      afterStartTimestamp = moment().valueOf()
-      beforeStartTimestamp = afterStartTimestamp
+      afterStartTimestamp = moment().startOf('day').valueOf()
+      beforeStartTimestamp = moment().endOf('day').valueOf()
     } else if (filterType === 'month') {
       afterStartTimestamp = moment().startOf('month').valueOf()
       beforeStartTimestamp = moment().endOf('month').valueOf()

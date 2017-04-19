@@ -53,8 +53,8 @@ export default class DateRangePicker2 extends React.Component {
 
   onApply (e, dp) {
     this.props.onApply && this.props.onApply({
-      startDate: dp.startDate,
-      endDate: dp.endDate
+      startDate: dp.startDate.startOf('day'),
+      endDate: dp.endDate.endOf('day')
     })
   }
 
