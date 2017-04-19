@@ -29,7 +29,11 @@ export default class ImageUploaderModal extends Component {
 
   onClickItem (item, e) {
     let currentIcon = item
-    this.setState({currentIcon})
+    this.setState({currentIcon}, () => {
+      if (this.props.closeOnSelect) {
+        this.onClickSave()
+      }
+    })
   }
 
   onChangeFile (e) {
@@ -39,7 +43,11 @@ export default class ImageUploaderModal extends Component {
     let filename = input.value.split(/(\\|\/)/g).pop()
     let file = input.files[0]
     formData.append('file', file, filename)
-    this.props.uploadImage(formData)
+    this.props.uploadImage(formData, (data) => {
+      if (this.props.closeOnSelect) {
+        this.closeModal(data)
+      }
+    })
   }
 
   render () {
