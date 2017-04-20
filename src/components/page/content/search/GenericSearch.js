@@ -64,7 +64,36 @@ class GenericSearch extends React.Component {
       }
     }]
 
-    this.props.fetchSearchFields(props.params)
+    const {filterType} = props.location.state || {}
+
+    const params = assign({}, props.params)
+
+    if (filterType) {
+      if (filterType === 'today') {
+        params.dateFrom = moment().startOf('day').valueOf()
+        params.dateTo = moment().endOf('day').valueOf()
+      } else if (filterType === 'month') {
+        params.dateFrom = moment().startOf('month').valueOf()
+        params.dateto = moment().endOf('month').valueOf()
+      } else if (filterType === 'open') {
+        params.dateFrom = moment().startOf('year').valueOf()
+        params.dateTo = moment().endOf('year').valueOf()
+      }
+
+      this.props.updateSearchParams(assign(params, {
+        query: '',
+        severity: 'HIGH,MEDIUM',
+        collections: 'incident',
+        workflow: ''
+      }))
+
+      this.props.replaceSearchWfs([])
+      this.props.updateQueryChips([])
+      this.props.change('query', '')
+      this.props.change('searchOptionIndex', '')
+    }
+    this.props.fetchSearchFields(params)
+
     this.props.fetchWorkflows()
   }
 
