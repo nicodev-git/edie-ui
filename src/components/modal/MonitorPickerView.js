@@ -19,7 +19,7 @@ export default class MonitorPickerView extends Component {
                 monitorTemplates.map(item =>
                   <li key={item.id}>
                     <a href="javascript:;" onClick={onClickItem.bind(this, item)}>
-                      <img src={`${extImageBaseUrl}${item.image}`}/>
+                      <img src={`${extImageBaseUrl}${item.image}`} style={{background: 'black', borderRadius: '3px'}}/>
                       <span>{item.name}</span>
                     </a>
                   </li>
