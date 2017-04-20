@@ -101,10 +101,8 @@ export default class Monitors extends React.Component {
         toolbar = (
           <div className="text-center margin-md-top">
             <div style={{position: 'absolute'}}>
-              <div className="pull-left">
-                <a href="javascript:;"
-                  className={`btn btn-white text-primary ${selected === 'monitors' ? 'hidden' : ''}`}
-                  onClick={this.onClickShowMonitors.bind(this)}>Show Monitors</a>
+              <div className={`pull-left ${selected === 'monitors' ? 'hidden' : ''}`}>
+                <RaisedButton label="Show Monitors" onTouchTap={this.onClickShowMonitors.bind(this)}/>
               </div>
             </div>
 
