@@ -345,6 +345,13 @@ class GenericSearch extends React.Component {
     }))
   }
 
+  onChangeRange ({startDate, endDate}) {
+    this.props.updateSearchParams(assign({}, this.props.params, {
+      dateFrom: startDate.valueOf(),
+      dateTo: endDate.valueOf()
+    }))
+  }
+
   renderFields () {
     const {selectedField} = this.props
     return (
@@ -461,7 +468,7 @@ class GenericSearch extends React.Component {
 
   render () {
     const { handleSubmit, selectedWf, params } = this.props
-    const { severity } = params
+    const { severity, dateFrom, dateTo } = params
     const selectedCollections = params.collections
     const workflow = this.props.workflows.filter(m => m.id === selectedWf)
 
@@ -485,6 +492,9 @@ class GenericSearch extends React.Component {
             severities={severities}
             selectedSeverities={severity.split(',')}
             onChangeSeverity={this.onChangeSeverity.bind(this)}
+            startDate={moment(dateFrom)}
+            endDate={moment(dateTo)}
+            onChangeDateRange={this.onChangeRange.bind(this)}
           />
 
           <div className="text-center">

@@ -73,11 +73,11 @@ const initialState = {
     params: {
       query: '',
       dateIndex: 0,
-      dateFrom: 0,
-      dateTo: 0,
       workflow: '',
       collections: 'incident,event',
-      severity: 'HIGH,MEDIUM'
+      severity: 'HIGH,MEDIUM',
+      dateFrom: moment().startOf('year').valueOf(),
+      dateTo: moment().endOf('year').valueOf()
     },
     incidentParams: {
       severity: ['HIGH', 'MEDIUM'],

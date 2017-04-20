@@ -7,11 +7,16 @@ import ToggleStar from 'material-ui/svg-icons/toggle/star-border'
 import FilledStar from 'material-ui/svg-icons/toggle/star'
 
 import { FormInput, FormSelect } from 'components/modal/parts'
+import DateRangePicker2 from 'components/shared/DateRangePicker2'
 import { underlineFocusStyle, inputStyle, selectedItemStyle } from 'style/materialStyles'
 
 const emptySearch = {label: 'None', value: ''}
-export default class
-SearchFormView extends React.Component {
+export default class SearchFormView extends React.Component {
+  renderDateLabel (label) {
+    return (
+      <FlatButton label={label}/>
+    )
+  }
   render () {
     const { onSearchKeyDown,
       dateOptions,
@@ -28,7 +33,11 @@ SearchFormView extends React.Component {
 
       collections,
       selectedCollections,
-      onChangeCollection
+      onChangeCollection,
+
+      startDate,
+      endDate,
+      onChangeDateRange
     } = this.props
 
     const options = dateOptions.map((m, index) => {
@@ -44,6 +53,12 @@ SearchFormView extends React.Component {
         <div className="text-center margin-md-top" >
           <Field name="query" component={FormInput} label="Search" onKeyDown={onSearchKeyDown} style={{verticalAlign: 'top'}}/>
           <Field name="dateIndex" component={FormSelect} label="" options={options} style={{verticalAlign: 'top', maxWidth: '200px'}}/>
+          <DateRangePicker2
+            startDate={startDate}
+            endDate={endDate}
+            onApply={onChangeDateRange}
+            renderer={this.renderDateLabel.bind(this)}
+            style={{marginTop: '4px', verticalAlign: 'top'}}/>
           <SelectField
             underlineStyle={underlineFocusStyle}
             selectedMenuItemStyle={selectedItemStyle}
