@@ -1,12 +1,10 @@
 import React from 'react'
-import Select from 'react-select'
 import moment from 'moment'
 import TimeAgo from 'react-timeago'
 import ReactTooltip from 'react-tooltip'
 import { RaisedButton } from 'material-ui'
 import { assign } from 'lodash'
 
-import DateRangePicker2 from '../../../shared/DateRangePicker2'
 import InfiniteTable from '../../../shared/InfiniteTable'
 
 import { getSeverityIcon } from '../../../../shared/Global'
@@ -168,25 +166,22 @@ export default class Incidents extends React.Component {
       label = `${selectedDevices.length} Devices`
     }
     return (
-      <a href="javascript:;" className="margin-md-left"
-        onClick={this.onClickSearchDevice.bind(this)}>
-          {label}
-      </a>
+      <RaisedButton className="margin-md-left valign-top" label={label} onClick={this.onClickSearchDevice.bind(this)} />
     )
   }
 
   renderTable () {
-    const { search, fixed, selectedSeverity, afterStartTimestamp, beforeStartTimestamp } = this.state
-    const params = {
-      description: search,
-      severity: selectedSeverity,
-      afterStartTimestamp,
-      beforeStartTimestamp,
-      fixed,
-      deviceid: this.state.selectedDevices.length === 0 ? '*' : this.state.selectedDevices.map(item => item.id),
-      sort: 'startTimestamp,desc',
-      draw: this.props.incidentDraw
-    }
+    // const { search, fixed, selectedSeverity, afterStartTimestamp, beforeStartTimestamp } = this.state
+    // const params = {
+    //   description: search,
+    //   severity: selectedSeverity,
+    //   afterStartTimestamp,
+    //   beforeStartTimestamp,
+    //   fixed,
+    //   deviceid: this.state.selectedDevices.length === 0 ? '*' : this.state.selectedDevices.map(item => item.id),
+    //   sort: 'startTimestamp,desc',
+    //   draw: this.props.incidentDraw
+    // }
 
     return (
       <InfiniteTable
@@ -196,7 +191,7 @@ export default class Incidents extends React.Component {
         rowMetadata={{'key': 'id'}}
         selectable
         onRowDblClick={this.onRowDblClick.bind(this)}
-        params={params}
+        params={this.props.incidentParams}
       />
     )
   }
@@ -217,17 +212,14 @@ export default class Incidents extends React.Component {
   }
 
   onChangeSeverity (e, index, values) {
-    // this.setState({
-    //   selectedSeverity: selected.map(item => item.value)
-    // })
     this.props.updateIncidentSearchParams(assign({}, this.props.incidentParams, {
       severity: values
     }))
   }
 
-  onFixedChange (e) {
+  onFixedChange (e, index, value) {
     this.props.updateIncidentSearchParams(assign({}, this.props.incidentParams, {
-      fixed: e.target.value || null
+      fixed: value
     }))
   }
 
@@ -294,36 +286,9 @@ export default class Incidents extends React.Component {
                 severities={severities}
                 selectedSeverities={incidentParams.severity}
                 onChangeSeverity={this.onChangeSeverity.bind(this)}
+
+                deviceSearch={this.renderDeviceSearch()}
               />
-            </div>
-
-            <div className="text-left pull-left hidden"
-              style={{'verticalAlign': 'middle', 'lineHeight': 2.2}}>
-              <Select
-                value={this.state.selectedSeverity.join(',')}
-                options={this.state.severities}
-                onChange={this.onChangeSeverity.bind(this)}
-                multi
-                clearable={false}
-                className="select-severity"
-                style={{minWidth: '85px'}}
-                searchable={false}
-                autosize={false}
-                backspaceRemoves={false}
-              />
-
-              <select className="form-control inline text-primary margin-md-left margin-md-right"
-                onChange={this.onFixedChange.bind(this)} value={`${this.state.fixed}`}>
-                <option value="">Any</option>
-                <option value="false">Unfixed</option>
-                <option value="true">Fixed</option>
-              </select>
-              <DateRangePicker2
-                startDate={moment(this.state.afterStartTimestamp)}
-                endDate={moment(this.state.beforeStartTimestamp)}
-                onApply={this.onChangeRange.bind(this)}/>
-
-              {this.renderDeviceSearch()}
             </div>
 
             <div className="pull-right">

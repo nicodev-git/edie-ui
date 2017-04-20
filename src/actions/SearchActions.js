@@ -175,6 +175,7 @@ export const removeSearchWf = (workflow) => {
 
 export const updateIncidentSearchParams = (params) => {
   return function (dispatch) {
+    console.log(params)
     dispatch({
       type: UPDATE_INCIDENTS_PARAMS,
       params
