@@ -380,7 +380,7 @@ class GenericSearch extends React.Component {
         {this.props.fields.map(f =>
           <div key={f.path} className={`field-item margin-xs-top ${selectedField && selectedField.path === f.path ? 'selected' : ''}`}>
             <span className="margin-sm-right text-gray">{this.getTypeChar(f.type)}</span>
-            <a href="javascript:;" onClick={this.onClickField.bind(this, f)}>{f.path}</a>
+            <a href="javascript:;" onClick={this.onClickField.bind(this, f)}>{f.path.replace(/\.dataobj\./gi, '.')}</a>
             <span className="margin-sm-left text-gray">{f.count}</span>
           </div>
         )}
