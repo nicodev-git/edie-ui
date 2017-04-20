@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDateRangePicker from 'react-bootstrap-daterangepicker'
 import moment from 'moment'
-import {keys} from 'lodash'
+import {keys, assign} from 'lodash'
 
 export default class DateRangePicker2 extends React.Component {
   constructor (props) {
@@ -60,7 +60,7 @@ export default class DateRangePicker2 extends React.Component {
 
   render () {
     const {rangeConfig} = this.state
-    let { className, startDate, endDate, children, renderer } = this.props
+    let { className, startDate, endDate, children, renderer, style } = this.props
 
     const startDateStr = (startDate || moment()).format('DD/MM/YYYY')
     const endDateStr = (endDate || moment()).format('DD/MM/YYYY')
@@ -85,7 +85,7 @@ export default class DateRangePicker2 extends React.Component {
         startDate={startDate}
         endDate={endDate}
 
-        style={{display: 'inline-block'}}
+        style={assign({}, style, {display: 'inline-block'})}
         className={className}
 
         onApply={this.onApply.bind(this)}

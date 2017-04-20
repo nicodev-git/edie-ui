@@ -1,6 +1,7 @@
 import { createStore, applyMiddleware } from 'redux'
 import reducers from '../reducers'
 import reduxThunk from 'redux-thunk'
+import moment from 'moment'
 
 const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore)
 
@@ -82,8 +83,8 @@ const initialState = {
       fixed: '',
       description: '',
       deviceid: '*',
-      afterStartTimestamp: 0,
-      beforeStartTimestamp: 0,
+      afterStartTimestamp: moment().startOf('year').valueOf(),
+      beforeStartTimestamp: moment().endOf('year').valueOf(),
       sort: 'startTimestamp,desc',
       draw: 1
     },

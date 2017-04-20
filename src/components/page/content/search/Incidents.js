@@ -3,10 +3,7 @@ import Select from 'react-select'
 import moment from 'moment'
 import TimeAgo from 'react-timeago'
 import ReactTooltip from 'react-tooltip'
-import {
-  ButtonGroup,
-  Button
-} from 'react-bootstrap'
+import { RaisedButton } from 'material-ui'
 
 import DateRangePicker2 from '../../../shared/DateRangePicker2'
 import InfiniteTable from '../../../shared/InfiniteTable'
@@ -284,7 +281,7 @@ export default class Incidents extends React.Component {
               <IncidentsFormView
                 fixedOptions={fixedOptions}
                 fixed={incidentParams.fixed}
-                onChangeFixed={this.onChangeSeverity.bind(this)}
+                onChangeFixed={this.onFixedChange.bind(this)}
 
                 startDate={moment(incidentParams.afterStartTimestamp)}
                 endDate={moment(incidentParams.beforeStartTimestamp)}
@@ -326,9 +323,7 @@ export default class Incidents extends React.Component {
             </div>
 
             <div className="pull-right">
-              <ButtonGroup>
-                <Button onClick={this.onClickFixAll.bind(this)}>Fix All</Button>
-              </ButtonGroup>
+              <RaisedButton onTouchTap={this.onClickFixAll.bind(this)} label="Fix All"/>
             </div>
           </div>
         </TabPageHeader>

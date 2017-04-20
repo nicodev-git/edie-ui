@@ -1,10 +1,15 @@
 import React from 'react'
-import {SelectField, MenuItem} from 'material-ui'
+import {SelectField, MenuItem, RaisedButton} from 'material-ui'
 
 import { underlineFocusStyle, inputStyle, selectedItemStyle } from 'style/materialStyles'
 import DateRangePicker2 from 'components/shared/DateRangePicker2'
 
 export default class IncidentsFormView extends React.Component {
+  renderDateLabel (label) {
+    return (
+      <RaisedButton label={label}/>
+    )
+  }
   render () {
     const {
       fixedOptions,
@@ -23,7 +28,7 @@ export default class IncidentsFormView extends React.Component {
     } = this.props
 
     return (
-      <div>
+      <div className="text-left">
         <SelectField
           underlineStyle={underlineFocusStyle}
           selectedMenuItemStyle={selectedItemStyle}
@@ -45,7 +50,6 @@ export default class IncidentsFormView extends React.Component {
         </SelectField>
 
         <SelectField
-          hintText="Fixed"
           underlineStyle={underlineFocusStyle}
           selectedMenuItemStyle={selectedItemStyle}
           menuItemStyle={inputStyle}
@@ -59,7 +63,9 @@ export default class IncidentsFormView extends React.Component {
         <DateRangePicker2
           startDate={startDate}
           endDate={endDate}
-          onApply={onChangeDateRange}/>
+          onApply={onChangeDateRange}
+          renderer={this.renderDateLabel.bind(this)}
+          style={{verticalAlign: 'top'}}/>
         {deviceSearch}
       </div>
     )
