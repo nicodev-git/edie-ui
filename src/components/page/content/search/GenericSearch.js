@@ -339,6 +339,12 @@ class GenericSearch extends React.Component {
     }))
   }
 
+  onChangeSeverity (e, index, values) {
+    this.props.updateSearchParams(assign({}, this.props.params, {
+      severity: values
+    }))
+  }
+
   renderFields () {
     const {selectedField} = this.props
     return (
