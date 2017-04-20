@@ -6,23 +6,23 @@ export default class EventLogTable extends Component {
     super(props)
     this.columns = [{
       'displayName': 'Time',
-      'columnName': 'agentdata.LogTime',
+      'columnName': 'dataobj.LogTime',
       'cssClassName': 'nowrap width-140'
     }, {
       'displayName': 'LogName',
-      'columnName': 'agentdata.LogName',
+      'columnName': 'dataobj.LogName',
       'cssClassName': 'width-100'
     }, {
       'displayName': 'EventID',
-      'columnName': 'agentdata.EventID',
+      'columnName': 'dataobj.EventID',
       'cssClassName': 'width-80'
     }, {
       'displayName': 'User',
-      'columnName': 'agentdata.User',
+      'columnName': 'dataobj.User',
       'cssClassName': 'width-160'
     }, {
       'displayName': 'Data',
-      'columnName': 'agentdata.Data'
+      'columnName': 'dataobj.Data'
     }]
   }
 

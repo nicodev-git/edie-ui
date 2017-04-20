@@ -8,11 +8,11 @@ export default class ApplicationTable extends Component {
 
     this.columns = [{
       'displayName': 'Name',
-      'columnName': 'agentdata.Name',
+      'columnName': 'dataobj.Name',
       'cssClassName': 'nowrap'
     }, {
       'displayName': 'InstallDate',
-      'columnName': 'agentdata.InstallDate',
+      'columnName': 'dataobj.InstallDate',
       'cssClassName': 'width-140',
       'customComponent': (props) => {
         let val = props.data
@@ -25,15 +25,15 @@ export default class ApplicationTable extends Component {
       }
     }, {
       'displayName': 'Version',
-      'columnName': 'agentdata.Version',
+      'columnName': 'dataobj.Version',
       'cssClassName': 'width-120'
     }, {
       'displayName': 'Publisher',
-      'columnName': 'agentdata.Publisher',
+      'columnName': 'dataobj.Publisher',
       'cssClassName': 'width-200'
     }, {
       'displayName': 'Size',
-      'columnName': 'agentdata.Size',
+      'columnName': 'dataobj.Size',
       'cssClassName': 'width-120'
     }]
   }

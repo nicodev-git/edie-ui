@@ -738,7 +738,7 @@ export const fetchDeviceProcesses = (device) => {
     }).then(res => {
       const {events} = res.data._embedded
       const event = events.length ? events[0] : null
-      const data = event ? event.agentdata.map((u, i) => assign(u, {id: i, timestamp: event.timestamp})) : []
+      const data = event ? event.dataobj.map((u, i) => assign(u, {id: i, timestamp: event.timestamp})) : []
       dispatch({type: FETCH_DEVICE_PROCESS, data})
     }).catch(error => apiError(dispatch, error))
   }
