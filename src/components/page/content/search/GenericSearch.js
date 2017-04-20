@@ -71,6 +71,7 @@ class GenericSearch extends React.Component {
     const params = assign({}, this.props.params)
 
     if (filterType) {
+      let query = ''
       if (filterType === 'today') {
         params.dateFrom = moment().startOf('day').valueOf()
         params.dateTo = moment().endOf('day').valueOf()
@@ -80,17 +81,19 @@ class GenericSearch extends React.Component {
       } else if (filterType === 'open') {
         params.dateFrom = moment().startOf('year').valueOf()
         params.dateTo = moment().endOf('year').valueOf()
+        query = 'fixed=false'
       }
+      const queryChips = parseSearchQuery(query)
 
       this.props.updateSearchParams(assign(params, {
-        query: '',
-        severity: 'HIGH,MEDIUM',
+        query,
+        severity: 'HIGH,MEDIUM,LOW,AUDIT,IGNORE',
         collections: 'incident',
         workflow: ''
       }))
 
       this.props.replaceSearchWfs([])
-      this.props.updateQueryChips([])
+      this.props.updateQueryChips(queryChips)
       this.props.change('query', '')
       this.props.change('searchOptionIndex', '')
     }
