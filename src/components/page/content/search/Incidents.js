@@ -7,8 +7,6 @@ import {
   ButtonGroup,
   Button
 } from 'react-bootstrap'
-import { reduxForm } from 'redux-form'
-import {connect} from 'react-redux'
 
 import DateRangePicker2 from '../../../shared/DateRangePicker2'
 import InfiniteTable from '../../../shared/InfiniteTable'
@@ -21,6 +19,7 @@ import TabPageHeader from '../../../shared/TabPageHeader'
 import { showConfirm } from 'components/shared/Alert'
 
 import DeviceSearchModal from './DeviceSearchModal'
+import IncidentsFormView from './IncidentsFormView'
 
 import {
     showIncidentDetail,
@@ -29,7 +28,13 @@ import {
 import { thumbup, thumpdown, done, notdone, openicon, reasonx,
   rawtext, reason } from '../../../../style/materialStyles'
 
-class Incidents extends React.Component {
+const fixedOptions = [
+  {label: 'Any', value: ''},
+  {label: 'Unfixed', value: 'false'},
+  {label: 'Fixed', value: 'true'}
+]
+
+export default class Incidents extends React.Component {
   constructor (props) {
     super(props)
 
@@ -262,11 +267,20 @@ class Incidents extends React.Component {
   }
 
   render () {
+    const {incidentParams} = this.props
     return (
       <TabPage>
         <TabPageHeader title="Search">
           <div className="form-inline" style={{margin: '0 auto', position: 'relative', textAlign: 'center'}}>
-            <div className="text-left pull-left"
+            <div className="pull-left">
+              <IncidentsFormView
+                fixedOptions={fixedOptions}
+                fixed={incidentParams.fixed}
+                onChangeFixed={this.onChangeSeverity.bind(this)}
+              />
+            </div>
+
+            <div className="text-left pull-left hidden"
               style={{'verticalAlign': 'middle', 'lineHeight': 2.2}}>
               <Select
                 value={this.state.selectedSeverity.join(',')}
@@ -312,10 +326,3 @@ class Incidents extends React.Component {
     )
   }
 }
-
-const IncidentsForm = reduxForm({form: 'incidentSearchForm'})(Incidents)
-export default connect(
-  state => ({
-    initialValues: state.search.incidentParams
-  })
-)(IncidentsForm)
