@@ -17,7 +17,7 @@ export default class MetricPanel extends React.Component {
   loadCounts () { }
 
   showOpenIncidentsDiv () {
-    this.showIncidentSearch('')
+    this.showIncidentSearch('open')
   }
 
   showTodayIncidentsDiv () {
@@ -35,7 +35,7 @@ export default class MetricPanel extends React.Component {
   showIncidentSearch (filterType) {
     const {router} = this.props
     router.push({
-      pathname: '/search/incidents',
+      pathname: '/search',
       state: {
         filterType
       }

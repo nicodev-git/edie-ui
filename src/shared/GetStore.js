@@ -72,7 +72,6 @@ const initialState = {
     incidentDraw: 1,
     params: {
       query: '',
-      dateIndex: 0,
       workflow: '',
       collections: 'incident,event',
       severity: 'HIGH,MEDIUM',

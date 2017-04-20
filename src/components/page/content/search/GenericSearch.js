@@ -63,10 +63,12 @@ class GenericSearch extends React.Component {
         return this.renderData(this.getHighlighted(rowData.entity, rowData.highlights), false, rowData.type)
       }
     }]
+  }
 
-    const {filterType} = props.location.state || {}
+  componentWillMount () {
+    const {filterType} = this.props.location.state || {}
 
-    const params = assign({}, props.params)
+    const params = assign({}, this.props.params)
 
     if (filterType) {
       if (filterType === 'today') {
@@ -74,7 +76,7 @@ class GenericSearch extends React.Component {
         params.dateTo = moment().endOf('day').valueOf()
       } else if (filterType === 'month') {
         params.dateFrom = moment().startOf('month').valueOf()
-        params.dateto = moment().endOf('month').valueOf()
+        params.dateTo = moment().endOf('month').valueOf()
       } else if (filterType === 'open') {
         params.dateFrom = moment().startOf('year').valueOf()
         params.dateTo = moment().endOf('year').valueOf()

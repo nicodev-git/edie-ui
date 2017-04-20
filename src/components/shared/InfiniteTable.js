@@ -87,6 +87,10 @@ class InfiniteTable extends React.Component {
       isLoading: true
     })
 
+    if (this.lastRequest) {
+      this.lastRequest.abort()
+    }
+
     this.lastRequest = $.get(`${ROOT_URL}${url}?${encodeUrlParams(urlParams)}`).done(res => {
       const embedded = res._embedded
       const data = embedded[keys(embedded)[0]]
