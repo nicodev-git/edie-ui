@@ -1,24 +1,22 @@
 import React from 'react'
 import { Field } from 'redux-form'
-import { concat } from 'lodash'
 import {FlatButton, SelectField, MenuItem} from 'material-ui'
 
 import { FormInput, FormSelect } from 'components/modal/parts'
 import { underlineFocusStyle, inputStyle, selectedItemStyle } from 'style/materialStyles'
+import DateRangePicker2 from 'components/shared/DateRangePicker2'
 
-class IncidentsFormView extends React.Component {
+export default class IncidentsFormView extends React.Component {
   render () {
     const {
-      onSubmit,
-      searchOptions,
-      onChangeSearchOption,
+      fixedOptions,
+      onChangeFixed,
       onClickWorkflow,
-      collections,
+      severities,
       selectedSeverities,
       onChangeSeverity
     } = this.props
 
-    const savedSearchOptions = concat([], emptySearch, searchOptions)
     return (
       <form onSubmit={onSubmit}>
         <div className="text-center margin-md-top" >
@@ -27,11 +25,11 @@ class IncidentsFormView extends React.Component {
             selectedMenuItemStyle={selectedItemStyle}
             menuItemStyle={inputStyle}
             multiple
-            hintText="Collection"
+            hintText="Severity"
             value={selectedSeverities}
             onChange={onChangeSeverity}
           >
-            {collections.map(option =>
+            {severities.map(option =>
               <MenuItem
                 key={option.value}
                 insetChildren
@@ -41,12 +39,16 @@ class IncidentsFormView extends React.Component {
               />
             )}
           </SelectField>
+          <DateRangePicker2
+            startDate={startDate}
+            endDate={endDate}
+            onApply={onChangeDateRange}/>
+
+          <Field name="fixed" component={FormSelect} label="" options={fixedOptions} style={{verticalAlign: 'top', textAlign: 'left', maxWidth: '100px'}} onChange={onChangeFixed}/>
           <FlatButton label="Workflow" onTouchTap={onClickWorkflow} style={{marginTop: '4px', verticalAlign: 'top'}}/>
-          <Field name="searchOptionIndex" component={FormSelect} label="" options={savedSearchOptions} style={{verticalAlign: 'top', textAlign: 'left', maxWidth: '100px'}} onChange={onChangeSearchOption}/>
+
         </div>
       </form>
     )
   }
 }
-
-export default IncidentsFormView
