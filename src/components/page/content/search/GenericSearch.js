@@ -407,14 +407,13 @@ class GenericSearch extends React.Component {
       <Popover
         open={fieldPopoverOpen}
         anchorEl={anchorEl}
-        anchorOrigin={{horizontal: 'left', vertical: 'center'}}
-        targetOrigin={{horizontal: 'left', vertical: 'center'}}
+        anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
         canAutoPosition
         style={{marginLeft: '100px'}}
         onRequestClose={this.handleRequestClose.bind(this)}
       >
         <div className="padding-md-left">
-          <div className="inline padding-sm">
+          <div className="inline-block padding-sm">
             <h4>{selectedField.path}</h4>
           </div>
           <div className="pull-right padding-sm">
