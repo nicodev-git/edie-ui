@@ -50,17 +50,6 @@ class GenericSearch extends React.Component {
 
     this.state = {
     }
-
-    this.dateOptions = [{
-      name: 'Last 24 hours',
-      from: moment().add(-24, 'hours').valueOf(),
-      to: moment().valueOf()
-    }, {
-      name: 'Any time',
-      from: 0,
-      to: 0
-    }]
-
     this.cells = [{
       'displayName': ' ',
       'columnName': 'entity.id',
@@ -182,10 +171,7 @@ class GenericSearch extends React.Component {
     this.props.updateQueryChips(newQueryChips)
 
     this.props.updateSearchParams(assign({}, this.props.params, {
-      query: newQueryChips.map(m => `${m.name}=${m.value}`).join(' and '),
-      dateIndex: values.dateIndex,
-      dateFrom: this.dateOptions[values.dateIndex].from,
-      dateTo: this.dateOptions[values.dateIndex].to
+      query: newQueryChips.map(m => `${m.name}=${m.value}`).join(' and ')
     }))
 
     this.props.change('query', '')
@@ -292,9 +278,9 @@ class GenericSearch extends React.Component {
     this.props.updateQueryChips(newQueryChips)
     this.props.updateSearchParams(assign({}, this.props.params, {
       query,
-      dateIndex,
-      dateFrom: this.dateOptions[dateIndex].from,
-      dateTo: this.dateOptions[dateIndex].to,
+      // dateIndex,
+      // dateFrom: this.dateOptions[dateIndex].from,
+      // dateTo: this.dateOptions[dateIndex].to,
       workflow: (workflows || []).map(m => m.id).join(',')
     }))
     this.props.replaceSearchWfs(workflows)
@@ -477,7 +463,6 @@ class GenericSearch extends React.Component {
         <TabPageHeader title="Search">
           <SearchFormView
             onSearchKeyDown={this.onSearchKeyDown.bind(this)}
-            dateOptions={this.dateOptions}
             searchOptions={this.getSearchOptions().map(m => ({label: m.name, value: m.id}))}
             onClickStar={this.onClickStar.bind(this)}
             starFilled={!!this.props.selectedSearchOption}
@@ -549,10 +534,8 @@ class GenericSearch extends React.Component {
                   showTableHeading={false}
                 />
               </div>
-
             </div>
           </div>
-
         </TabPageBody>
       </TabPage>
     )
