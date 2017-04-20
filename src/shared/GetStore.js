@@ -77,7 +77,7 @@ const initialState = {
       dateTo: 0,
       workflow: '',
       collections: 'incident,event',
-      severity: ['HIGH', 'MEDIUM']
+      severity: 'HIGH,MEDIUM'
     },
     incidentParams: {
       severity: ['HIGH', 'MEDIUM'],

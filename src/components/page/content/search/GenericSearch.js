@@ -341,7 +341,7 @@ class GenericSearch extends React.Component {
 
   onChangeSeverity (e, index, values) {
     this.props.updateSearchParams(assign({}, this.props.params, {
-      severity: values
+      severity: values.join(',')
     }))
   }
 
@@ -483,7 +483,7 @@ class GenericSearch extends React.Component {
             onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
             onChangeSearchOption={this.onChangeSearchOption.bind(this)}
             severities={severities}
-            selectedSeverities={severity}
+            selectedSeverities={severity.split(',')}
             onChangeSeverity={this.onChangeSeverity.bind(this)}
           />
 
