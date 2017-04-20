@@ -34,6 +34,14 @@ const fixedOptions = [
   {label: 'Fixed', value: 'true'}
 ]
 
+const severities = [
+  { label: 'High', value: 'HIGH' },
+  { label: 'Medium', value: 'MEDIUM' },
+  { label: 'Low', value: 'LOW' },
+  { label: 'Audit', value: 'AUDIT' },
+  { label: 'Ignore', value: 'IGNORE' }
+]
+
 export default class Incidents extends React.Component {
   constructor (props) {
     super(props)
@@ -277,6 +285,14 @@ export default class Incidents extends React.Component {
                 fixedOptions={fixedOptions}
                 fixed={incidentParams.fixed}
                 onChangeFixed={this.onChangeSeverity.bind(this)}
+
+                startDate={moment(incidentParams.afterStartTimestamp)}
+                endDate={moment(incidentParams.beforeStartTimestamp)}
+                onChangeDateRange={this.onChangeRange.bind(this)}
+
+                severities={severities}
+                selectedSeverities={incidentParams.severity}
+                onChangeSeverity={this.onChangeSeverity.bind(this)}
               />
             </div>
 

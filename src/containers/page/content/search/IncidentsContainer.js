@@ -17,7 +17,8 @@ import Incidents from 'components/page/content/search/Incidents'
   state => ({
     incidents: state.search.incidents,
     incidentDevices: state.search.incidentDevices,
-    incidentDraw: state.search.incidentDraw
+    incidentDraw: state.search.incidentDraw,
+    incidentParams: state.search.incidentParams
   }),
   dispatch => ({
     ...bindActionCreators({

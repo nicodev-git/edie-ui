@@ -78,6 +78,14 @@ const initialState = {
       collections: 'incident,event'
     },
     incidentParams: {
+      severity: ['HIGH', 'MEDIUM'],
+      fixed: '',
+      description: '',
+      deviceid: '*',
+      afterStartTimestamp: 0,
+      beforeStartTimestamp: 0,
+      sort: 'startTimestamp,desc',
+      draw: 1
     },
     queryChips: [],
     fields: [],
