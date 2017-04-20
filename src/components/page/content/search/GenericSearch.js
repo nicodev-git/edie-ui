@@ -37,6 +37,13 @@ const collections = [
   {label: 'incident', value: 'incident'},
   {label: 'event', value: 'event'}
 ]
+const severities = [
+  { label: 'High', value: 'HIGH' },
+  { label: 'Medium', value: 'MEDIUM' },
+  { label: 'Low', value: 'LOW' },
+  { label: 'Audit', value: 'AUDIT' },
+  { label: 'Ignore', value: 'IGNORE' }
+]
 class GenericSearch extends React.Component {
   constructor (props) {
     super(props)
@@ -447,9 +454,11 @@ class GenericSearch extends React.Component {
   }
 
   render () {
-    const { handleSubmit, selectedWf } = this.props
+    const { handleSubmit, selectedWf, params } = this.props
+    const { severity } = params
+    const selectedCollections = params.collections
     const workflow = this.props.workflows.filter(m => m.id === selectedWf)
-    const selectedCollections = this.props.params.collections
+
     return (
       <TabPage>
         <TabPageHeader title="Search">
@@ -467,6 +476,9 @@ class GenericSearch extends React.Component {
             onClickWorkflow={this.onClickWorkflow.bind(this)}
             onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
             onChangeSearchOption={this.onChangeSearchOption.bind(this)}
+            severities={severities}
+            selectedSeverities={severity}
+            onChangeSeverity={this.onChangeSeverity.bind(this)}
           />
 
           <div className="text-center">

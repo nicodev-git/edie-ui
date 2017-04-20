@@ -21,6 +21,11 @@ SearchFormView extends React.Component {
       searchOptions,
       onChangeSearchOption,
       onClickWorkflow,
+
+      severities,
+      selectedSeverities,
+      onChangeSeverity,
+
       collections,
       selectedCollections,
       onChangeCollection
@@ -39,6 +44,25 @@ SearchFormView extends React.Component {
         <div className="text-center margin-md-top" >
           <Field name="query" component={FormInput} label="Search" onKeyDown={onSearchKeyDown} style={{verticalAlign: 'top'}}/>
           <Field name="dateIndex" component={FormSelect} label="" options={options} style={{verticalAlign: 'top', maxWidth: '200px'}}/>
+          <SelectField
+            underlineStyle={underlineFocusStyle}
+            selectedMenuItemStyle={selectedItemStyle}
+            menuItemStyle={inputStyle}
+            multiple
+            hintText="Severity"
+            value={selectedSeverities}
+            onChange={onChangeSeverity}
+          >
+            {severities.map(option =>
+              <MenuItem
+                key={option.value}
+                insetChildren
+                checked={selectedSeverities && selectedSeverities.includes(option.value)}
+                value={option.value}
+                primaryText={option.label}
+              />
+            )}
+          </SelectField>
           <SelectField
             underlineStyle={underlineFocusStyle}
             selectedMenuItemStyle={selectedItemStyle}
