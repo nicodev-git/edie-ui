@@ -8,6 +8,8 @@ import {
   FETCH_FIELD_TOP_VALUES,
   UPDATE_QUERY_CHIPS,
 
+  UPDATE_INCIDENTS_PARAMS,
+
   OPEN_SEARCH_SAVE_POPOVER,
   CLOSE_SEARCH_SAVE_POPOVER,
 
@@ -168,5 +170,14 @@ export const addSearchWf = (workflow) => {
 export const removeSearchWf = (workflow) => {
   return dispatch => {
     dispatch({type: REMOVE_SEARCH_WF, workflow})
+  }
+}
+
+export const updateIncidentSearchParams = (params) => {
+  return function (dispatch) {
+    dispatch({
+      type: UPDATE_INCIDENTS_PARAMS,
+      params
+    })
   }
 }

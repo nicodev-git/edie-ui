@@ -8,7 +8,8 @@ import {
   fixIncident,
   ackIncident,
   searchIncidentDevices,
-  fixAllIncidentsByType
+  fixAllIncidentsByType,
+  updateIncidentSearchParams
 } from 'actions'
 import Incidents from 'components/page/content/search/Incidents'
 
@@ -26,7 +27,8 @@ import Incidents from 'components/page/content/search/Incidents'
       fixIncident,
       ackIncident,
       searchIncidentDevices,
-      fixAllIncidentsByType
+      fixAllIncidentsByType,
+      updateIncidentSearchParams
     }, dispatch)
   })
 )

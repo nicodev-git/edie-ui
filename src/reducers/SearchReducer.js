@@ -9,6 +9,7 @@ import {
   CLOSE_FIELDS_POPOVER,
   FETCH_FIELD_TOP_VALUES,
   UPDATE_QUERY_CHIPS,
+  UPDATE_INCIDENTS_PARAMS,
 
   FETCH_SEARCH_OPTIONS,
   ADD_SEARCH_OPTION,
@@ -93,6 +94,8 @@ export default function (state = {}, action) {
       return { ...state, selectedWfs: concat(state.selectedWfs, action.workflow) }
     case REMOVE_SEARCH_WF:
       return { ...state, selectedWfs: state.selectedWfs.filter(p => p.id !== action.workflow.id) }
+    case UPDATE_INCIDENTS_PARAMS:
+      return { ...state, incidentParams: action.params }
   }
   return state
 }

@@ -4,6 +4,7 @@ import moment from 'moment'
 import TimeAgo from 'react-timeago'
 import ReactTooltip from 'react-tooltip'
 import { RaisedButton } from 'material-ui'
+import { assign } from 'lodash'
 
 import DateRangePicker2 from '../../../shared/DateRangePicker2'
 import InfiniteTable from '../../../shared/InfiniteTable'
@@ -215,23 +216,26 @@ export default class Incidents extends React.Component {
     showIncidentDetail(sel)
   }
 
-  onChangeSeverity (selected) {
-    this.setState({
-      selectedSeverity: selected.map(item => item.value)
-    })
+  onChangeSeverity (e, index, values) {
+    // this.setState({
+    //   selectedSeverity: selected.map(item => item.value)
+    // })
+    this.props.updateIncidentSearchParams(assign({}, this.props.incidentParams, {
+      severity: values
+    }))
   }
 
   onFixedChange (e) {
-    this.setState({
+    this.props.updateIncidentSearchParams(assign({}, this.props.incidentParams, {
       fixed: e.target.value || null
-    })
+    }))
   }
 
   onChangeRange ({startDate, endDate}) {
-    this.setState({
+    this.props.updateIncidentSearchParams(assign({}, this.props.incidentParams, {
       afterStartTimestamp: startDate.valueOf(),
       beforeStartTimestamp: endDate.valueOf()
-    })
+    }))
   }
 
   onClickSearchDevice () {

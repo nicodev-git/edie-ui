@@ -80,7 +80,7 @@ const initialState = {
     },
     incidentParams: {
       severity: ['HIGH', 'MEDIUM'],
-      fixed: '',
+      fixed: 'false',
       description: '',
       deviceid: '*',
       afterStartTimestamp: moment().startOf('year').valueOf(),
