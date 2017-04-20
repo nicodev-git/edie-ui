@@ -1,6 +1,6 @@
 import React from 'react'
 import { Field } from 'redux-form'
-import { concat } from 'lodash'
+import { concat, findIndex } from 'lodash'
 import {FlatButton, SelectField, MenuItem} from 'material-ui'
 import ActionSearch from 'material-ui/svg-icons/action/search'
 import ToggleStar from 'material-ui/svg-icons/toggle/star-border'
@@ -16,6 +16,13 @@ export default class SearchFormView extends React.Component {
     return (
       <FlatButton label={label}/>
     )
+  }
+  severityRenderer (severities, values) {
+    if (!values.length || values.length === severities.length) return 'All'
+    return values.map(value => {
+      const i = findIndex(severities, {value})
+      return severities[i].label
+    }).join(', ')
   }
   render () {
     const { onSearchKeyDown,
@@ -57,6 +64,8 @@ export default class SearchFormView extends React.Component {
             hintText="Severity"
             value={selectedSeverities}
             onChange={onChangeSeverity}
+            className="text-left"
+            selectionRenderer={this.severityRenderer.bind(this, severities)}
           >
             {severities.map(option =>
               <MenuItem
