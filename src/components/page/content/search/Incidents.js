@@ -7,6 +7,8 @@ import {
   ButtonGroup,
   Button
 } from 'react-bootstrap'
+import { reduxForm } from 'redux-form'
+import {connect} from 'react-redux'
 
 import DateRangePicker2 from '../../../shared/DateRangePicker2'
 import InfiniteTable from '../../../shared/InfiniteTable'
@@ -27,7 +29,7 @@ import {
 import { thumbup, thumpdown, done, notdone, openicon, reasonx,
   rawtext, reason } from '../../../../style/materialStyles'
 
-export default class Incidents extends React.Component {
+class Incidents extends React.Component {
   constructor (props) {
     super(props)
 
@@ -310,3 +312,10 @@ export default class Incidents extends React.Component {
     )
   }
 }
+
+const IncidentsForm = reduxForm({form: 'incidentSearchForm'})(Incidents)
+export default connect(
+  state => ({
+    initialValues: state.search.incidentParams
+  })
+)(IncidentsForm)
