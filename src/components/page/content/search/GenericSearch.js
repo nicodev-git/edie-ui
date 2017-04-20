@@ -12,6 +12,7 @@ import TabPage from '../../../shared/TabPage'
 import TabPageBody from '../../../shared/TabPageBody'
 import TabPageHeader from '../../../shared/TabPageHeader'
 import { imageBaseUrl, parseSearchQuery, guid } from 'shared/Global'
+import { showConfirm } from 'components/shared/Alert'
 
 import SearchFormView from './SearchFormView'
 import SearchSavePopover from './SearchSavePopover'
@@ -238,9 +239,14 @@ class GenericSearch extends React.Component {
 
     const searchOptions = this.getSearchOptions()
     if (selectedSearchOption) {
-      change('searchOptionIndex', '')
       const found = searchOptions.filter(i => i.id === selectedSearchOption)
-      if (userInfo && found.length) removeSearchOption(userInfo, found[0])
+      if (userInfo && found.length) {
+        showConfirm('Click OK to remove.', (btn) => {
+          if (btn !== 'ok') return
+          change('searchOptionIndex', '')
+          removeSearchOption(userInfo, found[0])
+        })
+      }
     } else {
       openSearchSavePopover(null, e.target)
     }
