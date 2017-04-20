@@ -227,10 +227,10 @@ export default class MainEvents extends Component {
         <TabPageHeader title={device.name}>
           <div className="text-center margin-md-top">
             <div className="pull-right">
-              <RaisedButton onTouchTap={this.onClickMakeRule.bind(this)}>Make Workflow</RaisedButton>&nbsp;
-              <RaisedButton onTouchTap={this.onClickDeleteRaw.bind(this)}>Delete All</RaisedButton>&nbsp;
-              <RaisedButton onTouchTap={this.onClickMarkIgnored.bind(this)}>Mark as ignored</RaisedButton>&nbsp;
-              <RaisedButton onTouchTap={this.onClickRawSimulator.bind(this)}>Simulator</RaisedButton>&nbsp;
+              <RaisedButton onTouchTap={this.onClickMakeRule.bind(this)} label="Make Workflow"/>&nbsp;
+              <RaisedButton onTouchTap={this.onClickDeleteRaw.bind(this)} label="Delete All"/>&nbsp;
+              <RaisedButton onTouchTap={this.onClickMarkIgnored.bind(this)} label="Mark as ignored"/>&nbsp;
+              <RaisedButton onTouchTap={this.onClickRawSimulator.bind(this)} label="Simulator"/>&nbsp;
             </div>
 
             <div style={{margin: '0 auto', position: 'relative', width: '550px', textAlign: 'center'}}>

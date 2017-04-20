@@ -1,7 +1,5 @@
 import React from 'react'
-import {
-  ButtonGroup, Button
-} from 'react-bootstrap'
+import {RaisedButton} from 'material-ui'
 
 import InfiniteTable from '../../../../../shared/InfiniteTable'
 import MainTabs from '../MainTabs'
@@ -100,14 +98,10 @@ export default class MainWorkflows extends React.Component {
         <TabPageHeader title={device.name}>
           <div className="text-center margin-md-top">
             <div className="pull-right">
-              <ButtonGroup>
-
-                <Button onClick={this.onClickAdd.bind(this)}>Add</Button>
-                <Button onClick={this.onClickAddSys.bind(this)}>Add System Workflow</Button>
-                <Button onClick={this.onClickEdit.bind(this)}>Edit</Button>
-                <Button onClick={this.onClickRemove.bind(this)}>Remove</Button>
-
-              </ButtonGroup>
+              <RaisedButton onTouchTap={this.onClickAdd.bind(this)} label="Add"/>&nbsp;
+              <RaisedButton onTouchTap={this.onClickAddSys.bind(this)} label="Add System Workflow"/>&nbsp;
+              <RaisedButton onTouchTap={this.onClickEdit.bind(this)} label="Edit"/>&nbsp;
+              <RaisedButton onTouchTap={this.onClickRemove.bind(this)} label="Remove"/>
             </div>
           </div>
         </TabPageHeader>
