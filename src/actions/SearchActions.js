@@ -21,6 +21,7 @@ import {
   SELECT_SEARCH_WF,
   ADD_SEARCH_WF,
   REMOVE_SEARCH_WF,
+  REPLACE_SEARCH_WFS,
 
   UPDATE_USER_INFO
 } from './types'
@@ -170,6 +171,12 @@ export const addSearchWf = (workflow) => {
 export const removeSearchWf = (workflow) => {
   return dispatch => {
     dispatch({type: REMOVE_SEARCH_WF, workflow})
+  }
+}
+
+export const replaceSearchWfs = (workflows) => {
+  return dispatch => {
+    dispatch({type: REPLACE_SEARCH_WFS, workflows})
   }
 }
 

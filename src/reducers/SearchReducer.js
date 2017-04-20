@@ -26,7 +26,8 @@ import {
   SELECT_WF_ROW,
   SELECT_SEARCH_WF,
   ADD_SEARCH_WF,
-  REMOVE_SEARCH_WF
+  REMOVE_SEARCH_WF,
+  REPLACE_SEARCH_WFS
 } from '../actions/types'
 import { concat } from 'lodash'
 
@@ -94,6 +95,8 @@ export default function (state = {}, action) {
       return { ...state, selectedWfs: concat(state.selectedWfs, action.workflow) }
     case REMOVE_SEARCH_WF:
       return { ...state, selectedWfs: state.selectedWfs.filter(p => p.id !== action.workflow.id) }
+    case REPLACE_SEARCH_WFS:
+      return { ...state, selectedWfs: action.workflows || [] }
     case UPDATE_INCIDENTS_PARAMS:
       return { ...state, incidentParams: action.params }
   }

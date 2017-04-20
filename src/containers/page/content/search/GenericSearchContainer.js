@@ -30,7 +30,8 @@ import {
   selectWfRow,
   selectSearchWf,
   addSearchWf,
-  removeSearchWf
+  removeSearchWf,
+  replaceSearchWfs
 } from 'actions'
 
 @withRouter
@@ -86,7 +87,8 @@ import {
       selectWfRow,
       selectSearchWf,
       addSearchWf,
-      removeSearchWf
+      removeSearchWf,
+      replaceSearchWfs
     }, dispatch)
   })
 )

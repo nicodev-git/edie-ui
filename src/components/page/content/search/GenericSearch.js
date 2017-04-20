@@ -256,7 +256,11 @@ class GenericSearch extends React.Component {
       name: values.name,
       data: {
         dateIndex,
-        query
+        query,
+        workflows: this.props.selectedWfs.map(p => ({
+          id: p.id,
+          name: p.name
+        }))
       }
     }
 
@@ -270,7 +274,7 @@ class GenericSearch extends React.Component {
       found.push({data: {query: '', dateIndex: 0}})
     }
 
-    const { query, dateIndex } = found[0].data
+    const { query, dateIndex, workflows } = found[0].data
 
     const newQueryChips = parseSearchQuery(query)
     this.props.updateQueryChips(newQueryChips)
@@ -278,9 +282,10 @@ class GenericSearch extends React.Component {
       query,
       dateIndex,
       dateFrom: this.dateOptions[dateIndex].from,
-      dateTo: this.dateOptions[dateIndex].to
+      dateTo: this.dateOptions[dateIndex].to,
+      workflow: (workflows || []).map(m => m.id).join(',')
     }))
-
+    this.props.replaceSearchWfs(workflows)
     this.props.change('query', '')
     this.props.change('dateIndex', dateIndex)
   }
