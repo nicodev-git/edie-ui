@@ -819,7 +819,7 @@ export default class ThreatMap extends Component {
                 ),
                 attack.action || '',
                 attack.severity)
-
+      console.log('added attack row2')
       me.showObject(attack.from, true, () => {
         me.showObject(attack.to, true, () => {
           me.showAttack(attack.from, attack.to, attack.color, attack.linetype, attack.count)
@@ -838,20 +838,14 @@ export default class ThreatMap extends Component {
   onTickReal () {
     let me = this
     if (me.currentPlay.stopped) return
-    $.get(`${ROOT_URL}${Api.bi.threatMapEventsReal}?minutes=1`, { // eslint-disable-line no-undef
+    $.get(`${ROOT_URL}/incident/threatmap?dateFrom=0&dateTo=0`, { // eslint-disable-line no-undef
 
     }).done((res) => {
       if (me.cancelled) return
       let incidents = []
-      let lastId = me.lastIncidentId
-      res.object.forEach(item => {
-        if (item['id'] > me.lastIncidentId) {
-          incidents.push(item)
-          if (item['id'] > lastId) lastId = item['id']
-        }
+      res.forEach(item => {
+        incidents.push(item)
       })
-      me.lastIncidentId = lastId
-
       if (incidents.length === 0) return
 
       me.reset()
@@ -868,7 +862,7 @@ export default class ThreatMap extends Component {
                         attack.type,
                         attack.action || '',
                         attack.severity)
-
+          console.log('added attack row1')
           me.showObject(attack.from, true, () => {
             me.showObject(attack.to, true, () => {
               me.playAttack(attack.from, attack.to, attack.color, attack.linetype, attack.count)
@@ -1262,7 +1256,7 @@ export default class ThreatMap extends Component {
         attackers[attackerIP] = attacker
       }
 
-      let time = item['starttimestamp']
+      let time = item['startTimestamp']
       if (!screen || screen.time !== time) {
         screen = {
           time: time,
@@ -1271,13 +1265,13 @@ export default class ThreatMap extends Component {
         scene.push(screen)
       }
 
-      let severity = item['incidentseverity'].toLowerCase()
+      let severity = item['severity'].toLowerCase()
 
       screen.attacks.push({
         from: attacker,
         to: device,
         type: item['description'],
-        action: item['incidenttype'],
+        action: item['incidentType'],
         count: 1,
 
         linetype: 'curve',
