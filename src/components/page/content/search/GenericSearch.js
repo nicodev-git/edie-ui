@@ -49,6 +49,7 @@ class GenericSearch extends React.Component {
     super(props)
 
     this.state = {
+      total: 0
     }
     this.cells = [{
       'displayName': ' ',
@@ -373,7 +374,7 @@ class GenericSearch extends React.Component {
   }
 
   onResultCountUpdate (total) {
-    console.log(`Total: ${total}`)
+    this.setState({total})
   }
 
   renderFields () {
@@ -557,6 +558,9 @@ class GenericSearch extends React.Component {
             <div className="flex-1 flex-vertical padding-sm">
               <div className="header-red">
                 Content
+                <div className="pull-right">
+                  Total: {this.state.total}
+                </div>
               </div>
               <div className="flex-1">
                 <InfiniteTable
