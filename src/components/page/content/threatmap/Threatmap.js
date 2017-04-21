@@ -150,6 +150,7 @@ export default class ThreatMap extends Component {
 
   onAddThreat (msg) {
     const me = this
+    if (me.state.mode === 'demo') return
     me.reset()
 
     console.log(msg)
@@ -1265,7 +1266,7 @@ export default class ThreatMap extends Component {
           ip: deviceIP,
           name: item['targetIP'],
 
-          country: countries[item['targetCountry']].name,
+          country: countries[item['targetCountry'] || 'US'].name,
 
           img: '/images/threatmap/RoundedPin.png',
 
@@ -1284,7 +1285,7 @@ export default class ThreatMap extends Component {
           ip: attackerIP,
           name: item['attackerIP'],
 
-          country: countries[item['attackerCountry']].name,
+          country: countries[item['attackerCountry'] || 'US'].name,
 
           img: '/images/threatmap/SquarePin.png',
 
