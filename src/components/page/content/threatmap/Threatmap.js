@@ -4,12 +4,12 @@ import {assign, findIndex} from 'lodash'
 import d3 from 'd3'
 import moment from 'moment'
 import Transition from 'react-addons-css-transition-group'
-
 import 'react-datepicker/dist/react-datepicker.css'
 import DatePicker from 'react-datepicker'
 import {countries} from 'country-data'
 
 import countryLatlng from 'shared/data/country-latlng'
+import IncidentSocket from 'util/socket/IncidentSocket'
 
 import { appendComponent, removeComponent } from '../../../../util/Component'
 import Preloader from '../../../shared/Preloader'
@@ -65,7 +65,7 @@ export default class ThreatMap extends Component {
 
       buffer: [],
       buffertimer: 0,
-      severities: ['High', 'Medium', 'Low'],
+      severities: ['HIGH', 'MEDIUM', 'LOW'],
       lastIncidentId: 0,
 
       incidentTimer: 0,
@@ -84,9 +84,15 @@ export default class ThreatMap extends Component {
 
     this.initDemoScenario()
   }
-
   componentDidMount () {
-    let me = this
+    const me = this
+
+    this.incidentSocket = new IncidentSocket({
+      listeners: {
+        'threat': this.onAddThreat.bind(this)
+      }
+    })
+    this.incidentSocket.connect()
 
     me.vmap = $(this.refs.mapDiv).vectorMap({ // eslint-disable-line no-undef
       map: 'world_mill_en',
@@ -133,11 +139,40 @@ export default class ThreatMap extends Component {
   }
 
   componentWillUnmount () {
-    let me = this
+    const me = this
+    this.incidentSocket.close()
+
     me.cancelled = true
     me.stop()
     clearInterval(me.buffertimer)
     me.vmap.remove()
+  }
+
+  onAddThreat (msg) {
+    const me = this
+    me.reset()
+
+    console.log(msg)
+    let scenes = me.buildScene([msg])
+    me.currentPlay.scene = scenes
+
+    scenes.forEach(scene => {
+      scene.attacks.forEach(attack => {
+        if (me.severities.indexOf(attack.severity) < 0) return
+        me.addAttackRow(attack.from,
+                      attack.to,
+                      moment(scene.time).format('HH:mm:ss'),
+                      attack.type,
+                      attack.action || '',
+                      attack.severity)
+        me.showObject(attack.from, true, () => {
+          me.showObject(attack.to, true, () => {
+            me.showAttack(attack.from, attack.to, attack.color, attack.linetype, attack.count)
+            me.showBlast(attack.to, attack.color)
+          })
+        })
+      })
+    })
   }
 
   renderSlider () {
@@ -773,7 +808,7 @@ export default class ThreatMap extends Component {
   }
 
   updateObjectPosition (device) {
-    let me = this
+    const me = this
 
     if (!device.visible) return
     let img = device.imgObj
@@ -798,7 +833,7 @@ export default class ThreatMap extends Component {
     // ///////////////////////////////////////////////////////////////////
 
   onPlayFrame () {
-    let me = this
+    const me = this
 
     if (me.currentPlay.stopped || me.currentPlay.paused) return
     if (me.currentPlay.screen >= me.currentPlay.scene.length) return
@@ -807,7 +842,6 @@ export default class ThreatMap extends Component {
 
     screen.attacks.forEach(attack => {
       if (me.severities.indexOf(attack.severity) < 0) return
-
       me.addAttackRow(
                 attack.id,
                 attack.from,
@@ -819,7 +853,6 @@ export default class ThreatMap extends Component {
                 ),
                 attack.action || '',
                 attack.severity)
-      console.log('added attack row2')
       me.showObject(attack.from, true, () => {
         me.showObject(attack.to, true, () => {
           me.showAttack(attack.from, attack.to, attack.color, attack.linetype, attack.count)
@@ -830,56 +863,57 @@ export default class ThreatMap extends Component {
   }
 
   onPlayEnd () {
-    let me = this
+    const me = this
     me.stop()
     me.setState({ playing: false })
   }
 
   onTickReal () {
-    let me = this
+    const me = this
     if (me.currentPlay.stopped) return
-    $.get(`${ROOT_URL}/incident/threatmap?dateFrom=0&dateTo=0`, { // eslint-disable-line no-undef
 
-    }).done((res) => {
-      if (me.cancelled) return
-      let incidents = []
-      res.forEach(item => {
-        incidents.push(item)
-      })
-      if (incidents.length === 0) return
-
-      me.reset()
-
-      let scenes = me.buildScene(incidents)
-      me.currentPlay.scene = scenes
-
-      scenes.forEach(scene => {
-        scene.attacks.forEach(attack => {
-          if (me.severities.indexOf(attack.severity) < 0) return
-          me.addAttackRow(attack.from,
-                        attack.to,
-                        moment(scene.time).format('HH:mm:ss'),
-                        attack.type,
-                        attack.action || '',
-                        attack.severity)
-          console.log('added attack row1')
-          me.showObject(attack.from, true, () => {
-            me.showObject(attack.to, true, () => {
-              me.playAttack(attack.from, attack.to, attack.color, attack.linetype, attack.count)
-              me.showBlast(attack.to, attack.color)
-            })
-          })
-        })
-      })
-    }).always(() => {
-      me.currentPlay.timer = setTimeout(() => {
-        me.onTickReal()
-      }, 5000)
-    })
+    me.reset()
+    // $.get(`${ROOT_URL}/incident/threatmap?dateFrom=0&dateTo=0`, { // eslint-disable-line no-undef
+    //
+    // }).done((res) => {
+    //   if (me.cancelled) return
+    //   let incidents = []
+    //   res.forEach(item => {
+    //     incidents.push(item)
+    //   })
+    //   if (incidents.length === 0) return
+    //
+    //   me.reset()
+    //
+    //   let scenes = me.buildScene(incidents)
+    //   me.currentPlay.scene = scenes
+    //
+    //   scenes.forEach(scene => {
+    //     scene.attacks.forEach(attack => {
+    //       if (me.severities.indexOf(attack.severity) < 0) return
+    //       me.addAttackRow(attack.from,
+    //                     attack.to,
+    //                     moment(scene.time).format('HH:mm:ss'),
+    //                     attack.type,
+    //                     attack.action || '',
+    //                     attack.severity)
+    //       me.showObject(attack.from, true, () => {
+    //         me.showObject(attack.to, true, () => {
+    //           me.showAttack(attack.from, attack.to, attack.color, attack.linetype, attack.count)
+    //           me.showBlast(attack.to, attack.color)
+    //         })
+    //       })
+    //     })
+    //   })
+    // }).always(() => {
+    //   me.currentPlay.timer = setTimeout(() => {
+    //     me.onTickReal()
+    //   }, 5000)
+    // })
   }
 
   onSeek (newpos) {
-    let me = this
+    const me = this
 
     if (!me.currentPlay || !me.currentPlay.scene) return
     me.currentPlay.stopped = false
@@ -921,7 +955,8 @@ export default class ThreatMap extends Component {
     // ///////////////////////////////////////////////////////////////////
 
   addAttackRow (id, attacker, target, time, type, action, severity) {
-    let me = this
+    const me = this
+    console.log('add attack row')
     me.buffer.push({
       id: id,
       time: time,
@@ -1217,7 +1252,7 @@ export default class ThreatMap extends Component {
 
     let screen
     incidents.forEach(item => {
-      let deviceIP = item['destinationip']
+      let deviceIP = item['targetIP']
       let device = devices[deviceIP]
 
       if (!device) {
@@ -1225,9 +1260,9 @@ export default class ThreatMap extends Component {
           id: deviceIP,
 
           ip: deviceIP,
-          name: item['destinationName'],
+          name: item['targetIP'],
 
-          country: item['destinationCountry'] || item['devicecounty'],
+          country: item['targetCountry'],
 
           img: '/images/threatmap/RoundedPin.png',
 
@@ -1237,16 +1272,16 @@ export default class ThreatMap extends Component {
         devices[deviceIP] = device
       }
 
-      let attackerIP = item['ipcountry']
+      let attackerIP = item['attackerIP']
       let attacker = attackers[attackerIP]
       if (!attacker) {
         attacker = {
-          id: attackerIP,
+          id: item['id'],
 
-          ip: item['ipaddress'],
-          name: item['name'],
+          ip: attackerIP,
+          name: item['attackerIP'],
 
-          country: item['ipcountry'],
+          country: item['attackerCountry'],
 
           img: '/images/threatmap/SquarePin.png',
 
@@ -1256,7 +1291,7 @@ export default class ThreatMap extends Component {
         attackers[attackerIP] = attacker
       }
 
-      let time = item['startTimestamp']
+      let time = item['timestamp']
       if (!screen || screen.time !== time) {
         screen = {
           time: time,
@@ -1265,17 +1300,17 @@ export default class ThreatMap extends Component {
         scene.push(screen)
       }
 
-      let severity = item['severity'].toLowerCase()
+      let severity = item['severity']
 
       screen.attacks.push({
         from: attacker,
         to: device,
-        type: item['description'],
-        action: item['incidentType'],
+        type: item['attack'],
+        action: item['action'],
         count: 1,
 
         linetype: 'curve',
-        color: colors[severity] || 'red',
+        color: colors[severity.toLowerCase()] || 'red',
         severity: severity
       })
     })
@@ -1311,6 +1346,15 @@ export default class ThreatMap extends Component {
     return latlng
   }
 
+  renderHistoryCheck () {
+    // return (
+    //   <div className="checkbox">
+    //     <label>
+    //       <input type="checkbox" checked={this.state.history} ref="history" onChange={this.onChangeHistoryCheck.bind(this)}/>History
+    //     </label>
+    //   </div>
+    // )
+  }
   render () {
     return (
       <div className="flex-vertical flex-1">
@@ -1323,13 +1367,7 @@ export default class ThreatMap extends Component {
           </select>
 
           <div className={`form-group ${this.state.mode === 'real' ? '' : 'hidden'}`}>
-
-            <div className="checkbox">
-              <label>
-                <input type="checkbox" checked={this.state.history} ref="history"
-                  onChange={this.onChangeHistoryCheck.bind(this)}/>History
-              </label>
-            </div>
+            {this.renderHistoryCheck()}
 
             <div className={`inline margin-md-left ${this.state.history ? '' : 'hidden'}`}>
               <label className="pt-none control-label">From: </label>
