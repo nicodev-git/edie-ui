@@ -92,13 +92,13 @@ export default class ThreatMap extends Component {
     me.vmap = $(this.refs.mapDiv).vectorMap({ // eslint-disable-line no-undef
       map: 'world_mill_en',
 
-      backgroundColor: '#E8E8E9',
-      // zoomMax: 1,
+      backgroundColor: '#3C6A81',
+      zoomMax: 1,
 
       regionStyle: {
         initial: {
-          'fill': '#404047',
-          'fill-opacity': 0.8,
+          'fill': '#E8E8E9',
+          'fill-opacity': 1,
           'stroke': 'none',
           'stroke-width': 1,
           'stroke-opacity': 1
