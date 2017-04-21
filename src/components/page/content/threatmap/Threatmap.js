@@ -9,10 +9,11 @@ import 'react-datepicker/dist/react-datepicker.css'
 import DatePicker from 'react-datepicker'
 import {countries} from 'country-data'
 
-import countryLatlng from 'shared/data/country-latlng.json'
+import countryLatlng from 'shared/data/country-latlng'
 
 import { appendComponent, removeComponent } from '../../../../util/Component'
 import Preloader from '../../../shared/Preloader'
+import CustomHandle from './CustomHandle'
 
 import { format } from '../../../../shared/Global'
 import { ROOT_URL } from '../../../../actions/config'
@@ -140,33 +141,6 @@ export default class ThreatMap extends Component {
   }
 
   renderSlider () {
-    const handleStyle = {
-      position: 'absolute',
-      transform: 'translate(-50%, -50%)',
-      cursor: 'pointer',
-      padding: '2px',
-      border: '2px solid #94EE2E',
-      borderRadius: '3px',
-      background: '#94EE2E',
-      fontSize: '14px',
-      textAlign: 'center',
-      zIndex: 3,
-
-      minHeight: '24px',
-      marginTop: '3px'
-    }
-
-    const CustomHandle = props => {
-      const style = assign({left: `${props.offset}%`}, handleStyle)
-      return (
-                <div style={style} />
-      )
-    }
-    // CustomHandle.propTypes = {
-    //   value: React.PropTypes.any, // eslint-disable-line react/forbid-prop-types
-    //   offset: React.PropTypes.number
-    // }
-
     return (
             <Slider min={this.state.sliderMin} max={this.state.sliderMax}
               value={this.state.sliderPos} handle={<CustomHandle />}
@@ -1041,7 +1015,7 @@ export default class ThreatMap extends Component {
                     .attr('height', 24)
                     .text(device.name)
                     .attr('class', 'map-item')
-                    .attr('fill', '#fff')
+                    .attr('fill', 'black')
                     .attr('font-size', '0.9em')
 
         if (anim) {
