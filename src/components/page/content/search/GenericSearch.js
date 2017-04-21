@@ -372,6 +372,10 @@ class GenericSearch extends React.Component {
     }))
   }
 
+  onResultCountUpdate (total) {
+    console.log(`Total: ${total}`)
+  }
+
   renderFields () {
     const {selectedField} = this.props
     return (
@@ -565,6 +569,7 @@ class GenericSearch extends React.Component {
                   params={this.props.params}
                   pageSize={10}
                   showTableHeading={false}
+                  onUpdateCount={this.onResultCountUpdate.bind(this)}
                 />
               </div>
             </div>

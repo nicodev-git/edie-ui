@@ -29,6 +29,11 @@ class InfiniteTable extends React.Component {
     this.lastRequest = null
   }
 
+  componentWillMount () {
+    const {onUpdateCount} = this.props
+    onUpdateCount && onUpdateCount(0)
+  }
+
   componentDidMount () {
     // if (this.props.useExternal) {
     //   this.getExternalData()
@@ -75,7 +80,7 @@ class InfiniteTable extends React.Component {
     //   return
     // }
 
-    const {url, params, pageSize} = this.props
+    const {url, params, pageSize, onUpdateCount} = this.props
     if (!url) return
     page = clear ? 1 : (page || 1)
     let urlParams = assign({
@@ -95,16 +100,18 @@ class InfiniteTable extends React.Component {
       const embedded = res._embedded
       const data = embedded[keys(embedded)[0]]
 
+      const total = res.page.totalElements
       let state = {
         results: concat((clear ? [] : this.state.results), data),
         currentPage: page - 1,
         maxPages: res.page.totalPages,
-        total: res.page.totalElements,
+        total,
         isLoading: false,
         hasMore: data.length > 0
       }
 
       this.setState(state)
+      onUpdateCount && onUpdateCount(total)
     })
 
     return this.lastRequest
