@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Slider from 'rc-slider'
-import {assign, findIndex} from 'lodash'
+import {assign, findIndex, isArray} from 'lodash'
 import d3 from 'd3'
 import moment from 'moment'
 import Transition from 'react-addons-css-transition-group'
@@ -150,11 +150,11 @@ export default class ThreatMap extends Component {
 
   onAddThreat (msg) {
     const me = this
+    console.log(msg)
     if (me.state.mode === 'demo') return
     me.reset()
 
-    console.log(msg)
-    let scenes = me.buildScene([msg])
+    let scenes = me.buildScene(isArray(msg) ? msg : [msg])
     me.currentPlay.scene = scenes
 
     scenes.forEach(scene => {
