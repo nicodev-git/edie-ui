@@ -1,17 +1,15 @@
 import React, { Component } from 'react'
 import Slider from 'rc-slider'
-import {
-  assign
-} from 'lodash'
+import {assign, findIndex} from 'lodash'
 import d3 from 'd3'
 import moment from 'moment'
 import Transition from 'react-addons-css-transition-group'
 
 import 'react-datepicker/dist/react-datepicker.css'
 import DatePicker from 'react-datepicker'
-import {lookup} from 'country-data'
+import {countries} from 'country-data'
 
-const countryLatlng = null
+import countryLatlng from 'shared/data/country-latlng.json'
 
 import { appendComponent, removeComponent } from '../../../../util/Component'
 import Preloader from '../../../shared/Preloader'
@@ -970,8 +968,8 @@ export default class ThreatMap extends Component {
   }
 
   findCountry (attack) {
-    const found = lookup.countries({name: attack.country})
-    if (found.length === 0) {
+    const index = findIndex(countries.all, {name: attack.country})
+    if (index < 0) {
       return {
         name: '',
         code: '_European Union'
@@ -979,8 +977,8 @@ export default class ThreatMap extends Component {
     }
 
     return {
-      name: found[0].name,
-      code: found[0].alpha2.toLowerCase()
+      name: countries.all[index].name,
+      code: countries.all[index].alpha2.toLowerCase()
     }
   }
 
@@ -1334,12 +1332,12 @@ export default class ThreatMap extends Component {
   }
 
   getCountryLatLng (name) {
-    let found = lookup.countries({name})
-    if (found === 0) return null
-    let code = found[0].alpha2
+    const index = findIndex(countries.all, {name})
+    if (index < 0) return null
+    const code = countries.all[index].alpha2
     if (!code) return null
 
-    let latlng = countryLatlng[code]
+    const latlng = countryLatlng[code]
     if (!latlng || !latlng.length) return null
 
     return latlng
