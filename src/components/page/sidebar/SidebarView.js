@@ -104,7 +104,7 @@ class SidebarView extends Component {
               if (item.group && !group) return null
               return (
                 <li key={index} className={pageId === item.id ? 'active open' : ''}
-                  onClick={onDeviceMenu.bind(this, index)}>
+                  onClick={onDeviceMenu.bind(this, index)} data-tip={item.title}>
                   <a href="javascript:;">
                     <i className={`fa fa-lg fa-fw ${item.icon}`} />{item.title}
                   </a>
