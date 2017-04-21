@@ -159,12 +159,15 @@ export default class ThreatMap extends Component {
     scenes.forEach(scene => {
       scene.attacks.forEach(attack => {
         if (me.severities.indexOf(attack.severity) < 0) return
-        me.addAttackRow(attack.from,
-                      attack.to,
-                      moment(scene.time).format('HH:mm:ss'),
-                      attack.type,
-                      attack.action || '',
-                      attack.severity)
+        me.addAttackRow(
+          attack.id,
+          attack.from,
+          attack.to,
+          moment(scene.time).format('HH:mm:ss'),
+          attack.type,
+          attack.action || '',
+          attack.severity
+        )
         me.showObject(attack.from, true, () => {
           me.showObject(attack.to, true, () => {
             me.showAttack(attack.from, attack.to, attack.color, attack.linetype, attack.count)
@@ -1262,7 +1265,7 @@ export default class ThreatMap extends Component {
           ip: deviceIP,
           name: item['targetIP'],
 
-          country: item['targetCountry'],
+          country: countries[item['targetCountry']].name,
 
           img: '/images/threatmap/RoundedPin.png',
 
@@ -1276,12 +1279,12 @@ export default class ThreatMap extends Component {
       let attacker = attackers[attackerIP]
       if (!attacker) {
         attacker = {
-          id: item['id'],
+          id: attackerIP,
 
           ip: attackerIP,
           name: item['attackerIP'],
 
-          country: item['attackerCountry'],
+          country: countries[item['attackerCountry']].name,
 
           img: '/images/threatmap/SquarePin.png',
 
