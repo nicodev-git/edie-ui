@@ -8,6 +8,8 @@ import 'react-datepicker/dist/react-datepicker.css'
 import {countries} from 'country-data'
 import SelectField from 'material-ui/SelectField'
 import MenuItem from 'material-ui/MenuItem'
+import IconButton from 'material-ui/IconButton'
+import CropFreeIcon from 'material-ui/svg-icons/image/crop-free'
 
 import countryLatlng from 'shared/data/country-latlng'
 import IncidentSocket from 'util/socket/IncidentSocket'
@@ -36,7 +38,9 @@ export default class ThreatMap extends Component {
       popupY: 0,
       popupObject: null,
 
-      speed: 20
+      speed: 20,
+
+      maximized: false
     }
 
     assign(this, {
@@ -517,6 +521,12 @@ export default class ThreatMap extends Component {
         // Blast
     me.blasts.forEach(blast => {
       me.updateBlastPosition(blast)
+    })
+  }
+
+  onToggleMaximize () {
+    this.setState({
+      maximized: !this.state.maximized
     })
   }
     // ///////////////////////////////////////////////////////////////////
@@ -1322,83 +1332,107 @@ export default class ThreatMap extends Component {
     return latlng
   }
 
+  renderTable () {
+    return (
+      <div id="latestAttacksContainerLeft" className="pinkBorder">
+        <div id="tableContainer">
+          <div id="tableHeaderRow">
+            <div id="latestAttacksTimeCol">TIME</div>
+            <div id="latestAttacksAttackCol">ATTACK</div>
+            <div id="latestSeverityCol">SEVERITY</div>
+            <div id="latestAttacksSourceCol">ATTACKING COUNTRY</div>
+            <div id="latestAttacksDestCol">
+              TARGET DEVICE
+              <div style={{position: 'absolute', right: 12, top: 2}}>
+                <IconButton
+                  style={{padding: 0, width: 32, height: 32}}
+                  iconStyle={{padding: 0}}
+                  onTouchTap={this.onToggleMaximize.bind(this)}>
+                  <CropFreeIcon color="#545454"/>
+                </IconButton>
+              </div>
+            </div>
+          </div>
+          {
+            this.state.latestAttacks.map(item => this.renderRow(item))
+          }
+        </div>
+      </div>
+    )
+  }
+
   render () {
-    const {mode, speed} = this.state
+    const {mode, speed, maximized} = this.state
+
+    const maximizedTable = maximized ? (
+      <div className="flex-1">
+        <div id="latestAttacksContainer">
+          {this.renderTable()}
+        </div>
+      </div>
+    ) : null
     return (
       <div className="flex-vertical flex-1">
-        <div className="form-inline padding-sm" style={{background: '#CECECE'}}>
-          <SelectField value={mode} onChange={this.onChangeMode.bind(this)} style={{width: '120px', marginLeft: '20px'}}>
-            <MenuItem value="real" primaryText="Real" />
-            <MenuItem value="replay" primaryText="Replay" />
-            <MenuItem value="demo" primaryText="Demo" />
-          </SelectField>&nbsp;
-          <SelectField value={speed} onChange={this.onChangeSpeed.bind(this)} className={mode === 'replay' ? '' : 'hidden'} style={{width: '120px'}}>
-            <MenuItem value={1} primaryText="Normal" />
-            <MenuItem value={2} primaryText="2x" />
-            <MenuItem value={5} primaryText="5x"/>
-            <MenuItem value={10} primaryText="10x"/>
-            <MenuItem value={20} primaryText="20x"/>
-            <MenuItem value={50} primaryText="50x"/>
-            <MenuItem value={100} primaryText="100x"/>
-          </SelectField>
-          <div className="form-group pull-right inline hidden">
-            <a href="javascript:;" onClick={this.onClickSettings.bind(this)}>
-              <i className="fa fa-x fa-cog valign-middle" />
-            </a>
-          </div>
-
-        </div>
-        <div style={{position: 'relative'}} className={`flex-1 flex-vertical ${(mode === 'demo' || mode === 'replay') ? 'slider-visible' : ''}`}>
-          <div className="flex-1" style={{position: 'relative'}}>
-            <div ref="mapDiv" style={{position: 'absolute', left: 0, right: 0, top: 0, bottom: 0}}/>
-          </div>
-
-          <div id="latestAttacksContainer">
-            <div className="play-controls">
-              <div className="inline-block">
-                {
-                  this.state.playing
-                    ? (<a href="javascript:;" style={{padding: '2px'}}>
-                    <img src="/images/btn_pause.png" width="32" onClick={this.onClickPause.bind(this)}/>
-                  </a>)
-                    : (<a href="javascript:;" style={{padding: '2px'}}>
-                    <img src="/images/btn_play.png" width="32" onClick={this.onClickPlay.bind(this)}/>
-                  </a>)
-                }
-
-                <a href="javascript:;" style={{padding: '2px'}}>
-                  <img src="/images/btn_stop.png" width="32" onClick={this.onClickStop.bind(this)}/>
-                </a>
-
-                {this.renderTime()}
-
-              </div>
-              <div className="incident-time hidden" style={{color: 'white', paddingTop: '3px'}} />
-
-              <div className="play-timeline" style={{flex: 1, padding: '12px'}}>
-                {this.renderSlider()}
-              </div>
+        <div className={`flex-vertical flex-1 ${maximized ? 'hidden' : ''}`}>
+          <div className="form-inline padding-sm" style={{background: '#CECECE'}}>
+            <SelectField value={mode} onChange={this.onChangeMode.bind(this)} style={{width: '120px', marginLeft: '20px'}}>
+              <MenuItem value="real" primaryText="Real" />
+              <MenuItem value="replay" primaryText="Replay" />
+              <MenuItem value="demo" primaryText="Demo" />
+            </SelectField>&nbsp;
+            <SelectField value={speed} onChange={this.onChangeSpeed.bind(this)} className={mode === 'replay' ? '' : 'hidden'} style={{width: '120px'}}>
+              <MenuItem value={1} primaryText="Normal" />
+              <MenuItem value={2} primaryText="2x" />
+              <MenuItem value={5} primaryText="5x"/>
+              <MenuItem value={10} primaryText="10x"/>
+              <MenuItem value={20} primaryText="20x"/>
+              <MenuItem value={50} primaryText="50x"/>
+              <MenuItem value={100} primaryText="100x"/>
+            </SelectField>
+            <div className="form-group pull-right inline hidden">
+              <a href="javascript:;" onClick={this.onClickSettings.bind(this)}>
+                <i className="fa fa-x fa-cog valign-middle" />
+              </a>
             </div>
 
-            <div id="latestAttacksContainerLeft" className="pinkBorder">
-              <div id="tableContainer">
-                <div id="tableHeaderRow">
-                  <div id="latestAttacksTimeCol">TIME</div>
-                  <div id="latestAttacksAttackCol">ATTACK</div>
-                  <div id="latestSeverityCol">SEVERITY</div>
-                  <div id="latestAttacksSourceCol">ATTACKING COUNTRY</div>
-                  <div id="latestAttacksDestCol">TARGET DEVICE</div>
+          </div>
+          <div style={{position: 'relative'}} className={`flex-1 flex-vertical ${(mode === 'demo' || mode === 'replay') ? 'slider-visible' : ''}`}>
+            <div className="flex-1" style={{position: 'relative'}}>
+              <div ref="mapDiv" style={{position: 'absolute', left: 0, right: 0, top: 0, bottom: 0}}/>
+            </div>
+
+            <div id="latestAttacksContainer">
+              <div className="play-controls">
+                <div className="inline-block">
+                  {
+                    this.state.playing
+                      ? (<a href="javascript:;" style={{padding: '2px'}}>
+                      <img src="/images/btn_pause.png" width="32" onClick={this.onClickPause.bind(this)}/>
+                    </a>)
+                      : (<a href="javascript:;" style={{padding: '2px'}}>
+                      <img src="/images/btn_play.png" width="32" onClick={this.onClickPlay.bind(this)}/>
+                    </a>)
+                  }
+
+                  <a href="javascript:;" style={{padding: '2px'}}>
+                    <img src="/images/btn_stop.png" width="32" onClick={this.onClickStop.bind(this)}/>
+                  </a>
+
+                  {this.renderTime()}
+
                 </div>
-                {
-                  this.state.latestAttacks.map(item => this.renderRow(item))
-                }
+                <div className="incident-time hidden" style={{color: 'white', paddingTop: '3px'}} />
+
+                <div className="play-timeline" style={{flex: 1, padding: '12px'}}>
+                  {this.renderSlider()}
+                </div>
               </div>
+              {this.renderTable()}
             </div>
+            {this.renderInfoPopup()}
           </div>
-
-          {this.renderInfoPopup()}
         </div>
-
+        {maximizedTable}
       </div>
     )
   }

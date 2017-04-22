@@ -88,10 +88,11 @@
     font-size: 100%;
     vertical-align: baseline;
 }
-#latestAttacksContainerLeft #tableHeaderRow div {
+#latestAttacksContainerLeft #tableHeaderRow > div {
     display: table-cell;
     font-size: .85em;
     padding: 10px 15px;
+    position: relative;
 }
 .attackRow div {
     display: table-cell;
