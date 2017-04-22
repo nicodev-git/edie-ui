@@ -1354,21 +1354,6 @@ export default class ThreatMap extends Component {
           </div>
 
           <div id="latestAttacksContainer">
-            <div id="latestAttacksContainerLeft" className="pinkBorder">
-              <div id="tableContainer">
-                <div id="tableHeaderRow">
-                  <div id="latestAttacksTimeCol">TIME</div>
-                  <div id="latestAttacksAttackCol">ATTACK</div>
-                  <div id="latestSeverityCol">SEVERITY</div>
-                  <div id="latestAttacksSourceCol">ATTACKING COUNTRY</div>
-                  <div id="latestAttacksDestCol">TARGET DEVICE</div>
-                </div>
-                {
-                  this.state.latestAttacks.map(item => this.renderRow(item))
-                }
-              </div>
-            </div>
-
             <div className="play-controls">
               <div className="inline-block">
                 {
@@ -1392,6 +1377,21 @@ export default class ThreatMap extends Component {
 
               <div className="play-timeline" style={{flex: 1, padding: '12px'}}>
                 {this.renderSlider()}
+              </div>
+            </div>
+
+            <div id="latestAttacksContainerLeft" className="pinkBorder">
+              <div id="tableContainer">
+                <div id="tableHeaderRow">
+                  <div id="latestAttacksTimeCol">TIME</div>
+                  <div id="latestAttacksAttackCol">ATTACK</div>
+                  <div id="latestSeverityCol">SEVERITY</div>
+                  <div id="latestAttacksSourceCol">ATTACKING COUNTRY</div>
+                  <div id="latestAttacksDestCol">TARGET DEVICE</div>
+                </div>
+                {
+                  this.state.latestAttacks.map(item => this.renderRow(item))
+                }
               </div>
             </div>
           </div>

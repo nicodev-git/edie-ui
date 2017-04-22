@@ -95,7 +95,7 @@
 }
 .attackRow div {
     display: table-cell;
-    padding: 5px 15px;
+    padding: 0px 15px;
 }
 .attackRow .sourceCol p{
     width: 70%;
@@ -199,7 +199,6 @@
 
 .play-controls {
     display: none;
-    border-top: 1px solid #555;
     margin: 0 8px;
     padding: 15px 0;
 }
