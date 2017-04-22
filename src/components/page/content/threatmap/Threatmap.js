@@ -6,6 +6,8 @@ import moment from 'moment'
 import Transition from 'react-addons-css-transition-group'
 import 'react-datepicker/dist/react-datepicker.css'
 import {countries} from 'country-data'
+import SelectField from 'material-ui/SelectField'
+import MenuItem from 'material-ui/MenuItem'
 
 import countryLatlng from 'shared/data/country-latlng'
 import IncidentSocket from 'util/socket/IncidentSocket'
@@ -32,7 +34,9 @@ export default class ThreatMap extends Component {
       popup: false,
       popupX: 0,
       popupY: 0,
-      popupObject: null
+      popupObject: null,
+
+      speed: 20
     }
 
     assign(this, {
@@ -55,7 +59,6 @@ export default class ThreatMap extends Component {
         screen: 0,
         frame: 0
       },
-      speed: 1,
 
       buffer: [],
       buffertimer: 0,
@@ -162,41 +165,10 @@ export default class ThreatMap extends Component {
       if (a.timestamp > b.timestamp) return 1
       return 0
     })
-    // const startTime = incidents[0].timestamp
-    // const timeWidth = incidents[incidents.length - 1].timestamp - incidents[0].timestamp
-    // const range = timeWidth / 20 // mseconds
     const scenes = me.buildScene(incidents)
 
     me.currentPlay.scene = scenes
     this.onClickPlay()
-    //
-    // me.reset()
-    // scenes.forEach(scene => {
-    //   let delay = scene.time - startTime
-    //   if (timeWidth) delay = delay * range / timeWidth
-    //   const timer = setTimeout(() => {
-    //     scene.attacks.forEach(attack => {
-    //       // if (me.severities.indexOf(attack.severity) < 0) return
-    //
-    //       me.addAttackRow(
-    //         attack.id,
-    //         attack.from,
-    //         attack.to,
-    //         moment(scene.time).format('HH:mm:ss'),
-    //         attack.type,
-    //         attack.action || '',
-    //         attack.severity
-    //       )
-    //       me.showObject(attack.from, true, () => {
-    //         me.showObject(attack.to, true, () => {
-    //           me.showAttack(attack.from, attack.to, attack.color, attack.linetype, attack.count)
-    //           me.showBlast(attack.to, attack.color)
-    //         })
-    //       })
-    //     })
-    //   }, delay)
-    //   me.realIncidentTimers.push(timer)
-    // })
   }
 
   renderSlider () {
@@ -212,9 +184,9 @@ export default class ThreatMap extends Component {
     let tx = new Date('2016-1-1 00:00:00') - 0
     return (
       <div className="inline-block valign-middle margin-md-left margin-md-right" style={{color: 'white'}}>
-          <span>{moment(tx + me.state.sliderPos * 1000).format('m:ss')}</span>
+          <span>{moment(tx + me.state.sliderPos * 1000).format('HH:mm:ss')}</span>
           <span>/</span>
-          <span>{moment(tx + me.state.sliderMax * 1000).format('m:ss')}</span>
+          <span>{moment(tx + me.state.sliderMax * 1000).format('HH:mm:ss')}</span>
       </div>
     )
   }
@@ -455,16 +427,25 @@ export default class ThreatMap extends Component {
 
     // ///////////////////////////////////////////////////////////////
 
-  onChangeMode (e) {
+  onChangeMode (e, index, value) {
     this.onClickStop()
     this.clear()
 
     this.setState({
-      mode: e.target.value
+      mode: value
     }, () => {
       if (this.state.mode === 'real') {
         this.onClickPlay()
       }
+    })
+  }
+
+  onChangeSpeed (e, index, value) {
+    this.onClickPause()
+    this.setState({
+      speed: parseInt(value)
+    }, () => {
+      this.onClickPlay()
     })
   }
 
@@ -560,7 +541,7 @@ export default class ThreatMap extends Component {
           me.stop()
           setTimeout(() => {
             me.play(scene)
-          }, 1000 / me.speed)
+          }, 1000 / me.state.speed)
           return
         }
       }
@@ -770,7 +751,7 @@ export default class ThreatMap extends Component {
   enableTimer (enable) {
     let me = this
     if (enable) {
-      me.incidentTimer = setInterval(me.updateTimer.bind(me), 1000 / me.speed)
+      me.incidentTimer = setInterval(me.updateTimer.bind(me), 1000 / me.state.speed)
     } else {
       clearInterval(me.incidentTimer)
     }
@@ -960,7 +941,6 @@ export default class ThreatMap extends Component {
 
   addAttackRow (id, attacker, target, time, type, action, severity) {
     const me = this
-    console.log('add attack row')
     me.buffer.push({
       id: id,
       time: time,
@@ -1334,18 +1314,24 @@ export default class ThreatMap extends Component {
   }
 
   render () {
-    const {mode} = this.state
+    const {mode, speed} = this.state
     return (
       <div className="flex-vertical flex-1">
         <div className="form-inline padding-sm" style={{background: '#CECECE'}}>
-          <label className="pt-none control-label margin-sm-right">Mode</label>
-          <select className="form-control input-sm margin-lg-right"
-            value={mode} onChange={this.onChangeMode.bind(this)}>
-            <option value="real">Real</option>
-            <option value="replay">Replay</option>
-            <option value="demo">Demo</option>
-          </select>
-
+          <SelectField value={mode} onChange={this.onChangeMode.bind(this)} style={{width: '120px'}}>
+            <MenuItem value="real" primaryText="Real" />
+            <MenuItem value="replay" primaryText="Replay" />
+            <MenuItem value="demo" primaryText="Demo" />
+          </SelectField>&nbsp;
+          <SelectField value={speed} onChange={this.onChangeSpeed.bind(this)} className={mode === 'replay' ? '' : 'hidden'} style={{width: '120px'}}>
+            <MenuItem value={1} primaryText="Normal" />
+            <MenuItem value={2} primaryText="2x" />
+            <MenuItem value={5} primaryText="5x"/>
+            <MenuItem value={10} primaryText="10x"/>
+            <MenuItem value={20} primaryText="20x"/>
+            <MenuItem value={50} primaryText="50x"/>
+            <MenuItem value={100} primaryText="100x"/>
+          </SelectField>
           <div className="form-group pull-right inline hidden">
             <a href="javascript:;" onClick={this.onClickSettings.bind(this)}>
               <i className="fa fa-x fa-cog valign-middle" />

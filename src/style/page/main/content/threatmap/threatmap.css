@@ -76,7 +76,7 @@
 }
 .attackRow .attackContainer {
     display: block;
-    max-width: 300px;
+    /*max-width: 300px;*/
 }
 .attackRow p {
     overflow: hidden;
