@@ -162,7 +162,7 @@ export default class ThreatMap extends Component {
       return 0
     })
     const startTime = incidents[0].timestamp
-    const range = 20 * 1000 // seconds
+    const range = 10 * 1000 // seconds
     const timeWidth = incidents[incidents.length - 1].timestamp - incidents[0].timestamp
     let scenes = me.buildScene(incidents)
     me.currentPlay.scene = scenes
