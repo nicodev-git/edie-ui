@@ -55,6 +55,7 @@ export default class ThreatMap extends Component {
         screen: 0,
         frame: 0
       },
+      speed: 1,
 
       buffer: [],
       buffertimer: 0,
@@ -132,8 +133,8 @@ export default class ThreatMap extends Component {
     }, 500)
 
     const {query} = this.props.location
-    if (query && query.mode === 'real') {
-      this.onChangeMode({target: {value: 'real'}})
+    if (query && query.mode === 'replay') {
+      this.onChangeMode({target: {value: 'replay'}})
     }
   }
 
@@ -486,6 +487,7 @@ export default class ThreatMap extends Component {
       me.play(me.scenario[0])
       me.setState({ playing: true })
     } else if (mode === 'replay') {
+      if (!me.currentPlay.scene) return
       me.play(me.currentPlay.scene)
       me.setState({ playing: true })
     }
@@ -558,7 +560,7 @@ export default class ThreatMap extends Component {
           me.stop()
           setTimeout(() => {
             me.play(scene)
-          }, 1000)
+          }, 1000 / me.speed)
           return
         }
       }
@@ -768,7 +770,7 @@ export default class ThreatMap extends Component {
   enableTimer (enable) {
     let me = this
     if (enable) {
-      me.incidentTimer = setInterval(me.updateTimer.bind(me), 1000)
+      me.incidentTimer = setInterval(me.updateTimer.bind(me), 1000 / me.speed)
     } else {
       clearInterval(me.incidentTimer)
     }

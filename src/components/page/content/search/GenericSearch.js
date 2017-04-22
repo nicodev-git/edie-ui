@@ -383,7 +383,7 @@ class GenericSearch extends React.Component {
     router.push({
       pathname: '/threatmap',
       query: {
-        mode: 'real'
+        mode: 'replay'
       }
     })
   }

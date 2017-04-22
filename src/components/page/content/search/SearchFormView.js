@@ -5,6 +5,7 @@ import {FlatButton, SelectField, MenuItem} from 'material-ui'
 import ActionSearch from 'material-ui/svg-icons/action/search'
 import ToggleStar from 'material-ui/svg-icons/toggle/star-border'
 import FilledStar from 'material-ui/svg-icons/toggle/star'
+import LocalMovie from 'material-ui/svg-icons/maps/local-movies'
 
 import { FormInput, FormSelect } from 'components/modal/parts'
 import DateRangePicker2 from 'components/shared/DateRangePicker2'
@@ -103,7 +104,7 @@ export default class SearchFormView extends React.Component {
           <FlatButton type="submit" icon={<ActionSearch />} style={{marginTop: '4px', verticalAlign: 'top'}}/>
           <FlatButton icon={starFilled ? <FilledStar/> : <ToggleStar/>} style={{marginTop: '4px', verticalAlign: 'top'}} onClick={onClickStar}/>
           <Field name="searchOptionIndex" component={FormSelect} label="" options={savedSearchOptions} style={{verticalAlign: 'top', textAlign: 'left', maxWidth: '100px'}} onChange={onChangeSearchOption}/>
-          <FlatButton style={{marginTop: '4px', verticalAlign: 'top'}} label="Illustrate" onClick={onClickIllustrate}/>
+          <FlatButton icon={<LocalMovie/>} style={{marginTop: '4px', verticalAlign: 'top', minWidth: '50px'}} onClick={onClickIllustrate}/>
         </div>
       </form>
     )
