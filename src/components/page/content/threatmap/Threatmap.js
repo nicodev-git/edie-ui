@@ -154,7 +154,13 @@ export default class ThreatMap extends Component {
     if (me.state.mode === 'demo') return
     me.reset()
 
-    let scenes = me.buildScene(isArray(msg) ? msg : [msg])
+    const incidents = isArray(msg) ? msg : [msg]
+    incidents.sort((a, b) => {
+      if (a.timestamp < b.timestamp) return -1
+      if (a.timestamp > b.timestamp) return 1
+      return 0
+    })
+    let scenes = me.buildScene(incidents)
     me.currentPlay.scene = scenes
 
     scenes.forEach(scene => {
