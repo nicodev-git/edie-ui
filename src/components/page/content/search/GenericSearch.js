@@ -377,6 +377,17 @@ class GenericSearch extends React.Component {
     this.setState({total})
   }
 
+  onClickIllustrate () {
+    this.props.showThreats()
+    const {router} = this.props
+    router.push({
+      pathname: '/threatmap',
+      query: {
+        mode: 'real'
+      }
+    })
+  }
+
   renderFields () {
     const {selectedField} = this.props
     return (
@@ -518,6 +529,7 @@ class GenericSearch extends React.Component {
             startDate={moment(dateFrom)}
             endDate={moment(dateTo)}
             onChangeDateRange={this.onChangeRange.bind(this)}
+            onClickIllustrate={this.onClickIllustrate.bind(this)}
           />
 
           <div className="text-center">

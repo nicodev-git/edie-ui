@@ -25,7 +25,8 @@ export default class SearchFormView extends React.Component {
     }).join(', ')
   }
   render () {
-    const { onSearchKeyDown,
+    const {
+      onSearchKeyDown,
       onClickStar,
       starFilled,
       onSubmit,
@@ -43,7 +44,9 @@ export default class SearchFormView extends React.Component {
 
       startDate,
       endDate,
-      onChangeDateRange
+      onChangeDateRange,
+
+      onClickIllustrate
     } = this.props
     const savedSearchOptions = concat([], emptySearch, searchOptions)
     return (
@@ -100,6 +103,7 @@ export default class SearchFormView extends React.Component {
           <FlatButton type="submit" icon={<ActionSearch />} style={{marginTop: '4px', verticalAlign: 'top'}}/>
           <FlatButton icon={starFilled ? <FilledStar/> : <ToggleStar/>} style={{marginTop: '4px', verticalAlign: 'top'}} onClick={onClickStar}/>
           <Field name="searchOptionIndex" component={FormSelect} label="" options={savedSearchOptions} style={{verticalAlign: 'top', textAlign: 'left', maxWidth: '100px'}} onChange={onChangeSearchOption}/>
+          <FlatButton style={{marginTop: '4px', verticalAlign: 'top'}} label="Illustrate" onClick={onClickIllustrate}/>
         </div>
       </form>
     )

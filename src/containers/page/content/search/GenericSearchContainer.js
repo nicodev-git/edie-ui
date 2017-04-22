@@ -31,7 +31,9 @@ import {
   selectSearchWf,
   addSearchWf,
   removeSearchWf,
-  replaceSearchWfs
+  replaceSearchWfs,
+
+  showThreats
 } from 'actions'
 
 @withRouter
@@ -88,7 +90,9 @@ import {
       selectSearchWf,
       addSearchWf,
       removeSearchWf,
-      replaceSearchWfs
+      replaceSearchWfs,
+
+      showThreats
     }, dispatch)
   })
 )

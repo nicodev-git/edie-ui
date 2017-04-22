@@ -188,3 +188,9 @@ export function showSidebarMessageMenu (open) {
     dispatch({type: SHOW_SIDEBAR_MESSAGE_MENU, open})
   }
 }
+
+export function showThreats (params) {
+  return dispatch => {
+    axios.get(`${ROOT_URL}/showThreats`, {params})
+  }
+}
