@@ -5,18 +5,14 @@ import d3 from 'd3'
 import moment from 'moment'
 import Transition from 'react-addons-css-transition-group'
 import 'react-datepicker/dist/react-datepicker.css'
-import DatePicker from 'react-datepicker'
 import {countries} from 'country-data'
 
 import countryLatlng from 'shared/data/country-latlng'
 import IncidentSocket from 'util/socket/IncidentSocket'
 
-import { appendComponent, removeComponent } from '../../../../util/Component'
-import Preloader from '../../../shared/Preloader'
 import CustomHandle from './CustomHandle'
 
 import { format } from '../../../../shared/Global'
-import { ROOT_URL } from '../../../../actions/config'
 
 export default class ThreatMap extends Component {
 
@@ -25,9 +21,6 @@ export default class ThreatMap extends Component {
     this.state = {
       mode: 'demo',
       settings: false,
-
-      startDate: moment().add(-15, 'days'),
-      endDate: moment(),
 
       playing: false,
       sliderPos: 0,
@@ -137,6 +130,11 @@ export default class ThreatMap extends Component {
 
       this.setState({ latestAttacks })
     }, 500)
+
+    const {query} = this.props.location
+    if (query && query.mode === 'real') {
+      this.onChangeMode({target: {value: 'real'}})
+    }
   }
 
   componentWillUnmount () {
@@ -146,14 +144,16 @@ export default class ThreatMap extends Component {
     me.cancelled = true
     me.stop()
     clearInterval(me.buffertimer)
+
+    me.reset()
+
     me.vmap.remove()
   }
 
   onAddThreat (msg) {
     const me = this
     console.log(msg)
-    if (me.state.mode === 'demo') return
-    me.reset()
+    if (me.state.mode !== 'replay') return
 
     const incidents = isArray(msg) ? msg : [msg]
     incidents.sort((a, b) => {
@@ -161,40 +161,41 @@ export default class ThreatMap extends Component {
       if (a.timestamp > b.timestamp) return 1
       return 0
     })
-    const startTime = incidents[0].timestamp
-    const range = 5 * 1000 // mseconds
-    const timeWidth = incidents[incidents.length - 1].timestamp - incidents[0].timestamp
-    let scenes = me.buildScene(incidents)
+    // const startTime = incidents[0].timestamp
+    // const timeWidth = incidents[incidents.length - 1].timestamp - incidents[0].timestamp
+    // const range = timeWidth / 20 // mseconds
+    const scenes = me.buildScene(incidents)
+
     me.currentPlay.scene = scenes
-
-    me.realIncidentTimers = []
-
-    scenes.forEach(scene => {
-      let delay = scene.time - startTime
-      if (timeWidth) delay = delay * range / timeWidth
-      const timer = setTimeout(() => {
-        scene.attacks.forEach(attack => {
-          if (me.severities.indexOf(attack.severity) < 0) return
-
-          me.addAttackRow(
-            attack.id,
-            attack.from,
-            attack.to,
-            moment(scene.time).format('HH:mm:ss'),
-            attack.type,
-            attack.action || '',
-            attack.severity
-          )
-          me.showObject(attack.from, true, () => {
-            me.showObject(attack.to, true, () => {
-              me.showAttack(attack.from, attack.to, attack.color, attack.linetype, attack.count)
-              me.showBlast(attack.to, attack.color)
-            })
-          })
-        })
-      }, delay)
-      me.realIncidentTimers.push(timer)
-    })
+    this.onClickPlay()
+    //
+    // me.reset()
+    // scenes.forEach(scene => {
+    //   let delay = scene.time - startTime
+    //   if (timeWidth) delay = delay * range / timeWidth
+    //   const timer = setTimeout(() => {
+    //     scene.attacks.forEach(attack => {
+    //       // if (me.severities.indexOf(attack.severity) < 0) return
+    //
+    //       me.addAttackRow(
+    //         attack.id,
+    //         attack.from,
+    //         attack.to,
+    //         moment(scene.time).format('HH:mm:ss'),
+    //         attack.type,
+    //         attack.action || '',
+    //         attack.severity
+    //       )
+    //       me.showObject(attack.from, true, () => {
+    //         me.showObject(attack.to, true, () => {
+    //           me.showAttack(attack.from, attack.to, attack.color, attack.linetype, attack.count)
+    //           me.showBlast(attack.to, attack.color)
+    //         })
+    //       })
+    //     })
+    //   }, delay)
+    //   me.realIncidentTimers.push(timer)
+    // })
   }
 
   renderSlider () {
@@ -230,12 +231,6 @@ export default class ThreatMap extends Component {
                     <Transition transitionName="example" transitionEnterTimeout={500} transitionLeaveTimeout={0}
                       transitionAppear transitionAppearTimeout={500}>
                         <p className="attackContainer">{item.type}</p>
-                    </Transition>
-                </div>
-                <div className="actionCol">
-                    <Transition transitionName="example" transitionEnterTimeout={500} transitionLeaveTimeout={0}
-                      transitionAppear transitionAppearTimeout={500}>
-                        <p>{item.action}</p>
                     </Transition>
                 </div>
                 <div className="severityCol">
@@ -464,8 +459,7 @@ export default class ThreatMap extends Component {
     this.clear()
 
     this.setState({
-      mode: e.target.value,
-      history: false
+      mode: e.target.value
     }, () => {
       if (this.state.mode === 'real') {
         this.onClickPlay()
@@ -473,29 +467,9 @@ export default class ThreatMap extends Component {
     })
   }
 
-  onChangeHistoryCheck (e) {
-    this.onClickStop()
-
-    this.setState({
-      history: e.target.checked
-    })
-  }
-
   onClickSettings () {
     this.setState({
       settings: !this.state.settings
-    })
-  }
-
-  onChangeStartDate (date) {
-    this.setState({
-      startDate: date
-    })
-  }
-
-  onChangeEndDate (date) {
-    this.setState({
-      endDate: date
     })
   }
 
@@ -507,14 +481,12 @@ export default class ThreatMap extends Component {
 
   onClickPlay () {
     const me = this
-    const {history} = me.state
-    if (history) {
-      me.getHistoryEvents(function (scene) {
-        me.play(scene)
-        me.setState({ playing: true })
-      })
-    } else {
+    const {mode} = me.state
+    if (mode === 'demo') {
       me.play(me.scenario[0])
+      me.setState({ playing: true })
+    } else if (mode === 'replay') {
+      me.play(me.currentPlay.scene)
       me.setState({ playing: true })
     }
   }
@@ -569,7 +541,7 @@ export default class ThreatMap extends Component {
   play (scene) {
     let me = this
 
-    if (me.state.mode === 'real' && !me.state.history) {
+    if (me.state.mode === 'real') {
       me.currentPlay.stopped = false
       me.currentPlay.pause = false
       me.cancelled = false
@@ -617,7 +589,7 @@ export default class ThreatMap extends Component {
 
   pause () {
     let me = this
-    if (me.state.mode === 'real' && !me.state.history) {
+    if (me.state.mode === 'real') {
       me.stop()
       return
     }
@@ -655,7 +627,8 @@ export default class ThreatMap extends Component {
     me.blasts = []
 
     me.setState({
-      sliderPos: 0
+      sliderPos: 0,
+      latestAttacks: []
     })
 
     me.devices.forEach(device => {
@@ -674,6 +647,8 @@ export default class ThreatMap extends Component {
       clearTimeout(timer)
     })
     me.realIncidentTimers = []
+
+    me.buffer = []
   }
 
   clear () {
@@ -868,7 +843,7 @@ export default class ThreatMap extends Component {
     let screen = me.currentPlay.scene[me.currentPlay.screen++]
 
     screen.attacks.forEach(attack => {
-      if (me.severities.indexOf(attack.severity) < 0) return
+      // if (me.severities.indexOf(attack.severity) < 0) return
       me.addAttackRow(
                 attack.id,
                 attack.from,
@@ -959,7 +934,7 @@ export default class ThreatMap extends Component {
       me.currentPlay.screen = i
       if (pos < newpos) {
         screen.attacks.forEach(attack => {
-          if (me.severities.indexOf(attack.severity) < 0) return
+          // if (me.severities.indexOf(attack.severity) < 0) return
           me.showObject(attack.from, false)
           me.showObject(attack.to, false)
         })
@@ -1247,26 +1222,6 @@ export default class ThreatMap extends Component {
   }
 
     // ///////////////////////////////////////////////////////////////////
-  getHistoryEvents (cb) {
-    const me = this
-    const datefrom = this.state.startDate.format('YYYY-MM-DD HH:mm:ss')
-    const dateto = this.state.endDate.format('YYYY-MM-DD HH:mm:ss')
-
-    let loader = appendComponent(<Preloader/>)
-
-    $.get(`${ROOT_URL}${Api.bi.threatMapEventsHistory}`, { // eslint-disable-line no-undef
-      from: datefrom,
-      to: dateto
-    }).done((res) => {
-      if (res.success && cb) {
-        let scene = me.buildScene(res.object)
-        me.currentPlay.scene = scene
-        cb(scene)
-      }
-    }).always(() => {
-      removeComponent(loader)
-    })
-  }
 
   buildScene (incidents) {
     let scene = []
@@ -1376,53 +1331,27 @@ export default class ThreatMap extends Component {
     return latlng
   }
 
-  renderHistoryCheck () {
-    // return (
-    //   <div className="checkbox">
-    //     <label>
-    //       <input type="checkbox" checked={this.state.history} ref="history" onChange={this.onChangeHistoryCheck.bind(this)}/>History
-    //     </label>
-    //   </div>
-    // )
-  }
   render () {
+    const {mode} = this.state
     return (
       <div className="flex-vertical flex-1">
         <div className="form-inline padding-sm" style={{background: '#CECECE'}}>
           <label className="pt-none control-label margin-sm-right">Mode</label>
           <select className="form-control input-sm margin-lg-right"
-            value={this.state.mode} onChange={this.onChangeMode.bind(this)}>
-            <option value="real">Real/History</option>
+            value={mode} onChange={this.onChangeMode.bind(this)}>
+            <option value="real">Real</option>
+            <option value="replay">Replay</option>
             <option value="demo">Demo</option>
           </select>
 
-          <div className={`form-group ${this.state.mode === 'real' ? '' : 'hidden'}`}>
-            {this.renderHistoryCheck()}
-
-            <div className={`inline margin-md-left ${this.state.history ? '' : 'hidden'}`}>
-              <label className="pt-none control-label">From: </label>
-              <DatePicker ref="dateFrom" readOnly
-                selected={this.state.startDate} onChange={this.onChangeStartDate.bind(this)} />
-              <label className="pt-none control-label margin-sm-left">To: </label>
-              <DatePicker ref="dateFrom" readOnly
-                selected={this.state.endDate} onChange={this.onChangeEndDate.bind(this)} />
-            </div>
-          </div>
-
-          <div className="form-group pull-right inline">
-            <select ref="severity" className="hidden" multiple="multiple">
-              <option>High</option>
-              <option>Medium</option>
-              <option>Low</option>
-              <option>Audit</option>
-            </select>
+          <div className="form-group pull-right inline hidden">
             <a href="javascript:;" onClick={this.onClickSettings.bind(this)}>
               <i className="fa fa-x fa-cog valign-middle" />
             </a>
           </div>
 
         </div>
-        <div style={{position: 'relative'}} className={`flex-1 flex-vertical ${(this.state.history || this.state.mode === 'demo') ? 'slider-visible' : ''}`}>
+        <div style={{position: 'relative'}} className={`flex-1 flex-vertical ${(mode === 'demo' || mode === 'replay') ? 'slider-visible' : ''}`}>
           <div className="flex-1" style={{position: 'relative'}}>
             <div ref="mapDiv" style={{position: 'absolute', left: 0, right: 0, top: 0, bottom: 0}}/>
           </div>
@@ -1433,7 +1362,6 @@ export default class ThreatMap extends Component {
                 <div id="tableHeaderRow">
                   <div id="latestAttacksTimeCol">TIME</div>
                   <div id="latestAttacksAttackCol">ATTACK</div>
-                  <div id="latestAttacksActionCol">ACTION</div>
                   <div id="latestSeverityCol">SEVERITY</div>
                   <div id="latestAttacksSourceCol">ATTACKING COUNTRY</div>
                   <div id="latestAttacksDestCol">TARGET DEVICE</div>
