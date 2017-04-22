@@ -53,6 +53,8 @@ import {
   SHOW_SIDEBAR_PROFILE_MENU,
   SHOW_SIDEBAR_MESSAGE_MENU,
 
+  SHOW_THREAT_ITEM_MODAL,
+
   API_ERROR
 } from '../actions/types'
 
@@ -229,6 +231,8 @@ export default function (state = {}, action) {
 
     case SHOW_SIDEBAR_MESSAGE_MENU:
       return { ...state, sidebarMessageMenuOpen: action.open }
+    case SHOW_THREAT_ITEM_MODAL:
+      return { ...state, threatItemModalOpen: !!action.visible, threatItem: action.threatItem }
   }
   return state
 }

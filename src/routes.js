@@ -14,7 +14,7 @@ import SearchEvents from './containers/page/content/search/EventsContainer'
 import ChatContainer from './containers/page/content/chat/ChatContainer'
 import Incidents from './components/page/content/incidents/Incidents'
 import BigIncidentsContainer from './containers/page/content/dashboard/BigIncidentsContainer'
-import ThreatMap from './components/page/content/threatmap/Threatmap'
+import ThreatMapContainer from './containers/page/content/threatmap/ThreatMapContainer'
 import Settings from './components/page/content/settings/Settings'
 import SettingGeneralContainer from './containers/page/content/settings/general/GeneralContainer'
 import SettingAgent from './components/page/content/settings/agent/Agents'
@@ -62,7 +62,7 @@ export default(
       </Route>
       <Route path="incidents" component={Incidents}/>
       <Route path="bigincidents" component={BigIncidentsContainer}/>
-      <Route path="threatmap" component={ThreatMap}/>
+      <Route path="threatmap" component={ThreatMapContainer}/>
       <Route path="settings" component={Settings}>
         <IndexRoute component={SettingGeneralContainer} />
         <Route path="general" component={SettingGeneralContainer} />

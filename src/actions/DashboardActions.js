@@ -27,6 +27,8 @@ import {
   SHOW_SIDEBAR_PROFILE_MENU,
   SHOW_SIDEBAR_MESSAGE_MENU,
 
+  SHOW_THREAT_ITEM_MODAL,
+
   NO_AUTH_ERROR
 } from './types'
 
@@ -192,5 +194,11 @@ export function showSidebarMessageMenu (open) {
 export function showThreats (params) {
   return dispatch => {
     axios.get(`${ROOT_URL}/showThreats`, {params})
+  }
+}
+
+export function showThreatItemModal (visible, threatItem) {
+  return dispatch => {
+    dispatch({type: SHOW_THREAT_ITEM_MODAL, visible, threatItem})
   }
 }

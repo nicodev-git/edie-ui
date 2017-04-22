@@ -14,6 +14,7 @@ import FileIcon from 'material-ui/svg-icons/editor/insert-drive-file'
 
 import countryLatlng from 'shared/data/country-latlng'
 import IncidentSocket from 'util/socket/IncidentSocket'
+import ThreatItemModal from './ThreatItemModal'
 
 import CustomHandle from './CustomHandle'
 
@@ -1349,6 +1350,13 @@ export default class ThreatMap extends Component {
     )
   }
 
+  renderThreatItemModal () {
+    if (!this.props.threatItemModalOpen) return
+    return (
+      <ThreatItemModal {...this.props}/>
+    )
+  }
+
   render () {
     const {mode, speed, maximized} = this.state
 
@@ -1421,6 +1429,7 @@ export default class ThreatMap extends Component {
           </div>
         </div>
         {maximizedTable}
+        {this.renderThreatItemModal.bind(this)}
       </div>
     )
   }
