@@ -162,7 +162,7 @@ export default class ThreatMap extends Component {
       return 0
     })
     const startTime = incidents[0].timestamp
-    const range = 10 * 1000 // seconds
+    const range = 5 * 1000 // mseconds
     const timeWidth = incidents[incidents.length - 1].timestamp - incidents[0].timestamp
     let scenes = me.buildScene(incidents)
     me.currentPlay.scene = scenes
@@ -1025,7 +1025,10 @@ export default class ThreatMap extends Component {
       txt = device.labelObj
     } else {
       let latlng = me.getCountryLatLng(device.country)
-      if (!latlng) return
+      if (!latlng) {
+        console.log(`Location not found: ${device.country}`)
+        return
+      }
 
       let xy = me.latLngToXY(latlng[0], latlng[1])
       device.x = xy[0]
