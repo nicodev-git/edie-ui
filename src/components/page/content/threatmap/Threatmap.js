@@ -69,6 +69,7 @@ export default class ThreatMap extends Component {
       lastIncidentId: 0,
 
       incidentTimer: 0,
+      realIncidentTimers: [],
 
       mode: null,
 
@@ -160,12 +161,24 @@ export default class ThreatMap extends Component {
       if (a.timestamp > b.timestamp) return 1
       return 0
     })
+    const startTime = incidents[0].timestamp
+    const range = 20;//seconds
+    const timeWidth = incidents[incidents.length - 1].timestamp - incidents[0].timestamp
     let scenes = me.buildScene(incidents)
     me.currentPlay.scene = scenes
 
+    me.realIncidentTimers = []
+
     scenes.forEach(scene => {
+      const delay = scene.time - startTime
+
+      const timer = setTimeout(() => {
+
+      }, delay)
+      me.realIncidentTimers.push()
       scene.attacks.forEach(attack => {
         if (me.severities.indexOf(attack.severity) < 0) return
+
         me.addAttackRow(
           attack.id,
           attack.from,
@@ -657,6 +670,11 @@ export default class ThreatMap extends Component {
       attacker.attacks = 0
       attacker.bubbles = []
     })
+
+    me.realIncidentTimers.forEach(timer => {
+      clearTimeout(timer)
+    })
+    me.realIncidentTimers = []
   }
 
   clear () {
