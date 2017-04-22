@@ -10,6 +10,7 @@ import SelectField from 'material-ui/SelectField'
 import MenuItem from 'material-ui/MenuItem'
 import IconButton from 'material-ui/IconButton'
 import CropFreeIcon from 'material-ui/svg-icons/image/crop-free'
+import FileIcon from 'material-ui/svg-icons/editor/insert-drive-file'
 
 import countryLatlng from 'shared/data/country-latlng'
 import IncidentSocket from 'util/socket/IncidentSocket'
@@ -197,46 +198,60 @@ export default class ThreatMap extends Component {
 
   renderRow (item) {
     return (
-            <div className="attackRow visible" key={item.id}>
-                <div className="timeCol">
-                    <Transition transitionName="example" transitionEnterTimeout={500} transitionLeaveTimeout={0}
-                      transitionAppear transitionAppearTimeout={500}>
-                        <p>{item.time}</p>
-                    </Transition>
-                </div>
-                <div className="attackCol">
-                    <Transition transitionName="example" transitionEnterTimeout={500} transitionLeaveTimeout={0}
-                      transitionAppear transitionAppearTimeout={500}>
-                        <p className="attackContainer">{item.type}</p>
-                    </Transition>
-                </div>
-                <div className="severityCol">
-                    <Transition transitionName="example" transitionEnterTimeout={500} transitionLeaveTimeout={0}
-                      transitionAppear transitionAppearTimeout={500}>
-                        <p>{item.severity}</p>
-                    </Transition>
-                </div>
-                <div className="sourceCol">
-                    <Transition transitionName="example" transitionEnterTimeout={500} transitionLeaveTimeout={0}
-                      transitionAppear transitionAppearTimeout={500}>
-                        <p>{item.attacker}</p>
-                        <img src={`/images/flags/32/${item.attackerCountry.code}.png`}
-                          title={item.attackerCountry.name}
-                          width="28"
-                          style={{marginTop: '-5px', maxHeight: '24px'}}/>
-                    </Transition>
-                </div>
-                <div className="destCol">
-                    <Transition transitionName="example" transitionEnterTimeout={500} transitionLeaveTimeout={0}
-                      transitionAppear transitionAppearTimeout={500}>
-                        <p>{item.target}</p>
-                        <img src={`/images/flags/32/${item.targetCountry.code}.png`}
-                          title={item.targetCountry.name}
-                          width="28"
-                          style={{marginTop: '-5px', maxHeight: '24px'}}/>
-                    </Transition>
-                </div>
-            </div>
+      <div className="attackRow visible" key={item.id}>
+        <div className="timeCol">
+          <Transition
+            transitionName="example" transitionEnterTimeout={500} transitionLeaveTimeout={0}
+            transitionAppear transitionAppearTimeout={500}>
+            <p>{item.time}</p>
+          </Transition>
+        </div>
+        <div className="attackCol">
+          <Transition
+            transitionName="example" transitionEnterTimeout={500} transitionLeaveTimeout={0}
+            transitionAppear transitionAppearTimeout={500}>
+            <p className="attackContainer">{item.type}</p>
+          </Transition>
+        </div>
+        <div className="severityCol">
+          <Transition
+            transitionName="example" transitionEnterTimeout={500} transitionLeaveTimeout={0}
+            transitionAppear transitionAppearTimeout={500}>
+            <p>{item.severity}</p>
+          </Transition>
+        </div>
+        <div className="sourceCol">
+          <Transition
+            transitionName="example" transitionEnterTimeout={500} transitionLeaveTimeout={0}
+            transitionAppear transitionAppearTimeout={500}>
+            <p>{item.attacker}</p>
+            <img
+              src={`/images/flags/32/${item.attackerCountry.code}.png`}
+              title={item.attackerCountry.name}
+              width="28"
+              style={{marginTop: '-5px', maxHeight: '24px'}}/>
+          </Transition>
+        </div>
+        <div className="destCol">
+          <Transition
+            transitionName="example" transitionEnterTimeout={500} transitionLeaveTimeout={0}
+            transitionAppear transitionAppearTimeout={500}>
+            <p>{item.target}</p>
+            <img
+              src={`/images/flags/32/${item.targetCountry.code}.png`}
+              title={item.targetCountry.name}
+              width="28"
+              className="hidden"
+              style={{marginTop: '-5px', maxHeight: '24px'}}/>
+            <IconButton
+              style={{padding: 0, width: 32, height: 32}}
+              iconStyle={{padding: 0}}
+              onTouchTap={this.onClickData.bind(this, item.data)}>
+              <FileIcon color="#fff"/>
+            </IconButton>
+          </Transition>
+        </div>
+      </div>
     )
   }
 
@@ -528,6 +543,9 @@ export default class ThreatMap extends Component {
     this.setState({
       maximized: !this.state.maximized
     })
+  }
+  onClickData (data) {
+    console.log(data)
   }
     // ///////////////////////////////////////////////////////////////////
 
@@ -847,7 +865,8 @@ export default class ThreatMap extends Component {
                   : 'Trojan-Banker.Win32.Bancos.N'
                 ),
                 attack.action || '',
-                attack.severity)
+                attack.severity,
+                attack.data)
       me.showObject(attack.from, true, () => {
         me.showObject(attack.to, true, () => {
           me.showAttack(attack.from, attack.to, attack.color, attack.linetype, attack.count)
@@ -866,45 +885,7 @@ export default class ThreatMap extends Component {
   onTickReal () {
     const me = this
     if (me.currentPlay.stopped) return
-
     me.reset()
-    // $.get(`${ROOT_URL}/incident/threatmap?dateFrom=0&dateTo=0`, { // eslint-disable-line no-undef
-    //
-    // }).done((res) => {
-    //   if (me.cancelled) return
-    //   let incidents = []
-    //   res.forEach(item => {
-    //     incidents.push(item)
-    //   })
-    //   if (incidents.length === 0) return
-    //
-    //   me.reset()
-    //
-    //   let scenes = me.buildScene(incidents)
-    //   me.currentPlay.scene = scenes
-    //
-    //   scenes.forEach(scene => {
-    //     scene.attacks.forEach(attack => {
-    //       if (me.severities.indexOf(attack.severity) < 0) return
-    //       me.addAttackRow(attack.from,
-    //                     attack.to,
-    //                     moment(scene.time).format('HH:mm:ss'),
-    //                     attack.type,
-    //                     attack.action || '',
-    //                     attack.severity)
-    //       me.showObject(attack.from, true, () => {
-    //         me.showObject(attack.to, true, () => {
-    //           me.showAttack(attack.from, attack.to, attack.color, attack.linetype, attack.count)
-    //           me.showBlast(attack.to, attack.color)
-    //         })
-    //       })
-    //     })
-    //   })
-    // }).always(() => {
-    //   me.currentPlay.timer = setTimeout(() => {
-    //     me.onTickReal()
-    //   }, 5000)
-    // })
   }
 
   onSeek (newpos) {
@@ -935,7 +916,8 @@ export default class ThreatMap extends Component {
             moment(screen.time).format('HH:mm:ss'),
             attack.type,
             attack.action || '',
-            attack.severity
+            attack.severity,
+            attack.data
           )
           me.showObject(attack.from, false)
           me.showObject(attack.to, false)
@@ -958,7 +940,7 @@ export default class ThreatMap extends Component {
   }
     // ///////////////////////////////////////////////////////////////////
 
-  addAttackRow (id, attacker, target, time, type, action, severity) {
+  addAttackRow (id, attacker, target, time, type, action, severity, data) {
     const me = this
     me.buffer.push({
       id: id,
@@ -969,7 +951,8 @@ export default class ThreatMap extends Component {
       attacker: attacker.name || attacker.ip,
       attackerCountry: me.findCountry(attacker),
       target: target.name || target.ip,
-      targetCountry: me.findCountry(target)
+      targetCountry: me.findCountry(target),
+      data
     })
   }
 
@@ -1297,7 +1280,9 @@ export default class ThreatMap extends Component {
 
         linetype: 'curve',
         color: colors[severity.toLowerCase()] || 'red',
-        severity: severity
+        severity: severity,
+
+        data: item
       })
     })
 
