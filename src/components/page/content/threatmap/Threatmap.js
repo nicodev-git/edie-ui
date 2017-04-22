@@ -162,7 +162,7 @@ export default class ThreatMap extends Component {
       return 0
     })
     const startTime = incidents[0].timestamp
-    const range = 20;//seconds
+    const range = 20 * 1000 // seconds
     const timeWidth = incidents[incidents.length - 1].timestamp - incidents[0].timestamp
     let scenes = me.buildScene(incidents)
     me.currentPlay.scene = scenes
@@ -170,31 +170,30 @@ export default class ThreatMap extends Component {
     me.realIncidentTimers = []
 
     scenes.forEach(scene => {
-      const delay = scene.time - startTime
-
+      let delay = scene.time - startTime
+      if (timeWidth) delay = delay * range / timeWidth
       const timer = setTimeout(() => {
+        scene.attacks.forEach(attack => {
+          if (me.severities.indexOf(attack.severity) < 0) return
 
-      }, delay)
-      me.realIncidentTimers.push()
-      scene.attacks.forEach(attack => {
-        if (me.severities.indexOf(attack.severity) < 0) return
-
-        me.addAttackRow(
-          attack.id,
-          attack.from,
-          attack.to,
-          moment(scene.time).format('HH:mm:ss'),
-          attack.type,
-          attack.action || '',
-          attack.severity
-        )
-        me.showObject(attack.from, true, () => {
-          me.showObject(attack.to, true, () => {
-            me.showAttack(attack.from, attack.to, attack.color, attack.linetype, attack.count)
-            me.showBlast(attack.to, attack.color)
+          me.addAttackRow(
+            attack.id,
+            attack.from,
+            attack.to,
+            moment(scene.time).format('HH:mm:ss'),
+            attack.type,
+            attack.action || '',
+            attack.severity
+          )
+          me.showObject(attack.from, true, () => {
+            me.showObject(attack.to, true, () => {
+              me.showAttack(attack.from, attack.to, attack.color, attack.linetype, attack.count)
+              me.showBlast(attack.to, attack.color)
+            })
           })
         })
-      })
+      }, delay)
+      me.realIncidentTimers.push(timer)
     })
   }
 
