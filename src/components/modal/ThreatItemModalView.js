@@ -18,8 +18,8 @@ export default class ThreatItemModalView extends React.Component {
           <div>
             {renderEntity(entity)}
           </div>
+          <CloseButton onClose={onHide} />
         </div>
-        <CloseButton onClose={onHide} />
       </Modal>
     )
   }

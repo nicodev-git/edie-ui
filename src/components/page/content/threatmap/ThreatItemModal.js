@@ -7,7 +7,7 @@ export default class ThreatItemModal extends React.Component {
   render () {
     return (
       <ThreatItemModalView
-        entity={this.props.threatItem}
+        entity={this.props.threatItem || {}}
         onHide={this.onHide.bind(this)}
       />
     )

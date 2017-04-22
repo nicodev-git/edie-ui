@@ -546,7 +546,7 @@ export default class ThreatMap extends Component {
     })
   }
   onClickData (data) {
-    console.log(data)
+    this.props.showThreatItemModal(true, data)
   }
     // ///////////////////////////////////////////////////////////////////
 
@@ -1283,7 +1283,7 @@ export default class ThreatMap extends Component {
         color: colors[severity.toLowerCase()] || 'red',
         severity: severity,
 
-        data: item
+        data: item.data
       })
     })
 
@@ -1429,7 +1429,7 @@ export default class ThreatMap extends Component {
           </div>
         </div>
         {maximizedTable}
-        {this.renderThreatItemModal.bind(this)}
+        {this.renderThreatItemModal()}
       </div>
     )
   }
