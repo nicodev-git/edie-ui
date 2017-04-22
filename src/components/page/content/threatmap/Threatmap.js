@@ -119,7 +119,7 @@ export default class ThreatMap extends Component {
     me.svg = d3.select($svg[0])
     me.svg.append('text').attr('class', 'layer')
     me.buffertimer = setInterval(() => {
-      let $scope = me.scope
+      // let $scope = me.scope
 
       if (!me.buffer.length) return
       let row = me.buffer[0]
@@ -128,16 +128,16 @@ export default class ThreatMap extends Component {
       let {latestAttacks} = this.state
 
       latestAttacks.unshift(row)
-      if (latestAttacks.length > $scope.maxSize) {
-        latestAttacks.pop()
-      }
+      // if (latestAttacks.length > $scope.maxSize) {
+      //   latestAttacks.pop()
+      // }
 
       this.setState({ latestAttacks })
     }, 500)
 
     const {query} = this.props.location
     if (query && query.mode === 'replay') {
-      this.onChangeMode({target: {value: 'replay'}})
+      this.onChangeMode(null, null, 'replay')
     }
   }
 
@@ -219,7 +219,7 @@ export default class ThreatMap extends Component {
                         <img src={`/images/flags/32/${item.attackerCountry.code}.png`}
                           title={item.attackerCountry.name}
                           width="28"
-                          style={{marginTop: '-5px', maxHeight: '28px'}}/>
+                          style={{marginTop: '-5px', maxHeight: '24px'}}/>
                     </Transition>
                 </div>
                 <div className="destCol">
@@ -229,7 +229,7 @@ export default class ThreatMap extends Component {
                         <img src={`/images/flags/32/${item.targetCountry.code}.png`}
                           title={item.targetCountry.name}
                           width="28"
-                          style={{marginTop: '-5px', maxHeight: '28px'}}/>
+                          style={{marginTop: '-5px', maxHeight: '24px'}}/>
                     </Transition>
                 </div>
             </div>
@@ -918,6 +918,15 @@ export default class ThreatMap extends Component {
       if (pos < newpos) {
         screen.attacks.forEach(attack => {
           // if (me.severities.indexOf(attack.severity) < 0) return
+          me.addAttackRow(
+            attack.id,
+            attack.from,
+            attack.to,
+            moment(screen.time).format('HH:mm:ss'),
+            attack.type,
+            attack.action || '',
+            attack.severity
+          )
           me.showObject(attack.from, false)
           me.showObject(attack.to, false)
         })
@@ -1318,7 +1327,7 @@ export default class ThreatMap extends Component {
     return (
       <div className="flex-vertical flex-1">
         <div className="form-inline padding-sm" style={{background: '#CECECE'}}>
-          <SelectField value={mode} onChange={this.onChangeMode.bind(this)} style={{width: '120px'}}>
+          <SelectField value={mode} onChange={this.onChangeMode.bind(this)} style={{width: '120px', marginLeft: '20px'}}>
             <MenuItem value="real" primaryText="Real" />
             <MenuItem value="replay" primaryText="Replay" />
             <MenuItem value="demo" primaryText="Demo" />

@@ -6,7 +6,7 @@
 #latestAttacksContainerLeft {
     height: 15em;
     border-width: 1px 0px 1px 1px;
-    overflow: hidden;
+    overflow: auto;
 }
 #latestAttacksContainerRight {
     height: 110px;
@@ -91,11 +91,11 @@
 #latestAttacksContainerLeft #tableHeaderRow div {
     display: table-cell;
     font-size: .85em;
-    padding: 20px 15px;
+    padding: 10px 15px;
 }
 .attackRow div {
     display: table-cell;
-    padding: 10px 15px;
+    padding: 5px 15px;
 }
 .attackRow .sourceCol p{
     width: 70%;
