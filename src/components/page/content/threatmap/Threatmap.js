@@ -1333,8 +1333,11 @@ export default class ThreatMap extends Component {
   }
 
   renderTable () {
+    const {maximized} = this.state
+    const style = {}
+    if (maximized) style.height = '100%'
     return (
-      <div id="latestAttacksContainerLeft" className="pinkBorder">
+      <div id="latestAttacksContainerLeft" className="pinkBorder" style={style}>
         <div id="tableContainer">
           <div id="tableHeaderRow">
             <div id="latestAttacksTimeCol">TIME</div>
@@ -1366,7 +1369,7 @@ export default class ThreatMap extends Component {
 
     const maximizedTable = maximized ? (
       <div className="flex-1">
-        <div id="latestAttacksContainer">
+        <div id="latestAttacksContainer" style={{height: '100%'}}>
           {this.renderTable()}
         </div>
       </div>
