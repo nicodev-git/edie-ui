@@ -193,7 +193,7 @@ export function showSidebarMessageMenu (open) {
 
 export function showThreats (params) {
   return dispatch => {
-    axios.get(`${ROOT_URL}/showThreats`, {params})
+    axios.get(`${ROOT_URL}/search/showThreats`, {params})
   }
 }
 
