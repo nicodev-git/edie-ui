@@ -26,6 +26,7 @@ import MonitorPickerView from './MonitorPickerView'
 import ParamEditModalView from './ParamEditModalView'
 import WorkflowSelectModalView from './WorkflowSelectModalView'
 import DeviceTplWfSelectModalView from './DeviceTplWfSelectModalView'
+import ThreatItemModalView from './ThreatItemModalView'
 
 export {
   ActivationModalView,
@@ -55,5 +56,6 @@ export {
   MonitorPickerView,
   ParamEditModalView,
   WorkflowSelectModalView,
-  DeviceTplWfSelectModalView
+  DeviceTplWfSelectModalView,
+  ThreatItemModalView
 }
