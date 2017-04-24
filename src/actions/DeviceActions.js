@@ -683,7 +683,7 @@ export const closeWfActionModal = () => {
 
 export const fixAllDeviceIncidents = (device) => {
   return dispatch => {
-    axios.get(`/incident/fixall/bydeviceid/${device.id}`).then(res => {
+    axios.get(`${ROOT_URL}/incident/fixall/bydeviceid/${device.id}`).then(res => {
       dispatch({type: FIX_ALL_DEVICE_INCIDENTS})
     }).catch(error => apiError(dispatch, error))
   }

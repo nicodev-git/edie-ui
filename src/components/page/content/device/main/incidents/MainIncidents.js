@@ -285,6 +285,7 @@ export default class MainIncidents extends Component {
     const { currentSortCol, currentSortDir, selectedSeverity, fixed, afterStartTimestamp, beforeStartTimestamp, text } = this.state
 
     let params = {
+      draw: this.props.incidentDraw,
       description: text || '""',
       severity: selectedSeverity,
       afterStartTimestamp,
