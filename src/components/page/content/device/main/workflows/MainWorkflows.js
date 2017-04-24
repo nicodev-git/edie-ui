@@ -34,6 +34,15 @@ export default class MainWorkflows extends React.Component {
     }, {
       'displayName': 'Description',
       'columnName': 'desc'
+    }, {
+      'displayName': 'Description',
+      'columnName': 'desc'
+    }, {
+      'displayName': 'Global',
+      'columnName': 'isglobal',
+      'customComponent': p => {
+        return <span>{p.data ? 'YES' : 'NO'}</span>
+      }
     }]
   }
 

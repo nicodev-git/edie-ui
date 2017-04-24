@@ -36,6 +36,12 @@ export default class Rules extends React.Component {
     }, {
       'displayName': 'Version',
       'columnName': 'version'
+    }, {
+      'displayName': 'Global',
+      'columnName': 'isglobal',
+      'customComponent': p => {
+        return <span>{p.data ? 'YES' : 'NO'}</span>
+      }
     }]
   }
   componentWillMount () {
