@@ -1,6 +1,8 @@
 import React from 'react'
 import {RaisedButton, Menu, MenuItem, Popover, TextField, FlatButton} from 'material-ui'
 import ActionSearch from 'material-ui/svg-icons/action/search'
+import moment from 'moment'
+import { assign } from 'lodash'
 
 import MonitorTable from './MonitorTable'
 import EventLogTable from './EventLogTable'
@@ -14,18 +16,14 @@ import MonitorLogOptions from './MonitorLogOptions'
 import TabPage from '../../../../shared/TabPage'
 import TabPageBody from '../../../../shared/TabPageBody'
 import TabPageHeader from '../../../../shared/TabPageHeader'
-import { Provider } from 'react-redux'
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
-import { store } from 'shared/GetStore'
 import { parseSearchQuery } from 'shared/Global'
-
-import { assign } from 'lodash'
 
 export default class Monitors extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
       selected: 'monitors',
+      query: '',
       currentMonitor: null
     }
   }
@@ -94,14 +92,28 @@ export default class Monitors extends React.Component {
       query: e.target.value
     })
   }
+  onKeyupQuery (e) {
+    if (e.keyCode === 13) {
+      this.onClickSearch()
+    }
+  }
   onClickSearch () {
-    const query = `deviceid=${this.props.device.id} and _all=${this.state.query}`
+    const {selected} = this.state
+    let monitortype = ''
+    if (selected === 'eventlog') monitortype = 'log'
+    else if (selected === 'process') monitortype = 'process'
+    else if (selected === 'application') monitortype = 'app'
+    console.log(this.props.params)
+
+    const query = `deviceid=${this.props.device.id} and monitortype=${monitortype} and eventType=AGENT and _all=${this.state.query}`
     const queryChips = parseSearchQuery(query)
-    this.props.updateSearchParams(assign(this.props.params, {
+    this.props.updateSearchParams(assign({}, this.props.params, {
       query,
       severity: 'HIGH,MEDIUM',
       collections: 'event',
-      workflow: ''
+      workflow: '',
+      dateFrom: moment().startOf('year').valueOf(),
+      dateTo: moment().endOf('year').valueOf()
     }))
 
     this.props.replaceSearchWfs([])
@@ -113,7 +125,7 @@ export default class Monitors extends React.Component {
     const {selected, query} = this.state
     return (
       <div className={`inline-block ${selected === 'monitors' ? 'hidden' : ''}`}>
-        <TextField value={query} onChange={this.onChangeQuery.bind(this)}/>
+        <TextField value={query} onChange={this.onChangeQuery.bind(this)} onKeyUp={this.onKeyupQuery.bind(this)}/>
         <FlatButton icon={<ActionSearch />} onTouchTap={this.onClickSearch.bind(this)}/>
       </div>
     )
@@ -209,19 +221,15 @@ export default class Monitors extends React.Component {
     const {props} = this
     const {device} = props
     return (
-      <MuiThemeProvider>
-        <Provider store={store}>
-          <TabPage>
-            <TabPageHeader title={device.name}>
-              {this.renderOptions()}
-            </TabPageHeader>
-            <TabPageBody>
-              {this.renderBody()}
-              {this.renderProcessModal()}
-            </TabPageBody>
-          </TabPage>
-        </Provider>
-      </MuiThemeProvider>
+      <TabPage>
+        <TabPageHeader title={device.name}>
+          {this.renderOptions()}
+        </TabPageHeader>
+        <TabPageBody>
+          {this.renderBody()}
+          {this.renderProcessModal()}
+        </TabPageBody>
+      </TabPage>
     )
   }
 }
