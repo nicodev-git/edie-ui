@@ -1,5 +1,6 @@
 import React from 'react'
-import {RaisedButton, Menu, MenuItem, Popover} from 'material-ui'
+import {RaisedButton, Menu, MenuItem, Popover, TextField, FlatButton} from 'material-ui'
+import ActionSearch from 'material-ui/svg-icons/action/search'
 
 import MonitorTable from './MonitorTable'
 import EventLogTable from './EventLogTable'
@@ -85,7 +86,23 @@ export default class Monitors extends React.Component {
       open: false
     })
   }
-
+  onChangeQuery (e) {
+    this.setState({
+      query: e.target.value
+    })
+  }
+  onClickSearch () {
+    console.log(this.state.query)
+  }
+  renderSearch () {
+    const {selected, query} = this.state
+    return (
+      <div className={`inline-block ${selected === 'monitors' ? 'hidden' : ''}`}>
+        <TextField value={query} onChange={this.onChangeQuery.bind(this)}/>
+        <FlatButton icon={<ActionSearch />} onTouchTap={this.onClickSearch.bind(this)}/>
+      </div>
+    )
+  }
   renderOptions () {
     const {selected, currentMonitor} = this.state
 
@@ -126,6 +143,7 @@ export default class Monitors extends React.Component {
                 </Menu>
               </Popover>
             </div>
+            {this.renderSearch()}
           </div>
         )
         break
