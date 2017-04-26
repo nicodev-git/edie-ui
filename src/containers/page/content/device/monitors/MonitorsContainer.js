@@ -15,7 +15,11 @@ import {
   fetchMonitorTemplates,
   closeDeviceMonitorPicker,
   openProcessModal,
-  closeProcessModal
+  closeProcessModal,
+
+  updateSearchParams,
+  replaceSearchWfs,
+  updateQueryChips
 } from 'actions'
 
 @connect(
@@ -29,7 +33,9 @@ import {
     eventLogs: state.devices.eventLogs,
     apps: state.devices.apps,
     processes: state.devices.processes,
-    monitorTemplates: state.settings.monitorTemplates
+    monitorTemplates: state.settings.monitorTemplates,
+
+    params: state.search.params
   }),
   {
     openDeviceMonitorPicker,
@@ -44,7 +50,11 @@ import {
     fetchMonitorTemplates,
     closeDeviceMonitorPicker,
     openProcessModal,
-    closeProcessModal
+    closeProcessModal,
+
+    updateSearchParams,
+    replaceSearchWfs,
+    updateQueryChips
   }
 )
 @withRouter

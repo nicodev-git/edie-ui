@@ -17,6 +17,9 @@ import TabPageHeader from '../../../../shared/TabPageHeader'
 import { Provider } from 'react-redux'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import { store } from 'shared/GetStore'
+import { parseSearchQuery } from 'shared/Global'
+
+import { assign } from 'lodash'
 
 export default class Monitors extends React.Component {
   constructor (props) {
@@ -92,7 +95,19 @@ export default class Monitors extends React.Component {
     })
   }
   onClickSearch () {
-    console.log(this.state.query)
+    const query = `deviceid=${this.props.device.id} and _all=${this.state.query}`
+    const queryChips = parseSearchQuery(query)
+    this.props.updateSearchParams(assign(this.props.params, {
+      query,
+      severity: 'HIGH,MEDIUM',
+      collections: 'event',
+      workflow: ''
+    }))
+
+    this.props.replaceSearchWfs([])
+    this.props.updateQueryChips(queryChips)
+
+    this.props.router.push('/search')
   }
   renderSearch () {
     const {selected, query} = this.state
