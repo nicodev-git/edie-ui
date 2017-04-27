@@ -858,7 +858,7 @@ export const selectSysWorkflowCategory = (category) => {
   }
 }
 
-const fetchAgentEvent = (deviceid, monitortype, cb) => {
+const fetchAgentEvent = (dispatch, deviceid, monitortype, cb) => {
   axios.get(`${ROOT_URL}/event/search/findAgentEvents`, {
     params: {
       deviceid,
@@ -876,7 +876,7 @@ const fetchAgentEvent = (deviceid, monitortype, cb) => {
 export const fetchMonitorOS = (deviceid) => {
   return dispatch => {
     dispatch({type: FETCH_MONITOR_OS, os: null})
-    fetchAgentEvent(deviceid, 'os', data => {
+    fetchAgentEvent(dispatch, deviceid, 'os', data => {
       dispatch({type: FETCH_MONITOR_OS, os: data})
     })
   }
@@ -885,7 +885,7 @@ export const fetchMonitorOS = (deviceid) => {
 export const fetchMonitorDisk = (deviceid) => {
   return dispatch => {
     dispatch({type: FETCH_MONITOR_DISK, disk: null})
-    fetchAgentEvent(deviceid, 'disk', data => {
+    fetchAgentEvent(dispatch, deviceid, 'disk', data => {
       dispatch({type: FETCH_MONITOR_DISK, disk: data})
     })
   }
@@ -894,7 +894,7 @@ export const fetchMonitorDisk = (deviceid) => {
 export const fetchMonitorCpu = (deviceid) => {
   return dispatch => {
     dispatch({type: FETCH_MONITOR_CPU, cpu: null})
-    fetchAgentEvent(deviceid, 'cpu', data => {
+    fetchAgentEvent(dispatch, deviceid, 'cpu', data => {
       dispatch({type: FETCH_MONITOR_CPU, cpu: data})
     })
   }
