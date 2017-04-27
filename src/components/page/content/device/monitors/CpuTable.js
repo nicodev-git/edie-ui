@@ -5,7 +5,7 @@ class CpuTable extends React.Component {
     // this.props.fetchMonitorCpu()
     this.timer = setInterval(() => {
       this.props.fetchMonitorCpu()
-    }, 10000)
+    }, 5000)
   }
   componentWillUnmount () {
     clearInterval(this.timer)
