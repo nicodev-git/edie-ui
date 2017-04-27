@@ -23,7 +23,8 @@ import {
 
   fetchMonitorOS,
   fetchMonitorDisk,
-  fetchMonitorCpu
+  fetchMonitorCpu,
+  clearMonitors
 } from 'actions'
 
 @connect(
@@ -66,7 +67,8 @@ import {
 
     fetchMonitorOS,
     fetchMonitorDisk,
-    fetchMonitorCpu
+    fetchMonitorCpu,
+    clearMonitors
   }
 )
 @withRouter

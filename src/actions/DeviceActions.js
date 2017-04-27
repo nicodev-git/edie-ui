@@ -83,6 +83,7 @@ import {
   FETCH_MONITOR_OS,
   FETCH_MONITOR_DISK,
   FETCH_MONITOR_CPU,
+  CLEAR_MONITORS,
 
   NO_AUTH_ERROR
 } from './types'
@@ -875,7 +876,6 @@ const fetchAgentEvent = (dispatch, deviceid, monitortype, cb) => {
 
 export const fetchMonitorOS = (deviceid) => {
   return dispatch => {
-    dispatch({type: FETCH_MONITOR_OS, os: null})
     fetchAgentEvent(dispatch, deviceid, 'os', data => {
       dispatch({type: FETCH_MONITOR_OS, os: data})
     })
@@ -884,7 +884,6 @@ export const fetchMonitorOS = (deviceid) => {
 
 export const fetchMonitorDisk = (deviceid) => {
   return dispatch => {
-    dispatch({type: FETCH_MONITOR_DISK, disk: null})
     fetchAgentEvent(dispatch, deviceid, 'disk', data => {
       dispatch({type: FETCH_MONITOR_DISK, disk: data})
     })
@@ -893,9 +892,14 @@ export const fetchMonitorDisk = (deviceid) => {
 
 export const fetchMonitorCpu = (deviceid) => {
   return dispatch => {
-    dispatch({type: FETCH_MONITOR_CPU, cpu: null})
     fetchAgentEvent(dispatch, deviceid, 'cpu', data => {
       dispatch({type: FETCH_MONITOR_CPU, cpu: data})
     })
+  }
+}
+
+export const clearMonitors = () => {
+  return dispatch => {
+    dispatch({type: CLEAR_MONITORS})
   }
 }

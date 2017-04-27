@@ -12,6 +12,7 @@ import ProcessModal from './ProcessModal'
 import MonitorLogTable from './MonitorLogTable'
 import OSTable from './OSTable'
 import DiskTable from './DiskTable'
+import CpuTable from './CpuTable'
 
 import MonitorLogOptions from './MonitorLogOptions'
 
@@ -28,6 +29,9 @@ export default class Monitors extends React.Component {
       query: '',
       currentMonitor: null
     }
+  }
+  componentWillMount () {
+    this.props.clearMonitors()
   }
 
   getMonitorTable () {
@@ -200,7 +204,8 @@ export default class Monitors extends React.Component {
       case 'monitors' :
         return (
           <div className="flex-vertical" style={{height: '100%'}}>
-            <div>
+            <div className="padding-md">
+              <CpuTable {...this.props}/>
               <DiskTable {...this.props}/>
             </div>
             <div className="flex-1 flex-vertical" style={{background: 'white'}}>

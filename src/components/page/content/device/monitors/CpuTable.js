@@ -2,7 +2,13 @@ import React from 'react'
 
 class CpuTable extends React.Component {
   componentWillMount () {
-    this.props.fetchMonitorCpu()
+    // this.props.fetchMonitorCpu()
+    this.timer = setInterval(() => {
+      this.props.fetchMonitorCpu()
+    }, 10000)
+  }
+  componentWillUnmount () {
+    clearInterval(this.timer)
   }
   buildProgress (val) {
     let color = 'red'
@@ -22,8 +28,8 @@ class CpuTable extends React.Component {
     if (!monitorCpu) return null
     const cpus = monitorCpu.dataobj
     return (cpus.length ? cpus : [cpus]).map((d, i) =>
-      <div key={i} className="inline-block valign-top">
-        <img src="/images/cpu.gif" width="80"/>
+      <div key={i} className="inline-block padding-md">
+        <img src="/images/cpu.gif" width="70"/>
         <div className="inline">
           {this.buildProgress(d.Usage)}
         </div>
@@ -32,7 +38,7 @@ class CpuTable extends React.Component {
   }
   render () {
     return (
-      <div className="inline-block">
+      <div className="inline-block valign-top">
         {this.renderContent()}
       </div>
     )
