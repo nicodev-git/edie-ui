@@ -1,6 +1,6 @@
 import moment from 'moment'
 import React from 'react'
-import {reduce, isNull, isUndefined, isArray, findIndex} from 'lodash'
+import {reduce, isNull, isUndefined, isArray} from 'lodash'
 import { ROOT_URL } from 'actions/config'
 import WarningIcon from 'material-ui/svg-icons/alert/warning'
 import DescriptionIcon from 'material-ui/svg-icons/action/description'
@@ -187,33 +187,6 @@ export function parseSearchQuery (query) {
   })
 }
 
-/* Search Options */
-export const KEY_SEARCH_OPTIONS = 'SEARCH_OPTIONS'
-export function getEnvVar (envvars, key) {
-  const index = findIndex(envvars, {envvars: {key}})
-  return index < 0 ? null : envvars[index]
-}
-
-export function getEnvVarValue1 (envVar) {
-  if (!envVar) return null
-  return envVar['envvars']['value1']
-}
-
-export function setEnvVarValue1 (envVar, value1) {
-  if (!envVar) return null
-  envVar['envvars']['value1'] = value1
-  return envVar
-}
-
-export function createEnvVar (key, value1, value2) {
-  return {
-    envvars: {
-      key,
-      value1,
-      value2
-    }
-  }
-}
 export function guid () {
   function s4 () {
     return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1)
