@@ -1123,3 +1123,15 @@ table.table tbody tr.selected {
     width: 100%;
     overflow: auto;
 }
+
+/* Progress */
+.progress {
+    margin-bottom: 0;
+}
+
+.centered {
+    transform: translate(-50%, -50%);
+    position: absolute;
+    left: 50%;
+    top: 50%;
+}

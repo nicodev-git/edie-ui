@@ -180,7 +180,6 @@ export default class Monitors extends React.Component {
                   <MenuItem primaryText="Installed Applications" onTouchTap={this.onClickApplication.bind(this)}/>
                   <MenuItem primaryText="Process" onTouchTap={this.onClickProcess.bind(this)}/>
                   <MenuItem primaryText="OS" onTouchTap={this.onClickOS.bind(this)}/>
-                  <MenuItem primaryText="Disk" onTouchTap={this.onClickDisk.bind(this)}/>
                 </Menu>
               </Popover>
             </div>
@@ -201,6 +200,9 @@ export default class Monitors extends React.Component {
       case 'monitors' :
         return (
           <div className="flex-vertical" style={{height: '100%'}}>
+            <div>
+              <DiskTable {...this.props}/>
+            </div>
             <div className="flex-1 flex-vertical" style={{background: 'white'}}>
               <MonitorTable {...props} ref="monitor"/>
             </div>
