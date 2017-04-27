@@ -75,6 +75,7 @@ import {
   CLOSE_DEVICE,
 
   FETCH_MONITOR_OS,
+  FETCH_MONITOR_DISK,
 
   UPDATE_DEVICE_ERROR
 } from '../actions/types'
@@ -275,6 +276,8 @@ export default function (state = INITIAL_STATE, action) {
       return { ...state, selectedSysWorkflowCategory: action.category }
     case FETCH_MONITOR_OS:
       return { ...state, monitorOS: action.os }
+    case FETCH_MONITOR_DISK:
+      return { ...state, monitorDisk: action.disk }
   }
   return state
 }

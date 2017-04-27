@@ -874,3 +874,21 @@ export const fetchMonitorOS = (deviceid) => {
     }).catch(error => apiError(dispatch, error))
   }
 }
+
+export const fetchMonitorDisk = (deviceid) => {
+  return dispatch => {
+    dispatch({type: FETCH_MONITOR_DISK, disk: null})
+    axios.get(`${ROOT_URL}/event/search/findAgentEvents`, {
+      params: {
+        deviceid,
+        eventType: 'AGENT',
+        monitortype: 'disk',
+        sort: 'timestamp,desc',
+        size: 1
+      }
+    }).then(res => {
+      const data = res.data._embedded.events
+      dispatch({type: FETCH_MONITOR_DISK, disk: data.length ? data[0] : ''})
+    }).catch(error => apiError(dispatch, error))
+  }
+}

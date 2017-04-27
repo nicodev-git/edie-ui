@@ -11,6 +11,7 @@ import ProcessTable from './ProcessTable'
 import ProcessModal from './ProcessModal'
 import MonitorLogTable from './MonitorLogTable'
 import OSTable from './OSTable'
+import DiskTable from './DiskTable'
 
 import MonitorLogOptions from './MonitorLogOptions'
 
@@ -225,6 +226,10 @@ export default class Monitors extends React.Component {
       case 'os':
         return (
           <OSTable {...this.props}/>
+        )
+      case 'disk':
+        return (
+          <DiskTable {...this.props}/>
         )
     }
   }
