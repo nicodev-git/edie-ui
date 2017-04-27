@@ -170,6 +170,7 @@ export function encodeUrlParams (obj) {
 }
 
 export function parseSearchQuery (query) {
+  if (!query) return []
   const matches = query.split(' and ')
   // if (!matches || !matches.length) {
   //   if (query) return [{name: '_all', value: query}]
