@@ -82,6 +82,7 @@ import {
 
   FETCH_MONITOR_OS,
   FETCH_MONITOR_DISK,
+  FETCH_MONITOR_CPU,
 
   NO_AUTH_ERROR
 } from './types'
@@ -857,38 +858,44 @@ export const selectSysWorkflowCategory = (category) => {
   }
 }
 
+const fetchAgentEvent = (deviceid, monitortype, cb) => {
+  axios.get(`${ROOT_URL}/event/search/findAgentEvents`, {
+    params: {
+      deviceid,
+      eventType: 'AGENT',
+      monitortype,
+      sort: 'timestamp,desc',
+      size: 1
+    }
+  }).then(res => {
+    const data = res.data._embedded.events
+    data.length && cb && cb(data[0])
+  }).catch(error => apiError(dispatch, error))
+}
+
 export const fetchMonitorOS = (deviceid) => {
   return dispatch => {
-    dispatch({type: FETCH_MONITOR_OS, os: ''})
-    axios.get(`${ROOT_URL}/event/search/findAgentEvents`, {
-      params: {
-        deviceid,
-        eventType: 'AGENT',
-        monitortype: 'os',
-        sort: 'timestamp,desc',
-        size: 1
-      }
-    }).then(res => {
-      const data = res.data._embedded.events
-      dispatch({type: FETCH_MONITOR_OS, os: data.length ? data[0] : ''})
-    }).catch(error => apiError(dispatch, error))
+    dispatch({type: FETCH_MONITOR_OS, os: null})
+    fetchAgentEvent(deviceid, 'os', data => {
+      dispatch({type: FETCH_MONITOR_OS, os: data})
+    })
   }
 }
 
 export const fetchMonitorDisk = (deviceid) => {
   return dispatch => {
     dispatch({type: FETCH_MONITOR_DISK, disk: null})
-    axios.get(`${ROOT_URL}/event/search/findAgentEvents`, {
-      params: {
-        deviceid,
-        eventType: 'AGENT',
-        monitortype: 'disk',
-        sort: 'timestamp,desc',
-        size: 1
-      }
-    }).then(res => {
-      const data = res.data._embedded.events
-      dispatch({type: FETCH_MONITOR_DISK, disk: data.length ? data[0] : ''})
-    }).catch(error => apiError(dispatch, error))
+    fetchAgentEvent(deviceid, 'disk', data => {
+      dispatch({type: FETCH_MONITOR_DISK, disk: data})
+    })
+  }
+}
+
+export const fetchMonitorCpu = (deviceid) => {
+  return dispatch => {
+    dispatch({type: FETCH_MONITOR_CPU, cpu: null})
+    fetchAgentEvent(deviceid, 'cpu', data => {
+      dispatch({type: FETCH_MONITOR_CPU, cpu: data})
+    })
   }
 }

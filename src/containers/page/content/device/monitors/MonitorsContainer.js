@@ -22,7 +22,8 @@ import {
   updateQueryChips,
 
   fetchMonitorOS,
-  fetchMonitorDisk
+  fetchMonitorDisk,
+  fetchMonitorCpu
 } from 'actions'
 
 @connect(
@@ -41,7 +42,8 @@ import {
     params: state.search.params,
 
     monitorOS: state.devices.monitorOS,
-    monitorDisk: state.devices.monitorDisk
+    monitorDisk: state.devices.monitorDisk,
+    monitorCpu: state.devices.monitorCpu
   }),
   {
     openDeviceMonitorPicker,
@@ -63,7 +65,8 @@ import {
     updateQueryChips,
 
     fetchMonitorOS,
-    fetchMonitorDisk
+    fetchMonitorDisk,
+    fetchMonitorCpu
   }
 )
 @withRouter

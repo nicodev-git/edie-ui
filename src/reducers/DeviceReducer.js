@@ -76,6 +76,7 @@ import {
 
   FETCH_MONITOR_OS,
   FETCH_MONITOR_DISK,
+  FETCH_MONITOR_CPU,
 
   UPDATE_DEVICE_ERROR
 } from '../actions/types'
@@ -278,6 +279,8 @@ export default function (state = INITIAL_STATE, action) {
       return { ...state, monitorOS: action.os }
     case FETCH_MONITOR_DISK:
       return { ...state, monitorDisk: action.disk }
+    case FETCH_MONITOR_CPU:
+      return { ...state, monitorCpu: action.cpu }
   }
   return state
 }
