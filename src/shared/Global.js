@@ -170,14 +170,15 @@ export function encodeUrlParams (obj) {
 }
 
 export function parseSearchQuery (query) {
-  const matches = query.match(/([^ ()]*)=([^ ()]*)/gi)
-  if (!matches || !matches.length) {
-    if (query) return [{name: '_all', value: query}]
-    return []
-  }
+  const matches = query.split(' and ')
+  // if (!matches || !matches.length) {
+  //   if (query) return [{name: '_all', value: query}]
+  //   return []
+  // }
 
   return matches.map(m => {
-    const res = m.match(/([^ ()]*)=([^ ()]*)/)
+    const res = m.match(/([^ ()]*)=(.*)/)
+    if (!res || !res.length) return {name: '_all', value: m}
     return {
       name: res[1],
       value: res[2]
