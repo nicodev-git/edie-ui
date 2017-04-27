@@ -10,6 +10,7 @@ import ApplicationTable from './ApplicationTable'
 import ProcessTable from './ProcessTable'
 import ProcessModal from './ProcessModal'
 import MonitorLogTable from './MonitorLogTable'
+import OSTable from './OSTable'
 
 import MonitorLogOptions from './MonitorLogOptions'
 
@@ -220,6 +221,10 @@ export default class Monitors extends React.Component {
       case 'monitorlog':
         return (
           <MonitorLogTable device={this.state.currentMonitor} father={device}/>
+        )
+      case 'os':
+        return (
+          <OSTable {...this.props}/>
         )
     }
   }

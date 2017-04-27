@@ -19,7 +19,9 @@ import {
 
   updateSearchParams,
   replaceSearchWfs,
-  updateQueryChips
+  updateQueryChips,
+
+  fetchMonitorOS
 } from 'actions'
 
 @connect(
@@ -35,7 +37,9 @@ import {
     processes: state.devices.processes,
     monitorTemplates: state.settings.monitorTemplates,
 
-    params: state.search.params
+    params: state.search.params,
+
+    monitorOS: state.devices.monitorOS
   }),
   {
     openDeviceMonitorPicker,
@@ -54,7 +58,9 @@ import {
 
     updateSearchParams,
     replaceSearchWfs,
-    updateQueryChips
+    updateQueryChips,
+
+    fetchMonitorOS
   }
 )
 @withRouter

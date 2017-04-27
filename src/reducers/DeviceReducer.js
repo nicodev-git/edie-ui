@@ -74,6 +74,8 @@ import {
 
   CLOSE_DEVICE,
 
+  FETCH_MONITOR_OS,
+
   UPDATE_DEVICE_ERROR
 } from '../actions/types'
 
@@ -271,6 +273,8 @@ export default function (state = INITIAL_STATE, action) {
 
     case SELECT_SYS_WORKFLOW_CATEGORY:
       return { ...state, selectedSysWorkflowCategory: action.category }
+    case FETCH_MONITOR_OS:
+      return { ...state, monitorOS: action.os }
   }
   return state
 }

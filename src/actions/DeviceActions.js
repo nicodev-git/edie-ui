@@ -80,6 +80,9 @@ import {
   OPEN_PROCESS_MODAL,
   CLOSE_PROCESS_MODAL,
 
+  FETCH_MONITOR_OS,
+  FETCH_MONITOR_DISK,
+
   NO_AUTH_ERROR
 } from './types'
 
@@ -851,5 +854,23 @@ export const deselectSysWorkflow = (workflow) => {
 export const selectSysWorkflowCategory = (category) => {
   return dispatch => {
     dispatch({type: SELECT_SYS_WORKFLOW_CATEGORY, category})
+  }
+}
+
+export const fetchMonitorOS = (deviceid) => {
+  return dispatch => {
+    dispatch({type: FETCH_MONITOR_OS, os: ''})
+    axios.get(`${ROOT_URL}/event/search/findAgentEvents`, {
+      params: {
+        deviceid,
+        eventType: 'AGENT',
+        monitortype: 'os',
+        sort: 'timestamp,desc',
+        size: 1
+      }
+    }).then(res => {
+      const data = res.data._embedded.events
+      dispatch({type: FETCH_MONITOR_OS, os: data.length ? data[0] : ''})
+    }).catch(error => apiError(dispatch, error))
   }
 }
