@@ -244,7 +244,7 @@ InfiniteTable.defaultProps = {
   useExternal: true,
   data: [],
 
-  pageSize: 50,
+  pageSize: 20,
   rowMetadata: {},
   rowHeight: 50,
   showTableHeading: true,
