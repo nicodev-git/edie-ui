@@ -68,6 +68,16 @@ export default class Monitors extends React.Component {
     })
   }
 
+  onClickOS () {
+    this.setState({
+      'selected': 'os'
+    })
+  }
+  onClickDisk () {
+    this.setState({
+      'selected': 'disk'
+    })
+  }
   onMonitorLogClicked (monitor) {
     this.setState({
       'selected': 'monitorlog',
@@ -167,6 +177,8 @@ export default class Monitors extends React.Component {
                   <MenuItem primaryText="Event Log" onTouchTap={this.onClickEventLog.bind(this)}/>
                   <MenuItem primaryText="Installed Applications" onTouchTap={this.onClickApplication.bind(this)}/>
                   <MenuItem primaryText="Process" onTouchTap={this.onClickProcess.bind(this)}/>
+                  <MenuItem primaryText="OS" onTouchTap={this.onClickOS.bind(this)}/>
+                  <MenuItem primaryText="Disk" onTouchTap={this.onClickDisk.bind(this)}/>
                 </Menu>
               </Popover>
             </div>
