@@ -3,7 +3,7 @@ import TimeAgo from 'react-timeago'
 import { assign, concat, debounce } from 'lodash'
 import ReactTooltip from 'react-tooltip'
 
-import MonitorWizardContainer from '../../../../../containers/shared/wizard/MonitorWizardContainer'
+import MonitorWizardContainer from 'containers/shared/wizard/MonitorWizardContainer'
 import InfiniteTable from 'components/shared/InfiniteTable'
 
 import { appendComponent, removeComponent } from '../../../../../util/Component'

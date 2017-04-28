@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { assign } from 'lodash'
-import SimpleModalContainer from '../../../../../containers/modal/SimpleModalContainer'
+import SimpleModalContainer from 'containers/modal/SimpleModalContainer'
 import { validate } from '../../../../modal/validation/Password'
 
 export default class PasswordModal extends Component { // eslint-disable-line react/no-multi-comp

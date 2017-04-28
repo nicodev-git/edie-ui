@@ -58,7 +58,7 @@ export default connect(
 
 /* import React from 'react'
 import { assign } from 'lodash'
-import SimpleModalContainer from '../../../../../../containers/modal/SimpleModalContainer'
+import SimpleModalContainer from 'containers/modal/SimpleModalContainer'
 import { validate } from '../../../../../modal/validation/NameValidation'
 import { closeWfActionModal } from '../../../../../../actions'
 

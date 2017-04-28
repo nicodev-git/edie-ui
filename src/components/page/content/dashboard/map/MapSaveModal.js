@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import SimpleModalContainer from '../../../../../containers/modal/SimpleModalContainer'
+import SimpleModalContainer from 'containers/modal/SimpleModalContainer'
 import { validate } from '../../../../modal/validation/NameValidation'
 
 export default class MapSaveModal extends Component {

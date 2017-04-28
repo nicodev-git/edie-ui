@@ -3,7 +3,7 @@ import Modal from 'react-bootstrap-modal'
 import { showAlert } from '../../../../../shared/Alert'
 import { ROOT_URL } from '../../../../../../actions/config'
 import { validate } from '../../../../../modal/validation/NameValidation'
-import SimpleModalContainer from '../../../../../../containers/modal/SimpleModalContainer'
+import SimpleModalContainer from 'containers/modal/SimpleModalContainer'
 
 export default class IgnoreRuleEditModal extends Component {
   constructor (props) {

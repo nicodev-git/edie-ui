@@ -3,7 +3,7 @@ import Modal from 'react-bootstrap-modal'
 import { Pagination } from 'react-bootstrap'
 
 import Preloader from '../../../../shared/Preloader'
-import DeviceWizardContainer from '../../../../../containers/shared/wizard/DeviceWizardContainer'
+import DeviceWizardContainer from 'containers/shared/wizard/DeviceWizardContainer'
 import LogMatchModal from './LogMatchModal'
 
 import { appendComponent, removeComponent } from '../../../../../util/Component'

@@ -11,7 +11,7 @@ import { showAlert, showConfirm } from '../../../../../shared/Alert'
 import InfiniteTable from '../../../../../shared/InfiniteTable'
 import MarkIgnoreModal from './MarkIgnoreModal'
 import SimulatorModal from '../rules/SimulatorModal'
-import DeviceWizardContainer from '../../../../../../containers/shared/wizard/DeviceWizardContainer'
+import DeviceWizardContainer from 'containers/shared/wizard/DeviceWizardContainer'
 
 import MainTabs from '../MainTabs'
 import TabPage from '../../../../../shared/TabPage'

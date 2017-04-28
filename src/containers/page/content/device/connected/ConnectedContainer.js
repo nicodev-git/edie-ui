@@ -1,5 +1,5 @@
 import React from 'react'
-import Connected from '../../../../../components/page/content/device/connected/Connected'
+import Connected from 'components/page/content/device/connected/Connected'
 import {withRouter} from 'react-router'
 import { connect } from 'react-redux'
 

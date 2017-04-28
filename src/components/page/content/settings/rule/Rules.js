@@ -8,7 +8,7 @@ import SettingTabs from '../SettingTabs'
 import TabPage from '../../../../shared/TabPage'
 import TabPageBody from '../../../../shared/TabPageBody'
 import TabPageHeader from '../../../../shared/TabPageHeader'
-import WorkflowModalContainer from '../../../../../containers/page/content/settings/rule/WorkflowModalContainer'
+import WorkflowModalContainer from 'containers/page/content/settings/rule/WorkflowModalContainer'
 import { errorStyle, underlineFocusStyle, inputStyle, selectedItemStyle } from 'style/materialStyles'
 
 export default class Rules extends React.Component {

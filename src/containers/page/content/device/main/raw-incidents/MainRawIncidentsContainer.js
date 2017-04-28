@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import MainRawIncidents from '../../../../../../components/page/content/device/main/raw-incidents/MainRawIncidents'
+import MainRawIncidents from 'components/page/content/device/main/raw-incidents/MainRawIncidents'
 import { withRouter } from 'react-router'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'

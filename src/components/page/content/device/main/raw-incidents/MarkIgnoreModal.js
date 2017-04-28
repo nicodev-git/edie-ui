@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { validate } from '../../../../../modal/validation/NameValidation'
 import { ROOT_URL } from '../../../../../../actions/config'
-import SimpleModalContainer from '../../../../../../containers/modal/SimpleModalContainer'
+import SimpleModalContainer from 'containers/modal/SimpleModalContainer'
 
 export default class MarkIgnoreModal extends Component {
 

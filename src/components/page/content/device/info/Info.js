@@ -1,7 +1,7 @@
 import React from 'react'
 import { assign } from 'lodash'
 
-import DeviceEditWizardContainer from '../../../../../containers/shared/wizard/DeviceEditWizardContainer'
+import DeviceEditWizardContainer from 'containers/shared/wizard/DeviceEditWizardContainer'
 import { deviceTypeMap } from '../../../../shared/wizard/WizardConfig'
 
 export default class Info extends React.Component {

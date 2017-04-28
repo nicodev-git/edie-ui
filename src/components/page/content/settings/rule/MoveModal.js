@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { ROOT_URL } from '../../../../../actions/config'
-import SimpleModalContainer from '../../../../../containers/modal/SimpleModalContainer'
+import SimpleModalContainer from 'containers/modal/SimpleModalContainer'
 import { validate } from '../../../../modal/validation/Category'
 
 export default class MoveModal extends Component {

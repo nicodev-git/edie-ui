@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { validate } from '../../../../../modal/validation/NameValidation'
-import SimpleModalContainer from '../../../../../../containers/modal/SimpleModalContainer'
+import SimpleModalContainer from 'containers/modal/SimpleModalContainer'
 
 export default class MTypeModal extends Component {
   constructor (props) {

@@ -220,7 +220,6 @@ export default class Monitors extends React.Component {
 
   renderBody () {
     const {props} = this
-    const {device} = props
 
     switch (this.state.selected) {
       case 'monitors' :

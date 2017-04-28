@@ -2,7 +2,7 @@ import React from 'react'
 
 import { appendComponent, removeComponent } from '../../../util/Component'
 import IncidentDetailModal from './IncidentDetailModal'
-import CommentsModalContainer from '../../../containers/shared/incident/CommentsModalContainer'
+import CommentsModalContainer from 'containers/shared/incident/CommentsModalContainer'
 import IncidentEventsModal from './IncidentEventsModal'
 
 export function showIncidentDetail (incident) {

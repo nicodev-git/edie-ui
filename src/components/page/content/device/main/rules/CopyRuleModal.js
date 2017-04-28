@@ -8,7 +8,7 @@ import { showAlert, showConfirm } from '../../../../../shared/Alert'
 import { sortBy, join } from 'lodash'
 
 import { appendComponent, removeComponent } from '../../../../../../util/Component'
-import DeviceWizardContainer from '../../../../../../containers/shared/wizard/DeviceWizardContainer'
+import DeviceWizardContainer from 'containers/shared/wizard/DeviceWizardContainer'
 
 import Api from '../../../../../../api'
 import { ROOT_URL } from '../../../../../../actions/config'

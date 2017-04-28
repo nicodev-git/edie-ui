@@ -1,5 +1,5 @@
 import React from 'react'
-import UsersContainer from '../../../../../containers/page/content/settings/users/UsersContainer'
+import UsersContainer from 'containers/page/content/settings/users/UsersContainer'
 import Groups from '../groups/Groups'
 import {
   emit,
