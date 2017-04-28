@@ -3,7 +3,6 @@ import {TextField, FlatButton} from 'material-ui'
 import ActionSearch from 'material-ui/svg-icons/action/search'
 import moment from 'moment'
 import {assign} from 'lodash'
-import TimeAgo from 'react-timeago'
 
 import InfiniteTable from 'components/shared/InfiniteTable'
 
@@ -49,7 +48,7 @@ export default class ProcessTable extends React.Component {
       'customComponent': (props) => {
         if (!props.data) return <span />
 
-        return <TimeAgo date={props.data} />
+        return <span>{moment(props.data).fromNow()}</span>
       },
       'cssClassName': 'width-160'
     }]
