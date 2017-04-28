@@ -12,13 +12,12 @@ import SearchTabs from './SearchTabs'
 import TabPage from '../../../shared/TabPage'
 import TabPageBody from '../../../shared/TabPageBody'
 import TabPageHeader from '../../../shared/TabPageHeader'
-import { imageBaseUrl, parseSearchQuery, guid } from 'shared/Global'
+import { imageBaseUrl, parseSearchQuery, guid, encodeUrlParams } from 'shared/Global'
 import { showConfirm } from 'components/shared/Alert'
 
 import SearchFormView from './SearchFormView'
 import SearchSavePopover from './SearchSavePopover'
 import WorkflowSelectModal from './WorkflowSelectModal'
-import {encodeUrlParams} from 'shared/Global'
 
 const styles = {
   chip: {
