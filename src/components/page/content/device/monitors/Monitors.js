@@ -9,7 +9,6 @@ import EventLogTable from './EventLogTable'
 import ApplicationTable from './ApplicationTable'
 import ProcessTable from './ProcessTable'
 import ProcessModal from './ProcessModal'
-import MonitorLogTable from './MonitorLogTable'
 import OSTable from './OSTable'
 import DiskTable from './DiskTable'
 import CpuTable from './CpuTable'
@@ -230,8 +229,8 @@ export default class Monitors extends React.Component {
             <div className="padding-sm">
               {this.renderOSInfo()}
               <CpuTable {...this.props}/>
-              <DiskTable {...this.props}/>
               <MemoryTable {...this.props}/>
+              <DiskTable {...this.props}/>
             </div>
             <div className="flex-1 flex-vertical" style={{background: 'white'}}>
               <MonitorTable {...props} ref="monitor"/>
@@ -250,10 +249,6 @@ export default class Monitors extends React.Component {
       case 'process':
         return (
           <ProcessTable {...props}/>
-        )
-      case 'monitorlog':
-        return (
-          <MonitorLogTable device={this.state.currentMonitor} father={device}/>
         )
       case 'os':
         return (
