@@ -91,7 +91,7 @@ import {
 
   FETCH_DEVICE_CATEGORIES
 
-} from '../actions/types'
+} from 'actions/types'
 
 import {concat, difference} from 'lodash'
 

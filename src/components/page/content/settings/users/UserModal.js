@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { assign } from 'lodash'
 import { reduxForm, change } from 'redux-form'
 import axios from 'axios'
-import { ROOT_URL } from '../../../../../actions/config'
+import { ROOT_URL } from 'actions/config'
 import { SimpleModalForm } from '../../../../modal'
 import { validate } from '../../../../modal/validation/NameValidation'
 

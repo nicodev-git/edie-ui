@@ -81,7 +81,7 @@ import {
   CLEAR_MONITORS,
 
   UPDATE_DEVICE_ERROR
-} from '../actions/types'
+} from 'actions/types'
 
 import { concat, keys } from 'lodash'
 

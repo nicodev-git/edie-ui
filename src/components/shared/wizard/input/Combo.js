@@ -2,7 +2,7 @@ import React from 'react'
 import { util } from '../WizardUtil'
 import { SelectField } from 'react-serial-forms'
 
-import CredentialModal from '../../../../components/page/content/settings/credentials/CredentialModal'
+import CredentialModal from 'components/page/content/settings/credentials/CredentialModal'
 import { appendComponent, removeComponent } from '../../../../util/Component'
 
 export default class Combo extends React.Component {

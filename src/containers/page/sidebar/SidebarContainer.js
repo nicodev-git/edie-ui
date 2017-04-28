@@ -1,7 +1,7 @@
 import React from 'react'
-import Sidebar from '../../../components/page/sidebar/Sidebar'
+import Sidebar from 'components/page/sidebar/Sidebar'
 import { connect } from 'react-redux'
-import { mainMenu, deviceMenu, contentType } from '../../../components/page/Config'
+import { mainMenu, deviceMenu, contentType } from 'components/page/Config'
 
 import {
   signOut,

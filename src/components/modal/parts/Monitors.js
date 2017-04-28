@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import IconButton from 'material-ui/IconButton'
 import DeleteIcon from 'material-ui/svg-icons/action/delete'
 import CreateIcon from 'material-ui/svg-icons/content/create'
-import { buttonStyle, iconStyle } from '../../../style/materialStyles'
+import { buttonStyle, iconStyle } from 'style/materialStyles'
 
 export default class Monitors extends Component {
   render () {

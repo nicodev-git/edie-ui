@@ -1,6 +1,6 @@
 import React from 'react'
 import { showAlert } from '../../../../../shared/Alert'
-import { ROOT_URL } from '../../../../../../actions/config'
+import { ROOT_URL } from 'actions/config'
 import { ParsersModalView } from '../../../../../modal'
 
 export default class ParsersModal extends React.Component {

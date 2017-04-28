@@ -28,7 +28,7 @@ import {
   deselectSysWorkflow,
   addDeviceWorkflows,
   selectSysWorkflowCategory
-} from '../../../../../../actions'
+} from 'actions'
 
 @connect(
   state => ({

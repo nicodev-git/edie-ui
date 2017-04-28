@@ -9,7 +9,7 @@ import {
 } from 'lodash'
 
 import { showAlert } from '../../../../shared/Alert'
-import { ROOT_URL } from '../../../../../actions/config'
+import { ROOT_URL } from 'actions/config'
 
 export default class GroupModal extends React.Component {
   constructor (props) {

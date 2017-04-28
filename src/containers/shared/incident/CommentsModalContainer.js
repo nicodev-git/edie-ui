@@ -1,8 +1,8 @@
 import React from 'react'
-import CommentsModal from '../../../components/shared/incident/CommentsModal'
+import CommentsModal from 'components/shared/incident/CommentsModal'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { updateDeviceIncident } from '../../../actions'
+import { updateDeviceIncident } from 'actions'
 
 @connect(
   state => ({ }),

@@ -1,4 +1,4 @@
-import { SIDEBAR_ITEM_CLICKED } from '../actions/types'
+import { SIDEBAR_ITEM_CLICKED } from 'actions/types'
 
 export default function (state = {}, action) {
   switch (action.type) {

@@ -10,7 +10,7 @@ import {
   ACTIVATE_MSG,
 
   NO_AUTH_ERROR
-} from '../actions/types'
+} from 'actions/types'
 
 export default function (state = {}, action) {
   switch (action.type) {

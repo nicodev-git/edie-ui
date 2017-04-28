@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import Signout from '../../components/auth/Signout'
+import Signout from 'components/auth/Signout'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { signOut } from '../../actions'
+import { signOut } from 'actions'
 
 @connect(
   state => ({ errorMessage: state.auth.error }),

@@ -1,6 +1,6 @@
 import React from 'react'
 import FlatButton from 'material-ui/FlatButton'
-import { headerStyle, buttonStyle, buttonTextStyle } from '../../../style/materialStyles'
+import { headerStyle, buttonStyle, buttonTextStyle } from 'style/materialStyles'
 
 const HeaderWithCancel = ({name, onClose}) => (
   <div className="modal-header header-with-cancel" style={headerStyle}>

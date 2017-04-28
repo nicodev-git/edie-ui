@@ -3,7 +3,7 @@ import IconButton from 'material-ui/IconButton'
 import Badge from 'material-ui/Badge'
 import Divider from 'material-ui/Divider'
 import MenuIcon from 'material-ui/svg-icons/navigation/menu'
-import {badgeStyle, badgeRootStyle, iconStyle, iconButtonStyle} from '../../../style/materialStyles'
+import {badgeStyle, badgeRootStyle, iconStyle, iconButtonStyle} from 'style/materialStyles'
 
 import SearchBarContainer from './parts/SearchBarContainer'
 import MessageBox from './parts/MessageBox'

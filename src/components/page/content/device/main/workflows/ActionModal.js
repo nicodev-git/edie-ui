@@ -60,7 +60,7 @@ export default connect(
 import { assign } from 'lodash'
 import SimpleModalContainer from 'containers/modal/SimpleModalContainer'
 import { validate } from '../../../../../modal/validation/NameValidation'
-import { closeWfActionModal } from '../../../../../../actions'
+import { closeWfActionModal } from 'actions'
 
 export default class ActionModal extends React.Component {
   doAction (values) {

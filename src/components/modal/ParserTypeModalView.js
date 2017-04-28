@@ -5,7 +5,7 @@ import DeleteIcon from 'material-ui/svg-icons/action/delete'
 import InlineEdit from 'react-edit-inline'
 import { Field } from 'redux-form'
 import { Header, SubHeader, SubmitBlock, FormInput } from './parts'
-import { buttonStyle, iconStyle } from '../../style/materialStyles'
+import { buttonStyle, iconStyle } from 'style/materialStyles'
 
 export default class ParserTypeModalView extends Component {
   render () {

@@ -1,5 +1,5 @@
 import React from 'react'
-import Rules from '../../../../../components/page/content/settings/rule/Rules'
+import Rules from 'components/page/content/settings/rule/Rules'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import {
@@ -12,7 +12,7 @@ import {
   addWorkflow,
   updateWorkflow,
   closeWorkflowModal
-} from '../../../../../actions'
+} from 'actions'
 
 @connect(
   state => ({

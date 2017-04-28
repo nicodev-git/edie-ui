@@ -24,9 +24,9 @@ import { showAlert, showConfirm } from '../../../../../shared/Alert'
 import { getSeverityIcon } from '../../../../../../shared/Global'
 const encodeUrlParams = getSeverityIcon
 import MainTabs from '../MainTabs'
-import TabPage from '../../../../../shared/TabPage'
-import TabPageBody from '../../../../../shared/TabPageBody'
-import TabPageHeader from '../../../../../shared/TabPageHeader'
+import TabPage from 'components/shared/TabPage'
+import TabPageBody from 'components/shared/TabPageBody'
+import TabPageHeader from 'components/shared/TabPageHeader'
 import {
   showIncidentDetail,
   showIncidentRaw

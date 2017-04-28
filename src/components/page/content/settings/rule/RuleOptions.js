@@ -12,7 +12,7 @@ import {
 } from 'shared/event/Emitter'
 
 import { EVENTS } from 'shared/event/Events'
-import { ROOT_URL } from '../../../../../actions/config'
+import { ROOT_URL } from 'actions/config'
 
 export default class RuleOptions extends React.Component {
   constructor (props) {

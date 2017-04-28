@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
-import { SimpleModalForm } from '../../components/modal'
+import { SimpleModalForm } from 'components/modal'
 
 class SimpleModalContainer extends Component {
   handleFormSubmit (event) {

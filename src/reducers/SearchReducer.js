@@ -28,7 +28,7 @@ import {
   ADD_SEARCH_WF,
   REMOVE_SEARCH_WF,
   REPLACE_SEARCH_WFS
-} from '../actions/types'
+} from 'actions/types'
 import { concat } from 'lodash'
 
 export default function (state = {}, action) {

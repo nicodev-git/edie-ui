@@ -7,11 +7,11 @@ import {
 
 import InfiniteTable from '../../../../../shared/InfiniteTable'
 import { showAlert } from '../../../../../shared/Alert'
-import TabPage from '../../../../../shared/TabPage'
-import TabPageBody from '../../../../../shared/TabPageBody'
-import TabPageHeader from '../../../../../shared/TabPageHeader'
+import TabPage from 'components/shared/TabPage'
+import TabPageBody from 'components/shared/TabPageBody'
+import TabPageHeader from 'components/shared/TabPageHeader'
 
-import { ROOT_URL } from '../../../../../../actions/config'
+import { ROOT_URL } from 'actions/config'
 
 export default class MainRulesAdd extends Component {
   constructor (props) {

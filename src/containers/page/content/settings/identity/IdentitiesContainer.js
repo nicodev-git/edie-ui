@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Identities from '../../../../../components/page/content/settings/identity/Identities'
+import Identities from 'components/page/content/settings/identity/Identities'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import {
@@ -10,7 +10,7 @@ import {
   closeIdentityModal,
   addIdentity,
   updateIdentity
-} from '../../../../../actions'
+} from 'actions'
 
 @connect(
   state => ({

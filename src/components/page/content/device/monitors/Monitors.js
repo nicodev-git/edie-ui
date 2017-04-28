@@ -1,5 +1,5 @@
 import React from 'react'
-import {RaisedButton, Menu, MenuItem, Popover, TextField, FlatButton} from 'material-ui'
+import {RaisedButton, TextField, FlatButton} from 'material-ui'
 import ActionSearch from 'material-ui/svg-icons/action/search'
 import moment from 'moment'
 import { assign } from 'lodash'
@@ -16,9 +16,11 @@ import MemoryTable from './MemoryTable'
 
 import MonitorLogOptions from './MonitorLogOptions'
 
-import TabPage from '../../../../shared/TabPage'
-import TabPageBody from '../../../../shared/TabPageBody'
-import TabPageHeader from '../../../../shared/TabPageHeader'
+import TabPage from 'components/shared/TabPage'
+import TabPageBody from 'components/shared/TabPageBody'
+import TabPageHeader from 'components/shared/TabPageHeader'
+import MonitorTabs from './MonitorTabs'
+
 import { parseSearchQuery } from 'shared/Global'
 
 export default class Monitors extends React.Component {
@@ -171,21 +173,6 @@ export default class Monitors extends React.Component {
               <RaisedButton label="Add" onTouchTap={this.onClickAddMonitor.bind(this)}/>&nbsp;
               <RaisedButton label="Edit" onTouchTap={this.onClickEditMonitor.bind(this)}/>&nbsp;
               <RaisedButton label="Delete" onTouchTap={this.onClickDeleteMonitor.bind(this)}/>&nbsp;
-
-              <RaisedButton label="System" primary onTouchTap={this.handleTouchTap.bind(this)}/>
-              <Popover
-                open={this.state.open}
-                anchorEl={this.state.anchorEl}
-                anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
-                targetOrigin={{horizontal: 'left', vertical: 'top'}}
-                onRequestClose={this.handleRequestClose.bind(this)}
-              >
-                <Menu>
-                  <MenuItem primaryText="Event Log" onTouchTap={this.onClickEventLog.bind(this)}/>
-                  <MenuItem primaryText="Installed Applications" onTouchTap={this.onClickApplication.bind(this)}/>
-                  <MenuItem primaryText="Process" onTouchTap={this.onClickProcess.bind(this)}/>
-                </Menu>
-              </Popover>
             </div>
             {this.renderSearch()}
           </div>
@@ -273,7 +260,7 @@ export default class Monitors extends React.Component {
         <TabPageHeader title={device.name}>
           {this.renderOptions()}
         </TabPageHeader>
-        <TabPageBody>
+        <TabPageBody tabs={MonitorTabs(device.id)}>
           {this.renderBody()}
           {this.renderProcessModal()}
         </TabPageBody>

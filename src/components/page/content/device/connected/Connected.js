@@ -1,8 +1,8 @@
 import React from 'react'
 
-import TabPage from '../../../../shared/TabPage'
-import TabPageBody from '../../../../shared/TabPageBody'
-import TabPageHeader from '../../../../shared/TabPageHeader'
+import TabPage from 'components/shared/TabPage'
+import TabPageBody from 'components/shared/TabPageBody'
+import TabPageHeader from 'components/shared/TabPageHeader'
 
 export default class Connected extends React.Component {
   constructor (props) {

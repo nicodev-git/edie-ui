@@ -1,6 +1,6 @@
 import React from 'react'
 import { isEqual, assign } from 'lodash'
-import { ROOT_URL } from '../../actions/config'
+import { ROOT_URL } from 'actions/config'
 
 class JDataTable extends React.Component {
   constructor (props) {

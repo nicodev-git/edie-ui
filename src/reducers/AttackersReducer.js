@@ -1,6 +1,6 @@
 import {
   FETCH_ATTACKERS
-} from '../actions/types'
+} from 'actions/types'
 
 export default function (state = {}, action) {
   switch (action.type) {

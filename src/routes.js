@@ -35,6 +35,9 @@ import DeviceMainEventsContainer from './containers/page/content/device/main/eve
 import DeviceMainAdvancedContainer from './containers/page/content/device/main/advanced/MainAdvancedContainer'
 import DeviceMainRuleAddContainer from './containers/page/content/device/main/ruleAdd/MainRulesAddContainer'
 import DeviceMonitorsContainer from './containers/page/content/device/monitors/MonitorsContainer'
+import DeviceEventLogs from './containers/page/content/device/monitors/EventLogsContainer'
+import DeviceApps from './containers/page/content/device/monitors/AppsContainer'
+import DeviceProcesses from './containers/page/content/device/monitors/ProcessContainer'
 import DeviceConnectedContainer from './containers/page/content/device/connected/ConnectedContainer'
 import DeviceInfoContainer from './containers/page/content/device/info/InfoContainer'
 import DeviceTopology from './containers/page/content/device/topology/TopologyContainer'
@@ -87,7 +90,12 @@ export default(
           <Route path="ruleAdd" component={DeviceMainRuleAddContainer}/>
         </Route>
         <Route path="topology" component={DeviceTopology}/>
-        <Route path="monitor" component={DeviceMonitorsContainer}/>
+        <Route path="monitor">
+          <IndexRoute component={DeviceMonitorsContainer}/>
+          <Route path="eventlog" component={DeviceEventLogs}/>
+          <Route path="app" component={DeviceApps}/>
+          <Route path="process" component={DeviceProcesses}/>
+        </Route>
         <Route path="connected" component={DeviceConnectedContainer}/>
         <Route path="info" component={DeviceInfoContainer}/>
         <Route path="list" component={GroupDevicesContainer}/>

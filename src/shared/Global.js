@@ -4,7 +4,7 @@ import {reduce, isNull, isUndefined, isArray} from 'lodash'
 import { ROOT_URL } from 'actions/config'
 import WarningIcon from 'material-ui/svg-icons/alert/warning'
 import DescriptionIcon from 'material-ui/svg-icons/action/description'
-import { iconStyle } from '../style/materialStyles'
+import { iconStyle } from 'style/materialStyles'
 
 export const imageBaseUrl = `${ROOT_URL}/images/`
 export const extImageBaseUrl = `${ROOT_URL}/externalpictures?name=`

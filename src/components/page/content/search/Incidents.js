@@ -22,7 +22,7 @@ import {
     showIncidentRaw
 } from '../../../shared/incident/Incident'
 import { thumbup, thumpdown, done, notdone, openicon, reasonx,
-  rawtext, reason } from '../../../../style/materialStyles'
+  rawtext, reason } from 'style/materialStyles'
 
 const fixedOptions = [
   {label: 'Any', value: ''},

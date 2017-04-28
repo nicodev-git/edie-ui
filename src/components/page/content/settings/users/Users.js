@@ -10,11 +10,11 @@ import UserModal from './UserModal'
 import PasswordModal from './PasswordModal'
 
 import SettingTabs from '../SettingTabs'
-import TabPage from '../../../../shared/TabPage'
-import TabPageBody from '../../../../shared/TabPageBody'
-import TabPageHeader from '../../../../shared/TabPageHeader'
+import TabPage from 'components/shared/TabPage'
+import TabPageBody from 'components/shared/TabPageBody'
+import TabPageHeader from 'components/shared/TabPageHeader'
 
-import { ROOT_URL } from '../../../../../actions/config'
+import { ROOT_URL } from 'actions/config'
 import { errorStyle, underlineFocusStyle, inputStyle, selectedItemStyle } from 'style/materialStyles'
 
 export default class Users extends React.Component {

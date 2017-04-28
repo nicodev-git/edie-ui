@@ -1,5 +1,5 @@
 import React from 'react'
-import WorkflowModal from '../../../../../components/page/content/settings/rule/WorkflowModal'
+import WorkflowModal from 'components/page/content/settings/rule/WorkflowModal'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { assign } from 'lodash'
@@ -18,7 +18,7 @@ import {
   openDeviceWfDiagramModal,
   updateWorkflowEditType
 
-} from '../../../../../actions'
+} from 'actions'
 
 @connect(
   state => ({

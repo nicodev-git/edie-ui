@@ -5,7 +5,7 @@ import { withRouter } from 'react-router'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-import Main from '../../components/page/Main'
+import Main from 'components/page/Main'
 import IncidentSocket from 'util/socket/IncidentSocket'
 
 import {

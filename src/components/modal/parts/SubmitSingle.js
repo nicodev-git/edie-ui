@@ -1,6 +1,6 @@
 import React from 'react'
 import RaisedButton from 'material-ui/RaisedButton'
-import { buttonStyle, buttonTextStyle } from '../../../style/materialStyles'
+import { buttonStyle, buttonTextStyle } from 'style/materialStyles'
 
 const SubmitSingle = ({name}) => (
   <div className="form-buttons">

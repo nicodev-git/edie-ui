@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import TimeAgo from 'react-timeago'
 import moment from 'moment'
 import { thumbup, thumpdown, done, notdone,
-  rawtext, reason } from '../../../../../style/materialStyles'
+  rawtext, reason } from 'style/materialStyles'
 import {
     getSeverityIcon
 } from '../../../../../shared/Global'

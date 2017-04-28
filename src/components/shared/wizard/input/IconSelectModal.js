@@ -1,7 +1,7 @@
 import React from 'react'
 import Modal from 'react-bootstrap-modal'
 
-import { ROOT_URL } from '../../../../actions/config'
+import { ROOT_URL } from 'actions/config'
 
 export default class IconSelectModal extends React.Component {
   constructor (props) {

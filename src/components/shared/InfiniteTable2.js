@@ -1,7 +1,7 @@
 import React from 'react'
 import GriddleWithCallback from './GriddleWithCallback'
 
-import { ROOT_URL } from '../../actions/config'
+import { ROOT_URL } from 'actions/config'
 
 class InfiniteTable extends React.Component {
   constructor (props) {

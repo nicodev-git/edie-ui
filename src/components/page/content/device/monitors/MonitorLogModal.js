@@ -8,7 +8,7 @@ import LogMatchModal from './LogMatchModal'
 
 import { appendComponent, removeComponent } from '../../../../../util/Component'
 
-import { ROOT_URL } from '../../../../../actions/config'
+import { ROOT_URL } from 'actions/config'
 
 export default class MonitorLogModal extends Component {
   constructor (props) {

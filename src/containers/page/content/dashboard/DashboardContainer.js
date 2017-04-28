@@ -1,4 +1,4 @@
-import Dashboard from '../../../../components/page/content/dashboard/Dashboard'
+import Dashboard from 'components/page/content/dashboard/Dashboard'
 import { connect } from 'react-redux'
 import {
   fetchBigIncidents,

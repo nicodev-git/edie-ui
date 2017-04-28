@@ -1,9 +1,9 @@
 import React from 'react'
-import Topbar from '../../../components/page/topbar/Topbar'
+import Topbar from 'components/page/topbar/Topbar'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { appendComponent, removeComponent } from '../../../util/Component'
-import { signOut, openProfileModal, closeProfileModal, fetchUserInfo, updateUserProfile } from '../../../actions'
+import { signOut, openProfileModal, closeProfileModal, fetchUserInfo, updateUserProfile } from 'actions'
 
 class TopbarContainer extends React.Component {
   render () {

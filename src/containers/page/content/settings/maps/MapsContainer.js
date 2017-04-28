@@ -1,5 +1,5 @@
 import React from 'react'
-import Maps from '../../../../../components/page/content/settings/maps/Maps'
+import Maps from 'components/page/content/settings/maps/Maps'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
@@ -18,7 +18,7 @@ import {
   removeMapUser,
 
   fetchSettingUsers
-} from '../../../../../actions'
+} from 'actions'
 
 @connect(
   state => ({

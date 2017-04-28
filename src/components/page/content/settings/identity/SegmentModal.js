@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { showAlert } from '../../../../shared/Alert'
-import { ROOT_URL } from '../../../../../actions/config'
+import { ROOT_URL } from 'actions/config'
 import SimpleModalContainer from 'containers/modal/SimpleModalContainer'
 import { validate } from 'components/modal/validation/NameValidation'
 import { store } from 'shared/GetStore'

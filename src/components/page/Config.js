@@ -5,7 +5,7 @@ import ChatIcon from 'material-ui/svg-icons/communication/chat'
 import BugReportIcon from 'material-ui/svg-icons/action/bug-report'
 import NotificationsNoneIcon from 'material-ui/svg-icons/social/notifications-none'
 import SettingsIcon from 'material-ui/svg-icons/action/settings'
-import { sidebarIconsColor } from '../../style/materialStyles'
+import { sidebarIconsColor } from 'style/materialStyles'
 
 const home = <HomeIcon color={sidebarIconsColor}/>
 const search = <SearchIcon color={sidebarIconsColor}/>

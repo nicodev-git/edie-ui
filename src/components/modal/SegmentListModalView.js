@@ -6,7 +6,7 @@ import DeleteIcon from 'material-ui/svg-icons/action/delete'
 import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
 import CreateIcon from 'material-ui/svg-icons/content/create'
 import { Header, CloseButton } from './parts'
-import { buttonStyle, iconStyle } from '../../style/materialStyles'
+import { buttonStyle, iconStyle } from 'style/materialStyles'
 
 export default class SegmentListModalView extends Component {
   render () {

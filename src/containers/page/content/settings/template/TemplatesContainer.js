@@ -1,5 +1,5 @@
 import React from 'react'
-import Templates from '../../../../../components/page/content/settings/template/Templates'
+import Templates from 'components/page/content/settings/template/Templates'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
@@ -34,7 +34,7 @@ import {
   uploadImage,
 
   fetchDeviceCategories
-} from '../../../../../actions'
+} from 'actions'
 
 @connect(
   state => ({

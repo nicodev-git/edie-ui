@@ -25,6 +25,7 @@ import {
     updateSearchParams,
     replaceSearchWfs,
     updateQueryChips
+
   }
 )
 @withRouter

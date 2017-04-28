@@ -4,7 +4,7 @@ import { withRouter } from 'react-router'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-import {fetchDeviceRawIncidents} from '../../../../../../actions'
+import {fetchDeviceRawIncidents} from 'actions'
 
 @connect(
   state => ({

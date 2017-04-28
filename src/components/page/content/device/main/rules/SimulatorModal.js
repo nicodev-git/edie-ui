@@ -6,7 +6,7 @@ import { showAlert } from '../../../../../shared/Alert'
 
 import ParsersModal from './ParsersModal'
 import MTypeModal from './MTypeModal'
-import { ROOT_URL } from '../../../../../../actions/config'
+import { ROOT_URL } from 'actions/config'
 
 export default class SimulatorModal extends React.Component {
   constructor (props) {

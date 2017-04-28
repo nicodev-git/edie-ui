@@ -1,6 +1,6 @@
 import {
   GENERATE_PINCODE
-} from '../actions/types'
+} from 'actions/types'
 
 export default function (state = {}, action) {
   switch (action.type) {

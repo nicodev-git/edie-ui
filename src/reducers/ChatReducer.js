@@ -5,7 +5,7 @@ import {
   SET_CHAT_INCIDENTS,
   SET_CHAT_ROOMS,
   SELECT_CHAT_INCIDENT
-} from '../actions/types'
+} from 'actions/types'
 
 const INITIAL_STATE = {
   incidents: [],

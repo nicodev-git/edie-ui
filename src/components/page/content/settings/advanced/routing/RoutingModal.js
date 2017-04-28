@@ -8,10 +8,10 @@ import { findIndex } from 'lodash'
 import { showAlert } from '../../../../../shared/Alert'
 import { appendComponent, removeComponent } from '../../../../../../util/Component'
 
-import UsersModal from '../../../../../../components/page/content/settings/maps/UsersModal'
+import UsersModal from 'components/page/content/settings/maps/UsersModal'
 import GroupsModal from './GroupsModal'
 
-import { ROOT_URL } from '../../../../../../actions/config'
+import { ROOT_URL } from 'actions/config'
 
 export default class RoutingModal extends Component {
   constructor (props) {

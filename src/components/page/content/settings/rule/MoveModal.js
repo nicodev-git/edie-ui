@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { ROOT_URL } from '../../../../../actions/config'
+import { ROOT_URL } from 'actions/config'
 import SimpleModalContainer from 'containers/modal/SimpleModalContainer'
 import { validate } from '../../../../modal/validation/Category'
 

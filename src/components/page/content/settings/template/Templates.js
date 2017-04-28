@@ -4,9 +4,9 @@ import {RaisedButton, MenuItem, SelectField, IconButton, Chip} from 'material-ui
 import DeleteIcon from 'material-ui/svg-icons/action/delete'
 
 import SettingTabs from '../SettingTabs'
-import TabPage from '../../../../shared/TabPage'
-import TabPageBody from '../../../../shared/TabPageBody'
-import TabPageHeader from '../../../../shared/TabPageHeader'
+import TabPage from 'components/shared/TabPage'
+import TabPageBody from 'components/shared/TabPageBody'
+import TabPageHeader from 'components/shared/TabPageHeader'
 
 import DeviceTplModal from './DeviceTplModal'
 import MonitorTplModal from './MonitorTplModal'

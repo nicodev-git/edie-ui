@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { ROOT_URL } from '../../../../../actions/config'
+import { ROOT_URL } from 'actions/config'
 
 export default class MonitorLogOptions extends Component {
   constructor (props) {

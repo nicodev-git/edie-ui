@@ -1,6 +1,6 @@
 import React from 'react'
 import { BootstrapTable } from 'react-bootstrap-table'
-import { ROOT_URL } from '../../actions/config'
+import { ROOT_URL } from 'actions/config'
 
 export default class DataTable extends React.Component {
 

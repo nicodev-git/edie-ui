@@ -1,5 +1,5 @@
 import React from 'react'
-import Users from '../../../../../components/page/content/settings/users/Users'
+import Users from 'components/page/content/settings/users/Users'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
@@ -14,7 +14,7 @@ import {
   closeSettingUserModal,
 
   closeUserPasswordModal
-} from '../../../../../actions'
+} from 'actions'
 
 @connect(
   state => ({

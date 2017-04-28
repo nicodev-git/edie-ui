@@ -4,9 +4,9 @@ import {Checkbox, RaisedButton} from 'material-ui'
 import { assign } from 'lodash'
 
 import SettingTabs from '../SettingTabs' // Never used
-import TabPage from '../../../../shared/TabPage' // Never used
-import TabPageBody from '../../../../shared/TabPageBody' // Never used
-import TabPageHeader from '../../../../shared/TabPageHeader' // Never used
+import TabPage from 'components/shared/TabPage' // Never used
+import TabPageBody from 'components/shared/TabPageBody' // Never used
+import TabPageHeader from 'components/shared/TabPageHeader' // Never used
 
 export default class General extends React.Component {
   constructor (props) {

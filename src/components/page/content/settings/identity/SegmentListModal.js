@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { showAlert, showConfirm } from '../../../../shared/Alert'
 import { appendComponent, removeComponent } from '../../../../../util/Component'
 import SegmentModal from './SegmentModal'
-import { ROOT_URL } from '../../../../../actions/config'
+import { ROOT_URL } from 'actions/config'
 import { SegmentListModalView } from '../../../../modal'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
 

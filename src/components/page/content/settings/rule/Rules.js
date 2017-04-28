@@ -5,9 +5,9 @@ import InfiniteTable from '../../../../shared/InfiniteTable'
 import { showAlert } from '../../../../shared/Alert'
 
 import SettingTabs from '../SettingTabs'
-import TabPage from '../../../../shared/TabPage'
-import TabPageBody from '../../../../shared/TabPageBody'
-import TabPageHeader from '../../../../shared/TabPageHeader'
+import TabPage from 'components/shared/TabPage'
+import TabPageBody from 'components/shared/TabPageBody'
+import TabPageHeader from 'components/shared/TabPageHeader'
 import WorkflowModalContainer from 'containers/page/content/settings/rule/WorkflowModalContainer'
 import { errorStyle, underlineFocusStyle, inputStyle, selectedItemStyle } from 'style/materialStyles'
 

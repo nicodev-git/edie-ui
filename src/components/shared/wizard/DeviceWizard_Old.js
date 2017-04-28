@@ -24,7 +24,7 @@ import MonitorTable from './input/MonitorTable'
 
 import {util} from './WizardUtil'
 
-import { ROOT_URL } from '../../../actions/config'
+import { ROOT_URL } from 'actions/config'
 
 export default class DeviceWizard extends React.Component {
   constructor (props) {

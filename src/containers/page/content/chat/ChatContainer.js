@@ -11,7 +11,7 @@ import {
   setRoomUsers,
   setRooms,
   selectIncident
-} from '../../../../actions'
+} from 'actions'
 
 @connect(
   state => ({

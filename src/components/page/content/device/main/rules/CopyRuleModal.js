@@ -11,7 +11,7 @@ import { appendComponent, removeComponent } from '../../../../../../util/Compone
 import DeviceWizardContainer from 'containers/shared/wizard/DeviceWizardContainer'
 
 import Api from '../../../../../../api'
-import { ROOT_URL } from '../../../../../../actions/config'
+import { ROOT_URL } from 'actions/config'
 
 export default class CopyRuleModal extends React.Component {
   constructor (props) {

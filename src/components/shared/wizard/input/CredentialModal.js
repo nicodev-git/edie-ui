@@ -6,7 +6,7 @@ import { appendComponent, removeComponent } from '../../../../util/Component'
 
 import CredentialEditModal from './CredentialEditModal'
 import { showAlert, showConfirm } from '../../../shared/Alert'
-import { ROOT_URL } from '../../../../actions/config'
+import { ROOT_URL } from 'actions/config'
 
 export default class CredentialModal extends React.Component {
   constructor (props) {

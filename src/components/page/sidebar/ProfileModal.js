@@ -3,7 +3,7 @@ import { reduxForm } from 'redux-form'
 import { assign } from 'lodash'
 import { connect } from 'react-redux'
 import $ from 'jquery'
-import { showAlert } from '../../../components/shared/Alert'
+import { showAlert } from 'components/shared/Alert'
 import { extImageBaseUrl } from 'shared/Global'
 import { ProfileModalView } from '../../modal'
 

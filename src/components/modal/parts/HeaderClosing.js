@@ -1,5 +1,5 @@
 import React from 'react'
-import { headerStyle } from '../../../style/materialStyles'
+import { headerStyle } from 'style/materialStyles'
 
 const HeaderClosing = ({name, onClose}) => (
   <div className="modal-header" style={headerStyle}>

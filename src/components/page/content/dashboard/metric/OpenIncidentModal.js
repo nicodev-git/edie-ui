@@ -1,7 +1,7 @@
 import React from 'react'
 import moment from 'moment'
 import { assign } from 'lodash'
-import { ROOT_URL } from '../../../../../actions/config'
+import { ROOT_URL } from 'actions/config'
 import DateRangePicker from '../../../../shared/DateRangePicker'
 import AddExceptionModal from './AddExceptionModal'
 

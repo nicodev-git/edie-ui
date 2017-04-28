@@ -7,9 +7,9 @@ import { showAlert, showConfirm } from '../../../../shared/Alert'
 import CredentialModal from './CredentialModal'
 
 import SettingTabs from '../SettingTabs'
-import TabPage from '../../../../shared/TabPage'
-import TabPageBody from '../../../../shared/TabPageBody'
-import TabPageHeader from '../../../../shared/TabPageHeader'
+import TabPage from 'components/shared/TabPage'
+import TabPageBody from 'components/shared/TabPageBody'
+import TabPageHeader from 'components/shared/TabPageHeader'
 import { errorStyle, inputStyle, underlineStyle } from 'style/materialStyles'
 
 export default class Credentials extends React.Component {

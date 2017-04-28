@@ -56,7 +56,7 @@ import {
   SHOW_THREAT_ITEM_MODAL,
 
   API_ERROR
-} from '../actions/types'
+} from 'actions/types'
 
 import {concat, difference, assign} from 'lodash'
 

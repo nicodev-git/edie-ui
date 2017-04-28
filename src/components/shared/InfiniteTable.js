@@ -6,7 +6,7 @@ import ReduxInfiniteScroll from 'redux-infinite-scroll'
 
 import $ from 'jquery'
 import { encodeUrlParams } from 'shared/Global'
-import { ROOT_URL } from '../../actions/config'
+import { ROOT_URL } from 'actions/config'
 
 class InfiniteTable extends React.Component {
   constructor (props) {

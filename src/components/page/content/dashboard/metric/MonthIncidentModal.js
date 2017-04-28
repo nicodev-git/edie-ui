@@ -1,6 +1,6 @@
 import React from 'react'
 import { assign } from 'lodash'
-import { ROOT_URL } from '../../../../../actions/config'
+import { ROOT_URL } from 'actions/config'
 import AddExceptionModal from './AddExceptionModal'
 import IncidentsModalView from '../../../../modal'
 

@@ -3,7 +3,7 @@ import Modal from 'react-bootstrap-modal'
 import { assign } from 'lodash'
 
 import { showAlert } from '../../../shared/Alert'
-import { ROOT_URL } from '../../../../actions/config'
+import { ROOT_URL } from 'actions/config'
 
 export default class CredentialEditModal extends React.Component {
   constructor (props) {
