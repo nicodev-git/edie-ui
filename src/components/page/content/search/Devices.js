@@ -3,7 +3,7 @@ import {
     Button
 } from 'react-bootstrap'
 
-import InfiniteTable from '../../../shared/InfiniteTable'
+import InfiniteTable from 'components/shared/InfiniteTable'
 
 import { showAlert } from '../../../shared/Alert'
 

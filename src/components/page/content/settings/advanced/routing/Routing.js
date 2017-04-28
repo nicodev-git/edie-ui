@@ -1,7 +1,7 @@
 import React from 'react'
 import Dimensions from 'react-dimensions'
 
-import InfiniteTable from '../../../../../shared/InfiniteTable'
+import InfiniteTable from 'components/shared/InfiniteTable'
 import { appendComponent, removeComponent } from '../../../../../../util/Component'
 import { showAlert } from '../../../../../shared/Alert'
 

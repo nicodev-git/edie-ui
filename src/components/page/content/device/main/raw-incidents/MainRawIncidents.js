@@ -8,7 +8,7 @@ import {
 import { appendComponent, removeComponent } from '../../../../../../util/Component'
 import { showAlert, showConfirm } from '../../../../../shared/Alert'
 
-import InfiniteTable from '../../../../../shared/InfiniteTable'
+import InfiniteTable from 'components/shared/InfiniteTable'
 import MarkIgnoreModal from './MarkIgnoreModal'
 import SimulatorModal from '../rules/SimulatorModal'
 import DeviceWizardContainer from 'containers/shared/wizard/DeviceWizardContainer'

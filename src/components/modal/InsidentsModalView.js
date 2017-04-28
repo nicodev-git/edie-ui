@@ -1,6 +1,6 @@
 import React from 'react'
 import Modal from 'react-bootstrap-modal'
-import InfiniteTable from '../shared/InfiniteTable'
+import InfiniteTable from 'components/shared/InfiniteTable'
 import { Button } from 'react-bootstrap'
 import Select from 'react-select'
 import { Header } from './parts'

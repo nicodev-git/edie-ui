@@ -1,7 +1,7 @@
 import React from 'react'
 
 import {RaisedButton, Popover, MenuItem, Menu, SelectField} from 'material-ui'
-import InfiniteTable from '../../../../shared/InfiniteTable'
+import InfiniteTable from 'components/shared/InfiniteTable'
 import { appendComponent, removeComponent } from '../../../../../util/Component'
 import { showAlert, showConfirm } from '../../../../shared/Alert'
 

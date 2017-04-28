@@ -2,7 +2,7 @@ import React from 'react'
 import Modal from 'react-bootstrap-modal'
 import TimeAgo from 'react-timeago'
 
-import InfiniteTable from '../../../shared/InfiniteTable'
+import InfiniteTable from 'components/shared/InfiniteTable'
 import { ROOT_URL } from 'actions/config'
 
 export default class ProcessModal extends React.Component {

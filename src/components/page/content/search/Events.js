@@ -1,7 +1,7 @@
 import React from 'react'
 import moment from 'moment'
 
-import InfiniteTable from '../../../shared/InfiniteTable'
+import InfiniteTable from 'components/shared/InfiniteTable'
 
 import SearchTabs from './SearchTabs'
 import TabPage from '../../../shared/TabPage'

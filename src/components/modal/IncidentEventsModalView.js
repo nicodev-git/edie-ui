@@ -1,6 +1,6 @@
 import React from 'react'
 import Modal from 'react-bootstrap-modal'
-import InfiniteTable from '../shared/InfiniteTable'
+import InfiniteTable from 'components/shared/InfiniteTable'
 import { Header } from './parts'
 
 const InsidentEventsModalView = ({show, onHide, onClose, params, cells}) => (

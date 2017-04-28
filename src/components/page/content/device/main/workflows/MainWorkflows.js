@@ -1,7 +1,7 @@
 import React from 'react'
 import {RaisedButton} from 'material-ui'
 
-import InfiniteTable from '../../../../../shared/InfiniteTable'
+import InfiniteTable from 'components/shared/InfiniteTable'
 import MainTabs from '../MainTabs'
 import TabPage from 'components/shared/TabPage'
 import TabPageBody from 'components/shared/TabPageBody'

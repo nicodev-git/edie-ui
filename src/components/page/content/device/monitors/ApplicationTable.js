@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import InfiniteTable from '../../../../shared/InfiniteTable'
+import InfiniteTable from 'components/shared/InfiniteTable'
 
 export default class ApplicationTable extends Component {
   constructor (props) {

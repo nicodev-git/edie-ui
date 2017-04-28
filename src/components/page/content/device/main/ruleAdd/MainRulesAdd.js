@@ -5,7 +5,7 @@ import {
     Button
 } from 'react-bootstrap'
 
-import InfiniteTable from '../../../../../shared/InfiniteTable'
+import InfiniteTable from 'components/shared/InfiniteTable'
 import { showAlert } from '../../../../../shared/Alert'
 import TabPage from 'components/shared/TabPage'
 import TabPageBody from 'components/shared/TabPageBody'

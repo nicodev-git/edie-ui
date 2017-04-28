@@ -1,6 +1,6 @@
 import React from 'react'
 import Modal from 'react-bootstrap-modal'
-import InfiniteTable from '../shared/InfiniteTable'
+import InfiniteTable from 'components/shared/InfiniteTable'
 import { Header, CloseButton, TwoButtonsBlock } from './parts'
 
 const SmallModalTable = ({show, header, url, row, height, onHide,

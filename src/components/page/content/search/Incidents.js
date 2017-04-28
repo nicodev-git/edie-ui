@@ -5,7 +5,7 @@ import ReactTooltip from 'react-tooltip'
 import { RaisedButton } from 'material-ui'
 import { assign } from 'lodash'
 
-import InfiniteTable from '../../../shared/InfiniteTable'
+import InfiniteTable from 'components/shared/InfiniteTable'
 
 import { getSeverityIcon } from '../../../../shared/Global'
 import SearchTabs from './SearchTabs'

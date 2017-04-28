@@ -2,7 +2,7 @@ import React from 'react'
 import {RaisedButton, TextField} from 'material-ui'
 import { assign } from 'lodash'
 
-import InfiniteTable from '../../../../shared/InfiniteTable'
+import InfiniteTable from 'components/shared/InfiniteTable'
 
 import SettingTabs from '../SettingTabs'
 import TabPage from 'components/shared/TabPage'

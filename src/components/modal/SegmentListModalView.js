@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Modal from 'react-bootstrap-modal'
-import InfiniteTable from '../shared/InfiniteTable'
+import InfiniteTable from 'components/shared/InfiniteTable'
 import IconButton from 'material-ui/IconButton'
 import DeleteIcon from 'material-ui/svg-icons/action/delete'
 import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'

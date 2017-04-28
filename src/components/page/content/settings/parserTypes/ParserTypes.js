@@ -7,7 +7,7 @@ import TabPage from 'components/shared/TabPage'
 import TabPageBody from 'components/shared/TabPageBody'
 import TabPageHeader from 'components/shared/TabPageHeader'
 
-import InfiniteTable from '../../../../shared/InfiniteTable'
+import InfiniteTable from 'components/shared/InfiniteTable'
 import ParserTypeModal from './ParserTypeModal'
 import SimulationModal from './SimulationModal'
 

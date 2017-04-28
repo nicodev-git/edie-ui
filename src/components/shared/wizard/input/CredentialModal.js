@@ -1,7 +1,7 @@
 import React from 'react'
 import Modal from 'react-bootstrap-modal'
 
-import InfiniteTable from '../../../shared/InfiniteTable'
+import InfiniteTable from 'components/shared/InfiniteTable'
 import { appendComponent, removeComponent } from '../../../../util/Component'
 
 import CredentialEditModal from './CredentialEditModal'

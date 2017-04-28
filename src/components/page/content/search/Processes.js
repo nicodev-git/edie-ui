@@ -1,7 +1,7 @@
 import React from 'react'
 import TimeAgo from 'react-timeago'
 
-import InfiniteTable from '../../../shared/InfiniteTable'
+import InfiniteTable from 'components/shared/InfiniteTable'
 import DateRangePicker from '../../../shared/DateRangePicker'
 
 import { appendComponent, removeComponent } from '../../../../util/Component'
