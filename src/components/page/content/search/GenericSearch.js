@@ -5,6 +5,7 @@ import { merge, assign, concat, isArray, keys } from 'lodash'
 import moment from 'moment'
 import {Popover, FlatButton, Chip} from 'material-ui'
 import NavigationClose from 'material-ui/svg-icons/navigation/close'
+import {browserHistory} from 'react-router'
 
 import InfiniteTable from 'components/shared/InfiniteTable'
 import SearchTabs from './SearchTabs'
@@ -17,6 +18,7 @@ import { showConfirm } from 'components/shared/Alert'
 import SearchFormView from './SearchFormView'
 import SearchSavePopover from './SearchSavePopover'
 import WorkflowSelectModal from './WorkflowSelectModal'
+import {encodeUrlParams} from 'shared/Global'
 
 const styles = {
   chip: {
@@ -205,11 +207,18 @@ class GenericSearch extends React.Component {
 
     this.props.updateQueryChips(newQueryChips)
 
-    this.props.updateSearchParams(assign({}, this.props.params, {
-      query: newQueryChips.map(m => `${m.name}=${m.value}`).join(' and ')
-    }))
+    const newQuery = newQueryChips.map(m => `${m.name}=${m.value}`).join(' and ')
+    const params = assign({}, this.props.params, {
+      query: newQuery
+    })
+    this.props.updateSearchParams(params)
 
     this.props.change('query', '')
+    browserHistory.push({
+      pathname: '/search',
+      search: `?${encodeUrlParams({params})}`
+
+    })
   }
 
   getTypeChar (type) {
