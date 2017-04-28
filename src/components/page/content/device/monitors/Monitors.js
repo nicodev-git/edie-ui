@@ -32,6 +32,7 @@ export default class Monitors extends React.Component {
   }
   componentWillMount () {
     this.props.clearMonitors()
+    this.props.fetchMonitorOS(this.props.device.id)
   }
 
   getMonitorTable () {
@@ -183,7 +184,6 @@ export default class Monitors extends React.Component {
                   <MenuItem primaryText="Event Log" onTouchTap={this.onClickEventLog.bind(this)}/>
                   <MenuItem primaryText="Installed Applications" onTouchTap={this.onClickApplication.bind(this)}/>
                   <MenuItem primaryText="Process" onTouchTap={this.onClickProcess.bind(this)}/>
-                  <MenuItem primaryText="OS" onTouchTap={this.onClickOS.bind(this)}/>
                 </Menu>
               </Popover>
             </div>
@@ -196,6 +196,28 @@ export default class Monitors extends React.Component {
     return toolbar
   }
 
+  renderOSInfo () {
+    const {monitorOS, monitorCpu} = this.props
+    const texts = []
+    if (monitorOS) {
+      texts.push(`${monitorOS.dataobj.Name} ${monitorOS.dataobj.ServicePack}`)
+    }
+    if (monitorCpu) {
+      const cpus = monitorCpu.dataobj
+      const list = cpus.length ? cpus : [cpus]
+      list.forEach(c => {
+        texts.push(`${c.Model}`)
+      })
+    }
+    return (
+      <div className="inline-block" style={{width: '150px'}}>
+        {texts.map((t, i) =>
+          <div key={i}>{t}</div>
+        )}
+      </div>
+    )
+  }
+
   renderBody () {
     const {props} = this
     const {device} = props
@@ -205,6 +227,7 @@ export default class Monitors extends React.Component {
         return (
           <div className="flex-vertical" style={{height: '100%'}}>
             <div className="padding-md">
+              {this.renderOSInfo()}
               <CpuTable {...this.props}/>
               <DiskTable {...this.props}/>
             </div>

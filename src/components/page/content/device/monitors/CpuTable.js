@@ -28,9 +28,9 @@ class CpuTable extends React.Component {
     if (!monitorCpu) return null
     const cpus = monitorCpu.dataobj
     return (cpus.length ? cpus : [cpus]).map((d, i) =>
-      <div key={i} className="inline-block padding-md">
+      <div key={i} className="inline-block padding-sm">
         <img src="/images/cpu.gif" width="70"/>
-        <div className="inline">
+        <div className="inline" style={{marginTop: '5px'}}>
           {this.buildProgress(d.Usage)}
         </div>
       </div>
