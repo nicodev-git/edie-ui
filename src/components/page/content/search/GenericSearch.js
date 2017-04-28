@@ -69,10 +69,23 @@ class GenericSearch extends React.Component {
 
   componentWillMount () {
     const {filterType} = this.props.location.state || {}
+    const {q} = this.props.location.query || {}
+    let params = assign({}, this.props.params)
 
-    const params = assign({}, this.props.params)
+    if (q) {
+      try {
+        const parsed = JSON.parse(q)
+        const {query} = parsed
+        const queryChips = parseSearchQuery(query)
+        params = assign(params, parsed)
 
-    if (filterType) {
+        this.props.updateSearchParams(params)
+        this.props.replaceSearchWfs([])
+        this.props.updateQueryChips(queryChips)
+        this.props.change('query', '')
+        this.props.change('searchOptionIndex', '')
+      } catch (e) {}
+    } else if (filterType) {
       let query = ''
       if (filterType === 'today') {
         params.dateFrom = moment().startOf('day').valueOf()
@@ -87,13 +100,14 @@ class GenericSearch extends React.Component {
       }
       const queryChips = parseSearchQuery(query)
 
-      this.props.updateSearchParams(assign(params, {
+      params = assign(params, {
         query,
         severity: 'HIGH,MEDIUM,LOW,AUDIT,IGNORE',
         collections: 'incident',
         workflow: ''
-      }))
+      })
 
+      this.props.updateSearchParams(params)
       this.props.replaceSearchWfs([])
       this.props.updateQueryChips(queryChips)
       this.props.change('query', '')
@@ -210,13 +224,12 @@ class GenericSearch extends React.Component {
     const params = assign({}, this.props.params, {
       query: newQuery
     })
-    this.props.updateSearchParams(params)
+    this.props.updateSearchParams(params, true)
 
     this.props.change('query', '')
-    browserHistory.push({
+    browserHistory.replace({
       pathname: '/search',
-      search: `?${encodeUrlParams({params})}`
-
+      search: `?${encodeUrlParams({q: JSON.stringify(params)})}`
     })
   }
 

@@ -28,13 +28,19 @@ import {
 import { ROOT_URL } from './config'
 import { apiError } from './Errors'
 
-export const updateSearchParams = (params) => {
+export const updateSearchParams = (params, updateHistory) => {
   return function (dispatch) {
     dispatch(fetchSearchFields(params))
     dispatch({
       type: UPDATE_SEARCH_PARAMS,
       params
     })
+    // if (updateHistory) {
+    //   browserHistory.replace({
+    //     pathname: '/search',
+    //     search: `?${encodeUrlParams({q: JSON.stringify(params)})}`
+    //   })
+    // }
   }
 }
 
