@@ -74,11 +74,12 @@ export default class Sidebar extends React.Component {
   onSearch (query) {
     const newChips = parseSearchQuery(query)
 
+    this.props.router.push('/search')
+
     this.props.updateQueryChips(newChips)
     this.props.updateSearchParams(assign({}, this.props.params, {
       query: newChips.map(m => `${m.name}=${m.value}`).join(' and ')
     }))
-    this.props.router.push('/search')
   }
 
   onClickProfile () {

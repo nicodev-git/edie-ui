@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { assign } from 'lodash'
+import {browserHistory} from 'react-router'
 import {
   UPDATE_SEARCH_PARAMS,
   UPDATE_SEARCH_FIELDS,

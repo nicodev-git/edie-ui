@@ -75,6 +75,8 @@ export default class ProcessTable extends React.Component {
   onClickSearch () {
     const query = `deviceid=${this.props.device.id} and monitortype=process and eventType=AGENT and _all=${this.state.query}`
     const queryChips = parseSearchQuery(query)
+
+    this.props.router.push('/search')
     this.props.updateSearchParams(assign({}, this.props.params, {
       query,
       severity: 'HIGH,MEDIUM',
@@ -86,8 +88,6 @@ export default class ProcessTable extends React.Component {
 
     this.props.replaceSearchWfs([])
     this.props.updateQueryChips(queryChips)
-
-    this.props.router.push('/search')
   }
   renderOptions () {
     const {query} = this.state
