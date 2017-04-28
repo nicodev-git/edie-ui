@@ -83,6 +83,7 @@ import {
   FETCH_MONITOR_OS,
   FETCH_MONITOR_DISK,
   FETCH_MONITOR_CPU,
+  FETCH_MONITOR_MEMORY,
   CLEAR_MONITORS,
 
   NO_AUTH_ERROR
@@ -894,6 +895,14 @@ export const fetchMonitorCpu = (deviceid) => {
   return dispatch => {
     fetchAgentEvent(dispatch, deviceid, 'cpu', data => {
       dispatch({type: FETCH_MONITOR_CPU, cpu: data})
+    })
+  }
+}
+
+export const fetchMonitorMemory = (deviceid) => {
+  return dispatch => {
+    fetchAgentEvent(dispatch, deviceid, 'memory', data => {
+      dispatch({type: FETCH_MONITOR_MEMORY, memory: data})
     })
   }
 }

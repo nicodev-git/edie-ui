@@ -77,6 +77,7 @@ import {
   FETCH_MONITOR_OS,
   FETCH_MONITOR_DISK,
   FETCH_MONITOR_CPU,
+  FETCH_MONITOR_MEMORY,
   CLEAR_MONITORS,
 
   UPDATE_DEVICE_ERROR
@@ -282,6 +283,8 @@ export default function (state = INITIAL_STATE, action) {
       return { ...state, monitorDisk: action.disk }
     case FETCH_MONITOR_CPU:
       return { ...state, monitorCpu: action.cpu }
+    case FETCH_MONITOR_MEMORY:
+      return { ...state, monitorMemory: action.memory }
     case CLEAR_MONITORS:
       return { ...state, monitorCpu: null, monitorDisk: null, monitorOS: null, monitorMemory: null }
   }
