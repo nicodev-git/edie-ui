@@ -198,7 +198,7 @@ export default class Monitors extends React.Component {
       })
     }
     return (
-      <div className="inline-block padding-sm" style={{width: '150px', fontSize: '11px'}}>
+      <div className="v-centered text-left" style={{fontSize: '11px', paddingLeft: '10px'}}>
         {texts.map((t, i) =>
           <div key={i}>{t}</div>
         )}
@@ -213,7 +213,7 @@ export default class Monitors extends React.Component {
       case 'monitors' :
         return (
           <div className="flex-vertical" style={{height: '100%'}}>
-            <div className="padding-sm">
+            <div className="padding-sm text-center" style={{position: 'relative'}}>
               {this.renderOSInfo()}
               <CpuTable {...this.props}/>
               <MemoryTable {...this.props}/>

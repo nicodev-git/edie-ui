@@ -1135,3 +1135,9 @@ table.table tbody tr.selected {
     left: 50%;
     top: 50%;
 }
+
+.v-centered {
+    transform: translate(0, -50%);
+    position: absolute;
+    top: 50%;
+}
