@@ -70,9 +70,9 @@ export default class EventLogTable extends Component {
   renderOptions () {
     const {query} = this.state
     return (
-      <div className="text-center margin-md-top">
+      <div className="text-center">
         <div className="inline-block">
-          <TextField value={query} onChange={this.onChangeQuery.bind(this)} onKeyUp={this.onKeyupQuery.bind(this)}/>
+          <TextField name="query" value={query} onChange={this.onChangeQuery.bind(this)} onKeyUp={this.onKeyupQuery.bind(this)}/>
           <FlatButton icon={<ActionSearch />} onTouchTap={this.onClickSearch.bind(this)}/>
         </div>
       </div>

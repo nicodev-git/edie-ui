@@ -162,7 +162,7 @@ export default class Monitors extends React.Component {
         break
       default:
         toolbar = (
-          <div className="text-center margin-md-top">
+          <div className="text-center">
             <div style={{position: 'absolute'}}>
               <div className={`pull-left ${selected === 'monitors' ? 'hidden' : ''}`}>
                 <RaisedButton label="Show Monitors" onTouchTap={this.onClickShowMonitors.bind(this)}/>
@@ -175,6 +175,7 @@ export default class Monitors extends React.Component {
               <RaisedButton label="Delete" onTouchTap={this.onClickDeleteMonitor.bind(this)}/>&nbsp;
             </div>
             {this.renderSearch()}
+            &nbsp;
           </div>
         )
         break
