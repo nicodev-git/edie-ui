@@ -24,6 +24,7 @@ import {
   fetchMonitorOS,
   fetchMonitorDisk,
   fetchMonitorCpu,
+  fetchMonitorMemory,
   clearMonitors
 } from 'actions'
 
@@ -44,7 +45,8 @@ import {
 
     monitorOS: state.devices.monitorOS,
     monitorDisk: state.devices.monitorDisk,
-    monitorCpu: state.devices.monitorCpu
+    monitorCpu: state.devices.monitorCpu,
+    monitorMemory: state.devices.monitorMemory
   }),
   {
     openDeviceMonitorPicker,
@@ -68,6 +70,7 @@ import {
     fetchMonitorOS,
     fetchMonitorDisk,
     fetchMonitorCpu,
+    fetchMonitorMemory,
     clearMonitors
   }
 )

@@ -13,6 +13,7 @@ import MonitorLogTable from './MonitorLogTable'
 import OSTable from './OSTable'
 import DiskTable from './DiskTable'
 import CpuTable from './CpuTable'
+import MemoryTable from './MemoryTable'
 
 import MonitorLogOptions from './MonitorLogOptions'
 
@@ -230,6 +231,7 @@ export default class Monitors extends React.Component {
               {this.renderOSInfo()}
               <CpuTable {...this.props}/>
               <DiskTable {...this.props}/>
+              <MemoryTable {...this.props}/>
             </div>
             <div className="flex-1 flex-vertical" style={{background: 'white'}}>
               <MonitorTable {...props} ref="monitor"/>
