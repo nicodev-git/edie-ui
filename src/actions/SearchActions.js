@@ -27,20 +27,19 @@ import {
 } from './types'
 import { ROOT_URL } from './config'
 import { apiError } from './Errors'
+import {encodeUrlParams} from 'shared/Global'
 
-export const updateSearchParams = (params, updateHistory) => {
+export const updateSearchParams = (params) => {
   return function (dispatch) {
     dispatch(fetchSearchFields(params))
     dispatch({
       type: UPDATE_SEARCH_PARAMS,
       params
     })
-    // if (updateHistory) {
-    //   browserHistory.replace({
-    //     pathname: '/search',
-    //     search: `?${encodeUrlParams({q: JSON.stringify(params)})}`
-    //   })
-    // }
+    browserHistory.replace({
+      pathname: '/search',
+      search: `?${encodeUrlParams({q: JSON.stringify(params)})}`
+    })
   }
 }
 
