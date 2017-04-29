@@ -303,46 +303,36 @@ class GenericSearch extends React.Component {
   }
 
   onClickSaveSearch (values) {
-    const { userInfo } = this.props
-    const { dateIndex, query } = this.props.params
+    const { userInfo, params } = this.props
     if (!userInfo) return
     const option = {
       id: guid(),
       name: values.name,
-      data: {
-        dateIndex,
-        query,
-        workflows: this.props.selectedWfs.map(p => ({
-          id: p.id,
-          name: p.name
-        }))
-      }
+      data: JSON.stringify(params)
     }
 
     this.props.closeSearchSavePopover()
     this.props.addSearchOption(userInfo, option)
   }
 
-  onChangeSearchOption (m, value) {
-    const found = this.getSearchOptions().filter(i => i.id === value)
-    if (!found.length) {
-      found.push({data: {query: '', dateIndex: 0}})
+  onChangeSearchOption (selectedSearch) {
+    let found
+    if (selectedSearch.type === 'User') {
+      found = selectedSearch
+    } else {
+      try {
+        found = JSON.parse(selectedSearch.data)
+      } catch (e) {}
     }
 
-    const { query, dateIndex, workflows } = found[0].data
+    const newQueryChips = parseSearchQuery(found.query || '')
+    const params = assign({}, this.props.params, found)
+    params.workflow = ''
 
-    const newQueryChips = parseSearchQuery(query)
+    this.props.updateSearchParams(params)
     this.props.updateQueryChips(newQueryChips)
-    this.props.updateSearchParams(assign({}, this.props.params, {
-      query,
-      // dateIndex,
-      // dateFrom: this.dateOptions[dateIndex].from,
-      // dateTo: this.dateOptions[dateIndex].to,
-      workflow: (workflows || []).map(m => m.id).join(',')
-    }))
-    this.props.replaceSearchWfs(workflows)
+    this.props.replaceSearchWfs([])
     this.props.change('query', '')
-    this.props.change('dateIndex', dateIndex)
   }
 
   onClickWorkflow () {
@@ -528,7 +518,9 @@ class GenericSearch extends React.Component {
   renderSavedSearchModal () {
     if (!this.props.savedSearchModalOpen) return
     return (
-      <SavedSearchModal {...this.props}
+      <SavedSearchModal
+        {...this.props}
+        onChangeSearchOption={this.onChangeSearchOption.bind(this)}
         userOptions={this.getSearchOptions()}
       />
     )
@@ -554,7 +546,6 @@ class GenericSearch extends React.Component {
             onClearWorkflow={this.onClearWorkflow.bind(this)}
             onClickWorkflow={this.onClickWorkflow.bind(this)}
             onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
-            onChangeSearchOption={this.onChangeSearchOption.bind(this)}
             severities={severities}
             selectedSeverities={severity.split(',')}
             onChangeSeverity={this.onChangeSeverity.bind(this)}
