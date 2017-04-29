@@ -1,7 +1,8 @@
 import React from 'react'
 import ReactDateRangePicker from 'react-bootstrap-daterangepicker'
 import moment from 'moment'
-import {keys, assign} from 'lodash'
+import {keys, assign, isString, isNumber} from 'lodash'
+import {dateFormat} from 'shared/Global'
 
 export default class DateRangePicker2 extends React.Component {
   constructor (props) {
@@ -62,14 +63,17 @@ export default class DateRangePicker2 extends React.Component {
     const {rangeConfig} = this.state
     let { className, startDate, endDate, children, renderer, style } = this.props
 
-    const startDateStr = (startDate || moment()).format('DD/MM/YYYY')
-    const endDateStr = (endDate || moment()).format('DD/MM/YYYY')
+    const momentStartDate = isString(startDate) ? moment(startDate, dateFormat) : (isNumber(startDate) ? moment(startDate) : startDate)
+    const momentEndDate = isString(endDate) ? moment(endDate, dateFormat) : (isNumber(endDate) ? moment(endDate) : endDate)
+
+    const startDateStr = momentStartDate.format(dateFormat)
+    const endDateStr = momentEndDate.format(dateFormat)
 
     let label = ''
 
     keys(rangeConfig).forEach(key => {
-      if (rangeConfig[key][0].format('DD/MM/YYYY') === startDateStr &&
-        rangeConfig[key][1].format('DD/MM/YYYY') === endDateStr) {
+      if (rangeConfig[key][0].format(dateFormat) === startDateStr &&
+        rangeConfig[key][1].format(dateFormat) === endDateStr) {
         label = key
       }
     })
@@ -82,8 +86,8 @@ export default class DateRangePicker2 extends React.Component {
         linkedCalendars
         opens="right"
 
-        startDate={startDate}
-        endDate={endDate}
+        startDate={momentStartDate}
+        endDate={momentEndDate}
 
         style={assign({}, style, {display: 'inline-block'})}
         className={className}

@@ -11,7 +11,8 @@ class SavedSearchModalView extends React.Component {
       userOptions,
       sysSearchOptions,
       onClickRow,
-      selectedSearch
+      selectedSearch,
+      loadingSearchOptions
     } = this.props
 
     const options = concat([], userOptions.map(p => {
@@ -50,6 +51,9 @@ class SavedSearchModalView extends React.Component {
                   <td>{p.type}</td>
                 </tr>
               )}
+              {
+                loadingSearchOptions && !options.length ? <tr><td colSpan="3" className="text-center">Loading...</td></tr> : null
+              }
               </tbody>
             </table>
           </div>

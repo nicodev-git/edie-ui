@@ -31,7 +31,8 @@ import {
   REPLACE_SEARCH_WFS,
 
   SHOW_SAVED_SEARCH_MODAL,
-  SELECT_SEARCH
+  SELECT_SEARCH,
+  SET_LOADING_SEARCH_OPTIONS
 } from 'actions/types'
 import { concat } from 'lodash'
 
@@ -110,6 +111,8 @@ export default function (state = {}, action) {
       return { ...state, sysSearchOptions: action.data }
     case SELECT_SEARCH:
       return { ...state, selectedSearch: action.selected }
+    case SET_LOADING_SEARCH_OPTIONS:
+      return { ...state, loadingSearchOptions: action.loading }
   }
   return state
 }

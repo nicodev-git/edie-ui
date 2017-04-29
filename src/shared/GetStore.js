@@ -3,6 +3,8 @@ import reducers from '../reducers'
 import reduxThunk from 'redux-thunk'
 import moment from 'moment'
 
+import {dateFormat} from 'shared/Global'
+
 const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore)
 
 const initialState = {
@@ -75,8 +77,8 @@ const initialState = {
       workflow: '',
       collections: 'incident,event',
       severity: 'HIGH,MEDIUM',
-      dateFrom: moment().startOf('year').valueOf(),
-      dateTo: moment().endOf('year').valueOf()
+      dateFrom: moment().startOf('year').format(dateFormat),
+      dateTo: moment().endOf('year').format(dateFormat)
     },
     incidentParams: {
       severity: ['HIGH', 'MEDIUM'],

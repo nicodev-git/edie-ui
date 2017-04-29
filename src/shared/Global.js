@@ -1,14 +1,15 @@
 import moment from 'moment'
 import React from 'react'
-import {reduce, isNull, isUndefined, isArray} from 'lodash'
+import {reduce, isNull, isUndefined, isArray, assign} from 'lodash'
 import { ROOT_URL } from 'actions/config'
 import WarningIcon from 'material-ui/svg-icons/alert/warning'
 import DescriptionIcon from 'material-ui/svg-icons/action/description'
 import { iconStyle } from 'style/materialStyles'
 
+export const dateFormat = 'DD/MM/YYYY'
+
 export const imageBaseUrl = `${ROOT_URL}/images/`
 export const extImageBaseUrl = `${ROOT_URL}/externalpictures?name=`
-
 export function getCustomImageUrl (img) {
   return `data:${img.mimeType};base64,${img.content}`
 }
@@ -192,4 +193,11 @@ export function guid () {
     return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1)
   }
   return `${s4()}${s4()}-${s4()}-${s4()}-${s4()}-${s4()}${s4()}${s4()}`
+}
+
+export function convertSearchParams (params) {
+  const p = assign({}, params)
+  if (p.dateFrom) p.dateFrom = moment(p.dateFrom, dateFormat).valueOf()
+  if (p.dateTo) p.dateTo = moment(p.dateTo, dateFormat).valueOf()
+  return p
 }

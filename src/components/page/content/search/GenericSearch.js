@@ -12,7 +12,7 @@ import SearchTabs from './SearchTabs'
 import TabPage from '../../../shared/TabPage'
 import TabPageBody from '../../../shared/TabPageBody'
 import TabPageHeader from '../../../shared/TabPageHeader'
-import { imageBaseUrl, parseSearchQuery, guid, encodeUrlParams } from 'shared/Global'
+import { imageBaseUrl, parseSearchQuery, guid, encodeUrlParams, dateFormat, convertSearchParams } from 'shared/Global'
 import { showConfirm } from 'components/shared/Alert'
 
 import SearchFormView from './SearchFormView'
@@ -378,8 +378,8 @@ class GenericSearch extends React.Component {
 
   onChangeRange ({startDate, endDate}) {
     this.props.updateSearchParams(assign({}, this.props.params, {
-      dateFrom: startDate.valueOf(),
-      dateTo: endDate.valueOf()
+      dateFrom: startDate.format(dateFormat),
+      dateTo: endDate.format(dateFormat)
     }))
   }
 
@@ -547,8 +547,8 @@ class GenericSearch extends React.Component {
             severities={severities}
             selectedSeverities={severity.split(',')}
             onChangeSeverity={this.onChangeSeverity.bind(this)}
-            startDate={moment(dateFrom)}
-            endDate={moment(dateTo)}
+            startDate={dateFrom}
+            endDate={dateTo}
             onChangeDateRange={this.onChangeRange.bind(this)}
             onClickIllustrate={this.onClickIllustrate.bind(this)}
             onClickSavedSearch={this.onClickSavedSearch.bind(this)}
@@ -605,7 +605,7 @@ class GenericSearch extends React.Component {
                   rowMetadata={{'key': 'id'}}
                   selectable
                   onRowDblClick={this.onRowDblClick.bind(this)}
-                  params={this.props.params}
+                  params={convertSearchParams(this.props.params)}
                   pageSize={10}
                   showTableHeading={false}
                   onUpdateCount={this.onResultCountUpdate.bind(this)}

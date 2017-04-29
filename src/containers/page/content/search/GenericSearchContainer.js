@@ -68,7 +68,8 @@ import {
 
     savedSearchModalOpen: state.search.savedSearchModalOpen,
     sysSearchOptions: state.search.sysSearchOptions,
-    selectedSearch: state.search.selectedSearch
+    selectedSearch: state.search.selectedSearch,
+    loadingSearchOptions: state.search.loadingSearchOptions
   }),
   dispatch => ({
     ...bindActionCreators({
