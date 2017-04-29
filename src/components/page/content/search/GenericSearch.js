@@ -528,7 +528,9 @@ class GenericSearch extends React.Component {
   renderSavedSearchModal () {
     if (!this.props.savedSearchModalOpen) return
     return (
-      <SavedSearchModal {...this.props}/>
+      <SavedSearchModal {...this.props}
+        userOptions={this.getSearchOptions()}
+      />
     )
   }
 

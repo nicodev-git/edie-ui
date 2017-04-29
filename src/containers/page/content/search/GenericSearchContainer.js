@@ -17,6 +17,8 @@ import {
   addSearchOption,
   updateSearchOption,
   removeSearchOption,
+  fetchSysSearchOptions,
+  showSavedSearch,
 
   openSearchSavePopover,
   closeSearchSavePopover,
@@ -61,7 +63,9 @@ import {
     selectedWf: state.search.selectedWf,
     selectedWfs: state.search.selectedWfs,
     workflowFilter: state.search.workflowFilter,
-    selectedRowWf: state.search.selectedRowWf
+    selectedRowWf: state.search.selectedRowWf,
+
+    savedSearchModalOpen: state.search.savedSearchModalOpen
   }),
   dispatch => ({
     ...bindActionCreators({
@@ -76,6 +80,8 @@ import {
       addSearchOption,
       updateSearchOption,
       removeSearchOption,
+      fetchSysSearchOptions,
+      showSavedSearch,
 
       openSearchSavePopover,
       closeSearchSavePopover,

@@ -1,8 +1,11 @@
 import React from 'react'
 
-import SavedSearchModalView from 'components/modal'
+import {SavedSearchModalView} from 'components/modal'
 
 export default class SavedSearchModal extends React.Component {
+  componentWillMount () {
+    this.props.fetchSysSearchOptions()
+  }
   render () {
     return (
       <SavedSearchModalView

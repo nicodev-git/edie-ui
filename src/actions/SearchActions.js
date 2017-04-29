@@ -24,7 +24,10 @@ import {
   REMOVE_SEARCH_WF,
   REPLACE_SEARCH_WFS,
 
-  UPDATE_USER_INFO
+  UPDATE_USER_INFO,
+
+  SHOW_SAVED_SEARCH_MODAL,
+  FETCH_SYS_SEARCH_OPTIONS
 } from './types'
 import { ROOT_URL } from './config'
 import { apiError } from './Errors'
@@ -198,6 +201,14 @@ export const updateIncidentSearchParams = (params) => {
 
 export const showSavedSearch = (visible) => {
   return dispatch => {
+    dispatch({type: SHOW_SAVED_SEARCH_MODAL, visible})
+  }
+}
 
+export const fetchSysSearchOptions = () => {
+  return dispatch => {
+    axios.get(`${ROOT_URL}/usersearch?size=1000`).then(res => {
+      dispatch({type: FETCH_SYS_SEARCH_OPTIONS, data: res.data._embedded.userSearches})
+    }).catch(error => apiError(dispatch, error))
   }
 }

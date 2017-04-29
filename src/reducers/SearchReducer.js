@@ -27,7 +27,9 @@ import {
   SELECT_SEARCH_WF,
   ADD_SEARCH_WF,
   REMOVE_SEARCH_WF,
-  REPLACE_SEARCH_WFS
+  REPLACE_SEARCH_WFS,
+
+  SHOW_SAVED_SEARCH_MODAL
 } from 'actions/types'
 import { concat } from 'lodash'
 
@@ -99,6 +101,9 @@ export default function (state = {}, action) {
       return { ...state, selectedWfs: action.workflows || [] }
     case UPDATE_INCIDENTS_PARAMS:
       return { ...state, incidentParams: action.params }
+
+    case SHOW_SAVED_SEARCH_MODAL:
+      return { ...state, savedSearchModalOpen: !!action.visible }
   }
   return state
 }
