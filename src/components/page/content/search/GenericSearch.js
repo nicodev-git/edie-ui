@@ -317,12 +317,10 @@ class GenericSearch extends React.Component {
 
   onChangeSearchOption (selectedSearch) {
     let found
-    if (selectedSearch.type === 'User') {
-      found = selectedSearch
-    } else {
-      try {
-        found = JSON.parse(selectedSearch.data)
-      } catch (e) {}
+    try {
+      found = JSON.parse(selectedSearch.data)
+    } catch (e) {
+      found = {}
     }
 
     const newQueryChips = parseSearchQuery(found.query || '')
