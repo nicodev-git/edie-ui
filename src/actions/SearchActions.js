@@ -27,7 +27,8 @@ import {
   UPDATE_USER_INFO,
 
   SHOW_SAVED_SEARCH_MODAL,
-  FETCH_SYS_SEARCH_OPTIONS
+  FETCH_SYS_SEARCH_OPTIONS,
+  SELECT_SEARCH
 } from './types'
 import { ROOT_URL } from './config'
 import { apiError } from './Errors'
@@ -210,5 +211,11 @@ export const fetchSysSearchOptions = () => {
     axios.get(`${ROOT_URL}/usersearch?size=1000`).then(res => {
       dispatch({type: FETCH_SYS_SEARCH_OPTIONS, data: res.data._embedded.userSearches})
     }).catch(error => apiError(dispatch, error))
+  }
+}
+
+export function selectSearch (selected) {
+  return dispatch => {
+    dispatch({type: SELECT_SEARCH, selected})
   }
 }

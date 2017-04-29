@@ -11,10 +11,14 @@ export default class SavedSearchModal extends React.Component {
   }
   onClickOK () {
   }
+  onClickRow (p) {
+    this.props.selectSearch(p)
+  }
   render () {
     return (
       <SavedSearchModalView
         {...this.props}
+        onClickRow={this.onClickRow.bind(this)}
         onClickOK={this.onClickOK.bind(this)}
         onClickClose={this.onClickClose.bind(this)}
       />

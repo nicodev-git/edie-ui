@@ -19,6 +19,7 @@ import {
   removeSearchOption,
   fetchSysSearchOptions,
   showSavedSearch,
+  selectSearch,
 
   openSearchSavePopover,
   closeSearchSavePopover,
@@ -66,7 +67,8 @@ import {
     selectedRowWf: state.search.selectedRowWf,
 
     savedSearchModalOpen: state.search.savedSearchModalOpen,
-    sysSearchOptions: state.search.sysSearchOptions
+    sysSearchOptions: state.search.sysSearchOptions,
+    selectedSearch: state.search.selectedSearch
   }),
   dispatch => ({
     ...bindActionCreators({
@@ -83,6 +85,7 @@ import {
       removeSearchOption,
       fetchSysSearchOptions,
       showSavedSearch,
+      selectSearch,
 
       openSearchSavePopover,
       closeSearchSavePopover,

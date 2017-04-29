@@ -30,7 +30,8 @@ import {
   REMOVE_SEARCH_WF,
   REPLACE_SEARCH_WFS,
 
-  SHOW_SAVED_SEARCH_MODAL
+  SHOW_SAVED_SEARCH_MODAL,
+  SELECT_SEARCH
 } from 'actions/types'
 import { concat } from 'lodash'
 
@@ -107,6 +108,8 @@ export default function (state = {}, action) {
       return { ...state, savedSearchModalOpen: !!action.visible }
     case FETCH_SYS_SEARCH_OPTIONS:
       return { ...state, sysSearchOptions: action.data }
+    case SELECT_SEARCH:
+      return { ...state, selectedSearch: action.selected }
   }
   return state
 }
