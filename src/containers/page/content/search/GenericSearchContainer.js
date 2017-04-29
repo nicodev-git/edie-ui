@@ -65,7 +65,8 @@ import {
     workflowFilter: state.search.workflowFilter,
     selectedRowWf: state.search.selectedRowWf,
 
-    savedSearchModalOpen: state.search.savedSearchModalOpen
+    savedSearchModalOpen: state.search.savedSearchModalOpen,
+    sysSearchOptions: state.search.sysSearchOptions
   }),
   dispatch => ({
     ...bindActionCreators({

@@ -15,6 +15,7 @@ import {
   ADD_SEARCH_OPTION,
   UPDATE_SEARCH_OPTION,
   REMOVE_SEARCH_OPTION,
+  FETCH_SYS_SEARCH_OPTIONS,
 
   OPEN_SEARCH_SAVE_POPOVER,
   CLOSE_SEARCH_SAVE_POPOVER,
@@ -104,6 +105,8 @@ export default function (state = {}, action) {
 
     case SHOW_SAVED_SEARCH_MODAL:
       return { ...state, savedSearchModalOpen: !!action.visible }
+    case FETCH_SYS_SEARCH_OPTIONS:
+      return { ...state, sysSearchOptions: action.data }
   }
   return state
 }

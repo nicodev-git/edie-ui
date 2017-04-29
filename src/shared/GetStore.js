@@ -94,6 +94,7 @@ const initialState = {
     selectedWfs: [],
 
     searchOptions: [],
+    sysSearchOptions: [],
     selectedCategory: '',
     workflowFilter: ''
   },

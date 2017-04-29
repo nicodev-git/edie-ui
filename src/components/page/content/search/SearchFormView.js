@@ -100,7 +100,7 @@ export default class SearchFormView extends React.Component {
           <FlatButton label="Workflow" onTouchTap={onClickWorkflow} style={{marginTop: '4px', verticalAlign: 'top'}}/>
           <FlatButton type="submit" icon={<ActionSearch />} style={{marginTop: '4px', verticalAlign: 'top'}}/>
           <FlatButton icon={starFilled ? <FilledStar/> : <ToggleStar/>} style={{marginTop: '4px', verticalAlign: 'top'}} onClick={onClickStar}/>
-          <FlatButton labeld="Saved Search" style={{marginTop: '4px', verticalAlign: 'top', minWidth: '50px'}} onClick={onClickSavedSearch}/>
+          <FlatButton label="Saved Search" style={{marginTop: '4px', verticalAlign: 'top', minWidth: '50px'}} onClick={onClickSavedSearch}/>
           <FlatButton icon={<LocalMovie/>} style={{marginTop: '4px', verticalAlign: 'top', minWidth: '50px'}} onClick={onClickIllustrate}/>
         </div>
       </form>
