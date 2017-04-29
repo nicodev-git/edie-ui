@@ -1,17 +1,16 @@
 import React from 'react'
 import { Field } from 'redux-form'
-import { concat, findIndex } from 'lodash'
+import { findIndex } from 'lodash'
 import {FlatButton, SelectField, MenuItem} from 'material-ui'
 import ActionSearch from 'material-ui/svg-icons/action/search'
 import ToggleStar from 'material-ui/svg-icons/toggle/star-border'
 import FilledStar from 'material-ui/svg-icons/toggle/star'
 import LocalMovie from 'material-ui/svg-icons/maps/local-movies'
 
-import { FormInput, FormSelect } from 'components/modal/parts'
+import { FormInput } from 'components/modal/parts'
 import DateRangePicker2 from 'components/shared/DateRangePicker2'
 import { underlineFocusStyle, inputStyle, selectedItemStyle } from 'style/materialStyles'
 
-const emptySearch = {label: 'None', value: ''}
 export default class SearchFormView extends React.Component {
   renderDateLabel (label) {
     return (
@@ -31,8 +30,7 @@ export default class SearchFormView extends React.Component {
       onClickStar,
       starFilled,
       onSubmit,
-      searchOptions,
-      onChangeSearchOption,
+      onClickSavedSearch,
       onClickWorkflow,
 
       severities,
@@ -49,7 +47,6 @@ export default class SearchFormView extends React.Component {
 
       onClickIllustrate
     } = this.props
-    const savedSearchOptions = concat([], emptySearch, searchOptions)
     return (
       <form onSubmit={onSubmit}>
         <div className="text-center margin-md-top" >
@@ -103,7 +100,7 @@ export default class SearchFormView extends React.Component {
           <FlatButton label="Workflow" onTouchTap={onClickWorkflow} style={{marginTop: '4px', verticalAlign: 'top'}}/>
           <FlatButton type="submit" icon={<ActionSearch />} style={{marginTop: '4px', verticalAlign: 'top'}}/>
           <FlatButton icon={starFilled ? <FilledStar/> : <ToggleStar/>} style={{marginTop: '4px', verticalAlign: 'top'}} onClick={onClickStar}/>
-          <Field name="searchOptionIndex" component={FormSelect} label="" options={savedSearchOptions} style={{verticalAlign: 'top', textAlign: 'left', maxWidth: '100px'}} onChange={onChangeSearchOption}/>
+          <FlatButton labeld="Saved Search" style={{marginTop: '4px', verticalAlign: 'top', minWidth: '50px'}} onClick={onClickSavedSearch}/>
           <FlatButton icon={<LocalMovie/>} style={{marginTop: '4px', verticalAlign: 'top', minWidth: '50px'}} onClick={onClickIllustrate}/>
         </div>
       </form>

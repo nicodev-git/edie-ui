@@ -195,3 +195,9 @@ export const updateIncidentSearchParams = (params) => {
     })
   }
 }
+
+export const showSavedSearch = (visible) => {
+  return dispatch => {
+
+  }
+}

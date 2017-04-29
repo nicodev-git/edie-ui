@@ -18,6 +18,7 @@ import { showConfirm } from 'components/shared/Alert'
 import SearchFormView from './SearchFormView'
 import SearchSavePopover from './SearchSavePopover'
 import WorkflowSelectModal from './WorkflowSelectModal'
+import SavedSearchModal from './SavedSearchModal'
 
 const styles = {
   chip: {
@@ -408,7 +409,9 @@ class GenericSearch extends React.Component {
       }
     })
   }
-
+  onClickSavedSearch () {
+    this.props.showSavedSearch(true)
+  }
   renderFields () {
     const {selectedField} = this.props
     return (
@@ -522,6 +525,13 @@ class GenericSearch extends React.Component {
     )
   }
 
+  renderSavedSearchModal () {
+    if (!this.props.savedSearchModalOpen) return
+    return (
+      <SavedSearchModal {...this.props}/>
+    )
+  }
+
   render () {
     const { handleSubmit, selectedWf, params } = this.props
     const { severity, dateFrom, dateTo } = params
@@ -533,7 +543,6 @@ class GenericSearch extends React.Component {
         <TabPageHeader title="Search">
           <SearchFormView
             onSearchKeyDown={this.onSearchKeyDown.bind(this)}
-            searchOptions={this.getSearchOptions().map(m => ({label: m.name, value: m.id}))}
             onClickStar={this.onClickStar.bind(this)}
             starFilled={!!this.props.selectedSearchOption}
             workflow={workflow.length ? workflow[0].name : ''}
@@ -551,6 +560,7 @@ class GenericSearch extends React.Component {
             endDate={moment(dateTo)}
             onChangeDateRange={this.onChangeRange.bind(this)}
             onClickIllustrate={this.onClickIllustrate.bind(this)}
+            onClickSavedSearch={this.onClickSavedSearch.bind(this)}
           />
 
           <div className="text-center">
@@ -578,6 +588,7 @@ class GenericSearch extends React.Component {
 
             {this.renderSavePopover()}
             {this.renderWfSelectModal()}
+            {this.renderSavedSearchModal()}
           </div>
 
         </TabPageHeader>

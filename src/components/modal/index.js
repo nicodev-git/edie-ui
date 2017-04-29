@@ -27,6 +27,7 @@ import ParamEditModalView from './ParamEditModalView'
 import WorkflowSelectModalView from './WorkflowSelectModalView'
 import DeviceTplWfSelectModalView from './DeviceTplWfSelectModalView'
 import ThreatItemModalView from './ThreatItemModalView'
+import SavedSearchModalView from './SavedSearchModalView'
 
 export {
   ActivationModalView,
@@ -57,5 +58,6 @@ export {
   ParamEditModalView,
   WorkflowSelectModalView,
   DeviceTplWfSelectModalView,
-  ThreatItemModalView
+  ThreatItemModalView,
+  SavedSearchModalView
 }
