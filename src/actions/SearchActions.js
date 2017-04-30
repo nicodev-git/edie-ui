@@ -29,7 +29,8 @@ import {
   SHOW_SAVED_SEARCH_MODAL,
   FETCH_SYS_SEARCH_OPTIONS,
   SELECT_SEARCH,
-  SET_LOADING_SEARCH_OPTIONS
+  SET_LOADING_SEARCH_OPTIONS,
+  SHOW_REL_DEVICES_POPOVER
 } from './types'
 import { ROOT_URL } from './config'
 import { apiError } from './Errors'
@@ -222,3 +223,10 @@ export function selectSearch (selected) {
     dispatch({type: SELECT_SEARCH, selected})
   }
 }
+
+export const showRelDevicesPopover = (visible) => {
+  return dispatch => {
+    dispatch({type: SHOW_REL_DEVICES_POPOVER, visible})
+  }
+}
+
