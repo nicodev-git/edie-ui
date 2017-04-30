@@ -36,7 +36,9 @@ import {
   removeSearchWf,
   replaceSearchWfs,
 
-  showThreats
+  showThreats,
+  showRelDevicesPopover,
+  fetchRelDevices
 } from 'actions'
 
 @withRouter
@@ -69,7 +71,10 @@ import {
     savedSearchModalOpen: state.search.savedSearchModalOpen,
     sysSearchOptions: state.search.sysSearchOptions,
     selectedSearch: state.search.selectedSearch,
-    loadingSearchOptions: state.search.loadingSearchOptions
+    loadingSearchOptions: state.search.loadingSearchOptions,
+
+    relDevicePopoverOpen: state.search.relDevicePopoverOpen,
+    relDevices: state.search.relDevices
   }),
   dispatch => ({
     ...bindActionCreators({
@@ -103,7 +108,9 @@ import {
       removeSearchWf,
       replaceSearchWfs,
 
-      showThreats
+      showThreats,
+      showRelDevicesPopover,
+      fetchRelDevices
     }, dispatch)
   })
 )

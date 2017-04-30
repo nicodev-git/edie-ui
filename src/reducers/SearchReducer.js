@@ -33,7 +33,8 @@ import {
   SHOW_SAVED_SEARCH_MODAL,
   SELECT_SEARCH,
   SET_LOADING_SEARCH_OPTIONS,
-  SHOW_REL_DEVICES_POPOVER
+  SHOW_REL_DEVICES_POPOVER,
+  FETCH_REL_DEVICES
 } from 'actions/types'
 import { concat } from 'lodash'
 
@@ -115,7 +116,9 @@ export default function (state = {}, action) {
     case SET_LOADING_SEARCH_OPTIONS:
       return { ...state, loadingSearchOptions: action.loading }
     case SHOW_REL_DEVICES_POPOVER:
-      return { ...state, relDevicePopoverOpen: !!action.visible }
+      return { ...state, relDevicePopoverOpen: !!action.visible, anchorEl: action.anchorEl }
+    case FETCH_REL_DEVICES:
+      return { ...state, relDevices: action.data }
   }
   return state
 }

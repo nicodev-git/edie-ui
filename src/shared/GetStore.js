@@ -98,7 +98,9 @@ const initialState = {
     searchOptions: [],
     sysSearchOptions: [],
     selectedCategory: '',
-    workflowFilter: ''
+    workflowFilter: '',
+
+    relDevices: []
   },
 
   settings: {

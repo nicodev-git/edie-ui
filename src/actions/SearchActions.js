@@ -30,7 +30,8 @@ import {
   FETCH_SYS_SEARCH_OPTIONS,
   SELECT_SEARCH,
   SET_LOADING_SEARCH_OPTIONS,
-  SHOW_REL_DEVICES_POPOVER
+  SHOW_REL_DEVICES_POPOVER,
+  FETCH_REL_DEVICES
 } from './types'
 import { ROOT_URL } from './config'
 import { apiError } from './Errors'
@@ -224,9 +225,20 @@ export function selectSearch (selected) {
   }
 }
 
-export const showRelDevicesPopover = (visible) => {
+export const showRelDevicesPopover = (visible, anchorEl) => {
   return dispatch => {
-    dispatch({type: SHOW_REL_DEVICES_POPOVER, visible})
+    dispatch({type: SHOW_REL_DEVICES_POPOVER, visible, anchorEl})
   }
 }
 
+export const fetchRelDevices = (params) => {
+  return dispatch => {
+    dispatch({type: FETCH_REL_DEVICES, data: []})
+    const config = {
+      params: assign({}, convertSearchParams(params))
+    }
+    axios.get(`${ROOT_URL}/search/relevantDevices`, config).then(res => {
+      dispatch({type: FETCH_REL_DEVICES, data: res.data})
+    }).catch(error => apiError(dispatch, error))
+  }
+}

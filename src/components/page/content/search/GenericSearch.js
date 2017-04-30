@@ -400,6 +400,10 @@ class GenericSearch extends React.Component {
   onClickSavedSearch () {
     this.props.showSavedSearch(true)
   }
+  onClickRelDevices (e) {
+    this.props.showRelDevicesPopover(true, e.target)
+    this.props.fetchRelDevices(this.props.params)
+  }
   renderFields () {
     const {selectedField} = this.props
     return (
@@ -427,7 +431,44 @@ class GenericSearch extends React.Component {
       />
     )
   }
+  renderRelDevicesPopover () {
+    const { relDevicePopoverOpen, anchorEl, relDevices } = this.props
+    return (
+      <Popover
+        open={relDevicePopoverOpen}
+        anchorEl={anchorEl}
+        anchorOrigin={{horizontal: 'right', vertical: 'top'}}
+        targetOrigin={{horizontal: 'right', vertical: 'bottom'}}
+        canAutoPosition
+        onRequestClose={() => this.props.showRelDevicesPopover(false)}
+      >
+        <div className="padding-md">
+          <h4>Relevant Devices</h4>
+        </div>
 
+        <hr className="m-none" style={{borderColor: 'gray'}}/>
+
+        <div style={{maxHeight: '300px', minWidth: '200px', overflowY: 'auto', overflowX: 'hidden', padding: '10px 0'}}>
+          <table className="table table-hover">
+            <thead>
+            <tr>
+              <th>Name</th>
+              <th>IP</th>
+            </tr>
+            </thead>
+            <tbody>
+              {relDevices.map(d =>
+                <tr key={d.id}>
+                  <td>{d.name}</td>
+                  <td>{d.wanip || d.lanip}</td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+        </div>
+      </Popover>
+    )
+  }
   renderFieldPopover () {
     const { selectedField, fieldPopoverOpen, anchorEl } = this.props
     if (!selectedField) return
@@ -552,6 +593,7 @@ class GenericSearch extends React.Component {
             onChangeDateRange={this.onChangeRange.bind(this)}
             onClickIllustrate={this.onClickIllustrate.bind(this)}
             onClickSavedSearch={this.onClickSavedSearch.bind(this)}
+            onClickRelDevices={this.onClickRelDevices.bind(this)}
           />
 
           <div className="text-center">
@@ -577,6 +619,7 @@ class GenericSearch extends React.Component {
               </div>
             </div>
 
+            {this.renderRelDevicesPopover()}
             {this.renderSavePopover()}
             {this.renderWfSelectModal()}
             {this.renderSavedSearchModal()}
