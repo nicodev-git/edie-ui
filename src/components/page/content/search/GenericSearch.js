@@ -433,6 +433,7 @@ class GenericSearch extends React.Component {
     )
   }
   renderRelDevicesPopover () {
+    if (!this.props.relDevicePopoverOpen) return null
     return (
       <RelDevicesModal {...this.props}/>
     )

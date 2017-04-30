@@ -6,10 +6,10 @@ export default class RelDevicesModalView extends React.Component {
   render () {
     const {onHide, relDevices} = this.props
     return (
-      <Modal show onHide={onHide} aria-labelledby="ModalHeader" className="bootstrap-dialog type-primary">
-        <Header name="Choose Monitor"/>
+      <Modal show onHide={onHide} aria-labelledby="ModalHeader" className="bootstrap-dialog type-primary modal-w-fit">
+        <Header name="Relevant Devices"/>
         <div className="modal-body bootstrap-dialog-message">
-          <div style={{maxHeight: '500px', overflow: 'auto'}}>
+          <div style={{height: '500px', overflow: 'auto'}}>
             <table className="table table-hover">
               <thead>
                 <tr>
