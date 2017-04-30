@@ -19,6 +19,7 @@ import SearchFormView from './SearchFormView'
 import SearchSavePopover from './SearchSavePopover'
 import WorkflowSelectModal from './WorkflowSelectModal'
 import SavedSearchModal from './SavedSearchModal'
+import RelDevicesModal from './RelDevicesModal'
 
 const styles = {
   chip: {
@@ -432,41 +433,8 @@ class GenericSearch extends React.Component {
     )
   }
   renderRelDevicesPopover () {
-    const { relDevicePopoverOpen, anchorEl, relDevices } = this.props
     return (
-      <Popover
-        open={relDevicePopoverOpen}
-        anchorEl={anchorEl}
-        anchorOrigin={{horizontal: 'right', vertical: 'top'}}
-        targetOrigin={{horizontal: 'right', vertical: 'bottom'}}
-        canAutoPosition
-        onRequestClose={() => this.props.showRelDevicesPopover(false)}
-      >
-        <div className="padding-md">
-          <h4>Relevant Devices</h4>
-        </div>
-
-        <hr className="m-none" style={{borderColor: 'gray'}}/>
-
-        <div style={{maxHeight: '300px', minWidth: '200px', overflowY: 'auto', overflowX: 'hidden', padding: '10px 0'}}>
-          <table className="table table-hover">
-            <thead>
-            <tr>
-              <th>Name</th>
-              <th>IP</th>
-            </tr>
-            </thead>
-            <tbody>
-              {relDevices.map(d =>
-                <tr key={d.id}>
-                  <td>{d.name}</td>
-                  <td>{d.wanip || d.lanip}</td>
-                </tr>
-              )}
-            </tbody>
-          </table>
-        </div>
-      </Popover>
+      <RelDevicesModal {...this.props}/>
     )
   }
   renderFieldPopover () {
