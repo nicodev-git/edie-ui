@@ -30,6 +30,7 @@ import ThreatItemModalView from './ThreatItemModalView'
 import SavedSearchModalView from './SavedSearchModalView'
 import RelDevicesModalView from './RelDevicesModalView'
 import IrrelDevicesModalView from './IrrelDevicesModalView'
+import SearchFieldsModalView from './SearchFieldsModalView'
 
 export {
   ActivationModalView,
@@ -63,5 +64,6 @@ export {
   ThreatItemModalView,
   SavedSearchModalView,
   RelDevicesModalView,
-  IrrelDevicesModalView
+  IrrelDevicesModalView,
+  SearchFieldsModalView
 }

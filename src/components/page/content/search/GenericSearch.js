@@ -21,6 +21,7 @@ import WorkflowSelectModal from './WorkflowSelectModal'
 import SavedSearchModal from './SavedSearchModal'
 import RelDevicesModal from './RelDevicesModal'
 import IrrelDevicesModal from './IrrelDevicesModal'
+import SearchFieldsModal from './SearchFieldsModal'
 
 const styles = {
   chip: {
@@ -545,6 +546,10 @@ class GenericSearch extends React.Component {
     )
   }
 
+  renderSearchFieldsModal () {
+    if (!this.props.searchFieldsModalOpen) return null
+  }
+
   render () {
     const { handleSubmit, selectedWf, params } = this.props
     const { severity, dateFrom, dateTo } = params
@@ -605,6 +610,7 @@ class GenericSearch extends React.Component {
             {this.renderSavePopover()}
             {this.renderWfSelectModal()}
             {this.renderSavedSearchModal()}
+            {this.renderSearchFieldsModal()}
           </div>
 
         </TabPageHeader>
