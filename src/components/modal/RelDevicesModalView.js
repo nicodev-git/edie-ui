@@ -3,8 +3,24 @@ import Modal from 'react-bootstrap-modal'
 import { Header, CloseButton } from './parts'
 
 export default class RelDevicesModalView extends React.Component {
+  // renderItems () {
+  //   return relDevices.map(d =>
+  //     <tr key={d.id}>
+  //       <td>{d.name}</td>
+  //       <td>{d.wanip || d.lanip}</td>
+  //     </tr>
+  //   )
+  // }
+  renderItems () {
+    const {relDevices} = this.props
+    return relDevices.map(d =>
+      <tr key={d}>
+        <td>{d}</td>
+      </tr>
+    )
+  }
   render () {
-    const {onHide, relDevices} = this.props
+    const {onHide} = this.props
     return (
       <Modal show onHide={onHide} aria-labelledby="ModalHeader" className="bootstrap-dialog type-primary modal-w-fit">
         <Header name="Relevant Devices"/>
@@ -13,17 +29,11 @@ export default class RelDevicesModalView extends React.Component {
             <table className="table table-hover">
               <thead>
                 <tr>
-                  <th>Name</th>
-                  <th>IP</th>
+                  <th>Name/IP</th>
                 </tr>
               </thead>
               <tbody>
-              {relDevices.map(d =>
-                <tr key={d.id}>
-                  <td>{d.name}</td>
-                  <td>{d.wanip || d.lanip}</td>
-                </tr>
-              )}
+              {this.renderItems()}
               </tbody>
             </table>
           </div>
