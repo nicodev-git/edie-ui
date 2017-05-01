@@ -236,13 +236,13 @@ export const showRelDevicesPopover = (visible, anchorEl) => {
   }
 }
 
-export const fetchRelDevices = (params, fields) => {
+export const fetchRelDevices = (params, name) => {
   return dispatch => {
     dispatch({type: FETCH_REL_DEVICES, data: []})
     const config = {
-      params: assign({}, convertSearchParams(params), { fields })
+      params: assign({}, convertSearchParams(params), { name, size: 10000 })
     }
-    axios.get(`${ROOT_URL}/search/relevantDevices`, config).then(res => {
+    axios.get(`${ROOT_URL}/search/topValueCount`, config).then(res => {
       dispatch({type: FETCH_REL_DEVICES, data: res.data})
     }).catch(error => apiError(dispatch, error))
   }

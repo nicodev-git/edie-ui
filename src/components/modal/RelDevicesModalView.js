@@ -8,8 +8,8 @@ export default class RelDevicesModalView extends React.Component {
   renderItems () {
     const {relDevices} = this.props
     return relDevices.map(d =>
-      <tr key={d}>
-        <td>{d}</td>
+      <tr key={d.name}>
+        <td>{d.name}</td>
       </tr>
     )
   }
@@ -41,7 +41,7 @@ export default class RelDevicesModalView extends React.Component {
             </SelectField>
           </div>
           <div style={{height: '500px', overflow: 'auto'}}>
-            <table className="table table-hover">
+            <table className="table table-hover dataTable">
               <tbody>
               {this.renderItems()}
               </tbody>
