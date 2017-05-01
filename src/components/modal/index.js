@@ -29,6 +29,7 @@ import DeviceTplWfSelectModalView from './DeviceTplWfSelectModalView'
 import ThreatItemModalView from './ThreatItemModalView'
 import SavedSearchModalView from './SavedSearchModalView'
 import RelDevicesModalView from './RelDevicesModalView'
+import IrrelDevicesModalView from './IrrelDevicesModalView'
 
 export {
   ActivationModalView,
@@ -61,5 +62,6 @@ export {
   DeviceTplWfSelectModalView,
   ThreatItemModalView,
   SavedSearchModalView,
-  RelDevicesModalView
+  RelDevicesModalView,
+  IrrelDevicesModalView
 }

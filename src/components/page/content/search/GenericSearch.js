@@ -20,6 +20,7 @@ import SearchSavePopover from './SearchSavePopover'
 import WorkflowSelectModal from './WorkflowSelectModal'
 import SavedSearchModal from './SavedSearchModal'
 import RelDevicesModal from './RelDevicesModal'
+import IrrelDevicesModal from './IrrelDevicesModal'
 
 const styles = {
   chip: {
@@ -405,6 +406,8 @@ class GenericSearch extends React.Component {
     this.props.showRelDevicesPopover(true, e.target)
     this.props.fetchRelDevices(this.props.params)
   }
+  onClickIrrelDevices () {
+  }
   renderFields () {
     const {selectedField} = this.props
     return (
@@ -436,6 +439,12 @@ class GenericSearch extends React.Component {
     if (!this.props.relDevicePopoverOpen) return null
     return (
       <RelDevicesModal {...this.props}/>
+    )
+  }
+  renderIrrelDevicesModal () {
+    if (!this.props.irrelDeviceModalOpen) return null
+    return (
+      <IrrelDevicesModal {...this.props}/>
     )
   }
   renderFieldPopover () {
@@ -563,6 +572,7 @@ class GenericSearch extends React.Component {
             onClickIllustrate={this.onClickIllustrate.bind(this)}
             onClickSavedSearch={this.onClickSavedSearch.bind(this)}
             onClickRelDevices={this.onClickRelDevices.bind(this)}
+            onClickIrrelDevices={this.onClickIrrelDevices.bind(this)}
           />
 
           <div className="text-center">
@@ -589,6 +599,7 @@ class GenericSearch extends React.Component {
             </div>
 
             {this.renderRelDevicesPopover()}
+            {this.renderIrrelDevicesModal()}
             {this.renderSavePopover()}
             {this.renderWfSelectModal()}
             {this.renderSavedSearchModal()}

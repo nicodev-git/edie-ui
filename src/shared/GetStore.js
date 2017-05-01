@@ -100,7 +100,8 @@ const initialState = {
     selectedCategory: '',
     workflowFilter: '',
 
-    relDevices: []
+    relDevices: [],
+    irrelDevices: []
   },
 
   settings: {
