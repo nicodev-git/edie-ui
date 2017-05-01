@@ -7,6 +7,7 @@ import ToggleStar from 'material-ui/svg-icons/toggle/star-border'
 import FilledStar from 'material-ui/svg-icons/toggle/star'
 import LocalMovie from 'material-ui/svg-icons/maps/local-movies'
 import Computer from 'material-ui/svg-icons/hardware/computer'
+import NoSim from 'material-ui/svg-icons/communication/no-sim'
 
 import { FormInput } from 'components/modal/parts'
 import DateRangePicker2 from 'components/shared/DateRangePicker2'
@@ -47,7 +48,8 @@ export default class SearchFormView extends React.Component {
       onChangeDateRange,
 
       onClickIllustrate,
-      onClickRelDevices
+      onClickRelDevices,
+      onClickIrrelDevices
     } = this.props
     return (
       <form onSubmit={onSubmit}>
@@ -105,6 +107,7 @@ export default class SearchFormView extends React.Component {
           <FlatButton label="Saved Search" style={{marginTop: '4px', verticalAlign: 'top', minWidth: '50px'}} onClick={onClickSavedSearch}/>
           <FlatButton icon={<LocalMovie/>} style={{marginTop: '4px', verticalAlign: 'top', minWidth: '50px'}} onClick={onClickIllustrate}/>
           <FlatButton icon={<Computer/>} style={{marginTop: '4px', verticalAlign: 'top', minWidth: '50px'}} onClick={onClickRelDevices}/>
+          <FlatButton icon={<NoSim/>} style={{marginTop: '4px', verticalAlign: 'top', minWidth: '50px'}} onClick={onClickIrrelDevices}/>
         </div>
       </form>
     )
