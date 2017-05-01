@@ -14,7 +14,7 @@ export default class RelDevicesModal extends React.Component {
   render () {
     return (
       <RelDevicesModalView
-        relDevices={this.props.relDevices}
+        {...this.props}
         onHide={this.onHide.bind(this)}
         onClickFields={this.onClickFields.bind(this)}
       />
