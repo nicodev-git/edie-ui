@@ -408,6 +408,7 @@ class GenericSearch extends React.Component {
   }
   onClickIrrelDevices () {
     this.props.showIrrelDevicesModal(true)
+    this.props.fetchIrrelDevices(this.props.params)
   }
   renderFields () {
     const {selectedField} = this.props

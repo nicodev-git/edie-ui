@@ -35,7 +35,8 @@ import {
   SET_LOADING_SEARCH_OPTIONS,
   SHOW_REL_DEVICES_POPOVER,
   FETCH_REL_DEVICES,
-  SHOW_IRREL_DEVICES_MODAL
+  SHOW_IRREL_DEVICES_MODAL,
+  FETCH_IRREL_DEVICES
 } from 'actions/types'
 import { concat } from 'lodash'
 
@@ -122,6 +123,8 @@ export default function (state = {}, action) {
       return { ...state, relDevices: action.data }
     case SHOW_IRREL_DEVICES_MODAL:
       return { ...state, irrelDeviceModalOpen: !!action.visible }
+    case FETCH_IRREL_DEVICES:
+      return { ...state, irrelDevices: action.data }
   }
   return state
 }
