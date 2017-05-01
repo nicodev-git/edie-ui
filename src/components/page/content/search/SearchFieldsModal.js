@@ -1,4 +1,5 @@
 import React from 'react'
+import {concat} from 'lodash'
 
 import {SearchFieldsModalView} from 'components/modal'
 
@@ -12,15 +13,16 @@ class SearchFieldsModal extends React.Component {
   onClickClose () {
     this.props.showSearchFieldsModal(false)
   }
-  onRowSelection (selectedRows) {
-    const {fields} = this.props
-    this.props.updateSelectedSearchFields(selectedRows.map(i => fields[i].path))
+  onCheck (checked, item) {
+    const {selectedSearchFields} = this.props
+    const items = checked ? concat(selectedSearchFields, item) : selectedSearchFields.filter(p => p !== item)
+    this.props.updateSelectedSearchFields(items)
   }
   render () {
     return (
       <SearchFieldsModalView
         {...this.props}
-        onRowSelection={this.onRowSelection.bind(this)}
+        onCheck={this.onCheck.bind(this)}
         onClickOK={this.onClickOK.bind(this)}
         onClickClose={this.onClickClose.bind(this)}
       />

@@ -1,19 +1,10 @@
 import React from 'react'
 import Modal from 'react-bootstrap-modal'
-import {FlatButton} from 'material-ui'
-import Computer from 'material-ui/svg-icons/hardware/computer'
+import {SelectField, MenuItem} from 'material-ui'
 
 import { Header, CloseButton } from './parts'
 
 export default class RelDevicesModalView extends React.Component {
-  // renderItems () {
-  //   return relDevices.map(d =>
-  //     <tr key={d.id}>
-  //       <td>{d.name}</td>
-  //       <td>{d.wanip || d.lanip}</td>
-  //     </tr>
-  //   )
-  // }
   renderItems () {
     const {relDevices} = this.props
     return relDevices.map(d =>
@@ -23,21 +14,34 @@ export default class RelDevicesModalView extends React.Component {
     )
   }
   render () {
-    const {onHide, onClickFields, searchFields} = this.props
+    const {
+      onHide,
+      searchFields,
+      onChangeSearchField,
+      fields
+    } = this.props
     return (
       <Modal show onHide={onHide} aria-labelledby="ModalHeader" className="bootstrap-dialog type-primary modal-w-fit">
         <Header name="Relevant Devices"/>
         <div className="modal-body bootstrap-dialog-message">
           <div>
-            <FlatButton icon={<Computer/>} style={{minWidth: '50px'}} onClick={onClickFields}/>
+            <SelectField
+              hintText="Field"
+              value={searchFields[0]}
+              onChange={onChangeSearchField}
+              className="text-left"
+            >
+              {fields.map(option =>
+                <MenuItem
+                  key={option.path}
+                  value={option.path}
+                  primaryText={option.path.replace(/\.dataobj\./gi, '.').replace(/dataobj\./gi, '')}
+                />
+              )}
+            </SelectField>
           </div>
           <div style={{height: '500px', overflow: 'auto'}}>
             <table className="table table-hover">
-              <thead>
-                <tr>
-                  <th>{searchFields.join('/')}</th>
-                </tr>
-              </thead>
               <tbody>
               {this.renderItems()}
               </tbody>

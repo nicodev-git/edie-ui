@@ -8,15 +8,18 @@ export default class RelDevicesModal extends React.Component {
   onHide () {
     this.props.showRelDevicesPopover(false)
   }
-  onClickFields () {
-    this.props.showSearchFieldsModal(true)
+  // onClickFields () {
+  //   this.props.showSearchFieldsModal(true)
+  // }
+  onChangeSearchField (e, index, value) {
+    this.props.updateRelDeviceFields([value])
   }
   render () {
     return (
       <RelDevicesModalView
         {...this.props}
         onHide={this.onHide.bind(this)}
-        onClickFields={this.onClickFields.bind(this)}
+        onChangeSearchField={this.onChangeSearchField.bind(this)}
       />
     )
   }
