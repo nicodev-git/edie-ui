@@ -1,5 +1,13 @@
 import React from 'react'
 import Modal from 'react-bootstrap-modal'
+import {
+  Table,
+  TableBody,
+  TableHeader,
+  TableHeaderColumn,
+  TableRow,
+  TableRowColumn
+} from 'material-ui/Table'
 
 import { Header, TwoButtonsBlockCustom } from './parts'
 
@@ -15,24 +23,20 @@ class SearchFieldsModalView extends React.Component {
       >
         <Header name="Fields" />
         <div className="modal-body bootstrap-dialog-message">
-          <div style={{maxHeight: '350px', overflow: 'auto'}}>
-            <table className="table table-hover">
-              <thead>
-              <tr>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Origin</th>
-              </tr>
-              </thead>
-              <tbody>
+          <Table height="300px" multiSelectable>
+            <TableHeader enableSelectAll={false}>
+              <TableRow>
+                <TableHeaderColumn>Name</TableHeaderColumn>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
               {fields.map(p =>
-                <tr key={p.path}>
-                  <td>{p.path}</td>
-                </tr>
+                <TableRow key={p.path}>
+                  <TableRowColumn>{p.path}</TableRowColumn>
+                </TableRow>
               )}
-              </tbody>
-            </table>
-          </div>
+            </TableBody>
+          </Table>
           <TwoButtonsBlockCustom name1="OK" name2="Cancel" action1={onClickOK} action2={onClickClose}/>
         </div>
       </Modal>
