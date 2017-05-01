@@ -129,7 +129,7 @@ export default function (state = {}, action) {
     case FETCH_IRREL_DEVICES:
       return { ...state, irrelDevices: action.data }
     case SHOW_SEARCH_FIELDS_MODAL:
-      return { ...state, searchFieldsModalOpen: !!action.visible }
+      return { ...state, searchFieldsModalOpen: !!action.visible, selectedSearchFields: action.visible ? state.searchFields : state.selectedSearchFields }
     case UPDATE_SELECTED_SEARCH_FIELDS:
       return { ...state, selectedSearchFields: action.fields }
     case UPDATE_REL_DEVICE_FIELDS:
