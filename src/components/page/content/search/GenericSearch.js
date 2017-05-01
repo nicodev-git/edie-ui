@@ -548,6 +548,9 @@ class GenericSearch extends React.Component {
 
   renderSearchFieldsModal () {
     if (!this.props.searchFieldsModalOpen) return null
+    return (
+      <SearchFieldsModal {...this.props}/>
+    )
   }
 
   render () {
