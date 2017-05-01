@@ -405,7 +405,6 @@ class GenericSearch extends React.Component {
   }
   onClickRelDevices (e) {
     this.props.showRelDevicesPopover(true, e.target)
-    this.props.fetchRelDevices(this.props.params)
   }
   onClickIrrelDevices () {
     this.props.showIrrelDevicesModal(true)

@@ -235,11 +235,11 @@ export const showRelDevicesPopover = (visible, anchorEl) => {
   }
 }
 
-export const fetchRelDevices = (params) => {
+export const fetchRelDevices = (params, fields) => {
   return dispatch => {
     dispatch({type: FETCH_REL_DEVICES, data: []})
     const config = {
-      params: assign({}, convertSearchParams(params))
+      params: assign({}, convertSearchParams(params), { fields })
     }
     axios.get(`${ROOT_URL}/search/relevantDevices`, config).then(res => {
       dispatch({type: FETCH_REL_DEVICES, data: res.data})

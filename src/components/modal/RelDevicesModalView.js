@@ -23,7 +23,7 @@ export default class RelDevicesModalView extends React.Component {
     )
   }
   render () {
-    const {onHide, onClickFields} = this.props
+    const {onHide, onClickFields, searchFields} = this.props
     return (
       <Modal show onHide={onHide} aria-labelledby="ModalHeader" className="bootstrap-dialog type-primary modal-w-fit">
         <Header name="Relevant Devices"/>
@@ -35,7 +35,7 @@ export default class RelDevicesModalView extends React.Component {
             <table className="table table-hover">
               <thead>
                 <tr>
-                  <th>Name/IP</th>
+                  <th>{searchFields.join('/')}</th>
                 </tr>
               </thead>
               <tbody>
