@@ -38,7 +38,8 @@ import {
   SHOW_IRREL_DEVICES_MODAL,
   FETCH_IRREL_DEVICES,
   SHOW_SEARCH_FIELDS_MODAL,
-  UPDATE_SELECTED_SEARCH_FIELDS
+  UPDATE_SELECTED_SEARCH_FIELDS,
+  UPDATE_REL_DEVICE_FIELDS
 } from 'actions/types'
 import { concat } from 'lodash'
 
@@ -131,6 +132,8 @@ export default function (state = {}, action) {
       return { ...state, searchFieldsModalOpen: !!action.visible }
     case UPDATE_SELECTED_SEARCH_FIELDS:
       return { ...state, selectedSearchFields: action.fields }
+    case UPDATE_REL_DEVICE_FIELDS:
+      return { ...state, searchFields: action.fields }
   }
   return state
 }

@@ -4,6 +4,10 @@ import {SearchFieldsModalView} from 'components/modal'
 
 class SearchFieldsModal extends React.Component {
   onClickOK () {
+    const {selectedSearchFields} = this.props
+    if (!selectedSearchFields.length) return
+    this.onClickClose()
+    this.props.updateRelDeviceFields(selectedSearchFields)
   }
   onClickClose () {
     this.props.showSearchFieldsModal(false)
