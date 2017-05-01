@@ -33,7 +33,8 @@ import {
   SHOW_REL_DEVICES_POPOVER,
   FETCH_REL_DEVICES,
   SHOW_IRREL_DEVICES_MODAL,
-  FETCH_IRREL_DEVICES
+  FETCH_IRREL_DEVICES,
+  SHOW_SEARCH_FIELDS_MODAL
 } from './types'
 import { ROOT_URL } from './config'
 import { apiError } from './Errors'
@@ -260,5 +261,11 @@ export const fetchIrrelDevices = (params) => {
     axios.get(`${ROOT_URL}/search/irrelevantDevices`, config).then(res => {
       dispatch({type: FETCH_IRREL_DEVICES, data: res.data})
     }).catch(error => apiError(dispatch, error))
+  }
+}
+
+export const showSearchFieldsModal = (visible) => {
+  return dispatch => {
+    dispatch({type: SHOW_SEARCH_FIELDS_MODAL, visible})
   }
 }

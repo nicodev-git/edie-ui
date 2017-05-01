@@ -40,7 +40,8 @@ import {
   showRelDevicesPopover,
   fetchRelDevices,
   showIrrelDevicesModal,
-  fetchIrrelDevices
+  fetchIrrelDevices,
+  showSearchFieldsModal
 } from 'actions'
 
 @withRouter
@@ -78,7 +79,9 @@ import {
     relDevicePopoverOpen: state.search.relDevicePopoverOpen,
     relDevices: state.search.relDevices,
     irrelDeviceModalOpen: state.search.irrelDeviceModalOpen,
-    irrelDevices: state.search.irrelDevices
+    irrelDevices: state.search.irrelDevices,
+
+    searchFieldsModalOpen: state.search.searchFieldsModalOpen
   }),
   dispatch => ({
     ...bindActionCreators({
@@ -116,7 +119,8 @@ import {
       showRelDevicesPopover,
       fetchRelDevices,
       showIrrelDevicesModal,
-      fetchIrrelDevices
+      fetchIrrelDevices,
+      showSearchFieldsModal
     }, dispatch)
   })
 )
