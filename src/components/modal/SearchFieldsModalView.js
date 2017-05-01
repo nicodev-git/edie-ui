@@ -13,7 +13,7 @@ import { Header, TwoButtonsBlockCustom } from './parts'
 
 class SearchFieldsModalView extends React.Component {
   render () {
-    const {onClickOK, onClickClose, fields, onRowSelection} = this.props
+    const {onClickOK, onClickClose, fields, selectedSearchFields, onRowSelection} = this.props
     return (
       <Modal
         show
@@ -31,7 +31,7 @@ class SearchFieldsModalView extends React.Component {
             </TableHeader>
             <TableBody>
               {fields.map(p =>
-                <TableRow key={p.path}>
+                <TableRow key={p.path} selected={selectedSearchFields.indexOf(p.path) >= 0}>
                   <TableRowColumn>{p.path}</TableRowColumn>
                 </TableRow>
               )}

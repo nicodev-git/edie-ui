@@ -82,7 +82,9 @@ import {
     irrelDeviceModalOpen: state.search.irrelDeviceModalOpen,
     irrelDevices: state.search.irrelDevices,
 
-    searchFieldsModalOpen: state.search.searchFieldsModalOpen
+    searchFieldsModalOpen: state.search.searchFieldsModalOpen,
+    selectedSearchFields: state.search.selectedSearchFields,
+    searchFields: state.search.searchFields
   }),
   dispatch => ({
     ...bindActionCreators({

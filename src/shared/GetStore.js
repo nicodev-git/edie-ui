@@ -101,7 +101,9 @@ const initialState = {
     workflowFilter: '',
 
     relDevices: [],
-    irrelDevices: []
+    irrelDevices: [],
+    searchFields: ['devicename'],
+    selectedSearchFields: []
   },
 
   settings: {

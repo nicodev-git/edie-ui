@@ -10,6 +10,7 @@ class SearchFieldsModal extends React.Component {
   }
   onRowSelection (selectedRows) {
     const {fields} = this.props
+    this.props.updateSelectedSearchFields(selectedRows.map(i => fields[i].path))
   }
   render () {
     return (
