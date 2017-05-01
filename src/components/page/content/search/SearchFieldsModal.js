@@ -8,10 +8,14 @@ class SearchFieldsModal extends React.Component {
   onClickClose () {
     this.props.showSearchFieldsModal(false)
   }
+  onRowSelection (selectedRows) {
+    const {fields} = this.props
+  }
   render () {
     return (
       <SearchFieldsModalView
         {...this.props}
+        onRowSelection={this.onRowSelection.bind(this)}
         onClickOK={this.onClickOK.bind(this)}
         onClickClose={this.onClickClose.bind(this)}
       />

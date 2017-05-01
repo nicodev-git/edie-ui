@@ -41,7 +41,8 @@ import {
   fetchRelDevices,
   showIrrelDevicesModal,
   fetchIrrelDevices,
-  showSearchFieldsModal
+  showSearchFieldsModal,
+  updateSelectedSearchFields
 } from 'actions'
 
 @withRouter
@@ -120,7 +121,8 @@ import {
       fetchRelDevices,
       showIrrelDevicesModal,
       fetchIrrelDevices,
-      showSearchFieldsModal
+      showSearchFieldsModal,
+      updateSelectedSearchFields
     }, dispatch)
   })
 )

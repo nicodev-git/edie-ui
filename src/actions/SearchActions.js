@@ -34,7 +34,8 @@ import {
   FETCH_REL_DEVICES,
   SHOW_IRREL_DEVICES_MODAL,
   FETCH_IRREL_DEVICES,
-  SHOW_SEARCH_FIELDS_MODAL
+  SHOW_SEARCH_FIELDS_MODAL,
+  UPDATE_SELECTED_SEARCH_FIELDS
 } from './types'
 import { ROOT_URL } from './config'
 import { apiError } from './Errors'
@@ -267,5 +268,11 @@ export const fetchIrrelDevices = (params) => {
 export const showSearchFieldsModal = (visible) => {
   return dispatch => {
     dispatch({type: SHOW_SEARCH_FIELDS_MODAL, visible})
+  }
+}
+
+export const updateSelectedSearchFields = (fields) => {
+  return dispatch => {
+    dispatch({type: UPDATE_SELECTED_SEARCH_FIELDS, fields})
   }
 }

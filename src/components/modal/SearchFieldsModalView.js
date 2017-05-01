@@ -13,7 +13,7 @@ import { Header, TwoButtonsBlockCustom } from './parts'
 
 class SearchFieldsModalView extends React.Component {
   render () {
-    const {onClickOK, onClickClose, fields} = this.props
+    const {onClickOK, onClickClose, fields, onRowSelection} = this.props
     return (
       <Modal
         show
@@ -23,7 +23,7 @@ class SearchFieldsModalView extends React.Component {
       >
         <Header name="Fields" />
         <div className="modal-body bootstrap-dialog-message">
-          <Table height="300px" multiSelectable>
+          <Table height="300px" multiSelectable onRowSelection={onRowSelection}>
             <TableHeader enableSelectAll={false}>
               <TableRow>
                 <TableHeaderColumn>Name</TableHeaderColumn>
