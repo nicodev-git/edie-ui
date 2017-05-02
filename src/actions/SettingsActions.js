@@ -47,6 +47,8 @@ import {
   ADD_DEVICE_TPL_WF,
   REMOVE_DEVICE_TPL_WF,
 
+  SHARE_MONITOR_TEMPLATE,
+
   NO_AUTH_ERROR
 } from './types'
 
@@ -480,5 +482,15 @@ export const addDeviceTplWf = (workflow) => {
 export const removeDeviceTplWf = (workflow) => {
   return dispatch => {
     dispatch({type: REMOVE_DEVICE_TPL_WF, workflow})
+  }
+}
+
+export const shareMonitorTemplate = (props) => {
+  return dispatch => {
+    dispatch({type: SHARE_MONITOR_TEMPLATE, data: null})
+    axios.post(`${ROOT_URL}/shareMonitorTemplate`, props).then(({data}) => {
+      if (data.success) dispatch({type: SHARE_MONITOR_TEMPLATE, data: 'OK'})
+      else dispatch({type: SHARE_MONITOR_TEMPLATE, data: 'Error'})
+    }).catch(error => apiError(dispatch, error))
   }
 }

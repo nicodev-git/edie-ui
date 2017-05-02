@@ -20,6 +20,7 @@ import {
   DELETE_MONITOR_TEMPLATE,
   OPEN_MONITOR_TEMPLATE_MODAL,
   CLOSE_MONITOR_TEMPLATE_MODAL,
+  SHARE_MONITOR_TEMPLATE,
 
   OPEN_TPL_IMAGE_MODAL,
   CLOSE_TPL_IMAGE_MODAL,
@@ -138,35 +139,30 @@ export default function (state = {}, action) {
 
     case FETCH_MONITOR_TEMPLATES:
       return { ...state, monitorTemplates: action.data }
-
     case ADD_MONITOR_TEMPLATE: {
       const monitorTemplates = concat(state.monitorTemplates || [], action.data)
       return { ...state, monitorTemplates }
     }
-
     case UPDATE_MONITOR_TEMPLATE: {
       let monitorTemplates = state.monitorTemplates.map(
                 u => u.id === action.data.id ? action.data : u)
       return { ...state, monitorTemplates }
     }
-
     case DELETE_MONITOR_TEMPLATE: {
       const monitorTemplates = difference(state.monitorTemplates,
-                state.monitorTemplates.filter(u => u.id === action.data.id))
-      return { ...state, monitorTemplates }
+        state.monitorTemplates.filter(u => u.id === action.data.id))
+      return {...state, monitorTemplates}
     }
-
     case OPEN_MONITOR_TEMPLATE_MODAL:
       return { ...state, monitorTplModalVisible: true, monitorTpl: action.data, selectedTplImage: null }
-
     case CLOSE_MONITOR_TEMPLATE_MODAL:
       return { ...state, monitorTplModalVisible: false }
-
     case OPEN_TPL_IMAGE_MODAL:
       return { ...state, tplImageModalVisible: true }
-
     case CLOSE_TPL_IMAGE_MODAL:
       return { ...state, tplImageModalVisible: false, selectedTplImage: action.data || state.selectedTplImage }
+    case SHARE_MONITOR_TEMPLATE:
+      return { ...state, shareMonitorTplResult: action.data }
 
     case FETCH_SETTING_MAPS:
       return { ...state, maps: action.data }

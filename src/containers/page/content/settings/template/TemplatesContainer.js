@@ -24,6 +24,7 @@ import {
   updateDeviceTemplate,
   closeDeviceTplModal,
   openTplImageModal,
+  shareMonitorTemplate,
 
   addMonitorTemplate,
   updateMonitorTemplate,
@@ -44,6 +45,8 @@ import {
     deviceTplModalVisible: state.settings.deviceTplModalVisible,
     monitorTplModalVisible: state.settings.monitorTplModalVisible,
     tplImageModalVisible: state.settings.tplImageModalVisible,
+
+    shareMonitorTplResult: state.settings.shareMonitorTplResult,
 
     deviceTpl: state.settings.deviceTpl,
     selectedDeviceTpl: state.settings.selectedDeviceTpl,
@@ -80,6 +83,7 @@ import {
       updateDeviceTemplate,
       closeDeviceTplModal,
       openTplImageModal,
+      shareMonitorTemplate,
 
       addMonitorTemplate,
       updateMonitorTemplate,
