@@ -288,9 +288,10 @@ export const updateSelectedSearchFields = (fields) => {
 
 export const shareSavedSearch = (props) => {
   return dispatch => {
+    dispatch({type: SHARE_SAVED_SEARCH, data: null})
     axios.post(`${ROOT_URL}/shareUserSearch`, props).then(({data}) => {
-      if (data.success) dispatch({type: SHARE_SAVED_SEARCH, data: true})
-      else dispatch({type: SHARE_SAVED_SEARCH, data: false})
+      if (data.success) dispatch({type: SHARE_SAVED_SEARCH, data: 'OK'})
+      else dispatch({type: SHARE_SAVED_SEARCH, data: 'Error'})
     }).catch(error => apiError(dispatch, error))
   }
 }

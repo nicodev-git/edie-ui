@@ -137,7 +137,7 @@ export default function (state = {}, action) {
     case UPDATE_REL_DEVICE_FIELDS:
       return { ...state, searchFields: action.fields }
     case SHARE_SAVED_SEARCH:
-      return { ...state }
+      return { ...state, shareSearchResult: action.data }
   }
   return state
 }

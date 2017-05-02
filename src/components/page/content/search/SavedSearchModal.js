@@ -1,11 +1,19 @@
 import React from 'react'
 
 import {SavedSearchModalView} from 'components/modal'
+import {showAlert} from 'components/shared/Alert'
 
 export default class SavedSearchModal extends React.Component {
   componentWillMount () {
     this.props.fetchSysSearchOptions()
     this.props.selectSearch(null)
+  }
+  componentWillUpdate (props) {
+    const {shareSearchResult} = this.props
+    if (props.shareSearchResult && shareSearchResult !== props.shareSearchResult) {
+      if (props.shareSearchResult === 'OK') showAlert('Shared successfully!')
+      else showAlert('Share failed!')
+    }
   }
   onClickClose () {
     this.props.showSavedSearch(false)

@@ -86,7 +86,8 @@ import {
 
     searchFieldsModalOpen: state.search.searchFieldsModalOpen,
     selectedSearchFields: state.search.selectedSearchFields,
-    searchFields: state.search.searchFields
+    searchFields: state.search.searchFields,
+    shareSearchResult: state.search.shareSearchResult
   }),
   dispatch => ({
     ...bindActionCreators({
