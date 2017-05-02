@@ -240,7 +240,7 @@ export const fetchRelDevices = (params, name) => {
   return dispatch => {
     dispatch({type: FETCH_REL_DEVICES, data: []})
     const config = {
-      params: assign({}, convertSearchParams(params), { name, size: 10000 })
+      params: assign({}, convertSearchParams(params), { name, size: 10 })
     }
     axios.get(`${ROOT_URL}/search/topValueCount`, config).then(res => {
       dispatch({type: FETCH_REL_DEVICES, data: res.data})

@@ -102,7 +102,7 @@ const initialState = {
 
     relDevices: [],
     irrelDevices: [],
-    searchFields: ['devicename'],
+    searchFields: ['dataobj.ip'],
     selectedSearchFields: []
   },
 

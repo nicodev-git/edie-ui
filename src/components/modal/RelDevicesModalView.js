@@ -6,10 +6,12 @@ import { Header, CloseButton } from './parts'
 
 export default class RelDevicesModalView extends React.Component {
   renderItems () {
-    const {relDevices} = this.props
+    const {relDevices, isIP} = this.props
     return relDevices.map(d =>
       <tr key={d.name}>
         <td>{d.name}</td>
+        {isIP ? <td>{d.hostname}</td> : null}
+        {isIP ? <td>{d.country}</td> : null}
       </tr>
     )
   }
