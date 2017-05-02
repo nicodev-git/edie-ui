@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 
 import {RaisedButton, MenuItem, SelectField, IconButton, Chip} from 'material-ui'
 import DeleteIcon from 'material-ui/svg-icons/action/delete'
+import Share from 'material-ui/svg-icons/social/share'
 
 import SettingTabs from '../SettingTabs'
 import TabPage from 'components/shared/TabPage'
@@ -95,14 +96,19 @@ export default class Templates extends Component {
           {
             this.props.monitorTemplates.map((item, index) =>
               <tr key={item.id}
-                className={index === this.state.selected ? 'selected' : ''}
-                onClick={this.onClickRow.bind(this, index)}>
+                className={index === this.state.selected ? 'selected' : ''}>
                 <td>{item.name}</td>
                 <td className="text-right fa-lg">
                   {item.origin !== 'SYSTEM' && <IconButton
                     style={{padding: 0, width: 24, height: 24}}
                     onTouchTap={this.onClickDeleteMonitorTpl.bind(this, item)}>
                     <DeleteIcon color="#545454" hoverColor="#f44336"/>
+                  </IconButton>}
+
+                  {item.origin !== 'SYSTEM' && <IconButton
+                    style={{padding: 0, width: 24, height: 24}}
+                    onTouchTap={this.onClickShareMonitorTpl.bind(this, item)}>
+                    <Share color="#545454" hoverColor="#f44336"/>
                   </IconButton>}
                 </td>
               </tr>
@@ -165,6 +171,9 @@ export default class Templates extends Component {
       if (btn !== 'ok') return
       this.props.deleteMonitorTemplate(item)
     })
+  }
+
+  onClickShareMonitorTpl (item) {
   }
 
   onChangeType (e, index, value) {
@@ -237,7 +246,7 @@ export default class Templates extends Component {
         <TabPageBody tabs={SettingTabs} tab={7}>
           <div className="row padding-md">
             <div className="col-md-6">
-              {type === 'Device' ? this.renderDeviceTemplates() : null/* this.renderMonitorTemplates() */}
+              {type === 'Device' ? this.renderDeviceTemplates() : this.renderMonitorTemplates()}
             </div>
             <div className="col-md-6">
               {this.renderDeviceTplView()}
