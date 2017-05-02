@@ -19,7 +19,6 @@ export default class RelDevicesModal extends React.Component {
     return (
       <RelDevicesModalView
         {...this.props}
-        isIP={this.props.searchFields[0] === 'dataobj.ip'}
         onHide={this.onHide.bind(this)}
         onChangeSearchField={this.onChangeSearchField.bind(this)}
       />
