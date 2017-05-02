@@ -15,7 +15,7 @@ import ImageUploaderModal from './ImageUploaderModal'
 import DeviceTplView from './DeviceTplView'
 import WorkflowSelectModal from './WorkflowSelectModal'
 
-import { showConfirm } from 'components/shared/Alert'
+import { showConfirm, showAlert } from 'components/shared/Alert'
 import { errorStyle, underlineFocusStyle, inputStyle, selectedItemStyle, chipStyles } from 'style/materialStyles'
 
 import { extImageBaseUrl } from 'shared/Global'
@@ -33,6 +33,14 @@ export default class Templates extends Component {
     this.props.fetchDeviceTemplates()
     this.props.fetchMonitorTemplates()
     this.props.fetchDeviceCategories()
+  }
+
+  componentWillUpdate (props) {
+    const {shareMonitorTplResult} = props
+    if (shareMonitorTplResult && this.props.shareMonitorTplResult !== shareMonitorTplResult) {
+      if (shareMonitorTplResult === 'OK') showAlert('Shared successfully!')
+      else showAlert('Share failed!')
+    }
   }
 
   onClickRow (selected) {
@@ -97,18 +105,22 @@ export default class Templates extends Component {
             this.props.monitorTemplates.map((item, index) =>
               <tr key={item.id}
                 className={index === this.state.selected ? 'selected' : ''}>
-                <td>{item.name}</td>
+                <td>
+                  <img src={`${extImageBaseUrl}${item.image}`} width="32" height="32" className="icon-black"/>
+                  &nbsp;
+                  {item.name}
+                </td>
                 <td className="text-right fa-lg">
-                  {item.origin !== 'SYSTEM' && <IconButton
-                    style={{padding: 0, width: 24, height: 24}}
-                    onTouchTap={this.onClickDeleteMonitorTpl.bind(this, item)}>
-                    <DeleteIcon color="#545454" hoverColor="#f44336"/>
-                  </IconButton>}
-
                   {item.origin !== 'SYSTEM' && <IconButton
                     style={{padding: 0, width: 24, height: 24}}
                     onTouchTap={this.onClickShareMonitorTpl.bind(this, item)}>
                     <Share color="#545454" hoverColor="#f44336"/>
+                  </IconButton>}
+
+                  {item.origin !== 'SYSTEM' && <IconButton
+                    style={{padding: 0, width: 24, height: 24}}
+                    onTouchTap={this.onClickDeleteMonitorTpl.bind(this, item)}>
+                    <DeleteIcon color="#545454" hoverColor="#f44336"/>
                   </IconButton>}
                 </td>
               </tr>
@@ -174,6 +186,7 @@ export default class Templates extends Component {
   }
 
   onClickShareMonitorTpl (item) {
+    this.props.shareMonitorTemplate(item)
   }
 
   onChangeType (e, index, value) {
