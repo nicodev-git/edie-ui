@@ -19,6 +19,8 @@ export default class SavedSearchModal extends React.Component {
   onClickRow (p) {
     this.props.selectSearch(p)
   }
+  onClickShare (p) {
+  }
   render () {
     return (
       <SavedSearchModalView
@@ -26,6 +28,7 @@ export default class SavedSearchModal extends React.Component {
         onClickRow={this.onClickRow.bind(this)}
         onClickOK={this.onClickOK.bind(this)}
         onClickClose={this.onClickClose.bind(this)}
+        onClickShare={this.onClickShare.bind(this)}
       />
     )
   }

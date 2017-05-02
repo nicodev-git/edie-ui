@@ -1,6 +1,8 @@
 import React from 'react'
 import Modal from 'react-bootstrap-modal'
 import { assign, concat } from 'lodash'
+import {IconButton} from 'material-ui'
+import Share from 'material-ui/svg-icons/social/share'
 
 import { Header, TwoButtonsBlockCustom } from './parts'
 
@@ -12,7 +14,8 @@ class SavedSearchModalView extends React.Component {
       sysSearchOptions,
       onClickRow,
       selectedSearch,
-      loadingSearchOptions
+      loadingSearchOptions,
+      onClickShare
     } = this.props
 
     const options = concat([], userOptions.map(p => {
@@ -41,6 +44,7 @@ class SavedSearchModalView extends React.Component {
                   <th>Name</th>
                   <th>Description</th>
                   <th>Origin</th>
+                  <th/>
                 </tr>
               </thead>
               <tbody>
@@ -49,6 +53,7 @@ class SavedSearchModalView extends React.Component {
                   <td>{p.name}</td>
                   <td>{p.description}</td>
                   <td>{p.type}</td>
+                  <td className="p-none">{p.type === 'User' ? <IconButton onTouchTap={() => onClickShare(p)}><Share/></IconButton> : null}</td>
                 </tr>
               )}
               {
