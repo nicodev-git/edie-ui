@@ -26,6 +26,7 @@ export default class SavedSearchModal extends React.Component {
       description: '',
       origin: 'USER'
     }
+    this.props.shareSavedSearch(props)
   }
   render () {
     return (

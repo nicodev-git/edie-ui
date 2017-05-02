@@ -43,7 +43,8 @@ import {
   fetchIrrelDevices,
   showSearchFieldsModal,
   updateSelectedSearchFields,
-  updateRelDeviceFields
+  updateRelDeviceFields,
+  shareSavedSearch
 } from 'actions'
 
 @withRouter
@@ -126,7 +127,8 @@ import {
       fetchIrrelDevices,
       showSearchFieldsModal,
       updateSelectedSearchFields,
-      updateRelDeviceFields
+      updateRelDeviceFields,
+      shareSavedSearch
     }, dispatch)
   })
 )

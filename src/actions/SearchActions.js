@@ -38,7 +38,7 @@ import {
   UPDATE_SELECTED_SEARCH_FIELDS,
   UPDATE_REL_DEVICE_FIELDS,
 
-  PUSH_SAVED_SEARCH
+  SHARE_SAVED_SEARCH
 } from './types'
 import { ROOT_URL } from './config'
 import { apiError } from './Errors'
@@ -286,6 +286,11 @@ export const updateSelectedSearchFields = (fields) => {
   }
 }
 
-export const pushSavedSearch = (props) => {
-
+export const shareSavedSearch = (props) => {
+  return dispatch => {
+    axios.post(`${ROOT_URL}/shareUserSearch`, props).then(({data}) => {
+      if (data.success) dispatch({type: SHARE_SAVED_SEARCH, data: true})
+      else dispatch({type: SHARE_SAVED_SEARCH, data: false})
+    }).catch(error => apiError(dispatch, error))
+  }
 }

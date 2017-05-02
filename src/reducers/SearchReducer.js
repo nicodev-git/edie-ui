@@ -39,7 +39,9 @@ import {
   FETCH_IRREL_DEVICES,
   SHOW_SEARCH_FIELDS_MODAL,
   UPDATE_SELECTED_SEARCH_FIELDS,
-  UPDATE_REL_DEVICE_FIELDS
+  UPDATE_REL_DEVICE_FIELDS,
+
+  SHARE_SAVED_SEARCH
 } from 'actions/types'
 import { concat } from 'lodash'
 
@@ -134,6 +136,8 @@ export default function (state = {}, action) {
       return { ...state, selectedSearchFields: action.fields }
     case UPDATE_REL_DEVICE_FIELDS:
       return { ...state, searchFields: action.fields }
+    case SHARE_SAVED_SEARCH:
+      return { ...state }
   }
   return state
 }
