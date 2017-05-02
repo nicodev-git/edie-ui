@@ -36,7 +36,9 @@ import {
   FETCH_IRREL_DEVICES,
   SHOW_SEARCH_FIELDS_MODAL,
   UPDATE_SELECTED_SEARCH_FIELDS,
-  UPDATE_REL_DEVICE_FIELDS
+  UPDATE_REL_DEVICE_FIELDS,
+
+  PUSH_SAVED_SEARCH
 } from './types'
 import { ROOT_URL } from './config'
 import { apiError } from './Errors'
@@ -282,4 +284,8 @@ export const updateSelectedSearchFields = (fields) => {
   return dispatch => {
     dispatch({type: UPDATE_SELECTED_SEARCH_FIELDS, fields})
   }
+}
+
+export const pushSavedSearch = (props) => {
+
 }

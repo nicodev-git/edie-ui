@@ -20,6 +20,12 @@ export default class SavedSearchModal extends React.Component {
     this.props.selectSearch(p)
   }
   onClickShare (p) {
+    const props = {
+      name: p.name,
+      data: p.data,
+      description: '',
+      origin: 'USER'
+    }
   }
   render () {
     return (
