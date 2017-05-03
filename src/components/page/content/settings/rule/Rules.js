@@ -1,6 +1,7 @@
 import React from 'react'
 import {RaisedButton, MenuItem, SelectField, IconButton} from 'material-ui'
 import Share from 'material-ui/svg-icons/social/share'
+import { assign } from 'lodash'
 
 import InfiniteTable from 'components/shared/InfiniteTable'
 import { showAlert } from '../../../../shared/Alert'
@@ -63,7 +64,9 @@ export default class Rules extends React.Component {
   }
 
   onClickShare (item) {
-    this.props.shareWorkflow(item)
+    const props = assign({}, item)
+    if (props.updated) delete props.updated
+    this.props.shareWorkflow(props)
   }
 
   renderContent () {
