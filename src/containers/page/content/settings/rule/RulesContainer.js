@@ -11,7 +11,9 @@ import {
 
   addWorkflow,
   updateWorkflow,
-  closeWorkflowModal
+  closeWorkflowModal,
+
+  shareWorkflow
 } from 'actions'
 
 @connect(
@@ -20,7 +22,8 @@ import {
     editWorkflow: state.settings.editWorkflow,
     workflowModalVisible: state.settings.workflowModalVisible,
     workflowCategories: state.devices.workflowCategories,
-    selectedWorkflowCategory: state.devices.selectedWorkflowCategory
+    selectedWorkflowCategory: state.devices.selectedWorkflowCategory,
+    shareWorkflowResult: state.settings.shareWorkflowResult
   }),
   dispatch => ({
     ...bindActionCreators({
@@ -32,7 +35,9 @@ import {
 
       addWorkflow,
       updateWorkflow,
-      closeWorkflowModal
+      closeWorkflowModal,
+
+      shareWorkflow
     }, dispatch)
   })
 )

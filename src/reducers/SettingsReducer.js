@@ -50,6 +50,7 @@ import {
   OPEN_WORKFLOW_MODAL,
   CLOSE_WORKFLOW_MODAL,
   UPDATE_WORKFLOW_EDIT_TYPE,
+  SHARE_WORKFLOW,
 
   FETCH_SETTING_MAPS,
   ADD_SETTING_MAP,
@@ -307,6 +308,9 @@ export default function (state = {}, action) {
 
     case UPDATE_WORKFLOW_EDIT_TYPE:
       return { ...state, workflowEditType: action.editType }
+
+    case SHARE_WORKFLOW:
+      return { ...state, shareWorkflowResult: action.data }
         // ///////////////////////////////////////////////////
 
     case FETCH_SETTING_USERS:

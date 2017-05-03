@@ -54,9 +54,16 @@ export default class Rules extends React.Component {
     this.props.fetchWorkflows()
     this.props.fetchWorkflowCategories()
   }
+  componentWillUpdate (props) {
+    const {shareWorkflowResult} = this.props
+    if (props.shareWorkflowResult && shareWorkflowResult !== props.shareWorkflowResult) {
+      if (props.shareWorkflowResult === 'OK') showAlert('Shared successfully!')
+      else showAlert('Share failed!')
+    }
+  }
 
   onClickShare (item) {
-    console.log(item)
+    this.props.shareWorkflow(item)
   }
 
   renderContent () {
