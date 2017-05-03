@@ -1,5 +1,6 @@
 import React from 'react'
-import {RaisedButton, MenuItem, SelectField} from 'material-ui'
+import {RaisedButton, MenuItem, SelectField, IconButton} from 'material-ui'
+import Share from 'material-ui/svg-icons/social/share'
 
 import InfiniteTable from 'components/shared/InfiniteTable'
 import { showAlert } from '../../../../shared/Alert'
@@ -29,10 +30,7 @@ export default class Rules extends React.Component {
       'cssClassName': 'width-300'
     }, {
       'displayName': 'Origin',
-      'columnName': 'origin',
-      'customComponent': props => {
-        return <span>{props.data === 'SYSTEM' ? 'system' : 'custom'}</span>
-      }
+      'columnName': 'origin'
     }, {
       'displayName': 'Version',
       'columnName': 'version'
@@ -42,12 +40,23 @@ export default class Rules extends React.Component {
       'customComponent': p => {
         return <span>{p.data ? 'YES' : 'NO'}</span>
       }
+    }, {
+      'displayName': '',
+      'columnName': 'id',
+      'cssClassName': 'width-80',
+      'customComponent': p => {
+        return p.rowData.origin === 'USER' ? <IconButton onTouchTap={() => this.onClickShare(p.rowData)}><Share/></IconButton> : null
+      }
     }]
   }
   componentWillMount () {
     this.props.selectWorkflowCategory('')
     this.props.fetchWorkflows()
     this.props.fetchWorkflowCategories()
+  }
+
+  onClickShare (item) {
+    console.log(item)
   }
 
   renderContent () {
