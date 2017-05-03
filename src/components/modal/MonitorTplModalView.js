@@ -18,6 +18,7 @@ export default class MonitorTplModalView extends Component {
           <form onSubmit={onSubmit}>
             <div className="form-column">
               <Field name="name" component={FormInput} label="Name"/>
+              <Field name="description" component={FormInput} label="Description"/>
               <Field name="monitortype" component={FormInput} label="Monitor type"/>
               <ImageUploader imgUrl={imgUrl} onChange={onChange}/>
             </div>

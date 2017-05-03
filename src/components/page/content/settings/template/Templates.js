@@ -110,6 +110,7 @@ export default class Templates extends Component {
                   &nbsp;
                   {item.name}
                 </td>
+                <td>{item.description}</td>
                 <td className="text-right fa-lg">
                   {item.origin !== 'SYSTEM' && <IconButton
                     style={{padding: 0, width: 24, height: 24}}
