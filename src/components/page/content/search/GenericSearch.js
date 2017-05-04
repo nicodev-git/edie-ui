@@ -391,7 +391,7 @@ class GenericSearch extends React.Component {
   }
 
   onClickIllustrate () {
-    this.props.showThreats(this.props.params)
+    this.props.showThreats(convertSearchParams(this.props.params))
     const {router} = this.props
     router.push({
       pathname: '/threatmap',
