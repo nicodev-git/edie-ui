@@ -871,7 +871,7 @@ const fetchAgentEvent = (dispatch, deviceid, monitortype, cb) => {
     }
   }).then(res => {
     const data = res.data._embedded.events
-    data.length && cb && cb(data[0])
+    data && data.length && cb && cb(data[0])
   }).catch(error => apiError(dispatch, error))
 }
 
