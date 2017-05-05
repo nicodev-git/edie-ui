@@ -14,7 +14,7 @@ export default class IncidentSocket {
     this.id = props.id || ''
   }
 
-  connect () {
+  connect (cb) {
     const me = this
 
     if (me.ws) {
@@ -39,6 +39,8 @@ export default class IncidentSocket {
           me.stompClient.subscribe(`/frontendupdates/${path}`, me.onMessage.bind(me, me.listeners[path]))
         })
         me.stompClient.debug = null
+
+        cb && cb()
       })
     } catch (e) {
       console.log(e)
@@ -53,6 +55,12 @@ export default class IncidentSocket {
     } catch (e) {
       console.log(e)
     }
+  }
+
+  send (path, msg) {
+    if (this.stompClient) return false
+    this.stompClient.send(path, {}, JSON.stringify(msg))
+    return true
   }
 
   addListener (msg, cb) {

@@ -107,7 +107,7 @@ export default class MonitorTable extends Component {
         'updatedDevice': this.onDeviceUpdated.bind(this)
       }
     })
-    this.incidentSocket.connect()
+    this.incidentSocket.connect(this.onSocketOpen.bind(this))
   }
 
   componentWillUnmount () {
@@ -115,6 +115,9 @@ export default class MonitorTable extends Component {
     this.incidentSocket.close()
   }
 
+  onSocketOpen () {
+    console.log('Socket Opened')
+  }
   onDeviceUpdated (msg) {
     const {device} = this.props
     if (device.id !== msg.id) return
