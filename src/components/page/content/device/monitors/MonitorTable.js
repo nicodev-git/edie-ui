@@ -117,6 +117,9 @@ export default class MonitorTable extends Component {
 
   onSocketOpen () {
     console.log('Socket Opened')
+    this.incidentSocket.send('/monitorupdate', {
+      data: 'realtime'
+    })
   }
   onDeviceUpdated (msg) {
     const {device} = this.props

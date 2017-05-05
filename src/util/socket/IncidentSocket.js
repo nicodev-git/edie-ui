@@ -58,7 +58,7 @@ export default class IncidentSocket {
   }
 
   send (path, msg) {
-    if (this.stompClient) return false
+    if (!this.stompClient) return false
     this.stompClient.send(path, {}, JSON.stringify(msg))
     return true
   }
