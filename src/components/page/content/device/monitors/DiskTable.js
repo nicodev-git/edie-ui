@@ -2,7 +2,7 @@ import React from 'react'
 
 class DiskTable extends React.Component {
   componentWillMount () {
-    this.props.fetchMonitorDisk()
+    this.props.fetchMonitorDisk(this.props.device.id)
   }
   renderContent () {
     const {monitorDisk} = this.props

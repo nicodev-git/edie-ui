@@ -2,7 +2,7 @@ import React from 'react'
 
 class MemoryTable extends React.Component {
   componentWillMount () {
-    this.props.fetchMonitorMemory()
+    this.props.fetchMonitorMemory(this.props.device.id)
   }
   renderContent () {
     const {monitorMemory} = this.props
