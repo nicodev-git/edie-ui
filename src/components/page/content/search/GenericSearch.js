@@ -92,14 +92,14 @@ class GenericSearch extends React.Component {
     } else if (filterType) {
       let query = ''
       if (filterType === 'today') {
-        params.dateFrom = moment().startOf('day').valueOf()
-        params.dateTo = moment().endOf('day').valueOf()
+        params.dateFrom = moment().startOf('day').format(dateFormat)
+        params.dateTo = moment().endOf('day').format(dateFormat)
       } else if (filterType === 'month') {
-        params.dateFrom = moment().startOf('month').valueOf()
-        params.dateTo = moment().endOf('month').valueOf()
+        params.dateFrom = moment().startOf('month').format(dateFormat)
+        params.dateTo = moment().endOf('month').format(dateFormat)
       } else if (filterType === 'open') {
-        params.dateFrom = moment().startOf('year').valueOf()
-        params.dateTo = moment().endOf('year').valueOf()
+        params.dateFrom = moment().startOf('year').format(dateFormat)
+        params.dateTo = moment().endOf('year').format(dateFormat)
         query = 'fixed=false'
       }
       const queryChips = parseSearchQuery(query)
