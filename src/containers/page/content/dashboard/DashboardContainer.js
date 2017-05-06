@@ -65,7 +65,6 @@ export default connect(
     maps: state.dashboard.maps,
     mapImportModalVisible: state.dashboard.mapImportModalVisible,
 
-    attackers: state.dashboard.attackers,
     countries: [],
 
     incidentEventsModalOpen: state.dashboard.incidentEventsModalOpen,
@@ -76,7 +75,9 @@ export default connect(
     sidebarProfileMenuOpen: state.dashboard.sidebarProfileMenuOpen,
     sidebarMessageMenuOpen: state.dashboard.sidebarMessageMenuOpen,
 
-    mainIncidentDraw: state.dashboard.mainIncidentDraw
+    mainIncidentDraw: state.dashboard.mainIncidentDraw,
+
+    attackers: state.attackers.attackers
   }), {
 
     fetchBigIncidents,

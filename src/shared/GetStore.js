@@ -77,8 +77,8 @@ const initialState = {
       workflow: '',
       collections: 'incident,event',
       severity: 'HIGH,MEDIUM',
-      dateFrom: moment().startOf('year').format(dateFormat),
-      dateTo: moment().endOf('year').format(dateFormat)
+      dateFrom: moment().startOf('day').format(dateFormat),
+      dateTo: moment().endOf('day').format(dateFormat)
     },
     incidentParams: {
       severity: ['HIGH', 'MEDIUM'],
@@ -131,6 +131,10 @@ const initialState = {
     workflows: [],
 
     showTraffic: true
+  },
+
+  attackers: {
+    attackers: []
   },
 
   diagram: {

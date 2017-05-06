@@ -12,7 +12,7 @@ export const fetchAttackers = () => {
     return dispatch => dispatch({ type: NO_AUTH_ERROR })
   }
   return (dispatch) => {
-    axios.get(`${ROOT_URL}/attacker`, {params: {}})
+    axios.get(`${ROOT_URL}/incident/attackers`, {params: {}})
       .then(response => fetchAttackersSuccess(dispatch, response))
       .catch(error => apiError(dispatch, error))
   }
@@ -21,6 +21,6 @@ export const fetchAttackers = () => {
 const fetchAttackersSuccess = (dispatch, response) => {
   dispatch({
     type: FETCH_ATTACKERS,
-    data: response.data._embedded.attackers
+    data: response.data
   })
 }
