@@ -11,7 +11,8 @@ import { showAlert } from '../../../../shared/Alert'
 
 import MonitorPicker from './MonitorPicker'
 import MonitorHistoryModal from './MonitorHistoryModal'
-import IncidentSocket from 'util/socket/IncidentSocket'
+// import IncidentSocket from 'util/socket/IncidentSocket'
+import MonitorSocket from 'util/socket/MonitorSocket'
 import { Provider } from 'react-redux'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import { store } from 'shared/GetStore'
@@ -98,28 +99,31 @@ export default class MonitorTable extends Component {
   }
 
   componentDidMount () {
-    // this.reloadTimer = window.setInterval(() => {
-    //   this.props.device && this.props.reloadDevice(this.props.device)
-    // }, 2000)
+    // this.incidentSocket = new IncidentSocket({
+    //   listeners: {
+    //     'updatedDevice': this.onDeviceUpdated.bind(this)
+    //   }
+    // })
+    // this.incidentSocket.connect(this.onSocketOpen.bind(this))
 
-    this.incidentSocket = new IncidentSocket({
-      listeners: {
-        'updatedDevice': this.onDeviceUpdated.bind(this)
-      }
+    this.monitorSocket = new MonitorSocket({
+      listener: this.onMonitorMessage.bind(this)
     })
-    this.incidentSocket.connect(this.onSocketOpen.bind(this))
+    this.monitorSocket.connect(this.onSocketOpen.bind(this))
   }
 
   componentWillUnmount () {
-    // window.clearInterval(this.reloadTimer)
-    this.incidentSocket.close()
+    // this.incidentSocket.close()
+    this.monitorSocket.close()
   }
 
   onSocketOpen () {
-    console.log('Socket Opened')
-    this.incidentSocket.send('/monitorupdate', {
-      data: 'realtime'
+    this.monitorSocket.send({
+      action: 'enable-realtime',
+      deviceId: this.props.device.id
     })
+  }
+  onMonitorMessage () {
   }
   onDeviceUpdated (msg) {
     const {device} = this.props
