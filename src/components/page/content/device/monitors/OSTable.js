@@ -1,5 +1,4 @@
 import React from 'react'
-import TimeAgo from 'react-timeago'
 
 class OSTable extends React.Component {
   constructor (props) {
@@ -7,26 +6,9 @@ class OSTable extends React.Component {
     this.state = {
       hovered: false
     }
-    this.onMouseEnter = this.onMouseEnter.bind(this)
-    this.onMouseLeave = this.onMouseLeave.bind(this)
   }
   componentWillMount () {
     this.props.fetchMonitorOS(this.props.device.id)
-  }
-  onMouseEnter () {
-    this.setState({ hovered: true })
-  }
-  onMouseLeave () {
-    this.setState({ hovered: false })
-  }
-  renderHoverLabel () {
-    const {monitorsUpdateTime} = this.props
-    if (!this.state.hovered || !monitorsUpdateTime) return null
-    return (
-      <div style={{position: 'absolute', top: 0}}>
-        <span>Last Updated </span><TimeAgo date={monitorsUpdateTime}/>
-      </div>
-    )
   }
   renderContent () {
     const {monitorOS} = this.props
@@ -40,10 +22,7 @@ class OSTable extends React.Component {
   }
   render () {
     return (
-      <div className="padding-md"
-        onMouseEnter={this.onMouseEnter}
-        onMouseLeave={this.onMouseLeave}>
-        {this.renderHoverLabel()}
+      <div className="padding-md">
         {this.renderContent()}
       </div>
     )

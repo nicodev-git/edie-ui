@@ -3,6 +3,7 @@ import {RaisedButton, TextField, FlatButton} from 'material-ui'
 import ActionSearch from 'material-ui/svg-icons/action/search'
 import moment from 'moment'
 import { assign } from 'lodash'
+import TimeAgo from 'react-timeago'
 
 import MonitorTable from './MonitorTable'
 import EventLogTable from './EventLogTable'
@@ -29,8 +30,11 @@ export default class Monitors extends React.Component {
     this.state = {
       selected: 'monitors',
       query: '',
-      currentMonitor: null
+      currentMonitor: null,
+      hovered: false
     }
+    this.onMouseEnter = this.onMouseEnter.bind(this)
+    this.onMouseLeave = this.onMouseLeave.bind(this)
   }
   componentWillMount () {
     this.props.clearMonitors()
@@ -140,6 +144,12 @@ export default class Monitors extends React.Component {
     this.props.replaceSearchWfs([])
     this.props.updateQueryChips(queryChips)
   }
+  onMouseEnter () {
+    this.setState({ hovered: true })
+  }
+  onMouseLeave () {
+    this.setState({ hovered: false })
+  }
   renderSearch () {
     const {selected, query} = this.state
     return (
@@ -183,7 +193,15 @@ export default class Monitors extends React.Component {
 
     return toolbar
   }
-
+  renderHoverLabel () {
+    const {monitorsUpdateTime} = this.props
+    if (!this.state.hovered || !monitorsUpdateTime) return null
+    return (
+      <div style={{position: 'absolute', top: '-100%'}}>
+        <span>Last Updated </span><TimeAgo date={monitorsUpdateTime}/>
+      </div>
+    )
+  }
   renderOSInfo () {
     const {monitorOS, monitorCpu} = this.props
     const texts = []
@@ -198,7 +216,10 @@ export default class Monitors extends React.Component {
       })
     }
     return (
-      <div className="v-centered text-left" style={{fontSize: '11px', paddingLeft: '10px'}}>
+      <div className="v-centered text-left" style={{fontSize: '11px', paddingLeft: '10px'}}
+        onMouseEnter={this.onMouseEnter}
+        onMouseLeave={this.onMouseLeave}>
+        {this.renderHoverLabel()}
         {texts.map((t, i) =>
           <div key={i}>{t}</div>
         )}
