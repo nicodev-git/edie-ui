@@ -120,12 +120,12 @@ class Main extends React.Component {
         value: incident.devicename
       })
     }
+    this.props.router.push('/search')
     this.props.updateQueryChips(newChips)
     this.props.updateSearchParams(assign({}, this.props.searchParams, {
-      query: newChips.map(m => `${m.name}=${m.value}`).join(' and ')
+      query: newChips.map(m => `${m.name}=${m.value}`).join(' and '),
+      severity: 'HIGH,MEDIUM,LOW,AUDIT,IGNORE'
     }))
-
-    this.props.router.push('/search')
   }
 
   renderActivationModal () {
