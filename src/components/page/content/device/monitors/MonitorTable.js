@@ -120,6 +120,7 @@ export default class MonitorTable extends Component {
   onSocketOpen () {
     this.monitorSocket.send({
       action: 'enable-realtime',
+      monitors: 'basic',
       deviceId: this.props.device.id
     })
   }

@@ -289,8 +289,13 @@ export default function (state = INITIAL_STATE, action) {
     case CLEAR_MONITORS:
       return { ...state, monitorCpu: null, monitorDisk: null, monitorOS: null, monitorMemory: null, monitorsUpdateTime: 0 }
     case UPDATE_MONITOR_REALTIME: {
-      const {cpu, disk, memory} = action.data
-      return { ...state, monitorCpu: {dataobj: cpu}, monitorDisk: {dataobj: disk}, monitorMemory: {dataobj: memory}, monitorsUpdateTime: new Date().getTime() }
+      const {os, cpu, disk, memory} = action.data || {}
+      const newState = { ...state, monitorsUpdateTime: new Date().getTime() }
+      if (os) newState.monitorOS = {dataobj: os}
+      if (cpu) newState.monitorCpu = {dataobj: cpu}
+      if (disk) newState.monitorDisk = {dataobj: disk}
+      if (memory) newState.monitorMemory = {dataobj: memory}
+      return newState
     }
   }
   return state
