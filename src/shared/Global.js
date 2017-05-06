@@ -197,7 +197,7 @@ export function guid () {
 
 export function convertSearchParams (params) {
   const p = assign({}, params)
-  if (p.dateFrom) p.dateFrom = moment(p.dateFrom, dateFormat).valueOf()
-  if (p.dateTo) p.dateTo = moment(p.dateTo, dateFormat).valueOf()
+  if (p.dateFrom) p.dateFrom = moment(p.dateFrom, dateFormat).startOf('day').valueOf()
+  if (p.dateTo) p.dateTo = moment(p.dateTo, dateFormat).endOf('day').valueOf()
   return p
 }
