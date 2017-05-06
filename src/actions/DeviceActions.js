@@ -84,6 +84,7 @@ import {
   FETCH_MONITOR_DISK,
   FETCH_MONITOR_CPU,
   FETCH_MONITOR_MEMORY,
+  UPDATE_MONITOR_REALTIME,
   CLEAR_MONITORS,
 
   NO_AUTH_ERROR
@@ -910,5 +911,11 @@ export const fetchMonitorMemory = (deviceid) => {
 export const clearMonitors = () => {
   return dispatch => {
     dispatch({type: CLEAR_MONITORS})
+  }
+}
+
+export const updateMonitorRealTime = (data) => {
+  return dispatch => {
+    dispatch({type: UPDATE_MONITOR_REALTIME, data})
   }
 }

@@ -78,6 +78,7 @@ import {
   FETCH_MONITOR_DISK,
   FETCH_MONITOR_CPU,
   FETCH_MONITOR_MEMORY,
+  UPDATE_MONITOR_REALTIME,
   CLEAR_MONITORS,
 
   UPDATE_DEVICE_ERROR
@@ -287,6 +288,10 @@ export default function (state = INITIAL_STATE, action) {
       return { ...state, monitorMemory: action.memory }
     case CLEAR_MONITORS:
       return { ...state, monitorCpu: null, monitorDisk: null, monitorOS: null, monitorMemory: null }
+    case UPDATE_MONITOR_REALTIME: {
+      const {cpu, disk, memory} = action.data
+      return { ...state, monitorCpu: {dataobj: cpu}, monitorDisk: {dataobj: disk}, monitorMemory: {dataobj: memory} }
+    }
   }
   return state
 }

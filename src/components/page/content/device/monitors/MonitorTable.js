@@ -123,7 +123,11 @@ export default class MonitorTable extends Component {
       deviceId: this.props.device.id
     })
   }
-  onMonitorMessage () {
+  onMonitorMessage (msg) {
+    console.log(msg)
+    if (msg.action === 'update' && msg.deviceId === this.props.device.id) {
+      this.props.updateMonitorRealTime(msg.data)
+    }
   }
   onDeviceUpdated (msg) {
     const {device} = this.props

@@ -42,17 +42,15 @@ export default class MonitorSocket {
   }
 
   onMessage (e) {
-    console.log(e)
-    if (this.listener) {
-      this.listener(e)
-    }
     // if (!func) return
-    // try {
-    //   const msgObj = JSON.parse(e.body)
-    //   func(msgObj)
-    // } catch (e) {
-    //   console.log(e)
-    // }
+    try {
+      const msgObj = JSON.parse(e.data)
+      if (this.listener) {
+        this.listener(msgObj)
+      }
+    } catch (e) {
+      console.log(e)
+    }
   }
 
   onClose () {

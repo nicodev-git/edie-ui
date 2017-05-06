@@ -144,7 +144,7 @@ export default class Monitors extends React.Component {
     const {selected, query} = this.state
     return (
       <div className={`inline-block ${selected === 'monitors' ? 'hidden' : ''}`}>
-        <TextField value={query} onChange={this.onChangeQuery.bind(this)} onKeyUp={this.onKeyupQuery.bind(this)}/>
+        <TextField name="query" value={query} onChange={this.onChangeQuery.bind(this)} onKeyUp={this.onKeyupQuery.bind(this)}/>
         <FlatButton icon={<ActionSearch />} onTouchTap={this.onClickSearch.bind(this)}/>
       </div>
     )

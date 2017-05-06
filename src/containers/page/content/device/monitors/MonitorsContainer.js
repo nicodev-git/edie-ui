@@ -25,6 +25,7 @@ import {
   fetchMonitorDisk,
   fetchMonitorCpu,
   fetchMonitorMemory,
+  updateMonitorRealTime,
   clearMonitors
 } from 'actions'
 
@@ -71,6 +72,7 @@ import {
     fetchMonitorDisk,
     fetchMonitorCpu,
     fetchMonitorMemory,
+    updateMonitorRealTime,
     clearMonitors
   }
 )
