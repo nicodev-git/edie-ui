@@ -198,7 +198,7 @@ export default class Monitors extends React.Component {
     if (!this.state.hovered || !monitorsUpdateTime) return null
     return (
       <div style={{position: 'absolute', top: '-100%'}}>
-        <span>Last Updated </span><TimeAgo date={monitorsUpdateTime}/>
+        <img src="/images/green_light.png" width="16"/><span>Last Updated </span><TimeAgo date={monitorsUpdateTime}/>
       </div>
     )
   }

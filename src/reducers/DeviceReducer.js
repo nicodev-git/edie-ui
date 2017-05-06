@@ -287,7 +287,7 @@ export default function (state = INITIAL_STATE, action) {
     case FETCH_MONITOR_MEMORY:
       return { ...state, monitorMemory: action.memory }
     case CLEAR_MONITORS:
-      return { ...state, monitorCpu: null, monitorDisk: null, monitorOS: null, monitorMemory: null }
+      return { ...state, monitorCpu: null, monitorDisk: null, monitorOS: null, monitorMemory: null, monitorsUpdateTime: 0 }
     case UPDATE_MONITOR_REALTIME: {
       const {cpu, disk, memory} = action.data
       return { ...state, monitorCpu: {dataobj: cpu}, monitorDisk: {dataobj: disk}, monitorMemory: {dataobj: memory}, monitorsUpdateTime: new Date().getTime() }
