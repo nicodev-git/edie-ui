@@ -84,7 +84,7 @@ import {
   UPDATE_DEVICE_ERROR
 } from 'actions/types'
 
-import { concat, keys } from 'lodash'
+import { concat, keys, assign } from 'lodash'
 
 const INITIAL_STATE = { devices: [] }
 
@@ -289,12 +289,13 @@ export default function (state = INITIAL_STATE, action) {
     case CLEAR_MONITORS:
       return { ...state, monitorCpu: null, monitorDisk: null, monitorOS: null, monitorMemory: null, monitorsUpdateTime: 0 }
     case UPDATE_MONITOR_REALTIME: {
-      const {os, cpu, disk, memory} = action.data || {}
+      const {os, cpu, disk, memory, process} = action.data || {}
       const newState = { ...state, monitorsUpdateTime: new Date().getTime() }
       if (os) newState.monitorOS = {dataobj: os}
       if (cpu) newState.monitorCpu = {dataobj: cpu}
       if (disk) newState.monitorDisk = {dataobj: disk}
       if (memory) newState.monitorMemory = {dataobj: memory}
+      if (process) newState.processes = process.map((u, i) => assign(u, {timestamp: new Date().getTime()}))
       return newState
     }
   }

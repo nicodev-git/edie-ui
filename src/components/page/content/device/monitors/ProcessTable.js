@@ -10,6 +10,7 @@ import TabPage from 'components/shared/TabPage'
 import TabPageBody from 'components/shared/TabPageBody'
 import TabPageHeader from 'components/shared/TabPageHeader'
 import MonitorTabs from './MonitorTabs'
+import MonitorSocket from 'util/socket/MonitorSocket'
 
 import { parseSearchQuery } from 'shared/Global'
 
@@ -36,8 +37,8 @@ export default class ProcessTable extends React.Component {
       'columnName': 'Parent',
       'cssClassName': 'width-120'
     }, {
-      'displayName': 'FilePath',
-      'columnName': 'FilePath'
+      'displayName': 'Location',
+      'columnName': 'Location'
     }, {
       'displayName': 'Status',
       'columnName': 'Status',
@@ -54,8 +55,29 @@ export default class ProcessTable extends React.Component {
     }]
   }
 
-  componentWillMount () {
-    this.props.fetchDeviceProcesses(this.props.device)
+  componentDidMount () {
+    this.monitorSocket = new MonitorSocket({
+      listener: this.onMonitorMessage.bind(this)
+    })
+    this.monitorSocket.connect(this.onSocketOpen.bind(this))
+  }
+
+  componentWillUnmount () {
+    this.monitorSocket.close()
+  }
+
+  onSocketOpen () {
+    this.monitorSocket.send({
+      action: 'enable-realtime',
+      monitors: 'process',
+      deviceId: this.props.device.id
+    })
+  }
+  onMonitorMessage (msg) {
+    console.log(msg)
+    if (msg.action === 'update' && msg.deviceId === this.props.device.id) {
+      this.props.updateMonitorRealTime(msg.data)
+    }
   }
 
   onRowDblClick () {
@@ -105,7 +127,7 @@ export default class ProcessTable extends React.Component {
       <InfiniteTable
         cells={this.columns}
         ref="table"
-        rowMetadata={{'key': 'id'}}
+        rowMetadata={{'key': 'Id'}}
         selectable
         rowHeight={40}
         onRowDblClick={this.onRowDblClick.bind(this)}
