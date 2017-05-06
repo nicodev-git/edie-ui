@@ -1,15 +1,6 @@
 import React from 'react'
 
 class CpuTable extends React.Component {
-  componentWillMount () {
-    // this.props.fetchMonitorCpu()
-    this.timer = setInterval(() => {
-      this.props.fetchMonitorCpu(this.props.device.id)
-    }, 5000)
-  }
-  componentWillUnmount () {
-    clearInterval(this.timer)
-  }
   buildProgress (val) {
     let color = 'red'
     const textcolor = 'black'

@@ -290,7 +290,7 @@ export default function (state = INITIAL_STATE, action) {
       return { ...state, monitorCpu: null, monitorDisk: null, monitorOS: null, monitorMemory: null }
     case UPDATE_MONITOR_REALTIME: {
       const {cpu, disk, memory} = action.data
-      return { ...state, monitorCpu: {dataobj: cpu}, monitorDisk: {dataobj: disk}, monitorMemory: {dataobj: memory} }
+      return { ...state, monitorCpu: {dataobj: cpu}, monitorDisk: {dataobj: disk}, monitorMemory: {dataobj: memory}, monitorsUpdateTime: new Date().getTime() }
     }
   }
   return state

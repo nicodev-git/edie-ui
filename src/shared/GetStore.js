@@ -58,6 +58,7 @@ const initialState = {
 
     basicMonitors: [],
     monitors: [],
+    monitorsUpdateTime: 0,
 
     eventLogs: [],
     apps: [],

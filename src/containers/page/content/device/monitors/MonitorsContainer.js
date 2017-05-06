@@ -47,7 +47,9 @@ import {
     monitorOS: state.devices.monitorOS,
     monitorDisk: state.devices.monitorDisk,
     monitorCpu: state.devices.monitorCpu,
-    monitorMemory: state.devices.monitorMemory
+    monitorMemory: state.devices.monitorMemory,
+
+    monitorsUpdateTime: state.devices.monitorsUpdateTime
   }),
   {
     openDeviceMonitorPicker,
