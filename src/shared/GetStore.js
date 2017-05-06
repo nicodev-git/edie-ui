@@ -77,7 +77,7 @@ const initialState = {
       workflow: '',
       collections: 'incident,event',
       severity: 'HIGH,MEDIUM',
-      dateFrom: moment().startOf('day').format(dateFormat),
+      dateFrom: moment().add(-1, 'days').startOf('day').format(dateFormat),
       dateTo: moment().endOf('day').format(dateFormat)
     },
     incidentParams: {

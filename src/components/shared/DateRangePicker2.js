@@ -12,41 +12,43 @@ export default class DateRangePicker2 extends React.Component {
     let yesterday = moment().add(-1, 'days')
 
     let rangeConfig = {
-      'Today': [
-        today,
+      [moment().add('-1', 'years').format('YYYY')]: [
+        moment().add('-1', 'years').startOf('year'),
+        moment().add('-1', 'years').endOf('year')
+      ],
+      [moment().startOf('years').format('YYYY')]: [
+        moment().startOf('year'),
+        moment().endOf('year')
+      ],
+      [moment().add('-1', 'months').format('MMMM')]: [
+        moment().add(-1, 'months').startOf('month'),
+        moment().add(-1, 'months').endOf('month')
+      ],
+      [moment().startOf('month').format('MMMM')]: [
+        moment().startOf('month'),
+        moment().endOf('month')
+      ],
+      'Last 30 Days': [
+        moment().add(-30, 'days'),
+        today
+      ],
+      'Last 7 Days': [
+        moment().add(-6, 'days'),
+        today
+      ],
+      'Since Yesterday': [
+        yesterday,
         today
       ],
       'Yesterday': [
         yesterday,
         yesterday
       ],
-      'Last 7 Days': [
-        moment().add(-6, 'days'),
-        today
-      ],
-      'Last 30 Days': [
-        moment().add(-30, 'days'),
+      'Today': [
+        today,
         today
       ]
     }
-    rangeConfig[moment().startOf('month').format('MMMM')] = [
-      moment().startOf('month'),
-      moment().endOf('month')
-    ]
-    rangeConfig[moment().add('-1', 'months').format('MMMM')] = [
-      moment().add(-1, 'months').startOf('month'),
-      moment().add(-1, 'months').endOf('month')
-    ]
-
-    rangeConfig[moment().startOf('years').format('YYYY')] = [
-      moment().startOf('year'),
-      moment().endOf('year')
-    ]
-    rangeConfig[moment().add('-1', 'years').format('YYYY')] = [
-      moment().add('-1', 'years').startOf('year'),
-      moment().add('-1', 'years').endOf('year')
-    ]
-
     this.state = {
       rangeConfig
     }
