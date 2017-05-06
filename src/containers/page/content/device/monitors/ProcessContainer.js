@@ -7,7 +7,9 @@ import {
 
   updateSearchParams,
   replaceSearchWfs,
-  updateQueryChips
+  updateQueryChips,
+  updateMonitorRealTime,
+  clearMonitors
 } from 'actions'
 
 @connect(
@@ -23,7 +25,9 @@ import {
 
     updateSearchParams,
     replaceSearchWfs,
-    updateQueryChips
+    updateQueryChips,
+    updateMonitorRealTime,
+    clearMonitors
   }
 )
 @withRouter

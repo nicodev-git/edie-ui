@@ -54,7 +54,9 @@ export default class ProcessTable extends React.Component {
       'cssClassName': 'width-160'
     }]
   }
-
+  componentWillMount () {
+    this.props.clearMonitors()
+  }
   componentDidMount () {
     this.monitorSocket = new MonitorSocket({
       listener: this.onMonitorMessage.bind(this)
