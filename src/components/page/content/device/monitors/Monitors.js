@@ -197,8 +197,8 @@ export default class Monitors extends React.Component {
     const {monitorsUpdateTime} = this.props
     if (!this.state.hovered || !monitorsUpdateTime) return null
     return (
-      <div style={{position: 'absolute', top: '-100%'}}>
-        <img src="/images/green_light.png" width="16"/><span>Last Updated </span><TimeAgo date={monitorsUpdateTime}/>
+      <div className="__react_component_tooltip show place-right type-dark" style={{position: 'absolute', top: -10, left: 25}}>
+        <span className="valign-middle">Last Updated <TimeAgo date={monitorsUpdateTime}/></span>
       </div>
     )
   }
@@ -216,13 +216,12 @@ export default class Monitors extends React.Component {
       })
     }
     return (
-      <div className="v-centered text-left" style={{fontSize: '11px', paddingLeft: '10px'}}
-        onMouseEnter={this.onMouseEnter}
-        onMouseLeave={this.onMouseLeave}>
-        {this.renderHoverLabel()}
+      <div className="v-centered text-left" style={{fontSize: '11px', paddingLeft: '10px'}}>
+        <img src="/images/green_light.png" width="16" onMouseEnter={this.onMouseEnter} onMouseLeave={this.onMouseLeave}/>
         {texts.map((t, i) =>
           <div key={i}>{t}</div>
         )}
+        {this.renderHoverLabel()}
       </div>
     )
   }
