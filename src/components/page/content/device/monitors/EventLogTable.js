@@ -10,6 +10,8 @@ import TabPage from 'components/shared/TabPage'
 import TabPageBody from 'components/shared/TabPageBody'
 import TabPageHeader from 'components/shared/TabPageHeader'
 import MonitorTabs from './MonitorTabs'
+import StatusImg from './StatusImg'
+import MonitorSocket from 'util/socket/MonitorSocket'
 
 import { parseSearchQuery } from 'shared/Global'
 
@@ -21,24 +23,51 @@ export default class EventLogTable extends Component {
     }
     this.columns = [{
       'displayName': 'Time',
-      'columnName': 'dataobj.LogTime',
+      'columnName': 'LogTime',
       'cssClassName': 'nowrap width-140'
     }, {
       'displayName': 'LogName',
-      'columnName': 'dataobj.LogName',
+      'columnName': 'LogName',
       'cssClassName': 'width-100'
     }, {
       'displayName': 'EventID',
-      'columnName': 'dataobj.EventID',
+      'columnName': 'EventID',
       'cssClassName': 'width-80'
     }, {
       'displayName': 'User',
-      'columnName': 'dataobj.User',
+      'columnName': 'User',
       'cssClassName': 'width-160'
     }, {
       'displayName': 'Data',
-      'columnName': 'dataobj.Data'
+      'columnName': 'Data'
     }]
+  }
+  componentWillMount () {
+    this.props.clearMonitors()
+  }
+  componentDidMount () {
+    this.monitorSocket = new MonitorSocket({
+      listener: this.onMonitorMessage.bind(this)
+    })
+    this.monitorSocket.connect(this.onSocketOpen.bind(this))
+  }
+
+  componentWillUnmount () {
+    this.monitorSocket.close()
+  }
+
+  onSocketOpen () {
+    this.monitorSocket.send({
+      action: 'enable-realtime',
+      monitors: 'eventlog',
+      deviceId: this.props.device.id
+    })
+  }
+  onMonitorMessage (msg) {
+    console.log(msg)
+    if (msg.action === 'update' && msg.deviceId === this.props.device.id) {
+      this.props.updateMonitorRealTime(msg.data)
+    }
   }
   onChangeQuery (e) {
     this.setState({
@@ -101,15 +130,9 @@ export default class EventLogTable extends Component {
         cells={this.columns}
         ref="table"
         rowMetadata={{'key': 'id'}}
-        rowHeight={400}
         selectable
-        url="/event/search/findAgentEvents"
-        params={{
-          deviceid: this.props.device.id,
-          eventType: 'AGENT',
-          monitortype: 'log',
-          sort: 'timestamp,desc'
-        }}
+        data={this.props.eventLogs}
+        useExternal={false}
       />
     )
   }
@@ -121,7 +144,14 @@ export default class EventLogTable extends Component {
           {this.renderOptions()}
         </TabPageHeader>
         <TabPageBody tabs={MonitorTabs(device.id)}>
-          {this.renderBody()}
+          <div className="flex-vertical" style={{height: '100%'}}>
+            <div className="padding-md">
+              <StatusImg {...this.props}/>
+            </div>
+            <div className="flex-1">
+              {this.renderBody()}
+            </div>
+          </div>
         </TabPageBody>
       </TabPage>
     )

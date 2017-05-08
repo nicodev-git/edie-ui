@@ -19,7 +19,8 @@ import {
 
     eventLogs: state.devices.eventLogs,
 
-    params: state.search.params
+    params: state.search.params,
+    monitorsUpdateTime: state.devices.monitorsUpdateTime
   }),
   {
     fetchDeviceEventLog,
