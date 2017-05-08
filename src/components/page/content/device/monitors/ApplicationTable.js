@@ -10,6 +10,8 @@ import TabPage from 'components/shared/TabPage'
 import TabPageBody from 'components/shared/TabPageBody'
 import TabPageHeader from 'components/shared/TabPageHeader'
 import MonitorTabs from './MonitorTabs'
+import StatusImg from './StatusImg'
+import MonitorSocket from 'util/socket/MonitorSocket'
 
 import { parseSearchQuery } from 'shared/Global'
 
@@ -49,6 +51,33 @@ export default class ApplicationTable extends Component {
       'columnName': 'dataobj.Size',
       'cssClassName': 'width-120'
     }]
+  }
+  componentWillMount () {
+    this.props.clearMonitors()
+  }
+  componentDidMount () {
+    this.monitorSocket = new MonitorSocket({
+      listener: this.onMonitorMessage.bind(this)
+    })
+    this.monitorSocket.connect(this.onSocketOpen.bind(this))
+  }
+
+  componentWillUnmount () {
+    this.monitorSocket.close()
+  }
+
+  onSocketOpen () {
+    this.monitorSocket.send({
+      action: 'enable-realtime',
+      monitors: 'app',
+      deviceId: this.props.device.id
+    })
+  }
+  onMonitorMessage (msg) {
+    console.log(msg)
+    if (msg.action === 'update' && msg.deviceId === this.props.device.id) {
+      this.props.updateMonitorRealTime(msg.data)
+    }
   }
   onChangeQuery (e) {
     this.setState({
@@ -114,7 +143,14 @@ export default class ApplicationTable extends Component {
           {this.renderOptions()}
         </TabPageHeader>
         <TabPageBody tabs={MonitorTabs(device.id)}>
-          {this.renderBody()}
+          <div className="flex-vertical" style={{height: '100%'}}>
+            <div className="padding-md">
+              <StatusImg {...this.props}/>
+            </div>
+            <div className="flex-1">
+              {this.renderBody()}
+            </div>
+          </div>
         </TabPageBody>
       </TabPage>
     )

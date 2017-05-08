@@ -7,7 +7,9 @@ import {
 
   updateSearchParams,
   replaceSearchWfs,
-  updateQueryChips
+  updateQueryChips,
+  updateMonitorRealTime,
+  clearMonitors
 } from 'actions'
 
 @connect(
@@ -16,14 +18,17 @@ import {
 
     apps: state.devices.apps,
 
-    params: state.search.params
+    params: state.search.params,
+    monitorsUpdateTime: state.devices.monitorsUpdateTime
   }),
   {
     fetchDeviceApps,
 
     updateSearchParams,
     replaceSearchWfs,
-    updateQueryChips
+    updateQueryChips,
+    updateMonitorRealTime,
+    clearMonitors
   }
 )
 @withRouter
