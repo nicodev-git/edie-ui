@@ -25,7 +25,9 @@ const SmallModalTable = ({show, header, url, row, height, onHide,
         selectable
       />
     </div>
-    {save ? <TwoButtonsBlock onSave={onSave} onClose={onHide}/> : <CloseButton onClose={onHide} />}
+    <div className="padding-md">
+      {save ? <TwoButtonsBlock onSave={onSave} onClose={onHide}/> : <CloseButton onClose={onHide} />}
+    </div>
   </Modal>
 )
 

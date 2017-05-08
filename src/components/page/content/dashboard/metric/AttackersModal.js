@@ -13,7 +13,7 @@ export default class AttackersModal extends React.Component {
     this.cells = [{
       'displayName': 'Source IP',
       'columnName': 'ip',
-      'cssClassName': 'width-80'
+      'cssClassName': 'width-100'
       // 'customComponent': (props) => {
       //   let row = props.rowData
       //   let val = props.data
