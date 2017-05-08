@@ -18,7 +18,8 @@ import {
 
     processes: state.devices.processes,
 
-    params: state.search.params
+    params: state.search.params,
+    monitorsUpdateTime: state.devices.monitorsUpdateTime
   }),
   {
     fetchDeviceProcesses,

@@ -13,6 +13,7 @@ import MonitorTabs from './MonitorTabs'
 import MonitorSocket from 'util/socket/MonitorSocket'
 
 import { parseSearchQuery } from 'shared/Global'
+import StatusImg from './StatusImg'
 
 export default class ProcessTable extends React.Component {
   constructor (props) {
@@ -39,10 +40,6 @@ export default class ProcessTable extends React.Component {
     }, {
       'displayName': 'Location',
       'columnName': 'Location'
-    }, {
-      'displayName': 'Status',
-      'columnName': 'Status',
-      'cssClassName': 'width-100'
     }]
   }
   componentWillMount () {
@@ -138,13 +135,16 @@ export default class ProcessTable extends React.Component {
           {this.renderOptions()}
         </TabPageHeader>
         <TabPageBody tabs={MonitorTabs(device.id)}>
-          {this.renderBody()}
+          <div className="flex-vertical" style={{height: '100%'}}>
+            <div className="padding-md">
+              <StatusImg {...this.props}/>
+            </div>
+            <div className="flex-1">
+              {this.renderBody()}
+            </div>
+          </div>
         </TabPageBody>
       </TabPage>
     )
   }
-}
-
-ProcessTable.defaultProps = {
-  device: {}
 }

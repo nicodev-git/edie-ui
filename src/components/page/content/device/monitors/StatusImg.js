@@ -27,7 +27,7 @@ export default class StatusImg extends React.Component {
   }
   render () {
     return (
-      <div>
+      <div style={{position: 'relative'}}>
         <img src="/images/green_light.png" width="16" onMouseEnter={this.onMouseEnter} onMouseLeave={this.onMouseLeave}/>
         {this.renderHoverLabel()}
       </div>

@@ -26,7 +26,6 @@ export default class Monitors extends React.Component {
   }
   componentWillMount () {
     this.props.clearMonitors()
-    this.props.fetchMonitorOS(this.props.device.id)
   }
 
   getMonitorTable () {
