@@ -23,11 +23,11 @@ export default class ApplicationTable extends Component {
     }
     this.columns = [{
       'displayName': 'Name',
-      'columnName': 'dataobj.Name',
+      'columnName': 'Name',
       'cssClassName': 'nowrap'
     }, {
       'displayName': 'InstallDate',
-      'columnName': 'dataobj.InstallDate',
+      'columnName': 'InstallDate',
       'cssClassName': 'width-140',
       'customComponent': (props) => {
         let val = props.data
@@ -40,15 +40,15 @@ export default class ApplicationTable extends Component {
       }
     }, {
       'displayName': 'Version',
-      'columnName': 'dataobj.Version',
+      'columnName': 'Version',
       'cssClassName': 'width-120'
     }, {
       'displayName': 'Publisher',
-      'columnName': 'dataobj.Publisher',
+      'columnName': 'Publisher',
       'cssClassName': 'width-200'
     }, {
       'displayName': 'Size',
-      'columnName': 'dataobj.Size',
+      'columnName': 'Size',
       'cssClassName': 'width-120'
     }]
   }
@@ -116,7 +116,7 @@ export default class ApplicationTable extends Component {
       </div>
     )
   }
-  renderBody () {
+  renderBody2 () {
     return (
       <InfiniteTable
         cells={this.columns}
@@ -132,6 +132,18 @@ export default class ApplicationTable extends Component {
           monitortype: 'app',
           sort: 'timestamp,desc'
         }}
+      />
+    )
+  }
+  renderBody () {
+    return (
+      <InfiniteTable
+        cells={this.columns}
+        ref="table"
+        rowMetadata={{'key': 'ID'}}
+        selectable
+        data={this.props.apps}
+        useExternal={false}
       />
     )
   }
