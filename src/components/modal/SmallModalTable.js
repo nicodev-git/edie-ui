@@ -13,19 +13,21 @@ const SmallModalTable = ({show, header, url, row, height, onHide,
   >
     <Header name={header} />
     <div className="modal-body bootstrap-dialog-message small-modal-table">
-      <InfiniteTable
-        url={url}
-        params={params}
-        cells={cells}
-        rowMetadata={row}
-        bodyHeight={height}
-        pageSize={20}
-        data={data}
-        useExternal={useExternal}
-        selectable
-      />
+      <div style={{height: height, overflow: 'auto'}}>
+        <InfiniteTable
+          url={url}
+          params={params}
+          cells={cells}
+          rowMetadata={row}
+          bodyHeight={height}
+          pageSize={20}
+          data={data}
+          useExternal={useExternal}
+          selectable
+        />
+      </div>
     </div>
-    <div className="padding-md">
+    <div className="padding-md-bottom">
       {save ? <TwoButtonsBlock onSave={onSave} onClose={onHide}/> : <CloseButton onClose={onHide} />}
     </div>
   </Modal>
