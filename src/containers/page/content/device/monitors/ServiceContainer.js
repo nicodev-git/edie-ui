@@ -16,7 +16,7 @@ import {
   state => ({
     device: state.dashboard.selectedDevice,
 
-    processes: state.devices.processes,
+    services: state.devices.services,
 
     params: state.search.params,
     monitorsUpdateTime: state.devices.monitorsUpdateTime
