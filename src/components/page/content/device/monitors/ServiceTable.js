@@ -6,6 +6,7 @@ import TabPage from 'components/shared/TabPage'
 import TabPageBody from 'components/shared/TabPageBody'
 import TabPageHeader from 'components/shared/TabPageHeader'
 import MonitorTabs from './MonitorTabs'
+import MonitorSocket from 'util/socket/MonitorSocket'
 import StatusImg from './StatusImg'
 
 export default class ServiceTable extends React.Component {
@@ -16,9 +17,43 @@ export default class ServiceTable extends React.Component {
     }
     this.columns = [{
       'displayName': 'Name',
-      'columnName': 'Name',
-      'cssClassName': 'width-180'
+      'columnName': 'ServiceName',
+      'cssClassName': 'width-200'
+    }, {
+      'displayName': 'Display Name',
+      'columnName': 'DisplayName'
+    }, {
+      'displayName': 'Status',
+      'columnName': 'Status',
+      'cssClassName': 'width-120'
     }]
+  }
+  componentWillMount () {
+    this.props.clearMonitors()
+  }
+  componentDidMount () {
+    this.monitorSocket = new MonitorSocket({
+      listener: this.onMonitorMessage.bind(this)
+    })
+    this.monitorSocket.connect(this.onSocketOpen.bind(this))
+  }
+
+  componentWillUnmount () {
+    this.monitorSocket.close()
+  }
+
+  onSocketOpen () {
+    this.monitorSocket.send({
+      action: 'enable-realtime',
+      monitors: 'service',
+      deviceId: this.props.device.id
+    })
+  }
+  onMonitorMessage (msg) {
+    console.log(msg)
+    if (msg.action === 'update' && msg.deviceId === this.props.device.id) {
+      this.props.updateMonitorRealTime(msg.data)
+    }
   }
   renderOptions () {
     return (
@@ -32,7 +67,7 @@ export default class ServiceTable extends React.Component {
       <InfiniteTable
         cells={this.columns}
         ref="table"
-        rowMetadata={{'key': 'Id'}}
+        rowMetadata={{'key': 'ServiceName'}}
         selectable
         rowHeight={40}
 
