@@ -43,15 +43,6 @@ export default class ProcessTable extends React.Component {
       'displayName': 'Status',
       'columnName': 'Status',
       'cssClassName': 'width-100'
-    }, {
-      'displayName': 'LastSeen',
-      'columnName': 'timestamp',
-      'customComponent': (props) => {
-        if (!props.data) return <span />
-
-        return <span>{moment(props.data).fromNow()}</span>
-      },
-      'cssClassName': 'width-160'
     }]
   }
   componentWillMount () {

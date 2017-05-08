@@ -3,24 +3,17 @@ import {RaisedButton, TextField, FlatButton} from 'material-ui'
 import ActionSearch from 'material-ui/svg-icons/action/search'
 import moment from 'moment'
 import { assign } from 'lodash'
-import TimeAgo from 'react-timeago'
 
 import MonitorTable from './MonitorTable'
-import EventLogTable from './EventLogTable'
-import ApplicationTable from './ApplicationTable'
-import ProcessTable from './ProcessTable'
-import ProcessModal from './ProcessModal'
-import OSTable from './OSTable'
 import DiskTable from './DiskTable'
 import CpuTable from './CpuTable'
 import MemoryTable from './MemoryTable'
-
-import MonitorLogOptions from './MonitorLogOptions'
 
 import TabPage from 'components/shared/TabPage'
 import TabPageBody from 'components/shared/TabPageBody'
 import TabPageHeader from 'components/shared/TabPageHeader'
 import MonitorTabs from './MonitorTabs'
+import StatusImg from './StatusImg'
 
 import { parseSearchQuery } from 'shared/Global'
 
@@ -28,13 +21,8 @@ export default class Monitors extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      selected: 'monitors',
-      query: '',
-      currentMonitor: null,
-      hovered: false
+      query: ''
     }
-    this.onMouseEnter = this.onMouseEnter.bind(this)
-    this.onMouseLeave = this.onMouseLeave.bind(this)
   }
   componentWillMount () {
     this.props.clearMonitors()
@@ -46,7 +34,6 @@ export default class Monitors extends React.Component {
   }
 
   onClickAddMonitor () {
-    console.log('click add monitor')
     this.getMonitorTable().onClickAddMonitor()
   }
 
@@ -58,58 +45,6 @@ export default class Monitors extends React.Component {
     this.getMonitorTable().onClickDeleteMonitor()
   }
 
-  onClickShowMonitors () {
-    this.setState({
-      'selected': 'monitors'
-    })
-  }
-  onClickEventLog () {
-    this.setState({
-      'selected': 'eventlog'
-    })
-  }
-
-  onClickApplication () {
-    this.setState({
-      'selected': 'application'
-    })
-  }
-
-  onClickProcess () {
-    this.setState({
-      'selected': 'process'
-    })
-  }
-
-  onClickOS () {
-    this.setState({
-      'selected': 'os'
-    })
-  }
-  onClickDisk () {
-    this.setState({
-      'selected': 'disk'
-    })
-  }
-  onMonitorLogClicked (monitor) {
-    this.setState({
-      'selected': 'monitorlog',
-      'currentMonitor': monitor
-    })
-  }
-
-  handleTouchTap (event) {
-    this.setState({
-      open: true,
-      anchorEl: event.currentTarget
-    })
-  }
-
-  handleRequestClose () {
-    this.setState({
-      open: false
-    })
-  }
   onChangeQuery (e) {
     this.setState({
       query: e.target.value
@@ -144,12 +79,6 @@ export default class Monitors extends React.Component {
     this.props.replaceSearchWfs([])
     this.props.updateQueryChips(queryChips)
   }
-  onMouseEnter () {
-    this.setState({ hovered: true })
-  }
-  onMouseLeave () {
-    this.setState({ hovered: false })
-  }
   renderSearch () {
     const {selected, query} = this.state
     return (
@@ -160,45 +89,15 @@ export default class Monitors extends React.Component {
     )
   }
   renderOptions () {
-    const {selected, currentMonitor} = this.state
-
-    let toolbar = null
-
-    switch (selected) {
-      case 'monitorlog':
-        toolbar = (
-          <MonitorLogOptions device={currentMonitor} father={this.props.device}/>
-        )
-        break
-      default:
-        toolbar = (
-          <div className="text-center">
-            <div style={{position: 'absolute'}}>
-              <div className={`pull-left ${selected === 'monitors' ? 'hidden' : ''}`}>
-                <RaisedButton label="Show Monitors" onTouchTap={this.onClickShowMonitors.bind(this)}/>
-              </div>
-            </div>
-
-            <div style={{position: 'absolute', right: '25px'}}>
-              <RaisedButton label="Add" onTouchTap={this.onClickAddMonitor.bind(this)}/>&nbsp;
-              <RaisedButton label="Edit" onTouchTap={this.onClickEditMonitor.bind(this)}/>&nbsp;
-              <RaisedButton label="Delete" onTouchTap={this.onClickDeleteMonitor.bind(this)}/>&nbsp;
-            </div>
-            {this.renderSearch()}
-            &nbsp;
-          </div>
-        )
-        break
-    }
-
-    return toolbar
-  }
-  renderHoverLabel () {
-    const {monitorsUpdateTime} = this.props
-    if (!this.state.hovered || !monitorsUpdateTime) return null
     return (
-      <div className="__react_component_tooltip show place-right type-dark" style={{position: 'absolute', top: -10, left: 25}}>
-        <span className="valign-middle nowrap">Last Updated <TimeAgo date={monitorsUpdateTime}/></span>
+      <div className="text-center">
+        <div style={{position: 'absolute', right: '25px'}}>
+          <RaisedButton label="Add" onTouchTap={this.onClickAddMonitor.bind(this)}/>&nbsp;
+          <RaisedButton label="Edit" onTouchTap={this.onClickEditMonitor.bind(this)}/>&nbsp;
+          <RaisedButton label="Delete" onTouchTap={this.onClickDeleteMonitor.bind(this)}/>&nbsp;
+        </div>
+        {this.renderSearch()}
+        &nbsp;
       </div>
     )
   }
@@ -217,11 +116,10 @@ export default class Monitors extends React.Component {
     }
     return (
       <div className="v-centered text-left" style={{fontSize: '11px', paddingLeft: '10px'}}>
-        <img src="/images/green_light.png" width="16" onMouseEnter={this.onMouseEnter} onMouseLeave={this.onMouseLeave}/>
+        <StatusImg {...this.props}/>
         {texts.map((t, i) =>
           <div key={i}>{t}</div>
         )}
-        {this.renderHoverLabel()}
       </div>
     )
   }
@@ -229,50 +127,20 @@ export default class Monitors extends React.Component {
   renderBody () {
     const {props} = this
 
-    switch (this.state.selected) {
-      case 'monitors' :
-        return (
-          <div className="flex-vertical" style={{height: '100%'}}>
-            <div className="padding-sm text-center" style={{position: 'relative'}}>
-              {this.renderOSInfo()}
-              <CpuTable {...this.props}/>
-              <MemoryTable {...this.props}/>
-              <DiskTable {...this.props}/>
-            </div>
-            <div className="flex-1 flex-vertical" style={{background: 'white'}}>
-              <MonitorTable {...props} ref="monitor"/>
-            </div>
-          </div>
-        )
-      case 'eventlog':
-        return (
-          <EventLogTable {...props}/>
-        )
-      case 'application':
-        return (
-          <ApplicationTable {...props}/>
-        )
-
-      case 'process':
-        return (
-          <ProcessTable {...props}/>
-        )
-      case 'os':
-        return (
-          <OSTable {...this.props}/>
-        )
-      case 'disk':
-        return (
+    return (
+      <div className="flex-vertical" style={{height: '100%'}}>
+        <div className="padding-sm text-center" style={{position: 'relative'}}>
+          {this.renderOSInfo()}
+          <CpuTable {...this.props}/>
+          <MemoryTable {...this.props}/>
           <DiskTable {...this.props}/>
-        )
-    }
+        </div>
+        <div className="flex-1 flex-vertical" style={{background: 'white'}}>
+          <MonitorTable {...props} ref="monitor"/>
+        </div>
+      </div>
+    )
   }
-
-  renderProcessModal () {
-    if (!this.props.processModalOpen) return
-    return <ProcessModal {...this.props}/>
-  }
-
   render () {
     const {props} = this
     const {device} = props
@@ -283,7 +151,6 @@ export default class Monitors extends React.Component {
         </TabPageHeader>
         <TabPageBody tabs={MonitorTabs(device.id)}>
           {this.renderBody()}
-          {this.renderProcessModal()}
         </TabPageBody>
       </TabPage>
     )

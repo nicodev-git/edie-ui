@@ -84,7 +84,7 @@ import {
   UPDATE_DEVICE_ERROR
 } from 'actions/types'
 
-import { concat, keys, assign } from 'lodash'
+import { concat, keys } from 'lodash'
 
 const INITIAL_STATE = { devices: [] }
 
@@ -295,7 +295,7 @@ export default function (state = INITIAL_STATE, action) {
       if (cpu) newState.monitorCpu = {dataobj: cpu}
       if (disk) newState.monitorDisk = {dataobj: disk}
       if (memory) newState.monitorMemory = {dataobj: memory}
-      if (process) newState.processes = process.map((u, i) => assign(u, {timestamp: new Date().getTime()}))
+      if (process) newState.processes = process
       return newState
     }
   }
