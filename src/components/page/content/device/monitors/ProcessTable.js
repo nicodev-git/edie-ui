@@ -23,7 +23,7 @@ export default class ProcessTable extends React.Component {
     }
     this.columns = [{
       'displayName': 'Name',
-      'columnName': 'Name',
+      'columnName': 'Filename',
       'cssClassName': 'width-180'
     }, {
       'displayName': 'Id',
