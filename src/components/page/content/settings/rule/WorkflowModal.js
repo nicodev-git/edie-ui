@@ -76,8 +76,18 @@ class WorkflowModal extends React.Component { // eslint-disable-line react/no-mu
       if (r.key) props.rules[r.key] = r.value
     })
     if (!props.name) return window.alert('Please type name.')
-  }
 
+    if (editWorkflow) {
+      this.props.updateWorkflow(props)
+    } else {
+      this.props.addWorkflow(props)
+    }
+  }
+  onActionClick (index) {
+    this.setState({
+      selectedActionIndex: index
+    })
+  }
   onClickPrev () {
     let { current } = this.state
     current -= 1
@@ -150,6 +160,7 @@ class WorkflowModal extends React.Component { // eslint-disable-line react/no-mu
         selectedActionIndex={this.state.selectedActionIndex}
         onClickClose={this.closeModal.bind(this)}
         onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
+        onActionClick={this.onActionClick.bind(this)}
         onClickNext={this.onClickNext.bind(this)}
         onClickPrev={this.onClickPrev.bind(this)}
         onClickAddRule={this.onClickAddRule.bind(this)}
