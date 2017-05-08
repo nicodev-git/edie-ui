@@ -1,9 +1,8 @@
 import React from 'react'
 
 class CpuTable extends React.Component {
-  buildProgress (val) {
+  buildProgress (val, textcolor) {
     let color = 'red'
-    const textcolor = 'black'
     if (val < 70) color = 'green'
     else if (val < 90) color = '#fec835'
 
@@ -16,22 +15,13 @@ class CpuTable extends React.Component {
   }
   renderContent () {
     const {monitorCpu} = this.props
-    if (!monitorCpu) {
-      return (
-        <div className="inline-block padding-sm">
-          <img src="/images/cpu.gif" width="70" style={{marginBottom: '5px', padding: '2px'}}/>
-          <div className="inline" style={{marginTop: '5px'}}>
-            &nbsp;
-          </div>
-        </div>
-      )
-    }
-    const cpus = monitorCpu.dataobj
+    const cpus = monitorCpu ? monitorCpu.dataobj : [{Usage: 0}]
+    const color = monitorCpu ? 'black' : 'lightgray'
     return (cpus.length ? cpus : [cpus]).map((d, i) =>
       <div key={i} className="inline-block padding-sm">
         <img src="/images/cpu.gif" width="70" style={{marginBottom: '5px', padding: '2px'}}/>
         <div className="inline" style={{marginTop: '5px'}}>
-          {this.buildProgress(d.Usage)}
+          {this.buildProgress(d.Usage, color)}
         </div>
       </div>
     )
