@@ -12,7 +12,7 @@ import SearchTabs from './SearchTabs'
 import TabPage from '../../../shared/TabPage'
 import TabPageBody from '../../../shared/TabPageBody'
 import TabPageHeader from '../../../shared/TabPageHeader'
-import { imageBaseUrl, parseSearchQuery, guid, encodeUrlParams, dateFormat, convertSearchParams } from 'shared/Global'
+import { imageBaseUrl, parseSearchQuery, guid, encodeUrlParams, dateFormat } from 'shared/Global'
 import { showConfirm } from 'components/shared/Alert'
 
 import SearchFormView from './SearchFormView'
@@ -391,7 +391,7 @@ class GenericSearch extends React.Component {
   }
 
   onClickIllustrate () {
-    this.props.showThreats(convertSearchParams(this.props.params))
+    this.props.showThreats(this.props.params)
     const {router} = this.props
     router.push({
       pathname: '/threatmap',
@@ -638,7 +638,7 @@ class GenericSearch extends React.Component {
                   rowMetadata={{'key': 'id'}}
                   selectable
                   onRowDblClick={this.onRowDblClick.bind(this)}
-                  params={convertSearchParams(this.props.params)}
+                  params={this.props.params}
                   pageSize={10}
                   showTableHeading={false}
                   onUpdateCount={this.onResultCountUpdate.bind(this)}

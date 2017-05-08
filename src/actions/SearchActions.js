@@ -42,7 +42,7 @@ import {
 } from './types'
 import { ROOT_URL } from './config'
 import { apiError } from './Errors'
-import {encodeUrlParams, convertSearchParams} from 'shared/Global'
+import {encodeUrlParams} from 'shared/Global'
 
 export const updateSearchParams = (params) => {
   return function (dispatch) {
@@ -60,7 +60,7 @@ export const updateSearchParams = (params) => {
 
 export const fetchSearchFields = (params) => {
   return dispatch => {
-    axios.get(`${ROOT_URL}/search/fields`, {params: convertSearchParams(params)}).then(res => {
+    axios.get(`${ROOT_URL}/search/fields`, {params}).then(res => {
       dispatch({type: UPDATE_SEARCH_FIELDS, data: res.data})
     }).catch(error => apiError(dispatch, error))
   }
@@ -82,7 +82,7 @@ export const fetchFieldTopValues = (name, params) => {
   return dispatch => {
     dispatch({type: FETCH_FIELD_TOP_VALUES, data: []})
     const config = {
-      params: assign({}, convertSearchParams(params), {name})
+      params: assign({}, params, {name})
     }
     axios.get(`${ROOT_URL}/search/topValueCount`, config).then(res => {
       dispatch({type: FETCH_FIELD_TOP_VALUES, data: res.data})
@@ -242,7 +242,7 @@ export const fetchRelDevices = (params, name) => {
   return dispatch => {
     dispatch({type: FETCH_REL_DEVICES, data: []})
     const config = {
-      params: assign({}, convertSearchParams(params), { name, size: 10 })
+      params: assign({}, params, { name, size: 10 })
     }
     axios.get(`${ROOT_URL}/search/topValueCount`, config).then(res => {
       dispatch({type: FETCH_REL_DEVICES, data: res.data})
@@ -260,7 +260,7 @@ export const fetchIrrelDevices = (params) => {
   return dispatch => {
     dispatch({type: FETCH_IRREL_DEVICES, data: []})
     const config = {
-      params: assign({}, convertSearchParams(params))
+      params
     }
     axios.get(`${ROOT_URL}/search/irrelevantDevices`, config).then(res => {
       dispatch({type: FETCH_IRREL_DEVICES, data: res.data})
