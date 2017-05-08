@@ -11,11 +11,16 @@ class DiskTable extends React.Component {
           <div style={{position: 'relative', marginBottom: '2px'}} className="inline-block">
             <img src="/images/drive.png" width="70"/>
             <div className="centered text-white" style={{marginTop: '-4px', color}}>
-              {Math.ceil((p.TotalSpace - p.FreeSpace) * 100 / p.TotalSpace)}%
+              {monitorDisk && <span>{Math.ceil((p.TotalSpace - p.FreeSpace) * 100 / p.TotalSpace)}%</span>}
             </div>
           </div>
           <div style={{fontSize: '11px', color}}>
-            {p.Name} {p.FreeSpace}GB / {p.TotalSpace}GB
+            {
+              monitorDisk
+                ? <span>{p.Name} {p.FreeSpace}GB / {p.TotalSpace}GB</span>
+                : <div style={{height: '12px', position: 'relative', background: '#EAEAEA', marginTop: '3px'}}/>
+            }
+
           </div>
         </div>
       )
