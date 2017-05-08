@@ -17,7 +17,7 @@ const MetricPanelView = ({stats, showOpen, showToday, showAttackers, showMonth,
         onClick={showToday}/>
     </div>
     <div className="col-sm-3 col-lg-3 col-xs-6 metric-container">
-      <Metric icon={<BugReportIcon/>} title="Attackers Today" value={stats.attackers}
+      <Metric icon={<BugReportIcon/>} title="Attackers Today" value={stats.attackers || 0}
         onClick={showAttackers}/>
     </div>
     <div className="col-sm-3 col-lg-3 col-xs-6 metric-container">
