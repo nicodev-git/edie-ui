@@ -106,7 +106,7 @@ class GenericSearch extends React.Component {
 
       params = assign(params, {
         query,
-        severity: 'HIGH,MEDIUM,LOW,AUDIT,IGNORE',
+        severity: 'HIGH,MEDIUM',
         collections: 'incident',
         workflow: ''
       })
