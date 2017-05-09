@@ -104,7 +104,8 @@ export default class MainContainer extends Component {
     this.props.updateDashboardStats({
       open: msg.openincidents || 0,
       today: msg.todayincidents || 0,
-      month: msg.monthincidents || 0
+      month: msg.monthincidents || 0,
+      attackers: msg.attackers || 0
     })
 
     const incident = msg.latestincident || {}
