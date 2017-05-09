@@ -17,44 +17,40 @@ export default class UserTable extends React.Component {
     }
     this.columns = [{
       'displayName': 'Name',
-      'columnName': 'ServiceName',
+      'columnName': 'Name',
       'cssClassName': 'width-200'
     }, {
-      'displayName': 'Display Name',
-      'columnName': 'DisplayName'
-    }, {
-      'displayName': 'Status',
-      'columnName': 'Status',
-      'cssClassName': 'width-120'
+      'displayName': 'Domain',
+      'columnName': 'Domain'
     }]
   }
   componentWillMount () {
     this.props.clearMonitors()
   }
-  // componentDidMount () {
-  //   this.monitorSocket = new MonitorSocket({
-  //     listener: this.onMonitorMessage.bind(this)
-  //   })
-  //   this.monitorSocket.connect(this.onSocketOpen.bind(this))
-  // }
-  //
-  // componentWillUnmount () {
-  //   this.monitorSocket.close()
-  // }
-  //
-  // onSocketOpen () {
-  //   this.monitorSocket.send({
-  //     action: 'enable-realtime',
-  //     monitors: 'user',
-  //     deviceId: this.props.device.id
-  //   })
-  // }
-  // onMonitorMessage (msg) {
-  //   console.log(msg)
-  //   if (msg.action === 'update' && msg.deviceId === this.props.device.id) {
-  //     this.props.updateMonitorRealTime(msg.data)
-  //   }
-  // }
+  componentDidMount () {
+    this.monitorSocket = new MonitorSocket({
+      listener: this.onMonitorMessage.bind(this)
+    })
+    this.monitorSocket.connect(this.onSocketOpen.bind(this))
+  }
+
+  componentWillUnmount () {
+    this.monitorSocket.close()
+  }
+
+  onSocketOpen () {
+    this.monitorSocket.send({
+      action: 'enable-realtime',
+      monitors: 'user',
+      deviceId: this.props.device.id
+    })
+  }
+  onMonitorMessage (msg) {
+    console.log(msg)
+    if (msg.action === 'update' && msg.deviceId === this.props.device.id) {
+      this.props.updateMonitorRealTime(msg.data)
+    }
+  }
   renderOptions () {
     return (
       <div className="text-center">
@@ -67,7 +63,7 @@ export default class UserTable extends React.Component {
       <InfiniteTable
         cells={this.columns}
         ref="table"
-        rowMetadata={{'key': 'ServiceName'}}
+        rowMetadata={{'key': 'Name'}}
         selectable
         rowHeight={40}
 

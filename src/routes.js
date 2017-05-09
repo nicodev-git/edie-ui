@@ -39,6 +39,7 @@ import DeviceEventLogs from './containers/page/content/device/monitors/EventLogs
 import DeviceApps from './containers/page/content/device/monitors/AppsContainer'
 import DeviceProcesses from './containers/page/content/device/monitors/ProcessContainer'
 import DeviceServices from './containers/page/content/device/monitors/ServiceContainer'
+import DeviceUsers from './containers/page/content/device/monitors/UsersContainer'
 import DeviceConnectedContainer from './containers/page/content/device/connected/ConnectedContainer'
 import DeviceInfoContainer from './containers/page/content/device/info/InfoContainer'
 import DeviceTopology from './containers/page/content/device/topology/TopologyContainer'
@@ -97,6 +98,7 @@ export default(
           <Route path="app" component={DeviceApps}/>
           <Route path="process" component={DeviceProcesses}/>
           <Route path="service" component={DeviceServices}/>
+          <Route path="user" component={DeviceUsers}/>
         </Route>
         <Route path="connected" component={DeviceConnectedContainer}/>
         <Route path="info" component={DeviceInfoContainer}/>
