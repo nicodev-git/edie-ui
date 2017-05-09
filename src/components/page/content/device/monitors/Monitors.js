@@ -95,7 +95,6 @@ export default class Monitors extends React.Component {
           <RaisedButton label="Edit" onTouchTap={this.onClickEditMonitor.bind(this)}/>&nbsp;
           <RaisedButton label="Delete" onTouchTap={this.onClickDeleteMonitor.bind(this)}/>&nbsp;
         </div>
-        {this.renderSearch()}
         &nbsp;
       </div>
     )
