@@ -14,5 +14,8 @@ export default (deviceId) => {
   }, {
     title: 'Services',
     path: `/device/${deviceId}/monitor/service`
+  }, {
+    title: 'Users',
+    path: `/device/${deviceId}/monitor/users`
   }]
 }
