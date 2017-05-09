@@ -296,7 +296,7 @@ export default function (state = INITIAL_STATE, action) {
       if (disk) newState.monitorDisk = {dataobj: disk}
       if (memory) newState.monitorMemory = {dataobj: memory}
       if (process) newState.processes = process
-      if (app) newState.apps = app
+      if (app) newState.apps = app.map((u, i) => assign(u, {id: i}))
       if (eventlog) newState.eventLogs = eventlog.map((u, i) => assign(u, {id: i}))
       if (service) newState.services = service
       if (user) newState.monitorUsers = user

@@ -140,7 +140,7 @@ export default class ApplicationTable extends Component {
       <InfiniteTable
         cells={this.columns}
         ref="table"
-        rowMetadata={{'key': 'ID'}}
+        rowMetadata={{'key': 'id'}}
         selectable
         data={this.props.apps}
         useExternal={false}
