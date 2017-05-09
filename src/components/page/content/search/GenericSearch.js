@@ -12,8 +12,10 @@ import SearchTabs from './SearchTabs'
 import TabPage from '../../../shared/TabPage'
 import TabPageBody from '../../../shared/TabPageBody'
 import TabPageHeader from '../../../shared/TabPageHeader'
-import { imageBaseUrl, parseSearchQuery, guid, encodeUrlParams, dateFormat } from 'shared/Global'
+import { imageBaseUrl, parseSearchQuery, guid, encodeUrlParams, dateFormat, collections, severities } from 'shared/Global'
 import { showConfirm } from 'components/shared/Alert'
+import {renderEntity} from 'components/shared/CellRenderers'
+import {chipStyles} from 'style/materialStyles'
 
 import SearchFormView from './SearchFormView'
 import SearchSavePopover from './SearchSavePopover'
@@ -23,32 +25,6 @@ import RelDevicesModal from './RelDevicesModal'
 import IrrelDevicesModal from './IrrelDevicesModal'
 import SearchFieldsModal from './SearchFieldsModal'
 
-const styles = {
-  chip: {
-    margin: 4
-  },
-  chipLabel: {
-    fontSize: '12px'
-  },
-  wrapper: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    maxHeight: '300px',
-    overflow: 'auto'
-  }
-}
-
-const collections = [
-  {label: 'incident', value: 'incident'},
-  {label: 'event', value: 'event'}
-]
-const severities = [
-  { label: 'High', value: 'HIGH' },
-  { label: 'Medium', value: 'MEDIUM' },
-  { label: 'Low', value: 'LOW' },
-  { label: 'Audit', value: 'AUDIT' },
-  { label: 'Ignore', value: 'IGNORE' }
-]
 class GenericSearch extends React.Component {
   constructor (props) {
     super(props)
@@ -61,12 +37,15 @@ class GenericSearch extends React.Component {
       'columnName': 'entity.id',
       'customComponent': (props) => {
         const {rowData} = props
-        if (!rowData.entity) return <span/>
+        const {entity} = rowData
+        if (!entity) return <span/>
+        const highlighted = this.getHighlighted(entity, rowData.highlights)
 
-        // const data = this.getHighlighted(rowData.entity, rowData.highlights)
-        // return <span dangerouslySetInnerHTML={{ __html: data }} /> // eslint-disable-line
+        const data = {type: rowData.type, ...highlighted}
+        if (entity.startTimestamp) data.startTimestamp = this.formatDate(entity.startTimestamp)
+        if (entity.timestamp) data.timestamp = this.formatDate(entity.timestamp)
 
-        return this.renderData(this.getHighlighted(rowData.entity, rowData.highlights), false, rowData.type)
+        return renderEntity(data)
       }
     }]
   }
@@ -122,6 +101,10 @@ class GenericSearch extends React.Component {
     this.props.fetchWorkflows()
   }
 
+  formatDate (time) {
+    return moment(time).fromNow()
+  }
+
   getSearchOptions () {
     const {userInfo} = this.props
     if (!userInfo) return []
@@ -133,49 +116,6 @@ class GenericSearch extends React.Component {
       console.log(e)
     }
     return []
-  }
-
-  renderValue (val) {
-    let startChar, endChar
-    let children = []
-    if (typeof val === 'object' && val !== null) {
-      startChar = isArray(val) ? '[' : '{'
-      endChar = isArray(val) ? ']' : '}'
-
-      if (isArray(val)) {
-        val.forEach((item, index) => {
-          children.push(this.renderValue(item))
-          if (index < val.length - 1) children.push(<div className="field-separator"/>)
-        })
-      } else {
-        children = this.renderData(val, true)
-      }
-
-      return concat([],
-        <span className="field-key">{startChar}&nbsp;</span>,
-        children,
-        <span className="field-key">&nbsp;{endChar}</span>
-      )
-    }
-
-    const html = JSON.stringify(val).replace(/(\\t)|(\\r)|(\\n)/gi, ' ')
-
-    return (
-      <span className="field-value" dangerouslySetInnerHTML={{ __html: html }}/> // eslint-disable-line
-    )
-  }
-
-  renderData (entity, isChildren, type) {
-    let children = []
-    const allKeys = type ? concat([], 'type', keys(entity)) : keys(entity)
-    const newEntity = type ? assign({}, entity, {type}) : entity
-    allKeys.forEach((key, index) => {
-      children.push(<span className="field-key">{key} = </span>)
-      children = concat(children, this.renderValue(newEntity[key]))
-      if (index < allKeys.length - 1) children.push(<div className="field-separator"/>)
-    })
-    if (isChildren) return children
-    return <div className="inline">{children}</div>
   }
 
   getHighlighted (entity, highlights) {
@@ -586,11 +526,11 @@ class GenericSearch extends React.Component {
 
           <div className="text-center">
             <div className="inline">
-              <div style={styles.wrapper}>
+              <div style={chipStyles.wrapper}>
                 {this.props.queryChips.map((p, i) =>
                   <Chip
                     key={`${p.name}${p.value}`}
-                    style={styles.chip}
+                    style={chipStyles.chip}
                     onTouchTap={this.onClickChip.bind(this, i)}
                     onRequestDelete={this.onClickRemoveChip.bind(this, i)}>
                     {p.name !== '_all' ? <b>{p.name}: </b> : null}{p.value}
@@ -599,7 +539,7 @@ class GenericSearch extends React.Component {
                 {this.props.selectedWfs.map((p, i) =>
                   <Chip
                     key={p.id}
-                    style={styles.chip}
+                    style={chipStyles.chip}
                     onRequestDelete={this.onClickRemoveWfChip.bind(this, i)}>
                     <b>Workflow: </b>{p.name}
                   </Chip>

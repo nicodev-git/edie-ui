@@ -201,3 +201,15 @@ export function convertSearchParams (params) {
   if (p.dateTo) p.dateTo = moment(p.dateTo, dateFormat).endOf('day').valueOf()
   return p
 }
+
+export const collections = [
+  {label: 'incident', value: 'incident'},
+  {label: 'event', value: 'event'}
+]
+export const severities = [
+  { label: 'High', value: 'HIGH' },
+  { label: 'Medium', value: 'MEDIUM' },
+  { label: 'Low', value: 'LOW' },
+  { label: 'Audit', value: 'AUDIT' },
+  { label: 'Ignore', value: 'IGNORE' }
+]
