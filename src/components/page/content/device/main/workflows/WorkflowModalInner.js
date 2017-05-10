@@ -38,7 +38,7 @@ export default class WorkflowModalInner extends Component {
   }
 
   renderStep () {
-    const {current, rules, selectedRuleIndex, actions, selectedActionIndex} = this.props
+    const {current, rules, selectedRuleIndex, actions, selectedActionIndex, onClickRawData} = this.props
     let categoryModal = this.renderCategoryModal()
     let ruleModal = this.renderRuleModal()
     let actionModal = this.renderActionModal()
@@ -46,6 +46,7 @@ export default class WorkflowModalInner extends Component {
     if (current === 1) {
       return (
         <WorkflowStep1
+          onClickRawData={onClickRawData}
           categories={this.props.workflowCategories}
           onAddCategory={this.props.onClickAddCategory}
           categoryModal={categoryModal}

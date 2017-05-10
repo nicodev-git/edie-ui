@@ -143,6 +143,10 @@ class WorkflowModal extends React.Component { // eslint-disable-line react/no-mu
     return 2
   }
 
+  onClickRawData () {
+    this.props.change('display_incident_desc', 'SHOW_RAW_DATA')
+  }
+
   render () {
     const { handleSubmit } = this.props
     let steps = this.getSteps()
@@ -176,6 +180,7 @@ class WorkflowModal extends React.Component { // eslint-disable-line react/no-mu
         onCloseActionModal={this.onCloseActionModal.bind(this)}
         onClickDiagram={this.onClickDiagram.bind(this)}
         onDiagramModalClose={this.onDiagramModalClose.bind(this)}
+        onClickRawData={this.onClickRawData.bind(this)}
         {...this.props}
       />
     )
