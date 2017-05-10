@@ -7,8 +7,6 @@ import { Field } from 'redux-form'
 import { Header, SubHeader, SubmitBlock, FormInput, FormSelect } from './parts'
 import { buttonStyle, iconStyle } from 'style/materialStyles'
 
-import {severities} from 'shared/Global'
-
 export default class ParserTypeModalView extends Component {
   render () {
     const {show, header, patterns, selectedIndex, onSubmit,
@@ -26,7 +24,7 @@ export default class ParserTypeModalView extends Component {
             <div className="form-column">
               <Field name="name" component={FormInput} label="name"/>
               <Field name="filters" component={FormInput} label="filters"/>
-              <Field name="ignoredelete" component={FormSelect} label="IgnoreDelete" options={severities}/>
+              <Field name="ignoredelete" component={FormSelect} label="IgnoreDelete" options={[{label: 'Ignore Delete', value: 'Ignore Delete'}]}/>
               <div className="text-plus-icon">
                 <SubHeader name="Patterns"/>
                 <IconButton

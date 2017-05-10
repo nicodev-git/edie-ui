@@ -813,6 +813,26 @@ table.table tbody tr.selected {
   align-items: center;
 }
 
+.wizard-step-1 {
+  width: 90%;
+}
+
+.wizard-step-1-container {
+  position: relative;
+}
+
+.wizard-step-1-help {
+  position: absolute;
+  top: 135px;
+  right: 5px;
+}
+
+.wizard-step-1-add {
+  position: absolute;
+  top: 180px;
+  right: 5px;
+}
+
 .crud-buttons {
   display: flex;
   justify-content: flex-start;
