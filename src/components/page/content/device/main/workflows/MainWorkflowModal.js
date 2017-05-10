@@ -153,6 +153,10 @@ class MainWorkflowModal extends Component {
     })
   }
 
+  onClickRawData () {
+    this.props.change('display_incident_desc', 'SHOW_RAW_DATA')
+  }
+
   render () {
     const {handleSubmit} = this.props
     let isDiagramButton = true
@@ -185,6 +189,7 @@ class MainWorkflowModal extends Component {
         onCloseActionModal={this.onCloseActionModal.bind(this)}
         onClickDiagram={this.onClickDiagram.bind(this)}
         onDiagramModalClose={this.onDiagramModalClose.bind(this)}
+        onClickRawData={this.onClickRawData.bind(this)}
         {...this.props}
       />
     )

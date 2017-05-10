@@ -3,17 +3,24 @@ import { Field } from 'redux-form'
 import IconButton from 'material-ui/IconButton'
 import HelpIcon from 'material-ui/svg-icons/action/help'
 import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
+
 import { FormInput, FormSelect, FormCheckbox } from './parts'
-import { buttonStyle, iconStyle } from 'style/materialStyles'
+import { buttonStyle, iconStyle, chipStyles } from 'style/materialStyles'
 
 export default class WorkflowStep1 extends Component {
   render () {
-    const {categories, onAddCategory, categoryModal} = this.props
+    const {categories, onAddCategory, categoryModal, onClickRawData} = this.props
     return (
       <div className="wizard-step-1-container">
         <div className="form-column wizard-step-1">
           <Field name="name" component={FormInput} label="Name"/>
           <Field name="desc" component={FormInput} label="Description"/>
+          <div>
+            <Chip style={chipStyles.chip}
+              onTouchTap={onClickRawData}>
+              SHOW_RAW_DATA
+            </Chip>
+          </div>
           <Field name="display_incident_desc" component={FormInput} label="Display Incident Description"/>
           <Field name="category" component={FormSelect} label="Category"
             options={categories.map(c => ({value: c.name, label: c.name}))}/>
