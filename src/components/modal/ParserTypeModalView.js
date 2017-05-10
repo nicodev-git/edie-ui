@@ -24,7 +24,7 @@ export default class ParserTypeModalView extends Component {
             <div className="form-column">
               <Field name="name" component={FormInput} label="name"/>
               <Field name="filters" component={FormInput} label="filters"/>
-              <Field name="ignoredelete" component={FormSelect} label="IgnoreDelete" options={[{label: 'Ignore Delete', value: 'Ignore Delete'}]}/>
+              <Field name="ignoredelete" component={FormSelect} label="IgnoreDelete" options={[{label: 'Ignore Delete', value: 'IGNOREDELETE'}]}/>
               <div className="text-plus-icon">
                 <SubHeader name="Patterns"/>
                 <IconButton
