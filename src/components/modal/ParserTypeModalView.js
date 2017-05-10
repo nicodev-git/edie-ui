@@ -4,8 +4,10 @@ import IconButton from 'material-ui/IconButton'
 import DeleteIcon from 'material-ui/svg-icons/action/delete'
 import InlineEdit from 'react-edit-inline'
 import { Field } from 'redux-form'
-import { Header, SubHeader, SubmitBlock, FormInput } from './parts'
+import { Header, SubHeader, SubmitBlock, FormInput, FormSelect } from './parts'
 import { buttonStyle, iconStyle } from 'style/materialStyles'
+
+import {severities} from 'shared/Global'
 
 export default class ParserTypeModalView extends Component {
   render () {
@@ -24,6 +26,7 @@ export default class ParserTypeModalView extends Component {
             <div className="form-column">
               <Field name="name" component={FormInput} label="name"/>
               <Field name="filters" component={FormInput} label="filters"/>
+              <Field name="ignoredelete" component={FormSelect} label="IgnoreDelete" options={severities}/>
               <div className="text-plus-icon">
                 <SubHeader name="Patterns"/>
                 <IconButton
