@@ -11,7 +11,11 @@ import {
   closeAddDeviceIncident,
   addDeviceIncident,
   fixAllDeviceIncidents,
-  closeDevice
+  closeDevice,
+
+  replaceSearchWfs,
+  updateQueryChips,
+  updateSearchParams
 } from 'actions'
 
 import MainIncidents from 'components/page/content/device/main/incidents/MainIncidents'
@@ -21,7 +25,8 @@ import MainIncidents from 'components/page/content/device/main/incidents/MainInc
     device: state.dashboard.selectedDevice,
     incidents: state.devices.incidents,
     incidentDraw: state.devices.incidentDraw,
-    addIncidentModalVisible: state.devices.addIncidentModalVisible
+    addIncidentModalVisible: state.devices.addIncidentModalVisible,
+    params: state.search.params
   }),
   dispatch => ({
     ...bindActionCreators({
@@ -32,7 +37,11 @@ import MainIncidents from 'components/page/content/device/main/incidents/MainInc
       closeAddDeviceIncident,
       addDeviceIncident,
       fixAllDeviceIncidents,
-      closeDevice
+      closeDevice,
+
+      replaceSearchWfs,
+      updateQueryChips,
+      updateSearchParams
     }, dispatch)
   })
 )

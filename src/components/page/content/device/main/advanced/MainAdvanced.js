@@ -36,7 +36,7 @@ export default class MainAdvanced extends React.Component {
           <div className="text-center margin-md-top" />
         </TabPageHeader>
 
-        <TabPageBody tabs={MainTabs(device.id)} tab={3}>
+        <TabPageBody tabs={MainTabs(device.id)} tab={2}>
           <div className="padding-md">
             <label className="control-label col-md-12"><b>Simulate Incident</b></label>
             <label className="control-label col-md-2">Text: </label>

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import moment from 'moment'
-import { findIndex } from 'lodash'
+import { findIndex, assign } from 'lodash'
 import {
   RaisedButton,
   MenuItem,
@@ -21,7 +21,7 @@ import AddExceptionModal from './AddExceptionModal'
 import CommentsModal from '../../../../../shared/incident/CommentsModal'
 
 import { showAlert, showConfirm } from '../../../../../shared/Alert'
-import { getSeverityIcon } from '../../../../../../shared/Global'
+import { getSeverityIcon, parseSearchQuery } from '../../../../../../shared/Global'
 const encodeUrlParams = getSeverityIcon
 import MainTabs from '../MainTabs'
 import TabPage from 'components/shared/TabPage'
@@ -251,6 +251,23 @@ export default class MainIncidents extends Component {
     window.open(url, '_blank')
   }
 
+  onClickEvents () {
+    const query = `deviceid=${this.props.device.id} and eventType=AGENT`
+    const queryChips = parseSearchQuery(query)
+    this.props.router.push('/search')
+    this.props.updateSearchParams(assign({}, this.props.params, {
+      query,
+      severity: 'HIGH,MEDIUM',
+      collections: 'event',
+      workflow: '',
+      dateFrom: moment().startOf('year').valueOf(),
+      dateTo: moment().endOf('year').valueOf()
+    }))
+
+    this.props.replaceSearchWfs([])
+    this.props.updateQueryChips(queryChips)
+  }
+
   onChangeSeverity (e, index, values) {
     console.log(arguments)
     this.setState({
@@ -421,6 +438,7 @@ export default class MainIncidents extends Component {
                   <MenuItem primaryText="Add Incident" onTouchTap={this.onClickAddIncident.bind(this)}/>
                   <MenuItem primaryText="Add Exception" onTouchTap={this.onClickAddException.bind(this)}/>
                   <MenuItem primaryText="Export PDF" onTouchTap={this.onClickPDF.bind(this)}/>
+                  <MenuItem primaryText="Events" onTouchTap={this.onClickEvents.bind(this)}/>
                 </Menu>
               </Popover>
             </div>

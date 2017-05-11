@@ -8,10 +8,6 @@ export default (deviceId) => {
     path: `/device/${deviceId}/main/workflows`
   },
   {
-    title: 'Events',
-    path: `/device/${deviceId}/main/events`
-  },
-  {
     title: 'Advanced',
     path: `/device/${deviceId}/main/advanced`
   }]
