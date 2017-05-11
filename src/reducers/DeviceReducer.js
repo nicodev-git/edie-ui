@@ -109,7 +109,7 @@ export default function (state = INITIAL_STATE, action) {
         if (u.id === action.data.id) return action.data
         return u
       })
-      return { ...state, incidents }
+      return { ...state, incidents, incidentDraw: state.incidentDraw + 1 }
     }
 
     case OPEN_ADD_DEVICE_INCIDENT:

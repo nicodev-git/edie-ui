@@ -99,7 +99,7 @@ export default class MainIncidents extends Component {
     }, {
       'displayName': 'Actions',
       'columnName': 'actions',
-      'cssClassName': 'nowrap width-200',
+      'cssClassName': 'nowrap',
       'customComponent': (p) => {
         const row = p.rowData
         setTimeout(() => {
