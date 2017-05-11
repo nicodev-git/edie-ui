@@ -252,7 +252,7 @@ export default class MainIncidents extends Component {
   }
 
   onClickEvents () {
-    const query = `deviceid=${this.props.device.id} and eventType=AGENT`
+    const query = `deviceid=${this.props.device.id}`
     const queryChips = parseSearchQuery(query)
     this.props.router.push('/search')
     this.props.updateSearchParams(assign({}, this.props.params, {
@@ -435,10 +435,10 @@ export default class MainIncidents extends Component {
                 onRequestClose={this.handleRequestClose.bind(this)}
               >
                 <Menu>
+                  <MenuItem primaryText="Events" onTouchTap={this.onClickEvents.bind(this)}/>
                   <MenuItem primaryText="Add Incident" onTouchTap={this.onClickAddIncident.bind(this)}/>
                   <MenuItem primaryText="Add Exception" onTouchTap={this.onClickAddException.bind(this)}/>
                   <MenuItem primaryText="Export PDF" onTouchTap={this.onClickPDF.bind(this)}/>
-                  <MenuItem primaryText="Events" onTouchTap={this.onClickEvents.bind(this)}/>
                 </Menu>
               </Popover>
             </div>
