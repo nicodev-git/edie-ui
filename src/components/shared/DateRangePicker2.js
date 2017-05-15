@@ -57,6 +57,10 @@ export default class DateRangePicker2 extends React.Component {
       'Today': [
         moment().startOf('day'),
         moment().endOf('day')
+      ],
+      'Last Hour': [
+        moment().add(-1, 'hours').startOf('minute'),
+        moment().endOf('minute')
       ]
     }
     this.state = {
