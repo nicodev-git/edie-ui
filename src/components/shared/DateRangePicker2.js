@@ -1,8 +1,21 @@
 import React from 'react'
-import ReactDateRangePicker from 'react-bootstrap-daterangepicker'
+import 'bootstrap-daterangepicker/daterangepicker.css'
+import ReactDateRangePicker from 'react-bootstrap-datetimerangepicker'
 import moment from 'moment'
 import {keys, assign, isString, isNumber} from 'lodash'
 import {dateFormat} from 'shared/Global'
+
+const locale = {
+  format: dateFormat,
+  separator: ' - ',
+  applyLabel: 'Apply',
+  cancelLabel: 'Cancel',
+  weekLabel: 'W',
+  customRangeLabel: 'Custom Range',
+  daysOfWeek: moment.weekdaysMin(),
+  monthNames: moment.monthsShort(),
+  firstDay: moment.localeData().firstDayOfWeek()
+}
 
 export default class DateRangePicker2 extends React.Component {
   constructor (props) {
@@ -29,24 +42,24 @@ export default class DateRangePicker2 extends React.Component {
         moment().endOf('month')
       ],
       'Last 30 Days': [
-        moment().add(-30, 'days'),
-        today
+        moment().add(-30, 'days').startOf('day'),
+        today.endOf('days')
       ],
       'Last 7 Days': [
-        moment().add(-6, 'days'),
-        today
+        moment().add(-6, 'days').startOf('day'),
+        today.endOf('days')
       ],
       'Since Yesterday': [
-        yesterday,
-        today
+        yesterday.startOf('day'),
+        today.endOf('day')
       ],
       'Yesterday': [
-        yesterday,
-        yesterday
+        yesterday.startOf('day'),
+        yesterday.endOf('day')
       ],
       'Today': [
-        today,
-        today
+        today.startOf('day'),
+        today.endOf('day')
       ]
     }
     this.state = {
@@ -81,12 +94,17 @@ export default class DateRangePicker2 extends React.Component {
     })
 
     if (!label) label = `${startDateStr} - ${endDateStr}`
-
     return (
       <ReactDateRangePicker
+        timePicker
+        timePicker24Hour
+        showDropdowns
+        timePickerSeconds
+        autoUpdateInput
+        linkedCalendars={false}
+        locale={locale}
+
         ranges={rangeConfig}
-        linkedCalendars
-        opens="right"
 
         startDate={momentStartDate}
         endDate={momentEndDate}
