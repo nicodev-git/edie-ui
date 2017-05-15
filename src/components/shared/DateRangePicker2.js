@@ -21,9 +21,6 @@ export default class DateRangePicker2 extends React.Component {
   constructor (props) {
     super(props)
 
-    let today = moment()
-    let yesterday = moment().add(-1, 'days')
-
     let rangeConfig = {
       [moment().add('-1', 'years').format('YYYY')]: [
         moment().add('-1', 'years').startOf('year'),
@@ -43,23 +40,23 @@ export default class DateRangePicker2 extends React.Component {
       ],
       'Last 30 Days': [
         moment().add(-30, 'days').startOf('day'),
-        today.endOf('days')
+        moment().endOf('day')
       ],
       'Last 7 Days': [
         moment().add(-6, 'days').startOf('day'),
-        today.endOf('days')
+        moment().endOf('day')
       ],
       'Since Yesterday': [
-        yesterday.startOf('day'),
-        today.endOf('day')
+        moment().add(-1, 'days').startOf('day'),
+        moment().endOf('day')
       ],
       'Yesterday': [
-        yesterday.startOf('day'),
-        yesterday.endOf('day')
+        moment().add(-1, 'days').startOf('day'),
+        moment().add(-1, 'days').endOf('day')
       ],
       'Today': [
-        today.startOf('day'),
-        today.endOf('day')
+        moment().startOf('day'),
+        moment().endOf('day')
       ]
     }
     this.state = {
@@ -68,10 +65,7 @@ export default class DateRangePicker2 extends React.Component {
   }
 
   onApply (e, dp) {
-    this.props.onApply && this.props.onApply({
-      startDate: dp.startDate.startOf('day'),
-      endDate: dp.endDate.endOf('day')
-    })
+    this.props.onApply && this.props.onApply(dp)
   }
 
   render () {
@@ -100,7 +94,6 @@ export default class DateRangePicker2 extends React.Component {
         timePicker24Hour
         showDropdowns
         timePickerSeconds
-        autoUpdateInput
         linkedCalendars={false}
         locale={locale}
 
