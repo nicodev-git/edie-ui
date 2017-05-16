@@ -21,7 +21,7 @@ import AddExceptionModal from './AddExceptionModal'
 import CommentsModal from '../../../../../shared/incident/CommentsModal'
 
 import { showAlert, showConfirm } from '../../../../../shared/Alert'
-import { getSeverityIcon, parseSearchQuery } from '../../../../../../shared/Global'
+import { getSeverityIcon, parseSearchQuery, dateFormat } from '../../../../../../shared/Global'
 const encodeUrlParams = getSeverityIcon
 import MainTabs from '../MainTabs'
 import TabPage from 'components/shared/TabPage'
@@ -260,8 +260,8 @@ export default class MainIncidents extends Component {
       severity: 'HIGH,MEDIUM',
       collections: 'event',
       workflow: '',
-      dateFrom: moment().startOf('year').valueOf(),
-      dateTo: moment().endOf('year').valueOf()
+      dateFrom: moment().startOf('year').format(dateFormat),
+      dateTo: moment().endOf('year').format(dateFormat)
     }))
 
     this.props.replaceSearchWfs([])
