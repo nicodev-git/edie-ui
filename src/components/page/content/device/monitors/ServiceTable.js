@@ -60,13 +60,22 @@ export default class ServiceTable extends React.Component {
       this.props.updateMonitorRealTime(msg.data)
     }
   }
+  sendCommandMessage (command, params) {
+    this.monitorSocket.send({
+      action: 'command',
+      deviceId: this.props.device.id,
+      data: {
+        command,
+        params
+      }
+    })
+  }
   onClickStart (service) {
-    // if (service.Status === 'Running') {
-    //   this.sendCommandMessage('StopServiceCommand', {service: service.ServiceName})
-    // } else {
-    //   this.sendCommandMessage('StartServiceCommand', {service: service.ServiceName})
-    // }
-    // this.sendCommandMessage('GetServicesCommand')
+    if (service.Status === 'Running') {
+      this.sendCommandMessage('StopServiceCommand', {service: service.ServiceName})
+    } else {
+      this.sendCommandMessage('StartServiceCommand', {service: service.ServiceName})
+    }
   }
   renderOptions () {
     return (
