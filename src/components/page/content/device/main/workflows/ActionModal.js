@@ -49,7 +49,7 @@ export default connect(
     editWfAction: state.devices.editWfAction,
     validate: validate,
     initialValues: assign({
-      actionType: 'OPEN_INCIDENT'
+      type: 'OPEN_INCIDENT'
     }, state.devices.editWfAction)
   }), {
     closeWfActionModal

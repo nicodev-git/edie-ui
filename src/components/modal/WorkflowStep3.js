@@ -13,7 +13,7 @@ export default class WorkflowStep3 extends Component {
     return (
       <div>
         <div className="crud-buttons">
-          <SubHeader name="Rules"/>
+          <SubHeader name="Actions"/>
           <div className="add-button">
             <IconButton
               style={buttonStyle}
