@@ -1,5 +1,6 @@
 import React from 'react'
 import InfiniteTable from 'components/shared/InfiniteTable'
+import {Toggle} from 'material-ui'
 
 import TabPage from 'components/shared/TabPage'
 import TabPageBody from 'components/shared/TabPageBody'
@@ -65,6 +66,16 @@ export default class FirewallTable extends React.Component {
       deviceId: this.props.device.id
     })
   }
+  sendCommandMessage (name, params) {
+    this.monitorSocket.send({
+      action: 'command',
+      deviceId: this.props.device.id,
+      data: {
+        name,
+        params
+      }
+    })
+  }
   onMonitorMessage (msg) {
     console.log(msg)
     if (msg.action === 'update' && msg.deviceId === this.props.device.id) {
@@ -86,10 +97,16 @@ export default class FirewallTable extends React.Component {
       this.onClickSearch()
     }
   }
+  onToggleStatus (e, checked) {
+    this.sendCommandMessage('SetFirewallStatusCommand', {
+      status: checked ? 'on' : 'off'
+    })
+  }
   renderOptions () {
+    if (!this.props.monitorsUpdateTime) return
     return (
-      <div className="text-center">
-        <div className="inline-block"/>
+      <div>
+        <Toggle toggled={this.props.monitorFwStatus} onToggle={this.onToggleStatus.bind(this)}/>
       </div>
     )
   }
@@ -108,21 +125,14 @@ export default class FirewallTable extends React.Component {
     )
   }
   render () {
-    const {device, monitorsUpdateTime, monitorFwStatus} = this.props
+    const {device} = this.props
     return (
       <TabPage>
         <TabPageHeader title="Firewall" titleOptions={<StatusImg {...this.props}/>}>
           {this.renderOptions()}
         </TabPageHeader>
         <TabPageBody tabs={MonitorTabs(device.id)}>
-          <div className="flex-vertical" style={{height: '100%'}}>
-            <div className="padding-md">
-              {monitorsUpdateTime > 0 && <span className="valign-middle">Firewall: {monitorFwStatus ? 'ON' : 'OFF'}</span>}
-            </div>
-            <div className="flex-1">
-              {this.renderBody()}
-            </div>
-          </div>
+          {this.renderBody()}
         </TabPageBody>
       </TabPage>
     )
