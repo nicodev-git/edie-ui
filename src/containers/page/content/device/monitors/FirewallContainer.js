@@ -17,6 +17,7 @@ import {
     device: state.dashboard.selectedDevice,
 
     monitorFwRules: state.devices.monitorFwRules,
+    monitorFwStatus: state.devices.monitorFwStatus,
 
     params: state.search.params,
     monitorsUpdateTime: state.devices.monitorsUpdateTime

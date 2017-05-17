@@ -29,7 +29,7 @@ export default class StatusImg extends React.Component {
     const {monitorsUpdateTime} = this.props
     const img = monitorsUpdateTime ? 'green_light.png' : 'yellow_light.png'
     return (
-      <div style={{position: 'relative'}}>
+      <div className="inline-block" style={{position: 'relative'}}>
         <img src={`/images/${img}`} width="16" onMouseEnter={this.onMouseEnter} onMouseLeave={this.onMouseLeave}/>
         {this.renderHoverLabel()}
       </div>
