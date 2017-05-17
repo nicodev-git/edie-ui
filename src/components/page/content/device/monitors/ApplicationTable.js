@@ -145,13 +145,13 @@ export default class ApplicationTable extends Component {
     })
   }
   onClickGetHotfix () {
-    this.setState({tab: 'hotfix'}, () => {
+    this.setState({tab: 'hotfix', open: false}, () => {
       this.props.clearMonitors()
       this.sendTabMessage()
     })
   }
   onClickGetApp () {
-    this.setState({tab: 'app'}, () => {
+    this.setState({tab: 'app', open: false}, () => {
       this.props.clearMonitors()
       this.sendTabMessage()
     })
