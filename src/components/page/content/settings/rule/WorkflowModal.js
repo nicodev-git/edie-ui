@@ -69,6 +69,7 @@ class WorkflowModal extends React.Component { // eslint-disable-line react/no-mu
     const { editWorkflow, workflowCategories } = this.props
     const { rules, actions, diagram } = this.state
     let props = assign({}, editWorkflow, values, { rules: {}, actions: actions, flowchart: diagram })
+    props.origin = props.origin || 'USER'
     if (workflowCategories && workflowCategories.length) {
       props.category = props.category || workflowCategories[0].name
     }
