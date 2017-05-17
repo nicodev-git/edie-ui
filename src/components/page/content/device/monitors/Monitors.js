@@ -114,7 +114,6 @@ export default class Monitors extends React.Component {
     }
     return (
       <div className="v-centered text-left" style={{fontSize: '11px', paddingLeft: '10px'}}>
-        <StatusImg {...this.props}/>
         {texts.map((t, i) =>
           <div key={i}>{t}</div>
         )}
@@ -144,7 +143,7 @@ export default class Monitors extends React.Component {
     const {device} = props
     return (
       <TabPage>
-        <TabPageHeader title={device.name}>
+        <TabPageHeader title="Monitors" titleOptions={<StatusImg {...this.props}/>}>
           {this.renderOptions()}
         </TabPageHeader>
         <TabPageBody tabs={MonitorTabs(device.id)}>

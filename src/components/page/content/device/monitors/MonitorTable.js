@@ -13,9 +13,6 @@ import MonitorPicker from './MonitorPicker'
 import MonitorHistoryModal from './MonitorHistoryModal'
 // import IncidentSocket from 'util/socket/IncidentSocket'
 import MonitorSocket from 'util/socket/MonitorSocket'
-import { Provider } from 'react-redux'
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
-import { store } from 'shared/GetStore'
 
 export default class MonitorTable extends Component {
   constructor (props) {
@@ -261,14 +258,6 @@ export default class MonitorTable extends Component {
     })
   }
 
-  editPortMonitors (type) {
-
-  }
-
-  onFinishPorts (res, req) {
-
-  }
-
   onClickDeleteMonitor () {
     let data = this.getTable().getSelected()
     if (!data) return showAlert('Please choose monitor.')
@@ -286,27 +275,23 @@ export default class MonitorTable extends Component {
 
   render () {
     return (
-      <MuiThemeProvider>
-        <Provider store={store}>
-          <div className="flex-1 flex-vertical">
-            <InfiniteTable
-              cells={this.columns}
-              ref="table"
-              rowMetadata={{'key': 'name'}}
-              selectable
-              onRowDblClick={this.onRowDblClick.bind(this)}
+      <div className="flex-1 flex-vertical">
+        <InfiniteTable
+          cells={this.columns}
+          ref="table"
+          rowMetadata={{'key': 'name'}}
+          selectable
+          onRowDblClick={this.onRowDblClick.bind(this)}
 
-              useExternal={false}
-              data={this.props.device.monitors}
-            />
+          useExternal={false}
+          data={this.props.device.monitors}
+        />
 
-            {this.renderMonitorPicker()}
+        {this.renderMonitorPicker()}
 
-            {this.renderMonitorWizard()}
-            <ReactTooltip/>
-          </div>
-        </Provider>
-      </MuiThemeProvider>
+        {this.renderMonitorWizard()}
+        <ReactTooltip/>
+      </div>
     )
   }
 }

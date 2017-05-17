@@ -111,13 +111,12 @@ export default class FirewallTable extends React.Component {
     const {device, monitorsUpdateTime, monitorFwStatus} = this.props
     return (
       <TabPage>
-        <TabPageHeader title={device.name}>
+        <TabPageHeader title="Firewall" titleOptions={<StatusImg {...this.props}/>}>
           {this.renderOptions()}
         </TabPageHeader>
         <TabPageBody tabs={MonitorTabs(device.id)}>
           <div className="flex-vertical" style={{height: '100%'}}>
             <div className="padding-md">
-              <StatusImg {...this.props}/>
               {monitorsUpdateTime > 0 && <span className="valign-middle">Firewall: {monitorFwStatus ? 'ON' : 'OFF'}</span>}
             </div>
             <div className="flex-1">

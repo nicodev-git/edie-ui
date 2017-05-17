@@ -112,18 +112,11 @@ export default class NetworkTable extends React.Component {
     const {device} = this.props
     return (
       <TabPage>
-        <TabPageHeader title={device.name}>
+        <TabPageHeader title={device.name} titleOptions={<StatusImg {...this.props}/>}>
           {this.renderOptions()}
         </TabPageHeader>
         <TabPageBody tabs={MonitorTabs(device.id)}>
-          <div className="flex-vertical" style={{height: '100%'}}>
-            <div className="padding-md">
-              <StatusImg {...this.props}/>
-            </div>
-            <div className="flex-1">
-              {this.renderBody()}
-            </div>
-          </div>
+          {this.renderBody()}
         </TabPageBody>
       </TabPage>
     )
