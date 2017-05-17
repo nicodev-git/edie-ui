@@ -146,11 +146,13 @@ export default class ApplicationTable extends Component {
   }
   onClickGetHotfix () {
     this.setState({tab: 'hotfix'}, () => {
+      this.props.clearMonitors()
       this.sendTabMessage()
     })
   }
   onClickGetApp () {
     this.setState({tab: 'app'}, () => {
+      this.props.clearMonitors()
       this.sendTabMessage()
     })
   }
@@ -211,7 +213,7 @@ export default class ApplicationTable extends Component {
             rowHeight={40}
 
             useExternal={false}
-            data={this.props.execHotfixes}
+            data={this.props.monitorHotfixes}
           />
         }
         {this.state.tab !== 'hotfix' &&

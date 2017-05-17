@@ -17,6 +17,7 @@ import {
     device: state.dashboard.selectedDevice,
 
     apps: state.devices.apps,
+    monitorHotfixes: state.devices.monitorHotfixes,
 
     params: state.search.params,
     monitorsUpdateTime: state.devices.monitorsUpdateTime
