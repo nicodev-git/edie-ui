@@ -145,10 +145,14 @@ export default class ApplicationTable extends Component {
     })
   }
   onClickGetHotfix () {
-    this.setState({tab: 'hotfix'})
+    this.setState({tab: 'hotfix'}, () => {
+      this.sendTabMessage()
+    })
   }
   onClickGetApp () {
-    this.setState({tab: 'app'})
+    this.setState({tab: 'app'}, () => {
+      this.sendTabMessage()
+    })
   }
   renderOptions () {
     const {query} = this.state
