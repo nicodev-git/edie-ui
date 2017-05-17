@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {TextField, FlatButton} from 'material-ui'
+import {TextField, FlatButton, RaisedButton, Menu, MenuItem, Popover} from 'material-ui'
 import ActionSearch from 'material-ui/svg-icons/action/search'
 import moment from 'moment'
 import {assign} from 'lodash'
@@ -19,7 +19,8 @@ export default class ApplicationTable extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      query: ''
+      query: '',
+      tab: 'app'
     }
     this.columns = [{
       'displayName': 'Name',
@@ -51,6 +52,27 @@ export default class ApplicationTable extends Component {
       'columnName': 'Size',
       'cssClassName': 'width-120'
     }]
+    this.hotfixColumns = [{
+      'displayName': 'Source',
+      'columnName': 'Source',
+      'cssClassName': 'width-180'
+    }, {
+      'displayName': 'HotFixID',
+      'columnName': 'HotFixID',
+      'cssClassName': 'width-160'
+    }, {
+      'displayName': 'Description',
+      'columnName': 'Description',
+      'cssClassName': 'width-200'
+    }, {
+      'displayName': 'InstalledBy',
+      'columnName': 'InstalledBy',
+      'cssClassName': 'width-200'
+    }, {
+      'displayName': 'InstalledOn',
+      'columnName': 'InstalledOn',
+      'cssClassName': 'width-180'
+    }]
   }
   componentWillMount () {
     this.props.clearMonitors()
@@ -67,9 +89,12 @@ export default class ApplicationTable extends Component {
   }
 
   onSocketOpen () {
+    this.sendTabMessage()
+  }
+  sendTabMessage () {
     this.monitorSocket.send({
       action: 'enable-realtime',
-      monitors: 'app',
+      monitors: this.state.tab,
       deviceId: this.props.device.id
     })
   }
@@ -105,6 +130,26 @@ export default class ApplicationTable extends Component {
     this.props.replaceSearchWfs([])
     this.props.updateQueryChips(queryChips)
   }
+  handleTouchTap (event) {
+    event.preventDefault()
+
+    this.setState({
+      open: true,
+      anchorEl: event.currentTarget
+    })
+  }
+
+  handleRequestClose () {
+    this.setState({
+      open: false
+    })
+  }
+  onClickGetHotfix () {
+    this.setState({tab: 'hotfix'})
+  }
+  onClickGetApp () {
+    this.setState({tab: 'app'})
+  }
   renderOptions () {
     const {query} = this.state
     return (
@@ -112,6 +157,21 @@ export default class ApplicationTable extends Component {
         <div className="inline-block">
           <TextField name="query" value={query} onChange={this.onChangeQuery.bind(this)} onKeyUp={this.onKeyupQuery.bind(this)}/>
           <FlatButton icon={<ActionSearch />} onTouchTap={this.onClickSearch.bind(this)}/>
+        </div>
+        <div className="pull-right">
+          <RaisedButton onTouchTap={this.handleTouchTap.bind(this)} label="More" primary/>&nbsp;
+          <Popover
+            open={this.state.open}
+            anchorEl={this.state.anchorEl}
+            anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
+            targetOrigin={{horizontal: 'left', vertical: 'top'}}
+            onRequestClose={this.handleRequestClose.bind(this)}
+          >
+            <Menu>
+              <MenuItem primaryText="Applications" onTouchTap={this.onClickGetApp.bind(this)}/>
+              <MenuItem primaryText="Hotfix" onTouchTap={this.onClickGetHotfix.bind(this)}/>
+            </Menu>
+          </Popover>
         </div>
       </div>
     )
@@ -137,14 +197,30 @@ export default class ApplicationTable extends Component {
   }
   renderBody () {
     return (
-      <InfiniteTable
-        cells={this.columns}
-        ref="table"
-        rowMetadata={{'key': 'id'}}
-        selectable
-        data={this.props.apps}
-        useExternal={false}
-      />
+      <div style={{height: '100%'}}>
+        {this.state.tab === 'hotfix' &&
+          <InfiniteTable
+            cells={this.hotfixColumns}
+            ref="table1"
+            rowMetadata={{'key': 'HotFixID'}}
+            selectable
+            rowHeight={40}
+
+            useExternal={false}
+            data={this.props.execHotfixes}
+          />
+        }
+        {this.state.tab !== 'hotfix' &&
+          <InfiniteTable
+            cells={this.columns}
+            ref="table2"
+            rowMetadata={{'key': 'id'}}
+            selectable
+            data={this.props.apps}
+            useExternal={false}
+          />
+        }
+      </div>
     )
   }
   render () {
