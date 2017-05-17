@@ -32,7 +32,10 @@ export default class NetworkTable extends React.Component {
       'columnName': 'Description'
     }, {
       'displayName': 'Enabled',
-      'columnName': 'Enabled'
+      'columnName': 'Enabled',
+      'customComponent': p => {
+        return <span>{p.data ? 'YES' : 'NO'}</span>
+      }
     }]
   }
   componentWillMount () {
