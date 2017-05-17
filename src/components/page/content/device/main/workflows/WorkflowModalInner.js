@@ -59,6 +59,8 @@ export default class WorkflowModalInner extends Component {
           rules={rules}
           onRuleChange={this.props.onRuleChange}
           onRuleClick={this.props.onRuleClick}
+          onClickKeyChip={this.props.onClickKeyChip}
+          onClickValueChip={this.props.onClickValueChip}
           ruleModal={ruleModal}
           selected={selectedRuleIndex}
         />

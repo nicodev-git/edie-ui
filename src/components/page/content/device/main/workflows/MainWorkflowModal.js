@@ -157,6 +157,11 @@ class MainWorkflowModal extends Component {
     this.props.change('display_incident_desc', 'SHOW_RAW_DATA')
   }
 
+  onClickKeyChip () {
+  }
+  onClickValueChip () {
+  }
+
   render () {
     const {handleSubmit} = this.props
     let isDiagramButton = true
@@ -190,6 +195,8 @@ class MainWorkflowModal extends Component {
         onClickDiagram={this.onClickDiagram.bind(this)}
         onDiagramModalClose={this.onDiagramModalClose.bind(this)}
         onClickRawData={this.onClickRawData.bind(this)}
+        onClickKeyChip={this.onClickKeyChip.bind(this)}
+        onClickValueChip={this.onClickValueChip.bind(this)}
         {...this.props}
       />
     )
