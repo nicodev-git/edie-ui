@@ -301,10 +301,15 @@ export default function (state = INITIAL_STATE, action) {
         monitorsUpdateTime: 0,
         monitorHotfixes: [],
         monitorFwRules: [],
-        monitorFwStatus: false
+        monitorFwStatus: false,
+        monitorNetworks: []
       }
     case UPDATE_MONITOR_REALTIME: {
-      const {os, cpu, disk, memory, process, app, eventlog, service, user, hotfix, firewall, firewallRules} = action.data || {}
+      const {
+        os, cpu, disk, memory, process, app, eventlog,
+        service, user, hotfix, firewall, firewallRules,
+        network
+      } = action.data || {}
       const newState = { ...state, monitorsUpdateTime: new Date().getTime() }
       if (os) newState.monitorOS = {dataobj: os}
       if (cpu) newState.monitorCpu = {dataobj: cpu}
@@ -318,6 +323,7 @@ export default function (state = INITIAL_STATE, action) {
       if (hotfix) newState.monitorHotfixes = hotfix
       if (firewallRules) newState.monitorFwRules = firewallRules.map((u, i) => assign(u, {id: i}))
       if (firewall) newState.monitorFwStatus = firewall.status
+      if (network) newState.monitorNetworks = network
       return newState
     }
   }
