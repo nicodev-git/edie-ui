@@ -59,6 +59,8 @@ export default class WorkflowModalInner extends Component {
           onRuleClick={this.props.onRuleClick}
           ruleModal={ruleModal}
           selected={selectedRuleIndex}
+          onClickKeyChip={this.props.onClickKeyChip}
+          onClickValueChip={this.props.onClickValueChip}
         />
       )
     } else if (current === 4) {
@@ -68,8 +70,6 @@ export default class WorkflowModalInner extends Component {
           onEditAction={this.props.onClickEditAction}
           onRemoveAction={this.props.onClickRemoveAction}
           onActionClick={this.props.onActionClick}
-          onClickKeyChip={this.props.onClickKeyChip}
-          onClickValueChip={this.props.onClickValueChip}
           actions={actions}
           selected={selectedActionIndex}
           actionModal={actionModal}

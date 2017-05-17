@@ -156,10 +156,15 @@ class MainWorkflowModal extends Component {
   onClickRawData () {
     this.props.change('display_incident_desc', 'SHOW_RAW_DATA')
   }
-
-  onClickKeyChip () {
+  onClickKeyChip (key) {
+    const { rules } = this.state
+    this.setState({rules: concat([{key, value: ''}], rules)})
   }
-  onClickValueChip () {
+  onClickValueChip (value) {
+    const { rules, selectedRuleIndex } = this.state
+    if (selectedRuleIndex < 0 || rules.length <= selectedRuleIndex) return null
+    rules[selectedRuleIndex].value = `${value}${rules[selectedRuleIndex].value}${value}`
+    this.setState({rules})
   }
 
   render () {

@@ -9,6 +9,7 @@ export default class MainWorkflowModalView extends Component {
       <Modal
         show
         aria-labelledby="ModalHeader"
+        onHide={() => {}}
         className="bootstrap-dialog type-primary">
         <Header name="Workflow"/>
         <div className="modal-body bootstrap-dialog-message p-none">
