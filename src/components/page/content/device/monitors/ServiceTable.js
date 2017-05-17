@@ -60,12 +60,12 @@ export default class ServiceTable extends React.Component {
       this.props.updateMonitorRealTime(msg.data)
     }
   }
-  sendCommandMessage (command, params) {
+  sendCommandMessage (name, params) {
     this.monitorSocket.send({
       action: 'command',
       deviceId: this.props.device.id,
       data: {
-        command,
+        name,
         params
       }
     })
