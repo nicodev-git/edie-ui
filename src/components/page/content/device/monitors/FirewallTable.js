@@ -17,23 +17,31 @@ export default class FirewallTable extends React.Component {
     }
     this.columns = [{
       'displayName': 'Name',
-      'columnName': 'Filename',
-      'cssClassName': 'width-180'
+      'columnName': 'Name'
     }, {
-      'displayName': 'Id',
-      'columnName': 'Id',
-      'cssClassName': 'width-80'
+      'displayName': 'Source',
+      'columnName': 'LocalIP',
+      'customComponent': p => {
+        const data = p.rowData
+        return <span>{data.Direction === 'In' ? data.RemoteIP : data.LocalIP}</span>
+      }
     }, {
-      'displayName': 'Owner',
-      'columnName': 'Owner',
-      'cssClassName': 'width-220'
+      'displayName': 'Destination',
+      'columnName': 'RemoteIP',
+      'customComponent': p => {
+        const data = p.rowData
+        return <span>{data.Direction === 'In' ? data.LocalIP : data.RemoteIP}</span>
+      }
     }, {
-      'displayName': 'Parent',
-      'columnName': 'Parent',
-      'cssClassName': 'width-120'
+      'displayName': 'Service',
+      'columnName': 'RemotePort',
+      'customComponent': p => {
+        const data = p.rowData
+        return <span>{data.Direction === 'In' ? data.LocalPort : data.RemotePort} / {data.Protocol}</span>
+      }
     }, {
-      'displayName': 'Location',
-      'columnName': 'Location'
+      'displayName': 'Action',
+      'columnName': 'Action'
     }]
   }
   componentWillMount () {
@@ -110,7 +118,7 @@ export default class FirewallTable extends React.Component {
           <div className="flex-vertical" style={{height: '100%'}}>
             <div className="padding-md">
               <StatusImg {...this.props}/>
-              {monitorsUpdateTime > 0 && <span>Firewall: {monitorFwStatus ? 'ON' : 'OFF'}</span>}
+              {monitorsUpdateTime > 0 && <span className="valign-middle">Firewall: {monitorFwStatus ? 'ON' : 'OFF'}</span>}
             </div>
             <div className="flex-1">
               {this.renderBody()}
