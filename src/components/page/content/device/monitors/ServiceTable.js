@@ -1,5 +1,5 @@
 import React from 'react'
-
+import {RaisedButton} from 'material-ui'
 import InfiniteTable from 'components/shared/InfiniteTable'
 
 import TabPage from 'components/shared/TabPage'
@@ -23,9 +23,14 @@ export default class ServiceTable extends React.Component {
       'displayName': 'Display Name',
       'columnName': 'DisplayName'
     }, {
-      'displayName': 'Status',
+      'displayName': '    ',
       'columnName': 'Status',
-      'cssClassName': 'width-120'
+      'cssClassName': 'width-200',
+      'customComponent': (props) => {
+        const val = props.data
+        const label = val === 'Running' ? 'Stop' : 'Start'
+        return <RaisedButton label={label} onTouchTap={this.onClickStart.bind(this, props.rowData)} primary={val !== 'Running'}/>
+      }
     }]
   }
   componentWillMount () {
@@ -54,6 +59,14 @@ export default class ServiceTable extends React.Component {
     if (msg.action === 'update' && msg.deviceId === this.props.device.id) {
       this.props.updateMonitorRealTime(msg.data)
     }
+  }
+  onClickStart (service) {
+    // if (service.Status === 'Running') {
+    //   this.sendCommandMessage('StopServiceCommand', {service: service.ServiceName})
+    // } else {
+    //   this.sendCommandMessage('StartServiceCommand', {service: service.ServiceName})
+    // }
+    // this.sendCommandMessage('GetServicesCommand')
   }
   renderOptions () {
     return (
