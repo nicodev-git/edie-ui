@@ -1,4 +1,5 @@
 import React from 'react'
+import InfiniteTable from 'components/shared/InfiniteTable'
 
 import TabPage from 'components/shared/TabPage'
 import TabPageBody from 'components/shared/TabPageBody'
@@ -18,29 +19,20 @@ export default class NetworkTable extends React.Component {
       'displayName': 'Name',
       'columnName': 'Name'
     }, {
-      'displayName': 'Source',
-      'columnName': 'LocalIP',
-      'customComponent': p => {
-        const data = p.rowData
-        return <span>{data.Direction === 'In' ? data.RemoteIP : data.LocalIP}</span>
-      }
+      'displayName': 'Address',
+      'columnName': 'Address'
     }, {
-      'displayName': 'Destination',
-      'columnName': 'RemoteIP',
-      'customComponent': p => {
-        const data = p.rowData
-        return <span>{data.Direction === 'In' ? data.LocalIP : data.RemoteIP}</span>
-      }
+      'displayName': 'MAC Address',
+      'columnName': 'MAC'
     }, {
-      'displayName': 'Service',
-      'columnName': 'RemotePort',
-      'customComponent': p => {
-        const data = p.rowData
-        return <span>{data.Direction === 'In' ? data.LocalPort : data.RemotePort} / {data.Protocol}</span>
-      }
+      'displayName': 'Speed',
+      'columnName': 'Speed'
     }, {
-      'displayName': 'Action',
-      'columnName': 'Action'
+      'displayName': 'Description',
+      'columnName': 'Description'
+    }, {
+      'displayName': 'Enabled',
+      'columnName': 'Enabled'
     }]
   }
   componentWillMount () {
@@ -94,18 +86,16 @@ export default class NetworkTable extends React.Component {
   }
   renderBody () {
     return (
-      <div style={{height: '100%', overflow: 'auto'}}>
-        <table className="table table-hover">
-          <thead>
-          <tr><th>Name</th></tr>
-          </thead>
-          <tbody>
-          {this.props.monitorNetworks.map((m, i) =>
-            <tr key={i}><td>{m.Name}</td></tr>
-          )}
-          </tbody>
-        </table>
-      </div>
+      <InfiniteTable
+        cells={this.columns}
+        ref="table"
+        rowMetadata={{'key': 'Name'}}
+        selectable
+        rowHeight={40}
+
+        useExternal={false}
+        data={this.props.monitorNetworks}
+      />
     )
   }
   render () {
