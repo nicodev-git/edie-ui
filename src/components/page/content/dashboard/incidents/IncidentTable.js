@@ -32,6 +32,7 @@ export default class IncidentTable extends Component {
       'customComponent': (props) => {
         const {data} = props
         if (!data) return <span/>
+        if (this.props.showAbsDate) return <span>{moment(new Date(data)).format('YYYY-MM-DD HH:mm:ss')}</span>
         return (
           <span data-tip={moment(new Date(data)).format('YYYY-MM-DD HH:mm:ss')}>
               <TimeAgo date={data}/>

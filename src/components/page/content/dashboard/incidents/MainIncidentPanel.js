@@ -17,8 +17,9 @@ export default class MainIncidentPanel extends React.Component {
   }
 
   renderTable () {
+    const showAbsDate = this.getOptionValue('SHOW_ABS_DATE') === 'true'
     return (
-      <IncidentTable {...this.props} ref="table"/>
+      <IncidentTable {...this.props} showAbsDate={showAbsDate} ref="table"/>
     )
   }
 
@@ -28,6 +29,18 @@ export default class MainIncidentPanel extends React.Component {
 
   onClickSearch () {
 
+  }
+
+  getOption (key) {
+    const list = (this.props.envVars || []).filter(u => u.envvars && u.envvars.key === key)
+    if (list.length) return list[0]
+    return null
+  }
+
+  getOptionValue (key, value = 'value1') {
+    const option = this.getOption(key)
+    if (!option) return ''
+    return option.envvars[value]
   }
 
   refreshTable () {
