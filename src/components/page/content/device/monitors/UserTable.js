@@ -10,6 +10,7 @@ import MonitorSocket from 'util/socket/MonitorSocket'
 import StatusImg from './StatusImg'
 
 import LocalUserModal from './LocalUserModal'
+import {showConfirm} from 'components/shared/Alert'
 
 export default class UserTable extends React.Component {
   constructor (props) {
@@ -69,11 +70,39 @@ export default class UserTable extends React.Component {
   onSaveUser (values) {
     this.sendCommandMessage('CreateUserCommand', values)
   }
+  onClickDelete () {
+    const sel = this.refs.table.getSelected()
+    if (!sel) return
+    showConfirm('Click OK to delete user.', btn => {
+      if (btn !== 'ok') return
+      this.sendCommandMessage('DeleteUserCommand', {
+        username: sel.Name
+      })
+    })
+  }
+  onClickEnable () {
+    const sel = this.refs.table.getSelected()
+    if (!sel) return
+    this.sendCommandMessage('EnableUserCommand', {
+      username: sel.Name
+    })
+  }
+  onClickDisable () {
+    const sel = this.refs.table.getSelected()
+    if (!sel) return
+    this.sendCommandMessage('DisableUserCommand', {
+      username: sel.Name
+    })
+  }
+
   renderOptions () {
     return (
       <div className="text-center">
         <div className="pull-right">
-          <RaisedButton label="Create" onTouchTap={this.onClickCreate.bind(this)}/>
+          <RaisedButton label="Create" onTouchTap={this.onClickCreate.bind(this)}/>&nbsp;
+          <RaisedButton label="Enable" onTouchTap={this.onClickEnable.bind(this)}/>&nbsp;
+          <RaisedButton label="Disable" onTouchTap={this.onClickDisable.bind(this)}/>&nbsp;
+          <RaisedButton label="Delete" onTouchTap={this.onClickDelete.bind(this)}/>&nbsp;
         </div>
       </div>
     )
