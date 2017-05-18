@@ -3,9 +3,10 @@ import SelectField from 'material-ui/SelectField'
 import MenuItem from 'material-ui/MenuItem'
 import { errorStyle, underlineFocusStyle, inputStyle, selectedItemStyle } from 'style/materialStyles'
 
-const FormSelect = ({input, label, style, meta: { touched, error }, options}) => (
+const FormSelect = ({input, label, floatingLabel, style, meta: { touched, error }, options}) => (
   <SelectField
     hintText={label}
+    floatingLabelText={floatingLabel}
     errorText={touched && error}
     errorStyle={errorStyle}
     underlineStyle={underlineFocusStyle}

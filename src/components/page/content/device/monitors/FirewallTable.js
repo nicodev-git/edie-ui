@@ -11,6 +11,8 @@ import MonitorSocket from 'util/socket/MonitorSocket'
 import StatusImg from './StatusImg'
 import FwRuleModal from './FwRuleModal'
 
+import {showConfirm} from 'components/shared/Alert'
+
 export default class FirewallTable extends React.Component {
   constructor (props) {
     super(props)
@@ -97,9 +99,26 @@ export default class FirewallTable extends React.Component {
     this.props.showFwRuleModal(true)
   }
   onSaveRule (values) {
-    // this.sendCommandMessage('AddFirewallRuleCommand', values)
+    console.log(values)
+    this.sendCommandMessage('AddFirewallRuleCommand', values)
   }
   onClickDeleteAll () {
+    showConfirm('Click OK to remove all rules.', btn => {
+      if (btn !== 'ok') return
+      this.sendCommandMessage('RemoveFirewallRuleCommand', {
+        rule: 'all'
+      })
+    })
+  }
+  onClickDelete () {
+    const sel = this.refs.table.getSelected()
+    if (!sel) return
+    showConfirm('Click OK to remove the rule.', btn => {
+      if (btn !== 'ok') return
+      this.sendCommandMessage('RemoveFirewallRuleCommand', {
+        rule: sel.Name
+      })
+    })
   }
   renderOptions () {
     return (
@@ -107,6 +126,7 @@ export default class FirewallTable extends React.Component {
         {this.props.monitorsUpdateTime > 0 && <Toggle toggled={this.props.monitorFwStatus} onToggle={this.onToggleStatus.bind(this)}/>}
         <div className="pull-right">
           <RaisedButton label="Add" onTouchTap={this.onClickAdd.bind(this)} className="valign-top"/>&nbsp;
+          <RaisedButton label="Delete" onTouchTap={this.onClickDelete.bind(this)} className="valign-top"/>&nbsp;
           <RaisedButton label="Delete All" onTouchTap={this.onClickDeleteAll.bind(this)} className="valign-top"/>&nbsp;
         </div>
       </div>

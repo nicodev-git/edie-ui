@@ -2,7 +2,7 @@ import React from 'react'
 import {reduxForm, formValueSelector} from 'redux-form'
 import {connect} from 'react-redux'
 
-import FwRuleModalView from 'components/modal'
+import {FwRuleModalView} from 'components/modal'
 
 @connect(
   state => ({
