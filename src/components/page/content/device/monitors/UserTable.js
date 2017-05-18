@@ -1,5 +1,5 @@
 import React from 'react'
-
+import {RaisedButton} from 'material-ui'
 import InfiniteTable from 'components/shared/InfiniteTable'
 
 import TabPage from 'components/shared/TabPage'
@@ -51,10 +51,14 @@ export default class UserTable extends React.Component {
       this.props.updateMonitorRealTime(msg.data)
     }
   }
+  onClickCreate () {
+  }
   renderOptions () {
     return (
       <div className="text-center">
-        <div className="inline-block"/>
+        <div className="pull-right">
+          <RaisedButton label="Create" onTouchTap={this.onClickCreate.bind(this)}/>
+        </div>
       </div>
     )
   }
