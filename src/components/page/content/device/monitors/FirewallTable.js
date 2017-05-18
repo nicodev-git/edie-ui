@@ -1,6 +1,6 @@
 import React from 'react'
 import InfiniteTable from 'components/shared/InfiniteTable'
-import {Toggle} from 'material-ui'
+import {Toggle, RaisedButton} from 'material-ui'
 
 import TabPage from 'components/shared/TabPage'
 import TabPageBody from 'components/shared/TabPageBody'
@@ -9,6 +9,7 @@ import MonitorTabs from './MonitorTabs'
 import MonitorSocket from 'util/socket/MonitorSocket'
 
 import StatusImg from './StatusImg'
+import FwRuleModal from './FwRuleModalView'
 
 export default class FirewallTable extends React.Component {
   constructor (props) {
@@ -87,26 +88,26 @@ export default class FirewallTable extends React.Component {
     const selected = this.refs.table.getSelected()
     this.props.openProcessModal(selected)
   }
-  onChangeQuery (e) {
-    this.setState({
-      query: e.target.value
-    })
-  }
-  onKeyupQuery (e) {
-    if (e.keyCode === 13) {
-      this.onClickSearch()
-    }
-  }
   onToggleStatus (e, checked) {
     this.sendCommandMessage('SetFirewallStatusCommand', {
       status: checked ? 'on' : 'off'
     })
   }
+  onClickAdd () {
+  }
+  onSaveRule (values) {
+    // this.sendCommandMessage('AddFirewallRuleCommand', values)
+  }
+  onClickDeleteAll () {
+  }
   renderOptions () {
-    if (!this.props.monitorsUpdateTime) return
     return (
       <div>
-        <Toggle toggled={this.props.monitorFwStatus} onToggle={this.onToggleStatus.bind(this)}/>
+        {this.props.monitorsUpdateTime > 0 && <Toggle toggled={this.props.monitorFwStatus} onToggle={this.onToggleStatus.bind(this)}/>}
+        <div className="pull-right">
+          <RaisedButton label="Add" onTouchTap={this.onClickAdd.bind(this)} className="valign-top"/>&nbsp;
+          <RaisedButton label="Delete All" onTouchTap={this.onClickDeleteAll.bind(this)} className="valign-top"/>&nbsp;
+        </div>
       </div>
     )
   }
@@ -124,6 +125,12 @@ export default class FirewallTable extends React.Component {
       />
     )
   }
+  renderRuleModal () {
+    if (!this.props.fwRuleModalOpen) return
+    return (
+      <FwRuleModal {...this.props} onSave={this.onSaveRule.bind(this)}/>
+    )
+  }
   render () {
     const {device} = this.props
     return (
@@ -133,6 +140,7 @@ export default class FirewallTable extends React.Component {
         </TabPageHeader>
         <TabPageBody tabs={MonitorTabs(device.id)}>
           {this.renderBody()}
+          {this.renderRuleModal()}
         </TabPageBody>
       </TabPage>
     )

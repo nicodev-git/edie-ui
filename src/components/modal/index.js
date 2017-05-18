@@ -32,6 +32,7 @@ import RelDevicesModalView from './RelDevicesModalView'
 import IrrelDevicesModalView from './IrrelDevicesModalView'
 import SearchFieldsModalView from './SearchFieldsModalView'
 import LocalUserModalView from './LocalUserModalView'
+import FwRuleModalView from './FwRuleModalView'
 
 export {
   ActivationModalView,
@@ -67,5 +68,6 @@ export {
   RelDevicesModalView,
   IrrelDevicesModalView,
   SearchFieldsModalView,
-  LocalUserModalView
+  LocalUserModalView,
+  FwRuleModalView
 }
