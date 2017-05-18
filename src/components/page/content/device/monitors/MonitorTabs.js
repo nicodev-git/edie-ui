@@ -23,5 +23,8 @@ export default (deviceId) => {
   }, {
     title: 'Network',
     path: `/device/${deviceId}/monitor/network`
+  }, {
+    title: 'Command',
+    path: `/device/${deviceId}/monitor/command`
   }]
 }

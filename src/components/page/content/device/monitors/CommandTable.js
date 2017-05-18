@@ -3,12 +3,13 @@ import {reduxForm, Field} from 'redux-form'
 import {connect} from 'react-redux'
 import {RaisedButton} from 'material-ui'
 
-
 import TabPage from 'components/shared/TabPage'
 import TabPageBody from 'components/shared/TabPageBody'
 import TabPageHeader from 'components/shared/TabPageHeader'
 import MonitorTabs from './MonitorTabs'
 import MonitorSocket from 'util/socket/MonitorSocket'
+
+import {FormInput, FormCheckbox} from 'components/modal/parts'
 
 @connect(
   state => ({initialValues: {output: true}})
@@ -53,9 +54,8 @@ export default class CommandTable extends React.Component {
     })
   }
   onSubmit (values) {
-    console.log(values)
-    // this.props.clearExecData()
-    // this.sendCommandMessage('RunCommand', values)
+    this.props.clearMonitors()
+    this.sendCommandMessage('RunCommand', values)
   }
   renderOptions () {
     return (

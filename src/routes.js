@@ -41,6 +41,8 @@ import DeviceServices from './containers/page/content/device/monitors/ServiceCon
 import DeviceUsers from './containers/page/content/device/monitors/UsersContainer'
 import DeviceFirewall from './containers/page/content/device/monitors/FirewallContainer'
 import DeviceNetwork from './containers/page/content/device/monitors/NetworkContainer'
+import DeviceCommand from './containers/page/content/device/monitors/CommandContainer'
+
 import DeviceConnectedContainer from './containers/page/content/device/connected/ConnectedContainer'
 import DeviceInfoContainer from './containers/page/content/device/info/InfoContainer'
 import DeviceTopology from './containers/page/content/device/topology/TopologyContainer'
@@ -101,6 +103,7 @@ export default(
           <Route path="user" component={DeviceUsers}/>
           <Route path="firewall" component={DeviceFirewall}/>
           <Route path="network" component={DeviceNetwork}/>
+          <Route path="command" component={DeviceCommand}/>
         </Route>
         <Route path="connected" component={DeviceConnectedContainer}/>
         <Route path="info" component={DeviceInfoContainer}/>

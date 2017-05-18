@@ -307,6 +307,7 @@ export default function (state = INITIAL_STATE, action) {
         monitorFwStatus: false,
         monitorNetworks: [],
         monitorLogNames: ['Application'],
+        monitorCommandResult: '',
 
         selectedLogName: 'Application'
       }
@@ -315,7 +316,7 @@ export default function (state = INITIAL_STATE, action) {
         os, cpu, disk, memory, process, app,
         eventlog, logNames,
         service, user, hotfix, firewall, firewallRules,
-        network
+        network, commandResult
       } = action.data || {}
       const newState = { ...state, monitorsUpdateTime: new Date().getTime() }
       if (os) newState.monitorOS = {dataobj: os}
@@ -332,6 +333,7 @@ export default function (state = INITIAL_STATE, action) {
       if (firewallRules) newState.monitorFwRules = firewallRules.map((u, i) => assign(u, {id: i}))
       if (firewall) newState.monitorFwStatus = firewall.status
       if (network) newState.monitorNetworks = network
+      if (commandResult) newState.monitorCommandResult = commandResult
       return newState
     }
 
