@@ -64,6 +64,7 @@ const initialState = {
     apps: [],
     processes: [],
     monitorNetworks: [],
+    moniotrLogNames: [],
     selectedLogName: 'Application',
 
     workflowCategories: [],

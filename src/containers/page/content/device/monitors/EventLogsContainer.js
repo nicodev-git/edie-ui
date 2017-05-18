@@ -10,7 +10,9 @@ import {
   replaceSearchWfs,
   updateQueryChips,
   updateMonitorRealTime,
-  clearMonitors
+  clearMonitors,
+
+  selectLogName
 } from 'actions'
 
 @connect(
@@ -31,7 +33,9 @@ import {
     replaceSearchWfs,
     updateQueryChips,
     updateMonitorRealTime,
-    clearMonitors
+    clearMonitors,
+
+    selectLogName
   }
 )
 @withRouter

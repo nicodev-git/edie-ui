@@ -311,7 +311,8 @@ export default function (state = INITIAL_STATE, action) {
       }
     case UPDATE_MONITOR_REALTIME: {
       const {
-        os, cpu, disk, memory, process, app, eventlog,
+        os, cpu, disk, memory, process, app,
+        eventlog, logNames,
         service, user, hotfix, firewall, firewallRules,
         network
       } = action.data || {}
@@ -323,6 +324,7 @@ export default function (state = INITIAL_STATE, action) {
       if (process) newState.processes = process
       if (app) newState.apps = app.map((u, i) => assign(u, {id: i}))
       if (eventlog) newState.eventLogs = eventlog.map((u, i) => assign(u, {id: i}))
+      if (logNames) newState.monitorLogNames = logNames
       if (service) newState.services = service
       if (user) newState.monitorUsers = user
       if (hotfix) newState.monitorHotfixes = hotfix
