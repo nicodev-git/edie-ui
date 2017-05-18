@@ -9,6 +9,8 @@ import MonitorTabs from './MonitorTabs'
 import MonitorSocket from 'util/socket/MonitorSocket'
 import StatusImg from './StatusImg'
 
+import LocalUserModal from './LocalUserModal'
+
 export default class UserTable extends React.Component {
   constructor (props) {
     super(props)
@@ -88,6 +90,12 @@ export default class UserTable extends React.Component {
         useExternal={false}
         data={this.props.monitorUsers}
       />
+    )
+  }
+  renderLocalUserModal () {
+    if (!this.props.localUserModalOpen) return
+    return (
+      <LocalUserModal {...this.props}/>
     )
   }
   render () {
