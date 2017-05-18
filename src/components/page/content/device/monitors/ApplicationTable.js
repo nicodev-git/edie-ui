@@ -13,7 +13,7 @@ import MonitorTabs from './MonitorTabs'
 import StatusImg from './StatusImg'
 import MonitorSocket from 'util/socket/MonitorSocket'
 
-import { parseSearchQuery } from 'shared/Global'
+import { parseSearchQuery, dateFormat } from 'shared/Global'
 
 export default class ApplicationTable extends Component {
   constructor (props) {
@@ -123,8 +123,8 @@ export default class ApplicationTable extends Component {
       severity: 'HIGH,MEDIUM',
       collections: 'event',
       workflow: '',
-      dateFrom: moment().startOf('year').valueOf(),
-      dateTo: moment().endOf('year').valueOf()
+      dateFrom: moment().startOf('year').format(dateFormat),
+      dateTo: moment().endOf('year').format(dateFormat)
     }))
 
     this.props.replaceSearchWfs([])
