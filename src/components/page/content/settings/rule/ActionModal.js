@@ -26,7 +26,7 @@ class ActionModal extends Component {
     ]
     let content = [
       {name: 'Name'},
-      {type: 'select', name: 'Type', options: options},
+      {type: 'select', name: 'Type', key: 'actionType', options: options},
       {name: 'Command'},
       {name: 'Params'}
     ]
@@ -49,7 +49,7 @@ export default connect(
     editWfAction: state.devices.editWfAction,
     validate: validate,
     initialValues: assign({
-      type: 'OPEN_INCIDENT'
+      actionType: 'OPEN_INCIDENT'
     }, state.devices.editWfAction)
   }), {
     closeWfActionModal

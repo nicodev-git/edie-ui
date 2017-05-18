@@ -24,21 +24,21 @@ const SimpleModalForm = ({show, onHide, onSubmit, header, subheader, buttonText,
               case 'select':
                 return (<Field
                   key={elem.name.replace(/\s+/g, '')}
-                  name={elem.name.toLowerCase().replace(/\s+/g, '')}
+                  name={elem.key || elem.name.toLowerCase().replace(/\s+/g, '')}
                   component={FormSelect}
                   label={elem.name}
                   options={elem.options}/>)
               case 'password':
                 return (<Field
                   key={elem.name.replace(/\s+/g, '')}
-                  name={elem.name.toLowerCase().replace(/\s+/g, '')}
+                  name={elem.key || elem.name.toLowerCase().replace(/\s+/g, '')}
                   type="password"
                   component={FormInput}
                   label={elem.name}/>)
               default:
                 return (<Field
                   key={elem.name.replace(/\s+/g, '')}
-                  name={elem.name.toLowerCase().replace(/\s+/g, '')}
+                  name={elem.key || elem.name.toLowerCase().replace(/\s+/g, '')}
                   component={FormInput}
                   label={elem.name}/>)
             }
