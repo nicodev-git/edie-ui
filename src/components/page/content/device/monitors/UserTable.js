@@ -25,6 +25,12 @@ export default class UserTable extends React.Component {
     }, {
       'displayName': 'Domain',
       'columnName': 'Domain'
+    }, {
+      'displayName': 'Status',
+      'columnName': 'Disabled',
+      'customComponent': p => {
+        return <span>{p.data ? 'Disabled' : 'Enabled'}</span>
+      }
     }]
   }
   componentWillMount () {
