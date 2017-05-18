@@ -110,6 +110,15 @@ export default class General extends React.Component {
           />
         </div>
 
+        <div className="col-md-12 margin-md-bottom bt-gray">
+          <div className="pull-left width-200">
+            <Checkbox
+              label="Show absolute date"
+              checked={this.getOptionValue('SHOW_ABS_DATE') === 'true'}
+              onCheck={this.onChangeAbsDate.bind(this)}/>
+          </div>
+        </div>
+
         <div className="col-md-12 margin-lg-top" style={{color: '#888'}}>
           <label className="margin-sm-top margin-sm-bottom">
             Customer ID: {this.getOptionValue('CUSTOMER_ID') || '[None]'}
@@ -188,6 +197,11 @@ export default class General extends React.Component {
 
   onChangeCustomerId (value) {
     this.updateOption('CUSTOMER_ID', value.message)
+  }
+
+  onChangeAbsDate (e) {
+    let {checked} = e.target
+    this.updateOption('SHOW_ABS_DATE', `${checked}`)
   }
 
   updateOption (name, value1, value2 = '') {
