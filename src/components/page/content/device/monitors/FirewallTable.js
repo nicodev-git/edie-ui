@@ -9,7 +9,7 @@ import MonitorTabs from './MonitorTabs'
 import MonitorSocket from 'util/socket/MonitorSocket'
 
 import StatusImg from './StatusImg'
-import FwRuleModal from './FwRuleModalView'
+import FwRuleModal from './FwRuleModal'
 
 export default class FirewallTable extends React.Component {
   constructor (props) {
@@ -94,6 +94,7 @@ export default class FirewallTable extends React.Component {
     })
   }
   onClickAdd () {
+    this.props.showFwRuleModal(true)
   }
   onSaveRule (values) {
     // this.sendCommandMessage('AddFirewallRuleCommand', values)

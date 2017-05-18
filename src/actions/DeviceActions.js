@@ -88,6 +88,7 @@ import {
   CLEAR_MONITORS,
   SHOW_LOCAL_USER_MODAL,
   SELECT_LOGNAME,
+  SHOW_FW_RULE_MODAL,
 
   NO_AUTH_ERROR
 } from './types'
@@ -931,5 +932,11 @@ export const showLocalUserModal = (visible) => {
 export function selectLogName (logName) {
   return dispatch => {
     dispatch({type: SELECT_LOGNAME, logName})
+  }
+}
+
+export function showFwRuleModal (visible) {
+  return dispatch => {
+    dispatch({type: SHOW_FW_RULE_MODAL, visible})
   }
 }

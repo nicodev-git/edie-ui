@@ -82,6 +82,7 @@ import {
   CLEAR_MONITORS,
   SHOW_LOCAL_USER_MODAL,
   SELECT_LOGNAME,
+  SHOW_FW_RULE_MODAL,
 
   UPDATE_DEVICE_ERROR
 } from 'actions/types'
@@ -338,6 +339,8 @@ export default function (state = INITIAL_STATE, action) {
       return { ...state, localUserModalOpen: !!action.visible }
     case SELECT_LOGNAME:
       return { ...state, selectedLogName: action.logName }
+    case SHOW_FW_RULE_MODAL:
+      return { ...state, fwRuleModalOpen: !!action.visible }
   }
   return state
 }

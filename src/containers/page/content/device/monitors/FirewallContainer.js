@@ -3,13 +3,13 @@ import Firewall from 'components/page/content/device/monitors/FirewallTable'
 import { withRouter } from 'react-router'
 import { connect } from 'react-redux'
 import {
-  fetchDeviceApps,
-
   updateSearchParams,
   replaceSearchWfs,
   updateQueryChips,
   updateMonitorRealTime,
-  clearMonitors
+  clearMonitors,
+
+  showFwRuleModal
 } from 'actions'
 
 @connect(
@@ -18,18 +18,19 @@ import {
 
     monitorFwRules: state.devices.monitorFwRules,
     monitorFwStatus: state.devices.monitorFwStatus,
+    fwRuleModalOpen: state.devices.fwRuleModalOpen,
 
     params: state.search.params,
     monitorsUpdateTime: state.devices.monitorsUpdateTime
   }),
   {
-    fetchDeviceApps,
-
     updateSearchParams,
     replaceSearchWfs,
     updateQueryChips,
     updateMonitorRealTime,
-    clearMonitors
+    clearMonitors,
+
+    showFwRuleModal
   }
 )
 @withRouter
