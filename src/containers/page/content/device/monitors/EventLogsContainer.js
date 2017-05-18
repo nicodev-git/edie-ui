@@ -18,6 +18,8 @@ import {
     device: state.dashboard.selectedDevice,
 
     eventLogs: state.devices.eventLogs,
+    selectedLogName: state.devices.selectedLogName,
+    monitorLogNames: state.devices.monitorLogNames,
 
     params: state.search.params,
     monitorsUpdateTime: state.devices.monitorsUpdateTime

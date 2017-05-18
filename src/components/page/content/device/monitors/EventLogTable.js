@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {TextField, FlatButton} from 'material-ui'
+import {TextField, FlatButton, SelectField, MenuItem} from 'material-ui'
 import ActionSearch from 'material-ui/svg-icons/action/search'
 import moment from 'moment'
 import {assign} from 'lodash'
@@ -60,7 +60,10 @@ export default class EventLogTable extends Component {
     this.monitorSocket.send({
       action: 'enable-realtime',
       monitors: 'eventlog',
-      deviceId: this.props.device.id
+      deviceId: this.props.device.id,
+      data: {
+        name: this.props.selectedLogName
+      }
     })
   }
   onMonitorMessage (msg) {
@@ -95,10 +98,23 @@ export default class EventLogTable extends Component {
     this.props.replaceSearchWfs([])
     this.props.updateQueryChips(queryChips)
   }
+  onChangeLogName () {
+  }
   renderOptions () {
     const {query} = this.state
+    const {selectedLogName, monitorLogNames} = this.props
     return (
       <div className="text-center">
+        <div className="pull-left text-left">
+          <SelectField
+            floatingLabelText="Log"
+            onChange={this.onChangeLogName.bind(this)}
+            value={selectedLogName}>
+            {monitorLogNames.map((c, i) =>
+              <MenuItem key={i} primaryText={c} value={c}/>
+            )}
+          </SelectField>
+        </div>
         <div className="inline-block">
           <TextField name="query" value={query} onChange={this.onChangeQuery.bind(this)} onKeyUp={this.onKeyupQuery.bind(this)}/>
           <FlatButton icon={<ActionSearch />} onTouchTap={this.onClickSearch.bind(this)}/>

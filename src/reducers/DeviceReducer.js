@@ -303,7 +303,10 @@ export default function (state = INITIAL_STATE, action) {
         monitorHotfixes: [],
         monitorFwRules: [],
         monitorFwStatus: false,
-        monitorNetworks: []
+        monitorNetworks: [],
+        monitorLogNames: ['Application'],
+
+        selectedLogName: 'Application'
       }
     case UPDATE_MONITOR_REALTIME: {
       const {
