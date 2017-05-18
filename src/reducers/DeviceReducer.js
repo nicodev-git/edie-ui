@@ -81,6 +81,7 @@ import {
   UPDATE_MONITOR_REALTIME,
   CLEAR_MONITORS,
   SHOW_LOCAL_USER_MODAL,
+  SELECT_LOGNAME,
 
   UPDATE_DEVICE_ERROR
 } from 'actions/types'
@@ -333,6 +334,8 @@ export default function (state = INITIAL_STATE, action) {
 
     case SHOW_LOCAL_USER_MODAL:
       return { ...state, localUserModalOpen: !!action.visible }
+    case SELECT_LOGNAME:
+      return { ...state, selectedLogName: action.logName }
   }
   return state
 }

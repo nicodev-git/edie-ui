@@ -87,6 +87,7 @@ import {
   UPDATE_MONITOR_REALTIME,
   CLEAR_MONITORS,
   SHOW_LOCAL_USER_MODAL,
+  SELECT_LOGNAME,
 
   NO_AUTH_ERROR
 } from './types'
@@ -924,5 +925,11 @@ export const updateMonitorRealTime = (data) => {
 export const showLocalUserModal = (visible) => {
   return dispatch => {
     dispatch({type: SHOW_LOCAL_USER_MODAL, visible})
+  }
+}
+
+export function selectLogName (logName) {
+  return dispatch => {
+    dispatch({type: SELECT_LOGNAME, logName})
   }
 }
