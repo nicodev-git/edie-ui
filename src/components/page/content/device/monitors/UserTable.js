@@ -51,7 +51,21 @@ export default class UserTable extends React.Component {
       this.props.updateMonitorRealTime(msg.data)
     }
   }
+  sendCommandMessage (name, params) {
+    this.monitorSocket.send({
+      action: 'command',
+      deviceId: this.props.device.id,
+      data: {
+        name,
+        params
+      }
+    })
+  }
   onClickCreate () {
+    this.sendCommandMessage('CreateUserCommand', {
+      username: 'test1',
+      userpassword: ''
+    })
   }
   renderOptions () {
     return (
