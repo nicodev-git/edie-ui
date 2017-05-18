@@ -33,14 +33,18 @@ export default class IncidentTable extends Component {
         const {data} = props
         if (!data) return <span/>
         return (
-                    <span data-tip={moment(new Date(data)).format('YYYY-MM-DD HH:mm:ss')}>
-                        <TimeAgo date={data}/>
-                    </span>
+          <span data-tip={moment(new Date(data)).format('YYYY-MM-DD HH:mm:ss')}>
+              <TimeAgo date={data}/>
+          </span>
         )
       }
     }, {
       'displayName': 'System',
       'columnName': 'devicename',
+      'cssClassName': 'width-180'
+    }, {
+      'displayName': 'Workflow',
+      'columnName': 'workflow',
       'cssClassName': 'width-180'
     }, {
       'displayName': 'Description',
