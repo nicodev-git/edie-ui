@@ -31,6 +31,7 @@ import SavedSearchModalView from './SavedSearchModalView'
 import RelDevicesModalView from './RelDevicesModalView'
 import IrrelDevicesModalView from './IrrelDevicesModalView'
 import SearchFieldsModalView from './SearchFieldsModalView'
+import LocalUserModalView from './LocalUserModalView'
 
 export {
   ActivationModalView,
@@ -65,5 +66,6 @@ export {
   SavedSearchModalView,
   RelDevicesModalView,
   IrrelDevicesModalView,
-  SearchFieldsModalView
+  SearchFieldsModalView,
+  LocalUserModalView
 }
