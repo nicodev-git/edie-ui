@@ -72,7 +72,7 @@ export default class CommandTable extends React.Component {
           <div className="padding-md">
             <Field name="command" component={FormInput} floatingLabel="Command"/>&nbsp;
             <div className="inline-block valign-bottom">
-              <Field name="output" component={FormCheckBox} label="Output"/>
+              <Field name="output" component={FormCheckbox} label="Output" labelPosition="right"/>
             </div>
             <div>
               <RaisedButton label="Run" type="submit"/>&nbsp;

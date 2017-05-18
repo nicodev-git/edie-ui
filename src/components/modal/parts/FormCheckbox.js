@@ -2,10 +2,10 @@ import React from 'react'
 import Checkbox from 'material-ui/Checkbox'
 import { checkboxStyle } from 'style/materialStyles'
 
-const FormCheckbox = ({input, label, meta: { touched, error }, ...custom}) => (
+const FormCheckbox = ({input, label, labelPosition, meta: { touched, error }, ...custom}) => (
   <Checkbox
     label={label}
-    labelPosition="left"
+    labelPosition={labelPosition || 'left'}
     labelStyle={checkboxStyle}
     iconStyle={checkboxStyle}
     checked={input.value}
