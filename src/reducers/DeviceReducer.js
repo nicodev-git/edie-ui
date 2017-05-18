@@ -80,6 +80,7 @@ import {
   FETCH_MONITOR_MEMORY,
   UPDATE_MONITOR_REALTIME,
   CLEAR_MONITORS,
+  SHOW_LOCAL_USER_MODAL,
 
   UPDATE_DEVICE_ERROR
 } from 'actions/types'
@@ -326,6 +327,9 @@ export default function (state = INITIAL_STATE, action) {
       if (network) newState.monitorNetworks = network
       return newState
     }
+
+    case SHOW_LOCAL_USER_MODAL:
+      return { ...state, localUserModalOpen: !!action.visible }
   }
   return state
 }

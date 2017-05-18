@@ -64,10 +64,10 @@ export default class UserTable extends React.Component {
     })
   }
   onClickCreate () {
-    this.sendCommandMessage('CreateUserCommand', {
-      username: 'test1',
-      userpassword: ''
-    })
+    this.props.showLocalUserModal(true)
+  }
+  onSaveUser (values) {
+    this.sendCommandMessage('CreateUserCommand', values)
   }
   renderOptions () {
     return (
@@ -95,7 +95,7 @@ export default class UserTable extends React.Component {
   renderLocalUserModal () {
     if (!this.props.localUserModalOpen) return
     return (
-      <LocalUserModal {...this.props}/>
+      <LocalUserModal {...this.props} onSave={this.onSaveUser.bind(this)}/>
     )
   }
   render () {
@@ -107,6 +107,7 @@ export default class UserTable extends React.Component {
         </TabPageHeader>
         <TabPageBody tabs={MonitorTabs(device.id)}>
           {this.renderBody()}
+          {this.renderLocalUserModal()}
         </TabPageBody>
       </TabPage>
     )

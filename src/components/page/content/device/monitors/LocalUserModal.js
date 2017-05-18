@@ -12,7 +12,9 @@ import {LocalUserModalView} from 'components/modal'
 @reduxForm({form: 'localUserForm'})
 export default class LocalUserModal extends React.Component {
   onSubmit (values) {
-    console.log(values)
+    const {onSave} = this.props
+    onSave && onSave(values)
+    this.onClickClose()
   }
   onClickClose () {
     this.props.showLocalUserModal(false)

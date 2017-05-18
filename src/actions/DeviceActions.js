@@ -86,6 +86,7 @@ import {
   FETCH_MONITOR_MEMORY,
   UPDATE_MONITOR_REALTIME,
   CLEAR_MONITORS,
+  SHOW_LOCAL_USER_MODAL,
 
   NO_AUTH_ERROR
 } from './types'
@@ -917,5 +918,11 @@ export const clearMonitors = () => {
 export const updateMonitorRealTime = (data) => {
   return dispatch => {
     dispatch({type: UPDATE_MONITOR_REALTIME, data})
+  }
+}
+
+export const showLocalUserModal = (visible) => {
+  return dispatch => {
+    dispatch({type: SHOW_LOCAL_USER_MODAL, visible})
   }
 }

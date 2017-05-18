@@ -3,13 +3,13 @@ import Users from 'components/page/content/device/monitors/UserTable'
 import { withRouter } from 'react-router'
 import { connect } from 'react-redux'
 import {
-  fetchDeviceProcesses,
-
   updateSearchParams,
   replaceSearchWfs,
   updateQueryChips,
   updateMonitorRealTime,
-  clearMonitors
+  clearMonitors,
+
+  showLocalUserModal
 } from 'actions'
 
 @connect(
@@ -17,18 +17,19 @@ import {
     device: state.dashboard.selectedDevice,
 
     monitorUsers: state.devices.monitorUsers,
+    localUserModalOpen: state.devices.localUserModalOpen,
 
     params: state.search.params,
     monitorsUpdateTime: state.devices.monitorsUpdateTime
   }),
   {
-    fetchDeviceProcesses,
-
     updateSearchParams,
     replaceSearchWfs,
     updateQueryChips,
     updateMonitorRealTime,
-    clearMonitors
+    clearMonitors,
+
+    showLocalUserModal
   }
 )
 @withRouter
