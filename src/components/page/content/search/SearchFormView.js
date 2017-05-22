@@ -49,7 +49,11 @@ export default class SearchFormView extends React.Component {
 
       onClickIllustrate,
       onClickRelDevices,
-      onClickIrrelDevices
+      onClickIrrelDevices,
+
+      monitorTemplates,
+      selectedMonitorTypes,
+      onChangeMonitorType
     } = this.props
     return (
       <form onSubmit={onSubmit}>
@@ -107,9 +111,18 @@ export default class SearchFormView extends React.Component {
             menuItemStyle={inputStyle}
             multiple
             hintText="MonitorType"
-            value={selectedMonitorType}
-            onChange={onChangeMonitorType}>
-
+            value={selectedMonitorTypes}
+            onChange={onChangeMonitorType}
+          >
+            {monitorTemplates.map(option =>
+              <MenuItem
+                key={option.id}
+                insetChildren
+                checked={selectedMonitorTypes && selectedMonitorTypes.includes(option.monitortype)}
+                value={option.monitortype}
+                primaryText={option.name}
+              />
+            )}
           </SelectField>
           <FlatButton label="Workflow" onTouchTap={onClickWorkflow} style={{marginTop: '4px', verticalAlign: 'top'}}/>
           <FlatButton type="submit" icon={<ActionSearch />} style={{marginTop: '4px', verticalAlign: 'top'}}/>

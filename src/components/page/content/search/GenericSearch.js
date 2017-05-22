@@ -107,6 +107,7 @@ class GenericSearch extends React.Component {
     this.props.fetchSearchFields(params)
 
     this.props.fetchWorkflows()
+    this.props.fetchMonitorTemplates()
   }
 
   formatDate (time) {
@@ -501,7 +502,7 @@ class GenericSearch extends React.Component {
   }
 
   render () {
-    const { handleSubmit, selectedWf, params } = this.props
+    const { handleSubmit, selectedWf, params, monitorTemplates } = this.props
     const { severity, dateFrom, dateTo } = params
     const selectedCollections = params.collections
     const workflow = this.props.workflows.filter(m => m.id === selectedWf)
@@ -530,6 +531,7 @@ class GenericSearch extends React.Component {
             onClickSavedSearch={this.onClickSavedSearch.bind(this)}
             onClickRelDevices={this.onClickRelDevices.bind(this)}
             onClickIrrelDevices={this.onClickIrrelDevices.bind(this)}
+            monitorTemplates={monitorTemplates}
           />
 
           <div className="text-center">
