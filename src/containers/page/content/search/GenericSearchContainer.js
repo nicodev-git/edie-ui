@@ -44,7 +44,9 @@ import {
   showSearchFieldsModal,
   updateSelectedSearchFields,
   updateRelDeviceFields,
-  shareSavedSearch
+  shareSavedSearch,
+
+  fetchMonitorTemplates
 } from 'actions'
 
 @withRouter
@@ -131,7 +133,9 @@ import {
       showSearchFieldsModal,
       updateSelectedSearchFields,
       updateRelDeviceFields,
-      shareSavedSearch
+      shareSavedSearch,
+
+      fetchMonitorTemplates
     }, dispatch)
   })
 )

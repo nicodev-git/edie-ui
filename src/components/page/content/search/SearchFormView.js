@@ -94,6 +94,7 @@ export default class SearchFormView extends React.Component {
             hintText="Collection"
             value={selectedCollections}
             onChange={onChangeCollection}
+            style={{width: '180px'}}
           >
             {collections.map(option =>
               <MenuItem
@@ -102,6 +103,26 @@ export default class SearchFormView extends React.Component {
                 checked={selectedCollections && selectedCollections.includes(option.value)}
                 value={option.value}
                 primaryText={option.label}
+              />
+            )}
+          </SelectField>
+          <SelectField
+            underlineStyle={underlineFocusStyle}
+            selectedMenuItemStyle={selectedItemStyle}
+            menuItemStyle={inputStyle}
+            multiple
+            hintText="MonitorType"
+            value={selectedMonitorTypes}
+            onChange={onChangeMonitorType}
+            style={{width: '200px'}}
+          >
+            {monitorTemplates.map(option =>
+              <MenuItem
+                key={option.id}
+                insetChildren
+                checked={selectedMonitorTypes && selectedMonitorTypes.includes(option.monitortype)}
+                value={option.monitortype}
+                primaryText={option.name}
               />
             )}
           </SelectField>
