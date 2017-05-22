@@ -6,7 +6,6 @@ import moment from 'moment'
 import MonitorWizardContainer from 'containers/shared/wizard/MonitorWizardContainer'
 import InfiniteTable from 'components/shared/InfiniteTable'
 
-import { appendComponent, removeComponent } from '../../../../../util/Component'
 import { showAlert } from '../../../../shared/Alert'
 
 import MonitorPicker from './MonitorPicker'
@@ -70,7 +69,6 @@ export default class MonitorTable extends Component {
       'columnName': 'action',
       'customComponent': (props) => {
         let row = props.rowData
-        let devtype = row.type
 
         tooltipRebuild()
 
@@ -82,13 +80,6 @@ export default class MonitorTable extends Component {
             <a href="javascript:;" className="option" onClick={this.onClickCal.bind(this, props.rowData)}>
               <i className="fa fa-calendar-o" data-tip="History" />
             </a>
-          {
-            (devtype === 'LogFile' || devtype === 'LogCheck')
-              ? <a href="javascript:;" className="option" onClick={this.onClickLog.bind(this, props.rowData)}>
-                    <i className="fa fa-list" title="Log" />
-                </a>
-              : null
-          }
           </span>
         )
       }
@@ -150,59 +141,12 @@ export default class MonitorTable extends Component {
     )
   }
 
-  renderMonitorPicker () {
-    if (!this.props.monitorPickerVisible) return null
-
-    return (
-      <MonitorPicker
-        {...this.props}
-        onClickItem={monitorConfig => {
-          this.setState({monitorConfig}, () => {
-            this.addMonitor()
-          })
-          return true
-        }}
-      />
-    )
-  }
-
-  renderMonitorWizard () {
-    if (!this.props.monitorWizardVisible) return null
-
-    const {monitorConfig} = this.state
-    const type = 'monitor-custom'
-    return (
-      <MonitorWizardContainer
-        deviceType={type}
-        title={monitorConfig ? monitorConfig.name : ''}
-        onClose={() => {
-          this.props.closeDeviceMonitorWizard()
-        }}
-        onStep0={this.onStep0.bind(this)}
-        extraParams={{}}
-        configParams={{}}
-        onFinish={this.onFinishMonitorWizard.bind(this)}
-      />
-    )
-  }
-
   onRowDblClick () {
     this.onClickEditMonitor()
   }
 
   onClickCal (row) {
-    let data = row
-    appendComponent(
-      <MonitorHistoryModal
-        device={data}
-        onClose={removeComponent}
-      />
-    )
-  }
-
-  onClickLog (row) {
-    let data = row
-    emit(EVENTS.DEV_MONITOR_LOG_CLICKED, data, this.props.device) // eslint-disable-line no-undef
+    this.props.showMonitorHistoryModal(true, row)
   }
 
   onClickAddMonitor () {
@@ -273,6 +217,49 @@ export default class MonitorTable extends Component {
     return this.refs.table
   }
 
+  renderMonitorPicker () {
+    if (!this.props.monitorPickerVisible) return null
+
+    return (
+      <MonitorPicker
+        {...this.props}
+        onClickItem={monitorConfig => {
+          this.setState({monitorConfig}, () => {
+            this.addMonitor()
+          })
+          return true
+        }}
+      />
+    )
+  }
+
+  renderMonitorWizard () {
+    if (!this.props.monitorWizardVisible) return null
+
+    const {monitorConfig} = this.state
+    const type = 'monitor-custom'
+    return (
+      <MonitorWizardContainer
+        deviceType={type}
+        title={monitorConfig ? monitorConfig.name : ''}
+        onClose={() => {
+          this.props.closeDeviceMonitorWizard()
+        }}
+        onStep0={this.onStep0.bind(this)}
+        extraParams={{}}
+        configParams={{}}
+        onFinish={this.onFinishMonitorWizard.bind(this)}
+      />
+    )
+  }
+
+  renderHistoryModal () {
+    if (!this.props.monitorHistoryModalOpen) return null
+    return (
+      <MonitorHistoryModal device={this.props.selectedMonitor} onClose={() => this.props.showMonitorHistoryModal(false)}/>
+    )
+  }
+
   render () {
     return (
       <div className="flex-1 flex-vertical">
@@ -290,6 +277,7 @@ export default class MonitorTable extends Component {
         {this.renderMonitorPicker()}
 
         {this.renderMonitorWizard()}
+        {this.renderHistoryModal()}
         <ReactTooltip/>
       </div>
     )

@@ -111,6 +111,7 @@ export default class Templates extends Component {
                   {item.name}
                 </td>
                 <td>{item.description}</td>
+                <td>{item.enabled ? 'Enabled' : 'Disabled'}</td>
                 <td className="text-right fa-lg">
                   {item.origin !== 'SYSTEM' && <IconButton
                     style={{padding: 0, width: 24, height: 24}}

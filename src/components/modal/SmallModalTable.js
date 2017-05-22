@@ -15,6 +15,7 @@ const SmallModalTable = ({show, header, url, row, height, onHide,
     <div className="modal-body bootstrap-dialog-message small-modal-table">
       <div style={{height: height, overflow: 'auto'}}>
         <InfiniteTable
+          id="table"
           url={url}
           params={params}
           cells={cells}
