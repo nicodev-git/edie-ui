@@ -25,7 +25,7 @@ export default class DeviceTplModalView extends Component {
             <Monitors monitors={monitors} onEditMonitor={onEditMonitor} onRemoveMonitor={onRemoveMonitor} />
             <Workflows workflows={workflows} showWfSelectModal={showWfSelectModal} onClickDeleteWf={onClickDeleteWf}/>
           </div>
-          <div className="col-md-6 modal-right">
+          <div className="col-md-6 modal-right" style={{maxHeight: '200px', overflow: 'auto'}}>
             <MonitorTemplates monitors={monitors} monitorTemplates={monitorTemplates} onAddMonitor={onAddMonitor} />
           </div>
         </div>

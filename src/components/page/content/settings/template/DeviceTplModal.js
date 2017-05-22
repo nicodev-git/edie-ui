@@ -72,6 +72,7 @@ class DeviceTplModal extends React.Component { // eslint-disable-line react/no-m
     let options = this.renderOptions()
     return (
       <DeviceTplModalView
+        workflows={[]}
         show
         header={header}
         monitors={this.state.monitors}
