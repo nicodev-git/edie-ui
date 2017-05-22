@@ -90,6 +90,8 @@ import {
   SELECT_LOGNAME,
   SHOW_FW_RULE_MODAL,
 
+  SHOW_MONITOR_HISTORY_MODAL,
+
   NO_AUTH_ERROR
 } from './types'
 
@@ -938,5 +940,11 @@ export function selectLogName (logName) {
 export function showFwRuleModal (visible) {
   return dispatch => {
     dispatch({type: SHOW_FW_RULE_MODAL, visible})
+  }
+}
+
+export function showMonitorHistoryModal (visible, monitor) {
+  return dispatch => {
+    dispatch({type: SHOW_MONITOR_HISTORY_MODAL, visible, monitor})
   }
 }

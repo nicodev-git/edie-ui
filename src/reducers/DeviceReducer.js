@@ -84,6 +84,7 @@ import {
   SELECT_LOGNAME,
   SHOW_FW_RULE_MODAL,
 
+  SHOW_MONITOR_HISTORY_MODAL,
   UPDATE_DEVICE_ERROR
 } from 'actions/types'
 
@@ -343,6 +344,8 @@ export default function (state = INITIAL_STATE, action) {
       return { ...state, selectedLogName: action.logName }
     case SHOW_FW_RULE_MODAL:
       return { ...state, fwRuleModalOpen: !!action.visible }
+    case SHOW_MONITOR_HISTORY_MODAL:
+      return { ...state, monitorHistoryModalOpen: !!action.visible, selectedMonitor: action.monitor }
   }
   return state
 }

@@ -26,7 +26,9 @@ import {
   fetchMonitorCpu,
   fetchMonitorMemory,
   updateMonitorRealTime,
-  clearMonitors
+  clearMonitors,
+
+  showMonitorHistoryModal
 } from 'actions'
 
 @connect(
@@ -36,6 +38,9 @@ import {
     monitorWizardVisible: state.devices.monitorWizardVisible,
     process: state.devices.process,
     processModalOpen: state.devices.processModalOpen,
+
+    monitorHistoryModalOpen: state.devices.monitorHistoryModalOpen,
+    selectedMonitor: state.devices.selectedMonitor,
 
     eventLogs: state.devices.eventLogs,
     apps: state.devices.apps,
@@ -75,7 +80,9 @@ import {
     fetchMonitorCpu,
     fetchMonitorMemory,
     updateMonitorRealTime,
-    clearMonitors
+    clearMonitors,
+
+    showMonitorHistoryModal
   }
 )
 @withRouter
