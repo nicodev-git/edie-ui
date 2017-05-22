@@ -5,17 +5,29 @@ import {withRouter} from 'react-router'
 export default function (ComposedComponent) {
   @withRouter
   class Authentication extends Component {
-
     componentWillMount () {
       if (!this.props.authenticated) {
-        this.context.router.push('/signin')
+        this.gotoLogin()
       }
     }
 
     componentWillUpdate (nextProps) {
       if (!nextProps.authenticated) {
-        this.context.router.push('/signin')
+        this.gotoLogin()
       }
+    }
+
+    gotoLogin () {
+      const { location } = this.props
+      this.props.router.push({
+        pathname: '/signin',
+        query: {
+          redirect: JSON.stringify({
+            p: location.pathname,
+            q: location.query
+          })
+        }
+      })
     }
 
     render () {

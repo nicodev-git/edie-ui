@@ -20,7 +20,7 @@ import { apiError, authError } from './Errors'
 import { ROOT_URL } from './config'
 import { getAuthConfig, getRequestConfig } from './util'
 
-export const signUser = ({ email, password }) => {
+export const signUser = ({ email, password }, redirect) => {
   return (dispatch) => {
     axios.post(`${ROOT_URL}/api/auth/login`,
       {
@@ -29,16 +29,28 @@ export const signUser = ({ email, password }) => {
       },
       getRequestConfig()
     )
-    .then(response => signUserSuccess(dispatch, response))
+    .then(response => signUserSuccess(dispatch, response, redirect))
     .catch(() => authError(dispatch))
   }
 }
 
-const signUserSuccess = (dispatch, response) => {
+const signUserSuccess = (dispatch, response, redirect) => {
   dispatch({
     type: AUTH_USER
   })
   window.localStorage.setItem('token', response.data.token)
+  if (redirect) {
+    try {
+      const loc = JSON.parse(redirect)
+      browserHistory.push({
+        pathname: loc.p,
+        query: loc.q
+      })
+      return
+    } catch (e) {
+
+    }
+  }
   browserHistory.push('/')
 }
 

@@ -4,8 +4,9 @@ import { reduxForm, Field } from 'redux-form'
 class Signin extends Component {
 
   handleFormSubmit ({ email, password }) {
-    let { signUser } = this.props
-    signUser({ email, password })
+    const { signUser, location } = this.props
+    const {redirect} = location.query
+    signUser({ email, password }, redirect)
   }
 
   renderAlert () {
