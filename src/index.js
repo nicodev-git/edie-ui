@@ -16,7 +16,7 @@ if (token) {
   store.dispatch({ type: AUTH_USER })
 }
 
-console.log('Version: 0.10.1')
+console.log('Version: 0.10.2')
 
 ReactDOM.render(
   <MuiThemeProvider>
