@@ -10,7 +10,7 @@ import { showAlert } from '../../../../shared/Alert'
 
 import MonitorPicker from './MonitorPicker'
 import MonitorHistoryModal from './MonitorHistoryModal'
-// import IncidentSocket from 'util/socket/IncidentSocket'
+import IncidentSocket from 'util/socket/IncidentSocket'
 import MonitorSocket from 'util/socket/MonitorSocket'
 
 export default class MonitorTable extends Component {
@@ -87,12 +87,12 @@ export default class MonitorTable extends Component {
   }
 
   componentDidMount () {
-    // this.incidentSocket = new IncidentSocket({
-    //   listeners: {
-    //     'updatedDevice': this.onDeviceUpdated.bind(this)
-    //   }
-    // })
-    // this.incidentSocket.connect(this.onSocketOpen.bind(this))
+    this.incidentSocket = new IncidentSocket({
+      listeners: {
+        'updatedDevice': this.onDeviceUpdated.bind(this)
+      }
+    })
+    this.incidentSocket.connect(this.onSocketOpen.bind(this))
 
     this.monitorSocket = new MonitorSocket({
       listener: this.onMonitorMessage.bind(this)
@@ -101,7 +101,7 @@ export default class MonitorTable extends Component {
   }
 
   componentWillUnmount () {
-    // this.incidentSocket.close()
+    this.incidentSocket.close()
     this.monitorSocket.close()
   }
 
