@@ -322,6 +322,15 @@ class GenericSearch extends React.Component {
     }))
   }
 
+  onChangeMonitorType (e, index, values) {
+    if (!values.length) {
+      return
+    }
+    this.props.updateSearchParams(assign({}, this.props.params, {
+      monitorTypes: values.join(',')
+    }))
+  }
+
   onChangeSeverity (e, index, values) {
     this.props.updateSearchParams(assign({}, this.props.params, {
       severity: values.join(',')
@@ -503,7 +512,7 @@ class GenericSearch extends React.Component {
 
   render () {
     const { handleSubmit, selectedWf, params, monitorTemplates } = this.props
-    const { severity, dateFrom, dateTo } = params
+    const { severity, dateFrom, dateTo, monitorTypes } = params
     const selectedCollections = params.collections
     const workflow = this.props.workflows.filter(m => m.id === selectedWf)
 
@@ -531,7 +540,10 @@ class GenericSearch extends React.Component {
             onClickSavedSearch={this.onClickSavedSearch.bind(this)}
             onClickRelDevices={this.onClickRelDevices.bind(this)}
             onClickIrrelDevices={this.onClickIrrelDevices.bind(this)}
+
             monitorTemplates={monitorTemplates}
+            selectedMonitorTypes={monitorTypes.split(',')}
+            onChangeMonitorType={this.onChangeMonitorType.bind(this)}
           />
 
           <div className="text-center">
