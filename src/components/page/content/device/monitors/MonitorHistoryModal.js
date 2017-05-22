@@ -23,7 +23,7 @@ export default class MonitorHistoryModal extends Component {
       'columnName': 'lastResult.status',
       'cssClassName': 'width-80 text-center',
       'customComponent': props => {
-        const val = props.data
+        const val = props.rowData.eventType === 'AGENT' ? 'UP' : props.data
         let cls = 'fa-question'
         let color = '#FDB422'
         if (val === 'UP') {
@@ -39,6 +39,9 @@ export default class MonitorHistoryModal extends Component {
       'displayName': 'Response',
       'columnName': 'lastResult.resultdata',
       'customComponent': props => {
+        if (props.rowData.eventType === 'AGENT') {
+          return <span>{JSON.stringify(props.rowData.dataobj)}</span>
+        }
         return <span>{JSON.stringify(props.rowData.lastResult)}</span>
       }
     }]
@@ -50,7 +53,7 @@ export default class MonitorHistoryModal extends Component {
 
   render () {
     const params = {
-      monitorid: this.props.device.id,
+      monitorid: this.props.device.uid,
       sort: 'timestamp,desc'
     }
 

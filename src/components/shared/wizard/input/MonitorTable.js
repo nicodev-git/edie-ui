@@ -124,7 +124,7 @@ export default class MonitorTable extends Component {
           </IconMenu>
           <CrudButtons
             onEdit={this.onClickEdit.bind(this)}
-            onRemove={this.onClickRemove.bind(this)}
+            onDelete={this.onClickRemove.bind(this)}
           />
         </div>
 
