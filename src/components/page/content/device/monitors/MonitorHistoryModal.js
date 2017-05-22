@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import moment from 'moment'
-import { SmallModalTable } from '../../../../modal'
+import Modal from 'react-bootstrap-modal'
+
+import InfiniteTable from 'components/shared/InfiniteTable'
+import { Header, CloseButton } from 'components/modal/parts'
 
 export default class MonitorHistoryModal extends Component {
   constructor (props) {
@@ -50,19 +53,26 @@ export default class MonitorHistoryModal extends Component {
       monitorid: this.props.device.id,
       sort: 'timestamp,desc'
     }
+
     return (
-      <SmallModalTable
-        show
-        onHide={this.onClickClose.bind(this)}
-        customWidth="modal-750"
-        params={params}
-        cells={this.cells}
-        header="Monitor history"
-        url="/event/search/findBy"
-        row={{'key': 'id'}}
-        height={520}
-        useExternal
-      />
+      <Modal show onHide={this.onClickClose.bind(this)} aria-labelledby="ModalHeader"
+        className="bootstrap-dialog type-primary modal-750">
+        <Header name="Monitor History" />
+        <div className="modal-body bootstrap-dialog-message small-modal-table">
+          <div style={{height: '400px', position: 'relative'}}>
+            <InfiniteTable
+              id="table"
+              url="/event/search/findBy"
+              params={params}
+              cells={this.cells}
+              rowMetadata={{'key': 'id'}}
+            />
+          </div>
+        </div>
+        <div className="padding-md-bottom">
+          <CloseButton onClose={this.onClickClose.bind(this)} />
+        </div>
+      </Modal>
     )
   }
 }
