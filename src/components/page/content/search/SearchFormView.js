@@ -101,6 +101,16 @@ export default class SearchFormView extends React.Component {
               />
             )}
           </SelectField>
+          <SelectField
+            underlineStyle={underlineFocusStyle}
+            selectedMenuItemStyle={selectedItemStyle}
+            menuItemStyle={inputStyle}
+            multiple
+            hintText="MonitorType"
+            value={selectedMonitorType}
+            onChange={onChangeMonitorType}>
+
+          </SelectField>
           <FlatButton label="Workflow" onTouchTap={onClickWorkflow} style={{marginTop: '4px', verticalAlign: 'top'}}/>
           <FlatButton type="submit" icon={<ActionSearch />} style={{marginTop: '4px', verticalAlign: 'top'}}/>
           <FlatButton icon={starFilled ? <FilledStar/> : <ToggleStar/>} style={{marginTop: '4px', verticalAlign: 'top'}} onClick={onClickStar}/>
