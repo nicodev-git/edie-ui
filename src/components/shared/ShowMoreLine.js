@@ -7,16 +7,20 @@ export default class ShowMoreLine extends React.Component {
       expanded: false
     }
   }
+  onClickMore () {
+    this.setState({expanded: true})
+  }
   render () {
-    if (this.expanded) {
+    const {text} = this.props
+    if (this.state.expanded || text.length < 150) {
       return (
-        <div>{this.props.text}</div>
+        <div>{text}</div>
       )
     }
     return (
-      <div className="nowrap" style={{maxWidth: '100%', overflow: 'hidden'}}>
-        {this.props.text}<br/>
-        <a href="javascript:;"></a>
+      <div className="nowrap" style={{maxWidth: '100%', overflow: 'hidden', textOverflow: 'ellipsis'}}>
+        {text}<br/>
+        <a href="javascript:;" onClick={this.onClickMore.bind(this)}>Show More...</a>
       </div>
     )
   }

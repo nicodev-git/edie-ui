@@ -3,6 +3,7 @@ import moment from 'moment'
 import Modal from 'react-bootstrap-modal'
 
 import InfiniteTable from 'components/shared/InfiniteTable'
+import ShowMoreLine from 'components/shared/ShowMoreLine'
 import { Header, CloseButton } from 'components/modal/parts'
 
 export default class MonitorHistoryModal extends Component {
@@ -39,10 +40,7 @@ export default class MonitorHistoryModal extends Component {
       'displayName': 'Response',
       'columnName': 'lastResult.resultdata',
       'customComponent': props => {
-        if (props.rowData.eventType === 'AGENT') {
-          return <span>{JSON.stringify(props.rowData.dataobj)}</span>
-        }
-        return <span>{JSON.stringify(props.rowData.lastResult)}</span>
+        return <ShowMoreLine text={JSON.stringify(props.rowData.eventType === 'AGENT' ? props.rowData.dataobj : props.rowData.lastResult)}/>
       }
     }]
   }
