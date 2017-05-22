@@ -144,7 +144,8 @@ class Map extends React.Component {
       width: options.width,
       height: options.height,
       image: options.imgName,
-      templateName: options.templateName
+      templateName: options.templateName,
+      workflowids: options.workflowids
     }
 
     let config = {
@@ -338,7 +339,8 @@ class Map extends React.Component {
       height: 50,
 
       monitors: item.template.monitors,
-      templateName: item.template.name
+      templateName: item.template.name,
+      workflowids: item.template.workflowids || []
     }
 
     if (options.type === 'longhub') {

@@ -34,6 +34,7 @@ import {
 import { apiError } from './Errors'
 
 import { ROOT_URL } from './config'
+import {encodeUrlParams} from 'shared/Global'
 
 export const fetchMaps = (initial) => {
   if (!window.localStorage.getItem('token')) {
@@ -289,14 +290,26 @@ const fetchMapDevicesAndLinesSuccess = (dispatch, response) => {
   })
 }
 
+const fetchWorkflowIds = (uuids, cb) => {
+  if (!uuids || !uuids.length) {
+    cb && cb([])
+    return
+  }
+  axios.get(`${ROOT_URL}/workflow/search/findByUuidIn?size=1000&sort=name&${encodeUrlParams({uuid: uuids})}`).then(res => {
+    cb(res.data._embedded.workflows.map(u => u.id))
+  })
+}
+
 export const addMapDevice = (props, url) => {
   if (!window.localStorage.getItem('token')) {
     return dispatch => dispatch({ type: NO_AUTH_ERROR })
   }
   return (dispatch) => {
-    axios.post(`${ROOT_URL}${url || '/device'}`, props)
-      .then(response => addMapDeviceSuccess(dispatch, response))
-      .catch(error => apiError(dispatch, error))
+    fetchWorkflowIds(props.workflowids, workflowids => {
+      axios.post(`${ROOT_URL}${url || '/device'}`, assign({}, props, {workflowids}))
+        .then(response => addMapDeviceSuccess(dispatch, response))
+        .catch(error => apiError(dispatch, error))
+    })
   }
 }
 
