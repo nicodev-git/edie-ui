@@ -17,6 +17,8 @@ export default class MainWorkflows extends React.Component {
     const {device} = this.props
 
     this.state = {
+      currentSortCol: 'name',
+      currentSortDir: 'asc',
       params: {
         id: device.workflowids || []
       }
@@ -24,23 +26,60 @@ export default class MainWorkflows extends React.Component {
 
     this.cells = [{
       'displayName': 'Name',
+      'customHeaderComponent': this.renderColHeader.bind(this),
       'columnName': 'name'
     }, {
       'displayName': 'Category',
+      'customHeaderComponent': this.renderColHeader.bind(this),
       'columnName': 'category'
     }, {
       'displayName': 'Severity',
+      'customHeaderComponent': this.renderColHeader.bind(this),
       'columnName': 'severity'
     }, {
       'displayName': 'Description',
+      'customHeaderComponent': this.renderColHeader.bind(this),
       'columnName': 'desc'
     }, {
       'displayName': 'Global',
       'columnName': 'isglobal',
+      'customHeaderComponent': this.renderColHeader.bind(this),
       'customComponent': p => {
         return <span>{p.data ? 'YES' : 'NO'}</span>
       }
     }]
+  }
+
+  renderColHeader (col) {
+    const {columnName, displayName} = col
+    const { currentSortCol, currentSortDir } = this.state
+    let caretEl = null
+
+    if (columnName === currentSortCol) {
+      const cls = currentSortDir === 'asc' ? 'fa-caret-up' : 'fa-caret-down'
+      caretEl = <i className={`margin-sm-left fa ${cls}`} />
+    }
+
+    return (
+      <a href="javascript:;" className="text-black" onClick={this.onClickColHeader.bind(this, col)}>
+        <span className="nowrap">{displayName}{caretEl}</span>
+      </a>
+    )
+  }
+
+  onClickColHeader (col) {
+    const {
+      columnName
+    } = col
+    let { currentSortCol, currentSortDir } = this.state
+
+    if (columnName === currentSortCol) {
+      currentSortDir = currentSortDir === 'asc' ? 'desc' : 'asc'
+    } else {
+      currentSortCol = columnName
+      currentSortDir = 'asc'
+    }
+    this.setState({ currentSortCol, currentSortDir })
   }
 
   onClickAdd () {
@@ -69,6 +108,7 @@ export default class MainWorkflows extends React.Component {
 
   renderTable () {
     const { device, workflowListDraw } = this.props
+    const { currentSortCol, currentSortDir } = this.state
     return (
       <InfiniteTable
         id="rule1"
@@ -81,7 +121,8 @@ export default class MainWorkflows extends React.Component {
         url="/workflow/search/findById"
         params={{
           id: device.workflowids || [],
-          draw: workflowListDraw
+          draw: workflowListDraw,
+          sort: `${currentSortCol},${currentSortDir}`
         }}
       />
     )
