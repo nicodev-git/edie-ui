@@ -127,11 +127,20 @@ class InfiniteTable extends React.Component {
     return this.state.useExternal ? this.state.total : this.props.data.length
   }
 
-  onRowClick (row) {
+  onRowClick (row, e) {
     if (!this.props.selectable) return
-    this.setState({
-      selected: [row.props.data[this.props.rowMetadata.key]]
-    })
+    if (e.metaKey && this.props.allowMultiSelect) {
+      const selected = this.state
+      const key = row.props.data[this.props.rowMetadata.key]
+      const index = selected.indexOf(key)
+      if (index >= 0) selected.splice(index, 1)
+      else selected.push(key)
+      this.setState({ selected })
+    } else {
+      this.setState({
+        selected: [row.props.data[this.props.rowMetadata.key]]
+      })
+    }
   }
 
   onRowDblClick (row) {
@@ -155,15 +164,25 @@ class InfiniteTable extends React.Component {
     })
     return found
   }
-  getSelected () {
+  getSelected (multiple) {
     let found = null
     const results = this.getCurrentData()
-    results.forEach(item => {
-      if (this.state.selected.indexOf(item[this.props.rowMetadata.key]) >= 0) {
-        found = item
-        return false
-      }
-    })
+    if (this.props.allowMultiSelect && multiple) {
+      found = []
+      results.forEach(item => {
+        if (this.state.selected.indexOf(item[this.props.rowMetadata.key]) >= 0) {
+          found.push(item)
+        }
+      })
+    } else {
+      results.forEach(item => {
+        if (this.state.selected.indexOf(item[this.props.rowMetadata.key]) >= 0) {
+          found = item
+          return false
+        }
+      })
+    }
+
     return found
   }
 
@@ -251,6 +270,7 @@ InfiniteTable.defaultProps = {
   showTableHeading: true,
 
   selectable: false,
+  allowMultiSelect: false,
   noDataMessage: ''
 }
 

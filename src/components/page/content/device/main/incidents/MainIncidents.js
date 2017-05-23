@@ -179,6 +179,7 @@ export default class MainIncidents extends Component {
         ref="table"
         rowMetadata={{'key': 'id'}}
         selectable
+        allowMultiSelect
         onRowDblClick={this.onRowDblClick.bind(this)}
 
         url="/incident/search/findBy"
@@ -223,6 +224,8 @@ export default class MainIncidents extends Component {
   }
 
   onClickFixSelected () {
+    const selected = this.getTable().getSelected(true)
+    console.log(selected)
   }
 
   onClickAddIncident () {
