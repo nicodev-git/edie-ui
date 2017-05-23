@@ -222,6 +222,9 @@ export default class MainIncidents extends Component {
     })
   }
 
+  onClickFixSelected () {
+  }
+
   onClickAddIncident () {
     this.props.openAddDeviceIncident()
   }
@@ -426,6 +429,7 @@ export default class MainIncidents extends Component {
             <div className="pull-right">
               <RaisedButton label="Open" onTouchTap={this.onClickOpen.bind(this)}/>&nbsp;
               <RaisedButton label="Fix All" onTouchTap={this.onClickFixAll.bind(this)}/>&nbsp;
+              <RaisedButton label="Fix Selected" onTouchTap={this.onClickFixSelected.bind(this)}/>&nbsp;
               <RaisedButton label="More" primary onTouchTap={this.handleTouchTap.bind(this)}/>&nbsp;
               <Popover
                 open={this.state.open}
