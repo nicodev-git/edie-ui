@@ -78,7 +78,8 @@ export default class MainContainer extends Component {
       listeners: {
         'incidents': this.onReceiveIncidents.bind(this),
         'statuses': debounce(this.onReceiveStatus.bind(this), 500),
-        'dashboard': this.onReceiveDashboard.bind(this)
+        'dashboard': this.onReceiveDashboard.bind(this),
+        'refreshpage': this.onReceiveRefresh.bind(this)
       }
     })
     this.incidentSocket.connect()
@@ -129,6 +130,10 @@ export default class MainContainer extends Component {
     const {userInfo} = this.props
     const keep = userInfo && userInfo.keepIncidentAlert
     if (!keep) this.clearNewincidentMsg()
+  }
+
+  onReceiveRefresh () {
+    document.location.reload(true)
   }
 
   render () {
