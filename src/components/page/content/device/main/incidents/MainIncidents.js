@@ -13,6 +13,7 @@ import {
 import TimeAgo from 'react-timeago'
 import ReactTooltip from 'react-tooltip'
 import ArrowBack from 'material-ui/svg-icons/navigation/arrow-back'
+import ActionSearch from 'material-ui/svg-icons/action/search'
 
 import DateRangePicker from '../../../../../shared/DateRangePicker2'
 import InfiniteTable from 'components/shared/InfiniteTable'
@@ -444,7 +445,7 @@ export default class MainIncidents extends Component {
             <div style={{margin: '0 auto', position: 'relative', display: 'inline-block', textAlign: 'center'}}>
               <div className="inline-block" style={{position: 'relative'}}>
                 <TextField
-                  hintText="Search"
+                  hintText={<ActionSearch style={{bottom: '5px'}} color="#888888"/>}
                   errorStyle={errorStyle}
                   inputStyle={inputStyle}
                   underlineFocusStyle={underlineStyle}
