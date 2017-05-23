@@ -15,7 +15,9 @@ import {
 
   replaceSearchWfs,
   updateQueryChips,
-  updateSearchParams
+  updateSearchParams,
+
+  fixDeviceIncidents
 } from 'actions'
 
 import MainIncidents from 'components/page/content/device/main/incidents/MainIncidents'
@@ -41,7 +43,9 @@ import MainIncidents from 'components/page/content/device/main/incidents/MainInc
 
       replaceSearchWfs,
       updateQueryChips,
-      updateSearchParams
+      updateSearchParams,
+
+      fixDeviceIncidents
     }, dispatch)
   })
 )

@@ -701,6 +701,14 @@ export const fixAllDeviceIncidents = (device) => {
   }
 }
 
+export const fixDeviceIncidents = (incidentIds) => {
+  return dispatch => {
+    axios.get(`${ROOT_URL}/incident/fixall/selected/${incidentIds.join(',')}`).then(res => {
+      dispatch({type: FIX_ALL_DEVICE_INCIDENTS})
+    }).catch(error => apiError(dispatch, error))
+  }
+}
+
 export const fetchGroupDevicesAndLines = (groupid) => {
   if (!window.localStorage.getItem('token')) {
     return dispatch => dispatch({ type: NO_AUTH_ERROR })

@@ -130,7 +130,7 @@ class InfiniteTable extends React.Component {
   onRowClick (row, e) {
     if (!this.props.selectable) return
     if (e.metaKey && this.props.allowMultiSelect) {
-      const selected = this.state
+      const {selected} = this.state
       const key = row.props.data[this.props.rowMetadata.key]
       const index = selected.indexOf(key)
       if (index >= 0) selected.splice(index, 1)

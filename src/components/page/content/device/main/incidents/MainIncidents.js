@@ -225,7 +225,8 @@ export default class MainIncidents extends Component {
 
   onClickFixSelected () {
     const selected = this.getTable().getSelected(true)
-    console.log(selected)
+    if (!selected.length) return showAlert('Please select incidents.')
+    this.props.fixDeviceIncidents(selected.map(s => s.id))
   }
 
   onClickAddIncident () {
