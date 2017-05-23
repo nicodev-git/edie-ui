@@ -42,7 +42,9 @@ import {
     envVarAvailable: state.settings.envVarAvailable,
     envVars: state.settings.envVars,
 
-    searchParams: state.search.params
+    searchParams: state.search.params,
+
+    userInfo: state.dashboard.userInfo
   }
 },
 dispatch => bindActionCreators({
@@ -83,6 +85,14 @@ export default class MainContainer extends Component {
     this.clearNewincidentMsg = debounce(() => this.props.updateNewIncidentMsg(null), 8000)
   }
 
+  componentWillUpdate (nextProps) {
+    const {userInfo} = nextProps
+    const oldInfo = this.props.userInfo
+    if (oldInfo && oldInfo.keepIncidentAlert && userInfo && !userInfo.keepIncidentAlert) {
+      this.props.updateNewIncidentMsg(null)
+    }
+  }
+
   componentWillUnmount () {
     this.incidentSocket.close()
   }
@@ -115,7 +125,10 @@ export default class MainContainer extends Component {
       message: `${time} - ${device} - ${incident.description || ''}`,
       incident
     })
-    this.clearNewincidentMsg()
+
+    const {userInfo} = this.props
+    const keep = userInfo && userInfo.keepIncidentAlert
+    if (!keep) this.clearNewincidentMsg()
   }
 
   render () {

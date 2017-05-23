@@ -122,7 +122,7 @@ export default class General extends React.Component {
         <div className="col-md-12 margin-md-bottom bt-gray">
           <div className="pull-left width-200">
             <Checkbox
-              label="Show absolute date"
+              label="Keep Incident Alert"
               checked={!!this.getUserOptionValue('keepIncidentAlert')}
               onCheck={this.onChangeKeepIncidentAlert.bind(this)}/>
           </div>
@@ -163,7 +163,9 @@ export default class General extends React.Component {
   }
 
   getUserOptionValue (key) {
-    return this.props.userInfo[key]
+    const {userInfo} = this.props
+    if (!userInfo) return false
+    return userInfo[key]
   }
 
   onChangeSysName (value) {

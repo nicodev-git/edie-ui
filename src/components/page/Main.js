@@ -145,8 +145,9 @@ class Main extends React.Component {
   }
 
   renderIncidentAlert () {
-    const { newIncidentMsg } = this.props
+    const { newIncidentMsg, userInfo } = this.props
     if (!newIncidentMsg) return null
+    const keep = userInfo && userInfo.keepIncidentAlert
     return (
       <Snackbar
         open
@@ -154,6 +155,7 @@ class Main extends React.Component {
         message={<div className="inline-block" onClick={this.onClickAlert.bind(this, newIncidentMsg.incident)} style={{cursor: 'pointer'}}>{newIncidentMsg.message}</div>}
         autoHideDuration={8000}
         onActionTouchTap={this.onClickAlert.bind(this, newIncidentMsg.incident)}
+        onRequestClose={keep ? () => {} : null}
       />
     )
   }
