@@ -17,17 +17,13 @@ export default class IncidentSocket {
   connect (cb) {
     const me = this
 
-    if (me.ws) {
-      me.close()
-      return
-    }
-
     try {
       const domain = getLocation(ROOT_URL || document.location.href).host
 
       me.ws = new window.WebSocket(`ws://${domain}/frontendupdates`)
       me.stompClient = Stomp.over(me.ws)
       me.connecting = true
+      me.reconnectOnClose = true
       me.stompClient.connect('', '', (frame) => {
         me.connecting = false
 
@@ -41,6 +37,14 @@ export default class IncidentSocket {
         me.stompClient.debug = null
 
         cb && cb()
+      }, () => {
+        if (me.reconnectOnClose) {
+          // Retry connection
+          console.log('Socket Retrying To Connect...')
+          setTimeout(() => {
+            me.connect(cb)
+          }, 3000)
+        }
       })
     } catch (e) {
       console.log(e)
@@ -88,6 +92,7 @@ export default class IncidentSocket {
 
   close () {
     const me = this
+    me.reconnectOnClose = false
     me.needDestroy = true
     if (me.stompClient && !me.connecting) {
       me.stompClient.debug = window.console.log
