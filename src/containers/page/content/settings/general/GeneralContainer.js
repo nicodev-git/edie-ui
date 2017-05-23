@@ -6,16 +6,23 @@ import { bindActionCreators } from 'redux'
 import {
   fetchEnvVars,
   addEnvVar,
-  updateEnvVar
+  updateEnvVar,
+
+  updateUserOption
 } from 'actions'
 
 @connect(
-  state => ({ envVars: state.settings.envVars }),
+  state => ({
+    envVars: state.settings.envVars,
+    userInfo: state.dashboard.userInfo
+  }),
   dispatch => ({
     ...bindActionCreators({
       fetchEnvVars,
       addEnvVar,
-      updateEnvVar
+      updateEnvVar,
+
+      updateUserOption
     }, dispatch)
   })
 )

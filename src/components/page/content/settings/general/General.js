@@ -119,6 +119,15 @@ export default class General extends React.Component {
           </div>
         </div>
 
+        <div className="col-md-12 margin-md-bottom bt-gray">
+          <div className="pull-left width-200">
+            <Checkbox
+              label="Show absolute date"
+              checked={!!this.getUserOptionValue('keepIncidentAlert')}
+              onCheck={this.onChangeKeepIncidentAlert.bind(this)}/>
+          </div>
+        </div>
+
         <div className="col-md-12 margin-lg-top" style={{color: '#888'}}>
           <label className="margin-sm-top margin-sm-bottom">
             Customer ID: {this.getOptionValue('CUSTOMER_ID') || '[None]'}
@@ -151,6 +160,10 @@ export default class General extends React.Component {
     const option = this.getOption(key)
     if (!option) return ''
     return option.envvars[value]
+  }
+
+  getUserOptionValue (key) {
+    return this.props.userInfo[key]
   }
 
   onChangeSysName (value) {
@@ -202,6 +215,10 @@ export default class General extends React.Component {
   onChangeAbsDate (e) {
     let {checked} = e.target
     this.updateOption('SHOW_ABS_DATE', `${checked}`)
+  }
+
+  onChangeKeepIncidentAlert (e) {
+    this.props.updateUserOption(this.props.userInfo, 'keepIncidentAlert', e.target.checked)
   }
 
   updateOption (name, value1, value2 = '') {

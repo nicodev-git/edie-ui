@@ -1,5 +1,7 @@
 import axios from 'axios'
 import {reset} from 'redux-form'
+import {assign} from 'lodash'
+
 import {
   FETCH_SETTING_MAPS,
   ADD_SETTING_MAP,
@@ -49,6 +51,8 @@ import {
 
   SHARE_MONITOR_TEMPLATE,
   SHARE_WORKFLOW,
+
+  UPDATE_USER_INFO,
 
   NO_AUTH_ERROR
 } from './types'
@@ -503,5 +507,21 @@ export const shareWorkflow = props => {
       if (data.success) dispatch({type: SHARE_WORKFLOW, data: 'OK'})
       else dispatch({type: SHARE_WORKFLOW, data: 'Error'})
     }).catch(error => apiError(dispatch, error))
+  }
+}
+
+const updateUserSuccess = (dispatch, response) => {
+  dispatch({
+    type: UPDATE_USER_INFO,
+    data: response.data
+  })
+}
+
+export const updateUserOption = (user, key, value) => {
+  if (!user) return
+  return dispatch => {
+    axios.put(user._links.self.href, assign({}, user, {
+      [key]: value
+    })).then(res => updateUserSuccess(dispatch, res)).catch(error => apiError(dispatch, error))
   }
 }
