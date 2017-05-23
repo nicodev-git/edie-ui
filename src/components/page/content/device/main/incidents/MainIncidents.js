@@ -21,8 +21,7 @@ import AddExceptionModal from './AddExceptionModal'
 import CommentsModal from '../../../../../shared/incident/CommentsModal'
 
 import { showAlert, showConfirm } from '../../../../../shared/Alert'
-import { getSeverityIcon, parseSearchQuery, dateFormat } from '../../../../../../shared/Global'
-const encodeUrlParams = getSeverityIcon
+import { getSeverityIcon, parseSearchQuery, dateFormat, encodeUrlParams, severities } from 'shared/Global'
 import MainTabs from '../MainTabs'
 import TabPage from 'components/shared/TabPage'
 import TabPageBody from 'components/shared/TabPageBody'
@@ -42,15 +41,6 @@ export default class MainIncidents extends Component {
     super(props)
 
     this.state = {
-
-      severities: [
-        { label: 'High', value: 'HIGH' },
-        { label: 'Medium', value: 'MEDIUM' },
-        { label: 'Low', value: 'LOW' },
-        { label: 'Audit', value: 'AUDIT' },
-        { label: 'Ignore', value: 'IGNORE' }
-      ],
-
       selectedSeverity: ['HIGH', 'MEDIUM'],
 
       selectedIndex: -1,
@@ -373,7 +363,7 @@ export default class MainIncidents extends Component {
 
   render () {
     const {device, incidents} = this.props
-    const {selectedIndex, selectedSeverity, severities, afterStartTimestamp, beforeStartTimestamp, text} = this.state
+    const {selectedIndex, selectedSeverity, afterStartTimestamp, beforeStartTimestamp, text} = this.state
 
     let selectedIncident = selectedIndex < 0 ? null : incidents[selectedIndex]
 

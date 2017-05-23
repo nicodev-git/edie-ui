@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { validate } from '../../../../../modal/validation/NameValidation'
 import SimpleModalContainer from 'containers/modal/SimpleModalContainer'
+import {severities} from 'shared/Global'
 
 export default class AddIncidentModal extends Component {
 
@@ -24,16 +25,10 @@ export default class AddIncidentModal extends Component {
 
   render () {
     let header = 'Add incident'
-    let options = [
-      { value: 'HIGH', label: 'High' },
-      { value: 'MEDIUM', label: 'Medium' },
-      { value: 'LOW', label: 'Low' },
-      { value: 'AUDIT', label: 'Audit' }
-    ]
     let content = [
       {name: 'Name'},
       {name: 'Description'},
-      {type: 'select', name: 'Severity', options: options}
+      {type: 'select', name: 'Severity', options: severities}
     ]
     return (
       <SimpleModalContainer

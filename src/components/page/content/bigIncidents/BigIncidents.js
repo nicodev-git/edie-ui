@@ -5,21 +5,13 @@ import TimeAgo from 'react-timeago'
 
 import IncidentEventsModal from 'components/page/content/dashboard/incidents/IncidentEventsModal'
 import { thumbup, thumpdown, done, notdone, rawtext, reason } from 'style/materialStyles'
-import { getSeverityIcon } from 'shared/Global'
+import { getSeverityIcon, severities } from 'shared/Global'
 import { showIncidentRaw, showIncidentComments } from 'components/shared/incident/Incident'
 import ReactTooltip from 'react-tooltip'
 
 import BigIncidentsView from '../../../modal/BigIncidentsView'
 
 import InfiniteTable from 'components/shared/InfiniteTable'
-
-const severities = [
-  { label: 'High', value: 'HIGH' },
-  { label: 'Medium', value: 'MEDIUM' },
-  { label: 'Low', value: 'LOW' },
-  { label: 'Audit', value: 'AUDIT' },
-  { label: 'Ignore', value: 'IGNORE' }
-]
 
 class BigIncidents extends Component {
   constructor (props) {

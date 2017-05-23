@@ -7,7 +7,7 @@ import { assign } from 'lodash'
 
 import InfiniteTable from 'components/shared/InfiniteTable'
 
-import { getSeverityIcon } from '../../../../shared/Global'
+import { getSeverityIcon, severities } from 'shared/Global'
 import SearchTabs from './SearchTabs'
 import TabPage from '../../../shared/TabPage'
 import TabPageBody from '../../../shared/TabPageBody'
@@ -30,14 +30,6 @@ const fixedOptions = [
   {label: 'Fixed', value: 'true'}
 ]
 
-const severities = [
-  { label: 'High', value: 'HIGH' },
-  { label: 'Medium', value: 'MEDIUM' },
-  { label: 'Low', value: 'LOW' },
-  { label: 'Audit', value: 'AUDIT' },
-  { label: 'Ignore', value: 'IGNORE' }
-]
-
 export default class Incidents extends React.Component {
   constructor (props) {
     super(props)
@@ -57,15 +49,6 @@ export default class Incidents extends React.Component {
     }
 
     this.state = {
-
-      severities: [
-        { label: 'High', value: 'HIGH' },
-        { label: 'Medium', value: 'MEDIUM' },
-        { label: 'Low', value: 'LOW' },
-        { label: 'Audit', value: 'AUDIT' },
-        { label: 'Ignore', value: 'IGNORE' }
-      ],
-
       selectedSeverity: ['HIGH', 'MEDIUM'],
       selectedDevices: [],
       afterStartTimestamp,

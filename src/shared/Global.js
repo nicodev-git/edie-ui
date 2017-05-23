@@ -211,5 +211,6 @@ export const severities = [
   { label: 'Medium', value: 'MEDIUM' },
   { label: 'Low', value: 'LOW' },
   { label: 'Audit', value: 'AUDIT' },
+  { label: 'Device', value: 'DEVICE' },
   { label: 'Ignore', value: 'IGNORE' }
 ]

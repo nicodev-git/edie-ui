@@ -12,14 +12,13 @@ import { DragDropContext } from 'react-dnd'
 import TouchBackend from 'react-dnd-touch-backend'
 
 import Alert from 'components/shared/Alert'
-import { parseSearchQuery } from 'shared/Global'
+import { parseSearchQuery, severities } from 'shared/Global'
 
 import { mainMenu, deviceMenu, contentType } from './Config'
 
 const dashboardId = mainMenu[0].id
 
 class Main extends React.Component {
-
   constructor (props) {
     super(props)
     this.state = {
@@ -124,7 +123,7 @@ class Main extends React.Component {
     this.props.updateQueryChips(newChips)
     this.props.updateSearchParams(assign({}, this.props.searchParams, {
       query: newChips.map(m => `${m.name}=${m.value}`).join(' and '),
-      severity: 'HIGH,MEDIUM,LOW,AUDIT,IGNORE'
+      severity: severities.map(p => p.value).join(',')
     }))
   }
 
