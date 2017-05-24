@@ -154,7 +154,7 @@ class Main extends React.Component {
       <Snackbar
         open
         action={<SearchIcon color="white" style={{marginTop: '6px'}}/>}
-        message={<div className="inline-block" onClick={this.onClickAlert} style={{cursor: 'pointer'}}>{}</div>}
+        message={<div className="inline-block" onClick={this.onClickAlert} style={{cursor: 'pointer'}}>{newIncidentMsg.message}</div>}
         autoHideDuration={8000}
         onActionTouchTap={this.onClickAlert}
         onRequestClose={keep ? this.fnEmpty : null}
