@@ -240,7 +240,12 @@ class MapCanvas extends React.Component {
     cmap.needReset = !!force
     cmap && cmap.zooming && cmap.setZooming(false)
 
-        // Update Devices
+    if (cmap.needReset) {
+      cmap.zoomReset2(deviceData)
+      cmap.canvas.renderAll()
+    }
+
+    // Update Devices
     if (deviceData !== prevDeviceData) {
       this.updateMapDevices(cmap, deviceData, prevDeviceData)
     }
@@ -251,10 +256,10 @@ class MapCanvas extends React.Component {
     }
 
     setTimeout(function () {
-      if (cmap.needReset) {
-        cmap.zoomReset()
-        cmap.needReset = false
-      }
+      // if (cmap.needReset) {
+      //   cmap.zoomReset()
+      //   cmap.needReset = false
+      // }
 
       cmap.canvas.renderAll()
 

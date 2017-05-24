@@ -1376,6 +1376,75 @@ var mapObject = {
     me.changeZoom(z);
   },
 
+  zoomReset2: function (devices) {
+    var me = this;
+    var left = 0, top = 0;
+    var right = 100, bottom = 100;
+
+    me.canvas.deactivateAllWithDispatch();
+    me.canvas.setZoom(1);
+    me.canvas.absolutePan({x: 0, y: 0});
+
+    var updateBounding = function(br, first) {
+      if (first) {
+        left = br.left;
+        top = br.top;
+        right = br.left + br.width;
+        bottom = br.top + br.height;
+      } else {
+        left = Math.min(br.left, left);
+        top = Math.min(br.top, top);
+        right = Math.max(br.left + br.width, right);
+        bottom = Math.max(br.top + br.height, bottom);
+      }
+    }
+
+    var i;
+    for (i = 0; i < devices.length; i++){
+      var obj = devices[i];
+      updateBounding({
+        left: obj.x || 0,
+        top: (obj.y || 0) - 6,
+        width: (obj.width || 50) + 12,
+        height: obj.height || 50
+      }, i == 0);
+      if (obj.textSize) {
+        updateBounding({
+          left: obj.textX || 0,
+          top: obj.textY || 0,
+          width: obj.textWidth || 0,
+          height: obj.textSize + 4
+        });
+      }
+    }
+
+    var w = right - left;
+    var h = bottom - top;
+
+    if (w < 800) {
+      left += w / 2;
+      w = 800;
+      left -= w / 2;
+    }
+    if (h < 500) {
+      top += h / 2;
+      h = 500;
+      top -= h / 2;
+    }
+
+    var px = (me.canvas.width - 20) / w;
+    var py = (me.canvas.height - 20) / h;
+
+    var z = Math.min(px, py);
+
+    if (z > 3) z = 3;
+
+    me.changeZoom(z, {
+      x: left + w / 2,
+      y: top + h / 2,
+    });
+  },
+
   zoomReset: function() {
     var me = this;
     var left = 0, top = 0;
@@ -1392,13 +1461,13 @@ var mapObject = {
 
       if (first) {
         left = br.left;
-        top = br.top;
-        right = br.left + br.width;
+        top = br.top - 6;
+        right = br.left + br.width + 12;
         bottom = br.top + br.height;
       } else {
         left = Math.min(br.left, left);
-        top = Math.min(br.top, top);
-        right = Math.max(br.left + br.width, right);
+        top = Math.min(br.top - 6, top);
+        right = Math.max(br.left + br.width + 12, right);
         bottom = Math.max(br.top + br.height, bottom);
       }
     }
