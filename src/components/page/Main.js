@@ -25,6 +25,8 @@ class Main extends React.Component {
       user: null,
       minHeight: 1300
     }
+    this.onClickAlert = this.onClickAlert.bind(this)
+    this.fnEmpty = () => {}
   }
 
   componentWillMount () {
@@ -110,7 +112,8 @@ class Main extends React.Component {
   onCloseAlert () {
     this.props.closeApiErrorModal()
   }
-  onClickAlert (incident) {
+  onClickAlert () {
+    const {incident} = this.props.newIncidentMsg
     const query = (incident.description || '').replace(/:/gi, '')
     const newChips = parseSearchQuery(query)
     if (incident.devicename) {
@@ -151,10 +154,10 @@ class Main extends React.Component {
       <Snackbar
         open
         action={<SearchIcon color="white" style={{marginTop: '6px'}}/>}
-        message={<div className="inline-block" onClick={this.onClickAlert.bind(this, newIncidentMsg.incident)} style={{cursor: 'pointer'}}>{newIncidentMsg.message}</div>}
+        message={<div className="inline-block" onClick={this.onClickAlert} style={{cursor: 'pointer'}}>{}</div>}
         autoHideDuration={8000}
-        onActionTouchTap={this.onClickAlert.bind(this, newIncidentMsg.incident)}
-        onRequestClose={keep ? () => {} : null}
+        onActionTouchTap={this.onClickAlert}
+        onRequestClose={keep ? this.fnEmpty : null}
       />
     )
   }
