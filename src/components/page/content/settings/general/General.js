@@ -117,6 +117,15 @@ export default class General extends React.Component {
               checked={this.getOptionValue('SHOW_ABS_DATE') === 'true'}
               onCheck={this.onChangeAbsDate.bind(this)}/>
           </div>
+          <InlineEdit
+            text="DD/MM/YYYY HH:mm:ss"
+            paramName="dateFormat"
+            change={() => {}}
+            className="pull-left margin-xs-top"
+            ref="dateFormat"
+            minLength={0}
+          />
+
         </div>
 
         <div className="col-md-12 margin-md-bottom bt-gray">
