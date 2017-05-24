@@ -18,6 +18,9 @@ import { mainMenu, deviceMenu, contentType } from './Config'
 
 const dashboardId = mainMenu[0].id
 
+const searchIconStyle = {
+  marginTop: '6px'
+}
 class Main extends React.Component {
   constructor (props) {
     super(props)
@@ -27,6 +30,8 @@ class Main extends React.Component {
     }
     this.onClickAlert = this.onClickAlert.bind(this)
     this.fnEmpty = () => {}
+
+    this.searchIcon = <SearchIcon color="white" style={searchIconStyle}/>
   }
 
   componentWillMount () {
@@ -151,14 +156,16 @@ class Main extends React.Component {
     if (!newIncidentMsg) return null
     const keep = userInfo && userInfo.keepIncidentAlert
     return (
-      <Snackbar
-        open
-        action={<SearchIcon color="white" style={{marginTop: '6px'}}/>}
-        message={<div className="inline-block" onClick={this.onClickAlert} style={{cursor: 'pointer'}}>{newIncidentMsg.message}</div>}
-        autoHideDuration={8000}
-        onActionTouchTap={this.onClickAlert}
-        onRequestClose={keep ? this.fnEmpty : null}
-      />
+      <a href="javascript:;" onClick={this.onClickAlert}>
+        <Snackbar
+          open
+          action={this.searchIcon}
+          message={newIncidentMsg.message}
+          autoHideDuration={8000}
+          onActionTouchTap={this.onClickAlert}
+          onRequestClose={keep ? this.fnEmpty : null}
+        />
+      </a>
     )
   }
 
