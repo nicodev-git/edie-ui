@@ -9,7 +9,7 @@ export default class MapImportModal extends Component {
     if (typeof FormData !== 'undefined') {
       let formData = new FormData() // eslint-disable-line no-undef
       // formData.append('file', file, input.value.split(/(\\|\/)/g).pop()) what does this regex do?
-      formData.append('file', values.file, values.file.name)
+      formData.append('file', values.file[0], values.file[0].name)
       formData.append('name', values.name)
       this.props.importMap(formData)
     }
