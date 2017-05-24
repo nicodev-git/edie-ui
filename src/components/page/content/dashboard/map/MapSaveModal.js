@@ -2,15 +2,11 @@ import React, { Component } from 'react'
 import SimpleModalContainer from 'containers/modal/SimpleModalContainer'
 import { validate } from '../../../../modal/validation/NameValidation'
 
+import {ROOT_URL} from 'actions/config'
+
 export default class MapSaveModal extends Component {
   doAction (values) {
-    console.log('doing some action when form submitted')
-    console.log(values)
-    // TODO
-    /* document.location.href = `${'/exportmap' + '?'}$.param({
-      ${name},
-      mapid: ${this.props.mapId}
-    })` */
+    document.location.href = `${ROOT_URL}/exportmap?mapid=${this.props.mapId}&name=${encodeURIComponent(values.name)}`
   }
 
   render () {
