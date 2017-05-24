@@ -1,5 +1,5 @@
 import React from 'react'
-import { reduxForm } from 'redux-form'
+import { reduxForm, formValueSelector } from 'redux-form'
 import { assign, concat } from 'lodash'
 import { connect } from 'react-redux'
 import { showAlert } from 'components/shared/Alert'
@@ -56,6 +56,9 @@ class ParserTypeModal extends React.Component {
       })
     }
   }
+  onClickValueChip () {
+    this.props.change('filters', `.*${this.props.currentFilters}.*`)
+  }
 
   render () {
     const { patterns, selectedPatternIndex } = this.state
@@ -67,6 +70,7 @@ class ParserTypeModal extends React.Component {
         header={header}
         patterns={patterns}
         selectedIndex={selectedPatternIndex}
+        onClickValueChip={this.onClickValueChip.bind(this)}
         onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
         onPatternChange={this.onPatternChange.bind(this)}
         onDelete={this.onClickRemovePattern.bind(this)}
@@ -77,9 +81,11 @@ class ParserTypeModal extends React.Component {
   }
 }
 
+const selector = formValueSelector('parserTypeForm')
 export default connect(
   state => ({
     initialValues: state.settings.editParserType,
+    currentFilters: selector(state, 'filters'),
     validate: validate
   })
 )(reduxForm({form: 'parserTypeForm'})(ParserTypeModal))

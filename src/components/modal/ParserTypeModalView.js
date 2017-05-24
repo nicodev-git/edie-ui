@@ -4,13 +4,15 @@ import IconButton from 'material-ui/IconButton'
 import DeleteIcon from 'material-ui/svg-icons/action/delete'
 import InlineEdit from 'react-edit-inline'
 import { Field } from 'redux-form'
+import {Chip} from 'material-ui'
+
 import { Header, SubHeader, SubmitBlock, FormInput, FormSelect } from './parts'
-import { buttonStyle, iconStyle } from 'style/materialStyles'
+import { buttonStyle, iconStyle, chipStyles } from 'style/materialStyles'
 
 export default class ParserTypeModalView extends Component {
   render () {
     const {show, header, patterns, selectedIndex, onSubmit,
-      onHide, onPatternChange, onDelete, onItemClick} = this.props
+      onHide, onPatternChange, onDelete, onItemClick, onClickValueChip} = this.props
     return (
       <Modal
         show={show}
@@ -23,6 +25,11 @@ export default class ParserTypeModalView extends Component {
           <form onSubmit={onSubmit}>
             <div className="form-column">
               <Field name="name" component={FormInput} label="name"/>
+              <div>
+                <Chip style={chipStyles.chip} onTouchTap={() => onClickValueChip('.*')}>
+                  .*
+                </Chip>
+              </div>
               <Field name="filters" component={FormInput} label="filters"/>
               <Field name="ignoredelete" component={FormSelect} label="IgnoreDelete" options={[{label: 'Ignore Delete', value: 'IGNOREDELETE'}]}/>
               <div className="text-plus-icon">

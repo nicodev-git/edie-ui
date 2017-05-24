@@ -24,6 +24,9 @@ class ParserTypes extends React.Component {
     }, {
       'displayName': 'Filters',
       'columnName': 'filters'
+    }, {
+      'displayName': 'IgnoreDelete',
+      'columnName': 'ignoredelete'
     }]
   }
   componentWillMount () {
