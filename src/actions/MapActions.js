@@ -152,6 +152,7 @@ export const importMap = (form) => {
 }
 
 const importMapSuccess = (dispatch, response) => {
+  if (!response.data) return
   dispatch({
     type: IMPORT_MAP,
     data: response.data
