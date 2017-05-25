@@ -99,19 +99,19 @@ export default class MainContainer extends Component {
   }
 
   onReceiveIncidents (msg) {
-    console.log(msg)
+    // console.log(msg)
     if (msg && msg.length && (msg[0].severity === 'HIGH' || msg[0].severity === 'MEDIUM')) {
       this.props.addDashboardIncident(msg)
     }
   }
 
   onReceiveStatus (msg) {
-    // console.log(msg)
+    if (window && window.debugSocket) console.log(msg)
     this.props.updateMapDeviceStatus(msg)
   }
 
   onReceiveDashboard (msg) {
-    console.log(msg)
+    // console.log(msg)
     this.props.updateDashboardStats({
       open: msg.openincidents || 0,
       today: msg.todayincidents || 0,
