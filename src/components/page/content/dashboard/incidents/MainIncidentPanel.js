@@ -5,6 +5,8 @@ import IncidentTable from './IncidentTable'
 import ToolbarToggle from '../map/toolbar/ToolbarToggle'
 import IncidentEventsModal from './IncidentEventsModal'
 
+import {defaultDateFormat} from 'shared/Global'
+
 @withRouter
 export default class MainIncidentPanel extends React.Component {
   constructor (props) {
@@ -17,9 +19,10 @@ export default class MainIncidentPanel extends React.Component {
   }
 
   renderTable () {
-    const showAbsDate = this.getOptionValue('SHOW_ABS_DATE') === 'true'
+    const showAbsDate = this.getUserOptionValue('useAbsoluteDate', false)
+    const dateFormat = this.getUserOptionValue('dateFormat', defaultDateFormat)
     return (
-      <IncidentTable {...this.props} showAbsDate={showAbsDate} ref="table"/>
+      <IncidentTable {...this.props} showAbsDate={showAbsDate} dateFormat={dateFormat} ref="table"/>
     )
   }
 
@@ -31,16 +34,10 @@ export default class MainIncidentPanel extends React.Component {
 
   }
 
-  getOption (key) {
-    const list = (this.props.envVars || []).filter(u => u.envvars && u.envvars.key === key)
-    if (list.length) return list[0]
-    return null
-  }
-
-  getOptionValue (key, value = 'value1') {
-    const option = this.getOption(key)
-    if (!option) return ''
-    return option.envvars[value]
+  getUserOptionValue (key, defVal) {
+    const {userInfo} = this.props
+    if (!userInfo) return defVal
+    return userInfo[key] || defVal
   }
 
   refreshTable () {
