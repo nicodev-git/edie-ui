@@ -244,6 +244,7 @@ class MapCanvas extends React.Component {
       cmap.zoomReset2(deviceData)
       cmap.canvas.renderAll()
     }
+    cmap.needReset = false
 
     // Update Devices
     if (deviceData !== prevDeviceData) {
@@ -261,7 +262,7 @@ class MapCanvas extends React.Component {
       //   cmap.needReset = false
       // }
 
-      cmap.canvas.renderAll()
+      // cmap.canvas.renderAll()
 
       callback && callback()
     }, 500)
