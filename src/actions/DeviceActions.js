@@ -693,17 +693,17 @@ export const closeWfActionModal = () => {
   }
 }
 
-export const fixAllDeviceIncidents = (device) => {
+export const fixAllDeviceIncidents = (device, user, text) => {
   return dispatch => {
-    axios.get(`${ROOT_URL}/incident/fixall/bydeviceid/${device.id}`).then(res => {
+    axios.get(`${ROOT_URL}/incident/fixall/bydeviceid/${device.id}/${user}/${encodeURIComponent(text)}`).then(res => {
       dispatch({type: FIX_ALL_DEVICE_INCIDENTS})
     }).catch(error => apiError(dispatch, error))
   }
 }
 
-export const fixDeviceIncidents = (incidentIds) => {
+export const fixDeviceIncidents = (incidentIds, user, text) => {
   return dispatch => {
-    axios.get(`${ROOT_URL}/incident/fixall/selected/${incidentIds.join(',')}`).then(res => {
+    axios.get(`${ROOT_URL}/incident/fixall/selected/${incidentIds.join(',')}/${user}/${encodeURIComponent(text)}`).then(res => {
       dispatch({type: FIX_ALL_DEVICE_INCIDENTS})
     }).catch(error => apiError(dispatch, error))
   }

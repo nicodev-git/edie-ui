@@ -55,7 +55,7 @@ export default class CommentsModal extends Component {
         </div>
         <div className="modal-body bootstrap-dialog-message">
 
-          <div className="row margin-md-bottom">
+          <div className="row margin-md-bottom hidden">
             <label className="control-label col-md-2 padding-xs-top">Reason</label>
 
             <div className="col-md-8">

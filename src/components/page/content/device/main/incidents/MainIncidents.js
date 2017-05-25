@@ -21,7 +21,7 @@ import AddIncidentModal from './AddIncidentModal'
 import AddExceptionModal from './AddExceptionModal'
 import CommentsModal from '../../../../../shared/incident/CommentsModal'
 
-import { showAlert, showPrompt, showConfirm } from '../../../../../shared/Alert'
+import { showAlert, showPrompt } from '../../../../../shared/Alert'
 import { getSeverityIcon, parseSearchQuery, dateFormat, encodeUrlParams, severities } from 'shared/Global'
 import MainTabs from '../MainTabs'
 import TabPage from 'components/shared/TabPage'
@@ -55,7 +55,9 @@ export default class MainIncidents extends Component {
 
       openExceptionModal: false,
       commentModalVisible: false,
-      params: {}
+      params: {},
+
+      incident: null
     }
 
     this.cells = [{
@@ -217,16 +219,28 @@ export default class MainIncidents extends Component {
   }
 
   onClickFixAll () {
-    showConfirm('Click OK to fix all device incidents.', btn => {
-      if (btn !== 'ok') return
-      this.props.fixAllDeviceIncidents(this.props.device)
+    showPrompt('Please type comment.', '', text => {
+      if (!text) return
+
+      const {userInfo} = this.props
+      const user = userInfo ? userInfo.username : 'User'
+
+      this.props.fixAllDeviceIncidents(this.props.device, user, text)
     })
   }
 
   onClickFixSelected () {
     const selected = this.getTable().getSelected(true)
     if (!selected.length) return showAlert('Please select incidents.')
-    this.props.fixDeviceIncidents(selected.map(s => s.id))
+
+    showPrompt('Please type comment.', '', text => {
+      if (!text) return
+
+      const {userInfo} = this.props
+      const user = userInfo ? userInfo.username : 'User'
+
+      this.props.fixDeviceIncidents(selected.map(s => s.id), user, text)
+    })
   }
 
   onClickAddIncident () {
@@ -330,7 +344,7 @@ export default class MainIncidents extends Component {
 
   showIncidentComments (incident) {
     this.setState({
-      selectedIndex: findIndex(this.props.incidents, {id: incident.id}),
+      incident,
       commentModalVisible: true
     })
   }
@@ -373,7 +387,7 @@ export default class MainIncidents extends Component {
 
   render () {
     const {device, incidents} = this.props
-    const {selectedIndex, selectedSeverity, afterStartTimestamp, beforeStartTimestamp, text} = this.state
+    const {selectedIndex, selectedSeverity, afterStartTimestamp, beforeStartTimestamp, text, incident} = this.state
 
     let selectedIncident = selectedIndex < 0 ? null : incidents[selectedIndex]
 
@@ -477,7 +491,8 @@ export default class MainIncidents extends Component {
 
           {this.state.commentModalVisible &&
           <CommentsModal
-            incident={selectedIncident}
+            incident={incident}
+            updateDeviceIncident={this.props.updateDeviceIncident}
             onClose={() => {
               this.setState({commentModalVisible: false})
             }}/>}

@@ -17,7 +17,8 @@ import {
   updateQueryChips,
   updateSearchParams,
 
-  fixDeviceIncidents
+  fixDeviceIncidents,
+  updateDeviceIncident
 } from 'actions'
 
 import MainIncidents from 'components/page/content/device/main/incidents/MainIncidents'
@@ -46,7 +47,8 @@ import MainIncidents from 'components/page/content/device/main/incidents/MainInc
       updateQueryChips,
       updateSearchParams,
 
-      fixDeviceIncidents
+      fixDeviceIncidents,
+      updateDeviceIncident
     }, dispatch)
   })
 )
