@@ -42,7 +42,8 @@ import {
 
   showSidebarMessageMenu,
 
-  fetchDashboardStats
+  fetchDashboardStats,
+  updateDeviceIncident
 } from 'actions'
 
 export default connect(
@@ -124,6 +125,7 @@ export default connect(
 
     showSidebarMessageMenu,
 
-    fetchDashboardStats
+    fetchDashboardStats,
+    updateDeviceIncident
   }
 )(Dashboard)

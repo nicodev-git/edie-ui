@@ -6,14 +6,17 @@ import ReactTooltip from 'react-tooltip'
 import { thumbup, thumpdown, done, notdone,
   rawtext, reason } from 'style/materialStyles'
 import { getSeverityIcon } from 'shared/Global'
-import {showIncidentRaw, showIncidentComments} from 'components/shared/incident/Incident'
+import {showIncidentRaw} from 'components/shared/incident/Incident'
 import InfiniteTable from 'components/shared/InfiniteTable'
 import {showPrompt} from 'components/shared/Alert'
+import CommentsModal from 'components/shared/incident/CommentsModal'
 
 export default class IncidentTable extends Component {
   constructor (props) {
     super(props)
-    this.state = {}
+    this.state = {
+      commentModalVisible: false
+    }
 
     this.cells = [{
       'displayName': 'Severity',
@@ -74,7 +77,7 @@ export default class IncidentTable extends Component {
             {
               (row.fixed && !row.whathappened)
                 ? <div
-                  onClick={showIncidentComments.bind(null, this.context.sid, row, this.reloadTable.bind(this))}>
+                  onClick={this.showIncidentComments.bind(this, row)}>
                   {reason}
                 </div>
                 : null
@@ -94,6 +97,13 @@ export default class IncidentTable extends Component {
       const user = userInfo ? userInfo.username : 'User'
 
       this.props.fixIncident(incident, user, text)
+    })
+  }
+
+  showIncidentComments (incident) {
+    this.setState({
+      incident,
+      commentModalVisible: true
     })
   }
 
@@ -126,6 +136,13 @@ export default class IncidentTable extends Component {
             sort: 'startTimestamp,desc'
           }}
         />
+        {this.state.commentModalVisible &&
+        <CommentsModal
+          incident={this.state.incident}
+          updateDeviceIncident={this.props.updateDeviceIncident}
+          onClose={() => {
+            this.setState({commentModalVisible: false})
+          }}/>}
       </div>
     )
   }
