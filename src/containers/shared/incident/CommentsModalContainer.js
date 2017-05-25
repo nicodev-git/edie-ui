@@ -1,16 +1,16 @@
 import React from 'react'
 import CommentsModal from 'components/shared/incident/CommentsModal'
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
-import { updateDeviceIncident } from 'actions'
+import getMuiTheme from 'material-ui/styles/getMuiTheme'
 
-@connect(
-  state => ({ }),
-  dispatch => ({
-    updateDeviceIncident: bindActionCreators(updateDeviceIncident, dispatch)
-  })
-)
 export default class CommentsModalContainer extends React.Component {
+  static childContextTypes = {
+    muiTheme: React.PropTypes.object
+  }
+  getChildContext () {
+    return {
+      muiTheme: getMuiTheme()
+    }
+  }
   render () {
     return (
       <CommentsModal {...this.props} />

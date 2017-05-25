@@ -22,10 +22,11 @@ export function showIncidentRaw (incident) {
   )
 }
 
-export function showIncidentComments (sid, incident, cb) {
+export function showIncidentComments (sid, incident, cb, updateDeviceIncident) {
   appendComponent(
     <CommentsModalContainer
       incident={incident}
+      updateDeviceIncident={updateDeviceIncident}
       onClose={(modal) => {
         removeComponent(modal)
         cb && cb()
