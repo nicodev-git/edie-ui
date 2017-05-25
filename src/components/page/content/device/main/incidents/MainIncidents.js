@@ -21,7 +21,7 @@ import AddIncidentModal from './AddIncidentModal'
 import AddExceptionModal from './AddExceptionModal'
 import CommentsModal from '../../../../../shared/incident/CommentsModal'
 
-import { showAlert, showConfirm } from '../../../../../shared/Alert'
+import { showAlert, showPrompt, showConfirm } from '../../../../../shared/Alert'
 import { getSeverityIcon, parseSearchQuery, dateFormat, encodeUrlParams, severities } from 'shared/Global'
 import MainTabs from '../MainTabs'
 import TabPage from 'components/shared/TabPage'
@@ -112,7 +112,7 @@ export default class MainIncidents extends Component {
             </div>
             &nbsp;
 
-            <div onClick={() => { props.fixIncident(row) }}>
+            <div onClick={() => this.onClickFixIncident(row)}>
               {row.fixed ? done : notdone}
             </div>
             &nbsp;
@@ -143,7 +143,16 @@ export default class MainIncidents extends Component {
   componentDidMount () {
     this.onFilterChange()
   }
+  onClickFixIncident (incident) {
+    showPrompt('Please type comment.', '', text => {
+      if (!text) return
 
+      const {userInfo} = this.props
+      const user = userInfo ? userInfo.username : 'User'
+
+      this.props.fixIncident(incident, user, text)
+    })
+  }
   renderColHeader (col) {
     const {columnName, displayName} = col
     const { currentSortCol, currentSortDir } = this.state

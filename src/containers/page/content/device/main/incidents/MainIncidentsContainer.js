@@ -28,7 +28,8 @@ import MainIncidents from 'components/page/content/device/main/incidents/MainInc
     incidents: state.devices.incidents,
     incidentDraw: state.devices.incidentDraw,
     addIncidentModalVisible: state.devices.addIncidentModalVisible,
-    params: state.search.params
+    params: state.search.params,
+    userInfo: state.dashboard.userInfo
   }),
   dispatch => ({
     ...bindActionCreators({
