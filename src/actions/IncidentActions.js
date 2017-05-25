@@ -15,6 +15,7 @@ import {
 
   NO_AUTH_ERROR
 } from './types'
+import {concat} from 'lodash'
 
 import { apiError } from './Errors'
 
@@ -109,10 +110,15 @@ export const closeAddDeviceIncident = () => {
   }
 }
 
-export const fixIncident = (incident) => {
+export const fixIncident = (incident, user, text) => {
   return (dispatch) => {
     incident.fixed = true
     incident.acknowledged = true
+    incident.comments = concat(incident.comments || [], {
+      user,
+      text,
+      dateCreated: new Date().getTime()
+    })
     dispatch(updateDeviceIncident(incident))
   }
 }

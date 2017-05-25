@@ -1,17 +1,14 @@
 import React, { Component } from 'react'
 import TimeAgo from 'react-timeago'
 import moment from 'moment'
+import ReactTooltip from 'react-tooltip'
+
 import { thumbup, thumpdown, done, notdone,
   rawtext, reason } from 'style/materialStyles'
-import {
-    getSeverityIcon
-} from '../../../../../shared/Global'
-import {
-  showIncidentRaw,
-  showIncidentComments
-} from '../../../../shared/incident/Incident'
-import ReactTooltip from 'react-tooltip'
+import { getSeverityIcon } from 'shared/Global'
+import {showIncidentRaw, showIncidentComments} from 'components/shared/incident/Incident'
 import InfiniteTable from 'components/shared/InfiniteTable'
+import {showPrompt} from 'components/shared/Alert'
 
 export default class IncidentTable extends Component {
   constructor (props) {
@@ -66,7 +63,7 @@ export default class IncidentTable extends Component {
               {row.acknowledged ? thumbup : thumpdown}
             </div>
 
-            <div onClick={() => { this.props.fixIncident(row) }}>
+            <div onClick={() => this.onClickFixIncident(row)}>
                 {row.fixed ? done : notdone}
             </div>
 
@@ -87,6 +84,17 @@ export default class IncidentTable extends Component {
         )
       }
     }]
+  }
+
+  onClickFixIncident (incident) {
+    showPrompt('Please type comment.', '', text => {
+      if (!text) return
+
+      const {userInfo} = this.props
+      const user = userInfo ? userInfo.username : 'User'
+
+      this.props.fixIncident(incident, user, text)
+    })
   }
 
   refresh () {

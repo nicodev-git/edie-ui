@@ -40,7 +40,7 @@ export default class Alert extends Component {
   }
 
   onClickSave () {
-    this.closeAlert('ok', this.refs.input.value || '')
+    this.closeAlert('ok', this.refs.input.input.value || '')
   }
 
   onClickClose () {

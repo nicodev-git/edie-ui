@@ -9,15 +9,6 @@ import {defaultDateFormat} from 'shared/Global'
 
 @withRouter
 export default class MainIncidentPanel extends React.Component {
-  constructor (props) {
-    super(props)
-
-    this.state = {
-    }
-
-    this.refreshTable = this.refreshTable.bind(this)
-  }
-
   renderTable () {
     const showAbsDate = this.getUserOptionValue('useAbsoluteDate', false)
     const dateFormat = this.getUserOptionValue('dateFormat', defaultDateFormat)
@@ -30,18 +21,10 @@ export default class MainIncidentPanel extends React.Component {
     this.props.router.push('/bigincidents')
   }
 
-  onClickSearch () {
-
-  }
-
   getUserOptionValue (key, defVal) {
     const {userInfo} = this.props
     if (!userInfo) return defVal
     return userInfo[key] || defVal
-  }
-
-  refreshTable () {
-    this.refs.table && this.refs.table.getWrappedInstance() && this.refs.table.getWrappedInstance().refresh()
   }
 
   renderIncidentEventsModal () {
