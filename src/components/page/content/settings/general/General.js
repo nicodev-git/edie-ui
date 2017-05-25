@@ -8,6 +8,8 @@ import TabPage from 'components/shared/TabPage' // Never used
 import TabPageBody from 'components/shared/TabPageBody' // Never used
 import TabPageHeader from 'components/shared/TabPageHeader' // Never used
 
+import {defaultDateFormat} from 'shared/Global'
+
 export default class General extends React.Component {
   constructor (props) {
     super(props)
@@ -114,13 +116,13 @@ export default class General extends React.Component {
           <div className="pull-left width-200">
             <Checkbox
               label="Show absolute date"
-              checked={this.getOptionValue('SHOW_ABS_DATE') === 'true'}
+              checked={this.getUserOptionValue('useAbsoluteDate', false)}
               onCheck={this.onChangeAbsDate.bind(this)}/>
           </div>
           <InlineEdit
-            text="DD/MM/YYYY HH:mm:ss"
+            text={this.getUserOptionValue('dateFormat', defaultDateFormat)}
             paramName="dateFormat"
-            change={() => {}}
+            change={this.onChangeDateFormat.bind(this)}
             className="pull-left margin-xs-top"
             ref="dateFormat"
             minLength={0}
@@ -132,7 +134,7 @@ export default class General extends React.Component {
           <div className="pull-left width-200">
             <Checkbox
               label="Keep Incident Alert"
-              checked={!!this.getUserOptionValue('keepIncidentAlert')}
+              checked={!!this.getUserOptionValue('keepIncidentAlert', false)}
               onCheck={this.onChangeKeepIncidentAlert.bind(this)}/>
           </div>
         </div>
@@ -171,10 +173,10 @@ export default class General extends React.Component {
     return option.envvars[value]
   }
 
-  getUserOptionValue (key) {
+  getUserOptionValue (key, defVal) {
     const {userInfo} = this.props
-    if (!userInfo) return false
-    return userInfo[key]
+    if (!userInfo) return defVal
+    return userInfo[key] || defVal
   }
 
   onChangeSysName (value) {
@@ -224,12 +226,20 @@ export default class General extends React.Component {
   }
 
   onChangeAbsDate (e) {
-    let {checked} = e.target
-    this.updateOption('SHOW_ABS_DATE', `${checked}`)
+    this.updateUserOption('useAbsoluteDate', e.target.checked)
+  }
+
+  onChangeDateFormat (value) {
+    this.updateUserOption('dateFormat', value.dateFormat)
   }
 
   onChangeKeepIncidentAlert (e) {
-    this.props.updateUserOption(this.props.userInfo, 'keepIncidentAlert', e.target.checked)
+    this.updateUserOption('keepIncidentAlert', e.target.checked)
+  }
+
+  updateUserOption (key, value) {
+    if (!key) return
+    this.props.updateUserOption(this.props.userInfo, key, value)
   }
 
   updateOption (name, value1, value2 = '') {

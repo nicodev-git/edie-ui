@@ -7,6 +7,7 @@ import DescriptionIcon from 'material-ui/svg-icons/action/description'
 import { iconStyle } from 'style/materialStyles'
 
 export const dateFormat = 'DD/MM/YYYY HH:mm:ss'
+export const defaultDateFormat = 'YYYY-MM-DD HH:mm:ss'
 
 export const imageBaseUrl = `${ROOT_URL}/images/`
 export const extImageBaseUrl = `${ROOT_URL}/externalpictures?name=`
