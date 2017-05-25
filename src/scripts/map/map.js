@@ -1408,11 +1408,11 @@ var mapObject = {
         width: (obj.width || 50) + 12,
         height: obj.height || 50
       }, i == 0);
-      if (obj.textSize) {
+      if (obj.textSize && obj.textX && obj.textY) {
         updateBounding({
-          left: obj.textX || 0,
-          top: obj.textY || 0,
-          width: obj.textWidth || 0,
+          left: obj.textX,
+          top: obj.textY,
+          width: obj.textWidth,
           height: obj.textSize + 4
         });
       }
