@@ -79,7 +79,8 @@ export default connect(
 
     attackers: state.attackers.attackers,
 
-    envVars: state.settings.envVars
+    envVars: state.settings.envVars,
+    userInfo: state.dashboard.userInfo
   }), {
 
     fetchBigIncidents,
