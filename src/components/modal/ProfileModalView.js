@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Modal from 'react-bootstrap-modal'
 import { Field } from 'redux-form'
-import { Header, SubmitBlock, ProfileImageUpload, FormInput, FormMultiSelect, CheckboxItem } from './parts'
+import { Header, SubmitBlock, ProfileImageUpload, FormInput, FormSelect, FormMultiSelect, CheckboxItem } from './parts'
 
 export default class ProfileModalView extends Component {
   render () {
@@ -18,8 +18,8 @@ export default class ProfileModalView extends Component {
               <Field name="fullname" component={FormInput} label="Full Name"/>
               <Field name="email" component={FormInput} label="Email"/>
               <Field name="phone" component={FormInput} label="Phone"/>
-              <Field name="map" component={FormMultiSelect} label="Default Map" options={mapOptions} multiple/>
-              <Field name="role" component={FormMultiSelect} label="Role" options={roleOptions} multiple/>
+              <Field name="defaultMapId" component={FormSelect} label="Default Map" options={mapOptions}/>
+              <Field name="roles" component={FormMultiSelect} label="Role" options={roleOptions}/>
               <CheckboxItem label={checkboxLabel} disabled defaultChecked={defaultChecked}/>
             </div>
             <SubmitBlock name="Save" onClick={onHide}/>

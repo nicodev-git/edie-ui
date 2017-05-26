@@ -97,8 +97,8 @@ class ProfileModal extends Component { // eslint-disable-line react/no-multi-com
     console.log(imgSrc)
     let mapOptions = this.renderMapOptions()
     let roleOptions = [
-      {value: 'user', label: 'user'},
-      {value: 'admin', label: 'admin'}
+      {value: 'USER', label: 'User'},
+      {value: 'ADMIN', label: 'Admin'}
     ]
     let defaultChecked = (user.enabled === true)
     let checkboxLabel = 'User Enabled'
