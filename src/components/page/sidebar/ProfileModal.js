@@ -32,8 +32,8 @@ class ProfileModal extends Component { // eslint-disable-line react/no-multi-com
   handleFormSubmit (values) {
     const {user} = this.props
     this.uploadUserImage(image => {
-      let props = assign({}, user, values, {
-        mapids: [this.refs.defaultmap.value]
+      const props = assign({}, user, values, {
+        mapids: []// [this.refs.defaultmap.value]
       })
       if (image) props.image = image
       console.log(props)
@@ -44,7 +44,7 @@ class ProfileModal extends Component { // eslint-disable-line react/no-multi-com
 
   uploadUserImage (cb) {
     let input = this.refs.file
-    if (!input.files || !input.files.length) return cb()
+    if (!input || !input.files || !input.files.length) return cb()
     let file = input.files[0]
     let formData = new FormData() // eslint-disable-line no-undef
     formData.append('file', file, input.value.split(/(\\|\/)/g).pop())
