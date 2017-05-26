@@ -6,7 +6,7 @@ import { Header, SubmitBlock, ProfileImageUpload, FormInput, FormSelect, FormMul
 export default class ProfileModalView extends Component {
   render () {
     const {show, imgSrc, onHide, onSubmit, onChangeImage, mapOptions, roleOptions,
-      defaultChecked, checkboxLabel} = this.props
+      defaultChecked, checkboxLabel, onChangeRoles} = this.props
     return (
       <Modal show={show} onHide={onHide} aria-labelledby="ModalHeader" className="bootstrap-dialog type-primary">
         <Header name="Profile" />
@@ -19,7 +19,7 @@ export default class ProfileModalView extends Component {
               <Field name="email" component={FormInput} label="Email"/>
               <Field name="phone" component={FormInput} label="Phone"/>
               <Field name="defaultMapId" component={FormSelect} label="Default Map" options={mapOptions}/>
-              <Field name="roles" type="select" component={FormMultiSelect} label="Role" options={roleOptions}/>
+              <Field name="roles" type="select" component={FormMultiSelect} label="Role" options={roleOptions} props={{onChange: onChangeRoles}} />
               <CheckboxItem label={checkboxLabel} disabled defaultChecked={defaultChecked}/>
             </div>
             <SubmitBlock name="Save" onClick={onHide}/>

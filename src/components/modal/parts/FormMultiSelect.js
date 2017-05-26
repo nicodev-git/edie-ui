@@ -2,7 +2,7 @@ import React from 'react'
 import {SelectField, MenuItem} from 'material-ui'
 import { underlineFocusStyle, inputStyle, selectedItemStyle } from 'style/materialStyles'
 
-const FormMultiSelect = ({input, label, meta: { touched, error }, value, options}) => (
+const FormMultiSelect = ({input, label, meta: { touched, error }, value, options, onChange}) => (
   <SelectField
     {...input}
     underlineStyle={underlineFocusStyle}
@@ -11,6 +11,7 @@ const FormMultiSelect = ({input, label, meta: { touched, error }, value, options
     multiple
     hintText={label}
     value={input.value}
+    onChange={onChange || input.onChange}
   >
     {options.map(option =>
       <MenuItem
