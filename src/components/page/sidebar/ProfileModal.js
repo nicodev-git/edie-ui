@@ -90,15 +90,17 @@ class ProfileModal extends Component { // eslint-disable-line react/no-multi-com
     let options = maps.map(item => ({value: item.id, label: item.name}))
     return options
   }
-
+  onChangeRoles (e, index, value) {
+    this.props.change('roles', value)
+  }
   render () {
     let { user, handleSubmit } = this.props
     let imgSrc = this.state.imgSrc || (`${extImageBaseUrl}${user.image || 'unknown.png'}`)
     console.log(imgSrc)
     let mapOptions = this.renderMapOptions()
     let roleOptions = [
-      {value: 'USER', label: 'User'},
-      {value: 'ADMIN', label: 'Admin'}
+      {value: 'ADMIN', label: 'Admin'},
+      {value: 'USER', label: 'User'}
     ]
     let defaultChecked = (user.enabled === true)
     let checkboxLabel = 'User Enabled'
@@ -113,6 +115,7 @@ class ProfileModal extends Component { // eslint-disable-line react/no-multi-com
         roleOptions={roleOptions}
         defaultChecked={defaultChecked}
         checkboxLabel={checkboxLabel}
+        onChangeRoles={this.onChangeRoles.bind(this)}
       />
     )
   }

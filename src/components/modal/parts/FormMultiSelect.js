@@ -20,7 +20,6 @@ const FormMultiSelect = ({input, label, meta: { touched, error }, value, options
         checked={input.value && input.value.includes(option.value)}
         value={option.value}
         primaryText={option.label}
-        type="select-multiple"
       />
     )}
   </SelectField>
