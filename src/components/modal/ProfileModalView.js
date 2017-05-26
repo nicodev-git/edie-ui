@@ -19,7 +19,7 @@ export default class ProfileModalView extends Component {
               <Field name="email" component={FormInput} label="Email"/>
               <Field name="phone" component={FormInput} label="Phone"/>
               <Field name="defaultMapId" component={FormSelect} label="Default Map" options={mapOptions}/>
-              <Field name="roles" type="select-multiple" component={FormMultiSelect} label="Role" options={roleOptions}/>
+              <Field name="roles" type="select" component={FormMultiSelect} label="Role" options={roleOptions}/>
               <CheckboxItem label={checkboxLabel} disabled defaultChecked={defaultChecked}/>
             </div>
             <SubmitBlock name="Save" onClick={onHide}/>
