@@ -21,7 +21,7 @@ export default class CommentsModal extends Component {
 
   onClickAdd () {
     const text = this.refs.comment.value
-    if (!text) return showAlert('Please input reason.') // eslint-disable-line no-undef
+    if (!text) return showAlert('Please input comment.') // eslint-disable-line no-undef
 
     const params = {
       text,
@@ -47,7 +47,7 @@ export default class CommentsModal extends Component {
       >
         <div className="modal-header">
           <h4 className="modal-title bootstrap-dialog-title">
-            Reason
+            Comment
           </h4>
           <div className="bootstrap-dialog-close-button">
             <button className="close" onClick={this.onClickClose.bind(this)}>×</button>
