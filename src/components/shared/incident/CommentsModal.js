@@ -81,7 +81,7 @@ export default class CommentsModal extends Component {
 
               {(comments || []).map((item, index) =>
                 <tr key={index}>
-                  <td>{moment(item.dateCreated).format('YYYY-MM-DD')}</td>
+                  <td>{moment(item.dateCreated).format('YYYY-MM-DD HH:mm:ss')}</td>
                   <td>{item.user}</td>
                   <td>{item.text}</td>
                 </tr>
