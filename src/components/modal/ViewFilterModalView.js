@@ -17,8 +17,7 @@ export default class ViewFilterModalView extends React.Component {
                 Logs
               </div>
             </Tab>
-            <Tab label="Specific">
-            </Tab>
+            <Tab label="Specific"/>
           </Tabs>
           <TwoButtonsBlockCustom name1="OK" name2="Cancel" action1={onClickOK} action2={onClickClose}/>
         </div>

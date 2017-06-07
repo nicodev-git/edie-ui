@@ -11,6 +11,7 @@ import {
   UPDATE_QUERY_CHIPS,
   UPDATE_INCIDENTS_PARAMS,
   UPDATE_SEARCH_VIEW_FILTER,
+  SHOW_VIEW_FILTER_MODAL,
 
   FETCH_SEARCH_OPTIONS,
   ADD_SEARCH_OPTION,
@@ -141,6 +142,8 @@ export default function (state = {}, action) {
       return { ...state, shareSearchResult: action.data }
     case UPDATE_SEARCH_VIEW_FILTER:
       return { ...state, viewFilter: action.viewFilter }
+    case SHOW_VIEW_FILTER_MODAL:
+      return { ...state, viewFilterModalOpen: !!action.visible }
   }
   return state
 }

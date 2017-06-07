@@ -1,5 +1,4 @@
 import React from 'react'
-
 import {ViewFilterModalView} from 'components/modal'
 
 export default class ViewFilterModal extends React.Component {

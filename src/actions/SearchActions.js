@@ -9,6 +9,7 @@ import {
   FETCH_FIELD_TOP_VALUES,
   UPDATE_QUERY_CHIPS,
   UPDATE_SEARCH_VIEW_FILTER,
+  SHOW_VIEW_FILTER_MODAL,
 
   UPDATE_INCIDENTS_PARAMS,
 
@@ -300,5 +301,11 @@ export const shareSavedSearch = (props) => {
 export const updateSearchViewFilter = (viewFilter) => {
   return dispatch => {
     dispatch({type: UPDATE_SEARCH_VIEW_FILTER, viewFilter})
+  }
+}
+
+export const showViewFilterModal = (visible) => {
+  return dispatch => {
+    dispatch({type: SHOW_VIEW_FILTER_MODAL, visible})
   }
 }

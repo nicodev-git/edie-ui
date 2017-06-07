@@ -24,6 +24,7 @@ import SavedSearchModal from './SavedSearchModal'
 import RelDevicesModal from './RelDevicesModal'
 import IrrelDevicesModal from './IrrelDevicesModal'
 import SearchFieldsModal from './SearchFieldsModal'
+import ViewFilterModal from './ViewFilterModal'
 
 class GenericSearch extends React.Component {
   constructor (props) {
@@ -383,8 +384,9 @@ class GenericSearch extends React.Component {
     this.props.fetchIrrelDevices(this.props.params)
   }
   onClickViewFilter () {
-    if (this.props.viewFilter) this.props.updateSearchViewFilter(null)
-    else this.props.updateSearchViewFilter('dataobj.line')
+    // if (this.props.viewFilter) this.props.updateSearchViewFilter(null)
+    // else this.props.updateSearchViewFilter('dataobj.line')
+    this.props.showViewFilterModal(true)
   }
   renderFields () {
     const {selectedField} = this.props
@@ -528,6 +530,13 @@ class GenericSearch extends React.Component {
     )
   }
 
+  renderFilterViewModal () {
+    if (!this.props.viewFilterModalOpen) return null
+    return (
+      <ViewFilterModal {...this.props}/>
+    )
+  }
+
   render () {
     const { handleSubmit, selectedWf, params, monitorTemplates } = this.props
     const { severity, dateFrom, dateTo, monitorTypes } = params
@@ -628,6 +637,7 @@ class GenericSearch extends React.Component {
               </div>
             </div>
           </div>
+          {this.renderFilterViewModal()}
         </TabPageBody>
       </TabPage>
     )
