@@ -12,7 +12,8 @@ import SearchTabs from './SearchTabs'
 import TabPage from '../../../shared/TabPage'
 import TabPageBody from '../../../shared/TabPageBody'
 import TabPageHeader from '../../../shared/TabPageHeader'
-import { imageBaseUrl, parseSearchQuery, guid, encodeUrlParams, dateFormat, collections, severities } from 'shared/Global'
+import { imageBaseUrl, parseSearchQuery, guid, encodeUrlParams, dateFormat, collections, severities, viewFilters } from 'shared/Global'
+import {viewFilters} from 'shared/Global'
 import { showConfirm } from 'components/shared/Alert'
 import {renderEntity} from 'components/shared/CellRenderers'
 import {chipStyles} from 'style/materialStyles'
@@ -37,7 +38,7 @@ class GenericSearch extends React.Component {
       'displayName': ' ',
       'columnName': 'entity.id',
       'customComponent': (props) => {
-        if (this.props.viewFilter) {
+        if (this.props.viewFilter === viewFilters.log) {
           const {entity} = props.rowData
           return (
             <div>
@@ -70,7 +71,7 @@ class GenericSearch extends React.Component {
       }
     }]
 
-    this.props.updateSearchViewFilter()
+    this.props.updateSearchViewFilter(viewFilters.standard)
   }
 
   componentWillMount () {

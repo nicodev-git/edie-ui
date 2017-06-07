@@ -215,3 +215,14 @@ export const severities = [
   { label: 'Device', value: 'DEVICE' },
   { label: 'Ignore', value: 'IGNORE' }
 ]
+
+export const viewFilters = {
+  standard: {
+    name: 'Standard',
+    desc: 'Normal view'
+  },
+  log: {
+    name: 'Log',
+    desc: 'Log file content view'
+  }
+}
