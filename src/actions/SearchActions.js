@@ -8,8 +8,10 @@ import {
   CLOSE_FIELDS_POPOVER,
   FETCH_FIELD_TOP_VALUES,
   UPDATE_QUERY_CHIPS,
+
   UPDATE_SEARCH_VIEW_FILTER,
   SHOW_VIEW_FILTER_MODAL,
+  SELECT_VIEW_FILTER,
 
   UPDATE_INCIDENTS_PARAMS,
 
@@ -307,5 +309,11 @@ export const updateSearchViewFilter = (viewFilter) => {
 export const showViewFilterModal = (visible) => {
   return dispatch => {
     dispatch({type: SHOW_VIEW_FILTER_MODAL, visible})
+  }
+}
+
+export const selectViewFilter = (filter) => {
+  return dispatch => {
+    dispatch({type: SELECT_VIEW_FILTER, filter})
   }
 }

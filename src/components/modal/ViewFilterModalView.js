@@ -9,7 +9,7 @@ import {viewFilters} from 'shared/Global'
 
 export default class ViewFilterModalView extends React.Component {
   render () {
-    const {onClickOK, onClickClose} = this.props
+    const {onClickOK, onClickClose, selectViewFilter, selectedViewFilter} = this.props
     return (
       <Modal show onHide={() => {}} aria-labelledby="ModalHeader" className="bootstrap-dialog type-primary">
         <Header name="View Filter"/>
@@ -25,7 +25,10 @@ export default class ViewFilterModalView extends React.Component {
                 </thead>
                 <tbody>
                   {keys(viewFilters).map(k =>
-                    <tr key={k}>
+                    <tr
+                      key={k}
+                      onClick={() => selectViewFilter(viewFilters[k].name)}
+                      className={selectedViewFilter === viewFilters[k].name ? 'selected' : ''}>
                       <td>{viewFilters[k].name}</td>
                       <td>{viewFilters[k].desc}</td>
                     </tr>

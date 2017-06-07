@@ -10,8 +10,10 @@ import {
   FETCH_FIELD_TOP_VALUES,
   UPDATE_QUERY_CHIPS,
   UPDATE_INCIDENTS_PARAMS,
+
   UPDATE_SEARCH_VIEW_FILTER,
   SHOW_VIEW_FILTER_MODAL,
+  SELECT_VIEW_FILTER,
 
   FETCH_SEARCH_OPTIONS,
   ADD_SEARCH_OPTION,
@@ -144,6 +146,8 @@ export default function (state = {}, action) {
       return { ...state, viewFilter: action.viewFilter }
     case SHOW_VIEW_FILTER_MODAL:
       return { ...state, viewFilterModalOpen: !!action.visible }
+    case SELECT_VIEW_FILTER:
+      return { ...state, selectedViewFilter: action.filter }
   }
   return state
 }

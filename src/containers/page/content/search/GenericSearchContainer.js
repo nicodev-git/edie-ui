@@ -49,7 +49,8 @@ import {
   fetchMonitorTemplates,
 
   updateSearchViewFilter,
-  showViewFilterModal
+  showViewFilterModal,
+  selectViewFilter
 } from 'actions'
 
 @withRouter
@@ -97,7 +98,8 @@ import {
     monitorTemplates: state.settings.monitorTemplates,
 
     viewFilter: state.search.viewFilter,
-    viewFilterModalOpen: state.search.viewFilterModalOpen
+    viewFilterModalOpen: state.search.viewFilterModalOpen,
+    selectedViewFilter: state.search.selectedViewFilter
   }),
   dispatch => ({
     ...bindActionCreators({
@@ -144,7 +146,8 @@ import {
       fetchMonitorTemplates,
 
       updateSearchViewFilter,
-      showViewFilterModal
+      showViewFilterModal,
+      selectViewFilter
     }, dispatch)
   })
 )
