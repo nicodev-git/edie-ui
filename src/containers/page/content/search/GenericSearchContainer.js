@@ -46,7 +46,9 @@ import {
   updateRelDeviceFields,
   shareSavedSearch,
 
-  fetchMonitorTemplates
+  fetchMonitorTemplates,
+
+  updateSearchViewFilter
 } from 'actions'
 
 @withRouter
@@ -91,7 +93,9 @@ import {
     searchFields: state.search.searchFields,
     shareSearchResult: state.search.shareSearchResult,
 
-    monitorTemplates: state.settings.monitorTemplates
+    monitorTemplates: state.settings.monitorTemplates,
+
+    viewFilter: state.search.viewFilter
   }),
   dispatch => ({
     ...bindActionCreators({
@@ -135,7 +139,9 @@ import {
       updateRelDeviceFields,
       shareSavedSearch,
 
-      fetchMonitorTemplates
+      fetchMonitorTemplates,
+
+      updateSearchViewFilter
     }, dispatch)
   })
 )

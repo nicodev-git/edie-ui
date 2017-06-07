@@ -8,6 +8,7 @@ import {
   CLOSE_FIELDS_POPOVER,
   FETCH_FIELD_TOP_VALUES,
   UPDATE_QUERY_CHIPS,
+  UPDATE_SEARCH_VIEW_FILTER,
 
   UPDATE_INCIDENTS_PARAMS,
 
@@ -293,5 +294,11 @@ export const shareSavedSearch = (props) => {
       if (data.success) dispatch({type: SHARE_SAVED_SEARCH, data: 'OK'})
       else dispatch({type: SHARE_SAVED_SEARCH, data: 'Error'})
     }).catch(error => apiError(dispatch, error))
+  }
+}
+
+export const updateSearchViewFilter = (viewFilter) => {
+  return dispatch => {
+    dispatch({type: UPDATE_SEARCH_VIEW_FILTER, viewFilter})
   }
 }

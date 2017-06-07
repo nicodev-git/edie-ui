@@ -10,6 +10,7 @@ import {
   FETCH_FIELD_TOP_VALUES,
   UPDATE_QUERY_CHIPS,
   UPDATE_INCIDENTS_PARAMS,
+  UPDATE_SEARCH_VIEW_FILTER,
 
   FETCH_SEARCH_OPTIONS,
   ADD_SEARCH_OPTION,
@@ -138,6 +139,8 @@ export default function (state = {}, action) {
       return { ...state, searchFields: action.fields }
     case SHARE_SAVED_SEARCH:
       return { ...state, shareSearchResult: action.data }
+    case UPDATE_SEARCH_VIEW_FILTER:
+      return { ...state, viewFilter: action.viewFilter }
   }
   return state
 }

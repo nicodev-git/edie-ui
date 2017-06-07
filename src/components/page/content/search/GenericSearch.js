@@ -36,6 +36,18 @@ class GenericSearch extends React.Component {
       'displayName': ' ',
       'columnName': 'entity.id',
       'customComponent': (props) => {
+        if (this.props.viewFilter) {
+          const pathElements = this.props.viewFilter.split('.')
+
+          let el = props.rowData.entity
+          pathElements.forEach((pathEl, index) => {
+            el = el[pathEl]
+            if (isArray(el)) el = el[0]
+          })
+
+          return <span>{el}</span>
+        }
+
         const {rowData} = props
         const {entity} = rowData
         if (!entity) return <span/>
@@ -56,6 +68,8 @@ class GenericSearch extends React.Component {
         return renderEntity(data)
       }
     }]
+
+    this.props.updateSearchViewFilter()
   }
 
   componentWillMount () {
@@ -368,6 +382,10 @@ class GenericSearch extends React.Component {
     this.props.showIrrelDevicesModal(true)
     this.props.fetchIrrelDevices(this.props.params)
   }
+  onClickViewFilter () {
+    if (this.props.viewFilter) this.props.updateSearchViewFilter(null)
+    else this.props.updateSearchViewFilter('dataobj.line')
+  }
   renderFields () {
     const {selectedField} = this.props
     return (
@@ -544,6 +562,8 @@ class GenericSearch extends React.Component {
             monitorTemplates={monitorTemplates}
             selectedMonitorTypes={(monitorTypes || '').split(',')}
             onChangeMonitorType={this.onChangeMonitorType.bind(this)}
+
+            onClickViewFilter={this.onClickViewFilter.bind(this)}
           />
 
           <div className="text-center">

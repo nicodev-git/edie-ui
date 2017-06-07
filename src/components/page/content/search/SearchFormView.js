@@ -53,7 +53,9 @@ export default class SearchFormView extends React.Component {
 
       monitorTemplates,
       selectedMonitorTypes,
-      onChangeMonitorType
+      onChangeMonitorType,
+
+      onClickViewFilter
     } = this.props
     return (
       <form onSubmit={onSubmit}>
@@ -133,6 +135,7 @@ export default class SearchFormView extends React.Component {
           <FlatButton icon={<LocalMovie/>} style={{marginTop: '4px', verticalAlign: 'top', minWidth: '50px'}} onClick={onClickIllustrate}/>
           <FlatButton icon={<Computer/>} style={{marginTop: '4px', verticalAlign: 'top', minWidth: '50px'}} onClick={onClickRelDevices}/>
           <FlatButton icon={<NoSim/>} style={{marginTop: '4px', verticalAlign: 'top', minWidth: '50px'}} onClick={onClickIrrelDevices}/>
+          <FlatButton label="View Filter" style={{marginTop: '4px', verticalAlign: 'top', minWidth: '50px'}} onClick={onClickViewFilter}/>
         </div>
       </form>
     )
