@@ -33,6 +33,7 @@ import IrrelDevicesModalView from './IrrelDevicesModalView'
 import SearchFieldsModalView from './SearchFieldsModalView'
 import LocalUserModalView from './LocalUserModalView'
 import FwRuleModalView from './FwRuleModalView'
+import ViewFilterModalView from './ViewFilterModalView'
 
 export {
   ActivationModalView,
@@ -69,5 +70,6 @@ export {
   IrrelDevicesModalView,
   SearchFieldsModalView,
   LocalUserModalView,
-  FwRuleModalView
+  FwRuleModalView,
+  ViewFilterModalView
 }

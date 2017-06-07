@@ -37,15 +37,15 @@ class GenericSearch extends React.Component {
       'columnName': 'entity.id',
       'customComponent': (props) => {
         if (this.props.viewFilter) {
-          const pathElements = this.props.viewFilter.split('.')
-
-          let el = props.rowData.entity
-          pathElements.forEach((pathEl, index) => {
-            el = el[pathEl]
-            if (isArray(el)) el = el[0]
-          })
-
-          return <span>{el}</span>
+          const {entity} = props.rowData
+          return (
+            <div>
+              {entity.dataobj.line}
+              <div style={chipStyles.wrapper}>
+                <Chip>{entity.dataobj.file}</Chip>
+              </div>
+            </div>
+          )
         }
 
         const {rowData} = props
