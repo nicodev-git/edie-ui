@@ -40,12 +40,10 @@ class GenericSearch extends React.Component {
         if (this.props.viewFilter === viewFilters.log.name) {
           const {entity} = props.rowData
           return (
-            <div>
-              {entity.dataobj.line}
               <div style={chipStyles.wrapper}>
-                <Chip>{entity.dataobj.file}</Chip>
+                <div className="inline-block" style={{lineHeight: 2.5}}>{entity.dataobj.line}</div>
+                {entity.dataobj.file && <Chip style={chipStyles.chip}>{entity.dataobj.file}</Chip>}
               </div>
-            </div>
           )
         }
 
