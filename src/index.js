@@ -7,16 +7,16 @@ import './style/style.styl'
 import injectTapEventPlugin from 'react-tap-event-plugin'
 injectTapEventPlugin()
 
-import { AUTH_USER } from './actions/types'
+// import { AUTH_USER } from './actions/types'
 import { store } from './shared/GetStore'
 
-const token = window.localStorage.getItem('token')
+// const token = window.localStorage.getItem('token')
+//
+// if (token) {
+//   store.dispatch({ type: AUTH_USER })
+// }
 
-if (token) {
-  store.dispatch({ type: AUTH_USER })
-}
-
-console.log('Version: 0.10.6')
+console.log('Version: 0.10.7')
 
 ReactDOM.render(
   <MuiThemeProvider>
