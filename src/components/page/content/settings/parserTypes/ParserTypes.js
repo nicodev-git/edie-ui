@@ -27,6 +27,12 @@ class ParserTypes extends React.Component {
     }, {
       'displayName': 'IgnoreDelete',
       'columnName': 'ignoredelete'
+    }, {
+      'displayName': 'Tags',
+      'columnName': 'tags',
+      'customComponent': p => {
+        return <div>{(p.data || []).map((t, i) => <span key={i}>{t}</span>)}</div>
+      }
     }]
   }
   componentWillMount () {
