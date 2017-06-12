@@ -535,7 +535,7 @@ export const addParserTypeTag = (tag) => {
   }
 }
 
-export const removeWorkflowTag = (index) => {
+export const removeParserTypeTag = (index) => {
   return dispatch => {
     dispatch({type: REMOVE_PT_TAG, index})
   }

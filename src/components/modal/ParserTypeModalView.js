@@ -4,7 +4,7 @@ import IconButton from 'material-ui/IconButton'
 import DeleteIcon from 'material-ui/svg-icons/action/delete'
 import InlineEdit from 'react-edit-inline'
 import { Field } from 'redux-form'
-import {Chip} from 'material-ui'
+import {Chip, FlatButton} from 'material-ui'
 
 import { Header, SubHeader, SubmitBlock, FormInput, FormSelect } from './parts'
 import { buttonStyle, iconStyle, chipStyles } from 'style/materialStyles'
@@ -12,7 +12,8 @@ import { buttonStyle, iconStyle, chipStyles } from 'style/materialStyles'
 export default class ParserTypeModalView extends Component {
   render () {
     const {show, header, patterns, selectedIndex, onSubmit,
-      onHide, onPatternChange, onDelete, onItemClick, onClickValueChip} = this.props
+      onHide, onPatternChange, onDelete, onItemClick, onClickValueChip,
+      tagModal, tags, onClickAddTag, onClickDeleteTag} = this.props
     return (
       <Modal
         show={show}
@@ -41,6 +42,14 @@ export default class ParserTypeModalView extends Component {
                     <DeleteIcon color="#545454"/>
                 </IconButton>
               </div>
+            </div>
+            <div>
+              <FlatButton label="Add Tag" onTouchTap={onClickAddTag}/>
+            </div>
+            <div style={chipStyles.wrapper}>
+              {tags.map((t, i) =>
+                <Chip key={i} style={chipStyles.chip} onRequestDelete={() => onClickDeleteTag(i)}>{t}</Chip>
+              )}
             </div>
             <div style={{maxHeight: '300px', overflow: 'scroll'}}>
               <table className="table table-hover table-p-sm">
@@ -71,6 +80,7 @@ export default class ParserTypeModalView extends Component {
             </div>
             <SubmitBlock name="Save" onClick={onHide}/>
           </form>
+          {tagModal}
         </div>
       </Modal>
     )

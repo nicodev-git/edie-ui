@@ -23,7 +23,11 @@ import {
 
   showFilterEditModal,
   showPatternEditModal,
-  updateSimParserType
+  updateSimParserType,
+
+  addParserTypeTag,
+  removeParserTypeTag,
+  showParserTypeTagModal
 } from 'actions'
 
 @connect(
@@ -43,7 +47,10 @@ import {
     editFilter: state.settings.editFilter,
 
     patternModalOpen: state.settings.patternModalOpen,
-    editPattern: state.settings.editPattern
+    editPattern: state.settings.editPattern,
+
+    parserTypeTagModalOpen: state.settings.parserTypeTagModalOpen,
+    editParserTypeTags: state.settings.editParserTypeTags
   }),
   dispatch => ({
     ...bindActionCreators({
@@ -65,7 +72,11 @@ import {
 
       showFilterEditModal,
       showPatternEditModal,
-      updateSimParserType
+      updateSimParserType,
+
+      addParserTypeTag,
+      removeParserTypeTag,
+      showParserTypeTagModal
     }, dispatch)
   })
 )

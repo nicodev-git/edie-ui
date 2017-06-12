@@ -92,6 +92,9 @@ import {
   SHOW_FILTER_EDIT_MODAL,
   SHOW_PATTERN_EDIT_MODAL,
   UPDATE_SIM_PARSER_TYPE,
+  SHOW_PT_TAG_MODAL,
+  ADD_PT_TAG,
+  REMOVE_PT_TAG,
 
   SYNC_DATA,
 
@@ -402,6 +405,13 @@ export default function (state = {}, action) {
       return { ...state, editWorkflowTags: state.editWorkflowTags.filter((a, i) => i !== action.index) }
     case SHOW_WF_TAG_MODAL:
       return { ...state, wfTagModalOpen: !!action.visible }
+
+    case ADD_PT_TAG:
+      return { ...state, editParserTypeTags: [...state.editParserTypeTags, action.tag] }
+    case REMOVE_PT_TAG:
+      return { ...state, editParserTypeTags: state.editParserTypeTags.filter((a, i) => i !== action.index) }
+    case SHOW_PT_TAG_MODAL:
+      return { ...state, parserTypeTagModalOpen: !!action.visible }
   }
   return state
 }

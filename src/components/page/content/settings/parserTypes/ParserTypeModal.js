@@ -6,6 +6,8 @@ import { showAlert } from 'components/shared/Alert'
 import { ParserTypeModalView } from '../../../../modal'
 import { validate } from '../../../../modal/validation/NameValidation'
 
+import TagPickerModal from 'containers/shared/TagPickerModalContainer'
+
 class ParserTypeModal extends React.Component {
   constructor (props) {
     super(props)
@@ -60,9 +62,25 @@ class ParserTypeModal extends React.Component {
     this.props.change('filters', `.*${this.props.currentFilters}.*`)
   }
 
+  onClickAddTag () {
+    this.props.showParserTypeTagModal(true)
+  }
+  onPickTag (tag) {
+    this.props.addParserTypeTag(tag.name)
+  }
+
+  renderTagsModal () {
+    if (!this.props.parserTypeTagModalOpen) return null
+    return (
+      <TagPickerModal
+        onPick={this.onPickTag.bind(this)}
+        onClickClose={() => this.props.showParserTypeTagModal(false)}/>
+    )
+  }
+
   render () {
     const { patterns, selectedPatternIndex } = this.state
-    const { handleSubmit } = this.props
+    const { handleSubmit, editParserTypeTags, removeParserTypeTag } = this.props
     let header = 'Parser Type'
     return (
       <ParserTypeModalView
@@ -76,6 +94,11 @@ class ParserTypeModal extends React.Component {
         onDelete={this.onClickRemovePattern.bind(this)}
         onHide={this.onClickClose.bind(this)}
         onItemClick={this.onItemClick.bind(this)}
+
+        tags={editParserTypeTags}
+        onClickAddTag={this.onClickAddTag.bind(this)}
+        onClickDeleteTag={removeParserTypeTag}
+        tagModal={this.renderTagsModal()}
       />
     )
   }
