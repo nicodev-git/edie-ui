@@ -2,7 +2,8 @@ import axios from 'axios'
 import { ROOT_URL } from './config'
 import {
   FETCH_TAGS,
-  ADD_TAG
+  ADD_TAG,
+  SELECT_TAG
 } from './types'
 
 export function fetchTags () {
@@ -16,7 +17,13 @@ export function fetchTags () {
 export function addTag (props) {
   return dispatch => {
     axios.post(`${ROOT_URL}/tag`, props).then(res => {
-      dispatch({type: ADD_TAG})
+      dispatch({type: ADD_TAG, data: res.data})
     })
+  }
+}
+
+export function selectTag (tag) {
+  return dispatch => {
+    dispatch({type: SELECT_TAG, tag})
   }
 }

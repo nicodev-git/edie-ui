@@ -332,6 +332,7 @@ export const SELECT_CHAT_INCIDENT = 'SELECT_CHAT_INCIDENT'
 
 export const FETCH_TAGS = 'FETCH_TAGS'
 export const ADD_TAG = 'ADD_TAG'
+export const SELECT_TAG = 'SELECT_TAG'
 
 export const REQUIRE_FULLSCREEN = 'REQUIRE_FULLSCREEN'
 
