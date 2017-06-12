@@ -9,11 +9,14 @@ import { selectedItemStyle, chipStyles } from 'style/materialStyles'
 
 export default class WorkflowStep0 extends Component {
   render () {
-    const {workflowEditType, updateWorkflowEditType, tags, onClickDeleteTag} = this.props
+    const {workflowEditType, updateWorkflowEditType, tagModal, tags, onClickAddTag, onClickDeleteTag} = this.props
     return (
       <div>
         <div className="form-column">
           <Field name="name" component={FormInput} label="Name"/>
+        </div>
+        <div>
+          <FlatButton label="Add Tag" onTouchTap={onClickAddTag}/>
         </div>
         <div style={chipStyles.wrapper}>
           {tags.map((t, i) =>
@@ -36,6 +39,7 @@ export default class WorkflowStep0 extends Component {
               backgroundColor={workflowEditType === 'diagram' ? '#2383F3' : null}/>
           </div>
         </div>
+        {tagModal}
       </div>
     )
   }

@@ -4,10 +4,11 @@ import ActionModal from './ActionModal'
 import DiagramViewContainer from 'containers/page/content/settings/rule/DiagramViewContainer'
 import { WorkflowStep0, WorkflowStep1, WorkflowStep2, WorkflowStep3, WorkflowWizard,
   MainWorkflowModalView } from 'components/modal'
+import TagPickerModal from 'containers/shared/TagPickerModalContainer'
 
 export default class WorkflowModalInner extends Component {
   onClickAddTag () {
-
+    this.props.showWorkflowTagModal(true)
   }
   renderCategoryModal () {
     if (!this.props.wfCategoryModalOpen) return null
@@ -23,6 +24,13 @@ export default class WorkflowModalInner extends Component {
     )
   }
 
+  renderTagsModal () {
+    if (!this.props.wfTagModalOpen) return null
+    return (
+      <TagPickerModal onClickClose={() => this.props.showWorkflowTagModal(false)}/>
+    )
+  }
+
   renderStep () {
     const {current, workflowEditType, updateWorkflowEditType, editWorkflowTags, removeWorkflowTag} = this.props
     if (current === 1) {
@@ -33,6 +41,7 @@ export default class WorkflowModalInner extends Component {
           onClickDeleteTag={removeWorkflowTag}
           workflowEditType={workflowEditType}
           updateWorkflowEditType={updateWorkflowEditType}
+          tagModal={this.renderTagsModal()}
         />
       )
     } else {

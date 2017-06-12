@@ -1,13 +1,17 @@
 import React from 'react'
 import Modal from 'react-bootstrap-modal'
+import {FlatButton} from 'material-ui'
 
 export default class TagPickerModalView extends React.Component {
   render () {
-    const {tags, onClickClose, onClickOK, onSelectTag} = this.props
+    const {tags, onClickClose, onClickOK, onSelectTag, onClickAdd} = this.props
     return (
       <Modal show onHide={() => {}} aria-labelledby="ModalHeader" className="bootstrap-dialog type-primary">
         <Header name="Workflow" />
         <div className="modal-body bootstrap-dialog-message">
+          <div>
+            <FlatButton label="Add" onTouchTap={onClickAdd}/>
+          </div>
           <div style={{maxHeight: '400px', overflow: 'auto'}}>
             <table className="table table-hover">
               <tbody>

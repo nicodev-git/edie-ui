@@ -34,6 +34,7 @@ import SearchFieldsModalView from './SearchFieldsModalView'
 import LocalUserModalView from './LocalUserModalView'
 import FwRuleModalView from './FwRuleModalView'
 import ViewFilterModalView from './ViewFilterModalView'
+import TagPickerModalView from './TagPickerModalView'
 
 export {
   ActivationModalView,
@@ -71,5 +72,6 @@ export {
   SearchFieldsModalView,
   LocalUserModalView,
   FwRuleModalView,
-  ViewFilterModalView
+  ViewFilterModalView,
+  TagPickerModalView
 }
