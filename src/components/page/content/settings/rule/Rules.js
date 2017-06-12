@@ -44,7 +44,7 @@ export default class Rules extends React.Component {
       'displayName': 'Tags',
       'columnName': 'tags',
       'customComponent': p => {
-        return <div>{(p.data || []).map((t, i) => <span key={i}>{t}</span>)}</div>
+        return <div>{(p.data || []).join(', ')}</div>
       }
     }, {
       'displayName': '',

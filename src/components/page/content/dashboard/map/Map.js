@@ -122,7 +122,6 @@ class Map extends React.Component {
       })
     }, 10)
 
-    this.props.fetchDeviceCategories()
     this.props.fetchDeviceTemplates()
   }
 

@@ -23,7 +23,6 @@ export default class DeviceMenu extends React.Component {
   }
 
   componentWillMount () {
-    this.props.fetchDeviceCategories()
     this.props.fetchDeviceTemplates()
   }
 

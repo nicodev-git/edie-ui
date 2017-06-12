@@ -32,7 +32,6 @@ export default class Templates extends Component {
     this.props.selectDeviceTemplate(null)
     this.props.fetchDeviceTemplates()
     this.props.fetchMonitorTemplates()
-    this.props.fetchDeviceCategories()
   }
 
   componentWillUpdate (props) {
