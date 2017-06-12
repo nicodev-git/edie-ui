@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import { Field } from 'redux-form'
+import {Chip} from 'material-ui'
 import { FormInput, SubHeader } from './parts'
 import FlatButton from 'material-ui/FlatButton'
 import ActionList from 'material-ui/svg-icons/action/list'
 import ActionTrendingUp from 'material-ui/svg-icons/action/trending-up'
-import { selectedItemStyle } from 'style/materialStyles'
+import { selectedItemStyle, chipStyles } from 'style/materialStyles'
 
 export default class WorkflowStep0 extends Component {
   render () {
@@ -16,7 +17,7 @@ export default class WorkflowStep0 extends Component {
         </div>
         <div style={chipStyles.wrapper}>
           {tags.map((t, i) =>
-            <Chip style={chipStyles.chip} onRequestDelete={() => onClickDeleteTag(i)}>{t}</Chip>
+            <Chip key={i} style={chipStyles.chip} onRequestDelete={() => onClickDeleteTag(i)}>{t}</Chip>
           )}
         </div>
         <div className="wizard-diagram-choice">
