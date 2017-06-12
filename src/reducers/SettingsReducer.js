@@ -361,8 +361,11 @@ export default function (state = {}, action) {
     case REMOVE_PARSER_TYPE:
       return { ...state, parserTypeDraw: state.parserTypeDraw + 1 }
 
-    case OPEN_PARSER_TYPE_MODAL:
-      return { ...state, parserTypeModalOpen: true, editParserType: action.data }
+    case OPEN_PARSER_TYPE_MODAL: {
+      const editParserType = action.data
+      const editParserTypeTags = editParserType ? (editParserType.tags || []) : []
+      return { ...state, parserTypeModalOpen: true, editParserType, editParserTypeTags }
+    }
 
     case CLOSE_PARSER_TYPE_MODAL:
       return { ...state, parserTypeModalOpen: false }

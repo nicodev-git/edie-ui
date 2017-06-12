@@ -26,9 +26,10 @@ class ParserTypeModal extends React.Component {
   }
 
   handleFormSubmit (values) {
-    const { editParserType } = this.props
+    const { editParserType, editParserTypeTags } = this.props
     let props = assign({}, editParserType, values, {
-      patterns: this.state.patterns.filter(p => !!p)
+      patterns: this.state.patterns.filter(p => !!p),
+      tags: editParserTypeTags
     })
     if (editParserType) {
       this.props.updateParserType(props)
