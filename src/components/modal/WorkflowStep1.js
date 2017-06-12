@@ -12,7 +12,7 @@ import {severities} from 'shared/Global'
 
 export default class WorkflowStep1 extends Component {
   render () {
-    const {onClickRawData} = this.props
+    const {onClickRawData, tags, onClickDeleteTag} = this.props
     return (
       <div className="wizard-step-1-container">
         <div className="form-column wizard-step-1">
@@ -35,6 +35,12 @@ export default class WorkflowStep1 extends Component {
             iconStyle={iconStyle}>
             <HelpIcon color="#2196f3"/>
           </IconButton>
+        </div>
+
+        <div style={chipStyles.wrapper}>
+          {tags.map((t, i) =>
+            <Chip style={chipStyles.chip} onRequestDelete={() => onClickDeleteTag(i)}>{t}</Chip>
+          )}
         </div>
         <ReactTooltip />
       </div>
