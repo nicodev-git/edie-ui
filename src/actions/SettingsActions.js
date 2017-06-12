@@ -25,6 +25,9 @@ import {
   REMOVE_PARSER_TYPE,
   OPEN_PARSER_TYPE_MODAL,
   CLOSE_PARSER_TYPE_MODAL,
+  SHOW_PT_TAG_MODAL,
+  ADD_PT_TAG,
+  REMOVE_PT_TAG,
 
   OPEN_PARSER_PATTERN_MODAL,
   CLOSE_PARSER_PATTERN_MODAL,
@@ -523,5 +526,23 @@ export const updateUserOption = (user, key, value) => {
     axios.put(user._links.self.href, assign({}, user, {
       [key]: value
     })).then(res => updateUserSuccess(dispatch, res)).catch(error => apiError(dispatch, error))
+  }
+}
+
+export const addParserTypeTag = (tag) => {
+  return dispatch => {
+    dispatch({type: ADD_PT_TAG, tag})
+  }
+}
+
+export const removeWorkflowTag = (index) => {
+  return dispatch => {
+    dispatch({type: REMOVE_PT_TAG, index})
+  }
+}
+
+export const showParserTypeTagModal = (visible) => {
+  return dispatch => {
+    dispatch({type: SHOW_PT_TAG_MODAL, visible})
   }
 }

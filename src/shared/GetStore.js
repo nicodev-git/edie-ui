@@ -132,6 +132,7 @@ const initialState = {
 
     parserTypeDraw: 1,
     parserTypes: [],
+    editParserTypeTags: [],
 
     workflows: [],
     editWorkflowTags: [],
