@@ -39,9 +39,10 @@ class GenericSearch extends React.Component {
       'customComponent': (props) => {
         if (this.props.viewFilter === viewFilters.log.name) {
           const {entity} = props.rowData
+          if (!entity.dataobj) return <span/>
           return (
               <div style={chipStyles.wrapper}>
-                <div className="inline-block" style={{lineHeight: 2.5}}>{entity.dataobj.line}</div>
+                {<div className="inline-block" style={{lineHeight: 2.5}}>{entity.dataobj.line}</div>}
                 {entity.dataobj.file && <Chip style={chipStyles.chip}>{entity.dataobj.file}</Chip>}
               </div>
           )
