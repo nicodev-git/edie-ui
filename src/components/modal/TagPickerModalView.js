@@ -2,6 +2,8 @@ import React from 'react'
 import Modal from 'react-bootstrap-modal'
 import {FlatButton} from 'material-ui'
 
+import {Header, TwoButtonsBlockCustom} from './parts'
+
 export default class TagPickerModalView extends React.Component {
   render () {
     const {tags, onClickClose, onClickOK, onSelectTag, onClickAdd} = this.props

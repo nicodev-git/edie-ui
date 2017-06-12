@@ -32,6 +32,7 @@ import {
     wfDiagramModalOpen: state.devices.wfDiagramModalOpen,
 
     wfTagModalOpen: state.settings.wfTagModalOpen,
+    editWorkflowTags: state.settings.editWorkflowTags,
 
     initialValues: assign({
       enable: true,
