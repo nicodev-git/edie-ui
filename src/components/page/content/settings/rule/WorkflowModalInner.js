@@ -44,6 +44,8 @@ export default class WorkflowModalInner extends Component {
     if (current === 2) {
       return (
         <WorkflowStep1
+          tags={this.props.editWorkflowTags}
+          onClickDeleteTag={this.props.onClickDeleteTag}
           onClickRawData={onClickRawData}
           categories={this.props.workflowCategories}
           onAddCategory={this.props.onClickAddCategory}

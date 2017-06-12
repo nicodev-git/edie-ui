@@ -9,6 +9,9 @@ import {
 
   UPDATE_WORKFLOW_EDIT_TYPE,
 
+  ADD_WORKFLOW_TAG,
+  REMOVE_WORKFLOW_TAG,
+
   NO_AUTH_ERROR
 } from './types'
 
@@ -115,5 +118,17 @@ export const updateWorkflowEditType = (editType) => {
     dispatch({
       type: UPDATE_WORKFLOW_EDIT_TYPE, editType
     })
+  }
+}
+
+export const addWorkflowTag = (tag) => {
+  return dispatch => {
+    dispatch({type: ADD_WORKFLOW_TAG, tag})
+  }
+}
+
+export const removeWorkflowTag = (index) => {
+  return dispatch => {
+    dispatch({type: REMOVE_WORKFLOW_TAG, index})
   }
 }
