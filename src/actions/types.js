@@ -333,4 +333,6 @@ export const REQUIRE_FULLSCREEN = 'REQUIRE_FULLSCREEN'
 
 export const SYNC_DATA = 'SYNC_DATA'
 
+export const FETCH_TAGS = 'FETCH_TAGS'
+
 export const API_ERROR = 'API_ERROR'
