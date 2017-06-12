@@ -9,7 +9,7 @@ export default class TagPickerModalView extends React.Component {
     const {tags, onClickClose, onClickOK, onSelectTag, onClickAdd} = this.props
     return (
       <Modal show onHide={() => {}} aria-labelledby="ModalHeader" className="bootstrap-dialog type-primary">
-        <Header name="Workflow" />
+        <Header name="Tags" />
         <div className="modal-body bootstrap-dialog-message">
           <div>
             <FlatButton label="Add" onTouchTap={onClickAdd}/>

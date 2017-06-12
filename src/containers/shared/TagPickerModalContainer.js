@@ -4,14 +4,16 @@ import { connect } from 'react-redux'
 import TagPickerModal from 'components/shared/TagPickerModal'
 
 import {
-  fetchTags
+  fetchTags,
+  addTag
 } from 'actions'
 
 @connect(
   state => ({
     tags: state.tag.tags
   }), {
-    fetchTags
+    fetchTags,
+    addTag
   }
 )
 

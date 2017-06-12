@@ -330,10 +330,11 @@ export const SET_CHAT_INCIDENTS = 'SET_CHAT_INCIDENTS'
 export const SET_CHAT_ROOMS = 'SET_CHAT_ROOMS'
 export const SELECT_CHAT_INCIDENT = 'SELECT_CHAT_INCIDENT'
 
+export const FETCH_TAGS = 'FETCH_TAGS'
+export const ADD_TAG = 'ADD_TAG'
+
 export const REQUIRE_FULLSCREEN = 'REQUIRE_FULLSCREEN'
 
 export const SYNC_DATA = 'SYNC_DATA'
-
-export const FETCH_TAGS = 'FETCH_TAGS'
 
 export const API_ERROR = 'API_ERROR'

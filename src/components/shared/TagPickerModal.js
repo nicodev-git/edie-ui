@@ -1,5 +1,7 @@
 import React from 'react'
-import TagPickerModalView from 'components/modal'
+import {TagPickerModalView} from 'components/modal'
+
+import {showPrompt} from 'components/shared/Alert'
 
 export default class TagPickerModal extends React.Component {
   componentWillMount () {
@@ -12,6 +14,13 @@ export default class TagPickerModal extends React.Component {
   onClickClose () {
   }
   onClickAdd () {
+    showPrompt('Please type tag name.', tag => {
+      if (!tag) return
+      this.props.addTag({
+        name: tag,
+        desc: ''
+      })
+    })
   }
   render () {
     return (
