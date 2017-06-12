@@ -25,10 +25,6 @@ class MainWorkflowModal extends Component {
     }
   }
 
-  componentWillMount () {
-    this.props.fetchWorkflowCategories()
-  }
-
   handleFormSubmit (values) {
     const {editWorkflow, workflowCategories} = this.props
     const { rules, actions, diagram } = this.state

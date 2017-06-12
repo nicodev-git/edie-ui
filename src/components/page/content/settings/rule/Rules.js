@@ -1,5 +1,5 @@
 import React from 'react'
-import {RaisedButton, MenuItem, SelectField, IconButton} from 'material-ui'
+import {RaisedButton, IconButton} from 'material-ui'
 import Share from 'material-ui/svg-icons/social/share'
 import { assign } from 'lodash'
 
@@ -11,7 +11,6 @@ import TabPage from 'components/shared/TabPage'
 import TabPageBody from 'components/shared/TabPageBody'
 import TabPageHeader from 'components/shared/TabPageHeader'
 import WorkflowModalContainer from 'containers/page/content/settings/rule/WorkflowModalContainer'
-import { errorStyle, underlineFocusStyle, inputStyle, selectedItemStyle } from 'style/materialStyles'
 
 export default class Rules extends React.Component {
   constructor (props) {
@@ -57,9 +56,7 @@ export default class Rules extends React.Component {
     }]
   }
   componentWillMount () {
-    this.props.selectWorkflowCategory('')
     this.props.fetchWorkflows()
-    this.props.fetchWorkflowCategories()
   }
   componentWillUpdate (props) {
     const {shareWorkflowResult} = this.props
@@ -76,7 +73,6 @@ export default class Rules extends React.Component {
   }
 
   renderContent () {
-    const workflows = this.props.selectedWorkflowCategory ? this.props.workflows.filter(m => m.category === this.props.selectedWorkflowCategory) : this.props.workflows
     return (
       <InfiniteTable
         cells={this.cells}
@@ -86,7 +82,7 @@ export default class Rules extends React.Component {
         onRowDblClick={this.onEditWorkflow.bind(this)}
 
         useExternal={false}
-        data={workflows}
+        data={this.props.workflows}
       />
     )
   }
@@ -100,11 +96,6 @@ export default class Rules extends React.Component {
 
   getTable () {
     return this.refs.logicalRules
-  }
-
-  onChangeCategory (e, index, value) {
-    console.log(arguments)
-    this.props.selectWorkflowCategory(value)
   }
 
   onAddWorkflow () {
@@ -128,21 +119,6 @@ export default class Rules extends React.Component {
       <TabPage>
         <TabPageHeader title="Settings">
           <div className="text-center margin-md-top">
-            <div className="pull-left form-inline text-left">
-              <SelectField
-                errorStyle={errorStyle}
-                underlineStyle={underlineFocusStyle}
-                selectedMenuItemStyle={selectedItemStyle}
-                menuItemStyle={inputStyle}
-                labelStyle={inputStyle}
-                onChange={this.onChangeCategory.bind(this)}
-                value={this.props.selectedWorkflowCategory}>
-                <MenuItem value="" primaryText="All"/>
-                {this.props.workflowCategories.map(m =>
-                  <MenuItem key={m.id} value={m.id} primaryText={m.name}/>
-                )}
-              </SelectField>
-            </div>
             <div className="pull-right">
               <RaisedButton label="Add" onTouchTap={this.onAddWorkflow.bind(this)}/>&nbsp;
               <RaisedButton label="Edit" onTouchTap={this.onEditWorkflow.bind(this)}/>&nbsp;

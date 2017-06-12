@@ -23,10 +23,6 @@ class WorkflowModal extends React.Component { // eslint-disable-line react/no-mu
     }
   }
 
-  componentWillMount () {
-    this.props.fetchWorkflowCategories()
-  }
-
   closeModal () {
     this.props.closeWorkflowModal()
   }
