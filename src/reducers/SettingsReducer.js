@@ -303,7 +303,9 @@ export default function (state = {}, action) {
     }
 
     case OPEN_WORKFLOW_MODAL: {
-      return { ...state, workflowModalVisible: true, editWorkflow: action.data, workflowEditType: 'wizard', editWorkflowTags: [] }
+      const editWorkflow = action.data
+      const editWorkflowTags = editWorkflow ? (editWorkflow.tags || []) : []
+      return { ...state, workflowModalVisible: true, editWorkflow, workflowEditType: 'wizard', editWorkflowTags }
     }
 
     case CLOSE_WORKFLOW_MODAL: {

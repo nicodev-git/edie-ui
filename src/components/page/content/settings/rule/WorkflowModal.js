@@ -62,9 +62,14 @@ class WorkflowModal extends React.Component { // eslint-disable-line react/no-mu
   }
 
   handleFormSubmit (values) {
-    const { editWorkflow, workflowCategories } = this.props
+    const { editWorkflow, editWorkflowTags, workflowCategories } = this.props
     const { rules, actions, diagram } = this.state
-    let props = assign({}, editWorkflow, values, { rules: {}, actions: actions, flowchart: diagram })
+    let props = assign({}, editWorkflow, values, {
+      rules: {},
+      actions: actions,
+      flowchart: diagram,
+      tags: editWorkflowTags
+    })
     props.origin = props.origin || 'USER'
     if (workflowCategories && workflowCategories.length) {
       props.category = props.category || workflowCategories[0].name

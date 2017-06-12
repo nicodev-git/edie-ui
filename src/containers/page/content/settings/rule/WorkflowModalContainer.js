@@ -18,7 +18,9 @@ import {
   openDeviceWfDiagramModal,
   updateWorkflowEditType,
 
-  showWorkflowTagModal
+  showWorkflowTagModal,
+  addWorkflowTag,
+  removeWorkflowTag
 } from 'actions'
 
 @connect(
@@ -54,7 +56,9 @@ import {
       openDeviceWfDiagramModal,
       updateWorkflowEditType,
 
-      showWorkflowTagModal
+      showWorkflowTagModal,
+      addWorkflowTag,
+      removeWorkflowTag
     }, dispatch)
   })
 )

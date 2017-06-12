@@ -11,7 +11,7 @@ export default class WorkflowModalInner extends Component {
     this.props.showWorkflowTagModal(true)
   }
   onPickTag (tag) {
-    console.log(tag)
+    this.props.addWorkflowTag(tag.name)
   }
   renderCategoryModal () {
     if (!this.props.wfCategoryModalOpen) return null
