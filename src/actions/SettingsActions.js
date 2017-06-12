@@ -51,6 +51,9 @@ import {
   SHOW_WF_SELECT_MODAL,
   ADD_DEVICE_TPL_WF,
   REMOVE_DEVICE_TPL_WF,
+  SHOW_DEVICE_TPL_TAG_MODAL,
+  ADD_DEVICE_TPL_TAG,
+  REMOVE_DEVICE_TPL_TAG,
 
   SHARE_MONITOR_TEMPLATE,
   SHARE_WORKFLOW,
@@ -544,5 +547,23 @@ export const removeParserTypeTag = (index) => {
 export const showParserTypeTagModal = (visible) => {
   return dispatch => {
     dispatch({type: SHOW_PT_TAG_MODAL, visible})
+  }
+}
+
+export const addDeviceTplTag = (tag) => {
+  return dispatch => {
+    dispatch({type: ADD_DEVICE_TPL_TAG, tag})
+  }
+}
+
+export const removeDeviceTplTag = (index) => {
+  return dispatch => {
+    dispatch({type: REMOVE_DEVICE_TPL_TAG, index})
+  }
+}
+
+export const showDeviceTplTagModal = (visible) => {
+  return dispatch => {
+    dispatch({type: SHOW_DEVICE_TPL_TAG_MODAL, visible})
   }
 }

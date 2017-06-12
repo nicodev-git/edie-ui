@@ -34,7 +34,11 @@ import {
   fetchImages,
   uploadImage,
 
-  fetchDeviceCategories
+  fetchDeviceCategories,
+
+  addDeviceTplTag,
+  removeDeviceTplTag,
+  showDeviceTplTagModal
 } from 'actions'
 
 @connect(
@@ -92,7 +96,11 @@ import {
       closeTplImageModal,
       fetchImages,
       uploadImage,
-      fetchDeviceCategories
+      fetchDeviceCategories,
+
+      addDeviceTplTag,
+      removeDeviceTplTag,
+      showDeviceTplTagModal
     }, dispatch)
   })
 )
