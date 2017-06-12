@@ -52,6 +52,7 @@ import {
   UPDATE_WORKFLOW_EDIT_TYPE,
   SHARE_WORKFLOW,
 
+  SHOW_WF_TAG_MODAL,
   ADD_WORKFLOW_TAG,
   REMOVE_WORKFLOW_TAG,
 
@@ -397,6 +398,8 @@ export default function (state = {}, action) {
       return { ...state, editWorkflowTags: [...state.editWorkflowTags, action.tag] }
     case REMOVE_WORKFLOW_TAG:
       return { ...state, editWorkflowTags: state.editWorkflowTags.filter((a, i) => i !== action.index) }
+    case SHOW_WF_TAG_MODAL:
+      return { ...state, wfTagModalOpen: !!action.visible }
   }
   return state
 }

@@ -9,6 +9,7 @@ import {
 
   UPDATE_WORKFLOW_EDIT_TYPE,
 
+  SHOW_WF_TAG_MODAL,
   ADD_WORKFLOW_TAG,
   REMOVE_WORKFLOW_TAG,
 
@@ -130,5 +131,11 @@ export const addWorkflowTag = (tag) => {
 export const removeWorkflowTag = (index) => {
   return dispatch => {
     dispatch({type: REMOVE_WORKFLOW_TAG, index})
+  }
+}
+
+export const showWorkflowTagModal = (visible) => {
+  return dispatch => {
+    dispatch({type: SHOW_WF_TAG_MODAL, visible})
   }
 }

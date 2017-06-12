@@ -16,8 +16,9 @@ import {
 
   openWfActionModal,
   openDeviceWfDiagramModal,
-  updateWorkflowEditType
+  updateWorkflowEditType,
 
+  showWorkflowTagModal
 } from 'actions'
 
 @connect(
@@ -29,6 +30,8 @@ import {
     wfCategoryModalOpen: state.devices.wfCategoryModalOpen,
     wfActionModalOpen: state.devices.wfActionModalOpen,
     wfDiagramModalOpen: state.devices.wfDiagramModalOpen,
+
+    wfTagModalOpen: state.settings.wfTagModalOpen,
 
     initialValues: assign({
       enable: true,
@@ -48,7 +51,9 @@ import {
 
       openWfActionModal,
       openDeviceWfDiagramModal,
-      updateWorkflowEditType
+      updateWorkflowEditType,
+
+      showWorkflowTagModal
     }, dispatch)
   })
 )
