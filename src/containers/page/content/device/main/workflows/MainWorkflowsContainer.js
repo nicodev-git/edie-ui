@@ -7,6 +7,9 @@ import {
   fetchDeviceWorkflows,
   removeDeviceWorkflow,
 
+  addWorkflowTag,
+  removeWorkflowTag,
+
   closeDeviceWorkflowModal,
   addDeviceWorkflow,
   updateDeviceWorkflow,
@@ -56,6 +59,9 @@ import {
     openDeviceWorkflowModal,
     fetchDeviceWorkflows,
     removeDeviceWorkflow,
+
+    addWorkflowTag,
+    removeWorkflowTag,
 
     closeDeviceWorkflowModal,
     addDeviceWorkflow,

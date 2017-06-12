@@ -8,11 +8,16 @@ import { selectedItemStyle } from 'style/materialStyles'
 
 export default class WorkflowStep0 extends Component {
   render () {
-    const {workflowEditType, updateWorkflowEditType} = this.props
+    const {workflowEditType, updateWorkflowEditType, tags, onClickDeleteTag} = this.props
     return (
       <div>
         <div className="form-column">
           <Field name="name" component={FormInput} label="Name"/>
+        </div>
+        <div style={chipStyles.wrapper}>
+          {tags.map((t, i) =>
+            <Chip style={chipStyles.chip} onRequestDelete={() => onClickDeleteTag(i)}>{t}</Chip>
+          )}
         </div>
         <div className="wizard-diagram-choice">
           <SubHeader name="Add by"/>

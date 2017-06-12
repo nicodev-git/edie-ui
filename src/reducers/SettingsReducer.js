@@ -52,6 +52,9 @@ import {
   UPDATE_WORKFLOW_EDIT_TYPE,
   SHARE_WORKFLOW,
 
+  ADD_WORKFLOW_TAG,
+  REMOVE_WORKFLOW_TAG,
+
   FETCH_SETTING_MAPS,
   ADD_SETTING_MAP,
   UPDATE_SETTING_MAP,
@@ -299,7 +302,7 @@ export default function (state = {}, action) {
     }
 
     case OPEN_WORKFLOW_MODAL: {
-      return { ...state, workflowModalVisible: true, editWorkflow: action.data, workflowEditType: 'wizard' }
+      return { ...state, workflowModalVisible: true, editWorkflow: action.data, workflowEditType: 'wizard', editWorkflowTags: [] }
     }
 
     case CLOSE_WORKFLOW_MODAL: {
@@ -389,6 +392,11 @@ export default function (state = {}, action) {
 
     case SYNC_DATA:
       return { ...state, syncStatus: action.data }
+
+    case ADD_WORKFLOW_TAG:
+      return { ...state, editWorkflowTags: [...state.editWorkflowTags, action.tag] }
+    case REMOVE_WORKFLOW_TAG:
+      return { ...state, editWorkflowTags: state.editWorkflowTags.filter((a, i) => i !== action.index) }
   }
   return state
 }

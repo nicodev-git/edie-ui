@@ -134,6 +134,7 @@ const initialState = {
     parserTypes: [],
 
     workflows: [],
+    editWorkflowTags: [],
 
     showTraffic: true
   },

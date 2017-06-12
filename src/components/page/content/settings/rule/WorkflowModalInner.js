@@ -21,10 +21,13 @@ export default class WorkflowModalInner extends Component {
   }
 
   renderStep () {
-    const {current, workflowEditType, updateWorkflowEditType} = this.props
+    const {current, workflowEditType, updateWorkflowEditType, editWorkflowTags, removeWorkflowTag, addWorkflowTag} = this.props
     if (current === 1) {
       return (
         <WorkflowStep0
+          tags={editWorkflowTags}
+          onClickAddTag={addWorkflowTag}
+          onClickDeleteTag={removeWorkflowTag}
           workflowEditType={workflowEditType}
           updateWorkflowEditType={updateWorkflowEditType}
         />
