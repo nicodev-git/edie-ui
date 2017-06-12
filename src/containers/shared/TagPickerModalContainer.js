@@ -5,15 +5,18 @@ import TagPickerModal from 'components/shared/TagPickerModal'
 
 import {
   fetchTags,
-  addTag
+  addTag,
+  selectTag
 } from 'actions'
 
 @connect(
   state => ({
-    tags: state.tag.tags
+    tags: state.tag.tags,
+    selectedTag: state.tag.selectedTag
   }), {
     fetchTags,
-    addTag
+    addTag,
+    selectTag
   }
 )
 

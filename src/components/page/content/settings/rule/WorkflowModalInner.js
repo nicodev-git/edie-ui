@@ -10,6 +10,9 @@ export default class WorkflowModalInner extends Component {
   onClickAddTag () {
     this.props.showWorkflowTagModal(true)
   }
+  onPickTag (tag) {
+    console.log(tag)
+  }
   renderCategoryModal () {
     if (!this.props.wfCategoryModalOpen) return null
     return (
@@ -27,7 +30,9 @@ export default class WorkflowModalInner extends Component {
   renderTagsModal () {
     if (!this.props.wfTagModalOpen) return null
     return (
-      <TagPickerModal onClickClose={() => this.props.showWorkflowTagModal(false)}/>
+      <TagPickerModal
+        onPick={this.onPickTag.bind(this)}
+        onClickClose={() => this.props.showWorkflowTagModal(false)}/>
     )
   }
 

@@ -6,7 +6,7 @@ import {Header, TwoButtonsBlockCustom} from './parts'
 
 export default class TagPickerModalView extends React.Component {
   render () {
-    const {tags, onClickClose, onClickOK, onSelectTag, onClickAdd} = this.props
+    const {tags, selectedTag, onClickClose, onClickOK, onSelectTag, onClickAdd} = this.props
     return (
       <Modal show onHide={() => {}} aria-labelledby="ModalHeader" className="bootstrap-dialog type-primary">
         <Header name="Tags" />
@@ -19,8 +19,11 @@ export default class TagPickerModalView extends React.Component {
               <tbody>
               {
                 tags.map((w, i) =>
-                  <tr key={i} onClick={() => onSelectTag(i)}>
-                    <td>{w}</td>
+                  <tr
+                    key={i}
+                    onClick={() => onSelectTag(w)}
+                    className={selectedTag && selectedTag.id === w.id ? 'selected' : ''}>
+                    <td>{w.name}</td>
                   </tr>
                 )
               }
