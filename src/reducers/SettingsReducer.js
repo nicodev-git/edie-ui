@@ -9,6 +9,10 @@ import {
   UPDATE_DEVICE_TEMPLATE_MONITORS,
   FETCH_DEVICE_TPL_WORKFLOWS,
 
+  SHOW_DEVICE_TPL_TAG_MODAL,
+  ADD_DEVICE_TPL_TAG,
+  REMOVE_DEVICE_TPL_TAG,
+
   SELECT_TPL_WF_ROW,
   SHOW_WF_SELECT_MODAL,
   ADD_DEVICE_TPL_WF,
@@ -108,8 +112,12 @@ export default function (state = {}, action) {
   switch (action.type) {
     case FETCH_DEVICE_TEMPLATES:
       return { ...state, deviceTemplates: action.data }
-    case SELECT_DEVICE_TEMPLATE:
-      return { ...state, selectedDeviceTpl: action.tpl, selectedDeviceMonitors: (action.tpl ? action.tpl.monitors : []) || [], editTplWorkflows: [] }
+    case SELECT_DEVICE_TEMPLATE: {
+      const deviceTpl = action.tpl
+      const editDeviceTplTags = deviceTpl ? (deviceTpl.tags || []) : []
+      return { ...state, selectedDeviceTpl: deviceTpl, selectedDeviceMonitors: (action.tpl ? action.tpl.monitors : []) || [], editTplWorkflows: [], editDeviceTplTags }
+    }
+
     case UPDATE_DEVICE_TEMPLATE_MONITORS:
       return { ...state, selectedDeviceMonitors: action.monitors }
     case ADD_DEVICE_TEMPLATE: {
@@ -127,9 +135,11 @@ export default function (state = {}, action) {
                 state.deviceTemplates.filter(u => u.id === action.data.id))
       return {...state, deviceTemplates}
     }
-
-    case OPEN_DEVICE_TEMPLATE_MODAL:
-      return { ...state, deviceTplModalVisible: true, deviceTpl: action.data, selectedTplImage: null }
+    case OPEN_DEVICE_TEMPLATE_MODAL: {
+      const deviceTpl = action.data
+      const editDeviceTplTags = deviceTpl ? (deviceTpl.tags || []) : []
+      return { ...state, deviceTplModalVisible: true, deviceTpl, selectedTplImage: null, editDeviceTplTags }
+    }
 
     case CLOSE_DEVICE_TEMPLATE_MODAL:
       return { ...state, deviceTplModalVisible: false, deviceTpl: null }
@@ -415,6 +425,13 @@ export default function (state = {}, action) {
       return { ...state, editParserTypeTags: state.editParserTypeTags.filter((a, i) => i !== action.index) }
     case SHOW_PT_TAG_MODAL:
       return { ...state, parserTypeTagModalOpen: !!action.visible }
+
+    case ADD_DEVICE_TPL_TAG:
+      return { ...state, editDeviceTplTags: [...state.editDeviceTplTags, action.tag] }
+    case REMOVE_DEVICE_TPL_TAG:
+      return { ...state, editDeviceTplTags: state.editDeviceTplTags.filter((a, i) => i !== action.index) }
+    case SHOW_DEVICE_TPL_TAG_MODAL:
+      return { ...state, deviceTplTagModalOpen: !!action.visible }
   }
   return state
 }

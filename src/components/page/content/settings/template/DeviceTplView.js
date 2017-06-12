@@ -5,6 +5,8 @@ import { connect } from 'react-redux'
 import { getCustomImageUrl, extImageBaseUrl } from 'shared/Global'
 import { DeviceTplModalView } from 'components/modal'
 
+import TagPickerModal from 'containers/shared/TagPickerModalContainer'
+
 class DeviceTplView extends React.Component {
   componentWillMount () {
     const {initialValues} = this.props
@@ -21,11 +23,19 @@ class DeviceTplView extends React.Component {
     }
   }
 
+  onClickAddTag () {
+    this.props.showDeviceTplTagModal(true)
+  }
+  onPickTag (tag) {
+    this.props.addDeviceTplTag(tag.name)
+  }
+
   handleFormSubmit (formProps) {
-    const {deviceTpl, selectedTplImage} = this.props
+    const {deviceTpl, selectedTplImage, editDeviceTplTags} = this.props
     const tpl = assign({}, (deviceTpl || {}), formProps, {
       monitors: this.props.monitors,
-      workflowids: this.props.editTplWorkflows.map(u => u.uuid || '')
+      workflowids: this.props.editTplWorkflows.map(u => u.uuid || ''),
+      tags: editDeviceTplTags
     })
     if (selectedTplImage) tpl.image = selectedTplImage.uuid
     if (deviceTpl) { this.props.updateDeviceTemplate(tpl) } else {
@@ -72,8 +82,17 @@ class DeviceTplView extends React.Component {
     return options
   }
 
+  renderTagsModal () {
+    if (!this.props.deviceTplTagModalOpen) return null
+    return (
+      <TagPickerModal
+        onPick={this.onPickTag.bind(this)}
+        onClickClose={() => this.props.showDeviceTplTagModal(false)}/>
+    )
+  }
+
   render () {
-    const { handleSubmit } = this.props
+    const { handleSubmit, editDeviceTplTags, removeDeviceTplTag } = this.props
     let header = 'Device Template'
     let imgUrl = this.getImageUrl()
     let options = this.renderOptions()
@@ -95,6 +114,11 @@ class DeviceTplView extends React.Component {
 
         showWfSelectModal={this.props.showWfSelectModal}
         onClickDeleteWf={this.onClickDeleteWf.bind(this)}
+
+        tags={editDeviceTplTags}
+        onClickAddTag={this.onClickAddTag.bind(this)}
+        onClickDeleteTag={removeDeviceTplTag}
+        tagModal={this.renderTagsModal()}
       />
     )
   }

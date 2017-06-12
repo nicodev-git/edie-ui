@@ -50,6 +50,9 @@ import {
     monitorTplModalVisible: state.settings.monitorTplModalVisible,
     tplImageModalVisible: state.settings.tplImageModalVisible,
 
+    deviceTplTagModalOpen: state.settings.deviceTplTagModalOpen,
+    editDeviceTplTags: state.settings.editDeviceTplTags,
+
     shareMonitorTplResult: state.settings.shareMonitorTplResult,
 
     deviceTpl: state.settings.deviceTpl,

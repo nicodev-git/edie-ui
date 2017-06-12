@@ -1,14 +1,18 @@
 import React, { Component } from 'react'
 import Modal from 'react-bootstrap-modal'
 import { Field } from 'redux-form'
+import {Chip, FlatButton} from 'material-ui'
+
 import { Header, SubHeader, SubmitBlock, FormInput, FormSelect, ImageUploader,
   Monitors, MonitorTemplates, Workflows } from './parts'
+import { chipStyles } from 'style/materialStyles'
 
 export default class DeviceTplModalView extends Component {
   renderContent () {
     const {options, imgUrl, onSubmit, onHide, onChange,
       monitors, monitorTemplates, onAddMonitor, onEditMonitor, onRemoveMonitor,
-      workflows, showWfSelectModal, onClickDeleteWf
+      workflows, showWfSelectModal, onClickDeleteWf,
+      tagModal, tags, onClickAddTag, onClickDeleteTag
     } = this.props
     return (
       <form onSubmit={onSubmit}>
@@ -16,9 +20,19 @@ export default class DeviceTplModalView extends Component {
           <Field name="name" component={FormInput} label="Name"/>
           <Field name="devicetemplategroup" component={FormSelect} label="Group" options={options}/>
           <ImageUploader imgUrl={imgUrl} onChange={onChange}/>
-          <div className="subheader-wrapper">
-            <SubHeader name="Monitors"/>
-          </div>
+        </div>
+
+        <div>
+          <FlatButton label="Add Tag" onTouchTap={onClickAddTag}/>
+        </div>
+        <div style={chipStyles.wrapper}>
+          {tags.map((t, i) =>
+            <Chip key={i} style={chipStyles.chip} onRequestDelete={() => onClickDeleteTag(i)}>{t}</Chip>
+          )}
+        </div>
+
+        <div className="subheader-wrapper">
+          <SubHeader name="Monitors"/>
         </div>
         <div>
           <div className="col-md-6 modal-left">
@@ -29,6 +43,7 @@ export default class DeviceTplModalView extends Component {
             <MonitorTemplates monitors={monitors} monitorTemplates={monitorTemplates} onAddMonitor={onAddMonitor} />
           </div>
         </div>
+        {tagModal}
         <SubmitBlock name="Save" onClick={onHide}/>
       </form>
     )

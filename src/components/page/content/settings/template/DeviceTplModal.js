@@ -5,6 +5,8 @@ import { connect } from 'react-redux'
 import { getCustomImageUrl, extImageBaseUrl } from 'shared/Global'
 import { DeviceTplModalView } from 'components/modal'
 
+import TagPickerModal from 'containers/shared/TagPickerModalContainer'
+
 class DeviceTplModal extends React.Component { // eslint-disable-line react/no-multi-comp
   constructor (props) {
     super(props)
@@ -13,10 +15,18 @@ class DeviceTplModal extends React.Component { // eslint-disable-line react/no-m
     }
   }
 
+  onClickAddTag () {
+    this.props.showDeviceTplTagModal(true)
+  }
+  onPickTag (tag) {
+    this.props.addDeviceTplTag(tag.name)
+  }
+
   handleFormSubmit (formProps) {
-    const {deviceTpl, selectedTplImage} = this.props
+    const {deviceTpl, selectedTplImage, editDeviceTplTags} = this.props
     const tpl = assign({}, (deviceTpl || {}), formProps, {
-      monitors: this.state.monitors
+      monitors: this.state.monitors,
+      tags: editDeviceTplTags
     })
     if (selectedTplImage) tpl.image = selectedTplImage.uuid
     if (deviceTpl) { this.props.updateDeviceTemplate(tpl) } else {
@@ -59,6 +69,15 @@ class DeviceTplModal extends React.Component { // eslint-disable-line react/no-m
     this.props.openTplImageModal()
   }
 
+  renderTagsModal () {
+    if (!this.props.deviceTplTagModalOpen) return null
+    return (
+      <TagPickerModal
+        onPick={this.onPickTag.bind(this)}
+        onClickClose={() => this.props.showDeviceTplTagModal(false)}/>
+    )
+  }
+
   renderOptions () {
     let categories = this.props.deviceCategories
     let options = categories.map(m => ({value: m.name, label: m.name}))
@@ -66,7 +85,7 @@ class DeviceTplModal extends React.Component { // eslint-disable-line react/no-m
   }
 
   render () {
-    const { handleSubmit } = this.props
+    const { handleSubmit, editDeviceTplTags, removeDeviceTplTag } = this.props
     let header = 'Device Template'
     let imgUrl = this.getImageUrl()
     let options = this.renderOptions()
@@ -85,6 +104,11 @@ class DeviceTplModal extends React.Component { // eslint-disable-line react/no-m
         onAddMonitor={this.onClickAddMonitor.bind(this)}
         onRemoveMonitor={this.onClickRemoveMonitor.bind(this)}
         onEditMonitor={this.onClickEditMonitor.bind(this)}
+
+        tags={editDeviceTplTags}
+        onClickAddTag={this.onClickAddTag.bind(this)}
+        onClickDeleteTag={removeDeviceTplTag}
+        tagModal={this.renderTagsModal()}
       />
     )
   }
