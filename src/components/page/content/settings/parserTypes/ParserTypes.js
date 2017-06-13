@@ -11,6 +11,7 @@ import InfiniteTable from 'components/shared/InfiniteTable'
 import ParserTypeModal from './ParserTypeModal'
 import SimulationModal from './SimulationModal'
 
+import WfTabs from '../rule/WorkflowTabs'
 import { showAlert } from 'components/shared/Alert'
 
 class ParserTypes extends React.Component {
@@ -96,18 +97,19 @@ class ParserTypes extends React.Component {
   render () {
     return (
       <TabPage>
-        <TabPageHeader title="Settings">
+        <TabPageHeader title="ParserTypes">
           <div className="text-center margin-md-top">
             <div style={{position: 'absolute', right: '25px'}}>
               <RaisedButton label="Add" onTouchTap={this.onClickAdd.bind(this)}/>&nbsp;
               <RaisedButton label="Edit" onTouchTap={this.onClickEdit.bind(this)}/>&nbsp;
               <RaisedButton label="Remove" onTouchTap={this.onClickRemove.bind(this)}/>&nbsp;
               <RaisedButton label="Simulation" onTouchTap={this.onClickSimulation.bind(this)}/>&nbsp;
+              <WfTabs router={this.props.router}/>
             </div>
           </div>
         </TabPageHeader>
 
-        <TabPageBody tabs={SettingTabs} tab={8}>
+        <TabPageBody tabs={SettingTabs} tab={2}>
           <InfiniteTable
             cells={this.cells}
             ref="table"

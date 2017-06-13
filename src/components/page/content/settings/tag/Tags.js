@@ -10,6 +10,7 @@ import TabPageBody from 'components/shared/TabPageBody'
 import TabPageHeader from 'components/shared/TabPageHeader'
 
 import TagModal from './TagModal'
+import WfTabs from '../rule/WorkflowTabs'
 
 export default class Tags extends React.Component {
   constructor (props) {
@@ -65,11 +66,12 @@ export default class Tags extends React.Component {
               <RaisedButton label="Add" onTouchTap={this.onAddTag.bind(this)}/>&nbsp;
               <RaisedButton label="Edit" onTouchTap={this.onEditTag.bind(this)}/>&nbsp;
               <RaisedButton label="Delete" onTouchTap={this.onDeleteTag.bind(this)}/>&nbsp;
+              <WfTabs router={this.props.router}/>
             </div>
           </div>
         </TabPageHeader>
 
-        <TabPageBody tabs={SettingTabs} tab={9}>
+        <TabPageBody tabs={SettingTabs} tab={2}>
           <InfiniteTable
             url="/tag"
             params={{

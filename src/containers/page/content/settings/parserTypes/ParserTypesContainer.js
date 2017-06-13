@@ -3,6 +3,7 @@ import React from 'react'
 import ParserTypes from 'components/page/content/settings/parserTypes/ParserTypes'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import { withRouter } from 'react-router'
 
 import {
   openParserTypeModal,
@@ -80,6 +81,7 @@ import {
     }, dispatch)
   })
 )
+@withRouter
 export default class ParserTypesContainer extends React.Component {
   render () {
     return (

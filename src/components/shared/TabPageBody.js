@@ -35,6 +35,12 @@ export default class TabPageBody extends Component {
   render () {
     const {tabs, tclass} = this.props
     let tableclass = tclass || ''
+
+    let active = 0
+    tabs.forEach((p, i) => {
+      if (this.context.router.isActive(p.path)) active = i
+    })
+
     return (
       <div className="tabs-custom flex-vertical flex-1">
         <div className={`nav nav-tabs tab-container ${tabs.length ? '' : 'mt-none'}`}>
@@ -45,7 +51,7 @@ export default class TabPageBody extends Component {
               >
                 <div>
                   <div className="tab-label">{item.title}</div>
-                  <div className={(this.checkPath(item.path, i)) ? 'tab-chosen' : 'tab-blank'}/>
+                  <div className={i === active ? 'tab-chosen' : 'tab-blank'}/>
                 </div>
               </div>
           )}
