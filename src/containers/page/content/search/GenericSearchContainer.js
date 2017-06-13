@@ -52,7 +52,7 @@ import {
   showViewFilterModal,
   selectViewFilter,
 
-  searchGraphModalOpen
+  showSearchGraphModal
 } from 'actions'
 
 @withRouter
@@ -153,7 +153,7 @@ import {
       showViewFilterModal,
       selectViewFilter,
 
-      searchGraphModalOpen
+      showSearchGraphModal
     }, dispatch)
   })
 )

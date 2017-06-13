@@ -36,6 +36,7 @@ import FwRuleModalView from './FwRuleModalView'
 import ViewFilterModalView from './ViewFilterModalView'
 import TagPickerModalView from './TagPickerModalView'
 import TagModalView from './TagModalView'
+import SearchGraphModalView from './SearchGraphModalView'
 
 export {
   ActivationModalView,
@@ -75,5 +76,6 @@ export {
   FwRuleModalView,
   ViewFilterModalView,
   TagPickerModalView,
-  TagModalView
+  TagModalView,
+  SearchGraphModalView
 }

@@ -26,6 +26,8 @@ import IrrelDevicesModal from './IrrelDevicesModal'
 import SearchFieldsModal from './SearchFieldsModal'
 import ViewFilterModal from './ViewFilterModal'
 
+import SearchGraphModal from './SearchGraphModal'
+
 class GenericSearch extends React.Component {
   constructor (props) {
     super(props)
@@ -395,6 +397,7 @@ class GenericSearch extends React.Component {
     this.props.showViewFilterModal(true)
   }
   onClickGraph () {
+    this.props.showSearchGraphModal(true)
   }
   renderFields () {
     const {selectedField} = this.props
@@ -545,6 +548,13 @@ class GenericSearch extends React.Component {
     )
   }
 
+  renderSearchGraphModal () {
+    if (!this.props.searchGraphModalOpen) return null
+    return (
+      <SearchGraphModal {...this.props}/>
+    )
+  }
+
   render () {
     const { handleSubmit, selectedWf, params, monitorTemplates } = this.props
     const { severity, dateFrom, dateTo, monitorTypes } = params
@@ -613,6 +623,7 @@ class GenericSearch extends React.Component {
             {this.renderWfSelectModal()}
             {this.renderSavedSearchModal()}
             {this.renderSearchFieldsModal()}
+            {this.renderSearchGraphModal()}
           </div>
 
         </TabPageHeader>
