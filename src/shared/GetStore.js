@@ -108,7 +108,8 @@ const initialState = {
     relDevices: [],
     irrelDevices: [],
     searchFields: ['ip'],
-    selectedSearchFields: []
+    selectedSearchFields: [],
+    searchRecordCounts: []
   },
 
   settings: {

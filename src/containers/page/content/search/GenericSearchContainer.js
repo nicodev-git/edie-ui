@@ -103,7 +103,8 @@ import {
     viewFilterModalOpen: state.search.viewFilterModalOpen,
     selectedViewFilter: state.search.selectedViewFilter,
 
-    searchGraphModalOpen: state.search.searchGraphModalOpen
+    searchGraphModalOpen: state.search.searchGraphModalOpen,
+    searchRecordCounts: state.search.searchRecordCounts
   }),
   dispatch => ({
     ...bindActionCreators({

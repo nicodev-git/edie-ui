@@ -44,7 +44,8 @@ import {
 
   SHARE_SAVED_SEARCH,
 
-  SHOW_SEARCH_GRAPH_MODAL
+  SHOW_SEARCH_GRAPH_MODAL,
+  FETCH_SEARCH_RECORD_COUNT
 } from './types'
 import { ROOT_URL } from './config'
 import { apiError } from './Errors'
@@ -323,5 +324,17 @@ export const selectViewFilter = (filter) => {
 export const showSearchGraphModal = (visible) => {
   return dispatch => {
     dispatch({type: SHOW_SEARCH_GRAPH_MODAL, visible})
+  }
+}
+
+export const fetchSearchRecordCount = (params) => {
+  return dispatch => {
+    dispatch({type: FETCH_SEARCH_RECORD_COUNT, data: []})
+    const config = {
+      params
+    }
+    axios.get(`${ROOT_URL}/search/getRecordCount`, config).then(res => {
+      dispatch({type: FETCH_SEARCH_RECORD_COUNT, data: res.data})
+    }).catch(error => apiError(dispatch, error))
   }
 }
