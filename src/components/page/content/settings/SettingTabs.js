@@ -26,6 +26,9 @@ const tabs = [{
   title: 'Parser Types',
   path: '/settings/parserTypes'
 }, {
+  title: 'Tags',
+  path: '/settings/tags'
+}, {
   title: 'Advanced',
   path: '/settings/advanced'
 }]
