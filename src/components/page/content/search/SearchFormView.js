@@ -65,14 +65,14 @@ export default class SearchFormView extends React.Component {
     } = this.props
     return (
       <form onSubmit={onSubmit}>
-        <Toolbar style={{background: '#dadada'}}>
-          <Field name="query" component={FormInput} label="Search" onKeyDown={onSearchKeyDown} style={{verticalAlign: 'top'}}/>
+        <Toolbar style={{background: '#dadada', height: '48px'}}>
+          <Field name="query" component={FormInput} label="Search" onKeyDown={onSearchKeyDown}/>
           <DateRangePicker2
             startDate={startDate}
             endDate={endDate}
             onApply={onChangeDateRange}
             renderer={this.renderDateLabel.bind(this)}
-            style={{marginTop: '4px', verticalAlign: 'top'}}/>
+            style={{marginTop: '4px'}}/>
           <SelectField
             underlineStyle={underlineFocusStyle}
             selectedMenuItemStyle={selectedItemStyle}
@@ -122,7 +122,7 @@ export default class SearchFormView extends React.Component {
             hintText="MonitorType"
             value={selectedMonitorTypes}
             onChange={onChangeMonitorType}
-            style={{width: '200px'}}
+            style={{width: '180px'}}
           >
             {monitorTemplates.map(option =>
               <MenuItem
