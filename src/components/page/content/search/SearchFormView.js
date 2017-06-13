@@ -65,7 +65,7 @@ export default class SearchFormView extends React.Component {
     } = this.props
     return (
       <form onSubmit={onSubmit}>
-        <Toolbar>
+        <Toolbar style={{background: '#dadada'}}>
           <Field name="query" component={FormInput} label="Search" onKeyDown={onSearchKeyDown} style={{verticalAlign: 'top'}}/>
           <DateRangePicker2
             startDate={startDate}
