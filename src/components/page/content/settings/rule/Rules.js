@@ -130,7 +130,7 @@ export default class Rules extends React.Component {
           </div>
         </TabPageHeader>
 
-        <TabPageBody tabs={SettingTabs} tab={2}>
+        <TabPageBody tabs={SettingTabs} tab={6}>
           {this.renderContent()}
           {this.renderWorkflowModal()}
         </TabPageBody>

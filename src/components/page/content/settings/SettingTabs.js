@@ -5,9 +5,6 @@ const tabs = [{
   title: 'Agents',
   path: '/settings/agents'
 }, {
-  title: 'Workflows',
-  path: '/settings/rules'
-}, {
   title: 'Maps',
   path: '/settings/maps'
 }, {

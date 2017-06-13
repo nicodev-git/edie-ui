@@ -118,7 +118,7 @@ export default class Credentials extends React.Component {
           </div>
         </TabPageHeader>
 
-        <TabPageBody tabs={SettingTabs} tab={6}>
+        <TabPageBody tabs={SettingTabs} tab={5}>
           {this.renderContent()}
           {this.renderCredentialsModal()}
         </TabPageBody>
