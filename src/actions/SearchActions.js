@@ -42,7 +42,9 @@ import {
   UPDATE_SELECTED_SEARCH_FIELDS,
   UPDATE_REL_DEVICE_FIELDS,
 
-  SHARE_SAVED_SEARCH
+  SHARE_SAVED_SEARCH,
+
+  SHOW_SEARCH_GRAPH_MODAL
 } from './types'
 import { ROOT_URL } from './config'
 import { apiError } from './Errors'
@@ -315,5 +317,11 @@ export const showViewFilterModal = (visible) => {
 export const selectViewFilter = (filter) => {
   return dispatch => {
     dispatch({type: SELECT_VIEW_FILTER, filter})
+  }
+}
+
+export const showSearchGraphModal = (visible) => {
+  return dispatch => {
+    dispatch({type: SHOW_SEARCH_GRAPH_MODAL, visible})
   }
 }

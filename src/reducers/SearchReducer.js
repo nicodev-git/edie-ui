@@ -45,7 +45,8 @@ import {
   UPDATE_SELECTED_SEARCH_FIELDS,
   UPDATE_REL_DEVICE_FIELDS,
 
-  SHARE_SAVED_SEARCH
+  SHARE_SAVED_SEARCH,
+  SHOW_SEARCH_GRAPH_MODAL
 } from 'actions/types'
 import { concat } from 'lodash'
 
@@ -148,6 +149,8 @@ export default function (state = {}, action) {
       return { ...state, viewFilterModalOpen: !!action.visible }
     case SELECT_VIEW_FILTER:
       return { ...state, selectedViewFilter: action.filter }
+    case SHOW_SEARCH_GRAPH_MODAL:
+      return { ...state, searchGraphModalOpen: !!action.visible }
   }
   return state
 }

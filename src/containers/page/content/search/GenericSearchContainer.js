@@ -50,7 +50,9 @@ import {
 
   updateSearchViewFilter,
   showViewFilterModal,
-  selectViewFilter
+  selectViewFilter,
+
+  searchGraphModalOpen
 } from 'actions'
 
 @withRouter
@@ -99,7 +101,9 @@ import {
 
     viewFilter: state.search.viewFilter,
     viewFilterModalOpen: state.search.viewFilterModalOpen,
-    selectedViewFilter: state.search.selectedViewFilter
+    selectedViewFilter: state.search.selectedViewFilter,
+
+    searchGraphModalOpen: state.search.searchGraphModalOpen
   }),
   dispatch => ({
     ...bindActionCreators({
@@ -147,7 +151,9 @@ import {
 
       updateSearchViewFilter,
       showViewFilterModal,
-      selectViewFilter
+      selectViewFilter,
+
+      searchGraphModalOpen
     }, dispatch)
   })
 )

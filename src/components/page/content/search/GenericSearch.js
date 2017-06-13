@@ -394,6 +394,8 @@ class GenericSearch extends React.Component {
     // else this.props.updateSearchViewFilter('dataobj.line')
     this.props.showViewFilterModal(true)
   }
+  onClickGraph () {
+  }
   renderFields () {
     const {selectedField} = this.props
     return (
@@ -579,6 +581,7 @@ class GenericSearch extends React.Component {
             onChangeMonitorType={this.onChangeMonitorType.bind(this)}
 
             onClickViewFilter={this.onClickViewFilter.bind(this)}
+            onClickGraph={this.onClickGraph.bind(this)}
           />
 
           <div className="text-center">
