@@ -52,7 +52,8 @@ import {
   showViewFilterModal,
   selectViewFilter,
 
-  showSearchGraphModal
+  showSearchGraphModal,
+  fetchSearchRecordCount
 } from 'actions'
 
 @withRouter
@@ -154,7 +155,8 @@ import {
       showViewFilterModal,
       selectViewFilter,
 
-      showSearchGraphModal
+      showSearchGraphModal,
+      fetchSearchRecordCount
     }, dispatch)
   })
 )
