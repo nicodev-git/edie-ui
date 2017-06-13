@@ -47,8 +47,14 @@ export default class DeviceMenu extends React.Component {
     let devicePanels = []
 
     let deviceTypes = concat([], this.state.deviceTypes)
-    this.props.deviceCategories.forEach(deviceCategory => {
-      const items = this.props.deviceTemplates.filter(i => i.devicetemplategroup === deviceCategory.name).map(u => {
+    const categories = []// this.props.deviceCategories
+    this.props.deviceTemplates.forEach(p => {
+      if (categories.indexOf(p.devicetemplategroup) < 0) categories.push(p.devicetemplategroup)
+    })
+    categories.sort()
+
+    categories.forEach(deviceCategory => {
+      const items = this.props.deviceTemplates.filter(i => i.devicetemplategroup === deviceCategory).map(u => {
         return {
           title: u.name,
           img: u.image || 'windows.png',
@@ -57,7 +63,7 @@ export default class DeviceMenu extends React.Component {
       })
       if (items.length === 0) return
       deviceTypes = concat(deviceTypes, {
-        title: deviceCategory.name,
+        title: deviceCategory,
         items
       })
     })
