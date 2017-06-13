@@ -224,5 +224,9 @@ export const viewFilters = {
   log: {
     name: 'Log',
     desc: 'Log file content view'
+  },
+  raw: {
+    name: 'Raw',
+    desc: 'Raw data view'
   }
 }
