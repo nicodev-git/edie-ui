@@ -1,6 +1,8 @@
 import {
   FETCH_TAGS,
   ADD_TAG,
+  UPDATE_TAG,
+  REMOVE_TAG,
   SELECT_TAG
 } from 'actions/types'
 
@@ -9,7 +11,10 @@ export default function (state = {}, action) {
     case FETCH_TAGS:
       return { ...state, tags: action.data }
     case ADD_TAG:
-      return { ...state, tags: [...state.tags, action.data] }
+      return { ...state, tagDraw: state.tagDraw + 1, tags: [...state.tags, action.data] }
+    case UPDATE_TAG:
+    case REMOVE_TAG:
+      return { ...state, tagDraw: state.tagDraw + 1 }
     case SELECT_TAG:
       return { ...state, selectedTag: action.tag }
   }

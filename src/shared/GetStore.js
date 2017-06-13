@@ -154,7 +154,8 @@ const initialState = {
     selected: []
   },
   tag: {
-    tags: []
+    tags: [],
+    tagDraw: 1
   }
 }
 
