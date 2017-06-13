@@ -19,6 +19,7 @@ import { showConfirm, showAlert } from 'components/shared/Alert'
 import { errorStyle, underlineFocusStyle, inputStyle, selectedItemStyle, chipStyles } from 'style/materialStyles'
 
 import { extImageBaseUrl } from 'shared/Global'
+import WfTabs from '../rule/WorkflowTabs'
 
 export default class Templates extends Component {
   constructor (props) {
@@ -253,6 +254,7 @@ export default class Templates extends Component {
             <div style={{position: 'absolute', right: '25px'}}>
               <RaisedButton label="Add" onTouchTap={this.onClickAdd.bind(this)}/>&nbsp;
               <RaisedButton label="Edit" onTouchTap={this.onClickEdit.bind(this)} className="hidden"/>&nbsp;
+              <WfTabs router={this.props.router}/>
             </div>
           </div>
         </TabPageHeader>

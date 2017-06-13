@@ -121,7 +121,7 @@ export default class Maps extends React.Component {
           </div>
         </TabPageHeader>
 
-        <TabPageBody tabs={SettingTabs} tab={3} tclass="small-table">
+        <TabPageBody tabs={SettingTabs} tab={2} tclass="small-table">
           {this.renderContent()}
           {this.renderMapModal()}
           {this.renderMapUsersModal()}

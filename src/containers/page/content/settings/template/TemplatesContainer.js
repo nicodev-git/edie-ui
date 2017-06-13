@@ -2,6 +2,7 @@ import React from 'react'
 import Templates from 'components/page/content/settings/template/Templates'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import {withRouter} from 'react-router'
 
 import {
   fetchDeviceTemplates,
@@ -107,6 +108,7 @@ import {
     }, dispatch)
   })
 )
+@withRouter
 export default class TemplatesContainer extends React.Component {
   render () {
     return (

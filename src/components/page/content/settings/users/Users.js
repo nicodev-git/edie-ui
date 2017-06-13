@@ -275,7 +275,7 @@ export default class Users extends React.Component {
           </div>
         </TabPageHeader>
 
-        <TabPageBody tabs={SettingTabs} tab={4}>
+        <TabPageBody tabs={SettingTabs} tab={3}>
           {this.renderContent()}
           {this.renderUserModal()}
           {this.renderPasswordModal()}

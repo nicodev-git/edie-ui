@@ -2,14 +2,17 @@ import React from 'react'
 import {RaisedButton, Popover, Menu, MenuItem} from 'material-ui'
 
 const tabs = [{
+  title: 'Templates',
+  path: '/settings/templates'
+}, {
   title: 'Workflows',
-  path: '/settings/rules'
+  path: '/settings/templates/rules'
 }, {
   title: 'Tags',
-  path: '/settings/rules/tags'
+  path: '/settings/templates/tags'
 }, {
   title: 'ParserTypes',
-  path: '/settings/rules/parsertypes'
+  path: '/settings/templates/parsertypes'
 }]
 
 export default class WorkflowTabs extends React.Component {
