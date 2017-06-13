@@ -36,9 +36,12 @@ class GenericSearch extends React.Component {
     this.cells = [{
       'displayName': ' ',
       'columnName': 'entity.id',
-      'customComponent': (props) => {
-        if (this.props.viewFilter === viewFilters.log.name) {
-          const {entity} = props.rowData
+      'customComponent': (p) => {
+        const {viewFilter} = this.props
+        const {rowData} = p
+        const {entity} = rowData
+
+        if (viewFilter === viewFilters.log.name) {
           if (!entity.dataobj) return <span/>
           return (
               <div style={chipStyles.wrapper}>
@@ -46,10 +49,11 @@ class GenericSearch extends React.Component {
                 {entity.dataobj.file && <Chip style={chipStyles.chip}>{entity.dataobj.file}</Chip>}
               </div>
           )
+        } else if (viewFilter === viewFilters.raw.name) {
+          return (
+            <span>{entity.rawdata}</span>
+          )
         }
-
-        const {rowData} = props
-        const {entity} = rowData
         if (!entity) return <span/>
         const highlighted = this.getHighlighted(entity, rowData.highlights)
 

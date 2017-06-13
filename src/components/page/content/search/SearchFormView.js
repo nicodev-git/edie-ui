@@ -1,7 +1,7 @@
 import React from 'react'
 import { Field } from 'redux-form'
 import { findIndex } from 'lodash'
-import {FlatButton, SelectField, MenuItem} from 'material-ui'
+import {FlatButton, SelectField, MenuItem, IconButton} from 'material-ui'
 import ActionSearch from 'material-ui/svg-icons/action/search'
 import ToggleStar from 'material-ui/svg-icons/toggle/star-border'
 import FilledStar from 'material-ui/svg-icons/toggle/star'
@@ -134,14 +134,15 @@ export default class SearchFormView extends React.Component {
               />
             )}
           </SelectField>
-          <FlatButton icon={<img src="/images/wf-icon.png" width="24"/>} onTouchTap={onClickWorkflow} style={iconButtonStyle}/>
-          <FlatButton type="submit" icon={<ActionSearch />} style={iconButtonStyle}/>
-          <FlatButton icon={starFilled ? <FilledStar/> : <ToggleStar/>} style={iconButtonStyle} onClick={onClickStar}/>
+          <IconButton tooltip="Workflow" onTouchTap={onClickWorkflow}><img src="/images/wf-icon.png" width="24"/></IconButton>
+          <IconButton tooltip="Search" onTouchTap={onClickWorkflow} type="submit" ><ActionSearch /></IconButton>
+
+          <IconButton tooltip="Favorite" onTouchTap={onClickStar}>{starFilled ? <FilledStar/> : <ToggleStar/>}</IconButton>
           <FlatButton label="Saved Search" style={iconButtonStyle} onClick={onClickSavedSearch}/>
-          <FlatButton icon={<LocalMovie/>} style={iconButtonStyle} onClick={onClickIllustrate}/>
-          <FlatButton icon={<Computer/>} style={iconButtonStyle} onClick={onClickRelDevices}/>
-          <FlatButton icon={<NoSim/>} style={iconButtonStyle} onClick={onClickIrrelDevices}/>
-          <FlatButton icon={<img src="/images/view-icon.png" width="24"/>} style={iconButtonStyle} onClick={onClickViewFilter}/>
+          <IconButton tooltip="Illustrate" onTouchTap={onClickIllustrate}><LocalMovie/></IconButton>
+          <IconButton tooltip="Related devices" onTouchTap={onClickRelDevices}><Computer/></IconButton>
+          <IconButton tooltip="Non-related devices" onTouchTap={onClickIrrelDevices}><NoSim/></IconButton>
+          <IconButton tooltip="Views" onTouchTap={onClickViewFilter}><img src="/images/view-icon.png" width="24"/></IconButton>
         </Toolbar>
       </form>
     )
