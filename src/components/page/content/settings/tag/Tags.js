@@ -9,7 +9,7 @@ import TabPage from 'components/shared/TabPage'
 import TabPageBody from 'components/shared/TabPageBody'
 import TabPageHeader from 'components/shared/TabPageHeader'
 
-// import TagModal from './TagModal'
+import TagModal from './TagModal'
 
 export default class Tags extends React.Component {
   constructor (props) {
@@ -51,10 +51,10 @@ export default class Tags extends React.Component {
     })
   }
   renderTagModal () {
-    // if (!this.props.tagModalOpen) return null
-    // return (
-    //   <TagModal {...this.props}/>
-    // )
+    if (!this.props.tagModalOpen) return null
+    return (
+      <TagModal {...this.props}/>
+    )
   }
   render () {
     return (

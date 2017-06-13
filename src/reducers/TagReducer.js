@@ -1,4 +1,5 @@
 import {
+  SHOW_TAG_MODAL,
   FETCH_TAGS,
   ADD_TAG,
   UPDATE_TAG,
@@ -8,6 +9,8 @@ import {
 
 export default function (state = {}, action) {
   switch (action.type) {
+    case SHOW_TAG_MODAL:
+      return { ...state, tagModalOpen: !!action.visible, editTag: action.tag }
     case FETCH_TAGS:
       return { ...state, tags: action.data }
     case ADD_TAG:
