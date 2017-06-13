@@ -44,14 +44,17 @@ class GenericSearch extends React.Component {
         if (viewFilter === viewFilters.log.name) {
           if (!entity.dataobj) return <span/>
           return (
+            <div className="padding-sm bt-gray">
               <div style={chipStyles.wrapper}>
                 {<div className="inline-block" style={{lineHeight: 2.5}}>{entity.dataobj.line}</div>}
                 {entity.dataobj.file && <Chip style={chipStyles.chip}>{entity.dataobj.file}</Chip>}
               </div>
+            </div>
           )
         } else if (viewFilter === viewFilters.raw.name) {
+          if (!entity.rawdata) return <span/>
           return (
-            <span>{entity.rawdata}</span>
+            <div className="padding-sm bt-gray">{entity.rawdata}</div>
           )
         }
         if (!entity) return <span/>
@@ -69,7 +72,7 @@ class GenericSearch extends React.Component {
         }
         if (!severity) delete data.severity
 
-        return renderEntity(data)
+        return <div className="padding-sm bt-gray">{renderEntity(data)}</div>
       }
     }]
 
@@ -624,7 +627,7 @@ class GenericSearch extends React.Component {
                   Total: {this.state.total}
                 </div>
               </div>
-              <div className="flex-1">
+              <div className="flex-1 table-no-gap">
                 <InfiniteTable
                   url="/search/all"
                   cells={this.cells}

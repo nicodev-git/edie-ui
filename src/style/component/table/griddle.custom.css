@@ -27,3 +27,8 @@
 .griddle-container {
     border: none;
 }
+
+.table-no-gap .griddle .table>tbody>tr>td {
+    padding: 0;
+    border-top: none;
+}
