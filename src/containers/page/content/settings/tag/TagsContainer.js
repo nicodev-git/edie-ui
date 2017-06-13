@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import {withRouter} from 'react-router'
 
 import Tags from 'components/page/content/settings/tag/Tags'
 
@@ -22,7 +23,7 @@ import {
     removeTag
   }
 )
-
+@withRouter
 export default class TagsContainer extends React.Component {
   render () {
     return (

@@ -12,6 +12,8 @@ import TabPageBody from 'components/shared/TabPageBody'
 import TabPageHeader from 'components/shared/TabPageHeader'
 import WorkflowModalContainer from 'containers/page/content/settings/rule/WorkflowModalContainer'
 
+import WfTabs from './WorkflowTabs'
+
 export default class Rules extends React.Component {
   constructor (props) {
     super(props)
@@ -123,6 +125,7 @@ export default class Rules extends React.Component {
               <RaisedButton label="Add" onTouchTap={this.onAddWorkflow.bind(this)}/>&nbsp;
               <RaisedButton label="Edit" onTouchTap={this.onEditWorkflow.bind(this)}/>&nbsp;
               <RaisedButton label="Remove" onTouchTap={this.onRemoveWorkflow.bind(this)}/>&nbsp;
+              <WfTabs router={this.props.router}/>
             </div>
           </div>
         </TabPageHeader>

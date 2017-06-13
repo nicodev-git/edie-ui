@@ -2,6 +2,8 @@ import React from 'react'
 import Rules from 'components/page/content/settings/rule/Rules'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import {withRouter} from 'react-router'
+
 import {
   fetchWorkflowCategories,
   fetchWorkflows,
@@ -41,6 +43,7 @@ import {
     }, dispatch)
   })
 )
+@withRouter
 export default class RulesContainer extends React.Component {
   render () {
     return (
