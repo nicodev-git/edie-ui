@@ -8,11 +8,17 @@ import FilledStar from 'material-ui/svg-icons/toggle/star'
 import LocalMovie from 'material-ui/svg-icons/maps/local-movies'
 import Computer from 'material-ui/svg-icons/hardware/computer'
 import NoSim from 'material-ui/svg-icons/communication/no-sim'
+import {Toolbar} from 'material-ui/Toolbar'
 
 import { FormInput } from 'components/modal/parts'
 import DateRangePicker2 from 'components/shared/DateRangePicker2'
 import { underlineFocusStyle, inputStyle, selectedItemStyle } from 'style/materialStyles'
 
+const iconButtonStyle = {
+  marginTop: '4px',
+  verticalAlign: 'top',
+  minWidth: '50px'
+}
 export default class SearchFormView extends React.Component {
   renderDateLabel (label) {
     return (
@@ -59,7 +65,7 @@ export default class SearchFormView extends React.Component {
     } = this.props
     return (
       <form onSubmit={onSubmit}>
-        <div className="text-center margin-md-top" >
+        <Toolbar>
           <Field name="query" component={FormInput} label="Search" onKeyDown={onSearchKeyDown} style={{verticalAlign: 'top'}}/>
           <DateRangePicker2
             startDate={startDate}
@@ -128,15 +134,15 @@ export default class SearchFormView extends React.Component {
               />
             )}
           </SelectField>
-          <FlatButton label="Workflow" onTouchTap={onClickWorkflow} style={{marginTop: '4px', verticalAlign: 'top'}}/>
-          <FlatButton type="submit" icon={<ActionSearch />} style={{marginTop: '4px', verticalAlign: 'top'}}/>
-          <FlatButton icon={starFilled ? <FilledStar/> : <ToggleStar/>} style={{marginTop: '4px', verticalAlign: 'top'}} onClick={onClickStar}/>
-          <FlatButton label="Saved Search" style={{marginTop: '4px', verticalAlign: 'top', minWidth: '50px'}} onClick={onClickSavedSearch}/>
-          <FlatButton icon={<LocalMovie/>} style={{marginTop: '4px', verticalAlign: 'top', minWidth: '50px'}} onClick={onClickIllustrate}/>
-          <FlatButton icon={<Computer/>} style={{marginTop: '4px', verticalAlign: 'top', minWidth: '50px'}} onClick={onClickRelDevices}/>
-          <FlatButton icon={<NoSim/>} style={{marginTop: '4px', verticalAlign: 'top', minWidth: '50px'}} onClick={onClickIrrelDevices}/>
-          <FlatButton label="View Filter" style={{marginTop: '4px', verticalAlign: 'top', minWidth: '50px'}} onClick={onClickViewFilter}/>
-        </div>
+          <FlatButton icon={<img src="/images/wf-icon.png" width="24"/>} onTouchTap={onClickWorkflow} style={iconButtonStyle}/>
+          <FlatButton type="submit" icon={<ActionSearch />} style={iconButtonStyle}/>
+          <FlatButton icon={starFilled ? <FilledStar/> : <ToggleStar/>} style={iconButtonStyle} onClick={onClickStar}/>
+          <FlatButton label="Saved Search" style={iconButtonStyle} onClick={onClickSavedSearch}/>
+          <FlatButton icon={<LocalMovie/>} style={iconButtonStyle} onClick={onClickIllustrate}/>
+          <FlatButton icon={<Computer/>} style={iconButtonStyle} onClick={onClickRelDevices}/>
+          <FlatButton icon={<NoSim/>} style={iconButtonStyle} onClick={onClickIrrelDevices}/>
+          <FlatButton icon={<img src="/images/view-icon.png" width="24"/>} style={iconButtonStyle} onClick={onClickViewFilter}/>
+        </Toolbar>
       </form>
     )
   }
