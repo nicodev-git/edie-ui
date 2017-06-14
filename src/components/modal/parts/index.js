@@ -1,6 +1,5 @@
 import Header from './Header'
 import Selector from './Selector'
-import FiveButtonsBlock from './FiveButtonsBlock'
 import JTableDeviceRules from './JTableDeviceRules'
 import FormInput from './FormInput'
 import FormSelect from './FormSelect'
@@ -29,7 +28,6 @@ import HeaderWithCancel from './HeaderWithCancel'
 export {
     Header,
     Selector,
-    FiveButtonsBlock,
     JTableDeviceRules,
     FormInput,
     FormSelect,

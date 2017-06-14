@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import moment from 'moment'
-import Modal from 'react-bootstrap-modal'
+import {Dialog} from 'material-ui'
 
 import InfiniteTable from 'components/shared/InfiniteTable'
 import ShowMoreLine from 'components/shared/ShowMoreLine'
@@ -56,10 +56,9 @@ export default class MonitorHistoryModal extends Component {
     }
 
     return (
-      <Modal show onHide={this.onClickClose.bind(this)} aria-labelledby="ModalHeader"
-        className="bootstrap-dialog type-primary modal-750">
+      <Dialog open title="Monitor History">
         <Header name="Monitor History" />
-        <div className="modal-body bootstrap-dialog-message small-modal-table">
+        <div className="small-modal-table">
           <div style={{height: '400px', position: 'relative'}}>
             <InfiniteTable
               id="table"
@@ -73,7 +72,7 @@ export default class MonitorHistoryModal extends Component {
         <div className="padding-md-bottom">
           <CloseButton onClose={this.onClickClose.bind(this)} />
         </div>
-      </Modal>
+      </Dialog>
     )
   }
 }

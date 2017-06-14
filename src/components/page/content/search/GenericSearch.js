@@ -8,7 +8,6 @@ import NavigationClose from 'material-ui/svg-icons/navigation/close'
 import {browserHistory} from 'react-router'
 
 import InfiniteTable from 'components/shared/InfiniteTable'
-import SearchTabs from './SearchTabs'
 import TabPage from '../../../shared/TabPage'
 import TabPageBody from '../../../shared/TabPageBody'
 import TabPageHeader from '../../../shared/TabPageHeader'
@@ -628,7 +627,7 @@ class GenericSearch extends React.Component {
 
         </TabPageHeader>
 
-        <TabPageBody tabs={SearchTabs} tab={0}>
+        <TabPageBody tabs={[]} tab={0}>
           <div className="flex-horizontal" style={{height: '100%'}}>
             <div style={{minWidth: '170px', height: '100%', overflow: 'auto', position: 'relative'}}>
               {this.renderFields()}

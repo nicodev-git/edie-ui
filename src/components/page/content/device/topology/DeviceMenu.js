@@ -1,11 +1,6 @@
 import React from 'react'
 import DeviceImg from './DeviceImg'
 
-import {
-    PanelGroup,
-    Panel
-} from 'react-bootstrap'
-
 export default class DeviceMenu extends React.Component {
   constructor (props) {
     super(props)
@@ -67,11 +62,11 @@ export default class DeviceMenu extends React.Component {
       if (!deviceItems.length) return
 
       devicePanels.push(
-        <Panel header= {section.title} key={sectionIndex} eventKey={sectionIndex}>
+        <div className="panel panel-default" header= {section.title} key={sectionIndex} eventKey={sectionIndex}>
           <ul>
             {deviceItems}
           </ul>
-        </Panel>
+        </div>
       )
     })
 
@@ -88,9 +83,9 @@ export default class DeviceMenu extends React.Component {
           </div>
         </div>
 
-        <PanelGroup defaultActiveKey={0} accordion>
+        <div defaultActiveKey={0} accordion>
           {devicePanels}
-        </PanelGroup>
+        </div>
       </div>
     )
   }

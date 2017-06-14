@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Modal from 'react-bootstrap-modal'
+import {Dialog} from 'material-ui'
 import TimeAgo from 'react-timeago'
 
 export default class ProcessModal extends Component {
@@ -74,87 +74,72 @@ export default class ProcessModal extends Component {
   render () {
     const {process} = this.props
     return (
-      <Modal
-        show
-        onHide={this.onHide.bind(this)}
-        aria-labelledby="ModalHeader"
-        className="bootstrap-dialog type-primary"
-      >
+      <Dialog open title="Process">
+        <h4>
+          Process: {process.Name}
+        </h4>
 
-        <div className="modal-header">
-          <h4 className="modal-title bootstrap-dialog-title">
-            Process: {process.Name}
-          </h4>
-          <div className="bootstrap-dialog-close-button">
-            <button className="close"
-              onClick={this.onClickClose.bind(this)}>×
-            </button>
-          </div>
+        <div className="row">
+          <label className="col-md-2">ProcessID:</label>
+          <label className="col-md-10">{process.Id}</label>
         </div>
 
-        <div className="modal-body bootstrap-dialog-message form-inline">
-          <div className="row">
-            <label className="col-md-2">ProcessID:</label>
-            <label className="col-md-10">{process.Id}</label>
-          </div>
-
-          <div style={{maxHeight: '200px', minHeight: '50px', overflow: 'auto'}}>
-            <table className="table table-hover">
-              <thead>
-                <tr>
-                  <th>RemoteAddress</th>
-                  <th>Port</th>
-                  <th>State</th>
-                </tr>
-              </thead>
-              <tbody>
-              {process.Connections.map((c, i) =>
-                <tr key={i}>
-                  <td>{c.RemoteAddress}</td>
-                  <td>{c.RemotePorts}</td>
-                  <td>{c.State}</td>
-                </tr>
-              )}
-              </tbody>
-            </table>
-          </div>
-          <div className="row">
-            <div className="col-md-4">
-              <div className="row">
-                <label className="col-md-12">Last Run Times</label>
-              </div>
-              <div style={{height: '150px', overflow: 'auto'}}>
-                <table>
-                  <tbody>{
-                    this.getRunTimes().map((item, i) =>
-                      <tr key={i}>
-                        <td><TimeAgo date={item}/></td>
-                      </tr>)
-                  }
-                  </tbody>
-                </table>
-              </div>
+        <div style={{maxHeight: '200px', minHeight: '50px', overflow: 'auto'}}>
+          <table className="table table-hover">
+            <thead>
+              <tr>
+                <th>RemoteAddress</th>
+                <th>Port</th>
+                <th>State</th>
+              </tr>
+            </thead>
+            <tbody>
+            {process.Connections.map((c, i) =>
+              <tr key={i}>
+                <td>{c.RemoteAddress}</td>
+                <td>{c.RemotePorts}</td>
+                <td>{c.State}</td>
+              </tr>
+            )}
+            </tbody>
+          </table>
+        </div>
+        <div className="row">
+          <div className="col-md-4">
+            <div className="row">
+              <label className="col-md-12">Last Run Times</label>
             </div>
-            <div className="col-md-8">
-              <div className="row">
-                <label className="col-md-9">Children</label>
-                <label className="col-md-3">PID</label>
-              </div>
-              <div style={{height: '150px', overflow: 'auto'}}>
-                <table style={{width: '100%'}}>
-                  <tbody>{
-                    this.getChildren().map((item, i) =>
-                      <tr key={`${i}-${item.Id}`} onDoubleClick={this.onChildDblClick.bind(this, item)}>
-                        <td width="75%">{item.Name}</td>
-                        <td width="25%">{item.Id}</td>
-                      </tr>)
-                  }</tbody>
-                </table>
-              </div>
+            <div style={{height: '150px', overflow: 'auto'}}>
+              <table>
+                <tbody>{
+                  this.getRunTimes().map((item, i) =>
+                    <tr key={i}>
+                      <td><TimeAgo date={item}/></td>
+                    </tr>)
+                }
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div className="col-md-8">
+            <div className="row">
+              <label className="col-md-9">Children</label>
+              <label className="col-md-3">PID</label>
+            </div>
+            <div style={{height: '150px', overflow: 'auto'}}>
+              <table style={{width: '100%'}}>
+                <tbody>{
+                  this.getChildren().map((item, i) =>
+                    <tr key={`${i}-${item.Id}`} onDoubleClick={this.onChildDblClick.bind(this, item)}>
+                      <td width="75%">{item.Name}</td>
+                      <td width="25%">{item.Id}</td>
+                    </tr>)
+                }</tbody>
+              </table>
             </div>
           </div>
         </div>
-      </Modal>
+      </Dialog>
     )
   }
 }

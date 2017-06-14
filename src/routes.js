@@ -5,12 +5,7 @@ import MainContainer from './containers/page/MainContainer'
 import SigninContainer from './containers/auth/SigninContainer'
 import SignoutContainer from './containers/auth/SignoutContainer'
 
-import Search from './components/page/content/search/Search'
 import SearchGeneric from './containers/page/content/search/GenericSearchContainer'
-import SearchIncidentsContainer from './containers/page/content/search/IncidentsContainer'
-import SearchDevices from './components/page/content/search/Devices'
-import SearchProcess from './components/page/content/search/Processes'
-import SearchEvents from './containers/page/content/search/EventsContainer'
 import ChatContainer from './containers/page/content/chat/ChatContainer'
 import Incidents from './components/page/content/incidents/Incidents'
 import BigIncidentsContainer from './containers/page/content/dashboard/BigIncidentsContainer'
@@ -33,7 +28,6 @@ import DeviceMain from './components/page/content/device/main/Main'
 import DeviceMainIncidentsContainer from './containers/page/content/device/main/incidents/MainIncidentsContainer'
 import DeviceMainWorkflowsContainer from './containers/page/content/device/main/workflows/MainWorkflowsContainer'
 import DeviceMainAdvancedContainer from './containers/page/content/device/main/advanced/MainAdvancedContainer'
-import DeviceMainRuleAddContainer from './containers/page/content/device/main/ruleAdd/MainRulesAddContainer'
 import DeviceMonitorsContainer from './containers/page/content/device/monitors/MonitorsContainer'
 import DeviceEventLogs from './containers/page/content/device/monitors/EventLogsContainer'
 import DeviceApps from './containers/page/content/device/monitors/AppsContainer'
@@ -62,13 +56,7 @@ export default(
   <Router history={browserHistory}>
     <Route path="/" component={RequireAuth(MainContainer)} onChange={onMainEnter}>
       <Route path="chat" component={ChatContainer} />
-      <Route path="search" component={Search}>
-        <IndexRoute component={SearchGeneric} />
-        <Route path="incidents" component={SearchIncidentsContainer} />
-        <Route path="devices" component={SearchDevices} />
-        <Route path="process" component={SearchProcess} />
-        <Route path="events" component={SearchEvents} />
-      </Route>
+      <Route path="search" component={SearchGeneric}/>
       <Route path="incidents" component={Incidents}/>
       <Route path="bigincidents" component={BigIncidentsContainer}/>
       <Route path="threatmap" component={ThreatMapContainer}/>
@@ -96,7 +84,6 @@ export default(
           <Route path="incidents" component={DeviceMainIncidentsContainer}/>
           <Route path="workflows" component={DeviceMainWorkflowsContainer}/>
           <Route path="advanced" component={DeviceMainAdvancedContainer}/>
-          <Route path="ruleAdd" component={DeviceMainRuleAddContainer}/>
         </Route>
         <Route path="topology" component={DeviceTopology}/>
         <Route path="monitor">
