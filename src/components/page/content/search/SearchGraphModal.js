@@ -15,6 +15,7 @@ export default class SearchGraphModal extends React.Component {
     const chartData = {
       labels: searchRecordCounts.map(p => p.date),
       datasets: [{
+        label: 'Keyword',
         data: searchRecordCounts.map(p => p.count),
         borderWidth: 1,
         borderColor: '#269C8B',
