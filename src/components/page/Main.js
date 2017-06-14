@@ -26,8 +26,7 @@ class Main extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      user: null,
-      minHeight: 1300
+      // minHeight: 1300
     }
     this.onClickAlert = this.onClickAlert.bind(this)
     this.fnEmpty = () => {}

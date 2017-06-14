@@ -522,8 +522,9 @@ table.table tbody tr.selected {
 }
 
 .metric-container {
-  display: flex;
-  justify-content: center;
+    display: inline-block;
+    justify-content: center;
+    width: 25%;
 }
 
 .metric-panel {
@@ -1146,3 +1147,5 @@ table.table tbody tr.selected {
     position: absolute;
     top: 50%;
 }
+
+/* Misc */
