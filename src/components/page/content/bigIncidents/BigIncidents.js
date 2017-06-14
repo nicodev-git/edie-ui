@@ -124,9 +124,9 @@ class BigIncidents extends Component {
     this.props.router.goBack()
   }
 
-  onChangeSeverity (selected) {
+  onChangeSeverity (e, index, values) {
     this.props.updateBigIncidentParams(assign({}, this.props.bigIncidentParams, {
-      severity: selected.map(item => item.value)
+      severity: values
     }))
   }
 
@@ -137,9 +137,9 @@ class BigIncidents extends Component {
     }))
   }
 
-  onChangeFixedStatus (e) {
+  onChangeFixedStatus (e, index, value) {
     this.props.updateBigIncidentParams(assign({}, this.props.bigIncidentParams, {
-      fixed: e.target.value || null
+      fixed: value || null
     }))
   }
 
@@ -156,7 +156,7 @@ class BigIncidents extends Component {
     return (
       <BigIncidentsView
         onHide={this.onHide.bind(this)}
-        severities={bigIncidentParams.severity.join(',')}
+        selectedSeverity={bigIncidentParams.severity}
         severityOptions={severities}
         onChangeSeverity={this.onChangeSeverity.bind(this)}
 

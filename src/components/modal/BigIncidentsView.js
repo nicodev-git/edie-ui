@@ -1,11 +1,17 @@
 import React from 'react'
-import {FlatButton} from 'material-ui'
+import moment from 'moment'
+import {FlatButton, RaisedButton, MenuItem, SelectField, TextField} from 'material-ui'
+import ActionSearch from 'material-ui/svg-icons/action/search'
 
-import DateRangePicker2 from 'components/shared/DateRangePicker2'
-import Select from 'react-select'
+import DateRangePicker from 'components/shared/DateRangePicker2'
+import {
+  errorStyle, underlineFocusStyle, inputStyle, selectedItemStyle, underlineStyle
+} from 'style/materialStyles'
+
+import {severities} from 'shared/Global'
 
 const BigIncidentsView = ({onHide,
-  severities, severityOptions, onChangeSeverity,
+  selectedSeverity, onChangeSeverity,
   startDate, endDate, onChangeDateRange,
   fixedStatus, onChangeFixedStatus,
   keyword, onChangeKeyword,
@@ -16,53 +22,58 @@ const BigIncidentsView = ({onHide,
       <FlatButton label="Close" onTouchTap={onHide} className="pull-right"/>
     </div>
     <div className="form-inline padding-md-left">
-      <label>Show</label>
-      &nbsp;
-
-      <Select
-        value={severities}
-        options={severityOptions}
+      <SelectField
+        errorStyle={errorStyle}
+        underlineStyle={underlineFocusStyle}
+        selectedMenuItemStyle={selectedItemStyle}
+        menuItemStyle={inputStyle}
+        labelStyle={inputStyle}
+        multiple
+        hintText="Select severities"
         onChange={onChangeSeverity}
-        multi
-        clearable={false}
-        className="select-severity"
-        style={{minWidth: '85px'}}
-        searchable={false}
-        autosize={false}
-        backspaceRemoves={false}
-      />
-      &nbsp;
+        value={selectedSeverity}
+        style={{width: '160px'}}
+        className="valign-top"
+      >
+        {severities.map(option =>
+          <MenuItem
+            key={option.value}
+            insetChildren
+            checked={selectedSeverity && selectedSeverity.includes(option.value)}
+            value={option.value}
+            primaryText={option.label}
+          />
+        )}
+      </SelectField>
 
-      <label>incidents from</label>
-      &nbsp;
-
-      <DateRangePicker2
-        startDate={startDate}
-        endDate={endDate}
-        onApply={onChangeDateRange}/>
-      &nbsp;
-
-      <label>having</label>
-      &nbsp;
-
-      <select className="fixtype form-control inline select-custom text-primary"
+      <SelectField
         onChange={onChangeFixedStatus}
-        value={fixedStatus || ''}>
-        <option value="">Any</option>
-        <option value="false">Unfixed</option>
-        <option value="true">Fixed</option>
-      </select>
-      &nbsp;
+        value={fixedStatus || ''}
+        className="margin-md-left valign-top"
+        errorStyle={errorStyle}
+        underlineStyle={underlineFocusStyle}
+        selectedMenuItemStyle={selectedItemStyle}
+        menuItemStyle={inputStyle}
+        labelStyle={inputStyle}
+        style={{width: '120px'}}>
+        <MenuItem primaryText="Any" value=""/>
+        <MenuItem primaryText="Unfixed" value="false"/>
+        <MenuItem primaryText="Fixed" value="true"/>
+      </SelectField>
+      <DateRangePicker
+        startDate={moment(startDate)}
+        endDate={moment(endDate)}
+        onApply={onChangeDateRange}
+        renderer={label => <RaisedButton label={label} className="valign-top margin-md-left"/>}/>
 
-      <label>status that contains</label>
-      &nbsp;
-
-      <input
-        value={keyword}
+      <TextField
+        hintText={<ActionSearch style={{bottom: '5px'}} color="#888888"/>}
+        errorStyle={errorStyle}
+        inputStyle={inputStyle}
+        underlineFocusStyle={underlineStyle}
         onChange={onChangeKeyword}
-        placeholder="search"
-        className="form-control p-none noborder text-primary"
-        style={{marginTop: '-2px'}}
+        value={keyword}
+        className="valign-top margin-md-left"
       />
     </div>
     <div className="flex-1 flex-vertical">
