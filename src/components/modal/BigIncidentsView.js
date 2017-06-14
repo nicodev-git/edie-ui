@@ -1,5 +1,4 @@
 import React from 'react'
-import Modal from 'react-bootstrap-modal'
 import DateRangePicker2 from 'components/shared/DateRangePicker2'
 import Select from 'react-select'
 import { HeaderClosing } from './parts'
@@ -10,12 +9,8 @@ const BigIncidentsView = ({onHide,
   fixedStatus, onChangeFixedStatus,
   keyword, onChangeKeyword,
   table, eventsModal}) => (
-  <Modal show
-    onHide={onHide}
-    aria-labelledby="ModalHeader"
-    className="bootstrap-dialog type-default modal-fit modal-flex table-panel">
+  <div className="flex-vertical flex-1">
     <HeaderClosing name="Incidents" onClose={onHide}/>
-    <div className="modal-body bootstrap-dialog-message">
       <div className="form-inline">
         <label>Show</label>
         &nbsp;
@@ -70,8 +65,7 @@ const BigIncidentsView = ({onHide,
         {table}
         {eventsModal}
       </div>
-    </div>
-  </Modal>
+  </div>
 )
 
 export default BigIncidentsView
