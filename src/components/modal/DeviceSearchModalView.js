@@ -3,16 +3,15 @@ import {Dialog} from 'material-ui'
 import Autocomplete from 'react-autocomplete'
 import IconButton from 'material-ui/IconButton'
 import DeleteIcon from 'material-ui/svg-icons/action/delete'
-import { Header, CloseButton } from './parts'
+import { CloseButton } from './parts'
 import { buttonStyle, iconStyle } from 'style/materialStyles'
 
 export default class DeviceSearchModalView extends Component {
   render () {
-    const {show, onHide, value, selected, items, styles,
+    const {onHide, value, selected, items, styles,
       onSelect, onChange, onRemove} = this.props
     return (
       <Dialog open title="Device Search">
-        <Header name="Device Search"/>
         <div className="search-modal-container">
           <div className="autocomplete-wrapper">
             <Autocomplete

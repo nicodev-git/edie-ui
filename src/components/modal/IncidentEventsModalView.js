@@ -1,17 +1,10 @@
 import React from 'react'
-import Modal from 'react-bootstrap-modal'
+import {Dialog} from 'material-ui'
 import InfiniteTable from 'components/shared/InfiniteTable'
-import { Header } from './parts'
 
-const InsidentEventsModalView = ({show, onHide, onClose, params, cells}) => (
-  <Modal
-    show={show}
-    onHide={onHide}
-    aria-labelledby="ModalHeader"
-    className="bootstrap-dialog type-primary"
-  >
-    <Header name="Incident Events" onClick={onClose} />
-    <div className="modal-body bootstrap-dialog-message small-modal-table">
+const InsidentEventsModalView = ({onClose, params, cells}) => (
+  <Dialog open title="Incident Events" onRequestClose={onClose}>
+    <div className="small-modal-table">
       <InfiniteTable
         url="/bi/getAllAttackers"
         params={params}
@@ -21,7 +14,7 @@ const InsidentEventsModalView = ({show, onHide, onClose, params, cells}) => (
         selectable
       />
     </div>
-  </Modal>
+  </Dialog>
 )
 
 export default IncidentEventsModalView

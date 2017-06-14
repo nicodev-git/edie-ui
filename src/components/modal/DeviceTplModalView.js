@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
-import Modal from 'react-bootstrap-modal'
 import { Field } from 'redux-form'
-import {Chip, FlatButton} from 'material-ui'
+import {Chip, FlatButton, Dialog} from 'material-ui'
 
-import { Header, SubHeader, SubmitBlock, FormInput, FormSelect, ImageUploader,
+import { SubHeader, SubmitBlock, FormInput, FormSelect, ImageUploader,
   Monitors, MonitorTemplates, Workflows } from './parts'
 import { chipStyles } from 'style/materialStyles'
 
@@ -49,20 +48,12 @@ export default class DeviceTplModalView extends Component {
     )
   }
   render () {
-    const {show, header, onHide, innerView} = this.props
+    const {header, innerView} = this.props
     if (innerView) return this.renderContent()
     return (
-      <Modal
-        show={show}
-        onHide={onHide}
-        aria-labelledby="ModalHeader"
-        className="bootstrap-dialog type-primary"
-      >
-        <Header name={header} />
-        <div className="modal-body bootstrap-dialog-message">
-          {this.renderContent()}
-        </div>
-      </Modal>
+      <Dialog open title={header}>
+        {this.renderContent()}
+      </Dialog>
     )
   }
 }
