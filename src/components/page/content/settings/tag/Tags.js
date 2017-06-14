@@ -32,7 +32,8 @@ export default class Tags extends React.Component {
   table () {
     return this.refs.table
   }
-  onRowDblClick () {
+  onRowDblClick (item) {
+    this.props.showTagModal(true, item)
   }
   onAddTag () {
     this.props.showTagModal(true)

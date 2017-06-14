@@ -15,7 +15,7 @@ export default class TagModalView extends React.Component {
             <Field name="desc" component={FormInput} type="text" floatingLabel="Description"/>
             <Field name="order" component={FormInput} type="text" floatingLabel="Order"/>
           </div>
-          <SubmitBlock name="Save" onCancel={onClickClose}/>
+          <SubmitBlock name="Save" onClick={onClickClose}/>
         </form>
       </Dialog>
     )
