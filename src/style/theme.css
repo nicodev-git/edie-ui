@@ -276,7 +276,6 @@ table th[class*="col-"] {
 }
 
 .panel {
-    margin-bottom: 26px;
     border: none;
     background-color: #fff;
     -webkit-box-shadow: 0 3px 0 rgba(9, 9, 9, 0.03);

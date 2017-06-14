@@ -66,6 +66,24 @@ export default class DeviceMenu extends React.Component {
 
     let hasActive = false
     let firstPanelIndex = -1
+
+    deviceTypes.forEach((section, sectionIndex) => {
+      let items = false
+
+      if (sectionIndex > 0) {
+        section.items.forEach((item, typeIndex) => {
+          if (item.title.toLowerCase().indexOf(this.state.keyword.toLowerCase()) < 0) return
+          items = true
+        })
+
+        if (!items) return
+
+        if (firstPanelIndex < 0) firstPanelIndex = sectionIndex
+        if (sectionIndex === this.state.activePanel) hasActive = true
+      }
+    })
+    const activeKey = !hasActive && firstPanelIndex >= 0 ? firstPanelIndex : this.state.activePanel
+
     deviceTypes.forEach((section, sectionIndex) => {
       let deviceItems = []
 
@@ -82,14 +100,14 @@ export default class DeviceMenu extends React.Component {
         })
 
         if (!deviceItems.length) return
-
-        if (firstPanelIndex < 0) firstPanelIndex = sectionIndex
-        if (sectionIndex === this.state.activePanel) hasActive = true
       }
 
       devicePanels.push(
-        <div className="panel panel-default" header= {section.title} key={sectionIndex} eventKey={sectionIndex}>
-          <ul>
+        <div className="panel panel-default" key={sectionIndex} style={{background: 'black'}}>
+          <div className="panel-heading">
+            {section.title}
+          </div>
+          <ul className={activeKey === sectionIndex ? '' : 'hidden'}>
             {deviceItems}
           </ul>
         </div>
@@ -113,7 +131,7 @@ export default class DeviceMenu extends React.Component {
           </div>
         </div>
 
-        <div activeKey={!hasActive && firstPanelIndex >= 0 ? firstPanelIndex : this.state.activePanel} onSelect={this.handleSelect.bind(this)} accordion>
+        <div onSelect={this.handleSelect.bind(this)} accordion>
           {devicePanels}
         </div>
       </div>
