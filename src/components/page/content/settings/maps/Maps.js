@@ -2,11 +2,9 @@ import React from 'react'
 import {RaisedButton} from 'material-ui'
 
 import InfiniteTable from 'components/shared/InfiniteTable'
-import { appendComponent, removeComponent } from '../../../../../util/Component'
 import { showAlert, showConfirm } from '../../../../shared/Alert'
 
 import MapModal from './MapModal'
-import MapRestoreModal from './MapRestoreModal'
 import MapUsersModal from './MapUsersModal'
 
 import SettingTabs from '../SettingTabs'
@@ -68,13 +66,6 @@ export default class Maps extends React.Component {
     this.props.openSettingMapModal()
   }
 
-  onMapAdded (modal, success) {
-    removeComponent(modal)
-    if (success) {
-      this.refs.maps.refresh()
-    }
-  }
-
   onMapEdit () {
     const selected = this.getMaps().getSelected()
     if (!selected) return showAlert('Please select map.')
@@ -92,12 +83,6 @@ export default class Maps extends React.Component {
 
       this.props.deleteSettingMap(selected)
     })
-  }
-
-  onMapRestore () {
-    appendComponent(
-      <MapRestoreModal onClose={removeComponent}/>
-    )
   }
 
   onMapUsers () {

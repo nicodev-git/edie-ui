@@ -2,10 +2,8 @@ import React from 'react'
 
 import {RaisedButton, Popover, MenuItem, Menu, SelectField} from 'material-ui'
 import InfiniteTable from 'components/shared/InfiniteTable'
-import { appendComponent, removeComponent } from '../../../../../util/Component'
 import { showAlert, showConfirm } from '../../../../shared/Alert'
 
-import GroupModal from './GroupModal'
 import UserModal from './UserModal'
 import PasswordModal from './PasswordModal'
 
@@ -94,34 +92,19 @@ export default class Users extends React.Component {
   }
 
   onAddGroup () {
-    appendComponent(
-      <GroupModal sid={this.context.sid} onClose={this.onGroupAdded.bind(this)}/>
-    )
-  }
-
-  onGroupAdded (modal, group) {
-    removeComponent(modal)
-    group && emit(EVENTS.GROUP_ADDED, group) // eslint-disable-line no-undef
+    // appendComponent(
+    //   <GroupModal sid={this.context.sid} onClose={this.onGroupAdded.bind(this)}/>
+    // )
   }
 
   onClickEditGroup () {
     const selected = this.state.selected
     if (selected < 0) return showAlert('Please select a group.')
 
-    appendComponent(
-      <GroupModal group={this.state.groups[selected]} onClose={this.onCloseEditGroup.bind(this)}
-      />
-    )
-  }
-
-  onCloseEditGroup (modal, group) {
-    removeComponent(modal)
-    if (!group) return
-    this.onChangeGroup({
-      target: { value: group.id }
-    })
-
-    this.loadGroups()
+    // appendComponent(
+    //   <GroupModal group={this.state.groups[selected]} onClose={this.onCloseEditGroup.bind(this)}
+    //   />
+    // )
   }
 
   onClickRemoveGroup () {

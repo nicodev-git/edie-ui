@@ -6,20 +6,11 @@ import TextInput from './input/TextInput'
 import Checkbox from './input/Checkbox'
 import Combo from './input/Combo'
 import RadioCombo from './input/RadioCombo'
-import PortList from './input/PortList'
-import Password from './input/Password'
 import MonitorTable from './input/MonitorTable'
-import AdvancedForm from './input/AdvancedForm'
-import MatchIgnore from './input/MatchIgnore'
-import GlobalIgnore from './input/GlobalIgnore'
-import MTable from './input/MTable'
 import ParamEditModal from './input/ParamEditModal'
 import ParamList from './input/ParamList'
 import {wizardConfig} from './WizardConfig'
 import {util} from './WizardUtil'
-// import { Provider } from 'react-redux'
-// import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
-// import { store } from 'shared/GetStore'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import LinearProgress from 'material-ui/LinearProgress'
 import { DeviceWizardView } from 'components/modal'
@@ -48,7 +39,6 @@ class DeviceWizard extends Component {
       'text': this.buildText.bind(this),
       'check': this.buildCheck.bind(this),
       'monitors': this.buildMonitors.bind(this),
-      'portlist': this.buildPortList.bind(this),
       'paramlist': this.buildParamList.bind(this),
       'row': this.buildRow.bind(this)
     }
@@ -207,35 +197,6 @@ class DeviceWizard extends Component {
       change={this.props.change}/>)
   }
 
-  buildPortList (config, values) {
-    return (<PortList config={config}
-      change={this.props.change}
-      values={values}
-      name="portList"
-      buildInput={this.buildInput.bind(this)}/>)
-  }
-
-  buildPassword (config, values) {
-    let text = []
-    let width = util.calcWidth(config.width) // eslint-disable-line no-unused-vars
-
-    if (config.label !== null) {
-      if (config.label.type === 'place') {
-
-      } else {
-        text.push(this.buildLabel(config.label))
-        width = util.calcWidth(config.width) - util.calcWidth(config.label.width)
-      }
-    }
-
-    text.push(
-      <div className={`col-md-${util.calcWidth(config.width)}`} style={util.convertStyle(config.style)}>
-          <Password config={config} values={values}/>
-      </div>
-    )
-    return text
-  }
-
   // className={`col-md-${util.calcWidth(config.width)}`}
 
   buildLabel (config) {
@@ -247,29 +208,8 @@ class DeviceWizard extends Component {
       </div>
     )
   }
-
-  buildAdvanced (config, values) {
-    return (<AdvancedForm config={config}
-      values={values}
-      name="advanced"
-      buildInput={this.buildInput.bind(this)}
-      buildLabel={this.buildLabel.bind(this)}/>)
-  }
-
   buildForm (config, values) {
     return null
-  }
-
-  buildMatchIgnore (config, values) {
-    return (<MatchIgnore name="matchIgnore"
-      values={values}
-      config={config}/>)
-  }
-
-  buildGlobalIgnore (config, values) {
-    return (<GlobalIgnore name="globalIgnore"
-      values={values}
-      config={config}/>)
   }
 
   buildMonitors (config, values) {
@@ -282,12 +222,6 @@ class DeviceWizard extends Component {
       config={config}
       openDeviceMonitorWizard={this.props.openDeviceMonitorWizard}
     />)
-  }
-
-  buildMTable (config, values) {
-    return (<MTable name="mTable"
-      values={values}
-      config={config}/>)
   }
 
   buildParamList (config, values) {

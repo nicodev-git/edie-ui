@@ -1,5 +1,5 @@
 import React from 'react'
-import Modal from 'react-bootstrap-modal'
+import {Dialog} from 'material-ui'
 import moment from 'moment'
 
 import {renderEntity} from 'components/shared/CellRenderers'
@@ -47,22 +47,11 @@ export default class IncidentEventsModal extends React.Component {
 
   render () {
     return (
-      <Modal show onHide={this.onHide.bind(this)}
-        aria-labelledby="ModalHeader" className="bootstrap-dialog type-primary modal-w-fit">
-        <div className="modal-header">
-          <h4 className="modal-title bootstrap-dialog-title">
-            Incident Events
-          </h4>
-          <div className="bootstrap-dialog-close-button">
-            <button className="close" onClick={this.onClickClose.bind(this)}>×</button>
-          </div>
+      <Dialog open title="Incident Events" onRequestClose={this.onHide.bind(this)}>
+        <div style={{height: '600px', overflow: 'auto'}}>
+          {this.renderTable()}
         </div>
-        <div className="modal-body bootstrap-dialog-message">
-          <div style={{height: '600px', overflow: 'auto'}}>
-            {this.renderTable()}
-          </div>
-        </div>
-      </Modal>
+      </Dialog>
     )
   }
 }

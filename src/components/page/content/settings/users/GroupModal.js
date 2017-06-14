@@ -1,8 +1,5 @@
 import React from 'react'
-import Modal from 'react-bootstrap-modal'
-import {
-    Button
-} from 'react-bootstrap'
+import {Dialog} from 'material-ui'
 import {
   findIndex,
   clone
@@ -137,77 +134,60 @@ export default class GroupModal extends React.Component {
     if (group) groupId = group.id
 
     return (
-      <Modal
-        show={this.state.open}
-        onHide={this.onHide.bind(this)}
-        aria-labelledby="ModalHeader"
-        className="bootstrap-dialog type-primary"
-      >
-
-        <div className="modal-header">
-          <h4 className="modal-title bootstrap-dialog-title">
-            Group
-          </h4>
-          <div className="bootstrap-dialog-close-button">
-            <button className="close" onClick={this.onClickClose.bind(this)}>×</button>
+      <Dialog open title="Group">
+        <div className="row form-group margin-md-bottom">
+          <div className="col-xs-12">
+            <label className="control-label">Group Name</label>
+            <input
+              type="text" className="form-control input-sm"
+              style={{width: '30%', marginLeft: '10px', display: 'inline-block'}}
+              defaultValue={group ? group.name : ''}
+              ref="name"
+            />
           </div>
         </div>
 
-        <div className="modal-body bootstrap-dialog-message">
-          <div className="row form-group margin-md-bottom">
-            <div className="col-xs-12">
-              <label className="control-label">Group Name</label>
-              <input
-                type="text" className="form-control input-sm"
-                style={{width: '30%', marginLeft: '10px', display: 'inline-block'}}
-                defaultValue={group ? group.name : ''}
-                ref="name"
-              />
-            </div>
-          </div>
-
-          <div style={{maxHeight: '400px', overflow: 'auto'}}>
-            <table className="table table-hover">
-              <thead>
-              <tr>
-                <th />
-                <th>User Name</th>
-                <th>Full Name</th>
-                <th>Email</th>
-                <th>Phone</th>
-              </tr>
-              </thead>
-              <tbody>
-              {
-                this.state.data.map(item =>
-                  <tr key={item.id}>
-                    <td className="text-right groupcheck">
-                      <input
-                        type="checkbox"
-                        defaultChecked={group ? (findIndex(group.groupUsers, {userId: item.id}) >= 0) : false}
-                        onChange={this.onChangeCheck.bind(this, item.id)}
-                      />
-                    </td>
-                    <td>{item.username}</td>
-                    <td>{item.fullname}</td>
-                    <td>{item.email}</td>
-                    <td>{item.phone}</td>
-                  </tr>
-                )
-              }
-              </tbody>
-            </table>
-          </div>
-
-          <div className="text-right p-none">
-            <Button
-              className="btn-primary btn-sm"
-              onClick={this.onClickSave.bind(this)}>Save</Button>
-            <Button className="btn-sm margin-sm-left"
-              onClick={this.onClickClose.bind(this)}>Cancel</Button>
-          </div>
+        <div style={{maxHeight: '400px', overflow: 'auto'}}>
+          <table className="table table-hover">
+            <thead>
+            <tr>
+              <th />
+              <th>User Name</th>
+              <th>Full Name</th>
+              <th>Email</th>
+              <th>Phone</th>
+            </tr>
+            </thead>
+            <tbody>
+            {
+              this.state.data.map(item =>
+                <tr key={item.id}>
+                  <td className="text-right groupcheck">
+                    <input
+                      type="checkbox"
+                      defaultChecked={group ? (findIndex(group.groupUsers, {userId: item.id}) >= 0) : false}
+                      onChange={this.onChangeCheck.bind(this, item.id)}
+                    />
+                  </td>
+                  <td>{item.username}</td>
+                  <td>{item.fullname}</td>
+                  <td>{item.email}</td>
+                  <td>{item.phone}</td>
+                </tr>
+              )
+            }
+            </tbody>
+          </table>
         </div>
-      </Modal>
+
+        <div className="text-right p-none">
+          <a href="javascript:;"
+            className="btn-primary btn-sm"
+            onClick={this.onClickSave.bind(this)}>Save</a>
+          <a href="javascript:;" className="btn-sm margin-sm-left"
+            onClick={this.onClickClose.bind(this)}>Cancel</a>
+        </div>
+      </Dialog>
     )
   }
 }
