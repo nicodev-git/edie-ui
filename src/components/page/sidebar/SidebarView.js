@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
 import {Drawer, IconButton} from 'material-ui'
-import IconButton from 'material-ui/IconButton'
 import Badge from 'material-ui/Badge'
 import Divider from 'material-ui/Divider'
 import MenuIcon from 'material-ui/svg-icons/navigation/menu'
-import {badgeStyle, badgeRootStyle, iconStyle, iconButtonStyle} from 'style/materialStyles'
+import {badgeStyle, badgeRootStyle, iconStyle, iconButtonStyle, sidebarWidth, sidebarStyle} from 'style/materialStyles'
 
 import SearchBarContainer from './parts/SearchBarContainer'
 import MessageBox from './parts/MessageBox'
@@ -119,15 +118,16 @@ class SidebarView extends Component {
     )
   }
 
-  render () {
+  render1 () {
     const {items, onClickItem, active} = this.props
     return (
       <Drawer open width={sidebarWidth} containerStyle={sidebarStyle}>
         <div className="margin-md-top">
           {items.map((item, index) =>
-            <div key={index}
-                 className={index === active ? 'sidebar-chosen' : ''}
-                 onClick={onClickItem.bind(this, index)}>
+            <div
+              key={index}
+              className={index === active ? 'sidebar-chosen' : ''}
+              onClick={onClickItem.bind(this, index)}>
               {index > 0 && <Divider style={{margin: 0, backgroundColor: '#393b42'}}/>}
               <div className="sidebar-item-container">
                 {this.renderButton(item)}
@@ -135,6 +135,76 @@ class SidebarView extends Component {
             </div>
           )}
         </div>
+      </Drawer>
+    )
+  }
+
+  render () {
+    const {onToggle, contentType, mainMenu, deviceMenu, onMainMenu, onDeviceMenu,
+      device, pageId, pageType, searchVisible, group, onSearch,
+      profile, user, onClickProfile, onClickMessages, onSignOut,
+      sidebarMessageMenuOpen, sidebarProfileMenuOpen,
+      showSidebarProfileMenu,
+      openSidebarMessageMenu, closeSidebarMessageMenu
+    } = this.props
+
+    return (
+      <Drawer open width={sidebarWidth} containerStyle={sidebarStyle}>
+        <div className="hidden">
+          <IconButton
+            style={iconButtonStyle}
+            iconStyle={iconStyle}
+            onTouchTap={onToggle}>
+            <MenuIcon color="#ffffff"/>
+          </IconButton>
+        </div>
+        <div style={{display: contentType.Main === pageType ? 'block' : 'none'}}>
+          {mainMenu.map((item, index) =>
+            <div
+              key={index}
+              className={pageId === item.id ? 'sidebar-chosen' : ''}
+              onClick={onMainMenu.bind(this, index)}>
+              {(index !== 0) ? (<Divider style={{margin: 0, backgroundColor: '#393b42'}}/>) : null}
+              <div className="sidebar-item-container">
+                {item.badge ? this.renderBadge(item) : this.renderButton(item)}
+                <div className="sidebar-title">{item.title}</div>
+              </div>
+              {
+                index === 1 && searchVisible && pageId !== item.id ? <div className={`sidebar-tooltip`}>
+                  <SearchBarContainer defaultKeyword={this.props.params.query} onSearch={onSearch}/>
+                </div> : null
+              }
+            </div>
+          )}
+          <Divider style={{margin: 0, backgroundColor: '#393b42'}}/>
+          <MessageBox
+            open={sidebarMessageMenuOpen}
+            openSidebarMessageMenu={openSidebarMessageMenu}
+            closeSidebarMessageMenu={closeSidebarMessageMenu}/>
+          <Divider style={{margin: 0, backgroundColor: '#393b42'}}/>
+          <ProfileMenu
+            open={sidebarProfileMenuOpen}
+            showSidebarProfileMenu={showSidebarProfileMenu}
+            user={user}
+
+            onClickProfile={onClickProfile}
+            onClickMessages={onClickMessages}
+            onSignOut={onSignOut}/>
+        </div>
+
+        <div style={{display: contentType.Device === pageType ? 'block' : 'none'}}>
+          {deviceMenu(device ? device.id : 'main').map((item, index) => {
+            if (item.group && !group) return null
+            return (
+              <div key={index} className={pageId === item.id ? 'active open' : ''} onClick={onDeviceMenu.bind(this, index)} data-tip={item.title}>
+                <a href="javascript:;">
+                  <i className={`fa fa-lg fa-fw ${item.icon}`} />{item.title}
+                </a>
+              </div>
+            )
+          })}
+        </div>
+        {profile}
       </Drawer>
     )
   }

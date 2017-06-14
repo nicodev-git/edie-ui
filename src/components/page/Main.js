@@ -15,6 +15,7 @@ import Alert from 'components/shared/Alert'
 import { parseSearchQuery, severities } from 'shared/Global'
 
 import { mainMenu, deviceMenu, contentType } from './Config'
+import {sidebarWidth} from 'style/materialStyles'
 
 const dashboardId = mainMenu[0].id
 
@@ -179,7 +180,7 @@ class Main extends React.Component {
     return (
       <div style={style}>
         {this.renderSidebar()}
-        <div className="page-content flex-vertical" style={{overflow: 'auto'}} ref="content">
+        <div className="page-content flex-vertical" style={{overflow: 'auto', paddingLeft: sidebarWidth}} ref="content">
           {this.renderDashboard()}
           {children || null}
         </div>
