@@ -103,9 +103,9 @@ export default class DeviceMenu extends React.Component {
       }
 
       devicePanels.push(
-        <div className="panel panel-default" key={sectionIndex}>
+        <div className="panel panel-default" key={sectionIndex} onClick={this.handleSelect.bind(this, sectionIndex)}>
           <div className="panel-heading">
-            {section.title}
+            <a href="javascript:;">{section.title}</a>
           </div>
           <ul className={activeKey === sectionIndex ? '' : 'hidden'} style={{background: 'black'}}>
             {deviceItems}
@@ -119,11 +119,7 @@ export default class DeviceMenu extends React.Component {
         <div className="panel panel-default">
           <div className="panel-body">
             <div className="navbar-search" style={{paddingLeft: '5px', paddingRight: '5px'}}>
-              <input type="text" placeholder="Search …" className="form-control"
-                onChange={this.onChangeDeviceSearch.bind(this)}/>
-              <button className="btn" type="submit" disabled>
-                <i className="fa fa-search" />
-              </button>
+              <input type="text" placeholder="Search …" className="form-control" onChange={this.onChangeDeviceSearch.bind(this)}/>
             </div>
             <a href="javascript:;" className="btn btn-default btn-sm" onClick={this.props.onNewIncident}>
               Add Incident
@@ -131,7 +127,7 @@ export default class DeviceMenu extends React.Component {
           </div>
         </div>
 
-        <div onClick={this.handleSelect.bind(this)}>
+        <div>
           {devicePanels}
         </div>
       </div>

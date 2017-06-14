@@ -7,12 +7,14 @@
     z-index: 61;
     text-align: left;
 }
-
+.devicediv .panel {
+    border-bottom: 1px solid lightgray;
+}
 .devicediv > .panel:first-child {
     border-radius: 0;
 }
 
-.devicediv .panel .panel-heading a {
+.devicediv .panel .panel-heading {
     padding: 6px 15px;
 }
 

@@ -1149,3 +1149,7 @@ table.table tbody tr.selected {
 }
 
 /* Misc */
+
+.panel-group {
+    overflow: auto;
+}

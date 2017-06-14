@@ -124,7 +124,7 @@ export default class DividerLine extends React.Component {
       height: '10px',
       cursor: 'row-resize',
       bottom: 0,
-      zIndex: 100,
+      zIndex: 60,
       borderBottom: '1px solid #E91E63'
     }
 
