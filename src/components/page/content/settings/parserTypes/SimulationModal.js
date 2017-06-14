@@ -1,12 +1,11 @@
 import React from 'react'
-import Modal from 'react-bootstrap-modal'
 import { reduxForm, Field, formValueSelector } from 'redux-form'
 import { connect } from 'react-redux'
-import {FlatButton, Chip} from 'material-ui'
+import {Dialog, FlatButton, Chip} from 'material-ui'
 import {chipStyles} from 'style/materialStyles'
 import { concat, assign } from 'lodash'
 
-import { FormInput, Header } from 'components/modal/parts'
+import { FormInput } from 'components/modal/parts'
 import FilterModal from './FilterModal'
 import PatternModal from './PatternModal'
 
@@ -140,66 +139,62 @@ class SimulationModal extends React.Component {
   render () {
     const {handleSubmit} = this.props
     return (
-      <Modal show onHide={this.onHide.bind(this)} aria-labelledby="ModalHeader" className="bootstrap-dialog type-primary modal-w-9">
-        <Header name="Simulation"/>
-        <div className="modal-body bootstrap-dialog-message">
+      <Dialog open title="Simulation">
+        <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
+          <div className="form-column">
+            <Field name="text" component={FormInput} type="text" label="Text"/>
+          </div>
 
-          <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
-            <div className="form-column">
-              <Field name="text" component={FormInput} type="text" label="Text"/>
+          <div className="row m-none">
+            <div className="margin-sm-top pull-left"><b>Filters</b></div>
+            <div className="pull-right">
+              <FlatButton label="Add" primary onTouchTap={this.onClickAddFilter.bind(this)}/>
             </div>
+          </div>
 
-            <div className="row m-none">
-              <div className="margin-sm-top pull-left"><b>Filters</b></div>
-              <div className="pull-right">
-                <FlatButton label="Add" primary onTouchTap={this.onClickAddFilter.bind(this)}/>
-              </div>
-            </div>
+          <div className="margin-md-bottom" style={chipStyles.wrapper}>
+            {this.props.editParserType.filterChips.map((k, i) =>
+              <Chip
+                key={i}
+                style={chipStyles.chip}
+                onTouchTap={this.onClickEditFilter.bind(this, i)}
+                onRequestDelete={this.onClickDeleteFilter.bind(this, i)}
+              >
+                {this.renderChipContent(k)}
+              </Chip>
+            )}
+          </div>
 
-            <div className="margin-md-bottom" style={chipStyles.wrapper}>
-              {this.props.editParserType.filterChips.map((k, i) =>
-                <Chip
-                  key={i}
-                  style={chipStyles.chip}
-                  onTouchTap={this.onClickEditFilter.bind(this, i)}
-                  onRequestDelete={this.onClickDeleteFilter.bind(this, i)}
-                >
-                  {this.renderChipContent(k)}
-                </Chip>
-              )}
+          <div className="row m-none">
+            <div className="margin-sm-top pull-left"><b>Patterns</b></div>
+            <div className="pull-right">
+              <FlatButton label="Add" primary onTouchTap={this.onClickAddPattern.bind(this)}/>
             </div>
+          </div>
+          <div style={chipStyles.wrapper} className="margin-md-bottom" >
+            {this.props.editParserType.patterns.map((k, i) =>
+              <Chip
+                key={i}
+                style={chipStyles.chip}
+                onTouchTap={this.onClickEditPattern.bind(this, i)}
+                onRequestDelete={this.onClickDeletePattern.bind(this, i)}
+              >
+                {k}
+              </Chip>
+            )}
+          </div>
 
-            <div className="row m-none">
-              <div className="margin-sm-top pull-left"><b>Patterns</b></div>
-              <div className="pull-right">
-                <FlatButton label="Add" primary onTouchTap={this.onClickAddPattern.bind(this)}/>
-              </div>
-            </div>
-            <div style={chipStyles.wrapper} className="margin-md-bottom" >
-              {this.props.editParserType.patterns.map((k, i) =>
-                <Chip
-                  key={i}
-                  style={chipStyles.chip}
-                  onTouchTap={this.onClickEditPattern.bind(this, i)}
-                  onRequestDelete={this.onClickDeletePattern.bind(this, i)}
-                >
-                  {k}
-                </Chip>
-              )}
-            </div>
+          <div className="row m-none">
+            <div className="margin-sm-top pull-left"><b>Result</b></div>
+          </div>
+          <div className="margin-sm-top">Match Result: {this.props.matchResult}</div>
+          <div><div className="inline-block">Parse Result:&nbsp;&nbsp;</div>{renderEntity(this.props.parseResult)}</div>
 
-            <div className="row m-none">
-              <div className="margin-sm-top pull-left"><b>Result</b></div>
-            </div>
-            <div className="margin-sm-top">Match Result: {this.props.matchResult}</div>
-            <div><div className="inline-block">Parse Result:&nbsp;&nbsp;</div>{renderEntity(this.props.parseResult)}</div>
-
-            {this.renderButtons()}
-          </form>
-          {this.renderFilterModal()}
-          {this.renderPatternModal()}
-        </div>
-      </Modal>
+          {this.renderButtons()}
+        </form>
+        {this.renderFilterModal()}
+        {this.renderPatternModal()}
+      </Dialog>
     )
   }
 }

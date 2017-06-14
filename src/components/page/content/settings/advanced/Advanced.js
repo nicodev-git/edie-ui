@@ -4,7 +4,6 @@ import SettingIcon from 'material-ui/svg-icons/action/settings'
 
 import MainSettings from './MainSettings'
 import Websocket from './websocket/Websocket'
-import Routing from './routing/Routing'
 
 import SettingTabs from '../SettingTabs'
 import TabPage from 'components/shared/TabPage'
@@ -31,7 +30,6 @@ export default class Advanced extends React.Component {
   renderContent () {
     switch (this.state.pageIndex) {
       case 1: return <Websocket />
-      case 2: return <Routing />
     }
 
     return <MainSettings {...this.props} />

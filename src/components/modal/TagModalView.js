@@ -8,7 +8,7 @@ export default class TagModalView extends React.Component {
   render () {
     const {onClickClose, onSubmit} = this.props
     return (
-      <Modal open title="Tag">
+      <Dialog open title="Tag">
         <form onSubmit={onSubmit}>
           <div className="form-column">
             <Field name="name" component={FormInput} type="text" floatingLabel="Name"/>
@@ -17,7 +17,7 @@ export default class TagModalView extends React.Component {
           </div>
           <SubmitBlock name="Save" onCancel={onClickClose}/>
         </form>
-      </Modal>
+      </Dialog>
     )
   }
 }

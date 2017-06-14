@@ -1,7 +1,6 @@
 import React from 'react'
-import {Dialog} from 'material-ui'
+import {Dialog, RaisedButton} from 'material-ui'
 import InfiniteTable from 'components/shared/InfiniteTable'
-import { Button } from 'react-bootstrap'
 import Select from 'react-select'
 
 const IncidentsModalView = ({show, onHide, onClose, header, onFilter, onChange,
@@ -47,11 +46,9 @@ const IncidentsModalView = ({show, onHide, onClose, header, onFilter, onChange,
     />
 
     <div style={{borderTop: '1px solid gray', paddingTop: '4px'}}>
-      <Button bsStyle="primary" onClick={onClick1}>Fix All</Button>
-      <Button bsStyle="primary" className="margin-sm-left"
-        onClick={onClick2}>Add Exception</Button>
-      <Button bsStyle="primary" className="margin-sm-left"
-        onClick={onClick3}>Open</Button>
+      <RaisedButton onTouchTap={onClick1} label="Fix All"/>
+      <RaisedButton className="margin-sm-left" label="Add Exception" onTouchTap={onClick2}/>
+      <RaisedButton className="margin-sm-left" label="Open" onTouchTap={onClick3}/>
     </div>
   </Dialog>
 )

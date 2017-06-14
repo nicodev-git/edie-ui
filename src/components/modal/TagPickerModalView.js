@@ -1,6 +1,5 @@
 import React from 'react'
-import {Dialog} from 'material-ui'
-import {FlatButton} from 'material-ui'
+import {Dialog, FlatButton} from 'material-ui'
 
 import {TwoButtonsBlockCustom} from './parts'
 
