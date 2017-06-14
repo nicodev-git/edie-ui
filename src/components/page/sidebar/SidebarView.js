@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import {Drawer, IconButton} from 'material-ui'
 import IconButton from 'material-ui/IconButton'
 import Badge from 'material-ui/Badge'
 import Divider from 'material-ui/Divider'
@@ -40,7 +41,7 @@ class SidebarView extends Component {
     )
   }
 
-  render () {
+  render2 () {
     const {onToggle, contentType, mainMenu, deviceMenu, onMainMenu, onDeviceMenu,
       device, pageId, pageType, searchVisible, group, onSearch,
       profile, user, onClickProfile, onClickMessages, onSignOut,
@@ -113,16 +114,28 @@ class SidebarView extends Component {
             })}
           </ul>
         </nav>
-        <h5 className="sidebar-header hidden">Incidents</h5>
-        <div style={{padding: '0 10px 10px 10px'}} className="padding-sm graph-stack hidden">
-          <span className="graph-title">Incidents By Type</span>
-          <div id="maingraph" style={{background: 'white'}} />
-
-          <span className="graph-title">Incidents By IP</span>
-          <div id="maingraph2" style={{background: 'white'}} />
-        </div>
         {profile}
       </aside>
+    )
+  }
+
+  render () {
+    const {items, onClickItem, active} = this.props
+    return (
+      <Drawer open width={sidebarWidth} containerStyle={sidebarStyle}>
+        <div className="margin-md-top">
+          {items.map((item, index) =>
+            <div key={index}
+                 className={index === active ? 'sidebar-chosen' : ''}
+                 onClick={onClickItem.bind(this, index)}>
+              {index > 0 && <Divider style={{margin: 0, backgroundColor: '#393b42'}}/>}
+              <div className="sidebar-item-container">
+                {this.renderButton(item)}
+              </div>
+            </div>
+          )}
+        </div>
+      </Drawer>
     )
   }
 }

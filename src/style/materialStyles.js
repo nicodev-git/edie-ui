@@ -9,7 +9,11 @@ const disabledColor = '#d7d8d9'
 const fontSize = '12pt'
 const smallFontSize = '12pt'
 
+export const sidebarWidth = 50
 export const sidebarIconsColor = '#838489'
+export const sidebarStyle = {
+  backgroundColor: '#23272d'
+}
 
 export const thumbup = <img title="Acknowledge" src="/images/thumbup.png" />
 export const thumpdown = <img title="Acknowledge" src="/images/thumbdown.png" />
