@@ -12,7 +12,8 @@ const smallFontSize = '12pt'
 export const sidebarWidth = 50
 export const sidebarIconsColor = '#838489'
 export const sidebarStyle = {
-  backgroundColor: '#23272d'
+  backgroundColor: '#23272d',
+  overflow: 'hidden'
 }
 
 export const thumbup = <img title="Acknowledge" src="/images/thumbup.png" />
