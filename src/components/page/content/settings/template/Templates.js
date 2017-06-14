@@ -47,6 +47,9 @@ export default class Templates extends Component {
     this.props.selectDeviceTemplate(selected)
   }
 
+  onDblClickRow (selected) {
+  }
+
   renderDeviceTemplates () {
     const {selectedDeviceTpl} = this.props
     return (
@@ -57,9 +60,10 @@ export default class Templates extends Component {
             this.props.deviceTemplates.map((item, index) =>
               <tr key={item.id}
                 className={selectedDeviceTpl && item.id === selectedDeviceTpl.id ? 'selected' : ''}
-                onClick={this.onClickRow.bind(this, item)}>
-                <td className="valign-middle nowrap">
-                  <img src={`${extImageBaseUrl}${item.image}`} width="32" height="32" className="icon-black"/>
+                onClick={this.onClickRow.bind(this, item)}
+                onDoubleClick={this.onDblClickRow.bind(this, item)}>
+                <td className="nowrap">
+                  <img src={`${extImageBaseUrl}${item.image}`} width="32" height="32" className="icon-black valign-middle"/>
                   &nbsp;
                   {item.name}
                 </td>
@@ -106,7 +110,7 @@ export default class Templates extends Component {
               <tr key={item.id}
                 className={index === this.state.selected ? 'selected' : ''}>
                 <td>
-                  <img src={`${extImageBaseUrl}${item.image}`} width="32" height="32" className="icon-black"/>
+                  <img src={`${extImageBaseUrl}${item.image}`} width="32" height="32" className="icon-black valign-middle"/>
                   &nbsp;
                   {item.name}
                 </td>
