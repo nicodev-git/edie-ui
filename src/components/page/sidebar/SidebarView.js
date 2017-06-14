@@ -9,7 +9,7 @@ import SearchBarContainer from './parts/SearchBarContainer'
 import MessageBox from './parts/MessageBox'
 import ProfileMenu from './parts/ProfileMenu'
 
-class SidebarView extends Component {
+export default class SidebarView extends Component {
   constructor (props) {
     super(props)
     this.renderBadge = this.renderBadge.bind(this)
@@ -118,27 +118,6 @@ class SidebarView extends Component {
     )
   }
 
-  render1 () {
-    const {items, onClickItem, active} = this.props
-    return (
-      <Drawer open width={sidebarWidth} containerStyle={sidebarStyle}>
-        <div className="margin-md-top">
-          {items.map((item, index) =>
-            <div
-              key={index}
-              className={index === active ? 'sidebar-chosen' : ''}
-              onClick={onClickItem.bind(this, index)}>
-              {index > 0 && <Divider style={{margin: 0, backgroundColor: '#393b42'}}/>}
-              <div className="sidebar-item-container">
-                {this.renderButton(item)}
-              </div>
-            </div>
-          )}
-        </div>
-      </Drawer>
-    )
-  }
-
   render () {
     const {onToggle, contentType, mainMenu, deviceMenu, onMainMenu, onDeviceMenu,
       device, pageId, pageType, searchVisible, group, onSearch,
@@ -196,10 +175,11 @@ class SidebarView extends Component {
           {deviceMenu(device ? device.id : 'main').map((item, index) => {
             if (item.group && !group) return null
             return (
-              <div key={index} className={pageId === item.id ? 'active open' : ''} onClick={onDeviceMenu.bind(this, index)} data-tip={item.title}>
-                <a href="javascript:;">
-                  <i className={`fa fa-lg fa-fw ${item.icon}`} />{item.title}
-                </a>
+              <div key={index} className={pageId === item.id ? 'active open' : ''} onClick={onDeviceMenu.bind(this, index)}>
+                <div className="sidebar-item-container">
+                  {this.renderButton(item)}
+                  <div className="sidebar-title">{item.title}</div>
+                </div>
               </div>
             )
           })}
@@ -209,5 +189,3 @@ class SidebarView extends Component {
     )
   }
 }
-
-export default SidebarView
