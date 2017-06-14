@@ -39,57 +39,55 @@ const messageStyle = {
 }
 
 const MessageBox = ({open, openSidebarMessageMenu, closeSidebarMessageMenu}) => (
-  <li className="dropdown">
-    <div className="sidebar-item-container" onClick={openSidebarMessageMenu}>
-      <Badge
-        badgeContent={4}
-        badgeStyle={badgeStyle}
-        style={badgeRootStyle}
+  <div className="sidebar-item-container" onClick={openSidebarMessageMenu}>
+    <Badge
+      badgeContent={4}
+      badgeStyle={badgeStyle}
+      style={badgeRootStyle}
+    >
+      <IconMenu
+        iconButtonElement={
+          <IconButton
+            style={iconButtonStyle}
+            iconStyle={iconStyle}>
+              <EmailIcon color="#777777"/>
+          </IconButton>
+        }
+        open={open}
+        onRequestChange={(value) => value ? openSidebarMessageMenu() : closeSidebarMessageMenu()}
+        anchorOrigin={{horizontal: 'right', vertical: 'bottom'}}
+        targetOrigin={{horizontal: 'right', vertical: 'top'}}
+        listStyle={iconMenuStyle}
       >
-        <IconMenu
-          iconButtonElement={
-            <IconButton
-              style={iconButtonStyle}
-              iconStyle={iconStyle}>
-                <EmailIcon color="#777777"/>
-            </IconButton>
-          }
-          open={open}
-          onRequestChange={(value) => value ? openSidebarMessageMenu() : closeSidebarMessageMenu()}
-          anchorOrigin={{horizontal: 'right', vertical: 'bottom'}}
-          targetOrigin={{horizontal: 'right', vertical: 'top'}}
-          listStyle={iconMenuStyle}
-        >
-          <MenuItem style={newStyle} primaryText="New messages" />
-          <Divider style={dividerStyle}/>
-          <MenuItem style={messageStyle}>
-            <Message
-              avatar="/images/avatars/1.jpg"
-              name="Ernest Kerry"
-              message="Hello, You there?"
-              time="8 minutes ago"
-            />
-          </MenuItem>
-          <Divider style={dividerStyle}/>
-          <MenuItem style={messageStyle}>
-            <Message
-              avatar="/images/avatars/3.jpg"
-              name="Don Mark"
-              message="Hello? How are you? Do you want to go to my birthday party?"
-              time="21 hours"
-            />
-          </MenuItem>
-          <Divider style={dividerStyle}/>
-          <MenuItem
-            className="see-all-messages"
-            primaryText="See all messages"
-            leftIcon={<InboxIcon/>}
-            style={seeAllStyle}/>
-        </IconMenu>
-      </Badge>
-      <div className="sidebar-title">Messages</div>
-    </div>
-  </li>
+        <MenuItem style={newStyle} primaryText="New messages" />
+        <Divider style={dividerStyle}/>
+        <MenuItem style={messageStyle}>
+          <Message
+            avatar="/images/avatars/1.jpg"
+            name="Ernest Kerry"
+            message="Hello, You there?"
+            time="8 minutes ago"
+          />
+        </MenuItem>
+        <Divider style={dividerStyle}/>
+        <MenuItem style={messageStyle}>
+          <Message
+            avatar="/images/avatars/3.jpg"
+            name="Don Mark"
+            message="Hello? How are you? Do you want to go to my birthday party?"
+            time="21 hours"
+          />
+        </MenuItem>
+        <Divider style={dividerStyle}/>
+        <MenuItem
+          className="see-all-messages"
+          primaryText="See all messages"
+          leftIcon={<InboxIcon/>}
+          style={seeAllStyle}/>
+      </IconMenu>
+    </Badge>
+    <div className="sidebar-title">Messages</div>
+  </div>
 )
 
 export default MessageBox
