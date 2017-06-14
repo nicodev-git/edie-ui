@@ -1,10 +1,9 @@
 import React from 'react'
-import Modal from 'react-bootstrap-modal'
 import { assign, concat } from 'lodash'
-import {IconButton} from 'material-ui'
+import {Dialog, IconButton} from 'material-ui'
 import Share from 'material-ui/svg-icons/social/share'
 
-import { Header, TwoButtonsBlockCustom } from './parts'
+import { TwoButtonsBlockCustom } from './parts'
 
 class SavedSearchModalView extends React.Component {
   render () {
@@ -29,42 +28,34 @@ class SavedSearchModalView extends React.Component {
     }))
 
     return (
-      <Modal
-        show
-        onHide={() => {}}
-        aria-labelledby="ModalHeader"
-        className="bootstrap-dialog type-primary"
-      >
-        <Header name="Saved Search" />
-        <div className="modal-body bootstrap-dialog-message">
-          <div style={{maxHeight: '350px', overflow: 'auto'}}>
-            <table className="table table-hover">
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Description</th>
-                  <th>Origin</th>
-                  <th/>
-                </tr>
-              </thead>
-              <tbody>
-              {options.map(p =>
-                <tr key={p.id} onClick={() => onClickRow(p)} className={`${selectedSearch && selectedSearch.id === p.id ? 'selected' : ''}`}>
-                  <td>{p.name}</td>
-                  <td>{p.description}</td>
-                  <td>{p.type}</td>
-                  <td className="p-none">{p.type === 'User' ? <IconButton onTouchTap={() => onClickShare(p)}><Share/></IconButton> : null}</td>
-                </tr>
-              )}
-              {
-                loadingSearchOptions && !options.length ? <tr><td colSpan="3" className="text-center">Loading...</td></tr> : null
-              }
-              </tbody>
-            </table>
-          </div>
-          <TwoButtonsBlockCustom name1="Search" name2="Cancel" action1={onClickOK} action2={onClickClose}/>
+      <Dialog open title="Saved Search">
+        <div style={{maxHeight: '350px', overflow: 'auto'}}>
+          <table className="table table-hover">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Origin</th>
+                <th/>
+              </tr>
+            </thead>
+            <tbody>
+            {options.map(p =>
+              <tr key={p.id} onClick={() => onClickRow(p)} className={`${selectedSearch && selectedSearch.id === p.id ? 'selected' : ''}`}>
+                <td>{p.name}</td>
+                <td>{p.description}</td>
+                <td>{p.type}</td>
+                <td className="p-none">{p.type === 'User' ? <IconButton onTouchTap={() => onClickShare(p)}><Share/></IconButton> : null}</td>
+              </tr>
+            )}
+            {
+              loadingSearchOptions && !options.length ? <tr><td colSpan="3" className="text-center">Loading...</td></tr> : null
+            }
+            </tbody>
+          </table>
         </div>
-      </Modal>
+        <TwoButtonsBlockCustom name1="Search" name2="Cancel" action1={onClickOK} action2={onClickClose}/>
+      </Dialog>
     )
   }
 }
