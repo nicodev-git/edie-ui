@@ -17,12 +17,14 @@ export default class MainSettings extends Component {
     this.props.showImportSyncModal(true)
   }
   onCloseImportModal () {
+    this.props.showImportSyncModal(false)
   }
 
   renderImportModal () {
     if (!this.props.importSyncModalOpen) return null
     return (
       <ImportSyncDataModal
+        onSubmit={this.props.importSyncData}
         onClose={this.onCloseImportModal.bind(this)}/>
     )
   }

@@ -8,7 +8,8 @@ import {
   addEnvVar,
   updateEnvVar,
   syncData,
-  showImportSyncModal
+  showImportSyncModal,
+  importSyncData
 } from 'actions'
 
 @connect(
@@ -23,7 +24,8 @@ import {
       addEnvVar,
       updateEnvVar,
       syncData,
-      showImportSyncModal
+      showImportSyncModal,
+      importSyncData
     }, dispatch)
   })
 )

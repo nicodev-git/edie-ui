@@ -430,9 +430,6 @@ export const closeParserPatternModal = () => {
 }
 
 export const fetchDeviceCategories = () => {
-  if (!window.localStorage.getItem('token')) {
-    return dispatch => dispatch({ type: NO_AUTH_ERROR })
-  }
   return (dispatch) => {
     axios.get(`${ROOT_URL}/devicecategory?sort=order`).then(response => {
       dispatch({type: FETCH_DEVICE_CATEGORIES, data: response.data._embedded.deviceCategories})
@@ -441,9 +438,6 @@ export const fetchDeviceCategories = () => {
 }
 
 export const syncData = () => {
-  if (!window.localStorage.getItem('token')) {
-    return dispatch => dispatch({ type: NO_AUTH_ERROR })
-  }
   return dispatch => {
     dispatch({type: SYNC_DATA, data: null})
     axios.get(`${ROOT_URL}/pullSyncDataFromImadmin`).then(response => {
@@ -572,5 +566,25 @@ export const showDeviceTplTagModal = (visible) => {
 export const showImportSyncModal = (visible) => {
   return dispatch => {
     dispatch({type: SHOW_IMPORT_SYNC_MODAL, visible})
+  }
+}
+
+export const importSyncData = (formData) => {
+  return dispatch => {
+    dispatch({type: SYNC_DATA, data: null})
+    window.$.ajax({
+      url: `${ROOT_URL}/importSyncData`,
+      type: 'POST',
+      data: formData,
+      cache: false,
+      processData: false,
+      contentType: false,
+      success: (data, textStatus, jqXHR) => {
+        dispatch({type: SYNC_DATA, data: data ? 'OK' : 'Failed'})
+      },
+      error: (jqXHR, textStatus, errorThrown) => {
+        apiError(dispatch, errorThrown)
+      }
+    })
   }
 }
