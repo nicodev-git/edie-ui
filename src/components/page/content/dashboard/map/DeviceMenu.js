@@ -103,11 +103,11 @@ export default class DeviceMenu extends React.Component {
       }
 
       devicePanels.push(
-        <div className="panel panel-default" key={sectionIndex} style={{background: 'black'}}>
+        <div className="panel panel-default" key={sectionIndex}>
           <div className="panel-heading">
             {section.title}
           </div>
-          <ul className={activeKey === sectionIndex ? '' : 'hidden'}>
+          <ul className={activeKey === sectionIndex ? '' : 'hidden'} style={{background: 'black'}}>
             {deviceItems}
           </ul>
         </div>
@@ -131,7 +131,7 @@ export default class DeviceMenu extends React.Component {
           </div>
         </div>
 
-        <div onSelect={this.handleSelect.bind(this)} accordion>
+        <div onClick={this.handleSelect.bind(this)}>
           {devicePanels}
         </div>
       </div>

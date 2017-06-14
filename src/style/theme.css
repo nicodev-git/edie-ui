@@ -31,11 +31,13 @@
 
 table {
     border-collapse: collapse;
-    border-spacing: 0; }
+    border-spacing: 0;
+}
 
 td,
 th {
-    padding: 0; }
+    padding: 0;
+}
 
 .table {
     width: 100%;
@@ -280,6 +282,41 @@ table th[class*="col-"] {
     background-color: #fff;
     -webkit-box-shadow: 0 3px 0 rgba(9, 9, 9, 0.03);
     box-shadow: 0 3px 0 rgba(9, 9, 9, 0.03);
+}
+
+.panel-body {
+    padding: 15px;
+}
+
+.panel-body:before, .panel-body:after {
+    content: " ";
+    display: table;
+}
+
+.panel-body:after {
+    clear: both;
+}
+
+.panel-heading {
+    padding: 10px 15px;
+    border-bottom: 1px solid transparent;
+    border-top-right-radius: 3px;
+    border-top-left-radius: 3px;
+}
+
+.panel-heading > .dropdown .dropdown-toggle {
+    color: inherit;
+}
+
+.panel-title {
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 15px;
+    color: inherit;
+}
+
+.panel-title > a {
+    color: inherit;
 }
 
 .panel.collapsed .panel-heading {
