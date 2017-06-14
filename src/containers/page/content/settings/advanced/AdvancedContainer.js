@@ -7,20 +7,23 @@ import {
   fetchEnvVars,
   addEnvVar,
   updateEnvVar,
-  syncData
+  syncData,
+  showImportSyncModal
 } from 'actions'
 
 @connect(
   state => ({
     envVars: state.settings.envVars,
-    syncStatus: state.settings.syncStatus
+    syncStatus: state.settings.syncStatus,
+    importSyncModalOpen: state.settings.importSyncModalOpen
   }),
   dispatch => ({
     ...bindActionCreators({
       fetchEnvVars,
       addEnvVar,
       updateEnvVar,
-      syncData
+      syncData,
+      showImportSyncModal
     }, dispatch)
   })
 )

@@ -101,6 +101,7 @@ import {
   REMOVE_PT_TAG,
 
   SYNC_DATA,
+  SHOW_IMPORT_SYNC_MODAL,
 
   FETCH_DEVICE_CATEGORIES
 
@@ -432,6 +433,9 @@ export default function (state = {}, action) {
       return { ...state, editDeviceTplTags: state.editDeviceTplTags.filter((a, i) => i !== action.index) }
     case SHOW_DEVICE_TPL_TAG_MODAL:
       return { ...state, deviceTplTagModalOpen: !!action.visible }
+
+    case SHOW_IMPORT_SYNC_MODAL:
+      return { ...state, importSyncModalOpen: !!action.visible }
   }
   return state
 }

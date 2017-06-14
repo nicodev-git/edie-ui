@@ -59,6 +59,7 @@ import {
   SHARE_WORKFLOW,
 
   UPDATE_USER_INFO,
+  SHOW_IMPORT_SYNC_MODAL,
 
   NO_AUTH_ERROR
 } from './types'
@@ -565,5 +566,11 @@ export const removeDeviceTplTag = (index) => {
 export const showDeviceTplTagModal = (visible) => {
   return dispatch => {
     dispatch({type: SHOW_DEVICE_TPL_TAG_MODAL, visible})
+  }
+}
+
+export const showImportSyncModal = (visible) => {
+  return dispatch => {
+    dispatch({type: SHOW_IMPORT_SYNC_MODAL, visible})
   }
 }

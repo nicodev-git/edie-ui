@@ -87,7 +87,7 @@ export default class Advanced extends React.Component {
                   <MenuItem primaryText="Edit" onTouchTap={this.onClickEditRouting.bind(this)}/>
                 </Menu>
               </Popover>
-              <RaisedButton icon={<SettingIcon />} onTouchTap={this.handleTouchTap.bind(this)}/>
+              <RaisedButton icon={<SettingIcon />} onTouchTap={this.handleTouchTap.bind(this)} className="hidden"/>
               <Popover
                 open={this.state.open}
                 anchorEl={this.state.anchorEl}

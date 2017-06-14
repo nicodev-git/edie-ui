@@ -1,46 +1,30 @@
 import React, { Component } from 'react'
 import RaisedButton from 'material-ui/RaisedButton'
+import ImportSyncDataModal from './ImportSyncDataModal'
 
 export default class MainSettings extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      translate: false
     }
-  }
-
-  componentWillMount () {
-    // $.get(`${ROOT_URL}${Api.admin.getOptions}`, {}).done((res) => { // eslint-disable-line no-undef
-    //   let state = {}
-    //
-    //   res.data.forEach(item => {
-    //     switch (item.name) {
-    //       case 'enable_translate_from_heb7':
-    //         state.translate = item.value === 'true'
-    //         break
-    //     }
-    //   })
-    //
-    //   this.setState(state)
-    // })
-  }
-
-  onChangeTranslate (e) {
-    let {checked} = e.target
-    this.setState({ translate: checked }, () => {
-      this.updateOption('enable_translate_from_heb7', checked)
-    })
-  }
-
-  updateOption (name, value, param) {
-    // if (!name) return false
-    // value = value || ''
-    // param = param || ''
-    // return $.get(`${ROOT_URL}${Api.admin.updateOptions}`, {name, value, param}) // eslint-disable-line no-undef
   }
 
   onClickSync () {
     this.props.syncData()
+  }
+
+  onClickImportSync () {
+    this.props.showImportSyncModal(true)
+  }
+  onCloseImportModal () {
+  }
+
+  renderImportModal () {
+    if (!this.props.importSyncModalOpen) return null
+    return (
+      <ImportSyncDataModal
+        onClose={this.onCloseImportModal.bind(this)}/>
+    )
   }
 
   render () {
@@ -50,21 +34,12 @@ export default class MainSettings extends Component {
           <label className="margin-sm-right">Update The System</label>
           <RaisedButton label="Update" onTouchTap={this.onClickSync.bind(this)}/>
         </div>
-        <div className="form-inline hidden">
-          <div className="col-md-12 margin-md-bottom">
-            <div className="checkbox">
-              <label className="margin-sm-top margin-sm-bottom">
-                <input
-                  type="checkbox"
-                  className="margin-xs-right"
-                  checked={this.state.translate}
-                  onChange={this.onChangeTranslate.bind(this)}
-                />
-                Enable Translate From heb7
-              </label>
-            </div>
-          </div>
+
+        <div className="padding-md-top">
+          <RaisedButton label="Import From File SyncData" onTouchTap={this.onClickImportSync.bind(this)}/>
         </div>
+
+        {this.renderImportModal()}
       </div>
     )
   }
