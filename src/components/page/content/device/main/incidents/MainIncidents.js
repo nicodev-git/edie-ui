@@ -407,6 +407,7 @@ export default class MainIncidents extends Component {
                   hintText="Select severities"
                   onChange={this.onChangeSeverity.bind(this)}
                   value={selectedSeverity}
+                  style={{width: '160px'}}
                 >
                   {severities.map(option =>
                     <MenuItem
@@ -427,7 +428,8 @@ export default class MainIncidents extends Component {
                   underlineStyle={underlineFocusStyle}
                   selectedMenuItemStyle={selectedItemStyle}
                   menuItemStyle={inputStyle}
-                  labelStyle={inputStyle}>
+                  labelStyle={inputStyle}
+                  style={{width: '120px'}}>
                   <MenuItem primaryText="Any" value=""/>
                   <MenuItem primaryText="Unfixed" value="false"/>
                   <MenuItem primaryText="Fixed" value="true"/>

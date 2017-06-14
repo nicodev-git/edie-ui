@@ -10,6 +10,11 @@ import TabPageHeader from 'components/shared/TabPageHeader' // Never used
 
 import {defaultDateFormat} from 'shared/Global'
 
+const rowStyle = {
+  float: 'left',
+  width: '100%',
+  height: 30
+}
 export default class General extends React.Component {
   constructor (props) {
     super(props)
@@ -37,7 +42,7 @@ export default class General extends React.Component {
   renderContent () {
     return (
       <div className="padding-md form-inline">
-        <div className="col-md-12 margin-md-bottom bt-gray">
+        <div style={rowStyle} className="margin-md-bottom bt-gray">
           <label className="margin-sm-top margin-sm-bottom width-200">System Name:</label>
           <InlineEdit
             text={this.getOptionValue('SYSTEM_NAME') || '[Empty]'}
@@ -48,7 +53,7 @@ export default class General extends React.Component {
           />
         </div>
 
-        <div className="col-md-12 margin-md-bottom bt-gray">
+        <div style={rowStyle} className="margin-md-bottom bt-gray">
           <div className="pull-left width-200">
             <Checkbox
               label="Enable DMZ"
@@ -63,7 +68,7 @@ export default class General extends React.Component {
             ref="dmzIp"
           />
         </div>
-        <div className="col-md-12 margin-md-bottom bt-gray">
+        <div style={rowStyle} className="margin-md-bottom bt-gray">
           <div className="pull-left width-200">
             <Checkbox
               label="Pause System"
@@ -71,7 +76,7 @@ export default class General extends React.Component {
               onCheck={this.onChangePause.bind(this)}/>
           </div>
         </div>
-        <div className="col-md-12 margin-md-bottom bt-gray">
+        <div style={rowStyle} className="margin-md-bottom bt-gray">
           <div className="pull-left width-200">
             <Checkbox
               label="Display Network Traffic"
@@ -79,7 +84,7 @@ export default class General extends React.Component {
               onCheck={this.onChangeTraffic.bind(this)}/>
           </div>
         </div>
-        <div className="col-md-12 margin-md-bottom bt-gray">
+        <div style={rowStyle} className="margin-md-bottom bt-gray">
           <div className="pull-left width-200">
             <Checkbox
               label="Send Error Logs With"
@@ -94,7 +99,7 @@ export default class General extends React.Component {
           />
         </div>
 
-        <div className="col-md-12 margin-md-bottom bt-gray">
+        <div style={rowStyle} className="margin-md-bottom bt-gray">
           <div className="pull-left width-200">
             <Checkbox
               label="Send to mobile"
@@ -112,7 +117,7 @@ export default class General extends React.Component {
           />
         </div>
 
-        <div className="col-md-12 margin-md-bottom bt-gray">
+        <div style={rowStyle} className="margin-md-bottom bt-gray">
           <div className="pull-left width-200">
             <Checkbox
               label="Show absolute date"
@@ -130,7 +135,7 @@ export default class General extends React.Component {
 
         </div>
 
-        <div className="col-md-12 margin-md-bottom bt-gray">
+        <div style={rowStyle} className="margin-md-bottom bt-gray">
           <div className="pull-left width-200">
             <Checkbox
               label="Keep Incident Alert"
@@ -139,7 +144,7 @@ export default class General extends React.Component {
           </div>
         </div>
 
-        <div className="col-md-12 margin-lg-top" style={{color: '#888'}}>
+        <div style={{...rowStyle, color: '#888'}} className="margin-lg-top">
           <label className="margin-sm-top margin-sm-bottom">
             Customer ID: {this.getOptionValue('CUSTOMER_ID') || '[None]'}
           </label>
