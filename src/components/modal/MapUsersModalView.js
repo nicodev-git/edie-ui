@@ -1,23 +1,17 @@
 import React, { Component } from 'react'
-import Modal from 'react-bootstrap-modal'
+import {Dialog} from 'material-ui'
 import IconButton from 'material-ui/IconButton'
 import DeleteIcon from 'material-ui/svg-icons/action/delete'
 import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
-import { Header, CloseButton } from './parts'
+import { CloseButton } from './parts'
 import { buttonStyle, iconStyle } from 'style/materialStyles'
 
 export default class MapUsersModalView extends Component {
   render () {
-    const {show, header, table, usersModal, onHide, onAdd, onDelete} = this.props
+    const {header, table, usersModal, onHide, onAdd, onDelete} = this.props
     return (
-      <Modal
-        show={show}
-        onHide={onHide}
-        aria-labelledby="ModalHeader"
-        className="bootstrap-dialog type-primary"
-      >
-        <Header name={header} />
-        <div className="modal-body bootstrap-dialog-message" style={{minHeight: '400px'}}>
+      <Dialog open title={header}>
+        <div style={{minHeight: '400px'}}>
           <div className="panel panel-default panel-noborder">
             <div className="crud-buttons">
               <div className="add-button">
@@ -44,7 +38,7 @@ export default class MapUsersModalView extends Component {
           {usersModal}
         </div>
         <CloseButton onClose={onHide} />
-      </Modal>
+      </Dialog>
     )
   }
 }
