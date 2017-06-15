@@ -1,6 +1,11 @@
 import React from 'react'
-import {Dialog, FlatButton, RefreshIndicator} from 'material-ui'
+import {Dialog, RefreshIndicator, Chip} from 'material-ui'
 import {Line} from 'react-chartjs-2'
+import moment from 'moment'
+
+import {CloseIconButton} from 'components/modal/parts'
+import {chipStyles} from 'style/materialStyles'
+import {dateFormat} from 'shared/Global'
 
 const loadingStyle = {
   position: 'absolute',
@@ -15,7 +20,8 @@ const overlayStyle = {
   left: 0,
   width: '100%',
   height: '100%',
-  background: 'rgba(80,80,80,0.5)'
+  background: 'rgba(80,80,80,0.5)',
+  zIndex: 10
 }
 
 export default class SearchGraphModalView extends React.Component {
@@ -37,14 +43,26 @@ export default class SearchGraphModalView extends React.Component {
     )
   }
   render () {
-    const {onHide, chartData, chartOptions} = this.props
+    const {onHide, chartData, chartOptions, queryChips, params} = this.props
     return (
-      <Dialog open title="Graph">
+      <Dialog open title="">
+        <CloseIconButton onClick={onHide}/>
+        <div>
+          <small>Date Range:</small><br/>
+          <small>
+            {moment(params.dateFrom, dateFormat).format('MMM D, YYYY')}&nbsp;-&nbsp;
+            {moment(params.dateTo, dateFormat).format('MMM D, YYYY')}
+          </small>
+        </div>
+        <div style={chipStyles.wrapper} className="pull-right">
+          {queryChips.map((p, i) =>
+            <Chip key={i} style={chipStyles.chip}>
+              {p.name !== '_all' ? <b>{p.name}: </b> : null}{p.value}
+            </Chip>
+          )}
+        </div>
         <Line data={chartData} options={chartOptions} width="850" height="300" />
         {this.renderLoading()}
-        <div className="form-buttons">
-          <FlatButton label="Close" onClick={onHide}/>
-        </div>
       </Dialog>
     )
   }

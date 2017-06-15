@@ -33,11 +33,10 @@ export default class SearchGraphModal extends React.Component {
     this.props.showSearchGraphModal(false)
   }
   render () {
-    const {searchRecordCounts} = this.props
+    const {searchRecordCounts, queryChips, params} = this.props
     const chartData = {
       labels: (searchRecordCounts || sampleData).map(p => p.date),
       datasets: [{
-        label: 'Keyword',
         data: (searchRecordCounts || sampleData).map(p => p.count),
         borderWidth: 1,
         borderColor: '#269C8B',
@@ -45,6 +44,9 @@ export default class SearchGraphModal extends React.Component {
       }]
     }
     const chartOptions = {
+      legend: {
+        display: false
+      },
       elements: {
         line: {
           tension: 0
@@ -53,6 +55,8 @@ export default class SearchGraphModal extends React.Component {
     }
     return (
       <SearchGraphModalView
+        params={params}
+        queryChips={queryChips}
         loading={!searchRecordCounts}
         chartData={chartData}
         chartOptions={chartOptions}

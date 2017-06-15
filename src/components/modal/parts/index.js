@@ -24,6 +24,7 @@ import Workflows from './Workflows'
 import MonitorTemplates from './MonitorTemplates'
 import CrudButtons from './CrudButtons'
 import HeaderWithCancel from './HeaderWithCancel'
+import CloseIconButton from './CloseIconButton'
 
 export {
     Header,
@@ -51,5 +52,6 @@ export {
     Workflows,
     MonitorTemplates,
     CrudButtons,
-    HeaderWithCancel
+    HeaderWithCancel,
+    CloseIconButton
 }
