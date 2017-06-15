@@ -1,10 +1,9 @@
 import React from 'react'
-import {Dialog, RefreshIndicator, Chip} from 'material-ui'
+import {Dialog, RefreshIndicator} from 'material-ui'
 import {Line} from 'react-chartjs-2'
 import moment from 'moment'
 
 import {CloseIconButton} from 'components/modal/parts'
-import {chipStyles} from 'style/materialStyles'
 import {dateFormat} from 'shared/Global'
 
 const loadingStyle = {
@@ -22,6 +21,20 @@ const overlayStyle = {
   height: '100%',
   background: 'rgba(80,80,80,0.5)',
   zIndex: 10
+}
+
+const chipStyle = {
+  color: 'white',
+  background: '#1775C3',
+  borderRadius: 4,
+  fontSize: '11px',
+  padding: '4px 8px',
+  margin: '2px 4px',
+  display: 'inline-block'
+}
+
+const dialogContentStyle = {
+  paddingTop: 0
 }
 
 export default class SearchGraphModalView extends React.Component {
@@ -45,23 +58,26 @@ export default class SearchGraphModalView extends React.Component {
   render () {
     const {onHide, chartData, chartOptions, queryChips, params} = this.props
     return (
-      <Dialog open title="">
+      <Dialog open title="" bodyStyle={dialogContentStyle}>
         <CloseIconButton onClick={onHide}/>
-        <div>
-          <small>Date Range:</small><br/>
+        <div className="pull-left margin-md-bottom">
+          <small><b>Date Range:</b></small><br/>
           <small>
             {moment(params.dateFrom, dateFormat).format('MMM D, YYYY')}&nbsp;-&nbsp;
             {moment(params.dateTo, dateFormat).format('MMM D, YYYY')}
           </small>
         </div>
-        <div style={chipStyles.wrapper} className="pull-right">
+        <div className="pull-right margin-md-bottom text-right">
+          <div><small>Search Keywords:</small></div>
           {queryChips.map((p, i) =>
-            <Chip key={i} style={chipStyles.chip}>
+            <div key={i} style={chipStyle}>
               {p.name !== '_all' ? <b>{p.name}: </b> : null}{p.value}
-            </Chip>
+            </div>
           )}
         </div>
-        <Line data={chartData} options={chartOptions} width="850" height="300" />
+        <div className="margin-md-top">
+          <Line data={chartData} options={chartOptions} width="850" height="300" />
+        </div>
         {this.renderLoading()}
       </Dialog>
     )
