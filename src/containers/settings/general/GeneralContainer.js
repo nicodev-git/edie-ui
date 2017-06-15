@@ -1,5 +1,5 @@
 import React from 'react'
-import General from 'components/settings/general/General'
+import General from 'components/sidebar/settings/general/General'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 

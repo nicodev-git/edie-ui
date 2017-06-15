@@ -1,5 +1,5 @@
 import React from 'react'
-import Templates from 'components/settings/template/Templates'
+import Templates from 'components/sidebar/settings/template/Templates'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import {withRouter} from 'react-router'

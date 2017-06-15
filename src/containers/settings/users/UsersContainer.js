@@ -1,5 +1,5 @@
 import React from 'react'
-import Users from 'components/settings/users/Users'
+import Users from 'components/sidebar/settings/users/Users'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 

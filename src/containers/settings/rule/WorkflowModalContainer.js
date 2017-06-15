@@ -1,5 +1,5 @@
 import React from 'react'
-import WorkflowModal from 'components/settings/rule/WorkflowModal'
+import WorkflowModal from 'components/sidebar/settings/rule/WorkflowModal'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { assign } from 'lodash'

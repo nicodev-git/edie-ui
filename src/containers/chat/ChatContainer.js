@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Chat from 'components/chat/Chat'
+import Chat from 'components/sidebar/chat/Chat'
 import {connect} from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { withRouter } from 'react-router'

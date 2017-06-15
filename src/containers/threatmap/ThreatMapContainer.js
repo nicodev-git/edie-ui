@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import ThreatMap from 'components/threatmap/ThreatMap'
+import ThreatMap from 'components/sidebar/threatmap/ThreatMap'
 import {
   showThreatItemModal
 } from 'actions'

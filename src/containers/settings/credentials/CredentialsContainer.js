@@ -1,5 +1,5 @@
 import React from 'react'
-import Credentials from 'components/settings/credentials/Credentials'
+import Credentials from 'components/sidebar/settings/credentials/Credentials'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 

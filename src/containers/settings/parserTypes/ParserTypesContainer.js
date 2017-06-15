@@ -1,6 +1,6 @@
 import React from 'react'
 
-import ParserTypes from 'components/settings/parserTypes/ParserTypes'
+import ParserTypes from 'components/sidebar/settings/parserTypes/ParserTypes'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { withRouter } from 'react-router'

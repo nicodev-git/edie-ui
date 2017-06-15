@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import {withRouter} from 'react-router'
 
-import Tags from 'components/settings/tag/Tags'
+import Tags from 'components/sidebar/settings/tag/Tags'
 
 import {
   showTagModal,

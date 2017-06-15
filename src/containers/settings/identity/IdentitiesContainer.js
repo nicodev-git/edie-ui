@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Identities from 'components/settings/identity/Identities'
+import Identities from 'components/sidebar/settings/identity/Identities'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import {

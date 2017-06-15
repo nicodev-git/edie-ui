@@ -1,5 +1,5 @@
 import React from 'react'
-import Rules from 'components/settings/rule/Rules'
+import Rules from 'components/sidebar/settings/rule/Rules'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import {withRouter} from 'react-router'

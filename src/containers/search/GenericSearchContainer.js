@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { withRouter } from 'react-router'
 
-import GenericSearch from 'components/search/GenericSearch'
+import GenericSearch from 'components/sidebar/search/GenericSearch'
 
 import {
   updateSearchParams,

@@ -1,5 +1,5 @@
 import React from 'react'
-import Maps from 'components/settings/maps/Maps'
+import Maps from 'components/sidebar/settings/maps/Maps'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
