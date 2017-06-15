@@ -2,7 +2,7 @@ import React from 'react'
 import { reduxForm } from 'redux-form'
 import { assign } from 'lodash'
 import { connect } from 'react-redux'
-import { MonitorTplModalView } from '../../../../modal'
+import MonitorTplModalView from './MonitorTplModalView'
 import { getCustomImageUrl, extImageBaseUrl } from 'shared/Global'
 
 class MonitorTplModal extends React.Component { // eslint-disable-line react/no-multi-comp

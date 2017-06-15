@@ -1,6 +1,6 @@
 import React from 'react'
 
-import {SearchGraphModalView} from 'components/modal'
+import SearchGraphModalView from './SearchGraphModalView'
 
 const sampleData = [{
   'date': '2017-05-16',

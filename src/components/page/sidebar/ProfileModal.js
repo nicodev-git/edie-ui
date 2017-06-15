@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import $ from 'jquery'
 import { showAlert } from 'components/shared/Alert'
 import { extImageBaseUrl } from 'shared/Global'
-import { ProfileModalView } from '../../modal'
+import ProfileModalView from './ProfileModalView'
 
 class ProfileModal extends Component { // eslint-disable-line react/no-multi-comp
   constructor (props) {

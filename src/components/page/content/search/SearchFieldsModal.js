@@ -1,7 +1,7 @@
 import React from 'react'
 import {concat} from 'lodash'
 
-import {SearchFieldsModalView} from 'components/modal'
+import SearchFieldsModalView from './SearchFieldsModalView'
 
 class SearchFieldsModal extends React.Component {
   onClickOK () {

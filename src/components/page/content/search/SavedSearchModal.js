@@ -1,6 +1,6 @@
 import React from 'react'
 
-import {SavedSearchModalView} from 'components/modal'
+import SavedSearchModalView from './SavedSearchModalView'
 import {showAlert} from 'components/shared/Alert'
 
 export default class SavedSearchModal extends React.Component {

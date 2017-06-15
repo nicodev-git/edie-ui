@@ -1,6 +1,6 @@
 import React from 'react'
 import { extImageBaseUrl } from 'shared/Global'
-import { MonitorPickerView } from 'components/modal'
+import MonitorPickerView from './MonitorPickerView'
 
 export default class MonitorPicker extends React.Component {
   componentWillMount () {

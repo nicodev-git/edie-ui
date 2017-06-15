@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { showAlert } from '../../../../shared/Alert'
 import InfiniteTable from 'components/shared/InfiniteTable'
 import UsersModal from './UsersModal'
-import { MapUsersModalView } from 'components/modal'
+import MapUsersModalView from './MapUsersModalView'
 
 export default class MapUsersModal extends Component {
   constructor (props) {

@@ -2,7 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {reduxForm} from 'redux-form'
 
-import PatternModalView from 'components/modal/PatternModalView'
+import PatternModalView from './PatternModalView'
 
 class PatternModal extends React.Component {
   onSubmit (props) {

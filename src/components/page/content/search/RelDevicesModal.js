@@ -1,5 +1,5 @@
 import React from 'react'
-import {RelDevicesModalView} from 'components/modal'
+import RelDevicesModalView from './RelDevicesModalView'
 
 export default class RelDevicesModal extends React.Component {
   componentWillMount () {

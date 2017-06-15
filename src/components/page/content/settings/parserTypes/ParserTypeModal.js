@@ -3,7 +3,7 @@ import { reduxForm, formValueSelector } from 'redux-form'
 import { assign, concat } from 'lodash'
 import { connect } from 'react-redux'
 import { showAlert } from 'components/shared/Alert'
-import { ParserTypeModalView } from '../../../../modal'
+import ParserTypeModalView from './ParserTypeModalView'
 import { validate } from '../../../../modal/validation/NameValidation'
 
 import TagPickerModal from 'containers/shared/TagPickerModalContainer'
