@@ -1,5 +1,5 @@
 import React from 'react'
-import Process from 'components/device/monitors/ProcessTable'
+import Process from 'components/dashboard/map/device/monitors/ProcessTable'
 import { withRouter } from 'react-router'
 import { connect } from 'react-redux'
 import {

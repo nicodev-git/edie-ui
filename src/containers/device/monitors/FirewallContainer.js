@@ -1,5 +1,5 @@
 import React from 'react'
-import Firewall from 'components/device/monitors/FirewallTable'
+import Firewall from 'components/dashboard/map/device/monitors/FirewallTable'
 import { withRouter } from 'react-router'
 import { connect } from 'react-redux'
 import {

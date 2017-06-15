@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import DiagramView from 'components/device/main/workflows/DiagramView'
+import DiagramView from 'components/dashboard/map/device/main/workflows/DiagramView'
 
 import {
   closeDeviceWfDiagramModal,

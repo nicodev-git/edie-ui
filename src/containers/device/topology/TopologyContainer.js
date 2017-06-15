@@ -15,7 +15,7 @@ import {
   fetchGroupDevicesAndLines
 } from 'actions'
 
-import Topology from 'components/device/topology/Topology'
+import Topology from 'components/dashboard/map/device/topology/Topology'
 
 @connect(
   state => ({

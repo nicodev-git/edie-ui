@@ -1,5 +1,5 @@
 import React from 'react'
-import Apps from 'components/device/monitors/ApplicationTable'
+import Apps from 'components/dashboard/map/device/monitors/ApplicationTable'
 import { withRouter } from 'react-router'
 import { connect } from 'react-redux'
 import {

@@ -23,7 +23,7 @@ import SettingTagsContainer from './containers/settings/tag/TagsContainer'
 import SettingAdvancedContainer from './containers/settings/advanced/AdvancedContainer'
 
 import DeviceContainer from './containers/device/DeviceContainer'
-import DeviceMain from './components/device/main/Main'
+import DeviceMain from './components/dashboard/map/device/main/Main'
 import DeviceMainIncidentsContainer from './containers/device/main/incidents/MainIncidentsContainer'
 import DeviceMainWorkflowsContainer from './containers/device/main/workflows/MainWorkflowsContainer'
 import DeviceMainAdvancedContainer from './containers/device/main/advanced/MainAdvancedContainer'

@@ -3,7 +3,7 @@ import { withRouter } from 'react-router'
 import { connect } from 'react-redux'
 import { addGroupDevice } from 'actions'
 
-import Devices from 'components/device/devices/Devices'
+import Devices from 'components/dashboard/map/device/devices/Devices'
 
 @connect(
   state => ({

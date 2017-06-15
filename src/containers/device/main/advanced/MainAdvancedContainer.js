@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import MainAdvanced from 'components/device/main/advanced/MainAdvanced'
+import MainAdvanced from 'components/dashboard/map/device/main/advanced/MainAdvanced'
 import {withRouter} from 'react-router'
 import { connect } from 'react-redux'
 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Monitors from 'components/device/monitors/Monitors'
+import Monitors from 'components/dashboard/map/device/monitors/Monitors'
 import { withRouter } from 'react-router'
 import { connect } from 'react-redux'
 import {

@@ -1,5 +1,5 @@
 import React from 'react'
-import Service from 'components/device/monitors/ServiceTable'
+import Service from 'components/dashboard/map/device/monitors/ServiceTable'
 import { withRouter } from 'react-router'
 import { connect } from 'react-redux'
 import {

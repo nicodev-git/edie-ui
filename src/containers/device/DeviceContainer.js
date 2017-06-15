@@ -1,5 +1,5 @@
 import React from 'react'
-import Device from 'components/device/Device'
+import Device from 'components/dashboard/map/device/Device'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { withRouter } from 'react-router'

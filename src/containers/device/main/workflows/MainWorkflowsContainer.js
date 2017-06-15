@@ -1,5 +1,5 @@
 import React from 'react'
-import MainWorkflows from 'components/device/main/workflows/MainWorkflows'
+import MainWorkflows from 'components/dashboard/map/device/main/workflows/MainWorkflows'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
 import {

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import MainEvents from 'components/device/main/events/MainEvents'
+import MainEvents from 'components/dashboard/map/device/main/events/MainEvents'
 import { withRouter } from 'react-router'
 import { connect } from 'react-redux'
 

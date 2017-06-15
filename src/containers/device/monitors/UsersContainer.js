@@ -1,5 +1,5 @@
 import React from 'react'
-import Users from 'components/device/monitors/UserTable'
+import Users from 'components/dashboard/map/device/monitors/UserTable'
 import { withRouter } from 'react-router'
 import { connect } from 'react-redux'
 import {

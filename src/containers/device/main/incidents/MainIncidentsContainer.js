@@ -21,7 +21,7 @@ import {
   updateDeviceIncident
 } from 'actions'
 
-import MainIncidents from 'components/device/main/incidents/MainIncidents'
+import MainIncidents from 'components/dashboard/map/device/main/incidents/MainIncidents'
 
 @connect(
   state => ({
