@@ -3,7 +3,7 @@ import { reduxForm } from 'redux-form'
 import { assign } from 'lodash'
 import { connect } from 'react-redux'
 import { getCustomImageUrl, extImageBaseUrl } from 'shared/Global'
-import { DeviceTplModalView } from 'components/modal'
+import DeviceTplModalView from './DeviceTplModalView'
 
 import TagPickerModal from 'containers/shared/TagPickerModalContainer'
 

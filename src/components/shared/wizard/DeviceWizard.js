@@ -13,7 +13,7 @@ import {wizardConfig} from './WizardConfig'
 import {util} from './WizardUtil'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import LinearProgress from 'material-ui/LinearProgress'
-import { DeviceWizardView } from 'components/modal'
+import DeviceWizardView from './DeviceWizardView'
 import { primeColor } from 'style/materialStyles'
 
 class DeviceWizard extends Component {

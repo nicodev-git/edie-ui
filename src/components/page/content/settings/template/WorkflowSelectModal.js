@@ -1,6 +1,6 @@
 import React from 'react'
 
-import {DeviceTplWfSelectModalView} from 'components/modal'
+import DeviceTplWfSelectModalView from './DeviceTplWfSelectModalView'
 
 export default class WorkflowSelectModal extends React.Component {
   componentWillMount () {
