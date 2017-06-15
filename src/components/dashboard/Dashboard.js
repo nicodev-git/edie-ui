@@ -1,7 +1,7 @@
 import React from 'react'
 import { withRouter } from 'react-router'
 
-import MetricPanel from './metric/MetricPanel'
+import MetricPanel from './top_metric/MetricPanel'
 import Map from './map/Map'
 import MainIncidentPanel from './incidents/MainIncidentPanel'
 
