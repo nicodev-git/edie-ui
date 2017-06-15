@@ -1,5 +1,5 @@
 import React from 'react'
-import { showAlert } from '../../../shared/Alert'
+import { showAlert } from 'components/shared/Alert'
 
 export default class RadioGroup extends React.Component {
   constructor (props) {

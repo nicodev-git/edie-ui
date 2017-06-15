@@ -1,5 +1,5 @@
 import React from 'react'
-import JDataTable from '../../shared/JDataTable'
+import JDataTable from 'components/shared/JDataTable'
 
 const JTableDeviceRules = ({ref, deviceId}) => (
   <JDataTable

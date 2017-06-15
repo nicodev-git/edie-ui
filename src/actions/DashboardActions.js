@@ -36,7 +36,7 @@ import { apiError } from './Errors'
 
 import { ROOT_URL } from './config'
 
-import { encodeUrlParams } from '../shared/Global'
+import { encodeUrlParams } from 'shared/Global'
 
 export const updateDashboard = (data) => {
   return (dispatch) => {

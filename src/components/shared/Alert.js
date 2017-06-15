@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Dialog from 'material-ui/Dialog'
-import {appendComponent, removeComponent} from '../../util/Component'
+import {appendComponent, removeComponent} from 'util/Component'
 import { SubHeader } from '../modal/parts'
 import TextField from 'material-ui/TextField'
 import FlatButton from 'material-ui/FlatButton'

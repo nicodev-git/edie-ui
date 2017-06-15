@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { appendComponent, removeComponent } from '../../../util/Component'
+import { appendComponent, removeComponent } from 'util/Component'
 import IncidentDetailModal from './IncidentDetailModal'
 import CommentsModalContainer from 'containers/shared/incident/CommentsModalContainer'
 import IncidentEventsModal from './IncidentEventsModal'

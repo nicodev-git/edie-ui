@@ -3,7 +3,7 @@ import { InputBase } from 'react-serial-forms'
 import MatchIgnoreModal from './MatchIgnoreModal'
 
 import {appendComponent, removeComponent}
-    from '../../../../util/Component'
+    from 'util/Component'
 
 export default class MatchIgnore extends InputBase {
   constructor (props) {

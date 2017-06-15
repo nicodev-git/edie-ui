@@ -3,7 +3,7 @@ import { InputBase } from 'react-serial-forms'
 import GlobalIgnoreModal from './GlobalIgnoreModal'
 
 import {appendComponent, removeComponent}
-    from '../../../../util/Component'
+    from 'util/Component'
 
 export default class GlobalIgnore extends InputBase {
   constructor (props) {

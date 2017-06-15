@@ -97,7 +97,7 @@ import {
 
 import { apiError, updateDeviceError } from './Errors'
 import { ROOT_URL } from './config'
-import { encodeUrlParams } from '../shared/Global'
+import { encodeUrlParams } from 'shared/Global'
 import { getAuthConfig, getWorkflowConfig } from './util'
 
 export const fetchDevice = (id) => {
