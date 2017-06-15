@@ -3,7 +3,7 @@ import {assign, extend} from 'lodash'
 import ReactTooltip from 'react-tooltip'
 import { withRouter } from 'react-router'
 
-import MapCanvas from 'components/shared/map/MapCanvas'
+import MapCanvas from './MapCanvas'
 
 import MapToolbar from './toolbar/MapToolbar'
 import DeviceDragLayer from './DeviceDragLayer'

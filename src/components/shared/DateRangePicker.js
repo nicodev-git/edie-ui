@@ -1,107 +1,120 @@
 import React from 'react'
-import ReactDateRangePicker from 'react-bootstrap-daterangepicker'
+import 'bootstrap-daterangepicker/daterangepicker.css'
+import ReactDateRangePicker from 'react-bootstrap-datetimerangepicker'
 import moment from 'moment'
+import {keys, assign, isString, isNumber} from 'lodash'
+import {dateFormat} from 'shared/Global'
+
+const locale = {
+  format: dateFormat,
+  separator: ' - ',
+  applyLabel: 'Apply',
+  cancelLabel: 'Cancel',
+  weekLabel: 'W',
+  customRangeLabel: 'Custom Range',
+  daysOfWeek: moment.weekdaysMin(),
+  monthNames: moment.monthsShort(),
+  firstDay: moment.localeData().firstDayOfWeek()
+}
 
 export default class DateRangePicker extends React.Component {
   constructor (props) {
     super(props)
 
-    let today = moment()
-    let yesterday = moment().add(-1, 'days')
-
     let rangeConfig = {
-      'Today': [
-        today,
-        today
+      [moment().add('-1', 'years').format('YYYY')]: [
+        moment().add('-1', 'years').startOf('year'),
+        moment().add('-1', 'years').endOf('year')
       ],
-      'Yesterday': [
-        yesterday,
-        yesterday
+      [moment().startOf('years').format('YYYY')]: [
+        moment().startOf('year'),
+        moment().endOf('year')
       ],
-      'Last 7 Days': [
-        moment().add(-6, 'days'),
-        today
+      [moment().add('-1', 'months').format('MMMM')]: [
+        moment().add(-1, 'months').startOf('month'),
+        moment().add(-1, 'months').endOf('month')
+      ],
+      [moment().startOf('month').format('MMMM')]: [
+        moment().startOf('month'),
+        moment().endOf('month')
       ],
       'Last 30 Days': [
-        moment().add(-30, 'days'),
-        today
+        moment().add(-30, 'days').startOf('day'),
+        moment().endOf('day')
+      ],
+      'Last 7 Days': [
+        moment().add(-6, 'days').startOf('day'),
+        moment().endOf('day')
+      ],
+      'Since Yesterday': [
+        moment().add(-1, 'days').startOf('day'),
+        moment().endOf('day')
+      ],
+      'Yesterday': [
+        moment().add(-1, 'days').startOf('day'),
+        moment().add(-1, 'days').endOf('day')
+      ],
+      'Today': [
+        moment().startOf('day'),
+        moment().endOf('day')
+      ],
+      'Last Hour': [
+        moment().add(-1, 'hours').startOf('minute'),
+        moment().endOf('minute')
       ]
     }
-    rangeConfig[moment().startOf('month').format('MMMM')] = [
-      moment().startOf('month'),
-      moment().endOf('month')
-    ]
-    rangeConfig[moment().add('-1', 'months').format('MMMM')] = [
-      moment().add(-1, 'months').startOf('month'),
-      moment().add(-1, 'months').endOf('month')
-    ]
-
-    rangeConfig[moment().startOf('years').format('YYYY')] = [
-      moment().startOf('year'),
-      moment().endOf('year')
-    ]
-    rangeConfig[moment().add('-1', 'years').format('YYYY')] = [
-      moment().add('-1', 'years').startOf('year'),
-      moment().add('-1', 'years').endOf('year')
-    ]
-
-    let config = {
-      'ranges': rangeConfig,
-      'linkedCalendars': true,
-      'startDate': rangeConfig[this.props.default][0],
-      'endDate': rangeConfig[this.props.default][1],
-      'opens': 'right'
-    }
-
-        // ////////////////////////////////
-
     this.state = {
-      config: config,
-      label: this.props.default
+      rangeConfig
     }
   }
 
   onApply (e, dp) {
-    let label = dp.chosenLabel
-    if (label === 'Custom Range') {
-      label = `${dp.startDate.format('DD/MM/YYYY')} - ${
-                 dp.endDate.format('DD/MM/YYYY')}`
-    }
-
-    this.setState({
-      label: label,
-      config: {
-        startDate: dp.startDate,
-        endDate: dp.endDate
-      }
-    }, () => {
-      this.props.onClickRange && this.props.onClickRange()
-    })
-  }
-
-  getStartDate () {
-    return this.state.config.startDate
-  }
-
-  getEndDate () {
-    return this.state.config.endDate
+    this.props.onApply && this.props.onApply(dp)
   }
 
   render () {
-    const {renderer} = this.props
+    const {rangeConfig} = this.state
+    let { className, startDate, endDate, children, renderer, style } = this.props
+
+    const momentStartDate = isString(startDate) ? moment(startDate, dateFormat) : (isNumber(startDate) ? moment(startDate) : startDate)
+    const momentEndDate = isString(endDate) ? moment(endDate, dateFormat) : (isNumber(endDate) ? moment(endDate) : endDate)
+
+    const startDateStr = momentStartDate.format(dateFormat)
+    const endDateStr = momentEndDate.format(dateFormat)
+
+    let label = ''
+
+    keys(rangeConfig).forEach(key => {
+      if (rangeConfig[key][0].format(dateFormat) === startDateStr &&
+        rangeConfig[key][1].format(dateFormat) === endDateStr) {
+        label = key
+      }
+    })
+
+    if (!label) label = `${startDateStr} - ${endDateStr}`
     return (
-      <ReactDateRangePicker {...this.state.config}
-        style={{display: 'inline-block'}}
-        className={this.props.className}
-        onApply={this.onApply.bind(this)}>
-        <a href="javascript:;" className={renderer ? 'hidden' : ''}>{this.state.label}</a>
-        {renderer ? renderer(this.state.label) : null}
-        {this.props.children}
+      <ReactDateRangePicker
+        timePicker
+        timePicker24Hour
+        showDropdowns
+        timePickerSeconds
+        linkedCalendars={false}
+        locale={locale}
+
+        ranges={rangeConfig}
+
+        startDate={momentStartDate}
+        endDate={momentEndDate}
+
+        style={assign({}, style, {display: 'inline-block'})}
+        className={className}
+
+        onApply={this.onApply.bind(this)}
+      >
+        <a href="javascript:;" className={renderer ? 'hidden' : ''}>{label}</a>
+        {renderer ? renderer(label) : null}
+        {children}
       </ReactDateRangePicker>
     )
   }
-}
-
-DateRangePicker.defaultProps = {
-  default: 'Last 7 Days'
 }
