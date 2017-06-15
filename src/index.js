@@ -16,7 +16,7 @@ import { store } from './shared/GetStore'
 //   store.dispatch({ type: AUTH_USER })
 // }
 
-console.log('Version: 0.11.1')
+console.log('Version: 0.11.2')
 
 ReactDOM.render(
   <MuiThemeProvider>

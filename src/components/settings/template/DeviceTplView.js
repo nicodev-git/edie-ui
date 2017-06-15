@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { getCustomImageUrl, extImageBaseUrl } from 'shared/Global'
 import DeviceTplModalView from './DeviceTplModalView'
 
-import TagPickerModal from 'containers/shared/TagPickerModalContainer'
+import TagPickerModal from 'containers/settings/tag/TagPickerModalContainer'
 
 class DeviceTplView extends React.Component {
   componentWillMount () {

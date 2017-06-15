@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import TagPickerModal from 'components/shared/TagPickerModal'
+import TagPickerModal from 'components/settings/tag/TagPickerModal'
 
 import {
   fetchTags,

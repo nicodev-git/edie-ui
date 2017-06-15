@@ -6,7 +6,7 @@ import { showAlert } from 'components/shared/Alert'
 import ParserTypeModalView from './ParserTypeModalView'
 import { validate } from 'components/modal/validation/NameValidation'
 
-import TagPickerModal from 'containers/shared/TagPickerModalContainer'
+import TagPickerModal from 'containers/settings/tag/TagPickerModalContainer'
 
 class ParserTypeModal extends React.Component {
   constructor (props) {

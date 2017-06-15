@@ -4,7 +4,7 @@ import ActionModal from './ActionModal'
 import DiagramViewContainer from 'containers/settings/rule/DiagramViewContainer'
 import { WorkflowStep0, WorkflowStep1, WorkflowStep2, WorkflowStep3, WorkflowWizard,
   MainWorkflowModalView } from 'components/modal'
-import TagPickerModal from 'containers/shared/TagPickerModalContainer'
+import TagPickerModal from 'containers/settings/tag/TagPickerModalContainer'
 
 export default class WorkflowModalInner extends Component {
   onClickAddTag () {

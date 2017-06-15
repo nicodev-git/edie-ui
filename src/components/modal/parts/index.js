@@ -1,6 +1,5 @@
 import Header from './Header'
 import Selector from './Selector'
-import JTableDeviceRules from './JTableDeviceRules'
 import FormInput from './FormInput'
 import FormSelect from './FormSelect'
 import FormImg from './FormImg'
@@ -29,7 +28,6 @@ import CloseIconButton from './CloseIconButton'
 export {
     Header,
     Selector,
-    JTableDeviceRules,
     FormInput,
     FormSelect,
     FormImg,

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import BigIncidents from 'components/bigIncidents/BigIncidents'
+import BigIncidents from 'components/dashboard/incidents/bigIncidents/BigIncidents'
 import {connect} from 'react-redux'
 import { withRouter } from 'react-router'
 

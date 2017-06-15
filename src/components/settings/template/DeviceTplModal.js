@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { getCustomImageUrl, extImageBaseUrl } from 'shared/Global'
 import DeviceTplModalView from './DeviceTplModalView'
 
-import TagPickerModal from 'containers/shared/TagPickerModalContainer'
+import TagPickerModal from 'containers/settings/tag/TagPickerModalContainer'
 
 class DeviceTplModal extends React.Component { // eslint-disable-line react/no-multi-comp
   constructor (props) {

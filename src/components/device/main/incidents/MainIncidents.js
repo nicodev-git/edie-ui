@@ -15,7 +15,7 @@ import ReactTooltip from 'react-tooltip'
 import ArrowBack from 'material-ui/svg-icons/navigation/arrow-back'
 import ActionSearch from 'material-ui/svg-icons/action/search'
 
-import DateRangePicker from 'components/shared/DateRangePicker2'
+import DateRangePicker from 'components/shared/DateRangePicker'
 import InfiniteTable from 'components/shared/InfiniteTable'
 import AddIncidentModal from './AddIncidentModal'
 import AddExceptionModal from './AddExceptionModal'

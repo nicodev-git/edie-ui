@@ -11,7 +11,7 @@ import NoSim from 'material-ui/svg-icons/communication/no-sim'
 import {Toolbar} from 'material-ui/Toolbar'
 
 import { FormInput } from 'components/modal/parts'
-import DateRangePicker2 from 'components/shared/DateRangePicker2'
+import DateRangePicker from 'components/shared/DateRangePicker'
 import { underlineFocusStyle, inputStyle, selectedItemStyle } from 'style/materialStyles'
 
 const iconButtonStyle = {
@@ -68,7 +68,7 @@ export default class SearchFormView extends React.Component {
       <form onSubmit={onSubmit}>
         <Toolbar style={{background: '#dadada', height: '48px'}}>
           <Field name="query" component={FormInput} label="Search" onKeyDown={onSearchKeyDown}/>
-          <DateRangePicker2
+          <DateRangePicker
             startDate={startDate}
             endDate={endDate}
             onApply={onChangeDateRange}

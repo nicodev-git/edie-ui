@@ -2,7 +2,7 @@ import React from 'react'
 import ReactTooltip from 'react-tooltip'
 import { assign } from 'lodash'
 
-import MapCanvas from 'components/shared/map/MapCanvas'
+import MapCanvas from 'components/dashboard/map/MapCanvas'
 import MapToolbar from './MapToolbar'
 
 import DeviceWizardContainer from 'containers/shared/wizard/DeviceWizardContainer'
