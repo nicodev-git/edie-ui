@@ -2,9 +2,7 @@ import IncidentsModalView from './InsidentsModalView'
 import SimpleModalForm from './SimpleModalForm'
 import SmallModalTable from './SmallModalTable'
 import ParsersModalView from './ParsersModalView'
-import DiagramModalView from './DiagramModalView'
 import ParserTypeModalView from './ParserTypeModalView'
-import ImageUploaderModalView from './ImageUploaderModalView'
 import MonitorTplModalView from './MonitorTplModalView'
 import ProfileModalView from './ProfileModalView'
 import SysWorkflowsModalView from './SysWorkflowsModalView'
@@ -22,10 +20,7 @@ import WorkflowSelectModalView from './WorkflowSelectModalView'
 import ThreatItemModalView from './ThreatItemModalView'
 import SavedSearchModalView from './SavedSearchModalView'
 import RelDevicesModalView from './RelDevicesModalView'
-import IrrelDevicesModalView from './IrrelDevicesModalView'
 import SearchFieldsModalView from './SearchFieldsModalView'
-import LocalUserModalView from './LocalUserModalView'
-import FwRuleModalView from './FwRuleModalView'
 import ViewFilterModalView from './ViewFilterModalView'
 import TagPickerModalView from './TagPickerModalView'
 import TagModalView from './TagModalView'
@@ -36,9 +31,7 @@ export {
   SimpleModalForm,
   SmallModalTable,
   ParsersModalView,
-  DiagramModalView,
   ParserTypeModalView,
-  ImageUploaderModalView,
   MonitorTplModalView,
   ProfileModalView,
   SysWorkflowsModalView,
@@ -56,10 +49,7 @@ export {
   ThreatItemModalView,
   SavedSearchModalView,
   RelDevicesModalView,
-  IrrelDevicesModalView,
   SearchFieldsModalView,
-  LocalUserModalView,
-  FwRuleModalView,
   ViewFilterModalView,
   TagPickerModalView,
   TagModalView,

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { getCustomImageUrl } from 'shared/Global'
-import { ImageUploaderModalView } from '../../../../modal'
+import ImageUploaderModalView from './ImageUploaderModalView'
 
 export default class ImageUploaderModal extends Component {
   constructor (props) {

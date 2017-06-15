@@ -1,5 +1,5 @@
 import React from 'react'
-import {IrrelDevicesModalView} from 'components/modal'
+import IrrelDevicesModalView from './IrrelDevicesModalView'
 
 export default class IrrelDevicesModal extends React.Component {
   onHide () {

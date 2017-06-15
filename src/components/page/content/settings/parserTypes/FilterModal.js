@@ -2,7 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {reduxForm} from 'redux-form'
 
-import FilterModalView from 'components/modal/FilterModalView'
+import FilterModalView from './FilterModalView'
 
 class FilterModal extends React.Component {
   onSubmit (props) {

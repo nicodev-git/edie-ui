@@ -6,7 +6,7 @@ import DiagramDragItem from './DiagramDragItem'
 import DiagramToolbar from './DiagramToolbar'
 import { workflowItems } from './DiagramItems'
 import { DiagramTypes } from 'shared/Global'
-import { DiagramModalView } from '../../../../../modal'
+import DiagramModalView from './DiagramModalView'
 
 import DiagramObjectModal from './DiagramObjectModal'
 
