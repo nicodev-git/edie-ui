@@ -39,7 +39,8 @@ const dialogContentStyle = {
 }
 
 const maxContentStyle = {
-  width: '100%',
+  left: 5,
+  right: 5,
   maxWidth: 'none',
   margin: 0
 }

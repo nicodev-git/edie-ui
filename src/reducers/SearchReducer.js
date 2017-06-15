@@ -152,7 +152,7 @@ export default function (state = {}, action) {
     case SELECT_VIEW_FILTER:
       return { ...state, selectedViewFilter: action.filter }
     case SHOW_SEARCH_GRAPH_MODAL:
-      return { ...state, searchGraphModalOpen: !!action.visible, graphMaximized: false }
+      return { ...state, searchGraphModalOpen: !!action.visible, graphMaximized: true }
     case FETCH_SEARCH_RECORD_COUNT:
       return { ...state, searchRecordCounts: action.data }
     case MAXIMIZE_SEARCH_GRAPH:
