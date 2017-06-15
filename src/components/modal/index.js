@@ -1,4 +1,3 @@
-import BigIncidentsView from './BigIncidentsView'
 import IncidentsModalView from './InsidentsModalView'
 import SimpleModalForm from './SimpleModalForm'
 import SmallModalTable from './SmallModalTable'
@@ -9,7 +8,6 @@ import ImageUploaderModalView from './ImageUploaderModalView'
 import MonitorTplModalView from './MonitorTplModalView'
 import DeviceTplModalView from './DeviceTplModalView'
 import ProfileModalView from './ProfileModalView'
-import DeviceSearchModalView from './DeviceSearchModalView'
 import SysWorkflowsModalView from './SysWorkflowsModalView'
 import SegmentListModalView from './SegmentListModalView'
 import WorkflowStep0 from './WorkflowStep0'
@@ -37,7 +35,6 @@ import TagModalView from './TagModalView'
 import SearchGraphModalView from './SearchGraphModalView'
 
 export {
-  BigIncidentsView,
   IncidentsModalView,
   SimpleModalForm,
   SmallModalTable,
@@ -48,7 +45,6 @@ export {
   MonitorTplModalView,
   DeviceTplModalView,
   ProfileModalView,
-  DeviceSearchModalView,
   SysWorkflowsModalView,
   SegmentListModalView,
   WorkflowStep0,

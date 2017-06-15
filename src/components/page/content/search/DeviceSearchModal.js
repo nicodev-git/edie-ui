@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { findIndex, concat } from 'lodash'
-import { DeviceSearchModalView } from '../../../modal'
+import DeviceSearchModalView from './DeviceSearchModalView'
 
 const styles = {
   item: {

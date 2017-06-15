@@ -9,7 +9,7 @@ import { getSeverityIcon, severities } from 'shared/Global'
 import { showIncidentRaw, showIncidentComments } from 'components/shared/incident/Incident'
 import ReactTooltip from 'react-tooltip'
 
-import BigIncidentsView from '../../../modal/BigIncidentsView'
+import BigIncidentsView from './BigIncidentsView'
 
 import InfiniteTable from 'components/shared/InfiniteTable'
 
