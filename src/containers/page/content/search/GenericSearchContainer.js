@@ -53,7 +53,8 @@ import {
   selectViewFilter,
 
   showSearchGraphModal,
-  fetchSearchRecordCount
+  fetchSearchRecordCount,
+  maximizeSearchGraph
 } from 'actions'
 
 @withRouter
@@ -105,7 +106,8 @@ import {
     selectedViewFilter: state.search.selectedViewFilter,
 
     searchGraphModalOpen: state.search.searchGraphModalOpen,
-    searchRecordCounts: state.search.searchRecordCounts
+    searchRecordCounts: state.search.searchRecordCounts,
+    graphMaximized: state.search.graphMaximized
   }),
   dispatch => ({
     ...bindActionCreators({
@@ -156,7 +158,8 @@ import {
       selectViewFilter,
 
       showSearchGraphModal,
-      fetchSearchRecordCount
+      fetchSearchRecordCount,
+      maximizeSearchGraph
     }, dispatch)
   })
 )

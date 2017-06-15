@@ -32,8 +32,11 @@ export default class SearchGraphModal extends React.Component {
   onClickClose () {
     this.props.showSearchGraphModal(false)
   }
+  onClickMax () {
+    this.props.maximizeSearchGraph(!this.props.graphMaximized)
+  }
   render () {
-    const {searchRecordCounts, queryChips, params} = this.props
+    const {searchRecordCounts, queryChips, params, graphMaximized} = this.props
     const chartData = {
       labels: (searchRecordCounts || sampleData).map(p => p.date),
       datasets: [{
@@ -61,6 +64,9 @@ export default class SearchGraphModal extends React.Component {
         chartData={chartData}
         chartOptions={chartOptions}
         onHide={this.onClickClose.bind(this)}
+
+        graphMaximized={graphMaximized}
+        onMaximize={this.onClickMax.bind(this)}
       />
     )
   }

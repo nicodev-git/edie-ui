@@ -47,7 +47,8 @@ import {
 
   SHARE_SAVED_SEARCH,
   SHOW_SEARCH_GRAPH_MODAL,
-  FETCH_SEARCH_RECORD_COUNT
+  FETCH_SEARCH_RECORD_COUNT,
+  MAXIMIZE_SEARCH_GRAPH
 } from 'actions/types'
 import { concat } from 'lodash'
 
@@ -154,6 +155,8 @@ export default function (state = {}, action) {
       return { ...state, searchGraphModalOpen: !!action.visible }
     case FETCH_SEARCH_RECORD_COUNT:
       return { ...state, searchRecordCounts: action.data }
+    case MAXIMIZE_SEARCH_GRAPH:
+      return { ...state, graphMaximized: action.maximized }
   }
   return state
 }

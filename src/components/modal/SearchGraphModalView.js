@@ -1,5 +1,6 @@
 import React from 'react'
-import {Dialog, RefreshIndicator} from 'material-ui'
+import {Dialog, RefreshIndicator, IconButton} from 'material-ui'
+import ZoomOutIcon from 'material-ui/svg-icons/maps/zoom-out-map'
 import {Line} from 'react-chartjs-2'
 import moment from 'moment'
 
@@ -56,10 +57,14 @@ export default class SearchGraphModalView extends React.Component {
     )
   }
   render () {
-    const {onHide, chartData, chartOptions, queryChips, params} = this.props
+    const {onHide, onMaximize, chartData, chartOptions, queryChips, params} = this.props
     return (
-      <Dialog open title="" bodyStyle={dialogContentStyle}>
-        <CloseIconButton onClick={onHide}/>
+      <Dialog open title="" bodyStyle={dialogContentStyle} contentStyle={{}}>
+        <CloseIconButton onClick={onHide}>
+          <IconButton onTouchTap={onMaximize}>
+            <ZoomOutIcon size={32} color="#545454"/>
+          </IconButton>
+        </CloseIconButton>
         <div className="pull-left margin-md-bottom">
           <small><b>Date Range:</b></small><br/>
           <small>

@@ -45,7 +45,8 @@ import {
   SHARE_SAVED_SEARCH,
 
   SHOW_SEARCH_GRAPH_MODAL,
-  FETCH_SEARCH_RECORD_COUNT
+  FETCH_SEARCH_RECORD_COUNT,
+  MAXIMIZE_SEARCH_GRAPH
 } from './types'
 import { ROOT_URL } from './config'
 import { apiError } from './Errors'
@@ -336,5 +337,11 @@ export const fetchSearchRecordCount = (params) => {
     axios.get(`${ROOT_URL}/search/getRecordCount`, config).then(res => {
       dispatch({type: FETCH_SEARCH_RECORD_COUNT, data: res.data})
     }).catch(error => apiError(dispatch, error))
+  }
+}
+
+export const maximizeSearchGraph = (maximize) => {
+  return dispatch => {
+    dispatch({type: MAXIMIZE_SEARCH_GRAPH, maximize})
   }
 }
