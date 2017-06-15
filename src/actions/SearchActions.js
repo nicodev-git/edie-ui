@@ -329,7 +329,7 @@ export const showSearchGraphModal = (visible) => {
 
 export const fetchSearchRecordCount = (params) => {
   return dispatch => {
-    dispatch({type: FETCH_SEARCH_RECORD_COUNT, data: []})
+    dispatch({type: FETCH_SEARCH_RECORD_COUNT, data: null})
     const config = {
       params
     }

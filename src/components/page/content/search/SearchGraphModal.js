@@ -12,7 +12,7 @@ export default class SearchGraphModal extends React.Component {
   }
   render () {
     const {searchRecordCounts} = this.props
-    const chartData = {
+    const chartData = searchRecordCounts ? {
       labels: searchRecordCounts.map(p => p.date),
       datasets: [{
         label: 'Keyword',
@@ -21,7 +21,7 @@ export default class SearchGraphModal extends React.Component {
         borderColor: '#269C8B',
         fill: false
       }]
-    }
+    } : null
     const chartOptions = {
       elements: {
         line: {
