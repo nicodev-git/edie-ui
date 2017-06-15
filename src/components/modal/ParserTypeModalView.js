@@ -5,7 +5,7 @@ import InlineEdit from 'react-edit-inline'
 import { Field } from 'redux-form'
 import {Dialog, Chip, FlatButton} from 'material-ui'
 
-import { SubHeader, SubmitBlock, FormInput, FormSelect } from './parts'
+import { SubHeader, SubmitBlock, FormInput, FormSelect } from 'components/modal/parts'
 import { buttonStyle, iconStyle, chipStyles } from 'style/materialStyles'
 
 export default class ParserTypeModalView extends Component {

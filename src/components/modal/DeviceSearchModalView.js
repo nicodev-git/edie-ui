@@ -3,7 +3,7 @@ import {Dialog} from 'material-ui'
 import Autocomplete from 'react-autocomplete'
 import IconButton from 'material-ui/IconButton'
 import DeleteIcon from 'material-ui/svg-icons/action/delete'
-import { CloseButton } from './parts'
+import { CloseButton } from 'components/modal/parts'
 import { buttonStyle, iconStyle } from 'style/materialStyles'
 
 export default class DeviceSearchModalView extends Component {

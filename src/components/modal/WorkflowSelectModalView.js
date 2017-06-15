@@ -1,7 +1,7 @@
 import React from 'react'
 import {Dialog, MenuItem, SelectField, TextField} from 'material-ui'
 
-import { TwoButtonsBlockCustom } from './parts'
+import { TwoButtonsBlockCustom } from 'components/modal/parts'
 import { errorStyle, underlineFocusStyle, inputStyle,
   selectedItemStyle, underlineStyle } from 'style/materialStyles'
 

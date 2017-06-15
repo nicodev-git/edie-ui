@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import {showAlert} from 'components/shared/Alert'
 import { reduxForm } from 'redux-form'
-import ActivationModalView from '../modal/ActivationModalView'
-import { validate } from '../modal/validation/LicenseValidation'
+import ActivationModalView from './ActivationModalView'
+import { validate } from './LicenseValidation'
 
 class ActivationModal extends Component {
   componentWillUpdate (nextProps, nextState) {

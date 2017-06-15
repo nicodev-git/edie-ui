@@ -3,8 +3,8 @@ import { assign, concat, debounce } from 'lodash'
 import ReactTooltip from 'react-tooltip'
 import moment from 'moment'
 
-import CheckIcon from 'material-ui/svg-icons/toggle/check-box'
-import CloseIcon from 'material-ui/svg-icons/navigation/close'
+// import CheckIcon from 'material-ui/svg-icons/toggle/check-box'
+// import CloseIcon from 'material-ui/svg-icons/navigation/close'
 
 import MonitorWizardContainer from 'containers/shared/wizard/MonitorWizardContainer'
 import InfiniteTable from 'components/shared/InfiniteTable'

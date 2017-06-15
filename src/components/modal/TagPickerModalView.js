@@ -1,7 +1,7 @@
 import React from 'react'
 import {Dialog, FlatButton} from 'material-ui'
 
-import {TwoButtonsBlockCustom} from './parts'
+import {TwoButtonsBlockCustom} from 'components/modal/parts'
 
 export default class TagPickerModalView extends React.Component {
   render () {

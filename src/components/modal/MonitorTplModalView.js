@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import {Dialog} from 'material-ui'
 import { Field } from 'redux-form'
-import { SubmitBlock, FormInput, ImageUploader, FormCheckbox } from './parts'
+import { SubmitBlock, FormInput, ImageUploader, FormCheckbox } from 'components/modal/parts'
 
 export default class MonitorTplModalView extends Component {
   render () {

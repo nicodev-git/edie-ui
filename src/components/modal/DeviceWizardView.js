@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import {Dialog} from 'material-ui'
-import { WizardButtons } from './parts'
+import { WizardButtons } from 'components/modal/parts'
 
 export default class DeviceWizardView extends Component {
   render () {

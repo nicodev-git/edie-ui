@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import {Dialog} from 'material-ui'
-import { TwoButtonsBlock, UploadFile } from './parts'
+import { TwoButtonsBlock, UploadFile } from 'components/modal/parts'
 
 export default class ImageUploaderModalView extends Component {
   render () {

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import {Dialog} from 'material-ui'
-import { TwoButtonsBlock } from './parts'
+import { TwoButtonsBlock } from 'components/modal/parts'
 
 export default class DiagramModalView extends Component {
   render () {

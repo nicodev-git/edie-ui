@@ -1,7 +1,7 @@
 import React from 'react'
 import {Dialog, SelectField, MenuItem} from 'material-ui'
 
-import { CloseButton } from './parts'
+import { CloseButton } from 'components/modal/parts'
 
 export default class RelDevicesModalView extends React.Component {
   renderItems () {

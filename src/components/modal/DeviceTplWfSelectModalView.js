@@ -1,7 +1,7 @@
 import React from 'react'
 import {Dialog} from 'material-ui'
 
-import { TwoButtonsBlockCustom } from './parts'
+import { TwoButtonsBlockCustom } from 'components/modal/parts'
 
 export default class DeviceTplWfSelectModalView extends React.Component {
   render () {

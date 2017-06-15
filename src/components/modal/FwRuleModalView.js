@@ -3,7 +3,7 @@ import {Dialog} from 'material-ui'
 import {Field, Form} from 'redux-form'
 import {
   FormInput, SubmitBlock, FormSelect
-} from './parts'
+} from 'components/modal/parts'
 
 const actions = [
   {label: 'Allow', value: 'allow'},

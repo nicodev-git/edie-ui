@@ -2,7 +2,7 @@ import React from 'react'
 import Dialog from 'material-ui/Dialog'
 import { Field } from 'redux-form'
 import { SubHeader, FormInput, FormSelect, FormImg, FileUpload,
-  SubmitBlock } from './parts'
+  SubmitBlock } from 'components/modal/parts'
 
 const SimpleModalForm = ({show, onHide, onSubmit, header, subheader, buttonText,
   content, imageUpload, fileUpload}) => (

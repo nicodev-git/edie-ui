@@ -1,6 +1,6 @@
 import React from 'react'
 import {Dialog} from 'material-ui'
-import { CloseButton } from './parts'
+import { CloseButton } from 'components/modal/parts'
 
 export default class IrrelDevicesModalView extends React.Component {
   renderItems () {

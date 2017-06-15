@@ -3,7 +3,7 @@ import { assign, concat } from 'lodash'
 import {Dialog, IconButton} from 'material-ui'
 import Share from 'material-ui/svg-icons/social/share'
 
-import { TwoButtonsBlockCustom } from './parts'
+import { TwoButtonsBlockCustom } from 'components/modal/parts'
 
 class SavedSearchModalView extends React.Component {
   render () {

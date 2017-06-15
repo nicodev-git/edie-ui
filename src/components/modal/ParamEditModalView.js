@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import {Dialog} from 'material-ui'
 import { Field } from 'redux-form'
 import Chip from 'material-ui/Chip'
-import { SubmitBlock, FormInput } from './parts'
+import { SubmitBlock, FormInput } from 'components/modal/parts'
 
 export default class ParamEditModalView extends Component {
   render () {

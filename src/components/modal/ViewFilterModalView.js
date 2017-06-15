@@ -2,7 +2,7 @@ import React from 'react'
 import {Dialog} from 'material-ui'
 import {keys} from 'lodash'
 
-import {TwoButtonsBlockCustom} from './parts'
+import {TwoButtonsBlockCustom} from 'components/modal/parts'
 
 import {Tabs, Tab} from 'material-ui/Tabs'
 import {viewFilters} from 'shared/Global'

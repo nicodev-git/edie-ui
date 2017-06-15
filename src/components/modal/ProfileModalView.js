@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import {Dialog} from 'material-ui'
 import { Field } from 'redux-form'
-import { SubmitBlock, ProfileImageUpload, FormInput, FormSelect, FormMultiSelect, CheckboxItem } from './parts'
+import { SubmitBlock, ProfileImageUpload, FormInput, FormSelect, FormMultiSelect, CheckboxItem } from 'components/modal/parts'
 
 export default class ProfileModalView extends Component {
   render () {

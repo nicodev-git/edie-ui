@@ -1,4 +1,3 @@
-import ActivationModalView from './ActivationModalView'
 import BigIncidentsView from './BigIncidentsView'
 import IncidentsModalView from './InsidentsModalView'
 import SimpleModalForm from './SimpleModalForm'
@@ -38,7 +37,6 @@ import TagModalView from './TagModalView'
 import SearchGraphModalView from './SearchGraphModalView'
 
 export {
-  ActivationModalView,
   BigIncidentsView,
   IncidentsModalView,
   SimpleModalForm,

@@ -1,6 +1,6 @@
 import React from 'react'
 import NewsLine from './NewsLine'
-import { TopHeader } from './parts'
+import { TopHeader } from 'components/modal/parts'
 
 const TopbarComponent = ({paused, onSearch}) => (
   <nav className="navbar navbar-default navbar-static-top no-margin"

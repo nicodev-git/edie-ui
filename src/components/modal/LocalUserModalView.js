@@ -2,7 +2,7 @@ import React from 'react'
 import {Dialog} from 'material-ui'
 import {Field} from 'redux-form'
 
-import {FormInput, SubmitBlock} from './parts'
+import {FormInput, SubmitBlock} from 'components/modal/parts'
 
 export default class LocalUserModalView extends React.Component {
   render () {
