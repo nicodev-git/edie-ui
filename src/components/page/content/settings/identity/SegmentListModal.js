@@ -3,7 +3,7 @@ import { showAlert, showConfirm } from '../../../../shared/Alert'
 import { appendComponent, removeComponent } from '../../../../../util/Component'
 import SegmentModal from './SegmentModal'
 import { ROOT_URL } from 'actions/config'
-import { SegmentListModalView } from '../../../../modal'
+import SegmentListModalView from './SegmentListModalView'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
 
 export default class SegmentListModal extends Component {

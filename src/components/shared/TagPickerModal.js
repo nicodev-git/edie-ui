@@ -1,5 +1,5 @@
 import React from 'react'
-import {TagPickerModalView} from 'components/modal'
+import TagPickerModalView from './TagPickerModalView'
 
 import {showPrompt, showAlert} from 'components/shared/Alert'
 

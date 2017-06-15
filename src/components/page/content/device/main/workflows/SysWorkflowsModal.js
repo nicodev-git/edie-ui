@@ -1,7 +1,7 @@
 import React from 'react'
 import { assign } from 'lodash'
 
-import { SysWorkflowsModalView } from 'components/modal'
+import SysWorkflowsModalView from './SysWorkflowsModalView'
 
 class SysWorkflowsModal extends React.Component {
   componentWillMount () {

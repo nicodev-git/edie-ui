@@ -1,5 +1,5 @@
 import React from 'react'
-import { WorkflowSelectModalView } from 'components/modal'
+import WorkflowSelectModalView from './WorkflowSelectModalView'
 
 class WorkflowSelectModal extends React.Component {
   componentWillMount () {

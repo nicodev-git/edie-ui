@@ -1,5 +1,5 @@
 import React from 'react'
-import {ViewFilterModalView} from 'components/modal'
+import ViewFilterModalView from './ViewFilterModalView'
 
 export default class ViewFilterModal extends React.Component {
   componentWillMount () {

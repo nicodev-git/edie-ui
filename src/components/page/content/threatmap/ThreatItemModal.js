@@ -1,5 +1,5 @@
 import React from 'react'
-import {ThreatItemModalView} from 'components/modal'
+import ThreatItemModalView from './ThreatItemModalView'
 export default class ThreatItemModal extends React.Component {
   onHide () {
     this.props.showThreatItemModal(false)
