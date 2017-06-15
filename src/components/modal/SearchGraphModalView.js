@@ -38,6 +38,17 @@ const dialogContentStyle = {
   paddingTop: 0
 }
 
+const maxContentStyle = {
+  width: '100%',
+  maxWidth: 'none',
+  margin: 0
+}
+
+// const maxStyle = {
+//   paddingTop: 0,
+//   margin: 0
+// }
+
 export default class SearchGraphModalView extends React.Component {
   renderLoading () {
     if (!this.props.loading) return
@@ -57,9 +68,14 @@ export default class SearchGraphModalView extends React.Component {
     )
   }
   render () {
-    const {onHide, onMaximize, chartData, chartOptions, queryChips, params} = this.props
+    const {onHide, onMaximize, graphMaximized, chartData, chartOptions, queryChips, params} = this.props
     return (
-      <Dialog open title="" bodyStyle={dialogContentStyle} contentStyle={{}}>
+      <Dialog
+        open title=""
+        bodyStyle={dialogContentStyle}
+        contentStyle={graphMaximized ? maxContentStyle : {}}
+        className={graphMaximized ? 'pt-none' : ''}
+      >
         <CloseIconButton onClick={onHide}>
           <IconButton onTouchTap={onMaximize}>
             <ZoomOutIcon size={32} color="#545454"/>
@@ -81,7 +97,7 @@ export default class SearchGraphModalView extends React.Component {
           )}
         </div>
         <div className="margin-md-top">
-          <Line data={chartData} options={chartOptions} width="850" height="300" />
+          <Line data={chartData} options={chartOptions} width="800" height="250" />
         </div>
         {this.renderLoading()}
       </Dialog>
