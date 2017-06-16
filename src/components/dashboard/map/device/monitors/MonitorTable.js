@@ -3,8 +3,9 @@ import { assign, concat, debounce } from 'lodash'
 import ReactTooltip from 'react-tooltip'
 import moment from 'moment'
 
-// import CheckIcon from 'material-ui/svg-icons/toggle/check-box'
-// import CloseIcon from 'material-ui/svg-icons/navigation/close'
+import CheckIcon from 'material-ui/svg-icons/toggle/check-box'
+import CloseIcon from 'material-ui/svg-icons/navigation/close'
+import HelpIcon from 'material-ui/svg-icons/action/help'
 
 import MonitorWizardContainer from 'containers/shared/wizard/MonitorWizardContainer'
 import InfiniteTable from 'components/shared/InfiniteTable'
@@ -128,18 +129,15 @@ export default class MonitorTable extends Component {
   }
 
   healthFormatter (val) {
-    let cls = 'fa-question'
-    let color = '#FDB422'
+    let cls = <HelpIcon color="#FDB422"/>
     if (val === 'UP') {
-      cls = 'fa-check-square'
-      color = 'green'
+      cls = <CheckIcon color="green"/>
     } else if (val === 'DOWN') {
-      cls = 'fa-times'
-      color = 'red'
+      cls = <CloseIcon color="red"/>
     }
     return (
-      <div style={{width: '100%', textAlign: 'center'}}>
-        <i className={`fa ${cls}`} style={{color: color, fontSize: '20px', verticalAlign: 'middle'}} />
+      <div className="text-center">
+        {cls}
       </div>
     )
   }
