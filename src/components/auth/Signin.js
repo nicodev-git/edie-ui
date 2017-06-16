@@ -61,7 +61,7 @@ class Signin extends Component {
           </div>
         </form>
         <div className="copyright_text">
-          Copyright 2016 SecuRegion Ltd. All Rights Reserved.
+          Copyright 2017 SecuRegion Ltd. All Rights Reserved.
         </div>
       </div>
     )

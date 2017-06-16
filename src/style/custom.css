@@ -163,7 +163,7 @@ table.table tbody tr.selected {
 /* Sub Page */
 
 .tab-header {
-    min-height: 81px;
+    min-height: 120px;
     position: relative;
     margin: 16px 24px 0;
 }
