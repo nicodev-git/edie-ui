@@ -6,6 +6,7 @@ import { showAlert, showConfirm } from 'components/shared/Alert'
 
 import UserModal from './UserModal'
 import PasswordModal from './PasswordModal'
+import ProfileModal from './ProfileModal'
 
 import SettingTabs from '../SettingTabs'
 import TabPage from 'components/shared/TabPage'
@@ -193,11 +194,22 @@ export default class Users extends React.Component {
     })
   }
 
+  onClickProfile () {
+    this.props.openProfileModal()
+  }
+
   handleRequestClose () {
     this.setState({
       groupOpen: false,
       userOpen: false
     })
+  }
+
+  renderProfileModal () {
+    if (!this.props.profileModalVisible) return
+    return (
+      <ProfileModal {...this.props} />
+    )
   }
 
   render () {
@@ -241,6 +253,7 @@ export default class Users extends React.Component {
               </Popover>
 
               <RaisedButton label="User" onTouchTap={this.onClickUser.bind(this)}/>&nbsp;
+              <RaisedButton label="Profile" onTouchTap={this.onClickProfile.bind(this)}/>&nbsp;
               <Popover
                 open={this.state.userOpen}
                 anchorEl={this.state.anchorEl}
@@ -266,6 +279,7 @@ export default class Users extends React.Component {
           {this.renderContent()}
           {this.renderUserModal()}
           {this.renderPasswordModal()}
+          {this.renderProfileModal()}
         </TabPageBody>
       </TabPage>
     )
