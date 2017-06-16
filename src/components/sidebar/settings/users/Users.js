@@ -12,6 +12,8 @@ import TabPage from 'components/shared/TabPage'
 import TabPageBody from 'components/shared/TabPageBody'
 import TabPageHeader from 'components/shared/TabPageHeader'
 
+import UserTabs from './UserTabs'
+
 import { ROOT_URL } from 'actions/config'
 import { errorStyle, underlineFocusStyle, inputStyle, selectedItemStyle } from 'style/materialStyles'
 
@@ -254,6 +256,8 @@ export default class Users extends React.Component {
                   <MenuItem primaryText="Regenerate Pin" onTouchTap={this.onClickPin.bind(this)}/>
                 </Menu>
               </Popover>
+
+              <UserTabs router={this.props.router}/>
             </div>
           </div>
         </TabPageHeader>

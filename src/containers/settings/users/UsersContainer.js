@@ -2,6 +2,7 @@ import React from 'react'
 import Users from 'components/sidebar/settings/users/Users'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+import {withRouter} from 'react-router'
 
 import {
   fetchSettingUsers,
@@ -39,6 +40,7 @@ import {
     }, dispatch)
   })
 )
+@withRouter
 export default class UsersContainer extends React.Component {
   render () {
     return (
