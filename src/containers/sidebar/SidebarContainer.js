@@ -4,10 +4,6 @@ import { connect } from 'react-redux'
 import { mainMenu, deviceMenu, contentType } from 'components/Config'
 
 import {
-  signOut,
-  openProfileModal,
-  closeProfileModal,
-  fetchUserInfo,
   updateUserProfile,
   updateQueryChips,
   updateSearchParams,
@@ -37,17 +33,11 @@ export default connect(
     contentType,
 
     user: state.dashboard.userInfo || {},
-    profileModalVisible: state.dashboard.profileModalVisible,
     maps: state.dashboard.maps,
     params: state.search.params,
 
-    sidebarMessageMenuOpen: state.dashboard.sidebarMessageMenuOpen,
-    sidebarProfileMenuOpen: state.dashboard.sidebarProfileMenuOpen
+    sidebarMessageMenuOpen: state.dashboard.sidebarMessageMenuOpen
   }), {
-    signOut,
-    openProfileModal,
-    closeProfileModal,
-    fetchUserInfo,
     updateUserProfile,
     updateQueryChips,
     updateSearchParams,

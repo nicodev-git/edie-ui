@@ -24,7 +24,6 @@ import {
 
   UPDATE_MAP_DEVICE_STATUS,
 
-  SHOW_SIDEBAR_PROFILE_MENU,
   SHOW_SIDEBAR_MESSAGE_MENU,
 
   SHOW_THREAT_ITEM_MODAL,
@@ -176,12 +175,6 @@ export function updateNewIncidentMsg (msg) {
 export function updateMapDeviceStatus (data) {
   return dispatch => {
     dispatch({type: UPDATE_MAP_DEVICE_STATUS, data})
-  }
-}
-
-export function showSidebarProfileMenu (open) {
-  return dispatch => {
-    dispatch({type: SHOW_SIDEBAR_PROFILE_MENU, open})
   }
 }
 

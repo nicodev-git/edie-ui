@@ -50,7 +50,6 @@ import {
   UPDATE_MAP_DEVICE_STATUS,
   RELOAD_DEVICE,
 
-  SHOW_SIDEBAR_PROFILE_MENU,
   SHOW_SIDEBAR_MESSAGE_MENU,
 
   SHOW_THREAT_ITEM_MODAL,
@@ -225,9 +224,6 @@ export default function (state = {}, action) {
 
       return { ...state, mapDevices }
     }
-
-    case SHOW_SIDEBAR_PROFILE_MENU:
-      return { ...state, sidebarProfileMenuOpen: action.open }
 
     case SHOW_SIDEBAR_MESSAGE_MENU:
       return { ...state, sidebarMessageMenuOpen: action.open }

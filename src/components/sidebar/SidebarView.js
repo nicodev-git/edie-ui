@@ -7,7 +7,6 @@ import {badgeStyle, badgeRootStyle, iconStyle, iconButtonStyle, sidebarWidth, si
 
 import SearchBarContainer from './parts/SearchBarContainer'
 import MessageBox from './parts/MessageBox'
-import ProfileMenu from './parts/ProfileMenu'
 
 export default class SidebarView extends Component {
   constructor (props) {
@@ -43,9 +42,7 @@ export default class SidebarView extends Component {
   render () {
     const {onToggle, contentType, mainMenu, deviceMenu, onMainMenu, onDeviceMenu,
       device, pageId, pageType, searchVisible, group, onSearch,
-      profile, user, onClickProfile, onClickMessages, onSignOut,
-      sidebarMessageMenuOpen, sidebarProfileMenuOpen,
-      showSidebarProfileMenu,
+      sidebarMessageMenuOpen,
       openSidebarMessageMenu, closeSidebarMessageMenu
     } = this.props
 
@@ -83,14 +80,6 @@ export default class SidebarView extends Component {
             openSidebarMessageMenu={openSidebarMessageMenu}
             closeSidebarMessageMenu={closeSidebarMessageMenu}/>
           <Divider style={{margin: 0, backgroundColor: '#393b42'}}/>
-          <ProfileMenu
-            open={sidebarProfileMenuOpen}
-            showSidebarProfileMenu={showSidebarProfileMenu}
-            user={user}
-
-            onClickProfile={onClickProfile}
-            onClickMessages={onClickMessages}
-            onSignOut={onSignOut}/>
         </div>
 
         <div style={{display: contentType.Device === pageType ? 'block' : 'none'}}>
@@ -106,7 +95,6 @@ export default class SidebarView extends Component {
             )
           })}
         </div>
-        {profile}
       </Drawer>
     )
   }

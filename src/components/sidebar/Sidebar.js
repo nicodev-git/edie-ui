@@ -4,7 +4,6 @@ import { assign } from 'lodash'
 
 import { isGroup, parseSearchQuery } from 'shared/Global'
 import SidebarView from './SidebarView'
-import ProfileModal from './ProfileModal'
 
 export default class Sidebar extends React.Component {
   constructor (props) {
@@ -82,23 +81,12 @@ export default class Sidebar extends React.Component {
     }))
   }
 
-  onClickProfile () {
-    this.props.openProfileModal()
-  }
-
   onClickMessages () {
     console.log('messages clicked')
   }
 
   onClickSearch (value) {
     console.log('making a request... ', value)
-  }
-
-  renderProfileModal () {
-    if (!this.props.profileModalVisible) return
-    return (
-      <ProfileModal {...this.props} />
-    )
   }
 
   render () {
@@ -114,8 +102,6 @@ export default class Sidebar extends React.Component {
         onSearch={this.onSearch.bind(this)}
         searchVisible={this.state.searchVisible}
         group={group}
-        profile={this.renderProfileModal()}
-        onClickProfile={this.onClickProfile.bind(this)}
         onClickMessages={this.onClickMessages.bind(this)}
 
         openSidebarMessageMenu={() => this.props.showSidebarMessageMenu(true)}

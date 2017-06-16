@@ -14,7 +14,11 @@ import {
   updateSettingUser,
   closeSettingUserModal,
 
-  closeUserPasswordModal
+  closeUserPasswordModal,
+
+  openProfileModal,
+  closeProfileModal,
+  fetchUserInfo
 } from 'actions'
 
 @connect(
@@ -23,7 +27,11 @@ import {
     userModalVisible: state.settings.userModalVisible,
     userPasswordModalVisible: state.settings.userPasswordModalVisible,
 
-    editUser: state.settings.editUser
+    editUser: state.settings.editUser,
+
+    user: state.dashboard.userInfo || {},
+    maps: state.dashboard.maps,
+    profileModalVisible: state.dashboard.profileModalVisible
   }),
   dispatch => ({
     ...bindActionCreators({
@@ -36,7 +44,11 @@ import {
       updateSettingUser,
       closeSettingUserModal,
 
-      closeUserPasswordModal
+      closeUserPasswordModal,
+
+      openProfileModal,
+      closeProfileModal,
+      fetchUserInfo
     }, dispatch)
   })
 )
