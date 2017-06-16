@@ -1,4 +1,3 @@
-import IncidentsModalView from './InsidentsModalView'
 import SimpleModalForm from './SimpleModalForm'
 import SmallModalTable from './SmallModalTable'
 import WorkflowStep0 from './WorkflowStep0'
@@ -9,7 +8,6 @@ import WorkflowWizard from './WorklowWizard'
 import MainWorkflowModalView from './MainWorkflowModalView'
 
 export {
-  IncidentsModalView,
   SimpleModalForm,
   SmallModalTable,
   WorkflowStep0,

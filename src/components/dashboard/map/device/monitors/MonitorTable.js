@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
-import { assign, concat, debounce } from 'lodash'
+import { assign, concat } from 'lodash'
 import ReactTooltip from 'react-tooltip'
 import moment from 'moment'
 
 import CheckIcon from 'material-ui/svg-icons/toggle/check-box'
 import CloseIcon from 'material-ui/svg-icons/navigation/close'
 import HelpIcon from 'material-ui/svg-icons/action/help'
+import CommentIcon from 'material-ui/svg-icons/communication/comment'
+import DateRangeIcon from 'material-ui/svg-icons/action/date-range'
 
 import MonitorWizardContainer from 'containers/shared/wizard/MonitorWizardContainer'
 import InfiniteTable from 'components/shared/InfiniteTable'
@@ -25,8 +27,6 @@ export default class MonitorTable extends Component {
 
       monitorConfig: null
     }
-    let tooltipRebuild = debounce(ReactTooltip.rebuild, 200)
-
     this.columns = [{
       'displayName': 'Monitor Name',
       'columnName': 'name',
@@ -72,19 +72,13 @@ export default class MonitorTable extends Component {
       'displayName': 'Actions',
       'columnName': 'action',
       'customComponent': (props) => {
-        let row = props.rowData
-
-        tooltipRebuild()
+        const row = props.rowData
 
         return (
-          <span>
-            <a href="javascript:;" className="option">
-              <i className="fa fa-comment" data-tip={row.checkResult ? JSON.stringify(row.checkResult) : ''} />
-            </a>
-            <a href="javascript:;" className="option" onClick={this.onClickCal.bind(this, props.rowData)}>
-              <i className="fa fa-calendar-o" data-tip="History" />
-            </a>
-          </span>
+          <div>
+            <CommentIcon color="#545454" data-tip={row.checkResult ? JSON.stringify(row.checkResult) : ''}/>
+            <DateRangeIcon color="#545454" data-tip="History" onClick={this.onClickCal.bind(this, props.rowData)}/>
+          </div>
         )
       }
     }]
