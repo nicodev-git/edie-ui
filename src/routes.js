@@ -70,9 +70,11 @@ export default(
         </Route>
 
         <Route path="maps" component={SettingMapsContainer} />
-        <Route path="users" component={SettingUsersContainer} />
+        <Route path="users" component={Settings}>
+          <IndexRoute component={SettingUsersContainer}/>
+          <Route path="credentials" component={SettingCredentialsContainer} />
+        </Route>
         <Route path="identities" component={SettingIdentitiesContainer} />
-        <Route path="credentials" component={SettingCredentialsContainer} />
         <Route path="advanced" component={SettingAdvancedContainer} />
       </Route>
 

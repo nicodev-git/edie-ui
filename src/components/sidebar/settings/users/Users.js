@@ -240,7 +240,7 @@ export default class Users extends React.Component {
                 </Menu>
               </Popover>
 
-              <RaisedButton label="User" onTouchTap={this.onClickUser.bind(this)}/>
+              <RaisedButton label="User" onTouchTap={this.onClickUser.bind(this)}/>&nbsp;
               <Popover
                 open={this.state.userOpen}
                 anchorEl={this.state.anchorEl}

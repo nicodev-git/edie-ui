@@ -2,6 +2,7 @@ import React from 'react'
 import Credentials from 'components/sidebar/settings/credentials/Credentials'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import { withRouter } from 'react-router'
 
 import {
   fetchCredentials,
@@ -32,6 +33,7 @@ import {
     }, dispatch)
   })
 )
+@withRouter
 export default class CredentialsContainer extends React.Component {
   render () {
     return (

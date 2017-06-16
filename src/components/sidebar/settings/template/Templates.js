@@ -263,7 +263,7 @@ export default class Templates extends Component {
           </div>
         </TabPageHeader>
 
-        <TabPageBody tabs={SettingTabs} tab={6}>
+        <TabPageBody tabs={SettingTabs} tab={5}>
           <div className="row padding-md">
             <div className="col-md-6">
               {type === 'Device' ? this.renderDeviceTemplates() : this.renderMonitorTemplates()}

@@ -1,5 +1,5 @@
 import React from 'react'
-import {RaisedButton, TextField} from 'material-ui'
+import {RaisedButton} from 'material-ui'
 
 import InfiniteTable from 'components/shared/InfiniteTable'
 import { showAlert, showConfirm } from 'components/shared/Alert'
@@ -10,13 +10,13 @@ import SettingTabs from '../SettingTabs'
 import TabPage from 'components/shared/TabPage'
 import TabPageBody from 'components/shared/TabPageBody'
 import TabPageHeader from 'components/shared/TabPageHeader'
-import { errorStyle, inputStyle, underlineStyle } from 'style/materialStyles'
+
+import UserTabs from '../users/UserTabs'
 
 export default class Credentials extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      filter: ''
     }
 
     this.cells = [{
@@ -61,10 +61,6 @@ export default class Credentials extends React.Component {
     return this.refs.credentials
   }
 
-  onKeywordChanged (filter) {
-    this.setState({ filter })
-  }
-
   onAddCred () {
     this.props.openCredentialsModal()
   }
@@ -86,15 +82,6 @@ export default class Credentials extends React.Component {
       this.props.removeCredentials(selected)
     })
   }
-
-  onSearchKeyUp (e) {
-    clearTimeout(this.searchTimer)
-    const value = e.target.value
-    this.searchTimer = setTimeout(() => {
-      emit(EVENTS.CREDENTIALS_KEYWORD_CHANGED, value) // eslint-disable-line no-undef
-    }, 200)
-  }
-
   render () {
     return (
       <TabPage>
@@ -104,16 +91,7 @@ export default class Credentials extends React.Component {
               <RaisedButton label="Add" onTouchTap={this.onAddCred.bind(this)}/>&nbsp;
               <RaisedButton label="Edit" onTouchTap={this.onEditCred.bind(this)}/>&nbsp;
               <RaisedButton label="Remove" onTouchTap={this.onRemoveCred.bind(this)}/>&nbsp;
-            </div>
-
-            <div className="inline-block">
-              <TextField
-                hintText="Search"
-                errorStyle={errorStyle}
-                inputStyle={inputStyle}
-                underlineFocusStyle={underlineStyle}
-                onKeyUp={this.onSearchKeyUp.bind(this)}
-              />
+              <UserTabs router={this.props.router}/>&nbsp;
             </div>
           </div>
         </TabPageHeader>
