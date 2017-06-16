@@ -56,7 +56,7 @@ export default class SidebarView extends Component {
             <MenuIcon color="#ffffff"/>
           </IconButton>
         </div>
-        <div style={{display: contentType.Main === pageType ? 'block' : 'none'}}>
+        <div style={{display: contentType.Main === pageType ? 'block' : 'none'}} className="sidebar">
           {mainMenu.map((item, index) =>
             <div
               key={index}
@@ -82,11 +82,12 @@ export default class SidebarView extends Component {
           <Divider style={{margin: 0, backgroundColor: '#393b42'}}/>
         </div>
 
-        <div style={{display: contentType.Device === pageType ? 'block' : 'none'}} className="sidebar-device">
+        <div style={{display: contentType.Device === pageType ? 'block' : 'none'}} className="sidebar">
           {deviceMenu(device ? device.id : 'main').map((item, index) => {
             if (item.group && !group) return null
             return (
               <div key={index} className={pageId === item.id ? 'active open' : ''} onClick={onDeviceMenu.bind(this, index)}>
+                {(index !== 0) ? (<Divider style={{margin: 0, backgroundColor: '#393b42'}}/>) : null}
                 <div className="sidebar-item-container">
                   {this.renderButton(item)}
                   <div className="sidebar-title">{item.title}</div>

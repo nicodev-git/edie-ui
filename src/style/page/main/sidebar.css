@@ -2,11 +2,10 @@
     padding: 14px;
 }
 
-.sidebar-device {
+.sidebar {
     width: 100%;
     position: absolute;
-    top: 50%;
-    transform: translate(0, -50%);
+    top: 170px;
 }
 
 /* Sidebar tooltip */
