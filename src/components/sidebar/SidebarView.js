@@ -82,7 +82,7 @@ export default class SidebarView extends Component {
           <Divider style={{margin: 0, backgroundColor: '#393b42'}}/>
         </div>
 
-        <div style={{display: contentType.Device === pageType ? 'block' : 'none'}}>
+        <div style={{display: contentType.Device === pageType ? 'block' : 'none'}} className="sidebar-device">
           {deviceMenu(device ? device.id : 'main').map((item, index) => {
             if (item.group && !group) return null
             return (

@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react'
+import {Tabs, Tab} from 'material-ui/Tabs'
 
 export default class TabPageBody extends Component {
   static contextTypes = {
@@ -28,8 +29,9 @@ export default class TabPageBody extends Component {
     return false
   }
 
-  navigate (item) {
-    this.context.router.push(item.path)
+  navigate (index) {
+    const {tabs} = this.props
+    this.context.router.push(tabs[index].path)
   }
 
   render () {
@@ -43,19 +45,12 @@ export default class TabPageBody extends Component {
 
     return (
       <div className="tabs-custom flex-vertical flex-1">
-        <div className={`nav nav-tabs tab-container ${tabs.length ? '' : 'mt-none'}`}>
+        <Tabs value={active} onChange={this.navigate.bind(this)}>
           {tabs.map((item, i) =>
-              <div
-                key={i}
-                onClick={this.navigate.bind(this, item)}
-              >
-                <div>
-                  <div className="tab-label">{item.title}</div>
-                  <div className={i === active ? 'tab-chosen' : 'tab-blank'}/>
-                </div>
-              </div>
+            <Tab key={i} label={item.title} value={i}/>
           )}
-        </div>
+        </Tabs>
+
         <div className={`tab-content ${tableclass}`}>
           {this.props.children}
         </div>
