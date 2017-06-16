@@ -6,7 +6,7 @@ import moment from 'moment'
 import CheckIcon from 'material-ui/svg-icons/toggle/check-box'
 import CloseIcon from 'material-ui/svg-icons/navigation/close'
 import HelpIcon from 'material-ui/svg-icons/action/help'
-import CommentIcon from 'material-ui/svg-icons/action/list'
+import CommentIcon from 'material-ui/svg-icons/action/description'
 import DateRangeIcon from 'material-ui/svg-icons/action/date-range'
 
 import MonitorWizardContainer from 'containers/shared/wizard/MonitorWizardContainer'
