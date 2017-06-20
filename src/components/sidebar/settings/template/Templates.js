@@ -257,7 +257,7 @@ export default class Templates extends Component {
 
             <div style={{position: 'absolute', right: '25px'}}>
               <RaisedButton label="Add" onTouchTap={this.onClickAdd.bind(this)}/>&nbsp;
-              <RaisedButton label="Edit" onTouchTap={this.onClickEdit.bind(this)} className="hidden"/>&nbsp;
+              <RaisedButton label="Edit" onTouchTap={this.onClickEdit.bind(this)} className={type === 'Device' ? 'hidden' : ''}/>&nbsp;
               <WfTabs router={this.props.router}/>
             </div>
           </div>
