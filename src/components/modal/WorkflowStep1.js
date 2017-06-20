@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Field } from 'redux-form'
 import IconButton from 'material-ui/IconButton'
 import HelpIcon from 'material-ui/svg-icons/action/help'
-import {Chip} from 'material-ui'
+import {Chip, FlatButton} from 'material-ui'
 import ReactTooltip from 'react-tooltip'
 
 import { FormInput, FormSelect, FormCheckbox } from 'components/modal/parts'
@@ -12,7 +12,7 @@ import {severities} from 'shared/Global'
 
 export default class WorkflowStep1 extends Component {
   render () {
-    const {onClickRawData} = this.props
+    const {onClickRawData, tags, onClickAddTag, onClickDeleteTag, tagModal} = this.props
     return (
       <div className="wizard-step-1-container">
         <div className="form-column wizard-step-1">
@@ -36,6 +36,15 @@ export default class WorkflowStep1 extends Component {
             <HelpIcon color="#2196f3"/>
           </IconButton>
         </div>
+        <div>
+          <FlatButton label="Add Tag" onTouchTap={onClickAddTag}/>
+        </div>
+        <div style={chipStyles.wrapper}>
+          {tags.map((t, i) =>
+            <Chip key={i} style={chipStyles.chip} onRequestDelete={() => onClickDeleteTag(i)}>{t}</Chip>
+          )}
+        </div>
+        {tagModal}
         <ReactTooltip />
       </div>
     )

@@ -37,16 +37,12 @@ export default class WorkflowModalInner extends Component {
   }
 
   renderStep () {
-    const {current, workflowEditType, updateWorkflowEditType, editWorkflowTags, removeWorkflowTag} = this.props
+    const {current, workflowEditType, updateWorkflowEditType} = this.props
     if (current === 1) {
       return (
         <WorkflowStep0
-          tags={editWorkflowTags}
-          onClickAddTag={this.onClickAddTag.bind(this)}
-          onClickDeleteTag={removeWorkflowTag}
           workflowEditType={workflowEditType}
           updateWorkflowEditType={updateWorkflowEditType}
-          tagModal={this.renderTagsModal()}
         />
       )
     } else {
@@ -56,7 +52,7 @@ export default class WorkflowModalInner extends Component {
   }
 
   renderWizardStep () {
-    const {current, rules, selectedRuleIndex, actions, selectedActionIndex, onClickRawData} = this.props
+    const {current, rules, selectedRuleIndex, actions, selectedActionIndex, onClickRawData, editWorkflowTags, removeWorkflowTag} = this.props
     let categoryModal = this.renderCategoryModal()
     let ruleModal = null
     let actionModal = this.renderActionModal()
@@ -64,8 +60,11 @@ export default class WorkflowModalInner extends Component {
     if (current === 2) {
       return (
         <WorkflowStep1
-          tags={this.props.editWorkflowTags}
-          onClickDeleteTag={this.props.onClickDeleteTag}
+          tags={editWorkflowTags}
+          onClickDeleteTag={removeWorkflowTag}
+          onClickAddTag={this.onClickAddTag.bind(this)}
+          tagModal={this.renderTagsModal()}
+
           onClickRawData={onClickRawData}
           categories={this.props.workflowCategories}
           onAddCategory={this.props.onClickAddCategory}
