@@ -55,6 +55,7 @@ import {
   CLOSE_WORKFLOW_MODAL,
   UPDATE_WORKFLOW_EDIT_TYPE,
   SHARE_WORKFLOW,
+  OPEN_DEVICE_WORKFLOW_MODAL,
 
   SHOW_WF_TAG_MODAL,
   ADD_WORKFLOW_TAG,
@@ -320,6 +321,11 @@ export default function (state = {}, action) {
       const editWorkflow = action.data
       const editWorkflowTags = editWorkflow ? (editWorkflow.tags || []) : []
       return { ...state, workflowModalVisible: true, editWorkflow, workflowEditType: 'wizard', editWorkflowTags }
+    }
+    case OPEN_DEVICE_WORKFLOW_MODAL: {
+      const editWorkflow = action.data
+      const editWorkflowTags = editWorkflow ? (editWorkflow.tags || []) : []
+      return { ...state, editWorkflowTags }
     }
 
     case CLOSE_WORKFLOW_MODAL: {

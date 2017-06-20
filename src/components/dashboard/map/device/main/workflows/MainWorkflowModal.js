@@ -26,9 +26,15 @@ class MainWorkflowModal extends Component {
   }
 
   handleFormSubmit (values) {
-    const {editWorkflow, workflowCategories} = this.props
+    const {editWorkflow, workflowCategories, editWorkflowTags} = this.props
     const { rules, actions, diagram } = this.state
-    let props = assign({}, editWorkflow, values, { isglobal: false, rules: {}, actions: actions, flowchart: diagram })
+    let props = assign({}, editWorkflow, values, {
+      isglobal: false,
+      rules: {},
+      actions: actions,
+      flowchart: diagram,
+      tags: editWorkflowTags
+    })
     if (workflowCategories && workflowCategories.length) {
       props.category = props.category || workflowCategories[0].name
     }

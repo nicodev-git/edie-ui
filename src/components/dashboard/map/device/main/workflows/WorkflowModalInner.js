@@ -5,8 +5,15 @@ import ActionModal from './ActionModal'
 import DiagramModalContainer from 'containers/device/main/workflows/DiagramModalContainer'
 import { WorkflowStep1, WorkflowStep2, WorkflowStep3, WorkflowWizard,
   MainWorkflowModalView } from 'components/modal'
+import TagPickerModal from 'containers/settings/tag/TagPickerModalContainer'
 
 export default class WorkflowModalInner extends Component {
+  onClickAddTag () {
+    this.props.showWorkflowTagModal(true)
+  }
+  onPickTag (tag) {
+    this.props.addWorkflowTag(tag.name)
+  }
   renderRuleModal () {
     if (!this.props.ruleModalOpen) return null
     return (
@@ -28,6 +35,15 @@ export default class WorkflowModalInner extends Component {
     )
   }
 
+  renderTagsModal () {
+    if (!this.props.wfTagModalOpen) return null
+    return (
+      <TagPickerModal
+        onPick={this.onPickTag.bind(this)}
+        onClickClose={() => this.props.showWorkflowTagModal(false)}/>
+    )
+  }
+
   renderDiagramModal () {
     if (!this.props.wfDiagramModalOpen) return null
     return (
@@ -38,7 +54,7 @@ export default class WorkflowModalInner extends Component {
   }
 
   renderStep () {
-    const {current, rules, selectedRuleIndex, actions, selectedActionIndex, onClickRawData} = this.props
+    const {current, rules, selectedRuleIndex, actions, selectedActionIndex, onClickRawData, editWorkflowTags, removeWorkflowTag} = this.props
     let categoryModal = this.renderCategoryModal()
     let ruleModal = this.renderRuleModal()
     let actionModal = this.renderActionModal()
@@ -46,6 +62,11 @@ export default class WorkflowModalInner extends Component {
     if (current === 1) {
       return (
         <WorkflowStep1
+          tags={editWorkflowTags}
+          onClickDeleteTag={removeWorkflowTag}
+          onClickAddTag={this.onClickAddTag.bind(this)}
+          tagModal={this.renderTagsModal()}
+
           onClickRawData={onClickRawData}
           categories={this.props.workflowCategories}
           onAddCategory={this.props.onClickAddCategory}

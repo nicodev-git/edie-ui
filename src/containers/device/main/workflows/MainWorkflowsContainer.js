@@ -30,7 +30,9 @@ import {
   selectSysWorkflow,
   deselectSysWorkflow,
   addDeviceWorkflows,
-  selectSysWorkflowCategory
+  selectSysWorkflowCategory,
+
+  showWorkflowTagModal
 } from 'actions'
 
 @connect(
@@ -54,7 +56,10 @@ import {
     sysWorkflows: state.settings.workflows,
     sysWorkflowsModalOpen: state.devices.sysWorkflowsModalOpen,
     selectedSysWorkflows: state.devices.selectedSysWorkflows,
-    selectedSysWorkflowCategory: state.devices.selectedSysWorkflowCategory
+    selectedSysWorkflowCategory: state.devices.selectedSysWorkflowCategory,
+
+    wfTagModalOpen: state.settings.wfTagModalOpen,
+    editWorkflowTags: state.settings.editWorkflowTags
   }), {
     openDeviceWorkflowModal,
     fetchDeviceWorkflows,
@@ -83,7 +88,9 @@ import {
     selectSysWorkflow,
     deselectSysWorkflow,
     addDeviceWorkflows,
-    selectSysWorkflowCategory
+    selectSysWorkflowCategory,
+
+    showWorkflowTagModal
   }
 )
 @withRouter
