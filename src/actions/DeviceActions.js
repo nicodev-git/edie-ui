@@ -621,7 +621,7 @@ export const fetchWorkflowCategories = () => {
     return dispatch => dispatch({ type: NO_AUTH_ERROR })
   }
   return (dispatch) => {
-    axios.get(`${ROOT_URL}/workflowcategory`)
+    axios.get(`${ROOT_URL}/tag`)
       .then((response) => fetchWorkflowCategoriesSuccess(dispatch, response))
       .catch(error => apiError(dispatch, error))
   }
@@ -630,7 +630,7 @@ export const fetchWorkflowCategories = () => {
 const fetchWorkflowCategoriesSuccess = (dispatch, response) => {
   dispatch({
     type: FETCH_WORKFLOW_CATEGORIES,
-    data: response.data._embedded.workflowCategories
+    data: response.data._embedded.tags
   })
 }
 
