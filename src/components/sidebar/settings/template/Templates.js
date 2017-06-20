@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 
 import {RaisedButton, MenuItem, SelectField, IconButton, Chip} from 'material-ui'
 import DeleteIcon from 'material-ui/svg-icons/action/delete'
+import EditIcon from 'material-ui/svg-icons/editor/mode-edit'
 import Share from 'material-ui/svg-icons/social/share'
 
 import SettingTabs from '../SettingTabs'
@@ -122,7 +123,11 @@ export default class Templates extends Component {
                     onTouchTap={this.onClickShareMonitorTpl.bind(this, item)}>
                     <Share color="#545454" hoverColor="#f44336"/>
                   </IconButton>}
-
+                  {item.origin !== 'SYSTEM' && <IconButton
+                    style={{padding: 0, width: 24, height: 24}}
+                    onTouchTap={this.onClickEditMonitorTpl.bind(this, item)}>
+                    <EditIcon color="#545454" hoverColor="#f44336"/>
+                  </IconButton>}
                   {item.origin !== 'SYSTEM' && <IconButton
                     style={{padding: 0, width: 24, height: 24}}
                     onTouchTap={this.onClickDeleteMonitorTpl.bind(this, item)}>
@@ -257,7 +262,6 @@ export default class Templates extends Component {
 
             <div style={{position: 'absolute', right: '25px'}}>
               <RaisedButton label="Add" onTouchTap={this.onClickAdd.bind(this)}/>&nbsp;
-              <RaisedButton label="Edit" onTouchTap={this.onClickEdit.bind(this)} className={type === 'Device' ? 'hidden' : ''}/>&nbsp;
               <WfTabs router={this.props.router}/>
             </div>
           </div>
