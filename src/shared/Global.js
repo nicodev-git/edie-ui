@@ -51,37 +51,6 @@ export const lineTypes = [{
   visible: true
 }]
 
-export function getIncidenttypeIcon (incidenttype) {
-  switch (incidenttype) {
-    case 'ssh root failed password':
-      return 'sysadmin.png'
-    case 'Failed password for root':
-      return 'sysadmin.png'
-    case 'unknown user':
-      return 'usersicon.png'
-    case 'SSH unknown user':
-      return 'usersicon.png'
-    case 'Root Login Attack pattern':
-      return 'sysadmin.png'
-    case 'root login':
-      return 'adminlogin.png'
-    case 'IPS':
-      return 'ips.png'
-    case 'NAC All Alerts':
-      return 'nac.png'
-    case 'Webservice Method failure':
-      return 'webservice.png'
-    case 'http failure':
-      return 'port.png'
-    case 'LogCheck failure':
-      return 'log-dir.png'
-    case 'ping failure':
-      return 'ping.png'
-  }
-
-  return 'defaultincidenticon.png'
-}
-
 export function getSeverityIcon (severity) {
   switch ((severity || '').toLowerCase()) {
     case 'high':
@@ -142,10 +111,6 @@ export function format () {
   return args[0].replace(/{(\d+)}/g, function (match, number) {
     return typeof args[1 + parseInt(number)] !== 'undefined' ? args[1 + parseInt(number)] : match
   })
-}
-
-export const globalState = {
-  fullscreen: false
 }
 
 export function encodeUrlParams (obj) {
@@ -228,5 +193,9 @@ export const viewFilters = {
   raw: {
     name: 'Raw',
     desc: 'Raw data view'
+  },
+  notNull: {
+    name: 'Not Null',
+    desc: 'Filter Null Values'
   }
 }
