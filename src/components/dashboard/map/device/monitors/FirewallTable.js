@@ -86,10 +86,6 @@ export default class FirewallTable extends React.Component {
     }
   }
 
-  onRowDblClick () {
-    const selected = this.refs.table.getSelected()
-    this.props.openProcessModal(selected)
-  }
   onToggleStatus (e, checked) {
     this.sendCommandMessage('SetFirewallStatusCommand', {
       status: checked ? 'on' : 'off'

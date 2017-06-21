@@ -39,7 +39,6 @@ export default class NetworkTable extends React.Component {
   }
   componentWillMount () {
     this.props.clearMonitors()
-    this.props.updateMonitorQuery()
   }
   componentDidMount () {
     this.monitorSocket = new MonitorSocket({
@@ -66,10 +65,6 @@ export default class NetworkTable extends React.Component {
     }
   }
 
-  onRowDblClick () {
-    const selected = this.refs.table.getSelected()
-    this.props.openProcessModal(selected)
-  }
   renderOptions () {
     return (
       <div className="text-center">

@@ -6,8 +6,6 @@ export default class ProcessModal extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      runTimes: [],
-      children: []
     }
 
     this.cells = [{
@@ -22,25 +20,6 @@ export default class ProcessModal extends Component {
       'cssClassName': 'width-180'
     }]
   }
-
-  componentWillMount () {
-    // $.get(`${ROOT_URL}${Api.incidents.getProcessRunTimes}`, { // eslint-disable-line no-undef
-    //   processId: this.props.process.id
-    // }).done(res => {
-    //   this.setState({
-    //     runTimes: res
-    //   })
-    // })
-    //
-    // $.get(`${ROOT_URL}${Api.incidents.getProcessChildren}`, { // eslint-disable-line no-undef
-    //   processId: this.props.process.id
-    // }).done(res => {
-    //   this.setState({
-    //     children: res
-    //   })
-    // })
-  }
-
   onHide () {
     this.closeModal()
   }
@@ -54,13 +33,11 @@ export default class ProcessModal extends Component {
   }
 
   onChildDblClick (item) {
-    this.setState({open: false}, () => {
-      this.props.onClose &&
-            this.props.onClose(this)
+    this.props.onClose &&
+    this.props.onClose(this)
 
-      const {onChildClicked} = this.props
-      onChildClicked && onChildClicked(item)
-    })
+    const {onChildClicked} = this.props
+    onChildClicked && onChildClicked(item)
   }
 
   getRunTimes () {

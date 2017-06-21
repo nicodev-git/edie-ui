@@ -12,8 +12,6 @@ import TabPageHeader from 'components/shared/TabPageHeader'
 import MonitorTabs from './MonitorTabs'
 import StatusImg from './StatusImg'
 
-import { parseSearchQuery } from 'shared/Global'
-
 export default class Monitors extends React.Component {
   componentWillMount () {
     this.props.clearMonitors()

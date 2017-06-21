@@ -19,7 +19,6 @@ export default class EventLogTable extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      query: ''
     }
     this.columns = [{
       'displayName': 'Time',
@@ -73,9 +72,7 @@ export default class EventLogTable extends Component {
     }
   }
   onChangeQuery (e) {
-    this.setState({
-      query: e.target.value
-    })
+    this.props.updateMonitorQuery(e.target.value)
   }
   onKeyupQuery (e) {
     if (e.keyCode === 13) {
@@ -83,7 +80,7 @@ export default class EventLogTable extends Component {
     }
   }
   onClickSearch () {
-    const query = `deviceid=${this.props.device.id} and monitortype=log and eventType=AGENT and _all=${this.state.query}`
+    const query = `deviceid=${this.props.device.id} and monitortype=log and eventType=AGENT and _all=${this.props.monitorQuery}`
     const queryChips = parseSearchQuery(query)
     this.props.router.push('/search')
     this.props.updateSearchParams(assign({}, this.props.params, {
@@ -112,7 +109,6 @@ export default class EventLogTable extends Component {
     })
   }
   renderOptions () {
-    const {query} = this.state
     const {selectedLogName, monitorLogNames} = this.props
     return (
       <div className="text-center">
@@ -127,7 +123,7 @@ export default class EventLogTable extends Component {
           </SelectField>
         </div>
         <div className="inline-block">
-          <TextField name="query" value={query} onChange={this.onChangeQuery.bind(this)} onKeyUp={this.onKeyupQuery.bind(this)}/>
+          <TextField name="query" value={this.props.monitorQuery} onChange={this.onChangeQuery.bind(this)} onKeyUp={this.onKeyupQuery.bind(this)}/>
           <FlatButton icon={<ActionSearch />} onTouchTap={this.onClickSearch.bind(this)}/>
         </div>
       </div>

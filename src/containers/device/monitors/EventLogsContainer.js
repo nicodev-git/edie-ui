@@ -13,7 +13,9 @@ import {
   updateMonitorRealTime,
   clearMonitors,
 
-  selectLogName
+  selectLogName,
+
+  updateMonitorQuery
 } from 'actions'
 
 @connect(
@@ -25,7 +27,9 @@ import {
     monitorLogNames: state.devices.monitorLogNames,
 
     params: state.search.params,
-    monitorsUpdateTime: state.devices.monitorsUpdateTime
+    monitorsUpdateTime: state.devices.monitorsUpdateTime,
+
+    monitorQuery: state.devices.monitorQuery
   }),
   {
     fetchDeviceEventLog,
@@ -37,7 +41,9 @@ import {
     updateMonitorRealTime,
     clearMonitors,
 
-    selectLogName
+    selectLogName,
+
+    updateMonitorQuery
   }
 )
 @withRouter
