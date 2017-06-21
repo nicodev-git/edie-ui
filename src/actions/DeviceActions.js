@@ -94,6 +94,9 @@ import {
 
   SHOW_MONITOR_HISTORY_MODAL,
 
+  SHOW_DEVICE_TAG_MODAL,
+  UPDATE_DEVICE_TAGS,
+
   NO_AUTH_ERROR
 } from './types'
 
@@ -968,5 +971,17 @@ export function showMonitorTagModal (visible) {
 export function updateMonitorTags (tags) {
   return dispatch => {
     dispatch({type: UPDATE_MONITOR_TAGS, tags})
+  }
+}
+
+export function showDeviceTagModal (visible) {
+  return dispatch => {
+    dispatch({type: SHOW_DEVICE_TAG_MODAL, visible})
+  }
+}
+
+export function updateDeviceTags (tags) {
+  return dispatch => {
+    dispatch({type: UPDATE_DEVICE_TAGS, tags})
   }
 }

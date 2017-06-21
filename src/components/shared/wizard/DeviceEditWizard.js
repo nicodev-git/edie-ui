@@ -41,6 +41,13 @@ class DeviceEditWizard extends React.Component {
     this.fnSaveDeb = debounce(this.onRequestSave.bind(this), 2000)
   }
 
+  componentDidMount () {
+    const {initialValues} = this.props
+    if (initialValues) {
+      this.props.updateDeviceTags(initialValues.tags || [])
+    }
+  }
+
   componentWillReceiveProps (nextProps) {
     let elem = document.getElementById('submitButton')
     if (nextProps.dirty) {
@@ -48,10 +55,6 @@ class DeviceEditWizard extends React.Component {
     } else {
       elem.style.backgroundColor = '#d1d1d1'
     }
-  }
-
-  onSelectTab () {
-
   }
 
   onRequestSave () {
@@ -126,7 +129,13 @@ class DeviceEditWizard extends React.Component {
 
   buildTags () {
     return (
-      <TagsView {...this.props}/>
+      <TagsView
+        {...this.props}
+        showMonitorTagModal={this.props.showDeviceTagModal}
+        updateMonitorTags={this.props.updateDeviceTags}
+        monitorTagModalOpen={this.props.deviceTagModalOpen}
+        monitorTags={this.props.deviceTags}
+      />
     )
   }
 

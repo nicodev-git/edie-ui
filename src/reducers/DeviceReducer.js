@@ -87,6 +87,10 @@ import {
   SHOW_FW_RULE_MODAL,
 
   SHOW_MONITOR_HISTORY_MODAL,
+
+  SHOW_DEVICE_TAG_MODAL,
+  UPDATE_DEVICE_TAGS,
+
   UPDATE_DEVICE_ERROR
 } from 'actions/types'
 
@@ -354,6 +358,11 @@ export default function (state = INITIAL_STATE, action) {
       return { ...state, monitorTagModalOpen: !!action.visible }
     case UPDATE_MONITOR_TAGS:
       return { ...state, monitorTags: action.tags }
+
+    case SHOW_DEVICE_TAG_MODAL:
+      return { ...state, deviceTagModalOpen: !!action.visible }
+    case UPDATE_DEVICE_TAGS:
+      return { ...state, deviceTags: action.tags }
   }
   return state
 }

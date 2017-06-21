@@ -5,7 +5,10 @@ import {
   openTplImageModal,
   closeTplImageModal,
   fetchImages,
-  uploadImage
+  uploadImage,
+
+  showDeviceTagModal,
+  updateDeviceTags
 } from 'actions'
 
 @connect(
@@ -15,12 +18,18 @@ import {
     tplImageModalVisible: state.settings.tplImageModalVisible,
     selectedTplImage: state.settings.selectedTplImage,
 
-    images: state.dashboard.images
+    images: state.dashboard.images,
+
+    deviceTagModalOpen: state.devices.deviceTagModalOpen,
+    deviceTags: state.devices.deviceTags
   }), {
     openTplImageModal,
     closeTplImageModal,
     fetchImages,
-    uploadImage
+    uploadImage,
+
+    showDeviceTagModal,
+    updateDeviceTags
   }
 )
 export default class DeviceEditWizardContainer extends React.Component {
