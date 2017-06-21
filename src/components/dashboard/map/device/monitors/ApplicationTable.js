@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import {TextField, FlatButton, RaisedButton, Menu, MenuItem, Popover} from 'material-ui'
+import {TextField, FlatButton, RaisedButton, MenuItem} from 'material-ui'
+import IconMenu from 'material-ui/IconMenu'
 import ActionSearch from 'material-ui/svg-icons/action/search'
 import moment from 'moment'
 import {assign} from 'lodash'
@@ -19,7 +20,6 @@ export default class ApplicationTable extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      tab: 'app'
     }
     this.columns = [{
       'displayName': 'Name',
@@ -89,12 +89,12 @@ export default class ApplicationTable extends Component {
   }
 
   onSocketOpen () {
-    this.sendTabMessage()
+    this.sendTabMessage(this.props.deviceAppTab)
   }
-  sendTabMessage () {
+  sendTabMessage (tab) {
     this.monitorSocket.send({
       action: 'enable-realtime',
-      monitors: this.state.tab,
+      monitors: tab,
       deviceId: this.props.device.id
     })
   }
@@ -130,31 +130,15 @@ export default class ApplicationTable extends Component {
     this.props.updateSearchTags([])
     this.props.updateQueryChips(queryChips)
   }
-  handleTouchTap (event) {
-    event.preventDefault()
-
-    this.setState({
-      open: true,
-      anchorEl: event.currentTarget
-    })
-  }
-
-  handleRequestClose () {
-    this.setState({
-      open: false
-    })
-  }
   onClickGetHotfix () {
-    this.setState({tab: 'hotfix', open: false}, () => {
-      this.props.clearMonitors()
-      this.sendTabMessage()
-    })
+    this.props.updateDeviceAppTab('hotfix')
+    this.props.clearMonitors()
+    this.sendTabMessage('hotfix')
   }
   onClickGetApp () {
-    this.setState({tab: 'app', open: false}, () => {
-      this.props.clearMonitors()
-      this.sendTabMessage()
-    })
+    this.props.updateDeviceAppTab('app')
+    this.props.clearMonitors()
+    this.sendTabMessage('app')
   }
   renderOptions () {
     const {monitorQuery} = this.props
@@ -165,19 +149,14 @@ export default class ApplicationTable extends Component {
           <FlatButton icon={<ActionSearch />} onTouchTap={this.onClickSearch.bind(this)}/>
         </div>
         <div className="pull-right">
-          <RaisedButton onTouchTap={this.handleTouchTap.bind(this)} label="More" primary/>&nbsp;
-          <Popover
-            open={this.state.open}
-            anchorEl={this.state.anchorEl}
+          <IconMenu
+            iconButtonElement={<RaisedButton label="More" primary/>}
             anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
             targetOrigin={{horizontal: 'left', vertical: 'top'}}
-            onRequestClose={this.handleRequestClose.bind(this)}
           >
-            <Menu>
-              <MenuItem primaryText="Applications" onTouchTap={this.onClickGetApp.bind(this)}/>
-              <MenuItem primaryText="Hotfix" onTouchTap={this.onClickGetHotfix.bind(this)}/>
-            </Menu>
-          </Popover>
+            <MenuItem primaryText="Applications" onTouchTap={this.onClickGetApp.bind(this)}/>
+            <MenuItem primaryText="Hotfix" onTouchTap={this.onClickGetHotfix.bind(this)}/>
+          </IconMenu>
         </div>
       </div>
     )
@@ -185,7 +164,7 @@ export default class ApplicationTable extends Component {
   renderBody () {
     return (
       <div style={{height: '100%'}}>
-        {this.state.tab === 'hotfix' &&
+        {this.props.deviceAppTab === 'hotfix' &&
           <InfiniteTable
             cells={this.hotfixColumns}
             ref="table1"
@@ -197,7 +176,7 @@ export default class ApplicationTable extends Component {
             data={this.props.monitorHotfixes}
           />
         }
-        {this.state.tab !== 'hotfix' &&
+        {this.props.deviceAppTab !== 'hotfix' &&
           <InfiniteTable
             cells={this.columns}
             ref="table2"

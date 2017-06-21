@@ -12,7 +12,8 @@ import {
   updateMonitorRealTime,
   clearMonitors,
 
-  updateMonitorQuery
+  updateMonitorQuery,
+  updateDeviceAppTab
 } from 'actions'
 
 @connect(
@@ -25,7 +26,8 @@ import {
     params: state.search.params,
     monitorsUpdateTime: state.devices.monitorsUpdateTime,
 
-    monitorQuery: state.devices.monitorQuery
+    monitorQuery: state.devices.monitorQuery,
+    deviceAppTab: state.devices.deviceAppTab
   }),
   {
     fetchDeviceApps,
@@ -37,7 +39,8 @@ import {
     updateMonitorRealTime,
     clearMonitors,
 
-    updateMonitorQuery
+    updateMonitorQuery,
+    updateDeviceAppTab
   }
 )
 @withRouter

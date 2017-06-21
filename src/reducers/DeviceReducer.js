@@ -92,6 +92,7 @@ import {
   UPDATE_DEVICE_TAGS,
 
   UPDATE_MONITOR_QUERY,
+  UPDATE_DEVICE_APP_TAB,
 
   UPDATE_DEVICE_ERROR
 } from 'actions/types'
@@ -367,6 +368,8 @@ export default function (state = INITIAL_STATE, action) {
       return { ...state, deviceTags: action.tags }
     case UPDATE_MONITOR_QUERY:
       return { ...state, monitorQuery: action.query }
+    case UPDATE_DEVICE_APP_TAB:
+      return { ...state, deviceAppTab: action.tab }
   }
   return state
 }

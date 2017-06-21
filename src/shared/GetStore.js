@@ -69,6 +69,8 @@ const initialState = {
     moniotrLogNames: [],
     selectedLogName: 'Application',
 
+    deviceAppTab: 'app',
+
     workflowCategories: [],
     workflows: [],
     workflowListDraw: 1

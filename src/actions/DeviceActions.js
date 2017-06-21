@@ -98,6 +98,7 @@ import {
   UPDATE_DEVICE_TAGS,
 
   UPDATE_MONITOR_QUERY,
+  UPDATE_DEVICE_APP_TAB,
 
   NO_AUTH_ERROR
 } from './types'
@@ -991,5 +992,11 @@ export function updateDeviceTags (tags) {
 export function updateMonitorQuery (query) {
   return dispatch => {
     dispatch({type: UPDATE_MONITOR_QUERY, query})
+  }
+}
+
+export function updateDeviceAppTab (tab) {
+  return dispatch => {
+    dispatch({type: UPDATE_DEVICE_APP_TAB, tab})
   }
 }
