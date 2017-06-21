@@ -16,6 +16,7 @@ import RaisedButton from 'material-ui/RaisedButton'
 
 import ImageUploaderModal from 'components/sidebar/settings/template/ImageUploaderModal'
 import ContentPanel from './ContentPanel'
+import TagsView from './input/TagsView'
 
 class DeviceEditWizard extends React.Component {
   constructor (props) {
@@ -118,7 +119,14 @@ class DeviceEditWizard extends React.Component {
     return (
       <div>
         {items}
+        {tab.include.indexOf('tags') >= 0 && this.buildTags()}
       </div>
+    )
+  }
+
+  buildTags () {
+    return (
+      <TagsView {...this.props}/>
     )
   }
 
