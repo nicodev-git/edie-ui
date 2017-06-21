@@ -99,6 +99,7 @@ const initialState = {
     fields: [],
     fieldTopValues: [],
     selectedWfs: [],
+    searchTags: [],
 
     searchOptions: [],
     sysSearchOptions: [],

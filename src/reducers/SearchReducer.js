@@ -34,6 +34,7 @@ import {
   REMOVE_SEARCH_WF,
   REPLACE_SEARCH_WFS,
   SHOW_SEARCH_TAG_MODAL,
+  UPDATE_SEARCH_TAGS,
 
   SHOW_SAVED_SEARCH_MODAL,
   SELECT_SEARCH,
@@ -160,6 +161,8 @@ export default function (state = {}, action) {
       return { ...state, graphMaximized: action.maximize }
     case SHOW_SEARCH_TAG_MODAL:
       return { ...state, searchTagModalOpen: !!action.visible }
+    case UPDATE_SEARCH_TAGS:
+      return { ...state, searchTags: action.tags || [] }
   }
   return state
 }

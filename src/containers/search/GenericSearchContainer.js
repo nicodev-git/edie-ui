@@ -56,7 +56,8 @@ import {
   fetchSearchRecordCount,
   maximizeSearchGraph,
 
-  showSearchTagModal
+  showSearchTagModal,
+  updateSearchTags
 } from 'actions'
 
 @withRouter
@@ -111,7 +112,8 @@ import {
     searchRecordCounts: state.search.searchRecordCounts,
     graphMaximized: state.search.graphMaximized,
 
-    searchTagModalOpen: state.search.searchTagModalOpen
+    searchTagModalOpen: state.search.searchTagModalOpen,
+    searchTags: state.search.searchTags
   }),
   dispatch => ({
     ...bindActionCreators({
@@ -165,7 +167,8 @@ import {
       fetchSearchRecordCount,
       maximizeSearchGraph,
 
-      showSearchTagModal
+      showSearchTagModal,
+      updateSearchTags
     }, dispatch)
   })
 )

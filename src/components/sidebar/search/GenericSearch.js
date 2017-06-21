@@ -400,10 +400,16 @@ class GenericSearch extends React.Component {
     this.props.showSearchGraphModal(true)
   }
   onClickTags () {
-    // this.props.showSearchTags()
+    this.props.showSearchTagModal(true)
   }
   onPickTag (tag) {
-    // this.props.addDeviceTplTag(tag.name)
+    const {searchTags, updateSearchTags} = this.props
+    if (searchTags.indexOf(tag.name) >= 0) return
+    updateSearchTags([...searchTags, tag.name])
+  }
+  onClickRemoveTagChip (index) {
+    const {searchTags, updateSearchTags} = this.props
+    updateSearchTags(searchTags.filter((p, i) => i !== index))
   }
   renderFields () {
     const {selectedField} = this.props
@@ -571,7 +577,7 @@ class GenericSearch extends React.Component {
   }
 
   render () {
-    const { handleSubmit, selectedWf, params, monitorTemplates } = this.props
+    const { handleSubmit, selectedWf, params, monitorTemplates, searchTags } = this.props
     const { severity, dateFrom, dateTo, monitorTypes } = params
     const selectedCollections = params.collections
     const workflow = this.props.workflows.filter(m => m.id === selectedWf)
@@ -631,6 +637,16 @@ class GenericSearch extends React.Component {
                     <b>Workflow: </b>{p.name}
                   </Chip>
                   )}
+                {
+                  searchTags.map((p, i) =>
+                    <Chip
+                      key={i}
+                      style={chipStyles.chip}
+                      onRequestDelete={this.onClickRemoveTagChip.bind(this, i)}>
+                      <b>Tag: </b>{p}
+                    </Chip>
+                  )
+                }
               </div>
             </div>
 

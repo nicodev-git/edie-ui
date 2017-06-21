@@ -28,6 +28,7 @@ import {
   REMOVE_SEARCH_WF,
   REPLACE_SEARCH_WFS,
   SHOW_SEARCH_TAG_MODAL,
+  UPDATE_SEARCH_TAGS,
 
   UPDATE_USER_INFO,
 
@@ -350,5 +351,11 @@ export const maximizeSearchGraph = (maximize) => {
 export const showSearchTagModal = (visible) => {
   return dispatch => {
     dispatch({type: SHOW_SEARCH_TAG_MODAL, visible})
+  }
+}
+
+export const updateSearchTags = (tags) => {
+  return dispatch => {
+    dispatch({type: UPDATE_SEARCH_TAGS, tags})
   }
 }
