@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { assign } from 'lodash'
 import { reduxForm } from 'redux-form'
-import {Chip, RaisedButton} from 'material-ui'
 
 import TextInput from './input/TextInput'
 import Checkbox from './input/Checkbox'
@@ -15,7 +14,8 @@ import {util} from './WizardUtil'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import LinearProgress from 'material-ui/LinearProgress'
 import DeviceWizardView from './DeviceWizardView'
-import { primeColor, chipStyles } from 'style/materialStyles'
+import TagsView from './input/TagsView'
+import { primeColor } from 'style/materialStyles'
 
 class DeviceWizard extends Component {
   static childContextTypes = {
@@ -288,19 +288,8 @@ class DeviceWizard extends Component {
   }
 
   renderTags () {
-    const {tags, onClickAddTag, onClickDeleteTag, tagModal} = this.props
     return (
-      <div>
-        <div>
-          <RaisedButton label="Add Tag" onTouchTap={onClickAddTag}/>
-        </div>
-        <div style={chipStyles.wrapper}>
-          {tags.map((t, i) =>
-            <Chip key={i} style={chipStyles.chip} onRequestDelete={() => onClickDeleteTag(i)}>{t}</Chip>
-          )}
-        </div>
-        {tagModal}
-      </div>
+      <TagsView {...this.props}/>
     )
   }
 
