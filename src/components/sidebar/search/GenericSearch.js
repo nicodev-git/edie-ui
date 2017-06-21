@@ -119,7 +119,8 @@ class GenericSearch extends React.Component {
         query,
         severity: 'HIGH,MEDIUM',
         collections: 'incident',
-        workflow: ''
+        workflow: '',
+        tag: ''
       })
 
       this.props.updateSearchParams(params)
@@ -408,11 +409,20 @@ class GenericSearch extends React.Component {
   onPickTag (tag) {
     const {searchTags, updateSearchTags} = this.props
     if (searchTags.indexOf(tag.name) >= 0) return
-    updateSearchTags([...searchTags, tag.name])
+    const tags = [...searchTags, tag.name]
+    updateSearchTags(tags)
+
+    this.props.updateSearchParams(assign({}, this.props.params, {
+      tag: tags.join(',')
+    }))
   }
   onClickRemoveTagChip (index) {
     const {searchTags, updateSearchTags} = this.props
-    updateSearchTags(searchTags.filter((p, i) => i !== index))
+    const tags = searchTags.filter((p, i) => i !== index)
+    updateSearchTags(tags)
+    this.props.updateSearchParams(assign({}, this.props.params, {
+      tag: tags.join(',')
+    }))
   }
   renderFields () {
     const {selectedField} = this.props

@@ -91,6 +91,7 @@ export default class EventLogTable extends Component {
       severity: 'HIGH,MEDIUM',
       collections: 'event',
       workflow: '',
+      tag: '',
       dateFrom: moment().startOf('year').format(dateFormat),
       dateTo: moment().endOf('year').format(dateFormat)
     }))

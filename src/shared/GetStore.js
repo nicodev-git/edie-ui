@@ -79,6 +79,7 @@ const initialState = {
     params: {
       query: '',
       workflow: '',
+      tag: '',
       collections: 'incident,event',
       severity: 'HIGH,MEDIUM',
       monitorTypes: '',

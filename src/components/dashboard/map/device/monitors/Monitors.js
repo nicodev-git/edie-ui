@@ -71,6 +71,7 @@ export default class Monitors extends React.Component {
       severity: 'HIGH,MEDIUM',
       collections: 'event',
       workflow: '',
+      tag: '',
       dateFrom: moment().startOf('year').valueOf(),
       dateTo: moment().endOf('year').valueOf()
     }))
