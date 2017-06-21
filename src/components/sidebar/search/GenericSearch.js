@@ -58,6 +58,8 @@ class GenericSearch extends React.Component {
           return (
             <div className="padding-sm bt-gray">{entity.rawdata}</div>
           )
+        } else if (viewFilter === viewFilters.notNull.name) {
+
         }
         if (!entity) return <span/>
         const highlighted = this.getHighlighted(entity, rowData.highlights)
@@ -74,7 +76,10 @@ class GenericSearch extends React.Component {
         }
         if (!severity) delete data.severity
 
-        return <div className="padding-sm bt-gray">{renderEntity(data)}</div>
+        const options = {
+          notNull: viewFilter === viewFilters.notNull.name
+        }
+        return <div className="padding-sm bt-gray">{renderEntity(data, options)}</div>
       }
     }]
 

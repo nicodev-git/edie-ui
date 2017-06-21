@@ -1,14 +1,14 @@
 import React from 'react'
 import {assign, concat, isArray, keys} from 'lodash'
 
-export function renderEntity (entity) {
+export function renderEntity (entity, options) {
   const data = assign({}, entity)
   if (data.id) delete data.id
   if (data._links) delete data._links
-  return renderData(data, false, '')
+  return renderData(data, false, '', options)
 }
 
-function renderValue (val, path) {
+function renderValue (val, path, options) {
   let startChar, endChar
   let children = []
   if (typeof val === 'object' && val !== null) {
@@ -17,11 +17,11 @@ function renderValue (val, path) {
 
     if (isArray(val)) {
       val.forEach((item, index) => {
-        children.push(renderValue(item, `${path}[${index}]`))
+        children.push(renderValue(item, `${path}[${index}]`, options))
         if (index < val.length - 1) children.push(<div className="field-separator" key={`${path}-sep-${index}`}/>)
       })
     } else {
-      children = renderData(val, true, path)
+      children = renderData(val, true, path, options)
     }
 
     return concat([],
@@ -35,12 +35,13 @@ function renderValue (val, path) {
   )
 }
 
-function renderData (entity, isChildren, path) {  // eslint-disable-line
+function renderData (entity, isChildren, path, options) {  // eslint-disable-line
   let children = []
   const allKeys = keys(entity)
   allKeys.forEach((key, index) => {
+    if (entity[key] === null && options && options['notNull']) return
     children.push(<span className="field-key" key={`${path}-key-${key}`}>{key} = </span>)
-    children = concat(children, renderValue(entity[key], `${path}.${key}`))
+    children = concat(children, renderValue(entity[key], `${path}.${key}`, options))
     if (index < allKeys.length - 1) children.push(<div className="field-separator" key={`${path}-sep-${index}`}/>)
   })
   if (isChildren) return children
