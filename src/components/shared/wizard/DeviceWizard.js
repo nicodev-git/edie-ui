@@ -62,7 +62,7 @@ class DeviceWizard extends Component {
   }
 
   handleFormSubmit (formProps) {
-    const { extraParams, onFinish, editParams } = this.props
+    const { extraParams, onFinish, editParams, canAddTags, monitorTags } = this.props
     const { monitors, currentDevice } = this.state
     let params = {}
     if (editParams) {
@@ -80,6 +80,7 @@ class DeviceWizard extends Component {
         params
       }
     )
+    if (canAddTags) props.tags = monitorTags || []
     console.log(props)
     this.closeModal(true)
     onFinish && onFinish(null, props, currentDevice.server.url)

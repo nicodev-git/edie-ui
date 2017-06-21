@@ -1,5 +1,6 @@
 import React from 'react'
 import {Chip, RaisedButton} from 'material-ui'
+import TagPickerModal from 'containers/settings/tag/TagPickerModalContainer'
 
 import { chipStyles } from 'style/materialStyles'
 
