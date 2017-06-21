@@ -13,7 +13,6 @@ export default class NetworkTable extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      query: ''
     }
     this.columns = [{
       'displayName': 'Name',
@@ -40,6 +39,7 @@ export default class NetworkTable extends React.Component {
   }
   componentWillMount () {
     this.props.clearMonitors()
+    this.props.updateMonitorQuery()
   }
   componentDidMount () {
     this.monitorSocket = new MonitorSocket({
@@ -69,16 +69,6 @@ export default class NetworkTable extends React.Component {
   onRowDblClick () {
     const selected = this.refs.table.getSelected()
     this.props.openProcessModal(selected)
-  }
-  onChangeQuery (e) {
-    this.setState({
-      query: e.target.value
-    })
-  }
-  onKeyupQuery (e) {
-    if (e.keyCode === 13) {
-      this.onClickSearch()
-    }
   }
   renderOptions () {
     return (

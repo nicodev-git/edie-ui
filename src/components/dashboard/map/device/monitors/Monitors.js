@@ -1,8 +1,5 @@
 import React from 'react'
-import {RaisedButton, TextField, FlatButton} from 'material-ui'
-import ActionSearch from 'material-ui/svg-icons/action/search'
-import moment from 'moment'
-import { assign } from 'lodash'
+import {RaisedButton} from 'material-ui'
 
 import MonitorTable from './MonitorTable'
 import DiskTable from './DiskTable'
@@ -18,12 +15,6 @@ import StatusImg from './StatusImg'
 import { parseSearchQuery } from 'shared/Global'
 
 export default class Monitors extends React.Component {
-  constructor (props) {
-    super(props)
-    this.state = {
-      query: ''
-    }
-  }
   componentWillMount () {
     this.props.clearMonitors()
   }
@@ -42,52 +33,6 @@ export default class Monitors extends React.Component {
 
   onClickDeleteMonitor () {
     this.getMonitorTable().onClickDeleteMonitor()
-  }
-
-  onChangeQuery (e) {
-    this.setState({
-      query: e.target.value
-    })
-  }
-  onKeyupQuery (e) {
-    if (e.keyCode === 13) {
-      this.onClickSearch()
-    }
-  }
-  onClickSearch () {
-    const {selected} = this.state
-    let monitortype = ''
-    if (selected === 'eventlog') monitortype = 'log'
-    else if (selected === 'process') monitortype = 'process'
-    else if (selected === 'application') monitortype = 'app'
-    console.log(this.props.params)
-
-    const query = `deviceid=${this.props.device.id} and monitortype=${monitortype} and eventType=AGENT and _all=${this.state.query}`
-    const queryChips = parseSearchQuery(query)
-
-    this.props.router.push('/search')
-    this.props.updateSearchParams(assign({}, this.props.params, {
-      query,
-      severity: 'HIGH,MEDIUM',
-      collections: 'event',
-      workflow: '',
-      tag: '',
-      dateFrom: moment().startOf('year').valueOf(),
-      dateTo: moment().endOf('year').valueOf()
-    }))
-
-    this.props.replaceSearchWfs([])
-    this.props.updateSearchTags([])
-    this.props.updateQueryChips(queryChips)
-  }
-  renderSearch () {
-    const {selected, query} = this.state
-    return (
-      <div className={`inline-block ${selected === 'monitors' ? 'hidden' : ''}`}>
-        <TextField name="query" value={query} onChange={this.onChangeQuery.bind(this)} onKeyUp={this.onKeyupQuery.bind(this)}/>
-        <FlatButton icon={<ActionSearch />} onTouchTap={this.onClickSearch.bind(this)}/>
-      </div>
-    )
   }
   renderOptions () {
     return (

@@ -19,7 +19,6 @@ export default class ProcessTable extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      query: ''
     }
     this.columns = [{
       'displayName': 'Name',
@@ -75,9 +74,7 @@ export default class ProcessTable extends React.Component {
     this.props.openProcessModal(selected)
   }
   onChangeQuery (e) {
-    this.setState({
-      query: e.target.value
-    })
+    this.props.updateMonitorQuery(e.target.value)
   }
   onKeyupQuery (e) {
     if (e.keyCode === 13) {
@@ -85,7 +82,7 @@ export default class ProcessTable extends React.Component {
     }
   }
   onClickSearch () {
-    const query = `deviceid=${this.props.device.id} and monitortype=process and eventType=AGENT and _all=${this.state.query}`
+    const query = `deviceid=${this.props.device.id} and monitortype=process and eventType=AGENT and _all=${this.props.monitorQuery}`
     const queryChips = parseSearchQuery(query)
 
     this.props.router.push('/search')
@@ -104,11 +101,11 @@ export default class ProcessTable extends React.Component {
     this.props.updateQueryChips(queryChips)
   }
   renderOptions () {
-    const {query} = this.state
+    const {monitorQuery} = this.props
     return (
       <div className="text-center">
         <div className="inline-block">
-          <TextField name="query" value={query} onChange={this.onChangeQuery.bind(this)} onKeyUp={this.onKeyupQuery.bind(this)}/>
+          <TextField name="query" value={monitorQuery} onChange={this.onChangeQuery.bind(this)} onKeyUp={this.onKeyupQuery.bind(this)}/>
           <FlatButton icon={<ActionSearch />} onTouchTap={this.onClickSearch.bind(this)}/>
         </div>
       </div>
