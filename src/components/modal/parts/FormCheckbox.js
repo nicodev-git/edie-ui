@@ -4,14 +4,14 @@ import { checkboxStyle } from 'style/materialStyles'
 
 const FormCheckbox = ({input, label, labelPosition, meta: { touched, error }, ...custom}) => (
   <Checkbox
+    {...input}
+    {...custom}
     label={label}
-    labelPosition={labelPosition || 'left'}
+    labelPosition={labelPosition || 'right'}
     labelStyle={checkboxStyle}
     iconStyle={checkboxStyle}
     checked={!!input.value}
     onCheck={(e) => input.onChange(e)}
-    {...input}
-    {...custom}
   />
 )
 
