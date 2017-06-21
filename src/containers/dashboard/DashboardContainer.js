@@ -43,7 +43,8 @@ import {
   showSidebarMessageMenu,
 
   fetchDashboardStats,
-  updateDeviceIncident
+  updateDeviceIncident,
+  showCommentsModal
 } from 'actions'
 
 export default connect(
@@ -81,7 +82,10 @@ export default connect(
     attackers: state.attackers.attackers,
 
     envVars: state.settings.envVars,
-    userInfo: state.dashboard.userInfo
+    userInfo: state.dashboard.userInfo,
+
+    commentsModalVisible: state.dashboard.commentsModalVisible,
+    commentsIncident: state.dashboard.commentsIncident
   }), {
 
     fetchBigIncidents,
@@ -126,6 +130,7 @@ export default connect(
     showSidebarMessageMenu,
 
     fetchDashboardStats,
-    updateDeviceIncident
+    updateDeviceIncident,
+    showCommentsModal
   }
 )(Dashboard)

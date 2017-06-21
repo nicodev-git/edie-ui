@@ -15,7 +15,6 @@ export default class IncidentTable extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      commentModalVisible: false
     }
 
     this.cells = [{
@@ -101,23 +100,10 @@ export default class IncidentTable extends Component {
   }
 
   showIncidentComments (incident) {
-    this.setState({
-      incident,
-      commentModalVisible: true
-    })
-  }
-
-  refresh () {
-    this.refs.table &&
-        this.refs.table.refresh()
-  }
-
-  reloadTable () {
-    this.refresh()
+    this.props.showCommentsModal(true, incident)
   }
 
   onRowDblClick () {
-    console.log(arguments)
   }
 
   render () {
@@ -136,13 +122,14 @@ export default class IncidentTable extends Component {
             sort: 'startTimestamp,desc'
           }}
         />
-        {this.state.commentModalVisible &&
-        <CommentsModal
-          incident={this.state.incident}
-          updateDeviceIncident={this.props.updateDeviceIncident}
-          onClose={() => {
-            this.setState({commentModalVisible: false})
-          }}/>}
+        {
+          this.props.commentsModalVisible &&
+          <CommentsModal
+            incident={this.props.commentsIncident}
+            updateDeviceIncident={this.props.updateDeviceIncident}
+            onClose={() => this.props.showCommentsModal(false)}/>
+        }
+        <ReactTooltip/>
       </div>
     )
   }

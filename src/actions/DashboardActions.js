@@ -205,8 +205,8 @@ export function updateSidebarSearchActive (active) {
   }
 }
 
-export function showCommentsModal (visible) {
+export function showCommentsModal (visible, incident) {
   return dispatch => {
-    dispatch({type: SHOW_COMMENTS_MODAL, visible})
+    dispatch({type: SHOW_COMMENTS_MODAL, visible, incident})
   }
 }

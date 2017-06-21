@@ -4,12 +4,6 @@ import moment from 'moment'
 import { assign, concat } from 'lodash'
 
 export default class CommentsModal extends Component {
-  constructor (props) {
-    super(props)
-    this.state = {
-    }
-  }
-
   onHide () {
     this.onClickClose()
   }
