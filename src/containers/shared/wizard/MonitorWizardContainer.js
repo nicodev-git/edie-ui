@@ -39,7 +39,7 @@ import {
 export default class MonitorWizardContainer extends React.Component {
   render () {
     return (
-      <MonitorWizard {...this.props} />
+      <MonitorWizard {...this.props} canAddTags/>
     )
   }
 }

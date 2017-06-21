@@ -126,6 +126,7 @@ class DeviceWizard extends Component {
   }
 
   buildStep (index) {
+    const {canAddTags} = this.props
     const currentDevice = this.state.currentDevice
     const stepConfig = currentDevice.steps[index]
 
@@ -140,7 +141,8 @@ class DeviceWizard extends Component {
 
     return (
       <div key={index} className={`${(index === (this.state.current - 1)) ? ' active' : 'hidden'}`}>
-          {items}
+        {items}
+        {index === 0 && canAddTags ? this.renderTags() : null}
       </div>
     )
   }
@@ -284,8 +286,13 @@ class DeviceWizard extends Component {
     )
   }
 
+  renderTags () {
+    const {tags, onClickAddTag, onClickDeleteTag, tagModal} = this.props
+
+  }
+
   render () {
-    const { handleSubmit } = this.props
+    const { handleSubmit, canAddTags } = this.props
     const { current, steps } = this.state
     /* let cssPrevious = ''
     if (current < 2) cssPrevious = onStep0 ? '' : 'hidden' */
@@ -305,6 +312,7 @@ class DeviceWizard extends Component {
           onPrev={this.onClickPrevious.bind(this)}
           onNext={this.onClickNext.bind(this)}
           onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
+          canAddTags={canAddTags}
         />
     )
   }
