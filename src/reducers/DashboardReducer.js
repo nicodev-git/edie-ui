@@ -33,6 +33,7 @@ import {
   UPDATE_USER_INFO,
   OPEN_PROFILE_MODAL,
   CLOSE_PROFILE_MODAL,
+  CHANGE_PROFILE_IMG,
 
   CLOSE_API_ERROR_MODAL,
 
@@ -183,10 +184,13 @@ export default function (state = {}, action) {
       return { ...state, userInfo: action.data }
 
     case OPEN_PROFILE_MODAL:
-      return { ...state, profileModalVisible: true }
+      return { ...state, profileModalVisible: true, profileImg: null }
 
     case CLOSE_PROFILE_MODAL:
-      return { ...state, profileModalVisible: false }
+      return { ...state, profileModalVisible: false, profileImg: null }
+
+    case CHANGE_PROFILE_IMG:
+      return { ...state, profileImg: action.img }
 
     case API_ERROR:
       return { ...state, apiErrorModalOpen: true, apiError: action.msg }

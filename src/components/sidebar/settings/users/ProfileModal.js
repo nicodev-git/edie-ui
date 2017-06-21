@@ -7,6 +7,11 @@ import { showAlert } from 'components/shared/Alert'
 import { extImageBaseUrl } from 'shared/Global'
 import ProfileModalView from './ProfileModalView'
 
+const roleOptions = [
+  {value: 'ADMIN', label: 'Admin'},
+  {value: 'USER', label: 'User'}
+]
+
 class ProfileModal extends Component { // eslint-disable-line react/no-multi-comp
   constructor (props) {
     super(props)
@@ -17,7 +22,6 @@ class ProfileModal extends Component { // eslint-disable-line react/no-multi-com
     this.closeModal = this.closeModal.bind(this)
     this.handleFormSubmit = this.handleFormSubmit.bind(this)
     this.onChangeImage = this.onChangeImage.bind(this)
-    this.onChangeMap = this.onChangeMap.bind(this)
     this.renderMapOptions = this.renderMapOptions.bind(this)
   }
 
@@ -39,7 +43,6 @@ class ProfileModal extends Component { // eslint-disable-line react/no-multi-com
       console.log(props)
       this.props.updateUserProfile(props)
     })
-    this.onChangeMap(values.map)
   }
 
   uploadUserImage (cb) {
@@ -78,32 +81,15 @@ class ProfileModal extends Component { // eslint-disable-line react/no-multi-com
       reader.readAsDataURL(input.files[0])
     }
   }
-
-  onChangeMap (map) {
-    this.setState({
-      defaultmap: map
-    })
-  }
-
-  renderMapOptions () {
-    let maps = this.props.maps
-    let options = maps.map(item => ({value: item.id, label: item.name}))
-    return options
-  }
   onChangeRoles (e, index, value) {
     this.props.change('roles', value)
   }
   render () {
-    let { user, handleSubmit } = this.props
-    let imgSrc = this.state.imgSrc || (`${extImageBaseUrl}${user.image || 'unknown.png'}`)
-    console.log(imgSrc)
-    let mapOptions = this.renderMapOptions()
-    let roleOptions = [
-      {value: 'ADMIN', label: 'Admin'},
-      {value: 'USER', label: 'User'}
-    ]
-    let defaultChecked = (user.enabled === true)
-    let checkboxLabel = 'User Enabled'
+    const { user, handleSubmit } = this.props
+    const imgSrc = this.state.imgSrc || (`${extImageBaseUrl}${user.image || 'unknown.png'}`)
+    const mapOptions = this.props.maps.map(item => ({value: item.id, label: item.name}))
+    const defaultChecked = (user.enabled === true)
+    const checkboxLabel = 'User Enabled'
     return (
       <ProfileModalView
         show

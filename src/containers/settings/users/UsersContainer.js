@@ -18,6 +18,7 @@ import {
 
   openProfileModal,
   closeProfileModal,
+  changeProfileImg,
   fetchUserInfo
 } from 'actions'
 
@@ -31,7 +32,8 @@ import {
 
     user: state.dashboard.userInfo || {},
     maps: state.dashboard.maps,
-    profileModalVisible: state.dashboard.profileModalVisible
+    profileModalVisible: state.dashboard.profileModalVisible,
+    profileImg: state.dashboard.profileImg
   }),
   dispatch => ({
     ...bindActionCreators({
@@ -48,6 +50,7 @@ import {
 
       openProfileModal,
       closeProfileModal,
+      changeProfileImg,
       fetchUserInfo
     }, dispatch)
   })

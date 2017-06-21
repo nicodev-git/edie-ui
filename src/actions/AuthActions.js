@@ -7,6 +7,7 @@ import {
   UPDATE_USER_INFO,
   OPEN_PROFILE_MODAL,
   CLOSE_PROFILE_MODAL,
+  CHANGE_PROFILE_IMG,
   OPEN_ACTIVATION_MODAL,
   CLOSE_ACTIVATION_MODAL,
   ACTIVATE_USER,
@@ -124,6 +125,12 @@ export const closeProfileModal = () => {
     dispatch({
       type: CLOSE_PROFILE_MODAL
     })
+  }
+}
+
+export function changeProfileImg (img) {
+  return dispatch => {
+    dispatch({type: CHANGE_PROFILE_IMG, img})
   }
 }
 
