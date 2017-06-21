@@ -33,6 +33,7 @@ import {
   ADD_SEARCH_WF,
   REMOVE_SEARCH_WF,
   REPLACE_SEARCH_WFS,
+  SHOW_SEARCH_TAG_MODAL,
 
   SHOW_SAVED_SEARCH_MODAL,
   SELECT_SEARCH,
@@ -157,6 +158,8 @@ export default function (state = {}, action) {
       return { ...state, searchRecordCounts: action.data }
     case MAXIMIZE_SEARCH_GRAPH:
       return { ...state, graphMaximized: action.maximize }
+    case SHOW_SEARCH_TAG_MODAL:
+      return { ...state, searchTagModalOpen: !!action.visible }
   }
   return state
 }

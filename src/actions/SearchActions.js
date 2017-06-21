@@ -27,6 +27,7 @@ import {
   ADD_SEARCH_WF,
   REMOVE_SEARCH_WF,
   REPLACE_SEARCH_WFS,
+  SHOW_SEARCH_TAG_MODAL,
 
   UPDATE_USER_INFO,
 
@@ -343,5 +344,11 @@ export const fetchSearchRecordCount = (params) => {
 export const maximizeSearchGraph = (maximize) => {
   return dispatch => {
     dispatch({type: MAXIMIZE_SEARCH_GRAPH, maximize})
+  }
+}
+
+export const showSearchTagModal = (visible) => {
+  return dispatch => {
+    dispatch({type: SHOW_SEARCH_TAG_MODAL, visible})
   }
 }

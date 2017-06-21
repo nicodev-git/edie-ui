@@ -26,6 +26,7 @@ import SearchFieldsModal from './SearchFieldsModal'
 import ViewFilterModal from './ViewFilterModal'
 
 import SearchGraphModal from './SearchGraphModal'
+import TagPickerModal from 'containers/settings/tag/TagPickerModalContainer'
 
 class GenericSearch extends React.Component {
   constructor (props) {
@@ -401,6 +402,9 @@ class GenericSearch extends React.Component {
   onClickTags () {
     // this.props.showSearchTags()
   }
+  onPickTag (tag) {
+    // this.props.addDeviceTplTag(tag.name)
+  }
   renderFields () {
     const {selectedField} = this.props
     return (
@@ -557,6 +561,15 @@ class GenericSearch extends React.Component {
     )
   }
 
+  renderTagsModal () {
+    if (!this.props.searchTagModalOpen) return null
+    return (
+      <TagPickerModal
+        onPick={this.onPickTag.bind(this)}
+        onClickClose={() => this.props.showSearchTagModal(false)}/>
+    )
+  }
+
   render () {
     const { handleSubmit, selectedWf, params, monitorTemplates } = this.props
     const { severity, dateFrom, dateTo, monitorTypes } = params
@@ -662,6 +675,7 @@ class GenericSearch extends React.Component {
             </div>
           </div>
           {this.renderFilterViewModal()}
+          {this.renderTagsModal()}
         </TabPageBody>
       </TabPage>
     )
