@@ -39,7 +39,10 @@ import {
 
   addDeviceTplTag,
   removeDeviceTplTag,
-  showDeviceTplTagModal
+  showDeviceTplTagModal,
+
+  showMonitorTplTagModal,
+  updateMonitorTplTags
 } from 'actions'
 
 @connect(
@@ -104,7 +107,10 @@ import {
 
       addDeviceTplTag,
       removeDeviceTplTag,
-      showDeviceTplTagModal
+      showDeviceTplTagModal,
+
+      showMonitorTplTagModal,
+      updateMonitorTplTags
     }, dispatch)
   })
 )

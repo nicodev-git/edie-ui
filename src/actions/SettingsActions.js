@@ -61,6 +61,9 @@ import {
   UPDATE_USER_INFO,
   SHOW_IMPORT_SYNC_MODAL,
 
+  SHOW_MONITOR_TPL_TAG_MODAL,
+  UPDATE_MONITOR_TPL_TAGS,
+
   NO_AUTH_ERROR
 } from './types'
 
@@ -586,5 +589,17 @@ export const importSyncData = (formData) => {
         apiError(dispatch, errorThrown)
       }
     })
+  }
+}
+
+export const showMonitorTplTagModal = (visible) => {
+  return dispatch => {
+    dispatch({type: SHOW_MONITOR_TPL_TAG_MODAL, visible})
+  }
+}
+
+export const updateMonitorTplTags = (tags) => {
+  return dispatch => {
+    dispatch({type: UPDATE_MONITOR_TPL_TAGS, tags})
   }
 }

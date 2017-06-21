@@ -56,6 +56,7 @@ const initialState = {
     wizardInitialValues: {},
     monitorWizardVisible: false,
     monitorTags: [],
+    deviceTags: [],
 
     basicMonitors: [],
     monitors: [],

@@ -26,6 +26,9 @@ import {
   CLOSE_MONITOR_TEMPLATE_MODAL,
   SHARE_MONITOR_TEMPLATE,
 
+  SHOW_MONITOR_TPL_TAG_MODAL,
+  UPDATE_MONITOR_TPL_TAGS,
+
   OPEN_TPL_IMAGE_MODAL,
   CLOSE_TPL_IMAGE_MODAL,
 
@@ -442,6 +445,11 @@ export default function (state = {}, action) {
 
     case SHOW_IMPORT_SYNC_MODAL:
       return { ...state, importSyncModalOpen: !!action.visible }
+
+    case SHOW_MONITOR_TPL_TAG_MODAL:
+      return { ...state, monitorTplTagModalOpen: !!action.visible }
+    case UPDATE_MONITOR_TPL_TAGS:
+      return { ...state, monitorTplTags: action.tags || [] }
   }
   return state
 }
