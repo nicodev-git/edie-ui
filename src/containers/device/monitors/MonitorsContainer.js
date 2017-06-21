@@ -19,6 +19,7 @@ import {
 
   updateSearchParams,
   replaceSearchWfs,
+  updateSearchTags,
   updateQueryChips,
 
   fetchMonitorOS,
@@ -73,6 +74,7 @@ import {
 
     updateSearchParams,
     replaceSearchWfs,
+    updateSearchTags,
     updateQueryChips,
 
     fetchMonitorOS,

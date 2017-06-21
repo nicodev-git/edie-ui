@@ -8,6 +8,7 @@ import {
 
   updateSearchParams,
   replaceSearchWfs,
+  updateSearchTags,
   updateQueryChips,
   updateMonitorRealTime,
   clearMonitors,
@@ -31,6 +32,7 @@ import {
 
     updateSearchParams,
     replaceSearchWfs,
+    updateSearchTags,
     updateQueryChips,
     updateMonitorRealTime,
     clearMonitors,

@@ -286,6 +286,7 @@ export default class MainIncidents extends Component {
     }))
 
     this.props.replaceSearchWfs([])
+    this.props.updateSearchTags([])
     this.props.updateQueryChips(queryChips)
   }
 

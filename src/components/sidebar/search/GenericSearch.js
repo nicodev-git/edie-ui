@@ -95,6 +95,7 @@ class GenericSearch extends React.Component {
 
         this.props.updateSearchParams(params)
         this.props.replaceSearchWfs([])
+        this.props.updateSearchTags([])
         this.props.updateQueryChips(queryChips)
         this.props.change('query', '')
         this.props.change('searchOptionIndex', '')
@@ -123,6 +124,7 @@ class GenericSearch extends React.Component {
 
       this.props.updateSearchParams(params)
       this.props.replaceSearchWfs([])
+      this.props.updateSearchTags([])
       this.props.updateQueryChips(queryChips)
       this.props.change('query', '')
       this.props.change('searchOptionIndex', '')
@@ -305,6 +307,7 @@ class GenericSearch extends React.Component {
     this.props.updateSearchParams(params)
     this.props.updateQueryChips(newQueryChips)
     this.props.replaceSearchWfs([])
+    this.props.updateSearchTags([])
     this.props.change('query', '')
   }
 

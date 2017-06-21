@@ -99,6 +99,7 @@ export default class ProcessTable extends React.Component {
     }))
 
     this.props.replaceSearchWfs([])
+    this.props.updateSearchTags([])
     this.props.updateQueryChips(queryChips)
   }
   renderOptions () {

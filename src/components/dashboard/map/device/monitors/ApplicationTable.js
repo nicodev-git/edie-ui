@@ -128,6 +128,7 @@ export default class ApplicationTable extends Component {
     }))
 
     this.props.replaceSearchWfs([])
+    this.props.updateSearchTags([])
     this.props.updateQueryChips(queryChips)
   }
   handleTouchTap (event) {

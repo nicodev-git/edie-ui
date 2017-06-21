@@ -16,6 +16,7 @@ import {
   replaceSearchWfs,
   updateQueryChips,
   updateSearchParams,
+  updateSearchTags,
 
   fixDeviceIncidents,
   updateDeviceIncident
@@ -46,6 +47,7 @@ import MainIncidents from 'components/dashboard/map/device/main/incidents/MainIn
       replaceSearchWfs,
       updateQueryChips,
       updateSearchParams,
+      updateSearchTags,
 
       fixDeviceIncidents,
       updateDeviceIncident

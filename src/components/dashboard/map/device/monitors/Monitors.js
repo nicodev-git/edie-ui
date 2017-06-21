@@ -76,6 +76,7 @@ export default class Monitors extends React.Component {
     }))
 
     this.props.replaceSearchWfs([])
+    this.props.updateSearchTags([])
     this.props.updateQueryChips(queryChips)
   }
   renderSearch () {
