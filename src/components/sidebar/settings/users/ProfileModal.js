@@ -16,13 +16,10 @@ class ProfileModal extends Component { // eslint-disable-line react/no-multi-com
   constructor (props) {
     super(props)
     this.state = {
-      imgSrc: '',
-      maps: []
     }
     this.closeModal = this.closeModal.bind(this)
     this.handleFormSubmit = this.handleFormSubmit.bind(this)
     this.onChangeImage = this.onChangeImage.bind(this)
-    this.renderMapOptions = this.renderMapOptions.bind(this)
   }
 
   componentWillMount () {
@@ -37,7 +34,7 @@ class ProfileModal extends Component { // eslint-disable-line react/no-multi-com
     const {user} = this.props
     this.uploadUserImage(image => {
       const props = assign({}, user, values, {
-        mapids: []// [this.refs.defaultmap.value]
+        mapids: []
       })
       if (image) props.image = image
       console.log(props)
@@ -74,9 +71,7 @@ class ProfileModal extends Component { // eslint-disable-line react/no-multi-com
     if (input.files && input.files[0]) {
       let reader = new FileReader() // eslint-disable-line no-undef
       reader.onload = v => {
-        this.setState({
-          imgSrc: v.target.result
-        })
+        this.props.changeProfileImg(v.target.result)
       }
       reader.readAsDataURL(input.files[0])
     }
@@ -85,8 +80,8 @@ class ProfileModal extends Component { // eslint-disable-line react/no-multi-com
     this.props.change('roles', value)
   }
   render () {
-    const { user, handleSubmit } = this.props
-    const imgSrc = this.state.imgSrc || (`${extImageBaseUrl}${user.image || 'unknown.png'}`)
+    const { user, handleSubmit, profileImg } = this.props
+    const imgSrc = profileImg || (`${extImageBaseUrl}${user.image || 'unknown.png'}`)
     const mapOptions = this.props.maps.map(item => ({value: item.id, label: item.name}))
     const defaultChecked = (user.enabled === true)
     const checkboxLabel = 'User Enabled'

@@ -29,6 +29,8 @@ import {
   SHOW_THREAT_ITEM_MODAL,
   UPDATE_SIDEBAR_SEARCH_ACTIVE,
 
+  SHOW_COMMENTS_MODAL,
+
   NO_AUTH_ERROR
 } from './types'
 
@@ -200,5 +202,11 @@ export function showThreatItemModal (visible, threatItem) {
 export function updateSidebarSearchActive (active) {
   return dispatch => {
     dispatch({type: UPDATE_SIDEBAR_SEARCH_ACTIVE, active})
+  }
+}
+
+export function showCommentsModal (visible) {
+  return dispatch => {
+    dispatch({type: SHOW_COMMENTS_MODAL, visible})
   }
 }
