@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import { assign } from 'lodash'
 import { reduxForm, change } from 'redux-form'
 import axios from 'axios'
-import { ROOT_URL } from 'actions/config'
 import { SimpleModalForm } from 'components/modal'
 import { validate } from 'components/modal/validation/NameValidation'
 
@@ -19,24 +18,6 @@ class UserModal extends React.Component {
     this.handleFormSubmit = this.handleFormSubmit.bind(this)
     this.renderMapOptions = this.renderMapOptions.bind(this)
     this.renderRoleOptions = this.renderRoleOptions.bind(this)
-  }
-
-  loadDefaultMaps () {
-    return $.get(`${ROOT_URL}${Api.dashboard.getMaps}?draw=1`).done(res => { // eslint-disable-line no-undef
-      this.setState({
-        defaultMaps: res.data
-      })
-    })
-  }
-
-  loadRoles () {
-    return $.get(`${ROOT_URL}${Api.user.getRoles}`, { // eslint-disable-line no-undef
-      sid: this.context.sid
-    }).done(res => {
-      if (!res.object) return
-
-      this.setState({ roles: res.object.map(item => item.role) })
-    })
   }
 
   closeModal () {

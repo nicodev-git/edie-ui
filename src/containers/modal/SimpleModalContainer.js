@@ -10,9 +10,7 @@ class SimpleModalContainer extends Component {
   }
 
   onHide () {
-    this.setState({open: false}, () => {
-      this.props.onClose && this.props.onClose(this)
-    })
+    this.props.onClose && this.props.onClose(this)
   }
 
   render () {
@@ -21,7 +19,6 @@ class SimpleModalContainer extends Component {
     let subheader = (this.props.subheader) ? (this.props.subheader) : null
     return (
       <SimpleModalForm
-        show={this.props.open}
         onHide={this.onHide.bind(this)}
         onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
         content={content}
@@ -37,7 +34,6 @@ class SimpleModalContainer extends Component {
 
 export default connect(
   (state, props) => ({
-    open: true,
     validate: props.validate,
     initialValues: props.initialValues
   }), {})(reduxForm({
