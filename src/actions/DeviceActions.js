@@ -97,6 +97,8 @@ import {
   SHOW_DEVICE_TAG_MODAL,
   UPDATE_DEVICE_TAGS,
 
+  UPDATE_MONITOR_QUERY,
+
   NO_AUTH_ERROR
 } from './types'
 
@@ -983,5 +985,11 @@ export function showDeviceTagModal (visible) {
 export function updateDeviceTags (tags) {
   return dispatch => {
     dispatch({type: UPDATE_DEVICE_TAGS, tags})
+  }
+}
+
+export function updateMonitorQuery (query) {
+  return dispatch => {
+    dispatch({type: UPDATE_MONITOR_QUERY, query})
   }
 }

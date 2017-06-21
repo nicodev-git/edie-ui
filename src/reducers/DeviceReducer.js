@@ -91,6 +91,8 @@ import {
   SHOW_DEVICE_TAG_MODAL,
   UPDATE_DEVICE_TAGS,
 
+  UPDATE_MONITOR_QUERY,
+
   UPDATE_DEVICE_ERROR
 } from 'actions/types'
 
@@ -363,6 +365,8 @@ export default function (state = INITIAL_STATE, action) {
       return { ...state, deviceTagModalOpen: !!action.visible }
     case UPDATE_DEVICE_TAGS:
       return { ...state, deviceTags: action.tags }
+    case UPDATE_MONITOR_QUERY:
+      return { ...state, monitorQuery: action.query }
   }
   return state
 }

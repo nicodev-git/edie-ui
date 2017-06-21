@@ -10,7 +10,9 @@ import {
   updateSearchTags,
   updateQueryChips,
   updateMonitorRealTime,
-  clearMonitors
+  clearMonitors,
+
+  updateMonitorQuery
 } from 'actions'
 
 @connect(
@@ -21,7 +23,9 @@ import {
     monitorHotfixes: state.devices.monitorHotfixes,
 
     params: state.search.params,
-    monitorsUpdateTime: state.devices.monitorsUpdateTime
+    monitorsUpdateTime: state.devices.monitorsUpdateTime,
+
+    monitorQuery: state.devices.monitorQuery
   }),
   {
     fetchDeviceApps,
@@ -31,7 +35,9 @@ import {
     updateSearchTags,
     updateQueryChips,
     updateMonitorRealTime,
-    clearMonitors
+    clearMonitors,
+
+    updateMonitorQuery
   }
 )
 @withRouter
