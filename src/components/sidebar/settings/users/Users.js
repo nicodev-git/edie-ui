@@ -1,6 +1,6 @@
 import React from 'react'
 
-import {RaisedButton, Popover, MenuItem, Menu, SelectField} from 'material-ui'
+import {RaisedButton, IconMenu, MenuItem, SelectField} from 'material-ui'
 import InfiniteTable from 'components/shared/InfiniteTable'
 import { showAlert, showConfirm } from 'components/shared/Alert'
 
@@ -15,7 +15,6 @@ import TabPageHeader from 'components/shared/TabPageHeader'
 
 import UserTabs from './UserTabs'
 
-import { ROOT_URL } from 'actions/config'
 import { errorStyle, underlineFocusStyle, inputStyle, selectedItemStyle } from 'style/materialStyles'
 
 export default class Users extends React.Component {
@@ -180,31 +179,9 @@ export default class Users extends React.Component {
     })
   }
 
-  onClickGroup (e) {
-    this.setState({
-      groupOpen: true,
-      anchorEl: e.currentTarget
-    })
-  }
-
-  onClickUser (e) {
-    this.setState({
-      userOpen: true,
-      anchorEl: e.currentTarget
-    })
-  }
-
   onClickProfile () {
     this.props.openProfileModal()
   }
-
-  handleRequestClose () {
-    this.setState({
-      groupOpen: false,
-      userOpen: false
-    })
-  }
-
   renderProfileModal () {
     if (!this.props.profileModalVisible) return
     return (
@@ -236,40 +213,28 @@ export default class Users extends React.Component {
             </div>
 
             <div style={{position: 'absolute', right: '25px'}}>
-
-              <RaisedButton label="Group" onTouchTap={this.onClickGroup.bind(this)}/>&nbsp;
-              <Popover
-                open={this.state.groupOpen}
-                anchorEl={this.state.anchorEl}
+              <IconMenu
+                iconButtonElement={<RaisedButton label="Group"/>}
                 anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
                 targetOrigin={{horizontal: 'left', vertical: 'top'}}
-                onRequestClose={this.handleRequestClose.bind(this)}
               >
-                <Menu>
-                  <MenuItem primaryText="Add" onTouchTap={this.onAddGroup.bind(this)}/>
-                  <MenuItem primaryText="Edit" onTouchTap={this.onClickEditGroup.bind(this)}/>
-                  <MenuItem primaryText="Remove" onTouchTap={this.onClickRemoveGroup.bind(this)}/>
-                </Menu>
-              </Popover>
+                <MenuItem primaryText="Add" onTouchTap={this.onAddGroup.bind(this)}/>
+                <MenuItem primaryText="Edit" onTouchTap={this.onClickEditGroup.bind(this)}/>
+                <MenuItem primaryText="Remove" onTouchTap={this.onClickRemoveGroup.bind(this)}/>
+              </IconMenu>
 
-              <RaisedButton label="User" onTouchTap={this.onClickUser.bind(this)}/>&nbsp;
+              <IconMenu
+                iconButtonElement={<RaisedButton label="User"/>}
+                anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
+                targetOrigin={{horizontal: 'left', vertical: 'top'}}
+              >
+                <MenuItem primaryText="Add" onTouchTap={this.onAddUser.bind(this)}/>
+                <MenuItem primaryText="Edit" onTouchTap={this.onEditUser.bind(this)}/>
+                <MenuItem primaryText="Remove" onTouchTap={this.onRemoveUser.bind(this)}/>
+                <MenuItem primaryText="Change Password" onTouchTap={this.onChangePassword.bind(this)}/>
+                <MenuItem primaryText="Regenerate Pin" onTouchTap={this.onClickPin.bind(this)}/>
+              </IconMenu>
               <RaisedButton label="Profile" onTouchTap={this.onClickProfile.bind(this)}/>&nbsp;
-              <Popover
-                open={this.state.userOpen}
-                anchorEl={this.state.anchorEl}
-                anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
-                targetOrigin={{horizontal: 'left', vertical: 'top'}}
-                onRequestClose={this.handleRequestClose.bind(this)}
-              >
-                <Menu>
-                  <MenuItem primaryText="Add" onTouchTap={this.onAddUser.bind(this)}/>
-                  <MenuItem primaryText="Edit" onTouchTap={this.onEditUser.bind(this)}/>
-                  <MenuItem primaryText="Remove" onTouchTap={this.onRemoveUser.bind(this)}/>
-                  <MenuItem primaryText="Change Password" onTouchTap={this.onChangePassword.bind(this)}/>
-                  <MenuItem primaryText="Regenerate Pin" onTouchTap={this.onClickPin.bind(this)}/>
-                </Menu>
-              </Popover>
-
               <UserTabs router={this.props.router}/>
             </div>
           </div>
