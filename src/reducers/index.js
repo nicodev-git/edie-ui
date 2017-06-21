@@ -8,7 +8,6 @@ import DeviceReducer from './DeviceReducer'
 import SearchReducer from './SearchReducer'
 import DiagramReducer from './DiagramReducer'
 import AttackersReducer from './AttackersReducer'
-import PincodeReducer from './PincodeReducer'
 import TagReducer from './TagReducer'
 
 const rootReducer = combineReducers({
@@ -21,7 +20,6 @@ const rootReducer = combineReducers({
   diagram: DiagramReducer,
   chat: ChatReducer,
   attackers: AttackersReducer,
-  pincode: PincodeReducer,
   tag: TagReducer
 })
 
