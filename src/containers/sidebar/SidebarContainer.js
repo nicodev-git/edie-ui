@@ -9,7 +9,9 @@ import {
   updateSearchParams,
 
   showSidebarMessageMenu,
-  showSidebarProfileMenu
+  showSidebarProfileMenu,
+
+  updateSidebarSearchActive
 } from 'actions'
 
 class SidebarContainer extends React.Component {
@@ -36,13 +38,16 @@ export default connect(
     maps: state.dashboard.maps,
     params: state.search.params,
 
-    sidebarMessageMenuOpen: state.dashboard.sidebarMessageMenuOpen
+    sidebarMessageMenuOpen: state.dashboard.sidebarMessageMenuOpen,
+    sidebarSearchActive: state.dashboard.sidebarSearchActive
   }), {
     updateUserProfile,
     updateQueryChips,
     updateSearchParams,
 
     showSidebarMessageMenu,
-    showSidebarProfileMenu
+    showSidebarProfileMenu,
+
+    updateSidebarSearchActive
   }
 )(SidebarContainer)

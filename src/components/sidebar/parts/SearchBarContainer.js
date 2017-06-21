@@ -2,24 +2,16 @@ import React, { Component } from 'react'
 import SearchBar from './SearchBar'
 
 export default class SearchBarContainer extends Component {
-  constructor (props) {
-    super(props)
-    this.state = {
-      active: false
-    }
+  componentDidMount () {
+    this.props.updateSidebarSearchActive(false)
   }
-
   onBackgroundChange () {
-    let active = this.state.active
-    this.setState({
-      active: !active
-    })
+    this.props.updateSidebarSearchActive(!this.props.sidebarSearchActive)
   }
 
   onEnter (e) {
     if (e.charCode === 13) {
       let value = e.currentTarget.value
-      console.log('searching for...', value)
       let input = document.getElementById('searchInput')
       input.value = ''
       input.blur()
@@ -32,8 +24,7 @@ export default class SearchBarContainer extends Component {
       <SearchBar
         defaultKeyword={this.props.defaultKeyword}
         onSearch={this.onEnter.bind(this)}
-        color={this.state.color}
-        active={this.state.active}
+        active={this.props.sidebarSearchActive}
         onBackgroundChange={this.onBackgroundChange.bind(this)}
       />
     )

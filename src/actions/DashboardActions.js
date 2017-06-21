@@ -27,6 +27,7 @@ import {
   SHOW_SIDEBAR_MESSAGE_MENU,
 
   SHOW_THREAT_ITEM_MODAL,
+  UPDATE_SIDEBAR_SEARCH_ACTIVE,
 
   NO_AUTH_ERROR
 } from './types'
@@ -193,5 +194,11 @@ export function showThreats (params) {
 export function showThreatItemModal (visible, threatItem) {
   return dispatch => {
     dispatch({type: SHOW_THREAT_ITEM_MODAL, visible, threatItem})
+  }
+}
+
+export function updateSidebarSearchActive (active) {
+  return dispatch => {
+    dispatch({type: UPDATE_SIDEBAR_SEARCH_ACTIVE, active})
   }
 }

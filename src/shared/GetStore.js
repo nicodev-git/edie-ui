@@ -33,6 +33,8 @@ const initialState = {
     sidebarProfileMenuOpen: false,
     sidebarMessageMenuOpen: false,
 
+    sidebarSearchActive: false,
+
     apiErrorModalOpen: false,
     apiError: ''
   },

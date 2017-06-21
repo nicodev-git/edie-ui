@@ -53,6 +53,7 @@ import {
   SHOW_SIDEBAR_MESSAGE_MENU,
 
   SHOW_THREAT_ITEM_MODAL,
+  UPDATE_SIDEBAR_SEARCH_ACTIVE,
 
   API_ERROR
 } from 'actions/types'
@@ -229,6 +230,9 @@ export default function (state = {}, action) {
       return { ...state, sidebarMessageMenuOpen: action.open }
     case SHOW_THREAT_ITEM_MODAL:
       return { ...state, threatItemModalOpen: !!action.visible, threatItem: action.threatItem }
+
+    case UPDATE_SIDEBAR_SEARCH_ACTIVE:
+      return { ...state, sidebarSearchActive: action.active }
   }
   return state
 }
