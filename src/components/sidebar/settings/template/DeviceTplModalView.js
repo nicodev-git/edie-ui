@@ -8,7 +8,7 @@ import { chipStyles } from 'style/materialStyles'
 
 export default class DeviceTplModalView extends Component {
   renderContent () {
-    const {options, imgUrl, onSubmit, onHide, onChange,
+    const {imgUrl, onSubmit, onHide, onChange,
       monitors, monitorTemplates, onAddMonitor, onEditMonitor, onRemoveMonitor,
       workflows, showWfSelectModal, onClickDeleteWf,
       tagModal, tags, onClickAddTag, onClickDeleteTag
@@ -17,7 +17,7 @@ export default class DeviceTplModalView extends Component {
       <form onSubmit={onSubmit}>
         <div className="form-column padding-left-12 margin-bottom-0">
           <Field name="name" component={FormInput} label="Name"/>
-          <Field name="devicetemplategroup" component={FormSelect} label="Group" options={options}/>
+          <Field name="devicetemplategroup" component={FormInput} label="Group"/>
           <ImageUploader imgUrl={imgUrl} onChange={onChange}/>
         </div>
 
