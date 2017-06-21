@@ -62,10 +62,10 @@ export default(
         <IndexRoute component={SettingGeneralContainer} />
         <Route path="general" component={SettingGeneralContainer} />
         <Route path="agents" component={SettingAgent} />
-        <Route path="templates" component={Settings}>
-          <IndexRoute component={SettingTemplatesContainer}/>
+        <Route path="tags" component={Settings}>
+          <IndexRoute component={SettingTagsContainer}/>
           <Route path="rules" component={SettingRulesContainer} />
-          <Route path="tags" component={SettingTagsContainer} />
+          <Route path="templates" component={SettingTemplatesContainer} />
           <Route path="parserTypes" component={SettingParserTypesContainer} />
         </Route>
 

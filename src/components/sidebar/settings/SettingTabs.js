@@ -14,8 +14,8 @@ const tabs = [{
   title: 'Identities',
   path: '/settings/identities'
 }, {
-  title: 'Templates',
-  path: '/settings/templates'
+  title: 'Tags',
+  path: '/settings/tags'
 }, {
   title: 'Advanced',
   path: '/settings/advanced'
