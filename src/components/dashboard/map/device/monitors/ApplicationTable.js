@@ -19,7 +19,6 @@ export default class ApplicationTable extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      query: '',
       tab: 'app'
     }
     this.columns = [{
@@ -76,6 +75,7 @@ export default class ApplicationTable extends Component {
   }
   componentWillMount () {
     this.props.clearMonitors()
+    this.props.updateMonitorQuery('')
   }
   componentDidMount () {
     this.monitorSocket = new MonitorSocket({
@@ -105,9 +105,7 @@ export default class ApplicationTable extends Component {
     }
   }
   onChangeQuery (e) {
-    this.setState({
-      query: e.target.value
-    })
+    this.props.updateMonitorQuery(e.target.value)
   }
   onKeyupQuery (e) {
     if (e.keyCode === 13) {
@@ -115,7 +113,7 @@ export default class ApplicationTable extends Component {
     }
   }
   onClickSearch () {
-    const query = `deviceid=${this.props.device.id} and monitortype=app and eventType=AGENT and _all=${this.state.query}`
+    const query = `deviceid=${this.props.device.id} and monitortype=app and eventType=AGENT and _all=${this.props.monitorQuery}`
     const queryChips = parseSearchQuery(query)
     this.props.router.push('/search')
     this.props.updateSearchParams(assign({}, this.props.params, {
@@ -159,11 +157,11 @@ export default class ApplicationTable extends Component {
     })
   }
   renderOptions () {
-    const {query} = this.state
+    const {monitorQuery} = this.props
     return (
       <div className="text-center">
         <div className="inline-block">
-          <TextField name="query" value={query} onChange={this.onChangeQuery.bind(this)} onKeyUp={this.onKeyupQuery.bind(this)}/>
+          <TextField name="query" value={monitorQuery} onChange={this.onChangeQuery.bind(this)} onKeyUp={this.onKeyupQuery.bind(this)}/>
           <FlatButton icon={<ActionSearch />} onTouchTap={this.onClickSearch.bind(this)}/>
         </div>
         <div className="pull-right">
