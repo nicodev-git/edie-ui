@@ -56,6 +56,7 @@ import {
   SHOW_THREAT_ITEM_MODAL,
   UPDATE_SIDEBAR_SEARCH_ACTIVE,
   SHOW_COMMENTS_MODAL,
+  SHOW_ATTACKER_MODAL,
 
   API_ERROR
 } from 'actions/types'
@@ -240,6 +241,8 @@ export default function (state = {}, action) {
       return { ...state, sidebarSearchActive: action.active }
     case SHOW_COMMENTS_MODAL:
       return { ...state, commentsModalVisible: !!action.visible, commentsIncident: action.incident }
+    case SHOW_ATTACKER_MODAL:
+      return { ...state, attackerModalOpen: !!action.visible }
   }
   return state
 }

@@ -3,19 +3,6 @@ import MetricPanelView from './MetricPanelView'
 import AttackersModal from './AttackersModal'
 
 export default class MetricPanel extends React.Component {
-  constructor (props) {
-    super(props)
-    this.state = {
-      showAttackers: false
-    }
-  }
-
-  componentWillMount () {
-    this.loadCounts()
-  }
-
-  loadCounts () { }
-
   showOpenIncidentsDiv () {
     this.showIncidentSearch('open')
   }
@@ -25,7 +12,7 @@ export default class MetricPanel extends React.Component {
   }
 
   showIpIncidentsDiv () {
-    this.setState({ showAttackers: true })
+    this.props.showAttackerModal(true)
   }
 
   showMonthIncidentsDiv () {
@@ -43,25 +30,21 @@ export default class MetricPanel extends React.Component {
   }
 
   renderAttackers () {
-    if (!this.state.showAttackers) return
+    if (!this.props.attackerModalOpen) return
     return (
-      <AttackersModal {...this.props} onClose={() => {
-        this.setState({ showAttackers: false })
-      }} />
+      <AttackersModal {...this.props} onClose={() => this.props.showAttackerModal(false)} />
     )
   }
 
   render () {
-    const {stats} = this.props
-    let attackers = this.renderAttackers()
     return (
       <MetricPanelView
-        stats={stats}
+        stats={this.props.stats}
         showOpen={this.showOpenIncidentsDiv.bind(this)}
         showToday={this.showTodayIncidentsDiv.bind(this)}
         showAttackers={this.showIpIncidentsDiv.bind(this)}
         showMonth={this.showMonthIncidentsDiv.bind(this)}
-        attackers={attackers}
+        attackers={this.renderAttackers()}
       />
     )
   }

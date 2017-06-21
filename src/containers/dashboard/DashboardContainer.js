@@ -44,7 +44,9 @@ import {
 
   fetchDashboardStats,
   updateDeviceIncident,
-  showCommentsModal
+  showCommentsModal,
+
+  showAttackerModal
 } from 'actions'
 
 export default connect(
@@ -85,7 +87,9 @@ export default connect(
     userInfo: state.dashboard.userInfo,
 
     commentsModalVisible: state.dashboard.commentsModalVisible,
-    commentsIncident: state.dashboard.commentsIncident
+    commentsIncident: state.dashboard.commentsIncident,
+
+    attackerModalOpen: state.dashboard.attackerModalOpen
   }), {
 
     fetchBigIncidents,
@@ -131,6 +135,8 @@ export default connect(
 
     fetchDashboardStats,
     updateDeviceIncident,
-    showCommentsModal
+    showCommentsModal,
+
+    showAttackerModal
   }
 )(Dashboard)

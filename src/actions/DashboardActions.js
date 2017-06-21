@@ -30,6 +30,7 @@ import {
   UPDATE_SIDEBAR_SEARCH_ACTIVE,
 
   SHOW_COMMENTS_MODAL,
+  SHOW_ATTACKER_MODAL,
 
   NO_AUTH_ERROR
 } from './types'
@@ -208,5 +209,11 @@ export function updateSidebarSearchActive (active) {
 export function showCommentsModal (visible, incident) {
   return dispatch => {
     dispatch({type: SHOW_COMMENTS_MODAL, visible, incident})
+  }
+}
+
+export function showAttackerModal (visible) {
+  return dispatch => {
+    dispatch({type: SHOW_ATTACKER_MODAL, visible})
   }
 }
