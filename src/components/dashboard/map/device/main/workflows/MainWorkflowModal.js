@@ -4,6 +4,8 @@ import {assign, concat, forOwn} from 'lodash'
 import { connect } from 'react-redux'
 import WorkflowModalInner from './WorkflowModalInner'
 
+import {WorkflowActionTypes} from 'shared/Global'
+
 class MainWorkflowModal extends Component {
   constructor (props) {
     super(props)
@@ -19,7 +21,7 @@ class MainWorkflowModal extends Component {
       steps: 3,
       rules,
       selectedRuleIndex: -1,
-      actions: props.editWorkflow ? (props.editWorkflow.actions || []) : [{name: 'Open Incident', actionType: 'OPEN_INCIDENT'}],
+      actions: props.editWorkflow ? (props.editWorkflow.actions || []) : WorkflowActionTypes,
       selectedActionIndex: -1,
       diagram: props.editWorkflow ? props.editWorkflow.flowchart : ''
     }

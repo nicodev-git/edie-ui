@@ -6,6 +6,8 @@ import { closeWfActionModal } from 'actions'
 import { SimpleModalForm } from 'components/modal'
 import { validate } from 'components/modal/validation/NameValidation'
 
+import {WorkflowActionTypes} from 'shared/Global'
+
 class ActionModal extends Component {
   handleFormSubmit (values) {
     const {editWfAction} = this.props
@@ -21,12 +23,9 @@ class ActionModal extends Component {
   render () {
     const {handleSubmit} = this.props
     let header = 'Action'
-    let options = [
-      { value: 'OPEN_INCIDENT', label: 'Open incident' }
-    ]
     let content = [
       {name: 'Name'},
-      {type: 'select', name: 'Type', key: 'actionType', options: options},
+      {type: 'select', name: 'Type', key: 'actionType', options: WorkflowActionTypes},
       {name: 'Command'},
       {name: 'Params'}
     ]

@@ -199,3 +199,11 @@ export const viewFilters = {
     desc: 'Filter Null Values'
   }
 }
+
+export const WorkflowActionTypes = [{
+  label: 'Open Incident',
+  value: 'OPEN_INCIDENT'
+}, {
+  label: 'Add Tag',
+  value: 'ADD_TAG'
+}]

@@ -3,6 +3,8 @@ import { reduxForm } from 'redux-form'
 import { concat, assign, forOwn } from 'lodash'
 import WorkflowModalInner from './WorkflowModalInner'
 
+import {WorkflowActionTypes} from 'shared/Global'
+
 class WorkflowModal extends React.Component { // eslint-disable-line react/no-multi-comp
   constructor (props) {
     super(props)
@@ -17,7 +19,7 @@ class WorkflowModal extends React.Component { // eslint-disable-line react/no-mu
       current: 1,
       rules,
       selectedRuleIndex: -1,
-      actions: props.editWorkflow ? (props.editWorkflow.actions || []) : [{name: 'Open Incident', actionType: 'OPEN_INCIDENT'}],
+      actions: props.editWorkflow ? (props.editWorkflow.actions || []) : WorkflowActionTypes,
       selectedActionIndex: -1,
       diagram: props.editWorkflow ? props.editWorkflow.flowchart : ''
     }
