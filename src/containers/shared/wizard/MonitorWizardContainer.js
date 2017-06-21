@@ -11,7 +11,10 @@ import {
   openParamEditModal,
   closeParamsModal,
   removeParam,
-  updateMonitorParams
+  updateMonitorParams,
+
+  updateMonitorTags,
+  showMonitorTagModal
 } from 'actions'
 
 @connect(
@@ -21,7 +24,9 @@ import {
     paramsModalOpen: state.devices.paramsModalOpen,
     paramEditModalOpen: state.devices.paramEditModalOpen,
 
-    editParams: state.devices.editParams
+    editParams: state.devices.editParams,
+    monitorTagModalOpen: state.devices.monitorTagModalOpen,
+    monitorTags: state.devices.monitorTags
   }),
   dispatch => ({
     ...bindActionCreators({
@@ -31,7 +36,10 @@ import {
       openParamEditModal,
       closeParamsModal,
       removeParam,
-      updateMonitorParams
+      updateMonitorParams,
+
+      updateMonitorTags,
+      showMonitorTagModal
     }, dispatch)
   })
 )

@@ -37,6 +37,8 @@ import {
   OPEN_DEVICE_MONITOR_WIZARD,
   CLOSE_DEVICE_MONITOR_WIZARD,
   CLEAR_DEVICE_WIZARD_INITIAL_VALUES,
+  SHOW_MONITOR_TAG_MODAL,
+  UPDATE_MONITOR_TAGS,
 
   OPEN_PARAMS_MODAL,
   CLOSE_PARAMS_MODAL,
@@ -134,8 +136,9 @@ export default function (state = INITIAL_STATE, action) {
         key,
         value: params[key]
       }))
+      const monitorTags = action.data ? (action.data.tags || []) : []
       console.log(action.data)
-      return { ...state, monitorWizardVisible: true, monitorInitialValues: action.data, editParams }
+      return { ...state, monitorWizardVisible: true, monitorInitialValues: action.data, editParams, monitorTags }
     }
 
     case CLOSE_DEVICE_MONITOR_WIZARD:
@@ -346,6 +349,11 @@ export default function (state = INITIAL_STATE, action) {
       return { ...state, fwRuleModalOpen: !!action.visible }
     case SHOW_MONITOR_HISTORY_MODAL:
       return { ...state, monitorHistoryModalOpen: !!action.visible, selectedMonitor: action.monitor }
+
+    case SHOW_MONITOR_TAG_MODAL:
+      return { ...state, monitorTagModalOpen: !!action.visible }
+    case UPDATE_MONITOR_TAGS:
+      return { ...state, monitorTags: action.tags }
   }
   return state
 }

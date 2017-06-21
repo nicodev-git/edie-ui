@@ -12,6 +12,8 @@ import {
   OPEN_DEVICE_MONITOR_WIZARD,
   CLOSE_DEVICE_MONITOR_WIZARD,
   CLEAR_DEVICE_WIZARD_INITIAL_VALUES,
+  SHOW_MONITOR_TAG_MODAL,
+  UPDATE_MONITOR_TAGS,
 
   OPEN_PARAMS_MODAL,
   CLOSE_PARAMS_MODAL,
@@ -954,5 +956,17 @@ export function showFwRuleModal (visible) {
 export function showMonitorHistoryModal (visible, monitor) {
   return dispatch => {
     dispatch({type: SHOW_MONITOR_HISTORY_MODAL, visible, monitor})
+  }
+}
+
+export function showMonitorTagModal (visible) {
+  return dispatch => {
+    dispatch({type: SHOW_MONITOR_TAG_MODAL, visible})
+  }
+}
+
+export function updateMonitorTags (tags) {
+  return dispatch => {
+    dispatch({type: UPDATE_MONITOR_TAGS, tags})
   }
 }

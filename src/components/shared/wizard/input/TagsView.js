@@ -8,10 +8,12 @@ export default class TagsView extends React.Component {
     this.props.showMonitorTagModal(true)
   }
   onPickTag (tag) {
-    this.props.addWorkflowTag(tag.name)
+    const {monitorTags} = this.props
+    this.props.updateMonitorTags([...monitorTags, tag.name])
   }
-  onClickDeleteTag () {
-
+  onClickDeleteTag (index) {
+    const {monitorTags} = this.props
+    this.props.updateMonitorTags(monitorTags.filter((p, i) => i !== index))
   }
   renderTagsModal () {
     if (!this.props.monitorTagModalOpen) return null
@@ -26,11 +28,11 @@ export default class TagsView extends React.Component {
     return (
       <div>
         <div>
-          <RaisedButton label="Add Tag" onTouchTap={onClickAddTag}/>
+          <RaisedButton label="Add Tag" onTouchTap={this.onClickAddTag.bind(this)}/>
         </div>
         <div style={chipStyles.wrapper}>
-          {tags.map((t, i) =>
-            <Chip key={i} style={chipStyles.chip} onRequestDelete={() => onClickDeleteTag(i)}>{t}</Chip>
+          {monitorTags.map((t, i) =>
+            <Chip key={i} style={chipStyles.chip} onRequestDelete={() => this.onClickDeleteTag(i)}>{t}</Chip>
           )}
         </div>
         {this.renderTagsModal()}
