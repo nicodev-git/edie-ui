@@ -62,7 +62,9 @@ export default class SearchFormView extends React.Component {
       onChangeMonitorType,
 
       onClickViewFilter,
-      onClickGraph
+      onClickGraph,
+
+      onClickTags
     } = this.props
     return (
       <form onSubmit={onSubmit}>
@@ -136,6 +138,7 @@ export default class SearchFormView extends React.Component {
             )}
           </SelectField>
           <IconButton tooltip="Workflow" onTouchTap={onClickWorkflow}><img src="/images/wf-icon.png" width="24"/></IconButton>
+          <IconButton tooltip="Tags" onTouchTap={onClickTags}><img src="/images/tag.png" width="24"/></IconButton>
           <IconButton tooltip="Search" onTouchTap={onClickWorkflow} type="submit" ><ActionSearch /></IconButton>
 
           <IconButton tooltip="Favorite" onTouchTap={onClickStar}>{starFilled ? <FilledStar/> : <ToggleStar/>}</IconButton>

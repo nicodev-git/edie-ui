@@ -398,6 +398,9 @@ class GenericSearch extends React.Component {
   onClickGraph () {
     this.props.showSearchGraphModal(true)
   }
+  onClickTags () {
+    // this.props.showSearchTags()
+  }
   renderFields () {
     const {selectedField} = this.props
     return (
@@ -591,6 +594,8 @@ class GenericSearch extends React.Component {
 
             onClickViewFilter={this.onClickViewFilter.bind(this)}
             onClickGraph={this.onClickGraph.bind(this)}
+
+            onClickTags={this.onClickTags.bind(this)}
           />
 
           <div className="text-center">
