@@ -28,8 +28,10 @@ class MonitorTplModal extends React.Component { // eslint-disable-line react/no-
   }
 
   handleFormSubmit (formProps) {
-    const {monitorTpl, selectedTplImage} = this.props
-    const tpl = assign({}, (monitorTpl || {}), formProps)
+    const {monitorTpl, selectedTplImage, monitorTplTags} = this.props
+    const tpl = assign({}, (monitorTpl || {}), formProps, {
+      tags: monitorTplTags || []
+    })
     if (selectedTplImage) tpl.image = selectedTplImage.uuid
     if (monitorTpl) {
       this.props.updateMonitorTemplate(tpl)
