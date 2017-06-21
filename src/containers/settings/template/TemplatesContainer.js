@@ -69,6 +69,8 @@ import {
     workflows: state.settings.workflows,
 
     monitorTpl: state.settings.monitorTpl,
+    monitorTplTagModalOpen: state.settings.monitorTplTagModalOpen,
+    monitorTplTags: state.settings.monitorTplTags,
 
     images: state.dashboard.images
   }),

@@ -2,8 +2,10 @@ import React from 'react'
 import { reduxForm } from 'redux-form'
 import { assign } from 'lodash'
 import { connect } from 'react-redux'
+
 import MonitorTplModalView from './MonitorTplModalView'
 import { getCustomImageUrl, extImageBaseUrl } from 'shared/Global'
+import TagPickerModal from 'containers/settings/tag/TagPickerModalContainer'
 
 class MonitorTplModal extends React.Component { // eslint-disable-line react/no-multi-comp
   constructor (props) {
@@ -11,6 +13,18 @@ class MonitorTplModal extends React.Component { // eslint-disable-line react/no-
     this.state = {}
     this.getImageUrl = this.getImageUrl.bind(this)
     this.onClickChangeImage = this.onClickChangeImage.bind(this)
+  }
+
+  onClickAddTag () {
+    this.props.showMonitorTplTagModal(true)
+  }
+  onPickTag (tag) {
+    const {monitorTplTags} = this.props
+    this.props.updateMonitorTplTags([...monitorTplTags, tag.name])
+  }
+  onClickDeleteTag (index) {
+    const {monitorTplTags} = this.props
+    this.props.updateMonitorTplTags(monitorTplTags.filter((p, i) => i !== index))
   }
 
   handleFormSubmit (formProps) {
@@ -42,9 +56,16 @@ class MonitorTplModal extends React.Component { // eslint-disable-line react/no-
   onClickChangeImage () {
     this.props.openTplImageModal()
   }
-
+  renderTagsModal () {
+    if (!this.props.monitorTplTagModalOpen) return null
+    return (
+      <TagPickerModal
+        onPick={this.onPickTag.bind(this)}
+        onClickClose={() => this.props.showMonitorTplTagModal(false)}/>
+    )
+  }
   render () {
-    const { handleSubmit } = this.props
+    const { handleSubmit, monitorTplTags } = this.props
     let header = 'Monitor Template'
     let imgUrl = this.getImageUrl()
     return (
@@ -55,6 +76,11 @@ class MonitorTplModal extends React.Component { // eslint-disable-line react/no-
         onHide={this.onClickClose.bind(this)}
         imgUrl={imgUrl}
         onChange={this.onClickChangeImage}
+
+        tags={monitorTplTags}
+        onClickAddTag={this.onClickAddTag.bind(this)}
+        onClickDeleteTag={this.onClickDeleteTag.bind(this)}
+        tagModal={this.renderTagsModal()}
       />
     )
   }
