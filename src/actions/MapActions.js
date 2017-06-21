@@ -9,6 +9,7 @@ import {
   OPEN_MAP_IMPORT_MODAL,
   CLOSE_MAP_IMPORT_MODAL,
   IMPORT_MAP,
+  SHOW_MAP_EXPORT_MODAL,
 
   OPEN_MAP_USERS_MODAL,
   CLOSE_MAP_USERS_MODAL,
@@ -418,5 +419,11 @@ export function reloadDevice (device) {
       type: RELOAD_DEVICE,
       data: device
     })
+  }
+}
+
+export function showMapExportModal (visible) {
+  return dispatch => {
+    dispatch({type: SHOW_MAP_EXPORT_MODAL, visible})
   }
 }

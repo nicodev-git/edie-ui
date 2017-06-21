@@ -10,7 +10,6 @@ export default class MapMenu extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      mapExportModalVisible: false
     }
     this.onClickAdd = this.onClickAdd.bind(this)
     this.onClickRename = this.onClickRename.bind(this)
@@ -20,10 +19,10 @@ export default class MapMenu extends Component {
   }
 
   renderMapExportModal () {
-    if (!this.state.mapExportModalVisible) return
+    if (!this.props.mapExportModalOpen) return
     return (
       <MapSaveModal mapId={this.props.selectedMap.id}
-        onClose={() => { this.setState({ mapExportModalVisible: false }) }}/>
+        onClose={() => this.props.showMapExportModal(false)}/>
     )
   }
 
@@ -54,9 +53,7 @@ export default class MapMenu extends Component {
 
   onClickSave () {
     if (!this.props.selectedMap) return showAlert('Please choose map.')
-    this.setState({
-      mapExportModalVisible: true
-    })
+    this.props.showMapExportModal(true)
   }
 
   onClickImport () {

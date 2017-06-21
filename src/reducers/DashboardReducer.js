@@ -8,6 +8,7 @@ import {
   OPEN_MAP_IMPORT_MODAL,
   CLOSE_MAP_IMPORT_MODAL,
   IMPORT_MAP,
+  SHOW_MAP_EXPORT_MODAL,
 
   ADD_MAP_DEVICE,
   UPDATE_MAP_DEVICE,
@@ -243,6 +244,9 @@ export default function (state = {}, action) {
       return { ...state, commentsModalVisible: !!action.visible, commentsIncident: action.incident }
     case SHOW_ATTACKER_MODAL:
       return { ...state, attackerModalOpen: !!action.visible }
+
+    case SHOW_MAP_EXPORT_MODAL:
+      return { ...state, mapExportModalOpen: !!action.visible }
   }
   return state
 }

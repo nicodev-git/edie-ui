@@ -21,6 +21,7 @@ import {
   importMap,
   openMapImportModal,
   closeMapImportModal,
+  showMapExportModal,
 
   addMap,
   updateMap,
@@ -68,6 +69,7 @@ export default connect(
 
     maps: state.dashboard.maps,
     mapImportModalVisible: state.dashboard.mapImportModalVisible,
+    mapExportModalOpen: state.dashboard.mapExportModalOpen,
 
     countries: [],
 
@@ -112,6 +114,7 @@ export default connect(
     importMap,
     openMapImportModal,
     closeMapImportModal,
+    showMapExportModal,
 
     addMap,
     updateMap,
