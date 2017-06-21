@@ -73,13 +73,15 @@ class DeviceEditWizard extends React.Component {
 
   handleFormSubmit (params) {
     const {currentDevice} = this.state
-    const {initialValues, selectedTplImage} = this.props
+    const {initialValues, selectedTplImage, deviceTags} = this.props
+
     let elem = document.getElementById('submitButton')
     elem.style.backgroundColor = '#d1d1d1'
     assign(params, currentDevice.server.params)
     assign(params, this.props.extraParams)
     assign(params, {
-      image: selectedTplImage ? selectedTplImage.uuid : initialValues['image']
+      image: selectedTplImage ? selectedTplImage.uuid : initialValues['image'],
+      tags: deviceTags || []
     })
     console.log(params)
     this.didSave(params)
