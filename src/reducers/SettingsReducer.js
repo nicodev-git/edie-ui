@@ -176,8 +176,11 @@ export default function (state = {}, action) {
         state.monitorTemplates.filter(u => u.id === action.data.id))
       return {...state, monitorTemplates}
     }
-    case OPEN_MONITOR_TEMPLATE_MODAL:
-      return { ...state, monitorTplModalVisible: true, monitorTpl: action.data, selectedTplImage: null }
+    case OPEN_MONITOR_TEMPLATE_MODAL: {
+      const monitorTpl = action.data
+      const monitorTplTags = monitorTpl ? (monitorTpl.tags || []) : []
+      return { ...state, monitorTplModalVisible: true, monitorTpl, selectedTplImage: null, monitorTplTags }
+    }
     case CLOSE_MONITOR_TEMPLATE_MODAL:
       return { ...state, monitorTplModalVisible: false }
     case OPEN_TPL_IMAGE_MODAL:

@@ -142,7 +142,9 @@ const initialState = {
     workflows: [],
     editWorkflowTags: [],
 
-    showTraffic: true
+    showTraffic: true,
+
+    monitorTplTags: []
   },
 
   attackers: {

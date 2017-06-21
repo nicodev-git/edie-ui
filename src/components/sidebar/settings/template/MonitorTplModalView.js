@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {Dialog, RaisedButton} from 'material-ui'
+import {Dialog, RaisedButton, Chip} from 'material-ui'
 import { Field } from 'redux-form'
 import { SubmitBlock, FormInput, ImageUploader, FormCheckbox } from 'components/modal/parts'
 
