@@ -1,31 +1,33 @@
 import React from 'react'
 import {Dialog, FlatButton, Chip} from 'material-ui'
+import {findIndex} from 'lodash'
+import {blue300} from 'material-ui/styles/colors'
 
 import {TwoButtonsBlockCustom} from 'components/modal/parts'
 
 import {chipStyles} from 'style/materialStyles'
 
 export default class TagPickerModalView extends React.Component {
-  renderContent () {
-    const {tags, selectedTags, onSelectTag, onDeselectTag} = this.props
+  renderChip (w) {
+    const {selectedTags, onSelectTag, onDeselectTag} = this.props
+    const selected = findIndex(selectedTags, {id: w.id}) >= 0
     return (
-      <div>
-        <h4>Selected</h4>
-        <div style={chipStyles.wrapper}>
+      <Chip
+        key={w.id} style={chipStyles.chip}
+        backgroundColor={selected ? blue300 : null}
+        onTouchTap={() => selected ? onDeselectTag(w) : onSelectTag(w)}>
+        {w.name}
+      </Chip>
+    )
+  }
+
+  renderContent () {
+    const {tags} = this.props
+    return (
+      <div style={chipStyles.wrapper}>
         {
-          selectedTags.map((w, i) =>
-            <Chip key={w.id} style={chipStyles.chip} onRequestDelete={() => onDeselectTag(w)}>{w.name}</Chip>
-          )
+          tags.map(this.renderChip.bind(this))
         }
-        </div>
-        <h4>Tags</h4>
-        <div style={chipStyles.wrapper}>
-        {
-          tags.map((w, i) =>
-            <Chip key={w.id} style={chipStyles.chip} onTouchTap={() => onSelectTag(w)}>{w.name}</Chip>
-          )
-        }
-        </div>
       </div>
     )
   }
