@@ -19,7 +19,7 @@ export const mainMenu = [
   {id: 'search', title: 'Search', icon: search, path: '/search'},
   {id: 'chat', title: 'Chat', icon: chat, path: '/chat'},
   {id: 'threatmap', title: 'Threat Map', icon: threatmap, path: '/threatmap'},
-  {id: 'incidents', title: 'Incidents', icon: incidents, path: '/incidents', badge: true},
+  // {id: 'incidents', title: 'Incidents', icon: incidents, path: '/incidents', badge: true},
   {id: 'settings', title: 'Settings', icon: settings, path: '/settings'}
 ]
 

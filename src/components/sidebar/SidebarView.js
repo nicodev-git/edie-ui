@@ -62,7 +62,7 @@ export default class SidebarView extends Component {
               key={index}
               className={pageId === item.id ? 'sidebar-chosen' : ''}
               onClick={onMainMenu.bind(this, index)}>
-              {(index !== 0) ? (<Divider style={{margin: 0, backgroundColor: '#393b42'}}/>) : null}
+
               <div className="sidebar-item-container">
                 {item.badge ? this.renderBadge(item) : this.renderButton(item)}
                 <div className="sidebar-title">{item.title}</div>
@@ -77,14 +77,19 @@ export default class SidebarView extends Component {
                   />
                 </div> : null
               }
+              <Divider style={{margin: 0, backgroundColor: '#393b42'}}/>
+
+              {index === 0 ? (
+                <MessageBox
+                  open={sidebarMessageMenuOpen}
+                  openSidebarMessageMenu={openSidebarMessageMenu}
+                  closeSidebarMessageMenu={closeSidebarMessageMenu}/>
+              ) : null}
+              {index === 0 ? (
+                <Divider style={{margin: 0, backgroundColor: '#393b42'}}/>
+              ) : null}
             </div>
           )}
-          <Divider style={{margin: 0, backgroundColor: '#393b42'}}/>
-          <MessageBox
-            open={sidebarMessageMenuOpen}
-            openSidebarMessageMenu={openSidebarMessageMenu}
-            closeSidebarMessageMenu={closeSidebarMessageMenu}/>
-          <Divider style={{margin: 0, backgroundColor: '#393b42'}}/>
         </div>
 
         <div style={{display: contentType.Device === pageType ? 'block' : 'none'}} className="sidebar">
