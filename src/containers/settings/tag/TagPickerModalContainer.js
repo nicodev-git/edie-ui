@@ -12,7 +12,7 @@ import {
 @connect(
   state => ({
     tags: state.tag.tags,
-    selectedTag: state.tag.selectedTag
+    selectedTags: state.tag.selectedTags
   }), {
     fetchTags,
     addTag,

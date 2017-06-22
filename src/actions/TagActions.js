@@ -55,8 +55,8 @@ export function removeTag (entity) {
   }
 }
 
-export function selectTag (tag) {
+export function selectTag (tags) {
   return dispatch => {
-    dispatch({type: SELECT_TAG, tag})
+    dispatch({type: SELECT_TAG, tags})
   }
 }

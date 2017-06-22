@@ -19,7 +19,7 @@ export default function (state = {}, action) {
     case REMOVE_TAG:
       return { ...state, tagDraw: state.tagDraw + 1 }
     case SELECT_TAG:
-      return { ...state, selectedTag: action.tag }
+      return { ...state, selectedTags: action.tags || [] }
   }
   return state
 }

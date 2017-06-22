@@ -7,34 +7,21 @@ import {chipStyles} from 'style/materialStyles'
 
 export default class TagPickerModalView extends React.Component {
   renderContent () {
-    const {tags, selectedTag, onSelectTag, showChips} = this.props
-    if (showChips) {
-      return (
-        <div style={chipStyles.wrapper}>
-          {
-            tags.map((w, i) =>
-              <Chip style={chipStyles.chip} onTouchTap={() => onSelectTag(w)}>{w.name}</Chip>
-            )
-          }
-        </div>
-      )
-    }
+    const {tags, selectedTags, onSelectTag, onDeselectTag} = this.props
     return (
-      <div style={{maxHeight: '400px', overflow: 'auto'}}>
-        <table className="table table-hover">
-          <tbody>
-          {
-            tags.map((w, i) =>
-              <tr
-                key={i}
-                onClick={() => onSelectTag(w)}
-                className={selectedTag && selectedTag.id === w.id ? 'selected' : ''}>
-                <td>{w.name}</td>
-              </tr>
-            )
-          }
-          </tbody>
-        </table>
+      <div>
+        <div style={chipStyles.wrapper}>
+        {selectedTags.map((w, i) =>
+          <Chip style={chipStyles.chip} onRequestDelete={() => onDeselectTag(w)}>{w.name}</Chip>
+        )}
+        </div>
+        <div style={chipStyles.wrapper}>
+        {
+          tags.map((w, i) =>
+            <Chip style={chipStyles.chip} onTouchTap={() => onSelectTag(w)}>{w.name}</Chip>
+          )
+        }
+        </div>
       </div>
     )
   }

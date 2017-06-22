@@ -15,6 +15,8 @@ export default class TagPickerModal extends React.Component {
       this.props.selectTag(tag)
     }
   }
+  onDeselectTag (tag) {
+  }
   onClickOK () {
     const {selectedTag, onPick, onClickClose} = this.props
     if (!selectedTag) return showAlert('Please select tag.')
@@ -36,6 +38,7 @@ export default class TagPickerModal extends React.Component {
         {...this.props}
         onClickAdd={this.onClickAdd.bind(this)}
         onSelectTag={this.onSelectTag.bind(this)}
+        onDeselectTag={this.onDeselectTag.bind(this)}
         onClickOK={this.onClickOK.bind(this)}
       />
     )
