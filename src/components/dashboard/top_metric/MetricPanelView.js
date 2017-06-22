@@ -12,8 +12,8 @@ import Metric from 'components/shared/Metric'
 
 const logoutStyle = {
   position: 'absolute',
-  right: '12px',
-  top: '-6px'
+  right: 0,
+  top: -6
 }
 const MetricPanelView = ({stats, showOpen, showToday, showAttackers, showMonth,
   attackers}) => (
