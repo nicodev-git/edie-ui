@@ -109,7 +109,7 @@ export default function (state = {}, action) {
 
     case UPDATE_MAP_DEVICE: {
       let mapDevices = state.mapDevices.map(u => {
-        if (u.id === action.data.id) return action.data
+        if (u.id === action.data.id) return {...u, ...action.data}
         return u
       })
 

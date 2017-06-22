@@ -23,6 +23,7 @@ import {
   UPDATE_NEW_INCIDENT_MSG,
 
   UPDATE_MAP_DEVICE_STATUS,
+  UPDATE_MAP_DEVICE,
 
   SHOW_SIDEBAR_MESSAGE_MENU,
 
@@ -179,6 +180,12 @@ export function updateNewIncidentMsg (msg) {
 export function updateMapDeviceStatus (data) {
   return dispatch => {
     dispatch({type: UPDATE_MAP_DEVICE_STATUS, data})
+  }
+}
+
+export function updateDashboardMapDevice (data) {
+  return dispatch => {
+    dispatch({type: UPDATE_MAP_DEVICE, data})
   }
 }
 

@@ -22,6 +22,7 @@ import {
   addDashboardIncident,
   updateNewIncidentMsg,
   updateMapDeviceStatus,
+  updateDashboardMapDevice,
 
   fetchUserInfo,
 
@@ -61,6 +62,7 @@ dispatch => bindActionCreators({
   addDashboardIncident,
   updateNewIncidentMsg,
   updateMapDeviceStatus,
+  updateDashboardMapDevice,
 
   fetchUserInfo,
 
@@ -79,7 +81,8 @@ export default class MainContainer extends Component {
         'incidents': this.onReceiveIncidents.bind(this),
         'statuses': debounce(this.onReceiveStatus.bind(this), 500),
         'dashboard': this.onReceiveDashboard.bind(this),
-        'refreshpage': this.onReceiveRefresh.bind(this)
+        'refreshpage': this.onReceiveRefresh.bind(this),
+        'updatedDevice': this.onDeviceUpdated.bind(this)
       }
     })
     this.incidentSocket.connect()
@@ -130,6 +133,11 @@ export default class MainContainer extends Component {
     const {userInfo} = this.props
     const keep = userInfo && userInfo.keepIncidentAlert
     if (!keep) this.clearNewincidentMsg()
+  }
+
+  onDeviceUpdated (msg) {
+    // console.log(msg)
+    this.props.updateDashboardMapDevice(msg)
   }
 
   onReceiveRefresh () {
