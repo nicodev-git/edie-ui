@@ -10,15 +10,19 @@ export default class TagPickerModalView extends React.Component {
     const {tags, selectedTags, onSelectTag, onDeselectTag} = this.props
     return (
       <div>
+        <h4>Selected</h4>
         <div style={chipStyles.wrapper}>
-        {selectedTags.map((w, i) =>
-          <Chip style={chipStyles.chip} onRequestDelete={() => onDeselectTag(w)}>{w.name}</Chip>
-        )}
+        {
+          selectedTags.map((w, i) =>
+            <Chip key={w.id} style={chipStyles.chip} onRequestDelete={() => onDeselectTag(w)}>{w.name}</Chip>
+          )
+        }
         </div>
+        <h4>Tags</h4>
         <div style={chipStyles.wrapper}>
         {
           tags.map((w, i) =>
-            <Chip style={chipStyles.chip} onTouchTap={() => onSelectTag(w)}>{w.name}</Chip>
+            <Chip key={w.id} style={chipStyles.chip} onTouchTap={() => onSelectTag(w)}>{w.name}</Chip>
           )
         }
         </div>
@@ -26,14 +30,14 @@ export default class TagPickerModalView extends React.Component {
     )
   }
   render () {
-    const {onClickClose, onClickOK, onClickAdd, showChips, hideAdd} = this.props
+    const {onClickClose, onClickOK, onClickAdd, hideAdd} = this.props
     return (
       <Dialog open title="Tags">
         <div className={hideAdd ? 'hidden' : ''}>
           <FlatButton label="Add" onTouchTap={onClickAdd}/>
         </div>
         {this.renderContent()}
-        <TwoButtonsBlockCustom name1="Cancel" action1={onClickClose} name2="OK" action2={showChips ? null : onClickOK}/>
+        <TwoButtonsBlockCustom name1="Cancel" action1={onClickClose} name2="OK" action2={onClickOK}/>
       </Dialog>
     )
   }

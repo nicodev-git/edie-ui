@@ -411,11 +411,14 @@ class GenericSearch extends React.Component {
   onClickTags () {
     this.props.showSearchTagModal(true)
   }
-  onPickTag (tag) {
+  onPickTag (tags) {
     const {searchTags, updateSearchTags} = this.props
-    if (searchTags.indexOf(tag.name) >= 0) return
-    const tags = [...searchTags, tag.name]
-    updateSearchTags(tags)
+    const newTags = [...searchTags]
+    tags.forEach(tag => {
+      if (newTags.indexOf(tag.name) >= 0) return
+      newTags.push(tag.name)
+    })
+    updateSearchTags(newTags)
 
     this.props.updateSearchParams(assign({}, this.props.params, {
       tag: tags.join(',')
@@ -589,9 +592,8 @@ class GenericSearch extends React.Component {
     if (!this.props.searchTagModalOpen) return null
     return (
       <TagPickerModal
-        showChips
         hideAdd
-        onPick={this.onPickTag.bind(this)}
+        onPickMulti={this.onPickTag.bind(this)}
         onClickClose={() => this.props.showSearchTagModal(false)}/>
     )
   }
