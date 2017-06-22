@@ -9,7 +9,11 @@ export default class TagPickerModal extends React.Component {
     this.props.fetchTags()
   }
   onSelectTag (tag) {
-    this.props.selectTag(tag)
+    if (this.props.showChips) {
+
+    } else {
+      this.props.selectTag(tag)
+    }
   }
   onClickOK () {
     const {selectedTag, onPick, onClickClose} = this.props

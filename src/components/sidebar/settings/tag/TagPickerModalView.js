@@ -39,14 +39,14 @@ export default class TagPickerModalView extends React.Component {
     )
   }
   render () {
-    const {onClickClose, onClickOK, onClickAdd} = this.props
+    const {onClickClose, onClickOK, onClickAdd, showChips, hideAdd} = this.props
     return (
       <Dialog open title="Tags">
-        <div>
+        <div className={hideAdd ? 'hidden' : ''}>
           <FlatButton label="Add" onTouchTap={onClickAdd}/>
         </div>
         {this.renderContent()}
-        <TwoButtonsBlockCustom name1="Cancel" action1={onClickClose} name2="OK" action2={onClickOK}/>
+        <TwoButtonsBlockCustom name1="Cancel" action1={onClickClose} name2="OK" action2={showChips ? null : onClickOK}/>
       </Dialog>
     )
   }
