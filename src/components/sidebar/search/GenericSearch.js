@@ -590,6 +590,7 @@ class GenericSearch extends React.Component {
     return (
       <TagPickerModal
         showChips
+        hideAdd
         onPick={this.onPickTag.bind(this)}
         onClickClose={() => this.props.showSearchTagModal(false)}/>
     )
