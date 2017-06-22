@@ -19,14 +19,21 @@ export default function (ComposedComponent) {
 
     gotoLogin () {
       const { location } = this.props
-      this.props.router.push({
-        pathname: '/signin',
-        query: {
+
+      const p = location.pathname
+      const q = location.query
+      let query = null
+      if (p !== '/' && p !== '/signout') {
+        query = {
           redirect: JSON.stringify({
-            p: location.pathname,
-            q: location.query
+            p, q
           })
         }
+      }
+
+      this.props.router.push({
+        pathname: '/signin',
+        query
       })
     }
 

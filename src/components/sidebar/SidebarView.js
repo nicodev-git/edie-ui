@@ -58,14 +58,12 @@ export default class SidebarView extends Component {
         </div>
         <div style={{display: contentType.Main === pageType ? 'block' : 'none'}} className="sidebar">
           {mainMenu.map((item, index) =>
-            <div
-              key={index}
-              className={pageId === item.id ? 'sidebar-chosen' : ''}
-              onClick={onMainMenu.bind(this, index)}>
-
-              <div className="sidebar-item-container">
-                {item.badge ? this.renderBadge(item) : this.renderButton(item)}
-                <div className="sidebar-title">{item.title}</div>
+            <div key={index} onClick={onMainMenu.bind(this, index)}>
+              <div className={pageId === item.id ? 'sidebar-chosen' : ''}>
+                <div className="sidebar-item-container">
+                  {item.badge ? this.renderBadge(item) : this.renderButton(item)}
+                  <div className="sidebar-title">{item.title}</div>
+                </div>
               </div>
               {
                 index === 1 && searchVisible && pageId !== item.id ? <div className={`sidebar-tooltip`}>

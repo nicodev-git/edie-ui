@@ -102,8 +102,8 @@ export default(
         <Route path="list" component={GroupDevicesContainer}/>
       </Route>
 
+      <Route path="signout" component={SignoutContainer} />
     </Route>
     <Route path="/signin" component={SigninContainer} />
-    <Route path="/signout" component={SignoutContainer} />
   </Router>
 )
