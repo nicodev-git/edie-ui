@@ -5,7 +5,7 @@ import ChatIcon from 'material-ui/svg-icons/communication/chat'
 import BugReportIcon from 'material-ui/svg-icons/action/bug-report'
 import NotificationsNoneIcon from 'material-ui/svg-icons/social/notifications-none'
 import SettingsIcon from 'material-ui/svg-icons/action/settings'
-import ExitIcon from 'material-ui/svg-icons/action/exit-to-app'
+// import ExitIcon from 'material-ui/svg-icons/action/exit-to-app'
 import { sidebarIconsColor } from 'style/materialStyles'
 
 const home = <HomeIcon color={sidebarIconsColor}/>
@@ -14,7 +14,7 @@ const chat = <ChatIcon color={sidebarIconsColor}/>
 const threatmap = <BugReportIcon color={sidebarIconsColor}/>
 const incidents = <NotificationsNoneIcon color={sidebarIconsColor}/>
 const settings = <SettingsIcon color={sidebarIconsColor}/>
-const exit = <ExitIcon color={sidebarIconsColor}/>
+// const exit = <ExitIcon color={sidebarIconsColor}/>
 
 export const mainMenu = [
   {id: 'dashboard', title: 'Dashboard', icon: home, path: '/'},
@@ -22,8 +22,8 @@ export const mainMenu = [
   {id: 'chat', title: 'Chat', icon: chat, path: '/chat'},
   {id: 'threatmap', title: 'Threat Map', icon: threatmap, path: '/threatmap'},
   // {id: 'incidents', title: 'Incidents', icon: incidents, path: '/incidents', badge: true},
-  {id: 'settings', title: 'Settings', icon: settings, path: '/settings'},
-  {id: 'logout', title: 'Log Out', icon: exit, path: '/signout'}
+  {id: 'settings', title: 'Settings', icon: settings, path: '/settings'}
+  // {id: 'logout', title: 'Log Out', icon: exit, path: '/signout'}
 ]
 
 export const deviceMenu = (deviceId) => {
