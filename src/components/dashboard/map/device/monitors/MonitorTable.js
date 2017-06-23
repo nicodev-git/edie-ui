@@ -154,8 +154,8 @@ export default class MonitorTable extends Component {
     })
   }
 
-  addMonitor (type) {
-    this.props.openDeviceMonitorWizard()
+  addMonitor (monitorConfig) {
+    this.props.openDeviceMonitorWizard(null, monitorConfig)
     return true
   }
 
@@ -220,7 +220,7 @@ export default class MonitorTable extends Component {
         {...this.props}
         onClickItem={monitorConfig => {
           this.setState({monitorConfig}, () => {
-            this.addMonitor()
+            this.addMonitor(monitorConfig)
           })
           return true
         }}

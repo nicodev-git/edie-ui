@@ -138,7 +138,8 @@ export default function (state = INITIAL_STATE, action) {
       return { ...state, monitorPickerVisible: false }
 
     case OPEN_DEVICE_MONITOR_WIZARD: {
-      const params = action.data ? (action.data.params || {}) : {}
+      const config = action.monitorConfig || {}
+      const params = action.data ? (action.data.params || {}) : (config.params || {})
       const editParams = keys(params).map(key => ({
         key,
         value: params[key]

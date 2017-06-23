@@ -181,11 +181,12 @@ export const closeDeviceMonitorPicker = () => {
   }
 }
 
-export const openDeviceMonitorWizard = (initialValues) => {
+export const openDeviceMonitorWizard = (initialValues, monitorConfig) => {
   return (dispatch) => {
     dispatch({
       type: OPEN_DEVICE_MONITOR_WIZARD,
-      data: initialValues
+      data: initialValues,
+      monitorConfig
     })
   }
 }
