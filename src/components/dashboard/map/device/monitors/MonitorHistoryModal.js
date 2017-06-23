@@ -57,9 +57,8 @@ export default class MonitorHistoryModal extends Component {
 
     return (
       <Dialog open title="Monitor History">
-        <Header name="Monitor History" />
         <div className="small-modal-table">
-          <div style={{height: '400px', position: 'relative'}}>
+          <div style={{height: '300px', position: 'relative'}}>
             <InfiniteTable
               id="table"
               url="/event/search/findBy"
@@ -69,9 +68,7 @@ export default class MonitorHistoryModal extends Component {
             />
           </div>
         </div>
-        <div className="padding-md-bottom">
-          <CloseButton onClose={this.onClickClose.bind(this)} />
-        </div>
+        <CloseButton onClose={this.onClickClose.bind(this)} />
       </Dialog>
     )
   }
