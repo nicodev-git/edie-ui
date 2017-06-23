@@ -27,3 +27,22 @@
 .wizard-diagram-choice button:hover {
     background-color: #d7d8d9 !important;
 }
+
+.tt-workflow {
+    min-width: 250px !important;
+    white-space: nowrap;
+}
+
+.text-plus-icon {
+    display: flex;
+    justify-content: flex-start;
+    height: 50px !important;
+}
+
+.text-plus-icon button {
+    padding: 0 !important;
+}
+
+.text-plus-icon svg:hover {
+    fill: #f44336 !important;
+}
