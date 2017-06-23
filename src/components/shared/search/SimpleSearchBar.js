@@ -22,17 +22,6 @@ const SimpleSearchBar = ({onSearch, active, onFocus, onBlur, defaultKeyword, aut
       onChange={onSearch}
       id="searchInput"
     />
-    {/* <div className="searchbar" style={active ? activeStyle : defaultStyle}>
-      <input
-        onFocus={onFocus}
-        onBlur={onBlur}
-        id="searchInput"
-        className="searchbar-input"
-        style={active ? activeStyle : defaultStyle}
-        autoFocus={autoFocus}
-        defaultValue={defaultKeyword}
-        onKeyPress={onSearch}/>
-    </div> */}
   </div>
 )
 

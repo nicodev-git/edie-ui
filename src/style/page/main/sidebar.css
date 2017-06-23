@@ -74,3 +74,49 @@
     padding: 0 16px;
 }
 
+/* Message view */
+.topbar-message {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.message-avatar {
+    display: flex;
+    align-items: center;
+}
+
+.message-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: flex-start;
+    line-height: 16px;
+    word-wrap: break-word;
+}
+
+.message-text div {
+    max-width: 350px;
+}
+
+.inner-text {
+    white-space: normal;
+}
+
+.message-time {
+    padding-left: 15px;
+}
+
+.see-all-messages:hover {
+    background-color: #b8b7b7 !important;
+}
+
+.see-all-messages:hover svg path, .see-all-messages:hover {
+    fill: #ffffff !important;
+    color: #ffffff !important;
+}
+
+.see-all-messages>div>div {
+    padding-left: 50px !important;
+}
+
+
