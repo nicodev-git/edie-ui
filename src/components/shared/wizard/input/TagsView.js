@@ -1,5 +1,5 @@
 import React from 'react'
-import {Chip, RaisedButton} from 'material-ui'
+import {Chip} from 'material-ui'
 import TagPickerModal from 'containers/settings/tag/TagPickerModalContainer'
 
 import { chipStyles } from 'style/materialStyles'
@@ -28,10 +28,8 @@ export default class TagsView extends React.Component {
     const {monitorTags} = this.props
     return (
       <div>
-        <div>
-          <RaisedButton label="Add Tag" onTouchTap={this.onClickAddTag.bind(this)}/>
-        </div>
         <div style={chipStyles.wrapper}>
+          <Chip style={chipStyles.chip} onTouchTap={() => this.onClickAddTag()}><b>Add Tag</b></Chip>
           {monitorTags.map((t, i) =>
             <Chip key={i} style={chipStyles.chip} onRequestDelete={() => this.onClickDeleteTag(i)}>{t}</Chip>
           )}

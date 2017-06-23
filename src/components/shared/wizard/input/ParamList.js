@@ -1,7 +1,5 @@
 import React from 'react'
 import Chip from 'material-ui/Chip'
-import RaisedButton from 'material-ui/RaisedButton'
-import { buttonStyle, buttonTextStyle } from 'style/materialStyles'
 
 const styles = {
   chip: {
@@ -40,25 +38,19 @@ class ParamList extends React.Component {
 
   render () {
     return (
-      <div>
-        <div className="margin-sm-bottom">
-          <RaisedButton label="Add Params" onClick={this.onClickAdd.bind(this)}
-            style={buttonStyle} labelStyle={buttonTextStyle}/>
-        </div>
-        <div style={styles.wrapper} className="margin-lg-bottom margin-md-top">
-          {this.props.editParams.map(p =>
-            <Chip
-              key={p.key}
-              style={styles.chip}
-              labelStyle={styles.chipLabel}
-              onTouchTap={this.onClickEdit.bind(this, p)}
-              onRequestDelete={this.onClickRemove.bind(this, p)}
-            >
-              <b>{p.key}</b>: {p.value}
-            </Chip>
-          )}
-        </div>
-
+      <div style={styles.wrapper} className="margin-lg-bottom margin-md-top">
+        <Chip style={styles.chip} onTouchTap={this.onClickAdd.bind(this)}><b>Add Param</b></Chip>
+        {this.props.editParams.map(p =>
+          <Chip
+            key={p.key}
+            style={styles.chip}
+            labelStyle={styles.chipLabel}
+            onTouchTap={this.onClickEdit.bind(this, p)}
+            onRequestDelete={this.onClickRemove.bind(this, p)}
+          >
+            <b>{p.key}</b>: {p.value}
+          </Chip>
+        )}
       </div>
     )
   }

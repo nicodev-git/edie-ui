@@ -7,6 +7,7 @@ import NotificationsNoneIcon from 'material-ui/svg-icons/social/notifications-no
 import SettingsIcon from 'material-ui/svg-icons/action/settings'
 import BackIcon from 'material-ui/svg-icons/navigation/arrow-back'
 // import ExitIcon from 'material-ui/svg-icons/action/exit-to-app'
+import PlaylistIcon from 'material-ui/svg-icons/av/playlist-add-check'
 import { sidebarIconsColor } from 'style/materialStyles'
 
 const home = <HomeIcon color={sidebarIconsColor}/>
@@ -16,6 +17,7 @@ const threatmap = <BugReportIcon color={sidebarIconsColor}/>
 const incidents = <NotificationsNoneIcon color={sidebarIconsColor}/>
 const settings = <SettingsIcon color={sidebarIconsColor}/>
 const back = <BackIcon color={sidebarIconsColor}/>
+const monitors = <PlaylistIcon color={sidebarIconsColor}/>
 // const exit = <ExitIcon color={sidebarIconsColor}/>
 
 export const mainMenu = [
@@ -34,7 +36,7 @@ export const deviceMenu = (deviceId) => {
     {id: 'topology', title: 'Topology', icon: threatmap, group: true, path: `/device/${deviceId}/topology`},
     {id: 'devices', title: 'Devices', icon: chat, group: true, path: `/device/${deviceId}/list`},
     {id: 'incidents', title: 'Incidents', icon: incidents, path: `/device/${deviceId}/main`},
-    {id: 'monitors', title: 'Monitors', icon: chat, path: `/device/${deviceId}/monitor`},
+    {id: 'monitors', title: 'Monitors', icon: monitors, path: `/device/${deviceId}/monitor`},
     {id: 'connected', title: 'Connected Devices', icon: search, path: `/device/${deviceId}/connected`},
     {id: 'deviceinfo', title: 'Device Info', icon: settings, path: `/device/${deviceId}/info`}
   ]
