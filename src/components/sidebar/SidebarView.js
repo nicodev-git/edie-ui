@@ -39,13 +39,28 @@ export default class SidebarView extends Component {
     )
   }
 
+  renderDeviceMenuItem (item, index) {
+    const {pageId, group, onDeviceMenu} = this.props
+    if (item.group && !group) return null
+    return (
+      <div key={index} className={pageId === item.id ? 'active open' : ''} onClick={onDeviceMenu.bind(this, index)}>
+        {(index !== 0) ? (<Divider style={{margin: 0, backgroundColor: '#393b42'}}/>) : null}
+        <div className="sidebar-item-container">
+          {this.renderButton(item)}
+          <div className="sidebar-title">{item.title}</div>
+        </div>
+      </div>
+    )
+  }
+
   render () {
-    const {onToggle, contentType, mainMenu, deviceMenu, onMainMenu, onDeviceMenu,
-      device, pageId, pageType, searchVisible, group, onSearch,
+    const {onToggle, contentType, mainMenu, deviceMenu, onMainMenu,
+      device, pageId, pageType, searchVisible, onSearch,
       sidebarMessageMenuOpen,
       openSidebarMessageMenu, closeSidebarMessageMenu
     } = this.props
 
+    const deviceMenuItems = deviceMenu(device ? device.id : 'main')
     return (
       <Drawer open width={sidebarWidth} containerStyle={sidebarStyle}>
         <div className="hidden">
@@ -90,19 +105,9 @@ export default class SidebarView extends Component {
           )}
         </div>
 
+        {contentType.Device === pageType ? this.renderDeviceMenuItem(deviceMenuItems[0], 0) : null}
         <div style={{display: contentType.Device === pageType ? 'block' : 'none'}} className="sidebar">
-          {deviceMenu(device ? device.id : 'main').map((item, index) => {
-            if (item.group && !group) return null
-            return (
-              <div key={index} className={pageId === item.id ? 'active open' : ''} onClick={onDeviceMenu.bind(this, index)}>
-                {(index !== 0) ? (<Divider style={{margin: 0, backgroundColor: '#393b42'}}/>) : null}
-                <div className="sidebar-item-container">
-                  {this.renderButton(item)}
-                  <div className="sidebar-title">{item.title}</div>
-                </div>
-              </div>
-            )
-          })}
+          {deviceMenuItems.map((item, index) => index > 0 ? this.renderDeviceMenuItem(item, index) : null)}
         </div>
       </Drawer>
     )
