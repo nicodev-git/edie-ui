@@ -6,9 +6,9 @@ import { inputStyle, underlineStyle } from 'style/materialStyles'
 
 export default class TextInput extends React.Component {
   renderField (config) {
-    const {input, label, disabled, style, useColumn} = config
+    const {input, label, disabled, style, useColumn, className} = config
     const field = (
-      <div style={util.convertStyle(style)}>
+      <div style={util.convertStyle(style)} className={className}>
         <TextField
           floatingLabelText={<label>{label}</label>}
           inputStyle={inputStyle}
@@ -36,6 +36,7 @@ export default class TextInput extends React.Component {
         component={this.renderField}
         style={config.style}
         onChange={onChange}
+        className={config.cls}
         disabled={config.disabled}
       />
     )

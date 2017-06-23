@@ -27,7 +27,7 @@ export default class TagsView extends React.Component {
   render () {
     const {monitorTags} = this.props
     return (
-      <div>
+      <div className="margin-md-top">
         <div style={chipStyles.wrapper}>
           <label className="padding-xs-top" style={{...chipStyles.chip, width: 80}}>Tags</label>
           {monitorTags.map((t, i) =>

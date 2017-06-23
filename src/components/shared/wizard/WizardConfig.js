@@ -2470,7 +2470,8 @@ export const wizardConfig = {
         },
         width: MAX_WIDTH,
         required: true,
-        name: 'name'
+        name: 'name',
+        cls: 'col-md-6 p-none'
       }, {
         type: 'check',
         label: {
@@ -2479,6 +2480,7 @@ export const wizardConfig = {
           width: 3
         },
         name: 'enabled',
+        cls: 'margin-md-top margin-md-bottom',
                 // checked: true,
         width: MAX_WIDTH
       }, {

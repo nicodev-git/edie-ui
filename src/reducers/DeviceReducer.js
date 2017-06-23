@@ -146,7 +146,7 @@ export default function (state = INITIAL_STATE, action) {
       }))
       const monitorTags = action.data ? (action.data.tags || []) : []
       console.log(action.data)
-      return { ...state, monitorWizardVisible: true, monitorInitialValues: action.data, editParams, monitorTags }
+      return { ...state, monitorWizardVisible: true, monitorInitialValues: action.data || {enabled: true}, editParams, monitorTags }
     }
 
     case CLOSE_DEVICE_MONITOR_WIZARD:
