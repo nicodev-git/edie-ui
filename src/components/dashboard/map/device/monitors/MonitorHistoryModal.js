@@ -4,7 +4,7 @@ import {Dialog} from 'material-ui'
 
 import InfiniteTable from 'components/shared/InfiniteTable'
 import ShowMoreLine from 'components/shared/ShowMoreLine'
-import { Header, CloseButton } from 'components/modal/parts'
+import { CloseButton } from 'components/modal/parts'
 
 export default class MonitorHistoryModal extends Component {
   constructor (props) {

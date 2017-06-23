@@ -9,7 +9,7 @@ injectTapEventPlugin()
 
 import { store } from './shared/GetStore'
 
-console.log('Version: 0.12.0')
+console.log('Version: 0.12.1')
 
 ReactDOM.render(
   <MuiThemeProvider>
