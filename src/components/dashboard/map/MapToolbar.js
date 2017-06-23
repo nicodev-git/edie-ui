@@ -391,10 +391,6 @@ export default class Toolbar extends React.Component {
 
               {this.renderLineTypes()}
             </li>
-            <li>
-              <img className="option uploader" src="/images/uploading.gif"
-                style={{float: 'left', width: '18px', display: 'none', opacity: 0.5, marginLeft: '10px'}}/>
-            </li>
 
             <li className={this.state.displayDevices ? '' : 'dropdown'} ref="liDevices">
               <a

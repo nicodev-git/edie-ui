@@ -164,10 +164,6 @@ a.btn-new-incident {
     z-index: 21;
 }
 
-.non-scrollable {
-    overflow: hidden;
-}
-
 .map-maximized > .panel > .panel-heading {
     position: fixed;
     transition: 0.3s ease;
@@ -238,4 +234,13 @@ li.dropdown-settings {
     position: absolute;
     right: 0;
     bottom: 0;
+}
+
+.map-toolbar {
+    background-color: #333333 !important;
+    border: 0px !important;
+}
+
+.toolbar-options {
+    right: 5px !important;
 }

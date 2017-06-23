@@ -117,18 +117,6 @@ a, a:focus, a:hover {
     position: relative;
 }
 
-.input-underlined {
-    border: none;
-    border-bottom: 1px solid gray;
-    outline: 0;
-}
-
-.select-noborder {
-    border: none;
-    outline: 0;
-    background: transparent;
-}
-
 table.table tbody tr.selected {
     background-color: #C7DEFC;
 }
@@ -174,7 +162,6 @@ table.table tbody tr.selected {
     text-transform: uppercase;
 }
 
-.tab-header .btn-group button,
 .tab-header .dropdown-menu>li>a{
     color: #428bca;
 }
@@ -388,63 +375,6 @@ table.table tbody tr.selected {
     background-color: yellow;
 }
 
-/* Modal */
-.modal-w-9 .modal-dialog {
-    width: 900px;
-}
-
-.modal-w-10 .modal-dialog {
-    width: 1000px;
-}
-
-.modal-w-fit .modal-dialog {
-    width: 100%;
-}
-.modal-w-wrap .modal-dialog {
-    width: initial;
-}
-
-.img-input {
-    display: inline-block;
-    position: relative;
-    overflow: hidden;
-}
-
-.img-input img {
-    width: 100%;
-}
-
-.img-input input[type=file] {
-    position: absolute;
-    top: 0;
-    right: 0;
-    margin: 0;
-    opacity: 0;
-    -ms-filter: 'alpha(opacity=0)';
-    font-size: 200px;
-    direction: ltr;
-    cursor: pointer;
-    bottom: 0;
-}
-
-/* Alert */
-.alert-incident{
-    position: fixed;
-    bottom: 5px;
-    margin-bottom: 0;
-    left: 50%;
-    min-width: 62%;
-    transform: translate(-50%, 0);
-
-    color: #a94442;
-    background-color: #f2dede;
-    border-color: #ebccd1;
-
-    z-index: 61;
-
-    font-size: 18px;
-}
-
 /* Tooltip */
 .tt-workflow {
     min-width: 250px !important;
@@ -513,15 +443,6 @@ table.table tbody tr.selected {
     outline-width: 0;
 }
 
-.map-toolbar {
-  background-color: #333333 !important;
-  border: 0px !important;
-}
-
-.toolbar-options {
-  right: 5px !important;
-}
-
 .incident-button-value {
     font-size: 24pt;
     margin-left: 10px;
@@ -584,8 +505,6 @@ table.table tbody tr.selected {
   padding-left: 50px !important;
 }
 
-
-
 #main-navigation {
   padding-top: 30px;
 }
@@ -625,17 +544,6 @@ table.table tbody tr.selected {
   height: 4px;
   background-color: #78a8ca;
   border-radius: 15%;
-}
-
-.modal-dialog th,
-.modal-dialog th>span {
-  font-size: 9pt;
-}
-
-.modal-dialog td,
-.modal-dialog td>span {
-  font-size: 9pt;
-  color: #939395 !important;
 }
 
 .main-panel {
