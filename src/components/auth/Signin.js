@@ -38,7 +38,7 @@ class Signin extends Component {
       <div className="login">
         <div className="heading">
           <h1>Incident Manager</h1>
-          <p>Version 3.0</p>
+          <p>Version 2017.2</p>
         </div>
         <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
           <div className="box">
