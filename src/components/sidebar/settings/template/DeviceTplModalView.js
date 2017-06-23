@@ -15,7 +15,7 @@ export default class DeviceTplModalView extends Component {
     } = this.props
     return (
       <form onSubmit={onSubmit}>
-        <div className="form-column padding-left-12 margin-bottom-0">
+        <div className="form-column padding-md-left mb-none">
           <Field name="name" component={FormInput} label="Name"/>
           <Field name="devicetemplategroup" component={FormInput} label="Group"/>
           <ImageUploader imgUrl={imgUrl} onChange={onChange}/>
@@ -34,11 +34,11 @@ export default class DeviceTplModalView extends Component {
           <SubHeader name="Monitors"/>
         </div>
         <div>
-          <div className="col-md-6 modal-left">
+          <div className="col-md-6 ml-none">
             <Monitors monitors={monitors} onEditMonitor={onEditMonitor} onRemoveMonitor={onRemoveMonitor} />
             <Workflows workflows={workflows} showWfSelectModal={showWfSelectModal} onClickDeleteWf={onClickDeleteWf}/>
           </div>
-          <div className="col-md-6 modal-right" style={{maxHeight: '200px', overflow: 'auto'}}>
+          <div className="col-md-6 mr-none" style={{maxHeight: '200px', overflow: 'auto'}}>
             <MonitorTemplates monitors={monitors} monitorTemplates={monitorTemplates} onAddMonitor={onAddMonitor} />
           </div>
         </div>

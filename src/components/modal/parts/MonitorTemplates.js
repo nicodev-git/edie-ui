@@ -14,7 +14,7 @@ export default class MonitorTemplates extends Component {
               <tr className="modal-row" key={item.id}>
                 <td className="table-label">{item.name}</td>
                 <td className="table-icon">
-                  <div className={`add-button ${monitors.includes(item) ? 'd-none' : ''}`}>
+                  <div className={`add-button ${monitors.includes(item) ? 'hidden' : ''}`}>
                     <IconButton
                       style={buttonStyle}
                       iconStyle={iconStyle}

@@ -12,6 +12,7 @@
 
 .griddle th {
     background-color: white;
+    padding-left: 6px !important;
 }
 
 .griddle .table>tbody>tr>td {

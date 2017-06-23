@@ -22,7 +22,6 @@ import Monitors from './Monitors'
 import Workflows from './Workflows'
 import MonitorTemplates from './MonitorTemplates'
 import CrudButtons from './CrudButtons'
-import HeaderWithCancel from './HeaderWithCancel'
 import CloseIconButton from './CloseIconButton'
 
 export {
@@ -50,6 +49,5 @@ export {
     Workflows,
     MonitorTemplates,
     CrudButtons,
-    HeaderWithCancel,
     CloseIconButton
 }
