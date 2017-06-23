@@ -38,8 +38,8 @@ class ParamList extends React.Component {
 
   render () {
     return (
-      <div style={styles.wrapper} className="margin-lg-bottom margin-md-top">
-        <Chip style={styles.chip} onTouchTap={this.onClickAdd.bind(this)}><b>Add Param</b></Chip>
+      <div style={styles.wrapper}>
+        <label className="padding-xs-top" style={{...styles.chip, width: 80}}>Params</label>
         {this.props.editParams.map(p =>
           <Chip
             key={p.key}
@@ -51,6 +51,7 @@ class ParamList extends React.Component {
             <b>{p.key}</b>: {p.value}
           </Chip>
         )}
+        <Chip style={styles.chip} onTouchTap={this.onClickAdd.bind(this)}><b>&nbsp;&nbsp;+&nbsp;&nbsp;</b></Chip>
       </div>
     )
   }
