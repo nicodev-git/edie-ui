@@ -584,62 +584,10 @@ table.table tbody tr.selected {
   padding-left: 50px !important;
 }
 
-.sidebar-item-container {
-  display: flex;
-  justify-content: flex-start;
-  cursor: pointer;
-  padding-left: 20px;
-}
 
-.sidebar-condensed .sidebar-item-container {
-  padding-left: 0px;
-}
-
-.sidebar-title {
-  color: #838489;
-  padding-top: 15px;
-  padding-left: 20px;
-  font-weight: 600;
-}
-
-.sidebar-condensed .sidebar-title {
-  display: none;
-}
-
-.sidebar-item-container button>div>div {
-  display: none;
-}
-
-.sidebar-condensed .sidebar-item-container button>div>div {
-  display: block;
-}
-
-.sidebar-chosen {
-  background-color: #2b2c31;
-}
-
-.sidebar-chosen .sidebar-title {
-  color: #ffffff;
-}
-
-.sidebar-chosen svg {
-  fill: #ffffff !important;
-}
 
 #main-navigation {
   padding-top: 30px;
-}
-
-.sidebar-custom {
-  background-color: #33363d !important;
-}
-
-.sidebar-custom hr {
-  margin-left: 10px !important;
-}
-
-.sidebar-condensed .sidebar-custom hr {
-  margin-left: 0px !important;
 }
 
 .tab-container {
