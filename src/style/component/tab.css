@@ -49,3 +49,19 @@
     margin-bottom: 0;
     overflow: auto;
 }
+
+.tab-content>.active {
+    display: flex !important;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: flex-start;
+}
+
+.tab-content>.active>div {
+    width: 100%;
+}
+
+.tab-content>.hidden {
+    display: none;
+}
+

@@ -55,7 +55,7 @@ export default class DeviceSearchModalView extends Component {
             <tbody>
             {
               selected.map(device =>
-                <tr className="row-no-padding" key={device.id}>
+                <tr className="p-none" key={device.id}>
                   <td className="table-label">{device.name}</td>
                   <td className="table-icon">
                     <div className="remove-button">

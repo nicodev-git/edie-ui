@@ -122,3 +122,12 @@ div.dropdown-image div:hover {
     background-color: lightgray;
 }
 
+.wizard-input>div>div {
+    width: 100% !important;
+}
+
+.monitors-wizard-crud {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}

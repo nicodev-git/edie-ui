@@ -317,16 +317,6 @@ table.table tbody tr.selected {
     border: 1px solid black;
 }
 
-.material-selector {
-    padding: 0px;
-}
-
-.material-selector button {
-    width: 34px !important;
-    height: 34px !important;
-    padding: 0px !important;
-}
-
 .form-column {
     display: flex;
     flex-direction: column;
@@ -424,10 +414,6 @@ table.table tbody tr.selected {
   width:100% !important;
 }
 
-.modal-header h4 {
-  display: inline-block;
-}
-
 .form-buttons button:hover {
   background-color: #d7d8d9 !important;
 }
@@ -488,26 +474,6 @@ table.table tbody tr.selected {
   align-items: center;
 }
 
-.wizard-step-1 {
-  width: 90%;
-}
-
-.wizard-step-1-container {
-  position: relative;
-}
-
-.wizard-step-1-help {
-  position: absolute;
-  top: 135px;
-  right: 5px;
-}
-
-.wizard-step-1-add {
-  position: absolute;
-  top: 180px;
-  right: 5px;
-}
-
 .crud-buttons {
   display: flex;
   justify-content: flex-start;
@@ -530,39 +496,6 @@ table.table tbody tr.selected {
   fill: #f44336 !important;
 }
 
-.wizard-diagram-choice {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-}
-
-.wizard-diagram-choice button:hover {
-  background-color: #d7d8d9 !important;
-}
-
-.wizard-input>div>div {
-  width: 100% !important;
-}
-
-.device-wizard-container {
-  display: flex;
-}
-
-.tab-content>.active {
-  display: flex !important;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: flex-start;
-}
-
-.tab-content>.active>div {
-  width: 100%;
-}
-
-.tab-content>.hidden {
-  display: none;
-}
-
 .control-label>div>div {
   align-items: center;
 }
@@ -570,25 +503,9 @@ table.table tbody tr.selected {
 .control-label>div>div>label {
   width: calc(100% - 40px) !important;
 }
-
-.monitors-wizard-crud {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-}
-
 .image-container {
   position: relative;
   height: 100px;
-}
-
-.image-uploader {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  height: 100px;
-  margin-left: -80px;
-  z-index: 2;
 }
 
 .image-container img {
@@ -601,35 +518,6 @@ table.table tbody tr.selected {
   max-height: 100px;
 }
 
-.dropzone-inner {
-  position: absolute;
-  top: 40%;
-  left: 40%;
-}
-
-.flex-panel {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.flex-start {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-}
-
-.flex-start > div {
-  margin-right: 10px !important;
-}
-
-.search-wrapper {
-  margin: 0;
-}
-
-.search-wrapper>div>div {
-  background-color: #ffffff;
-}
 /* Field Item */
 .field-item.selected {
     background: lightgray;
@@ -700,11 +588,6 @@ table.table tbody tr.selected {
   font-size: 12pt !important;
   padding-left: 0 !important;
   font-weight: 600 !important;
-}
-
-/* Device search table */
-.row-no-padding > td{
-  padding: 0 !important;
 }
 
 /* Autocomplete styles */
