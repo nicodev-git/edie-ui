@@ -31,7 +31,14 @@ import {
   showParserTypeTagModal
 } from 'actions'
 
-@connect(
+class ParserTypesContainer extends React.Component {
+  render () {
+    return (
+      <ParserTypes {...this.props} />
+    )
+  }
+}
+export default connect(
   state => ({
     parserTypes: state.settings.parserTypes,
     parserTypeDraw: state.settings.parserTypeDraw,
@@ -80,12 +87,4 @@ import {
       showParserTypeTagModal
     }, dispatch)
   })
-)
-@withRouter
-export default class ParserTypesContainer extends React.Component {
-  render () {
-    return (
-      <ParserTypes {...this.props} />
-    )
-  }
-}
+)(withRouter(ParserTypesContainer))

@@ -14,7 +14,14 @@ import {
   closeCredentialsModal
 } from 'actions'
 
-@connect(
+class CredentialsContainer extends React.Component {
+  render () {
+    return (
+      <Credentials {...this.props} />
+    )
+  }
+}
+export default connect(
   state => ({
     credentials: state.settings.credentials,
     credentialsModalVisible: state.settings.credentialsModalVisible,
@@ -32,12 +39,4 @@ import {
       closeCredentialsModal
     }, dispatch)
   })
-)
-@withRouter
-export default class CredentialsContainer extends React.Component {
-  render () {
-    return (
-      <Credentials {...this.props} />
-    )
-  }
-}
+)(withRouter(CredentialsContainer))

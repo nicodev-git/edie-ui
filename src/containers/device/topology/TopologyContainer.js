@@ -17,7 +17,14 @@ import {
 
 import Topology from 'components/dashboard/map/device/topology/Topology'
 
-@connect(
+class TopologyContainer extends React.Component {
+  render () {
+    return (
+      <Topology {...this.props} />
+    )
+  }
+}
+export default connect(
   state => ({
     device: state.dashboard.selectedDevice,
     deviceCategories: state.settings.deviceCategories,
@@ -35,12 +42,4 @@ import Topology from 'components/dashboard/map/device/topology/Topology'
     closeDevice,
     fetchGroupDevicesAndLines
   }
-)
-@withRouter
-export default class TopologyContainer extends React.Component {
-  render () {
-    return (
-      <Topology {...this.props} />
-    )
-  }
-}
+)(withRouter(TopologyContainer))

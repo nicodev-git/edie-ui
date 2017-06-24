@@ -24,7 +24,14 @@ import {
 
 import MainIncidents from 'components/dashboard/map/device/main/incidents/MainIncidents'
 
-@connect(
+class MainIncidentsContainer extends Component {
+  render () {
+    return (
+      <MainIncidents {...this.props} />
+    )
+  }
+}
+export default connect(
   state => ({
     device: state.dashboard.selectedDevice,
     incidents: state.devices.incidents,
@@ -53,12 +60,4 @@ import MainIncidents from 'components/dashboard/map/device/main/incidents/MainIn
       updateDeviceIncident
     }, dispatch)
   })
-)
-@withRouter
-export default class MainIncidentsContainer extends Component {
-  render () {
-    return (
-      <MainIncidents {...this.props} />
-    )
-  }
-}
+)(withRouter(MainIncidentsContainer))

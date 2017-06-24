@@ -10,7 +10,14 @@ import {
   clearMonitors
 } from 'actions'
 
-@connect(
+class CommandContainer extends React.Component {
+  render () {
+    return (
+      <Command {...this.props}/>
+    )
+  }
+}
+export default connect(
   state => ({
     device: state.dashboard.selectedDevice,
 
@@ -26,12 +33,4 @@ import {
     updateMonitorRealTime,
     clearMonitors
   }
-)
-@withRouter
-export default class CommandContainer extends React.Component {
-  render () {
-    return (
-      <Command {...this.props}/>
-    )
-  }
-}
+)(withRouter(CommandContainer))

@@ -18,7 +18,14 @@ import {
   updateMonitorQuery
 } from 'actions'
 
-@connect(
+class EventLogsContainer extends React.Component {
+  render () {
+    return (
+      <EventLogs {...this.props}/>
+    )
+  }
+}
+export default connect(
   state => ({
     device: state.dashboard.selectedDevice,
 
@@ -45,12 +52,4 @@ import {
 
     updateMonitorQuery
   }
-)
-@withRouter
-export default class EventLogsContainer extends React.Component {
-  render () {
-    return (
-      <EventLogs {...this.props}/>
-    )
-  }
-}
+)(withRouter(EventLogsContainer))

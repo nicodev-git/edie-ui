@@ -12,7 +12,14 @@ import {
   showFwRuleModal
 } from 'actions'
 
-@connect(
+class FirewallContainer extends React.Component {
+  render () {
+    return (
+      <Firewall {...this.props}/>
+    )
+  }
+}
+export default connect(
   state => ({
     device: state.dashboard.selectedDevice,
 
@@ -32,12 +39,4 @@ import {
 
     showFwRuleModal
   }
-)
-@withRouter
-export default class FirewallContainer extends React.Component {
-  render () {
-    return (
-      <Firewall {...this.props}/>
-    )
-  }
-}
+)(withRouter(FirewallContainer))

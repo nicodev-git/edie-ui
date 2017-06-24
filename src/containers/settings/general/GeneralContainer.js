@@ -11,7 +11,14 @@ import {
   updateUserOption
 } from 'actions'
 
-@connect(
+class GeneralContainer extends React.Component {
+  render () {
+    return (
+      <General {...this.props} />
+    )
+  }
+}
+export default connect(
   state => ({
     envVars: state.settings.envVars,
     userInfo: state.dashboard.userInfo
@@ -26,10 +33,3 @@ import {
     }, dispatch)
   })
 )
-export default class GeneralContainer extends React.Component {
-  render () {
-    return (
-      <General {...this.props} />
-    )
-  }
-}

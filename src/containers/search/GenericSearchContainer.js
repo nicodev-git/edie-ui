@@ -60,8 +60,14 @@ import {
   updateSearchTags
 } from 'actions'
 
-@withRouter
-@connect(
+class GenericSearchContainer extends React.Component {
+  render () {
+    return (
+      <GenericSearch {...this.props}/>
+    )
+  }
+}
+export default connect(
   state => ({
     params: state.search.params,
     queryChips: state.search.queryChips,
@@ -171,11 +177,4 @@ import {
       updateSearchTags
     }, dispatch)
   })
-)
-export default class GenericSearchContainer extends React.Component {
-  render () {
-    return (
-      <GenericSearch {...this.props}/>
-    )
-  }
-}
+)(withRouter(GenericSearchContainer))

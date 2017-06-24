@@ -6,19 +6,19 @@ import { withRouter } from 'react-router'
 
 import { openDevice, fetchDevices, fetchDevice } from 'actions'
 
-@connect(
-  state => ({
-    devices: state.devices.devices,
-    selectedDevice: state.dashboard.selectedDevice }),
-  dispatch => ({
-    ...bindActionCreators({ openDevice, fetchDevices, fetchDevice }, dispatch)
-  })
-)
-@withRouter
-export default class DeviceContainer extends React.Component {
+class DeviceContainer extends React.Component {
   render () {
     return (
       <Device {...this.props} />
     )
   }
 }
+
+export default connect(
+  state => ({
+    devices: state.devices.devices,
+    selectedDevice: state.dashboard.selectedDevice }),
+  dispatch => ({
+    ...bindActionCreators({ openDevice, fetchDevices, fetchDevice }, dispatch)
+  })
+)(withRouter(DeviceContainer))

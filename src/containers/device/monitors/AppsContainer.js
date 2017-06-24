@@ -16,7 +16,15 @@ import {
   updateDeviceAppTab
 } from 'actions'
 
-@connect(
+class AppsContainer extends React.Component {
+  render () {
+    return (
+      <Apps {...this.props}/>
+    )
+  }
+}
+
+export default connect(
   state => ({
     device: state.dashboard.selectedDevice,
 
@@ -42,12 +50,4 @@ import {
     updateMonitorQuery,
     updateDeviceAppTab
   }
-)
-@withRouter
-export default class AppsContainer extends React.Component {
-  render () {
-    return (
-      <Apps {...this.props}/>
-    )
-  }
-}
+)(withRouter(AppsContainer))

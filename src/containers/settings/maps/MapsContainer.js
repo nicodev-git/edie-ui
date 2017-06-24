@@ -20,7 +20,14 @@ import {
   fetchSettingUsers
 } from 'actions'
 
-@connect(
+class MapsContainer extends React.Component {
+  render () {
+    return (
+      <Maps {...this.props} />
+    )
+  }
+}
+export default connect(
   state => ({
     maps: state.settings.maps,
     mapModalVisible: state.settings.mapModalVisible,
@@ -50,10 +57,3 @@ import {
     }, dispatch)
   })
 )
-export default class MapsContainer extends React.Component {
-  render () {
-    return (
-      <Maps {...this.props} />
-    )
-  }
-}

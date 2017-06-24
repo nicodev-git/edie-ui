@@ -32,7 +32,15 @@ import {
   showMonitorHistoryModal
 } from 'actions'
 
-@connect(
+export default class MonitorsContainer extends Component {
+  render () {
+    return (
+      <Monitors {...this.props} />
+    )
+  }
+}
+
+export default connect(
   state => ({
     device: state.dashboard.selectedDevice,
     monitorPickerVisible: state.devices.monitorPickerVisible,
@@ -86,12 +94,4 @@ import {
 
     showMonitorHistoryModal
   }
-)
-@withRouter
-export default class MonitorsContainer extends Component {
-  render () {
-    return (
-      <Monitors {...this.props} />
-    )
-  }
-}
+)(withRouter(MonitorsContainer))

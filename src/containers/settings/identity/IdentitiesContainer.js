@@ -12,7 +12,14 @@ import {
   updateIdentity
 } from 'actions'
 
-@connect(
+class IdentitiesContainer extends Component {
+  render () {
+    return (
+      <Identities {...this.props} />
+    )
+  }
+}
+export default connect(
   state => ({
     identities: state.settings.identities,
     editIdentity: state.settings.editIdentity,
@@ -30,10 +37,3 @@ import {
     }, dispatch)
   })
 )
-export default class IdentitiesContainer extends Component {
-  render () {
-    return (
-      <Identities {...this.props} />
-    )
-  }
-}

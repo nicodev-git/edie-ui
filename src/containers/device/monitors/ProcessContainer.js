@@ -16,7 +16,14 @@ import {
   updateDeviceAppTab
 } from 'actions'
 
-@connect(
+class ProcessContainer extends React.Component {
+  render () {
+    return (
+      <Process {...this.props}/>
+    )
+  }
+}
+export default connect(
   state => ({
     device: state.dashboard.selectedDevice,
 
@@ -41,12 +48,4 @@ import {
     updateMonitorQuery,
     updateDeviceAppTab
   }
-)
-@withRouter
-export default class ProcessContainer extends React.Component {
-  render () {
-    return (
-      <Process {...this.props}/>
-    )
-  }
-}
+)(withRouter(ProcessContainer))

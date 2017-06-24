@@ -12,7 +12,15 @@ import {
   importSyncData
 } from 'actions'
 
-@connect(
+class AdvancedContainer extends React.Component {
+  render () {
+    return (
+      <Advanced {...this.props} />
+    )
+  }
+}
+
+export default connect(
   state => ({
     envVars: state.settings.envVars,
     syncStatus: state.settings.syncStatus,
@@ -29,10 +37,3 @@ import {
     }, dispatch)
   })
 )
-export default class AdvancedContainer extends React.Component {
-  render () {
-    return (
-      <Advanced {...this.props} />
-    )
-  }
-}

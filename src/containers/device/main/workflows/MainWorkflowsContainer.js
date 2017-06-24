@@ -35,7 +35,14 @@ import {
   showWorkflowTagModal
 } from 'actions'
 
-@connect(
+class MainRulesContainer extends React.Component {
+  render () {
+    return (
+      <MainWorkflows {...this.props} />
+    )
+  }
+}
+export default connect(
   state => ({
     device: state.dashboard.selectedDevice,
     workflows: state.devices.workflows,
@@ -92,12 +99,4 @@ import {
 
     showWorkflowTagModal
   }
-)
-@withRouter
-export default class MainRulesContainer extends React.Component {
-  render () {
-    return (
-      <MainWorkflows {...this.props} />
-    )
-  }
-}
+)(withRouter(MainRulesContainer))

@@ -18,7 +18,14 @@ import {
   shareWorkflow
 } from 'actions'
 
-@connect(
+export default class RulesContainer extends React.Component {
+  render () {
+    return (
+      <Rules {...this.props} />
+    )
+  }
+}
+export default connect(
   state => ({
     workflows: state.settings.workflows,
     editWorkflow: state.settings.editWorkflow,
@@ -42,12 +49,4 @@ import {
       shareWorkflow
     }, dispatch)
   })
-)
-@withRouter
-export default class RulesContainer extends React.Component {
-  render () {
-    return (
-      <Rules {...this.props} />
-    )
-  }
-}
+)(withRouter(RulesContainer))

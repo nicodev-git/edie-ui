@@ -30,7 +30,14 @@ import {
   removeDiagramSelectedObjects
 } from 'actions'
 
-@connect(
+class DiagramViewContainer extends React.Component {
+  render () {
+    return (
+      <DiagramView {...this.props} />
+    )
+  }
+}
+export default connect(
   state => ({
     objects: state.diagram.objects,
     lastId: state.diagram.lastId,
@@ -88,10 +95,3 @@ import {
     closeDiagramObjectModal
   }
 )
-export default class DiagramViewContainer extends React.Component {
-  render () {
-    return (
-      <DiagramView {...this.props} />
-    )
-  }
-}
