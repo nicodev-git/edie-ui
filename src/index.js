@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import Routes from './routes'
-import './style/index.styl'
+import './style'
 import injectTapEventPlugin from 'react-tap-event-plugin'
 injectTapEventPlugin()
 
