@@ -40,3 +40,32 @@
     opacity: 0;
     cursor: pointer !important;
 }
+
+.images-list {
+    background-color: #000000;
+}
+
+.image-upload-container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.image-upload-container img {
+    margin-left: 20px;
+}
+
+.image-container {
+    position: relative;
+    height: 100px;
+}
+
+.image-container img {
+    height: auto;
+    width: auto;
+    position: absolute;
+    top: 0;
+    left: 10px;
+    max-width: 300px;
+    max-height: 100px;
+}

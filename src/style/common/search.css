@@ -1,0 +1,23 @@
+/* Field Item */
+.field-item.selected {
+    background: lightgray;
+}
+
+.field-key {
+    color: gray;
+    font-size: 11px;
+}
+
+.field-value {
+    color: black;
+    font-size: 12px;
+}
+
+.field-separator {
+    height: 16px;
+    width: 1px;
+    border-left: 1px dashed gray;
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0 8px;
+}

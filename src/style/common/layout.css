@@ -68,17 +68,6 @@ body {
     border-bottom: 1px solid lightgray;
 }
 
-.option i{
-    font-size: 20px;
-    width: 30px;
-    padding-left: 10px;
-    color: gray;
-    float: left;
-}
-.option.option-active i{
-    color: green;
-}
-
 a, a:focus, a:hover {
     outline: 0;
     text-decoration: none;
@@ -163,85 +152,8 @@ a, a:focus, a:hover {
     border: 1px solid black;
 }
 
-.form-column {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    margin-bottom: 20px;
-}
-
-.form-column-shift > div:first-child {
-    flex-basis: 100px;
-}
-
-.form-buttons {
-    text-align: right;
-}
-
-.form-buttons > div {
-    margin-left: 20px;
-}
-
-.form-mui-inline > div{
-    vertical-align: middle;
-}
-
-.form-column>div {
-  width:100% !important;
-}
-
-.form-buttons button:hover {
-  background-color: #d7d8d9 !important;
-}
-
-.close-block {
-  margin-top: 20px;
-}
-
 .alert-buttons {
   padding-right: 15px;
-}
-
-.images-list {
-  background-color: #000000;
-}
-
-.image-upload-container {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-}
-
-.image-upload-container img {
-  margin-left: 20px;
-}
-
-.search-modal-container {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-}
-
-.crud-buttons {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-}
-
-.crud-buttons button {
-  padding: 0 !important;
-}
-
-.add-button svg:hover {
-  fill: #8bc34a !important;
-}
-
-.edit-button svg:hover {
-  fill: #2196f3 !important;
-}
-
-.remove-button svg:hover {
-  fill: #f44336 !important;
 }
 
 .control-label>div>div {
@@ -251,61 +163,6 @@ a, a:focus, a:hover {
 .control-label>div>div>label {
   width: calc(100% - 40px) !important;
 }
-.image-container {
-  position: relative;
-  height: 100px;
-}
-
-.image-container img {
-  height: auto;
-  width: auto;
-  position: absolute;
-  top: 0;
-  left: 10px;
-  max-width: 300px;
-  max-height: 100px;
-}
-
-/* Field Item */
-.field-item.selected {
-    background: lightgray;
-}
-
-.field-key {
-    color: gray;
-    font-size: 11px;
-}
-
-.field-value {
-    color: black;
-    font-size: 12px;
-}
-
-.field-separator {
-    height: 16px;
-    width: 1px;
-    border-left: 1px dashed gray;
-    display: inline-block;
-    vertical-align: middle;
-    margin: 0 8px;
-}
-
-/* Autocomplete styles */
-.autocomplete-wrapper {
-  width: 100%;
-  position: relative;
-}
-
-.autocomplete-wrapper > div {
-  width: 100%;
-}
-
-.autocomplete-wrapper > div > input{
-  width: 95%;
-  border-width: 0px 0px 1px;
-  outline: none;
-}
-
 /* Progress */
 .progress {
     margin-bottom: 0;

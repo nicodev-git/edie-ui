@@ -309,3 +309,27 @@
     margin: auto;
     display: block;
 }
+
+.search-modal-container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+
+
+/* Autocomplete styles */
+.autocomplete-wrapper {
+    width: 100%;
+    position: relative;
+}
+
+.autocomplete-wrapper > div {
+    width: 100%;
+}
+
+.autocomplete-wrapper > div > input{
+    width: 95%;
+    border-width: 0px 0px 1px;
+    outline: none;
+}
