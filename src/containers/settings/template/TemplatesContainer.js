@@ -45,7 +45,15 @@ import {
   updateMonitorTplTags
 } from 'actions'
 
-@connect(
+class TemplatesContainer extends React.Component {
+  render () {
+    return (
+      <Templates {...this.props} />
+    )
+  }
+}
+
+export default connect(
   state => ({
     deviceCategories: state.settings.deviceCategories,
     monitorTemplates: state.settings.monitorTemplates,
@@ -115,12 +123,4 @@ import {
       updateMonitorTplTags
     }, dispatch)
   })
-)
-@withRouter
-export default class TemplatesContainer extends React.Component {
-  render () {
-    return (
-      <Templates {...this.props} />
-    )
-  }
-}
+)(withRouter(TemplatesContainer))

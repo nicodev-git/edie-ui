@@ -32,7 +32,7 @@ import {
   showMonitorHistoryModal
 } from 'actions'
 
-export default class MonitorsContainer extends Component {
+class MonitorsContainer extends Component {
   render () {
     return (
       <Monitors {...this.props} />

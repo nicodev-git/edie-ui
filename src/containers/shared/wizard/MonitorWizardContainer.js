@@ -17,7 +17,15 @@ import {
   showMonitorTagModal
 } from 'actions'
 
-@connect(
+class MonitorWizardContainer extends React.Component {
+  render () {
+    return (
+      <MonitorWizard {...this.props} canAddTags/>
+    )
+  }
+}
+
+export default connect(
   state => ({
     initialValues: state.devices.monitorInitialValues,
 
@@ -42,12 +50,4 @@ import {
       showMonitorTagModal
     }, dispatch)
   })
-)
-
-export default class MonitorWizardContainer extends React.Component {
-  render () {
-    return (
-      <MonitorWizard {...this.props} canAddTags/>
-    )
-  }
-}
+)(MonitorWizardContainer)

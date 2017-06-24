@@ -11,28 +11,7 @@ import {
   updateDeviceTags
 } from 'actions'
 
-@connect(
-  state => ({
-    initialValues: state.dashboard.selectedDevice,
-
-    tplImageModalVisible: state.settings.tplImageModalVisible,
-    selectedTplImage: state.settings.selectedTplImage,
-
-    images: state.dashboard.images,
-
-    deviceTagModalOpen: state.devices.deviceTagModalOpen,
-    deviceTags: state.devices.deviceTags
-  }), {
-    openTplImageModal,
-    closeTplImageModal,
-    fetchImages,
-    uploadImage,
-
-    showDeviceTagModal,
-    updateDeviceTags
-  }
-)
-export default class DeviceEditWizardContainer extends React.Component {
+class DeviceEditWizardContainer extends React.Component {
   render () {
     return (
       <DeviceEditWizard {...this.props} />
@@ -75,3 +54,25 @@ DeviceEditWizard.defaultProps = {
     width: 12
   }]
 }
+
+export default connect(
+  state => ({
+    initialValues: state.dashboard.selectedDevice,
+
+    tplImageModalVisible: state.settings.tplImageModalVisible,
+    selectedTplImage: state.settings.selectedTplImage,
+
+    images: state.dashboard.images,
+
+    deviceTagModalOpen: state.devices.deviceTagModalOpen,
+    deviceTags: state.devices.deviceTags
+  }), {
+    openTplImageModal,
+    closeTplImageModal,
+    fetchImages,
+    uploadImage,
+
+    showDeviceTagModal,
+    updateDeviceTags
+  }
+)(DeviceEditWizardContainer)

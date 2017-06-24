@@ -25,16 +25,7 @@ const styles = {
   }
 }
 
-@connect(state => ({
-  initialValues: state.devices.editParam,
-  editParam: state.devices.editParam
-}), {
-  closeParamEditModal,
-  updateParam,
-  addParam
-})
-@reduxForm({form: 'monitorParamEdit'})
-export default class ParamEditModal extends React.Component {
+class ParamEditModal extends React.Component {
   onClickClose () {
     this.props.closeParamEditModal()
   }
@@ -69,3 +60,12 @@ export default class ParamEditModal extends React.Component {
     )
   }
 }
+
+export default connect(state => ({
+  initialValues: state.devices.editParam,
+  editParam: state.devices.editParam
+}), {
+  closeParamEditModal,
+  updateParam,
+  addParam
+})(reduxForm({form: 'monitorParamEdit'})(ParamEditModal))

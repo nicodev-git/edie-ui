@@ -4,13 +4,7 @@ import { connect } from 'react-redux'
 
 import LocalUserModalView from './LocalUserModalView'
 
-@connect(
-  state => ({
-    initialValues: {}
-  })
-)
-@reduxForm({form: 'localUserForm'})
-export default class LocalUserModal extends React.Component {
+class LocalUserModal extends React.Component {
   onSubmit (values) {
     const {onSave} = this.props
     onSave && onSave(values)
@@ -29,3 +23,9 @@ export default class LocalUserModal extends React.Component {
     )
   }
 }
+
+export default connect(
+  state => ({
+    initialValues: {}
+  })
+)(reduxForm({form: 'localUserForm'})(LocalUserModal))

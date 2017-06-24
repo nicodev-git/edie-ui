@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import {withRouter} from 'react-router'
 
 export default function (ComposedComponent) {
-  @withRouter
   class Authentication extends Component {
     componentWillMount () {
       if (!this.props.authenticated) {
@@ -51,5 +50,5 @@ export default function (ComposedComponent) {
     return { authenticated: state.auth.authenticated }
   }
 
-  return connect(mapStateToProps)(Authentication)
+  return connect(mapStateToProps)(withRouter(Authentication))
 }

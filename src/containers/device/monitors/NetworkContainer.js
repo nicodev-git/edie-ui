@@ -12,7 +12,7 @@ import {
   clearMonitors
 } from 'actions'
 
-export default class NetworkContainer extends React.Component {
+class NetworkContainer extends React.Component {
   render () {
     return (
       <Network {...this.props}/>

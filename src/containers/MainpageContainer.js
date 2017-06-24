@@ -160,131 +160,131 @@ class MainpageContainer extends Component {
 }
 
 export default connect((state) => {
-    return {
-      device: state.dashboard.selectedDevice,
-      apiErrorModalOpen: state.dashboard.apiErrorModalOpen,
-      apiError: state.dashboard.apiError,
+  return {
+    device: state.dashboard.selectedDevice,
+    apiErrorModalOpen: state.dashboard.apiErrorModalOpen,
+    apiError: state.dashboard.apiError,
 
-      newIncidentMsg: state.dashboard.newIncidentMsg,
+    newIncidentMsg: state.dashboard.newIncidentMsg,
 
-      activationModalOpen: state.auth.activationModalOpen,
-      activationMsg: state.auth.activationMsg,
-      envVarAvailable: state.settings.envVarAvailable,
-      envVars: state.settings.envVars,
+    activationModalOpen: state.auth.activationModalOpen,
+    activationMsg: state.auth.activationMsg,
+    envVarAvailable: state.settings.envVarAvailable,
+    envVars: state.settings.envVars,
 
-      searchParams: state.search.params,
+    searchParams: state.search.params,
 
-      userInfo: state.dashboard.userInfo,
+    userInfo: state.dashboard.userInfo,
 
-      // bigIncidents: state.dashboard.bigIncidents,
-      // incidents: state.dashboard.incidents,
-      bigIncidentParams: state.dashboard.bigIncidentParams,
+    // bigIncidents: state.dashboard.bigIncidents,
+    // incidents: state.dashboard.incidents,
+    bigIncidentParams: state.dashboard.bigIncidentParams,
 
-      bigIncidents: state.dashboard.bigIncidents,
-      incidents: state.dashboard.incidents,
+    bigIncidents: state.dashboard.bigIncidents,
+    incidents: state.dashboard.incidents,
 
-      deviceCategories: state.settings.deviceCategories,
-      deviceTemplates: state.settings.deviceTemplates,
+    deviceCategories: state.settings.deviceCategories,
+    deviceTemplates: state.settings.deviceTemplates,
 
-      mapDevices: state.dashboard.mapDevices,
-      mapLines: state.dashboard.mapLines,
-      selectedMap: state.dashboard.selectedMap,
-      showTraffic: state.settings.showTraffic,
+    mapDevices: state.dashboard.mapDevices,
+    mapLines: state.dashboard.mapLines,
+    selectedMap: state.dashboard.selectedMap,
+    showTraffic: state.settings.showTraffic,
 
-      newIncidentModalOpen: state.dashboard.newIncidentModalOpen,
+    newIncidentModalOpen: state.dashboard.newIncidentModalOpen,
 
-      isFullScreen: state.dashboard.isFullScreen,
+    isFullScreen: state.dashboard.isFullScreen,
 
-      maps: state.dashboard.maps,
-      mapImportModalVisible: state.dashboard.mapImportModalVisible,
-      mapExportModalOpen: state.dashboard.mapExportModalOpen,
+    maps: state.dashboard.maps,
+    mapImportModalVisible: state.dashboard.mapImportModalVisible,
+    mapExportModalOpen: state.dashboard.mapExportModalOpen,
 
-      countries: [],
+    countries: [],
 
-      incidentEventsModalOpen: state.dashboard.incidentEventsModalOpen,
-      selectedIncident: state.dashboard.selectedIncident,
+    incidentEventsModalOpen: state.dashboard.incidentEventsModalOpen,
+    selectedIncident: state.dashboard.selectedIncident,
 
-      stats: state.dashboard.stats,
+    stats: state.dashboard.stats,
 
-      sidebarProfileMenuOpen: state.dashboard.sidebarProfileMenuOpen,
-      sidebarMessageMenuOpen: state.dashboard.sidebarMessageMenuOpen,
+    sidebarProfileMenuOpen: state.dashboard.sidebarProfileMenuOpen,
+    sidebarMessageMenuOpen: state.dashboard.sidebarMessageMenuOpen,
 
-      mainIncidentDraw: state.dashboard.mainIncidentDraw,
+    mainIncidentDraw: state.dashboard.mainIncidentDraw,
 
-      attackers: state.attackers.attackers,
+    attackers: state.attackers.attackers,
 
-      commentsModalVisible: state.dashboard.commentsModalVisible,
-      commentsIncident: state.dashboard.commentsIncident,
+    commentsModalVisible: state.dashboard.commentsModalVisible,
+    commentsIncident: state.dashboard.commentsIncident,
 
-      attackerModalOpen: state.dashboard.attackerModalOpen
-    }
-  },
-  dispatch => bindActionCreators({
-    closeDevice,
-    closeApiErrorModal,
+    attackerModalOpen: state.dashboard.attackerModalOpen
+  }
+},
+dispatch => bindActionCreators({
+  closeDevice,
+  closeApiErrorModal,
 
-    fetchEnvVars,
-    activateUser,
-    openActivationModal,
-    closeActivationModal,
+  fetchEnvVars,
+  activateUser,
+  openActivationModal,
+  closeActivationModal,
 
-    updateDashboardStats,
-    fetchIncidents,
-    addDashboardIncident,
-    updateNewIncidentMsg,
-    updateMapDeviceStatus,
-    updateDashboardMapDevice,
+  updateDashboardStats,
+  fetchIncidents,
+  addDashboardIncident,
+  updateNewIncidentMsg,
+  updateMapDeviceStatus,
+  updateDashboardMapDevice,
 
-    fetchUserInfo,
+  fetchUserInfo,
 
-    updateSearchParams,
-    updateQueryChips,
+  updateSearchParams,
+  updateQueryChips,
 
-    updateBigIncidentParams,
-    fetchBigIncidents,
+  updateBigIncidentParams,
+  fetchBigIncidents,
 
-    fixIncident,
-    ackIncident,
+  fixIncident,
+  ackIncident,
 
-    fetchDeviceCategories,
-    fetchDeviceTemplates,
+  fetchDeviceCategories,
+  fetchDeviceTemplates,
 
-    openDevice,
-    addMapDevice,
-    deleteMapDevice,
-    updateMapDevice,
-    addMapLine,
-    deleteMapLine,
-    updateMapLine,
+  openDevice,
+  addMapDevice,
+  deleteMapDevice,
+  updateMapDevice,
+  addMapLine,
+  deleteMapLine,
+  updateMapLine,
 
-    importMap,
-    openMapImportModal,
-    closeMapImportModal,
-    showMapExportModal,
+  importMap,
+  openMapImportModal,
+  closeMapImportModal,
+  showMapExportModal,
 
-    addMap,
-    updateMap,
-    deleteMap,
+  addMap,
+  updateMap,
+  deleteMap,
 
-    fetchMaps,
-    changeMap,
+  fetchMaps,
+  changeMap,
 
-    fetchAttackers,
+  fetchAttackers,
 
-    updateDashboard,
-    requireFullScreen,
+  updateDashboard,
+  requireFullScreen,
 
-    openIncidentEventsModal,
-    closeIncidentEventsModal,
+  openIncidentEventsModal,
+  closeIncidentEventsModal,
 
-    openDashboardNewIncidentModal,
-    closeDashboardNewIncidentModal,
+  openDashboardNewIncidentModal,
+  closeDashboardNewIncidentModal,
 
-    showSidebarMessageMenu,
+  showSidebarMessageMenu,
 
-    fetchDashboardStats,
-    updateDeviceIncident,
-    showCommentsModal,
+  fetchDashboardStats,
+  updateDeviceIncident,
+  showCommentsModal,
 
-    showAttackerModal
-  }, dispatch))(withRouter(MainpageContainer))
+  showAttackerModal
+}, dispatch))(withRouter(MainpageContainer))

@@ -4,13 +4,7 @@ import {reduxForm} from 'redux-form'
 
 import TagModalView from './TagModalView'
 
-@connect(
-  state => ({
-    initialValues: state.tag.editTag
-  })
-)
-@reduxForm({form: 'tagForm'})
-export default class TagModal extends React.Component {
+class TagModal extends React.Component {
   onSubmit (values) {
     const {editTag} = this.props
     const entity = {
@@ -39,3 +33,9 @@ export default class TagModal extends React.Component {
     )
   }
 }
+
+export default connect(
+  state => ({
+    initialValues: state.tag.editTag
+  })
+)(reduxForm({form: 'tagForm'})(TagModal))

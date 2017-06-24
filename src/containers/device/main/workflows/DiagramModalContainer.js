@@ -94,4 +94,4 @@ export default connect(
     openDiagramObjectModal,
     closeDiagramObjectModal
   }
-)
+)(DiagramModalContainer)

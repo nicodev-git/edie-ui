@@ -1,8 +1,7 @@
 import React from 'react'
 import { withRouter } from 'react-router'
 
-@withRouter
-export default class Settings extends React.Component {
+class Settings extends React.Component {
   constructor (props) {
     super(props)
     this.state = {}
@@ -17,3 +16,4 @@ export default class Settings extends React.Component {
     return this.props.children
   }
 }
+export default withRouter(Settings)

@@ -1,5 +1,4 @@
 import React from 'react'
-import {withRouter} from 'react-router'
 import { Panel, PanelBody } from 'components/common/Panel'
 import IncidentTable from './IncidentTable'
 import ToolbarToggle from '../map/toolbar/ToolbarToggle'
@@ -7,7 +6,6 @@ import IncidentEventsModal from './IncidentEventsModal'
 
 import {defaultDateFormat} from 'shared/Global'
 
-@withRouter
 export default class MainIncidentPanel extends React.Component {
   renderTable () {
     const showAbsDate = this.getUserOptionValue('useAbsoluteDate', false)

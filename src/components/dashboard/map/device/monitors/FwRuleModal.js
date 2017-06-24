@@ -4,15 +4,7 @@ import {connect} from 'react-redux'
 
 import FwRuleModalView from './FwRuleModalView'
 
-@connect(
-  state => ({
-    initialValues: {protocol: 'tcp', action: 'block'},
-    formValues: formValueSelector('tabFirewallForm')(
-      state, 'rule', 'program')
-  })
-)
-@reduxForm({form: 'firewallRuleForm'})
-export default class FwRuleModal extends React.Component {
+class FwRuleModal extends React.Component {
   onSubmit (values) {
     const {onSave} = this.props
     onSave && onSave(values)
@@ -34,3 +26,10 @@ export default class FwRuleModal extends React.Component {
     )
   }
 }
+export default connect(
+  state => ({
+    initialValues: {protocol: 'tcp', action: 'block'},
+    formValues: formValueSelector('tabFirewallForm')(
+      state, 'rule', 'program')
+  })
+)(reduxForm({form: 'firewallRuleForm'})(FwRuleModal))

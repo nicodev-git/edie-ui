@@ -9,7 +9,14 @@ import {
   selectTag
 } from 'actions'
 
-@connect(
+class TagPickerModalContainer extends React.Component {
+  render () {
+    return (
+      <TagPickerModal {...this.props}/>
+    )
+  }
+}
+export default connect(
   state => ({
     tags: state.tag.tags,
     selectedTags: state.tag.selectedTags
@@ -18,12 +25,4 @@ import {
     addTag,
     selectTag
   }
-)
-
-export default class TagPickerModalContainer extends React.Component {
-  render () {
-    return (
-      <TagPickerModal {...this.props}/>
-    )
-  }
-}
+)(TagPickerModalContainer)

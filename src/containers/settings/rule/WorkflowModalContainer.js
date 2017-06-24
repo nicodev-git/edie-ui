@@ -23,7 +23,14 @@ import {
   removeWorkflowTag
 } from 'actions'
 
-@connect(
+class WorkflowModalContainer extends React.Component {
+  render () {
+    return (
+      <WorkflowModal {...this.props} />
+    )
+  }
+}
+export default connect(
   state => ({
     editWorkflow: state.settings.editWorkflow,
     workflowEditType: state.settings.workflowEditType,
@@ -61,15 +68,4 @@ import {
       removeWorkflowTag
     }, dispatch)
   })
-)
-export default class WorkflowModalContainer extends React.Component {
-  render () {
-    return (
-      <WorkflowModal {...this.props} />
-    )
-  }
-}
-
-WorkflowModal.defaultProps = {
-  credentials: null
-}
+)(WorkflowModalContainer)

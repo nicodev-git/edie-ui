@@ -11,11 +11,7 @@ import MonitorSocket from 'util/socket/MonitorSocket'
 
 import {FormInput, FormCheckbox} from 'components/modal/parts'
 
-@connect(
-  state => ({initialValues: {output: true}})
-)
-@reduxForm({form: 'tabCommandForm'})
-export default class CommandTable extends React.Component {
+class CommandTable extends React.Component {
   componentWillMount () {
     this.props.clearMonitors()
   }
@@ -99,3 +95,7 @@ export default class CommandTable extends React.Component {
     )
   }
 }
+
+export default connect(
+  state => ({initialValues: {output: true}})
+)(reduxForm({form: 'tabCommandForm'})(CommandTable))

@@ -11,7 +11,15 @@ import {
   removeTag
 } from 'actions'
 
-@connect(
+class TagsContainer extends React.Component {
+  render () {
+    return (
+      <Tags {...this.props}/>
+    )
+  }
+}
+
+export default connect(
   state => ({
     tagDraw: state.tag.tagDraw,
     tagModalOpen: state.tag.tagModalOpen,
@@ -22,12 +30,4 @@ import {
     updateTag,
     removeTag
   }
-)
-@withRouter
-export default class TagsContainer extends React.Component {
-  render () {
-    return (
-      <Tags {...this.props}/>
-    )
-  }
-}
+)(withRouter(TagsContainer))

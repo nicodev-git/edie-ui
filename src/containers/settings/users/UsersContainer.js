@@ -22,7 +22,14 @@ import {
   fetchUserInfo
 } from 'actions'
 
-@connect(
+class UsersContainer extends React.Component {
+  render () {
+    return (
+      <Users {...this.props} />
+    )
+  }
+}
+export default connect(
   state => ({
     users: state.settings.users,
     userModalVisible: state.settings.userModalVisible,
@@ -54,12 +61,4 @@ import {
       fetchUserInfo
     }, dispatch)
   })
-)
-@withRouter
-export default class UsersContainer extends React.Component {
-  render () {
-    return (
-      <Users {...this.props} />
-    )
-  }
-}
+)(withRouter(UsersContainer))

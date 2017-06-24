@@ -18,7 +18,7 @@ import {
   shareWorkflow
 } from 'actions'
 
-export default class RulesContainer extends React.Component {
+class RulesContainer extends React.Component {
   render () {
     return (
       <Rules {...this.props} />
