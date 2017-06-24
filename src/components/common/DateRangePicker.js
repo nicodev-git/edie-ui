@@ -22,6 +22,10 @@ export default class DateRangePicker extends React.Component {
     super(props)
 
     let rangeConfig = {
+      'Ever': [
+        moment('2000-01-01'),
+        moment().endOf('year')
+      ],
       [moment().add('-1', 'years').format('YYYY')]: [
         moment().add('-1', 'years').startOf('year'),
         moment().add('-1', 'years').endOf('year')

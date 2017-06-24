@@ -87,8 +87,8 @@ class BigIncidents extends Component {
       description: '',
       fixed: null,
       severity: ['HIGH', 'MEDIUM'],
-      afterStartTimestamp: moment().add(-6, 'days').valueOf(),
-      beforeStartTimestamp: moment().valueOf(),
+      afterStartTimestamp: moment('2000-01-01'),
+      beforeStartTimestamp: moment().endOf('year'),
       sort: 'startTimestamp,desc'
     })
   }

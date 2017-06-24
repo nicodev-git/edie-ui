@@ -1,6 +1,6 @@
 import React from 'react'
 import moment from 'moment'
-import {FlatButton, RaisedButton, MenuItem, SelectField, TextField} from 'material-ui'
+import {FlatButton, MenuItem, SelectField, TextField} from 'material-ui'
 import ActionSearch from 'material-ui/svg-icons/action/search'
 
 import DateRangePicker from 'components/common/DateRangePicker'
@@ -60,11 +60,16 @@ const BigIncidentsView = ({onHide,
         <MenuItem primaryText="Unfixed" value="false"/>
         <MenuItem primaryText="Fixed" value="true"/>
       </SelectField>
-      <DateRangePicker
-        startDate={moment(startDate)}
-        endDate={moment(endDate)}
-        onApply={onChangeDateRange}
-        renderer={label => <RaisedButton label={label} className="valign-top margin-md-left"/>}/>
+        <DateRangePicker
+          startDate={moment(startDate)}
+          endDate={moment(endDate)}
+          onApply={onChangeDateRange}
+          renderer={label =>
+            <FlatButton
+              label={label} className="valign-top margin-md-left"
+              style={{borderBottom: '1px solid lightgray', marginTop: 4}}/>
+          }
+        />
 
       <TextField
         hintText={<ActionSearch style={{bottom: '5px'}} color="#888888"/>}
