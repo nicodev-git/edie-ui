@@ -3,9 +3,6 @@ import { showAlert } from 'components/common/Alert'
 import { ROOT_URL } from 'actions/config'
 import SimpleModalContainer from 'containers/modal/SimpleModalContainer'
 import { validate } from 'components/modal/validation/NameValidation'
-import { store } from 'shared/GetStore'
-import { Provider } from 'react-redux'
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 
 export default class SegmentModal extends Component {
 
@@ -68,18 +65,14 @@ export default class SegmentModal extends Component {
       country: segment.country
     } : null
     return (
-      <MuiThemeProvider>
-        <Provider store={store}>
-          <SimpleModalContainer
-            header={header}
-            content={content}
-            doAction={this.onClickSave}
-            onClose={this.closeModal}
-            validate={validate}
-            initialValues={initialValues}
-          />
-        </Provider>
-    </MuiThemeProvider>
+      <SimpleModalContainer
+        header={header}
+        content={content}
+        doAction={this.onClickSave}
+        onClose={this.closeModal}
+        validate={validate}
+        initialValues={initialValues}
+      />
     )
   }
 }

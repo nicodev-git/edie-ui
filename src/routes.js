@@ -7,7 +7,6 @@ import SignoutContainer from './containers/auth/SignoutContainer'
 
 import SearchGeneric from './containers/search/GenericSearchContainer'
 import ChatContainer from './containers/chat/ChatContainer'
-import BigIncidentsContainer from './containers/dashboard/BigIncidentsContainer'
 import ThreatMapContainer from './containers/threatmap/ThreatMapContainer'
 import Settings from './components/sidebar/settings/Settings'
 import SettingGeneralContainer from './containers/settings/general/GeneralContainer'
@@ -56,7 +55,6 @@ export default(
     <Route path="/" component={RequireAuth(MainContainer)} onChange={onMainEnter}>
       <Route path="chat" component={ChatContainer} />
       <Route path="search" component={SearchGeneric}/>
-      <Route path="bigincidents" component={BigIncidentsContainer}/>
       <Route path="threatmap" component={ThreatMapContainer}/>
       <Route path="settings" component={Settings}>
         <IndexRoute component={SettingGeneralContainer} />

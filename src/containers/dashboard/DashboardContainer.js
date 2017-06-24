@@ -2,6 +2,7 @@ import Dashboard from 'components/dashboard/Dashboard'
 import { connect } from 'react-redux'
 import {
   fetchBigIncidents,
+  updateBigIncidentParams,
 
   fetchIncidents,
   fixIncident,
@@ -54,6 +55,7 @@ export default connect(
   state => ({
     bigIncidents: state.dashboard.bigIncidents,
     incidents: state.dashboard.incidents,
+    bigIncidentParams: state.dashboard.bigIncidentParams,
 
     deviceCategories: state.settings.deviceCategories,
     deviceTemplates: state.settings.deviceTemplates,
@@ -93,8 +95,8 @@ export default connect(
 
     attackerModalOpen: state.dashboard.attackerModalOpen
   }), {
-
     fetchBigIncidents,
+    updateBigIncidentParams,
 
     fetchIncidents,
     fixIncident,

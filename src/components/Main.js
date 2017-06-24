@@ -9,6 +9,8 @@ import { scrollTop } from 'util/Scroll'
 import { DragDropContext } from 'react-dnd'
 import TouchBackend from 'react-dnd-touch-backend'
 
+import BigIncidents from 'components/dashboard/main_incidents_table/BigIncidents'
+
 import Alert from 'components/common/Alert'
 import Snackbar from 'components/common/Snackbar'
 
@@ -48,6 +50,16 @@ class Main extends React.Component {
     return (
       <DashboardContainer hidden={hidden}/>
     )
+  }
+
+  renderBigIncidents () {
+    const {pathname, search} = this.props.location
+    if (pathname === '/' && search === '?bigincidents=') {
+      console.log('big incidents')
+      return (
+        <BigIncidents {...this.props}/>
+      )
+    }
   }
 
   onClickMenuItem (type, item) {
@@ -137,6 +149,7 @@ class Main extends React.Component {
         {this.renderSidebar()}
         <div className="page-content flex-vertical" style={{overflow: 'auto', paddingLeft: sidebarWidth}} ref="content">
           {this.renderDashboard()}
+          {this.renderBigIncidents()}
           {children || null}
         </div>
         <ReactTooltip />

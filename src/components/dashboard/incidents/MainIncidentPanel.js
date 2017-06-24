@@ -18,7 +18,10 @@ export default class MainIncidentPanel extends React.Component {
   }
 
   onClickOpenModal (e) {
-    this.props.router.push('/bigincidents')
+    this.props.router.push({
+      pathname: '/',
+      search: '?bigincidents='
+    })
   }
 
   getUserOptionValue (key, defVal) {
@@ -34,13 +37,12 @@ export default class MainIncidentPanel extends React.Component {
     )
   }
 
-  render () {
+  renderContents () {
     const {hidden} = this.props
-    if (hidden) return <div />
+    if (hidden) {
 
-    return (
-      <div className="incidents-row margin-sm-top flex-vertical flex-1"
-        style={{minHeight: '600px'}}>
+    } else {
+      return (
         <Panel className="margin-sm-bottom flex-vertical flex-1 main-panel table-panel">
           <PanelBody className="padding-xs flex-vertical flex-1">
             <div className="main-incident-toggle">
@@ -50,6 +52,14 @@ export default class MainIncidentPanel extends React.Component {
             {this.renderIncidentEventsModal()}
           </PanelBody>
         </Panel>
+      )
+    }
+  }
+
+  render () {
+    return (
+      <div className="incidents-row margin-sm-top flex-vertical flex-1" style={{minHeight: '600px'}}>
+        {this.renderContents()}
       </div>
     )
   }
