@@ -12,6 +12,7 @@ import IncidentSocket from 'util/socket/IncidentSocket'
 import SearchGeneric from 'containers/search/GenericSearchContainer'
 import ChatContainer from 'containers/chat/ChatContainer'
 import ThreatMapContainer from 'containers/threatmap/ThreatMapContainer'
+import Dashboard from 'components/dashboard/Dashboard'
 
 import {
   closeDevice,
@@ -161,7 +162,8 @@ class MainpageContainer extends Component {
     return (
       <Main {...this.props}>
         <Switch>
-          <Route path="/chat" component={ChatContainer} />
+          <Route path="/" exact component={Dashboard} {...this.props}/>
+          <Route path="/chat" component={ChatContainer}/>
           <Route path="/search" component={SearchGeneric}/>
           <Route path="/threatmap" component={ThreatMapContainer}/>
         </Switch>

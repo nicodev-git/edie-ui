@@ -3,7 +3,7 @@ import { findIndex, startsWith } from 'lodash'
 import ReactTooltip from 'react-tooltip'
 
 import SidebarContainer from 'containers/sidebar/SidebarContainer'
-import Dashboard from './dashboard/Dashboard'
+// import Dashboard from './dashboard/Dashboard'
 import ActivationModal from 'components/auth/ActivationModal'
 import { scrollTop } from 'util/Scroll'
 import { DragDropContext } from 'react-dnd'
@@ -50,10 +50,10 @@ class Main extends React.Component {
     return (pathname === '/' && search === '?bigincidents=')
   }
   renderDashboard () {
-    const hidden = !!this.props.children || this.isBigIncidents()
-    return (
-      <Dashboard {...this.props} hidden={hidden}/>
-    )
+    // const hidden = !!this.props.children || this.isBigIncidents()
+    // return (
+    //   <Dashboard {...this.props} hidden={hidden}/>
+    // )
   }
 
   renderBigIncidents () {
@@ -66,60 +66,59 @@ class Main extends React.Component {
   }
 
   onClickMenuItem (type, item) {
-    const { router, closeDevice } = this.props
+    const { history, closeDevice } = this.props
 
     scrollTop(this.refs.content)
 
     if (item.id === 'dashboard') {
       closeDevice()
     }
-    router.push({
+    history.push({
       pathname: item.path,
       search: item.search || ''
     })
   }
 
   renderSidebar () {
-    // const {location, device, router} = this.props
-    // const {pathname} = location
-    //
-    // let pageId = dashboardId
-    // let pageType = contentType.Main
-    //
-    // let found = false
-    // mainMenu.forEach(item => {
-    //   if (item.id === dashboardId) return true
-    //   if (startsWith(pathname, item.path) && (location.search || '') === (item.search || '')) {
-    //     pageId = item.id
-    //     pageType = contentType.Main
-    //     found = true
-    //     return false
-    //   }
-    // })
-    //
-    // if (!found) {
-    //   let deviceId = device ? device.id : 'main'
-    //   deviceMenu(deviceId).forEach(item => {
-    //     if (item.id === dashboardId) return true
-    //     if (startsWith(pathname, item.path)) {
-    //       pageId = item.id
-    //       pageType = contentType.Device
-    //       found = true
-    //       return false
-    //     }
-    //   })
-    // }
-    //
-    // return (
-    //   <SidebarContainer
-    //     router={router}
-    //     pageId={pageId}
-    //     pageType={pageType}
-    //     device={device}
-    //     onClickItem={this.onClickMenuItem.bind(this)}
-    //   />
-    // )
-    return null
+    const {location, device, history} = this.props
+    const {pathname} = location
+
+    let pageId = dashboardId
+    let pageType = contentType.Main
+
+    let found = false
+    mainMenu.forEach(item => {
+      if (item.id === dashboardId) return true
+      if (startsWith(pathname, item.path) && (location.search || '') === (item.search || '')) {
+        pageId = item.id
+        pageType = contentType.Main
+        found = true
+        return false
+      }
+    })
+
+    if (!found) {
+      let deviceId = device ? device.id : 'main'
+      deviceMenu(deviceId).forEach(item => {
+        if (item.id === dashboardId) return true
+        if (startsWith(pathname, item.path)) {
+          pageId = item.id
+          pageType = contentType.Device
+          found = true
+          return false
+        }
+      })
+    }
+
+    return (
+      <SidebarContainer
+        history={history}
+        pageId={pageId}
+        pageType={pageType}
+        device={device}
+        onClickItem={this.onClickMenuItem.bind(this)}
+      />
+    )
   }
 
   onCloseAlert () {
