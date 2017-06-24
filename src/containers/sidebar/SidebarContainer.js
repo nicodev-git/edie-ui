@@ -1,7 +1,7 @@
 import React from 'react'
 import Sidebar from 'components/sidebar/Sidebar'
 import { connect } from 'react-redux'
-import { mainMenu, deviceMenu, contentType } from 'components/Config'
+import { mainMenu, deviceMenu, contentType } from 'components/sidebar/Config'
 
 import {
   updateUserProfile,
