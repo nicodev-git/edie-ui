@@ -30,7 +30,52 @@ import {
   updateQueryChips,
 
   updateBigIncidentParams,
-  fetchBigIncidents
+  fetchBigIncidents,
+
+  fixIncident,
+  ackIncident,
+
+  fetchDeviceCategories,
+  fetchDeviceTemplates,
+
+  openDevice,
+  addMapDevice,
+  deleteMapDevice,
+  updateMapDevice,
+  addMapLine,
+  deleteMapLine,
+  updateMapLine,
+
+  importMap,
+  openMapImportModal,
+  closeMapImportModal,
+  showMapExportModal,
+
+  addMap,
+  updateMap,
+  deleteMap,
+
+  fetchMaps,
+  changeMap,
+
+  fetchAttackers,
+
+  updateDashboard,
+  requireFullScreen,
+
+  openIncidentEventsModal,
+  closeIncidentEventsModal,
+
+  openDashboardNewIncidentModal,
+  closeDashboardNewIncidentModal,
+
+  showSidebarMessageMenu,
+
+  fetchDashboardStats,
+  updateDeviceIncident,
+  showCommentsModal,
+
+  showAttackerModal
 } from 'actions'
 
 @connect((state) => {
@@ -52,7 +97,45 @@ import {
 
     // bigIncidents: state.dashboard.bigIncidents,
     // incidents: state.dashboard.incidents,
-    bigIncidentParams: state.dashboard.bigIncidentParams
+    bigIncidentParams: state.dashboard.bigIncidentParams,
+
+    bigIncidents: state.dashboard.bigIncidents,
+    incidents: state.dashboard.incidents,
+
+    deviceCategories: state.settings.deviceCategories,
+    deviceTemplates: state.settings.deviceTemplates,
+
+    mapDevices: state.dashboard.mapDevices,
+    mapLines: state.dashboard.mapLines,
+    selectedMap: state.dashboard.selectedMap,
+    showTraffic: state.settings.showTraffic,
+
+    newIncidentModalOpen: state.dashboard.newIncidentModalOpen,
+
+    isFullScreen: state.dashboard.isFullScreen,
+
+    maps: state.dashboard.maps,
+    mapImportModalVisible: state.dashboard.mapImportModalVisible,
+    mapExportModalOpen: state.dashboard.mapExportModalOpen,
+
+    countries: [],
+
+    incidentEventsModalOpen: state.dashboard.incidentEventsModalOpen,
+    selectedIncident: state.dashboard.selectedIncident,
+
+    stats: state.dashboard.stats,
+
+    sidebarProfileMenuOpen: state.dashboard.sidebarProfileMenuOpen,
+    sidebarMessageMenuOpen: state.dashboard.sidebarMessageMenuOpen,
+
+    mainIncidentDraw: state.dashboard.mainIncidentDraw,
+
+    attackers: state.attackers.attackers,
+
+    commentsModalVisible: state.dashboard.commentsModalVisible,
+    commentsIncident: state.dashboard.commentsIncident,
+
+    attackerModalOpen: state.dashboard.attackerModalOpen
   }
 },
 dispatch => bindActionCreators({
@@ -77,7 +160,52 @@ dispatch => bindActionCreators({
   updateQueryChips,
 
   updateBigIncidentParams,
-  fetchBigIncidents
+  fetchBigIncidents,
+
+  fixIncident,
+  ackIncident,
+
+  fetchDeviceCategories,
+  fetchDeviceTemplates,
+
+  openDevice,
+  addMapDevice,
+  deleteMapDevice,
+  updateMapDevice,
+  addMapLine,
+  deleteMapLine,
+  updateMapLine,
+
+  importMap,
+  openMapImportModal,
+  closeMapImportModal,
+  showMapExportModal,
+
+  addMap,
+  updateMap,
+  deleteMap,
+
+  fetchMaps,
+  changeMap,
+
+  fetchAttackers,
+
+  updateDashboard,
+  requireFullScreen,
+
+  openIncidentEventsModal,
+  closeIncidentEventsModal,
+
+  openDashboardNewIncidentModal,
+  closeDashboardNewIncidentModal,
+
+  showSidebarMessageMenu,
+
+  fetchDashboardStats,
+  updateDeviceIncident,
+  showCommentsModal,
+
+  showAttackerModal
 }, dispatch))
 @withRouter
 export default class MainContainer extends Component {

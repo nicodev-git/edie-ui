@@ -3,7 +3,7 @@ import { findIndex, startsWith } from 'lodash'
 import ReactTooltip from 'react-tooltip'
 
 import SidebarContainer from 'containers/sidebar/SidebarContainer'
-import DashboardContainer from 'containers/dashboard/DashboardContainer'
+import Dashboard from './dashboard/Dashboard'
 import ActivationModal from 'components/auth/ActivationModal'
 import { scrollTop } from 'util/Scroll'
 import { DragDropContext } from 'react-dnd'
@@ -52,7 +52,7 @@ class Main extends React.Component {
   renderDashboard () {
     const hidden = !!this.props.children || this.isBigIncidents()
     return (
-      <DashboardContainer hidden={hidden}/>
+      <Dashboard {...this.props} hidden={hidden}/>
     )
   }
 
@@ -89,7 +89,7 @@ class Main extends React.Component {
     let found = false
     mainMenu.forEach(item => {
       if (item.id === dashboardId) return true
-      if (startsWith(pathname, item.path) && location.search === item.search) {
+      if (startsWith(pathname, item.path) && (location.search || '') === (item.search || '')) {
         pageId = item.id
         pageType = contentType.Main
         found = true
