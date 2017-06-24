@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import moment from 'moment'
 import {Dialog} from 'material-ui'
+import CheckIcon from 'material-ui/svg-icons/toggle/check-box'
+import CloseIcon from 'material-ui/svg-icons/navigation/close'
+import HelpIcon from 'material-ui/svg-icons/action/help'
 
 import InfiniteTable from 'components/common/InfiniteTable'
 import ShowMoreLine from 'components/common/ShowMoreLine'
@@ -25,16 +28,13 @@ export default class MonitorHistoryModal extends Component {
       'cssClassName': 'width-80 text-center',
       'customComponent': props => {
         const val = props.rowData.eventType === 'AGENT' ? 'UP' : props.data
-        let cls = 'fa-question'
-        let color = '#FDB422'
+        let cls = <HelpIcon color="#FDB422"/>
         if (val === 'UP') {
-          cls = 'fa-check-square'
-          color = 'green'
+          cls = <CheckIcon color="green"/>
         } else if (val === 'DOWN') {
-          cls = 'fa-times'
-          color = 'red'
+          cls = <CloseIcon color="red"/>
         }
-        return <i className={`fa ${cls}`} style={{color: color, fontSize: '20px', verticalAlign: 'middle'}} />
+        return cls
       }
     }, {
       'displayName': 'Response',
