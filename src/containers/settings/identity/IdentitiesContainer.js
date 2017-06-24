@@ -36,4 +36,4 @@ export default connect(
       updateIdentity
     }, dispatch)
   })
-)
+)(IdentitiesContainer)
