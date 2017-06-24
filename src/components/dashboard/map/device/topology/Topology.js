@@ -6,8 +6,8 @@ import MapCanvas from 'components/dashboard/map/MapCanvas'
 import MapToolbar from './MapToolbar'
 
 import DeviceWizardContainer from 'containers/shared/wizard/DeviceWizardContainer'
-import { wizardConfig, getDeviceType } from 'components/shared/wizard/WizardConfig'
-import {showAlert, showConfirm} from 'components/shared/Alert'
+import { wizardConfig, getDeviceType } from 'components/common/wizard/WizardConfig'
+import {showAlert, showConfirm} from 'components/common/Alert'
 
 import DeviceDragLayer from './DeviceDragLayer'
 import { isGroup } from 'shared/Global'

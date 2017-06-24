@@ -4,9 +4,9 @@ import {Checkbox, RaisedButton} from 'material-ui'
 import { assign } from 'lodash'
 
 import SettingTabs from '../SettingTabs' // Never used
-import TabPage from 'components/shared/TabPage' // Never used
-import TabPageBody from 'components/shared/TabPageBody' // Never used
-import TabPageHeader from 'components/shared/TabPageHeader' // Never used
+import TabPage from 'components/common/TabPage' // Never used
+import TabPageBody from 'components/common/TabPageBody' // Never used
+import TabPageHeader from 'components/common/TabPageHeader' // Never used
 
 import {defaultDateFormat} from 'shared/Global'
 

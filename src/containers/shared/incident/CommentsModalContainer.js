@@ -1,5 +1,5 @@
 import React from 'react'
-import CommentsModal from 'components/shared/incident/CommentsModal'
+import CommentsModal from 'components/common/incident/CommentsModal'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
 
 export default class CommentsModalContainer extends React.Component {

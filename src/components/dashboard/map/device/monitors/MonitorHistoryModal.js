@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import moment from 'moment'
 import {Dialog} from 'material-ui'
 
-import InfiniteTable from 'components/shared/InfiniteTable'
-import ShowMoreLine from 'components/shared/ShowMoreLine'
+import InfiniteTable from 'components/common/InfiniteTable'
+import ShowMoreLine from 'components/common/ShowMoreLine'
 import { CloseButton } from 'components/modal/parts'
 
 export default class MonitorHistoryModal extends Component {

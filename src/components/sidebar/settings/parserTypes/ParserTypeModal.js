@@ -2,7 +2,7 @@ import React from 'react'
 import { reduxForm, formValueSelector } from 'redux-form'
 import { assign, concat } from 'lodash'
 import { connect } from 'react-redux'
-import { showAlert } from 'components/shared/Alert'
+import { showAlert } from 'components/common/Alert'
 import ParserTypeModalView from './ParserTypeModalView'
 import { validate } from 'components/modal/validation/NameValidation'
 

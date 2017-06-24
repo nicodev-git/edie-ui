@@ -1,9 +1,9 @@
 import React from 'react'
 import Griddle from 'griddle-react'
 
-import TabPage from 'components/shared/TabPage'
-import TabPageBody from 'components/shared/TabPageBody'
-import TabPageHeader from 'components/shared/TabPageHeader'
+import TabPage from 'components/common/TabPage'
+import TabPageBody from 'components/common/TabPageBody'
+import TabPageHeader from 'components/common/TabPageHeader'
 
 export default class Devices extends React.Component {
   constructor (props) {

@@ -3,9 +3,9 @@ import {reduxForm, Field} from 'redux-form'
 import {connect} from 'react-redux'
 import {RaisedButton} from 'material-ui'
 
-import TabPage from 'components/shared/TabPage'
-import TabPageBody from 'components/shared/TabPageBody'
-import TabPageHeader from 'components/shared/TabPageHeader'
+import TabPage from 'components/common/TabPage'
+import TabPageBody from 'components/common/TabPageBody'
+import TabPageHeader from 'components/common/TabPageHeader'
 import MonitorTabs from './MonitorTabs'
 import MonitorSocket from 'util/socket/MonitorSocket'
 

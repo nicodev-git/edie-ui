@@ -5,7 +5,7 @@ import {
     DropTarget
 } from 'react-dnd'
 
-import { getDeviceType } from 'components/shared/wizard/WizardConfig'
+import { getDeviceType } from 'components/common/wizard/WizardConfig'
 import { imageBaseUrl, extImageBaseUrl, DragTypes, lineTypes } from 'shared/Global'
 
 function collect (connect) {

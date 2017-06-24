@@ -1,13 +1,13 @@
 import React from 'react'
 import {RaisedButton} from 'material-ui'
 
-import InfiniteTable from 'components/shared/InfiniteTable'
-import {showConfirm, showAlert} from 'components/shared/Alert'
+import InfiniteTable from 'components/common/InfiniteTable'
+import {showConfirm, showAlert} from 'components/common/Alert'
 
 import SettingTabs from '../SettingTabs'
-import TabPage from 'components/shared/TabPage'
-import TabPageBody from 'components/shared/TabPageBody'
-import TabPageHeader from 'components/shared/TabPageHeader'
+import TabPage from 'components/common/TabPage'
+import TabPageBody from 'components/common/TabPageBody'
+import TabPageHeader from 'components/common/TabPageHeader'
 
 import TagModal from './TagModal'
 import WfTabs from '../rule/WorkflowTabs'

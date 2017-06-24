@@ -7,7 +7,7 @@ import {
 } from 'lodash'
 import moment from 'moment'
 import { chatSocket } from 'util/socket/ChatSocket'
-import { showAlert } from 'components/shared/Alert'
+import { showAlert } from 'components/common/Alert'
 
 import { scrollBottom } from 'util/Scroll'
 import {extImageBaseUrl} from 'shared/Global'

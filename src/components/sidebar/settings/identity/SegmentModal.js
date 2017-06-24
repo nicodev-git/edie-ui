@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { showAlert } from 'components/shared/Alert'
+import { showAlert } from 'components/common/Alert'
 import { ROOT_URL } from 'actions/config'
 import SimpleModalContainer from 'containers/modal/SimpleModalContainer'
 import { validate } from 'components/modal/validation/NameValidation'

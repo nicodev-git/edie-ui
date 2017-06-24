@@ -3,13 +3,13 @@ import {RaisedButton, IconButton} from 'material-ui'
 import Share from 'material-ui/svg-icons/social/share'
 import { assign } from 'lodash'
 
-import InfiniteTable from 'components/shared/InfiniteTable'
-import { showAlert } from 'components/shared/Alert'
+import InfiniteTable from 'components/common/InfiniteTable'
+import { showAlert } from 'components/common/Alert'
 
 import SettingTabs from '../SettingTabs'
-import TabPage from 'components/shared/TabPage'
-import TabPageBody from 'components/shared/TabPageBody'
-import TabPageHeader from 'components/shared/TabPageHeader'
+import TabPage from 'components/common/TabPage'
+import TabPageBody from 'components/common/TabPageBody'
+import TabPageHeader from 'components/common/TabPageHeader'
 import WorkflowModalContainer from 'containers/settings/rule/WorkflowModalContainer'
 
 import WfTabs from './WorkflowTabs'

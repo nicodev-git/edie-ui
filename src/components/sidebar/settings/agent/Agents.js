@@ -7,9 +7,9 @@ import SettingIcon from 'material-ui/svg-icons/action/settings'
 import { findIndex, assign } from 'lodash'
 
 import SettingTabs from '../SettingTabs'
-import TabPage from 'components/shared/TabPage'
-import TabPageBody from 'components/shared/TabPageBody'
-import TabPageHeader from 'components/shared/TabPageHeader'
+import TabPage from 'components/common/TabPage'
+import TabPageBody from 'components/common/TabPageBody'
+import TabPageHeader from 'components/common/TabPageHeader'
 
 import { ROOT_URL } from 'actions/config'
 import { errorStyle, underlineFocusStyle, inputStyle, selectedItemStyle } from 'style/common/materialStyles'

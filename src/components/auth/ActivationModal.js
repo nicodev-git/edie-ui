@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {showAlert} from 'components/shared/Alert'
+import {showAlert} from 'components/common/Alert'
 import { reduxForm } from 'redux-form'
 import ActivationModalView from './ActivationModalView'
 import { validate } from './LicenseValidation'

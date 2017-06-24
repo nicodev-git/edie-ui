@@ -6,10 +6,10 @@ import MainSettings from './MainSettings'
 import Websocket from './websocket/Websocket'
 
 import SettingTabs from '../SettingTabs'
-import TabPage from 'components/shared/TabPage'
-import TabPageBody from 'components/shared/TabPageBody'
-import TabPageHeader from 'components/shared/TabPageHeader'
-import {showAlert} from 'components/shared/Alert'
+import TabPage from 'components/common/TabPage'
+import TabPageBody from 'components/common/TabPageBody'
+import TabPageHeader from 'components/common/TabPageHeader'
+import {showAlert} from 'components/common/Alert'
 
 export default class Advanced extends React.Component {
   constructor (props) {

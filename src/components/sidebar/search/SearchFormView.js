@@ -11,7 +11,7 @@ import NoSim from 'material-ui/svg-icons/communication/no-sim'
 import {Toolbar} from 'material-ui/Toolbar'
 
 import { FormInput } from 'components/modal/parts'
-import DateRangePicker from 'components/shared/DateRangePicker'
+import DateRangePicker from 'components/common/DateRangePicker'
 import { underlineFocusStyle, inputStyle, selectedItemStyle } from 'style/common/materialStyles'
 
 const iconButtonStyle = {

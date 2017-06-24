@@ -15,22 +15,22 @@ import ReactTooltip from 'react-tooltip'
 import ArrowBack from 'material-ui/svg-icons/navigation/arrow-back'
 import ActionSearch from 'material-ui/svg-icons/action/search'
 
-import DateRangePicker from 'components/shared/DateRangePicker'
-import InfiniteTable from 'components/shared/InfiniteTable'
+import DateRangePicker from 'components/common/DateRangePicker'
+import InfiniteTable from 'components/common/InfiniteTable'
 import AddIncidentModal from './AddIncidentModal'
 import AddExceptionModal from './AddExceptionModal'
-import CommentsModal from 'components/shared/incident/CommentsModal'
+import CommentsModal from 'components/common/incident/CommentsModal'
 
-import { showAlert, showPrompt } from 'components/shared/Alert'
+import { showAlert, showPrompt } from 'components/common/Alert'
 import { getSeverityIcon, parseSearchQuery, dateFormat, encodeUrlParams, severities } from 'shared/Global'
 import MainTabs from '../MainTabs'
-import TabPage from 'components/shared/TabPage'
-import TabPageBody from 'components/shared/TabPageBody'
-import TabPageHeader from 'components/shared/TabPageHeader'
+import TabPage from 'components/common/TabPage'
+import TabPageBody from 'components/common/TabPageBody'
+import TabPageHeader from 'components/common/TabPageHeader'
 import {
   showIncidentDetail,
   showIncidentRaw
-} from 'components/shared/incident/Incident'
+} from 'components/common/incident/Incident'
 import {
   errorStyle, underlineFocusStyle, inputStyle, selectedItemStyle, underlineStyle,
   thumbup, thumpdown, done, notdone,

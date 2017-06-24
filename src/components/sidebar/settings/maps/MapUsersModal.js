@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { showAlert } from 'components/shared/Alert'
-import InfiniteTable from 'components/shared/InfiniteTable'
+import { showAlert } from 'components/common/Alert'
+import InfiniteTable from 'components/common/InfiniteTable'
 import UsersModal from './UsersModal'
 import MapUsersModalView from './MapUsersModalView'
 

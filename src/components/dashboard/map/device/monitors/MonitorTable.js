@@ -10,9 +10,9 @@ import CommentIcon from 'material-ui/svg-icons/action/description'
 import DateRangeIcon from 'material-ui/svg-icons/action/date-range'
 
 import MonitorWizardContainer from 'containers/shared/wizard/MonitorWizardContainer'
-import InfiniteTable from 'components/shared/InfiniteTable'
+import InfiniteTable from 'components/common/InfiniteTable'
 
-import { showAlert } from 'components/shared/Alert'
+import { showAlert } from 'components/common/Alert'
 
 import MonitorPicker from './MonitorPicker'
 import MonitorHistoryModal from './MonitorHistoryModal'

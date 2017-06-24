@@ -22,7 +22,7 @@ import './common/infinitetable.css'
 
 import './login.css'
 import './sidebar.css'
-import './dashboard/metric/metric.css'
+import './dashboard/map/metric.css'
 import './dashboard/map/map.css'
 import './incidents.css'
 import './device.css'

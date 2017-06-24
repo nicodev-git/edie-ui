@@ -3,7 +3,7 @@ import {findIndex} from 'lodash'
 
 import TagPickerModalView from './TagPickerModalView'
 
-import {showPrompt, showAlert} from 'components/shared/Alert'
+import {showPrompt, showAlert} from 'components/common/Alert'
 
 export default class TagPickerModal extends React.Component {
   componentWillMount () {

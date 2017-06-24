@@ -1,11 +1,11 @@
 import React from 'react'
-import { showAlert } from 'components/shared/Alert'
+import { showAlert } from 'components/common/Alert'
 import {RaisedButton} from 'material-ui'
 
 import MainTabs from '../MainTabs'
-import TabPage from 'components/shared/TabPage'
-import TabPageBody from 'components/shared/TabPageBody'
-import TabPageHeader from 'components/shared/TabPageHeader'
+import TabPage from 'components/common/TabPage'
+import TabPageBody from 'components/common/TabPageBody'
+import TabPageHeader from 'components/common/TabPageHeader'
 
 import { ROOT_URL } from 'actions/config'
 

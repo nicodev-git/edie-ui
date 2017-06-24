@@ -6,9 +6,9 @@ import EditIcon from 'material-ui/svg-icons/editor/mode-edit'
 import Share from 'material-ui/svg-icons/social/share'
 
 import SettingTabs from '../SettingTabs'
-import TabPage from 'components/shared/TabPage'
-import TabPageBody from 'components/shared/TabPageBody'
-import TabPageHeader from 'components/shared/TabPageHeader'
+import TabPage from 'components/common/TabPage'
+import TabPageBody from 'components/common/TabPageBody'
+import TabPageHeader from 'components/common/TabPageHeader'
 
 import DeviceTplModal from './DeviceTplModal'
 import MonitorTplModal from './MonitorTplModal'
@@ -16,7 +16,7 @@ import ImageUploaderModal from './ImageUploaderModal'
 import DeviceTplView from './DeviceTplView'
 import WorkflowSelectModal from './WorkflowSelectModal'
 
-import { showConfirm, showAlert } from 'components/shared/Alert'
+import { showConfirm, showAlert } from 'components/common/Alert'
 import { errorStyle, underlineFocusStyle, inputStyle, selectedItemStyle, chipStyles } from 'style/common/materialStyles'
 
 import { extImageBaseUrl } from 'shared/Global'

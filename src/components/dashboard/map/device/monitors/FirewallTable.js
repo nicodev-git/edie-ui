@@ -1,17 +1,17 @@
 import React from 'react'
-import InfiniteTable from 'components/shared/InfiniteTable'
+import InfiniteTable from 'components/common/InfiniteTable'
 import {Toggle, RaisedButton} from 'material-ui'
 
-import TabPage from 'components/shared/TabPage'
-import TabPageBody from 'components/shared/TabPageBody'
-import TabPageHeader from 'components/shared/TabPageHeader'
+import TabPage from 'components/common/TabPage'
+import TabPageBody from 'components/common/TabPageBody'
+import TabPageHeader from 'components/common/TabPageHeader'
 import MonitorTabs from './MonitorTabs'
 import MonitorSocket from 'util/socket/MonitorSocket'
 
 import StatusImg from './StatusImg'
 import FwRuleModal from './FwRuleModal'
 
-import {showConfirm} from 'components/shared/Alert'
+import {showConfirm} from 'components/common/Alert'
 
 export default class FirewallTable extends React.Component {
   constructor (props) {

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { showAlert, showConfirm } from 'components/shared/Alert'
+import { showAlert, showConfirm } from 'components/common/Alert'
 import { appendComponent, removeComponent } from 'util/Component'
 import SegmentModal from './SegmentModal'
 import { ROOT_URL } from 'actions/config'

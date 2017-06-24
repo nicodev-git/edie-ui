@@ -1,6 +1,6 @@
 import React from 'react'
 import {Dialog} from 'material-ui'
-import InfiniteTable from 'components/shared/InfiniteTable'
+import InfiniteTable from 'components/common/InfiniteTable'
 import { CloseButton, TwoButtonsBlock } from 'components/modal/parts'
 
 const SmallModalTable = ({show, header, url, row, height, onHide,

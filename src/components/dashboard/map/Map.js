@@ -12,8 +12,8 @@ import DividerLine from './DividerLine'
 import { ZoomOptions, ToolbarToggle } from './toolbar'
 
 import DeviceWizardContainer from 'containers/shared/wizard/DeviceWizardContainer'
-import { wizardConfig, getDeviceType } from 'components/shared/wizard/WizardConfig'
-import { showConfirm } from 'components/shared/Alert'
+import { wizardConfig, getDeviceType } from 'components/common/wizard/WizardConfig'
+import { showConfirm } from 'components/common/Alert'
 
 import { fullScreen } from 'shared/FullScreen'
 import { isGroup } from 'shared/Global'

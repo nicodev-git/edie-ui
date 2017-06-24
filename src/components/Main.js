@@ -1,8 +1,6 @@
 import React from 'react'
-import { findIndex, startsWith, assign } from 'lodash'
+import { findIndex, startsWith } from 'lodash'
 import ReactTooltip from 'react-tooltip'
-import Snackbar from 'material-ui/Snackbar'
-import SearchIcon from 'material-ui/svg-icons/action/search'
 
 import SidebarContainer from 'containers/sidebar/SidebarContainer'
 import DashboardContainer from 'containers/dashboard/DashboardContainer'
@@ -11,27 +9,20 @@ import { scrollTop } from 'util/Scroll'
 import { DragDropContext } from 'react-dnd'
 import TouchBackend from 'react-dnd-touch-backend'
 
-import Alert from 'components/shared/Alert'
-import { parseSearchQuery, severities } from 'shared/Global'
+import Alert from 'components/common/Alert'
+import Snackbar from 'components/common/Snackbar'
 
-import { mainMenu, deviceMenu, contentType } from './Config'
+import { mainMenu, deviceMenu, contentType } from './sidebar/Config'
 import {sidebarWidth} from 'style/common/materialStyles'
 
 const dashboardId = mainMenu[0].id
 
-const searchIconStyle = {
-  marginTop: '6px'
-}
 class Main extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
       // minHeight: 1300
     }
-    this.onClickAlert = this.onClickAlert.bind(this)
-    this.fnEmpty = () => {}
-
-    this.searchIcon = <SearchIcon color="white" style={searchIconStyle}/>
   }
 
   componentWillMount () {
@@ -117,23 +108,6 @@ class Main extends React.Component {
   onCloseAlert () {
     this.props.closeApiErrorModal()
   }
-  onClickAlert () {
-    const {incident} = this.props.newIncidentMsg
-    const query = (incident.description || '').replace(/:/gi, '')
-    const newChips = parseSearchQuery(query)
-    if (incident.devicename) {
-      newChips.push({
-        name: 'devicename',
-        value: incident.devicename
-      })
-    }
-    this.props.router.push('/search')
-    this.props.updateQueryChips(newChips)
-    this.props.updateSearchParams(assign({}, this.props.searchParams, {
-      query: newChips.map(m => `${m.name}=${m.value}`).join(' and '),
-      severity: severities.map(p => p.value).join(',')
-    }))
-  }
 
   renderActivationModal () {
     if (!this.props.activationModalOpen) return null
@@ -148,24 +122,6 @@ class Main extends React.Component {
     const msg = `${apiError.message}. Url: ${apiError.config ? apiError.config.url : ''}`
     return (
       <Alert message={msg} onClose={this.onCloseAlert.bind(this)}/>
-    )
-  }
-
-  renderIncidentAlert () {
-    const { newIncidentMsg, userInfo } = this.props
-    if (!newIncidentMsg) return null
-    const keep = userInfo && userInfo.keepIncidentAlert
-    return (
-      <a href="javascript:;" onClick={this.onClickAlert}>
-        <Snackbar
-          open
-          action={this.searchIcon}
-          message={newIncidentMsg.message}
-          autoHideDuration={8000}
-          onActionTouchTap={this.onClickAlert}
-          onRequestClose={keep ? this.fnEmpty : null}
-        />
-      </a>
     )
   }
 
@@ -184,7 +140,7 @@ class Main extends React.Component {
           {children || null}
         </div>
         <ReactTooltip />
-        {this.renderIncidentAlert()}
+        <Snackbar {...this.props}/>
         {this.renderActivationModal()}
         {this.renderApiError()}
       </div>

@@ -8,7 +8,7 @@ import BugReportIcon from 'material-ui/svg-icons/action/bug-report'
 import FlagIcon from 'material-ui/svg-icons/content/flag'
 import ExitIcon from 'material-ui/svg-icons/action/exit-to-app'
 
-import Metric from 'components/shared/Metric'
+import Metric from 'components/common/Metric'
 
 const logoutStyle = {
   position: 'absolute',

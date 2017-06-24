@@ -1,5 +1,5 @@
 import React from 'react'
-import DeviceEditWizard from 'components/shared/wizard/DeviceEditWizard'
+import DeviceEditWizard from 'components/common/wizard/DeviceEditWizard'
 import { connect } from 'react-redux'
 import {
   openTplImageModal,

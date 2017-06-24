@@ -3,7 +3,7 @@ import moment from 'moment'
 import {FlatButton, RaisedButton, MenuItem, SelectField, TextField} from 'material-ui'
 import ActionSearch from 'material-ui/svg-icons/action/search'
 
-import DateRangePicker from 'components/shared/DateRangePicker'
+import DateRangePicker from 'components/common/DateRangePicker'
 import {
   errorStyle, underlineFocusStyle, inputStyle, selectedItemStyle, underlineStyle
 } from 'style/common/materialStyles'

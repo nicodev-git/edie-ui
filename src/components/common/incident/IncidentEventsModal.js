@@ -2,7 +2,7 @@ import React from 'react'
 import {Dialog} from 'material-ui'
 import moment from 'moment'
 
-import {renderEntity} from 'components/shared/CellRenderers'
+import {renderEntity} from 'components/common/CellRenderers'
 
 export default class IncidentEventsModal extends React.Component {
   constructor (props) {

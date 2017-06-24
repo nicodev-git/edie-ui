@@ -9,7 +9,7 @@ import { FormInput } from 'components/modal/parts'
 import FilterModal from './FilterModal'
 import PatternModal from './PatternModal'
 
-import {renderEntity} from 'components/shared/CellRenderers'
+import {renderEntity} from 'components/common/CellRenderers'
 
 class SimulationModal extends React.Component {
   onHide () {

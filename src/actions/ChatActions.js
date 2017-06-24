@@ -9,7 +9,7 @@ import {
 } from './types'
 
 import { apiError } from './Errors'
-import { showAlert } from 'components/shared/Alert'
+import { showAlert } from 'components/common/Alert'
 import { ROOT_URL } from './config'
 import { getAuthConfig, getParamsConfig } from './util' // eslint-disable-line
 import { encodeUrlParams } from 'shared/Global'

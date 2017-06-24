@@ -3,16 +3,16 @@ import {RaisedButton} from 'material-ui'
 import { assign, concat } from 'lodash'
 
 import SettingTabs from '../SettingTabs'
-import TabPage from 'components/shared/TabPage'
-import TabPageBody from 'components/shared/TabPageBody'
-import TabPageHeader from 'components/shared/TabPageHeader'
+import TabPage from 'components/common/TabPage'
+import TabPageBody from 'components/common/TabPageBody'
+import TabPageHeader from 'components/common/TabPageHeader'
 
-import InfiniteTable from 'components/shared/InfiniteTable'
+import InfiniteTable from 'components/common/InfiniteTable'
 import ParserTypeModal from './ParserTypeModal'
 import SimulationModal from './SimulationModal'
 
 import WfTabs from '../rule/WorkflowTabs'
-import { showAlert } from 'components/shared/Alert'
+import { showAlert } from 'components/common/Alert'
 
 class ParserTypes extends React.Component {
   constructor (props) {

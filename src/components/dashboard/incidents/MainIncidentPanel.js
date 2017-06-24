@@ -1,6 +1,6 @@
 import React from 'react'
 import {withRouter} from 'react-router'
-import { Panel, PanelBody } from 'components/shared/Panel'
+import { Panel, PanelBody } from 'components/common/Panel'
 import IncidentTable from './IncidentTable'
 import ToolbarToggle from '../map/toolbar/ToolbarToggle'
 import IncidentEventsModal from './IncidentEventsModal'

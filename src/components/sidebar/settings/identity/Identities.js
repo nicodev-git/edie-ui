@@ -2,15 +2,15 @@ import React from 'react'
 import {RaisedButton, TextField} from 'material-ui'
 import { assign } from 'lodash'
 
-import InfiniteTable from 'components/shared/InfiniteTable'
+import InfiniteTable from 'components/common/InfiniteTable'
 
 import SettingTabs from '../SettingTabs'
-import TabPage from 'components/shared/TabPage'
-import TabPageBody from 'components/shared/TabPageBody'
-import TabPageHeader from 'components/shared/TabPageHeader'
+import TabPage from 'components/common/TabPage'
+import TabPageBody from 'components/common/TabPageBody'
+import TabPageHeader from 'components/common/TabPageHeader'
 
 import { appendComponent, removeComponent } from 'util/Component'
-import { showAlert, showConfirm } from 'components/shared/Alert'
+import { showAlert, showConfirm } from 'components/common/Alert'
 import { errorStyle, inputStyle, underlineStyle } from 'style/common/materialStyles'
 
 import IdentityModal from './IdentityModal'

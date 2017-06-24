@@ -6,10 +6,10 @@ import ReactTooltip from 'react-tooltip'
 import { thumbup, thumpdown, done, notdone,
   rawtext, reason } from 'style/common/materialStyles'
 import { getSeverityIcon } from 'shared/Global'
-import {showIncidentRaw} from 'components/shared/incident/Incident'
-import InfiniteTable from 'components/shared/InfiniteTable'
-import {showPrompt} from 'components/shared/Alert'
-import CommentsModal from 'components/shared/incident/CommentsModal'
+import {showIncidentRaw} from 'components/common/incident/Incident'
+import InfiniteTable from 'components/common/InfiniteTable'
+import {showPrompt} from 'components/common/Alert'
+import CommentsModal from 'components/common/incident/CommentsModal'
 
 export default class IncidentTable extends Component {
   constructor (props) {

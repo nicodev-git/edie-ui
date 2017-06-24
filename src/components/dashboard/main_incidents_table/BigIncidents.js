@@ -6,12 +6,12 @@ import TimeAgo from 'react-timeago'
 import IncidentEventsModal from 'components/dashboard/incidents/IncidentEventsModal'
 import { thumbup, thumpdown, done, notdone, rawtext, reason } from 'style/common/materialStyles'
 import { getSeverityIcon, severities } from 'shared/Global'
-import { showIncidentRaw, showIncidentComments } from 'components/shared/incident/Incident'
+import { showIncidentRaw, showIncidentComments } from 'components/common/incident/Incident'
 import ReactTooltip from 'react-tooltip'
 
 import BigIncidentsView from './BigIncidentsView'
 
-import InfiniteTable from 'components/shared/InfiniteTable'
+import InfiniteTable from 'components/common/InfiniteTable'
 
 class BigIncidents extends Component {
   constructor (props) {

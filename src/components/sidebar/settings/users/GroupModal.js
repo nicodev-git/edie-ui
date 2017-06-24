@@ -5,7 +5,7 @@ import {
   clone
 } from 'lodash'
 
-import { showAlert } from 'components/shared/Alert'
+import { showAlert } from 'components/common/Alert'
 import { ROOT_URL } from 'actions/config'
 
 export default class GroupModal extends React.Component {

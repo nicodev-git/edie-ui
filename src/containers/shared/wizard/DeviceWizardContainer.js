@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import DeviceWizard from 'components/shared/wizard/DeviceWizard'
+import DeviceWizard from 'components/common/wizard/DeviceWizard'
 import { fetchMonitorTemplates, clearDeviceWizardInitialValues, openDeviceMonitorWizard } from 'actions'
 
 @connect(
