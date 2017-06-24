@@ -64,7 +64,35 @@ import {
 
 import {concat, difference, assign} from 'lodash'
 
-export default function (state = {}, action) {
+const initialState = {
+  stats: {
+    open: 0,
+    month: 0,
+    today: 0,
+    attackers: 0
+  },
+
+  maps: [],
+  mapDevices: [],
+  mapLines: [],
+
+  incidents: [],
+  mainIncidentDraw: 1,
+
+  selectedDevice: null,
+
+  images: [],
+
+  sidebarProfileMenuOpen: false,
+  sidebarMessageMenuOpen: false,
+
+  sidebarSearchActive: false,
+
+  apiErrorModalOpen: false,
+  apiError: ''
+}
+
+export default function (state = initialState, action) {
   switch (action.type) {
     case FETCH_MAPS:
       return { ...state, maps: action.data }

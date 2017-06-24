@@ -113,7 +113,38 @@ import {
 
 import {concat, difference} from 'lodash'
 
-export default function (state = {}, action) {
+const initialState = {
+  envVarAvailable: false,
+  envVars: [],
+  identities: [],
+  credentials: [],
+
+  deviceCategories: [],
+  deviceTemplates: [],
+  monitorTemplates: [],
+  tplImageModalVisible: false,
+  selectedDeviceMonitors: [],
+  editTplWorkflows: [],
+
+  maps: [],
+  editMap: null,
+
+  editUser: null,
+  editUserPin: '',
+
+  parserTypeDraw: 1,
+  parserTypes: [],
+  editParserTypeTags: [],
+
+  workflows: [],
+  editWorkflowTags: [],
+
+  showTraffic: true,
+
+  monitorTplTags: []
+}
+
+export default function (state = initialState, action) {
   switch (action.type) {
     case FETCH_DEVICE_TEMPLATES:
       return { ...state, deviceTemplates: action.data }

@@ -12,7 +12,11 @@ import {
   NO_AUTH_ERROR
 } from 'actions/types'
 
-export default function (state = {}, action) {
+const initialState = {
+  activationChecked: false
+}
+
+export default function (state = initialState, action) {
   switch (action.type) {
     case AUTH_USER:
       return { ...state, error: '', authenticated: true }

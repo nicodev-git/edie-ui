@@ -1,16 +1,23 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+
+import { createStore, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
+import reduxThunk from 'redux-thunk'
+
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+import injectTapEventPlugin from 'react-tap-event-plugin'
+
+import reducers from './reducers'
 import Routes from './routes'
 import './style'
-import injectTapEventPlugin from 'react-tap-event-plugin'
+
+const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore)
+const store = createStoreWithMiddleware(reducers)
+
+console.log('Version: 0.13.1')
+
 injectTapEventPlugin()
-
-import { store } from './shared/GetStore'
-
-console.log('Version: 0.12.2')
-
 ReactDOM.render(
   <MuiThemeProvider>
     <Provider store={store}>

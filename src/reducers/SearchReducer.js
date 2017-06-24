@@ -1,3 +1,4 @@
+import moment from 'moment'
 import {
   SEARCH_INCIDENTS,
   SEARCH_INCIDENT_DEVICES,
@@ -54,7 +55,51 @@ import {
 } from 'actions/types'
 import { concat } from 'lodash'
 
-export default function (state = {}, action) {
+import {dateFormat} from 'shared/Global'
+
+const initialState = {
+  incidents: [],
+  incidentDevices: [],
+  incidentDraw: 1,
+  params: {
+    query: '',
+    workflow: '',
+    tag: '',
+    collections: 'incident,event',
+    severity: 'HIGH,MEDIUM',
+    monitorTypes: '',
+    dateFrom: moment().add(-1, 'days').startOf('day').format(dateFormat),
+    dateTo: moment().endOf('day').format(dateFormat)
+  },
+  incidentParams: {
+    severity: ['HIGH', 'MEDIUM'],
+    fixed: 'false',
+    description: '',
+    deviceid: '*',
+    afterStartTimestamp: moment().startOf('year').valueOf(),
+    beforeStartTimestamp: moment().endOf('year').valueOf(),
+    sort: 'startTimestamp,desc',
+    draw: 1
+  },
+  queryChips: [],
+  fields: [],
+  fieldTopValues: [],
+  selectedWfs: [],
+  searchTags: [],
+
+  searchOptions: [],
+  sysSearchOptions: [],
+  selectedCategory: '',
+  workflowFilter: '',
+
+  relDevices: [],
+  irrelDevices: [],
+  searchFields: ['ip'],
+  selectedSearchFields: [],
+  searchRecordCounts: []
+}
+
+export default function (state = initialState, action) {
   switch (action.type) {
     case SEARCH_INCIDENTS:
       return {...state, incidents: action.data}

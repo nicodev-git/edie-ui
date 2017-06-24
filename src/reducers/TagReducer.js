@@ -7,7 +7,13 @@ import {
   SELECT_TAG
 } from 'actions/types'
 
-export default function (state = {}, action) {
+const initialState = {
+  tags: [],
+  tagDraw: 1,
+  selectedTags: []
+}
+
+export default function (state = initialState, action) {
   switch (action.type) {
     case SHOW_TAG_MODAL:
       return { ...state, tagModalOpen: !!action.visible, editTag: action.tag }

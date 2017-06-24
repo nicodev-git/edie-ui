@@ -99,7 +99,44 @@ import {
 
 import { concat, keys, assign } from 'lodash'
 
-const INITIAL_STATE = { devices: [] }
+const INITIAL_STATE = {
+  devices: [],
+
+  mapDevices: [],
+  mapLines: [],
+
+  incidents: [],
+  incidentDraw: 1,
+  addIncidentModalVisible: false,
+
+  rules: [],
+  rawIncidents: [],
+  physicalRules: [],
+
+  monitorPickerVisible: false,
+
+  wizardInitialValues: {},
+  monitorWizardVisible: false,
+  monitorTags: [],
+  deviceTags: [],
+
+  basicMonitors: [],
+  monitors: [],
+  monitorsUpdateTime: 0,
+
+  eventLogs: [],
+  apps: [],
+  processes: [],
+  monitorNetworks: [],
+  moniotrLogNames: [],
+  selectedLogName: 'Application',
+
+  deviceAppTab: 'app',
+
+  workflowCategories: [],
+  workflows: [],
+  workflowListDraw: 1
+}
 
 export default function (state = INITIAL_STATE, action) {
   switch (action.type) {

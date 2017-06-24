@@ -2,7 +2,11 @@ import {
   FETCH_ATTACKERS
 } from 'actions/types'
 
-export default function (state = {}, action) {
+const initialState = {
+  attackers: []
+}
+
+export default function (state = initialState, action) {
   switch (action.type) {
     case FETCH_ATTACKERS:
       return { ...state, attackers: action.data }
