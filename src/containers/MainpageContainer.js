@@ -1,12 +1,17 @@
 import React, { Component } from 'react'
 import moment from 'moment'
 import { debounce } from 'lodash'
-import { withRouter } from 'react-router'
+import { Switch, withRouter } from 'react-router'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import { Route } from 'react-router-dom'
 
 import Main from 'components/Main'
 import IncidentSocket from 'util/socket/IncidentSocket'
+
+import SearchGeneric from 'containers/search/GenericSearchContainer'
+import ChatContainer from 'containers/chat/ChatContainer'
+import ThreatMapContainer from 'containers/threatmap/ThreatMapContainer'
 
 import {
   closeDevice,
@@ -154,7 +159,13 @@ class MainpageContainer extends Component {
 
   render () {
     return (
-      <Main {...this.props} />
+      <Main {...this.props}>
+        <Switch>
+          <Route path="/chat" component={ChatContainer} />
+          <Route path="/search" component={SearchGeneric}/>
+          <Route path="/threatmap" component={ThreatMapContainer}/>
+        </Switch>
+      </Main>
     )
   }
 }

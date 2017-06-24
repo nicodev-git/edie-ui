@@ -21,18 +21,18 @@ export default function (ComposedComponent) {
 
       const p = location.pathname
       const q = location.query
-      let query = null
+      let search = null
       if (p !== '/' && p !== '/signout') {
-        query = {
+        search = {
           redirect: JSON.stringify({
             p, q
           })
         }
       }
 
-      this.props.router.push({
+      this.props.history.push({
         pathname: '/signin',
-        query
+        search
       })
     }
 

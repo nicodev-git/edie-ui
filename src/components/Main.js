@@ -80,45 +80,46 @@ class Main extends React.Component {
   }
 
   renderSidebar () {
-    const {location, device, router} = this.props
-    const {pathname} = location
-
-    let pageId = dashboardId
-    let pageType = contentType.Main
-
-    let found = false
-    mainMenu.forEach(item => {
-      if (item.id === dashboardId) return true
-      if (startsWith(pathname, item.path) && (location.search || '') === (item.search || '')) {
-        pageId = item.id
-        pageType = contentType.Main
-        found = true
-        return false
-      }
-    })
-
-    if (!found) {
-      let deviceId = device ? device.id : 'main'
-      deviceMenu(deviceId).forEach(item => {
-        if (item.id === dashboardId) return true
-        if (startsWith(pathname, item.path)) {
-          pageId = item.id
-          pageType = contentType.Device
-          found = true
-          return false
-        }
-      })
-    }
-
-    return (
-      <SidebarContainer
-        router={router}
-        pageId={pageId}
-        pageType={pageType}
-        device={device}
-        onClickItem={this.onClickMenuItem.bind(this)}
-      />
-    )
+    // const {location, device, router} = this.props
+    // const {pathname} = location
+    //
+    // let pageId = dashboardId
+    // let pageType = contentType.Main
+    //
+    // let found = false
+    // mainMenu.forEach(item => {
+    //   if (item.id === dashboardId) return true
+    //   if (startsWith(pathname, item.path) && (location.search || '') === (item.search || '')) {
+    //     pageId = item.id
+    //     pageType = contentType.Main
+    //     found = true
+    //     return false
+    //   }
+    // })
+    //
+    // if (!found) {
+    //   let deviceId = device ? device.id : 'main'
+    //   deviceMenu(deviceId).forEach(item => {
+    //     if (item.id === dashboardId) return true
+    //     if (startsWith(pathname, item.path)) {
+    //       pageId = item.id
+    //       pageType = contentType.Device
+    //       found = true
+    //       return false
+    //     }
+    //   })
+    // }
+    //
+    // return (
+    //   <SidebarContainer
+    //     router={router}
+    //     pageId={pageId}
+    //     pageType={pageType}
+    //     device={device}
+    //     onClickItem={this.onClickMenuItem.bind(this)}
+    //   />
+    // )
+    return null
   }
 
   onCloseAlert () {
