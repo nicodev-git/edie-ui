@@ -284,3 +284,28 @@
 .geSprite-horizontalelbow { background-position: 0 -5903px; }
 .geSprite-horizontalisometric { background-position: 0 -5949px; }
 .geSprite-verticalisometric { background-position: 0 -5995px; }
+
+.monitor-types {
+    border-radius: 4px;
+    box-shadow: 0 0 0 1px rgba(63,63,68,.1),0 1px 2px rgba(63,63,68,.1);
+    text-align: center;
+}
+
+.monitor-types ul {
+    margin: 0;
+    padding: 0;
+}
+
+.monitor-types ul li {
+    display: inline-block;
+    text-align: center;
+    width: 18%;
+    padding: 10px;
+}
+
+.monitor-types ul li img {
+    width: 48px;
+    height: 48px;
+    margin: auto;
+    display: block;
+}
