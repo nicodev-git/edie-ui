@@ -23,9 +23,9 @@ const monitors = <PlaylistIcon color={sidebarIconsColor}/>
 export const mainMenu = [
   {id: 'dashboard', title: 'Dashboard', icon: home, path: '/'},
   {id: 'search', title: 'Search', icon: search, path: '/search'},
+  {id: 'incidents', title: 'Incidents', icon: incidents, path: '/', search: '?bigincidents='},
   {id: 'chat', title: 'Chat', icon: chat, path: '/chat'},
   {id: 'threatmap', title: 'Threat Map', icon: threatmap, path: '/threatmap'},
-  // {id: 'incidents', title: 'Incidents', icon: incidents, path: '/incidents', badge: true},
   {id: 'settings', title: 'Settings', icon: settings, path: '/settings'}
   // {id: 'logout', title: 'Log Out', icon: exit, path: '/signout'}
 ]

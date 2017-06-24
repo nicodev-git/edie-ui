@@ -45,16 +45,19 @@ class Main extends React.Component {
     }
   }
 
+  isBigIncidents () {
+    const {pathname, search} = this.props.location
+    return (pathname === '/' && search === '?bigincidents=')
+  }
   renderDashboard () {
-    const hidden = !!this.props.children
+    const hidden = !!this.props.children || this.isBigIncidents()
     return (
       <DashboardContainer hidden={hidden}/>
     )
   }
 
   renderBigIncidents () {
-    const {pathname, search} = this.props.location
-    if (pathname === '/' && search === '?bigincidents=') {
+    if (this.isBigIncidents()) {
       console.log('big incidents')
       return (
         <BigIncidents {...this.props}/>
@@ -71,7 +74,8 @@ class Main extends React.Component {
       closeDevice()
     }
     router.push({
-      pathname: item.path
+      pathname: item.path,
+      search: item.search || ''
     })
   }
 
@@ -85,7 +89,7 @@ class Main extends React.Component {
     let found = false
     mainMenu.forEach(item => {
       if (item.id === dashboardId) return true
-      if (startsWith(pathname, item.path)) {
+      if (startsWith(pathname, item.path) && location.search === item.search) {
         pageId = item.id
         pageType = contentType.Main
         found = true

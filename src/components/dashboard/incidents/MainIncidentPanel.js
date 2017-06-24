@@ -45,7 +45,7 @@ export default class MainIncidentPanel extends React.Component {
       return (
         <Panel className="margin-sm-bottom flex-vertical flex-1 main-panel table-panel">
           <PanelBody className="padding-xs flex-vertical flex-1">
-            <div className="main-incident-toggle">
+            <div className="main-incident-toggle hidden">
               <ToolbarToggle onToggle={this.onClickOpenModal.bind(this)} />
             </div>
             {this.renderTable()}

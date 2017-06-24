@@ -27,7 +27,10 @@ import {
   fetchUserInfo,
 
   updateSearchParams,
-  updateQueryChips
+  updateQueryChips,
+
+  updateBigIncidentParams,
+  fetchBigIncidents
 } from 'actions'
 
 @connect((state) => {
@@ -45,7 +48,11 @@ import {
 
     searchParams: state.search.params,
 
-    userInfo: state.dashboard.userInfo
+    userInfo: state.dashboard.userInfo,
+
+    // bigIncidents: state.dashboard.bigIncidents,
+    // incidents: state.dashboard.incidents,
+    bigIncidentParams: state.dashboard.bigIncidentParams
   }
 },
 dispatch => bindActionCreators({
@@ -67,7 +74,10 @@ dispatch => bindActionCreators({
   fetchUserInfo,
 
   updateSearchParams,
-  updateQueryChips
+  updateQueryChips,
+
+  updateBigIncidentParams,
+  fetchBigIncidents
 }, dispatch))
 @withRouter
 export default class MainContainer extends Component {
