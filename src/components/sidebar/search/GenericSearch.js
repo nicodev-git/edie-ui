@@ -14,7 +14,7 @@ import TabPageHeader from 'components/shared/TabPageHeader'
 import { imageBaseUrl, parseSearchQuery, guid, encodeUrlParams, dateFormat, collections, severities, viewFilters } from 'shared/Global'
 import { showConfirm } from 'components/shared/Alert'
 import {renderEntity} from 'components/shared/CellRenderers'
-import {chipStyles} from 'style/materialStyles'
+import {chipStyles} from 'style/common/materialStyles'
 
 import SearchFormView from './SearchFormView'
 import SearchSavePopover from './SearchSavePopover'

@@ -4,7 +4,7 @@ import moment from 'moment'
 import ReactTooltip from 'react-tooltip'
 
 import { thumbup, thumpdown, done, notdone,
-  rawtext, reason } from 'style/materialStyles'
+  rawtext, reason } from 'style/common/materialStyles'
 import { getSeverityIcon } from 'shared/Global'
 import {showIncidentRaw} from 'components/shared/incident/Incident'
 import InfiniteTable from 'components/shared/InfiniteTable'

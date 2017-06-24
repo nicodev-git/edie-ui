@@ -2,7 +2,7 @@ import React from 'react'
 import { Field } from 'redux-form'
 import TextField from 'material-ui/TextField'
 import { util } from '../WizardUtil'
-import { inputStyle, underlineStyle } from 'style/materialStyles'
+import { inputStyle, underlineStyle } from 'style/common/materialStyles'
 
 export default class TextInput extends React.Component {
   renderField (config) {

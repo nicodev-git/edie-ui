@@ -6,7 +6,7 @@ import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
 import { assign } from 'lodash'
 
 import { SubHeader, CrudButtons } from 'components/modal/parts'
-import { buttonStyle, iconStyle } from 'style/materialStyles'
+import { buttonStyle, iconStyle } from 'style/common/materialStyles'
 
 import MonitorWizardContainer from 'containers/shared/wizard/MonitorWizardContainer'
 

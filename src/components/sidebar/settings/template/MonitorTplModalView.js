@@ -3,7 +3,7 @@ import {Dialog, RaisedButton, Chip} from 'material-ui'
 import { Field } from 'redux-form'
 import { SubmitBlock, FormInput, ImageUploader, FormCheckbox } from 'components/modal/parts'
 
-import { chipStyles } from 'style/materialStyles'
+import { chipStyles } from 'style/common/materialStyles'
 
 export default class MonitorTplModalView extends Component {
   render () {

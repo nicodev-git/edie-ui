@@ -1,7 +1,7 @@
 import React from 'react'
 import {Chip, FlatButton} from 'material-ui'
 
-import {chipStyles} from 'style/materialStyles'
+import {chipStyles} from 'style/common/materialStyles'
 
 export default class Workflows extends React.Component {
   render () {

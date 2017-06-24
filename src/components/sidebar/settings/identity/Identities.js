@@ -11,7 +11,7 @@ import TabPageHeader from 'components/shared/TabPageHeader'
 
 import { appendComponent, removeComponent } from 'util/Component'
 import { showAlert, showConfirm } from 'components/shared/Alert'
-import { errorStyle, inputStyle, underlineStyle } from 'style/materialStyles'
+import { errorStyle, inputStyle, underlineStyle } from 'style/common/materialStyles'
 
 import IdentityModal from './IdentityModal'
 import SegmentListModal from './SegmentListModal'

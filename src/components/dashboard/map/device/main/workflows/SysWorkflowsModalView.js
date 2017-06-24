@@ -7,7 +7,7 @@ import { findIndex } from 'lodash'
 
 import { TwoButtonsBlockCustom } from 'components/modal/parts'
 import { errorStyle, underlineFocusStyle, inputStyle,
-  selectedItemStyle } from 'style/materialStyles'
+  selectedItemStyle } from 'style/common/materialStyles'
 
 export default class SysWorkflowsModalView extends React.Component {
   render () {

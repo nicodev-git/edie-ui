@@ -35,7 +35,7 @@ import {
   errorStyle, underlineFocusStyle, inputStyle, selectedItemStyle, underlineStyle,
   thumbup, thumpdown, done, notdone,
   rawtext, reason, openicon
-} from 'style/materialStyles'
+} from 'style/common/materialStyles'
 
 export default class MainIncidents extends Component {
   constructor (props) {

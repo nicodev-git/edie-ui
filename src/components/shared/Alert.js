@@ -5,7 +5,7 @@ import { SubHeader } from '../modal/parts'
 import TextField from 'material-ui/TextField'
 import FlatButton from 'material-ui/FlatButton'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
-import { inputStyle, underlineStyle, buttonStyle, buttonTextStyle } from 'style/materialStyles'
+import { inputStyle, underlineStyle, buttonStyle, buttonTextStyle } from 'style/common/materialStyles'
 
 const TYPE_ALERT = 'alert'
 const TYPE_CONFIRM = 'confirm'

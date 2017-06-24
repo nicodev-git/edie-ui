@@ -4,7 +4,7 @@ import {Chip, FlatButton, Dialog} from 'material-ui'
 
 import { SubHeader, SubmitBlock, FormInput, ImageUploader,
   Monitors, MonitorTemplates, Workflows } from 'components/modal/parts'
-import { chipStyles } from 'style/materialStyles'
+import { chipStyles } from 'style/common/materialStyles'
 
 export default class DeviceTplModalView extends Component {
   renderContent () {

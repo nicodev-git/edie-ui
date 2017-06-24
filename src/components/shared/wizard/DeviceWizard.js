@@ -15,7 +15,7 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import LinearProgress from 'material-ui/LinearProgress'
 import DeviceWizardView from './DeviceWizardView'
 import TagsView from './input/TagsView'
-import { primeColor } from 'style/materialStyles'
+import { primeColor } from 'style/common/materialStyles'
 
 class DeviceWizard extends Component {
   static childContextTypes = {

@@ -5,7 +5,7 @@ import {blue300} from 'material-ui/styles/colors'
 
 import {TwoButtonsBlockCustom} from 'components/modal/parts'
 
-import {chipStyles} from 'style/materialStyles'
+import {chipStyles} from 'style/common/materialStyles'
 
 export default class TagPickerModalView extends React.Component {
   renderChip (w) {

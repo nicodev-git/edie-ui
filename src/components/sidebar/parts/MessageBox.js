@@ -8,7 +8,7 @@ import EmailIcon from 'material-ui/svg-icons/communication/email'
 import InboxIcon from 'material-ui/svg-icons/content/inbox'
 import Message from './Message'
 
-import {badgeStyle, badgeRootStyle, iconStyle, iconButtonStyle} from 'style/materialStyles'
+import {badgeStyle, badgeRootStyle, iconStyle, iconButtonStyle} from 'style/common/materialStyles'
 
 const iconMenuStyle = {
   paddingTop: '0px',

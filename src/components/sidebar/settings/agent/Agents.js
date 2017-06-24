@@ -12,7 +12,7 @@ import TabPageBody from 'components/shared/TabPageBody'
 import TabPageHeader from 'components/shared/TabPageHeader'
 
 import { ROOT_URL } from 'actions/config'
-import { errorStyle, underlineFocusStyle, inputStyle, selectedItemStyle } from 'style/materialStyles'
+import { errorStyle, underlineFocusStyle, inputStyle, selectedItemStyle } from 'style/common/materialStyles'
 
 export default class Agents extends Component {
   constructor (props) {

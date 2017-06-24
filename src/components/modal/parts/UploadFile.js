@@ -1,6 +1,6 @@
 import React from 'react'
 import FlatButton from 'material-ui/FlatButton'
-import { buttonStyle, buttonTextStyle } from 'style/materialStyles'
+import { buttonStyle, buttonTextStyle } from 'style/common/materialStyles'
 
 const UploadFile = ({onChangeFile}) => (
   <div className="pull-left upload-file">

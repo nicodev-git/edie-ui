@@ -8,7 +8,7 @@ import SettingsIcon from 'material-ui/svg-icons/action/settings'
 import BackIcon from 'material-ui/svg-icons/navigation/arrow-back'
 // import ExitIcon from 'material-ui/svg-icons/action/exit-to-app'
 import PlaylistIcon from 'material-ui/svg-icons/av/playlist-add-check'
-import { sidebarIconsColor } from 'style/materialStyles'
+import { sidebarIconsColor } from 'style/common/materialStyles'
 
 const home = <HomeIcon color={sidebarIconsColor}/>
 const search = <SearchIcon color={sidebarIconsColor}/>

@@ -12,7 +12,7 @@ import {Toolbar} from 'material-ui/Toolbar'
 
 import { FormInput } from 'components/modal/parts'
 import DateRangePicker from 'components/shared/DateRangePicker'
-import { underlineFocusStyle, inputStyle, selectedItemStyle } from 'style/materialStyles'
+import { underlineFocusStyle, inputStyle, selectedItemStyle } from 'style/common/materialStyles'
 
 const iconButtonStyle = {
   marginTop: '4px',

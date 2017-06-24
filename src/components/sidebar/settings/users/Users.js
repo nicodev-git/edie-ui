@@ -15,7 +15,7 @@ import TabPageHeader from 'components/shared/TabPageHeader'
 
 import UserTabs from './UserTabs'
 
-import { errorStyle, underlineFocusStyle, inputStyle, selectedItemStyle } from 'style/materialStyles'
+import { errorStyle, underlineFocusStyle, inputStyle, selectedItemStyle } from 'style/common/materialStyles'
 
 export default class Users extends React.Component {
   constructor (props) {

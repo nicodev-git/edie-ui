@@ -4,7 +4,7 @@ import { FormInput, SubHeader } from 'components/modal/parts'
 import ActionList from 'material-ui/svg-icons/action/list'
 import ActionTrendingUp from 'material-ui/svg-icons/action/trending-up'
 import {FlatButton} from 'material-ui'
-import { selectedItemStyle } from 'style/materialStyles'
+import { selectedItemStyle } from 'style/common/materialStyles'
 
 export default class WorkflowStep0 extends Component {
   render () {

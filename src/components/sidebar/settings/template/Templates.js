@@ -17,7 +17,7 @@ import DeviceTplView from './DeviceTplView'
 import WorkflowSelectModal from './WorkflowSelectModal'
 
 import { showConfirm, showAlert } from 'components/shared/Alert'
-import { errorStyle, underlineFocusStyle, inputStyle, selectedItemStyle, chipStyles } from 'style/materialStyles'
+import { errorStyle, underlineFocusStyle, inputStyle, selectedItemStyle, chipStyles } from 'style/common/materialStyles'
 
 import { extImageBaseUrl } from 'shared/Global'
 import WfTabs from '../rule/WorkflowTabs'

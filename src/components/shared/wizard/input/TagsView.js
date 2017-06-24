@@ -2,7 +2,7 @@ import React from 'react'
 import {Chip} from 'material-ui'
 import TagPickerModal from 'containers/settings/tag/TagPickerModalContainer'
 
-import { chipStyles } from 'style/materialStyles'
+import { chipStyles } from 'style/common/materialStyles'
 
 export default class TagsView extends React.Component {
   onClickAddTag () {

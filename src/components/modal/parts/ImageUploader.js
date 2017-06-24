@@ -1,6 +1,6 @@
 import React from 'react'
 import RaisedButton from 'material-ui/RaisedButton'
-import { primeButtonStyle, primeButtonLabelStyle } from 'style/materialStyles'
+import { primeButtonStyle, primeButtonLabelStyle } from 'style/common/materialStyles'
 
 const ImageUploader = ({imgUrl, onChange}) => (
   <div className="image-upload-container margin-top-20">

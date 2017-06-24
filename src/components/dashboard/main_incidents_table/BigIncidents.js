@@ -4,7 +4,7 @@ import { assign } from 'lodash'
 import TimeAgo from 'react-timeago'
 
 import IncidentEventsModal from 'components/dashboard/incidents/IncidentEventsModal'
-import { thumbup, thumpdown, done, notdone, rawtext, reason } from 'style/materialStyles'
+import { thumbup, thumpdown, done, notdone, rawtext, reason } from 'style/common/materialStyles'
 import { getSeverityIcon, severities } from 'shared/Global'
 import { showIncidentRaw, showIncidentComments } from 'components/shared/incident/Incident'
 import ReactTooltip from 'react-tooltip'

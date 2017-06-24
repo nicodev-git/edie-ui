@@ -15,7 +15,7 @@ import Alert from 'components/shared/Alert'
 import { parseSearchQuery, severities } from 'shared/Global'
 
 import { mainMenu, deviceMenu, contentType } from './Config'
-import {sidebarWidth} from 'style/materialStyles'
+import {sidebarWidth} from 'style/common/materialStyles'
 
 const dashboardId = mainMenu[0].id
 

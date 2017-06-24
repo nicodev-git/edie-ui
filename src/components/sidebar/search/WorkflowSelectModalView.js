@@ -3,7 +3,7 @@ import {Dialog, MenuItem, SelectField, TextField} from 'material-ui'
 
 import { TwoButtonsBlockCustom } from 'components/modal/parts'
 import { errorStyle, underlineFocusStyle, inputStyle,
-  selectedItemStyle, underlineStyle } from 'style/materialStyles'
+  selectedItemStyle, underlineStyle } from 'style/common/materialStyles'
 
 export default class WorkflowSelectModalView extends React.Component {
   render () {

@@ -5,7 +5,7 @@ import DeleteIcon from 'material-ui/svg-icons/action/delete'
 import {Chip} from 'material-ui'
 
 import { SubHeader } from 'components/modal/parts'
-import { buttonStyle, iconStyle, chipStyles } from 'style/materialStyles'
+import { buttonStyle, iconStyle, chipStyles } from 'style/common/materialStyles'
 
 export default class WorkflowStep2 extends Component {
   render () {

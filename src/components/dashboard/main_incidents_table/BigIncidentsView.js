@@ -6,7 +6,7 @@ import ActionSearch from 'material-ui/svg-icons/action/search'
 import DateRangePicker from 'components/shared/DateRangePicker'
 import {
   errorStyle, underlineFocusStyle, inputStyle, selectedItemStyle, underlineStyle
-} from 'style/materialStyles'
+} from 'style/common/materialStyles'
 
 import {severities} from 'shared/Global'
 

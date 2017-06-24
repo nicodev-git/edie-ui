@@ -2,7 +2,7 @@ import React from 'react'
 import { reduxForm, Field, formValueSelector } from 'redux-form'
 import { connect } from 'react-redux'
 import {Dialog, FlatButton, Chip} from 'material-ui'
-import {chipStyles} from 'style/materialStyles'
+import {chipStyles} from 'style/common/materialStyles'
 import { concat, assign } from 'lodash'
 
 import { FormInput } from 'components/modal/parts'

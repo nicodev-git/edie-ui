@@ -6,7 +6,7 @@ import {Chip, FlatButton} from 'material-ui'
 import ReactTooltip from 'react-tooltip'
 
 import { FormInput, FormSelect, FormCheckbox } from 'components/modal/parts'
-import { buttonStyle, iconStyle, chipStyles } from 'style/materialStyles'
+import { buttonStyle, iconStyle, chipStyles } from 'style/common/materialStyles'
 
 import {severities} from 'shared/Global'
 

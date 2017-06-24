@@ -1,6 +1,6 @@
 import React from 'react'
 import {SelectField, MenuItem} from 'material-ui'
-import { underlineFocusStyle, inputStyle, selectedItemStyle } from 'style/materialStyles'
+import { underlineFocusStyle, inputStyle, selectedItemStyle } from 'style/common/materialStyles'
 
 const FormMultiSelect = ({input, label, meta: { touched, error }, value, options, onChange}) => (
   <SelectField

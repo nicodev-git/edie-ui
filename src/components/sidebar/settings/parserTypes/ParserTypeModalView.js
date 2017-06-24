@@ -6,7 +6,7 @@ import { Field } from 'redux-form'
 import {Dialog, Chip, FlatButton} from 'material-ui'
 
 import { SubHeader, SubmitBlock, FormInput, FormSelect } from 'components/modal/parts'
-import { buttonStyle, iconStyle, chipStyles } from 'style/materialStyles'
+import { buttonStyle, iconStyle, chipStyles } from 'style/common/materialStyles'
 
 export default class ParserTypeModalView extends Component {
   render () {
