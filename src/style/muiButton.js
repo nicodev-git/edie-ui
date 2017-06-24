@@ -1,7 +1,7 @@
 /**
  * Created by Cheng on 6/24/17.
  */
-import {primeColor, backgroundColor} from './muiColor'
+import {primeColor, backgroundColor, disabledColor} from './muiColor'
 
 export const buttonStyle = {
   backgroundColor: backgroundColor,

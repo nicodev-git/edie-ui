@@ -1,5 +1,3 @@
-
-
 export const chipStyles = {
   chip: {
     margin: 4
