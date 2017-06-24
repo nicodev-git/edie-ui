@@ -82,7 +82,7 @@ export default class EventLogTable extends Component {
   onClickSearch () {
     const query = `deviceid=${this.props.device.id} and monitortype=log and eventType=AGENT and _all=${this.props.monitorQuery}`
     const queryChips = parseSearchQuery(query)
-    this.props.history.push('/search')
+    this.props.router.push('/search')
     this.props.updateSearchParams(assign({}, this.props.params, {
       query,
       severity: 'HIGH,MEDIUM',

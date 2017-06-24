@@ -28,7 +28,7 @@ export default class IncidentSnackbar extends React.Component {
         value: incident.devicename
       })
     }
-    this.props.history.push('/search')
+    this.props.router.push('/search')
     this.props.updateQueryChips(newChips)
     this.props.updateSearchParams(assign({}, this.props.searchParams, {
       query: newChips.map(m => `${m.name}=${m.value}`).join(' and '),

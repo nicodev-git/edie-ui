@@ -213,9 +213,9 @@ class Map extends React.Component {
     this.props.openDevice(obj.data)
 
     if (isGroup(obj.data)) {
-      this.props.history.push(`/device/${obj.data.id}/topology`)
+      this.props.router.push(`/device/${obj.data.id}/topology`)
     } else {
-      this.props.history.push(`/device/${obj.data.id}/main/incidents`)
+      this.props.router.push(`/device/${obj.data.id}/main/incidents`)
     }
   }
 

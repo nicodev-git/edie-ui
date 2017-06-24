@@ -275,7 +275,7 @@ export default class MainIncidents extends Component {
   onClickEvents () {
     const query = `deviceid=${this.props.device.id}`
     const queryChips = parseSearchQuery(query)
-    this.props.history.push('/search')
+    this.props.router.push('/search')
     this.props.updateSearchParams(assign({}, this.props.params, {
       query,
       severity: 'HIGH,MEDIUM',
@@ -374,7 +374,7 @@ export default class MainIncidents extends Component {
 
   onClickGroup (groupId) {
     this.props.closeDevice()
-    this.props.history.push(`/device/${groupId}/topology`)
+    this.props.router.push(`/device/${groupId}/topology`)
   }
 
   renderHeaderOptions () {
