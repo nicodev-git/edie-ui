@@ -17,8 +17,7 @@
             "transform": "react-transform-catch-errors",
             "imports": ["react", "redbox-react"]
           }]
-        }],
-        ["transform-decorators-legacy"]
+        }]
       ]
     },
     "production": {
@@ -27,8 +26,7 @@
         ["transform-react-jsx"],
         ["transform-object-assign"],
         ["transform-es2015-spread"],
-        ["transform-react-display-name"],
-        ["transform-decorators-legacy"]
+        ["transform-react-display-name"]
       ]
     }
   }

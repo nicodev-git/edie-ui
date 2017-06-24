@@ -3,14 +3,13 @@ import MainAdvanced from 'components/dashboard/map/device/main/advanced/MainAdva
 import {withRouter} from 'react-router'
 import { connect } from 'react-redux'
 
-@connect(
-  state => ({ device: state.dashboard.selectedDevice })
-)
-@withRouter
-export default class MainAdvancedContainer extends Component {
+class MainAdvancedContainer extends Component {
   render () {
     return (
       <MainAdvanced {...this.props} />
     )
   }
 }
+export default connect(
+  state => ({ device: state.dashboard.selectedDevice })
+)(withRouter(MainAdvancedContainer))

@@ -33,7 +33,14 @@ import {
   selectSysWorkflowCategory
 } from 'actions'
 
-@connect(
+class MainEventsContainer extends Component {
+  render () {
+    return (
+      <MainEvents {...this.props} />
+    )
+  }
+}
+export default connect(
   state => ({
     device: state.dashboard.selectedDevice,
     events: state.devices.events,
@@ -86,12 +93,4 @@ import {
     addDeviceWorkflows,
     selectSysWorkflowCategory
   }
-)
-@withRouter
-export default class MainEventsContainer extends Component {
-  render () {
-    return (
-      <MainEvents {...this.props} />
-    )
-  }
-}
+)(withRouter(MainEventsContainer))

@@ -49,7 +49,7 @@ module.exports = {
         loader: 'babel-loader',
         include: path.join(__dirname, 'src'),
         query: {
-          plugins: ['transform-decorators-legacy','transform-react-jsx','transform-object-assign'],
+          plugins: ['transform-react-jsx','transform-object-assign'],
           presets: ['react', 'es2015', 'stage-0']
         }
       },

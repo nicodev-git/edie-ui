@@ -5,18 +5,17 @@ import { addGroupDevice } from 'actions'
 
 import Devices from 'components/dashboard/map/device/devices/Devices'
 
-@connect(
-  state => ({
-    device: state.dashboard.selectedDevice
-  }), {
-    addGroupDevice
-  }
-)
-@withRouter
-export default class DevicesContainer extends React.Component {
+class DevicesContainer extends React.Component {
   render () {
     return (
       <Devices {...this.props} />
     )
   }
 }
+export default connect(
+  state => ({
+    device: state.dashboard.selectedDevice
+  }), {
+    addGroupDevice
+  }
+)(withRouter(DevicesContainer))

@@ -13,7 +13,14 @@ import {
   selectIncident
 } from 'actions'
 
-@connect(
+class ChatContainer extends Component {
+  render () {
+    return (
+      <Chat {...this.props} />
+    )
+  }
+}
+export default connect(
   state => ({
     incidents: state.chat.incidents,
     rooms: state.chat.rooms,
@@ -32,12 +39,4 @@ import {
       selectIncident
     }, dispatch)
   })
-)
-@withRouter
-export default class ChatContainer extends Component {
-  render () {
-    return (
-      <Chat {...this.props} />
-    )
-  }
-}
+)(withRouter(ChatContainer))
