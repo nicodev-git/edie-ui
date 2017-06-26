@@ -12,7 +12,7 @@ import IconButton from 'material-ui/IconButton'
 import CropFreeIcon from 'material-ui/svg-icons/image/crop-free'
 import FileIcon from 'material-ui/svg-icons/editor/insert-drive-file'
 
-import countryLatlng from 'shared/data/country-latlng'
+import countryLatlng from 'util/Country-latlng'
 import IncidentSocket from 'util/socket/IncidentSocket'
 import ThreatItemModal from './ThreatItemModal'
 

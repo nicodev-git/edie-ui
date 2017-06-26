@@ -12,7 +12,6 @@ import IncidentSocket from 'util/socket/IncidentSocket'
 import SearchGeneric from 'containers/search/GenericSearchContainer'
 import ChatContainer from 'containers/chat/ChatContainer'
 import ThreatMapContainer from 'containers/threatmap/ThreatMapContainer'
-// import Dashboard from 'containers/dashboard/DashboardContainer'
 import SignoutContainer from 'containers/auth/SignoutContainer'
 import Settings from 'components/sidebar/settings/Settings'
 import DeviceContainer from 'containers/device/DeviceContainer'
@@ -104,6 +103,9 @@ class MainpageContainer extends Component {
     })
     this.incidentSocket.connect()
     this.clearNewincidentMsg = debounce(() => this.props.updateNewIncidentMsg(null), 8000)
+
+    const { history } = this.props
+    this.unsubscribeFromHistory = history.listen(this.handleLocationChange)
   }
 
   componentWillUpdate (nextProps) {
@@ -116,6 +118,15 @@ class MainpageContainer extends Component {
 
   componentWillUnmount () {
     this.incidentSocket.close()
+    this.unsubscribeFromHistory()
+  }
+
+  handleLocationChange (location) {
+    if (location.pathname === '/') {
+      setTimeout(() => {
+        window.dispatchEvent(new window.Event('resize'))
+      }, 100)
+    }
   }
 
   onReceiveIncidents (msg) {

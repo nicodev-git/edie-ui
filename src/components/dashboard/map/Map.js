@@ -16,7 +16,7 @@ import DeviceWizardContainer from 'containers/shared/wizard/DeviceWizardContaine
 import { wizardConfig, getDeviceType } from 'components/common/wizard/WizardConfig'
 import { showConfirm } from 'components/common/Alert'
 
-import { fullScreen } from 'shared/FullScreen'
+import { fullScreen } from 'util/FullScreen'
 import { isGroup } from 'shared/Global'
 
 class Map extends React.Component {
