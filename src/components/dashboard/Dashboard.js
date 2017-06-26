@@ -9,14 +9,14 @@ export default class Dashboard extends React.Component {
     this.props.fetchDashboardStats()
   }
 
-  isBigIncidents () {
+  isHidden () {
     const {pathname, search} = this.props.location
-    return (pathname === '/' && search === '?bigincidents=')
+    return (pathname !== '/' || !!search)
   }
   render () {
-    const hidden = this.isBigIncidents()
+    const hidden = this.isHidden()
     return (
-      <div className={`flex-vertical flex-1 ${hidden ? 'hidden' : ''}`}>
+      <div className={`flex-vertical flex-1 ${hidden ? 'hidden' : ''}`} hidden={hidden}>
         <MetricPanel {...this.props}/>
         <Map {...this.props}/>
         <MainIncidentPanel {...this.props}/>

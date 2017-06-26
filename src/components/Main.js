@@ -3,7 +3,7 @@ import { findIndex, startsWith } from 'lodash'
 import ReactTooltip from 'react-tooltip'
 
 import SidebarContainer from 'containers/sidebar/SidebarContainer'
-// import Dashboard from './dashboard/Dashboard'
+import Dashboard from './dashboard/Dashboard'
 import ActivationModal from 'components/auth/ActivationModal'
 import { scrollTop } from 'util/Scroll'
 import { DragDropContext } from 'react-dnd'
@@ -50,15 +50,13 @@ class Main extends React.Component {
     return (pathname === '/' && search === '?bigincidents=')
   }
   renderDashboard () {
-    // const hidden = !!this.props.children || this.isBigIncidents()
-    // return (
-    //   <Dashboard {...this.props} hidden={hidden}/>
-    // )
+    return (
+      <Dashboard {...this.props}/>
+    )
   }
 
   renderBigIncidents () {
     if (this.isBigIncidents()) {
-      console.log('big incidents')
       return (
         <BigIncidents {...this.props}/>
       )
