@@ -8,7 +8,7 @@ class MemoryTable extends React.Component {
     return (
       <div className="inline-block padding-sm">
         <div style={{position: 'relative', marginBottom: '2px'}} className="inline-block">
-          <img src="/images/ram.png" width="70" className="padding-sm"/>
+          <img src="/resources/images/dashboard/map/device/monitors/ram.png" width="70" className="padding-sm"/>
           <div className="centered" style={{marginTop: '-4px', color}}>
             {monitorMemory && <span>{Math.ceil(p.UsedSize * 100 / p.TotalSize)}%</span>}
           </div>

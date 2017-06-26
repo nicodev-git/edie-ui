@@ -16,7 +16,7 @@ export default class MonitorRoutes extends React.Component {
   render () {
     return (
       <Switch>
-        <Route path="/device/:deviceId/monitor" component={DeviceMonitorsContainer}/>
+        <Route path="/device/:deviceId/monitor" exact component={DeviceMonitorsContainer}/>
         <Route path="/device/:deviceId/monitor/eventlog" component={DeviceEventLogs}/>
         <Route path="/device/:deviceId/monitor/app" component={DeviceApps}/>
         <Route path="/device/:deviceId/monitor/process" component={DeviceProcesses}/>
