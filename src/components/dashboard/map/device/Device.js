@@ -17,14 +17,15 @@ export default class Device extends React.Component {
   // }
 
   render () {
+    const {deviceId} = this.props.match.params
     if (!this.props.selectedDevice) {
       if (!this.props.devices.length) {
         console.log('fetch devices')
-        this.props.fetchDevice(this.props.params.deviceId)
+        this.props.fetchDevice(deviceId)
       } else {
         console.log('no fetching')
         for (let device of this.props.devices) {
-          if (device.id === this.props.params.deviceId) {
+          if (device.id === deviceId) {
             console.log('open device')
             this.props.openDevice(device)
           }

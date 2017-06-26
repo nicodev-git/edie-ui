@@ -284,7 +284,7 @@ export default class MainIncidents extends Component {
       tag: '',
       dateFrom: moment().startOf('year').format(dateFormat),
       dateTo: moment().endOf('year').format(dateFormat)
-    }))
+    }), this.props.history)
 
     this.props.replaceSearchWfs([])
     this.props.updateSearchTags([])

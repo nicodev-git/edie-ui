@@ -33,7 +33,7 @@ export default class IncidentSnackbar extends React.Component {
     this.props.updateSearchParams(assign({}, this.props.searchParams, {
       query: newChips.map(m => `${m.name}=${m.value}`).join(' and '),
       severity: severities.map(p => p.value).join(',')
-    }))
+    }), this.props.history)
   }
   render () {
     const { newIncidentMsg, userInfo } = this.props

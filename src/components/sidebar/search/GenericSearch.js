@@ -5,7 +5,6 @@ import { merge, assign, concat, isArray, keys } from 'lodash'
 import moment from 'moment'
 import {Popover, FlatButton, Chip} from 'material-ui'
 import NavigationClose from 'material-ui/svg-icons/navigation/close'
-import {browserHistory} from 'react-router'
 
 import InfiniteTable from 'components/common/InfiniteTable'
 import TabPage from 'components/common/TabPage'
@@ -98,7 +97,7 @@ class GenericSearch extends React.Component {
         const queryChips = parseSearchQuery(query)
         params = assign(params, parsed)
 
-        this.props.updateSearchParams(params)
+        this.props.updateSearchParams(params, this.props.history)
         this.props.replaceSearchWfs([])
         this.props.updateSearchTags([])
         this.props.updateQueryChips(queryChips)
@@ -128,7 +127,7 @@ class GenericSearch extends React.Component {
         tag: ''
       })
 
-      this.props.updateSearchParams(params)
+      this.props.updateSearchParams(params, this.props.history)
       this.props.replaceSearchWfs([])
       this.props.updateSearchTags([])
       this.props.updateQueryChips(queryChips)
@@ -208,10 +207,10 @@ class GenericSearch extends React.Component {
     const params = assign({}, this.props.params, {
       query: newQuery
     })
-    this.props.updateSearchParams(params, true)
+    this.props.updateSearchParams(params, this.props.history)
 
     this.props.change('query', '')
-    browserHistory.replace({
+    this.props.history.replace({
       pathname: '/search',
       search: `?${encodeUrlParams({q: JSON.stringify(params)})}`
     })
@@ -247,7 +246,7 @@ class GenericSearch extends React.Component {
     this.props.updateQueryChips(newQueryChips)
     this.props.updateSearchParams(assign({}, params, {
       query: newQueryChips.map(m => `${m.name}=${m.value}`).join(' and ')
-    }))
+    }), this.props.history)
   }
 
   onClickChip (index) {
@@ -264,7 +263,7 @@ class GenericSearch extends React.Component {
     this.props.updateQueryChips(newQueryChips)
     this.props.updateSearchParams(assign({}, this.props.params, {
       query: newQueryChips.map(m => `${m.name}=${m.value}`).join(' and ')
-    }))
+    }), this.props.history)
   }
 
   onClickStar (e) {
@@ -310,7 +309,7 @@ class GenericSearch extends React.Component {
     const params = assign({}, this.props.params, found)
     params.workflow = ''
 
-    this.props.updateSearchParams(params)
+    this.props.updateSearchParams(params, this.props.history)
     this.props.updateQueryChips(newQueryChips)
     this.props.replaceSearchWfs([])
     this.props.updateSearchTags([])
@@ -325,7 +324,7 @@ class GenericSearch extends React.Component {
     this.props.selectSearchWf('')
     this.props.updateSearchParams(assign({}, this.props.params, {
       workflow: ''
-    }))
+    }), this.props.history)
   }
 
   onClickSelectWorkflow () {
@@ -333,7 +332,7 @@ class GenericSearch extends React.Component {
     this.props.addSearchWf(this.props.selectedRowWf)
     this.props.updateSearchParams(assign({}, this.props.params, {
       workflow: concat([], this.props.selectedWfs, this.props.selectedRowWf).map(m => m.id).join(',')
-    }))
+    }), this.props.history)
     this.props.closeSearchWfModal()
   }
 
@@ -342,7 +341,7 @@ class GenericSearch extends React.Component {
     this.props.removeSearchWf(wf)
     this.props.updateSearchParams(assign({}, this.props.params, {
       workflow: this.props.selectedWfs.filter(m => m.id !== wf.id).map(m => m.id).join(',')
-    }))
+    }), this.props.history)
   }
 
   onChangeCollection (e, index, values) {
@@ -351,7 +350,7 @@ class GenericSearch extends React.Component {
     }
     this.props.updateSearchParams(assign({}, this.props.params, {
       collections: values.join(',')
-    }))
+    }), this.props.history)
   }
 
   onChangeMonitorType (e, index, values) {
@@ -360,20 +359,20 @@ class GenericSearch extends React.Component {
     }
     this.props.updateSearchParams(assign({}, this.props.params, {
       monitorTypes: values.join(',')
-    }))
+    }), this.props.history)
   }
 
   onChangeSeverity (e, index, values) {
     this.props.updateSearchParams(assign({}, this.props.params, {
       severity: values.join(',')
-    }))
+    }), this.props.history)
   }
 
   onChangeRange ({startDate, endDate}) {
     this.props.updateSearchParams(assign({}, this.props.params, {
       dateFrom: startDate.format(dateFormat),
       dateTo: endDate.format(dateFormat)
-    }))
+    }), this.props.history)
   }
 
   onResultCountUpdate (total) {
@@ -422,7 +421,7 @@ class GenericSearch extends React.Component {
 
     this.props.updateSearchParams(assign({}, this.props.params, {
       tag: tags.join(',')
-    }))
+    }), this.props.history)
   }
   onClickRemoveTagChip (index) {
     const {searchTags, updateSearchTags} = this.props
@@ -430,7 +429,7 @@ class GenericSearch extends React.Component {
     updateSearchTags(tags)
     this.props.updateSearchParams(assign({}, this.props.params, {
       tag: tags.join(',')
-    }))
+    }), this.props.history)
   }
   renderFields () {
     const {selectedField} = this.props

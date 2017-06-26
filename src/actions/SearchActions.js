@@ -1,6 +1,5 @@
 import axios from 'axios'
 import { assign } from 'lodash'
-import {browserHistory} from 'react-router'
 import {
   UPDATE_SEARCH_PARAMS,
   UPDATE_SEARCH_FIELDS,
@@ -54,14 +53,14 @@ import { ROOT_URL } from './config'
 import { apiError } from './Errors'
 import {encodeUrlParams} from 'shared/Global'
 
-export const updateSearchParams = (params) => {
+export const updateSearchParams = (params, history) => {
   return function (dispatch) {
     dispatch(fetchSearchFields(params))
     dispatch({
       type: UPDATE_SEARCH_PARAMS,
       params
     })
-    browserHistory.replace({
+    history.replace({
       pathname: '/search',
       search: `?${encodeUrlParams({q: JSON.stringify(params)})}`
     })

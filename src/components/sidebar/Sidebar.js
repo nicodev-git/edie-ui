@@ -78,7 +78,7 @@ export default class Sidebar extends React.Component {
     this.props.updateQueryChips(newChips)
     this.props.updateSearchParams(assign({}, this.props.params, {
       query: newChips.map(m => `${m.name}=${m.value}`).join(' and ')
-    }))
+    }), this.props.history)
   }
 
   onClickMessages () {
