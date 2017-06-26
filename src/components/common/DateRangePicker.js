@@ -115,8 +115,8 @@ export default class DateRangePicker extends React.Component {
 
         onApply={this.onApply.bind(this)}
       >
-        <a href="javascript:;" className={renderer ? 'hidden' : ''}>{label}</a>
-        {renderer ? renderer(label) : null}
+        {renderer ? null : <a href="javascript:;" className={renderer ? 'hidden' : ''}>{label}</a>}
+        {renderer ? <div className="nowrap">{renderer(label)}</div> : null}
         {children}
       </ReactDateRangePicker>
     )
