@@ -14,14 +14,10 @@ export default class TabPageBody extends Component {
     const pageUrl = this.props.location.pathname
     let pageArray = pageUrl.split('/')
     let page = pageArray[pageArray.length - 1]
-    if (path === page) {
-      return true
-    } else {
-      let rootPath = urlArray[urlArray.length - 2]
-      if ((rootPath === page) && (number === 0)) {
-        return true
-      }
-    }
+    if (path === page) return true
+    let rootPath = urlArray[urlArray.length - 2]
+    if ((rootPath === page) && (number === 0)) return true
+
     return false
   }
 
@@ -31,13 +27,17 @@ export default class TabPageBody extends Component {
   }
 
   render () {
-    const {tabs, tclass} = this.props
+    const {tabs, tclass, tab} = this.props
     let tableclass = tclass || ''
 
     let active = 0
-    tabs.forEach((p, i) => {
-      if (this.checkPath(p.path, i)) active = i
-    })
+    if (tab !== undefined) {
+      active = tab
+    } else {
+      tabs.forEach((p, i) => {
+        if (this.checkPath(p.path, i)) active = i
+      })
+    }
 
     return (
       <div className="tabs-custom flex-vertical flex-1">

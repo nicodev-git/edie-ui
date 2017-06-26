@@ -91,7 +91,7 @@ export default class Credentials extends React.Component {
               <RaisedButton label="Add" onTouchTap={this.onAddCred.bind(this)}/>&nbsp;
               <RaisedButton label="Edit" onTouchTap={this.onEditCred.bind(this)}/>&nbsp;
               <RaisedButton label="Remove" onTouchTap={this.onRemoveCred.bind(this)}/>&nbsp;
-              <UserTabs router={this.props.router}/>&nbsp;
+              <UserTabs history={this.props.history}/>&nbsp;
             </div>
           </div>
         </TabPageHeader>

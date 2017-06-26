@@ -125,7 +125,7 @@ export default class Rules extends React.Component {
               <RaisedButton label="Add" onTouchTap={this.onAddWorkflow.bind(this)}/>&nbsp;
               <RaisedButton label="Edit" onTouchTap={this.onEditWorkflow.bind(this)}/>&nbsp;
               <RaisedButton label="Remove" onTouchTap={this.onRemoveWorkflow.bind(this)}/>&nbsp;
-              <WfTabs router={this.props.router}/>
+              <WfTabs history={this.props.history}/>
             </div>
           </div>
         </TabPageHeader>

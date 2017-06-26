@@ -262,7 +262,7 @@ export default class Templates extends Component {
 
             <div style={{position: 'absolute', right: '25px'}}>
               <RaisedButton label="Add" onTouchTap={this.onClickAdd.bind(this)}/>&nbsp;
-              <WfTabs router={this.props.router}/>
+              <WfTabs history={this.props.history}/>
             </div>
           </div>
         </TabPageHeader>

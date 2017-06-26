@@ -104,7 +104,7 @@ class ParserTypes extends React.Component {
               <RaisedButton label="Edit" onTouchTap={this.onClickEdit.bind(this)}/>&nbsp;
               <RaisedButton label="Remove" onTouchTap={this.onClickRemove.bind(this)}/>&nbsp;
               <RaisedButton label="Simulation" onTouchTap={this.onClickSimulation.bind(this)}/>&nbsp;
-              <WfTabs router={this.props.router}/>
+              <WfTabs history={this.props.history}/>
             </div>
           </div>
         </TabPageHeader>

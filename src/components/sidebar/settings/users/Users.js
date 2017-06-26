@@ -235,7 +235,7 @@ export default class Users extends React.Component {
                 <MenuItem primaryText="Regenerate Pin" onTouchTap={this.onClickPin.bind(this)}/>
               </IconMenu>
               <RaisedButton label="Profile" onTouchTap={this.onClickProfile.bind(this)}/>&nbsp;
-              <UserTabs router={this.props.router}/>
+              <UserTabs history={this.props.history}/>
             </div>
           </div>
         </TabPageHeader>

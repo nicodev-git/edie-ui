@@ -23,11 +23,10 @@ export default function (ComposedComponent) {
       const q = location.query
       let search = null
       if (p !== '/' && p !== '/signout') {
-        search = {
-          redirect: JSON.stringify({
-            p, q
-          })
-        }
+        const redirect = JSON.stringify({
+          p, q
+        })
+        search = `?redirect=${encodeURIComponent(redirect)}`
       }
 
       this.props.history.push({
@@ -42,9 +41,7 @@ export default function (ComposedComponent) {
     }
   }
 
-  function mapStateToProps (state) {
-    return { authenticated: state.auth.authenticated }
-  }
-
-  return connect(mapStateToProps)(withRouter(Authentication))
+  return connect(state => ({
+    authenticated: state.auth.authenticated
+  }))(withRouter(Authentication))
 }

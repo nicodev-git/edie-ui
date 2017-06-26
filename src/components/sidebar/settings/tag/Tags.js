@@ -67,7 +67,7 @@ export default class Tags extends React.Component {
               <RaisedButton label="Add" onTouchTap={this.onAddTag.bind(this)}/>&nbsp;
               <RaisedButton label="Edit" onTouchTap={this.onEditTag.bind(this)}/>&nbsp;
               <RaisedButton label="Delete" onTouchTap={this.onDeleteTag.bind(this)}/>&nbsp;
-              <WfTabs router={this.props.router}/>
+              <WfTabs history={this.props.history}/>
             </div>
           </div>
         </TabPageHeader>
