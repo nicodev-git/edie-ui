@@ -446,8 +446,8 @@ export default class Toolbar extends React.Component {
           {}
         </div>
         <a href="javascript:;" id="map-header-toggle" onClick={this.onClickToggleMapHeader.bind(this)}>
-          <img src="/images/arrow-up.png" width="14" height="14" className="up" />
-          <img src="/images/arrow-down.png" width="14" height="14" className="down" />
+          <img src="/resources/images/dashboard/map/toolbar/arrow-up.png" width="14" height="14" className="up" />
+          <img src="/resources/images/dashboard/map/toolbar/arrow-down.png" width="14" height="14" className="down" />
         </a>
 
         {this.renderNewIncidentModal()}

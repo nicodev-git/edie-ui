@@ -162,7 +162,7 @@ class MapCanvas extends React.Component {
                     position: 'absolute',
                     left: cursorPos.x - width / 2,
                     top: cursorPos.y - width / 2,
-                    cursor: `url("${imageBaseUrl}cursor_drag_hand.png") 15 15, auto`
+                    cursor: `url("/resources/images/dashboard/map/cursor_drag_hand.png") 15 15, auto`
                   }}
                 />
             </div>

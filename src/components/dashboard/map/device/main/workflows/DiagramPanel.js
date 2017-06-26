@@ -312,7 +312,7 @@ class DiagramPanel extends React.Component {
                   onMouseDown={this.onMouseDownHandlePoint.bind(this, index)}
                   width="17"
                   height="17"
-                  href="/images/handle.png"
+                  href="/resources/images/dashboard/map/device/main/workflows/handle.png"
                   preserveAspectRatio="none"/>
               </g>
             )
@@ -332,11 +332,11 @@ class DiagramPanel extends React.Component {
       return (
         <g key={`sel-${obj.id}`}>
           <g style={{cursor: 'move'}}>
-            <image x={startPos.x - 8.5} y={startPos.y - 8.5} width="17" height="17" href="/images/handle.png" preserveAspectRatio="none"
+            <image x={startPos.x - 8.5} y={startPos.y - 8.5} width="17" height="17" href="/resources/images/dashboard/map/device/main/workflows/handle.png" preserveAspectRatio="none"
               onMouseDown={this.onMouseDownLineMove.bind(this, obj, true, endPos)}/>
           </g>
           <g style={{cursor: 'move'}}>
-            <image x={endPos.x - 8.5} y={endPos.y - 8.5} width="17" height="17" href="/images/handle.png" preserveAspectRatio="none"
+            <image x={endPos.x - 8.5} y={endPos.y - 8.5} width="17" height="17" href="/resources/images/dashboard/map/device/main/workflows/handle.png" preserveAspectRatio="none"
               onMouseDown={this.onMouseDownLineMove.bind(this, obj, false, startPos)}/>
           </g>
         </g>

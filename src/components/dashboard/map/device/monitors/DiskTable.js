@@ -9,7 +9,7 @@ class DiskTable extends React.Component {
       d.Drives.map(p =>
         <div key={`${d.DeviceID}-${p.Name}`} className="inline-block padding-sm">
           <div style={{position: 'relative', marginBottom: '2px'}} className="inline-block">
-            <img src="/images/drive.png" width="70"/>
+            <img src="/resources/images/dashboard/map/device/monitors/drive.png" width="70"/>
             <div className="centered text-white" style={{marginTop: '-4px', color}}>
               {monitorDisk && <span>{Math.ceil((p.TotalSpace - p.FreeSpace) * 100 / p.TotalSpace)}%</span>}
             </div>

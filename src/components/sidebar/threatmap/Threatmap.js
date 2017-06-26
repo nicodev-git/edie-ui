@@ -1403,15 +1403,15 @@ export default class ThreatMap extends Component {
                   {
                     this.state.playing
                       ? (<a href="javascript:;" style={{padding: '2px'}}>
-                      <img src="/images/btn_pause.png" width="32" onClick={this.onClickPause.bind(this)}/>
+                      <img src="/resources/images/sidebar/threatmap/btn_pause.png" width="32" onClick={this.onClickPause.bind(this)}/>
                     </a>)
                       : (<a href="javascript:;" style={{padding: '2px'}}>
-                      <img src="/images/btn_play.png" width="32" onClick={this.onClickPlay.bind(this)}/>
+                      <img src="/resources/images/sidebar/threatmap/btn_play.png" width="32" onClick={this.onClickPlay.bind(this)}/>
                     </a>)
                   }
 
                   <a href="javascript:;" style={{padding: '2px'}}>
-                    <img src="/images/btn_stop.png" width="32" onClick={this.onClickStop.bind(this)}/>
+                    <img src="/resources/images/sidebar/threatmap/btn_stop.png" width="32" onClick={this.onClickStop.bind(this)}/>
                   </a>
 
                   {this.renderTime()}

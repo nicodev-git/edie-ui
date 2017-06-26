@@ -2892,7 +2892,7 @@ export const wizardConfig = {
           style: {
             'text-align': 'left'
           },
-          html: '<img src="/images/info.png" style="width:26px;height:26px;">This file will be monitored for any change or in a case it will be deleted.',
+          html: '<img src="/resources/images/common/wizard/info.png" style="width:26px;height:26px;">This file will be monitored for any change or in a case it will be deleted.',
           width: 10
         }]
       }, {

@@ -150,7 +150,7 @@ export default class SearchFormView extends React.Component {
           <IconButton tooltip="Related devices" onTouchTap={onClickRelDevices}><Computer/></IconButton>
           <IconButton tooltip="Non-related devices" onTouchTap={onClickIrrelDevices}><NoSim/></IconButton>
           <IconButton tooltip="Views" onTouchTap={onClickViewFilter}><img src="/images/view-icon.png" width="24"/></IconButton>
-          <IconButton tooltip="Graph" onTouchTap={onClickGraph}><img src="/images/graph-icon.png" width="24"/></IconButton>
+          <IconButton tooltip="Graph" onTouchTap={onClickGraph}><img src="/resources/images/sidebar/search/graph-icon.png" width="24"/></IconButton>
         </Toolbar>
       </form>
     )
