@@ -137,15 +137,12 @@ export default function (state = initialState, action) {
 
     case UPDATE_MAP_DEVICE: {
       let mapDevices = state.mapDevices.map(u => {
-        if (u.id === action.data.id) {
-          const device = {...u, ...action.data}
-          return device
-        }
+        if (u.id === action.data.id) return {...u, ...action.data}
         return u
       })
 
       let {selectedDevice} = state
-      if (selectedDevice && selectedDevice.id === action.data.id) selectedDevice = action.data
+      if (selectedDevice && selectedDevice.id === action.data.id) selectedDevice = {...selectedDevice, ...action.data}
 
       return {...state, mapDevices, selectedDevice}
     }
