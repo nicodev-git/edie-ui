@@ -1,19 +1,13 @@
 import React from 'react'
 import CommentsModal from 'components/common/incident/CommentsModal'
-import getMuiTheme from 'material-ui/styles/getMuiTheme'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 
 export default class CommentsModalContainer extends React.Component {
-  static childContextTypes = {
-    muiTheme: React.PropTypes.object
-  }
-  getChildContext () {
-    return {
-      muiTheme: getMuiTheme()
-    }
-  }
   render () {
     return (
-      <CommentsModal {...this.props} />
+      <MuiThemeProvider>
+        <CommentsModal {...this.props} />
+      </MuiThemeProvider>
     )
   }
 }

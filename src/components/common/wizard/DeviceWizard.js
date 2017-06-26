@@ -11,17 +11,12 @@ import ParamEditModal from './input/ParamEditModal'
 import ParamList from './input/ParamList'
 import {wizardConfig} from './WizardConfig'
 import {util} from './WizardUtil'
-import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import LinearProgress from 'material-ui/LinearProgress'
 import DeviceWizardView from './DeviceWizardView'
 import TagsView from './input/TagsView'
 import { primeColor } from 'style/common/materialStyles'
 
 class DeviceWizard extends Component {
-  static childContextTypes = {
-    muiTheme: React.PropTypes.object
-  }
-
   constructor (props) {
     super(props)
 
@@ -42,12 +37,6 @@ class DeviceWizard extends Component {
       'monitors': this.buildMonitors.bind(this),
       'paramlist': this.buildParamList.bind(this),
       'row': this.buildRow.bind(this)
-    }
-  }
-
-  getChildContext () {
-    return {
-      muiTheme: getMuiTheme()
     }
   }
 

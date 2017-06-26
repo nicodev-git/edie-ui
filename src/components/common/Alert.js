@@ -4,7 +4,7 @@ import {appendComponent, removeComponent} from 'util/Component'
 import { SubHeader } from '../modal/parts'
 import TextField from 'material-ui/TextField'
 import FlatButton from 'material-ui/FlatButton'
-import getMuiTheme from 'material-ui/styles/getMuiTheme'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import { inputStyle, underlineStyle, buttonStyle, buttonTextStyle } from 'style/common/materialStyles'
 
 const TYPE_ALERT = 'alert'
@@ -12,23 +12,12 @@ const TYPE_CONFIRM = 'confirm'
 const TYPE_PROMPT = 'prompt'
 
 export default class Alert extends Component {
-  static childContextTypes = {
-    muiTheme: React.PropTypes.object
-  }
-
   constructor (props) {
     super(props)
     this.state = {
       open: true
     }
   }
-
-  getChildContext () {
-    return {
-      muiTheme: getMuiTheme()
-    }
-  }
-
   onKeyUp (e) {
     if (e.keyCode === 13) {
       this.onClickSave()
@@ -63,32 +52,34 @@ export default class Alert extends Component {
 
   render () {
     return (
-      <Dialog open title={this.props.title}>
-        <SubHeader name={this.props.message}/>
-        <div className={`form-column ${this.props.type === TYPE_PROMPT ? '' : 'hidden'}`}>
-          <TextField
-            name="input"
-            defaultValue={this.props.default}
-            inputStyle={inputStyle}
-            underlineFocusStyle={underlineStyle}
-            onKeyUp={this.onKeyUp.bind(this)}
-            ref="input"
-          />
-        </div>
-        <div className="form-buttons alert-buttons">
-          <FlatButton
-            onClick={this.onClickSave.bind(this)}
-            label="Ok"
-            style={buttonStyle}
-            labelStyle={buttonTextStyle}/>
-          <FlatButton
-            className={this.props.type === TYPE_ALERT ? 'hidden' : ''}
-            onClick={this.onClickClose.bind(this)}
-            label="Cancel"
-            style={buttonStyle}
-            labelStyle={buttonTextStyle}/>
-        </div>
-      </Dialog>
+      <MuiThemeProvider>
+        <Dialog open title={this.props.title}>
+          <SubHeader name={this.props.message}/>
+          <div className={`form-column ${this.props.type === TYPE_PROMPT ? '' : 'hidden'}`}>
+            <TextField
+              name="input"
+              defaultValue={this.props.default}
+              inputStyle={inputStyle}
+              underlineFocusStyle={underlineStyle}
+              onKeyUp={this.onKeyUp.bind(this)}
+              ref="input"
+            />
+          </div>
+          <div className="form-buttons alert-buttons">
+            <FlatButton
+              onClick={this.onClickSave.bind(this)}
+              label="Ok"
+              style={buttonStyle}
+              labelStyle={buttonTextStyle}/>
+            <FlatButton
+              className={this.props.type === TYPE_ALERT ? 'hidden' : ''}
+              onClick={this.onClickClose.bind(this)}
+              label="Cancel"
+              style={buttonStyle}
+              labelStyle={buttonTextStyle}/>
+          </div>
+        </Dialog>
+      </MuiThemeProvider>
     )
   }
 }

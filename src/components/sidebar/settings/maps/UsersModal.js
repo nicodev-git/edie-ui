@@ -1,12 +1,7 @@
 import React, { Component } from 'react'
 import { SmallModalTable } from 'components/modal'
-import getMuiTheme from 'material-ui/styles/getMuiTheme'
 
 export default class UsersModal extends Component {
-  static childContextTypes = {
-    muiTheme: React.PropTypes.object
-  }
-
   constructor (props) {
     super(props)
     this.state = {
@@ -20,12 +15,6 @@ export default class UsersModal extends Component {
       'displayName': 'Full Name',
       'columnName': 'fullname'
     }]
-  }
-
-  getChildContext () {
-    return {
-      muiTheme: getMuiTheme()
-    }
   }
 
   componentWillMount () {

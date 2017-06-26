@@ -61,14 +61,4 @@ class DeviceDragLayer extends React.Component {
   }
 }
 
-// DeviceDragLayer.defaultProps = {
-//   item: PropTypes.object,
-//   itemType: PropTypes.string,
-//   currentOffset: PropTypes.shape({
-//     x: PropTypes.number.isRequired,
-//     y: PropTypes.number.isRequired
-//   }),
-//   isDragging: PropTypes.bool.isRequired
-// }
-
 export default DragLayer(collect)(DeviceDragLayer)

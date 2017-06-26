@@ -4,13 +4,8 @@ import { appendComponent, removeComponent } from 'util/Component'
 import SegmentModal from './SegmentModal'
 import { ROOT_URL } from 'actions/config'
 import SegmentListModalView from './SegmentListModalView'
-import getMuiTheme from 'material-ui/styles/getMuiTheme'
 
 export default class SegmentListModal extends Component {
-  static childContextTypes = {
-    muiTheme: React.PropTypes.object
-  }
-
   constructor (props) {
     super(props)
     this.state = {
@@ -38,12 +33,6 @@ export default class SegmentListModal extends Component {
     this.onClickAdd = this.onClickAdd.bind(this)
     this.onClickAdd = this.onClickAdd.bind(this)
     this.onClickAdd = this.onClickAdd.bind(this)
-  }
-
-  getChildContext () {
-    return {
-      muiTheme: getMuiTheme()
-    }
   }
 
   closeModal (data) {
