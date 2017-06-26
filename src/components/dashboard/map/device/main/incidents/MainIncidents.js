@@ -442,9 +442,6 @@ export default class MainIncidents extends Component {
                   endDate={moment(beforeStartTimestamp)}
                   onApply={this.onChangeDateRange.bind(this)}
                   renderer={this.renderDateLabel.bind(this)}/>
-
-                <a href="javascript:;" title="Export" style={{display: 'none'}}><img
-                  width="26" src="/images/btn-export.jpg"/></a>
               </div>
             </div>
 
