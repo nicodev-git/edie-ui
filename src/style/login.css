@@ -47,7 +47,7 @@
 
 .login .form {
     float: left;
-    background: url(/images/login_bg.png) repeat-x;
+    background: url(/resources/images/auth/login_bg.png) repeat-x;
     width: 219px;
     border-radius: 5px;
     height: 65px;
@@ -68,7 +68,7 @@
 
 .login  .text_field {
     float: left;
-    background: url(/images/field_bg.png) repeat-x;
+    background: url(/resources/images/auth/field_bg.png) repeat-x;
     width: 181px;
     font-size: 12px;
     font-weight: bold;
