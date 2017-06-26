@@ -7,12 +7,6 @@ import DeviceMainWorkflowsContainer from 'containers/device/main/workflows/MainW
 import DeviceMainAdvancedContainer from 'containers/device/main/advanced/MainAdvancedContainer'
 
 class Main extends React.Component {
-  componentWillMount () {
-    if (!this.props.children) {
-      this.props.history.replace(`${this.props.location.pathname}/incidents`)
-    }
-  }
-
   render () {
     return (
       <Switch>
