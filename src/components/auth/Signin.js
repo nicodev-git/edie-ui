@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 import { reduxForm, Field } from 'redux-form'
+import {parse} from 'query-string'
 
 class Signin extends Component {
 
   handleFormSubmit ({ email, password }) {
     const { signUser, location, history } = this.props
-    const params = new window.URLSearchParams(location.search)
+    const params = parse(location.search)
     signUser({ email, password }, params['redirect'], history)
   }
 
