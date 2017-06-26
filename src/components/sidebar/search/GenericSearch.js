@@ -81,14 +81,14 @@ class GenericSearch extends React.Component {
         return <div className="padding-sm bt-gray">{renderEntity(data, options)}</div>
       }
     }]
-
-    this.props.updateSearchViewFilter(viewFilters.standard)
   }
 
   componentWillMount () {
     const {filterType} = this.props.location.state || {}
     const {q} = this.props.location.query || {}
     let params = assign({}, this.props.params)
+
+    this.props.updateSearchViewFilter(viewFilters.standard)
 
     if (q) {
       try {
