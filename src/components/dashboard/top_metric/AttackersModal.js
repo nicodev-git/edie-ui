@@ -23,7 +23,7 @@ export default class AttackersModal extends React.Component {
       //   let isoCode = (countries[index].alpha2 || '').toLowerCase()
       //   let flag
       //   if (!isoCode) isoCode = '_European Union'
-      //   if (isoCode) flag = <img src={`/images/flags/32/${isoCode}.png`} title={row.ipcountry}/>
+      //   if (isoCode) flag = <img src={`/images/flags/${isoCode}.png`} title={row.ipcountry}/>
       //
       //   return <span>{flag}&nbsp;{val}</span>
       // }

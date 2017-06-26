@@ -227,7 +227,7 @@ export default class ThreatMap extends Component {
             transitionAppear transitionAppearTimeout={500}>
             <p>{item.attacker}</p>
             <img
-              src={`/images/flags/32/${item.attackerCountry.code}.png`}
+              src={`/images/flags/${item.attackerCountry.code}.png`}
               title={item.attackerCountry.name}
               width="28"
               style={{marginTop: '-5px', maxHeight: '24px'}}/>
@@ -239,7 +239,7 @@ export default class ThreatMap extends Component {
             transitionAppear transitionAppearTimeout={500}>
             <p>{item.target}</p>
             <img
-              src={`/images/flags/32/${item.targetCountry.code}.png`}
+              src={`/images/flags/${item.targetCountry.code}.png`}
               title={item.targetCountry.name}
               width="28"
               className="hidden"
