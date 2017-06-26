@@ -13,6 +13,8 @@ import SearchGeneric from 'containers/search/GenericSearchContainer'
 import ChatContainer from 'containers/chat/ChatContainer'
 import ThreatMapContainer from 'containers/threatmap/ThreatMapContainer'
 import Dashboard from 'containers/dashboard/DashboardContainer'
+import SignoutContainer from 'containers/auth/SignoutContainer'
+import Settings from 'components/sidebar/settings/Settings'
 
 import {
   closeDevice,
@@ -166,6 +168,9 @@ class MainpageContainer extends Component {
           <Route path="/chat" component={ChatContainer}/>
           <Route path="/search" component={SearchGeneric}/>
           <Route path="/threatmap" component={ThreatMapContainer}/>
+          <Route path="/signout" component={SignoutContainer} />
+
+          <Route path="/settings" component={Settings}/>
         </Switch>
       </Main>
     )

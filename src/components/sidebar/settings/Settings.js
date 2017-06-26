@@ -1,19 +1,28 @@
 import React from 'react'
-import { withRouter } from 'react-router'
+import { Switch, withRouter } from 'react-router'
+import { Route } from 'react-router-dom'
+
+import SettingGeneralContainer from 'containers/settings/general/GeneralContainer'
+import SettingAgent from 'components/sidebar/settings/agent/Agents'
+import SettingMapsContainer from 'containers/settings/maps/MapsContainer'
+import SettingIdentitiesContainer from 'containers/settings/identity/IdentitiesContainer'
+import SettingAdvancedContainer from 'containers/settings/advanced/AdvancedContainer'
+import SettingTags from 'components/sidebar/settings/tag/TagRoutes'
+import SettingUsers from 'components/sidebar/settings/users/UserRoutes'
 
 class Settings extends React.Component {
-  constructor (props) {
-    super(props)
-    this.state = {}
-  }
-  componentWillMount () {
-    if (!this.props.children) {
-      this.props.router.replace('/settings/general')
-    }
-  }
-
   render () {
-    return this.props.children
+    return (
+      <Switch>
+        <Route path="/settings" exact component={SettingGeneralContainer} />
+        <Route path="/settings/agents" component={SettingAgent} />
+        <Route path="/settings/tags" component={SettingTags}/>
+        <Route path="/settings/maps" component={SettingMapsContainer} />
+        <Route path="/settings/users" component={SettingUsers}/>
+        <Route path="/settings/identities" component={SettingIdentitiesContainer} />
+        <Route path="/settings/advanced" component={SettingAdvancedContainer} />
+      </Switch>
+    )
   }
 }
 export default withRouter(Settings)
