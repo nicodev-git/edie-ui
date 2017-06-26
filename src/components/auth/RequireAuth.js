@@ -42,10 +42,6 @@ export default function (ComposedComponent) {
     }
   }
 
-  Authentication.contextTypes = {
-    router: React.PropTypes.object
-  }
-
   function mapStateToProps (state) {
     return { authenticated: state.auth.authenticated }
   }

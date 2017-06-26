@@ -20,8 +20,8 @@ export default class MetricPanel extends React.Component {
   }
 
   showIncidentSearch (filterType) {
-    const {router} = this.props
-    router.push({
+    const {history} = this.props
+    history.push({
       pathname: '/search',
       state: {
         filterType

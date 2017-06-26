@@ -280,7 +280,7 @@ export default class General extends React.Component {
           </div>
         </TabPageHeader>
 
-        <TabPageBody tabs={SettingTabs} tab={0}>
+        <TabPageBody tabs={SettingTabs} tab={0} history={this.props.history} location={this.props.location}>
           {this.renderContent()}
         </TabPageBody>
       </TabPage>

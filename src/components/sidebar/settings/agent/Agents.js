@@ -287,7 +287,7 @@ export default class Agents extends Component {
           </div>
         </TabPageHeader>
 
-        <TabPageBody tabs={SettingTabs} tab={1} />
+        <TabPageBody tabs={SettingTabs} tab={1} history={this.props.history} location={this.props.location}/>
       </TabPage>
     )
   }

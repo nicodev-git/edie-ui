@@ -104,12 +104,6 @@ class Map extends React.Component {
     this.onDragEndDivider = this.onDragEndDivider.bind(this)
   }
 
-  getChildContext () {
-    return {
-      mapId: this.state.mapId
-    }
-  }
-
   componentDidMount () {
     if (fullScreen.supportsFullScreen) {
       document.body.addEventListener(fullScreen.fullScreenEventName, this.onFullScreenChange, true)
@@ -711,15 +705,6 @@ class Map extends React.Component {
 Map.defaultProps = {
   drawMapInterval: 4000,
   hidden: false
-}
-
-Map.childContextTypes = {
-  mapId: React.PropTypes.number
-}
-
-Map.contextTypes = {
-  user: React.PropTypes.object,
-  sid: React.PropTypes.string
 }
 
 export default withRouter(Map)

@@ -456,10 +456,6 @@ export default class Toolbar extends React.Component {
   }
 }
 
-Toolbar.contextTypes = {
-  sid: React.PropTypes.string
-}
-
 Toolbar.defaultProps = {
   onClickEdit: null,
   editable: false,

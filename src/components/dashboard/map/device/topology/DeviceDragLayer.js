@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react'
+import React  from 'react'
 import { DragLayer } from 'react-dnd'
 import { extImageBaseUrl, DragTypes } from 'shared/Global'
 
@@ -61,14 +61,14 @@ class DeviceDragLayer extends React.Component {
   }
 }
 
-DeviceDragLayer.defaultProps = {
-  item: PropTypes.object,
-  itemType: PropTypes.string,
-  currentOffset: PropTypes.shape({
-    x: PropTypes.number.isRequired,
-    y: PropTypes.number.isRequired
-  }),
-  isDragging: PropTypes.bool.isRequired
-}
+// DeviceDragLayer.defaultProps = {
+//   item: PropTypes.object,
+//   itemType: PropTypes.string,
+//   currentOffset: PropTypes.shape({
+//     x: PropTypes.number.isRequired,
+//     y: PropTypes.number.isRequired
+//   }),
+//   isDragging: PropTypes.bool.isRequired
+// }
 
 export default DragLayer(collect)(DeviceDragLayer)

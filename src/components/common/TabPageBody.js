@@ -1,11 +1,7 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
 import {Tabs, Tab} from 'material-ui/Tabs'
 
 export default class TabPageBody extends Component {
-  static contextTypes = {
-    router: PropTypes.object
-  }
-
   constructor (props) {
     super(props)
     this.navigate = this.navigate.bind(this)
@@ -15,7 +11,7 @@ export default class TabPageBody extends Component {
   checkPath (url, number) {
     let urlArray = url.split('/')
     let path = urlArray[urlArray.length - 1]
-    let pageUrl = document.location.href
+    const pageUrl = this.props.location.pathname
     let pageArray = pageUrl.split('/')
     let page = pageArray[pageArray.length - 1]
     if (path === page) {
@@ -31,7 +27,7 @@ export default class TabPageBody extends Component {
 
   navigate (index) {
     const {tabs} = this.props
-    this.context.router.push(tabs[index].path)
+    this.props.history.push(tabs[index].path)
   }
 
   render () {
@@ -40,7 +36,7 @@ export default class TabPageBody extends Component {
 
     let active = 0
     tabs.forEach((p, i) => {
-      if (this.context.router.isActive(p.path)) active = i
+      if (this.checkPath(p.path, i)) active = i
     })
 
     return (

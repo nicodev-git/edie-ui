@@ -240,7 +240,7 @@ export default class Users extends React.Component {
           </div>
         </TabPageHeader>
 
-        <TabPageBody tabs={SettingTabs} tab={3}>
+        <TabPageBody tabs={SettingTabs} tab={3} history={this.props.history} location={this.props.location}>
           {this.renderContent()}
           {this.renderUserModal()}
           {this.renderPasswordModal()}

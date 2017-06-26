@@ -382,8 +382,8 @@ class GenericSearch extends React.Component {
 
   onClickIllustrate () {
     this.props.showThreats(this.props.params)
-    const {router} = this.props
-    router.push({
+    const {history} = this.props
+    history.push({
       pathname: '/threatmap',
       query: {
         mode: 'replay'
@@ -683,7 +683,7 @@ class GenericSearch extends React.Component {
 
         </TabPageHeader>
 
-        <TabPageBody tabs={[]} tab={0}>
+        <TabPageBody tabs={[]} tab={0} history={this.props.history} location={this.props.location}>
           <div className="flex-horizontal" style={{height: '100%'}}>
             <div style={{minWidth: '170px', height: '100%', overflow: 'auto', position: 'relative'}}>
               {this.renderFields()}

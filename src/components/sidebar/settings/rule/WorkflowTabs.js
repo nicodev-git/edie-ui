@@ -31,7 +31,7 @@ export default class WorkflowTabs extends React.Component {
   }
 
   render () {
-    const {router} = this.props
+    const {history} = this.props
     return (
       <div className="inline-block">
         <RaisedButton label="View" primary onTouchTap={e => this.setState({viewOpen: true, anchorEl: e.currentTarget})}/>
@@ -43,7 +43,7 @@ export default class WorkflowTabs extends React.Component {
           onRequestClose={this.handleRequestClose.bind(this)}>
           <Menu>
             {tabs.map(p =>
-              <MenuItem key={p.path} primaryText={p.title} onTouchTap={() => router.push(p.path)}/>
+              <MenuItem key={p.path} primaryText={p.title} onTouchTap={() => history.push(p.path)}/>
             )}
           </Menu>
         </Popover>

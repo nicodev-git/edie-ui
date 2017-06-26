@@ -196,7 +196,7 @@ export default class ApplicationTable extends Component {
         <TabPageHeader title="Applications" titleOptions={<StatusImg {...this.props}/>}>
           {this.renderOptions()}
         </TabPageHeader>
-        <TabPageBody tabs={MonitorTabs(device.id)}>
+        <TabPageBody tabs={MonitorTabs(device.id)} history={this.props.history} location={this.props.location}>
           {this.renderBody()}
         </TabPageBody>
       </TabPage>
