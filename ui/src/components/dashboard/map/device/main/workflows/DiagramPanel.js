@@ -417,8 +417,8 @@ class DiagramPanel extends React.Component {
 
     const object = selected.filter(obj => obj.type === DiagramTypes.OBJECT)[0]
     const {w, h} = object
-    const x = parseInt(object.x + cursorPos.x - mouseDownPos.x)
-    const y = parseInt(object.y + cursorPos.y - mouseDownPos.y)
+    const x = parseInt(object.x + cursorPos.x - mouseDownPos.x, 10)
+    const y = parseInt(object.y + cursorPos.y - mouseDownPos.y, 10)
 
     const text = `${x}, ${y}`
     return (

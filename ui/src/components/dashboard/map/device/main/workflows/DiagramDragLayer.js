@@ -54,6 +54,8 @@ class DiagramDragLayer extends React.Component {
             {workflowItems[item.imgIndex].img}
           </svg>
         )
+      default:
+        return null
     }
   }
 

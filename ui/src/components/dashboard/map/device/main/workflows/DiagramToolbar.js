@@ -16,13 +16,13 @@ class DiagramToolbar extends React.Component {
         <a href="javascript:void(0);" className="geLabel"
           style={{whiteSpace: 'nowrap', overflow: 'hidden', position: 'relative', width: '42px'}}>
           <div className="geSprite geSprite-formatpanel" style={{marginLeft: '-4px', marginTop: '-3px'}}/>
-          <img style={{position: 'absolute', right: '4px', top: '5px', left: '25px'}} src="/resources/images/dashboard/map/device/main/workflows/caret.gif"/>
+          <img style={{position: 'absolute', right: '4px', top: '5px', left: '25px'}} src="/resources/images/dashboard/map/device/main/workflows/caret.gif" alt=""/>
         </a>
 
         <div className="geSeparator"/>
 
         <a href="javascript:void(0);" className="geLabel" style={{whiteSpace: 'nowrap', overflow: 'hidden', position: 'relative', width: '56px'}}>
-          100%<img style={{position: 'absolute', right: '4px', top: '5px', left: '40px'}} src="/resources/images/dashboard/map/device/main/workflows/caret.gif"/>
+          100%<img style={{position: 'absolute', right: '4px', top: '5px', left: '40px'}} src="/resources/images/dashboard/map/device/main/workflows/caret.gif" alt=""/>
         </a>
 
         <div className="geSeparator"/>
@@ -57,18 +57,18 @@ class DiagramToolbar extends React.Component {
 
         <a href="javascript:void(0);" className="geButton" style={{whiteSpace: 'nowrap', overflow: 'hidden', position: 'relative', width: '42px'}}>
           <div className="geSprite geSprite-connection" style={{marginLeft: 0, marginTop: 0}}/>
-          <img style={{position: 'absolute', right: '4px', top: '5px', left: '25px'}} src="/resources/images/dashboard/map/device/main/workflows/caret.gif"/>
+          <img alt="" style={{position: 'absolute', right: '4px', top: '5px', left: '25px'}} src="/resources/images/dashboard/map/device/main/workflows/caret.gif"/>
         </a>
         <a href="javascript:void(0);" className="geButton" style={{whiteSpace: 'nowrap', overflow: 'hidden', position: 'relative', width: '42px'}}>
           <div className="geSprite geSprite-orthogonal" style={{marginLeft: 0, marginTop: 0}}/>
-          <img style={{position: 'absolute', right: '4px', top: '5px', left: '25px'}} src="/resources/images/dashboard/map/device/main/workflows/caret.gif"/>
+          <img alt="" style={{position: 'absolute', right: '4px', top: '5px', left: '25px'}} src="/resources/images/dashboard/map/device/main/workflows/caret.gif"/>
         </a>
 
         <div className="geSeparator"/>
 
         <a href="javascript:void(0);" className="geLabel" style={{whiteSpace: 'nowrap', overflow: 'hidden', position: 'relative', width: '42px'}}>
           <div className="geSprite geSprite-plus" style={{marginLeft: '-4px', marginTop: '-3px'}}/>
-          <img style={{position: 'absolute', right: '4px', top: '5px', left: '25px'}} src="/resources/images/dashboard/map/device/main/workflows/caret.gif"/>
+          <img alt="" style={{position: 'absolute', right: '4px', top: '5px', left: '25px'}} src="/resources/images/dashboard/map/device/main/workflows/caret.gif"/>
         </a>
       </div>
     )

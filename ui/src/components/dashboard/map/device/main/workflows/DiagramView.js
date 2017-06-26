@@ -108,9 +108,9 @@ class DiagramView extends React.Component {
 
     let searchBtn
     if (text) {
-      searchBtn = <img src="/resources/images/dashboard/map/device/main/workflows/close2.png" style={{position: 'relative', left: '-18px', top: '-1px'}} onClick={this.onClickClear.bind(this)}/>
+      searchBtn = <img alt="" src="/resources/images/dashboard/map/device/main/workflows/close2.png" style={{position: 'relative', left: '-18px', top: '-1px'}} onClick={this.onClickClear.bind(this)}/>
     } else {
-      searchBtn = <img src="/resources/images/dashboard/map/device/main/workflows/search2.png" style={{position: 'relative', left: '-18px', top: '-1px'}} />
+      searchBtn = <img alt="" src="/resources/images/dashboard/map/device/main/workflows/search2.png" style={{position: 'relative', left: '-18px', top: '-1px'}} />
     }
 
     return (
