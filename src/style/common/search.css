@@ -21,3 +21,7 @@
     vertical-align: middle;
     margin: 0 8px;
 }
+
+.highlight {
+    background: yellow;
+}

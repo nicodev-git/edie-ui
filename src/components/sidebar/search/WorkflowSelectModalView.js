@@ -16,7 +16,7 @@ export default class WorkflowSelectModalView extends React.Component {
       workflowFilter, onChangeWorkflowFilter
     } = this.props
     return (
-      <Dialog open title="Workflow">
+      <Dialog open title="Workflow" onRequestClose={onClickClose}>
         <div className="padding-md-left">
           <SelectField
             errorStyle={errorStyle}
@@ -42,7 +42,7 @@ export default class WorkflowSelectModalView extends React.Component {
             onChange={onChangeWorkflowFilter}
           />
         </div>
-        <div style={{maxHeight: '400px', overflow: 'auto'}}>
+        <div style={{maxHeight: '250px', overflow: 'auto'}}>
           <table className="table table-hover">
             <thead>
             <tr>
