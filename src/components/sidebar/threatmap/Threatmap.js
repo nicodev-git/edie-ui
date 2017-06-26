@@ -412,7 +412,7 @@ export default class ThreatMap extends Component {
 
         country: demoCountries[i % 3],
 
-        img: '/images/threatmap/RoundedPin.png',
+        img: '/resources/images/sidebar/threatmap/RoundedPin.png',
 
         visible: false,
         bubbles: []
@@ -435,7 +435,7 @@ export default class ThreatMap extends Component {
                  }.${Math.ceil(Math.random() * 255)}.${Math.ceil(Math.random() * 255)}`,
         country: demoCountries[i % 3],
 
-        img: '/images/threatmap/SquarePin.png',
+        img: '/resources/images/sidebar/threatmap/SquarePin.png',
 
         visible: false,
         bubbles: []
@@ -1110,19 +1110,19 @@ export default class ThreatMap extends Component {
 
     let images = {
       'low': {
-        src: `/images/threatmap/tinyExplosion${suffix}.png`,
+        src: `/resources/images/sidebar/threatmap/tinyExplosion${suffix}.png`,
         width: 16,
         height: 16
       },
 
       'medium': {
-        src: `/images/threatmap/smallExplosion${suffix}.png`,
+        src: `/resources/images/sidebar/threatmap/smallExplosion${suffix}.png`,
         width: 46,
         height: 45
       },
 
       'high': {
-        src: `/images/threatmap/bigExplosion${suffix}.png`,
+        src: `/resources/images/sidebar/threatmap/bigExplosion${suffix}.png`,
         width: 57,
         height: 57
       }
@@ -1234,7 +1234,7 @@ export default class ThreatMap extends Component {
 
           country: countries[item['targetCountry'] || 'US'].name,
 
-          img: '/images/threatmap/RoundedPin.png',
+          img: '/resources/images/sidebar/threatmap/RoundedPin.png',
 
           visible: false,
           bubbles: []
@@ -1253,7 +1253,7 @@ export default class ThreatMap extends Component {
 
           country: countries[item['attackerCountry'] || 'US'].name,
 
-          img: '/images/threatmap/SquarePin.png',
+          img: '/resources/images/sidebar/threatmap/SquarePin.png',
 
           visible: false,
           bubbles: []

@@ -12,7 +12,7 @@
     height: 110px;
     float: left;
     border-width: 0px;
-    background: url('/images/threatmap/smallBox.png') 0px 0px no-repeat;
+    background: url('/resources/images/sidebar/threatmap/smallBox.png') 0px 0px no-repeat;
     width: 150px;
 }
 #latestAttacksContainerRight > div {
@@ -50,10 +50,10 @@
     margin-right: 10px;
 }
 .attackerIcon {
-    background-image: url("/images/threatmap/SquarePin.png");
+    background-image: url("/resources/images/sidebar/threatmap/SquarePin.png");
 }
 .targetIcon {
-    background-image: url("/images/threatmap/RoundedPin.png");
+    background-image: url("/resources/images/sidebar/threatmap/RoundedPin.png");
 }
 
 #spacerRow div {
