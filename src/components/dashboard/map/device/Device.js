@@ -36,12 +36,11 @@ export default class Device extends React.Component {
     if (!this.props.selectedDevice) return null
     return (
       <Switch>
-        <Route path="main" component={DeviceMain}/>
-        <Route path="topology" component={DeviceTopology}/>
-        {/*<Route path="monitor"/>*/}
-        <Route path="connected" component={DeviceConnectedContainer}/>
-        <Route path="info" component={DeviceInfoContainer}/>
-        <Route path="list" component={GroupDevicesContainer}/>
+        <Route path="/device/:deviceId/main" component={DeviceMain}/>
+        <Route path="/device/:deviceId/topology" component={DeviceTopology}/>
+        <Route path="/device/:deviceId/connected" component={DeviceConnectedContainer}/>
+        <Route path="/device/:deviceId/info" component={DeviceInfoContainer}/>
+        <Route path="/device/:deviceId/list" component={GroupDevicesContainer}/>
       </Switch>
     )
   }

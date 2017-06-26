@@ -1,20 +1,16 @@
 import React from 'react'
+import {withRouter} from 'react-router'
 
-export default class Main extends React.Component {
-  constructor (props) {
-    super(props)
-    this.state = {
-
-    }
-  }
-
+class Main extends React.Component {
   componentWillMount () {
     if (!this.props.children) {
-      this.props.router.replace(`${this.props.router.location.pathname}/incidents`)
+      this.props.history.replace(`${this.props.location.pathname}/incidents`)
     }
   }
 
   render () {
-    return this.props.children
+    return null
   }
 }
+
+export default withRouter(Main)

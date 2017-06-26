@@ -1,4 +1,4 @@
-import React  from 'react'
+import React from 'react'
 import { DragLayer } from 'react-dnd'
 import { extImageBaseUrl, DragTypes } from 'shared/Global'
 

@@ -172,7 +172,7 @@ class MainpageContainer extends Component {
           <Route path="/signout" component={SignoutContainer} />
           <Route path="/settings" component={Settings}/>
 
-          <Route path="device/:deviceId" component={DeviceContainer}/>
+          <Route path="/device/:deviceId" component={DeviceContainer}/>
         </Switch>
       </Main>
     )
