@@ -121,6 +121,9 @@ export default class SearchFormView extends React.Component {
             underlineStyle={underlineFocusStyle}
             selectedMenuItemStyle={selectedItemStyle}
             menuItemStyle={inputStyle}
+            menuStyle={{
+              width: 220
+            }}
             multiple
             hintText="MonitorType"
             value={selectedMonitorTypes}
