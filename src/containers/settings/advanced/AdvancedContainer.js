@@ -2,6 +2,7 @@ import React from 'react'
 import Advanced from 'components/sidebar/settings/advanced/Advanced'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import {withRouter} from 'react-router'
 
 import {
   fetchEnvVars,
@@ -36,4 +37,4 @@ export default connect(
       importSyncData
     }, dispatch)
   })
-)(AdvancedContainer)
+)(withRouter(AdvancedContainer))

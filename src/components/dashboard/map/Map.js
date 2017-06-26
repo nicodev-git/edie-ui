@@ -1,4 +1,5 @@
 import React from 'react'
+import {findDOMNode} from 'react-dom'
 import {assign, extend} from 'lodash'
 import ReactTooltip from 'react-tooltip'
 import { withRouter } from 'react-router'
@@ -211,6 +212,7 @@ class Map extends React.Component {
     } else {
       this.props.history.push(`/device/${obj.data.id}/main`)
     }
+    ReactTooltip.hide(findDOMNode(this.refs.deviceTooltip))
   }
 
   onMapObjectMoving () {
@@ -688,7 +690,7 @@ class Map extends React.Component {
               />
               <ToolbarToggle onToggle={this.onClickMaximize.bind(this)}/>
             </div>
-            <div className={`map-hover ${tooltip ? '' : 'hidden'}`}
+            <div className={`map-hover ${tooltip ? '' : 'hidden'}`} ref="deviceTooltip"
               data-tip={tooltip}
               data-html
               style={{ left: tipLeft, top: tipTop, width: tipWidth, height: tipHeight }}

@@ -7,6 +7,7 @@ import DeviceConnectedContainer from 'containers/device/connected/ConnectedConta
 import DeviceInfoContainer from 'containers/device/info/InfoContainer'
 import DeviceTopology from 'containers/device/topology/TopologyContainer'
 import GroupDevicesContainer from 'containers/device/devices/DevicesContainer'
+import DeviceMonitor from 'components/dashboard/map/device/monitors/MonitorRoutes'
 
 export default class Device extends React.Component {
   // componentWillMount () {
@@ -38,6 +39,7 @@ export default class Device extends React.Component {
       <Switch>
         <Route path="/device/:deviceId/main" component={DeviceMain}/>
         <Route path="/device/:deviceId/topology" component={DeviceTopology}/>
+        <Route path="/device/:deviceId/monitor" component={DeviceMonitor}/>
         <Route path="/device/:deviceId/connected" component={DeviceConnectedContainer}/>
         <Route path="/device/:deviceId/info" component={DeviceInfoContainer}/>
         <Route path="/device/:deviceId/list" component={GroupDevicesContainer}/>
