@@ -16,7 +16,7 @@ export default class MainIncidentPanel extends React.Component {
   }
 
   onClickOpenModal (e) {
-    this.props.router.push({
+    this.props.history.push({
       pathname: '/',
       search: '?bigincidents='
     })

@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-const ReactRouter = require('react-router')
+const ReactRouter = require('react-router-dom')
 const { Link } = ReactRouter
 
 class MonkeyPatchLink extends Component {

@@ -1,5 +1,4 @@
 import axios from 'axios'
-import { browserHistory } from 'react-router'
 import {
   AUTH_USER,
   INVALIDATE_USER,
@@ -21,7 +20,7 @@ import { apiError, authError } from './Errors'
 import { ROOT_URL } from './config'
 import { getAuthConfig, getRequestConfig } from './util'
 
-export const signUser = ({ email, password }, redirect) => {
+export const signUser = ({ email, password }, redirect, history) => {
   return (dispatch) => {
     axios.post(`${ROOT_URL}/api/auth/login`,
       {
@@ -30,12 +29,12 @@ export const signUser = ({ email, password }, redirect) => {
       },
       getRequestConfig()
     )
-    .then(response => signUserSuccess(dispatch, response, redirect))
+    .then(response => signUserSuccess(dispatch, response, redirect, history))
     .catch(() => authError(dispatch))
   }
 }
 
-const signUserSuccess = (dispatch, response, redirect) => {
+const signUserSuccess = (dispatch, response, redirect, history) => {
   dispatch({
     type: AUTH_USER
   })
@@ -43,16 +42,16 @@ const signUserSuccess = (dispatch, response, redirect) => {
   if (redirect) {
     try {
       const loc = JSON.parse(redirect)
-      browserHistory.push({
+      history.push({
         pathname: loc.p,
-        query: loc.q
+        search: loc.q
       })
       return
     } catch (e) {
 
     }
   }
-  browserHistory.push('/')
+  history.push('/')
 }
 
 export const signOut = () => {
@@ -76,7 +75,7 @@ const signupSuccess = (dispatch, response) => {
     type: AUTH_USER
   })
   window.localStorage.setItem('token', response.data.token)
-  browserHistory.push('/feature')
+  // browserHistory.push('/feature')
 }
 
 export const fetchUserInfo = () => {

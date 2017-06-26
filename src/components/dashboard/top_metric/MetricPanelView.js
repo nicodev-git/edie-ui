@@ -1,6 +1,6 @@
 import React from 'react'
 import {IconButton} from 'material-ui'
-import {Link} from 'react-router'
+import {Link} from 'react-router-dom'
 
 import HistoryIcon from 'material-ui/svg-icons/action/history'
 import AlarmIcon from 'material-ui/svg-icons/action/alarm'
