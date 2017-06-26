@@ -32,21 +32,21 @@ export const DiagramTypes = {
 
 export const lineTypes = [{
   title: 'Lightning',
-  image: '/images/light.svg',
+  image: '/resources/images/dashboard/map/light.svg',
   type: 'lightning'
 }, {
   title: 'Lightning',
-  image: '/images/lightning2.png',
+  image: '/resources/images/dashboard/map/lightning2.png',
   type: 'lightning2',
   visible: true
 }, {
   title: 'Line',
-  image: '/images/line.gif',
+  image: '/resources/images/dashboard/map/line.gif',
   type: 'normal',
   visible: true
 }, {
   title: 'Dashed Line',
-  image: '/images/dashedline.png',
+  image: '/resources/images/dashboard/map/dashedline.png',
   type: 'dashed',
   visible: true
 }]

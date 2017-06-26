@@ -16,11 +16,11 @@ export const smallIconStyle = {
   height: 10
 }
 
-export const thumbup = <img title="Acknowledge" src="/images/thumbup.png" />
-export const thumpdown = <img title="Acknowledge" src="/images/thumbdown.png" />
-export const done = <img title="Fixed" src="/images/isdone.png" />
-export const notdone = <img title="Not Fixed" src="/images/notdone.png" />
-export const rawtext = <img title="Detail" src="/images/rawstext.png" />
-export const reason = <img title="Reason" src="/images/reason1.png" />
-export const openicon = <img title="Details" src="/images/showicon.png" />
-export const reasonx = <img title="Reason" src="/images/reason2.png" />
+export const thumbup = <img title="Acknowledge" src="/resources/images/common/incident/thumbup.png" />
+export const thumpdown = <img title="Acknowledge" src="/resources/images/common/incident/thumbdown.png" />
+export const done = <img title="Fixed" src="/resources/images/common/incident/isdone.png" />
+export const notdone = <img title="Not Fixed" src="/resources/images/common/incident/notdone.png" />
+export const rawtext = <img title="Detail" src="/resources/images/common/incident/rawstext.png" />
+export const reason = <img title="Reason" src="/resources/images/common/incident/reason1.png" />
+export const openicon = <img title="Details" src="/resources/images/common/incident/showicon.png" />
+export const reasonx = <img title="Reason" src="/resources/images/common/incident/reason2.png" />
