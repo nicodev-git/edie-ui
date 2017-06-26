@@ -1,7 +1,7 @@
 export default (deviceId) => {
   return [{
     title: 'Incidents',
-    path: `/device/${deviceId}/main/incidents`
+    path: `/device/${deviceId}/main`
   },
   {
     title: 'Workflows',
