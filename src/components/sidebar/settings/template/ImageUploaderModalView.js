@@ -7,7 +7,7 @@ export default class ImageUploaderModalView extends Component {
     const {onHide, images, currentIcon, getCustomImageUrl, onClickItem,
       onChangeFile, onSave} = this.props
     return (
-      <Dialog open title="Change Image">
+      <Dialog open title="Change Image" onRequestClose={onHide}>
         <div className="dropdown-image images-list">
           {images.map(item => (
             <div

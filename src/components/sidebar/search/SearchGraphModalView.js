@@ -76,6 +76,7 @@ export default class SearchGraphModalView extends React.Component {
         contentStyle={graphMaximized ? maxContentStyle : {}}
         className={graphMaximized ? 'pt-none' : ''}
         style={{left: 5, right: 5, width: 'initial'}}
+        onRequestClose={onHide}
       >
         <CloseIconButton onClick={onHide}>
           <IconButton onTouchTap={onMaximize}>

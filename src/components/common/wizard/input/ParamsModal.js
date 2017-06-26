@@ -43,7 +43,7 @@ export default class ParamsModal extends React.Component {
 
   render () {
     return (
-      <Dialog open title="Params">
+      <Dialog open title="Params" onRequestClose={this.onClickClose.bind(this)}>
         <div>
           <table className="table table-hover">
             <tbody>

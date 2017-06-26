@@ -11,7 +11,7 @@ export default class DeviceSearchModalView extends Component {
     const {onHide, value, selected, items, styles,
       onSelect, onChange, onRemove} = this.props
     return (
-      <Dialog open title="Device Search">
+      <Dialog open title="Device Search" onRequestClose={onHide}>
         <div className="search-modal-container">
           <div className="autocomplete-wrapper">
             <Autocomplete

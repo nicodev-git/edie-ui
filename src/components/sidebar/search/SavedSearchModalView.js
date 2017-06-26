@@ -28,7 +28,7 @@ class SavedSearchModalView extends React.Component {
     }))
 
     return (
-      <Dialog open title="Saved Search">
+      <Dialog open title="Saved Search" onRequestClose={onClickClose}>
         <div style={{maxHeight: '350px', overflow: 'auto'}}>
           <table className="table table-hover">
             <thead>

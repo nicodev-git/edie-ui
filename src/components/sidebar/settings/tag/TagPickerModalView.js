@@ -34,7 +34,7 @@ export default class TagPickerModalView extends React.Component {
   render () {
     const {onClickClose, onClickOK, onClickAdd, hideAdd} = this.props
     return (
-      <Dialog open title="Tags">
+      <Dialog open title="Tags" onRequestClose={onClickClose}>
         <div className={hideAdd ? 'hidden' : ''}>
           <FlatButton label="Add" onTouchTap={onClickAdd}/>
         </div>

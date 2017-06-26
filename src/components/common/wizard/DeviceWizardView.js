@@ -7,7 +7,7 @@ export default class DeviceWizardView extends Component {
     const {header, progressBar, content, current, steps, onSubmit, onHide,
       onPrev, onNext, paramEditModal} = this.props
     return (
-      <Dialog open className="modal-device-wizard" title={header}>
+      <Dialog open className="modal-device-wizard" title={header} onRequestClose={onHide}>
         <form onSubmit={onSubmit}>
           {progressBar}
           <div className="form-column">

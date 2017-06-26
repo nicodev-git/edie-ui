@@ -14,7 +14,7 @@ export default class IrrelDevicesModalView extends React.Component {
   render () {
     const {onHide} = this.props
     return (
-      <Dialog open title="Not Relevant Devices">
+      <Dialog open title="Not Relevant Devices" onRequestClose={onHide}>
         <div style={{height: '500px', overflow: 'auto'}}>
           <table className="table table-hover">
             <thead>

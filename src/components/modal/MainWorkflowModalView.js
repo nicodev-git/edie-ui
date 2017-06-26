@@ -3,9 +3,9 @@ import {Dialog} from 'material-ui'
 
 export default class MainWorkflowModalView extends Component {
   render () {
-    const {onSubmit, wizard} = this.props
+    const {onSubmit, wizard, onClose} = this.props
     return (
-      <Dialog open title="Workflow">
+      <Dialog open title="Workflow" onRequestClose={onClose}>
         <form onSubmit={onSubmit}>
           {wizard}
         </form>

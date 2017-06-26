@@ -12,7 +12,7 @@ export default class SegmentListModalView extends Component {
   render () {
     const {onHide, cells, onAdd, onEdit, onDelete} = this.props
     return (
-      <Dialog open title="Segments">
+      <Dialog open title="Segments" onRequestClose={onHide}>
         <div className="panel panel-default">
           <div>
             <IconButton

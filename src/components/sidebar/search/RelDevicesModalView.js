@@ -22,7 +22,7 @@ export default class RelDevicesModalView extends React.Component {
       fields
     } = this.props
     return (
-      <Dialog open title="Relevant Devices">
+      <Dialog open title="Relevant Devices" onRequestClose={onHide}>
         <div>
           <SelectField
             hintText="Field"

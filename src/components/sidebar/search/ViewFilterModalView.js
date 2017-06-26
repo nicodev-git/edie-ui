@@ -11,7 +11,7 @@ export default class ViewFilterModalView extends React.Component {
   render () {
     const {onClickOK, onClickClose, selectViewFilter, selectedViewFilter} = this.props
     return (
-      <Dialog open title="View Filter">
+      <Dialog open title="View Filter" onRequestClose={onClickClose}>
         <Tabs>
           <Tab label="Predefined">
             <table className="table table-hover">

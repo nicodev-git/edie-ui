@@ -7,7 +7,7 @@ class SearchFieldsModalView extends React.Component {
   render () {
     const {onClickOK, onClickClose, fields, selectedSearchFields, onCheck} = this.props
     return (
-      <Dialog open title="Fields">
+      <Dialog open title="Fields" onRequestClose={onClickClose}>
         <div className="row" style={{maxHeight: '500px', overflow: 'auto'}}>
           {fields.map(p =>
             <div key={p.path} className="col-md-4">

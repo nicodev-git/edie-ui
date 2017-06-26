@@ -8,7 +8,7 @@ export default class ParamEditModalView extends Component {
   render () {
     const {onSubmit, onHide, styles, defaultKeys, onKeyClick} = this.props
     return (
-      <Dialog open title="Param">
+      <Dialog open title="Param" onRequestClose={onHide}>
         <form onSubmit={onSubmit}>
           <div className="margin-md-bottom" style={styles.wrapper}>
             {defaultKeys.map(k =>

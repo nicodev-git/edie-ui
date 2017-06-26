@@ -5,7 +5,7 @@ import { CloseButton, TwoButtonsBlock } from 'components/modal/parts'
 
 const SmallModalTable = ({show, header, url, row, height, onHide,
   params, cells, save, onSave, data, useExternal, customWidth}) => (
-  <Dialog open title={header}>
+  <Dialog open title={header} onRequestClose={onHide}>
     <div className="small-modal-table">
       <div style={{height: height, overflow: 'auto'}}>
         <InfiniteTable

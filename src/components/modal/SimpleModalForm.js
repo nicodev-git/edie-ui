@@ -6,7 +6,7 @@ import { SubHeader, FormInput, FormSelect, FormImg, FileUpload,
 
 const SimpleModalForm = ({show, onHide, onSubmit, header, subheader, buttonText,
   content, imageUpload, fileUpload}) => (
-  <Dialog open title={header}>
+  <Dialog open title={header} onRequestClose={onHide}>
     {(subheader) ? (<SubHeader name={subheader}/>) : null}
     <form onSubmit={onSubmit}>
       {(imageUpload) ? (<Field name="image" component={FormImg}/>) : null}

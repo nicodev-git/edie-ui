@@ -7,7 +7,7 @@ export default class ThreatItemModalView extends React.Component {
   render () {
     const {entity, onHide} = this.props
     return (
-      <Dialog open title="Details">
+      <Dialog open title="Details" onRequestClose={onHide}>
         <div>
           {renderEntity(entity)}
         </div>

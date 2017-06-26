@@ -51,7 +51,7 @@ export default class ProcessModal extends Component {
   render () {
     const {process} = this.props
     return (
-      <Dialog open title="Process">
+      <Dialog open title="Process" onRequestClose={this.onClickClose.bind(this)}>
         <h4>
           Process: {process.Name}
         </h4>

@@ -10,7 +10,7 @@ export default class MapUsersModalView extends Component {
   render () {
     const {header, table, usersModal, onHide, onAdd, onDelete} = this.props
     return (
-      <Dialog open title={header}>
+      <Dialog open title={header} onRequestClose={onHide}>
         <div style={{minHeight: '400px'}}>
           <div className="panel panel-default panel-noborder">
             <div className="crud-buttons">

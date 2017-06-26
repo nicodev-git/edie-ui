@@ -19,7 +19,7 @@ export default class FwRuleModalView extends React.Component {
   render () {
     const {onSubmit, onHide} = this.props
     return (
-      <Dialog open title="Rule">
+      <Dialog open title="Rule" onRequestClose={onHide}>
         <Form onSubmit={onSubmit}>
           <div>
             <Field name="rule" component={FormInput} floatingLabel="Rule Name"/>&nbsp;

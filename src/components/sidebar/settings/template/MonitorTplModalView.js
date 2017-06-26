@@ -12,7 +12,7 @@ export default class MonitorTplModalView extends Component {
       tagModal, tags, onClickAddTag, onClickDeleteTag
     } = this.props
     return (
-      <Dialog open title={header}>
+      <Dialog open title={header} onRequestClose={onHide}>
         <form onSubmit={onSubmit}>
           <div className="form-column">
             <Field name="name" component={FormInput} label="Name"/>

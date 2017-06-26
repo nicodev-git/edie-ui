@@ -56,7 +56,7 @@ export default class MonitorHistoryModal extends Component {
     }
 
     return (
-      <Dialog open title="Monitor History">
+      <Dialog open title="Monitor History" onRequestClose={this.onClickClose.bind(this)}>
         <div className="small-modal-table">
           <div style={{height: '300px', position: 'relative'}}>
             <InfiniteTable

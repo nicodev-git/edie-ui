@@ -8,7 +8,7 @@ class FilterModalView extends React.Component {
   render () {
     const {onClickClose, onSubmit} = this.props
     return (
-      <Dialog open title="Filter">
+      <Dialog open title="Filter" onRequestClose={onClickClose}>
         <form onSubmit={onSubmit}>
           <div className="form-column">
             <Field name="text" component={FormInput} type="text" label="Filter"/>

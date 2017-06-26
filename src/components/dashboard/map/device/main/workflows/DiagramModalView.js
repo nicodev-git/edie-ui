@@ -7,7 +7,7 @@ export default class DiagramModalView extends Component {
     const {header, onHide, onSave, dragLayer, toolbar, sidebar,
       panel, objectModal} = this.props
     return (
-      <Dialog open title={header}>
+      <Dialog open title={header} onRequestClose={onHide}>
         <div className="diagram">
           {dragLayer}
           {toolbar}

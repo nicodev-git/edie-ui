@@ -8,7 +8,7 @@ export default class TagModalView extends React.Component {
   render () {
     const {onClickClose, onSubmit} = this.props
     return (
-      <Dialog open title="Tag">
+      <Dialog open title="Tag" onRequestClose={onClickClose}>
         <form onSubmit={onSubmit}>
           <div className="form-column">
             <Field name="name" component={FormInput} type="text" floatingLabel="Name"/>

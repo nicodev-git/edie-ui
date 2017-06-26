@@ -146,6 +146,7 @@ export default class WorkflowModalInner extends Component {
       <MainWorkflowModalView
         onSubmit={onSubmit}
         wizard={wizard}
+        onClose={this.props.onClickClose}
       />
     )
   }

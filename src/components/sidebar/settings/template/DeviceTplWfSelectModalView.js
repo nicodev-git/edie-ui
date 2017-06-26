@@ -10,7 +10,7 @@ export default class DeviceTplWfSelectModalView extends React.Component {
       workflows, selectedRowWf
     } = this.props
     return (
-      <Dialog open title="Workflow">
+      <Dialog open title="Workflow" onRequestClose={onClickClose}>
         <div style={{maxHeight: '400px', overflow: 'auto'}}>
           <table className="table table-hover">
             <thead>

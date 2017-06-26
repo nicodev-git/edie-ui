@@ -134,7 +134,7 @@ export default class GroupModal extends React.Component {
     if (group) groupId = group.id
 
     return (
-      <Dialog open title="Group">
+      <Dialog open title="Group" onRequestClose={this.onClickClose.bind(this)}>
         <div className="row form-group margin-md-bottom">
           <div className="col-xs-12">
             <label className="control-label">Group Name</label>

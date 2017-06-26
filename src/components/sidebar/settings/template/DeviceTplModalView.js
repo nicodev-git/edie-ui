@@ -51,7 +51,7 @@ export default class DeviceTplModalView extends Component {
     const {header, innerView} = this.props
     if (innerView) return this.renderContent()
     return (
-      <Dialog open title={header}>
+      <Dialog open title={header} onRequestClose={this.props.onHide}>
         {this.renderContent()}
       </Dialog>
     )

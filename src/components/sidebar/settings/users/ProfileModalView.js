@@ -8,7 +8,7 @@ export default class ProfileModalView extends Component {
     const {imgSrc, onHide, onSubmit, onChangeImage, mapOptions, roleOptions,
       defaultChecked, checkboxLabel, onChangeRoles} = this.props
     return (
-      <Dialog open title="Profile">
+      <Dialog open title="Profile" onRequestClose={onHide}>
         <form onSubmit={onSubmit}>
           <ProfileImageUpload imgSrc={imgSrc} onChangeImage={onChangeImage} />
           <div className="form-column">

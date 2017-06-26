@@ -139,7 +139,7 @@ class SimulationModal extends React.Component {
   render () {
     const {handleSubmit} = this.props
     return (
-      <Dialog open title="Simulation">
+      <Dialog open title="Simulation" onRequestClose={this.onClickClose.bind(this)}>
         <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
           <div className="form-column">
             <Field name="text" component={FormInput} type="text" label="Text"/>

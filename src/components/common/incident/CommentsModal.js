@@ -33,7 +33,7 @@ export default class CommentsModal extends Component {
     let {comments} = this.props.incident
 
     return (
-      <Dialog open title="Comment">
+      <Dialog open title="Comment" onRequestClose={this.onClickClose.bind(this)}>
         <div className="row margin-md-bottom hidden">
           <label className="control-label col-md-2 padding-xs-top">Reason</label>
 
