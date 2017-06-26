@@ -6,7 +6,7 @@ import {
 } from 'react-dnd'
 
 import { getDeviceType } from 'components/common/wizard/WizardConfig'
-import { imageBaseUrl, extImageBaseUrl, DragTypes, lineTypes } from 'shared/Global'
+import { extImageBaseUrl, DragTypes, lineTypes } from 'shared/Global'
 
 function collect (connect) {
   return {
@@ -385,7 +385,7 @@ class MapCanvas extends React.Component {
         height: height,
         angle: angle,
 
-        imageUrl: `${imageBaseUrl}longhub.png`
+        imageUrl: '/resources/images/dashboard/map/longhub.png'
       })
     } else if (devicetype === 'Text') {
       let label = devname
@@ -414,7 +414,7 @@ class MapCanvas extends React.Component {
         height: height,
 
         text: percent,
-        imageUrl: `${imageBaseUrl}sqlgauge.png`
+        imageUrl: '/resources/images/dashboard/map/sqlgauge.png'
       })
     } else if (devicetype === 'SQLBI') {
       let charttype = ''
@@ -527,7 +527,7 @@ class MapCanvas extends React.Component {
       let imageUrl = ''
       let picture = device.image || ''
 
-      if (!picture) imageUrl = `${imageBaseUrl}window.png`
+      if (!picture) imageUrl = '/resources/images/dashboard/map/windows.png'
       else if (picture.startsWith('/')) imageUrl = picture
       else imageUrl = extImageBaseUrl + picture
             // Status
@@ -569,7 +569,7 @@ class MapCanvas extends React.Component {
 
         text: devname,
         imageUrl: imageUrl,
-        statusImageUrl: imageBaseUrl + okurl,
+        statusImageUrl: `/resources/images/dashboard/map/${okurl}`,
 
         statusImageLeft: statusImageLeft,
         statusImageTop: statusImageTop
@@ -676,7 +676,7 @@ class MapCanvas extends React.Component {
       let imageUrl = ''
       let picture = device.image || ''
 
-      if (!picture) imageUrl = `${imageBaseUrl}window.png`
+      if (!picture) imageUrl = '/resources/images/dashboard/map/windows.png'
       else if (picture.startsWith('/')) imageUrl = picture
       else imageUrl = extImageBaseUrl + picture
 
@@ -714,7 +714,7 @@ class MapCanvas extends React.Component {
 
         text: devname,
         imageUrl: imageUrl,
-        statusImageUrl: imageBaseUrl + okurl,
+        statusImageUrl: `/resources/images/dashboard/map/${okurl}`,
 
         statusImageLeft: statusImageLeft,
         statusImageTop: statusImageTop

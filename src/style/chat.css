@@ -364,7 +364,7 @@ a img {
 
 .channel-textarea-upload {
     position: relative;
-    background: url('/images/upload.svg') 50% no-repeat;
+    background: url('/resources/images/sidebar/chat/upload.svg') 50% no-repeat;
     background-size: 25px 25px;
     border-right: 1px solid #D2D2D2;
     margin: -12px 10px -12px -10px;

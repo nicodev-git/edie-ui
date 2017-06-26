@@ -363,7 +363,7 @@ class DiagramPanel extends React.Component {
       points.push(
         <g key={i}>
           <image x={xy.x - 2.5} y={xy.y - 2.5}
-            width="5" height="5" href="/images/point.gif" preserveAspectRatio="none"
+            width="5" height="5" href="/resources/images/dashboard/map/device/workflows/point.gif" preserveAspectRatio="none"
             className="line-handle"
             pointerEvents="all"
             onMouseDown={this.onMouseDownLineHandle.bind(this, i, xy, hovered)}

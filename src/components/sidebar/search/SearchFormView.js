@@ -140,8 +140,8 @@ export default class SearchFormView extends React.Component {
               />
             )}
           </SelectField>
-          <IconButton tooltip="Workflow" onTouchTap={onClickWorkflow}><img src="/images/wf-icon.png" width="24"/></IconButton>
-          <IconButton tooltip="Tags" onTouchTap={onClickTags}><img src="/images/tag.png" width="24"/></IconButton>
+          <IconButton tooltip="Workflow" onTouchTap={onClickWorkflow}><img src="/resources/images/sidebar/search/wf-icon.png" width="24"/></IconButton>
+          <IconButton tooltip="Tags" onTouchTap={onClickTags}><img src="/resources/images/sidebar/search/tag.png" width="24"/></IconButton>
           <IconButton tooltip="Search" onTouchTap={onClickWorkflow} type="submit" ><ActionSearch /></IconButton>
 
           <IconButton tooltip="Favorite" onTouchTap={onClickStar}>{starFilled ? <FilledStar/> : <ToggleStar/>}</IconButton>
@@ -149,7 +149,7 @@ export default class SearchFormView extends React.Component {
           <IconButton tooltip="Illustrate" onTouchTap={onClickIllustrate}><LocalMovie/></IconButton>
           <IconButton tooltip="Related devices" onTouchTap={onClickRelDevices}><Computer/></IconButton>
           <IconButton tooltip="Non-related devices" onTouchTap={onClickIrrelDevices}><NoSim/></IconButton>
-          <IconButton tooltip="Views" onTouchTap={onClickViewFilter}><img src="/images/view-icon.png" width="24"/></IconButton>
+          <IconButton tooltip="Views" onTouchTap={onClickViewFilter}><img src="/resources/images/sidebar/search/view-icon.png" width="24"/></IconButton>
           <IconButton tooltip="Graph" onTouchTap={onClickGraph}><img src="/resources/images/sidebar/search/graph-icon.png" width="24"/></IconButton>
         </Toolbar>
       </form>

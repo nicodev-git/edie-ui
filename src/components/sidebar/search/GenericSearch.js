@@ -10,7 +10,7 @@ import InfiniteTable from 'components/common/InfiniteTable'
 import TabPage from 'components/common/TabPage'
 import TabPageBody from 'components/common/TabPageBody'
 import TabPageHeader from 'components/common/TabPageHeader'
-import { imageBaseUrl, parseSearchQuery, guid, encodeUrlParams, dateFormat, collections, severities, viewFilters } from 'shared/Global'
+import { parseSearchQuery, guid, encodeUrlParams, dateFormat, collections, severities, viewFilters } from 'shared/Global'
 import { showConfirm } from 'components/common/Alert'
 import {renderEntity} from 'components/common/CellRenderers'
 import {chipStyles} from 'style/common/materialStyles'
@@ -535,7 +535,7 @@ class GenericSearch extends React.Component {
                   <td>{(m.percent || 0).toFixed(2)}%</td>
                   <td>
                     <div style={{width: '200px'}}>
-                      <img src={`${imageBaseUrl}bar.png`} width={`${Math.max(m.percent || 0, 0.5)}%`} height="16"/>
+                      <img src="/resources/images/sidebar/search/bar.png" width={`${Math.max(m.percent || 0, 0.5)}%`} height="16"/>
                     </div>
                   </td>
                 </tr>

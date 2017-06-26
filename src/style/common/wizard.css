@@ -25,7 +25,7 @@
     height: 32px;
     width: 32px;
     overflow: hidden;
-    background-image: url('/images/Marker-Pink.png');
+    background-image: url('/resources/images/common/wizard/Marker-Pink.png');
     top: 2px;
     color:white;
     text-align: center;
@@ -33,7 +33,7 @@
 }
 
 .marker-checked{
-    background-image: url('/images/Marker-Green.png');
+    background-image: url('/resources/images/common/wizard/Marker-Green.png');
 }
 
 .marker-label{

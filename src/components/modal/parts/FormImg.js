@@ -21,9 +21,7 @@ const FormImg = (field) => {
           return value
         }}
       >
-        {files
-          ? (<img src="/images/upload_file.png" style={{position: 'relative'}}/>)
-          : (<img src="/images/upload_file.png" style={{position: 'relative'}}/>)}
+        <img src="/resources/images/modal/upload_file.png" style={{position: 'relative'}}/>
         </Dropzone>
       {field.meta.touched &&
         field.meta.error &&
