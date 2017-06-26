@@ -72,7 +72,7 @@ export default class Tags extends React.Component {
           </div>
         </TabPageHeader>
 
-        <TabPageBody tabs={SettingTabs} tab={6} history={this.props.history} location={this.props.location}>
+        <TabPageBody tabs={SettingTabs} tab={5} history={this.props.history} location={this.props.location}>
           <InfiniteTable
             url="/tag"
             params={{

@@ -1,6 +1,6 @@
 const tabs = [{
   title: 'General',
-  path: '/settings/general'
+  path: '/settings'
 }, {
   title: 'Agents',
   path: '/settings/agents'

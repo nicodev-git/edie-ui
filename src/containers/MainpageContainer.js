@@ -15,6 +15,7 @@ import ThreatMapContainer from 'containers/threatmap/ThreatMapContainer'
 import Dashboard from 'containers/dashboard/DashboardContainer'
 import SignoutContainer from 'containers/auth/SignoutContainer'
 import Settings from 'components/sidebar/settings/Settings'
+import DeviceContainer from 'containers/device/DeviceContainer'
 
 import {
   closeDevice,
@@ -169,8 +170,9 @@ class MainpageContainer extends Component {
           <Route path="/search" component={SearchGeneric}/>
           <Route path="/threatmap" component={ThreatMapContainer}/>
           <Route path="/signout" component={SignoutContainer} />
-
           <Route path="/settings" component={Settings}/>
+
+          <Route path="device/:deviceId" component={DeviceContainer}/>
         </Switch>
       </Main>
     )
