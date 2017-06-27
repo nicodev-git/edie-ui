@@ -387,7 +387,7 @@ class MapCanvas extends React.Component {
 
         imageUrl: '/resources/images/dashboard/map/longhub.png'
       })
-    } else if (devicetype === 'Text') {
+    } else if (devicetype === 'usertext') {
       let label = devname
 
       cmap.addShapeText({
