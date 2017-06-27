@@ -9,7 +9,8 @@ export const deviceTypeMap = {
   'DR Site': 'group',
   'Partners': 'group',
 
-  'Long hub': 'longhub'
+  'Long hub': 'longhub',
+  'Free Text': 'usertext'
 }
 
 export const monitorTypeMap = {
