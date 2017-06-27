@@ -92,6 +92,7 @@ fabric.ShapeText = fabric.util.createClass(fabric.Textbox, {
       fontSize: config.fontSize || 13,
       textAlign: config.textAlign || 'center',
       text: config.text || '',
+      data: config.data,
     });
 
     me.setCoords();
@@ -115,7 +116,7 @@ fabric.ShapeText.create = function(options){
     selectable: options.canvas.map.editable,
     lines: [],
     canvas: null,
-    hasRotatingPoint: false,
+    hasRotatingPoint: false
   };
 
   var config = $.extend({}, defaults, options);

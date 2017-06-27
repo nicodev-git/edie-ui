@@ -392,6 +392,7 @@ class MapCanvas extends React.Component {
 
       cmap.addShapeText({
         id: deviceid,
+        data: device,
 
         left: x,
         top: y,
