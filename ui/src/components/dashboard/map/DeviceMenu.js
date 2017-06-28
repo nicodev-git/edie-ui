@@ -72,7 +72,7 @@ export default class DeviceMenu extends React.Component {
 
       if (sectionIndex > 0) {
         section.items.forEach((item, typeIndex) => {
-          if (item.title.toLowerCase().indexOf(this.state.keyword.toLowerCase()) < 0) return
+          if ((item.title || '').toLowerCase().indexOf(this.state.keyword.toLowerCase()) < 0) return
           items = true
         })
 
