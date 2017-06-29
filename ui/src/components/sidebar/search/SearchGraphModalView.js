@@ -1,5 +1,5 @@
 import React from 'react'
-import {Dialog, RefreshIndicator, IconButton} from 'material-ui'
+import {Dialog, RefreshIndicator, IconButton, SelectField, MenuItem} from 'material-ui'
 import ZoomOutIcon from 'material-ui/svg-icons/maps/zoom-out-map'
 import {Line} from 'react-chartjs-2'
 import moment from 'moment'
@@ -89,6 +89,20 @@ export default class SearchGraphModalView extends React.Component {
             {moment(params.dateFrom, dateFormat).format('MMM D, YYYY')}&nbsp;-&nbsp;
             {moment(params.dateTo, dateFormat).format('MMM D, YYYY')}
           </small>
+        </div>
+        <div className="pull-left margin-md-left">
+          <SelectField value="day" style={{width: 100}} className="valign-bottom">
+            <MenuItem value="day" primaryText="Day"/>
+            <MenuItem value="hour" primaryText="Hour"/>
+            <MenuItem value="min" primaryText="Minute"/>
+          </SelectField>&nbsp;
+          <SelectField value="1" style={{width: 80}} className="valign-bottom">
+            <MenuItem value="1" primaryText="1"/>
+            <MenuItem value="3" primaryText="3"/>
+            <MenuItem value="5" primaryText="5"/>
+            <MenuItem value="10" primaryText="10"/>
+            <MenuItem value="15" primaryText="15"/>
+          </SelectField>
         </div>
         <div className="pull-right margin-md-bottom text-right">
           <div><small>Search Keywords:</small></div>
