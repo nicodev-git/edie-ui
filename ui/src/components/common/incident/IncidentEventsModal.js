@@ -1,16 +1,11 @@
 import React from 'react'
 import {Dialog} from 'material-ui'
 import moment from 'moment'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 
 import {renderEntity} from 'components/common/CellRenderers'
 
 export default class IncidentEventsModal extends React.Component {
-  constructor (props) {
-    super(props)
-    this.state = {
-    }
-  }
-
   renderTable () {
     const {events} = this.props.incident
     return (
@@ -36,10 +31,6 @@ export default class IncidentEventsModal extends React.Component {
     )
   }
 
-  onHide () {
-
-  }
-
   onClickClose () {
     this.props.onClose &&
         this.props.onClose(this)
@@ -47,11 +38,13 @@ export default class IncidentEventsModal extends React.Component {
 
   render () {
     return (
-      <Dialog open title="Incident Events" onRequestClose={this.onHide.bind(this)}>
-        <div style={{height: '600px', overflow: 'auto'}}>
-          {this.renderTable()}
-        </div>
-      </Dialog>
+      <MuiThemeProvider>
+        <Dialog open title="Incident Events" onRequestClose={this.onClickClose.bind(this)}>
+          <div style={{height: '600px', overflow: 'auto'}}>
+            {this.renderTable()}
+          </div>
+        </Dialog>
+      </MuiThemeProvider>
     )
   }
 }
