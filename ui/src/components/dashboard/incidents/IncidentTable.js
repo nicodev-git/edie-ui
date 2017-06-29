@@ -56,9 +56,9 @@ export default class IncidentTable extends Component {
       'cssClassName': 'width-180',
       'customComponent': (p) => {
         const row = p.rowData
-        setTimeout(() => {
-          ReactTooltip.rebuild()
-        }, 1)
+        // setTimeout(() => {
+        //   ReactTooltip.rebuild()
+        // }, 1)
         return (
           <div className = "table-icons-container">
             <div onClick={() => { this.props.ackIncident(row) }}>

@@ -2,6 +2,7 @@ import React from 'react'
 import moment from 'moment'
 import {FlatButton, MenuItem, SelectField, TextField} from 'material-ui'
 import ActionSearch from 'material-ui/svg-icons/action/search'
+import ReactTooltip from 'react-tooltip'
 
 import DateRangePicker from 'components/common/DateRangePicker'
 import {
@@ -85,6 +86,7 @@ const BigIncidentsView = ({onHide,
       {table}
       {eventsModal}
     </div>
+    <ReactTooltip/>
   </div>
 )
 

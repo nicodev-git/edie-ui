@@ -361,8 +361,9 @@ export const updateSearchTags = (tags) => {
   }
 }
 
-export const updateGraphParams = (params) => {
+export const updateGraphParams = (params, graphParams) => {
   return dispatch => {
     dispatch({type: UPDATE_GRAPH_PARAMS, params})
+    dispatch(fetchSearchRecordCount({...params, ...graphParams}))
   }
 }
