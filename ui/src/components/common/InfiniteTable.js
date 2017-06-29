@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import Griddle from 'griddle-react'
-import { concat, assign, isEqual, keys } from 'lodash'
+import { concat, assign, isEqual, keys, debounce } from 'lodash'
 import ReduxInfiniteScroll from 'redux-infinite-scroll'
 
 import $ from 'jquery'
@@ -27,6 +27,8 @@ class InfiniteTable extends React.Component {
     }
 
     this.lastRequest = null
+
+    this.loadMoreDeb = debounce(this.loadMore.bind(this), 200)
   }
 
   componentWillMount () {
@@ -247,7 +249,7 @@ class InfiniteTable extends React.Component {
       return (
         <ReduxInfiniteScroll
           children={[table]}
-          loadMore={this.loadMore.bind(this)}
+          loadMore={this.loadMoreDeb}
           loadingMore={this.state.isLoading}
         />
       )
