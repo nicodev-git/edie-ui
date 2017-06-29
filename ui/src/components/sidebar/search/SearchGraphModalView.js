@@ -87,12 +87,19 @@ export default class SearchGraphModalView extends React.Component {
           <label><small>Duration {moment(params.dateFrom, dateFormat).format('MMM D, YYYY')}&nbsp;-&nbsp;
             {moment(params.dateTo, dateFormat).format('MMM D, YYYY')} resolution</small></label>
 
-          <input type="text" className="form-control text-right input-sm input-custom" maxLength="3" defaultValue={3}/>
+          <select className="form-control input-sm select-custom" defaultValue={1}>
+            <option>&nbsp;1</option>
+            <option>&nbsp;3</option>
+            <option>&nbsp;5</option>
+            <option>10</option>
+            <option>15</option>
+            <option>30</option>
+          </select>
 
           <select className="form-control input-sm select-custom" defaultValue={'day'}>
-            <option value="hour">Hours</option>
-            <option value="day">Days</option>
-            <option value="month">Months</option>
+            <option value="hour">Hour(s)</option>
+            <option value="day">Day(s)</option>
+            <option value="month">Month(s)</option>
           </select>
         </div>
         <div className="pull-right margin-md-bottom text-right">

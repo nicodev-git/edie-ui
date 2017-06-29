@@ -32,12 +32,13 @@ select.select-custom.input-sm {
     -moz-appearance: none;
     appearance: none;
     background: none;
-    text-decoration: underline;
     font-size: 13px;
     line-height: 23px;
     padding-top: 0;
     padding-left: 3px;
     padding-right: 0;
+    outline: none;
+    color: rgba(0, 0, 0, 0.6);
 }
 
 input.input-custom.input-sm {
@@ -47,4 +48,6 @@ input.input-custom.input-sm {
     padding-left: 2px;
     font-size: 13px;
     padding-right: 2px;
+    outline: none;
+    color: rgba(0, 0, 0, 0.6);
 }
