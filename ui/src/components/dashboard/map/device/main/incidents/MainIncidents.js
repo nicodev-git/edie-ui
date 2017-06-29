@@ -104,7 +104,7 @@ export default class MainIncidents extends Component {
         // }, 1)
         return (
           <div className="table-icons-container">
-            <div onClick={() => { showIncidentDetail.bind(null, row) }}>
+            <div onClick={() => showIncidentDetail(row)}>
               {openicon}
             </div>
             &nbsp;

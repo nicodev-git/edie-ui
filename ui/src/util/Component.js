@@ -14,6 +14,6 @@ export function removeComponent (component) {
   }
   setTimeout(() => {
     ReactDOM.unmountComponentAtNode(modalDiv)
-    modalDiv.parentNode.removeChild(modalDiv)
+    modalDiv.parentNode && modalDiv.parentNode.removeChild(modalDiv)
   }, 1)
 }
