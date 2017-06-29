@@ -83,26 +83,17 @@ export default class SearchGraphModalView extends React.Component {
             <ZoomOutIcon size={32} color="#545454"/>
           </IconButton>
         </CloseIconButton>
-        <div className="pull-left margin-md-bottom">
-          <small><b>Date Range:</b></small><br/>
-          <small>
-            {moment(params.dateFrom, dateFormat).format('MMM D, YYYY')}&nbsp;-&nbsp;
-            {moment(params.dateTo, dateFormat).format('MMM D, YYYY')}
-          </small>
-        </div>
-        <div className="pull-left margin-md-left">
-          <SelectField value="day" style={{width: 100}} className="valign-bottom">
-            <MenuItem value="day" primaryText="Day"/>
-            <MenuItem value="hour" primaryText="Hour"/>
-            <MenuItem value="min" primaryText="Minute"/>
-          </SelectField>&nbsp;
-          <SelectField value="1" style={{width: 80}} className="valign-bottom">
-            <MenuItem value="1" primaryText="1"/>
-            <MenuItem value="3" primaryText="3"/>
-            <MenuItem value="5" primaryText="5"/>
-            <MenuItem value="10" primaryText="10"/>
-            <MenuItem value="15" primaryText="15"/>
-          </SelectField>
+        <div className="pull-left form-inline margin-md-bottom">
+          <label><small>Duration {moment(params.dateFrom, dateFormat).format('MMM D, YYYY')}&nbsp;-&nbsp;
+            {moment(params.dateTo, dateFormat).format('MMM D, YYYY')} resolution</small></label>
+
+          <input type="text" className="form-control text-right input-sm input-custom" maxLength="3" defaultValue={3}/>
+
+          <select className="form-control input-sm select-custom" defaultValue={'day'}>
+            <option value="hour">Hours</option>
+            <option value="day">Days</option>
+            <option value="month">Months</option>
+          </select>
         </div>
         <div className="pull-right margin-md-bottom text-right">
           <div><small>Search Keywords:</small></div>

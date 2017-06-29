@@ -25,3 +25,26 @@
 .highlight {
     background: yellow;
 }
+
+select.select-custom.input-sm {
+    border: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: none;
+    text-decoration: underline;
+    font-size: 13px;
+    line-height: 23px;
+    padding-top: 0;
+    padding-left: 3px;
+    padding-right: 0;
+}
+
+input.input-custom.input-sm {
+    width: 25px;
+    border: none;
+    padding-top: 2px;
+    padding-left: 2px;
+    font-size: 13px;
+    padding-right: 2px;
+}
