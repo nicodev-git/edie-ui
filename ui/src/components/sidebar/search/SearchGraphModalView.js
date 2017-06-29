@@ -94,6 +94,7 @@ export default class SearchGraphModalView extends React.Component {
             className="form-control input-sm select-custom" value={graphParams.splitBy}
             onChange={onChangeSplitBy}>
             <option value="1">&nbsp;1</option>
+            <option value="2">&nbsp;2</option>
             <option value="3">&nbsp;3</option>
             <option value="5">&nbsp;5</option>
             <option value="10">10</option>
@@ -104,6 +105,7 @@ export default class SearchGraphModalView extends React.Component {
           <select
             className="form-control input-sm select-custom" value={graphParams.splitUnit}
             onChange={onChangeSplitUnit}>
+            <option value="minute">Minute(s)</option>
             <option value="hour">Hour(s)</option>
             <option value="day">Day(s)</option>
             <option value="month">Month(s)</option>
