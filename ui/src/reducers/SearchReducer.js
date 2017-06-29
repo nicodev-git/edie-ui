@@ -51,7 +51,9 @@ import {
   SHARE_SAVED_SEARCH,
   SHOW_SEARCH_GRAPH_MODAL,
   FETCH_SEARCH_RECORD_COUNT,
-  MAXIMIZE_SEARCH_GRAPH
+  MAXIMIZE_SEARCH_GRAPH,
+
+  UPDATE_GRAPH_PARAMS
 } from 'actions/types'
 import { concat } from 'lodash'
 
@@ -80,6 +82,10 @@ const initialState = {
     beforeStartTimestamp: moment().endOf('year').valueOf(),
     sort: 'startTimestamp,desc',
     draw: 1
+  },
+  graphParams: {
+    stepBy: '1',
+    stepUnit: 'day'
   },
   queryChips: [],
   fields: [],
@@ -208,6 +214,8 @@ export default function (state = initialState, action) {
       return { ...state, searchTagModalOpen: !!action.visible }
     case UPDATE_SEARCH_TAGS:
       return { ...state, searchTags: action.tags || [] }
+    case UPDATE_GRAPH_PARAMS:
+      return { ...state, graphParams: action.params }
   }
   return state
 }

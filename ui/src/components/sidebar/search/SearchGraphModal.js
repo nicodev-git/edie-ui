@@ -1,4 +1,5 @@
 import React from 'react'
+import {assign} from 'lodash'
 
 import SearchGraphModalView from './SearchGraphModalView'
 
@@ -35,8 +36,22 @@ export default class SearchGraphModal extends React.Component {
   onClickMax () {
     this.props.maximizeSearchGraph(!this.props.graphMaximized)
   }
+  onChangeSplitBy (e) {
+    const {graphParams} = this.props
+    this.props.updateGraphParams(assign({}, graphParams, {
+      splitBy: e.target.value
+    }))
+  }
+
+  onChangeSplitUnit (e) {
+    const {graphParams} = this.props
+    this.props.updateGraphParams(assign({}, graphParams, {
+      splitUnit: e.target.value
+    }))
+  }
+
   render () {
-    const {searchRecordCounts, queryChips, params, graphMaximized} = this.props
+    const {searchRecordCounts, queryChips, params, graphMaximized, graphParams, updateGraphParams} = this.props
     const chartData = {
       labels: (searchRecordCounts || sampleData).map(p => p.date),
       datasets: [{
@@ -67,6 +82,10 @@ export default class SearchGraphModal extends React.Component {
 
         graphMaximized={graphMaximized}
         onMaximize={this.onClickMax.bind(this)}
+
+        graphParams={graphParams}
+        onChangeSplitBy={this.onChangeSplitBy.bind(this)}
+        onChangeSplitUnit={this.onChangeSplitUnit.bind(this)}
       />
     )
   }

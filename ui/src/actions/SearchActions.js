@@ -47,7 +47,9 @@ import {
 
   SHOW_SEARCH_GRAPH_MODAL,
   FETCH_SEARCH_RECORD_COUNT,
-  MAXIMIZE_SEARCH_GRAPH
+  MAXIMIZE_SEARCH_GRAPH,
+
+  UPDATE_GRAPH_PARAMS
 } from './types'
 import { ROOT_URL } from './config'
 import { apiError } from './Errors'
@@ -356,5 +358,11 @@ export const showSearchTagModal = (visible) => {
 export const updateSearchTags = (tags) => {
   return dispatch => {
     dispatch({type: UPDATE_SEARCH_TAGS, tags})
+  }
+}
+
+export const updateGraphParams = (params) => {
+  return dispatch => {
+    dispatch({type: UPDATE_GRAPH_PARAMS, params})
   }
 }

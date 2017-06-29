@@ -56,7 +56,9 @@ import {
   maximizeSearchGraph,
 
   showSearchTagModal,
-  updateSearchTags
+  updateSearchTags,
+
+  updateGraphParams
 } from 'actions'
 
 class GenericSearchContainer extends React.Component {
@@ -116,6 +118,7 @@ export default connect(
     searchGraphModalOpen: state.search.searchGraphModalOpen,
     searchRecordCounts: state.search.searchRecordCounts,
     graphMaximized: state.search.graphMaximized,
+    graphParams: state.search.graphParams,
 
     searchTagModalOpen: state.search.searchTagModalOpen,
     searchTags: state.search.searchTags
@@ -170,6 +173,7 @@ export default connect(
       showSearchGraphModal,
       fetchSearchRecordCount,
       maximizeSearchGraph,
+      updateGraphParams,
 
       showSearchTagModal,
       updateSearchTags

@@ -68,7 +68,10 @@ export default class SearchGraphModalView extends React.Component {
     )
   }
   render () {
-    const {onHide, onMaximize, graphMaximized, chartData, chartOptions, queryChips, params} = this.props
+    const {
+      onHide, onMaximize, graphMaximized, chartData, chartOptions, queryChips, params, graphParams,
+      onChangeSplitBy, onChangeSplitUnit
+    } = this.props
     return (
       <Dialog
         open title=""
@@ -87,16 +90,20 @@ export default class SearchGraphModalView extends React.Component {
           <label><small>Duration {moment(params.dateFrom, dateFormat).format('MMM D, YYYY')}&nbsp;-&nbsp;
             {moment(params.dateTo, dateFormat).format('MMM D, YYYY')} resolution</small></label>
 
-          <select className="form-control input-sm select-custom" defaultValue={1}>
-            <option>&nbsp;1</option>
-            <option>&nbsp;3</option>
-            <option>&nbsp;5</option>
-            <option>10</option>
-            <option>15</option>
-            <option>30</option>
+          <select
+            className="form-control input-sm select-custom" defaultValue={graphParams.splitBy}
+            onChange={onChangeSplitBy}>
+            <option value="1">&nbsp;1</option>
+            <option value="3">&nbsp;3</option>
+            <option value="5">&nbsp;5</option>
+            <option value="10">10</option>
+            <option value="15">15</option>
+            <option value="30">30</option>
           </select>
 
-          <select className="form-control input-sm select-custom" defaultValue={'day'}>
+          <select
+            className="form-control input-sm select-custom" defaultValue={graphParams.splitUnit}
+            onChange={onChangeSplitUnit}>
             <option value="hour">Hour(s)</option>
             <option value="day">Day(s)</option>
             <option value="month">Month(s)</option>
