@@ -31,6 +31,8 @@ export default class General extends React.Component {
       sendMobile: false,
       mobileIP: '',
 
+      removeEvents: "",
+
       customerId: ''
     }
   }
@@ -144,6 +146,18 @@ export default class General extends React.Component {
           </div>
         </div>
 
+        <div style={rowStyle} className="margin-md-bottom bt-gray">
+          <label className="margin-sm-top margin-sm-bottom width-200">Remove Undefined Events After: </label>
+          <InlineEdit
+            text={this.getOptionValue('UNDEFINED_EVENTS_RETENTION_DAYS') || 'Days'}
+            paramName="message"
+            change={this.onChangeRemoveEvents.bind(this)}
+            className="inline-block"
+            minLength={0}
+          />
+          <label className="margin-sm-top margin-sm-bottom width-200">  Days</label>
+        </div>
+
         <div style={{...rowStyle, color: '#888'}} className="margin-lg-top">
           <label className="margin-sm-top margin-sm-bottom">
             Customer ID: {this.getOptionValue('CUSTOMER_ID') || '[None]'}
@@ -186,6 +200,10 @@ export default class General extends React.Component {
 
   onChangeSysName (value) {
     this.updateOption('SYSTEM_NAME', value.message)
+  }
+
+  onChangeRemoveEvents (value) {
+    this.updateOption('UNDEFINED_EVENTS_RETENTION_DAYS', value.message)
   }
 
   onChangeDmz (e) {
