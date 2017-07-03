@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Field, reduxForm } from 'redux-form'
-import { Popover, RadioButton } from 'material-ui'
+import { Popover, RadioButtonGroup, RadioButton } from 'material-ui'
 
 import { FormInput, SubmitBlock } from 'components/modal/parts'
 
@@ -18,22 +18,18 @@ class SearchSavePopover extends React.Component {
         className="padding-md"
       >
         <form onSubmit={handleSubmit(onSubmit)}>
-          <RadioButtonGroup name="shipName" defaultSelected="community">
-          <div>
-            <div>
-              <RadioButton value="new" label="New"/>
+          <div className="row">
+            <div className="col-md-3">
+              <RadioButtonGroup name="savetype" defaultSelected="new">
+                <RadioButton value="new" label="New"/>
+                <RadioButton value="replace" label="Replace"/>
+              </RadioButtonGroup>
             </div>
-            <Field name="name" component={FormInput} label="Name"/>
-          </div>
-          <div>
-            <div>
-              <RadioButton value="replace" label="Replace"/>
-            </div>
-            <div>
-              &nbsp;
+            <div className="col-md-9">
+              <Field name="name" component={FormInput} label="Name"/>
             </div>
           </div>
-          </RadioButtonGroup>
+
           <SubmitBlock name="Done" onClick={onRequestClose}/>
         </form>
       </Popover>
