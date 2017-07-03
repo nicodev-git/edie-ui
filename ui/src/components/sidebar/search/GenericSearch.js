@@ -464,6 +464,7 @@ class GenericSearch extends React.Component {
         anchorEl={anchorEl}
         onRequestClose={closeSearchSavePopover}
         onSubmit={this.onClickSaveSearch.bind(this)}
+        userOptions={this.getSearchOptions()}
       />
     )
   }
