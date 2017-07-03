@@ -1,7 +1,8 @@
 import React from 'react'
 import {RaisedButton, Chip} from 'material-ui'
+import {blue300} from 'material-ui/styles/colors'
 
-import {showConfirm, showAlert} from 'components/common/Alert'
+import {showConfirm} from 'components/common/Alert'
 
 import SettingTabs from '../SettingTabs'
 import TabPage from 'components/common/TabPage'
@@ -32,6 +33,11 @@ export default class Tags extends React.Component {
       this.props.removeTag(item)
     })
   }
+  onClickTag (item) {
+    const {multiSelTags} = this.props
+    const selected = multiSelTags.filter(p => p.id === item).length > 0
+    this.props.multiSelectTag(item, !selected)
+  }
   renderTagModal () {
     if (!this.props.tagModalOpen) return null
     return (
@@ -39,7 +45,7 @@ export default class Tags extends React.Component {
     )
   }
   renderTags () {
-    const {tags} = this.props
+    const {tags, multiSelTags} = this.props
     return (
       <div style={chipStyles.wrapper}>
         {tags.map(p =>
@@ -47,7 +53,8 @@ export default class Tags extends React.Component {
             key={p.id}
             style={chipStyles.chip}
             labelStyle={chipStyles.label}
-            onTouchTap={this.onClickEditTag.bind(this, p)}
+            backgroundColor={multiSelTags.filter(t => t.id === p.id).length ? blue300 : null}
+            onTouchTap={this.onClickTag.bind(this, p)}
             onRequestDelete={this.onDeleteTag.bind(this, p)}
           >
             {p.name}

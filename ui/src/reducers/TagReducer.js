@@ -11,7 +11,8 @@ import {
 const initialState = {
   tags: [],
   tagDraw: 1,
-  selectedTags: []
+  selectedTags: [],
+  multiSelTags: []
 }
 
 export default function (state = initialState, action) {
