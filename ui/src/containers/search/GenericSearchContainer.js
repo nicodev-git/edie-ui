@@ -23,6 +23,7 @@ import {
 
   openSearchSavePopover,
   closeSearchSavePopover,
+  changeSearchSaveType,
 
   fetchWorkflows,
   fetchWorkflowCategories,
@@ -81,6 +82,7 @@ export default connect(
     searchOptions: state.search.searchOptions,
 
     savePopoverOpen: state.search.savePopoverOpen,
+    searchSaveType: state.search.searchSaveType,
     selectedOption: state.search.selectedOption,
 
     userInfo: state.dashboard.userInfo,
@@ -144,6 +146,7 @@ export default connect(
 
       openSearchSavePopover,
       closeSearchSavePopover,
+      changeSearchSaveType,
 
       fetchWorkflows,
       fetchWorkflowCategories,

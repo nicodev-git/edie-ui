@@ -24,6 +24,7 @@ import {
 
   OPEN_SEARCH_SAVE_POPOVER,
   CLOSE_SEARCH_SAVE_POPOVER,
+  CHANGE_SEARCH_SAVE_TYPE,
 
   OPEN_SEARCH_WF_MODAL,
   CLOSE_SEARCH_WF_MODAL,
@@ -104,7 +105,8 @@ const initialState = {
   searchFields: ['ip'],
   selectedSearchFields: [],
   searchRecordCounts: [],
-  savedSearchKeyword: ''
+  savedSearchKeyword: '',
+  searchSaveType: 'new'
 }
 
 export default function (state = initialState, action) {
@@ -154,6 +156,8 @@ export default function (state = initialState, action) {
       return { ...state, savePopoverOpen: true, selectedOption: action.option, anchorEl: action.anchorEl }
     case CLOSE_SEARCH_SAVE_POPOVER:
       return { ...state, savePopoverOpen: false }
+    case CHANGE_SEARCH_SAVE_TYPE:
+      return { ...state, searchSaveType: action.data }
 
     case OPEN_SEARCH_WF_MODAL:
       return { ...state, wfModalOpen: true, selectedRowWf: '' }

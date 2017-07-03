@@ -16,6 +16,7 @@ import {
 
   OPEN_SEARCH_SAVE_POPOVER,
   CLOSE_SEARCH_SAVE_POPOVER,
+  CHANGE_SEARCH_SAVE_TYPE,
 
   OPEN_SEARCH_WF_MODAL,
   CLOSE_SEARCH_WF_MODAL,
@@ -155,6 +156,12 @@ export const openSearchSavePopover = (option, anchorEl) => {
 export const closeSearchSavePopover = () => {
   return dispatch => {
     dispatch({type: CLOSE_SEARCH_SAVE_POPOVER})
+  }
+}
+
+export const changeSearchSaveType = (data) => {
+  return dispatch => {
+    dispatch({type: CHANGE_SEARCH_SAVE_TYPE, data})
   }
 }
 

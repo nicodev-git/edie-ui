@@ -457,7 +457,7 @@ class GenericSearch extends React.Component {
   }
 
   renderSavePopover () {
-    const { savePopoverOpen, anchorEl, closeSearchSavePopover } = this.props
+    const { savePopoverOpen, anchorEl, closeSearchSavePopover, searchSaveType, changeSearchSaveType } = this.props
     if (!savePopoverOpen) return
     return (
       <SearchSavePopover
@@ -465,6 +465,8 @@ class GenericSearch extends React.Component {
         onRequestClose={closeSearchSavePopover}
         onSubmit={this.onClickSaveSearch.bind(this)}
         userOptions={this.getSearchOptions()}
+        searchSaveType={searchSaveType}
+        changeSearchSaveType={changeSearchSaveType}
       />
     )
   }
