@@ -430,7 +430,7 @@ class GenericSearch extends React.Component {
     updateSearchTags(newTags)
 
     this.props.updateSearchParams(assign({}, this.props.params, {
-      tag: tags.map(p => p.name).join(',')
+      tag: newTags.join(',')
     }), this.props.history)
   }
   onClickRemoveTagChip (index) {
@@ -438,7 +438,7 @@ class GenericSearch extends React.Component {
     const tags = searchTags.filter((p, i) => i !== index)
     updateSearchTags(tags)
     this.props.updateSearchParams(assign({}, this.props.params, {
-      tag: tags.map(p => p.name).join(',')
+      tag: tags.join(',')
     }), this.props.history)
   }
   onClickClearSearch () {
