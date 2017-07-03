@@ -1,7 +1,6 @@
 import React from 'react'
-import {RaisedButton} from 'material-ui'
+import {RaisedButton, Chip} from 'material-ui'
 
-import InfiniteTable from 'components/common/InfiniteTable'
 import {showConfirm, showAlert} from 'components/common/Alert'
 
 import SettingTabs from '../SettingTabs'
@@ -12,25 +11,11 @@ import TabPageHeader from 'components/common/TabPageHeader'
 import TagModal from './TagModal'
 import WfTabs from '../rule/WorkflowTabs'
 
-export default class Tags extends React.Component {
-  constructor (props) {
-    super(props)
-    this.state = {
-    }
+import {chipStyles} from 'style/common/materialStyles'
 
-    this.columns = [{
-      'displayName': 'Name',
-      'columnName': 'name'
-    }, {
-      'displayName': 'Description',
-      'columnName': 'desc'
-    }, {
-      'displayName': 'Order',
-      'columnName': 'order'
-    }]
-  }
-  table () {
-    return this.refs.table
+export default class Tags extends React.Component {
+  componentWillMount () {
+    this.props.fetchTags()
   }
   onRowDblClick (item) {
     this.props.showTagModal(true, item)
@@ -38,15 +23,10 @@ export default class Tags extends React.Component {
   onAddTag () {
     this.props.showTagModal(true)
   }
-  onEditTag () {
-    const item = this.table().getSelected()
-    if (!item) return showAlert('Please select tag.')
-
+  onEditTag (item) {
     this.props.showTagModal(true, item)
   }
-  onDeleteTag () {
-    const item = this.table().getSelected()
-    if (!item) return showAlert('Please select tag.')
+  onDeleteTag (item) {
     showConfirm('Are you sure?', btn => {
       if (btn !== 'ok') return
       this.props.removeTag(item)
@@ -56,6 +36,24 @@ export default class Tags extends React.Component {
     if (!this.props.tagModalOpen) return null
     return (
       <TagModal {...this.props}/>
+    )
+  }
+  renderTags () {
+    const {tags} = this.props
+    return (
+      <div style={chipStyles.wrapper}>
+        {tags.map(p =>
+          <Chip
+            key={p.id}
+            style={chipStyles.chip}
+            labelStyle={chipStyles.label}
+            onTouchTap={this.onClickEditTag.bind(this, p)}
+            onRequestDelete={this.onDeleteTag.bind(this, p)}
+          >
+            {p.name}
+          </Chip>
+        )}
+      </div>
     )
   }
   render () {
@@ -73,17 +71,7 @@ export default class Tags extends React.Component {
         </TabPageHeader>
 
         <TabPageBody tabs={SettingTabs} tab={5} history={this.props.history} location={this.props.location}>
-          <InfiniteTable
-            url="/tag"
-            params={{
-              draw: this.props.tagDraw
-            }}
-            cells={this.columns}
-            ref="table"
-            rowMetadata={{'key': 'id'}}
-            selectable
-            onRowDblClick={this.onRowDblClick.bind(this)}
-          />
+          {this.renderTags()}
           {this.renderTagModal()}
         </TabPageBody>
       </TabPage>
