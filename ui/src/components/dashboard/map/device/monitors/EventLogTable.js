@@ -166,7 +166,7 @@ export default class EventLogTable extends Component {
         <TabPageHeader title="Event Log" titleOptions={<StatusImg {...this.props}/>}>
           {this.renderOptions()}
         </TabPageHeader>
-        <TabPageBody tabs={MonitorTabs(device.id)} history={this.props.history} location={this.props.location}>
+        <TabPageBody tabs={MonitorTabs(device.id, device.templateName)} history={this.props.history} location={this.props.location}>
           {this.renderBody()}
         </TabPageBody>
       </TabPage>

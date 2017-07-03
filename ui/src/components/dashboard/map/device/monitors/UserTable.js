@@ -140,7 +140,7 @@ export default class UserTable extends React.Component {
         <TabPageHeader title={device.name} titleOptions={<StatusImg {...this.props}/>}>
           {this.renderOptions()}
         </TabPageHeader>
-        <TabPageBody tabs={MonitorTabs(device.id)} history={this.props.history} location={this.props.location}>
+        <TabPageBody tabs={MonitorTabs(device.id, device.templateName)} history={this.props.history} location={this.props.location}>
           {this.renderBody()}
           {this.renderLocalUserModal()}
         </TabPageBody>

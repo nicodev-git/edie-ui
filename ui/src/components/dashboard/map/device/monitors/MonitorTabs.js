@@ -1,13 +1,15 @@
-export default (deviceId) => {
-  return [{
+export default (deviceId, templateName) => {
+  const items = [{
     title: 'Monitors',
     path: `/device/${deviceId}/monitor`
   }, {
     title: 'Event Logs',
-    path: `/device/${deviceId}/monitor/eventlog`
+    path: `/device/${deviceId}/monitor/eventlog`,
+    exclude: ['Linux Server']
   }, {
     title: 'Applications',
-    path: `/device/${deviceId}/monitor/app`
+    path: `/device/${deviceId}/monitor/app`,
+    exclude: ['Linux Server']
   }, {
     title: 'Processes',
     path: `/device/${deviceId}/monitor/process`
@@ -27,4 +29,9 @@ export default (deviceId) => {
     title: 'Command',
     path: `/device/${deviceId}/monitor/command`
   }]
+
+  if (templateName) {
+    return items.filter(p => !p.exclude || p.exclude.indexOf(templateName) < 0)
+  }
+  return items
 }

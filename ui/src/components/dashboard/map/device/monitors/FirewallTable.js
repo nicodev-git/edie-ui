@@ -155,7 +155,7 @@ export default class FirewallTable extends React.Component {
         <TabPageHeader title="Firewall" titleOptions={<StatusImg {...this.props}/>}>
           {this.renderOptions()}
         </TabPageHeader>
-        <TabPageBody tabs={MonitorTabs(device.id)} history={this.props.history} location={this.props.location}>
+        <TabPageBody tabs={MonitorTabs(device.id, device.templateName)} history={this.props.history} location={this.props.location}>
           {this.renderBody()}
           {this.renderRuleModal()}
         </TabPageBody>
