@@ -66,7 +66,7 @@ export default class Tags extends React.Component {
     )
   }
   renderItems () {
-    const {tagDevices} = this.props
+    const {tagDevices, tagWorkflows, tagParserTypes, tagDeviceTpls, tagMonitorTpls} = this.props
     return (
       <div style={chipStyles.wrapper}>
         {tagDevices.map(p =>
@@ -74,6 +74,34 @@ export default class Tags extends React.Component {
             key={p.id} style={chipStyles.chip} labelStyle={chipStyles.label}
             onTouchTap={() => {}}>
             <Avatar color={blue300} backgroundColor={indigo900}>D</Avatar>{p.name}
+          </Chip>
+        )}
+        {tagWorkflows.map(p =>
+          <Chip
+            key={p.id} style={chipStyles.chip} labelStyle={chipStyles.label}
+            onTouchTap={() => {}}>
+            <Avatar color={blue300} backgroundColor={indigo900}>W</Avatar>{p.name}
+          </Chip>
+        )}
+        {tagParserTypes.map(p =>
+          <Chip
+            key={p.id} style={chipStyles.chip} labelStyle={chipStyles.label}
+            onTouchTap={() => {}}>
+            <Avatar color={blue300} backgroundColor={indigo900}>P</Avatar>{p.name}
+          </Chip>
+        )}
+        {tagDeviceTpls.map(p =>
+          <Chip
+            key={p.id} style={chipStyles.chip} labelStyle={chipStyles.label}
+            onTouchTap={() => {}}>
+            <Avatar color={blue300} backgroundColor={indigo900}>DT</Avatar>{p.name}
+          </Chip>
+        )}
+        {tagMonitorTpls.map(p =>
+          <Chip
+            key={p.id} style={chipStyles.chip} labelStyle={chipStyles.label}
+            onTouchTap={() => {}}>
+            <Avatar color={blue300} backgroundColor={indigo900}>MT</Avatar>{p.name}
           </Chip>
         )}
       </div>

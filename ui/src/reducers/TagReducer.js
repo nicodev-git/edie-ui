@@ -44,6 +44,14 @@ export default function (state = initialState, action) {
       return {...state, multiSelTags: action.tags}
     case FETCH_DEVICE_BY_TAGS:
       return {...state, tagDevices: action.data}
+    case FETCH_WORKFLOW_BY_TAGS:
+      return {...state, tagWorkflows: action.data}
+    case FETCH_DEVICETPL_BY_TAGS:
+      return {...state, tagDeviceTpls: action.data}
+    case FETCH_MONITORTPL_BY_TAGS:
+      return {...state, tagMonitorTpls: action.data}
+    case FETCH_PARSERTYPE_BY_TAGS:
+      return {...state, tagParserTypes: action.data}
   }
   return state
 }
