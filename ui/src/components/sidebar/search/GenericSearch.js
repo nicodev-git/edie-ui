@@ -1,7 +1,7 @@
 import React from 'react'
 import { reduxForm, submit, formValueSelector } from 'redux-form'
 import { connect } from 'react-redux'
-import { merge, assign, concat, isArray, keys } from 'lodash'
+import { merge, assign, concat, isArray, keys, findIndex } from 'lodash'
 import moment from 'moment'
 import {Popover, FlatButton, Chip, RaisedButton} from 'material-ui'
 import NavigationClose from 'material-ui/svg-icons/navigation/close'
@@ -285,7 +285,7 @@ class GenericSearch extends React.Component {
   }
 
   onClickSaveSearch (values) {
-    const { userInfo, params } = this.props
+    const { userInfo, params, searchSaveType } = this.props
     if (!userInfo) return
     const option = {
       id: guid(),
@@ -293,8 +293,18 @@ class GenericSearch extends React.Component {
       data: JSON.stringify(params)
     }
 
+    if (searchSaveType === 'new') {
+      this.props.addSearchOption(userInfo, option)
+    } else {
+      const options = this.getSearchOptions()
+      const index = findIndex(options, {id: values.searchId})
+      if (index < 0) return
+      this.props.updateSearchOption(userInfo, {
+        ...options[index],
+        data: JSON.stringify(params)
+      })
+    }
     this.props.closeSearchSavePopover()
-    this.props.addSearchOption(userInfo, option)
   }
 
   onChangeSearchOption (selectedSearch) {
