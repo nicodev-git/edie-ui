@@ -64,6 +64,10 @@ body {
     font-weight: bold;
 }
 
+.text-danger {
+    color: firebrick;
+}
+
 .bt-gray {
     border-bottom: 1px solid lightgray;
 }

@@ -607,7 +607,7 @@ class GenericSearch extends React.Component {
   }
 
   render () {
-    const { handleSubmit, selectedWf, params, monitorTemplates, searchTags } = this.props
+    const { handleSubmit, selectedWf, params, monitorTemplates, searchTags, queryChips } = this.props
     const { severity, dateFrom, dateTo, monitorTypes } = params
     const selectedCollections = params.collections
     const workflow = this.props.workflows.filter(m => m.id === selectedWf)
@@ -650,7 +650,7 @@ class GenericSearch extends React.Component {
           <div className="text-center">
             <div className="inline">
               <div style={chipStyles.wrapper}>
-                {this.props.queryChips.map((p, i) =>
+                {queryChips.map((p, i) =>
                   <Chip
                     key={`${p.name}${p.value}`}
                     style={chipStyles.chip}
@@ -678,8 +678,12 @@ class GenericSearch extends React.Component {
                   )
                 }
                 {
-                  searchTags.length ? (
-                    <RaisedButton label="Clear" onTouchTap={this.onClickClearSearch.bind(this)}/>
+                  searchTags.length > 0 || queryChips.length > 0 ? (
+                    <Chip
+                      style={chipStyles.chip}
+                      onTouchTap={this.onClickClearSearch.bind(this)}>
+                      <b className="text-danger">Clear</b>
+                    </Chip>
                   ) : null
                 }
               </div>
