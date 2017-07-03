@@ -83,8 +83,24 @@ export function fetchItemsByTags (tags) {
       axios.get(`${ROOT_URL}/device/search/findByTagsIn?${params}`).then(res => {
         dispatch({type: FETCH_DEVICE_BY_TAGS, data: res.data._embedded.devices})
       })
+      axios.get(`${ROOT_URL}/workflow/search/findByTagsIn?${params}`).then(res => {
+        dispatch({type: FETCH_WORKFLOW_BY_TAGS, data: res.data._embedded.workflows})
+      })
+      axios.get(`${ROOT_URL}/devicetemplate/search/findByTagsIn?${params}`).then(res => {
+        dispatch({type: FETCH_DEVICETPL_BY_TAGS, data: res.data._embedded.deviceTemplates})
+      })
+      axios.get(`${ROOT_URL}/monitortemplate/search/findByTagsIn?${params}`).then(res => {
+        dispatch({type: FETCH_MONITORTPL_BY_TAGS, data: res.data._embedded.monitorTemplates})
+      })
+      axios.get(`${ROOT_URL}/parsertype/search/findByTagsIn?${params}`).then(res => {
+        dispatch({type: FETCH_PARSERTYPE_BY_TAGS, data: res.data._embedded.parserTypes})
+      })
     } else {
       dispatch({type: FETCH_DEVICE_BY_TAGS, data: []})
+      dispatch({type: FETCH_WORKFLOW_BY_TAGS, data: []})
+      dispatch({type: FETCH_DEVICETPL_BY_TAGS, data: []})
+      dispatch({type: FETCH_MONITORTPL_BY_TAGS, data: []})
+      dispatch({type: FETCH_PARSERTYPE_BY_TAGS, data: []})
     }
   }
 }
