@@ -36,6 +36,9 @@ export default class SavedSearchModal extends React.Component {
     }
     this.props.shareSavedSearch(props)
   }
+  onChangeKeyword (e) {
+    this.props.updateSavedSearchKeyword(e.target.value)
+  }
   render () {
     return (
       <SavedSearchModalView
@@ -44,6 +47,7 @@ export default class SavedSearchModal extends React.Component {
         onClickOK={this.onClickOK.bind(this)}
         onClickClose={this.onClickClose.bind(this)}
         onClickShare={this.onClickShare.bind(this)}
+        onChangeKeyword={this.onChangeKeyword.bind(this)}
       />
     )
   }

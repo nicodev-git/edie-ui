@@ -19,6 +19,7 @@ import {
   fetchSysSearchOptions,
   showSavedSearch,
   selectSearch,
+  updateSavedSearchKeyword,
 
   openSearchSavePopover,
   closeSearchSavePopover,
@@ -139,6 +140,7 @@ export default connect(
       fetchSysSearchOptions,
       showSavedSearch,
       selectSearch,
+      updateSavedSearchKeyword,
 
       openSearchSavePopover,
       closeSearchSavePopover,

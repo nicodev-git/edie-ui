@@ -15,10 +15,11 @@ class SavedSearchModalView extends React.Component {
       selectedSearch,
       loadingSearchOptions,
       onClickShare,
-      keyword,
+      savedSearchKeyword,
       onChangeKeyword
     } = this.props
 
+    const keyword = savedSearchKeyword.toLowerCase();
     const options = concat([], userOptions.map(p => {
       return assign({}, p, {
         type: 'User'
@@ -27,12 +28,13 @@ class SavedSearchModalView extends React.Component {
       return assign({}, p, {
         type: 'System'
       })
-    }))
+    })).filter(p => (p.name || '').toLowerCase().indexOf(keyword) >= 0
+    || (p.description || '').toLowerCase().indexOf(keyword) >= 0)
 
     return (
       <Dialog open title="Saved Search" onRequestClose={onClickClose}>
         <div>
-          <TextField value={keyword} floatingLabelText="Search" onChange={onChangeKeyword}/>
+          <TextField value={savedSearchKeyword} floatingLabelText="Search" onChange={onChangeKeyword}/>
         </div>
         <div style={{maxHeight: '350px', overflow: 'auto'}}>
           <table className="table table-hover">
