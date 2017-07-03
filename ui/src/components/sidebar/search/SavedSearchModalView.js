@@ -1,6 +1,6 @@
 import React from 'react'
 import { assign, concat } from 'lodash'
-import {Dialog, IconButton} from 'material-ui'
+import {Dialog, IconButton, TextField} from 'material-ui'
 import Share from 'material-ui/svg-icons/social/share'
 
 import { TwoButtonsBlockCustom } from 'components/modal/parts'
@@ -14,7 +14,9 @@ class SavedSearchModalView extends React.Component {
       onClickRow,
       selectedSearch,
       loadingSearchOptions,
-      onClickShare
+      onClickShare,
+      keyword,
+      onChangeKeyword
     } = this.props
 
     const options = concat([], userOptions.map(p => {
@@ -29,6 +31,9 @@ class SavedSearchModalView extends React.Component {
 
     return (
       <Dialog open title="Saved Search" onRequestClose={onClickClose}>
+        <div>
+          <TextField value={keyword} floatingLabelText="Search" onChange={onChangeKeyword}/>
+        </div>
         <div style={{maxHeight: '350px', overflow: 'auto'}}>
           <table className="table table-hover">
             <thead>

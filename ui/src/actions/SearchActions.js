@@ -32,6 +32,7 @@ import {
   UPDATE_USER_INFO,
 
   SHOW_SAVED_SEARCH_MODAL,
+  UPDATE_SAVED_SEARCH_KEYWORD,
   FETCH_SYS_SEARCH_OPTIONS,
   SELECT_SEARCH,
   SET_LOADING_SEARCH_OPTIONS,
@@ -224,6 +225,12 @@ export const updateIncidentSearchParams = (params) => {
 export const showSavedSearch = (visible) => {
   return dispatch => {
     dispatch({type: SHOW_SAVED_SEARCH_MODAL, visible})
+  }
+}
+
+export const updateSavedSearchKeyword = (keyword) => {
+  return dispatch => {
+    dispatch({type: UPDATE_SAVED_SEARCH_KEYWORD, keyword})
   }
 }
 

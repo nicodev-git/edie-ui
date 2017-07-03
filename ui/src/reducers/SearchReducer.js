@@ -38,6 +38,7 @@ import {
   UPDATE_SEARCH_TAGS,
 
   SHOW_SAVED_SEARCH_MODAL,
+  UPDATE_SAVED_SEARCH_KEYWORD,
   SELECT_SEARCH,
   SET_LOADING_SEARCH_OPTIONS,
   SHOW_REL_DEVICES_POPOVER,
@@ -102,7 +103,8 @@ const initialState = {
   irrelDevices: [],
   searchFields: ['ip'],
   selectedSearchFields: [],
-  searchRecordCounts: []
+  searchRecordCounts: [],
+  savedSearchKeyword: ''
 }
 
 export default function (state = initialState, action) {
@@ -173,9 +175,10 @@ export default function (state = initialState, action) {
       return { ...state, selectedWfs: action.workflows || [] }
     case UPDATE_INCIDENTS_PARAMS:
       return { ...state, incidentParams: action.params }
-
     case SHOW_SAVED_SEARCH_MODAL:
       return { ...state, savedSearchModalOpen: !!action.visible }
+    case UPDATE_SAVED_SEARCH_KEYWORD:
+      return { ...state, savedSearchKeyword: action.keyword }
     case FETCH_SYS_SEARCH_OPTIONS:
       return { ...state, sysSearchOptions: action.data }
     case SELECT_SEARCH:

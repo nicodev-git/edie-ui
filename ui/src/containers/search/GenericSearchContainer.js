@@ -95,6 +95,7 @@ export default connect(
     selectedRowWf: state.search.selectedRowWf,
 
     savedSearchModalOpen: state.search.savedSearchModalOpen,
+    savedSearchKeyword: state.search.savedSearchKeyword,
     sysSearchOptions: state.search.sysSearchOptions,
     selectedSearch: state.search.selectedSearch,
     loadingSearchOptions: state.search.loadingSearchOptions,
