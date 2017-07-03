@@ -7,6 +7,7 @@ import {
   UPDATE_TAG,
   REMOVE_TAG,
   SELECT_TAG,
+  MULTI_SELECT_TAG,
 
   API_ERROR
 } from './types'
@@ -58,5 +59,11 @@ export function removeTag (entity) {
 export function selectTag (tags) {
   return dispatch => {
     dispatch({type: SELECT_TAG, tags})
+  }
+}
+
+export function multiSelectTag (tag, select) {
+  return dispatch => {
+    dispatch({type: MULTI_SELECT_TAG, tag, select})
   }
 }

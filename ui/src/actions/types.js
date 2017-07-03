@@ -371,6 +371,7 @@ export const UPDATE_TAG = 'UPDATE_TAG'
 export const REMOVE_TAG = 'REMOVE_TAG'
 export const SHOW_TAG_MODAL = 'SHOW_TAG_MODAL'
 export const SELECT_TAG = 'SELECT_TAG'
+export const MULTI_SELECT_TAG = 'MULTI_SELECT_TAG'
 
 export const REQUIRE_FULLSCREEN = 'REQUIRE_FULLSCREEN'
 

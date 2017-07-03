@@ -4,7 +4,8 @@ import {
   ADD_TAG,
   UPDATE_TAG,
   REMOVE_TAG,
-  SELECT_TAG
+  SELECT_TAG,
+  MULTI_SELECT_TAG
 } from 'actions/types'
 
 const initialState = {
@@ -26,6 +27,12 @@ export default function (state = initialState, action) {
       return { ...state, tagDraw: state.tagDraw + 1 }
     case SELECT_TAG:
       return { ...state, selectedTags: action.tags || [] }
+    case MULTI_SELECT_TAG: {
+      const {multiSelTags} = state
+      if (action.select)
+        return {...state, multiSelTags: [...multiSelTags, action.tag]}
+      return {...state, multiSelTags: multiSelTags.filter(p => p.id !== action.tag.id)}
+    }
   }
   return state
 }
