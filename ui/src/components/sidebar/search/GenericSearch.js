@@ -3,7 +3,7 @@ import { reduxForm, submit, formValueSelector } from 'redux-form'
 import { connect } from 'react-redux'
 import { merge, assign, concat, isArray, keys } from 'lodash'
 import moment from 'moment'
-import {Popover, FlatButton, Chip} from 'material-ui'
+import {Popover, FlatButton, Chip, RaisedButton} from 'material-ui'
 import NavigationClose from 'material-ui/svg-icons/navigation/close'
 
 import InfiniteTable from 'components/common/InfiniteTable'
@@ -431,6 +431,15 @@ class GenericSearch extends React.Component {
       tag: tags.join(',')
     }), this.props.history)
   }
+  onClickClearSearch () {
+    const {searchTags, updateSearchTags, updateQueryChips} = this.props
+    updateQueryChips([])
+    updateSearchTags([])
+    this.props.updateSearchParams(assign({}, this.props.params, {
+      tag: '',
+      query: ''
+    }), this.props.history)
+  }
   renderFields () {
     const {selectedField} = this.props
     return (
@@ -667,6 +676,11 @@ class GenericSearch extends React.Component {
                       <b>Tag: </b>{p}
                     </Chip>
                   )
+                }
+                {
+                  searchTags.length ? (
+                    <RaisedButton label="Clear" onTouchTap={this.onClickClearSearch.bind(this)}/>
+                  ) : null
                 }
               </div>
             </div>
