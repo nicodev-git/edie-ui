@@ -18,7 +18,7 @@ import {
   API_ERROR
 } from './types'
 
-import {tags} from 'shared/Global'
+import {encodeUrlParams} from 'shared/Global'
 
 export function showTagModal (visible, tag) {
   return dispatch => {
@@ -70,15 +70,21 @@ export function selectTag (tags) {
   }
 }
 
-export function multiSelectTag (tag, select) {
+export function multiSelectTag (tags) {
   return dispatch => {
-    dispatch({type: MULTI_SELECT_TAG, tag, select})
+    dispatch({type: MULTI_SELECT_TAG, tags})
   }
 }
 
 export function fetchItemsByTags (tags) {
   return dispatch => {
-    const params = tags.map(t => t.name)
-    axios.get(`${ROOT_URL}/device/findByTagsIn`, { params })
+    if (tags.length) {
+      const params = encodeUrlParams({tag: tags.map(t => t.name)})
+      axios.get(`${ROOT_URL}/device/search/findByTagsIn?${params}`).then(res => {
+        dispatch({type: FETCH_DEVICE_BY_TAGS, data: res.data._embedded.devices})
+      })
+    } else {
+      dispatch({type: FETCH_DEVICE_BY_TAGS, data: []})
+    }
   }
 }

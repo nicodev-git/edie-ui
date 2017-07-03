@@ -5,7 +5,13 @@ import {
   UPDATE_TAG,
   REMOVE_TAG,
   SELECT_TAG,
-  MULTI_SELECT_TAG
+
+  MULTI_SELECT_TAG,
+  FETCH_DEVICE_BY_TAGS,
+  FETCH_WORKFLOW_BY_TAGS,
+  FETCH_MONITORTPL_BY_TAGS,
+  FETCH_DEVICETPL_BY_TAGS,
+  FETCH_PARSERTYPE_BY_TAGS
 } from 'actions/types'
 
 const initialState = {
@@ -14,11 +20,11 @@ const initialState = {
   selectedTags: [],
   multiSelTags: [],
 
-  deviceTags: [],
-  workflowTags: [],
-  parserTypeTags: [],
-  deviceTplTags: [],
-  monitorTplTags: []
+  tagDevices: [],
+  tagWorkflows: [],
+  tagParserTypes: [],
+  tagDeviceTpls: [],
+  tagMonitorTpls: []
 }
 
 export default function (state = initialState, action) {
@@ -34,12 +40,10 @@ export default function (state = initialState, action) {
       return { ...state, tagDraw: state.tagDraw + 1 }
     case SELECT_TAG:
       return { ...state, selectedTags: action.tags || [] }
-    case MULTI_SELECT_TAG: {
-      const {multiSelTags} = state
-      if (action.select)
-        return {...state, multiSelTags: [...multiSelTags, action.tag]}
-      return {...state, multiSelTags: multiSelTags.filter(p => p.id !== action.tag.id)}
-    }
+    case MULTI_SELECT_TAG:
+      return {...state, multiSelTags: action.tags}
+    case FETCH_DEVICE_BY_TAGS:
+      return {...state, tagDevices: action.data}
   }
   return state
 }
