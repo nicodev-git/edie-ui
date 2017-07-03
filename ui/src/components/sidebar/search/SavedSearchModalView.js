@@ -2,7 +2,7 @@ import React from 'react'
 import { assign, concat } from 'lodash'
 import {Dialog, IconButton, TextField} from 'material-ui'
 import Share from 'material-ui/svg-icons/social/share'
-import EditIcon from 'material-ui/svg-icons/editor/mode-edit'
+import DeleteIcon from 'material-ui/svg-icons/action/delete'
 
 import { TwoButtonsBlockCustom } from 'components/modal/parts'
 
@@ -18,7 +18,7 @@ class SavedSearchModalView extends React.Component {
       onClickShare,
       savedSearchKeyword,
       onChangeKeyword,
-      onClickEdit
+      onClickDelete
     } = this.props
 
     const keyword = savedSearchKeyword.toLowerCase();
@@ -56,7 +56,7 @@ class SavedSearchModalView extends React.Component {
                 <td>{p.type}</td>
                 <td className="p-none">
                   {p.type === 'User' ? <IconButton onTouchTap={() => onClickShare(p)}><Share/></IconButton> : null}
-                  {p.type === 'User' ? <IconButton onTouchTap={() => onClickEdit(p)}><EditIcon/></IconButton> : null}
+                  {p.type === 'User' ? <IconButton onTouchTap={() => onClickDelete(p)}><DeleteIcon/></IconButton> : null}
                 </td>
               </tr>
             )}

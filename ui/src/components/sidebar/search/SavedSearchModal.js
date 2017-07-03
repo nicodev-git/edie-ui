@@ -39,15 +39,16 @@ export default class SavedSearchModal extends React.Component {
   onChangeKeyword (e) {
     this.props.updateSavedSearchKeyword(e.target.value)
   }
-  onClickEdit (p) {
-
+  onClickDelete (p) {
+    const {userInfo} = this.props
+    this.props.removeSearchOption(userInfo, p)
   }
   render () {
     return (
       <SavedSearchModalView
         {...this.props}
         onClickRow={this.onClickRow.bind(this)}
-        onClickEdit={this.onClickEdit.bind(this)}
+        onClickDelete={this.onClickDelete.bind(this)}
         onClickOK={this.onClickOK.bind(this)}
         onClickClose={this.onClickClose.bind(this)}
         onClickShare={this.onClickShare.bind(this)}
