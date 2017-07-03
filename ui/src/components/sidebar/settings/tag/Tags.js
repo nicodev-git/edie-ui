@@ -35,7 +35,7 @@ export default class Tags extends React.Component {
   }
   onClickTag (item) {
     const {multiSelTags} = this.props
-    const selected = multiSelTags.filter(p => p.id === item).length > 0
+    const selected = multiSelTags.filter(p => p.id === item.id).length > 0
     this.props.multiSelectTag(item, !selected)
   }
   renderTagModal () {
@@ -47,7 +47,7 @@ export default class Tags extends React.Component {
   renderTags () {
     const {tags, multiSelTags} = this.props
     return (
-      <div style={chipStyles.wrapper}>
+      <div style={chipStyles.wrapper} className="padding-md">
         {tags.map(p =>
           <Chip
             key={p.id}
@@ -78,6 +78,7 @@ export default class Tags extends React.Component {
         </TabPageHeader>
 
         <TabPageBody tabs={SettingTabs} tab={5} history={this.props.history} location={this.props.location}>
+          <h5>Tags</h5>
           {this.renderTags()}
           {this.renderTagModal()}
         </TabPageBody>

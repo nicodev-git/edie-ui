@@ -12,7 +12,13 @@ const initialState = {
   tags: [],
   tagDraw: 1,
   selectedTags: [],
-  multiSelTags: []
+  multiSelTags: [],
+
+  deviceTags: [],
+  workflowTags: [],
+  parserTypeTags: [],
+  deviceTplTags: [],
+  monitorTplTags: []
 }
 
 export default function (state = initialState, action) {

@@ -7,10 +7,18 @@ import {
   UPDATE_TAG,
   REMOVE_TAG,
   SELECT_TAG,
+
   MULTI_SELECT_TAG,
+  FETCH_DEVICE_BY_TAGS,
+  FETCH_WORKFLOW_BY_TAGS,
+  FETCH_MONITORTPL_BY_TAGS,
+  FETCH_DEVICETPL_BY_TAGS,
+  FETCH_PARSERTYPE_BY_TAGS,
 
   API_ERROR
 } from './types'
+
+import {tags} from 'shared/Global'
 
 export function showTagModal (visible, tag) {
   return dispatch => {
@@ -65,5 +73,12 @@ export function selectTag (tags) {
 export function multiSelectTag (tag, select) {
   return dispatch => {
     dispatch({type: MULTI_SELECT_TAG, tag, select})
+  }
+}
+
+export function fetchItemsByTags (tags) {
+  return dispatch => {
+    const params = tags.map(t => t.name)
+    axios.get(`${ROOT_URL}/device/findByTagsIn`, { params })
   }
 }
