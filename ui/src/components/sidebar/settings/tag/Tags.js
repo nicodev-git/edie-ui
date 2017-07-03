@@ -1,6 +1,6 @@
 import React from 'react'
-import {RaisedButton, Chip} from 'material-ui'
-import {blue300} from 'material-ui/styles/colors'
+import {RaisedButton, Chip, Avatar} from 'material-ui'
+import {blue300, indigo900} from 'material-ui/styles/colors'
 
 import {showConfirm} from 'components/common/Alert'
 
@@ -36,7 +36,9 @@ export default class Tags extends React.Component {
   onClickTag (item) {
     const {multiSelTags} = this.props
     const selected = multiSelTags.filter(p => p.id === item.id).length > 0
-    this.props.multiSelectTag(item, !selected)
+    const items = !selected ? [...multiSelTags, item] : multiSelTags.filter(p => p.id !== item.id)
+    this.props.multiSelectTag(items)
+    this.props.fetchItemsByTags(items)
   }
   renderTagModal () {
     if (!this.props.tagModalOpen) return null
@@ -47,7 +49,7 @@ export default class Tags extends React.Component {
   renderTags () {
     const {tags, multiSelTags} = this.props
     return (
-      <div style={chipStyles.wrapper} className="padding-md">
+      <div style={chipStyles.wrapper}>
         {tags.map(p =>
           <Chip
             key={p.id}
@@ -58,6 +60,20 @@ export default class Tags extends React.Component {
             onRequestDelete={this.onDeleteTag.bind(this, p)}
           >
             {p.name}
+          </Chip>
+        )}
+      </div>
+    )
+  }
+  renderItems () {
+    const {tagDevices} = this.props
+    return (
+      <div style={chipStyles.wrapper}>
+        {tagDevices.map(p =>
+          <Chip
+            key={p.id} style={chipStyles.chip} labelStyle={chipStyles.label}
+            onTouchTap={() => {}}>
+            <Avatar color={blue300} backgroundColor={indigo900}>D</Avatar>{p.name}
           </Chip>
         )}
       </div>
@@ -78,8 +94,12 @@ export default class Tags extends React.Component {
         </TabPageHeader>
 
         <TabPageBody tabs={SettingTabs} tab={5} history={this.props.history} location={this.props.location}>
-          <h5>Tags</h5>
-          {this.renderTags()}
+          <div className="padding-md">
+            <div><b>Tags</b></div>
+            {this.renderTags()}
+            <div>Related</div>
+            {this.renderItems()}
+          </div>
           {this.renderTagModal()}
         </TabPageBody>
       </TabPage>

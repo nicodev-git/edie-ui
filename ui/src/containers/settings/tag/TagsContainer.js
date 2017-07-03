@@ -10,7 +10,8 @@ import {
   updateTag,
   removeTag,
   fetchTags,
-  multiSelectTag
+  multiSelectTag,
+  fetchItemsByTags
 } from 'actions'
 
 class TagsContainer extends React.Component {
@@ -27,13 +28,20 @@ export default connect(
     tagDraw: state.tag.tagDraw,
     tagModalOpen: state.tag.tagModalOpen,
     editTag: state.tag.editTag,
-    multiSelTags: state.tag.multiSelTags
+    multiSelTags: state.tag.multiSelTags,
+
+    tagDevices: state.tag.tagDevices,
+    tagWorkflows: state.tag.tagWorkflows,
+    tagParserTypes: state.tag.tagParserTypes,
+    tagDeviceTpls: state.tag.tagDeviceTpls,
+    tagMonitorTpls: state.tag.tagMonitorTpls
   }), {
     showTagModal,
     addTag,
     updateTag,
     removeTag,
     fetchTags,
-    multiSelectTag
+    multiSelectTag,
+    fetchItemsByTags
   }
 )(withRouter(TagsContainer))
