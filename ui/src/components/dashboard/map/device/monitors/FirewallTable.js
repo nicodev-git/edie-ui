@@ -112,7 +112,13 @@ export default class FirewallTable extends React.Component {
     showConfirm('Click OK to remove the rule.', btn => {
       if (btn !== 'ok') return
       this.sendCommandMessage('RemoveFirewallRuleCommand', {
-        rule: sel.Name
+        rule: sel.Name,
+        action: sel.Action,
+        protocol: sel.Protocol,
+        localip: sel.LocalIP,
+        remoteip: sel.RemoteIP,
+        localport: sel.LocalPort,
+        remoteport: sel.RemotePort
       })
     })
   }
