@@ -4,14 +4,15 @@ import { errorStyle, inputStyle, underlineStyle } from 'style/common/materialSty
 
 const FormInput = ({input, label, floatingLabel, meta: { touched, error }, ...custom}) => (
   <TextField
+    {...input}
+    {...custom}
     hintText={label}
     floatingLabelText={floatingLabel}
     errorText={touched && error}
     errorStyle={errorStyle}
     inputStyle={inputStyle}
     underlineFocusStyle={underlineStyle}
-    {...input}
-    {...custom}
+    autoComplete="off"
   />
 )
 
