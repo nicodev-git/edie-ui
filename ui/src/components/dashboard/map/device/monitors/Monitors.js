@@ -48,7 +48,7 @@ export default class Monitors extends React.Component {
     const {monitorOS, monitorCpu} = this.props
     const texts = []
     if (monitorOS) {
-      texts.push(`${monitorOS.dataobj.Name} ${monitorOS.dataobj.ServicePack}`)
+      texts.push(`${monitorOS.dataobj.Name || ''} ${monitorOS.dataobj.ServicePack || ''}`)
     }
     if (monitorCpu) {
       const cpus = monitorCpu.dataobj
