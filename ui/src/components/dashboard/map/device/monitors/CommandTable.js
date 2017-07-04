@@ -66,7 +66,7 @@ class CommandTable extends React.Component {
       <div className="flex-vertical" style={{height: '100%'}}>
         <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
           <div className="padding-md">
-            <Field name="command" component={FormInput} floatingLabel="Command"/>&nbsp;
+            <Field name="command" component={FormInput} floatingLabel="Command" style={{width: 500}}/>&nbsp;
             <div className="inline-block valign-bottom">
               <Field name="output" component={FormCheckbox} label="Output" labelPosition="right"/>
             </div>

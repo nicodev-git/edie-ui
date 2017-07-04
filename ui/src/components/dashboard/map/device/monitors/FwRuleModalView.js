@@ -19,9 +19,9 @@ export default class FwRuleModalView extends React.Component {
   render () {
     const {onSubmit, onHide} = this.props
     return (
-      <Dialog open title="Rule" onRequestClose={onHide}>
+      <Dialog open title="Rule" onRequestClose={onHide} contentStyle={{width: 600}}>
         <Form onSubmit={onSubmit}>
-          <div>
+          <div style={{marginTop: -20}}>
             <Field name="rule" component={FormInput} floatingLabel="Rule Name"/>&nbsp;
             <Field name="localip" component={FormInput} floatingLabel="Source"/>&nbsp;
           </div>
@@ -34,7 +34,7 @@ export default class FwRuleModalView extends React.Component {
             <Field name="protocol" component={FormSelect} floatingLabel="Protocol" options={protocols} className="valign-top"/>
             <Field name="action" component={FormSelect} floatingLabel="Action" options={actions} className="valign-top"/>&nbsp;
           </div>
-          <SubmitBlock name="OK" onCancel={onHide}/>
+          <SubmitBlock name="OK" onClick={onHide}/>
         </Form>
       </Dialog>
     )
