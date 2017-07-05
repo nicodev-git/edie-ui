@@ -1,6 +1,5 @@
 import React from 'react'
 import CpuProcessModal from './CpuProcessModal'
-
 class CpuTable extends React.Component {
   onClickCPU () {
     this.props.showDeviceCpuProcessModal(true)

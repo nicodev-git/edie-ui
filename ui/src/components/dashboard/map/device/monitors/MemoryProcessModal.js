@@ -10,13 +10,13 @@ export default class MemoryProcessModal extends React.Component {
     this.state = {
     }
     this.columns = [{
-      'displayName': 'Mem',
+      'displayName': 'Memory',
       'columnName': 'Mem',
-      'cssClassName': 'width-60'
+      'cssClassName': 'width-80'
     },{
       'displayName': 'Name',
       'columnName': 'Filename',
-      'cssClassName': 'width-180'
+      'cssClassName': 'width-160'
     }, {
       'displayName': 'Id',
       'columnName': 'Id',

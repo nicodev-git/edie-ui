@@ -1,6 +1,10 @@
 import React from 'react'
+import MemoryProcessModal from './MemoryProcessModal'
 
 class MemoryTable extends React.Component {
+  onClickMem () {
+    this.props.showDeviceMemoryProcessModal(true)
+  }
   renderContent () {
     const {monitorMemory} = this.props
     const color = monitorMemory ? 'black' : 'lightgray'
@@ -24,10 +28,17 @@ class MemoryTable extends React.Component {
       </div>
     )
   }
+  renderMemProcessModal () {
+    if (!this.props.memProcessModalOpen) return null
+    return (
+      <MemoryProcessModal {...this.props}/>
+    )
+  }
   render () {
     return (
-      <div className="inline-block valign-top">
+      <div className="inline-block valign-top" onClick={this.onClickMem.bind(this)}>
         {this.renderContent()}
+        {this.renderMemProcessModal()}
       </div>
     )
   }
