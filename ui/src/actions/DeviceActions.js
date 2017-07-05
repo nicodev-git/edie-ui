@@ -35,6 +35,7 @@ import {
   FETCH_DEVICE_BASIC_MONITORS,
   FETCH_DEVICE_EVENTLOG,
   FETCH_DEVICE_APPS,
+  SHOW_DEVICE_CPU_PROCESS_MODAL,
 
   OPEN_SYS_WORKFLOWS_MODAL,
   CLOSE_SYS_WORKFLOWS_MODAL,
@@ -450,6 +451,12 @@ export const fetchDeviceApps = () => {
       type: FETCH_DEVICE_APPS,
       data: []
     })
+  }
+}
+
+export const showDeviceCpuProcessModal = (visible) => {
+  return dispatch => {
+    dispatch({type: SHOW_DEVICE_CPU_PROCESS_MODAL, visible})
   }
 }
 

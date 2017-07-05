@@ -1,8 +1,9 @@
 import React from 'react'
+import CpuProcessModal from './CpuProcessModal'
 
 class CpuTable extends React.Component {
   onClickCPU () {
-
+    this.props.showDeviceCpuProcessModal(true)
   }
   buildProgress (val) {
     let color = 'red'
@@ -14,6 +15,12 @@ class CpuTable extends React.Component {
         <div className="progress-label" style={{fontSize: '9px', top: '1px', textAlign: 'center', position: 'absolute', width: '100%', color: 'black'}}>{val}%</div>
         <div className="progress-bar progress-bar-info" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100" style={{width: `${val}%`, backgroundColor: color}}/>
       </div>
+    )
+  }
+  renderCpuProcessModal () {
+    if (!this.props.cpuProcessModalOpen) return null
+    return (
+      <CpuProcessModal {...this.props}/>
     )
   }
   renderContent () {
@@ -34,6 +41,7 @@ class CpuTable extends React.Component {
     return (
       <div className="inline-block valign-top" onClick={this.onClickCPU.bind(this)}>
         {this.renderContent()}
+        {this.renderCpuProcessModal()}
       </div>
     )
   }

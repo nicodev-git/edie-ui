@@ -29,7 +29,8 @@ import {
   updateMonitorRealTime,
   clearMonitors,
 
-  showMonitorHistoryModal
+  showMonitorHistoryModal,
+  showDeviceCpuProcessModal
 } from 'actions'
 
 class MonitorsContainer extends Component {
@@ -47,6 +48,7 @@ export default connect(
     monitorWizardVisible: state.devices.monitorWizardVisible,
     process: state.devices.process,
     processModalOpen: state.devices.processModalOpen,
+    cpuProcessModalOpen: state.devices.cpuProcessModalOpen,
 
     monitorHistoryModalOpen: state.devices.monitorHistoryModalOpen,
     selectedMonitor: state.devices.selectedMonitor,
@@ -92,6 +94,7 @@ export default connect(
     updateMonitorRealTime,
     clearMonitors,
 
-    showMonitorHistoryModal
+    showMonitorHistoryModal,
+    showDeviceCpuProcessModal
   }
 )(withRouter(MonitorsContainer))

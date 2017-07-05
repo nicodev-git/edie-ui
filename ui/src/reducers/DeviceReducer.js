@@ -23,6 +23,7 @@ import {
   FETCH_DEVICE_PROCESS,
   OPEN_PROCESS_MODAL,
   CLOSE_PROCESS_MODAL,
+  SHOW_DEVICE_CPU_PROCESS_MODAL,
 
   OPEN_SYS_WORKFLOWS_MODAL,
   CLOSE_SYS_WORKFLOWS_MODAL,
@@ -242,6 +243,9 @@ export default function (state = INITIAL_STATE, action) {
       return { ...state, processModalOpen: true, process: action.process }
     case CLOSE_PROCESS_MODAL:
       return { ...state, processModalOpen: false }
+
+    case SHOW_DEVICE_CPU_PROCESS_MODAL:
+      return { ...state, cpuProcessModalOpen: !!action.visible }
 
     case OPEN_DEVICE_EDIT_MODAL:
       return { ...state, openModal: true, editDevice: action.device, updateDeviceError: '' }
