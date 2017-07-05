@@ -49,6 +49,7 @@ export default connect(
     process: state.devices.process,
     processModalOpen: state.devices.processModalOpen,
     cpuProcessModalOpen: state.devices.cpuProcessModalOpen,
+    memProcessModalOpen: state.devices.memProcessModalOpen,
 
     monitorHistoryModalOpen: state.devices.monitorHistoryModalOpen,
     selectedMonitor: state.devices.selectedMonitor,

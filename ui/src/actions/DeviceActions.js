@@ -36,6 +36,7 @@ import {
   FETCH_DEVICE_EVENTLOG,
   FETCH_DEVICE_APPS,
   SHOW_DEVICE_CPU_PROCESS_MODAL,
+  SHOW_DEVICE_MEMORY_PROCESS_MODAL,
 
   OPEN_SYS_WORKFLOWS_MODAL,
   CLOSE_SYS_WORKFLOWS_MODAL,
@@ -457,6 +458,12 @@ export const fetchDeviceApps = () => {
 export const showDeviceCpuProcessModal = (visible) => {
   return dispatch => {
     dispatch({type: SHOW_DEVICE_CPU_PROCESS_MODAL, visible})
+  }
+}
+
+export const showDeviceMemoryProcessModal = (visible) => {
+  return dispatch => {
+    dispatch({type: SHOW_DEVICE_MEMORY_PROCESS_MODAL, visible})
   }
 }
 
