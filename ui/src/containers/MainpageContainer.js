@@ -151,6 +151,10 @@ class MainpageContainer extends Component {
     })
 
     const incident = msg.latestincident || {}
+
+    const {lastIncidentMsg} = this.props
+    if (lastIncidentMsg && lastIncidentMsg.incident.id === incident.id) return
+
     const device = incident.devicename
     const time = moment(incident.startTimestamp || new Date()).format('HH:mm:ss')
     this.props.updateNewIncidentMsg({
@@ -194,6 +198,7 @@ export default connect((state) => {
     apiError: state.dashboard.apiError,
 
     newIncidentMsg: state.dashboard.newIncidentMsg,
+    lastIncidentMsg: state.dashboard.lastIncidentMsg,
 
     activationModalOpen: state.auth.activationModalOpen,
     activationMsg: state.auth.activationMsg,

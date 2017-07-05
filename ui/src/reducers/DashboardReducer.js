@@ -248,8 +248,10 @@ export default function (state = initialState, action) {
     case ADD_DASHBOARD_INCIDENT:
       return { ...state, mainIncidentDraw: state.mainIncidentDraw + 1 }
 
-    case UPDATE_NEW_INCIDENT_MSG:
-      return { ...state, newIncidentMsg: action.msg }
+    case UPDATE_NEW_INCIDENT_MSG: {
+      const  lastIncidentMsg = state.newIncidentMsg || state.lastIncidentMsg
+      return {...state, lastIncidentMsg, newIncidentMsg: action.msg}
+    }
 
     case UPDATE_MAP_DEVICE_STATUS: {
       const mapDevices = state.mapDevices.map(u => {
