@@ -1,6 +1,9 @@
 import React from 'react'
 
 class CpuTable extends React.Component {
+  onClickCPU () {
+
+  }
   buildProgress (val) {
     let color = 'red'
     if (val < 70) color = 'green'
@@ -29,7 +32,7 @@ class CpuTable extends React.Component {
   }
   render () {
     return (
-      <div className="inline-block valign-top">
+      <div className="inline-block valign-top" onClick={this.onClickCPU.bind(this)}>
         {this.renderContent()}
       </div>
     )
