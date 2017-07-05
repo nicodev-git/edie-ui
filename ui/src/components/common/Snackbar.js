@@ -49,6 +49,7 @@ export default class IncidentSnackbar extends React.Component {
           onActionTouchTap={this.onClickAlert}
           onRequestClose={keep ? this.fnEmpty : null}
         />
+        <span className="hidden">{newIncidentMsg.incident.id}</span>
       </a>
     )
   }
