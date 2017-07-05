@@ -56,7 +56,7 @@ export default class MemoryProcessModal extends React.Component {
   }
 
   onClickClose () {
-    this.props.showDeviceCpuProcessModal(false)
+    this.props.showDeviceMemoryProcessModal(false)
   }
   renderTable () {
     const data = [...this.props.processes]
