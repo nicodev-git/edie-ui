@@ -1,6 +1,8 @@
 import React from 'react'
 import CpuProcessModalView from './CpuProcessModalView'
 
+import InfiniteTable from 'components/common/InfiniteTable'
+
 export default class CpuProcessModal extends React.Component {
   constructor (props) {
     super(props)
@@ -30,10 +32,25 @@ export default class CpuProcessModal extends React.Component {
   onClickClose () {
     this.props.showDeviceCpuProcessModal(false)
   }
+  renderTable () {
+    return (
+      <InfiniteTable
+        cells={this.columns}
+        ref="table"
+        rowMetadata={{'key': 'Id'}}
+        selectable
+        rowHeight={40}
+
+        useExternal={false}
+        data={this.props.processes}
+      />
+    )
+  }
   render () {
     return (
       <CpuProcessModalView
         onHide={this.onClickClose.bind(this)}
+        table={this.renderTable()}
       />
     )
   }
