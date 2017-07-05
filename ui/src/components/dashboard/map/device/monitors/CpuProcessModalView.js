@@ -5,7 +5,7 @@ export default class CpuProcessModalView extends React.Component {
   render () {
     const {table, onHide} = this.props
     return (
-      <Dialog open title="Process" onRequestClose={onHide} contentStyle={{width: 800}}>
+      <Dialog open title="Process" onRequestClose={onHide} contentStyle={{width: 900}}>
         <div style={{height: 300, overflow: 'auto'}}>
           {table}
         </div>

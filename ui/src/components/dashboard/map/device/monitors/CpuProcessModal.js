@@ -10,6 +10,10 @@ export default class CpuProcessModal extends React.Component {
     this.state = {
     }
     this.columns = [{
+      'displayName': 'Cpu',
+      'columnName': 'Cpu',
+      'cssClassName': 'width-60'
+    },{
       'displayName': 'Name',
       'columnName': 'Filename',
       'cssClassName': 'width-180'
@@ -17,10 +21,6 @@ export default class CpuProcessModal extends React.Component {
       'displayName': 'Id',
       'columnName': 'Id',
       'cssClassName': 'width-80'
-    }, {
-      'displayName': 'Owner',
-      'columnName': 'Owner',
-      'cssClassName': 'width-220'
     }, {
       'displayName': 'Parent',
       'columnName': 'Parent',
@@ -59,6 +59,12 @@ export default class CpuProcessModal extends React.Component {
     this.props.showDeviceCpuProcessModal(false)
   }
   renderTable () {
+    const data = [...this.props.processes]
+    data.sort((a, b) => {
+      if (a.Cpu > b.Cpu) return -1
+      if (a.Cpu < b.Cpu) return 1
+      return 0
+    })
     return (
       <InfiniteTable
         cells={this.columns}
@@ -68,7 +74,7 @@ export default class CpuProcessModal extends React.Component {
         rowHeight={40}
         bodyHeight={300}
         useExternal={false}
-        data={this.props.processes}
+        data={data}
       />
     )
   }
