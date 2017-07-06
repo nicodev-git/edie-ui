@@ -15,7 +15,9 @@ export default class Info extends React.Component {
       device: loc.device
     }
   }
+  componentWillMount () {
 
+  }
   onFinish (params) {
     const device = assign({}, this.props.device, params)
     this.props.updateMapDevice(device)

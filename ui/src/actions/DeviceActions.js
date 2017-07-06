@@ -99,6 +99,8 @@ import {
   SHOW_DEVICE_TAG_MODAL,
   UPDATE_DEVICE_TAGS,
 
+  UPDATE_DEVICE_CREDS,
+
   UPDATE_MONITOR_QUERY,
   UPDATE_DEVICE_APP_TAB,
 
@@ -1013,5 +1015,11 @@ export function updateMonitorQuery (query) {
 export function updateDeviceAppTab (tab) {
   return dispatch => {
     dispatch({type: UPDATE_DEVICE_APP_TAB, tab})
+  }
+}
+
+export function updateDeviceCreds (creds) {
+  return dispatch => {
+    dispatch({type: UPDATE_DEVICE_CREDS, creds})
   }
 }

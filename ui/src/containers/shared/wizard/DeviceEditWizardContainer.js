@@ -8,7 +8,9 @@ import {
   uploadImage,
 
   showDeviceTagModal,
-  updateDeviceTags
+  updateDeviceTags,
+
+  updateDeviceCreds
 } from 'actions'
 
 class DeviceEditWizardContainer extends React.Component {
@@ -65,7 +67,8 @@ export default connect(
     images: state.dashboard.images,
 
     deviceTagModalOpen: state.devices.deviceTagModalOpen,
-    deviceTags: state.devices.deviceTags
+    deviceTags: state.devices.deviceTags,
+    deviceCreds: state.devices.deviceCreds
   }), {
     openTplImageModal,
     closeTplImageModal,
@@ -73,6 +76,8 @@ export default connect(
     uploadImage,
 
     showDeviceTagModal,
-    updateDeviceTags
+    updateDeviceTags,
+
+    updateDeviceCreds
   }
 )(DeviceEditWizardContainer)

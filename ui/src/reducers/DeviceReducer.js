@@ -95,6 +95,8 @@ import {
   UPDATE_MONITOR_QUERY,
   UPDATE_DEVICE_APP_TAB,
 
+  UPDATE_DEVICE_CREDS,
+
   UPDATE_DEVICE_ERROR
 } from 'actions/types'
 
@@ -120,6 +122,7 @@ const INITIAL_STATE = {
   monitorWizardVisible: false,
   monitorTags: [],
   deviceTags: [],
+  deviceCreds: [],
 
   basicMonitors: [],
   monitors: [],
@@ -411,6 +414,8 @@ export default function (state = INITIAL_STATE, action) {
       return { ...state, monitorQuery: action.query }
     case UPDATE_DEVICE_APP_TAB:
       return { ...state, deviceAppTab: action.tab }
+    case UPDATE_DEVICE_CREDS:
+      return { ...state, deviceCreds: action.creds }
   }
   return state
 }

@@ -286,7 +286,6 @@ class DeviceEditWizard extends React.Component {
                     </ContentPanel>
                   ))
                 }
-
                 <ContentPanel title="Credentials" width={12}>
                   {this.buildCredentials()}
                 </ContentPanel>
