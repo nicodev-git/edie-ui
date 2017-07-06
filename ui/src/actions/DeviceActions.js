@@ -100,6 +100,7 @@ import {
   UPDATE_DEVICE_TAGS,
 
   UPDATE_DEVICE_CREDS,
+  SHOW_DEVICE_CREDS_PICKER,
 
   UPDATE_MONITOR_QUERY,
   UPDATE_DEVICE_APP_TAB,
@@ -1021,5 +1022,11 @@ export function updateDeviceAppTab (tab) {
 export function updateDeviceCreds (creds) {
   return dispatch => {
     dispatch({type: UPDATE_DEVICE_CREDS, creds})
+  }
+}
+
+export function showDeviceCredsPicker (visible) {
+  return dispatch => {
+    dispatch({type: SHOW_DEVICE_CREDS_PICKER, visible})
   }
 }

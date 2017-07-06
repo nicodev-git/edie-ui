@@ -96,6 +96,7 @@ import {
   UPDATE_DEVICE_APP_TAB,
 
   UPDATE_DEVICE_CREDS,
+  SHOW_DEVICE_CREDS_PICKER,
 
   UPDATE_DEVICE_ERROR
 } from 'actions/types'
@@ -416,6 +417,8 @@ export default function (state = INITIAL_STATE, action) {
       return { ...state, deviceAppTab: action.tab }
     case UPDATE_DEVICE_CREDS:
       return { ...state, deviceCreds: action.creds }
+    case SHOW_DEVICE_CREDS_PICKER:
+      return { ...state, deviceCredsPickerVisible: !!action.visible }
   }
   return state
 }
