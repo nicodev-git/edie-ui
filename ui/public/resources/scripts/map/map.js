@@ -1503,6 +1503,7 @@ var mapObject = {
 
     var z = Math.min(px, py);
 
+    if (z > 1 && z < 1.5) z = 1
     if (z > 3) z = 3;
 
     me.changeZoom(z, {
