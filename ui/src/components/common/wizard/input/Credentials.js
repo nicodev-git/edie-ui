@@ -6,18 +6,17 @@ import { TwoButtonsBlockCustom } from 'components/modal/parts'
 
 export default class Credentials extends React.Component {
   componentDidMount () {
-    this.props.selectDeviceCreds(null)
+    this.props.selectDeviceCreds(-1)
   }
   onClickAdd () {
     this.props.showDeviceCredsPicker(true)
   }
   onClickRemove () {
-    const {deviceCreds, selectDeviceCreds} = this.props
-    if (!selectDeviceCreds) return null
-    this.props.updateDeviceCreds(deviceCreds.filter(p => p.id !== selectDeviceCreds.id))
+    const {deviceCreds, selectedDeviceCreds} = this.props
+    this.props.updateDeviceCreds(deviceCreds.filter((p, i) => i !== selectedDeviceCreds))
   }
   onCloseCredPicker (selected) {
-    const {deviceCreds} = this.props
+    const {deviceCreds} = thnpis.props
     if (selected) {
       this.props.updateDeviceCreds([...deviceCreds, selected])
     }
@@ -50,8 +49,8 @@ export default class Credentials extends React.Component {
             {deviceCreds.map((p, i) =>
               <tr
                 key={i}
-                className={selectedDeviceCreds && selectedDeviceCreds.id === p.id ? 'selected' : ''}
-                onClick={() => selectDeviceCreds(p)}>
+                className={selectedDeviceCreds === i ? 'selected' : ''}
+                onClick={() => selectDeviceCreds(i)}>
                 <td>{p.name}</td>
                 <td>{p.description}</td>
                 <td>{p.username}</td>
