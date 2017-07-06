@@ -50,7 +50,7 @@ export default class WorkflowStep3 extends Component {
             <tbody>
             {
               actions.map((a, index) =>
-                <tr key={a.name} className={selected === index ? 'selected' : ''} onClick={onActionClick.bind(this, index)}>
+                <tr key={index} className={selected === index ? 'selected' : ''} onClick={onActionClick.bind(this, index)}>
                   <td>{a.name}</td>
                   <td>{a.actionType}</td>
                 </tr>

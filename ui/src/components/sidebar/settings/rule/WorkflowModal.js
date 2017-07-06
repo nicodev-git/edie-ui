@@ -19,7 +19,8 @@ class WorkflowModal extends React.Component { // eslint-disable-line react/no-mu
       current: 1,
       rules,
       selectedRuleIndex: -1,
-      actions: props.editWorkflow ? (props.editWorkflow.actions || []) : WorkflowActionTypes,
+      actions: props.editWorkflow ? (props.editWorkflow.actions || [])
+        : WorkflowActionTypes.map(p => ({name: p.label, actionType: p.value})),
       selectedActionIndex: -1,
       diagram: props.editWorkflow ? props.editWorkflow.flowchart : ''
     }
