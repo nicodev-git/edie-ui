@@ -11,7 +11,8 @@ import {
   updateDeviceTags,
 
   updateDeviceCreds,
-  showDeviceCredsPicker
+  showDeviceCredsPicker,
+  selectDeviceCreds
 } from 'actions'
 
 class DeviceEditWizardContainer extends React.Component {
@@ -70,7 +71,8 @@ export default connect(
     deviceTagModalOpen: state.devices.deviceTagModalOpen,
     deviceTags: state.devices.deviceTags,
     deviceCreds: state.devices.deviceCreds,
-    deviceCredsPickerVisible: state.devices.deviceCredsPickerVisible
+    deviceCredsPickerVisible: state.devices.deviceCredsPickerVisible,
+    selectedDeviceCreds: state.devices.selectedDeviceCreds
   }), {
     openTplImageModal,
     closeTplImageModal,
@@ -81,6 +83,7 @@ export default connect(
     updateDeviceTags,
 
     updateDeviceCreds,
-    showDeviceCredsPicker
+    showDeviceCredsPicker,
+    selectDeviceCreds
   }
 )(DeviceEditWizardContainer)

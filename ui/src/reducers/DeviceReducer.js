@@ -97,6 +97,7 @@ import {
 
   UPDATE_DEVICE_CREDS,
   SHOW_DEVICE_CREDS_PICKER,
+  SELECT_DEVICE_CREDS,
 
   UPDATE_DEVICE_ERROR
 } from 'actions/types'
@@ -419,6 +420,8 @@ export default function (state = INITIAL_STATE, action) {
       return { ...state, deviceCreds: action.creds }
     case SHOW_DEVICE_CREDS_PICKER:
       return { ...state, deviceCredsPickerVisible: !!action.visible }
+    case SELECT_DEVICE_CREDS:
+      return { ...state, selectedDeviceCreds: action.creds }
   }
   return state
 }
