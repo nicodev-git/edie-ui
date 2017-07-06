@@ -5,10 +5,16 @@ import CredPicker from 'containers/settings/credentials/CredsPickerContainer'
 import { TwoButtonsBlockCustom } from 'components/modal/parts'
 
 export default class Credentials extends React.Component {
+  componentDidMount () {
+    this.props.selectDeviceCreds(null)
+  }
   onClickAdd () {
     this.props.showDeviceCredsPicker(true)
   }
   onClickRemove () {
+    const {deviceCreds, selectDeviceCreds} = this.props
+    if (!selectDeviceCreds) return null
+    this.props.updateDeviceCreds(deviceCreds.filter(p => p.id !== selectDeviceCreds.id))
   }
   onCloseCredPicker (selected) {
     const {deviceCreds} = this.props
@@ -24,7 +30,7 @@ export default class Credentials extends React.Component {
     )
   }
   render () {
-    const {deviceCreds} = this.props
+    const {deviceCreds, selectedDeviceCreds, selectDeviceCreds} = this.props
     return (
       <div>
         <div className="padding-md-top">
@@ -34,15 +40,18 @@ export default class Credentials extends React.Component {
         <div>
           <table className="table table-hover">
             <thead>
-            <tr>
-              <th>Name</th>
-              <th>Description</th>
-              <th>User</th>
-            </tr>
+              <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>User</th>
+              </tr>
             </thead>
             <tbody>
             {deviceCreds.map((p, i) =>
-              <tr key={i}>
+              <tr
+                key={i}
+                className={selectedDeviceCreds && selectedDeviceCreds.id === p.id ? 'selected' : ''}
+                onClick={() => selectDeviceCreds(p)}>
                 <td>{p.name}</td>
                 <td>{p.description}</td>
                 <td>{p.username}</td>
