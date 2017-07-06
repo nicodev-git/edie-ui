@@ -262,7 +262,7 @@ export default class MonitorTable extends Component {
         <InfiniteTable
           cells={this.columns}
           ref="table"
-          rowMetadata={{'key': 'name'}}
+          rowMetadata={{'key': 'uid'}}
           selectable
           onRowDblClick={this.onRowDblClick.bind(this)}
 
