@@ -1517,7 +1517,7 @@ var mapObject = {
     var c = me.canvas;
 
     c.setZoom(z);
-
+    console.log('Zoom: ' + z);
     ///////////////////////////////
 
     $.each(me.objects, function(i, object){
