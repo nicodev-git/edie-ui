@@ -2,15 +2,18 @@ import React from 'react'
 import {RaisedButton} from 'material-ui'
 import CredPicker from 'containers/settings/credentials/CredsPickerContainer'
 
+import { TwoButtonsBlockCustom } from 'components/modal/parts'
+
 export default class Credentials extends React.Component {
   onClickAdd () {
+    this.props.showDeviceCredsPicker(true)
   }
   onClickRemove () {
   }
   onCloseCredPicker () {
   }
   renderPicker () {
-    if (!this.props.credPickerVisible) return null
+    if (!this.props.deviceCredsPickerVisible) return null
     return (
       <CredPicker onClose={this.onCloseCredPicker.bind(this)}/>
     )
@@ -43,6 +46,7 @@ export default class Credentials extends React.Component {
             </tbody>
           </table>
         </div>
+        {this.renderPicker()}
       </div>
     )
   }

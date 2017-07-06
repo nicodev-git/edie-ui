@@ -7,6 +7,8 @@ import {
   OPEN_CREDENTIALS_MODAL,
   CLOSE_CREDENTIALS_MODAL,
 
+  SELECT_CREDS,
+
   NO_AUTH_ERROR
 } from './types'
 
@@ -102,5 +104,11 @@ export const closeCredentialsModal = () => {
     dispatch({
       type: CLOSE_CREDENTIALS_MODAL
     })
+  }
+}
+
+export const selectCreds = (creds) => {
+  return dispatch => {
+    dispatch({type: SELECT_CREDS, creds})
   }
 }

@@ -254,7 +254,7 @@ class DeviceEditWizard extends React.Component {
   }
   buildCredentials () {
     return (
-      <Credentials device={this.props.initialValues} deviceCreds={this.props.deviceCreds}/>
+      <Credentials {...this.props}/>
     )
   }
 

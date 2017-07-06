@@ -49,6 +49,7 @@ import {
   REMOVE_CREDENTIALS,
   OPEN_CREDENTIALS_MODAL,
   CLOSE_CREDENTIALS_MODAL,
+  SELECT_CREDS,
 
   FETCH_WORKFLOWS,
   ADD_WORKFLOW,
@@ -333,6 +334,9 @@ export default function (state = initialState, action) {
     case CLOSE_CREDENTIALS_MODAL: {
       return { ...state, credentialsModalVisible: false }
     }
+
+    case SELECT_CREDS:
+      return { ...state, selectedCreds: action.creds }
 
         // ///////////////////////////////////////////////////
 

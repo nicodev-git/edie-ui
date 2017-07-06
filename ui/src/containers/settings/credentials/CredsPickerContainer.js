@@ -3,7 +3,8 @@ import CredPicker from 'components/sidebar/settings/credentials/CredPicker'
 import { connect } from 'react-redux'
 
 import {
-  fetchCredentials
+  fetchCredentials,
+  selectCreds
 } from 'actions'
 
 class CredsPickerContainer extends React.Component {
@@ -15,8 +16,10 @@ class CredsPickerContainer extends React.Component {
 }
 export default connect(
   state => ({
-    credentials: state.settings.credentials
+    credentials: state.settings.credentials,
+    selectedCreds: state.settings.selectedCreds
   }), {
-    fetchCredentials
+    fetchCredentials,
+    selectCreds
   }
 )(CredsPickerContainer)
