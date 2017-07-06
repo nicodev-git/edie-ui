@@ -78,16 +78,27 @@ class MapCanvas extends React.Component {
         this.state.cmap.setHidden(nextProps.hidden)
       }
 
-      if (JSON.stringify(nextProps.mapDevices) !== JSON.stringify(this.currentMapDevices) ||
-        JSON.stringify(nextProps.mapLines) !== JSON.stringify(this.currentMapLines)) {
-                // Cancel when device adding
+      const deviceUpdated = JSON.stringify(nextProps.mapDevices) !== JSON.stringify(this.currentMapDevices)
+      const linesUpdated = JSON.stringify(nextProps.mapLines) !== JSON.stringify(this.currentMapLines)
+      if (deviceUpdated || linesUpdated) {
+        // Cancel when device adding
         if (this.state.cmap.editable) return
 
-                // Cancel when map changed;
-        console.log('Map needs to update.')
-        this.drawMap(nextProps.mapDevices, nextProps.mapLines, this.currentMapDevices, this.currentMapLines, true, () => {
-          console.log('Map updated.')
-        })
+        let updateDeviceDataOnly = false;
+        if (!linesUpdated) {
+          if (this.getDevicePositionJson(nextProps.mapDevices) == this.getDevicePositionJson(this.currentMapDevices)) {
+            updateDeviceDataOnly = true
+          }
+        }
+        if (updateDeviceDataOnly) {
+          console.log('Map needs to update data only.')
+          this.updateMapDeviceData(nextProps.mapDevices, this.currentMapDevices)
+        } else {
+          console.log('Map needs to update.')
+          this.drawMap(nextProps.mapDevices, nextProps.mapLines, this.currentMapDevices, this.currentMapLines, true, () => {
+            console.log('Map updated.')
+          })
+        }
 
         this.currentMapDevices = nextProps.mapDevices
         this.currentMapLines = nextProps.mapLines
@@ -97,6 +108,14 @@ class MapCanvas extends React.Component {
 
   componentWillUnmount () {
     window.removeEventListener('resize', this.updateDimensions)
+  }
+
+  getDevicePositionJson (mapDevices) {
+    //exclude non-position props
+    return JSON.stringify(mapDevices.map(d => ({
+      ...d,
+      monitors: ''
+    })))
   }
 
   updateDimensions () {
@@ -229,7 +248,6 @@ class MapCanvas extends React.Component {
   }
 
     // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
   drawMap (deviceData, lineData, prevDeviceData, prevLineData, force, callback) {
     let cmap = this.state.cmap
     if (!cmap) {
@@ -271,17 +289,17 @@ class MapCanvas extends React.Component {
     // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   isEqualDevices (dev1, dev2) {
-    let equal = 0
-    $.each(dev1, (key, value) => { // eslint-disable-line no-undef
-      if (JSON.stringify(value) !== JSON.stringify(dev2[key])) {
-        if (key === 'monitors') {
-          equal = 1
-        } else {
-          equal = 2
-          return false
-        }
-      }
-    })
+    let equal = JSON.stringify(dev1) == JSON.stringify(dev2)
+    // $.each(dev1, (key, value) => { // eslint-disable-line no-undef
+    //   if (JSON.stringify(value) !== JSON.stringify(dev2[key])) {
+    //     if (key === 'monitors') {
+    //       equal = 1
+    //     } else {
+    //       equal = 2
+    //       return false
+    //     }
+    //   }
+    // })
 
     return equal
   }
@@ -293,6 +311,36 @@ class MapCanvas extends React.Component {
   }
 
     // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  updateMapDeviceData (deviceData, prevDeviceData) {
+    const cmap = this.state.cmap
+    if (!cmap) {
+      console.log('MapCanvas not initialized yet.')
+      return
+    }
+    deviceData.forEach(device => {
+      // Check for new devices
+      // Find if already exists
+      let index = findIndex(prevDeviceData, { id: device.id })
+      let existingDevice = index >= 0 ? prevDeviceData[index] : null// findOneBy(device.id, prevDeviceData, 'id');
+
+      if (existingDevice) {
+        if (this.isNewDevice(existingDevice)) return
+
+        // Update
+        if (!this.isEqualDevices(device, existingDevice)) {
+          this.updateMapItem(cmap, device)
+
+          const mapObject = cmap.findObject(device.id)
+          if (mapObject) {
+            mapObject.set({
+              data: device
+            })
+          }
+        }
+      }
+    })
+  }
 
   updateMapDevices (cmap, deviceData, prevDeviceData) {
     let existingDevices = []
@@ -307,9 +355,8 @@ class MapCanvas extends React.Component {
         if (this.isNewDevice(existingDevice)) return
 
                 // Update
-        const equalStatus = this.isEqualDevices(device, existingDevice)
-        if (equalStatus != 0) {
-          this.updateMapItem(cmap, device, equalStatus)
+        if (!this.isEqualDevices(device, existingDevice)) {
+          this.updateMapItem(cmap, device)
         }
       } else if (!cmap.findObject(device.id)) {
                 // Add
@@ -594,7 +641,7 @@ class MapCanvas extends React.Component {
     }
   }
 
-  updateMapItem (cmap, device, equalStatus) {
+  updateMapItem (cmap, device) {
     let deviceid = device.id
     let devicetype = getDeviceType(device.templateName)
     let devname = device.name
@@ -614,12 +661,12 @@ class MapCanvas extends React.Component {
     let mapObject = cmap.findObject(deviceid)
     if (!mapObject) return
 
-    if (equalStatus == 1) {
+    /*if (equalStatus == 1) {
       mapObject.set({
         data: device
       })
       return
-    }
+    }*/
 
     let propsEntity = JSON.parse(device.json || '[]') || []
 
