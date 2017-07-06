@@ -5,18 +5,8 @@ import DeviceEditWizardContainer from 'containers/shared/wizard/DeviceEditWizard
 import { deviceTypeMap } from 'components/common/wizard/WizardConfig'
 
 export default class Info extends React.Component {
-  constructor (props) {
-    super(props)
-
-    const { location } = props
-    const loc = location.state || {}
-
-    this.state = {
-      device: loc.device
-    }
-  }
-  componentWillMount () {
-
+  componentDidMount () {
+    this.props.updateDeviceCreds(this.props.device.credentials || [])
   }
   onFinish (params) {
     const device = assign({}, this.props.device, params)
