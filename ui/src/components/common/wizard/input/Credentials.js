@@ -16,7 +16,7 @@ export default class Credentials extends React.Component {
     this.props.updateDeviceCreds(deviceCreds.filter((p, i) => i !== selectedDeviceCreds))
   }
   onCloseCredPicker (selected) {
-    const {deviceCreds} = thnpis.props
+    const {deviceCreds} = this.props
     if (selected) {
       this.props.updateDeviceCreds([...deviceCreds, selected])
     }
