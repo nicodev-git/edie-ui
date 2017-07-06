@@ -9,6 +9,7 @@ import SettingIdentitiesContainer from 'containers/settings/identity/IdentitiesC
 import SettingAdvancedContainer from 'containers/settings/advanced/AdvancedContainer'
 import SettingTags from 'components/sidebar/settings/tag/TagRoutes'
 import SettingUsers from 'components/sidebar/settings/users/UserRoutes'
+import SettingCreds from 'containers/settings/settings/credentials/CredentialsContainer'
 
 class Settings extends React.Component {
   render () {
@@ -20,6 +21,7 @@ class Settings extends React.Component {
         <Route path="/settings/maps" component={SettingMapsContainer} />
         <Route path="/settings/users" component={SettingUsers}/>
         <Route path="/settings/identities" component={SettingIdentitiesContainer} />
+        <Route path="/settings/creds" component={SettingCreds} />
         <Route path="/settings/advanced" component={SettingAdvancedContainer} />
       </Switch>
     )
