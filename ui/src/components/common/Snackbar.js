@@ -17,6 +17,10 @@ export default class IncidentSnackbar extends React.Component {
     this.onClickAlert = this.onClickAlert.bind(this)
 
     this.searchIcon = <SearchIcon color="white" style={searchIconStyle}/>
+    this.onSnackClose = this.onSnackClose.bind(this)
+  }
+  onSnackClose (reason) {
+    console.log(reason)
   }
   onClickAlert () {
     const {incident} = this.props.newIncidentMsg
@@ -45,9 +49,9 @@ export default class IncidentSnackbar extends React.Component {
           open
           action={this.searchIcon}
           message={newIncidentMsg.message}
-          autoHideDuration={8000}
+          autoHideDuration={3600000 * 24 * 7}
           onActionTouchTap={this.onClickAlert}
-          onRequestClose={keep ? this.fnEmpty : null}
+          onRequestClose={this.onSnackClose}
         />
         <span className="hidden">{newIncidentMsg.incident.id}</span>
       </a>
