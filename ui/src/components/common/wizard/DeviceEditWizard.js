@@ -258,7 +258,13 @@ class DeviceEditWizard extends React.Component {
       <Credentials {...this.props}/>
     )
   }
-
+  onClickInstall () {
+  }
+  renderInstallAgent () {
+    return (
+      <RaisedButton label="Install Agent" onTouchTap={this.onClickInstall.bind(this)}/>
+    )
+  }
   renderTplImageModal () {
     if (!this.props.tplImageModalVisible) return null
     return (
@@ -273,7 +279,8 @@ class DeviceEditWizard extends React.Component {
           <div className="tab-options">
             <div className="margin-md-right margin-md-top"
               style={{position: 'absolute', top: '40px', right: '20px'}}>
-              <RaisedButton id="submitButton" type="submit" label="Save"/>
+              <RaisedButton id="submitButton" type="submit" label="Save"/>&nbsp;
+              {this.renderInstallAgent()}
             </div>
           </div>
 
