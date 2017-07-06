@@ -1,6 +1,7 @@
 import React from 'react'
 import { assign, debounce } from 'lodash'
 import { reduxForm, Form } from 'redux-form'
+import RaisedButton from 'material-ui/RaisedButton'
 
 import { wizardEditConfig } from './WizardConfig'
 import { util } from './WizardUtil'
@@ -12,7 +13,7 @@ import Password from './input/Password'
 import RadioCombo from './input/RadioCombo'
 import Checkbox from './input/Checkbox'
 import IconUploader from './input/IconUploader'
-import RaisedButton from 'material-ui/RaisedButton'
+import Credentials from './input/Credentials'
 
 import ImageUploaderModal from 'components/sidebar/settings/template/ImageUploaderModal'
 import ContentPanel from './ContentPanel'
@@ -251,6 +252,12 @@ class DeviceEditWizard extends React.Component {
   buildForm (config) {
     return null
   }
+  buildCredentials () {
+    return (
+      <Credentials device={this.props.initialValues}/>
+    )
+  }
+
   renderTplImageModal () {
     if (!this.props.tplImageModalVisible) return null
     return (
@@ -279,6 +286,10 @@ class DeviceEditWizard extends React.Component {
                     </ContentPanel>
                   ))
                 }
+
+                <ContentPanel title="Credentials" width={12}>
+                  {this.buildCredentials()}
+                </ContentPanel>
               </div>
               {this.renderTplImageModal()}
             </div>

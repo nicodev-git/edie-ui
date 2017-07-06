@@ -48,11 +48,11 @@ DeviceEditWizard.defaultProps = {
       title: 'Template Name'
     }],
     width: 4
-  }, {
+  }/*, {
     title: 'Credentials',
-    include: ['credentialid'],
+    include: ['credentials'],
     width: 12
-  }]
+  }*/]
 }
 
 export default connect(
