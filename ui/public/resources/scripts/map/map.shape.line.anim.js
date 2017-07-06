@@ -48,7 +48,7 @@ fabric.ShapeLineAnim = fabric.util.createClass(fabric.Object, {
     var me = this;
     me.animInterval = setInterval(function() {
       me.onPlay();
-    }, 10);
+    }, 200);
   },
 
   stop: function() {
@@ -77,8 +77,8 @@ fabric.ShapeLineAnim = fabric.util.createClass(fabric.Object, {
       }
     }
 
-    var spd = 1.5;
-    var sign = 1;
+    var spd = 5;
+    var sign = 10;
 
     if (line.x1 == line.x2) {
       sign = (line.y1 - line.y2) / Math.abs(line.y1 - line.y2) * spd;
