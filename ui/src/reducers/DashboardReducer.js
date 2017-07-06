@@ -192,7 +192,7 @@ export default function (state = initialState, action) {
         if (u.id === action.data.id) return action.data
         return u
       })
-      return { ...state, incidents }
+      return { ...state, incidents, mainIncidentDraw: state.mainIncidentDraw + 1 }
     }
 
     case UPDATE_BIGINCIDENTS_PARAMS: {
