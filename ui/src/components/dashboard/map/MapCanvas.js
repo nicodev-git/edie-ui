@@ -271,11 +271,15 @@ class MapCanvas extends React.Component {
     // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   isEqualDevices (dev1, dev2) {
-    let equal = true
+    let equal = 0
     $.each(dev1, (key, value) => { // eslint-disable-line no-undef
-      if (value !== dev2[key]) {
-        equal = false
-        return false
+      if (JSON.stringify(value) !== JSON.stringify(dev2[key])) {
+        if (key === 'monitors') {
+          equal = 1
+        } else {
+          equal = 2
+          return false
+        }
       }
     })
 
@@ -303,8 +307,9 @@ class MapCanvas extends React.Component {
         if (this.isNewDevice(existingDevice)) return
 
                 // Update
-        if (!this.isEqualDevices(device, existingDevice)) {
-          this.updateMapItem(cmap, device)
+        const equalStatus = this.isEqualDevices(device, existingDevice)
+        if (equalStatus != 0) {
+          this.updateMapItem(cmap, device, equalStatus)
         }
       } else if (!cmap.findObject(device.id)) {
                 // Add
@@ -589,7 +594,7 @@ class MapCanvas extends React.Component {
     }
   }
 
-  updateMapItem (cmap, device) {
+  updateMapItem (cmap, device, equalStatus) {
     let deviceid = device.id
     let devicetype = getDeviceType(device.templateName)
     let devname = device.name
@@ -608,6 +613,13 @@ class MapCanvas extends React.Component {
 
     let mapObject = cmap.findObject(deviceid)
     if (!mapObject) return
+
+    if (equalStatus == 1) {
+      mapObject.set({
+        data: device
+      })
+      return
+    }
 
     let propsEntity = JSON.parse(device.json || '[]') || []
 
