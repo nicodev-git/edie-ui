@@ -10,7 +10,12 @@ export default class Credentials extends React.Component {
   }
   onClickRemove () {
   }
-  onCloseCredPicker () {
+  onCloseCredPicker (selected) {
+    const {deviceCreds} = this.props
+    if (selected) {
+      this.props.updateDeviceCreds([...deviceCreds, selected])
+    }
+    this.props.showDeviceCredsPicker(false)
   }
   renderPicker () {
     if (!this.props.deviceCredsPickerVisible) return null

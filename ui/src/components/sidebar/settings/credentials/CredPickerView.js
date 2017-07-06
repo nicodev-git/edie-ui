@@ -7,7 +7,7 @@ import {chipStyles} from 'style/common/materialStyles'
 
 export default class CredPickerView extends React.Component {
   render () {
-    const {credentials, onHide} = this.props
+    const {credentials, onHide, onClickOK, onSelect, selectedCreds} = this.props
     return (
       <Dialog open title="Credentials" onRequestClose={onHide}>
         <div style={{height: 300, overflow: 'auto'}}>
@@ -21,7 +21,11 @@ export default class CredPickerView extends React.Component {
             </thead>
             <tbody>
             {credentials.map((p, i) =>
-              <tr key={i}>
+              <tr
+                key={i}
+                onClick={() => onSelect(p)}
+                className={selectedCreds && selectedCreds.id === p.id ? 'selected' : ''}
+              >
                 <td>{p.name}</td>
                 <td>{p.description}</td>
                 <td>{p.username}</td>
@@ -30,7 +34,8 @@ export default class CredPickerView extends React.Component {
             </tbody>
           </table>
         </div>
+        <TwoButtonsBlockCustom name1="OK" name2="Cancel" action1={onClickOK} action2={onHide}/>
       </Dialog>
     )
-  }s
+  }
 }

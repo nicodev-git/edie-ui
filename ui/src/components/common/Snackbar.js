@@ -20,7 +20,7 @@ export default class IncidentSnackbar extends React.Component {
     this.onSnackClose = this.onSnackClose.bind(this)
   }
   onSnackClose (reason) {
-    console.log(reason)
+    // console.log(reason)
   }
   onClickAlert () {
     const {incident} = this.props.newIncidentMsg
