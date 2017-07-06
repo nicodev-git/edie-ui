@@ -1,16 +1,25 @@
 import React from 'react'
 import {RaisedButton} from 'material-ui'
+import CredPicker from 'containers/settings/credentials/CredsPickerContainer'
 
 export default class Credentials extends React.Component {
   onClickAdd () {
   }
   onClickRemove () {
   }
+  onCloseCredPicker () {
+  }
+  renderPicker () {
+    if (!this.props.credPickerVisible) return null
+    return (
+      <CredPicker onClose={this.onCloseCredPicker.bind(this)}/>
+    )
+  }
   render () {
     const {deviceCreds} = this.props
     return (
       <div>
-        <div>
+        <div className="padding-md-top">
           <RaisedButton label="Add" onTouchTap={this.onClickAdd.bind(this)}/>&nbsp;
           <RaisedButton label="Remove" onTouchTap={this.onClickRemove.bind(this)}/>
         </div>
