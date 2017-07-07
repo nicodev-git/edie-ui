@@ -110,6 +110,7 @@ import {
 
   SHOW_COLLECTOR_MODAL,
   ADD_COLLECTOR,
+  UPDATE_COLLECTOR,
 
   FETCH_DEVICE_CATEGORIES
 
@@ -495,8 +496,9 @@ export default function (state = initialState, action) {
       return { ...state, monitorTplTags: action.tags || [] }
 
     case SHOW_COLLECTOR_MODAL:
-      return { ...state, collectorModalOpen: !!action.visible, editCollector: action.editor}
+      return { ...state, collectorModalOpen: !!action.visible, editCollector: action.collector}
     case ADD_COLLECTOR:
+    case UPDATE_COLLECTOR:
       return { ...state, collectorDraw: state.collectorDraw + 1 }
   }
   return state

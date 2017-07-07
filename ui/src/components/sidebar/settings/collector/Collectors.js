@@ -10,6 +10,7 @@ import TabPageBody from 'components/common/TabPageBody'
 import TabPageHeader from 'components/common/TabPageHeader'
 
 import CollectorModal from './CollectorModal'
+import {showAlert} from 'components/common/Alert'
 
 export default class Collectors extends React.Component {
   constructor (props) {
@@ -48,8 +49,13 @@ export default class Collectors extends React.Component {
   onClickAdd () {
     this.props.showCollectorModal(true)
   }
+  onClickEdit () {
+    const selected = this.getTable().getSelected()
+    if (!selected) showAlert('Please choose collector.')
+    this.props.showCollectorModal(true, selected)
+  }
   getTable () {
-    return this.refs.credentials
+    return this.refs.table
   }
   renderCollectorModal () {
     if (!this.props.collectorModalOpen) return null
@@ -64,6 +70,7 @@ export default class Collectors extends React.Component {
           <div className="text-center margin-md-top">
             <div className="pull-right">
               <RaisedButton label="Add" onTouchTap={this.onClickAdd.bind(this)}/>&nbsp;
+              <RaisedButton label="Edit" onTouchTap={this.onClickEdit.bind(this)}/>&nbsp;
               <CollectorTabs history={this.props.history}/>
             </div>
           </div>

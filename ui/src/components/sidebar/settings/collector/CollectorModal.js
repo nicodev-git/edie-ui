@@ -11,7 +11,10 @@ class CollectorModal extends React.Component {
   handleFormSubmit (values) {
     const {editCollector} = this.props
     if (editCollector) {
-
+      this.props.updateCollector({
+        ...editCollector,
+        ...values
+      })
     } else {
       this.props.addCollector(values)
     }

@@ -66,6 +66,7 @@ import {
 
   SHOW_COLLECTOR_MODAL,
   ADD_COLLECTOR,
+  UPDATE_COLLECTOR,
 
   NO_AUTH_ERROR
 } from './types'
@@ -617,6 +618,15 @@ export const addCollector = (props) => {
   return dispatch => {
     axios.post(`${ROOT_URL}/collector`, props).then(({data}) => {
       dispatch({type: ADD_COLLECTOR, data})
+      dispatch(showCollectorModal(false))
+    }).catch(error => apiError(dispatch, error))
+  }
+}
+
+export const updateCollector = (entity) => {
+  return (dispatch) => {
+    axios.put(entity._links.self.href, entity).then(({data}) => {
+      dispatch({type: UPDATE_COLLECTOR, data})
       dispatch(showCollectorModal(false))
     }).catch(error => apiError(dispatch, error))
   }
