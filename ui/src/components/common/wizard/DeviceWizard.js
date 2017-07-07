@@ -134,7 +134,7 @@ class DeviceWizard extends Component {
     return (
       <div key={index} className={`${(index === (this.state.current - 1)) ? ' active' : 'hidden'}`}>
         {items}
-        {index === 0 && canAddTags ? this.renderTags() : null}
+        {index === 1 && canAddTags ? this.renderTags() : null}
       </div>
     )
   }

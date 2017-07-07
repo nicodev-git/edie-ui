@@ -1,4 +1,5 @@
 import React from 'react'
+import { Field } from 'redux-form'
 import { util } from '../WizardUtil'
 
 import {FormSelect} from 'components/modal/parts'
@@ -68,13 +69,13 @@ export default class Combo extends React.Component {
     return (
       <Field
         name={config.name}
-        label={''}
+        label={config.label ? config.label.text : ''}
         component={FormSelect}
         style={config.style}
-        onChange={onChange}
         className={config.cls}
         disabled={config.disabled}
         options={this.comboOptions}
+        defaultValue={this.comboOptions.length ? this.comboOptions[0].value : null}
       />
     )
   }

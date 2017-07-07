@@ -2477,6 +2477,15 @@ export const wizardConfig = {
         }],
         width: MAX_WIDTH,
         name: 'agentType'
+      }, {
+        type: 'combo',
+        label: {
+          text: 'Collector',
+          width: 3
+        },
+        items: [],
+        width: MAX_WIDTH,
+        name: 'collectorId'
       }]
     }, {
       title: 'step 2',
