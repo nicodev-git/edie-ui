@@ -59,8 +59,8 @@ class UserModal extends React.Component {
     let mapOptions = this.renderMapOptions()
     let roleOptions = this.renderRoleOptions()
     let content = [
-      {name: 'Name'},
-      {name: 'Full Name'},
+      {name: 'Name', key: 'username'},
+      {name: 'Full Name', key: 'fullname'},
       {type: 'password', name: 'Password'},
       {name: 'Email'},
       {name: 'Phone'},
