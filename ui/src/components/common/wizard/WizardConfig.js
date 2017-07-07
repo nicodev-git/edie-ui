@@ -2463,6 +2463,24 @@ export const wizardConfig = {
     steps: [{
       title: 'step 1',
       items: [{
+        type: 'combo',
+        label: {
+          text: 'Type',
+          width: 3
+        },
+        items: [{
+          display: 'Collector',
+          value: 'collector'
+        }, {
+          display: 'Agent',
+          value: 'agent'
+        }],
+        width: MAX_WIDTH,
+        name: 'agentType'
+      }]
+    }, {
+      title: 'step 2',
+      items: [{
         type: 'text',
         label: {
           text: 'Name',
@@ -2482,7 +2500,7 @@ export const wizardConfig = {
         },
         name: 'enabled',
         cls: 'margin-md-top margin-md-bottom',
-                // checked: true,
+        // checked: true,
         width: MAX_WIDTH
       }, {
         type: 'paramlist'
