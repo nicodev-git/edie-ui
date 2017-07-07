@@ -1,4 +1,5 @@
 import React from 'react'
+import moment from 'moment'
 
 import InfiniteTable from 'components/common/InfiniteTable'
 
@@ -15,7 +16,10 @@ export default class Audit extends React.Component {
 
     this.cells = [{
       'displayName': 'Time',
-      'columnName': 'time'
+      'columnName': 'time',
+      'customComponent': p => {
+        return <span>{moment(p.data).format('YYYY-MM-DD HH:mm:ss')}</span>
+      }
     }, {
       'displayName': 'IP',
       'columnName': 'ipaddress'
