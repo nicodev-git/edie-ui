@@ -142,7 +142,9 @@ const initialState = {
 
   showTraffic: true,
 
-  monitorTplTags: []
+  monitorTplTags: [],
+
+  collectorDraw: 1
 }
 
 export default function (state = initialState, action) {

@@ -1,6 +1,7 @@
 import React from 'react'
 
 import CollectorTabs from './CollectorTabs'
+import InfiniteTable from 'components/common/InfiniteTable'
 
 import SettingTabs from '../SettingTabs'
 import TabPage from 'components/common/TabPage'
@@ -17,27 +18,29 @@ export default class Collectors extends React.Component {
       'displayName': 'Name',
       'columnName': 'name'
     }, {
-      'displayName': 'Description',
-      'columnName': 'description'
+      'displayName': 'Version',
+      'columnName': 'version'
     }, {
-      'displayName': 'User Name',
-      'columnName': 'username'
+      'displayName': 'Last Seen',
+      'columnName': 'lastSeen'
     }]
   }
-
+  onRowDblClick () {
+  }
   renderContent () {
-    // return (
-    //   <InfiniteTable
-    //     cells={this.cells}
-    //     ref="credentials"
-    //     rowMetadata={{'key': 'id'}}
-    //     selectable
-    //     onRowDblClick={this.onEditCred.bind(this)}
-    //
-    //     useExternal={false}
-    //     data={this.props.credentials}
-    //   />
-    // )
+    return (
+      <InfiniteTable
+        url="/collector"
+        cells={this.cells}
+        ref="table"
+        rowMetadata={{'key': 'id'}}
+        selectable
+        onRowDblClick={this.onRowDblClick.bind(this)}
+        params={{
+          draw: this.props.collectorDraw
+        }}
+      />
+    )
   }
 
   getTable () {

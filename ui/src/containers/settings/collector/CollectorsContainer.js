@@ -1,17 +1,11 @@
 import React from 'react'
-import Collectors from 'components/sidebar/settings/collector/Collectors'
 import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
 import { withRouter } from 'react-router'
 
-import {
-  fetchCredentials,
-  openCredentialsModal,
-  removeCredentials,
+import Collectors from 'components/sidebar/settings/collector/Collectors'
 
-  addCredentials,
-  updateCredentials,
-  closeCredentialsModal
+import {
+  fetchCredentials
 } from 'actions'
 
 class CollectorsContainer extends React.Component {
@@ -23,21 +17,9 @@ class CollectorsContainer extends React.Component {
 }
 export default connect(
   state => ({
-    credentials: state.settings.credentials,
-    credentialsModalVisible: state.settings.credentialsModalVisible,
-
-    editCredentials: state.settings.editCredentials
-  }),
-  dispatch => ({
-    ...bindActionCreators({
-      fetchCredentials,
-      openCredentialsModal,
-      removeCredentials,
-
-      addCredentials,
-      updateCredentials,
-      closeCredentialsModal
-    }, dispatch)
-  })
+    collectorDraw: state.settings.collectorDraw
+  }),{
+    fetchCredentials
+  }
 )(withRouter(CollectorsContainer))
 
