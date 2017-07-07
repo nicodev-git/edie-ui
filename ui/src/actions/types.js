@@ -392,7 +392,11 @@ export const SYNC_DATA = 'SYNC_DATA'
 export const SHOW_IMPORT_SYNC_MODAL = 'SHOW_IMPORT_SYNC_MODAL'
 
 ///////////////////////////////////////////////////////////////
+
 export const SHOW_COLLECTOR_MODAL = 'SHOW_COLLECTOR_MODAL'
+export const ADD_COLLECTOR = 'ADD_COLLECTOR'
+export const UPDATE_COLLECTOR = 'UPDATE_COLLECTOR'
+export const REMOVE_COLLECTOR = 'REMOVE_COLLECTOR'
 
 ///////////////////////////////////////////////////////////////
 

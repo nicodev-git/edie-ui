@@ -109,6 +109,7 @@ import {
   SHOW_IMPORT_SYNC_MODAL,
 
   SHOW_COLLECTOR_MODAL,
+  ADD_COLLECTOR,
 
   FETCH_DEVICE_CATEGORIES
 
@@ -495,6 +496,8 @@ export default function (state = initialState, action) {
 
     case SHOW_COLLECTOR_MODAL:
       return { ...state, collectorModalOpen: !!action.visible, editCollector: action.editor}
+    case ADD_COLLECTOR:
+      return { ...state, collectorDraw: state.collectorDraw + 1 }
   }
   return state
 }

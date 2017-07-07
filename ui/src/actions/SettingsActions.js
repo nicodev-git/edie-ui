@@ -65,6 +65,7 @@ import {
   UPDATE_MONITOR_TPL_TAGS,
 
   SHOW_COLLECTOR_MODAL,
+  ADD_COLLECTOR,
 
   NO_AUTH_ERROR
 } from './types'
@@ -609,5 +610,13 @@ export const updateMonitorTplTags = (tags) => {
 export const showCollectorModal = (visible, collector) => {
   return dispatch => {
     dispatch({type: SHOW_COLLECTOR_MODAL, visible, collector})
+  }
+}
+
+export const addCollector = (props) => {
+  return dispatch => {
+    axios.post(`${ROOT_URL}/collector`, props).then(({data}) => {
+      dispatch({type: ADD_COLLECTOR, data})
+    }).catch(error => apiError(dispatch, error))
   }
 }
