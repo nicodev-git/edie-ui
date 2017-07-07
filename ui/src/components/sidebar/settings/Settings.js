@@ -10,7 +10,7 @@ import SettingAdvancedContainer from 'containers/settings/advanced/AdvancedConta
 import SettingAudit from 'containers/settings/audit/AuditContainer'
 import SettingTags from 'components/sidebar/settings/tag/TagRoutes'
 import SettingUsers from 'components/sidebar/settings/users/UserRoutes'
-import SettingCollectors from 'containers/settings/collector/CollectorsContainer'
+import SettingCollectors from 'components/sidebar/settings/collector/CollectorRoutes'
 
 class Settings extends React.Component {
   render () {

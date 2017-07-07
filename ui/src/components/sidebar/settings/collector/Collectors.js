@@ -1,4 +1,7 @@
 import React from 'react'
+
+import CollectorTabs from './CollectorTabs'
+
 import SettingTabs from '../SettingTabs'
 import TabPage from 'components/common/TabPage'
 import TabPageBody from 'components/common/TabPageBody'
@@ -47,7 +50,7 @@ export default class Collectors extends React.Component {
         <TabPageHeader title="Settings">
           <div className="text-center margin-md-top">
             <div className="pull-right">
-              &nbsp;
+              <CollectorTabs history={this.props.history}/>
             </div>
           </div>
         </TabPageHeader>
