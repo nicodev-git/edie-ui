@@ -6,7 +6,7 @@ import AgentModalView from './AgentModalView'
 
 class AgentModal extends React.Component {
   onClickClose () {
-    this.props.showCollectorModal(false)
+    this.props.showAgentModal(false)
   }
   handleFormSubmit (values) {
     const {editAgent} = this.props
@@ -34,4 +34,4 @@ export default connect(
   state => ({
     initialValues: state.settings.editAgent
   })
-)(reduxForm({form: 'agentForm'})(CollectorModal))
+)(reduxForm({form: 'agentForm'})(AgentModal))

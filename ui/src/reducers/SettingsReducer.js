@@ -154,7 +154,8 @@ const initialState = {
 
   monitorTplTags: [],
 
-  collectorDraw: 1
+  collectorDraw: 1,
+  agentDraw: 1
 }
 
 export default function (state = initialState, action) {

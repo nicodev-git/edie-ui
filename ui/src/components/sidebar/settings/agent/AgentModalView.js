@@ -7,7 +7,7 @@ export default class AgentModalView extends React.Component {
   render () {
     const {onHide, onSubmit} = this.props
     return (
-      <Dialog open title="Collector" onRequestClose={onHide} contentStyle={{width: 350}}>
+      <Dialog open title="Agent" onRequestClose={onHide} contentStyle={{width: 350}}>
         <form onSubmit={onSubmit}>
           <div className="form-column">
             <Field name="name" component={FormInput} label="Name"/>

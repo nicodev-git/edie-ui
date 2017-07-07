@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import moment from 'moment'
-import {MenuItem, SelectField} from 'material-ui'
+import {MenuItem, SelectField, RaisedButton} from 'material-ui'
 
 import InfiniteTable from 'components/common/InfiniteTable'
 
@@ -10,8 +10,10 @@ import TabPageBody from 'components/common/TabPageBody'
 import TabPageHeader from 'components/common/TabPageHeader'
 
 import CollectorTabs from '../collector/CollectorTabs'
+import AgentModal from './AgentModal'
 
 import { errorStyle, inputStyle, selectedItemStyle } from 'style/common/materialStyles'
+import {showAlert, showConfirm} from 'components/common/Alert'
 
 export default class Agents extends Component {
   constructor (props) {
@@ -43,6 +45,26 @@ export default class Agents extends Component {
   onRowDblClick () {
   }
 
+  onClickAdd () {
+    this.props.showAgentModal(true)
+  }
+  onClickEdit () {
+    const selected = this.getTable().getSelected()
+    if (!selected) return showAlert('Please choose agent.')
+    this.props.showAgentModal(true, selected)
+  }
+  onClickRemove () {
+    const selected = this.getTable().getSelected()
+    if (!selected) return showAlert('Please choose agent.')
+    showConfirm('Click OK to remove.', btn => {
+      if (btn !== 'ok') return
+      this.props.removeAgent(selected)
+    })
+  }
+  getTable () {
+    return this.refs.table
+  }
+
   renderSelect () {
     return (
       <SelectField
@@ -59,6 +81,13 @@ export default class Agents extends Component {
     )
   }
 
+  renderAgentModal () {
+    if (!this.props.agentModalOpen) return null
+    return (
+      <AgentModal {...this.props}/>
+    )
+  }
+
   renderContent () {
     return (
       <InfiniteTable
@@ -69,7 +98,7 @@ export default class Agents extends Component {
         selectable
         onRowDblClick={this.onRowDblClick.bind(this)}
         params={{
-          draw: this.props.collectorDraw
+          draw: this.props.agentDraw
         }}
       />
     )
@@ -78,13 +107,16 @@ export default class Agents extends Component {
   render () {
     return (
       <TabPage>
-        <TabPageHeader title="Settings">
+        <TabPageHeader title="Agents">
           <div className="text-center margin-md-top">
             <div className="pull-left form-inline text-left">
               &nbsp;
             </div>
 
             <div style={{position: 'absolute', right: '25px'}}>
+              <RaisedButton label="Add" onTouchTap={this.onClickAdd.bind(this)}/>&nbsp;
+              <RaisedButton label="Edit" onTouchTap={this.onClickEdit.bind(this)}/>&nbsp;
+              <RaisedButton label="Remove" onTouchTap={this.onClickRemove.bind(this)}/>&nbsp;
               <CollectorTabs history={this.props.history}/>
             </div>
           </div>
@@ -92,6 +124,7 @@ export default class Agents extends Component {
 
         <TabPageBody tabs={SettingTabs} tab={1} history={this.props.history} location={this.props.location}>
           {this.renderContent()}
+          {this.renderAgentModal()}
         </TabPageBody>
       </TabPage>
     )
