@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
-import TimeAgo from 'react-timeago'
 import moment from 'moment'
-import {RaisedButton, MenuItem, SelectField} from 'material-ui'
+import {MenuItem, SelectField} from 'material-ui'
 
-import { findIndex, assign } from 'lodash'
+import InfiniteTable from 'components/common/InfiniteTable'
 
 import SettingTabs from '../SettingTabs'
 import TabPage from 'components/common/TabPage'
@@ -12,7 +11,6 @@ import TabPageHeader from 'components/common/TabPageHeader'
 
 import CollectorTabs from '../collector/CollectorTabs'
 
-import { ROOT_URL } from 'actions/config'
 import { errorStyle, inputStyle, selectedItemStyle } from 'style/common/materialStyles'
 
 export default class Agents extends Component {
@@ -20,63 +18,19 @@ export default class Agents extends Component {
     super(props)
     this.state = {
     }
-    this.cellAgents = [{
+    this.cells = [{
       'displayName': 'Name',
       'columnName': 'name'
     }, {
-      'displayName': 'Map',
-      'columnName': 'mapName'
-    }, {
-      'displayName': 'OS',
-      'columnName': 'osname'
-    }, {
-      'displayName': 'Agent',
-      'columnName': 'agentLastSeen',
-      'customComponent': (props) => {
-        let val = props.data
-        let installed = false
-        if (val) {
-          let diff = new Date().getTime() - val
-          installed = diff <= 3600 * 1000
-        }
-
-        if (installed) return <span>Installed</span>
-        return <span>Not Installed</span>
-      }
-    }, {
       'displayName': 'Version',
-      'columnName': 'agentVersion',
-      'customComponent': (props) => {
-        let val = props.data
-        let installed = false
-
-        if (props.rowData.agentLastSeen) {
-          let diff = new Date().getTime() - props.rowData.agentLastSeen
-          installed = diff <= 3600 * 1000
-        }
-
-        return <span>{installed ? val : ''}</span>
-      }
+      'columnName': 'version'
     }, {
       'displayName': 'Last Seen',
-      'columnName': 'agentExist',
-      'customComponent': (props) => {
-        let val = props.rowData.agentLastSeen
-        if (!val) return <span />
-        return <TimeAgo date={val}/>
-      }
-    }, {
-      'displayName': 'Action',
-      'columnName': 'agentUUID',
-      'customComponent': (props) => {
-        const row = props.rowData
+      'columnName': 'lastSeen',
+      'customComponent': p => {
+        if (!p.data) return <span/>
         return (
-          <div>
-            <a href="javascript:;" onClick={this.showAgentConfigModal.bind(this, row)}>
-              <i className="fa fa-edit fa-x"/></a>
-            <a href="javascript:;" className="margin-md-left" onClick={this.downloadAgentConfig.bind(this, row)}>
-              <i className="fa fa-download fa-x"/></a>
-          </div>
+          <span>{moment(p.data).format('YYYY-MM-DD HH:mm:ss')}</span>
         )
       }
     }]
@@ -102,8 +56,23 @@ export default class Agents extends Component {
     )
   }
 
+  renderContent () {
+    return (
+      <InfiniteTable
+        url="/deviceagent"
+        cells={this.cells}
+        ref="table"
+        rowMetadata={{'key': 'id'}}
+        selectable
+        onRowDblClick={this.onRowDblClick.bind(this)}
+        params={{
+          draw: this.props.collectorDraw
+        }}
+      />
+    )
+  }
+
   render () {
-    const {tabIndex} = this.state
     return (
       <TabPage>
         <TabPageHeader title="Settings">
@@ -118,7 +87,9 @@ export default class Agents extends Component {
           </div>
         </TabPageHeader>
 
-        <TabPageBody tabs={SettingTabs} tab={1} history={this.props.history} location={this.props.location}/>
+        <TabPageBody tabs={SettingTabs} tab={1} history={this.props.history} location={this.props.location}>
+          {this.renderContent()}
+        </TabPageBody>
       </TabPage>
     )
   }
