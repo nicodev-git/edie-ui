@@ -113,6 +113,11 @@ import {
   UPDATE_COLLECTOR,
   REMOVE_COLLECTOR,
 
+  SHOW_AGENT_MODAL,
+  ADD_AGENT,
+  UPDATE_AGENT,
+  REMOVE_AGENT,
+
   FETCH_DEVICE_CATEGORIES
 
 } from 'actions/types'
@@ -502,6 +507,13 @@ export default function (state = initialState, action) {
     case UPDATE_COLLECTOR:
     case REMOVE_COLLECTOR:
       return { ...state, collectorDraw: state.collectorDraw + 1 }
+
+    case SHOW_AGENT_MODAL:
+      return { ...state, agentModalOpen: !!action.visible, editAgent: action.agent}
+    case ADD_AGENT:
+    case UPDATE_AGENT:
+    case REMOVE_AGENT:
+      return { ...state, agentDraw: state.agentDraw + 1 }
   }
   return state
 }

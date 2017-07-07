@@ -398,6 +398,11 @@ export const ADD_COLLECTOR = 'ADD_COLLECTOR'
 export const UPDATE_COLLECTOR = 'UPDATE_COLLECTOR'
 export const REMOVE_COLLECTOR = 'REMOVE_COLLECTOR'
 
+export const SHOW_AGENT_MODAL = 'SHOW_AGENT_MODAL'
+export const ADD_AGENT = 'ADD_AGENT'
+export const UPDATE_AGENT = 'UPDATE_AGENT'
+export const REMOVE_AGENT = 'REMOVE_AGENT'
+
 ///////////////////////////////////////////////////////////////
 
 export const API_ERROR = 'API_ERROR'

@@ -69,6 +69,11 @@ import {
   UPDATE_COLLECTOR,
   REMOVE_COLLECTOR,
 
+  SHOW_AGENT_MODAL,
+  ADD_AGENT,
+  UPDATE_AGENT,
+  REMOVE_AGENT,
+
   NO_AUTH_ERROR
 } from './types'
 
@@ -637,6 +642,38 @@ export const removeCollector = (entity) => {
   return (dispatch) => {
     axios.delete(entity._links.self.href).then(() => {
       dispatch({type: REMOVE_COLLECTOR, entity})
+    }).catch(error => apiError(dispatch, error))
+  }
+}
+
+export const showAgentModal = (visible, agent) => {
+  return dispatch => {
+    dispatch({type: SHOW_AGENT_MODAL, visible, agent})
+  }
+}
+
+export const addAgent = (props) => {
+  return dispatch => {
+    axios.post(`${ROOT_URL}/deviceagent`, props).then(({data}) => {
+      dispatch({type: ADD_AGENT, data})
+      dispatch(showAgentModal(false))
+    }).catch(error => apiError(dispatch, error))
+  }
+}
+
+export const updateAgent = (entity) => {
+  return (dispatch) => {
+    axios.put(entity._links.self.href, entity).then(({data}) => {
+      dispatch({type: UPDATE_AGENT, data})
+      dispatch(showAgentModal(false))
+    }).catch(error => apiError(dispatch, error))
+  }
+}
+
+export const removeAgent = (entity) => {
+  return (dispatch) => {
+    axios.delete(entity._links.self.href).then(() => {
+      dispatch({type: REMOVE_AGENT, entity})
     }).catch(error => apiError(dispatch, error))
   }
 }

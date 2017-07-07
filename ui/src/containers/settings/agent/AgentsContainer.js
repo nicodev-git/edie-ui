@@ -4,11 +4,10 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
 
 import {
-  fetchEnvVars,
-  addEnvVar,
-  updateEnvVar,
-
-  updateUserOption
+  showAgentModal,
+  addAgent,
+  updateAgent,
+  removeAgent
 } from 'actions'
 
 class AgentsContainer extends React.Component {
@@ -20,13 +19,13 @@ class AgentsContainer extends React.Component {
 }
 export default connect(
   state => ({
-    envVars: state.settings.envVars,
-    userInfo: state.dashboard.userInfo
+    agentModalOpen:state.settings.agentModalOpen,
+    editAgent: state.settings.editAgent,
+    agentDraw: state.settings.agentDraw
   }), {
-    fetchEnvVars,
-    addEnvVar,
-    updateEnvVar,
-
-    updateUserOption
+    showAgentModal,
+    addAgent,
+    updateAgent,
+    removeAgent
   }
 )(withRouter(AgentsContainer))
