@@ -10,6 +10,7 @@ import SettingAdvancedContainer from 'containers/settings/advanced/AdvancedConta
 import SettingAudit from 'containers/settings/audit/AuditContainer'
 import SettingTags from 'components/sidebar/settings/tag/TagRoutes'
 import SettingUsers from 'components/sidebar/settings/users/UserRoutes'
+import SettingCollectors from 'containers/settings/collector/CollectorsContainer'
 
 class Settings extends React.Component {
   render () {
@@ -22,6 +23,7 @@ class Settings extends React.Component {
         <Route path="/settings/users" component={SettingUsers}/>
         <Route path="/settings/identities" component={SettingIdentitiesContainer} />
         <Route path="/settings/audit" component={SettingAudit} />
+        <Route path="/settings/collectors" component={SettingCollectors} />
         <Route path="/settings/advanced" component={SettingAdvancedContainer} />
       </Switch>
     )

@@ -1,5 +1,5 @@
 import React from 'react'
-import Collectors from 'components/sidebar/settings/collectors/Collectors'
+import Collectors from 'components/sidebar/settings/collector/Collectors'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { withRouter } from 'react-router'
