@@ -1,4 +1,5 @@
 import React from 'react'
+import {RaisedButton} from 'material-ui'
 
 import CollectorTabs from './CollectorTabs'
 import InfiniteTable from 'components/common/InfiniteTable'
@@ -42,7 +43,8 @@ export default class Collectors extends React.Component {
       />
     )
   }
-
+  onClickAdd () {
+  }
   getTable () {
     return this.refs.credentials
   }
@@ -53,6 +55,7 @@ export default class Collectors extends React.Component {
         <TabPageHeader title="Settings">
           <div className="text-center margin-md-top">
             <div className="pull-right">
+              <RaisedButton label="Add" onTouchTap={this.onClickAdd.bind(this)}/>&nbsp;
               <CollectorTabs history={this.props.history}/>
             </div>
           </div>
