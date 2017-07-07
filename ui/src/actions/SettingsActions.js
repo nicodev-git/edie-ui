@@ -617,6 +617,7 @@ export const addCollector = (props) => {
   return dispatch => {
     axios.post(`${ROOT_URL}/collector`, props).then(({data}) => {
       dispatch({type: ADD_COLLECTOR, data})
+      dispatch(showCollectorModal(false))
     }).catch(error => apiError(dispatch, error))
   }
 }

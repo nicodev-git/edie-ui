@@ -5,7 +5,8 @@ import { withRouter } from 'react-router'
 import Collectors from 'components/sidebar/settings/collector/Collectors'
 
 import {
-  showCollectorModal
+  showCollectorModal,
+  addCollector
 } from 'actions'
 
 class CollectorsContainer extends React.Component {
@@ -21,7 +22,8 @@ export default connect(
     collectorModalOpen: state.settings.collectorModalOpen,
     editCollector: state.settings.editCollector
   }),{
-    showCollectorModal
+    showCollectorModal,
+    addCollector
   }
 )(withRouter(CollectorsContainer))
 

@@ -6,10 +6,15 @@ import CollectorModalView from './CollectorModalView'
 
 class CollectorModal extends React.Component {
   onClickClose () {
-
+    this.props.showCollectorModal(false)
   }
-  handleFormSubmit () {
+  handleFormSubmit (values) {
+    const {editCollector} = this.props
+    if (editCollector) {
 
+    } else {
+      this.props.addCollector(values)
+    }
   }
   render () {
     const {handleSubmit} = this.props
@@ -24,7 +29,6 @@ class CollectorModal extends React.Component {
 
 export default connect(
   state => ({
-    initialValues: {
-    }
+    initialValues: state.settings.editCollector
   })
 )(reduxForm({form: 'collectorForm'})(CollectorModal))
