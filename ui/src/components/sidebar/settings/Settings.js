@@ -17,13 +17,12 @@ class Settings extends React.Component {
     return (
       <Switch>
         <Route path="/settings" exact component={SettingGeneralContainer} />
-        <Route path="/settings/agents" component={SettingAgent} />
+        <Route path="/settings/collectors" component={SettingCollectors} />
         <Route path="/settings/tags" component={SettingTags}/>
         <Route path="/settings/maps" component={SettingMapsContainer} />
         <Route path="/settings/users" component={SettingUsers}/>
         <Route path="/settings/identities" component={SettingIdentitiesContainer} />
         <Route path="/settings/audit" component={SettingAudit} />
-        <Route path="/settings/collectors" component={SettingCollectors} />
         <Route path="/settings/advanced" component={SettingAdvancedContainer} />
       </Switch>
     )

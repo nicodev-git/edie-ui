@@ -2,8 +2,8 @@ const tabs = [{
   title: 'General',
   path: '/settings'
 }, {
-  title: 'Agents',
-  path: '/settings/agents'
+  title: 'Collectors',
+  path: '/settings/collectors'
 }, {
   title: 'Maps',
   path: '/settings/maps'
@@ -19,9 +19,6 @@ const tabs = [{
 }, {
   title: 'Audit',
   path: '/settings/audit'
-}, {
-  title: 'Collectors',
-  path: '/settings/collectors'
 }, {
   title: 'Advanced',
   path: '/settings/advanced'

@@ -61,7 +61,7 @@ export default class Collectors extends React.Component {
           </div>
         </TabPageHeader>
 
-        <TabPageBody tabs={SettingTabs} tab={7} history={this.props.history} location={this.props.location}>
+        <TabPageBody tabs={SettingTabs} tab={1} history={this.props.history} location={this.props.location}>
           {this.renderContent()}
         </TabPageBody>
       </TabPage>
