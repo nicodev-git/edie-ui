@@ -36,6 +36,7 @@ class DeviceWizard extends Component {
       'check': this.buildCheck.bind(this),
       'monitors': this.buildMonitors.bind(this),
       'paramlist': this.buildParamList.bind(this),
+      'combo': this.buildCombo.bind(this),
       'row': this.buildRow.bind(this)
     }
   }
