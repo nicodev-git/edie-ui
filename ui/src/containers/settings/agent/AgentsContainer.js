@@ -1,7 +1,7 @@
 import React from 'react'
 import Agents from 'components/sidebar/settings/agent/Agents'
 import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
+import { withRouter } from 'react-router'
 
 import {
   fetchEnvVars,
@@ -22,14 +22,11 @@ export default connect(
   state => ({
     envVars: state.settings.envVars,
     userInfo: state.dashboard.userInfo
-  }),
-  dispatch => ({
-    ...bindActionCreators({
-      fetchEnvVars,
-      addEnvVar,
-      updateEnvVar,
+  }), {
+    fetchEnvVars,
+    addEnvVar,
+    updateEnvVar,
 
-      updateUserOption
-    }, dispatch)
-  })
-)(AgentsContainer)
+    updateUserOption
+  }
+)(withRouter(AgentsContainer))

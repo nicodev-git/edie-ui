@@ -40,6 +40,9 @@ export default class Agents extends Component {
     this.setState({ install })
   }
 
+  onRowDblClick () {
+  }
+
   renderSelect () {
     return (
       <SelectField
