@@ -17,7 +17,9 @@ class CollectorsContainer extends React.Component {
 }
 export default connect(
   state => ({
-    collectorDraw: state.settings.collectorDraw
+    collectorDraw: state.settings.collectorDraw,
+    collectorModalOpen: state.settings.collectorModalOpen,
+    editCollector: state.settings.editCollector
   }),{
     fetchCredentials
   }

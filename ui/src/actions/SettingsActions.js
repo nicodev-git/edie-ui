@@ -64,6 +64,8 @@ import {
   SHOW_MONITOR_TPL_TAG_MODAL,
   UPDATE_MONITOR_TPL_TAGS,
 
+  SHOW_COLLECTOR_MODAL,
+
   NO_AUTH_ERROR
 } from './types'
 
@@ -601,5 +603,11 @@ export const showMonitorTplTagModal = (visible) => {
 export const updateMonitorTplTags = (tags) => {
   return dispatch => {
     dispatch({type: UPDATE_MONITOR_TPL_TAGS, tags})
+  }
+}
+
+export const showCollectorModal = (visible, collector) => {
+  return dispatch => {
+    dispatch({type: SHOW_COLLECTOR_MODAL, visible, collector})
   }
 }

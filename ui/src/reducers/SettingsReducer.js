@@ -108,6 +108,8 @@ import {
   SYNC_DATA,
   SHOW_IMPORT_SYNC_MODAL,
 
+  SHOW_COLLECTOR_MODAL,
+
   FETCH_DEVICE_CATEGORIES
 
 } from 'actions/types'
@@ -490,6 +492,9 @@ export default function (state = initialState, action) {
       return { ...state, monitorTplTagModalOpen: !!action.visible }
     case UPDATE_MONITOR_TPL_TAGS:
       return { ...state, monitorTplTags: action.tags || [] }
+
+    case SHOW_COLLECTOR_MODAL:
+      return { ...state, collectorModalOpen: !!action.visible, editCollector: action.editor}
   }
   return state
 }
