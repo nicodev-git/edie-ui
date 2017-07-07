@@ -9,6 +9,8 @@ import TabPage from 'components/common/TabPage'
 import TabPageBody from 'components/common/TabPageBody'
 import TabPageHeader from 'components/common/TabPageHeader'
 
+import CollectorModal from './CollectorModal'
+
 export default class Collectors extends React.Component {
   constructor (props) {
     super(props)
@@ -44,11 +46,17 @@ export default class Collectors extends React.Component {
     )
   }
   onClickAdd () {
+    this.props.showCollectorModal(true)
   }
   getTable () {
     return this.refs.credentials
   }
-
+  renderCollectorModal () {
+    if (!this.props.collectorModalOpen) return null
+    return (
+      <CollectorModal {...this.props}/>
+    )
+  }
   render () {
     return (
       <TabPage>

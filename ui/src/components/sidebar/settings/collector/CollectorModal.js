@@ -8,9 +8,14 @@ class CollectorModal extends React.Component {
   onClickClose () {
 
   }
+  handleFormSubmit () {
+
+  }
   render () {
+    const {handleSubmit} = this.props
     return (
       <CollectorModalView
+        onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
         onHide={this.onClickClose.bind(this)}
       />
     )
