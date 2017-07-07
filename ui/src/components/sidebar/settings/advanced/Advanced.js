@@ -105,7 +105,7 @@ export default class Advanced extends React.Component {
           </div>
         </TabPageHeader>
 
-        <TabPageBody tabs={SettingTabs} tab={6} history={this.props.history} location={this.props.location}>
+        <TabPageBody tabs={SettingTabs} tab={7} history={this.props.history} location={this.props.location}>
           {this.renderContent()}
         </TabPageBody>
       </TabPage>

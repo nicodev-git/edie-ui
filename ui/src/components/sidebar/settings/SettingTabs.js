@@ -17,8 +17,8 @@ const tabs = [{
   title: 'Tags',
   path: '/settings/tags'
 }, {
-  title: 'Credentials',
-  path: '/settings/creds'
+  title: 'Audit',
+  path: '/settings/audit'
 }, {
   title: 'Advanced',
   path: '/settings/advanced'

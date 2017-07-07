@@ -7,6 +7,7 @@ import SettingAgent from 'components/sidebar/settings/agent/Agents'
 import SettingMapsContainer from 'containers/settings/maps/MapsContainer'
 import SettingIdentitiesContainer from 'containers/settings/identity/IdentitiesContainer'
 import SettingAdvancedContainer from 'containers/settings/advanced/AdvancedContainer'
+import SettingAudit from 'containers/settings/audit/AuditContainer'
 import SettingTags from 'components/sidebar/settings/tag/TagRoutes'
 import SettingUsers from 'components/sidebar/settings/users/UserRoutes'
 
@@ -20,6 +21,7 @@ class Settings extends React.Component {
         <Route path="/settings/maps" component={SettingMapsContainer} />
         <Route path="/settings/users" component={SettingUsers}/>
         <Route path="/settings/identities" component={SettingIdentitiesContainer} />
+        <Route path="/settings/audit" component={SettingAudit} />
         <Route path="/settings/advanced" component={SettingAdvancedContainer} />
       </Switch>
     )
