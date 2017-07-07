@@ -111,6 +111,7 @@ import {
   SHOW_COLLECTOR_MODAL,
   ADD_COLLECTOR,
   UPDATE_COLLECTOR,
+  REMOVE_COLLECTOR,
 
   FETCH_DEVICE_CATEGORIES
 
@@ -499,6 +500,7 @@ export default function (state = initialState, action) {
       return { ...state, collectorModalOpen: !!action.visible, editCollector: action.collector}
     case ADD_COLLECTOR:
     case UPDATE_COLLECTOR:
+    case REMOVE_COLLECTOR:
       return { ...state, collectorDraw: state.collectorDraw + 1 }
   }
   return state

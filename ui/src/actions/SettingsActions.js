@@ -67,6 +67,7 @@ import {
   SHOW_COLLECTOR_MODAL,
   ADD_COLLECTOR,
   UPDATE_COLLECTOR,
+  REMOVE_COLLECTOR,
 
   NO_AUTH_ERROR
 } from './types'
@@ -628,6 +629,14 @@ export const updateCollector = (entity) => {
     axios.put(entity._links.self.href, entity).then(({data}) => {
       dispatch({type: UPDATE_COLLECTOR, data})
       dispatch(showCollectorModal(false))
+    }).catch(error => apiError(dispatch, error))
+  }
+}
+
+export const removeCollector = (entity) => {
+  return (dispatch) => {
+    axios.delete(entity._links.self.href).then(() => {
+      dispatch({type: REMOVE_COLLECTOR, entity})
     }).catch(error => apiError(dispatch, error))
   }
 }

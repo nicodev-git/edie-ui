@@ -10,7 +10,7 @@ import TabPageBody from 'components/common/TabPageBody'
 import TabPageHeader from 'components/common/TabPageHeader'
 
 import CollectorModal from './CollectorModal'
-import {showAlert} from 'components/common/Alert'
+import {showAlert, showConfirm} from 'components/common/Alert'
 
 export default class Collectors extends React.Component {
   constructor (props) {
@@ -51,8 +51,18 @@ export default class Collectors extends React.Component {
   }
   onClickEdit () {
     const selected = this.getTable().getSelected()
-    if (!selected) showAlert('Please choose collector.')
+    if (!selected) return showAlert('Please choose collector.')
+    if (selected.name === 'Built-In') return showAlert('Built-In collector is not editable.')
     this.props.showCollectorModal(true, selected)
+  }
+  onClickRemove () {
+    const selected = this.getTable().getSelected()
+    if (!selected) return showAlert('Please choose collector.')
+    if (selected.name === 'Built-In') return showAlert('Built-In collector is not editable.')
+    showConfirm('Click OK to remove.', btn => {
+      if (btn !== 'ok') return
+      this.props.removeCollector(selected)
+    })
   }
   getTable () {
     return this.refs.table
@@ -71,6 +81,7 @@ export default class Collectors extends React.Component {
             <div className="pull-right">
               <RaisedButton label="Add" onTouchTap={this.onClickAdd.bind(this)}/>&nbsp;
               <RaisedButton label="Edit" onTouchTap={this.onClickEdit.bind(this)}/>&nbsp;
+              <RaisedButton label="Remove" onTouchTap={this.onClickRemove.bind(this)}/>&nbsp;
               <CollectorTabs history={this.props.history}/>
             </div>
           </div>

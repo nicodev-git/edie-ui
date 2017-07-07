@@ -7,7 +7,8 @@ import Collectors from 'components/sidebar/settings/collector/Collectors'
 import {
   showCollectorModal,
   addCollector,
-  updateCollector
+  updateCollector,
+  removeCollector
 } from 'actions'
 
 class CollectorsContainer extends React.Component {
@@ -25,7 +26,7 @@ export default connect(
   }),{
     showCollectorModal,
     addCollector,
-    updateCollector
+    updateCollector,
+    removeCollector
   }
 )(withRouter(CollectorsContainer))
-
