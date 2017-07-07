@@ -1,5 +1,6 @@
 import React from 'react'
 import {RaisedButton} from 'material-ui'
+import moment from 'moment'
 
 import CollectorTabs from './CollectorTabs'
 import InfiniteTable from 'components/common/InfiniteTable'
@@ -26,7 +27,13 @@ export default class Collectors extends React.Component {
       'columnName': 'version'
     }, {
       'displayName': 'Last Seen',
-      'columnName': 'lastSeen'
+      'columnName': 'lastSeen',
+      'customComponent': p => {
+        if (!p.data) return <span/>
+        return (
+          <span>{moment(p.data).format('YYYY-MM-DD HH:mm:ss')}</span>
+        )
+      }
     }]
   }
   onRowDblClick () {
