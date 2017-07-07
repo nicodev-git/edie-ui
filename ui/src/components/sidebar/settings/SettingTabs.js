@@ -20,6 +20,9 @@ const tabs = [{
   title: 'Audit',
   path: '/settings/audit'
 }, {
+  title: 'Collectors',
+  path: '/settings/collectors'
+}, {
   title: 'Advanced',
   path: '/settings/advanced'
 }]
