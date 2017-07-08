@@ -283,7 +283,12 @@ class DeviceWizard extends Component {
 
   onCloseCredPicker (selected) {
     if (selected) {
-      // this.props.updateDeviceCreds([...deviceCreds, selected])
+      const {selectedDevice} = this.props
+      const props = {
+        ...selectedDevice,
+        credentials: [selected]
+      }
+      this.props.updateMapDevice(props)
     }
     this.props.showDeviceCredsPicker(false)
   }

@@ -16,7 +16,9 @@ import {
   showDeviceCredsPicker,
 
   updateMonitorTags,
-  showMonitorTagModal
+  showMonitorTagModal,
+
+  updateMapDevice
 } from 'actions'
 
 class MonitorWizardContainer extends React.Component {
@@ -54,7 +56,9 @@ export default connect(
       showDeviceCredsPicker,
 
       updateMonitorTags,
-      showMonitorTagModal
+      showMonitorTagModal,
+
+      updateMapDevice
     }, dispatch)
   })
 )(MonitorWizardContainer)
