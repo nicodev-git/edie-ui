@@ -1037,3 +1037,13 @@ export function selectDeviceCreds (creds) {
     dispatch({type: SELECT_DEVICE_CREDS, creds})
   }
 }
+
+export function installAgent (device) {
+  return dispatch => {
+    axios.get(`${ROOT_URL}/installAgent`, {
+      params: {
+          id: device.id
+      }
+    })
+  }
+}
