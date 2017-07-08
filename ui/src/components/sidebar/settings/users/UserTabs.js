@@ -7,6 +7,9 @@ const tabs = [{
 }, {
   title: 'Credentials',
   path: '/settings/users/credentials'
+}, {
+  title: 'Credential Types',
+  path: '/settings/users/credtypes'
 }]
 
 export default class UserTabs extends React.Component {

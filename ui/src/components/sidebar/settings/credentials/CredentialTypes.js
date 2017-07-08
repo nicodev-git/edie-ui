@@ -4,7 +4,7 @@ import {RaisedButton} from 'material-ui'
 import InfiniteTable from 'components/common/InfiniteTable'
 import { showAlert, showConfirm } from 'components/common/Alert'
 
-// import CredentialModal from './CredentialModal'
+import CredentialModal from './CredentialModal'
 
 import SettingTabs from '../SettingTabs'
 import TabPage from 'components/common/TabPage'
@@ -33,7 +33,6 @@ export default class CredentialTypes extends React.Component {
         ref="table"
         rowMetadata={{'key': 'id'}}
         selectable
-        onRowDblClick={this.onRowDblClick.bind(this)}
         params={{
           draw: this.props.credentialTypeDraw
         }}
@@ -76,7 +75,7 @@ export default class CredentialTypes extends React.Component {
   render () {
     return (
       <TabPage>
-        <TabPageHeader title="Credentials">
+        <TabPageHeader title="Credential Types">
           <div className="text-center margin-md-top">
             <div className="pull-right">
               <RaisedButton label="Add" onTouchTap={this.onAddCred.bind(this)}/>&nbsp;
