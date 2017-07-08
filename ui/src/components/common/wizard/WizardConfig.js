@@ -2483,7 +2483,13 @@ export const wizardConfig = {
           text: 'Collector',
           width: 3
         },
-        items: [],
+        remote: true,
+        server: {
+          url: '/collector?size=100',
+          root: ['_embedded', 'collectors'],
+          display: 'name',
+          value: 'id'
+        },
         width: MAX_WIDTH,
         name: 'collectorId'
       }]
