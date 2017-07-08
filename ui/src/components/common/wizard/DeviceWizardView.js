@@ -5,7 +5,7 @@ import { WizardButtons } from 'components/modal/parts'
 export default class DeviceWizardView extends Component {
   render () {
     const {header, progressBar, content, current, steps, onSubmit, onHide,
-      onPrev, onNext, paramEditModal} = this.props
+      onPrev, onNext, paramEditModal, credPicker} = this.props
     return (
       <Dialog open className="modal-device-wizard" title={header} onRequestClose={onHide}>
         <form onSubmit={onSubmit}>
@@ -17,6 +17,7 @@ export default class DeviceWizardView extends Component {
             onPrev={onPrev} onNext={onNext}/>
         </form>
         {paramEditModal}
+        {credPicker}
       </Dialog>
     )
   }

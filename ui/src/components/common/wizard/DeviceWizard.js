@@ -54,6 +54,7 @@ class DeviceWizard extends Component {
     if (checkCreds) {
       if (!selectedDevice.credentials || !selectedDevice.credentials.length) {
         //Show Credentials Picker
+        this.props.showDeviceCredsPicker(true)
       }
     }
   }
@@ -313,6 +314,7 @@ class DeviceWizard extends Component {
           onNext={this.onClickNext.bind(this)}
           onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
           canAddTags={canAddTags}
+          credPicker={this.renderCredPicker()}
         />
     )
   }
