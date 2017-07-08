@@ -3,8 +3,10 @@ import CredentialTypes from 'components/sidebar/settings/credentials/CredentialT
 import { connect } from 'react-redux'
 
 import {
-  fetchCredentials,
-  selectCreds
+  showCredTypeModal,
+  addCredType,
+  updateCredType,
+  removeCredType
 } from 'actions'
 
 class CredentialTypeContainer extends React.Component {
@@ -20,7 +22,9 @@ export default connect(
     credTypeModalOpen: state.settings.credTypeModalOpen,
     editCredType: state.settings.editCredType
   }), {
-    fetchCredentials,
-    selectCreds
+    showCredTypeModal,
+    addCredType,
+    updateCredType,
+    removeCredType
   }
 )(CredentialTypeContainer)

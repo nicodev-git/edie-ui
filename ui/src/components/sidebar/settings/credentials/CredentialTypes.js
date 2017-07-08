@@ -40,7 +40,7 @@ export default class CredentialTypes extends React.Component {
     )
   }
 
-  renderCredentialsModal () {
+  renderTypeModal () {
     if (!this.props.credTypeModalOpen) return null
     return (
       <CredentialTypeModal {...this.props}/>
@@ -48,18 +48,11 @@ export default class CredentialTypes extends React.Component {
   }
 
   getTable () {
-    return this.refs.credentials
+    return this.refs.table
   }
 
   onAddCred () {
-    this.props.openCredentialsModal()
-  }
-
-  onEditCred () {
-    let selected = this.getTable().getSelected()
-    if (!selected) return showAlert('Please choose credentials.')
-
-    this.props.openCredentialsModal(selected)
+    this.props.showCredTypeModal(true)
   }
 
   onRemoveCred () {
@@ -69,7 +62,7 @@ export default class CredentialTypes extends React.Component {
     showConfirm('Are you sure? Click OK to remove.', (btn) => {
       if (btn !== 'ok') return
 
-      this.props.removeCredentials(selected)
+      this.props.removeCredType(selected)
     })
   }
   render () {
@@ -79,16 +72,15 @@ export default class CredentialTypes extends React.Component {
           <div className="text-center margin-md-top">
             <div className="pull-right">
               <RaisedButton label="Add" onTouchTap={this.onAddCred.bind(this)}/>&nbsp;
-              <RaisedButton label="Edit" onTouchTap={this.onEditCred.bind(this)}/>&nbsp;
               <RaisedButton label="Remove" onTouchTap={this.onRemoveCred.bind(this)}/>&nbsp;
               <UserTabs history={this.props.history}/>&nbsp;
             </div>
           </div>
         </TabPageHeader>
 
-        <TabPageBody tabs={SettingTabs} tab={5} history={this.props.history} location={this.props.location}>
+        <TabPageBody tabs={SettingTabs} tab={3} history={this.props.history} location={this.props.location}>
           {this.renderContent()}
-          {this.renderCredentialsModal()}
+          {this.renderTypeModal()}
         </TabPageBody>
       </TabPage>
     )

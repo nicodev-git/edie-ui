@@ -78,6 +78,7 @@ import {
   ADD_CRED_TYPE,
   UPDATE_CRED_TYPE,
   REMOVE_CRED_TYPE,
+  FETCH_CRED_TYPES,
 
   NO_AUTH_ERROR
 } from './types'
@@ -712,5 +713,13 @@ export const removeCredType = (entity) => {
     axios.delete(entity._links.self.href).then(() => {
       dispatch({type: REMOVE_CRED_TYPE, entity})
     }).catch(error => apiError(dispatch, error))
+  }
+}
+
+export const fetchCredTypes = () => {
+  return dispatch => {
+    axios.get(`${ROOT_URL}/credentialtype?size=100`).then(({data}) => {
+      disaptch({type: FETCH_CRED_TYPES, data: data._embedded.credentialTypes})
+    })
   }
 }

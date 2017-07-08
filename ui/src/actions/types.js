@@ -407,6 +407,7 @@ export const SHOW_CRED_TYPE_MODAL = 'SHOW_CRED_TYPE_MODAL'
 export const ADD_CRED_TYPE = 'ADD_CRED_TYPE'
 export const UPDATE_CRED_TYPE = 'UPDATE_CRED_TYPE'
 export const REMOVE_CRED_TYPE = 'REMOVE_CRED_TYPE'
+export const FETCH_CRED_TYPES = 'FETCH_CRED_TYPES'
 
 
 ///////////////////////////////////////////////////////////////
