@@ -21,7 +21,7 @@ export default class Combo extends React.Component {
     if (config.remote === true) {
       const {url, root, display, value} = config.server
       axios.get(`${ROOT_URL}${url}`).then(res => {
-        let data = {res}
+        let {data} = res
         if (root) {
           root.forEach(p => {
             data = data[p]

@@ -42,12 +42,19 @@ class DeviceWizard extends Component {
   }
 
   componentWillMount () {
+    const {selectedDevice, checkCreds} = this.props
     const hasMonitors = this.state.currentDevice.steps.filter(s =>
         s.items.filter(i => i.type === 'monitors').length > 0
     ).length > 0
 
     if (hasMonitors) {
       this.props.fetchMonitorTemplates()
+    }
+
+    if (checkCreds) {
+      if (!selectedDevice.credentials || !selectedDevice.credentials.length) {
+        //Show Credentials Picker
+      }
     }
   }
 

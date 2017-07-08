@@ -20,7 +20,7 @@ import {
 class MonitorWizardContainer extends React.Component {
   render () {
     return (
-      <MonitorWizard {...this.props} canAddTags/>
+      <MonitorWizard {...this.props} canAddTags checkCreds/>
     )
   }
 }
@@ -34,7 +34,9 @@ export default connect(
 
     editParams: state.devices.editParams,
     monitorTagModalOpen: state.devices.monitorTagModalOpen,
-    monitorTags: state.devices.monitorTags
+    monitorTags: state.devices.monitorTags,
+
+    selectedDevice: state.dashboard.selectedDevice
   }),
   dispatch => ({
     ...bindActionCreators({
