@@ -28,7 +28,7 @@ class DeviceWizard extends Component {
     console.log(`Device type: ${this.props.deviceType}`)
     console.log(props.monitorConfig)
 
-    const stepItems = this.hasCreds() ? [...config.creds, ...config.steps] : config.steps
+    const stepItems = this.hasAgentType() ? [...config.creds, ...config.steps] : config.steps
 
     this.state = {
       current: 1,
@@ -62,14 +62,23 @@ class DeviceWizard extends Component {
   }
 
   hasCreds () {
-    const {selectedDevice, checkCreds, monitorConfig, initialValues} = this.props
+    const {selectedDevice} = this.props
+
+    if (this.hasAgentType()) {
+      if (!selectedDevice.credentials || !selectedDevice.credentials.length) {
+        return true
+      }
+    }
+    return false
+  }
+
+  hasAgentType () {
+    const {checkCreds, monitorConfig, initialValues} = this.props
 
     if (checkCreds && !initialValues.uid) {
       const monitorType = monitorConfig ? (monitorConfig.monitortype || '') : ''
       if (credentialExcludes.indexOf(monitorType) < 0) {
-        if (!selectedDevice.credentials || !selectedDevice.credentials.length) {
-          return true
-        }
+        return true
       }
     }
     return false
