@@ -1,19 +1,46 @@
 import React from 'react'
 import { Field } from 'redux-form'
-import { util } from '../WizardUtil'
+import axios from 'axios'
 
+import { util } from '../WizardUtil'
 import {FormSelect} from 'components/modal/parts'
+
+import {ROOT_URL} from 'actions/config'
 
 export default class Combo extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
+      options: []
     }
+  }
 
-    this.comboOptions = (props.config.items || []).map(p => ({
-      label: p.display || '',
-      value: p.value || ''
-    }))
+  componentWillMount () {
+    const {config} = this.props
+
+    if (config.remote === true) {
+      const {url, root, display, value} = config.server
+      axios.get(`${ROOT_URL}${url}`).then(res => {
+        let data = {res}
+        if (root) {
+          root.forEach(p => {
+            data = data[p]
+          })
+        }
+
+        const options = (data || []).map(p => ({
+          label: p[display] || '',
+          value: p[value] || ''
+        }))
+        this.setState({options})
+      })
+    } else {
+      const options = (config.items || []).map(p => ({
+        label: p.display || '',
+        value: p.value || ''
+      }))
+      this.setState({options})
+    }
   }
   // render1 () {
   //   let config = this.props.config
@@ -66,6 +93,7 @@ export default class Combo extends React.Component {
   // }
   render () {
     const {config} = this.props
+    const {options} = this.state
     return (
       <Field
         name={config.name}
@@ -74,8 +102,8 @@ export default class Combo extends React.Component {
         style={config.style}
         className={config.cls}
         disabled={config.disabled}
-        options={this.comboOptions}
-        defaultValue={this.comboOptions.length ? this.comboOptions[0].value : null}
+        options={options}
+        defaultValue={options.length ? options[0].value : null}
       />
     )
   }
