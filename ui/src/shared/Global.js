@@ -211,4 +211,4 @@ export const credentialExcludes = [
   'ping', 'port'
 ]
 
-export const credentialTypes = ['WINDOWS', 'SSH', '']
+export const credentialTypes = ['WINDOWS', 'SSH', 'SQL']

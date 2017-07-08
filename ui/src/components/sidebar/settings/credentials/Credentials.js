@@ -28,6 +28,9 @@ export default class Credentials extends React.Component {
     }, {
       'displayName': 'User Name',
       'columnName': 'username'
+    }, {
+      'displayName': 'Type',
+      'columnName': 'type'
     }]
   }
 
@@ -85,7 +88,7 @@ export default class Credentials extends React.Component {
   render () {
     return (
       <TabPage>
-        <TabPageHeader title="Settings">
+        <TabPageHeader title="Credentials">
           <div className="text-center margin-md-top">
             <div className="pull-right">
               <RaisedButton label="Add" onTouchTap={this.onAddCred.bind(this)}/>&nbsp;
