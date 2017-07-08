@@ -118,6 +118,11 @@ import {
   UPDATE_AGENT,
   REMOVE_AGENT,
 
+  SHOW_CRED_TYPE_MODAL,
+  ADD_CRED_TYPE,
+  UPDATE_CRED_TYPE,
+  REMOVE_CRED_TYPE,
+
   FETCH_DEVICE_CATEGORIES
 
 } from 'actions/types'
@@ -516,6 +521,13 @@ export default function (state = initialState, action) {
     case UPDATE_AGENT:
     case REMOVE_AGENT:
       return { ...state, agentDraw: state.agentDraw + 1 }
+
+    case SHOW_CRED_TYPE_MODAL:
+      return { ...state, credTypeModalOpen: !!action.visible, editCredType: action.credType}
+    case ADD_CRED_TYPE:
+    case UPDATE_CRED_TYPE:
+    case REMOVE_CRED_TYPE:
+      return { ...state, credentialTypeDraw: state.credentialTypeDraw + 1 }
   }
   return state
 }

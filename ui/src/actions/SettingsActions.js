@@ -693,7 +693,7 @@ export const addCredType = (props) => {
   return dispatch => {
     axios.post(`${ROOT_URL}/credentialtype`, props).then(({data}) => {
       dispatch({type: ADD_CRED_TYPE, data})
-      dispatch(showCredtypeModal(false))
+      dispatch(showCredTypeModal(false))
     }).catch(error => apiError(dispatch, error))
   }
 }
@@ -702,7 +702,7 @@ export const updateCredType = (entity) => {
   return (dispatch) => {
     axios.put(entity._links.self.href, entity).then(({data}) => {
       dispatch({type: UPDATE_CRED_TYPE, data})
-      dispatch(showCredtypeModal(false))
+      dispatch(showCredTypeModal(false))
     }).catch(error => apiError(dispatch, error))
   }
 }

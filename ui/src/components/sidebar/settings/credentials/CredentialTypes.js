@@ -41,7 +41,7 @@ export default class CredentialTypes extends React.Component {
   }
 
   renderCredentialsModal () {
-    if (!this.props.credTypeModalVisible) return null
+    if (!this.props.credTypeModalOpen) return null
     return (
       <CredentialTypeModal {...this.props}/>
     )
