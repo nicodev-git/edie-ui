@@ -2461,39 +2461,6 @@ export const wizardConfig = {
       }
     },
     steps: [{
-      title: 'step 1',
-      items: [{
-        type: 'combo',
-        label: {
-          text: 'Type',
-          width: 3
-        },
-        items: [{
-          display: 'Collector',
-          value: 'collector'
-        }, {
-          display: 'Agent',
-          value: 'agent'
-        }],
-        width: MAX_WIDTH,
-        name: 'agentType'
-      }, {
-        type: 'combo',
-        label: {
-          text: 'Collector',
-          width: 3
-        },
-        remote: true,
-        server: {
-          url: '/collector?size=100',
-          root: ['_embedded', 'collectors'],
-          display: 'name',
-          value: 'id'
-        },
-        width: MAX_WIDTH,
-        name: 'collectorId'
-      }]
-    }, {
       title: 'step 2',
       items: [{
         type: 'text',
@@ -2551,6 +2518,40 @@ export const wizardConfig = {
           width: MAX_WIDTH,
           name: 'checkinterval'
         }]
+      }]
+    }],
+    creds: [{
+      title: 'step 1',
+      items: [{
+        type: 'combo',
+        label: {
+          text: 'Type',
+          width: 3
+        },
+        items: [{
+          display: 'Collector',
+          value: 'collector'
+        }, {
+          display: 'Agent',
+          value: 'agent'
+        }],
+        width: MAX_WIDTH,
+        name: 'agentType'
+      }, {
+        type: 'combo',
+        label: {
+          text: 'Collector',
+          width: 3
+        },
+        remote: true,
+        server: {
+          url: '/collector?size=100',
+          root: ['_embedded', 'collectors'],
+          display: 'name',
+          value: 'id'
+        },
+        width: MAX_WIDTH,
+        name: 'collectorId'
       }]
     }]
   },

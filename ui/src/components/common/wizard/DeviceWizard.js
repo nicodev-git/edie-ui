@@ -28,10 +28,12 @@ class DeviceWizard extends Component {
     console.log(`Device type: ${this.props.deviceType}`)
     console.log(props.monitorConfig)
 
+    const stepItems = this.hasCreds() ? [...config.creds, ...config.steps] : config.steps
+
     this.state = {
       current: 1,
-      steps: config.steps.length,
-      currentDevice: config,
+      steps: stepItems.length,
+      currentDevice: {...config, steps: stepItems},
       monitors: props.monitors || []
     }
 
@@ -46,7 +48,6 @@ class DeviceWizard extends Component {
   }
 
   componentWillMount () {
-    const {selectedDevice, checkCreds, monitorConfig} = this.props
     const hasMonitors = this.state.currentDevice.steps.filter(s =>
         s.items.filter(i => i.type === 'monitors').length > 0
     ).length > 0
@@ -55,15 +56,23 @@ class DeviceWizard extends Component {
       this.props.fetchMonitorTemplates()
     }
 
-    if (checkCreds) {
+    if (this.hasCreds()) {
+      this.props.showDeviceCredsPicker(true)
+    }
+  }
+
+  hasCreds () {
+    const {selectedDevice, checkCreds, monitorConfig, initialValues} = this.props
+
+    if (checkCreds && !initialValues.uid) {
       const monitorType = monitorConfig ? (monitorConfig.monitortype || '') : ''
       if (credentialExcludes.indexOf(monitorType) < 0) {
         if (!selectedDevice.credentials || !selectedDevice.credentials.length) {
-          //Show Credentials Picker
-          this.props.showDeviceCredsPicker(true)
+          return true
         }
       }
     }
+    return false
   }
 
   handleFormSubmit (formProps) {
