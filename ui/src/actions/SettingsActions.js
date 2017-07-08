@@ -74,6 +74,11 @@ import {
   UPDATE_AGENT,
   REMOVE_AGENT,
 
+  SHOW_CRED_TYPE_MODAL,
+  ADD_CRED_TYPE,
+  UPDATE_CRED_TYPE,
+  REMOVE_CRED_TYPE,
+
   NO_AUTH_ERROR
 } from './types'
 
@@ -674,6 +679,38 @@ export const removeAgent = (entity) => {
   return (dispatch) => {
     axios.delete(entity._links.self.href).then(() => {
       dispatch({type: REMOVE_AGENT, entity})
+    }).catch(error => apiError(dispatch, error))
+  }
+}
+
+export const showCredTypeModal = (visible, credType) => {
+  return dispatch => {
+    dispatch({type: SHOW_CRED_TYPE_MODAL, visible, credType})
+  }
+}
+
+export const addCredType = (props) => {
+  return dispatch => {
+    axios.post(`${ROOT_URL}/credentialtype`, props).then(({data}) => {
+      dispatch({type: ADD_CRED_TYPE, data})
+      dispatch(showCredtypeModal(false))
+    }).catch(error => apiError(dispatch, error))
+  }
+}
+
+export const updateCredType = (entity) => {
+  return (dispatch) => {
+    axios.put(entity._links.self.href, entity).then(({data}) => {
+      dispatch({type: UPDATE_CRED_TYPE, data})
+      dispatch(showCredtypeModal(false))
+    }).catch(error => apiError(dispatch, error))
+  }
+}
+
+export const removeCredType = (entity) => {
+  return (dispatch) => {
+    axios.delete(entity._links.self.href).then(() => {
+      dispatch({type: REMOVE_CRED_TYPE, entity})
     }).catch(error => apiError(dispatch, error))
   }
 }

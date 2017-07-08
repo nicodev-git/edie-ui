@@ -403,6 +403,12 @@ export const ADD_AGENT = 'ADD_AGENT'
 export const UPDATE_AGENT = 'UPDATE_AGENT'
 export const REMOVE_AGENT = 'REMOVE_AGENT'
 
+export const SHOW_CRED_TYPE_MODAL = 'SHOW_CRED_TYPE_MODAL'
+export const ADD_CRED_TYPE = 'ADD_CRED_TYPE'
+export const UPDATE_CRED_TYPE = 'UPDATE_CRED_TYPE'
+export const REMOVE_CRED_TYPE = 'REMOVE_CRED_TYPE'
+
+
 ///////////////////////////////////////////////////////////////
 
 export const API_ERROR = 'API_ERROR'

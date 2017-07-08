@@ -4,7 +4,7 @@ import {RaisedButton} from 'material-ui'
 import InfiniteTable from 'components/common/InfiniteTable'
 import { showAlert, showConfirm } from 'components/common/Alert'
 
-import CredentialModal from './CredentialModal'
+import CredentialTypeModal from './CredentialTypeModal'
 
 import SettingTabs from '../SettingTabs'
 import TabPage from 'components/common/TabPage'
@@ -41,9 +41,9 @@ export default class CredentialTypes extends React.Component {
   }
 
   renderCredentialsModal () {
-    if (!this.props.credentialsModalVisible) return null
+    if (!this.props.credTypeModalVisible) return null
     return (
-      <CredentialModal {...this.props}/>
+      <CredentialTypeModal {...this.props}/>
     )
   }
 

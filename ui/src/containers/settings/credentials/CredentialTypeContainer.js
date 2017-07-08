@@ -16,7 +16,8 @@ class CredentialTypeContainer extends React.Component {
 }
 export default connect(
   state => ({
-    credentialTypeDraw: state.settings.credentialTypeDraw
+    credentialTypeDraw: state.settings.credentialTypeDraw,
+    credTypeModalVisible: state.settings.credTypeModalVisible
   }), {
     fetchCredentials,
     selectCreds
