@@ -719,7 +719,7 @@ export const removeCredType = (entity) => {
 export const fetchCredTypes = () => {
   return dispatch => {
     axios.get(`${ROOT_URL}/credentialtype?size=100`).then(({data}) => {
-      disaptch({type: FETCH_CRED_TYPES, data: data._embedded.credentialTypes})
+      dispatch({type: FETCH_CRED_TYPES, data: data._embedded.credentialTypes})
     })
   }
 }

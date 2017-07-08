@@ -36,6 +36,7 @@ export default class Credentials extends React.Component {
 
   componentWillMount () {
     this.props.fetchCredentials()
+    this.props.fetchCredTypes()
   }
 
   renderContent () {

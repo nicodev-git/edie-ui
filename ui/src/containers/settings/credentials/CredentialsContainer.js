@@ -9,6 +9,7 @@ import {
   openCredentialsModal,
   removeCredentials,
 
+  fetchCredTypes,
   addCredentials,
   updateCredentials,
   closeCredentialsModal
@@ -26,7 +27,9 @@ export default connect(
     credentials: state.settings.credentials,
     credentialsModalVisible: state.settings.credentialsModalVisible,
 
-    editCredentials: state.settings.editCredentials
+    editCredentials: state.settings.editCredentials,
+
+    credentialTypes: state.settings.credentialTypes
   }),
   dispatch => ({
     ...bindActionCreators({
@@ -34,6 +37,7 @@ export default connect(
       openCredentialsModal,
       removeCredentials,
 
+      fetchCredTypes,
       addCredentials,
       updateCredentials,
       closeCredentialsModal

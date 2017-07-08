@@ -122,6 +122,7 @@ import {
   ADD_CRED_TYPE,
   UPDATE_CRED_TYPE,
   REMOVE_CRED_TYPE,
+  FETCH_CRED_TYPES,
 
   FETCH_DEVICE_CATEGORIES
 
@@ -161,7 +162,8 @@ const initialState = {
 
   collectorDraw: 1,
   agentDraw: 1,
-  credentialTypeDraw: 1
+  credentialTypeDraw: 1,
+  credentialTypes: []
 }
 
 export default function (state = initialState, action) {
@@ -528,6 +530,8 @@ export default function (state = initialState, action) {
     case UPDATE_CRED_TYPE:
     case REMOVE_CRED_TYPE:
       return { ...state, credentialTypeDraw: state.credentialTypeDraw + 1 }
+    case FETCH_CRED_TYPES:
+      return { ...state, credentialTypes: action.data }
   }
   return state
 }

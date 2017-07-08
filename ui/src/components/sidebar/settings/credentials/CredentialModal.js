@@ -4,15 +4,6 @@ import { assign } from 'lodash'
 import { connect } from 'react-redux'
 import { validate } from 'components/modal/validation/NameValidation'
 import { SimpleModalForm } from 'components/modal'
-import {credentialTypes} from 'shared/Global'
-
-const content = [
-  {name: 'Name'},
-  {name: 'User Name'},
-  {name: 'Password'},
-  {name: 'Type', type: 'select', options: credentialTypes.map(t => ({label: t, value: t}))},
-  {name: 'Description'}
-]
 
 class CredentialModal extends Component { // eslint-disable-line react/no-multi-comp
   constructor (props) {
@@ -37,7 +28,17 @@ class CredentialModal extends Component { // eslint-disable-line react/no-multi-
   }
 
   render () {
-    const { handleSubmit } = this.props
+    const { handleSubmit, credentialTypes } = this.props
+
+
+    const content = [
+      {name: 'Name'},
+      {name: 'User Name'},
+      {name: 'Password'},
+      {name: 'Type', type: 'select', options: credentialTypes.map(t => ({label: t.name, value: t.name}))},
+      {name: 'Description'}
+    ]
+
     return (
       <SimpleModalForm
         show
