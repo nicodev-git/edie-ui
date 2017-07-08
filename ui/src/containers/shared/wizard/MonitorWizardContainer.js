@@ -13,6 +13,8 @@ import {
   removeParam,
   updateMonitorParams,
 
+  showDeviceCredsPicker,
+
   updateMonitorTags,
   showMonitorTagModal
 } from 'actions'
@@ -36,7 +38,8 @@ export default connect(
     monitorTagModalOpen: state.devices.monitorTagModalOpen,
     monitorTags: state.devices.monitorTags,
 
-    selectedDevice: state.dashboard.selectedDevice
+    selectedDevice: state.dashboard.selectedDevice,
+    deviceCredsPickerVisible: state.devices.deviceCredsPickerVisible
   }),
   dispatch => ({
     ...bindActionCreators({
@@ -47,6 +50,8 @@ export default connect(
       closeParamsModal,
       removeParam,
       updateMonitorParams,
+
+      showDeviceCredsPicker,
 
       updateMonitorTags,
       showMonitorTagModal
