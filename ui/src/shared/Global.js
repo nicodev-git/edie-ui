@@ -210,3 +210,5 @@ export const WorkflowActionTypes = [{
 export const credentialExcludes = [
   'ping', 'port'
 ]
+
+export const credentialTypes = ['WINDOWS', 'SSH', '']

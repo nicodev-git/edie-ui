@@ -259,6 +259,8 @@ class DeviceEditWizard extends React.Component {
     )
   }
   onClickInstall () {
+    const device = this.props.initialValues
+    this.props.installAgent(device)
   }
   renderInstallAgent () {
     return (
