@@ -39,6 +39,7 @@ export default connect(
     editParams: state.devices.editParams,
     monitorTagModalOpen: state.devices.monitorTagModalOpen,
     monitorTags: state.devices.monitorTags,
+    monitorConfig: state.devices.monitorConfig,
 
     selectedDevice: state.dashboard.selectedDevice,
     deviceCredsPickerVisible: state.devices.deviceCredsPickerVisible

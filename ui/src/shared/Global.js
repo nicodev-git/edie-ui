@@ -108,7 +108,7 @@ export function dateFormatter (datetime) {
 export function format () {
   let args = arguments
   return args[0].replace(/{(\d+)}/g, function (match, number) {
-    return typeof args[1 + parseInt(number)] !== 'undefined' ? args[1 + parseInt(number)] : match
+    return typeof args[1 + parseInt(number, 10)] !== 'undefined' ? args[1 + parseInt(number, 10)] : match
   })
 }
 
@@ -206,3 +206,7 @@ export const WorkflowActionTypes = [{
   label: 'Add Tag',
   value: 'ADD_TAG'
 }]
+
+export const credentialExcludes = [
+  'ping', 'port'
+]

@@ -18,13 +18,15 @@ import { primeColor } from 'style/common/materialStyles'
 
 import CredPicker from 'containers/settings/credentials/CredsPickerContainer'
 
+import {credentialExcludes} from 'shared/Global'
+
 class DeviceWizard extends Component {
   constructor (props) {
     super(props)
 
     let config = wizardConfig[this.props.deviceType]
     console.log(`Device type: ${this.props.deviceType}`)
-    console.log(props)
+    console.log(props.monitorConfig)
 
     this.state = {
       current: 1,
@@ -44,7 +46,7 @@ class DeviceWizard extends Component {
   }
 
   componentWillMount () {
-    const {selectedDevice, checkCreds} = this.props
+    const {selectedDevice, checkCreds, monitorConfig} = this.props
     const hasMonitors = this.state.currentDevice.steps.filter(s =>
         s.items.filter(i => i.type === 'monitors').length > 0
     ).length > 0
@@ -54,9 +56,12 @@ class DeviceWizard extends Component {
     }
 
     if (checkCreds) {
-      if (!selectedDevice.credentials || !selectedDevice.credentials.length) {
-        //Show Credentials Picker
-        this.props.showDeviceCredsPicker(true)
+      const monitorType = monitorConfig ? (monitorConfig.monitortype || '') : ''
+      if (credentialExcludes.indexOf(monitorType) < 0) {
+        if (!selectedDevice.credentials || !selectedDevice.credentials.length) {
+          //Show Credentials Picker
+          this.props.showDeviceCredsPicker(true)
+        }
       }
     }
   }
