@@ -16,6 +16,8 @@ import DeviceWizardView from './DeviceWizardView'
 import TagsView from './input/TagsView'
 import { primeColor } from 'style/common/materialStyles'
 
+import CredPicker from 'containers/settings/credentials/CredsPickerContainer'
+
 class DeviceWizard extends Component {
   constructor (props) {
     super(props)
@@ -279,6 +281,13 @@ class DeviceWizard extends Component {
     this.setState({ current })
   }
 
+  onCloseCredPicker (selected) {
+    if (selected) {
+      // this.props.updateDeviceCreds([...deviceCreds, selected])
+    }
+    this.props.showDeviceCredsPicker(false)
+  }
+
   renderParamEditModal () {
     if (!this.props.paramEditModalOpen) return null
     return (
@@ -289,6 +298,13 @@ class DeviceWizard extends Component {
   renderTags () {
     return (
       <TagsView {...this.props}/>
+    )
+  }
+
+  renderCredPicker () {
+    if (!this.props.deviceCredsPickerVisible) return null
+    return (
+      <CredPicker onClose={this.onCloseCredPicker.bind(this)}/>
     )
   }
 
