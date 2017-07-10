@@ -1,0 +1,35 @@
+import React from 'react'
+import {Dialog} from 'material-ui'
+
+import {TwoButtonsBlockCustom} from 'component/modal/parts'
+
+export default class CredTypePickerView extends React.Component {
+  render () {
+    const {credentialTypes, onHide, onClickOK, onSelect, selectedCredType} = this.props
+    return (
+      <Dialog open title="Credentials" onRequestClose={onHide}>
+        <div style={{height: 300, overflow: 'auto'}}>
+          <table className="table table-hover">
+            <thead>
+            <tr>
+              <th>Type</th>
+            </tr>
+            </thead>
+            <tbody>
+            {credentialTypes.map((p, i) =>
+              <tr
+                key={i}
+                onClick={() => onSelect(p)}
+                className={selectedCredType && selectedCredType.id === p.id ? 'selected' : ''}
+              >
+                <td>{p.name}</td>
+              </tr>
+            )}
+            </tbody>
+          </table>
+        </div>
+        <TwoButtonsBlockCustom name1="OK" name2="Cancel" action1={onClickOK} action2={onHide}/>
+      </Dialog>
+    )
+  }
+}
