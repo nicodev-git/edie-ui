@@ -30,17 +30,35 @@ class MonitorTplModal extends React.Component { // eslint-disable-line react/no-
   }
 
   handleFormSubmit (formProps) {
-    const {monitorTpl, selectedTplImage, monitorTplTags, monitorTplCredTypes} = this.props
+    const {
+      monitorTpl, selectedTplImage, monitorTplTags, monitorTplCredTypes,
+      selectedDeviceTpl, selectedDeviceMonitors
+    } = this.props
     const tpl = assign({}, (monitorTpl || {}), formProps, {
       tags: monitorTplTags || [],
       credentialTypes: monitorTplCredTypes
     })
     if (selectedTplImage) tpl.image = selectedTplImage.uuid
-    if (monitorTpl) {
-      this.props.updateMonitorTemplate(tpl)
+
+    if (selectedDeviceTpl) {
+      if (monitorTpl) {
+        this.props.updateSelectedDeviceTplMonitors(
+          selectedDeviceMonitors.map(p => p.uid === tpl.uid ? tpl : p)
+        )
+      } else {
+        this.props.updateSelectedDeviceTplMonitors(
+          [...selectedDeviceMonitors, tpl]
+        )
+      }
+      this.props.closeMonitorTplModal()
     } else {
-      this.props.addMonitorTemplate(tpl)
+      if (monitorTpl) {
+        this.props.updateMonitorTemplate(tpl)
+      } else {
+        this.props.addMonitorTemplate(tpl)
+      }
     }
+
   }
 
   getImageUrl () {
