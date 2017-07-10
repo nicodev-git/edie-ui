@@ -63,6 +63,7 @@ import {
 
   SHOW_MONITOR_TPL_TAG_MODAL,
   UPDATE_MONITOR_TPL_TAGS,
+  SHOW_MONITOR_TPL_CREDTYPE_PICKER,
 
   SHOW_COLLECTOR_MODAL,
   ADD_COLLECTOR,
@@ -721,5 +722,11 @@ export const fetchCredTypes = () => {
     axios.get(`${ROOT_URL}/credentialtype?size=100`).then(({data}) => {
       dispatch({type: FETCH_CRED_TYPES, data: data._embedded.credentialTypes})
     })
+  }
+}
+
+export const showMonitorTplCredTypesPicker = (visible) => {
+  return dispatch => {
+    dispatch({type: SHOW_MONITOR_TPL_CREDTYPE_PICKER, visible})
   }
 }

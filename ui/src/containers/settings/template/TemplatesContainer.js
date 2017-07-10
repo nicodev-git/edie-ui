@@ -42,7 +42,9 @@ import {
   showDeviceTplTagModal,
 
   showMonitorTplTagModal,
-  updateMonitorTplTags
+  updateMonitorTplTags,
+
+  showMonitorTplCredTypesPicker
 } from 'actions'
 
 class TemplatesContainer extends React.Component {
@@ -80,6 +82,7 @@ export default connect(
     monitorTplTagModalOpen: state.settings.monitorTplTagModalOpen,
     monitorTplTags: state.settings.monitorTplTags,
     monitorTplCredTypes: state.settings.monitorTplCredTypes,
+    monitorTplCredTypePickerOpen: state.settings.monitorTplCredTypePickerOpen,
 
     images: state.dashboard.images
   }),
@@ -121,7 +124,9 @@ export default connect(
       showDeviceTplTagModal,
 
       showMonitorTplTagModal,
-      updateMonitorTplTags
+      updateMonitorTplTags,
+
+      showMonitorTplCredTypesPicker
     }, dispatch)
   })
 )(withRouter(TemplatesContainer))

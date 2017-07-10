@@ -10,7 +10,7 @@ export default class MonitorTplModalView extends Component {
     const {
       header, imgUrl, onSubmit, onHide, onChange,
       tagModal, tags, onClickAddTag, onClickDeleteTag,
-      monitorTplCredTypes, onClickAddCredType, onClickDeleteCredType
+      credTypeModal, monitorTplCredTypes, onClickAddCredType, onClickDeleteCredType
     } = this.props
     return (
       <Dialog open title={header} onRequestClose={onHide}>
@@ -44,6 +44,7 @@ export default class MonitorTplModalView extends Component {
             </div>
 
             {tagModal}
+            {credTypeModal}
           </div>
           <SubmitBlock name="Save" onClick={onHide}/>
         </form>
