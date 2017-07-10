@@ -109,7 +109,8 @@ export default class Templates extends Component {
           {
             this.props.monitorTemplates.map((item, index) =>
               <tr key={item.id}
-                className={index === this.state.selected ? 'selected' : ''}>
+                className={index === this.state.selected ? 'selected' : ''}
+                onClick={() => console.log(item)}>
                 <td>
                   <img src={`${extImageBaseUrl}${item.image}`} width="32" height="32" className="icon-black valign-middle"/>
                   &nbsp;

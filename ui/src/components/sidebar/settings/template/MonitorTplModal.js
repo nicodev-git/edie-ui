@@ -14,6 +14,7 @@ class MonitorTplModal extends React.Component { // eslint-disable-line react/no-
     this.state = {}
     this.getImageUrl = this.getImageUrl.bind(this)
     this.onClickChangeImage = this.onClickChangeImage.bind(this)
+    console.log(props.selectedDeviceTpl)
   }
 
   onClickAddTag () {
@@ -29,9 +30,10 @@ class MonitorTplModal extends React.Component { // eslint-disable-line react/no-
   }
 
   handleFormSubmit (formProps) {
-    const {monitorTpl, selectedTplImage, monitorTplTags} = this.props
+    const {monitorTpl, selectedTplImage, monitorTplTags, monitorTplCredTypes} = this.props
     const tpl = assign({}, (monitorTpl || {}), formProps, {
-      tags: monitorTplTags || []
+      tags: monitorTplTags || [],
+      credentialTypes: monitorTplCredTypes
     })
     if (selectedTplImage) tpl.image = selectedTplImage.uuid
     if (monitorTpl) {

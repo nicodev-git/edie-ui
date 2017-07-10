@@ -236,7 +236,8 @@ export default function (state = initialState, action) {
     case OPEN_MONITOR_TEMPLATE_MODAL: {
       const monitorTpl = action.data
       const monitorTplTags = monitorTpl ? (monitorTpl.tags || []) : []
-      return { ...state, monitorTplModalVisible: true, monitorTpl, selectedTplImage: null, monitorTplTags }
+      const monitorTplCredTypes = monitorTpl ? (monitorTpl.credentialTypes || []) : []
+      return { ...state, monitorTplModalVisible: true, monitorTpl, selectedTplImage: null, monitorTplTags, monitorTplCredTypes }
     }
     case CLOSE_MONITOR_TEMPLATE_MODAL:
       return { ...state, monitorTplModalVisible: false }
