@@ -9,7 +9,8 @@ export default class MonitorTplModalView extends Component {
   render () {
     const {
       header, imgUrl, onSubmit, onHide, onChange,
-      tagModal, tags, onClickAddTag, onClickDeleteTag
+      tagModal, tags, onClickAddTag, onClickDeleteTag,
+      monitorTplCredTypes, onClickAddCredType, onClickDeleteCredType
     } = this.props
     return (
       <Dialog open title={header} onRequestClose={onHide}>
@@ -19,7 +20,10 @@ export default class MonitorTplModalView extends Component {
             <Field name="description" component={FormInput} label="Description"/>
             <Field name="monitortype" component={FormInput} label="Monitor type"/>
             <Field name="enabled" component={FormCheckbox} label="Enabled" labelPosition="right"/>
-            <ImageUploader imgUrl={imgUrl} onChange={onChange}/>
+
+            <div className="padding-sm-top padding-sm-bottom">
+              <ImageUploader imgUrl={imgUrl} onChange={onChange}/>
+            </div>
 
             <div>
               <RaisedButton label="Add Tag" onTouchTap={onClickAddTag}/>
@@ -29,6 +33,16 @@ export default class MonitorTplModalView extends Component {
                 <Chip key={i} style={chipStyles.chip} onRequestDelete={() => onClickDeleteTag(i)}>{t}</Chip>
               )}
             </div>
+
+            <div>
+              <RaisedButton label="Add Credential Type" onTouchTap={onClickAddCredType}/>
+            </div>
+            <div style={chipStyles.wrapper}>
+              {monitorTplCredTypes.map((t, i) =>
+                <Chip key={i} style={chipStyles.chip} onRequestDelete={() => onClickDeleteCredType(i)}>{t}</Chip>
+              )}
+            </div>
+
             {tagModal}
           </div>
           <SubmitBlock name="Save" onClick={onHide}/>

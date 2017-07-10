@@ -67,7 +67,7 @@ class MonitorTplModal extends React.Component { // eslint-disable-line react/no-
     )
   }
   render () {
-    const { handleSubmit, monitorTplTags } = this.props
+    const { handleSubmit, monitorTplTags, monitorTplCredTypes } = this.props
     let header = 'Monitor Template'
     let imgUrl = this.getImageUrl()
     return (
@@ -83,6 +83,10 @@ class MonitorTplModal extends React.Component { // eslint-disable-line react/no-
         onClickAddTag={this.onClickAddTag.bind(this)}
         onClickDeleteTag={this.onClickDeleteTag.bind(this)}
         tagModal={this.renderTagsModal()}
+
+        monitorTplCredTypes={monitorTplCredTypes}
+        onClickAddCredType
+        onClickDeleteCredType
       />
     )
   }
