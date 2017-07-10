@@ -62,10 +62,17 @@ class MonitorTplModal extends React.Component { // eslint-disable-line react/no-
   onClickAddCredType () {
     this.props.showMonitorTplCredTypesPicker(true)
   }
-  onClickDeleteCredType () {
+  onClickDeleteCredType (sel) {
+    const {monitorTplCredTypes} = this.props
+    this.props.updateMonitorTplCredTypes(monitorTplCredTypes.filter((p, i) => i !== sel))
   }
-  onCloseCredTypePicker () {
+  onCloseCredTypePicker (sel) {
     this.props.showMonitorTplCredTypesPicker(false)
+    if (sel) {
+      const {monitorTplCredTypes} = this.props
+      if (monitorTplCredTypes.indexOf(sel.name) >= 0) return
+      this.props.updateMonitorTplCredTypes([...monitorTplCredTypes, sel.name])
+    }
   }
   renderTagsModal () {
     if (!this.props.monitorTplTagModalOpen) return null

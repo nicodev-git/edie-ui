@@ -44,7 +44,8 @@ import {
   showMonitorTplTagModal,
   updateMonitorTplTags,
 
-  showMonitorTplCredTypesPicker
+  showMonitorTplCredTypesPicker,
+  updateMonitorTplCredTypes
 } from 'actions'
 
 class TemplatesContainer extends React.Component {
@@ -126,7 +127,8 @@ export default connect(
       showMonitorTplTagModal,
       updateMonitorTplTags,
 
-      showMonitorTplCredTypesPicker
+      showMonitorTplCredTypesPicker,
+      updateMonitorTplCredTypes
     }, dispatch)
   })
 )(withRouter(TemplatesContainer))
