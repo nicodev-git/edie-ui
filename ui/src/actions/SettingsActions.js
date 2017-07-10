@@ -64,6 +64,7 @@ import {
   SHOW_MONITOR_TPL_TAG_MODAL,
   UPDATE_MONITOR_TPL_TAGS,
   SHOW_MONITOR_TPL_CREDTYPE_PICKER,
+  UPDATE_MONITOR_TPL_CREDTYPES,
 
   SHOW_COLLECTOR_MODAL,
   ADD_COLLECTOR,
@@ -80,6 +81,7 @@ import {
   UPDATE_CRED_TYPE,
   REMOVE_CRED_TYPE,
   FETCH_CRED_TYPES,
+  SELECT_CRED_TYPE,
 
   NO_AUTH_ERROR
 } from './types'
@@ -725,8 +727,20 @@ export const fetchCredTypes = () => {
   }
 }
 
+export const selectCredType = (data) => {
+  return dispatch => {
+    dispatch({type: SELECT_CRED_TYPE, data})
+  }
+}
+
 export const showMonitorTplCredTypesPicker = (visible) => {
   return dispatch => {
     dispatch({type: SHOW_MONITOR_TPL_CREDTYPE_PICKER, visible})
+  }
+}
+
+export const updateMonitorTplCredTypes = (data) => {
+  return dispatch => {
+    dispatch({type: UPDATE_MONITOR_TPL_CREDTYPES, data})
   }
 }

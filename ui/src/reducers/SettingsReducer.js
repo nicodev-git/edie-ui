@@ -29,6 +29,7 @@ import {
   SHOW_MONITOR_TPL_TAG_MODAL,
   UPDATE_MONITOR_TPL_TAGS,
   SHOW_MONITOR_TPL_CREDTYPE_PICKER,
+  UPDATE_MONITOR_TPL_CREDTYPES,
 
   OPEN_TPL_IMAGE_MODAL,
   CLOSE_TPL_IMAGE_MODAL,
@@ -124,6 +125,7 @@ import {
   UPDATE_CRED_TYPE,
   REMOVE_CRED_TYPE,
   FETCH_CRED_TYPES,
+  SELECT_CRED_TYPE,
 
   FETCH_DEVICE_CATEGORIES
 
@@ -534,8 +536,12 @@ export default function (state = initialState, action) {
       return { ...state, credentialTypeDraw: state.credentialTypeDraw + 1 }
     case FETCH_CRED_TYPES:
       return { ...state, credentialTypes: action.data }
+    case SELECT_CRED_TYPE:
+      return { ...state, selectedCredType: action.data }
     case SHOW_MONITOR_TPL_CREDTYPE_PICKER:
       return { ...state, monitorTplCredTypePickerOpen: !!action.visible }
+    case UPDATE_MONITOR_TPL_CREDTYPES:
+      return { ...state, monitorTplCredTypes: action.data }
   }
   return state
 }

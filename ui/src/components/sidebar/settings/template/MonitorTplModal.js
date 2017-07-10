@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 import MonitorTplModalView from './MonitorTplModalView'
 import { getCustomImageUrl, extImageBaseUrl } from 'shared/Global'
 import TagPickerModal from 'containers/settings/tag/TagPickerModalContainer'
-import CredPicker from 'containers/settings/credentials/CredsPickerContainer'
+import CredTypePicker from 'containers/settings/credentials/CredTypePickerContainer'
 
 class MonitorTplModal extends React.Component { // eslint-disable-line react/no-multi-comp
   constructor (props) {
@@ -64,6 +64,9 @@ class MonitorTplModal extends React.Component { // eslint-disable-line react/no-
   }
   onClickDeleteCredType () {
   }
+  onCloseCredTypePicker () {
+    this.props.showMonitorTplCredTypesPicker(false)
+  }
   renderTagsModal () {
     if (!this.props.monitorTplTagModalOpen) return null
     return (
@@ -75,7 +78,7 @@ class MonitorTplModal extends React.Component { // eslint-disable-line react/no-
   renderCredTypePicker () {
     if (!this.props.monitorTplCredTypePickerOpen) return null
     return (
-      <CredPicker />
+      <CredTypePicker onClose={this.onCloseCredTypePicker.bind(this)} />
     )
   }
   render () {

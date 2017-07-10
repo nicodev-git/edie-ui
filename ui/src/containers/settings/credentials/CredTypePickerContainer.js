@@ -16,8 +16,8 @@ class CredTypePickerContainer extends React.Component {
 }
 export default connect(
   state => ({
-    credentialTypes: state.setting.credentialTypes,
-    selectedCredType: state.setting.selectedCredType
+    credentialTypes: state.settings.credentialTypes,
+    selectedCredType: state.settings.selectedCredType
   }), {
     fetchCredTypes,
     selectCredType
