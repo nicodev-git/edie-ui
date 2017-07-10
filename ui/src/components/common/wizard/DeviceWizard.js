@@ -63,9 +63,14 @@ class DeviceWizard extends Component {
     const {selectedDevice, monitorConfig} = this.props
 
     if (this.hasAgentType()) {
-      if (!selectedDevice.credentials || !selectedDevice.credentials.length) {
-        return true
-      }
+      const credTypes = monitorConfig.credentialTypes || []
+      const creds = selectedDevice.credentials || []
+      let found = true
+      credTypes.forEach(type => {
+        if (!creds.filter(p => p.type === type).length)
+          found = false
+      })
+      return found
     }
     return false
   }
