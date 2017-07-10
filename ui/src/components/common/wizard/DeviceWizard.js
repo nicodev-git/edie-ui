@@ -54,7 +54,7 @@ class DeviceWizard extends Component {
       this.props.fetchMonitorTemplates()
     }
 
-    if (this.hasCreds()) {
+    if (!this.hasCreds()) {
       this.props.showDeviceCredsPicker(true)
     }
   }
@@ -72,7 +72,7 @@ class DeviceWizard extends Component {
       })
       return found
     }
-    return false
+    return true
   }
 
   hasAgentType () {
