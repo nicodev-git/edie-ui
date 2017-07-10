@@ -18,8 +18,6 @@ import { primeColor } from 'style/common/materialStyles'
 
 import CredPicker from 'containers/settings/credentials/CredsPickerContainer'
 
-import {credentialExcludes} from 'shared/Global'
-
 class DeviceWizard extends Component {
   constructor (props) {
     super(props)
@@ -62,7 +60,7 @@ class DeviceWizard extends Component {
   }
 
   hasCreds () {
-    const {selectedDevice} = this.props
+    const {selectedDevice, monitorConfig} = this.props
 
     if (this.hasAgentType()) {
       if (!selectedDevice.credentials || !selectedDevice.credentials.length) {
@@ -76,10 +74,8 @@ class DeviceWizard extends Component {
     const {checkCreds, monitorConfig, initialValues} = this.props
 
     if (checkCreds && !initialValues.uid) {
-      const monitorType = monitorConfig ? (monitorConfig.monitortype || '') : ''
-      if (credentialExcludes.indexOf(monitorType) < 0) {
-        return true
-      }
+      const credTypes = monitorConfig.credentialTypes || []
+      return credTypes.length > 0
     }
     return false
   }

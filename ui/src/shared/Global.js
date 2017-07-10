@@ -206,7 +206,3 @@ export const WorkflowActionTypes = [{
   label: 'Add Tag',
   value: 'ADD_TAG'
 }]
-
-export const credentialExcludes = [
-  'ping', 'port'
-]
