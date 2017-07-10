@@ -1047,3 +1047,13 @@ export function installAgent (device) {
     })
   }
 }
+
+export function uninstallAgent (device) {
+  return dispatch => {
+    axios.get(`${ROOT_URL}/uninstallAgent`, {
+      params: {
+        id: device.id
+      }
+    })
+  }
+}

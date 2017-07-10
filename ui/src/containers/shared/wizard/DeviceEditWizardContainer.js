@@ -14,7 +14,8 @@ import {
   showDeviceCredsPicker,
   selectDeviceCreds,
 
-  installAgent
+  installAgent,
+  uninstallAgent
 } from 'actions'
 
 class DeviceEditWizardContainer extends React.Component {
@@ -88,6 +89,7 @@ export default connect(
     showDeviceCredsPicker,
     selectDeviceCreds,
 
-    installAgent
+    installAgent,
+    uninstallAgent
   }
 )(DeviceEditWizardContainer)

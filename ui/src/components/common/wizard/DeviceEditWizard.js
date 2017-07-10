@@ -50,12 +50,12 @@ class DeviceEditWizard extends React.Component {
   }
 
   componentWillReceiveProps (nextProps) {
-    let elem = document.getElementById('submitButton')
-    if (nextProps.dirty) {
-      elem.style.backgroundColor = '#ffffff'
-    } else {
-      elem.style.backgroundColor = '#d1d1d1'
-    }
+    // let elem = document.getElementById('submitButton')
+    // if (nextProps.dirty) {
+    //   elem.style.backgroundColor = '#ffffff'
+    // } else {
+    //   elem.style.backgroundColor = '#d1d1d1'
+    // }
   }
 
   onRequestSave () {
@@ -262,10 +262,9 @@ class DeviceEditWizard extends React.Component {
     const device = this.props.initialValues
     this.props.installAgent(device)
   }
-  renderInstallAgent () {
-    return (
-      <RaisedButton label="Install Agent" onTouchTap={this.onClickInstall.bind(this)}/>
-    )
+  onClickUninstall () {
+    const device = this.props.initialValues
+    this.props.uninstallAgent(device)
   }
   renderTplImageModal () {
     if (!this.props.tplImageModalVisible) return null
@@ -281,8 +280,9 @@ class DeviceEditWizard extends React.Component {
           <div className="tab-options">
             <div className="margin-md-right margin-md-top"
               style={{position: 'absolute', top: '40px', right: '20px'}}>
-              <RaisedButton id="submitButton" type="submit" label="Save"/>&nbsp;
-              {this.renderInstallAgent()}
+              <RaisedButton label="Save" type="submit" primary/>&nbsp;
+              <RaisedButton label="Install Agent" onTouchTap={this.onClickInstall.bind(this)}/>&nbsp;
+              <RaisedButton label="Uninstall Agent" onTouchTap={this.onClickUninstall.bind(this)}/>
             </div>
           </div>
 
