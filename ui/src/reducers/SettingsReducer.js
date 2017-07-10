@@ -159,6 +159,7 @@ const initialState = {
   showTraffic: true,
 
   monitorTplTags: [],
+  monitorTplCredTypes: [],
 
   collectorDraw: 1,
   agentDraw: 1,

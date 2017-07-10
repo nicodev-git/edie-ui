@@ -58,6 +58,10 @@ class MonitorTplModal extends React.Component { // eslint-disable-line react/no-
   onClickChangeImage () {
     this.props.openTplImageModal()
   }
+  onClickAddCredType () {
+  }
+  onClickDeleteCredType () {
+  }
   renderTagsModal () {
     if (!this.props.monitorTplTagModalOpen) return null
     return (
@@ -85,8 +89,8 @@ class MonitorTplModal extends React.Component { // eslint-disable-line react/no-
         tagModal={this.renderTagsModal()}
 
         monitorTplCredTypes={monitorTplCredTypes}
-        onClickAddCredType
-        onClickDeleteCredType
+        onClickAddCredType={this.onClickAddCredType.bind(this)}
+        onClickDeleteCredType={this.onClickDeleteCredType.bind(this)}
       />
     )
   }

@@ -79,6 +79,7 @@ export default connect(
     monitorTpl: state.settings.monitorTpl,
     monitorTplTagModalOpen: state.settings.monitorTplTagModalOpen,
     monitorTplTags: state.settings.monitorTplTags,
+    monitorTplCredTypes: state.settings.monitorTplCredTypes,
 
     images: state.dashboard.images
   }),

@@ -34,7 +34,7 @@ export default class MonitorTplModalView extends Component {
               )}
             </div>
 
-            <div>
+            <div className="padding-md-top">
               <RaisedButton label="Add Credential Type" onTouchTap={onClickAddCredType}/>
             </div>
             <div style={chipStyles.wrapper}>
