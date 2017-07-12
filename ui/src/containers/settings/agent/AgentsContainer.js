@@ -7,7 +7,8 @@ import {
   showAgentModal,
   addAgent,
   updateAgent,
-  removeAgent
+  removeAgent,
+  fetchAgents
 } from 'actions'
 
 class AgentsContainer extends React.Component {
@@ -19,6 +20,7 @@ class AgentsContainer extends React.Component {
 }
 export default connect(
   state => ({
+    agents: state.settings.agents,
     agentModalOpen:state.settings.agentModalOpen,
     editAgent: state.settings.editAgent,
     agentDraw: state.settings.agentDraw
@@ -26,6 +28,7 @@ export default connect(
     showAgentModal,
     addAgent,
     updateAgent,
-    removeAgent
+    removeAgent,
+    fetchAgents
   }
 )(withRouter(AgentsContainer))

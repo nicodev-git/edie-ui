@@ -39,14 +39,18 @@ export default class Agents extends Component {
       'customComponent': p => {
         if (!p.data) return <span/>
         return (
-          <span>{moment(p.data).format('YYYY-MM-DD HH:mm:ss')}</span>
+          <span>{moment(p.data).fromNow()}</span>
         )
       }
     }]
   }
 
-  onChangeInstall (install) {
-    this.setState({ install })
+  componentDidMount () {
+    this.props.fetchAgents()
+  }
+
+  onChangeInstall (e, index, value) {
+    this.setState({ install: value })
   }
 
   onRowDblClick () {
@@ -96,17 +100,21 @@ export default class Agents extends Component {
   }
 
   renderContent () {
+    let {agents} = this.props
+
+    const {install} = this.state
+    if (install === 'installed') agents = agents.filter(p => !!p.agent)
+    else if (install === 'notinstalled') agents = agents.filter(p => !p.agent)
+
     return (
       <InfiniteTable
-        url="/device/search/findAgents"
         cells={this.cells}
         ref="table"
         rowMetadata={{'key': 'id'}}
         selectable
         onRowDblClick={this.onRowDblClick.bind(this)}
-        params={{
-          draw: this.props.agentDraw
-        }}
+        useExternal={false}
+        data={agents}
       />
     )
   }
