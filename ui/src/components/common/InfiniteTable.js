@@ -143,6 +143,8 @@ class InfiniteTable extends React.Component {
         selected: [row.props.data[this.props.rowMetadata.key]]
       })
     }
+    const {onRowClick} = this.props
+    onRowClick && onRowClick(row.props.data)
   }
 
   onRowDblClick (row) {

@@ -47,6 +47,7 @@ export default class Collectors extends React.Component {
         rowMetadata={{'key': 'id'}}
         selectable
         onRowDblClick={this.onRowDblClick.bind(this)}
+        onRowClick={row => console.log}
         params={{
           draw: this.props.collectorDraw
         }}
