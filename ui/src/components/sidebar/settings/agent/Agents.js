@@ -21,11 +21,17 @@ export default class Agents extends Component {
     this.state = {
     }
     this.cells = [{
-      'displayName': 'Name',
-      'columnName': 'name'
+      'displayName': 'Device',
+      'columnName': 'deviceId'
     }, {
       'displayName': 'Version',
       'columnName': 'version'
+    }, {
+      'displayName': 'Host',
+      'columnName': 'host'
+    }, {
+      'displayName': 'IP',
+      'columnName': 'ipaddress'
     }, {
       'displayName': 'Last Seen',
       'columnName': 'lastSeen',
@@ -114,9 +120,6 @@ export default class Agents extends Component {
             </div>
 
             <div style={{position: 'absolute', right: '25px'}}>
-              <RaisedButton label="Add" onTouchTap={this.onClickAdd.bind(this)}/>&nbsp;
-              <RaisedButton label="Edit" onTouchTap={this.onClickEdit.bind(this)}/>&nbsp;
-              <RaisedButton label="Remove" onTouchTap={this.onClickRemove.bind(this)}/>&nbsp;
               <CollectorTabs history={this.props.history}/>
             </div>
           </div>
