@@ -84,11 +84,10 @@ export default class Monitors extends React.Component {
     )
   }
   render () {
-    const {props} = this
-    const {device} = props
+    const {device} = this.props
     return (
       <TabPage>
-        <TabPageHeader title="Monitors" titleOptions={<StatusImg {...this.props}/>}>
+        <TabPageHeader title={device.name} titleOptions={<StatusImg {...this.props}/>}>
           {this.renderOptions()}
         </TabPageHeader>
         <TabPageBody tabs={MonitorTabs(device.id, device.templateName)} history={this.props.history} location={this.props.location}>
