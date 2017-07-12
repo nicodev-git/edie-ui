@@ -76,8 +76,8 @@ class DeviceEditWizard extends React.Component {
     const {currentDevice} = this.state
     const {initialValues, selectedTplImage, deviceTags, deviceCreds} = this.props
 
-    let elem = document.getElementById('submitButton')
-    elem.style.backgroundColor = '#d1d1d1'
+    // let elem = document.getElementById('submitButton')
+    // elem.style.backgroundColor = '#d1d1d1'
     assign(params, currentDevice.server.params)
     assign(params, this.props.extraParams)
     assign(params, {
