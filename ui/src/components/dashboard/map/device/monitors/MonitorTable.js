@@ -85,6 +85,8 @@ export default class MonitorTable extends Component {
   }
 
   componentDidMount () {
+    this.props.fetchMonitorTemplates()
+
     this.incidentSocket = new IncidentSocket({
       listeners: {
         'updatedDevice': this.onDeviceUpdated.bind(this)
@@ -189,12 +191,17 @@ export default class MonitorTable extends Component {
   }
 
   onClickEditMonitor () {
+    const {monitorTemplates} = this.props
     let selected = this.getTable().getSelected()
 
     if (!selected) return showAlert('Please select monitor.')
 
-    this.setState({ editMonitor: selected }, () => {
-      this.props.openDeviceMonitorWizard(selected)
+    let monitorConfig = monitorTemplates.filter(p => p.monitortype === selected.monitortype)
+    monitorConfig = monitorConfig.length ? monitorConfig[0] : null
+    this.setState({
+      editMonitor: selected
+    }, () => {
+      this.props.openDeviceMonitorWizard(selected, monitorConfig)
     })
   }
 
