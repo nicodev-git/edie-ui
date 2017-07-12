@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import moment from 'moment'
-import {MenuItem, SelectField, RaisedButton} from 'material-ui'
+import {MenuItem, SelectField} from 'material-ui'
 
 import InfiniteTable from 'components/common/InfiniteTable'
 
@@ -19,22 +19,23 @@ export default class Agents extends Component {
   constructor (props) {
     super(props)
     this.state = {
+      install: 'all'
     }
     this.cells = [{
       'displayName': 'Device',
-      'columnName': 'deviceId'
+      'columnName': 'name'
     }, {
       'displayName': 'Version',
-      'columnName': 'version'
+      'columnName': 'agent.version'
     }, {
       'displayName': 'Host',
-      'columnName': 'host'
+      'columnName': 'agent.host'
     }, {
       'displayName': 'IP',
-      'columnName': 'ipaddress'
+      'columnName': 'agent.ipaddress'
     }, {
       'displayName': 'Last Seen',
-      'columnName': 'lastSeen',
+      'columnName': 'agent.lastSeen',
       'customComponent': p => {
         if (!p.data) return <span/>
         return (
@@ -79,7 +80,7 @@ export default class Agents extends Component {
         menuItemStyle={inputStyle}
         labelStyle={inputStyle}
         onChange={this.onChangeInstall.bind(this)}
-        value="all">
+        value={this.state.install}>
         <MenuItem value="all" primaryText="All"/>
         <MenuItem value="installed" primaryText="Installed"/>
         <MenuItem value="notinstalled" primaryText="Not Installed"/>
@@ -97,7 +98,7 @@ export default class Agents extends Component {
   renderContent () {
     return (
       <InfiniteTable
-        url="/deviceagent"
+        url="/device/search/findAgents"
         cells={this.cells}
         ref="table"
         rowMetadata={{'key': 'id'}}
@@ -116,7 +117,7 @@ export default class Agents extends Component {
         <TabPageHeader title="Agents">
           <div className="text-center margin-md-top">
             <div className="pull-left form-inline text-left">
-              &nbsp;
+              {this.renderSelect()}
             </div>
 
             <div style={{position: 'absolute', right: '25px'}}>

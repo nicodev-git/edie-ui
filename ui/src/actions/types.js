@@ -404,6 +404,7 @@ export const SHOW_AGENT_MODAL = 'SHOW_AGENT_MODAL'
 export const ADD_AGENT = 'ADD_AGENT'
 export const UPDATE_AGENT = 'UPDATE_AGENT'
 export const REMOVE_AGENT = 'REMOVE_AGENT'
+export const FETCH_AGENTS = 'FETCH_AGENTS'
 
 export const SHOW_CRED_TYPE_MODAL = 'SHOW_CRED_TYPE_MODAL'
 export const ADD_CRED_TYPE = 'ADD_CRED_TYPE'

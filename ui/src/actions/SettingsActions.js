@@ -75,6 +75,7 @@ import {
   ADD_AGENT,
   UPDATE_AGENT,
   REMOVE_AGENT,
+  FETCH_AGENTS,
 
   SHOW_CRED_TYPE_MODAL,
   ADD_CRED_TYPE,
@@ -658,6 +659,14 @@ export const removeCollector = (entity) => {
 export const showAgentModal = (visible, agent) => {
   return dispatch => {
     dispatch({type: SHOW_AGENT_MODAL, visible, agent})
+  }
+}
+
+export const fetchAgents = () => {
+  return dispatch => {
+    axios.get(`${ROOT_URL}/device/search/findAgents?size=1000`).then(res => {
+      dispatch({type: FETCH_AGENTS, data: res.data._embedded.devices})
+    }).catch(error => apiError(dispatch, error))
   }
 }
 
