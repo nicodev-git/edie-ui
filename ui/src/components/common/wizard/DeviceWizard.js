@@ -78,7 +78,7 @@ class DeviceWizard extends Component {
   hasAgentType () {
     const {checkCreds, monitorConfig, initialValues} = this.props
 
-    if (checkCreds && !initialValues.uid) {
+    if (checkCreds) {
       const credTypes = monitorConfig.credentialTypes || []
       return credTypes.length > 0
     }
