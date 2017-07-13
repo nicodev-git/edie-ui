@@ -74,6 +74,7 @@ export default class Agents extends Component {
   }
   onClickInstall (device) {
     console.log(device)
+    this.props.installAgent(device)
   }
   getTable () {
     return this.refs.table

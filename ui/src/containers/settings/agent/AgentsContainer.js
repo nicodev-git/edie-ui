@@ -8,7 +8,9 @@ import {
   addAgent,
   updateAgent,
   removeAgent,
-  fetchAgents
+  fetchAgents,
+
+  installAgent
 } from 'actions'
 
 class AgentsContainer extends React.Component {
@@ -29,6 +31,8 @@ export default connect(
     addAgent,
     updateAgent,
     removeAgent,
-    fetchAgents
+    fetchAgents,
+
+    installAgent
   }
 )(withRouter(AgentsContainer))
