@@ -1052,7 +1052,7 @@ export function installAgent (data) {
     }).then(({data})=> {
       if (!data.success) dispatch({type: UPDATE_AGENT_INSTALL, data, status: 'failed'})
     }).catch(() => {
-      dispatch({type: UPDATE_AGENT_INSTALL, success: 'failed'})
+      dispatch({type: UPDATE_AGENT_INSTALL, data, status: 'failed'})
     })
   }
 }

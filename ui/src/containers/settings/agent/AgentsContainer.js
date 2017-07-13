@@ -11,6 +11,7 @@ import {
   fetchAgents,
 
   installAgent,
+  clearAgentInstall,
   showAgentPreloader
 } from 'actions'
 
@@ -39,6 +40,7 @@ export default connect(
     fetchAgents,
 
     installAgent,
+    clearAgentInstall,
     showAgentPreloader
   }
 )(withRouter(AgentsContainer))

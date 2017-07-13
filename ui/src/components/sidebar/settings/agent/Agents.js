@@ -41,10 +41,17 @@ export default class Agents extends Component {
         if (!p.data) {
           let installAgent = me.props.installAgents.filter(a => a.id === p.rowData.id)
           installAgent = installAgent.length ? installAgent[0] : null
+
+          const installing = installAgent && installAgent.status === 'installing'
           return (
             <div>
-              <RaisedButton label="Install" onTouchTap={this.onClickInstall.bind(this, p.rowData)} disabled={!!installAgent} className="valign-middle"/>
-              {installAgent && installAgent.status === 'installing' ? <CircularProgress className="valign-middle margin-md-left" size={30}/> : null}
+              <RaisedButton
+                label={installing ? 'Installing' : 'Install'}
+                onTouchTap={this.onClickInstall.bind(this, p.rowData)}
+                disabled={!!installAgent}
+                className="valign-middle"
+              />
+              {installing ? <CircularProgress className="valign-middle margin-md-left" size={30}/> : null}
               {installAgent && installAgent.status === 'failed' ? 'Failed' : null}
             </div>
           )
@@ -57,6 +64,7 @@ export default class Agents extends Component {
   }
 
   componentDidMount () {
+    this.props.clearAgentInstall()
     this.props.fetchAgents()
     this.props.showAgentPreloader(false)
   }
