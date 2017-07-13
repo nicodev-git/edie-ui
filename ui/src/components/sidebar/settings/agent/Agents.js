@@ -72,6 +72,14 @@ export default class Agents extends Component {
     this.props.showAgentPreloader(false)
   }
 
+  componentWillUpdate (nextProps) {
+    const {installAgentResult} = nextProps
+    if (this.props.installAgentResult === null && installAgentResult !== null) {
+      this.props.showAgentPreloader(false)
+      if (!installAgentResult) showAlert("Install failed.")
+    }
+  }
+
   onChangeInstall (e, index, value) {
     this.setState({ install: value })
   }
@@ -81,6 +89,9 @@ export default class Agents extends Component {
 
   onClickAdd () {
     this.props.showAgentModal(true)
+    // this.checkTimer = setInterval(() => {
+    //  
+    // })
   }
   onClickEdit () {
     const selected = this.getTable().getSelected()

@@ -28,7 +28,9 @@ export default connect(
     editAgent: state.settings.editAgent,
     agentDraw: state.settings.agentDraw,
 
-    agentPreloader: state.settings.agentPreloader
+    agentPreloader: state.settings.agentPreloader,
+
+    installAgentResult: state.settings.installAgentResult
   }), {
     showAgentModal,
     addAgent,
