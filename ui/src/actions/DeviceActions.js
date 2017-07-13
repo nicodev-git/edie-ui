@@ -107,6 +107,7 @@ import {
   UPDATE_DEVICE_APP_TAB,
 
   INSTALL_AGENT,
+  CLEAR_AGENT_INSTALL,
 
   NO_AUTH_ERROR
 } from './types'
@@ -1042,7 +1043,6 @@ export function selectDeviceCreds (creds) {
 
 export function installAgent (device) {
   return dispatch => {
-    dispatch({type: INSTALL_AGENT, success: null})
     axios.get(`${ROOT_URL}/installAgent`, {
       params: {
           id: device.id
@@ -1062,5 +1062,11 @@ export function uninstallAgent (device) {
         id: device.id
       }
     })
+  }
+}
+
+export function clearAgentInstall () {
+  return dispatch => {
+    dispatch({type: CLEAR_AGENT_INSTALL})
   }
 }

@@ -407,6 +407,8 @@ export const REMOVE_AGENT = 'REMOVE_AGENT'
 export const FETCH_AGENTS = 'FETCH_AGENTS'
 export const SHOW_AGENT_PRELOADER = 'SHOW_AGENT_PRELOADER'
 export const INSTALL_AGENT = 'INSTALL_AGENT'
+export const ADD_AGENT_INSTALL = 'ADD_AGENT_INSTALL'
+export const CLEAR_AGENT_INSTALL = 'CLEAR_AGENT_INSTALL'
 
 export const SHOW_CRED_TYPE_MODAL = 'SHOW_CRED_TYPE_MODAL'
 export const ADD_CRED_TYPE = 'ADD_CRED_TYPE'
@@ -414,7 +416,6 @@ export const UPDATE_CRED_TYPE = 'UPDATE_CRED_TYPE'
 export const REMOVE_CRED_TYPE = 'REMOVE_CRED_TYPE'
 export const FETCH_CRED_TYPES = 'FETCH_CRED_TYPES'
 export const SELECT_CRED_TYPE = 'SELECT_CRED_TYPE'
-
 
 ///////////////////////////////////////////////////////////////
 

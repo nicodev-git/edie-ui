@@ -89,9 +89,6 @@ export default class Agents extends Component {
 
   onClickAdd () {
     this.props.showAgentModal(true)
-    // this.checkTimer = setInterval(() => {
-    //  
-    // })
   }
   onClickEdit () {
     const selected = this.getTable().getSelected()
