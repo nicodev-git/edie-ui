@@ -1042,17 +1042,17 @@ export function selectDeviceCreds (creds) {
   }
 }
 
-export function installAgent (data) {
+export function installAgent (device) {
   return dispatch => {
-    dispatch({type: ADD_AGENT_INSTALL, data})
+    dispatch({type: ADD_AGENT_INSTALL, data: device})
     axios.get(`${ROOT_URL}/installAgent`, {
       params: {
-          id: data.id
+          id: device.id
       }
     }).then(({data})=> {
-      if (!data.success) dispatch({type: UPDATE_AGENT_INSTALL, data, status: 'failed'})
+      if (!data.success) dispatch({type: UPDATE_AGENT_INSTALL, data: device, status: 'failed'})
     }).catch(() => {
-      dispatch({type: UPDATE_AGENT_INSTALL, data, status: 'failed'})
+      dispatch({type: UPDATE_AGENT_INSTALL, data: device, status: 'failed'})
     })
   }
 }
