@@ -37,7 +37,7 @@ export default class Agents extends Component {
       'displayName': 'Last Seen',
       'columnName': 'agent.lastSeen',
       'customComponent': p => {
-        if (!p.data) return <RaisedButton label="Install"/>
+        if (!p.data) return <RaisedButton label="Install" onTouchTap={this.onClickInstall.bind(this, p.rowData)}/>
         return (
           <span>{moment(p.data).fromNow()}</span>
         )
@@ -71,6 +71,9 @@ export default class Agents extends Component {
       if (btn !== 'ok') return
       this.props.removeAgent(selected)
     })
+  }
+  onClickInstall (device) {
+    console.log(device)
   }
   getTable () {
     return this.refs.table
