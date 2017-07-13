@@ -121,6 +121,7 @@ import {
   REMOVE_AGENT,
   FETCH_AGENTS,
   SHOW_AGENT_PRELOADER,
+  INSTALL_AGENT,
 
   SHOW_CRED_TYPE_MODAL,
   ADD_CRED_TYPE,
@@ -171,7 +172,8 @@ const initialState = {
   credentialTypeDraw: 1,
   credentialTypes: [],
 
-  agents: []
+  agents: [],
+  installAgentResult: null
 }
 
 export default function (state = initialState, action) {
@@ -551,6 +553,8 @@ export default function (state = initialState, action) {
       return { ...state, monitorTplCredTypes: action.data }
     case SHOW_AGENT_PRELOADER:
       return { ...state, agentPreloader: !!action.visible }
+    case INSTALL_AGENT:
+      return { ...state, installAgentResult: action.success }
   }
   return state
 }
