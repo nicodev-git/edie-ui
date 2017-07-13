@@ -65,8 +65,14 @@ export default class Agents extends Component {
 
   componentDidMount () {
     this.props.clearAgentInstall()
-    this.props.fetchAgents()
-    this.props.showAgentPreloader(false)
+
+    this.timer = setInterval(() => {
+      this.props.fetchAgents()
+    }, 5000)
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.timer)
   }
 
   onChangeInstall (e, index, value) {
