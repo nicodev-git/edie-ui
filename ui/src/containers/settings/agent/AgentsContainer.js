@@ -10,7 +10,8 @@ import {
   removeAgent,
   fetchAgents,
 
-  installAgent
+  installAgent,
+  showAgentPreloader
 } from 'actions'
 
 class AgentsContainer extends React.Component {
@@ -25,7 +26,9 @@ export default connect(
     agents: state.settings.agents,
     agentModalOpen:state.settings.agentModalOpen,
     editAgent: state.settings.editAgent,
-    agentDraw: state.settings.agentDraw
+    agentDraw: state.settings.agentDraw,
+
+    agentPreloader: state.settings.agentPreloader
   }), {
     showAgentModal,
     addAgent,
@@ -33,6 +36,7 @@ export default connect(
     removeAgent,
     fetchAgents,
 
-    installAgent
+    installAgent,
+    showAgentPreloader
   }
 )(withRouter(AgentsContainer))

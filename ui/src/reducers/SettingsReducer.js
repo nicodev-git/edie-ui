@@ -120,6 +120,7 @@ import {
   UPDATE_AGENT,
   REMOVE_AGENT,
   FETCH_AGENTS,
+  SHOW_AGENT_PRELOADER,
 
   SHOW_CRED_TYPE_MODAL,
   ADD_CRED_TYPE,
@@ -548,6 +549,8 @@ export default function (state = initialState, action) {
       return { ...state, monitorTplCredTypePickerOpen: !!action.visible }
     case UPDATE_MONITOR_TPL_CREDTYPES:
       return { ...state, monitorTplCredTypes: action.data }
+    case SHOW_AGENT_PRELOADER:
+      return { ...state, agentPreloader: !!action.visible }
   }
   return state
 }

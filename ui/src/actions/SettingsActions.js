@@ -76,6 +76,7 @@ import {
   UPDATE_AGENT,
   REMOVE_AGENT,
   FETCH_AGENTS,
+  SHOW_AGENT_PRELOADER,
 
   SHOW_CRED_TYPE_MODAL,
   ADD_CRED_TYPE,
@@ -751,5 +752,11 @@ export const showMonitorTplCredTypesPicker = (visible) => {
 export const updateMonitorTplCredTypes = (data) => {
   return dispatch => {
     dispatch({type: UPDATE_MONITOR_TPL_CREDTYPES, data})
+  }
+}
+
+export const showAgentPreloader = (visible) => {
+  return dispatch => {
+    dispatch({type: SHOW_AGENT_PRELOADER, visible})
   }
 }

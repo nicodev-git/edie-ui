@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import moment from 'moment'
-import {MenuItem, SelectField, RaisedButton} from 'material-ui'
+import {MenuItem, SelectField, RaisedButton, RefreshIndicator} from 'material-ui'
 
 import InfiniteTable from 'components/common/InfiniteTable'
 
@@ -14,6 +14,28 @@ import AgentModal from './AgentModal'
 
 import { errorStyle, inputStyle, selectedItemStyle } from 'style/common/materialStyles'
 import {showAlert, showConfirm} from 'components/common/Alert'
+
+const loadingStyle = {
+  position: 'absolute',
+  left: '50%',
+  top: '50%',
+  transform: 'translate(-50%, -50%)'
+}
+
+const overlayStyle = {
+  position: 'absolute',
+  top: 0,
+  left: 0,
+  width: '100%',
+  height: '100%',
+  background: 'rgba(80,80,80,0.5)',
+  zIndex: 10
+}
+
+const indicatorStyle = {
+  display: 'inline-block',
+  position: 'relative'
+}
 
 export default class Agents extends Component {
   constructor (props) {
@@ -47,6 +69,7 @@ export default class Agents extends Component {
 
   componentDidMount () {
     this.props.fetchAgents()
+    this.props.showAgentPreloader(false)
   }
 
   onChangeInstall (e, index, value) {
@@ -73,8 +96,8 @@ export default class Agents extends Component {
     })
   }
   onClickInstall (device) {
-    console.log(device)
     this.props.installAgent(device)
+    this.props.showAgentPreloader(true)
   }
   getTable () {
     return this.refs.table
@@ -123,6 +146,23 @@ export default class Agents extends Component {
     )
   }
 
+  renderPreloader () {
+    if (!this.props.agentPreloader) return null
+    return (
+      <div style={overlayStyle}>
+        <div style={loadingStyle}>
+          <RefreshIndicator
+            size={50}
+            left={0}
+            top={0}
+            status="loading"
+            style={indicatorStyle}
+          />
+        </div>
+      </div>
+    )
+  }
+
   render () {
     return (
       <TabPage>
@@ -142,6 +182,7 @@ export default class Agents extends Component {
           {this.renderContent()}
           {this.renderAgentModal()}
         </TabPageBody>
+        {this.renderPreloader()}
       </TabPage>
     )
   }
