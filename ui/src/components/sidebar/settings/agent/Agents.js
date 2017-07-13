@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import moment from 'moment'
-import {MenuItem, SelectField, RaisedButton, RefreshIndicator} from 'material-ui'
+import {MenuItem, SelectField, RaisedButton, CircularProgress} from 'material-ui'
 
 import InfiniteTable from 'components/common/InfiniteTable'
 
@@ -15,34 +15,13 @@ import AgentModal from './AgentModal'
 import { errorStyle, inputStyle, selectedItemStyle } from 'style/common/materialStyles'
 import {showAlert, showConfirm} from 'components/common/Alert'
 
-const loadingStyle = {
-  position: 'absolute',
-  left: '50%',
-  top: '50%',
-  transform: 'translate(-50%, -50%)'
-}
-
-const overlayStyle = {
-  position: 'absolute',
-  top: 0,
-  left: 0,
-  width: '100%',
-  height: '100%',
-  background: 'rgba(80,80,80,0.5)',
-  zIndex: 10
-}
-
-const indicatorStyle = {
-  display: 'inline-block',
-  position: 'relative'
-}
-
 export default class Agents extends Component {
   constructor (props) {
     super(props)
     this.state = {
       install: 'all'
     }
+    const me = this
     this.cells = [{
       'displayName': 'Device',
       'columnName': 'name'
@@ -59,7 +38,17 @@ export default class Agents extends Component {
       'displayName': 'Last Seen',
       'columnName': 'agent.lastSeen',
       'customComponent': p => {
-        if (!p.data) return <RaisedButton label="Install" onTouchTap={this.onClickInstall.bind(this, p.rowData)}/>
+        if (!p.data) {
+          let installAgent = me.props.installAgents.filter(a => a.id === p.rowData.id)
+          installAgent = installAgent.length ? installAgent[0] : null
+          return (
+            <div>
+              <RaisedButton label="Install" onTouchTap={this.onClickInstall.bind(this, p.rowData)} disabled={!!installAgent} className="valign-middle"/>
+              {installAgent && installAgent.status === 'installing' ? <CircularProgress className="valign-middle margin-md-left" size={30}/> : null}
+              {installAgent && installAgent.status === 'failed' ? 'Failed' : null}
+            </div>
+          )
+        }
         return (
           <span>{moment(p.data).fromNow()}</span>
         )
@@ -70,14 +59,6 @@ export default class Agents extends Component {
   componentDidMount () {
     this.props.fetchAgents()
     this.props.showAgentPreloader(false)
-  }
-
-  componentWillUpdate (nextProps) {
-    const {installAgentResult} = nextProps
-    if (this.props.installAgentResult === null && installAgentResult !== null) {
-      this.props.showAgentPreloader(false)
-      if (!installAgentResult) showAlert("Install failed.")
-    }
   }
 
   onChangeInstall (e, index, value) {
@@ -105,7 +86,6 @@ export default class Agents extends Component {
   }
   onClickInstall (device) {
     this.props.installAgent(device)
-    this.props.showAgentPreloader(true)
   }
   getTable () {
     return this.refs.table
@@ -154,23 +134,6 @@ export default class Agents extends Component {
     )
   }
 
-  renderPreloader () {
-    if (!this.props.agentPreloader) return null
-    return (
-      <div style={overlayStyle}>
-        <div style={loadingStyle}>
-          <RefreshIndicator
-            size={50}
-            left={0}
-            top={0}
-            status="loading"
-            style={indicatorStyle}
-          />
-        </div>
-      </div>
-    )
-  }
-
   render () {
     return (
       <TabPage>
@@ -190,7 +153,6 @@ export default class Agents extends Component {
           {this.renderContent()}
           {this.renderAgentModal()}
         </TabPageBody>
-        {this.renderPreloader()}
       </TabPage>
     )
   }

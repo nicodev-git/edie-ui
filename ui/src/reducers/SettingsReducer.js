@@ -121,7 +121,8 @@ import {
   REMOVE_AGENT,
   FETCH_AGENTS,
   SHOW_AGENT_PRELOADER,
-  INSTALL_AGENT,
+  UPDATE_AGENT_INSTALL,
+  ADD_AGENT_INSTALL,
   CLEAR_AGENT_INSTALL,
 
   SHOW_CRED_TYPE_MODAL,
@@ -554,8 +555,10 @@ export default function (state = initialState, action) {
       return { ...state, monitorTplCredTypes: action.data }
     case SHOW_AGENT_PRELOADER:
       return { ...state, agentPreloader: !!action.visible }
-    case ADD_AGENT_:
-      return { ...state, installAgents: action.success }
+    case ADD_AGENT_INSTALL:
+      return { ...state, installAgents: [...state.installAgents, {id: action.data.id, status: 'installing'}] }
+    case UPDATE_AGENT_INSTALL:
+      return { ...state, installAgents: state.installAgents.map(p => p.id === action.data.id ? {...p, status: action.status} : p)}
     case CLEAR_AGENT_INSTALL:
       return { ...state, installAgents: [] }
   }

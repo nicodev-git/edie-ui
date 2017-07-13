@@ -106,7 +106,8 @@ import {
   UPDATE_MONITOR_QUERY,
   UPDATE_DEVICE_APP_TAB,
 
-  INSTALL_AGENT,
+  ADD_AGENT_INSTALL,
+  UPDATE_AGENT_INSTALL,
   CLEAR_AGENT_INSTALL,
 
   NO_AUTH_ERROR
@@ -1041,16 +1042,17 @@ export function selectDeviceCreds (creds) {
   }
 }
 
-export function installAgent (device) {
+export function installAgent (data) {
   return dispatch => {
+    dispatch({type: ADD_AGENT_INSTALL, data})
     axios.get(`${ROOT_URL}/installAgent`, {
       params: {
-          id: device.id
+          id: data.id
       }
     }).then(({data})=> {
-      dispatch({type: INSTALL_AGENT, success: !!data.success})
+      if (!data.success) dispatch({type: UPDATE_AGENT_INSTALL, data, status: 'failed'})
     }).catch(() => {
-      dispatch({type: INSTALL_AGENT, success: false})
+      dispatch({type: UPDATE_AGENT_INSTALL, success: 'failed'})
     })
   }
 }

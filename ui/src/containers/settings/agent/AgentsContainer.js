@@ -30,7 +30,7 @@ export default connect(
 
     agentPreloader: state.settings.agentPreloader,
 
-    installAgentResult: state.settings.installAgentResult
+    installAgents: state.settings.installAgents
   }), {
     showAgentModal,
     addAgent,
