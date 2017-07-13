@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import moment from 'moment'
-import {MenuItem, SelectField} from 'material-ui'
+import {MenuItem, SelectField, RaisedButton} from 'material-ui'
 
 import InfiniteTable from 'components/common/InfiniteTable'
 
@@ -37,7 +37,7 @@ export default class Agents extends Component {
       'displayName': 'Last Seen',
       'columnName': 'agent.lastSeen',
       'customComponent': p => {
-        if (!p.data) return <span/>
+        if (!p.data) return <RaisedButton label="Install"/>
         return (
           <span>{moment(p.data).fromNow()}</span>
         )
