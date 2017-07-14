@@ -149,11 +149,7 @@ class DeviceWizard extends Component {
       tabs.push(tab)
     }
 
-    return (
-      <div className="tab-content">
-          {tabs}
-      </div>
-    )
+    return tabs
   }
 
   buildStep (index) {

@@ -6,7 +6,7 @@ import { inputStyle, underlineStyle } from 'style/common/materialStyles'
 
 export default class TextInput extends React.Component {
   renderField (config) {
-    const {input, label, disabled, style, useColumn, className} = config
+    const {input, label, disabled, style, className} = config
     const field = (
       <div style={util.convertStyle(style)} className={className}>
         <TextField
@@ -18,7 +18,7 @@ export default class TextInput extends React.Component {
         />
       </div>
     )
-    return util.wrapInputs(field, useColumn)
+    return field
   }
 
   //

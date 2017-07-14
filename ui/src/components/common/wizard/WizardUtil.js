@@ -27,7 +27,7 @@ export const util = {
   wrapInputs (input, useColumn) {
     if (useColumn) return input
     return (
-      <div className="wizard-input">
+      <div>
           {input}
       </div>
     )

@@ -2471,19 +2471,7 @@ export const wizardConfig = {
         },
         width: MAX_WIDTH,
         required: true,
-        name: 'name',
-        cls: 'col-md-6 p-none'
-      }, {
-        type: 'check',
-        label: {
-          text: 'Enabled',
-          type: 'attach',
-          width: 3
-        },
-        name: 'enabled',
-        cls: 'margin-md-top margin-md-bottom',
-        // checked: true,
-        width: MAX_WIDTH
+        name: 'name'
       }, {
         type: 'paramlist'
       }, {
@@ -2518,6 +2506,17 @@ export const wizardConfig = {
           width: MAX_WIDTH,
           name: 'checkinterval'
         }]
+      }, {
+        type: 'check',
+        label: {
+          text: 'Enabled',
+          type: 'attach',
+          width: 3
+        },
+        name: 'enabled',
+        cls: 'margin-md-top margin-md-bottom',
+        // checked: true,
+        width: MAX_WIDTH
       }]
     }],
     creds: [{
