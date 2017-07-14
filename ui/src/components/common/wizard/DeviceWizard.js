@@ -84,7 +84,7 @@ class DeviceWizard extends Component {
       if (selectedDevice.agent) return false
       const credTypes = monitorConfig.credentialTypes || []
       if (credTypes.length === 0) return false
-      if (collectors.length) return false
+      if (collectors.length > 2) return false
       return true
     }
     return false
