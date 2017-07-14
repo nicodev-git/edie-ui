@@ -1,5 +1,5 @@
 import React from 'react'
-import Chip from 'material-ui/Chip'
+import {Chip, Card, CardText} from 'material-ui'
 import {keys} from 'lodash'
 import {Field} from 'redux-form'
 
@@ -62,23 +62,26 @@ class ParamList extends React.Component {
     const params = this.props.editParams.filter(p => paramKeys.indexOf(p.key) < 0)
     return (
       <div>
-        {this.renderInputs()}
-        <div style={styles.wrapper}>
-          <label className="padding-xs-top" style={{...styles.chip, width: 80}}>Params</label>
-
-          {params.map(p =>
-            <Chip
-              key={p.key}
-              style={styles.chip}
-              labelStyle={styles.chipLabel}
-              onTouchTap={this.onClickEdit.bind(this, p)}
-              onRequestDelete={this.onClickRemove.bind(this, p)}
-            >
-              <b>{p.key}</b>: {p.value}
-            </Chip>
-          )}
-          <Chip style={styles.chip} onTouchTap={this.onClickAdd.bind(this)}><b>&nbsp;&nbsp;+&nbsp;&nbsp;</b></Chip>
-        </div>
+        <div className="margin-md-top">Params</div>
+        <Card>
+          <CardText>
+            {this.renderInputs()}
+            <div style={styles.wrapper}>
+              {params.map(p =>
+                <Chip
+                  key={p.key}
+                  style={styles.chip}
+                  labelStyle={styles.chipLabel}
+                  onTouchTap={this.onClickEdit.bind(this, p)}
+                  onRequestDelete={this.onClickRemove.bind(this, p)}
+                >
+                  <b>{p.key}</b>: {p.value}
+                </Chip>
+              )}
+              <Chip style={styles.chip} onTouchTap={this.onClickAdd.bind(this)}><b>&nbsp;&nbsp;+&nbsp;&nbsp;</b></Chip>
+            </div>
+          </CardText>
+        </Card>
       </div>
     )
   }
