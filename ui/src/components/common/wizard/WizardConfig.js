@@ -2521,38 +2521,35 @@ export const wizardConfig = {
       }]
     }],
     creds: [{
-      title: 'step 1',
+      type: 'combo',
+      label: {
+        text: 'Type',
+        width: 3
+      } ,
       items: [{
-        type: 'combo',
-        label: {
-          text: 'Type',
-          width: 3
-        },
-        items: [{
-          display: 'Collector',
-          value: 'collector'
-        }, {
-          display: 'Agent',
-          value: 'agent'
-        }],
-        width: MAX_WIDTH,
-        name: 'agentType'
+        display: 'Collector',
+        value: 'collector'
       }, {
-        type: 'combo',
-        label: {
-          text: 'Collector',
-          width: 3
-        },
-        remote: true,
-        server: {
-          url: '/collector?size=100',
-          root: ['_embedded', 'collectors'],
-          display: 'name',
-          value: 'id'
-        },
-        width: MAX_WIDTH,
-        name: 'collectorId'
-      }]
+        display: 'Agent',
+        value: 'agent'
+      }],
+      width: MAX_WIDTH,
+      name: 'agentType'
+    }, {
+      type: 'combo',
+      label: {
+        text: 'Collector',
+        width: 3
+      },
+      remote: true,
+      server: {
+        url: '/collector?size=100',
+        root: ['_embedded', 'collectors'],
+        display: 'name',
+        value: 'id'
+      },
+      width: MAX_WIDTH,
+      name: 'collectorId'
     }]
   },
 

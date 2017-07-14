@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { assign } from 'lodash'
+import { assign, cloneDeep } from 'lodash'
 import { reduxForm } from 'redux-form'
 
 import TextInput from './input/TextInput'
@@ -26,7 +26,10 @@ class DeviceWizard extends Component {
     console.log(`Device type: ${this.props.deviceType}`)
     console.log(props.monitorConfig)
 
-    const stepItems = this.showAgentType() ? [...config.creds, ...config.steps] : config.steps
+    const stepItems = cloneDeep(config.steps)
+    if (this.showAgentType()) {
+      stepItems[0].items = [...config.creds, ...stepItems[0].items]
+    }
 
     this.state = {
       current: 1,
@@ -76,11 +79,13 @@ class DeviceWizard extends Component {
   }
 
   showAgentType () {
-    const {checkCreds, monitorConfig, selectedDevice} = this.props
-    if (selectedDevice.agent) return false
+    const {checkCreds, monitorConfig, selectedDevice, collectors} = this.props
     if (checkCreds) {
+      if (selectedDevice.agent) return false
       const credTypes = monitorConfig.credentialTypes || []
-      return credTypes.length > 0
+      if (credTypes.length === 0) return false
+      if (collectors.length) return false
+      return true
     }
     return false
   }
