@@ -46,9 +46,7 @@
 }
 
 .image-upload-container {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
+    display: inline-block;
 }
 
 .image-upload-container img {

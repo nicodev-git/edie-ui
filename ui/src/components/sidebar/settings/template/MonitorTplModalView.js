@@ -5,6 +5,9 @@ import { SubmitBlock, FormInput, ImageUploader, FormCheckbox } from 'components/
 
 import { chipStyles } from 'style/common/materialStyles'
 
+const contentStyle = {
+  width: 570
+}
 export default class MonitorTplModalView extends Component {
   render () {
     const {
@@ -13,40 +16,32 @@ export default class MonitorTplModalView extends Component {
       credTypeModal, monitorTplCredTypes, onClickAddCredType, onClickDeleteCredType
     } = this.props
     return (
-      <Dialog open title={header} onRequestClose={onHide}>
+      <Dialog open title={header} onRequestClose={onHide} contentStyle={contentStyle}>
         <form onSubmit={onSubmit}>
-          <div className="form-column">
-            <Field name="name" component={FormInput} label="Name"/>
-            <Field name="description" component={FormInput} label="Description"/>
-            <Field name="monitortype" component={FormInput} label="Monitor type"/>
-            <Field name="enabled" component={FormCheckbox} label="Enabled" labelPosition="right"/>
-            <Field name="needWindowsAgentCollector" component={FormCheckbox} label="Need Windows" labelPosition="right" disabled/>
+          <Field name="name" component={FormInput} label="Name"/>&nbsp;
+          <Field name="description" component={FormInput} label="Description"/>&nbsp;
+          <Field name="monitortype" component={FormInput} label="Monitor type"/>&nbsp;
 
-            <div className="padding-sm-top padding-sm-bottom">
-              <ImageUploader imgUrl={imgUrl} onChange={onChange}/>
-            </div>
-
-            <div>
-              <RaisedButton label="Add Tag" onTouchTap={onClickAddTag}/>
-            </div>
-            <div style={chipStyles.wrapper}>
-              {tags.map((t, i) =>
-                <Chip key={i} style={chipStyles.chip} onRequestDelete={() => onClickDeleteTag(i)}>{t}</Chip>
-              )}
-            </div>
-
-            <div className="padding-md-top">
-              <RaisedButton label="Add Credential Type" onTouchTap={onClickAddCredType}/>
-            </div>
-            <div style={chipStyles.wrapper}>
-              {monitorTplCredTypes.map((t, i) =>
-                <Chip key={i} style={chipStyles.chip} onRequestDelete={() => onClickDeleteCredType(i)}>{t}</Chip>
-              )}
-            </div>
-
-            {tagModal}
-            {credTypeModal}
+          <div className="pull-right">
+            <ImageUploader imgUrl={imgUrl} onChange={onChange}/>
           </div>
+
+          <Field name="enabled" component={FormCheckbox} label="Enabled" labelPosition="right"/>
+          <div style={chipStyles.wrapper}>
+            {tags.map((t, i) =>
+              <Chip key={i} style={chipStyles.chip} onRequestDelete={() => onClickDeleteTag(i)}>{t}</Chip>
+            )}
+            <Chip style={chipStyles.chip} onTouchTap={onClickAddTag}>Add Tag</Chip>
+          </div>
+          <div style={chipStyles.wrapper}>
+            {monitorTplCredTypes.map((t, i) =>
+              <Chip key={i} style={chipStyles.chip} onRequestDelete={() => onClickDeleteCredType(i)}>{t}</Chip>
+            )}
+            <Chip style={chipStyles.chip} onTouchTap={onClickAddCredType}>Add Credential Type</Chip>
+          </div>
+
+          {tagModal}
+          {credTypeModal}
           <SubmitBlock name="Save" onClick={onHide}/>
         </form>
       </Dialog>
