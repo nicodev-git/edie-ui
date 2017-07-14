@@ -65,7 +65,6 @@ class ParamList extends React.Component {
         <div className="margin-md-top">Params</div>
         <Card>
           <CardText>
-            {this.renderInputs()}
             <div style={styles.wrapper}>
               {params.map(p =>
                 <Chip

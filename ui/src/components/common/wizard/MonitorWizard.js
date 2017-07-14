@@ -4,6 +4,7 @@ import { reduxForm } from 'redux-form'
 
 import ParamEditModal from './input/ParamEditModal'
 import TagsView from './input/TagsView'
+import ParamList from './input/ParamList'
 
 import CredPicker from 'containers/settings/credentials/CredsPickerContainer'
 import MonitorWizardView from './MonitorWizardView'
@@ -122,8 +123,20 @@ class MonitorWizard extends React.Component {
       <CredPicker onClose={this.onCloseCredPicker.bind(this)}/>
     )
   }
+  renderParamList () {
+    return (
+      <ParamList
+        editParams={this.props.editParams}
+        openParamEditModal={this.props.openParamEditModal}
+        closeParamsModal={this.props.closeParamsModal}
+        removeParam={this.props.removeParam}
+        updateMonitorParams={this.props.updateMonitorParams}
+        monitorConfig={this.props.monitorConfig}
+      />
+    )
+  }
   render () {
-    const { handleSubmit } = this.props
+    const { handleSubmit, monitorConfig } = this.props
     const header = this.props.title || 'Monitor'
     const paramEditModal = this.renderParamEditModal()
     return (
@@ -133,7 +146,9 @@ class MonitorWizard extends React.Component {
         onHide={this.closeModal.bind(this)}
         onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
         tagsView={this.renderTags()}
+        paramsView={this.renderParamList()}
         credPicker={this.renderCredPicker()}
+        monitorConfig={monitorConfig}
       />
     )
   }
