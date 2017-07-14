@@ -1,5 +1,9 @@
 import React from 'react'
 import Chip from 'material-ui/Chip'
+import {keys} from 'lodash'
+import {Field} from 'redux-form'
+
+import {FormInput} from 'components/modal/parts'
 
 const styles = {
   chip: {
@@ -36,22 +40,45 @@ class ParamList extends React.Component {
     this.props.removeParam(p)
   }
 
-  render () {
+  renderInputs () {
+    const {monitorConfig} = this.props
     return (
-      <div style={styles.wrapper}>
-        <label className="padding-xs-top" style={{...styles.chip, width: 80}}>Params</label>
-        {this.props.editParams.map(p =>
-          <Chip
-            key={p.key}
-            style={styles.chip}
-            labelStyle={styles.chipLabel}
-            onTouchTap={this.onClickEdit.bind(this, p)}
-            onRequestDelete={this.onClickRemove.bind(this, p)}
-          >
-            <b>{p.key}</b>: {p.value}
-          </Chip>
+      <div>
+        {keys(monitorConfig.params || {}).map(k =>
+          <Field
+            key={k}
+            name={k}
+            label={k}
+            component={FormInput}
+            className="margin-sm-left margin-sm-right"
+          />
         )}
-        <Chip style={styles.chip} onTouchTap={this.onClickAdd.bind(this)}><b>&nbsp;&nbsp;+&nbsp;&nbsp;</b></Chip>
+      </div>
+    )
+  }
+  render () {
+    const {monitorConfig} = this.props
+    const paramKeys = keys(monitorConfig.params || {})
+    const params = this.props.editParams.filter(p => paramKeys.indexOf(p.key) < 0)
+    return (
+      <div>
+        {this.renderInputs()}
+        <div style={styles.wrapper}>
+          <label className="padding-xs-top" style={{...styles.chip, width: 80}}>Params</label>
+
+          {params.map(p =>
+            <Chip
+              key={p.key}
+              style={styles.chip}
+              labelStyle={styles.chipLabel}
+              onTouchTap={this.onClickEdit.bind(this, p)}
+              onRequestDelete={this.onClickRemove.bind(this, p)}
+            >
+              <b>{p.key}</b>: {p.value}
+            </Chip>
+          )}
+          <Chip style={styles.chip} onTouchTap={this.onClickAdd.bind(this)}><b>&nbsp;&nbsp;+&nbsp;&nbsp;</b></Chip>
+        </div>
       </div>
     )
   }

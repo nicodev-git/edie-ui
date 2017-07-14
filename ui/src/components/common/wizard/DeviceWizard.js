@@ -268,6 +268,7 @@ class DeviceWizard extends Component {
         closeParamsModal={this.props.closeParamsModal}
         removeParam={this.props.removeParam}
         updateMonitorParams={this.props.updateMonitorParams}
+        monitorConfig={this.props.monitorConfig}
       />
     )
   }
