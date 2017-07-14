@@ -42,7 +42,9 @@ export default connect(
     monitorConfig: state.devices.monitorConfig,
 
     selectedDevice: state.dashboard.selectedDevice,
-    deviceCredsPickerVisible: state.devices.deviceCredsPickerVisible
+    deviceCredsPickerVisible: state.devices.deviceCredsPickerVisible,
+
+    collectors: state.settings.collectors
   }),
   dispatch => ({
     ...bindActionCreators({

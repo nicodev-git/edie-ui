@@ -31,7 +31,9 @@ import {
 
   showMonitorHistoryModal,
   showDeviceCpuProcessModal,
-  showDeviceMemoryProcessModal
+  showDeviceMemoryProcessModal,
+
+  fetchCollectors
 } from 'actions'
 
 class MonitorsContainer extends Component {
@@ -98,6 +100,8 @@ export default connect(
 
     showMonitorHistoryModal,
     showDeviceCpuProcessModal,
-    showDeviceMemoryProcessModal
+    showDeviceMemoryProcessModal,
+
+    fetchCollectors
   }
 )(withRouter(MonitorsContainer))
