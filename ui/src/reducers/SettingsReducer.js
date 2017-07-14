@@ -114,6 +114,7 @@ import {
   ADD_COLLECTOR,
   UPDATE_COLLECTOR,
   REMOVE_COLLECTOR,
+  FETCH_COLLECTORS,
 
   SHOW_AGENT_MODAL,
   ADD_AGENT,
@@ -175,7 +176,8 @@ const initialState = {
   credentialTypes: [],
 
   agents: [],
-  installAgents: []
+  installAgents: [],
+  collectors: []
 }
 
 export default function (state = initialState, action) {
@@ -529,6 +531,8 @@ export default function (state = initialState, action) {
     case UPDATE_COLLECTOR:
     case REMOVE_COLLECTOR:
       return { ...state, collectorDraw: state.collectorDraw + 1 }
+    case FETCH_COLLECTORS:
+      return { ...state, collectors: action.data }
 
     case FETCH_AGENTS:
       return { ...state, agents: action.data }

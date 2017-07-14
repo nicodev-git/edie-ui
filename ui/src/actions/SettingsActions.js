@@ -70,6 +70,7 @@ import {
   ADD_COLLECTOR,
   UPDATE_COLLECTOR,
   REMOVE_COLLECTOR,
+  FETCH_COLLECTORS,
 
   SHOW_AGENT_MODAL,
   ADD_AGENT,
@@ -758,5 +759,13 @@ export const updateMonitorTplCredTypes = (data) => {
 export const showAgentPreloader = (visible) => {
   return dispatch => {
     dispatch({type: SHOW_AGENT_PRELOADER, visible})
+  }
+}
+
+export const fetchCollectors = () => {
+  return dispatch => {
+    axios.get(`${ROOT_URL}/collector?size=100`).then(({data}) => {
+      dispatch({type: FETCH_COLLECTORS, data: data._embedded.collectors})
+    })
   }
 }
