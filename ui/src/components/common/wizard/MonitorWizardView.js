@@ -5,12 +5,13 @@ import {SubmitBlock} from 'components/modal/parts'
 
 export default class MonitorWizardView extends React.Component {
   render () {
-    const {header, content, onSubmit, onHide, paramEditModal, credPicker} = this.props
+    const {header, onSubmit, onHide, paramEditModal, credPicker, tagsView} = this.props
     return (
-      <Dialog open title={header} onRequestClose={onHide}>
+      <Dialog open title={header}>
         <form onSubmit={onSubmit}>
-          {content}
-          <SubmitBlock name="Finish" onCllick={onHide}/>
+
+          {tagsView}
+          <SubmitBlock name="Finish" onClick={onHide}/>
         </form>
         {paramEditModal}
         {credPicker}

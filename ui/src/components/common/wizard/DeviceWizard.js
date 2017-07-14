@@ -379,9 +379,9 @@ DeviceWizard.defaultProps = {
   onFinish: null
 }
 
-export const MonitorWizard = reduxForm({
-  form: 'monitorWizardForm'
-})(DeviceWizard)
+// export const MonitorWizard = reduxForm({
+//   form: 'monitorWizardForm'
+// })(DeviceWizard)
 
 export default reduxForm({
   form: 'deviceForm'

@@ -1,8 +1,14 @@
 import React from 'react'
+import { assign } from 'lodash'
+import { reduxForm } from 'redux-form'
 
+import ParamEditModal from './input/ParamEditModal'
+import TagsView from './input/TagsView'
+
+import CredPicker from 'containers/settings/credentials/CredsPickerContainer'
 import MonitorWizardView from './MonitorWizardView'
 
-export default class MonitorWizard extends React.Component {
+class MonitorWizard extends React.Component {
   constructor (props) {
     super(props)
 
@@ -12,18 +18,17 @@ export default class MonitorWizard extends React.Component {
     // }
 
     this.state = {
-      currentDevice: {...config, steps: stepItems},
       monitors: props.monitors || []
     }
   }
   componentWillMount () {
-    const hasMonitors = this.state.currentDevice.steps.filter(s =>
-        s.items.filter(i => i.type === 'monitors').length > 0
-      ).length > 0
-
-    if (hasMonitors) {
-      this.props.fetchMonitorTemplates()
-    }
+    // const hasMonitors = this.state.currentDevice.steps.filter(s =>
+    //     s.items.filter(i => i.type === 'monitors').length > 0
+    //   ).length > 0
+    //
+    // if (hasMonitors) {
+    //   this.props.fetchMonitorTemplates()
+    // }
 
     if (!this.hasCreds()) {
       this.props.showDeviceCredsPicker(true)
@@ -58,18 +63,82 @@ export default class MonitorWizard extends React.Component {
     return false
   }
 
+  handleFormSubmit (formProps) {
+    const { extraParams, onFinish, editParams, canAddTags, monitorTags } = this.props
+    const { monitors } = this.state
+    let params = {}
+    if (editParams) {
+      editParams.forEach(p => {
+        params[p.key] = p.value
+      })
+    }
+
+    let props = assign(
+      {},
+      formProps,
+      extraParams, {
+        monitors: monitors.map(m => assign({}, m, {id: null})),
+        params
+      }
+    )
+    if (canAddTags) props.tags = monitorTags || []
+    console.log(props)
+    this.closeModal(true)
+    onFinish && onFinish(null, props)
+  }
+
+  closeModal (data) {
+    this.props.onClose && this.props.onClose(this, data)
+  }
+  onCloseCredPicker (selected) {
+    if (selected) {
+      const {selectedDevice} = this.props
+      const props = {
+        ...selectedDevice,
+        credentials: [selected]
+      }
+      this.props.updateMapDevice(props)
+    }
+    this.props.showDeviceCredsPicker(false)
+  }
+
+  renderParamEditModal () {
+    if (!this.props.paramEditModalOpen) return null
+    return (
+      <ParamEditModal/>
+    )
+  }
+
+  renderTags () {
+    if (!this.props.canAddTags) return null
+    return (
+      <TagsView {...this.props}/>
+    )
+  }
+
+  renderCredPicker () {
+    if (!this.props.deviceCredsPickerVisible) return null
+    return (
+      <CredPicker onClose={this.onCloseCredPicker.bind(this)}/>
+    )
+  }
   render () {
     const { handleSubmit } = this.props
-    const header = this.props.title || this.state.currentDevice.title || ''
+    const header = this.props.title || 'Monitor'
     const paramEditModal = this.renderParamEditModal()
     return (
-      <DeviceWizardView
+      <MonitorWizardView
         header={header}
         paramEditModal={paramEditModal}
         onHide={this.closeModal.bind(this)}
         onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
+        tagsView={this.renderTags()}
         credPicker={this.renderCredPicker()}
       />
     )
   }
 }
+
+export default reduxForm({
+  form: 'monitorWizardForm'
+})(MonitorWizard)

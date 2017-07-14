@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-import {MonitorWizard} from 'components/common/wizard/DeviceWizard'
+import MonitorWizard from 'components/common/wizard/MonitorWizard'
 
 import {
   fetchMonitorTemplates,
