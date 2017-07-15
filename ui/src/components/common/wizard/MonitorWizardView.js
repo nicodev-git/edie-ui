@@ -34,6 +34,20 @@ export default class MonitorWizardView extends React.Component {
       label: p.name, value: p.id
     }))
 
+    let agentLabel = 'Agent'
+    if (!agent) {
+      agentLabel = (
+        <div >
+          <div className="inline-block" style={{width: 100}}>Agent</div>
+          <div className="inline-block" style={{textDecoration: 'underline', color: 'rgba(0, 0, 0, 0.87)'}}>Install Agent</div>
+        </div>
+      )
+    }
+
+    const collectorLabel = (
+      <div style={{width: 100}} className="inline-block">Collector</div>
+    )
+
     return (
       <Dialog open title={header} bodyStyle={dialogStyle} titleStyle={titleStyle} onRequestClose={onHide}>
         <CloseIconButton onClick={onHide} color="white"/>
@@ -48,8 +62,8 @@ export default class MonitorWizardView extends React.Component {
 
               <div className={showAgentType ? '' : 'hidden'}>
                 <Field name="agentType" component={RadioButtonGroup} className="margin-md-top">
-                  <RadioButton value="agent" label={agent ? 'Agent' : <span style={{textDecoration: 'underline'}}>Install Agent</span>} className="pull-left" disabled={!agent}/>
-                  <RadioButton value="collector" label="Collector" className="pull-left" style={{width: 100, marginTop: 14, marginRight: 20}}/>
+                  <RadioButton value="agent" label={agentLabel} className="pull-left" disabled={!agent}/>
+                  <RadioButton value="collector" label={collectorLabel} className="pull-left" style={{width: 120, marginTop: 14}}/>
                 </Field>
                 <Field name="collectorId" label="Collector" component={FormSelect} className="pull-left" options={collectorOptions}/>
               </div>
