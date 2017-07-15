@@ -153,7 +153,7 @@ export default class MainWorkflows extends React.Component {
           </div>
         </TabPageHeader>
 
-        <TabPageBody tabs={MainTabs(device.id)} tab={1} history={this.props.history} location={this.props.location}>
+        <TabPageBody tabs={MainTabs(device.id)} tab={1} history={this.props.history} location={this.props.location} transparent>
           {this.renderTable()}
           {this.renderWorkflowModal()}
           {this.renderSysWorkflowsModal()}

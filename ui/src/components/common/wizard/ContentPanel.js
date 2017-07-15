@@ -6,7 +6,7 @@ const style = {
     color: 'white'
   },
   body: {
-    minHeight: '250px',
+    minHeight: '280px',
     paddingTop: 0,
     background: '#f8f8f8'
   }
@@ -15,7 +15,7 @@ export default class ContentPanel extends React.Component {
   render () {
     const {width, title} = this.props
     return (
-      <div className={`col-md-${width}`}>
+      <div className={`col-md-${width} margin-md-top`}>
         <div className="panel panel-gray">
           <div className="panel-heading" style={style.header}>
             {title}
