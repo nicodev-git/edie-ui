@@ -1,3 +1,8 @@
+.griddle {
+    background: white;
+    padding-bottom: 30px;
+}
+
 .griddle table {
     margin: 0;
 }

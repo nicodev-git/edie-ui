@@ -48,6 +48,7 @@
 .tabs-custom .tab-content {
     margin-bottom: 0;
     overflow: auto;
+    margin: 20px;
 }
 
 .tab-content>.active {

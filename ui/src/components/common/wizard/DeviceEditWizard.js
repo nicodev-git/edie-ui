@@ -48,6 +48,7 @@ class DeviceEditWizard extends React.Component {
       this.props.updateDeviceTags(initialValues.tags || [])
     }
     this.props.fetchCredentials()
+    this.props.fetchCredTypes()
   }
 
   componentWillReceiveProps (nextProps) {

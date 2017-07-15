@@ -1,6 +1,10 @@
 import React, { Component } from 'react'
 import {Tabs, Tab} from 'material-ui/Tabs'
 
+const clearStyle = {
+  background: 'transparent'
+}
+
 export default class TabPageBody extends Component {
   constructor (props) {
     super(props)
@@ -27,7 +31,7 @@ export default class TabPageBody extends Component {
   }
 
   render () {
-    const {tabs, tclass, tab} = this.props
+    const {tabs, tclass, tab, transparent} = this.props
     let tableclass = tclass || ''
 
     let active = 0
@@ -51,7 +55,7 @@ export default class TabPageBody extends Component {
           )}
         </Tabs>
 
-        <div className={`tab-content ${tableclass}`}>
+        <div className={`tab-content ${tableclass}`} style={transparent ? clearStyle : null}>
           {this.props.children}
         </div>
       </div>

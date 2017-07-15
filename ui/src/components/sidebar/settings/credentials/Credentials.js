@@ -35,7 +35,7 @@ export default class Credentials extends React.Component {
       'displayName': 'Global',
       'columnName': 'global',
       'customComponent': p => {
-        return <span>{p.data ? 'Global' : 'Device'}</span>
+        return <span>{p.data ? 'Yes' : 'No'}</span>
       }
     }]
   }
@@ -106,7 +106,7 @@ export default class Credentials extends React.Component {
           </div>
         </TabPageHeader>
 
-        <TabPageBody tabs={SettingTabs} tab={5} history={this.props.history} location={this.props.location}>
+        <TabPageBody tabs={SettingTabs} tab={3} history={this.props.history} location={this.props.location} transparent>
           {this.renderContent()}
           {this.renderCredentialsModal()}
         </TabPageBody>

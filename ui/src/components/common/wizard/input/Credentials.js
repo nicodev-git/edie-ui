@@ -12,14 +12,16 @@ export default class Credentials extends React.Component {
     this.props.showDeviceCredsPicker(true)
   }
   onClickRemove () {
-    // const {deviceCreds, selectedDeviceCreds} = this.props
-    // this.props.updateDeviceCreds(deviceCreds.filter((p, i) => i !== selectedDeviceCreds))
+    const {selectedDeviceCreds} = this.props
+    const selected = this.getDeviceCreds().filter((p, i) => i !== selectedDeviceCreds)
+    if (selected.length) this.props.removeCredentials(selected[0])
   }
   onCloseCredPicker (props) {
     if (props) {
       const {selectedDevice} = this.props
       this.props.addCredentials({
         ...props,
+        global: false,
         deviceIds: [selectedDevice.id]
       })
     }
@@ -31,13 +33,16 @@ export default class Credentials extends React.Component {
     return (
       <CredentialModal
         addCredentials={this.onCloseCredPicker.bind(this)}
-        credentialTypes={[]}
+        credentialTypes={this.props.credentialTypes}
         onClose={this.onCloseCredPicker.bind(this)}/>
     )
   }
+  getDeviceCreds () {
+    const { selectedDevice, credentials } = this.props
+    return credentials.filter(p => !p.global && p.deviceIds && p.deviceIds.indexOf(selectedDevice.id) >= 0)
+  }
   render () {
-    const { selectedDevice, credentials, selectedDeviceCreds, selectDeviceCreds } = this.props
-    const deviceCreds = credentials.filter(p => !p.global && p.deviceIds && p.deviceIds.indexOf(selectedDevice.id) >= 0)
+    const { selectedDeviceCreds, selectDeviceCreds } = this.props
 
     return (
       <div>
@@ -56,7 +61,7 @@ export default class Credentials extends React.Component {
               </tr>
             </thead>
             <tbody>
-            {deviceCreds.map((p, i) =>
+            {this.getDeviceCreds().map((p, i) =>
               <tr
                 key={i}
                 className={selectedDeviceCreds === i ? 'selected' : ''}
