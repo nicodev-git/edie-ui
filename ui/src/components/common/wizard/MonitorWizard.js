@@ -14,7 +14,7 @@ import {showAlert} from 'components/common/Alert'
 class MonitorWizard extends React.Component {
   componentDidMount () {
     if (!this.hasCreds()) {
-      this.props.showDeviceCredsPicker(true)
+      // this.props.showDeviceCredsPicker(true)
     }
   }
 
@@ -35,15 +35,19 @@ class MonitorWizard extends React.Component {
   }
 
   showAgentType () {
-    const {checkCreds, monitorConfig, selectedDevice, collectors} = this.props
-    if (checkCreds) {
-      if (selectedDevice.agent) return false
-      const credTypes = monitorConfig.credentialTypes || []
-      if (credTypes.length === 0) return false
-      if (collectors.length > 2) return false
-      return true
-    }
-    return false
+    const {monitorConfig, selectedDevice, collectors} = this.props
+    const credTypes = monitorConfig.credentialTypes || []
+
+    //Step 1
+    if (selectedDevice.agent) return false
+
+    //Step 2
+    if (credTypes.length === 0) return false
+
+    //Step 3
+    // if (monitorConfig.needWindowsAgentCollector)
+    if (collectors.length > 2) return false
+    return true
   }
 
   handleFormSubmit (values) {

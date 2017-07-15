@@ -21,19 +21,13 @@ export default class MonitorWizardView extends React.Component {
   renderAgentType () {
     const {showAgentType, collectors} = this.props
     if (!showAgentType) return null
-    const collectorOptions = collectors.map(p => ({
-      label: p.name, value: p.id
-    }))
+
     return (
       <div>
         <CardLegend>Agent/Collector</CardLegend>
         <Card>
           <CardText className="pb-none">
-            <Field name="agentType" component={RadioButtonGroup} style={{height: 30, marginTop: 12, marginRight: 20, float: 'left'}}>
-              <RadioButton value="agent" label="Agent" className="pull-left" style={{width: 100}}/>
-              <RadioButton value="collector" label="Collector" className="pull-left" style={{width: 100}}/>
-            </Field>
-            <Field name="collectorId" label="Collector" component={FormSelect} options={collectorOptions}/>
+
           </CardText>
         </Card>
       </div>
@@ -43,7 +37,14 @@ export default class MonitorWizardView extends React.Component {
   render () {
     const {header, onSubmit, onHide, paramEditModal, credPicker, tagsView, paramsView,
       requiredParamKeys,
-      credentials} = this.props
+      credentials,
+      showAgentType, collectors
+    } = this.props
+
+    const collectorOptions = collectors.map(p => ({
+      label: p.name, value: p.id
+    }))
+
     return (
       <Dialog open title={header} bodyStyle={dialogStyle} titleStyle={titleStyle} onRequestClose={onHide}>
         <form onSubmit={onSubmit}>
@@ -55,6 +56,17 @@ export default class MonitorWizardView extends React.Component {
               {requiredParamKeys.map(k =>
                 <Field key={k} name={k} floatingLabel={k} component={FormInput} className="margin-sm-left margin-sm-right"/>
               )}
+
+              <div className={showAgentType ? '' : 'hidden'}>
+                <Field name="agentType" component={RadioButtonGroup}>
+                  <RadioButton value="agent" label="Agent" className="pull-left"/>
+                  <RadioButton value="collector" label="Collector" className="pull-left" style={{width: 100}}/>
+                </Field>
+                <div>
+                  <Field name="collectorId" label="Collector" component={FormSelect} className="pull-left" options={collectorOptions}/>
+                </div>
+
+              </div>
             </CardText>
           </Card>
 

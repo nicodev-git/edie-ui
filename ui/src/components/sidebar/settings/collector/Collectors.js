@@ -26,6 +26,9 @@ export default class Collectors extends React.Component {
       'displayName': 'Version',
       'columnName': 'version'
     }, {
+      'displayName': 'Type',
+      'columnName': 'type'
+    }, {
       'displayName': 'Last Seen',
       'columnName': 'lastSeen',
       'customComponent': p => {
