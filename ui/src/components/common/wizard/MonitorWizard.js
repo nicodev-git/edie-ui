@@ -1,5 +1,5 @@
 import React from 'react'
-import { assign } from 'lodash'
+import { assign, keys } from 'lodash'
 import { reduxForm } from 'redux-form'
 
 import ParamEditModal from './input/ParamEditModal'
@@ -9,7 +9,7 @@ import ParamList from './input/ParamList'
 import CredPicker from 'containers/settings/credentials/CredsPickerContainer'
 import MonitorWizardView from './MonitorWizardView'
 
-import {showAlert} from 'components/'
+import {showAlert} from 'components/common/Alert'
 
 class MonitorWizard extends React.Component {
   constructor (props) {
@@ -24,7 +24,7 @@ class MonitorWizard extends React.Component {
       monitors: props.monitors || []
     }
   }
-  componentWillMount () {
+  componentDidMount () {
     // const hasMonitors = this.state.currentDevice.steps.filter(s =>
     //     s.items.filter(i => i.type === 'monitors').length > 0
     //   ).length > 0
@@ -32,8 +32,6 @@ class MonitorWizard extends React.Component {
     // if (hasMonitors) {
     //   this.props.fetchMonitorTemplates()
     // }
-
-    this.props.fetchCollectors()
     if (!this.hasCreds()) {
       this.props.showDeviceCredsPicker(true)
     }
@@ -83,6 +81,13 @@ class MonitorWizard extends React.Component {
         params
       }
     )
+
+    //Merge required params
+    this.getRequiredParamKeys().forEach(key => {
+      props.params[key] = props[key]
+      delete props[key]
+    })
+
     if (canAddTags) props.tags = monitorTags || []
     console.log(props)
     // this.closeModal(true)
@@ -103,7 +108,10 @@ class MonitorWizard extends React.Component {
     }
     this.props.showDeviceCredsPicker(false)
   }
-
+  getRequiredParamKeys() {
+    //return keys(this.prop.monitorConfig.params || {})
+    return []
+  }
   renderParamEditModal () {
     if (!this.props.paramEditModalOpen) return null
     return (
@@ -151,9 +159,11 @@ class MonitorWizard extends React.Component {
         onHide={this.closeModal.bind(this)}
         onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
         tagsView={this.renderTags()}
+
+        requiredParamKeys={this.getRequiredParamKeys()}
         paramsView={this.renderParamList()}
+
         credPicker={this.renderCredPicker()}
-        monitorConfig={monitorConfig}
         credentials={credentials}
 
         showAgentType={this.showAgentType()}

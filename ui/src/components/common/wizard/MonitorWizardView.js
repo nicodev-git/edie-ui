@@ -1,7 +1,6 @@
 import React from 'react'
 import {Dialog, Card, CardText, RaisedButton, RadioButton} from 'material-ui'
 import {Field} from 'redux-form'
-import {keys} from 'lodash'
 import {RadioButtonGroup} from 'redux-form-material-ui'
 
 import {FormInput, FormCheckbox, FormSelect, CardLegend} from 'components/modal/parts'
@@ -43,7 +42,7 @@ export default class MonitorWizardView extends React.Component {
 
   render () {
     const {header, onSubmit, onHide, paramEditModal, credPicker, tagsView, paramsView,
-      monitorConfig,
+      requiredParamKeys,
       credentials} = this.props
     return (
       <Dialog open title={header} bodyStyle={dialogStyle} titleStyle={titleStyle} onRequestClose={onHide}>
@@ -53,7 +52,7 @@ export default class MonitorWizardView extends React.Component {
           <Card>
             <CardText>
               <Field name="name" floatingLabel="Name" component={FormInput} className="margin-sm-left margin-sm-right"/>
-              {keys(monitorConfig.params || {}).map(k =>
+              {requiredParamKeys.map(k =>
                 <Field key={k} name={k} floatingLabel={k} component={FormInput} className="margin-sm-left margin-sm-right"/>
               )}
             </CardText>
