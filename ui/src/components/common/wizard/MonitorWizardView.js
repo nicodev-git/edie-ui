@@ -29,11 +29,11 @@ export default class MonitorWizardView extends React.Component {
         <CardLegend>Agent/Collector</CardLegend>
         <Card>
           <CardText>
-            <Field name="agentType" component={RadioButtonGroup} style={{height: 30, marginTop: 8}}>
+            <Field name="agentType" component={RadioButtonGroup} style={{height: 30, marginTop: 12, marginRight: 20, float: 'left'}}>
               <RadioButton value="agent" label="Agent" className="pull-left" style={{width: 100}}/>
               <RadioButton value="collector" label="Collector" className="pull-left" style={{width: 100}}/>
             </Field>
-            <Field name="collectorId" label="Collector" component={FormSelect} className="margin-sm-left margin-sm-right" options={collectorOptions}/>
+            <Field name="collectorId" label="Collector" component={FormSelect} options={collectorOptions}/>
           </CardText>
         </Card>
       </div>

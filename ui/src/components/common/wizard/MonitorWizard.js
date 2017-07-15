@@ -90,8 +90,8 @@ class MonitorWizard extends React.Component {
 
     if (canAddTags) props.tags = monitorTags || []
     console.log(props)
-    // this.closeModal(true)
-    // onFinish && onFinish(null, props)
+    this.closeModal(true)
+    onFinish && onFinish(null, props)
   }
 
   closeModal (data) {
@@ -109,8 +109,7 @@ class MonitorWizard extends React.Component {
     this.props.showDeviceCredsPicker(false)
   }
   getRequiredParamKeys() {
-    //return keys(this.prop.monitorConfig.params || {})
-    return []
+    return keys(this.props.monitorConfig.params || {})
   }
   renderParamEditModal () {
     if (!this.props.paramEditModalOpen) return null

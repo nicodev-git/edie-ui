@@ -33,7 +33,7 @@ class MonitorWizardContainer extends React.Component {
 
 export default connect(
   state => ({
-    initialValues: state.devices.monitorInitialValues,
+    initialValues: { agentType: 'agent', ...state.devices.monitorInitialValues.params, ...state.devices.monitorInitialValues },
 
     paramsModalOpen: state.devices.paramsModalOpen,
     paramEditModalOpen: state.devices.paramEditModalOpen,
