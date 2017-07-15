@@ -17,16 +17,26 @@ const titleStyle = {
   paddingBottom: 12
 }
 
+const agentTypes = [{
+  label: 'Agent', value: 'agent'
+}, {
+  label: 'Collector', value: 'collector'
+}]
+
 export default class MonitorWizardView extends React.Component {
   renderAgentType () {
-    const {showAgentType} = this.props
+    const {showAgentType, collectors} = this.props
     if (!showAgentType) return null
+    const collectorOptions = collectors.map(p => ({
+      label: p.name, value: p.id
+    }))
     return (
       <div>
         <CardLegend>Agent/Collector</CardLegend>
         <Card>
           <CardText>
-            <Field name="name" floatingLabel="Name" component={FormInput} className="margin-sm-left margin-sm-right"/>
+            <Field name="agentType" label="Type" component={FormSelect} className="margin-sm-left margin-sm-right" options={agentTypes}/>
+            <Field name="collectorId" label="Collector" component={FormSelect} className="margin-sm-left margin-sm-right" options={collectorOptions}/>
           </CardText>
         </Card>
       </div>
@@ -38,7 +48,7 @@ export default class MonitorWizardView extends React.Component {
       monitorConfig,
       credentials} = this.props
     return (
-      <Dialog open title={header} bodyStyle={dialogStyle} titleStyle={titleStyle}>
+      <Dialog open title={header} bodyStyle={dialogStyle} titleStyle={titleStyle} onRequestClose={onHide}>
         <form onSubmit={onSubmit}>
           {this.renderAgentType()}
           <CardLegend>Configuration</CardLegend>
