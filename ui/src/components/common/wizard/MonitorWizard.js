@@ -154,6 +154,7 @@ class MonitorWizard extends React.Component {
         credPicker={this.renderCredPicker()}
         monitorConfig={monitorConfig}
         credentials={credentials}
+        showAgentType={this.showAgentType()}
       />
     )
   }

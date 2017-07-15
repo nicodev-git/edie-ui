@@ -3,7 +3,7 @@ import {Chip, Card, CardText} from 'material-ui'
 import {keys} from 'lodash'
 import {Field} from 'redux-form'
 
-import {FormInput} from 'components/modal/parts'
+import {FormInput, CardLegend} from 'components/modal/parts'
 
 const styles = {
   chip: {
@@ -62,7 +62,7 @@ class ParamList extends React.Component {
     const params = this.props.editParams.filter(p => paramKeys.indexOf(p.key) < 0)
     return (
       <div>
-        <div className="margin-lg-top">Params</div>
+        <CardLegend>Params</CardLegend>
         <Card>
           <CardText>
             <div style={styles.wrapper}>

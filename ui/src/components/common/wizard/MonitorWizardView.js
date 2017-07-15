@@ -19,6 +19,18 @@ const titleStyle = {
 
 export default class MonitorWizardView extends React.Component {
   renderAgentType () {
+    const {showAgentType} = this.props
+    if (!showAgentType) return null
+    return (
+      <div>
+        <CardLegend>Agent/Collector</CardLegend>
+        <Card>
+          <CardText>
+            <Field name="name" floatingLabel="Name" component={FormInput} className="margin-sm-left margin-sm-right"/>
+          </CardText>
+        </Card>
+      </div>
+    )
   }
 
   render () {
@@ -42,7 +54,7 @@ export default class MonitorWizardView extends React.Component {
           <CardLegend>Credentials</CardLegend>
           <Card>
             <CardText>
-              <Field name="cred1" component={FormSelect} className="margin-sm-left margin-sm-right" options={credentials}/>
+              <Field name="credentialId" component={FormSelect} className="margin-sm-left margin-sm-right" options={credentials}/>
             </CardText>
           </Card>
 
