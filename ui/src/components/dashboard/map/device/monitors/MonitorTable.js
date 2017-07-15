@@ -30,24 +30,30 @@ export default class MonitorTable extends Component {
     this.columns = [{
       'displayName': 'Monitor Name',
       'columnName': 'name',
-      'cssClassName': 'nowrap'
+      'cssClassName': 'nowrap',
+      'cssClassName': 'width-140'
     }, {
       'displayName': 'Type',
-      'columnName': 'monitortype'
+      'columnName': 'monitortype',
+      'cssClassName': 'width-60'
     }, {
       'displayName': 'Result',
-      'columnName': 'checkResult.resultdata'
+      'columnName': 'checkResult.resultdata',
+      'customComponent': (p) => {
+        if (p.data.length > 100) return <span>{p.data.substring(0, 100)}...</span>
+        return <span>{p.data}</span>
+      }
     }, {
       'displayName': 'Status',
       'columnName': 'status',
-      'cssClassName': 'text-center',
+      'cssClassName': 'width-60 text-center',
       'customComponent': (props) => {
         return this.healthFormatter(props.data)
       }
     }, {
       'displayName': 'Last Seen',
       'columnName': 'lastrun',
-      'cssClassName': 'nowrap',
+      'cssClassName': 'width-160',
       'customComponent': (props) => {
         if (!props.data) return <span />
         return <span>{moment(props.data).fromNow()}</span>
@@ -55,7 +61,7 @@ export default class MonitorTable extends Component {
     }, {
       'displayName': 'Last Failed',
       'columnName': 'lastfalure',
-      'cssClassName': 'nowrap',
+      'cssClassName': 'width-140',
       'customComponent': (props) => {
         if (!props.data) return <span />
         return <span>{moment(props.data).fromNow()}</span>
@@ -63,7 +69,7 @@ export default class MonitorTable extends Component {
     }, {
       'displayName': 'Last Success',
       'columnName': 'lastsuccess',
-      'cssClassName': 'nowrap',
+      'cssClassName': 'width-160',
       'customComponent': (props) => {
         if (!props.data) return <span />
         return <span>{moment(props.data).fromNow()}</span>
@@ -71,12 +77,14 @@ export default class MonitorTable extends Component {
     }, {
       'displayName': 'Actions',
       'columnName': 'action',
+      'cssClassName': 'width-100',
       'customComponent': (props) => {
         const row = props.rowData
 
+        const res = row.checkResult ? JSON.stringify(row.checkResult) : ''
         return (
           <div>
-            <CommentIcon color="#545454" data-tip={row.checkResult ? JSON.stringify(row.checkResult) : ''}/>
+            <CommentIcon color="#545454" data-tip={res.length > 200 ? `${res.substring(0, 200)}...` : res}/>
             <DateRangeIcon color="#545454" data-tip="History" onClick={this.onClickCal.bind(this, props.rowData)}/>
           </div>
         )
