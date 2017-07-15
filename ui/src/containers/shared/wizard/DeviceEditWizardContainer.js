@@ -42,7 +42,7 @@ DeviceEditWizard.defaultProps = {
 
   tabs: [{
     title: 'General',
-    include: ['name', 'agentid', 'ipaddress', 'wanip', 'lanip', 'hostname', 'port', 'dbtype', 'sql', 'disabled', 'image', 'url'],
+    include: ['name', 'image', 'agentid', 'ipaddress', 'wanip', 'lanip', 'hostname', 'port', 'dbtype', 'sql', 'disabled', 'url'],
     width: 4
   }, {
     title: 'Info',

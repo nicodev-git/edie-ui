@@ -28,7 +28,7 @@ export default class IconUploader extends React.Component {
   }
   render () {
     return (
-      <ImageUploader imgUrl={this.getImageUrl()} onChange={this.onClickChange.bind(this)}/>
+      <ImageUploader className={this.props.config.cls} imgUrl={this.getImageUrl()} onChange={this.onClickChange.bind(this)}/>
     )
   }
 }

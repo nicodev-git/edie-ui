@@ -4500,7 +4500,17 @@ export const wizardEditConfig = {
         },
         width: MAX_WIDTH,
         required: true,
-        name: 'name'
+        name: 'name',
+        cls: 'pull-left'
+      }, {
+        type: 'uploader',
+        label: {
+          text: 'Image',
+          type: 'attach',
+          width: 3
+        },
+        cls: 'pull-right margin-md-top',
+        name: 'image'
       }, {
         type: 'text',
         label: {
@@ -4528,15 +4538,6 @@ export const wizardEditConfig = {
         },
         width: MAX_WIDTH,
         name: 'info'
-      }, {
-        type: 'uploader',
-        label: {
-          text: 'Image',
-          type: 'attach',
-          width: 3
-        },
-
-        name: 'image'
       }, {
         type: 'label',
         text: '',
