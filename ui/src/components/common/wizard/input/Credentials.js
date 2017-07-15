@@ -42,6 +42,7 @@ export default class Credentials extends React.Component {
               <tr>
                 <th>Name</th>
                 <th>Description</th>
+                <th>Type</th>
                 <th>User</th>
               </tr>
             </thead>
@@ -53,6 +54,7 @@ export default class Credentials extends React.Component {
                 onClick={() => selectDeviceCreds(i)}>
                 <td>{p.name}</td>
                 <td>{p.description}</td>
+                <td>{p.type}</td>
                 <td>{p.username}</td>
               </tr>
             )}

@@ -100,6 +100,18 @@ class MonitorWizard extends React.Component {
   getRequiredParamKeys() {
     return keys(this.props.monitorConfig.params || {})
   }
+  getRelevantCreds() {
+    const {monitorConfig, selectedDevice} = this.props
+    const credentialTypes = monitorConfig.credentialTypes || []
+    const credentials = (selectedDevice.credentials || []).filter(p =>
+      credentialTypes.indexOf(p.type) >= 0
+    ).map(p => ({
+      label: p.name,
+      value: p.id
+    }))
+
+    return credentials
+  }
   renderParamEditModal () {
     if (!this.props.paramEditModalOpen) return null
     return (
@@ -134,12 +146,9 @@ class MonitorWizard extends React.Component {
   }
   render () {
     const { title, handleSubmit, monitorConfig, selectedDevice, collectors } = this.props
-    const header = title || `${monitorConfig.name} Monitor`
+    const header = title || `${monitorConfig ? monitorConfig.name : ''} Monitor`
     const paramEditModal = this.renderParamEditModal()
-    const credentials = (selectedDevice.credentials || []).map(p => ({
-      label: p.name,
-      value: p.id
-    }))
+
     return (
       <MonitorWizardView
         header={header}
@@ -152,7 +161,7 @@ class MonitorWizard extends React.Component {
         paramsView={this.renderParamList()}
 
         credPicker={this.renderCredPicker()}
-        credentials={credentials}
+        credentials={this.getRelevantCreds()}
 
         showAgentType={this.showAgentType()}
         collectors={collectors}
