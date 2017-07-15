@@ -136,9 +136,13 @@ class MonitorWizard extends React.Component {
     )
   }
   render () {
-    const { handleSubmit, monitorConfig } = this.props
+    const { handleSubmit, monitorConfig, selectedDevice } = this.props
     const header = this.props.title || 'Monitor'
     const paramEditModal = this.renderParamEditModal()
+    const credentials = (selectedDevice.credentials || []).map(p => ({
+      label: p.name,
+      value: p.id
+    }))
     return (
       <MonitorWizardView
         header={header}
@@ -149,6 +153,7 @@ class MonitorWizard extends React.Component {
         paramsView={this.renderParamList()}
         credPicker={this.renderCredPicker()}
         monitorConfig={monitorConfig}
+        credentials={credentials}
       />
     )
   }

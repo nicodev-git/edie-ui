@@ -1,18 +1,30 @@
 import React from 'react'
-import {Dialog, Card, CardText} from 'material-ui'
+import {Dialog, Card, CardText, RaisedButton} from 'material-ui'
 import {Field} from 'redux-form'
 import {keys} from 'lodash'
 
-import {SubmitBlock, FormInput, FormCheckbox} from 'components/modal/parts'
+import {FormInput, FormCheckbox, CardTitle, FormSelect} from 'components/modal/parts'
 
+const dialogStyle = {
+  background: '#efefef',
+  padding: '8px 48px 48px'
+}
+const titleStyle = {
+  background: '#324454',
+  color: 'white',
+  fontSize: 14,
+  paddingTop: 12,
+  paddingBottom: 12
+}
 export default class MonitorWizardView extends React.Component {
   render () {
     const {header, onSubmit, onHide, paramEditModal, credPicker, tagsView, paramsView,
-      monitorConfig} = this.props
+      monitorConfig,
+      credentials} = this.props
     return (
-      <Dialog open title={header}>
+      <Dialog open title={header} bodyStyle={dialogStyle} titleStyle={titleStyle}>
         <form onSubmit={onSubmit}>
-          <div>Configuration</div>
+          <div className="margin-lg-top">Configuration</div>
           <Card>
             <CardText>
               <Field name="name" floatingLabel="Name" component={FormInput} className="margin-sm-left margin-sm-right"/>
@@ -21,11 +33,23 @@ export default class MonitorWizardView extends React.Component {
               )}
             </CardText>
           </Card>
+
+          <div className="margin-lg-top">Credentials</div>
+          <Card>
+            <CardText>
+              <Field name="cred1" component={FormSelect} className="margin-sm-left margin-sm-right" options={credentials}/>
+            </CardText>
+          </Card>
+
           {paramsView}
-          <Field name="enabled" component={FormCheckbox} type="checkbox" label="Enabled" className="margin-sm-top margin-sm-bottom"/>
+
+          <Field name="enabled" component={FormCheckbox} type="checkbox" label="Enabled" className="margin-md-top margin-sm-bottom"/>
 
           {/*{tagsView}*/}
-          <SubmitBlock name="Finish" onClick={onHide}/>
+          <div className="form-buttons">
+            <RaisedButton type="submit" label="Finish" onTouchTap={onSubmit}/>
+            <RaisedButton label="Cancel" onTouchTap={onHide}/>
+          </div>
         </form>
         {paramEditModal}
         {credPicker}

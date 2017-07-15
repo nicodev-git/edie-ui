@@ -62,7 +62,7 @@ class ParamList extends React.Component {
     const params = this.props.editParams.filter(p => paramKeys.indexOf(p.key) < 0)
     return (
       <div>
-        <div className="margin-md-top">Params</div>
+        <div className="margin-lg-top">Params</div>
         <Card>
           <CardText>
             <div style={styles.wrapper}>
