@@ -3,7 +3,7 @@ import {Dialog, Card, CardText, RaisedButton} from 'material-ui'
 import {Field} from 'redux-form'
 import {keys} from 'lodash'
 
-import {FormInput, FormCheckbox, CardTitle, FormSelect} from 'components/modal/parts'
+import {FormInput, FormCheckbox, FormSelect, CardLegend} from 'components/modal/parts'
 
 const dialogStyle = {
   background: '#efefef',
@@ -16,7 +16,11 @@ const titleStyle = {
   paddingTop: 12,
   paddingBottom: 12
 }
+
 export default class MonitorWizardView extends React.Component {
+  renderAgentType () {
+  }
+
   render () {
     const {header, onSubmit, onHide, paramEditModal, credPicker, tagsView, paramsView,
       monitorConfig,
@@ -24,7 +28,8 @@ export default class MonitorWizardView extends React.Component {
     return (
       <Dialog open title={header} bodyStyle={dialogStyle} titleStyle={titleStyle}>
         <form onSubmit={onSubmit}>
-          <div className="margin-lg-top">Configuration</div>
+          {this.renderAgentType()}
+          <CardLegend>Configuration</CardLegend>
           <Card>
             <CardText>
               <Field name="name" floatingLabel="Name" component={FormInput} className="margin-sm-left margin-sm-right"/>
@@ -34,7 +39,7 @@ export default class MonitorWizardView extends React.Component {
             </CardText>
           </Card>
 
-          <div className="margin-lg-top">Credentials</div>
+          <CardLegend>Credentials</CardLegend>
           <Card>
             <CardText>
               <Field name="cred1" component={FormSelect} className="margin-sm-left margin-sm-right" options={credentials}/>

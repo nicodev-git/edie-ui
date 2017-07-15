@@ -23,6 +23,7 @@ import Workflows from './Workflows'
 import MonitorTemplates from './MonitorTemplates'
 import CrudButtons from './CrudButtons'
 import CloseIconButton from './CloseIconButton'
+import CardLegend from './CardLegend'
 
 export {
     Header,
@@ -49,5 +50,6 @@ export {
     Workflows,
     MonitorTemplates,
     CrudButtons,
-    CloseIconButton
+    CloseIconButton,
+    CardLegend
 }
