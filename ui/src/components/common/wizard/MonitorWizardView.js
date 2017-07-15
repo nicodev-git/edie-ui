@@ -28,7 +28,7 @@ export default class MonitorWizardView extends React.Component {
       <div>
         <CardLegend>Agent/Collector</CardLegend>
         <Card>
-          <CardText>
+          <CardText className="pb-none">
             <Field name="agentType" component={RadioButtonGroup} style={{height: 30, marginTop: 12, marginRight: 20, float: 'left'}}>
               <RadioButton value="agent" label="Agent" className="pull-left" style={{width: 100}}/>
               <RadioButton value="collector" label="Collector" className="pull-left" style={{width: 100}}/>
