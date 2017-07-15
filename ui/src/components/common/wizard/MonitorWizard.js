@@ -9,6 +9,8 @@ import ParamList from './input/ParamList'
 import CredPicker from 'containers/settings/credentials/CredsPickerContainer'
 import MonitorWizardView from './MonitorWizardView'
 
+import {showAlert} from 'components/'
+
 class MonitorWizard extends React.Component {
   constructor (props) {
     super(props)
@@ -65,28 +67,26 @@ class MonitorWizard extends React.Component {
     return false
   }
 
-  handleFormSubmit (formProps) {
+  handleFormSubmit (values) {
     const { extraParams, onFinish, editParams, canAddTags, monitorTags } = this.props
-    const { monitors } = this.state
-    let params = {}
+    const params = {}
     if (editParams) {
       editParams.forEach(p => {
         params[p.key] = p.value
       })
     }
 
-    let props = assign(
+    const props = assign(
       {},
-      formProps,
+      values,
       extraParams, {
-        monitors: monitors.map(m => assign({}, m, {id: null})),
         params
       }
     )
     if (canAddTags) props.tags = monitorTags || []
     console.log(props)
-    this.closeModal(true)
-    onFinish && onFinish(null, props)
+    // this.closeModal(true)
+    // onFinish && onFinish(null, props)
   }
 
   closeModal (data) {

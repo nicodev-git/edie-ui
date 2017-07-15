@@ -72,7 +72,7 @@ export default class MonitorWizardView extends React.Component {
 
           {/*{tagsView}*/}
           <div className="form-buttons">
-            <RaisedButton type="submit" label="Finish" onTouchTap={onSubmit}/>
+            <RaisedButton type="submit" label="Finish"/>
             <RaisedButton label="Cancel" onTouchTap={onHide}/>
           </div>
         </form>
