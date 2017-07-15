@@ -127,7 +127,7 @@ export default class Identities extends React.Component {
           </div>
         </TabPageHeader>
 
-        <TabPageBody tabs={SettingTabs} tab={4} history={this.props.history} location={this.props.location}>
+        <TabPageBody tabs={SettingTabs} tab={4} history={this.props.history} location={this.props.location} transparent>
           {this.renderContent()}
           {this.renderIdentityModal()}
         </TabPageBody>

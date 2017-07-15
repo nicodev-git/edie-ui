@@ -163,7 +163,7 @@ export default class Agents extends Component {
           </div>
         </TabPageHeader>
 
-        <TabPageBody tabs={SettingTabs} tab={1} history={this.props.history} location={this.props.location}>
+        <TabPageBody tabs={SettingTabs} tab={1} history={this.props.history} location={this.props.location} transparent>
           {this.renderContent()}
           {this.renderAgentModal()}
         </TabPageBody>
