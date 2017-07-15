@@ -12,26 +12,7 @@ import MonitorWizardView from './MonitorWizardView'
 import {showAlert} from 'components/common/Alert'
 
 class MonitorWizard extends React.Component {
-  constructor (props) {
-    super(props)
-
-    // const stepItems = cloneDeep(config.steps)
-    // if (this.showAgentType()) {
-    //   stepItems[0].items = [...config.creds, ...stepItems[0].items]
-    // }
-
-    this.state = {
-      monitors: props.monitors || []
-    }
-  }
   componentDidMount () {
-    // const hasMonitors = this.state.currentDevice.steps.filter(s =>
-    //     s.items.filter(i => i.type === 'monitors').length > 0
-    //   ).length > 0
-    //
-    // if (hasMonitors) {
-    //   this.props.fetchMonitorTemplates()
-    // }
     if (!this.hasCreds()) {
       this.props.showDeviceCredsPicker(true)
     }

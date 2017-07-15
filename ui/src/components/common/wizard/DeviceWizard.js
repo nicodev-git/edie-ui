@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { assign, cloneDeep } from 'lodash'
+import { assign } from 'lodash'
 import { reduxForm } from 'redux-form'
 
 import TextInput from './input/TextInput'
@@ -26,10 +26,7 @@ class DeviceWizard extends Component {
     console.log(`Device type: ${this.props.deviceType}`)
     console.log(props.monitorConfig)
 
-    const stepItems = cloneDeep(config.steps)
-    if (this.showAgentType()) {
-      stepItems[0].items = [...config.creds, ...stepItems[0].items]
-    }
+    const stepItems = config.steps
 
     this.state = {
       current: 1,
@@ -56,38 +53,6 @@ class DeviceWizard extends Component {
     if (hasMonitors) {
       this.props.fetchMonitorTemplates()
     }
-
-    if (!this.hasCreds()) {
-      this.props.showDeviceCredsPicker(true)
-    }
-  }
-
-  hasCreds () {
-    const {selectedDevice, monitorConfig} = this.props
-
-    if (this.showAgentType()) {
-      const credTypes = monitorConfig.credentialTypes || []
-      const creds = selectedDevice.credentials || []
-      let found = true
-      credTypes.forEach(type => {
-        if (!creds.filter(p => p.type === type).length)
-          found = false
-      })
-      return found
-    }
-    return true
-  }
-
-  showAgentType () {
-    const {checkCreds, monitorConfig, selectedDevice, collectors} = this.props
-    if (checkCreds) {
-      if (selectedDevice.agent) return false
-      const credTypes = monitorConfig.credentialTypes || []
-      if (credTypes.length === 0) return false
-      if (collectors.length > 2) return false
-      return true
-    }
-    return false
   }
 
   handleFormSubmit (formProps) {
