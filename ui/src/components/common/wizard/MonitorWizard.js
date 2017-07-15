@@ -31,6 +31,7 @@ class MonitorWizard extends React.Component {
     //   this.props.fetchMonitorTemplates()
     // }
 
+    this.props.fetchCollectors()
     if (!this.hasCreds()) {
       this.props.showDeviceCredsPicker(true)
     }
@@ -136,7 +137,7 @@ class MonitorWizard extends React.Component {
     )
   }
   render () {
-    const { handleSubmit, monitorConfig, selectedDevice } = this.props
+    const { handleSubmit, monitorConfig, selectedDevice, collectors } = this.props
     const header = this.props.title || 'Monitor'
     const paramEditModal = this.renderParamEditModal()
     const credentials = (selectedDevice.credentials || []).map(p => ({
@@ -156,7 +157,7 @@ class MonitorWizard extends React.Component {
         credentials={credentials}
 
         showAgentType={this.showAgentType()}
-        collectors={[]}
+        collectors={collectors}
       />
     )
   }

@@ -1,7 +1,8 @@
 import React from 'react'
-import {Dialog, Card, CardText, RaisedButton} from 'material-ui'
+import {Dialog, Card, CardText, RaisedButton, RadioButton} from 'material-ui'
 import {Field} from 'redux-form'
 import {keys} from 'lodash'
+import {RadioButtonGroup} from 'redux-form-material-ui'
 
 import {FormInput, FormCheckbox, FormSelect, CardLegend} from 'components/modal/parts'
 
@@ -17,12 +18,6 @@ const titleStyle = {
   paddingBottom: 12
 }
 
-const agentTypes = [{
-  label: 'Agent', value: 'agent'
-}, {
-  label: 'Collector', value: 'collector'
-}]
-
 export default class MonitorWizardView extends React.Component {
   renderAgentType () {
     const {showAgentType, collectors} = this.props
@@ -35,7 +30,10 @@ export default class MonitorWizardView extends React.Component {
         <CardLegend>Agent/Collector</CardLegend>
         <Card>
           <CardText>
-            <Field name="agentType" label="Type" component={FormSelect} className="margin-sm-left margin-sm-right" options={agentTypes}/>
+            <Field name="agentType" component={RadioButtonGroup}>
+              <RadioButton value="agent" label="Agent"/>
+              <RadioButton value="collector" label="Collector"/>
+            </Field>
             <Field name="collectorId" label="Collector" component={FormSelect} className="margin-sm-left margin-sm-right" options={collectorOptions}/>
           </CardText>
         </Card>
