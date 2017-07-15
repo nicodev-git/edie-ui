@@ -1,7 +1,7 @@
 import React from 'react'
 import Dialog from 'material-ui/Dialog'
 import { Field } from 'redux-form'
-import { SubHeader, FormInput, FormSelect, FormImg, FileUpload,
+import { SubHeader, FormInput, FormSelect, FormImg, FileUpload, FormCheckbox,
   SubmitBlock } from 'components/modal/parts'
 
 const SimpleModalForm = ({show, onHide, onSubmit, header, subheader, buttonText,
@@ -21,6 +21,12 @@ const SimpleModalForm = ({show, onHide, onSubmit, header, subheader, buttonText,
                 component={FormSelect}
                 label={elem.name}
                 options={elem.options}/>)
+            case 'checkbox':
+              return (<Field
+                key={elem.name.replace(/\s+/g, '')}
+                name={elem.key || elem.name.toLowerCase().replace(/\s+/g, '')}
+                component={FormCheckbox}
+                label={elem.name}/>)
             case 'password':
               return (<Field
                 key={elem.name.replace(/\s+/g, '')}

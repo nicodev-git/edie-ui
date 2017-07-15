@@ -31,6 +31,12 @@ export default class Credentials extends React.Component {
     }, {
       'displayName': 'Type',
       'columnName': 'type'
+    }, {
+      'displayName': 'Global',
+      'columnName': 'global',
+      'customComponent': p => {
+        return <span>{p.data ? 'Global' : 'Device'}</span>
+      }
     }]
   }
 
