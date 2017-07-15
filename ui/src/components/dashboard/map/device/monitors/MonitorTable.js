@@ -35,12 +35,13 @@ export default class MonitorTable extends Component {
     }, {
       'displayName': 'Type',
       'columnName': 'monitortype',
-      'cssClassName': 'width-60'
+      'cssClassName': 'width-100'
     }, {
       'displayName': 'Result',
       'columnName': 'checkResult.resultdata',
+      'cssClassName': 'text-ellipsis',
       'customComponent': (p) => {
-        if (p.data.length > 100) return <span>{p.data.substring(0, 100)}...</span>
+        if (p.data && p.data.length > 200) return <span>{p.data.substring(0, 200)}...</span>
         return <span>{p.data}</span>
       }
     }, {

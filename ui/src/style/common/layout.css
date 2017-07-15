@@ -68,6 +68,12 @@ body {
     color: firebrick;
 }
 
+.text-ellipsis {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 .bt-gray {
     border-bottom: 1px solid lightgray;
 }
