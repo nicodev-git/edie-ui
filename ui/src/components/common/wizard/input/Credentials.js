@@ -1,8 +1,10 @@
 import React from 'react'
-import {RaisedButton} from 'material-ui'
 import CredentialModal from './CredentialModal'
+import DeleteIcon from 'material-ui/svg-icons/action/delete'
+import {IconButton} from 'material-ui'
 
 import { TwoButtonsBlockCustom } from 'components/modal/parts'
+import {showConfirm} from 'components/common/Alert'
 
 export default class Credentials extends React.Component {
   componentDidMount () {
@@ -11,10 +13,12 @@ export default class Credentials extends React.Component {
   onClickAdd () {
     this.props.showDeviceCredsPicker(true)
   }
-  onClickRemove () {
-    const {selectedDeviceCreds} = this.props
-    const selected = this.getDeviceCreds().filter((p, i) => i !== selectedDeviceCreds)
-    if (selected.length) this.props.removeCredentials(selected[0])
+  onClickRemove (selected) {
+    showConfirm('Are you sure?', btn => {
+      if (btn !== 'ok') return
+      this.props.removeCredentials(selected)
+    })
+
   }
   onCloseCredPicker (props) {
     if (props) {
@@ -46,35 +50,36 @@ export default class Credentials extends React.Component {
 
     return (
       <div>
-        <div className="padding-md-top">
-          <RaisedButton label="Add" onTouchTap={this.onClickAdd.bind(this)}/>&nbsp;
-          <RaisedButton label="Remove" onTouchTap={this.onClickRemove.bind(this)}/>
-        </div>
-        <div>
-          <table className="table table-hover">
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Type</th>
-                <th>User</th>
-              </tr>
-            </thead>
-            <tbody>
-            {this.getDeviceCreds().map((p, i) =>
-              <tr
-                key={i}
-                className={selectedDeviceCreds === i ? 'selected' : ''}
-                onClick={() => selectDeviceCreds(i)}>
-                <td>{p.name}</td>
-                <td>{p.description}</td>
-                <td>{p.type}</td>
-                <td>{p.username}</td>
-              </tr>
-            )}
-            </tbody>
-          </table>
-        </div>
+        <table className="table table-hover">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Description</th>
+              <th>Type</th>
+              <th>User</th>
+              <th />
+            </tr>
+          </thead>
+          <tbody>
+          {this.getDeviceCreds().map((p, i) =>
+            <tr
+              key={i}
+              className={selectedDeviceCreds === i ? 'selected' : ''}
+              onClick={() => selectDeviceCreds(i)}>
+              <td>{p.name}</td>
+              <td>{p.description}</td>
+              <td>{p.type}</td>
+              <td>{p.username}</td>
+              <td>
+                <IconButton style={{padding: 0, width: 24, height: 24}}
+                  onTouchTap={this.onClickRemove.bind(this, p)}>
+                  <DeleteIcon color="#545454" hoverColor="#f44336"/>
+                </IconButton>
+              </td>
+            </tr>
+          )}
+          </tbody>
+        </table>
         {this.renderPicker()}
       </div>
     )

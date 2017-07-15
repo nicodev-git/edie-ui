@@ -268,6 +268,9 @@ class DeviceEditWizard extends React.Component {
     const device = this.props.initialValues
     this.props.uninstallAgent(device)
   }
+  onClickAddCred () {
+    this.props.showDeviceCredsPicker(true)
+  }
   renderTplImageModal () {
     if (!this.props.tplImageModalVisible) return null
     return (
@@ -275,16 +278,18 @@ class DeviceEditWizard extends React.Component {
     )
   }
   render () {
-    const { handleSubmit, tabs } = this.props
+    const { handleSubmit, tabs, selectedDevice } = this.props
     return (
       <div>
         <Form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
           <div className="tab-options">
-            <div className="margin-md-right margin-md-top"
+            <div className="margin-md-top"
               style={{position: 'absolute', top: '40px', right: '20px'}}>
-              <RaisedButton label="Save" type="submit" primary/>&nbsp;
-              <RaisedButton label="Install Agent" onTouchTap={this.onClickInstall.bind(this)}/>&nbsp;
-              <RaisedButton label="Uninstall Agent" onTouchTap={this.onClickUninstall.bind(this)}/>
+              <RaisedButton label="Save" type="submit" primary className="hidden"/>&nbsp;
+              {!selectedDevice.agent ? <RaisedButton label="Install Agent" onTouchTap={this.onClickInstall.bind(this)}/> : null}
+              {selectedDevice.agent ? <RaisedButton label="Uninstall Agent" onTouchTap={this.onClickUninstall.bind(this)}/> : null}
+              &nbsp;
+              <RaisedButton label="Add Credential" onTouchTap={this.onClickAddCred.bind(this)}/>
             </div>
           </div>
 
