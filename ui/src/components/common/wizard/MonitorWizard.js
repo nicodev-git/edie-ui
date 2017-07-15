@@ -59,6 +59,10 @@ class MonitorWizard extends React.Component {
       })
     }
 
+    if (values.checkinterval !== null) {
+      values.checkinterval = values.checkinterval * 1000
+    }
+
     const props = assign(
       {},
       values,
@@ -129,8 +133,8 @@ class MonitorWizard extends React.Component {
     )
   }
   render () {
-    const { handleSubmit, monitorConfig, selectedDevice, collectors } = this.props
-    const header = this.props.title || 'Monitor'
+    const { title, handleSubmit, monitorConfig, selectedDevice, collectors } = this.props
+    const header = title || `${monitorConfig.name} Monitor`
     const paramEditModal = this.renderParamEditModal()
     const credentials = (selectedDevice.credentials || []).map(p => ({
       label: p.name,
@@ -152,6 +156,8 @@ class MonitorWizard extends React.Component {
 
         showAgentType={this.showAgentType()}
         collectors={collectors}
+
+        agent={!!selectedDevice.agent}
       />
     )
   }

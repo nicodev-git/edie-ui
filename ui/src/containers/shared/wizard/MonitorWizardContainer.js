@@ -34,11 +34,12 @@ class MonitorWizardContainer extends React.Component {
 export default connect(
   state => ({
     initialValues: {
-      agentType: 'agent',
+      agentType: state.dashboard.selectedDevice.agent ? 'agent' : 'collector',
       collectorId: state.settings.collectors.length ? state.settings.collectors[0].id : '',
       credentialId: (state.dashboard.selectedDevice.credentials || []).length ? state.dashboard.selectedDevice.credentials[0].id : '',
 
       ...state.devices.monitorInitialValues.params,
+      checkinterval: ((state.devices.monitorInitialValues.params || {}).checkinterval || 0) / 1000,
       ...state.devices.monitorInitialValues
     },
 

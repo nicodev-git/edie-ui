@@ -3,7 +3,7 @@ import {Dialog, Card, CardText, RaisedButton, RadioButton} from 'material-ui'
 import {Field} from 'redux-form'
 import {RadioButtonGroup} from 'redux-form-material-ui'
 
-import {FormInput, FormCheckbox, FormSelect, CardLegend} from 'components/modal/parts'
+import {FormInput, FormCheckbox, FormSelect, CardLegend, CloseIconButton} from 'components/modal/parts'
 
 const dialogStyle = {
   background: '#efefef',
@@ -17,28 +17,17 @@ const titleStyle = {
   paddingBottom: 12
 }
 
+const paramLabels = {
+  'checkinterval': 'Interval (seconds)',
+  'timeout': 'Timeout (seconds)'
+}
+
 export default class MonitorWizardView extends React.Component {
-  renderAgentType () {
-    const {showAgentType, collectors} = this.props
-    if (!showAgentType) return null
-
-    return (
-      <div>
-        <CardLegend>Agent/Collector</CardLegend>
-        <Card>
-          <CardText className="pb-none">
-
-          </CardText>
-        </Card>
-      </div>
-    )
-  }
-
   render () {
     const {header, onSubmit, onHide, paramEditModal, credPicker, tagsView, paramsView,
       requiredParamKeys,
       credentials,
-      showAgentType, collectors
+      showAgentType, collectors, agent
     } = this.props
 
     const collectorOptions = collectors.map(p => ({
@@ -47,25 +36,22 @@ export default class MonitorWizardView extends React.Component {
 
     return (
       <Dialog open title={header} bodyStyle={dialogStyle} titleStyle={titleStyle} onRequestClose={onHide}>
+        <CloseIconButton onClick={onHide} color="white"/>
         <form onSubmit={onSubmit}>
-          {this.renderAgentType()}
           <CardLegend>Configuration</CardLegend>
           <Card>
             <CardText>
               <Field name="name" floatingLabel="Name" component={FormInput} className="margin-sm-left margin-sm-right"/>
               {requiredParamKeys.map(k =>
-                <Field key={k} name={k} floatingLabel={k} component={FormInput} className="margin-sm-left margin-sm-right"/>
+                <Field key={k} name={k} floatingLabel={paramLabels[k] || k} component={FormInput} className="margin-sm-left margin-sm-right"/>
               )}
 
               <div className={showAgentType ? '' : 'hidden'}>
-                <Field name="agentType" component={RadioButtonGroup}>
-                  <RadioButton value="agent" label="Agent" className="pull-left"/>
-                  <RadioButton value="collector" label="Collector" className="pull-left" style={{width: 100}}/>
+                <Field name="agentType" component={RadioButtonGroup} className="margin-md-top">
+                  <RadioButton value="agent" label={agent ? 'Agent' : <span style={{textDecoration: 'underline'}}>Install Agent</span>} className="pull-left" disabled={!agent}/>
+                  <RadioButton value="collector" label="Collector" className="pull-left" style={{width: 100, marginTop: 14, marginRight: 20}}/>
                 </Field>
-                <div>
-                  <Field name="collectorId" label="Collector" component={FormSelect} className="pull-left" options={collectorOptions}/>
-                </div>
-
+                <Field name="collectorId" label="Collector" component={FormSelect} className="pull-left" options={collectorOptions}/>
               </div>
             </CardText>
           </Card>
@@ -83,8 +69,7 @@ export default class MonitorWizardView extends React.Component {
 
           {/*{tagsView}*/}
           <div className="form-buttons">
-            <RaisedButton type="submit" label="Finish"/>
-            <RaisedButton label="Cancel" onTouchTap={onHide}/>
+            <RaisedButton type="submit" label="Add"/>
           </div>
         </form>
         {paramEditModal}

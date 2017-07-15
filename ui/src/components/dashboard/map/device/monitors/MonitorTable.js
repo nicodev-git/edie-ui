@@ -244,7 +244,7 @@ export default class MonitorTable extends Component {
     return (
       <MonitorWizardContainer
         deviceType={type}
-        title={monitorConfig ? monitorConfig.name : ''}
+        title={`Add ${monitorConfig.name} Monitor To ${this.props.device.name}`}
         onClose={() => {
           this.props.closeDeviceMonitorWizard()
         }}
