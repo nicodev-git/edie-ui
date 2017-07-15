@@ -1,6 +1,6 @@
 import React from 'react'
 import {RaisedButton} from 'material-ui'
-import CredPicker from 'containers/settings/credentials/CredsPickerContainer'
+import CredentialModal from './CredentialModal'
 
 import { TwoButtonsBlockCustom } from 'components/modal/parts'
 
@@ -12,24 +12,33 @@ export default class Credentials extends React.Component {
     this.props.showDeviceCredsPicker(true)
   }
   onClickRemove () {
-    const {deviceCreds, selectedDeviceCreds} = this.props
-    this.props.updateDeviceCreds(deviceCreds.filter((p, i) => i !== selectedDeviceCreds))
+    // const {deviceCreds, selectedDeviceCreds} = this.props
+    // this.props.updateDeviceCreds(deviceCreds.filter((p, i) => i !== selectedDeviceCreds))
   }
-  onCloseCredPicker (selected) {
-    const {deviceCreds} = this.props
-    if (selected) {
-      this.props.updateDeviceCreds([...deviceCreds, selected])
+  onCloseCredPicker (props) {
+    if (props) {
+      const {selectedDevice} = this.props
+      this.props.addCredentials({
+        ...props,
+        deviceIds: [selectedDevice.id]
+      })
     }
     this.props.showDeviceCredsPicker(false)
   }
   renderPicker () {
     if (!this.props.deviceCredsPickerVisible) return null
+
     return (
-      <CredPicker onClose={this.onCloseCredPicker.bind(this)}/>
+      <CredentialModal
+        addCredentials={this.onCloseCredPicker.bind(this)}
+        credentialTypes={[]}
+        onClose={this.onCloseCredPicker.bind(this)}/>
     )
   }
   render () {
-    const {deviceCreds, selectedDeviceCreds, selectDeviceCreds} = this.props
+    const { selectedDevice, credentials, selectedDeviceCreds, selectDeviceCreds } = this.props
+    const deviceCreds = credentials.filter(p => !p.global && p.deviceIds && p.deviceIds.indexOf(selectedDevice.id) >= 0)
+
     return (
       <div>
         <div className="padding-md-top">

@@ -15,7 +15,10 @@ import {
   selectDeviceCreds,
 
   installAgent,
-  uninstallAgent
+  uninstallAgent,
+
+  fetchCredentials,
+  addCredentials
 } from 'actions'
 
 class DeviceEditWizardContainer extends React.Component {
@@ -66,6 +69,8 @@ export default connect(
   state => ({
     initialValues: state.dashboard.selectedDevice,
 
+    selectedDevice: state.dashboard.selectedDevice,
+
     tplImageModalVisible: state.settings.tplImageModalVisible,
     selectedTplImage: state.settings.selectedTplImage,
 
@@ -75,7 +80,9 @@ export default connect(
     deviceTags: state.devices.deviceTags,
     deviceCreds: state.devices.deviceCreds,
     deviceCredsPickerVisible: state.devices.deviceCredsPickerVisible,
-    selectedDeviceCreds: state.devices.selectedDeviceCreds
+    selectedDeviceCreds: state.devices.selectedDeviceCreds,
+
+    credentials: state.settings.credentials
   }), {
     openTplImageModal,
     closeTplImageModal,
@@ -90,6 +97,8 @@ export default connect(
     selectDeviceCreds,
 
     installAgent,
-    uninstallAgent
+    uninstallAgent,
+
+    fetchCredentials
   }
 )(DeviceEditWizardContainer)
