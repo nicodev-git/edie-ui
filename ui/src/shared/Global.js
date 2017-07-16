@@ -206,3 +206,9 @@ export const WorkflowActionTypes = [{
   label: 'Add Tag',
   value: 'ADD_TAG'
 }]
+
+export const collectorOSTypes = [{
+  label: 'Windows', value: 'WINDOWS'
+}, {
+  label: 'Linux', type: 'LINUX'
+}]
