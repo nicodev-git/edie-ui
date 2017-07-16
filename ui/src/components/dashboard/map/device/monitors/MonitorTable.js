@@ -30,7 +30,6 @@ export default class MonitorTable extends Component {
     this.columns = [{
       'displayName': 'Monitor Name',
       'columnName': 'name',
-      'cssClassName': 'nowrap',
       'cssClassName': 'width-140'
     }, {
       'displayName': 'Type',

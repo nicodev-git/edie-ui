@@ -45,8 +45,10 @@ class MonitorWizard extends React.Component {
     if (credTypes.length === 0) return false
 
     //Step 3
-    // if (monitorConfig.needWindowsAgentCollector)
-    if (collectors.length > 2) return false
+    if (monitorConfig.needWindowsAgentCollector) {
+      if (collectors.length >= 2) return false
+    }
+
     return true
   }
 
