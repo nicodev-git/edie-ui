@@ -26,6 +26,7 @@ import {
   closeDeviceTplModal,
   openTplImageModal,
   shareMonitorTemplate,
+  cloneDeviceTemplate,
 
   addMonitorTemplate,
   updateMonitorTemplate,
@@ -110,6 +111,7 @@ export default connect(
       closeDeviceTplModal,
       openTplImageModal,
       shareMonitorTemplate,
+      cloneDeviceTemplate,
 
       addMonitorTemplate,
       updateMonitorTemplate,

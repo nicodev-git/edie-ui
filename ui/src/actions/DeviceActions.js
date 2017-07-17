@@ -613,6 +613,18 @@ const deleteDeviceTemplateSuccess = (dispatch, entity) => {
   })
 }
 
+export const cloneDeviceTemplate = (entity) => {
+  return (dispatch) => {
+    axios.post(`${ROOT_URL}/devicetemplate`, {
+      ...entity,
+      id: null,
+      origin: 'USER'
+    })
+      .then(response => addDeviceTemplateSuccess(dispatch, response))
+      .catch(error => apiError(dispatch, error))
+  }
+}
+
 export const openDeviceTplModal = (tpl) => {
   return (dispatch) => {
     dispatch({

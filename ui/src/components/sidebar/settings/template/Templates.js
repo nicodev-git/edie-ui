@@ -4,6 +4,7 @@ import {RaisedButton, MenuItem, SelectField, IconButton, Chip} from 'material-ui
 import DeleteIcon from 'material-ui/svg-icons/action/delete'
 import EditIcon from 'material-ui/svg-icons/editor/mode-edit'
 import Share from 'material-ui/svg-icons/social/share'
+import CopyIcon from 'material-ui/svg-icons/content/content-copy'
 
 import SettingTabs from '../SettingTabs'
 import TabPage from 'components/common/TabPage'
@@ -83,6 +84,11 @@ export default class Templates extends Component {
                   </div>
                 </td>
                 <td className="text-right fa-lg">
+                  {item.origin === 'SYSTEM' && <IconButton
+                    style={{padding: 0, width: 24, height: 24}}
+                    onTouchTap={this.onClickCloneDeviceTpl.bind(this, item)}>
+                    <CopyIcon color="#545454" hoverColor="#f44336"/>
+                  </IconButton>}
                   {item.origin !== 'SYSTEM' && <IconButton
                     style={{padding: 0, width: 24, height: 24}}
                     onTouchTap={this.onClickDeleteDeviceTpl.bind(this, item)}>
@@ -179,6 +185,13 @@ export default class Templates extends Component {
     showConfirm('Click OK to remove.', btn => {
       if (btn !== 'ok') return
       this.props.deleteDeviceTemplate(item)
+    })
+  }
+
+  onClickCloneDeviceTpl (item) {
+    showConfirm('Click OK to clone.', btn => {
+      if (btn !== 'ok') return
+      this.props.cloneDeviceTemplate(item)
     })
   }
 
