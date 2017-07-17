@@ -36,7 +36,7 @@ export default connect(
     initialValues: {
       agentType: state.dashboard.selectedDevice.agent ? 'agent' : 'collector',
       collectorId: state.settings.collectors.length ? state.settings.collectors[0].id : '',
-      credentialId: (state.dashboard.selectedDevice.credentials || []).length ? state.dashboard.selectedDevice.credentials[0].id : '',
+      // credentialId: (state.dashboard.selectedDevice.credentials || []).length ? state.dashboard.selectedDevice.credentials[0].id : '',
 
       ...state.devices.monitorInitialValues.params,
       checkinterval: ((state.devices.monitorInitialValues.params || {}).checkinterval || 0) / 1000,
@@ -54,7 +54,8 @@ export default connect(
     selectedDevice: state.dashboard.selectedDevice,
     deviceCredsPickerVisible: state.devices.deviceCredsPickerVisible,
 
-    collectors: state.settings.collectors
+    collectors: state.settings.collectors,
+    credentials: state.settings.credentials
   }),
   dispatch => ({
     ...bindActionCreators({
