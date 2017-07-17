@@ -92,7 +92,7 @@ class DeviceTplView extends React.Component {
   }
 
   render () {
-    const { handleSubmit, editDeviceTplTags, removeDeviceTplTag } = this.props
+    const { handleSubmit, editDeviceTplTags, removeDeviceTplTag, deviceTpl } = this.props
     let header = 'Device Template'
     let imgUrl = this.getImageUrl()
     let options = this.renderOptions()
@@ -104,7 +104,7 @@ class DeviceTplView extends React.Component {
         monitors={this.props.monitors}
         monitorTemplates={this.props.monitorTemplates}
         workflows={this.props.editTplWorkflows}
-        onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
+        onSubmit={deviceTpl.origin === 'SYSTEM' ? null : handleSubmit(this.handleFormSubmit.bind(this))}
         options={options}
         imgUrl={imgUrl}
         onChange={this.onClickChangeImage.bind(this)}

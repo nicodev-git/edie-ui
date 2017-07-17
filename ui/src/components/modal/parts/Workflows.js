@@ -9,7 +9,7 @@ export default class Workflows extends React.Component {
     return (
       <div>
         <div>
-          <label className="margin-md-bottom"><b>Workflows</b></label>
+          <div className="inline-block margin-md-bottom margin-md-top"><b>Workflows</b></div>
           <div className="pull-right">
             <FlatButton label="Add" onTouchTap={() => showWfSelectModal(true)}/>
           </div>

@@ -43,7 +43,7 @@ export default class DeviceTplModalView extends Component {
           </div>
         </div>
         {tagModal}
-        <SubmitBlock name="Save" onClick={onHide}/>
+        {onSubmit && <SubmitBlock name="Save" onClick={onHide}/>}
       </form>
     )
   }
