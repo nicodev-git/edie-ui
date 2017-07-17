@@ -16,6 +16,7 @@ export default class Monitors extends React.Component {
   componentWillMount () {
     this.props.clearMonitors()
     this.props.fetchCollectors()
+    this.props.fetchCredentials()
   }
 
   getMonitorTable () {
