@@ -21,7 +21,7 @@ export default class DeviceTplModalView extends Component {
           <ImageUploader imgUrl={imgUrl} onChange={onChange}/>
         </div>
 
-        <div>
+        <div className={onSubmit ? '' : 'hidden'}>
           <FlatButton label="Add Tag" onTouchTap={onClickAddTag}/>
         </div>
         <div style={chipStyles.wrapper}>
@@ -35,11 +35,11 @@ export default class DeviceTplModalView extends Component {
         </div>
         <div>
           <div className="col-md-6 ml-none">
-            <Monitors monitors={monitors} onEditMonitor={onEditMonitor} onRemoveMonitor={onRemoveMonitor} />
-            <Workflows workflows={workflows} showWfSelectModal={showWfSelectModal} onClickDeleteWf={onClickDeleteWf}/>
+            <Monitors monitors={monitors} onEditMonitor={onSubmit ? onEditMonitor : null} onRemoveMonitor={onSubmit ? onRemoveMonitor : null} />
+            <Workflows workflows={workflows} showWfSelectModal={onSubmit ? showWfSelectModal : null} onClickDeleteWf={onSubmit ? onClickDeleteWf : null}/>
           </div>
           <div className="col-md-6 mr-none" style={{maxHeight: '200px', overflow: 'auto'}}>
-            <MonitorTemplates monitors={monitors} monitorTemplates={monitorTemplates} onAddMonitor={onAddMonitor} />
+            <MonitorTemplates monitors={monitors} monitorTemplates={monitorTemplates} onAddMonitor={onSubmit ? onAddMonitor : null} />
           </div>
         </div>
         {tagModal}

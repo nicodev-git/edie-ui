@@ -16,22 +16,22 @@ export default class Monitors extends Component {
                 <tr className="modal-row" key={item.id}>
                   <td className="table-label">{item.name}</td>
                   <td className="table-icon">
-                    <div className="edit-button">
+                    {onEditMonitor && <div className="edit-button">
                       <IconButton
                         style={buttonStyle}
                         iconStyle={iconStyle}
                         onTouchTap={onEditMonitor.bind(this, item)}>
                           <CreateIcon color="#d4d4d4"/>
                       </IconButton>
-                    </div>
-                    <div className="remove-button">
+                    </div>}
+                    {onEditMonitor && <div className="remove-button">
                       <IconButton
                         style={buttonStyle}
                         iconStyle={iconStyle}
                         onTouchTap={onRemoveMonitor.bind(this, index)}>
                           <DeleteIcon color="#d4d4d4"/>
                       </IconButton>
-                    </div>
+                    </div>}
                   </td>
                 </tr>)
             }

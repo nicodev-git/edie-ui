@@ -14,14 +14,14 @@ export default class MonitorTemplates extends Component {
               <tr className="modal-row" key={item.id}>
                 <td className="table-label">{item.name}</td>
                 <td className="table-icon">
-                  <div className={`add-button ${monitors.includes(item) ? 'hidden' : ''}`}>
+                  {onAddMonitor && <div className={`add-button ${monitors.includes(item) ? 'hidden' : ''}`}>
                     <IconButton
                       style={buttonStyle}
                       iconStyle={iconStyle}
                       onTouchTap={onAddMonitor.bind(this, item)}>
                         <AddCircleIcon color="#d4d4d4"/>
                     </IconButton>
-                  </div>
+                  </div>}
                 </td>
               </tr>)
           }
