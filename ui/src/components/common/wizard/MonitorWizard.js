@@ -46,7 +46,9 @@ class MonitorWizard extends React.Component {
 
     //Step 3
     if (monitorConfig.needWindowsAgentCollector) {
-      if (collectors.length >= 2) return false
+      if (collectors.filter(p => p.ostype === 'WINDOWS').length) return false
+    } else {
+      if (collectors.filter(p => p.ostype === 'LINUX').length) return false
     }
 
     return true
