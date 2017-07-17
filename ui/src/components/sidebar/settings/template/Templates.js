@@ -282,12 +282,14 @@ export default class Templates extends Component {
         </TabPageHeader>
 
         <TabPageBody tabs={SettingTabs} tab={5} history={this.props.history} location={this.props.location}>
-          <div className="row padding-md">
-            <div className="col-md-6">
-              {type === 'Device' ? this.renderDeviceTemplates() : this.renderMonitorTemplates()}
-            </div>
-            <div className="col-md-6">
-              {this.renderDeviceTplView()}
+          <div style={{position: 'absolute', width: '100%', height: '100%'}}>
+            <div className="flex-horizontal" style={{height: '100%'}}>
+              <div className="flex-1" style={{overflow: 'auto'}}>
+                {type === 'Device' ? this.renderDeviceTemplates() : this.renderMonitorTemplates()}
+              </div>
+              <div className="flex-1" style={{overflow: 'auto'}}>
+                {this.renderDeviceTplView()}
+              </div>
             </div>
           </div>
           {this.renderTplImageModal()}
