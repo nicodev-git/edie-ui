@@ -2,13 +2,9 @@ import React, { Component } from 'react'
 import RaisedButton from 'material-ui/RaisedButton'
 import ImportSyncDataModal from './ImportSyncDataModal'
 
-export default class MainSettings extends Component {
-  constructor (props) {
-    super(props)
-    this.state = {
-    }
-  }
+import SimulationModal from './SimulationModal'
 
+export default class MainSettings extends Component {
   onClickSync () {
     this.props.syncData()
   }
@@ -32,6 +28,13 @@ export default class MainSettings extends Component {
     )
   }
 
+  renderSimulationModal () {
+    if (!this.props.simulationModalOpen) return null
+    return (
+      <SimulationModal {...this.props}/>
+    )
+  }
+
   render () {
     return (
       <div className="padding-md">
@@ -49,6 +52,7 @@ export default class MainSettings extends Component {
         </div>
 
         {this.renderImportModal()}
+        {this.renderSimulationModal()}
       </div>
     )
   }

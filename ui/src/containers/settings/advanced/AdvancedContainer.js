@@ -11,7 +11,8 @@ import {
   syncData,
   showImportSyncModal,
   importSyncData,
-  showSimulationModal
+  showSimulationModal,
+  postIncidentSimulation
 } from 'actions'
 
 class AdvancedContainer extends React.Component {
@@ -35,6 +36,7 @@ export default connect(
     syncData,
     showImportSyncModal,
     importSyncData,
-    showSimulationModal
+    showSimulationModal,
+    postIncidentSimulation
   }
 )(withRouter(AdvancedContainer))

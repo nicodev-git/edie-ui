@@ -777,3 +777,9 @@ export const showSimulationModal = (visible) => {
     dispatch({type: SHOW_SIMULATION_MODAL, visible})
   }
 }
+
+export const postIncidentSimulation = (data) => {
+  return dispatch => {
+    axios.post(`${ROOT_URL}/restlistener/post`, data)
+  }
+}
