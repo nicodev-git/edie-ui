@@ -44,6 +44,6 @@ class CredentialModal extends Component {
 
 export default connect(
   state => ({
-    initialValues: state.settings.editCredentials
+    initialValues: {global: true, ...state.settings.editCredentials}
   })
 )(reduxForm({form: 'credentialsEditForm'})(CredentialModal))
