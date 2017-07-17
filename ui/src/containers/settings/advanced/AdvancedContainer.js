@@ -10,7 +10,8 @@ import {
   updateEnvVar,
   syncData,
   showImportSyncModal,
-  importSyncData
+  importSyncData,
+  showSimulationModal
 } from 'actions'
 
 class AdvancedContainer extends React.Component {
@@ -25,16 +26,15 @@ export default connect(
   state => ({
     envVars: state.settings.envVars,
     syncStatus: state.settings.syncStatus,
-    importSyncModalOpen: state.settings.importSyncModalOpen
-  }),
-  dispatch => ({
-    ...bindActionCreators({
-      fetchEnvVars,
-      addEnvVar,
-      updateEnvVar,
-      syncData,
-      showImportSyncModal,
-      importSyncData
-    }, dispatch)
-  })
+    importSyncModalOpen: state.settings.importSyncModalOpen,
+    simulationModalOpen: state.settings.simulationModalOpen
+  }), {
+    fetchEnvVars,
+    addEnvVar,
+    updateEnvVar,
+    syncData,
+    showImportSyncModal,
+    importSyncData,
+    showSimulationModal
+  }
 )(withRouter(AdvancedContainer))

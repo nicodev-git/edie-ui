@@ -19,6 +19,9 @@ export default class MainSettings extends Component {
   onCloseImportModal () {
     this.props.showImportSyncModal(false)
   }
+  onClickSimulate () {
+    this.props.showSimulationModal(true)
+  }
 
   renderImportModal () {
     if (!this.props.importSyncModalOpen) return null
@@ -39,6 +42,10 @@ export default class MainSettings extends Component {
 
         <div className="padding-md-top">
           <RaisedButton label="Import From File SyncData" onTouchTap={this.onClickImportSync.bind(this)}/>
+        </div>
+
+        <div className="padding-md-top">
+          <RaisedButton label="Simulate" onTouchTap={this.onClickSimulate.bind(this)}/>
         </div>
 
         {this.renderImportModal()}

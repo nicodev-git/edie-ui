@@ -133,7 +133,9 @@ import {
   FETCH_CRED_TYPES,
   SELECT_CRED_TYPE,
 
-  FETCH_DEVICE_CATEGORIES
+  FETCH_DEVICE_CATEGORIES,
+
+  SHOW_SIMULATION_MODAL
 
 } from 'actions/types'
 
@@ -565,6 +567,9 @@ export default function (state = initialState, action) {
       return { ...state, installAgents: state.installAgents.map(p => p.id === action.data.id ? {...p, status: action.status} : p)}
     case CLEAR_AGENT_INSTALL:
       return { ...state, installAgents: [] }
+
+    case SHOW_SIMULATION_MODAL:
+      return { ...state, simulationModalOpen: !!action.visible }
   }
   return state
 }

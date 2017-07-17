@@ -86,6 +86,8 @@ import {
   FETCH_CRED_TYPES,
   SELECT_CRED_TYPE,
 
+  SHOW_SIMULATION_MODAL,
+
   NO_AUTH_ERROR
 } from './types'
 
@@ -767,5 +769,11 @@ export const fetchCollectors = () => {
     axios.get(`${ROOT_URL}/collector?size=100`).then(({data}) => {
       dispatch({type: FETCH_COLLECTORS, data: data._embedded.collectors})
     })
+  }
+}
+
+export const showSimulationModal = (visible) => {
+  return dispatch => {
+    dispatch({type: SHOW_SIMULATION_MODAL, visible})
   }
 }
