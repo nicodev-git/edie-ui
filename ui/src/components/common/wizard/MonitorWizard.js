@@ -13,15 +13,14 @@ import {showAlert} from 'components/common/Alert'
 
 class MonitorWizard extends React.Component {
   componentDidMount () {
-    if (!this.hasCreds()) {
-      // this.props.showDeviceCredsPicker(true)
-    }
+    // if (!this.hasCreds()) {
+    //   this.props.showDeviceCredsPicker(true)
+    // }
   }
 
   hasCreds () {
-    const {selectedDevice, monitorConfig} = this.props
-
     if (this.showAgentType()) {
+      const {selectedDevice, monitorConfig} = this.props
       const credTypes = monitorConfig.credentialTypes || []
       const creds = selectedDevice.credentials || []
       let found = true
@@ -34,7 +33,7 @@ class MonitorWizard extends React.Component {
     return true
   }
 
-  showAgentType () {
+  showAgentType (suppress) {
     const {monitorConfig, selectedDevice, collectors} = this.props
     const credTypes = monitorConfig.credentialTypes || []
 
@@ -55,7 +54,20 @@ class MonitorWizard extends React.Component {
   }
 
   handleFormSubmit (values) {
-    const { extraParams, onFinish, editParams, canAddTags, monitorTags } = this.props
+    const { extraParams, onFinish, editParams, canAddTags, monitorTags, selectedDevice } = this.props
+    if (values.agentType === 'collector') {
+      if (!values.collectorId) {
+        showAlert('Please install collector.')
+        return
+      }
+    } else if (values.agentType === 'agent') {
+      if (!selectedDevice.agent) {
+        showAlert('Please install agent.')
+        return
+      }
+    }
+
+
     const params = {}
     if (editParams) {
       editParams.forEach(p => {
@@ -167,7 +179,7 @@ class MonitorWizard extends React.Component {
         credPicker={this.renderCredPicker()}
         credentials={this.getRelevantCreds()}
 
-        showAgentType={this.showAgentType()}
+        showAgentType={this.showAgentType(true)}
         collectors={collectors}
 
         agent={!!selectedDevice.agent}
