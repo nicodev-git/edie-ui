@@ -20,9 +20,9 @@ class MonitorWizard extends React.Component {
 
   hasCreds () {
     if (this.showAgentType()) {
-      const {selectedDevice, monitorConfig} = this.props
+      const {selectedDevice, credentials, monitorConfig} = this.props
       const credTypes = monitorConfig.credentialTypes || []
-      const creds = selectedDevice.credentials || []
+      const creds = credentials.filter(p => !p.global && p.deviceIds && p.deviceIds.indexOf(selectedDevice.id) >= 0) || []
       let found = true
       credTypes.forEach(type => {
         if (!creds.filter(p => p.type === type).length)
