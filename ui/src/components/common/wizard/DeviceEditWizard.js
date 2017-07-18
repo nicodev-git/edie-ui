@@ -285,7 +285,7 @@ class DeviceEditWizard extends React.Component {
           <div className="tab-options">
             <div className="margin-md-top"
               style={{position: 'absolute', top: '40px', right: '20px'}}>
-              <RaisedButton label="Save" type="submit" primary className="hidden"/>&nbsp;
+              <RaisedButton label="Save" type="submit" primary/>&nbsp;
               {!selectedDevice.agent ? <RaisedButton label="Install Agent" onTouchTap={this.onClickInstall.bind(this)}/> : null}
               {selectedDevice.agent ? <RaisedButton label="Uninstall Agent" onTouchTap={this.onClickUninstall.bind(this)}/> : null}
               &nbsp;
