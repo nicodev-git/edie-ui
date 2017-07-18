@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import InlineEdit from 'react-edit-inline'
-import {Checkbox, RaisedButton} from 'material-ui'
+import {assign} from 'lodash'
+import {Checkbox, RaisedButton, SelectField, MenuItem} from 'material-ui'
 
 import ImportSyncDataModal from './ImportSyncDataModal'
 import SimulationModal from './SimulationModal'
@@ -11,6 +11,13 @@ const rowStyle = {
   height: 30
 }
 
+const logLevels = [{
+  label: 'INFO', value: 'INFO'
+}, {
+  label: 'DEBUG', value: 'DEBUG'
+}, {
+  label: 'ERROR', value: 'ERROR'
+}]
 export default class MainSettings extends Component {
   getOption (key) {
     const list = (this.props.envVars || []).filter(u => u.envvars && u.envvars.key === key)
@@ -22,6 +29,27 @@ export default class MainSettings extends Component {
     const option = this.getOption(key)
     if (!option) return ''
     return option.envvars[value]
+  }
+
+  updateOption (name, value1, value2 = '') {
+    if (!name) return false
+
+    let option = this.getOption(name)
+    if (!option) {
+      option = {
+        envvars: {
+          'key': name,
+          'value1': value1,
+          'value2': value2
+        }
+      }
+
+      this.props.addEnvVar(option)
+    } else {
+      assign(option.envvars, { value1, value2 })
+
+      this.props.updateEnvVar(option)
+    }
   }
 
   onClickSync () {
@@ -39,8 +67,12 @@ export default class MainSettings extends Component {
   }
 
   onChangeSendLogOption (e) {
-    let {checked} = e.target
+    const {checked} = e.target
     this.updateOption('SEND_LOGS', `${checked}`)
+  }
+
+  onChangeSendLogLevel (e, index, value) {
+    this.updateOption('SEND_LOGS_LEVEL', value)
   }
 
   renderImportModal () {
@@ -63,14 +95,22 @@ export default class MainSettings extends Component {
     return (
       <div className="padding-md">
         <div style={rowStyle} className="margin-md-bottom bt-gray">
-          <div className="pull-left width-220">
+          <div>
             <Checkbox
               label="Send IMP Logs to IMAdmin"
               checked={this.getOptionValue('SEND_LOGS') === 'true'}
               onCheck={this.onChangeSendLogOption.bind(this)}/>
           </div>
         </div>
-
+        <div>
+          <SelectField
+            floatingLabelText="Send IMP Logs Level"
+            options={logLevels}
+            value={this.getOptionValue('SEND_LOGS_LEVEL')}
+            onChange={this.onChangeSendLogLevel.bind(this)}>
+            {logLevels.map(option => <MenuItem key={option.value} value={option.value} primaryText={option.label}/>)}
+          </SelectField>
+        </div>
         <div className="padding-md-top">
           <label className="margin-sm-right">Update The System</label>
           <RaisedButton label="Update" onTouchTap={this.onClickSync.bind(this)}/>
