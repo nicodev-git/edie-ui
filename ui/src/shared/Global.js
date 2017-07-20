@@ -212,3 +212,7 @@ export const collectorOSTypes = [{
 }, {
   label: 'Linux', type: 'LINUX'
 }]
+
+export const isWindowsDevice = (device) => {
+  return device && device.templateName === 'Windows Server'
+}

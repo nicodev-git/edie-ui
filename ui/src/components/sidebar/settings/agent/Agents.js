@@ -15,6 +15,8 @@ import AgentModal from './AgentModal'
 import { errorStyle, inputStyle, selectedItemStyle } from 'style/common/materialStyles'
 import {showAlert, showConfirm} from 'components/common/Alert'
 
+import {isWindowsDevice} from 'shared/Global'
+
 export default class Agents extends Component {
   constructor (props) {
     super(props)
@@ -65,6 +67,7 @@ export default class Agents extends Component {
 
   componentDidMount () {
     this.props.clearAgentInstall()
+    this.props.fetchCollectors()
 
     this.timer = setInterval(() => {
       this.props.fetchAgents()
@@ -99,6 +102,12 @@ export default class Agents extends Component {
     })
   }
   onClickInstall (device) {
+    if (isWindowsDevice(device)) {
+      const exists = this.props.collectors.filter(p => p.ostype === 'WINDOWS').length > 0
+      if (!exists) {
+        return showAlert('Please install windows collector.')
+      }
+    }
     this.props.installAgent(device)
   }
   getTable () {

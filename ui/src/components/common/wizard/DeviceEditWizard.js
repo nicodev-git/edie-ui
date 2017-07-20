@@ -5,6 +5,8 @@ import RaisedButton from 'material-ui/RaisedButton'
 
 import { wizardEditConfig } from './WizardConfig'
 import { util } from './WizardUtil'
+import {isWindowsDevice} from 'shared/Global'
+import {showAlert} from 'components/common/Alert'
 
 import TextInput from './input/TextInput'
 import TextArea from './input/TextArea'
@@ -262,6 +264,14 @@ class DeviceEditWizard extends React.Component {
   }
   onClickInstall () {
     const device = this.props.initialValues
+
+    if (isWindowsDevice(device)) {
+      const exists = this.props.collectors.filter(p => p.ostype === 'WINDOWS').length > 0
+      if (!exists) {
+        return showAlert('Please install windows collector.')
+      }
+    }
+
     this.props.installAgent(device)
   }
   onClickUninstall () {

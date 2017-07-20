@@ -10,6 +10,8 @@ import {
   removeAgent,
   fetchAgents,
 
+  fetchCollectors,
+
   installAgent,
   clearAgentInstall,
   showAgentPreloader
@@ -31,13 +33,17 @@ export default connect(
 
     agentPreloader: state.settings.agentPreloader,
 
-    installAgents: state.settings.installAgents
+    installAgents: state.settings.installAgents,
+
+    collectors: state.settings.collectors
   }), {
     showAgentModal,
     addAgent,
     updateAgent,
     removeAgent,
     fetchAgents,
+
+    fetchCollectors,
 
     installAgent,
     clearAgentInstall,

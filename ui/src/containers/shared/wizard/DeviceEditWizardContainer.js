@@ -20,7 +20,9 @@ import {
   fetchCredentials,
   addCredentials,
   removeCredentials,
-  fetchCredTypes
+  fetchCredTypes,
+
+  fetchCollectors
 } from 'actions'
 
 class DeviceEditWizardContainer extends React.Component {
@@ -85,7 +87,9 @@ export default connect(
     selectedDeviceCreds: state.devices.selectedDeviceCreds,
 
     credentials: state.settings.credentials,
-    credentialTypes: state.settings.credentialTypes
+    credentialTypes: state.settings.credentialTypes,
+
+    collectors: state.settings.collectors
   }), {
     openTplImageModal,
     closeTplImageModal,
@@ -105,6 +109,8 @@ export default connect(
     fetchCredentials,
     addCredentials,
     removeCredentials,
-    fetchCredTypes
+    fetchCredTypes,
+
+    fetchCollectors
   }
 )(DeviceEditWizardContainer)
