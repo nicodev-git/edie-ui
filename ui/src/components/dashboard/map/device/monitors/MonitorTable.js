@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { assign, concat } from 'lodash'
+import { assign, concat, findIndex } from 'lodash'
 import ReactTooltip from 'react-tooltip'
 import moment from 'moment'
 
@@ -177,7 +177,7 @@ export default class MonitorTable extends Component {
 
     if (editMonitor) {
       // Edit
-      const index = device.monitors.indexOf(editMonitor)
+      const index = findIndex(device.monitors, {uid: editMonitor.uid})
       if (index >= 0) device.monitors[index] = monitor
     } else {
       // Add
@@ -218,7 +218,7 @@ export default class MonitorTable extends Component {
     if (!data) return showAlert('Please choose monitor.')
 
     let device = assign({}, this.props.device)
-    const index = device.monitors.indexOf(data)
+    const index = findIndex(device.monitors, {uid: data.uid})
     if (index >= 0) device.monitors.splice(index, 1)
 
     this.props.updateMapDevice(device)
