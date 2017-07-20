@@ -22,7 +22,9 @@ import {
   removeCredentials,
   fetchCredTypes,
 
-  fetchCollectors
+  fetchCollectors,
+  showCollectorModal,
+  addCollector
 } from 'actions'
 
 class DeviceEditWizardContainer extends React.Component {
@@ -89,7 +91,8 @@ export default connect(
     credentials: state.settings.credentials,
     credentialTypes: state.settings.credentialTypes,
 
-    collectors: state.settings.collectors
+    collectors: state.settings.collectors,
+    collectorModalOpen: state.settings.collectorModalOpen
   }), {
     openTplImageModal,
     closeTplImageModal,
@@ -111,6 +114,8 @@ export default connect(
     removeCredentials,
     fetchCredTypes,
 
-    fetchCollectors
+    fetchCollectors,
+    showCollectorModal,
+    addCollector
   }
 )(DeviceEditWizardContainer)
