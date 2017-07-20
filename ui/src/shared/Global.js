@@ -210,7 +210,7 @@ export const WorkflowActionTypes = [{
 export const collectorOSTypes = [{
   label: 'Windows', value: 'WINDOWS'
 }, {
-  label: 'Linux', type: 'LINUX'
+  label: 'Linux', value: 'LINUX'
 }]
 
 export const isWindowsDevice = (device) => {

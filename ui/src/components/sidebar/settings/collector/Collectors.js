@@ -27,7 +27,7 @@ export default class Collectors extends React.Component {
       'columnName': 'version'
     }, {
       'displayName': 'Type',
-      'columnName': 'type'
+      'columnName': 'ostype'
     }, {
       'displayName': 'Last Seen',
       'columnName': 'lastSeen',
