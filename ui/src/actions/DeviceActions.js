@@ -109,6 +109,7 @@ import {
   ADD_AGENT_INSTALL,
   UPDATE_AGENT_INSTALL,
   CLEAR_AGENT_INSTALL,
+  UPDATE_INSTALL_AGENT_MESSAGE,
 
   NO_AUTH_ERROR
 } from './types'
@@ -1057,12 +1058,14 @@ export function selectDeviceCreds (creds) {
 export function installAgent (device) {
   return dispatch => {
     dispatch({type: ADD_AGENT_INSTALL, data: device})
+    dispatch({type: UPDATE_INSTALL_AGENT_MESSAGE, data: ''})
     axios.get(`${ROOT_URL}/installAgent`, {
       params: {
           id: device.id
       }
     }).then(({data})=> {
       if (!data.success) dispatch({type: UPDATE_AGENT_INSTALL, data: device, status: 'failed'})
+      dispatch({type: UPDATE_INSTALL_AGENT_MESSAGE, data: data.success ? 'Successfully installed' : ''})
     }).catch(() => {
       dispatch({type: UPDATE_AGENT_INSTALL, data: device, status: 'failed'})
     })
