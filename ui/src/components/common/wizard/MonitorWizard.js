@@ -160,7 +160,7 @@ class MonitorWizard extends React.Component {
     )
   }
   render () {
-    const { title, handleSubmit, monitorConfig, selectedDevice, collectors } = this.props
+    const { title, handleSubmit, monitorConfig, selectedDevice, collectors, initialValues } = this.props
     const header = title || `${monitorConfig ? monitorConfig.name : ''} Monitor`
     const paramEditModal = this.renderParamEditModal()
 
@@ -182,6 +182,8 @@ class MonitorWizard extends React.Component {
         collectors={collectors}
 
         agent={!!selectedDevice.agent}
+
+        isEdit={!!initialValues.uid}
       />
     )
   }

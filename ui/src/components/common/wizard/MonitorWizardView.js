@@ -7,7 +7,8 @@ import {FormInput, FormCheckbox, FormSelect, CardLegend, CloseIconButton} from '
 
 const dialogStyle = {
   background: '#efefef',
-  padding: '8px 48px 48px'
+  padding: '8px 48px 48px',
+  overflowY: 'auto'
 }
 const titleStyle = {
   background: '#324454',
@@ -27,7 +28,8 @@ export default class MonitorWizardView extends React.Component {
     const {header, onSubmit, onHide, paramEditModal, credPicker, tagsView, paramsView,
       requiredParamKeys,
       credentials,
-      showAgentType, collectors, agent
+      showAgentType, collectors, agent,
+      isEdit
     } = this.props
 
     const collectorOptions = collectors.map(p => ({
@@ -83,7 +85,7 @@ export default class MonitorWizardView extends React.Component {
 
           {/*{tagsView}*/}
           <div className="form-buttons">
-            <RaisedButton type="submit" label="Add"/>
+            <RaisedButton type="submit" label={isEdit ? 'Save' : 'Add'}/>
           </div>
         </form>
         {paramEditModal}
