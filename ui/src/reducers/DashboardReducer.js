@@ -59,6 +59,8 @@ import {
   SHOW_COMMENTS_MODAL,
   SHOW_ATTACKER_MODAL,
 
+  FIX_ALL_DEVICE_INCIDENTS,
+
   API_ERROR
 } from 'actions/types'
 
@@ -246,6 +248,7 @@ export default function (state = initialState, action) {
       return { ...state, stats: action.stats }
 
     case ADD_DASHBOARD_INCIDENT:
+    case FIX_ALL_DEVICE_INCIDENTS:
       return { ...state, mainIncidentDraw: state.mainIncidentDraw + 1 }
 
     case UPDATE_NEW_INCIDENT_MSG: {
