@@ -17,7 +17,6 @@ class UserModal extends React.Component {
     this.closeModal = this.closeModal.bind(this)
     this.handleFormSubmit = this.handleFormSubmit.bind(this)
     this.renderMapOptions = this.renderMapOptions.bind(this)
-    this.renderRoleOptions = this.renderRoleOptions.bind(this)
   }
 
   closeModal () {
@@ -78,6 +77,8 @@ class UserModal extends React.Component {
       <UserModalView
         onHide={this.closeModal}
         onSubmit={handleSubmit(this.handleFormSubmit)}
+        defaultmaps={[]}
+        roles={roleOptions}
       />
     )
   }
