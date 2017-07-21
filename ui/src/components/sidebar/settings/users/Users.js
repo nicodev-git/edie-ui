@@ -37,7 +37,10 @@ export default class Users extends React.Component {
       }
     }, {
       'displayName': 'Role',
-      'columnName': 'role'
+      'columnName': 'roles',
+      'customComponent': p => {
+        return <span>{(p.data || []).join(", ")}</span>
+      }
     }, {
       'displayName': 'Full Name',
       'columnName': 'fullname'
