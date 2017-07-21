@@ -50,6 +50,7 @@ export default class Users extends React.Component {
   componentWillMount () {
     this.loadGroups()
     this.props.fetchSettingUsers()
+    this.props.fetchSettingMaps()
   }
 
   loadGroups () {

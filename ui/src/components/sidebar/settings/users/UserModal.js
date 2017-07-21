@@ -72,12 +72,13 @@ class UserModal extends React.Component {
     )
   }
   render () {
-    const { handleSubmit } = this.props
+    const { handleSubmit, maps } = this.props
+    const defaultmaps = maps.map(p => ({label: p.name, value: p.id}))
     return (
       <UserModalView
         onHide={this.closeModal}
         onSubmit={handleSubmit(this.handleFormSubmit)}
-        defaultmaps={[]}
+        defaultmaps={defaultmaps}
         roles={roleOptions}
       />
     )

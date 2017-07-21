@@ -2,7 +2,7 @@ import React from 'react'
 
 import Dialog from 'material-ui/Dialog'
 import { Field } from 'redux-form'
-import { FormInput, FormSelect, SubmitBlock } from 'components/modal/parts'
+import { FormInput, FormSelect, FormCheckbox, SubmitBlock } from 'components/modal/parts'
 
 export default class UserModalView extends React.Component {
   render () {
@@ -17,7 +17,8 @@ export default class UserModalView extends React.Component {
             <Field name="email" component={FormInput} label="Email"/>
             <Field name="phone" component={FormInput} label="Phone"/>
             <Field name="defaultmap" component={FormSelect} label="Default Map" options={defaultmaps}/>
-            <Field name="role" component={FormSelect} label="Default Map" options={roles}/>
+            <Field name="role" component={FormSelect} label="Role" options={roles}/>
+            <Field name="enabled" component={FormCheckbox} label="Enabled" />
           </div>
           <SubmitBlock name="Save" onClick={onHide}/>
         </form>
