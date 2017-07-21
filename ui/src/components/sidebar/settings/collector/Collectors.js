@@ -34,7 +34,7 @@ export default class Collectors extends React.Component {
       'customComponent': p => {
         if (!p.data) return <span/>
         return (
-          <span>{moment(p.data).format('YYYY-MM-DD HH:mm:ss')}</span>
+          <span>{moment(p.data).fromNow()}</span>
         )
       }
     }]
