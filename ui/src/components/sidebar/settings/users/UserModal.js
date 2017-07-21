@@ -7,6 +7,8 @@ import { SimpleModalForm } from 'components/modal'
 import { validate } from 'components/modal/validation/NameValidation'
 import { extImageBaseUrl, roleOptions } from 'shared/Global'
 
+import UserModalView from './UserModalView'
+
 class UserModal extends React.Component {
   constructor (props) {
     super(props)
@@ -43,7 +45,7 @@ class UserModal extends React.Component {
     return options
   }
 
-  render () {
+  render1 () {
     const { handleSubmit } = this.props
     let header = 'User Detail'
     let buttonText = 'Save'
@@ -67,6 +69,15 @@ class UserModal extends React.Component {
         content={content}
         header={header}
         buttonText={buttonText}
+      />
+    )
+  }
+  render () {
+    const { handleSubmit } = this.props
+    return (
+      <UserModalView
+        onHide={this.closeModal}
+        onSubmit={handleSubmit(this.handleFormSubmit)}
       />
     )
   }
