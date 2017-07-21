@@ -17,11 +17,10 @@ export default connect(
     incidents: [],
     serviceUsage: [],
     topService: [],
-    servicePerformance: []
+    servicePerformance: {
+      labels: [],
+      values: []
+    }
   }), {
-    fetchIncidents: () => {},
-    fetchServiceUsage: () => {},
-    fetchTopService: () => {},
-    fetchServicePerformance: () => {}
   }
 )(withRouter(DeviceDashboardContainer))

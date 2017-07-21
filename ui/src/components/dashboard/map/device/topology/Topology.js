@@ -108,7 +108,7 @@ export default class Topology extends React.Component {
     this.props.closeDevice()
 
     if (isGroup(obj.data)) {
-      this.props.history.push(`/device/${obj.data.id}/topology`)
+      this.props.history.push(`/device/${obj.data.id}/dashboard`)
     } else {
       this.props.history.push(`/device/${obj.data.id}/main`)
     }

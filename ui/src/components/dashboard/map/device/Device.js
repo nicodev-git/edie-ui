@@ -2,7 +2,7 @@ import React from 'react'
 import { Switch } from 'react-router'
 import { Route } from 'react-router-dom'
 
-import DeviceDashboard from 'components/dashboard/map/device/dashboard/DeviceDashboard'
+import DeviceDashboard from 'containers/device/dashboard/DeviceDashboardContainer'
 import DeviceMain from 'components/dashboard/map/device/main/Main'
 import DeviceConnectedContainer from 'containers/device/connected/ConnectedContainer'
 import DeviceInfoContainer from 'containers/device/info/InfoContainer'
