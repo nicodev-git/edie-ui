@@ -374,7 +374,7 @@ export default class MainIncidents extends Component {
 
   onClickGroup (groupId) {
     this.props.closeDevice()
-    this.props.history.push(`/device/${groupId}/topology`)
+    this.props.history.push(`/device/${groupId}/dashboard`)
   }
 
   renderHeaderOptions () {
