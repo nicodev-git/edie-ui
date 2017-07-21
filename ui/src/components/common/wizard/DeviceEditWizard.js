@@ -63,6 +63,10 @@ class DeviceEditWizard extends React.Component {
     // } else {
     //   elem.style.backgroundColor = '#d1d1d1'
     // }
+    const {installAgentMessage} = nextProps
+    if (!this.props.installAgentMessage && installAgentMessage) {
+      showAlert(installAgentMessage)
+    }
   }
 
   onRequestSave () {
@@ -278,9 +282,7 @@ class DeviceEditWizard extends React.Component {
     if (isWindowsDevice(device)) {
       const exists = collectors.filter(p => p.ostype === 'WINDOWS').length > 0
       if (!exists) {
-        showAlert('Please add windows collector.', () => {
-          this.props.showCollectorModal(true)
-        });
+        showAlert('Please add windows collector.');
         return;
       }
     }

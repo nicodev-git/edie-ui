@@ -92,7 +92,9 @@ export default connect(
     credentialTypes: state.settings.credentialTypes,
 
     collectors: state.settings.collectors,
-    collectorModalOpen: state.settings.collectorModalOpen
+    collectorModalOpen: state.settings.collectorModalOpen,
+
+    installAgentMessage: state.devices.installAgentMessage
   }), {
     openTplImageModal,
     closeTplImageModal,

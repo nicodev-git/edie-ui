@@ -99,6 +99,8 @@ import {
   SHOW_DEVICE_CREDS_PICKER,
   SELECT_DEVICE_CREDS,
 
+  UPDATE_INSTALL_AGENT_MESSAGE,
+
   UPDATE_DEVICE_ERROR
 } from 'actions/types'
 
@@ -422,6 +424,9 @@ export default function (state = INITIAL_STATE, action) {
       return { ...state, deviceCredsPickerVisible: !!action.visible }
     case SELECT_DEVICE_CREDS:
       return { ...state, selectedDeviceCreds: action.creds }
+
+    case UPDATE_INSTALL_AGENT_MESSAGE:
+      return { ...state, installAgentMessage: action.data }
   }
   return state
 }
