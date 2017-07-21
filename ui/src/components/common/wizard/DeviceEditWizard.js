@@ -264,6 +264,12 @@ class DeviceEditWizard extends React.Component {
       <Credentials {...this.props}/>
     )
   }
+
+  getDeviceCreds () {
+    const { selectedDevice, credentials } = this.props
+    return credentials.filter(p => !p.global && p.deviceIds && p.deviceIds.indexOf(selectedDevice.id) >= 0)
+  }
+
   onClickInstall () {
     const device = this.props.initialValues
     const {collectors} = this.props
@@ -276,6 +282,14 @@ class DeviceEditWizard extends React.Component {
         });
         return;
       }
+    }
+
+    const creds = this.getDeviceCreds()
+    if (!creds.length) {
+      showAlert('Please add credential.', () => {
+        this.onClickAddCred()
+      });
+      return;
     }
 
     this.props.installAgent(device)
