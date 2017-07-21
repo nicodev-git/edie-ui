@@ -333,3 +333,29 @@
     border-width: 0px 0px 1px;
     outline: none;
 }
+
+/* Dashboard */
+.chart-container {
+    left: 10px;
+    right: 10px;
+    position: absolute;
+    top: 10px;
+    bottom: 10px;
+}
+
+.row-chart{
+    margin:0;
+    padding: 8px;
+    position: relative;
+    height: 100%;
+    overflow: scroll;
+    min-height: 700px;
+}
+
+.row-chart > .col-md-6 {
+    padding: 8px;
+    min-height: 50%;
+}
+.row-chart > .col-md-6 > .panel {
+    margin: 0;
+}

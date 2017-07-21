@@ -196,3 +196,47 @@ a, a:focus, a:hover {
 .panel-group {
     overflow: auto;
 }
+
+.panel-red {
+    border-color: #E64E51;
+}
+
+.panel-red>.panel-heading,
+.panel-red>form>.panel-heading {
+    color: #fff;
+    background-color: #E64E51;
+    border-color: #E64E51;
+}
+
+.panel-blue {
+    border-color: #4C9FF6;
+}
+
+.panel-blue>.panel-heading,
+.panel-blue>form>.panel-heading {
+    color: #fff;
+    background-color: #4C9FF6;
+    border-color: #4C9FF6;
+}
+
+.panel-green {
+    border-color: #6DB864;
+}
+
+.panel-green>.panel-heading,
+.panel-green>form>.panel-heading {
+    color: #fff;
+    background-color: #6DB864;
+    border-color: #6DB864;
+}
+
+.panel-purple {
+    border-color: #AF61C4;
+}
+
+.panel-purple>.panel-heading,
+.panel-purple>form>.panel-heading {
+    color: #fff;
+    background-color: #AF61C4;
+    border-color: #AF61C4;
+}
