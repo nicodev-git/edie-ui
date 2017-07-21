@@ -18,6 +18,7 @@ import {
   CLOSE_SETTING_USER_MODAL,
   OPEN_USER_PASSWORD_MODAL,
   CLOSE_USER_PASSWORD_MODAL,
+  SELECT_USER_ROLES,
 
   FETCH_PARSER_TYPES,
   ADD_PARSER_TYPE,
@@ -278,6 +279,12 @@ export const closeSettingUserModal = () => {
     dispatch({
       type: CLOSE_SETTING_USER_MODAL
     })
+  }
+}
+
+export const selectUserRoles = (data) => {
+  return dispatch => {
+    dispatch({type: SELECT_USER_ROLES, data})
   }
 }
 

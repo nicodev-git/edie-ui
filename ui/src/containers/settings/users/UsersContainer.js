@@ -21,7 +21,8 @@ import {
   changeProfileImg,
   fetchUserInfo,
 
-  fetchSettingMaps
+  fetchSettingMaps,
+  selectUserRoles
 } from 'actions'
 
 class UsersContainer extends React.Component {
@@ -38,6 +39,7 @@ export default connect(
     userPasswordModalVisible: state.settings.userPasswordModalVisible,
 
     editUser: state.settings.editUser,
+    selectedRoles: state.settings.selectedRoles,
 
     user: state.dashboard.userInfo || {},
     maps: state.dashboard.maps,
@@ -62,7 +64,8 @@ export default connect(
       changeProfileImg,
       fetchUserInfo,
 
-      fetchSettingMaps
+      fetchSettingMaps,
+      selectUserRoles
     }, dispatch)
   })
 )(withRouter(UsersContainer))

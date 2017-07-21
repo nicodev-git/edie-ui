@@ -1,6 +1,6 @@
 import React from 'react'
 
-import Dialog from 'material-ui/Dialog'
+import {Dialog, SelectField, MenuItem} from 'material-ui'
 import { Field } from 'redux-form'
 import { FormInput, FormSelect, FormCheckbox, SubmitBlock } from 'components/modal/parts'
 

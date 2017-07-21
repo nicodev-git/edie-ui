@@ -25,7 +25,7 @@ class UserModal extends React.Component {
 
   handleFormSubmit (values) {
     const { editUser } = this.props
-    let user = assign({}, editUser, values)
+    const user = assign({}, editUser, values)
     if (editUser) {
       this.props.updateSettingUser(user)
     } else {
@@ -40,6 +40,7 @@ class UserModal extends React.Component {
   }
 
   onChangeRole (e, index, values) {
+    this.props.selectUserRoles(values)
   }
 
   renderMapOptions () {
@@ -75,7 +76,7 @@ class UserModal extends React.Component {
     )
   }
   render () {
-    const { handleSubmit, maps } = this.props
+    const { handleSubmit, maps, selectedRoles } = this.props
     const defaultmaps = maps.map(p => ({label: p.name, value: p.id}))
     return (
       <UserModalView
@@ -83,7 +84,7 @@ class UserModal extends React.Component {
         onSubmit={handleSubmit(this.handleFormSubmit)}
         defaultmaps={defaultmaps}
         roles={roleOptions}
-        selectedRoles={[]}
+        selectedRoles={selectedRoles}
         onChangeRole={this.onChangeRole.bind(this)}
       />
     )
