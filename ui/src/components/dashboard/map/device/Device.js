@@ -2,6 +2,7 @@ import React from 'react'
 import { Switch } from 'react-router'
 import { Route } from 'react-router-dom'
 
+import DeviceDashboard from 'components/dashboard/map/device/dashboard/DeviceDashboard'
 import DeviceMain from 'components/dashboard/map/device/main/Main'
 import DeviceConnectedContainer from 'containers/device/connected/ConnectedContainer'
 import DeviceInfoContainer from 'containers/device/info/InfoContainer'
@@ -38,6 +39,7 @@ export default class Device extends React.Component {
     if (!this.props.selectedDevice) return null
     return (
       <Switch>
+        <Route path="/device/:deviceId/dashboard" component={DeviceDashboard}/>
         <Route path="/device/:deviceId/main" component={DeviceMain}/>
         <Route path="/device/:deviceId/topology" component={DeviceTopology}/>
         <Route path="/device/:deviceId/monitor" component={DeviceMonitor}/>
