@@ -31,7 +31,10 @@ export default class Users extends React.Component {
       'columnName': 'username'
     }, {
       'displayName': 'Enabled',
-      'columnName': 'enabled'
+      'columnName': 'enabled',
+      'customComponent': p => {
+        return <span>{p.data ? 'Yes' : 'No'}</span>
+      }
     }, {
       'displayName': 'Role',
       'columnName': 'role'

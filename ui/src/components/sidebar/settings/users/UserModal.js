@@ -24,8 +24,10 @@ class UserModal extends React.Component {
   }
 
   handleFormSubmit (values) {
-    const { editUser } = this.props
-    const user = assign({}, editUser, values)
+    const { editUser, selectedRoles } = this.props
+    const user = assign({}, editUser, values, {
+      roles: selectedRoles
+    })
     if (editUser) {
       this.props.updateSettingUser(user)
     } else {
