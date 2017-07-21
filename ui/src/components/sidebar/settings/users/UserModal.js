@@ -5,14 +5,12 @@ import { reduxForm, change } from 'redux-form'
 import axios from 'axios'
 import { SimpleModalForm } from 'components/modal'
 import { validate } from 'components/modal/validation/NameValidation'
+import { extImageBaseUrl, roleOptions } from 'shared/Global'
 
 class UserModal extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      open: true,
-      defaultMaps: [],
-      roles: []
     }
     this.closeModal = this.closeModal.bind(this)
     this.handleFormSubmit = this.handleFormSubmit.bind(this)
@@ -41,14 +39,7 @@ class UserModal extends React.Component {
   }
 
   renderMapOptions () {
-    let maps = this.state.defaultMaps
-    let options = maps.map(item => ({value: item.id, label: item.mapname}))
-    return options
-  }
-
-  renderRoleOptions () {
-    let roles = this.state.roles
-    let options = roles.map(item => ({value: item, label: item}))
+    let options = [].map(item => ({value: item.id, label: item.mapname}))
     return options
   }
 
@@ -70,7 +61,7 @@ class UserModal extends React.Component {
     ]
     return (
       <SimpleModalForm
-        show={this.state.open}
+        show
         onHide={this.closeModal}
         onSubmit={handleSubmit(this.handleFormSubmit)}
         content={content}

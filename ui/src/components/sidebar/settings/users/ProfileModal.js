@@ -4,13 +4,8 @@ import { assign } from 'lodash'
 import { connect } from 'react-redux'
 import $ from 'jquery'
 import { showAlert } from 'components/common/Alert'
-import { extImageBaseUrl } from 'shared/Global'
+import { extImageBaseUrl, roleOptions } from 'shared/Global'
 import ProfileModalView from './ProfileModalView'
-
-const roleOptions = [
-  {value: 'ADMIN', label: 'Admin'},
-  {value: 'USER', label: 'User'}
-]
 
 class ProfileModal extends Component { // eslint-disable-line react/no-multi-comp
   constructor (props) {

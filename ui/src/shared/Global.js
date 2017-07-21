@@ -216,3 +216,8 @@ export const collectorOSTypes = [{
 export const isWindowsDevice = (device) => {
   return device && device.templateName === 'Windows Server'
 }
+
+export const roleOptions = [
+  {value: 'ADMIN', label: 'Admin'},
+  {value: 'USER', label: 'User'}
+]
