@@ -53,6 +53,7 @@ class DeviceEditWizard extends React.Component {
     }
     this.props.fetchCredentials()
     this.props.fetchCredTypes()
+    this.props.fetchCollectors()
   }
 
   componentWillReceiveProps (nextProps) {

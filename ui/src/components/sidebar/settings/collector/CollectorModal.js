@@ -32,6 +32,6 @@ class CollectorModal extends React.Component {
 
 export default connect(
   state => ({
-    initialValues: state.settings.editCollector
+    initialValues: {ostype: 'WINDOWS', ...state.settings.editCollector}
   })
 )(reduxForm({form: 'collectorForm'})(CollectorModal))
