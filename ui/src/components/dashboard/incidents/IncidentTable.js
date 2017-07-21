@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import TimeAgo from 'react-timeago'
 import moment from 'moment'
 import ReactTooltip from 'react-tooltip'
 
@@ -34,7 +33,7 @@ export default class IncidentTable extends Component {
         if (this.props.showAbsDate) return <span>{moment(new Date(data)).format(this.props.dateFormat)}</span>
         return (
           <span data-tip={moment(new Date(data)).format(this.props.dateFormat)}>
-              <TimeAgo date={data}/>
+            {moment(new Date(data)).fromNow()}
           </span>
         )
       }

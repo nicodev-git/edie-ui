@@ -19,7 +19,9 @@ import {
   openProfileModal,
   closeProfileModal,
   changeProfileImg,
-  fetchUserInfo
+  fetchUserInfo,
+
+  fetchSettingMaps
 } from 'actions'
 
 class UsersContainer extends React.Component {
@@ -58,7 +60,9 @@ export default connect(
       openProfileModal,
       closeProfileModal,
       changeProfileImg,
-      fetchUserInfo
+      fetchUserInfo,
+
+      fetchSettingMaps
     }, dispatch)
   })
 )(withRouter(UsersContainer))

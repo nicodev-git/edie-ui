@@ -39,6 +39,9 @@ class UserModal extends React.Component {
     })
   }
 
+  onChangeRole (e, index, values) {
+  }
+
   renderMapOptions () {
     let options = [].map(item => ({value: item.id, label: item.mapname}))
     return options
@@ -80,6 +83,8 @@ class UserModal extends React.Component {
         onSubmit={handleSubmit(this.handleFormSubmit)}
         defaultmaps={defaultmaps}
         roles={roleOptions}
+        selectedRoles={[]}
+        onChangeRole={this.onChangeRole.bind(this)}
       />
     )
   }
