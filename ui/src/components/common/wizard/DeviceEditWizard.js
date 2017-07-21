@@ -21,6 +21,8 @@ import ImageUploaderModal from 'components/sidebar/settings/template/ImageUpload
 import ContentPanel from './ContentPanel'
 import TagsView from './input/TagsView'
 
+import CollectorModal from 'components/sidebar/settings/collector/CollectorModal'
+
 class DeviceEditWizard extends React.Component {
   constructor (props) {
     super(props)
@@ -264,11 +266,15 @@ class DeviceEditWizard extends React.Component {
   }
   onClickInstall () {
     const device = this.props.initialValues
+    const {collectors} = this.props
 
     if (isWindowsDevice(device)) {
-      const exists = this.props.collectors.filter(p => p.ostype === 'WINDOWS').length > 0
+      const exists = collectors.filter(p => p.ostype === 'WINDOWS').length > 0
       if (!exists) {
-        return showAlert('Please install windows collector.')
+        showAlert('Please add windows collector.', () => {
+          this.props.showCollectorModal(true)
+        });
+        return;
       }
     }
 
@@ -285,6 +291,15 @@ class DeviceEditWizard extends React.Component {
     if (!this.props.tplImageModalVisible) return null
     return (
       <ImageUploaderModal {...this.props} closeOnSelect/>
+    )
+  }
+  renderCollectorModal () {
+    if (!this.props.collectorModalOpen) return null
+    return (
+      <CollectorModal
+        showCollectorModal={this.props.showCollectorModal}
+        addCollector={this.props.addCollector}
+      />
     )
   }
   render () {
@@ -318,6 +333,7 @@ class DeviceEditWizard extends React.Component {
                 </ContentPanel>
               </div>
               {this.renderTplImageModal()}
+              {this.renderCollectorModal()}
             </div>
           </div>
         </Form>

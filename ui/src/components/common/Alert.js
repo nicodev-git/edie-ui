@@ -102,7 +102,7 @@ function alertCallback (cb, modal, res) {
   cb && cb(res)
 }
 
-export function showAlert (msg, width, cb) {
+export function showAlert (msg, cb) {
   appendComponent(
     <Alert message={msg}
       onClose={alertCallback.bind(this, cb)}
