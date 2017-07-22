@@ -7,7 +7,8 @@ export default class DeviceMenu extends React.Component {
     this.state = {
 
       keyword: '',
-      deviceTypes: []
+      deviceTypes: [],
+      activePanel: 1
     }
   }
 
@@ -24,6 +25,10 @@ export default class DeviceMenu extends React.Component {
     })
   }
 
+  handleSelect (activePanel) {
+    this.setState({ activePanel })
+  }
+
   render () {
     let devicePanels = []
 
@@ -37,7 +42,7 @@ export default class DeviceMenu extends React.Component {
 
     categories.forEach(deviceCategory => {
       if (deviceCategory.name === 'GROUPS') return
-      const items = this.props.deviceTemplates.filter(i => i.devicetemplategroup === deviceCategory.name).map(u => {
+      const items = this.props.deviceTemplates.filter(i => i.devicetemplategroup === deviceCategory).map(u => {
         return {
           title: u.name,
           img: u.image || 'windows.png',
@@ -47,10 +52,28 @@ export default class DeviceMenu extends React.Component {
       if (items.length === 0) return
 
       deviceTypes.push({
-        title: deviceCategory.name,
+        title: deviceCategory,
         items
       })
     })
+
+    let hasActive = false
+    let firstPanelIndex = -1
+
+    deviceTypes.forEach((section, sectionIndex) => {
+      let items = false
+
+      section.items.forEach((item, typeIndex) => {
+        if ((item.title || '').toLowerCase().indexOf(this.state.keyword.toLowerCase()) < 0) return
+        items = true
+      })
+
+      if (!items) return
+
+      if (firstPanelIndex < 0) firstPanelIndex = sectionIndex
+      if (sectionIndex === this.state.activePanel) hasActive = true
+    })
+    const activeKey = !hasActive && firstPanelIndex >= 0 ? firstPanelIndex : this.state.activePanel
 
     deviceTypes.forEach((section, sectionIndex) => {
       let deviceItems = []
@@ -69,8 +92,11 @@ export default class DeviceMenu extends React.Component {
       if (!deviceItems.length) return
 
       devicePanels.push(
-        <div className="panel panel-default" header= {section.title} key={sectionIndex} eventKey={sectionIndex}>
-          <ul>
+        <div className="panel panel-default" key={sectionIndex} onClick={this.handleSelect.bind(this, sectionIndex)}>
+          <div className="panel-heading">
+            <a href="javascript:;">{section.title}</a>
+          </div>
+          <ul className={activeKey === sectionIndex ? '' : 'hidden'} style={{background: 'black'}}>
             {deviceItems}
           </ul>
         </div>
