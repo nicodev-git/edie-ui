@@ -86,7 +86,7 @@ class MapCanvas extends React.Component {
 
         let updateDeviceDataOnly = false;
         if (!linesUpdated) {
-          if (this.getDevicePositionJson(nextProps.mapDevices) == this.getDevicePositionJson(this.currentMapDevices)) {
+          if (this.getDevicePositionJson(nextProps.mapDevices) === this.getDevicePositionJson(this.currentMapDevices)) {
             updateDeviceDataOnly = true
           }
         }
@@ -177,6 +177,7 @@ class MapCanvas extends React.Component {
                   src={`${extImageBaseUrl}${dragItem.img}`}
                   width={width}
                   height={width}
+                  alt=""
                   style={{
                     position: 'absolute',
                     left: cursorPos.x - width / 2,
@@ -198,7 +199,7 @@ class MapCanvas extends React.Component {
     if (!rt) return null
 
     return (
-            <img src={`${extImageBaseUrl}${dropItem.img}`} width={width} height={width}
+            <img src={`${extImageBaseUrl}${dropItem.img}`} width={width} height={width} alt=""
               style={{
                 position: 'absolute',
                 left: dropItemPos.x - rt.left - width / 2,
@@ -280,16 +281,16 @@ class MapCanvas extends React.Component {
       //   cmap.needReset = false
       // }
 
-      // cmap.canvas.renderAll()
+      cmap.canvas.renderAll()
 
       callback && callback()
-    }, 500)
+    }, 700)
   }
 
     // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   isEqualDevices (dev1, dev2) {
-    let equal = JSON.stringify(dev1) == JSON.stringify(dev2)
+    let equal = JSON.stringify(dev1) === JSON.stringify(dev2)
     // $.each(dev1, (key, value) => { // eslint-disable-line no-undef
     //   if (JSON.stringify(value) !== JSON.stringify(dev2[key])) {
     //     if (key === 'monitors') {
