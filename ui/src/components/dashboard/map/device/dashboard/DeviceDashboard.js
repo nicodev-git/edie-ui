@@ -80,7 +80,7 @@ export default class DeviceDashboard extends React.Component {
 
   getGauges () {
     const {mapDevices} = this.props
-    return mapDevices.filter(p => p.params && !!p.params.graph)
+    return mapDevices/*.filter(p => p.params && !!p.params.graph)*/
   }
 
   renderIncidentTable () {
@@ -243,12 +243,12 @@ export default class DeviceDashboard extends React.Component {
       </div>
     )
   }
-  renderGauge () {
+  renderGauge (p) {
     return (
-      <div className="col-md-6 flex-vertical" style={{height: 250}}>
+      <div className="col-md-6 flex-vertical" style={{height: 300}} key={p.id}>
         <div className="panel panel-blue flex-vertical flex-1">
           <div className="panel-heading">
-            <h4 className="panel-title"><i className="fa fa-bar-chart fa-lg margin-sm-right"/>Services Usage</h4>
+            <h4 className="panel-title"><i className="fa fa-bar-chart fa-lg margin-sm-right"/>{p.name}</h4>
             <div className="panel-options">
               <a href="javascript:;" onClick={this.onUsageCalendar.bind(this)}><i className="fa fa-2x fa-calendar" /></a>
               &nbsp;&nbsp;&nbsp;
