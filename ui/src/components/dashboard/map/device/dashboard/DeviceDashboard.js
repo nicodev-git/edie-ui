@@ -1,5 +1,6 @@
 import React from 'react'
 import moment from 'moment'
+import {concat, assign} from 'lodash'
 
 import ServiceUsage from './ServiceUsage'
 import TopService from './TopService'
@@ -56,6 +57,7 @@ export default class DeviceDashboard extends React.Component {
 
   componentWillMount () {
     this.props.fetchGroupDevicesAndLines(this.props.device.id)
+    this.props.fetchSysSearchOptions()
     // this.props.fetchIncidents()
     //
     // this.fetchServiceUsage()
@@ -81,6 +83,32 @@ export default class DeviceDashboard extends React.Component {
   getGauges () {
     const {mapDevices} = this.props
     return mapDevices/*.filter(p => p.params && !!p.params.graph)*/
+  }
+
+  getUserSearchOptions () {
+    const {userInfo} = this.props
+    if (!userInfo) return []
+    const {searchOptions} = userInfo
+    if (!searchOptions) return []
+    try {
+      return JSON.parse(searchOptions)
+    } catch (e) {
+      console.log(e)
+    }
+    return []
+  }
+
+  getSearchList () {
+    const {sysSearchOptions} = this.props
+    return concat([], this.getUserSearchOptions().map(p => {
+      return assign({}, p, {
+        type: 'User'
+      })
+    }), sysSearchOptions.map(p => {
+      return assign({}, p, {
+        type: 'System'
+      })
+    }))
   }
 
   renderIncidentTable () {

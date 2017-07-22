@@ -9,16 +9,22 @@ export default class GaugeView extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
+      splitBy: 1,
+      splitUnit: 'day'
     }
   }
   componentWillMount () {
 
   }
+  onChangeSplitBy () {
+  }
+  onChangeSplitUnit () {
+  }
   render () {
     const {
-      chartData, chartOptions, queryChips, params, graphParams,
-      onChangeSplitBy, onChangeSplitUnit
+      chartData, chartOptions, queryChips, params
     } = this.props
+    const {splitBy, splitUnit} = this.state
 
     return (
       <div>
@@ -27,8 +33,8 @@ export default class GaugeView extends React.Component {
             {moment(params.dateTo, dateFormat).format('MMM D, YYYY')} resolution</small></label>
 
           <select
-            className="form-control input-sm select-custom" value={graphParams.splitBy}
-            onChange={onChangeSplitBy}>
+            className="form-control input-sm select-custom" value={splitBy}
+            onChange={this.onChangeSplitBy.bind(this)}>
             <option value="1">&nbsp;1</option>
             <option value="2">&nbsp;2</option>
             <option value="3">&nbsp;3</option>
@@ -39,8 +45,8 @@ export default class GaugeView extends React.Component {
           </select>
 
           <select
-            className="form-control input-sm select-custom" value={graphParams.splitUnit}
-            onChange={onChangeSplitUnit}>
+            className="form-control input-sm select-custom" value={splitUnit}
+            onChange={this.onChangeSplitUnit.bind(this)}>
             <option value="minute">Minute(s)</option>
             <option value="hour">Hour(s)</option>
             <option value="day">Day(s)</option>
