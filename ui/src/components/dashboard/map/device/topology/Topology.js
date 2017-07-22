@@ -242,7 +242,8 @@ export default class Topology extends React.Component {
       height: 50,
 
       monitors: item.template.monitors,
-      templateName: item.template.name
+      templateName: item.template.name,
+      dashboard: item.template.dashboard
     }
 
     if (options.type === 'longhub') {
@@ -438,7 +439,7 @@ export default class Topology extends React.Component {
       groupid: this.props.device.id
     }
 
-    if (options.templateName === 'Gauge') {
+    if (options.dashboard) {
       return (
         <GaugeWizardContainer
           deviceType={options.type}
