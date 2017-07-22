@@ -7,8 +7,6 @@ const graphs = [{
   label: 'Line', value: 'line'
 }, {
   label: 'Bar', value: 'bar'
-}, {
-  label: 'Pie', value: 'pie'
 }]
 
 export default class GaugeWizardView extends React.Component {
@@ -19,7 +17,7 @@ export default class GaugeWizardView extends React.Component {
         <form onSubmit={onSubmit}>
           <Field name="name" component={FormInput} floatingLabel="Name" className="valign-top"/>
           <Field name="savedSearch" component={FormSelect} floatingLabel="Saved Search" options={searchList} className="valign-top"/>
-          <Field name="graph" component={FormSelect} floatingLabel="Saved Search" options={graphs} className="valign-top"/>
+          <Field name="graph" component={FormSelect} floatingLabel="Graph" options={graphs} className="valign-top"/>
           <SubmitBlock name="Add" onClick={onHide} />
         </form>
       </Dialog>
