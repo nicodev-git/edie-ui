@@ -5,12 +5,12 @@ import { SubmitBlock, FormInput, FormSelect } from 'components/modal/parts'
 
 export default class GaugeWizardView extends React.Component {
   render () {
-    const {onSubmit, onHide} = this.props
+    const {onSubmit, onHide, searchList} = this.props
     return (
       <Dialog open title="Gauge" onRequestClose={onHide}>
         <form onSubmit={onSubmit}>
-          <Field name="name" component={FormInput} floatingLabel="Name"/>
-          <Field name="savedSearch" component={FormSelect} floatingLabel="Saved Search" options={[]}/>
+          <Field name="name" component={FormInput} floatingLabel="Name" className="valign-top"/>
+          <Field name="savedSearch" component={FormSelect} floatingLabel="Saved Search" options={searchList} className="valign-top"/>
           <SubmitBlock name="Add" onClick={onHide} />
         </form>
       </Dialog>

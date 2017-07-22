@@ -60,6 +60,9 @@ class GaugeWizard extends React.Component {
       return assign({}, p, {
         type: 'System'
       })
+    })).map(p => ({
+      label: p.name,
+      value: p.id
     }))
 
     return (
