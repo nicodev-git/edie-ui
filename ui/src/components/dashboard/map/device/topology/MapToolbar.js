@@ -1,6 +1,7 @@
 import React from 'react'
-
 import { ChromePicker } from 'react-color'
+import {IconButton} from 'material-ui'
+import CreateIcon from 'material-ui/svg-icons/content/create'
 
 import DeviceMenu from './DeviceMenu'
 import { lineTypes } from 'shared/Global'
@@ -18,6 +19,17 @@ const cover = {
   right: 0,
   bottom: 0,
   left: 0
+}
+
+const buttonStyle = {
+  padding: 0,
+  width: 32,
+  height: 32
+}
+
+const iconStyle = {
+  width: 24,
+  height: 24
 }
 
 export default class Toolbar extends React.Component {
@@ -78,7 +90,7 @@ export default class Toolbar extends React.Component {
                   <li key={item.typename}>
                     <a href="javascript:;" onClick={this.onClickLineType.bind(this, item)}>
                       <div className="pull-left item-icon">
-                        <img src={item.image} data-type={item.type} data-typename={item.typename}/>
+                        <img src={item.image} data-type={item.type} data-typename={item.typename} alt=""/>
                       </div>
                       <div className="item-text">
                         <strong>{item.title}</strong>
@@ -162,9 +174,16 @@ export default class Toolbar extends React.Component {
     return (
       <div className="panel-heading map-heading">
         <h4 className="panel-title">Topology</h4>
-        <div className="panel-options main-map-options" style={{top: '9px'}}>
-          <ul className="nav nav-tabs" style={{background: 'transparent'}}>
+        <div className="panel-options" style={{top: 4}}>
+          <IconButton style={buttonStyle} iconStyle={iconStyle} onTouchTap={this.props.onClickEdit}>
+            <CreateIcon color="#545454"/>
+          </IconButton>
 
+          <IconButton style={buttonStyle} iconStyle={iconStyle} onTouchTap={this.onClickAdd.bind(this)}>
+            <AddCircleIcon color="#545454"/>
+          </IconButton>
+
+          <ul className="nav nav-tabs hidden">
             <li>
               <a href="javascript:"
                 className="option trash p-none" style={{display: obj ? 'block' : 'none'}}

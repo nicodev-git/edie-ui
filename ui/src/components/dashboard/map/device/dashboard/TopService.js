@@ -40,7 +40,7 @@ class TopService extends React.Component {
 
     return (
       <PieChart width={this.props.containerWidth} height={this.props.containerHeight}>
-        <Pie data={data} cx={this.props.containerWidth / 2 - 20} cy={this.props.containerHeight / 2}
+        <Pie data={data} dataKey="value" cx={this.props.containerWidth / 2 - 20} cy={this.props.containerHeight / 2}
              outerRadius="100%"
              fill="#8884d8"
              label={this.renderCustomizedLabel.bind(this)} labelLine={false}>
