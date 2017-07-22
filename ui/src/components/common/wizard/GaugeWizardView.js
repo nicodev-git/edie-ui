@@ -9,8 +9,8 @@ export default class GaugeWizardView extends React.Component {
     return (
       <Dialog open title="Gauge" onRequestClose={onHide}>
         <form onSubmit={onSubmit}>
-          <Field type="name" component={FormInput} floatingLabel="Name"/>
-          <Field type="savedSearch" component={FormSelect} floatingLabel="Saved Search"/>
+          <Field name="name" component={FormInput} floatingLabel="Name"/>
+          <Field name="savedSearch" component={FormSelect} floatingLabel="Saved Search" options={[]}/>
           <SubmitBlock name="Add" onClick={onHide} />
         </form>
       </Dialog>
