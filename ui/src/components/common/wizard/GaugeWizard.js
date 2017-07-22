@@ -29,6 +29,8 @@ class GaugeWizard extends React.Component {
         params[p.key] = p.value
       })
     }
+    params.graph = formProps.graph
+    params.savedSearch = formProps.savedSearch
 
     const props = assign(
       {},
@@ -39,7 +41,7 @@ class GaugeWizard extends React.Component {
     )
     console.log(props)
     this.closeModal(true)
-    // onFinish && onFinish(null, props, currentDevice.server.url)
+    onFinish && onFinish(null, props)
   }
 
   closeModal (data) {
