@@ -275,16 +275,16 @@ class MapCanvas extends React.Component {
       this.updateMapLines(cmap, lineData, prevLineData)
     }
 
-    setTimeout(function () {
-      // if (cmap.needReset) {
-      //   cmap.zoomReset()
-      //   cmap.needReset = false
-      // }
+    setTimeout(() => {
+      if (cmap.needReset) {
+        cmap.zoomReset()
+        cmap.needReset = false
+      }
 
       cmap.canvas.renderAll()
 
       callback && callback()
-    }, 700)
+    }, 500)
   }
 
     // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////

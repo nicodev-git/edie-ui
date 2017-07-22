@@ -27,7 +27,7 @@ fabric.Sprite = fabric.util.createClass(fabric.Image, {
   createSpriteImages: function() {
     this.spriteImages = [ ];
 
-    var steps = this._element.width / this.spriteWidth;
+    var steps = (this._element ? this._element.width : this.width) / this.spriteWidth;
     for (var i = 0; i < steps; i++) {
       this.createSpriteImage(i);
     }
