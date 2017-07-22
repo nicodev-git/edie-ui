@@ -12,6 +12,7 @@ import {
 
   ADD_MAP_DEVICE,
   UPDATE_MAP_DEVICE,
+  UPDATE_MAP_DEVICES,
   DELETE_MAP_DEVICE,
 
   ADD_MAP_LINE,
@@ -64,7 +65,7 @@ import {
   API_ERROR
 } from 'actions/types'
 
-import {concat, difference, assign} from 'lodash'
+import {concat, difference, assign, findIndex} from 'lodash'
 
 const initialState = {
   stats: {
@@ -145,6 +146,21 @@ export default function (state = initialState, action) {
 
       let {selectedDevice} = state
       if (selectedDevice && selectedDevice.id === action.data.id) selectedDevice = {...selectedDevice, ...action.data}
+
+      return {...state, mapDevices, selectedDevice}
+    }
+    case UPDATE_MAP_DEVICES: {
+      const mapDevices = state.mapDevices.map(u => {
+        const index = findIndex(action.data, {id: u.id})
+        if (index >= 0) return {...u, ...action.data[index]}
+        return u
+      })
+
+      let {selectedDevice} = state
+      if (selectedDevice) {
+        const index = findIndex(action.data, {id: selectedDevice.id})
+        selectedDevice = {...selectedDevice, ...action.data[index]}
+      }
 
       return {...state, mapDevices, selectedDevice}
     }

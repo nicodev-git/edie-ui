@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import moment from 'moment'
-import { debounce } from 'lodash'
+import { debounce, findIndex } from 'lodash'
 import { withRouter } from 'react-router'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
@@ -30,7 +30,7 @@ import {
   addDashboardIncident,
   updateNewIncidentMsg,
   updateMapDeviceStatus,
-  updateDashboardMapDevice,
+  updateDashboardMapDevices,
 
   fetchUserInfo,
 
@@ -89,6 +89,9 @@ import {
 class MainpageContainer extends Component {
   componentWillMount () {
     this.props.fetchUserInfo()
+
+    this.deviceBuffer = []
+    this.fnProcessBuffer = debounce(this.processBuffer.bind(this), 1000)
   }
 
   componentDidMount () {
@@ -119,6 +122,11 @@ class MainpageContainer extends Component {
   componentWillUnmount () {
     this.incidentSocket.close()
     this.unsubscribeFromHistory()
+  }
+
+  processBuffer () {
+    this.props.updateDashboardMapDevices(this.deviceBuffer)
+    this.deviceBuffer = []
   }
 
   handleLocationChange (location) {
@@ -169,7 +177,10 @@ class MainpageContainer extends Component {
 
   onDeviceUpdated (msg) {
     // console.log(msg)
-    this.props.updateDashboardMapDevice(msg)
+    const index = findIndex(this.deviceBuffer, {id: msg.id})
+    if (index < 0) this.deviceBuffer.push(msg)
+    else this.deviceBuffer[index] = msg
+    this.fnProcessBuffer()
   }
 
   onReceiveRefresh () {
@@ -266,7 +277,7 @@ dispatch => bindActionCreators({
   addDashboardIncident,
   updateNewIncidentMsg,
   updateMapDeviceStatus,
-  updateDashboardMapDevice,
+  updateDashboardMapDevices,
 
   fetchUserInfo,
 

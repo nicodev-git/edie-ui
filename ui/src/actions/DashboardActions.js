@@ -24,6 +24,7 @@ import {
 
   UPDATE_MAP_DEVICE_STATUS,
   UPDATE_MAP_DEVICE,
+  UPDATE_MAP_DEVICES,
 
   SHOW_SIDEBAR_MESSAGE_MENU,
 
@@ -183,9 +184,9 @@ export function updateMapDeviceStatus (data) {
   }
 }
 
-export function updateDashboardMapDevice (data) {
+export function updateDashboardMapDevices (data) {
   return dispatch => {
-    dispatch({type: UPDATE_MAP_DEVICE, data})
+    dispatch({type: UPDATE_MAP_DEVICES, data})
   }
 }
 
