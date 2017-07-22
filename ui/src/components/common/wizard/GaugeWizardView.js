@@ -1,7 +1,7 @@
 import React from 'react'
 import {Dialog} from 'material-ui'
 import { Field } from 'redux-form'
-import { SubmitBlock, FormInput } from 'components/modal/parts'
+import { SubmitBlock, FormInput, FormSelect } from 'components/modal/parts'
 
 export default class GaugeWizardView extends React.Component {
   render () {
@@ -10,6 +10,7 @@ export default class GaugeWizardView extends React.Component {
       <Dialog open title="Gauge" onRequestClose={onHide}>
         <form onSubmit={onSubmit}>
           <Field type="name" component={FormInput} floatingLabel="Name"/>
+          <Field type="savedSearch" component={FormSelect} floatingLabel="Saved Search"/>
           <SubmitBlock name="Add" onClick={onHide} />
         </form>
       </Dialog>

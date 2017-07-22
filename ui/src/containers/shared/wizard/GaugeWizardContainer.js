@@ -4,6 +4,8 @@ import { connect } from 'react-redux'
 import GaugeWizard from 'components/common/wizard/GaugeWizard'
 
 import {
+  fetchSysSearchOptions,
+
   clearDeviceWizardInitialValues
 } from 'actions'
 
@@ -17,8 +19,12 @@ class GaugeWizardContainer extends React.Component {
 
 export default connect(
   (state, props) => ({
-    initialValues: state.devices.wizardInitialValues
+    initialValues: state.devices.wizardInitialValues,
+    userInfo: state.dashboard.userInfo,
+    sysSearchOptions: state.search.sysSearchOptions
   }), {
+    fetchSysSearchOptions,
+
     clearDeviceWizardInitialValues
   }
 )(GaugeWizardContainer)

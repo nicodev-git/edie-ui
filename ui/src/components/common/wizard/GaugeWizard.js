@@ -1,9 +1,25 @@
 import React from 'react'
 import { reduxForm } from 'redux-form'
+import {assign, concat} from 'lodash'
 
 import GaugeWizardView from './GaugeWizardView'
 
 class GaugeWizard extends React.Component {
+  componentWillMount () {
+    this.props.fetchSysSearchOptions()
+  }
+  getSearchOptions () {
+    const {userInfo} = this.props
+    if (!userInfo) return []
+    const {searchOptions} = userInfo
+    if (!searchOptions) return []
+    try {
+      return JSON.parse(searchOptions)
+    } catch (e) {
+      console.log(e)
+    }
+    return []
+  }
   handleFormSubmit (formProps) {
     console.log(formProps)
     // const { extraParams, onFinish, editParams, canAddTags, monitorTags } = this.props
@@ -34,11 +50,24 @@ class GaugeWizard extends React.Component {
     this.props.onClose && this.props.onClose(this, data)
   }
   render () {
-    const { handleSubmit } = this.props
+    const { handleSubmit, sysSearchOptions } = this.props
+
+    const searchList = concat([], this.getSearchOptions().map(p => {
+      return assign({}, p, {
+        type: 'User'
+      })
+    }), sysSearchOptions.map(p => {
+      return assign({}, p, {
+        type: 'System'
+      })
+    }))
+
     return (
       <GaugeWizardView
         onHide={this.closeModal.bind(this)}
         onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
+
+        searchList={searchList}
       />
     )
   }
