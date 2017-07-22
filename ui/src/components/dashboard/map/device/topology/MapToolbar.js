@@ -2,6 +2,7 @@ import React from 'react'
 import { ChromePicker } from 'react-color'
 import {IconButton} from 'material-ui'
 import CreateIcon from 'material-ui/svg-icons/content/create'
+import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
 
 import DeviceMenu from './DeviceMenu'
 import { lineTypes } from 'shared/Global'
@@ -67,7 +68,15 @@ export default class Toolbar extends React.Component {
   handleClick (e) {
     // Detect device menu outer click
     if (this.state.displayDevices) {
-      if (!this.refs.liDevices.contains(e.target)) {
+
+      let path = e.path
+      let deviceMenuClicked = false
+      for (let i = 0; i < path.length; i++) {
+        if (path[i].id === 'device-menu' || path[i].id === 'device-menu-button') {
+          deviceMenuClicked = true
+        }
+      }
+      if (!deviceMenuClicked) {
         this.setState({ displayDevices: false }, () => {
           this.props.onClickAdd(this.state.displayDevices)
         })
@@ -179,9 +188,15 @@ export default class Toolbar extends React.Component {
             <CreateIcon color="#545454"/>
           </IconButton>
 
-          <IconButton style={buttonStyle} iconStyle={iconStyle} onTouchTap={this.onClickAdd.bind(this)}>
+          <IconButton style={buttonStyle} iconStyle={iconStyle} onTouchTap={this.onClickAdd.bind(this)} id="device-menu-button">
             <AddCircleIcon color="#545454"/>
           </IconButton>
+
+          {
+            this.state.displayDevices
+              ? <DeviceMenu {...this.props} onClickItem={this.props.onClickDeviceItem} selectedItem={this.props.selectedItem}/>
+              : null
+          }
 
           <ul className="nav nav-tabs hidden">
             <li>
@@ -274,11 +289,6 @@ export default class Toolbar extends React.Component {
               <a href="javascript:" onClick={this.onClickAdd.bind(this)} className={`option p-none ${this.state.displayDevices ? 'option-active' : ''}`}>
                 <i className="fa fa-plus-square" title="Add" />
               </a>
-              {
-                this.state.displayDevices
-                  ? <DeviceMenu {...this.props} onClickItem={this.props.onClickDeviceItem} selectedItem={this.props.selectedItem}/>
-                  : null
-              }
             </li>
 
             <li className="dropdown active">
