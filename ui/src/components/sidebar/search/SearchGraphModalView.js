@@ -1,28 +1,12 @@
 import React from 'react'
-import {Dialog, RefreshIndicator, IconButton, SelectField, MenuItem} from 'material-ui'
+import {Dialog, IconButton} from 'material-ui'
 import ZoomOutIcon from 'material-ui/svg-icons/maps/zoom-out-map'
 import {Line} from 'react-chartjs-2'
 import moment from 'moment'
 
+import RefreshOverlay from 'components/common/RefreshOverlay'
 import {CloseIconButton} from 'components/modal/parts'
 import {dateFormat} from 'shared/Global'
-
-const loadingStyle = {
-  position: 'absolute',
-  left: '50%',
-  top: '50%',
-  transform: 'translate(-50%, -50%)'
-}
-
-const overlayStyle = {
-  position: 'absolute',
-  top: 0,
-  left: 0,
-  width: '100%',
-  height: '100%',
-  background: 'rgba(80,80,80,0.5)',
-  zIndex: 10
-}
 
 const chipStyle = {
   color: 'white',
@@ -44,29 +28,7 @@ const maxContentStyle = {
   margin: 0
 }
 
-// const maxStyle = {
-//   paddingTop: 0,
-//   margin: 0
-// }
-
 export default class SearchGraphModalView extends React.Component {
-  renderLoading () {
-    if (!this.props.loading) return
-
-    return (
-      <div style={overlayStyle}>
-        <div style={loadingStyle}>
-          <RefreshIndicator
-            size={50}
-            left={0}
-            top={0}
-            status="loading"
-            style={{display: 'inline-block', position: 'relative'}}
-          />
-        </div>
-      </div>
-    )
-  }
   render () {
     const {
       onHide, onMaximize, graphMaximized, chartData, chartOptions, queryChips, params, graphParams,
@@ -122,7 +84,7 @@ export default class SearchGraphModalView extends React.Component {
         <div className="margin-md-top">
           <Line data={chartData} options={chartOptions} width="800" height="250" />
         </div>
-        {this.renderLoading()}
+        {this.props.loading ? <RefreshOverlay /> : null}
       </Dialog>
     )
   }

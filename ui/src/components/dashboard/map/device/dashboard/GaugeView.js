@@ -1,6 +1,19 @@
 import React from 'react'
+import moment from 'moment'
+import {Line} from 'react-chartjs-2'
+
+import {dateFormat} from 'shared/Global'
+import RefreshOverlay from 'components/common/RefreshOverlay'
 
 export default class GaugeView extends React.Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+    }
+  }
+  componentWillMount () {
+
+  }
   render () {
     const {
       chartData, chartOptions, queryChips, params, graphParams,
@@ -45,7 +58,7 @@ export default class GaugeView extends React.Component {
         <div className="margin-md-top">
           <Line data={chartData} options={chartOptions} width="800" height="250" />
         </div>
-        {this.renderLoading()}
+        {this.props.loading ? <RefreshOverlay /> : null}
       </div>
     )
   }
