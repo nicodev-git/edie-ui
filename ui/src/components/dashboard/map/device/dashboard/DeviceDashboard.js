@@ -55,6 +55,7 @@ export default class DeviceDashboard extends React.Component {
   }
 
   componentWillMount () {
+    this.props.fetchGroupDevicesAndLines(this.props.device.id)
     // this.props.fetchIncidents()
     //
     // this.fetchServiceUsage()
@@ -75,6 +76,11 @@ export default class DeviceDashboard extends React.Component {
   fetchServicePerformance () {
     // const { paramServicePerformance } = this.state
     // this.props.fetchServicePerformance(paramServicePerformance)
+  }
+
+  getGauges () {
+    const {mapDevices} = this.props
+    return mapDevices.filter(p => p.params && !!p.params.graph)
   }
 
   renderIncidentTable () {
@@ -168,7 +174,7 @@ export default class DeviceDashboard extends React.Component {
     )
   }
 
-  render () {
+  render1 () {
     return (
       <div className="row-chart padding-md-top">
         <div className="col-md-6 flex-vertical">
@@ -234,6 +240,32 @@ export default class DeviceDashboard extends React.Component {
         </div>
 
         {this.renderDurationModal()}
+      </div>
+    )
+  }
+  renderGauge () {
+    return (
+      <div className="col-md-6 flex-vertical" style={{height: 250}}>
+        <div className="panel panel-blue flex-vertical flex-1">
+          <div className="panel-heading">
+            <h4 className="panel-title"><i className="fa fa-bar-chart fa-lg margin-sm-right"/>Services Usage</h4>
+            <div className="panel-options">
+              <a href="javascript:;" onClick={this.onUsageCalendar.bind(this)}><i className="fa fa-2x fa-calendar" /></a>
+              &nbsp;&nbsp;&nbsp;
+              <a href="javascript:;" onClick={this.fetchServiceUsage.bind(this)}><i className="fa fa-2x fa-refresh" /></a>
+            </div>
+          </div>
+          <div className="panel-body flex-vertical flex-1">
+            {this.renderServiceUsageChart()}
+          </div>
+        </div>
+      </div>
+    )
+  }
+  render () {
+    return (
+      <div className="padding-md-top">
+        {this.getGauges().map(p => this.renderGauge(p))}
       </div>
     )
   }
