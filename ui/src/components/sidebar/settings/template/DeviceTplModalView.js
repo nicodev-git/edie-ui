@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Field } from 'redux-form'
 import {Chip, FlatButton, Dialog} from 'material-ui'
 
-import { SubHeader, SubmitBlock, FormInput, ImageUploader,
+import { SubHeader, SubmitBlock, FormInput, ImageUploader, FormCheckbox,
   Monitors, MonitorTemplates, Workflows } from 'components/modal/parts'
 import { chipStyles } from 'style/common/materialStyles'
 
@@ -18,6 +18,7 @@ export default class DeviceTplModalView extends Component {
         <div className="form-column padding-md-left mb-none">
           <Field name="name" component={FormInput} label="Name"/>
           <Field name="devicetemplategroup" component={FormInput} label="Group"/>
+          <Field name="dashboard" component={FormCheckbox} label="Dashboard"/>
           <ImageUploader imgUrl={imgUrl} onChange={onChange}/>
         </div>
 
