@@ -6,6 +6,7 @@ import MapCanvas from 'components/dashboard/map/MapCanvas'
 import MapToolbar from './MapToolbar'
 
 import DeviceWizardContainer from 'containers/shared/wizard/DeviceWizardContainer'
+import GaugeWizardContainer from 'containers/shared/wizard/GaugeWizardContainer'
 import { wizardConfig, getDeviceType } from 'components/common/wizard/WizardConfig'
 import {showAlert, showConfirm} from 'components/common/Alert'
 
@@ -427,7 +428,7 @@ export default class Topology extends React.Component {
 
     const {options, callback, closeCallback} = this.state.deviceWizardConfig
 
-    let extra = {
+    const extra = {
       x: options.x,
       y: options.y,
       width: options.width,
@@ -437,7 +438,21 @@ export default class Topology extends React.Component {
       groupid: this.props.device.id
     }
 
-    let config = {}
+    if (options.templateName === 'Gauge') {
+      return (
+        <GaugeWizardContainer
+          deviceType={options.type}
+          onClose={() => {
+            this.setState({deviceWizardVisible: false})
+            closeCallback && closeCallback()
+          }}
+          title={options.title}
+          monitors={options.monitors}
+          extraParams={extra}
+          onFinish={this.onFinishAddWizard.bind(this, callback)}
+        />
+      )
+    }
 
     return (
       <DeviceWizardContainer
@@ -449,7 +464,7 @@ export default class Topology extends React.Component {
         title={options.title}
         monitors={options.monitors}
         extraParams={extra}
-        configParams={config}
+        configParams={{}}
         onFinish={this.onFinishAddWizard.bind(this, callback)}
       />
     )
