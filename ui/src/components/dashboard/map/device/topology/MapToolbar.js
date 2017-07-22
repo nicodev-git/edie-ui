@@ -5,6 +5,21 @@ import { ChromePicker } from 'react-color'
 import DeviceMenu from './DeviceMenu'
 import { lineTypes } from 'shared/Global'
 
+const popover = {
+  position: 'absolute',
+  zIndex: '2',
+  right: '-10px',
+  top: '30px'
+}
+
+const cover = {
+  position: 'fixed',
+  top: 0,
+  right: 0,
+  bottom: 0,
+  left: 0
+}
+
 export default class Toolbar extends React.Component {
   constructor (props) {
     super(props)
@@ -50,21 +65,6 @@ export default class Toolbar extends React.Component {
 
   renderLineTypes () {
     if (!this.state.displayLineType) return null
-
-    const popover = {
-      position: 'absolute',
-      zIndex: '2',
-      right: '-10px',
-      top: '30px'
-    }
-
-    const cover = {
-      position: 'fixed',
-      top: 0,
-      right: 0,
-      bottom: 0,
-      left: 0
-    }
 
     return (
       <div style={popover}>
