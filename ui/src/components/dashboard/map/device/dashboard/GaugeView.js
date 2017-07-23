@@ -22,7 +22,8 @@ export default class GaugeView extends React.Component {
     this.state = {
       splitBy: 1,
       splitUnit: 'day',
-      chartData: []
+      chartData: [],
+      loading: true
     }
   }
   componentWillMount () {
@@ -42,47 +43,49 @@ export default class GaugeView extends React.Component {
 
     return (
       <div className="flex-vertical flex-1">
-        <div className="pull-left form-inline">
-          <label><small>Duration {moment(params.dateFrom, dateFormat).format('MMM D, YYYY')}&nbsp;-&nbsp;
-            {moment(params.dateTo, dateFormat).format('MMM D, YYYY')} resolution</small></label>
+        <div>
+          <div className="pull-left form-inline">
+            <label><small>Duration {moment(params.dateFrom, dateFormat).format('MMM D, YYYY')}&nbsp;-&nbsp;
+              {moment(params.dateTo, dateFormat).format('MMM D, YYYY')} resolution</small></label>
 
-          <select
-            className="form-control input-sm select-custom" value={splitBy}
-            style={{fontSize: '11px'}}
-            onChange={this.onChangeSplitBy.bind(this)}>
-            <option value="1">&nbsp;1</option>
-            <option value="2">&nbsp;2</option>
-            <option value="3">&nbsp;3</option>
-            <option value="5">&nbsp;5</option>
-            <option value="10">10</option>
-            <option value="15">15</option>
-            <option value="30">30</option>
-          </select>
+            <select
+              className="form-control input-sm select-custom" value={splitBy}
+              style={{fontSize: '11px'}}
+              onChange={this.onChangeSplitBy.bind(this)}>
+              <option value="1">&nbsp;1</option>
+              <option value="2">&nbsp;2</option>
+              <option value="3">&nbsp;3</option>
+              <option value="5">&nbsp;5</option>
+              <option value="10">10</option>
+              <option value="15">15</option>
+              <option value="30">30</option>
+            </select>
 
-          <select
-            className="form-control input-sm select-custom" value={splitUnit}
-            style={{fontSize: '11px'}}
-            onChange={this.onChangeSplitUnit.bind(this)}>
-            <option value="minute">Minute(s)</option>
-            <option value="hour">Hour(s)</option>
-            <option value="day">Day(s)</option>
-            <option value="month">Month(s)</option>
-          </select>
-        </div>
-        <div className="pull-right text-right">
-          <div><small>Search Keywords:</small></div>
-        </div>
-        <div className="pull-right margin-md-bottom text-right">
-          {queryChips.map((p, i) =>
-            <div key={i} style={chipStyle}>
-              {p.name !== '_all' ? <b>{p.name}: </b> : null}{p.value}
-            </div>
-          )}
+            <select
+              className="form-control input-sm select-custom" value={splitUnit}
+              style={{fontSize: '11px'}}
+              onChange={this.onChangeSplitUnit.bind(this)}>
+              <option value="minute">Minute(s)</option>
+              <option value="hour">Hour(s)</option>
+              <option value="day">Day(s)</option>
+              <option value="month">Month(s)</option>
+            </select>
+          </div>
+          <div className="pull-right text-right">
+            <div><small>Search Keywords:</small></div>
+          </div>
+          <div className="pull-right margin-md-bottom text-right">
+            {queryChips.map((p, i) =>
+              <div key={i} style={chipStyle}>
+                {p.name !== '_all' ? <b>{p.name}: </b> : null}{p.value}
+              </div>
+            )}
+          </div>
         </div>
         <div className="flex-1">
           <LineChart chartData={chartData} />
         </div>
-        {this.props.loading ? <RefreshOverlay /> : null}
+        {this.state.loading ? <RefreshOverlay /> : null}
       </div>
     )
   }
