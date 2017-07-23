@@ -5,12 +5,34 @@ import {Line} from 'react-chartjs-2'
 import {dateFormat} from 'shared/Global'
 import RefreshOverlay from 'components/common/RefreshOverlay'
 
+const chartOptions = {
+  legend: {
+    display: false
+  },
+  elements: {
+    line: {
+      tension: 0
+    }
+  }
+}
+
+const chipStyle = {
+  color: 'white',
+  background: '#1775C3',
+  borderRadius: 4,
+  fontSize: '11px',
+  padding: '4px 8px',
+  margin: '2px 4px',
+  display: 'inline-block'
+}
+
 export default class GaugeView extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
       splitBy: 1,
-      splitUnit: 'day'
+      splitUnit: 'day',
+      chartData: []
     }
   }
   componentWillMount () {
@@ -22,9 +44,9 @@ export default class GaugeView extends React.Component {
   }
   render () {
     const {
-      chartData, chartOptions, queryChips, params
+      queryChips, params
     } = this.props
-    const {splitBy, splitUnit} = this.state
+    const {splitBy, splitUnit, chartData} = this.state
 
     return (
       <div>
