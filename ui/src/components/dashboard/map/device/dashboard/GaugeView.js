@@ -1,10 +1,12 @@
 import React from 'react'
 import moment from 'moment'
+import axios from 'axios'
 
 import {dateFormat} from 'shared/Global'
 import RefreshOverlay from 'components/common/RefreshOverlay'
 
 import LineChart from './LineChart'
+import { ROOT_URL } from 'actions/config'
 
 const chipStyle = {
   color: 'white',
@@ -16,6 +18,8 @@ const chipStyle = {
   display: 'inline-block'
 }
 
+const sampleData = []
+
 export default class GaugeView extends React.Component {
   constructor (props) {
     super(props)
@@ -23,11 +27,21 @@ export default class GaugeView extends React.Component {
       splitBy: 1,
       splitUnit: 'day',
       chartData: [],
-      loading: true
+      loading: true,
+      searchRecordCounts: []
     }
   }
   componentWillMount () {
-
+    this.fetchRecordCount()
+  }
+  fetchRecordCount () {
+    const {params} = this.props
+    axios.get(`${ROOT_URL}/search/getRecordCount`, {params}).then(res => {
+      this.setState({
+        searchRecordCounts: res.data,
+        loading: false
+      })
+    })
   }
   onChangeSplitBy (e) {
     this.setState({splitBy: e.target.value})
@@ -39,7 +53,17 @@ export default class GaugeView extends React.Component {
     const {
       queryChips, params
     } = this.props
-    const {splitBy, splitUnit, chartData} = this.state
+    const {splitBy, splitUnit, searchRecordCounts} = this.state
+
+    const chartData = {
+      labels: (searchRecordCounts || sampleData).map(p => p.date),
+      datasets: [{
+        data: (searchRecordCounts || sampleData).map(p => p.count),
+        borderWidth: 1,
+        borderColor: '#269C8B',
+        fill: false
+      }]
+    }
 
     return (
       <div className="flex-vertical flex-1">
