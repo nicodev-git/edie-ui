@@ -1,20 +1,10 @@
 import React from 'react'
 import moment from 'moment'
-import {Line} from 'react-chartjs-2'
 
 import {dateFormat} from 'shared/Global'
 import RefreshOverlay from 'components/common/RefreshOverlay'
 
-const chartOptions = {
-  legend: {
-    display: false
-  },
-  elements: {
-    line: {
-      tension: 0
-    }
-  }
-}
+import LineChart from './LineChart'
 
 const chipStyle = {
   color: 'white',
@@ -51,7 +41,7 @@ export default class GaugeView extends React.Component {
     const {splitBy, splitUnit, chartData} = this.state
 
     return (
-      <div>
+      <div className="flex-vertical flex-1">
         <div className="pull-left form-inline">
           <label><small>Duration {moment(params.dateFrom, dateFormat).format('MMM D, YYYY')}&nbsp;-&nbsp;
             {moment(params.dateTo, dateFormat).format('MMM D, YYYY')} resolution</small></label>
@@ -89,8 +79,8 @@ export default class GaugeView extends React.Component {
             </div>
           )}
         </div>
-        <div>
-          <Line data={chartData} options={chartOptions} width="800" height="250" />
+        <div className="flex-1">
+          <LineChart chartData={chartData} />
         </div>
         {this.props.loading ? <RefreshOverlay /> : null}
       </div>

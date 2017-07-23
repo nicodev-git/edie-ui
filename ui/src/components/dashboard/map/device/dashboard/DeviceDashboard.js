@@ -73,12 +73,12 @@ export default class DeviceDashboard extends React.Component {
     const params = JSON.parse(savedSearch.data)
     const queryChips = parseSearchQuery(params.query)
     return (
-      <div className="col-md-6 margin-sm-bottom" key={p.id}>
-        <div className="panel panel-blue">
+      <div className="col-md-6 margin-sm-bottom flex-vertical flex-1" style={{height: 350}} key={p.id}>
+        <div className="panel panel-blue flex-vertical flex-1">
           <div className="panel-heading">
             <h4 className="panel-title">{p.name}</h4>
           </div>
-          <div className="panel-body">
+          <div className="panel-body flex-vertical flex-1">
             <GaugeView queryChips={queryChips} params={params}/>
           </div>
         </div>
