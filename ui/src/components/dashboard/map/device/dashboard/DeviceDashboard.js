@@ -1,5 +1,5 @@
 import React from 'react'
-import {concat, assign} from 'lodash'
+import {concat, assign, findIndex} from 'lodash'
 
 import GaugeView from './GaugeView'
 
@@ -48,6 +48,18 @@ export default class DeviceDashboard extends React.Component {
         type: 'System'
       })
     }))
+  }
+
+  getSavedSearch (id) {
+    const userOptions = this.getUserSearchOptions()
+    let index = findIndex(userOptions, {id})
+    if (index >= 0) return userOptions[index]
+
+    const {sysSearchOptions} = this.props
+    index = findIndex(sysSearchOptions, {id})
+    if (index >= 0) return sysSearchOptions[index]
+
+    return null
   }
 
   // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////

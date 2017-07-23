@@ -38,9 +38,11 @@ export default class GaugeView extends React.Component {
   componentWillMount () {
 
   }
-  onChangeSplitBy () {
+  onChangeSplitBy (e) {
+    this.setState({splitBy: e.target.value})
   }
-  onChangeSplitUnit () {
+  onChangeSplitUnit (e) {
+    this.setState({splitUnit: e.target.value})
   }
   render () {
     const {
@@ -56,6 +58,7 @@ export default class GaugeView extends React.Component {
 
           <select
             className="form-control input-sm select-custom" value={splitBy}
+            style={{fontSize: '11px'}}
             onChange={this.onChangeSplitBy.bind(this)}>
             <option value="1">&nbsp;1</option>
             <option value="2">&nbsp;2</option>
@@ -68,6 +71,7 @@ export default class GaugeView extends React.Component {
 
           <select
             className="form-control input-sm select-custom" value={splitUnit}
+            style={{fontSize: '11px'}}
             onChange={this.onChangeSplitUnit.bind(this)}>
             <option value="minute">Minute(s)</option>
             <option value="hour">Hour(s)</option>
@@ -83,7 +87,7 @@ export default class GaugeView extends React.Component {
             </div>
           )}
         </div>
-        <div className="margin-md-top">
+        <div>
           <Line data={chartData} options={chartOptions} width="800" height="250" />
         </div>
         {this.props.loading ? <RefreshOverlay /> : null}
