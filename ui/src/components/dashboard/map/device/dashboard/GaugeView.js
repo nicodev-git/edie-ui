@@ -52,7 +52,7 @@ export default class GaugeView extends React.Component {
 
     return (
       <div>
-        <div className="pull-left form-inline margin-md-bottom">
+        <div className="pull-left form-inline">
           <label><small>Duration {moment(params.dateFrom, dateFormat).format('MMM D, YYYY')}&nbsp;-&nbsp;
             {moment(params.dateTo, dateFormat).format('MMM D, YYYY')} resolution</small></label>
 
@@ -79,8 +79,10 @@ export default class GaugeView extends React.Component {
             <option value="month">Month(s)</option>
           </select>
         </div>
-        <div className="pull-right margin-md-bottom text-right">
+        <div className="pull-right text-right">
           <div><small>Search Keywords:</small></div>
+        </div>
+        <div className="pull-right margin-md-bottom text-right">
           {queryChips.map((p, i) =>
             <div key={i} style={chipStyle}>
               {p.name !== '_all' ? <b>{p.name}: </b> : null}{p.value}

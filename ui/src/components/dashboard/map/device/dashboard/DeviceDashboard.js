@@ -3,10 +3,13 @@ import {concat, assign, findIndex} from 'lodash'
 
 import GaugeView from './GaugeView'
 
+import { parseSearchQuery } from 'shared/Global'
+
 const params = {
   dateFrom: '20/07/2017 00:00:00',
   dateTo: '23/07/2017 23:59:59'
 }
+
 export default class DeviceDashboard extends React.Component {
   constructor (props) {
     super(props)
@@ -62,9 +65,13 @@ export default class DeviceDashboard extends React.Component {
     return null
   }
 
-  // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   renderGauge (p) {
+    const savedSearch = this.getSavedSearch('a1e2f323-2139-cf7c-89df-aeb9ca56553c')
+    if (!savedSearch) return null
+    const params = JSON.parse(savedSearch.data)
+    const queryChips = parseSearchQuery(params.query)
     return (
       <div className="col-md-6 margin-sm-bottom" key={p.id}>
         <div className="panel panel-blue">
@@ -72,7 +79,7 @@ export default class DeviceDashboard extends React.Component {
             <h4 className="panel-title">{p.name}</h4>
           </div>
           <div className="panel-body">
-            <GaugeView queryChips={[]} params={params}/>
+            <GaugeView queryChips={queryChips} params={params}/>
           </div>
         </div>
       </div>
