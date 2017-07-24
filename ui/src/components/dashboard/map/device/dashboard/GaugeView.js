@@ -61,6 +61,18 @@ export default class GaugeView extends React.Component {
     })
   }
 
+  onMouseEnter () {
+    this.setState({
+      hovered: true
+    })
+  }
+
+  onMouseLeave () {
+    this.setState({
+      hovered: false
+    })
+  }
+
   renderChart (graphType, chartData) {
     if (graphType === 'line') {
       return (
@@ -72,6 +84,18 @@ export default class GaugeView extends React.Component {
       )
     }
   }
+
+  renderInfoIcon () {
+    const {hovered} = this.state
+    return (
+      <div
+        style={{position: 'absolute', right: -8, bottom: -10}}
+        className={`link info-button ${hovered ? 'visible' : ''}`}>
+        <InfoIcon size={24}/>
+      </div>
+    )
+  }
+
   renderFront () {
     const {
       queryChips, params, graphType
@@ -89,7 +113,7 @@ export default class GaugeView extends React.Component {
     }
 
     return (
-      <div className="flex-vertical flex-1">
+      <div className="flex-vertical flex-1" onMouseEnter={this.onMouseEnter.bind(this)} onMouseLeave={this.onMouseLeave.bind(this)}>
         <div>
           <div className="pull-left form-inline">
             <label><small>Duration {moment(params.dateFrom, dateFormat).format('MMM D, YYYY')}&nbsp;-&nbsp;
@@ -131,6 +155,7 @@ export default class GaugeView extends React.Component {
         </div>
         <div className="flex-1">
           {this.renderChart(graphType, chartData)}
+          {this.renderInfoIcon()}
         </div>
         {this.state.loading ? <RefreshOverlay /> : null}
       </div>

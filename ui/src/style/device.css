@@ -360,3 +360,14 @@
 .row-chart > .col-md-6 > .panel {
     margin: 0;
 }
+
+.info-button {
+    transition: 0.5s;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.info-button.visible {
+    opacity: 1;
+    visibility: visible;
+}
