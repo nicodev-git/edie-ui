@@ -2,7 +2,6 @@ import React from 'react'
 import { Field } from 'redux-form'
 import axios from 'axios'
 
-import { util } from '../WizardUtil'
 import {FormSelect} from 'components/modal/parts'
 
 import {ROOT_URL} from 'actions/config'

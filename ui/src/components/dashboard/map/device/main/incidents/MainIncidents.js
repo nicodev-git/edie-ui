@@ -166,9 +166,9 @@ export default class MainIncidents extends Component {
     }
 
     return (
-      <a href="javascript:;" className="text-black" onClick={this.onClickColHeader.bind(this, col)}>
+      <div className="text-black link" onClick={this.onClickColHeader.bind(this, col)}>
         <span className="nowrap">{displayName}{caretEl}</span>
-      </a>
+      </div>
     )
   }
 

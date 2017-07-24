@@ -94,7 +94,7 @@ export default class DeviceMenu extends React.Component {
       devicePanels.push(
         <div className="panel panel-default" key={sectionIndex} onClick={this.handleSelect.bind(this, sectionIndex)}>
           <div className="panel-heading">
-            <a href="javascript:;">{section.title}</a>
+            <div className="link">{section.title}</div>
           </div>
           <ul className={activeKey === sectionIndex ? '' : 'hidden'} style={{background: 'black'}}>
             {deviceItems}

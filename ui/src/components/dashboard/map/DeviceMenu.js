@@ -105,7 +105,7 @@ export default class DeviceMenu extends React.Component {
       devicePanels.push(
         <div className="panel panel-default" key={sectionIndex} onClick={this.handleSelect.bind(this, sectionIndex)}>
           <div className="panel-heading">
-            <a href="javascript:;">{section.title}</a>
+            <div className="link">{section.title}</div>
           </div>
           <ul className={activeKey === sectionIndex ? '' : 'hidden'} style={{background: 'black'}}>
             {deviceItems}
@@ -121,9 +121,7 @@ export default class DeviceMenu extends React.Component {
             <div className="navbar-search" style={{paddingLeft: '5px', paddingRight: '5px'}}>
               <input type="text" placeholder="Search …" className="form-control" onChange={this.onChangeDeviceSearch.bind(this)}/>
             </div>
-            <a href="javascript:;" className="btn btn-default btn-sm" onClick={this.props.onNewIncident}>
-              Add Incident
-            </a>
+            <button className="btn btn-default btn-sm" onClick={this.props.onNewIncident}>Add Incident</button>
           </div>
         </div>
 

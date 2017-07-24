@@ -39,11 +39,10 @@ function getItemStyles (props) {
 
 class DeviceDragLayer extends React.Component {
   renderItem (type, item, style) {
-    switch (type) {
-      case DragTypes.DEVICE:
-        return (
-          <img src={`${extImageBaseUrl}${item.img}`} width="48" height="48" style={style}/>
-        )
+    if (type === DragTypes.DEVICE){
+      return (
+        <img src={`${extImageBaseUrl}${item.img}`} width="48" height="48" style={style} alt=""/>
+      )
     }
   }
 

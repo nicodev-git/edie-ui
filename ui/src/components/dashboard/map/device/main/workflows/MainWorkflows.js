@@ -1,5 +1,7 @@
 import React from 'react'
 import {RaisedButton} from 'material-ui'
+import ArrowUp from 'material-ui/svg-icons/navigation/arrow-drop-up'
+import ArrowDown from 'material-ui/svg-icons/navigation/arrow-drop-down'
 
 import InfiniteTable from 'components/common/InfiniteTable'
 import MainTabs from '../MainTabs'
@@ -56,14 +58,14 @@ export default class MainWorkflows extends React.Component {
     let caretEl = null
 
     if (columnName === currentSortCol) {
-      const cls = currentSortDir === 'asc' ? 'fa-caret-up' : 'fa-caret-down'
-      caretEl = <i className={`margin-sm-left fa ${cls}`} />
+      caretEl = currentSortDir === 'asc' ? <ArrowUp/> : <ArrowDown/>
     }
 
     return (
-      <a href="javascript:;" className="text-black" onClick={this.onClickColHeader.bind(this, col)}>
-        <span className="nowrap">{displayName}{caretEl}</span>
-      </a>
+      <div className="nowrap text-black link" onClick={this.onClickColHeader.bind(this, col)}>
+        <span>{displayName}</span>
+        <span className="valign-middle inline-block">{caretEl}</span>
+      </div>
     )
   }
 
