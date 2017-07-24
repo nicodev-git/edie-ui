@@ -110,7 +110,7 @@ class Map extends React.Component {
       document.body.addEventListener(fullScreen.fullScreenEventName, this.onFullScreenChange, true)
     }
 
-    const mapHeight = Math.max(parseInt(window.innerWidth / 3), this.state.mapHeight)
+    const mapHeight = Math.max(parseInt(window.innerWidth / 3, 10), this.state.mapHeight)
     setTimeout(() => {
       this.setState({ mapHeight }, () => {
         window.dispatchEvent(new window.Event('resize'))
@@ -497,7 +497,7 @@ class Map extends React.Component {
     // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   onReceiveMapUpdated (msg) {
-    const mapId = parseInt(msg.content)
+    const mapId = parseInt(msg.content, 10)
     if (!mapId) return
   }
 

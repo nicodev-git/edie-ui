@@ -75,15 +75,13 @@ export default class Chat extends React.Component {
     const room = this.props.rooms[item.id]
     const unread = room.unread
     return (
-      <li className={`room${this.props.selected === item ? ' active open' : ''}`}
+      <li className={`room ${this.props.selected === item ? 'active open' : ''} link`}
         key={item.id}
         onClick={this.onClickIncident.bind(this, item)}>
-          <a href="javascript:;">
-            <strong>#</strong><span className="room-title">
-              {name}(<TimeAgo date={item.startTimestamp}/>)
-            </span>
-            <span className={`badge pull-right badge-message ${unread ? '' : 'hidden'}`}>{unread}</span>
-          </a>
+          <strong>#</strong><span className="room-title">
+            {name}(<TimeAgo date={item.startTimestamp}/>)
+          </span>
+          <span className={`badge pull-right badge-message ${unread ? '' : 'hidden'}`}>{unread}</span>
       </li>
     )
   }
@@ -95,9 +93,9 @@ export default class Chat extends React.Component {
     if (content.startsWith('picture:')) {
       accessory = (
         <div className="attachment-image">
-          <a href="javascript:;">
-            <img className="image" src={`${extImageBaseUrl}${content.substring(8)}`} height="300px" />
-          </a>
+          <div className="link">
+            <img className="image" src={`${extImageBaseUrl}${content.substring(8)}`} height="300px" alt=""/>
+          </div>
         </div>
       )
     } else {

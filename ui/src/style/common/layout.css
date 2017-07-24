@@ -243,4 +243,5 @@ a, a:focus, a:hover {
 
 .link {
     cursor: pointer;
+    display: inline-block;
 }

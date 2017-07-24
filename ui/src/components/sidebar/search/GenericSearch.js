@@ -3,7 +3,7 @@ import { reduxForm, submit, formValueSelector } from 'redux-form'
 import { connect } from 'react-redux'
 import { merge, assign, concat, isArray, keys, findIndex } from 'lodash'
 import moment from 'moment'
-import {Popover, FlatButton, Chip, RaisedButton} from 'material-ui'
+import {Popover, FlatButton, Chip} from 'material-ui'
 import NavigationClose from 'material-ui/svg-icons/navigation/close'
 
 import InfiniteTable from 'components/common/InfiniteTable'
@@ -222,8 +222,9 @@ class GenericSearch extends React.Component {
       case 'boolean':
       case 'int':
         return '#'
+      default:
+        return 'a'
     }
-    return 'a'
   }
 
   handleRequestClose () {
@@ -442,7 +443,7 @@ class GenericSearch extends React.Component {
     }), this.props.history)
   }
   onClickClearSearch () {
-    const {searchTags, updateSearchTags, updateQueryChips} = this.props
+    const {updateSearchTags, updateQueryChips} = this.props
     updateQueryChips([])
     updateSearchTags([])
     this.props.updateSearchParams(assign({}, this.props.params, {
@@ -458,7 +459,7 @@ class GenericSearch extends React.Component {
         {this.props.fields.map(f =>
           <div key={f.path} className={`field-item margin-xs-top ${selectedField && selectedField.path === f.path ? 'selected' : ''}`}>
             <span className="margin-sm-right text-gray">{this.getTypeChar(f.type)}</span>
-            <a href="javascript:;" onClick={this.onClickField.bind(this, f)}>{f.path.replace(/\.dataobj\./gi, '.').replace(/dataobj\./gi, '')}</a>
+            <div className="link" onClick={this.onClickField.bind(this, f)}>{f.path.replace(/\.dataobj\./gi, '.').replace(/dataobj\./gi, '')}</div>
             <span className="margin-sm-left text-gray">{f.count}</span>
           </div>
         )}
@@ -527,10 +528,10 @@ class GenericSearch extends React.Component {
           </div>
           <div className="padding-sm">
             <div>
-              <div className="col-md-4"><a href="javascript:;">Top values</a></div>
-              <div className="col-md-4"><a href="javascript:;">Top values by time</a></div>
-              <div className="col-md-4"><a href="javascript:;">Rare values</a></div>
-              <div className="col-md-4"><a href="javascript:;">Events with this field</a></div>
+              <div className="col-md-4"><div className="link">Top values</div></div>
+              <div className="col-md-4"><div className="link">Top values by time</div></div>
+              <div className="col-md-4"><div className="link">Rare values</div></div>
+              <div className="col-md-4"><div className="link">Events with this field</div></div>
             </div>
 
           </div>
@@ -551,13 +552,13 @@ class GenericSearch extends React.Component {
               this.props.fieldTopValues.map(m =>
                 <tr key={m.name}>
                   <td>
-                    <a href="javascript:;" onClick={this.onClickValue.bind(this, m.name)}>{m.name}</a>
+                    <div className="link" onClick={this.onClickValue.bind(this, m.name)}>{m.name}</div>
                   </td>
                   <td>{m.count}</td>
                   <td>{(m.percent || 0).toFixed(2)}%</td>
                   <td>
                     <div style={{width: '200px'}}>
-                      <img src="/resources/images/sidebar/search/bar.png" width={`${Math.max(m.percent || 0, 0.5)}%`} height="16"/>
+                      <img src="/resources/images/sidebar/search/bar.png" width={`${Math.max(m.percent || 0, 0.5)}%`} height="16" alt=""/>
                     </div>
                   </td>
                 </tr>

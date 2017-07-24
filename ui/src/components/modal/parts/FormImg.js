@@ -21,12 +21,12 @@ const FormImg = (field) => {
           return value
         }}
       >
-        <img src="/resources/images/modal/upload_file.png" style={{position: 'relative'}}/>
+        <img src="/resources/images/modal/upload_file.png" style={{position: 'relative'}} alt=""/>
         </Dropzone>
       {field.meta.touched &&
         field.meta.error &&
         <span className="error">{field.meta.error}</span>}
-      {files && (<img src={files[0].preview}/>)}
+      {files && (<img src={files[0].preview} alt=""/>)}
     </div>
   )
 }

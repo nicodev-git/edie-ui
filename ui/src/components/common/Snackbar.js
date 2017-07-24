@@ -40,11 +40,11 @@ export default class IncidentSnackbar extends React.Component {
     }), this.props.history)
   }
   render () {
-    const { newIncidentMsg, userInfo } = this.props
+    const { newIncidentMsg } = this.props
     if (!newIncidentMsg) return null
-    const keep = userInfo && userInfo.keepIncidentAlert
+    // const keep = userInfo && userInfo.keepIncidentAlert
     return (
-      <a href="javascript:;" onClick={this.onClickAlert}>
+      <div className="link" onClick={this.onClickAlert}>
         <Snackbar
           open
           action={this.searchIcon}
@@ -54,7 +54,7 @@ export default class IncidentSnackbar extends React.Component {
           onRequestClose={this.onSnackClose}
         />
         <span className="hidden">{newIncidentMsg.incident.id}</span>
-      </a>
+      </div>
     )
   }
 }

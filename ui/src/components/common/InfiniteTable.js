@@ -205,7 +205,7 @@ class InfiniteTable extends React.Component {
   }
 
   getBodyHeight () {
-    const height = parseInt(this.props.bodyHeight || '0')
+    const height = parseInt(this.props.bodyHeight || '0', 10)
     return height ? `${height}px` : height
   }
 

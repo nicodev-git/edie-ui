@@ -229,7 +229,8 @@ export default class ThreatMap extends Component {
               src={`/images/flags/${item.attackerCountry.code}.png`}
               title={item.attackerCountry.name}
               width="28"
-              style={{marginTop: '-5px', maxHeight: '24px'}}/>
+              style={{marginTop: '-5px', maxHeight: '24px'}}
+              alt=""/>
           </Transition>
         </div>
         <div className="destCol">
@@ -242,7 +243,8 @@ export default class ThreatMap extends Component {
               title={item.targetCountry.name}
               width="28"
               className="hidden"
-              style={{marginTop: '-5px', maxHeight: '24px'}}/>
+              style={{marginTop: '-5px', maxHeight: '24px'}}
+              alt=""/>
             <IconButton
               style={{padding: 0, width: 32, height: 32}}
               iconStyle={{padding: 0}}
@@ -264,11 +266,11 @@ export default class ThreatMap extends Component {
             <div id="countryDrillDownContainer"
               className={`pinkBorder active ${this.state.popup ? '' : 'hidden'}`}
               style={{left: `${this.state.popupX}px`, top: `${this.state.popupY}px`}}>
-                    <a href="javascript:;" onClick={this.onClickPopupClose.bind(this)}>
+                    <div onClick={this.onClickPopupClose.bind(this)} className="linnk">
                         <span className="modalCloseBtn">
                             <i className="fa fa-times" />
                         </span>
-                    </a>
+                    </div>
                 <div id="countryDrillDowntitleContainer">
                     <div style={{marginRight: '5px'}} />Info
                 </div>
@@ -386,7 +388,7 @@ export default class ThreatMap extends Component {
       }]
     }]
 
-    let id = parseInt(Math.random() * 1000000)
+    let id = parseInt(Math.random() * 1000000, 10)
     scene1.forEach(screen => {
       screen.attacks.forEach(item => {
         item.id = id++
@@ -462,7 +464,7 @@ export default class ThreatMap extends Component {
   onChangeSpeed (e, index, value) {
     this.onClickPause()
     this.setState({
-      speed: parseInt(value)
+      speed: parseInt(value, 10)
     }, () => {
       this.onClickPlay()
     })
@@ -579,7 +581,7 @@ export default class ThreatMap extends Component {
       let diff = 1
       if (scene.length >= 2) {
         diff = scene[scene.length - 1].time - scene[0].time
-        diff = parseInt(diff / 1000)
+        diff = parseInt(diff / 1000, 10)
       }
 
       me.currentPlay.duration = diff
@@ -793,7 +795,7 @@ export default class ThreatMap extends Component {
       }, () => {
         if (me.currentPlay.scene.length > me.currentPlay.screen) {
           let screen = me.currentPlay.scene[me.currentPlay.screen]
-          if (me.state.sliderPos === parseInt((screen.time - me.currentPlay.scene[0].time) / 1000)) {
+          if (me.state.sliderPos === parseInt((screen.time - me.currentPlay.scene[0].time) / 1000, 10)) {
             me.onPlayFrame()
           }
         }
@@ -860,7 +862,7 @@ export default class ThreatMap extends Component {
                 attack.from,
                 attack.to,
                 moment(screen.time).format('HH:mm:ss'),
-                attack.type || (((parseInt(Math.random() * 10) % 3) === 0)
+                attack.type || (((parseInt(Math.random() * 10, 10) % 3) === 0)
                   ? 'Possible Bot HTTP Request.AA'
                   : 'Trojan-Banker.Win32.Bancos.N'
                 ),
@@ -903,7 +905,7 @@ export default class ThreatMap extends Component {
     let pos
     for (let i = 0; i < scene.length; i++) {
       let screen = scene[i]
-      pos = parseInt((screen.time - scene[0].time) / 1000)
+      pos = parseInt((screen.time - scene[0].time) / 1000, 10)
 
       me.currentPlay.screen = i
       if (pos < newpos) {
@@ -1385,9 +1387,9 @@ export default class ThreatMap extends Component {
               <MenuItem value={100} primaryText="100x"/>
             </SelectField>
             <div className="form-group pull-right inline hidden">
-              <a href="javascript:;" onClick={this.onClickSettings.bind(this)}>
+              <div className="link" onClick={this.onClickSettings.bind(this)}>
                 <i className="fa fa-x fa-cog valign-middle" />
-              </a>
+              </div>
             </div>
 
           </div>
@@ -1401,17 +1403,17 @@ export default class ThreatMap extends Component {
                 <div className="inline-block">
                   {
                     this.state.playing
-                      ? (<a href="javascript:;" style={{padding: '2px'}}>
-                      <img src="/resources/images/sidebar/threatmap/btn_pause.png" width="32" onClick={this.onClickPause.bind(this)}/>
-                    </a>)
-                      : (<a href="javascript:;" style={{padding: '2px'}}>
-                      <img src="/resources/images/sidebar/threatmap/btn_play.png" width="32" onClick={this.onClickPlay.bind(this)}/>
-                    </a>)
+                      ? (<div className="link" style={{padding: '2px'}}>
+                      <img src="/resources/images/sidebar/threatmap/btn_pause.png" width="32" onClick={this.onClickPause.bind(this)} alt=""/>
+                    </div>)
+                      : (<div className="link" style={{padding: '2px'}}>
+                      <img src="/resources/images/sidebar/threatmap/btn_play.png" width="32" onClick={this.onClickPlay.bind(this)} alt=""/>
+                    </div>)
                   }
 
-                  <a href="javascript:;" style={{padding: '2px'}}>
-                    <img src="/resources/images/sidebar/threatmap/btn_stop.png" width="32" onClick={this.onClickStop.bind(this)}/>
-                  </a>
+                  <div className="link" style={{padding: '2px'}}>
+                    <img src="/resources/images/sidebar/threatmap/btn_stop.png" width="32" onClick={this.onClickStop.bind(this)} alt=""/>
+                  </div>
 
                   {this.renderTime()}
 
