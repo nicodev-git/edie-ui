@@ -247,7 +247,9 @@ class InfiniteTable extends React.Component {
 
   renderLayout ({ Table, Pagination, Filter, SettingsWrapper }) {
     return (
-      <Table />
+      <div className="griddle">
+        <Table />
+      </div>
     )
   }
 
@@ -263,6 +265,12 @@ class InfiniteTable extends React.Component {
           pageSize: this.getCountPerPage(),
           recordCount: this.getCountPerPage()
         }}
+        styleConfig={{
+          classNames: {
+            Table: 'griddle-table table table-hover table-panel',
+            NoResults: 'hidden'
+          }
+        }}
       >
         <RowDefinition>
           {this.props.cells.map((p, i) =>
@@ -270,6 +278,8 @@ class InfiniteTable extends React.Component {
               key={i}
               id={p.columnName} title={p.displayName}
               cssClassName={p.cssClassName}
+              headerCssClassName={p.cssClassName}
+              sortable={false}
               customComponent={p.customComponent ? (config => {
                 const rowData = config.store.getState().get('data').find(r => r.get('griddleKey') === config.griddleKey).toJSON()
                 return p.customComponent({data: config.value, rowData})
