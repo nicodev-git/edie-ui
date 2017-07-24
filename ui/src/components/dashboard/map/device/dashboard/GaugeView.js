@@ -6,6 +6,8 @@ import {dateFormat} from 'shared/Global'
 import RefreshOverlay from 'components/common/RefreshOverlay'
 
 import LineChart from './LineChart'
+import BarChart from './BarChart'
+
 import { ROOT_URL } from 'actions/config'
 
 const chipStyle = {
@@ -53,6 +55,18 @@ export default class GaugeView extends React.Component {
     this.setState({splitUnit: e.target.value}, () => {
       this.fetchRecordCount()
     })
+  }
+
+  renderChart (graphType, chartData) {
+    if (graphType === 'line') {
+      return (
+        <LineChart chartData={chartData} />
+      )
+    } else if (graphType === 'bar') {
+      return (
+        <BarChart chartData={chartData} />
+      )
+    }
   }
   render () {
     const {
@@ -112,7 +126,7 @@ export default class GaugeView extends React.Component {
           </div>
         </div>
         <div className="flex-1">
-          <LineChart chartData={chartData} />
+          {this.renderChart('line', chartData)}
         </div>
         {this.state.loading ? <RefreshOverlay /> : null}
       </div>
