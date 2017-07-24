@@ -2,6 +2,8 @@ import React from 'react'
 import moment from 'moment'
 import axios from 'axios'
 
+import InfoIcon from 'material-ui/svg-icons/action/info'
+
 import {dateFormat} from 'shared/Global'
 import RefreshOverlay from 'components/common/RefreshOverlay'
 
@@ -30,7 +32,9 @@ export default class GaugeView extends React.Component {
       splitUnit: 'day',
       chartData: [],
       loading: true,
-      searchRecordCounts: []
+      searchRecordCounts: [],
+
+      flip: false
     }
   }
   componentWillMount () {
@@ -68,7 +72,7 @@ export default class GaugeView extends React.Component {
       )
     }
   }
-  render () {
+  renderFront () {
     const {
       queryChips, params, graphType
     } = this.props
@@ -131,5 +135,16 @@ export default class GaugeView extends React.Component {
         {this.state.loading ? <RefreshOverlay /> : null}
       </div>
     )
+  }
+
+  renderBack () {
+
+  }
+
+  render () {
+    if (this.props.flip) {
+      return this.renderBack()
+    }
+    return this.renderFront()
   }
 }

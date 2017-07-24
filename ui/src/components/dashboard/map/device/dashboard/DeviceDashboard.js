@@ -74,7 +74,7 @@ export default class DeviceDashboard extends React.Component {
             <h4 className="panel-title">{p.name}</h4>
           </div>
           <div className="panel-body flex-vertical flex-1">
-            <GaugeView graphType={p.params.graph} queryChips={queryChips} params={params}/>
+            <GaugeView gauge={p} graphType={p.params.graph} queryChips={queryChips} params={params}/>
           </div>
         </div>
       </div>
