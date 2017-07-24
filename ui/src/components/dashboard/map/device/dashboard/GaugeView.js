@@ -35,7 +35,8 @@ export default class GaugeView extends React.Component {
     this.fetchRecordCount()
   }
   fetchRecordCount () {
-    const {params} = this.props
+    const {splitBy, splitUnit} = this.state
+    const params = { ...this.props.params, splitBy, splitUnit }
     axios.get(`${ROOT_URL}/search/getRecordCount`, {params}).then(res => {
       this.setState({
         searchRecordCounts: res.data,
@@ -44,10 +45,14 @@ export default class GaugeView extends React.Component {
     })
   }
   onChangeSplitBy (e) {
-    this.setState({splitBy: e.target.value})
+    this.setState({splitBy: e.target.value}, () => {
+      this.fetchRecordCount()
+    })
   }
   onChangeSplitUnit (e) {
-    this.setState({splitUnit: e.target.value})
+    this.setState({splitUnit: e.target.value}, () => {
+      this.fetchRecordCount()
+    })
   }
   render () {
     const {
