@@ -29,6 +29,8 @@ class InfiniteTable extends React.Component {
     this.lastRequest = null
 
     this.loadMoreDeb = debounce(this.loadMore.bind(this), 200)
+
+    this.renderTableRow = this.renderTableRow.bind(this)
   }
 
   componentWillMount () {
@@ -42,6 +44,14 @@ class InfiniteTable extends React.Component {
     // }
 
     this.domNode = ReactDOM.findDOMNode(this.refs.griddle)
+    $(this.domNode).on('click', 'tbody tr', (e) => {
+      const index = $(e.target).closest('tr').index()
+      const data = this.getCurrentData()
+      if (data && data[index]) {
+        let row = { props: { data: data[index] } }
+        this.onRowClick(row, e)
+      }
+    })
     $(this.domNode).on('dblclick', 'tbody tr', (e) => {
       const index = $(e.target).closest('tr').index()
       const data = this.getCurrentData()
@@ -253,12 +263,23 @@ class InfiniteTable extends React.Component {
     )
   }
 
+  renderTableRow ({ griddleKey, columnIds, Cell, style, className }) {
+    return (
+      <tr key={griddleKey} style={style} className={`${className} selected`}>
+        {columnIds && columnIds.map(p =>
+          <Cell key={p} columnId={p}/>
+        )}
+      </tr>
+    )
+  }
+
   renderTable () {
     return (
       <Griddle
         key="0" data={this.getCurrentData()} plugins={[plugins.LocalPlugin]}
         components={{
-          Layout: this.renderLayout
+          Layout: this.renderLayout,
+          // Row: this.renderTableRow
         }}
         pageProperties={{
           currentPage: 1,
