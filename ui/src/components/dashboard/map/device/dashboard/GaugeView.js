@@ -70,7 +70,7 @@ export default class GaugeView extends React.Component {
   }
   render () {
     const {
-      queryChips, params
+      queryChips, params, graphType
     } = this.props
     const {splitBy, splitUnit, searchRecordCounts} = this.state
 
@@ -126,7 +126,7 @@ export default class GaugeView extends React.Component {
           </div>
         </div>
         <div className="flex-1">
-          {this.renderChart('line', chartData)}
+          {this.renderChart(graphType, chartData)}
         </div>
         {this.state.loading ? <RefreshOverlay /> : null}
       </div>

@@ -63,7 +63,7 @@ export default class DeviceDashboard extends React.Component {
   /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   renderGauge (p) {
-    const savedSearch = this.getSavedSearch('a1e2f323-2139-cf7c-89df-aeb9ca56553c')
+    const savedSearch = this.getSavedSearch(p.params.savedSearch)
     if (!savedSearch) return null
     const params = JSON.parse(savedSearch.data)
     const queryChips = parseSearchQuery(params.query)
@@ -74,7 +74,7 @@ export default class DeviceDashboard extends React.Component {
             <h4 className="panel-title">{p.name}</h4>
           </div>
           <div className="panel-body flex-vertical flex-1">
-            <GaugeView queryChips={queryChips} params={params}/>
+            <GaugeView graphType={p.params.graph} queryChips={queryChips} params={params}/>
           </div>
         </div>
       </div>
