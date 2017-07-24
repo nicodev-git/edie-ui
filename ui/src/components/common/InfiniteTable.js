@@ -1,21 +1,12 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import Griddle, { plugins, RowDefinition, ColumnDefinition} from 'griddle-react'
+import Griddle from 'griddle-react'
 import { concat, assign, isEqual, keys, debounce } from 'lodash'
 import ReduxInfiniteScroll from 'redux-infinite-scroll'
-import {connect} from 'react-redux'
 
 import $ from 'jquery'
 import { encodeUrlParams } from 'shared/Global'
 import { ROOT_URL } from 'actions/config'
-
-const tablePlugins = [plugins.LocalPlugin]
-const tableStyleConfig = {
-  classNames: {
-    Table: 'griddle-table table table-hover table-panel',
-    NoResults: 'hidden'
-  }
-}
 
 class InfiniteTable extends React.Component {
   constructor (props) {
@@ -38,30 +29,6 @@ class InfiniteTable extends React.Component {
     this.lastRequest = null
 
     this.loadMoreDeb = debounce(this.loadMore.bind(this), 200)
-
-    this.renderTableRow = this.renderTableRow.bind(this)
-    this.renderTableCell = this.renderTableCell.bind(this)
-
-
-    this.tableComponents = {
-      Layout: this.renderLayout,
-      // Cell: this.renderTableCell,
-      // Row: this.renderTableRow,
-      // RowContainer: row => props => row(props)
-      // Row: this.renderTableRow
-      Row: connect((state, props) => ({
-      }))( ({ griddleKey, columnIds, Cell }) =>
-        <tr
-          className={this.getBodyCssClassName(this.getCurrentData()[griddleKey])}
-          onClick={e => this.onRowClickAt(griddleKey, e)}>
-          {
-            columnIds.map(r =>
-              <Cell key={r} griddleKey={griddleKey} columnId={r} />
-            )
-          }
-        </tr>
-      )
-    }
   }
 
   componentWillMount () {
@@ -162,14 +129,6 @@ class InfiniteTable extends React.Component {
     return this.state.useExternal ? this.state.total : this.props.data.length
   }
 
-  onRowClickAt (index, e) {
-    const data = this.getCurrentData()[index]
-    this.onRowClick({
-      props: {
-        data
-      }
-    }, e)
-  }
   onRowClick (row, e) {
     if (!this.props.selectable) return
     if (e && e.metaKey && this.props.allowMultiSelect) {
@@ -250,7 +209,7 @@ class InfiniteTable extends React.Component {
     return height ? `${height}px` : height
   }
 
-  renderTable1 () {
+  renderTable () {
     const rowMetadata = assign({}
       , this.defaultRowMetaData
       , this.props.rowMetadata || {})
@@ -283,67 +242,6 @@ class InfiniteTable extends React.Component {
         onRowDblClick={this.onRowDblClick.bind(this)}
         ref="griddle"
       />
-    )
-  }
-
-  renderLayout ({ Table, Pagination, Filter, SettingsWrapper }) {
-    return (
-      <div className="griddle">
-        <Table />
-      </div>
-    )
-  }
-
-  renderTableRow ({ griddleKey, columnIds, Cell, style, className }) {
-    return (
-      <tr key={griddleKey} style={style} className={`${className} selected`}>
-
-      </tr>
-    )
-  }
-
-  renderTableCell () {
-    return (
-      <td >
-
-      </td>
-    )
-  }
-
-  renderCustomComponent (p, config) {
-    const rowData = config.store.getState().get('data').find(r => r.get('griddleKey') === config.griddleKey).toJSON()
-    return p.customComponent({data: config.value, rowData})
-  }
-
-  renderTable () {
-    return (
-      <Griddle
-        key="0"
-        data={this.getCurrentData()}
-        plugins={tablePlugins}
-        components={this.tableComponents}
-        pageProperties={{
-          currentPage: 1,
-          pageSize: this.getCountPerPage(),
-          recordCount: this.getCountPerPage()
-        }}
-        styleConfig={tableStyleConfig}
-      >
-        <RowDefinition>
-          {this.props.cells.map((p, i) =>
-            <ColumnDefinition
-              key={i}
-              id={p.columnName}
-              title={p.displayName}
-              cssClassName={p.cssClassName}
-              headerCssClassName={p.cssClassName}
-              sortable={false}
-              customHeadingComponent={p.customHeaderComponent}
-              customComponent={p.customComponent ? (config => this.renderCustomComponent(p, config)) : null}
-            />
-          )}
-        </RowDefinition>
-      </Griddle>
     )
   }
 
