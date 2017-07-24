@@ -31,9 +31,9 @@ class DiagramDragItem extends React.Component {
 
     return (
       connectDragSource(
-        <a href="javascript:;" className="sidebar-item">
+        <div className="sidebar-item">
           {this.props.children}
-        </a>
+        </div>
       )
     )
   }

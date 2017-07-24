@@ -103,7 +103,7 @@ export default class WorkflowModalInner extends Component {
   renderDiagramStep (current) {
     if (current === 2) {
       return (
-        <div style={{margin: '-28px -15px 10px'}}>
+        <div style={{margin: '-16px -40px 10px'}}>
           <DiagramViewContainer />
         </div>
       )
