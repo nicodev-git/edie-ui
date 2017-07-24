@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import Griddle, { plugins, RowDefinition, ColumnDefinition} from 'griddle-react'
+import Griddle from 'griddle-react'
 import { concat, assign, isEqual, keys, debounce } from 'lodash'
 import ReduxInfiniteScroll from 'redux-infinite-scroll'
 
@@ -209,7 +209,7 @@ class InfiniteTable extends React.Component {
     return height ? `${height}px` : height
   }
 
-  renderTable1 () {
+  renderTable () {
     const rowMetadata = assign({}
       , this.defaultRowMetaData
       , this.props.rowMetadata || {})
@@ -242,42 +242,6 @@ class InfiniteTable extends React.Component {
         onRowDblClick={this.onRowDblClick.bind(this)}
         ref="griddle"
       />
-    )
-  }
-
-  renderLayout ({ Table, Pagination, Filter, SettingsWrapper }) {
-    return (
-      <Table />
-    )
-  }
-
-  renderTable () {
-    return (
-      <Griddle
-        key="0" data={this.getCurrentData()} plugins={[plugins.LocalPlugin]}
-        components={{
-          Layout: this.renderLayout
-        }}
-        pageProperties={{
-          currentPage: 1,
-          pageSize: this.getCountPerPage(),
-          recordCount: this.getCountPerPage()
-        }}
-      >
-        <RowDefinition>
-          {this.props.cells.map((p, i) =>
-            <ColumnDefinition
-              key={i}
-              id={p.columnName} title={p.displayName}
-              cssClassName={p.cssClassName}
-              customComponent={p.customComponent ? (config => {
-                const rowData = config.store.getState().get('data').find(r => r.get('griddleKey') === config.griddleKey).toJSON()
-                return p.customComponent({data: config.value, rowData})
-              }) : null}
-            />
-          )}
-        </RowDefinition>
-      </Griddle>
     )
   }
 
