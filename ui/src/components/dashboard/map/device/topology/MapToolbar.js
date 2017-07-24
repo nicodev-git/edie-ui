@@ -3,6 +3,7 @@ import React from 'react'
 import {IconButton} from 'material-ui'
 import CreateIcon from 'material-ui/svg-icons/content/create'
 import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
+import DeleteIcon from 'material-ui/svg-icons/action/delete'
 
 import DeviceMenu from './DeviceMenu'
 import { lineTypes } from 'shared/Global'
@@ -261,7 +262,7 @@ export default class Toolbar extends React.Component {
 
   render () {
     // const cmap = this.state.cmap
-    // const obj = this.state.selectedObj
+    const obj = this.state.selectedObj
 
     // const line = obj ? cmap.selectedLine() : null
     // const lineGroup = line ? line.objectSubType === window.MapItemType.ShapeLineGroup : false
@@ -295,12 +296,15 @@ export default class Toolbar extends React.Component {
             <AddCircleIcon color="#545454"/>
           </IconButton>
 
+          <IconButton style={{...buttonStyle, display: obj ? 'inline-block' : 'none'}} iconStyle={iconStyle} onTouchTap={this.props.onClickDelete}>
+            <DeleteIcon color="#545454"/>
+          </IconButton>
+
           {
             this.state.displayDevices
               ? <DeviceMenu {...this.props} onClickItem={this.props.onClickDeviceItem} selectedItem={this.props.selectedItem}/>
               : null
           }
-
           {this.renderItems()}
         </div>
       </div>

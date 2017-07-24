@@ -19,7 +19,7 @@ export default class DeviceDashboard extends React.Component {
 
   getGauges () {
     const {mapDevices} = this.props
-    return mapDevices/*.filter(p => p.params && !!p.params.graph)*/
+    return mapDevices.filter(p => p.params && !!p.params.graph)
   }
 
   getUserSearchOptions () {
@@ -68,7 +68,7 @@ export default class DeviceDashboard extends React.Component {
     const params = JSON.parse(savedSearch.data)
     const queryChips = parseSearchQuery(params.query)
     return (
-      <div className="col-md-6 margin-sm-bottom flex-vertical flex-1" style={{height: 350}} key={p.id}>
+      <div className="col-md-4 margin-sm-bottom flex-vertical flex-1" style={{height: 350}} key={p.id}>
         <div className="panel panel-blue flex-vertical flex-1">
           <div className="panel-heading">
             <h4 className="panel-title">{p.name}</h4>
