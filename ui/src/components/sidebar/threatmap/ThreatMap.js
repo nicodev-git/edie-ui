@@ -15,9 +15,23 @@ import countryLatlng from 'util/Country-latlng'
 import IncidentSocket from 'util/socket/IncidentSocket'
 import ThreatItemModal from './ThreatItemModal'
 
-import CustomHandle from './CustomHandle'
-
 import { format } from 'shared/Global'
+
+const handleStyle = {
+  position: 'absolute',
+  transform: 'translate(-50%, -50%)',
+  cursor: 'pointer',
+  padding: '2px',
+  border: '2px solid #94EE2E',
+  borderRadius: '3px',
+  background: '#94EE2E',
+  fontSize: '14px',
+  textAlign: 'center',
+  zIndex: 3,
+
+  minHeight: '24px',
+  marginTop: '3px'
+}
 
 export default class ThreatMap extends Component {
 
@@ -176,10 +190,17 @@ export default class ThreatMap extends Component {
     this.onClickPlay()
   }
 
+  renderHandle (props) {
+    const style = assign({left: `${props.offset}%`}, handleStyle)
+    return (
+      <div style={style} />
+    )
+  }
+
   renderSlider () {
     return (
             <Slider min={this.state.sliderMin} max={this.state.sliderMax}
-              value={this.state.sliderPos} handle={<CustomHandle />}
+              value={this.state.sliderPos} handle={this.renderHandle}
               onChange={this.onChangeSlider.bind(this)}/>
     )
   }

@@ -42,7 +42,7 @@
     "stompjs": "^2.3.3"
   },
   "devDependencies": {
-    "react-scripts": "1.0.7"
+    "react-scripts": "1.0.10"
   },
   "scripts": {
     "start": "react-scripts start",
