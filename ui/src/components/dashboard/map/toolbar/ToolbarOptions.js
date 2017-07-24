@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { DeleteObject, ColorPicker, LineWidthInc, LineWidthDec,
   TextChange, RotateHubLeft, RotateHubRight, ChangeLineType, OptionUploader,
-  EditMapMenu, LogOut, DropdownToggle, DeviceMenuContainer } from './index'
+  EditMapMenu, DropdownToggle, DeviceMenuContainer } from './index'
 
 class ToolbarOptions extends Component {
   render () {
@@ -69,7 +69,6 @@ class ToolbarOptions extends Component {
             onChange={this.props.toggleLineTypes}
           />
           <OptionUploader />
-          <LogOut />
           <DropdownToggle />
         </ul>
       </div>

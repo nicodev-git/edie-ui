@@ -5,11 +5,6 @@ import GaugeView from './GaugeView'
 
 import { parseSearchQuery } from 'shared/Global'
 
-const params = {
-  dateFrom: '20/07/2017 00:00:00',
-  dateTo: '23/07/2017 23:59:59'
-}
-
 export default class DeviceDashboard extends React.Component {
   constructor (props) {
     super(props)

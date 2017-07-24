@@ -2,14 +2,12 @@ import React from 'react'
 
 const TextChange = ({ text, onChange, icon, title }) => (
   <li>
-    <a
-      href="javascript:;"
-      className="option p-none"
+    <div className="option p-none link"
       style={{display: text ? 'block' : 'none'}}
       onClick={onChange}
     >
       <i className={icon} title={title} />
-    </a>
+    </div>
   </li>
 )
 

@@ -42,8 +42,8 @@ export default class CommentsModal extends Component {
           </div>
 
           <div className="col-md-2">
-            <a href="javascript:;" className="btn btn-primary btn-sm"
-              onClick={this.onClickAdd.bind(this)}>Add</a>
+            <button className="btn btn-primary btn-sm"
+              onClick={this.onClickAdd.bind(this)}>Add</button>
           </div>
         </div>
 
@@ -71,8 +71,7 @@ export default class CommentsModal extends Component {
         </div>
 
         <div className="text-right p-none">
-          <a href="javascript:;" className="btn btn-default btn-sm"
-            onClick={this.onClickClose.bind(this)}>Close</a>
+          <button className="btn btn-default btn-sm" onClick={this.onClickClose.bind(this)}>Close</button>
         </div>
       </Dialog>
     )

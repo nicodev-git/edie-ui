@@ -83,7 +83,7 @@ export default class Connected extends React.Component {
 
     let devices = []
 
-    let r = () => { return parseInt(Math.random() * 10000) % 256 }
+    let r = () => { return parseInt(Math.random() * 10000, 10) % 256 }
 
     for (let i = 0; i < stats.length; i++) {
       let alpha = Math.PI * 2 * i / stats.length// Math.random() * Math.PI * 2;
@@ -95,7 +95,7 @@ export default class Connected extends React.Component {
         data: stats[i],
 
         alpha: alpha,
-        img: icons.eq(parseInt(Math.random() * (icons.length - 1))).attr('src'),
+        img: icons.eq(parseInt(Math.random() * (icons.length - 1), 10)).attr('src'),
         devicetype: icons.data('type'),
         visible: false,
         bubbles: []

@@ -2,14 +2,12 @@ import React from 'react'
 
 const LineWidthInc = ({ lineGroup, onLineWidthInc }) => (
   <li>
-    <a
-      href="javascript:;"
-      className="option p-none"
+    <div className="option p-none link"
       style={{display: lineGroup ? 'block' : 'none'}}
       onClick={onLineWidthInc}
     >
       <i className="fa fa-expand" title="Increase Line Width" />
-    </a>
+    </div>
   </li>
 )
 

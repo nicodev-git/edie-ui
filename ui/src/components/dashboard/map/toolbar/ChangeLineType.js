@@ -2,14 +2,9 @@ import React from 'react'
 
 const ChangeLineType = ({ line, onChange, lineTypes }) => (
   <li>
-    <a
-      href="javascript:;"
-      onClick={onChange}
-      className="option p-none"
-      style={{display: line ? 'block' : 'none'}}
-    >
+    <div onClick={onChange} className="option p-none link" style={{display: line ? 'block' : 'none'}}>
       <i className="fa fa-reply" title="Change Type" />
-    </a>
+    </div>
     {lineTypes}
   </li>
 )

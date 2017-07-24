@@ -12,7 +12,6 @@ import RotateHubRight from './RotateHubRight'
 import ChangeLineType from './ChangeLineType'
 import OptionUploader from './OptionUploader'
 import EditMapMenu from './EditMapMenu'
-import LogOut from './LogOut'
 import DropdownToggle from './DropdownToggle'
 import LineTypesMenu from './LineTypesMenu'
 import ZoomOptions from './ZoomOptions'
@@ -34,7 +33,6 @@ export {
   ChangeLineType,
   OptionUploader,
   EditMapMenu,
-  LogOut,
   DropdownToggle,
   LineTypesMenu,
   ZoomOptions,
