@@ -214,6 +214,7 @@ export default function (state = initialState, action) {
         isLineDrawing: false
       }
     }
+    default:
+      return state
   }
-  return state
 }

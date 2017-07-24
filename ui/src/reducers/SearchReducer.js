@@ -223,6 +223,7 @@ export default function (state = initialState, action) {
       return { ...state, searchTags: action.tags || [] }
     case UPDATE_GRAPH_PARAMS:
       return { ...state, graphParams: action.params }
+    default:
+      return state
   }
-  return state
 }

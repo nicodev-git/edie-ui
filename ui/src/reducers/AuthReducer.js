@@ -37,6 +37,7 @@ export default function (state = initialState, action) {
       return { ...state, activationModalOpen: true }
     case CLOSE_ACTIVATION_MODAL:
       return { ...state, activationModalOpen: false }
+    default:
+      return state
   }
-  return state
 }

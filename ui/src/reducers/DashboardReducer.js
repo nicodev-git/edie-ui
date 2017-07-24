@@ -296,7 +296,8 @@ export default function (state = initialState, action) {
 
     case SHOW_MAP_EXPORT_MODAL:
       return { ...state, mapExportModalOpen: !!action.visible }
+    default:
+      return state
   }
-  return state
 }
 

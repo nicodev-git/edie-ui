@@ -29,6 +29,7 @@ export default function (state = INITIAL_STATE, action) {
       return { ...state, incidents: action.incidents }
     case SET_CHAT_ROOMS:
       return { ...state, rooms: action.rooms }
+    default:
+      return state
   }
-  return state
 }

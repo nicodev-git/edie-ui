@@ -133,7 +133,7 @@ section.channel-members {
 .avatar-large, .avatar-profile, .avatar-small, .avatar-xlarge, .avatar-xsmall, .avatar-xxlarge {
     background-clip: padding-box;
     position: relative;
-    background-color: none;
+    background-color: initial;
     background-position: 50%;
 }
 
@@ -206,10 +206,6 @@ a img {
 }
 
 .message-group {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: box;
     display: flex;
     padding: 20px 0;
     margin-left: 20px;
@@ -328,12 +324,7 @@ a img {
 }
 
 .chat form {
-    -webkit-flex-shrink: 0;
     flex-shrink: 0;
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: box;
     display: flex;
     box-shadow: 0 -1px 0 rgba(0,0,0,.1);
     margin: 0 20px;
@@ -349,10 +340,6 @@ a img {
 }
 
 .channel-textarea-inner {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: box;
     display: flex;
     position: relative;
     padding: 12px 10px;
@@ -467,13 +454,9 @@ a img {
 }
 
 .status-typing .ellipsis {
-    position: absolute top left;
+    position: absolute;
     width: 100%;
     height: 100%;
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: box;
     display: flex;
     -webkit-box-pack: center;
     -o-box-pack: center;
@@ -524,10 +507,6 @@ a img {
 }
 
 .channel-members .member {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: box;
     display: flex;
     color: #737f8d;
     padding: 5px;

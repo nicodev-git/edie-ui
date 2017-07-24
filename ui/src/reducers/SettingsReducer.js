@@ -574,6 +574,7 @@ export default function (state = initialState, action) {
 
     case SHOW_SIMULATION_MODAL:
       return { ...state, simulationModalOpen: !!action.visible }
+    default:
+      return state
   }
-  return state
 }

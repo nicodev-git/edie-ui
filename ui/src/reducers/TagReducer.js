@@ -52,6 +52,7 @@ export default function (state = initialState, action) {
       return {...state, tagMonitorTpls: action.data}
     case FETCH_PARSERTYPE_BY_TAGS:
       return {...state, tagParserTypes: action.data}
+    default:
+      return state
   }
-  return state
 }

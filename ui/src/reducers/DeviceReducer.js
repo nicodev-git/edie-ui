@@ -427,6 +427,7 @@ export default function (state = INITIAL_STATE, action) {
 
     case UPDATE_INSTALL_AGENT_MESSAGE:
       return { ...state, installAgentMessage: action.data }
+    default:
+      return state
   }
-  return state
 }
