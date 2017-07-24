@@ -13,16 +13,6 @@ import BarChart from './BarChart'
 
 import { ROOT_URL } from 'actions/config'
 
-const chipStyle = {
-  color: 'white',
-  background: '#1775C3',
-  borderRadius: 4,
-  fontSize: '11px',
-  padding: '4px 8px',
-  margin: '2px 4px',
-  display: 'inline-block'
-}
-
 const sampleData = []
 
 export default class GaugeView extends React.Component {
@@ -33,10 +23,7 @@ export default class GaugeView extends React.Component {
       splitUnit: 'day',
       chartData: [],
       loading: true,
-      searchRecordCounts: [],
-
-      flip: false,
-      clicked: false
+      searchRecordCounts: []
     }
   }
   componentWillMount () {
@@ -76,7 +63,7 @@ export default class GaugeView extends React.Component {
   }
 
   onClickInfoIcon () {
-    this.setState({flip: !this.state.flip, clicked: true})
+    this.props.onClickFlip()
   }
 
   renderChart (graphType, chartData) {
@@ -103,12 +90,6 @@ export default class GaugeView extends React.Component {
     )
   }
 
-  getFlipClass () {
-    var flippedCSS = this.state.flip ? " card-back-flip" : " card-front-flip";
-    if (!this.state.clicked) flippedCSS =  "";
-    return flippedCSS
-  }
-
   renderFront () {
     const {
       params, graphType
@@ -126,9 +107,7 @@ export default class GaugeView extends React.Component {
     }
 
     return (
-      <div className={`card-front ${this.getFlipClass()}`}
-           onMouseEnter={this.onMouseEnter.bind(this)} onMouseLeave={this.onMouseLeave.bind(this)}>
-        <div className="flex-vertical" style={{height: '100%'}}>
+        <div className="flex-vertical flex-1" onMouseEnter={this.onMouseEnter.bind(this)} onMouseLeave={this.onMouseLeave.bind(this)}>
           <div>
             <div className="pull-left form-inline">
               <label><small>Duration {moment(params.dateFrom, dateFormat).format('MMM D, YYYY')}&nbsp;-&nbsp;
@@ -139,14 +118,12 @@ export default class GaugeView extends React.Component {
             {this.renderChart(graphType, chartData)}
             {this.renderInfoIcon()}
           </div>
+          {this.state.loading ? <RefreshOverlay /> : null}
         </div>
-        {this.state.loading ? <RefreshOverlay /> : null}
-      </div>
     )
   }
 
   renderBack () {
-    const {queryChips} = this.props
     const {splitBy, splitUnit} = this.state
     return (
       <div className={`card-back ${this.getFlipClass()}`}>
@@ -176,27 +153,12 @@ export default class GaugeView extends React.Component {
           </select>
         </div>
 
-        <div className="margin-md-top">
-          <div><small>Search Keywords:</small></div>
-          {queryChips.map((p, i) =>
-            <div key={i}>
-              <div style={chipStyle}>
-                {p.name !== '_all' ? <b>{p.name}: </b> : null}{p.value}
-              </div>
-            </div>
-          )}
-        </div>
         <RaisedButton label="Done" onTouchTap={this.onClickInfoIcon.bind(this)}/>
       </div>
     )
   }
 
   render () {
-    return (
-      <div className="card">
-        {this.renderBack()}
-        {this.renderFront()}
-      </div>
-    )
+    return this.renderFront()
   }
 }

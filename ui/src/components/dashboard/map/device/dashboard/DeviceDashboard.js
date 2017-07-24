@@ -1,9 +1,7 @@
 import React from 'react'
 import {concat, assign, findIndex} from 'lodash'
 
-import GaugeView from './GaugeView'
-
-import { parseSearchQuery } from 'shared/Global'
+import GaugePanel from './GaugePanel'
 
 export default class DeviceDashboard extends React.Component {
   constructor (props) {
@@ -66,18 +64,8 @@ export default class DeviceDashboard extends React.Component {
     const savedSearch = this.getSavedSearch(p.params.savedSearch)
     if (!savedSearch) return null
     const params = JSON.parse(savedSearch.data)
-    const queryChips = parseSearchQuery(params.query)
     return (
-      <div className="col-md-4 margin-sm-bottom flex-vertical flex-1" style={{height: 350}} key={p.id}>
-        <div className="panel panel-blue flex-vertical flex-1">
-          <div className="panel-heading">
-            <h4 className="panel-title">{p.name}</h4>
-          </div>
-          <div className="panel-body flex-vertical flex-1">
-            <GaugeView gauge={p} graphType={p.params.graph} queryChips={queryChips} params={params}/>
-          </div>
-        </div>
-      </div>
+      <GaugePanel key={p.id} gauge={p} graphType={p.params.graph} params={params}/>
     )
   }
   render () {
