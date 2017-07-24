@@ -134,7 +134,7 @@ class DiagramView extends React.Component {
       <div className="draw-sidebar">
         {this.renderSearch()}
 
-        <a className="geTitle">General</a>
+        <div className="geTitle">General</div>
         <div style={{padding: '5px'}}>
           {workflowItems.map((m, index) =>
             <DiagramDragItem key={index} imgIndex={index}>

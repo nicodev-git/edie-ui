@@ -20,7 +20,7 @@ export default class ShowMoreLine extends React.Component {
     return (
       <div className="nowrap" style={{maxWidth: '100%', overflow: 'hidden', textOverflow: 'ellipsis'}}>
         {text}<br/>
-        <a href="javascript:;" onClick={this.onClickMore.bind(this)}>Show More...</a>
+        <div className="link" onClick={this.onClickMore.bind(this)}>Show More...</div>
       </div>
     )
   }

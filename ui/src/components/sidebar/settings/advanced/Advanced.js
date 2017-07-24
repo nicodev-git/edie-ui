@@ -29,10 +29,11 @@ export default class Advanced extends React.Component {
 
   renderContent () {
     switch (this.state.pageIndex) {
-      case 1: return <Websocket />
+      case 1:
+        return <Websocket />
+      default:
+        return <MainSettings {...this.props} />
     }
-
-    return <MainSettings {...this.props} />
   }
 
   onClickTab (pageIndex) {

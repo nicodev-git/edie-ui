@@ -14,7 +14,7 @@ export default class ImageUploaderModalView extends Component {
               key={item.id}
               className={currentIcon.id === item.id ? 'active' : ''}
               onClick={onClickItem.bind(this, item)}>
-              <img src={getCustomImageUrl(item)}/>
+              <img src={getCustomImageUrl(item)} alt=""/>
             </div>
           ))}
         </div>

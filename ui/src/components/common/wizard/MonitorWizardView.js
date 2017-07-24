@@ -25,7 +25,7 @@ const paramLabels = {
 
 export default class MonitorWizardView extends React.Component {
   render () {
-    const {header, onSubmit, onHide, paramEditModal, credPicker, tagsView, paramsView,
+    const {header, onSubmit, onHide, paramEditModal, credPicker, paramsView,
       requiredParamKeys,
       credentials,
       showAgentType, collectors, agent,

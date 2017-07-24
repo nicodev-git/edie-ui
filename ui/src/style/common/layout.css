@@ -240,3 +240,7 @@ a, a:focus, a:hover {
     background-color: #AF61C4;
     border-color: #AF61C4;
 }
+
+.link {
+    cursor: pointer;
+}

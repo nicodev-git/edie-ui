@@ -166,6 +166,9 @@ export default function (state = initialState, action) {
               obj.w += action.data.x
               obj.h += action.data.y
               break
+
+            default:
+              break
           }
           return obj
         })

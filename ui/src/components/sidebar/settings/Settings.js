@@ -3,7 +3,6 @@ import { Switch, withRouter } from 'react-router'
 import { Route } from 'react-router-dom'
 
 import SettingGeneralContainer from 'containers/settings/general/GeneralContainer'
-import SettingAgent from 'components/sidebar/settings/agent/Agents'
 import SettingMapsContainer from 'containers/settings/maps/MapsContainer'
 import SettingIdentitiesContainer from 'containers/settings/identity/IdentitiesContainer'
 import SettingAdvancedContainer from 'containers/settings/advanced/AdvancedContainer'

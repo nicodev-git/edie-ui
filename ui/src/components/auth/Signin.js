@@ -43,19 +43,19 @@ class Signin extends Component {
         </div>
         <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
           <div className="box">
-            <div className="logo"><img src="/resources/images/auth/logo.png" /></div>
+            <div className="logo"><img src="/resources/images/auth/logo.png" alt=""/></div>
             <div className="form">
-              <div className="field"><img src="/resources/images/auth/user_icon.png" /></div>
+              <div className="field"><img src="/resources/images/auth/user_icon.png" alt="" /></div>
               <Field name="email" component={this.renderInput} type="text" label="Username" className="text_field"/>
 
               <div className="line" />
 
-              <div className="field"><img src="/resources/images/auth/pass_icon.png"/></div>
+              <div className="field"><img src="/resources/images/auth/pass_icon.png" alt=""/></div>
               <Field name="password" component={this.renderInput} type="password" label="Password" className="text_field" />
 
             </div>
             <button type="submit" style={{border: 'none', padding: 0, background: 'none'}}>
-              <img src="/resources/images/auth/log_in_btn.png"/>
+              <img src="/resources/images/auth/log_in_btn.png" alt=""/>
             </button>
 
             { this.renderAlert() }

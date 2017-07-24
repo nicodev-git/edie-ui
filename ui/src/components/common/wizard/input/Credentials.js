@@ -3,7 +3,6 @@ import CredentialModal from './CredentialModal'
 import DeleteIcon from 'material-ui/svg-icons/action/delete'
 import {IconButton} from 'material-ui'
 
-import { TwoButtonsBlockCustom } from 'components/modal/parts'
 import {showConfirm} from 'components/common/Alert'
 
 export default class Credentials extends React.Component {

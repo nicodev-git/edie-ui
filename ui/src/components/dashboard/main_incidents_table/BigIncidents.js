@@ -7,7 +7,6 @@ import IncidentEventsModal from 'components/dashboard/incidents/IncidentEventsMo
 import { thumbup, thumpdown, done, notdone, rawtext, reason } from 'style/common/materialStyles'
 import { getSeverityIcon, severities } from 'shared/Global'
 import { showIncidentRaw, showIncidentComments } from 'components/common/incident/Incident'
-import ReactTooltip from 'react-tooltip'
 
 import BigIncidentsView from './BigIncidentsView'
 

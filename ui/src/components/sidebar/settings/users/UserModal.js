@@ -5,7 +5,7 @@ import { reduxForm, change } from 'redux-form'
 import axios from 'axios'
 import { SimpleModalForm } from 'components/modal'
 import { validate } from 'components/modal/validation/NameValidation'
-import { extImageBaseUrl, roleOptions } from 'shared/Global'
+import { roleOptions } from 'shared/Global'
 
 import UserModalView from './UserModalView'
 

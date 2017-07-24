@@ -132,7 +132,7 @@ class DiagramModal extends Component {
       <div className="draw-sidebar">
         {this.renderSearch()}
 
-        <a href="javascript:void(0);" className="geTitle">General</a>
+        <div className="geTitle">General</div>
         <div style={{padding: '5px'}}>
           {workflowItems.map((m, index) =>
             <DiagramDragItem key={index} imgIndex={index}>

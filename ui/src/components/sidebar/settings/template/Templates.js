@@ -65,7 +65,7 @@ export default class Templates extends Component {
                 onClick={this.onClickRow.bind(this, item)}
                 onDoubleClick={this.onDblClickRow.bind(this, item)}>
                 <td className="nowrap">
-                  <img src={`${extImageBaseUrl}${item.image}`} width="32" height="32" className="icon-black valign-middle"/>
+                  <img src={`${extImageBaseUrl}${item.image}`} width="32" height="32" className="icon-black valign-middle" alt=""/>
                   &nbsp;
                   {item.name}
                 </td>
@@ -118,7 +118,7 @@ export default class Templates extends Component {
                 className={index === this.state.selected ? 'selected' : ''}
                 onClick={() => console.log(item)}>
                 <td>
-                  <img src={`${extImageBaseUrl}${item.image}`} width="32" height="32" className="icon-black valign-middle"/>
+                  <img src={`${extImageBaseUrl}${item.image}`} width="32" height="32" className="icon-black valign-middle" alt=""/>
                   &nbsp;
                   {item.name}
                 </td>
