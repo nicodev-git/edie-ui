@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 import Griddle, { plugins, RowDefinition, ColumnDefinition} from 'griddle-react'
 import { concat, assign, isEqual, keys, debounce } from 'lodash'
 import ReduxInfiniteScroll from 'redux-infinite-scroll'
+import {connect} from 'react-redux'
 
 import $ from 'jquery'
 import { encodeUrlParams } from 'shared/Global'
@@ -31,6 +32,7 @@ class InfiniteTable extends React.Component {
     this.loadMoreDeb = debounce(this.loadMore.bind(this), 200)
 
     this.renderTableRow = this.renderTableRow.bind(this)
+    this.renderTableCell = this.renderTableCell.bind(this)
   }
 
   componentWillMount () {
@@ -44,14 +46,6 @@ class InfiniteTable extends React.Component {
     // }
 
     this.domNode = ReactDOM.findDOMNode(this.refs.griddle)
-    $(this.domNode).on('click', 'tbody tr', (e) => {
-      const index = $(e.target).closest('tr').index()
-      const data = this.getCurrentData()
-      if (data && data[index]) {
-        let row = { props: { data: data[index] } }
-        this.onRowClick(row, e)
-      }
-    })
     $(this.domNode).on('dblclick', 'tbody tr', (e) => {
       const index = $(e.target).closest('tr').index()
       const data = this.getCurrentData()
@@ -139,6 +133,14 @@ class InfiniteTable extends React.Component {
     return this.state.useExternal ? this.state.total : this.props.data.length
   }
 
+  onRowClickAt (index, e) {
+    // const data = this.getCurrentData()[index]
+    // this.onRowClick({
+    //   props: {
+    //     data
+    //   }
+    // }, e)
+  }
   onRowClick (row, e) {
     if (!this.props.selectable) return
     if (e && e.metaKey && this.props.allowMultiSelect) {
@@ -266,10 +268,16 @@ class InfiniteTable extends React.Component {
   renderTableRow ({ griddleKey, columnIds, Cell, style, className }) {
     return (
       <tr key={griddleKey} style={style} className={`${className} selected`}>
-        {columnIds && columnIds.map(p =>
-          <Cell key={p} columnId={p}/>
-        )}
+
       </tr>
+    )
+  }
+
+  renderTableCell () {
+    return (
+      <td >
+
+      </td>
     )
   }
 
@@ -279,7 +287,22 @@ class InfiniteTable extends React.Component {
         key="0" data={this.getCurrentData()} plugins={[plugins.LocalPlugin]}
         components={{
           Layout: this.renderLayout,
+          // Cell: this.renderTableCell,
+          // Row: this.renderTableRow,
+          // RowContainer: row => props => row(props)
           // Row: this.renderTableRow
+          Row: connect((state, props) => ({
+          }))( ({ griddleKey, columnIds, Cell }) =>
+            <tr
+              className={this.getBodyCssClassName(this.getCurrentData()[griddleKey])}
+              onClick={e => this.onRowClickAt(griddleKey, e)}>
+            {
+              columnIds.map(r =>
+                <Cell key={r} griddleKey={griddleKey} columnId={r} />
+              )
+            }
+            </tr>
+          )
         }}
         pageProperties={{
           currentPage: 1,
