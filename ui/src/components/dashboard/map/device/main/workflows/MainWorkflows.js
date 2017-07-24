@@ -53,17 +53,17 @@ export default class MainWorkflows extends React.Component {
   }
 
   renderColHeader (col) {
-    const {columnName, displayName} = col
+    const {columnId, title} = col
     const { currentSortCol, currentSortDir } = this.state
     let caretEl = null
 
-    if (columnName === currentSortCol) {
+    if (columnId === currentSortCol) {
       caretEl = currentSortDir === 'asc' ? '▲': '▼  '
     }
 
     return (
       <div className="nowrap text-black link" onClick={this.onClickColHeader.bind(this, col)}>
-        {displayName}{caretEl}
+        {title}{caretEl}
       </div>
     )
   }

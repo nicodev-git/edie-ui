@@ -280,6 +280,7 @@ class InfiniteTable extends React.Component {
               cssClassName={p.cssClassName}
               headerCssClassName={p.cssClassName}
               sortable={false}
+              customHeadingComponent={p.customHeaderComponent}
               customComponent={p.customComponent ? (config => {
                 const rowData = config.store.getState().get('data').find(r => r.get('griddleKey') === config.griddleKey).toJSON()
                 return p.customComponent({data: config.value, rowData})
