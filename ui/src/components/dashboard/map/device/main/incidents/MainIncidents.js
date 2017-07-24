@@ -14,8 +14,8 @@ import TimeAgo from 'react-timeago'
 import ReactTooltip from 'react-tooltip'
 import ArrowBack from 'material-ui/svg-icons/navigation/arrow-back'
 import ActionSearch from 'material-ui/svg-icons/action/search'
-import ArrowUp from 'material-ui/svg-icons/navigation/arrow-drop-up'
-import ArrowDown from 'material-ui/svg-icons/navigation/arrow-drop-down'
+// import ArrowUp from 'material-ui/svg-icons/navigation/arrow-drop-up'
+// import ArrowDown from 'material-ui/svg-icons/navigation/arrow-drop-down'
 
 import DateRangePicker from 'components/common/DateRangePicker'
 import InfiniteTable from 'components/common/InfiniteTable'
@@ -163,13 +163,12 @@ export default class MainIncidents extends Component {
     let caretEl = null
 
     if (columnName === currentSortCol) {
-      caretEl = currentSortDir === 'asc' ? <ArrowUp/> : <ArrowDown/>
+      caretEl = currentSortDir === 'asc' ? '▲': '▼  '
     }
 
     return (
       <div className="nowrap text-black link" onClick={this.onClickColHeader.bind(this, col)}>
-        <span>{displayName}</span>
-        <span className="valign-middle inline-block">{caretEl}</span>
+        {displayName}{caretEl}
       </div>
     )
   }
