@@ -97,7 +97,7 @@ export default class DeviceDashboard extends React.Component {
       title: tpl.name,
       type: getDeviceType(tpl.name),
       imgName: tpl.image,
-      imageUrl: `/externalpictures?name=${item.image}`,
+      imageUrl: `/externalpictures?name=${tpl.image}`,
       x: pos.x,
       y: pos.y,
       width: 50,
