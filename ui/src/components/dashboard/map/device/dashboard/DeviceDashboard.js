@@ -193,6 +193,7 @@ export default class DeviceDashboard extends React.Component {
               onTouchTap={this.onClickMenuItem.bind(this, p)}
             />
           )}
+          <MenuItem primaryText="Incident Table"/>
         </IconMenu>
       </div>
     )
