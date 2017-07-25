@@ -51,7 +51,7 @@ export default class GaugeBackView extends React.Component {
             {gaugeGraphs.map(p => <MenuItem key={p.value} value={p.value} primaryText={p.label}/>)}
           </SelectField>
         </div>
-        <div className="text-right">
+        <div className="text-right" style={{position: 'absolute', bottom: 16, right: 16}}>
           <RaisedButton label="Done" onTouchTap={this.props.onClickDone}/>
         </div>
       </div>
