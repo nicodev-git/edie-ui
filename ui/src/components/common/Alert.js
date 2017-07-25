@@ -53,7 +53,7 @@ export default class Alert extends Component {
   render () {
     return (
       <MuiThemeProvider>
-        <Dialog open title={this.props.title}>
+        <Dialog open title={this.props.title} contentStyle={{width: 350}}>
           <SubHeader name={this.props.message}/>
           <div className={`form-column ${this.props.type === TYPE_PROMPT ? '' : 'hidden'}`}>
             <TextField
