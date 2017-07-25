@@ -59,7 +59,7 @@ export default class GaugeView extends React.Component {
 
   renderFront () {
     const {
-      params, graphType, splitBy, splitUnit, searchRecordCounts
+      searchParams, graphType, splitBy, splitUnit, searchRecordCounts
     } = this.props
 
     const chartData = {
@@ -76,15 +76,15 @@ export default class GaugeView extends React.Component {
         <div className="flex-vertical flex-1" onMouseEnter={this.onMouseEnter.bind(this)} onMouseLeave={this.onMouseLeave.bind(this)}>
           <div>
             <div className="pull-left form-inline">
-              <label><small>Duration {moment(params.dateFrom, dateFormat).format('MMM D, YYYY')}&nbsp;-&nbsp;
-                {moment(params.dateTo, dateFormat).format('MMM D, YYYY')} resolution {splitBy} {splitUnit}</small></label>
+              <label><small>Duration {moment(searchParams.dateFrom, dateFormat).format('MMM D, YYYY')}&nbsp;-&nbsp;
+                {moment(searchParams.dateTo, dateFormat).format('MMM D, YYYY')} resolution {splitBy} {splitUnit}</small></label>
             </div>
           </div>
           <div className="flex-1">
             {this.renderChart(graphType, chartData)}
             {this.renderInfoIcon()}
           </div>
-          {this.state.loading ? <RefreshOverlay /> : null}
+          {this.props.loading ? <RefreshOverlay /> : null}
         </div>
     )
   }

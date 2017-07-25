@@ -1,5 +1,6 @@
 import React from 'react'
 import axios from 'axios'
+import {findIndex} from 'lodash'
 
 import GaugeFrontView from './GaugeFrontView'
 import GaugeBackView from './GaugeBackView'
@@ -18,6 +19,7 @@ export default class GaugePanel extends React.Component {
 
       selectedSearch: props.gauge.params.savedSearch,
       graphType: props.gauge.params.graph,
+      searchParams: props.searchParams,
 
       loading: true,
       searchRecordCounts: []
@@ -27,8 +29,8 @@ export default class GaugePanel extends React.Component {
     this.fetchRecordCount()
   }
   fetchRecordCount () {
-    const {splitBy, splitUnit} = this.props
-    const params = { ...this.props.params, splitBy, splitUnit }
+    const {splitBy, splitUnit, searchParams} = this.state
+    const params = { ...searchParams, splitBy, splitUnit }
     axios.get(`${ROOT_URL}/search/getRecordCount`, {params}).then(res => {
       this.setState({
         searchRecordCounts: res.data,
@@ -52,10 +54,25 @@ export default class GaugePanel extends React.Component {
     })
   }
 
-  onChangeSearch (e, index, value) {
-    this.setState({
-      selectedSearch: value
-    })
+  onChangeSearch (e, i, value) {
+    const index = findIndex(this.props.searchList, {id: value})
+    if (index < 0) {
+      console.log('Saved search not found.')
+      return
+    }
+    const savedSearch = this.props.searchList[index]
+    try {
+      const searchParams = JSON.parse(savedSearch.data)
+
+      this.setState({
+        selectedSearch: value,
+        searchParams
+      }, () => {
+        this.fetchRecordCount()
+      })
+    } catch (e) {
+      console.log(e)
+    }
   }
 
   onChangeGraphType (e, index, value) {
@@ -73,7 +90,7 @@ export default class GaugePanel extends React.Component {
   renderGaugeFront () {
     return (
       <GaugeFrontView
-        {...this.state} {...this.props} onClickFlip={this.onClickFlip.bind(this)}
+        {...this.props} {...this.state} onClickFlip={this.onClickFlip.bind(this)}
       />
     )
   }
@@ -81,7 +98,7 @@ export default class GaugePanel extends React.Component {
   renderGaugeBack () {
     return (
       <GaugeBackView
-        {...this.state} {...this.props} onClickFlip={this.onClickFlip.bind(this)}
+        {...this.props} {...this.state} onClickFlip={this.onClickFlip.bind(this)}
         onChangeSplitBy={this.onChangeSplitBy.bind(this)}
         onChangeSplitUnit={this.onChangeSplitUnit.bind(this)}
         onChangeSearch={this.onChangeSearch.bind(this)}
