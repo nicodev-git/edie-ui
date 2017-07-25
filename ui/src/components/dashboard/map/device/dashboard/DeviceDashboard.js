@@ -4,7 +4,7 @@ import {IconButton, IconMenu, MenuItem} from 'material-ui'
 import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
 
 import GaugePanel from './GaugePanel'
-// import GaugeWizardContainer from 'containers/shared/wizard/GaugeWizardContainer'
+import GaugeWizardContainer from 'containers/shared/wizard/GaugeWizardContainer'
 import { extImageBaseUrl } from 'shared/Global'
 import { wizardConfig, getDeviceType } from 'components/common/wizard/WizardConfig'
 
@@ -131,52 +131,35 @@ export default class DeviceDashboard extends React.Component {
   }
 
   /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  // renderDeviceWizard () {
-  //   if (!this.state.deviceWizardVisible) return null
-  //
-  //   const {options, callback, closeCallback} = this.state.deviceWizardConfig
-  //
-  //   const extra = {
-  //     x: options.x,
-  //     y: options.y,
-  //     width: options.width,
-  //     height: options.height,
-  //     image: options.imgName,
-  //     templateName: options.templateName,
-  //     groupid: this.props.device.id
-  //   }
-  //
-  //   if (options.dashboard) {
-  //     return (
-  //       <GaugeWizardContainer
-  //         deviceType={options.type}
-  //         onClose={() => {
-  //           this.setState({deviceWizardVisible: false})
-  //           closeCallback && closeCallback()
-  //         }}
-  //         title={options.title}
-  //         monitors={options.monitors}
-  //         extraParams={extra}
-  //         onFinish={this.onFinishAddWizard.bind(this, callback)}
-  //       />
-  //     )
-  //   }
-  //
-  //   return (
-  //     <DeviceWizardContainer
-  //       deviceType={options.type}
-  //       onClose={() => {
-  //         this.setState({deviceWizardVisible: false})
-  //         closeCallback && closeCallback()
-  //       }}
-  //       title={options.title}
-  //       monitors={options.monitors}
-  //       extraParams={extra}
-  //       configParams={{}}
-  //       onFinish={this.onFinishAddWizard.bind(this, callback)}
-  //     />
-  //   )
-  // }
+  renderDeviceWizard () {
+    if (!this.state.deviceWizardVisible) return null
+
+    const {options, callback, closeCallback} = this.state.deviceWizardConfig
+
+    const extra = {
+      x: options.x,
+      y: options.y,
+      width: options.width,
+      height: options.height,
+      image: options.imgName,
+      templateName: options.templateName,
+      groupid: this.props.device.id
+    }
+
+    return (
+      <GaugeWizardContainer
+        deviceType={options.type}
+        onClose={() => {
+          this.setState({deviceWizardVisible: false})
+          closeCallback && closeCallback()
+        }}
+        title={options.title}
+        monitors={options.monitors}
+        extraParams={extra}
+        onFinish={this.onFinishAddWizard.bind(this, callback)}
+      />
+    )
+  }
   renderGauge (p) {
     const savedSearch = this.getSavedSearch(p.params.savedSearch)
     if (!savedSearch) return null
@@ -213,6 +196,7 @@ export default class DeviceDashboard extends React.Component {
       <div>
         {this.renderAddMenu()}
         {this.getGauges().map(p => this.renderGauge(p))}
+        {this.renderDeviceWizard()}
       </div>
     )
   }
