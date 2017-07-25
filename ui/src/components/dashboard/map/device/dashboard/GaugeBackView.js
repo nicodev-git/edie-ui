@@ -1,17 +1,20 @@
 import React from 'react'
-import {RaisedButton} from 'material-ui'
+import {RaisedButton, SelectField, MenuItem} from 'material-ui'
 
 export default class GaugeBackView extends React.Component {
   render () {
-    const {splitBy, splitUnit} = this.props
+    const {
+      splitBy, splitUnit, selectedSearch, searchList,
+      onChangeSplitBy, onChangeSplitUnit, onChangeSearch
+    } = this.props
     return (
       <div>
         <div>
           Resolution:
           <select
             className="form-control input-sm select-custom" value={splitBy}
-            style={{fontSize: '11px'}}
-            onChange={this.props.onChangeSplitBy}>
+            style={{color: 'black'}}
+            onChange={onChangeSplitBy}>
             <option value="1">&nbsp;1</option>
             <option value="2">&nbsp;2</option>
             <option value="3">&nbsp;3</option>
@@ -23,13 +26,20 @@ export default class GaugeBackView extends React.Component {
 
           <select
             className="form-control input-sm select-custom" value={splitUnit}
-            style={{fontSize: '11px'}}
-            onChange={this.props.onChangeSplitUnit}>
+            style={{color: 'black'}}
+            onChange={onChangeSplitUnit}>
             <option value="minute">Minute(s)</option>
             <option value="hour">Hour(s)</option>
             <option value="day">Day(s)</option>
             <option value="month">Month(s)</option>
           </select>
+        </div>
+
+        <div>
+          <SelectField
+            floatingLabelText="Saved Search" onChange={onChangeSearch} value={selectedSearch}>
+            {searchList.map(p => <MenuItem key={p.id} value={p.id} primaryText={p.name}/>)}
+          </SelectField>
         </div>
 
         <RaisedButton label="Done" onTouchTap={this.props.onClickFlip}/>

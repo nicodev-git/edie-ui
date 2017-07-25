@@ -14,6 +14,7 @@ export default class GaugePanel extends React.Component {
       clicked: false,
       splitBy: 1,
       splitUnit: 'day',
+      selectedSearch: props.gauge.params.savedSearch,
 
       loading: true,
       searchRecordCounts: []
@@ -48,6 +49,12 @@ export default class GaugePanel extends React.Component {
     })
   }
 
+  onChangeSearch (e, index, value) {
+    this.setState({
+      selectedSearch: value
+    })
+  }
+
   getFlipClass () {
     var flippedCSS = this.state.flip ? " card-back-flip" : " card-front-flip";
     if (!this.state.clicked) flippedCSS =  "";
@@ -68,6 +75,7 @@ export default class GaugePanel extends React.Component {
         {...this.state} {...this.props} onClickFlip={this.onClickFlip.bind(this)}
         onChangeSplitBy={this.onChangeSplitBy.bind(this)}
         onChangeSplitUnit={this.onChangeSplitUnit.bind(this)}
+        onChangeSearch={this.onChangeSearch.bind(this)}
       />
     )
   }
