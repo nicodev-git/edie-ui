@@ -1,5 +1,6 @@
 import React from 'react'
 import {concat, assign, findIndex} from 'lodash'
+import {RaisedButton} from 'material-ui'
 
 import GaugePanel from './GaugePanel'
 
@@ -58,6 +59,10 @@ export default class DeviceDashboard extends React.Component {
     return null
   }
 
+  onClickAddGauge () {
+
+  }
+
   /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   renderGauge (p) {
@@ -68,10 +73,12 @@ export default class DeviceDashboard extends React.Component {
       <GaugePanel key={p.id} gauge={p} searchParams={searchParams} searchList={this.getSearchList()}/>
     )
   }
+
   render () {
     return (
       <div className="padding-md-top">
         {this.getGauges().map(p => this.renderGauge(p))}
+        <RaisedButton label="Add" onTouchTap={this.onClickAddGauge.bind(this)}/>
       </div>
     )
   }
