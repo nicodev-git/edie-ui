@@ -1,13 +1,14 @@
 import React from 'react'
 import axios from 'axios'
 import {findIndex} from 'lodash'
-import {IconButton} from 'material-ui'
 import DeleteIcon from 'material-ui/svg-icons/action/delete'
 
 import GaugeFrontView from './GaugeFrontView'
 import GaugeBackView from './GaugeBackView'
 
 import { ROOT_URL } from 'actions/config'
+
+import {showConfirm} from "components/common/Alert"
 
 export default class GaugePanel extends React.Component {
   constructor (props) {
@@ -90,8 +91,11 @@ export default class GaugePanel extends React.Component {
     })
   }
 
-  onClickDelete () {
-
+  onClickDelete (gauge) {
+    showConfirm('Click OK to remove.', btn => {
+      if (btn !== 'ok') return
+      this.props.removeGroupDevice(gauge)
+    })
   }
 
   getFlipClass () {
@@ -130,11 +134,7 @@ export default class GaugePanel extends React.Component {
             <div className="panel-heading">
               <h4 className="panel-title">{gauge.name}</h4>
               <div className="panel-options">
-                <IconButton
-                  onTouchTap={this.onClickDelete.bind(this)}
-                  style={{width: 24, height: 24}}>
-                  <DeleteIcon color="#545454"/>
-                </IconButton>
+                <DeleteIcon color="#545454" className="link" onTouchTap={() => this.onClickDelete(gauge)}/>
               </div>
             </div>
             <div className="panel-body pt-none flex-vertical flex-1">

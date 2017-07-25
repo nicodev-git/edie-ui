@@ -169,7 +169,9 @@ export default class DeviceDashboard extends React.Component {
     if (!savedSearch) return null
     const searchParams = JSON.parse(savedSearch.data)
     return (
-      <GaugePanel key={p.id} gauge={p} searchParams={searchParams} searchList={this.getSearchList()}/>
+      <GaugePanel
+        key={p.id} gauge={p} searchParams={searchParams} searchList={this.getSearchList()}
+        removeGroupDevice={this.props.removeGroupDevice}/>
     )
   }
 
