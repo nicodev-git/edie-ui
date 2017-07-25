@@ -85,7 +85,7 @@ class GenericSearch extends React.Component {
 
   componentWillMount () {
     const {filterType} = this.props.location.state || {}
-    const {q} = this.props.location.query || {}
+    const {q} = this.props.location.search || {}
     let params = assign({}, this.props.params)
 
     this.props.updateSearchViewFilter(viewFilters.standard)

@@ -20,7 +20,7 @@ export default function (ComposedComponent) {
       const { location } = this.props
 
       const p = location.pathname
-      const q = location.query
+      const q = location.search
       let search = null
       if (p !== '/' && p !== '/signout') {
         const redirect = JSON.stringify({
