@@ -13,15 +13,17 @@ import {showConfirm} from "components/common/Alert"
 export default class GaugePanel extends React.Component {
   constructor (props) {
     super(props)
+
+    const {params} = props.gauge
     this.state = {
       flip: false,
       clicked: false,
 
-      splitBy: 1,
-      splitUnit: 'day',
+      splitBy: params.splitBy || 1,
+      splitUnit: params.splitUnit || 'day',
 
-      selectedSearch: props.gauge.params.savedSearch,
-      graphType: props.gauge.params.graph,
+      selectedSearch: params.savedSearch,
+      graphType: params.graph,
       searchParams: props.searchParams,
       name: props.gauge.name,
 
@@ -98,6 +100,25 @@ export default class GaugePanel extends React.Component {
     })
   }
 
+  onClickDone () {
+    this.onClickFlip()
+
+    const {gauge} = this.props
+    const device = {
+      ...gauge,
+      name: this.state.name,
+      params: {
+        ...gauge.params,
+        splitBy: this.state.splitBy,
+        splitUnit: this.state.splitUnit,
+        graph: this.state.graphType,
+        savedSearch: this.state.selectedSearch
+      }
+    }
+
+    this.props.updateGroupDevice(device)
+  }
+
   getFlipClass () {
     var flippedCSS = this.state.flip ? " card-back-flip" : " card-front-flip";
     if (!this.state.clicked) flippedCSS =  "";
@@ -115,7 +136,7 @@ export default class GaugePanel extends React.Component {
   renderGaugeBack () {
     return (
       <GaugeBackView
-        {...this.props} {...this.state} onClickFlip={this.onClickFlip.bind(this)}
+        {...this.props} {...this.state} onClickDone={this.onClickDone.bind(this)}
         onChangeSplitBy={this.onChangeSplitBy.bind(this)}
         onChangeSplitUnit={this.onChangeSplitUnit.bind(this)}
         onChangeSearch={this.onChangeSearch.bind(this)}

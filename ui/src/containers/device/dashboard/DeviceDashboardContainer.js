@@ -7,6 +7,7 @@ import {
   fetchGroupDevicesAndLines,
   fetchSysSearchOptions,
   addGroupDevice,
+  updateGroupDevice,
   removeGroupDevice
 } from 'actions'
 
@@ -32,6 +33,7 @@ export default connect(
     fetchGroupDevicesAndLines,
     fetchSysSearchOptions,
     addGroupDevice,
+    updateGroupDevice,
     removeGroupDevice
   }
 )(withRouter(DeviceDashboardContainer))

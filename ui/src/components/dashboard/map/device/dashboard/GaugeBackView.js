@@ -52,7 +52,7 @@ export default class GaugeBackView extends React.Component {
           </SelectField>
         </div>
         <div className="text-right">
-          <RaisedButton label="Done" onTouchTap={this.props.onClickFlip}/>
+          <RaisedButton label="Done" onTouchTap={this.props.onClickDone}/>
         </div>
       </div>
     )
