@@ -384,8 +384,7 @@
     left: 16px;
 }
 .card .card-front.card-back-flip {
-    -webkit-animation: back-flip-1 1s 1 forwards;
-    animation: back-flip-1 1s 1 forwards;
+    animation: back-flip-1 1s linear 1 forwards;
 }
 @-webkit-keyframes back-flip-1 {
     0% {
@@ -422,8 +421,7 @@
     }
 }
 .card .card-front.card-front-flip {
-    -webkit-animation: front-flip-1 1s 1 forwards;
-    animation: front-flip-1 1s 1 forwards;
+    animation: front-flip-1 1s linear 1 forwards;
 }
 @-webkit-keyframes front-flip-1 {
     0% {
@@ -469,8 +467,7 @@
     left: 16px;
 }
 .card .card-back.card-back-flip {
-    -webkit-animation: back-flip-2 1s 1 forwards;
-    animation: back-flip-2 1s 1 forwards;
+    animation: back-flip-2 1s linear 1 forwards;
 }
 
 @-webkit-keyframes back-flip-2 {
@@ -504,8 +501,7 @@
     }
 }
 .card .card-back.card-front-flip {
-    -webkit-animation: front-flip-2 1s 1 forwards;
-    animation: front-flip-2 1s 1 forwards;
+    animation: front-flip-2 1s linear 1 forwards;
 }
 @-webkit-keyframes front-flip-2 {
     0% {

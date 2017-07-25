@@ -1,16 +1,19 @@
 import React from 'react'
-import {RaisedButton, SelectField, MenuItem} from 'material-ui'
+import {RaisedButton, SelectField, MenuItem, TextField} from 'material-ui'
 
 import {gaugeGraphs} from 'shared/Global'
 
 export default class GaugeBackView extends React.Component {
   render () {
     const {
-      splitBy, splitUnit, selectedSearch, searchList, graphType,
-      onChangeSplitBy, onChangeSplitUnit, onChangeSearch, onChangeGraphType
+      splitBy, splitUnit, selectedSearch, searchList, graphType, name,
+      onChangeSplitBy, onChangeSplitUnit, onChangeSearch, onChangeGraphType, onChangeName
     } = this.props
     return (
       <div>
+        <div>
+          <TextField value={name} floatingLabelText="Title" onChange={onChangeName}/>
+        </div>
         <div>
           Resolution:
           <select
@@ -42,16 +45,15 @@ export default class GaugeBackView extends React.Component {
             floatingLabelText="Saved Search" onChange={onChangeSearch} value={selectedSearch}>
             {searchList.map(p => <MenuItem key={p.id} value={p.id} primaryText={p.name}/>)}
           </SelectField>
-        </div>
-
-        <div>
+          &nbsp;&nbsp;
           <SelectField
             floatingLabelText="Graph Type" onChange={onChangeGraphType} value={graphType}>
             {gaugeGraphs.map(p => <MenuItem key={p.value} value={p.value} primaryText={p.label}/>)}
           </SelectField>
         </div>
-
-        <RaisedButton label="Done" onTouchTap={this.props.onClickFlip}/>
+        <div className="text-right">
+          <RaisedButton label="Done" onTouchTap={this.props.onClickFlip}/>
+        </div>
       </div>
     )
   }
