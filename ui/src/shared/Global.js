@@ -222,9 +222,11 @@ export const roleOptions = [
   {value: 'USER', label: 'User'}
 ]
 
-export const gaugeGraphs = [{
+export const gaugeTypes = [{
   label: 'Line', value: 'line'
 }, {
   label: 'Bar', value: 'bar'
+}, {
+  label: 'Incident Table', value: 'table'
 }]
 

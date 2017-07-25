@@ -1,7 +1,7 @@
 import React from 'react'
 import {RaisedButton, SelectField, MenuItem, TextField} from 'material-ui'
 
-import {gaugeGraphs} from 'shared/Global'
+import {gaugeTypes} from 'shared/Global'
 
 export default class GaugeBackView extends React.Component {
   render () {
@@ -48,7 +48,7 @@ export default class GaugeBackView extends React.Component {
           &nbsp;&nbsp;
           <SelectField
             floatingLabelText="Graph Type" onChange={onChangeGraphType} value={graphType}>
-            {gaugeGraphs.map(p => <MenuItem key={p.value} value={p.value} primaryText={p.label}/>)}
+            {gaugeTypes.map(p => <MenuItem key={p.value} value={p.value} primaryText={p.label}/>)}
           </SelectField>
         </div>
         <div className="text-right" style={{position: 'absolute', bottom: 16, right: 16}}>

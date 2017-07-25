@@ -3,7 +3,7 @@ import {Dialog} from 'material-ui'
 import { Field } from 'redux-form'
 import { SubmitBlock, FormInput, FormSelect } from 'components/modal/parts'
 
-import {gaugeGraphs} from 'shared/Global'
+import {gaugeTypes} from 'shared/Global'
 
 export default class GaugeWizardView extends React.Component {
   render () {
@@ -13,7 +13,7 @@ export default class GaugeWizardView extends React.Component {
         <form onSubmit={onSubmit}>
           <Field name="name" component={FormInput} floatingLabel="Name" className="valign-top"/>
           <Field name="savedSearch" component={FormSelect} floatingLabel="Saved Search" options={searchList} className="valign-top ml-dialog"/>
-          <Field name="graph" component={FormSelect} floatingLabel="Graph" options={gaugeGraphs} className="valign-top"/>
+          <Field name="graph" component={FormSelect} floatingLabel="Graph" options={gaugeTypes} className="valign-top"/>
           <SubmitBlock name="Add" onClick={onHide} />
         </form>
       </Dialog>
