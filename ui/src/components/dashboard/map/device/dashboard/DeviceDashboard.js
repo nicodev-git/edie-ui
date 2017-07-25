@@ -6,6 +6,7 @@ import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
 import GaugePanel from './GaugePanel'
 // import GaugeWizardContainer from 'containers/shared/wizard/GaugeWizardContainer'
 import { extImageBaseUrl } from 'shared/Global'
+import { wizardConfig, getDeviceType } from 'components/common/wizard/WizardConfig'
 
 export default class DeviceDashboard extends React.Component {
   constructor (props) {
@@ -62,8 +63,61 @@ export default class DeviceDashboard extends React.Component {
     return null
   }
 
+  getNewPosition () {
+    const {mapDevices} = this.props
+    let maxY = null
+    let minX = null
+    let maxX = null
+    mapDevices.forEach(p => {
+      if (maxY === null) maxY = p.y
+      else maxY = Math.max(maxY, p.y)
+
+      if (minX === null) minX = p.x
+      else minX = Math.min(minX, p.x)
+
+      if (maxX === null) maxX = p.x
+      else maxX = Math.max(maxX, p.x)
+    })
+
+    maxY = maxY || 0
+    minX = minX || 0
+    maxX = maxX || 0
+
+    return {
+      x: parseInt((minX + maxX) / 2, 10),
+      y: maxY + 50
+    }
+  }
+
   onClickMenuItem (tpl) {
     console.log(tpl)
+    const pos = this.getNewPosition()
+
+    const options = {
+      title: tpl.name,
+      type: getDeviceType(tpl.name),
+      imgName: tpl.image,
+      imageUrl: `/externalpictures?name=${item.image}`,
+      x: pos.x,
+      y: pos.y,
+      width: 50,
+      height: 50,
+
+      monitors: [],
+      templateName: tpl.name,
+      dashboard: tpl.dashboard
+    }
+
+
+    this.showAddWizard(options, (id, name, data) => {
+      const refMap = this.getDivMap()
+      let cmap = this.getCanvasMap()
+      refMap.addMapItem(cmap, data, () => {
+
+      })
+    }, () => {
+      this.setState({dropItem: null})
+    })
   }
 
   /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
