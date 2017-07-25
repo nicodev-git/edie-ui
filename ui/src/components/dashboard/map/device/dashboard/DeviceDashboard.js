@@ -2,7 +2,7 @@ import React from 'react'
 import {concat, assign, findIndex} from 'lodash'
 import {IconButton, IconMenu, MenuItem} from 'material-ui'
 import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
-import ReactGridLayout from 'react-grid-layout'
+import {Responsive, WidthProvider} from 'react-grid-layout'
 
 import GaugePanel from './GaugePanel'
 import GaugeWizardContainer from 'containers/shared/wizard/GaugeWizardContainer'
@@ -14,6 +14,7 @@ import {showAlert} from 'components/common/Alert'
 import 'react-grid-layout/css/styles.css'
 import 'react-resizable/css/styles.css'
 
+const ResponsiveReactGridLayout = WidthProvider(Responsive)
 export default class DeviceDashboard extends React.Component {
   constructor (props) {
     super(props)
@@ -178,10 +179,14 @@ export default class DeviceDashboard extends React.Component {
     if (!savedSearch) return null
     const searchParams = JSON.parse(savedSearch.data)
     return (
-      <GaugePanel
-        key={p.id} gauge={p} searchParams={searchParams} searchList={this.getSearchList()}
-        updateGroupDevice={this.props.updateGroupDevice}
-        removeGroupDevice={this.props.removeGroupDevice}/>
+      <div key={p.id}>
+        <GaugePanel
+          gauge={p} searchParams={searchParams} searchList={this.getSearchList()}
+          updateGroupDevice={this.props.updateGroupDevice}
+          removeGroupDevice={this.props.removeGroupDevice}
+          style={{width: '100%', height: '100%'}}
+        />
+      </div>
     )
   }
 
@@ -209,19 +214,19 @@ export default class DeviceDashboard extends React.Component {
 
   render () {
     const gauges = this.getGauges()
-    const layout = gauges.map((p, i) => ({
-      i: p.id,
-      x: i / 3,
-      y: i % 3,
-      w: 4,
-      h: 1
-    }))
+    // const layout = gauges.map((p, i) => ({
+    //   i: p.id,
+    //   x: i % 3, y: parseInt(i / 3, 10),
+    //   w: 1, h: 1
+    // }))
     return (
       <div>
         {this.renderAddMenu()}
-        <ReactGridLayout className="layout" layout={layout} cols={12} rowHeight={350} containerWidth>
+        <ResponsiveReactGridLayout
+          className="layout" cols={{lg: 3, md: 3, sm: 2, xs: 1, xxs: 1}} rowHeight={350}
+          isResizable={false} margin={[0, 0]}>
           {gauges.map(p => this.renderGauge(p))}
-        </ReactGridLayout>
+        </ResponsiveReactGridLayout>
 
         {this.renderDeviceWizard()}
       </div>

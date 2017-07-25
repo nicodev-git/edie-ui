@@ -168,8 +168,9 @@ export default class GaugePanel extends React.Component {
   }
 
   render () {
+    const {className, style} = this.props
     return (
-      <div className="card">
+      <div className={`${className || ''} card`} style={style}>
         {this.renderCard('card-back', this.renderGaugeBack())}
         {this.renderCard('card-front', this.renderGaugeFront())}
       </div>
