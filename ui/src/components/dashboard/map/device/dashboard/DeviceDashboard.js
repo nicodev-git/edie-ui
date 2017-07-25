@@ -8,6 +8,8 @@ import GaugePanel from './GaugePanel'
 import { extImageBaseUrl } from 'shared/Global'
 import { wizardConfig, getDeviceType } from 'components/common/wizard/WizardConfig'
 
+import {showAlert} from 'components/common/Alert'
+
 export default class DeviceDashboard extends React.Component {
   constructor (props) {
     super(props)
@@ -110,13 +112,21 @@ export default class DeviceDashboard extends React.Component {
 
 
     this.showAddWizard(options, (id, name, data) => {
-      const refMap = this.getDivMap()
-      let cmap = this.getCanvasMap()
-      refMap.addMapItem(cmap, data, () => {
 
-      })
-    }, () => {
-      this.setState({dropItem: null})
+    })
+  }
+
+  showAddWizard (options, callback, closeCallback) {
+    if (wizardConfig[options.type] === null) {
+      showAlert(`Unrecognized Type: ${options.type}`)
+      return
+    }
+
+    this.setState({
+      deviceWizardConfig: {
+        options, callback, closeCallback
+      },
+      deviceWizardVisible: true
     })
   }
 
@@ -167,7 +177,6 @@ export default class DeviceDashboard extends React.Component {
   //     />
   //   )
   // }
-
   renderGauge (p) {
     const savedSearch = this.getSavedSearch(p.params.savedSearch)
     if (!savedSearch) return null
