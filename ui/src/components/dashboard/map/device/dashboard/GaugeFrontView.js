@@ -7,6 +7,7 @@ import RefreshOverlay from 'components/common/RefreshOverlay'
 
 import LineChart from './LineChart'
 import BarChart from './BarChart'
+import IncidentTable from './IncidentTable'
 
 const sampleData = []
 
@@ -33,7 +34,7 @@ export default class GaugeView extends React.Component {
     this.props.onClickFlip()
   }
 
-  renderChart (graphType, chartData) {
+  renderChart (graphType, chartData, searchParams) {
     if (graphType === 'line') {
       return (
         <LineChart chartData={chartData} />
@@ -41,6 +42,10 @@ export default class GaugeView extends React.Component {
     } else if (graphType === 'bar') {
       return (
         <BarChart chartData={chartData} />
+      )
+    } else if (graphType === 'table') {
+      return (
+        <IncidentTable params={searchParams} />
       )
     }
   }
@@ -74,14 +79,14 @@ export default class GaugeView extends React.Component {
 
     return (
         <div className="flex-vertical flex-1" onMouseEnter={this.onMouseEnter.bind(this)} onMouseLeave={this.onMouseLeave.bind(this)}>
-          <div>
+          <div className={graphType === 'table' ? 'hidden' : ''}>
             <div className="pull-left form-inline">
               <label><small>Duration {moment(searchParams.dateFrom, dateFormat).format('MMM D, YYYY')}&nbsp;-&nbsp;
                 {moment(searchParams.dateTo, dateFormat).format('MMM D, YYYY')} resolution {splitBy} {splitUnit}</small></label>
             </div>
           </div>
-          <div className="flex-1">
-            {this.renderChart(graphType, chartData)}
+          <div className="flex-1 flex-vertical">
+            {this.renderChart(graphType, chartData, searchParams)}
             {this.renderInfoIcon()}
           </div>
           {this.props.loading ? <RefreshOverlay /> : null}
