@@ -1,7 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 import {findIndex} from 'lodash'
-import DeleteIcon from 'material-ui/svg-icons/action/delete'
+import DeleteIcon from 'material-ui/svg-icons/navigation/close'
 
 import GaugeFrontView from './GaugeFrontView'
 import GaugeBackView from './GaugeBackView'

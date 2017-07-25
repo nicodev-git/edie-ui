@@ -3,7 +3,7 @@ import SelectField from 'material-ui/SelectField'
 import MenuItem from 'material-ui/MenuItem'
 import { errorStyle, underlineFocusStyle, inputStyle, selectedItemStyle } from 'style/common/materialStyles'
 
-const FormSelect = ({input, label, floatingLabel, style, meta: { touched, error }, options}) => (
+const FormSelect = ({input, label, floatingLabel, className, style, meta: { touched, error }, options}) => (
   <SelectField
     hintText={label}
     floatingLabelText={floatingLabel}
@@ -14,6 +14,7 @@ const FormSelect = ({input, label, floatingLabel, style, meta: { touched, error 
     menuItemStyle={inputStyle}
     labelStyle={inputStyle}
     style={style}
+    className={className}
     {...input}
     onChange={(event, index, value) => input.onChange(value)}>
     {options.map(option => <MenuItem key={option.value} value={option.value} primaryText={option.label}/>)}

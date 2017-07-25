@@ -245,3 +245,7 @@ a, a:focus, a:hover {
     cursor: pointer;
     display: inline-block;
 }
+
+.ml-dialog {
+    margin-left: 24px;
+}
