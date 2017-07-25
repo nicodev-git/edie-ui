@@ -1,17 +1,51 @@
 import React from 'react'
-import GaugeView from './GaugeView'
+import axios from 'axios'
+
+import GaugeFrontView from './GaugeFrontView'
+import GaugeBackView from './GaugeBackView'
+
+import { ROOT_URL } from 'actions/config'
 
 export default class GaugePanel extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
       flip: false,
-      clicked: false
+      clicked: false,
+      splitBy: 1,
+      splitUnit: 'day',
+
+      loading: true,
+      searchRecordCounts: []
     }
+  }
+  componentWillMount () {
+    this.fetchRecordCount()
+  }
+  fetchRecordCount () {
+    const {splitBy, splitUnit} = this.props
+    const params = { ...this.props.params, splitBy, splitUnit }
+    axios.get(`${ROOT_URL}/search/getRecordCount`, {params}).then(res => {
+      this.setState({
+        searchRecordCounts: res.data,
+        loading: false
+      })
+    })
   }
 
   onClickFlip () {
     this.setState({flip: !this.state.flip, clicked: true})
+  }
+
+  onChangeSplitBy (e) {
+    this.setState({splitBy: e.target.value}, () => {
+      this.fetchRecordCount()
+    })
+  }
+  onChangeSplitUnit (e) {
+    this.setState({splitUnit: e.target.value}, () => {
+      this.fetchRecordCount()
+    })
   }
 
   getFlipClass () {
@@ -20,10 +54,21 @@ export default class GaugePanel extends React.Component {
     return flippedCSS
   }
 
-  renderGauge () {
-    const {gauge, graphType, params} = this.props
+  renderGaugeFront () {
     return (
-      <GaugeView gauge={gauge} graphType={graphType} params={params} onClickFlip={this.onClickFlip.bind(this)}/>
+      <GaugeFrontView
+        {...this.state} {...this.props} onClickFlip={this.onClickFlip.bind(this)}
+      />
+    )
+  }
+
+  renderGaugeBack () {
+    return (
+      <GaugeBackView
+        {...this.state} {...this.props} onClickFlip={this.onClickFlip.bind(this)}
+        onChangeSplitBy={this.onChangeSplitBy.bind(this)}
+        onChangeSplitUnit={this.onChangeSplitUnit.bind(this)}
+      />
     )
   }
 
@@ -48,8 +93,8 @@ export default class GaugePanel extends React.Component {
   render () {
     return (
       <div className="col-md-4 margin-sm-bottom card" style={{height: 350}}>
-        {this.renderCard('card-back', <div>Back View</div>)}
-        {this.renderCard('card-front', this.renderGauge())}
+        {this.renderCard('card-back', this.renderGaugeBack())}
+        {this.renderCard('card-front', this.renderGaugeFront())}
       </div>
     )
   }
