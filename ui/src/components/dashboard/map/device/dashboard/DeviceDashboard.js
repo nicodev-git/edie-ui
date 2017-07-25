@@ -2,6 +2,7 @@ import React from 'react'
 import {concat, assign, findIndex} from 'lodash'
 import {IconButton, IconMenu, MenuItem} from 'material-ui'
 import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
+import ReactGridLayout from 'react-grid-layout'
 
 import GaugePanel from './GaugePanel'
 import GaugeWizardContainer from 'containers/shared/wizard/GaugeWizardContainer'
@@ -9,6 +10,9 @@ import { extImageBaseUrl } from 'shared/Global'
 import { wizardConfig, getDeviceType } from 'components/common/wizard/WizardConfig'
 
 import {showAlert} from 'components/common/Alert'
+
+import 'react-grid-layout/css/styles.css'
+import 'react-resizable/css/styles.css'
 
 export default class DeviceDashboard extends React.Component {
   constructor (props) {
@@ -204,10 +208,21 @@ export default class DeviceDashboard extends React.Component {
   }
 
   render () {
+    const gauges = this.getGauges()
+    const layout = gauges.map((p, i) => ({
+      i: p.id,
+      x: i / 3,
+      y: i % 3,
+      w: 4,
+      h: 1
+    }))
     return (
       <div>
         {this.renderAddMenu()}
-        {this.getGauges().map(p => this.renderGauge(p))}
+        <ReactGridLayout className="layout" layout={layout} cols={12} rowHeight={350} containerWidth>
+          {gauges.map(p => this.renderGauge(p))}
+        </ReactGridLayout>
+
         {this.renderDeviceWizard()}
       </div>
     )

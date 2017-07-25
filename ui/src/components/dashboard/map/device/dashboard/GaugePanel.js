@@ -169,7 +169,7 @@ export default class GaugePanel extends React.Component {
 
   render () {
     return (
-      <div className="col-md-4 margin-sm-bottom card" style={{height: 350}}>
+      <div className="card">
         {this.renderCard('card-back', this.renderGaugeBack())}
         {this.renderCard('card-front', this.renderGaugeFront())}
       </div>
