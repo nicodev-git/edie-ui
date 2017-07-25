@@ -27,6 +27,8 @@ import ViewFilterModal from './ViewFilterModal'
 import SearchGraphModal from './SearchGraphModal'
 import TagPickerModal from 'containers/settings/tag/TagPickerModalContainer'
 
+import {parse} from 'query-string'
+
 class GenericSearch extends React.Component {
   constructor (props) {
     super(props)
@@ -85,7 +87,7 @@ class GenericSearch extends React.Component {
 
   componentWillMount () {
     const {filterType} = this.props.location.state || {}
-    const {q} = this.props.location.search || {}
+    const {q} = parse(this.props.location.search || {})
     let params = assign({}, this.props.params)
 
     this.props.updateSearchViewFilter(viewFilters.standard)
