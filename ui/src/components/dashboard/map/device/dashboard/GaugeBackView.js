@@ -1,11 +1,13 @@
 import React from 'react'
 import {RaisedButton, SelectField, MenuItem} from 'material-ui'
 
+import {gaugeGraphs} from 'shared/Global'
+
 export default class GaugeBackView extends React.Component {
   render () {
     const {
-      splitBy, splitUnit, selectedSearch, searchList,
-      onChangeSplitBy, onChangeSplitUnit, onChangeSearch
+      splitBy, splitUnit, selectedSearch, searchList, graphType,
+      onChangeSplitBy, onChangeSplitUnit, onChangeSearch, onChangeGraphType
     } = this.props
     return (
       <div>
@@ -39,6 +41,13 @@ export default class GaugeBackView extends React.Component {
           <SelectField
             floatingLabelText="Saved Search" onChange={onChangeSearch} value={selectedSearch}>
             {searchList.map(p => <MenuItem key={p.id} value={p.id} primaryText={p.name}/>)}
+          </SelectField>
+        </div>
+
+        <div>
+          <SelectField
+            floatingLabelText="Graph Type" onChange={onChangeGraphType} value={graphType}>
+            {gaugeGraphs.map(p => <MenuItem key={p.value} value={p.value} primaryText={p.label}/>)}
           </SelectField>
         </div>
 

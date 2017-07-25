@@ -221,3 +221,10 @@ export const roleOptions = [
   {value: 'ADMIN', label: 'Admin'},
   {value: 'USER', label: 'User'}
 ]
+
+export const gaugeGraphs = [{
+  label: 'Line', value: 'line'
+}, {
+  label: 'Bar', value: 'bar'
+}]
+
