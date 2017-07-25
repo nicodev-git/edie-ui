@@ -1,10 +1,11 @@
 import React from 'react'
 import {concat, assign, findIndex} from 'lodash'
-import {RaisedButton, IconButton, IconMenu} from 'material-ui'
+import {IconButton, IconMenu, MenuItem} from 'material-ui'
 import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
 
 import GaugePanel from './GaugePanel'
 // import GaugeWizardContainer from 'containers/shared/wizard/GaugeWizardContainer'
+import { extImageBaseUrl } from 'shared/Global'
 
 export default class DeviceDashboard extends React.Component {
   constructor (props) {
@@ -61,8 +62,8 @@ export default class DeviceDashboard extends React.Component {
     return null
   }
 
-  onClickAddGauge () {
-
+  onClickMenuItem (tpl) {
+    console.log(tpl)
   }
 
   /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -122,22 +123,32 @@ export default class DeviceDashboard extends React.Component {
     )
   }
 
+  renderAddMenu () {
+    const {deviceTemplates} = this.props
+    const gauges = deviceTemplates.filter(p => p.dashboard)
+    return (
+      <IconMenu
+        iconButtonElement={<IconButton><AddCircleIcon /></IconButton>}
+        anchorOrigin={{horizontal: 'left', vertical: 'top'}}
+        targetOrigin={{horizontal: 'left', vertical: 'top'}}
+      >
+        {gauges.map(p =>
+          <MenuItem
+            key={p.id} primaryText={p.name}
+            leftIcon={<img src={`${extImageBaseUrl}${p.image}`} alt="" width="24" height="24"/>}
+            style={{background: 'black'}}
+            onTouchTap={this.onClickMenuItem.bind(this, p)}
+          />
+        )}
+      </IconMenu>
+    )
+  }
+
   render () {
     return (
       <div className="padding-md-top">
         {this.getGauges().map(p => this.renderGauge(p))}
-
-        <IconMenu
-          iconButtonElement={<IconButton><AddCircleIcon /></IconButton>}
-          anchorOrigin={{horizontal: 'left', vertical: 'top'}}
-          targetOrigin={{horizontal: 'left', vertical: 'top'}}
-        >
-          <MenuItem primaryText="Refresh" />
-          <MenuItem primaryText="Send feedback" />
-          <MenuItem primaryText="Settings" />
-          <MenuItem primaryText="Help" />
-          <MenuItem primaryText="Sign out" />
-        </IconMenu>
+        {this.renderAddMenu()}
       </div>
     )
   }
