@@ -1,6 +1,8 @@
 import React from 'react'
 import axios from 'axios'
 import {findIndex} from 'lodash'
+import {IconButton} from 'material-ui'
+import DeleteIcon from 'material-ui/svg-icons/action/delete'
 
 import GaugeFrontView from './GaugeFrontView'
 import GaugeBackView from './GaugeBackView'
@@ -88,6 +90,10 @@ export default class GaugePanel extends React.Component {
     })
   }
 
+  onClickDelete () {
+
+  }
+
   getFlipClass () {
     var flippedCSS = this.state.flip ? " card-back-flip" : " card-front-flip";
     if (!this.state.clicked) flippedCSS =  "";
@@ -123,6 +129,13 @@ export default class GaugePanel extends React.Component {
           <div className="panel panel-blue flex-vertical flex-1">
             <div className="panel-heading">
               <h4 className="panel-title">{gauge.name}</h4>
+              <div className="panel-options">
+                <IconButton
+                  onTouchTap={this.onClickDelete.bind(this)}
+                  style={{width: 24, height: 24}}>
+                  <DeleteIcon color="#545454"/>
+                </IconButton>
+              </div>
             </div>
             <div className="panel-body pt-none flex-vertical flex-1">
               {children}

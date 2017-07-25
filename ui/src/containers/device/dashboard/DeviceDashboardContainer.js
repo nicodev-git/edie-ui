@@ -5,7 +5,8 @@ import { connect } from 'react-redux'
 
 import {
   fetchGroupDevicesAndLines,
-  fetchSysSearchOptions
+  fetchSysSearchOptions,
+  addGroupDevice
 } from 'actions'
 
 class DeviceDashboardContainer extends React.Component {
@@ -28,6 +29,7 @@ export default connect(
     sysSearchOptions: state.search.sysSearchOptions
   }), {
     fetchGroupDevicesAndLines,
-    fetchSysSearchOptions
+    fetchSysSearchOptions,
+    addGroupDevice
   }
 )(withRouter(DeviceDashboardContainer))

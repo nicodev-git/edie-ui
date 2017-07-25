@@ -130,6 +130,10 @@ export default class DeviceDashboard extends React.Component {
     })
   }
 
+  onFinishAddWizard (callback, res, params, url) {
+    this.props.addGroupDevice(params, url)
+  }
+
   /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   renderDeviceWizard () {
     if (!this.state.deviceWizardVisible) return null
