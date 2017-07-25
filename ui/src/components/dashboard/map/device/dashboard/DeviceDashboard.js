@@ -1,6 +1,7 @@
 import React from 'react'
 import {concat, assign, findIndex} from 'lodash'
-import {RaisedButton} from 'material-ui'
+import {RaisedButton, IconButton, IconMenu} from 'material-ui'
+import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
 
 import GaugePanel from './GaugePanel'
 // import GaugeWizardContainer from 'containers/shared/wizard/GaugeWizardContainer'
@@ -65,52 +66,52 @@ export default class DeviceDashboard extends React.Component {
   }
 
   /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  renderDeviceWizard () {
-    if (!this.state.deviceWizardVisible) return null
-
-    const {options, callback, closeCallback} = this.state.deviceWizardConfig
-
-    const extra = {
-      x: options.x,
-      y: options.y,
-      width: options.width,
-      height: options.height,
-      image: options.imgName,
-      templateName: options.templateName,
-      groupid: this.props.device.id
-    }
-
-    if (options.dashboard) {
-      return (
-        <GaugeWizardContainer
-          deviceType={options.type}
-          onClose={() => {
-            this.setState({deviceWizardVisible: false})
-            closeCallback && closeCallback()
-          }}
-          title={options.title}
-          monitors={options.monitors}
-          extraParams={extra}
-          onFinish={this.onFinishAddWizard.bind(this, callback)}
-        />
-      )
-    }
-
-    return (
-      <DeviceWizardContainer
-        deviceType={options.type}
-        onClose={() => {
-          this.setState({deviceWizardVisible: false})
-          closeCallback && closeCallback()
-        }}
-        title={options.title}
-        monitors={options.monitors}
-        extraParams={extra}
-        configParams={{}}
-        onFinish={this.onFinishAddWizard.bind(this, callback)}
-      />
-    )
-  }
+  // renderDeviceWizard () {
+  //   if (!this.state.deviceWizardVisible) return null
+  //
+  //   const {options, callback, closeCallback} = this.state.deviceWizardConfig
+  //
+  //   const extra = {
+  //     x: options.x,
+  //     y: options.y,
+  //     width: options.width,
+  //     height: options.height,
+  //     image: options.imgName,
+  //     templateName: options.templateName,
+  //     groupid: this.props.device.id
+  //   }
+  //
+  //   if (options.dashboard) {
+  //     return (
+  //       <GaugeWizardContainer
+  //         deviceType={options.type}
+  //         onClose={() => {
+  //           this.setState({deviceWizardVisible: false})
+  //           closeCallback && closeCallback()
+  //         }}
+  //         title={options.title}
+  //         monitors={options.monitors}
+  //         extraParams={extra}
+  //         onFinish={this.onFinishAddWizard.bind(this, callback)}
+  //       />
+  //     )
+  //   }
+  //
+  //   return (
+  //     <DeviceWizardContainer
+  //       deviceType={options.type}
+  //       onClose={() => {
+  //         this.setState({deviceWizardVisible: false})
+  //         closeCallback && closeCallback()
+  //       }}
+  //       title={options.title}
+  //       monitors={options.monitors}
+  //       extraParams={extra}
+  //       configParams={{}}
+  //       onFinish={this.onFinishAddWizard.bind(this, callback)}
+  //     />
+  //   )
+  // }
 
   renderGauge (p) {
     const savedSearch = this.getSavedSearch(p.params.savedSearch)
@@ -125,7 +126,18 @@ export default class DeviceDashboard extends React.Component {
     return (
       <div className="padding-md-top">
         {this.getGauges().map(p => this.renderGauge(p))}
-        <RaisedButton label="Add" onTouchTap={this.onClickAddGauge.bind(this)} className="margin-md-left"/>
+
+        <IconMenu
+          iconButtonElement={<IconButton><AddCircleIcon /></IconButton>}
+          anchorOrigin={{horizontal: 'left', vertical: 'top'}}
+          targetOrigin={{horizontal: 'left', vertical: 'top'}}
+        >
+          <MenuItem primaryText="Refresh" />
+          <MenuItem primaryText="Send feedback" />
+          <MenuItem primaryText="Settings" />
+          <MenuItem primaryText="Help" />
+          <MenuItem primaryText="Sign out" />
+        </IconMenu>
       </div>
     )
   }
