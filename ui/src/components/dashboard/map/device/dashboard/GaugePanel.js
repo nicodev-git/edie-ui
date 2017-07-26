@@ -52,14 +52,10 @@ export default class GaugePanel extends React.Component {
   }
 
   onChangeSplitBy (e) {
-    this.setState({splitBy: e.target.value}, () => {
-      this.fetchRecordCount()
-    })
+    this.setState({splitBy: e.target.value})
   }
   onChangeSplitUnit (e) {
-    this.setState({splitUnit: e.target.value}, () => {
-      this.fetchRecordCount()
-    })
+    this.setState({splitUnit: e.target.value})
   }
 
   onChangeSearch (e, i, value) {
@@ -75,8 +71,6 @@ export default class GaugePanel extends React.Component {
       this.setState({
         selectedSearch: value,
         searchParams
-      }, () => {
-        this.fetchRecordCount()
       })
     } catch (e) {
       console.log(e)
@@ -123,6 +117,9 @@ export default class GaugePanel extends React.Component {
       name: this.state.name,
       params: {
         ...gauge.params,
+
+        duration: this.state.duration,
+        durationUnit: this.state.durationUnit,
         splitBy: this.state.splitBy,
         splitUnit: this.state.splitUnit,
         graph: this.state.graphType,
@@ -130,6 +127,7 @@ export default class GaugePanel extends React.Component {
       }
     }
 
+    this.fetchRecordCount()
     this.props.updateGroupDevice(device)
   }
 

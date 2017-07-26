@@ -231,9 +231,9 @@ export const gaugeTypes = [{
 }]
 
 export const gaugeDurationTypes = [{
-  label: 'Hours', value: 'hours'
+  label: 'Hours', value: 'hour'
 }, {
-  label: 'Days', value: 'days'
+  label: 'Days', value: 'day'
 }, {
-  label: 'Months', value: 'months'
+  label: 'Months', value: 'month'
 }]
