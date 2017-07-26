@@ -5,9 +5,10 @@ import InfoIcon from 'material-ui/svg-icons/action/info'
 import {dateFormat} from 'shared/Global'
 import RefreshOverlay from 'components/common/RefreshOverlay'
 
-import LineChart from './LineChart'
-import BarChart from './BarChart'
-import IncidentTable from './IncidentTable'
+import LineChart from './display/LineChart'
+import BarChart from './display/BarChart'
+import IncidentTable from './display/IncidentTable'
+import LiquidView from './display/LiquidView'
 
 const sampleData = []
 
@@ -35,19 +36,27 @@ export default class GaugeView extends React.Component {
   }
 
   renderChart (graphType, chartData, searchParams) {
-    if (graphType === 'line') {
-      return (
-        <LineChart chartData={chartData} />
-      )
-    } else if (graphType === 'bar') {
-      return (
-        <BarChart chartData={chartData} />
-      )
-    } else if (graphType === 'table') {
-      const {duration, durationUnit} = this.props
-      return (
-        <IncidentTable params={searchParams} duration={duration} durationUnit={durationUnit}/>
-      )
+    switch (graphType) {
+      case 'line':
+        return (
+          <LineChart chartData={chartData} />
+        )
+      case 'bar':
+        return (
+          <BarChart chartData={chartData} />
+        )
+      case 'liquid':
+        return (
+          <LiquidView/>
+        )
+      case 'table': {
+        const {duration, durationUnit} = this.props
+        return (
+          <IncidentTable params={searchParams} duration={duration} durationUnit={durationUnit}/>
+        )
+      }
+      default:
+        return null
     }
   }
 
@@ -63,9 +72,22 @@ export default class GaugeView extends React.Component {
     )
   }
 
+  renderDesc () {
+    const {searchParams, graphType, splitBy, splitUnit} = this.props
+    if (graphType !== 'line' && graphType !== 'bar') return null
+    return (
+      <div>
+        <div className="pull-left form-inline">
+          <label><small>Duration {moment(searchParams.dateFrom, dateFormat).format('MMM D, YYYY')}&nbsp;-&nbsp;
+            {moment(searchParams.dateTo, dateFormat).format('MMM D, YYYY')} resolution {splitBy} {splitUnit}</small></label>
+        </div>
+      </div>
+    )
+  }
+
   renderFront () {
     const {
-      searchParams, graphType, splitBy, splitUnit, searchRecordCounts
+      searchParams, graphType, searchRecordCounts
     } = this.props
 
     const chartData = {
@@ -80,12 +102,7 @@ export default class GaugeView extends React.Component {
 
     return (
         <div className="flex-vertical flex-1" onMouseEnter={this.onMouseEnter.bind(this)} onMouseLeave={this.onMouseLeave.bind(this)}>
-          <div className={graphType === 'table' ? 'hidden' : ''}>
-            <div className="pull-left form-inline">
-              <label><small>Duration {moment(searchParams.dateFrom, dateFormat).format('MMM D, YYYY')}&nbsp;-&nbsp;
-                {moment(searchParams.dateTo, dateFormat).format('MMM D, YYYY')} resolution {splitBy} {splitUnit}</small></label>
-            </div>
-          </div>
+          {this.renderDesc()}
           <div className="flex-1 flex-vertical">
             {this.renderChart(graphType, chartData, searchParams)}
             {this.renderInfoIcon()}
