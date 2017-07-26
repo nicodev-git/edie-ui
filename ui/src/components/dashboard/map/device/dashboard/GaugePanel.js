@@ -19,6 +19,8 @@ export default class GaugePanel extends React.Component {
       flip: false,
       clicked: false,
 
+      duration: params.duration || 3,
+      durationUnit: params.durationUnit || 'days',
       splitBy: params.splitBy || 1,
       splitUnit: params.splitUnit || 'day',
 
@@ -93,6 +95,18 @@ export default class GaugePanel extends React.Component {
     })
   }
 
+  onChangeDuration (e) {
+    this.setState({
+      duration: e.target.value
+    })
+  }
+
+  onChangeDurationUnit (e) {
+    this.setState({
+      durationUnit: e.target.value
+    })
+  }
+
   onClickDelete (gauge) {
     showConfirm('Click OK to remove.', btn => {
       if (btn !== 'ok') return
@@ -142,6 +156,8 @@ export default class GaugePanel extends React.Component {
         onChangeSearch={this.onChangeSearch.bind(this)}
         onChangeGraphType={this.onChangeGraphType.bind(this)}
         onChangeName={this.onChangeName.bind(this)}
+        onChangeDuration={this.onChangeDuration.bind(this)}
+        onChangeDurationUnit={this.onChangeDurationUnit.bind(this)}
       />
     )
   }

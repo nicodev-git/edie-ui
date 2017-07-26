@@ -6,20 +6,32 @@ import {gaugeTypes, gaugeDurationTypes} from 'shared/Global'
 export default class GaugeBackView extends React.Component {
   render () {
     const {
-      duration, splitBy, splitUnit, selectedSearch, searchList, graphType, name,
-      onChangeDuration, onChangeSplitBy, onChangeSplitUnit, onChangeSearch, onChangeGraphType, onChangeName
+      duration, durationUnit, splitBy, splitUnit, selectedSearch, searchList, graphType, name,
+      onChangeDuration, onChangeDurationUnit, onChangeSplitBy, onChangeSplitUnit, onChangeSearch, onChangeGraphType, onChangeName
     } = this.props
     return (
       <div>
         <div>
           <TextField value={name} floatingLabelText="Title" onChange={onChangeName}/>
         </div>
-        <div>
+        <div className="margin-md-top">
           Show Last
           <select
             className="form-control input-sm select-custom" value={duration}
             style={{color: 'black'}}
             onChange={onChangeDuration}>
+            <option value="1">&nbsp;1</option>
+            <option value="2">&nbsp;2</option>
+            <option value="3">&nbsp;3</option>
+            <option value="5">&nbsp;5</option>
+            <option value="10">10</option>
+            <option value="15">15</option>
+            <option value="30">30</option>
+          </select>
+          <select
+            className="form-control input-sm select-custom" value={durationUnit}
+            style={{color: 'black'}}
+            onChange={onChangeDurationUnit}>
             {gaugeDurationTypes.map(p =>
               <option key={p.value} value={p.value}>{p.label}</option>
             )}
