@@ -15,7 +15,20 @@ export default class GaugeBackView extends React.Component {
           <TextField value={name} floatingLabelText="Title" onChange={onChangeName}/>
         </div>
         <div>
-          Resolution:
+          Show Last
+          <select
+            className="form-control input-sm select-custom" value={duration}
+            style={{color: 'black'}}
+            onChange={onChangeDuration}>
+            <option value="1">&nbsp;1</option>
+            <option value="2">&nbsp;2</option>
+            <option value="3">&nbsp;3</option>
+            <option value="5">&nbsp;5</option>
+            <option value="10">10</option>
+            <option value="15">15</option>
+            <option value="30">30</option>
+          </select>
+          With Resolution
           <select
             className="form-control input-sm select-custom" value={splitBy}
             style={{color: 'black'}}

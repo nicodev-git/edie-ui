@@ -230,3 +230,10 @@ export const gaugeTypes = [{
   label: 'Incident Table', value: 'table'
 }]
 
+export const gaugeDurationTypes = [{
+  label: 'Hours', value: 'hours'
+}, {
+  label: 'Days', value: 'days'
+}, {
+  label: 'Months', value: 'months'
+}]
