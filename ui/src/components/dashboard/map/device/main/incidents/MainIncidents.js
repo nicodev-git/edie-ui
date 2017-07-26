@@ -10,12 +10,9 @@ import {
   TextField,
   FlatButton
 } from 'material-ui'
-import TimeAgo from 'react-timeago'
 import ReactTooltip from 'react-tooltip'
 import ArrowBack from 'material-ui/svg-icons/navigation/arrow-back'
 import ActionSearch from 'material-ui/svg-icons/action/search'
-// import ArrowUp from 'material-ui/svg-icons/navigation/arrow-drop-up'
-// import ArrowDown from 'material-ui/svg-icons/navigation/arrow-drop-down'
 
 import DateRangePicker from 'components/common/DateRangePicker'
 import InfiniteTable from 'components/common/InfiniteTable'
@@ -80,7 +77,7 @@ export default class MainIncidents extends Component {
         if (!data) return <span/>
         return (
           <span data-tip={moment(new Date(data)).format('YYYY-MM-DD HH:mm:ss')}>
-            <TimeAgo date={data}/>
+            {moment(new Date(data)).fromNow()}
           </span>
         )
       }
