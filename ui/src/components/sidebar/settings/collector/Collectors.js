@@ -90,8 +90,6 @@ export default class Collectors extends React.Component {
         <TabPageHeader title="Settings">
           <div className="text-center margin-md-top">
             <div className="pull-right">
-              <RaisedButton label="Add" onTouchTap={this.onClickAdd.bind(this)}/>&nbsp;
-              <RaisedButton label="Edit" onTouchTap={this.onClickEdit.bind(this)}/>&nbsp;
               <RaisedButton label="Remove" onTouchTap={this.onClickRemove.bind(this)}/>&nbsp;
               <CollectorTabs history={this.props.history}/>
             </div>
