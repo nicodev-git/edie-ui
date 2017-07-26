@@ -1,6 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 import {findIndex} from 'lodash'
+import moment from 'moment'
 import DeleteIcon from 'material-ui/svg-icons/navigation/close'
 
 import GaugeFrontView from './GaugeFrontView'
@@ -9,6 +10,7 @@ import GaugeBackView from './GaugeBackView'
 import { ROOT_URL } from 'actions/config'
 
 import {showConfirm} from "components/common/Alert"
+import { dateFormat } from 'shared/Global'
 
 export default class GaugePanel extends React.Component {
   constructor (props) {
@@ -37,8 +39,12 @@ export default class GaugePanel extends React.Component {
     this.fetchRecordCount()
   }
   fetchRecordCount () {
-    const {splitBy, splitUnit, searchParams} = this.state
-    const params = { ...searchParams, splitBy, splitUnit }
+    const {duration, durationUnit, splitBy, splitUnit, searchParams} = this.state
+
+    const dateFrom = moment().add(-duration, `${durationUnit}s`).startOf(durationUnit).format(dateFormat)
+    const dateTo = moment().endOf(durationUnit).format(dateFormat)
+
+    const params = { ...searchParams, splitBy, splitUnit, dateFrom, dateTo }
     axios.get(`${ROOT_URL}/search/getRecordCount`, {params}).then(res => {
       this.setState({
         searchRecordCounts: res.data,
