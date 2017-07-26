@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import {Dialog} from 'material-ui'
-import TimeAgo from 'react-timeago'
+import moment from 'moment'
 
 export default class ProcessModal extends Component {
   constructor (props) {
@@ -91,7 +91,7 @@ export default class ProcessModal extends Component {
                 <tbody>{
                   this.getRunTimes().map((item, i) =>
                     <tr key={i}>
-                      <td><TimeAgo date={item}/></td>
+                      <td>{moment(item).fromNow()}</td>
                     </tr>)
                 }
                 </tbody>

@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import moment from 'moment'
 import { assign } from 'lodash'
-import TimeAgo from 'react-timeago'
 
 import IncidentEventsModal from 'components/dashboard/incidents/IncidentEventsModal'
 import { thumbup, thumpdown, done, notdone, rawtext, reason } from 'style/common/materialStyles'
@@ -30,7 +29,7 @@ class BigIncidents extends Component {
         const {data} = props
         if (!data) return <span/>
         return (
-          <span data-tip={moment(new Date(data)).format('YYYY-MM-DD HH:mm:ss')}><TimeAgo date={data}/></span>
+          <span data-tip={moment(new Date(data)).format('YYYY-MM-DD HH:mm:ss')}>{moment(data).fromNow()}</span>
         )
       }
     }, {

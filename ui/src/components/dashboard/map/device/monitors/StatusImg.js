@@ -1,5 +1,5 @@
 import React from 'react'
-import TimeAgo from 'react-timeago'
+import moment from 'moment'
 
 export default class StatusImg extends React.Component {
   constructor (props) {
@@ -21,7 +21,7 @@ export default class StatusImg extends React.Component {
     if (!this.state.hovered || !monitorsUpdateTime) return null
     return (
       <div className="__react_component_tooltip show place-right type-dark" style={{position: 'absolute', top: -10, left: 25}}>
-        <span className="valign-middle nowrap">Last Updated <TimeAgo date={monitorsUpdateTime}/></span>
+        <span className="valign-middle nowrap">Last Updated {moment(monitorsUpdateTime).fromNow()}</span>
       </div>
     )
   }

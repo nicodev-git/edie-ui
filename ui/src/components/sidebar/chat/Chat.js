@@ -1,5 +1,4 @@
 import React from 'react'
-import TimeAgo from 'react-timeago'
 import {
   // assign, // Never used
   forIn,
@@ -79,7 +78,7 @@ export default class Chat extends React.Component {
         key={item.id}
         onClick={this.onClickIncident.bind(this, item)}>
           <strong>#</strong><span className="room-title">
-            {name}(<TimeAgo date={item.startTimestamp}/>)
+            {name}{moment(item.startTimestamp).fromNow()}
           </span>
           <span className={`badge pull-right badge-message ${unread ? '' : 'hidden'}`}>{unread}</span>
       </li>
