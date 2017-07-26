@@ -214,16 +214,25 @@ export default class DeviceDashboard extends React.Component {
 
   render () {
     const gauges = this.getGauges()
-    // const layout = gauges.map((p, i) => ({
-    //   i: p.id,
-    //   x: i % 3, y: parseInt(i / 3, 10),
-    //   w: 1, h: 1
-    // }))
+    const layout = w => gauges.map((p, i) => ({
+      i: p.id,
+      x: i % w, y: parseInt(i / w, 10),
+      w: 1, h: 1
+    }))
+    const cols = {lg: 3, md: 2, sm: 2, xs: 1, xxs: 1}
+    const layouts = {
+      lg: layout(cols['lg']),
+      md: layout(cols['md']),
+      sm: layout(cols['sm']),
+      xs: layout(cols['xs']),
+      xxs: layout(cols['xxs'])
+    }
     return (
       <div>
         {this.renderAddMenu()}
         <ResponsiveReactGridLayout
-          className="layout" cols={{lg: 3, md: 3, sm: 2, xs: 1, xxs: 1}} rowHeight={350}
+          className="layout" cols={cols} rowHeight={350}
+          layouts={layouts}
           isResizable={false} margin={[10, 10]}
           style={{marginTop: -10}}>
           {gauges.map(p => this.renderGauge(p))}
