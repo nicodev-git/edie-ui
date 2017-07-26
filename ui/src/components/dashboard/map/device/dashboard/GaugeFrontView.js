@@ -36,6 +36,7 @@ export default class GaugeView extends React.Component {
   }
 
   renderChart (graphType, chartData, searchParams) {
+    const {gauge} = this.props
     switch (graphType) {
       case 'line':
         return (
@@ -47,7 +48,7 @@ export default class GaugeView extends React.Component {
         )
       case 'liquid':
         return (
-          <LiquidView/>
+          <LiquidView title={gauge.name}/>
         )
       case 'table': {
         const {duration, durationUnit} = this.props

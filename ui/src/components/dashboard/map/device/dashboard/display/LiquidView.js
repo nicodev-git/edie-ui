@@ -16,7 +16,7 @@ class LiquidView extends React.Component {
   }
 
   render () {
-    const radius = Math.min(this.props.containerWidth, this.props.containerHeight)/ 2 - 10;
+    const radius = Math.max(Math.min(this.props.containerWidth, this.props.containerHeight)/ 2 - 24, 10);
     const interpolate = interpolateRgb(startColor, endColor);
     const fillColor = interpolate(this.state.value / 100);
     const gradientStops = [
@@ -90,6 +90,7 @@ class LiquidView extends React.Component {
             fontFamily: 'Arial'
           }}
         />
+        <div className="text-center margin-md-top">{this.props.title}</div>
       </div>
     )
   }
