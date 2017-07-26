@@ -44,8 +44,9 @@ export default class GaugeView extends React.Component {
         <BarChart chartData={chartData} />
       )
     } else if (graphType === 'table') {
+      const {duration, durationUnit} = this.props
       return (
-        <IncidentTable params={searchParams} />
+        <IncidentTable params={searchParams} duration={duration} durationUnit={durationUnit}/>
       )
     }
   }

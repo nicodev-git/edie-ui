@@ -22,7 +22,7 @@ export default class GaugePanel extends React.Component {
       clicked: false,
 
       duration: params.duration || 3,
-      durationUnit: params.durationUnit || 'days',
+      durationUnit: params.durationUnit || 'day',
       splitBy: params.splitBy || 1,
       splitUnit: params.splitUnit || 'day',
 

@@ -3,6 +3,7 @@ import moment from 'moment'
 
 import InfiniteTable from 'components/common/InfiniteTable'
 import {renderEntity} from 'components/common/CellRenderers'
+import { dateFormat } from 'shared/Global'
 
 export default class IncidentTable extends React.Component {
   constructor (props) {
@@ -38,6 +39,11 @@ export default class IncidentTable extends React.Component {
   }
 
   render () {
+    const {duration, durationUnit} = this.props
+
+    const dateFrom = moment().add(-duration, `${durationUnit}s`).startOf(durationUnit).format(dateFormat)
+    const dateTo = moment().endOf(durationUnit).format(dateFormat)
+
     return (
       <div className="flex-1 table-no-gap">
         <InfiniteTable
@@ -45,7 +51,7 @@ export default class IncidentTable extends React.Component {
           cells={this.cells}
           ref="table"
           rowMetadata={{'key': 'id'}}
-          params={this.props.params}
+          params={{...this.props.params, dateFrom, dateTo}}
           showTableHeading={false}
         />
       </div>
