@@ -201,17 +201,17 @@ fabric.Device = fabric.util.createClass(fabric.Object, {
     me.isLoadingSprite = true;
 
     //Loading Image
-    fabric.Sprite.fromURL('/images/loading-sprite.gif', function(sprite){
-      me.loadingSprite = sprite;
-      sprite.set({
-        visible: false,
-        selectable: false,
-        originX: 'center',
-        originY: 'center',
-      });
-      me.updateLoadingImage();
-      me.canvas.add(sprite);
-    });
+    // fabric.Sprite.fromURL('/images/loading-sprite.gif', function(sprite){
+    //   me.loadingSprite = sprite;
+    //   sprite.set({
+    //     visible: false,
+    //     selectable: false,
+    //     originX: 'center',
+    //     originY: 'center',
+    //   });
+    //   me.updateLoadingImage();
+    //   me.canvas.add(sprite);
+    // });
   },
 
   addUploading: function(){
