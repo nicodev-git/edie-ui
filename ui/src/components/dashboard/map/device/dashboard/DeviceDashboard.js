@@ -224,7 +224,8 @@ export default class DeviceDashboard extends React.Component {
         {this.renderAddMenu()}
         <ResponsiveReactGridLayout
           className="layout" cols={{lg: 3, md: 3, sm: 2, xs: 1, xxs: 1}} rowHeight={350}
-          isResizable={false} margin={[0, 0]}>
+          isResizable={false} margin={[10, 10]}
+          style={{marginTop: -10}}>
           {gauges.map(p => this.renderGauge(p))}
         </ResponsiveReactGridLayout>
 
