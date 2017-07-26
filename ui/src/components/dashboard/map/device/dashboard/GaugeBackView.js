@@ -1,13 +1,13 @@
 import React from 'react'
 import {RaisedButton, SelectField, MenuItem, TextField} from 'material-ui'
 
-import {gaugeTypes} from 'shared/Global'
+import {gaugeTypes, gaugeDurationTypes} from 'shared/Global'
 
 export default class GaugeBackView extends React.Component {
   render () {
     const {
-      splitBy, splitUnit, selectedSearch, searchList, graphType, name,
-      onChangeSplitBy, onChangeSplitUnit, onChangeSearch, onChangeGraphType, onChangeName
+      duration, splitBy, splitUnit, selectedSearch, searchList, graphType, name,
+      onChangeDuration, onChangeSplitBy, onChangeSplitUnit, onChangeSearch, onChangeGraphType, onChangeName
     } = this.props
     return (
       <div>
@@ -20,14 +20,10 @@ export default class GaugeBackView extends React.Component {
             className="form-control input-sm select-custom" value={duration}
             style={{color: 'black'}}
             onChange={onChangeDuration}>
-            <option value="1">&nbsp;1</option>
-            <option value="2">&nbsp;2</option>
-            <option value="3">&nbsp;3</option>
-            <option value="5">&nbsp;5</option>
-            <option value="10">10</option>
-            <option value="15">15</option>
-            <option value="30">30</option>
-          </select>
+            {gaugeDurationTypes.map(p =>
+              <option key={p.value} value={p.value}>{p.label}</option>
+            )}
+          </select>&nbsp;
           With Resolution
           <select
             className="form-control input-sm select-custom" value={splitBy}
