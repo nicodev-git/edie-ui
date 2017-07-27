@@ -103,7 +103,6 @@ class MonitorWizard extends React.Component {
     //Merge required params
     this.getRequiredParamKeys().forEach(key => {
       props.params[key] = props[key]
-      delete props[key]
     })
 
     if (canAddTags) props.tags = monitorTags || []

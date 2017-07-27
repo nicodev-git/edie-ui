@@ -24,7 +24,7 @@ const paramLabels = {
 }
 
 const durationOptions = [1,2,3,5,10,15,20,25].map(p => ({
-  label: `${p}`, value: `${p}`
+  label: `${p}`, value: p
 }))
 
 const durationUnits = 'days months years'.split(' ').map(p => ({
@@ -67,7 +67,7 @@ export default class MonitorWizardView extends React.Component {
             <CardText>
               <Field name="name" floatingLabel="Name" component={FormInput} className="margin-sm-left margin-sm-right"/>
               {requiredParamKeys.map(k =>
-                <Field key={k} name={k} floatingLabel={paramLabels[k] || k} component={FormInput} className="margin-sm-left margin-sm-right"/>
+                k !== 'remove_after' && <Field key={k} name={k} floatingLabel={paramLabels[k] || k} component={FormInput} className="margin-sm-left margin-sm-right"/>
               )}
 
               <div>
