@@ -23,6 +23,14 @@ const paramLabels = {
   'timeout': 'Timeout (seconds)'
 }
 
+const durationOptions = [1,2,3,5,10].map(p => ({
+  label: `${p}`, value: `${p}`
+}))
+
+const durationUnits = 'days weeks months'.split(' ').map(p => ({
+  label: p, value: p
+}))
+
 export default class MonitorWizardView extends React.Component {
   render () {
     const {header, onSubmit, onHide, paramEditModal, tagsView, credPicker, paramsView,
@@ -61,6 +69,16 @@ export default class MonitorWizardView extends React.Component {
               {requiredParamKeys.map(k =>
                 <Field key={k} name={k} floatingLabel={paramLabels[k] || k} component={FormInput} className="margin-sm-left margin-sm-right"/>
               )}
+
+              <div>
+                <div className="inline-block valign-middle">Add remove events after</div>
+                <Field
+                  name="remove_after" component={FormSelect} options={durationOptions}
+                  style={{width: 80}} className="valign-middle" labelStyle={{paddingLeft: 15}}/>
+                <Field
+                  name="remove_after_unit" component={FormSelect} options={durationUnits}
+                  style={{width: 120}} className="valign-middle"/>
+              </div>
 
               <div className={showAgentType ? '' : 'hidden'}>
                 <Field name="agentType" component={RadioButtonGroup} className="margin-md-top">
