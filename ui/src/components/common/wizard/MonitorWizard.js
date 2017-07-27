@@ -79,6 +79,19 @@ class MonitorWizard extends React.Component {
       values.checkinterval = values.checkinterval * 1000
     }
 
+    if (values.remove_after !== null) {
+      switch (values.remove_after_unit) {
+        case 'months':
+          params.remove_after = values.remove_after * 30
+          break
+        case 'years':
+          params.remove_after = values.remove_after * 365
+          break
+        default:
+          params.remove_after = values.remove_after
+      }
+    }
+
     const props = assign(
       {},
       values,

@@ -23,11 +23,11 @@ const paramLabels = {
   'timeout': 'Timeout (seconds)'
 }
 
-const durationOptions = [1,2,3,5,10].map(p => ({
+const durationOptions = [1,2,3,5,10,15,20,25].map(p => ({
   label: `${p}`, value: `${p}`
 }))
 
-const durationUnits = 'days weeks months'.split(' ').map(p => ({
+const durationUnits = 'days months years'.split(' ').map(p => ({
   label: p, value: p
 }))
 
