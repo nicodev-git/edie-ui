@@ -53,7 +53,11 @@ export default class MainSettings extends Component {
   }
 
   onClickSync () {
-    this.props.syncData()
+    this.props.syncData(false)
+  }
+
+  onClickSyncAll () {
+    this.props.syncData(true)
   }
 
   onClickImportSync () {
@@ -114,6 +118,8 @@ export default class MainSettings extends Component {
         <div className="padding-md-top">
           <label className="margin-sm-right">Update The System</label>
           <RaisedButton label="Update" onTouchTap={this.onClickSync.bind(this)}/>
+
+          <RaisedButton label="Sync All" onTouchTap={this.onClickSyncAll.bind(this)} className="margin-lg-left"/>
         </div>
 
         <div className="padding-md-top">

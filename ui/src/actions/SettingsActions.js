@@ -471,10 +471,10 @@ export const fetchDeviceCategories = () => {
   }
 }
 
-export const syncData = () => {
+export const syncData = (full) => {
   return dispatch => {
     dispatch({type: SYNC_DATA, data: null})
-    axios.get(`${ROOT_URL}/pullSyncDataFromImadmin`).then(response => {
+    axios.get(`${ROOT_URL}/pullSyncDataFromImadmin?full=${full}`).then(response => {
       dispatch({type: SYNC_DATA, data: response.data})
     }).catch(error => apiError(dispatch, error))
   }
