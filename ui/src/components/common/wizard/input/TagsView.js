@@ -8,9 +8,10 @@ export default class TagsView extends React.Component {
   onClickAddTag () {
     this.props.showMonitorTagModal(true)
   }
-  onPickTag (tag) {
+  onPickTag (tags) {
     const {monitorTags} = this.props
-    this.props.updateMonitorTags([...monitorTags, tag.name])
+    const selected = tags.map(p => p.name).filter(p => monitorTags.indexOf(p) < 0)
+    this.props.updateMonitorTags([...monitorTags, ...selected])
   }
   onClickDeleteTag (index) {
     const {monitorTags} = this.props
@@ -20,7 +21,7 @@ export default class TagsView extends React.Component {
     if (!this.props.monitorTagModalOpen) return null
     return (
       <TagPickerModal
-        onPick={this.onPickTag.bind(this)}
+        onPickMulti={this.onPickTag.bind(this)}
         onClickClose={() => this.props.showMonitorTagModal(false)}/>
     )
   }

@@ -25,7 +25,7 @@ const paramLabels = {
 
 export default class MonitorWizardView extends React.Component {
   render () {
-    const {header, onSubmit, onHide, paramEditModal, credPicker, paramsView,
+    const {header, onSubmit, onHide, paramEditModal, tagsView, credPicker, paramsView,
       requiredParamKeys,
       credentials,
       showAgentType, collectors, agent,
@@ -80,10 +80,10 @@ export default class MonitorWizardView extends React.Component {
           </Card>
 
           {paramsView}
+          {tagsView}
 
           <Field name="enabled" component={FormCheckbox} type="checkbox" label="Enabled" className="margin-md-top margin-sm-bottom"/>
 
-          {/*{tagsView}*/}
           <div className="form-buttons">
             <RaisedButton type="submit" label={isEdit ? 'Save' : 'Add'}/>
           </div>
