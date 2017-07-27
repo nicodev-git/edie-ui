@@ -216,7 +216,7 @@ export default class DeviceDashboard extends React.Component {
     const layout = w => gauges.map((p, i) => ({
       i: p.id,
       x: i % w, y: parseInt(i / w, 10),
-      w: 1, h: 1
+      w: p.templateName === 'Incident Table' ? Math.min(2, w) : 1, h: 1
     }))
     const cols = {lg: 3, md: 2, sm: 2, xs: 1, xxs: 1}
     const layouts = {

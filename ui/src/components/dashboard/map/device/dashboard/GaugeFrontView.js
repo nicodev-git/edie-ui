@@ -10,6 +10,7 @@ import BarChart from './display/BarChart'
 import NormalTable from './display/NormalTable'
 import LiquidView from './display/LiquidView'
 import AccelMeterView from "./display/AccelMeterView"
+import IncidentTable from "./display/IncidentTable"
 
 const sampleData = []
 
@@ -59,6 +60,12 @@ export default class GaugeView extends React.Component {
         const {duration, durationUnit} = this.props
         return (
           <NormalTable params={searchParams} duration={duration} durationUnit={durationUnit}/>
+        )
+      }
+      case 'Incident Table': {
+        const {duration, durationUnit} = this.props
+        return (
+          <IncidentTable params={searchParams} duration={duration} durationUnit={durationUnit}/>
         )
       }
       default:
