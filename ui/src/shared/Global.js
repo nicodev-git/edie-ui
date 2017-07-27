@@ -229,6 +229,8 @@ export const gaugeTypes = [{
 }, {
   label: 'Liquid', value: 'liquid'
 }, {
+  label: 'Accel', value: 'accel'
+}, {
   label: 'Incident Table', value: 'table'
 }]
 

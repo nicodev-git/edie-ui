@@ -9,6 +9,7 @@ import LineChart from './display/LineChart'
 import BarChart from './display/BarChart'
 import IncidentTable from './display/IncidentTable'
 import LiquidView from './display/LiquidView'
+import AccelMeterView from "./display/AccelMeterView"
 
 const sampleData = []
 
@@ -49,6 +50,10 @@ export default class GaugeView extends React.Component {
       case 'liquid':
         return (
           <LiquidView title={gauge.name}/>
+        )
+      case 'accel':
+        return (
+          <AccelMeterView title={gauge.name}/>
         )
       case 'table': {
         const {duration, durationUnit} = this.props
