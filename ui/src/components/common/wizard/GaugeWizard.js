@@ -28,7 +28,6 @@ class GaugeWizard extends React.Component {
         params[p.key] = p.value
       })
     }
-    params.graph = formProps.graph
     params.savedSearch = formProps.savedSearch
 
     const props = assign(
