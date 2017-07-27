@@ -115,7 +115,6 @@ export default class DeviceDashboard extends React.Component {
       dashboard: tpl.dashboard
     }
 
-
     this.showAddWizard(options, (id, name, data) => {
 
     })
