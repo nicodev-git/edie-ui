@@ -7,7 +7,7 @@ import RefreshOverlay from 'components/common/RefreshOverlay'
 
 import LineChart from './display/LineChart'
 import BarChart from './display/BarChart'
-import IncidentTable from './display/IncidentTable'
+import NormalTable from './display/NormalTable'
 import LiquidView from './display/LiquidView'
 import AccelMeterView from "./display/AccelMeterView"
 
@@ -55,10 +55,10 @@ export default class GaugeView extends React.Component {
         return (
           <AccelMeterView title={gauge.name}/>
         )
-      case 'Incident Table': {
+      case 'Table': {
         const {duration, durationUnit} = this.props
         return (
-          <IncidentTable params={searchParams} duration={duration} durationUnit={durationUnit}/>
+          <NormalTable params={searchParams} duration={duration} durationUnit={durationUnit}/>
         )
       }
       default:
