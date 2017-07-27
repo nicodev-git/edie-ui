@@ -29,7 +29,7 @@ export default class DeviceDashboard extends React.Component {
 
   getGauges () {
     const {mapDevices} = this.props
-    return mapDevices.filter(p => p.params && !!p.params.graph)
+    return mapDevices.filter(p => p.params && p.params.dashboard)
   }
 
   getUserSearchOptions () {

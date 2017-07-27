@@ -29,6 +29,7 @@ class GaugeWizard extends React.Component {
       })
     }
     params.savedSearch = formProps.savedSearch
+    params.dashboard = true
 
     const props = assign(
       {},

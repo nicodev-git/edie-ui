@@ -36,26 +36,26 @@ export default class GaugeView extends React.Component {
     this.props.onClickFlip()
   }
 
-  renderChart (graphType, chartData, searchParams) {
+  renderChart (chartData, searchParams) {
     const {gauge} = this.props
-    switch (graphType) {
-      case 'line':
+    switch (gauge.templateName) {
+      case 'Line Chart':
         return (
           <LineChart chartData={chartData} />
         )
-      case 'bar':
+      case 'Bar Chart':
         return (
           <BarChart chartData={chartData} />
         )
-      case 'liquid':
+      case 'Liquid':
         return (
           <LiquidView title={gauge.name}/>
         )
-      case 'accel':
+      case 'Accelerometer':
         return (
           <AccelMeterView title={gauge.name}/>
         )
-      case 'table': {
+      case 'Incident Table': {
         const {duration, durationUnit} = this.props
         return (
           <IncidentTable params={searchParams} duration={duration} durationUnit={durationUnit}/>
@@ -79,8 +79,8 @@ export default class GaugeView extends React.Component {
   }
 
   renderDesc () {
-    const {searchParams, graphType, splitBy, splitUnit} = this.props
-    if (graphType !== 'line' && graphType !== 'bar') return null
+    const {searchParams, gauge, splitBy, splitUnit} = this.props
+    if (gauge.templateName !== 'Line Chart' && gauge.templateName !== 'Bar Chart') return null
     return (
       <div>
         <div className="pull-left form-inline">
@@ -93,7 +93,7 @@ export default class GaugeView extends React.Component {
 
   renderFront () {
     const {
-      searchParams, graphType, searchRecordCounts
+      searchParams, searchRecordCounts
     } = this.props
 
     const chartData = {
@@ -110,7 +110,7 @@ export default class GaugeView extends React.Component {
         <div className="flex-vertical flex-1" onMouseEnter={this.onMouseEnter.bind(this)} onMouseLeave={this.onMouseLeave.bind(this)}>
           {this.renderDesc()}
           <div className="flex-1 flex-vertical">
-            {this.renderChart(graphType, chartData, searchParams)}
+            {this.renderChart(chartData, searchParams)}
             {this.renderInfoIcon()}
           </div>
           {this.props.loading ? <RefreshOverlay /> : null}

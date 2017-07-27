@@ -27,7 +27,6 @@ export default class GaugePanel extends React.Component {
       splitUnit: params.splitUnit || 'day',
 
       selectedSearch: params.savedSearch,
-      graphType: params.graph,
       searchParams: props.searchParams,
       name: props.gauge.name,
 
@@ -83,12 +82,6 @@ export default class GaugePanel extends React.Component {
     }
   }
 
-  onChangeGraphType (e, index, value) {
-    this.setState({
-      graphType: value
-    })
-  }
-
   onChangeName (e, value) {
     this.setState({
       name: value
@@ -128,7 +121,6 @@ export default class GaugePanel extends React.Component {
         durationUnit: this.state.durationUnit,
         splitBy: this.state.splitBy,
         splitUnit: this.state.splitUnit,
-        graph: this.state.graphType,
         savedSearch: this.state.selectedSearch
       }
     }
@@ -158,7 +150,6 @@ export default class GaugePanel extends React.Component {
         onChangeSplitBy={this.onChangeSplitBy.bind(this)}
         onChangeSplitUnit={this.onChangeSplitUnit.bind(this)}
         onChangeSearch={this.onChangeSearch.bind(this)}
-        onChangeGraphType={this.onChangeGraphType.bind(this)}
         onChangeName={this.onChangeName.bind(this)}
         onChangeDuration={this.onChangeDuration.bind(this)}
         onChangeDurationUnit={this.onChangeDurationUnit.bind(this)}
