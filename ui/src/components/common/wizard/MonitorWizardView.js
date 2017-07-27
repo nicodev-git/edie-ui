@@ -71,10 +71,10 @@ export default class MonitorWizardView extends React.Component {
               )}
 
               <div>
-                <div className="inline-block valign-middle">Add remove events after</div>
+                <div className="inline-block valign-middle" style={{fontSize: '16px', paddingLeft: 7}}>Add remove events after</div>
                 <Field
                   name="remove_after" component={FormSelect} options={durationOptions}
-                  style={{width: 80}} className="valign-middle" labelStyle={{paddingLeft: 15}}/>
+                  style={{width: 80, paddingLeft: 15}} className="valign-middle"/>
                 <Field
                   name="remove_after_unit" component={FormSelect} options={durationUnits}
                   style={{width: 120}} className="valign-middle"/>
