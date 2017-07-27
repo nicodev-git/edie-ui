@@ -37,7 +37,7 @@ function getRemoveAfter (monitor) {
     remove_after_unit: 'days'
   }
   if (!monitor || !monitor.params) return values
-  const {remove_after} = parseInt(monitor.params || 1, 10)
+  const remove_after = parseInt(monitor.params.remove_after || 1, 10)
   if (!remove_after || isNaN(remove_after)) return values
   if (remove_after >= 365) {
     values.remove_after = remove_after / 365
