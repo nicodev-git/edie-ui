@@ -144,9 +144,9 @@ export default class DeviceDashboard extends React.Component {
       templateName: options.templateName
     }
 
-    let monitors = null
-    if (!isGroup(device) && options.templateName === 'Monitor') {
-      monitors = device.monitors.map(p => ({
+    let monitors = []
+    if (!isGroup(device)) {
+      monitors = (device.monitors || []).map(p => ({
         label: p.name,
         value: p.uid
       }))
@@ -154,6 +154,7 @@ export default class DeviceDashboard extends React.Component {
 
     return (
       <GaugeWizardContainer
+        templateName={options.templateName}
         onClose={() => {
           this.setState({deviceWizardVisible: false})
           closeCallback && closeCallback()
