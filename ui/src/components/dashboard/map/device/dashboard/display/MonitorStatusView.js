@@ -20,12 +20,12 @@ export default class MonitorStatusView extends React.Component {
   render () {
     const {monitor} = this.props
     const isUp = monitor.status === 'UP'
-    const imgName = `/images/dashboard/map/triangle-${isUp ? 'up' : 'down'}.png`
+    const imgName = `/resources/images/dashboard/map/triangle-${isUp ? 'up' : 'down'}.png`
     return (
       <div className="text-center" style={containerStyle}>
-        <div className={isUp ? 'text-success' : 'text-danger'} style={iconStyle}>
-          <img src={imgName} width="70"></img>
-          <span className="margin-sm-left">{isUp ? 'Up' : 'Down'}</span>
+        <div className={`nowrap ${isUp ? 'text-success' : 'text-danger'}`} style={iconStyle}>
+          <img src={imgName} width="60" alt="" className="valign-top" style={{marginTop: 20}}/>
+          <span className="margin-md-left">{isUp ? 'Up' : 'Down'}</span>
         </div>
         {
           isUp ? (
