@@ -210,7 +210,8 @@ class Map extends React.Component {
     if (isGroup(obj.data)) {
       this.props.history.push(`/device/${obj.data.id}/dashboard`)
     } else {
-      this.props.history.push(`/device/${obj.data.id}/main`)
+      // this.props.history.push(`/device/${obj.data.id}/main`)
+      this.props.history.push(`/device/${obj.data.id}/dashboard`)
     }
     ReactTooltip.hide(findDOMNode(this.refs.deviceTooltip))
   }
