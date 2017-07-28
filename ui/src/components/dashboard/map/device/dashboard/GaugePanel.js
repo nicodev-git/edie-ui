@@ -103,7 +103,7 @@ export default class GaugePanel extends React.Component {
   onClickDelete (gauge) {
     showConfirm('Click OK to remove.', btn => {
       if (btn !== 'ok') return
-      this.props.removeGroupGauge(gauge, this.props.group)
+      this.props.removeDeviceGauge(gauge, this.props.device)
     })
   }
 
@@ -121,7 +121,7 @@ export default class GaugePanel extends React.Component {
     }
 
     this.fetchRecordCount()
-    this.props.updateGroupGauge(gauge, this.props.group)
+    this.props.updateDeviceGauge(gauge, this.props.device)
   }
 
   getFlipClass () {

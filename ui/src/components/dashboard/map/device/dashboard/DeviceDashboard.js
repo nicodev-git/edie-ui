@@ -125,7 +125,7 @@ export default class DeviceDashboard extends React.Component {
 
   onFinishAddWizard (callback, res, params, url) {
     params.id = guid()
-    this.props.addGroupGauge(params, this.props.device)
+    this.props.addDeviceGauge(params, this.props.device)
   }
 
   /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -164,9 +164,9 @@ export default class DeviceDashboard extends React.Component {
     return (
       <div key={p.id}>
         <GaugePanel
-          group={this.props.device} gauge={p} searchParams={searchParams} searchList={this.getSearchList()}
-          updateGroupGauge={this.props.updateGroupGauge}
-          removeGroupGauge={this.props.removeGroupGauge}
+          device={this.props.device} gauge={p} searchParams={searchParams} searchList={this.getSearchList()}
+          updateDeviceGauge={this.props.updateDeviceGauge}
+          removeDeviceGauge={this.props.removeDeviceGauge}
           style={{width: '100%', height: '100%'}}
         />
       </div>

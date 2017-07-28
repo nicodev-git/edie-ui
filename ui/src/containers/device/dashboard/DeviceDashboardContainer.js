@@ -5,9 +5,9 @@ import { connect } from 'react-redux'
 
 import {
   fetchSysSearchOptions,
-  addGroupGauge,
-  updateGroupGauge,
-  removeGroupGauge,
+  addDeviceGauge,
+  updateDeviceGauge,
+  removeDeviceGauge,
 
   fetchGauges
 } from 'actions'
@@ -32,9 +32,9 @@ export default connect(
     sysSearchOptions: state.search.sysSearchOptions
   }), {
     fetchSysSearchOptions,
-    addGroupGauge,
-    updateGroupGauge,
-    removeGroupGauge,
+    addDeviceGauge,
+    updateDeviceGauge,
+    removeDeviceGauge,
 
     fetchGauges
   }

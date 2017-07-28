@@ -888,34 +888,34 @@ export const removeGroupLine = (entity) => {
   }
 }
 
-export const addGroupGauge = (props, group) => {
+export const addDeviceGauge = (props, group) => {
   return dispatch => {
-    dispatch(updateGroup({
+    dispatch(updateMapDevice({
       ...group,
       gauges: [...(group.gauges || []), props]
     }))
   }
 }
 
-export const updateGroupGauge = (props, group) => {
+export const updateDeviceGauge = (props, group) => {
   return dispatch => {
-    dispatch(updateGroup({
+    dispatch(updateMapDevice({
       ...group,
       gauges: (group.gauges || []).map(p => p.id === props.id ? props : p)
     }))
   }
 }
 
-export const removeGroupGauge = (props, group) => {
+export const removeDeviceGauge = (props, group) => {
   return dispatch => {
-    dispatch(updateGroup({
+    dispatch(updateMapDevice({
       ...group,
       gauges: (group.gauges || []).filter(p => p.id !== props.id)
     }))
   }
 }
 
-export const updateGroup = (entity) => {
+const updateMapDevice = (entity) => {
   return dispatch => {
     axios.put(entity._links.self.href, entity).then(response => {
       dispatch({type: UPDATE_MAP_DEVICE, data: response.data})
