@@ -253,3 +253,7 @@ a, a:focus, a:hover {
 .ml-dialog {
     margin-left: 24px;
 }
+
+.mr-dialog {
+    margin-right: 24px;
+}
