@@ -1,9 +1,10 @@
 import React from 'react'
 import moment from 'moment'
+import ReactTooltip from 'react-tooltip'
 
 import InfiniteTable from 'components/common/InfiniteTable'
 import {renderEntity} from 'components/common/CellRenderers'
-import { dateFormat } from 'shared/Global'
+import { dateFormat, getSeverityIcon } from 'shared/Global'
 
 export default class IncidentTable extends React.Component {
   constructor (props) {
@@ -13,29 +14,73 @@ export default class IncidentTable extends React.Component {
       total: 0
     }
     this.cells = [{
-      'displayName': ' ',
-      'columnName': 'entity.id',
-      'customComponent': (p) => {
-        const {rowData} = p
-        const {entity} = rowData
-
-        if (!entity) return <span/>
-        const highlighted = { ...entity }
-
-        const timeField = entity.startTimestamp ? 'startTimestamp' : 'timestamp'
-        delete highlighted[timeField]
-
-        const {severity, ...others} = highlighted
-        const data = {
-          type: rowData.type,
-          [timeField]: moment(entity[timeField]).fromNow(),
-          severity,
-          ...others
-        }
-        if (!severity) delete data.severity
-        return <div className="padding-sm bt-gray">{renderEntity(data)}</div>
+      'displayName': 'Severity',
+      'columnName': 'severity',
+      'cssClassName': 'text-center width-80',
+      'customComponent': (props) => {
+        return <span>{getSeverityIcon(props.data)}</span>
       }
-    }]
+    }, {
+      'displayName': 'Date/Time',
+      'columnName': 'startTimestamp',
+      'cssClassName': 'nowrap text-center width-180',
+      'customComponent': (props) => {
+        const {data} = props
+        if (!data) return <span/>
+        return (
+          <span data-tip={moment(new Date(data)).format(dateFormat)}>
+            {moment(new Date(data)).fromNow()}
+          </span>
+        )
+      }
+    }, {
+      'displayName': 'System',
+      'columnName': 'devicename',
+      'cssClassName': 'width-180'
+    }, {
+      'displayName': 'Workflow',
+      'columnName': 'workflow',
+      'cssClassName': 'width-180'
+    }, {
+      'displayName': 'Description',
+      'columnName': 'description',
+      'weight': 1
+    }/*, {
+      'displayName': 'Actions',
+      'columnName': 'actions',
+      'cssClassName': 'width-180',
+      'customComponent': (p) => {
+        const row = p.rowData
+        // setTimeout(() => {
+        //   ReactTooltip.rebuild()
+        // }, 1)
+        return (
+          <div className = "table-icons-container">
+            <div onClick={() => { this.props.ackIncident(row) }}>
+              {row.acknowledged ? thumbup : thumpdown}
+            </div>
+
+            <div onClick={() => this.onClickFixIncident(row)}>
+              {row.fixed ? done : notdone}
+            </div>
+
+            <div onClick={showIncidentRaw.bind(null, row)}>
+              {rawtext}
+            </div>
+
+            {
+              (row.fixed && !row.whathappened)
+                ? <div
+                  onClick={this.showIncidentComments.bind(this, row)}>
+                  {reason}
+                </div>
+                : null
+            }
+
+          </div>
+        )
+      }
+    }*/]
   }
 
   render () {
@@ -54,6 +99,7 @@ export default class IncidentTable extends React.Component {
           params={{...this.props.params, dateFrom, dateTo}}
           showTableHeading={false}
         />
+        <ReactTooltip />
       </div>
     )
   }
