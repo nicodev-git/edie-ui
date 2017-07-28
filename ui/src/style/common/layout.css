@@ -68,6 +68,10 @@ body {
     color: firebrick;
 }
 
+.text-success {
+    color: #5cb85c;
+}
+
 .text-ellipsis {
     white-space: nowrap;
     overflow: hidden;

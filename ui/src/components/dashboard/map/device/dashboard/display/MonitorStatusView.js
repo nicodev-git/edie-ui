@@ -1,11 +1,37 @@
 import React from 'react'
+import moment from 'moment'
+
+const iconStyle = {
+  fontSize: '70px'
+}
+
+const containerStyle = {
+  position: 'absolute',
+  left: '50%',
+  top: '50%',
+  transform: 'translate(-50%, -50%)'
+}
+
+const labelStyle = {
+  fontSize: '20px'
+}
 
 export default class MonitorStatusView extends React.Component {
   render () {
     const {monitor} = this.props
+    const isUp = monitor.status === 'UP'
     return (
-      <div>
-        {monitor.name}: {monitor.status}
+      <div className="text-center" style={containerStyle}>
+        <div className={isUp ? 'text-success' : 'text-danger'} style={iconStyle}>
+          {isUp ? '▲' : '▼'}{monitor.status}
+        </div>
+        {
+          isUp ? (
+            <div style={labelStyle}>Last down {moment(monitor.lastfalure).fromNow()}</div>
+          ) : (
+            <div style={labelStyle}>Last up {moment(monitor.lastsuccess).fromNow()}</div>
+          )
+        }
       </div>
     )
   }
