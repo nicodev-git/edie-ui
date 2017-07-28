@@ -21,22 +21,12 @@ class GaugeWizard extends React.Component {
     return []
   }
   handleFormSubmit (formProps) {
-    const { extraParams, onFinish, editParams } = this.props
-    let params = {}
-    if (editParams) {
-      editParams.forEach(p => {
-        params[p.key] = p.value
-      })
-    }
-    params.savedSearch = formProps.savedSearch
-    params.dashboard = true
+    const { extraParams, onFinish } = this.props
 
     const props = assign(
       {},
       formProps,
-      extraParams, {
-        params
-      }
+      extraParams
     )
     console.log(props)
     this.closeModal(true)

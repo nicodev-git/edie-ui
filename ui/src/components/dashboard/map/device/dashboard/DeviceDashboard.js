@@ -7,7 +7,7 @@ import {Responsive, WidthProvider} from 'react-grid-layout'
 import GaugePanel from './GaugePanel'
 import GaugeWizardContainer from 'containers/shared/wizard/GaugeWizardContainer'
 import { extImageBaseUrl } from 'shared/Global'
-import { wizardConfig, getDeviceType } from 'components/common/wizard/WizardConfig'
+import { wizardConfig } from 'components/common/wizard/WizardConfig'
 
 import {showAlert} from 'components/common/Alert'
 
@@ -98,19 +98,12 @@ export default class DeviceDashboard extends React.Component {
 
   onClickMenuItem (tpl) {
     console.log(tpl)
-    const pos = this.getNewPosition()
 
     const options = {
       title: tpl.name,
-      type: getDeviceType(tpl.name),
       imgName: tpl.image,
       imageUrl: `/externalpictures?name=${tpl.image}`,
-      x: pos.x,
-      y: pos.y,
-      width: 50,
-      height: 50,
 
-      monitors: [],
       templateName: tpl.name,
       dashboard: tpl.dashboard
     }
@@ -135,7 +128,7 @@ export default class DeviceDashboard extends React.Component {
   }
 
   onFinishAddWizard (callback, res, params, url) {
-    this.props.addGroupDevice(params, url)
+    // this.props.addGroupDevice(params, url)
   }
 
   /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -150,13 +143,8 @@ export default class DeviceDashboard extends React.Component {
     const {options, callback, closeCallback} = this.state.deviceWizardConfig
 
     const extra = {
-      x: options.x,
-      y: options.y,
-      width: options.width,
-      height: options.height,
       image: options.imgName,
-      templateName: options.templateName,
-      groupid: this.props.device.id
+      templateName: options.templateName
     }
 
     return (

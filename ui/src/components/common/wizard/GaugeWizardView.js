@@ -10,7 +10,7 @@ export default class GaugeWizardView extends React.Component {
       <Dialog open title="Gauge" onRequestClose={onHide} contentStyle={{width: 585}}>
         <form onSubmit={onSubmit}>
           <Field name="name" component={FormInput} floatingLabel="Name" className="valign-top"/>
-          <Field name="savedSearch" component={FormSelect} floatingLabel="Saved Search" options={searchList} className="valign-top ml-dialog"/>
+          <Field name="savedSearchId" component={FormSelect} floatingLabel="Saved Search" options={searchList} className="valign-top ml-dialog"/>
           <SubmitBlock name="Add" onClick={onHide} />
         </form>
       </Dialog>
