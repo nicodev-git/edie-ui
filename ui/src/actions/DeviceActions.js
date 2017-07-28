@@ -68,7 +68,7 @@ import {
   OPEN_WF_ACTION_MODAL,
   CLOSE_WF_ACTION_MODAL,
 
-  // UPDATE_MAP_DEVICE,
+  UPDATE_MAP_DEVICE,
 
   FIX_ALL_DEVICE_INCIDENTS,
 
@@ -884,6 +884,23 @@ export const removeGroupLine = (entity) => {
   return (dispatch) => {
     axios.delete(entity._links.self.href).then(() => {
       dispatch({type: REMOVE_GROUP_LINE, data: entity})
+    }).catch(error => apiError(dispatch, error))
+  }
+}
+
+export const addGroupGauge = (props, group) => {
+  return dispatch => {
+    dispatch(updateGroup({
+      ...group,
+      gauges: [...group.gauges, props]
+    }))
+  }
+}
+
+export const updateGroup = (entity) => {
+  return dispatch => {
+    axios.put(entity._links.self.href, entity).then(response => {
+      dispatch({type: UPDATE_MAP_DEVICE, data: response.data})
     }).catch(error => apiError(dispatch, error))
   }
 }
