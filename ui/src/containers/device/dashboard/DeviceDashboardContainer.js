@@ -7,6 +7,7 @@ import {
   fetchSysSearchOptions,
   addGroupGauge,
   updateGroupGauge,
+  removeGroupGauge,
 
   fetchGauges
 } from 'actions'
@@ -33,6 +34,7 @@ export default connect(
     fetchSysSearchOptions,
     addGroupGauge,
     updateGroupGauge,
+    removeGroupGauge,
 
     fetchGauges
   }

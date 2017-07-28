@@ -103,7 +103,7 @@ export default class GaugePanel extends React.Component {
   onClickDelete (gauge) {
     showConfirm('Click OK to remove.', btn => {
       if (btn !== 'ok') return
-      this.props.removeGroupGauge(gauge)
+      this.props.removeGroupGauge(gauge, this.props.group)
     })
   }
 

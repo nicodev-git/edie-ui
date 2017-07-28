@@ -906,6 +906,15 @@ export const updateGroupGauge = (props, group) => {
   }
 }
 
+export const removeGroupGauge = (props, group) => {
+  return dispatch => {
+    dispatch(updateGroup({
+      ...group,
+      gauges: (group.gauges || []).filter(p => p.id !== props.id)
+    }))
+  }
+}
+
 export const updateGroup = (entity) => {
   return dispatch => {
     axios.put(entity._links.self.href, entity).then(response => {
