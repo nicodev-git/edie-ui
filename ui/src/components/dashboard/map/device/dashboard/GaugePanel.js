@@ -35,7 +35,12 @@ export default class GaugePanel extends React.Component {
     }
   }
   componentWillMount () {
-    this.fetchRecordCount()
+    const {templateName} = this.props.gauge
+    if (['Line Chart', 'Pie Chart', 'Bar Chart'].indexOf(templateName) >= 0) {
+      this.fetchRecordCount()
+    } else {
+      this.setState({loading: false})
+    }
   }
   fetchRecordCount () {
     const {duration, durationUnit, splitBy, splitUnit, searchParams} = this.state

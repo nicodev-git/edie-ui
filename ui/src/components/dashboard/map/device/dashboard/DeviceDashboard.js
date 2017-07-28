@@ -6,7 +6,7 @@ import {Responsive, WidthProvider} from 'react-grid-layout'
 
 import GaugePanel from './GaugePanel'
 import GaugeWizardContainer from 'containers/shared/wizard/GaugeWizardContainer'
-import { extImageBaseUrl, guid } from 'shared/Global'
+import { extImageBaseUrl, guid, isGroup } from 'shared/Global'
 import { wizardConfig } from 'components/common/wizard/WizardConfig'
 
 import {showAlert} from 'components/common/Alert'
@@ -137,21 +137,29 @@ export default class DeviceDashboard extends React.Component {
   renderDeviceWizard () {
     if (!this.state.deviceWizardVisible) return null
 
+    const {device} = this.props
     const {options, callback, closeCallback} = this.state.deviceWizardConfig
 
     const extra = {
       templateName: options.templateName
     }
 
+    let monitors = null
+    if (!isGroup(device) && options.templateName === 'Monitor') {
+      monitors = device.monitors.map(p => ({
+        label: p.name,
+        value: p.uid
+      }))
+    }
+
     return (
       <GaugeWizardContainer
-        deviceType={options.type}
         onClose={() => {
           this.setState({deviceWizardVisible: false})
           closeCallback && closeCallback()
         }}
         title={options.title}
-        monitors={options.monitors}
+        monitors={monitors}
         extraParams={extra}
         onFinish={this.onFinishAddWizard.bind(this, callback)}
       />

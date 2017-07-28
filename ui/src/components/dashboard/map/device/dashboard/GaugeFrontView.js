@@ -1,6 +1,7 @@
 import React from 'react'
 import moment from 'moment'
 import InfoIcon from 'material-ui/svg-icons/action/info'
+import {findIndex} from 'lodash'
 
 import {dateFormat} from 'shared/Global'
 import RefreshOverlay from 'components/common/RefreshOverlay'
@@ -9,8 +10,9 @@ import LineChart from './display/LineChart'
 import BarChart from './display/BarChart'
 import NormalTable from './display/NormalTable'
 import LiquidView from './display/LiquidView'
-import AccelMeterView from "./display/AccelMeterView"
-import IncidentTable from "./display/IncidentTable"
+import AccelMeterView from './display/AccelMeterView'
+import IncidentTable from './display/IncidentTable'
+import MonitorStatusView from './display/MonitorStatusView'
 
 const sampleData = []
 
@@ -38,7 +40,7 @@ export default class GaugeView extends React.Component {
   }
 
   renderChart (chartData, searchParams) {
-    const {gauge} = this.props
+    const {gauge, device} = this.props
     switch (gauge.templateName) {
       case 'Line Chart':
         return (
@@ -68,6 +70,14 @@ export default class GaugeView extends React.Component {
           <IncidentTable params={searchParams} duration={duration} durationUnit={durationUnit}/>
         )
       }
+      case 'MonitorStatusView': {
+        const index = findIndex(device.monitors, {uid: gauge.monitorId})
+        if (index < 0) return null
+        return (
+          <MonitorStatusView monitor={device.monitors[index]}/>
+        )
+      }
+
       default:
         return null
     }
@@ -114,14 +124,14 @@ export default class GaugeView extends React.Component {
     }
 
     return (
-        <div className="flex-vertical flex-1" onMouseEnter={this.onMouseEnter.bind(this)} onMouseLeave={this.onMouseLeave.bind(this)}>
-          {this.renderDesc()}
-          <div className="flex-1 flex-vertical">
-            {this.renderChart(chartData, searchParams)}
-            {this.renderInfoIcon()}
-          </div>
-          {this.props.loading ? <RefreshOverlay /> : null}
+      <div className="flex-vertical flex-1" onMouseEnter={this.onMouseEnter.bind(this)} onMouseLeave={this.onMouseLeave.bind(this)}>
+        {this.renderDesc()}
+        <div className="flex-1 flex-vertical">
+          {this.renderChart(chartData, searchParams)}
+          {this.renderInfoIcon()}
         </div>
+        {this.props.loading ? <RefreshOverlay /> : null}
+      </div>
     )
   }
 
