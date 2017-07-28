@@ -3,7 +3,6 @@ import moment from 'moment'
 import ReactTooltip from 'react-tooltip'
 
 import InfiniteTable from 'components/common/InfiniteTable'
-import {renderEntity} from 'components/common/CellRenderers'
 import { dateFormat, getSeverityIcon } from 'shared/Global'
 
 export default class IncidentTable extends React.Component {
@@ -15,14 +14,14 @@ export default class IncidentTable extends React.Component {
     }
     this.cells = [{
       'displayName': 'Severity',
-      'columnName': 'severity',
+      'columnName': 'entity.severity',
       'cssClassName': 'text-center width-80',
       'customComponent': (props) => {
         return <span>{getSeverityIcon(props.data)}</span>
       }
     }, {
       'displayName': 'Date/Time',
-      'columnName': 'startTimestamp',
+      'columnName': 'entity.startTimestamp',
       'cssClassName': 'nowrap text-center width-180',
       'customComponent': (props) => {
         const {data} = props
@@ -35,15 +34,15 @@ export default class IncidentTable extends React.Component {
       }
     }, {
       'displayName': 'System',
-      'columnName': 'devicename',
+      'columnName': 'entity.devicename',
       'cssClassName': 'width-180'
     }, {
       'displayName': 'Workflow',
-      'columnName': 'workflow',
+      'columnName': 'entity.workflow',
       'cssClassName': 'width-180'
     }, {
       'displayName': 'Description',
-      'columnName': 'description',
+      'columnName': 'entity.description',
       'weight': 1
     }/*, {
       'displayName': 'Actions',
@@ -96,8 +95,7 @@ export default class IncidentTable extends React.Component {
           cells={this.cells}
           ref="table"
           rowMetadata={{'key': 'id'}}
-          params={{...this.props.params, dateFrom, dateTo}}
-          showTableHeading={false}
+          params={{...this.props.params, dateFrom, dateTo, collections: 'incident'}}
         />
         <ReactTooltip />
       </div>
