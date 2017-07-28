@@ -38,23 +38,40 @@ export default class GaugePanel extends React.Component {
     this.fetchRecordCount()
   }
   fetchRecordCount () {
-    const {templateName} = this.props.gauge
+    const {gauge} = this.props
+    const {templateName, monitorId, resource} = gauge
     if (['Line Chart', 'Pie Chart', 'Bar Chart'].indexOf(templateName) < 0) {
       this.setState({loading: false})
       return
     }
     const {duration, durationUnit, splitBy, splitUnit, searchParams} = this.state
 
-    const dateFrom = moment().add(-duration, `${durationUnit}s`).startOf(durationUnit).format(dateFormat)
-    const dateTo = moment().endOf(durationUnit).format(dateFormat)
+    if (resource === 'search') {
+      const dateFrom = moment().add(-duration, `${durationUnit}s`).startOf(durationUnit).format(dateFormat)
+      const dateTo = moment().endOf(durationUnit).format(dateFormat)
 
-    const params = { ...searchParams, splitBy, splitUnit, dateFrom, dateTo }
-    axios.get(`${ROOT_URL}/search/getRecordCount`, {params}).then(res => {
-      this.setState({
-        searchRecordCounts: res.data,
-        loading: false
+      const params = { ...searchParams, splitBy, splitUnit, dateFrom, dateTo }
+      axios.get(`${ROOT_URL}/search/getRecordCount`, {params}).then(res => {
+        this.setState({
+          searchRecordCounts: res.data,
+          loading: false
+        })
       })
-    })
+    } else if (resource === 'monitor') {
+      const dateFrom = moment().add(-duration, `${durationUnit}s`).startOf(durationUnit).valueOf()
+      const dateTo = moment().endOf(durationUnit).valueOf()
+      axios.get(`${ROOT_URL}/event/findByDate`, {
+        resource, dateFrom, dateTo, monitorId
+      }).then(res => {
+        this.setState({
+          searchRecordCounts: res.data._embedded.events.map(p => ({
+            label: moment(p.timestamp).format(),
+            value: p.lastResult && p.lastResult.status === 'UP' ? 1 : 0
+          })),
+          loading: false
+        })
+      })
+    }
   }
 
   onClickFlip () {

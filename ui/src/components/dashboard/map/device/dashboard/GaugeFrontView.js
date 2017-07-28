@@ -97,7 +97,7 @@ export default class GaugeView extends React.Component {
 
   renderDesc () {
     const {searchParams, gauge, splitBy, splitUnit} = this.props
-    if (gauge.templateName !== 'Line Chart' && gauge.templateName !== 'Bar Chart') return null
+    if ((gauge.templateName !== 'Line Chart' && gauge.templateName !== 'Bar Chart') || gauge.resource !== 'search') return null
     return (
       <div>
         <div className="pull-left form-inline">

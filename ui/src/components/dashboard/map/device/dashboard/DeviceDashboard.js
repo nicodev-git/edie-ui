@@ -168,7 +168,9 @@ export default class DeviceDashboard extends React.Component {
   }
   renderGauge (p) {
     const savedSearch = this.getSavedSearch(p.savedSearchId)
-    if (!savedSearch && ['Line Chart', 'Pie Chart', 'Bar Chart'].indexOf(p.templateName) >= 0) return <div key={p.id}></div>
+    if (!savedSearch && ['Line Chart', 'Pie Chart', 'Bar Chart'].indexOf(p.templateName) >= 0){
+      if (p.resource === 'search') return <div key={p.id}></div>
+    }
     const searchParams = savedSearch ? JSON.parse(savedSearch.data) : null
     return (
       <div key={p.id}>

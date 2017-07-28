@@ -24,7 +24,7 @@ export default class GaugeWizardView extends React.Component {
           <Field name="name" component={FormInput} floatingLabel="Name" className="valign-top mr-dialog"/>
           <Field name="resource" component={FormSelect} floatingLabel="Resource" options={resources} className="valign-top"/>
 
-          <Field name="savedSearchId" component={FormSelect} floatingLabel="Saved Search" options={searchList} className="valign-top mr-dialog"/>
+          {formValues.resource === 'search' && <Field name="savedSearchId" component={FormSelect} floatingLabel="Saved Search" options={searchList} className="valign-top mr-dialog"/>}
           {formValues.resource === 'monitor' && <Field name="monitorId" component={FormSelect} floatingLabel="Monitor" options={monitors} className="valign-top"/>}
 
           <Field name="duration" component={FormSelect} floatingLabel="Duration" options={durations} className="valign-top mr-dialog" style={{width: 100}}/>
