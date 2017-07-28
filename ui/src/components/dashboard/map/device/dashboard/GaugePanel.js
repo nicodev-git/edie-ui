@@ -103,30 +103,25 @@ export default class GaugePanel extends React.Component {
   onClickDelete (gauge) {
     showConfirm('Click OK to remove.', btn => {
       if (btn !== 'ok') return
-      this.props.removeGroupDevice(gauge)
+      this.props.removeGroupGauge(gauge)
     })
   }
 
   onClickDone () {
     this.onClickFlip()
 
-    const {gauge} = this.props
-    const device = {
-      ...gauge,
+    const gauge = {
+      ...this.props.gauge,
       name: this.state.name,
-      params: {
-        ...gauge.params,
-
-        duration: this.state.duration,
-        durationUnit: this.state.durationUnit,
-        splitBy: this.state.splitBy,
-        splitUnit: this.state.splitUnit,
-        savedSearch: this.state.selectedSearch
-      }
+      duration: this.state.duration,
+      durationUnit: this.state.durationUnit,
+      splitBy: this.state.splitBy,
+      splitUnit: this.state.splitUnit,
+      savedSearchId: this.state.selectedSearch
     }
 
     this.fetchRecordCount()
-    this.props.updateGroupDevice(device)
+    this.props.updateGroupGauge(gauge, this.props.group)
   }
 
   getFlipClass () {

@@ -6,6 +6,7 @@ import { connect } from 'react-redux'
 import {
   fetchSysSearchOptions,
   addGroupGauge,
+  updateGroupGauge,
 
   fetchGauges
 } from 'actions'
@@ -31,6 +32,7 @@ export default connect(
   }), {
     fetchSysSearchOptions,
     addGroupGauge,
+    updateGroupGauge,
 
     fetchGauges
   }

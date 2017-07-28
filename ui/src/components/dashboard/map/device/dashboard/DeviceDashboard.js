@@ -164,9 +164,9 @@ export default class DeviceDashboard extends React.Component {
     return (
       <div key={p.id}>
         <GaugePanel
-          gauge={p} searchParams={searchParams} searchList={this.getSearchList()}
-          updateGroupDevice={this.props.updateGroupDevice}
-          removeGroupDevice={this.props.removeGroupDevice}
+          group={this.props.device} gauge={p} searchParams={searchParams} searchList={this.getSearchList()}
+          updateGroupGauge={this.props.updateGroupGauge}
+          removeGroupGauge={this.props.removeGroupGauge}
           style={{width: '100%', height: '100%'}}
         />
       </div>

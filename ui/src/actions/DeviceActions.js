@@ -897,6 +897,15 @@ export const addGroupGauge = (props, group) => {
   }
 }
 
+export const updateGroupGauge = (props, group) => {
+  return dispatch => {
+    dispatch(updateGroup({
+      ...group,
+      gauges: (group.gauges || []).map(p => p.id === props.id ? props : p)
+    }))
+  }
+}
+
 export const updateGroup = (entity) => {
   return dispatch => {
     axios.put(entity._links.self.href, entity).then(response => {
