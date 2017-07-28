@@ -423,6 +423,10 @@ export const SELECT_CRED_TYPE = 'SELECT_CRED_TYPE'
 
 ///////////////////////////////////////////////////////////////
 
+export const FETCH_GAUGES = 'FETCH_GAUGES'
+
+///////////////////////////////////////////////////////////////
+
 export const SHOW_SIMULATION_MODAL = 'SHOW_SIMULATION_MODAL'
 
 export const API_ERROR = 'API_ERROR'

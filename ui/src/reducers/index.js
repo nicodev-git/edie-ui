@@ -9,6 +9,7 @@ import SearchReducer from './SearchReducer'
 import DiagramReducer from './DiagramReducer'
 import AttackersReducer from './AttackersReducer'
 import TagReducer from './TagReducer'
+import GaugeReducer from './GaugeReducer'
 
 const rootReducer = combineReducers({
   form: FormReducer,
@@ -20,7 +21,8 @@ const rootReducer = combineReducers({
   diagram: DiagramReducer,
   chat: ChatReducer,
   attackers: AttackersReducer,
-  tag: TagReducer
+  tag: TagReducer,
+  gauge: GaugeReducer
 })
 
 export default rootReducer
