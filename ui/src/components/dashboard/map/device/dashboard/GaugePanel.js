@@ -16,19 +16,19 @@ export default class GaugePanel extends React.Component {
   constructor (props) {
     super(props)
 
-    const {params} = props.gauge
+    const {gauge} = props
     this.state = {
       flip: false,
       clicked: false,
 
-      duration: params.duration || 3,
-      durationUnit: params.durationUnit || 'day',
-      splitBy: params.splitBy || 1,
-      splitUnit: params.splitUnit || 'day',
+      duration: gauge.duration || 3,
+      durationUnit: gauge.durationUnit || 'day',
+      splitBy: gauge.splitBy || 1,
+      splitUnit: gauge.splitUnit || 'day',
 
-      selectedSearch: params.savedSearch,
+      selectedSearch: gauge.savedSearchId,
       searchParams: props.searchParams,
-      name: props.gauge.name,
+      name: gauge.name,
 
       loading: true,
       searchRecordCounts: []

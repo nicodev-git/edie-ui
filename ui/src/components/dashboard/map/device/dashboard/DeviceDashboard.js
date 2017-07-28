@@ -6,7 +6,7 @@ import {Responsive, WidthProvider} from 'react-grid-layout'
 
 import GaugePanel from './GaugePanel'
 import GaugeWizardContainer from 'containers/shared/wizard/GaugeWizardContainer'
-import { extImageBaseUrl } from 'shared/Global'
+import { extImageBaseUrl, guid } from 'shared/Global'
 import { wizardConfig } from 'components/common/wizard/WizardConfig'
 
 import {showAlert} from 'components/common/Alert'
@@ -28,8 +28,8 @@ export default class DeviceDashboard extends React.Component {
   }
 
   getGauges () {
-    const {mapDevices} = this.props
-    return mapDevices.filter(p => p.params && p.params.dashboard)
+    const {device} = this.props
+    return device.gauges || []
   }
 
   getUserSearchOptions () {
@@ -101,11 +101,7 @@ export default class DeviceDashboard extends React.Component {
 
     const options = {
       title: tpl.name,
-      imgName: tpl.image,
-      imageUrl: `/externalpictures?name=${tpl.image}`,
-
-      templateName: tpl.name,
-      dashboard: tpl.dashboard
+      templateName: tpl.name
     }
 
     this.showAddWizard(options, (id, name, data) => {
@@ -128,7 +124,8 @@ export default class DeviceDashboard extends React.Component {
   }
 
   onFinishAddWizard (callback, res, params, url) {
-    // this.props.addGroupDevice(params, url)
+    params.id = guid()
+    this.props.addGroupGauge(params, this.props.device)
   }
 
   /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -143,7 +140,6 @@ export default class DeviceDashboard extends React.Component {
     const {options, callback, closeCallback} = this.state.deviceWizardConfig
 
     const extra = {
-      image: options.imgName,
       templateName: options.templateName
     }
 
@@ -162,7 +158,7 @@ export default class DeviceDashboard extends React.Component {
     )
   }
   renderGauge (p) {
-    const savedSearch = this.getSavedSearch(p.params.savedSearch)
+    const savedSearch = this.getSavedSearch(p.savedSearchId)
     if (!savedSearch) return <div key={p.id}></div>
     const searchParams = JSON.parse(savedSearch.data)
     return (

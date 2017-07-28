@@ -892,7 +892,7 @@ export const addGroupGauge = (props, group) => {
   return dispatch => {
     dispatch(updateGroup({
       ...group,
-      gauges: [...group.gauges, props]
+      gauges: [...(group.gauges || []), props]
     }))
   }
 }
