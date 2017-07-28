@@ -70,7 +70,7 @@ export default class GaugeView extends React.Component {
           <IncidentTable params={searchParams} duration={duration} durationUnit={durationUnit}/>
         )
       }
-      case 'MonitorStatusView': {
+      case 'Monitor': {
         const index = findIndex(device.monitors, {uid: gauge.monitorId})
         if (index < 0) return null
         return (

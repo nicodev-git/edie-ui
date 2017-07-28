@@ -35,14 +35,14 @@ export default class GaugePanel extends React.Component {
     }
   }
   componentWillMount () {
-    const {templateName} = this.props.gauge
-    if (['Line Chart', 'Pie Chart', 'Bar Chart'].indexOf(templateName) >= 0) {
-      this.fetchRecordCount()
-    } else {
-      this.setState({loading: false})
-    }
+    this.fetchRecordCount()
   }
   fetchRecordCount () {
+    const {templateName} = this.props.gauge
+    if (['Line Chart', 'Pie Chart', 'Bar Chart'].indexOf(templateName) < 0) {
+      this.setState({loading: false})
+      return
+    }
     const {duration, durationUnit, splitBy, splitUnit, searchParams} = this.state
 
     const dateFrom = moment().add(-duration, `${durationUnit}s`).startOf(durationUnit).format(dateFormat)
