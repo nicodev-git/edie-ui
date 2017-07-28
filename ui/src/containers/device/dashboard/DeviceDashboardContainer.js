@@ -4,11 +4,12 @@ import {withRouter} from 'react-router'
 import { connect } from 'react-redux'
 
 import {
-  fetchGroupDevicesAndLines,
   fetchSysSearchOptions,
   addGroupDevice,
   updateGroupDevice,
-  removeGroupDevice
+  removeGroupDevice,
+
+  fetchGauges
 } from 'actions'
 
 class DeviceDashboardContainer extends React.Component {
@@ -22,7 +23,7 @@ export default connect(
   state => ({
     device: state.dashboard.selectedDevice,
 
-    deviceTemplates: state.settings.deviceTemplates,
+    gauges: state.gauge.gauges,
 
     mapDevices: state.devices.mapDevices,
     mapLines: state.devices.mapLines,
@@ -30,10 +31,11 @@ export default connect(
     userInfo: state.dashboard.userInfo,
     sysSearchOptions: state.search.sysSearchOptions
   }), {
-    fetchGroupDevicesAndLines,
     fetchSysSearchOptions,
     addGroupDevice,
     updateGroupDevice,
-    removeGroupDevice
+    removeGroupDevice,
+
+    fetchGauges
   }
 )(withRouter(DeviceDashboardContainer))

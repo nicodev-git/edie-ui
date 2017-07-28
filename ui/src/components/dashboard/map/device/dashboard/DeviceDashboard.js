@@ -23,7 +23,7 @@ export default class DeviceDashboard extends React.Component {
   }
 
   componentWillMount () {
-    this.props.fetchGroupDevicesAndLines(this.props.device.id)
+    this.props.fetchGauges()
     this.props.fetchSysSearchOptions()
   }
 
@@ -190,8 +190,7 @@ export default class DeviceDashboard extends React.Component {
   }
 
   renderAddMenu () {
-    const {deviceTemplates} = this.props
-    const gauges = deviceTemplates.filter(p => p.dashboard)
+    const {gauges} = this.props
     return (
       <div className="text-right">
         <IconMenu

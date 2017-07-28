@@ -9,7 +9,7 @@ const INITIAL_STATE = {
 export default function (state = INITIAL_STATE, action) {
   switch (action.type) {
     case FETCH_GAUGES:
-      return { ...state, incidents: action.data }
+      return { ...state, gauges: action.data }
     default:
       return state
   }
