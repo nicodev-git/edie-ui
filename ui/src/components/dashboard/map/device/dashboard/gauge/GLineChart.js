@@ -7,10 +7,10 @@ import { ROOT_URL } from 'actions/config'
 import { dateFormat } from 'shared/Global'
 
 import FlipView from './FlipView'
-import DoneButton from './DoneButton'
 import LineChart from './display/LineChart'
-
 import GEditView from './GEditView'
+
+import {showAlert} from 'components/common/Alert'
 
 const sampleData = []
 
@@ -130,6 +130,21 @@ export default class GLineChart extends React.Component {
     }
   }
 
+  onSubmit (options, values) {
+    console.log(values)
+
+    if (!values.name) {
+      showAlert('Please type name.')
+      return
+    }
+    const gauge = {
+      ...this.props.gauge,
+      ...values
+    }
+
+    this.props.updateDeviceGauge(gauge, this.props.device)
+  }
+
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   renderFrontView () {
@@ -161,8 +176,8 @@ export default class GLineChart extends React.Component {
           searchList={this.props.searchList}
           gauge={this.props.gauge}
           monitors={this.props.monitors}
+          onSubmit={this.onSubmit.bind(this, options)}
         />
-        <DoneButton onClick={options.onClickFlip}/>
       </div>
     )
   }

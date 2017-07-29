@@ -1,6 +1,7 @@
 import React from 'react'
 import {TextField, SelectField, MenuItem} from 'material-ui'
 
+import DoneButton from './DoneButton'
 import {gaugeDurationTypes, gaugeResources} from 'shared/Global'
 
 const durations = '1 2 3 5 10 15 30'.split(' ').map(p => ({
@@ -40,6 +41,18 @@ export default class GEditView extends React.Component {
       [key]: value
     }
     this.setState(state)
+  }
+
+  onClickDone () {
+    const {onSubmit} = this.props
+    const {resource, savedSearchId, monitorId,
+      duration, durationUnit, splitBy, splitUnit, name
+    }  = this.state
+    const values = {
+      resource, savedSearchId, monitorId,
+      duration, durationUnit, splitBy, splitUnit, name
+    }
+    onSubmit && onSubmit(values)
   }
 
   render () {
@@ -86,6 +99,8 @@ export default class GEditView extends React.Component {
             </SelectField>
           </div>
         </div>
+
+        <DoneButton onClick={this.onClickDone.bind(this)}/>
       </div>
     )
   }
