@@ -70,7 +70,7 @@ class LiquidView extends React.Component {
               </tspan>
             );
           }}
-          riseAnimation
+          riseAnimation={false}
           waveAnimation
           waveFrequency={2}
           waveAmplitude={1}

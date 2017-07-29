@@ -6,12 +6,12 @@ import LiquidView from './display/LiquidView'
 
 import MonitorSocket from 'util/socket/MonitorSocket'
 
-export default class GCpu extends React.Component {
+export default class GMemory extends React.Component {
   constructor (props) {
     super (props)
     this.state = {
       loading: false,
-      cpu: null
+      memory: null
     }
     this.renderBackView = this.renderBackView.bind(this)
     this.renderFrontView = this.renderFrontView.bind(this)
@@ -37,8 +37,8 @@ export default class GCpu extends React.Component {
   }
   onMonitorMessage (msg) {
     if (msg.action === 'update' && msg.deviceId === this.props.device.id) {
-      const {cpu} = msg.data
-      if (cpu) this.setState({ cpu })
+      const {memory} = msg.data
+      if (memory) this.setState({ memory })
     }
   }
 
@@ -48,8 +48,8 @@ export default class GCpu extends React.Component {
 
   renderFrontView () {
     const {gauge} = this.props
-    const {cpu} = this.state
-    const value = cpu ? (cpu.length ? cpu[0].Usage : cpu.Usage) : 0
+    const {memory} = this.state
+    const value = memory ? Math.ceil(memory.UsedSize * 100 / memory.TotalSize) : 0
     return (
       <div className="flex-1">
         <LiquidView title={gauge.name} value={value}/>
