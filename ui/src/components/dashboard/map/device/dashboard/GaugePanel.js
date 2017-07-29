@@ -52,7 +52,8 @@ export default class GaugePanel extends React.Component {
 
       axios.get(`${ROOT_URL}/event/search/findByDate`, {
         params: {
-          dateFrom, dateTo, monitorId
+          dateFrom, dateTo, monitorId,
+          sort: 'timestamp'
         }
       }).then(res => {
         this.setState({

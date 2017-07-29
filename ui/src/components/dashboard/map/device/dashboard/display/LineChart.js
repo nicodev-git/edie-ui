@@ -10,6 +10,14 @@ const chartOptions = {
     line: {
       tension: 0
     }
+  },
+  scales: {
+    yAxes: [{
+      display: true,
+      ticks: {
+        min: 0
+      }
+    }]
   }
 }
 
