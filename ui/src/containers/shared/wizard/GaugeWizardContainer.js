@@ -21,6 +21,7 @@ class GaugeWizardContainer extends React.Component {
 export default connect(
   (state, props) => ({
     initialValues: {
+      resource: 'search',
       duration: '3',
       durationUnit: 'day',
       ...state.devices.wizardInitialValues
