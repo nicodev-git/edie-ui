@@ -16,6 +16,54 @@ import MonitorStatusView from './display/MonitorStatusView'
 
 const sampleData = []
 
+const chartOptions = {
+  legend: {
+    display: false
+  },
+  elements: {
+    line: {
+      tension: 0
+    }
+  },
+  scales: {
+    yAxes: [{
+      display: true,
+      ticks: {
+        min: 0,
+        callback: function(value, index, values) {
+          if (Math.floor(value) === value) {
+            return value
+          }
+        }
+      }
+    }]
+  }
+}
+
+const monitorChartOptions = {
+  legend: {
+    display: false
+  },
+  elements: {
+    line: {
+      tension: 0
+    }
+  },
+  scales: {
+    yAxes: [{
+      display: true,
+      ticks: {
+        min: 0,
+        callback: function(value, index, values) {
+          if (Math.floor(value) === value) {
+            return value === 0 ? 'Down' : 'Up'
+          }
+        }
+      }
+    }]
+  }
+}
+
 export default class GaugeView extends React.Component {
   constructor (props) {
     super(props)
@@ -44,7 +92,7 @@ export default class GaugeView extends React.Component {
     switch (gauge.templateName) {
       case 'Line Chart':
         return (
-          <LineChart chartData={chartData} />
+          <LineChart chartData={chartData} chartOptions={gauge.resource === 'monitor' ? monitorChartOptions : chartOptions} />
         )
       case 'Bar Chart':
         return (
@@ -119,7 +167,8 @@ export default class GaugeView extends React.Component {
         data: (searchRecordCounts || sampleData).map(p => p.count),
         borderWidth: 1,
         borderColor: '#269C8B',
-        fill: false
+        fill: false,
+        // pointRadius: 0
       }]
     }
 
