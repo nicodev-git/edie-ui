@@ -1,5 +1,4 @@
 import React from 'react'
-import {findIndex} from 'lodash'
 
 import FlipView from './FlipView'
 import DoneButton from './DoneButton'
@@ -37,7 +36,6 @@ export default class GCpu extends React.Component {
     })
   }
   onMonitorMessage (msg) {
-    console.log(msg)
     if (msg.action === 'update' && msg.deviceId === this.props.device.id) {
       const {cpu} = msg.data
       this.setState({ cpu })
@@ -51,9 +49,9 @@ export default class GCpu extends React.Component {
   renderFrontView () {
     const {gauge} = this.props
     const {cpu} = this.state
-    const value = cpu ? cpu.dataobj[0].Usage :0
+    const value = cpu ? (cpu.length ? cpu[0].Usage : cpu.Usage) : 0
     return (
-      <div>
+      <div className="flex-1">
         <LiquidView title={gauge.name} value={value}/>
       </div>
     )
