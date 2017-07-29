@@ -15,6 +15,7 @@ import {showAlert} from 'components/common/Alert'
 import GLineChart from './gauge/GLineChart'
 import GBarChart from './gauge/GBarChart'
 import GMonitor from './gauge/GMonitor'
+import GCpu from './gauge/GCpu'
 
 const ResponsiveReactGridLayout = WidthProvider(Responsive)
 
@@ -22,7 +23,8 @@ const gaugeMap = {
   'Line Chart': GLineChart,
   'Bar Chart': GBarChart,
   'Monitor': GMonitor,
-  'Up/Down': GMonitor
+  'Up/Down': GMonitor,
+  'Cpu': GCpu
 }
 export default class DeviceDashboard extends React.Component {
   constructor (props) {
