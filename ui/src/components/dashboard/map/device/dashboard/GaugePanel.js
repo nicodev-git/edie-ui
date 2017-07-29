@@ -46,7 +46,24 @@ export default class GaugePanel extends React.Component {
     }
     const {duration, durationUnit, splitBy, splitUnit, searchParams} = this.state
 
-    if (resource === 'search') {
+    if (resource === 'monitor') {
+      const dateFrom = moment().add(-duration, `${durationUnit}s`).startOf(durationUnit).valueOf()
+      const dateTo = moment().endOf(durationUnit).valueOf()
+
+      axios.get(`${ROOT_URL}/event/search/findByDate`, {
+        params: {
+          dateFrom, dateTo, monitorId
+        }
+      }).then(res => {
+        this.setState({
+          searchRecordCounts: res.data._embedded.events.map(p => ({
+            date: moment(p.timestamp).format('YYYY-MM-DD HH:mm:ss'),
+            count: p.lastResult && p.lastResult.status === 'UP' ? 1 : 0
+          })),
+          loading: false
+        })
+      })
+    } else {
       const dateFrom = moment().add(-duration, `${durationUnit}s`).startOf(durationUnit).format(dateFormat)
       const dateTo = moment().endOf(durationUnit).format(dateFormat)
 
@@ -54,20 +71,6 @@ export default class GaugePanel extends React.Component {
       axios.get(`${ROOT_URL}/search/getRecordCount`, {params}).then(res => {
         this.setState({
           searchRecordCounts: res.data,
-          loading: false
-        })
-      })
-    } else if (resource === 'monitor') {
-      const dateFrom = moment().add(-duration, `${durationUnit}s`).startOf(durationUnit).valueOf()
-      const dateTo = moment().endOf(durationUnit).valueOf()
-      axios.get(`${ROOT_URL}/event/findByDate`, {
-        resource, dateFrom, dateTo, monitorId
-      }).then(res => {
-        this.setState({
-          searchRecordCounts: res.data._embedded.events.map(p => ({
-            label: moment(p.timestamp).format(),
-            value: p.lastResult && p.lastResult.status === 'UP' ? 1 : 0
-          })),
           loading: false
         })
       })
