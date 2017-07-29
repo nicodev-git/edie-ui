@@ -61,6 +61,15 @@ const monitorChartOptions = {
         }
       }
     }]
+  },
+  tooltips: {
+    mode: 'label',
+    callbacks: {
+      label: function(tooltipItem, data) {
+        const indice = tooltipItem.index;
+        return data.datasets[0].data[indice] === 0 ? 'Down' : 'Up'
+      }
+    }
   }
 }
 
