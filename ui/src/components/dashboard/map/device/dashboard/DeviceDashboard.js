@@ -133,23 +133,26 @@ export default class DeviceDashboard extends React.Component {
     params.id = guid()
     this.props.addDeviceGauge(params, this.props.device)
   }
-  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  renderDeviceWizard () {
-    if (!this.state.deviceWizardVisible) return null
 
+  getMonitors () {
     const {device} = this.props
-    const {options, callback, closeCallback} = this.state.deviceWizardConfig
-
-    const extra = {
-      templateName: options.templateName
-    }
-
     let monitors = []
     if (!isGroup(device)) {
       monitors = (device.monitors || []).map(p => ({
         label: p.name,
         value: p.uid
       }))
+    }
+    return monitors
+  }
+  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  renderDeviceWizard () {
+    if (!this.state.deviceWizardVisible) return null
+
+    const {options, callback, closeCallback} = this.state.deviceWizardConfig
+
+    const extra = {
+      templateName: options.templateName
     }
 
     return (
@@ -160,7 +163,7 @@ export default class DeviceDashboard extends React.Component {
           closeCallback && closeCallback()
         }}
         title={options.title}
-        monitors={monitors}
+        monitors={this.getMonitors()}
         extraParams={extra}
         onFinish={this.onFinishAddWizard.bind(this, callback)}
       />
@@ -191,7 +194,10 @@ export default class DeviceDashboard extends React.Component {
     return (
       <div key={p.id}>
         <GaugePanel
-          device={this.props.device} gauge={p} searchList={this.getSearchList()}
+          device={this.props.device} gauge={p}
+          searchList={this.getSearchList()}
+          monitors={this.getMonitors()}
+
           updateDeviceGauge={this.props.updateDeviceGauge}
           removeDeviceGauge={this.props.removeDeviceGauge}
           style={{width: '100%', height: '100%'}}

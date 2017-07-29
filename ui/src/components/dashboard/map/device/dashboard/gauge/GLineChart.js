@@ -10,6 +10,8 @@ import FlipView from './FlipView'
 import DoneButton from './DoneButton'
 import LineChart from './display/LineChart'
 
+import GEditView from './GEditView'
+
 const sampleData = []
 
 
@@ -155,7 +157,11 @@ export default class GLineChart extends React.Component {
   renderBackView (options) {
     return (
       <div>
-        Back View
+        <GEditView
+          searchList={this.props.searchList}
+          gauge={this.props.gauge}
+          monitors={this.props.monitors}
+        />
         <DoneButton onClick={options.onClickFlip}/>
       </div>
     )
