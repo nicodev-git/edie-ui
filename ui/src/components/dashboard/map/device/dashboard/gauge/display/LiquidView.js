@@ -8,17 +8,18 @@ const startColor = '#6495ed'; // cornflowerblue
 const endColor = '#dc143c'; // crimson
 
 class LiquidView extends React.Component {
-  constructor (props) {
-    super(props)
-    this.state = {
-      value: Math.random() * 100
-    }
-  }
+  // constructor (props) {
+  //   super(props)
+  //   this.state = {
+  //     value: Math.random() * 100
+  //   }
+  // }
 
   render () {
+    const {value} = this.props
     const radius = Math.max(Math.min(this.props.containerWidth, this.props.containerHeight)/ 2 - 24, 10);
     const interpolate = interpolateRgb(startColor, endColor);
-    const fillColor = interpolate(this.state.value / 100);
+    const fillColor = interpolate(value / 100);
     const gradientStops = [
       {
         key: '0%',
@@ -46,7 +47,7 @@ class LiquidView extends React.Component {
           style={{ margin: '0 auto' }}
           width={radius * 2}
           height={radius * 2}
-          value={this.state.value}
+          value={value}
           percent="%"
           textSize={1}
           textOffsetX={0}

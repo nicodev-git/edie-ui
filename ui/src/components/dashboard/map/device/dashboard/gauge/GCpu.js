@@ -3,16 +3,45 @@ import {findIndex} from 'lodash'
 
 import FlipView from './FlipView'
 import DoneButton from './DoneButton'
-import MonitorStatusView from './display/MonitorStatusView'
+import LiquidView from './display/LiquidView'
+
+import MonitorSocket from 'util/socket/MonitorSocket'
 
 export default class GCpu extends React.Component {
   constructor (props) {
     super (props)
     this.state = {
-      loading: false
+      loading: false,
+      cpu: null
     }
     this.renderBackView = this.renderBackView.bind(this)
     this.renderFrontView = this.renderFrontView.bind(this)
+  }
+
+  componentDidMount () {
+    this.monitorSocket = new MonitorSocket({
+      listener: this.onMonitorMessage.bind(this)
+    })
+    this.monitorSocket.connect(this.onSocketOpen.bind(this))
+  }
+
+  componentWillUnmount () {
+    this.monitorSocket.close()
+  }
+
+  onSocketOpen () {
+    this.monitorSocket.send({
+      action: 'enable-realtime',
+      monitors: 'basic',
+      deviceId: this.props.device.id
+    })
+  }
+  onMonitorMessage (msg) {
+    console.log(msg)
+    if (msg.action === 'update' && msg.deviceId === this.props.device.id) {
+      const {cpu} = msg.data
+      this.setState({ cpu })
+    }
   }
 
   onClickDelete () {
@@ -20,16 +49,12 @@ export default class GCpu extends React.Component {
   }
 
   renderFrontView () {
-    // const {gauge, device} = this.props
-
-    // const index = findIndex(device.monitors, {uid: gauge.monitorId})
-    // if (index < 0) return null
-    // return (
-    //   <MonitorStatusView monitor={device.monitors[index]}/>
-    // )
+    const {gauge} = this.props
+    const {cpu} = this.state
+    const value = cpu ? cpu.dataobj[0].Usage :0
     return (
       <div>
-        CPU View
+        <LiquidView title={gauge.name} value={value}/>
       </div>
     )
   }
