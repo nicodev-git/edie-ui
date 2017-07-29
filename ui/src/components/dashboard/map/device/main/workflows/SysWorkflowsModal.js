@@ -19,7 +19,7 @@ class SysWorkflowsModal extends React.Component {
 
   getSysWorkflows () {
     const { selectedSysWorkflowCategory } = this.props
-    return this.props.sysWorkflows.filter(m => m.origin === 'SYSTEM' && (!selectedSysWorkflowCategory || m.category === selectedSysWorkflowCategory))
+    return this.props.sysWorkflows.filter(m => m.origin === 'SYSTEM' && (!selectedSysWorkflowCategory || (m.tags || []).indexOf(selectedSysWorkflowCategory) >= 0))
   }
 
   onChangeCheck (workflow, e, checked) {
