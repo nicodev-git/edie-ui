@@ -3,18 +3,22 @@ import {concat, assign, findIndex} from 'lodash'
 import {IconButton, IconMenu, MenuItem} from 'material-ui'
 import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
 import {Responsive, WidthProvider} from 'react-grid-layout'
+import 'react-grid-layout/css/styles.css'
+import 'react-resizable/css/styles.css'
 
-import GaugePanel from './GaugePanel'
 import GaugeWizardContainer from 'containers/shared/wizard/GaugeWizardContainer'
 import { extImageBaseUrl, guid, isGroup } from 'shared/Global'
 import { wizardConfig } from 'components/common/wizard/WizardConfig'
 
 import {showAlert} from 'components/common/Alert'
 
-import 'react-grid-layout/css/styles.css'
-import 'react-resizable/css/styles.css'
+import GLineChart from './gauge/GLineChart'
 
 const ResponsiveReactGridLayout = WidthProvider(Responsive)
+
+const gaugeMap = {
+  'Line Chart': GLineChart
+}
 export default class DeviceDashboard extends React.Component {
   constructor (props) {
     super(props)
@@ -127,12 +131,6 @@ export default class DeviceDashboard extends React.Component {
     params.id = guid()
     this.props.addDeviceGauge(params, this.props.device)
   }
-
-  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-  onClickAddTable () {
-
-  }
   /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   renderDeviceWizard () {
     if (!this.state.deviceWizardVisible) return null
@@ -166,16 +164,32 @@ export default class DeviceDashboard extends React.Component {
       />
     )
   }
+
+  // renderGauge (p) {
+  //   const savedSearch = this.getSavedSearch(p.savedSearchId)
+  //   if (!savedSearch && ['Line Chart', 'Pie Chart', 'Bar Chart'].indexOf(p.templateName) >= 0){
+  //     if (p.resource === 'search') return <div key={p.id}></div>
+  //   }
+  //   const searchParams = savedSearch ? JSON.parse(savedSearch.data) : null
+  //   return (
+  //     <div key={p.id}>
+  //       <GaugePanel
+  //         device={this.props.device} gauge={p} searchParams={searchParams} searchList={this.getSearchList()}
+  //         updateDeviceGauge={this.props.updateDeviceGauge}
+  //         removeDeviceGauge={this.props.removeDeviceGauge}
+  //         style={{width: '100%', height: '100%'}}
+  //       />
+  //     </div>
+  //   )
+  // }
+
   renderGauge (p) {
-    const savedSearch = this.getSavedSearch(p.savedSearchId)
-    if (!savedSearch && ['Line Chart', 'Pie Chart', 'Bar Chart'].indexOf(p.templateName) >= 0){
-      if (p.resource === 'search') return <div key={p.id}></div>
-    }
-    const searchParams = savedSearch ? JSON.parse(savedSearch.data) : null
+    let GaugePanel = gaugeMap[p.templateName || 'z']
+    if (!GaugePanel) return <div key={p.id}/>
     return (
       <div key={p.id}>
         <GaugePanel
-          device={this.props.device} gauge={p} searchParams={searchParams} searchList={this.getSearchList()}
+          device={this.props.device} gauge={p} searchList={this.getSearchList()}
           updateDeviceGauge={this.props.updateDeviceGauge}
           removeDeviceGauge={this.props.removeDeviceGauge}
           style={{width: '100%', height: '100%'}}

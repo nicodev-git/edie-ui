@@ -1,4 +1,6 @@
 import React from 'react'
+import InfoIcon from 'material-ui/svg-icons/action/info'
+import DeleteIcon from 'material-ui/svg-icons/navigation/close'
 
 import RefreshOverlay from 'components/common/RefreshOverlay'
 
@@ -11,6 +13,9 @@ export default class FlipView extends React.Component {
       clicked: false,
       hovered: false
     }
+
+    this.onMouseEnter = this.onMouseEnter.bind(this)
+    this.onMouseLeave = this.onMouseLeave.bind(this)
   }
 
   getFlipClass () {
@@ -21,6 +26,18 @@ export default class FlipView extends React.Component {
 
   onClickFlip () {
     this.setState({flip: !this.state.flip, clicked: true})
+  }
+
+  onMouseEnter () {
+    this.setState({
+      hovered: true
+    })
+  }
+
+  onMouseLeave () {
+    this.setState({
+      hovered: false
+    })
   }
 
   renderInfoIcon () {
@@ -43,7 +60,10 @@ export default class FlipView extends React.Component {
     // )
     const {renderFrontView} = this.props
     return (
-      <div className="flex-vertical flex-1">
+      <div
+        className="flex-vertical flex-1"
+        onMouseEnter={this.onMouseEnter.bind(this)}
+        onMouseLeave={this.onMouseLeave.bind(this)}>
         {renderFrontView && renderFrontView()}
         {this.renderInfoIcon()}
       </div>
@@ -92,7 +112,7 @@ export default class FlipView extends React.Component {
   }
 
   render () {
-    const {className, style, backView, frontView} = this.props
+    const {className, style} = this.props
     return (
       <div className={`${className || ''} card`} style={style}>
         {this.renderCard('card-back', this.renderBack())}
