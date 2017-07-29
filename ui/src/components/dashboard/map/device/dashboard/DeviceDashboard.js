@@ -21,7 +21,8 @@ const ResponsiveReactGridLayout = WidthProvider(Responsive)
 const gaugeMap = {
   'Line Chart': GLineChart,
   'Bar Chart': GBarChart,
-  'Monitor': GMonitor
+  'Monitor': GMonitor,
+  'Up/Down': GMonitor
 }
 export default class DeviceDashboard extends React.Component {
   constructor (props) {

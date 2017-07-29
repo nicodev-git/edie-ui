@@ -11,7 +11,7 @@ const durations = '1 2 3 5 10 15 30'.split(' ').map(p => ({
 
 export default class GaugeWizardView extends React.Component {
   render () {
-    const {onSubmit, onHide, searchList, monitors, title, formValues} = this.props
+    const {onSubmit, onHide, searchList, monitors, title, formValues, durationVisible} = this.props
     return (
       <Dialog open title={title || 'Gauge'} onRequestClose={onHide} contentStyle={{width: 585}}>
         <form onSubmit={onSubmit}>
@@ -21,8 +21,10 @@ export default class GaugeWizardView extends React.Component {
           {formValues.resource === 'search' && <Field name="savedSearchId" component={FormSelect} floatingLabel="Saved Search" options={searchList} className="valign-top mr-dialog"/>}
           {formValues.resource === 'monitor' && <Field name="monitorId" component={FormSelect} floatingLabel="Monitor" options={monitors} className="valign-top"/>}
 
-          <Field name="duration" component={FormSelect} floatingLabel="Duration" options={durations} className="valign-top mr-dialog" style={{width: 100}}/>
-          <Field name="durationUnit" component={FormSelect} floatingLabel="  "options={gaugeDurationTypes} className="valign-top" style={{width: 120}}/>
+          <div className={durationVisible ? '' : 'hidden'}>
+            <Field name="duration" component={FormSelect} floatingLabel="Duration" options={durations} className="valign-top mr-dialog" style={{width: 100}}/>
+            <Field name="durationUnit" component={FormSelect} floatingLabel="  "options={gaugeDurationTypes} className="valign-top" style={{width: 120}}/>
+          </div>
 
           <SubmitBlock name="Add" onClick={onHide} />
         </form>

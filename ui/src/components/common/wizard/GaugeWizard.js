@@ -37,7 +37,7 @@ class GaugeWizard extends React.Component {
     this.props.onClose && this.props.onClose(this, data)
   }
   render () {
-    const { handleSubmit, sysSearchOptions, monitors, title, formValues } = this.props
+    const { handleSubmit, sysSearchOptions, monitors, title, formValues, templateName } = this.props
 
     const searchList = concat([], this.getSearchOptions().map(p => {
       return assign({}, p, {
@@ -52,6 +52,8 @@ class GaugeWizard extends React.Component {
       value: p.id
     }))
 
+    const durationVisible = templateName !== 'Up/Down'
+
     return (
       <GaugeWizardView
         title={title}
@@ -60,6 +62,7 @@ class GaugeWizard extends React.Component {
         monitors={monitors}
         searchList={searchList}
         formValues={formValues}
+        durationVisible={durationVisible}
       />
     )
   }

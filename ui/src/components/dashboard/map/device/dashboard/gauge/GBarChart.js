@@ -122,6 +122,10 @@ export default class GBarChart extends React.Component {
     options.onClickFlip()
   }
 
+  onClickDelete () {
+    this.props.removeDeviceGauge(this.props.gauge, this.props.device)
+  }
+
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   renderFrontView () {
@@ -168,7 +172,7 @@ export default class GBarChart extends React.Component {
         renderFrontView={this.renderFrontView}
         renderBackView={this.renderBackView}
 
-        onClickDelete={this.props.removeDeviceGauge}
+        onClickDelete={this.onClickDelete.bind(this)}
       />
     )
   }
