@@ -5,7 +5,7 @@ import DoneButton from './DoneButton'
 import {gaugeDurationTypes, gaugeResources} from 'shared/Global'
 
 const durations = '1 2 3 5 10 15 30'.split(' ').map(p => ({
-  label: p, value: p
+  label: p, value: parseInt(p, 10)
 }))
 
 const inputStyle = {

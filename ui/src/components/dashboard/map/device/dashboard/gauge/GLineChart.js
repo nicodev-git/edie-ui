@@ -84,12 +84,23 @@ export default class GLineChart extends React.Component {
   }
 
   componentWillMount () {
-    this.fetchRecordCount()
+    this.fetchRecordCount(this.props)
   }
 
-  fetchRecordCount () {
-    const {gauge, searchList} = this.props
+  componentWillUpdate (nextProps) {
+    const {gauge} = nextProps
+    if (gauge && JSON.stringify(this.props.gauge) !== JSON.stringify(gauge)) {
+      this.fetchRecordCount(nextProps)
+    }
+  }
+
+  fetchRecordCount (props) {
+    const {gauge, searchList} = props
     const {savedSearchId, monitorId, resource, duration, durationUnit, splitBy, splitUnit} = gauge
+
+    this.setState({
+      loading: true
+    })
 
     if (resource === 'monitor') {
       const dateFrom = moment().add(-duration, `${durationUnit}s`).startOf(durationUnit).valueOf()
@@ -143,6 +154,7 @@ export default class GLineChart extends React.Component {
     }
 
     this.props.updateDeviceGauge(gauge, this.props.device)
+    options.onClickFlip()
   }
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
