@@ -8,27 +8,52 @@ const durations = '1 2 3 5 10 15 30'.split(' ').map(p => ({
 }))
 
 export default class GEditView extends React.Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      resource: 'search',
+      savedSearchId: '',
+      monitorId: '',
+      duration: '3',
+      durationUnit: 'days',
+      splitBy: '1',
+      splitUnit: 'day',
+      name: ''
+    }
+  }
+
   render () {
     const {
-      resource, savedSearchId, duration, durationUnit, splitBy, splitUnit, selectedSearch, searchList, name,
-      onChangeResource, onChangeDuration, onChangeDurationUnit, onChangeSplitBy, onChangeSplitUnit, onChangeSearch, onChangeName
-    } = this.props
+      resource, savedSearchId, monitorId,
+      duration, durationUnit, splitBy, splitUnit, name,
+      onChangeResource, onChangeSavedSearch, onChangeMonitor,
+      onChangeDuration, onChangeDurationUnit, onChangeSplitBy, onChangeSplitUnit, onChangeName
+    } = this.state
+    const {searchList, monitors} = this.props
     return (
       <div>
         <TextField value={name} floatingLabel="Name" className="valign-top mr-dialog" onChange={onChangeName}/>
         <SelectField v gaugealue={resource} floatingLabel="Resource" className="valign-top" onChange={onChangeResource}>
-          {gaugeResources.map(p => <MenuItem value={p.value} primaryText={p.label}/>)}
+          {gaugeResources.map(p => <MenuItem key={p.value} value={p.value} primaryText={p.label}/>)}
         </SelectField>
 
         {resource === 'search' ? (
-          <SelectField value={savedSearchId} floatingLabel="Saved Search" className="valign-top mr-dialog">
-            {searchList.map(p => <MenuItem value={p.value} primaryText={p.label}/>)}
+          <SelectField value={savedSearchId} floatingLabel="Saved Search" className="valign-top mr-dialog" onChange={onChangeSavedSearch}>
+            {searchList.map(p => <MenuItem key={p.value} value={p.value} primaryText={p.label}/>)}
           </SelectField>
         ): null}
-        {resource === 'monitor' && <Field name="monitorId" component={FormSelect} floatingLabel="Monitor" options={monitors} className="valign-top"/>}
+        {resource === 'monitor' ? (
+          <SelectField value={monitorId} floatingLabel="Monitor" className="valign-top" onChange={onChangeMonitor}>
+            {monitors.map(p => <MenuItem key={p.value} value={p.value} primaryText={p.label}/>)}
+          </SelectField>
+        ) : null}
 
-        <Field name="duration" component={FormSelect} floatingLabel="Duration" options={durations} className="valign-top mr-dialog" style={{width: 100}}/>
-        <Field name="durationUnit" component={FormSelect} floatingLabel="  "options={gaugeDurationTypes} className="valign-top" style={{width: 120}}/>
+        <SelectField value={duration} floatingLabel="Duration" className="valign-top mr-dialog" style={{width: 100}} onChange={onChangeDuration}>
+          {durations.map(p => <MenuItem key={p.value} value={p.value} primaryText={p.label}/>)}
+        </SelectField>
+        <SelectField value={durationUnit} floatingLabel="  " className="valign-top" style={{width: 120}} onChange={onChangeDurationUnit}>
+          {gaugeDurationTypes.map(p => <MenuItem key={p.value} value={p.value} primaryText={p.label}/>)}
+        </SelectField>
       </div>
     )
   }
