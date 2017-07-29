@@ -108,14 +108,22 @@ export default class DeviceDashboard extends React.Component {
   onClickMenuItem (tpl) {
     console.log(tpl)
 
-    const options = {
-      title: tpl.name,
-      templateName: tpl.name
+    if (['Cpu', 'Memory', 'Disk'].indexOf(tpl.name) >= 0) {
+      this.onFinishAddWizard(null, null, {
+        templateName:tpl.name,
+        name: tpl.name,
+        resource: 'search'
+      })
+    } else {
+      const options = {
+        title: tpl.name,
+        templateName: tpl.name
+      }
+
+      this.showAddWizard(options, (id, name, data) => {
+
+      })
     }
-
-    this.showAddWizard(options, (id, name, data) => {
-
-    })
   }
 
   showAddWizard (options, callback, closeCallback) {
