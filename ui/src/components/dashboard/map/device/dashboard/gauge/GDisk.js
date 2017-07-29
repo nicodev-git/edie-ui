@@ -6,12 +6,12 @@ import LiquidView from './display/LiquidView'
 
 import MonitorSocket from 'util/socket/MonitorSocket'
 
-export default class GMemory extends React.Component {
+export default class GDisk extends React.Component {
   constructor (props) {
     super (props)
     this.state = {
       loading: false,
-      memory: null
+      disk: null
     }
     this.renderBackView = this.renderBackView.bind(this)
     this.renderFrontView = this.renderFrontView.bind(this)
@@ -37,8 +37,9 @@ export default class GMemory extends React.Component {
   }
   onMonitorMessage (msg) {
     if (msg.action === 'update' && msg.deviceId === this.props.device.id) {
-      const {memory} = msg.data
-      if (memory) this.setState({ memory })
+      const {disk} = msg.data
+      if (disk && disk.length && disk[0].Drives && disk[0].Drives.length)
+        this.setState({ disk: disk[0].Drives[0] })
     }
   }
 
@@ -48,13 +49,11 @@ export default class GMemory extends React.Component {
 
   renderFrontView () {
     const {gauge} = this.props
-    const {memory} = this.state
-    const value = memory ? Math.ceil(memory.UsedSize * 100 / memory.TotalSize) : 0
+    const {disk} = this.state
+    const value = disk ? Math.ceil(disk.FreeSpace * 100 / disk.TotalSpace) : 0
     return (
       <div className="flex-1">
-        <LiquidView
-          title={`${gauge.name} ${memory ? `${(memory.UsedSize/1024).toFixed(1)}G/${(memory.TotalSize/1024).toFixed(1)}G` : ''}`}
-          value={value}/>
+        <LiquidView title={`${gauge.name} ${disk ? `${disk.FreeSpace}G/${disk.TotalSpace}G` : ''}`} value={value}/>
       </div>
     )
   }
