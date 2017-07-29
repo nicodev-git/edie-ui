@@ -7,18 +7,24 @@ const durations = '1 2 3 5 10 15 30'.split(' ').map(p => ({
   label: p, value: p
 }))
 
+const inputStyle = {
+  width: '100%'
+}
+
 export default class GEditView extends React.Component {
   constructor (props) {
     super(props)
+
+    const {gauge} = props
     this.state = {
-      resource: 'search',
-      savedSearchId: '',
-      monitorId: '',
-      duration: '3',
-      durationUnit: 'day',
-      splitBy: '1',
-      splitUnit: 'day',
-      name: ''
+      resource: gauge.resource || 'search',
+      savedSearchId: gauge.savedSearchId || '',
+      monitorId: gauge.monitorId || '',
+      duration: gauge.duration || '3',
+      durationUnit: gauge.durationUnit || 'day',
+      splitBy: gauge.splitBy || '1',
+      splitUnit: gauge.splitUnit || 'day',
+      name: gauge.name || ''
     }
   }
 
@@ -44,28 +50,42 @@ export default class GEditView extends React.Component {
     const {searchList, monitors} = this.props
     return (
       <div>
-        <TextField name="name" value={name} floatingLabelText="Name" className="valign-top mr-dialog" onChange={this.onChangeText.bind(this, 'name')}/>
-        <SelectField value={resource} floatingLabelText="Resource" className="valign-top" onChange={this.onChangeSelect.bind(this, 'resource')}>
-          {gaugeResources.map(p => <MenuItem key={p.value} value={p.value} primaryText={p.label}/>)}
-        </SelectField>
+        <div className="row">
+          <div className="col-md-6">
+            <TextField name="name" value={name} floatingLabelText="Name" className="valign-top" style={inputStyle} onChange={this.onChangeText.bind(this, 'name')}/>
+          </div>
+          <div className="col-md-6">
+            <SelectField value={resource} floatingLabelText="Resource" className="valign-top" style={inputStyle} onChange={this.onChangeSelect.bind(this, 'resource')}>
+              {gaugeResources.map(p => <MenuItem key={p.value} value={p.value} primaryText={p.label}/>)}
+            </SelectField>
+          </div>
+        </div>
 
-        {resource === 'search' ? (
-          <SelectField value={savedSearchId} floatingLabelText="Saved Search" className="valign-top mr-dialog" onChange={this.onChangeSelect.bind(this, 'savedSearchId')}>
-            {searchList.map(p => <MenuItem key={p.value} value={p.value} primaryText={p.label}/>)}
-          </SelectField>
-        ): null}
-        {resource === 'monitor' ? (
-          <SelectField value={monitorId} floatingLabelText="Monitor" className="valign-top" onChange={this.onChangeSelect.bind(this, 'monitorId')}>
-            {monitors.map(p => <MenuItem key={p.value} value={p.value} primaryText={p.label}/>)}
-          </SelectField>
-        ) : null}
+        <div className="row">
+          <div className="col-md-6">
+            {resource === 'search' ? (
+              <SelectField value={savedSearchId} floatingLabelText="Saved Search" className="valign-top mr-dialog" style={inputStyle} onChange={this.onChangeSelect.bind(this, 'savedSearchId')}>
+                {searchList.map(p => <MenuItem key={p.id} value={p.id} primaryText={p.name}/>)}
+              </SelectField>
+            ): null}
+            {resource === 'monitor' ? (
+              <SelectField value={monitorId} floatingLabelText="Monitor" className="valign-top" style={inputStyle} onChange={this.onChangeSelect.bind(this, 'monitorId')}>
+                {monitors.map(p => <MenuItem key={p.value} value={p.value} primaryText={p.label}/>)}
+              </SelectField>
+            ) : null}
+          </div>
 
-        <SelectField value={duration} floatingLabelText="Duration" className="valign-top mr-dialog" style={{width: 100}} onChange={this.onChangeSelect.bind(this, 'duration')}>
-          {durations.map(p => <MenuItem key={p.value} value={p.value} primaryText={p.label}/>)}
-        </SelectField>
-        <SelectField value={durationUnit} floatingLabelText="  " className="valign-top" style={{width: 120}} onChange={this.onChangeSelect.bind(this, 'durationUnit')}>
-          {gaugeDurationTypes.map(p => <MenuItem key={p.value} value={p.value} primaryText={p.label}/>)}
-        </SelectField>
+          <div className="col-md-3">
+            <SelectField value={duration} floatingLabelText="Duration" className="valign-top mr-dialog" style={inputStyle} onChange={this.onChangeSelect.bind(this, 'duration')}>
+              {durations.map(p => <MenuItem key={p.value} value={p.value} primaryText={p.label}/>)}
+            </SelectField>
+          </div>
+          <div className="col-md-3">
+            <SelectField value={durationUnit} floatingLabelText="  " className="valign-top" style={inputStyle} onChange={this.onChangeSelect.bind(this, 'durationUnit')}>
+              {gaugeDurationTypes.map(p => <MenuItem key={p.value} value={p.value} primaryText={p.label}/>)}
+            </SelectField>
+          </div>
+        </div>
       </div>
     )
   }
