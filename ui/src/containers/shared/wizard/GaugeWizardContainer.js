@@ -24,6 +24,8 @@ export default connect(
       resource: 'search',
       duration: '3',
       durationUnit: 'day',
+      splitBy: '1',
+      splitUnit: 'day',
       ...state.devices.wizardInitialValues
     },
     userInfo: state.dashboard.userInfo,
