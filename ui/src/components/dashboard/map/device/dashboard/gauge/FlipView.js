@@ -116,7 +116,7 @@ export default class FlipView extends React.Component {
     return (
       <div className={`${className || ''} card`} style={style}>
         {this.renderCard('card-back', this.renderBack())}
-        {this.renderCard('card-front', this.renderFront())}
+        {this.renderCard('card-front', this.renderFront(), true)}
       </div>
     )
   }
