@@ -7,7 +7,7 @@ import { ROOT_URL } from 'actions/config'
 import { dateFormat } from 'shared/Global'
 
 import FlipView from './FlipView'
-import LineChart from './display/LineChart'
+import BarChart from './display/BarChart'
 import GEditView from './GEditView'
 
 import {showAlert} from 'components/common/Alert'
@@ -20,7 +20,7 @@ const chartOptions = {
     display: false
   },
   elements: {
-    line: {
+    bar: {
       tension: 0
     }
   },
@@ -37,38 +37,7 @@ const chartOptions = {
   }
 }
 
-const monitorChartOptions = {
-  legend: {
-    display: false
-  },
-  elements: {
-    line: {
-      tension: 0
-    }
-  },
-  scales: {
-    yAxes: [{
-      display: true,
-      ticks: {
-        min: 0,
-        callback: function(value, index, values) {
-          if (Math.floor(value) === value) return value === 0 ? 'Down' : 'Up'
-        }
-      }
-    }]
-  },
-  tooltips: {
-    mode: 'label',
-    callbacks: {
-      label: function(tooltipItem, data) {
-        const indice = tooltipItem.index;
-        return data.datasets[0].data[indice] === 0 ? 'Down' : 'Up'
-      }
-    }
-  }
-}
-
-export default class GLineChart extends React.Component {
+export default class GBarChart extends React.Component {
   constructor (props) {
     super (props)
     this.state = {
@@ -156,7 +125,6 @@ export default class GLineChart extends React.Component {
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   renderFrontView () {
-    const {gauge} = this.props
     const {searchRecordCounts} = this.state
 
     const chartData = {
@@ -172,7 +140,7 @@ export default class GLineChart extends React.Component {
     return (
       <div className="flex-vertical flex-1">
         <div className="flex-1">
-          <LineChart chartData={chartData} chartOptions={gauge.resource === 'monitor' ? monitorChartOptions : chartOptions} />
+          <BarChart chartData={chartData} chartOptions={chartOptions} />
         </div>
       </div>
     )
