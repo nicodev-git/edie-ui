@@ -13,11 +13,13 @@ import { wizardConfig } from 'components/common/wizard/WizardConfig'
 import {showAlert} from 'components/common/Alert'
 
 import GLineChart from './gauge/GLineChart'
+import GMonitor from './gauge/GMonitor'
 
 const ResponsiveReactGridLayout = WidthProvider(Responsive)
 
 const gaugeMap = {
-  'Line Chart': GLineChart
+  'Line Chart': GLineChart,
+  'Monitor': GMonitor
 }
 export default class DeviceDashboard extends React.Component {
   constructor (props) {
