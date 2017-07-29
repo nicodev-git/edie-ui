@@ -1,18 +1,21 @@
 import React from 'react'
 import {RaisedButton, SelectField, MenuItem, TextField} from 'material-ui'
 
-import {gaugeDurationTypes} from 'shared/Global'
+import {gaugeDurationTypes, gaugeResources} from 'shared/Global'
 
 export default class GaugeBackView extends React.Component {
   render () {
     const {
-      duration, durationUnit, splitBy, splitUnit, selectedSearch, searchList, name,
-      onChangeDuration, onChangeDurationUnit, onChangeSplitBy, onChangeSplitUnit, onChangeSearch, onChangeName
+      resource, duration, durationUnit, splitBy, splitUnit, selectedSearch, searchList, name,
+      onChangeResource, onChangeDuration, onChangeDurationUnit, onChangeSplitBy, onChangeSplitUnit, onChangeSearch, onChangeName
     } = this.props
     return (
       <div>
         <div>
-          <TextField value={name} floatingLabelText="Title" onChange={onChangeName}/>
+          <TextField value={name} floatingLabelText="Title" onChange={onChangeName} className="valign-top"/>
+          <SelectField value={resource} floatingLabel="Resource" onChange={onChangeResource} className="valign-top">
+            {gaugeResources.map(p => <MenuItem key={p.value} value={p.value} primaryText={p.label}/>)}
+          </SelectField>
         </div>
         <div className="margin-md-top">
           Show Last

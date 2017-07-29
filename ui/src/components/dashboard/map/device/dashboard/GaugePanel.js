@@ -21,6 +21,7 @@ export default class GaugePanel extends React.Component {
       flip: false,
       clicked: false,
 
+      resource: gauge.resource || 'search',
       duration: gauge.duration || 3,
       durationUnit: gauge.durationUnit || 'day',
       splitBy: gauge.splitBy || 1,
@@ -126,6 +127,12 @@ export default class GaugePanel extends React.Component {
     })
   }
 
+  onChangeResource (e, index, value) {
+    this.setState({
+      resource: value
+    })
+  }
+
   onClickDelete (gauge) {
     showConfirm('Click OK to remove.', btn => {
       if (btn !== 'ok') return
@@ -138,6 +145,7 @@ export default class GaugePanel extends React.Component {
 
     const gauge = {
       ...this.props.gauge,
+      resource: this.state.resource,
       name: this.state.name,
       duration: this.state.duration,
       durationUnit: this.state.durationUnit,
@@ -174,6 +182,7 @@ export default class GaugePanel extends React.Component {
         onChangeName={this.onChangeName.bind(this)}
         onChangeDuration={this.onChangeDuration.bind(this)}
         onChangeDurationUnit={this.onChangeDurationUnit.bind(this)}
+        onChangeResource={this.onChangeResource.bind(this)}
       />
     )
   }

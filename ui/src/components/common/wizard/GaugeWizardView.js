@@ -3,13 +3,7 @@ import {Dialog} from 'material-ui'
 import { Field } from 'redux-form'
 import { SubmitBlock, FormInput, FormSelect } from 'components/modal/parts'
 
-import {gaugeDurationTypes} from 'shared/Global'
-
-const resources = [{
-  label: 'Search', value: 'search'
-}, {
-  label: 'Monitor', value: 'monitor'
-}]
+import {gaugeDurationTypes, gaugeResources} from 'shared/Global'
 
 const durations = '1 2 3 5 10 15 30'.split(' ').map(p => ({
   label: p, value: p
@@ -22,7 +16,7 @@ export default class GaugeWizardView extends React.Component {
       <Dialog open title={title || 'Gauge'} onRequestClose={onHide} contentStyle={{width: 585}}>
         <form onSubmit={onSubmit}>
           <Field name="name" component={FormInput} floatingLabel="Name" className="valign-top mr-dialog"/>
-          <Field name="resource" component={FormSelect} floatingLabel="Resource" options={resources} className="valign-top"/>
+          <Field name="resource" component={FormSelect} floatingLabel="Resource" options={gaugeResources} className="valign-top"/>
 
           {formValues.resource === 'search' && <Field name="savedSearchId" component={FormSelect} floatingLabel="Saved Search" options={searchList} className="valign-top mr-dialog"/>}
           {formValues.resource === 'monitor' && <Field name="monitorId" component={FormSelect} floatingLabel="Monitor" options={monitors} className="valign-top"/>}

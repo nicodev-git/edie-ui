@@ -241,3 +241,9 @@ export const gaugeDurationTypes = [{
 }, {
   label: 'Months', value: 'month'
 }]
+
+export const gaugeResources = [{
+  label: 'Search', value: 'search'
+}, {
+  label: 'Monitor', value: 'monitor'
+}]
