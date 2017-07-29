@@ -100,6 +100,19 @@ export default class GEditView extends React.Component {
           </div>
         </div>
 
+        <div className="row">
+          <div className="col-md-3">
+            <SelectField value={splitBy} floatingLabelText="Resolution" className="valign-top mr-dialog" style={inputStyle} onChange={this.onChangeSelect.bind(this, 'splitBy')}>
+              {durations.map(p => <MenuItem key={p.value} value={p.value} primaryText={p.label}/>)}
+            </SelectField>
+          </div>
+          <div className="col-md-3">
+            <SelectField value={splitUnit} floatingLabelText="  " className="valign-top" style={inputStyle} onChange={this.onChangeSelect.bind(this, 'splitUnit')}>
+              {gaugeDurationTypes.map(p => <MenuItem key={p.value} value={p.value} primaryText={p.label}/>)}
+            </SelectField>
+          </div>
+        </div>
+
         <DoneButton onClick={this.onClickDone.bind(this)}/>
       </div>
     )
