@@ -8,7 +8,8 @@ export default class FlipView extends React.Component {
 
     this.state = {
       flip: false,
-      clicked: false
+      clicked: false,
+      hovered: false
     }
   }
 
@@ -18,15 +19,33 @@ export default class FlipView extends React.Component {
     return flippedCSS
   }
 
+  onClickFlip () {
+    this.setState({flip: !this.state.flip, clicked: true})
+  }
+
+  renderInfoIcon () {
+    const {hovered} = this.state
+    return (
+      <div
+        style={{position: 'absolute', right: -8, bottom: -10}}
+        className={`link info-button ${hovered ? 'visible' : ''}`}
+        onClick={this.onClickFlip.bind(this)}>
+        <InfoIcon size={24}/>
+      </div>
+    )
+  }
+
   renderFront () {
     // return (
     //   <GaugeFrontView
     //     {...this.props} {...this.state} onClickFlip={this.onClickFlip.bind(this)}
     //   />
     // )
+    const {renderFrontView} = this.props
     return (
-      <div>
-
+      <div className="flex-vertical flex-1">
+        {renderFrontView && renderFrontView()}
+        {this.renderInfoIcon()}
       </div>
     )
   }
@@ -44,6 +63,10 @@ export default class FlipView extends React.Component {
     //     onChangeResource={this.onChangeResource.bind(this)}
     //   />
     // )
+    const {renderBackView} = this.props
+    return renderBackView && renderBackView({
+      onClickFlip: this.onClickFlip.bind(this)
+    })
   }
 
   renderCard (cls, children, front) {
