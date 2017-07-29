@@ -50,6 +50,18 @@ export default class DateRangePicker extends React.Component {
         moment().add(-6, 'days').startOf('day'),
         moment().endOf('day')
       ],
+      'Last 3 Months' : [
+        moment().add(-3, 'months').startOf('day'),
+        moment().endOf('day')
+      ],
+      'Last 6 Months' : [
+        moment().add(-6, 'months').startOf('day'),
+        moment().endOf('day')
+      ],
+      'Last 1 Year' : [
+        moment().add(-12, 'months').startOf('day'),
+        moment().endOf('day')
+      ],
       'Since Yesterday': [
         moment().add(-1, 'days').startOf('day'),
         moment().endOf('day')
