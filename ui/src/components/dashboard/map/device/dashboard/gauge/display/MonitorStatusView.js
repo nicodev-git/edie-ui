@@ -29,9 +29,9 @@ export default class MonitorStatusView extends React.Component {
         </div>
         {
           isUp ? (
-            <div style={labelStyle}>Last down {moment(monitor.lastfalure).fromNow()}</div>
+            <div style={labelStyle}>Last down {monitor.lastfalure ? moment(monitor.lastfalure).fromNow() : 'never'}</div>
           ) : (
-            <div style={labelStyle}>Last up {moment(monitor.lastsuccess).fromNow()}</div>
+            <div style={labelStyle}>Last up {monitor.lastsuccess ? moment(monitor.lastsuccess).fromNow() : 'never'}</div>
           )
         }
       </div>

@@ -14,6 +14,11 @@ export default class GMonitor extends React.Component {
     this.renderBackView = this.renderBackView.bind(this)
     this.renderFrontView = this.renderFrontView.bind(this)
   }
+
+  onClickDelete () {
+    this.props.removeDeviceGauge(this.props.gauge, this.props.device)
+  }
+
   renderFrontView () {
     const {gauge, device} = this.props
 
@@ -41,6 +46,8 @@ export default class GMonitor extends React.Component {
         loading={this.state.loading}
         renderFrontView={this.renderFrontView}
         renderBackView={this.renderBackView}
+
+        onClickDelete={this.onClickDelete.bind(this)}
       />
     )
   }
