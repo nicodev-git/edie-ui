@@ -91,7 +91,7 @@ export default class GLineChart extends React.Component {
   }
 
   fetchRecordCount (props) {
-    const {gauge, searchList} = props
+    const {gauge, searchList, device} = props
     const {savedSearchId, monitorId, resource, duration, durationUnit, splitBy, splitUnit,workflowId} = gauge
 
     this.setState({
@@ -118,7 +118,7 @@ export default class GLineChart extends React.Component {
       })
     } else if (resource === 'incident'){
       const searchParams = {
-        query: '',
+        query: `deviceid=${device.id}`,
         workflow: workflowId,
         collections: 'incident',
         severity: severities.map(p => p.value).join(','),
@@ -198,9 +198,7 @@ export default class GLineChart extends React.Component {
     return (
       <div>
         <GEditView
-          searchList={this.props.searchList}
-          gauge={this.props.gauge}
-          monitors={this.props.monitors}
+          {...this.props}
           onSubmit={this.onSubmit.bind(this, options)}
         />
       </div>

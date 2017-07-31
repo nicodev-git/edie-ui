@@ -35,6 +35,7 @@ export default class GEditView extends React.Component {
       resource: gauge.resource || 'search',
       savedSearchId: gauge.savedSearchId || '',
       monitorId: gauge.monitorId || '',
+      workflowId: gauge.workflowId || '',
       duration: gauge.duration || '3',
       durationUnit: gauge.durationUnit || 'day',
       splitBy: gauge.splitBy || '1',
@@ -78,13 +79,13 @@ export default class GEditView extends React.Component {
 
   onClickDone () {
     const {onSubmit} = this.props
-    const {resource, savedSearchId, monitorId,
+    const {resource, savedSearchId, monitorId, workflowId,
       duration, durationUnit, splitBy, splitUnit, name,
       severities, dateFrom, dateTo, fixed,
       widgetSize
     }  = this.state
     const values = {
-      resource, savedSearchId, monitorId,
+      resource, savedSearchId, monitorId, workflowId,
       duration, durationUnit, splitBy, splitUnit, name,
       severities, dateFrom, dateTo, fixed,
       widgetSize
@@ -94,11 +95,11 @@ export default class GEditView extends React.Component {
 
   renderNormal () {
     const {
-      resource, savedSearchId, monitorId,
+      resource, savedSearchId, monitorId, workflowId,
       duration, durationUnit, splitBy, splitUnit, name,
       widgetSize
     } = this.state
-    const {searchList, monitors, hideDuration, hideSplit} = this.props
+    const {searchList, monitors, hideDuration, hideSplit, workflows} = this.props
     return (
       <div>
         <div className="row">
@@ -122,6 +123,11 @@ export default class GEditView extends React.Component {
             {resource === 'monitor' ? (
               <SelectField value={monitorId} floatingLabelText="Monitor" className="valign-top" style={inputStyle} onChange={this.onChangeSelect.bind(this, 'monitorId')}>
                 {monitors.map(p => <MenuItem key={p.value} value={p.value} primaryText={p.label}/>)}
+              </SelectField>
+            ) : null}
+            {resource === 'incident' ? (
+              <SelectField value={workflowId} floatingLabelText="Workflow" className="valign-top" style={inputStyle} onChange={this.onChangeSelect.bind(this, 'workflowId')}>
+                {workflows.map(p => <MenuItem key={p.id} value={p.id} primaryText={p.name}/>)}
               </SelectField>
             ) : null}
           </div>

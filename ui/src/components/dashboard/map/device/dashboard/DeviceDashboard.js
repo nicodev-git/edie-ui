@@ -53,6 +53,7 @@ export default class DeviceDashboard extends React.Component {
   componentWillMount () {
     this.props.fetchGauges()
     this.props.fetchSysSearchOptions()
+    this.props.fetchWorkflows()
   }
 
   componentDidMount () {

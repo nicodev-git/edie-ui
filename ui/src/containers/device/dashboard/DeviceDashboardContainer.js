@@ -5,11 +5,12 @@ import { connect } from 'react-redux'
 
 import {
   fetchSysSearchOptions,
+  fetchWorkflows,
+
+  fetchGauges,
   addDeviceGauge,
   updateDeviceGauge,
   removeDeviceGauge,
-
-  fetchGauges,
 
   fixIncident,
   ackIncident
@@ -33,15 +34,17 @@ export default connect(
 
     userInfo: state.dashboard.userInfo,
     sysSearchOptions: state.search.sysSearchOptions,
+    workflows: state.settings.workflows,
 
     incidentDraw: state.devices.incidentDraw
   }), {
     fetchSysSearchOptions,
+    fetchWorkflows,
+
+    fetchGauges,
     addDeviceGauge,
     updateDeviceGauge,
     removeDeviceGauge,
-
-    fetchGauges,
 
     fixIncident,
     ackIncident
