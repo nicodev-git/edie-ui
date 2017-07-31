@@ -31,7 +31,6 @@ export default class IncidentTable extends React.Component {
       'displayName': 'Severity',
       'columnName': 'severity',
       'cssClassName': 'text-center width-80',
-      'customHeaderComponent': this.renderColHeader.bind(this),
       'customComponent': (props) => {
         return getSeverityIcon(props.data)
       }
@@ -39,7 +38,6 @@ export default class IncidentTable extends React.Component {
       'displayName': 'Date/Time',
       'columnName': 'startTimestamp',
       'cssClassName': 'nowrap text-center width-140',
-      'customHeaderComponent': this.renderColHeader.bind(this),
       'customComponent': (props) => {
         const {data} = props
         if (!data) return <span/>
