@@ -1,4 +1,5 @@
 import React from 'react'
+import ReactTooltip from 'react-tooltip'
 
 import FlipView from './FlipView'
 import IncidentTable from './display/IncidentTable'
@@ -39,11 +40,10 @@ export default class GIncidentTable extends React.Component {
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   renderFrontView () {
-    const {gauge} = this.props
-
     return (
       <div className="flex-1">
         <IncidentTable device={this.props.device} />
+        <ReactTooltip />
       </div>
     )
   }

@@ -1,9 +1,9 @@
 import React from 'react'
 import moment from 'moment'
-import ReactTooltip from 'react-tooltip'
+// import ReactTooltip from 'react-tooltip'
 
 import InfiniteTable from 'components/common/InfiniteTable'
-import { dateFormat, getSeverityIcon } from 'shared/Global'
+import { getSeverityIcon } from 'shared/Global'
 
 export default class IncidentTable extends React.Component {
   constructor (props) {
@@ -29,63 +29,71 @@ export default class IncidentTable extends React.Component {
     }
     this.cells = [{
       'displayName': 'Severity',
-      'columnName': 'entity.severity',
+      'columnName': 'severity',
       'cssClassName': 'text-center width-80',
+      'customHeaderComponent': this.renderColHeader.bind(this),
       'customComponent': (props) => {
-        return <span>{getSeverityIcon(props.data)}</span>
+        return getSeverityIcon(props.data)
       }
     }, {
       'displayName': 'Date/Time',
-      'columnName': 'entity.startTimestamp',
-      'cssClassName': 'nowrap text-center width-180',
+      'columnName': 'startTimestamp',
+      'cssClassName': 'nowrap text-center width-140',
+      'customHeaderComponent': this.renderColHeader.bind(this),
       'customComponent': (props) => {
         const {data} = props
         if (!data) return <span/>
         return (
-          <span data-tip={moment(new Date(data)).format(dateFormat)}>
+          <span data-tip={moment(new Date(data)).format('YYYY-MM-DD HH:mm:ss')}>
             {moment(new Date(data)).fromNow()}
           </span>
         )
       }
     }, {
-      'displayName': 'System',
-      'columnName': 'entity.devicename',
-      'cssClassName': 'width-180'
-    }, {
-      'displayName': 'Workflow',
-      'columnName': 'entity.workflow',
-      'cssClassName': 'width-180'
-    }, {
       'displayName': 'Description',
-      'columnName': 'entity.description',
-      'weight': 1
+      'columnName': 'description',
+      'customComponent': (props) => {
+        let str = props.data
+        if (props.rowData.lastcomment) {
+          str += `<br/><b>Reason:</b> ${props.rowData.lastcomment}`
+        }
+
+        return <span dangerouslySetInnerHTML={{ __html: str }} /> // eslint-disable-line react/no-danger
+      }
     }/*, {
       'displayName': 'Actions',
       'columnName': 'actions',
-      'cssClassName': 'width-180',
+      'cssClassName': 'nowrap width-220',
       'customComponent': (p) => {
         const row = p.rowData
         // setTimeout(() => {
         //   ReactTooltip.rebuild()
         // }, 1)
         return (
-          <div className = "table-icons-container">
-            <div onClick={() => { this.props.ackIncident(row) }}>
+          <div className="table-icons-container">
+            <div onClick={() => showIncidentDetail(row)}>
+              {openicon}
+            </div>
+            &nbsp;
+
+            <div onClick={() => { props.ackIncident(row) }}>
               {row.acknowledged ? thumbup : thumpdown}
             </div>
+            &nbsp;
 
             <div onClick={() => this.onClickFixIncident(row)}>
               {row.fixed ? done : notdone}
             </div>
+            &nbsp;
 
             <div onClick={showIncidentRaw.bind(null, row)}>
               {rawtext}
             </div>
+            &nbsp;
 
             {
               (row.fixed && !row.whathappened)
-                ? <div
-                  onClick={this.showIncidentComments.bind(this, row)}>
+                ? <div onClick={this.showIncidentComments.bind(this, row)}>
                   {reason}
                 </div>
                 : null
@@ -118,26 +126,18 @@ export default class IncidentTable extends React.Component {
   }
 
   render () {
-    const {duration, durationUnit} = this.props
-
-    const dateFrom = moment().add(-duration, `${durationUnit}s`).startOf(durationUnit).format(dateFormat)
-    const dateTo = moment().endOf(durationUnit).format(dateFormat)
-
     return (
-      <div className="flex-1 table-no-gap">
-        <InfiniteTable
-          cells={this.cells}
-          ref="table"
-          rowMetadata={{'key': 'id'}}
-          selectable
-          allowMultiSelect
-          onRowDblClick={this.onRowDblClick.bind(this)}
+      <InfiniteTable
+        cells={this.cells}
+        ref="table"
+        rowMetadata={{'key': 'id'}}
+        selectable
+        allowMultiSelect
+        onRowDblClick={this.onRowDblClick.bind(this)}
 
-          url="/incident/search/findBy"
-          params={params}
-        />
-        <ReactTooltip />
-      </div>
+        url="/incident/search/findBy"
+        params={this.getParams()}
+      />
     )
   }
 }
