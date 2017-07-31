@@ -58,14 +58,14 @@ export default class FlipView extends React.Component {
     //     {...this.props} {...this.state} onClickFlip={this.onClickFlip.bind(this)}
     //   />
     // )
-    const {renderFrontView} = this.props
+    const {renderFrontView, viewOnly} = this.props
     return (
       <div
         className="flex-vertical flex-1"
         onMouseEnter={this.onMouseEnter.bind(this)}
         onMouseLeave={this.onMouseLeave.bind(this)}>
         {renderFrontView && renderFrontView()}
-        {this.renderInfoIcon()}
+        {!viewOnly && this.renderInfoIcon()}
       </div>
     )
   }

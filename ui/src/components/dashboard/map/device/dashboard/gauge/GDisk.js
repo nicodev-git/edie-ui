@@ -76,6 +76,7 @@ export default class GDisk extends React.Component {
         renderBackView={this.renderBackView}
 
         onClickDelete={this.onClickDelete.bind(this)}
+        viewOnly
       />
     )
   }
