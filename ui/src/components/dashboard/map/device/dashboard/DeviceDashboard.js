@@ -131,7 +131,8 @@ export default class DeviceDashboard extends React.Component {
     } else {
       const options = {
         title: tpl.name,
-        templateName: tpl.name
+        templateName: tpl.name,
+        widgetSize: tpl.widgetSize || 1
       }
 
       this.showAddWizard(options, (id, name, data) => {
@@ -177,7 +178,8 @@ export default class DeviceDashboard extends React.Component {
     const {options, callback, closeCallback} = this.state.deviceWizardConfig
 
     const extra = {
-      templateName: options.templateName
+      templateName: options.templateName,
+      widgetSize: options.widgetSize
     }
 
     return (
@@ -255,11 +257,29 @@ export default class DeviceDashboard extends React.Component {
 
   render () {
     const gauges = this.getGauges()
-    const layout = w => gauges.map((p, i) => ({
-      i: p.id,
-      x: i % w, y: parseInt(i / w, 10),
-      w: p.templateName === 'Incident Table' ? Math.min(2, w) : 1, h: 1
-    }))
+    const layout = mw => {
+      let x = 0
+      let y = 0
+      return gauges.map((p, i) => {
+        const w = Math.min(p.widgetSize || 1, mw)
+        if (x + w > mw) {
+          x = 0
+          y++
+        }
+        const op = {
+          i: p.id,
+          x, y,
+          w, h: 1
+        }
+
+        x += w
+        if (x >= mw) {
+          x = 0
+          y++
+        }
+        return op
+      })
+    }
     const cols = {lg: 3, md: 2, sm: 2, xs: 1, xxs: 1}
     const layouts = {
       lg: layout(cols['lg']),

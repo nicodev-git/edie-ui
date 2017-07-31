@@ -22,6 +22,10 @@ const fixOptions = [{
   label: 'Fixed', value: 'true'
 }]
 
+const sizeList = [1, 2, 3].map(p => ({
+  label: p, value: p
+}))
+
 export default class GEditView extends React.Component {
   constructor (props) {
     super(props)
@@ -40,7 +44,9 @@ export default class GEditView extends React.Component {
       fixed: gauge.fixed || '',
       severities: gauge.severities || [],
       dateFrom: gauge.dateFrom || 0,
-      dateTo: gauge.dateTo || 0
+      dateTo: gauge.dateTo || 0,
+
+      widgetSize: gauge.widgetSize || 1
     }
   }
 
@@ -74,12 +80,14 @@ export default class GEditView extends React.Component {
     const {onSubmit} = this.props
     const {resource, savedSearchId, monitorId,
       duration, durationUnit, splitBy, splitUnit, name,
-      severities, dateFrom, dateTo, fixed
+      severities, dateFrom, dateTo, fixed,
+      widgetSize
     }  = this.state
     const values = {
       resource, savedSearchId, monitorId,
       duration, durationUnit, splitBy, splitUnit, name,
-      severities, dateFrom, dateTo, fixed
+      severities, dateFrom, dateTo, fixed,
+      widgetSize
     }
     onSubmit && onSubmit(values)
   }
@@ -87,7 +95,8 @@ export default class GEditView extends React.Component {
   renderNormal () {
     const {
       resource, savedSearchId, monitorId,
-      duration, durationUnit, splitBy, splitUnit, name
+      duration, durationUnit, splitBy, splitUnit, name,
+      widgetSize
     } = this.state
     const {searchList, monitors, hideDuration, hideSplit} = this.props
     return (
@@ -141,6 +150,14 @@ export default class GEditView extends React.Component {
             </SelectField>
           </div>
         </div>}
+
+        <div className="row">
+          <div className="col-md-3">
+            <SelectField value={widgetSize} floatingLabelText="Size" className="valign-top mr-dialog" style={inputStyle} onChange={this.onChangeSelect.bind(this, 'widgetSize')}>
+              {sizeList.map(p => <MenuItem key={p.value} value={p.value} primaryText={p.label}/>)}
+            </SelectField>
+          </div>
+        </div>
       </div>
     )
   }
@@ -152,7 +169,7 @@ export default class GEditView extends React.Component {
   }
 
   renderIncidentTable () {
-    const {fixed, severities, dateFrom, dateTo, name} = this.state
+    const {fixed, severities, dateFrom, dateTo, name, widgetSize} = this.state
     return (
       <div>
         <TextField name="name" value={name} floatingLabelText="Name" className="valign-top mr-dialog" onChange={this.onChangeText.bind(this, 'name')}/>
@@ -168,7 +185,7 @@ export default class GEditView extends React.Component {
           {fixOptions.map(p => <MenuItem key={p.value} value={p.value} primaryText={p.label}/>)}
         </SelectField>
 
-        <div className="inline-block" style={{marginTop: 24}}>
+        <div className="inline-block mr-dialog" style={{marginTop: 24}}>
           <DateRangePicker
             startDate={moment(dateFrom)}
             endDate={moment(dateTo)}
@@ -176,6 +193,11 @@ export default class GEditView extends React.Component {
             renderer={this.renderDateLabel.bind(this)}
           />
         </div>
+
+
+        <SelectField value={widgetSize} floatingLabelText="Size" className="valign-top mr-dialog" onChange={this.onChangeSelect.bind(this, 'widgetSize')}>
+          {sizeList.map(p => <MenuItem key={p.value} value={p.value} primaryText={p.label}/>)}
+        </SelectField>
       </div>
     )
   }
