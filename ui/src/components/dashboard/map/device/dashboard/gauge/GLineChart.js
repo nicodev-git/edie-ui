@@ -124,8 +124,8 @@ export default class GLineChart extends React.Component {
       }
       const searchParams = JSON.parse(searchList[index].data)
 
-      const dateFrom = moment().add(-duration, `${durationUnit}s`).startOf(durationUnit).format(dateFormat)
-      const dateTo = moment().endOf(durationUnit).format(dateFormat)
+      const dateFrom = moment().add(-duration, `${durationUnit}s`).startOf('day').format(dateFormat)
+      const dateTo = moment().endOf('day').format(dateFormat)
 
       const params = { ...searchParams, splitBy, splitUnit, dateFrom, dateTo }
       axios.get(`${ROOT_URL}/search/getRecordCount`, {params}).then(res => {

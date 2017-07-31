@@ -43,7 +43,7 @@ export default class GAccelView extends React.Component {
     return (
       <div className="flex-vertical flex-1">
         <div className="flex-1">
-          <PieChart chartData={[]}/>
+          <PieChart chartData={{labels: ['Count1', 'Count2'], datasets:[{data: [300, 50], backgroundColor:['#FF6384', '#36A2EB']}]}}/>
         </div>
       </div>
     )
