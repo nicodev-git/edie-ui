@@ -262,7 +262,7 @@ export default class DeviceDashboard extends React.Component {
     const up = agentDevice && agentDevice.agent && (agentDevice.agent.lastSeen - now) <= 5 * 60000
     const img = up ? 'green_light.png' : 'yellow_light.png'
     return (
-      <div className="pull-left margin-lg-left margin-md-top" data-tip={up ? moment(agentDevice.agent.lastSeen).fromNow() : ''} data-place="right">
+      <div className="pull-left margin-lg-left margin-md-top" data-tip={agentDevice.agent ? moment(agentDevice.agent.lastSeen).fromNow() : ''} data-place="right">
         <img alt="" src={`/resources/images/dashboard/map/device/monitors/${img}`} width="16"
              style={{verticalAlign: 'top', marginTop: -1, marginLeft: 5}}/>
       </div>
