@@ -60,7 +60,7 @@ export default class GEditView extends React.Component {
       resource, savedSearchId, monitorId,
       duration, durationUnit, splitBy, splitUnit, name
     } = this.state
-    const {searchList, monitors} = this.props
+    const {searchList, monitors, hideDuration, hideSplit} = this.props
     return (
       <div>
         <div className="row">
@@ -88,19 +88,19 @@ export default class GEditView extends React.Component {
             ) : null}
           </div>
 
-          <div className="col-md-3">
+          {!hideDuration && <div className="col-md-3">
             <SelectField value={duration} floatingLabelText="Duration" className="valign-top mr-dialog" style={inputStyle} onChange={this.onChangeSelect.bind(this, 'duration')}>
               {durations.map(p => <MenuItem key={p.value} value={p.value} primaryText={p.label}/>)}
             </SelectField>
-          </div>
-          <div className="col-md-3">
+          </div>}
+          {!hideDuration && <div className="col-md-3">
             <SelectField value={durationUnit} floatingLabelText="  " className="valign-top" style={inputStyle} onChange={this.onChangeSelect.bind(this, 'durationUnit')}>
               {gaugeDurationTypes.map(p => <MenuItem key={p.value} value={p.value} primaryText={p.label}/>)}
             </SelectField>
-          </div>
+          </div>}
         </div>
 
-        <div className="row">
+        {!hideSplit && <div className="row">
           <div className="col-md-3">
             <SelectField value={splitBy} floatingLabelText="Resolution" className="valign-top mr-dialog" style={inputStyle} onChange={this.onChangeSelect.bind(this, 'splitBy')}>
               {durations.map(p => <MenuItem key={p.value} value={p.value} primaryText={p.label}/>)}
@@ -111,7 +111,7 @@ export default class GEditView extends React.Component {
               {gaugeDurationTypes.map(p => <MenuItem key={p.value} value={p.value} primaryText={p.label}/>)}
             </SelectField>
           </div>
-        </div>
+        </div>}
 
         <DoneButton onClick={this.onClickDone.bind(this)}/>
       </div>
