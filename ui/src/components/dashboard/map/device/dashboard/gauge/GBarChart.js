@@ -67,8 +67,9 @@ export default class GBarChart extends React.Component {
       loading: true
     })
 
-    const dateFrom = moment().add(-duration + 1, `${durationUnit}s`).startOf('day').format(dateFormat)
-    const dateTo = moment().endOf('day').format(dateFormat)
+    const dateFrom = moment().add(-duration + 1, `${durationUnit}s`)
+      .startOf(durationUnit === 'hour' || duration === 1 ? durationUnit : 'day').format(dateFormat)
+    const dateTo = moment().endOf(durationUnit === 'hour' ? durationUnit : 'day').format(dateFormat)
 
     if (resource === 'monitor') {
       axios.get(`${ROOT_URL}/event/search/findByDate`, {
