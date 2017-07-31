@@ -2,8 +2,10 @@ import React from 'react'
 import {findIndex} from 'lodash'
 
 import FlipView from './FlipView'
-import DoneButton from './DoneButton'
 import MonitorStatusView from './display/MonitorStatusView'
+import GEditView from './GEditView'
+
+import {showAlert} from 'components/common/Alert'
 
 export default class GMonitor extends React.Component {
   constructor (props) {
@@ -19,6 +21,24 @@ export default class GMonitor extends React.Component {
     this.props.removeDeviceGauge(this.props.gauge, this.props.device)
   }
 
+  onSubmit (options, values) {
+    console.log(values)
+
+    if (!values.name) {
+      showAlert('Please type name.')
+      return
+    }
+    const gauge = {
+      ...this.props.gauge,
+      ...values
+    }
+
+    this.props.updateDeviceGauge(gauge, this.props.device)
+    options.onClickFlip()
+  }
+
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
   renderFrontView () {
     const {gauge, device} = this.props
 
@@ -30,10 +50,12 @@ export default class GMonitor extends React.Component {
   }
   renderBackView (options) {
     return (
-      <div>
-        Back View
-        <DoneButton onClick={options.onClickFlip}/>
-      </div>
+      <GEditView
+        searchList={this.props.searchList}
+        gauge={this.props.gauge}
+        monitors={this.props.monitors}
+        onSubmit={this.onSubmit.bind(this, options)}
+      />
     )
   }
   render () {
