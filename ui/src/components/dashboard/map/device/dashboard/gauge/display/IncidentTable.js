@@ -1,9 +1,20 @@
 import React from 'react'
 import moment from 'moment'
-// import ReactTooltip from 'react-tooltip'
 
-import InfiniteTable from 'components/common/InfiniteTable'
 import { getSeverityIcon } from 'shared/Global'
+import CommentsModal from 'components/common/incident/CommentsModal'
+import InfiniteTable from 'components/common/InfiniteTable'
+import { showPrompt } from 'components/common/Alert'
+
+import {
+  showIncidentDetail,
+  showIncidentRaw
+} from 'components/common/incident/Incident'
+
+import {
+  thumbup, thumpdown, done, notdone,
+  rawtext, reason, openicon
+} from 'style/common/materialStyles'
 
 export default class IncidentTable extends React.Component {
   constructor (props) {
@@ -48,15 +59,12 @@ export default class IncidentTable extends React.Component {
 
         return <span dangerouslySetInnerHTML={{ __html: str }} /> // eslint-disable-line react/no-danger
       }
-    }/*, {
+    }, {
       'displayName': 'Actions',
       'columnName': 'actions',
       'cssClassName': 'nowrap width-220',
       'customComponent': (p) => {
         const row = p.rowData
-        // setTimeout(() => {
-        //   ReactTooltip.rebuild()
-        // }, 1)
         return (
           <div className="table-icons-container">
             <div onClick={() => showIncidentDetail(row)}>
@@ -90,12 +98,27 @@ export default class IncidentTable extends React.Component {
           </div>
         )
       }
-    }*/]
+    }]
   }
   onRowDblClick () {
 
   }
+  showIncidentComments (incident) {
+    this.setState({
+      incident,
+      commentModalVisible: true
+    })
+  }
+  onClickFixIncident (incident) {
+    showPrompt('Please type comment.', '', text => {
+      if (!text) return
 
+      const {userInfo} = this.props
+      const user = userInfo ? userInfo.username : 'User'
+
+      this.props.fixIncident(incident, user, text)
+    })
+  }
   getParams () {
     const { severities, fixed, dateFrom, dateTo } = this.props.gauge
     const searchParams = {
@@ -112,18 +135,29 @@ export default class IncidentTable extends React.Component {
   }
 
   render () {
+    const {incident} = this.state
     return (
-      <InfiniteTable
-        cells={this.cells}
-        ref="table"
-        rowMetadata={{'key': 'id'}}
-        selectable
-        allowMultiSelect
-        onRowDblClick={this.onRowDblClick.bind(this)}
+      <div className="flex-1">
+        <InfiniteTable
+          cells={this.cells}
+          ref="table"
+          rowMetadata={{'key': 'id'}}
+          selectable
+          allowMultiSelect
+          onRowDblClick={this.onRowDblClick.bind(this)}
 
-        url="/incident/search/findBy"
-        params={this.getParams()}
-      />
+          url="/incident/search/findBy"
+          params={this.getParams()}
+        />
+
+        {this.state.commentModalVisible &&
+        <CommentsModal
+          incident={incident}
+          updateDeviceIncident={this.props.updateDeviceIncident}
+          onClose={() => {
+            this.setState({commentModalVisible: false})
+          }}/>}
+      </div>
     )
   }
 }

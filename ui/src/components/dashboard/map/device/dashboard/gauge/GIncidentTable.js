@@ -41,8 +41,8 @@ export default class GIncidentTable extends React.Component {
 
   renderFrontView () {
     return (
-      <div className="flex-1">
-        <IncidentTable device={this.props.device} gauge={this.props.gauge}/>
+      <div className="flex-vertical flex-1">
+        <IncidentTable {...this.props}/>
         <ReactTooltip />
       </div>
     )

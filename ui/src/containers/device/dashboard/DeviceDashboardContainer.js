@@ -9,7 +9,10 @@ import {
   updateDeviceGauge,
   removeDeviceGauge,
 
-  fetchGauges
+  fetchGauges,
+
+  fixIncident,
+  ackIncident
 } from 'actions'
 
 class DeviceDashboardContainer extends React.Component {
@@ -29,13 +32,18 @@ export default connect(
     mapLines: state.devices.mapLines,
 
     userInfo: state.dashboard.userInfo,
-    sysSearchOptions: state.search.sysSearchOptions
+    sysSearchOptions: state.search.sysSearchOptions,
+
+    incidentDraw: state.devices.incidentDraw
   }), {
     fetchSysSearchOptions,
     addDeviceGauge,
     updateDeviceGauge,
     removeDeviceGauge,
 
-    fetchGauges
+    fetchGauges,
+
+    fixIncident,
+    ackIncident
   }
 )(withRouter(DeviceDashboardContainer))
