@@ -219,7 +219,8 @@ export default class DeviceDashboard extends React.Component {
     return (
       <div key={p.id}>
         <GaugePanel
-          device={this.props.device} gauge={p}
+          {...this.props}
+          gauge={p}
           searchList={this.getSearchList()}
           monitors={this.getMonitors()}
 

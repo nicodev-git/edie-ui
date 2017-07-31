@@ -122,7 +122,7 @@ export default class IncidentTable extends React.Component {
   getParams () {
     const { severities, fixed, dateFrom, dateTo } = this.props.gauge
     const searchParams = {
-      draw: 1,
+      draw: this.props.incidentDraw,
       description: '""',
       severity: severities,
       afterStartTimestamp: dateFrom,
