@@ -4,7 +4,7 @@ import {findIndex} from 'lodash'
 import axios from 'axios'
 
 import { ROOT_URL } from 'actions/config'
-import { dateFormat } from 'shared/Global'
+import { dateFormat, severities } from 'shared/Global'
 
 import FlipView from './FlipView'
 import BarChart from './display/BarChart'
@@ -60,17 +60,17 @@ export default class GBarChart extends React.Component {
   }
 
   fetchRecordCount (props) {
-    const {gauge, searchList} = props
-    const {savedSearchId, monitorId, resource, duration, durationUnit, splitBy, splitUnit} = gauge
+    const {gauge, searchList, device} = props
+    const {savedSearchId, monitorId, resource, duration, durationUnit, splitBy, splitUnit,workflowId} = gauge
 
     this.setState({
       loading: true
     })
 
-    if (resource === 'monitor') {
-      const dateFrom = moment().add(-duration + 1, `${durationUnit}s`).startOf('day').valueOf()
-      const dateTo = moment().endOf('day').valueOf()
+    const dateFrom = moment().add(-duration + 1, `${durationUnit}s`).startOf('day').format(dateFormat)
+    const dateTo = moment().endOf('day').format(dateFormat)
 
+    if (resource === 'monitor') {
       axios.get(`${ROOT_URL}/event/search/findByDate`, {
         params: {
           dateFrom, dateTo, monitorId,
@@ -85,6 +85,22 @@ export default class GBarChart extends React.Component {
           loading: false
         })
       })
+    } else if (resource === 'incident'){
+      const searchParams = {
+        query: `deviceid=${device.id}`,
+        workflow: workflowId,
+        collections: 'incident',
+        severity: severities.map(p => p.value).join(','),
+        tag: '',
+        monitorTypes: ''
+      }
+      const params = { ...searchParams, splitBy, splitUnit, dateFrom, dateTo }
+      axios.get(`${ROOT_URL}/search/getRecordCount`, {params}).then(res => {
+        this.setState({
+          searchRecordCounts: res.data,
+          loading: false
+        })
+      })
     } else {
       const index = findIndex(searchList, {id: savedSearchId})
       if (index < 0) {
@@ -92,9 +108,6 @@ export default class GBarChart extends React.Component {
         return
       }
       const searchParams = JSON.parse(searchList[index].data)
-
-      const dateFrom = moment().add(-duration + 1, `${durationUnit}s`).startOf(durationUnit).format(dateFormat)
-      const dateTo = moment().endOf(durationUnit).format(dateFormat)
 
       const params = { ...searchParams, splitBy, splitUnit, dateFrom, dateTo }
       axios.get(`${ROOT_URL}/search/getRecordCount`, {params}).then(res => {
@@ -153,9 +166,7 @@ export default class GBarChart extends React.Component {
     return (
       <div>
         <GEditView
-          searchList={this.props.searchList}
-          gauge={this.props.gauge}
-          monitors={this.props.monitors}
+          {...this.props}
           onSubmit={this.onSubmit.bind(this, options)}
         />
       </div>
