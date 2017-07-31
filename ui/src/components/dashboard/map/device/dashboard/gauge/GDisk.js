@@ -48,12 +48,11 @@ export default class GDisk extends React.Component {
   }
 
   renderFrontView () {
-    const {gauge} = this.props
     const {disk} = this.state
     const value = disk ? Math.ceil(disk.FreeSpace * 100 / disk.TotalSpace) : 0
     return (
       <div className="flex-1">
-        <LiquidView title={`${gauge.name} ${disk ? `${disk.FreeSpace}G/${disk.TotalSpace}G` : ''}`} value={value}/>
+        <LiquidView title={`${disk ? `${disk.Name} ${disk.FreeSpace}G/${disk.TotalSpace}G` : ''}`} value={value}/>
       </div>
     )
   }
