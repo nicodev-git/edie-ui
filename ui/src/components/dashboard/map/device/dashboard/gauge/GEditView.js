@@ -1,8 +1,10 @@
 import React from 'react'
-import {TextField, SelectField, MenuItem} from 'material-ui'
+import moment from 'moment'
+import {TextField, SelectField, MenuItem, RaisedButton} from 'material-ui'
 
 import DoneButton from './DoneButton'
 import {gaugeDurationTypes, gaugeResources} from 'shared/Global'
+import DateRangePicker from 'components/common/DateRangePicker'
 
 const durations = '1 2 3 5 10 15 30'.split(' ').map(p => ({
   label: p, value: parseInt(p, 10)
@@ -11,6 +13,14 @@ const durations = '1 2 3 5 10 15 30'.split(' ').map(p => ({
 const inputStyle = {
   width: '100%'
 }
+
+const fixOptions = [{
+  label: 'Any', value: '',
+}, {
+  label: 'Unfixed', value: 'false'
+}, {
+  label: 'Fixed', value: 'true'
+}]
 
 export default class GEditView extends React.Component {
   constructor (props) {
@@ -25,7 +35,12 @@ export default class GEditView extends React.Component {
       durationUnit: gauge.durationUnit || 'day',
       splitBy: gauge.splitBy || '1',
       splitUnit: gauge.splitUnit || 'day',
-      name: gauge.name || ''
+      name: gauge.name || '',
+
+      fixed: gauge.fixed || '',
+      severities: gauge.severities || [],
+      dateFrom: gauge.dateFrom || 0,
+      dateTo: gauge.dateTo || 0
     }
   }
 
@@ -43,19 +58,33 @@ export default class GEditView extends React.Component {
     this.setState(state)
   }
 
+  onChangeSeverity (e, index, values) {
+    this.setState({
+      selectedSeverity: values
+    })
+  }
+  onChangeDateRange ({startDate, endDate}) {
+    this.setState({
+      dateFrom: startDate.valueOf(),
+      dateTo: endDate.valueOf()
+    })
+  }
+
   onClickDone () {
     const {onSubmit} = this.props
     const {resource, savedSearchId, monitorId,
-      duration, durationUnit, splitBy, splitUnit, name
+      duration, durationUnit, splitBy, splitUnit, name,
+      severities, dateFrom, dateTo, fixed
     }  = this.state
     const values = {
       resource, savedSearchId, monitorId,
-      duration, durationUnit, splitBy, splitUnit, name
+      duration, durationUnit, splitBy, splitUnit, name,
+      severities, dateFrom, dateTo, fixed
     }
     onSubmit && onSubmit(values)
   }
 
-  render () {
+  renderNormal () {
     const {
       resource, savedSearchId, monitorId,
       duration, durationUnit, splitBy, splitUnit, name
@@ -112,6 +141,57 @@ export default class GEditView extends React.Component {
             </SelectField>
           </div>
         </div>}
+      </div>
+    )
+  }
+
+  renderDateLabel (label) {
+    return (
+      <RaisedButton label={label}/>
+    )
+  }
+
+  renderIncidentTable () {
+    const {fixed, severities, dateFrom, dateTo, name} = this.state
+    return (
+      <div>
+        <TextField name="name" value={name} floatingLabelText="Name" className="valign-top" style={inputStyle} onChange={this.onChangeText.bind(this, 'name')}/>
+
+        <SelectField multiple floatingLabelText="Severity" onChange={this.onChangeSeverity.bind(this)} className="valign-top" value={severities}>
+          {severities.map(option =>
+            <MenuItem key={option.value} insetChildren checked={severities && severities.includes(option.value)}
+                      value={option.value} primaryText={option.label}/>
+          )}
+        </SelectField>
+
+        <SelectField value={fixed} floatingLabelText="Status" className="valign-top" onChange={this.onChangeSelect.bind(this, 'fixed')}>
+          {fixOptions.map(p => <MenuItem key={p.value} value={p.value} primaryText={p.label}/>)}
+        </SelectField>
+
+        <div className="inline-block" style={{marginTop: 24}}>
+          <DateRangePicker
+            startDate={moment(dateFrom)}
+            endDate={moment(dateTo)}
+            onApply={this.onChangeDateRange.bind(this)}
+            renderer={this.renderDateLabel.bind(this)}
+          />
+        </div>
+      </div>
+    )
+  }
+  renderContent () {
+    const {gauge} = this.props
+    switch(gauge.templateName) {
+      case 'Incident Table':
+        return this.renderIncidentTable()
+      default:
+        return this.renderNormal()
+    }
+  }
+  render () {
+    return (
+      <div>
+        {this.renderContent()}
 
         <DoneButton onClick={this.onClickDone.bind(this)}/>
       </div>

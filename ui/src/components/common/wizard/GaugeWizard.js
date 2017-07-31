@@ -46,10 +46,15 @@ class GaugeWizard extends React.Component {
     return []
   }
   handleFormSubmit (formProps) {
+    const { selectedSeverity, dateFrom, dateTo } = this.state
     const { extraParams, onFinish } = this.props
 
     const props = assign(
-      {},
+      {
+        severities: selectedSeverity,
+        dateFrom,
+        dateTo
+      },
       formProps,
       extraParams
     )
