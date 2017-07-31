@@ -63,6 +63,9 @@ export default class GLiquid extends React.Component {
           gauge={this.props.gauge}
           monitors={this.props.monitors}
           onSubmit={this.onSubmit.bind(this, options)}
+
+          hideDuration
+          hideSplit
         />
       </div>
     )
