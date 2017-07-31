@@ -99,7 +99,7 @@ export default class GLineChart extends React.Component {
     })
 
     if (resource === 'monitor') {
-      const dateFrom = moment().add(-duration, `${durationUnit}s`).startOf(durationUnit).valueOf()
+      const dateFrom = moment().add(-duration + 1, `${durationUnit}s`).startOf(durationUnit).valueOf()
       const dateTo = moment().endOf(durationUnit).valueOf()
 
       axios.get(`${ROOT_URL}/event/search/findByDate`, {
@@ -124,7 +124,7 @@ export default class GLineChart extends React.Component {
       }
       const searchParams = JSON.parse(searchList[index].data)
 
-      const dateFrom = moment().add(-duration, `${durationUnit}s`).startOf('day').format(dateFormat)
+      const dateFrom = moment().add(-duration + 1, `${durationUnit}s`).startOf('day').format(dateFormat)
       const dateTo = moment().endOf('day').format(dateFormat)
 
       const params = { ...searchParams, splitBy, splitUnit, dateFrom, dateTo }
