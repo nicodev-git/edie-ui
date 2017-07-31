@@ -1,6 +1,4 @@
 import React from 'react'
-import ReactTooltip from 'react-tooltip'
-
 import FlipView from './FlipView'
 import IncidentTable from './display/IncidentTable'
 import GEditView from './GEditView'
@@ -43,7 +41,6 @@ export default class GIncidentTable extends React.Component {
     return (
       <div className="flex-vertical flex-1">
         <IncidentTable {...this.props}/>
-        <ReactTooltip />
       </div>
     )
   }

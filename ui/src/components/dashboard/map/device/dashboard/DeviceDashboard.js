@@ -1,7 +1,10 @@
 import React from 'react'
+import axios from 'axios'
 import {concat, assign, findIndex} from 'lodash'
 import {IconButton, IconMenu, MenuItem} from 'material-ui'
 import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
+import ReactTooltip from 'react-tooltip'
+import moment from 'moment'
 import {Responsive, WidthProvider} from 'react-grid-layout'
 import 'react-grid-layout/css/styles.css'
 import 'react-resizable/css/styles.css'
@@ -11,6 +14,7 @@ import { extImageBaseUrl, guid, isGroup } from 'shared/Global'
 import { wizardConfig } from 'components/common/wizard/WizardConfig'
 
 import {showAlert} from 'components/common/Alert'
+import { ROOT_URL } from 'actions/config'
 
 import GLineChart from './gauge/GLineChart'
 import GBarChart from './gauge/GBarChart'
@@ -42,12 +46,27 @@ export default class DeviceDashboard extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
+      agentDevice: props.device
     }
   }
 
   componentWillMount () {
     this.props.fetchGauges()
     this.props.fetchSysSearchOptions()
+  }
+
+  componentDidMount () {
+    this.agentTimer = setInterval(() => {
+      axios.get(`${ROOT_URL}/device/${this.props.device.id}`).then(res => {
+        this.setState({
+          agentDevice: res.data
+        })
+      })
+    }, 1000 * 30)
+  }
+
+  componentWillUnmount () {
+    clearInterval(this.agentTimer)
   }
 
   getGauges () {
@@ -197,24 +216,6 @@ export default class DeviceDashboard extends React.Component {
     )
   }
 
-  // renderGauge (p) {
-  //   const savedSearch = this.getSavedSearch(p.savedSearchId)
-  //   if (!savedSearch && ['Line Chart', 'Pie Chart', 'Bar Chart'].indexOf(p.templateName) >= 0){
-  //     if (p.resource === 'search') return <div key={p.id}></div>
-  //   }
-  //   const searchParams = savedSearch ? JSON.parse(savedSearch.data) : null
-  //   return (
-  //     <div key={p.id}>
-  //       <GaugePanel
-  //         device={this.props.device} gauge={p} searchParams={searchParams} searchList={this.getSearchList()}
-  //         updateDeviceGauge={this.props.updateDeviceGauge}
-  //         removeDeviceGauge={this.props.removeDeviceGauge}
-  //         style={{width: '100%', height: '100%'}}
-  //       />
-  //     </div>
-  //   )
-  // }
-
   renderGauge (p) {
     let GaugePanel = gaugeMap[p.templateName || 'z']
     if (!GaugePanel) return <div key={p.id}/>
@@ -255,6 +256,19 @@ export default class DeviceDashboard extends React.Component {
     )
   }
 
+  renderAgent () {
+    const {agentDevice} = this.state
+    const now = new Date().getTime()
+    const up = agentDevice && agentDevice.agent && (agentDevice.agent.lastSeen - now) <= 5 * 60000
+    const img = up ? 'green_light.png' : 'yellow_light.png'
+    return (
+      <div className="pull-left margin-lg-left margin-md-top" data-tip={up ? moment(agentDevice.agent.lastSeen).fromNow() : ''} data-place="right">
+        <img alt="" src={`/resources/images/dashboard/map/device/monitors/${img}`} width="16"
+             style={{verticalAlign: 'top', marginTop: -1, marginLeft: 5}}/>
+      </div>
+    )
+  }
+
   render () {
     const gauges = this.getGauges()
     const layout = mw => {
@@ -290,6 +304,7 @@ export default class DeviceDashboard extends React.Component {
     }
     return (
       <div>
+        {this.renderAgent()}
         {this.renderAddMenu()}
         <ResponsiveReactGridLayout
           className="layout" cols={cols} rowHeight={350}
@@ -300,6 +315,7 @@ export default class DeviceDashboard extends React.Component {
         </ResponsiveReactGridLayout>
 
         {this.renderDeviceWizard()}
+        <ReactTooltip />
       </div>
     )
   }
