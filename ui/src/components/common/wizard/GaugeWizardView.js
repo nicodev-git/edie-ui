@@ -33,7 +33,7 @@ export default class GaugeWizardView extends React.Component {
         {formValues.resource === 'monitor' && <Field name="monitorId" component={FormSelect} floatingLabel="Monitor" options={monitors} className="valign-top mr-dialog"/>}
         {formValues.resource === 'incident' && <Field name="workflowId" component={FormSelect} floatingLabel="Workflow" options={workflows} className="valign-top mr-dialog"/>}
 
-        {durationVisible && formValues.resource !== 'incident' ? (
+        {durationVisible ? (
           <div className="inline-block">
             <Field name="duration" component={FormSelect} floatingLabel="Duration" options={durations} className="valign-top mr-dialog" style={{width: 100}}/>
             <Field name="durationUnit" component={FormSelect} floatingLabel="  "options={gaugeDurationTypes} className="valign-top" style={{width: 120}}/>
@@ -41,7 +41,7 @@ export default class GaugeWizardView extends React.Component {
           ) : null
         }
 
-        {formValues.resource !== 'monitor' && formValues.resource !== 'incident' ? (
+        {formValues.resource === 'search' || formValues.resource === 'incident' ? (
           <div className="inline-block">
             <Field name="splitBy" component={FormSelect} floatingLabel="Resolution" options={durations} className="valign-top mr-dialog" style={{width: 100}}/>
             <Field name="splitUnit" component={FormSelect} floatingLabel="  "options={gaugeDurationTypes} className="valign-top" style={{width: 120}}/>
