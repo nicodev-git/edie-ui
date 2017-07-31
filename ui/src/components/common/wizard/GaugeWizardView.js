@@ -1,13 +1,22 @@
 import React from 'react'
-import {Dialog} from 'material-ui'
+import {Dialog, SelectField, MenuItem} from 'material-ui'
 import { Field } from 'redux-form'
 import { SubmitBlock, FormInput, FormSelect } from 'components/modal/parts'
 
-import {gaugeDurationTypes, gaugeResources} from 'shared/Global'
+import {gaugeDurationTypes, gaugeResources, severities} from 'shared/Global'
+// import { getSeverityIcon, parseSearchQuery, dateFormat, encodeUrlParams, severities } from 'shared/Global'
 
 const durations = '1 2 3 5 10 15 30'.split(' ').map(p => ({
   label: p, value: p
 }))
+
+const fixOptions = [{
+  label: 'Any', value: '',
+}, {
+  label: 'Unfixed', value: 'false'
+}, {
+  label: 'Fixed', value: 'true'
+}]
 
 export default class GaugeWizardView extends React.Component {
   renderNormal () {
@@ -30,7 +39,19 @@ export default class GaugeWizardView extends React.Component {
     )
   }
   renderIncidentTable () {
+    const {selectedSeverity, onChangeSeverity} = this.props
+    return (
+      <div>
+        <SelectField multiple floatingLabelText="Severity" onChange={onChangeSeverity} className="valign-top mr-dialog" value={selectedSeverity}>
+          {severities.map(option =>
+            <MenuItem key={option.value} insetChildren checked={selectedSeverity && selectedSeverity.includes(option.value)}
+              value={option.value} primaryText={option.label}/>
+          )}
+        </SelectField>
 
+        <Field name="fixed" component={FormSelect} floatingLabel="Status" options={fixOptions} className="valign-top"/>
+      </div>
+    )
   }
   renderContent () {
     const {templateName} = this.props

@@ -5,9 +5,25 @@ import {assign, concat} from 'lodash'
 import GaugeWizardView from './GaugeWizardView'
 
 class GaugeWizard extends React.Component {
+  constructor (props) {
+    super(props)
+
+    this.state = {
+      selectedSeverity: ['HIGH', 'MEDIUM']
+    }
+  }
+
   componentWillMount () {
     this.props.fetchSysSearchOptions()
   }
+
+
+  onChangeSeverity (e, index, values) {
+    this.setState({
+      selectedSeverity: values
+    })
+  }
+
   getSearchOptions () {
     const {userInfo} = this.props
     if (!userInfo) return []
@@ -64,6 +80,9 @@ class GaugeWizard extends React.Component {
         searchList={searchList}
         formValues={formValues}
         durationVisible={durationVisible}
+
+        selectedSeverity={this.state.selectedSeverity}
+        onChangeSeverity={this.onChangeSeverity.bind(this)}
       />
     )
   }

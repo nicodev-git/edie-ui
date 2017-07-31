@@ -26,6 +26,7 @@ export default connect(
       durationUnit: 'day',
       splitBy: '1',
       splitUnit: 'day',
+      fixed: 'false',
       ...state.devices.wizardInitialValues
     },
     userInfo: state.dashboard.userInfo,
