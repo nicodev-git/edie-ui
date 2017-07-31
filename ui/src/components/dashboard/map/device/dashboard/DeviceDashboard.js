@@ -14,6 +14,7 @@ import {showAlert} from 'components/common/Alert'
 
 import GLineChart from './gauge/GLineChart'
 import GBarChart from './gauge/GBarChart'
+import GPieChart from './gauge/GPieChart'
 import GMonitor from './gauge/GMonitor'
 import GCpu from './gauge/GCpu'
 import GMemory from './gauge/GMemory'
@@ -27,6 +28,7 @@ const ResponsiveReactGridLayout = WidthProvider(Responsive)
 const gaugeMap = {
   'Line Chart': GLineChart,
   'Bar Chart': GBarChart,
+  'Pie Chart': GPieChart,
   'Monitor': GMonitor,
   'Up/Down': GMonitor,
   'Cpu': GCpu,
