@@ -10,25 +10,44 @@ const durations = '1 2 3 5 10 15 30'.split(' ').map(p => ({
 }))
 
 export default class GaugeWizardView extends React.Component {
+  renderNormal () {
+    const {searchList, monitors, formValues, durationVisible} = this.props
+    return (
+      <div>
+        <Field name="resource" component={FormSelect} floatingLabel="Resource" options={gaugeResources} className="valign-top"/>
+
+        {formValues.resource === 'search' && <Field name="savedSearchId" component={FormSelect} floatingLabel="Saved Search" options={searchList} className="valign-top mr-dialog"/>}
+        {formValues.resource === 'monitor' && <Field name="monitorId" component={FormSelect} floatingLabel="Monitor" options={monitors} className="valign-top"/>}
+
+        <div className={durationVisible ? '' : 'hidden'}>
+          <Field name="duration" component={FormSelect} floatingLabel="Duration" options={durations} className="valign-top mr-dialog" style={{width: 100}}/>
+          <Field name="durationUnit" component={FormSelect} floatingLabel="  "options={gaugeDurationTypes} className="valign-top" style={{width: 120}}/>
+
+          <Field name="splitBy" component={FormSelect} floatingLabel="Resolution" options={durations} className="valign-top mr-dialog" style={{width: 100}}/>
+          <Field name="splitUnit" component={FormSelect} floatingLabel="  "options={gaugeDurationTypes} className="valign-top" style={{width: 120}}/>
+        </div>
+      </div>
+    )
+  }
+  renderIncidentTable () {
+
+  }
+  renderContent () {
+    const {templateName} = this.props
+    switch(templateName) {
+      case 'Incident Table':
+        return this.renderIncidentTable()
+      default:
+        return this.renderNormal()
+    }
+  }
   render () {
-    const {onSubmit, onHide, searchList, monitors, title, formValues, durationVisible} = this.props
+    const {onSubmit, onHide, title} = this.props
     return (
       <Dialog open title={title || 'Gauge'} onRequestClose={onHide} contentStyle={{width: 585}}>
         <form onSubmit={onSubmit}>
           <Field name="name" component={FormInput} floatingLabel="Name" className="valign-top mr-dialog"/>
-          <Field name="resource" component={FormSelect} floatingLabel="Resource" options={gaugeResources} className="valign-top"/>
-
-          {formValues.resource === 'search' && <Field name="savedSearchId" component={FormSelect} floatingLabel="Saved Search" options={searchList} className="valign-top mr-dialog"/>}
-          {formValues.resource === 'monitor' && <Field name="monitorId" component={FormSelect} floatingLabel="Monitor" options={monitors} className="valign-top"/>}
-
-          <div className={durationVisible ? '' : 'hidden'}>
-            <Field name="duration" component={FormSelect} floatingLabel="Duration" options={durations} className="valign-top mr-dialog" style={{width: 100}}/>
-            <Field name="durationUnit" component={FormSelect} floatingLabel="  "options={gaugeDurationTypes} className="valign-top" style={{width: 120}}/>
-
-            <Field name="splitBy" component={FormSelect} floatingLabel="Resolution" options={durations} className="valign-top mr-dialog" style={{width: 100}}/>
-            <Field name="splitUnit" component={FormSelect} floatingLabel="  "options={gaugeDurationTypes} className="valign-top" style={{width: 120}}/>
-          </div>
-
+          {this.renderContent()}
           <SubmitBlock name="Add" onClick={onHide} />
         </form>
       </Dialog>

@@ -57,6 +57,7 @@ class GaugeWizard extends React.Component {
     return (
       <GaugeWizardView
         title={title}
+        templateName={templateName}
         onHide={this.closeModal.bind(this)}
         onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
         monitors={monitors}
