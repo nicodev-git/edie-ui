@@ -17,7 +17,7 @@ class LiquidView extends React.Component {
 
   render () {
     const {value} = this.props
-    const radius = Math.max(Math.min(this.props.containerWidth, this.props.containerHeight)/ 2 - 24, 10);
+    const radius = Math.max(Math.min(this.props.containerWidth, this.props.containerHeight) * 0.4, 10);
     const interpolate = interpolateRgb(startColor, endColor);
     const fillColor = interpolate(value / 100);
     const gradientStops = [
@@ -42,7 +42,7 @@ class LiquidView extends React.Component {
     ];
 
     return (
-      <div className="padding-md">
+      <div className="padding-md text-center">
         <LiquidFillGauge
           style={{ margin: '0 auto' }}
           width={radius * 2}
