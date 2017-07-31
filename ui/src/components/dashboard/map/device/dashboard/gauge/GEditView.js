@@ -3,7 +3,7 @@ import moment from 'moment'
 import {TextField, SelectField, MenuItem, RaisedButton} from 'material-ui'
 
 import DoneButton from './DoneButton'
-import {gaugeDurationTypes, gaugeResources} from 'shared/Global'
+import {gaugeDurationTypes, gaugeResources, severities as allSeverities} from 'shared/Global'
 import DateRangePicker from 'components/common/DateRangePicker'
 
 const durations = '1 2 3 5 10 15 30'.split(' ').map(p => ({
@@ -60,7 +60,7 @@ export default class GEditView extends React.Component {
 
   onChangeSeverity (e, index, values) {
     this.setState({
-      selectedSeverity: values
+      severities: values
     })
   }
   onChangeDateRange ({startDate, endDate}) {
@@ -155,16 +155,16 @@ export default class GEditView extends React.Component {
     const {fixed, severities, dateFrom, dateTo, name} = this.state
     return (
       <div>
-        <TextField name="name" value={name} floatingLabelText="Name" className="valign-top" style={inputStyle} onChange={this.onChangeText.bind(this, 'name')}/>
+        <TextField name="name" value={name} floatingLabelText="Name" className="valign-top mr-dialog" onChange={this.onChangeText.bind(this, 'name')}/>
 
-        <SelectField multiple floatingLabelText="Severity" onChange={this.onChangeSeverity.bind(this)} className="valign-top" value={severities}>
-          {severities.map(option =>
+        <SelectField multiple floatingLabelText="Severity" onChange={this.onChangeSeverity.bind(this)} className="valign-top mr-dialog" value={severities}>
+          {allSeverities.map(option =>
             <MenuItem key={option.value} insetChildren checked={severities && severities.includes(option.value)}
                       value={option.value} primaryText={option.label}/>
           )}
         </SelectField>
 
-        <SelectField value={fixed} floatingLabelText="Status" className="valign-top" onChange={this.onChangeSelect.bind(this, 'fixed')}>
+        <SelectField value={fixed} floatingLabelText="Status" className="valign-top mr-dialog" onChange={this.onChangeSelect.bind(this, 'fixed')}>
           {fixOptions.map(p => <MenuItem key={p.value} value={p.value} primaryText={p.label}/>)}
         </SelectField>
 

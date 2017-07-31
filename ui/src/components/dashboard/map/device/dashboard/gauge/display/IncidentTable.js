@@ -10,23 +10,13 @@ export default class IncidentTable extends React.Component {
     super(props)
 
     this.state = {
-      selectedSeverity: ['HIGH', 'MEDIUM'],
-
-      selectedIndex: -1,
-      fixed: 'false',
-      text: '',
-      afterStartTimestamp: moment().startOf('year').valueOf(),
-      beforeStartTimestamp: moment().endOf('year').valueOf(),
-
-      currentSortCol: 'startTimestamp',
-      currentSortDir: 'desc',
-
       openExceptionModal: false,
       commentModalVisible: false,
       params: {},
 
       incident: null
     }
+
     this.cells = [{
       'displayName': 'Severity',
       'columnName': 'severity',
@@ -107,20 +97,18 @@ export default class IncidentTable extends React.Component {
   }
 
   getParams () {
-    const { currentSortCol, currentSortDir, selectedSeverity, fixed, afterStartTimestamp, beforeStartTimestamp, text } = this.state
-
-    let params = {
+    const { severities, fixed, dateFrom, dateTo } = this.props.gauge
+    const searchParams = {
       draw: 1,
-      description: text || '""',
-      severity: selectedSeverity,
-      afterStartTimestamp,
-      beforeStartTimestamp,
+      description: '""',
+      severity: severities,
+      afterStartTimestamp: dateFrom,
+      beforeStartTimestamp: dateTo,
       deviceid: this.props.device.id,
-      sort: `${currentSortCol},${currentSortDir}`
+      sort: 'startTimestamp,desc'
     }
-    if (fixed) params.fixed = fixed
-
-    return params
+    if (fixed) searchParams.fixed = fixed
+    return searchParams
   }
 
   render () {

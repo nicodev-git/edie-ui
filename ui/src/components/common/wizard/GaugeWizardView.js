@@ -71,6 +71,7 @@ export default class GaugeWizardView extends React.Component {
       </div>
     )
   }
+
   renderContent () {
     const {templateName} = this.props
     switch(templateName) {
