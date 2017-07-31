@@ -18,6 +18,8 @@ import GMonitor from './gauge/GMonitor'
 import GCpu from './gauge/GCpu'
 import GMemory from './gauge/GMemory'
 import GDisk from './gauge/GDisk'
+import GAccelView from './gauge/GAccelView'
+import GLiquid from './gauge/GLiquid'
 
 const ResponsiveReactGridLayout = WidthProvider(Responsive)
 
@@ -28,7 +30,9 @@ const gaugeMap = {
   'Up/Down': GMonitor,
   'Cpu': GCpu,
   'Memory': GMemory,
-  'Disk': GDisk
+  'Disk': GDisk,
+  'Accelerometer': GAccelView,
+  'Liquid': GLiquid
 }
 export default class DeviceDashboard extends React.Component {
   constructor (props) {

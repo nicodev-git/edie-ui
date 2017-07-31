@@ -7,15 +7,16 @@ import React from 'react'
 // import { dateFormat } from 'shared/Global'
 
 import FlipView from './FlipView'
-import AccelMeterView from './display/AccelMeterView'
+import LiquidView from './display/LiquidView'
 import GEditView from './GEditView'
 
 import {showAlert} from 'components/common/Alert'
 
-export default class GAccelView extends React.Component {
+export default class GLiquid extends React.Component {
   constructor (props) {
     super (props)
     this.state = {
+      value: Math.ceil(Math.random() * 100)
     }
     this.renderBackView = this.renderBackView.bind(this)
     this.renderFrontView = this.renderFrontView.bind(this)
@@ -49,7 +50,7 @@ export default class GAccelView extends React.Component {
     return (
       <div className="flex-vertical flex-1">
         <div className="flex-1">
-          <AccelMeterView title={gauge.name}/>
+          <LiquidView title={gauge.name} value={this.state.value}/>
         </div>
       </div>
     )
