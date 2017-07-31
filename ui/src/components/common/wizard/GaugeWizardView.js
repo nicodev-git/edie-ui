@@ -1,10 +1,12 @@
 import React from 'react'
-import {Dialog, SelectField, MenuItem} from 'material-ui'
+import moment from 'moment'
+import {Dialog, SelectField, MenuItem, RaisedButton} from 'material-ui'
 import { Field } from 'redux-form'
 import { SubmitBlock, FormInput, FormSelect } from 'components/modal/parts'
 
 import {gaugeDurationTypes, gaugeResources, severities} from 'shared/Global'
 // import { getSeverityIcon, parseSearchQuery, dateFormat, encodeUrlParams, severities } from 'shared/Global'
+import DateRangePicker from 'components/common/DateRangePicker'
 
 const durations = '1 2 3 5 10 15 30'.split(' ').map(p => ({
   label: p, value: p
@@ -23,6 +25,7 @@ export default class GaugeWizardView extends React.Component {
     const {searchList, monitors, formValues, durationVisible} = this.props
     return (
       <div>
+        <Field name="name" component={FormInput} floatingLabel="Name" className="valign-top mr-dialog"/>
         <Field name="resource" component={FormSelect} floatingLabel="Resource" options={gaugeResources} className="valign-top"/>
 
         {formValues.resource === 'search' && <Field name="savedSearchId" component={FormSelect} floatingLabel="Saved Search" options={searchList} className="valign-top mr-dialog"/>}
@@ -38,18 +41,33 @@ export default class GaugeWizardView extends React.Component {
       </div>
     )
   }
+  renderDateLabel (label) {
+    return (
+      <RaisedButton label={label}/>
+    )
+  }
   renderIncidentTable () {
-    const {selectedSeverity, onChangeSeverity} = this.props
+    const {selectedSeverity, onChangeSeverity, dateFrom, dateTo, onChangeDateRange} = this.props
     return (
       <div>
-        <SelectField multiple floatingLabelText="Severity" onChange={onChangeSeverity} className="valign-top mr-dialog" value={selectedSeverity}>
+        <Field name="name" component={FormInput} floatingLabel="Name" className="valign-top mr-dialog"/>
+        <SelectField multiple floatingLabelText="Severity" onChange={onChangeSeverity} className="valign-top" value={selectedSeverity}>
           {severities.map(option =>
             <MenuItem key={option.value} insetChildren checked={selectedSeverity && selectedSeverity.includes(option.value)}
               value={option.value} primaryText={option.label}/>
           )}
         </SelectField>
 
-        <Field name="fixed" component={FormSelect} floatingLabel="Status" options={fixOptions} className="valign-top"/>
+        <Field name="fixed" component={FormSelect} floatingLabel="Status" options={fixOptions} className="valign-top mr-dialog"/>
+
+        <div className="inline-block" style={{marginTop: 24}}>
+          <DateRangePicker
+            startDate={moment(dateFrom)}
+            endDate={moment(dateTo)}
+            onApply={onChangeDateRange.bind(this)}
+            renderer={this.renderDateLabel.bind(this)}
+          />
+        </div>
       </div>
     )
   }
@@ -67,7 +85,6 @@ export default class GaugeWizardView extends React.Component {
     return (
       <Dialog open title={title || 'Gauge'} onRequestClose={onHide} contentStyle={{width: 585}}>
         <form onSubmit={onSubmit}>
-          <Field name="name" component={FormInput} floatingLabel="Name" className="valign-top mr-dialog"/>
           {this.renderContent()}
           <SubmitBlock name="Add" onClick={onHide} />
         </form>

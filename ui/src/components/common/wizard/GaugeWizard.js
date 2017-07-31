@@ -1,6 +1,7 @@
 import React from 'react'
 import { reduxForm } from 'redux-form'
 import {assign, concat} from 'lodash'
+import moment from 'moment'
 
 import GaugeWizardView from './GaugeWizardView'
 
@@ -9,7 +10,9 @@ class GaugeWizard extends React.Component {
     super(props)
 
     this.state = {
-      selectedSeverity: ['HIGH', 'MEDIUM']
+      selectedSeverity: ['HIGH', 'MEDIUM'],
+      dateFrom: moment().startOf('year').valueOf(),
+      dateTo: moment().endOf('year').valueOf()
     }
   }
 
@@ -21,6 +24,12 @@ class GaugeWizard extends React.Component {
   onChangeSeverity (e, index, values) {
     this.setState({
       selectedSeverity: values
+    })
+  }
+  onChangeDateRange ({startDate, endDate}) {
+    this.setState({
+      dateFrom: startDate.valueOf(),
+      dateTo: endDate.valueOf()
     })
   }
 
@@ -83,6 +92,10 @@ class GaugeWizard extends React.Component {
 
         selectedSeverity={this.state.selectedSeverity}
         onChangeSeverity={this.onChangeSeverity.bind(this)}
+
+        dateFrom={this.state.dateFrom}
+        dateTo={this.state.dateTo}
+        onChangeDateRange={this.onChangeDateRange.bind(this)}
       />
     )
   }
