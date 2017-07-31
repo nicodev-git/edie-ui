@@ -10,7 +10,22 @@ export default class IncidentTable extends React.Component {
     super(props)
 
     this.state = {
-      total: 0
+      selectedSeverity: ['HIGH', 'MEDIUM'],
+
+      selectedIndex: -1,
+      fixed: 'false',
+      text: '',
+      afterStartTimestamp: moment().startOf('year').valueOf(),
+      beforeStartTimestamp: moment().endOf('year').valueOf(),
+
+      currentSortCol: 'startTimestamp',
+      currentSortDir: 'desc',
+
+      openExceptionModal: false,
+      commentModalVisible: false,
+      params: {},
+
+      incident: null
     }
     this.cells = [{
       'displayName': 'Severity',
@@ -81,6 +96,26 @@ export default class IncidentTable extends React.Component {
       }
     }*/]
   }
+  onRowDblClick () {
+
+  }
+
+  getParams () {
+    const { currentSortCol, currentSortDir, selectedSeverity, fixed, afterStartTimestamp, beforeStartTimestamp, text } = this.state
+
+    let params = {
+      draw: 1,
+      description: text || '""',
+      severity: selectedSeverity,
+      afterStartTimestamp,
+      beforeStartTimestamp,
+      deviceid: this.props.device.id,
+      sort: `${currentSortCol},${currentSortDir}`
+    }
+    if (fixed) params.fixed = fixed
+
+    return params
+  }
 
   render () {
     const {duration, durationUnit} = this.props
@@ -91,11 +126,15 @@ export default class IncidentTable extends React.Component {
     return (
       <div className="flex-1 table-no-gap">
         <InfiniteTable
-          url="/search/all"
           cells={this.cells}
           ref="table"
           rowMetadata={{'key': 'id'}}
-          params={{...this.props.params, dateFrom, dateTo, collections: 'incident'}}
+          selectable
+          allowMultiSelect
+          onRowDblClick={this.onRowDblClick.bind(this)}
+
+          url="/incident/search/findBy"
+          params={params}
         />
         <ReactTooltip />
       </div>

@@ -43,7 +43,7 @@ export default class GIncidentTable extends React.Component {
 
     return (
       <div className="flex-1">
-        <IncidentTable />
+        <IncidentTable device={this.props.device} />
       </div>
     )
   }
