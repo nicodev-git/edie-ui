@@ -6,6 +6,7 @@ import GaugeWizard from 'components/common/wizard/GaugeWizard'
 
 import {
   fetchSysSearchOptions,
+  fetchWorkflows,
 
   clearDeviceWizardInitialValues
 } from 'actions'
@@ -31,10 +32,12 @@ export default connect(
     },
     userInfo: state.dashboard.userInfo,
     sysSearchOptions: state.search.sysSearchOptions,
+    workflows: state.settings.workflows,
     formValues: formValueSelector('gaugeDeviceForm')(
       state, 'resource', 'monitorId')
   }), {
     fetchSysSearchOptions,
+    fetchWorkflows,
 
     clearDeviceWizardInitialValues
   }

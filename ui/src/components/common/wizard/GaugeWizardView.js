@@ -22,7 +22,8 @@ const fixOptions = [{
 
 export default class GaugeWizardView extends React.Component {
   renderNormal () {
-    const {searchList, monitors, formValues, durationVisible} = this.props
+    const {searchList, monitors, workflows, formValues, durationVisible} = this.props
+
     return (
       <div>
         <Field name="name" component={FormInput} floatingLabel="Name" className="valign-top mr-dialog"/>
@@ -30,16 +31,23 @@ export default class GaugeWizardView extends React.Component {
 
         {formValues.resource === 'search' && <Field name="savedSearchId" component={FormSelect} floatingLabel="Saved Search" options={searchList} className="valign-top mr-dialog"/>}
         {formValues.resource === 'monitor' && <Field name="monitorId" component={FormSelect} floatingLabel="Monitor" options={monitors} className="valign-top mr-dialog"/>}
+        {formValues.resource === 'incident' && <Field name="workflowId" component={FormSelect} floatingLabel="Workflow" options={workflows} className="valign-top mr-dialog"/>}
 
-        {durationVisible && <div className="inline-block">
-          <Field name="duration" component={FormSelect} floatingLabel="Duration" options={durations} className="valign-top mr-dialog" style={{width: 100}}/>
-          <Field name="durationUnit" component={FormSelect} floatingLabel="  "options={gaugeDurationTypes} className="valign-top" style={{width: 120}}/>
-        </div>}
+        {durationVisible && formValues.resource !== 'incident' ? (
+          <div className="inline-block">
+            <Field name="duration" component={FormSelect} floatingLabel="Duration" options={durations} className="valign-top mr-dialog" style={{width: 100}}/>
+            <Field name="durationUnit" component={FormSelect} floatingLabel="  "options={gaugeDurationTypes} className="valign-top" style={{width: 120}}/>
+          </div>
+          ) : null
+        }
 
-        {formValues.resource !== 'monitor' && <div className="inline-block">
-          <Field name="splitBy" component={FormSelect} floatingLabel="Resolution" options={durations} className="valign-top mr-dialog" style={{width: 100}}/>
-          <Field name="splitUnit" component={FormSelect} floatingLabel="  "options={gaugeDurationTypes} className="valign-top" style={{width: 120}}/>
-        </div>}
+        {formValues.resource !== 'monitor' && formValues.resource !== 'incident' ? (
+          <div className="inline-block">
+            <Field name="splitBy" component={FormSelect} floatingLabel="Resolution" options={durations} className="valign-top mr-dialog" style={{width: 100}}/>
+            <Field name="splitUnit" component={FormSelect} floatingLabel="  "options={gaugeDurationTypes} className="valign-top" style={{width: 120}}/>
+          </div>
+          ) : null
+        }
       </div>
     )
   }

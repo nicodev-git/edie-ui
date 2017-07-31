@@ -18,6 +18,7 @@ class GaugeWizard extends React.Component {
 
   componentWillMount () {
     this.props.fetchSysSearchOptions()
+    this.props.fetchWorkflows()
   }
 
 
@@ -67,7 +68,7 @@ class GaugeWizard extends React.Component {
     this.props.onClose && this.props.onClose(this, data)
   }
   render () {
-    const { handleSubmit, sysSearchOptions, monitors, title, formValues, templateName } = this.props
+    const { handleSubmit, sysSearchOptions, monitors, title, formValues, workflows, templateName } = this.props
 
     const searchList = concat([], this.getSearchOptions().map(p => {
       return assign({}, p, {
@@ -84,6 +85,7 @@ class GaugeWizard extends React.Component {
 
     const durationVisible = templateName !== 'Up/Down'
 
+    const workflowOptions = workflows.map(p => ({label: p.name, value: p.id}))
     return (
       <GaugeWizardView
         title={title}
@@ -92,6 +94,8 @@ class GaugeWizard extends React.Component {
         onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
         monitors={monitors}
         searchList={searchList}
+        workflows={workflowOptions}
+
         formValues={formValues}
         durationVisible={durationVisible}
 

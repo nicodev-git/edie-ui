@@ -246,4 +246,6 @@ export const gaugeResources = [{
   label: 'Search', value: 'search'
 }, {
   label: 'Monitor', value: 'monitor'
+}, {
+  label: 'Incident', value: 'incident'
 }]
