@@ -3,6 +3,7 @@ import moment from 'moment'
 import {Dialog, SelectField, MenuItem, RaisedButton} from 'material-ui'
 import { Field } from 'redux-form'
 import { SubmitBlock, FormInput, FormSelect } from 'components/modal/parts'
+import {findIndex} from 'lodash'
 
 import {gaugeDurationTypes, gaugeResources, severities} from 'shared/Global'
 // import { getSeverityIcon, parseSearchQuery, dateFormat, encodeUrlParams, severities } from 'shared/Global'
@@ -21,8 +22,24 @@ const fixOptions = [{
 }]
 
 export default class GaugeWizardView extends React.Component {
+  renderMonitorPick () {
+    const {devices, monitors, formValues} = this.props
+    if (formValues.resource !== 'monitor') return null
+    if (!devices) {
+      return (
+        <Field name="monitorId" component={FormSelect} floatingLabel="Monitor" options={monitors} className="valign-top mr-dialog"/>
+      )
+    }
+    const deviceOptions = devices.map(p => ({label: p.name, value: p.id}))
+    const index = findIndex(devices, {id: formValues.deviceId})
+    const monitorOptions = index < 0 ? [] : devices[index].monitors.map(p => ({label: p.name, value: p.uid}))
+    return [
+      <Field key="deviceId" name="deviceId" component={FormSelect} floatingLabel="Device" options={deviceOptions} className="valign-top mr-dialog"/>,
+      <Field key="monitorId" name="monitorId" component={FormSelect} floatingLabel="Monitor" options={monitorOptions} className="valign-top"/>
+    ]
+  }
   renderNormal () {
-    const {searchList, monitors, workflows, formValues, durationVisible} = this.props
+    const {searchList, workflows, formValues, durationVisible} = this.props
 
     return (
       <div>
@@ -30,8 +47,8 @@ export default class GaugeWizardView extends React.Component {
         <Field name="resource" component={FormSelect} floatingLabel="Resource" options={gaugeResources} className="valign-top"/>
 
         {formValues.resource === 'search' && <Field name="savedSearchId" component={FormSelect} floatingLabel="Saved Search" options={searchList} className="valign-top mr-dialog"/>}
-        {formValues.resource === 'monitor' && <Field name="monitorId" component={FormSelect} floatingLabel="Monitor" options={monitors} className="valign-top mr-dialog"/>}
         {formValues.resource === 'incident' && <Field name="workflowId" component={FormSelect} floatingLabel="Workflow" options={workflows} className="valign-top mr-dialog"/>}
+        {this.renderMonitorPick()}
 
         {durationVisible ? (
           <div className="inline-block">

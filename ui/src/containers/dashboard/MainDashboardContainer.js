@@ -25,6 +25,8 @@ class MainDashboardContainer extends React.Component {
 }
 export default connect(
   state => ({
+    mapDevices: state.dashboard.mapDevices,
+
     gauges: state.gauge.gauges,
 
     userInfo: state.dashboard.userInfo,

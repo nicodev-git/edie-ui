@@ -8,7 +8,7 @@ import 'react-grid-layout/css/styles.css'
 import 'react-resizable/css/styles.css'
 
 import GaugeWizardContainer from 'containers/shared/wizard/GaugeWizardContainer'
-import { extImageBaseUrl, guid, isGroup } from 'shared/Global'
+import { extImageBaseUrl, guid } from 'shared/Global'
 import { wizardConfig } from 'components/common/wizard/WizardConfig'
 
 import {showAlert} from 'components/common/Alert'
@@ -136,7 +136,7 @@ export default class MainDashboard extends React.Component {
     // this.props.addDeviceGauge(params, this.props.device)
   }
 
-  // getMonitors () {
+  getMonitors () {
   //   const {device} = this.props
   //   let monitors = []
   //   if (!isGroup(device)) {
@@ -146,7 +146,8 @@ export default class MainDashboard extends React.Component {
   //     }))
   //   }
   //   return monitors
-  // }
+    return []
+  }
 
   /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   renderDeviceWizard () {
@@ -167,6 +168,7 @@ export default class MainDashboard extends React.Component {
           closeCallback && closeCallback()
         }}
         title={options.title}
+        devices={this.props.mapDevices}
         monitors={this.getMonitors()}
         extraParams={extra}
         onFinish={this.onFinishAddWizard.bind(this, callback)}
