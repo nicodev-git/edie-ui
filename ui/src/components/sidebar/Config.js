@@ -38,7 +38,7 @@ export const deviceMenu = (deviceId) => {
     {id: 'home', title: 'Back', icon: back, path: '/'},
     {id: 'devicemain', title: 'Dashboard', icon: dashboard, path: `/device/${deviceId}/dashboard`},
     {id: 'topology', title: 'Topology', icon: threatmap, group: true, path: `/device/${deviceId}/topology`},
-    {id: 'devices', title: 'Devices', icon: chat, group:k true, path: `/device/${deviceId}/list`},
+    {id: 'devices', title: 'Devices', icon: chat, group: true, path: `/device/${deviceId}/list`},
     {id: 'incidents', title: 'Incidents', icon: incidents, path: `/device/${deviceId}/main`},
     {id: 'monitors', title: 'Monitors', icon: monitors, path: `/device/${deviceId}/monitor`},
     {id: 'connected', title: 'Connected Devices', icon: search, path: `/device/${deviceId}/connected`},
