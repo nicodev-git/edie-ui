@@ -204,6 +204,7 @@ export default class DeviceDashboard extends React.Component {
 
     return (
       <GaugeWizardContainer
+        device={this.props.device}
         templateName={options.templateName}
         onClose={() => {
           this.setState({deviceWizardVisible: false})

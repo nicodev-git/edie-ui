@@ -13,7 +13,9 @@ class GaugeWizard extends React.Component {
     this.state = {
       selectedSeverity: ['HIGH', 'MEDIUM'],
       dateFrom: moment().startOf('year').valueOf(),
-      dateTo: moment().endOf('year').valueOf()
+      dateTo: moment().endOf('year').valueOf(),
+
+      services: []
     }
   }
 
@@ -46,7 +48,13 @@ class GaugeWizard extends React.Component {
   onMonitorMessage (msg) {
     console.log(msg)
     if (msg.action === 'update' && msg.deviceId === this.props.device.id) {
-      // this.props.updateMonitorRealTime(msg.data)
+      this.setState({
+        services: msg.data.service
+      })
+      setTimeout(() => {
+        this.monitorSocket.close()
+        this.monitorSocket = null
+      }, 1)
     }
   }
 
@@ -114,6 +122,7 @@ class GaugeWizard extends React.Component {
     const durationVisible = templateName !== 'Up/Down'
 
     const workflowOptions = workflows.map(p => ({label: p.name, value: p.id}))
+    const serviceOptions = this.state.services.map(p => ({label: p.DisplayName || p.ServiceName, value: p.ServiceName}))
     return (
       <GaugeWizardView
         title={title}
@@ -123,7 +132,7 @@ class GaugeWizard extends React.Component {
         devices={devices}
         monitors={monitors}
         searchList={searchList}
-        services={[]}
+        services={serviceOptions}
         workflows={workflowOptions}
 
         formValues={formValues}
