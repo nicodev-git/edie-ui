@@ -27,8 +27,6 @@ export default connect(
   state => ({
     gauges: state.gauge.gauges,
 
-    mapDevices: state.devices.mapDevices,
-
     userInfo: state.dashboard.userInfo,
     sysSearchOptions: state.search.sysSearchOptions,
     workflows: state.settings.workflows,

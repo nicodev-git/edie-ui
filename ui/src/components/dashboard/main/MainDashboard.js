@@ -44,10 +44,9 @@ export default class MainDashboard extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      agentDevice: props.device
+      deviceWizardVisible: false
     }
   }
-
   componentWillMount () {
     this.props.fetchGauges()
     this.props.fetchSysSearchOptions()
@@ -55,8 +54,7 @@ export default class MainDashboard extends React.Component {
   }
 
   getGauges () {
-    const {device} = this.props
-    return device.gauges || []
+    return []
   }
 
   getUserSearchOptions () {
@@ -97,32 +95,6 @@ export default class MainDashboard extends React.Component {
     return null
   }
 
-  getNewPosition () {
-    const {mapDevices} = this.props
-    let maxY = null
-    let minX = null
-    let maxX = null
-    mapDevices.forEach(p => {
-      if (maxY === null) maxY = p.y
-      else maxY = Math.max(maxY, p.y)
-
-      if (minX === null) minX = p.x
-      else minX = Math.min(minX, p.x)
-
-      if (maxX === null) maxX = p.x
-      else maxX = Math.max(maxX, p.x)
-    })
-
-    maxY = maxY || 0
-    minX = minX || 0
-    maxX = maxX || 0
-
-    return {
-      x: parseInt((minX + maxX) / 2, 10),
-      y: maxY + 50
-    }
-  }
-
   onClickMenuItem (tpl) {
     console.log(tpl)
 
@@ -161,20 +133,21 @@ export default class MainDashboard extends React.Component {
 
   onFinishAddWizard (callback, res, params, url) {
     params.id = guid()
-    this.props.addDeviceGauge(params, this.props.device)
+    // this.props.addDeviceGauge(params, this.props.device)
   }
 
-  getMonitors () {
-    const {device} = this.props
-    let monitors = []
-    if (!isGroup(device)) {
-      monitors = (device.monitors || []).map(p => ({
-        label: p.name,
-        value: p.uid
-      }))
-    }
-    return monitors
-  }
+  // getMonitors () {
+  //   const {device} = this.props
+  //   let monitors = []
+  //   if (!isGroup(device)) {
+  //     monitors = (device.monitors || []).map(p => ({
+  //       label: p.name,
+  //       value: p.uid
+  //     }))
+  //   }
+  //   return monitors
+  // }
+
   /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   renderDeviceWizard () {
     if (!this.state.deviceWizardVisible) return null
