@@ -31,6 +31,17 @@ export default class GService extends React.Component {
     this.monitorSocket.close()
   }
 
+  sendCommandMessage (name, params) {
+    this.monitorSocket.send({
+      action: 'command',
+      deviceId: this.props.device.id,
+      data: {
+        name,
+        params
+      }
+    })
+  }
+
   onSocketOpen () {
     this.monitorSocket.send({
       action: 'enable-realtime',
@@ -50,6 +61,11 @@ export default class GService extends React.Component {
 
   onClickToggle () {
     const {isUp} = this.state
+    if (isUp) {
+      this.sendCommandMessage('StopServiceCommand', {service: this.props.gauge.serviceName})
+    } else {
+      this.sendCommandMessage('StartServiceCommand', {service: this.props.gauge.serviceName})
+    }
   }
 
   onClickDelete () {
@@ -86,10 +102,10 @@ export default class GService extends React.Component {
   renderBackView (options) {
     return (
       <div>
-        <GEditView
-          {...this.props}
-          onSubmit={this.onSubmit.bind(this, options)}
-        />
+        {/*<GEditView*/}
+          {/*{...this.props}*/}
+          {/*onSubmit={this.onSubmit.bind(this, options)}*/}
+        {/*/>*/}
       </div>
     )
   }
