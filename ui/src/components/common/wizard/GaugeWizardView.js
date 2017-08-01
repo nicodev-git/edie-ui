@@ -22,13 +22,6 @@ const fixOptions = [{
 }]
 
 export default class GaugeWizardView extends React.Component {
-  renderServicePick () {
-    const {services, formValues} = this.props
-    if (formValues.resource !== 'service') return null
-    return (
-      <Field name="serviceName" component={FormSelect} floatingLabel="Service" options={services} className="valign-top mr-dialog"/>
-    )
-  }
   renderMonitorPick () {
     const {devices, monitors, formValues} = this.props
     if (formValues.resource !== 'monitor') return null
@@ -118,7 +111,15 @@ export default class GaugeWizardView extends React.Component {
       </div>
     )
   }
-
+  renderService () {
+    const {services} = this.props
+    return (
+      <div>
+        <Field name="name" component={FormInput} floatingLabel="Name" className="valign-top mr-dialog"/>
+        <Field name="serviceName" component={FormSelect} floatingLabel="Service" options={services} className="valign-top mr-dialog"/>
+      </div>
+    )
+  }
   renderContent () {
     const {templateName} = this.props
     switch(templateName) {
@@ -128,6 +129,8 @@ export default class GaugeWizardView extends React.Component {
       case 'Memory':
       case 'Disk':
         return this.renderDevice()
+      case 'Service':
+        return this.renderService()
       default:
         return this.renderNormal()
     }
