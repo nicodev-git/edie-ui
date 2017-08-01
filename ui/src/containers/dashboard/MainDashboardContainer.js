@@ -1,9 +1,10 @@
 import React from 'react'
+import MainDashboard from 'components/dashboard/main/MainDashboard'
 
 export default class MainDashboardContainer extends React.Component {
   render () {
     return (
-      <div></div>
+      <MainDashboard {...this.props}/>
     )
   }
 }

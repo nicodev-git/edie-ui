@@ -24,7 +24,7 @@ const dashboard = <DashboardIcon color={sidebarIconsColor}/>
 
 export const mainMenu = [
   {id: 'home', title: 'Home', icon: home, path: '/'},
-  {id: 'dashboard', title: 'Home', icon: dashboard, path: '/dashboard'},
+  {id: 'dashboard', title: 'Dashboard', icon: dashboard, path: '/dashboard'},
   {id: 'search', title: 'Search', icon: search, path: '/search'},
   {id: 'incidents', title: 'Incidents', icon: incidents, path: '/', search: '?bigincidents='},
   {id: 'chat', title: 'Chat', icon: chat, path: '/chat'},
@@ -38,7 +38,7 @@ export const deviceMenu = (deviceId) => {
     {id: 'home', title: 'Back', icon: back, path: '/'},
     {id: 'devicemain', title: 'Dashboard', icon: dashboard, path: `/device/${deviceId}/dashboard`},
     {id: 'topology', title: 'Topology', icon: threatmap, group: true, path: `/device/${deviceId}/topology`},
-    {id: 'devices', title: 'Devices', icon: chat, group: true, path: `/device/${deviceId}/list`},
+    {id: 'devices', title: 'Devices', icon: chat, group:k true, path: `/device/${deviceId}/list`},
     {id: 'incidents', title: 'Incidents', icon: incidents, path: `/device/${deviceId}/main`},
     {id: 'monitors', title: 'Monitors', icon: monitors, path: `/device/${deviceId}/monitor`},
     {id: 'connected', title: 'Connected Devices', icon: search, path: `/device/${deviceId}/connected`},

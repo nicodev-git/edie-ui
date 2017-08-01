@@ -9,6 +9,7 @@ import { Route } from 'react-router-dom'
 import Main from 'components/Main'
 import IncidentSocket from 'util/socket/IncidentSocket'
 
+import MainDashboardContainer from 'containers/dashboard/MainDashboardContainer'
 import SearchGeneric from 'containers/search/GenericSearchContainer'
 import ChatContainer from 'containers/chat/ChatContainer'
 import ThreatMapContainer from 'containers/threatmap/ThreatMapContainer'
@@ -190,6 +191,7 @@ class MainpageContainer extends Component {
   render () {
     return (
       <Main {...this.props}>
+          <Route path="/dashboard" component={MainDashboardContainer} />
           <Route path="/chat" component={ChatContainer}/>
           <Route path="/search" component={SearchGeneric}/>
           <Route path="/threatmap" component={ThreatMapContainer}/>
