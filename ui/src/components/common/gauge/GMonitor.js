@@ -51,9 +51,7 @@ export default class GMonitor extends React.Component {
   renderBackView (options) {
     return (
       <GEditView
-        searchList={this.props.searchList}
-        gauge={this.props.gauge}
-        monitors={this.props.monitors}
+        {...this.props}
         onSubmit={this.onSubmit.bind(this, options)}
         hideDuration
         hideSplit

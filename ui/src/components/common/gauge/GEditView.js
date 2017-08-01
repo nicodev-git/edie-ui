@@ -1,6 +1,7 @@
 import React from 'react'
 import moment from 'moment'
 import {TextField, SelectField, MenuItem, RaisedButton} from 'material-ui'
+import {findIndex} from 'lodash'
 
 import DoneButton from './DoneButton'
 import {gaugeDurationTypes, gaugeResources, severities as allSeverities} from 'shared/Global'
@@ -34,6 +35,7 @@ export default class GEditView extends React.Component {
     this.state = {
       resource: gauge.resource || 'search',
       savedSearchId: gauge.savedSearchId || '',
+      deviceId: gauge.deviceId || '',
       monitorId: gauge.monitorId || '',
       workflowId: gauge.workflowId || '',
       duration: gauge.duration || '3',
@@ -79,13 +81,13 @@ export default class GEditView extends React.Component {
 
   onClickDone () {
     const {onSubmit} = this.props
-    const {resource, savedSearchId, monitorId, workflowId,
+    const {resource, savedSearchId, monitorId, workflowId, deviceId,
       duration, durationUnit, splitBy, splitUnit, name,
       severities, dateFrom, dateTo, fixed,
       widgetSize
     }  = this.state
     const values = {
-      resource, savedSearchId, monitorId, workflowId,
+      resource, savedSearchId, monitorId, workflowId, deviceId,
       duration, durationUnit, splitBy, splitUnit, name,
       severities, dateFrom, dateTo, fixed,
       widgetSize
@@ -93,13 +95,42 @@ export default class GEditView extends React.Component {
     onSubmit && onSubmit(values)
   }
 
+  renderMonitorPick () {
+    const {deviceId, monitorId} = this.state
+    const {devices, monitors} = this.props
+    if (this.state.resource !== 'monitor') return null
+    if (!devices) {
+      return (
+        <div className="col-md-6">
+          <SelectField value={monitorId} floatingLabelText="Monitor" className="valign-top" style={inputStyle} onChange={this.onChangeSelect.bind(this, 'monitorId')}>
+            {monitors.map(p => <MenuItem key={p.value} value={p.value} primaryText={p.label}/>)}
+          </SelectField>
+        </div>
+      )
+    }
+    const deviceOptions = devices.map(p => ({label: p.name, value: p.id}))
+    const index = findIndex(devices, {id: deviceId})
+    const monitorOptions = index < 0 ? [] : devices[index].monitors.map(p => ({label: p.name, value: p.uid}))
+    return [
+      <div key="deviceId" className="col-md-6">
+        <SelectField value={deviceId} floatingLabelText="Monitor" className="valign-top" style={inputStyle} onChange={this.onChangeSelect.bind(this, 'deviceId')}>
+          {deviceOptions.map(p => <MenuItem key={p.value} value={p.value} primaryText={p.label}/>)}
+        </SelectField>
+      </div>,
+      <div key="monitorId" className="col-md-6">
+        <SelectField value={monitorId} floatingLabelText="Monitor" className="valign-top" style={inputStyle} onChange={this.onChangeSelect.bind(this, 'monitorId')}>
+          {monitorOptions.map(p => <MenuItem key={p.value} value={p.value} primaryText={p.label}/>)}
+        </SelectField>
+      </div>
+    ]
+  }
   renderNormal () {
     const {
-      resource, savedSearchId, monitorId, workflowId,
+      resource, savedSearchId, workflowId,
       duration, durationUnit, splitBy, splitUnit, name,
       widgetSize
     } = this.state
-    const {searchList, monitors, hideDuration, hideSplit, workflows} = this.props
+    const {searchList, hideDuration, hideSplit, workflows} = this.props
     return (
       <div>
         <div className="row">
@@ -114,23 +145,21 @@ export default class GEditView extends React.Component {
         </div>
 
         <div className="row">
-          <div className="col-md-6">
-            {resource === 'search' ? (
+          {resource === 'search' ? (
+            <div className="col-md-6">
               <SelectField value={savedSearchId} floatingLabelText="Saved Search" className="valign-top mr-dialog" style={inputStyle} onChange={this.onChangeSelect.bind(this, 'savedSearchId')}>
                 {searchList.map(p => <MenuItem key={p.id} value={p.id} primaryText={p.name}/>)}
               </SelectField>
-            ): null}
-            {resource === 'monitor' ? (
-              <SelectField value={monitorId} floatingLabelText="Monitor" className="valign-top" style={inputStyle} onChange={this.onChangeSelect.bind(this, 'monitorId')}>
-                {monitors.map(p => <MenuItem key={p.value} value={p.value} primaryText={p.label}/>)}
-              </SelectField>
-            ) : null}
-            {resource === 'incident' ? (
+            </div>
+          ): null}
+          {resource === 'incident' ? (
+            <div className="col-md-6">
               <SelectField value={workflowId} floatingLabelText="Workflow" className="valign-top" style={inputStyle} onChange={this.onChangeSelect.bind(this, 'workflowId')}>
                 {workflows.map(p => <MenuItem key={p.id} value={p.id} primaryText={p.name}/>)}
               </SelectField>
-            ) : null}
-          </div>
+            </div>
+          ) : null}
+          {this.renderMonitorPick()}
 
           {!hideDuration && <div className="col-md-3">
             <SelectField value={duration} floatingLabelText="Duration" className="valign-top mr-dialog" style={inputStyle} onChange={this.onChangeSelect.bind(this, 'duration')}>
@@ -207,11 +236,29 @@ export default class GEditView extends React.Component {
       </div>
     )
   }
+  renderDevice () {
+    const {name, deviceId, widgetSize, devices} = this.state
+    return (
+      <div>
+        <TextField name="name" value={name} floatingLabelText="Name" className="valign-top mr-dialog" onChange={this.onChangeText.bind(this, 'name')}/>
+        <SelectField value={deviceId} floatingLabelText="Size" className="valign-top" onChange={this.onChangeSelect.bind(this, 'deviceId')}>
+          {devices.map(p => <MenuItem key={p.id} value={p.id} primaryText={p.name}/>)}
+        </SelectField>
+        <SelectField value={widgetSize} floatingLabelText="Size" className="valign-top mr-dialog" onChange={this.onChangeSelect.bind(this, 'widgetSize')}>
+          {sizeList.map(p => <MenuItem key={p.value} value={p.value} primaryText={p.label}/>)}
+        </SelectField>
+      </div>
+    )
+  }
   renderContent () {
     const {gauge} = this.props
     switch(gauge.templateName) {
       case 'Incident Table':
         return this.renderIncidentTable()
+      case 'Cpu':
+      case 'Memory':
+      case 'Disk':
+        return this.renderDevice()
       default:
         return this.renderNormal()
     }

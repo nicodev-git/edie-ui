@@ -48,9 +48,7 @@ export default class GIncidentTable extends React.Component {
     return (
       <div>
         <GEditView
-          searchList={this.props.searchList}
-          gauge={this.props.gauge}
-          monitors={this.props.monitors}
+          {...this.props}
           onSubmit={this.onSubmit.bind(this, options)}
         />
       </div>
