@@ -1,4 +1,6 @@
 import React from 'react'
+import {findIndex} from 'lodash'
+import {RaisedButton} from 'material-ui'
 
 import FlipView from './FlipView'
 import GEditView from './GEditView'
@@ -12,7 +14,7 @@ export default class GService extends React.Component {
     super (props)
     this.state = {
       loading: false,
-      memory: null
+      isUp: false
     }
     this.renderBackView = this.renderBackView.bind(this)
     this.renderFrontView = this.renderFrontView.bind(this)
@@ -38,9 +40,16 @@ export default class GService extends React.Component {
   }
   onMonitorMessage (msg) {
     if (msg.action === 'update' && msg.deviceId === this.props.device.id) {
-      // const {service} = msg.data
-      // if (service) this.setState({ service })
+      const {service} = msg.data
+      const index = findIndex(service, {ServiceName: this.props.gauge.serviceName})
+      if (index >= 0) {
+        this.setState({isUp: service[index].Status === 'Running'})
+      }
     }
+  }
+
+  onClickToggle () {
+    const {isUp} = this.state
   }
 
   onClickDelete () {
@@ -64,11 +73,15 @@ export default class GService extends React.Component {
 
   renderFrontView () {
     // const {gauge} = this.props
-    // const isUp = monitor.status === 'UP'
-    // const lastUpdate = isUp ? monitor.lastfalure : monitor.lastsuccess
-    // return (
-    //   <MonitorStatusView isUp={isUp} lastUpdate={lastUpdate}/>
-    // )
+    const {isUp} = this.state
+    return (
+      <div>
+        <MonitorStatusView isUp={isUp} hideLabel/>
+        <div style={{position: 'absolute', bottom: 15, width: '100%'}} className="text-center">
+          <RaisedButton label={isUp ? 'Stop' : 'Start'} onTouchTap={this.onClickToggle.bind(this)}/>
+        </div>
+      </div>
+    )
   }
   renderBackView (options) {
     return (

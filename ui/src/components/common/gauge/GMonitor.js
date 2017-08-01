@@ -11,8 +11,7 @@ export default class GMonitor extends React.Component {
   constructor (props) {
     super (props)
     this.state = {
-      loading: false,
-      isUp: false,
+      loading: false
     }
     this.renderBackView = this.renderBackView.bind(this)
     this.renderFrontView = this.renderFrontView.bind(this)
