@@ -2,6 +2,7 @@ import React from 'react'
 import { reduxForm } from 'redux-form'
 import {assign, concat} from 'lodash'
 import moment from 'moment'
+import MonitorSocket from 'util/socket/MonitorSocket'
 
 import GaugeWizardView from './GaugeWizardView'
 
@@ -21,6 +22,33 @@ class GaugeWizard extends React.Component {
     this.props.fetchWorkflows()
   }
 
+  componentDidMount () {
+    const {templateName, device} = this.props
+    if (device && templateName === 'Service') {
+      this.monitorSocket = new MonitorSocket({
+        listener: this.onMonitorMessage.bind(this)
+      })
+      this.monitorSocket.connect(this.onSocketOpen.bind(this))
+    }
+  }
+
+  componentWillUnmount () {
+    if (this.monitorSocket) this.monitorSocket.close()
+  }
+
+  onSocketOpen () {
+    this.monitorSocket.send({
+      action: 'enable-realtime',
+      monitors: 'service',
+      deviceId: this.props.device.id
+    })
+  }
+  onMonitorMessage (msg) {
+    console.log(msg)
+    if (msg.action === 'update' && msg.deviceId === this.props.device.id) {
+      // this.props.updateMonitorRealTime(msg.data)
+    }
+  }
 
   onChangeSeverity (e, index, values) {
     this.setState({
