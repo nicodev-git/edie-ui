@@ -23,7 +23,8 @@ const dashboard = <DashboardIcon color={sidebarIconsColor}/>
 // const exit = <ExitIcon color={sidebarIconsColor}/>
 
 export const mainMenu = [
-  {id: 'dashboard', title: 'Dashboard', icon: home, path: '/'},
+  {id: 'home', title: 'Home', icon: home, path: '/'},
+  {id: 'dashboard', title: 'Home', icon: dashboard, path: '/dashboard'},
   {id: 'search', title: 'Search', icon: search, path: '/search'},
   {id: 'incidents', title: 'Incidents', icon: incidents, path: '/', search: '?bigincidents='},
   {id: 'chat', title: 'Chat', icon: chat, path: '/chat'},
@@ -34,7 +35,7 @@ export const mainMenu = [
 
 export const deviceMenu = (deviceId) => {
   return [
-    {id: 'dashboard', title: 'Back', icon: back, path: '/'},
+    {id: 'home', title: 'Back', icon: back, path: '/'},
     {id: 'devicemain', title: 'Dashboard', icon: dashboard, path: `/device/${deviceId}/dashboard`},
     {id: 'topology', title: 'Topology', icon: threatmap, group: true, path: `/device/${deviceId}/topology`},
     {id: 'devices', title: 'Devices', icon: chat, group: true, path: `/device/${deviceId}/list`},
