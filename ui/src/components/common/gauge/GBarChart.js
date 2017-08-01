@@ -53,8 +53,10 @@ export default class GBarChart extends React.Component {
   }
 
   componentWillUpdate (nextProps) {
-    const {gauge} = nextProps
+    const {gauge, searchList} = nextProps
     if (gauge && JSON.stringify(this.props.gauge) !== JSON.stringify(gauge)) {
+      this.fetchRecordCount(nextProps)
+    } else if (searchList && JSON.stringify(this.props.searchList) !== JSON.stringify(searchList)) {
       this.fetchRecordCount(nextProps)
     }
   }

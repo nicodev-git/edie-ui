@@ -177,6 +177,7 @@ export default class MainDashboard extends React.Component {
         <GaugePanel
           {...this.props}
           gauge={p}
+          device={{id: p.deviceId}}
           searchList={this.getSearchList()}
           devices={this.props.mapDevices}
           monitors={this.getMonitors()}
