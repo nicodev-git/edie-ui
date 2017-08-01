@@ -113,7 +113,7 @@ export default class GEditView extends React.Component {
     const monitorOptions = index < 0 ? [] : devices[index].monitors.map(p => ({label: p.name, value: p.uid}))
     return [
       <div key="deviceId" className="col-md-6">
-        <SelectField value={deviceId} floatingLabelText="Monitor" className="valign-top" style={inputStyle} onChange={this.onChangeSelect.bind(this, 'deviceId')}>
+        <SelectField value={deviceId} floatingLabelText="Device" className="valign-top" style={inputStyle} onChange={this.onChangeSelect.bind(this, 'deviceId')}>
           {deviceOptions.map(p => <MenuItem key={p.value} value={p.value} primaryText={p.label}/>)}
         </SelectField>
       </div>,
@@ -204,11 +204,14 @@ export default class GEditView extends React.Component {
   }
 
   renderIncidentTable () {
-    const {fixed, severities, dateFrom, dateTo, name, widgetSize} = this.state
+    const {devices} = this.props
+    const {deviceId, fixed, severities, dateFrom, dateTo, name, widgetSize} = this.state
     return (
       <div>
         <TextField name="name" value={name} floatingLabelText="Name" className="valign-top mr-dialog" onChange={this.onChangeText.bind(this, 'name')}/>
-
+        {devices && <SelectField value={deviceId} floatingLabelText="Device" className="valign-top" onChange={this.onChangeSelect.bind(this, 'deviceId')}>
+          {devices.map(p => <MenuItem key={p.id} value={p.id} primaryText={p.name}/>)}
+        </SelectField>}
         <SelectField multiple floatingLabelText="Severity" onChange={this.onChangeSeverity.bind(this)} className="valign-top mr-dialog" value={severities}>
           {allSeverities.map(option =>
             <MenuItem key={option.value} insetChildren checked={severities && severities.includes(option.value)}
@@ -241,9 +244,9 @@ export default class GEditView extends React.Component {
     return (
       <div>
         <TextField name="name" value={name} floatingLabelText="Name" className="valign-top mr-dialog" onChange={this.onChangeText.bind(this, 'name')}/>
-        <SelectField value={deviceId} floatingLabelText="Size" className="valign-top" onChange={this.onChangeSelect.bind(this, 'deviceId')}>
+        {devices && <SelectField value={deviceId} floatingLabelText="Size" className="valign-top" onChange={this.onChangeSelect.bind(this, 'deviceId')}>
           {devices.map(p => <MenuItem key={p.id} value={p.id} primaryText={p.name}/>)}
-        </SelectField>
+        </SelectField>}
         <SelectField value={widgetSize} floatingLabelText="Size" className="valign-top mr-dialog" onChange={this.onChangeSelect.bind(this, 'widgetSize')}>
           {sizeList.map(p => <MenuItem key={p.value} value={p.value} primaryText={p.label}/>)}
         </SelectField>
