@@ -26,6 +26,7 @@ import GDisk from 'components/common/gauge/GDisk'
 import GAccelView from 'components/common/gauge/GAccelView'
 import GLiquid from 'components/common/gauge/GLiquid'
 import GIncidentTable from 'components/common/gauge/GIncidentTable'
+import GService from 'components/common/gauge/GService'
 
 const ResponsiveReactGridLayout = WidthProvider(Responsive)
 
@@ -35,6 +36,7 @@ const gaugeMap = {
   'Pie Chart': GPieChart,
   'Monitor': GMonitor,
   'Up/Down': GMonitor,
+  'Service': GService,
   'Cpu': GCpu,
   'Memory': GMemory,
   'Disk': GDisk,

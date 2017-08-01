@@ -18,8 +18,7 @@ const labelStyle = {
 
 export default class MonitorStatusView extends React.Component {
   render () {
-    const {monitor} = this.props
-    const isUp = monitor.status === 'UP'
+    const {isUp, lastUpdate, hideLabel} = this.props
     const imgName = `/resources/images/dashboard/map/triangle-${isUp ? 'up' : 'down'}.png`
     return (
       <div className="text-center" style={containerStyle}>
@@ -27,13 +26,7 @@ export default class MonitorStatusView extends React.Component {
           <img src={imgName} width="60" alt="" className="valign-top" style={{marginTop: 20}}/>
           <span className="margin-md-left">{isUp ? 'Up' : 'Down'}</span>
         </div>
-        {
-          isUp ? (
-            <div style={labelStyle}>Last down {monitor.lastfalure ? moment(monitor.lastfalure).fromNow() : 'never'}</div>
-          ) : (
-            <div style={labelStyle}>Last up {monitor.lastsuccess ? moment(monitor.lastsuccess).fromNow() : 'never'}</div>
-          )
-        }
+        {!hideLabel && <div style={labelStyle}>Last {isUp ? 'down' : 'up'} {lastUpdate ? moment(lastUpdate).fromNow() : 'never'}</div>}
       </div>
     )
   }
