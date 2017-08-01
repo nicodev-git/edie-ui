@@ -8,9 +8,10 @@ import {
   fetchWorkflows,
 
   fetchGauges,
-  addDeviceGauge,
-  updateDeviceGauge,
-  removeDeviceGauge,
+  fetchGaugeItems,
+  addGaugeItem,
+  updateGaugeItem,
+  removeGaugeItem,
 
   fixIncident,
   ackIncident
@@ -28,6 +29,7 @@ export default connect(
     mapDevices: state.dashboard.mapDevices,
 
     gauges: state.gauge.gauges,
+    gaugeItems: state.gauge.gaugeItems,
 
     userInfo: state.dashboard.userInfo,
     sysSearchOptions: state.search.sysSearchOptions,
@@ -39,9 +41,10 @@ export default connect(
     fetchWorkflows,
 
     fetchGauges,
-    addDeviceGauge,
-    updateDeviceGauge,
-    removeDeviceGauge,
+    fetchGaugeItems,
+    addGaugeItem,
+    updateGaugeItem,
+    removeGaugeItem,
 
     fixIncident,
     ackIncident

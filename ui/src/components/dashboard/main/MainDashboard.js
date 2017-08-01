@@ -49,12 +49,13 @@ export default class MainDashboard extends React.Component {
   }
   componentWillMount () {
     this.props.fetchGauges()
+    this.props.fetchGaugeItems()
     this.props.fetchSysSearchOptions()
     this.props.fetchWorkflows()
   }
 
   getGauges () {
-    return []
+    return this.props.gaugeItems
   }
 
   getUserSearchOptions () {

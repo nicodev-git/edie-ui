@@ -424,6 +424,10 @@ export const SELECT_CRED_TYPE = 'SELECT_CRED_TYPE'
 ///////////////////////////////////////////////////////////////
 
 export const FETCH_GAUGES = 'FETCH_GAUGES'
+export const FETCH_GAUGE_ITEMS = 'FETCH_GAUGE_ITEMS'
+export const ADD_GAUGE_ITEM = 'ADD_GAUGE_ITEM'
+export const UPDATE_GAUGE_ITEM = 'UPDATE_GAUGE_ITEM'
+export const REMOVE_GAUGE_ITEM = 'REMOVE_GAUGE_ITEM'
 
 ///////////////////////////////////////////////////////////////
 
