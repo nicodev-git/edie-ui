@@ -34,7 +34,7 @@ export default connect(
     sysSearchOptions: state.search.sysSearchOptions,
     workflows: state.settings.workflows,
     formValues: formValueSelector('gaugeDeviceForm')(
-      state, 'resource', 'monitorId')
+      state, 'resource', 'monitorId', 'deviceId')
   }), {
     fetchSysSearchOptions,
     fetchWorkflows,

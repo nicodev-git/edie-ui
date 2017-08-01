@@ -185,6 +185,7 @@ export default class MainDashboard extends React.Component {
           {...this.props}
           gauge={p}
           searchList={this.getSearchList()}
+          devices={this.props.mapDevices}
           monitors={this.getMonitors()}
 
           updateDeviceGauge={this.props.updateDeviceGauge}
