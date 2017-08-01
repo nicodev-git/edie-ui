@@ -232,7 +232,6 @@ export default class GEditView extends React.Component {
           />
         </div>
 
-
         <SelectField value={widgetSize} floatingLabelText="Size" className="valign-top mr-dialog" onChange={this.onChangeSelect.bind(this, 'widgetSize')}>
           {sizeList.map(p => <MenuItem key={p.value} value={p.value} primaryText={p.label}/>)}
         </SelectField>
@@ -242,6 +241,7 @@ export default class GEditView extends React.Component {
   renderDevice () {
     const {devices} = this.props
     const {name, deviceId, widgetSize} = this.state
+    if (!devices) return null
     return (
       <div>
         <TextField name="name" value={name} floatingLabelText="Name" className="valign-top mr-dialog" onChange={this.onChangeText.bind(this, 'name')}/>
