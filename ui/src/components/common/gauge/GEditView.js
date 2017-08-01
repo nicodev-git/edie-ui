@@ -240,13 +240,14 @@ export default class GEditView extends React.Component {
     )
   }
   renderDevice () {
-    const {name, deviceId, widgetSize, devices} = this.state
+    const {devices} = this.props
+    const {name, deviceId, widgetSize} = this.state
     return (
       <div>
         <TextField name="name" value={name} floatingLabelText="Name" className="valign-top mr-dialog" onChange={this.onChangeText.bind(this, 'name')}/>
-        {devices && <SelectField value={deviceId} floatingLabelText="Size" className="valign-top" onChange={this.onChangeSelect.bind(this, 'deviceId')}>
+        <SelectField value={deviceId} floatingLabelText="Device" className="valign-top" onChange={this.onChangeSelect.bind(this, 'deviceId')}>
           {devices.map(p => <MenuItem key={p.id} value={p.id} primaryText={p.name}/>)}
-        </SelectField>}
+        </SelectField>
         <SelectField value={widgetSize} floatingLabelText="Size" className="valign-top mr-dialog" onChange={this.onChangeSelect.bind(this, 'widgetSize')}>
           {sizeList.map(p => <MenuItem key={p.value} value={p.value} primaryText={p.label}/>)}
         </SelectField>

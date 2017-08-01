@@ -1,10 +1,12 @@
 import React from 'react'
 
 import FlipView from './FlipView'
-import DoneButton from './DoneButton'
 import LiquidView from './display/LiquidView'
+import GEditView from './GEditView'
 
 import MonitorSocket from 'util/socket/MonitorSocket'
+
+import {showAlert} from 'components/common/Alert'
 
 export default class GMemory extends React.Component {
   constructor (props) {
@@ -45,6 +47,21 @@ export default class GMemory extends React.Component {
   onClickDelete () {
     this.props.removeDeviceGauge(this.props.gauge, this.props.device)
   }
+  onSubmit (options, values) {
+    console.log(values)
+
+    if (!values.name) {
+      showAlert('Please type name.')
+      return
+    }
+    const gauge = {
+      ...this.props.gauge,
+      ...values
+    }
+
+    this.props.updateDeviceGauge(gauge, this.props.device)
+    options.onClickFlip()
+  }
 
   renderFrontView () {
     const {gauge} = this.props
@@ -61,8 +78,10 @@ export default class GMemory extends React.Component {
   renderBackView (options) {
     return (
       <div>
-        Back View
-        <DoneButton onClick={options.onClickFlip}/>
+        <GEditView
+          {...this.props}
+          onSubmit={this.onSubmit.bind(this, options)}
+        />
       </div>
     )
   }
@@ -78,7 +97,7 @@ export default class GMemory extends React.Component {
         renderBackView={this.renderBackView}
 
         onClickDelete={this.onClickDelete.bind(this)}
-        viewOnly
+        viewOnly={!this.props.devices}
       />
     )
   }
