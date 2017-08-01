@@ -64,7 +64,7 @@ class ParserTypes extends React.Component {
     const selected = this.getTable().getSelected()
     if (!selected) return showAlert('Please select parser type.')
 
-    let filterChips = selected.filters.split('.*|.*').filter(t => !!t)
+    let filterChips = (selected.filters || '').split('.*|.*').filter(t => !!t)
     if (filterChips.length > 1) {
       filterChips = filterChips.map((t, i) => {
         if (i === 0) return `${t}.*`
