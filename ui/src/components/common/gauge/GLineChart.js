@@ -4,7 +4,7 @@ import {findIndex} from 'lodash'
 import axios from 'axios'
 
 import { ROOT_URL } from 'actions/config'
-import { dateFormat, severities } from 'shared/Global'
+import { severities } from 'shared/Global'
 
 import FlipView from './FlipView'
 import LineChart from './display/LineChart'
@@ -99,8 +99,8 @@ export default class GLineChart extends React.Component {
     })
 
     const dateFrom = moment().add(-duration + 1, `${durationUnit}s`)
-      .startOf(durationUnit === 'hour' || duration === 1 ? durationUnit : 'day').format(dateFormat)
-    const dateTo = moment().endOf(durationUnit === 'hour' ? durationUnit : 'day').format(dateFormat)
+      .startOf(durationUnit === 'hour' || duration === 1 ? durationUnit : 'day').format('YYYY-MM-DD HH:mm:ss')
+    const dateTo = moment().endOf(durationUnit === 'hour' ? durationUnit : 'day').format('YYYY-MM-DD HH:mm:ss')
 
     if (resource === 'monitor') {
       axios.get(`${ROOT_URL}/event/search/findByDate`, {

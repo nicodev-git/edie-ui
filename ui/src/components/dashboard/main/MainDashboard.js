@@ -134,7 +134,7 @@ export default class MainDashboard extends React.Component {
 
   onFinishAddWizard (callback, res, params, url) {
     params.id = guid()
-    // this.props.addDeviceGauge(params, this.props.device)
+    this.props.addGaugeItem(params)
   }
 
   getMonitors () {
@@ -189,8 +189,8 @@ export default class MainDashboard extends React.Component {
           devices={this.props.mapDevices}
           monitors={this.getMonitors()}
 
-          updateDeviceGauge={this.props.updateDeviceGauge}
-          removeDeviceGauge={this.props.removeDeviceGauge}
+          updateDeviceGauge={this.props.updateGaugeItem}
+          removeDeviceGauge={this.props.removeGaugeItem}
           style={{width: '100%', height: '100%'}}
         />
       </div>
