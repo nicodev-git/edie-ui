@@ -22,6 +22,13 @@ const fixOptions = [{
 }]
 
 export default class GaugeWizardView extends React.Component {
+  renderServicePick () {
+    const {services, formValues} = this.props
+    if (formValues.resource !== 'service') return null
+    return (
+      <Field name="serviceName" component={FormSelect} floatingLabel="Service" options={services} className="valign-top mr-dialog"/>
+    )
+  }
   renderMonitorPick () {
     const {devices, monitors, formValues} = this.props
     if (formValues.resource !== 'monitor') return null

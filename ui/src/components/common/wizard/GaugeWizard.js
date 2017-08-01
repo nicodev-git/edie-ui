@@ -95,6 +95,7 @@ class GaugeWizard extends React.Component {
         devices={devices}
         monitors={monitors}
         searchList={searchList}
+        services={[]}
         workflows={workflowOptions}
 
         formValues={formValues}
