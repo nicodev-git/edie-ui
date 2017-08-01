@@ -4,7 +4,7 @@ import {findIndex} from 'lodash'
 import axios from 'axios'
 
 import { ROOT_URL } from 'actions/config'
-import { severities } from 'shared/Global'
+import { dateFormat, severities } from 'shared/Global'
 
 import FlipView from './FlipView'
 import LineChart from './display/LineChart'
@@ -99,20 +99,22 @@ export default class GLineChart extends React.Component {
     })
 
     const dateFrom = moment().add(-duration + 1, `${durationUnit}s`)
-      .startOf(durationUnit === 'hour' || duration === 1 ? durationUnit : 'day').format('YYYY-MM-DD HH:mm:ss')
-    const dateTo = moment().endOf(durationUnit === 'hour' ? durationUnit : 'day').format('YYYY-MM-DD HH:mm:ss')
+      .startOf(durationUnit === 'hour' || duration === 1 ? durationUnit : 'day')
+    const dateTo = moment().endOf(durationUnit === 'hour' ? durationUnit : 'day')
 
     if (resource === 'monitor') {
       axios.get(`${ROOT_URL}/event/search/findByDate`, {
         params: {
-          dateFrom, dateTo, monitorId,
+          dateFrom: dateFrom.valueOf(),
+          dateTo: dateTo.valueOf(),
+          monitorId,
           sort: 'timestamp'
         }
       }).then(res => {
         this.setState({
           searchRecordCounts: res.data._embedded.events.map(p => ({
             date: moment(p.timestamp).format('YYYY-MM-DD HH:mm:ss'),
-            count: p.lastResult && p.lastResult.status === 'UP' ? 1 : 0
+            count: p.eventType === 'AGENT' || (p.lastResult && p.lastResult.status === 'UP') ? 1 : 0
           })),
           loading: false
         })
@@ -126,7 +128,10 @@ export default class GLineChart extends React.Component {
         tag: '',
         monitorTypes: ''
       }
-      const params = { ...searchParams, splitBy, splitUnit, dateFrom, dateTo }
+      const params = { ...searchParams, splitBy, splitUnit,
+        dateFrom: dateFrom.format(dateFormat),
+        dateTo: dateTo.format(dateFormat)
+      }
       axios.get(`${ROOT_URL}/search/getRecordCount`, {params}).then(res => {
         this.setState({
           searchRecordCounts: res.data,
@@ -141,7 +146,10 @@ export default class GLineChart extends React.Component {
       }
       const searchParams = JSON.parse(searchList[index].data)
 
-      const params = { ...searchParams, splitBy, splitUnit, dateFrom, dateTo }
+      const params = { ...searchParams, splitBy, splitUnit,
+        dateFrom: dateFrom.format(dateFormat),
+        dateTo: dateTo.format(dateFormat)
+      }
       axios.get(`${ROOT_URL}/search/getRecordCount`, {params}).then(res => {
         this.setState({
           searchRecordCounts: res.data,
