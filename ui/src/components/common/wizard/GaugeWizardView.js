@@ -74,18 +74,20 @@ export default class GaugeWizardView extends React.Component {
     )
   }
   renderIncidentTable () {
-    const {selectedSeverity, onChangeSeverity, dateFrom, dateTo, onChangeDateRange} = this.props
+    const {selectedSeverity, onChangeSeverity, dateFrom, dateTo, onChangeDateRange, devices} = this.props
+    const deviceOptions = (devices || []).map(p => ({label: p.name, value: p.id}))
     return (
       <div>
         <Field name="name" component={FormInput} floatingLabel="Name" className="valign-top mr-dialog"/>
-        <SelectField multiple floatingLabelText="Severity" onChange={onChangeSeverity} className="valign-top" value={selectedSeverity}>
+        <Field name="deviceId" component={FormSelect} floatingLabel="Device" options={deviceOptions} className="valign-top"/>
+        <SelectField multiple floatingLabelText="Severity" onChange={onChangeSeverity} className="valign-top mr-dialog" value={selectedSeverity}>
           {severities.map(option =>
             <MenuItem key={option.value} insetChildren checked={selectedSeverity && selectedSeverity.includes(option.value)}
               value={option.value} primaryText={option.label}/>
           )}
         </SelectField>
 
-        <Field name="fixed" component={FormSelect} floatingLabel="Status" options={fixOptions} className="valign-top mr-dialog"/>
+        <Field name="fixed" component={FormSelect} floatingLabel="Status" options={fixOptions} className="valign-top"/>
 
         <div className="inline-block" style={{marginTop: 24}}>
           <DateRangePicker
