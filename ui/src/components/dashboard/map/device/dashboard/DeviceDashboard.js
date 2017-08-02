@@ -194,7 +194,21 @@ export default class DeviceDashboard extends React.Component {
     return monitors
   }
   onLayoutChange (layout) {
-    console.log(layout)
+    const {device, gauges} = this.props
+    const items = gauges.map(p => {
+      const index = findIndex(layout, {i: p.id})
+      if (index < 0) return p
+      return {
+        ...p,
+        layout: {
+          w: layout[index].w,
+          h: layout[index].h,
+          x: layout[index].x,
+          y: layout[index].y
+        }
+      }
+    })
+    this.props.updateDeviceGauge(items, device)
   }
   /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   renderDeviceWizard () {

@@ -1,5 +1,5 @@
 import axios from 'axios'
-import {assign} from 'lodash'
+import {assign, findIndex} from 'lodash'
 import {
   FETCH_DEVICES,
 
@@ -899,6 +899,14 @@ export const addDeviceGauge = (props, group) => {
 
 export const updateDeviceGauge = (props, group) => {
   return dispatch => {
+    const gauges = (group.gauges || []).map(p => {
+      if (props.length) {
+        const index = findIndex(props, {id: p.id})
+        return index < 0 ? p : props[index]
+      } else {
+        return p.id === props.id ? props : p
+      }
+    })
     dispatch(updateMapDevice({
       ...group,
       gauges: (group.gauges || []).map(p => p.id === props.id ? props : p)
