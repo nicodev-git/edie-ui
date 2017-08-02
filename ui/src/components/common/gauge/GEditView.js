@@ -38,6 +38,8 @@ export default class GEditView extends React.Component {
       deviceId: gauge.deviceId || '',
       monitorId: gauge.monitorId || '',
       workflowId: gauge.workflowId || '',
+      serviceName: gauge.serviceName || '',
+
       duration: gauge.duration || '3',
       durationUnit: gauge.durationUnit || 'day',
       splitBy: gauge.splitBy || '1',
@@ -254,6 +256,22 @@ export default class GEditView extends React.Component {
       </div>
     )
   }
+  renderService () {
+    const {services} = this.props
+    const {name, serviceName, widgetSize} = this.state
+    return (
+      <div>
+        <TextField name="name" value={name} floatingLabelText="Name" className="valign-top mr-dialog" onChange={this.onChangeText.bind(this, 'name')}/>
+        <SelectField value={serviceName} floatingLabelText="Service" className="valign-top mr-dialog" onChange={this.onChangeSelect.bind(this, 'serviceName')}>
+          {services.map(p => <MenuItem key={p.ServiceName} value={p.ServiceName} primaryText={p.DisplayName || p.ServiceName}/>)}
+        </SelectField>
+
+        <SelectField value={widgetSize} floatingLabelText="Size" className="valign-top mr-dialog" onChange={this.onChangeSelect.bind(this, 'widgetSize')}>
+          {sizeList.map(p => <MenuItem key={p.value} value={p.value} primaryText={p.label}/>)}
+        </SelectField>
+      </div>
+    )
+  }
   renderContent () {
     const {gauge} = this.props
     switch(gauge.templateName) {
@@ -263,6 +281,8 @@ export default class GEditView extends React.Component {
       case 'Memory':
       case 'Disk':
         return this.renderDevice()
+      case 'Service':
+        return this.renderService()
       default:
         return this.renderNormal()
     }

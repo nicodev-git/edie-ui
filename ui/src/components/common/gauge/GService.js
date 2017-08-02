@@ -102,10 +102,11 @@ export default class GService extends React.Component {
   renderBackView (options) {
     return (
       <div>
-        {/*<GEditView*/}
-          {/*{...this.props}*/}
-          {/*onSubmit={this.onSubmit.bind(this, options)}*/}
-        {/*/>*/}
+        <GEditView
+          {...this.props}
+          services={[]}
+          onSubmit={this.onSubmit.bind(this, options)}
+        />
       </div>
     )
   }
