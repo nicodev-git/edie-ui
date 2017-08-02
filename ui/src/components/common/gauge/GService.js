@@ -13,7 +13,7 @@ export default class GService extends React.Component {
   constructor (props) {
     super (props)
     this.state = {
-      loading: false,
+      loading: true,
       isUp: false,
       services: []
     }
@@ -58,7 +58,8 @@ export default class GService extends React.Component {
         this.setState({isUp: service[index].Status === 'Running'})
       }
       this.setState({
-        services: service
+        services: service,
+        loading: false
       })
     }
   }
