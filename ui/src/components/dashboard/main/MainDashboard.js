@@ -142,6 +142,26 @@ export default class MainDashboard extends React.Component {
     return []
   }
 
+  onLayoutChange (layout) {
+    const {gaugeItems} = this.props
+    const layouts = [...layout]
+    layouts.sort((a, b) => {
+      const v1 = a.y * 10 + a.x
+      const v2 = b.y * 10 + b.x
+      if (v1 < v2) return -1
+      if (v1 > v2) return 1
+      return 0
+    })
+    layouts.forEach((p, i) => {
+      const index = findIndex(gaugeItems, {id: p.i})
+      if (index < 0) return
+      this.props.updateGaugeItem({
+        ...gaugeItems[index],
+        layout: i
+      })
+    })
+  }
+
   /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   renderDeviceWizard () {
     if (!this.state.deviceWizardVisible) return null
@@ -213,10 +233,17 @@ export default class MainDashboard extends React.Component {
 
   render () {
     const gauges = this.getGauges()
+    const items = [...gauges]
+    items.sort((a, b) => {
+      if (!a.layout && !b.layout) return 0
+      if (!a.layout || a.layout < b.layout) return -1
+      if (!b.layout || a.layout > b.layout) return 1
+      return 0
+    })
     const layout = mw => {
       let x = 0
       let y = 0
-      return gauges.map((p, i) => {
+      return items.map((p, i) => {
         const w = Math.min(p.widgetSize || 1, mw)
         if (x + w > mw) {
           x = 0
@@ -251,7 +278,8 @@ export default class MainDashboard extends React.Component {
           className="layout" cols={cols} rowHeight={350}
           layouts={layouts}
           isResizable={false} margin={[10, 10]}
-          style={{marginTop: -10}}>
+          style={{marginTop: -10}}
+          onDragStop={this.onLayoutChange.bind(this)}>
           {gauges.map(p => this.renderGauge(p))}
         </ResponsiveReactGridLayout>
 

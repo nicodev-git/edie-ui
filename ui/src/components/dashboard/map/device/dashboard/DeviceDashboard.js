@@ -196,7 +196,6 @@ export default class DeviceDashboard extends React.Component {
     return monitors
   }
   onLayoutChange (layout) {
-    console.log(layout)
     const {device} = this.props
     const layouts = [...layout]
     layouts.sort((a, b) => {
