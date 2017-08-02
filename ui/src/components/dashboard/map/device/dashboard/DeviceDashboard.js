@@ -179,6 +179,8 @@ export default class DeviceDashboard extends React.Component {
 
   onFinishAddWizard (callback, res, params, url) {
     params.id = guid()
+    const lastLayout = Math.max.apply(this, (this.props.device.gauges || []).map(p => p.layout || 0))
+    params.layout = lastLayout + 1
     this.props.addDeviceGauge(params, this.props.device)
   }
 
