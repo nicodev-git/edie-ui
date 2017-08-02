@@ -25,6 +25,14 @@ export default class ParserTypeModalView extends Component {
             </div>
             <Field name="filters" component={FormInput} label="filters"/>
             <Field name="ignoredelete" component={FormSelect} label="IgnoreDelete" options={[{label: 'Ignore Delete', value: 'IGNOREDELETE'}]}/>
+            <div>
+              <FlatButton label="Add Tag" onTouchTap={onClickAddTag}/>
+            </div>
+            <div style={chipStyles.wrapper}>
+              {tags.map((t, i) =>
+                <Chip key={i} style={chipStyles.chip} onRequestDelete={() => onClickDeleteTag(i)}>{t}</Chip>
+              )}
+            </div>
             <div className="text-plus-icon">
               <SubHeader name="Patterns"/>
               <IconButton
@@ -34,14 +42,6 @@ export default class ParserTypeModalView extends Component {
                   <DeleteIcon color="#545454"/>
               </IconButton>
             </div>
-          </div>
-          <div>
-            <FlatButton label="Add Tag" onTouchTap={onClickAddTag}/>
-          </div>
-          <div style={chipStyles.wrapper}>
-            {tags.map((t, i) =>
-              <Chip key={i} style={chipStyles.chip} onRequestDelete={() => onClickDeleteTag(i)}>{t}</Chip>
-            )}
           </div>
           <div style={{maxHeight: '300px', overflow: 'scroll'}}>
             <table className="table table-hover table-p-sm">
