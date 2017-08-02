@@ -114,6 +114,10 @@ export default class Topology extends React.Component {
       // this.props.history.push(`/device/${obj.data.id}/main`)
       this.props.history.push(`/device/${obj.data.id}/dashboard`)
     }
+
+    this.setState({
+      tooltip: ''
+    })
   }
 
   onMapObjectMoving () {
