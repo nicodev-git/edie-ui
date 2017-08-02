@@ -1,4 +1,5 @@
 import React from 'react'
+import {findDOMNode} from 'react-dom'
 import ReactTooltip from 'react-tooltip'
 import { assign } from 'lodash'
 
@@ -115,9 +116,7 @@ export default class Topology extends React.Component {
       this.props.history.push(`/device/${obj.data.id}/dashboard`)
     }
 
-    this.setState({
-      tooltip: ''
-    })
+    ReactTooltip.hide(findDOMNode(this.refs.deviceTopTooltip))
   }
 
   onMapObjectMoving () {
@@ -561,7 +560,7 @@ export default class Topology extends React.Component {
               data-tip={tooltip}
               data-html
               style={{left: tipLeft, top: tipTop, width: tipWidth, height: tipHeight}}
-              onClick={this.onClickTooltip.bind(this)} />
+              onClick={this.onClickTooltip.bind(this)} ref="deviceTopTooltip"/>
             <ReactTooltip/>
           </div>
         </div>
