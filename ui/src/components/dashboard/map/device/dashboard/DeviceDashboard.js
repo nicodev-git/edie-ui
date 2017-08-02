@@ -194,18 +194,21 @@ export default class DeviceDashboard extends React.Component {
     return monitors
   }
   onLayoutChange (layout) {
+    console.log(layout)
     const {device, gauges} = this.props
-    const items = gauges.map(p => {
-      const index = findIndex(layout, {i: p.id})
-      if (index < 0) return p
+    const layouts = [...layout]
+    layouts.sort((a, b) => {
+      const v1 = a.y * 10 + a.x
+      const v2 = b.y * 10 + b.x
+      if (v1 < v2) return -1
+      if (v1 > v2) return 1
+      return 0
+    })
+    const items = layouts.map((p, i) => {
+      const index = findIndex(gauges, {id: p.i})
       return {
-        ...p,
-        layout: {
-          w: layout[index].w,
-          h: layout[index].h,
-          x: layout[index].x,
-          y: layout[index].y
-        }
+        ...gauges[index],
+        layout: i
       }
     })
     this.props.updateDeviceGauge(items, device)
@@ -295,6 +298,7 @@ export default class DeviceDashboard extends React.Component {
     const layout = mw => {
       let x = 0
       let y = 0
+
       return gauges.map((p, i) => {
         const w = Math.min(p.widgetSize || 1, mw)
         if (x + w > mw) {
