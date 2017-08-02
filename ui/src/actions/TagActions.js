@@ -28,7 +28,7 @@ export function showTagModal (visible, tag) {
 
 export function fetchTags () {
   return dispatch => {
-    axios.get(`${ROOT_URL}/tag`).then(res => {
+    axios.get(`${ROOT_URL}/tag?size=1000`).then(res => {
       dispatch({type: FETCH_TAGS, data: res.data._embedded.tags})
     })
   }
