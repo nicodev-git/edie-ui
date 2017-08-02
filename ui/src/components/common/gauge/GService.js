@@ -14,7 +14,8 @@ export default class GService extends React.Component {
     super (props)
     this.state = {
       loading: false,
-      isUp: false
+      isUp: false,
+      services: []
     }
     this.renderBackView = this.renderBackView.bind(this)
     this.renderFrontView = this.renderFrontView.bind(this)
@@ -56,6 +57,9 @@ export default class GService extends React.Component {
       if (index >= 0) {
         this.setState({isUp: service[index].Status === 'Running'})
       }
+      this.setState({
+        services: service
+      })
     }
   }
 
@@ -104,7 +108,7 @@ export default class GService extends React.Component {
       <div>
         <GEditView
           {...this.props}
-          services={[]}
+          services={this.state.services}
           onSubmit={this.onSubmit.bind(this, options)}
         />
       </div>

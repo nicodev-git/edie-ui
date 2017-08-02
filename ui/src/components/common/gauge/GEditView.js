@@ -83,13 +83,13 @@ export default class GEditView extends React.Component {
 
   onClickDone () {
     const {onSubmit} = this.props
-    const {resource, savedSearchId, monitorId, workflowId, deviceId,
+    const {resource, savedSearchId, monitorId, workflowId, deviceId, serviceName,
       duration, durationUnit, splitBy, splitUnit, name,
       severities, dateFrom, dateTo, fixed,
       widgetSize
     }  = this.state
     const values = {
-      resource, savedSearchId, monitorId, workflowId, deviceId,
+      resource, savedSearchId, monitorId, workflowId, deviceId, serviceName,
       duration, durationUnit, splitBy, splitUnit, name,
       severities, dateFrom, dateTo, fixed,
       widgetSize
