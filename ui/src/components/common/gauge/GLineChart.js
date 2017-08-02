@@ -100,7 +100,9 @@ export default class GLineChart extends React.Component {
       loading: true
     })
 
-    const dateFrom = moment().add(-duration + 1, `${durationUnit}s`)
+    let inc = 1
+    if (durationUnit === 'month' && splitUnit === 'day') inc = 0
+    const dateFrom = moment().add(-duration + inc, `${durationUnit}s`)
       .startOf(durationUnit === 'hour' || duration === 1 ? durationUnit : 'day')
     const dateTo = moment().endOf(durationUnit === 'hour' ? durationUnit : 'day')
 
