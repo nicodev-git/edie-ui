@@ -195,7 +195,7 @@ export default class DeviceDashboard extends React.Component {
   }
   onLayoutChange (layout) {
     console.log(layout)
-    const {device, gauges} = this.props
+    const {device} = this.props
     const layouts = [...layout]
     layouts.sort((a, b) => {
       const v1 = a.y * 10 + a.x
@@ -205,9 +205,9 @@ export default class DeviceDashboard extends React.Component {
       return 0
     })
     const items = layouts.map((p, i) => {
-      const index = findIndex(gauges, {id: p.i})
+      const index = findIndex(device.gauges, {id: p.i})
       return {
-        ...gauges[index],
+        ...device.gauges[index],
         layout: i
       }
     })
