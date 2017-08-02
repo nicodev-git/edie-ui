@@ -193,6 +193,9 @@ export default class DeviceDashboard extends React.Component {
     }
     return monitors
   }
+  onLayoutChange (layout) {
+    console.log(layout)
+  }
   /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   renderDeviceWizard () {
     if (!this.state.deviceWizardVisible) return null
@@ -314,7 +317,8 @@ export default class DeviceDashboard extends React.Component {
           className="layout" cols={cols} rowHeight={350}
           layouts={layouts}
           isResizable={false} margin={[10, 10]}
-          style={{marginTop: -10}}>
+          style={{marginTop: -10}}
+          onDragStop={this.onLayoutChange.bind(this)}>
           {gauges.map(p => this.renderGauge(p))}
         </ResponsiveReactGridLayout>
 
