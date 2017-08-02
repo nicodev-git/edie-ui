@@ -909,7 +909,7 @@ export const updateDeviceGauge = (props, group) => {
     })
     dispatch(updateMapDevice({
       ...group,
-      gauges: (group.gauges || []).map(p => p.id === props.id ? props : p)
+      gauges
     }))
   }
 }
