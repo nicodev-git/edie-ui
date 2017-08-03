@@ -105,7 +105,8 @@ export default class MainDashboard extends React.Component {
       this.onFinishAddWizard(null, null, {
         templateName:tpl.name,
         name: tpl.name,
-        resource: 'search'
+        resource: 'search',
+        widgetSize: 0
       })
     } else {
       const options = {

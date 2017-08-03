@@ -23,8 +23,8 @@ const fixOptions = [{
   label: 'Fixed', value: 'true'
 }]
 
-const sizeList = [0, 1, 2, 3].map(p => ({
-  label: p === 0 ? 'Auto' : p,
+const sizeList = [1, 2, 3].map(p => ({
+  label: p,
   value: p
 }))
 
@@ -52,7 +52,7 @@ export default class GEditView extends React.Component {
       dateFrom: gauge.dateFrom || 0,
       dateTo: gauge.dateTo || 0,
 
-      widgetSize: gauge.widgetSize || 1
+      widgetSize: gauge.widgetSize || 0
     }
   }
 
@@ -273,6 +273,14 @@ export default class GEditView extends React.Component {
       </div>
     )
   }
+  renderServers () {
+    const {name} = this.state
+    return (
+      <div>
+        <TextField name="name" value={name} floatingLabelText="Name" className="valign-top mr-dialog" onChange={this.onChangeText.bind(this, 'name')}/>
+      </div>
+    )
+  }
   renderContent () {
     const {gauge} = this.props
     switch(gauge.templateName) {
@@ -284,6 +292,8 @@ export default class GEditView extends React.Component {
         return this.renderDevice()
       case 'Service':
         return this.renderService()
+      case 'Servers':
+        return this.renderServers()
       default:
         return this.renderNormal()
     }
