@@ -9,6 +9,7 @@ export default class GServers extends React.Component {
   constructor (props) {
     super (props)
     this.state = {
+      devices: []
     }
     this.renderBackView = this.renderBackView.bind(this)
     this.renderFrontView = this.renderFrontView.bind(this)
@@ -37,12 +38,11 @@ export default class GServers extends React.Component {
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   renderFrontView () {
-    // const {gauge} = this.props
-
+    const items = this.state.devices
     return (
       <div className="flex-vertical flex-1">
         <div className="flex-1">
-          <PieChart chartData={{labels: ['Count1', 'Count2'], datasets:[{data: [300, 50], backgroundColor:['#FF6384', '#36A2EB']}]}}/>
+          {items.length}
         </div>
       </div>
     )

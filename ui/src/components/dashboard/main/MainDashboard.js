@@ -23,6 +23,7 @@ import GDisk from 'components/common/gauge/GDisk'
 import GAccelView from 'components/common/gauge/GAccelView'
 import GLiquid from 'components/common/gauge/GLiquid'
 import GIncidentTable from 'components/common/gauge/GIncidentTable'
+import GServers from 'components/common/gauge/GServers'
 
 const ResponsiveReactGridLayout = WidthProvider(Responsive)
 
@@ -37,7 +38,8 @@ const gaugeMap = {
   'Disk': GDisk,
   'Accelerometer': GAccelView,
   'Liquid': GLiquid,
-  'Incident Table': GIncidentTable
+  'Incident Table': GIncidentTable,
+  'Servers': GServers
 }
 
 export default class MainDashboard extends React.Component {
@@ -99,15 +101,23 @@ export default class MainDashboard extends React.Component {
   onClickMenuItem (tpl) {
     console.log(tpl)
 
-    const options = {
-      title: tpl.name,
-      templateName: tpl.name,
-      widgetSize: tpl.widgetSize || 1
+    if (['Servers'].indexOf(tpl.name) >= 0) {
+      this.onFinishAddWizard(null, null, {
+        templateName:tpl.name,
+        name: tpl.name,
+        resource: 'search'
+      })
+    } else {
+      const options = {
+        title: tpl.name,
+        templateName: tpl.name,
+        widgetSize: tpl.widgetSize || 1
+      }
+
+      this.showAddWizard(options, (id, name, data) => {
+
+      })
     }
-
-    this.showAddWizard(options, (id, name, data) => {
-
-    })
   }
 
   showAddWizard (options, callback, closeCallback) {
