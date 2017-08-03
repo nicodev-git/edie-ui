@@ -10,7 +10,7 @@ import 'react-grid-layout/css/styles.css'
 import 'react-resizable/css/styles.css'
 
 import GaugeWizardContainer from 'containers/shared/wizard/GaugeWizardContainer'
-import { extImageBaseUrl, guid, isGroup, filterGaugeServers } from 'shared/Global'
+import { extImageBaseUrl, guid, isGroup, getWidgetSize } from 'shared/Global'
 import { wizardConfig } from 'components/common/wizard/WizardConfig'
 
 import {showAlert} from 'components/common/Alert'
@@ -214,15 +214,6 @@ export default class DeviceDashboard extends React.Component {
     })
     this.props.updateDeviceGauge(items, device)
   }
-  getWidgetSize (gauge) {
-    if (gauge.widgetSize === 0) {
-      if (gauge.templateName === 'Servers') {
-        const count = filterGaugeServers(this.props.devices).length
-        return Math.min(Math.ceil(count / 12), 2)
-      }
-    }
-    return gauge.widgetSize || 1
-  }
   /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   renderDeviceWizard () {
     if (!this.state.deviceWizardVisible) return null
@@ -317,7 +308,7 @@ export default class DeviceDashboard extends React.Component {
       let y = 0
 
       return items.map((p, i) => {
-        const w = Math.min(this.getWidgetSize(p), mw)
+        const w = Math.min(getWidgetSize(p, this.props.mapDevices), mw)
         if (x + w > mw) {
           x = 0
           y++

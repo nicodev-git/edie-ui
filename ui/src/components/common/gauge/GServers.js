@@ -44,11 +44,11 @@ export default class GServers extends React.Component {
     const isUp = item.status === 'UP'
     const col = total > (12 * (gauge.itemSize === 'slim' ? 2 : 1)) ? 2 : 4
     return (
-      <div key={item.id} className={`col-md-${col} text-center padding-xs`} style={{height: gauge.itemSize === 'slim' ? '12.5%' : '25%'}}>
+      <div key={item.id} className={`col-md-${col} text-center padding-xs padding-md-left padding-md-right`} style={{height: gauge.itemSize === 'slim' ? '12.5%' : '25%'}}>
         <div className={`${isUp ? 'bg-success' : 'bg-danger'}`} style={{width: '100%', height: '100%'}}>
           <div className="div-center text-white">
-            {item.name}<br/>
-            <small>{item.templateName}</small>
+            <div>{item.name}</div>
+            <div><small>{item.templateName}</small></div>
           </div>
         </div>
       </div>

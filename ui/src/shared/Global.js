@@ -253,3 +253,13 @@ export const gaugeResources = [{
 export function filterGaugeServers (devices) {
   return (devices || []).filter(p => p.templateName !== 'Long hub' && p.templateName !== 'Free Text' )
 }
+
+export function getWidgetSize (gauge, mapDevices) {
+  if (gauge.widgetSize === 0) {
+    if (gauge.templateName === 'Servers') {
+      const count = filterGaugeServers(mapDevices).length
+      return Math.max(Math.min(Math.ceil(count / (12 * (gauge.itemSize === 'slim' ? 2 : 1))), 2), 1)
+    }
+  }
+  return gauge.widgetSize || 1
+}
