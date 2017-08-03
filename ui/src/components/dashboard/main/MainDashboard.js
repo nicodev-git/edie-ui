@@ -8,7 +8,7 @@ import 'react-grid-layout/css/styles.css'
 import 'react-resizable/css/styles.css'
 
 import GaugeWizardContainer from 'containers/shared/wizard/GaugeWizardContainer'
-import { extImageBaseUrl, guid } from 'shared/Global'
+import { extImageBaseUrl, guid, getWidgetSize } from 'shared/Global'
 import { wizardConfig } from 'components/common/wizard/WizardConfig'
 
 import {showAlert} from 'components/common/Alert'
@@ -106,7 +106,7 @@ export default class MainDashboard extends React.Component {
         templateName:tpl.name,
         name: tpl.name,
         resource: 'search',
-        widgetSize: 1
+        widgetSize: 0
       })
     } else {
       const options = {
@@ -254,7 +254,7 @@ export default class MainDashboard extends React.Component {
       let x = 0
       let y = 0
       return items.map((p, i) => {
-        const w = Math.min(p.widgetSize || 1, mw)
+        const w = Math.min(getWidgetSize(p, this.props.mapDevices), mw)
         if (x + w > mw) {
           x = 0
           y++
