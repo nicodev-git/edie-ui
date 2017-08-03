@@ -40,8 +40,10 @@ export default class GServers extends React.Component {
     const isUp = item.status === 'UP'
 
     return (
-      <div className={`col-md-4 text-center ${isUp ? 'bg-success' : 'bg-danger'}`} style={{height: '25%'}}>
-        {item.name}
+      <div className={`col-md-4 text-center padding-xs`} style={{height: '25%'}}>
+        <div className={`${isUp ? 'bg-success' : 'bg-danger'}`} style={{width: '100%', height: '100%'}}>
+          <div className="div-center text-white">{item.name}</div>
+        </div>
       </div>
     )
   }
@@ -50,7 +52,7 @@ export default class GServers extends React.Component {
     return (
       <div className="flex-vertical flex-1">
         <div className="flex-1">
-          <div className="row" style={{height: '100%'}}>
+          <div className="row"   style={{height: '100%'}}>
           {items.map(item => this.renderItemView(item))}
           </div>
         </div>

@@ -259,9 +259,16 @@ a, a:focus, a:hover {
 }
 
 .bg-success {
-    background-color:#468847;
+    background-color:#578B00;
 }
 
 .bg-danger {
-    background-color: #dd514c;
+    background-color: #BC0000;
+}
+
+.div-center {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
 }
