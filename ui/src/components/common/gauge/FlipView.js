@@ -44,7 +44,7 @@ export default class FlipView extends React.Component {
     const {hovered} = this.state
     return (
       <div
-        style={{position: 'absolute', right: -8, bottom: -10}}
+        style={{position: 'absolute', right: 5, bottom: 0}}
         className={`link info-button ${hovered ? 'visible' : ''}`}
         onClick={this.onClickFlip.bind(this)}>
         <InfoIcon size={24}/>
@@ -101,7 +101,7 @@ export default class FlipView extends React.Component {
                 <DeleteIcon color="#545454" className="link" onTouchTap={() => onClickDelete(gauge)}/>
               </div>
             </div>
-            <div className="panel-body pt-none flex-vertical flex-1">
+            <div className="panel-body p-none flex-vertical flex-1">
               {children}
               {loading && front && <RefreshOverlay />}
             </div>
