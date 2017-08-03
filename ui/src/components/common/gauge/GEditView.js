@@ -213,6 +213,7 @@ export default class GEditView extends React.Component {
       <div>
         <TextField name="name" value={name} floatingLabelText="Name" className="valign-top mr-dialog" onChange={this.onChangeText.bind(this, 'name')}/>
         {devices && <SelectField value={deviceId} floatingLabelText="Device" className="valign-top" onChange={this.onChangeSelect.bind(this, 'deviceId')}>
+          <MenuItem value="*" primaryText="[Any Device]"/>
           {devices.map(p => <MenuItem key={p.id} value={p.id} primaryText={p.name}/>)}
         </SelectField>}
         <SelectField multiple floatingLabelText="Severity" onChange={this.onChangeSeverity.bind(this)} className="valign-top mr-dialog" value={severities}>
