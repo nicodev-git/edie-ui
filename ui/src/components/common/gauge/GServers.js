@@ -40,15 +40,20 @@ export default class GServers extends React.Component {
     const isUp = item.status === 'UP'
 
     return (
-      <div className={`col-md-4 text-center padding-xs`} style={{height: '25%'}}>
+      <div key={item.id} className={`col-md-4 text-center padding-xs`} style={{height: '25%'}}>
         <div className={`${isUp ? 'bg-success' : 'bg-danger'}`} style={{width: '100%', height: '100%'}}>
-          <div className="div-center text-white">{item.name}</div>
+          <div className="div-center text-white">
+            {item.name}<br/>
+            <small>{item.templateName}</small>
+          </div>
         </div>
       </div>
     )
   }
   renderFrontView () {
-    const items = (this.props.devices || []).slice(0, 12)
+    const items = (this.props.devices || [])
+      .filter(p => p.templateName !== 'Long hub' && p.templateName !== 'Free Text' )
+      .slice(0, 12)
     return (
       <div className="flex-vertical flex-1">
         <div className="flex-1">
