@@ -257,3 +257,11 @@ a, a:focus, a:hover {
 .mr-dialog {
     margin-right: 24px;
 }
+
+.bg-success {
+    background-color:#468847;
+}
+
+.bg-danger {
+    background-color: #dd514c;
+}

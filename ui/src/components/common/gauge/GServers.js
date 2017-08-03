@@ -36,18 +36,22 @@ export default class GServers extends React.Component {
   }
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  renderItemView(item) {
+    const isUp = item.status === 'UP'
 
+    return (
+      <div className={`col-md-4 text-center ${isUp ? 'bg-success' : 'bg-danger'}`} style={{height: '25%'}}>
+        {item.name}
+      </div>
+    )
+  }
   renderFrontView () {
     const items = (this.props.devices || []).slice(0, 12)
     return (
       <div className="flex-vertical flex-1">
         <div className="flex-1">
           <div className="row" style={{height: '100%'}}>
-          {items.map(item =>
-              <div className="col-md-4" style={{height: '25%'}}>
-                {item.name}: {item.status}
-              </div>
-          )}
+          {items.map(item => this.renderItemView(item))}
           </div>
         </div>
       </div>
