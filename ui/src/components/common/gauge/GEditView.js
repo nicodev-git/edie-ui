@@ -286,7 +286,7 @@ export default class GEditView extends React.Component {
           <MenuItem value="normal" primaryText="Normal"/>
           <MenuItem value="slim" primaryText="Slim"/>
         </SelectField>
-        <Checkbox label="Show Device Type" checked={showDeviceType}/>
+        <Checkbox label="Show Device Type" checked={showDeviceType} onCheck={this.onChangeText.bind(this, 'showDeviceType')}/>
       </div>
     )
   }
