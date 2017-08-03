@@ -34,12 +34,17 @@ export default class GServers extends React.Component {
   onClickDelete () {
     this.props.removeDeviceGauge(this.props.gauge, this.props.device)
   }
+  getMaxItemCount () {
+    const {gauge}= this.props
+    return 24 * (gauge.itemSize === 'slim' ? 2 : 1)
+  }
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   renderItemView(item, total) {
+    const {gauge} = this.props
     const isUp = item.status === 'UP'
-    const col = total > 12 ? 2 : 4
+    const col = total > (12 * (gauge.itemSize === 'slim' ? 2 : 1)) ? 2 : 4
     return (
-      <div key={item.id} className={`col-md-${col} text-center padding-xs`} style={{height: '25%'}}>
+      <div key={item.id} className={`col-md-${col} text-center padding-xs`} style={{height: gauge.itemSize === 'slim' ? '12.5%' : '25%'}}>
         <div className={`${isUp ? 'bg-success' : 'bg-danger'}`} style={{width: '100%', height: '100%'}}>
           <div className="div-center text-white">
             {item.name}<br/>
@@ -50,11 +55,10 @@ export default class GServers extends React.Component {
     )
   }
   renderFrontView () {
-    const {gauge} = this.props
-    const items = filterGaugeServers(this.props.devices).slice(0, gauge.widgetSize === 0 ? 24 : (12 * Math.min(gauge.widgetSize, 2)))
+    const items = filterGaugeServers(this.props.devices).slice(0, this.getMaxItemCount())
     return (
       <div className="flex-vertical flex-1">
-        <div className="flex-1">
+        <div className="flex-1" style={{overflow: 'hidden'}}>
           <div className="row padding-xs"   style={{height: '100%'}}>
           {items.map(item => this.renderItemView(item, items.length))}
           </div>

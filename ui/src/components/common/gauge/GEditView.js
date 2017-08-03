@@ -89,13 +89,13 @@ export default class GEditView extends React.Component {
     const {resource, savedSearchId, monitorId, workflowId, deviceId, serviceName,
       duration, durationUnit, splitBy, splitUnit, name,
       severities, dateFrom, dateTo, fixed,
-      widgetSize
+      widgetSize, itemSize
     }  = this.state
     const values = {
       resource, savedSearchId, monitorId, workflowId, deviceId, serviceName,
       duration, durationUnit, splitBy, splitUnit, name,
       severities, dateFrom, dateTo, fixed,
-      widgetSize
+      widgetSize, itemSize
     }
     onSubmit && onSubmit(values)
   }
