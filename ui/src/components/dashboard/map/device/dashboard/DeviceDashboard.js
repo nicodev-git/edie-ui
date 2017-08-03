@@ -214,7 +214,7 @@ export default class DeviceDashboard extends React.Component {
     })
     this.props.updateDeviceGauge(items, device)
   }
-  getAutoSize (gauge) {
+  getWidgetSize (gauge) {
     if (gauge.widgetSize === 0) {
       if (gauge.templateName === 'Servers') {
         const count = filterGaugeServers(this.props.devices).length
@@ -317,7 +317,7 @@ export default class DeviceDashboard extends React.Component {
       let y = 0
 
       return items.map((p, i) => {
-        const w = Math.min(p.widgetSize || 1, mw)
+        const w = Math.min(this.getWidgetSize(p), mw)
         if (x + w > mw) {
           x = 0
           y++
