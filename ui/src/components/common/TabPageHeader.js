@@ -16,7 +16,7 @@ export default class TabPageHeader extends React.Component {
             {this.props.headerOptions}
           </div>
         </div>
-        <div className="margin-md-top" style={{width: '100%'}}>
+        <div className="margin-md-top" style={{...this.props.style, width: '100%'}}>
           {this.props.children}
         </div>
       </div>
