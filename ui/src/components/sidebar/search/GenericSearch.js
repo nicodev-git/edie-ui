@@ -289,7 +289,7 @@ class GenericSearch extends React.Component {
 
   onClickSaveSearch (values) {
     const { userInfo, params, searchSaveType } = this.props
-    if (!userInfo) return
+    if (!userInfo || !values.name) return
     const option = {
       id: guid(),
       name: values.name,
