@@ -43,13 +43,13 @@ export default class GServers extends React.Component {
     const {gauge} = this.props
     const isUp = item.status === 'UP'
     const col = Math.floor(12 / (gauge.itemSize === 'slim' ? 4 : 3) / Math.ceil(total / (gauge.itemSize === 'slim' ? 16 : 12)))
-    const padding = gauge.itemSize === 'slim' ? 'padding-md-left padding-md-right' : ''
+    const padding = ''
     return (
       <div key={item.id} className={`col-md-${col} text-center padding-xs ${padding}`} style={{height: gauge.itemSize === 'slim' ? '12.5%' : '25%'}}>
         <div className={`${isUp ? 'bg-success' : 'bg-danger'}`} style={{width: '100%', height: '100%'}}>
           <div className="div-center text-white">
             <div>{item.name}</div>
-            <div><small>{item.templateName}</small></div>
+            {gauge.showDeviceType && <div><small>{item.templateName}</small></div>}
           </div>
         </div>
       </div>
