@@ -34,16 +34,10 @@ export default class GServers extends React.Component {
   onClickDelete () {
     this.props.removeDeviceGauge(this.props.gauge, this.props.device)
   }
-
-  getTotal () {
-    const {gauge} = this.props
-    const total = Math.min(gauge.widgetSize || 1, 2) * 12
-    return total
-  }
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  renderItemView(item) {
+  renderItemView(item, total) {
     const isUp = item.status === 'UP'
-    const col = 12 / (this.getTotal() / 4)
+    const col = total > 12 ? 2 : 4
     return (
       <div key={item.id} className={`col-md-${col} text-center padding-xs`} style={{height: '25%'}}>
         <div className={`${isUp ? 'bg-success' : 'bg-danger'}`} style={{width: '100%', height: '100%'}}>
@@ -56,13 +50,13 @@ export default class GServers extends React.Component {
     )
   }
   renderFrontView () {
-    const total = this.getTotal()
-    const items = filterGaugeServers(this.props.devices).slice(0, total)
+    const {gauge} = this.props
+    const items = filterGaugeServers(this.props.devices).slice(0, gauge.widgetSize === 0 ? 24 : (12 * Math.min(gauge.widgetSize, 2)))
     return (
       <div className="flex-vertical flex-1">
         <div className="flex-1">
           <div className="row padding-xs"   style={{height: '100%'}}>
-          {items.map(item => this.renderItemView(item))}
+          {items.map(item => this.renderItemView(item, items.length))}
           </div>
         </div>
       </div>
