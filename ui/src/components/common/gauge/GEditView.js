@@ -52,7 +52,9 @@ export default class GEditView extends React.Component {
       dateFrom: gauge.dateFrom || 0,
       dateTo: gauge.dateTo || 0,
 
-      widgetSize: gauge.widgetSize || 0
+      widgetSize: gauge.widgetSize || 0,
+
+      itemSize: gauge.itemSize || 'normal'
     }
   }
 
@@ -275,10 +277,14 @@ export default class GEditView extends React.Component {
     )
   }
   renderServers () {
-    const {name} = this.state
+    const {name, itemSize} = this.state
     return (
       <div>
         <TextField name="name" value={name} floatingLabelText="Name" className="valign-top mr-dialog" onChange={this.onChangeText.bind(this, 'name')}/>
+        <SelectField value={itemSize} floatingLabelText="Item Size" className="valign-top mr-dialog" onChange={this.onChangeSelect.bind(this, 'itemSize')}>
+          <MenuItem value="normal" primaryText="Normal"/>
+          <MenuItem value="slim" primaryText="Slim"/>
+        </SelectField>
       </div>
     )
   }
