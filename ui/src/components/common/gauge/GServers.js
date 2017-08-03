@@ -42,7 +42,7 @@ export default class GServers extends React.Component {
   renderItemView(item, total) {
     const {gauge} = this.props
     const isUp = item.status === 'UP'
-    const col = total > (12 * (gauge.itemSize === 'slim' ? 2 : 1)) ? 2 : 4
+    const col = Math.floor(12 / (gauge.itemSize === 'slim' ? 4 : 3) / Math.ceil(total / (gauge.itemSize === 'slim' ? 16 : 12)))
     const padding = gauge.itemSize === 'slim' ? 'padding-md-left padding-md-right' : ''
     return (
       <div key={item.id} className={`col-md-${col} text-center padding-xs ${padding}`} style={{height: gauge.itemSize === 'slim' ? '12.5%' : '25%'}}>
