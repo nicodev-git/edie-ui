@@ -38,11 +38,17 @@ export default class GServers extends React.Component {
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   renderFrontView () {
-    const items = this.state.devices
+    const items = (this.props.devices || []).slice(0, 12)
     return (
       <div className="flex-vertical flex-1">
         <div className="flex-1">
-          {items.length}
+          <div className="row" style={{height: '100%'}}>
+          {items.map(item =>
+              <div className="col-md-4" style={{height: '25%'}}>
+                {item.name}: {item.status}
+              </div>
+          )}
+          </div>
         </div>
       </div>
     )
