@@ -37,7 +37,7 @@ class ParamEditModal extends React.Component {
   onClickDefaultKey (key) {
     this.props.change('key', key)
     if (key === 'parse') {
-      this.props.change('value', '{"FIELD","PARSERNAME"}')
+      this.props.change('value', '{"FIELD":"PARSERNAME"}')
     }
   }
 
