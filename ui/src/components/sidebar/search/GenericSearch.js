@@ -320,12 +320,16 @@ class GenericSearch extends React.Component {
 
     const newQueryChips = parseSearchQuery(found.query || '')
     const params = assign({}, this.props.params, found)
-    params.workflow = ''
+
+    const workflowIds = params.workflow.split(',')
+    const workflows = this.props.workflows.filter(p => workflowIds.indexOf(p.id) >= 0)
+    params.workflow = workflows.map(p => p.id).join(',')
+    const tags = params.tag.split(',')
 
     this.props.updateSearchParams(params, this.props.history)
     this.props.updateQueryChips(newQueryChips)
-    this.props.replaceSearchWfs([])
-    this.props.updateSearchTags([])
+    this.props.replaceSearchWfs(workflows)
+    this.props.updateSearchTags(tags)
     this.props.change('query', '')
   }
 
