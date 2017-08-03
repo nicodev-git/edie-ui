@@ -6,7 +6,6 @@ import {findIndex} from 'lodash'
 import DoneButton from './DoneButton'
 import {gaugeDurationTypes, gaugeResources, severities as allSeverities} from 'shared/Global'
 import DateRangePicker from 'components/common/DateRangePicker'
-import Checkbox from "../wizard/input/Checkbox";
 
 const durations = '1 2 3 5 10 15 30'.split(' ').map(p => ({
   label: p, value: parseInt(p, 10)
