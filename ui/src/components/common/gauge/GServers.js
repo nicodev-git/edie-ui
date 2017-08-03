@@ -35,12 +35,17 @@ export default class GServers extends React.Component {
     this.props.removeDeviceGauge(this.props.gauge, this.props.device)
   }
 
+  getTotal () {
+    const {gauge} = this.props
+    const total = Math.min(gauge.widgetSize || 1, 2) * 12
+    return total
+  }
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   renderItemView(item) {
     const isUp = item.status === 'UP'
-
+    const col = 12 / (this.getTotal() / 4)
     return (
-      <div key={item.id} className={`col-md-4 text-center padding-xs`} style={{height: '25%'}}>
+      <div key={item.id} className={`col-md-${col} text-center padding-xs`} style={{height: '25%'}}>
         <div className={`${isUp ? 'bg-success' : 'bg-danger'}`} style={{width: '100%', height: '100%'}}>
           <div className="div-center text-white">
             {item.name}<br/>
@@ -51,13 +56,14 @@ export default class GServers extends React.Component {
     )
   }
   renderFrontView () {
+    const total = this.getTotal()
     const items = (this.props.devices || [])
       .filter(p => p.templateName !== 'Long hub' && p.templateName !== 'Free Text' )
-      .slice(0, 12)
+      .slice(0, total)
     return (
       <div className="flex-vertical flex-1">
         <div className="flex-1">
-          <div className="row"   style={{height: '100%'}}>
+          <div className="row padding-xs"   style={{height: '100%'}}>
           {items.map(item => this.renderItemView(item))}
           </div>
         </div>
