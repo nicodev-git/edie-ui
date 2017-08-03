@@ -10,7 +10,7 @@ import 'react-grid-layout/css/styles.css'
 import 'react-resizable/css/styles.css'
 
 import GaugeWizardContainer from 'containers/shared/wizard/GaugeWizardContainer'
-import { extImageBaseUrl, guid, isGroup } from 'shared/Global'
+import { extImageBaseUrl, guid, isGroup, filterGaugeServers } from 'shared/Global'
 import { wizardConfig } from 'components/common/wizard/WizardConfig'
 
 import {showAlert} from 'components/common/Alert'
@@ -213,6 +213,15 @@ export default class DeviceDashboard extends React.Component {
       }
     })
     this.props.updateDeviceGauge(items, device)
+  }
+  getAutoSize (gauge) {
+    if (gauge.widgetSize === 0) {
+      if (gauge.templateName === 'Servers') {
+        const count = filterGaugeServers(this.props.devices).length
+        return Math.min(Math.ceil(count / 12), 2)
+      }
+    }
+    return gauge.widgetSize || 1
   }
   /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   renderDeviceWizard () {

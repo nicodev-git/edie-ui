@@ -23,8 +23,9 @@ const fixOptions = [{
   label: 'Fixed', value: 'true'
 }]
 
-const sizeList = [1, 2, 3].map(p => ({
-  label: p, value: p
+const sizeList = [0, 1, 2, 3].map(p => ({
+  label: p === 0 ? 'Auto' : p,
+  value: p
 }))
 
 export default class GEditView extends React.Component {

@@ -4,12 +4,12 @@ import FlipView from './FlipView'
 import GEditView from './GEditView'
 
 import {showAlert} from 'components/common/Alert'
+import {filterGaugeServers} from 'shared/Global'
 
 export default class GServers extends React.Component {
   constructor (props) {
     super (props)
     this.state = {
-      devices: []
     }
     this.renderBackView = this.renderBackView.bind(this)
     this.renderFrontView = this.renderFrontView.bind(this)
@@ -57,9 +57,7 @@ export default class GServers extends React.Component {
   }
   renderFrontView () {
     const total = this.getTotal()
-    const items = (this.props.devices || [])
-      .filter(p => p.templateName !== 'Long hub' && p.templateName !== 'Free Text' )
-      .slice(0, total)
+    const items = filterGaugeServers(this.props.devices).slice(0, total)
     return (
       <div className="flex-vertical flex-1">
         <div className="flex-1">
