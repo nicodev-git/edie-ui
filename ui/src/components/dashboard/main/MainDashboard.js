@@ -15,7 +15,7 @@ export default class MainDashboard extends React.Component {
   componentWillUpdate (nextProps) {
     const {gaugeBoards} = nextProps
     if (!this.props.gaugeBoards.length && gaugeBoards.length) {
-      this.props.selectGaugeBoard(gaugeBoards[0].id)
+      nextProps.selectGaugeBoard(gaugeBoards[0].id)
     }
   }
   getSelected () {
@@ -37,7 +37,7 @@ export default class MainDashboard extends React.Component {
   onClickSetDefault () {
     const board = this.getSelected()
     if (!board) return null
-    this.props.setDefaultBoard(board)
+    this.props.setDefaultGaugeBoard(board)
   }
   getBoards () {
     return this.props.gaugeBoards

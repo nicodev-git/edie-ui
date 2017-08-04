@@ -17,6 +17,7 @@ import {
   updateGaugeBoard,
   removeGaugeBoard,
   selectGaugeBoard,
+  setDefaultGaugeBoard,
 
   fixIncident,
   ackIncident
@@ -57,6 +58,7 @@ export default connect(
     updateGaugeBoard,
     removeGaugeBoard,
     selectGaugeBoard,
+    setDefaultGaugeBoard,
 
     fixIncident,
     ackIncident

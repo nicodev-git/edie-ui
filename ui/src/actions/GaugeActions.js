@@ -111,3 +111,14 @@ export const selectGaugeBoard = (data) => {
     dispatch({type: SELECT_GAUGE_BOARD, data})
   }
 }
+
+export const setDefaultGaugeBoard = (entity) => {
+  return dispatch => {
+    axios.put(entity._links.self.href, {
+      ...entity,
+      defaultSetDate: new Date().getTime()
+    }).then(res => {
+      dispatch({type: UPDATE_GAUGE_BOARD, data: res.data})
+    })
+  }
+}

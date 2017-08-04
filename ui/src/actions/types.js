@@ -435,6 +435,7 @@ export const UPDATE_GAUGE_BOARD = 'UPDATE_GAUGE_BOARD'
 export const REMOVE_GAUGE_BOARD = 'REMOVE_GAUGE_BOARD'
 
 export const SELECT_GAUGE_BOARD = 'SELECT_GAUGE_BOARD'
+export const SET_DEFAULT_BOARD = 'SET_DEFAULT_BOARD'
 
 ///////////////////////////////////////////////////////////////
 
