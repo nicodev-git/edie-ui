@@ -39,8 +39,11 @@ export default class GMonitors extends React.Component {
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   renderItem (monitorId) {
-    const {device} = this.props
-
+    let {device, devices} = this.props
+    if (devices) {
+      const devIndex = findIndex(devices, {id: device.id})
+      if (devIndex >= 0) device = devices[devIndex]
+    }
     const index = findIndex(device.monitors, {uid: monitorId})
     if (index < 0) return null
     const monitor = device.monitors[index]

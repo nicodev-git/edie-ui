@@ -24,6 +24,7 @@ import GAccelView from 'components/common/gauge/GAccelView'
 import GLiquid from 'components/common/gauge/GLiquid'
 import GIncidentTable from 'components/common/gauge/GIncidentTable'
 import GServers from 'components/common/gauge/GServers'
+import GMonitors from 'components/common/gauge/GMonitors'
 
 const ResponsiveReactGridLayout = WidthProvider(Responsive)
 
@@ -39,7 +40,8 @@ const gaugeMap = {
   'Accelerometer': GAccelView,
   'Liquid': GLiquid,
   'Incident Table': GIncidentTable,
-  'Servers': GServers
+  'Servers': GServers,
+  'Monitors': GMonitors
 }
 
 export default class MainDashboard extends React.Component {
