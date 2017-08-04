@@ -96,7 +96,7 @@ export default class FlipView extends React.Component {
         <div className="flex-vertical" style={{height: '100%'}}>
           <div className="panel panel-blue flex-vertical flex-1">
             <div className="panel-heading">
-              <h4 className="panel-title">{gauge.name}</h4>
+              <h4 className="panel-title text-ellipsis">{gauge.name}</h4>
               <div className="panel-options">
                 <DeleteIcon color="#545454" className="link" onTouchTap={() => onClickDelete(gauge)}/>
               </div>

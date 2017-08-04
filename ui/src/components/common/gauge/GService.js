@@ -93,11 +93,11 @@ export default class GService extends React.Component {
   }
 
   renderFrontView () {
-    // const {gauge} = this.props
+    const {gauge} = this.props
     const {isUp} = this.state
     return (
       <div>
-        <MonitorStatusView isUp={isUp} hideLabel/>
+        <MonitorStatusView isUp={isUp} hideLabel size={gauge.gaugeSize}/>
         <div style={{position: 'absolute', bottom: 15, width: '100%'}} className="text-center">
           <RaisedButton label={isUp ? 'Stop' : 'Start'} onTouchTap={this.onClickToggle.bind(this)}/>
         </div>
