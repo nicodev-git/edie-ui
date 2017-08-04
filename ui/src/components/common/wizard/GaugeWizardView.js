@@ -88,7 +88,11 @@ export default class GaugeWizardView extends React.Component {
   }
   renderIncidentTable () {
     const {selectedSeverity, onChangeSeverity, dateFrom, dateTo, onChangeDateRange, devices} = this.props
-    const deviceOptions = (devices || []).map(p => ({label: p.name, value: p.id}))
+    let deviceOptions = (devices || []).map(p => ({label: p.name, value: p.id}))
+    deviceOptions = [
+      ...deviceOptions,
+      {label: '[Any Device]', value: '*'}
+    ]
     return (
       <div>
         <Field name="name" component={FormInput} floatingLabel="Name" className="valign-top mr-dialog"/>

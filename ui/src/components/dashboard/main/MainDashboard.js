@@ -1,5 +1,5 @@
 import React from 'react'
-import {IconButton, SelectField, MenuItem} from 'material-ui'
+import {IconButton, SelectField, MenuItem, RaisedButton} from 'material-ui'
 import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
 import {findIndex} from 'lodash'
 
@@ -33,6 +33,12 @@ export default class MainDashboard extends React.Component {
       })
     })
   }
+  onClickSetDefault () {
+
+  }
+  getBoards () {
+    return this.props.gaugeBoards
+  }
   renderContent () {
     const board = this.getSelected()
     if (!board) return null
@@ -47,11 +53,12 @@ export default class MainDashboard extends React.Component {
           <SelectField
             floatingLabelText="Dashboard" value={this.props.selectedGaugeBoard} onChange={this.onChangeBoard.bind(this)}
             className="valign-top">
-            {this.props.gaugeBoards.map(p =>
+            {this.getBoards().map(p =>
               <MenuItem key={p.id} value={p.id} primaryText={p.name}/>
             )}
           </SelectField>
           <IconButton onTouchTap={this.onClickAdd.bind(this)} className="valign-bottom"><AddCircleIcon /></IconButton>
+          <RaisedButton className="top" label="Set Default" style={{marginTop: 30}} onTouchTap={this.onClickSetDefault.bind(this)}/>
         </div>
 
         <div className="flex-vertical flex-1">

@@ -138,7 +138,7 @@ export default class MainDashboardView extends React.Component {
 
   onFinishAddWizard (callback, res, params, url) {
     params.id = guid()
-    this.props.addGaugeItem(params)
+    this.props.addGaugeItem(params, this.props.board)
   }
 
   getMonitors () {
@@ -164,10 +164,11 @@ export default class MainDashboardView extends React.Component {
     //   if (v1 > v2) return 1
     //   return 0
     // })
+    const items = []
     layout.forEach((p, i) => {
       const index = findIndex(gaugeItems, {id: p.i})
       if (index < 0) return
-      this.props.updateGaugeItem({
+      items.push({
         ...gaugeItems[index],
         layout: {
           i: p.i,
@@ -176,6 +177,7 @@ export default class MainDashboardView extends React.Component {
         }
       })
     })
+    this.props.updateGaugeItem(items, this.props.board)
   }
   /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   renderDeviceWizard () {
@@ -217,8 +219,8 @@ export default class MainDashboardView extends React.Component {
           devices={this.props.mapDevices}
           monitors={this.getMonitors()}
 
-          updateDeviceGauge={this.props.updateGaugeItem}
-          removeDeviceGauge={this.props.removeGaugeItem}
+          updateDeviceGauge={gauge => this.props.updateGaugeItem(gauge, this.props.board)}
+          removeDeviceGauge={gauge => this.props.removeGaugeItem(gauge, this.props.board)}
           style={{width: '100%', height: '100%'}}
         />
       </div>
@@ -228,7 +230,7 @@ export default class MainDashboardView extends React.Component {
   renderAddMenu () {
     const {gauges} = this.props
     return (
-      <div className="text-right">
+      <div className="text-right" style={{position: 'absolute', top: -45, right: 0}}>
         <IconMenu
           iconButtonElement={<IconButton><AddCircleIcon /></IconButton>}
           anchorOrigin={{horizontal: 'left', vertical: 'top'}}

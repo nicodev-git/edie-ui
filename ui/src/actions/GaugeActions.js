@@ -70,7 +70,14 @@ export const removeGaugeItem = (props, board) => {
 export const fetchGaugeBoards = () => {
   return dispatch => {
     axios.get(`${ROOT_URL}/gaugeboard`).then(res => {
-      dispatch({type: FETCH_GAUGE_BOARDS, data: res.data._embedded.gaugeBoards})
+      const data = res.data._embedded.gaugeBoards
+      data.sort((a, b) => {
+        if (!a.defaultSetDate && !b.defaultSetDate) return 0
+        if (!a.defaultSetDate || a.defaultSetDate > b.defaultSetDate ) return -1
+        if (!b.defaultSetDate || a.defaultSetDate < b.defaultSetDate ) return 1
+        return 0
+      })
+      dispatch({type: FETCH_GAUGE_BOARDS, data})
     })
   }
 }
