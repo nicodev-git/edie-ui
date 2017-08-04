@@ -20,11 +20,11 @@ const fixOptions = [{
   label: 'Fixed', value: 'true'
 }]
 
-const timingOptions = [{
-  label: 'Realtime', value: 'realtime'
-}, {
-  label: 'Historic', value: 'historic'
-}]
+// const timingOptions = [{
+//   label: 'Realtime', value: 'realtime'
+// }, {
+//   label: 'Historic', value: 'historic'
+// }]
 
 export default class GaugeWizardView extends React.Component {
   renderDeviceList () {
@@ -61,7 +61,7 @@ export default class GaugeWizardView extends React.Component {
         {formValues.resource === 'incident' && <Field name="workflowId" component={FormSelect} floatingLabel="Workflow" options={workflows} className="valign-top mr-dialog"/>}
         {this.renderMonitorPick()}
 
-        <Field name="timing" component={FormSelect} floatingLabel=" " options={timingOptions} className="valign-top"/>
+        {/*<Field name="timing" component={FormSelect} floatingLabel=" " options={timingOptions} className="valign-top"/>*/}
 
         {durationVisible ? (
           <div className="inline-block">
