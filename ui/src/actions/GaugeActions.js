@@ -59,7 +59,7 @@ export const removeGaugeItem = (entity) => {
 export const fetchGaugeBoards = () => {
   return dispatch => {
     axios.get(`${ROOT_URL}/gaugeboard`).then(res => {
-      dispatch({type: FETCH_GAUGE_BOARDS, data: res.data._embedded.gaugeItems})
+      dispatch({type: FETCH_GAUGE_BOARDS, data: res.data._embedded.gaugeBoards})
     })
   }
 }
