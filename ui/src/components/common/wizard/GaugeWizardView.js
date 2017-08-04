@@ -22,6 +22,13 @@ const fixOptions = [{
 }]
 
 export default class GaugeWizardView extends React.Component {
+  renderDeviceList () {
+    const {devices} = this.props
+    const deviceOptions = devices.map(p => ({label: p.name, value: p.id}))
+    return (
+      <Field key="deviceId" name="deviceId" component={FormSelect} floatingLabel="Device" options={deviceOptions} className="valign-top mr-dialog"/>
+    )
+  }
   renderMonitorPick () {
     const {devices, monitors, formValues} = this.props
     if (formValues.resource !== 'monitor') return null
@@ -30,11 +37,10 @@ export default class GaugeWizardView extends React.Component {
         <Field name="monitorId" component={FormSelect} floatingLabel="Monitor" options={monitors} className="valign-top mr-dialog"/>
       )
     }
-    const deviceOptions = devices.map(p => ({label: p.name, value: p.id}))
     const index = findIndex(devices, {id: formValues.deviceId})
     const monitorOptions = index < 0 ? [] : devices[index].monitors.map(p => ({label: p.name, value: p.uid}))
     return [
-      <Field key="deviceId" name="deviceId" component={FormSelect} floatingLabel="Device" options={deviceOptions} className="valign-top mr-dialog"/>,
+      this.renderDeviceList(),
       <Field key="monitorId" name="monitorId" component={FormSelect} floatingLabel="Monitor" options={monitorOptions} className="valign-top"/>
     ]
   }
@@ -121,16 +127,19 @@ export default class GaugeWizardView extends React.Component {
     )
   }
   renderMonitors () {
-    const {device, selectedMonitors, onChangeMonitors} = this.props
+    const {device, devices, formValues, selectedMonitors, onChangeMonitors} = this.props
+
+    const index = findIndex(devices || [], {id: formValues.deviceId})
+    const monitors = devices ? (index < 0 ? [] : devices[index].monitors) : device.monitors
 
     return (
       <div>
         <Field name="name" component={FormInput} floatingLabel="Name" className="valign-top mr-dialog"/>
-
+        {devices && this.renderDeviceList()}
         <SelectField multiple floatingLabelText="Monitors" value={selectedMonitors} onChange={onChangeMonitors}>
-          {(device.monitors || []).map(p =>
+          {(monitors || []).map((p, i) =>
             <MenuItem
-              key={p.uid}
+              key={i}
               insetChildren
               checked={selectedMonitors && selectedMonitors.includes(p.uid)}
               value={p.uid}
