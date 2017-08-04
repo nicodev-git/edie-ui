@@ -13,6 +13,11 @@ import {
   updateGaugeItem,
   removeGaugeItem,
 
+  fetchGaugeBoards,
+  addGaugeBoard,
+  updateGaugeBoard,
+  removeGaugeBoard,
+
   fixIncident,
   ackIncident
 } from 'actions'
@@ -30,6 +35,7 @@ export default connect(
 
     gauges: state.gauge.gauges,
     gaugeItems: state.gauge.gaugeItems,
+    gaugeBoards: state.gauge.gaugeBoards,
 
     userInfo: state.dashboard.userInfo,
     sysSearchOptions: state.search.sysSearchOptions,
@@ -45,6 +51,11 @@ export default connect(
     addGaugeItem,
     updateGaugeItem,
     removeGaugeItem,
+
+    fetchGaugeBoards,
+    addGaugeBoard,
+    updateGaugeBoard,
+    removeGaugeBoard,
 
     fixIncident,
     ackIncident

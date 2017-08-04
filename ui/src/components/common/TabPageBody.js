@@ -26,8 +26,9 @@ export default class TabPageBody extends Component {
   }
 
   navigate (index) {
-    const {tabs} = this.props
-    this.props.history.push(tabs[index].path)
+    const {tabs, history, onClickTab} = this.props
+    onClickTab && onClickTab(index)
+    history && history.push(tabs[index].path)
   }
 
   render () {
