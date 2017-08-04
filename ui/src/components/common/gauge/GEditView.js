@@ -4,7 +4,7 @@ import {TextField, SelectField, MenuItem, RaisedButton, Checkbox} from 'material
 import {findIndex} from 'lodash'
 
 import DoneButton from './DoneButton'
-import {gaugeDurationTypes, gaugeResources, severities as allSeverities} from 'shared/Global'
+import {gaugeDurationTypes, gaugeResources, severities as allSeverities, gaugeSizeList} from 'shared/Global'
 import DateRangePicker from 'components/common/DateRangePicker'
 
 const durations = '1 2 3 5 10 15 30'.split(' ').map(p => ({
@@ -27,7 +27,6 @@ const fixOptions = [{
 //   label: p,
 //   value: p
 // }))
-const gaugeSizeList = ['small', 'medium', 'big']
 
 export default class GEditView extends React.Component {
   constructor (props) {

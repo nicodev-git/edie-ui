@@ -250,6 +250,8 @@ export const gaugeResources = [{
   label: 'Incident', value: 'incident'
 }]
 
+export const gaugeSizeList = ['small', 'medium', 'big']
+
 export function filterGaugeServers (devices) {
   return (devices || []).filter(p => p.templateName !== 'Long hub' && p.templateName !== 'Free Text' )
 }

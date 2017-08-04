@@ -6,7 +6,6 @@ import { SubmitBlock, FormInput, FormSelect } from 'components/modal/parts'
 import {findIndex} from 'lodash'
 
 import {gaugeDurationTypes, gaugeResources, severities} from 'shared/Global'
-// import { getSeverityIcon, parseSearchQuery, dateFormat, encodeUrlParams, severities } from 'shared/Global'
 import DateRangePicker from 'components/common/DateRangePicker'
 
 const durations = '1 2 3 5 10 15 30'.split(' ').map(p => ({
