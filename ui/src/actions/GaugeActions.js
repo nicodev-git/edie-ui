@@ -36,25 +36,36 @@ export const fetchGaugeItems = () => {
 
 export const addGaugeItem = (props, board) => {
   return dispatch => {
-    axios.post(`${ROOT_URL}/gaugeitem`, props).then(res => {
-      dispatch({type: ADD_GAUGE_ITEM, data: res.data})
-    })
+    dispatch(updateGaugeBoard({
+      ...board,
+      gauges: [...(board.gauges || []), props]
+    }))
   }
 }
 
-export const updateGaugeItem = (entity) => {
+export const updateGaugeItem = (props, board) => {
   return dispatch => {
-    axios.put(entity._links.self.href, entity).then(res => {
-      dispatch({type: UPDATE_GAUGE_ITEM, data: res.data})
+    const gauges = (board.gauges || []).map(p => {
+      if (props.length) {
+        const index = findIndex(props, {id: p.id})
+        return index < 0 ? p : props[index]
+      } else {
+        return p.id === props.id ? props : p
+      }
     })
+    dispatch(updateGaugeBoard({
+      ...board,
+      gauges
+    }))
   }
 }
 
-export const removeGaugeItem = (entity) => {
+export const removeGaugeItem = (props, board) => {
   return dispatch => {
-    axios.delete(entity._links.self.href, entity).then(() => {
-      dispatch({type: REMOVE_GAUGE_ITEM, data: entity})
-    })
+    dispatch(updateGaugeBoard({
+      ...board,
+      gauges: (board.gauges || []).filter(p => p.id !== props.id)
+    }))
   }
 }
 
