@@ -42,7 +42,7 @@ class LiquidView extends React.Component {
     ];
 
     return (
-      <div className="text-center">
+      <div className="text-center" style={{paddingTop: this.props.containerHeight / 2 - radius}}>
         <LiquidFillGauge
           style={{ margin: '0 auto' }}
           width={radius * 2}
