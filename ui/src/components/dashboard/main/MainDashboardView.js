@@ -154,7 +154,8 @@ export default class MainDashboardView extends React.Component {
     return []
   }
 
-  onLayoutChange (layout, old, e1, e2, e) {
+  onLayoutChange (layout, oldItem, newItem, e2, e) {
+    if (JSON.stringify(oldItem) === JSON.stringify(newItem)) return
     const gaugeItems = this.getGauges()
     // const layouts = [...layout]
     // layouts.sort((a, b) => {

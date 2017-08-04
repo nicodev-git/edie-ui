@@ -11,14 +11,13 @@ class AccelMeterView extends React.Component {
   }
   render () {
     return (
-      <div className="padding-md text-center">
+      <div className="text-center" style={{paddingTop: this.props.containerHeight * 0.05}}>
         <AccelView
           value={this.state.value}
-          width={this.props.containerWidth * 0.8}
-          height={this.props.containerHeight - 50}
+          width={Math.min(this.props.containerWidth, this.props.containerHeight * 2) * 0.7}
+          height={this.props.containerHeight * 0.8}
           label=""
         />
-        <div className="text-center">{this.props.title}</div>
       </div>
     )
   }

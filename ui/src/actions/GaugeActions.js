@@ -69,6 +69,7 @@ export const removeGaugeItem = (props, board) => {
 
 export const fetchGaugeBoards = () => {
   return dispatch => {
+    dispatch({type: FETCH_GAUGE_BOARDS, data: []})
     axios.get(`${ROOT_URL}/gaugeboard`).then(res => {
       const data = res.data._embedded.gaugeBoards
       data.sort((a, b) => {

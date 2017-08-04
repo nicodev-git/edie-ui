@@ -24,8 +24,9 @@ export default class FlipView extends React.Component {
     return flippedCSS
   }
 
-  onClickFlip () {
+  onClickFlip (e) {
     this.setState({flip: !this.state.flip, clicked: true})
+    e && e.preventDefault()
   }
 
   onMouseEnter () {

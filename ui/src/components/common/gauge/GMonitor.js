@@ -40,7 +40,11 @@ export default class GMonitor extends React.Component {
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   renderFrontView () {
-    const {gauge, device} = this.props
+    let {gauge, device, devices} = this.props
+    if (devices) {
+      const devIndex = findIndex(devices, {id: device.id})
+      if (devIndex >= 0) device = devices[devIndex]
+    }
 
     const index = findIndex(device.monitors, {uid: gauge.monitorId})
     if (index < 0) return null

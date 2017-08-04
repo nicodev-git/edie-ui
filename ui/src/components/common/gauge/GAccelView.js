@@ -49,8 +49,9 @@ export default class GAccelView extends React.Component {
     return (
       <div className="flex-vertical flex-1">
         <div className="flex-1">
-          <AccelMeterView title={gauge.name}/>
+          <AccelMeterView/>
         </div>
+        <div className="text-center">{gauge.name}</div>
       </div>
     )
   }
