@@ -15,7 +15,8 @@ class GaugeWizard extends React.Component {
       dateFrom: moment().startOf('year').valueOf(),
       dateTo: moment().endOf('year').valueOf(),
 
-      services: []
+      services: [],
+      selectedMonitors: []
     }
   }
 
@@ -63,6 +64,11 @@ class GaugeWizard extends React.Component {
       selectedSeverity: values
     })
   }
+  onChangeMonitors (e, index, values) {
+    this.setState({
+      selectedMonitors: values
+    })
+  }
   onChangeDateRange ({startDate, endDate}) {
     this.setState({
       dateFrom: startDate.valueOf(),
@@ -83,12 +89,13 @@ class GaugeWizard extends React.Component {
     return []
   }
   handleFormSubmit (formProps) {
-    const { selectedSeverity, dateFrom, dateTo } = this.state
+    const { selectedSeverity, selectedMonitors, dateFrom, dateTo } = this.state
     const { extraParams, onFinish } = this.props
 
     const props = assign(
       {
         severities: selectedSeverity,
+        monitorIds: selectedMonitors,
         dateFrom,
         dateTo
       },
@@ -141,6 +148,9 @@ class GaugeWizard extends React.Component {
 
         selectedSeverity={this.state.selectedSeverity}
         onChangeSeverity={this.onChangeSeverity.bind(this)}
+
+        selectedMonitors={this.state.selectedMonitors}
+        onChangeMonitors={this.onChangeMonitors.bind(this)}
 
         dateFrom={this.state.dateFrom}
         dateTo={this.state.dateTo}
