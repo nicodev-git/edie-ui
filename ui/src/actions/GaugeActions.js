@@ -4,7 +4,12 @@ import {
   FETCH_GAUGE_ITEMS,
   ADD_GAUGE_ITEM,
   UPDATE_GAUGE_ITEM,
-  REMOVE_GAUGE_ITEM
+  REMOVE_GAUGE_ITEM,
+
+  FETCH_GAUGE_BOARDS,
+  ADD_GAUGE_BOARD,
+  UPDATE_GAUGE_BOARD,
+  REMOVE_GAUGE_BOARD
 } from './types'
 
 import { apiError } from './Errors'
@@ -47,6 +52,38 @@ export const removeGaugeItem = (entity) => {
   return dispatch => {
     axios.delete(entity._links.self.href, entity).then(() => {
       dispatch({type: REMOVE_GAUGE_ITEM, data: entity})
+    })
+  }
+}
+
+export const fetchGaugeBoards = () => {
+  return dispatch => {
+    axios.get(`${ROOT_URL}/gaugeboard`).then(res => {
+      dispatch({type: FETCH_GAUGE_BOARDS, data: res.data._embedded.gaugeItems})
+    })
+  }
+}
+
+export const addGaugeBoard = (props) => {
+  return dispatch => {
+    axios.post(`${ROOT_URL}/gaugeboard`, props).then(res => {
+      dispatch({type: ADD_GAUGE_BOARD, data: res.data})
+    })
+  }
+}
+
+export const updateGaugeBoard = (entity) => {
+  return dispatch => {
+    axios.put(entity._links.self.href, entity).then(res => {
+      dispatch({type: UPDATE_GAUGE_BOARD, data: res.data})
+    })
+  }
+}
+
+export const removeGaugeBoard = (entity) => {
+  return dispatch => {
+    axios.delete(entity._links.self.href, entity).then(() => {
+      dispatch({type: REMOVE_GAUGE_BOARD, data: entity})
     })
   }
 }

@@ -429,6 +429,11 @@ export const ADD_GAUGE_ITEM = 'ADD_GAUGE_ITEM'
 export const UPDATE_GAUGE_ITEM = 'UPDATE_GAUGE_ITEM'
 export const REMOVE_GAUGE_ITEM = 'REMOVE_GAUGE_ITEM'
 
+export const FETCH_GAUGE_BOARDS = 'FETCH_GAUGE_BOARDS'
+export const ADD_GAUGE_BOARD = 'ADD_GAUGE_BOARD'
+export const UPDATE_GAUGE_BOARD = 'UPDATE_GAUGE_BOARD'
+export const REMOVE_GAUGE_BOARD = 'REMOVE_GAUGE_BOARD'
+
 ///////////////////////////////////////////////////////////////
 
 export const SHOW_SIMULATION_MODAL = 'SHOW_SIMULATION_MODAL'
