@@ -48,7 +48,7 @@ export default class GMonitor extends React.Component {
     const isUp = monitor.status === 'UP'
     const lastUpdate = isUp ? monitor.lastfalure : monitor.lastsuccess
     return (
-      <MonitorStatusView isUp={isUp} lastUpdate={lastUpdate}/>
+      <MonitorStatusView isUp={isUp} lastUpdate={lastUpdate} size={gauge.gaugeSize}/>
     )
   }
   renderBackView (options) {

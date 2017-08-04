@@ -257,7 +257,7 @@ export function filterGaugeServers (devices) {
 export function getWidgetSize (gauge, mapDevices) {
   switch(gauge.gaugeSize) {
     case 'small':
-      return {w: 2, h: 1}
+      return {w: 1, h: 1}
     case 'big':
       return {w: 8, h: 2}
     default:
