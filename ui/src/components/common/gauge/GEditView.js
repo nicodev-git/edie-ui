@@ -23,10 +23,11 @@ const fixOptions = [{
   label: 'Fixed', value: 'true'
 }]
 
-const sizeList = [1, 2, 3].map(p => ({
-  label: p,
-  value: p
-}))
+// const sizeList = [1, 2, 3].map(p => ({
+//   label: p,
+//   value: p
+// }))
+const gaugeSizeList = ['small', 'medium', 'big']
 
 export default class GEditView extends React.Component {
   constructor (props) {
@@ -56,6 +57,7 @@ export default class GEditView extends React.Component {
       widgetSize: gauge.widgetSize || 0,
 
       itemSize: gauge.itemSize || 'normal',
+      gaugeSize: gauge.gaugeSize || 'medium',
       showDeviceType: gauge.showDeviceType || false
     }
   }
@@ -85,13 +87,13 @@ export default class GEditView extends React.Component {
     const {resource, savedSearchId, monitorId, workflowId, deviceId, serviceName, monitorIds,
       duration, durationUnit, splitBy, splitUnit, name,
       severities, dateFrom, dateTo, fixed,
-      widgetSize, itemSize, showDeviceType
+      widgetSize, itemSize, showDeviceType, gaugeSize
     }  = this.state
     const values = {
       resource, savedSearchId, monitorId, workflowId, deviceId, serviceName, monitorIds,
       duration, durationUnit, splitBy, splitUnit, name,
       severities, dateFrom, dateTo, fixed,
-      widgetSize, itemSize, showDeviceType
+      widgetSize, itemSize, showDeviceType, gaugeSize
     }
     onSubmit && onSubmit(values)
   }
@@ -129,7 +131,7 @@ export default class GEditView extends React.Component {
     const {
       resource, savedSearchId, workflowId,
       duration, durationUnit, splitBy, splitUnit, name,
-      widgetSize
+      gaugeSize
     } = this.state
     const {searchList, hideDuration, hideSplit, workflows} = this.props
     return (
@@ -189,8 +191,8 @@ export default class GEditView extends React.Component {
 
         <div className="row">
           <div className="col-md-3">
-            <SelectField value={widgetSize} floatingLabelText="Size" className="valign-top mr-dialog" style={inputStyle} onChange={this.onChangeSelect.bind(this, 'widgetSize')}>
-              {sizeList.map(p => <MenuItem key={p.value} value={p.value} primaryText={p.label}/>)}
+            <SelectField value={gaugeSize} floatingLabelText="Size" className="valign-top mr-dialog" style={inputStyle} onChange={this.onChangeSelect.bind(this, 'gaugeSize')}>
+              {gaugeSizeList.map(p => <MenuItem key={p} value={p} primaryText={p}/>)}
             </SelectField>
           </div>
         </div>
@@ -206,7 +208,7 @@ export default class GEditView extends React.Component {
 
   renderIncidentTable () {
     const {devices} = this.props
-    const {deviceId, fixed, severities, dateFrom, dateTo, name, widgetSize} = this.state
+    const {deviceId, fixed, severities, dateFrom, dateTo, name, gaugeSize} = this.state
     return (
       <div>
         <TextField name="name" value={name} floatingLabelText="Name" className="valign-top mr-dialog" onChange={this.onChangeText.bind(this, 'name')}/>
@@ -234,15 +236,15 @@ export default class GEditView extends React.Component {
           />
         </div>
 
-        <SelectField value={widgetSize} floatingLabelText="Size" className="valign-top mr-dialog" onChange={this.onChangeSelect.bind(this, 'widgetSize')}>
-          {sizeList.map(p => <MenuItem key={p.value} value={p.value} primaryText={p.label}/>)}
+        <SelectField value={gaugeSize} floatingLabelText="Size" className="valign-top mr-dialog" onChange={this.onChangeSelect.bind(this, 'gaugeSize')}>
+          {gaugeSizeList.map(p => <MenuItem key={p} value={p} primaryText={p}/>)}
         </SelectField>
       </div>
     )
   }
   renderDevice () {
     const {devices} = this.props
-    const {name, deviceId, widgetSize} = this.state
+    const {name, deviceId, gaugeSize} = this.state
     if (!devices) return null
     return (
       <div>
@@ -250,15 +252,15 @@ export default class GEditView extends React.Component {
         <SelectField value={deviceId} floatingLabelText="Device" className="valign-top" onChange={this.onChangeSelect.bind(this, 'deviceId')}>
           {devices.map(p => <MenuItem key={p.id} value={p.id} primaryText={p.name}/>)}
         </SelectField>
-        <SelectField value={widgetSize} floatingLabelText="Size" className="valign-top mr-dialog" onChange={this.onChangeSelect.bind(this, 'widgetSize')}>
-          {sizeList.map(p => <MenuItem key={p.value} value={p.value} primaryText={p.label}/>)}
+        <SelectField value={gaugeSize} floatingLabelText="Size" className="valign-top mr-dialog" onChange={this.onChangeSelect.bind(this, 'gaugeSize')}>
+          {gaugeSizeList.map(p => <MenuItem key={p} value={p} primaryText={p}/>)}
         </SelectField>
       </div>
     )
   }
   renderService () {
     const {services} = this.props
-    const {name, serviceName, widgetSize} = this.state
+    const {name, serviceName, gaugeSize} = this.state
     return (
       <div>
         <TextField name="name" value={name} floatingLabelText="Name" className="valign-top mr-dialog" onChange={this.onChangeText.bind(this, 'name')}/>
@@ -266,8 +268,8 @@ export default class GEditView extends React.Component {
           {services.map(p => <MenuItem key={p.ServiceName} value={p.ServiceName} primaryText={p.DisplayName || p.ServiceName}/>)}
         </SelectField>
 
-        <SelectField value={widgetSize} floatingLabelText="Size" className="valign-top mr-dialog" onChange={this.onChangeSelect.bind(this, 'widgetSize')}>
-          {sizeList.map(p => <MenuItem key={p.value} value={p.value} primaryText={p.label}/>)}
+        <SelectField value={gaugeSize} floatingLabelText="Size" className="valign-top mr-dialog" onChange={this.onChangeSelect.bind(this, 'gaugeSize')}>
+          {gaugeSizeList.map(p => <MenuItem key={p} value={p} primaryText={p}/>)}
         </SelectField>
       </div>
     )
