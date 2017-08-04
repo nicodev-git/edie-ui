@@ -160,9 +160,9 @@ export default class GaugeWizardView extends React.Component {
             <MenuItem
               key={i}
               insetChildren
-              checked={serviceNames && serviceNames.includes(p.ServiceName)}
-              value={p.ServiceName}
-              primaryText={p.DisplayName || p.ServiceName}
+              checked={serviceNames && serviceNames.includes(p.value)}
+              value={p.value}
+              primaryText={p.label}
             />
           )}
         </SelectField>
