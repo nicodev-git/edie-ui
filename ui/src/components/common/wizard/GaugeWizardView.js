@@ -120,6 +120,17 @@ export default class GaugeWizardView extends React.Component {
       </div>
     )
   }
+  renderMonitors () {
+    const {device, monitors, formValues} = this.props
+    const monitorOptions = (device.monitors || []).map(p => ({label: p.name, value: p.uid}))
+
+    return (
+      <div>
+        <Field name="name" component={FormInput} floatingLabel="Name" className="valign-top mr-dialog"/>
+        <Field name="monitorId" component={FormSelect} floatingLabel="Monitor" options={monitorOptions} className="valign-top"/>
+      </div>
+    )
+  }
   renderContent () {
     const {templateName} = this.props
     switch(templateName) {
@@ -131,6 +142,8 @@ export default class GaugeWizardView extends React.Component {
         return this.renderDevice()
       case 'Service':
         return this.renderService()
+      case 'Monitors':
+        return this.renderMonitors()
       default:
         return this.renderNormal()
     }

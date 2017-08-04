@@ -6,7 +6,7 @@ import GEditView from './GEditView'
 import {showAlert} from 'components/common/Alert'
 import {filterGaugeServers} from 'shared/Global'
 
-export default class GServers extends React.Component {
+export default class GMonitors extends React.Component {
   constructor (props) {
     super (props)
     this.state = {
