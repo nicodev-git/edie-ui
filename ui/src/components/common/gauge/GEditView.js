@@ -40,6 +40,7 @@ export default class GEditView extends React.Component {
       monitorId: gauge.monitorId || '',
       workflowId: gauge.workflowId || '',
       serviceName: gauge.serviceName || '',
+      monitorIds: gauge.monitorIds || [],
 
       duration: gauge.duration || '3',
       durationUnit: gauge.durationUnit || 'day',
@@ -72,12 +73,6 @@ export default class GEditView extends React.Component {
     }
     this.setState(state)
   }
-
-  onChangeSeverity (e, index, values) {
-    this.setState({
-      severities: values
-    })
-  }
   onChangeDateRange ({startDate, endDate}) {
     this.setState({
       dateFrom: startDate.valueOf(),
@@ -87,13 +82,13 @@ export default class GEditView extends React.Component {
 
   onClickDone () {
     const {onSubmit} = this.props
-    const {resource, savedSearchId, monitorId, workflowId, deviceId, serviceName,
+    const {resource, savedSearchId, monitorId, workflowId, deviceId, serviceName, monitorIds,
       duration, durationUnit, splitBy, splitUnit, name,
       severities, dateFrom, dateTo, fixed,
       widgetSize, itemSize, showDeviceType
     }  = this.state
     const values = {
-      resource, savedSearchId, monitorId, workflowId, deviceId, serviceName,
+      resource, savedSearchId, monitorId, workflowId, deviceId, serviceName, monitorIds,
       duration, durationUnit, splitBy, splitUnit, name,
       severities, dateFrom, dateTo, fixed,
       widgetSize, itemSize, showDeviceType
@@ -219,7 +214,7 @@ export default class GEditView extends React.Component {
           <MenuItem value="*" primaryText="[Any Device]"/>
           {devices.map(p => <MenuItem key={p.id} value={p.id} primaryText={p.name}/>)}
         </SelectField>}
-        <SelectField multiple floatingLabelText="Severity" onChange={this.onChangeSeverity.bind(this)} className="valign-top mr-dialog" value={severities}>
+        <SelectField multiple floatingLabelText="Severity" onChange={this.onChangeSelect.bind(this, 'severities')} className="valign-top mr-dialog" value={severities}>
           {allSeverities.map(option =>
             <MenuItem key={option.value} insetChildren checked={severities && severities.includes(option.value)}
                       value={option.value} primaryText={option.label}/>
@@ -290,6 +285,28 @@ export default class GEditView extends React.Component {
       </div>
     )
   }
+  renderMonitors () {
+    const {device} = this.props
+    const {name, monitorIds} = this.state
+
+    return (
+      <div>
+        <TextField name="name" value={name} floatingLabelText="Name" className="valign-top mr-dialog" onChange={this.onChangeText.bind(this, 'name')}/>
+
+        <SelectField multiple floatingLabelText="Monitors" value={monitorIds} onChange={this.onChangeSelect.bind(this, 'monitorIds')}>
+          {(device.monitors || []).map(p =>
+            <MenuItem
+              key={p.uid}
+              insetChildren
+              checked={monitorIds && monitorIds.includes(p.uid)}
+              value={p.uid}
+              primaryText={p.name}
+            />
+          )}
+        </SelectField>
+      </div>
+    )
+  }
   renderContent () {
     const {gauge} = this.props
     switch(gauge.templateName) {
@@ -303,6 +320,8 @@ export default class GEditView extends React.Component {
         return this.renderService()
       case 'Servers':
         return this.renderServers()
+      case 'Monitors':
+        return this.renderMonitors()
       default:
         return this.renderNormal()
     }
