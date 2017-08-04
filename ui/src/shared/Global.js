@@ -255,11 +255,19 @@ export function filterGaugeServers (devices) {
 }
 
 export function getWidgetSize (gauge, mapDevices) {
-  if (gauge.widgetSize === 0) {
-    if (gauge.templateName === 'Servers') {
-      const count = filterGaugeServers(mapDevices).length
-      return Math.max(Math.min(Math.ceil(count / (gauge.itemSize === 'slim' ? 16 : 12)), 3), 1)
-    }
+  switch(gauge.gaugeSize) {
+    case 'small':
+      return {w: 2, h: 1}
+    case 'big':
+      return {w: 8, h: 2}
+    default:
+      return {w: 4, h: 2}
   }
-  return gauge.widgetSize || 1
+  // if (gauge.widgetSize === 0) {
+  //   if (gauge.templateName === 'Servers') {
+  //     const count = filterGaugeServers(mapDevices).length
+  //     return Math.max(Math.min(Math.ceil(count / (gauge.itemSize === 'slim' ? 16 : 12)), 3), 1)
+  //   }
+  // }
+  // return gauge.widgetSize || 1
 }

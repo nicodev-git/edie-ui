@@ -201,8 +201,8 @@ export default class DeviceDashboard extends React.Component {
     const {device} = this.props
     const layouts = [...layout]
     layouts.sort((a, b) => {
-      const v1 = a.y * 10 + a.x
-      const v2 = b.y * 10 + b.x
+      const v1 = a.y * 100 + a.x
+      const v2 = b.y * 100 + b.x
       if (v1 < v2) return -1
       if (v1 > v2) return 1
       return 0
@@ -310,7 +310,7 @@ export default class DeviceDashboard extends React.Component {
       let y = 0
 
       return items.map((p, i) => {
-        const w = Math.min(getWidgetSize(p, this.props.mapDevices), mw)
+        const {w, h} = getWidgetSize(p, this.props.mapDevices)
         if (x + w > mw) {
           x = 0
           y++
@@ -318,7 +318,7 @@ export default class DeviceDashboard extends React.Component {
         const op = {
           i: p.id,
           x, y,
-          w, h: 1
+          w, h
         }
 
         x += w
@@ -329,7 +329,7 @@ export default class DeviceDashboard extends React.Component {
         return op
       })
     }
-    const cols = {lg: 3, md: 2, sm: 2, xs: 1, xxs: 1}
+    const cols = {lg: 12, md: 8, sm: 8, xs: 4, xxs: 4}
     const layouts = {
       lg: layout(cols['lg']),
       md: layout(cols['md']),
@@ -342,7 +342,7 @@ export default class DeviceDashboard extends React.Component {
         {this.renderAgent()}
         {this.renderAddMenu()}
         <ResponsiveReactGridLayout
-          className="layout" cols={cols} rowHeight={350}
+          className="layout" cols={cols} rowHeight={170}
           layouts={layouts}
           isResizable={false} margin={[10, 10]}
           style={{marginTop: -10}}
