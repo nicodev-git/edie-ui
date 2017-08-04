@@ -8,7 +8,9 @@ import {
   FETCH_GAUGE_BOARDS,
   ADD_GAUGE_BOARD,
   UPDATE_GAUGE_BOARD,
-  REMOVE_GAUGE_BOARD
+  REMOVE_GAUGE_BOARD,
+
+  SELECT_GAUGE_BOARD
 } from 'actions/types'
 
 const INITIAL_STATE = {
@@ -38,7 +40,8 @@ export default function (state = INITIAL_STATE, action) {
       return { ...state, gaugeBoards: state.gaugeBoards.map(p => p.id === action.data.id ? action.data : p) }
     case REMOVE_GAUGE_BOARD:
       return { ...state, gaugeBoards: state.gaugeBoards.filter(p => p.id !== action.data.id) }
-
+    case SELECT_GAUGE_BOARD:
+      return { ...state, selectedGaugeBoard: action.data }
     default:
       return state
   }

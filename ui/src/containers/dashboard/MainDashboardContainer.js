@@ -17,6 +17,7 @@ import {
   addGaugeBoard,
   updateGaugeBoard,
   removeGaugeBoard,
+  selectGaugeBoard,
 
   fixIncident,
   ackIncident
@@ -36,6 +37,7 @@ export default connect(
     gauges: state.gauge.gauges,
     gaugeItems: state.gauge.gaugeItems,
     gaugeBoards: state.gauge.gaugeBoards,
+    selectedGaugeBoard: state.gauge.selectedGaugeBoard,
 
     userInfo: state.dashboard.userInfo,
     sysSearchOptions: state.search.sysSearchOptions,
@@ -56,6 +58,7 @@ export default connect(
     addGaugeBoard,
     updateGaugeBoard,
     removeGaugeBoard,
+    selectGaugeBoard,
 
     fixIncident,
     ackIncident

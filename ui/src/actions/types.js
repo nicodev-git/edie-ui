@@ -434,6 +434,8 @@ export const ADD_GAUGE_BOARD = 'ADD_GAUGE_BOARD'
 export const UPDATE_GAUGE_BOARD = 'UPDATE_GAUGE_BOARD'
 export const REMOVE_GAUGE_BOARD = 'REMOVE_GAUGE_BOARD'
 
+export const SELECT_GAUGE_BOARD = 'SELECT_GAUGE_BOARD'
+
 ///////////////////////////////////////////////////////////////
 
 export const SHOW_SIMULATION_MODAL = 'SHOW_SIMULATION_MODAL'

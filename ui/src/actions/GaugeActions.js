@@ -9,7 +9,9 @@ import {
   FETCH_GAUGE_BOARDS,
   ADD_GAUGE_BOARD,
   UPDATE_GAUGE_BOARD,
-  REMOVE_GAUGE_BOARD
+  REMOVE_GAUGE_BOARD,
+
+  SELECT_GAUGE_BOARD
 } from './types'
 
 import { apiError } from './Errors'
@@ -85,5 +87,11 @@ export const removeGaugeBoard = (entity) => {
     axios.delete(entity._links.self.href, entity).then(() => {
       dispatch({type: REMOVE_GAUGE_BOARD, data: entity})
     })
+  }
+}
+
+export const selectGaugeBoard = (data) => {
+  return dispatch => {
+    dispatch({type: SELECT_GAUGE_BOARD, data})
   }
 }
