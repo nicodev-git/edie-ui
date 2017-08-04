@@ -16,7 +16,8 @@ class GaugeWizard extends React.Component {
       dateTo: moment().endOf('year').valueOf(),
 
       services: [],
-      selectedMonitors: []
+      selectedMonitors: [],
+      serviceNames: []
     }
   }
 
@@ -27,7 +28,7 @@ class GaugeWizard extends React.Component {
 
   componentDidMount () {
     const {templateName, device} = this.props
-    if (device && templateName === 'Service') {
+    if (device && (templateName === 'Service' || templateName === 'Services')) {
       this.monitorSocket = new MonitorSocket({
         listener: this.onMonitorMessage.bind(this)
       })
@@ -69,6 +70,11 @@ class GaugeWizard extends React.Component {
       selectedMonitors: values
     })
   }
+  onChangeServiceNames (e, index, values) {
+    this.setState({
+      serviceNames: values
+    })
+  }
   onChangeDateRange ({startDate, endDate}) {
     this.setState({
       dateFrom: startDate.valueOf(),
@@ -89,13 +95,13 @@ class GaugeWizard extends React.Component {
     return []
   }
   handleFormSubmit (formProps) {
-    const { selectedSeverity, selectedMonitors, dateFrom, dateTo } = this.state
+    const { selectedSeverity, selectedMonitors, serviceNames, dateFrom, dateTo } = this.state
     const { extraParams, onFinish } = this.props
 
-    const props = assign(
-      {
+    const props = assign({
         severities: selectedSeverity,
         monitorIds: selectedMonitors,
+        serviceNames: serviceNames,
         dateFrom,
         dateTo
       },
@@ -151,6 +157,9 @@ class GaugeWizard extends React.Component {
 
         selectedMonitors={this.state.selectedMonitors}
         onChangeMonitors={this.onChangeMonitors.bind(this)}
+
+        serviceNames={this.state.serviceNames}
+        onChangeServiceNames={this.onChangeServiceNames.bind(this)}
 
         dateFrom={this.state.dateFrom}
         dateTo={this.state.dateTo}

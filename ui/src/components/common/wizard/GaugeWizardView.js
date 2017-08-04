@@ -150,6 +150,25 @@ export default class GaugeWizardView extends React.Component {
       </div>
     )
   }
+  renderServices () {
+    const {services, serviceNames, onChangeServiceNames} = this.props
+    return (
+      <div>
+        <Field name="name" component={FormInput} floatingLabel="Name" className="valign-top mr-dialog"/>
+        <SelectField multiple floatingLabelText="Services" value={serviceNames} onChange={onChangeServiceNames}>
+          {(services || []).map((p, i) =>
+            <MenuItem
+              key={i}
+              insetChildren
+              checked={serviceNames && serviceNames.includes(p.ServiceName)}
+              value={p.ServiceName}
+              primaryText={p.DisplayName || p.ServiceName}
+            />
+          )}
+        </SelectField>
+      </div>
+    )
+  }
   renderContent () {
     const {templateName} = this.props
     switch(templateName) {
@@ -163,6 +182,8 @@ export default class GaugeWizardView extends React.Component {
         return this.renderService()
       case 'Monitors':
         return this.renderMonitors()
+      case 'Services':
+        return this.renderServices()
       default:
         return this.renderNormal()
     }
