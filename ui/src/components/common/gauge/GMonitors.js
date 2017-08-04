@@ -1,18 +1,24 @@
 import React from 'react'
+import {findIndex} from 'lodash'
 
 import FlipView from './FlipView'
+import MonitorStatusView from './display/MonitorStatusView'
 import GEditView from './GEditView'
 
 import {showAlert} from 'components/common/Alert'
-import {filterGaugeServers} from 'shared/Global'
 
 export default class GMonitors extends React.Component {
   constructor (props) {
     super (props)
     this.state = {
+      loading: false
     }
     this.renderBackView = this.renderBackView.bind(this)
     this.renderFrontView = this.renderFrontView.bind(this)
+  }
+
+  onClickDelete () {
+    this.props.removeDeviceGauge(this.props.gauge, this.props.device)
   }
 
   onSubmit (options, values) {
@@ -31,52 +37,38 @@ export default class GMonitors extends React.Component {
     options.onClickFlip()
   }
 
-  onClickDelete () {
-    this.props.removeDeviceGauge(this.props.gauge, this.props.device)
-  }
-  getMaxItemCount () {
-    const {gauge}= this.props
-    return 24 * (gauge.itemSize === 'slim' ? 2 : 1)
-  }
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  renderItemView(item, total) {
-    const {gauge} = this.props
-    const isUp = item.status === 'UP'
-    const col = Math.floor(12 / (gauge.itemSize === 'slim' ? 4 : 3) / Math.ceil(total / (gauge.itemSize === 'slim' ? 16 : 12)))
-    const padding = ''
+  renderItem (monitorId) {
+    const {device} = this.props
+
+    const index = findIndex(device.monitors, {uid: monitorId})
+    if (index < 0) return null
+    const monitor = device.monitors[index]
+    const isUp = monitor.status === 'UP'
+    const lastUpdate = isUp ? monitor.lastfalure : monitor.lastsuccess
     return (
-      <div key={item.id} className={`col-md-${col} text-center padding-xs ${padding}`} style={{height: gauge.itemSize === 'slim' ? '12.5%' : '25%'}}>
-        <div className={`${isUp ? 'bg-success' : 'bg-danger'}`} style={{width: '100%', height: '100%'}}>
-          <div className="div-center text-white">
-            <div>{item.name}</div>
-            {gauge.showDeviceType && <div><small>{item.templateName}</small></div>}
-          </div>
-        </div>
+      <div key={monitorId} className="col-md-6" style={{height: '50%'}}>
+        <MonitorStatusView isUp={isUp} lastUpdate={lastUpdate}/>
       </div>
     )
   }
   renderFrontView () {
-    const items = filterGaugeServers(this.props.devices).slice(0, this.getMaxItemCount())
+    const {gauge} = this.props
+
     return (
-      <div className="flex-vertical flex-1">
-        <div className="flex-1" style={{overflow: 'hidden'}}>
-          <div className="row"   style={{height: '100%', paddingTop: 2, paddingLeft: 17, paddingRight: 17}}>
-          {items.map(item => this.renderItemView(item, items.length))}
-          </div>
-        </div>
+      <div className="row" style={{height: '100%'}}>
+
       </div>
     )
   }
   renderBackView (options) {
     return (
-      <div>
-        <GEditView
-          {...this.props}
-          onSubmit={this.onSubmit.bind(this, options)}
-          hideDuration
-          hideSplit
-        />
-      </div>
+      <GEditView
+        {...this.props}
+        onSubmit={this.onSubmit.bind(this, options)}
+        hideDuration
+        hideSplit
+      />
     )
   }
   render () {
