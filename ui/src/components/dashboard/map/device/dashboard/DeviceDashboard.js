@@ -199,19 +199,23 @@ export default class DeviceDashboard extends React.Component {
   }
   onLayoutChange (layout) {
     const {device} = this.props
-    const layouts = [...layout]
-    layouts.sort((a, b) => {
-      const v1 = a.y * 100 + a.x
-      const v2 = b.y * 100 + b.x
-      if (v1 < v2) return -1
-      if (v1 > v2) return 1
-      return 0
-    })
-    const items = layouts.map((p, i) => {
+    // const layouts = [...layout]
+    // layouts.sort((a, b) => {
+    //   const v1 = a.y * 100 + a.x
+    //   const v2 = b.y * 100 + b.x
+    //   if (v1 < v2) return -1
+    //   if (v1 > v2) return 1
+    //   return 0
+    // })
+    const items = layout.map((p, i) => {
       const index = findIndex(device.gauges, {id: p.i})
       return {
         ...device.gauges[index],
-        layout: i
+        layout: {
+          i: p.i,
+          x: p.x, y: p.y,
+          w: p.w, h: p.h
+        }
       }
     })
     this.props.updateDeviceGauge(items, device)
@@ -298,19 +302,22 @@ export default class DeviceDashboard extends React.Component {
 
   render () {
     const gauges = this.getGauges()
-    const items = [...gauges]
-    items.sort((a, b) => {
-      if (!a.layout && !b.layout) return 0
-      if (!a.layout || a.layout < b.layout) return -1
-      if (!b.layout || a.layout > b.layout) return 1
-      return 0
-    })
+    // const items = [...gauges]
+    // items.sort((a, b) => {
+    //   if (!a.layout && !b.layout) return 0
+    //   if (!a.layout || a.layout < b.layout) return -1
+    //   if (!b.layout || a.layout > b.layout) return 1
+    //   return 0
+    // })
     const layout = mw => {
       let x = 0
       let y = 0
 
-      return items.map((p, i) => {
+      return gauges.map((p, i) => {
         const {w, h} = getWidgetSize(p, this.props.mapDevices)
+        if (p.layout && p.layout.i) {
+          return {...p.layout , i: p.id}
+        }
         if (x + w > mw) {
           x = 0
           y++
