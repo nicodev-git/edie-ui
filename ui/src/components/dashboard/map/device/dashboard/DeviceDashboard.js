@@ -27,6 +27,7 @@ import GAccelView from 'components/common/gauge/GAccelView'
 import GLiquid from 'components/common/gauge/GLiquid'
 import GIncidentTable from 'components/common/gauge/GIncidentTable'
 import GService from 'components/common/gauge/GService'
+import GMonitors from 'components/common/gauge/GMonitors'
 
 const ResponsiveReactGridLayout = WidthProvider(Responsive)
 
@@ -42,7 +43,8 @@ const gaugeMap = {
   'Disk': GDisk,
   'Accelerometer': GAccelView,
   'Liquid': GLiquid,
-  'Incident Table': GIncidentTable
+  'Incident Table': GIncidentTable,
+  'Monitors': GMonitors
 }
 export default class DeviceDashboard extends React.Component {
   constructor (props) {

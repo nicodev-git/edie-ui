@@ -48,7 +48,7 @@ export default class GMonitors extends React.Component {
     const lastUpdate = isUp ? monitor.lastfalure : monitor.lastsuccess
     return (
       <div key={monitorId} className="col-md-6" style={{height: '50%'}}>
-        <MonitorStatusView isUp={isUp} lastUpdate={lastUpdate}/>
+        <MonitorStatusView isUp={isUp} lastUpdate={lastUpdate} title={monitor.name}/>
       </div>
     )
   }
@@ -57,7 +57,7 @@ export default class GMonitors extends React.Component {
 
     return (
       <div className="row" style={{height: '100%'}}>
-
+        {(gauge.monitorIds || []).slice(0, 4).map(p => this.renderItem(p))}
       </div>
     )
   }
