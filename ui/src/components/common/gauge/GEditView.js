@@ -286,15 +286,22 @@ export default class GEditView extends React.Component {
     )
   }
   renderMonitors () {
-    const {device} = this.props
-    const {name, monitorIds} = this.state
+    const {device, devices} = this.props
+    const {name, monitorIds, deviceId} = this.state
+
+    const index = findIndex(devices || [], {id: deviceId})
+    const monitors = devices ? (index < 0 ? [] : devices[index].monitors) : device.monitors
 
     return (
       <div>
         <TextField name="name" value={name} floatingLabelText="Name" className="valign-top mr-dialog" onChange={this.onChangeText.bind(this, 'name')}/>
 
+        <SelectField value={deviceId} floatingLabelText="Device" className="valign-top" onChange={this.onChangeSelect.bind(this, 'deviceId')}>
+          {devices.map(p => <MenuItem key={p.id} value={p.id} primaryText={p.name}/>)}
+        </SelectField>
+
         <SelectField multiple floatingLabelText="Monitors" value={monitorIds} onChange={this.onChangeSelect.bind(this, 'monitorIds')}>
-          {(device.monitors || []).map(p =>
+          {(monitors || []).map(p =>
             <MenuItem
               key={p.uid}
               insetChildren
