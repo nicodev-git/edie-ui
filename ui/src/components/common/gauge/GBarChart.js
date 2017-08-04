@@ -168,7 +168,7 @@ export default class GBarChart extends React.Component {
     }
 
     return (
-      <div className="flex-vertical flex-1">
+      <div className="flex-vertical flex-1" style={{overflow: 'hidden'}}>
         <div className="flex-1">
           <BarChart chartData={chartData} chartOptions={chartOptions} />
         </div>

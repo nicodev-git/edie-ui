@@ -250,7 +250,7 @@ export const gaugeResources = [{
   label: 'Incident', value: 'incident'
 }]
 
-export const gaugeSizeList = ['small', 'medium', 'big']
+export const gaugeSizeList = ['small', 'medium', 'big', 'very big']
 
 export function filterGaugeServers (devices) {
   return (devices || []).filter(p => p.templateName !== 'Long hub' && p.templateName !== 'Free Text' )
@@ -260,10 +260,14 @@ export function getWidgetSize (gauge, mapDevices) {
   switch(gauge.gaugeSize) {
     case 'small':
       return {w: 1, h: 1}
-    case 'big':
+    case 'medium':
+      return {w: 2, h: 1}
+    case 'very big':
       return {w: 8, h: 2}
+    case 'big':
     default:
       return {w: 4, h: 2}
+
   }
   // if (gauge.widgetSize === 0) {
   //   if (gauge.templateName === 'Servers') {

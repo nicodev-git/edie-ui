@@ -56,7 +56,7 @@ export default class GEditView extends React.Component {
       widgetSize: gauge.widgetSize || 0,
 
       itemSize: gauge.itemSize || 'normal',
-      gaugeSize: gauge.gaugeSize || 'medium',
+      gaugeSize: gauge.gaugeSize || 'big',
       showDeviceType: gauge.showDeviceType || false
     }
   }

@@ -200,7 +200,7 @@ export default class GLineChart extends React.Component {
     }
 
     return (
-      <div className="flex-vertical flex-1">
+      <div className="flex-vertical flex-1" style={{overflow: 'hidden'}}>
         <div className="flex-1">
           <LineChart chartData={chartData} chartOptions={gauge.resource === 'monitor' ? monitorChartOptions : chartOptions} />
         </div>
