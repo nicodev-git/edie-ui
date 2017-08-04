@@ -1,8 +1,11 @@
 import React from 'react'
 import {IconButton, SelectField, MenuItem} from 'material-ui'
 import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
+import {findIndex} from 'lodash'
 
 import { showPrompt } from 'components/common/Alert'
+
+import MainDashboardView from './MainDashboardView'
 
 export default class MainDashboard extends React.Component {
   componentWillMount () {
@@ -11,13 +14,13 @@ export default class MainDashboard extends React.Component {
   componentWillUpdate (nextProps) {
     const {gaugeBoards} = nextProps
     if (!this.props.gaugeBoards.length && gaugeBoards.length) {
-      this.prop.selectGaugeBoard(gaugeBoards[0].id)
+      this.props.selectGaugeBoard(gaugeBoards[0].id)
     }
   }
-  getTabs () {
-    return this.props.gaugeBoards.map(p => ({
-      title: p.name
-    }))
+  getSelected () {
+    const index = findIndex(this.props.gaugeBoards, {id: this.props.selectedGaugeBoard})
+    if (index < 0) return null
+    return this.props.gaugeBoards[index]
   }
   onChangeBoard (e, index, value) {
     this.props.selectGaugeBoard(value)
@@ -30,8 +33,12 @@ export default class MainDashboard extends React.Component {
       })
     })
   }
-  onClickTab (index) {
-
+  renderContent () {
+    const board = this.getSelected()
+    if (!board) return null
+    return (
+      <MainDashboardView board={board} {...this.props}/>
+    )
   }
   render () {
     return (
@@ -48,7 +55,7 @@ export default class MainDashboard extends React.Component {
         </div>
 
         <div className="flex-vertical flex-1">
-
+          {this.renderContent()}
         </div>
       </div>
     )

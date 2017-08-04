@@ -44,7 +44,7 @@ const gaugeMap = {
   'Monitors': GMonitors
 }
 
-export default class MainDashboard extends React.Component {
+export default class MainDashboardView extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -59,7 +59,7 @@ export default class MainDashboard extends React.Component {
   }
 
   getGauges () {
-    return this.props.gaugeItems
+    return this.props.board.gauges
   }
 
   getUserSearchOptions () {
