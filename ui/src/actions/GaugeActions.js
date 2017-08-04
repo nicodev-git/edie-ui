@@ -1,10 +1,8 @@
 import axios from 'axios'
+import {findIndex} from 'lodash'
 import {
   FETCH_GAUGES,
   FETCH_GAUGE_ITEMS,
-  ADD_GAUGE_ITEM,
-  UPDATE_GAUGE_ITEM,
-  REMOVE_GAUGE_ITEM,
 
   FETCH_GAUGE_BOARDS,
   ADD_GAUGE_BOARD,
