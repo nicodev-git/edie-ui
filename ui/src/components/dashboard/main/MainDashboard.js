@@ -9,6 +9,7 @@ import MainDashboardView from './MainDashboardView'
 
 export default class MainDashboard extends React.Component {
   componentWillMount () {
+    this.props.selectGaugeBoard(null)
     this.props.fetchGaugeBoards()
   }
   componentWillUpdate (nextProps) {
@@ -34,7 +35,9 @@ export default class MainDashboard extends React.Component {
     })
   }
   onClickSetDefault () {
-
+    const board = this.getSelected()
+    if (!board) return null
+    this.props.setDefaultBoard(board)
   }
   getBoards () {
     return this.props.gaugeBoards

@@ -68,8 +68,13 @@ export default class GDisk extends React.Component {
     const {disk} = this.state
     const value = disk ? Math.ceil(disk.FreeSpace * 100 / disk.TotalSpace) : 0
     return (
-      <div className="flex-1">
-        <LiquidView title={`${disk ? `${disk.Name} ${disk.FreeSpace}G/${disk.TotalSpace}G` : ''}`} value={value}/>
+      <div className="flex-1 flex-vertical">
+        <div className="flex-1">
+          <LiquidView value={value}/>
+        </div>
+        <div className="text-center">
+          {`${disk ? `${disk.Name} ${disk.FreeSpace}G/${disk.TotalSpace}G` : ''}`}
+        </div>
       </div>
     )
   }

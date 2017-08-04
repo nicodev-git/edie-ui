@@ -69,8 +69,11 @@ export default class GCpu extends React.Component {
     const {cpu} = this.state
     const value = cpu ? (cpu.length ? cpu[0].Usage : cpu.Usage) : 0
     return (
-      <div className="flex-1">
-        <LiquidView title={gauge.name} value={value}/>
+      <div className="flex-vertical flex-1">
+        <div className="flex-1">
+          <LiquidView value={value}/>
+        </div>
+        <div className="text-center">{gauge.name}</div>
       </div>
     )
   }

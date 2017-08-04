@@ -68,10 +68,13 @@ export default class GMemory extends React.Component {
     const {memory} = this.state
     const value = memory ? Math.ceil(memory.UsedSize * 100 / memory.TotalSize) : 0
     return (
-      <div className="flex-1">
-        <LiquidView
-          title={`${gauge.name} ${memory ? `${(memory.UsedSize/1024).toFixed(1)}G/${(memory.TotalSize/1024).toFixed(1)}G` : ''}`}
-          value={value}/>
+      <div className="flex-1 flex-vertical">
+        <div className="flex-1">
+          <LiquidView value={value}/>
+        </div>
+        <div className="text-center">
+          {`${gauge.name} ${memory ? `${(memory.UsedSize/1024).toFixed(1)}G/${(memory.TotalSize/1024).toFixed(1)}G` : ''}`}
+        </div>
       </div>
     )
   }
