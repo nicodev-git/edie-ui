@@ -261,7 +261,7 @@ export default class MainDashboard extends React.Component {
       let y = 0
       return gauges.map((p, i) => {
         const {w, h} = getWidgetSize(p, this.props.mapDevices)
-        if (p.layout && p.layout.i) {
+        if (p.layout && p.layout.i && w === p.layout.w && h === p.layout.h) {
           return {...p.layout , i: p.id}
         }
         if (x + w > mw) {
