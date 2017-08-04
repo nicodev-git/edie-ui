@@ -121,7 +121,7 @@ export default class GaugeWizardView extends React.Component {
     )
   }
   renderMonitors () {
-    const {device, monitors, formValues} = this.props
+    const {device} = this.props
     const monitorOptions = (device.monitors || []).map(p => ({label: p.name, value: p.uid}))
 
     return (

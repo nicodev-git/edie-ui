@@ -104,7 +104,7 @@ class GaugeWizard extends React.Component {
     this.props.onClose && this.props.onClose(this, data)
   }
   render () {
-    const { handleSubmit, sysSearchOptions, monitors, title, formValues, workflows, templateName, devices } = this.props
+    const { handleSubmit, sysSearchOptions, monitors, title, formValues, workflows, templateName, devices, device } = this.props
 
     const searchList = concat([], this.getSearchOptions().map(p => {
       return assign({}, p, {
@@ -129,6 +129,7 @@ class GaugeWizard extends React.Component {
         templateName={templateName}
         onHide={this.closeModal.bind(this)}
         onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
+        device={device}
         devices={devices}
         monitors={monitors}
         searchList={searchList}
