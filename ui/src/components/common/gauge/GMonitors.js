@@ -56,7 +56,7 @@ export default class GMonitors extends React.Component {
     const {gauge} = this.props
 
     return (
-      <div className="row" style={{height: '100%'}}>
+      <div className="row" style={{height: '100%', paddingLeft: 16, paddingRight: 16}}>
         {(gauge.monitorIds || []).slice(0, 4).map(p => this.renderItem(p))}
       </div>
     )

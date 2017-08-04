@@ -23,7 +23,7 @@ export default class MonitorStatusView extends React.Component {
     const imgName = `/resources/images/dashboard/map/triangle-${isUp ? 'up' : 'down'}.png`
     return (
       <div className="text-center" style={containerStyle}>
-        <div className={`nowrap ${isUp ? 'text-success' : 'text-danger'}`} style={iconStyle}>
+        <div className={`text-ellipsis ${isUp ? 'text-success' : 'text-danger'}`} style={iconStyle}>
           <img src={imgName} width="60" alt="" className="valign-top" style={{marginTop: 20}}/>
           <span className="margin-md-left">{title || (isUp ? 'Up' : 'Down')}</span>
         </div>
