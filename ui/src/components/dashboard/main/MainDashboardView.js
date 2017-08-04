@@ -53,13 +53,12 @@ export default class MainDashboardView extends React.Component {
   }
   componentWillMount () {
     this.props.fetchGauges()
-    this.props.fetchGaugeItems()
     this.props.fetchSysSearchOptions()
     this.props.fetchWorkflows()
   }
 
   getGauges () {
-    return this.props.board.gauges
+    return this.props.board.gauges || []
   }
 
   getUserSearchOptions () {
@@ -156,7 +155,7 @@ export default class MainDashboardView extends React.Component {
   }
 
   onLayoutChange (layout, old, e1, e2, e) {
-    const {gaugeItems} = this.props
+    const gaugeItems = this.getGauges()
     // const layouts = [...layout]
     // layouts.sort((a, b) => {
     //   const v1 = a.y * 100 + a.x

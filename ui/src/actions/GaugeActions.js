@@ -34,7 +34,7 @@ export const fetchGaugeItems = () => {
   }
 }
 
-export const addGaugeItem = (props) => {
+export const addGaugeItem = (props, board) => {
   return dispatch => {
     axios.post(`${ROOT_URL}/gaugeitem`, props).then(res => {
       dispatch({type: ADD_GAUGE_ITEM, data: res.data})

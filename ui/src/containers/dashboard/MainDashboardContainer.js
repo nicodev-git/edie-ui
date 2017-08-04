@@ -8,7 +8,6 @@ import {
   fetchWorkflows,
 
   fetchGauges,
-  fetchGaugeItems,
   addGaugeItem,
   updateGaugeItem,
   removeGaugeItem,
@@ -49,7 +48,6 @@ export default connect(
     fetchWorkflows,
 
     fetchGauges,
-    fetchGaugeItems,
     addGaugeItem,
     updateGaugeItem,
     removeGaugeItem,
