@@ -86,15 +86,15 @@ export default class GMemory extends React.Component {
     if (devices) {
       const devIndex = findIndex(devices, {id: device.id})
       if (devIndex < 0) {
-        console.log('CPU Device not found.')
+        console.log('Memory Device not found.')
         return
       }
       monitors = devices[devIndex].monitors || []
     }
 
-    const monitorIndex = findIndex(monitors || [], {monitortype: 'cpu'})
+    const monitorIndex = findIndex(monitors || [], {monitortype: 'memory'})
     if (monitorIndex < 0) {
-      console.log('CPU monitor not found.')
+      console.log('Memory monitor not found.')
       return
     }
     const monitorId = monitors[monitorIndex].uid
@@ -147,19 +147,51 @@ export default class GMemory extends React.Component {
   }
 
   renderFrontView () {
+
     const {gauge} = this.props
-    const {memory} = this.state
-    const value = memory ? Math.ceil(memory.UsedSize * 100 / memory.TotalSize) : 0
-    return (
-      <div className="flex-1 flex-vertical">
-        <div className="flex-1">
-          <LiquidView value={value}/>
+    if (gauge.timing === 'historic') {
+      const {searchRecordCounts} = this.state
+
+      const chartData = {
+        labels: (searchRecordCounts || sampleData).map(p => p.date),
+        datasets: [{
+          data: (searchRecordCounts || sampleData).map(p => p.count),
+          borderWidth: 1,
+          borderColor: '#269C8B',
+          fill: false
+        }]
+      }
+
+      return (
+        <div className="flex-vertical flex-1" style={{overflow: 'hidden'}}>
+          <div className="flex-1">
+            {gauge.gaugeType === 'bar' ? (
+              <BarChart chartData={chartData} chartOptions={chartOptions} />
+            ) : (
+              <LineChart chartData={chartData} chartOptions={chartOptions} />
+            )}
+
+          </div>
         </div>
-        <div className="text-center">
-          {`${gauge.name} ${memory ? `${(memory.UsedSize/1024).toFixed(1)}G/${(memory.TotalSize/1024).toFixed(1)}G` : ''}`}
+      )
+    } else {
+      const {memory} = this.state
+      const value = memory ? Math.ceil(memory.UsedSize * 100 / memory.TotalSize) : 0
+      return (
+        <div className="flex-vertical flex-1">
+          <div className="flex-1">
+            {gauge.gaugeType === 'accel' ? (
+              <AccelView value={value}/>
+            ) : (
+              <LiquidView value={value}/>
+            )}
+          </div>
+          <div className="text-center">
+            {`${gauge.name} ${memory ? `${(memory.UsedSize/1024).toFixed(1)}G/${(memory.TotalSize/1024).toFixed(1)}G` : ''}`}
+          </div>
         </div>
-      </div>
-    )
+      )
+    }
   }
   renderBackView (options) {
     return (
