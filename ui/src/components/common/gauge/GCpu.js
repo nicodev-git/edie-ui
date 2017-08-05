@@ -78,16 +78,26 @@ export default class GCpu extends React.Component {
   }
 
   fetchRecordCount (props) {
-    const {gauge, device} = props
+    const {gauge, device, devices} = props
     const {duration, durationUnit, splitUnit} = gauge
 
     if (gauge.timing !== 'historic') return
-    const monitorIndex = findIndex(device.monitors || [], {monitortype: 'cpu'})
+    let monitors = device.monitors || []
+    if (devices) {
+      const devIndex = findIndex(devices, {id: device.id})
+      if (devIndex < 0) {
+        console.log('CPU Device not found.')
+        return
+      }
+      monitors = devices[devIndex].monitors || []
+    }
+
+    const monitorIndex = findIndex(monitors || [], {monitortype: 'cpu'})
     if (monitorIndex < 0) {
       console.log('CPU monitor not found.')
       return
     }
-    const monitorId = device.monitors[monitorIndex].uid
+    const monitorId = monitors[monitorIndex].uid
 
     this.setState({
       loading: true
@@ -155,9 +165,9 @@ export default class GCpu extends React.Component {
         <div className="flex-vertical flex-1" style={{overflow: 'hidden'}}>
           <div className="flex-1">
             {gauge.gaugeType === 'bar' ? (
-              <LineChart chartData={chartData} chartOptions={chartOptions} />
-            ) : (
               <BarChart chartData={chartData} chartOptions={chartOptions} />
+            ) : (
+              <LineChart chartData={chartData} chartOptions={chartOptions} />
             )}
 
           </div>
