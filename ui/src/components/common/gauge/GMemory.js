@@ -2,32 +2,41 @@ import React from 'react'
 
 import FlipView from './FlipView'
 import LiquidView from './display/LiquidView'
+import AccelView from './display/AccelMeterView'
 import GEditView from './GEditView'
+import LineChart from './display/LineChart'
+import BarChart from './display/BarChart'
 
 import MonitorSocket from 'util/socket/MonitorSocket'
 
 import {showAlert} from 'components/common/Alert'
+import { ROOT_URL } from 'actions/config'
 
 export default class GMemory extends React.Component {
   constructor (props) {
     super (props)
     this.state = {
       loading: false,
-      memory: null
+      memory: null,
+      searchRecordCounts: []
     }
     this.renderBackView = this.renderBackView.bind(this)
     this.renderFrontView = this.renderFrontView.bind(this)
   }
 
   componentDidMount () {
-    this.monitorSocket = new MonitorSocket({
-      listener: this.onMonitorMessage.bind(this)
-    })
-    this.monitorSocket.connect(this.onSocketOpen.bind(this))
+    if (this.props.gauge.timing === 'realtime') {
+      this.monitorSocket = new MonitorSocket({
+        listener: this.onMonitorMessage.bind(this)
+      })
+      this.monitorSocket.connect(this.onSocketOpen.bind(this))
+    } else {
+      this.fetchRecordCount(this.props)
+    }
   }
 
   componentWillUnmount () {
-    this.monitorSocket.close()
+    this.monitorSocket && this.monitorSocket.close()
   }
 
   onSocketOpen () {
