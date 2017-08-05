@@ -51,7 +51,9 @@ import {
   FETCH_SEARCH_RECORD_COUNT,
   MAXIMIZE_SEARCH_GRAPH,
 
-  UPDATE_GRAPH_PARAMS
+  UPDATE_GRAPH_PARAMS,
+
+  TOGGLE_VIEW_COL
 } from './types'
 import { ROOT_URL } from './config'
 import { apiError } from './Errors'
@@ -379,5 +381,11 @@ export const updateGraphParams = (params, graphParams) => {
   return dispatch => {
     dispatch({type: UPDATE_GRAPH_PARAMS, params: graphParams})
     dispatch(fetchSearchRecordCount({...params, ...graphParams}))
+  }
+}
+
+export const toggleViewCol = (col) => {
+  return dispatch => {
+    dispatch({type: TOGGLE_VIEW_COL, col})
   }
 }

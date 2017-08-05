@@ -35,17 +35,17 @@ export default class ViewFilterModalView extends React.Component {
             </table>
           </Tab>
           <Tab label="Specific">
-            <div style={{maxHeight: 300}}>
+            <div style={{maxHeight: 300, overflow: 'auto'}}>
+              <table className="table table-hover">
+                <tbody>
+                {cols.map(k =>
+                  <tr key={k}>
+                    <td><Checkbox label={k}/></td>
+                  </tr>
+                )}
+                </tbody>
+              </table>
             </div>
-            <table className="table table-hover">
-              <tbody>
-              {cols.map(k =>
-                <tr key={k}>
-                  <td><Checkbox label={k}/></td>
-                </tr>
-              )}
-              </tbody>
-            </table>
           </Tab>
         </Tabs>
         <TwoButtonsBlockCustom name1="OK" name2="Cancel" action1={onClickOK} action2={onClickClose}/>

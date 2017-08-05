@@ -125,7 +125,9 @@ export default connect(
     graphParams: state.search.graphParams,
 
     searchTagModalOpen: state.search.searchTagModalOpen,
-    searchTags: state.search.searchTags
+    searchTags: state.search.searchTags,
+
+    viewCols: state.search.viewCols
   }),
   dispatch => ({
     ...bindActionCreators({

@@ -55,7 +55,9 @@ import {
   FETCH_SEARCH_RECORD_COUNT,
   MAXIMIZE_SEARCH_GRAPH,
 
-  UPDATE_GRAPH_PARAMS
+  UPDATE_GRAPH_PARAMS,
+
+  TOGGLE_VIEW_COL
 } from 'actions/types'
 import { concat } from 'lodash'
 
@@ -106,7 +108,9 @@ const initialState = {
   selectedSearchFields: [],
   searchRecordCounts: [],
   savedSearchKeyword: '',
-  searchSaveType: 'new'
+  searchSaveType: 'new',
+
+  viewCols: []
 }
 
 export default function (state = initialState, action) {
@@ -223,6 +227,12 @@ export default function (state = initialState, action) {
       return { ...state, searchTags: action.tags || [] }
     case UPDATE_GRAPH_PARAMS:
       return { ...state, graphParams: action.params }
+    case TOGGLE_VIEW_COL: {
+      let viewCols = {state}
+      if (viewCols.indexOf(action.col) >= 0) viewCols = viewCols.filter(p => p !== action.col)
+      else viewCols = [ ...viewCols, action.col ]
+      return { ...state, viewCols }
+    }
     default:
       return state
   }
