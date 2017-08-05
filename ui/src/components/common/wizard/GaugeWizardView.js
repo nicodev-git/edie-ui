@@ -124,6 +124,14 @@ export default class GaugeWizardView extends React.Component {
           options={formValues.timing === 'realtime' ? realtimeGauges : historicGauges}
           className="valign-top"
           />
+
+        {formValues.timing === 'historic' ? (
+          <div className="inline-block">
+            <Field name="duration" component={FormSelect} floatingLabel="Duration" options={durations} className="valign-top mr-dialog" style={{width: 100}}/>
+            <Field name="durationUnit" component={FormSelect} floatingLabel="  "options={gaugeDurationTypes} className="valign-top" style={{width: 120}}/>
+          </div>
+        ) : null
+        }
       </div>
     )
   }
