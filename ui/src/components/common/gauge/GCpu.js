@@ -50,7 +50,7 @@ export default class GCpu extends React.Component {
 
   fetchRecordCount (props) {
     const {gauge, searchList, device} = props
-    const {savedSearchId, monitorId, resource, duration, durationUnit} = gauge
+    const {savedSearchId, monitorId, resource, duration, durationUnit, splitUnit} = gauge
 
     this.setState({
       loading: true
@@ -61,7 +61,7 @@ export default class GCpu extends React.Component {
     const dateFrom = moment().add(-duration + inc, `${durationUnit}s`)
       .startOf(durationUnit === 'hour' || duration === 1 ? durationUnit : 'day')
     const dateTo = moment().endOf(durationUnit === 'hour' ? durationUnit : 'day')
-
+    const ROOT_URL = ''
     if (resource === 'monitor') {
       axios.get(`${ROOT_URL}/event/search/findByDate`, {
         params: {
