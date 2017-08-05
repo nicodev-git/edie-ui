@@ -5,7 +5,7 @@ import { Field } from 'redux-form'
 import { SubmitBlock, FormInput, FormSelect } from 'components/modal/parts'
 import {findIndex} from 'lodash'
 
-import {gaugeDurationTypes, gaugeResources, severities} from 'shared/Global'
+import {gaugeDurationTypes, gaugeResources, severities, timingOptions, realtimeGauges, historicGauges} from 'shared/Global'
 import DateRangePicker from 'components/common/DateRangePicker'
 
 const durations = '1 2 3 5 10 15 30'.split(' ').map(p => ({
@@ -18,12 +18,6 @@ const fixOptions = [{
   label: 'Unfixed', value: 'false'
 }, {
   label: 'Fixed', value: 'true'
-}]
-
-const timingOptions = [{
-  label: 'Realtime', value: 'realtime'
-}, {
-  label: 'Historic', value: 'historic'
 }]
 
 export default class GaugeWizardView extends React.Component {
@@ -117,14 +111,19 @@ export default class GaugeWizardView extends React.Component {
   }
 
   renderDevice () {
-    const {devices} = this.props
+    const {devices, formValues} = this.props
     const deviceOptions = (devices || []).map(p => ({label: p.name, value: p.id}))
     return (
       <div>
         <Field name="name" component={FormInput} floatingLabel="Name" className="valign-top mr-dialog"/>
         {devices && <Field key="deviceId" name="deviceId" component={FormSelect} floatingLabel="Device" options={deviceOptions} className="valign-top"/>}
 
-        <Field name="timing" component={FormSelect} floatingLabel=" " options={timingOptions} className="valign-top"/>
+        <Field name="timing" component={FormSelect} floatingLabel="Timing" options={timingOptions} className="valign-top mr-dialog"/>
+        <Field
+          name="gaugeType" component={FormSelect} floatingLabel="Gauge Type"
+          options={formValues.timing === 'realtime' ? realtimeGauges : historicGauges}
+          className="valign-top"
+          />
       </div>
     )
   }

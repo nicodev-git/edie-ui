@@ -250,6 +250,24 @@ export const gaugeResources = [{
   label: 'Incident', value: 'incident'
 }]
 
+export const timingOptions = [{
+  label: 'Realtime', value: 'realtime',
+}, {
+  label: 'Historic', value: 'historic'
+}]
+
+export const realtimeGauges = [{
+  label: 'Liquid', value: 'liquid'
+}, {
+  label: 'Accelerometer', value: 'accel'
+}]
+
+export const historicGauges = [{
+  label: 'Line Chart', value: 'line'
+}, {
+  label: 'Bar Chart', value: 'bar'
+}]
+
 export const gaugeSizeList = ['small', 'medium', 'big', 'very big']
 
 export function filterGaugeServers (devices) {

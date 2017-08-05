@@ -28,13 +28,14 @@ export default connect(
       splitBy: '1',
       splitUnit: 'day',
       fixed: 'false',
+      timing: 'realtime',
       ...state.devices.wizardInitialValues
     },
     userInfo: state.dashboard.userInfo,
     sysSearchOptions: state.search.sysSearchOptions,
     workflows: state.settings.workflows,
     formValues: formValueSelector('gaugeDeviceForm')(
-      state, 'resource', 'monitorId', 'deviceId')
+      state, 'resource', 'monitorId', 'deviceId', 'timing')
   }), {
     fetchSysSearchOptions,
     fetchWorkflows,
