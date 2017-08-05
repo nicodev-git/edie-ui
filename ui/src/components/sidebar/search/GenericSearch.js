@@ -84,6 +84,17 @@ class GenericSearch extends React.Component {
         }
         if (!severity) delete data.severity
 
+        const viewCols = this.props
+        if (viewCols.length > 0) {
+          const remove = []
+          keys(data).forEach(p => {
+            if (viewCols.indexOf(p) < 0) remove.push(p)
+          })
+          remove.forEach(p => {
+            delete data[p]
+          })
+        }
+
         const options = {
           notNull: viewFilter === viewFilters.notNull.name
         }
