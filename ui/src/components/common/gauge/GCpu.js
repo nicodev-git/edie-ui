@@ -1,37 +1,66 @@
 import React from 'react'
 import moment from 'moment'
 import axios from 'axios'
+import {findIndex} from 'lodash'
 
 import FlipView from './FlipView'
 import LiquidView from './display/LiquidView'
 import AccelView from './display/AccelMeterView'
 import GEditView from './GEditView'
 import LineChart from './display/LineChart'
+import BarChart from './display/BarChart'
 
 import MonitorSocket from 'util/socket/MonitorSocket'
 
 import {showAlert} from 'components/common/Alert'
+import { ROOT_URL } from 'actions/config'
+
+const sampleData = []
+
+const chartOptions = {
+  legend: {
+    display: false
+  },
+  elements: {
+    line: {
+      tension: 0
+    }
+  },
+  scales: {
+    yAxes: [{
+      display: true,
+      ticks: {
+        min: 0
+      }
+    }]
+  }
+}
 
 export default class GCpu extends React.Component {
   constructor (props) {
     super (props)
     this.state = {
       loading: false,
-      cpu: null
+      cpu: null,
+      searchRecordCounts: []
     }
     this.renderBackView = this.renderBackView.bind(this)
     this.renderFrontView = this.renderFrontView.bind(this)
   }
 
   componentDidMount () {
-    this.monitorSocket = new MonitorSocket({
-      listener: this.onMonitorMessage.bind(this)
-    })
-    this.monitorSocket.connect(this.onSocketOpen.bind(this))
+    if (this.props.gauge.timing === 'realtime') {
+      this.monitorSocket = new MonitorSocket({
+        listener: this.onMonitorMessage.bind(this)
+      })
+      this.monitorSocket.connect(this.onSocketOpen.bind(this))
+    } else {
+      this.fetchRecordCount(this.props)
+    }
   }
 
   componentWillUnmount () {
-    this.monitorSocket.close()
+    this.monitorSocket && this.monitorSocket.close()
   }
 
   onSocketOpen () {
@@ -49,8 +78,16 @@ export default class GCpu extends React.Component {
   }
 
   fetchRecordCount (props) {
-    const {gauge, searchList, device} = props
-    const {savedSearchId, monitorId, resource, duration, durationUnit, splitUnit} = gauge
+    const {gauge, device} = props
+    const {duration, durationUnit, splitUnit} = gauge
+
+    if (gauge.timing !== 'historic') return
+    const monitorIndex = findIndex(device.monitors || [], {monitortype: 'cpu'})
+    if (monitorIndex < 0) {
+      console.log('CPU monitor not found.')
+      return
+    }
+    const monitorId = device.monitors[monitorIndex].uid
 
     this.setState({
       loading: true
@@ -61,25 +98,23 @@ export default class GCpu extends React.Component {
     const dateFrom = moment().add(-duration + inc, `${durationUnit}s`)
       .startOf(durationUnit === 'hour' || duration === 1 ? durationUnit : 'day')
     const dateTo = moment().endOf(durationUnit === 'hour' ? durationUnit : 'day')
-    const ROOT_URL = ''
-    if (resource === 'monitor') {
-      axios.get(`${ROOT_URL}/event/search/findByDate`, {
-        params: {
-          dateFrom: dateFrom.valueOf(),
-          dateTo: dateTo.valueOf(),
-          monitorId,
-          sort: 'timestamp'
-        }
-      }).then(res => {
-        this.setState({
-          searchRecordCounts: res.data._embedded.events.map(p => ({
-            date: moment(p.timestamp).format('YYYY-MM-DD HH:mm:ss'),
-            count: p.eventType === 'AGENT' || (p.lastResult && p.lastResult.status === 'UP') ? 1 : 0
-          })),
-          loading: false
-        })
+
+    axios.get(`${ROOT_URL}/event/search/findByDate`, {
+      params: {
+        dateFrom: dateFrom.valueOf(),
+        dateTo: dateTo.valueOf(),
+        monitorId,
+        sort: 'timestamp'
+      }
+    }).then(res => {
+      this.setState({
+        searchRecordCounts: res.data._embedded.events.map(p => ({
+          date: moment(p.timestamp).format('YYYY-MM-DD HH:mm:ss'),
+          count: p.dataobj && p.dataobj.Usage ? (p.dataobj.Usage || 0) : 0
+        })),
+        loading: false
       })
-    }
+    })
   }
 
   onClickDelete () {
@@ -104,7 +139,30 @@ export default class GCpu extends React.Component {
   renderFrontView () {
     const {gauge} = this.props
     if (gauge.timing === 'historic') {
+      const {searchRecordCounts} = this.state
 
+      const chartData = {
+        labels: (searchRecordCounts || sampleData).map(p => p.date),
+        datasets: [{
+          data: (searchRecordCounts || sampleData).map(p => p.count),
+          borderWidth: 1,
+          borderColor: '#269C8B',
+          fill: false
+        }]
+      }
+
+      return (
+        <div className="flex-vertical flex-1" style={{overflow: 'hidden'}}>
+          <div className="flex-1">
+            {gauge.gaugeType === 'bar' ? (
+              <LineChart chartData={chartData} chartOptions={chartOptions} />
+            ) : (
+              <BarChart chartData={chartData} chartOptions={chartOptions} />
+            )}
+
+          </div>
+        </div>
+      )
     } else {
       const {cpu} = this.state
       const value = cpu ? (cpu.length ? cpu[0].Usage : cpu.Usage) : 0
