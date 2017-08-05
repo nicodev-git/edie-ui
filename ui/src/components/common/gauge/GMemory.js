@@ -1,4 +1,7 @@
 import React from 'react'
+import moment from 'moment'
+import axios from 'axios'
+import {findIndex} from 'lodash'
 
 import FlipView from './FlipView'
 import LiquidView from './display/LiquidView'
@@ -11,6 +14,27 @@ import MonitorSocket from 'util/socket/MonitorSocket'
 
 import {showAlert} from 'components/common/Alert'
 import { ROOT_URL } from 'actions/config'
+
+const sampleData = []
+
+const chartOptions = {
+  legend: {
+    display: false
+  },
+  elements: {
+    line: {
+      tension: 0
+    }
+  },
+  scales: {
+    yAxes: [{
+      display: true,
+      ticks: {
+        min: 0
+      }
+    }]
+  }
+}
 
 export default class GMemory extends React.Component {
   constructor (props) {
@@ -51,6 +75,56 @@ export default class GMemory extends React.Component {
       const {memory} = msg.data
       if (memory) this.setState({ memory })
     }
+  }
+
+  fetchRecordCount (props) {
+    const {gauge, device, devices} = props
+    const {duration, durationUnit, splitUnit} = gauge
+
+    if (gauge.timing !== 'historic') return
+    let monitors = device.monitors || []
+    if (devices) {
+      const devIndex = findIndex(devices, {id: device.id})
+      if (devIndex < 0) {
+        console.log('CPU Device not found.')
+        return
+      }
+      monitors = devices[devIndex].monitors || []
+    }
+
+    const monitorIndex = findIndex(monitors || [], {monitortype: 'cpu'})
+    if (monitorIndex < 0) {
+      console.log('CPU monitor not found.')
+      return
+    }
+    const monitorId = monitors[monitorIndex].uid
+
+    this.setState({
+      loading: true
+    })
+
+    let inc = 1
+    if (durationUnit === 'month' && splitUnit === 'day') inc = 0
+    const dateFrom = moment().add(-duration + inc, `${durationUnit}s`)
+      .startOf(durationUnit === 'hour' || duration === 1 ? durationUnit : 'day')
+    const dateTo = moment().endOf(durationUnit === 'hour' ? durationUnit : 'day')
+
+    axios.get(`${ROOT_URL}/event/search/findByDate`, {
+      params: {
+        dateFrom: dateFrom.valueOf(),
+        dateTo: dateTo.valueOf(),
+        monitorId,
+        sort: 'timestamp'
+      }
+    }).then(res => {
+      this.setState({
+        searchRecordCounts: res.data._embedded.events.map(p => ({
+          date: moment(p.timestamp).format('YYYY-MM-DD HH:mm:ss'),
+          count: p.dataobj && p.dataobj.TotalSize ? Math.ceil(p.dataobj.UsedSize * 100 / p.dataobj.TotalSize) : 0
+        })),
+        loading: false
+      })
+    })
   }
 
   onClickDelete () {
