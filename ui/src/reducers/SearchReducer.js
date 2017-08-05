@@ -228,7 +228,7 @@ export default function (state = initialState, action) {
     case UPDATE_GRAPH_PARAMS:
       return { ...state, graphParams: action.params }
     case TOGGLE_VIEW_COL: {
-      let viewCols = {state}
+      let {viewCols} = state
       if (viewCols.indexOf(action.col) >= 0) viewCols = viewCols.filter(p => p !== action.col)
       else viewCols = [ ...viewCols, action.col ]
       return { ...state, viewCols }

@@ -60,7 +60,8 @@ import {
   showSearchTagModal,
   updateSearchTags,
 
-  updateGraphParams
+  updateGraphParams,
+  toggleViewCol
 } from 'actions'
 
 class GenericSearchContainer extends React.Component {
@@ -184,7 +185,8 @@ export default connect(
       updateGraphParams,
 
       showSearchTagModal,
-      updateSearchTags
+      updateSearchTags,
+      toggleViewCol
     }, dispatch)
   })
 )(withRouter(GenericSearchContainer))

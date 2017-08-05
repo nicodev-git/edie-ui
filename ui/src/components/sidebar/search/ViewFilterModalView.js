@@ -9,7 +9,7 @@ import {viewFilters} from 'shared/Global'
 
 export default class ViewFilterModalView extends React.Component {
   render () {
-    const {onClickOK, onClickClose, selectViewFilter, selectedViewFilter, cols} = this.props
+    const {onClickOK, onClickClose, selectViewFilter, selectedViewFilter, cols, viewCols} = this.props
     return (
       <Dialog open title="View Filter" onRequestClose={onClickClose}>
         <Tabs>
@@ -40,7 +40,7 @@ export default class ViewFilterModalView extends React.Component {
                 <tbody>
                 {cols.map(k =>
                   <tr key={k}>
-                    <td><Checkbox label={k}/></td>
+                    <td><Checkbox label={k} checked={viewCols.indexOf(k) >= 0} onCheck={() => this.props.toggleViewCol(k)}/></td>
                   </tr>
                 )}
                 </tbody>
