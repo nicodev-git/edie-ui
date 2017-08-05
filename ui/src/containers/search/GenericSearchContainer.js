@@ -61,7 +61,8 @@ import {
   updateSearchTags,
 
   updateGraphParams,
-  toggleViewCol
+  toggleViewCol,
+  refreshSearch
 } from 'actions'
 
 class GenericSearchContainer extends React.Component {
@@ -128,7 +129,8 @@ export default connect(
     searchTagModalOpen: state.search.searchTagModalOpen,
     searchTags: state.search.searchTags,
 
-    viewCols: state.search.viewCols
+    viewCols: state.search.viewCols,
+    searchDraw: state.search.searchDraw
   }),
   dispatch => ({
     ...bindActionCreators({
@@ -186,7 +188,8 @@ export default connect(
 
       showSearchTagModal,
       updateSearchTags,
-      toggleViewCol
+      toggleViewCol,
+      refreshSearch
     }, dispatch)
   })
 )(withRouter(GenericSearchContainer))

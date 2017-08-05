@@ -84,7 +84,7 @@ class GenericSearch extends React.Component {
         }
         if (!severity) delete data.severity
 
-        const viewCols = this.props
+        const {viewCols} = this.props
         if (viewCols.length > 0) {
           const remove = []
           keys(data).forEach(p => {
@@ -759,7 +759,7 @@ class GenericSearch extends React.Component {
                   rowMetadata={{'key': 'id'}}
                   selectable
                   onRowDblClick={this.onRowDblClick.bind(this)}
-                  params={this.props.params}
+                  params={{...this.props.params, draw: this.props.searchDraw}}
                   pageSize={10}
                   showTableHeading={false}
                   onUpdateCount={this.onResultCountUpdate.bind(this)}
