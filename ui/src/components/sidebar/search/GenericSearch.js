@@ -34,7 +34,8 @@ class GenericSearch extends React.Component {
     super(props)
 
     this.state = {
-      total: 0
+      total: 0,
+      cols: []
     }
     this.cells = [{
       'displayName': ' ',
@@ -43,6 +44,12 @@ class GenericSearch extends React.Component {
         const {viewFilter} = this.props
         const {rowData} = p
         const {entity} = rowData
+
+        if (!this.state.cols.length) {
+          this.setState({
+            cols: keys(entity)
+          })
+        }
 
         if (viewFilter === viewFilters.log.name) {
           if (!entity.dataobj) return <span/>
@@ -605,7 +612,7 @@ class GenericSearch extends React.Component {
   renderFilterViewModal () {
     if (!this.props.viewFilterModalOpen) return null
     return (
-      <ViewFilterModal {...this.props}/>
+      <ViewFilterModal {...this.props} cols={this.state.cols}/>
     )
   }
 
