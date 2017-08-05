@@ -57,6 +57,7 @@ import {
 
   UPDATE_GRAPH_PARAMS,
 
+  REFRESH_SEARCH,
   TOGGLE_VIEW_COL
 } from 'actions/types'
 import { concat } from 'lodash'
@@ -97,6 +98,7 @@ const initialState = {
   selectedWfs: [],
   searchTags: [],
 
+  searchDraw: 1,
   searchOptions: [],
   sysSearchOptions: [],
   selectedCategory: '',
@@ -227,6 +229,8 @@ export default function (state = initialState, action) {
       return { ...state, searchTags: action.tags || [] }
     case UPDATE_GRAPH_PARAMS:
       return { ...state, graphParams: action.params }
+    case REFRESH_SEARCH:
+      return { ...state, searchDraw: state.searchDraw + 1 }
     case TOGGLE_VIEW_COL: {
       let {viewCols} = state
       if (viewCols.indexOf(action.col) >= 0) viewCols = viewCols.filter(p => p !== action.col)

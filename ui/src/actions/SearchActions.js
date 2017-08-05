@@ -44,6 +44,7 @@ import {
   SHOW_SEARCH_FIELDS_MODAL,
   UPDATE_SELECTED_SEARCH_FIELDS,
   UPDATE_REL_DEVICE_FIELDS,
+  REFRESH_SEARCH,
 
   SHARE_SAVED_SEARCH,
 
@@ -387,5 +388,11 @@ export const updateGraphParams = (params, graphParams) => {
 export const toggleViewCol = (col) => {
   return dispatch => {
     dispatch({type: TOGGLE_VIEW_COL, col})
+  }
+}
+
+export const refreshSearch = () => {
+  return dispatch => {
+    dispatch({type: REFRESH_SEARCH})
   }
 }
