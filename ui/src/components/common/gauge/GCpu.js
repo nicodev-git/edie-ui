@@ -2,6 +2,7 @@ import React from 'react'
 
 import FlipView from './FlipView'
 import LiquidView from './display/LiquidView'
+import AccelView from './display/AccelMeterView'
 import GEditView from './GEditView'
 
 import MonitorSocket from 'util/socket/MonitorSocket'
@@ -63,19 +64,26 @@ export default class GCpu extends React.Component {
     this.props.updateDeviceGauge(gauge, this.props.device)
     options.onClickFlip()
   }
-
   renderFrontView () {
     const {gauge} = this.props
-    const {cpu} = this.state
-    const value = cpu ? (cpu.length ? cpu[0].Usage : cpu.Usage) : 0
-    return (
-      <div className="flex-vertical flex-1">
-        <div className="flex-1">
-          <LiquidView value={value}/>
+    if (gauge.timing === 'hitoric') {
+
+    } else {
+      const {cpu} = this.state
+      const value = cpu ? (cpu.length ? cpu[0].Usage : cpu.Usage) : 0
+      return (
+        <div className="flex-vertical flex-1">
+          <div className="flex-1">
+            {gauge.gaugeType === 'accel' ? (
+              <AccelView value={value}/>
+            ) : (
+              <LiquidView value={value}/>
+            )}
+          </div>
+          <div className="text-center">{gauge.name}</div>
         </div>
-        <div className="text-center">{gauge.name}</div>
-      </div>
-    )
+      )
+    }
   }
   renderBackView (options) {
     return (
