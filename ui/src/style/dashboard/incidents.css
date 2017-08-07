@@ -1,0 +1,9 @@
+.div-sun {
+    position: absolute;
+    width: 100%;
+    top: 50px;
+    height: 100px;
+
+    background: url('/resources/images/dashboard/sun.jpg') no-repeat center;
+    background-size: contain;
+}

@@ -128,6 +128,8 @@ export default class IncidentTable extends Component {
             updateDeviceIncident={this.props.updateDeviceIncident}
             onClose={() => this.props.showCommentsModal(false)}/>
         }
+        <div className="div-sun hidden">
+        </div>
         <ReactTooltip/>
       </div>
     )
