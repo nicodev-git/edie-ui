@@ -14,6 +14,7 @@ export default class IncidentTable extends Component {
   constructor (props) {
     super(props)
     this.state = {
+      sunVisible: true
     }
 
     this.cells = [{
@@ -120,6 +121,7 @@ export default class IncidentTable extends Component {
             severity: ['HIGH', 'MEDIUM'],
             sort: 'startTimestamp,desc'
           }}
+          onUpdateCount={total => this.setState({sunVisible: !total})}
         />
         {
           this.props.commentsModalVisible &&
@@ -128,8 +130,7 @@ export default class IncidentTable extends Component {
             updateDeviceIncident={this.props.updateDeviceIncident}
             onClose={() => this.props.showCommentsModal(false)}/>
         }
-        <div className="div-sun hidden">
-        </div>
+        {this.state.sunVisible && <div className="div-sun"/>}
         <ReactTooltip/>
       </div>
     )

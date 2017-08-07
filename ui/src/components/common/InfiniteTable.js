@@ -275,7 +275,9 @@ InfiniteTable.defaultProps = {
 
   selectable: false,
   allowMultiSelect: false,
-  noDataMessage: ''
+  noDataMessage: '',
+
+  onUpdateCount: null
 }
 
 export default InfiniteTable
