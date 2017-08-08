@@ -22,12 +22,17 @@ export default class TagPickerModalView extends React.Component {
   }
 
   renderContent () {
-    const {tags} = this.props
+    const {tags, onClickAdd, hideAdd} = this.props
     return (
       <div style={chipStyles.wrapper}>
         {
           tags.map(this.renderChip.bind(this))
         }
+        {!hideAdd && <Chip
+          style={chipStyles.chip}
+          onTouchTap={onClickAdd}>
+          <b>+</b>
+        </Chip>}
       </div>
     )
   }
@@ -35,9 +40,6 @@ export default class TagPickerModalView extends React.Component {
     const {onClickClose, onClickOK, onClickAdd, hideAdd} = this.props
     return (
       <Dialog open title="Tags" onRequestClose={onClickClose}>
-        <div className={hideAdd ? 'hidden' : ''}>
-          <FlatButton label="Add" onTouchTap={onClickAdd}/>
-        </div>
         {this.renderContent()}
         <TwoButtonsBlockCustom name1="Cancel" action1={onClickClose} name2="OK" action2={onClickOK}/>
       </Dialog>
