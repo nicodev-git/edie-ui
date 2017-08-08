@@ -1,4 +1,5 @@
 import React from 'react'
+import moment from 'moment'
 import InlineEdit from 'react-edit-inline'
 import {Checkbox, RaisedButton} from 'material-ui'
 import { assign } from 'lodash'
@@ -42,6 +43,7 @@ export default class General extends React.Component {
   }
 
   renderContent () {
+    const lastSync = this.getOptionValue('LAST_WORKFLOW_TIME')
     return (
       <div className="padding-md form-inline">
         <div style={rowStyle} className="margin-md-bottom bt-gray">
@@ -160,7 +162,8 @@ export default class General extends React.Component {
 
         <div style={{...rowStyle, color: '#888'}} className="margin-lg-top">
           <label className="margin-sm-top margin-sm-bottom">
-            Customer ID: {this.getOptionValue('CUSTOMER_ID') || '[None]'}
+            Customer ID: {this.getOptionValue('CUSTOMER_ID') || '[None]'}&nbsp;&nbsp;&nbsp;&nbsp;
+            Last Synced: {lastSync ? moment(parseInt(lastSync, 10)).fromNow() : 'Never'}
           </label>
         </div>
       </div>
