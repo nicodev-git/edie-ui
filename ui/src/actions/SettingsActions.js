@@ -88,6 +88,7 @@ import {
   SELECT_CRED_TYPE,
 
   SHOW_SIMULATION_MODAL,
+  TOGGLE_MAP_USER,
 
   NO_AUTH_ERROR
 } from './types'
@@ -791,5 +792,11 @@ export const showSimulationModal = (visible) => {
 export const postIncidentSimulation = (data) => {
   return dispatch => {
     axios.post(`${ROOT_URL}/restlistener/post`, data)
+  }
+}
+
+export const toggleMapUser = (data) => {
+  return dispatch => {
+    dispatch({type: TOGGLE_MAP_USER, data})
   }
 }

@@ -135,6 +135,7 @@ import {
   SELECT_CRED_TYPE,
 
   FETCH_DEVICE_CATEGORIES,
+  TOGGLE_MAP_USER,
 
   SHOW_SIMULATION_MODAL
 
@@ -268,7 +269,7 @@ export default function (state = initialState, action) {
       return { ...state, maps: action.data }
 
     case OPEN_SETTING_MAP_MODAL:
-      return { ...state, mapModalVisible: true, editMap: action.data, mapUsers: action.data ? [] : action.data.users || [] }
+      return { ...state, mapModalVisible: true, editMap: action.data, mapUsers: action.data ? (action.data.users || []) : [] }
 
     case CLOSE_SETTING_MAP_MODAL:
       return { ...state, mapModalVisible: false }
@@ -577,6 +578,17 @@ export default function (state = initialState, action) {
 
     case SHOW_SIMULATION_MODAL:
       return { ...state, simulationModalOpen: !!action.visible }
+
+    case TOGGLE_MAP_USER: {
+      let {mapUsers} = state
+      if (mapUsers.indexOf(action.data) >= 0) {
+        mapUsers = mapUsers.filter(p => p !== action.data)
+      } else {
+        mapUsers = [ ...mapUsers, action.data ]
+      }
+      return { ...state, mapUsers}
+    }
+
     default:
       return state
   }
