@@ -265,7 +265,7 @@ export default function (state = initialState, action) {
       return { ...state, maps: action.data }
 
     case OPEN_SETTING_MAP_MODAL:
-      return { ...state, mapModalVisible: true, editMap: action.data }
+      return { ...state, mapModalVisible: true, editMap: action.data, mapUsers: action.data ? [] : action.data.users || [] }
 
     case CLOSE_SETTING_MAP_MODAL:
       return { ...state, mapModalVisible: false }

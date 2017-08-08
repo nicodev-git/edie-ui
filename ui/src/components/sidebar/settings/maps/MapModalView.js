@@ -7,12 +7,13 @@ export default class MapModalView extends React.Component {
   render () {
     const {onHide, onSubmit} = this.props
     return (
-      <Dialog open title="Collector" onRequestClose={onHide} contentStyle={{width: 350}}>
+      <Dialog open title="Collector" onRequestClose={onHide}>
         <form onSubmit={onSubmit}>
-          <div className="form-column">
-            <Field name="name" component={FormInput} floatingLabel="Name"/>
-            <Field name="description" component={FormInput} floatingLabel="Description"/>
-            <Field name="mapgroup" component={FormInput} floatingLabel="Group"/>
+          <Field name="name" component={FormInput} floatingLabel="Name" className="mr-dialog"/>
+          <Field name="description" component={FormInput} floatingLabel="Description"/>
+          <Field name="mapgroup" component={FormInput} floatingLabel="Group" className="mr-dialog"/>
+          <div style={{maxHeight: 250, overflow: 'auto'}}>
+
           </div>
           <SubmitBlock name="Save" onClick={onHide}/>
         </form>
