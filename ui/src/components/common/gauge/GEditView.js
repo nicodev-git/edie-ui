@@ -335,7 +335,7 @@ export default class GEditView extends React.Component {
   }
   render () {
     return (
-      <div>
+      <div className="padding-xs">
         {this.renderContent()}
 
         <DoneButton onClick={this.onClickDone.bind(this)}/>
