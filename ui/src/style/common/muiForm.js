@@ -31,7 +31,8 @@ export const headerStyle = {
 export const subHeaderStyle = {
   color: primeColor,
   fontSize: fontSize,
-  wordBreak: 'break-all'
+  wordBreak: 'break-all',
+  paddingTop: 12
 }
 
 export const underlineFocusStyle = {

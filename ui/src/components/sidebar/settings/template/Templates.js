@@ -284,7 +284,7 @@ export default class Templates extends Component {
         <TabPageBody tabs={SettingTabs} tab={5} history={this.props.history} location={this.props.location}>
           <div style={{position: 'absolute', width: '100%', height: '100%'}}>
             <div className="flex-horizontal" style={{height: '100%'}}>
-              <div className="flex-1" style={{overflow: 'auto'}}>
+              <div className="flex-1 padding-md-right" style={{overflow: 'auto'}}>
                 {type === 'Device' ? this.renderDeviceTemplates() : this.renderMonitorTemplates()}
               </div>
               <div className="flex-1" style={{overflow: 'auto'}}>

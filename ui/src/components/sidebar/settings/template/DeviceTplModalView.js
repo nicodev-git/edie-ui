@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Field } from 'redux-form'
 import {Chip, Dialog} from 'material-ui'
 
-import { SubHeader, SubmitBlock, FormInput, ImageUploader, FormCheckbox,
+import { SubmitBlock, FormInput, ImageUploader, FormCheckbox,
   Monitors, MonitorTemplates, Workflows } from 'components/modal/parts'
 import { chipStyles } from 'style/common/materialStyles'
 
