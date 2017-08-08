@@ -19,8 +19,9 @@ export default class IncidentSocket {
 
     try {
       const domain = getLocation(ROOT_URL || document.location.href).host
+      const protocol = document.location.protocol === 'https:' ? 'wss:' : 'ws:'
 
-      me.ws = new window.WebSocket(`ws://${domain}/frontendupdates`)
+      me.ws = new window.WebSocket(`${protocol}//${domain}/frontendupdates`)
       me.stompClient = Stomp.over(me.ws)
       me.connecting = true
       me.reconnectOnClose = true
