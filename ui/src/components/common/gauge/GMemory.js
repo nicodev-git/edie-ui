@@ -215,7 +215,6 @@ export default class GMemory extends React.Component {
         renderBackView={this.renderBackView}
 
         onClickDelete={this.onClickDelete.bind(this)}
-        viewOnly={!this.props.devices}
       />
     )
   }

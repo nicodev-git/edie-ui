@@ -212,7 +212,6 @@ export default class GCpu extends React.Component {
         renderBackView={this.renderBackView}
 
         onClickDelete={this.onClickDelete.bind(this)}
-        viewOnly={!this.props.devices}
       />
     )
   }
