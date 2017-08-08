@@ -24,9 +24,11 @@ class MapModal extends Component {
   }
 
   render () {
-    const { handleSubmit } = this.props
+    const { handleSubmit, users, mapUsers } = this.props
     return (
       <MapModalView
+        users={users}
+        mapUsers={mapUsers}
         onHide={this.closeModal.bind(this)}
         onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
       />

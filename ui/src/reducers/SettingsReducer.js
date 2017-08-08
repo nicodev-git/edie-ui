@@ -180,7 +180,10 @@ const initialState = {
 
   agents: [],
   installAgents: [],
-  collectors: []
+  collectors: [],
+
+  users: [],
+  mapUsers: []
 }
 
 export default function (state = initialState, action) {
