@@ -14,29 +14,6 @@ import {showAlert} from 'components/common/Alert'
 
 const sampleData = []
 
-
-const chartOptions = {
-  legend: {
-    display: false
-  },
-  elements: {
-    line: {
-      tension: 0
-    }
-  },
-  scales: {
-    yAxes: [{
-      display: true,
-      ticks: {
-        min: 0,
-        callback: function(value, index, values) {
-          if (Math.floor(value) === value) return value
-        }
-      }
-    }]
-  }
-}
-
 const monitorChartOptions = {
   legend: {
     display: false
@@ -199,9 +176,34 @@ export default class GLineChart extends React.Component {
       }]
     }
 
+    const chartOptions = {
+      legend: {
+        display: false
+      },
+      elements: {
+        line: {
+          tension: 0
+        }
+      },
+      scales: {
+        xAxes: [{
+          display: gauge.gaugeSize !== 'small'
+        }],
+        yAxes: [{
+          display: true,
+          ticks: {
+            min: 0,
+            callback: function(value, index, values) {
+              if (Math.floor(value) === value) return value
+            }
+          }
+        }]
+      }
+    }
+
     return (
       <div className="flex-vertical flex-1" style={{overflow: 'hidden'}}>
-        <div className="flex-1">
+        <div className="flex-1 padding-xs">
           <LineChart chartData={chartData} chartOptions={gauge.resource === 'monitor' ? monitorChartOptions : chartOptions} />
         </div>
       </div>
