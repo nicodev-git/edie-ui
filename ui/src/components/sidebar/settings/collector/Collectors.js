@@ -37,6 +37,12 @@ export default class Collectors extends React.Component {
           <span>{moment(p.data).fromNow()}</span>
         )
       }
+    }, {
+      'displayName': 'Host',
+      'columnName': 'host'
+    }, {
+      'displayName': 'IP',
+      'columnName': 'ip'
     }]
   }
   onRowDblClick () {
