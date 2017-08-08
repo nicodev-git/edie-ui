@@ -97,12 +97,12 @@ export default class Maps extends React.Component {
     })
   }
 
-  // onMapUsers () {
-  //   const selected = this.getMaps().getSelected()
-  //   if (!selected) return showAlert('Please select map.')
-  //
-  //   this.props.openMapUsersModal(selected)
-  // }
+  onMapUsers () {
+    const selected = this.getMaps().getSelected()
+    if (!selected) return showAlert('Please select map.')
+
+    this.props.openMapUsersModal(selected)
+  }
 
   render () {
     return (
