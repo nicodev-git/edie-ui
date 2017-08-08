@@ -113,7 +113,7 @@ export default class Maps extends React.Component {
               <RaisedButton label="Add Map" onTouchTap={this.onMapAdd.bind(this)}/>&nbsp;
               <RaisedButton label="Edit Map" onTouchTap={this.onMapEdit.bind(this)}/>&nbsp;
               <RaisedButton label="Delete Map" onTouchTap={this.onMapDelete.bind(this)}/>&nbsp;
-              <RaisedButton label="Edit Map Users" onTouchTap={this.onMapUsers.bind(this)}/>&nbsp;
+              <RaisedButton label="Edit Map Users" onTouchTap={this.onMapUsers.bind(this)} className="hidden"/>&nbsp;
             </div>
           </div>
         </TabPageHeader>
