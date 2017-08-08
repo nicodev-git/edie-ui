@@ -16,6 +16,7 @@ import {
   closeMapUsersModal,
   addMapUser,
   removeMapUser,
+  toggleMapUser,
 
   fetchSettingUsers
 } from 'actions'
@@ -52,6 +53,7 @@ export default connect(
       closeMapUsersModal,
       addMapUser,
       removeMapUser,
+      toggleMapUser,
 
       fetchSettingUsers
     }, dispatch)

@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { reduxForm } from 'redux-form'
-import { assign } from 'lodash'
 import { connect } from 'react-redux'
 
 import MapModalView from './MapModalView'
@@ -14,8 +13,8 @@ class MapModal extends Component {
   }
 
   handleFormSubmit (values) {
-    const {editMap} = this.props
-    let map = assign({}, editMap, values)
+    const {editMap, mapUsers} = this.props
+    let map = { ...editMap, ...values, users: mapUsers }
     if (editMap) {
       this.props.updateSettingMap(map)
     } else {
@@ -24,11 +23,12 @@ class MapModal extends Component {
   }
 
   render () {
-    const { handleSubmit, users, mapUsers } = this.props
+    const { handleSubmit, users, mapUsers, toggleMapUser } = this.props
     return (
       <MapModalView
         users={users}
         mapUsers={mapUsers}
+        toggleMapUser={toggleMapUser}
         onHide={this.closeModal.bind(this)}
         onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
       />
