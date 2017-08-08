@@ -40,7 +40,7 @@ export default class MonitorTplModalView extends Component {
                 {tags.map((t, i) =>
                   <Chip key={i} style={chipStyles.chip} onRequestDelete={() => onClickDeleteTag(i)}>{t}</Chip>
                 )}
-                <Chip style={chipStyles.chip} onTouchTap={onClickAddTag}>Add Tag</Chip>
+                <Chip style={chipStyles.chip} onTouchTap={onClickAddTag}><b>+</b></Chip>
               </div>
             </CardText>
           </Card>

@@ -36,10 +36,8 @@ export default class WorkflowStep1 extends Component {
             <HelpIcon color="#2196f3"/>
           </IconButton>
         </div>
-        <div>
-          <FlatButton label="Add Tag" onTouchTap={onClickAddTag}/>
-        </div>
         <div style={chipStyles.wrapper}>
+          <Chip style={chipStyles.chip} onTouchTap={onClickAddTag}><b>+</b></Chip>
           {tags.map((t, i) =>
             <Chip key={i} style={chipStyles.chip} onRequestDelete={() => onClickDeleteTag(i)}>{t}</Chip>
           )}
