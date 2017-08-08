@@ -1,5 +1,5 @@
 import React from 'react'
-import {Dialog, FlatButton, Chip} from 'material-ui'
+import {Dialog, Chip} from 'material-ui'
 import {findIndex} from 'lodash'
 import {blue300} from 'material-ui/styles/colors'
 
@@ -37,7 +37,7 @@ export default class TagPickerModalView extends React.Component {
     )
   }
   render () {
-    const {onClickClose, onClickOK, onClickAdd, hideAdd} = this.props
+    const {onClickClose, onClickOK} = this.props
     return (
       <Dialog open title="Tags" onRequestClose={onClickClose}>
         {this.renderContent()}

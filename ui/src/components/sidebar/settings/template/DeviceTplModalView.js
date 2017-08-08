@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Field } from 'redux-form'
-import {Chip, FlatButton, Dialog} from 'material-ui'
+import {Chip, Dialog} from 'material-ui'
 
 import { SubHeader, SubmitBlock, FormInput, ImageUploader, FormCheckbox,
   Monitors, MonitorTemplates, Workflows } from 'components/modal/parts'
@@ -15,27 +15,24 @@ export default class DeviceTplModalView extends Component {
     } = this.props
     return (
       <form onSubmit={onSubmit}>
-        <div className="form-column padding-md-left mb-none">
+        <div className="form-column mb-none">
           <Field name="name" component={FormInput} label="Name"/>
           <Field name="devicetemplategroup" component={FormInput} label="Group"/>
           <Field name="dashboard" component={FormCheckbox} label="Dashboard"/>
           <ImageUploader imgUrl={imgUrl} onChange={onChange}/>
         </div>
 
-        <div className={onSubmit ? '' : 'hidden'}>
-          <FlatButton label="Add Tag" onTouchTap={onClickAddTag}/>
-        </div>
         <div style={chipStyles.wrapper}>
+          <Chip style={chipStyles.chip} onTouchTap={onClickAddTag} className={onSubmit ? '' : 'hidden'}>
+            <b>+</b>
+          </Chip>
           {tags.map((t, i) =>
             <Chip key={i} style={chipStyles.chip} onRequestDelete={() => onClickDeleteTag(i)}>{t}</Chip>
           )}
         </div>
-
-        <div className="subheader-wrapper">
-          <SubHeader name="Monitors"/>
-        </div>
-        <div>
-          <div className="col-md-6 ml-none">
+        <div className="margin-md-top">
+          <div className="col-md-6 ml-none pl-none">
+            <div><b>Monitors</b></div>
             <Monitors monitors={monitors} onEditMonitor={onSubmit ? onEditMonitor : null} onRemoveMonitor={onSubmit ? onRemoveMonitor : null} />
             <Workflows workflows={workflows} showWfSelectModal={onSubmit ? showWfSelectModal : null} onClickDeleteWf={onSubmit ? onClickDeleteWf : null}/>
           </div>
