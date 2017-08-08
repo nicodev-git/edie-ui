@@ -171,7 +171,7 @@ export default class General extends React.Component {
   renderCustomer () {
     const lastSync = this.getOptionValue('LAST_WORKFLOW_TIME')
     return (
-      <div style={{...rowStyle, color: '#888'}} className="margin-lg-top">
+      <div style={{color: '#888'}} className="margin-lg-top">
         <label className="margin-sm-top margin-sm-bottom">
           Customer ID: {this.getOptionValue('CUSTOMER_ID') || '[None]'}&nbsp;&nbsp;&nbsp;&nbsp;
           Last Synced: {lastSync ? moment(parseInt(lastSync, 10)).fromNow() : 'Never'}
