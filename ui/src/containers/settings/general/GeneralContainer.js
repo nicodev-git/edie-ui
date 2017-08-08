@@ -8,7 +8,8 @@ import {
   addEnvVar,
   updateEnvVar,
 
-  updateUserOption
+  updateUserOption,
+  syncData
 } from 'actions'
 
 class GeneralContainer extends React.Component {
@@ -29,7 +30,8 @@ export default connect(
       addEnvVar,
       updateEnvVar,
 
-      updateUserOption
+      updateUserOption,
+      syncData
     }, dispatch)
   })
 )(GeneralContainer)

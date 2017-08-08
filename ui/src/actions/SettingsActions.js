@@ -97,6 +97,8 @@ import { apiError } from './Errors'
 import { ROOT_URL } from './config'
 import { encodeUrlParams } from 'shared/Global'
 
+import {fetchEnvVars} from './EnvActions'
+
 export const fetchSettingMaps = () => {
   if (!window.localStorage.getItem('token')) {
     return dispatch => dispatch({ type: NO_AUTH_ERROR })
@@ -476,6 +478,7 @@ export const syncData = (full) => {
     dispatch({type: SYNC_DATA, data: null})
     axios.get(`${ROOT_URL}/pullSyncDataFromImadmin?full=${full}`).then(response => {
       dispatch({type: SYNC_DATA, data: response.data})
+      dispatch(fetchEnvVars())
     }).catch(error => apiError(dispatch, error))
   }
 }

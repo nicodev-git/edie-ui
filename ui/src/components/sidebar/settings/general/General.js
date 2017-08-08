@@ -42,8 +42,11 @@ export default class General extends React.Component {
     this.props.fetchEnvVars()
   }
 
+  onClickSync () {
+    this.props.syncData(false)
+  }
+
   renderContent () {
-    const lastSync = this.getOptionValue('LAST_WORKFLOW_TIME')
     return (
       <div className="padding-md form-inline">
         <div style={rowStyle} className="margin-md-bottom bt-gray">
@@ -160,26 +163,22 @@ export default class General extends React.Component {
           <label className="margin-sm-top margin-sm-bottom width-200">  Days</label>
         </div>
 
-        <div style={{...rowStyle, color: '#888'}} className="margin-lg-top">
-          <label className="margin-sm-top margin-sm-bottom">
-            Customer ID: {this.getOptionValue('CUSTOMER_ID') || '[None]'}&nbsp;&nbsp;&nbsp;&nbsp;
-            Last Synced: {lastSync ? moment(parseInt(lastSync, 10)).fromNow() : 'Never'}
-          </label>
-        </div>
+        {this.renderCustomer()}
       </div>
     )
   }
 
-  renderCustomerIdEdit () {
+  renderCustomer () {
+    const lastSync = this.getOptionValue('LAST_WORKFLOW_TIME')
     return (
-      <InlineEdit
-        text={this.getOptionValue('CUSTOMER_ID') || '[None]'}
-        paramName="message"
-        change={this.onChangeCustomerId.bind(this)}
-        className="inline-block"
-        ref="mobileIp"
-        minLength={0}
-      />
+      <div style={{...rowStyle, color: '#888'}} className="margin-lg-top">
+        <label className="margin-sm-top margin-sm-bottom">
+          Customer ID: {this.getOptionValue('CUSTOMER_ID') || '[None]'}&nbsp;&nbsp;&nbsp;&nbsp;
+          Last Synced: {lastSync ? moment(parseInt(lastSync, 10)).fromNow() : 'Never'}
+        </label>
+        <br/>
+        <RaisedButton label="Sync" onTouchTap={this.onClickSync.bind(this)}/>
+      </div>
     )
   }
 
