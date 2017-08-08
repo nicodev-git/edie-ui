@@ -22,6 +22,18 @@ export default class Maps extends React.Component {
     this.cells = [{
       'displayName': 'Name',
       'columnName': 'name'
+    }, {
+      'displayName': 'Description',
+      'columnName': 'description'
+    }, {
+      'displayName': 'Group',
+      'columnName': 'mapgroup'
+    }, {
+      'displayName': 'Users',
+      'columnName': 'users',
+      'customComponent': p => {
+        return <span>{(p.data || []).join(', ')}</span>
+      }
     }]
   }
 

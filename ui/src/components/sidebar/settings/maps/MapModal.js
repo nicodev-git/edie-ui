@@ -38,6 +38,7 @@ class MapModal extends Component { // eslint-disable-line react/no-multi-comp
     let header = 'Map'
     let content = [
       {name: 'Name'},
+      {name: 'Description'},
       {name: 'Map Group'}
     ]
     let buttonText = 'Save'
