@@ -49,8 +49,8 @@ export default class General extends React.Component {
   renderContent () {
     return (
       <div className="padding-md form-inline">
-        <div style={rowStyle} className="margin-md-bottom bt-gray">
-          <label className="margin-sm-top margin-sm-bottom width-200">System Name:</label>
+        <div style={rowStyle} className="margin-md-bottom">
+          <label className="margin-sm-top margin-sm-bottom width-200">System Name: </label>
           <InlineEdit
             text={this.getOptionValue('SYSTEM_NAME') || '[Empty]'}
             paramName="message"
@@ -60,7 +60,7 @@ export default class General extends React.Component {
           />
         </div>
 
-        <div style={rowStyle} className="margin-md-bottom bt-gray">
+        <div style={rowStyle} className="margin-md-bottom">
           <div className="pull-left width-200">
             <Checkbox
               label="Enable DMZ"
@@ -75,7 +75,7 @@ export default class General extends React.Component {
             ref="dmzIp"
           />
         </div>
-        <div style={rowStyle} className="margin-md-bottom bt-gray">
+        <div style={rowStyle} className="margin-md-bottom">
           <div className="pull-left width-200">
             <Checkbox
               label="Pause System"
@@ -83,7 +83,7 @@ export default class General extends React.Component {
               onCheck={this.onChangePause.bind(this)}/>
           </div>
         </div>
-        <div style={rowStyle} className="margin-md-bottom bt-gray">
+        <div style={rowStyle} className="margin-md-bottom">
           <div className="pull-left width-200">
             <Checkbox
               label="Display Network Traffic"
@@ -91,7 +91,7 @@ export default class General extends React.Component {
               onCheck={this.onChangeTraffic.bind(this)}/>
           </div>
         </div>
-        <div style={rowStyle} className="margin-md-bottom bt-gray">
+        <div style={rowStyle} className="margin-md-bottom">
           <div className="pull-left width-200">
             <Checkbox
               label="Send Error Logs With"
@@ -106,7 +106,7 @@ export default class General extends React.Component {
           />
         </div>
 
-        <div style={rowStyle} className="margin-md-bottom bt-gray">
+        <div style={rowStyle} className="margin-md-bottom">
           <div className="pull-left width-200">
             <Checkbox
               label="Send to mobile"
@@ -124,7 +124,7 @@ export default class General extends React.Component {
           />
         </div>
 
-        <div style={rowStyle} className="margin-md-bottom bt-gray">
+        <div style={rowStyle} className="margin-md-bottom">
           <div className="pull-left width-200">
             <Checkbox
               label="Show absolute date"
@@ -142,7 +142,7 @@ export default class General extends React.Component {
 
         </div>
 
-        <div style={rowStyle} className="margin-md-bottom bt-gray">
+        <div style={rowStyle} className="margin-md-bottom">
           <div className="pull-left width-200">
             <Checkbox
               label="Keep Incident Alert"
@@ -151,7 +151,7 @@ export default class General extends React.Component {
           </div>
         </div>
 
-        <div style={rowStyle} className="margin-md-bottom bt-gray">
+        <div style={rowStyle} className="margin-md-bottom">
           <label className="margin-sm-top margin-sm-bottom width-200">Remove Undefined Events After: </label>
           <InlineEdit
             text={this.getOptionValue('UNDEFINED_EVENTS_RETENTION_DAYS') || 'Days'}
