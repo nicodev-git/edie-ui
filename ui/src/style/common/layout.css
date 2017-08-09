@@ -161,7 +161,6 @@ a, a:focus, a:hover {
 .flex-1,
 .flex-vertical > .tab-content {
     flex: 1;
-    display: flex;
     position: relative;
 }
 
