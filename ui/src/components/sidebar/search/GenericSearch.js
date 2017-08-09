@@ -45,12 +45,6 @@ class GenericSearch extends React.Component {
         const {rowData} = p
         const {entity} = rowData
 
-        if (!this.state.cols.length) {
-          this.setState({
-            cols: keys(entity)
-          })
-        }
-
         if (viewFilter === viewFilters.log.name) {
           if (!entity.dataobj) return <span/>
           return (
@@ -410,8 +404,15 @@ class GenericSearch extends React.Component {
     }), this.props.history)
   }
 
-  onResultCountUpdate (total) {
-    this.setState({total})
+  onResultCountUpdate (total, data) {
+    let {cols} = this.state
+    if (!cols.length && data && data.length) {
+      cols = keys(data[0].entity)
+    }
+    this.setState({
+      total,
+      cols
+    })
   }
 
   onClickIllustrate () {
@@ -481,7 +482,7 @@ class GenericSearch extends React.Component {
       <div className="padding-sm" style={{position: 'absolute', height: '100%', minWidth: '100%'}}>
         <div className="header-blue">Fields</div>
         {this.props.fields.map(f =>
-          <div key={f.path} className={`field-item margin-xs-top ${selectedField && selectedField.path === f.path ? 'selected' : ''}`}>
+          <div key={f.path} className={`field-item margin-xs-top nowrap ${selectedField && selectedField.path === f.path ? 'selected' : ''}`}>
             <span className="margin-sm-right text-gray">{this.getTypeChar(f.type)}</span>
             <div className="link text-primary" onClick={this.onClickField.bind(this, f)}>{f.path.replace(/\.dataobj\./gi, '.').replace(/dataobj\./gi, '')}</div>
             <span className="margin-sm-left text-gray">{f.count}</span>

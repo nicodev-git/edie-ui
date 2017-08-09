@@ -33,7 +33,7 @@ class InfiniteTable extends React.Component {
 
   componentWillMount () {
     const {onUpdateCount} = this.props
-    onUpdateCount && onUpdateCount(0)
+    onUpdateCount && onUpdateCount(0, [])
   }
 
   componentDidMount () {
@@ -113,7 +113,7 @@ class InfiniteTable extends React.Component {
       }
 
       this.setState(state)
-      onUpdateCount && onUpdateCount(total)
+      onUpdateCount && onUpdateCount(total, state.results)
     })
 
     return this.lastRequest
