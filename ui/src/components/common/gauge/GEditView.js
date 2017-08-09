@@ -57,7 +57,10 @@ export default class GEditView extends React.Component {
 
       itemSize: gauge.itemSize || 'normal',
       gaugeSize: gauge.gaugeSize || 'big',
-      showDeviceType: gauge.showDeviceType || false
+      showDeviceType: gauge.showDeviceType || false,
+
+      forward: gauge.forward || false,
+      forwardBoardId: gauge.forwardBoardId || ''
     }
   }
 
@@ -86,13 +89,15 @@ export default class GEditView extends React.Component {
     const {resource, savedSearchId, monitorId, workflowId, deviceId, serviceName, monitorIds,
       duration, durationUnit, splitBy, splitUnit, name,
       severities, dateFrom, dateTo, fixed,
-      widgetSize, itemSize, showDeviceType, gaugeSize
+      widgetSize, itemSize, showDeviceType, gaugeSize,
+      forward, forwardBoardId
     }  = this.state
     const values = {
       resource, savedSearchId, monitorId, workflowId, deviceId, serviceName, monitorIds,
       duration, durationUnit, splitBy, splitUnit, name,
       severities, dateFrom, dateTo, fixed,
-      widgetSize, itemSize, showDeviceType, gaugeSize
+      widgetSize, itemSize, showDeviceType, gaugeSize,
+      forward, forwardBoardId
     }
     onSubmit && onSubmit(values)
   }
@@ -273,7 +278,8 @@ export default class GEditView extends React.Component {
     )
   }
   renderServers () {
-    const {name, itemSize, showDeviceType} = this.state
+    const {gaugeBoards} = this.props
+    const {name, itemSize, showDeviceType, forward, forwardBoardId} = this.state
     return (
       <div>
         <TextField name="name" value={name} floatingLabelText="Name" className="valign-top mr-dialog" onChange={this.onChangeText.bind(this, 'name')}/>
@@ -282,6 +288,11 @@ export default class GEditView extends React.Component {
           <MenuItem value="slim" primaryText="Slim"/>
         </SelectField>
         <Checkbox label="Show Device Type" checked={showDeviceType} onCheck={this.onChangeText.bind(this, 'showDeviceType')}/>
+
+        <Checkbox label="Forward to dashboard" checked={forward} onCheck={this.onChangeText.bind(this, 'forward')}/>
+        <SelectField value={forwardBoardId} floatingLabelText=" " className="valign-top" onChange={this.onChangeSelect.bind(this, 'forwardBoardId')}>
+          {(gaugeBoards || []).map(p => <MenuItem key={p.id} value={p.id} primaryText={p.name}/>)}
+        </SelectField>
       </div>
     )
   }
