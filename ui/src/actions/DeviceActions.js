@@ -152,7 +152,6 @@ export const fetchDevices = () => {
 }
 
 const fetchDevicesSuccess = (dispatch, response) => {
-  console.log('Response DATA:', response.data._embedded.devices)
   dispatch({
     type: FETCH_DEVICES,
     payload: response.data._embedded.devices

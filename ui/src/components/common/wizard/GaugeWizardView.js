@@ -1,6 +1,6 @@
 import React from 'react'
 import moment from 'moment'
-import {Dialog, SelectField, MenuItem, RaisedButton} from 'material-ui'
+import {Dialog, SelectField, MenuItem, RaisedButton, Checkbox} from 'material-ui'
 import { Field } from 'redux-form'
 import { SubmitBlock, FormInput, FormSelect } from 'components/modal/parts'
 import {findIndex} from 'lodash'
@@ -44,16 +44,20 @@ export default class GaugeWizardView extends React.Component {
     ]
   }
   renderLogicalGroup () {
-    const {devices, formValues, selectedMonitors, onChangeMonitors} = this.props
+    const {devices, formValues, selectedMonitors, toggleMonitorId} = this.props
     if (formValues.resource !== 'logicalgroup') return null
     return (
-      <SelectField multiple floatingLabelText="Monitors" onChange={onChangeMonitors} className={`valign-top mr-dialog`} value={selectedMonitors}>
-        {(devices || []).map(d => (d.monitors || []).map(p =>
-          <MenuItem
-            key={p.uid} insetChildren checked={selectedMonitors.includes(p.uid)}
-            value={p.uid} primaryText={`${d.name} - ${p.name}`}/>
-        ))}
-      </SelectField>
+      <div style={{maxHeight: 300, overflow: 'auto'}}>
+        <table className="table table-hover">
+          <tbody>
+          {(devices || []).map(d => (d.monitors || []).map(p =>
+            <tr key={p.uid}>
+              <td><Checkbox label={`${d.name} - ${p.name}`} checked={selectedMonitors.includes(p.uid)} onCheck={() => toggleMonitorId(p.uid)}/></td>
+            </tr>
+          ))}
+          </tbody>
+        </table>
+      </div>
     )
   }
   renderNormal () {

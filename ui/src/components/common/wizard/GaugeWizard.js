@@ -71,6 +71,15 @@ class GaugeWizard extends React.Component {
       selectedMonitors: values
     })
   }
+  toggleMonitorId (id) {
+    let {selectedMonitors} = this.state
+    if (selectedMonitors.includes(id)) {
+      selectedMonitors = selectedMonitors.filter(p => p !== id)
+    } else {
+      selectedMonitors = [ ...selectedMonitors, id ]
+    }
+    this.setState({ selectedMonitors })
+  }
   onChangeServiceNames (e, index, values) {
     this.setState({
       serviceNames: values
@@ -159,6 +168,7 @@ class GaugeWizard extends React.Component {
 
         selectedMonitors={this.state.selectedMonitors}
         onChangeMonitors={this.onChangeMonitors.bind(this)}
+        toggleMonitorId={this.toggleMonitorId.bind(this)}
 
         serviceNames={this.state.serviceNames}
         onChangeServiceNames={this.onChangeServiceNames.bind(this)}
