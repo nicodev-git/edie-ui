@@ -24,6 +24,7 @@ class GaugeWizard extends React.Component {
   componentWillMount () {
     this.props.fetchSysSearchOptions()
     this.props.fetchWorkflows()
+    this.props.fetchMonitorGroups()
   }
 
   componentDidMount () {
@@ -117,7 +118,7 @@ class GaugeWizard extends React.Component {
     this.props.onClose && this.props.onClose(this, data)
   }
   render () {
-    const { handleSubmit, sysSearchOptions, monitors, title, formValues, workflows, templateName, devices, device } = this.props
+    const { handleSubmit, sysSearchOptions, monitors, title, formValues, workflows, templateName, devices, device, monitorGroups } = this.props
 
     const searchList = concat([], this.getSearchOptions().map(p => {
       return assign({}, p, {
@@ -136,6 +137,7 @@ class GaugeWizard extends React.Component {
 
     const workflowOptions = workflows.map(p => ({label: p.name, value: p.id}))
     const serviceOptions = this.state.services.map(p => ({label: p.DisplayName || p.ServiceName, value: p.ServiceName}))
+    const monitorGroupOptions = monitorGroups.map(p => ({label: p.name, value: p.id}))
     return (
       <GaugeWizardView
         title={title}
@@ -164,6 +166,8 @@ class GaugeWizard extends React.Component {
         dateFrom={this.state.dateFrom}
         dateTo={this.state.dateTo}
         onChangeDateRange={this.onChangeDateRange.bind(this)}
+
+        monitorGroups={monitorGroupOptions}
       />
     )
   }

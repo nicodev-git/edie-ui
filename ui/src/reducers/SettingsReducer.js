@@ -186,7 +186,8 @@ const initialState = {
   collectors: [],
 
   users: [],
-  mapUsers: []
+  mapUsers: [],
+  monitorGroups: []
 }
 
 export default function (state = initialState, action) {

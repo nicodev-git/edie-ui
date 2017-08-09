@@ -44,7 +44,7 @@ export default class GaugeWizardView extends React.Component {
     ]
   }
   renderNormal () {
-    const {searchList, workflows, formValues, durationVisible} = this.props
+    const {searchList, workflows, formValues, durationVisible, monitorGroups} = this.props
 
     return (
       <div>
@@ -54,6 +54,7 @@ export default class GaugeWizardView extends React.Component {
         {formValues.resource === 'search' && <Field name="savedSearchId" component={FormSelect} floatingLabel="Saved Search" options={searchList} className="valign-top mr-dialog"/>}
         {formValues.resource === 'incident' && <Field name="workflowId" component={FormSelect} floatingLabel="Workflow" options={workflows} className="valign-top mr-dialog"/>}
         {this.renderMonitorPick()}
+        {formValues.resource === 'logicalgroup' && <Field name="monitorGroupId" component={FormSelect} floatingLabel="Logical Group" options={monitorGroups} className="valign-top mr-dialog"/>}
 
         {durationVisible ? (
           <div className="inline-block">
