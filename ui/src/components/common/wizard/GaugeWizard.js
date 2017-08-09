@@ -2,9 +2,12 @@ import React from 'react'
 import { reduxForm } from 'redux-form'
 import {assign, concat} from 'lodash'
 import moment from 'moment'
-import MonitorSocket from 'util/socket/MonitorSocket'
+import axios from 'axios'
 
+import MonitorSocket from 'util/socket/MonitorSocket'
 import GaugeWizardView from './GaugeWizardView'
+import { ROOT_URL } from 'actions/config'
+import {showAlert} from 'components/common/Alert'
 
 class GaugeWizard extends React.Component {
   constructor (props) {
@@ -120,7 +123,20 @@ class GaugeWizard extends React.Component {
     )
     console.log(props)
     this.closeModal(true)
-    onFinish && onFinish(null, props)
+
+    if (props.resource === 'logicalgroup') {
+      axios.post(`${ROOT_URL}/monitorgroup`, {
+        monitorids: props.monitorIds
+      }).then(res => {
+        props.monitorIds = []
+        props.monitorGroupId = res.data.id
+        onFinish && onFinish(null, props)
+      }).catch(() => {
+        showAlert('Add logical group failed.')
+      })
+    } else {
+      onFinish && onFinish(null, props)
+    }
   }
 
   closeModal (data) {

@@ -31,7 +31,7 @@ export default class GMonitor extends React.Component {
   }
 
   fetchGroupMonitor (gauge) {
-    if (!gauge.resource !== 'localgroup') return
+    if (gauge.resource !== 'logicalgroup') return
     axios.get(`${ROOT_URL}/monitorgroup/${gauge.monitorGroupId}`).then(res => {
       this.setState({
         monitorGroup: res.data
