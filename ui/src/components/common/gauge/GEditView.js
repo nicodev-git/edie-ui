@@ -289,10 +289,14 @@ export default class GEditView extends React.Component {
         </SelectField>
         <Checkbox label="Show Device Type" checked={showDeviceType} onCheck={this.onChangeText.bind(this, 'showDeviceType')}/>
 
-        <Checkbox label="Forward to dashboard" checked={forward} onCheck={this.onChangeText.bind(this, 'forward')}/>
-        <SelectField value={forwardBoardId} floatingLabelText=" " className="valign-top" onChange={this.onChangeSelect.bind(this, 'forwardBoardId')}>
-          {(gaugeBoards || []).map(p => <MenuItem key={p.id} value={p.id} primaryText={p.name}/>)}
-        </SelectField>
+        <div>
+          <div className="inline-block nowrap margin-md-right margin-md-top">
+            <Checkbox label="Forward to dashboard" checked={forward} onCheck={this.onChangeText.bind(this, 'forward')}/>
+          </div>
+          <SelectField value={forwardBoardId} className="valign-top" onChange={this.onChangeSelect.bind(this, 'forwardBoardId')}>
+            {(gaugeBoards || []).map(p => <MenuItem key={p.id} value={p.id} primaryText={p.name}/>)}
+          </SelectField>
+        </div>
       </div>
     )
   }

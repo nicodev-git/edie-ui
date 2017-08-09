@@ -38,6 +38,10 @@ export default class GServers extends React.Component {
     const {gauge}= this.props
     return 24 * (gauge.itemSize === 'slim' ? 2 : 1)
   }
+
+  onClickItem (device) {
+
+  }
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   renderItemView(item, total) {
     const {gauge} = this.props
@@ -46,7 +50,9 @@ export default class GServers extends React.Component {
     const padding = ''
     return (
       <div key={item.id} className={`col-md-${col} text-center padding-xs ${padding}`} style={{height: gauge.itemSize === 'slim' ? '12.5%' : '25%'}}>
-        <div className={`${isUp ? 'bg-success' : 'bg-danger'}`} style={{width: '100%', height: '100%'}}>
+        <div
+          className={`${isUp ? 'bg-success' : 'bg-danger'}`} style={{width: '100%', height: '100%', cursor: 'pointer'}}
+          onClick={this.onClickItem.bind(this, item)}>
           <div className="div-center text-white">
             <div>{item.name}</div>
             {gauge.showDeviceType && <div><small>{item.templateName}</small></div>}
