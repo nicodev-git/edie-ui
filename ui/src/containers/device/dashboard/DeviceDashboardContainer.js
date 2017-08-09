@@ -7,6 +7,7 @@ import {
   fetchSysSearchOptions,
   fetchWorkflows,
 
+  fetchGaugeBoards,
   fetchGauges,
   addDeviceGauge,
   updateDeviceGauge,
@@ -28,6 +29,7 @@ export default connect(
     device: state.dashboard.selectedDevice,
 
     gauges: state.gauge.gauges,
+    gaugeBoards: state.gauge.gaugeBoards,
 
     mapDevices: state.devices.mapDevices,
     mapLines: state.devices.mapLines,
@@ -41,6 +43,7 @@ export default connect(
     fetchSysSearchOptions,
     fetchWorkflows,
 
+    fetchGaugeBoards,
     fetchGauges,
     addDeviceGauge,
     updateDeviceGauge,
