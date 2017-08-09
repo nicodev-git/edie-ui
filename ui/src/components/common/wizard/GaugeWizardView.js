@@ -48,7 +48,7 @@ export default class GaugeWizardView extends React.Component {
     if (formValues.resource !== 'logicalgroup') return null
     return (
       <SelectField multiple floatingLabelText="Monitors" onChange={onChangeMonitors} className={`valign-top mr-dialog`} value={selectedMonitors}>
-        {devices.map(d => (d.monitors || []).map(p =>
+        {(devices || []).map(d => (d.monitors || []).map(p =>
           <MenuItem
             key={p.uid} insetChildren checked={selectedMonitors.includes(p.uid)}
             value={p.uid} primaryText={`${d.name} - ${p.name}`}/>

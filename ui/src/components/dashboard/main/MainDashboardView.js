@@ -55,6 +55,7 @@ export default class MainDashboardView extends React.Component {
     this.props.fetchGauges()
     this.props.fetchSysSearchOptions()
     this.props.fetchWorkflows()
+    this.props.fetchDevices()
   }
 
   getGauges () {
@@ -199,7 +200,7 @@ export default class MainDashboardView extends React.Component {
           closeCallback && closeCallback()
         }}
         title={options.title}
-        devices={this.props.mapDevices}
+        devices={this.props.devices || []}
         monitors={this.getMonitors()}
         extraParams={extra}
         onFinish={this.onFinishAddWizard.bind(this, callback)}
@@ -217,7 +218,7 @@ export default class MainDashboardView extends React.Component {
           gauge={p}
           device={{id: p.deviceId}}
           searchList={this.getSearchList()}
-          devices={this.props.mapDevices}
+          devices={this.props.devices}
           monitors={this.getMonitors()}
 
           updateDeviceGauge={gauge => this.props.updateGaugeItem(gauge, this.props.board)}
@@ -262,7 +263,7 @@ export default class MainDashboardView extends React.Component {
       let x = 0
       let y = 0
       return gauges.map((p, i) => {
-        const {w, h} = getWidgetSize(p, this.props.mapDevices)
+        const {w, h} = getWidgetSize(p)
         if (p.layout && p.layout.i && w === p.layout.w && h === p.layout.h) {
           return {...p.layout , i: p.id}
         }

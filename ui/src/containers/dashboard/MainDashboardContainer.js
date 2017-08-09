@@ -4,6 +4,7 @@ import {withRouter} from 'react-router'
 import { connect } from 'react-redux'
 
 import {
+  fetchDevices,
   fetchSysSearchOptions,
   fetchWorkflows,
 
@@ -32,7 +33,7 @@ class MainDashboardContainer extends React.Component {
 }
 export default connect(
   state => ({
-    mapDevices: state.dashboard.mapDevices,
+    devices: state.devices.devices,
 
     gauges: state.gauge.gauges,
     gaugeItems: state.gauge.gaugeItems,
@@ -45,6 +46,7 @@ export default connect(
 
     incidentDraw: state.devices.incidentDraw
   }), {
+    fetchDevices,
     fetchSysSearchOptions,
     fetchWorkflows,
 
