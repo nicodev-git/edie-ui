@@ -9,12 +9,6 @@ class Signin extends Component {
     const params = parse(location.search)
     signUser({ email, password }, params['redirect'], history)
   }
-  onKeyUpEmail (e) {
-    if (e.keyCode === 13) {
-      e.preventDefault()
-      return false;
-    }
-  }
   renderAlert () {
     let { errorMessage } = this.props
     if (errorMessage) {
@@ -35,7 +29,6 @@ class Signin extends Component {
           type={field.type}
           placeholder={field.label}
           autoFocus={field.autoFocus}
-          onKeyUp={field.onKeyUp}
         />
       </div>
     )
@@ -55,13 +48,12 @@ class Signin extends Component {
             <div className="form">
               <div className="field"><img src="/resources/images/auth/user_icon.png" alt="" /></div>
               <Field
-                name="email" component={this.renderInput} type="text" label="Username" className="text_field" autoFocus
-                onKeyUp={this.onKeyUpEmail.bind(this)}/>
+                name="email" component={this.renderInput} type="text" label="Username" className="text_field" autoFocus/>
 
               <div className="line" />
 
               <div className="field"><img src="/resources/images/auth/pass_icon.png" alt=""/></div>
-              <Field name="password" component={this.renderInput} type="password" label="Password" className="text_field" ref=""/>
+              <Field name="password" component={this.renderInput} type="password" label="Password" className="text_field"/>
 
             </div>
             <button type="submit" style={{border: 'none', padding: 0, background: 'none'}}>
