@@ -40,7 +40,17 @@ export default class GServers extends React.Component {
   }
 
   onClickItem (device) {
-
+    const {gauge} = this.props
+    if (gauge.forward && gauge.forwardBoardId) {
+      this.props.history.push({
+        pathname: '/dashboard',
+        query: {
+          id: gauge.forwardBoardId
+        }
+      })
+    } else {
+      this.props.history.push(`/device/${device.id}/dashboard`)
+    }
   }
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   renderItemView(item, total) {
