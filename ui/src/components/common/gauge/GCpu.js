@@ -178,7 +178,7 @@ export default class GCpu extends React.Component {
       const value = cpu ? (cpu.length ? cpu[0].Usage : cpu.Usage) : 0
       return (
         <div className="flex-vertical flex-1">
-          <div className="flex-1">
+          <div className="flex-1 flex-vertical">
             {gauge.gaugeType === 'accel' ? (
               <AccelView value={value}/>
             ) : (

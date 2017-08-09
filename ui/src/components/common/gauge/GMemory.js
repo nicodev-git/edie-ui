@@ -179,7 +179,7 @@ export default class GMemory extends React.Component {
       const value = memory ? Math.ceil(memory.UsedSize * 100 / memory.TotalSize) : 0
       return (
         <div className="flex-vertical flex-1">
-          <div className="flex-1">
+          <div className="flex-1 flex-vertical">
             {gauge.gaugeType === 'accel' ? (
               <AccelView value={value}/>
             ) : (
