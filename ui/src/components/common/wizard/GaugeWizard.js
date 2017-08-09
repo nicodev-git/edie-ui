@@ -24,7 +24,7 @@ class GaugeWizard extends React.Component {
   componentWillMount () {
     this.props.fetchSysSearchOptions()
     this.props.fetchWorkflows()
-    this.props.fetchMonitorGroups()
+    // this.props.fetchMonitorGroups()
   }
 
   componentDidMount () {

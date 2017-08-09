@@ -1,4 +1,5 @@
 import React from 'react'
+import axios from 'axios'
 import {findIndex} from 'lodash'
 
 import FlipView from './FlipView'
@@ -6,15 +7,36 @@ import MonitorStatusView from './display/MonitorStatusView'
 import GEditView from './GEditView'
 
 import {showAlert} from 'components/common/Alert'
+import { ROOT_URL } from 'actions/config'
 
 export default class GMonitor extends React.Component {
   constructor (props) {
     super (props)
     this.state = {
-      loading: false
+      loading: false,
+      monitorGroup: null
     }
     this.renderBackView = this.renderBackView.bind(this)
     this.renderFrontView = this.renderFrontView.bind(this)
+  }
+  componentWillMount () {
+    this.fetchGroupMonitor(this.props.gauge)
+  }
+
+  componentWillUpdate (nextProps) {
+    const {gauge} = nextProps
+    if (gauge && JSON.stringify(this.props.gauge) !== JSON.stringify(gauge)) {
+      this.fetchGroupMonitor(gauge)
+    }
+  }
+
+  fetchGroupMonitor (gauge) {
+    if (!gauge.resource !== 'localgroup') return
+    axios.get(`${ROOT_URL}/monitorgroup/${gauge.monitorGroupId}`).then(res => {
+      this.setState({
+        monitorGroup: res.data
+      })
+    })
   }
 
   onClickDelete () {
@@ -41,19 +63,27 @@ export default class GMonitor extends React.Component {
 
   renderFrontView () {
     let {gauge, device, devices} = this.props
-    if (devices) {
-      const devIndex = findIndex(devices, {id: device.id})
-      if (devIndex >= 0) device = devices[devIndex]
+    if (gauge.resource === 'logicalgroup') {
+      const {monitorGroup} = this.state
+      return (
+        <MonitorStatusView isUp={monitorGroup && monitorGroup.status === 'UP'} lastUpdate={0} size={gauge.gaugeSize}/>
+      )
+    } else {
+      if (devices) {
+        const devIndex = findIndex(devices, {id: device.id})
+        if (devIndex >= 0) device = devices[devIndex]
+      }
+
+      const index = findIndex(device.monitors, {uid: gauge.monitorId})
+      if (index < 0) return null
+      const monitor = device.monitors[index]
+      const isUp = monitor.status === 'UP'
+      const lastUpdate = isUp ? monitor.lastfalure : monitor.lastsuccess
+      return (
+        <MonitorStatusView isUp={isUp} lastUpdate={lastUpdate} size={gauge.gaugeSize}/>
+      )
     }
 
-    const index = findIndex(device.monitors, {uid: gauge.monitorId})
-    if (index < 0) return null
-    const monitor = device.monitors[index]
-    const isUp = monitor.status === 'UP'
-    const lastUpdate = isUp ? monitor.lastfalure : monitor.lastsuccess
-    return (
-      <MonitorStatusView isUp={isUp} lastUpdate={lastUpdate} size={gauge.gaugeSize}/>
-    )
   }
   renderBackView (options) {
     return (

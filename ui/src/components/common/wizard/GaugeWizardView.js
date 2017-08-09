@@ -43,8 +43,21 @@ export default class GaugeWizardView extends React.Component {
       <Field key="monitorId" name="monitorId" component={FormSelect} floatingLabel="Monitor" options={monitorOptions} className="valign-top"/>
     ]
   }
+  renderLogicalGroup () {
+    const {devices, formValues, selectedMonitors, onChangeMonitors} = this.props
+    if (formValues.resource !== 'logicalgroup') return null
+    return (
+      <SelectField multiple floatingLabelText="Monitors" onChange={onChangeMonitors} className={`valign-top mr-dialog`} value={selectedMonitors}>
+        {devices.map(d => (d.monitors || []).map(p =>
+          <MenuItem
+            key={p.uid} insetChildren checked={selectedMonitors.includes(p.uid)}
+            value={p.uid} primaryText={`${d.name} - ${p.name}`}/>
+        ))}
+      </SelectField>
+    )
+  }
   renderNormal () {
-    const {searchList, workflows, formValues, durationVisible, monitorGroups} = this.props
+    const {searchList, workflows, formValues, durationVisible} = this.props
 
     return (
       <div>
@@ -54,7 +67,7 @@ export default class GaugeWizardView extends React.Component {
         {formValues.resource === 'search' && <Field name="savedSearchId" component={FormSelect} floatingLabel="Saved Search" options={searchList} className="valign-top mr-dialog"/>}
         {formValues.resource === 'incident' && <Field name="workflowId" component={FormSelect} floatingLabel="Workflow" options={workflows} className="valign-top mr-dialog"/>}
         {this.renderMonitorPick()}
-        {formValues.resource === 'logicalgroup' && <Field name="monitorGroupId" component={FormSelect} floatingLabel="Logical Group" options={monitorGroups} className="valign-top mr-dialog"/>}
+        {this.renderLogicalGroup()}
 
         {durationVisible ? (
           <div className="inline-block">
