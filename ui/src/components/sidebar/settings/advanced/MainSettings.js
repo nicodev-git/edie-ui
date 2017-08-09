@@ -109,7 +109,6 @@ export default class MainSettings extends Component {
         <div>
           <SelectField
             floatingLabelText="Send IMP Logs Level"
-            options={logLevels}
             value={this.getOptionValue('SEND_LOGS_LEVEL')}
             onChange={this.onChangeSendLogLevel.bind(this)}>
             {logLevels.map(option => <MenuItem key={option.value} value={option.value} primaryText={option.label}/>)}
