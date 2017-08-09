@@ -161,6 +161,7 @@ a, a:focus, a:hover {
 .flex-1,
 .flex-vertical > .tab-content {
     flex: 1;
+    display: flex;
     position: relative;
 }
 
@@ -277,4 +278,8 @@ a, a:focus, a:hover {
     transform: translate(-50%, -50%);
     width: 100%;
     line-height: 1;
+}
+
+.svg-accel svg {
+    height: 100% !important;
 }
