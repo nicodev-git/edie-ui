@@ -145,7 +145,7 @@ export default class SearchFormView extends React.Component {
           <IconButton tooltip="Search" onTouchTap={onClickWorkflow} type="submit" ><ActionSearch /></IconButton>
 
           <IconButton tooltip="Favorite" onTouchTap={onClickStar}>{starFilled ? <FilledStar/> : <ToggleStar/>}</IconButton>
-          <FlatButton label="Saved Search" style={iconButtonStyle} onClick={onClickSavedSearch}/>
+          <FlatButton label="Saved Search" style={iconButtonStyle} onClick={onClickSavedSearch} className="nowrap"/>
           <IconButton tooltip="Illustrate" onTouchTap={onClickIllustrate}><LocalMovie/></IconButton>
           <IconButton tooltip="Related devices" onTouchTap={onClickRelDevices}><Computer/></IconButton>
           <IconButton tooltip="Non-related devices" onTouchTap={onClickIrrelDevices}><NoSim/></IconButton>

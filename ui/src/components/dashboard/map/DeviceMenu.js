@@ -118,10 +118,10 @@ export default class DeviceMenu extends React.Component {
       <div id="device-menu" className="panel-group devicediv" style={{top: '32px'}}>
         <div className="panel panel-default">
           <div className="panel-body">
-            <div className="navbar-search" style={{paddingLeft: '5px', paddingRight: '5px'}}>
+            <div className="navbar-search" style={{paddingLeft: '5px'}}>
               <input type="text" placeholder="Search …" className="form-control" onChange={this.onChangeDeviceSearch.bind(this)}/>
+              <button className="btn btn-default btn-sm" onClick={this.props.onNewIncident}>Add Incident</button>
             </div>
-            <button className="btn btn-default btn-sm" onClick={this.props.onNewIncident}>Add Incident</button>
           </div>
         </div>
 
