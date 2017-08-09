@@ -72,6 +72,10 @@ body {
     color: #5cb85c;
 }
 
+.text-primary {
+    color: #0088cc;
+}
+
 .text-ellipsis {
     white-space: nowrap;
     overflow: hidden;
