@@ -40,14 +40,16 @@ export default class GServers extends React.Component {
   }
 
   onClickItem (device) {
-    const {gauge} = this.props
+    const {gauge, selectGaugeBoard} = this.props
     if (gauge.forward && gauge.forwardBoardId) {
-      this.props.history.push({
-        pathname: '/dashboard',
-        query: {
-          id: gauge.forwardBoardId
-        }
-      })
+      if (selectGaugeBoard) {
+        selectGaugeBoard(gauge.forwardBoardId)
+      } else {
+        this.props.history.push({
+          pathname: '/dashboard',
+          search: `id=${gauge.forwardBoardId}`
+        })
+      }
     } else {
       this.props.history.push(`/device/${device.id}/dashboard`)
     }
