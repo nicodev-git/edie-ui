@@ -2,6 +2,7 @@ import React from 'react'
 import {IconButton, SelectField, MenuItem, RaisedButton} from 'material-ui'
 import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
 import {findIndex} from 'lodash'
+import {parse} from 'query-string'
 
 import { showPrompt } from 'components/common/Alert'
 
@@ -15,7 +16,11 @@ export default class MainDashboard extends React.Component {
   componentWillUpdate (nextProps) {
     const {gaugeBoards} = nextProps
     if (!this.props.gaugeBoards.length && gaugeBoards.length) {
-      nextProps.selectGaugeBoard(gaugeBoards[0].id)
+      const {id} = parse(this.props.location.search || {})
+      let index = -1
+      if (id) index = findIndex(gaugeBoards, {id})
+
+      nextProps.selectGaugeBoard(gaugeBoards[index >= 0 ? index : 0].id)
     }
   }
   getSelected () {
