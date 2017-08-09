@@ -442,6 +442,10 @@ export const SET_DEFAULT_BOARD = 'SET_DEFAULT_BOARD'
 
 ///////////////////////////////////////////////////////////////
 
+export const FETCH_MONITOR_GROUPS = 'FETCH_MONITOR_GROUPS'
+
+///////////////////////////////////////////////////////////////
+
 export const SHOW_SIMULATION_MODAL = 'SHOW_SIMULATION_MODAL'
 
 export const API_ERROR = 'API_ERROR'

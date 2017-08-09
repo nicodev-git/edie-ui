@@ -137,7 +137,9 @@ import {
   FETCH_DEVICE_CATEGORIES,
   TOGGLE_MAP_USER,
 
-  SHOW_SIMULATION_MODAL
+  SHOW_SIMULATION_MODAL,
+
+  FETCH_MONITOR_GROUPS
 
 } from 'actions/types'
 
@@ -588,7 +590,8 @@ export default function (state = initialState, action) {
       }
       return { ...state, mapUsers}
     }
-
+    case FETCH_MONITOR_GROUPS:
+      return { ...state, monitorGroups: action.data }
     default:
       return state
   }

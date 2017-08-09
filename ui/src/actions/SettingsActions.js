@@ -90,6 +90,8 @@ import {
   SHOW_SIMULATION_MODAL,
   TOGGLE_MAP_USER,
 
+  FETCH_MONITOR_GROUPS,
+
   NO_AUTH_ERROR
 } from './types'
 
@@ -798,5 +800,13 @@ export const postIncidentSimulation = (data) => {
 export const toggleMapUser = (data) => {
   return dispatch => {
     dispatch({type: TOGGLE_MAP_USER, data})
+  }
+}
+
+export const fetchMonitorGroups = () => {
+  return dispatch => {
+    axios.get(`${ROOT_URL}/monitorgroup`).then(response => {
+      dispatch({type: FETCH_MONITOR_GROUPS, data: response.data._embedded.monitorGroups})
+    }).catch(error => apiError(dispatch, error))
   }
 }
