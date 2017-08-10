@@ -293,6 +293,8 @@ export function getWidgetSize (gauge, devices) {
       return {w: 2, h: 1}
     case 'very big':
       return {w: 8, h: 2}
+    case 'extra big':
+      return {w: 12, h: 2}
     case 'big':
     default:
       return {w: 4, h: 2}
