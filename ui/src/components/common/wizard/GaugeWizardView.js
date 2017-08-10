@@ -128,6 +128,17 @@ export default class GaugeWizardView extends React.Component {
     )
   }
 
+  renderTable () {
+    const {workflows} = this.props
+
+    return (
+      <div>
+        <Field name="name" component={FormInput} floatingLabel="Name" className="valign-top mr-dialog"/>
+        <Field name="workflowId" component={FormSelect} floatingLabel="Workflow" options={workflows} className="valign-top mr-dialog"/>
+      </div>
+    )
+  }
+
   renderDevice () {
     const {devices, formValues} = this.props
     const deviceOptions = (devices || []).map(p => ({label: p.name, value: p.id}))
@@ -210,6 +221,8 @@ export default class GaugeWizardView extends React.Component {
     switch(templateName) {
       case 'Incident Table':
         return this.renderIncidentTable()
+      case 'Table':
+        return this.renderTable()
       case 'Cpu':
       case 'Memory':
       case 'Disk':
