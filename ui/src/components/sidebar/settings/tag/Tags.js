@@ -66,6 +66,18 @@ export default class Tags extends React.Component {
   onClickTagDevice (device) {
     this.props.history.push(`/device/${device.id}`)
   }
+  onClickTagWf (wf) {
+
+  }
+  onClickTagParserType (pt) {
+
+  }
+  onClickTagDeviceTpl (tpl) {
+
+  }
+  onClickTagMonitorTpl (tpl) {
+
+  }
   renderTagModal () {
     if (!this.props.tagModalOpen) return null
     return (
@@ -112,28 +124,28 @@ export default class Tags extends React.Component {
         {tagWorkflows.map(p =>
           <Chip
             key={p.id} style={chipStyles.chip} labelStyle={chipStyles.label}
-            onTouchTap={() => {}}>
+            onTouchTap={this.onClickTagWf.bind(this, p)}>
             <Avatar color={blue300} backgroundColor={indigo900}>W</Avatar>{p.name}
           </Chip>
         )}
         {tagParserTypes.map(p =>
           <Chip
             key={p.id} style={chipStyles.chip} labelStyle={chipStyles.label}
-            onTouchTap={() => {}}>
+            onTouchTap={this.onClickTagParserType.bind(this, p)}>
             <Avatar color={blue300} backgroundColor={indigo900}>P</Avatar>{p.name}
           </Chip>
         )}
         {tagDeviceTpls.map(p =>
           <Chip
             key={p.id} style={chipStyles.chip} labelStyle={chipStyles.label}
-            onTouchTap={() => {}}>
+            onTouchTap={this.onClickTagDeviceTpl.bind(this, p)}>
             <Avatar color={blue300} backgroundColor={indigo900}>DT</Avatar>{p.name}
           </Chip>
         )}
         {tagMonitorTpls.map(p =>
           <Chip
             key={p.id} style={chipStyles.chip} labelStyle={chipStyles.label}
-            onTouchTap={() => {}}>
+            onTouchTap={this.onClickTagMonitorTpl.bind(this, p)}>
             <Avatar color={blue300} backgroundColor={indigo900}>MT</Avatar>{p.name}
           </Chip>
         )}
