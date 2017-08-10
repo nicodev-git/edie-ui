@@ -252,13 +252,6 @@ export default class MainDashboardView extends React.Component {
 
   render () {
     const gauges = this.getGauges()
-    // const items = [...gauges]
-    // items.sort((a, b) => {
-    //   if (!a.layout && !b.layout) return 0
-    //   if (!a.layout || a.layout < b.layout) return -1
-    //   if (!b.layout || a.layout > b.layout) return 1
-    //   return 0
-    // })
     const layout = mw => {
       let x = 0
       let y = 0
