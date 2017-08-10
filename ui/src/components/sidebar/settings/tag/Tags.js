@@ -49,8 +49,8 @@ export default class Tags extends React.Component {
       (d.monitors || []).forEach(m => {
         let found = false
         if (m.tags && m.tags.length > 0) {
-          for (const tag in multiSelTags) {
-            if (m.tags.includes(tag.name)) {
+          for (const i in multiSelTags) {
+            if (m.tags.includes(multiSelTags[i].name)) {
               found = true
               break
             }
