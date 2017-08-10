@@ -71,7 +71,7 @@ export default class GBarChart extends React.Component {
       })
     } else if (resource === 'incident'){
       const searchParams = {
-        query: `deviceid=${device.id}`,
+        query: '',
         workflow: workflowId,
         collections: 'incident',
         severity: severities.map(p => p.value).join(','),
