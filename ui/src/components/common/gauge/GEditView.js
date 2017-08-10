@@ -32,7 +32,7 @@ export default class GEditView extends React.Component {
   constructor (props) {
     super(props)
 
-    const {gauge} = props
+    const {gauge, monitorGroup} = props
     this.state = {
       resource: gauge.resource || 'search',
       savedSearchId: gauge.savedSearchId || '',
@@ -40,7 +40,7 @@ export default class GEditView extends React.Component {
       monitorId: gauge.monitorId || '',
       workflowId: gauge.workflowId || '',
       serviceName: gauge.serviceName || '',
-      monitorIds: gauge.monitorIds || [],
+      monitorIds: (monitorGroup ? monitorGroup.monitorids : gauge.monitorIds) || [],
 
       duration: gauge.duration || '3',
       durationUnit: gauge.durationUnit || 'day',
@@ -60,9 +60,7 @@ export default class GEditView extends React.Component {
       showDeviceType: gauge.showDeviceType || false,
 
       forward: gauge.forward || false,
-      forwardBoardId: gauge.forwardBoardId || '',
-
-      selectedMonitors: gauge.monitorIds || []
+      forwardBoardId: gauge.forwardBoardId || ''
     }
   }
 
@@ -87,13 +85,13 @@ export default class GEditView extends React.Component {
   }
 
   toggleMonitorId (id) {
-    let {selectedMonitors} = this.state
-    if (selectedMonitors.includes(id)) {
-      selectedMonitors = selectedMonitors.filter(p => p !== id)
+    let {monitorIds} = this.state
+    if (monitorIds.includes(id)) {
+      monitorIds = monitorIds.filter(p => p !== id)
     } else {
-      selectedMonitors = [ ...selectedMonitors, id ]
+      monitorIds = [ ...monitorIds, id ]
     }
-    this.setState({ selectedMonitors })
+    this.setState({ monitorIds })
   }
 
   onClickDone () {
@@ -116,7 +114,7 @@ export default class GEditView extends React.Component {
 
   renderLogicalGroup () {
     const {devices} = this.props
-    const {selectedMonitors} = this.state
+    const {monitorIds} = this.state
 
     if (this.state.resource !== 'logicalgroup') return null
 
@@ -127,7 +125,7 @@ export default class GEditView extends React.Component {
             <tbody>
             {(devices || []).map(d => (d.monitors || []).map(p =>
               <tr key={p.uid}>
-                <td><Checkbox label={`${d.name} - ${p.name}`} checked={selectedMonitors.includes(p.uid)} onCheck={() => this.toggleMonitorId(p.uid)}/></td>
+                <td><Checkbox label={`${d.name} - ${p.name}`} checked={monitorIds.includes(p.uid)} onCheck={() => this.toggleMonitorId(p.uid)}/></td>
               </tr>
             ))}
             </tbody>

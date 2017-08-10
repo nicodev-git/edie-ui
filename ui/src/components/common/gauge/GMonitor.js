@@ -45,6 +45,7 @@ export default class GMonitor extends React.Component {
 
   onSubmit (options, values) {
     console.log(values)
+    const {monitorGroup} = this.state
 
     if (!values.name) {
       showAlert('Please type name.')
@@ -55,7 +56,15 @@ export default class GMonitor extends React.Component {
       ...values
     }
 
-    this.props.updateDeviceGauge(gauge, this.props.device)
+    if (gauge.resource === 'logicalgroup') {
+      if (!monitorGroup) {
+        showAlert('Monitor group not found.')
+        return
+      }
+      return
+    } else {
+      this.props.updateDeviceGauge(gauge, this.props.device)
+    }
     options.onClickFlip()
   }
 
@@ -89,6 +98,7 @@ export default class GMonitor extends React.Component {
     return (
       <GEditView
         {...this.props}
+        monitorGroup={this.state.monitorGroup}
         onSubmit={this.onSubmit.bind(this, options)}
         hideDuration
         hideSplit
