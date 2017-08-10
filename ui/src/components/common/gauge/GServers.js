@@ -34,9 +34,12 @@ export default class GServers extends React.Component {
   onClickDelete () {
     this.props.removeDeviceGauge(this.props.gauge, this.props.device)
   }
-  getMaxItemCount () {
+  getMaxItemCount (allDevices) {
     const {gauge}= this.props
-    return gauge.itemSize === 'slim' ? 24 : 24
+
+    const w = Math.max(Math.min(Math.ceil(allDevices.length / (gauge.itemSize === 'slim' ? 24 : 16)), 3), 1)
+
+    return w * (gauge.itemSize === 'slim' ? 24 : 16)
   }
 
   onClickItem (device) {
@@ -76,7 +79,8 @@ export default class GServers extends React.Component {
     )
   }
   renderFrontView () {
-    const items = filterGaugeServers(this.props.devices).slice(0, this.getMaxItemCount())
+    const allDevices = filterGaugeServers(this.props.devices)
+    const items = allDevices.slice(0, this.getMaxItemCount(allDevices))
     return (
       <div className="flex-vertical flex-1">
         <div className="flex-1" style={{overflow: 'hidden'}}>
