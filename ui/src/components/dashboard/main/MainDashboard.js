@@ -1,5 +1,5 @@
 import React from 'react'
-import {IconButton, SelectField, MenuItem, RaisedButton} from 'material-ui'
+import {IconButton, SelectField, MenuItem} from 'material-ui'
 import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
 import {findIndex} from 'lodash'
 import {parse} from 'query-string'

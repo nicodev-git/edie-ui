@@ -60,7 +60,9 @@ export default class GEditView extends React.Component {
       showDeviceType: gauge.showDeviceType || false,
 
       forward: gauge.forward || false,
-      forwardBoardId: gauge.forwardBoardId || ''
+      forwardBoardId: gauge.forwardBoardId || '',
+
+      selectedMonitors: gauge.monitorIds || []
     }
   }
 
@@ -84,6 +86,16 @@ export default class GEditView extends React.Component {
     })
   }
 
+  toggleMonitorId (id) {
+    let {selectedMonitors} = this.state
+    if (selectedMonitors.includes(id)) {
+      selectedMonitors = selectedMonitors.filter(p => p !== id)
+    } else {
+      selectedMonitors = [ ...selectedMonitors, id ]
+    }
+    this.setState({ selectedMonitors })
+  }
+
   onClickDone () {
     const {onSubmit} = this.props
     const {resource, savedSearchId, monitorId, workflowId, deviceId, serviceName, monitorIds,
@@ -100,6 +112,29 @@ export default class GEditView extends React.Component {
       forward, forwardBoardId
     }
     onSubmit && onSubmit(values)
+  }
+
+  renderLogicalGroup () {
+    const {devices} = this.props
+    const {selectedMonitors} = this.state
+
+    if (this.state.resource !== 'logicalgroup') return null
+
+    return (
+      <div className="col-md-6">
+        <div style={{maxHeight: 150, overflow: 'auto'}}>
+          <table className="table table-hover">
+            <tbody>
+            {(devices || []).map(d => (d.monitors || []).map(p =>
+              <tr key={p.uid}>
+                <td><Checkbox label={`${d.name} - ${p.name}`} checked={selectedMonitors.includes(p.uid)} onCheck={() => this.toggleMonitorId(p.uid)}/></td>
+              </tr>
+            ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    )
   }
 
   renderMonitorPick () {
@@ -167,6 +202,7 @@ export default class GEditView extends React.Component {
             </div>
           ) : null}
           {this.renderMonitorPick()}
+          {this.renderLogicalGroup()}
 
           {!hideDuration && <div className="col-md-3">
             <SelectField value={duration} floatingLabelText="Duration" className="valign-top mr-dialog" style={inputStyle} onChange={this.onChangeSelect.bind(this, 'duration')}>
