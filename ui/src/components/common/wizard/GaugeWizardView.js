@@ -221,8 +221,6 @@ export default class GaugeWizardView extends React.Component {
     switch(templateName) {
       case 'Incident Table':
         return this.renderIncidentTable()
-      case 'Table':
-        return this.renderTable()
       case 'Cpu':
       case 'Memory':
       case 'Disk':
