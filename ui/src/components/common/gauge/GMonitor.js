@@ -61,7 +61,17 @@ export default class GMonitor extends React.Component {
         showAlert('Monitor group not found.')
         return
       }
-      return
+
+      axios.put(monitorGroup._links.self.href, {
+        ...monitorGroup,
+        monitorids: gauge.monitorIds
+      }).then(res => {
+        gauge.monitorIds = []
+        gauge.monitorGroupId = res.data.id
+        this.props.updateDeviceGauge(gauge, this.props.device)
+      }).catch(() => {
+        showAlert('Update logical group failed.')
+      })
     } else {
       this.props.updateDeviceGauge(gauge, this.props.device)
     }
