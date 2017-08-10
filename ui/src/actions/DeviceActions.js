@@ -2,7 +2,7 @@ import axios from 'axios'
 import {assign, findIndex} from 'lodash'
 import {
   FETCH_DEVICES,
-  FETCH_GROUPS,
+  FETCH_DEVICES_GROUPS,
 
   OPEN_DEVICE,
   CLOSE_DEVICE,
@@ -159,10 +159,15 @@ const fetchDevicesSuccess = (dispatch, response) => {
   })
 }
 
-export const fetchGroups = () => {
+export const fetchDevicesGroups = () => {
   return dispatch => {
-    axios.get(`${ROOT_URL}/group?size=1000`).then(res => {
-      dispatch({type: FETCH_GROUPS, data: res.data._embedded.groups})
+    const reqs = []
+    reqs.push(axios.get(`${ROOT_URL}/group?size=1000`))
+    reqs.push(axios.get(`${ROOT_URL}/device?size=1000`))
+
+    axios.all(reqs).then(res => {
+      const data = [...res[0].data._embedded.devices, ...res[1].data._embedded.groups]
+      dispatch({type: FETCH_DEVICES_GROUPS, data})
     }).catch(error => apiError(dispatch, error))
   }
 }
