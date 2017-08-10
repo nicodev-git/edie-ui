@@ -66,7 +66,6 @@ export default class MainDashboard extends React.Component {
             )}
           </SelectField>
           <IconButton onTouchTap={this.onClickAdd.bind(this)} className="valign-bottom"><AddCircleIcon /></IconButton>
-          <RaisedButton className="top" label="Set Default" style={{marginTop: 30}} onTouchTap={this.onClickSetDefault.bind(this)}/>
         </div>
 
         <div className="flex-vertical flex-1">
