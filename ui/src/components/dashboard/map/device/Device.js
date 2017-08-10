@@ -25,12 +25,16 @@ export default class Device extends React.Component {
         this.props.fetchDevice(deviceId)
       } else {
         console.log('no fetching')
+        let found = false
         for (let device of this.props.devices) {
           if (device.id === deviceId) {
             console.log('open device')
             this.props.openDevice(device)
+            found = true
           }
         }
+        if (!found)
+          this.props.fetchDevice(deviceId)
       }
 
       return null

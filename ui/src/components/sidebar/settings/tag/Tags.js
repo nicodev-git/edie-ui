@@ -63,7 +63,9 @@ export default class Tags extends React.Component {
     })
     return monitors
   }
-
+  onClickTagDevice (device) {
+    this.props.history.push(`/device/${device.id}`)
+  }
   renderTagModal () {
     if (!this.props.tagModalOpen) return null
     return (
@@ -96,7 +98,7 @@ export default class Tags extends React.Component {
         {tagDevices.map(p =>
           <Chip
             key={p.id} style={chipStyles.chip} labelStyle={chipStyles.label}
-            onTouchTap={() => {}}>
+            onTouchTap={this.onClickTagDevice.bind(this, p)}>
             <Avatar color={blue300} backgroundColor={indigo900}>D</Avatar>{p.name}
           </Chip>
         )}
