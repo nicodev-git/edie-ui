@@ -11,7 +11,9 @@ import {
   removeTag,
   fetchTags,
   multiSelectTag,
-  fetchItemsByTags
+  fetchItemsByTags,
+
+  fetchDevices
 } from 'actions'
 
 class TagsContainer extends React.Component {
@@ -35,7 +37,9 @@ export default connect(
     tagParserTypes: state.tag.tagParserTypes,
     tagDeviceTpls: state.tag.tagDeviceTpls,
     tagMonitorTpls: state.tag.tagMonitorTpls,
-    tagMonitors: []
+    tagMonitors: [],
+
+    devices: state.devices.devices
   }), {
     showTagModal,
     addTag,
@@ -43,6 +47,8 @@ export default connect(
     removeTag,
     fetchTags,
     multiSelectTag,
-    fetchItemsByTags
+    fetchItemsByTags,
+
+    fetchDevices
   }
 )(withRouter(TagsContainer))

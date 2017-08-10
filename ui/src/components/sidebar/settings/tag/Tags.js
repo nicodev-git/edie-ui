@@ -17,6 +17,7 @@ import {chipStyles} from 'style/common/materialStyles'
 export default class Tags extends React.Component {
   componentWillMount () {
     this.props.fetchTags()
+    this.props.fetchDevices()
   }
   onRowDblClick (item) {
     this.props.showTagModal(true, item)
@@ -40,6 +41,29 @@ export default class Tags extends React.Component {
     this.props.multiSelectTag(items)
     this.props.fetchItemsByTags(items)
   }
+
+  getTagMonitors () {
+    const {multiSelTags} = this.props
+    const monitors = []
+    this.props.devices.forEach(d => {
+      (d.monitors || []).forEach(m => {
+        let found = false
+        if (m.tags && m.tags.length > 0) {
+          for (const tag in multiSelTags) {
+            if (m.tags.includes(tag.name)) {
+              found = true
+              break
+            }
+          }
+        }
+        if (found) {
+          monitors.push(m)
+        }
+      })
+    })
+    return monitors
+  }
+
   renderTagModal () {
     if (!this.props.tagModalOpen) return null
     return (
@@ -66,7 +90,7 @@ export default class Tags extends React.Component {
     )
   }
   renderItems () {
-    const {tagDevices, tagMonitors, tagWorkflows, tagParserTypes, tagDeviceTpls, tagMonitorTpls} = this.props
+    const {tagDevices, tagWorkflows, tagParserTypes, tagDeviceTpls, tagMonitorTpls} = this.props
     return (
       <div style={chipStyles.wrapper}>
         {tagDevices.map(p =>
@@ -76,9 +100,9 @@ export default class Tags extends React.Component {
             <Avatar color={blue300} backgroundColor={indigo900}>D</Avatar>{p.name}
           </Chip>
         )}
-        {tagMonitors.map(p =>
+        {this.getTagMonitors().map(p =>
           <Chip
-            key={p.id} style={chipStyles.chip} labelStyle={chipStyles.label}
+            key={p.uid} style={chipStyles.chip} labelStyle={chipStyles.label}
             onTouchTap={() => {}}>
             <Avatar color={blue300} backgroundColor={indigo900}>M</Avatar>{p.name}
           </Chip>
