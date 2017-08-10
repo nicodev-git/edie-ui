@@ -36,7 +36,7 @@ export default class GServers extends React.Component {
   }
   getMaxItemCount () {
     const {gauge}= this.props
-    return 24 * (gauge.itemSize === 'slim' ? 2 : 1)
+    return gauge.itemSize === 'slim' ? 24 : 24
   }
 
   onClickItem (device) {
@@ -58,7 +58,7 @@ export default class GServers extends React.Component {
   renderItemView(item, total) {
     const {gauge} = this.props
     const isUp = item.status === 'UP'
-    const col = Math.floor(12 / (gauge.itemSize === 'slim' ? 4 : 3) / Math.ceil(total / (gauge.itemSize === 'slim' ? 16 : 12)))
+    const col = Math.floor(12 / (gauge.itemSize === 'slim' ? 3 : 4) / Math.ceil(total / (gauge.itemSize === 'slim' ? 36 : 24)))
     const padding = ''
     return (
       <div key={item.id} className={`col-md-${col} text-center padding-xs ${padding}`} style={{height: gauge.itemSize === 'slim' ? '12.5%' : '25%'}}>

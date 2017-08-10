@@ -263,7 +263,7 @@ export default class MainDashboardView extends React.Component {
       let x = 0
       let y = 0
       return gauges.map((p, i) => {
-        const {w, h} = getWidgetSize(p)
+        const {w, h} = getWidgetSize(p, this.props.devices)
         if (p.layout && p.layout.i && w === p.layout.w && h === p.layout.h) {
           return {...p.layout , i: p.id}
         }

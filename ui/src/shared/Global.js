@@ -273,11 +273,20 @@ export const historicGauges = [{
 export const gaugeSizeList = ['small', 'medium', 'big', 'very big']
 
 export function filterGaugeServers (devices) {
-  return (devices || []).filter(p => p.templateName !== 'Long hub' && p.templateName !== 'Free Text' && !p.line)
+  return (devices || []) // .filter(p => p.templateName !== 'Long hub' && p.templateName !== 'Free Text' && !p.line)
 }
 
 export function getWidgetSize (gauge) {
-  switch(gauge.gaugeSize) {
+  let size = gauge.gaugeSize
+  // if (gauge.templateName === 'Servers') {
+  //   const count = filterGaugeServers(devices || []).length
+  //   const w = Math.max(Math.min(Math.ceil(count / (gauge.itemSize === 'slim' ? 24 : 16)), 3), 1)
+  //   if (w === 1) return size = 'big'
+  //   else if (w === 2) return size = 'very big'
+  //   else size = 'extra big'
+  // }
+
+  switch(size) {
     case 'small':
       return {w: 1, h: 1}
     case 'medium':
@@ -289,11 +298,4 @@ export function getWidgetSize (gauge) {
       return {w: 4, h: 2}
 
   }
-  // if (gauge.widgetSize === 0) {
-  //   if (gauge.templateName === 'Servers') {
-  //     const count = filterGaugeServers(mapDevices).length
-  //     return Math.max(Math.min(Math.ceil(count / (gauge.itemSize === 'slim' ? 16 : 12)), 3), 1)
-  //   }
-  // }
-  // return gauge.widgetSize || 1
 }
