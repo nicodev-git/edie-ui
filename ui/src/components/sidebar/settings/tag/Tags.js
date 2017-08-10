@@ -67,16 +67,16 @@ export default class Tags extends React.Component {
     this.props.history.push(`/device/${device.id}`)
   }
   onClickTagWf (wf) {
-
+    this.props.history.push(`/settings/tags/rules`)
   }
   onClickTagParserType (pt) {
-
+    this.props.history.push(`/settings/tags/parsertypes`)
   }
   onClickTagDeviceTpl (tpl) {
-
+    this.props.history.push(`/settings/tags/templates`)
   }
   onClickTagMonitorTpl (tpl) {
-
+    this.props.history.push(`/settings/tags/templates`)
   }
   renderTagModal () {
     if (!this.props.tagModalOpen) return null
