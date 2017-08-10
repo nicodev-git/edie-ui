@@ -70,7 +70,7 @@ export default class GLineChart extends React.Component {
   }
 
   fetchRecordCount (props) {
-    const {gauge, searchList, device} = props
+    const {gauge, searchList} = props
     const {savedSearchId, monitorId, resource, duration, durationUnit, splitBy, splitUnit,workflowId} = gauge
 
     this.setState({
