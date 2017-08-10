@@ -34,7 +34,8 @@ export default connect(
     tagWorkflows: state.tag.tagWorkflows,
     tagParserTypes: state.tag.tagParserTypes,
     tagDeviceTpls: state.tag.tagDeviceTpls,
-    tagMonitorTpls: state.tag.tagMonitorTpls
+    tagMonitorTpls: state.tag.tagMonitorTpls,
+    tagMonitors: []
   }), {
     showTagModal,
     addTag,
