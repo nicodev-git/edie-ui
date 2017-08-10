@@ -1,5 +1,6 @@
 import {
   FETCH_DEVICES,
+  FETCH_DEVICES_GROUPS,
   FETCH_DEVICE_INCIDENTS,
   ADD_DEVICE_INCIDENT,
   OPEN_ADD_DEVICE_INCIDENT,
@@ -143,13 +144,18 @@ const INITIAL_STATE = {
 
   workflowCategories: [],
   workflows: [],
-  workflowListDraw: 1
+  workflowListDraw: 1,
+
+  deviceAndGroups: []
 }
 
 export default function (state = INITIAL_STATE, action) {
   switch (action.type) {
     case FETCH_DEVICES:
       return { ...state, devices: action.payload }
+
+    case FETCH_DEVICES_GROUPS:
+      return { ...state, deviceAndGroups: action.data }
 
     case FETCH_DEVICE_INCIDENTS:
       return { ...state, incidents: action.data }

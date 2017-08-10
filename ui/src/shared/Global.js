@@ -272,6 +272,10 @@ export const historicGauges = [{
 
 export const gaugeSizeList = ['small', 'medium', 'big', 'very big']
 
+export function filterDevices (devices) {
+  return (devices || []).filter(p => p.templateName !== 'Long hub' && p.templateName !== 'Free Text' && !p.line)
+}
+
 export function filterGaugeServers (devices) {
   return (devices || []).filter(p => p.templateName !== 'Long hub' && p.templateName !== 'Free Text' && !p.line)
 }

@@ -55,7 +55,7 @@ export default class MainDashboardView extends React.Component {
     this.props.fetchGauges()
     this.props.fetchSysSearchOptions()
     this.props.fetchWorkflows()
-    this.props.fetchDevices()
+    this.props.fetchDevicesGroups()
   }
 
   getGauges () {

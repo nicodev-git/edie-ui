@@ -117,7 +117,7 @@ import {
 
 import { apiError, updateDeviceError } from './Errors'
 import { ROOT_URL } from './config'
-import { encodeUrlParams } from 'shared/Global'
+import { encodeUrlParams, filterDevices } from 'shared/Global'
 import { getAuthConfig, getWorkflowConfig } from './util'
 
 export const fetchDevice = (id) => {
@@ -162,11 +162,11 @@ const fetchDevicesSuccess = (dispatch, response) => {
 export const fetchDevicesGroups = () => {
   return dispatch => {
     const reqs = []
-    reqs.push(axios.get(`${ROOT_URL}/group?size=1000`))
     reqs.push(axios.get(`${ROOT_URL}/device?size=1000`))
+    reqs.push(axios.get(`${ROOT_URL}/group?size=1000`))
 
     axios.all(reqs).then(res => {
-      const data = [...res[0].data._embedded.devices, ...res[1].data._embedded.groups]
+      const data = [...filterDevices(res[0].data._embedded.devices), ...res[1].data._embedded.groups]
       dispatch({type: FETCH_DEVICES_GROUPS, data})
     }).catch(error => apiError(dispatch, error))
   }
