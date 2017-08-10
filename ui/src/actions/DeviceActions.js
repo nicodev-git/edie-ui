@@ -145,7 +145,7 @@ export const fetchDevices = () => {
     return dispatch => dispatch({ type: NO_AUTH_ERROR })
   }
   return (dispatch) => {
-    axios.get(`${ROOT_URL}/device`, getAuthConfig())
+    axios.get(`${ROOT_URL}/device?size=1000`, getAuthConfig())
       .then(response => fetchDevicesSuccess(dispatch, response))
       .catch(error => apiError(dispatch, error))
   }
