@@ -29,3 +29,5 @@ import './incidents.css'
 import './device.css'
 import './chat.css'
 import './threatmap.css'
+
+import './common/antd.css'
