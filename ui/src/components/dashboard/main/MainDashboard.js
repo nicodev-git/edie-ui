@@ -7,6 +7,7 @@ import {parse} from 'query-string'
 import { showPrompt } from 'components/common/Alert'
 
 import MainDashboardView from './MainDashboardView'
+import BoardListModal from './BoardListModal'
 
 export default class MainDashboard extends React.Component {
   componentWillMount () {
@@ -32,12 +33,13 @@ export default class MainDashboard extends React.Component {
     this.props.selectGaugeBoard(value)
   }
   onClickAdd () {
-    showPrompt('Please type name.', '', name => {
-      if (!name) return
-      this.props.addGaugeBoard({
-        name
-      })
-    })
+    // showPrompt('Please type name.', '', name => {
+    //   if (!name) return
+    //   this.props.addGaugeBoard({
+    //     name
+    //   })
+    // })
+    this.props.showGaugeBoardsModal(true)
   }
   onClickSetDefault () {
     const board = this.getSelected()
@@ -52,6 +54,12 @@ export default class MainDashboard extends React.Component {
     if (!board) return null
     return (
       <MainDashboardView board={board} {...this.props}/>
+    )
+  }
+  renderBoardsModal () {
+    if (!this.props.gaugeBoardsModalOpen) return
+    return (
+      <BoardListModal {...this.props}/>
     )
   }
   render () {
@@ -70,6 +78,7 @@ export default class MainDashboard extends React.Component {
 
         <div className="flex-vertical flex-1">
           {this.renderContent()}
+          {this.renderBoardsModal()}
         </div>
       </div>
     )

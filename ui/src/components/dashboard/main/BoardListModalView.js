@@ -1,4 +1,6 @@
 import React from 'react'
+import {Dialog} from 'material-ui'
+
 import { TwoButtonsBlockCustom } from 'components/modal/parts'
 
 export default class BoardListModalView extends React.Component {
