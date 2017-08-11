@@ -3,6 +3,7 @@ import React from 'react'
 import BoardListModalView from './BoardListModalView'
 
 import {showPrompt, showConfirm} from 'components/common/Alert'
+import {showAlert} from "../../common/Alert";
 
 export default class BoardListModal extends React.Component {
   constructor (props) {
@@ -12,7 +13,7 @@ export default class BoardListModal extends React.Component {
     }
   }
   onHide () {
-
+    this.props.showGaugeBoardsModal(false)
   }
 
   onClickAdd () {
@@ -38,15 +39,18 @@ export default class BoardListModal extends React.Component {
     showConfirm('Are you sure?', btn => {
       if (btn !== 'ok') return
       this.props.removeGaugeBoard(item)
+      this.setState({selected: null})
     })
   }
 
   onSelect (item) {
-
+    this.setState({selected: item})
   }
 
-  onClickSetDefault (item) {
-
+  onClickSetDefault () {
+    const {selected} = this.state
+    if (!selected) return showAlert('Please select dashboard.')
+    this.props.setDefaultGaugeBoard(selected)
   }
 
   render () {
