@@ -7,7 +7,7 @@ import React from 'react'
 // import { dateFormat } from 'shared/Global'
 
 import FlipView from './FlipView'
-import AccelMeterView from './display/AccelMeterView'
+import AccelView from './display/AccelMeterView'
 import GEditView from './GEditView'
 
 import {showAlert} from 'components/common/Alert'
@@ -50,7 +50,7 @@ export default class GAccelView extends React.Component {
     return (
       <div className="flex-vertical flex-1">
         <div className="flex-1 flex-vertical">
-          <AccelMeterView value={this.state.value} title={gauge.name}/>
+          <AccelView value={this.state.value} title={gauge.name}/>
         </div>
       </div>
     )
@@ -72,6 +72,7 @@ export default class GAccelView extends React.Component {
       <FlipView
         {...this.props}
 
+        hideHeader
         style={this.props.style}
         className={this.props.className}
         gauge={this.props.gauge}

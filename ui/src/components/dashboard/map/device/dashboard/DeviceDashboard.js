@@ -352,7 +352,7 @@ export default class DeviceDashboard extends React.Component {
         {this.renderAgent()}
         {this.renderAddMenu()}
         <ResponsiveReactGridLayout
-          className="layout" cols={cols} rowHeight={170}
+          className="layout" cols={cols} rowHeight={85}
           layouts={layouts}
           isResizable={false} margin={[10, 10]}
           style={{marginTop: -10}}

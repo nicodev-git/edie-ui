@@ -284,25 +284,37 @@ export function getWidgetSize (gauge, devices, flip) {
   let size = gauge.gaugeSize
   if (gauge.templateName === 'Servers') {
     const count = filterGaugeServers(devices || []).length
-    const w = Math.max(Math.min(Math.ceil(count / (gauge.itemSize === 'slim' ? 24 : 16)), 3), 1)
-    if (w === 1) size = 'big'
-    else if (w === 2) size = 'very big'
+    const ws = Math.max(Math.min(Math.ceil(count / (gauge.itemSize === 'slim' ? 24 : 16)), 3), 1)
+    if (ws === 1) size = 'big'
+    else if (ws === 2) size = 'very big'
     else size = 'extra big'
   }
   if (flip && (size === 'small' || size === 'medium')) {
     size = 'big'
   }
+
+  let wh = {w: 4, h: 4}
   switch(size) {
     case 'small':
-      return {w: 1, h: 1}
+      wh = {w: 1, h: 2}
+      break
     case 'medium':
-      return {w: 2, h: 1}
+      wh = {w: 2, h: 2}
+      break
     case 'very big':
-      return {w: 8, h: 2}
+      wh = {w: 8, h: 4}
+      break
     case 'extra big':
-      return {w: 12, h: 2}
+      wh = {w: 12, h: 4}
+      break
     case 'big':
     default:
-      return {w: 4, h: 2}
+      wh = {w: 4, h: 2}
   }
+
+  if (gauge.templateName === 'Accelerometer') {
+    wh.h = 1
+  }
+
+  return wh
 }

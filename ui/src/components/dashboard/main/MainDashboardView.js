@@ -264,7 +264,7 @@ export default class MainDashboardView extends React.Component {
       let x = 0
       let y = 0
       return gauges.map((p, i) => {
-        const {w, h} = getWidgetSize(p, this.props.devices, this.state.flip[p.id])
+        let {w, h} = getWidgetSize(p, this.props.devices, this.state.flip[p.id])
         if (p.layout && p.layout.i) {
           if (w === p.layout.w && h === p.layout.h) return {...p.layout, i: p.id}
           return {...p.layout, i: p.id, w, h}
@@ -299,7 +299,7 @@ export default class MainDashboardView extends React.Component {
       <div>
         {this.renderAddMenu()}
         <ResponsiveReactGridLayout
-          className="layout" cols={cols} rowHeight={170}
+          className="layout" cols={cols} rowHeight={85}
           layouts={layouts}
           isResizable={false} margin={[10, 10]}
           style={{marginTop: -10}}
