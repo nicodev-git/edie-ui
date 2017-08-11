@@ -312,7 +312,7 @@ export function getWidgetSize (gauge, devices, flip) {
       wh = {w: 4, h: 4}
   }
 
-  if (gauge.templateName === 'Accelerometer') {
+  if (!flip && gauge.templateName === 'Accelerometer') {
     wh.h = 1
   }
 
