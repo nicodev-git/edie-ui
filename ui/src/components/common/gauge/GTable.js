@@ -67,8 +67,8 @@ export default class GTable extends React.Component {
       console.log('Saved search not found.')
       return {
         draw: this.props.incidentDraw,
-        dateFrom: dateFrom.format(dateFormat),
-        dateTo: dateTo.format(dateFormat),
+        afterStartTimestamp: dateFrom,
+        beforeStartTimestamp: dateTo,
         query: '',
         workflow: '',
         collections: 'incident,event',
@@ -81,8 +81,10 @@ export default class GTable extends React.Component {
     const searchParams = JSON.parse(searchList[index].data)
 
     const params = { ...searchParams,
-      dateFrom: dateFrom.format(dateFormat),
-      dateTo: dateTo.format(dateFormat)
+      draw: this.props.incidentDraw,
+      afterStartTimestamp: dateFrom,
+      beforeStartTimestamp: dateTo,
+      sort: 'startTimestamp,desc'
     }
 
     return params
@@ -93,7 +95,7 @@ export default class GTable extends React.Component {
   renderFrontView () {
     return (
       <div className="flex-vertical flex-1">
-        <NormalTable {...this.props} params={this.props.params}/>
+        <NormalTable {...this.props} params={this.getParams()}/>
       </div>
     )
   }

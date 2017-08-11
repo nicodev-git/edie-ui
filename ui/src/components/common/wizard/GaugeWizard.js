@@ -159,6 +159,7 @@ class GaugeWizard extends React.Component {
     }))
 
     const durationVisible = templateName !== 'Up/Down'
+    const splitVisible = templateName !== 'Table'
 
     const workflowOptions = workflows.map(p => ({label: p.name, value: p.id}))
     const serviceOptions = this.state.services.map(p => ({label: p.DisplayName || p.ServiceName, value: p.ServiceName}))
@@ -178,6 +179,7 @@ class GaugeWizard extends React.Component {
 
         formValues={formValues}
         durationVisible={durationVisible}
+        splitVisible={splitVisible}
 
         selectedSeverity={this.state.selectedSeverity}
         onChangeSeverity={this.onChangeSeverity.bind(this)}

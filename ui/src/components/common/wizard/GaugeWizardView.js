@@ -61,7 +61,7 @@ export default class GaugeWizardView extends React.Component {
     )
   }
   renderNormal () {
-    const {searchList, workflows, formValues, durationVisible} = this.props
+    const {searchList, workflows, formValues, durationVisible, splitVisible} = this.props
 
     return (
       <div>
@@ -81,7 +81,7 @@ export default class GaugeWizardView extends React.Component {
           ) : null
         }
 
-        {formValues.resource === 'search' || formValues.resource === 'incident' ? (
+        {splitVisible && (formValues.resource === 'search' || formValues.resource === 'incident') ? (
           <div className="inline-block">
             <Field name="splitBy" component={FormSelect} floatingLabel="Resolution" options={durations} className="valign-top mr-dialog" style={{width: 100}}/>
             <Field name="splitUnit" component={FormSelect} floatingLabel="  "options={gaugeDurationTypes} className="valign-top" style={{width: 120}}/>
