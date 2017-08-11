@@ -20,14 +20,18 @@ export default class BoardListModalView extends React.Component {
             {gaugeBoards.map(p =>
               <tr key={p.id}>
                 <td>{p.name}</td>
-                <td className="text-right">
-                  <IconButton style={{padding: 0, width: 24, height: 24}} onTouchTap={() => onClickEdit(p)}>
-                    <EditIcon color="#545454" hoverColor="#f44336"/>
-                  </IconButton>&nbsp;&nbsp;&nbsp;
-                  <IconButton style={{padding: 0, width: 24, height: 24}} onTouchTap={() => onClickDelete(p)}>
-                    <DeleteIcon color="#545454" hoverColor="#f44336"/>
-                  </IconButton>
-                </td>
+                {p.origin === 'SYSTEM' ? (
+                  <td/>
+                ) : (
+                  <td className="text-right">
+                    <IconButton style={{padding: 0, width: 24, height: 24}} onTouchTap={() => onClickEdit(p)}>
+                      <EditIcon color="#545454" hoverColor="#f44336"/>
+                    </IconButton>&nbsp;&nbsp;&nbsp;
+                    <IconButton style={{padding: 0, width: 24, height: 24}} onTouchTap={() => onClickDelete(p)}>
+                      <DeleteIcon color="#545454" hoverColor="#f44336"/>
+                    </IconButton>
+                  </td>
+                )}
               </tr>
             )}
             </tbody>
