@@ -309,7 +309,7 @@ export function getWidgetSize (gauge, devices, flip) {
       break
     case 'big':
     default:
-      wh = {w: 4, h: 2}
+      wh = {w: 4, h: 4}
   }
 
   if (gauge.templateName === 'Accelerometer') {
