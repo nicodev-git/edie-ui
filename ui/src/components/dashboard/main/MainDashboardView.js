@@ -50,7 +50,8 @@ export default class MainDashboardView extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      deviceWizardVisible: false
+      deviceWizardVisible: false,
+      flip: {}
     }
   }
   componentWillMount () {
@@ -160,14 +161,6 @@ export default class MainDashboardView extends React.Component {
   onLayoutChange (layout, oldItem, newItem, e2, e) {
     if (JSON.stringify(oldItem) === JSON.stringify(newItem)) return
     const gaugeItems = this.getGauges()
-    // const layouts = [...layout]
-    // layouts.sort((a, b) => {
-    //   const v1 = a.y * 100 + a.x
-    //   const v2 = b.y * 100 + b.x
-    //   if (v1 < v2) return -1
-    //   if (v1 > v2) return 1
-    //   return 0
-    // })
     const items = []
     layout.forEach((p, i) => {
       const index = findIndex(gaugeItems, {id: p.i})
@@ -222,6 +215,8 @@ export default class MainDashboardView extends React.Component {
           searchList={this.getSearchList()}
           devices={this.props.devices}
           monitors={this.getMonitors()}
+
+          flip={this.state.flip[p.id]}
 
           updateDeviceGauge={gauge => this.props.updateGaugeItem(gauge, this.props.board)}
           removeDeviceGauge={gauge => this.props.removeGaugeItem(gauge, this.props.board)}

@@ -25,8 +25,11 @@ export default class FlipView extends React.Component {
   }
 
   onClickFlip (e) {
+    const {onClickFlip} = this.props
     this.setState({flip: !this.state.flip, clicked: true})
     e && e.preventDefault()
+
+    onClickFlip && onClickFlip()
   }
 
   onMouseEnter () {
@@ -54,11 +57,6 @@ export default class FlipView extends React.Component {
   }
 
   renderFront () {
-    // return (
-    //   <GaugeFrontView
-    //     {...this.props} {...this.state} onClickFlip={this.onClickFlip.bind(this)}
-    //   />
-    // )
     const {renderFrontView, viewOnly} = this.props
     return (
       <div
@@ -72,18 +70,6 @@ export default class FlipView extends React.Component {
   }
 
   renderBack () {
-    // return (
-    //   <GaugeBackView
-    //     {...this.props} {...this.state} onClickDone={this.onClickDone.bind(this)}
-    //     onChangeSplitBy={this.onChangeSplitBy.bind(this)}
-    //     onChangeSplitUnit={this.onChangeSplitUnit.bind(this)}
-    //     onChangeSearch={this.onChangeSearch.bind(this)}
-    //     onChangeName={this.onChangeName.bind(this)}
-    //     onChangeDuration={this.onChangeDuration.bind(this)}
-    //     onChangeDurationUnit={this.onChangeDurationUnit.bind(this)}
-    //     onChangeResource={this.onChangeResource.bind(this)}
-    //   />
-    // )
     const {renderBackView} = this.props
     return renderBackView && renderBackView({
       onClickFlip: this.onClickFlip.bind(this)
