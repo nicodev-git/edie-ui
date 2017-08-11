@@ -1,10 +1,13 @@
 import React from 'react'
+import moment from 'moment'
+import {findIndex} from 'lodash'
 
 import FlipView from './FlipView'
 import NormalTable from './display/NormalTable'
 import GEditView from './GEditView'
 
 import {showAlert} from 'components/common/Alert'
+import { dateFormat, severities } from 'shared/Global'
 
 export default class GTable extends React.Component {
   constructor (props) {
@@ -36,12 +39,61 @@ export default class GTable extends React.Component {
     this.props.removeDeviceGauge(this.props.gauge, this.props.device)
   }
 
+  getParams () {
+    const {searchList, gauge} = this.props
+    const {resource, duration, durationUnit, workflowId, savedSearchId} = gauge
+
+    const dateFrom = moment().add(-duration, `${durationUnit}s`).startOf(durationUnit).format(dateFormat)
+    const dateTo = moment().endOf(durationUnit).format(dateFormat)
+
+    if (resource === 'incident')  {
+      const searchParams = {
+        draw: this.props.incidentDraw,
+        query: '',
+        workflow: workflowId || '',
+        collections: 'incident',
+        afterStartTimestamp: dateFrom,
+        beforeStartTimestamp: dateTo,
+        severity: severities.map(p => p.value).join(','),
+        tag: '',
+        monitorTypes: '',
+        sort: 'startTimestamp,desc'
+      }
+      return searchParams
+    }
+
+    const index = findIndex(searchList, {id: savedSearchId})
+    if (index < 0) {
+      console.log('Saved search not found.')
+      return {
+        draw: this.props.incidentDraw,
+        dateFrom: dateFrom.format(dateFormat),
+        dateTo: dateTo.format(dateFormat),
+        query: '',
+        workflow: '',
+        collections: 'incident,event',
+        severity: 'HIGH,MEDIUM',
+        tag: '',
+        monitorTypes: '',
+        sort: 'startTimestamp,desc'
+      }
+    }
+    const searchParams = JSON.parse(searchList[index].data)
+
+    const params = { ...searchParams,
+      dateFrom: dateFrom.format(dateFormat),
+      dateTo: dateTo.format(dateFormat)
+    }
+
+    return params
+  }
+
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   renderFrontView () {
     return (
       <div className="flex-vertical flex-1">
-        <NormalTable {...this.props}/>
+        <NormalTable {...this.props} params={this.props.params}/>
       </div>
     )
   }
