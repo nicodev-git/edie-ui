@@ -51,9 +51,9 @@ export default class GTable extends React.Component {
         draw: this.props.incidentDraw,
         query: '',
         workflow: workflowId || '',
-        collections: 'incident',
-        afterStartTimestamp: dateFrom,
-        beforeStartTimestamp: dateTo,
+        collections: 'incident,event',
+        dateFrom,
+        dateTo,
         severity: severities.map(p => p.value).join(','),
         tag: '',
         monitorTypes: '',
@@ -67,8 +67,8 @@ export default class GTable extends React.Component {
       console.log('Saved search not found.')
       return {
         draw: this.props.incidentDraw,
-        afterStartTimestamp: dateFrom,
-        beforeStartTimestamp: dateTo,
+        dateFrom,
+        dateTo,
         query: '',
         workflow: '',
         collections: 'incident,event',
@@ -82,8 +82,8 @@ export default class GTable extends React.Component {
 
     const params = { ...searchParams,
       draw: this.props.incidentDraw,
-      afterStartTimestamp: dateFrom,
-      beforeStartTimestamp: dateTo,
+      dateFrom,
+      dateTo,
       sort: 'startTimestamp,desc'
     }
 
@@ -105,7 +105,6 @@ export default class GTable extends React.Component {
         <GEditView
           {...this.props}
           onSubmit={this.onSubmit.bind(this, options)}
-          hideDuration
           hideSplit
         />
       </div>
