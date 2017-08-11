@@ -318,3 +318,7 @@ export function getWidgetSize (gauge, devices, flip) {
 
   return wh
 }
+
+export const gaugeAspectRatio = {
+  'Liquid': {w: 1, h: 1}
+}

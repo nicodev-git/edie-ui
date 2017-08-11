@@ -8,7 +8,7 @@ import 'react-grid-layout/css/styles.css'
 import 'react-resizable/css/styles.css'
 
 import GaugeWizardContainer from 'containers/shared/wizard/GaugeWizardContainer'
-import { extImageBaseUrl, guid, getWidgetSize } from 'shared/Global'
+import { extImageBaseUrl, guid, getWidgetSize, gaugeAspectRatio } from 'shared/Global'
 import { wizardConfig } from 'components/common/wizard/WizardConfig'
 
 import {showAlert} from 'components/common/Alert'
@@ -63,6 +63,13 @@ export default class MainDashboardView extends React.Component {
 
   getGauges () {
     return this.props.board.gauges || []
+  }
+
+  findGauge (id) {
+    const gauges = this.getGauges()
+    const index = findIndex(gauges, {id})
+    if (index < 0) return null
+    return gauges[index]
   }
 
   getUserSearchOptions () {
@@ -175,6 +182,23 @@ export default class MainDashboardView extends React.Component {
       })
     })
     this.props.updateGaugeItem(items, this.props.board)
+  }
+  onResize (layout, oldItem, newItem, placeholder, mouseEvent, el) {
+    const gauge = this.findGauge(newItem.i)
+    if (!gauge) return
+    const ratio = gaugeAspectRatio[gauge.templateName]
+    if (!ratio) return
+    if (newItem.w !== oldItem.w) {
+      newItem.h = Math.ceil(newItem.w / ratio.w * ratio.h)
+    } else {
+      newItem.w = Math.ceil(newItem.h / ratio.h * ratio.w)
+    }
+  }
+  onResizeStop (layout, oldItem, newItem, placeholder, mouseEvent, el) {
+    if (JSON.stringify(oldItem) === JSON.stringify(newItem)) return
+    console.log(newItem)
+    // newItem.w = oldItem.w
+    // newItem.h = oldItem.h
   }
 
   onClickFlip (id) {
@@ -303,7 +327,10 @@ export default class MainDashboardView extends React.Component {
           layouts={layouts}
           margin={[10, 10]}
           style={{marginTop: -10}}
-          onDragStop={this.onLayoutChange.bind(this)}>
+          onDragStop={this.onLayoutChange.bind(this)}
+          onResize={this.onResize.bind(this)}
+          onResizeStop={this.onResize.bind(this)}
+        >
           {gauges.map(p => this.renderGauge(p))}
         </ResponsiveReactGridLayout>
 
