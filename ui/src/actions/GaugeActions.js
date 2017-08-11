@@ -9,7 +9,9 @@ import {
   UPDATE_GAUGE_BOARD,
   REMOVE_GAUGE_BOARD,
 
-  SELECT_GAUGE_BOARD
+  SELECT_GAUGE_BOARD,
+
+  SHOW_GAUGE_BOARDS_MODAL
 } from './types'
 
 import { apiError } from './Errors'
@@ -121,5 +123,11 @@ export const setDefaultGaugeBoard = (entity) => {
     }).then(res => {
       dispatch({type: UPDATE_GAUGE_BOARD, data: res.data})
     })
+  }
+}
+
+export const showGaugeBoardsModal = (visible) => {
+  return dispatch => {
+    dispatch({type: SHOW_GAUGE_BOARDS_MODAL, visible})
   }
 }

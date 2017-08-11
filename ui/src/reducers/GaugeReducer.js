@@ -7,7 +7,9 @@ import {
   UPDATE_GAUGE_BOARD,
   REMOVE_GAUGE_BOARD,
 
-  SELECT_GAUGE_BOARD
+  SELECT_GAUGE_BOARD,
+
+  SHOW_GAUGE_BOARDS_MODAL
 } from 'actions/types'
 
 const INITIAL_STATE = {
@@ -33,6 +35,8 @@ export default function (state = INITIAL_STATE, action) {
       return { ...state, gaugeBoards: state.gaugeBoards.filter(p => p.id !== action.data.id) }
     case SELECT_GAUGE_BOARD:
       return { ...state, selectedGaugeBoard: action.data }
+    case SHOW_GAUGE_BOARDS_MODAL:
+      return { ...state, gaugeBoardsModalOpen: !!action.visible }
     default:
       return state
   }
