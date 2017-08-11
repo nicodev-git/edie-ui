@@ -7,9 +7,9 @@ export default class BoardListModalView extends React.Component {
   render () {
     const {onHide, gaugeBoards} = this.props
     return (
-      <Dialog open title="Dashboards" onRequestClose={onHide}>
+      <Dialog open title="Dashboards" onRequestClose={onHide} contentStyle={{width: 600}}>
         <div style={{maxHeight: 300, overflow: 'auto'}}>
-          <table>
+          <table className="table table-hover">
             <thead>
               <tr>
                 <th>Name</th>

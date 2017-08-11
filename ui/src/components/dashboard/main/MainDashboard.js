@@ -4,8 +4,6 @@ import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
 import {findIndex} from 'lodash'
 import {parse} from 'query-string'
 
-import { showPrompt } from 'components/common/Alert'
-
 import MainDashboardView from './MainDashboardView'
 import BoardListModal from './BoardListModal'
 
