@@ -5,6 +5,12 @@ import BoardListModalView from './BoardListModalView'
 import {showPrompt, showConfirm} from 'components/common/Alert'
 
 export default class BoardListModal extends React.Component {
+  constructor (props) {
+    super (props)
+    this.state = {
+      selected: null
+    }
+  }
   onHide () {
 
   }
@@ -35,15 +41,26 @@ export default class BoardListModal extends React.Component {
     })
   }
 
+  onSelect (item) {
+
+  }
+
+  onClickSetDefault (item) {
+
+  }
+
   render () {
     const {gaugeBoards} = this.props
     return (
       <BoardListModalView
+        selected={this.state.selected}
         onHide={this.onHide.bind(this)}
         gaugeBoards={gaugeBoards}
+        onSelect={this.onSelect.bind(this)}
         onClickAdd={this.onClickAdd.bind(this)}
         onClickEdit={this.onClickEdit.bind(this)}
         onClickDelete={this.onClickDelete.bind(this)}
+        onClickSetDefault={this.onClickSetDefault.bind(this)}
       />
     )
   }

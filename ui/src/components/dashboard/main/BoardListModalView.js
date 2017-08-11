@@ -5,7 +5,7 @@ import EditIcon from 'material-ui/svg-icons/editor/mode-edit'
 
 export default class BoardListModalView extends React.Component {
   render () {
-    const {onHide, gaugeBoards, onClickAdd, onClickEdit, onClickDelete} = this.props
+    const {onHide, gaugeBoards, onClickAdd, onClickEdit, onClickDelete, onClickSetDefault} = this.props
     return (
       <Dialog open title="Dashboards" onRequestClose={onHide} contentStyle={{width: 400}}>
         <div style={{maxHeight: 300, overflow: 'auto'}}>
@@ -38,6 +38,7 @@ export default class BoardListModalView extends React.Component {
           </table>
         </div>
         <div className="form-buttons close-block">
+          <FlatButton label="Set Default" onClick={onClickSetDefault} />
           <FlatButton label="Add" onClick={onClickAdd} primary/>
           <FlatButton label="OK" onClick={onHide} primary/>
         </div>
