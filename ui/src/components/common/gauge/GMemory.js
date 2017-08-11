@@ -27,6 +27,9 @@ const chartOptions = {
     }
   },
   scales: {
+    xAxes: [{
+      display: false
+    }],
     yAxes: [{
       display: true,
       ticks: {

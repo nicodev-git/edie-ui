@@ -14,6 +14,31 @@ import {showAlert} from 'components/common/Alert'
 
 const sampleData = []
 
+const chartOptions = {
+  legend: {
+    display: false
+  },
+  elements: {
+    line: {
+      tension: 0
+    }
+  },
+  scales: {
+    xAxes: [{
+      display: false
+    }],
+    yAxes: [{
+      display: true,
+      ticks: {
+        min: 0,
+        callback: function(value, index, values) {
+          if (Math.floor(value) === value) return value
+        }
+      }
+    }]
+  }
+}
+
 export default class GBarChart extends React.Component {
   constructor (props) {
     super (props)
@@ -132,7 +157,6 @@ export default class GBarChart extends React.Component {
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   renderFrontView () {
-    const {gauge} = this.props
     const {searchRecordCounts} = this.state
 
     const chartData = {
@@ -143,31 +167,6 @@ export default class GBarChart extends React.Component {
         borderColor: '#269C8B',
         fill: false
       }]
-    }
-
-    const chartOptions = {
-      legend: {
-        display: false
-      },
-      elements: {
-        line: {
-          tension: 0
-        }
-      },
-      scales: {
-        xAxes: [{
-          display: gauge.gaugeSize !== 'small'
-        }],
-        yAxes: [{
-          display: true,
-          ticks: {
-            min: 0,
-            callback: function(value, index, values) {
-              if (Math.floor(value) === value) return value
-            }
-          }
-        }]
-      }
     }
 
     return (

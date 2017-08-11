@@ -14,6 +14,31 @@ import {showAlert} from 'components/common/Alert'
 
 const sampleData = []
 
+const chartOptions = {
+  legend: {
+    display: false
+  },
+  elements: {
+    line: {
+      tension: 0
+    }
+  },
+  scales: {
+    xAxes: [{
+      display: false
+    }],
+    yAxes: [{
+      display: true,
+      ticks: {
+        min: 0,
+        callback: function(value, index, values) {
+          if (Math.floor(value) === value) return value
+        }
+      }
+    }]
+  }
+}
+
 const monitorChartOptions = {
   legend: {
     display: false
@@ -24,6 +49,9 @@ const monitorChartOptions = {
     }
   },
   scales: {
+    xAxes: [{
+      display: false
+    }],
     yAxes: [{
       display: true,
       ticks: {
@@ -174,31 +202,6 @@ export default class GLineChart extends React.Component {
         borderColor: '#269C8B',
         fill: false
       }]
-    }
-
-    const chartOptions = {
-      legend: {
-        display: false
-      },
-      elements: {
-        line: {
-          tension: 0
-        }
-      },
-      scales: {
-        xAxes: [{
-          display: gauge.gaugeSize !== 'small'
-        }],
-        yAxes: [{
-          display: true,
-          ticks: {
-            min: 0,
-            callback: function(value, index, values) {
-              if (Math.floor(value) === value) return value
-            }
-          }
-        }]
-      }
     }
 
     return (
