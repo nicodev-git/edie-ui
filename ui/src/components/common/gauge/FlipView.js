@@ -48,7 +48,7 @@ export default class FlipView extends React.Component {
     const {hovered} = this.state
     return (
       <div
-        style={{position: 'absolute', right: 5, bottom: 0}}
+        style={{position: 'absolute', right: 10, bottom: 10}}
         className={`link info-button ${hovered ? 'visible' : ''}`}
         onClick={this.onClickFlip.bind(this)}>
         <InfoIcon size={24}/>

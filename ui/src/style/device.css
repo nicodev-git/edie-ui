@@ -374,6 +374,7 @@
 
 .card {
     position: relative;
+    z-index: 0;
 }
 
 .card .card-front {
