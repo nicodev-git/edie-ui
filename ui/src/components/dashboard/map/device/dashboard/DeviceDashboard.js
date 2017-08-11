@@ -52,7 +52,8 @@ export default class DeviceDashboard extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      agentDevice: props.device
+      agentDevice: props.device,
+      flip: {}
     }
   }
 
@@ -203,14 +204,6 @@ export default class DeviceDashboard extends React.Component {
   onLayoutChange (layout, oldItem, newItem, e2, e) {
     if (JSON.stringify(oldItem) === JSON.stringify(newItem)) return
     const {device} = this.props
-    // const layouts = [...layout]
-    // layouts.sort((a, b) => {
-    //   const v1 = a.y * 100 + a.x
-    //   const v2 = b.y * 100 + b.x
-    //   if (v1 < v2) return -1
-    //   if (v1 > v2) return 1
-    //   return 0
-    // })
     const items = layout.map((p, i) => {
       const index = findIndex(device.gauges, {id: p.i})
       return {
@@ -223,6 +216,16 @@ export default class DeviceDashboard extends React.Component {
       }
     })
     this.props.updateDeviceGauge(items, device)
+  }
+
+  onClickFlip (id) {
+    const {flip} = this.state
+    this.setState({
+      flip: {
+        ...flip,
+        [id]: !flip[id]
+      }
+    })
   }
   /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   renderDeviceWizard () {
@@ -261,6 +264,9 @@ export default class DeviceDashboard extends React.Component {
           gauge={p}
           searchList={this.getSearchList()}
           monitors={this.getMonitors()}
+
+          flip={this.state.flip[p.id]}
+          onClickFlip={this.onClickFlip.bind(this, p.id)}
 
           updateDeviceGauge={this.props.updateDeviceGauge}
           removeDeviceGauge={this.props.removeDeviceGauge}
@@ -306,19 +312,12 @@ export default class DeviceDashboard extends React.Component {
 
   render () {
     const gauges = this.getGauges()
-    // const items = [...gauges]
-    // items.sort((a, b) => {
-    //   if (!a.layout && !b.layout) return 0
-    //   if (!a.layout || a.layout < b.layout) return -1
-    //   if (!b.layout || a.layout > b.layout) return 1
-    //   return 0
-    // })
     const layout = mw => {
       let x = 0
       let y = 0
 
       return gauges.map((p, i) => {
-        const {w, h} = getWidgetSize(p, this.props.mapDevices)
+        const {w, h} = getWidgetSize(p, this.props.mapDevices, this.state.flip[p.id])
         if (p.layout && p.layout.i && w === p.layout.w && h === p.layout.h) {
           return {...p.layout , i: p.id}
         }
