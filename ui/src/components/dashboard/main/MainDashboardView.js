@@ -176,6 +176,16 @@ export default class MainDashboardView extends React.Component {
     })
     this.props.updateGaugeItem(items, this.props.board)
   }
+
+  onClickFlip (id) {
+    const {flip} = this.state
+    this.setState({
+      flip: {
+        ...flip,
+        [id]: !flip[id]
+      }
+    })
+  }
   /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   renderDeviceWizard () {
     if (!this.state.deviceWizardVisible) return null
@@ -217,6 +227,7 @@ export default class MainDashboardView extends React.Component {
           monitors={this.getMonitors()}
 
           flip={this.state.flip[p.id]}
+          onClickFlip={this.onClickFlip.bind(this, p.id)}
 
           updateDeviceGauge={gauge => this.props.updateGaugeItem(gauge, this.props.board)}
           removeDeviceGauge={gauge => this.props.removeGaugeItem(gauge, this.props.board)}
@@ -253,9 +264,10 @@ export default class MainDashboardView extends React.Component {
       let x = 0
       let y = 0
       return gauges.map((p, i) => {
-        const {w, h} = getWidgetSize(p, this.props.devices)
-        if (p.layout && p.layout.i && w === p.layout.w && h === p.layout.h) {
-          return {...p.layout , i: p.id}
+        const {w, h} = getWidgetSize(p, this.props.devices, this.state.flip[p.id])
+        if (p.layout && p.layout.i) {
+          if (w === p.layout.w && h === p.layout.h) return {...p.layout, i: p.id}
+          return {...p.layout, i: p.id, w, h}
         }
         if (x + w > mw) {
           x = 0

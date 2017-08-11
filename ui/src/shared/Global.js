@@ -280,7 +280,7 @@ export function filterGaugeServers (devices) {
   return (devices || []).filter(p => p.templateName !== 'Long hub' && p.templateName !== 'Free Text' && !p.line)
 }
 
-export function getWidgetSize (gauge, devices) {
+export function getWidgetSize (gauge, devices, flip) {
   let size = gauge.gaugeSize
   if (gauge.templateName === 'Servers') {
     const count = filterGaugeServers(devices || []).length
@@ -289,7 +289,9 @@ export function getWidgetSize (gauge, devices) {
     else if (w === 2) size = 'very big'
     else size = 'extra big'
   }
-
+  if (flip && (size === 'small' || size === 'medium')) {
+    size = 'big'
+  }
   switch(size) {
     case 'small':
       return {w: 1, h: 1}
@@ -302,6 +304,5 @@ export function getWidgetSize (gauge, devices) {
     case 'big':
     default:
       return {w: 4, h: 2}
-
   }
 }

@@ -69,6 +69,9 @@ export default class GMonitor extends React.Component {
         gauge.monitorIds = []
         gauge.monitorGroupId = res.data.id
         this.props.updateDeviceGauge(gauge, this.props.device)
+        this.setState({
+          monitorGroup: res.data
+        })
       }).catch(() => {
         showAlert('Update logical group failed.')
       })
@@ -118,6 +121,8 @@ export default class GMonitor extends React.Component {
   render () {
     return (
       <FlipView
+        {...this.props}
+
         style={this.props.style}
         className={this.props.className}
         gauge={this.props.gauge}

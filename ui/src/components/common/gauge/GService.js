@@ -118,6 +118,8 @@ export default class GService extends React.Component {
   render () {
     return (
       <FlipView
+        {...this.props}
+
         style={this.props.style}
         className={this.props.className}
         gauge={this.props.gauge}
