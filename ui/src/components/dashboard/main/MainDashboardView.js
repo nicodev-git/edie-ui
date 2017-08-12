@@ -334,6 +334,7 @@ export default class MainDashboardView extends React.Component {
           className="layout" cols={cols} rowHeight={layoutRowHeight}
           layouts={layouts}
           style={{marginTop: -10}}
+          margin={[4, 10]}
           onDragStop={this.onLayoutChange.bind(this)}
           onResize={this.onResize.bind(this)}
           onResizeStop={this.onResizeStop.bind(this)}
