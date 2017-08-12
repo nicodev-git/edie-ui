@@ -49,7 +49,7 @@ export default class GLiquid extends React.Component {
 
     return (
       <div className="flex-vertical flex-1">
-        <div className="flex-1">
+        <div className="flex-1 flex-vertical">
           <LiquidView value={this.state.value}/>
         </div>
         <div className="text-center">
