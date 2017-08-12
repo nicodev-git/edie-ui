@@ -216,6 +216,22 @@ export default class GaugeWizardView extends React.Component {
       </div>
     )
   }
+  renderInstalledApp () {
+    const {devices} = this.props
+    const deviceOptions = (devices || []).map(p => ({label: p.name, value: p.id}))
+
+    return (
+      <div>
+        <Field name="name" component={FormInput} floatingLabel="Name" className="valign-top mr-dialog"/>
+        {devices && <Field key="deviceId" name="deviceId" component={FormSelect} floatingLabel="Device" options={deviceOptions} className="valign-top"/>}
+
+        <div className="inline-block">
+          <Field name="duration" component={FormSelect} floatingLabel="Duration" options={durations} className="valign-top mr-dialog" style={{width: 100}}/>
+          <Field name="durationUnit" component={FormSelect} floatingLabel="  "options={gaugeDurationTypes} className="valign-top" style={{width: 120}}/>
+        </div>
+      </div>
+    )
+  }
   renderContent () {
     const {templateName} = this.props
     switch(templateName) {
@@ -231,6 +247,8 @@ export default class GaugeWizardView extends React.Component {
         return this.renderMonitors()
       case 'Services':
         return this.renderServices()
+      case 'Installed App':
+        return this.renderInstalledApp()
       default:
         return this.renderNormal()
     }
