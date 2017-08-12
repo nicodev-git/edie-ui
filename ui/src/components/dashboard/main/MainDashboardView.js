@@ -26,6 +26,7 @@ import GIncidentTable from 'components/common/gauge/GIncidentTable'
 import GServers from 'components/common/gauge/GServers'
 import GMonitors from 'components/common/gauge/GMonitors'
 import GTable from 'components/common/gauge/GTable'
+import GInstallApp from 'components/common/gauge/GInstallApp'
 
 const ResponsiveReactGridLayout = WidthProvider(Responsive)
 
@@ -43,7 +44,8 @@ const gaugeMap = {
   'Incident Table': GIncidentTable,
   'Table': GTable,
   'Servers': GServers,
-  'Monitors': GMonitors
+  'Monitors': GMonitors,
+  'Installed App': GInstallApp
 }
 
 export default class MainDashboardView extends React.Component {
