@@ -245,11 +245,13 @@ export default class GaugeWizardView extends React.Component {
               <table className="table table-hover">
                 <tbody>
                   {devices.map((p, i) =>
-                    <tr
-                      key={p.id} className={selectedDevice && selectedDevice.id === p.id ? 'selected' : ''}
-                      onClick={() => onSelectDevice(p)}>
-                      <td>{p.name}</td>
-                      <td className="nowrap">
+                    <tr key={p.id}>
+                      <td
+                        className={selectedDevice && selectedDevice.id === p.id ? 'selected' : ''}
+                        onClick={() => onSelectDevice(p)}>{p.name}</td>
+                      <td
+                        className={i < monitors.length && selectedDevice && selectedDevice.uid === monitors[i].uid ? 'selected' : ''}
+                        onClick={i < monitors.length ? () => onSelectDevice(monitors[i].uid) : null}>
                         {i < monitors.length ? monitors[i].name : ''}
                       </td>
                     </tr>

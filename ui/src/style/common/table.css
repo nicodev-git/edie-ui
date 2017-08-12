@@ -1,4 +1,5 @@
-table.table tbody tr.selected {
+table.table tbody tr.selected,
+table.table tbody td.selected{
     background-color: #C7DEFC;
 }
 
