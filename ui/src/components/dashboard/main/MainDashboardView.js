@@ -333,7 +333,7 @@ export default class MainDashboardView extends React.Component {
         <ResponsiveReactGridLayout
           className="layout" cols={cols} rowHeight={layoutRowHeight}
           layouts={layouts}
-          margin={[10, 10]}
+          margin={[4, 4]}
           style={{marginTop: -10}}
           onDragStop={this.onLayoutChange.bind(this)}
           onResize={this.onResize.bind(this)}
