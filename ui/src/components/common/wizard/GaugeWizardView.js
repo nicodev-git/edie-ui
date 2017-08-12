@@ -1,9 +1,10 @@
 import React from 'react'
 import moment from 'moment'
-import {Dialog, SelectField, MenuItem, RaisedButton, Checkbox} from 'material-ui'
+import {Dialog, SelectField, MenuItem, RaisedButton, Checkbox, IconButton} from 'material-ui'
 import { Field } from 'redux-form'
 import { SubmitBlock, FormInput, FormSelect } from 'components/modal/parts'
 import {findIndex} from 'lodash'
+import ForwardIcon from 'material-ui/svg-icons/navigation/arrow-forward'
 
 import {gaugeDurationTypes, gaugeResources, severities, timingOptions, realtimeGauges, historicGauges} from 'shared/Global'
 import DateRangePicker from 'components/common/DateRangePicker'
@@ -233,17 +234,46 @@ export default class GaugeWizardView extends React.Component {
     )
   }
   renderServers () {
-    const {devices} = this.props
+    const {devices, selectedServers, selectedDevice, onSelectDevice, onClickAddServer} = this.props
+    const monitors = selectedDevice ? (selectedDevice.monitors || []) : []
     return (
       <div className="padding-md">
         <div className="row">
           <div className="col-md-6">
-            <div style={{maxHeight: 200, overflow: auto}}>
-
+            <div style={{maxHeight: 200, overflow: 'auto'}}>
+              <table className="table table-hover">
+                <tbody>
+                  {devices.map((p, i) =>
+                    <tr
+                      key={p.id} className={selectedDevice && selectedDevice.id === p.id ? 'selected' : ''}
+                      onClick={() => onSelectDevice(p)}>
+                      <td>{p.name}</td>
+                      <td className="nowrap">
+                        {i < monitors.length ? monitors[i].name : ''}
+                      </td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
             </div>
           </div>
-          <div className="col-md-6">
-
+          <div className="col-md-1">
+            <IconButton onTouchTap={onClickAddServer}>
+              <ForwardIcon />
+            </IconButton>
+          </div>
+          <div className="col-md-5">
+            <div style={{maxHeight: 200, overflow: 'auto'}}>
+              <table className="table table-hover">
+                <tbody>
+                  {selectedServers.map(p =>
+                    <tr key={p.id}>
+                      <td>{p.name}</td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>
@@ -275,7 +305,7 @@ export default class GaugeWizardView extends React.Component {
   render () {
     const {onSubmit, onHide, title} = this.props
     return (
-      <Dialog open title={title || 'Gauge'} onRequestClose={onHide} contentStyle={{width: 585}}>
+      <Dialog open title={title || 'Gauge'} onRequestClose={onHide} contentStyle={{/*width: 585*/}}>
         <form onSubmit={onSubmit}>
           {this.renderContent()}
           <SubmitBlock name="Add" onClick={onHide} />

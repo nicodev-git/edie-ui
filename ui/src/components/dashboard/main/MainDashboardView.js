@@ -115,13 +115,13 @@ export default class MainDashboardView extends React.Component {
   onClickMenuItem (tpl) {
     console.log(tpl)
 
-    if (['Servers'].indexOf(tpl.name) >= 0) {
-      this.onFinishAddWizard(null, null, {
-        templateName:tpl.name,
-        name: tpl.name,
-        resource: 'search'
-      })
-    } else {
+    // if (['Servers'].indexOf(tpl.name) >= 0) {
+    //   this.onFinishAddWizard(null, null, {
+    //     templateName:tpl.name,
+    //     name: tpl.name,
+    //     resource: 'search'
+    //   })
+    {
       const options = {
         title: tpl.name,
         templateName: tpl.name,

@@ -20,7 +20,10 @@ class GaugeWizard extends React.Component {
 
       services: [],
       selectedMonitors: [],
-      serviceNames: []
+      serviceNames: [],
+
+      selectedDevice: null,
+      selectedServers: []
     }
   }
 
@@ -95,6 +98,15 @@ class GaugeWizard extends React.Component {
     })
   }
 
+  onSelectDevice (id) {
+    this.setState({
+      selectedDevice: id
+    })
+  }
+  onClickAddServer () {
+
+  }
+
   getSearchOptions () {
     const {userInfo} = this.props
     if (!userInfo) return []
@@ -143,6 +155,7 @@ class GaugeWizard extends React.Component {
     this.props.onClose && this.props.onClose(this, data)
   }
   render () {
+    const {selectedDevice, selectedServers} = this.state
     const { handleSubmit, sysSearchOptions, monitors, title, formValues, workflows, templateName, devices, device, monitorGroups } = this.props
 
     const searchList = concat([], this.getSearchOptions().map(p => {
@@ -196,6 +209,11 @@ class GaugeWizard extends React.Component {
         onChangeDateRange={this.onChangeDateRange.bind(this)}
 
         monitorGroups={monitorGroupOptions}
+
+        selectedDevice={selectedDevice}
+        selectedServers={selectedServers}
+        onSelectDevice={this.onSelectDevice.bind(this)}
+        onClickAddServer={this.onClickAddServer.bind(this)}
       />
     )
   }
