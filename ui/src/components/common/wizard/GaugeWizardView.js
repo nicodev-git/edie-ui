@@ -240,7 +240,7 @@ export default class GaugeWizardView extends React.Component {
       <div className="padding-md">
         <div className="row">
           <div className="col-md-6">
-            <div style={{maxHeight: 200, overflow: 'auto'}}>
+            <div style={{height: 200, overflow: 'auto', border: '1px solid gray'}}>
               <table className="table table-hover">
                 <tbody>
                   {devices.map((p, i) =>
@@ -257,13 +257,13 @@ export default class GaugeWizardView extends React.Component {
               </table>
             </div>
           </div>
-          <div className="col-md-1">
+          <div className="col-md-1 p-none">
             <IconButton onTouchTap={onClickAddServer}>
               <ForwardIcon />
             </IconButton>
           </div>
           <div className="col-md-5">
-            <div style={{maxHeight: 200, overflow: 'auto'}}>
+            <div style={{height: 200, overflow: 'auto', border: '1px solid gray'}}>
               <table className="table table-hover">
                 <tbody>
                   {selectedServers.map(p =>

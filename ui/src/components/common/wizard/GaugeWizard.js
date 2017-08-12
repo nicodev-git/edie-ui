@@ -104,7 +104,9 @@ class GaugeWizard extends React.Component {
     })
   }
   onClickAddServer () {
-
+    const {selectedDevice} = this.state
+    if (!selectedDevice) return
+    this.setState({})
   }
 
   getSearchOptions () {
