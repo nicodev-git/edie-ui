@@ -23,6 +23,7 @@ class GaugeWizard extends React.Component {
       serviceNames: [],
 
       selectedDevice: null,
+      selectedMonitor: null,
       selectedRight: null,
       selectedServers: []
     }
@@ -101,7 +102,13 @@ class GaugeWizard extends React.Component {
 
   onSelectDevice (item) {
     this.setState({
-      selectedDevice: item
+      selectedDevice: item,
+      selectedMonitor: null
+    })
+  }
+  onSelectMonitor (item) {
+    this.setState({
+      selectedMonitor: item
     })
   }
   onSelectRight (item) {
@@ -110,12 +117,18 @@ class GaugeWizard extends React.Component {
     })
   }
   onClickAddServer () {
-    const {selectedDevice, selectedServers} = this.state
+    let {selectedDevice, selectedServers, selectedMonitor} = this.state
     if (!selectedDevice) return
-    const index = findIndex(selectedServers, selectedDevice.id ? {id: selectedDevice.id} : {uid: selectedDevice.uid})
-    if (index >= 0) return
+    let index = findIndex(selectedServers, {id: selectedDevice.id})
+    if (index < 0) selectedServers = [...selectedServers, selectedDevice]
+
+    if (selectedMonitor) {
+      index = findIndex(selectedServers,  {uid: selectedMonitor.uid})
+      if (index < 0) selectedServers = [...selectedServers, selectedMonitor]
+    }
+
     this.setState({
-      selectedServers: [...selectedServers, selectedDevice]
+      selectedServers
     })
   }
 
@@ -175,7 +188,7 @@ class GaugeWizard extends React.Component {
     this.props.onClose && this.props.onClose(this, data)
   }
   render () {
-    const {selectedDevice, selectedServers, selectedRight} = this.state
+    const {selectedDevice, selectedServers, selectedRight, selectedMonitor} = this.state
     const { handleSubmit, sysSearchOptions, monitors, title, formValues, workflows, templateName, devices, device, monitorGroups } = this.props
 
     const searchList = concat([], this.getSearchOptions().map(p => {
@@ -231,9 +244,11 @@ class GaugeWizard extends React.Component {
         monitorGroups={monitorGroupOptions}
 
         selectedDevice={selectedDevice}
+        selectedMonitor={selectedMonitor}
         selectedRight={selectedRight}
         selectedServers={selectedServers}
         onSelectDevice={this.onSelectDevice.bind(this)}
+        onSelectMonitor={this.onSelectMonitor.bind(this)}
         onSelectRight={this.onSelectRight.bind(this)}
         onClickAddServer={this.onClickAddServer.bind(this)}
         onClickRemoveServer={this.onClickRemoveServer.bind(this)}

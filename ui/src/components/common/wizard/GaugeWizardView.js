@@ -235,7 +235,8 @@ export default class GaugeWizardView extends React.Component {
     )
   }
   renderServers () {
-    const {devices, selectedServers, selectedDevice, selectedRight, onSelectDevice, onSelectRight, onClickAddServer, onClickRemoveServer} = this.props
+    const {devices, selectedServers, selectedDevice, selectedRight, selectedMonitor,
+      onSelectDevice, onSelectRight, onSelectMonitor, onClickAddServer, onClickRemoveServer} = this.props
     const monitors = selectedDevice ? (selectedDevice.monitors || []) : []
     return (
       <div className="padding-md">
@@ -250,8 +251,8 @@ export default class GaugeWizardView extends React.Component {
                         className={selectedDevice && selectedDevice.id === p.id ? 'selected' : ''}
                         onClick={() => onSelectDevice(p)}>{p.name}</td>
                       <td
-                        className={i < monitors.length && selectedDevice && selectedDevice.uid === monitors[i].uid ? 'selected' : ''}
-                        onClick={i < monitors.length ? () => onSelectDevice(monitors[i].uid) : null}>
+                        className={i < monitors.length && selectedMonitor && selectedMonitor.uid === monitors[i].uid ? 'selected' : ''}
+                        onClick={i < monitors.length ? () => onSelectMonitor(monitors[i]) : null}>
                         {i < monitors.length ? monitors[i].name : ''}
                       </td>
                     </tr>
@@ -274,7 +275,7 @@ export default class GaugeWizardView extends React.Component {
                 <tbody>
                   {selectedServers.map(p =>
                     <tr
-                      key={p.id} className={selectedRight && selectedRight.id === p.id ? 'selected' : ''}
+                      key={p.id || p.uid} className={selectedRight && selectedRight.id === p.id ? 'selected' : ''}
                       onClick={() => onSelectRight(p)}>
                       <td>{p.name}</td>
                     </tr>
