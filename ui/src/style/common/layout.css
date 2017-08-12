@@ -249,6 +249,26 @@ a, a:focus, a:hover {
     border-color: #AF61C4;
 }
 
+.panel-white {
+    border-color: white;
+}
+
+.panel-white>.panel-heading,
+.panel-white>form>.panel-heading {
+    color: black;
+    background-color: white;
+    border-color: white;
+    padding: 2px 5px;
+}
+
+.panel-white>.panel-heading>.panel-title {
+    font-size: 12px;
+}
+.panel-white>.panel-heading>.panel-options{
+    top: 3px;
+    right: 0px;
+}
+
 .link {
     cursor: pointer;
     display: inline-block;
