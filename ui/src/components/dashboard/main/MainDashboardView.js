@@ -8,7 +8,7 @@ import 'react-grid-layout/css/styles.css'
 import 'react-resizable/css/styles.css'
 
 import GaugeWizardContainer from 'containers/shared/wizard/GaugeWizardContainer'
-import { extImageBaseUrl, guid, getWidgetSize, gaugeAspectRatio } from 'shared/Global'
+import { extImageBaseUrl, guid, getWidgetSize, gaugeAspectRatio, layoutCols } from 'shared/Global'
 import { wizardConfig } from 'components/common/wizard/WizardConfig'
 
 import {showAlert} from 'components/common/Alert'
@@ -319,7 +319,7 @@ export default class MainDashboardView extends React.Component {
         return op
       })
     }
-    const cols = {lg: 12, md: 8, sm: 8, xs: 4, xxs: 4}
+    const cols = layoutCols
     const layouts = {
       lg: layout(cols['lg']),
       md: layout(cols['md']),

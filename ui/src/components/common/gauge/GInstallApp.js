@@ -1,4 +1,5 @@
 import React from 'react'
+import moment from 'moment'
 
 import FlipView from './FlipView'
 import GEditView from './GEditView'
@@ -18,8 +19,7 @@ export default class GInstallApp extends React.Component {
 
     this.columns = [{
       'displayName': 'Name',
-      'columnName': 'Name',
-      'cssClassName': 'nowrap'
+      'columnName': 'Name'
     }, {
       'displayName': 'InstallDate',
       'columnName': 'InstallDate',
@@ -94,6 +94,13 @@ export default class GInstallApp extends React.Component {
   onClickDelete () {
     this.props.removeDeviceGauge(this.props.gauge, this.props.device)
   }
+
+  getApps () {
+    const {gauge} = this.props
+    const {apps} = this.state
+    const dateFrom = moment().add(gauge.duration, `${gauge.durationUnit}s`).startOf('day').valueOf()
+    return apps.filter(p => moment(p.InstallDate, 'YYYY-MM-DD').valueOf() >= dateFrom)
+  }
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   renderFrontView () {
@@ -104,7 +111,7 @@ export default class GInstallApp extends React.Component {
           ref="table"
           rowMetadata={{'key': 'id'}}
           selectable
-          data={this.state.apps}
+          data={this.getApps()}
           useExternal={false}
         />
       </div>
