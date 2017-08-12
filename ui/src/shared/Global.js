@@ -289,7 +289,7 @@ export function getWidgetSize (gauge, devices, flip) {
     else if (ws === 2) size = 'very big'
     else size = 'extra big'
   }
-  if (flip && (size === 'small' || size === 'medium')) {
+  if (flip && (size === 'small' || size === 'medium' || size === 'custom')) {
     size = 'big'
   }
 
@@ -308,7 +308,8 @@ export function getWidgetSize (gauge, devices, flip) {
       wh = {w: 12, h: 4}
       break
     case 'custom':
-      return {w: 0, h: 0}
+      wh = {w: 0, h: 0}
+      break
     case 'big':
     default:
       wh = {w: 4, h: 4}
@@ -322,5 +323,5 @@ export function getWidgetSize (gauge, devices, flip) {
 }
 
 export const gaugeAspectRatio = {
-  'Liquid': {w: 1, h: 1}
+  // 'Liquid': {w: 1, h: 1}
 }
