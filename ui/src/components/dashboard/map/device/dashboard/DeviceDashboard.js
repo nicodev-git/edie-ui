@@ -174,6 +174,8 @@ export default class DeviceDashboard extends React.Component {
         }
         params.gaugeSize = 'custom'
       }
+    } else if(params.templateName === 'Incident Table') {
+      params.gaugeSize = 'very big'
     }
     this.props.addDeviceGauge(params, this.props.device)
   }

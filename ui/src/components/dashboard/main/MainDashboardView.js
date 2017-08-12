@@ -8,7 +8,7 @@ import 'react-grid-layout/css/styles.css'
 import 'react-resizable/css/styles.css'
 
 import GaugeWizardContainer from 'containers/shared/wizard/GaugeWizardContainer'
-import { extImageBaseUrl, guid, getWidgetSize, gaugeAspectRatio, layoutCols, layoutRowHeight } from 'shared/Global'
+import { extImageBaseUrl, guid, getWidgetSize, gaugeAspectRatio, layoutCols, layoutRowHeight, layoutWidthZoom, layoutHeightZoom } from 'shared/Global'
 import { wizardConfig } from 'components/common/wizard/WizardConfig'
 
 import {showAlert} from 'components/common/Alert'
@@ -150,6 +150,17 @@ export default class MainDashboardView extends React.Component {
 
   onFinishAddWizard (callback, res, params, url) {
     params.id = guid()
+    if (params.templateName === 'Cpu' || params.templateName === 'Memory' || params.templateName === 'Disk') {
+      if (params.gaugeType === 'accel') {
+        params.layout = {
+          x: 0, y: 0,
+          w: 2 * layoutWidthZoom, h: 1 * layoutHeightZoom
+        }
+        params.gaugeSize = 'custom'
+      }
+    } else if(params.templateName === 'Incident Table') {
+      params.gaugeSize = 'very big'
+    }
     this.props.addGaugeItem(params, this.props.board)
   }
 
@@ -196,7 +207,6 @@ export default class MainDashboardView extends React.Component {
   }
   onResizeStop (layout, oldItem, newItem, placeholder, mouseEvent, el) {
     this.updateLayout(layout, oldItem, newItem, true)
-
   }
 
   onClickFlip (id) {
