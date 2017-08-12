@@ -239,8 +239,8 @@ export default class GaugeWizardView extends React.Component {
     return (
       <div className="padding-md">
         <div className="row">
-          <div className="col-md-6">
-            <div style={{height: 200, overflow: 'auto', border: '1px solid gray'}}>
+          <div className="col-md-6 p-none">
+            <div style={{height: 300, overflow: 'auto', border: '1px solid gray'}}>
               <table className="table table-hover">
                 <tbody>
                   {devices.map((p, i) =>
@@ -262,8 +262,8 @@ export default class GaugeWizardView extends React.Component {
               <ForwardIcon />
             </IconButton>
           </div>
-          <div className="col-md-5">
-            <div style={{height: 200, overflow: 'auto', border: '1px solid gray'}}>
+          <div className="col-md-5 p-none">
+            <div style={{height: 300, overflow: 'auto', border: '1px solid gray'}}>
               <table className="table table-hover">
                 <tbody>
                   {selectedServers.map(p =>
@@ -305,7 +305,7 @@ export default class GaugeWizardView extends React.Component {
   render () {
     const {onSubmit, onHide, title} = this.props
     return (
-      <Dialog open title={title || 'Gauge'} onRequestClose={onHide} contentStyle={{/*width: 585*/}}>
+      <Dialog open title={title || 'Gauge'} onRequestClose={onHide} contentStyle={{width: 900/*width: 585*/}}>
         <form onSubmit={onSubmit}>
           {this.renderContent()}
           <SubmitBlock name="Add" onClick={onHide} />

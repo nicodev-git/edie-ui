@@ -1,6 +1,6 @@
 import React from 'react'
 import { reduxForm } from 'redux-form'
-import {assign, concat} from 'lodash'
+import {assign, concat, findIndex} from 'lodash'
 import moment from 'moment'
 import axios from 'axios'
 
@@ -104,9 +104,13 @@ class GaugeWizard extends React.Component {
     })
   }
   onClickAddServer () {
-    const {selectedDevice} = this.state
+    const {selectedDevice, selectedServers} = this.state
     if (!selectedDevice) return
-    this.setState({})
+    const index = findIndex(selectedServers, {id: selectedDevice.id})
+    if (index >= 0) return
+    this.setState({
+      selectedServers: [...selectedServers, selectedDevice]
+    })
   }
 
   getSearchOptions () {
