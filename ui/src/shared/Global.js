@@ -307,6 +307,8 @@ export function getWidgetSize (gauge, devices, flip) {
     case 'extra big':
       wh = {w: 12, h: 4}
       break
+    case 'custom':
+      return {w: 0, h: 0}
     case 'big':
     default:
       wh = {w: 4, h: 4}

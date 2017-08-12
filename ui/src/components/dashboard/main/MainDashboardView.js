@@ -165,23 +165,31 @@ export default class MainDashboardView extends React.Component {
     return []
   }
 
-  onLayoutChange (layout, oldItem, newItem, e2, e) {
+  updateLayout(layout, oldItem, newItem, isResize) {
     if (JSON.stringify(oldItem) === JSON.stringify(newItem)) return
     const gaugeItems = this.getGauges()
     const items = []
     layout.forEach((p, i) => {
       const index = findIndex(gaugeItems, {id: p.i})
       if (index < 0) return
-      items.push({
+      const gauge = {
         ...gaugeItems[index],
         layout: {
           i: p.i,
           x: p.x, y: p.y,
           w: p.w, h: p.h
         }
-      })
+      }
+      if (isResize && newItem.i === gauge.id) {
+        gauge.gaugeSize = 'custom'
+      }
+
+      items.push(gauge)
     })
     this.props.updateGaugeItem(items, this.props.board)
+  }
+  onLayoutChange (layout, oldItem, newItem, placeholder, mouseEvent, el) {
+    this.updateLayout(layout, oldItem, newItem)
   }
   onResize (layout, oldItem, newItem, placeholder, mouseEvent, el) {
     const gauge = this.findGauge(newItem.i)
@@ -195,10 +203,8 @@ export default class MainDashboardView extends React.Component {
     }
   }
   onResizeStop (layout, oldItem, newItem, placeholder, mouseEvent, el) {
-    if (JSON.stringify(oldItem) === JSON.stringify(newItem)) return
-    console.log(newItem)
-    // newItem.w = oldItem.w
-    // newItem.h = oldItem.h
+    this.updateLayout(layout, oldItem, newItem, true)
+
   }
 
   onClickFlip (id) {
@@ -290,7 +296,7 @@ export default class MainDashboardView extends React.Component {
       return gauges.map((p, i) => {
         let {w, h} = getWidgetSize(p, this.props.devices, this.state.flip[p.id])
         if (p.layout && p.layout.i) {
-          if (w === p.layout.w && h === p.layout.h) return {...p.layout, i: p.id}
+          if (p.gaugeSize === 'custom' || (w === p.layout.w && h === p.layout.h)) return {...p.layout, i: p.id}
           return {...p.layout, i: p.id, w, h}
         }
         if (x + w > mw) {
@@ -329,7 +335,7 @@ export default class MainDashboardView extends React.Component {
           style={{marginTop: -10}}
           onDragStop={this.onLayoutChange.bind(this)}
           onResize={this.onResize.bind(this)}
-          onResizeStop={this.onResize.bind(this)}
+          onResizeStop={this.onResizeStop.bind(this)}
         >
           {gauges.map(p => this.renderGauge(p))}
         </ResponsiveReactGridLayout>
