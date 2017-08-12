@@ -119,14 +119,13 @@ export default class MainDashboardView extends React.Component {
       this.onFinishAddWizard(null, null, {
         templateName:tpl.name,
         name: tpl.name,
-        resource: 'search',
-        widgetSize: 0
+        resource: 'search'
       })
     } else {
       const options = {
         title: tpl.name,
         templateName: tpl.name,
-        widgetSize: tpl.widgetSize || 1
+        gaugeSize: 'big'
       }
 
       this.showAddWizard(options, (id, name, data) => {
@@ -225,8 +224,7 @@ export default class MainDashboardView extends React.Component {
     const {options, callback, closeCallback} = this.state.deviceWizardConfig
 
     const extra = {
-      templateName: options.templateName,
-      widgetSize: options.widgetSize
+      templateName: options.templateName
     }
 
     return (

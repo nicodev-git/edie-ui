@@ -53,8 +53,6 @@ export default class GEditView extends React.Component {
       dateFrom: gauge.dateFrom || 0,
       dateTo: gauge.dateTo || 0,
 
-      widgetSize: gauge.widgetSize || 0,
-
       itemSize: gauge.itemSize || 'normal',
       gaugeSize: gauge.gaugeSize || 'big',
       showDeviceType: gauge.showDeviceType || false,
@@ -99,14 +97,14 @@ export default class GEditView extends React.Component {
     const {resource, savedSearchId, monitorId, workflowId, deviceId, serviceName, monitorIds,
       duration, durationUnit, splitBy, splitUnit, name,
       severities, dateFrom, dateTo, fixed,
-      widgetSize, itemSize, showDeviceType, gaugeSize,
+      itemSize, showDeviceType, gaugeSize,
       forward, forwardBoardId
     }  = this.state
     const values = {
       resource, savedSearchId, monitorId, workflowId, deviceId, serviceName, monitorIds,
       duration, durationUnit, splitBy, splitUnit, name,
       severities, dateFrom, dateTo, fixed,
-      widgetSize, itemSize, showDeviceType, gaugeSize,
+      itemSize, showDeviceType, gaugeSize,
       forward, forwardBoardId
     }
     onSubmit && onSubmit(values)

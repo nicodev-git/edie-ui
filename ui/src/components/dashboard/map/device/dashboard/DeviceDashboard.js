@@ -10,7 +10,7 @@ import 'react-grid-layout/css/styles.css'
 import 'react-resizable/css/styles.css'
 
 import GaugeWizardContainer from 'containers/shared/wizard/GaugeWizardContainer'
-import { extImageBaseUrl, guid, isGroup, getWidgetSize } from 'shared/Global'
+import { extImageBaseUrl, guid, isGroup, getWidgetSize, layoutCols, layoutRowHeight } from 'shared/Global'
 import { wizardConfig } from 'components/common/wizard/WizardConfig'
 
 import {showAlert} from 'components/common/Alert'
@@ -121,32 +121,6 @@ export default class DeviceDashboard extends React.Component {
     return null
   }
 
-  getNewPosition () {
-    const {mapDevices} = this.props
-    let maxY = null
-    let minX = null
-    let maxX = null
-    mapDevices.forEach(p => {
-      if (maxY === null) maxY = p.y
-      else maxY = Math.max(maxY, p.y)
-
-      if (minX === null) minX = p.x
-      else minX = Math.min(minX, p.x)
-
-      if (maxX === null) maxX = p.x
-      else maxX = Math.max(maxX, p.x)
-    })
-
-    maxY = maxY || 0
-    minX = minX || 0
-    maxX = maxX || 0
-
-    return {
-      x: parseInt((minX + maxX) / 2, 10),
-      y: maxY + 50
-    }
-  }
-
   onClickMenuItem (tpl) {
     console.log(tpl)
 
@@ -160,7 +134,7 @@ export default class DeviceDashboard extends React.Component {
       const options = {
         title: tpl.name,
         templateName: tpl.name,
-        widgetSize: tpl.widgetSize || 1
+        gaugeSize: 'big'
       }
 
       this.showAddWizard(options, (id, name, data) => {
@@ -185,8 +159,6 @@ export default class DeviceDashboard extends React.Component {
 
   onFinishAddWizard (callback, res, params, url) {
     params.id = guid()
-    const lastLayout = Math.max.apply(this, (this.props.device.gauges || []).map(p => p.layout || 0))
-    params.layout = lastLayout + 1
     this.props.addDeviceGauge(params, this.props.device)
   }
 
@@ -201,6 +173,31 @@ export default class DeviceDashboard extends React.Component {
     }
     return monitors
   }
+
+  updateLayout(layout, oldItem, newItem, isResize) {
+    if (JSON.stringify(oldItem) === JSON.stringify(newItem)) return
+    const gaugeItems = this.getGauges()
+    const items = []
+    layout.forEach((p, i) => {
+      const index = findIndex(gaugeItems, {id: p.i})
+      if (index < 0) return
+      const gauge = {
+        ...gaugeItems[index],
+        layout: {
+          i: p.i,
+          x: p.x, y: p.y,
+          w: p.w, h: p.h
+        }
+      }
+      if (isResize && newItem.i === gauge.id) {
+        gauge.gaugeSize = 'custom'
+      }
+
+      items.push(gauge)
+    })
+    this.props.updateGaugeItem(items, this.props.board)
+  }
+
   onLayoutChange (layout, oldItem, newItem, e2, e) {
     if (JSON.stringify(oldItem) === JSON.stringify(newItem)) return
     const {device} = this.props
@@ -235,7 +232,6 @@ export default class DeviceDashboard extends React.Component {
 
     const extra = {
       templateName: options.templateName,
-      widgetSize: options.widgetSize
     }
 
     return (
@@ -318,8 +314,9 @@ export default class DeviceDashboard extends React.Component {
 
       return gauges.map((p, i) => {
         const {w, h} = getWidgetSize(p, this.props.mapDevices, this.state.flip[p.id])
-        if (p.layout && p.layout.i && w === p.layout.w && h === p.layout.h) {
-          return {...p.layout , i: p.id}
+        if (p.layout && p.layout.i) {
+          if (w && h) return {...p.layout, i: p.id, w, h}
+          return {...p.layout, i: p.id}
         }
         if (x + w > mw) {
           x = 0
@@ -339,7 +336,7 @@ export default class DeviceDashboard extends React.Component {
         return op
       })
     }
-    const cols = {lg: 12, md: 8, sm: 8, xs: 4, xxs: 4}
+    const cols = layoutCols
     const layouts = {
       lg: layout(cols['lg']),
       md: layout(cols['md']),
@@ -352,7 +349,7 @@ export default class DeviceDashboard extends React.Component {
         {this.renderAgent()}
         {this.renderAddMenu()}
         <ResponsiveReactGridLayout
-          className="layout" cols={cols} rowHeight={85}
+          className="layout" cols={cols} rowHeight={layoutRowHeight}
           layouts={layouts}
           margin={[4, 10]}
           style={{marginTop: -10}}

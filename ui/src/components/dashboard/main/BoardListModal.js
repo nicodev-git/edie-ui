@@ -12,6 +12,19 @@ export default class BoardListModal extends React.Component {
       selected: null
     }
   }
+
+  getDefaultBoardId () {
+    const data = [...this.props.gaugeBoards]
+    data.sort((a, b) => {
+      if (!a.defaultSetDate && !b.defaultSetDate) return 0
+      if (!a.defaultSetDate || a.defaultSetDate > b.defaultSetDate ) return -1
+      if (!b.defaultSetDate || a.defaultSetDate < b.defaultSetDate ) return 1
+      return 0
+    })
+    if (data.length) return data[0].id
+    return null
+  }
+
   onHide () {
     this.props.showGaugeBoardsModal(false)
   }
@@ -57,6 +70,7 @@ export default class BoardListModal extends React.Component {
     const {gaugeBoards} = this.props
     return (
       <BoardListModalView
+        defaultBoardId={this.getDefaultBoardId()}
         selected={this.state.selected}
         onHide={this.onHide.bind(this)}
         gaugeBoards={gaugeBoards}

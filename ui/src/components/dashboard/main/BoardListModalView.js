@@ -1,5 +1,5 @@
 import React from 'react'
-import {Dialog, IconButton, Card, CardText} from 'material-ui'
+import {Dialog, IconButton, Card, CardText, Chip} from 'material-ui'
 import DeleteIcon from 'material-ui/svg-icons/action/delete'
 import EditIcon from 'material-ui/svg-icons/editor/mode-edit'
 import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
@@ -22,7 +22,7 @@ const titleStyle = {
 
 export default class BoardListModalView extends React.Component {
   render () {
-    const {onHide, gaugeBoards, selected, onClickAdd, onClickEdit, onClickDelete, onClickSetDefault, onSelect} = this.props
+    const {onHide, gaugeBoards, selected, onClickAdd, onClickEdit, onClickDelete, onClickSetDefault, onSelect, defaultBoardId} = this.props
     return (
       <Dialog open title="Dashboards" bodyStyle={dialogStyle} titleStyle={titleStyle} onRequestClose={onHide}>
         <CloseIconButton onClick={onHide} color="white"/>
@@ -45,6 +45,7 @@ export default class BoardListModalView extends React.Component {
                 <thead>
                 <tr>
                   <th>Name</th>
+                  <th></th>
                   <th className="text-right">Actions</th>
                 </tr>
                 </thead>
@@ -52,6 +53,11 @@ export default class BoardListModalView extends React.Component {
                 {gaugeBoards.map(p =>
                   <tr key={p.id} onClick={() => onSelect(p)} className={selected && selected.id === p.id ? 'selected' : ''}>
                     <td>{p.name}</td>
+                    <td className="text-right">
+                      {p.id === defaultBoardId ? (
+                        <Chip>Default</Chip>
+                      ) : null}
+                    </td>
                     {p.origin === 'SYSTEM' ? (
                       <td/>
                     ) : (
