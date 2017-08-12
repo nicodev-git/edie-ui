@@ -232,6 +232,23 @@ export default class GaugeWizardView extends React.Component {
       </div>
     )
   }
+  renderServers () {
+    const {devices} = this.props
+    return (
+      <div className="padding-md">
+        <div className="row">
+          <div className="col-md-6">
+            <div style={{maxHeight: 200, overflow: auto}}>
+
+            </div>
+          </div>
+          <div className="col-md-6">
+
+          </div>
+        </div>
+      </div>
+    )
+  }
   renderContent () {
     const {templateName} = this.props
     switch(templateName) {
@@ -249,6 +266,8 @@ export default class GaugeWizardView extends React.Component {
         return this.renderServices()
       case 'Installed App':
         return this.renderInstalledApp()
+      case 'Servers':
+        return this.renderServers()
       default:
         return this.renderNormal()
     }
