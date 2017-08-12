@@ -1,12 +1,9 @@
 import React from 'react'
-import moment from 'moment'
-import {findIndex} from 'lodash'
 
 import FlipView from './FlipView'
 import GEditView from './GEditView'
 
 import {showAlert} from 'components/common/Alert'
-import { dateFormat, severities } from 'shared/Global'
 import MonitorSocket from 'util/socket/MonitorSocket'
 import InfiniteTable from 'components/common/InfiniteTable'
 
@@ -19,6 +16,36 @@ export default class GInstallApp extends React.Component {
     this.renderBackView = this.renderBackView.bind(this)
     this.renderFrontView = this.renderFrontView.bind(this)
 
+    this.columns = [{
+      'displayName': 'Name',
+      'columnName': 'Name',
+      'cssClassName': 'nowrap'
+    }, {
+      'displayName': 'InstallDate',
+      'columnName': 'InstallDate',
+      'cssClassName': 'width-140',
+      'customComponent': (props) => {
+        let val = props.data
+        if (!val) return <span />
+        val = `${val.substring(0, 4)}-${
+          val.substring(4, 6)}-${
+          val.substring(6)}`
+
+        return <span>{val}</span>
+      }
+    }, {
+      'displayName': 'Version',
+      'columnName': 'Version',
+      'cssClassName': 'width-120'
+    }, {
+      'displayName': 'Publisher',
+      'columnName': 'Publisher',
+      'cssClassName': 'width-200'
+    }, {
+      'displayName': 'Size',
+      'columnName': 'Size',
+      'cssClassName': 'width-120'
+    }]
   }
 
   componentDidMount () {
@@ -45,8 +72,10 @@ export default class GInstallApp extends React.Component {
   }
   onMonitorMessage (msg) {
     if (msg.action === 'update' && msg.deviceId === this.props.device.id) {
-      const {cpu} = msg.data
-      if (cpu) this.setState({ cpu })
+      const {app} = msg.data
+      this.setState({
+        apps: app.map((u, i) => ({...u, id: i}))
+      })
     }
   }
 
