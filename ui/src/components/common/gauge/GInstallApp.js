@@ -49,14 +49,10 @@ export default class GInstallApp extends React.Component {
   }
 
   componentDidMount () {
-    if (this.props.gauge.timing === 'realtime') {
-      this.monitorSocket = new MonitorSocket({
-        listener: this.onMonitorMessage.bind(this)
-      })
-      this.monitorSocket.connect(this.onSocketOpen.bind(this))
-    } else {
-      this.fetchRecordCount(this.props)
-    }
+    this.monitorSocket = new MonitorSocket({
+      listener: this.onMonitorMessage.bind(this)
+    })
+    this.monitorSocket.connect(this.onSocketOpen.bind(this))
   }
 
   componentWillUnmount () {
@@ -108,7 +104,7 @@ export default class GInstallApp extends React.Component {
           ref="table"
           rowMetadata={{'key': 'id'}}
           selectable
-          data={this.props.apps}
+          data={this.state.apps}
           useExternal={false}
         />
       </div>
