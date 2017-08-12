@@ -354,7 +354,6 @@ export default class DeviceDashboard extends React.Component {
         <ResponsiveReactGridLayout
           className="layout" cols={cols} rowHeight={85}
           layouts={layouts}
-          margin={[4, 4]}
           style={{marginTop: -10}}
           onDragStop={this.onLayoutChange.bind(this)}>
           {gauges.map(p => this.renderGauge(p))}
