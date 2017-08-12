@@ -10,7 +10,7 @@ import 'react-grid-layout/css/styles.css'
 import 'react-resizable/css/styles.css'
 
 import GaugeWizardContainer from 'containers/shared/wizard/GaugeWizardContainer'
-import { extImageBaseUrl, guid, isGroup, getWidgetSize, layoutCols, layoutRowHeight, layoutWidthZoom, layoutHeightZoom } from 'shared/Global'
+import { extImageBaseUrl, guid, isGroup, getWidgetSize, gaugeAspectRatio, layoutCols, layoutRowHeight, layoutWidthZoom, layoutHeightZoom } from 'shared/Global'
 import { wizardConfig } from 'components/common/wizard/WizardConfig'
 
 import {showAlert} from 'components/common/Alert'
@@ -81,6 +81,13 @@ export default class DeviceDashboard extends React.Component {
   getGauges () {
     const {device} = this.props
     return device.gauges || []
+  }
+
+  findGauge (id) {
+    const gauges = this.getGauges()
+    const index = findIndex(gauges, {id})
+    if (index < 0) return null
+    return gauges[index]
   }
 
   getUserSearchOptions () {
@@ -204,26 +211,27 @@ export default class DeviceDashboard extends React.Component {
 
       items.push(gauge)
     })
-    this.props.updateGaugeItem(items, this.props.board)
+    this.props.updateDeviceGauge(items, this.props.device)
   }
 
-  onLayoutChange (layout, oldItem, newItem, e2, e) {
-    if (JSON.stringify(oldItem) === JSON.stringify(newItem)) return
-    const {device} = this.props
-    const items = layout.map((p, i) => {
-      const index = findIndex(device.gauges, {id: p.i})
-      return {
-        ...device.gauges[index],
-        layout: {
-          i: p.i,
-          x: p.x, y: p.y,
-          w: p.w, h: p.h
-        }
-      }
-    })
-    this.props.updateDeviceGauge(items, device)
+  onLayoutChange (layout, oldItem, newItem, placeholder, mouseEvent, el) {
+    this.updateLayout(layout, oldItem, newItem)
   }
+  onResize (layout, oldItem, newItem, placeholder, mouseEvent, el) {
+    const gauge = this.findGauge(newItem.i)
+    if (!gauge) return
+    const ratio = gaugeAspectRatio[gauge.templateName]
+    if (!ratio) return
+    if (newItem.w !== oldItem.w) {
+      newItem.h = Math.ceil(newItem.w / ratio.w * ratio.h)
+    } else {
+      newItem.w = Math.ceil(newItem.h / ratio.h * ratio.w)
+    }
+  }
+  onResizeStop (layout, oldItem, newItem, placeholder, mouseEvent, el) {
+    this.updateLayout(layout, oldItem, newItem, true)
 
+  }
   onClickFlip (id) {
     const {flip} = this.state
     this.setState({
@@ -362,7 +370,10 @@ export default class DeviceDashboard extends React.Component {
           layouts={layouts}
           margin={[4, 10]}
           style={{marginTop: -10}}
-          onDragStop={this.onLayoutChange.bind(this)}>
+          onDragStop={this.onLayoutChange.bind(this)}
+          onResize={this.onResize.bind(this)}
+          onResizeStop={this.onResizeStop.bind(this)}
+        >
           {gauges.map(p => this.renderGauge(p))}
         </ResponsiveReactGridLayout>
 
