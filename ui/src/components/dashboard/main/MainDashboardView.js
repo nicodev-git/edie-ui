@@ -8,7 +8,7 @@ import 'react-grid-layout/css/styles.css'
 import 'react-resizable/css/styles.css'
 
 import GaugeWizardContainer from 'containers/shared/wizard/GaugeWizardContainer'
-import { extImageBaseUrl, guid, getWidgetSize, gaugeAspectRatio, layoutCols } from 'shared/Global'
+import { extImageBaseUrl, guid, getWidgetSize, gaugeAspectRatio, layoutCols, layoutRowHeight } from 'shared/Global'
 import { wizardConfig } from 'components/common/wizard/WizardConfig'
 
 import {showAlert} from 'components/common/Alert'
@@ -331,7 +331,7 @@ export default class MainDashboardView extends React.Component {
       <div>
         {this.renderAddMenu()}
         <ResponsiveReactGridLayout
-          className="layout" cols={cols} rowHeight={85}
+          className="layout" cols={cols} rowHeight={layoutRowHeight}
           layouts={layouts}
           margin={[10, 10]}
           style={{marginTop: -10}}

@@ -282,6 +282,7 @@ export function filterGaugeServers (devices) {
 
 export const layoutZoom  = 100
 export const layoutCols = {lg: 12 * layoutZoom, md: 8 * layoutZoom, sm: 8 * layoutZoom, xs: 4 * layoutZoom, xxs: 4 * layoutZoom}
+export const layoutRowHeight = 10
 export function getWidgetSize (gauge, devices, flip) {
   let size = gauge.gaugeSize
   if (gauge.templateName === 'Servers') {
@@ -321,7 +322,7 @@ export function getWidgetSize (gauge, devices, flip) {
     wh.h = 1
   }
 
-  return {w: wh.w * layoutZoom, h: wh.h * layoutZoom}
+  return {w: wh.w * layoutZoom, h: wh.h * 4}
 }
 
 export const gaugeAspectRatio = {
