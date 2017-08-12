@@ -163,7 +163,7 @@ export default class DeviceDashboard extends React.Component {
       if (params.gaugeType === 'accel') {
         params.layout = {
           x: 0, y: 0,
-          w: 2 * layoutWidthZoom, h: 1.5 * layoutHeightZoom
+          w: 2 * layoutWidthZoom, h: 1 * layoutHeightZoom
         }
         params.gaugeSize = 'custom'
       }

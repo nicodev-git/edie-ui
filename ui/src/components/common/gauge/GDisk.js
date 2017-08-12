@@ -187,7 +187,7 @@ export default class GDisk extends React.Component {
     } else {
       const {disk} = this.state
       const value = disk ? Math.ceil(disk.FreeSpace * 100 / disk.TotalSpace) : 0
-      const title = `${disk ? `${disk.Name} ${disk.FreeSpace}G/${disk.TotalSpace}G` : ''}`
+      const title = `${gauge.name} ${disk ? `${disk.Name} ${disk.FreeSpace}G/${disk.TotalSpace}G` : ''}`
       return gauge.gaugeType === 'accel' ? (
         <div className="flex-1 flex-vertical">
           <AccelView value={value} title={title}/>
@@ -219,6 +219,7 @@ export default class GDisk extends React.Component {
       <FlipView
         {...this.props}
 
+        hideHeader
         style={this.props.style}
         className={this.props.className}
         gauge={this.props.gauge}
