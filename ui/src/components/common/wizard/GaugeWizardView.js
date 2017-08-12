@@ -5,6 +5,7 @@ import { Field } from 'redux-form'
 import { SubmitBlock, FormInput, FormSelect } from 'components/modal/parts'
 import {findIndex} from 'lodash'
 import ForwardIcon from 'material-ui/svg-icons/navigation/arrow-forward'
+import BackwardIcon from 'material-ui/svg-icons/navigation/arrow-back'
 
 import {gaugeDurationTypes, gaugeResources, severities, timingOptions, realtimeGauges, historicGauges} from 'shared/Global'
 import DateRangePicker from 'components/common/DateRangePicker'
@@ -234,7 +235,7 @@ export default class GaugeWizardView extends React.Component {
     )
   }
   renderServers () {
-    const {devices, selectedServers, selectedDevice, onSelectDevice, onClickAddServer} = this.props
+    const {devices, selectedServers, selectedDevice, selectedRight, onSelectDevice, onSelectRight, onClickAddServer, onClickRemoveServer} = this.props
     const monitors = selectedDevice ? (selectedDevice.monitors || []) : []
     return (
       <div className="padding-md">
@@ -261,13 +262,18 @@ export default class GaugeWizardView extends React.Component {
             <IconButton onTouchTap={onClickAddServer}>
               <ForwardIcon />
             </IconButton>
+            <IconButton onTouchTap={onClickRemoveServer}>
+              <BackwardIcon />
+            </IconButton>
           </div>
           <div className="col-md-5 p-none">
             <div style={{height: 300, overflow: 'auto', border: '1px solid gray'}}>
               <table className="table table-hover">
                 <tbody>
                   {selectedServers.map(p =>
-                    <tr key={p.id}>
+                    <tr
+                      key={p.id} className={selectedRight && selectedRight.id === p.id ? 'selected' : ''}
+                      onClick={() => onSelectRight(p)}>
                       <td>{p.name}</td>
                     </tr>
                   )}

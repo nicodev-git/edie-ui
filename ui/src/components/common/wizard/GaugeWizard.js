@@ -23,6 +23,7 @@ class GaugeWizard extends React.Component {
       serviceNames: [],
 
       selectedDevice: null,
+      selectedRight: null,
       selectedServers: []
     }
   }
@@ -98,9 +99,14 @@ class GaugeWizard extends React.Component {
     })
   }
 
-  onSelectDevice (id) {
+  onSelectDevice (item) {
     this.setState({
-      selectedDevice: id
+      selectedDevice: item
+    })
+  }
+  onSelectRight (item) {
+    this.setState({
+      selectedRight: item
     })
   }
   onClickAddServer () {
@@ -110,6 +116,14 @@ class GaugeWizard extends React.Component {
     if (index >= 0) return
     this.setState({
       selectedServers: [...selectedServers, selectedDevice]
+    })
+  }
+
+  onClickRemoveServer () {
+    const {selectedRight, selectedServers} = this.state
+    if (!selectedRight) return
+    this.setState({
+      selectedServers: selectedServers.filter(p => p.id !== selectedRight.id)
     })
   }
 
@@ -161,7 +175,7 @@ class GaugeWizard extends React.Component {
     this.props.onClose && this.props.onClose(this, data)
   }
   render () {
-    const {selectedDevice, selectedServers} = this.state
+    const {selectedDevice, selectedServers, selectedRight} = this.state
     const { handleSubmit, sysSearchOptions, monitors, title, formValues, workflows, templateName, devices, device, monitorGroups } = this.props
 
     const searchList = concat([], this.getSearchOptions().map(p => {
@@ -217,9 +231,12 @@ class GaugeWizard extends React.Component {
         monitorGroups={monitorGroupOptions}
 
         selectedDevice={selectedDevice}
+        selectedRight={selectedRight}
         selectedServers={selectedServers}
         onSelectDevice={this.onSelectDevice.bind(this)}
+        onSelectRight={this.onSelectRight.bind(this)}
         onClickAddServer={this.onClickAddServer.bind(this)}
+        onClickRemoveServer={this.onClickRemoveServer.bind(this)}
       />
     )
   }
