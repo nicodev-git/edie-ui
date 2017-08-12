@@ -284,6 +284,11 @@ export const layoutWidthZoom  = 100
 export const layoutHeightZoom = 4
 export const layoutCols = {lg: 12 * layoutWidthZoom, md: 8 * layoutWidthZoom, sm: 8 * layoutWidthZoom, xs: 4 * layoutWidthZoom, xxs: 4 * layoutWidthZoom}
 export const layoutRowHeight = 10
+
+function widgetSize () {
+
+}
+
 export function getWidgetSize (gauge, devices, flip) {
   let size = gauge.gaugeSize
   if (gauge.templateName === 'Servers') {
@@ -292,6 +297,9 @@ export function getWidgetSize (gauge, devices, flip) {
     if (ws === 1) size = 'big'
     else if (ws === 2) size = 'very big'
     else size = 'extra big'
+
+    const hs = count / ws /  (gauge.itemSize === 'slim' ? 6 : 4)
+
   }
   if (flip && (size === 'small' || size === 'medium' || size === 'custom')) {
     size = 'big'
