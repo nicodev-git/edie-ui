@@ -79,7 +79,7 @@ export default class GServers extends React.Component {
     )
   }
   renderFrontView () {
-    const allDevices = filterGaugeServers(this.props.devices)
+    const allDevices = filterGaugeServers(this.props.allDevices || this.props.devices)
     const items = allDevices.slice(0, this.getMaxItemCount(allDevices))
     return (
       <div className="flex-vertical flex-1">

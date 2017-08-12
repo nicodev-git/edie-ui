@@ -6,6 +6,7 @@ import { connect } from 'react-redux'
 import {
   fetchSysSearchOptions,
   fetchWorkflows,
+  fetchDevicesGroups,
 
   fetchGaugeBoards,
   fetchGauges,
@@ -27,6 +28,7 @@ class DeviceDashboardContainer extends React.Component {
 export default connect(
   state => ({
     device: state.dashboard.selectedDevice,
+    allDevices: state.devices.deviceAndGroups,
 
     gauges: state.gauge.gauges,
     gaugeBoards: state.gauge.gaugeBoards,
@@ -42,6 +44,7 @@ export default connect(
   }), {
     fetchSysSearchOptions,
     fetchWorkflows,
+    fetchDevicesGroups,
 
     fetchGaugeBoards,
     fetchGauges,

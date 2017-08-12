@@ -62,6 +62,7 @@ export default class DeviceDashboard extends React.Component {
     this.props.fetchGaugeBoards()
     this.props.fetchSysSearchOptions()
     this.props.fetchWorkflows()
+    this.props.fetchDevicesGroups()
   }
 
   componentDidMount () {
@@ -332,7 +333,7 @@ export default class DeviceDashboard extends React.Component {
       let y = 0
 
       return gauges.map((p, i) => {
-        const {w, h} = getWidgetSize(p, this.props.mapDevices, this.state.flip[p.id])
+        const {w, h} = getWidgetSize(p, this.props.allDevices || this.props.devices, this.state.flip[p.id])
         if (p.layout) {
           if (w && h) return {...p.layout, i: p.id, w, h}
           return {...p.layout, i: p.id}
