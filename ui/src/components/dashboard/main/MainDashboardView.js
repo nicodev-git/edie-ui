@@ -154,15 +154,6 @@ export default class MainDashboardView extends React.Component {
   }
 
   getMonitors () {
-  //   const {device} = this.props
-  //   let monitors = []
-  //   if (!isGroup(device)) {
-  //     monitors = (device.monitors || []).map(p => ({
-  //       label: p.name,
-  //       value: p.uid
-  //     }))
-  //   }
-  //   return monitors
     return []
   }
 
@@ -295,7 +286,7 @@ export default class MainDashboardView extends React.Component {
       let y = 0
       return gauges.map((p, i) => {
         let {w, h} = getWidgetSize(p, this.props.devices, this.state.flip[p.id])
-        if (p.layout && p.layout.i) {
+        if (p.layout) {
           if (w && h) return {...p.layout, i: p.id, w, h}
           return {...p.layout, i: p.id}
         }
