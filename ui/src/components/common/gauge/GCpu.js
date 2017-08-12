@@ -179,16 +179,20 @@ export default class GCpu extends React.Component {
     } else {
       const {cpu} = this.state
       const value = cpu ? (cpu.length ? cpu[0].Usage : cpu.Usage) : 0
-      return (
+      const title = gauge.name
+
+      return gauge.gaugeType === 'accel' ? (
+        <div className="flex-1 flex-vertical">
+          <AccelView value={value} title={title}/>
+        </div>
+      ) : (
         <div className="flex-vertical flex-1">
           <div className="flex-1 flex-vertical">
-            {gauge.gaugeType === 'accel' ? (
-              <AccelView value={value}/>
-            ) : (
-              <LiquidView value={value}/>
-            )}
+            <LiquidView value={value}/>
           </div>
-          <div className="text-center">{gauge.name}</div>
+          <div className="text-center">
+            {title}
+          </div>
         </div>
       )
     }
