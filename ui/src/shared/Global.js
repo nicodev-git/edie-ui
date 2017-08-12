@@ -280,8 +280,9 @@ export function filterGaugeServers (devices) {
   return (devices || []).filter(p => p.templateName !== 'Long hub' && p.templateName !== 'Free Text' && !p.line)
 }
 
-export const layoutZoom  = 100
-export const layoutCols = {lg: 12 * layoutZoom, md: 8 * layoutZoom, sm: 8 * layoutZoom, xs: 4 * layoutZoom, xxs: 4 * layoutZoom}
+export const layoutWidthZoom  = 100
+export const layoutHeightZoom = 4
+export const layoutCols = {lg: 12 * layoutWidthZoom, md: 8 * layoutWidthZoom, sm: 8 * layoutWidthZoom, xs: 4 * layoutWidthZoom, xxs: 4 * layoutWidthZoom}
 export const layoutRowHeight = 10
 export function getWidgetSize (gauge, devices, flip) {
   let size = gauge.gaugeSize
@@ -322,7 +323,7 @@ export function getWidgetSize (gauge, devices, flip) {
     wh.h = 1
   }
 
-  return {w: wh.w * layoutZoom, h: wh.h * 4}
+  return {w: wh.w * layoutWidthZoom, h: wh.h * layoutHeightZoom}
 }
 
 export const gaugeAspectRatio = {

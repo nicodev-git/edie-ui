@@ -10,7 +10,7 @@ import 'react-grid-layout/css/styles.css'
 import 'react-resizable/css/styles.css'
 
 import GaugeWizardContainer from 'containers/shared/wizard/GaugeWizardContainer'
-import { extImageBaseUrl, guid, isGroup, getWidgetSize, layoutCols, layoutRowHeight } from 'shared/Global'
+import { extImageBaseUrl, guid, isGroup, getWidgetSize, layoutCols, layoutRowHeight, layoutWidthZoom, layoutHeightZoom } from 'shared/Global'
 import { wizardConfig } from 'components/common/wizard/WizardConfig'
 
 import {showAlert} from 'components/common/Alert'
@@ -159,6 +159,15 @@ export default class DeviceDashboard extends React.Component {
 
   onFinishAddWizard (callback, res, params, url) {
     params.id = guid()
+    if (params.templateName === 'Cpu' || params.templateName === 'Memory' || params.templateName === 'Disk') {
+      if (params.gaugeType === 'accel') {
+        params.layout = {
+          x: 0, y: 0,
+          w: 2 * layoutWidthZoom, h: 1.5 * layoutHeightZoom
+        }
+        params.gaugeSize = 'custom'
+      }
+    }
     this.props.addDeviceGauge(params, this.props.device)
   }
 
@@ -314,7 +323,7 @@ export default class DeviceDashboard extends React.Component {
 
       return gauges.map((p, i) => {
         const {w, h} = getWidgetSize(p, this.props.mapDevices, this.state.flip[p.id])
-        if (p.layout && p.layout.i) {
+        if (p.layout) {
           if (w && h) return {...p.layout, i: p.id, w, h}
           return {...p.layout, i: p.id}
         }
