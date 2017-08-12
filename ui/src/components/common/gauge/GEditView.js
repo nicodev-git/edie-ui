@@ -4,7 +4,7 @@ import {TextField, SelectField, MenuItem, RaisedButton, Checkbox} from 'material
 import {findIndex} from 'lodash'
 
 import DoneButton from './DoneButton'
-import {gaugeDurationTypes, gaugeResources, severities as allSeverities, gaugeSizeList} from 'shared/Global'
+import {gaugeDurationTypes, gaugeResources, severities as allSeverities} from 'shared/Global'
 import DateRangePicker from 'components/common/DateRangePicker'
 
 const durations = '1 2 3 5 10 15 30'.split(' ').map(p => ({
@@ -165,8 +165,7 @@ export default class GEditView extends React.Component {
   renderNormal () {
     const {
       resource, savedSearchId, workflowId,
-      duration, durationUnit, splitBy, splitUnit, name,
-      gaugeSize
+      duration, durationUnit, splitBy, splitUnit, name
     } = this.state
     const {searchList, hideDuration, hideSplit, workflows} = this.props
     return (
@@ -224,14 +223,6 @@ export default class GEditView extends React.Component {
             </SelectField>
           </div>
         </div>}
-
-        <div className="row">
-          <div className="col-md-3">
-            <SelectField value={gaugeSize} floatingLabelText="Size" className="valign-top mr-dialog" style={inputStyle} onChange={this.onChangeSelect.bind(this, 'gaugeSize')}>
-              {gaugeSizeList.map(p => <MenuItem key={p} value={p} primaryText={p}/>)}
-            </SelectField>
-          </div>
-        </div>
       </div>
     )
   }
@@ -244,7 +235,7 @@ export default class GEditView extends React.Component {
 
   renderIncidentTable () {
     const {devices} = this.props
-    const {deviceId, fixed, severities, dateFrom, dateTo, name, gaugeSize} = this.state
+    const {deviceId, fixed, severities, dateFrom, dateTo, name} = this.state
     return (
       <div>
         <TextField name="name" value={name} floatingLabelText="Name" className="valign-top mr-dialog" onChange={this.onChangeText.bind(this, 'name')}/>
@@ -271,40 +262,29 @@ export default class GEditView extends React.Component {
             renderer={this.renderDateLabel.bind(this)}
           />
         </div>
-
-        <SelectField value={gaugeSize} floatingLabelText="Size" className="valign-top mr-dialog" onChange={this.onChangeSelect.bind(this, 'gaugeSize')}>
-          {gaugeSizeList.map(p => <MenuItem key={p} value={p} primaryText={p}/>)}
-        </SelectField>
       </div>
     )
   }
   renderDevice () {
     const {devices} = this.props
-    const {name, deviceId, gaugeSize} = this.state
+    const {name, deviceId} = this.state
     return (
       <div>
         <TextField name="name" value={name} floatingLabelText="Name" className="valign-top mr-dialog" onChange={this.onChangeText.bind(this, 'name')}/>
         {devices && <SelectField value={deviceId} floatingLabelText="Device" className="valign-top" onChange={this.onChangeSelect.bind(this, 'deviceId')}>
           {devices.map(p => <MenuItem key={p.id} value={p.id} primaryText={p.name}/>)}
         </SelectField>}
-        <SelectField value={gaugeSize} floatingLabelText="Size" className="valign-top mr-dialog" onChange={this.onChangeSelect.bind(this, 'gaugeSize')}>
-          {gaugeSizeList.map(p => <MenuItem key={p} value={p} primaryText={p}/>)}
-        </SelectField>
       </div>
     )
   }
   renderService () {
     const {services} = this.props
-    const {name, serviceName, gaugeSize} = this.state
+    const {name, serviceName} = this.state
     return (
       <div>
         <TextField name="name" value={name} floatingLabelText="Name" className="valign-top mr-dialog" onChange={this.onChangeText.bind(this, 'name')}/>
         <SelectField value={serviceName} floatingLabelText="Service" className="valign-top mr-dialog" onChange={this.onChangeSelect.bind(this, 'serviceName')}>
           {services.map(p => <MenuItem key={p.ServiceName} value={p.ServiceName} primaryText={p.DisplayName || p.ServiceName}/>)}
-        </SelectField>
-
-        <SelectField value={gaugeSize} floatingLabelText="Size" className="valign-top mr-dialog" onChange={this.onChangeSelect.bind(this, 'gaugeSize')}>
-          {gaugeSizeList.map(p => <MenuItem key={p} value={p} primaryText={p}/>)}
         </SelectField>
       </div>
     )
