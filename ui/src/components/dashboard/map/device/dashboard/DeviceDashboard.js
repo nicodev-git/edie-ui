@@ -131,13 +131,13 @@ export default class DeviceDashboard extends React.Component {
   onClickMenuItem (tpl) {
     console.log(tpl)
 
-    // if (['Cpu', 'Memory', 'Disk'].indexOf(tpl.name) >= 0) {
-    //   this.onFinishAddWizard(null, null, {
-    //     templateName:tpl.name,
-    //     name: tpl.name,
-    //     resource: 'search'
-    //   })
-    // } else {
+    if (['Servers'].indexOf(tpl.name) >= 0) {
+      this.onFinishAddWizard(null, null, {
+        templateName:tpl.name,
+        name: tpl.name,
+        resource: 'search'
+      })
+    } else {
       const options = {
         title: tpl.name,
         templateName: tpl.name,
@@ -147,7 +147,7 @@ export default class DeviceDashboard extends React.Component {
       this.showAddWizard(options, (id, name, data) => {
 
       })
-    // }
+    }
   }
 
   showAddWizard (options, callback, closeCallback) {

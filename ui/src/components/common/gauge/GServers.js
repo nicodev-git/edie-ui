@@ -108,6 +108,7 @@ export default class GServers extends React.Component {
       <FlipView
         {...this.props}
 
+        hideHeader
         style={this.props.style}
         className={this.props.className}
         gauge={this.props.gauge}
