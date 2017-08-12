@@ -190,7 +190,7 @@ export default class GDisk extends React.Component {
       const title = `${disk ? `${disk.Name} ${disk.FreeSpace}G/${disk.TotalSpace}G` : ''}`
       return gauge.gaugeType === 'accel' ? (
         <div className="flex-1 flex-vertical">
-          <AccelView value={value} title=""/>
+          <AccelView value={value} title={title}/>
         </div>
       ) : (
         <div className="flex-vertical flex-1">

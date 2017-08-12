@@ -183,7 +183,7 @@ export default class GMemory extends React.Component {
       const title = `${memory ? `${(memory.UsedSize/1024).toFixed(1)}G/${(memory.TotalSize/1024).toFixed(1)}G` : ''}`
       return gauge.gaugeType === 'accel' ? (
         <div className="flex-1 flex-vertical">
-          <AccelView value={value} title=""/>
+          <AccelView value={value} title={title}/>
         </div>
       ) : (
         <div className="flex-vertical flex-1">
