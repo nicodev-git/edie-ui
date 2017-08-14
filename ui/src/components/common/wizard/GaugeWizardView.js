@@ -239,9 +239,7 @@ export default class GaugeWizardView extends React.Component {
     //   onSelectDevice, onSelectRight, onSelectMonitor, onClickAddServer, onClickRemoveServer} = this.props
     // const monitors = selectedDevice ? (selectedDevice.monitors || []) : []
     return (
-      <div className="padding-md">
-        <GaugeServerPicker {...this.props}/>
-      </div>
+      <GaugeServerPicker {...this.props}/>
     )
   }
   renderContent () {

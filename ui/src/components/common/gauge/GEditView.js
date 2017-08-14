@@ -60,7 +60,12 @@ export default class GEditView extends React.Component {
       showDeviceType: gauge.showDeviceType || false,
 
       forward: gauge.forward || false,
-      forwardBoardId: gauge.forwardBoardId || ''
+      forwardBoardId: gauge.forwardBoardId || '',
+
+      selectedDevice: null,
+      selectedMonitor: null,
+      selectedRight: null,
+      servers: gauge.servers || []
     }
   }
 
@@ -94,20 +99,73 @@ export default class GEditView extends React.Component {
     this.setState({ monitorIds })
   }
 
+  onSelectDevice (item) {
+    this.setState({
+      selectedDevice: item,
+      selectedMonitor: null
+    })
+  }
+  onSelectMonitor (item) {
+    this.setState({
+      selectedMonitor: item
+    })
+  }
+  onSelectRight (item) {
+    this.setState({
+      selectedRight: item
+    })
+  }
+  onClickAddServer () {
+    let {selectedDevice, servers, selectedMonitor} = this.state
+    if (!selectedDevice) return
+
+    if (selectedMonitor) {
+      const index = findIndex(servers,  {type: 'monitor', monitorId: selectedMonitor.uid})
+      const item = {
+        type: 'monitor',
+        monitorId: selectedMonitor.uid,
+        id: selectedDevice.id,
+        name: selectedMonitor.name
+      }
+      if (index < 0) servers = [...servers, item]
+    } else {
+      const index = findIndex(servers, {type: 'device', id: selectedDevice.id})
+      const item = {
+        type: 'device',
+        id: selectedDevice.id,
+        name: selectedDevice.name
+      }
+      if (index < 0) servers = [...servers, item]
+    }
+
+    this.setState({
+      servers
+    })
+  }
+
+  onClickRemoveServer () {
+    const {selectedRight, servers} = this.state
+    if (!selectedRight) return
+    this.setState({
+      servers: servers.filter(p => selectedRight.type !== p.type ||
+        (p.type === 'monitor' ? p.monitorId !== selectedRight.monitorId : p.id !== selectedRight.id))
+    })
+  }
+
   onClickDone () {
     const {onSubmit} = this.props
     const {resource, savedSearchId, monitorId, workflowId, deviceId, serviceName, monitorIds,
       duration, durationUnit, splitBy, splitUnit, name,
       severities, dateFrom, dateTo, fixed,
       itemSize, showDeviceType, gaugeSize,
-      forward, forwardBoardId
+      forward, forwardBoardId, servers
     }  = this.state
     const values = {
       resource, savedSearchId, monitorId, workflowId, deviceId, serviceName, monitorIds,
       duration, durationUnit, splitBy, splitUnit, name,
       severities, dateFrom, dateTo, fixed,
       itemSize, showDeviceType, gaugeSize,
-      forward, forwardBoardId
+      forward, forwardBoardId, servers
     }
     onSubmit && onSubmit(values)
   }
@@ -292,10 +350,9 @@ export default class GEditView extends React.Component {
     )
   }
   renderServers () {
-    const {gaugeBoards} = this.props
-    const {name, itemSize, showDeviceType, forward, forwardBoardId} = this.state
+    const {gaugeBoards, devices} = this.props
+    const {name, itemSize, showDeviceType, forward, forwardBoardId, servers, selectedDevice, selectedRight, selectedMonitor} = this.state
 
-    const pickerProps = {}
     return (
       <div>
         <TextField name="name" value={name} floatingLabelText="Name" className="valign-top mr-dialog" onChange={this.onChangeText.bind(this, 'name')}/>
@@ -314,7 +371,18 @@ export default class GEditView extends React.Component {
         </div>
 
         <div>
-          <GaugeServerPicker/>
+          <GaugeServerPicker
+            devices={devices}
+            selectedServers={servers}
+            selectedDevice={selectedDevice}
+            selectedRight={selectedRight}
+            selectedMonitor={selectedMonitor}
+            onSelectDevice={this.onSelectDevice.bind(this)}
+            onSelectRight={this.onSelectRight.bind(this)}
+            onSelectMonitor={this.onSelectMonitor.bind(this)}
+            onClickAddServer={this.onClickAddServer.bind(this)}
+            onClickRemoveServer={this.onClickRemoveServer.bind(this)}
+          />
         </div>
       </div>
     )
