@@ -731,15 +731,6 @@ class GenericSearch extends React.Component {
                     </Chip>
                   )
                 }
-                {
-                  searchTags.length || queryChips.length || selectedWfs.length ? (
-                    <Chip
-                      style={chipStyles.chip}
-                      onTouchTap={this.onClickClearSearch.bind(this)}>
-                      <b className="text-danger">Clear</b>
-                    </Chip>
-                  ) : null
-                }
               </div>
             </div>
 
