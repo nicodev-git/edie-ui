@@ -6,14 +6,16 @@ import BackwardIcon from 'material-ui/svg-icons/navigation/arrow-back'
 export default class GaugeServerPicker extends React.Component {
   render () {
     const {devices, selectedServers, selectedDevice, selectedRight, selectedMonitor,
-      onSelectDevice, onSelectRight, onSelectMonitor, onClickAddServer, onClickRemoveServer} = this.props
+      onSelectDevice, onSelectRight, onSelectMonitor, onClickAddServer, onClickRemoveServer,
+      tableClass
+    } = this.props
     const monitors = selectedDevice ? (selectedDevice.monitors || []) : []
     return (
       <div className="padding-md">
         <div className="row">
           <div className="col-md-6 p-none">
             <div style={{height: 300, overflow: 'auto', border: '1px solid gray'}}>
-              <table className="table table-hover">
+              <table className={`table table-hover ${tableClass}`}>
                 <tbody>
                 {devices.map((p, i) =>
                   <tr key={p.id}>
@@ -41,7 +43,7 @@ export default class GaugeServerPicker extends React.Component {
           </div>
           <div className="col-md-5 p-none">
             <div style={{height: 300, overflow: 'auto', border: '1px solid gray'}}>
-              <table className="table table-hover">
+              <table className={`table table-hover ${tableClass}`}>
                 <tbody>
                 {selectedServers.map(p => {
                   let isSel = false
