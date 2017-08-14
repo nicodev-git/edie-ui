@@ -1,4 +1,5 @@
 import React from 'react'
+import {findIndex} from 'lodash'
 
 import FlipView from './FlipView'
 import GEditView from './GEditView'
@@ -34,6 +35,37 @@ export default class GServers extends React.Component {
   onClickDelete () {
     this.props.removeDeviceGauge(this.props.gauge, this.props.device)
   }
+
+  getServers () {
+    const allDevices = filterGaugeServers(this.props.allDevices || this.props.devices)
+    const {gauge}= this.props
+    if (!gauge.servers || !gauge.servers.length) return allDevices
+    return gauge.servers.map(p => {
+      const index = findIndex(allDevices, {id: p.id})
+      if (index < 0) return {
+        id: p.monitorId || p.id,
+        name: p.name
+      }
+
+      const device = allDevices[index]
+      if (p.type === 'device') return device
+
+      const monitorIndex = findIndex(p.monitors, {uid: p.monitorId})
+      if (monitorIndex < 0) return {
+        id: p.monitorId,
+        name: p.name
+      }
+
+      const monitor = p.monitors[monitorIndex]
+      return {
+        id: monitor.uid,
+        name: monitor.name,
+        status: monitor.status,
+        templateName: monitor.monitortype
+      }
+    })
+  }
+
   getMaxItemCount (allDevices) {
     const {gauge}= this.props
 
@@ -79,7 +111,7 @@ export default class GServers extends React.Component {
     )
   }
   renderFrontView () {
-    const allDevices = filterGaugeServers(this.props.allDevices || this.props.devices)
+    const allDevices = this.getServers()
     const items = allDevices.slice(0, this.getMaxItemCount(allDevices))
     return (
       <div className="flex-vertical flex-1">

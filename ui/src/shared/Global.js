@@ -292,7 +292,7 @@ export const layoutRowHeight = 10
 export function getWidgetSize (gauge, devices, flip) {
   let size = gauge.gaugeSize
   if (gauge.templateName === 'Servers') {
-    const count = filterGaugeServers(devices || []).length
+    const count = !gauge.servers || !gauge.servers.length ? filterGaugeServers(devices || []).length : gauge.servers.length
     const ws = Math.max(Math.min(Math.ceil(count / (gauge.itemSize === 'slim' ? 24 : 16)), 3), 1)
     if (ws === 1) size = 'big'
     else if (ws === 2) size = 'very big'
