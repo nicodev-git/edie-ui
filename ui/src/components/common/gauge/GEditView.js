@@ -295,13 +295,12 @@ export default class GEditView extends React.Component {
     return (
       <div>
         <TextField name="name" value={name} floatingLabelText="Name" className="valign-top mr-dialog" onChange={this.onChangeText.bind(this, 'name')}/>
-        <SelectField value={itemSize} floatingLabelText="Item Size" className="valign-top mr-dialog" onChange={this.onChangeSelect.bind(this, 'itemSize')}>
+        <SelectField value={itemSize} floatingLabelText="Item Size" className="valign-top" onChange={this.onChangeSelect.bind(this, 'itemSize')}>
           <MenuItem value="normal" primaryText="Normal"/>
           <MenuItem value="slim" primaryText="Slim"/>
         </SelectField>
-        <Checkbox label="Show Device Type" checked={showDeviceType} onCheck={this.onChangeText.bind(this, 'showDeviceType')}/>
-
         <div>
+          <Checkbox label="Show Device Type" checked={showDeviceType} onCheck={this.onChangeText.bind(this, 'showDeviceType')}/>
           <div className="inline-block nowrap margin-md-right" style={{marginTop: 12}}>
             <Checkbox label="Forward to dashboard" checked={forward} onCheck={this.onChangeText.bind(this, 'forward')}/>
           </div>
