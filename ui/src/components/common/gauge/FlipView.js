@@ -89,7 +89,7 @@ export default class FlipView extends React.Component {
                 <DeleteIcon color="#545454" viewBox="0 0 32 32" className="link" onTouchTap={() => onClickDelete(gauge)}/>
               </div>
             </div>
-            <div className="text-center text-ellipsis">
+            <div className="tab-box-container text-center text-ellipsis">
               <div className="tab-box">
                 {gauge.name}
               </div>

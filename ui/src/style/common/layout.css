@@ -308,7 +308,14 @@ a, a:focus, a:hover {
     height: 100% !important;
 }
 
+.tab-box-container {
+    height: 19px;
+    overflow: visible;
+    z-index: 1;
+}
+
 .tab-box {
+    height: 20px;
     display: inline-block;
     padding: 0 4px;
     background: #fff;
