@@ -11,7 +11,7 @@ export default class GaugeServerPicker extends React.Component {
     } = this.props
     const monitors = selectedDevice ? (selectedDevice.monitors || []) : []
     return (
-      <div className="padding-md">
+      <div className="padding-md-left padding-md-right">
         <div className="row">
           <div className="col-md-6 p-none">
             <div style={{height: 300, overflow: 'auto', border: '1px solid gray'}}>
