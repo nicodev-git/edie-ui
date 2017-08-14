@@ -8,7 +8,8 @@ import FilledStar from 'material-ui/svg-icons/toggle/star'
 import LocalMovie from 'material-ui/svg-icons/maps/local-movies'
 import Computer from 'material-ui/svg-icons/hardware/computer'
 import NoSim from 'material-ui/svg-icons/communication/no-sim'
-import {Toolbar} from 'material-ui/Toolbar'
+import ClearIcon from 'material-ui/svg-icons/content/clear'
+// import {Toolbar} from 'material-ui/Toolbar'
 
 import { FormInput } from 'components/modal/parts'
 import DateRangePicker from 'components/common/DateRangePicker'
@@ -64,13 +65,16 @@ export default class SearchFormView extends React.Component {
       onClickViewFilter,
       onClickGraph,
 
-      onClickTags
+      onClickTags,
+
+      onClickClear
     } = this.props
     return (
       <form onSubmit={onSubmit}>
-        <Toolbar style={{background: '#dadada', height: '48px'}}>
-          <Field name="query" component={FormInput} label="Search" onKeyDown={onSearchKeyDown} style={{minWidth: 200}}/>
+        <div style={{background: '#dadada', paddingLeft: 10}}>
+          <Field name="query" component={FormInput} label="Search" onKeyDown={onSearchKeyDown} style={{minWidth: 200}} className="valign-top"/>
           <DateRangePicker
+            className="valign-top"
             startDate={startDate}
             endDate={endDate}
             onApply={onChangeDateRange}
@@ -84,7 +88,7 @@ export default class SearchFormView extends React.Component {
             hintText="Severity"
             value={selectedSeverities}
             onChange={onChangeSeverity}
-            className="text-left"
+            className="text-left valign-top"
             selectionRenderer={this.severityRenderer.bind(this, severities)}
           >
             {severities.map(option =>
@@ -140,18 +144,20 @@ export default class SearchFormView extends React.Component {
               />
             )}
           </SelectField>
-          <IconButton tooltip="Workflow" onTouchTap={onClickWorkflow}><img src="/resources/images/sidebar/search/wf-icon.png" width="24" alt=""/></IconButton>
-          <IconButton tooltip="Tags" onTouchTap={onClickTags}><img src="/resources/images/sidebar/search/tag.png" width="24" alt=""/></IconButton>
-          <IconButton tooltip="Search" onTouchTap={onClickWorkflow} type="submit" ><ActionSearch /></IconButton>
+          <IconButton tooltip="Workflow" onTouchTap={onClickWorkflow} className="valign-top"><img src="/resources/images/sidebar/search/wf-icon.png" width="24" alt=""/></IconButton>
+          <IconButton tooltip="Tags" onTouchTap={onClickTags} className="valign-top"><img src="/resources/images/sidebar/search/tag.png" width="24" alt=""/></IconButton>
+          <IconButton tooltip="Search" onTouchTap={onClickWorkflow} type="submit" className="valign-top"><ActionSearch /></IconButton>
 
-          <IconButton tooltip="Favorite" onTouchTap={onClickStar}>{starFilled ? <FilledStar/> : <ToggleStar/>}</IconButton>
-          <FlatButton label="Saved Search" style={iconButtonStyle} onClick={onClickSavedSearch} className="nowrap"/>
-          <IconButton tooltip="Illustrate" onTouchTap={onClickIllustrate}><LocalMovie/></IconButton>
-          <IconButton tooltip="Related devices" onTouchTap={onClickRelDevices}><Computer/></IconButton>
-          <IconButton tooltip="Non-related devices" onTouchTap={onClickIrrelDevices}><NoSim/></IconButton>
-          <IconButton tooltip="Views" onTouchTap={onClickViewFilter}><img src="/resources/images/sidebar/search/view-icon.png" width="24" alt=""/></IconButton>
-          <IconButton tooltip="Graph" onTouchTap={onClickGraph}><img src="/resources/images/sidebar/search/graph-icon.png" width="24" alt=""/></IconButton>
-        </Toolbar>
+          <IconButton tooltip="Favorite" className="valign-top" onTouchTap={onClickStar}>{starFilled ? <FilledStar/> : <ToggleStar/>}</IconButton>
+          <FlatButton label="Saved Search" style={iconButtonStyle} onClick={onClickSavedSearch} className="nowrap valign-top"/>
+          <IconButton tooltip="Illustrate" className="valign-top" onTouchTap={onClickIllustrate}><LocalMovie/></IconButton>
+          <IconButton tooltip="Related devices" className="valign-top" onTouchTap={onClickRelDevices}><Computer/></IconButton>
+          <IconButton tooltip="Non-related devices" className="valign-top" onTouchTap={onClickIrrelDevices}><NoSim/></IconButton>
+          <IconButton tooltip="Views" className="valign-top" onTouchTap={onClickViewFilter}><img src="/resources/images/sidebar/search/view-icon.png" width="24" alt=""/></IconButton>
+          <IconButton tooltip="Graph" className="valign-top" onTouchTap={onClickGraph}><img src="/resources/images/sidebar/search/graph-icon.png" width="24" alt=""/></IconButton>
+
+          <IconButton tooltip="Clear" className="valign-top" onTouchTap={onClickClear}><ClearIcon /></IconButton>
+        </div>
       </form>
     )
   }

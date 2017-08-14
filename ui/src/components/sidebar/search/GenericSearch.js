@@ -697,6 +697,8 @@ class GenericSearch extends React.Component {
             onClickGraph={this.onClickGraph.bind(this)}
 
             onClickTags={this.onClickTags.bind(this)}
+
+            onClickClear={this.onClickClearSearch.bind(this)}
           />
 
           <div className="text-center">
