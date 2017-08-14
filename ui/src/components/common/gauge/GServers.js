@@ -93,13 +93,15 @@ export default class GServers extends React.Component {
   renderItemView(item, total) {
     const {gauge} = this.props
     const isUp = item.status === 'UP'
-    const col = 100 / (gauge.itemSize === 'slim' ? 3 : 4) / Math.ceil(total / (gauge.itemSize === 'slim' ? 24 : 16))
-    const rows = Math.max(1, Math.ceil(total / col))
+    const colCount = (gauge.itemSize === 'slim' ? 3 : 4) * Math.ceil(total / (gauge.itemSize === 'slim' ? 24 : 16))
+    const col = 100.0 / colCount
+    const rowCount = Math.max(1, Math.ceil(total / colCount))
+    const row = 100.0 / rowCount / (gauge.itemSize === 'slim' ? 2 : 1)
     const padding = ''
     return (
       <div
         key={item.id} className={`col-md-3 text-center padding-xs ${padding}`}
-        style={{width: `${col}%`, height: gauge.itemSize === 'slim' ? '12.5%' : '25%'}}>
+        style={{width: `${col}%`, height: `${row}%`}}>
         <div
           className={`${isUp ? 'bg-success' : 'bg-danger'}`} style={{width: '100%', height: '100%', cursor: 'pointer'}}
           onClick={this.onClickItem.bind(this, item)}>
