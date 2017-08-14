@@ -94,6 +94,7 @@ export default class GServers extends React.Component {
     const {gauge} = this.props
     const isUp = item.status === 'UP'
     const col = 100 / (gauge.itemSize === 'slim' ? 3 : 4) / Math.ceil(total / (gauge.itemSize === 'slim' ? 24 : 16))
+    const rows = Math.max(1, Math.ceil(total / col))
     const padding = ''
     return (
       <div

@@ -291,13 +291,15 @@ export const layoutRowHeight = 10
 
 export function getWidgetSize (gauge, devices, flip) {
   let size = gauge.gaugeSize
+  let hs = 0
   if (gauge.templateName === 'Servers') {
     const count = !gauge.servers || !gauge.servers.length ? filterGaugeServers(devices || []).length : gauge.servers.length
     const ws = Math.max(Math.min(Math.ceil(count / (gauge.itemSize === 'slim' ? 24 : 16)), 3), 1)
     if (ws === 1) size = 'big'
     else if (ws === 2) size = 'very big'
     else size = 'extra big'
-    // const hs = count / ws /  (gauge.itemSize === 'slim' ? 6 : 4)
+
+    hs = Math.max(1, count / ws /  (gauge.itemSize === 'slim' ? 6 : 4))
   }
   if (flip && (size === 'small' || size === 'medium' || size === 'custom')) {
     size = 'big'
@@ -325,8 +327,11 @@ export function getWidgetSize (gauge, devices, flip) {
       wh = {w: 4, h: 4}
   }
 
-  if (!flip && gauge.templateName === 'Accelerometer') {
-    wh.h = 1
+  if (!flip) {
+    if (hs) wh.h = hs
+
+    if (gauge.templateName === 'Accelerometer')
+      wh.h = 1
   }
 
   return {w: wh.w * layoutWidthZoom, h: wh.h * layoutHeightZoom}
