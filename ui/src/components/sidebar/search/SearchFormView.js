@@ -13,7 +13,6 @@ import ClearIcon from 'material-ui/svg-icons/content/clear'
 
 import { FormInput } from 'components/modal/parts'
 import DateRangePicker from 'components/common/DateRangePicker'
-import { underlineFocusStyle, inputStyle, selectedItemStyle } from 'style/common/materialStyles'
 
 const iconButtonStyle = {
   marginTop: '4px',
@@ -82,9 +81,6 @@ export default class SearchFormView extends React.Component {
               renderer={this.renderDateLabel.bind(this)}
               style={{marginTop: '4px'}}/>
             <SelectField
-              underlineStyle={underlineFocusStyle}
-              selectedMenuItemStyle={selectedItemStyle}
-              menuItemStyle={inputStyle}
               multiple
               hintText="Severity"
               value={selectedSeverities}
@@ -103,9 +99,6 @@ export default class SearchFormView extends React.Component {
               )}
             </SelectField>
             <SelectField
-              underlineStyle={underlineFocusStyle}
-              selectedMenuItemStyle={selectedItemStyle}
-              menuItemStyle={inputStyle}
               multiple
               hintText="Collection"
               value={selectedCollections}
@@ -123,15 +116,12 @@ export default class SearchFormView extends React.Component {
               )}
             </SelectField>
             <SelectField
-              underlineStyle={underlineFocusStyle}
-              selectedMenuItemStyle={selectedItemStyle}
-              menuItemStyle={inputStyle}
               menuStyle={{
                 width: 220
               }}
               multiple
               hintText="MonitorType"
-              value={selectedMonitorTypes && selectedMonitorTypes.length ? selectedMonitorTypes : null}
+              value={selectedMonitorTypes}
               onChange={onChangeMonitorType}
               style={{width: '180px'}}
             >
@@ -150,18 +140,18 @@ export default class SearchFormView extends React.Component {
 
           <div className="nowrap">
 
-            <IconButton tooltip="Workflow" onTouchTap={onClickWorkflow} className="valign-top"><img src="/resources/images/sidebar/search/wf-icon.png" width="24" alt=""/></IconButton>
-            <IconButton tooltip="Tags" onTouchTap={onClickTags} className="valign-top"><img src="/resources/images/sidebar/search/tag.png" width="24" alt=""/></IconButton>
-            <IconButton tooltip="Search" onTouchTap={onClickWorkflow} type="submit" className="valign-top"><ActionSearch /></IconButton>
+            <IconButton tooltip="Workflow" tooltipPosition="top-center" onTouchTap={onClickWorkflow} className="valign-top"><img src="/resources/images/sidebar/search/wf-icon.png" width="24" alt=""/></IconButton>
+            <IconButton tooltip="Tags" tooltipPosition="top-center" onTouchTap={onClickTags} className="valign-top"><img src="/resources/images/sidebar/search/tag.png" width="24" alt=""/></IconButton>
+            <IconButton tooltip="Search" tooltipPosition="top-center" onTouchTap={onClickWorkflow} type="submit" className="valign-top"><ActionSearch /></IconButton>
 
-            <IconButton tooltip="Favorite" className="valign-top" onTouchTap={onClickStar}>{starFilled ? <FilledStar/> : <ToggleStar/>}</IconButton>
-            <IconButton tooltip="Illustrate" className="valign-top" onTouchTap={onClickIllustrate}><LocalMovie/></IconButton>
-            <IconButton tooltip="Related devices" className="valign-top" onTouchTap={onClickRelDevices}><Computer/></IconButton>
-            <IconButton tooltip="Non-related devices" className="valign-top" onTouchTap={onClickIrrelDevices}><NoSim/></IconButton>
-            <IconButton tooltip="Views" className="valign-top" onTouchTap={onClickViewFilter}><img src="/resources/images/sidebar/search/view-icon.png" width="24" alt=""/></IconButton>
-            <IconButton tooltip="Graph" className="valign-top" onTouchTap={onClickGraph}><img src="/resources/images/sidebar/search/graph-icon.png" width="24" alt=""/></IconButton>
+            <IconButton tooltip="Favorite" tooltipPosition="top-center" className="valign-top" onTouchTap={onClickStar}>{starFilled ? <FilledStar/> : <ToggleStar/>}</IconButton>
+            <IconButton tooltip="Illustrate" tooltipPosition="top-center" className="valign-top" onTouchTap={onClickIllustrate}><LocalMovie/></IconButton>
+            <IconButton tooltip="Related devices" tooltipPosition="top-center" className="valign-top" onTouchTap={onClickRelDevices}><Computer/></IconButton>
+            <IconButton tooltip="Non-related devices" tooltipPosition="top-center" className="valign-top" onTouchTap={onClickIrrelDevices}><NoSim/></IconButton>
+            <IconButton tooltip="Views" tooltipPosition="top-center" className="valign-top" onTouchTap={onClickViewFilter}><img src="/resources/images/sidebar/search/view-icon.png" width="24" alt=""/></IconButton>
+            <IconButton tooltip="Graph" tooltipPosition="top-center" className="valign-top" onTouchTap={onClickGraph}><img src="/resources/images/sidebar/search/graph-icon.png" width="24" alt=""/></IconButton>
 
-            <IconButton tooltip="Clear" className="valign-top" onTouchTap={onClickClear}><ClearIcon /></IconButton>
+            <IconButton tooltip="Clear" tooltipPosition="top-center" className="valign-top" onTouchTap={onClickClear}><ClearIcon /></IconButton>
           </div>
         </div>
       </form>
