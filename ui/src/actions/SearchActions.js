@@ -392,9 +392,9 @@ export const toggleViewCol = (col) => {
   }
 }
 
-export const resetViewCols = () => {
+export const resetViewCols = (cols) => {
   return dispatch => {
-    dispatch({type: RESET_VIEW_COLS})
+    dispatch({type: RESET_VIEW_COLS, cols})
   }
 }
 

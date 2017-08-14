@@ -239,7 +239,7 @@ export default function (state = initialState, action) {
       return { ...state, viewCols }
     }
     case RESET_VIEW_COLS:
-      return { ...state, viewCols: [] }
+      return { ...state, viewCols: action.cols || [] }
     default:
       return state
   }

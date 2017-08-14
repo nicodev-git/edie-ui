@@ -114,6 +114,8 @@ class GenericSearch extends React.Component {
         this.props.updateSearchParams(params, this.props.history)
         this.props.replaceSearchWfs([])
         this.props.updateSearchTags([])
+        this.props.updateSearchViewFilter('')
+        this.props.resetViewCols()
         this.props.updateQueryChips(queryChips)
         this.props.change('query', '')
         this.props.change('searchOptionIndex', '')
@@ -144,6 +146,8 @@ class GenericSearch extends React.Component {
       this.props.updateSearchParams(params, this.props.history)
       this.props.replaceSearchWfs([])
       this.props.updateSearchTags([])
+      this.props.updateSearchViewFilter('')
+      this.props.resetViewCols()
       this.props.updateQueryChips(queryChips)
       this.props.change('query', '')
       this.props.change('searchOptionIndex', '')
@@ -300,7 +304,7 @@ class GenericSearch extends React.Component {
   }
 
   onClickSaveSearch (values) {
-    const { userInfo, params, searchSaveType } = this.props
+    const { userInfo, params, searchSaveType, viewFilter, viewCols } = this.props
     if (!userInfo || !values.name) return
     const option = {
       id: guid(),
@@ -316,7 +320,9 @@ class GenericSearch extends React.Component {
       if (index < 0) return
       this.props.updateSearchOption(userInfo, {
         ...options[index],
-        data: JSON.stringify(params)
+        data: JSON.stringify(params),
+        viewFilter,
+        viewCols
       })
     }
     this.props.closeSearchSavePopover()
@@ -340,6 +346,8 @@ class GenericSearch extends React.Component {
 
     this.props.updateSearchParams(params, this.props.history)
     this.props.updateQueryChips(newQueryChips)
+    this.props.updateSearchViewFilter(selectedSearch.viewFilter || '')
+    this.props.resetViewCols(selectedSearch.viewCols || [])
     this.props.replaceSearchWfs(workflows)
     this.props.updateSearchTags(tags)
     this.props.change('query', '')
