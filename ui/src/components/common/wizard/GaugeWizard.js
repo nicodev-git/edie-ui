@@ -148,7 +148,8 @@ class GaugeWizard extends React.Component {
     const {selectedRight, selectedServers} = this.state
     if (!selectedRight) return
     this.setState({
-      selectedServers: selectedServers.filter(p => p.id ? p.id !== selectedRight.id : p.uid !== selectedRight.uid)
+      selectedServers: selectedServers.filter(p => selectedRight.type !== p.type ||
+        (p.type === 'monitor' ? p.monitorId !== selectedRight.monitorId : p.id !== selectedRight.id))
     })
   }
 
