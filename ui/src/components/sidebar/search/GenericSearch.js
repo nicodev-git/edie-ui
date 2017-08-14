@@ -305,7 +305,7 @@ class GenericSearch extends React.Component {
 
   onClickSaveSearch (values) {
     const { userInfo, params, searchSaveType, viewFilter, viewCols } = this.props
-    if (!userInfo || !values.name) return
+    if (!userInfo) return
     const option = {
       id: guid(),
       name: values.name,
@@ -315,8 +315,10 @@ class GenericSearch extends React.Component {
     }
 
     if (searchSaveType === 'new') {
+      if (!values.name) return
       this.props.addSearchOption(userInfo, option)
     } else {
+      if (!values.searchId) return
       const options = this.getSearchOptions()
       const index = findIndex(options, {id: values.searchId})
       if (index < 0) return
