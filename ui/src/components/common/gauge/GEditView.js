@@ -370,7 +370,7 @@ export default class GEditView extends React.Component {
           </SelectField>
         </div>
 
-        <div>
+        <div className="hidden">
           <GaugeServerPicker
             devices={devices}
             selectedServers={servers}

@@ -468,13 +468,23 @@ class GenericSearch extends React.Component {
     }), this.props.history)
   }
   onClickClearSearch () {
-    const {updateSearchTags, updateQueryChips} = this.props
+    const {updateSearchTags, updateQueryChips, replaceSearchWfs} = this.props
     updateQueryChips([])
     updateSearchTags([])
+    replaceSearchWfs([])
     this.props.updateSearchParams(assign({}, this.props.params, {
+      query: '',
+      workflow: '',
       tag: '',
-      query: ''
+      collections: 'incident,event',
+      severity: 'HIGH,MEDIUM',
+      monitorTypes: '',
+      dateFrom: moment().add(-1, 'days').startOf('day').format(dateFormat),
+      dateTo: moment().endOf('day').format(dateFormat)
     }), this.props.history)
+
+    this.props.change('query', '')
+    this.props.change('searchOptionIndex', '')
   }
   renderFields () {
     const {selectedField} = this.props
@@ -646,7 +656,7 @@ class GenericSearch extends React.Component {
   }
 
   render () {
-    const { handleSubmit, selectedWf, params, monitorTemplates, searchTags, queryChips } = this.props
+    const { handleSubmit, selectedWf, params, monitorTemplates, searchTags, queryChips, selectedWfs } = this.props
     const { severity, dateFrom, dateTo, monitorTypes } = params
     const selectedCollections = params.collections
     const workflow = this.props.workflows.filter(m => m.id === selectedWf)
@@ -698,7 +708,7 @@ class GenericSearch extends React.Component {
                     {p.name !== '_all' ? <b>{p.name}: </b> : null}{p.value}
                   </Chip>
                 )}
-                {this.props.selectedWfs.map((p, i) =>
+                {selectedWfs.map((p, i) =>
                   <Chip
                     key={p.id}
                     style={chipStyles.chip}
@@ -717,7 +727,7 @@ class GenericSearch extends React.Component {
                   )
                 }
                 {
-                  searchTags.length > 0 || queryChips.length > 0 ? (
+                  searchTags.length || queryChips.length || selectedWfs.length ? (
                     <Chip
                       style={chipStyles.chip}
                       onTouchTap={this.onClickClearSearch.bind(this)}>
