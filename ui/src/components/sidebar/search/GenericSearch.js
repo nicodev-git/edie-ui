@@ -309,7 +309,9 @@ class GenericSearch extends React.Component {
     const option = {
       id: guid(),
       name: values.name,
-      data: JSON.stringify(params)
+      data: JSON.stringify(params),
+      viewFilter,
+      viewCols
     }
 
     if (searchSaveType === 'new') {
