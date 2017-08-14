@@ -301,8 +301,9 @@ export function getWidgetSize (gauge, devices, flip) {
 
     hs = Math.max(1, count / ws /  (gauge.itemSize === 'slim' ? 6 : 4))
   }
-  if (flip && (size === 'small' || size === 'medium' || size === 'custom')) {
-    size = gauge.templateName === 'Servers' ? 'very big' : 'big'
+  if (flip) {
+    if (size === 'small' || size === 'medium' || size === 'custom') size = 'big'
+    if (gauge.templateName === 'Servers') size = 'very big'
   }
 
   let wh = {w: 4, h: 4}
@@ -328,7 +329,7 @@ export function getWidgetSize (gauge, devices, flip) {
   }
 
   if (flip) {
-    if (gauge.templateName === 'Servers') wh.h = 7
+    if (gauge.templateName === 'Servers') wh.h = 6
   } else {
     if (hs) wh.h = hs
 
