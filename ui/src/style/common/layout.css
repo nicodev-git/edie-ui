@@ -252,6 +252,7 @@ a, a:focus, a:hover {
 .panel-white {
     border: none;
     background: transparent;
+    box-shadow: none;
 }
 
 .panel-white>.panel-heading {
@@ -270,6 +271,7 @@ a, a:focus, a:hover {
 }
 .panel-white>.panel-body {
     background: white;
+    border: 1px solid lightgrey;
 }
 
 .link {
@@ -307,13 +309,14 @@ a, a:focus, a:hover {
 }
 
 .tab-box {
-    padding: 4px;
+    display: inline-block;
+    padding: 2px 4px;
     background: #fff;
-    border-radius: 4px;
+    border-radius: 6px;
     border: 1px solid #ccc;
     margin: 0 4px 0;
-    box-shadow: 0 0 2px #fff inset;
     border-bottom: none;
     border-bottom-right-radius: 0;
     border-bottom-left-radius: 0;
+    text-align: center;
 }
