@@ -275,7 +275,7 @@ export default class GaugeWizardView extends React.Component {
                 <tbody>
                   {selectedServers.map(p =>
                     <tr
-                      key={p.id || p.uid} className={selectedRight && selectedRight.id === p.id ? 'selected' : ''}
+                      key={p.id || p.uid} className={selectedRight && (selectedRight.id === p.id && selectedRight.uid === p.uid ? 'selected' : ''}
                       onClick={() => onSelectRight(p)}>
                       <td>{p.name}</td>
                     </tr>
