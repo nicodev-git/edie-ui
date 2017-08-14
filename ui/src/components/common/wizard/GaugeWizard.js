@@ -119,12 +119,24 @@ class GaugeWizard extends React.Component {
   onClickAddServer () {
     let {selectedDevice, selectedServers, selectedMonitor} = this.state
     if (!selectedDevice) return
-    let index = findIndex(selectedServers, {id: selectedDevice.id})
-    if (index < 0) selectedServers = [...selectedServers, selectedDevice]
 
     if (selectedMonitor) {
-      index = findIndex(selectedServers,  {uid: selectedMonitor.uid})
-      if (index < 0) selectedServers = [...selectedServers, selectedMonitor]
+      const index = findIndex(selectedServers,  {type: 'monitor', monitorId: selectedMonitor.uid})
+      const item = {
+        type: 'monitor',
+        monitorId: selectedMonitor.uid,
+        id: selectedDevice.id,
+        name: selectedMonitor.name
+      }
+      if (index < 0) selectedServers = [...selectedServers, item]
+    } else {
+      const index = findIndex(selectedServers, {type: 'device', id: selectedDevice.id})
+      const item = {
+        type: 'device',
+        id: selectedDevice.id,
+        name: selectedDevice.name
+      }
+      if (index < 0) selectedServers = [...selectedServers, item]
     }
 
     this.setState({
@@ -136,7 +148,7 @@ class GaugeWizard extends React.Component {
     const {selectedRight, selectedServers} = this.state
     if (!selectedRight) return
     this.setState({
-      selectedServers: selectedServers.filter(p => p.id !== selectedRight.id && p.uid !== selectedRight.uid)
+      selectedServers: selectedServers.filter(p => p.id ? p.id !== selectedRight.id : p.uid !== selectedRight.uid)
     })
   }
 

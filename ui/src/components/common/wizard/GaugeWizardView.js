@@ -273,13 +273,22 @@ export default class GaugeWizardView extends React.Component {
             <div style={{height: 300, overflow: 'auto', border: '1px solid gray'}}>
               <table className="table table-hover">
                 <tbody>
-                  {selectedServers.map(p =>
-                    <tr
-                      key={p.id || p.uid} className={selectedRight && selectedRight.id === p.id && selectedRight.uid === p.uid ? 'selected' : ''}
-                      onClick={() => onSelectRight(p)}>
-                      <td>{p.name}</td>
-                    </tr>
-                  )}
+                  {selectedServers.map(p => {
+                    let isSel = false
+                    if (selectedRight) {
+                      if (selectedRight.type === 'monitor')
+                        isSel = p.type === 'monitor' && p.monitorId === selectedRight.monitorId
+                      else
+                        isSel = p.type === 'device' && p.id === selectedRight.id
+                    }
+                    return (
+                      <tr
+                        key={p.monitorId || p.id} className={isSel  ? 'selected' : ''}
+                        onClick={() => onSelectRight(p)}>
+                        <td>{p.name}</td>
+                      </tr>
+                    )
+                  })}
                 </tbody>
               </table>
             </div>
