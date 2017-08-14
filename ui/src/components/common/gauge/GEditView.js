@@ -7,6 +7,8 @@ import DoneButton from './DoneButton'
 import {gaugeDurationTypes, gaugeResources, severities as allSeverities} from 'shared/Global'
 import DateRangePicker from 'components/common/DateRangePicker'
 
+import GaugeServerPicker from 'components/common/wizard/input/GaugeServerPicker'
+
 const durations = '1 2 3 5 10 15 30'.split(' ').map(p => ({
   label: p, value: parseInt(p, 10)
 }))
@@ -292,6 +294,8 @@ export default class GEditView extends React.Component {
   renderServers () {
     const {gaugeBoards} = this.props
     const {name, itemSize, showDeviceType, forward, forwardBoardId} = this.state
+
+    const pickerProps = {}
     return (
       <div>
         <TextField name="name" value={name} floatingLabelText="Name" className="valign-top mr-dialog" onChange={this.onChangeText.bind(this, 'name')}/>
@@ -307,6 +311,10 @@ export default class GEditView extends React.Component {
           <SelectField value={forwardBoardId} className="valign-top" onChange={this.onChangeSelect.bind(this, 'forwardBoardId')}>
             {(gaugeBoards || []).map(p => <MenuItem key={p.id} value={p.id} primaryText={p.name}/>)}
           </SelectField>
+        </div>
+
+        <div>
+          <GaugeServerPicker/>
         </div>
       </div>
     )
