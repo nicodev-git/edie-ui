@@ -130,8 +130,8 @@ export default class SearchFormView extends React.Component {
                 width: 220
               }}
               multiple
-              floatingLabelText={selectedMonitorTypes && selectedMonitorTypes.length ? '' : 'MonitorType'}
-              value={selectedMonitorTypes}
+              hintText="MonitorType"
+              value={selectedMonitorTypes && selectedMonitorTypes.length ? selectedMonitorTypes : null}
               onChange={onChangeMonitorType}
               style={{width: '180px'}}
             >
