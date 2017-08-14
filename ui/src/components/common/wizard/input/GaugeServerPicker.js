@@ -7,14 +7,14 @@ export default class GaugeServerPicker extends React.Component {
   render () {
     const {devices, selectedServers, selectedDevice, selectedRight, selectedMonitor,
       onSelectDevice, onSelectRight, onSelectMonitor, onClickAddServer, onClickRemoveServer,
-      tableClass
+      tableClass, height
     } = this.props
     const monitors = selectedDevice ? (selectedDevice.monitors || []) : []
     return (
       <div className="padding-md-left padding-md-right">
         <div className="row">
           <div className="col-md-6 p-none">
-            <div style={{height: 300, overflow: 'auto', border: '1px solid gray'}}>
+            <div style={{height: height || 300, overflow: 'auto', border: '1px solid gray'}}>
               <table className={`table table-hover ${tableClass}`}>
                 <tbody>
                 {devices.map((p, i) =>
@@ -42,7 +42,7 @@ export default class GaugeServerPicker extends React.Component {
             </IconButton>
           </div>
           <div className="col-md-5 p-none">
-            <div style={{height: 300, overflow: 'auto', border: '1px solid gray'}}>
+            <div style={{height: height || 300, overflow: 'auto', border: '1px solid gray'}}>
               <table className={`table table-hover ${tableClass}`}>
                 <tbody>
                 {selectedServers.map(p => {

@@ -360,18 +360,17 @@ export default class GEditView extends React.Component {
           <MenuItem value="normal" primaryText="Normal"/>
           <MenuItem value="slim" primaryText="Slim"/>
         </SelectField>
-        <div>
-          <Checkbox label="Show Device Type" checked={showDeviceType} onCheck={this.onChangeText.bind(this, 'showDeviceType')}/>
-          <div className="inline-block nowrap margin-md-right" style={{marginTop: 12}}>
-            <Checkbox label="Forward to dashboard" checked={forward} onCheck={this.onChangeText.bind(this, 'forward')}/>
-          </div>
-          <SelectField value={forwardBoardId} className="valign-top" onChange={this.onChangeSelect.bind(this, 'forwardBoardId')}>
-            {(gaugeBoards || []).map(p => <MenuItem key={p.id} value={p.id} primaryText={p.name}/>)}
-          </SelectField>
+        <Checkbox label="Show Device Type" checked={showDeviceType} onCheck={this.onChangeText.bind(this, 'showDeviceType')}/>
+        <div className="inline-block nowrap margin-md-right" style={{marginTop: 12}}>
+          <Checkbox label="Forward to dashboard" checked={forward} onCheck={this.onChangeText.bind(this, 'forward')}/>
         </div>
+        <SelectField value={forwardBoardId} className="valign-top" onChange={this.onChangeSelect.bind(this, 'forwardBoardId')}>
+          {(gaugeBoards || []).map(p => <MenuItem key={p.id} value={p.id} primaryText={p.name}/>)}
+        </SelectField>
 
-        <div className="hidden">
+        <div>
           <GaugeServerPicker
+            height={200}
             devices={devices}
             selectedServers={servers}
             selectedDevice={selectedDevice}
