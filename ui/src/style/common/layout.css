@@ -310,7 +310,7 @@ a, a:focus, a:hover {
 
 .tab-box {
     display: inline-block;
-    padding: 2px 4px;
+    padding: 0 4px;
     background: #fff;
     border-radius: 6px;
     border: 1px solid #ccc;
