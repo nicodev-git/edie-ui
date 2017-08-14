@@ -63,12 +63,17 @@ export default class GaugeWizardView extends React.Component {
     )
   }
   renderNormal () {
-    const {searchList, workflows, formValues, durationVisible, splitVisible} = this.props
-
+    const {searchList, workflows, formValues, durationVisible, splitVisible, templateName} = this.props
+    let resourceOptions = gaugeResources
+    if (templateName === 'Up/Down') {
+      resourceOptions = [...resourceOptions, {
+        label: 'Logical Group', value: 'logicalgroup'
+      }]
+    }
     return (
       <div>
         <Field name="name" component={FormInput} floatingLabel="Name" className="valign-top mr-dialog"/>
-        <Field name="resource" component={FormSelect} floatingLabel="Resource" options={gaugeResources} className="valign-top"/>
+        <Field name="resource" component={FormSelect} floatingLabel="Resource" options={resourceOptions} className="valign-top"/>
 
         {formValues.resource === 'search' && <Field name="savedSearchId" component={FormSelect} floatingLabel="Saved Search" options={searchList} className="valign-top mr-dialog"/>}
         {formValues.resource === 'incident' && <Field name="workflowId" component={FormSelect} floatingLabel="Workflow" options={workflows} className="valign-top mr-dialog"/>}
