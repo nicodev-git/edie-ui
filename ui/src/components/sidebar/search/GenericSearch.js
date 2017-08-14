@@ -468,10 +468,13 @@ class GenericSearch extends React.Component {
     }), this.props.history)
   }
   onClickClearSearch () {
-    const {updateSearchTags, updateQueryChips, replaceSearchWfs} = this.props
+    const {updateSearchTags, updateQueryChips, replaceSearchWfs, updateSearchViewFilter, resetViewCols} = this.props
     updateQueryChips([])
     updateSearchTags([])
     replaceSearchWfs([])
+    updateSearchViewFilter(null)
+    resetViewCols()
+
     this.props.updateSearchParams(assign({}, this.props.params, {
       query: '',
       workflow: '',

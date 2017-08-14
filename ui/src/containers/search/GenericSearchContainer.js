@@ -62,6 +62,7 @@ import {
 
   updateGraphParams,
   toggleViewCol,
+  resetViewCols,
   refreshSearch
 } from 'actions'
 
@@ -189,6 +190,7 @@ export default connect(
       showSearchTagModal,
       updateSearchTags,
       toggleViewCol,
+      resetViewCols,
       refreshSearch
     }, dispatch)
   })

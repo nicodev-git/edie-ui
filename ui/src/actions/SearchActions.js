@@ -54,7 +54,8 @@ import {
 
   UPDATE_GRAPH_PARAMS,
 
-  TOGGLE_VIEW_COL
+  TOGGLE_VIEW_COL,
+  RESET_VIEW_COLS
 } from './types'
 import { ROOT_URL } from './config'
 import { apiError } from './Errors'
@@ -388,6 +389,12 @@ export const updateGraphParams = (params, graphParams) => {
 export const toggleViewCol = (col) => {
   return dispatch => {
     dispatch({type: TOGGLE_VIEW_COL, col})
+  }
+}
+
+export const resetViewCols = () => {
+  return dispatch => {
+    dispatch({type: RESET_VIEW_COLS})
   }
 }
 

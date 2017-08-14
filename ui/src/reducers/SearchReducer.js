@@ -58,7 +58,8 @@ import {
   UPDATE_GRAPH_PARAMS,
 
   REFRESH_SEARCH,
-  TOGGLE_VIEW_COL
+  TOGGLE_VIEW_COL,
+  RESET_VIEW_COLS
 } from 'actions/types'
 import { concat } from 'lodash'
 
@@ -237,6 +238,8 @@ export default function (state = initialState, action) {
       else viewCols = [ ...viewCols, action.col ]
       return { ...state, viewCols }
     }
+    case RESET_VIEW_COLS:
+      return { ...state, viewCols: [] }
     default:
       return state
   }
