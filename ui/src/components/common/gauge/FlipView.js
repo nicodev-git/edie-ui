@@ -83,12 +83,16 @@ export default class FlipView extends React.Component {
       <div className={`${cls} ${this.getFlipClass()}`}>
         <div className="flex-vertical" style={{height: '100%'}}>
           <div className="panel panel-white flex-vertical flex-1">
-            <div className={`panel-heading hidden`}>
+            <div className="panel-heading hidden">
               <h4 className="panel-title text-ellipsis">{gauge.name}</h4>
               <div className="panel-options">
                 <DeleteIcon color="#545454" viewBox="0 0 32 32" className="link" onTouchTap={() => onClickDelete(gauge)}/>
               </div>
             </div>
+            <div className="tab-box text-ellipsis">
+              {gauge.name}
+            </div>
+
             <div className="panel-body p-none flex-vertical flex-1">
               {children}
               {loading && front && <RefreshOverlay />}

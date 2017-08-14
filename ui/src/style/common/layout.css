@@ -250,13 +250,13 @@ a, a:focus, a:hover {
 }
 
 .panel-white {
-    border-color: white;
+    border: none;
+    background: transparent;
 }
 
-.panel-white>.panel-heading,
-.panel-white>form>.panel-heading {
+.panel-white>.panel-heading {
     color: black;
-    background-color: white;
+    background-color: transparent;
     border-color: white;
     padding: 2px 5px;
 }
@@ -267,6 +267,9 @@ a, a:focus, a:hover {
 .panel-white>.panel-heading>.panel-options{
     top: 3px;
     right: 0px;
+}
+.panel-white>.panel-body {
+    background: white;
 }
 
 .link {
@@ -304,11 +307,13 @@ a, a:focus, a:hover {
 }
 
 .tab-box {
-    height:50px;
+    padding: 4px;
     background: #fff;
     border-radius: 4px;
-    border:1px solid #ccc;
-    margin:0 10px 0;
-    box-shadow: 0 0 2px  #fff inset;
-    transform: perspective(100px) rotateX(30deg);
+    border: 1px solid #ccc;
+    margin: 0 4px 0;
+    box-shadow: 0 0 2px #fff inset;
+    border-bottom: none;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
 }
