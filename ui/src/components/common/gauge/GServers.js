@@ -50,13 +50,13 @@ export default class GServers extends React.Component {
       const device = allDevices[index]
       if (p.type === 'device') return device
 
-      const monitorIndex = findIndex(p.monitors, {uid: p.monitorId})
+      const monitorIndex = findIndex(device.monitors, {uid: p.monitorId})
       if (monitorIndex < 0) return {
         id: p.monitorId,
         name: p.name
       }
 
-      const monitor = p.monitors[monitorIndex]
+      const monitor = device.monitors[monitorIndex]
       return {
         id: monitor.uid,
         name: monitor.name,
