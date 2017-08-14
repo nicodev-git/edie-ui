@@ -700,7 +700,7 @@ class GenericSearch extends React.Component {
             onClickIrrelDevices={this.onClickIrrelDevices.bind(this)}
 
             monitorTemplates={monitorTemplates}
-            selectedMonitorTypes={(monitorTypes || '').split(',')}
+            selectedMonitorTypes={(monitorTypes || '').split(',').filter(p => !!p)}
             onChangeMonitorType={this.onChangeMonitorType.bind(this)}
 
             onClickViewFilter={this.onClickViewFilter.bind(this)}
