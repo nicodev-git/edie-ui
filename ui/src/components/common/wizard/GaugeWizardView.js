@@ -46,11 +46,20 @@ export default class GaugeWizardView extends React.Component {
     ]
   }
   renderWorkflowPick () {
-    const {workflows, formValues} = this.props
+    const {devices, workflows, formValues} = this.props
     if (formValues.resource !== 'incident') return null
+
+    if (!devices) {
+      return (
+        <Field name="workflowId" component={FormSelect} floatingLabel="Workflow" options={workflows} className="valign-top mr-dialog"/>
+      )
+    }
+    const index = findIndex(devices, {id: formValues.deviceId})
+    const wfs = index < 0 ? [] : (devices[index].workflowids || [])
+    const wfOptions = workflows.filter(p => wfs.includes(p.value))
     return [
       this.renderDeviceList(),
-      <Field name="workflowId" component={FormSelect} floatingLabel="Workflow" options={workflows} className="valign-top mr-dialog"/>
+      <Field key="workflowId" name="workflowId" component={FormSelect} floatingLabel="Workflow" options={wfOptions} className="valign-top"/>
     ]
   }
   renderLogicalGroup () {
