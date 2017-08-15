@@ -107,7 +107,7 @@ export default class IncidentTable extends Component {
   }
 
   renderSun () {
-    if (this.state.sunVisible) return null
+    if (!this.state.sunVisible) return null
     return (
       <div className="text-center div-sun" style={{}}>
         <div className="bg"/>
