@@ -17,6 +17,7 @@ export default class SavedSearchModal extends React.Component {
   }
   onClickClose () {
     this.props.showSavedSearch(false)
+    this.props.closeSearchSavePopover()
   }
   onClickOK () {
     const {selectedSearch} = this.props
