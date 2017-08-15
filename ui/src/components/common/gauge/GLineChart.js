@@ -99,18 +99,10 @@ export default class GLineChart extends React.Component {
 
   getParams (props) {
     const {gauge, searchList} = props
-    const {savedSearchId, monitorId, resource, duration, durationUnit, splitUnit,workflowId} = gauge
-
-    let inc = 1
-    if (durationUnit === 'month' && splitUnit === 'day') inc = 0
-    const dateFrom = moment().add(-duration + inc, `${durationUnit}s`)
-      .startOf(durationUnit === 'hour' || duration === 1 ? durationUnit : 'day')
-    const dateTo = moment().endOf(durationUnit === 'hour' ? durationUnit : 'day')
+    const {savedSearchId, monitorId, resource, workflowId} = gauge
 
     if (resource === 'monitor') {
       return {
-        dateFrom: dateFrom.format(dateFormat),
-        dateTo: dateTo.format(dateFormat),
         query: `monitorid=${monitorId}`
       }
     } else if (resource === 'incident'){
@@ -120,9 +112,7 @@ export default class GLineChart extends React.Component {
         collections: 'incident',
         severity: severities.map(p => p.value).join(','),
         tag: '',
-        monitorTypes: '',
-        dateFrom: dateFrom.format(dateFormat),
-        dateTo: dateTo.format(dateFormat)
+        monitorTypes: ''
       }
     } else {
       const index = findIndex(searchList, {id: savedSearchId})
@@ -132,11 +122,7 @@ export default class GLineChart extends React.Component {
       }
       const searchParams = JSON.parse(searchList[index].data)
 
-      return {
-        ...searchParams,
-        dateFrom: dateFrom.format(dateFormat),
-        dateTo: dateTo.format(dateFormat)
-      }
+      return searchParams
     }
   }
 
@@ -233,20 +219,21 @@ export default class GLineChart extends React.Component {
 
   onClickPoint (e, elements) {
     if (!elements.length) return
-    const {gauge, searchList} = this.props
-    const {splitBy, splitUnit} = gauge
-
     const el = elements[0]
-
 
     const record = this.state.searchRecordCounts[el._index]
     if (!record) {
       console.log('Record not found')
       return
     }
-    moment(record.date, 'YYYY-MM-DD')
-    // this.props.history.push('/search')
-    // this.props.loadSearch(this.getParams(this.props), this.props.history)
+    const params = {
+      ...this.getParams(this.props)
+    }
+    if (record.dateFrom) params.dateFrom = record.dateFrom
+    if (record.dateTo) params.dateTo = record.dateTo
+
+    this.props.history.push('/search')
+    this.props.loadSearch(params, this.props.history)
   }
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
