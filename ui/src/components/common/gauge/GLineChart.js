@@ -233,7 +233,7 @@ export default class GLineChart extends React.Component {
 
   onClickPoint (e, elements) {
     if (!elements.length) return
-    const {gauge, searchList} = props
+    const {gauge, searchList} = this.props
     const {splitBy, splitUnit} = gauge
 
     const el = elements[0]
