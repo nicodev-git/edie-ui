@@ -355,6 +355,8 @@ class GenericSearch extends React.Component {
     this.props.replaceSearchWfs(workflows)
     this.props.updateSearchTags(tags)
     this.props.change('query', '')
+
+    this.props.closeSearchSavePopover()
   }
 
   onClickWorkflow () {
@@ -526,6 +528,8 @@ class GenericSearch extends React.Component {
         onRequestClose={closeSearchSavePopover}
         onSubmit={this.onClickSaveSearch.bind(this)}
         userOptions={this.getSearchOptions()}
+
+        onChangeSearchOption={this.onChangeSearchOption.bind(this)}
       />
     )
   }
