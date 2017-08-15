@@ -15,8 +15,8 @@ class WorkflowSelectModal extends React.Component {
   }
 
   getWorkflows () {
-    const { selectedCategory, workflowFilter } = this.props
-    return this.props.workflows.filter(m =>
+    const { selectedCategory, workflowFilter, workflows } = this.props
+    return workflows.filter(m =>
       (!selectedCategory || m.category === selectedCategory) &&
       (
         !workflowFilter ||

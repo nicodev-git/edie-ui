@@ -68,6 +68,7 @@ export default class SearchFormView extends React.Component {
         <div style={{background: '#dadada', paddingLeft: 10}}>
           <div className="nowrap">
             <Field name="query" component={FormInput} label="Search" onKeyDown={onSearchKeyDown} style={{minWidth: 200}} className="valign-top"/>
+            <IconButton tooltip="Search" onTouchTap={onClickSearch} type="submit" className="valign-top"><ActionSearch /></IconButton>
             <DateRangePicker
               className="valign-top"
               startDate={startDate}
@@ -133,8 +134,6 @@ export default class SearchFormView extends React.Component {
           </div>
 
           <div className="nowrap">
-            <IconButton tooltip="Search" tooltipPosition="top-center" onTouchTap={onClickSearch} type="submit" className="valign-top"><ActionSearch /></IconButton>
-
             <IconButton tooltip="Workflow" tooltipPosition="top-center" onTouchTap={onClickWorkflow} className="valign-top"><img src="/resources/images/sidebar/search/wf-icon.png" width="24" alt=""/></IconButton>
             <IconButton tooltip="Tags" tooltipPosition="top-center" onTouchTap={onClickTags} className="valign-top"><img src="/resources/images/sidebar/search/tag.png" width="24" alt=""/></IconButton>
 
