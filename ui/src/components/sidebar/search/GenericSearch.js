@@ -48,11 +48,9 @@ class GenericSearch extends React.Component {
         if (viewFilter === viewFilters.log.name) {
           if (!entity.dataobj) return <span/>
           return (
-            <div className="padding-sm">
-              <div style={chipStyles.wrapper}>
-                {<div className="inline-block" style={{lineHeight: 2.5}}>{entity.dataobj.line}</div>}
-                {entity.dataobj.file && <Chip style={chipStyles.chip}>{entity.dataobj.file}</Chip>}
-              </div>
+            <div style={chipStyles.wrapper}>
+              {<div className="inline-block flex-1">{entity.dataobj.line}</div>}
+              {entity.dataobj.file && <Chip style={{...chipStyles.chip, maxHeight: 32}}>{entity.dataobj.file}</Chip>}
             </div>
           )
         } else if (viewFilter === viewFilters.raw.name) {
