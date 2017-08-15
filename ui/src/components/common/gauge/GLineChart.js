@@ -188,6 +188,10 @@ export default class GLineChart extends React.Component {
     this.props.removeDeviceGauge(this.props.gauge, this.props.device)
   }
 
+  onClickPoint () {
+    console.log(arguments)
+  }
+
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   renderFrontView () {
@@ -201,7 +205,8 @@ export default class GLineChart extends React.Component {
         borderWidth: 1,
         borderColor: '#269C8B',
         fill: false
-      }]
+      }],
+      onElementsClick: this.onClickPoint.bind(this)
     }
 
     return (
