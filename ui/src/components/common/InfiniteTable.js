@@ -33,7 +33,7 @@ class InfiniteTable extends React.Component {
 
   componentWillMount () {
     const {onUpdateCount} = this.props
-    onUpdateCount && onUpdateCount(0, [])
+    onUpdateCount && onUpdateCount(0, [], true)
   }
 
   componentDidMount () {

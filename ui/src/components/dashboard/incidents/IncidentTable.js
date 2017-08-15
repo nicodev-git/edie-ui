@@ -14,7 +14,7 @@ export default class IncidentTable extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      sunVisible: true
+      sunVisible: false
     }
 
     this.cells = [{
@@ -106,6 +106,17 @@ export default class IncidentTable extends Component {
   onRowDblClick () {
   }
 
+  renderSun () {
+    if (this.state.sunVisible) return null
+    return (
+      <div className="text-center div-sun" style={{}}>
+        <div className="bg"/>
+        You have no incidents.<br/>
+        Please enjoy your day!
+      </div>
+    )
+  }
+
   render () {
     return (
       <div style={{position: 'absolute', width: '100%', top: 0, bottom: 0, overflow: 'auto'}}>
@@ -121,7 +132,7 @@ export default class IncidentTable extends Component {
             severity: ['HIGH', 'MEDIUM'],
             sort: 'startTimestamp,desc'
           }}
-          onUpdateCount={total => this.setState({sunVisible: !total})}
+          onUpdateCount={(total, data, init) => !init && this.setState({sunVisible: !total})}
         />
         {
           this.props.commentsModalVisible &&
@@ -130,7 +141,7 @@ export default class IncidentTable extends Component {
             updateDeviceIncident={this.props.updateDeviceIncident}
             onClose={() => this.props.showCommentsModal(false)}/>
         }
-        {this.state.sunVisible && <div className="div-sun"/>}
+        {this.renderSun()}
         <ReactTooltip/>
       </div>
     )
