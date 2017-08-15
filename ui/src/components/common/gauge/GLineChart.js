@@ -230,8 +230,10 @@ export default class GLineChart extends React.Component {
     if (record.dateFrom) params.dateFrom = record.dateFrom
     if (record.dateTo) params.dateTo = record.dateTo
 
-    this.props.history.push('/search')
-    this.props.loadSearch(params, this.props.history)
+    setTimeout(() => {
+      this.props.history.push('/search')
+      this.props.loadSearch(params, this.props.history)
+    }, 1)
   }
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

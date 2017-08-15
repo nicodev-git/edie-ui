@@ -63,6 +63,35 @@ export default class GBarChart extends React.Component {
     }
   }
 
+  getParams () {
+    const {gauge, searchList} = this.props
+    const {savedSearchId, monitorId, resource, workflowId} = gauge
+
+    if (resource === 'monitor') {
+      return {
+        query: `monitorid=${monitorId}`
+      }
+    } else if (resource === 'incident'){
+      return {
+        query: '',
+        workflow: workflowId,
+        collections: 'incident',
+        severity: severities.map(p => p.value).join(','),
+        tag: '',
+        monitorTypes: ''
+      }
+    } else {
+      const index = findIndex(searchList, {id: savedSearchId})
+      if (index < 0) {
+        console.log('Saved search not found.')
+        return null
+      }
+      const searchParams = JSON.parse(searchList[index].data)
+
+      return searchParams
+    }
+  }
+
   fetchRecordCount (props) {
     const {gauge, searchList} = props
     const {savedSearchId, monitorId, resource, duration, durationUnit, splitBy, splitUnit,workflowId} = gauge
@@ -154,6 +183,24 @@ export default class GBarChart extends React.Component {
     this.props.removeDeviceGauge(this.props.gauge, this.props.device)
   }
 
+  onClickPoint (e, elements) {
+    if (!elements.length) return
+    const el = elements[0]
+
+    const record = this.state.searchRecordCounts[el._index]
+    if (!record) {
+      console.log('Record not found')
+      return
+    }
+    const params = this.getParams()
+    if (record.dateFrom) params.dateFrom = record.dateFrom
+    if (record.dateTo) params.dateTo = record.dateTo
+
+    setTimeout(() => {
+      this.props.history.push('/search')
+      this.props.loadSearch(params, this.props.history)
+    }, 1)
+  }
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   renderFrontView () {
@@ -169,10 +216,15 @@ export default class GBarChart extends React.Component {
       }]
     }
 
+    const options = {
+      ...chartOptions,
+      onClick: this.onClickPoint.bind(this)
+    }
+
     return (
       <div className="flex-vertical flex-1" style={{overflow: 'hidden'}}>
         <div className="flex-1 padding-xs">
-          <BarChart chartData={chartData} chartOptions={chartOptions} />
+          <BarChart chartData={chartData} chartOptions={options} />
         </div>
       </div>
     )
