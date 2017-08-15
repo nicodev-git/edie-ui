@@ -1,4 +1,5 @@
 import axios from 'axios'
+import moment from 'moment'
 import { assign } from 'lodash'
 import {
   UPDATE_SEARCH_PARAMS,
@@ -59,7 +60,7 @@ import {
 } from './types'
 import { ROOT_URL } from './config'
 import { apiError } from './Errors'
-import {encodeUrlParams} from 'shared/Global'
+import {encodeUrlParams, dateFormat, parseSearchQuery} from 'shared/Global'
 
 export const updateSearchParams = (params, history) => {
   return function (dispatch) {
@@ -401,5 +402,39 @@ export const resetViewCols = (cols) => {
 export const refreshSearch = () => {
   return dispatch => {
     dispatch({type: REFRESH_SEARCH})
+  }
+}
+
+export const loadSearch = (data, history) => {
+  return dispatch => {
+    const query = data.query || ''
+    const workflow = data.workflow || ''
+    const tag = data.tag || ''
+    const collections = data.collections || 'incident,event'
+    const severity = data.severity || 'HIGH,MEDIUM'
+    const monitorTypes = data.monitorTypes || ''
+    const dateFrom = data.dateFrom || moment().add(-1, 'days').startOf('day').format(dateFormat)
+    const dateTo = data.dateTo || moment().endOf('day').format(dateFormat)
+
+    const params = {
+      query,
+      workflow,
+      tag,
+      collections,
+      severity,
+      monitorTypes,
+      dateFrom,
+      dateTo
+    }
+
+    const queryChips = parseSearchQuery(query)
+    const tags = tag.split(',').filter(p => !!p)
+
+    dispatch(updateQueryChips(queryChips))
+    dispatch(updateSearchTags(tags))
+    dispatch(replaceSearchWfs([]))
+    dispatch(updateSearchViewFilter(''))
+    dispatch(resetViewCols())
+    dispatch(updateSearchParams(params, history))
   }
 }
