@@ -1,4 +1,5 @@
 import React from 'react'
+import moment from 'moment'
 import {assign, concat, isArray, keys} from 'lodash'
 
 export function renderEntity (entity, options) {
@@ -30,8 +31,15 @@ function renderValue (val, path, options) {
       <span className="field-key" key={`${path}-char-2`}>&nbsp;{endChar}</span>
     )
   }
+
+  let valStr = val
+  const attrs = {}
+  if (options.timeField && path === `.${options.timeField}`) {
+    valStr = moment(val).fromNow()
+    attrs['data-tip'] = moment(val).format('YYYY-MM-DD HH:mm:ss')
+  }
   return (
-    <span key={`${path}-val`} className="field-value" dangerouslySetInnerHTML={{__html: `${val}`}}/> // eslint-disable-line
+    <span {...attrs} key={`${path}-val`} className="field-value" dangerouslySetInnerHTML={{__html: `${valStr}`}}/> // eslint-disable-line
   )
 }
 

@@ -3,6 +3,7 @@ import { reduxForm, submit, formValueSelector } from 'redux-form'
 import { connect } from 'react-redux'
 import { merge, assign, concat, isArray, keys, findIndex } from 'lodash'
 import moment from 'moment'
+import ReactTooltip from 'react-tooltip'
 import {Popover, FlatButton, Chip} from 'material-ui'
 import NavigationClose from 'material-ui/svg-icons/navigation/close'
 
@@ -70,7 +71,7 @@ class GenericSearch extends React.Component {
         const {severity, ...others} = highlighted
         const data = {
           type: rowData.type,
-          [timeField]: this.formatDate(entity[timeField]),
+          [timeField]: entity[timeField],
           severity,
           ...others
         }
@@ -88,7 +89,8 @@ class GenericSearch extends React.Component {
         }
 
         const options = {
-          notNull: viewFilter === viewFilters.notNull.name
+          notNull: viewFilter === viewFilters.notNull.name,
+          timeField
         }
         return <div className="padding-sm bt-gray">{renderEntity(data, options)}</div>
       }
@@ -799,6 +801,7 @@ class GenericSearch extends React.Component {
           </div>
           {this.renderFilterViewModal()}
           {this.renderTagsModal()}
+          <ReactTooltip/>
         </TabPageBody>
       </TabPage>
     )
