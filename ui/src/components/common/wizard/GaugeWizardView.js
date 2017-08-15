@@ -45,6 +45,14 @@ export default class GaugeWizardView extends React.Component {
       <Field key="monitorId" name="monitorId" component={FormSelect} floatingLabel="Monitor" options={monitorOptions} className="valign-top"/>
     ]
   }
+  renderWorkflowPick () {
+    const {workflows, formValues} = this.props
+    if (formValues.resource !== 'incident') return null
+    return [
+      this.renderDeviceList(),
+      <Field name="workflowId" component={FormSelect} floatingLabel="Workflow" options={workflows} className="valign-top mr-dialog"/>
+    ]
+  }
   renderLogicalGroup () {
     const {devices, formValues, selectedMonitors, toggleMonitorId} = this.props
     if (formValues.resource !== 'logicalgroup') return null
@@ -63,7 +71,7 @@ export default class GaugeWizardView extends React.Component {
     )
   }
   renderNormal () {
-    const {searchList, workflows, formValues, durationVisible, splitVisible, templateName} = this.props
+    const {searchList, formValues, durationVisible, splitVisible, templateName} = this.props
     let resourceOptions = gaugeResources
     if (templateName === 'Up/Down') {
       resourceOptions = [...resourceOptions, {
@@ -76,7 +84,7 @@ export default class GaugeWizardView extends React.Component {
         <Field name="resource" component={FormSelect} floatingLabel="Resource" options={resourceOptions} className="valign-top"/>
 
         {formValues.resource === 'search' && <Field name="savedSearchId" component={FormSelect} floatingLabel="Saved Search" options={searchList} className="valign-top mr-dialog"/>}
-        {formValues.resource === 'incident' && <Field name="workflowId" component={FormSelect} floatingLabel="Workflow" options={workflows} className="valign-top mr-dialog"/>}
+        {this.renderWorkflowPick()}
         {this.renderMonitorPick()}
         {this.renderLogicalGroup()}
 
