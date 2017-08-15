@@ -22,7 +22,10 @@ import {
   showGaugeBoardsModal,
 
   fixIncident,
-  ackIncident
+  ackIncident,
+
+  updateSearchParams,
+  updateQueryChips
 } from 'actions'
 
 class MainDashboardContainer extends React.Component {
@@ -66,6 +69,9 @@ export default connect(
     showGaugeBoardsModal,
 
     fixIncident,
-    ackIncident
+    ackIncident,
+
+    updateSearchParams,
+    updateQueryChips
   }
 )(withRouter(MainDashboardContainer))
