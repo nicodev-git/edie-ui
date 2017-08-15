@@ -97,6 +97,49 @@ export default class GLineChart extends React.Component {
     }
   }
 
+  getParams (props) {
+    const {gauge, searchList} = props
+    const {savedSearchId, monitorId, resource, duration, durationUnit, splitUnit,workflowId} = gauge
+
+    let inc = 1
+    if (durationUnit === 'month' && splitUnit === 'day') inc = 0
+    const dateFrom = moment().add(-duration + inc, `${durationUnit}s`)
+      .startOf(durationUnit === 'hour' || duration === 1 ? durationUnit : 'day')
+    const dateTo = moment().endOf(durationUnit === 'hour' ? durationUnit : 'day')
+
+    if (resource === 'monitor') {
+      return {
+        dateFrom: dateFrom.format(dateFormat),
+        dateTo: dateTo.format(dateFormat),
+        query: `monitorid=${monitorId}`
+      }
+    } else if (resource === 'incident'){
+      return {
+        query: '',
+        workflow: workflowId,
+        collections: 'incident',
+        severity: severities.map(p => p.value).join(','),
+        tag: '',
+        monitorTypes: '',
+        dateFrom: dateFrom.format(dateFormat),
+        dateTo: dateTo.format(dateFormat)
+      }
+    } else {
+      const index = findIndex(searchList, {id: savedSearchId})
+      if (index < 0) {
+        console.log('Saved search not found.')
+        return null
+      }
+      const searchParams = JSON.parse(searchList[index].data)
+
+      return {
+        ...searchParams,
+        dateFrom: dateFrom.format(dateFormat),
+        dateTo: dateTo.format(dateFormat)
+      }
+    }
+  }
+
   fetchRecordCount (props) {
     const {gauge, searchList} = props
     const {savedSearchId, monitorId, resource, duration, durationUnit, splitBy, splitUnit,workflowId} = gauge
@@ -189,16 +232,17 @@ export default class GLineChart extends React.Component {
   }
 
   onClickPoint (e, elements) {
-    if (!elements.length == 0) return
+    if (!elements.length) return
     const el = elements[0]
     console.log(el)
 
-    // this.props.history.push('/search')
-    //
-    // this.props.updateQueryChips(newChips)
-    // this.props.updateSearchParams(assign({}, this.props.params, {
-    //   query: newChips.map(m => `${m.name}=${m.value}`).join(' and ')
-    // }), this.props.history)
+    this.props.history.push('/search')
+
+    const newChips = []
+    this.props.updateQueryChips(newChips)
+    this.props.updateSearchParams(...this.props.params, {
+      query: newChips.map(m => `${m.name}=${m.value}`).join(' and ')
+    }, this.props.history)
   }
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
