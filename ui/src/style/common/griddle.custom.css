@@ -38,3 +38,7 @@
     padding: 0;
     border-top: none;
 }
+
+.table-no-border .griddle .table>tbody>tr>td {
+    border: none;
+}

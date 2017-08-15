@@ -48,7 +48,7 @@ class GenericSearch extends React.Component {
         if (viewFilter === viewFilters.log.name) {
           if (!entity.dataobj) return <span/>
           return (
-            <div className="padding-sm bt-gray">
+            <div className="padding-sm">
               <div style={chipStyles.wrapper}>
                 {<div className="inline-block" style={{lineHeight: 2.5}}>{entity.dataobj.line}</div>}
                 {entity.dataobj.file && <Chip style={chipStyles.chip}>{entity.dataobj.file}</Chip>}
@@ -200,6 +200,12 @@ class GenericSearch extends React.Component {
     })
 
     return data
+  }
+
+  getTableClass () {
+    // const {viewFilter} = this.props
+    // if (viewFilter === viewFilters.log.name) return 'table-no-border'
+    return ''
   }
 
   onSearchKeyDown (e) {
@@ -777,7 +783,7 @@ class GenericSearch extends React.Component {
                   Total: {this.state.total}
                 </div>
               </div>
-              <div className="flex-1 table-no-gap">
+              <div className={`flex-1 table-no-gap ${this.getTableClass()}`}>
                 <InfiniteTable
                   url="/search/all"
                   cells={this.cells}
