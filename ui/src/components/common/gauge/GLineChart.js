@@ -188,8 +188,10 @@ export default class GLineChart extends React.Component {
     this.props.removeDeviceGauge(this.props.gauge, this.props.device)
   }
 
-  onClickPoint () {
-    console.log(arguments)
+  onClickPoint (e, elements) {
+    if (!elements.length == 0) return
+    const el = elements[0]
+    console.log(el)
   }
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -205,14 +207,23 @@ export default class GLineChart extends React.Component {
         borderWidth: 1,
         borderColor: '#269C8B',
         fill: false
-      }],
-      onElementsClick: this.onClickPoint.bind(this)
+      }]
+    }
+
+    let options
+    if (gauge.resource === 'monitor') {
+      options = monitorChartOptions
+    } else {
+      options = {
+        ...chartOptions,
+        onClick: this.onClickPoint.bind(this)
+      }
     }
 
     return (
       <div className="flex-vertical flex-1" style={{overflow: 'hidden'}}>
         <div className="flex-1 padding-xs">
-          <LineChart chartData={chartData} chartOptions={gauge.resource === 'monitor' ? monitorChartOptions : chartOptions} />
+          <LineChart chartData={chartData} chartOptions={options} />
         </div>
       </div>
     )
