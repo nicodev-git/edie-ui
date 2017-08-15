@@ -7,7 +7,7 @@ import DeleteIcon from 'material-ui/svg-icons/action/delete'
 import { TwoButtonsBlockCustom } from 'components/modal/parts'
 
 class SavedSearchModalView extends React.Component {
-  render () {
+  renderContent () {
     const {
       onClickOK, onClickClose,
       userOptions,
@@ -31,22 +31,22 @@ class SavedSearchModalView extends React.Component {
         type: 'System'
       })
     })).filter(p => (p.name || '').toLowerCase().indexOf(keyword) >= 0
-    || (p.description || '').toLowerCase().indexOf(keyword) >= 0)
+      || (p.description || '').toLowerCase().indexOf(keyword) >= 0)
 
     return (
-      <Dialog open title="Saved Search" onRequestClose={onClickClose}>
+      <div>
         <div>
           <TextField value={savedSearchKeyword} floatingLabelText="Search" onChange={onChangeKeyword}/>
         </div>
         <div style={{maxHeight: '350px', overflow: 'auto'}}>
           <table className="table table-hover">
             <thead>
-              <tr>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Origin</th>
-                <th/>
-              </tr>
+            <tr>
+              <th>Name</th>
+              <th>Description</th>
+              <th>Origin</th>
+              <th/>
+            </tr>
             </thead>
             <tbody>
             {options.map(p =>
@@ -67,6 +67,18 @@ class SavedSearchModalView extends React.Component {
           </table>
         </div>
         <TwoButtonsBlockCustom name1="Search" name2="Cancel" action1={onClickOK} action2={onClickClose}/>
+      </div>
+    )
+  }
+  render () {
+    const {
+      onClickClose,
+      panelMode
+    } = this.props
+    if (panelMode) return this.renderContent()
+    return (
+      <Dialog open title="Saved Search" onRequestClose={onClickClose}>
+        {this.renderContent()}
       </Dialog>
     )
   }
