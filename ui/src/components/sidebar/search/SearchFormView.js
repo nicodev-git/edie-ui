@@ -14,11 +14,6 @@ import ClearIcon from 'material-ui/svg-icons/content/clear'
 import { FormInput } from 'components/modal/parts'
 import DateRangePicker from 'components/common/DateRangePicker'
 
-const iconButtonStyle = {
-  marginTop: '4px',
-  verticalAlign: 'top',
-  minWidth: '50px'
-}
 export default class SearchFormView extends React.Component {
   renderDateLabel (label) {
     return (
@@ -38,7 +33,6 @@ export default class SearchFormView extends React.Component {
       onClickStar,
       starFilled,
       onSubmit,
-      onClickSavedSearch,
       onClickWorkflow,
 
       severities,
@@ -135,7 +129,6 @@ export default class SearchFormView extends React.Component {
                 />
               )}
             </SelectField>
-            <FlatButton label="Saved Search" style={iconButtonStyle} onClick={onClickSavedSearch} className="nowrap valign-top"/>
           </div>
 
           <div className="nowrap">

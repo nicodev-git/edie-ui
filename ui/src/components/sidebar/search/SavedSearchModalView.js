@@ -66,7 +66,7 @@ class SavedSearchModalView extends React.Component {
             </tbody>
           </table>
         </div>
-        <TwoButtonsBlockCustom name1="Search" name2="Cancel" action1={onClickOK} action2={onClickClose}/>
+        <TwoButtonsBlockCustom name1="Search" name2="Close" action1={onClickOK} action2={onClickClose}/>
       </div>
     )
   }
