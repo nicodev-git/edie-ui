@@ -149,8 +149,10 @@ export default class MainDashboardView extends React.Component {
   }
 
   onFinishAddWizard (callback, res, params, url) {
+    const {templateName} = params
     params.id = guid()
-    if (params.templateName === 'Cpu' || params.templateName === 'Memory' || params.templateName === 'Disk') {
+
+    if (templateName === 'Cpu' || templateName === 'Memory' || templateName === 'Disk') {
       if (params.gaugeType === 'accel') {
         params.layout = {
           x: 0, y: 0,
@@ -158,7 +160,7 @@ export default class MainDashboardView extends React.Component {
         }
         params.gaugeSize = 'custom'
       }
-    } else if(params.templateName === 'Incident Table') {
+    } else if(templateName === 'Incident Table' || templateName === '') {
       params.gaugeSize = 'very big'
     }
     this.props.addGaugeItem(params, this.props.board)
