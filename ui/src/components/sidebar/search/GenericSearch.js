@@ -212,6 +212,10 @@ class GenericSearch extends React.Component {
 
   }
 
+  onClickSearch () {
+    this.props.submit(this.props.handleSubmit(this.handleFormSubmit.bind(this)))
+  }
+
   handleFormSubmit (values) {
     const { queryChips } = this.props
     const { query } = values
@@ -692,6 +696,7 @@ class GenericSearch extends React.Component {
             onClearWorkflow={this.onClearWorkflow.bind(this)}
             onClickWorkflow={this.onClickWorkflow.bind(this)}
             onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
+            onClickSearch={this.onClickSearch.bind(this)}
             severities={severities}
             selectedSeverities={severity.split(',')}
             onChangeSeverity={this.onChangeSeverity.bind(this)}

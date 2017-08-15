@@ -60,7 +60,8 @@ export default class SearchFormView extends React.Component {
 
       onClickTags,
 
-      onClickClear
+      onClickClear,
+      onClickSearch
     } = this.props
     return (
       <form onSubmit={onSubmit}>
@@ -135,7 +136,7 @@ export default class SearchFormView extends React.Component {
 
             <IconButton tooltip="Workflow" tooltipPosition="top-center" onTouchTap={onClickWorkflow} className="valign-top"><img src="/resources/images/sidebar/search/wf-icon.png" width="24" alt=""/></IconButton>
             <IconButton tooltip="Tags" tooltipPosition="top-center" onTouchTap={onClickTags} className="valign-top"><img src="/resources/images/sidebar/search/tag.png" width="24" alt=""/></IconButton>
-            <IconButton tooltip="Search" tooltipPosition="top-center" onTouchTap={onClickWorkflow} type="submit" className="valign-top"><ActionSearch /></IconButton>
+            <IconButton tooltip="Search" tooltipPosition="top-center" onTouchTap={onClickSearch} type="submit" className="valign-top"><ActionSearch /></IconButton>
 
             <IconButton tooltip="Favorite" tooltipPosition="top-center" className="valign-top" onTouchTap={onClickStar}>{starFilled ? <FilledStar/> : <ToggleStar/>}</IconButton>
             <IconButton tooltip="Illustrate" tooltipPosition="top-center" className="valign-top" onTouchTap={onClickIllustrate}><LocalMovie/></IconButton>
