@@ -46,7 +46,6 @@ export default class WorkflowSelectModalView extends React.Component {
           <table className="table table-hover">
             <thead>
             <tr>
-              <th>Category</th>
               <th>Severity</th>
               <th>Name</th>
               <th>Description</th>
@@ -61,7 +60,6 @@ export default class WorkflowSelectModalView extends React.Component {
                   className={selectedRowWf.id === w.id ? 'selected' : ''}
                   onClick={() => onClickRow(w)}
                 >
-                  <td>{w.category}</td>
                   <td>{w.severity}</td>
                   <td>{w.name}</td>
                   <td>{w.desc}</td>

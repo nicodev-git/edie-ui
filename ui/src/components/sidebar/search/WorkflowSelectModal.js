@@ -17,11 +17,11 @@ class WorkflowSelectModal extends React.Component {
   getWorkflows () {
     const { selectedCategory, workflowFilter, workflows } = this.props
     return workflows.filter(m =>
-      (!selectedCategory || m.category === selectedCategory) &&
+      (!selectedCategory || (m.tags || []).includes(selectedCategory)) &&
       (
         !workflowFilter ||
-        !!m.name.match(new RegExp(workflowFilter, 'i')) ||
-        !!m.desc.match(new RegExp(workflowFilter, 'i'))
+        (m.name && !!m.name.match(new RegExp(workflowFilter, 'i'))) ||
+        (m.desc && !!m.desc.match(new RegExp(workflowFilter, 'i')))
       )
     )
   }
