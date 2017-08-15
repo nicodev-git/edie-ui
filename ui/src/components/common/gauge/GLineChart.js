@@ -97,8 +97,8 @@ export default class GLineChart extends React.Component {
     }
   }
 
-  getParams (props) {
-    const {gauge, searchList} = props
+  getParams () {
+    const {gauge, searchList} = this.props
     const {savedSearchId, monitorId, resource, workflowId} = gauge
 
     if (resource === 'monitor') {
@@ -226,9 +226,7 @@ export default class GLineChart extends React.Component {
       console.log('Record not found')
       return
     }
-    const params = {
-      ...this.getParams(this.props)
-    }
+    const params = this.getParams()
     if (record.dateFrom) params.dateFrom = record.dateFrom
     if (record.dateTo) params.dateTo = record.dateTo
 
