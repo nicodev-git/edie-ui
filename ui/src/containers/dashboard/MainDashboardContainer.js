@@ -24,8 +24,7 @@ import {
   fixIncident,
   ackIncident,
 
-  updateSearchParams,
-  updateQueryChips
+  loadSearch
 } from 'actions'
 
 class MainDashboardContainer extends React.Component {
@@ -71,7 +70,6 @@ export default connect(
     fixIncident,
     ackIncident,
 
-    updateSearchParams,
-    updateQueryChips
+    loadSearch
   }
 )(withRouter(MainDashboardContainer))

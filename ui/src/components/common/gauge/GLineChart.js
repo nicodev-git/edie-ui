@@ -233,16 +233,20 @@ export default class GLineChart extends React.Component {
 
   onClickPoint (e, elements) {
     if (!elements.length) return
+    const {gauge, searchList} = props
+    const {splitBy, splitUnit} = gauge
+
     const el = elements[0]
-    console.log(el)
 
-    this.props.history.push('/search')
 
-    const newChips = []
-    this.props.updateQueryChips(newChips)
-    this.props.updateSearchParams(...this.props.params, {
-      query: newChips.map(m => `${m.name}=${m.value}`).join(' and ')
-    }, this.props.history)
+    const record = this.state.searchRecordCounts[el._index]
+    if (!record) {
+      console.log('Record not found')
+      return
+    }
+    moment(record.date, 'YYYY-MM-DD')
+    // this.props.history.push('/search')
+    // this.props.loadSearch(this.getParams(this.props), this.props.history)
   }
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
