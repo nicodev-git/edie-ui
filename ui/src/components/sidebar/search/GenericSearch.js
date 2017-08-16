@@ -93,7 +93,6 @@ class GenericSearch extends React.Component {
           notNull: viewFilter === viewFilters.notNull.name,
           timeField
         }
-        this.tooltipRebuild()
         return <div className="padding-sm bt-gray">{renderEntity(data, options)}</div>
       }
     }]
@@ -439,6 +438,8 @@ class GenericSearch extends React.Component {
       total,
       cols
     })
+
+    this.tooltipRebuild()
   }
 
   onClickIllustrate () {
