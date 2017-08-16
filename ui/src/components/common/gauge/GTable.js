@@ -92,7 +92,7 @@ export default class GTable extends React.Component {
       },
       viewFilter: savedSearch.viewFilter,
       viewCols: savedSearch.viewCols,
-      viewMode: gauge.viewMode
+      viewMode: gauge.tableViewMode
     }
   }
 

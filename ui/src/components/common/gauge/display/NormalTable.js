@@ -1,6 +1,7 @@
 import React from 'react'
 import {Chip} from 'material-ui'
 import {keys} from 'lodash'
+import moment from 'moment'
 
 import InfiniteTable from 'components/common/InfiniteTable'
 import {renderEntity} from 'components/common/CellRenderers'
@@ -74,16 +75,35 @@ export default class NormalTable extends React.Component {
     }]
   }
 
+  getCells () {
+    if (this.props.viewMode === 'table') {
+      const {viewCols} = this.props
+      if (!viewCols || !viewCols.length) return null
+      return viewCols.map(p => {
+        const item = {
+          'displayName': p,
+          'columnName': `entity.${p}`
+        }
+        if (p === 'startTimestamp' || p === 'timestamp') {
+          item.customComponent = k => <span>{moment(k.data).format('YYYY-MM-DD HH:mm:ss')}</span>
+        }
+        return item
+      })
+    } else {
+      return this.cells
+    }
+  }
+
   render () {
     return (
       <div className="flex-1 table-no-gap">
         <InfiniteTable
           url="/search/all"
-          cells={this.cells}
+          cells={this.getCells()}
           ref="table"
           rowMetadata={{'key': 'id'}}
           params={this.props.params}
-          showTableHeading={false}
+          showTableHeading={this.props.viewMode === 'table'}
         />
       </div>
     )
