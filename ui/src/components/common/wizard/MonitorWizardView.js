@@ -1,22 +1,9 @@
 import React from 'react'
-import {Dialog, Card, CardText, RaisedButton, RadioButton} from 'material-ui'
+import {Card, CardText, RaisedButton, RadioButton} from 'material-ui'
 import {Field} from 'redux-form'
 import {RadioButtonGroup} from 'redux-form-material-ui'
 
-import {FormInput, FormCheckbox, FormSelect, CardLegend, CloseIconButton} from 'components/modal/parts'
-
-const dialogStyle = {
-  background: '#efefef',
-  padding: '8px 48px 48px',
-  overflowY: 'auto'
-}
-const titleStyle = {
-  background: '#324454',
-  color: 'white',
-  fontSize: 14,
-  paddingTop: 12,
-  paddingBottom: 12
-}
+import {FormInput, FormCheckbox, FormSelect, CardLegend, Modal} from 'components/modal/parts'
 
 const paramLabels = {
   'checkinterval': 'Interval (seconds)',
@@ -59,8 +46,7 @@ export default class MonitorWizardView extends React.Component {
     )
 
     return (
-      <Dialog open title={header} bodyStyle={dialogStyle} titleStyle={titleStyle} onRequestClose={onHide}>
-        <CloseIconButton onClick={onHide} color="white"/>
+      <Modal title={header} onRequestClose={onHide}>
         <form onSubmit={onSubmit}>
           <CardLegend>Configuration</CardLegend>
           <Card>
@@ -108,7 +94,7 @@ export default class MonitorWizardView extends React.Component {
         </form>
         {paramEditModal}
         {credPicker}
-      </Dialog>
+      </Modal>
     )
   }
 }
