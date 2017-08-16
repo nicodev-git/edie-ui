@@ -30,6 +30,7 @@ export default connect(
       splitUnit: 'day',
       fixed: 'false',
       timing: 'realtime',
+      tableViewMode: 'json',
       ...state.devices.wizardInitialValues
     },
     userInfo: state.dashboard.userInfo,
