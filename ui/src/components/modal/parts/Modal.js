@@ -1,4 +1,7 @@
 import React from 'react'
+import {Dialog} from 'material-ui'
+
+import CloseIconButton from './CloseIconButton'
 
 const dialogStyle = {
   background: '#efefef',
@@ -15,9 +18,9 @@ const titleStyle = {
 
 export default class Modal extends React.Component {
   render () {
-    const {onRequestClose} = this.props
+    const {onRequestClose, title} = this.props
     return (
-      <Dialog open title="Dashboards" bodyStyle={dialogStyle} titleStyle={titleStyle} onRequestClose={onRequestClose}>
+      <Dialog open title={title} bodyStyle={dialogStyle} titleStyle={titleStyle} onRequestClose={onRequestClose}>
         <CloseIconButton onClick={onRequestClose} color="white"/>
         {this.props.children}
       </Dialog>

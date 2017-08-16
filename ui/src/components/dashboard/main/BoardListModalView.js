@@ -1,32 +1,17 @@
 import React from 'react'
-import {Dialog, IconButton, Card, CardText, Chip} from 'material-ui'
+import {IconButton, Card, CardText, Chip} from 'material-ui'
 import DeleteIcon from 'material-ui/svg-icons/action/delete'
 import EditIcon from 'material-ui/svg-icons/editor/mode-edit'
 import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
 import SetDefIcon from 'material-ui/svg-icons/content/sort'
 
-import {CloseIconButton, CardLegend} from 'components/modal/parts'
-
-const dialogStyle = {
-  background: '#efefef',
-  padding: '8px 48px 48px',
-  overflowY: 'auto'
-}
-const titleStyle = {
-  background: '#324454',
-  color: 'white',
-  fontSize: 14,
-  paddingTop: 12,
-  paddingBottom: 12
-}
+import {Modal, CardLegend} from 'components/modal/parts'
 
 export default class BoardListModalView extends React.Component {
   render () {
     const {onHide, gaugeBoards, selected, onClickAdd, onClickEdit, onClickDelete, onClickSetDefault, onSelect, defaultBoardId} = this.props
     return (
-      <Dialog open title="Dashboards" bodyStyle={dialogStyle} titleStyle={titleStyle} onRequestClose={onHide}>
-        <CloseIconButton onClick={onHide} color="white"/>
-
+      <Modal title="Dashboards" onRequestClose={onHide}>
         <CardLegend>
           Dashboards
           <div className="pull-right" style={{marginTop: -13}}>
@@ -77,7 +62,7 @@ export default class BoardListModalView extends React.Component {
             </div>
           </CardText>
         </Card>
-      </Dialog>
+      </Modal>
     )
   }
 }
