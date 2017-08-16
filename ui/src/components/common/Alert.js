@@ -52,7 +52,7 @@ export default class Alert extends Component {
   render () {
     return (
       <MuiThemeProvider>
-        <Modal title={this.props.title} contentStyle={{width: 350}}>
+        <Modal title={this.props.title} contentStyle={{width: 350}} multiCard>
           <SubHeader name={this.props.message}/>
           <div className={`form-column ${this.props.type === TYPE_PROMPT ? '' : 'hidden'}`}>
             <TextField

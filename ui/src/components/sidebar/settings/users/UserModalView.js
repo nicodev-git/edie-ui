@@ -1,14 +1,14 @@
 import React from 'react'
 
-import {Dialog, SelectField, MenuItem} from 'material-ui'
+import {SelectField, MenuItem} from 'material-ui'
 import { Field } from 'redux-form'
-import { FormInput, FormSelect, FormCheckbox, SubmitBlock } from 'components/modal/parts'
+import { FormInput, FormSelect, FormCheckbox, SubmitBlock, Modal } from 'components/modal/parts'
 
 export default class UserModalView extends React.Component {
   render () {
     const {onHide, onSubmit, defaultmaps, roles, selectedRoles, onChangeRole} = this.props
     return (
-      <Dialog open title="User" onRequestClose={onHide}>
+      <Modal title="User" onRequestClose={onHide}>
         <form onSubmit={onSubmit}>
           <div className="form-column">
             <Field name="username" component={FormInput} label="Name"/>
@@ -33,7 +33,7 @@ export default class UserModalView extends React.Component {
           </div>
           <SubmitBlock name="Save" onClick={onHide}/>
         </form>
-      </Dialog>
+      </Modal>
     )
   }
 }

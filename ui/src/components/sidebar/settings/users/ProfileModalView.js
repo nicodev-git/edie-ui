@@ -1,14 +1,13 @@
 import React, { Component } from 'react'
-import {Dialog} from 'material-ui'
 import { Field } from 'redux-form'
-import { SubmitBlock, ProfileImageUpload, FormInput, FormSelect, FormMultiSelect, CheckboxItem } from 'components/modal/parts'
+import { SubmitBlock, ProfileImageUpload, FormInput, FormSelect, FormMultiSelect, CheckboxItem, Modal } from 'components/modal/parts'
 
 export default class ProfileModalView extends Component {
   render () {
     const {imgSrc, onHide, onSubmit, onChangeImage, mapOptions, roleOptions,
       defaultChecked, checkboxLabel, onChangeRoles} = this.props
     return (
-      <Dialog open title="Profile" onRequestClose={onHide}>
+      <Modal title="Profile" onRequestClose={onHide}>
         <form onSubmit={onSubmit}>
           <ProfileImageUpload imgSrc={imgSrc} onChangeImage={onChangeImage} />
           <div className="form-column">
@@ -22,7 +21,7 @@ export default class ProfileModalView extends Component {
           </div>
           <SubmitBlock name="Save" onClick={onHide}/>
         </form>
-      </Dialog>
+      </Modal>
     )
   }
 }

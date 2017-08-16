@@ -11,7 +11,7 @@ export default class BoardListModalView extends React.Component {
   render () {
     const {onHide, gaugeBoards, selected, onClickAdd, onClickEdit, onClickDelete, onClickSetDefault, onSelect, defaultBoardId} = this.props
     return (
-      <Modal title="Dashboards" onRequestClose={onHide}>
+      <Modal title="Dashboards" onRequestClose={onHide} multiCard>
         <CardLegend>
           Dashboards
           <div className="pull-right" style={{marginTop: -13}}>

@@ -1,7 +1,7 @@
 import React from 'react'
-import {Dialog, SelectField, MenuItem} from 'material-ui'
+import {SelectField, MenuItem} from 'material-ui'
 
-import { CloseButton } from 'components/modal/parts'
+import { CloseButton, Modal } from 'components/modal/parts'
 
 export default class RelDevicesModalView extends React.Component {
   renderItems () {
@@ -22,7 +22,7 @@ export default class RelDevicesModalView extends React.Component {
       fields
     } = this.props
     return (
-      <Dialog open title="Relevant Devices" onRequestClose={onHide}>
+      <Modal title="Relevant Devices" onRequestClose={onHide}>
         <div>
           <SelectField
             hintText="Field"
@@ -47,7 +47,7 @@ export default class RelDevicesModalView extends React.Component {
           </table>
         </div>
         <CloseButton onClose={onHide} />
-      </Dialog>
+      </Modal>
     )
   }
 }

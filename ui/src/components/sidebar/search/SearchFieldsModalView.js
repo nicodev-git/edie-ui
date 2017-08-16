@@ -1,13 +1,13 @@
 import React from 'react'
-import { Dialog, Checkbox } from 'material-ui'
+import { Checkbox } from 'material-ui'
 
-import { TwoButtonsBlockCustom } from 'components/modal/parts'
+import { TwoButtonsBlockCustom, Modal } from 'components/modal/parts'
 
 class SearchFieldsModalView extends React.Component {
   render () {
     const {onClickOK, onClickClose, fields, selectedSearchFields, onCheck} = this.props
     return (
-      <Dialog open title="Fields" onRequestClose={onClickClose}>
+      <Modal title="Fields" onRequestClose={onClickClose}>
         <div className="row" style={{maxHeight: '500px', overflow: 'auto'}}>
           {fields.map(p =>
             <div key={p.path} className="col-md-4">
@@ -19,7 +19,7 @@ class SearchFieldsModalView extends React.Component {
           )}
         </div>
         <TwoButtonsBlockCustom name1="OK" name2="Cancel" action1={onClickOK} action2={onClickClose}/>
-      </Dialog>
+      </Modal>
     )
   }
 }

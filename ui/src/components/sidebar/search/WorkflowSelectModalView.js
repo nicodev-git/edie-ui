@@ -1,7 +1,7 @@
 import React from 'react'
-import {Dialog, MenuItem, SelectField, TextField} from 'material-ui'
+import {MenuItem, SelectField, TextField} from 'material-ui'
 
-import { TwoButtonsBlockCustom } from 'components/modal/parts'
+import { TwoButtonsBlockCustom, Modal } from 'components/modal/parts'
 import { errorStyle, underlineFocusStyle, inputStyle,
   selectedItemStyle, underlineStyle } from 'style/common/materialStyles'
 
@@ -16,7 +16,7 @@ export default class WorkflowSelectModalView extends React.Component {
       workflowFilter, onChangeWorkflowFilter
     } = this.props
     return (
-      <Dialog open title="Workflow" onRequestClose={onClickClose}>
+      <Modal title="Workflow" onRequestClose={onClickClose}>
         <div className="padding-md-left">
           <SelectField
             errorStyle={errorStyle}
@@ -71,7 +71,7 @@ export default class WorkflowSelectModalView extends React.Component {
           </table>
         </div>
         <TwoButtonsBlockCustom name1="Cancel" action1={onClickClose} name2="OK" action2={onClickOK}/>
-      </Dialog>
+      </Modal>
     )
   }
 }

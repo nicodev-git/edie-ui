@@ -1,8 +1,8 @@
 import React from 'react'
-import {Dialog, Checkbox} from 'material-ui'
+import {Checkbox} from 'material-ui'
 import {keys} from 'lodash'
 
-import {TwoButtonsBlockCustom} from 'components/modal/parts'
+import {TwoButtonsBlockCustom, Modal} from 'components/modal/parts'
 
 import {Tabs, Tab} from 'material-ui/Tabs'
 import {viewFilters} from 'shared/Global'
@@ -11,7 +11,7 @@ export default class ViewFilterModalView extends React.Component {
   render () {
     const {onClickOK, onClickClose, selectViewFilter, selectedViewFilter, cols, viewCols} = this.props
     return (
-      <Dialog open title="View Filter" onRequestClose={onClickClose}>
+      <Modal title="View Filter" onRequestClose={onClickClose}>
         <Tabs>
           <Tab label="Predefined">
             <table className="table table-hover">
@@ -49,7 +49,7 @@ export default class ViewFilterModalView extends React.Component {
           </Tab>
         </Tabs>
         <TwoButtonsBlockCustom name1="OK" name2="Cancel" action1={onClickOK} action2={onClickClose}/>
-      </Dialog>
+      </Modal>
     )
   }
 }

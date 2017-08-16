@@ -1,9 +1,9 @@
 import React from 'react'
-import {Dialog, Chip} from 'material-ui'
+import {Chip} from 'material-ui'
 import {findIndex} from 'lodash'
 import {blue300} from 'material-ui/styles/colors'
 
-import {TwoButtonsBlockCustom} from 'components/modal/parts'
+import {TwoButtonsBlockCustom, Modal} from 'components/modal/parts'
 
 import {chipStyles} from 'style/common/materialStyles'
 
@@ -39,10 +39,10 @@ export default class TagPickerModalView extends React.Component {
   render () {
     const {onClickClose, onClickOK} = this.props
     return (
-      <Dialog open title="Tags" onRequestClose={onClickClose}>
+      <Modal title="Tags" onRequestClose={onClickClose}>
         {this.renderContent()}
         <TwoButtonsBlockCustom name1="Cancel" action1={onClickClose} name2="OK" action2={onClickOK}/>
-      </Dialog>
+      </Modal>
     )
   }
 }

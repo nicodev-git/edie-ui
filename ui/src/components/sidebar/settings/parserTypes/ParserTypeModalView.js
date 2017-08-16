@@ -3,9 +3,9 @@ import IconButton from 'material-ui/IconButton'
 import DeleteIcon from 'material-ui/svg-icons/action/delete'
 import InlineEdit from 'react-edit-inline'
 import { Field } from 'redux-form'
-import {Dialog, Chip} from 'material-ui'
+import {Chip} from 'material-ui'
 
-import { SubHeader, SubmitBlock, FormInput, FormSelect } from 'components/modal/parts'
+import { SubHeader, SubmitBlock, FormInput, FormSelect, Modal } from 'components/modal/parts'
 import { buttonStyle, iconStyle, chipStyles } from 'style/common/materialStyles'
 
 export default class ParserTypeModalView extends Component {
@@ -14,7 +14,7 @@ export default class ParserTypeModalView extends Component {
       onHide, onPatternChange, onDelete, onItemClick, onClickValueChip,
       tagModal, tags, onClickAddTag, onClickDeleteTag} = this.props
     return (
-      <Dialog open title={header} onRequestClose={onHide}>
+      <Modal title={header} onRequestClose={onHide}>
         <form onSubmit={onSubmit}>
           <div className="form-column">
             <Field name="name" component={FormInput} label="name"/>
@@ -71,7 +71,7 @@ export default class ParserTypeModalView extends Component {
           <SubmitBlock name="Save" onClick={onHide}/>
         </form>
         {tagModal}
-      </Dialog>
+      </Modal>
     )
   }
 }

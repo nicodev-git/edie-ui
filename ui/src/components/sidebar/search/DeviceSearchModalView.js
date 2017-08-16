@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
-import {Dialog} from 'material-ui'
 import Autocomplete from 'react-autocomplete'
 import IconButton from 'material-ui/IconButton'
 import DeleteIcon from 'material-ui/svg-icons/action/delete'
-import { CloseButton } from 'components/modal/parts'
+import { CloseButton, Modal } from 'components/modal/parts'
 import { buttonStyle, iconStyle } from 'style/common/materialStyles'
 
 export default class DeviceSearchModalView extends Component {
@@ -11,7 +10,7 @@ export default class DeviceSearchModalView extends Component {
     const {onHide, value, selected, items, styles,
       onSelect, onChange, onRemove} = this.props
     return (
-      <Dialog open title="Device Search" onRequestClose={onHide}>
+      <Modal title="Device Search" onRequestClose={onHide}>
         <div className="search-modal-container">
           <div className="autocomplete-wrapper">
             <Autocomplete
@@ -77,7 +76,7 @@ export default class DeviceSearchModalView extends Component {
           </table>
         </div>
         <CloseButton onClose={onHide}/>
-      </Dialog>
+      </Modal>
     )
   }
 }

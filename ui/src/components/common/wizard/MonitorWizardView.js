@@ -46,7 +46,7 @@ export default class MonitorWizardView extends React.Component {
     )
 
     return (
-      <Modal title={header} onRequestClose={onHide}>
+      <Modal title={header} onRequestClose={onHide} multiCard>
         <form onSubmit={onSubmit}>
           <CardLegend>Configuration</CardLegend>
           <Card>

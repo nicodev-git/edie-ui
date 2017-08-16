@@ -1,6 +1,5 @@
 import React from 'react'
-import {Dialog} from 'material-ui'
-import { CloseButton } from 'components/modal/parts'
+import { CloseButton, Modal } from 'components/modal/parts'
 
 export default class IrrelDevicesModalView extends React.Component {
   renderItems () {
@@ -14,7 +13,7 @@ export default class IrrelDevicesModalView extends React.Component {
   render () {
     const {onHide} = this.props
     return (
-      <Dialog open title="Not Relevant Devices" onRequestClose={onHide}>
+      <Modal title="Not Relevant Devices" onRequestClose={onHide}>
         <div style={{height: '500px', overflow: 'auto'}}>
           <table className="table table-hover">
             <thead>
@@ -28,7 +27,7 @@ export default class IrrelDevicesModalView extends React.Component {
           </table>
         </div>
         <CloseButton onClose={onHide} />
-      </Dialog>
+      </Modal>
     )
   }
 }

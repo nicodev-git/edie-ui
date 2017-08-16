@@ -1,11 +1,11 @@
 import React from 'react'
 import { reduxForm, Field, formValueSelector } from 'redux-form'
 import { connect } from 'react-redux'
-import {Dialog, FlatButton, Chip} from 'material-ui'
+import {FlatButton, Chip} from 'material-ui'
 import {chipStyles} from 'style/common/materialStyles'
 import { concat, assign } from 'lodash'
 
-import { FormInput } from 'components/modal/parts'
+import { FormInput, Modal } from 'components/modal/parts'
 import FilterModal from './FilterModal'
 import PatternModal from './PatternModal'
 
@@ -139,7 +139,7 @@ class SimulationModal extends React.Component {
   render () {
     const {handleSubmit} = this.props
     return (
-      <Dialog open title="Simulation" onRequestClose={this.onClickClose.bind(this)}>
+      <Modal title="Simulation" onRequestClose={this.onClickClose.bind(this)}>
         <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
           <div className="form-column">
             <Field name="text" component={FormInput} type="text" label="Text"/>
@@ -194,7 +194,7 @@ class SimulationModal extends React.Component {
         </form>
         {this.renderFilterModal()}
         {this.renderPatternModal()}
-      </Dialog>
+      </Modal>
     )
   }
 }

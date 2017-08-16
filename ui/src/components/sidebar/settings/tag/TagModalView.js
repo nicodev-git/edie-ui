@@ -1,14 +1,13 @@
 import React from 'react'
-import {Dialog} from 'material-ui'
 import {Field} from 'redux-form'
 
-import {FormInput, SubmitBlock} from 'components/modal/parts'
+import {Modal, FormInput, SubmitBlock} from 'components/modal/parts'
 
 export default class TagModalView extends React.Component {
   render () {
     const {onClickClose, onSubmit} = this.props
     return (
-      <Dialog open title="Tag" onRequestClose={onClickClose}>
+      <Modal title="Tag" onRequestClose={onClickClose}>
         <form onSubmit={onSubmit}>
           <div className="form-column">
             <Field name="name" component={FormInput} type="text" floatingLabel="Name"/>
@@ -17,7 +16,7 @@ export default class TagModalView extends React.Component {
           </div>
           <SubmitBlock name="Save" onClick={onClickClose}/>
         </form>
-      </Dialog>
+      </Modal>
     )
   }
 }

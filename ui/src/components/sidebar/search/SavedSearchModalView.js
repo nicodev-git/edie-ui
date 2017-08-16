@@ -1,10 +1,10 @@
 import React from 'react'
 import { assign, concat } from 'lodash'
-import {Dialog, IconButton, TextField} from 'material-ui'
+import {IconButton, TextField} from 'material-ui'
 import Share from 'material-ui/svg-icons/social/share'
 import DeleteIcon from 'material-ui/svg-icons/action/delete'
 
-import { TwoButtonsBlockCustom } from 'components/modal/parts'
+import { TwoButtonsBlockCustom, Modal } from 'components/modal/parts'
 
 class SavedSearchModalView extends React.Component {
   renderContent () {
@@ -77,9 +77,9 @@ class SavedSearchModalView extends React.Component {
     } = this.props
     if (panelMode) return this.renderContent()
     return (
-      <Dialog open title="Saved Search" onRequestClose={onClickClose}>
+      <Modal title="Saved Search" onRequestClose={onClickClose}>
         {this.renderContent()}
-      </Dialog>
+      </Modal>
     )
   }
 }
