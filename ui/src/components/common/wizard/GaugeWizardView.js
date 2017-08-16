@@ -104,7 +104,7 @@ export default class GaugeWizardView extends React.Component {
         {this.renderMonitorPick()}
         {this.renderLogicalGroup()}
 
-        {this.renderTableViewMode()}
+        {/*{this.renderTableViewMode()}*/}
 
         {durationVisible ? (
           <div className="inline-block">
