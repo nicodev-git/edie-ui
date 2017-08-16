@@ -102,7 +102,7 @@ export default class GTable extends React.Component {
   renderFrontView () {
     const data = this.getSearchData()
     return (
-      <div className="flex-vertical flex-1">
+      <div className="flex-vertical flex-1 padding-sm">
         <NormalTable
           {...this.props}
           params={data.searchParams}

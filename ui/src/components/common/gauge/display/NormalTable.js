@@ -28,7 +28,7 @@ export default class NormalTable extends React.Component {
           return (
             <div style={chipStyles.wrapper}>
               {<div className="inline-block flex-1">{entity.dataobj.line}</div>}
-              {entity.dataobj.file && <Chip style={{...chipStyles.chip, maxHeight: 32}}>{entity.dataobj.file}</Chip>}
+              {entity.dataobj.file && <Chip style={chipStyles.smallChip} labelStyle={chipStyles.smallLabel}>{entity.dataobj.file}</Chip>}
             </div>
           )
         } else if (viewFilter === viewFilters.raw.name) {
