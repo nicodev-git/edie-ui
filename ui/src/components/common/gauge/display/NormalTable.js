@@ -1,11 +1,12 @@
 import React from 'react'
 import {Chip} from 'material-ui'
+import {keys} from 'lodash'
 
 import InfiniteTable from 'components/common/InfiniteTable'
 import {renderEntity} from 'components/common/CellRenderers'
 import {chipStyles} from 'style/common/materialStyles'
 
-import { parseSearchQuery, guid, encodeUrlParams, dateFormat, collections, severities, viewFilters } from 'shared/Global'
+import { viewFilters } from 'shared/Global'
 
 export default class NormalTable extends React.Component {
   constructor (props) {
