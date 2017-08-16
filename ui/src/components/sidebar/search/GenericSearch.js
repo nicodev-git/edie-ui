@@ -11,7 +11,7 @@ import InfiniteTable from 'components/common/InfiniteTable'
 import TabPage from 'components/common/TabPage'
 import TabPageBody from 'components/common/TabPageBody'
 import TabPageHeader from 'components/common/TabPageHeader'
-import { parseSearchQuery, guid, encodeUrlParams, dateFormat, collections, severities, viewFilters } from 'shared/Global'
+import { parseSearchQuery, guid, dateFormat, collections, severities, viewFilters } from 'shared/Global'
 import { showConfirm } from 'components/common/Alert'
 import {renderEntity} from 'components/common/CellRenderers'
 import {chipStyles} from 'style/common/materialStyles'
@@ -239,10 +239,6 @@ class GenericSearch extends React.Component {
     this.props.updateSearchParams(params, this.props.history)
 
     this.props.change('query', '')
-    this.props.history.replace({
-      pathname: '/search',
-      search: `?${encodeUrlParams({q: JSON.stringify(params)})}`
-    })
   }
 
   getTypeChar (type) {
