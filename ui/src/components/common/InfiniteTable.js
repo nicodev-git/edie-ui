@@ -54,8 +54,9 @@ class InfiniteTable extends React.Component {
   }
 
   componentDidUpdate (prevProps, prevState) {
-    const {url, params} = this.props
-    if (url !== prevProps.url || !isEqual(params, prevProps.params)) {
+    const {url, params, handleRecord} = this.props
+    if (url !== prevProps.url || !isEqual(params, prevProps.params) ||
+      (prevProps.handleRecord && !handleRecord) || (!prevProps.handleRecord && handleRecord)) {
       this.refresh()
     }
   }
