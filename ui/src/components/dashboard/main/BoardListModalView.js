@@ -11,7 +11,7 @@ export default class BoardListModalView extends React.Component {
   render () {
     const {onHide, gaugeBoards, selected, onClickAdd, onClickEdit, onClickDelete, onClickSetDefault, onSelect, defaultBoardId} = this.props
     return (
-      <Modal title="Dashboards" onRequestClose={onHide} multiCard>
+      <Modal title="Dashboards" onRequestClose={onHide}>
         <CardLegend>
           Dashboards
           <div className="pull-right" style={{marginTop: -13}}>
@@ -24,43 +24,41 @@ export default class BoardListModalView extends React.Component {
           </div>
         </CardLegend>
         <Card>
-          <CardText>
-            <div style={{maxHeight: 300, overflow: 'auto'}}>
-              <table className="table table-hover">
-                <thead>
-                <tr>
-                  <th>Name</th>
-                  <th></th>
-                  <th className="text-right">Actions</th>
-                </tr>
-                </thead>
-                <tbody>
-                {gaugeBoards.map(p =>
-                  <tr key={p.id} onClick={() => onSelect(p)} className={selected && selected.id === p.id ? 'selected' : ''}>
-                    <td>{p.name}</td>
-                    <td className="text-center">
-                      {p.id === defaultBoardId ? (
-                        <Chip style={{margin: 'auto'}}>Default</Chip>
-                      ) : null}
+          <div style={{maxHeight: 300, overflow: 'auto'}}>
+            <table className="table table-hover">
+              <thead>
+              <tr>
+                <th>Name</th>
+                <th></th>
+                <th className="text-right">Actions</th>
+              </tr>
+              </thead>
+              <tbody>
+              {gaugeBoards.map(p =>
+                <tr key={p.id} onClick={() => onSelect(p)} className={selected && selected.id === p.id ? 'selected' : ''}>
+                  <td>{p.name}</td>
+                  <td className="text-center">
+                    {p.id === defaultBoardId ? (
+                      <Chip style={{margin: 'auto'}}>Default</Chip>
+                    ) : null}
+                  </td>
+                  {p.origin === 'SYSTEM' ? (
+                    <td/>
+                  ) : (
+                    <td className="text-right">
+                      <IconButton style={{padding: 0, width: 24, height: 24}} onTouchTap={() => onClickEdit(p)}>
+                        <EditIcon color="#545454" hoverColor="#f44336"/>
+                      </IconButton>&nbsp;&nbsp;&nbsp;
+                      <IconButton style={{padding: 0, width: 24, height: 24}} onTouchTap={() => onClickDelete(p)}>
+                        <DeleteIcon color="#545454" hoverColor="#f44336"/>
+                      </IconButton>
                     </td>
-                    {p.origin === 'SYSTEM' ? (
-                      <td/>
-                    ) : (
-                      <td className="text-right">
-                        <IconButton style={{padding: 0, width: 24, height: 24}} onTouchTap={() => onClickEdit(p)}>
-                          <EditIcon color="#545454" hoverColor="#f44336"/>
-                        </IconButton>&nbsp;&nbsp;&nbsp;
-                        <IconButton style={{padding: 0, width: 24, height: 24}} onTouchTap={() => onClickDelete(p)}>
-                          <DeleteIcon color="#545454" hoverColor="#f44336"/>
-                        </IconButton>
-                      </td>
-                    )}
-                  </tr>
-                )}
-                </tbody>
-              </table>
-            </div>
-          </CardText>
+                  )}
+                </tr>
+              )}
+              </tbody>
+            </table>
+          </div>
         </Card>
       </Modal>
     )

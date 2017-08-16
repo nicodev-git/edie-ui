@@ -1,5 +1,5 @@
 import React from 'react'
-import {Dialog, Card, CardText} from 'material-ui'
+import {Dialog} from 'material-ui'
 
 import CloseIconButton from './CloseIconButton'
 
@@ -17,17 +17,6 @@ const titleStyle = {
 }
 
 export default class Modal extends React.Component {
-  renderContent () {
-    const {multiCard} = this.props
-    if (multiCard) return this.props.children
-    return (
-      <Card>
-        <CardText>
-          {this.props.children}
-        </CardText>
-      </Card>
-    )
-  }
   render () {
     const {onRequestClose, title, contentStyle, className} = this.props
     return (
@@ -41,7 +30,7 @@ export default class Modal extends React.Component {
         className={className}
       >
         <CloseIconButton onClick={onRequestClose} color="white"/>
-        {this.renderContent()}
+        {this.props.children}
       </Dialog>
     )
   }
