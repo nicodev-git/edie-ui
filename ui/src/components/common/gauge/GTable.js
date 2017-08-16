@@ -95,7 +95,12 @@ export default class GTable extends React.Component {
   renderFrontView () {
     return (
       <div className="flex-vertical flex-1">
-        <NormalTable {...this.props} params={this.getParams()}/>
+        <NormalTable
+          {...this.props}
+          params={this.getParams()}
+          viewFilter=""
+          viewCols={[]}
+        />
       </div>
     )
   }
