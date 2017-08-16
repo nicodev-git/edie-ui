@@ -5,7 +5,7 @@ import { Field } from 'redux-form'
 import { SubmitBlock, FormInput, FormSelect } from 'components/modal/parts'
 import {findIndex} from 'lodash'
 
-import {gaugeDurationTypes, gaugeResources, severities, timingOptions, realtimeGauges, historicGauges} from 'shared/Global'
+import {gaugeDurationTypes, gaugeResources, severities, timingOptions, realtimeGauges, historicGauges, gaugeTableViewModes} from 'shared/Global'
 import DateRangePicker from 'components/common/DateRangePicker'
 
 import GaugeServerPicker from './input/GaugeServerPicker'
@@ -79,6 +79,13 @@ export default class GaugeWizardView extends React.Component {
       </div>
     )
   }
+  renderTableViewMode () {
+    const {templateName} = this.props
+    if (templateName !== 'Table') return null
+    return (
+      <Field name="tableViewMode" component={FormSelect} floatingLabel="View Mode" options={gaugeTableViewModes} className="valign-top"/>
+    )
+  }
   renderNormal () {
     const {searchList, formValues, durationVisible, splitVisible, templateName} = this.props
     let resourceOptions = gaugeResources
@@ -96,6 +103,8 @@ export default class GaugeWizardView extends React.Component {
         {this.renderWorkflowPick()}
         {this.renderMonitorPick()}
         {this.renderLogicalGroup()}
+
+        {this.renderTableViewMode()}
 
         {durationVisible ? (
           <div className="inline-block">

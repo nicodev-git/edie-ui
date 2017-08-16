@@ -283,10 +283,6 @@ export const layoutHeightZoom = 4
 export const layoutCols = {lg: 12 * layoutWidthZoom, md: 8 * layoutWidthZoom, sm: 8 * layoutWidthZoom, xs: 4 * layoutWidthZoom, xxs: 4 * layoutWidthZoom}
 export const layoutRowHeight = 10
 
-// function widgetSize () {
-//
-// }
-
 export function getWidgetSize (gauge, devices, flip) {
   let size = gauge.gaugeSize
   let hs = 0
@@ -341,3 +337,9 @@ export function getWidgetSize (gauge, devices, flip) {
 export const gaugeAspectRatio = {
   // 'Liquid': {w: 1, h: 1}
 }
+
+export const gaugeTableViewModes = [{
+  label: 'JSON', value: 'json'
+}, {
+  label: 'Table', value: 'table'
+}]
