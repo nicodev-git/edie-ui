@@ -1,7 +1,7 @@
 import React from 'react'
 import { reduxForm, submit, formValueSelector } from 'redux-form'
 import { connect } from 'react-redux'
-import { merge, assign, concat, isArray, keys, findIndex } from 'lodash'
+import { merge, assign, concat, isArray, keys, findIndex, debounce } from 'lodash'
 import moment from 'moment'
 import ReactTooltip from 'react-tooltip'
 import {Popover, FlatButton, Chip} from 'material-ui'
@@ -38,6 +38,7 @@ class GenericSearch extends React.Component {
       total: 0,
       cols: []
     }
+    this.tooltipRebuild = debounce(ReactTooltip.rebuild, 100)
     this.cells = [{
       'displayName': ' ',
       'columnName': 'entity.id',
@@ -92,6 +93,7 @@ class GenericSearch extends React.Component {
           notNull: viewFilter === viewFilters.notNull.name,
           timeField
         }
+        this.tooltipRebuild()
         return <div className="padding-sm bt-gray">{renderEntity(data, options)}</div>
       }
     }]
