@@ -1,13 +1,12 @@
 import React from 'react'
-import {Dialog} from 'material-ui'
 
-import {TwoButtonsBlockCustom} from 'components/modal/parts'
+import {TwoButtonsBlockCustom, Modal} from 'components/modal/parts'
 
 export default class CredTypePickerView extends React.Component {
   render () {
     const {credentialTypes, onHide, onClickOK, onSelect, selectedCredType} = this.props
     return (
-      <Dialog open title="Credentials" onRequestClose={onHide}>
+      <Modal title="Credentials" onRequestClose={onHide}>
         <div style={{height: 300, overflow: 'auto'}}>
           <table className="table table-hover">
             <thead>
@@ -29,7 +28,7 @@ export default class CredTypePickerView extends React.Component {
           </table>
         </div>
         <TwoButtonsBlockCustom name1="OK" name2="Cancel" action1={onClickOK} action2={onHide}/>
-      </Dialog>
+      </Modal>
     )
   }
 }

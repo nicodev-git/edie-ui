@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import {Dialog, Chip, Card, CardText} from 'material-ui'
+import {Chip, Card, CardText} from 'material-ui'
 import { Field } from 'redux-form'
-import { SubmitBlock, FormInput, ImageUploader, FormCheckbox } from 'components/modal/parts'
+import { SubmitBlock, FormInput, ImageUploader, FormCheckbox, Modal } from 'components/modal/parts'
 
 import { chipStyles } from 'style/common/materialStyles'
 
@@ -16,7 +16,7 @@ export default class MonitorTplModalView extends Component {
       credTypeModal, monitorTplCredTypes, onClickAddCredType, onClickDeleteCredType
     } = this.props
     return (
-      <Dialog open title={header} onRequestClose={onHide} contentStyle={contentStyle}>
+      <Modal title={header} onRequestClose={onHide} contentStyle={contentStyle}>
         <form onSubmit={onSubmit}>
           <div>Detail</div>
           <Card>
@@ -61,7 +61,7 @@ export default class MonitorTplModalView extends Component {
           {credTypeModal}
           <SubmitBlock name="Save" onClick={onHide}/>
         </form>
-      </Dialog>
+      </Modal>
     )
   }
 }
