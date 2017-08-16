@@ -7,11 +7,23 @@ import IncidentEventsModal from './IncidentEventsModal'
 import {defaultDateFormat} from 'shared/Global'
 
 export default class MainIncidentPanel extends React.Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      total: 0
+    }
+  }
+  onUpdateIncidentCount (total) {
+    this.setState({total})
+  }
   renderTable () {
     const showAbsDate = this.getUserOptionValue('useAbsoluteDate', false)
     const dateFormat = this.getUserOptionValue('dateFormat', defaultDateFormat)
     return (
-      <IncidentTable {...this.props} showAbsDate={showAbsDate} dateFormat={dateFormat} ref="table"/>
+      <IncidentTable
+        {...this.props}
+        onUpdateIncidentCount={this.onUpdateIncidentCount.bind(this)}
+        showAbsDate={showAbsDate} dateFormat={dateFormat} ref="table"/>
     )
   }
 
@@ -55,8 +67,10 @@ export default class MainIncidentPanel extends React.Component {
   }
 
   render () {
+    const {total} = this.state
+    const style = total ? {minHeight: '600px'} : null
     return (
-      <div className="incidents-row margin-sm-top flex-vertical flex-1" style={{minHeight: '600px'}}>
+      <div className="incidents-row margin-sm-top flex-vertical flex-1" style={style}>
         {this.renderContents()}
       </div>
     )

@@ -117,6 +117,16 @@ export default class IncidentTable extends Component {
     )
   }
 
+  onUpdateCount (total, data, init) {
+    if (!init) {
+      const {onUpdateIncidentCount} = this.props
+
+      this.setState({sunVisible: !total})
+
+      onUpdateIncidentCount && onUpdateIncidentCount(total)
+    }
+  }
+
   render () {
     return (
       <div style={{position: 'absolute', width: '100%', top: 0, bottom: 0, overflow: 'auto'}}>
@@ -132,7 +142,7 @@ export default class IncidentTable extends Component {
             severity: ['HIGH', 'MEDIUM'],
             sort: 'startTimestamp,desc'
           }}
-          onUpdateCount={(total, data, init) => !init && this.setState({sunVisible: !total})}
+          onUpdateCount={this.onUpdateCount.bind(this)}
         />
         {
           this.props.commentsModalVisible &&

@@ -1,5 +1,5 @@
 import React from 'react'
-import {IconButton, Card, CardText, Chip} from 'material-ui'
+import {IconButton, Card, Chip} from 'material-ui'
 import DeleteIcon from 'material-ui/svg-icons/action/delete'
 import EditIcon from 'material-ui/svg-icons/editor/mode-edit'
 import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
