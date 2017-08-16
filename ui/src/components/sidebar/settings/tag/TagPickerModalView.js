@@ -1,5 +1,5 @@
 import React from 'react'
-import {Chip} from 'material-ui'
+import {Chip, Popover} from 'material-ui'
 import {findIndex} from 'lodash'
 import {blue300} from 'material-ui/styles/colors'
 
@@ -37,7 +37,23 @@ export default class TagPickerModalView extends React.Component {
     )
   }
   render () {
-    const {onClickClose, onClickOK} = this.props
+    const {onClickClose, onClickOK, viewMode, anchorEl} = this.props
+    if (viewMode === 'popover') {
+      return (
+        <Popover
+          open
+          anchorEl={anchorEl}
+          anchorOrigin={{horizontal: 'right', vertical: 'bottom'}}
+          targetOrigin={{horizontal: 'right', vertical: 'top'}}
+          onRequestClose={onClickClose}
+          className="padding-md"
+          style={{maxWidth: 800}}
+        >
+          {this.renderContent()}
+          <TwoButtonsBlockCustom name1="Cancel" action1={onClickClose} name2="OK" action2={onClickOK}/>
+        </Popover>
+      )
+    }
     return (
       <Modal title="Tags" onRequestClose={onClickClose}>
         {this.renderContent()}

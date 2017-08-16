@@ -36,7 +36,8 @@ class GenericSearch extends React.Component {
 
     this.state = {
       total: 0,
-      cols: []
+      cols: [],
+      anchorEl: null
     }
     this.tooltipRebuild = debounce(ReactTooltip.rebuild, 100)
     this.cells = [{
@@ -466,7 +467,10 @@ class GenericSearch extends React.Component {
   onClickGraph () {
     this.props.showSearchGraphModal(true)
   }
-  onClickTags () {
+  onClickTags (e) {
+    this.setState({
+      anchorEl: e.target
+    })
     this.props.showSearchTagModal(true)
   }
   onPickTag (tags) {
@@ -676,6 +680,8 @@ class GenericSearch extends React.Component {
     return (
       <TagPickerModal
         hideAdd
+        viewMode="popover"
+        anchorEl={this.state.anchorEl}
         onPickMulti={this.onPickTag.bind(this)}
         onClickClose={() => this.props.showSearchTagModal(false)}/>
     )

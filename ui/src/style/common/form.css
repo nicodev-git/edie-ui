@@ -11,6 +11,8 @@
 
 .form-buttons {
     text-align: right;
+    margin-bottom: 2px;
+    margin-right: 2px;
 }
 
 .form-buttons > div {
