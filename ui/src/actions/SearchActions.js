@@ -60,7 +60,7 @@ import {
 } from './types'
 import { ROOT_URL } from './config'
 import { apiError } from './Errors'
-import {encodeUrlParams, dateFormat, parseSearchQuery} from 'shared/Global'
+import {dateFormat, parseSearchQuery} from 'shared/Global'
 
 export const updateSearchParams = (params, history) => {
   return function (dispatch) {
@@ -71,7 +71,7 @@ export const updateSearchParams = (params, history) => {
     })
     history.replace({
       pathname: '/search',
-      search: `?${encodeUrlParams({q: JSON.stringify(params)})}`
+      search: `?q=${encodeURIComponent(JSON.stringify(params))}`
     })
   }
 }
