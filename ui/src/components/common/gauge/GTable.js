@@ -73,8 +73,8 @@ export default class GTable extends React.Component {
           dateTo,
           query: '',
           workflow: '',
-          collections: 'incident,event',
-          severity: 'HIGH,MEDIUM',
+          collections: 'incident',
+          severity: 'HIGH,MEDIUM,LOW,AUDIT',
           tag: '',
           monitorTypes: ''
         }

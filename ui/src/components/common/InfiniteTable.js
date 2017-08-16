@@ -82,7 +82,7 @@ class InfiniteTable extends React.Component {
       return
     }
 
-    const {url, params, pageSize, onUpdateCount} = this.props
+    const {url, params, pageSize, onUpdateCount, handleRecord} = this.props
     if (!url) return
     page = clear ? 1 : (page || 1)
     let urlParams = assign({
@@ -100,7 +100,10 @@ class InfiniteTable extends React.Component {
 
     this.lastRequest = $.get(`${ROOT_URL}${url}?${encodeUrlParams(urlParams)}`).done(res => {
       const embedded = res._embedded
-      const data = embedded[keys(embedded)[0]]
+      let data = embedded[keys(embedded)[0]]
+      if (handleRecord) {
+        data = data.map(d => handleRecord(d))
+      }
 
       const total = res.page.totalElements
       let state = {
@@ -277,7 +280,8 @@ InfiniteTable.defaultProps = {
   allowMultiSelect: false,
   noDataMessage: '',
 
-  onUpdateCount: null
+  onUpdateCount: null,
+  handleRecord: null
 }
 
 export default InfiniteTable

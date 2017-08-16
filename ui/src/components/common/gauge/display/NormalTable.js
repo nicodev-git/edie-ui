@@ -1,6 +1,6 @@
 import React from 'react'
 import {Chip} from 'material-ui'
-import {keys} from 'lodash'
+import {keys, isArray, isObject} from 'lodash'
 import moment from 'moment'
 
 import InfiniteTable from 'components/common/InfiniteTable'
@@ -75,6 +75,21 @@ export default class NormalTable extends React.Component {
     }]
   }
 
+  handleRecord (d) {
+    const e = {id: d.id}
+
+    const data = d.entity
+    keys(data).forEach(k => {
+      let val = data[k]
+      if (val && (isObject(val) || isArray(val))) {
+        val = JSON.stringify(val)
+        if (val.length > 200) val = val.substring(0, 200)
+      }
+      e[k] = val
+    })
+    return e
+  }
+
   getCells () {
     if (this.props.viewMode === 'table') {
       const {viewCols} = this.props
@@ -104,6 +119,7 @@ export default class NormalTable extends React.Component {
           rowMetadata={{'key': 'id'}}
           params={this.props.params}
           showTableHeading={this.props.viewMode === 'table'}
+          handleRecord={this.props.viewMode === 'table' ? this.handleRecord.bind(this) : null}
         />
       </div>
     )
