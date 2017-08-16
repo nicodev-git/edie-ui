@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
-import Dialog from 'material-ui/Dialog'
 import {appendComponent, removeComponent} from 'util/Component'
-import { SubHeader } from '../modal/parts'
+import { SubHeader, Modal } from '../modal/parts'
 import TextField from 'material-ui/TextField'
 import FlatButton from 'material-ui/FlatButton'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
@@ -53,7 +52,7 @@ export default class Alert extends Component {
   render () {
     return (
       <MuiThemeProvider>
-        <Dialog open title={this.props.title} contentStyle={{width: 350}}>
+        <Modal title={this.props.title} contentStyle={{width: 350}}>
           <SubHeader name={this.props.message}/>
           <div className={`form-column ${this.props.type === TYPE_PROMPT ? '' : 'hidden'}`}>
             <TextField
@@ -78,7 +77,7 @@ export default class Alert extends Component {
               style={buttonStyle}
               labelStyle={buttonTextStyle}/>
           </div>
-        </Dialog>
+        </Modal>
       </MuiThemeProvider>
     )
   }

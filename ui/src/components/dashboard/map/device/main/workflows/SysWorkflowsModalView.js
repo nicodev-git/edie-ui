@@ -1,11 +1,10 @@
 import React from 'react'
-import {Dialog} from 'material-ui'
 import Checkbox from 'material-ui/Checkbox'
 import SelectField from 'material-ui/SelectField'
 import MenuItem from 'material-ui/MenuItem'
 import { findIndex } from 'lodash'
 
-import { TwoButtonsBlockCustom } from 'components/modal/parts'
+import { TwoButtonsBlockCustom, Modal } from 'components/modal/parts'
 import { errorStyle, underlineFocusStyle, inputStyle,
   selectedItemStyle } from 'style/common/materialStyles'
 
@@ -17,7 +16,7 @@ export default class SysWorkflowsModalView extends React.Component {
       selectedSysWorkflowCategory, workflowCategories,
       selectedSysWorkflows} = this.props
     return (
-      <Dialog open title={header} onRequestClose={onClickClose}>
+      <Modal title={header} onRequestClose={onClickClose}>
         <div className="padding-md-left">
           <SelectField
             errorStyle={errorStyle}
@@ -68,7 +67,7 @@ export default class SysWorkflowsModalView extends React.Component {
         </div>
         <TwoButtonsBlockCustom name1="Cancel" action1={onClickClose}
           name2="Add" action2={onClickAdd}/>
-      </Dialog>
+      </Modal>
     )
   }
 }

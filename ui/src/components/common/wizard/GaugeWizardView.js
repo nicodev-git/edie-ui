@@ -1,8 +1,8 @@
 import React from 'react'
 import moment from 'moment'
-import {Dialog, SelectField, MenuItem, RaisedButton, Checkbox} from 'material-ui'
+import {SelectField, MenuItem, RaisedButton, Checkbox} from 'material-ui'
 import { Field } from 'redux-form'
-import { SubmitBlock, FormInput, FormSelect } from 'components/modal/parts'
+import { SubmitBlock, FormInput, FormSelect, Modal } from 'components/modal/parts'
 import {findIndex} from 'lodash'
 
 import {gaugeDurationTypes, gaugeResources, severities, timingOptions, realtimeGauges, historicGauges, gaugeTableViewModes} from 'shared/Global'
@@ -300,12 +300,12 @@ export default class GaugeWizardView extends React.Component {
     const {onSubmit, onHide, title, templateName} = this.props
     const width = templateName === 'Servers' ? 900 : 585
     return (
-      <Dialog open title={title || 'Gauge'} onRequestClose={onHide} contentStyle={{width}}>
+      <Modal title={title || 'Gauge'} onRequestClose={onHide} contentStyle={{width}}>
         <form onSubmit={onSubmit}>
           {this.renderContent()}
           <SubmitBlock name="Add" onClick={onHide} />
         </form>
-      </Dialog>
+      </Modal>
     )
   }
 }

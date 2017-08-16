@@ -1,13 +1,12 @@
 import React, { Component } from 'react'
 import moment from 'moment'
-import {Dialog} from 'material-ui'
 import CheckIcon from 'material-ui/svg-icons/toggle/check-box'
 import CloseIcon from 'material-ui/svg-icons/navigation/close'
 import HelpIcon from 'material-ui/svg-icons/action/help'
 
 import InfiniteTable from 'components/common/InfiniteTable'
 import ShowMoreLine from 'components/common/ShowMoreLine'
-import { CloseButton } from 'components/modal/parts'
+import { CloseButton, Modal } from 'components/modal/parts'
 
 export default class MonitorHistoryModal extends Component {
   constructor (props) {
@@ -56,7 +55,7 @@ export default class MonitorHistoryModal extends Component {
     }
 
     return (
-      <Dialog open title="Monitor History" onRequestClose={this.onClickClose.bind(this)}>
+      <Modal title="Monitor History" onRequestClose={this.onClickClose.bind(this)}>
         <div className="small-modal-table">
           <div style={{height: '300px', position: 'relative'}}>
             <InfiniteTable
@@ -69,7 +68,7 @@ export default class MonitorHistoryModal extends Component {
           </div>
         </div>
         <CloseButton onClose={this.onClickClose.bind(this)} />
-      </Dialog>
+      </Modal>
     )
   }
 }

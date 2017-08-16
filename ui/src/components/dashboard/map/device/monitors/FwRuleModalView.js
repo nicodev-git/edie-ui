@@ -1,8 +1,7 @@
 import React from 'react'
-import {Dialog} from 'material-ui'
 import {Field, Form} from 'redux-form'
 import {
-  FormInput, SubmitBlock, FormSelect
+  FormInput, SubmitBlock, FormSelect, Modal
 } from 'components/modal/parts'
 
 const actions = [
@@ -19,7 +18,7 @@ export default class FwRuleModalView extends React.Component {
   render () {
     const {onSubmit, onHide} = this.props
     return (
-      <Dialog open title="Rule" onRequestClose={onHide} contentStyle={{width: 600}}>
+      <Modal title="Rule" onRequestClose={onHide} contentStyle={{width: 600}}>
         <Form onSubmit={onSubmit}>
           <div style={{marginTop: -20}}>
             <Field name="rule" component={FormInput} floatingLabel="Rule Name"/>&nbsp;
@@ -36,7 +35,7 @@ export default class FwRuleModalView extends React.Component {
           </div>
           <SubmitBlock name="OK" onClick={onHide}/>
         </Form>
-      </Dialog>
+      </Modal>
     )
   }
 }

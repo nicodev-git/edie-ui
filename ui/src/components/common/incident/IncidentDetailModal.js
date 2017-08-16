@@ -1,6 +1,7 @@
 import React from 'react'
-import {Dialog} from 'material-ui'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+
+import {Modal} from 'components/modal/parts'
 
 export default class IncidentDetailModal extends React.Component {
   onHide () {
@@ -21,7 +22,7 @@ export default class IncidentDetailModal extends React.Component {
 
     return (
       <MuiThemeProvider>
-        <Dialog open title="Incident Detail" onRequestClose={this.onHide.bind(this)}>
+        <Modal title="Incident Detail" onRequestClose={this.onHide.bind(this)}>
           <div className="row">
             <label className="control-label col-md-12 bold">Event Details</label>
           </div>
@@ -49,7 +50,7 @@ export default class IncidentDetailModal extends React.Component {
             <label className="control-label col-md-3">Status:</label>
             <label className="control-label col-md-9">{fixstatus}</label>
           </div>
-        </Dialog>
+        </Modal>
       </MuiThemeProvider>
     )
   }

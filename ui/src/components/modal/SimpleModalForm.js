@@ -1,12 +1,11 @@
 import React from 'react'
-import Dialog from 'material-ui/Dialog'
 import { Field } from 'redux-form'
 import { SubHeader, FormInput, FormSelect, FormImg, FileUpload, FormCheckbox,
-  SubmitBlock } from 'components/modal/parts'
+  SubmitBlock, Modal } from 'components/modal/parts'
 
 const SimpleModalForm = ({show, onHide, onSubmit, header, subheader, buttonText,
   content, imageUpload, fileUpload}) => (
-  <Dialog open title={header} onRequestClose={onHide}>
+  <Modal title={header} onRequestClose={onHide}>
     {(subheader) ? (<SubHeader name={subheader}/>) : null}
     <form onSubmit={onSubmit}>
       {(imageUpload) ? (<Field name="image" component={FormImg}/>) : null}
@@ -45,7 +44,7 @@ const SimpleModalForm = ({show, onHide, onSubmit, header, subheader, buttonText,
       </div>
       <SubmitBlock name={buttonText} onClick={onHide}/>
     </form>
-  </Dialog>
+  </Modal>
 )
 
 export default SimpleModalForm

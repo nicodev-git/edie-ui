@@ -1,5 +1,4 @@
 import React from 'react'
-import {Dialog} from 'material-ui'
 import { connect } from 'react-redux'
 import {
   openParamEditModal,
@@ -7,6 +6,8 @@ import {
   removeParam,
   updateMonitorParams
 } from 'actions'
+
+import {Modal} from 'components/modal/parts'
 
 @connect(state => ({
   editParams: state.devices.editParams
@@ -43,7 +44,7 @@ export default class ParamsModal extends React.Component {
 
   render () {
     return (
-      <Dialog open title="Params" onRequestClose={this.onClickClose.bind(this)}>
+      <Modal title="Params" onRequestClose={this.onClickClose.bind(this)}>
         <div>
           <table className="table table-hover">
             <tbody>
@@ -69,7 +70,7 @@ export default class ParamsModal extends React.Component {
             onClick={this.onClickSave.bind(this)}>Save</a>
           <a href="javascript:;" className="btn btn-default btn-sm" onClick={this.onClickClose.bind(this)}>Close</a>
         </div>
-      </Dialog>
+      </Modal>
     )
   }
 }

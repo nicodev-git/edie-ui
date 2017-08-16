@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import {Dialog} from 'material-ui'
 import moment from 'moment'
 import { assign, concat } from 'lodash'
+
+import {Modal} from 'components/modal/parts'
 
 export default class CommentsModal extends Component {
   onHide () {
@@ -33,7 +34,7 @@ export default class CommentsModal extends Component {
     let {comments} = this.props.incident
 
     return (
-      <Dialog open title="Comment" onRequestClose={this.onClickClose.bind(this)}>
+      <Modal title="Comment" onRequestClose={this.onClickClose.bind(this)}>
         <div className="row margin-md-bottom hidden">
           <label className="control-label col-md-2 padding-xs-top">Reason</label>
 
@@ -73,7 +74,7 @@ export default class CommentsModal extends Component {
         <div className="text-right p-none">
           <button className="btn btn-default btn-sm" onClick={this.onClickClose.bind(this)}>Close</button>
         </div>
-      </Dialog>
+      </Modal>
     )
   }
 }

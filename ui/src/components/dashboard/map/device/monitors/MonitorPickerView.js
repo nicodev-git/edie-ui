@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
-import {Dialog} from 'material-ui'
+
+import {Modal} from 'components/modal/parts'
 
 export default class MonitorPickerView extends Component {
   render () {
     const {onHide, monitorTemplates, onClickItem, extImageBaseUrl} = this.props
     return (
-      <Dialog open title="Choose Monitor" onRequestClose={onHide}>
+      <Modal title="Choose Monitor" onRequestClose={onHide}>
         <div className="monitor-types text-center">
           <ul>
             {
@@ -18,7 +19,7 @@ export default class MonitorPickerView extends Component {
             }
           </ul>
         </div>
-      </Dialog>
+      </Modal>
     )
   }
 }

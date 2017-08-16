@@ -1,13 +1,12 @@
 import React, { Component } from 'react'
-import {Dialog} from 'material-ui'
-import { WizardButtons } from 'components/modal/parts'
+import { WizardButtons, Modal } from 'components/modal/parts'
 
 export default class DeviceWizardView extends Component {
   render () {
     const {header, progressBar, content, current, steps, onSubmit, onHide,
       onPrev, onNext, paramEditModal, credPicker} = this.props
     return (
-      <Dialog open className="modal-device-wizard" title={header} onRequestClose={onHide}>
+      <Modal className="modal-device-wizard" title={header} onRequestClose={onHide}>
         <form onSubmit={onSubmit}>
           {progressBar}
           {content}
@@ -16,7 +15,7 @@ export default class DeviceWizardView extends Component {
         </form>
         {paramEditModal}
         {credPicker}
-      </Dialog>
+      </Modal>
     )
   }
 }

@@ -1,14 +1,13 @@
 import React, { Component } from 'react'
-import {Dialog} from 'material-ui'
 import { Field } from 'redux-form'
 import Chip from 'material-ui/Chip'
-import { SubmitBlock, FormInput } from 'components/modal/parts'
+import { SubmitBlock, FormInput, Modal } from 'components/modal/parts'
 
 export default class ParamEditModalView extends Component {
   render () {
     const {onSubmit, onHide, styles, defaultKeys, onKeyClick} = this.props
     return (
-      <Dialog open title="Param" onRequestClose={onHide}>
+      <Modal title="Param" onRequestClose={onHide}>
         <form onSubmit={onSubmit}>
           <div className="margin-md-bottom" style={styles.wrapper}>
             {defaultKeys.map(k =>
@@ -27,7 +26,7 @@ export default class ParamEditModalView extends Component {
           </div>
           <SubmitBlock name="Save" onClick={onHide}/>
         </form>
-      </Dialog>
+      </Modal>
     )
   }
 }

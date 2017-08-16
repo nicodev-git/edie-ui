@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
-import {Dialog} from 'material-ui'
-import { TwoButtonsBlock } from 'components/modal/parts'
+
+import { TwoButtonsBlock, Modal } from 'components/modal/parts'
 
 export default class DiagramModalView extends Component {
   render () {
     const {header, onHide, onSave, dragLayer, toolbar, sidebar,
       panel, objectModal} = this.props
     return (
-      <Dialog open title={header} onRequestClose={onHide}>
+      <Modal title={header} onRequestClose={onHide}>
         <div className="diagram">
           {dragLayer}
           {toolbar}
@@ -18,7 +18,7 @@ export default class DiagramModalView extends Component {
         </div>
         {objectModal}
         <TwoButtonsBlock onSave={onSave} onClose={onHide}/>
-      </Dialog>
+      </Modal>
     )
   }
 }

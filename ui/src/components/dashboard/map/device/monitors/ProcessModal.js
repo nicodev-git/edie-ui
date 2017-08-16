@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-import {Dialog} from 'material-ui'
 import moment from 'moment'
+
+import {Modal} from 'components/modal/parts'
 
 export default class ProcessModal extends Component {
   constructor (props) {
@@ -51,7 +52,7 @@ export default class ProcessModal extends Component {
   render () {
     const {process} = this.props
     return (
-      <Dialog open title="Process" onRequestClose={this.onClickClose.bind(this)}>
+      <Modal title="Process" onRequestClose={this.onClickClose.bind(this)}>
         <h4>
           Process: {process.Name}
         </h4>
@@ -116,7 +117,7 @@ export default class ProcessModal extends Component {
             </div>
           </div>
         </div>
-      </Dialog>
+      </Modal>
     )
   }
 }

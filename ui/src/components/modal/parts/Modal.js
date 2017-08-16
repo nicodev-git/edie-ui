@@ -18,9 +18,17 @@ const titleStyle = {
 
 export default class Modal extends React.Component {
   render () {
-    const {onRequestClose, title, contentStyle} = this.props
+    const {onRequestClose, title, contentStyle, className} = this.props
     return (
-      <Dialog open title={title} contentStyle={contentStyle} bodyStyle={dialogStyle} titleStyle={titleStyle} onRequestClose={onRequestClose}>
+      <Dialog
+        open
+        title={title}
+        contentStyle={contentStyle}
+        bodyStyle={dialogStyle}
+        titleStyle={titleStyle}
+        onRequestClose={onRequestClose}
+        className={className}
+      >
         <CloseIconButton onClick={onRequestClose} color="white"/>
         {this.props.children}
       </Dialog>
