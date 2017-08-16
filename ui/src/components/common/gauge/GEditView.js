@@ -4,7 +4,7 @@ import {TextField, SelectField, MenuItem, RaisedButton, Checkbox} from 'material
 import {findIndex} from 'lodash'
 
 import DoneButton from './DoneButton'
-import {gaugeDurationTypes, gaugeResources, severities as allSeverities} from 'shared/Global'
+import {gaugeDurationTypes, gaugeResources, severities as allSeverities, gaugeTableViewModes} from 'shared/Global'
 import DateRangePicker from 'components/common/DateRangePicker'
 
 import GaugeServerPicker from 'components/common/wizard/input/GaugeServerPicker'
@@ -65,7 +65,9 @@ export default class GEditView extends React.Component {
       selectedDevice: null,
       selectedMonitor: null,
       selectedRight: null,
-      servers: gauge.servers || []
+      servers: gauge.servers || [],
+
+      tableViewMode: gauge.tableViewMode || 'json'
     }
   }
 
@@ -158,14 +160,16 @@ export default class GEditView extends React.Component {
       duration, durationUnit, splitBy, splitUnit, name,
       severities, dateFrom, dateTo, fixed,
       itemSize, showDeviceType, gaugeSize,
-      forward, forwardBoardId, servers
+      forward, forwardBoardId, servers,
+      tableViewMode
     }  = this.state
     const values = {
       resource, savedSearchId, monitorId, workflowId, deviceId, serviceName, monitorIds,
       duration, durationUnit, splitBy, splitUnit, name,
       severities, dateFrom, dateTo, fixed,
       itemSize, showDeviceType, gaugeSize,
-      forward, forwardBoardId, servers
+      forward, forwardBoardId, servers,
+      tableViewMode
     }
     onSubmit && onSubmit(values)
   }
@@ -222,6 +226,16 @@ export default class GEditView extends React.Component {
       </div>
     ]
   }
+  renderTableViewMode () {
+    const {templateName} = this.props
+    const {tableViewMode} = this.state
+    if (templateName !== 'Table') return null
+    return (
+      <SelectField value={tableViewMode} floatingLabelText="View Mode" className="valign-top" style={inputStyle} onChange={this.onChangeSelect.bind(this, 'deviceId')}>
+        {gaugeTableViewModes.map(p => <MenuItem key={p.value} value={p.value} primaryText={p.label}/>)}
+      </SelectField>
+    )
+  }
   renderNormal () {
     const {
       resource, savedSearchId, workflowId,
@@ -257,6 +271,7 @@ export default class GEditView extends React.Component {
             </div>
           ) : null}
           {this.renderMonitorPick()}
+          {this.renderTableViewMode()}
           {this.renderLogicalGroup()}
 
           {!hideDuration && <div className="col-md-3">
