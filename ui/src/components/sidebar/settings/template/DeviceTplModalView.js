@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { Field } from 'redux-form'
-import {Chip, Dialog} from 'material-ui'
+import {Chip} from 'material-ui'
 
 import { SubmitBlock, FormInput, ImageUploader, FormCheckbox,
-  Monitors, MonitorTemplates, Workflows } from 'components/modal/parts'
+  Monitors, MonitorTemplates, Workflows, Modal } from 'components/modal/parts'
 import { chipStyles } from 'style/common/materialStyles'
 
 export default class DeviceTplModalView extends Component {
@@ -49,9 +49,9 @@ export default class DeviceTplModalView extends Component {
     const {header, innerView} = this.props
     if (innerView) return this.renderContent()
     return (
-      <Dialog open title={header} onRequestClose={this.props.onHide}>
+      <Modal title={header} onRequestClose={this.props.onHide}>
         {this.renderContent()}
-      </Dialog>
+      </Modal>
     )
   }
 }

@@ -8,6 +8,7 @@ import { chipStyles } from 'style/common/materialStyles'
 const contentStyle = {
   width: 620
 }
+
 export default class MonitorTplModalView extends Component {
   render () {
     const {

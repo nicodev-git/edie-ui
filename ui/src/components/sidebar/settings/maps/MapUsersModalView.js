@@ -1,16 +1,16 @@
 import React, { Component } from 'react'
-import {Dialog} from 'material-ui'
 import IconButton from 'material-ui/IconButton'
 import DeleteIcon from 'material-ui/svg-icons/action/delete'
 import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
-import { CloseButton } from 'components/modal/parts'
+
+import { CloseButton, Modal } from 'components/modal/parts'
 import { buttonStyle, iconStyle } from 'style/common/materialStyles'
 
 export default class MapUsersModalView extends Component {
   render () {
     const {header, table, usersModal, onHide, onAdd, onDelete} = this.props
     return (
-      <Dialog open title={header} onRequestClose={onHide}>
+      <Modal title={header} onRequestClose={onHide}>
         <div style={{minHeight: '400px'}}>
           <div className="panel panel-default panel-noborder">
             <div className="crud-buttons">
@@ -38,7 +38,7 @@ export default class MapUsersModalView extends Component {
           {usersModal}
         </div>
         <CloseButton onClose={onHide} />
-      </Dialog>
+      </Modal>
     )
   }
 }

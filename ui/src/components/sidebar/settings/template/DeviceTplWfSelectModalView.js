@@ -1,7 +1,6 @@
 import React from 'react'
-import {Dialog} from 'material-ui'
 
-import { TwoButtonsBlockCustom } from 'components/modal/parts'
+import { TwoButtonsBlockCustom, Modal } from 'components/modal/parts'
 
 export default class DeviceTplWfSelectModalView extends React.Component {
   render () {
@@ -10,7 +9,7 @@ export default class DeviceTplWfSelectModalView extends React.Component {
       workflows, selectedRowWf
     } = this.props
     return (
-      <Dialog open title="Workflow" onRequestClose={onClickClose}>
+      <Modal title="Workflow" onRequestClose={onClickClose}>
         <div style={{maxHeight: '400px', overflow: 'auto'}}>
           <table className="table table-hover">
             <thead>
@@ -42,7 +41,7 @@ export default class DeviceTplWfSelectModalView extends React.Component {
           </table>
         </div>
         <TwoButtonsBlockCustom name1="Cancel" action1={onClickClose} name2="OK" action2={onClickSave}/>
-      </Dialog>
+      </Modal>
     )
   }
 }

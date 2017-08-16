@@ -1,10 +1,9 @@
 import React from 'react'
-import {Dialog} from 'material-ui'
 import { Field } from 'redux-form'
-import { FormInput, SubmitSingle } from 'components/modal/parts'
+import { FormInput, SubmitSingle, Modal } from 'components/modal/parts'
 
 const ActivationModalView = ({onHide, onSignup}) => (
-  <Dialog open title="License Activation">
+  <Modal title="License Activation">
       <form onSubmit={onSignup}>
         <div className="form-column">
           <Field name="email" component={FormInput} autoComplete="off" label="Email"/>
@@ -12,7 +11,7 @@ const ActivationModalView = ({onHide, onSignup}) => (
         </div>
         <SubmitSingle name="Activate"/>
       </form>
-  </Dialog>
+  </Modal>
 )
 
 export default ActivationModalView

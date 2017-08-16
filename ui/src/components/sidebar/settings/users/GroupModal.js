@@ -1,9 +1,10 @@
 import React from 'react'
-import {Dialog} from 'material-ui'
 import {
   findIndex,
   clone
 } from 'lodash'
+
+import { Modal } from 'components/modal/parts'
 
 import { showAlert } from 'components/common/Alert'
 import { ROOT_URL } from 'actions/config'
@@ -134,7 +135,7 @@ export default class GroupModal extends React.Component {
     if (group) groupId = group.id
 
     return (
-      <Dialog open title="Group" onRequestClose={this.onClickClose.bind(this)}>
+      <Modal title="Group" onRequestClose={this.onClickClose.bind(this)}>
         <div className="row form-group margin-md-bottom">
           <div className="col-xs-12">
             <label className="control-label">Group Name</label>
@@ -187,7 +188,7 @@ export default class GroupModal extends React.Component {
           <a href="javascript:;" className="btn-sm margin-sm-left"
             onClick={this.onClickClose.bind(this)}>Cancel</a>
         </div>
-      </Dialog>
+      </Modal>
     )
   }
 }

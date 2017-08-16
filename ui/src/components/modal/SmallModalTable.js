@@ -1,11 +1,10 @@
 import React from 'react'
-import {Dialog} from 'material-ui'
 import InfiniteTable from 'components/common/InfiniteTable'
-import { CloseButton, TwoButtonsBlock } from 'components/modal/parts'
+import { CloseButton, TwoButtonsBlock, Modal } from 'components/modal/parts'
 
 const SmallModalTable = ({show, header, url, row, height, onHide,
   params, cells, save, onSave, data, useExternal, customWidth}) => (
-  <Dialog open title={header} onRequestClose={onHide}>
+  <Modal title={header} onRequestClose={onHide}>
     <div className="small-modal-table">
       <div style={{height: height, overflow: 'auto'}}>
         <InfiniteTable
@@ -25,7 +24,7 @@ const SmallModalTable = ({show, header, url, row, height, onHide,
     <div className="padding-md-bottom">
       {save ? <TwoButtonsBlock onSave={onSave} onClose={onHide}/> : <CloseButton onClose={onHide} />}
     </div>
-  </Dialog>
+  </Modal>
 )
 
 export default SmallModalTable
