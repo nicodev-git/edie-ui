@@ -227,13 +227,15 @@ export default class GEditView extends React.Component {
     ]
   }
   renderTableViewMode () {
-    const {templateName} = this.props
+    const {gauge} = this.props
     const {tableViewMode} = this.state
-    if (templateName !== 'Table') return null
+    if (gauge.templateName !== 'Table') return null
     return (
-      <SelectField value={tableViewMode} floatingLabelText="View Mode" className="valign-top" style={inputStyle} onChange={this.onChangeSelect.bind(this, 'deviceId')}>
-        {gaugeTableViewModes.map(p => <MenuItem key={p.value} value={p.value} primaryText={p.label}/>)}
-      </SelectField>
+      <div className="col-md-6">
+        <SelectField value={tableViewMode} floatingLabelText="View Mode" className="valign-top" style={inputStyle} onChange={this.onChangeSelect.bind(this, 'tableViewMode')}>
+          {gaugeTableViewModes.map(p => <MenuItem key={p.value} value={p.value} primaryText={p.label}/>)}
+        </SelectField>
+      </div>
     )
   }
   renderNormal () {
