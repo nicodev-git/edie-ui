@@ -80,10 +80,11 @@ export default class NormalTable extends React.Component {
 
     const data = d.entity
     keys(data).forEach(k => {
+      if (k === 'id') return
       let val = data[k]
       if (val && (isObject(val) || isArray(val))) {
         val = JSON.stringify(val)
-        if (val.length > 200) val = val.substring(0, 200)
+        // if (val.length > 200) val = val.substring(0, 200)
       }
       e[k] = val
     })

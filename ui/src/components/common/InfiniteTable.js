@@ -128,10 +128,6 @@ class InfiniteTable extends React.Component {
     return ''
   }
 
-  getTotalCount () {
-    return this.state.useExternal ? this.state.total : this.props.data.length
-  }
-
   onRowClick (row, e) {
     if (!this.props.selectable) return
     if (e && e.metaKey && this.props.allowMultiSelect) {
