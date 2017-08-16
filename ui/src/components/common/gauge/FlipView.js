@@ -49,7 +49,7 @@ export default class FlipView extends React.Component {
     const {onClickDelete, gauge} = this.props
     return (
       <div
-        style={{position: 'absolute', right: 10, bottom: 10}}
+        style={{position: 'absolute', right: 10, bottom: 10, zIndex: 1}}
         className={`link info-button ${hovered ? 'visible' : ''}`}>
         <DeleteIcon onTouchTap={() => onClickDelete(gauge)}/>
         <InfoIcon size={24} onClick={this.onClickFlip.bind(this)}/>
