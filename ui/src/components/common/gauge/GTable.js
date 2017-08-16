@@ -56,8 +56,7 @@ export default class GTable extends React.Component {
         dateTo,
         severity: severities.map(p => p.value).join(','),
         tag: '',
-        monitorTypes: '',
-        sort: 'startTimestamp,desc'
+        monitorTypes: ''
       }
       return {
         searchParams
@@ -77,8 +76,7 @@ export default class GTable extends React.Component {
           collections: 'incident,event',
           severity: 'HIGH,MEDIUM',
           tag: '',
-          monitorTypes: '',
-          sort: 'startTimestamp,desc'
+          monitorTypes: ''
         }
       }
     }
@@ -86,14 +84,15 @@ export default class GTable extends React.Component {
     const searchParams = JSON.parse(savedSearch.data)
 
     return {
-      searchParams: { ...searchParams,
+      searchParams: {
+        ...searchParams,
         draw: this.props.incidentDraw,
         dateFrom,
-        dateTo,
-        sort: 'startTimestamp,desc'
+        dateTo
       },
       viewFilter: savedSearch.viewFilter,
-      viewCols: savedSearch.viewCols
+      viewCols: savedSearch.viewCols,
+      viewMode: gauge.viewMode
     }
   }
 
@@ -108,6 +107,7 @@ export default class GTable extends React.Component {
           params={data.searchParams}
           viewFilter={data.viewFilter || ''}
           viewCols={data.viewCols || []}
+          viewMode={data.viewMode || 'json'}
         />
       </div>
     )

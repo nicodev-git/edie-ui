@@ -431,7 +431,7 @@ class GenericSearch extends React.Component {
 
   onResultCountUpdate (total, data) {
     let {cols} = this.state
-    if (!cols.length && data && data.length) {
+    if (data && data.length) {
       cols = keys(data[0].entity)
     }
     this.setState({
