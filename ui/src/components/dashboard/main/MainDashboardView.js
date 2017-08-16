@@ -249,8 +249,9 @@ export default class MainDashboardView extends React.Component {
   renderGauge (p) {
     let GaugePanel = gaugeMap[p.templateName || 'z']
     if (!GaugePanel) return <div key={p.id}/>
+    const flip = this.state.flip[p.id]
     return (
-      <div key={p.id}>
+      <div key={p.id} style={flip ? {zIndex: 10} : null}>
         <GaugePanel
           {...this.props}
           gauge={p}
@@ -259,12 +260,12 @@ export default class MainDashboardView extends React.Component {
           devices={this.props.devices}
           monitors={this.getMonitors()}
 
-          flip={this.state.flip[p.id]}
+          flip={flip}
           onClickFlip={this.onClickFlip.bind(this, p.id)}
 
           updateDeviceGauge={gauge => this.props.updateGaugeItem(gauge, this.props.board)}
           removeDeviceGauge={gauge => this.props.removeGaugeItem(gauge, this.props.board)}
-          style={{width: '100%', height: '100%'}}
+          style={flip ? {width: 700, height: 400} : {width: '100%', height: '100%'}}
         />
       </div>
     )
