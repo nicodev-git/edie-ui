@@ -39,7 +39,7 @@ export default class GTable extends React.Component {
     this.props.removeDeviceGauge(this.props.gauge, this.props.device)
   }
 
-  getParams () {
+  getSearchData () {
     const {searchList, gauge} = this.props
     const {resource, duration, durationUnit, workflowId, savedSearchId} = gauge
 
@@ -59,47 +59,55 @@ export default class GTable extends React.Component {
         monitorTypes: '',
         sort: 'startTimestamp,desc'
       }
-      return searchParams
+      return {
+        searchParams
+      }
     }
 
     const index = findIndex(searchList, {id: savedSearchId})
     if (index < 0) {
       console.log('Saved search not found.')
       return {
+        searchParams: {
+          draw: this.props.incidentDraw,
+          dateFrom,
+          dateTo,
+          query: '',
+          workflow: '',
+          collections: 'incident,event',
+          severity: 'HIGH,MEDIUM',
+          tag: '',
+          monitorTypes: '',
+          sort: 'startTimestamp,desc'
+        }
+      }
+    }
+    const savedSearch = searchList[index]
+    const searchParams = JSON.parse(savedSearch.data)
+
+    return {
+      searchParams: { ...searchParams,
         draw: this.props.incidentDraw,
         dateFrom,
         dateTo,
-        query: '',
-        workflow: '',
-        collections: 'incident,event',
-        severity: 'HIGH,MEDIUM',
-        tag: '',
-        monitorTypes: '',
         sort: 'startTimestamp,desc'
-      }
+      },
+      viewFilter: savedSearch.viewFilter,
+      viewCols: savedSearch.viewCols
     }
-    const searchParams = JSON.parse(searchList[index].data)
-
-    const params = { ...searchParams,
-      draw: this.props.incidentDraw,
-      dateFrom,
-      dateTo,
-      sort: 'startTimestamp,desc'
-    }
-
-    return params
   }
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   renderFrontView () {
+    const data = this.getSearchData()
     return (
       <div className="flex-vertical flex-1">
         <NormalTable
           {...this.props}
-          params={this.getParams()}
-          viewFilter=""
-          viewCols={[]}
+          params={data.searchParams}
+          viewFilter={data.viewFilter || ''}
+          viewCols={data.viewCols || []}
         />
       </div>
     )

@@ -40,12 +40,12 @@ export default class NormalTable extends React.Component {
 
         }
         if (!entity) return <span/>
-        const highlighted = this.getHighlighted(entity, rowData.highlights)
 
         const timeField = entity.startTimestamp ? 'startTimestamp' : 'timestamp'
-        delete highlighted[timeField]
 
-        const {severity, ...others} = highlighted
+        const {severity, ...others} = entity
+        delete others[timeField]
+
         const data = {
           type: rowData.type,
           [timeField]: entity[timeField],
