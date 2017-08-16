@@ -271,10 +271,10 @@ export default class GEditView extends React.Component {
   }
   renderNormal () {
     const {
-      resource, savedSearchId, workflowId,
+      resource, savedSearchId,
       duration, durationUnit, splitBy, splitUnit, name
     } = this.state
-    const {searchList, hideDuration, hideSplit, workflows} = this.props
+    const {searchList, hideDuration, hideSplit} = this.props
     return (
       <div>
         <div className="row">
@@ -296,13 +296,7 @@ export default class GEditView extends React.Component {
               </SelectField>
             </div>
           ): null}
-          {resource === 'incident' ? (
-            <div className="col-md-6">
-              <SelectField value={workflowId} floatingLabelText="Workflow" className="valign-top" style={inputStyle} onChange={this.onChangeSelect.bind(this, 'workflowId')}>
-                {workflows.map(p => <MenuItem key={p.id} value={p.id} primaryText={p.name}/>)}
-              </SelectField>
-            </div>
-          ) : null}
+          {this.renderWorkflowPick()}
           {this.renderMonitorPick()}
           {this.renderTableViewMode()}
           {this.renderLogicalGroup()}
