@@ -78,7 +78,7 @@ export default class NormalTable extends React.Component {
   getCells () {
     if (this.props.viewMode === 'table') {
       const {viewCols} = this.props
-      if (!viewCols || !viewCols.length) return null
+      if (!viewCols || !viewCols.length) return []
       return viewCols.map(p => {
         const item = {
           'displayName': p,
@@ -96,7 +96,7 @@ export default class NormalTable extends React.Component {
 
   render () {
     return (
-      <div className="flex-1 table-no-gap">
+      <div className="flex-1 table-no-gap table-small">
         <InfiniteTable
           url="/search/all"
           cells={this.getCells()}

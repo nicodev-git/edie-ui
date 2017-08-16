@@ -39,6 +39,14 @@
     border-top: none;
 }
 
+.table-no-gap .griddle .table>thead>tr>th {
+    padding: 0;
+}
+
 .table-no-border .griddle .table>tbody>tr>td {
     border: none;
+}
+
+.table-small .griddle td {
+    font-size: 12px;
 }
