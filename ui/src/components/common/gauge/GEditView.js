@@ -226,6 +226,37 @@ export default class GEditView extends React.Component {
       </div>
     ]
   }
+  renderWorkflowPick () {
+    const {deviceId, workflowId} = this.state
+    const {devices, workflows} = this.props
+    if (this.state.resource !== 'incident') return null
+    if (!devices) {
+      return (
+        <div className="col-md-6">
+          <SelectField value={workflowId} floatingLabelText="Workflow" className="valign-top" style={inputStyle} onChange={this.onChangeSelect.bind(this, 'workflowId')}>
+            {workflows.map(p => <MenuItem key={p.id} value={p.id} primaryText={p.name}/>)}
+          </SelectField>
+        </div>
+      )
+    }
+    const index = findIndex(devices, {id: deviceId})
+
+    const wfs = index < 0 ? [] : (devices[index].workflowids || [])
+    const wfOptions = workflows.filter(p => wfs.includes(p.id))
+
+    return [
+      <div key="deviceId" className="col-md-6">
+        <SelectField value={deviceId} floatingLabelText="Device" className="valign-top" style={inputStyle} onChange={this.onChangeSelect.bind(this, 'deviceId')}>
+          {devices.map(p => <MenuItem key={p.id} value={p.id} primaryText={p.name}/>)}
+        </SelectField>
+      </div>,
+      <div key="monitorId" className="col-md-6">
+        <SelectField value={workflowId} floatingLabelText="Workflow" className="valign-top" style={inputStyle} onChange={this.onChangeSelect.bind(this, 'workflowId')}>
+          {wfOptions.map(p => <MenuItem key={p.id} value={p.id} primaryText={p.name}/>)}
+        </SelectField>
+      </div>
+    ]
+  }
   renderTableViewMode () {
     const {gauge} = this.props
     const {tableViewMode} = this.state
