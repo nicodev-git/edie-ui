@@ -523,7 +523,7 @@ class GenericSearch extends React.Component {
   }
 
   redrawSearch () {
-    this.props.refreshSearch()
+    // this.props.refreshSearch()
   }
 
   renderFields () {
