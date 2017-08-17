@@ -54,7 +54,7 @@ export default class FlipView extends React.Component {
         className={`link info-button ${hovered ? 'visible' : ''}`}>
         {
           gauge.minimized ? (
-            <MaximizeIcon onTouchTap={() => onClickMaximize(gauge)}/>
+            <MaximizeIcon onTouchTap={() => onClickMaximize(gauge)} className="hidden"/>
           ) : (
             <MinimizeIcon onTouchTap={() => onClickMinimize(gauge)}/>
           )
@@ -87,7 +87,7 @@ export default class FlipView extends React.Component {
   }
 
   renderCard (cls, children, front) {
-    const {gauge, loading, viewOnly} = this.props
+    const {gauge, loading, viewOnly, onClickModalView} = this.props
     return (
       <div className={`${cls} ${this.getFlipClass()}`}>
         <div className="flex-vertical" style={{height: '100%'}}>
@@ -95,9 +95,10 @@ export default class FlipView extends React.Component {
             front ? (
               gauge.minimized ? (
                 <div
-                  className="flex-1 bg-white text-center"
-                   onMouseEnter={this.onMouseEnter}
-                   onMouseLeave={this.onMouseLeave}>
+                  className="flex-1 text-center"
+                  onMouseEnter={this.onMouseEnter}
+                  onMouseLeave={this.onMouseLeave}
+                  onClick={() => onClickModalView(gauge)}>
                   <img src="/resources/images/dashboard/gauge.png" width="48" alt=""/><br/>
                   {gauge.name}
                   {!viewOnly && this.renderInfoIcon()}

@@ -254,6 +254,10 @@ export default class MainDashboardView extends React.Component {
     }, this.props.board)
   }
 
+  onClickGaugeViewModal (gauge) {
+
+  }
+
   /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   renderDeviceWizard () {
     if (!this.state.deviceWizardVisible) return null
@@ -301,6 +305,7 @@ export default class MainDashboardView extends React.Component {
           removeDeviceGauge={gauge => this.props.removeGaugeItem(gauge, this.props.board)}
           onClickMinimize={this.onClickGaugeMinimize.bind(this)}
           onClickMaximize={this.onClickGaugeMaximize.bind(this)}
+          onClickModalView={this.onClickGaugeViewModal.bind(this)}
           style={flip ? {width: 700, height: 400} : {width: '100%', height: '100%'}}
         />
       </div>
