@@ -1,5 +1,5 @@
 import React from 'react'
-import { CloseButton, Modal } from 'components/modal/parts'
+import { CloseButton, Modal, CardPanel } from 'components/modal/parts'
 
 export default class IrrelDevicesModalView extends React.Component {
   renderItems () {
@@ -14,18 +14,20 @@ export default class IrrelDevicesModalView extends React.Component {
     const {onHide} = this.props
     return (
       <Modal title="Not Relevant Devices" onRequestClose={onHide}>
-        <div style={{height: '500px', overflow: 'auto'}}>
-          <table className="table table-hover">
-            <thead>
-              <tr>
-                <th>Name</th>
-              </tr>
-            </thead>
-            <tbody>
-            {this.renderItems()}
-            </tbody>
-          </table>
-        </div>
+        <CardPanel className="margin-md-bottom">
+          <div style={{height: '500px', overflow: 'auto'}}>
+            <table className="table table-hover">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                </tr>
+              </thead>
+              <tbody>
+              {this.renderItems()}
+              </tbody>
+            </table>
+          </div>
+        </CardPanel>
         <CloseButton onClose={onHide} />
       </Modal>
     )
