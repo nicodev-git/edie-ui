@@ -129,8 +129,13 @@ export default class FlipView extends React.Component {
   }
 
   render () {
-    const {className, style} = this.props
+    const {className, style, modalView} = this.props
     const {flip} = this.state
+
+    if (modalView) {
+      return this.renderFrontView()
+    }
+
     return (
       <div className={`${className || ''} card`} style={style}>
         {this.renderCard('card-back', flip && this.renderBack())}

@@ -232,7 +232,10 @@ export default class MainDashboardView extends React.Component {
   renderGaugeModal () {
     if (!this.props.gaugeModalOpen) return null
     return (
-      <GaugeModal {...this.props}/>
+      <GaugeModal
+        {...this.props}
+        searchList={this.getSearchList()}
+        monitors={this.getMonitors()}/>
     )
   }
 
@@ -272,7 +275,6 @@ export default class MainDashboardView extends React.Component {
           gauge={p}
           device={{id: p.deviceId}}
           searchList={this.getSearchList()}
-          devices={this.props.devices}
           monitors={this.getMonitors()}
 
           flip={flip}

@@ -1,12 +1,28 @@
 import React from 'react'
 import {Modal} from 'components/modal/parts'
 
+import GaugeMap from 'components/common/gauge/GaugeMap'
+
 export default class GaugeModalView extends React.Component {
+
+  renderGauge (p) {
+    let GaugePanel = GaugeMap[p.templateName || 'z']
+    if (!GaugePanel) return <div/>
+    return (
+      <GaugePanel
+        {...this.props}
+        gauge={this.props.editGauge}
+        device={{id: p.deviceId}}
+        modalView
+      />
+    )
+  }
+
   render () {
-    const {header, onHide, content} = this.props
+    const {header, onHide, editGauge} = this.props
     return (
       <Modal title={header} onRequestClose={onHide}>
-        {content}
+        {this.renderGauge(editGauge)}
       </Modal>
     )
   }
