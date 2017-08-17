@@ -56,7 +56,8 @@ import {
   UPDATE_GRAPH_PARAMS,
 
   TOGGLE_VIEW_COL,
-  RESET_VIEW_COLS
+  RESET_VIEW_COLS,
+  COLLAPSE_SEARCH_FIELDS
 } from './types'
 import { ROOT_URL } from './config'
 import { apiError } from './Errors'
@@ -402,6 +403,12 @@ export const resetViewCols = (cols) => {
 export const refreshSearch = () => {
   return dispatch => {
     dispatch({type: REFRESH_SEARCH})
+  }
+}
+
+export const collapseSearchFields = (visible) => {
+  return dispatch => {
+    dispatch({type: COLLAPSE_SEARCH_FIELDS, visible})
   }
 }
 

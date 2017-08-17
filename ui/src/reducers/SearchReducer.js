@@ -59,7 +59,8 @@ import {
 
   REFRESH_SEARCH,
   TOGGLE_VIEW_COL,
-  RESET_VIEW_COLS
+  RESET_VIEW_COLS,
+  COLLAPSE_SEARCH_FIELDS
 } from 'actions/types'
 import { concat } from 'lodash'
 
@@ -113,7 +114,9 @@ const initialState = {
   savedSearchKeyword: '',
   searchSaveType: 'new',
 
-  viewCols: []
+  viewCols: [],
+
+  searchFieldsVisible: true
 }
 
 export default function (state = initialState, action) {
@@ -240,6 +243,8 @@ export default function (state = initialState, action) {
     }
     case RESET_VIEW_COLS:
       return { ...state, viewCols: action.cols || [] }
+    case COLLAPSE_SEARCH_FIELDS:
+      return { ...state, searchFieldsVisible: action.visible }
     default:
       return state
   }
