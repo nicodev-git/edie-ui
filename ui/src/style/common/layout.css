@@ -295,6 +295,10 @@ a, a:focus, a:hover {
     background-color: #BC0000;
 }
 
+.bg-white {
+    background: white;
+}
+
 .div-center {
     position: absolute;
     left: 50%;

@@ -2,6 +2,7 @@ import React from 'react'
 import InfoIcon from 'material-ui/svg-icons/action/info'
 import DeleteIcon from 'material-ui/svg-icons/navigation/close'
 import MinimizeIcon from 'material-ui/svg-icons/toggle/indeterminate-check-box'
+import MaximizeIcon from 'material-ui/svg-icons/action/aspect-ratio'
 import RefreshOverlay from 'components/common/RefreshOverlay'
 
 export default class FlipView extends React.Component {
@@ -46,12 +47,19 @@ export default class FlipView extends React.Component {
 
   renderInfoIcon () {
     const {hovered} = this.state
-    const {onClickDelete, onClickMinimize, gauge} = this.props
+    const {onClickDelete, onClickMinimize, onClickMaximize, gauge} = this.props
     return (
       <div
         style={{position: 'absolute', right: 10, bottom: 10, zIndex: 1}}
         className={`link info-button ${hovered ? 'visible' : ''}`}>
-        <MinimizeIcon onTouchTap={() => onClickMinimize(gauge)}/>
+        {
+          gauge.minimized ? (
+            <MinimizeIcon onTouchTap={() => onClickMinimize(gauge)}/>
+          ) : (
+            <MaximizeIcon onTouchTap={() => onClickMaximize(gauge)}/>
+          )
+        }
+
         <DeleteIcon onTouchTap={() => onClickDelete(gauge)}/>
         <InfoIcon size={24} onClick={this.onClickFlip.bind(this)}/>
       </div>
@@ -79,23 +87,31 @@ export default class FlipView extends React.Component {
   }
 
   renderCard (cls, children, front) {
-    const {gauge, loading} = this.props
+    const {gauge, loading, viewOnly} = this.props
     return (
       <div className={`${cls} ${this.getFlipClass()}`}>
         <div className="flex-vertical" style={{height: '100%'}}>
           {
             front ? (
-              <div className="panel panel-white flex-vertical flex-1">
-                <div className="tab-box-container text-center text-ellipsis">
-                  <div className="tab-box">
-                    {gauge.name}
+              gauge.minimized ? (
+                <div className="flex-1 bg-white text-center">
+                  <img src="/resources/images/dashboard/gauge.png" width="48" alt=""/><br/>
+                  {gauge.name}
+                  {!viewOnly && this.renderInfoIcon()}
+                </div>
+              ) : (
+                <div className="panel panel-white flex-vertical flex-1">
+                  <div className="tab-box-container text-center text-ellipsis">
+                    <div className="tab-box">
+                      {gauge.name}
+                    </div>
+                  </div>
+                  <div className="panel-body p-none flex-vertical flex-1">
+                    {children}
+                    {loading && front && <RefreshOverlay />}
                   </div>
                 </div>
-                <div className="panel-body p-none flex-vertical flex-1">
-                  {children}
-                  {loading && front && <RefreshOverlay />}
-                </div>
-              </div>
+              )
             ) : (
               <div className="flex-1">
                 {children}

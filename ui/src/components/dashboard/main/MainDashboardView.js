@@ -199,6 +199,11 @@ export default class MainDashboardView extends React.Component {
   onResize (layout, oldItem, newItem, placeholder, mouseEvent, el) {
     const gauge = this.findGauge(newItem.i)
     if (!gauge) return
+    if (gauge.minimized) {
+      newItem.w = oldItem.w
+      newItem.h = oldItem.h
+      return
+    }
     const ratio = gaugeAspectRatio[gauge.templateName]
     if (!ratio) return
     if (newItem.w !== oldItem.w) {
@@ -208,6 +213,13 @@ export default class MainDashboardView extends React.Component {
     }
   }
   onResizeStop (layout, oldItem, newItem, placeholder, mouseEvent, el) {
+    const gauge = this.findGauge(newItem.i)
+    if (!gauge) return
+    if (gauge.minimized) {
+      newItem.w = oldItem.w
+      newItem.h = oldItem.h
+      return
+    }
     this.updateLayout(layout, oldItem, newItem, true)
   }
 

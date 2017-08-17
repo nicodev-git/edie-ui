@@ -299,9 +299,13 @@ export function getWidgetSize (gauge, devices, flip) {
   //   if (size === 'small' || size === 'medium' || size === 'custom') size = 'big'
   //   if (gauge.templateName === 'Servers') size = 'very big'
   // }
+  if (gauge.minimized) size = 'very small'
 
   let wh = {w: 4, h: 4}
   switch(size) {
+    case 'very small':
+      wh = {w: 1, h: 1}
+      break
     case 'small':
       wh = {w: 1, h: 2}
       break
