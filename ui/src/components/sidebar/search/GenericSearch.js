@@ -522,6 +522,10 @@ class GenericSearch extends React.Component {
     collapseSearchFields(!searchFieldsVisible)
   }
 
+  redrawSearch () {
+    this.props.refreshSearch()
+  }
+
   renderFields () {
     const {selectedField} = this.props
     return (
@@ -672,7 +676,11 @@ class GenericSearch extends React.Component {
   renderFilterViewModal () {
     if (!this.props.viewFilterModalOpen) return null
     return (
-      <ViewFilterModal {...this.props} cols={this.state.cols}/>
+      <ViewFilterModal
+        {...this.props}
+        cols={this.state.cols}
+        redrawSearch={this.redrawSearch.bind(this)}
+      />
     )
   }
 

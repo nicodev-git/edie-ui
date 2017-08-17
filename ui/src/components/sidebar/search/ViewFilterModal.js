@@ -9,13 +9,13 @@ export default class ViewFilterModal extends React.Component {
     const {selectedViewFilter} = this.props
     if (!selectedViewFilter) {
       //return window.alert('Please select filter.')
-      this.props.refreshSearch()
+      this.props.redrawSearch()
       this.onClickClose()
       return
     }
     this.props.updateSearchViewFilter(selectedViewFilter)
 
-    this.props.refreshSearch()
+    this.props.redrawSearch()
     this.onClickClose()
   }
   onClickClose () {
