@@ -1,6 +1,7 @@
 import React from 'react'
 import { showAlert } from 'components/common/Alert'
 import {RaisedButton} from 'material-ui'
+import axios from 'axios'
 
 import MainTabs from '../MainTabs'
 import TabPage from 'components/common/TabPage'
@@ -17,15 +18,7 @@ export default class MainAdvanced extends React.Component {
   }
 
   onClickSend () {
-    let ip = this.state.device.ipaddress
-    $.get(`${ROOT_URL}${Api.server.simulation}`, { // eslint-disable-line no-undef
-      data: this.refs.message.value,
-      ipaddress: ip
-    }).done(function (res) {
-      showAlert('Sent!')
-    }).fail(function () {
-      showAlert('Failed!')
-    })
+    axios.post(`${ROOT_URL}/restlistener/simulate`, this.refs.message.value)
   }
 
   render () {
