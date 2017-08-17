@@ -94,15 +94,12 @@ export default class GServers extends React.Component {
     const {gauge} = this.props
     const isUp = item.status === 'UP'
     // const colCount = (gauge.itemSize === 'slim' ? 3 : 4) * Math.ceil(total / (gauge.itemSize === 'slim' ? 24 : 16))
-    const colCount = 5
-    const col = 100.0 / colCount
-    const rowCount = Math.max(5, Math.ceil(total / colCount))
-    const row = 100.0 / rowCount / (gauge.itemSize === 'slim' ? 2 : 1)
-    const padding = ''
+    // const colCount = 5
+    // const col = 100.0 / colCount
+    // const rowCount = Math.max(5, Math.ceil(total / colCount))
+    // const row = 100.0 / rowCount / (gauge.itemSize === 'slim' ? 2 : 1)
     return (
-      <div
-        key={item.id} className={`col-md-3 text-center padding-xs ${padding}`}
-        style={{width: `${col}%`, height: `${row}%`}}>
+      <div key={item.id} className="server-cell">
         <div
           className={`${isUp ? 'bg-success' : 'bg-danger'}`} style={{width: '100%', height: '100%', cursor: 'pointer'}}
           onClick={this.onClickItem.bind(this, item)}>
@@ -120,7 +117,7 @@ export default class GServers extends React.Component {
     return (
       <div className="flex-vertical flex-1">
         <div className="flex-1" style={{overflow: 'hidden'}}>
-          <div className="row"   style={{height: '100%', paddingTop: 2, paddingLeft: 17, paddingRight: 17}}>
+          <div style={{height: '100%', overflow: 'auto'}}>
           {items.map(item => this.renderItemView(item, items.length))}
           </div>
         </div>

@@ -327,3 +327,12 @@ a, a:focus, a:hover {
     border-bottom-left-radius: 0;
     text-align: center;
 }
+
+.server-cell {
+    width: 96px;
+    height: 54px;
+    padding: 3px;
+    text-align: center;
+    display: inline-block;
+    position: relative;
+}
