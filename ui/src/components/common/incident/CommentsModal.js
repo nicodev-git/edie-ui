@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import moment from 'moment'
 import { assign, concat } from 'lodash'
-import {Card} from 'material-ui'
+import {Card, CardText} from 'material-ui'
 
-import {Modal} from 'components/modal/parts'
+import {Modal, CardLegend} from 'components/modal/parts'
 
 export default class CommentsModal extends Component {
   onHide () {
@@ -36,42 +36,45 @@ export default class CommentsModal extends Component {
 
     return (
       <Modal title="Comment" onRequestClose={this.onClickClose.bind(this)}>
+        <CardLegend/>
         <Card>
-          <div className="row margin-md-bottom hidden">
-            <label className="control-label col-md-2 padding-xs-top">Reason</label>
+          <CardText>
+            <div className="row margin-md-bottom hidden">
+              <label className="control-label col-md-2 padding-xs-top">Reason</label>
 
-            <div className="col-md-8">
-              <textarea className="form-control" ref="comment" />
+              <div className="col-md-8">
+                <textarea className="form-control" ref="comment" />
+              </div>
+
+              <div className="col-md-2">
+                <button className="btn btn-primary btn-sm"
+                  onClick={this.onClickAdd.bind(this)}>Add</button>
+              </div>
             </div>
 
-            <div className="col-md-2">
-              <button className="btn btn-primary btn-sm"
-                onClick={this.onClickAdd.bind(this)}>Add</button>
-            </div>
-          </div>
-
-          <div style={{overflow: 'auto', maxHeight: '300px'}}>
-            <table className="table">
-              <thead>
-              <tr>
-                <th>Date</th>
-                <th>User</th>
-                <th>Reason</th>
-              </tr>
-              </thead>
-              <tbody>
-
-              {(comments || []).map((item, index) =>
-                <tr key={index}>
-                  <td>{moment(item.dateCreated).format('YYYY-MM-DD HH:mm:ss')}</td>
-                  <td>{item.user}</td>
-                  <td>{item.text}</td>
+            <div style={{overflow: 'auto', maxHeight: '300px'}}>
+              <table className="table">
+                <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>User</th>
+                  <th>Reason</th>
                 </tr>
-              )}
+                </thead>
+                <tbody>
 
-              </tbody>
-            </table>
-          </div>
+                {(comments || []).map((item, index) =>
+                  <tr key={index}>
+                    <td>{moment(item.dateCreated).format('YYYY-MM-DD HH:mm:ss')}</td>
+                    <td>{item.user}</td>
+                    <td>{item.text}</td>
+                  </tr>
+                )}
+
+                </tbody>
+              </table>
+            </div>
+          </CardText>
         </Card>
       </Modal>
     )

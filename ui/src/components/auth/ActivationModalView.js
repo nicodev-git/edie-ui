@@ -1,17 +1,16 @@
 import React from 'react'
 import { Field } from 'redux-form'
-import {Card} from 'material-ui'
-import { FormInput, SubmitSingle, Modal } from 'components/modal/parts'
+import { FormInput, SubmitSingle, Modal, CardPanel } from 'components/modal/parts'
 
 const ActivationModalView = ({onHide, onSignup}) => (
   <Modal title="License Activation">
       <form onSubmit={onSignup}>
-        <Card>
+        <CardPanel>
           <div className="form-column">
             <Field name="email" component={FormInput} autoComplete="off" label="Email"/>
             <Field name="license" component={FormInput} autoComplete="off" label="License"/>
           </div>
-        </Card>
+        </CardPanel>
         <SubmitSingle name="Activate"/>
       </form>
   </Modal>

@@ -24,6 +24,7 @@ import MonitorTemplates from './MonitorTemplates'
 import CrudButtons from './CrudButtons'
 import CloseIconButton from './CloseIconButton'
 import CardLegend from './CardLegend'
+import CardPanel from './CardPanel'
 import Modal from './Modal'
 
 export {
@@ -53,5 +54,6 @@ export {
     CrudButtons,
     CloseIconButton,
     CardLegend,
-    Modal
+    Modal,
+    CardPanel
 }

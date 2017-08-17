@@ -1,9 +1,8 @@
 import React from 'react'
 import {Field, Form} from 'redux-form'
-import {Card, CardText} from 'material-ui'
 
 import {
-  FormInput, SubmitBlock, FormSelect, Modal, CardLegend
+  FormInput, SubmitBlock, FormSelect, Modal, CardPanel
 } from 'components/modal/parts'
 
 const actions = [
@@ -22,24 +21,21 @@ export default class FwRuleModalView extends React.Component {
     return (
       <Modal title="Rule" onRequestClose={onHide} contentStyle={{width: 600}}>
         <Form onSubmit={onSubmit}>
-          <CardLegend></CardLegend>
-          <Card>
-            <CardText>
-              <div>
-                <Field name="rule" component={FormInput} floatingLabel="Rule Name"/>&nbsp;
-                <Field name="localip" component={FormInput} floatingLabel="Source"/>&nbsp;
-              </div>
-              <div>
-                <Field name="remoteip" component={FormInput} floatingLabel="Destination"/>&nbsp;
-                <Field name="remoteport" component={FormInput} floatingLabel="Destination Port"/>
+          <CardPanel>
+            <div>
+              <Field name="rule" component={FormInput} floatingLabel="Rule Name"/>&nbsp;
+              <Field name="localip" component={FormInput} floatingLabel="Source"/>&nbsp;
+            </div>
+            <div>
+              <Field name="remoteip" component={FormInput} floatingLabel="Destination"/>&nbsp;
+              <Field name="remoteport" component={FormInput} floatingLabel="Destination Port"/>
 
-              </div>
-              <div>
-                <Field name="protocol" component={FormSelect} floatingLabel="Protocol" options={protocols} className="valign-top"/>
-                <Field name="action" component={FormSelect} floatingLabel="Action" options={actions} className="valign-top"/>&nbsp;
-              </div>
-            </CardText>
-          </Card>
+            </div>
+            <div>
+              <Field name="protocol" component={FormSelect} floatingLabel="Protocol" options={protocols} className="valign-top"/>
+              <Field name="action" component={FormSelect} floatingLabel="Action" options={actions} className="valign-top"/>&nbsp;
+            </div>
+          </CardPanel>
           <SubmitBlock name="OK" onClick={onHide} className="margin-md-top"/>
         </Form>
       </Modal>

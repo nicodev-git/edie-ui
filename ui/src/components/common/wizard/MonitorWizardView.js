@@ -1,9 +1,9 @@
 import React from 'react'
-import {Card, CardText, RaisedButton, RadioButton} from 'material-ui'
+import {RaisedButton, RadioButton} from 'material-ui'
 import {Field} from 'redux-form'
 import {RadioButtonGroup} from 'redux-form-material-ui'
 
-import {FormInput, FormCheckbox, FormSelect, CardLegend, Modal} from 'components/modal/parts'
+import {FormInput, FormCheckbox, FormSelect, CardPanel, Modal} from 'components/modal/parts'
 
 const paramLabels = {
   'checkinterval': 'Interval (seconds)',
@@ -48,40 +48,34 @@ export default class MonitorWizardView extends React.Component {
     return (
       <Modal title={header} onRequestClose={onHide}>
         <form onSubmit={onSubmit}>
-          <CardLegend>Configuration</CardLegend>
-          <Card>
-            <CardText>
-              <Field name="name" floatingLabel="Name" component={FormInput} className="margin-sm-left margin-sm-right"/>
-              {requiredParamKeys.map(k =>
-                k !== 'remove_after' && <Field key={k} name={k} floatingLabel={paramLabels[k] || k} component={FormInput} className="margin-sm-left margin-sm-right"/>
-              )}
+          <CardPanel title="Configuration">
+            <Field name="name" floatingLabel="Name" component={FormInput} className="margin-sm-left margin-sm-right"/>
+            {requiredParamKeys.map(k =>
+              k !== 'remove_after' && <Field key={k} name={k} floatingLabel={paramLabels[k] || k} component={FormInput} className="margin-sm-left margin-sm-right"/>
+            )}
 
-              <div>
-                <div className="inline-block valign-middle" style={{fontSize: '16px', paddingLeft: 7}}>Add remove events after</div>
-                <Field
-                  name="remove_after" component={FormSelect} options={durationOptions}
-                  style={{width: 80, paddingLeft: 15}} className="valign-middle"/>
-                <Field
-                  name="remove_after_unit" component={FormSelect} options={durationUnits}
-                  style={{width: 120}} className="valign-middle"/>
-              </div>
+            <div>
+              <div className="inline-block valign-middle" style={{fontSize: '16px', paddingLeft: 7}}>Add remove events after</div>
+              <Field
+                name="remove_after" component={FormSelect} options={durationOptions}
+                style={{width: 80, paddingLeft: 15}} className="valign-middle"/>
+              <Field
+                name="remove_after_unit" component={FormSelect} options={durationUnits}
+                style={{width: 120}} className="valign-middle"/>
+            </div>
 
-              <div className={showAgentType ? '' : 'hidden'}>
-                <Field name="agentType" component={RadioButtonGroup} className="margin-md-top">
-                  <RadioButton value="agent" label={agentLabel} className="pull-left" disabled={!agent}/>
-                  <RadioButton value="collector" label={collectorLabel} className="pull-left" style={{width: 120, marginTop: 14}}/>
-                </Field>
-                <Field name="collectorId" label="Collector" component={FormSelect} className="pull-left" options={collectorOptions}/>
-              </div>
-            </CardText>
-          </Card>
+            <div className={showAgentType ? '' : 'hidden'}>
+              <Field name="agentType" component={RadioButtonGroup} className="margin-md-top">
+                <RadioButton value="agent" label={agentLabel} className="pull-left" disabled={!agent}/>
+                <RadioButton value="collector" label={collectorLabel} className="pull-left" style={{width: 120, marginTop: 14}}/>
+              </Field>
+              <Field name="collectorId" label="Collector" component={FormSelect} className="pull-left" options={collectorOptions}/>
+            </div>
+          </CardPanel>
 
-          <CardLegend>Credentials</CardLegend>
-          <Card>
-            <CardText>
-              <Field name="credentialId" component={FormSelect} className="margin-sm-left margin-sm-right" options={credentials}/>
-            </CardText>
-          </Card>
+          <CardPanel title="Credentials">
+            <Field name="credentialId" component={FormSelect} className="margin-sm-left margin-sm-right" options={credentials}/>
+          </CardPanel>
 
           {paramsView}
           {tagsView}

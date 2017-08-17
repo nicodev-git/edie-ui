@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import {appendComponent, removeComponent} from 'util/Component'
-import { SubHeader, Modal } from '../modal/parts'
-import TextField from 'material-ui/TextField'
-import FlatButton from 'material-ui/FlatButton'
+import { SubHeader, Modal, CardPanel } from '../modal/parts'
+import {TextField, FlatButton} from 'material-ui'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import { inputStyle, underlineStyle, buttonStyle, buttonTextStyle } from 'style/common/materialStyles'
 
@@ -52,31 +51,33 @@ export default class Alert extends Component {
   render () {
     return (
       <MuiThemeProvider>
-        <Modal title={this.props.title} contentStyle={{width: 350}} multiCard>
-          <SubHeader name={this.props.message}/>
-          <div className={`form-column ${this.props.type === TYPE_PROMPT ? '' : 'hidden'}`}>
-            <TextField
-              name="input"
-              defaultValue={this.props.default}
-              inputStyle={inputStyle}
-              underlineFocusStyle={underlineStyle}
-              onKeyUp={this.onKeyUp.bind(this)}
-              ref="input"
-            />
-          </div>
-          <div className="form-buttons alert-buttons">
-            <FlatButton
-              onClick={this.onClickSave.bind(this)}
-              label="Ok"
-              style={buttonStyle}
-              labelStyle={buttonTextStyle}/>
-            <FlatButton
-              className={this.props.type === TYPE_ALERT ? 'hidden' : ''}
-              onClick={this.onClickClose.bind(this)}
-              label="Cancel"
-              style={buttonStyle}
-              labelStyle={buttonTextStyle}/>
-          </div>
+        <Modal title={this.props.title} contentStyle={{width: 450}} multiCard>
+          <CardPanel>
+            <SubHeader name={this.props.message}/>
+            <div className={`form-column ${this.props.type === TYPE_PROMPT ? '' : 'hidden'}`}>
+              <TextField
+                name="input"
+                defaultValue={this.props.default}
+                inputStyle={inputStyle}
+                underlineFocusStyle={underlineStyle}
+                onKeyUp={this.onKeyUp.bind(this)}
+                ref="input"
+              />
+            </div>
+            <div className="form-buttons alert-buttons">
+              <FlatButton
+                onClick={this.onClickSave.bind(this)}
+                label="Ok"
+                style={buttonStyle}
+                labelStyle={buttonTextStyle}/>
+              <FlatButton
+                className={this.props.type === TYPE_ALERT ? 'hidden' : ''}
+                onClick={this.onClickClose.bind(this)}
+                label="Cancel"
+                style={buttonStyle}
+                labelStyle={buttonTextStyle}/>
+            </div>
+          </CardPanel>
         </Modal>
       </MuiThemeProvider>
     )
