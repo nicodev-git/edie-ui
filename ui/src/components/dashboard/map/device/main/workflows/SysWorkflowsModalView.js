@@ -4,7 +4,7 @@ import SelectField from 'material-ui/SelectField'
 import MenuItem from 'material-ui/MenuItem'
 import { findIndex } from 'lodash'
 
-import { TwoButtonsBlockCustom, Modal } from 'components/modal/parts'
+import { TwoButtonsBlockCustom, Modal, CardPanel } from 'components/modal/parts'
 import { errorStyle, underlineFocusStyle, inputStyle,
   selectedItemStyle } from 'style/common/materialStyles'
 

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Field } from 'redux-form'
 import Chip from 'material-ui/Chip'
-import { SubmitBlock, FormInput, Modal } from 'components/modal/parts'
+import { SubmitBlock, FormInput, Modal, CardPanel } from 'components/modal/parts'
 
 export default class ParamEditModalView extends Component {
   render () {
@@ -9,21 +9,23 @@ export default class ParamEditModalView extends Component {
     return (
       <Modal title="Param" onRequestClose={onHide}>
         <form onSubmit={onSubmit}>
-          <div className="margin-md-bottom" style={styles.wrapper}>
-            {defaultKeys.map(k =>
-              <Chip
-                key={k}
-                style={styles.chip}
-                onTouchTap={onKeyClick.bind(this, k)}
-              >
-                {k}
-              </Chip>
-            )}
-          </div>
-          <div className="form-column">
-            <Field name="key" component={FormInput} label="Key"/>
-            <Field name="value" component={FormInput} label="Value"/>
-          </div>
+          <CardPanel className="margin-md-bottom">
+            <div className="margin-md-bottom" style={styles.wrapper}>
+              {defaultKeys.map(k =>
+                <Chip
+                  key={k}
+                  style={styles.chip}
+                  onTouchTap={onKeyClick.bind(this, k)}
+                >
+                  {k}
+                </Chip>
+              )}
+            </div>
+            <div className="form-column">
+              <Field name="key" component={FormInput} label="Key"/>
+              <Field name="value" component={FormInput} label="Value"/>
+            </div>
+          </CardPanel>
           <SubmitBlock name="Save" onClick={onHide}/>
         </form>
       </Modal>

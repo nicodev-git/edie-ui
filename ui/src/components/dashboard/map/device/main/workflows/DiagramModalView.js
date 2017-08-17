@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import { TwoButtonsBlock, Modal } from 'components/modal/parts'
+import { TwoButtonsBlock, Modal, CardPanel } from 'components/modal/parts'
 
 export default class DiagramModalView extends Component {
   render () {
@@ -8,15 +8,17 @@ export default class DiagramModalView extends Component {
       panel, objectModal} = this.props
     return (
       <Modal title={header} onRequestClose={onHide}>
-        <div className="diagram">
-          {dragLayer}
-          {toolbar}
-          <div className="flex-horizontal">
-            {sidebar}
-            {panel}
+        <CardPanel className="margin-md-bottom">
+          <div className="diagram">
+            {dragLayer}
+            {toolbar}
+            <div className="flex-horizontal">
+              {sidebar}
+              {panel}
+            </div>
           </div>
-        </div>
-        {objectModal}
+          {objectModal}
+        </CardPanel>
         <TwoButtonsBlock onSave={onSave} onClose={onHide}/>
       </Modal>
     )

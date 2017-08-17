@@ -45,7 +45,7 @@ export default class ParamsModal extends React.Component {
   render () {
     return (
       <Modal title="Params" onRequestClose={this.onClickClose.bind(this)}>
-        <div>
+        <CardPanel className="margin-md-bottom">
           <table className="table table-hover">
             <tbody>
             {this.props.editParams.map(p =>
@@ -61,7 +61,8 @@ export default class ParamsModal extends React.Component {
             )}
             </tbody>
           </table>
-        </div>
+        </CardPanel>
+
         <div className="text-right p-none">
           <a href="javascript:;" className="btn btn-default btn-sm margin-sm-right"
             onClick={this.onClickAdd.bind(this)}>Add</a>
