@@ -516,6 +516,12 @@ class GenericSearch extends React.Component {
     this.props.change('query', '')
     this.props.change('searchOptionIndex', '')
   }
+
+  onClickToggleFields () {
+    const {searchFieldsVisible, collapseSearchFields} = this.props
+    collapseSearchFields(!searchFieldsVisible)
+  }
+
   renderFields () {
     const {selectedField} = this.props
     return (
@@ -690,6 +696,8 @@ class GenericSearch extends React.Component {
   }
 
   renderFieldsView () {
+    const {searchFieldsVisible} = this.props
+    if (!searchFieldsVisible) return null
     return (
       <div style={{minWidth: '170px', height: '100%', overflow: 'auto', position: 'relative'}}>
         {this.renderFields()}
@@ -739,6 +747,7 @@ class GenericSearch extends React.Component {
             onClickTags={this.onClickTags.bind(this)}
 
             onClickClear={this.onClickClearSearch.bind(this)}
+            onClickToggleFields={this.onClickToggleFields.bind(this)}
           />
 
           <div className="text-center">

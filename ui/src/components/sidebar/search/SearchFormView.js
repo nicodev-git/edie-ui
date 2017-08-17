@@ -9,6 +9,7 @@ import LocalMovie from 'material-ui/svg-icons/maps/local-movies'
 import Computer from 'material-ui/svg-icons/hardware/computer'
 import NoSim from 'material-ui/svg-icons/communication/no-sim'
 import ClearIcon from 'material-ui/svg-icons/content/clear'
+import ViewColumnIcon from 'material-ui/svg-icons/action/view-column'
 // import {Toolbar} from 'material-ui/Toolbar'
 
 import { FormInput } from 'components/modal/parts'
@@ -61,7 +62,9 @@ export default class SearchFormView extends React.Component {
       onClickTags,
 
       onClickClear,
-      onClickSearch
+      onClickSearch,
+
+      onClickToggleFields
     } = this.props
     return (
       <form onSubmit={onSubmit}>
@@ -145,6 +148,8 @@ export default class SearchFormView extends React.Component {
             <IconButton tooltip="Graph" tooltipPosition="top-center" className="valign-top" onTouchTap={onClickGraph}><img src="/resources/images/sidebar/search/graph-icon.png" width="24" alt=""/></IconButton>
 
             <IconButton tooltip="Clear" tooltipPosition="top-center" className="valign-top" onTouchTap={onClickClear}><ClearIcon /></IconButton>
+
+            <IconButton tooltip="Toggle Fields" tooltipPosition="top-center" className="valign-top" onTouchTap={onClickToggleFields}><ViewColumnIcon /></IconButton>
           </div>
         </div>
       </form>
