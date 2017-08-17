@@ -2,19 +2,7 @@ import React from 'react'
 import {Dialog} from 'material-ui'
 
 import CloseIconButton from './CloseIconButton'
-
-const dialogStyle = {
-  background: '#efefef',
-  padding: '8px 48px 48px',
-  overflowY: 'auto'
-}
-const titleStyle = {
-  background: '#324454',
-  color: 'white',
-  fontSize: 14,
-  paddingTop: 12,
-  paddingBottom: 12
-}
+import { dialogBodyStyle, dialogTitleStyle } from 'style/common/materialStyles'
 
 export default class Modal extends React.Component {
   render () {
@@ -24,8 +12,8 @@ export default class Modal extends React.Component {
         open
         title={title}
         contentStyle={contentStyle}
-        bodyStyle={dialogStyle}
-        titleStyle={titleStyle}
+        bodyStyle={dialogBodyStyle}
+        titleStyle={dialogTitleStyle}
         onRequestClose={onRequestClose}
         className={className}
       >

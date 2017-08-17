@@ -38,3 +38,16 @@ export const subHeaderStyle = {
 export const underlineFocusStyle = {
 
 }
+
+export const dialogBodyStyle = {
+  background: '#efefef',
+  padding: '8px 48px 48px',
+  overflowY: 'auto'
+}
+export const dialogTitleStyle = {
+  background: '#324454',
+  color: 'white',
+  fontSize: 14,
+  paddingTop: 12,
+  paddingBottom: 12
+}
