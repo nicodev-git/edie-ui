@@ -48,6 +48,6 @@ export const dialogTitleStyle = {
   background: '#324454',
   color: 'white',
   fontSize: 14,
-  paddingTop: 12,
-  paddingBottom: 12
+  padding: '12px 24px',
+  margin: 0
 }

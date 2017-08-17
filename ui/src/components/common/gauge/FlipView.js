@@ -78,27 +78,30 @@ export default class FlipView extends React.Component {
   }
 
   renderCard (cls, children, front) {
-    const {gauge, loading, onClickDelete} = this.props
+    const {gauge, loading} = this.props
     return (
       <div className={`${cls} ${this.getFlipClass()}`}>
         <div className="flex-vertical" style={{height: '100%'}}>
-          <div className="panel panel-white flex-vertical flex-1">
-            <div className="panel-heading hidden">
-              <h4 className="panel-title text-ellipsis">{gauge.name}</h4>
-              <div className="panel-options">
-                <DeleteIcon color="#545454" viewBox="0 0 32 32" className="link" onTouchTap={() => onClickDelete(gauge)}/>
+          {
+            front ? (
+              <div className="panel panel-white flex-vertical flex-1">
+                <div className="tab-box-container text-center text-ellipsis">
+                  <div className="tab-box">
+                    {gauge.name}
+                  </div>
+                </div>
+                <div className="panel-body p-none flex-vertical flex-1">
+                  {children}
+                  {loading && front && <RefreshOverlay />}
+                </div>
               </div>
-            </div>
-            <div className="tab-box-container text-center text-ellipsis">
-              <div className="tab-box">
-                {gauge.name}
+            ) : (
+              <div className="flex-1">
+                {children}
               </div>
-            </div>
-            <div className="panel-body p-none flex-vertical flex-1">
-              {children}
-              {loading && front && <RefreshOverlay />}
-            </div>
-          </div>
+            )
+          }
+
         </div>
       </div>
     )

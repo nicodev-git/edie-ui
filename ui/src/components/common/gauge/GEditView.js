@@ -2,12 +2,15 @@ import React from 'react'
 import moment from 'moment'
 import {TextField, SelectField, MenuItem, RaisedButton, Checkbox} from 'material-ui'
 import {findIndex} from 'lodash'
+import IconButton from 'material-ui/IconButton'
+import CloseIcon from 'material-ui/svg-icons/navigation/close'
 
-import DoneButton from './DoneButton'
 import {gaugeDurationTypes, gaugeResources, severities as allSeverities, gaugeTableViewModes} from 'shared/Global'
 import DateRangePicker from 'components/common/DateRangePicker'
 
 import GaugeServerPicker from 'components/common/wizard/input/GaugeServerPicker'
+import { dialogBodyStyle, dialogTitleStyle } from 'style/common/materialStyles'
+import {CardPanel} from 'components/modal/parts'
 
 const durations = '1 2 3 5 10 15 30'.split(' ').map(p => ({
   label: p, value: parseInt(p, 10)
@@ -478,10 +481,18 @@ export default class GEditView extends React.Component {
   }
   render () {
     return (
-      <div className="padding-xs">
-        {this.renderContent()}
-
-        <DoneButton onClick={this.onClickDone.bind(this)}/>
+      <div style={{background: 'white'}}>
+        <h3 style={dialogTitleStyle}>Edit</h3>
+        <div style={{position: 'absolute', right: 4, top: 0}}>
+          <IconButton onTouchTap={this.onClickDone.bind(this)}>
+            <CloseIcon size={24} color="white"/>
+          </IconButton>
+        </div>
+        <div style={dialogBodyStyle}>
+          <CardPanel>
+            {this.renderContent()}
+          </CardPanel>
+        </div>
       </div>
     )
   }
