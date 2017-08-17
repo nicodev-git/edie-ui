@@ -17,54 +17,56 @@ export default class SysWorkflowsModalView extends React.Component {
       selectedSysWorkflows} = this.props
     return (
       <Modal title={header} onRequestClose={onClickClose}>
-        <div className="padding-md-left">
-          <SelectField
-            errorStyle={errorStyle}
-            underlineStyle={underlineFocusStyle}
-            selectedMenuItemStyle={selectedItemStyle}
-            menuItemStyle={inputStyle}
-            labelStyle={inputStyle}
-            value={selectedSysWorkflowCategory || ''}
-            onChange={onChangeCategory}
-          >
-            <MenuItem key="0" value="" primaryText="[All]" />
-            {workflowCategories.map(c =>
-              <MenuItem key={c.id} value={c.name} primaryText={c.name} />
-            )}
-          </SelectField>
-        </div>
-        <div style={{maxHeight: '400px', overflow: 'scroll'}}>
-          <table className="table table-hover">
-            <thead>
-            <tr>
-              <th>Category</th>
-              <th>Severity</th>
-              <th>Name</th>
-              <th>Description</th>
-              <th>Version</th>
-            </tr>
-            </thead>
-            <tbody>
-            {
-              sysWorkflows.map(w =>
-                <tr key={w.id}>
-                  <td>
-                    <Checkbox
-                      label={w.category}
-                      checked={findIndex(selectedSysWorkflows, {id: w.id}) >= 0}
-                      onCheck={(e, c) => onChangeCheck(w, e, c)}
-                    />
-                  </td>
-                  <td>{w.severity}</td>
-                  <td>{w.name}</td>
-                  <td>{w.desc}</td>
-                  <td>{w.version}</td>
-                </tr>
-              )
-            }
-            </tbody>
-          </table>
-        </div>
+        <CardPanel className="margin-md-bottom">
+          <div className="padding-md-left">
+            <SelectField
+              errorStyle={errorStyle}
+              underlineStyle={underlineFocusStyle}
+              selectedMenuItemStyle={selectedItemStyle}
+              menuItemStyle={inputStyle}
+              labelStyle={inputStyle}
+              value={selectedSysWorkflowCategory || ''}
+              onChange={onChangeCategory}
+            >
+              <MenuItem key="0" value="" primaryText="[All]" />
+              {workflowCategories.map(c =>
+                <MenuItem key={c.id} value={c.name} primaryText={c.name} />
+              )}
+            </SelectField>
+          </div>
+          <div style={{maxHeight: '400px', overflow: 'scroll'}}>
+            <table className="table table-hover">
+              <thead>
+              <tr>
+                <th>Category</th>
+                <th>Severity</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Version</th>
+              </tr>
+              </thead>
+              <tbody>
+              {
+                sysWorkflows.map(w =>
+                  <tr key={w.id}>
+                    <td>
+                      <Checkbox
+                        label={w.category}
+                        checked={findIndex(selectedSysWorkflows, {id: w.id}) >= 0}
+                        onCheck={(e, c) => onChangeCheck(w, e, c)}
+                      />
+                    </td>
+                    <td>{w.severity}</td>
+                    <td>{w.name}</td>
+                    <td>{w.desc}</td>
+                    <td>{w.version}</td>
+                  </tr>
+                )
+              }
+              </tbody>
+            </table>
+          </div>
+        </CardPanel>
         <TwoButtonsBlockCustom name1="Cancel" action1={onClickClose}
           name2="Add" action2={onClickAdd}/>
       </Modal>

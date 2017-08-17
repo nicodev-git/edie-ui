@@ -7,6 +7,7 @@ import HelpIcon from 'material-ui/svg-icons/action/help'
 import InfiniteTable from 'components/common/InfiniteTable'
 import ShowMoreLine from 'components/common/ShowMoreLine'
 import { CloseButton, Modal } from 'components/modal/parts'
+import CardPanel from "../../../../modal/parts/CardPanel";
 
 export default class MonitorHistoryModal extends Component {
   constructor (props) {
@@ -56,17 +57,19 @@ export default class MonitorHistoryModal extends Component {
 
     return (
       <Modal title="Monitor History" onRequestClose={this.onClickClose.bind(this)}>
-        <div className="small-modal-table">
-          <div style={{height: '300px', position: 'relative'}}>
-            <InfiniteTable
-              id="table"
-              url="/event/search/findBy"
-              params={params}
-              cells={this.cells}
-              rowMetadata={{'key': 'id'}}
-            />
+        <CardPanel className="margin-md-bottom">
+          <div className="small-modal-table">
+            <div style={{height: '300px', position: 'relative'}}>
+              <InfiniteTable
+                id="table"
+                url="/event/search/findBy"
+                params={params}
+                cells={this.cells}
+                rowMetadata={{'key': 'id'}}
+              />
+            </div>
           </div>
-        </div>
+        </CardPanel>
         <CloseButton onClose={this.onClickClose.bind(this)} />
       </Modal>
     )
