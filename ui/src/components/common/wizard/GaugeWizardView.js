@@ -298,11 +298,11 @@ export default class GaugeWizardView extends React.Component {
   }
   render () {
     const {onSubmit, onHide, title, templateName} = this.props
-    const width = templateName === 'Servers' ? 900 : 585
+    const width = templateName === 'Servers' ? 950 : 665
     return (
       <Modal title={title || 'Gauge'} onRequestClose={onHide} contentStyle={{width}}>
         <form onSubmit={onSubmit}>
-          <CardPanel className="marging-md-bottom">
+          <CardPanel className="margin-md-bottom">
             {this.renderContent()}
           </CardPanel>
           <SubmitBlock name="Add" onClick={onHide} />

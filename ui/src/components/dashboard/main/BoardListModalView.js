@@ -1,29 +1,31 @@
 import React from 'react'
-import {IconButton, Card, Chip} from 'material-ui'
+import {IconButton, Chip} from 'material-ui'
 import DeleteIcon from 'material-ui/svg-icons/action/delete'
 import EditIcon from 'material-ui/svg-icons/editor/mode-edit'
 import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
 import SetDefIcon from 'material-ui/svg-icons/content/sort'
 
-import {Modal, CardLegend} from 'components/modal/parts'
+import {Modal, CardPanel} from 'components/modal/parts'
 
 export default class BoardListModalView extends React.Component {
+  renderTools () {
+    const {onClickAdd, onClickSetDefault} = this.props
+    return (
+      <div className="pull-right" style={{marginTop: -13}}>
+        <IconButton onTouchTap={onClickSetDefault}>
+          <SetDefIcon size={32}/>
+        </IconButton>
+        <IconButton onTouchTap={onClickAdd}>
+          <AddCircleIcon size={32}/>
+        </IconButton>
+      </div>
+    )
+  }
   render () {
-    const {onHide, gaugeBoards, selected, onClickAdd, onClickEdit, onClickDelete, onClickSetDefault, onSelect, defaultBoardId} = this.props
+    const {onHide, gaugeBoards, selected, onClickEdit, onClickDelete, onSelect, defaultBoardId} = this.props
     return (
       <Modal title="Dashboards" onRequestClose={onHide}>
-        <CardLegend>
-          Dashboards
-          <div className="pull-right" style={{marginTop: -13}}>
-            <IconButton onTouchTap={onClickSetDefault}>
-              <SetDefIcon size={32}/>
-            </IconButton>
-            <IconButton onTouchTap={onClickAdd}>
-              <AddCircleIcon size={32}/>
-            </IconButton>
-          </div>
-        </CardLegend>
-        <Card>
+        <CardPanel title="Dashboards" tools={this.renderTools()}>
           <div style={{maxHeight: 300, overflow: 'auto'}}>
             <table className="table table-hover">
               <thead>
@@ -59,7 +61,7 @@ export default class BoardListModalView extends React.Component {
               </tbody>
             </table>
           </div>
-        </Card>
+        </CardPanel>
       </Modal>
     )
   }

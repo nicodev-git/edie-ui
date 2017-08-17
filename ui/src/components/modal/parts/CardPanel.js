@@ -5,7 +5,10 @@ export default class CardPanel extends React.Component {
   render () {
     return (
       <div className={this.props.className}>
-        <CardLegend>{this.props.title}</CardLegend>
+        <CardLegend>
+          {this.props.title}
+          {this.props.tools}
+        </CardLegend>
         <Card>
           <CardText>
             {this.props.children}
