@@ -1,4 +1,5 @@
 import React from 'react'
+
 import {Modal} from 'components/modal/parts'
 
 import GaugeMap from 'components/common/gauge/GaugeMap'
@@ -22,7 +23,9 @@ export default class GaugeModalView extends React.Component {
     const {header, onHide, editGauge} = this.props
     return (
       <Modal title={header} onRequestClose={onHide}>
-        {this.renderGauge(editGauge)}
+        <div style={{height: 400}}>
+          {this.renderGauge(editGauge)}
+        </div>
       </Modal>
     )
   }

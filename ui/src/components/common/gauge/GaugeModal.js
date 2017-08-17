@@ -7,11 +7,11 @@ export default class GaugeModal extends React.Component {
     this.props.showGaugeModal(false)
   }
   render () {
-    const {editGauge} = this.props.gauge
+    const {editGauge} = this.props
     return (
       <GaugeModalView
         {...this.props}
-        title={editGauge.name}
+        title={editGauge.name || 'Gauge'}
         onHide={this.onHide.bind(this)}
       />
     )

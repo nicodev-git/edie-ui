@@ -133,7 +133,7 @@ export default class FlipView extends React.Component {
     const {flip} = this.state
 
     if (modalView) {
-      return this.renderFrontView()
+      return this.props.renderFrontView()
     }
 
     return (
