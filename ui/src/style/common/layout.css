@@ -331,8 +331,13 @@ a, a:focus, a:hover {
 .server-cell {
     width: 96px;
     height: 54px;
-    padding: 3px;
+    padding: 1.5px;
     text-align: center;
     display: inline-block;
     position: relative;
+    float: left;
+}
+
+.server-cell.slim {
+    height: 27px;
 }

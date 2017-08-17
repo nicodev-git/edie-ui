@@ -99,7 +99,7 @@ export default class GServers extends React.Component {
     // const rowCount = Math.max(5, Math.ceil(total / colCount))
     // const row = 100.0 / rowCount / (gauge.itemSize === 'slim' ? 2 : 1)
     return (
-      <div key={item.id} className="server-cell">
+      <div key={item.id} className={`server-cell ${gauge.itemSize === 'slim' ? 'slim' : ''}`}>
         <div
           className={`${isUp ? 'bg-success' : 'bg-danger'}`} style={{width: '100%', height: '100%', cursor: 'pointer'}}
           onClick={this.onClickItem.bind(this, item)}>
@@ -112,12 +112,11 @@ export default class GServers extends React.Component {
     )
   }
   renderFrontView () {
-    const allDevices = this.getServers()
-    const items = allDevices.slice(0, this.getMaxItemCount(allDevices))
+    const items = this.getServers()
     return (
       <div className="flex-vertical flex-1">
         <div className="flex-1" style={{overflow: 'hidden'}}>
-          <div style={{height: '100%', overflow: 'auto'}}>
+          <div style={{height: '100%', padding: 1.5, overflow: 'auto'}}>
           {items.map(item => this.renderItemView(item, items.length))}
           </div>
         </div>
