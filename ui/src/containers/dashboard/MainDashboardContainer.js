@@ -24,7 +24,9 @@ import {
   fixIncident,
   ackIncident,
 
-  loadSearch
+  loadSearch,
+
+  showGaugeModal
 } from 'actions'
 
 class MainDashboardContainer extends React.Component {
@@ -48,7 +50,9 @@ export default connect(
     sysSearchOptions: state.search.sysSearchOptions,
     workflows: state.settings.workflows,
 
-    incidentDraw: state.devices.incidentDraw
+    incidentDraw: state.devices.incidentDraw,
+
+    gaugeModalOpen: state.gauge.gaugeModalOpen
   }), {
     fetchDevicesGroups,
     fetchSysSearchOptions,
@@ -70,6 +74,8 @@ export default connect(
     fixIncident,
     ackIncident,
 
-    loadSearch
+    loadSearch,
+
+    showGaugeModal
   }
 )(withRouter(MainDashboardContainer))

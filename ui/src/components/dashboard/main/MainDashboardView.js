@@ -255,7 +255,7 @@ export default class MainDashboardView extends React.Component {
   }
 
   onClickGaugeViewModal (gauge) {
-
+    this.props.showGaugeModal(true)
   }
 
   /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

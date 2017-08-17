@@ -11,7 +11,9 @@ import {
 
   SELECT_GAUGE_BOARD,
 
-  SHOW_GAUGE_BOARDS_MODAL
+  SHOW_GAUGE_BOARDS_MODAL,
+
+  SHOW_GAUGE_MODAL
 } from './types'
 
 import { apiError } from './Errors'
@@ -129,5 +131,11 @@ export const setDefaultGaugeBoard = (entity) => {
 export const showGaugeBoardsModal = (visible) => {
   return dispatch => {
     dispatch({type: SHOW_GAUGE_BOARDS_MODAL, visible})
+  }
+}
+
+export const showGaugeModal = (visible) => {
+  return dispatch => {
+    dispatch({type: SHOW_GAUGE_MODAL, visible})
   }
 }

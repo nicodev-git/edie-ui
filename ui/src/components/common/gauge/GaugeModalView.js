@@ -3,10 +3,10 @@ import {CardPanel, Modal} from 'components/modal/parts'
 
 export default class GaugeModalView extends React.Component {
   render () {
-    const {header, onHide} = this.props
+    const {header, onHide, content} = this.props
     return (
       <Modal title={header} onRequestClose={onHide}>
-        {this.props.children}
+        {content}
       </Modal>
     )
   }
