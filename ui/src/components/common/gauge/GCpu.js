@@ -190,9 +190,6 @@ export default class GCpu extends React.Component {
           <div className="flex-1 flex-vertical">
             <LiquidView value={value}/>
           </div>
-          <div className="text-center">
-            {title}
-          </div>
         </div>
       )
     }

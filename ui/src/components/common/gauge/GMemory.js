@@ -187,12 +187,7 @@ export default class GMemory extends React.Component {
         </div>
       ) : (
         <div className="flex-vertical flex-1">
-          <div className="flex-1 flex-vertical">
-            <LiquidView value={value}/>
-          </div>
-          <div className="text-center">
-            {title}
-          </div>
+          <LiquidView value={value}/>
         </div>
       )
     }
