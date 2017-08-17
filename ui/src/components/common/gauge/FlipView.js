@@ -54,9 +54,9 @@ export default class FlipView extends React.Component {
         className={`link info-button ${hovered ? 'visible' : ''}`}>
         {
           gauge.minimized ? (
-            <MinimizeIcon onTouchTap={() => onClickMinimize(gauge)}/>
-          ) : (
             <MaximizeIcon onTouchTap={() => onClickMaximize(gauge)}/>
+          ) : (
+            <MinimizeIcon onTouchTap={() => onClickMinimize(gauge)}/>
           )
         }
 
@@ -71,8 +71,8 @@ export default class FlipView extends React.Component {
     return (
       <div
         className="flex-vertical flex-1"
-        onMouseEnter={this.onMouseEnter.bind(this)}
-        onMouseLeave={this.onMouseLeave.bind(this)}>
+        onMouseEnter={this.onMouseEnter}
+        onMouseLeave={this.onMouseLeave}>
         {renderFrontView && renderFrontView()}
         {!viewOnly && this.renderInfoIcon()}
       </div>
@@ -94,7 +94,10 @@ export default class FlipView extends React.Component {
           {
             front ? (
               gauge.minimized ? (
-                <div className="flex-1 bg-white text-center">
+                <div
+                  className="flex-1 bg-white text-center"
+                   onMouseEnter={this.onMouseEnter}
+                   onMouseLeave={this.onMouseLeave}>
                   <img src="/resources/images/dashboard/gauge.png" width="48" alt=""/><br/>
                   {gauge.name}
                   {!viewOnly && this.renderInfoIcon()}
