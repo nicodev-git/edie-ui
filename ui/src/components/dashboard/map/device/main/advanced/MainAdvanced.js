@@ -1,5 +1,4 @@
 import React from 'react'
-import { showAlert } from 'components/common/Alert'
 import {RaisedButton} from 'material-ui'
 import axios from 'axios'
 
