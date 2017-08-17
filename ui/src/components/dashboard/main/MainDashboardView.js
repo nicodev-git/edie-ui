@@ -13,6 +13,7 @@ import { wizardConfig } from 'components/common/wizard/WizardConfig'
 
 import {showAlert} from 'components/common/Alert'
 
+import GaugeModal from 'components/common/gauge/GaugeModal'
 import GaugeMap from 'components/common/gauge/GaugeMap'
 
 const ResponsiveReactGridLayout = WidthProvider(Responsive)
@@ -224,10 +225,17 @@ export default class MainDashboardView extends React.Component {
   }
 
   onClickGaugeViewModal (gauge) {
-    this.props.showGaugeModal(true)
+    this.props.showGaugeModal(true, gauge)
   }
 
   /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  renderGaugeModal () {
+    if (!this.props.gaugeModalOpen) return null
+    return (
+      <GaugeModal {...this.props}/>
+    )
+  }
+
   renderDeviceWizard () {
     if (!this.state.deviceWizardVisible) return null
 
@@ -355,6 +363,7 @@ export default class MainDashboardView extends React.Component {
         </ResponsiveReactGridLayout>
 
         {this.renderDeviceWizard()}
+        {this.renderGaugeModal()}
         <ReactTooltip />
       </div>
     )

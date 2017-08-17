@@ -1,5 +1,5 @@
 import React from 'react'
-import {CardPanel, Modal} from 'components/modal/parts'
+import {Modal} from 'components/modal/parts'
 
 export default class GaugeModalView extends React.Component {
   render () {
