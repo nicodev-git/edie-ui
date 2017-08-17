@@ -39,7 +39,7 @@ export default function (state = INITIAL_STATE, action) {
     case SHOW_GAUGE_BOARDS_MODAL:
       return { ...state, gaugeBoardsModalOpen: !!action.visible }
     case SHOW_GAUGE_MODAL:
-      return { ...state, gaugeModalOpen: action.visible }
+      return { ...state, gaugeModalOpen: action.visible, editGauge: action.gauge }
     default:
       return state
   }

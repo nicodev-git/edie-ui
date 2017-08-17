@@ -52,7 +52,8 @@ export default connect(
 
     incidentDraw: state.devices.incidentDraw,
 
-    gaugeModalOpen: state.gauge.gaugeModalOpen
+    gaugeModalOpen: state.gauge.gaugeModalOpen,
+    editGauge: state.gauge.editGauge
   }), {
     fetchDevicesGroups,
     fetchSysSearchOptions,

@@ -134,8 +134,8 @@ export const showGaugeBoardsModal = (visible) => {
   }
 }
 
-export const showGaugeModal = (visible) => {
+export const showGaugeModal = (visible, gauge) => {
   return dispatch => {
-    dispatch({type: SHOW_GAUGE_MODAL, visible})
+    dispatch({type: SHOW_GAUGE_MODAL, visible, gauge})
   }
 }
