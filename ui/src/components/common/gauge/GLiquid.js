@@ -45,16 +45,9 @@ export default class GLiquid extends React.Component {
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   renderFrontView () {
-    const {gauge} = this.props
-
     return (
       <div className="flex-vertical flex-1">
-        <div className="flex-1 flex-vertical">
-          <LiquidView value={this.state.value}/>
-        </div>
-        <div className="text-center">
-          {gauge.name}
-        </div>
+        <LiquidView value={this.state.value}/>
       </div>
     )
   }
