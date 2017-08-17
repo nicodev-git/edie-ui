@@ -220,6 +220,14 @@ export default class MainDashboardView extends React.Component {
       }
     })
   }
+
+  onClickGaugeMinimize (gauge) {
+    this.props.updateGaugeItem({
+      ...gauge,
+      originalSize: gauge.layout,
+      minimized: true
+    }, this.props.board)
+  }
   /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   renderDeviceWizard () {
     if (!this.state.deviceWizardVisible) return null
@@ -265,6 +273,7 @@ export default class MainDashboardView extends React.Component {
 
           updateDeviceGauge={gauge => this.props.updateGaugeItem(gauge, this.props.board)}
           removeDeviceGauge={gauge => this.props.removeGaugeItem(gauge, this.props.board)}
+          onClickMinimize={this.onClickGaugeMinimize.bind(this)}
           style={flip ? {width: 700, height: 400} : {width: '100%', height: '100%'}}
         />
       </div>
