@@ -687,6 +687,14 @@ class GenericSearch extends React.Component {
     )
   }
 
+  renderFieldsView () {
+    return (
+      <div style={{minWidth: '170px', height: '100%', overflow: 'auto', position: 'relative'}}>
+        {this.renderFields()}
+        {this.renderFieldPopover()}
+      </div>
+    )
+  }
   render () {
     const { handleSubmit, selectedWf, params, monitorTemplates, searchTags, queryChips, selectedWfs } = this.props
     const { severity, dateFrom, dateTo, monitorTypes } = params
@@ -777,10 +785,7 @@ class GenericSearch extends React.Component {
 
         <TabPageBody tabs={[]} tab={0} history={this.props.history} location={this.props.location}>
           <div className="flex-horizontal" style={{height: '100%'}}>
-            <div style={{minWidth: '170px', height: '100%', overflow: 'auto', position: 'relative'}}>
-              {this.renderFields()}
-              {this.renderFieldPopover()}
-            </div>
+            {this.renderFieldsView()}
             <div className="flex-1 flex-vertical padding-sm">
               <div className="header-red">
                 Content
