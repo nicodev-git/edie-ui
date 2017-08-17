@@ -4,7 +4,7 @@ import CardLegend from './CardLegend'
 export default class CardPanel extends React.Component {
   render () {
     return (
-      <div>
+      <div className={this.props.className}>
         <CardLegend>{this.props.title}</CardLegend>
         <Card>
           <CardText>

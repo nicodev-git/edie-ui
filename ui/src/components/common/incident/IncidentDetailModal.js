@@ -1,8 +1,7 @@
 import React from 'react'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
-import {Card, CardText} from 'material-ui'
 
-import {Modal, CardLegend} from 'components/modal/parts'
+import {Modal, CardPanel} from 'components/modal/parts'
 
 export default class IncidentDetailModal extends React.Component {
   onHide () {
@@ -24,38 +23,35 @@ export default class IncidentDetailModal extends React.Component {
     return (
       <MuiThemeProvider>
         <Modal title="Incident Detail" onRequestClose={this.onHide.bind(this)}>
-          <CardLegend/>
-          <Card>
-            <CardText>
-              <div className="row">
-                <label className="control-label col-md-12 bold">Event Details</label>
-              </div>
-              <div className="row">
-                <label className="control-label col-md-3">Name:</label>
-                <label className="control-label col-md-9">{incidentname || (`Incident for ${data.incidenttype}`)}</label>
-              </div>
-              <div className="row">
-                <label className="control-label col-md-3">Description:</label>
-                <label className="control-label col-md-9">{data.descriptioninfo || incidentname}</label>
-              </div>
-              <div className="row">
-                <label className="control-label col-md-3">Date:</label>
-                <label className="control-label col-md-9">{data.starttimestamp}</label>
-              </div>
-              <div className="row">
-                <label className="control-label col-md-3">Device:</label>
-                <label className="control-label col-md-9">{data.fathername}</label>
-              </div>
-              <div className="row">
-                <label className="control-label col-md-3">Severity:</label>
-                <label className="control-label col-md-9">{data.incidentseverity}</label>
-              </div>
-              <div className="row">
-                <label className="control-label col-md-3">Status:</label>
-                <label className="control-label col-md-9">{fixstatus}</label>
-              </div>
-            </CardText>
-          </Card>
+          <CardPanel>
+            <div className="row">
+              <label className="control-label col-md-12 bold">Event Details</label>
+            </div>
+            <div className="row">
+              <label className="control-label col-md-3">Name:</label>
+              <label className="control-label col-md-9">{incidentname || (`Incident for ${data.incidenttype}`)}</label>
+            </div>
+            <div className="row">
+              <label className="control-label col-md-3">Description:</label>
+              <label className="control-label col-md-9">{data.descriptioninfo || incidentname}</label>
+            </div>
+            <div className="row">
+              <label className="control-label col-md-3">Date:</label>
+              <label className="control-label col-md-9">{data.starttimestamp}</label>
+            </div>
+            <div className="row">
+              <label className="control-label col-md-3">Device:</label>
+              <label className="control-label col-md-9">{data.fathername}</label>
+            </div>
+            <div className="row">
+              <label className="control-label col-md-3">Severity:</label>
+              <label className="control-label col-md-9">{data.incidentseverity}</label>
+            </div>
+            <div className="row">
+              <label className="control-label col-md-3">Status:</label>
+              <label className="control-label col-md-9">{fixstatus}</label>
+            </div>
+          </CardPanel>
         </Modal>
       </MuiThemeProvider>
     )
