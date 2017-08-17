@@ -1,7 +1,7 @@
 import React from 'react'
 import { Checkbox } from 'material-ui'
 
-import { TwoButtonsBlockCustom, Modal } from 'components/modal/parts'
+import { TwoButtonsBlockCustom, Modal, CardPanel } from 'components/modal/parts'
 
 class SearchFieldsModalView extends React.Component {
   render () {
