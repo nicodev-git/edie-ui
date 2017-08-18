@@ -99,7 +99,7 @@ export default class Combo extends React.Component {
         label={config.label ? config.label.text : ''}
         component={FormSelect}
         style={config.style}
-        className={config.cls}
+        className={`valign-top mr-dialog ${config.cls}`}
         disabled={config.disabled}
         options={options}
         defaultValue={options.length ? options[0].value : null}

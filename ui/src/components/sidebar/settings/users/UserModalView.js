@@ -17,8 +17,8 @@ export default class UserModalView extends React.Component {
             <Field name="password" type="password" component={FormInput} label="Password" className="mr-dialog"/>
             <Field name="email" component={FormInput} label="Email"/>
 
-            <Field name="phone" component={FormInput} label="Phone" className="mr-dialog"/>
-            <Field name="defaultMapId" component={FormSelect} label="Default Map" options={defaultmaps}/>
+            <Field name="phone" component={FormInput} label="Phone" className="valign-top mr-dialog"/>
+            <Field name="defaultMapId" component={FormSelect} label="Default Map" options={defaultmaps} className="valign-top"/>
 
             <SelectField multiple hintText="Role" onChange={onChangeRole} value={selectedRoles}>
               {roles.map(option =>

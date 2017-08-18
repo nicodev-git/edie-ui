@@ -13,7 +13,7 @@ export default class TextInput extends React.Component {
         inputStyle={inputStyle}
         underlineFocusStyle={underlineStyle}
         disabled={!!disabled}
-        className={className}
+        className={`valign-top mr-dialog ${className}`}
       />
     )
     return field
