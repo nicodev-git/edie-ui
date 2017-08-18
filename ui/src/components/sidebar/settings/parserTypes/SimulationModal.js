@@ -5,7 +5,7 @@ import {FlatButton, Chip} from 'material-ui'
 import {chipStyles} from 'style/common/materialStyles'
 import { concat, assign } from 'lodash'
 
-import { FormInput, Modal } from 'components/modal/parts'
+import { FormInput, Modal, CardPanel } from 'components/modal/parts'
 import FilterModal from './FilterModal'
 import PatternModal from './PatternModal'
 
@@ -141,6 +141,7 @@ class SimulationModal extends React.Component {
     return (
       <Modal title="Simulation" onRequestClose={this.onClickClose.bind(this)}>
         <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
+          <CardPanel className="margin-md-bottom">
           <div className="form-column">
             <Field name="text" component={FormInput} type="text" label="Text"/>
           </div>
@@ -189,7 +190,7 @@ class SimulationModal extends React.Component {
           </div>
           <div className="margin-sm-top">Match Result: {this.props.matchResult}</div>
           <div><div className="inline-block">Parse Result:&nbsp;&nbsp;</div>{renderEntity(this.props.parseResult)}</div>
-
+          </CardPanel>
           {this.renderButtons()}
         </form>
         {this.renderFilterModal()}

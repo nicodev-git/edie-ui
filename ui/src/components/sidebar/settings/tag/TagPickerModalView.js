@@ -80,7 +80,8 @@ export default class TagPickerModalView extends React.Component {
     return (
       <Modal title="Tags" onRequestClose={onClickClose}>
         {this.renderContent()}
-        <TwoButtonsBlockCustom name1="Cancel" action1={onClickClose} name2="OK" action2={onClickOK}/>
+        <TwoButtonsBlockCustom name1="Cancel" action1={onClickClose} name2="OK" action2={onClickOK}/>ok
+
       </Modal>
     )
   }

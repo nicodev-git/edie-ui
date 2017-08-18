@@ -1,8 +1,7 @@
 import React from 'react'
 import {Field} from 'redux-form'
-import {Card} from 'material-ui'
 
-import {FormInput, SubmitBlock, Modal} from 'components/modal/parts'
+import {FormInput, SubmitBlock, Modal, CardPanel} from 'components/modal/parts'
 
 class FilterModalView extends React.Component {
   render () {
@@ -10,11 +9,11 @@ class FilterModalView extends React.Component {
     return (
       <Modal title="Filter" onRequestClose={onClickClose}>
         <form onSubmit={onSubmit}>
-          <Card>
+          <CardPanel>
             <div className="form-column">
               <Field name="text" component={FormInput} type="text" label="Filter"/>
             </div>
-          </Card>
+          </CardPanel>
           <SubmitBlock name="Save" onClick={onClickClose}/>
         </form>
       </Modal>
