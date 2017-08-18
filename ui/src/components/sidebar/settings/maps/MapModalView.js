@@ -17,14 +17,15 @@ export default class MapModalView extends React.Component {
   render () {
     const {onHide, onSubmit, users} = this.props
     return (
-      <Modal title="Map" onRequestClose={onHide} contentStyle={{width: 585}}>
+      <Modal title="Map" onRequestClose={onHide} contentStyle={{width: 685}}>
         <form onSubmit={onSubmit}>
-          <CardPanel className="margin-md-bottom">
+          <CardPanel title="Map Settings" className="margin-md-bottom">
             <Field name="name" component={FormInput} floatingLabel="Name" className="mr-dialog"/>
             <Field name="description" component={FormInput} floatingLabel="Description"/>
             <Field name="mapgroup" component={FormInput} floatingLabel="Group" className="mr-dialog"/>
+          </CardPanel>
 
-            <h4>Map Users</h4>
+          <CardPanel title="Map Users" className="margin-md-bottom">
             <div style={{maxHeight: 250, overflow: 'auto'}}>
               <table className="table table-hover">
                 <tbody>
