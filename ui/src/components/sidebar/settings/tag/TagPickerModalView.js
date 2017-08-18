@@ -39,11 +39,11 @@ export default class TagPickerModalView extends React.Component {
   }
 
   onAdd (addedTag, allTags) {
-    this.props.onSelectTag(addedTag)
+    this.props.onSelectTag(addedTag.label)
   }
 
   onRemove (removedTag, allTags) {
-    this.props.onDeselectTag(removedTag)
+    this.props.onDeselectTag(removedTag.label)
   }
 
   renderContent () {

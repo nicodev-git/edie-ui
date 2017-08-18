@@ -1,5 +1,4 @@
 import React from 'react'
-import {findIndex} from 'lodash'
 
 import TagPickerModalView from './TagPickerModalView'
 
@@ -7,7 +6,7 @@ import {showPrompt, showAlert} from 'components/common/Alert'
 
 export default class TagPickerModal extends React.Component {
   componentWillMount () {
-    this.props.selectTag(null)
+    this.props.selectTag([])
     this.props.fetchTags()
   }
   onSelectTag (tag) {
@@ -22,9 +21,9 @@ export default class TagPickerModal extends React.Component {
     const {selectedTags, onPick, onPickMulti, onClickClose} = this.props
     if (!selectedTags.length) return showAlert('Please select tag.')
     if (onPickMulti) {
-      onPickMulti(selectedTags.map(p => {name: p}))
+      onPickMulti(selectedTags.map(p => ({name: p})))
     } else if (onPick) {
-      selectedTags.map(p => {name: p}).forEach(onPick)
+      selectedTags.map(p => ({name: p})).forEach(onPick)
     }
 
     onClickClose()
