@@ -51,7 +51,7 @@ export default class MonitorTplModalView extends Component {
           <br/>
           {tagModal}
           {credTypeModal}
-          <SubmitBlock name="Save" onClick={onHide}/>
+          <SubmitBlock name="Save"/>
         </form>
       </Modal>
     )

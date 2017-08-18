@@ -1,22 +1,20 @@
 import React from 'react'
 import { Field } from 'redux-form'
 import TextField from 'material-ui/TextField'
-import { util } from '../WizardUtil'
 import { inputStyle, underlineStyle } from 'style/common/materialStyles'
 
 export default class TextInput extends React.Component {
   renderField (config) {
-    const {input, label, disabled, style, className} = config
+    const {input, label, disabled, className} = config
     const field = (
-      <div style={util.convertStyle(style)} className={className}>
-        <TextField
-          floatingLabelText={<label>{label}</label>}
-          inputStyle={inputStyle}
-          underlineFocusStyle={underlineStyle}
-          disabled={!!disabled}
-          {...input}
-        />
-      </div>
+      <TextField
+        {...input}
+        floatingLabelText={<label>{label}</label>}
+        inputStyle={inputStyle}
+        underlineFocusStyle={underlineStyle}
+        disabled={!!disabled}
+        className={className}
+      />
     )
     return field
   }

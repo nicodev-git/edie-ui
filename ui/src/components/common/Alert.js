@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
 import {appendComponent, removeComponent} from 'util/Component'
-import { SubHeader, Modal, CardPanel } from '../modal/parts'
+import { SubHeader, Modal } from '../modal/parts'
 import {TextField, RaisedButton} from 'material-ui'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import { inputStyle, underlineStyle, buttonStyle, buttonTextStyle } from 'style/common/materialStyles'
-import CardLegend from "../modal/parts/CardLegend";
 
 const TYPE_ALERT = 'alert'
 const TYPE_CONFIRM = 'confirm'

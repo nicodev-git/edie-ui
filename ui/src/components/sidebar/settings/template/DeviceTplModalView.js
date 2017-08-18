@@ -8,7 +8,7 @@ import { chipStyles } from 'style/common/materialStyles'
 
 export default class DeviceTplModalView extends Component {
   renderContent () {
-    const {imgUrl, onSubmit, onHide, onChange,
+    const {imgUrl, onSubmit, onChange,
       monitors, monitorTemplates, onAddMonitor, onEditMonitor, onRemoveMonitor,
       workflows, showWfSelectModal, onClickDeleteWf,
       tagModal, tags, onClickAddTag, onClickDeleteTag
@@ -43,7 +43,7 @@ export default class DeviceTplModalView extends Component {
           </div>
           {tagModal}
         </CardPanel>
-        {onSubmit && <SubmitBlock name="Save" onClick={onHide}/>}
+        {onSubmit && <SubmitBlock name="Save"/>}
       </form>
     )
   }

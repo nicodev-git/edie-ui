@@ -21,7 +21,7 @@ export default class ProfileModalView extends Component {
               <CheckboxItem label={checkboxLabel} disabled defaultChecked={defaultChecked}/>
             </div>
           </CardPanel>
-          <SubmitBlock name="Save" onClick={onHide}/>
+          <SubmitBlock name="Save"/>
         </form>
       </Modal>
     )

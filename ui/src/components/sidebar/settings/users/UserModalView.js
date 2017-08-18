@@ -34,7 +34,7 @@ export default class UserModalView extends React.Component {
 
             <Field name="enabled" component={FormCheckbox} label="Enabled" />
           </CardPanel>
-          <SubmitBlock name="Save" onClick={onHide}/>
+          <SubmitBlock name="Save"/>
         </form>
       </Modal>
     )
