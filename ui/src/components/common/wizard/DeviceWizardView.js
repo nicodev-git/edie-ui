@@ -8,8 +8,8 @@ export default class DeviceWizardView extends Component {
     return (
       <Modal className="modal-device-wizard" title={header} onRequestClose={onHide}>
           <form onSubmit={onSubmit}>
+            {progressBar}
             <CardPanel className="margin-md-bottom">
-              {progressBar}
               {content}
             </CardPanel>
             <WizardButtons current={current} steps={steps} onClose={onHide}

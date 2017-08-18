@@ -1252,7 +1252,7 @@ export const wizardConfig = {
       }, {
         type: 'text',
         label: {
-          text: 'WAN IP',
+          text: 'IP',
           type: 'attach',
           width: 3
         },
@@ -4514,7 +4514,7 @@ export const wizardEditConfig = {
       }, {
         type: 'text',
         label: {
-          text: 'WAN IP',
+          text: 'IP',
           type: 'attach',
           width: 3
         },
