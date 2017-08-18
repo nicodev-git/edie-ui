@@ -40,23 +40,24 @@ const fetchWorkflowsSuccess = (dispatch, response) => {
   })
 }
 
-export const addWorkflow = (props) => {
+export const addWorkflow = (props, cb) => {
   if (!window.localStorage.getItem('token')) {
     return dispatch => dispatch({ type: NO_AUTH_ERROR })
   }
   return (dispatch) => {
     axios.post(`${ROOT_URL}/workflow`, props)
-      .then(response => addWorkflowSuccess(dispatch, response))
+      .then(response => addWorkflowSuccess(dispatch, response, cb))
       .catch(error => apiError(dispatch, error))
   }
 }
 
-const addWorkflowSuccess = (dispatch, response) => {
+const addWorkflowSuccess = (dispatch, response, cb) => {
   dispatch({
     type: ADD_WORKFLOW,
     data: response.data
   })
   dispatch(closeWorkflowModal())
+  cb && cb(response.data)
 }
 
 export const updateWorkflow = (entity) => {

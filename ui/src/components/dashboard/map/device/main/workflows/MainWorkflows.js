@@ -109,7 +109,7 @@ export default class MainWorkflows extends React.Component {
     this.props.addDeviceWorkflow({
       ...selected,
       id: null,
-      name: `${selected} Copy`
+      name: `${selected.name} Copy`
     }, this.props.device, copied => {
       this.props.openDeviceWorkflowModal(copied, this.props.device)
     })

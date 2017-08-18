@@ -306,8 +306,7 @@ export const addDeviceWorkflow = (props, device, cb) => {
   }
   return (dispatch) => {
     axios.post(`${ROOT_URL}/workflow`, props).then(response => {
-      addDeviceWorkflowSuccess(dispatch, [response], device)
-      cb && cb(response.data)
+      addDeviceWorkflowSuccess(dispatch, [response], device, cb)
     })
       .catch(error => apiError(dispatch, error))
   }
@@ -329,7 +328,7 @@ export const addDeviceWorkflows = (workflows, device) => {
   }
 }
 
-const addDeviceWorkflowSuccess = (dispatch, responses, device) => {
+const addDeviceWorkflowSuccess = (dispatch, responses, device, cb) => {
   if (!device.workflowids) device.workflowids = []
   responses.forEach(response => device.workflowids.push(response.data.id))
 
@@ -341,6 +340,7 @@ const addDeviceWorkflowSuccess = (dispatch, responses, device) => {
       })
       dispatch(closeDeviceWorkflowModal())
       dispatch(closeSysWorkflowsModal())
+      cb && cb(responses[0].data)
     })
     .catch(error => updateDeviceError(dispatch, error))
 }
