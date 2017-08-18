@@ -32,7 +32,9 @@ import {
   addDeviceWorkflows,
   selectSysWorkflowCategory,
 
-  showWorkflowTagModal
+  showWorkflowTagModal,
+
+  addWorkflow
 } from 'actions'
 
 class MainRulesContainer extends React.Component {
@@ -97,6 +99,8 @@ export default connect(
     addDeviceWorkflows,
     selectSysWorkflowCategory,
 
-    showWorkflowTagModal
+    showWorkflowTagModal,
+
+    addWorkflow
   }
 )(withRouter(MainRulesContainer))

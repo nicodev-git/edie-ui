@@ -104,7 +104,15 @@ export default class MainWorkflows extends React.Component {
   }
 
   onClickDuplicate () {
-
+    const selected = this.getTable().getSelected()
+    if (!selected) return window.alert('Please select workflow.')
+    this.props.addDeviceWorkflow({
+      ...selected,
+      id: null,
+      name: `${selected} Copy`
+    }, this.props.device, copied => {
+      this.props.openDeviceWorkflowModal(copied, this.props.device)
+    })
   }
 
   getTable () {
@@ -153,9 +161,9 @@ export default class MainWorkflows extends React.Component {
               <RaisedButton onTouchTap={this.onClickAdd.bind(this)} label="Add"/>&nbsp;
               <RaisedButton onTouchTap={this.onClickAddSys.bind(this)} label="Add System Workflow"/>&nbsp;
               <RaisedButton onTouchTap={this.onClickEdit.bind(this)} label="Edit"/>&nbsp;
-              <RaisedButton onTouchTap={this.onClickRemove.bind(this)} label="Remove"/>
+              <RaisedButton onTouchTap={this.onClickRemove.bind(this)} label="Remove"/>&nbsp;
 
-              <RaisedButton onTouchTap={this.onClickDuplicate.bind(this)} label="Duplicate"/>
+              <RaisedButton onTouchTap={this.onClickDuplicate.bind(this)} label="Duplicate"/>&nbsp;
             </div>
           </div>
         </TabPageHeader>

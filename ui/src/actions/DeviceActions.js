@@ -300,13 +300,15 @@ const fetchDeviceWorkflowsSuccess = (dispatch, response) => {
   })
 }
 
-export const addDeviceWorkflow = (props, device) => {
+export const addDeviceWorkflow = (props, device, cb) => {
   if (!window.localStorage.getItem('token')) {
     return dispatch => dispatch({ type: NO_AUTH_ERROR })
   }
   return (dispatch) => {
-    axios.post(`${ROOT_URL}/workflow`, props)
-      .then(response => addDeviceWorkflowSuccess(dispatch, [response], device))
+    axios.post(`${ROOT_URL}/workflow`, props).then(response => {
+      addDeviceWorkflowSuccess(dispatch, [response], device)
+      cb && cb(response.data)
+    })
       .catch(error => apiError(dispatch, error))
   }
 }
