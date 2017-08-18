@@ -1238,7 +1238,7 @@ export const wizardConfig = {
       }
     },
     steps: [{
-      title: 'step 1',
+      title: 'Basic',
       items: [{
         type: 'text',
         label: {
@@ -1301,7 +1301,7 @@ export const wizardConfig = {
         }]
       }]
     }, {
-      title: 'step 2',
+      title: 'Monitors',
       items: [{
         type: 'monitors',
         title: 'Monitors'
@@ -4490,7 +4490,7 @@ export const wizardEditConfig = {
       }
     },
     steps: [{
-      title: 'step 1',
+      title: 'Basic',
       items: [{
         type: 'text',
         label: {

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { assign } from 'lodash'
 import { reduxForm } from 'redux-form'
+import {Step, Stepper, StepLabel} from 'material-ui/Stepper'
 
 import TextInput from './input/TextInput'
 import Checkbox from './input/Checkbox'
@@ -11,10 +12,8 @@ import ParamEditModal from './input/ParamEditModal'
 import ParamList from './input/ParamList'
 import {wizardConfig} from './WizardConfig'
 import {util} from './WizardUtil'
-import LinearProgress from 'material-ui/LinearProgress'
 import DeviceWizardView from './DeviceWizardView'
 import TagsView from './input/TagsView'
-import { primeColor } from 'style/common/materialStyles'
 
 import CredPicker from 'containers/settings/credentials/CredsPickerContainer'
 
@@ -83,26 +82,19 @@ class DeviceWizard extends Component {
   buildProgressBar () {
     if (this.state.steps <= 1) return null
 
-    let markers = []
-    for (let i = 1; i <= this.state.steps; i++) {
+    const markers = []
+    for (let i = 0; i < this.state.steps; i++) {
       markers.push(
-        <div className={`marker ${i <= this.state.current ? 'marker-checked' : ''}`}
-          style={{left: `${100 / this.state.steps * (i - 0.5)}%`}}
-          key={i}>
-            <div className="marker-label">{i}</div>
-        </div>
+        <Step key={i}>
+          <StepLabel>{this.state.currentDevice.steps[i].title}</StepLabel>
+        </Step>
       )
     }
-    let value = 100 * this.state.current / this.state.steps
-    // <div className="progress-bar" style={{width: `${100 * this.state.current / this.state.steps}%`}} />
 
     return (
-      <div className="wizard-progress">
+      <Stepper activeStep={this.state.current - 1}>
         {markers}
-        <div className="progress progress-striped progress-xs" style={{margin: '10px 0'}}>
-          <LinearProgress mode="determinate" value={value} color={primeColor}/>
-        </div>
-      </div>
+      </Stepper>
     )
   }
 
@@ -190,8 +182,6 @@ class DeviceWizard extends Component {
       buildLabel={this.buildLabel.bind(this)}
       change={this.props.change}/>)
   }
-
-  // className={`col-md-${util.calcWidth(config.width)}`}
 
   buildLabel (config) {
     return (
