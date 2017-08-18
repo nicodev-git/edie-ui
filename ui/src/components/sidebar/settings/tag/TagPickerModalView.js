@@ -2,6 +2,7 @@ import React from 'react'
 import {Chip, Popover} from 'material-ui'
 import {findIndex} from 'lodash'
 import {blue300} from 'material-ui/styles/colors'
+import Tags from 'react-material-tags'
 
 import {TwoButtonsBlockCustom, Modal} from 'components/modal/parts'
 
@@ -21,7 +22,7 @@ export default class TagPickerModalView extends React.Component {
     )
   }
 
-  renderContent () {
+  renderContent2 () {
     const {tags, onClickAdd, hideAdd} = this.props
     return (
       <div style={chipStyles.wrapper}>
@@ -36,6 +37,27 @@ export default class TagPickerModalView extends React.Component {
       </div>
     )
   }
+
+  onAdd (addedTag, allTags) {
+    this.props.onSelectTag(addedTag.data)
+  }
+
+  onRemove (removedTag, allTags) {
+    this.props.onDeselectTag(removedTag.data)
+  }
+
+  renderContent () {
+    const {tags} = this.props
+    return (
+      <Tags
+        sourceTags={tags.map(p => ({label: p.name, data: p}))}
+        onlyFromSource
+        onAdd={this.onAdd.bind(this)}
+        onRemove={this.onRemove.bind(this)}
+      />
+    )
+  }
+
   render () {
     const {onClickClose, onClickOK, viewMode, anchorEl} = this.props
     if (viewMode === 'popover') {
