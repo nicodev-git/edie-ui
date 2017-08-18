@@ -70,7 +70,7 @@ export default class ParserTypeModalView extends Component {
               </table>
             </div>
           </CardPanel>
-          <SubmitBlock name="Save" onClick={onHide}/>
+          <SubmitBlock name="Save"/>
         </form>
         {tagModal}
       </Modal>

@@ -25,7 +25,7 @@ export default class MapModalView extends React.Component {
             <Field name="mapgroup" component={FormInput} floatingLabel="Group" className="mr-dialog"/>
           </CardPanel>
 
-          <CardPanel title="Map Users" className="margin-md-bottom">
+          <CardPanel title="Map Users">
             <div style={{maxHeight: 250, overflow: 'auto'}}>
               <table className="table table-hover">
                 <tbody>
@@ -34,7 +34,7 @@ export default class MapModalView extends React.Component {
               </table>
             </div>
           </CardPanel>
-          <SubmitBlock name="Save" onClick={onHide}/>
+          <SubmitBlock name="Save"/>
         </form>
       </Modal>
     )

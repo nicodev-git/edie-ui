@@ -17,7 +17,7 @@ export default class CollectorModalView extends React.Component {
               <Field name="ostype" component={FormSelect} label="Type" options={collectorOSTypes}/>
             </div>
           </CardPanel>
-          <SubmitBlock name="Save" onClick={onHide}/>
+          <SubmitBlock name="Save"/>
         </form>
       </Modal>
     )

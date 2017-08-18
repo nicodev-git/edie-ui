@@ -14,7 +14,7 @@ export default class AgentModalView extends React.Component {
               <Field name="version" component={FormInput} label="Version"/>
             </div>
           </CardPanel>
-          <SubmitBlock name="Save" onClick={onHide}/>
+          <SubmitBlock name="Save"/>
         </form>
       </Modal>
     )

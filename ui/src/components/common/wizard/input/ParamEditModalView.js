@@ -26,7 +26,7 @@ export default class ParamEditModalView extends Component {
               <Field name="value" component={FormInput} label="Value"/>
             </div>
           </CardPanel>
-          <SubmitBlock name="Save" onClick={onHide}/>
+          <SubmitBlock name="Save"/>
         </form>
       </Modal>
     )
