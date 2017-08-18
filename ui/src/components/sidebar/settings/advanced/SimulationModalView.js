@@ -5,7 +5,7 @@ import { SubmitBlock, FormInput, Modal, CardPanel } from 'components/modal/parts
 
 export default class SimulationModalView extends React.Component {
   render () {
-    const {onHide, onSubmit, CardPanel} = this.props
+    const {onHide, onSubmit} = this.props
     return (
       <Modal title="Simulation" onRequestClose={onHide}>
         <form onSubmit={onSubmit}>

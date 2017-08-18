@@ -1,6 +1,6 @@
 import React from 'react'
 import { Field } from 'redux-form'
-import { SubmitBlock, FormInput, Modal } from 'components/modal/parts'
+import { SubmitBlock, FormInput, Modal, CardPanel } from 'components/modal/parts'
 
 export default class AgentModalView extends React.Component {
   render () {
@@ -8,10 +8,12 @@ export default class AgentModalView extends React.Component {
     return (
       <Modal title="Agent" onRequestClose={onHide} contentStyle={{width: 350}}>
         <form onSubmit={onSubmit}>
-          <div className="form-column">
-            <Field name="name" component={FormInput} label="Name"/>
-            <Field name="version" component={FormInput} label="Version"/>
-          </div>
+          <CardPanel>
+            <div className="form-column">
+              <Field name="name" component={FormInput} label="Name"/>
+              <Field name="version" component={FormInput} label="Version"/>
+            </div>
+          </CardPanel>
           <SubmitBlock name="Save" onClick={onHide}/>
         </form>
       </Modal>
