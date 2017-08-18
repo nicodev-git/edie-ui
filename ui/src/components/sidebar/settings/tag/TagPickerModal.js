@@ -12,19 +12,19 @@ export default class TagPickerModal extends React.Component {
   }
   onSelectTag (tag) {
     const {selectedTags, selectTag} = this.props
-    if (findIndex(selectedTags, {id: tag.id}) < 0) selectTag([...selectedTags, tag])
+    if (!selectedTags.includes(tag)) selectTag([...selectedTags, tag])
   }
   onDeselectTag (tag) {
     const {selectedTags, selectTag} = this.props
-    selectTag(selectedTags.filter(p => p.id !== tag.id))
+    selectTag(selectedTags.filter(p => p !== tag.id))
   }
   onClickOK () {
     const {selectedTags, onPick, onPickMulti, onClickClose} = this.props
     if (!selectedTags.length) return showAlert('Please select tag.')
     if (onPickMulti) {
-      onPickMulti(selectedTags)
+      onPickMulti(selectedTags.map(p => {name: p}))
     } else if (onPick) {
-      selectedTags.forEach(onPick)
+      selectedTags.map(p => {name: p}).forEach(onPick)
     }
 
     onClickClose()

@@ -39,18 +39,19 @@ export default class TagPickerModalView extends React.Component {
   }
 
   onAdd (addedTag, allTags) {
-    this.props.onSelectTag(addedTag.data)
+    this.props.onSelectTag(addedTag)
   }
 
   onRemove (removedTag, allTags) {
-    this.props.onDeselectTag(removedTag.data)
+    this.props.onDeselectTag(removedTag)
   }
 
   renderContent () {
     const {tags} = this.props
+    if (!tags || !tags.length) return null
     return (
       <Tags
-        sourceTags={tags.map(p => ({label: p.name, data: p}))}
+        sourceTags={tags.map(p => ({label: p.name}))}
         onlyFromSource
         onAdd={this.onAdd.bind(this)}
         onRemove={this.onRemove.bind(this)}
