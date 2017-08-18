@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { assign } from 'lodash'
-import { Field, reduxForm } from 'redux-form'
+import { reduxForm } from 'redux-form'
 import {Step, Stepper, StepLabel} from 'material-ui/Stepper'
 
 import TextInput from './input/TextInput'
@@ -13,8 +13,9 @@ import {wizardConfig} from './WizardConfig'
 import {util} from './WizardUtil'
 import DeviceWizardView from './DeviceWizardView'
 import TagsView from './input/TagsView'
+import CredPickerInput from './input/CredPicker'
 
-import {CardPanel, FormSelect} from 'components/modal/parts'
+import {CardPanel} from 'components/modal/parts'
 
 import CredPicker from 'containers/settings/credentials/CredsPickerContainer'
 
@@ -205,9 +206,11 @@ class DeviceWizard extends Component {
 
   buildCredPicker (config, values) {
     const {credentials} = this.props
-    const options = credentials.map(p => ({label: p.name, value: p.id}))
     return (
-      <Field key="credentialId" name="credentialId" component={FormSelect} className="valign-top mr-dialog" options={options}/>
+      <CredPickerInput
+        credentials={credentials}
+        values={values}
+        config={config}/>
     )
   }
 
