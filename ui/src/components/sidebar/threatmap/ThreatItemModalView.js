@@ -1,5 +1,5 @@
 import React from 'react'
-import { CloseButton } from 'components/modal/parts'
+import { CloseButton, CardPanel } from 'components/modal/parts'
 import {renderEntity} from 'components/common/CellRenderers'
 
 import {Modal} from 'components/modal/parts'
@@ -9,9 +9,11 @@ export default class ThreatItemModalView extends React.Component {
     const {entity, onHide} = this.props
     return (
       <Modal title="Details" onRequestClose={onHide}>
-        <div>
-          {renderEntity(entity)}
-        </div>
+        <CardPanel className="margin-md-bottom">
+          <div>
+            {renderEntity(entity)}
+          </div>
+        </CardPanel>
         <CloseButton onClose={onHide} />
       </Modal>
     )

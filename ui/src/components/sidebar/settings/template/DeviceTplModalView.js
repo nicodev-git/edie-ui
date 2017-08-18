@@ -3,7 +3,7 @@ import { Field } from 'redux-form'
 import {Chip} from 'material-ui'
 
 import { SubmitBlock, FormInput, ImageUploader, FormCheckbox,
-  Monitors, MonitorTemplates, Workflows, Modal } from 'components/modal/parts'
+  Monitors, MonitorTemplates, Workflows, Modal, CardPanel } from 'components/modal/parts'
 import { chipStyles } from 'style/common/materialStyles'
 
 export default class DeviceTplModalView extends Component {
@@ -15,32 +15,34 @@ export default class DeviceTplModalView extends Component {
     } = this.props
     return (
       <form onSubmit={onSubmit}>
-        <div className="form-column mb-none">
-          <Field name="name" component={FormInput} label="Name"/>
-          <Field name="devicetemplategroup" component={FormInput} label="Group"/>
-          <Field name="dashboard" component={FormCheckbox} label="Dashboard"/>
-          <ImageUploader imgUrl={imgUrl} onChange={onChange}/>
-        </div>
+        <CardPanel className="margin-md-bottom">
+          <div className="form-column mb-none">
+            <Field name="name" component={FormInput} label="Name"/>
+            <Field name="devicetemplategroup" component={FormInput} label="Group"/>
+            <Field name="dashboard" component={FormCheckbox} label="Dashboard"/>
+            <ImageUploader imgUrl={imgUrl} onChange={onChange}/>
+          </div>
 
-        <div style={chipStyles.wrapper}>
-          <Chip style={chipStyles.chip} onTouchTap={onClickAddTag} className={onSubmit ? '' : 'hidden'}>
-            <b>+</b>
-          </Chip>
-          {tags.map((t, i) =>
-            <Chip key={i} style={chipStyles.chip} onRequestDelete={() => onClickDeleteTag(i)}>{t}</Chip>
-          )}
-        </div>
-        <div className="margin-md-top">
-          <div className="col-md-6 ml-none pl-none">
-            <div><b>Monitors</b></div>
-            <Monitors monitors={monitors} onEditMonitor={onSubmit ? onEditMonitor : null} onRemoveMonitor={onSubmit ? onRemoveMonitor : null} />
-            <Workflows workflows={workflows} showWfSelectModal={onSubmit ? showWfSelectModal : null} onClickDeleteWf={onSubmit ? onClickDeleteWf : null}/>
+          <div style={chipStyles.wrapper}>
+            <Chip style={chipStyles.chip} onTouchTap={onClickAddTag} className={onSubmit ? '' : 'hidden'}>
+              <b>+</b>
+            </Chip>
+            {tags.map((t, i) =>
+              <Chip key={i} style={chipStyles.chip} onRequestDelete={() => onClickDeleteTag(i)}>{t}</Chip>
+            )}
           </div>
-          <div className="col-md-6 mr-none" style={{maxHeight: '200px', overflow: 'auto'}}>
-            <MonitorTemplates monitors={monitors} monitorTemplates={monitorTemplates} onAddMonitor={onSubmit ? onAddMonitor : null} />
+          <div className="margin-md-top flex-horizontal" style={{height: 250}}>
+            <div className="flex-1">
+              <div><b>Monitors</b></div>
+              <Monitors monitors={monitors} onEditMonitor={onSubmit ? onEditMonitor : null} onRemoveMonitor={onSubmit ? onRemoveMonitor : null} />
+              <Workflows workflows={workflows} showWfSelectModal={onSubmit ? showWfSelectModal : null} onClickDeleteWf={onSubmit ? onClickDeleteWf : null}/>
+            </div>
+            <div className="flex-1" style={{maxHeight: '200px', overflow: 'auto'}}>
+              <MonitorTemplates monitors={monitors} monitorTemplates={monitorTemplates} onAddMonitor={onSubmit ? onAddMonitor : null} />
+            </div>
           </div>
-        </div>
-        {tagModal}
+          {tagModal}
+        </CardPanel>
         {onSubmit && <SubmitBlock name="Save" onClick={onHide}/>}
       </form>
     )

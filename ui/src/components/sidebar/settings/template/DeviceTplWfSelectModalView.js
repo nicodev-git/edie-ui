@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { TwoButtonsBlockCustom, Modal } from 'components/modal/parts'
+import { TwoButtonsBlockCustom, Modal, CardPanel } from 'components/modal/parts'
 
 export default class DeviceTplWfSelectModalView extends React.Component {
   render () {
@@ -10,36 +10,38 @@ export default class DeviceTplWfSelectModalView extends React.Component {
     } = this.props
     return (
       <Modal title="Workflow" onRequestClose={onClickClose}>
-        <div style={{maxHeight: '400px', overflow: 'auto'}}>
-          <table className="table table-hover">
-            <thead>
-            <tr>
-              <th>Category</th>
-              <th>Severity</th>
-              <th>Name</th>
-              <th>Description</th>
-              <th>Version</th>
-            </tr>
-            </thead>
-            <tbody>
-            {
-              workflows.map(w =>
-                <tr
-                  key={w.id}
-                  className={selectedRowWf && selectedRowWf.id === w.id ? 'selected' : ''}
-                  onClick={() => onClickRow(w)}
-                >
-                  <td>{w.category}</td>
-                  <td>{w.severity}</td>
-                  <td>{w.name}</td>
-                  <td>{w.desc}</td>
-                  <td>{w.version}</td>
-                </tr>
-              )
-            }
-            </tbody>
-          </table>
-        </div>
+        <CardPanel className="margin-md-bottom">
+          <div style={{maxHeight: '400px', overflow: 'auto'}}>
+            <table className="table table-hover">
+              <thead>
+              <tr>
+                <th>Category</th>
+                <th>Severity</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Version</th>
+              </tr>
+              </thead>
+              <tbody>
+              {
+                workflows.map(w =>
+                  <tr
+                    key={w.id}
+                    className={selectedRowWf && selectedRowWf.id === w.id ? 'selected' : ''}
+                    onClick={() => onClickRow(w)}
+                  >
+                    <td>{w.category}</td>
+                    <td>{w.severity}</td>
+                    <td>{w.name}</td>
+                    <td>{w.desc}</td>
+                    <td>{w.version}</td>
+                  </tr>
+                )
+              }
+              </tbody>
+            </table>
+          </div>
+        </CardPanel>
         <TwoButtonsBlockCustom name1="Cancel" action1={onClickClose} name2="OK" action2={onClickSave}/>
       </Modal>
     )
