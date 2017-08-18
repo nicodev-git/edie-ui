@@ -2,7 +2,12 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import DeviceWizard from 'components/common/wizard/DeviceWizard'
-import { fetchMonitorTemplates, clearDeviceWizardInitialValues, openDeviceMonitorWizard } from 'actions'
+import {
+  fetchMonitorTemplates,
+  clearDeviceWizardInitialValues,
+  openDeviceMonitorWizard,
+  fetchCredentials
+} from 'actions'
 
 class DeviceWizardContainer extends Component {
   render () {
@@ -15,13 +20,15 @@ class DeviceWizardContainer extends Component {
 export default connect(
   (state, props) => ({
     monitorTemplates: state.settings.monitorTemplates,
-    initialValues: state.devices.wizardInitialValues
+    initialValues: state.devices.wizardInitialValues,
+    credentials: state.settings.credentials
   }),
   dispatch => ({
     ...bindActionCreators({
       fetchMonitorTemplates,
       clearDeviceWizardInitialValues,
-      openDeviceMonitorWizard
+      openDeviceMonitorWizard,
+      fetchCredentials
     }, dispatch)
   })
 )(DeviceWizardContainer)

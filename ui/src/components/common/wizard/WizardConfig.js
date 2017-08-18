@@ -158,19 +158,12 @@ export const wizardConfig = {
           width: MAX_WIDTH,
           name: 'wanip'
         }]
-      }],
-    }, {
-      title: 'Adding Credentials',
-      panels: []
-    }, {
-      title: 'Monitors',
-      panels: [{
+      }, {
+        title: 'Credentials',
         items: [{
-          type: 'monitors',
-          title: 'Monitors'
+          type: 'credpicker'
         }]
-      }]
-
+      }],
     }, {
       title: 'Advanced',
       panels: [{
@@ -186,6 +179,15 @@ export const wizardConfig = {
           name: 'lanip'
         }]
       }]
+    }, {
+      title: 'Monitors',
+      panels: [{
+        items: [{
+          type: 'monitors',
+          title: 'Monitors'
+        }]
+      }]
+
     }]
   },
 

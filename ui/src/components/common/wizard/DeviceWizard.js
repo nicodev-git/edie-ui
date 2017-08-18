@@ -1,12 +1,11 @@
 import React, { Component } from 'react'
 import { assign } from 'lodash'
-import { reduxForm } from 'redux-form'
+import { Field, reduxForm } from 'redux-form'
 import {Step, Stepper, StepLabel} from 'material-ui/Stepper'
 
 import TextInput from './input/TextInput'
 import Checkbox from './input/Checkbox'
 import Combo from './input/Combo'
-import RadioCombo from './input/RadioCombo'
 import MonitorTable from './input/MonitorTable'
 import ParamEditModal from './input/ParamEditModal'
 import ParamList from './input/ParamList'
@@ -15,7 +14,7 @@ import {util} from './WizardUtil'
 import DeviceWizardView from './DeviceWizardView'
 import TagsView from './input/TagsView'
 
-import {CardPanel} from 'components/modal/parts'
+import {CardPanel, FormSelect} from 'components/modal/parts'
 
 import CredPicker from 'containers/settings/credentials/CredsPickerContainer'
 
@@ -42,12 +41,14 @@ class DeviceWizard extends Component {
       'monitors': this.buildMonitors.bind(this),
       'paramlist': this.buildParamList.bind(this),
       'combo': this.buildCombo.bind(this),
-      'row': this.buildRow.bind(this)
+      'row': this.buildRow.bind(this),
+      'credpicker': this.buildCredPicker.bind(this)
     }
   }
 
   componentWillMount () {
     this.props.fetchMonitorTemplates()
+    this.props.fetchCredentials()
   }
 
   handleFormSubmit (formProps) {
@@ -156,17 +157,6 @@ class DeviceWizard extends Component {
       buildLabel={this.buildLabel.bind(this)}/>)
   }
 
-  buildRadioGroup (config, values) {
-    return null
-  }
-
-  buildRadioCombo (config, values) {
-    return (<RadioCombo config={config}
-      values={values}
-      buildLabel={this.buildLabel.bind(this)}
-      buildInput={this.buildInput.bind(this)}/>)
-  }
-
   buildCheck (config, values) {
     return (<Checkbox key={config.name}
       config={config}
@@ -183,9 +173,6 @@ class DeviceWizard extends Component {
           />
       </div>
     )
-  }
-  buildForm (config, values) {
-    return null
   }
 
   buildMonitors (config, values) {
@@ -213,6 +200,14 @@ class DeviceWizard extends Component {
         updateMonitorParams={this.props.updateMonitorParams}
         monitorConfig={this.props.monitorConfig}
       />
+    )
+  }
+
+  buildCredPicker (config, values) {
+    const {credentials} = this.props
+    const options = credentials.map(p => ({label: p.name, value: p.id}))
+    return (
+      <Field key="credentialId" name="credentialId" component={FormSelect} className="valign-top mr-dialog" options={options}/>
     )
   }
 
