@@ -113,7 +113,6 @@ export default class Identities extends React.Component {
               <RaisedButton label="Add" onTouchTap={this.onAddIdentity.bind(this)}/>&nbsp;
               <RaisedButton label="Edit" onTouchTap={this.onEditIdentity.bind(this)}/>&nbsp;
               <RaisedButton label="Remove" onTouchTap={this.onRemoveIdentity.bind(this)}/>&nbsp;
-              <RaisedButton label="Segments" onTouchTap={this.onClickSegments.bind(this)}/>&nbsp;
             </div>
 
             <div className="inline-block">

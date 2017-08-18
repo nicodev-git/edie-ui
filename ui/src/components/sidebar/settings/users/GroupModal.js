@@ -136,51 +136,52 @@ export default class GroupModal extends React.Component {
 
     return (
       <Modal title="Group" onRequestClose={this.onClickClose.bind(this)}>
-        <div className="row form-group margin-md-bottom">
-          <div className="col-xs-12">
-            <label className="control-label">Group Name</label>
-            <input
-              type="text" className="form-control input-sm"
-              style={{width: '30%', marginLeft: '10px', display: 'inline-block'}}
-              defaultValue={group ? group.name : ''}
-              ref="name"
-            />
+        <CardPanel className="margin-md-bottom">
+          <div className="row form-group margin-md-bottom">
+            <div className="col-xs-12">
+              <label className="control-label">Group Name</label>
+              <input
+                type="text" className="form-control input-sm"
+                style={{width: '30%', marginLeft: '10px', display: 'inline-block'}}
+                defaultValue={group ? group.name : ''}
+                ref="name"
+              />
+            </div>
           </div>
-        </div>
 
-        <div style={{maxHeight: '400px', overflow: 'auto'}}>
-          <table className="table table-hover">
-            <thead>
-            <tr>
-              <th />
-              <th>User Name</th>
-              <th>Full Name</th>
-              <th>Email</th>
-              <th>Phone</th>
-            </tr>
-            </thead>
-            <tbody>
-            {
-              this.state.data.map(item =>
-                <tr key={item.id}>
-                  <td className="text-right groupcheck">
-                    <input
-                      type="checkbox"
-                      defaultChecked={group ? (findIndex(group.groupUsers, {userId: item.id}) >= 0) : false}
-                      onChange={this.onChangeCheck.bind(this, item.id)}
-                    />
-                  </td>
-                  <td>{item.username}</td>
-                  <td>{item.fullname}</td>
-                  <td>{item.email}</td>
-                  <td>{item.phone}</td>
-                </tr>
-              )
-            }
-            </tbody>
-          </table>
-        </div>
-
+          <div style={{maxHeight: '400px', overflow: 'auto'}}>
+            <table className="table table-hover">
+              <thead>
+              <tr>
+                <th />
+                <th>User Name</th>
+                <th>Full Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+              </tr>
+              </thead>
+              <tbody>
+              {
+                this.state.data.map(item =>
+                  <tr key={item.id}>
+                    <td className="text-right groupcheck">
+                      <input
+                        type="checkbox"
+                        defaultChecked={group ? (findIndex(group.groupUsers, {userId: item.id}) >= 0) : false}
+                        onChange={this.onChangeCheck.bind(this, item.id)}
+                      />
+                    </td>
+                    <td>{item.username}</td>
+                    <td>{item.fullname}</td>
+                    <td>{item.email}</td>
+                    <td>{item.phone}</td>
+                  </tr>
+                )
+              }
+              </tbody>
+            </table>
+          </div>
+        </CardPanel>
         <div className="text-right p-none">
           <a href="javascript:;"
             className="btn-primary btn-sm"
