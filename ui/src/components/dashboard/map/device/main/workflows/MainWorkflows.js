@@ -103,6 +103,10 @@ export default class MainWorkflows extends React.Component {
     this.props.removeDeviceWorkflow(selected, this.props.device)
   }
 
+  onClickDuplicate () {
+
+  }
+
   getTable () {
     return this.refs.table
   }
@@ -150,6 +154,8 @@ export default class MainWorkflows extends React.Component {
               <RaisedButton onTouchTap={this.onClickAddSys.bind(this)} label="Add System Workflow"/>&nbsp;
               <RaisedButton onTouchTap={this.onClickEdit.bind(this)} label="Edit"/>&nbsp;
               <RaisedButton onTouchTap={this.onClickRemove.bind(this)} label="Remove"/>
+
+              <RaisedButton onTouchTap={this.onClickDuplicate.bind(this)} label="Duplicate"/>
             </div>
           </div>
         </TabPageHeader>
