@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import {appendComponent, removeComponent} from 'util/Component'
 import { SubHeader, Modal, CardPanel } from '../modal/parts'
-import {TextField, FlatButton} from 'material-ui'
+import {TextField, RaisedButton} from 'material-ui'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import { inputStyle, underlineStyle, buttonStyle, buttonTextStyle } from 'style/common/materialStyles'
 
@@ -52,7 +52,7 @@ export default class Alert extends Component {
     return (
       <MuiThemeProvider>
         <Modal title={this.props.title} contentStyle={{width: 450}} multiCard>
-          <CardPanel>
+          <CardPanel className="margin-md-bottom">
             <SubHeader name={this.props.message}/>
             <div className={`form-column ${this.props.type === TYPE_PROMPT ? '' : 'hidden'}`}>
               <TextField
@@ -64,20 +64,20 @@ export default class Alert extends Component {
                 ref="input"
               />
             </div>
-            <div className="form-buttons alert-buttons">
-              <FlatButton
-                onClick={this.onClickSave.bind(this)}
-                label="Ok"
-                style={buttonStyle}
-                labelStyle={buttonTextStyle}/>
-              <FlatButton
-                className={this.props.type === TYPE_ALERT ? 'hidden' : ''}
-                onClick={this.onClickClose.bind(this)}
-                label="Cancel"
-                style={buttonStyle}
-                labelStyle={buttonTextStyle}/>
-            </div>
           </CardPanel>
+          <div className="form-buttons alert-buttons">
+            <RaisedButton
+              onClick={this.onClickSave.bind(this)}
+              label="Ok"
+              style={buttonStyle}
+              labelStyle={buttonTextStyle}/>
+            <RaisedButton
+              className={this.props.type === TYPE_ALERT ? 'hidden' : ''}
+              onClick={this.onClickClose.bind(this)}
+              label="Cancel"
+              style={buttonStyle}
+              labelStyle={buttonTextStyle}/>
+          </div>
         </Modal>
       </MuiThemeProvider>
     )

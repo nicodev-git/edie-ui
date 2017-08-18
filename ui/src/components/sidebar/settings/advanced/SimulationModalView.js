@@ -1,17 +1,19 @@
 import React from 'react'
 import { Field } from 'redux-form'
 
-import { SubmitBlock, FormInput, Modal } from 'components/modal/parts'
+import { SubmitBlock, FormInput, Modal, CardPanel } from 'components/modal/parts'
 
 export default class SimulationModalView extends React.Component {
   render () {
-    const {onHide, onSubmit} = this.props
+    const {onHide, onSubmit, CardPanel} = this.props
     return (
       <Modal title="Simulation" onRequestClose={onHide}>
         <form onSubmit={onSubmit}>
-          <div className="form-column">
-            <Field name="text" component={FormInput} floatingLabel="Text"/>
-          </div>
+          <CardPanel>
+            <div className="form-column">
+              <Field name="text" component={FormInput} floatingLabel="Text"/>
+            </div>
+          </CardPanel>
           <SubmitBlock name="Send" onClick={onHide}/>
         </form>
       </Modal>
