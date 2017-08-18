@@ -15,6 +15,8 @@ import {util} from './WizardUtil'
 import DeviceWizardView from './DeviceWizardView'
 import TagsView from './input/TagsView'
 
+import {CardPanel} from 'components/modal/parts'
+
 import CredPicker from 'containers/settings/credentials/CredsPickerContainer'
 
 class DeviceWizard extends Component {
@@ -45,13 +47,7 @@ class DeviceWizard extends Component {
   }
 
   componentWillMount () {
-    const hasMonitors = this.state.currentDevice.steps.filter(s =>
-        s.items.filter(i => i.type === 'monitors').length > 0
-    ).length > 0
-
-    if (hasMonitors) {
-      this.props.fetchMonitorTemplates()
-    }
+    this.props.fetchMonitorTemplates()
   }
 
   handleFormSubmit (formProps) {
@@ -114,18 +110,14 @@ class DeviceWizard extends Component {
     const currentDevice = this.state.currentDevice
     const stepConfig = currentDevice.steps[index]
 
-    let items = []
-
-    stepConfig.items.forEach(itemConfig => {
-      let inputs = this.buildInput(itemConfig, this.props.values)
-      if (!inputs) return true
-
-      items = items.concat(inputs)
-    })
-
     return (
       <div key={index} className={`${(index === (this.state.current - 1)) ? ' active' : 'hidden'}`}>
-        {items}
+        {stepConfig.panels.map((panel, pi) =>
+          <CardPanel key={pi} title={panel.title}>
+            {panel.items.map(itemConfig => this.buildInput(itemConfig, this.props.values))}
+          </CardPanel>
+        )}
+
         {index === 1 && canAddTags ? this.renderTags() : null}
       </div>
     )

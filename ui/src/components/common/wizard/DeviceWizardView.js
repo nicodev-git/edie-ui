@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { WizardButtons, Modal, CardPanel } from 'components/modal/parts'
+import { WizardButtons, Modal } from 'components/modal/parts'
 
 export default class DeviceWizardView extends Component {
   render () {
@@ -9,9 +9,7 @@ export default class DeviceWizardView extends Component {
       <Modal className="modal-device-wizard" title={header} onRequestClose={onHide}>
           <form onSubmit={onSubmit}>
             {progressBar}
-            <CardPanel className="margin-md-bottom">
-              {content}
-            </CardPanel>
+            {content}
             <WizardButtons current={current} steps={steps} onClose={onHide}
               onPrev={onPrev} onNext={onNext}/>
           </form>
