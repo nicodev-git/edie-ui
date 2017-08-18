@@ -4,6 +4,7 @@ import { SubHeader, Modal, CardPanel } from '../modal/parts'
 import {TextField, RaisedButton} from 'material-ui'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import { inputStyle, underlineStyle, buttonStyle, buttonTextStyle } from 'style/common/materialStyles'
+import CardLegend from "../modal/parts/CardLegend";
 
 const TYPE_ALERT = 'alert'
 const TYPE_CONFIRM = 'confirm'
@@ -51,30 +52,22 @@ export default class Alert extends Component {
   render () {
     return (
       <MuiThemeProvider>
-        <Modal title={this.props.title} contentStyle={{width: 450}} multiCard>
-          <CardPanel className="margin-md-bottom">
-            <SubHeader name={this.props.message}/>
-            <div className={`form-column ${this.props.type === TYPE_PROMPT ? '' : 'hidden'}`}>
-              <TextField
-                name="input"
-                defaultValue={this.props.default}
-                inputStyle={inputStyle}
-                underlineFocusStyle={underlineStyle}
-                onKeyUp={this.onKeyUp.bind(this)}
-                ref="input"
-              />
-            </div>
-          </CardPanel>
-          <div className="form-buttons alert-buttons">
+        <Modal title={this.props.title} contentStyle={{width: 450}} onRequestClose={this.onClickClose.bind(this)}>
+          <SubHeader name={this.props.message}/>
+          <div className={`form-column ${this.props.type === TYPE_PROMPT ? '' : 'hidden'}`}>
+            <TextField
+              name="input"
+              defaultValue={this.props.default}
+              inputStyle={inputStyle}
+              underlineFocusStyle={underlineStyle}
+              onKeyUp={this.onKeyUp.bind(this)}
+              ref="input"
+            />
+          </div>
+          <div className="form-buttons">
             <RaisedButton
               onClick={this.onClickSave.bind(this)}
-              label="Ok"
-              style={buttonStyle}
-              labelStyle={buttonTextStyle}/>
-            <RaisedButton
-              className={this.props.type === TYPE_ALERT ? 'hidden' : ''}
-              onClick={this.onClickClose.bind(this)}
-              label="Cancel"
+              label="OK"
               style={buttonStyle}
               labelStyle={buttonTextStyle}/>
           </div>

@@ -89,8 +89,7 @@ export default class Maps extends React.Component {
     const selected = this.getMaps().getSelected()
     if (!selected) return showAlert('Please select map.')
 
-    showConfirm(`Click OK to remove the selected item.\nName: ${
-             selected.name}`, (btn) => {
+    showConfirm(`Are you sure that you want to delete map '${selected.name}'?`, (btn) => {
       if (btn !== 'ok') return
 
       this.props.deleteSettingMap(selected)
