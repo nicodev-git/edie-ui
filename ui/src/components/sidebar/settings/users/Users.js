@@ -221,6 +221,7 @@ export default class Users extends React.Component {
 
             <div style={{position: 'absolute', right: '25px'}}>
               <IconMenu
+                className="hidden"
                 iconButtonElement={<RaisedButton label="Group"/>}
                 anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
                 targetOrigin={{horizontal: 'left', vertical: 'top'}}
@@ -228,7 +229,7 @@ export default class Users extends React.Component {
                 <MenuItem primaryText="Add" onTouchTap={this.onAddGroup.bind(this)}/>
                 <MenuItem primaryText="Edit" onTouchTap={this.onClickEditGroup.bind(this)}/>
                 <MenuItem primaryText="Remove" onTouchTap={this.onClickRemoveGroup.bind(this)}/>
-              </IconMenu>
+              </IconMenu>&nbsp;
 
               <IconMenu
                 iconButtonElement={<RaisedButton label="User"/>}
@@ -240,9 +241,9 @@ export default class Users extends React.Component {
                 <MenuItem primaryText="Remove" onTouchTap={this.onRemoveUser.bind(this)}/>
                 <MenuItem primaryText="Change Password" onTouchTap={this.onChangePassword.bind(this)}/>
                 <MenuItem primaryText="Regenerate Pin" onTouchTap={this.onClickPin.bind(this)}/>
-              </IconMenu>
+              </IconMenu>&nbsp;
               <RaisedButton label="Profile" onTouchTap={this.onClickProfile.bind(this)}/>&nbsp;
-              <UserTabs history={this.props.history}/>
+              <UserTabs history={this.props.history}/>&nbsp;
             </div>
           </div>
         </TabPageHeader>

@@ -9,7 +9,7 @@ export default class ProfileModalView extends Component {
     return (
       <Modal title="Profile" onRequestClose={onHide}>
         <form onSubmit={onSubmit}>
-          <CardPanel className="margin-md-bottom">
+          <CardPanel title="Profile" className="margin-md-bottom">
             <ProfileImageUpload imgSrc={imgSrc} onChangeImage={onChangeImage} />
             <div className="form-column">
               <Field name="username" component={FormInput} label="User Name"/>
