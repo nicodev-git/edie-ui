@@ -8,9 +8,20 @@ export default class MonitorPickModalView extends React.Component {
     return (
       <li key={tpl.id} className="web-applet-card">
         <div className="applet-card-body " style={{background: '#2468ff'}}>
-          <div className="padding-md">
-            <img src={`${extImageBaseUrl}${tpl.image}`} alt="" height="48"/><br/>
-            {tpl.name}
+          <div className="content">
+            <div className="card-top">
+              <img src={`${extImageBaseUrl}${tpl.image}`} alt="" height="50"/><br/>
+            </div>
+            <span className="title">
+              {tpl.name}
+            </span>
+            <p className="author">
+              by&nbsp;<span><b>Securegion</b></span>&nbsp;
+              <img alt="Verified" src="/resources/images/common/wizard/verified.svg" />
+            </p>
+          </div>
+          <div className="meta">
+            {tpl.description}&nbsp;
           </div>
         </div>
       </li>

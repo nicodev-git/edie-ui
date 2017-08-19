@@ -169,3 +169,82 @@ div.dropdown-image div:hover {
     width: 100%;
     color: white;
 }
+
+.web-applet-card .content {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-direction: normal;
+    -webkit-box-orient: vertical;
+    -webkit-flex-direction: column;
+    -moz-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-flex: 1;
+    -webkit-flex-grow: 1;
+    -moz-flex-grow: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+    padding: 1.5em;
+}
+
+.web-applet-card .card-top {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    -webkit-justify-content: space-between;
+    -moz-justify-content: space-between;
+    justify-content: space-between;
+}
+
+.web-applet-card .title {
+    display: block;
+    margin: .625em 0;
+    font-size: 1.5em;
+    font-weight: 800;
+    line-height: 1.125;
+    word-wrap: break-word;
+    word-break: normal;
+}
+
+.web-applet-card .author {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flexbox;
+    display: flex;
+    margin-top: auto;
+    margin-bottom: 0;
+    color: rgba(255,255,255,0.6);
+    font-size: .875em;
+    font-weight: 700;
+    line-height: 1.2;
+
+    font-weight: lighter;
+}
+
+.web-applet-card .author b {
+    color: #fff;
+    vertical-align: top;
+    font-weight: 400;
+}
+
+.web-applet-card .meta {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flexbox;
+    display: flex;
+    font-weight: 800;
+    padding: .75em 1.5em;
+    background: rgba(0,0,0,0.2);
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
