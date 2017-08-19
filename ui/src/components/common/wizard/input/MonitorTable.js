@@ -2,9 +2,14 @@ import React, { Component } from 'react'
 import { assign } from 'lodash'
 
 import { CrudButtons } from 'components/modal/parts'
+import AppletCard from 'components/common/AppletCard'
 
 import MonitorWizardContainer from 'containers/shared/wizard/MonitorWizardContainer'
 import MonitorPickModal from './MonitorPickModal'
+
+import { extImageBaseUrl } from 'shared/Global'
+
+const colors = '#2468ff #963484 #222629 #3cba54 #999999 #D1282C'.split(' ')
 
 export default class MonitorTable extends Component {
   constructor (props) {
@@ -112,7 +117,24 @@ export default class MonitorTable extends Component {
 
         <div className="panel-body"
           style={{minHeight: '100px', maxHeight: '350px', overflow: 'auto', padding: '3px'}}>
-          <table className="table dataTable hover">
+
+          <ul className="web-applet-cards">
+            {
+              this.props.monitors.map((item, index) =>
+                <AppletCard
+                  key={index}
+                  className="small"
+                  color={colors[index % colors.length]}
+                  name={item.name}
+                  desc={item.monitortype}
+                  img={`${extImageBaseUrl}${item.image}`}
+                />
+              )
+            }
+          </ul>
+
+
+          <table className="table dataTable hover hidden">
             <thead>
             <tr>
               <th width="5%">Type</th>

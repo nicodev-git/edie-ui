@@ -1,6 +1,7 @@
 import React from 'react'
 
 import { Modal } from 'components/modal/parts'
+import AppletCard from 'components/common/AppletCard'
 import { extImageBaseUrl } from 'shared/Global'
 
 const colors = '#2468ff #963484 #222629 #3cba54 #999999 #D1282C'.split(' ')
@@ -8,25 +9,13 @@ const colors = '#2468ff #963484 #222629 #3cba54 #999999 #D1282C'.split(' ')
 export default class MonitorPickModalView extends React.Component {
   renderTpl (tpl, i) {
     return (
-      <li key={tpl.id} className="web-applet-card">
-        <div className="applet-card-body " style={{background: colors[i % colors.length]}}>
-          <div className="content">
-            <div className="card-top">
-              <img src={`${extImageBaseUrl}${tpl.image}`} alt="" height="50"/><br/>
-            </div>
-            <span className="title">
-              {tpl.description}&nbsp;
-            </span>
-            <p className="author">
-              by&nbsp;<span><b>Securegion</b></span>&nbsp;
-              <img alt="Verified" src="/resources/images/common/wizard/verified.svg" />
-            </p>
-          </div>
-          <div className="meta">
-            {tpl.name}&nbsp;
-          </div>
-        </div>
-      </li>
+      <AppletCard
+        key={tpl.id}
+        color={colors[i % colors.length]}
+        name={tpl.name}
+        desc={tpl.description}
+        img={`${extImageBaseUrl}${tpl.image}`}
+      />
     )
   }
 
