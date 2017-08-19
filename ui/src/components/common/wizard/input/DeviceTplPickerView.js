@@ -20,7 +20,7 @@ export default class DeviceTplPickerView extends React.Component {
   render () {
     const {onHide} = this.props
     return (
-      <Modal title="Devices" onRequestClose={onHide} contentStyle={{width: 818, maxWidth: 'initial'}}>
+      <Modal title="Devices" onRequestClose={onHide} contentStyle={{width: 1058, maxWidth: 'initial'}}>
         <ul className="web-applet-cards" style={{marginTop: 40}}>
           {this.props.deviceTemplates.map(this.renderTpl.bind(this))}
         </ul>

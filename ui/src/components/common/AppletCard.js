@@ -3,9 +3,9 @@ import CloseIcon from 'material-ui/svg-icons/navigation/close'
 
 export default class AppletCard extends React.Component {
   render () {
-    const {name, desc, img, color, className, onClickDelete} = this.props
+    const {name, desc, img, color, className, onClick, onClickDelete} = this.props
     return (
-      <li className={`web-applet-card ${className}`}>
+      <li className={`web-applet-card ${className}`} onClick={onClick}>
         <div className="applet-card-body " style={{background: color}}>
           <div className="content">
             <div className="card-top">

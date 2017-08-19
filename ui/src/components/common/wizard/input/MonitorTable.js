@@ -21,7 +21,7 @@ export default class MonitorTable extends Component {
 
       monitorConfig: null,
       monitorWizardVisible: false,
-      isEditMonitor: false,
+      editMonitor: false,
 
       monitorPickerVisible: false,
       deviceTplPickerVisible: false
@@ -57,7 +57,7 @@ export default class MonitorTable extends Component {
   }
 
   onClickItem (item) {
-    this.setState({ isEditMonitor: false })
+    this.setState({ editMonitor: null, monitorPickerVisible: false })
     this.addMonitor(assign({}, item, {enable: true}))
   }
 
@@ -69,22 +69,18 @@ export default class MonitorTable extends Component {
     this.setState({deviceTplPickerVisible: true})
   }
 
-  onClickEdit (e) {
-    let {selected} = this.state
-    const {monitors} = this.props
-    if (selected < 0) return
-
-    this.setState({ monitorWizardVisible: true, isEditMonitor: true, monitorConfig: monitors[selected] })
-    this.props.openDeviceMonitorWizard(monitors[selected])
+  onClickEditMonitor (monitor) {
+    this.setState({ monitorWizardVisible: true, editMonitor: monitor, monitorConfig: monitor })
+    this.props.openDeviceMonitorWizard(monitor)
   }
 
-  onClickRemove () {
-    // const {monitors, onChanged} = this.props
-    // monitors.splice(selected, 1)
-    // selected = -1
-    // this.setState({selected, monitors})
-    //
-    // onChanged && onChanged(monitors)
+  onClickRemoveMonitor (monitor, e) {
+    const {monitors, onChanged} = this.props
+    const index = monitors.indexOf(monitor)
+    if (index < 0) return
+    monitors.splice(index, 1)
+    onChanged && onChanged(monitors)
+    e.stopPropagation && e.stopPropagation()
   }
 
   addMonitor (monitorConfig) {
@@ -93,13 +89,15 @@ export default class MonitorTable extends Component {
   }
 
   onFinishMonitorWizard (res, params) {
-    const { monitors, onChanged } = this.props
+    let { monitors, onChanged } = this.props
 
-    let {selected, isEditMonitor} = this.state
-    if (isEditMonitor) {
-      monitors[selected] = assign({}, monitors[selected], params)
+    const {editMonitor} = this.state
+    if (editMonitor) {
+      const index = monitors.indexOf(editMonitor)
+      if (index < 0) return
+      monitors[index] = assign({}, editMonitor, params)
     } else {
-      monitors.push(params)
+      monitors = [ ...monitors, params ]
     }
     onChanged && onChanged(monitors)
   }
@@ -113,6 +111,7 @@ export default class MonitorTable extends Component {
     return (
       <MonitorPickModal
         {...this.props}
+        onClick={this.onClickItem.bind(this)}
         onHide={() => this.setState({monitorPickerVisible: false})}
       />
     )
@@ -176,7 +175,8 @@ export default class MonitorTable extends Component {
                     name={item.name}
                     desc={item.monitortype}
                     img={`${extImageBaseUrl}${item.image}`}
-                    onClickDelete={this.onClickRemove.bind(this, item)}
+                    onClick={this.onClickEditMonitor.bind(this, item)}
+                    onClickDelete={this.onClickRemoveMonitor.bind(this, item)}
                   />
                 )
               }

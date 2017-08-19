@@ -9,7 +9,8 @@ import {
   fetchCredTypes,
   fetchCredentials,
 
-  fetchMonitorGroups
+  fetchMonitorGroups,
+  fetchCollectors
 } from 'actions'
 
 class DeviceWizardContainer extends Component {
@@ -24,6 +25,7 @@ export default connect(
   (state, props) => ({
     monitorTemplates: state.settings.monitorTemplates,
     deviceTemplates: state.settings.deviceTemplates,
+    collectors: state.settings.collectors,
     initialValues: state.devices.wizardInitialValues,
     credentials: state.settings.credentials,
     credentialTypes: state.settings.credentialTypes,
@@ -38,7 +40,8 @@ export default connect(
       fetchCredTypes,
       fetchCredentials,
 
-      fetchMonitorGroups
+      fetchMonitorGroups,
+      fetchCollectors
     }, dispatch)
   })
 )(DeviceWizardContainer)
