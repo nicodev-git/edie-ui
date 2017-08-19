@@ -347,3 +347,6 @@ export const gaugeTableViewModes = [{
 }, {
   label: 'Table', value: 'table'
 }]
+
+
+export const appletColors = '#2468ff #963484 #222629 #3cba54 #999999 #D1282C'.split(' ')

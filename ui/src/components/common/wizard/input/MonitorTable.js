@@ -10,9 +10,8 @@ import AppletCard from 'components/common/AppletCard'
 import MonitorWizardContainer from 'containers/shared/wizard/MonitorWizardContainer'
 import MonitorPickModal from './MonitorPickModal'
 
-import { extImageBaseUrl } from 'shared/Global'
-
-const colors = '#2468ff #963484 #222629 #3cba54 #999999 #D1282C'.split(' ')
+import { extImageBaseUrl, appletColors as colors } from 'shared/Global'
+import DeviceTplPicker from "./DeviceTplPicker";
 
 export default class MonitorTable extends Component {
   constructor (props) {
@@ -24,7 +23,8 @@ export default class MonitorTable extends Component {
       monitorWizardVisible: false,
       isEditMonitor: false,
 
-      monitorPickerVisible: false
+      monitorPickerVisible: false,
+      deviceTplPickerVisible: false
     }
   }
 
@@ -63,6 +63,10 @@ export default class MonitorTable extends Component {
 
   onClickAdd (e) {
     this.setState({ monitorPickerVisible: true })
+  }
+
+  onClickAddDevice () {
+    this.setState({deviceTplPickerVisible: true})
   }
 
   onClickEdit (e) {
@@ -110,6 +114,16 @@ export default class MonitorTable extends Component {
       <MonitorPickModal
         {...this.props}
         onHide={() => this.setState({monitorPickerVisible: false})}
+      />
+    )
+  }
+
+  renderDeviceTplPicker () {
+    if (!this.state.deviceTplPickerVisible) return null
+    return (
+      <DeviceTplPicker
+        {...this.props}
+        onHide={() => this.setState({deviceTplPickerVisible: false})}
       />
     )
   }

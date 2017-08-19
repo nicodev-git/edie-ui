@@ -338,20 +338,20 @@ class DeviceWizard extends Component {
     let content = this.buildContent()
     let paramEditModal = this.renderParamEditModal()
     return (
-        <DeviceWizardView
-          header={header}
-          content={content}
-          progressBar={progressBar}
-          current={current}
-          steps={steps}
-          paramEditModal={paramEditModal}
-          onHide={this.closeModal.bind(this)}
-          onPrev={this.onClickPrevious.bind(this)}
-          onNext={this.onClickNext.bind(this)}
-          onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
-          canAddTags={canAddTags}
-          credPicker={this.renderCredPicker()}
-        />
+      <DeviceWizardView
+        header={header}
+        content={content}
+        progressBar={progressBar}
+        current={current}
+        steps={steps}
+        paramEditModal={paramEditModal}
+        onHide={this.closeModal.bind(this)}
+        onPrev={this.onClickPrevious.bind(this)}
+        onNext={this.onClickNext.bind(this)}
+        onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
+        canAddTags={canAddTags}
+        credPicker={this.renderCredPicker()}
+      />
     )
   }
 }
