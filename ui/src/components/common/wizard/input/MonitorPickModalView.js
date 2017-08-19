@@ -3,17 +3,19 @@ import React from 'react'
 import { Modal } from 'components/modal/parts'
 import { extImageBaseUrl } from 'shared/Global'
 
+const colors = '#2468ff #963484 #222629 #3cba54 #999999 #D1282C'.split(' ')
+
 export default class MonitorPickModalView extends React.Component {
-  renderTpl (tpl) {
+  renderTpl (tpl, i) {
     return (
       <li key={tpl.id} className="web-applet-card">
-        <div className="applet-card-body " style={{background: '#2468ff'}}>
+        <div className="applet-card-body " style={{background: colors[i % colors.length]}}>
           <div className="content">
             <div className="card-top">
               <img src={`${extImageBaseUrl}${tpl.image}`} alt="" height="50"/><br/>
             </div>
             <span className="title">
-              {tpl.name}
+              {tpl.description}&nbsp;
             </span>
             <p className="author">
               by&nbsp;<span><b>Securegion</b></span>&nbsp;
@@ -21,7 +23,7 @@ export default class MonitorPickModalView extends React.Component {
             </p>
           </div>
           <div className="meta">
-            {tpl.description}&nbsp;
+            {tpl.name}&nbsp;
           </div>
         </div>
       </li>
@@ -31,8 +33,8 @@ export default class MonitorPickModalView extends React.Component {
   render () {
     const {onHide} = this.props
     return (
-      <Modal title="Monitors" onRequestClose={onHide} contentStyle={{width: 1000, maxWidth: 'initial'}}>
-        <ul className="web-applet-cards">
+      <Modal title="Monitors" onRequestClose={onHide} contentStyle={{width: 1112, maxWidth: 'initial'}}>
+        <ul className="web-applet-cards" style={{marginTop: 40}}>
           {this.props.templates.map(this.renderTpl.bind(this))}
         </ul>
       </Modal>
