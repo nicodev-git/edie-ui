@@ -56,7 +56,7 @@ function getRemoveAfter (monitor) {
 export default connect(
   state => ({
     initialValues: {
-      agentType: state.dashboard.selectedDevice.agent ? 'agent' : 'collector',
+      agentType: state.dashboard.selectedDevice && state.dashboard.selectedDevice.agent ? 'agent' : 'collector',
       collectorId: state.settings.collectors.length ? state.settings.collectors[0].id : '',
       // credentialId: (state.dashboard.selectedDevice.credentials || []).length ? state.dashboard.selectedDevice.credentials[0].id : '',
 

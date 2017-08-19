@@ -37,6 +37,8 @@ class MonitorWizard extends React.Component {
     const {monitorConfig, selectedDevice, collectors} = this.props
     const credTypes = monitorConfig.credentialTypes || []
 
+    if (!selectedDevice) return true
+
     //Step 1
     if (selectedDevice.agent) return false
 
@@ -61,7 +63,7 @@ class MonitorWizard extends React.Component {
         return
       }
     } else if (values.agentType === 'agent') {
-      if (!selectedDevice.agent) {
+      if (selectedDevice && !selectedDevice.agent) {
         showAlert('Please install agent.')
         return
       }
@@ -132,7 +134,7 @@ class MonitorWizard extends React.Component {
     const {monitorConfig, credentials, selectedDevice} = this.props
     const credentialTypes = monitorConfig.credentialTypes || []
     return (credentials || []).filter(p =>
-      (p.global || (p.deviceIds || []).indexOf(selectedDevice.id) >= 0) &&
+      (p.global || !selectedDevice || (p.deviceIds || []).indexOf(selectedDevice.id) >= 0) &&
       credentialTypes.indexOf(p.type) >= 0
     ).map(p => ({
       label: p.name,
@@ -193,7 +195,7 @@ class MonitorWizard extends React.Component {
         showAgentType={this.showAgentType(true)}
         collectors={collectors}
 
-        agent={!!selectedDevice.agent}
+        agent={selectedDevice && !!selectedDevice.agent}
 
         isEdit={!!initialValues.uid}
       />

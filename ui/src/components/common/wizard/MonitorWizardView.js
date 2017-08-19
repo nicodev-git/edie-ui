@@ -64,7 +64,7 @@ export default class MonitorWizardView extends React.Component {
                 style={{width: 120}} className="valign-middle"/>
             </div>
 
-            <div className={showAgentType ? '' : 'hidden'}>
+            <div className={showAgentType ? '' : 'hidden'} style={{height: 70}}>
               <Field name="agentType" component={RadioButtonGroup} className="margin-md-top">
                 <RadioButton value="agent" label={agentLabel} className="pull-left" disabled={!agent}/>
                 <RadioButton value="collector" label={collectorLabel} className="pull-left" style={{width: 120, marginTop: 14}}/>
