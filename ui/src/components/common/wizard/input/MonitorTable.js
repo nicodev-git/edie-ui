@@ -120,7 +120,7 @@ export default class MonitorTable extends Component {
   render () {
     return (
       <CardPanel title="Monitors" tools={this.renderTools()}>
-        <div style={{minHeight: '100px', maxHeight: '350px', overflow: 'auto', padding: '3px'}}>
+        <div style={{height: '350px', overflow: 'auto', padding: '3px'}}>
           <ul className="web-applet-cards">
             {
               this.props.monitors.map((item, index) =>
@@ -131,13 +131,11 @@ export default class MonitorTable extends Component {
                   name={item.name}
                   desc={item.monitortype}
                   img={`${extImageBaseUrl}${item.image}`}>
-                  <IconButton onTouchTap={this.onClickEdit.bind(this, item)}>
-                    <CreateIcon size={32}/>
-                  </IconButton>
 
-                  <IconButton onTouchTap={this.onClickRemove.bind(this, item)}>
-                    <DeleteIcon size={32}/>
-                  </IconButton>
+                  <div style={{position: 'absolute', right: 16, bottom: 8}}>
+                    <CreateIcon color="white" size={32} onTouchTap={this.onClickEdit.bind(this, item)}/>
+                    <DeleteIcon color="white" size={32} onTouchTap={this.onClickRemove.bind(this, item)}/>
+                  </div>
                 </AppletCard>
               )
             }

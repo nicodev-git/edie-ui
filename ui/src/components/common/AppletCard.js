@@ -20,6 +20,7 @@ export default class AppletCard extends React.Component {
           </div>
           <div className="meta">
             {name}&nbsp;
+            {this.props.children}
           </div>
         </div>
       </li>
