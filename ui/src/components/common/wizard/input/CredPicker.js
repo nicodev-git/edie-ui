@@ -5,8 +5,9 @@ import {FormSelect, FormInput} from 'components/modal/parts'
 
 export default class CredPicker extends React.Component {
   render () {
-    const {credentials} = this.props
+    const {credentials, credentialTypes} = this.props
     const options = credentials.map(p => ({label: p.name, value: p.id}))
+    const typeOptions = credentialTypes.map(p => ({label: p.name, value: p.id}))
     return (
       <div className="flex-horizontal">
         <div style={{paddingTop: 16}}>
@@ -22,6 +23,7 @@ export default class CredPicker extends React.Component {
           <div style={{marginTop: -20}}>
             <Field name="creduser" component={FormInput} className="valign-top mr-dialog" floatingLabel="User" style={{width: 150}}/>
             <Field name="credpassword" component={FormInput} className="valign-top" floatingLabel="Password" style={{width: 150}}/>
+            <Field name="credtype" component={FormInput} className="valign-top" floatingLabel="Type" style={{width: 150}} options={typeOptions}/>
           </div>
         </div>
       </div>

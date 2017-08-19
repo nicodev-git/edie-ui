@@ -6,6 +6,7 @@ import {
   fetchMonitorTemplates,
   clearDeviceWizardInitialValues,
   openDeviceMonitorWizard,
+  fetchCredTypes,
   fetchCredentials
 } from 'actions'
 
@@ -21,13 +22,15 @@ export default connect(
   (state, props) => ({
     monitorTemplates: state.settings.monitorTemplates,
     initialValues: state.devices.wizardInitialValues,
-    credentials: state.settings.credentials
+    credentials: state.settings.credentials,
+    credentialTypes: state.settings.credentialTypes
   }),
   dispatch => ({
     ...bindActionCreators({
       fetchMonitorTemplates,
       clearDeviceWizardInitialValues,
       openDeviceMonitorWizard,
+      fetchCredTypes,
       fetchCredentials
     }, dispatch)
   })

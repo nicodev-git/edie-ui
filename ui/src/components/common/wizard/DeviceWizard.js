@@ -78,10 +78,12 @@ class DeviceWizard extends Component {
 
       }
     } else {
-      if (formProps.creduser) {
+      if (formProps.creduser && formProps.credtype) {
         props.credential = {
           username: formProps.creduser,
           password: formProps.credpassword,
+          global: false,
+          type: formProps.credtype,
           name: `Cred-${props.name || 'device'}`
         }
       }
