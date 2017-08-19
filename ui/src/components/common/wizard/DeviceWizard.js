@@ -208,6 +208,7 @@ class DeviceWizard extends Component {
     const {credentials} = this.props
     return (
       <CredPickerInput
+        key="credentialId"
         credentials={credentials}
         values={values}
         config={config}/>
