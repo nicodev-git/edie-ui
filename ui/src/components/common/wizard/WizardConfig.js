@@ -135,6 +135,16 @@ export const wizardConfig = {
       }
     },
     steps: [{
+      title: 'Monitors',
+      panels: [{
+        skip: true,
+        items: [{
+          type: 'monitors',
+          title: 'Monitors'
+        }]
+      }]
+
+    }, {
       title: 'Settings',
       panels: [{
         title: 'Basic',
@@ -179,16 +189,6 @@ export const wizardConfig = {
           name: 'lanip'
         }]
       }]
-    }, {
-      title: 'Monitors',
-      panels: [{
-        skip: true,
-        items: [{
-          type: 'monitors',
-          title: 'Monitors'
-        }]
-      }]
-
     }]
   },
 

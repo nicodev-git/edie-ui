@@ -115,14 +115,20 @@ export default class MonitorTable extends Component {
   }
 
   render () {
-    const {monitorGroups, onChangeMonitorGroupType} = this.props
+    const {monitorGroups, onChangeMonitorGroupType, allDevices} = this.props
     return (
-      <div>
-        <CardPanel title="Monitor Group" style={{marginTop: -22}}>
+      <div style={{marginTop: -22}}>
+        <CardPanel title="Devices">
+          <Field
+            name="monitorDevice" label="Device" component={FormSelect} options={[]}/>
+        </CardPanel>
+
+        <CardPanel title="Monitor Group">
           <div className="flex-horizontal">
             <div style={{paddingTop: 12}}>
-              <RadioButtonGroup name="monitorGroupType" defaultSelected="new" onChange={(e, value) => onChangeMonitorGroupType(value)}
-                                style={{marginTop: 10}}>
+              <RadioButtonGroup
+                name="monitorGroupType" defaultSelected="new" onChange={(e, value) => onChangeMonitorGroupType(value)}
+                style={{marginTop: 10}}>
                 <RadioButton value="new" label="New" className="pull-left"/>
                 <RadioButton value="existing" label="Existing" className="pull-left" style={{width: 120, marginTop: 14}}/>
               </RadioButtonGroup>
