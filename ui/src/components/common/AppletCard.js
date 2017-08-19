@@ -1,14 +1,18 @@
 import React from 'react'
+import CloseIcon from 'material-ui/svg-icons/navigation/close'
 
 export default class AppletCard extends React.Component {
   render () {
-    const {name, desc, img, color, className} = this.props
+    const {name, desc, img, color, className, onClickDelete} = this.props
     return (
       <li className={`web-applet-card ${className}`}>
         <div className="applet-card-body " style={{background: color}}>
           <div className="content">
             <div className="card-top">
-              <img src={img} alt=""/><br/>
+              <img src={img} alt=""/>
+              <div className="pull-right" style={{marginRight: -10, marginTop: -10}}>
+                {onClickDelete && <CloseIcon size={32} color="white" onTouchTap={onClickDelete}/>}
+              </div>
             </div>
             <span className="title">
               {desc}&nbsp;
@@ -20,7 +24,6 @@ export default class AppletCard extends React.Component {
           </div>
           <div className="meta">
             {name}&nbsp;
-            {this.props.children}
           </div>
         </div>
       </li>

@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import { assign } from 'lodash'
-import DeleteIcon from 'material-ui/svg-icons/action/delete'
 import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
-import CreateIcon from 'material-ui/svg-icons/content/create'
 import {IconButton} from 'material-ui'
 
 import { CardPanel } from 'components/modal/parts'
@@ -76,14 +74,12 @@ export default class MonitorTable extends Component {
   }
 
   onClickRemove () {
-    let {selected} = this.state
-    const {monitors, onChanged} = this.props
-    if (selected < 0) return
-    monitors.splice(selected, 1)
-    selected = -1
-    this.setState({selected, monitors})
-
-    onChanged && onChanged(monitors)
+    // const {monitors, onChanged} = this.props
+    // monitors.splice(selected, 1)
+    // selected = -1
+    // this.setState({selected, monitors})
+    //
+    // onChanged && onChanged(monitors)
   }
 
   addMonitor (monitorConfig) {
@@ -120,7 +116,7 @@ export default class MonitorTable extends Component {
   render () {
     return (
       <CardPanel title="Monitors" tools={this.renderTools()}>
-        <div style={{height: '350px', overflow: 'auto', padding: '3px'}}>
+        <div style={{height: 326, overflow: 'auto', padding: '3px'}}>
           <ul className="web-applet-cards">
             {
               this.props.monitors.map((item, index) =>
@@ -130,13 +126,9 @@ export default class MonitorTable extends Component {
                   color={colors[index % colors.length]}
                   name={item.name}
                   desc={item.monitortype}
-                  img={`${extImageBaseUrl}${item.image}`}>
-
-                  <div style={{position: 'absolute', right: 16, bottom: 8}}>
-                    <CreateIcon color="white" size={32} onTouchTap={this.onClickEdit.bind(this, item)}/>
-                    <DeleteIcon color="white" size={32} onTouchTap={this.onClickRemove.bind(this, item)}/>
-                  </div>
-                </AppletCard>
+                  img={`${extImageBaseUrl}${item.image}`}
+                  onClickDelete={this.onClickRemove.bind(this, item)}
+                />
               )
             }
           </ul>
