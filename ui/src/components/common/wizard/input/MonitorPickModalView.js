@@ -22,7 +22,7 @@ export default class MonitorPickModalView extends React.Component {
   render () {
     const {onHide} = this.props
     return (
-      <Modal title="Monitors" onRequestClose={onHide} contentStyle={{width: 1112, maxWidth: 'initial'}}>
+      <Modal title="Monitors" onRequestClose={onHide} contentStyle={{width: 818, maxWidth: 'initial'}}>
         <ul className="web-applet-cards" style={{marginTop: 40}}>
           {this.props.templates.map(this.renderTpl.bind(this))}
         </ul>

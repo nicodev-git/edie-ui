@@ -150,8 +150,8 @@ div.dropdown-image div:hover {
     -webkit-box-orient: vertical;
     flex-direction: column;
     position: relative;
-    width: 338px;
-    height: 348px;
+    width: 240px;
+    height: 260px;
     padding: .5em;
     text-align: left;
 }
@@ -229,7 +229,7 @@ div.dropdown-image div:hover {
 .web-applet-card .title {
     display: block;
     margin: .625em 0;
-    font-size: 30px;
+    font-size: 20px;
     font-weight: 800;
     line-height: 1.125;
     word-wrap: break-word;
