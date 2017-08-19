@@ -4,7 +4,7 @@ import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
 import {IconButton, RadioButtonGroup, RadioButton} from 'material-ui'
 import {Field} from 'redux-form'
 
-import { CardPanel, FormSelect } from 'components/modal/parts'
+import { CardPanel, FormSelect, FormInput } from 'components/modal/parts'
 import AppletCard from 'components/common/AppletCard'
 
 import MonitorWizardContainer from 'containers/shared/wizard/MonitorWizardContainer'
@@ -118,16 +118,29 @@ export default class MonitorTable extends Component {
     const {monitorGroups, onChangeMonitorGroupType} = this.props
     return (
       <div>
-        <div>
-          <RadioButtonGroup name="monitorGroupType" defaultSelected="new" onChange={(e, value) => onChangeMonitorGroupType(value)}>
-            <RadioButton value="new" label="New" className="pull-left"/>
-            <RadioButton value="existing" label="Existing" className="pull-left" style={{width: 120, marginTop: 14}}/>
-          </RadioButtonGroup>
-          {this.state.monitorGroupType === ''}
-          <Field
-            name="monitorGroup" label="Monitor Group" component={FormSelect}
-            options={monitorGroups.map(p => ({label: p.name, value: p.id}))}/>
-        </div>
+        <CardPanel title="Monitor Group" style={{marginTop: -22}}>
+          <div className="flex-horizontal">
+            <div style={{paddingTop: 12}}>
+              <RadioButtonGroup name="monitorGroupType" defaultSelected="new" onChange={(e, value) => onChangeMonitorGroupType(value)}
+                                style={{marginTop: 10}}>
+                <RadioButton value="new" label="New" className="pull-left"/>
+                <RadioButton value="existing" label="Existing" className="pull-left" style={{width: 120, marginTop: 14}}/>
+              </RadioButtonGroup>
+            </div>
+            <div className="flex-1" style={{paddingLeft: 12}}>
+              <div>
+                <Field name="monitorGroupName" component={FormInput} className="valign-top mr-dialog" floatingLabel="Name" style={{marginTop: -20}}/>
+              </div>
+              <div style={{marginTop: -4}}>
+                <Field
+                  name="monitorGroup" label="Monitor Group" component={FormSelect}
+                  options={monitorGroups.map(p => ({label: p.name, value: p.id}))}/>
+              </div>
+            </div>
+          </div>
+
+
+        </CardPanel>
         <CardPanel title="Monitors" tools={this.renderTools()}>
           <div style={{height: 326, overflow: 'auto', padding: '3px'}}>
             <ul className="web-applet-cards">
