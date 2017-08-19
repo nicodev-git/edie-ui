@@ -1,36 +1,23 @@
 import React, { Component } from 'react'
-import IconMenu from 'material-ui/IconMenu'
-import MenuItem from 'material-ui/MenuItem'
-import IconButton from 'material-ui/IconButton'
-import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
 import { assign } from 'lodash'
 
 import { CrudButtons } from 'components/modal/parts'
-import { buttonStyle, iconStyle } from 'style/common/materialStyles'
 
 import MonitorWizardContainer from 'containers/shared/wizard/MonitorWizardContainer'
+import MonitorPickModal from './MonitorPickModal'
 
 export default class MonitorTable extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      menuHidden: true,
       selected: -1,
 
       monitorConfig: null,
       monitorWizardVisible: false,
-      isEditMonitor: false
+      isEditMonitor: false,
+
+      monitorPickerVisible: false
     }
-  }
-
-  renderMenu () {
-    return this.props.templates.map(item => this.renderMenuItem(item))
-  }
-
-  renderMenuItem (item) {
-    return (
-      <MenuItem key={item.id} primaryText={item.name} onTouchTap={this.onClickItem.bind(this, item)}/>
-    )
   }
 
   renderMonitorWizard () {
@@ -52,12 +39,12 @@ export default class MonitorTable extends Component {
   }
 
   onClickItem (item) {
-    this.setState({ menuHidden: true, isEditMonitor: false })
+    this.setState({ isEditMonitor: false })
     this.addMonitor(assign({}, item, {enable: true}))
   }
 
   onClickAdd (e) {
-    this.setState({ menuHidden: false })
+    this.setState({ monitorPickerVisible: true })
   }
 
   onClickEdit (e) {
@@ -101,28 +88,23 @@ export default class MonitorTable extends Component {
     this.onClickEdit()
   }
 
+  renderMonitorPicker () {
+    if (!this.state.monitorPickerVisible) return null
+    return (
+      <MonitorPickModal
+        {...this.props}
+        onHide={() => this.setState({monitorPickerVisible: false})}
+      />
+    )
+  }
+
   render () {
     return (
       <div className="panel panel-default panel-noborder">
         <div className="monitors-wizard-crud">
           <div className="inline-block">Monitors</div>
-          <IconMenu
-            iconButtonElement={
-              <div className="add-button">
-                <IconButton
-                  style={buttonStyle}
-                  iconStyle={iconStyle}
-                  onTouchTap={this.onClickAdd.bind(this)}>
-                  <AddCircleIcon color="#545454"/>
-                </IconButton>
-              </div>
-            }
-            anchorOrigin={{horizontal: 'right', vertical: 'bottom'}}
-            targetOrigin={{horizontal: 'left', vertical: 'top'}}
-          >
-            {this.renderMenu()}
-          </IconMenu>
           <CrudButtons
+            onAdd={this.onClickAdd.bind(this)}
             onEdit={this.onClickEdit.bind(this)}
             onDelete={this.onClickRemove.bind(this)}
           />
@@ -153,6 +135,7 @@ export default class MonitorTable extends Component {
           </table>
 
           {this.renderMonitorWizard()}
+          {this.renderMonitorPicker()}
         </div>
       </div>
     )
