@@ -112,3 +112,9 @@ export const selectCreds = (creds) => {
     dispatch({type: SELECT_CREDS, creds})
   }
 }
+
+export const addDeviceCredential = (creds, deviceId) => {
+  return dispatch => {
+
+  }
+}

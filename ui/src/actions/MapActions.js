@@ -37,6 +37,8 @@ import { apiError } from './Errors'
 import { ROOT_URL } from './config'
 import {encodeUrlParams} from 'shared/Global'
 
+import {addDeviceCredential} from './CredentialsActions'
+
 export const fetchMaps = (initial) => {
   if (!window.localStorage.getItem('token')) {
     return dispatch => dispatch({ type: NO_AUTH_ERROR })
@@ -302,15 +304,16 @@ const fetchWorkflowIds = (uuids, cb) => {
   })
 }
 
-export const addMapDevice = (props, url) => {
+export const addMapDevice = (props, url, credential) => {
   if (!window.localStorage.getItem('token')) {
     return dispatch => dispatch({ type: NO_AUTH_ERROR })
   }
   return (dispatch) => {
     fetchWorkflowIds(props.workflowids, workflowids => {
-      axios.post(`${ROOT_URL}${url || '/device'}`, assign({}, props, {workflowids}))
-        .then(response => addMapDeviceSuccess(dispatch, response))
-        .catch(error => apiError(dispatch, error))
+      axios.post(`${ROOT_URL}${url || '/device'}`, assign({}, props, {workflowids})).then(response => {
+        addMapDeviceSuccess(dispatch, response)
+        dispatch(addDeviceCredential(credential, response.data.id))
+      }).catch(error => apiError(dispatch, error))
     })
   }
 }

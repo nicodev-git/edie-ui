@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { assign } from 'lodash'
+import { assign, findIndex } from 'lodash'
 import { reduxForm } from 'redux-form'
 import {Step, Stepper, StepLabel} from 'material-ui/Stepper'
 
@@ -72,6 +72,20 @@ class DeviceWizard extends Component {
       }
     )
     if (canAddTags) props.tags = monitorTags || []
+    if (formProps.credentialSelect === 'existing') {
+      const index = findIndex(this.props.credentials, {id: formProps.credentialId})
+      if (index >= 0) {
+
+      }
+    } else {
+      if (formProps.creduser) {
+        props.credential = {
+          username: formProps.creduser,
+          password: formProps.credpassword,
+          name: `Cred-${props.name || 'device'}`
+        }
+      }
+    }
     console.log(props)
     this.closeModal(true)
     onFinish && onFinish(null, props, currentDevice.server.url)
