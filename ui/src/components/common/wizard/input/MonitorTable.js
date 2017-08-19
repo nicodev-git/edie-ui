@@ -81,6 +81,8 @@ export default class MonitorTable extends Component {
     monitors.splice(index, 1)
     onChanged && onChanged(monitors)
     e.stopPropagation && e.stopPropagation()
+    e.preventDefault()
+    return false
   }
 
   addMonitor (monitorConfig) {

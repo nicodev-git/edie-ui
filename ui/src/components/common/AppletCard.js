@@ -5,7 +5,7 @@ export default class AppletCard extends React.Component {
   render () {
     const {name, desc, img, color, className, onClick, onClickDelete} = this.props
     return (
-      <li className={`web-applet-card ${className}`} onClick={onClick}>
+      <li className={`web-applet-card ${className}`}>
         <div className="applet-card-body " style={{background: color}}>
           <div className="content">
             <div className="card-top">
@@ -14,15 +14,15 @@ export default class AppletCard extends React.Component {
                 {onClickDelete && <CloseIcon size={32} color="white" onTouchTap={onClickDelete}/>}
               </div>
             </div>
-            <span className="title">
+            <span className="title" onClick={onClick}>
               {desc}&nbsp;
             </span>
-            <p className="author">
+            <p className="author" onClick={onClick}>
               by&nbsp;<span><b>Securegion</b></span>&nbsp;
               <img alt="Verified" src="/resources/images/common/wizard/verified.svg" />
             </p>
           </div>
-          <div className="meta">
+          <div className="meta" onClick={onClick}>
             {name}&nbsp;
           </div>
         </div>
