@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { assign } from 'lodash'
 import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
-import {IconButton} from 'material-ui'
+import {IconButton, RadioButtonGroup, RadioButton} from 'material-ui'
 import {Field} from 'redux-form'
 
 import { CardPanel, FormSelect } from 'components/modal/parts'
@@ -115,10 +115,15 @@ export default class MonitorTable extends Component {
   }
 
   render () {
-    const {monitorGroups} = this.props
+    const {monitorGroups, onChangeMonitorGroupType} = this.props
     return (
       <div>
         <div>
+          <RadioButtonGroup name="monitorGroupType" defaultSelected="new" onChange={(e, value) => onChangeMonitorGroupType(value)}>
+            <RadioButton value="new" label="New" className="pull-left"/>
+            <RadioButton value="existing" label="Existing" className="pull-left" style={{width: 120, marginTop: 14}}/>
+          </RadioButtonGroup>
+          {this.state.monitorGroupType === ''}
           <Field
             name="monitorGroup" label="Monitor Group" component={FormSelect}
             options={monitorGroups.map(p => ({label: p.name, value: p.id}))}/>

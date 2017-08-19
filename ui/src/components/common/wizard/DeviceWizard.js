@@ -62,6 +62,12 @@ class DeviceWizard extends Component {
     })
   }
 
+  onChangeMonitorGroupType (value) {
+    this.setState({
+      monitorGroupType: value
+    })
+  }
+
   handleFormSubmit (formProps) {
     const { extraParams, onFinish, editParams, canAddTags, monitorTags } = this.props
     const { monitors, currentDevice } = this.state
@@ -218,6 +224,8 @@ class DeviceWizard extends Component {
       config={config}
       monitorGroups={this.props.monitorGroups}
       openDeviceMonitorWizard={this.props.openDeviceMonitorWizard}
+      monitorGroupType={this.state.monitorGroupType}
+      onChangeMonitorGroupType={this.onChangeMonitorGroupType.bind(this)}
     />)
   }
 
