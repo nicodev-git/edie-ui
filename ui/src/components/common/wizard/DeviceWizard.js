@@ -225,6 +225,7 @@ class DeviceWizard extends Component {
       monitorGroups={this.props.monitorGroups}
       openDeviceMonitorWizard={this.props.openDeviceMonitorWizard}
       monitorGroupType={this.state.monitorGroupType}
+      deviceTemplates={this.props.deviceTemplates}
       onChangeMonitorGroupType={this.onChangeMonitorGroupType.bind(this)}
     />)
   }

@@ -134,7 +134,10 @@ export default class MonitorTable extends Component {
       <div style={{marginTop: -22}}>
         <CardPanel title="Devices">
           <Field
-            name="monitorDevice" label="Device" component={FormSelect} options={[]}/>
+            name="monitorDevice" label="Device" component={FormSelect} options={[]} className="valign-top"/>
+          <IconButton onTouchTap={this.onClickAddDevice.bind(this)} className="valign-top">
+            <AddCircleIcon size={32}/>
+          </IconButton>
         </CardPanel>
 
         <CardPanel title="Monitor Group">
@@ -204,6 +207,7 @@ export default class MonitorTable extends Component {
 
             {this.renderMonitorWizard()}
             {this.renderMonitorPicker()}
+            {this.renderDeviceTplPicker()}
           </div>
         </CardPanel>
       </div>

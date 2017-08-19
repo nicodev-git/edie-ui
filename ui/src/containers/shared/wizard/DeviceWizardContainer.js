@@ -23,6 +23,7 @@ class DeviceWizardContainer extends Component {
 export default connect(
   (state, props) => ({
     monitorTemplates: state.settings.monitorTemplates,
+    deviceTemplates: state.settings.deviceTemplates,
     initialValues: state.devices.wizardInitialValues,
     credentials: state.settings.credentials,
     credentialTypes: state.settings.credentialTypes,
