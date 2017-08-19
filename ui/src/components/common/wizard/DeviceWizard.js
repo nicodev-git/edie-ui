@@ -50,6 +50,7 @@ class DeviceWizard extends Component {
   componentWillMount () {
     this.props.fetchMonitorTemplates()
     this.props.fetchCredentials()
+    this.props.fetchCredTypes()
   }
 
   handleFormSubmit (formProps) {
@@ -75,7 +76,7 @@ class DeviceWizard extends Component {
     if (formProps.credentialSelect === 'existing') {
       const index = findIndex(this.props.credentials, {id: formProps.credentialId})
       if (index >= 0) {
-
+        props.credential = this.props.credentials[index]
       }
     } else {
       if (formProps.creduser && formProps.credtype) {
@@ -89,8 +90,8 @@ class DeviceWizard extends Component {
       }
     }
     console.log(props)
-    this.closeModal(true)
-    onFinish && onFinish(null, props, currentDevice.server.url)
+    // this.closeModal(true)
+    // onFinish && onFinish(null, props, currentDevice.server.url)
   }
 
   buildProgressBar () {
@@ -221,11 +222,12 @@ class DeviceWizard extends Component {
   }
 
   buildCredPicker (config, values) {
-    const {credentials} = this.props
+    const {credentials, credentialTypes} = this.props
     return (
       <CredPickerInput
         key="credentialId"
         credentials={credentials}
+        credentialTypes={credentialTypes}
         values={values}
         config={config}/>
     )
