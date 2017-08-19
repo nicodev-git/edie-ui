@@ -5,7 +5,7 @@ import IconButton from 'material-ui/IconButton'
 import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
 import { assign } from 'lodash'
 
-import { SubHeader, CrudButtons } from 'components/modal/parts'
+import { CrudButtons } from 'components/modal/parts'
 import { buttonStyle, iconStyle } from 'style/common/materialStyles'
 
 import MonitorWizardContainer from 'containers/shared/wizard/MonitorWizardContainer'
@@ -105,7 +105,7 @@ export default class MonitorTable extends Component {
     return (
       <div className="panel panel-default panel-noborder">
         <div className="monitors-wizard-crud">
-          <SubHeader name="Monitors"/>
+          <div className="inline-block">Monitors</div>
           <IconMenu
             iconButtonElement={
               <div className="add-button">

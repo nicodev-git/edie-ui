@@ -14,7 +14,7 @@ export default class DeviceMenu extends React.Component {
         items: []
       }],
 
-      activePanel: 2
+      activePanel: 1
     }
   }
 
