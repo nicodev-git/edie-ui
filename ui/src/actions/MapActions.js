@@ -304,7 +304,7 @@ const fetchWorkflowIds = (uuids, cb) => {
   })
 }
 
-export const addMapDevice = (props, url, credential) => {
+export const addMapDevice = (props, url) => {
   if (!window.localStorage.getItem('token')) {
     return dispatch => dispatch({ type: NO_AUTH_ERROR })
   }
@@ -312,7 +312,7 @@ export const addMapDevice = (props, url, credential) => {
     fetchWorkflowIds(props.workflowids, workflowids => {
       axios.post(`${ROOT_URL}${url || '/device'}`, assign({}, props, {workflowids})).then(response => {
         addMapDeviceSuccess(dispatch, response)
-        dispatch(addDeviceCredential(credential, response.data.id))
+        dispatch(addDeviceCredential(props.credential, response.data.id))
       }).catch(error => apiError(dispatch, error))
     })
   }

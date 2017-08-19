@@ -115,6 +115,18 @@ export const selectCreds = (creds) => {
 
 export const addDeviceCredential = (creds, deviceId) => {
   return dispatch => {
-
+    if (!creds) return
+    creds.deviceIds = creds.deviceIds || []
+    if (creds.id) {
+      dispatch(updateCredentials({
+        ...creds,
+        deviceIds: [...creds.deviceIds, deviceId]
+      }))
+    } else {
+      dispatch(addCredentials({
+        ...creds,
+        deviceIds: [...creds.deviceIds, deviceId]
+      }))
+    }
   }
 }

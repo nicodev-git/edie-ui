@@ -98,8 +98,8 @@ class DeviceWizard extends Component {
       }
     }
     console.log(props)
-    // this.closeModal(true)
-    // onFinish && onFinish(null, props, currentDevice.server.url)
+    this.closeModal(true)
+    onFinish && onFinish(null, props, currentDevice.server.url)
   }
 
   buildProgressBar () {

@@ -7,7 +7,7 @@ export default class CredPicker extends React.Component {
   render () {
     const {credentials, credentialTypes, onChangeCredential} = this.props
     const options = credentials.map(p => ({label: p.name, value: p.id}))
-    const typeOptions = credentialTypes.map(p => ({label: p.name, value: p.id}))
+    const typeOptions = credentialTypes.map(p => ({label: p.name, value: p.name}))
     return (
       <div className="flex-horizontal">
         <div style={{paddingTop: 16}}>
