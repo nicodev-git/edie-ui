@@ -53,6 +53,7 @@ class DeviceWizard extends Component {
     this.props.fetchMonitorTemplates()
     this.props.fetchCredentials()
     this.props.fetchCredTypes()
+    this.props.fetchMonitorGroups()
   }
 
   onChangeCredential (value) {
@@ -215,6 +216,7 @@ class DeviceWizard extends Component {
       onChanged={monitors => { this.setState({ monitors }) }}
       values={values}
       config={config}
+      monitorGroups={this.props.monitorGroups}
       openDeviceMonitorWizard={this.props.openDeviceMonitorWizard}
     />)
   }

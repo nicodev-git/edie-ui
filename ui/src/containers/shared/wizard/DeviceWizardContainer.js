@@ -7,7 +7,9 @@ import {
   clearDeviceWizardInitialValues,
   openDeviceMonitorWizard,
   fetchCredTypes,
-  fetchCredentials
+  fetchCredentials,
+
+  fetchMonitorGroups
 } from 'actions'
 
 class DeviceWizardContainer extends Component {
@@ -23,7 +25,9 @@ export default connect(
     monitorTemplates: state.settings.monitorTemplates,
     initialValues: state.devices.wizardInitialValues,
     credentials: state.settings.credentials,
-    credentialTypes: state.settings.credentialTypes
+    credentialTypes: state.settings.credentialTypes,
+
+    monitorGroups: state.settings.monitorGroups
   }),
   dispatch => ({
     ...bindActionCreators({
@@ -31,7 +35,9 @@ export default connect(
       clearDeviceWizardInitialValues,
       openDeviceMonitorWizard,
       fetchCredTypes,
-      fetchCredentials
+      fetchCredentials,
+
+      fetchMonitorGroups
     }, dispatch)
   })
 )(DeviceWizardContainer)
