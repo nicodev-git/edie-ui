@@ -33,7 +33,9 @@ class DeviceWizard extends Component {
       current: 1,
       steps: stepItems.length,
       currentDevice: {...config, steps: stepItems},
-      monitors: props.monitors || []
+      monitors: props.monitors || [],
+
+      credentialSelect: 'existing'
     }
 
     this.mapping = {
@@ -51,6 +53,12 @@ class DeviceWizard extends Component {
     this.props.fetchMonitorTemplates()
     this.props.fetchCredentials()
     this.props.fetchCredTypes()
+  }
+
+  onChangeCredential (value) {
+    this.setState({
+      credentialSelect: value
+    })
   }
 
   handleFormSubmit (formProps) {
@@ -73,7 +81,7 @@ class DeviceWizard extends Component {
       }
     )
     if (canAddTags) props.tags = monitorTags || []
-    if (formProps.credentialSelect === 'existing') {
+    if (this.state.credentialSelect === 'existing') {
       const index = findIndex(this.props.credentials, {id: formProps.credentialId})
       if (index >= 0) {
         props.credential = this.props.credentials[index]
@@ -228,6 +236,7 @@ class DeviceWizard extends Component {
         key="credentialId"
         credentials={credentials}
         credentialTypes={credentialTypes}
+        onChangeCredential={this.onChangeCredential.bind(this)}
         values={values}
         config={config}/>
     )
