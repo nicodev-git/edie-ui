@@ -1,7 +1,11 @@
 import React, { Component } from 'react'
 import { assign } from 'lodash'
+import DeleteIcon from 'material-ui/svg-icons/action/delete'
+import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
+import CreateIcon from 'material-ui/svg-icons/content/create'
+import {IconButton} from 'material-ui'
 
-import { CrudButtons, CardPanel } from 'components/modal/parts'
+import { CardPanel } from 'components/modal/parts'
 import AppletCard from 'components/common/AppletCard'
 
 import MonitorWizardContainer from 'containers/shared/wizard/MonitorWizardContainer'
@@ -23,6 +27,16 @@ export default class MonitorTable extends Component {
 
       monitorPickerVisible: false
     }
+  }
+
+  renderTools () {
+    return (
+      <div className="pull-right" style={{marginTop: -13}}>
+        <IconButton onTouchTap={this.onClickAdd.bind(this)}>
+          <AddCircleIcon size={32}/>
+        </IconButton>
+      </div>
+    )
   }
 
   renderMonitorWizard () {
@@ -105,17 +119,8 @@ export default class MonitorTable extends Component {
 
   render () {
     return (
-      <CardPanel title="Monitors">
-        <div className="monitors-wizard-crud">
-          <CrudButtons
-            onAdd={this.onClickAdd.bind(this)}
-            onEdit={this.onClickEdit.bind(this)}
-            onDelete={this.onClickRemove.bind(this)}
-          />
-        </div>
-
+      <CardPanel title="Monitors" tools={this.renderTools()}>
         <div style={{minHeight: '100px', maxHeight: '350px', overflow: 'auto', padding: '3px'}}>
-
           <ul className="web-applet-cards">
             {
               this.props.monitors.map((item, index) =>
@@ -125,8 +130,15 @@ export default class MonitorTable extends Component {
                   color={colors[index % colors.length]}
                   name={item.name}
                   desc={item.monitortype}
-                  img={`${extImageBaseUrl}${item.image}`}
-                />
+                  img={`${extImageBaseUrl}${item.image}`}>
+                  <IconButton onTouchTap={this.onClickEdit.bind(this, item)}>
+                    <CreateIcon size={32}/>
+                  </IconButton>
+
+                  <IconButton onTouchTap={this.onClickRemove.bind(this, item)}>
+                    <DeleteIcon size={32}/>
+                  </IconButton>
+                </AppletCard>
               )
             }
           </ul>
