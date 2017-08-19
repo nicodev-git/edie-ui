@@ -182,6 +182,7 @@ export const wizardConfig = {
     }, {
       title: 'Monitors',
       panels: [{
+        skip: true,
         items: [{
           type: 'monitors',
           title: 'Monitors'

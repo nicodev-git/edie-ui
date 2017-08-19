@@ -140,9 +140,15 @@ class DeviceWizard extends Component {
     return (
       <div key={index} className={`${(index === (this.state.current - 1)) ? ' active' : 'hidden'}`}>
         {stepConfig.panels.map((panel, pi) =>
-          <CardPanel key={pi} title={panel.title}>
-            {panel.items.map(itemConfig => this.buildInput(itemConfig, this.props.values))}
-          </CardPanel>
+          panel.skip ? (
+            <div key={pi}>
+              {panel.items.map(itemConfig => this.buildInput(itemConfig, this.props.values))}
+            </div>
+          ) : (
+            <CardPanel key={pi} title={panel.title}>
+              {panel.items.map(itemConfig => this.buildInput(itemConfig, this.props.values))}
+            </CardPanel>
+          )
         )}
 
         {index === 1 && canAddTags ? this.renderTags() : null}

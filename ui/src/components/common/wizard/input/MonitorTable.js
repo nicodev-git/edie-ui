@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { assign } from 'lodash'
 
-import { CrudButtons } from 'components/modal/parts'
+import { CrudButtons, CardPanel } from 'components/modal/parts'
 import AppletCard from 'components/common/AppletCard'
 
 import MonitorWizardContainer from 'containers/shared/wizard/MonitorWizardContainer'
@@ -105,9 +105,8 @@ export default class MonitorTable extends Component {
 
   render () {
     return (
-      <div className="panel panel-default panel-noborder">
+      <CardPanel title="Monitors">
         <div className="monitors-wizard-crud">
-          <div className="inline-block">Monitors</div>
           <CrudButtons
             onAdd={this.onClickAdd.bind(this)}
             onEdit={this.onClickEdit.bind(this)}
@@ -115,8 +114,7 @@ export default class MonitorTable extends Component {
           />
         </div>
 
-        <div className="panel-body"
-          style={{minHeight: '100px', maxHeight: '350px', overflow: 'auto', padding: '3px'}}>
+        <div style={{minHeight: '100px', maxHeight: '350px', overflow: 'auto', padding: '3px'}}>
 
           <ul className="web-applet-cards">
             {
@@ -159,7 +157,7 @@ export default class MonitorTable extends Component {
           {this.renderMonitorWizard()}
           {this.renderMonitorPicker()}
         </div>
-      </div>
+      </CardPanel>
     )
   }
 }
