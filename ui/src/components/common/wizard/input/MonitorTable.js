@@ -130,7 +130,7 @@ export default class MonitorTable extends Component {
   }
 
   render () {
-    const {monitorGroups, onChangeMonitorGroupType, allDevices} = this.props
+    const {monitorGroups, onChangeMonitorGroupType} = this.props
     return (
       <div style={{marginTop: -22}}>
         <CardPanel title="Devices">

@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
-// import Tooltip from 'react-tooltip'
-import { WizardButtons, CardPanel } from 'components/modal/parts'
+import { WizardButtons } from 'components/modal/parts'
 
 export default class WorkflowWizard extends Component {
   render () {

@@ -1,11 +1,10 @@
 import React, { Component } from 'react'
 import InlineEdit from 'react-edit-inline'
-import IconButton from 'material-ui/IconButton'
 import DeleteIcon from 'material-ui/svg-icons/action/delete'
 import {Chip} from 'material-ui'
 
 import { CardPanel } from 'components/modal/parts'
-import { buttonStyle, iconStyle, chipStyles } from 'style/common/materialStyles'
+import { chipStyles } from 'style/common/materialStyles'
 
 export default class WorkflowStep2 extends Component {
   render () {

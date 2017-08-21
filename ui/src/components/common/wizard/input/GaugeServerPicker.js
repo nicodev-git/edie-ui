@@ -17,12 +17,18 @@ export default class GaugeServerPicker extends React.Component {
             <div style={{height: height || 300, overflow: 'auto', border: '1px solid gray'}}>
               <table className={`table table-hover ${tableClass}`}>
                 <tbody>
+                <tr>
+                  <td><b>Device</b></td>
+                  <td><b>Monitor</b></td>
+                </tr>
                 {devices.map((p, i) =>
                   <tr key={p.id}>
                     <td
+                      width="50%"
                       className={selectedDevice && selectedDevice.id === p.id ? 'selected' : ''}
                       onClick={() => onSelectDevice(p)}>{p.name}</td>
                     <td
+                      width="50%"
                       className={i < monitors.length && selectedMonitor && selectedMonitor.uid === monitors[i].uid ? 'selected' : ''}
                       onClick={i < monitors.length ? () => onSelectMonitor(monitors[i]) : null}>
                       {i < monitors.length ? monitors[i].name : ''}
@@ -45,6 +51,9 @@ export default class GaugeServerPicker extends React.Component {
             <div style={{height: height || 300, overflow: 'auto', border: '1px solid gray'}}>
               <table className={`table table-hover ${tableClass}`}>
                 <tbody>
+                <tr>
+                  <td><b>Selected</b></td>
+                </tr>
                 {selectedServers.map(p => {
                   let isSel = false
                   if (selectedRight) {

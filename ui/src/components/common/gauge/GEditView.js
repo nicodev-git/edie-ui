@@ -425,7 +425,7 @@ export default class GEditView extends React.Component {
 
         <div>
           <GaugeServerPicker
-            height={200}
+            height={400}
             devices={devices}
             selectedServers={servers}
             selectedDevice={selectedDevice}
