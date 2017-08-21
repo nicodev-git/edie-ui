@@ -104,6 +104,7 @@ class GenericSearch extends React.Component {
     const {q} = parse(this.props.location.search || {})
     let params = assign({}, this.props.params)
 
+    this.props.fetchDevicesGroups()
     this.props.updateSearchViewFilter(viewFilters.standard)
 
     if (q) {
@@ -714,7 +715,7 @@ class GenericSearch extends React.Component {
     )
   }
   render () {
-    const { handleSubmit, selectedWf, params, monitorTemplates, searchTags, queryChips, selectedWfs } = this.props
+    const { handleSubmit, selectedWf, params, monitorTemplates, searchTags, queryChips, selectedWfs, allDevices } = this.props
     const { severity, dateFrom, dateTo, monitorTypes } = params
     const selectedCollections = params.collections
     const workflow = this.props.workflows.filter(m => m.id === selectedWf)
@@ -756,6 +757,7 @@ class GenericSearch extends React.Component {
 
             onClickClear={this.onClickClearSearch.bind(this)}
             onClickToggleFields={this.onClickToggleFields.bind(this)}
+            allDevices={allDevices}
           />
 
           <div className="text-center">

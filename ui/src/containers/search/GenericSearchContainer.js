@@ -64,7 +64,9 @@ import {
   toggleViewCol,
   resetViewCols,
   refreshSearch,
-  collapseSearchFields
+  collapseSearchFields,
+
+  fetchDevicesGroups
 } from 'actions'
 
 class GenericSearchContainer extends React.Component {
@@ -134,7 +136,9 @@ export default connect(
     viewCols: state.search.viewCols,
     searchDraw: state.search.searchDraw,
 
-    searchFieldsVisible: state.search.searchFieldsVisible
+    searchFieldsVisible: state.search.searchFieldsVisible,
+
+    allDevices: state.devices.deviceAndGroups
   }),
   dispatch => ({
     ...bindActionCreators({
@@ -195,7 +199,9 @@ export default connect(
       toggleViewCol,
       resetViewCols,
       refreshSearch,
-      collapseSearchFields
+      collapseSearchFields,
+
+      fetchDevicesGroups
     }, dispatch)
   })
 )(withRouter(GenericSearchContainer))
