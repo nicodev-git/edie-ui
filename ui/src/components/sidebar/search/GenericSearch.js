@@ -15,6 +15,7 @@ import { parseSearchQuery, guid, dateFormat, collections, severities, viewFilter
 import { showConfirm } from 'components/common/Alert'
 import {renderEntity} from 'components/common/CellRenderers'
 import {chipStyles} from 'style/common/materialStyles'
+import {getRanges, getRangeLabel} from 'components/common/DateRangePicker'
 
 import SearchFormView from './SearchFormView'
 import SearchSavePopover from './SearchSavePopover'
@@ -316,12 +317,15 @@ class GenericSearch extends React.Component {
   onClickSaveSearch (values) {
     const { userInfo, params, searchSaveType, viewFilter, viewCols } = this.props
     if (!userInfo) return
+
+    const dateLabel = getRangeLabel(getRanges(), params.dateFrom, params.dateTo)
     const option = {
       id: guid(),
       name: values.name,
       data: JSON.stringify(params),
       viewFilter,
-      viewCols
+      viewCols,
+      dateLabel: dateLabel.label
     }
 
     if (searchSaveType === 'new') {
@@ -336,7 +340,8 @@ class GenericSearch extends React.Component {
         ...options[index],
         data: JSON.stringify(params),
         viewFilter,
-        viewCols
+        viewCols,
+        dateLabel: dateLabel.label
       })
     }
     this.props.closeSearchSavePopover()
@@ -352,6 +357,13 @@ class GenericSearch extends React.Component {
 
     const newQueryChips = parseSearchQuery(found.query || '')
     const params = assign({}, this.props.params, found)
+    if (selectedSearch.dateLabel) {
+      const dateRange = getRanges()[selectedSearch.dateLabel]
+      if (dateRange) {
+        params.dateFrom = dateRange[0].format(dateFormat)
+        params.dateTo = dateRange[1].format(dateFormat)
+      }
+    }
 
     const workflowIds = params.workflow.split(',')
     const workflows = this.props.workflows.filter(p => workflowIds.indexOf(p.id) >= 0)
