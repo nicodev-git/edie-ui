@@ -47,6 +47,7 @@ import {
   UPDATE_REL_DEVICE_FIELDS,
   REFRESH_SEARCH,
   UPDATE_SEARCH_MONITOR,
+  SHOW_SEARCH_MONITOR_MODAL,
 
   SHARE_SAVED_SEARCH,
 
@@ -451,5 +452,11 @@ export const loadSearch = (data, history) => {
     dispatch(resetViewCols())
     dispatch(updateSearchMonitor(''))
     dispatch(updateSearchParams(params, history))
+  }
+}
+
+export const showSearchMonitorModal = (visible) => {
+  return dispatch => {
+    dispatch({type: SHOW_SEARCH_MONITOR_MODAL, visible})
   }
 }

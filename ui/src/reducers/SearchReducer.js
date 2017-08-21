@@ -61,6 +61,7 @@ import {
   TOGGLE_VIEW_COL,
   RESET_VIEW_COLS,
   COLLAPSE_SEARCH_FIELDS,
+  SHOW_SEARCH_MONITOR_MODAL,
 
   UPDATE_SEARCH_MONITOR
 } from 'actions/types'
@@ -250,6 +251,8 @@ export default function (state = initialState, action) {
       return { ...state, searchFieldsVisible: action.visible }
     case UPDATE_SEARCH_MONITOR:
       return { ...state, searchMonitorId: action.monitorId }
+    case SHOW_SEARCH_MONITOR_MODAL:
+      return { ...state, searchMonitorModalOpen: action.visible }
     default:
       return state
   }
