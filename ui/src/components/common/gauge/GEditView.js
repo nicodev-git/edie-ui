@@ -394,6 +394,18 @@ export default class GEditView extends React.Component {
       </div>
     )
   }
+  renderForward () {
+    const {gaugeBoards} = this.props
+    const {forward, forwardBoardId} = this.state
+    return [
+      <div key="forward" className="inline-block nowrap margin-md-right" style={{marginTop: 12}}>
+        <Checkbox label="Forward to dashboard" checked={forward} onCheck={this.onChangeText.bind(this, 'forward')}/>
+      </div>,
+      <SelectField key="forwardBoard" value={forwardBoardId} className="valign-top" onChange={this.onChangeSelect.bind(this, 'forwardBoardId')}>
+        {(gaugeBoards || []).map(p => <MenuItem key={p.id} value={p.id} primaryText={p.name}/>)}
+      </SelectField>
+    ]
+  }
   renderServers () {
     const {gaugeBoards, devices} = this.props
     const {name, itemSize, showDeviceType, forward, forwardBoardId, servers, selectedDevice, selectedRight, selectedMonitor} = this.state
