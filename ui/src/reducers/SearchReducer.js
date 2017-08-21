@@ -60,7 +60,9 @@ import {
   REFRESH_SEARCH,
   TOGGLE_VIEW_COL,
   RESET_VIEW_COLS,
-  COLLAPSE_SEARCH_FIELDS
+  COLLAPSE_SEARCH_FIELDS,
+
+  UPDATE_SEARCH_MONITOR
 } from 'actions/types'
 import { concat } from 'lodash'
 
@@ -245,6 +247,8 @@ export default function (state = initialState, action) {
       return { ...state, viewCols: action.cols || [] }
     case COLLAPSE_SEARCH_FIELDS:
       return { ...state, searchFieldsVisible: action.visible }
+    case UPDATE_SEARCH_MONITOR:
+      return { ...state, searchMonitorId: action.monitorId }
     default:
       return state
   }

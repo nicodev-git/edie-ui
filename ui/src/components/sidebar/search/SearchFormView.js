@@ -67,7 +67,8 @@ export default class SearchFormView extends React.Component {
       onClickToggleFields,
 
       allDevices,
-      monitorId
+      monitorId,
+      onChangeMonitorId
     } = this.props
     return (
       <form onSubmit={onSubmit}>
@@ -143,7 +144,7 @@ export default class SearchFormView extends React.Component {
               menuStyle={{width: 220}}
               hintText="Monitor"
               value={monitorId}
-              onChange={onChangeMonitorType}
+              onChange={onChangeMonitorId}
               className="valign-top"
               style={{width: '180px'}}
             >

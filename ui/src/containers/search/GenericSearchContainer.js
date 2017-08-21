@@ -66,7 +66,8 @@ import {
   refreshSearch,
   collapseSearchFields,
 
-  fetchDevicesGroups
+  fetchDevicesGroups,
+  updateSearchMonitor
 } from 'actions'
 
 class GenericSearchContainer extends React.Component {
@@ -138,7 +139,8 @@ export default connect(
 
     searchFieldsVisible: state.search.searchFieldsVisible,
 
-    allDevices: state.devices.deviceAndGroups
+    allDevices: state.devices.deviceAndGroups,
+    searchMonitorId: state.search.searchMonitorId
   }),
   dispatch => ({
     ...bindActionCreators({
@@ -201,7 +203,8 @@ export default connect(
       refreshSearch,
       collapseSearchFields,
 
-      fetchDevicesGroups
+      fetchDevicesGroups,
+      updateSearchMonitor
     }, dispatch)
   })
 )(withRouter(GenericSearchContainer))

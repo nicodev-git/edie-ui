@@ -523,6 +523,10 @@ class GenericSearch extends React.Component {
     collapseSearchFields(!searchFieldsVisible)
   }
 
+  onChangeMonitorId (e, value) {
+    this.props.updateSearchMonitor(value)
+  }
+
   redrawSearch () {
     // this.props.refreshSearch()
   }
@@ -760,6 +764,7 @@ class GenericSearch extends React.Component {
 
             monitorId={this.props.searchMonitorId}
             allDevices={allDevices}
+            onChangeMonitorId={this.onChangeMonitorId.bind(this)}
           />
 
           <div className="text-center">

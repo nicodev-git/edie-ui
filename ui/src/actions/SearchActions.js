@@ -46,6 +46,7 @@ import {
   UPDATE_SELECTED_SEARCH_FIELDS,
   UPDATE_REL_DEVICE_FIELDS,
   REFRESH_SEARCH,
+  UPDATE_SEARCH_MONITOR,
 
   SHARE_SAVED_SEARCH,
 
@@ -403,6 +404,12 @@ export const resetViewCols = (cols) => {
 export const refreshSearch = () => {
   return dispatch => {
     dispatch({type: REFRESH_SEARCH})
+  }
+}
+
+export const updateSearchMonitor = (monitorId) => {
+  return dispatch => {
+    dispatch({type: UPDATE_SEARCH_MONITOR, monitorId})
   }
 }
 
