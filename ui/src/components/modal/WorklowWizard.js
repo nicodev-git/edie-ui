@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import Tooltip from 'react-tooltip'
-import { WizardButtons } from 'components/modal/parts'
+// import Tooltip from 'react-tooltip'
+import { WizardButtons, CardPanel } from 'components/modal/parts'
 
 export default class WorkflowWizard extends Component {
   render () {
@@ -9,6 +9,7 @@ export default class WorkflowWizard extends Component {
     return (
       <div>
         <div className="wizard-container padding-md m-none">
+          <CardPanel>
           <div className="wizard-progress hidden">
             {markers}
             <div className="progress progress-striped progress-xs" style={{margin: '10px 0'}}>
@@ -16,12 +17,12 @@ export default class WorkflowWizard extends Component {
             </div>
           </div>
           {step}
+          </CardPanel>
           <br/>
           <WizardButtons steps={steps} current={current} onClose={onClose} onPrev={onPrev}
             onNext={onNext} onDiagram={onDiagram} isDiagramButton={isDiagramButton}/>
         </div>
         {diagramModal}
-        <Tooltip place="right" event="mouseover" eventOff="mouseout" multiline effect="solid"/>
       </div>
     )
   }
