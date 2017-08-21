@@ -1,22 +1,29 @@
 import React, { Component } from 'react'
 import InlineEdit from 'react-edit-inline'
 import DeleteIcon from 'material-ui/svg-icons/action/delete'
-import {Chip} from 'material-ui'
+import {Chip, IconButton} from 'material-ui'
 
 import { CardPanel } from 'components/modal/parts'
 import { chipStyles } from 'style/common/materialStyles'
 
 export default class WorkflowStep2 extends Component {
+  renderTools () {
+    const {onRemoveRule} = this.props
+    return (
+      <div className="pull-right" style={{marginTop: -13}}>
+        <IconButton onTouchTap={onRemoveRule}>
+          <DeleteIcon color="#545454" className="link"/>
+        </IconButton>
+      </div>
+    )
+  }
   render () {
     const {
-      onRemoveRule, rules, onRuleChange, onRuleClick, ruleModal, selected,
+      rules, onRuleChange, onRuleClick, ruleModal, selected,
       onClickKeyChip, onClickValueChip
     } = this.props
     return (
-      <CardPanel title="Rules">
-        <div>
-          <DeleteIcon color="#545454" className="link" onTouchTap={onRemoveRule}/>
-        </div>
+      <CardPanel title="Rules" tools={this.renderTools()}>
         <div>
           <div className="pull-left">
             <Chip style={chipStyles.chip} onTouchTap={() => onClickKeyChip('KEY_RAW_DATA')}>
