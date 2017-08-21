@@ -757,6 +757,8 @@ class GenericSearch extends React.Component {
 
             onClickClear={this.onClickClearSearch.bind(this)}
             onClickToggleFields={this.onClickToggleFields.bind(this)}
+
+            monitorId={this.props.searchMonitorId}
             allDevices={allDevices}
           />
 
