@@ -22,8 +22,8 @@ export default class GaugeModalView extends React.Component {
   render () {
     const {title, onHide, editGauge} = this.props
     return (
-      <Modal title={title} onRequestClose={onHide}>
-        <div className="flex-vertical" style={{height: 400}}>
+      <Modal title={title} onRequestClose={onHide} contentStyle={{width: 1000, maxWidth: 'initial'}}>
+        <div className="flex-vertical" style={{height: 600}}>
           {this.renderGauge(editGauge)}
         </div>
       </Modal>
