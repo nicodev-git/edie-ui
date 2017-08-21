@@ -21,7 +21,7 @@ export default class GaugeServerPicker extends React.Component {
                   <td><b>Device</b></td>
                   <td><b>Monitor</b></td>
                 </tr>
-                {devices.map((p, i) =>
+                {(devices || []).map((p, i) =>
                   <tr key={p.id}>
                     <td
                       width="50%"
