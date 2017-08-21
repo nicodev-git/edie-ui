@@ -277,7 +277,7 @@ export default class GEditView extends React.Component {
       resource, savedSearchId,
       duration, durationUnit, splitBy, splitUnit, name
     } = this.state
-    const {searchList, hideDuration, hideSplit} = this.props
+    const {searchList, hideDuration, hideSplit, gauge} = this.props
     return (
       <div>
         <div className="row">
@@ -315,6 +315,8 @@ export default class GEditView extends React.Component {
             </SelectField>
           </div>}
         </div>
+
+        {gauge.templateName === 'Up/Down' ? this.renderForward() : null}
 
         {!hideSplit && resource !== 'monitor' && <div className="row">
           <div className="col-md-3">
@@ -406,9 +408,10 @@ export default class GEditView extends React.Component {
       </SelectField>
     ]
   }
+
   renderServers () {
-    const {gaugeBoards, devices} = this.props
-    const {name, itemSize, showDeviceType, forward, forwardBoardId, servers, selectedDevice, selectedRight, selectedMonitor} = this.state
+    const {devices} = this.props
+    const {name, itemSize, showDeviceType, servers, selectedDevice, selectedRight, selectedMonitor} = this.state
 
     return (
       <div>
@@ -418,12 +421,7 @@ export default class GEditView extends React.Component {
           <MenuItem value="slim" primaryText="Slim"/>
         </SelectField>
         <Checkbox label="Show Device Type" checked={showDeviceType} onCheck={this.onChangeText.bind(this, 'showDeviceType')}/>
-        <div className="inline-block nowrap margin-md-right" style={{marginTop: 12}}>
-          <Checkbox label="Forward to dashboard" checked={forward} onCheck={this.onChangeText.bind(this, 'forward')}/>
-        </div>
-        <SelectField value={forwardBoardId} className="valign-top" onChange={this.onChangeSelect.bind(this, 'forwardBoardId')}>
-          {(gaugeBoards || []).map(p => <MenuItem key={p.id} value={p.id} primaryText={p.name}/>)}
-        </SelectField>
+        {this.renderForward()}
 
         <div>
           <GaugeServerPicker
