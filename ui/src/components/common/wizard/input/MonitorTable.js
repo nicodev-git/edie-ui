@@ -30,7 +30,7 @@ export default class MonitorTable extends Component {
 
   renderTools () {
     return (
-      <div className="pull-right" style={{marginTop: -13}}>
+      <div>
         <IconButton onTouchTap={this.onClickAdd.bind(this)}>
           <AddCircleIcon size={32}/>
         </IconButton>

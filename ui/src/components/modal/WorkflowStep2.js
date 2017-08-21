@@ -10,7 +10,7 @@ export default class WorkflowStep2 extends Component {
   renderTools () {
     const {onRemoveRule} = this.props
     return (
-      <div className="pull-right" style={{marginTop: -13}}>
+      <div>
         <IconButton onTouchTap={onRemoveRule}>
           <DeleteIcon color="#545454" className="link"/>
         </IconButton>

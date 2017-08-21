@@ -11,7 +11,7 @@ export default class BoardListModalView extends React.Component {
   renderTools () {
     const {onClickAdd, onClickSetDefault} = this.props
     return (
-      <div className="pull-right" style={{marginTop: -13}}>
+      <div>
         <IconButton onTouchTap={onClickSetDefault}>
           <SetDefIcon size={32}/>
         </IconButton>
