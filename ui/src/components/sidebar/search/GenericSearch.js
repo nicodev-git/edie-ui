@@ -143,7 +143,8 @@ class GenericSearch extends React.Component {
         severity: 'HIGH,MEDIUM',
         collections: 'incident',
         workflow: '',
-        tag: ''
+        tag: '',
+        monitorId: ''
       })
 
       this.props.updateSearchParams(params, this.props.history)
@@ -511,7 +512,8 @@ class GenericSearch extends React.Component {
       severity: 'HIGH,MEDIUM',
       monitorTypes: '',
       dateFrom: moment().add(-1, 'days').startOf('day').format(dateFormat),
-      dateTo: moment().endOf('day').format(dateFormat)
+      dateTo: moment().endOf('day').format(dateFormat),
+      monitorId: ''
     }), this.props.history)
 
     this.props.change('query', '')
@@ -523,8 +525,10 @@ class GenericSearch extends React.Component {
     collapseSearchFields(!searchFieldsVisible)
   }
 
-  onChangeMonitorId (e, value) {
-    this.props.updateSearchMonitor(value)
+  onChangeMonitorId (e, index, value) {
+    this.props.updateSearchParams(assign({}, this.props.params, {
+      monitorId: value
+    }), this.props.history)
   }
 
   redrawSearch () {
@@ -720,7 +724,7 @@ class GenericSearch extends React.Component {
   }
   render () {
     const { handleSubmit, selectedWf, params, monitorTemplates, searchTags, queryChips, selectedWfs, allDevices } = this.props
-    const { severity, dateFrom, dateTo, monitorTypes } = params
+    const { severity, dateFrom, dateTo, monitorTypes, monitorId } = params
     const selectedCollections = params.collections
     const workflow = this.props.workflows.filter(m => m.id === selectedWf)
 
@@ -762,7 +766,7 @@ class GenericSearch extends React.Component {
             onClickClear={this.onClickClearSearch.bind(this)}
             onClickToggleFields={this.onClickToggleFields.bind(this)}
 
-            monitorId={this.props.searchMonitorId}
+            monitorId={monitorId}
             allDevices={allDevices}
             onChangeMonitorId={this.onChangeMonitorId.bind(this)}
           />

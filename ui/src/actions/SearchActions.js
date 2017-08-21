@@ -449,6 +449,7 @@ export const loadSearch = (data, history) => {
     dispatch(replaceSearchWfs([]))
     dispatch(updateSearchViewFilter(''))
     dispatch(resetViewCols())
+    dispatch(updateSearchMonitor(''))
     dispatch(updateSearchParams(params, history))
   }
 }

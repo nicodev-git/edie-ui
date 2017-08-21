@@ -142,12 +142,12 @@ export default class SearchFormView extends React.Component {
 
             <SelectField
               menuStyle={{width: 220}}
-              hintText="Monitor"
               value={monitorId}
               onChange={onChangeMonitorId}
               className="valign-top"
               style={{width: '180px'}}
             >
+              <MenuItem value="" primaryText="[Any]"/>
               {allDevices.map(device => (device.monitors || []).map(monitor =>
                 <MenuItem key={monitor.uid} value={monitor.uid} primaryText={`${device.name} - ${monitor.name}`}/>
               ))}

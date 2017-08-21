@@ -80,7 +80,8 @@ const initialState = {
     severity: 'HIGH,MEDIUM',
     monitorTypes: '',
     dateFrom: moment().add(-1, 'days').startOf('day').format(dateFormat),
-    dateTo: moment().endOf('day').format(dateFormat)
+    dateTo: moment().endOf('day').format(dateFormat),
+    monitorId: ''
   },
   incidentParams: {
     severity: ['HIGH', 'MEDIUM'],
