@@ -10,6 +10,7 @@ import 'react-resizable/css/styles.css'
 import GaugeWizardContainer from 'containers/shared/wizard/GaugeWizardContainer'
 import { extImageBaseUrl, guid, getWidgetSize, gaugeAspectRatio, layoutCols, layoutRowHeight, layoutWidthZoom, layoutHeightZoom } from 'shared/Global'
 import { wizardConfig } from 'components/common/wizard/WizardConfig'
+import { gaugeEditViewStyle } from 'style/common/materialStyles'
 
 import {showAlert} from 'components/common/Alert'
 
@@ -285,7 +286,7 @@ export default class MainDashboardView extends React.Component {
           onClickMinimize={this.onClickGaugeMinimize.bind(this)}
           onClickMaximize={this.onClickGaugeMaximize.bind(this)}
           onClickModalView={this.onClickGaugeViewModal.bind(this)}
-          style={flip ? {width: 700, height: 400} : {width: '100%', height: '100%'}}
+          style={flip ? gaugeEditViewStyle : {width: '100%', height: '100%'}}
         />
       </div>
     )
