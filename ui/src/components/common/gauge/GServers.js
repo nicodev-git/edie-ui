@@ -90,6 +90,9 @@ export default class GServers extends React.Component {
     }
   }
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  renderMonitorItems () {
+
+  }
   renderItemView(item, total) {
     const {gauge} = this.props
     const isUp = item.status === 'UP'
