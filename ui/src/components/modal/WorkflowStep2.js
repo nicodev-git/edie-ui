@@ -4,7 +4,7 @@ import IconButton from 'material-ui/IconButton'
 import DeleteIcon from 'material-ui/svg-icons/action/delete'
 import {Chip} from 'material-ui'
 
-import { SubHeader } from 'components/modal/parts'
+import { CardPanel } from 'components/modal/parts'
 import { buttonStyle, iconStyle, chipStyles } from 'style/common/materialStyles'
 
 export default class WorkflowStep2 extends Component {
@@ -14,15 +14,9 @@ export default class WorkflowStep2 extends Component {
       onClickKeyChip, onClickValueChip
     } = this.props
     return (
-      <div>
-        <div className="text-plus-icon">
-          <SubHeader name="Rules"/>
-          <IconButton
-            style={buttonStyle}
-            iconStyle={iconStyle}
-            onTouchTap={onRemoveRule}>
-              <DeleteIcon color="#545454"/>
-          </IconButton>
+      <CardPanel title="Rules">
+        <div>
+          <DeleteIcon color="#545454" className="link" onTouchTap={onRemoveRule}/>
         </div>
         <div>
           <div className="pull-left">
@@ -79,7 +73,7 @@ export default class WorkflowStep2 extends Component {
           </table>
         </div>
         {ruleModal}
-      </div>
+      </CardPanel>
     )
   }
 }

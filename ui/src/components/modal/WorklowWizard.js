@@ -9,7 +9,6 @@ export default class WorkflowWizard extends Component {
     return (
       <div>
         <div className="wizard-container padding-md m-none">
-          <CardPanel>
           <div className="wizard-progress hidden">
             {markers}
             <div className="progress progress-striped progress-xs" style={{margin: '10px 0'}}>
@@ -17,7 +16,6 @@ export default class WorkflowWizard extends Component {
             </div>
           </div>
           {step}
-          </CardPanel>
           <br/>
           <WizardButtons steps={steps} current={current} onClose={onClose} onPrev={onPrev}
             onNext={onNext} onDiagram={onDiagram} isDiagramButton={isDiagramButton}/>
