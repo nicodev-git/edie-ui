@@ -90,8 +90,23 @@ export default class GServers extends React.Component {
     }
   }
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  renderMonitorItems () {
-
+  renderMonitorItems (device) {
+    const {gauge} = this.props
+    return (device.monitors || []).map(monitor =>{
+      const isUp = monitor.status === 'UP'
+      return (
+        <div key={monitor.uid} className={`server-cell ${gauge.itemSize === 'slim' ? 'slim' : ''}`}>
+          <div
+            className={`${isUp ? 'bg-success' : 'bg-danger'}`} style={{width: '100%', height: '100%', cursor: 'pointer'}}
+            onClick={this.onClickItem.bind(this, device)}>
+            <div className="div-center text-white">
+              <div>{monitor.name}</div>
+              {gauge.showDeviceType && <div><small>{monitor.monitortype}</small></div>}
+            </div>
+          </div>
+        </div>
+      )
+    })
   }
   renderItemView(item, total) {
     const {gauge} = this.props
@@ -101,7 +116,7 @@ export default class GServers extends React.Component {
     // const col = 100.0 / colCount
     // const rowCount = Math.max(5, Math.ceil(total / colCount))
     // const row = 100.0 / rowCount / (gauge.itemSize === 'slim' ? 2 : 1)
-    return (
+    return [
       <div key={item.id} className={`server-cell ${gauge.itemSize === 'slim' ? 'slim' : ''}`}>
         <div
           className={`${isUp ? 'bg-success' : 'bg-danger'}`} style={{width: '100%', height: '100%', cursor: 'pointer'}}
@@ -111,8 +126,9 @@ export default class GServers extends React.Component {
             {gauge.showDeviceType && <div><small>{item.templateName}</small></div>}
           </div>
         </div>
-      </div>
-    )
+      </div>,
+      ...this.renderMonitorItems(item)
+    ]
   }
   renderFrontView () {
     const items = this.getServers()
