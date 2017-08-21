@@ -81,6 +81,20 @@ export default class GMonitor extends React.Component {
     options.onClickFlip()
   }
 
+  onClick () {
+    const {gauge, selectGaugeBoard} = this.props
+    if (gauge.forward && gauge.forwardBoardId) {
+      if (selectGaugeBoard) {
+        selectGaugeBoard(gauge.forwardBoardId)
+      } else {
+        this.props.history.push({
+          pathname: '/dashboard',
+          search: `id=${gauge.forwardBoardId}`
+        })
+      }
+    }
+  }
+
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   renderFrontView () {
@@ -88,7 +102,7 @@ export default class GMonitor extends React.Component {
     if (gauge.resource === 'logicalgroup') {
       const {monitorGroup} = this.state
       return (
-        <MonitorStatusView isUp={monitorGroup && monitorGroup.status === 'UP'} lastUpdate={0} size={gauge.gaugeSize}/>
+        <MonitorStatusView isUp={monitorGroup && monitorGroup.status === 'UP'} lastUpdate={0} size={gauge.gaugeSize} onClick={this.onClick.bind(this)}/>
       )
     } else {
       if (devices) {
@@ -102,7 +116,7 @@ export default class GMonitor extends React.Component {
       const isUp = monitor.status === 'UP'
       const lastUpdate = isUp ? monitor.lastfalure : monitor.lastsuccess
       return (
-        <MonitorStatusView isUp={isUp} lastUpdate={lastUpdate} size={gauge.gaugeSize}/>
+        <MonitorStatusView isUp={isUp} lastUpdate={lastUpdate} size={gauge.gaugeSize} onClick={this.onClick.bind(this)}/>
       )
     }
 

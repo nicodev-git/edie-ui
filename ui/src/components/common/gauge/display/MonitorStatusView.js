@@ -30,11 +30,11 @@ class MonitorStatusView extends React.Component {
     }
   }
   render () {
-    const {isUp, lastUpdate, hideLabel, title} = this.props
+    const {isUp, lastUpdate, hideLabel, title, onClick} = this.props
     const imgName = `/resources/images/dashboard/map/triangle-${isUp ? 'up' : 'down'}.png`
     const size = this.getSizeInfo()
     return (
-      <div className="text-center" style={containerStyle}>
+      <div className="text-center link" style={containerStyle} onClick={onClick}>
         <div className={`text-ellipsis ${isUp ? 'text-success' : 'text-danger'}`} style={{fontSize: size.iconFont}}>
           <img src={imgName} width={size.icon} alt="" className="valign-top" style={{marginTop: size.mt}}/>
           <span className="margin-md-left">{title || (isUp ? 'Up' : 'Down')}</span>
