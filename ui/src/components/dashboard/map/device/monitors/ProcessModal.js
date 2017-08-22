@@ -53,7 +53,7 @@ export default class ProcessModal extends Component {
     const {process} = this.props
     return (
       <Modal title="Process" onRequestClose={this.onClickClose.bind(this)}>
-        <CardPanel title={`Process: {process.Name}`} className="margin-md-bottom">
+        <CardPanel title={`Process: ${process.Name}`} className="margin-md-bottom">
           <div className="row">
             <label className="col-md-2">ProcessID:</label>
             <label className="col-md-10">{process.Id}</label>

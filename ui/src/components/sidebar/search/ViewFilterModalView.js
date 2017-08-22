@@ -12,7 +12,7 @@ export default class ViewFilterModalView extends React.Component {
     const {onClickOK, onClickClose, selectViewFilter, selectedViewFilter, cols, viewCols} = this.props
     return (
       <Modal title="View Filter" onRequestClose={onClickClose}>
-        <CardPanel className="margin-md-bottom">
+        <CardPanel title="View Filter">
           <Tabs>
             <Tab label="Predefined">
               <table className="table table-hover">
@@ -50,7 +50,7 @@ export default class ViewFilterModalView extends React.Component {
             </Tab>
           </Tabs>
         </CardPanel>
-        <TwoButtonsBlockCustom name1="OK" name2="Cancel" action1={onClickOK} action2={onClickClose}/>
+        <TwoButtonsBlockCustom name2="OK" action2={onClickOK}/>
       </Modal>
     )
   }

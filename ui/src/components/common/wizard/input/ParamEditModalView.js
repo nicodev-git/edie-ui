@@ -9,7 +9,7 @@ export default class ParamEditModalView extends Component {
     return (
       <Modal title="Param" onRequestClose={onHide}>
         <form onSubmit={onSubmit}>
-          <CardPanel className="margin-md-bottom">
+          <CardPanel title="Param">
             <div className="margin-md-bottom" style={styles.wrapper}>
               {defaultKeys.map(k =>
                 <Chip

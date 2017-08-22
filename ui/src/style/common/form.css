@@ -32,10 +32,6 @@
     background-color: #d7d8d9 !important;
 }
 
-.close-block {
-    margin-top: 20px;
-}
-
 .crud-buttons {
     display: flex;
     justify-content: flex-start;

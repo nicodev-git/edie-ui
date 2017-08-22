@@ -8,7 +8,7 @@ export default class DiagramModalView extends Component {
       panel, objectModal} = this.props
     return (
       <Modal title={header} onRequestClose={onHide}>
-        <CardPanel className="margin-md-bottom">
+        <CardPanel title={header}>
           <div className="diagram">
             {dragLayer}
             {toolbar}

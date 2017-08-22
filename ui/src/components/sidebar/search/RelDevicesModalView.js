@@ -23,7 +23,7 @@ export default class RelDevicesModalView extends React.Component {
     } = this.props
     return (
       <Modal title="Relevant Devices" onRequestClose={onHide}>
-        <CardPanel className="margin-md-bottom">
+        <CardPanel title="Relevant Devices" className="margin-md-bottom">
           <div>
             <SelectField
               hintText="Field"

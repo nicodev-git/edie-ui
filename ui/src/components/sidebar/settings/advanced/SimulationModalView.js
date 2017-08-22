@@ -9,7 +9,7 @@ export default class SimulationModalView extends React.Component {
     return (
       <Modal title="Simulation" onRequestClose={onHide}>
         <form onSubmit={onSubmit}>
-          <CardPanel>
+          <CardPanel title="Simulation">
             <div className="form-column">
               <Field name="text" component={FormInput} floatingLabel="Text"/>
             </div>

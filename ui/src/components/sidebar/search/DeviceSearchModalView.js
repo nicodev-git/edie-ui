@@ -11,7 +11,7 @@ export default class DeviceSearchModalView extends Component {
       onSelect, onChange, onRemove} = this.props
     return (
       <Modal title="Device Search" onRequestClose={onHide}>
-        <CardPanel className="margin-md-bottom">
+        <CardPanel title="Device Search">
           <div className="search-modal-container">
             <div className="autocomplete-wrapper">
               <Autocomplete

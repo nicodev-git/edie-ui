@@ -14,7 +14,7 @@ export default class IrrelDevicesModalView extends React.Component {
     const {onHide} = this.props
     return (
       <Modal title="Not Relevant Devices" onRequestClose={onHide}>
-        <CardPanel className="margin-md-bottom">
+        <CardPanel title="Not Relevant Devices">
           <div style={{height: '500px', overflow: 'auto'}}>
             <table className="table table-hover">
               <thead>
@@ -23,7 +23,7 @@ export default class IrrelDevicesModalView extends React.Component {
                 </tr>
               </thead>
               <tbody>
-              {this.renderItems()}
+                {this.renderItems()}
               </tbody>
             </table>
           </div>

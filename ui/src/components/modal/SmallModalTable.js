@@ -5,7 +5,7 @@ import { CloseButton, TwoButtonsBlock, Modal, CardPanel } from 'components/modal
 const SmallModalTable = ({show, header, url, row, height, onHide,
   params, cells, save, onSave, data, useExternal, customWidth}) => (
   <Modal title={header} onRequestClose={onHide}>
-    <CardPanel className="margin-md-bottom">
+    <CardPanel title={header}>
       <div className="small-modal-table">
         <div style={{height: height, overflow: 'auto'}}>
           <InfiniteTable

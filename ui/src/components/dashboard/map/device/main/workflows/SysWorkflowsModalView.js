@@ -17,7 +17,7 @@ export default class SysWorkflowsModalView extends React.Component {
       selectedSysWorkflows} = this.props
     return (
       <Modal title={header} onRequestClose={onClickClose}>
-        <CardPanel className="margin-md-bottom">
+        <CardPanel title={header}>
           <div className="padding-md-left">
             <SelectField
               errorStyle={errorStyle}

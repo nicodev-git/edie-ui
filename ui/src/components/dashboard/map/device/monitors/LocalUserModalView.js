@@ -9,7 +9,7 @@ export default class LocalUserModalView extends React.Component {
     return (
       <Modal title="User" onRequestClose={onClickClose} contentStyle={{width: '600px'}}>
         <form onSubmit={onSubmit}>
-          <CardPanel className="margin-md-bottom">
+          <CardPanel title="User">
             <Field name="username" component={FormInput} type="text" label="User" className="margin-lg-right"/>
             <Field name="userpassword" component={FormInput} type="password" label="Password"/>
           </CardPanel>

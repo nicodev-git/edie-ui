@@ -17,7 +17,7 @@ export default class WorkflowSelectModalView extends React.Component {
     } = this.props
     return (
       <Modal title="Workflow" onRequestClose={onClickClose}>
-        <CardPanel className="margin-md-bottom">
+        <CardPanel title="Workflow">
           <div className="padding-md-left">
             <SelectField
               errorStyle={errorStyle}
@@ -72,7 +72,7 @@ export default class WorkflowSelectModalView extends React.Component {
             </table>
           </div>
         </CardPanel>
-        <TwoButtonsBlockCustom name1="Cancel" action1={onClickClose} name2="OK" action2={onClickOK}/>
+        <TwoButtonsBlockCustom name2="OK" action2={onClickOK}/>
       </Modal>
     )
   }

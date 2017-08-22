@@ -57,7 +57,7 @@ export default class MonitorHistoryModal extends Component {
 
     return (
       <Modal title="Monitor History" onRequestClose={this.onClickClose.bind(this)}>
-        <CardPanel className="margin-md-bottom">
+        <CardPanel title="Monitor History">
           <div className="small-modal-table">
             <div style={{height: '300px', position: 'relative'}}>
               <InfiniteTable

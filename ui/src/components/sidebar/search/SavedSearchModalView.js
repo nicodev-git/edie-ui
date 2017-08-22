@@ -78,7 +78,7 @@ class SavedSearchModalView extends React.Component {
     if (panelMode) return this.renderContent()
     return (
       <Modal title="Saved Search" onRequestClose={onClickClose}>
-        <CardPanel className="margin-md-bottom">
+        <CardPanel title="Saved Search" className="margin-md-bottom">
           {this.renderContent()}
         </CardPanel>
       </Modal>

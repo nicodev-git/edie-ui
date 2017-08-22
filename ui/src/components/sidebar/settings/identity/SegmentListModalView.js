@@ -12,7 +12,7 @@ export default class SegmentListModalView extends Component {
     const {onHide, cells, onAdd, onEdit, onDelete} = this.props
     return (
       <Modal title="Segments" onRequestClose={onHide}>
-        <CardPanel className="margin-md-bottom">
+        <CardPanel title="Segments" className="margin-md-bottom">
           <div className="panel panel-default">
             <div>
               <IconButton

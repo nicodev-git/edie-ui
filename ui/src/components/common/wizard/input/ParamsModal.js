@@ -45,7 +45,7 @@ export default class ParamsModal extends React.Component {
   render () {
     return (
       <Modal title="Params" onRequestClose={this.onClickClose.bind(this)}>
-        <CardPanel className="margin-md-bottom">
+        <CardPanel title="Params">
           <table className="table table-hover">
             <tbody>
             {this.props.editParams.map(p =>
