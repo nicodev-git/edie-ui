@@ -24,7 +24,7 @@ export default class SearchMonitorModalView extends React.Component {
             </table>
           </div>
         </CardPanel>
-        <TwoButtonsBlockCustom name1="OK" action1={onClickOK}/>
+        <TwoButtonsBlockCustom name2="OK" action2={onClickOK}/>
       </Modal>
     )
   }

@@ -538,10 +538,11 @@ class GenericSearch extends React.Component {
     collapseSearchFields(!searchFieldsVisible)
   }
 
-  onChangeMonitorId (e, index, value) {
+  onChangeMonitorId (value) {
     this.props.updateSearchParams(assign({}, this.props.params, {
       monitorId: value
     }), this.props.history)
+    this.props.showSearchMonitorModal(false)
   }
 
   getMonitorName(monitorId) {
@@ -726,7 +727,7 @@ class GenericSearch extends React.Component {
   renderSearchGraphModal () {
     if (!this.props.searchGraphModalOpen) return null
     return (
-      <SearchGraphModal {...this.props}/>
+      <SearchGraphModal {...this.props} onClickOK={this.onChangeMonitorId.bind(this)}/>
     )
   }
 

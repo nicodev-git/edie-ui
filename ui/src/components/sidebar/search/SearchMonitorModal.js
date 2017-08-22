@@ -1,5 +1,7 @@
 import React from 'react'
+
 import SearchMonitorModalView from './SearchMonitorModalView'
+import { showAlert } from 'components/common/Alert'
 
 export default class SearchMonitorModal extends React.Component {
   constructor (props) {
@@ -12,8 +14,14 @@ export default class SearchMonitorModal extends React.Component {
   onClickRow (selected) {
     this.setState({selected})
   }
-  onClickOK () {
 
+  onClickOK () {
+    const {selected} = this.props
+    if (!selected) {
+      showAlert('Please select monitor')
+      return
+    }
+    this.props.onClickOK(selected)
   }
 
   onClickClose () {
