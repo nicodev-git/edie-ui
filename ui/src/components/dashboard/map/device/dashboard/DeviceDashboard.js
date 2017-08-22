@@ -15,39 +15,13 @@ import { wizardConfig } from 'components/common/wizard/WizardConfig'
 
 import {showAlert} from 'components/common/Alert'
 import { ROOT_URL } from 'actions/config'
+import { gaugeEditViewStyle } from 'style/common/materialStyles'
 
-import GLineChart from 'components/common/gauge/GLineChart'
-import GBarChart from 'components/common/gauge/GBarChart'
-import GPieChart from 'components/common/gauge/GPieChart'
-import GMonitor from 'components/common/gauge/GMonitor'
-import GCpu from 'components/common/gauge/GCpu'
-import GMemory from 'components/common/gauge/GMemory'
-import GDisk from 'components/common/gauge/GDisk'
-import GAccelView from 'components/common/gauge/GAccelView'
-import GLiquid from 'components/common/gauge/GLiquid'
-import GIncidentTable from 'components/common/gauge/GIncidentTable'
-import GService from 'components/common/gauge/GService'
-import GMonitors from 'components/common/gauge/GMonitors'
-import GServers from 'components/common/gauge/GServers'
+import GaugeModal from 'components/common/gauge/GaugeModal'
+import GaugeMap from 'components/common/gauge/GaugeMap'
 
 const ResponsiveReactGridLayout = WidthProvider(Responsive)
 
-const gaugeMap = {
-  'Line Chart': GLineChart,
-  'Bar Chart': GBarChart,
-  'Pie Chart': GPieChart,
-  'Monitor': GMonitor,
-  'Up/Down': GMonitor,
-  'Service': GService,
-  'Cpu': GCpu,
-  'Memory': GMemory,
-  'Disk': GDisk,
-  'Accelerometer': GAccelView,
-  'Liquid': GLiquid,
-  'Incident Table': GIncidentTable,
-  'Servers': GServers,
-  'Monitors': GMonitors
-}
 export default class DeviceDashboard extends React.Component {
   constructor (props) {
     super(props)
@@ -244,7 +218,43 @@ export default class DeviceDashboard extends React.Component {
       }
     })
   }
+
+  onClickGaugeMinimize (gauge) {
+    this.props.updateGaugeItem({
+      ...gauge,
+      originalSize: gauge.layout,
+      minimized: true
+    }, this.props.board)
+  }
+
+  onClickGaugeMaximize (gauge) {
+    const {layout, originalSize} = gauge
+    if (layout && originalSize) {
+      layout.w = originalSize.w
+      layout.h = originalSize.h
+    }
+    this.props.updateGaugeItem({
+      ...gauge,
+      layout,
+      minimized: false
+    }, this.props.board)
+  }
+
+  onClickGaugeViewModal (gauge) {
+    this.props.showGaugeModal(true, gauge)
+  }
+
   /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  renderGaugeModal () {
+    if (!this.props.gaugeModalOpen) return null
+    return (
+      <GaugeModal
+        {...this.props}
+        searchList={this.getSearchList()}
+        monitors={this.getMonitors()}/>
+    )
+  }
+
   renderDeviceWizard () {
     if (!this.state.deviceWizardVisible) return null
 
@@ -271,8 +281,9 @@ export default class DeviceDashboard extends React.Component {
   }
 
   renderGauge (p) {
-    let GaugePanel = gaugeMap[p.templateName || 'z']
+    let GaugePanel = GaugeMap[p.templateName || 'z']
     if (!GaugePanel) return <div key={p.id}/>
+    const flip = this.state.flip[p.id]
     return (
       <div key={p.id}>
         <GaugePanel
@@ -281,12 +292,15 @@ export default class DeviceDashboard extends React.Component {
           searchList={this.getSearchList()}
           monitors={this.getMonitors()}
 
-          flip={this.state.flip[p.id]}
+          flip={flip}
           onClickFlip={this.onClickFlip.bind(this, p.id)}
 
           updateDeviceGauge={this.props.updateDeviceGauge}
           removeDeviceGauge={this.props.removeDeviceGauge}
-          style={{width: '100%', height: '100%'}}
+          onClickMinimize={this.onClickGaugeMinimize.bind(this)}
+          onClickMaximize={this.onClickGaugeMaximize.bind(this)}
+          onClickModalView={this.onClickGaugeViewModal.bind(this)}
+          style={flip ? gaugeEditViewStyle : {width: '100%', height: '100%'}}
         />
       </div>
     )
@@ -320,8 +334,8 @@ export default class DeviceDashboard extends React.Component {
     const img = up ? 'green_light.png' : 'yellow_light.png'
     return (
       <div className="pull-left margin-lg-left margin-md-top" data-tip={agentDevice.agent ? moment(agentDevice.agent.lastSeen).fromNow() : ''} data-place="right">
-        <img alt="" src={`/resources/images/dashboard/map/device/monitors/${img}`} width="16"
-             style={{verticalAlign: 'top', marginTop: -1, marginLeft: 5}}/>
+        <img alt="" src={`/resources/images/dashboard/map/device/monitors/${img}`} width="16" className="valign-middle"/>
+        <div className="margin-md-left valign-middle inline-block" style={{fontSize: '20px'}}>{this.props.device.name}</div>
       </div>
     )
   }
@@ -381,6 +395,7 @@ export default class DeviceDashboard extends React.Component {
         </ResponsiveReactGridLayout>
 
         {this.renderDeviceWizard()}
+        {this.renderGaugeModal()}
         <ReactTooltip />
       </div>
     )

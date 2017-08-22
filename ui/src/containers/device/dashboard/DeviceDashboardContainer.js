@@ -15,7 +15,10 @@ import {
   removeDeviceGauge,
 
   fixIncident,
-  ackIncident
+  ackIncident,
+
+  loadSearch,
+  showGaugeModal
 } from 'actions'
 
 class DeviceDashboardContainer extends React.Component {
@@ -40,7 +43,10 @@ export default connect(
     sysSearchOptions: state.search.sysSearchOptions,
     workflows: state.settings.workflows,
 
-    incidentDraw: state.devices.incidentDraw
+    incidentDraw: state.devices.incidentDraw,
+
+    gaugeModalOpen: state.gauge.gaugeModalOpen,
+    editGauge: state.gauge.editGauge
   }), {
     fetchSysSearchOptions,
     fetchWorkflows,
@@ -53,6 +59,9 @@ export default connect(
     removeDeviceGauge,
 
     fixIncident,
-    ackIncident
+    ackIncident,
+
+    loadSearch,
+    showGaugeModal
   }
 )(withRouter(DeviceDashboardContainer))
