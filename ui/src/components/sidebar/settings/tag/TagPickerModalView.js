@@ -3,7 +3,9 @@ import {Chip, Popover} from 'material-ui'
 import {findIndex} from 'lodash'
 import {blue300} from 'material-ui/styles/colors'
 // import Tags from 'react-material-tags'
-import AutoComplete from 'react-autocomplete'
+import Select from 'react-select'
+import 'react-select/dist/react-select.css'
+
 import {TwoButtonsBlockCustom, Modal, CardPanel} from 'components/modal/parts'
 
 import {chipStyles} from 'style/common/materialStyles'
@@ -63,17 +65,10 @@ export default class TagPickerModalView extends React.Component {
     const {tags, value, onChangeValue} = this.props
     if (!tags || !tags.length) return null
     return (
-      <AutoComplete
-        getItemValue={(item) => item.name}
-        items={tags || []}
-        renderItem={(item, isHighlighted) =>
-          <div style={{ background: isHighlighted ? 'lightgray' : 'white' }}>
-            {item.name}
-          </div>
-        }
+      <Select
+        options={(tags || []).map(t => ({label: t.name, value: t.name}))}
         value={value}
-        onChange={(e) => onChangeValue(e.target.value)}
-        onSelect={(val) => {}}
+        onChange={onChangeValue}
       />
     )
   }
@@ -99,7 +94,9 @@ export default class TagPickerModalView extends React.Component {
     return (
       <Modal title="Tags" onRequestClose={onClickClose}>
         <CardPanel title="Tags">
-          {this.renderContent()}
+          <div style={{position: 'relative'}}>
+            {this.renderContent()}
+          </div>
         </CardPanel>
         <TwoButtonsBlockCustom name2="OK" action2={onClickOK}/>
 

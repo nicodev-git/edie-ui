@@ -47,7 +47,7 @@ export default class TagPickerModal extends React.Component {
     return (
       <TagPickerModalView
         {...this.props}
-        value={this.state.value}
+        value={null}
         onChangeValue={value => this.setState({value})}
         onClickAdd={this.onClickAdd.bind(this)}
         onSelectTag={this.onSelectTag.bind(this)}
