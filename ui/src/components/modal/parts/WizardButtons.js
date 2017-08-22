@@ -4,7 +4,6 @@ import { buttonStyle, buttonTextStyle, buttonDisabledStyle } from 'style/common/
 
 const WizardButtons = ({onClose, onDiagram, onPrev, onNext, current, steps, isDiagramButton}) => (
   <div className="text-right mb-none form-buttons">
-    <RaisedButton label="Cancel" onClick={onClose} style={buttonStyle} labelStyle={buttonTextStyle}/>
     { isDiagramButton
     ? (<RaisedButton label="Diagram" onClick={onDiagram} style={buttonStyle} labelStyle={buttonTextStyle}/>) : null}
     {(steps > 1)

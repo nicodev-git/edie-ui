@@ -37,6 +37,11 @@ export default class WorkflowStep1 extends Component {
               <HelpIcon color="#2196f3"/>
             </IconButton>
           </div>
+
+          <ReactTooltip />
+        </CardPanel>
+
+        <CardPanel title="Tags">
           <div style={chipStyles.wrapper}>
             <Chip style={chipStyles.chip} onTouchTap={onClickAddTag}><b>+</b></Chip>
             {tags.map((t, i) =>
@@ -44,7 +49,6 @@ export default class WorkflowStep1 extends Component {
             )}
           </div>
           {tagModal}
-          <ReactTooltip />
         </CardPanel>
       </div>
     )

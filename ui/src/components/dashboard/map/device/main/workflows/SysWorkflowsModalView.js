@@ -67,8 +67,7 @@ export default class SysWorkflowsModalView extends React.Component {
             </table>
           </div>
         </CardPanel>
-        <TwoButtonsBlockCustom name1="Cancel" action1={onClickClose}
-          name2="Add" action2={onClickAdd}/>
+        <TwoButtonsBlockCustom name2="Add" action2={onClickAdd}/>
       </Modal>
     )
   }
