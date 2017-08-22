@@ -101,8 +101,8 @@ export default class TagPickerModalView extends React.Component {
           anchorOrigin={{horizontal: 'right', vertical: 'bottom'}}
           targetOrigin={{horizontal: 'right', vertical: 'top'}}
           onRequestClose={onClickClose}
-          className="padding-md"
-          style={{maxWidth: 800, minWidth: 400, overflowY: 'visible'}}
+          className="padding-md tag-picker"
+          style={{maxWidth: 800, minWidth: 400}}
         >
           {this.renderContent()}
           {this.renderSelected()}

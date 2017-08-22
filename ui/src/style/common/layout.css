@@ -345,3 +345,11 @@ a, a:focus, a:hover {
 .server-cell.slim {
     height: 27px;
 }
+
+.tag-picker .Select-menu-outer {
+    z-index: 999;
+}
+
+.tag-picker > div {
+    overflow: visible !important;
+}
