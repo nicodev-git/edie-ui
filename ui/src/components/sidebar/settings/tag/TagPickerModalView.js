@@ -103,6 +103,7 @@ export default class TagPickerModalView extends React.Component {
           style={{maxWidth: 800}}
         >
           {this.renderContent()}
+          {this.renderSelected()}
           <TwoButtonsBlockCustom name1="Cancel" action1={onClickClose} name2="OK" action2={onClickOK}/>
         </Popover>
       )

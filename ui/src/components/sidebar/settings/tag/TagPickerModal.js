@@ -44,11 +44,11 @@ export default class TagPickerModal extends React.Component {
       })
     })
   }
-  onChangeValue (id) {
+  onChangeValue (p) {
     const {tags} = this.props
-    const index = findIndex(tags, {id})
+    const index = findIndex(tags, {id: p.value})
     if (index < 0) return
-    this.onSelectTag(tags[index])
+    this.onSelectTag(tags[index].name)
   }
   render () {
     return (
