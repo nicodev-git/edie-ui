@@ -141,7 +141,7 @@ class SimulationModal extends React.Component {
     return (
       <Modal title="Simulation" onRequestClose={this.onClickClose.bind(this)}>
         <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
-          <CardPanel className="margin-md-bottom">
+          <CardPanel title="Simulation">
           <div className="form-column">
             <Field name="text" component={FormInput} type="text" label="Text"/>
           </div>

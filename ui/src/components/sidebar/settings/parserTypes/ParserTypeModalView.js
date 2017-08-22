@@ -5,8 +5,8 @@ import InlineEdit from 'react-edit-inline'
 import { Field } from 'redux-form'
 import {Chip} from 'material-ui'
 
-import { SubHeader, SubmitBlock, FormInput, FormSelect, Modal, CardPanel } from 'components/modal/parts'
-import { buttonStyle, iconStyle, chipStyles } from 'style/common/materialStyles'
+import { SubmitBlock, FormInput, FormSelect, Modal, CardPanel } from 'components/modal/parts'
+import { chipStyles } from 'style/common/materialStyles'
 
 export default class ParserTypeModalView extends Component {
   render () {
@@ -16,7 +16,7 @@ export default class ParserTypeModalView extends Component {
     return (
       <Modal title={header} onRequestClose={onHide}>
         <form onSubmit={onSubmit}>
-          <CardPanel className="margin-md-bottom">
+          <CardPanel title={header}>
             <div className="form-column">
               <Field name="name" component={FormInput} label="name"/>
               <div>
@@ -26,23 +26,24 @@ export default class ParserTypeModalView extends Component {
               </div>
               <Field name="filters" component={FormInput} label="filters"/>
               <Field name="ignoredelete" component={FormSelect} label="IgnoreDelete" options={[{label: 'Ignore Delete', value: 'IGNOREDELETE'}]}/>
-              <div style={chipStyles.wrapper}>
-                <Chip style={chipStyles.chip} onTouchTap={onClickAddTag}><b>+</b></Chip>
-                {tags.map((t, i) =>
-                  <Chip key={i} style={chipStyles.chip} onRequestDelete={() => onClickDeleteTag(i)}>{t}</Chip>
-                )}
-              </div>
-              <div className="text-plus-icon">
-                <SubHeader name="Patterns"/>
-                <IconButton
-                  style={buttonStyle}
-                  iconStyle={iconStyle}
-                  onTouchTap={onDelete}>
-                    <DeleteIcon color="#545454"/>
-                </IconButton>
-              </div>
             </div>
-            <div style={{maxHeight: '300px', overflow: 'scroll'}}>
+          </CardPanel>
+
+          <CardPanel title="Tags">
+            <div style={chipStyles.wrapper}>
+              <Chip style={chipStyles.chip} onTouchTap={onClickAddTag}><b>+</b></Chip>
+              {tags.map((t, i) =>
+                <Chip key={i} style={chipStyles.chip} onRequestDelete={() => onClickDeleteTag(i)}>{t}</Chip>
+              )}
+            </div>
+          </CardPanel>
+
+          <CardPanel title="Patterns" tools={
+            <IconButton onTouchTap={onDelete}>
+              <DeleteIcon color="#545454"/>
+            </IconButton>
+          }>
+            <div style={{maxHeight: '300px', overflow: 'auto'}}>
               <table className="table table-hover table-p-sm">
                 <tbody>
                 {

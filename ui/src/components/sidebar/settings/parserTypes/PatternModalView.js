@@ -9,12 +9,12 @@ class PatternModalView extends React.Component {
     return (
       <Modal title="Pattern" onRequestClose={onClickClose}>
         <form onSubmit={onSubmit}>
-          <CardPanel className="margin-md-bottom">
+          <CardPanel title="Pattern">
             <div className="form-column">
               <Field name="text" component={FormInput} type="text" label="Pattern" multiLine/>
             </div>
           </CardPanel>
-          <SubmitBlock name="Save" onClick={onClickClose}/>
+          <SubmitBlock name="Save"/>
         </form>
       </Modal>
     )
