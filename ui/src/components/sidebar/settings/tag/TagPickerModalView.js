@@ -66,7 +66,7 @@ export default class TagPickerModalView extends React.Component {
     if (!tags || !tags.length) return null
     return (
       <Select
-        options={(tags || []).map(t => ({label: t.name, value: t.name}))}
+        options={(tags || []).map(t => ({label: t.name, value: t.id}))}
         value={value}
         style={{overflow: 'visible'}}
         onChange={onChangeValue}
@@ -79,7 +79,11 @@ export default class TagPickerModalView extends React.Component {
     return (
       <div style={chipStyles.wrapper}>
         {
-          selectedTags.map(this.renderChip.bind(this))
+          selectedTags.map(p =>
+            <Chip key={p.id} style={chipStyles.chip}>
+              {p.name}
+            </Chip>
+          )
         }
       </div>
     )

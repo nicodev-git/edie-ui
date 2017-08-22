@@ -1,4 +1,5 @@
 import React from 'react'
+import {findIndex} from 'lodash'
 
 import TagPickerModalView from './TagPickerModalView'
 
@@ -43,12 +44,18 @@ export default class TagPickerModal extends React.Component {
       })
     })
   }
+  onChangeValue (id) {
+    const {tags} = this.props
+    const index = findIndex(tags, {id})
+    if (index < 0) return
+    this.onSelectTag(tags[index])
+  }
   render () {
     return (
       <TagPickerModalView
         {...this.props}
         value={null}
-        onChangeValue={value => this.setState({value})}
+        onChangeValue={this.onChangeValue.bind(this)}
         onClickAdd={this.onClickAdd.bind(this)}
         onSelectTag={this.onSelectTag.bind(this)}
         onDeselectTag={this.onDeselectTag.bind(this)}
