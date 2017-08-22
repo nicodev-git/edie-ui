@@ -68,8 +68,20 @@ export default class TagPickerModalView extends React.Component {
       <Select
         options={(tags || []).map(t => ({label: t.name, value: t.name}))}
         value={value}
+        style={{overflow: 'visible'}}
         onChange={onChangeValue}
       />
+    )
+  }
+
+  renderSelected () {
+    const {selectedTags} = this.props
+    return (
+      <div style={chipStyles.wrapper}>
+        {
+          selectedTags.map(this.renderChip.bind(this))
+        }
+      </div>
     )
   }
 
@@ -92,10 +104,11 @@ export default class TagPickerModalView extends React.Component {
       )
     }
     return (
-      <Modal title="Tags" onRequestClose={onClickClose}>
+      <Modal title="Tags" onRequestClose={onClickClose} style={{overflow: 'visible'}}>
         <CardPanel title="Tags">
           <div style={{position: 'relative'}}>
             {this.renderContent()}
+            {this.renderSelected()}
           </div>
         </CardPanel>
         <TwoButtonsBlockCustom name2="OK" action2={onClickOK}/>
