@@ -80,8 +80,8 @@ export default class TagPickerModalView extends React.Component {
       <div style={chipStyles.wrapper}>
         {
           selectedTags.map(p =>
-            <Chip key={p.id} style={chipStyles.chip}>
-              {p.name}
+            <Chip key={p} style={chipStyles.chip}>
+              {p}
             </Chip>
           )
         }
