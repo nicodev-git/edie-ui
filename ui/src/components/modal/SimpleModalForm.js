@@ -1,14 +1,13 @@
 import React from 'react'
 import { Field } from 'redux-form'
-import { SubHeader, FormInput, FormSelect, FormImg, FileUpload, FormCheckbox,
+import { FormInput, FormSelect, FormImg, FileUpload, FormCheckbox,
   SubmitBlock, Modal, CardPanel } from 'components/modal/parts'
 
 const SimpleModalForm = ({show, onHide, onSubmit, header, subheader, buttonText,
   content, imageUpload, fileUpload}) => (
   <Modal title={header} onRequestClose={onHide}>
-    {(subheader) ? (<SubHeader name={subheader}/>) : null}
     <form onSubmit={onSubmit}>
-      <CardPanel className="margin-md-bottom">
+      <CardPanel title={subheader || header}className="margin-md-bottom">
         {(imageUpload) ? (<Field name="image" component={FormImg}/>) : null}
         {(fileUpload) ? (<Field name="file" component={FileUpload}/>) : null}
         <div className="form-column">

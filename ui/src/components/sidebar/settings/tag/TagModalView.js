@@ -9,12 +9,10 @@ export default class TagModalView extends React.Component {
     return (
       <Modal title="Tag" onRequestClose={onClickClose}>
         <form onSubmit={onSubmit}>
-          <CardPanel className="margin-md-bottom">
-            <div className="form-column">
-              <Field name="name" component={FormInput} type="text" floatingLabel="Name"/>
+          <CardPanel title="Tag">
+              <Field name="name" component={FormInput} type="text" floatingLabel="Name" className="mr-dialog"/>
               <Field name="desc" component={FormInput} type="text" floatingLabel="Description"/>
               <Field name="order" component={FormInput} type="text" floatingLabel="Order"/>
-            </div>
           </CardPanel>
           <SubmitBlock name="Save" onClick={onClickClose}/>
         </form>
