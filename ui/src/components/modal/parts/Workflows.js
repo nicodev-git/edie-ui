@@ -9,7 +9,6 @@ export default class Workflows extends React.Component {
     return (
       <div>
         <div>
-          <div className="inline-block margin-md-bottom margin-md-top"><b>Workflows</b></div>
           {showWfSelectModal && <div className="pull-right">
             <FlatButton label="Add" onTouchTap={() => showWfSelectModal(true)}/>
           </div>}

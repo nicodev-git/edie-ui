@@ -15,14 +15,15 @@ export default class DeviceTplModalView extends Component {
     } = this.props
     return (
       <form onSubmit={onSubmit}>
-        <CardPanel className="margin-md-bottom">
+        <CardPanel title="Basic">
           <div className="form-column mb-none">
             <Field name="name" component={FormInput} label="Name"/>
             <Field name="devicetemplategroup" component={FormInput} label="Group"/>
             <Field name="dashboard" component={FormCheckbox} label="Dashboard"/>
             <ImageUploader imgUrl={imgUrl} onChange={onChange}/>
           </div>
-
+        </CardPanel>
+        <CardPanel title="Tags">
           <div style={chipStyles.wrapper}>
             <Chip style={chipStyles.chip} onTouchTap={onClickAddTag} className={onSubmit ? '' : 'hidden'}>
               <b>+</b>
@@ -31,17 +32,21 @@ export default class DeviceTplModalView extends Component {
               <Chip key={i} style={chipStyles.chip} onRequestDelete={() => onClickDeleteTag(i)}>{t}</Chip>
             )}
           </div>
+          {tagModal}
+        </CardPanel>
+        <CardPanel title="Monitors">
           <div className="margin-md-top flex-horizontal" style={{height: 250}}>
             <div className="flex-1">
-              <div><b>Monitors</b></div>
               <Monitors monitors={monitors} onEditMonitor={onSubmit ? onEditMonitor : null} onRemoveMonitor={onSubmit ? onRemoveMonitor : null} />
-              <Workflows workflows={workflows} showWfSelectModal={onSubmit ? showWfSelectModal : null} onClickDeleteWf={onSubmit ? onClickDeleteWf : null}/>
             </div>
             <div className="flex-1" style={{maxHeight: '200px', overflow: 'auto'}}>
               <MonitorTemplates monitors={monitors} monitorTemplates={monitorTemplates} onAddMonitor={onSubmit ? onAddMonitor : null} />
             </div>
           </div>
-          {tagModal}
+        </CardPanel>
+
+        <CardPanel title="Workflows">
+          <Workflows workflows={workflows} showWfSelectModal={onSubmit ? showWfSelectModal : null} onClickDeleteWf={onSubmit ? onClickDeleteWf : null}/>
         </CardPanel>
         {onSubmit && <SubmitBlock name="Save"/>}
       </form>

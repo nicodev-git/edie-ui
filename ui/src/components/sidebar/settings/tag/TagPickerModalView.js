@@ -4,7 +4,7 @@ import {findIndex} from 'lodash'
 import {blue300} from 'material-ui/styles/colors'
 import Tags from 'react-material-tags'
 
-import {TwoButtonsBlockCustom, Modal} from 'components/modal/parts'
+import {TwoButtonsBlockCustom, Modal, CardPanel} from 'components/modal/parts'
 
 import {chipStyles} from 'style/common/materialStyles'
 
@@ -79,7 +79,9 @@ export default class TagPickerModalView extends React.Component {
     }
     return (
       <Modal title="Tags" onRequestClose={onClickClose}>
-        {this.renderContent()}
+        <CardPanel title="Tags">
+          {this.renderContent()}
+        </CardPanel>
         <TwoButtonsBlockCustom name2="OK" action2={onClickOK}/>
 
       </Modal>
