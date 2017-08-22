@@ -139,7 +139,7 @@ export default class SearchFormView extends React.Component {
               )}
             </SelectField>
 
-            <FlatButton label={searchMonitor} onTouchTap={onClickSearchMonitor}/>
+            <FlatButton label={searchMonitor} onTouchTap={onClickSearchMonitor} className="valign-top"/>
           </div>
 
           <div className="nowrap">

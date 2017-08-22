@@ -4,7 +4,7 @@ import {TwoButtonsBlockCustom, Modal, CardPanel} from 'components/modal/parts'
 
 export default class SearchMonitorModalView extends React.Component {
   render () {
-    const {allDevices, onClickOK, onClickClose, onClickRow} = this.props
+    const {selected, allDevices, onClickOK, onClickClose, onClickRow} = this.props
     return (
       <Modal title="Monitors" onRequestClose={onClickClose}>
         <CardPanel title="Monitors">
@@ -12,7 +12,11 @@ export default class SearchMonitorModalView extends React.Component {
             <table className="table table-hover">
               <tbody>
               {allDevices.map(device => (device.monitors || []).map(monitor =>
-                <tr key={monitor.uid} onClick={() => onClickRow(monitor.uid)}>
+                <tr
+                  key={monitor.uid}
+                  onClick={() => onClickRow(monitor.uid)}
+                  className={selected === monitor.uid ? 'selected' : ''}
+                >
                   <td>{`${device.name} - ${monitor.name}`}</td>
                 </tr>
               ))}
@@ -20,7 +24,7 @@ export default class SearchMonitorModalView extends React.Component {
             </table>
           </div>
         </CardPanel>
-        <TwoButtonsBlockCustom name1="OK" name2="Cancel" action1={onClickOK} action2={onClickClose}/>
+        <TwoButtonsBlockCustom name1="OK" action1={onClickOK}/>
       </Modal>
     )
   }
