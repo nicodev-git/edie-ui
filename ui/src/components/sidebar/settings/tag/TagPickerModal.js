@@ -5,6 +5,12 @@ import TagPickerModalView from './TagPickerModalView'
 import {showPrompt, showAlert} from 'components/common/Alert'
 
 export default class TagPickerModal extends React.Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      value: ''
+    }
+  }
   componentWillMount () {
     this.props.selectTag([])
     this.props.fetchTags()
@@ -41,6 +47,8 @@ export default class TagPickerModal extends React.Component {
     return (
       <TagPickerModalView
         {...this.props}
+        value={this.state.value}
+        onChangeValue={value => this.setState({value})}
         onClickAdd={this.onClickAdd.bind(this)}
         onSelectTag={this.onSelectTag.bind(this)}
         onDeselectTag={this.onDeselectTag.bind(this)}

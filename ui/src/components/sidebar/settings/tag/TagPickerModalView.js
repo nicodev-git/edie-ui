@@ -46,24 +46,35 @@ export default class TagPickerModalView extends React.Component {
     this.props.onDeselectTag(removedTag.label)
   }
 
-  renderContent1 () {
-    const {tags} = this.props
-    if (!tags || !tags.length) return null
-    return (
-      <Tags
-        sourceTags={tags.map(p => ({label: p.name}))}
-        onlyFromSource
-        onAdd={this.onAdd.bind(this)}
-        onRemove={this.onRemove.bind(this)}
-      />
-    )
-  }
+  // renderContent1 () {
+  //   const {tags} = this.props
+  //   if (!tags || !tags.length) return null
+  //   return (
+  //     <Tags
+  //       sourceTags={tags.map(p => ({label: p.name}))}
+  //       onlyFromSource
+  //       onAdd={this.onAdd.bind(this)}
+  //       onRemove={this.onRemove.bind(this)}
+  //     />
+  //   )
+  // }
 
   renderContent () {
-    const {tags} = this.props
+    const {tags, value, onChangeValue} = this.props
     if (!tags || !tags.length) return null
     return (
-      <AutoComplete />
+      <AutoComplete
+        getItemValue={(item) => item.name}
+        items={tags || []}
+        renderItem={(item, isHighlighted) =>
+          <div style={{ background: isHighlighted ? 'lightgray' : 'white' }}>
+            {item.name}
+          </div>
+        }
+        value={value}
+        onChange={(e) => onChangeValue(e.target.value)}
+        onSelect={(val) => {}}
+      />
     )
   }
 
