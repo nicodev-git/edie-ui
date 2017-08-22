@@ -2,8 +2,8 @@ import React from 'react'
 import {Chip, Popover} from 'material-ui'
 import {findIndex} from 'lodash'
 import {blue300} from 'material-ui/styles/colors'
-import Tags from 'react-material-tags'
-
+// import Tags from 'react-material-tags'
+import AutoComplete from 'react-autocomplete'
 import {TwoButtonsBlockCustom, Modal, CardPanel} from 'components/modal/parts'
 
 import {chipStyles} from 'style/common/materialStyles'
@@ -46,7 +46,7 @@ export default class TagPickerModalView extends React.Component {
     this.props.onDeselectTag(removedTag.label)
   }
 
-  renderContent () {
+  renderContent1 () {
     const {tags} = this.props
     if (!tags || !tags.length) return null
     return (
@@ -56,6 +56,14 @@ export default class TagPickerModalView extends React.Component {
         onAdd={this.onAdd.bind(this)}
         onRemove={this.onRemove.bind(this)}
       />
+    )
+  }
+
+  renderContent () {
+    const {tags} = this.props
+    if (!tags || !tags.length) return null
+    return (
+      <AutoComplete />
     )
   }
 
