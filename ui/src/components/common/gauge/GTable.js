@@ -13,7 +13,8 @@ export default class GTable extends React.Component {
   constructor (props) {
     super (props)
     this.state = {
-      value: parseInt(Math.random() * 100, 10)
+      value: parseInt(Math.random() * 100, 10),
+      draw: 1
     }
     this.renderBackView = this.renderBackView.bind(this)
     this.renderFrontView = this.renderFrontView.bind(this)
@@ -48,7 +49,7 @@ export default class GTable extends React.Component {
 
     if (resource === 'incident')  {
       const searchParams = {
-        draw: this.props.incidentDraw,
+        draw: this.state.draw,
         query: '',
         workflow: workflowId || '',
         collections: 'incident,event',
@@ -68,7 +69,7 @@ export default class GTable extends React.Component {
       console.log('Saved search not found.')
       return {
         searchParams: {
-          draw: this.props.incidentDraw,
+          draw: this.state.draw,
           dateFrom,
           dateTo,
           query: '',
@@ -86,7 +87,7 @@ export default class GTable extends React.Component {
     return {
       searchParams: {
         ...searchParams,
-        draw: this.props.incidentDraw,
+        draw: this.state.draw,
         dateFrom,
         dateTo
       },
@@ -102,6 +103,11 @@ export default class GTable extends React.Component {
     const data = this.getSearchData()
     return (
       <div className="flex-vertical flex-1 padding-sm">
+        <div>
+          <div className="pull-right">
+
+          </div>
+        </div>
         <NormalTable
           {...this.props}
           params={data.searchParams}
