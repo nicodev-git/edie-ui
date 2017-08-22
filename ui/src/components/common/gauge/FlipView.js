@@ -54,7 +54,7 @@ export default class FlipView extends React.Component {
         className={`link info-button ${hovered ? 'visible' : ''}`}>
         {
           gauge.minimized ? (
-            <MaximizeIcon onTouchTap={() => onClickMaximize(gauge)} className="hidden"/>
+            <MaximizeIcon onTouchTap={() => onClickMaximize(gauge)}/>
           ) : (
             <MinimizeIcon onTouchTap={() => onClickMinimize(gauge)}/>
           )
