@@ -86,13 +86,13 @@ export default class MainDashboardView extends React.Component {
   onClickMenuItem (tpl) {
     console.log(tpl)
 
-    // if (['Servers'].indexOf(tpl.name) >= 0) {
-    //   this.onFinishAddWizard(null, null, {
-    //     templateName:tpl.name,
-    //     name: tpl.name,
-    //     resource: 'search'
-    //   })
-    {
+    if (['News'].indexOf(tpl.name) >= 0) {
+      this.onFinishAddWizard(null, null, {
+        templateName: tpl.name,
+        name: tpl.name,
+        resource: 'search'
+      })
+    } else {
       const options = {
         title: tpl.name,
         templateName: tpl.name,
@@ -131,7 +131,7 @@ export default class MainDashboardView extends React.Component {
         }
         params.gaugeSize = 'custom'
       }
-    } else if(templateName === 'Incident Table' || templateName === '') {
+    } else if(templateName === 'Incident Table') {
       params.gaugeSize = 'very big'
     }
     this.props.addGaugeItem(params, this.props.board)
