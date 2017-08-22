@@ -69,6 +69,10 @@ class DeviceTplModal extends React.Component { // eslint-disable-line react/no-m
     this.props.openTplImageModal()
   }
 
+  onClickDeleteWf () {
+
+  }
+
   renderTagsModal () {
     if (!this.props.deviceTplTagModalOpen) return null
     return (
@@ -85,15 +89,18 @@ class DeviceTplModal extends React.Component { // eslint-disable-line react/no-m
   }
 
   render () {
-    const { handleSubmit, editDeviceTplTags, removeDeviceTplTag } = this.props
+    const { handleSubmit, editDeviceTplTags, removeDeviceTplTag, editTplWorkflows, showWfSelectModal, removeDeviceTplWf } = this.props
     let header = 'Device Template'
     let imgUrl = this.getImageUrl()
     let options = this.renderOptions()
     return (
       <DeviceTplModalView
-        workflows={[]}
-        show
         header={header}
+
+        workflows={editTplWorkflows}
+        showWfSelectModal={showWfSelectModal}
+        onClickDeleteWf={removeDeviceTplWf}
+
         monitors={this.state.monitors}
         monitorTemplates={this.props.monitorTemplates}
         onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}

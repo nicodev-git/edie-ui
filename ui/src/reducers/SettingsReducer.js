@@ -220,7 +220,8 @@ export default function (state = initialState, action) {
     case OPEN_DEVICE_TEMPLATE_MODAL: {
       const deviceTpl = action.data
       const editDeviceTplTags = deviceTpl ? (deviceTpl.tags || []) : []
-      return { ...state, deviceTplModalVisible: true, deviceTpl, selectedTplImage: null, editDeviceTplTags }
+      const editTplWorkflows = []
+      return { ...state, deviceTplModalVisible: true, deviceTpl, selectedTplImage: null, editDeviceTplTags, editTplWorkflows }
     }
 
     case CLOSE_DEVICE_TEMPLATE_MODAL:

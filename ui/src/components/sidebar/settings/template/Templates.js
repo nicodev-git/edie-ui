@@ -287,7 +287,7 @@ export default class Templates extends Component {
               <div className="flex-1 padding-md-right" style={{overflow: 'auto'}}>
                 {type === 'Device' ? this.renderDeviceTemplates() : this.renderMonitorTemplates()}
               </div>
-              <div className="flex-1" style={{overflow: 'auto'}}>
+              <div className="flex-1 padding-md" style={{overflow: 'auto'}}>
                 {this.renderDeviceTplView()}
               </div>
             </div>
