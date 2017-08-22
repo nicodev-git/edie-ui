@@ -16,10 +16,13 @@ export default class GTable extends React.Component {
     super (props)
     this.state = {
       value: parseInt(Math.random() * 100, 10),
-      draw: 1
+      draw: 1,
+      hover: false
     }
     this.renderBackView = this.renderBackView.bind(this)
     this.renderFrontView = this.renderFrontView.bind(this)
+    this.onMouseEnter = this.onMouseEnter.bind(this)
+    this.onMouseOut = this.onMouseOut.bind(this)
   }
 
   onSubmit (options, values) {
@@ -105,19 +108,34 @@ export default class GTable extends React.Component {
     })
   }
 
-  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  onMouseEnter () {
+    this.setState({hover: true})
+  }
 
+  onMouseOut () {
+    this.setState({hover: false})
+  }
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  renderRefresh (data) {
+    const {hover} = this.state
+    if (data.viewFilter !== viewFilters.log.name || !hover) return null
+
+    return (
+      <div style={{zIndex: 3}}>
+        <div style={{position: 'absolute', right: 10, top: 4}}>
+          <IconButton onTouchTap={this.onClickRefresh.bind(this)}>
+            <RefreshIcon size={32}/>
+          </IconButton>
+        </div>
+      </div>
+    )
+  }
   renderFrontView () {
     const data = this.getSearchData()
+
     return (
-      <div className="flex-vertical flex-1 padding-sm">
-        <div className={data.viewFilter === viewFilters.log.name ? '' : 'hidden'}>
-          <div style={{position: 'absolute'}}>
-            <IconButton onTouchTap={this.onClickRefresh.bind(this)}>
-              <RefreshIcon size={32}/>
-            </IconButton>
-          </div>
-        </div>
+      <div className="flex-vertical flex-1 padding-sm" onMouseEnter={this.onMouseEnter} onMouseLeave={this.onMouseOut}>
+        {this.renderRefresh(data)}
         <NormalTable
           {...this.props}
           params={data.searchParams}
