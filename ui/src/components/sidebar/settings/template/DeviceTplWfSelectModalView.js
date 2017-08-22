@@ -15,7 +15,6 @@ export default class DeviceTplWfSelectModalView extends React.Component {
             <table className="table table-hover">
               <thead>
               <tr>
-                <th>Category</th>
                 <th>Severity</th>
                 <th>Name</th>
                 <th>Description</th>
@@ -30,7 +29,6 @@ export default class DeviceTplWfSelectModalView extends React.Component {
                     className={selectedRowWf && selectedRowWf.id === w.id ? 'selected' : ''}
                     onClick={() => onClickRow(w)}
                   >
-                    <td>{w.category}</td>
                     <td>{w.severity}</td>
                     <td>{w.name}</td>
                     <td>{w.desc}</td>
@@ -42,7 +40,7 @@ export default class DeviceTplWfSelectModalView extends React.Component {
             </table>
           </div>
         </CardPanel>
-        <TwoButtonsBlockCustom name1="Cancel" action1={onClickClose} name2="OK" action2={onClickSave}/>
+        <TwoButtonsBlockCustom name2="OK" action2={onClickSave}/>
       </Modal>
     )
   }

@@ -19,7 +19,7 @@ export default class ImageUploaderModalView extends Component {
           ))}
         </div>
         <UploadFile onChangeFile={onChangeFile}/>
-        <TwoButtonsBlock onSave={onSave} onClose={onHide}/>
+        <TwoButtonsBlock onSave={onSave}/>
       </Modal>
     )
   }

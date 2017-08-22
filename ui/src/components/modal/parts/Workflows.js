@@ -8,12 +8,8 @@ export default class Workflows extends React.Component {
     const {workflows, showWfSelectModal, onClickDeleteWf} = this.props
     return (
       <div>
-        <div>
-          {showWfSelectModal && <div className="pull-right">
-            <FlatButton label="Add" onTouchTap={() => showWfSelectModal(true)}/>
-          </div>}
-        </div>
-        <div className="margin-md-bottom" style={chipStyles.wrapper}>
+        <div style={chipStyles.wrapper}>
+          {showWfSelectModal && <Chip style={chipStyles.chip} onTouchTap={() => showWfSelectModal(true)}><b>+</b></Chip>}
           {workflows.map((k, i) =>
             <Chip
               key={i}
