@@ -1,13 +1,15 @@
 import React from 'react'
 import moment from 'moment'
 import {findIndex} from 'lodash'
+import {IconButton} from 'material-ui'
+import RefreshIcon from 'material-ui/svg-icons/navigation/refresh'
 
 import FlipView from './FlipView'
 import NormalTable from './display/NormalTable'
 import GEditView from './GEditView'
 
 import {showAlert} from 'components/common/Alert'
-import { dateFormat, severities } from 'shared/Global'
+import { dateFormat, severities, viewFilters } from 'shared/Global'
 
 export default class GTable extends React.Component {
   constructor (props) {
@@ -97,15 +99,23 @@ export default class GTable extends React.Component {
     }
   }
 
+  onClickRefresh () {
+    this.setState({
+      draw: this.state.draw + 1
+    })
+  }
+
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   renderFrontView () {
     const data = this.getSearchData()
     return (
       <div className="flex-vertical flex-1 padding-sm">
-        <div>
-          <div className="pull-right">
-
+        <div className={data.viewFilter === viewFilters.log.name ? '' : 'hidden'}>
+          <div style={{position: 'absolute'}}>
+            <IconButton onTouchTap={this.onClickRefresh.bind(this)}>
+              <RefreshIcon size={32}/>
+            </IconButton>
           </div>
         </div>
         <NormalTable
