@@ -551,7 +551,7 @@ class GenericSearch extends React.Component {
     allDevices.forEach(p => {
       const index = findIndex(p.monitors, {uid: monitorId})
       if (index >= 0) {
-        name = p.monitors[index].name
+        name = `${p.name} - ${p.monitors[index].name}`
         return false
       }
     })
@@ -727,7 +727,7 @@ class GenericSearch extends React.Component {
   renderSearchGraphModal () {
     if (!this.props.searchGraphModalOpen) return null
     return (
-      <SearchGraphModal {...this.props} onClickOK={this.onChangeMonitorId.bind(this)}/>
+      <SearchGraphModal {...this.props}/>
     )
   }
 
@@ -746,7 +746,7 @@ class GenericSearch extends React.Component {
   renderSearchMonitorModal () {
     if (!this.props.searchMonitorModalOpen) return null
     return (
-      <SearchMonitorModal {...this.props}/>
+      <SearchMonitorModal {...this.props} onClickOK={this.onChangeMonitorId.bind(this)}/>
     )
   }
 
@@ -761,7 +761,7 @@ class GenericSearch extends React.Component {
     )
   }
   render () {
-    const { handleSubmit, selectedWf, params, monitorTemplates, searchTags, queryChips, selectedWfs, allDevices } = this.props
+    const { handleSubmit, selectedWf, params, monitorTemplates, searchTags, queryChips, selectedWfs } = this.props
     const { severity, dateFrom, dateTo, monitorTypes, monitorId } = params
     const selectedCollections = params.collections
     const workflow = this.props.workflows.filter(m => m.id === selectedWf)

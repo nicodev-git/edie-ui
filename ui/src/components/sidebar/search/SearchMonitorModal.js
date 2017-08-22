@@ -16,7 +16,7 @@ export default class SearchMonitorModal extends React.Component {
   }
 
   onClickOK () {
-    const {selected} = this.props
+    const {selected} = this.state
     if (!selected) {
       showAlert('Please select monitor')
       return
@@ -28,6 +28,10 @@ export default class SearchMonitorModal extends React.Component {
     this.props.showSearchMonitorModal(false)
   }
 
+  onClickShowAny () {
+    this.props.onClickOK('')
+  }
+
   render () {
     return (
       <SearchMonitorModalView
@@ -36,6 +40,7 @@ export default class SearchMonitorModal extends React.Component {
         onClickOK={this.onClickOK.bind(this)}
         onClickClose={this.onClickClose.bind(this)}
         onClickRow={this.onClickRow.bind(this)}
+        onClickShowAny={this.onClickShowAny.bind(this)}
       />
     )
   }

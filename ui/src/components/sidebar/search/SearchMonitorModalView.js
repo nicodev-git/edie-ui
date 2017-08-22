@@ -4,7 +4,7 @@ import {TwoButtonsBlockCustom, Modal, CardPanel} from 'components/modal/parts'
 
 export default class SearchMonitorModalView extends React.Component {
   render () {
-    const {selected, allDevices, onClickOK, onClickClose, onClickRow} = this.props
+    const {selected, allDevices, onClickOK, onClickClose, onClickRow, onClickShowAny} = this.props
     return (
       <Modal title="Monitors" onRequestClose={onClickClose}>
         <CardPanel title="Monitors">
@@ -24,7 +24,7 @@ export default class SearchMonitorModalView extends React.Component {
             </table>
           </div>
         </CardPanel>
-        <TwoButtonsBlockCustom name2="OK" action2={onClickOK}/>
+        <TwoButtonsBlockCustom name1="Show Any" name2="OK" action1={onClickShowAny} action2={onClickOK}/>
       </Modal>
     )
   }
