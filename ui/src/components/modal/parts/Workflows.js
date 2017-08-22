@@ -1,5 +1,5 @@
 import React from 'react'
-import {Chip, FlatButton} from 'material-ui'
+import {Chip} from 'material-ui'
 
 import {chipStyles} from 'style/common/materialStyles'
 

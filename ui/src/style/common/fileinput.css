@@ -49,10 +49,6 @@
     display: inline-block;
 }
 
-.image-upload-container img {
-    margin-left: 20px;
-}
-
 .image-container {
     position: relative;
     height: 100px;

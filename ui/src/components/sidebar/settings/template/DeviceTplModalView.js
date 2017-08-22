@@ -39,7 +39,7 @@ export default class DeviceTplModalView extends Component {
             <div className="flex-1">
               <Monitors monitors={monitors} onEditMonitor={onSubmit ? onEditMonitor : null} onRemoveMonitor={onSubmit ? onRemoveMonitor : null} />
             </div>
-            <div className="flex-1" style={{maxHeight: '200px', overflow: 'auto'}}>
+            <div className="flex-1" style={{maxHeight: 250 , overflow: 'auto'}}>
               <MonitorTemplates monitors={monitors} monitorTemplates={monitorTemplates} onAddMonitor={onSubmit ? onAddMonitor : null} />
             </div>
           </div>

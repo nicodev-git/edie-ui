@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import { TwoButtonsBlock, UploadFile, Modal } from 'components/modal/parts'
+import { TwoButtonsBlockCustom, UploadFile, Modal } from 'components/modal/parts'
 
 export default class ImageUploaderModalView extends Component {
   render () {
@@ -19,7 +19,7 @@ export default class ImageUploaderModalView extends Component {
           ))}
         </div>
         <UploadFile onChangeFile={onChangeFile}/>
-        <TwoButtonsBlock onSave={onSave}/>
+        <TwoButtonsBlockCustom name2="OK" action2={onSave}/>
       </Modal>
     )
   }

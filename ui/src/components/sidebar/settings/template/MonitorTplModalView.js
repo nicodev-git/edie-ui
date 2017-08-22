@@ -45,7 +45,7 @@ export default class MonitorTplModalView extends Component {
               {monitorTplCredTypes.map((t, i) =>
                 <Chip key={i} style={chipStyles.chip} onRequestDelete={() => onClickDeleteCredType(i)}>{t}</Chip>
               )}
-              <Chip style={chipStyles.chip} onTouchTap={onClickAddCredType}>Add Credential Type</Chip>
+              <Chip style={chipStyles.chip} onTouchTap={onClickAddCredType}><b>+</b></Chip>
             </div>
           </CardPanel>
           <br/>
