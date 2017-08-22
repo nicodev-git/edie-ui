@@ -12,6 +12,7 @@ import GServers from 'components/common/gauge/GServers'
 import GMonitors from 'components/common/gauge/GMonitors'
 import GTable from 'components/common/gauge/GTable'
 import GInstallApp from 'components/common/gauge/GInstallApp'
+import GNews from 'components/common/gauge/GNews'
 
 const gaugeMap = {
   'Line Chart': GLineChart,
@@ -28,7 +29,8 @@ const gaugeMap = {
   'Table': GTable,
   'Servers': GServers,
   'Monitors': GMonitors,
-  'Installed App': GInstallApp
+  'Installed App': GInstallApp,
+  'News': GNews
 }
 
 export default gaugeMap

@@ -1,15 +1,12 @@
 import React from 'react'
+import axios from 'axios'
 import moment from 'moment'
-import {findIndex} from 'lodash'
-import {IconButton} from 'material-ui'
-import RefreshIcon from 'material-ui/svg-icons/navigation/refresh'
 
 import FlipView from './FlipView'
-import NormalTable from './display/NormalTable'
 import GEditView from './GEditView'
 
 import {showAlert} from 'components/common/Alert'
-import { dateFormat, severities, viewFilters } from 'shared/Global'
+import { ROOT_URL } from 'actions/config'
 
 export default class GNews extends React.Component {
   constructor (props) {
@@ -37,18 +34,37 @@ export default class GNews extends React.Component {
     options.onClickFlip()
   }
 
+  componentWillMount () {
+    this.fetchArticles()
+  }
+
   onClickDelete () {
     this.props.removeDeviceGauge(this.props.gauge, this.props.device)
+  }
+
+  fetchArticles () {
+    axios.get(`${ROOT_URL}/event/search/findByDate`).then(res => {
+      this.setState({
+        articles: res.data._embedded.contents
+      })
+    })
   }
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   renderFrontView () {
-    const data = this.getSearchData()
-
     return (
-      <div className="flex-vertical flex-1">
-
+      <div className="flex-1" style={{overflow: 'auto'}}>
+        <table>
+          <tbody>
+          {this.state.articles.map(p =>
+            <tr>
+              <td>{p.subject}</td>
+              <td>{moment(p.dateUpdated).fromNow()}</td>
+            </tr>
+          )}
+          </tbody>
+        </table>
       </div>
     )
   }
