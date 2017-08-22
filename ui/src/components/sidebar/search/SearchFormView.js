@@ -66,9 +66,8 @@ export default class SearchFormView extends React.Component {
 
       onClickToggleFields,
 
-      allDevices,
-      monitorId,
-      onChangeMonitorId
+      searchMonitor,
+      onClickSearchMonitor
     } = this.props
     return (
       <form onSubmit={onSubmit}>
@@ -140,18 +139,7 @@ export default class SearchFormView extends React.Component {
               )}
             </SelectField>
 
-            <SelectField
-              menuStyle={{width: 220}}
-              value={monitorId}
-              onChange={onChangeMonitorId}
-              className="valign-top"
-              style={{width: '180px'}}
-            >
-              <MenuItem value="" primaryText="[Any]"/>
-              {allDevices.map(device => (device.monitors || []).map(monitor =>
-                <MenuItem key={monitor.uid} value={monitor.uid} primaryText={`${device.name} - ${monitor.name}`}/>
-              ))}
-            </SelectField>
+            <FlatButton label={searchMonitor} onTouchTap={onClickSearchMonitor}/>
           </div>
 
           <div className="nowrap">

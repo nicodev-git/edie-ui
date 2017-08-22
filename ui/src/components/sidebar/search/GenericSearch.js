@@ -543,6 +543,23 @@ class GenericSearch extends React.Component {
     }), this.props.history)
   }
 
+  getMonitorName(monitorId) {
+    const {allDevices} = this.props
+    let name = ''
+    allDevices.forEach(p => {
+      const index = findIndex(p.monitors, {uid: monitorId})
+      if (index >= 0) {
+        name = p.monitors[index].name
+        return false
+      }
+    })
+    return name
+  }
+
+  onClickSearchMonitor () {
+    this.props.showSearchMonitorModal(true)
+  }
+
   redrawSearch () {
     // this.props.refreshSearch()
   }
@@ -778,9 +795,8 @@ class GenericSearch extends React.Component {
             onClickClear={this.onClickClearSearch.bind(this)}
             onClickToggleFields={this.onClickToggleFields.bind(this)}
 
-            monitorId={monitorId}
-            allDevices={allDevices}
-            onChangeMonitorId={this.onChangeMonitorId.bind(this)}
+            searchMonitor={this.getMonitorName(monitorId) || 'Any'}
+            onClickSearchMonitor={this.onClickSearchMonitor.bind(this)}
           />
 
           <div className="text-center">
