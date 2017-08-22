@@ -65,12 +65,14 @@ export default class TagPickerModalView extends React.Component {
     const {tags, value, onChangeValue} = this.props
     if (!tags || !tags.length) return null
     return (
-      <Select
-        options={(tags || []).map(t => ({label: t.name, value: t.id}))}
-        value={value}
-        style={{overflow: 'visible'}}
-        onChange={onChangeValue}
-      />
+      <div style={{zIndex: 1000}}>
+        <Select
+          options={(tags || []).map(t => ({label: t.name, value: t.id}))}
+          value={value}
+          style={{overflow: 'visible'}}
+          onChange={onChangeValue}
+        />
+      </div>
     )
   }
 
@@ -100,7 +102,7 @@ export default class TagPickerModalView extends React.Component {
           targetOrigin={{horizontal: 'right', vertical: 'top'}}
           onRequestClose={onClickClose}
           className="padding-md"
-          style={{maxWidth: 800}}
+          style={{maxWidth: 800, minWidth: 400, overflowY: 'visible'}}
         >
           {this.renderContent()}
           {this.renderSelected()}
@@ -109,7 +111,7 @@ export default class TagPickerModalView extends React.Component {
       )
     }
     return (
-      <Modal title="Tags" onRequestClose={onClickClose} style={{overflow: 'visible'}}>
+      <Modal title="Tags" onRequestClose={onClickClose}>
         <CardPanel title="Tags">
           <div style={{position: 'relative'}}>
             {this.renderContent()}
