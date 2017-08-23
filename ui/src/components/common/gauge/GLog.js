@@ -1,15 +1,12 @@
 import React from 'react'
-import moment from 'moment'
-import {findIndex} from 'lodash'
-import {IconButton} from 'material-ui'
-import RefreshIcon from 'material-ui/svg-icons/navigation/refresh'
+// import {IconButton} from 'material-ui'
+// import RefreshIcon from 'material-ui/svg-icons/navigation/refresh'
 
 import FlipView from './FlipView'
-import NormalTable from './display/NormalTable'
 import GEditView from './GEditView'
 
 import {showAlert} from 'components/common/Alert'
-import { dateFormat, severities, viewFilters } from 'shared/Global'
+import { viewFilters } from 'shared/Global'
 
 export default class GLog extends React.Component {
   constructor (props) {
@@ -60,18 +57,18 @@ export default class GLog extends React.Component {
   }
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   renderRefresh (data) {
-    const {hover} = this.state
-    if (data.viewFilter !== viewFilters.log.name || !hover) return null
-
-    return (
-      <div style={{zIndex: 3}}>
-        <div style={{position: 'absolute', right: 10, top: 4}}>
-          <IconButton onTouchTap={this.onClickRefresh.bind(this)}>
-            <RefreshIcon size={32}/>
-          </IconButton>
-        </div>
-      </div>
-    )
+    // const {hover} = this.state
+    // if (data.viewFilter !== viewFilters.log.name || !hover) return null
+    //
+    // return (
+    //   <div style={{zIndex: 3}}>
+    //     <div style={{position: 'absolute', right: 10, top: 4}}>
+    //       <IconButton onTouchTap={this.onClickRefresh.bind(this)}>
+    //         <RefreshIcon size={32}/>
+    //       </IconButton>
+    //     </div>
+    //   </div>
+    // )
   }
   renderFrontView () {
     const data = this.getSearchData()
@@ -79,13 +76,16 @@ export default class GLog extends React.Component {
     return (
       <div className="flex-vertical flex-1" onMouseEnter={this.onMouseEnter} onMouseLeave={this.onMouseOut}>
         {this.renderRefresh(data)}
-        <NormalTable
-          {...this.props}
-          params={data.searchParams}
-          viewFilter={data.viewFilter || ''}
-          viewCols={data.viewCols || []}
-          viewMode={data.viewMode || 'json'}
-        />
+        <div className="flex-1" style={{overflow: 'auto'}}>
+          <table className="table table-hover">
+            <thead>
+            <tr>
+              <th>Log</th>
+              <th>Changed</th>
+            </tr>
+            </thead>
+          </table>
+        </div>
       </div>
     )
   }
