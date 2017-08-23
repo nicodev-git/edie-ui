@@ -212,8 +212,8 @@ export default class GBarChart extends React.Component {
       datasets: [{
         data: (searchRecordCounts || sampleData).map(p => p.count),
         borderWidth: 1,
-        borderColor: '#269C8B',
-        fill: false
+        borderColor: '#0288d1',
+        backgroundColor: '#4dd8e9'
       }]
     }
 

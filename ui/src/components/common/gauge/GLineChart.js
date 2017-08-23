@@ -249,7 +249,7 @@ export default class GLineChart extends React.Component {
       datasets: [{
         data: (searchRecordCounts || sampleData).map(p => p.count),
         borderWidth: 1,
-        borderColor: '#269C8B',
+        borderColor: '#0288d1',
         fill: false
       }]
     }
