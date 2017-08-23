@@ -2,6 +2,7 @@ import React from 'react'
 import {IconButton} from 'material-ui'
 import ForwardIcon from 'material-ui/svg-icons/navigation/arrow-forward'
 import BackwardIcon from 'material-ui/svg-icons/navigation/arrow-back'
+import {concat} from 'lodash'
 
 
 export default class GaugeLogMonitorPicker extends React.Component {
@@ -10,7 +11,12 @@ export default class GaugeLogMonitorPicker extends React.Component {
       onSelectDevice, onSelectRight, onSelectMonitor, onClickAddServer, onClickRemoveServer,
       tableClass, height
     } = this.props
-    const monitors = selectedDevice ? (selectedDevice.monitors || []) : []
+
+    let monitors = []
+    (devices || []).forEach(device => {
+      monitors = concat(monitors, (device.monitors || []).filter(monitor => monitor.monitortype === 'logfile'))
+    })
+
     return (
       <div className="padding-md-left padding-md-right">
         <div className="row">
@@ -19,19 +25,13 @@ export default class GaugeLogMonitorPicker extends React.Component {
               <table className={`table table-hover ${tableClass}`}>
                 <tbody>
                 <tr>
-                  <td><b>Device</b></td>
                   <td><b>Monitor</b></td>
                 </tr>
-                {(devices || []).map((p, i) =>
-                  <tr key={p.id}>
+                {monitors.map(p =>
+                  <tr key={p.uid}>
                     <td
-                      width="50%"
-                      className={selectedDevice && selectedDevice.id === p.id ? 'selected' : ''}
-                      onClick={() => onSelectDevice(p)}>{p.name}</td>
-                    <td
-                      width="50%"
-                      className={i < monitors.length && selectedMonitor && selectedMonitor.uid === monitors[i].uid ? 'selected' : ''}
-                      onClick={i < monitors.length ? () => onSelectMonitor(monitors[i]) : null}>
+                      className={selectedMonitor && selectedMonitor.uid === p.uid ? 'selected' : ''}
+                      onClick={() => onSelectMonitor(p)}>
                       {i < monitors.length ? monitors[i].name : ''}
                     </td>
                   </tr>
