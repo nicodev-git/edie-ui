@@ -67,7 +67,12 @@ export default class GLog extends React.Component {
     return monitors
   }
   onClickLog (monitor) {
-
+    setTimeout(() => {
+      this.props.history.push('/search')
+      this.props.loadSearch({
+        monitorid: monitor.uid
+      }, this.props.history)
+    }, 1)
   }
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   renderRefresh (data) {
@@ -89,20 +94,18 @@ export default class GLog extends React.Component {
       <div className="flex-vertical flex-1" onMouseEnter={this.onMouseEnter} onMouseLeave={this.onMouseOut}>
         <div className="flex-1" style={{overflow: 'auto'}}>
           <table className="table table-hover">
-            <thead>
-              <tr>
-                <th>Log</th>
-                <th>Changed</th>
-              </tr>
-            </thead>
             <tbody>
             {this.getLogMonitors().map(p =>
-              <tr key={p.uid} style={{cursor: 'pointer'}} onClick={this.onClickLog.bind(this, p)}>
+              <tr key={p.uid} onClick={this.onClickLog.bind(this, p)}>
                 <td>
-                  <img src="/resources/images/dashboard/log.png" width="32" className="valign-middle" />
-                  <span className="valign-middle">{p.name}</span>
+                  <img src="/resources/images/dashboard/log.png" width="16" className="valign-middle" alt=""/>
+                  <div className="valign-middle margin-xs-left inline-block">
+                    <span className="text-primary">{p.name}</span>
+                    &nbsp;updated&nbsp;
+                    {p.lastrun ? moment(p.lastrun).format('MMM DD, YYYY') : ' '} •&nbsp;
+                    <span style={{cursor: 'pointer'}} className="text-primary">view change</span>
+                  </div>
                 </td>
-                <td>{p.lastrun ? moment(p.lastrun).fromNow() : ''}</td>
               </tr>
             )}
             </tbody>
