@@ -33,6 +33,7 @@ const chartOptions = {
     yAxes: [{
       display: true,
       ticks: {
+        fontColor: '#9e9e9e',
         min: 0
       }
     }]

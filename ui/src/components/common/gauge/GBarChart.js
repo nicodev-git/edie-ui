@@ -31,6 +31,7 @@ const chartOptions = {
       display: true,
       ticks: {
         min: 0,
+        fontColor: '#9e9e9e',
         callback: function(value, index, values) {
           if (Math.floor(value) === value) return value
         }
