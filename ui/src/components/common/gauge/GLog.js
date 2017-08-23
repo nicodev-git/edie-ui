@@ -62,7 +62,7 @@ export default class GLog extends React.Component {
 
     let monitors = []
 
-    const monitorIds = gauge.monitorIds || []
+    const monitorIds = (gauge.servers || []).map(p => p.monitorId)
     devices.forEach(device => {
       monitors = monitors.concat((device.monitors || []).filter(monitor => monitorIds.includes(monitor.uid)))
     })

@@ -2,24 +2,21 @@ import React from 'react'
 import {IconButton} from 'material-ui'
 import ForwardIcon from 'material-ui/svg-icons/navigation/arrow-forward'
 import BackwardIcon from 'material-ui/svg-icons/navigation/arrow-back'
-import {concat, findIndex} from 'lodash'
 
 export default class GaugeLogMonitorPicker extends React.Component {
   render () {
-    const {
-      devices, selectedMonitors, onSelectMonitor, selectedMonitor,
-      selectedRight, onSelectRight,
-      onClickAddMonitor, onClickRemoveMonitor,
-      tableClass, height} = this.props
+    const {devices, selectedServers, selectedDevice, selectedRight, selectedMonitor,
+      onSelectDevice, onSelectRight, onSelectMonitor, onClickAddServer, onClickRemoveServer,
+      tableClass, height
+    } = this.props
+    const monitors = selectedDevice ? (selectedDevice.monitors || []).filter(monitor => monitor.monitortype === 'logfile') : []
 
-    let monitors = []
-
-    devices.forEach(device => {
-      monitors = concat(monitors, (device.monitors || []).filter(monitor => monitor.monitortype === 'logfile').map(p => ({
-        ...p,
-        name: `${device.name} - ${p.name}`
-      })))
-    })
+    // devices.forEach(device => {
+    //   monitors = concat(monitors, (device.monitors || []).filter(monitor => monitor.monitortype === 'logfile').map(p => ({
+    //     ...p,
+    //     name: `${device.name} - ${p.name}`
+    //   })))
+    // })
     return (
       <div className="padding-md-left padding-md-right">
         <div className="row">
@@ -28,14 +25,20 @@ export default class GaugeLogMonitorPicker extends React.Component {
               <table className={`table table-hover ${tableClass}`}>
                 <tbody>
                 <tr>
+                  <td><b>Device</b></td>
                   <td><b>Monitor</b></td>
                 </tr>
-                {monitors.map(p =>
-                  <tr key={p.uid}>
+                {(devices || []).map((p, i) =>
+                  <tr key={p.id}>
                     <td
-                      className={selectedMonitor && selectedMonitor.uid === p.uid ? 'selected' : ''}
-                      onClick={() => onSelectMonitor(p)}>
-                      {p.name}
+                      width="50%"
+                      className={selectedDevice && selectedDevice.id === p.id ? 'selected' : ''}
+                      onClick={() => onSelectDevice(p)}>{p.name}</td>
+                    <td
+                      width="50%"
+                      className={i < monitors.length && selectedMonitor && selectedMonitor.uid === monitors[i].uid ? 'selected' : ''}
+                      onClick={i < monitors.length ? () => onSelectMonitor(monitors[i]) : null}>
+                      {i < monitors.length ? monitors[i].name : ''}
                     </td>
                   </tr>
                 )}
@@ -44,10 +47,10 @@ export default class GaugeLogMonitorPicker extends React.Component {
             </div>
           </div>
           <div className="col-md-1 p-none">
-            <IconButton onTouchTap={onClickAddMonitor}>
+            <IconButton onTouchTap={() => onClickAddServer(true)}>
               <ForwardIcon />
             </IconButton>
-            <IconButton onTouchTap={onClickRemoveMonitor}>
+            <IconButton onTouchTap={onClickRemoveServer}>
               <BackwardIcon />
             </IconButton>
           </div>
@@ -58,15 +61,19 @@ export default class GaugeLogMonitorPicker extends React.Component {
                 <tr>
                   <td><b>Selected</b></td>
                 </tr>
-                {selectedMonitors.map(p => {
-                  const isSel = selectedRight && selectedRight.uid === p
-                  const index = findIndex(monitors, {uid: p})
-                  if (index < 0) return null
+                {selectedServers.map(p => {
+                  let isSel = false
+                  if (selectedRight) {
+                    if (selectedRight.type === 'monitor')
+                      isSel = p.type === 'monitor' && p.monitorId === selectedRight.monitorId
+                    else
+                      isSel = p.type === 'device' && p.id === selectedRight.id
+                  }
                   return (
                     <tr
-                      key={p} className={isSel  ? 'selected' : ''}
-                      onClick={() => onSelectRight(monitors[index])}>
-                      <td>{monitors[index].name}</td>
+                      key={p.monitorId || p.id} className={isSel  ? 'selected' : ''}
+                      onClick={() => onSelectRight(p)}>
+                      <td>{p.name}</td>
                     </tr>
                   )
                 })}

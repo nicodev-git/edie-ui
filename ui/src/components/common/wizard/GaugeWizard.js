@@ -116,7 +116,7 @@ class GaugeWizard extends React.Component {
       selectedRight: item
     })
   }
-  onClickAddServer () {
+  onClickAddServer (monitorOnly) {
     let {selectedDevice, selectedServers, selectedMonitor} = this.state
     if (!selectedDevice) return
 
@@ -129,7 +129,7 @@ class GaugeWizard extends React.Component {
         name: selectedMonitor.name
       }
       if (index < 0) selectedServers = [...selectedServers, item]
-    } else {
+    } else if (!monitorOnly) {
       const index = findIndex(selectedServers, {type: 'device', id: selectedDevice.id})
       const item = {
         type: 'device',
@@ -138,7 +138,6 @@ class GaugeWizard extends React.Component {
       }
       if (index < 0) selectedServers = [...selectedServers, item]
     }
-
     this.setState({
       selectedServers
     })
