@@ -145,6 +145,7 @@ export default class IncidentTable extends React.Component {
           selectable
           allowMultiSelect
           onRowDblClick={this.onRowDblClick.bind(this)}
+          tableClassName="table-panel2"
 
           url="/incident/search/findBy"
           params={this.getParams()}

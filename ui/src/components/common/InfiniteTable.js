@@ -217,6 +217,7 @@ class InfiniteTable extends React.Component {
       , this.defaultRowMetaData
       , this.props.rowMetadata || {})
     const bodyHeight = this.getBodyHeight()
+    const {tableClassName} = this.props
     return (
       <Griddle
         key="0"
@@ -234,7 +235,7 @@ class InfiniteTable extends React.Component {
         results={this.getCurrentData()}
         resultsPerPage={this.getCountPerPage()}
 
-        tableClassName="table table-hover table-panel"
+        tableClassName={`table table-hover ${tableClassName || 'table-panel'}`}
 
         useFixedHeader={false}
         noDataMessage={this.props.noDataMessage}
