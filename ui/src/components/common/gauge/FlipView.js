@@ -106,6 +106,11 @@ export default class FlipView extends React.Component {
                 </div>
               ) : (
                 <Paper className="flex-1 flex-vertical">
+                  <div
+                    className="padding-sm-left padding-sm-top padding-sm-right"
+                    style={{fontSize: 14}}>
+                    {gauge.name}
+                  </div>
                   {children}
                   {loading && front && <RefreshOverlay />}
                 </Paper>
