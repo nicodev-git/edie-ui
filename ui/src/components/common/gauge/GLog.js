@@ -7,7 +7,6 @@ import FlipView from './FlipView'
 import GEditView from './GEditView'
 
 import {showAlert} from 'components/common/Alert'
-import { viewFilters } from 'shared/Global'
 
 export default class GLog extends React.Component {
   constructor (props) {
@@ -59,11 +58,11 @@ export default class GLog extends React.Component {
   getLogMonitors () {
     const {devices, gauge} = this.props
 
-    const monitors = []
+    let monitors = []
 
     const monitorIds = gauge.monitorIds || []
     devices.forEach(device => {
-      monitors.concat((device.monitors || []).filter(monitor => monitorIds.includes(monitor.uid)))
+      monitors = monitors.concat((device.monitors || []).filter(monitor => monitorIds.includes(monitor.uid)))
     })
     return monitors
   }
