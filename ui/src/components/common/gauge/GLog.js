@@ -1,4 +1,5 @@
 import React from 'react'
+import moment from 'moment'
 // import {IconButton} from 'material-ui'
 // import RefreshIcon from 'material-ui/svg-icons/navigation/refresh'
 
@@ -55,6 +56,17 @@ export default class GLog extends React.Component {
   onMouseOut () {
     this.setState({hover: false})
   }
+  getLogMonitors () {
+    const {devices, gauge} = this.props
+
+    const monitors = []
+
+    const monitorIds = gauge.monitorIds || []
+    devices.forEach(device => {
+      monitors.concat((device.monitors || []).filter(monitor => monitorIds.includes(monitor.uid)))
+    })
+    return monitors
+  }
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   renderRefresh (data) {
     // const {hover} = this.state
@@ -71,19 +83,24 @@ export default class GLog extends React.Component {
     // )
   }
   renderFrontView () {
-    const data = this.getSearchData()
-
     return (
       <div className="flex-vertical flex-1" onMouseEnter={this.onMouseEnter} onMouseLeave={this.onMouseOut}>
-        {this.renderRefresh(data)}
         <div className="flex-1" style={{overflow: 'auto'}}>
           <table className="table table-hover">
             <thead>
-            <tr>
-              <th>Log</th>
-              <th>Changed</th>
-            </tr>
+              <tr>
+                <th>Log</th>
+                <th>Changed</th>
+              </tr>
             </thead>
+            <tbody>
+            {this.getLogMonitors().map(p =>
+              <tr key={p.uid}>
+                <td>{p.name}</td>
+                <td>{p.lastrun ? moment(p.lastrun).fromNow() : ''}</td>
+              </tr>
+            )}
+            </tbody>
           </table>
         </div>
       </div>
