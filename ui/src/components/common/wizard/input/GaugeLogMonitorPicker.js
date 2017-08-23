@@ -15,7 +15,10 @@ export default class GaugeLogMonitorPicker extends React.Component {
     let monitors = []
 
     devices.forEach(device => {
-      monitors = concat(monitors, (device.monitors || []).filter(monitor => monitor.monitortype === 'logfile'))
+      monitors = concat(monitors, (device.monitors || []).filter(monitor => monitor.monitortype === 'logfile').map(p => ({
+        ...p,
+        name: `${device.name} - ${p.name}`
+      })))
     })
     return (
       <div className="padding-md-left padding-md-right">
