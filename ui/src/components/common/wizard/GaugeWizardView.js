@@ -292,6 +292,8 @@ export default class GaugeWizardView extends React.Component {
         return this.renderInstalledApp()
       case 'Servers':
         return this.renderServers()
+      case 'Log':
+        return this.renderMonitors()
       default:
         return this.renderNormal()
     }
