@@ -2,21 +2,21 @@ import React from 'react'
 import {IconButton} from 'material-ui'
 import ForwardIcon from 'material-ui/svg-icons/navigation/arrow-forward'
 import BackwardIcon from 'material-ui/svg-icons/navigation/arrow-back'
-import {concat} from 'lodash'
-
+import {concat, findIndex} from 'lodash'
 
 export default class GaugeLogMonitorPicker extends React.Component {
   render () {
     const {
-      devices, selectedMonitors, toggleMonitorId, onSelectMonitor, selectedMonitor,
+      devices, selectedMonitors, onSelectMonitor, selectedMonitor,
       selectedRight, onSelectRight,
+      onClickAddMonitor, onClickRemoveMonitor,
       tableClass, height} = this.props
 
     let monitors = []
+
     (devices || []).forEach(device => {
       monitors = concat(monitors, (device.monitors || []).filter(monitor => monitor.monitortype === 'logfile'))
     })
-
     return (
       <div className="padding-md-left padding-md-right">
         <div className="row">
@@ -41,10 +41,10 @@ export default class GaugeLogMonitorPicker extends React.Component {
             </div>
           </div>
           <div className="col-md-1 p-none">
-            <IconButton onTouchTap={toggleMonitorId}>
+            <IconButton onTouchTap={onClickAddMonitor}>
               <ForwardIcon />
             </IconButton>
-            <IconButton onTouchTap={toggleMonitorId}>
+            <IconButton onTouchTap={onClickRemoveMonitor}>
               <BackwardIcon />
             </IconButton>
           </div>
@@ -62,8 +62,8 @@ export default class GaugeLogMonitorPicker extends React.Component {
                   return (
                     <tr
                       key={p} className={isSel  ? 'selected' : ''}
-                      onClick={() => onSelectRight(p)}>
-                      <td>{p.name}</td>
+                      onClick={() => onSelectRight(monitors[index])}>
+                      <td>{monitors[index].name}</td>
                     </tr>
                   )
                 })}

@@ -9,6 +9,7 @@ import {gaugeDurationTypes, gaugeResources, severities, timingOptions, realtimeG
 import DateRangePicker from 'components/common/DateRangePicker'
 
 import GaugeServerPicker from './input/GaugeServerPicker'
+import GaugeLogMonitorPicker from './input/GaugeLogMonitorPicker'
 
 const durations = '1 2 3 5 10 15 30'.split(' ').map(p => ({
   label: p, value: p
@@ -274,7 +275,9 @@ export default class GaugeWizardView extends React.Component {
     )
   }
   renderLog () {
-
+    return (
+      <GaugeLogMonitorPicker {...this.props}/>
+    )
   }
   renderContent () {
     const {templateName} = this.props

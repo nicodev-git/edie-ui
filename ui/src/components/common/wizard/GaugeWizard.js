@@ -153,6 +153,23 @@ class GaugeWizard extends React.Component {
     })
   }
 
+  onClickAddMonitor () {
+    const {selectedMonitor, selectedMonitors} = this.props
+    if (selectedMonitors.includes(selectedMonitor.uid)) return
+    this.setState({
+      selectedMonitors: [...selectedMonitors, selectedMonitor.uid],
+      selectedMonitor: null
+    })
+  }
+
+  onClickRemoveMonitor () {
+    const {selectedRight, selectedMonitors} = this.props
+    this.setState({
+      selectedMonitors: selectedMonitors.filter(p => p !== selectedRight.uid),
+      selectedRight: null
+    })
+  }
+
   getSearchOptions () {
     const {userInfo} = this.props
     if (!userInfo) return []
@@ -266,6 +283,9 @@ class GaugeWizard extends React.Component {
         onSelectRight={this.onSelectRight.bind(this)}
         onClickAddServer={this.onClickAddServer.bind(this)}
         onClickRemoveServer={this.onClickRemoveServer.bind(this)}
+
+        onClickAddMonitor={this.onClickAddMonitor.bind(this)}
+        onClickRemoveMonitor={this.onClickRemoveMonitor.bind(this)}
       />
     )
   }
