@@ -108,7 +108,7 @@ export default class FlipView extends React.Component {
                 <Paper className="flex-1 flex-vertical">
                   <div
                     className="padding-sm-left padding-sm-top padding-sm-right"
-                    style={{fontSize: 14}}>
+                    style={{fontSize: 14, color: 'rgba(0, 0, 0, 0.54)'}}>
                     {gauge.name}
                   </div>
                   {children}
