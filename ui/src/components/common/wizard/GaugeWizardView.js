@@ -273,6 +273,9 @@ export default class GaugeWizardView extends React.Component {
       <GaugeServerPicker {...this.props}/>
     )
   }
+  renderLog () {
+
+  }
   renderContent () {
     const {templateName} = this.props
     switch(templateName) {
@@ -293,7 +296,7 @@ export default class GaugeWizardView extends React.Component {
       case 'Servers':
         return this.renderServers()
       case 'Log':
-        return this.renderMonitors()
+        return this.renderLog()
       default:
         return this.renderNormal()
     }
