@@ -4,6 +4,7 @@ import DeleteIcon from 'material-ui/svg-icons/navigation/close'
 import MinimizeIcon from 'material-ui/svg-icons/toggle/indeterminate-check-box'
 import MaximizeIcon from 'material-ui/svg-icons/action/aspect-ratio'
 import RefreshOverlay from 'components/common/RefreshOverlay'
+import {Paper} from 'material-ui'
 
 export default class FlipView extends React.Component {
   constructor (props) {
@@ -104,17 +105,10 @@ export default class FlipView extends React.Component {
                   {!viewOnly && this.renderInfoIcon()}
                 </div>
               ) : (
-                <div className="panel panel-white flex-vertical flex-1">
-                  <div className="tab-box-container text-center text-ellipsis">
-                    <div className="tab-box">
-                      {gauge.name}
-                    </div>
-                  </div>
-                  <div className="panel-body p-none flex-vertical flex-1">
-                    {children}
-                    {loading && front && <RefreshOverlay />}
-                  </div>
-                </div>
+                <Paper className="flex-1 flex-vertical">
+                  {children}
+                  {loading && front && <RefreshOverlay />}
+                </Paper>
               )
             ) : (
               <div className="flex-1">
