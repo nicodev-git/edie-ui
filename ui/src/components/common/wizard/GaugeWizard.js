@@ -154,7 +154,8 @@ class GaugeWizard extends React.Component {
   }
 
   onClickAddMonitor () {
-    const {selectedMonitor, selectedMonitors} = this.props
+    const {selectedMonitor, selectedMonitors} = this.state
+    if (!selectedMonitor) return
     if (selectedMonitors.includes(selectedMonitor.uid)) return
     this.setState({
       selectedMonitors: [...selectedMonitors, selectedMonitor.uid],
@@ -163,7 +164,8 @@ class GaugeWizard extends React.Component {
   }
 
   onClickRemoveMonitor () {
-    const {selectedRight, selectedMonitors} = this.props
+    const {selectedRight, selectedMonitors} = this.state
+    if (!selectedRight) return
     this.setState({
       selectedMonitors: selectedMonitors.filter(p => p !== selectedRight.uid),
       selectedRight: null

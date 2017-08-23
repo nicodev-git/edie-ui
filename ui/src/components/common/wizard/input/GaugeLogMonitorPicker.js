@@ -14,7 +14,7 @@ export default class GaugeLogMonitorPicker extends React.Component {
 
     let monitors = []
 
-    (devices || []).forEach(device => {
+    devices.forEach(device => {
       monitors = concat(monitors, (device.monitors || []).filter(monitor => monitor.monitortype === 'logfile'))
     })
     return (
