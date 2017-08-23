@@ -66,6 +66,9 @@ export default class GLog extends React.Component {
     })
     return monitors
   }
+  onClickLog (monitor) {
+
+  }
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   renderRefresh (data) {
     // const {hover} = this.state
@@ -94,8 +97,11 @@ export default class GLog extends React.Component {
             </thead>
             <tbody>
             {this.getLogMonitors().map(p =>
-              <tr key={p.uid}>
-                <td>{p.name}</td>
+              <tr key={p.uid} style={{cursor: 'pointer'}} onClick={this.onClickLog.bind(this, p)}>
+                <td>
+                  <img src="/resources/images/dashboard/log.png" width="32" className="valign-middle" />
+                  <span className="valign-middle">{p.name}</span>
+                </td>
                 <td>{p.lastrun ? moment(p.lastrun).fromNow() : ''}</td>
               </tr>
             )}
