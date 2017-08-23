@@ -112,17 +112,16 @@ export default class NormalTable extends React.Component {
 
   render () {
     return (
-      <div className="flex-1 table-no-gap table-small">
-        <InfiniteTable
-          url="/search/all"
-          cells={this.getCells()}
-          ref="table"
-          rowMetadata={{'key': 'id'}}
-          params={this.props.params}
-          showTableHeading={this.props.viewMode === 'table'}
-          handleRecord={this.props.viewMode === 'table' ? this.handleRecord.bind(this) : null}
-        />
-      </div>
+      <InfiniteTable
+        url="/search/all"
+        cells={this.getCells()}
+        ref="table"
+        rowMetadata={{'key': 'id'}}
+        params={this.props.params}
+        showTableHeading={this.props.viewMode === 'table'}
+        handleRecord={this.props.viewMode === 'table' ? this.handleRecord.bind(this) : null}
+        tableClassName="table-panel2"
+      />
     )
   }
 }

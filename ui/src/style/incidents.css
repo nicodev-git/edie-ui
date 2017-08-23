@@ -50,6 +50,10 @@
     color: rgba(0, 0, 0, 0.87) !important;
 }
 
+.table-panel2 td {
+    padding: 4px;
+}
+
 .table-panel2 img {
     margin-right: 5px;
     cursor: pointer;

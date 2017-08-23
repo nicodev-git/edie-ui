@@ -134,7 +134,7 @@ export default class GTable extends React.Component {
     const data = this.getSearchData()
 
     return (
-      <div className="flex-vertical flex-1 padding-sm" onMouseEnter={this.onMouseEnter} onMouseLeave={this.onMouseOut}>
+      <div className="flex-vertical flex-1" onMouseEnter={this.onMouseEnter} onMouseLeave={this.onMouseOut}>
         {this.renderRefresh(data)}
         <NormalTable
           {...this.props}
