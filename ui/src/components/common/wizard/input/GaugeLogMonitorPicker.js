@@ -7,10 +7,10 @@ import {concat} from 'lodash'
 
 export default class GaugeLogMonitorPicker extends React.Component {
   render () {
-    const {devices, selectedServers, selectedDevice, selectedRight, selectedMonitor,
-      onSelectDevice, onSelectRight, onSelectMonitor, onClickAddServer, onClickRemoveServer,
-      tableClass, height
-    } = this.props
+    const {
+      devices, selectedMonitors, toggleMonitorId, onSelectMonitor, selectedMonitor,
+      selectedRight, onSelectRight,
+      tableClass, height} = this.props
 
     let monitors = []
     (devices || []).forEach(device => {
@@ -32,7 +32,7 @@ export default class GaugeLogMonitorPicker extends React.Component {
                     <td
                       className={selectedMonitor && selectedMonitor.uid === p.uid ? 'selected' : ''}
                       onClick={() => onSelectMonitor(p)}>
-                      {i < monitors.length ? monitors[i].name : ''}
+                      {p.name}
                     </td>
                   </tr>
                 )}
@@ -41,10 +41,10 @@ export default class GaugeLogMonitorPicker extends React.Component {
             </div>
           </div>
           <div className="col-md-1 p-none">
-            <IconButton onTouchTap={onClickAddServer}>
+            <IconButton onTouchTap={toggleMonitorId}>
               <ForwardIcon />
             </IconButton>
-            <IconButton onTouchTap={onClickRemoveServer}>
+            <IconButton onTouchTap={toggleMonitorId}>
               <BackwardIcon />
             </IconButton>
           </div>
@@ -55,17 +55,13 @@ export default class GaugeLogMonitorPicker extends React.Component {
                 <tr>
                   <td><b>Selected</b></td>
                 </tr>
-                {selectedServers.map(p => {
-                  let isSel = false
-                  if (selectedRight) {
-                    if (selectedRight.type === 'monitor')
-                      isSel = p.type === 'monitor' && p.monitorId === selectedRight.monitorId
-                    else
-                      isSel = p.type === 'device' && p.id === selectedRight.id
-                  }
+                {selectedMonitors.map(p => {
+                  const isSel = selectedRight && selectedRight.uid === p
+                  const index = findIndex(monitors, {uid: p})
+                  if (index < 0) return null
                   return (
                     <tr
-                      key={p.monitorId || p.id} className={isSel  ? 'selected' : ''}
+                      key={p} className={isSel  ? 'selected' : ''}
                       onClick={() => onSelectRight(p)}>
                       <td>{p.name}</td>
                     </tr>
