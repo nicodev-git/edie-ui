@@ -98,7 +98,7 @@ export default class NormalTable extends React.Component {
       return viewCols.map(p => {
         const item = {
           'displayName': p,
-          'columnName': `entity.${p}`
+          'columnName': p
         }
         if (p === 'startTimestamp' || p === 'timestamp') {
           item.customComponent = k => <span>{moment(k.data).format('YYYY-MM-DD HH:mm:ss')}</span>
