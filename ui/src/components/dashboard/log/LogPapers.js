@@ -1,6 +1,8 @@
 import React from 'react'
+import {Paper} from 'material-ui'
 import ReduxInfiniteScroll from 'redux-infinite-scroll'
-import { concat, assign, isEqual, keys, debounce } from 'lodash'
+import { concat, assign, isEqual, keys, debounce, chunk } from 'lodash'
+import $ from 'jquery'
 
 import { encodeUrlParams } from 'shared/Global'
 import { ROOT_URL } from 'actions/config'
@@ -45,10 +47,6 @@ export default class LogPapers extends React.Component {
 
   getCurrentData () {
     return this.props.useExternal ? this.state.results : this.props.data
-  }
-
-  getCountPerPage () {
-    return Math.max(this.props.useExternal ? this.state.results.length : this.props.data.length, this.props.pageSize)
   }
 
   getExternalData (page, clear) {
@@ -120,36 +118,20 @@ export default class LogPapers extends React.Component {
 
   renderTable () {
     const bodyHeight = this.getBodyHeight()
-    const {tableClassName} = this.props
-    return (
-      <Griddle
-        key="0"
-        id={this.props.id}
-        useExternal={false}
-        enableSort={false}
+    const {tableClassName, pageSize} = this.props
 
-        columns={this.props.cells.map(item => item.columnName)}
-        columnMetadata={this.props.cells}
-        rowMetadata={rowMetadata}
-        rowHeight={this.props.rowHeight}
-        bodyHeight={bodyHeight || null}
-        showTableHeading={this.props.showTableHeading}
+    const results = this.getCurrentData()
 
-        results={this.getCurrentData()}
-        resultsPerPage={this.getCountPerPage()}
-
-        tableClassName={`table table-hover ${tableClassName || 'table-panel'}`}
-
-        useFixedHeader={false}
-        noDataMessage={this.props.noDataMessage}
-        useGriddleStyles={false}
-
-        onRowClick={this.onRowClick.bind(this)}
-
-        onRowDblClick={this.onRowDblClick.bind(this)}
-        ref="griddle"
-      />
-    )
+    const chunks = chunk(results, pageSize)
+    return chunks.map((list, i) => {
+      return (
+        <Paper key={i} style={{height: 300, marginBottom: 20}}>
+          {list.map(row =>
+            <div key={row.id} className="inline-block flex-1">{row.entity.dataobj.line}</div>
+          )}
+        </Paper>
+      )
+    })
   }
 
   render () {
@@ -157,7 +139,7 @@ export default class LogPapers extends React.Component {
     if (!this.props.bodyHeight) {
       return (
         <ReduxInfiniteScroll
-          children={[table]}
+          children={table}
           loadMore={this.loadMoreDeb}
           loadingMore={this.state.isLoading}
         />
@@ -176,13 +158,6 @@ LogPapers.defaultProps = {
   data: [],
 
   pageSize: 20,
-  rowMetadata: {},
-  rowHeight: 50,
-  showTableHeading: true,
-
-  selectable: false,
-  allowMultiSelect: false,
-  noDataMessage: '',
 
   onUpdateCount: null,
   handleRecord: null
