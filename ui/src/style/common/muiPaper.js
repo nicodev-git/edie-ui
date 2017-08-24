@@ -1,1 +1,1 @@
-export const paperZDepth = 2
+export const paperZDepth = 1
