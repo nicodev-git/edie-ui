@@ -73,7 +73,8 @@ export default class FlipView extends React.Component {
       <div
         className="flex-vertical flex-1"
         onMouseEnter={this.onMouseEnter}
-        onMouseLeave={this.onMouseLeave}>
+        onMouseLeave={this.onMouseLeave}
+      >
         {renderFrontView && renderFrontView()}
         {!viewOnly && this.renderInfoIcon()}
       </div>
@@ -105,10 +106,8 @@ export default class FlipView extends React.Component {
                   {!viewOnly && this.renderInfoIcon()}
                 </div>
               ) : (
-                <Paper className="flex-1 flex-vertical">
-                  <div
-                    className="padding-sm-left padding-sm-top padding-sm-right"
-                    style={{fontSize: 14, color: 'rgba(0, 0, 0, 0.54)'}}>
+                <Paper className="flex-1 flex-vertical" style={{padding: '16px 20px 8px'}}>
+                  <div style={{fontSize: 14, color: 'rgba(0, 0, 0, 0.54)'}}>
                     {gauge.name}
                   </div>
                   {children}
