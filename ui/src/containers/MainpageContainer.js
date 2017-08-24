@@ -16,6 +16,7 @@ import ThreatMapContainer from 'containers/threatmap/ThreatMapContainer'
 import SignoutContainer from 'containers/auth/SignoutContainer'
 import Settings from 'components/sidebar/settings/Settings'
 import DeviceContainer from 'containers/device/DeviceContainer'
+import LogView from 'containers/dashboard/LogViewContainer'
 
 import {
   closeDevice,
@@ -197,6 +198,7 @@ class MainpageContainer extends Component {
           <Route path="/threatmap" component={ThreatMapContainer}/>
           <Route path="/signout" component={SignoutContainer} />
           <Route path="/settings" component={Settings}/>
+          <Route path="/logview" component={LogView}/>
 
           <Route path="/device/:deviceId" component={DeviceContainer}/>
       </Main>
