@@ -128,6 +128,9 @@ export default class LogPapers extends React.Component {
     return chunks.map((list, i) => {
       return (
         <Paper key={i} className="padding-sm margin-md-bottom">
+          <div className="header-red">
+            {list.length && list[0].entity && list[0].entity.dataobj? list[0].entity.dataobj.file : ''}
+          </div>
           {list.map(row =>
             <div key={row.id}>{row.entity && row.entity.dataobj ? row.entity.dataobj.line : ' '}</div>
           )}

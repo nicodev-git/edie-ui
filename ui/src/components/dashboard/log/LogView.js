@@ -119,7 +119,7 @@ class LogView extends React.Component {
               ref="table"
               rowMetadata={{'key': 'id'}}
               params={logViewParam}
-              pageSize={100}
+              pageSize={1000}
               revertRows
               onUpdateCount={this.onResultCountUpdate.bind(this)}
             />
