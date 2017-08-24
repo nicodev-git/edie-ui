@@ -106,7 +106,7 @@ export default class FlipView extends React.Component {
                   {!viewOnly && this.renderInfoIcon()}
                 </div>
               ) : (
-                <Paper className="flex-1 flex-vertical" style={paperStyle || {padding: '16px 20px 8px'}}>
+                <Paper className="flex-1 flex-vertical" style={paperStyle || {padding: '16px 20px 16px'}}>
                   {!hideTitle && <div style={{fontSize: 14, color: 'rgba(0, 0, 0, 0.54)', height: 32}}>
                     {gauge.name}
                   </div>}

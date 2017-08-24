@@ -155,7 +155,6 @@ export default class GMemory extends React.Component {
   }
 
   renderFrontView () {
-
     const {gauge} = this.props
     if (gauge.timing === 'historic') {
       const {searchRecordCounts} = this.state
@@ -172,7 +171,7 @@ export default class GMemory extends React.Component {
 
       return (
         <div className="flex-vertical flex-1" style={{overflow: 'hidden'}}>
-          <div className="flex-1">
+          <div className="flex-1" style={{marginTop: 30}}>
             {gauge.gaugeType === 'bar' ? (
               <BarChart chartData={chartData} chartOptions={chartOptions} />
             ) : (

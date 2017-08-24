@@ -179,7 +179,7 @@ export default class GDisk extends React.Component {
 
       return (
         <div className="flex-vertical flex-1" style={{overflow: 'hidden'}}>
-          <div className="flex-1">
+          <div className="flex-1" style={{marginTop: 30}}>
             {gauge.gaugeType === 'bar' ? (
               <BarChart chartData={chartData} chartOptions={chartOptions} />
             ) : (
