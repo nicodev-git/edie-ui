@@ -74,7 +74,7 @@ export default class GLog extends React.Component {
     setTimeout(() => {
       this.props.history.push('/viewlog')
       this.props.updateViewLogParams({
-        ...this.props.updateViewLogParams,
+        ...this.props.logViewParam,
         query: `monitorid=${monitor.uid}`,
         dateFrom: ranges['Ever'][0].format(dateFormat),
         dateTo: ranges['Ever'][1].format(dateFormat)
