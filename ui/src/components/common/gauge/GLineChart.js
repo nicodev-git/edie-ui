@@ -260,7 +260,8 @@ export default class GLineChart extends React.Component {
         borderWidth: 2,
         borderColor: '#0288d1',
         fill: false,
-        pointRadius: 0
+        pointRadius: 0,
+        pointHitRadius: 20
       }]
     }
 

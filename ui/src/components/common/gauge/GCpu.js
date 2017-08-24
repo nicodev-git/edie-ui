@@ -163,9 +163,11 @@ export default class GCpu extends React.Component {
         labels: (searchRecordCounts || sampleData).map(p => p.date),
         datasets: [{
           data: (searchRecordCounts || sampleData).map(p => p.count),
-          borderWidth: 1,
-          borderColor: '#269C8B',
-          fill: false
+          borderWidth: 2,
+          borderColor: '#0288d1',
+          fill: false,
+          pointRadius: 0,
+          pointHitRadius: 20
         }]
       }
 
