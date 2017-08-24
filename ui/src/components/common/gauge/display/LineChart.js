@@ -6,7 +6,9 @@ class LineChart extends React.Component {
   render () {
     const {chartData, chartOptions} = this.props
     return (
-      <Line data={chartData} options={chartOptions} width={this.props.containerWidth} height={this.props.containerHeight} />
+      <div style={{padding: '16px 20px 35px'}}>
+        <Line data={chartData} options={chartOptions} width={this.props.containerWidth - 40} height={this.props.containerHeight - 55} />
+      </div>
     )
   }
 }

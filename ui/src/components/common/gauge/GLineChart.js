@@ -275,10 +275,8 @@ export default class GLineChart extends React.Component {
     }
 
     return (
-      <div className="flex-vertical flex-1" style={{overflow: 'hidden'}}>
-        <div className="flex-1 padding-xs" style={{marginTop: 30}}>
-          <LineChart chartData={chartData} chartOptions={options} />
-        </div>
+      <div className="flex-1" style={{overflow: 'hidden'}}>
+        <LineChart chartData={chartData} chartOptions={options} />
       </div>
     )
   }
