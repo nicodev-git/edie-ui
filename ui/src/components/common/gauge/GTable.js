@@ -166,6 +166,9 @@ export default class GTable extends React.Component {
         className={this.props.className}
         gauge={this.props.gauge}
 
+        paperStyle={{}}
+        hideTitle
+
         loading={this.state.loading}
         renderFrontView={this.renderFrontView}
         renderBackView={this.renderBackView}
