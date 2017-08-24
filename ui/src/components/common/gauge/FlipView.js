@@ -6,6 +6,8 @@ import MaximizeIcon from 'material-ui/svg-icons/action/aspect-ratio'
 import RefreshOverlay from 'components/common/RefreshOverlay'
 import {Paper} from 'material-ui'
 
+import {paperZDepth} from 'style/common/materialStyles'
+
 export default class FlipView extends React.Component {
   constructor (props) {
     super(props)
@@ -106,7 +108,7 @@ export default class FlipView extends React.Component {
                   {!viewOnly && this.renderInfoIcon()}
                 </div>
               ) : (
-                <Paper className="flex-1 flex-vertical" style={paperStyle}>
+                <Paper className="flex-1 flex-vertical" style={paperStyle} zDepth={paperZDepth}>
                   {!hideTitle && <div style={{fontSize: 14, color: 'rgba(0, 0, 0, 0.54)', height: 48, paddingLeft: 20, paddingTop: 16}}>
                     {gauge.name}
                   </div>}

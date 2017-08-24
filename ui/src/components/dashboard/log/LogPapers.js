@@ -8,6 +8,8 @@ import moment from 'moment'
 import { encodeUrlParams, dateFormat } from 'shared/Global'
 import { ROOT_URL } from 'actions/config'
 
+import {paperZDepth} from 'style/common/materialStyles'
+
 export default class LogPapers extends React.Component {
   constructor (props) {
     super(props)
@@ -137,7 +139,7 @@ export default class LogPapers extends React.Component {
       }
       return (
         <div key={i} className="padding-sm margin-md-bottom">
-          <Paper zDepth={2}>
+          <Paper zDepth={paperZDepth}>
             <div className="header-red">{title} : {timeFrom} ~ {timeTo}</div>
             {list.map(row =>
               <div key={row.id} className="padding-xs">{row.entity && row.entity.dataobj ? row.entity.dataobj.line : ' '}</div>
