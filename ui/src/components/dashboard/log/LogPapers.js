@@ -3,6 +3,7 @@ import {Paper} from 'material-ui'
 import ReduxInfiniteScroll from 'redux-infinite-scroll'
 import { concat, assign, isEqual, keys, debounce, chunk, reverse } from 'lodash'
 import $ from 'jquery'
+import moment from 'moment'
 
 import { encodeUrlParams, dateFormat } from 'shared/Global'
 import { ROOT_URL } from 'actions/config'
@@ -118,6 +119,9 @@ export default class LogPapers extends React.Component {
     return height ? `${height}px` : height
   }
 
+  getFileName(entity) {
+    return entity && entity.dataobj ? entity.dataobj.file : ''
+  }
   renderTable () {
     const {pageSize} = this.props
 
@@ -127,18 +131,19 @@ export default class LogPapers extends React.Component {
     return chunks.map((list, i) => {
       let title, timeFrom, timeTo
       if (list.length) {
-        title = list[0].entity.dataobj? list[0].entity.dataobj.file : ''
-        if (list[0].entity.timestamp) {
-          timeTo = moment(list[0].entity.timestamp).format(dateFormat)
-        }
+        title = this.getFileName(list[0].entity) || this.getFileName(list[list.length - 1].entity)
+        timeFrom = moment(list[0].entity.timestamp).format(dateFormat)
+        timeTo = moment(list[list.length - 1].entity.timestamp).format(dateFormat)
       }
       return (
-        <Paper key={i} className="padding-sm margin-md-bottom">
-          <div className="header-red">{title}</div>
-          {list.map(row =>
-            <div key={row.id}>{row.entity && row.entity.dataobj ? row.entity.dataobj.line : ' '}</div>
-          )}
-        </Paper>
+        <div key={i} className="padding-sm margin-md-bottom">
+          <Paper zDepth={2}>
+            <div className="header-red">{title} : {timeFrom} ~ {timeTo}</div>
+            {list.map(row =>
+              <div key={row.id} className="padding-xs">{row.entity && row.entity.dataobj ? row.entity.dataobj.line : ' '}</div>
+            )}
+          </Paper>
+        </div>
       )
     })
   }
