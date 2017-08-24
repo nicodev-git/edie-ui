@@ -71,12 +71,12 @@ export default class GLog extends React.Component {
   onClickLog (monitor) {
     const ranges = getRanges()
     setTimeout(() => {
-      this.props.history.push('/search')
-      this.props.loadSearch({
-        query: `monitorid=${monitor.uid}`,
-        dateFrom: ranges['Ever'][0].format(dateFormat),
-        dateTo: ranges['Ever'][1].format(dateFormat)
-      }, this.props.history)
+      this.props.history.push('/viewlog')
+      // this.props.loadSearch({
+      //   query: `monitorid=${monitor.uid}`,
+      //   dateFrom: ranges['Ever'][0].format(dateFormat),
+      //   dateTo: ranges['Ever'][1].format(dateFormat)
+      // }, this.props.history)
     }, 1)
   }
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

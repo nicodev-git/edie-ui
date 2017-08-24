@@ -2,7 +2,7 @@ import React from 'react'
 import {withRouter} from 'react-router'
 import { connect } from 'react-redux'
 
-import LogView from 'components/dashboard/main/LogView'
+import LogView from 'components/dashboard/log/LogView'
 
 class LogViewContainer extends React.Component {
   render () {
