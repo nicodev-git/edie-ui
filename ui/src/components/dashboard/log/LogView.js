@@ -68,16 +68,16 @@ export default class LogView extends React.Component {
         }
         if (!severity) delete data.severity
 
-        const {viewCols} = this.props
-        if (viewCols.length > 0) {
-          const remove = []
-          keys(data).forEach(p => {
-            if (viewCols.indexOf(p) < 0) remove.push(p)
-          })
-          remove.forEach(p => {
-            delete data[p]
-          })
-        }
+        // const {viewCols} = this.props
+        // if (viewCols.length > 0) {
+        //   const remove = []
+        //   keys(data).forEach(p => {
+        //     if (viewCols.indexOf(p) < 0) remove.push(p)
+        //   })
+        //   remove.forEach(p => {
+        //     delete data[p]
+        //   })
+        // }
 
         const options = {
           notNull: viewFilter === viewFilters.notNull.name,
@@ -149,6 +149,7 @@ export default class LogView extends React.Component {
     return (
       <TabPage>
         <TabPageHeader title="Log" style={{overflowX: 'auto', overflowY: 'visible'}}>
+
         </TabPageHeader>
         <TabPageBody tabs={[]} tab={0} history={this.props.history} location={this.props.location}>
           <div className="flex-horizontal" style={{height: '100%'}}>
