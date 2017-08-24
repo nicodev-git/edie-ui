@@ -64,6 +64,8 @@ import {
 
   FIX_ALL_DEVICE_INCIDENTS,
 
+  UPDATE_VIEWLOG_PARAMS,
+
   API_ERROR
 } from 'actions/types'
 
@@ -311,6 +313,9 @@ export default function (state = initialState, action) {
 
     case SHOW_MAP_EXPORT_MODAL:
       return { ...state, mapExportModalOpen: !!action.visible }
+
+    case UPDATE_VIEWLOG_PARAMS:
+      return { ...state, logViewParam: action.params }
     default:
       return state
   }

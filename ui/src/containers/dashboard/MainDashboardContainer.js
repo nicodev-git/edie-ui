@@ -26,7 +26,9 @@ import {
 
   loadSearch,
 
-  showGaugeModal
+  showGaugeModal,
+
+  updateViewLogParams
 } from 'actions'
 
 class MainDashboardContainer extends React.Component {
@@ -53,7 +55,9 @@ export default connect(
     incidentDraw: state.devices.incidentDraw,
 
     gaugeModalOpen: state.gauge.gaugeModalOpen,
-    editGauge: state.gauge.editGauge
+    editGauge: state.gauge.editGauge,
+
+    logViewParam: state.dashboard.logViewParam
   }), {
     fetchDevicesGroups,
     fetchSysSearchOptions,
@@ -77,6 +81,8 @@ export default connect(
 
     loadSearch,
 
-    showGaugeModal
+    showGaugeModal,
+
+    updateViewLogParams
   }
 )(withRouter(MainDashboardContainer))

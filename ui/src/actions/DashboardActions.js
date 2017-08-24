@@ -33,6 +33,8 @@ import {
   SHOW_COMMENTS_MODAL,
   SHOW_ATTACKER_MODAL,
 
+  UPDATE_VIEWLOG_PARAMS,
+
   NO_AUTH_ERROR
 } from './types'
 

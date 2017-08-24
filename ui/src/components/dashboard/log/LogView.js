@@ -35,16 +35,17 @@ class LogView extends React.Component {
       'displayName': ' ',
       'columnName': 'entity.id',
       'customComponent': (p) => {
-        const {viewFilter} = this.props
+        // const {viewFilter} = this.props
         const {rowData} = p
         const {entity} = rowData
+
+        const viewFilter = viewFilters.log.name
 
         if (viewFilter === viewFilters.log.name) {
           if (!entity.dataobj) return <span/>
           return (
             <div style={chipStyles.wrapper}>
-              {<div className="inline-block flex-1">{entity.dataobj.line}</div>}
-              {entity.dataobj.file && <Chip style={chipStyles.smallChip} labelStyle={chipStyles.smallLabel}>{entity.dataobj.file}</Chip>}
+              <div className="inline-block flex-1">{entity.dataobj.line}</div>
             </div>
           )
         } else if (viewFilter === viewFilters.raw.name) {
