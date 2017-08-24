@@ -7,8 +7,7 @@ import FlipView from './FlipView'
 import GEditView from './GEditView'
 
 import {showAlert} from 'components/common/Alert'
-import {getRanges} from 'components/common/DateRangePicker'
-import {dateFormat} from "shared/Global"
+// import {getRanges} from 'components/common/DateRangePicker'
 
 export default class GLog extends React.Component {
   constructor (props) {
@@ -69,7 +68,7 @@ export default class GLog extends React.Component {
     return monitors
   }
   onClickLog (monitor) {
-    const ranges = getRanges()
+    // const ranges = getRanges()
     setTimeout(() => {
       this.props.history.push('/viewlog')
       // this.props.loadSearch({

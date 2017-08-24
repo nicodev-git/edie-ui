@@ -17,9 +17,11 @@ import {renderEntity} from 'components/common/CellRenderers'
 import {chipStyles} from 'style/common/materialStyles'
 import {getRanges, getRangeLabel} from 'components/common/DateRangePicker'
 
+import LogSearchFormView from './LogSearchFormView'
+
 import {parse} from 'query-string'
 
-export default class LogView extends React.Component {
+class LogView extends React.Component {
   constructor (props) {
     super(props)
 
@@ -149,7 +151,16 @@ export default class LogView extends React.Component {
     return (
       <TabPage>
         <TabPageHeader title="Log" style={{overflowX: 'auto', overflowY: 'visible'}}>
+          <LogSearchFormView
+            onSearchKeyDown={this.onSearchKeyDown.bind(this)}
+            onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
 
+            startDate={dateFrom}
+            endDate={dateTo}
+            onChangeDateRange={this.onChangeRange.bind(this)}
+
+            onClickSearch={this.onClickSearch.bind(this)}
+          />
         </TabPageHeader>
         <TabPageBody tabs={[]} tab={0} history={this.props.history} location={this.props.location}>
           <div className="flex-horizontal" style={{height: '100%'}}>
@@ -180,3 +191,13 @@ export default class LogView extends React.Component {
     )
   }
 }
+
+const LogViewForm = reduxForm({form: 'logViewForm'})(LogView)
+// const selector = formValueSelector('logViewForm')
+
+export default connect(
+  state => ({
+    // initialValues: assign({}, state.search.params, {query: ''}),
+    // selectedSearchOption: selector(state, 'searchOptionIndex')
+  })
+)(LogViewForm)
