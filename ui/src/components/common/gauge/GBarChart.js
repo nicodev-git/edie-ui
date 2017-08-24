@@ -35,6 +35,10 @@ const chartOptions = {
         callback: function(value, index, values) {
           if (Math.floor(value) === value) return value
         }
+      },
+      gridLines: {
+        display: true,
+        drawBorder: false
       }
     }]
   }

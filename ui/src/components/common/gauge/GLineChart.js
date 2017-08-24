@@ -38,9 +38,7 @@ const chartOptions = {
       },
       gridLines: {
         display: true,
-        drawBorder: true,
-        drawOnChartArea: true,
-        drawTicks: false,
+        drawBorder: false
       }
     }]
   }
@@ -52,7 +50,8 @@ const monitorChartOptions = {
   },
   elements: {
     line: {
-      tension: 0
+      tension: 0,
+      pointRadius: 0
     }
   },
   scales: {
@@ -67,6 +66,10 @@ const monitorChartOptions = {
         callback: function(value, index, values) {
           if (Math.floor(value) === value) return value === 0 ? 'Down' : 'Up'
         }
+      },
+      gridLines: {
+        display: true,
+        drawBorder: false
       }
     }]
   },
@@ -254,9 +257,10 @@ export default class GLineChart extends React.Component {
       labels: (searchRecordCounts || sampleData).map(p => p.date),
       datasets: [{
         data: (searchRecordCounts || sampleData).map(p => p.count),
-        borderWidth: 1,
+        borderWidth: 2,
         borderColor: '#0288d1',
-        fill: false
+        fill: false,
+        pointRadius: 0
       }]
     }
 

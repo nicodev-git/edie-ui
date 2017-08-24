@@ -35,6 +35,10 @@ const chartOptions = {
       ticks: {
         fontColor: '#9e9e9e',
         min: 0
+      },
+      gridLines: {
+        display: true,
+        drawBorder: false
       }
     }]
   }
