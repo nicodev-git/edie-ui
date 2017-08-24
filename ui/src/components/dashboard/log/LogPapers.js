@@ -1,7 +1,7 @@
 import React from 'react'
 import {Paper} from 'material-ui'
 import ReduxInfiniteScroll from 'redux-infinite-scroll'
-import { concat, assign, isEqual, keys, debounce, chunk } from 'lodash'
+import { concat, assign, isEqual, keys, debounce, chunk, reverse } from 'lodash'
 import $ from 'jquery'
 
 import { encodeUrlParams } from 'shared/Global'
@@ -80,6 +80,8 @@ export default class LogPapers extends React.Component {
         data = data.map(d => handleRecord(d))
       }
 
+      if (this.props.revertRows) data = reverse(data)
+
       const total = res.page.totalElements
       let state = {
         results: concat((clear ? [] : this.state.results), data),
@@ -125,9 +127,9 @@ export default class LogPapers extends React.Component {
     const chunks = chunk(results, pageSize)
     return chunks.map((list, i) => {
       return (
-        <Paper key={i} style={{height: 300, marginBottom: 20}}>
+        <Paper key={i} className="padding-sm margin-md-bottom">
           {list.map(row =>
-            <div key={row.id} className="inline-block flex-1">{row.entity.dataobj.line}</div>
+            <div key={row.id}>{row.entity && row.entity.dataobj ? row.entity.dataobj.line : ' '}</div>
           )}
         </Paper>
       )
@@ -158,6 +160,7 @@ LogPapers.defaultProps = {
   data: [],
 
   pageSize: 20,
+  revertRows: false,
 
   onUpdateCount: null,
   handleRecord: null

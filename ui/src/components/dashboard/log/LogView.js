@@ -18,6 +18,7 @@ import {chipStyles} from 'style/common/materialStyles'
 import {getRanges, getRangeLabel} from 'components/common/DateRangePicker'
 
 import LogSearchFormView from './LogSearchFormView'
+import LogPapers from './LogPapers'
 
 import {parse} from 'query-string'
 
@@ -31,52 +32,6 @@ class LogView extends React.Component {
       anchorEl: null
     }
     this.tooltipRebuild = debounce(ReactTooltip.rebuild, 100)
-    this.cells = [{
-      'displayName': ' ',
-      'columnName': 'entity.id',
-      'customComponent': (p) => {
-        // const {viewFilter} = this.props
-        const {rowData} = p
-        const {entity} = rowData
-
-        const viewFilter = viewFilters.log.name
-
-        if (viewFilter === viewFilters.log.name) {
-          if (!entity.dataobj) return <span/>
-          return (
-            <div style={chipStyles.wrapper}>
-              <div className="inline-block flex-1">{entity.dataobj.line}</div>
-            </div>
-          )
-        } else if (viewFilter === viewFilters.raw.name) {
-          if (!entity.rawdata) return <span/>
-          return (
-            <div className="padding-sm bt-gray">{entity.rawdata}</div>
-          )
-        } else if (viewFilter === viewFilters.notNull.name) {
-
-        }
-        if (!entity) return <span/>
-        const highlighted = this.getHighlighted(entity, rowData.highlights)
-
-        const timeField = entity.startTimestamp ? 'startTimestamp' : 'timestamp'
-        delete highlighted[timeField]
-
-        const {severity, ...others} = highlighted
-        const data = {
-          type: rowData.type,
-          [timeField]: entity[timeField],
-          severity,
-          ...others
-        }
-        if (!severity) delete data.severity
-        const options = {
-          notNull: viewFilter === viewFilters.notNull.name,
-          timeField
-        }
-        return <div className="padding-sm bt-gray">{renderEntity(data, options)}</div>
-      }
-    }]
   }
 
   getHighlighted (entity, highlights) {
@@ -157,29 +112,17 @@ class LogView extends React.Component {
             onClickSearch={this.onClickSearch.bind(this)}
           />
         </TabPageHeader>
-        <TabPageBody tabs={[]} tab={0} history={this.props.history} location={this.props.location}>
-          <div className="flex-horizontal" style={{height: '100%'}}>
-            <div className="flex-1 flex-vertical padding-sm">
-              <div className="header-red">
-                Content
-                <div className="pull-right">
-                  Total: {this.state.total}
-                </div>
-              </div>
-              <div className="flex-1 table-no-gap">
-                <InfiniteTable
-                  url="/search/all"
-                  cells={this.cells}
-                  ref="table"
-                  rowMetadata={{'key': 'id'}}
-                  params={logViewParam}
-                  pageSize={100}
-                  showTableHeading={false}
-                  revertRows
-                  onUpdateCount={this.onResultCountUpdate.bind(this)}
-                />
-              </div>
-            </div>
+        <TabPageBody tabs={[]} tab={0} history={this.props.history} location={this.props.location} transparent>
+          <div style={{height: '100%', position: 'relative'}}>
+            <LogPapers
+              url="/search/all"
+              ref="table"
+              rowMetadata={{'key': 'id'}}
+              params={logViewParam}
+              pageSize={100}
+              revertRows
+              onUpdateCount={this.onResultCountUpdate.bind(this)}
+            />
           </div>
           <ReactTooltip/>
         </TabPageBody>
