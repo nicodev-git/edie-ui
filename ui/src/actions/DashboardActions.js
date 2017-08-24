@@ -224,3 +224,18 @@ export function showAttackerModal (visible) {
     dispatch({type: SHOW_ATTACKER_MODAL, visible})
   }
 }
+
+///////////////////////////////////////////////////////////////////////////////////
+
+export const updateViewLogParams = (params, history) => {
+  return function (dispatch) {
+    dispatch({
+      type: UPDATE_VIEWLOG_PARAMS,
+      params
+    })
+    history.replace({
+      pathname: '/viewlog',
+      search: `?q=${encodeURIComponent(JSON.stringify(params))}`
+    })
+  }
+}

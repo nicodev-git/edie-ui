@@ -4,6 +4,8 @@ import { connect } from 'react-redux'
 
 import LogView from 'components/dashboard/log/LogView'
 
+import {updateViewLogParams} from 'actions'
+
 class LogViewContainer extends React.Component {
   render () {
     return (
@@ -13,8 +15,8 @@ class LogViewContainer extends React.Component {
 }
 export default connect(
   state => ({
-    devices: state.devices.deviceAndGroups
+    logViewParam: state.dashboard.logViewParam
   }), {
-
+    updateViewLogParams
   }
 )(withRouter(LogViewContainer))

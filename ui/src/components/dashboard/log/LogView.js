@@ -117,23 +117,6 @@ class LogView extends React.Component {
     return data
   }
 
-  getParams () {
-    return {
-      page: 0,
-      size: 10,
-      query: '',
-      workflow: '',
-      tag: '',
-      collections: 'incident,event',
-      severity: 'HIGH,MEDIUM',
-      monitorTypes: '',
-      dateFrom: '23/08/2017 00:00:00',
-      dateTo: '24/08/2017 23:59:59',
-      monitorId: '',
-      draw: 1
-    }
-  }
-
   onResultCountUpdate (total, data) {
     let {cols} = this.state
     if (data && data.length) {
@@ -146,8 +129,31 @@ class LogView extends React.Component {
 
     this.tooltipRebuild()
   }
+  onSearchKeyDown (e) {
+    if (e.keyCode === 13) {
+      submit('logViewForm')
+    }
+  }
+
+  handleFormSubmit (values) {
+  }
+
+  onClickSearch () {
+    submit('logViewForm')
+    // this.props.submit(this.props.handleSubmit(this.handleFormSubmit.bind(this)))
+  }
+
+  onChangeRange ({startDate, endDate}) {
+    this.props.updateViewLogParams(assign({}, this.props.logViewParam, {
+      dateFrom: startDate.format(dateFormat),
+      dateTo: endDate.format(dateFormat)
+    }), this.props.history)
+  }
 
   render () {
+    const { handleSubmit, selectedWf, logViewParam, monitorTemplates, searchTags, queryChips, selectedWfs } = this.props
+    const { dateFrom, dateTo } = logViewParam
+
     return (
       <TabPage>
         <TabPageHeader title="Log" style={{overflowX: 'auto', overflowY: 'visible'}}>
@@ -177,7 +183,7 @@ class LogView extends React.Component {
                   cells={this.cells}
                   ref="table"
                   rowMetadata={{'key': 'id'}}
-                  params={this.getParams()}
+                  params={logViewParam}
                   pageSize={10}
                   showTableHeading={false}
                   onUpdateCount={this.onResultCountUpdate.bind(this)}

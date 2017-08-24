@@ -455,6 +455,10 @@ export const FETCH_MONITOR_GROUPS = 'FETCH_MONITOR_GROUPS'
 
 ///////////////////////////////////////////////////////////////
 
+export const UPDATE_VIEWLOG_PARAMS = 'UPDATE_VIEWLOG_PARAMS'
+
+///////////////////////////////////////////////////////////////
+
 export const SHOW_SIMULATION_MODAL = 'SHOW_SIMULATION_MODAL'
 
 export const API_ERROR = 'API_ERROR'

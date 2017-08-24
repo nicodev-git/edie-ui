@@ -1,3 +1,5 @@
+import moment from 'moment'
+
 import {
   OPEN_DEVICE, CLOSE_DEVICE,
   FETCH_MAPS,
@@ -66,6 +68,7 @@ import {
 } from 'actions/types'
 
 import {concat, difference, assign, findIndex} from 'lodash'
+import {dateFormat} from 'shared/Global'
 
 const initialState = {
   stats: {
@@ -85,6 +88,18 @@ const initialState = {
   selectedDevice: null,
 
   images: [],
+
+  logViewParam: {
+    query: '',
+    workflow: '',
+    tag: '',
+    collections: 'incident,event',
+    severity: 'HIGH,MEDIUM',
+    monitorTypes: '',
+    dateFrom: moment().add(-1, 'days').startOf('day').format(dateFormat),
+    dateTo: moment().endOf('day').format(dateFormat),
+    monitorId: ''
+  },
 
   sidebarProfileMenuOpen: false,
   sidebarMessageMenuOpen: false,
