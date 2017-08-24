@@ -4,7 +4,7 @@ import ReduxInfiniteScroll from 'redux-infinite-scroll'
 import { concat, assign, isEqual, keys, debounce, chunk, reverse } from 'lodash'
 import $ from 'jquery'
 
-import { encodeUrlParams } from 'shared/Global'
+import { encodeUrlParams, dateFormat } from 'shared/Global'
 import { ROOT_URL } from 'actions/config'
 
 export default class LogPapers extends React.Component {
@@ -119,18 +119,22 @@ export default class LogPapers extends React.Component {
   }
 
   renderTable () {
-    const bodyHeight = this.getBodyHeight()
-    const {tableClassName, pageSize} = this.props
+    const {pageSize} = this.props
 
     const results = this.getCurrentData()
 
     const chunks = chunk(results, pageSize)
     return chunks.map((list, i) => {
+      let title, timeFrom, timeTo
+      if (list.length) {
+        title = list[0].entity.dataobj? list[0].entity.dataobj.file : ''
+        if (list[0].entity.timestamp) {
+          timeTo = moment(list[0].entity.timestamp).format(dateFormat)
+        }
+      }
       return (
         <Paper key={i} className="padding-sm margin-md-bottom">
-          <div className="header-red">
-            {list.length && list[0].entity && list[0].entity.dataobj? list[0].entity.dataobj.file : ''}
-          </div>
+          <div className="header-red">{title}</div>
           {list.map(row =>
             <div key={row.id}>{row.entity && row.entity.dataobj ? row.entity.dataobj.line : ' '}</div>
           )}
