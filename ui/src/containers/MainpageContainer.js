@@ -198,7 +198,7 @@ class MainpageContainer extends Component {
           <Route path="/threatmap" component={ThreatMapContainer}/>
           <Route path="/signout" component={SignoutContainer} />
           <Route path="/settings" component={Settings}/>
-          <Route path="/logview" component={LogView}/>
+          <Route path="/viewlog" component={LogView}/>
 
           <Route path="/device/:deviceId" component={DeviceContainer}/>
       </Main>

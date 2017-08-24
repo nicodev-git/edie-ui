@@ -88,14 +88,70 @@ export default class LogView extends React.Component {
     }]
   }
 
+  getHighlighted (entity, highlights) {
+    let data = merge({}, entity)
+    keys(highlights).forEach(path => {
+      const highlighted = highlights[path]
+      const pathElements = path.split('.')
+
+      let el = data
+      pathElements.forEach((pathEl, index) => {
+        if (index === pathElements.length - 1) {
+          if (isArray(el[pathEl])) {
+            el = el[pathEl]
+            el.forEach((item, index) => {
+              if (highlighted.match(item)) el[index] = highlighted
+            })
+          } else {
+            el[pathEl] = highlighted
+          }
+        } else {
+          el = el[pathEl]
+          if (isArray(el)) el = el[0]
+        }
+      })
+    })
+
+    return data
+  }
+
+  getParams () {
+    return {
+      page: 0,
+      size: 10,
+      query: '',
+      workflow: '',
+      tag: '',
+      collections: 'incident,event',
+      severity: 'HIGH,MEDIUM',
+      monitorTypes: '',
+      dateFrom: '23/08/2017 00:00:00',
+      dateTo: '24/08/2017 23:59:59',
+      monitorId: '',
+      draw: 1
+    }
+  }
+
+  onResultCountUpdate (total, data) {
+    let {cols} = this.state
+    if (data && data.length) {
+      cols = keys(data[0].entity)
+    }
+    this.setState({
+      total,
+      cols
+    })
+
+    this.tooltipRebuild()
+  }
+
   render () {
     return (
       <TabPage>
-        <TabPageHeader title="" style={{overflowX: 'auto', overflowY: 'visible'}}>
+        <TabPageHeader title="Log" style={{overflowX: 'auto', overflowY: 'visible'}}>
         </TabPageHeader>
         <TabPageBody tabs={[]} tab={0} history={this.props.history} location={this.props.location}>
           <div className="flex-horizontal" style={{height: '100%'}}>
-            {this.renderFieldsView()}
             <div className="flex-1 flex-vertical padding-sm">
               <div className="header-red">
                 Content
@@ -103,15 +159,13 @@ export default class LogView extends React.Component {
                   Total: {this.state.total}
                 </div>
               </div>
-              <div className={`flex-1 table-no-gap ${this.getTableClass()}`}>
+              <div className="flex-1 table-no-gap">
                 <InfiniteTable
                   url="/search/all"
                   cells={this.cells}
                   ref="table"
                   rowMetadata={{'key': 'id'}}
-                  selectable
-                  onRowDblClick={this.onRowDblClick.bind(this)}
-                  params={{...this.props.params, draw: this.props.searchDraw}}
+                  params={this.getParams()}
                   pageSize={10}
                   showTableHeading={false}
                   onUpdateCount={this.onResultCountUpdate.bind(this)}
@@ -119,9 +173,6 @@ export default class LogView extends React.Component {
               </div>
             </div>
           </div>
-          {this.renderFilterViewModal()}
-          {this.renderTagsModal()}
-          {this.renderSearchMonitorModal()}
           <ReactTooltip/>
         </TabPageBody>
       </TabPage>
