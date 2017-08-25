@@ -6,7 +6,14 @@ import {findIndex} from 'lodash'
 
 export default class GaugeWorkflowPicker extends React.Component {
   renderRight () {
-    const {selectedWorkflows, selectedRight, onSelectRight} = this.props
+    const {tableClass, height, workflows, selectedWorkflows, selectedRight, onSelectRight} = this.props
+
+    const wfs = []
+    selectedWorkflows.forEach(id => {
+      const index = findIndex(workflows, {id})
+      if (index >= 0) wfs.push(workflows[index])
+    })
+
     return (
       <div style={{height: height || 300, overflow: 'auto', border: '1px solid gray'}}>
         <table className={`table table-hover ${tableClass}`}>
@@ -14,11 +21,8 @@ export default class GaugeWorkflowPicker extends React.Component {
           <tr>
             <td><b>Selected</b></td>
           </tr>
-          {selectedWorkflows.map(p => {
-            let isSel = false
-            if (selectedRight) {
-              isSel = p.id === selectedRight.id
-            }
+          {wfs.map(p => {
+            let isSel = selectedRight && p.id === selectedRight.id
             return (
               <tr
                 key={p.id} className={isSel  ? 'selected' : ''}
@@ -53,7 +57,7 @@ export default class GaugeWorkflowPicker extends React.Component {
                 <tbody>
                 <tr>
                   <td><b>Device</b></td>
-                  <td><b>Monitor</b></td>
+                  <td><b>Workflow</b></td>
                 </tr>
                 {(devices || []).map((p, i) =>
                   <tr key={p.id}>
