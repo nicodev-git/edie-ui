@@ -76,7 +76,7 @@ export default class GEditView extends React.Component {
 
       tableViewMode: gauge.tableViewMode || 'json',
 
-      showImage: gauge.showImage || false
+      showImage: !!gauge.showImage
     }
   }
 
@@ -195,7 +195,7 @@ export default class GEditView extends React.Component {
       severities, dateFrom, dateTo, fixed,
       itemSize, showDeviceType, gaugeSize,
       forward, forwardBoardId, servers,
-      tableViewMode
+      tableViewMode, showImage
     }  = this.state
     const values = {
       resource, savedSearchId, monitorId, workflowId, workflowIds, deviceId, serviceName, monitorIds,
@@ -203,7 +203,7 @@ export default class GEditView extends React.Component {
       severities, dateFrom, dateTo, fixed,
       itemSize, showDeviceType, gaugeSize,
       forward, forwardBoardId, servers,
-      tableViewMode
+      tableViewMode, showImage
     }
     onSubmit && onSubmit(values)
   }
@@ -541,7 +541,9 @@ export default class GEditView extends React.Component {
     return (
       <div>
         <TextField name="name" value={name} floatingLabelText="Name" className="valign-top mr-dialog" onChange={this.onChangeText.bind(this, 'name')}/>
-        <Checkbox label="Show Image" checked={showImage} onCheck={this.onChangeText(this, 'showImage')}/>
+        <div className="margin-md-top">
+          <Checkbox label="Show Images" checked={showImage} onCheck={this.onChangeText.bind(this, 'showImage')}/>
+        </div>
       </div>
     )
   }
