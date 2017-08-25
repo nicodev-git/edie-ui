@@ -24,9 +24,10 @@ const fixOptions = [{
 }]
 
 export default class GaugeWizardView extends React.Component {
-  renderDeviceList () {
+  renderDeviceList (showMonitorGroups) {
     const {devices, monitorGroups} = this.props
-    const deviceOptions = [...devices.map(p => ({label: p.name, value: p.id})), ...monitorGroups]
+    const deviceOptions = devices.map(p => ({label: p.name, value: p.id}))
+    const deviceOptions = showMonitorGroups ? [...deviceOptions, ...monitorGroups] : deviceOptions
     return (
       <Field key="deviceId" name="deviceId" component={FormSelect} floatingLabel="Device" options={deviceOptions} className="valign-top mr-dialog"/>
     )
@@ -59,7 +60,7 @@ export default class GaugeWizardView extends React.Component {
     const wfs = index < 0 ? [] : (devices[index].workflowids || [])
     const wfOptions = workflows.filter(p => wfs.includes(p.value))
     return [
-      this.renderDeviceList(),
+      this.renderDeviceList(true),
       <Field key="workflowId" name="workflowId" component={FormSelect} floatingLabel="Workflow" options={wfOptions} className="valign-top"/>
     ]
   }
