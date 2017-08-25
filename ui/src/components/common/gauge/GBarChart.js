@@ -70,7 +70,7 @@ export default class GBarChart extends React.Component {
 
   getParams () {
     const {gauge, searchList} = this.props
-    const {savedSearchId, monitorId, resource, workflowId} = gauge
+    const {savedSearchId, monitorId, resource, workflowId, workflowIds} = gauge
 
     if (resource === 'monitor') {
       return {
@@ -79,7 +79,7 @@ export default class GBarChart extends React.Component {
     } else if (resource === 'incident'){
       return {
         query: '',
-        workflow: workflowId,
+        workflow: [workflowId, ...workflowIds].join(','),
         collections: 'incident',
         severity: severities.map(p => p.value).join(','),
         tag: '',

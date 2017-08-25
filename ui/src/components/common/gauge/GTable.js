@@ -47,7 +47,7 @@ export default class GTable extends React.Component {
 
   getSearchData () {
     const {searchList, gauge} = this.props
-    const {resource, duration, durationUnit, workflowId, savedSearchId} = gauge
+    const {resource, duration, durationUnit, workflowId, workflowIds, savedSearchId} = gauge
 
     const dateFrom = moment().add(-duration, `${durationUnit}s`).startOf(durationUnit).format(dateFormat)
     const dateTo = moment().endOf(durationUnit).format(dateFormat)
@@ -56,7 +56,7 @@ export default class GTable extends React.Component {
       const searchParams = {
         draw: this.state.draw,
         query: '',
-        workflow: workflowId || '',
+        workflow: [workflowId, ...workflowIds].join(','),
         collections: 'incident,event',
         dateFrom,
         dateTo,

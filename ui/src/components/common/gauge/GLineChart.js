@@ -110,7 +110,7 @@ export default class GLineChart extends React.Component {
 
   getParams () {
     const {gauge, searchList} = this.props
-    const {savedSearchId, monitorId, resource, workflowId} = gauge
+    const {savedSearchId, monitorId, resource, workflowId, workflowIds} = gauge
 
     if (resource === 'monitor') {
       return {
@@ -119,7 +119,7 @@ export default class GLineChart extends React.Component {
     } else if (resource === 'incident'){
       return {
         query: '',
-        workflow: workflowId,
+        workflow: [workflowId, ...workflowIds].join(','),
         collections: 'incident',
         severity: severities.map(p => p.value).join(','),
         tag: '',
@@ -139,7 +139,7 @@ export default class GLineChart extends React.Component {
 
   fetchRecordCount (props) {
     const {gauge, searchList} = props
-    const {savedSearchId, monitorId, resource, duration, durationUnit, splitBy, splitUnit,workflowId} = gauge
+    const {savedSearchId, monitorId, resource, duration, durationUnit, splitBy, splitUnit, workflowId, workflowIds} = gauge
 
     this.setState({
       loading: true
@@ -171,7 +171,7 @@ export default class GLineChart extends React.Component {
     } else if (resource === 'incident'){
       const searchParams = {
         query: '',
-        workflow: workflowId,
+        workflow: [workflowId, ...workflowIds].join(','),
         collections: 'incident',
         severity: severities.map(p => p.value).join(','),
         tag: '',
