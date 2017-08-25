@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import moment from 'moment'
-import { findIndex, assign } from 'lodash'
+import { findIndex, assign, debounce } from 'lodash'
 import {
   RaisedButton,
   MenuItem,
@@ -98,9 +98,6 @@ export default class MainIncidents extends Component {
       'cssClassName': 'nowrap width-220',
       'customComponent': (p) => {
         const row = p.rowData
-        // setTimeout(() => {
-        //   ReactTooltip.rebuild()
-        // }, 1)
         return (
           <div className="table-icons-container">
             <div onClick={() => showIncidentDetail(row)}>
@@ -136,6 +133,8 @@ export default class MainIncidents extends Component {
       }
     }]
 
+    this.tooltipRebuild = debounce(ReactTooltip.rebuild, 100)
+
     // ///////////////////////////////////////
 
     this.onFilterChange = this.onFilterChange.bind(this)
@@ -154,6 +153,11 @@ export default class MainIncidents extends Component {
       this.props.fixIncident(incident, user, text)
     })
   }
+
+  onResultCountUpdate (total, data) {
+    this.tooltipRebuild()
+  }
+
   renderColHeader (col) {
     const {columnId, title} = col
     const { currentSortCol, currentSortDir } = this.state
@@ -184,6 +188,8 @@ export default class MainIncidents extends Component {
 
         url="/incident/search/findBy"
         params={params}
+
+        onUpdateCount={this.onResultCountUpdate.bind(this)}
       />
     )
   }
