@@ -2,6 +2,7 @@ import React from 'react'
 import {IconButton} from 'material-ui'
 import ForwardIcon from 'material-ui/svg-icons/navigation/arrow-forward'
 import BackwardIcon from 'material-ui/svg-icons/navigation/arrow-back'
+import {findIndex} from 'lodash'
 
 export default class GaugeWorkflowPicker extends React.Component {
   renderRight () {
@@ -38,8 +39,11 @@ export default class GaugeWorkflowPicker extends React.Component {
       workflows,
       tableClass, height
     } = this.props
-    const monitors = selectedDevice ? (selectedDevice.workflowids || [])
-      .map(monitor => monitor.monitortype === 'logfile') : []
+    const wfs = []
+    selectedDevice && (selectedDevice.workflowids || []).forEach(id => {
+      const index = findIndex(workflows, {id})
+      if (index >= 0) wfs.push(workflows[index])
+    })
     return (
       <div className="padding-md-left padding-md-right">
         <div className="row">
@@ -59,9 +63,9 @@ export default class GaugeWorkflowPicker extends React.Component {
                       onClick={() => onSelectDevice(p)}>{p.name}</td>
                     <td
                       width="50%"
-                      className={i < monitors.length && selectedMonitor && selectedMonitor.uid === monitors[i].uid ? 'selected' : ''}
-                      onClick={i < monitors.length ? () => onSelectMonitor(monitors[i]) : null}>
-                      {i < monitors.length ? monitors[i].name : ''}
+                      className={i < wfs.length && selectedWorkflow && selectedWorkflow.id === wfs[i].id ? 'selected' : ''}
+                      onClick={i < wfs.length ? () => onSelectWorkflow(wfs[i]) : null}>
+                      {i < wfs.length ? wfs[i].name : ''}
                     </td>
                   </tr>
                 )}
