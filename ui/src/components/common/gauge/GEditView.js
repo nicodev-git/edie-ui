@@ -9,6 +9,7 @@ import {gaugeDurationTypes, gaugeResources, severities as allSeverities, gaugeTa
 import DateRangePicker from 'components/common/DateRangePicker'
 
 import GaugeServerPicker from 'components/common/wizard/input/GaugeServerPicker'
+import GaugeWorkflowPicker from 'components/common/wizard/input/GaugeWorkflowPicker'
 import { dialogBodyStyle, dialogTitleStyle } from 'style/common/materialStyles'
 import {CardPanel} from 'components/modal/parts'
 
@@ -229,7 +230,7 @@ export default class GEditView extends React.Component {
       </div>
     ]
   }
-  renderWorkflowPick () {
+  renderWorkflowPick2 () {
     const {deviceId, workflowId} = this.state
     const {devices, workflows} = this.props
     if (this.state.resource !== 'incident') return null
@@ -259,6 +260,28 @@ export default class GEditView extends React.Component {
         </SelectField>
       </div>
     ]
+  }
+  renderWorkflowPick () {
+    const {workflowId} = this.state
+    const {devices, workflows} = this.props
+    if (this.state.resource !== 'incident') return null
+    if (!devices) {
+      return (
+        <div className="col-md-6">
+          <SelectField value={workflowId} floatingLabelText="Workflow" className="valign-top" style={inputStyle} onChange={this.onChangeSelect.bind(this, 'workflowId')}>
+            {workflows.map(p => <MenuItem key={p.id} value={p.id} primaryText={p.name}/>)}
+          </SelectField>
+        </div>
+      )
+    }
+
+    return (
+      <div className="col-md-6">
+        <GaugeWorkflowPicker
+            workflows={workflows}
+        />
+      </div>
+    )
   }
   renderTableViewMode () {
     const {gauge} = this.props
