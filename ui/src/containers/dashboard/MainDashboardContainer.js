@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 
 import {
   fetchDevicesGroups,
+  fetchMonitorGroups,
   fetchSysSearchOptions,
   fetchWorkflows,
 
@@ -41,6 +42,7 @@ class MainDashboardContainer extends React.Component {
 export default connect(
   state => ({
     devices: state.devices.deviceAndGroups,
+    monitorGroups: state.settings.monitorGroups,
 
     gauges: state.gauge.gauges,
     gaugeItems: state.gauge.gaugeItems,
@@ -60,6 +62,7 @@ export default connect(
     logViewParam: state.dashboard.logViewParam
   }), {
     fetchDevicesGroups,
+    fetchMonitorGroups,
     fetchSysSearchOptions,
     fetchWorkflows,
 
