@@ -36,23 +36,19 @@ class LogView extends React.Component {
 
   componentWillMount () {
     const {q} = parse(this.props.location.search || {})
-    let params = assign({}, this.props.params)
+
 
     if (q) {
       try {
+        const {logViewParam} = this.props
         const parsed = JSON.parse(q)
-        const {query} = parsed
-        const queryChips = parseSearchQuery(query)
-        params = assign(params, parsed)
+        const params = assign(...logViewParam, parsed)
 
-        this.props.updateSearchParams(params, this.props.history)
-        this.props.replaceSearchWfs([])
-        this.props.updateSearchTags([])
-        this.props.updateSearchViewFilter('')
-        this.props.resetViewCols()
-        this.props.updateQueryChips(queryChips)
+        this.props.updateViewLogParams(params, this.props.history)
         this.props.change('query', '')
-      } catch (e) {}
+      } catch (e) {
+        console.log(e)
+      }
     }
   }
 
@@ -78,7 +74,7 @@ class LogView extends React.Component {
     const { query } = values
 
     const params = assign({}, this.props.logViewParam, {
-      query
+      query: query || ''
     })
     this.props.updateViewLogParams(params, this.props.history)
   }
@@ -91,7 +87,7 @@ class LogView extends React.Component {
   }
 
   render () {
-    const { handleSubmit, selectedWf, logViewParam, monitorTemplates, searchTags, queryChips, selectedWfs } = this.props
+    const { handleSubmit, logViewParam } = this.props
     const { dateFrom, dateTo } = logViewParam
 
     return (
