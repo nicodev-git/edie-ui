@@ -25,8 +25,8 @@ const fixOptions = [{
 
 export default class GaugeWizardView extends React.Component {
   renderDeviceList () {
-    const {devices} = this.props
-    const deviceOptions = devices.map(p => ({label: p.name, value: p.id}))
+    const {devices, monitorGroups} = this.props
+    const deviceOptions = [...devices.map(p => ({label: p.name, value: p.id})), ...monitorGroups]
     return (
       <Field key="deviceId" name="deviceId" component={FormSelect} floatingLabel="Device" options={deviceOptions} className="valign-top mr-dialog"/>
     )
