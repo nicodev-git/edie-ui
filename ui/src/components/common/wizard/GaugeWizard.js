@@ -25,7 +25,10 @@ class GaugeWizard extends React.Component {
       selectedDevice: null,
       selectedMonitor: null,
       selectedRight: null,
-      selectedServers: []
+      selectedServers: [],
+
+      selectedWorkflow: null,
+      selectedWorkflows: []
     }
   }
 
@@ -171,6 +174,31 @@ class GaugeWizard extends React.Component {
     })
   }
 
+  onClickAddWorkflow () {
+    const {selectedWorkflow, selectedWorkflows} = this.state
+    if (!selectedWorkflow) return
+    if (selectedWorkflows.includes(selectedWorkflow.id)) return
+    this.setState({
+      selectedWorkflows: [...selectedWorkflows, selectedWorkflow.id],
+      selectedWorkflow: null
+    })
+  }
+
+  onClickRemoveWorkflow () {
+    const {selectedRight, selectedWorkflows} = this.state
+    if (!selectedRight) return
+    this.setState({
+      selectedWorkflows: selectedWorkflows.filter(p => p !== selectedRight.id),
+      selectedRight: null
+    })
+  }
+
+  onSelectWorkflow (item) {
+    this.setState({
+      selectedWorkflow: item
+    })
+  }
+
   getSearchOptions () {
     const {userInfo} = this.props
     if (!userInfo) return []
@@ -220,7 +248,7 @@ class GaugeWizard extends React.Component {
     this.props.onClose && this.props.onClose(this, data)
   }
   render () {
-    const {selectedDevice, selectedServers, selectedRight, selectedMonitor} = this.state
+    const {selectedDevice, selectedServers, selectedRight, selectedMonitor, selectedWorkflow, selectedWorkflows} = this.state
     const { handleSubmit, sysSearchOptions, monitors, title, formValues, workflows, templateName, devices, device, monitorGroups } = this.props
 
     const searchList = concat([], this.getSearchOptions().map(p => {
@@ -287,6 +315,12 @@ class GaugeWizard extends React.Component {
 
         onClickAddMonitor={this.onClickAddMonitor.bind(this)}
         onClickRemoveMonitor={this.onClickRemoveMonitor.bind(this)}
+
+        selectedWorkflow={selectedWorkflow}
+        selectedWorkflows={selectedWorkflows}
+        onSelectWorkflow={this.onSelectWorkflow.bind(this)}
+        onClickAddWorkflow={this.onClickAddWorkflow.bind(this)}
+        onClickRemoveWorkflow={this.onClickRemoveWorkflow.bind(this)}
       />
     )
   }

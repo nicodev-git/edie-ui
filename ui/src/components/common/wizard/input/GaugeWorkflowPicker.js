@@ -35,9 +35,11 @@ export default class GaugeWorkflowPicker extends React.Component {
   render () {
     const {devices, selectedDevice, selectedWorkflow,
       onSelectDevice, onSelectWorkflow, onClickAddWorkflow, onClickRemoveWorkflow,
+      workflows,
       tableClass, height
     } = this.props
-    const monitors = selectedDevice ? (selectedDevice.monitors || []).filter(monitor => monitor.monitortype === 'logfile') : []
+    const monitors = selectedDevice ? (selectedDevice.workflowids || [])
+      .map(monitor => monitor.monitortype === 'logfile') : []
     return (
       <div className="padding-md-left padding-md-right">
         <div className="row">
