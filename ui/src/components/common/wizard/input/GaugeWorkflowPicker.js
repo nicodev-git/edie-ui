@@ -4,9 +4,37 @@ import ForwardIcon from 'material-ui/svg-icons/navigation/arrow-forward'
 import BackwardIcon from 'material-ui/svg-icons/navigation/arrow-back'
 
 export default class GaugeWorkflowPicker extends React.Component {
+  renderRight () {
+    const {selectedWorkflows, selectedRight, onSelectRight} = this.props
+    return (
+      <div style={{height: height || 300, overflow: 'auto', border: '1px solid gray'}}>
+        <table className={`table table-hover ${tableClass}`}>
+          <tbody>
+          <tr>
+            <td><b>Selected</b></td>
+          </tr>
+          {selectedWorkflows.map(p => {
+            let isSel = false
+            if (selectedRight) {
+              isSel = p.id === selectedRight.id
+            }
+            return (
+              <tr
+                key={p.id} className={isSel  ? 'selected' : ''}
+                onClick={() => onSelectRight(p)}>
+                <td>{p.name}</td>
+              </tr>
+            )
+          })}
+          </tbody>
+        </table>
+      </div>
+    )
+  }
+
   render () {
-    const {devices, selectedWorkflows, selectedDevice, selectedRight, selectedMonitor,
-      onSelectDevice, onSelectRight, onSelectMonitor, onClickAddWf, onClickRemoveWf,
+    const {devices, selectedDevice, selectedWorkflow,
+      onSelectDevice, onSelectWorkflow, onClickAddWorkflow, onClickRemoveWorkflow,
       tableClass, height
     } = this.props
     const monitors = selectedDevice ? (selectedDevice.monitors || []).filter(monitor => monitor.monitortype === 'logfile') : []
@@ -40,36 +68,15 @@ export default class GaugeWorkflowPicker extends React.Component {
             </div>
           </div>
           <div className="col-md-1 p-none">
-            <IconButton onTouchTap={onClickAddWf}>
+            <IconButton onTouchTap={onClickAddWorkflow}>
               <ForwardIcon />
             </IconButton>
-            <IconButton onTouchTap={onClickRemoveWf}>
+            <IconButton onTouchTap={onClickRemoveWorkflow}>
               <BackwardIcon />
             </IconButton>
           </div>
           <div className="col-md-5 p-none">
-            <div style={{height: height || 300, overflow: 'auto', border: '1px solid gray'}}>
-              <table className={`table table-hover ${tableClass}`}>
-                <tbody>
-                <tr>
-                  <td><b>Selected</b></td>
-                </tr>
-                {selectedWorkflows.map(p => {
-                  let isSel = false
-                  if (selectedRight) {
-                    isSel = p.id === selectedRight.id
-                  }
-                  return (
-                    <tr
-                      key={p.monitorId || p.id} className={isSel  ? 'selected' : ''}
-                      onClick={() => onSelectRight(p)}>
-                      <td>{p.name}</td>
-                    </tr>
-                  )
-                })}
-                </tbody>
-              </table>
-            </div>
+            {this.renderRight()}
           </div>
         </div>
       </div>
