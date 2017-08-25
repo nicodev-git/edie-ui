@@ -6,7 +6,7 @@ import FlipView from './FlipView'
 import GEditView from './GEditView'
 
 import {showAlert} from 'components/common/Alert'
-import { ROOT_URL } from 'actions/config'
+// import { ROOT_URL } from 'actions/config'
 
 export default class GNews extends React.Component {
   constructor (props) {
@@ -43,7 +43,7 @@ export default class GNews extends React.Component {
   }
 
   fetchArticles () {
-    axios.get('http://www.cyber-security.io/rcontent/search/findAllPublicArticles?type=rss&type=text&draw=1&page=0&size=5&sort=dateCreated,desc').then(res => {
+    axios.get('http://www.cyber-security.io/rcontent/search/findAllPublicArticles?type=rss&type=text&draw=1&page=0&size=20&sort=dateCreated,desc').then(res => {
       this.setState({
         articles: res.data._embedded.contents
       })
@@ -54,13 +54,13 @@ export default class GNews extends React.Component {
 
   renderFrontView () {
     return (
-      <div className="flex-1" style={{overflow: 'auto'}}>
-        <table>
+      <div className="flex-1 padding-md" style={{overflow: 'auto'}}>
+        <table className="table">
           <tbody>
           {this.state.articles.map(p =>
             <tr>
               <td>{p.subject}</td>
-              <td>{moment(p.dateUpdated).fromNow()}</td>
+              <td><small>{moment(p.dateUpdated).fromNow()}</small></td>
             </tr>
           )}
           </tbody>
