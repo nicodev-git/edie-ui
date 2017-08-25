@@ -43,7 +43,7 @@ export default class GNews extends React.Component {
   }
 
   fetchArticles () {
-    axios.get(`${ROOT_URL}/event/search/findByDate`).then(res => {
+    axios.get('http://www.cyber-security.io/rcontent/search/findAllPublicArticles?type=rss&type=text&draw=1&page=0&size=5&sort=dateCreated,desc').then(res => {
       this.setState({
         articles: res.data._embedded.contents
       })
