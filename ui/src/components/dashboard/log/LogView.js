@@ -82,11 +82,6 @@ class LogView extends React.Component {
   handleFormSubmit (values) {
   }
 
-  onClickSearch () {
-    submit('logViewForm')
-    // this.props.submit(this.props.handleSubmit(this.handleFormSubmit.bind(this)))
-  }
-
   onChangeRange ({startDate, endDate}) {
     this.props.updateViewLogParams(assign({}, this.props.logViewParam, {
       dateFrom: startDate.format(dateFormat),
@@ -108,8 +103,6 @@ class LogView extends React.Component {
             startDate={dateFrom}
             endDate={dateTo}
             onChangeDateRange={this.onChangeRange.bind(this)}
-
-            onClickSearch={this.onClickSearch.bind(this)}
           />
         </TabPageHeader>
         <TabPageBody tabs={[]} tab={0} history={this.props.history} location={this.props.location} transparent>

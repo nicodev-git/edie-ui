@@ -1,5 +1,5 @@
 import React from 'react'
-import { Field } from 'redux-form'
+import { Form, Field } from 'redux-form'
 import {FlatButton, IconButton} from 'material-ui'
 import ActionSearch from 'material-ui/svg-icons/action/search'
 
@@ -19,16 +19,14 @@ export default class LogSearchFormView extends React.Component {
 
       startDate,
       endDate,
-      onChangeDateRange,
-
-      onClickSearch
+      onChangeDateRange
     } = this.props
     return (
-      <form onSubmit={onSubmit}>
+      <Form onSubmit={onSubmit}>
         <div style={{background: '#dadada', paddingLeft: 10}}>
           <div className="nowrap">
             <Field name="query" component={FormInput} label="Search" onKeyDown={onSearchKeyDown} style={{minWidth: 200}} className="valign-top"/>
-            <IconButton tooltip="Search" onTouchTap={onClickSearch} type="submit" className="valign-top"><ActionSearch /></IconButton>
+            <IconButton tooltip="Search" type="submit" className="valign-top"><ActionSearch /></IconButton>
             <DateRangePicker
               className="valign-top"
               startDate={startDate}
@@ -38,7 +36,7 @@ export default class LogSearchFormView extends React.Component {
               style={{marginTop: '4px'}}/>
           </div>
         </div>
-      </form>
+      </Form>
     )
   }
 }
