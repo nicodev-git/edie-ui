@@ -60,7 +60,7 @@ export default class GNews extends React.Component {
           {this.state.articles.map(p =>
             <tr>
               <td>{p.subject}</td>
-              <td><small>{moment(p.dateUpdated).fromNow()}</small></td>
+              <td className="nowrap"><small>{moment(p.dateUpdated).fromNow()}</small></td>
             </tr>
           )}
           </tbody>
