@@ -80,6 +80,12 @@ class LogView extends React.Component {
   }
 
   handleFormSubmit (values) {
+    const { query } = values
+
+    const params = assign({}, this.props.logViewParam, {
+      query
+    })
+    this.props.updateViewLogParams(params, this.props.history)
   }
 
   onChangeRange ({startDate, endDate}) {
