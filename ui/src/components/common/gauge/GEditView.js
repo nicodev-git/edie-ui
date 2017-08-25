@@ -45,6 +45,7 @@ export default class GEditView extends React.Component {
       deviceId: gauge.deviceId || '',
       monitorId: gauge.monitorId || '',
       workflowId: gauge.workflowId || '',
+      workflowIds: gauge.workflowIds || [],
       serviceName: gauge.serviceName || '',
       monitorIds: (monitorGroup ? monitorGroup.monitorids : gauge.monitorIds) || [],
 
@@ -70,6 +71,8 @@ export default class GEditView extends React.Component {
       selectedMonitor: null,
       selectedRight: null,
       servers: gauge.servers || [],
+
+      selectedWorkflow: null,
 
       tableViewMode: gauge.tableViewMode || 'json'
     }
@@ -157,6 +160,13 @@ export default class GEditView extends React.Component {
         (p.type === 'monitor' ? p.monitorId !== selectedRight.monitorId : p.id !== selectedRight.id))
     })
   }
+
+  onSelectWorkflow (item) {
+    this.setState({
+      selectedWorkflow: item
+    })
+  }
+
 
   onClickDone () {
     const {onSubmit} = this.props
@@ -262,7 +272,7 @@ export default class GEditView extends React.Component {
     ]
   }
   renderWorkflowPick () {
-    const {workflowId} = this.state
+    const {workflowId, workflowIds, selectedWorkflow, selectedDevice, selectedRight} = this.state
     const {devices, workflows} = this.props
     if (this.state.resource !== 'incident') return null
     if (!devices) {
@@ -278,7 +288,18 @@ export default class GEditView extends React.Component {
     return (
       <div className="col-md-6">
         <GaugeWorkflowPicker
-            workflows={workflows}
+          workflows={workflows}
+
+          selectedDevice={selectedDevice}
+          selectedWorkflow={selectedWorkflow}
+          onSelectDevice={this.onSelectDevice.bind(this)}
+          onSelectWorkflow={this.onSelectWorkflow.bind(this)}
+          onClickAddWorkflow
+          onClickRemoveWorkflow
+
+          selectedWorkflows={workflowIds}
+          selectedRight={selectedRight}
+          onSelectRight={this.onSelectRight.bind(this)}
         />
       </div>
     )
