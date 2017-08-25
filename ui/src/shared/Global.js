@@ -14,6 +14,8 @@ export function getCustomImageUrl (img) {
   return `data:${img.mimeType};base64,${img.content}`
 }
 
+export const cybertronUrl = 'http://www.cyber-security.io'
+
 export function isGroup (device) {
   return device && device.groupid === undefined
 }

@@ -74,7 +74,9 @@ export default class GEditView extends React.Component {
 
       selectedWorkflow: null,
 
-      tableViewMode: gauge.tableViewMode || 'json'
+      tableViewMode: gauge.tableViewMode || 'json',
+
+      showImage: gauge.showImage || false
     }
   }
 
@@ -533,6 +535,17 @@ export default class GEditView extends React.Component {
       </div>
     )
   }
+
+  renderNews () {
+    const {name, showImage} = this.state
+    return (
+      <div>
+        <TextField name="name" value={name} floatingLabelText="Name" className="valign-top mr-dialog" onChange={this.onChangeText.bind(this, 'name')}/>
+        <Checkbox label="Show Image" checked={showImage} onCheck={this.onChangeText(this, 'showImage')}/>
+      </div>
+    )
+  }
+
   renderContent () {
     const {gauge} = this.props
     switch(gauge.templateName) {
@@ -548,6 +561,8 @@ export default class GEditView extends React.Component {
         return this.renderServers()
       case 'Monitors':
         return this.renderMonitors()
+      case 'News':
+        return this.renderNews()
       default:
         return this.renderNormal()
     }
