@@ -1,17 +1,13 @@
 import React from 'react'
-import { reduxForm, submit, formValueSelector } from 'redux-form'
+import { reduxForm, submit } from 'redux-form'
 import { connect } from 'react-redux'
-import { merge, assign, concat, isArray, keys, findIndex, debounce } from 'lodash'
-import moment from 'moment'
+import { assign, debounce } from 'lodash'
 import ReactTooltip from 'react-tooltip'
-import {Popover, FlatButton, Chip} from 'material-ui'
-import NavigationClose from 'material-ui/svg-icons/navigation/close'
 
-import InfiniteTable from 'components/common/InfiniteTable'
 import TabPage from 'components/common/TabPage'
 import TabPageBody from 'components/common/TabPageBody'
 import TabPageHeader from 'components/common/TabPageHeader'
-import { parseSearchQuery, guid, dateFormat, collections, severities, viewFilters } from 'shared/Global'
+import { guid, dateFormat, collections, severities, viewFilters } from 'shared/Global'
 import { showConfirm } from 'components/common/Alert'
 import {renderEntity} from 'components/common/CellRenderers'
 import {chipStyles} from 'style/common/materialStyles'
@@ -122,11 +118,8 @@ class LogView extends React.Component {
 }
 
 const LogViewForm = reduxForm({form: 'logViewForm'})(LogView)
-// const selector = formValueSelector('logViewForm')
 
 export default connect(
   state => ({
-    // initialValues: assign({}, state.search.params, {query: ''}),
-    // selectedSearchOption: selector(state, 'searchOptionIndex')
   })
 )(LogViewForm)
