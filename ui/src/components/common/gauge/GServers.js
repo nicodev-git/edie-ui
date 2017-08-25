@@ -134,8 +134,8 @@ export default class GServers extends React.Component {
     const items = this.getServers()
     return (
       <div className="flex-vertical flex-1">
-        <div className="flex-1" style={{overflow: 'hidden'}}>
-          <div style={{height: '100%', padding: 1.5, overflow: 'auto'}}>
+        <div className="flex-1 padding-md" style={{overflow: 'hidden'}}>
+          <div style={{height: '100%', overflow: 'auto'}}>
           {items.map(item => this.renderItemView(item, items.length))}
           </div>
         </div>
