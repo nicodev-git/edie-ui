@@ -188,7 +188,7 @@ export default class GEditView extends React.Component {
 
   onClickDone () {
     const {onSubmit} = this.props
-    const {resource, savedSearchId, monitorId, workflowId, deviceId, serviceName, monitorIds,
+    const {resource, savedSearchId, monitorId, workflowId, workflowIds, deviceId, serviceName, monitorIds,
       duration, durationUnit, splitBy, splitUnit, name,
       severities, dateFrom, dateTo, fixed,
       itemSize, showDeviceType, gaugeSize,
@@ -196,7 +196,7 @@ export default class GEditView extends React.Component {
       tableViewMode
     }  = this.state
     const values = {
-      resource, savedSearchId, monitorId, workflowId, deviceId, serviceName, monitorIds,
+      resource, savedSearchId, monitorId, workflowId, workflowIds, deviceId, serviceName, monitorIds,
       duration, durationUnit, splitBy, splitUnit, name,
       severities, dateFrom, dateTo, fixed,
       itemSize, showDeviceType, gaugeSize,
