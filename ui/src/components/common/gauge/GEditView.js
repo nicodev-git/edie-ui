@@ -167,6 +167,24 @@ export default class GEditView extends React.Component {
     })
   }
 
+  onClickAddWorkflow () {
+    const {selectedWorkflow, workflowIds} = this.state
+    if (!selectedWorkflow) return
+    if (workflowIds.includes(selectedWorkflow.id)) return
+    this.setState({
+      workflowIds: [...workflowIds, selectedWorkflow.id],
+      selectedWorkflow: null
+    })
+  }
+
+  onClickRemoveWorkflow () {
+    const {selectedRight, workflowIds} = this.state
+    if (!selectedRight) return
+    this.setState({
+      workflowIds: workflowIds.filter(p => p !== selectedRight.id),
+      selectedRight: null
+    })
+  }
 
   onClickDone () {
     const {onSubmit} = this.props
@@ -286,16 +304,17 @@ export default class GEditView extends React.Component {
     }
 
     return (
-      <div className="col-md-6">
+      <div className="col-md-12">
         <GaugeWorkflowPicker
+          devices={devices}
           workflows={workflows}
 
           selectedDevice={selectedDevice}
           selectedWorkflow={selectedWorkflow}
           onSelectDevice={this.onSelectDevice.bind(this)}
           onSelectWorkflow={this.onSelectWorkflow.bind(this)}
-          onClickAddWorkflow
-          onClickRemoveWorkflow
+          onClickAddWorkflow={this.onClickAddWorkflow.bind(this)}
+          onClickRemoveWorkflow={this.onClickRemoveWorkflow.bind(this)}
 
           selectedWorkflows={workflowIds}
           selectedRight={selectedRight}
