@@ -10,6 +10,7 @@ import DateRangePicker from 'components/common/DateRangePicker'
 
 import GaugeServerPicker from './input/GaugeServerPicker'
 import GaugeLogMonitorPicker from './input/GaugeLogMonitorPicker'
+import GaugeWorkflowPicker from './input/GaugeWorkflowPicker'
 
 const durations = '1 2 3 5 10 15 30'.split(' ').map(p => ({
   label: p, value: p
@@ -47,22 +48,29 @@ export default class GaugeWizardView extends React.Component {
       <Field key="monitorId" name="monitorId" component={FormSelect} floatingLabel="Monitor" options={monitorOptions} className="valign-top"/>
     ]
   }
+  renderWorkflowPick1 () {
+    // const {devices, workflows, formValues} = this.props
+    // if (formValues.resource !== 'incident') return null
+    //
+    // if (!devices) {
+    //   return (
+    //     <Field name="workflowId" component={FormSelect} floatingLabel="Workflow" options={workflows} className="valign-top mr-dialog"/>
+    //   )
+    // }
+    // const index = findIndex(devices, {id: formValues.deviceId})
+    // const wfs = index < 0 ? [] : (devices[index].workflowids || [])
+    // const wfOptions = workflows.filter(p => wfs.includes(p.value))
+    // return [
+    //   this.renderDeviceList(true),
+    //   <Field key="workflowId" name="workflowId" component={FormSelect} floatingLabel="Workflow" options={wfOptions} className="valign-top"/>
+    // ]
+  }
   renderWorkflowPick () {
-    const {devices, workflows, formValues} = this.props
+    const {formValues} = this.props
     if (formValues.resource !== 'incident') return null
-
-    if (!devices) {
-      return (
-        <Field name="workflowId" component={FormSelect} floatingLabel="Workflow" options={workflows} className="valign-top mr-dialog"/>
-      )
-    }
-    const index = findIndex(devices, {id: formValues.deviceId})
-    const wfs = index < 0 ? [] : (devices[index].workflowids || [])
-    const wfOptions = workflows.filter(p => wfs.includes(p.value))
-    return [
-      this.renderDeviceList(true),
-      <Field key="workflowId" name="workflowId" component={FormSelect} floatingLabel="Workflow" options={wfOptions} className="valign-top"/>
-    ]
+    return (
+      <GaugeWorkflowPicker {...this.props}/>
+    )
   }
   renderLogicalGroup () {
     const {devices, formValues, selectedMonitors, toggleMonitorId} = this.props
@@ -164,12 +172,12 @@ export default class GaugeWizardView extends React.Component {
   }
 
   renderTable () {
-    const {workflows} = this.props
+    const {workflowOptions} = this.props
 
     return (
       <div>
         <Field name="name" component={FormInput} floatingLabel="Name" className="valign-top mr-dialog"/>
-        <Field name="workflowId" component={FormSelect} floatingLabel="Workflow" options={workflows} className="valign-top mr-dialog"/>
+        <Field name="workflowId" component={FormSelect} floatingLabel="Workflow" options={workflowOptions} className="valign-top mr-dialog"/>
       </div>
     )
   }
@@ -306,9 +314,9 @@ export default class GaugeWizardView extends React.Component {
     }
   }
   render () {
-    const {onSubmit, onHide, title, templateName} = this.props
-    const width = ['Servers', 'Log'].includes(templateName) ? 950 : 665
-
+    const {onSubmit, onHide, title} = this.props
+    // const width = ['Servers', 'Log'].includes(templateName) ? 950 : 665
+    const width = 950
     return (
       <Modal title={title || 'Gauge'} onRequestClose={onHide} contentStyle={{width, maxWidth: 'initial'}}>
         <form onSubmit={onSubmit}>
