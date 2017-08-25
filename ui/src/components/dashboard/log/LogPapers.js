@@ -1,7 +1,7 @@
 import React from 'react'
 import {Paper} from 'material-ui'
 import ReduxInfiniteScroll from 'redux-infinite-scroll'
-import { concat, assign, isEqual, keys, debounce, chunk, reverse } from 'lodash'
+import { concat, assign, isEqual, keys, debounce, chunk, reverse, merge, isArray } from 'lodash'
 import $ from 'jquery'
 import moment from 'moment'
 
@@ -26,6 +26,33 @@ export default class LogPapers extends React.Component {
     this.lastRequest = null
 
     this.loadMoreDeb = debounce(this.loadMore.bind(this), 200)
+  }
+
+  getHighlighted (entity, highlights) {
+    let data = merge({}, entity)
+    keys(highlights).forEach(path => {
+      const highlighted = highlights[path]
+      const pathElements = path.split('.')
+
+      let el = data
+      pathElements.forEach((pathEl, index) => {
+        if (index === pathElements.length - 1) {
+          if (isArray(el[pathEl])) {
+            el = el[pathEl]
+            el.forEach((item, index) => {
+              if (highlighted.match(item)) el[index] = highlighted
+            })
+          } else {
+            el[pathEl] = highlighted
+          }
+        } else {
+          el = el[pathEl]
+          if (isArray(el)) el = el[0]
+        }
+      })
+    })
+
+    return data
   }
 
   componentWillMount () {
@@ -79,6 +106,11 @@ export default class LogPapers extends React.Component {
     this.lastRequest = $.get(`${ROOT_URL}${url}?${encodeUrlParams(urlParams)}`).done(res => {
       const embedded = res._embedded
       let data = embedded[keys(embedded)[0]]
+
+      data = data.map(d => ({
+        ...d,
+        entity: this.getHighlighted(d.entity, d.highlights)
+      }))
       if (handleRecord) {
         data = data.map(d => handleRecord(d))
       }
@@ -142,7 +174,7 @@ export default class LogPapers extends React.Component {
           <Paper zDepth={paperZDepth}>
             <div className="header-red">{title} : {timeFrom} ~ {timeTo}</div>
             {list.map(row =>
-              <div key={row.id} className="padding-xs">{row.entity && row.entity.dataobj ? row.entity.dataobj.line : ' '}</div>
+              <div key={row.id} className="padding-xs" dangerouslySetInnerHTML={{__html: row.entity && row.entity.dataobj ? row.entity.dataobj.line : ' '}}/>
             )}
           </Paper>
         </div>
