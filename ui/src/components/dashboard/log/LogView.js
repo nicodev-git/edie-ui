@@ -34,44 +34,39 @@ class LogView extends React.Component {
     this.tooltipRebuild = debounce(ReactTooltip.rebuild, 100)
   }
 
-  getHighlighted (entity, highlights) {
-    let data = merge({}, entity)
-    keys(highlights).forEach(path => {
-      const highlighted = highlights[path]
-      const pathElements = path.split('.')
+  componentWillMount () {
+    const {q} = parse(this.props.location.search || {})
+    let params = assign({}, this.props.params)
 
-      let el = data
-      pathElements.forEach((pathEl, index) => {
-        if (index === pathElements.length - 1) {
-          if (isArray(el[pathEl])) {
-            el = el[pathEl]
-            el.forEach((item, index) => {
-              if (highlighted.match(item)) el[index] = highlighted
-            })
-          } else {
-            el[pathEl] = highlighted
-          }
-        } else {
-          el = el[pathEl]
-          if (isArray(el)) el = el[0]
-        }
-      })
-    })
+    if (q) {
+      try {
+        const parsed = JSON.parse(q)
+        const {query} = parsed
+        const queryChips = parseSearchQuery(query)
+        params = assign(params, parsed)
 
-    return data
+        this.props.updateSearchParams(params, this.props.history)
+        this.props.replaceSearchWfs([])
+        this.props.updateSearchTags([])
+        this.props.updateSearchViewFilter('')
+        this.props.resetViewCols()
+        this.props.updateQueryChips(queryChips)
+        this.props.change('query', '')
+      } catch (e) {}
+    }
   }
 
   onResultCountUpdate (total, data) {
-    let {cols} = this.state
-    if (data && data.length) {
-      cols = keys(data[0].entity)
-    }
-    this.setState({
-      total,
-      cols
-    })
-
-    this.tooltipRebuild()
+    // let {cols} = this.state
+    // if (data && data.length) {
+    //   cols = keys(data[0].entity)
+    // }
+    // this.setState({
+    //   total,
+    //   cols
+    // })
+    //
+    // this.tooltipRebuild()
   }
   onSearchKeyDown (e) {
     if (e.keyCode === 13) {
