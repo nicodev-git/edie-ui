@@ -3,10 +3,10 @@ import {IconButton} from 'material-ui'
 import ForwardIcon from 'material-ui/svg-icons/navigation/arrow-forward'
 import BackwardIcon from 'material-ui/svg-icons/navigation/arrow-back'
 
-export default class DeviceWorkflowPicker extends React.Component {
+export default class GaugeWorkflowPicker extends React.Component {
   render () {
-    const {devices, selectedServers, selectedDevice, selectedRight, selectedMonitor,
-      onSelectDevice, onSelectRight, onSelectMonitor, onClickAddServer, onClickRemoveServer,
+    const {devices, selectedWorkflows, selectedDevice, selectedRight, selectedMonitor,
+      onSelectDevice, onSelectRight, onSelectMonitor, onClickAddWf, onClickRemoveWf,
       tableClass, height
     } = this.props
     const monitors = selectedDevice ? (selectedDevice.monitors || []).filter(monitor => monitor.monitortype === 'logfile') : []
@@ -40,10 +40,10 @@ export default class DeviceWorkflowPicker extends React.Component {
             </div>
           </div>
           <div className="col-md-1 p-none">
-            <IconButton onTouchTap={() => onClickAddServer(true)}>
+            <IconButton onTouchTap={onClickAddWf}>
               <ForwardIcon />
             </IconButton>
-            <IconButton onTouchTap={onClickRemoveServer}>
+            <IconButton onTouchTap={onClickRemoveWf}>
               <BackwardIcon />
             </IconButton>
           </div>
@@ -54,13 +54,10 @@ export default class DeviceWorkflowPicker extends React.Component {
                 <tr>
                   <td><b>Selected</b></td>
                 </tr>
-                {selectedServers.map(p => {
+                {selectedWorkflows.map(p => {
                   let isSel = false
                   if (selectedRight) {
-                    if (selectedRight.type === 'monitor')
-                      isSel = p.type === 'monitor' && p.monitorId === selectedRight.monitorId
-                    else
-                      isSel = p.type === 'device' && p.id === selectedRight.id
+                    isSel = p.id === selectedRight.id
                   }
                   return (
                     <tr
