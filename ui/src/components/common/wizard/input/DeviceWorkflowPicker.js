@@ -3,7 +3,7 @@ import {IconButton} from 'material-ui'
 import ForwardIcon from 'material-ui/svg-icons/navigation/arrow-forward'
 import BackwardIcon from 'material-ui/svg-icons/navigation/arrow-back'
 
-export default class GaugeLogMonitorPicker extends React.Component {
+export default class DeviceWorkflowPicker extends React.Component {
   render () {
     const {devices, selectedServers, selectedDevice, selectedRight, selectedMonitor,
       onSelectDevice, onSelectRight, onSelectMonitor, onClickAddServer, onClickRemoveServer,
