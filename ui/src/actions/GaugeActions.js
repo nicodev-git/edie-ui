@@ -13,7 +13,9 @@ import {
 
   SHOW_GAUGE_BOARDS_MODAL,
 
-  SHOW_GAUGE_MODAL
+  SHOW_GAUGE_MODAL,
+
+  SHOW_GAUGE_PICKER
 } from './types'
 
 import { apiError } from './Errors'
@@ -137,5 +139,10 @@ export const showGaugeBoardsModal = (visible) => {
 export const showGaugeModal = (visible, gauge) => {
   return dispatch => {
     dispatch({type: SHOW_GAUGE_MODAL, visible, gauge})
+  }
+}
+export const showGaugePicker = (visible) => {
+  return dispatch => {
+    dispatch({type: SHOW_GAUGE_PICKER, visible})
   }
 }

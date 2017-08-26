@@ -448,6 +448,7 @@ export const SET_DEFAULT_BOARD = 'SET_DEFAULT_BOARD'
 
 export const SHOW_GAUGE_BOARDS_MODAL = 'SHOW_GAUGE_BOARDS_MODAL'
 export const SHOW_GAUGE_MODAL = 'SHOW_GAUGE_MODAL'
+export const SHOW_GAUGE_PICKER = 'SHOW_GAUGE_PICKER'
 
 ///////////////////////////////////////////////////////////////
 
