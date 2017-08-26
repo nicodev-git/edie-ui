@@ -254,7 +254,8 @@ class InfiniteTable extends React.Component {
       columns = cells.map(p => ({
         Header: p.displayName,
         accessor: p.columnName,
-        className: 'text-center'
+        className: 'text-center',
+        style: {whiteSpace: 'normal'}
       }))
     }
 
