@@ -1,6 +1,5 @@
 import React from 'react'
 import axios from 'axios'
-import moment from 'moment'
 
 import FlipView from './FlipView'
 import GEditView from './GEditView'
@@ -63,13 +62,13 @@ export default class GNews extends React.Component {
             const {imgUrl, desc, date} = cybertronRenderInfo(p)
 
             return (
-              <tr>
+              <tr key={p.contentId}>
                 <td className="news-item">
                   <div className="flex-horizontal">
                     <img src={imgUrl} alt=""/>
                     <div className="flex-1 article-body">
                       <div className="article-title">
-                        <a href={`${cybertronUrl}/detail/${p.contentId || p.id}`} target="_blank" style={{color: 'initial'}}>{p.subject}</a>
+                        <a href={`${cybertronUrl}/detail/${p.contentId}`} target="_blank" style={{color: 'initial'}}>{p.subject}</a>
                       </div>
                       <div className="article-desc">{desc}</div>
                       <div className="article-time">{date}</div>

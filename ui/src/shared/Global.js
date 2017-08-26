@@ -361,7 +361,7 @@ export function cybertronRenderInfo (item) {
   let imgUrl, desc, date
 
   if (item.type === 'rss') {
-    imgUrl = `${cybertronUrl}/${item.pictureURL}`
+    imgUrl = item.pictureURL
   } else if (item.type === 'video') {
     imgUrl = `http://i.ytimg.com/vi/${item.videoId}/mqdefault.jpg`
   } else {

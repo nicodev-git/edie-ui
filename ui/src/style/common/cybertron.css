@@ -1,27 +1,27 @@
-.news-item.small {
+.news-item {
     padding: 4px 0;
 }
 
-.news-item.small .article-body {
+.news-item .article-body {
     padding: 4px;
 }
 
-.news-item.small .article-title {
+.news-item .article-title {
     font-size: 14px;
     font-weight: bold;
     max-height: 17px;
     overflow: hidden;
 }
 
-.news-item.small .article-desc {
+.news-item .article-desc {
     overflow: hidden;
     max-width: 100%;
     max-height: 16px;
-    font-size: 11px;
+    font-size: 12px;
 }
 
-.news-item.small .article-time {
-    font-size: 11px;
+.news-item .article-time {
+    font-size: 12px;
 }
 
 .news-item img{
