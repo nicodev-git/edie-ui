@@ -247,7 +247,7 @@ class InfiniteTable extends React.Component {
   }
 
   renderTable () {
-    const {cells} = this.props
+    const {cells, showTableHeading} = this.props
     let columns = []
 
     if (cells) {
@@ -265,6 +265,8 @@ class InfiniteTable extends React.Component {
         key="0"
         data={this.getCurrentData()}
         columns={columns}
+
+        getTheadProps={() => showTableHeading ? '' : 'hidden'}
 
         showPagination={false}
       />
