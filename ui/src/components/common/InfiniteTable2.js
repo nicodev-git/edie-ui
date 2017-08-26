@@ -255,7 +255,8 @@ class InfiniteTable extends React.Component {
         Header: p.displayName,
         accessor: p.columnName,
         className: 'text-center',
-        style: {whiteSpace: 'normal'}
+        style: {whiteSpace: 'normal'},
+        Cell: p.customComponent ? props => p.customComponent({rowData: props.row._original, data: props.value}) : null
       }))
     }
 
