@@ -1,5 +1,4 @@
 import React from 'react'
-import Griddle from 'griddle-react'
 import ReactTable from 'react-table'
 import { concat, assign, isEqual, keys, debounce } from 'lodash'
 import ReduxInfiniteScroll from 'redux-infinite-scroll'
@@ -36,6 +35,8 @@ class InfiniteTable extends React.Component {
   componentWillMount () {
     const {onUpdateCount} = this.props
     onUpdateCount && onUpdateCount(0, [], true)
+
+    this.getExternalData(1, true)
   }
 
   componentDidMount () {
@@ -207,43 +208,6 @@ class InfiniteTable extends React.Component {
   getBodyHeight () {
     const height = parseInt(this.props.bodyHeight || '0', 10)
     return height ? `${height}px` : height
-  }
-
-  renderTable1 () {
-    const rowMetadata = assign({}
-      , this.defaultRowMetaData
-      , this.props.rowMetadata || {})
-    const bodyHeight = this.getBodyHeight()
-    const {tableClassName} = this.props
-    return (
-      <Griddle
-        key="0"
-        id={this.props.id}
-        useExternal={false}
-        enableSort={false}
-
-        columns={this.props.cells.map(item => item.columnName)}
-        columnMetadata={this.props.cells}
-        rowMetadata={rowMetadata}
-        rowHeight={this.props.rowHeight}
-        bodyHeight={bodyHeight || null}
-        showTableHeading={this.props.showTableHeading}
-
-        results={this.getCurrentData()}
-        resultsPerPage={this.getCountPerPage()}
-
-        tableClassName={`table table-hover ${tableClassName || 'table-panel'}`}
-
-        useFixedHeader={false}
-        noDataMessage={this.props.noDataMessage}
-        useGriddleStyles={false}
-
-        onRowClick={this.onRowClick.bind(this)}
-
-        onRowDblClick={this.onRowDblClick.bind(this)}
-        ref="griddle"
-      />
-    )
   }
 
   renderTable () {
