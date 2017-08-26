@@ -1,21 +1,14 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
-import Griddle, { plugins, RowDefinition, ColumnDefinition} from 'griddle-react'
+import Griddle from 'griddle-react'
+import ReactTable from 'react-table'
 import { concat, assign, isEqual, keys, debounce } from 'lodash'
 import ReduxInfiniteScroll from 'redux-infinite-scroll'
-import {connect} from 'react-redux'
 
 import $ from 'jquery'
 import { encodeUrlParams } from 'shared/Global'
 import { ROOT_URL } from 'actions/config'
 
-const tablePlugins = [plugins.LocalPlugin]
-const tableStyleConfig = {
-  classNames: {
-    Table: 'griddle-table table table-hover table-panel',
-    NoResults: 'hidden'
-  }
-}
+import 'react-table/react-table.css'
 
 class InfiniteTable extends React.Component {
   constructor (props) {
@@ -38,63 +31,36 @@ class InfiniteTable extends React.Component {
     this.lastRequest = null
 
     this.loadMoreDeb = debounce(this.loadMore.bind(this), 200)
-
-    this.renderTableRow = this.renderTableRow.bind(this)
-    this.renderTableCell = this.renderTableCell.bind(this)
-
-
-    this.tableComponents = {
-      Layout: this.renderLayout,
-      // Cell: this.renderTableCell,
-      // Row: this.renderTableRow,
-      // RowContainer: row => props => row(props)
-      // Row: this.renderTableRow
-      Row: connect((state, props) => ({
-      }))( ({ griddleKey, columnIds, Cell }) =>
-        <tr
-          className={this.getBodyCssClassName(this.getCurrentData()[griddleKey])}
-          onClick={e => this.onRowClickAt(griddleKey, e)}>
-          {
-            columnIds.map(r =>
-              <Cell key={r} griddleKey={griddleKey} columnId={r} />
-            )
-          }
-        </tr>
-      )
-    }
   }
 
   componentWillMount () {
     const {onUpdateCount} = this.props
-    onUpdateCount && onUpdateCount(0)
+    onUpdateCount && onUpdateCount(0, [], true)
   }
 
   componentDidMount () {
-    // if (this.props.useExternal) {
-    //   this.getExternalData()
-    // }
-
-    this.domNode = ReactDOM.findDOMNode(this.refs.griddle)
-    $(this.domNode).on('dblclick', 'tbody tr', (e) => {
-      const index = $(e.target).closest('tr').index()
-      const data = this.getCurrentData()
-      if (data && data[index]) {
-        let row = { props: { data: data[index] } }
-        this.onRowClick(row)
-        this.onRowDblClick(row)
-      }
-    })
+    // this.domNode = ReactDOM.findDOMNode(this.refs.griddle)
+    // $(this.domNode).on('dblclick', 'tbody tr', (e) => {
+    //   const index = $(e.target).closest('tr').index()
+    //   const data = this.getCurrentData()
+    //   if (data && data[index]) {
+    //     let row = { props: { data: data[index] } }
+    //     this.onRowClick(row)
+    //     this.onRowDblClick(row)
+    //   }
+    // })
   }
 
   componentDidUpdate (prevProps, prevState) {
-    const {url, params} = this.props
-    if (url !== prevProps.url || !isEqual(params, prevProps.params)) {
+    const {url, params, handleRecord} = this.props
+    if (url !== prevProps.url || !isEqual(params, prevProps.params) ||
+      (prevProps.handleRecord && !handleRecord) || (!prevProps.handleRecord && handleRecord)) {
       this.refresh()
     }
   }
 
   componentWillUnmount () {
-    $(this.domNode).off('dblclick')
+    // $(this.domNode).off('dblclick')
     if (this.lastRequest) {
       this.lastRequest.abort()
       this.lastRequest = null
@@ -111,11 +77,13 @@ class InfiniteTable extends React.Component {
 
   getExternalData (page, clear) {
     if (this.state.isLoading) {
-      // console.log('Already loading.')
+      if (clear) {
+        if (this.state.results.length) this.setState({results: []})
+      }
       return
     }
 
-    const {url, params, pageSize, onUpdateCount} = this.props
+    const {url, params, pageSize, onUpdateCount, handleRecord} = this.props
     if (!url) return
     page = clear ? 1 : (page || 1)
     let urlParams = assign({
@@ -133,7 +101,10 @@ class InfiniteTable extends React.Component {
 
     this.lastRequest = $.get(`${ROOT_URL}${url}?${encodeUrlParams(urlParams)}`).done(res => {
       const embedded = res._embedded
-      const data = embedded[keys(embedded)[0]]
+      let data = embedded[keys(embedded)[0]]
+      if (handleRecord) {
+        data = data.map(d => handleRecord(d))
+      }
 
       const total = res.page.totalElements
       let state = {
@@ -146,7 +117,7 @@ class InfiniteTable extends React.Component {
       }
 
       this.setState(state)
-      onUpdateCount && onUpdateCount(total)
+      onUpdateCount && onUpdateCount(total, state.results)
     })
 
     return this.lastRequest
@@ -158,18 +129,6 @@ class InfiniteTable extends React.Component {
     return ''
   }
 
-  getTotalCount () {
-    return this.state.useExternal ? this.state.total : this.props.data.length
-  }
-
-  onRowClickAt (index, e) {
-    const data = this.getCurrentData()[index]
-    this.onRowClick({
-      props: {
-        data
-      }
-    }, e)
-  }
   onRowClick (row, e) {
     if (!this.props.selectable) return
     if (e && e.metaKey && this.props.allowMultiSelect) {
@@ -255,6 +214,7 @@ class InfiniteTable extends React.Component {
       , this.defaultRowMetaData
       , this.props.rowMetadata || {})
     const bodyHeight = this.getBodyHeight()
+    const {tableClassName} = this.props
     return (
       <Griddle
         key="0"
@@ -272,7 +232,7 @@ class InfiniteTable extends React.Component {
         results={this.getCurrentData()}
         resultsPerPage={this.getCountPerPage()}
 
-        tableClassName="table table-hover table-panel"
+        tableClassName={`table table-hover ${tableClassName || 'table-panel'}`}
 
         useFixedHeader={false}
         noDataMessage={this.props.noDataMessage}
@@ -286,64 +246,18 @@ class InfiniteTable extends React.Component {
     )
   }
 
-  renderLayout ({ Table, Pagination, Filter, SettingsWrapper }) {
-    return (
-      <div className="griddle">
-        <Table />
-      </div>
-    )
-  }
-
-  renderTableRow ({ griddleKey, columnIds, Cell, style, className }) {
-    return (
-      <tr key={griddleKey} style={style} className={`${className} selected`}>
-
-      </tr>
-    )
-  }
-
-  renderTableCell () {
-    return (
-      <td >
-
-      </td>
-    )
-  }
-
-  renderCustomComponent (p, config) {
-    const rowData = config.store.getState().get('data').find(r => r.get('griddleKey') === config.griddleKey).toJSON()
-    return p.customComponent({data: config.value, rowData})
-  }
-
   renderTable () {
+    const rowMetadata = assign({}
+      , this.defaultRowMetaData
+      , this.props.rowMetadata || {})
+    const bodyHeight = this.getBodyHeight()
+    const {tableClassName} = this.props
     return (
-      <Griddle
+      <ReactTable
         key="0"
-        data={this.getCurrentData()}
-        plugins={tablePlugins}
-        components={this.tableComponents}
-        pageProperties={{
-          currentPage: 1,
-          pageSize: this.getCountPerPage(),
-          recordCount: this.getCountPerPage()
-        }}
-        styleConfig={tableStyleConfig}
-      >
-        <RowDefinition>
-          {this.props.cells.map((p, i) =>
-            <ColumnDefinition
-              key={i}
-              id={p.columnName}
-              title={p.displayName}
-              cssClassName={p.cssClassName}
-              headerCssClassName={p.cssClassName}
-              sortable={false}
-              customHeadingComponent={p.customHeaderComponent}
-              customComponent={p.customComponent ? (config => this.renderCustomComponent(p, config)) : null}
-            />
-          )}
-        </RowDefinition>
-      </Griddle>
+        data={data}
+        columns={columns}
+      />
     )
   }
 
@@ -377,7 +291,10 @@ InfiniteTable.defaultProps = {
 
   selectable: false,
   allowMultiSelect: false,
-  noDataMessage: ''
+  noDataMessage: '',
+
+  onUpdateCount: null,
+  handleRecord: null
 }
 
 export default InfiniteTable

@@ -36,6 +36,7 @@
     "react-router-dom": "^4.1.1",
     "react-select": "^1.0.0-rc.5",
     "react-svg-gauge": "^1.0.5",
+    "react-table": "^6.5.3",
     "react-tap-event-plugin": "^2.0.1",
     "react-tooltip": "^3.3.0",
     "recharts": "^1.0.0-alpha.2",
