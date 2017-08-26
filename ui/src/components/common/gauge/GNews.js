@@ -7,7 +7,7 @@ import GEditView from './GEditView'
 
 import {showAlert} from 'components/common/Alert'
 // import { ROOT_URL } from 'actions/config'
-import {cybertronUrl} from 'shared/Global'
+import {cybertronUrl, cybertronImageUrl} from 'shared/Global'
 
 export default class GNews extends React.Component {
   constructor (props) {
@@ -61,6 +61,7 @@ export default class GNews extends React.Component {
           {this.state.articles.map(p =>
             <tr>
               <td>
+                <img src={`${cybertronImageUrl(p)}`} width="64" alt=""/>
                 <a href={`${cybertronUrl}/detail/${p.contentId || p.id}`} target="_blank" style={{color: 'initial'}}>{p.subject}</a>
               </td>
               <td className="nowrap"><small>{moment(p.dateUpdated).fromNow()}</small></td>

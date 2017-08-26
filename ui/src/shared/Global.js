@@ -352,3 +352,7 @@ export const gaugeTableViewModes = [{
 
 
 export const appletColors = '#2468ff #963484 #222629 #3cba54 #999999 #D1282C'.split(' ')
+
+export function cybertronImageUrl (item) {
+  return `${cybertronUrl}/webPic?articleId=${item.contentId}`
+}
