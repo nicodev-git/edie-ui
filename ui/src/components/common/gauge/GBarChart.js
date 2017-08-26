@@ -49,7 +49,8 @@ export default class GBarChart extends React.Component {
     super (props)
     this.state = {
       loading: true,
-      searchRecordCounts: []
+      searchRecordCounts: [],
+      needRefresh: false
     }
     this.renderBackView = this.renderBackView.bind(this)
     this.renderFrontView = this.renderFrontView.bind(this)
@@ -59,11 +60,14 @@ export default class GBarChart extends React.Component {
     this.fetchRecordCount(this.props)
   }
 
-  componentWillUpdate (nextProps) {
+  componentWillUpdate (nextProps, nextState) {
     const {gauge, searchList} = nextProps
+    const {needRefresh} = nextState
     if (gauge && JSON.stringify(this.props.gauge) !== JSON.stringify(gauge)) {
       this.fetchRecordCount(nextProps)
     } else if (searchList && JSON.stringify(this.props.searchList) !== JSON.stringify(searchList)) {
+      this.fetchRecordCount(nextProps)
+    } else if (needRefresh && !this.state.needRefresh) {
       this.fetchRecordCount(nextProps)
     }
   }
@@ -125,8 +129,13 @@ export default class GBarChart extends React.Component {
             date: moment(p.timestamp).format('YYYY-MM-DD HH:mm:ss'),
             count: p.eventType === 'AGENT' || (p.lastResult && p.lastResult.status === 'UP') ? 1 : 0
           })),
-          loading: false
+          loading: false,
+          needRefresh: false
         })
+      }).catch(() => {
+        setTimeout(() => {
+          this.setState({needRefresh: true})
+        }, 2000)
       })
     } else if (resource === 'incident'){
       const searchParams = {
@@ -144,8 +153,13 @@ export default class GBarChart extends React.Component {
       axios.get(`${ROOT_URL}/search/getRecordCount`, {params}).then(res => {
         this.setState({
           searchRecordCounts: res.data,
-          loading: false
+          loading: false,
+          needRefresh: false
         })
+      }).catch(() => {
+        setTimeout(() => {
+          this.setState({needRefresh: true})
+        }, 2000)
       })
     } else {
       const index = findIndex(searchList, {id: savedSearchId})
@@ -162,8 +176,13 @@ export default class GBarChart extends React.Component {
       axios.get(`${ROOT_URL}/search/getRecordCount`, {params}).then(res => {
         this.setState({
           searchRecordCounts: res.data,
-          loading: false
+          loading: false,
+          needRefresh: false
         })
+      }).catch(() => {
+        setTimeout(() => {
+          this.setState({needRefresh: true})
+        }, 2000)
       })
     }
   }
