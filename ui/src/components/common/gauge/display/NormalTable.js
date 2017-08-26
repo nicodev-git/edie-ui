@@ -3,7 +3,7 @@ import {Chip} from 'material-ui'
 import {keys, isArray, isObject} from 'lodash'
 import moment from 'moment'
 
-import InfiniteTable from 'components/common/InfiniteTable'
+import InfiniteTable from 'components/common/InfiniteTable2'
 import {renderEntity} from 'components/common/CellRenderers'
 import {chipStyles} from 'style/common/materialStyles'
 

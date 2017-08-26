@@ -247,16 +247,23 @@ class InfiniteTable extends React.Component {
   }
 
   renderTable () {
-    const rowMetadata = assign({}
-      , this.defaultRowMetaData
-      , this.props.rowMetadata || {})
-    const bodyHeight = this.getBodyHeight()
-    const {tableClassName} = this.props
+    const {cells} = this.props
+    let columns = []
+
+    if (cells) {
+      columns = cells.map(p => ({
+        Header: p.displayName,
+        accessor: p.columnName
+      }))
+    }
+
     return (
       <ReactTable
         key="0"
-        data={data}
+        data={this.getCurrentData()}
         columns={columns}
+
+        showPagination={false}
       />
     )
   }
