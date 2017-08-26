@@ -61,10 +61,21 @@ export default class GNews extends React.Component {
           {this.state.articles.map(p =>
             <tr>
               <td>
-                <img src={`${cybertronImageUrl(p)}`} width="64" alt=""/>
-                <a href={`${cybertronUrl}/detail/${p.contentId || p.id}`} target="_blank" style={{color: 'initial'}}>{p.subject}</a>
+                <div class="video-item small flex-horizontal">
+                  <img src={`${cybertronImageUrl(p)}`} alt=""/>
+                  <div class="flex-1 article-body">
+                    <div class="article-title">
+                      <a href={`${cybertronUrl}/detail/${p.contentId || p.id}`} target="_blank" style={{color: 'initial'}}>{p.subject}</a>
+                    </div>
+                    <div class="article-desc">
+                      {p.content}
+                    </div>
+                    <div class="article-time">
+                      {moment(p.dateUpdated).fromNow()}
+                    </div>
+                  </div>
+                </div>
               </td>
-              <td className="nowrap"><small>{moment(p.dateUpdated).fromNow()}</small></td>
             </tr>
           )}
           </tbody>
