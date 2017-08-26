@@ -7,7 +7,7 @@ import GEditView from './GEditView'
 
 import {showAlert} from 'components/common/Alert'
 // import { ROOT_URL } from 'actions/config'
-import {cybertronUrl, cybertronImageUrl} from 'shared/Global'
+import {cybertronUrl, cybertronRenderInfo} from 'shared/Global'
 
 export default class GNews extends React.Component {
   constructor (props) {
@@ -58,26 +58,27 @@ export default class GNews extends React.Component {
       <div className="flex-1 padding-md" style={{overflow: 'auto'}}>
         <table className="table">
           <tbody>
-          {this.state.articles.map(p =>
-            <tr>
-              <td>
-                <div class="video-item small flex-horizontal">
-                  <img src={`${cybertronImageUrl(p)}`} alt=""/>
-                  <div class="flex-1 article-body">
-                    <div class="article-title">
-                      <a href={`${cybertronUrl}/detail/${p.contentId || p.id}`} target="_blank" style={{color: 'initial'}}>{p.subject}</a>
-                    </div>
-                    <div class="article-desc">
-                      {p.content}
-                    </div>
-                    <div class="article-time">
-                      {moment(p.dateUpdated).fromNow()}
+          {this.state.articles.map(p =>{
+
+            const {imgUrl, desc, date} = cybertronRenderInfo(p)
+
+            return (
+              <tr>
+                <td className="news-item">
+                  <div className="flex-horizontal">
+                    <img src={imgUrl} alt=""/>
+                    <div className="flex-1 article-body">
+                      <div className="article-title">
+                        <a href={`${cybertronUrl}/detail/${p.contentId || p.id}`} target="_blank" style={{color: 'initial'}}>{p.subject}</a>
+                      </div>
+                      <div className="article-desc">{desc}</div>
+                      <div className="article-time">{date}</div>
                     </div>
                   </div>
-                </div>
-              </td>
-            </tr>
-          )}
+                </td>
+              </tr>
+            )
+          })}
           </tbody>
         </table>
       </div>

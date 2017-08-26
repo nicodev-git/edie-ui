@@ -356,3 +356,26 @@ export const appletColors = '#2468ff #963484 #222629 #3cba54 #999999 #D1282C'.sp
 export function cybertronImageUrl (item) {
   return `${cybertronUrl}/webPic?articleId=${item.contentId}`
 }
+
+export function cybertronRenderInfo (item) {
+  let imgUrl, desc, date
+
+  if (item.type === 'rss') {
+    imgUrl = `${cybertronUrl}/${item.pictureURL}`
+  } else if (item.type === 'video') {
+    imgUrl = `http://i.ytimg.com/vi/${item.videoId}/mqdefault.jpg`
+  } else {
+    imgUrl = `${cybertronUrl}/mobileGetPic?pictureName=${item.pictureName || ''}`
+  }
+
+  if (item.type === 'video') {
+    desc = item.channel
+    date = `${moment(new Date(item.dateCreated)).fromNow()} • ${item.views}`
+  } else {
+    desc = item.readableContent
+    date = moment(new Date(item.dateCreated)).fromNow()
+  }
+
+  return {imgUrl, desc, date}
+}
+
