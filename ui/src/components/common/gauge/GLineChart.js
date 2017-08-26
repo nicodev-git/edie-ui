@@ -105,6 +105,8 @@ export default class GLineChart extends React.Component {
       this.fetchRecordCount(nextProps)
     } else if (searchList && JSON.stringify(this.props.searchList) !== JSON.stringify(searchList)) {
       this.fetchRecordCount(nextProps)
+    } else if (searchList && !this.props.searchList) {
+      this.fetchRecordCount(nextProps)
     }
   }
 
