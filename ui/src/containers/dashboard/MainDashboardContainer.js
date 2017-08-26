@@ -28,6 +28,7 @@ import {
   loadSearch,
 
   showGaugeModal,
+  showGaugePicker,
 
   updateViewLogParams
 } from 'actions'
@@ -58,6 +59,7 @@ export default connect(
 
     gaugeModalOpen: state.gauge.gaugeModalOpen,
     editGauge: state.gauge.editGauge,
+    gaugePickerOpen: state.gauge.gaugePickerOpen,
 
     logViewParam: state.dashboard.logViewParam
   }), {
@@ -85,6 +87,7 @@ export default connect(
     loadSearch,
 
     showGaugeModal,
+    showGaugePicker,
 
     updateViewLogParams
   }

@@ -10,7 +10,9 @@ import {
   SELECT_GAUGE_BOARD,
 
   SHOW_GAUGE_BOARDS_MODAL,
-  SHOW_GAUGE_MODAL
+  SHOW_GAUGE_MODAL,
+
+  SHOW_GAUGE_PICKER
 } from 'actions/types'
 
 const INITIAL_STATE = {
@@ -40,6 +42,8 @@ export default function (state = INITIAL_STATE, action) {
       return { ...state, gaugeBoardsModalOpen: !!action.visible }
     case SHOW_GAUGE_MODAL:
       return { ...state, gaugeModalOpen: action.visible, editGauge: action.gauge }
+    case SHOW_GAUGE_PICKER:
+      return { ...state, gaugePickerOpen: action.visible }
     default:
       return state
   }

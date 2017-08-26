@@ -16,6 +16,7 @@ import {showAlert} from 'components/common/Alert'
 
 import GaugeModal from 'components/common/gauge/GaugeModal'
 import GaugeMap from 'components/common/gauge/GaugeMap'
+import GaugePicker from 'components/common/gauge/GaugePicker'
 
 const ResponsiveReactGridLayout = WidthProvider(Responsive)
 
@@ -294,23 +295,37 @@ export default class MainDashboardView extends React.Component {
   }
 
   renderAddMenu () {
-    const {gauges} = this.props
     return (
       <div className="text-right" style={{position: 'absolute', top: -45, right: 0}}>
-        <IconMenu
-          iconButtonElement={<IconButton><AddCircleIcon /></IconButton>}
-          anchorOrigin={{horizontal: 'left', vertical: 'top'}}
-          targetOrigin={{horizontal: 'left', vertical: 'top'}}
-        >
-          {gauges.map(p =>
-            <MenuItem
-              key={p.id} primaryText={p.name}
-              leftIcon={<img src={`${extImageBaseUrl}${p.image}`} alt="" width="24" height="24" style={{background: 'black'}}/>}
-              onTouchTap={this.onClickMenuItem.bind(this, p)}
-            />
-          )}
-        </IconMenu>
+        <IconButton onTouchTap={() => this.props.showGaugePicker(true)}>
+          <AddCircleIcon />
+        </IconButton>
       </div>
+    )
+    // const {gauges} = this.props
+    // return (
+    //   <div className="text-right" style={{position: 'absolute', top: -45, right: 0}}>
+    //     <IconMenu
+    //       iconButtonElement={<IconButton><AddCircleIcon /></IconButton>}
+    //       anchorOrigin={{horizontal: 'left', vertical: 'top'}}
+    //       targetOrigin={{horizontal: 'left', vertical: 'top'}}
+    //     >
+    //       {gauges.map(p =>
+    //         <MenuItem
+    //           key={p.id} primaryText={p.name}
+    //           leftIcon={<img src={`${extImageBaseUrl}${p.image}`} alt="" width="24" height="24" style={{background: 'black'}}/>}
+    //           onTouchTap={this.onClickMenuItem.bind(this, p)}
+    //         />
+    //       )}
+    //     </IconMenu>
+    //   </div>
+    // )
+  }
+
+  renderGaugePicker () {
+    if (!this.props.gaugePickerOpen) return null
+    return (
+      <GaugePicker {...this.props}/>
     )
   }
 
@@ -366,6 +381,8 @@ export default class MainDashboardView extends React.Component {
           {gauges.map(p => this.renderGauge(p))}
         </ResponsiveReactGridLayout>
 
+
+        {this.renderGaugePicker()}
         {this.renderDeviceWizard()}
         {this.renderGaugeModal()}
         <ReactTooltip />
