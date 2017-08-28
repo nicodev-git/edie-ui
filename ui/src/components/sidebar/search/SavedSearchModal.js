@@ -1,7 +1,7 @@
 import React from 'react'
 
 import SavedSearchModalView from './SavedSearchModalView'
-import {showAlert} from 'components/common/Alert'
+import {showAlert, showPrompt} from 'components/common/Alert'
 
 export default class SavedSearchModal extends React.Component {
   componentWillMount () {
@@ -44,10 +44,16 @@ export default class SavedSearchModal extends React.Component {
     const {userInfo} = this.props
     this.props.removeSearchOption(userInfo, p)
   }
+  onClickAdd () {
+    showPrompt('Please type name.', text => {
+
+    })
+  }
   render () {
     return (
       <SavedSearchModalView
         {...this.props}
+        onClickAdd={this.onClickAdd.bind(this)}
         onClickRow={this.onClickRow.bind(this)}
         onClickDelete={this.onClickDelete.bind(this)}
         onClickOK={this.onClickOK.bind(this)}

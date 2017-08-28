@@ -700,6 +700,7 @@ class GenericSearch extends React.Component {
     return (
       <SavedSearchModal
         {...this.props}
+        onAddSearch={this.handleFormSubmit.bind(this)}
         onChangeSearchOption={this.onChangeSearchOption.bind(this)}
         userOptions={this.getSearchOptions()}
       />
