@@ -37,7 +37,7 @@ class LogView extends React.Component {
         const params = assign(...logViewParam, parsed)
 
         this.props.updateViewLogParams(params, this.props.history)
-        this.props.change('query', '')
+        this.props.change('query', params.query || '')
       } catch (e) {
         console.log(e)
       }
