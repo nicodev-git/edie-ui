@@ -3,6 +3,7 @@ import {Paper} from 'material-ui'
 import { concat, assign, isEqual, keys, debounce, chunk, reverse, merge, isArray } from 'lodash'
 import $ from 'jquery'
 import moment from 'moment'
+import ReactPaginate from 'react-paginate'
 
 import { encodeUrlParams, dateFormat } from 'shared/Global'
 import { ROOT_URL } from 'actions/config'
@@ -155,6 +156,9 @@ export default class LogPapers extends React.Component {
   getFileName(entity) {
     return entity && entity.dataobj ? entity.dataobj.file : ''
   }
+  handlePageClick () {
+
+  }
   renderTable () {
     const {pageSize} = this.props
 
@@ -183,15 +187,20 @@ export default class LogPapers extends React.Component {
 
   renderPaging () {
     const {maxPages} = this.state
-    const btns = []
-    for (var i = 0; i < maxPages; i++) {
-      btns.push(
-        <div key={i} className="btn btn-default link inline-block">{i + 1}</div>
-      )
-    }
     return (
-      <div>
-        {btns}
+      <div id="">
+        <ReactPaginate
+          previousLabel={"previous"}
+          nextLabel={"next"}
+          breakLabel={<a href="">...</a>}
+          breakClassName={"break-me"}
+          pageCount={maxPages}
+          marginPagesDisplayed={2}
+          pageRangeDisplayed={5}
+          onPageChange={this.handlePageClick}
+          containerClassName={"pagination"}
+          subContainerClassName={"pages pagination"}
+          activeClassName={"active"}/>
       </div>
     )
   }
