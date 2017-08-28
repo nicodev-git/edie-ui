@@ -11,6 +11,7 @@ import { dateFormat } from 'shared/Global'
 
 import LogSearchFormView from './LogSearchFormView'
 import LogPapers from './LogPapers'
+import DetailLogModal from './DetailLogModal'
 
 import {parse} from 'query-string'
 
@@ -62,6 +63,10 @@ class LogView extends React.Component {
     }
   }
 
+  onClickDetailView (index, page, totalPages) {
+
+  }
+
   handleFormSubmit (values) {
     const { query } = values
 
@@ -76,6 +81,13 @@ class LogView extends React.Component {
       dateFrom: startDate.format(dateFormat),
       dateTo: endDate.format(dateFormat)
     }), this.props.history)
+  }
+
+  renderDetailModal () {
+    if (!this.props.detailLogModalOpen) return null
+    return (
+      <DetailLogModal {...this.props}/>
+    )
   }
 
   render () {
@@ -103,9 +115,11 @@ class LogView extends React.Component {
               params={logViewParam}
               pageSize={1000}
               revertRows
+              onClickView={this.onClickDetailView.bind(this)}
               onUpdateCount={this.onResultCountUpdate.bind(this)}
             />
           </div>
+          {this.renderDetailModal()}
           <ReactTooltip/>
         </TabPageBody>
       </TabPage>
