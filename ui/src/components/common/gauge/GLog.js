@@ -46,9 +46,7 @@ export default class GLog extends React.Component {
   }
 
   onClickRefresh () {
-    this.setState({
-      draw: this.state.draw + 1
-    })
+    this.props.fetchDevicesGroups()
   }
 
   onMouseEnter () {
@@ -83,20 +81,6 @@ export default class GLog extends React.Component {
     }, 1)
   }
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  renderRefresh (data) {
-    // const {hover} = this.state
-    // if (data.viewFilter !== viewFilters.log.name || !hover) return null
-    //
-    // return (
-    //   <div style={{zIndex: 3}}>
-    //     <div style={{position: 'absolute', right: 10, top: 4}}>
-    //       <IconButton onTouchTap={this.onClickRefresh.bind(this)}>
-    //         <RefreshIcon size={32}/>
-    //       </IconButton>
-    //     </div>
-    //   </div>
-    // )
-  }
   renderFrontView () {
     return (
       <div className="flex-vertical flex-1" onMouseEnter={this.onMouseEnter} onMouseLeave={this.onMouseOut}>
@@ -151,6 +135,8 @@ export default class GLog extends React.Component {
         renderBackView={this.renderBackView}
 
         onClickDelete={this.onClickDelete.bind(this)}
+
+        onClickRefresh={this.onClickRefresh.bind(this)}
       />
     )
   }

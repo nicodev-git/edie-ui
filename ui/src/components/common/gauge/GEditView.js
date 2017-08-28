@@ -35,7 +35,15 @@ export default class GEditView extends React.Component {
     super(props)
 
     const {gauge, monitorGroup} = props
+
+    let name = gauge.name
+    if (gauge.templateName === 'Log') {
+      name = gauge.templateName
+    }
+
     this.state = {
+      name,
+
       resource: gauge.resource || 'search',
       savedSearchId: gauge.savedSearchId || '',
       deviceId: gauge.deviceId || '',
@@ -49,7 +57,6 @@ export default class GEditView extends React.Component {
       durationUnit: gauge.durationUnit || 'day',
       splitBy: gauge.splitBy || '1',
       splitUnit: gauge.splitUnit || 'day',
-      name: gauge.name || '',
 
       fixed: gauge.fixed || '',
       severities: gauge.severities || [],
@@ -73,10 +80,6 @@ export default class GEditView extends React.Component {
       tableViewMode: gauge.tableViewMode || 'json',
 
       showImage: !!gauge.showImage
-    }
-
-    if (gauge.templateName === 'Log') {
-      this.state.name = gauge.templateName
     }
   }
 

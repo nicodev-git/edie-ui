@@ -3,6 +3,7 @@ import InfoIcon from 'material-ui/svg-icons/action/info'
 import DeleteIcon from 'material-ui/svg-icons/navigation/close'
 import MinimizeIcon from 'material-ui/svg-icons/toggle/indeterminate-check-box'
 import MaximizeIcon from 'material-ui/svg-icons/action/aspect-ratio'
+import RefreshIcon from 'material-ui/svg-icons/navigation/refresh'
 import RefreshOverlay from 'components/common/RefreshOverlay'
 import {Paper} from 'material-ui'
 
@@ -50,11 +51,12 @@ export default class FlipView extends React.Component {
 
   renderInfoIcon () {
     const {hovered} = this.state
-    const {onClickDelete, onClickMinimize, onClickMaximize, gauge} = this.props
+    const {onClickDelete, onClickMinimize, onClickMaximize, onClickRefresh, gauge} = this.props
     return (
       <div
         style={{position: 'absolute', right: 10, bottom: 10, zIndex: 1}}
         className={`link info-button ${hovered ? 'visible' : ''}`}>
+        {onClickRefresh && <RefreshIcon onTouchTap={() => onClickRefresh(gauge)}/>}
         {
           gauge.minimized ? (
             <MaximizeIcon onTouchTap={() => onClickMaximize(gauge)}/>
@@ -62,7 +64,6 @@ export default class FlipView extends React.Component {
             <MinimizeIcon onTouchTap={() => onClickMinimize(gauge)}/>
           )
         }
-
         <DeleteIcon onTouchTap={() => onClickDelete(gauge)}/>
         <InfoIcon size={24} onClick={this.onClickFlip.bind(this)}/>
       </div>
