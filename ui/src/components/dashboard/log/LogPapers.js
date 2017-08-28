@@ -159,10 +159,10 @@ export default class LogPapers extends React.Component {
           <Paper zDepth={paperZDepth}>
             <div className="header-red">{title} : {timeFrom} ~ {timeTo}</div>
             {list.map(row =>
-              <div key={row.id} className="padding-xs">
+              <div key={row.id} className="padding-xs row-hover">
                 <div className="inline-block" dangerouslySetInnerHTML={{__html: row.entity && row.entity.dataobj ? row.entity.dataobj.line : ' '}}/>
-                <div className="inline-block">
-
+                <div className="link text-primary margin-md-left">
+                  View
                 </div>
               </div>
             )}

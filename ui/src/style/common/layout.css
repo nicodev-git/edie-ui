@@ -362,3 +362,11 @@ a, a:focus, a:hover {
     background: white;
     cursor: pointer;
 }
+
+.row-hover .link {
+    display: none;
+}
+
+.row-hover:hover .link {
+    display: inline-block;
+}
