@@ -74,6 +74,10 @@ export default class GEditView extends React.Component {
 
       showImage: !!gauge.showImage
     }
+
+    if (gauge.templateName === 'Log') {
+      this.state.name = gauge.templateName
+    }
   }
 
   onChangeText(key, e, value) {
@@ -186,7 +190,8 @@ export default class GEditView extends React.Component {
 
   onClickDone () {
     const {onSubmit} = this.props
-    const {resource, savedSearchId, monitorId, workflowId, workflowIds, deviceId, serviceName, monitorIds,
+    const {
+      resource, savedSearchId, monitorId, workflowId, workflowIds, deviceId, serviceName, monitorIds,
       duration, durationUnit, splitBy, splitUnit, name,
       severities, dateFrom, dateTo, fixed,
       itemSize, showDeviceType, gaugeSize,
@@ -545,8 +550,22 @@ export default class GEditView extends React.Component {
   }
 
   renderLog () {
+    const {devices} = this.props
+    const {servers, selectedDevice, selectedRight, selectedMonitor} = this.state
     return (
-      <GaugeLogMonitorPicker {...this.props}/>
+      <GaugeLogMonitorPicker
+        height={400}
+        devices={devices}
+        selectedServers={servers}
+        selectedDevice={selectedDevice}
+        selectedRight={selectedRight}
+        selectedMonitor={selectedMonitor}
+        onSelectDevice={this.onSelectDevice.bind(this)}
+        onSelectRight={this.onSelectRight.bind(this)}
+        onSelectMonitor={this.onSelectMonitor.bind(this)}
+        onClickAddServer={this.onClickAddServer.bind(this)}
+        onClickRemoveServer={this.onClickRemoveServer.bind(this)}
+      />
     )
   }
 
