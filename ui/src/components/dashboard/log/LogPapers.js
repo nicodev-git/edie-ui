@@ -141,8 +141,8 @@ export default class LogPapers extends React.Component {
   handlePageClick (page) {
     this.getExternalData(page.selected + 1)
   }
-  onClickView (index) {
-    this.props.onClickView(index, this.state.currentPage, this.props.pageSize)
+  onClickView (row, index) {
+    this.props.onClickView(row, index, this.state.currentPage, this.props.pageSize)
   }
   renderTable () {
     const {pageSize} = this.props
@@ -164,7 +164,7 @@ export default class LogPapers extends React.Component {
             {list.map((row, index) =>
               <div key={row.id} className="padding-xs row-hover">
                 <div className="inline-block" dangerouslySetInnerHTML={{__html: row.entity && row.entity.dataobj ? row.entity.dataobj.line : ' '}}/>
-                <div className="link text-primary margin-md-left" onClick={this.onClickView.bind(this, index)}>
+                <div className="link text-primary margin-md-left" onClick={this.onClickView.bind(this, row, index)}>
                   View
                 </div>
               </div>
