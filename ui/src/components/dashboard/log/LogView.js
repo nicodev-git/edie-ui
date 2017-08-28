@@ -58,7 +58,7 @@ class LogView extends React.Component {
   }
   onSearchKeyDown (e) {
     if (e.keyCode === 13) {
-      submit('logViewForm')
+      // submit('logViewForm')
     }
   }
 
