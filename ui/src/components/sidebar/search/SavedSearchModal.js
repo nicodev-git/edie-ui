@@ -45,8 +45,10 @@ export default class SavedSearchModal extends React.Component {
     this.props.removeSearchOption(userInfo, p)
   }
   onClickAdd () {
-    showPrompt('Please type name.', text => {
+    showPrompt('Please type name.', '', text => {
+      if (!text) return
 
+      this.props.onAddSearch({name: text})
     })
   }
   render () {

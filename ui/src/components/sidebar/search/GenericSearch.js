@@ -316,7 +316,7 @@ class GenericSearch extends React.Component {
   }
 
   onClickSaveSearch (values) {
-    const { userInfo, params, searchSaveType, viewFilter, viewCols } = this.props
+    const { userInfo, params, viewFilter, viewCols } = this.props
     if (!userInfo) return
 
     const dateLabel = getRangeLabel(getRanges(), params.dateFrom, params.dateTo)
@@ -329,11 +329,10 @@ class GenericSearch extends React.Component {
       dateLabel: dateLabel.label
     }
 
-    if (searchSaveType === 'new') {
+    if (!values.searchId) {
       if (!values.name) return
       this.props.addSearchOption(userInfo, option)
     } else {
-      if (!values.searchId) return
       const options = this.getSearchOptions()
       const index = findIndex(options, {id: values.searchId})
       if (index < 0) return
@@ -700,7 +699,7 @@ class GenericSearch extends React.Component {
     return (
       <SavedSearchModal
         {...this.props}
-        onAddSearch={this.handleFormSubmit.bind(this)}
+        onAddSearch={this.onClickSaveSearch.bind(this)}
         onChangeSearchOption={this.onChangeSearchOption.bind(this)}
         userOptions={this.getSearchOptions()}
       />

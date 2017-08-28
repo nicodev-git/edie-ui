@@ -39,13 +39,14 @@ class SavedSearchModalView extends React.Component {
     if (panelMode) return this.renderContent()
     return (
       <Modal title="Saved Search" onRequestClose={onClickClose}>
-        <CardPanel title="Saved Search" className="margin-md-bottom" contentStyle={{paddingTop: 0}}>
-          <div>
-            <TextField value={savedSearchKeyword} floatingLabelText="Search" onChange={onChangeKeyword}/>
-            <div className="pull-right" style={{marginTop: 30}}>
-              <IconButton onTouchTap={onClickAdd}><AddCircleIcon size={32}/></IconButton>
-            </div>
-          </div>
+        <CardPanel
+          title="Saved Search"
+          className="margin-md-bottom"
+          contentStyle={{paddingTop: 0}}
+          tools={<IconButton onTouchTap={onClickAdd}><AddCircleIcon size={32}/></IconButton>}>
+
+          <TextField value={savedSearchKeyword} floatingLabelText="Search" onChange={onChangeKeyword}/>
+
           <div style={{maxHeight: '350px', overflow: 'auto', width: '100%'}}>
             <table className="table table-hover">
               <thead>
@@ -53,7 +54,7 @@ class SavedSearchModalView extends React.Component {
                 <th>Name</th>
                 <th>Description</th>
                 <th>Origin</th>
-                <th/>
+                <th>Action</th>
               </tr>
               </thead>
               <tbody>
