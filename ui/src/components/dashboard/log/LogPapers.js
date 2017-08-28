@@ -182,7 +182,18 @@ export default class LogPapers extends React.Component {
   }
 
   renderPaging () {
-
+    const {maxPages} = this.state
+    const btns = []
+    for (var i = 0; i < maxPages; i++) {
+      btns.push(
+        <div key={i} className="btn btn-default link inline-block">{i + 1}</div>
+      )
+    }
+    return (
+      <div>
+        {btns}
+      </div>
+    )
   }
 
   render () {

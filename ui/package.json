@@ -32,6 +32,7 @@
     "react-grid-layout": "^0.14.7",
     "react-liquid-gauge": "^1.2.2",
     "react-material-tags": "^1.0.1",
+    "react-paginate": "^4.4.3",
     "react-redux": "^5.0.5",
     "react-router-dom": "^4.1.1",
     "react-select": "^1.0.0-rc.5",
