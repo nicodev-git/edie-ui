@@ -7,6 +7,7 @@ import ReactPaginate from 'react-paginate'
 
 import { encodeUrlParams, dateFormat } from 'shared/Global'
 import { ROOT_URL } from 'actions/config'
+import RefreshOverlay from 'components/common/RefreshOverlay'
 
 import {paperZDepth} from 'style/common/materialStyles'
 
@@ -158,7 +159,12 @@ export default class LogPapers extends React.Component {
           <Paper zDepth={paperZDepth}>
             <div className="header-red">{title} : {timeFrom} ~ {timeTo}</div>
             {list.map(row =>
-              <div key={row.id} className="padding-xs" dangerouslySetInnerHTML={{__html: row.entity && row.entity.dataobj ? row.entity.dataobj.line : ' '}}/>
+              <div key={row.id} className="padding-xs">
+                <div className="inline-block" dangerouslySetInnerHTML={{__html: row.entity && row.entity.dataobj ? row.entity.dataobj.line : ' '}}/>
+                <div className="inline-block">
+
+                </div>
+              </div>
             )}
           </Paper>
         </div>
@@ -187,17 +193,15 @@ export default class LogPapers extends React.Component {
 
   render () {
     const table = this.renderTable()
-    if (!this.props.bodyHeight) {
-      return (
-        <div className="flex-vertical" style={{height: '100%', overflow: 'auto'}}>
-          {this.renderPaging()}
-          <div className="flex-1">
-            {table}
-          </div>
+    return (
+      <div className="flex-vertical" style={{height: '100%'}}>
+        {this.renderPaging()}
+        <div className="flex-1" style={{overflow: 'auto'}}>
+          {table}
         </div>
-      )
-    }
-    return table
+        {this.state.isLoading && <RefreshOverlay />}
+      </div>
+    )
   }
 
   // render () {

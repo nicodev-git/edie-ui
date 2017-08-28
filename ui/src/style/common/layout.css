@@ -354,6 +354,10 @@ a, a:focus, a:hover {
     overflow: visible !important;
 }
 
+.pagination {
+    margin: 0;
+    padding-left: 8px;
+}
 .pagination li a {
     background: white;
     cursor: pointer;
