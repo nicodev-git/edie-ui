@@ -65,6 +65,7 @@ import {
   FIX_ALL_DEVICE_INCIDENTS,
 
   UPDATE_VIEWLOG_PARAMS,
+  SHOW_DETAIL_LOG_MODAL,
 
   API_ERROR
 } from 'actions/types'
@@ -316,6 +317,9 @@ export default function (state = initialState, action) {
 
     case UPDATE_VIEWLOG_PARAMS:
       return { ...state, logViewParam: action.params }
+
+    case SHOW_DETAIL_LOG_MODAL:
+      return { ...state, detailLogModalOpen: action.visible, detailLogViewParam: action.params }
     default:
       return state
   }

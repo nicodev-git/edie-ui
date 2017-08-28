@@ -34,6 +34,7 @@ import {
   SHOW_ATTACKER_MODAL,
 
   UPDATE_VIEWLOG_PARAMS,
+  SHOW_DETAIL_LOG_MODAL,
 
   NO_AUTH_ERROR
 } from './types'
@@ -239,5 +240,11 @@ export const updateViewLogParams = (params, history) => {
       pathname: '/viewlog',
       search: `?q=${encodeURIComponent(JSON.stringify(params))}`
     })
+  }
+}
+
+export const showDetailLogModal = (visible, params) => {
+  return dispatch => {
+    dispatch({type: SHOW_DETAIL_LOG_MODAL, visible, params})
   }
 }
