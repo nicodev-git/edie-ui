@@ -12,7 +12,6 @@ import TabPage from 'components/common/TabPage'
 import TabPageBody from 'components/common/TabPageBody'
 import TabPageHeader from 'components/common/TabPageHeader'
 import { parseSearchQuery, guid, dateFormat, collections, severities, viewFilters } from 'shared/Global'
-import { showConfirm } from 'components/common/Alert'
 import {renderEntity} from 'components/common/CellRenderers'
 import {chipStyles} from 'style/common/materialStyles'
 import {getRanges, getRangeLabel} from 'components/common/DateRangePicker'
@@ -298,21 +297,22 @@ class GenericSearch extends React.Component {
   }
 
   onClickStar (e) {
-    const { userInfo, selectedSearchOption, change, removeSearchOption, openSearchSavePopover } = this.props
-
-    const searchOptions = this.getSearchOptions()
-    if (selectedSearchOption) {
-      const found = searchOptions.filter(i => i.id === selectedSearchOption)
-      if (userInfo && found.length) {
-        showConfirm('Click OK to remove.', (btn) => {
-          if (btn !== 'ok') return
-          change('searchOptionIndex', '')
-          removeSearchOption(userInfo, found[0])
-        })
-      }
-    } else {
-      openSearchSavePopover(null, e.target)
-    }
+    this.props.showSavedSearch(true)
+    // const { userInfo, selectedSearchOption, change, removeSearchOption, openSearchSavePopover } = this.props
+    //
+    // const searchOptions = this.getSearchOptions()
+    // if (selectedSearchOption) {
+    //   const found = searchOptions.filter(i => i.id === selectedSearchOption)
+    //   if (userInfo && found.length) {
+    //     showConfirm('Click OK to remove.', (btn) => {
+    //       if (btn !== 'ok') return
+    //       change('searchOptionIndex', '')
+    //       removeSearchOption(userInfo, found[0])
+    //     })
+    //   }
+    // } else {
+    //   openSearchSavePopover(null, e.target)
+    // }
   }
 
   onClickSaveSearch (values) {
