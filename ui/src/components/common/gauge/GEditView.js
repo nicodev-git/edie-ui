@@ -10,6 +10,7 @@ import DateRangePicker from 'components/common/DateRangePicker'
 
 import GaugeServerPicker from 'components/common/wizard/input/GaugeServerPicker'
 import GaugeWorkflowPicker from 'components/common/wizard/input/GaugeWorkflowPicker'
+import GaugeLogMonitorPicker from 'components/common/wizard/input/GaugeLogMonitorPicker'
 import { dialogBodyStyle, dialogTitleStyle } from 'style/common/materialStyles'
 import {CardPanel} from 'components/modal/parts'
 
@@ -28,11 +29,6 @@ const fixOptions = [{
 }, {
   label: 'Fixed', value: 'true'
 }]
-
-// const sizeList = [1, 2, 3].map(p => ({
-//   label: p,
-//   value: p
-// }))
 
 export default class GEditView extends React.Component {
   constructor (props) {
@@ -548,6 +544,12 @@ export default class GEditView extends React.Component {
     )
   }
 
+  renderLog () {
+    return (
+      <GaugeLogMonitorPicker {...this.props}/>
+    )
+  }
+
   renderContent () {
     const {gauge} = this.props
     switch(gauge.templateName) {
@@ -565,6 +567,8 @@ export default class GEditView extends React.Component {
         return this.renderMonitors()
       case 'News':
         return this.renderNews()
+      case 'Log':
+        return this.renderLog()
       default:
         return this.renderNormal()
     }
