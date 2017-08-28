@@ -65,7 +65,7 @@ class SavedSearchModalView extends React.Component {
                   <td>{p.name}</td>
                   <td>{p.description}</td>
                   <td>{p.type}</td>
-                  <td className="p-none">
+                  <td className="p-none nowrap">
                     {p.type === 'User' ? <IconButton onTouchTap={() => onClickShare(p)}><Share/></IconButton> : null}
                     {p.type === 'User' ? <IconButton onTouchTap={() => onClickEdit(p)}><EditIcon/></IconButton> : null}
                     {p.type === 'User' ? <IconButton onTouchTap={() => onClickDelete(p)}><DeleteIcon/></IconButton> : null}
