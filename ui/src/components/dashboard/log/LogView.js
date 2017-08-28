@@ -68,9 +68,8 @@ class LogView extends React.Component {
 
     const newPage = Math.floor(pos / 200)
 
-    this.props.showDetailLogModal({
+    this.props.showDetailLogModal(true, {
       ...this.props.logViewParam,
-      query: '',
       page: newPage,
       size: 200
     })

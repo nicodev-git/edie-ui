@@ -1,10 +1,20 @@
 import React from 'react'
 import { keys, reverse } from 'lodash'
+import $ from 'jquery'
+
 import DetailLogModalView from './DetailLogModalView'
+import { encodeUrlParams } from 'shared/Global'
+import { ROOT_URL } from 'actions/config'
 
 export default class DetailLogModal extends React.Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      data: []
+    }
+  }
   componentWillMount () {
-    $.get(`${ROOT_URL}${url}?${encodeUrlParams(urlParams)}`).done(res => {
+    $.get(`${ROOT_URL}/search/all?${encodeUrlParams(this.props.detailLogViewParam)}`).done(res => {
       const embedded = res._embedded
       let data = embedded[keys(embedded)[0]]
 
@@ -25,7 +35,10 @@ export default class DetailLogModal extends React.Component {
 
   render () {
     return (
-      <DetailLogModalView {...this.props}/>
+      <DetailLogModalView
+        onHide={this.onHide.bind(this)}
+        data={this.state.data}
+      />
     )
   }
 }
