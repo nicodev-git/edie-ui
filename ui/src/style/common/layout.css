@@ -353,3 +353,8 @@ a, a:focus, a:hover {
 .tag-picker > div {
     overflow: visible !important;
 }
+
+.pagination li a {
+    background: white;
+    cursor: pointer;
+}

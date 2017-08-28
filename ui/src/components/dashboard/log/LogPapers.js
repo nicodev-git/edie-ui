@@ -188,20 +188,18 @@ export default class LogPapers extends React.Component {
   renderPaging () {
     const {maxPages} = this.state
     return (
-      <div id="">
-        <ReactPaginate
-          previousLabel={"previous"}
-          nextLabel={"next"}
-          breakLabel={<a href="">...</a>}
-          breakClassName={"break-me"}
-          pageCount={maxPages}
-          marginPagesDisplayed={2}
-          pageRangeDisplayed={5}
-          onPageChange={this.handlePageClick}
-          containerClassName={"pagination"}
-          subContainerClassName={"pages pagination"}
-          activeClassName={"active"}/>
-      </div>
+      <ReactPaginate
+        previousLabel={"previous"}
+        nextLabel={"next"}
+        breakLabel={<a href="">...</a>}
+        breakClassName={"break-me"}
+        pageCount={maxPages}
+        marginPagesDisplayed={2}
+        pageRangeDisplayed={5}
+        onPageChange={this.handlePageClick}
+        containerClassName={"pagination"}
+        subContainerClassName={"pages pagination"}
+        activeClassName={"active"}/>
     )
   }
 
