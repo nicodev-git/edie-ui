@@ -3,6 +3,7 @@ import {Card, CardText} from 'material-ui'
 import CardLegend from './CardLegend'
 export default class CardPanel extends React.Component {
   render () {
+    const {contentStyle} = this.props
     return (
       <div className={this.props.className} style={this.props.style}>
         <CardLegend>
@@ -14,7 +15,7 @@ export default class CardPanel extends React.Component {
           ) : null}
         </CardLegend>
         <Card>
-          <CardText>
+          <CardText style={contentStyle}>
             {this.props.children}
           </CardText>
         </Card>
