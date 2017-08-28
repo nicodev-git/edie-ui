@@ -6,7 +6,7 @@ import {showAlert, showPrompt} from 'components/common/Alert'
 export default class SavedSearchModal extends React.Component {
   componentWillMount () {
     this.props.fetchSysSearchOptions()
-    this.props.selectSearch(null)
+    // this.props.selectSearch(null)
   }
   componentWillUpdate (props) {
     const {shareSearchResult} = this.props
