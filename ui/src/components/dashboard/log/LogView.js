@@ -63,8 +63,17 @@ class LogView extends React.Component {
     }
   }
 
-  onClickDetailView (index, page, totalPages) {
+  onClickDetailView (index, page, pageSize) {
+    const pos = pageSize * page + index
 
+    const newPage = Math.floor(pos / 200)
+
+    this.props.showDetailLogModal({
+      ...this.props.logViewParam,
+      query: '',
+      page: newPage,
+      size: 200
+    })
   }
 
   handleFormSubmit (values) {
