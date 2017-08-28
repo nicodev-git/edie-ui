@@ -1,7 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 import {concat, assign, findIndex} from 'lodash'
-import {IconButton, IconMenu, MenuItem} from 'material-ui'
+import {IconButton} from 'material-ui'
 import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
 import ReactTooltip from 'react-tooltip'
 import moment from 'moment'
@@ -10,7 +10,7 @@ import 'react-grid-layout/css/styles.css'
 import 'react-resizable/css/styles.css'
 
 import GaugeWizardContainer from 'containers/shared/wizard/GaugeWizardContainer'
-import { extImageBaseUrl, guid, isGroup, getWidgetSize, gaugeAspectRatio, layoutCols, layoutRowHeight, layoutWidthZoom, layoutHeightZoom } from 'shared/Global'
+import { guid, isGroup, getWidgetSize, gaugeAspectRatio, layoutCols, layoutRowHeight, layoutWidthZoom, layoutHeightZoom } from 'shared/Global'
 import { wizardConfig } from 'components/common/wizard/WizardConfig'
 
 import {showAlert} from 'components/common/Alert'
@@ -19,6 +19,7 @@ import { gaugeEditViewStyle } from 'style/common/materialStyles'
 
 import GaugeModal from 'components/common/gauge/GaugeModal'
 import GaugeMap from 'components/common/gauge/GaugeMap'
+import GaugePicker from 'components/common/gauge/GaugePicker'
 
 const ResponsiveReactGridLayout = WidthProvider(Responsive)
 
@@ -105,6 +106,8 @@ export default class DeviceDashboard extends React.Component {
 
   onClickMenuItem (tpl) {
     console.log(tpl)
+
+    this.props.showGaugePicker(false)
 
     if (['Servers'].indexOf(tpl.name) >= 0) {
       this.onFinishAddWizard(null, null, {
@@ -306,25 +309,39 @@ export default class DeviceDashboard extends React.Component {
     )
   }
 
-  renderAddMenu () {
-    const {gauges} = this.props
+  renderGaugePicker () {
+    if (!this.props.gaugePickerOpen) return null
     return (
-      <div className="text-right">
-        <IconMenu
-          iconButtonElement={<IconButton><AddCircleIcon /></IconButton>}
-          anchorOrigin={{horizontal: 'left', vertical: 'top'}}
-          targetOrigin={{horizontal: 'left', vertical: 'top'}}
-        >
-          {gauges.map(p =>
-            <MenuItem
-              key={p.id} primaryText={p.name}
-              leftIcon={<img src={`${extImageBaseUrl}${p.image}`} alt="" width="24" height="24" style={{background: 'black'}}/>}
-              onTouchTap={this.onClickMenuItem.bind(this, p)}
-            />
-          )}
-        </IconMenu>
+      <GaugePicker {...this.props} onClickMenuItem={this.onClickMenuItem.bind(this)}/>
+    )
+  }
+
+  renderAddMenu () {
+    return (
+      <div className="text-right" style={{position: 'absolute', top: 0, right: 0}}>
+        <IconButton onTouchTap={() => this.props.showGaugePicker(true)}>
+          <AddCircleIcon />
+        </IconButton>
       </div>
     )
+    // const {gauges} = this.props
+    // return (
+    //   <div className="text-right">
+    //     <IconMenu
+    //       iconButtonElement={<IconButton><AddCircleIcon /></IconButton>}
+    //       anchorOrigin={{horizontal: 'left', vertical: 'top'}}
+    //       targetOrigin={{horizontal: 'left', vertical: 'top'}}
+    //     >
+    //       {gauges.map(p =>
+    //         <MenuItem
+    //           key={p.id} primaryText={p.name}
+    //           leftIcon={<img src={`${extImageBaseUrl}${p.image}`} alt="" width="24" height="24" style={{background: 'black'}}/>}
+    //           onTouchTap={this.onClickMenuItem.bind(this, p)}
+    //         />
+    //       )}
+    //     </IconMenu>
+    //   </div>
+    // )
   }
 
   renderAgent () {
@@ -394,6 +411,7 @@ export default class DeviceDashboard extends React.Component {
           {gauges.map(p => this.renderGauge(p))}
         </ResponsiveReactGridLayout>
 
+        {this.renderGaugePicker()}
         {this.renderDeviceWizard()}
         {this.renderGaugeModal()}
         <ReactTooltip />
