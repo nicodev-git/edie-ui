@@ -54,7 +54,7 @@ export default class FlipView extends React.Component {
     const {onClickDelete, onClickMinimize, onClickMaximize, onClickRefresh, gauge} = this.props
     return (
       <div
-        style={{position: 'absolute', right: 10, bottom: 10, zIndex: 1}}
+        style={{position: 'absolute', right: 5, bottom: 5, zIndex: 1}}
         className={`link info-button ${hovered ? 'visible' : ''}`}>
         {onClickRefresh && <RefreshIcon onTouchTap={() => onClickRefresh(gauge)}/>}
         {
@@ -71,15 +71,10 @@ export default class FlipView extends React.Component {
   }
 
   renderFront () {
-    const {renderFrontView, viewOnly} = this.props
+    const {renderFrontView} = this.props
     return (
-      <div
-        className="flex-vertical flex-1"
-        onMouseEnter={this.onMouseEnter}
-        onMouseLeave={this.onMouseLeave}
-      >
+      <div className="flex-vertical flex-1">
         {renderFrontView && renderFrontView()}
-        {!viewOnly && this.renderInfoIcon()}
       </div>
     )
   }
@@ -109,11 +104,14 @@ export default class FlipView extends React.Component {
                   {!viewOnly && this.renderInfoIcon()}
                 </div>
               ) : (
-                <Paper className="flex-1 flex-vertical" style={paperStyle} zDepth={paperZDepth}>
+                <Paper className="flex-1 flex-vertical" style={paperStyle} zDepth={paperZDepth} onMouseEnter={this.onMouseEnter} onMouseLeave={this.onMouseLeave}>
                   {!hideTitle && <div style={{fontSize: 14, color: 'rgba(0, 0, 0, 0.54)', height: 48, paddingLeft: 20, paddingTop: 16}}>
                     {gauge.name}
                   </div>}
-                  {children}
+                  <div className="flex-1 flex-vertical" style={{padding: '16px 20px 35px'}}>
+                    {children}
+                  </div>
+                  {!viewOnly && this.renderInfoIcon()}
                   {loading && front && <RefreshOverlay />}
                 </Paper>
               )

@@ -5,7 +5,7 @@ class AccelMeterView extends React.Component {
   render () {
     const {value, title} = this.props
     return (
-      <div className="padding-md">
+      <div>
         {title}
         <div className="ant-progress ant-progress-line ant-progress-status-normal ant-progress-show-info">
           <div>

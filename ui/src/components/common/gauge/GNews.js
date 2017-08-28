@@ -54,7 +54,7 @@ export default class GNews extends React.Component {
 
   renderFrontView () {
     return (
-      <div className="flex-1 padding-md" style={{overflow: 'auto'}}>
+      <div className="flex-1" style={{overflow: 'auto'}}>
         <table className="table">
           <tbody>
           {this.state.articles.map(p =>{
