@@ -3,6 +3,7 @@ import { reduxForm, submit } from 'redux-form'
 import { connect } from 'react-redux'
 import { assign, debounce } from 'lodash'
 import ReactTooltip from 'react-tooltip'
+import moment from 'moment'
 
 import TabPage from 'components/common/TabPage'
 import TabPageBody from 'components/common/TabPageBody'
@@ -67,13 +68,14 @@ class LogView extends React.Component {
     // const pos = pageSize * page + index
     // const newPage = Math.floor(pos / 200)
 
-    // this.props.showDetailLogModal(true, {
-    //   ...this.props.logViewParam,
-    //   dateFrom: startDate.format(dateFormat),
-    //   dateTo: endDate.format(dateFormat),
-    //   page: 0,
-    //   size: 200
-    // })
+    this.props.showDetailLogModal(true, {
+      ...this.props.logViewParam,
+      query: '',
+      dateFrom: moment(row.timestamp).add(-5, 'minutes').format(dateFormat),
+      dateTo: moment(row.timestamp).add(5, 'minutes').format(dateFormat),
+      page: 0,
+      size: 200
+    })
   }
 
   handleFormSubmit (values) {

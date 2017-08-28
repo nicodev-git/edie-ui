@@ -1,9 +1,6 @@
 import React from 'react'
-import moment from 'moment'
 
 import { Modal } from 'components/modal/parts'
-
-import {dateFormat} from 'shared/Global'
 
 export default class DetailLogModalView extends React.Component {
   renderTable () {
