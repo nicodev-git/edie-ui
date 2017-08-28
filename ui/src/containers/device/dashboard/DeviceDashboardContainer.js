@@ -18,7 +18,11 @@ import {
   ackIncident,
 
   loadSearch,
-  showGaugeModal
+
+  showGaugeModal,
+  showGaugePicker,
+
+  updateViewLogParams
 } from 'actions'
 
 class DeviceDashboardContainer extends React.Component {
@@ -46,7 +50,10 @@ export default connect(
     incidentDraw: state.devices.incidentDraw,
 
     gaugeModalOpen: state.gauge.gaugeModalOpen,
-    editGauge: state.gauge.editGauge
+    editGauge: state.gauge.editGauge,
+    gaugePickerOpen: state.gauge.gaugePickerOpen,
+
+    logViewParam: state.dashboard.logViewParam
   }), {
     fetchSysSearchOptions,
     fetchWorkflows,
@@ -62,6 +69,10 @@ export default connect(
     ackIncident,
 
     loadSearch,
-    showGaugeModal
+
+    showGaugeModal,
+    showGaugePicker,
+
+    updateViewLogParams
   }
 )(withRouter(DeviceDashboardContainer))

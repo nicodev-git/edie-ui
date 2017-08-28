@@ -6,6 +6,7 @@ import { extImageBaseUrl, appletColors as colors } from 'shared/Global'
 
 export default class GaugePickerView extends React.Component {
   renderTpl (tpl, i) {
+    const {onClickMenuItem} = this.props
     return (
       <AppletCard
         key={tpl.id}
@@ -13,6 +14,7 @@ export default class GaugePickerView extends React.Component {
         name={''}
         desc={tpl.name}
         img={`${extImageBaseUrl}${tpl.image}`}
+        onClick={() => onClickMenuItem(tpl)}
       />
     )
   }

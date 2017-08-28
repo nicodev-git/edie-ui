@@ -88,6 +88,8 @@ export default class MainDashboardView extends React.Component {
   onClickMenuItem (tpl) {
     console.log(tpl)
 
+    this.props.showGaugePicker(false)
+
     if (['News'].indexOf(tpl.name) >= 0) {
       this.onFinishAddWizard(null, null, {
         templateName: tpl.name,
@@ -325,7 +327,7 @@ export default class MainDashboardView extends React.Component {
   renderGaugePicker () {
     if (!this.props.gaugePickerOpen) return null
     return (
-      <GaugePicker {...this.props}/>
+      <GaugePicker {...this.props} onClickMenuItem={this.onClickMenuItem.bind(this)}/>
     )
   }
 

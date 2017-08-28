@@ -9,7 +9,7 @@ export default class AppletCard extends React.Component {
         <div className="applet-card-body " style={{background: color}}>
           <div className="content">
             <div className="card-top">
-              <img src={img} alt=""/>
+              <img src={img} alt="" onClick={onClick}/>
               <div className="pull-right" style={{marginRight: -10, marginTop: -10}}>
                 {onClickDelete && <CloseIcon size={32} color="white" onTouchTap={onClickDelete}/>}
               </div>
