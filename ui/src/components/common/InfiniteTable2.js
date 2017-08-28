@@ -100,7 +100,7 @@ class InfiniteTable extends React.Component {
       this.lastRequest.abort()
     }
 
-    this.lastRequest = $.get(`${ROOT_URL}${url}?${encodeUrlParams(urlParams)}`).done(res => {
+    this.lastRequest = $.get(`${ROOT_URL}123${url}?${encodeUrlParams(urlParams)}`).done(res => {
       const embedded = res._embedded
       let data = embedded[keys(embedded)[0]]
       if (handleRecord) {
@@ -119,6 +119,16 @@ class InfiniteTable extends React.Component {
 
       this.setState(state)
       onUpdateCount && onUpdateCount(total, state.results)
+    }).fail(() => {
+      if (page === 1) {
+        setTimeout(() => {
+          this.setState({
+            isLoading: false
+          })
+          this.getExternalData(page, clear)
+        }, 2000)
+      }
+
     })
 
     return this.lastRequest
