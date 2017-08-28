@@ -1,5 +1,5 @@
 import React from 'react'
-import { reduxForm } from 'redux-form'
+import { reduxForm, submit } from 'redux-form'
 import { connect } from 'react-redux'
 import { assign, debounce } from 'lodash'
 import ReactTooltip from 'react-tooltip'
@@ -58,7 +58,7 @@ class LogView extends React.Component {
   }
   onSearchKeyDown (e) {
     if (e.keyCode === 13) {
-      // submit('logViewForm')
+      submit('logViewForm')
     }
   }
 

@@ -1,6 +1,5 @@
 import React from 'react'
 import {Paper} from 'material-ui'
-import ReduxInfiniteScroll from 'redux-infinite-scroll'
 import { concat, assign, isEqual, keys, debounce, chunk, reverse, merge, isArray } from 'lodash'
 import $ from 'jquery'
 import moment from 'moment'
@@ -182,19 +181,38 @@ export default class LogPapers extends React.Component {
     })
   }
 
+  renderPaging () {
+
+  }
+
   render () {
     const table = this.renderTable()
     if (!this.props.bodyHeight) {
       return (
-        <ReduxInfiniteScroll
-          children={table}
-          loadMore={this.loadMoreDeb}
-          loadingMore={this.state.isLoading}
-        />
+        <div className="flex-vertical" style={{height: '100%', overflow: 'auto'}}>
+          {this.renderPaging()}
+          <div className="flex-1">
+            {table}
+          </div>
+        </div>
       )
     }
     return table
   }
+
+  // render () {
+  //   const table = this.renderTable()
+  //   if (!this.props.bodyHeight) {
+  //     return (
+  //       <ReduxInfiniteScroll
+  //         children={table}
+  //         loadMore={this.loadMoreDeb}
+  //         loadingMore={this.state.isLoading}
+  //       />
+  //     )
+  //   }
+  //   return table
+  // }
 }
 
 LogPapers.defaultProps = {
