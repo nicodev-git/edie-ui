@@ -71,7 +71,7 @@ class LiquidView extends React.Component {
             );
           }}
           riseAnimation={false}
-          waveAnimation
+          waveAnimation={false}
           waveFrequency={2}
           waveAmplitude={1}
           gradient
