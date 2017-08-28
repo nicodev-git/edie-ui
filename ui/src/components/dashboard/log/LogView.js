@@ -1,5 +1,5 @@
 import React from 'react'
-import { reduxForm, submit } from 'redux-form'
+import { reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
 import { assign, debounce } from 'lodash'
 import ReactTooltip from 'react-tooltip'

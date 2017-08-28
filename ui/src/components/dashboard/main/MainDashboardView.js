@@ -1,6 +1,6 @@
 import React from 'react'
 import {concat, assign, findIndex} from 'lodash'
-import {IconButton, IconMenu, MenuItem} from 'material-ui'
+import {IconButton} from 'material-ui'
 import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
 import ReactTooltip from 'react-tooltip'
 import {Responsive, WidthProvider} from 'react-grid-layout'
@@ -8,7 +8,7 @@ import 'react-grid-layout/css/styles.css'
 import 'react-resizable/css/styles.css'
 
 import GaugeWizardContainer from 'containers/shared/wizard/GaugeWizardContainer'
-import { extImageBaseUrl, guid, getWidgetSize, gaugeAspectRatio, layoutCols, layoutRowHeight, layoutWidthZoom, layoutHeightZoom } from 'shared/Global'
+import { guid, getWidgetSize, gaugeAspectRatio, layoutCols, layoutRowHeight, layoutWidthZoom, layoutHeightZoom } from 'shared/Global'
 import { wizardConfig } from 'components/common/wizard/WizardConfig'
 import { gaugeEditViewStyle } from 'style/common/materialStyles'
 
@@ -295,31 +295,31 @@ export default class MainDashboardView extends React.Component {
   }
 
   renderAddMenu () {
-    // return (
-    //   <div className="text-right" style={{position: 'absolute', top: -45, right: 0}}>
-    //     <IconButton onTouchTap={() => this.props.showGaugePicker(true)}>
-    //       <AddCircleIcon />
-    //     </IconButton>
-    //   </div>
-    // )
-    const {gauges} = this.props
     return (
       <div className="text-right" style={{position: 'absolute', top: -45, right: 0}}>
-        <IconMenu
-          iconButtonElement={<IconButton><AddCircleIcon /></IconButton>}
-          anchorOrigin={{horizontal: 'left', vertical: 'top'}}
-          targetOrigin={{horizontal: 'left', vertical: 'top'}}
-        >
-          {gauges.map(p =>
-            <MenuItem
-              key={p.id} primaryText={p.name}
-              leftIcon={<img src={`${extImageBaseUrl}${p.image}`} alt="" width="24" height="24" style={{background: 'black'}}/>}
-              onTouchTap={this.onClickMenuItem.bind(this, p)}
-            />
-          )}
-        </IconMenu>
+        <IconButton onTouchTap={() => this.props.showGaugePicker(true)}>
+          <AddCircleIcon />
+        </IconButton>
       </div>
     )
+    // const {gauges} = this.props
+    // return (
+    //   <div className="text-right" style={{position: 'absolute', top: -45, right: 0}}>
+    //     <IconMenu
+    //       iconButtonElement={<IconButton><AddCircleIcon /></IconButton>}
+    //       anchorOrigin={{horizontal: 'left', vertical: 'top'}}
+    //       targetOrigin={{horizontal: 'left', vertical: 'top'}}
+    //     >
+    //       {gauges.map(p =>
+    //         <MenuItem
+    //           key={p.id} primaryText={p.name}
+    //           leftIcon={<img src={`${extImageBaseUrl}${p.image}`} alt="" width="24" height="24" style={{background: 'black'}}/>}
+    //           onTouchTap={this.onClickMenuItem.bind(this, p)}
+    //         />
+    //       )}
+    //     </IconMenu>
+    //   </div>
+    // )
   }
 
   renderGaugePicker () {
