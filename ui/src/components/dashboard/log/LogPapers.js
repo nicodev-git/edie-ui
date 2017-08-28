@@ -1,6 +1,6 @@
 import React from 'react'
 import {Paper} from 'material-ui'
-import { concat, assign, isEqual, keys, debounce, chunk, reverse, merge, isArray } from 'lodash'
+import { assign, isEqual, keys, chunk, reverse, merge, isArray } from 'lodash'
 import $ from 'jquery'
 import moment from 'moment'
 import ReactPaginate from 'react-paginate'
@@ -14,7 +14,7 @@ export default class LogPapers extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      currentPage: -1,
+      currentPage: 0,
       isLoading: false,
       maxPages: 0,
       results: [],
@@ -24,8 +24,6 @@ export default class LogPapers extends React.Component {
       selected: []
     }
     this.lastRequest = null
-
-    this.loadMoreDeb = debounce(this.loadMore.bind(this), 200)
   }
 
   getHighlighted (entity, highlights) {
@@ -79,17 +77,10 @@ export default class LogPapers extends React.Component {
     return this.props.useExternal ? this.state.results : this.props.data
   }
 
-  getExternalData (page, clear) {
-    if (this.state.isLoading) {
-      if (clear) {
-        if (this.state.results.length) this.setState({results: []})
-      }
-      return
-    }
-
+  getExternalData (page) {
     const {url, params, pageSize, onUpdateCount, handleRecord} = this.props
     if (!url) return
-    page = clear ? 1 : (page || 1)
+    page = page || 1
     let urlParams = assign({
       page: page - 1,
       size: pageSize || 10
@@ -119,7 +110,7 @@ export default class LogPapers extends React.Component {
 
       const total = res.page.totalElements
       let state = {
-        results: concat((clear ? [] : this.state.results), data),
+        results: data || [],
         currentPage: page - 1,
         maxPages: res.page.totalPages,
         total,
@@ -143,21 +134,11 @@ export default class LogPapers extends React.Component {
     }
   }
 
-  loadMore () {
-    if (!this.state.hasMore) return
-    this.getExternalData(this.state.currentPage + 2)
-  }
-
-  getBodyHeight () {
-    const height = parseInt(this.props.bodyHeight || '0', 10)
-    return height ? `${height}px` : height
-  }
-
   getFileName(entity) {
     return entity && entity.dataobj ? entity.dataobj.file : ''
   }
-  handlePageClick () {
-
+  handlePageClick (page) {
+    this.getExternalData(page.selected + 1)
   }
   renderTable () {
     const {pageSize} = this.props
@@ -186,17 +167,18 @@ export default class LogPapers extends React.Component {
   }
 
   renderPaging () {
-    const {maxPages} = this.state
+    const {maxPages, currentPage} = this.state
     return (
       <ReactPaginate
-        previousLabel={"previous"}
-        nextLabel={"next"}
-        breakLabel={<a href="">...</a>}
+        previousLabel={"Prev"}
+        nextLabel={"Next"}
+        breakLabel={<a>...</a>}
         breakClassName={"break-me"}
         pageCount={maxPages}
+        forcePage={currentPage}
         marginPagesDisplayed={2}
         pageRangeDisplayed={5}
-        onPageChange={this.handlePageClick}
+        onPageChange={this.handlePageClick.bind(this)}
         containerClassName={"pagination"}
         subContainerClassName={"pages pagination"}
         activeClassName={"active"}/>
