@@ -1,7 +1,7 @@
 import React from 'react'
 
 import SavedSearchModalView from './SavedSearchModalView'
-import {showAlert, showPrompt} from 'components/common/Alert'
+import {showAlert, showPrompt, showConfirm} from 'components/common/Alert'
 
 export default class SavedSearchModal extends React.Component {
   componentWillMount () {
@@ -51,11 +51,22 @@ export default class SavedSearchModal extends React.Component {
       this.props.onAddSearch({name: text})
     })
   }
+  onClickEdit (savedSearch) {
+    showConfirm('Click OK to overwrite.', btn => {
+      if (btn !== 'ok') return
+
+      this.props.onAddSearch({
+        searchId: savedSearch.id,
+        name: savedSearch.name
+      })
+    })
+  }
   render () {
     return (
       <SavedSearchModalView
         {...this.props}
         onClickAdd={this.onClickAdd.bind(this)}
+        onClickEdit={this.onClickEdit.bind(this)}
         onClickRow={this.onClickRow.bind(this)}
         onClickDelete={this.onClickDelete.bind(this)}
         onClickOK={this.onClickOK.bind(this)}

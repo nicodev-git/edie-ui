@@ -4,6 +4,7 @@ import {IconButton, TextField} from 'material-ui'
 import Share from 'material-ui/svg-icons/social/share'
 import DeleteIcon from 'material-ui/svg-icons/action/delete'
 import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
+import EditIcon from 'material-ui/svg-icons/content/create'
 
 import { TwoButtonsBlockCustom, Modal, CardPanel } from 'components/modal/parts'
 
@@ -21,6 +22,7 @@ class SavedSearchModalView extends React.Component {
       onChangeKeyword,
       onClickDelete,
       onClickAdd,
+      onClickEdit,
       panelMode
     } = this.props
 
@@ -65,6 +67,7 @@ class SavedSearchModalView extends React.Component {
                   <td>{p.type}</td>
                   <td className="p-none">
                     {p.type === 'User' ? <IconButton onTouchTap={() => onClickShare(p)}><Share/></IconButton> : null}
+                    {p.type === 'User' ? <IconButton onTouchTap={() => onClickEdit(p)}><EditIcon/></IconButton> : null}
                     {p.type === 'User' ? <IconButton onTouchTap={() => onClickDelete(p)}><DeleteIcon/></IconButton> : null}
                   </td>
                 </tr>
