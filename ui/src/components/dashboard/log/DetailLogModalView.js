@@ -7,12 +7,12 @@ import {dateFormat} from 'shared/Global'
 
 export default class DetailLogModalView extends React.Component {
   renderTable () {
-    const list = this.props.data
+    const list = this.props.items
 
     return (
-      <div>
+      <div className="bg-white">
         {list.map((row, index) =>
-          <div key={row.id} className="padding-xs row-hover">
+          <div key={row.id}>
             <div dangerouslySetInnerHTML={{__html: row.entity && row.entity.dataobj ? row.entity.dataobj.line : ' '}}/>
           </div>
         )}

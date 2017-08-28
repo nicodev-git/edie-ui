@@ -25,7 +25,7 @@ export default class DetailLogModal extends React.Component {
       //
       if (this.props.revertRows) data = reverse(data)
 
-      this.setState(data)
+      this.setState({data})
     })
   }
 
@@ -37,7 +37,7 @@ export default class DetailLogModal extends React.Component {
     return (
       <DetailLogModalView
         onHide={this.onHide.bind(this)}
-        data={this.state.data}
+        items={this.state.data}
       />
     )
   }
