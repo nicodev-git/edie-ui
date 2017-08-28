@@ -33,7 +33,7 @@ class SearchSavePopover extends React.Component {
     }
   }
   render () {
-    const { anchorEl, onRequestClose, onSubmit, handleSubmit, changeSearchSaveType } = this.props
+    const { anchorEl, onRequestClose, onSubmit, handleSubmit } = this.props
     return (
       <Popover
         open
@@ -44,13 +44,6 @@ class SearchSavePopover extends React.Component {
         className="padding-md"
       >
         <form onSubmit={handleSubmit(onSubmit)}>
-          <div>
-            <RadioButtonGroup name="saveType" defaultSelected="new" onChange={(e, value) => changeSearchSaveType(value)}>
-              <RadioButton value="new" label="New" style={{display: 'inline-block', width: 'auto'}}/>
-              <RadioButton value="replace" label="Replace" style={{display: 'inline-block', width: 'auto', marginLeft: 20}}/>
-              <RadioButton value="existing" label="Existing" style={{display: 'inline-block', width: 'auto', marginLeft: 20}}/>
-            </RadioButtonGroup>
-          </div>
           {this.renderContent()}
         </form>
       </Popover>
