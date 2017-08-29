@@ -1,6 +1,6 @@
 import React from 'react'
 import { keys, reverse } from 'lodash'
-import $ from 'jquery'
+import axios from 'axios'
 
 import DetailLogModalView from './DetailLogModalView'
 import { encodeUrlParams } from 'shared/Global'
@@ -13,26 +13,31 @@ export default class DetailLogModal extends React.Component {
       data: []
     }
   }
+
+  getData (res) {
+    const embedded = res._embedded
+    const data = embedded[keys(embedded)[0]]
+    return data
+  }
+
   componentWillMount () {
     const {detailLogViewParam} = this.props
-    $.get(`${ROOT_URL}/search/all?${encodeUrlParams({
-      ...detailLogViewParam,
-      sortDir: 'desc'
-    })}`).done(res => {
-      const embedded = res._embedded
-      const data = reverse(embedded[keys(embedded)[0]])
-      this.setState({data: [...data, ...this.state.data]})
-    })
+    axios.all([
+      axios.get(`${ROOT_URL}/search/all?${encodeUrlParams({
+        ...detailLogViewParam,
+        sortDir: 'desc'
+      })}`),
+      axios.get(`${ROOT_URL}/search/all?${encodeUrlParams({
+        ...detailLogViewParam,
+        dateFromEpoch: detailLogViewParam.dateToEpoch + 1,
+        dateToEpoch: 0,
+        sortDir: 'asc'
+      })}`)
+    ]).then(res => {
+      const data1 = reverse(this.getData(res[0].data))
+      const data2 = this.getData(res[1].data)
 
-    $.get(`${ROOT_URL}/search/all?${encodeUrlParams({
-      ...detailLogViewParam,
-      dateFromEpoch: detailLogViewParam.dateToEpoch + 1,
-      dateToEpoch: 0,
-      sortDir: 'asc'
-    })}`).done(res => {
-      const embedded = res._embedded
-      const data = embedded[keys(embedded)[0]]
-      this.setState({data: [...this.state.data, ...data]})
+      this.setState({data: [...data1, ...data2]})
     })
   }
 
