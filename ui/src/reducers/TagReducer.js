@@ -36,7 +36,7 @@ export default function (state = initialState, action) {
     case ADD_TAG:
       return { ...state, tagDraw: state.tagDraw + 1, tags: [...state.tags, action.data] }
     case UPDATE_TAG:
-      return { ...state, tagDraw: state.tagDraw + 1 }
+      return { ...state, tagDraw: state.tagDraw + 1, tags: state.tags.map(p => p.id === action.data.id ? action.data : p) }
     case REMOVE_TAG:
       return { ...state, tagDraw: state.tagDraw + 1, tags: state.tags.filter(p => p.id !== action.data.id) }
     case SELECT_TAG:

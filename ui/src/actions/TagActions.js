@@ -57,7 +57,7 @@ export function updateTag (entity) {
 export function removeTag (entity) {
   return (dispatch) => {
     axios.delete(entity._links.self.href).then(() => {
-      dispatch({type: REMOVE_TAG, entity})
+      dispatch({type: REMOVE_TAG, data: entity})
     }).catch(error => {
       dispatch({type: API_ERROR, msg: error})
     })

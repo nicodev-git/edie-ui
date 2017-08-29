@@ -30,10 +30,10 @@ export default class Tags extends React.Component {
     if (!multiSelTags.length) return
     this.props.showTagModal(true, multiSelTags[0])
   }
-  onDeleteTag (item) {
-    showConfirm('Are you sure?', btn => {
+  onDeleteTag (tag) {
+    showConfirm(`Are you sure? Tag: ${tag.name}` , btn => {
       if (btn !== 'ok') return
-      this.props.removeTag(item)
+      this.props.removeTag(tag)
     })
   }
   onClickTag (item) {
@@ -162,7 +162,6 @@ export default class Tags extends React.Component {
             <div className="pull-right">
               <RaisedButton label="Add" onTouchTap={this.onAddTag.bind(this)}/>&nbsp;
               <RaisedButton label="Edit" onTouchTap={this.onEditTag.bind(this)}/>&nbsp;
-              <RaisedButton label="Delete" onTouchTap={this.onDeleteTag.bind(this)}/>&nbsp;
               <WfTabs history={this.props.history}/>
             </div>
           </div>
