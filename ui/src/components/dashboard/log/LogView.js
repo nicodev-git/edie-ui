@@ -3,7 +3,6 @@ import { reduxForm, submit } from 'redux-form'
 import { connect } from 'react-redux'
 import { assign, debounce } from 'lodash'
 import ReactTooltip from 'react-tooltip'
-import moment from 'moment'
 
 import TabPage from 'components/common/TabPage'
 import TabPageBody from 'components/common/TabPageBody'
@@ -65,20 +64,18 @@ class LogView extends React.Component {
   }
 
   onClickDetailView (row, index, page, pageSize) {
-    // const pos = pageSize * page + index
-    // const newPage = Math.floor(pos / 200)
     const params = {
       ...this.props.logViewParam,
       query: '',
       dateFrom: '',
       dateTo: '',
-      dateFromEpoch: moment(row.entity.timestamp).add(-3, 'minutes').valueOf(),
-      dateToEpoch: moment(row.entity.timestamp).add(3, 'minutes').valueOf(),
+      dateFromEpoch: 0,
+      dateToEpoch: row.entity.timestamp,
       page: 0,
-      size: 200
+      size: 100
     }
 
-    console.log(`${row.entity.timestamp} Between ${params.dateFromEpoch} - ${params.dateToEpoch}`)
+    // console.log(`${row.entity.timestamp} Between ${params.dateFromEpoch} - ${params.dateToEpoch}`)
 
     this.props.showDetailLogModal(true, params)
   }

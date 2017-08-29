@@ -14,18 +14,25 @@ export default class DetailLogModal extends React.Component {
     }
   }
   componentWillMount () {
-    $.get(`${ROOT_URL}/search/all?${encodeUrlParams(this.props.detailLogViewParam)}`).done(res => {
+    const {detailLogViewParam} = this.props
+    $.get(`${ROOT_URL}/search/all?${encodeUrlParams({
+      ...detailLogViewParam,
+      sortDir: 'desc'
+    })}`).done(res => {
       const embedded = res._embedded
-      let data = embedded[keys(embedded)[0]]
+      const data = reverse(embedded[keys(embedded)[0]])
+      this.setState({data: [...data, ...this.state.data]})
+    })
 
-      // data = data.map(d => ({
-      //   ...d,
-      //   entity: this.getHighlighted(d.entity, d.highlights)
-      // }))
-      //
-      if (this.props.revertRows) data = reverse(data)
-
-      this.setState({data})
+    $.get(`${ROOT_URL}/search/all?${encodeUrlParams({
+      ...detailLogViewParam,
+      dateFrom: detailLogViewParam.dateTo + 1,
+      dateTo: 0,
+      sortDir: 'asc'
+    })}`).done(res => {
+      const embedded = res._embedded
+      const data = embedded[keys(embedded)[0]]
+      this.setState({data: [...this.state.data, ...data]})
     })
   }
 
