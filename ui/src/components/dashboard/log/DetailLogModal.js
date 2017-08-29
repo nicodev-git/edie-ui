@@ -44,6 +44,7 @@ export default class DetailLogModal extends React.Component {
     return (
       <DetailLogModalView
         onHide={this.onHide.bind(this)}
+        rowId={this.props.detailLogViewParam.rowId}
         items={this.state.data}
       />
     )

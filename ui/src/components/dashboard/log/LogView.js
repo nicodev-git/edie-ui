@@ -72,7 +72,8 @@ class LogView extends React.Component {
       dateFromEpoch: 0,
       dateToEpoch: row.entity.timestamp,
       page: 0,
-      size: 100
+      size: 100,
+      rowId: row.id
     }
 
     // console.log(`${row.entity.timestamp} Between ${params.dateFromEpoch} - ${params.dateToEpoch}`)
