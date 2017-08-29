@@ -19,7 +19,7 @@ export default class MainDashboard extends React.Component {
       let index = -1
       if (id) index = findIndex(gaugeBoards, {id})
 
-      nextProps.selectGaugeBoard(gaugeBoards[index >= 0 ? index : 0].id)
+      nextProps.selectGaugeBoard(gaugeBoards[index >= 0 ? index : 0].id, nextProps.history)
     }
   }
   getSelected () {
@@ -28,7 +28,7 @@ export default class MainDashboard extends React.Component {
     return this.props.gaugeBoards[index]
   }
   onChangeBoard (e, index, value) {
-    this.props.selectGaugeBoard(value)
+    this.props.selectGaugeBoard(value, this.props.history)
   }
   onClickAdd () {
     // showPrompt('Please type name.', '', name => {

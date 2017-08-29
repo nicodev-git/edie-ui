@@ -113,9 +113,15 @@ export const removeGaugeBoard = (entity) => {
   }
 }
 
-export const selectGaugeBoard = (data) => {
+export const selectGaugeBoard = (data, history) => {
   return dispatch => {
     dispatch({type: SELECT_GAUGE_BOARD, data})
+    if (history) {
+      history.replace({
+        pathname: '/dashboard',
+        search: `?id=${data}`
+      })
+    }
   }
 }
 
