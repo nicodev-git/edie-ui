@@ -5,11 +5,12 @@ import { Modal } from 'components/modal/parts'
 export default class DetailLogModalView extends React.Component {
   renderTable () {
     const list = this.props.items
+    const {rowId} = this.props
 
     return (
       <div className="bg-white">
         {list.map((row, index) =>
-          <div key={row.id}>
+          <div key={row.id} className={row.id === rowId ? 'highlight' : ''}>
             <div dangerouslySetInnerHTML={{__html: row.entity && row.entity.dataobj ? row.entity.dataobj.line : ' '}}/>
           </div>
         )}
