@@ -71,8 +71,10 @@ class LogView extends React.Component {
     this.props.showDetailLogModal(true, {
       ...this.props.logViewParam,
       query: '',
-      dateFrom: moment(row.timestamp).add(-5, 'minutes').format(dateFormat),
-      dateTo: moment(row.timestamp).add(5, 'minutes').format(dateFormat),
+      dateFrom: '',
+      dateTo: '',
+      dateFromEpoch: moment(row.timestamp).add(-5, 'minutes').valueOf(),
+      dateToEpoch: moment(row.timestamp).add(5, 'minutes').valueOf(),
       page: 0,
       size: 200
     })
@@ -97,7 +99,10 @@ class LogView extends React.Component {
   renderDetailModal () {
     if (!this.props.detailLogModalOpen) return null
     return (
-      <DetailLogModal {...this.props}/>
+      <DetailLogModal
+        {...this.props}
+        revertRows
+      />
     )
   }
 
