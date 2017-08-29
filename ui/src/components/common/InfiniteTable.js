@@ -121,6 +121,14 @@ class InfiniteTable extends React.Component {
 
       this.setState(state)
       onUpdateCount && onUpdateCount(total, state.results)
+    }).fail(() => {
+      let state = {
+        isLoading: false,
+        hasMore: false
+      }
+
+      this.setState(state)
+      onUpdateCount && onUpdateCount(this.state.total, this.state.results)
     })
 
     return this.lastRequest

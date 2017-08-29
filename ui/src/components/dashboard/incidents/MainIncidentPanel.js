@@ -68,7 +68,7 @@ export default class MainIncidentPanel extends React.Component {
 
   render () {
     const {total} = this.state
-    const style = total ? {minHeight: '600px'} : null
+    const style = {minHeight: total ? 600 : 300}
     return (
       <div className="incidents-row margin-sm-top flex-vertical flex-1" style={style}>
         {this.renderContents()}
