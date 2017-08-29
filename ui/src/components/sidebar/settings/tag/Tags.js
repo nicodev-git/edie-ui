@@ -25,8 +25,10 @@ export default class Tags extends React.Component {
   onAddTag () {
     this.props.showTagModal(true)
   }
-  onEditTag (item) {
-    this.props.showTagModal(true, item)
+  onEditTag () {
+    const {multiSelTags} = this.props
+    if (!multiSelTags.length) return
+    this.props.showTagModal(true, multiSelTags[0])
   }
   onDeleteTag (item) {
     showConfirm('Are you sure?', btn => {
