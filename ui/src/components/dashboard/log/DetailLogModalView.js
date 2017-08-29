@@ -7,7 +7,7 @@ export default class DetailLogModalView extends React.Component {
   onRefRow (ref) {
     setTimeout(() => {
       const node = ReactDOM.findDOMNode(ref)
-      node.scrollIntoView({behavior: 'smooth'})
+      node && node.scrollIntoView({behavior: 'smooth'})
     }, 100)
   }
   renderTable () {
