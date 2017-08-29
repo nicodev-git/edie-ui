@@ -5,7 +5,7 @@ import GaugePickerView from './GaugePickerView'
 export default class GaugePicker extends React.Component {
 
   onHide () {
-
+    this.props.showGaugePicker(false)
   }
 
   render () {
