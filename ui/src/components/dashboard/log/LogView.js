@@ -67,17 +67,20 @@ class LogView extends React.Component {
   onClickDetailView (row, index, page, pageSize) {
     // const pos = pageSize * page + index
     // const newPage = Math.floor(pos / 200)
-
-    this.props.showDetailLogModal(true, {
+    const params = {
       ...this.props.logViewParam,
       query: '',
       dateFrom: '',
       dateTo: '',
-      dateFromEpoch: moment(row.timestamp).add(-3, 'minutes').valueOf(),
-      dateToEpoch: moment(row.timestamp).add(3, 'minutes').valueOf(),
+      dateFromEpoch: moment(row.entity.timestamp).add(-3, 'minutes').valueOf(),
+      dateToEpoch: moment(row.entity.timestamp).add(3, 'minutes').valueOf(),
       page: 0,
       size: 200
-    })
+    }
+
+    console.log(`${row.entity.timestamp} Between ${params.dateFromEpoch} - ${params.dateToEpoch}`)
+
+    this.props.showDetailLogModal(true, params)
   }
 
   handleFormSubmit (values) {
