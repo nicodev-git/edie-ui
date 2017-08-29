@@ -191,9 +191,7 @@ export default class GCpu extends React.Component {
         </div>
       ) : (
         <div className="flex-vertical flex-1">
-          <div className="flex-1 flex-vertical">
-            <LiquidView value={value}/>
-          </div>
+          <LiquidView value={value}/>
         </div>
       )
     }
@@ -209,6 +207,7 @@ export default class GCpu extends React.Component {
     )
   }
   render () {
+    const {gauge} = this.props
     return (
       <FlipView
         {...this.props}
@@ -221,6 +220,8 @@ export default class GCpu extends React.Component {
         loading={this.state.loading}
         renderFrontView={this.renderFrontView}
         renderBackView={this.renderBackView}
+
+        hideContentPadding={gauge.timing !== 'historic' && gauge.gaugeType !== 'accel'}
 
         onClickDelete={this.onClickDelete.bind(this)}
       />

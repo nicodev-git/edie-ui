@@ -214,6 +214,7 @@ export default class GDisk extends React.Component {
     )
   }
   render () {
+    const {gauge} = this.props
     return (
       <FlipView
         {...this.props}
@@ -226,6 +227,8 @@ export default class GDisk extends React.Component {
         loading={this.state.loading}
         renderFrontView={this.renderFrontView}
         renderBackView={this.renderBackView}
+
+        hideContentPadding={gauge.timing !== 'historic' && gauge.gaugeType !== 'accel'}
 
         onClickDelete={this.onClickDelete.bind(this)}
       />

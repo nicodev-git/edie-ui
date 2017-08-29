@@ -78,6 +78,8 @@ export default class GLiquid extends React.Component {
         renderFrontView={this.renderFrontView}
         renderBackView={this.renderBackView}
 
+        hideContentPadding
+
         onClickDelete={this.onClickDelete.bind(this)}
       />
     )
