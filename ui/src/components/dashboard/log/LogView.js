@@ -73,8 +73,8 @@ class LogView extends React.Component {
       query: '',
       dateFrom: '',
       dateTo: '',
-      dateFromEpoch: moment(row.timestamp).add(-5, 'minutes').valueOf(),
-      dateToEpoch: moment(row.timestamp).add(5, 'minutes').valueOf(),
+      dateFromEpoch: moment(row.timestamp).add(-3, 'minutes').valueOf(),
+      dateToEpoch: moment(row.timestamp).add(3, 'minutes').valueOf(),
       page: 0,
       size: 200
     })

@@ -20,7 +20,7 @@ export default class DetailLogModalView extends React.Component {
   render () {
     const {onHide} = this.props
     return (
-      <Modal title="Log" onRequestClose={onHide} contentStyle={{width: 1000, maxWidth: 'initial'}}>
+      <Modal title="Log" onRequestClose={onHide} contentStyle={{width: '90%', maxWidth: 'initial'}}>
         {this.renderTable()}
       </Modal>
     )
