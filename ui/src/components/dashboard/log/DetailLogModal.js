@@ -26,8 +26,8 @@ export default class DetailLogModal extends React.Component {
 
     $.get(`${ROOT_URL}/search/all?${encodeUrlParams({
       ...detailLogViewParam,
-      dateFrom: detailLogViewParam.dateTo + 1,
-      dateTo: 0,
+      dateFromEpoch: detailLogViewParam.dateToEpoch + 1,
+      dateToEpoch: 0,
       sortDir: 'asc'
     })}`).done(res => {
       const embedded = res._embedded
