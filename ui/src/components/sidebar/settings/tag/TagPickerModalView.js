@@ -112,7 +112,7 @@ export default class TagPickerModalView extends React.Component {
     }
     return (
       <Modal title="Tags" onRequestClose={onClickClose}>
-        <CardPanel title="Tags">
+        <CardPanel title="Tags" style={{zIndex: 10, position: 'relative'}}>
           <div style={{position: 'relative'}}>
             {this.renderContent()}
             {this.renderSelected()}
