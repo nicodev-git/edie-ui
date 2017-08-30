@@ -174,6 +174,24 @@ export default class MainDashboardView extends React.Component {
   onLayoutChange (layout, oldItem, newItem, placeholder, mouseEvent, el) {
     this.updateLayout(layout, oldItem, newItem)
   }
+  onDrag (layout, oldItem, newItem) {
+    const rowItems = layout.filter(p => p.h === newItem.h)
+    rowItems.sort((a, b) => {
+      if (a.x > b.x) return -1
+      if (a.x < b.x) return 1
+      return 0
+    })
+
+    let x = -1
+    rowItems.forEach(p => {
+      if (x < 0 || p.i === newItem.i) {
+        x = p.x
+      } else {
+        p.x = x
+      }
+      x += p.w
+    })
+  }
   onResize (layout, oldItem, newItem, placeholder, mouseEvent, el) {
     const gauge = this.findGauge(newItem.i)
     if (!gauge) return
@@ -379,6 +397,7 @@ export default class MainDashboardView extends React.Component {
           layouts={layouts}
           style={{marginTop: -10}}
           margin={[16, 16]}
+          onDrag={this.onDrag.bind(this)}
           onDragStop={this.onLayoutChange.bind(this)}
           onResize={this.onResize.bind(this)}
           onResizeStop={this.onResizeStop.bind(this)}
