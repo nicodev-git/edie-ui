@@ -21,13 +21,16 @@ export default class MainDashboard extends React.Component {
       nextProps.selectGaugeBoard(gaugeBoards[index >= 0 ? index : 0].id, nextProps.history)
     }
   }
+  getSelectedId () {
+    return this.props.match.params.id
+  }
   getSelected () {
-    const index = findIndex(this.props.gaugeBoards, {id: this.props.selectedGaugeBoard})
+    const index = findIndex(this.props.gaugeBoards, {id: this.getSelectedId()})
     if (index < 0) return null
     return this.props.gaugeBoards[index]
   }
   onChangeBoard (e, index, value) {
-    this.props.selectGaugeBoard(value, this.props.history)
+    this.props.selectGaugeBoard(value, this.props.history, true)
   }
   onClickAdd () {
     // showPrompt('Please type name.', '', name => {
@@ -64,7 +67,7 @@ export default class MainDashboard extends React.Component {
       <div className="tabs-custom flex-vertical flex-1">
         <div className="padding-lg-left">
           <SelectField
-            floatingLabelText="Dashboard" value={this.props.selectedGaugeBoard} onChange={this.onChangeBoard.bind(this)}
+            floatingLabelText="Dashboard" value={this.getSelectedId()} onChange={this.onChangeBoard.bind(this)}
             className="valign-top">
             {this.getBoards().map(p =>
               <MenuItem key={p.id} value={p.id} primaryText={p.name}/>

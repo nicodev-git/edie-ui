@@ -48,7 +48,6 @@ export default connect(
     gauges: state.gauge.gauges,
     gaugeItems: state.gauge.gaugeItems,
     gaugeBoards: state.gauge.gaugeBoards,
-    selectedGaugeBoard: state.gauge.selectedGaugeBoard,
     gaugeBoardsModalOpen: state.gauge.gaugeBoardsModalOpen,
 
     userInfo: state.dashboard.userInfo,
