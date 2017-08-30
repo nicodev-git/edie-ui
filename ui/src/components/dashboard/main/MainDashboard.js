@@ -3,9 +3,13 @@ import {IconButton, SelectField, MenuItem} from 'material-ui'
 import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
 import {findIndex} from 'lodash'
 import {parse} from 'query-string'
+import {Route} from 'react-router-dom'
+
 
 import MainDashboardView from './MainDashboardView'
 import BoardListModal from './BoardListModal'
+
+import MainDashboardRoute from './MainDashboardRoute'
 
 export default class MainDashboard extends React.Component {
   componentWillMount () {
@@ -77,6 +81,7 @@ export default class MainDashboard extends React.Component {
         <div className="flex-vertical flex-1">
           {this.renderContent()}
           {this.renderBoardsModal()}
+          <Route path="/dashboard/:id" component={MainDashboardRoute}/>
         </div>
       </div>
     )
