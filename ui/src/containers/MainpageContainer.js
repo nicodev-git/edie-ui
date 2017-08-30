@@ -4,7 +4,7 @@ import { debounce, findIndex } from 'lodash'
 import { withRouter } from 'react-router'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { Route } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 
 import Main from 'components/Main'
 import IncidentSocket from 'util/socket/IncidentSocket'
@@ -192,15 +192,18 @@ class MainpageContainer extends Component {
   render () {
     return (
       <Main {...this.props}>
-          <Route path="/dashboard" component={MainDashboardContainer} />
-          <Route path="/chat" component={ChatContainer}/>
-          <Route path="/search" component={SearchGeneric}/>
-          <Route path="/threatmap" component={ThreatMapContainer}/>
-          <Route path="/signout" component={SignoutContainer} />
-          <Route path="/settings" component={Settings}/>
-          <Route path="/viewlog" component={LogView}/>
+        <Switch>
+          <Route path="/dashboard" component={MainDashboardContainer} exact/>
+          <Route path="/dashboard/:id" component={MainDashboardContainer} />
+        </Switch>
+        <Route path="/chat" component={ChatContainer}/>
+        <Route path="/search" component={SearchGeneric}/>
+        <Route path="/threatmap" component={ThreatMapContainer}/>
+        <Route path="/signout" component={SignoutContainer} />
+        <Route path="/settings" component={Settings}/>
+        <Route path="/viewlog" component={LogView}/>
 
-          <Route path="/device/:deviceId" component={DeviceContainer}/>
+        <Route path="/device/:deviceId" component={DeviceContainer}/>
       </Main>
     )
   }
