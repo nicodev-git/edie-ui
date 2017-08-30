@@ -174,10 +174,10 @@ export default class MainDashboardView extends React.Component {
       }
       items.push(gauge)
     })
-    console.log(items)
     this.props.updateGaugeItem(items, this.props.board)
   }
   onLayoutChange (layout, oldItem, newItem) {
+    if (!this.lastPlaceholder) return
     newItem.x = this.lastPlaceholder.x
     newItem.y = this.lastPlaceholder.y
     this.updateLayout(layout, oldItem, newItem)
@@ -233,6 +233,7 @@ export default class MainDashboardView extends React.Component {
       newItem.h = oldItem.h
       return
     }
+    this.onDrag(layout, oldItem, newItem, newItem)
     this.updateLayout(layout, oldItem, newItem, true)
   }
 
