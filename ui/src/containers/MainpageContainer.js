@@ -192,7 +192,7 @@ class MainpageContainer extends Component {
   render () {
     return (
       <Main {...this.props}>
-          <Route path="/dashboard/:id" component={MainDashboardContainer} />
+          <Route path="/dashboard" component={MainDashboardContainer} />
           <Route path="/chat" component={ChatContainer}/>
           <Route path="/search" component={SearchGeneric}/>
           <Route path="/threatmap" component={ThreatMapContainer}/>
