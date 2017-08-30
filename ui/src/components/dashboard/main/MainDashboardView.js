@@ -172,19 +172,20 @@ export default class MainDashboardView extends React.Component {
     this.props.updateGaugeItem(items, this.props.board)
   }
   onLayoutChange (layout, oldItem, newItem, placeholder, mouseEvent, el) {
+    this.onDrag(layout, oldItem, newItem)
     this.updateLayout(layout, oldItem, newItem)
   }
   onDrag (layout, oldItem, newItem) {
-    const rowItems = layout.filter(p => p.h === newItem.h)
+    const rowItems = layout.filter(p => p.y === newItem.y)
     rowItems.sort((a, b) => {
-      if (a.x > b.x) return -1
-      if (a.x < b.x) return 1
+      if (a.x > b.x) return 1
+      if (a.x < b.x) return -1
       return 0
     })
 
     let x = -1
     rowItems.forEach(p => {
-      if (x < 0 || p.i === newItem.i) {
+      if (x < 0) {
         x = p.x
       } else {
         p.x = x
