@@ -15,7 +15,7 @@ import {showAlert} from 'components/common/Alert'
 const sampleData = []
 
 const chartOptions = {
-  responsive: true,
+  maintainAspectRatio: false,
   legend: {
     display: false
   },
@@ -46,6 +46,7 @@ const chartOptions = {
 }
 
 const monitorChartOptions = {
+  maintainAspectRatio: false,
   legend: {
     display: false
   },

@@ -18,6 +18,7 @@ import { ROOT_URL } from 'actions/config'
 const sampleData = []
 
 const chartOptions = {
+  maintainAspectRatio: false,
   legend: {
     display: false
   },

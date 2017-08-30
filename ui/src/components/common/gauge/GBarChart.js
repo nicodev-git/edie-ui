@@ -15,6 +15,7 @@ import {showAlert} from 'components/common/Alert'
 const sampleData = []
 
 const chartOptions = {
+  maintainAspectRatio: false,
   legend: {
     display: false
   },
