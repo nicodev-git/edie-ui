@@ -27,6 +27,7 @@ export default class MainDashboardView extends React.Component {
       deviceWizardVisible: false,
       flip: {}
     }
+    this.lastPlaceholder = null
   }
   componentWillMount () {
     this.props.fetchGauges()
@@ -169,15 +170,19 @@ export default class MainDashboardView extends React.Component {
       }
       items.push(gauge)
     })
+    console.log(items)
     this.props.updateGaugeItem(items, this.props.board)
   }
-  onLayoutChange (layout, oldItem, newItem, placeholder, mouseEvent, el) {
-    this.onDrag(layout, oldItem, newItem, newItem)
-    this.updateLayout(layout, oldItem, newItem, placeholder)
+  onLayoutChange (layout, oldItem, newItem) {
+    newItem.x = this.lastPlaceholder.x
+    newItem.y = this.lastPlaceholder.y
+    this.updateLayout(layout, oldItem, newItem)
   }
-  onDrag (layout, oldItem, newItem, placeholder) {
+  onDragStart () {
+    this.lastPlaceholder = null
+  }
+  onDrag (layout, oldItem, newItem, placeholder, e) {
     const rowItems = layout.filter(p => p.y === placeholder.y)
-    console.log(rowItems)
     if (!rowItems.length) return
     if (findIndex(rowItems, {i: newItem.i}) < 0) rowItems.push(placeholder)
     rowItems.sort((a, b) => {
@@ -195,6 +200,10 @@ export default class MainDashboardView extends React.Component {
       }
       x += p.w
     })
+
+    if (e) {
+      this.lastPlaceholder = placeholder
+    }
   }
   onResize (layout, oldItem, newItem, placeholder, mouseEvent, el) {
     const gauge = this.findGauge(newItem.i)
@@ -401,6 +410,7 @@ export default class MainDashboardView extends React.Component {
           layouts={layouts}
           style={{marginTop: -10}}
           margin={[16, 16]}
+          onDragStart={this.onDragStart.bind(this)}
           onDrag={this.onDrag.bind(this)}
           onDragStop={this.onLayoutChange.bind(this)}
           onResize={this.onResize.bind(this)}
