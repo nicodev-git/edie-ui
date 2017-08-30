@@ -282,7 +282,7 @@ export function filterGaugeServers (devices) {
 
 export const layoutWidthZoom  = 100
 export const layoutHeightZoom = 4
-export const layoutCols = {lg: 12 * layoutWidthZoom, md: 12 * layoutWidthZoom, sm: 8 * layoutWidthZoom, xs: 4 * layoutWidthZoom, xxs: 4 * layoutWidthZoom}
+export const layoutCols = {lg: 12 * layoutWidthZoom, md: 12 * layoutWidthZoom, sm: 10 * layoutWidthZoom, xs: 4 * layoutWidthZoom, xxs: 4 * layoutWidthZoom}
 export const layoutRowHeight = 10
 
 export function getWidgetSize (gauge, devices, flip) {
