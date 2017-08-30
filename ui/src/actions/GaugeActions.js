@@ -118,8 +118,7 @@ export const selectGaugeBoard = (data, history) => {
     dispatch({type: SELECT_GAUGE_BOARD, data})
     if (history) {
       history.replace({
-        pathname: '/dashboard',
-        search: `?id=${data}`
+        pathname: `/dashboard/${data}`
       })
     }
   }
