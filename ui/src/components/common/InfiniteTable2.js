@@ -79,9 +79,9 @@ class InfiniteTable extends React.Component {
 
   getExternalData (page, clear) {
     if (this.state.isLoading) {
-      if (clear) {
-        if (this.state.results.length) this.setState({results: []})
-      }
+      // if (clear) {
+      //   if (this.state.results.length) this.setState({results: []})
+      // }
       return
     }
 
