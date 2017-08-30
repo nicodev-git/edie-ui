@@ -113,13 +113,12 @@ export const removeGaugeBoard = (entity) => {
   }
 }
 
-export const selectGaugeBoard = (data, history) => {
+export const selectGaugeBoard = (data, history, push) => {
   return dispatch => {
     dispatch({type: SELECT_GAUGE_BOARD, data})
     if (history) {
-      history.replace({
-        pathname: `/dashboard/${data}`
-      })
+      if (push) history.push(`/dashboard/${data}`)
+      else history.replace(`/dashboard/${data}`)
     }
   }
 }
