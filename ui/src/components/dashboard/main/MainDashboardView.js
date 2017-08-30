@@ -177,6 +177,7 @@ export default class MainDashboardView extends React.Component {
   }
   onDrag (layout, oldItem, newItem, placeholder) {
     const rowItems = layout.filter(p => p.y === placeholder.y)
+    if (!rowItems.length) return
     if (findIndex(rowItems, {i: newItem.i}) < 0) rowItems.push(placeholder)
     rowItems.sort((a, b) => {
       if (a.x > b.x) return 1
