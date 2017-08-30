@@ -167,6 +167,10 @@ export default class MainDashboardView extends React.Component {
         } else if (!gauge.minimized) {
           if (gauge.layout.y === newItem.y) gauge.layout.h = newItem.h
         }
+      } else {
+        if (!gauge.minimized) {
+          if (gauge.layout.y === newItem.y) gauge.layout.h = newItem.h
+        }
       }
       items.push(gauge)
     })
