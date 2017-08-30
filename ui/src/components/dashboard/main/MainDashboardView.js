@@ -160,10 +160,13 @@ export default class MainDashboardView extends React.Component {
           w: p.w, h: p.h
         }
       }
-      if (isResize && newItem.i === gauge.id) {
-        gauge.gaugeSize = 'custom'
+      if (isResize) {
+        if (newItem.i === gauge.id) {
+          gauge.gaugeSize = 'custom'
+        } else if (!gauge.minimized) {
+          if (gauge.layout.y === newItem.y) gauge.layout.h = newItem.h
+        }
       }
-
       items.push(gauge)
     })
     this.props.updateGaugeItem(items, this.props.board)
