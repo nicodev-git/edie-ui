@@ -307,7 +307,7 @@ class GenericSearch extends React.Component {
     //     showConfirm('Click OK to remove.', (btn) => {
     //       if (btn !== 'ok') return
     //       change('searchOptionIndex', '')
-    //       removeSearchOption(userInfo, found[0])
+    //       removeSearchOption(userInfo,  found[0])
     //     })
     //   }
     // } else {
@@ -782,12 +782,14 @@ class GenericSearch extends React.Component {
       types: params.collections.split(',')
     }
 
-    console.log(pp)
+    // console.log(pp)
+    //
+    // return {
+    //   ...this.props.params,
+    //   draw: this.props.searchDraw
+    // }
 
-    return {
-      ...this.props.params,
-      draw: this.props.searchDraw
-    }
+    return pp
   }
 
   render () {
@@ -894,7 +896,7 @@ class GenericSearch extends React.Component {
               </div>
               <div className={`flex-1 table-no-gap ${this.getTableClass()}`}>
                 <InfiniteTable
-                  url="/search/all"
+                  url="/search/query"
                   cells={this.cells}
                   ref="table"
                   rowMetadata={{'key': 'id'}}
