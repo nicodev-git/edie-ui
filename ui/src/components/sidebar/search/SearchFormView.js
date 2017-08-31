@@ -72,9 +72,31 @@ export default class SearchFormView extends React.Component {
     return (
       <form onSubmit={onSubmit}>
         <div style={{background: '#dadada', paddingLeft: 10}}>
-          <div className="nowrap">
-            <Field name="query" component={FormInput} label="Search" onKeyDown={onSearchKeyDown} style={{minWidth: 200}} className="valign-top"/>
-            <IconButton tooltip="Search" onTouchTap={onClickSearch} type="submit" className="valign-top"><ActionSearch /></IconButton>
+          <div className="nowrap flex-horizontal">
+            <div className="flex-1">
+              <Field name="query" component={FormInput} label="Search" onKeyDown={onSearchKeyDown} style={{width: '100%'}} className="valign-top"/>
+            </div>
+            <div>
+              <IconButton tooltip="Search" onTouchTap={onClickSearch} type="submit" className="valign-top"><ActionSearch /></IconButton>
+            </div>
+          </div>
+
+          <div>
+            <IconButton tooltip="Workflow" tooltipPosition="top-center" onTouchTap={onClickWorkflow} className="valign-top"><img src="/resources/images/sidebar/search/wf-icon.png" width="24" alt=""/></IconButton>
+            <IconButton tooltip="Tags" tooltipPosition="top-center" onTouchTap={onClickTags} className="valign-top"><img src="/resources/images/sidebar/search/tag.png" width="24" alt=""/></IconButton>
+
+            <IconButton tooltip="Favorite" tooltipPosition="top-center" className="valign-top" onTouchTap={onClickStar}>{starFilled ? <FilledStar/> : <ToggleStar/>}</IconButton>
+            <IconButton tooltip="Illustrate" tooltipPosition="top-center" className="valign-top" onTouchTap={onClickIllustrate}><LocalMovie/></IconButton>
+            <IconButton tooltip="Related devices" tooltipPosition="top-center" className="valign-top" onTouchTap={onClickRelDevices}><Computer/></IconButton>
+            <IconButton tooltip="Non-related devices" tooltipPosition="top-center" className="valign-top" onTouchTap={onClickIrrelDevices}><NoSim/></IconButton>
+            <IconButton tooltip="Views" tooltipPosition="top-center" className="valign-top" onTouchTap={onClickViewFilter}><img src="/resources/images/sidebar/search/view-icon.png" width="24" alt=""/></IconButton>
+            <IconButton tooltip="Graph" tooltipPosition="top-center" className="valign-top" onTouchTap={onClickGraph}><img src="/resources/images/sidebar/search/graph-icon.png" width="24" alt=""/></IconButton>
+
+            <IconButton tooltip="Clear" tooltipPosition="top-center" className="valign-top" onTouchTap={onClickClear}><ClearIcon /></IconButton>
+
+            <IconButton tooltip="Toggle Fields" tooltipPosition="top-center" className="valign-top" onTouchTap={onClickToggleFields}><ViewColumnIcon /></IconButton>
+
+
             <DateRangePicker
               className="valign-top"
               startDate={startDate}
@@ -140,22 +162,6 @@ export default class SearchFormView extends React.Component {
             </SelectField>
 
             <FlatButton label={searchMonitor} onTouchTap={onClickSearchMonitor} className="valign-top margin-xs-top"/>
-          </div>
-
-          <div className="nowrap">
-            <IconButton tooltip="Workflow" tooltipPosition="top-center" onTouchTap={onClickWorkflow} className="valign-top"><img src="/resources/images/sidebar/search/wf-icon.png" width="24" alt=""/></IconButton>
-            <IconButton tooltip="Tags" tooltipPosition="top-center" onTouchTap={onClickTags} className="valign-top"><img src="/resources/images/sidebar/search/tag.png" width="24" alt=""/></IconButton>
-
-            <IconButton tooltip="Favorite" tooltipPosition="top-center" className="valign-top" onTouchTap={onClickStar}>{starFilled ? <FilledStar/> : <ToggleStar/>}</IconButton>
-            <IconButton tooltip="Illustrate" tooltipPosition="top-center" className="valign-top" onTouchTap={onClickIllustrate}><LocalMovie/></IconButton>
-            <IconButton tooltip="Related devices" tooltipPosition="top-center" className="valign-top" onTouchTap={onClickRelDevices}><Computer/></IconButton>
-            <IconButton tooltip="Non-related devices" tooltipPosition="top-center" className="valign-top" onTouchTap={onClickIrrelDevices}><NoSim/></IconButton>
-            <IconButton tooltip="Views" tooltipPosition="top-center" className="valign-top" onTouchTap={onClickViewFilter}><img src="/resources/images/sidebar/search/view-icon.png" width="24" alt=""/></IconButton>
-            <IconButton tooltip="Graph" tooltipPosition="top-center" className="valign-top" onTouchTap={onClickGraph}><img src="/resources/images/sidebar/search/graph-icon.png" width="24" alt=""/></IconButton>
-
-            <IconButton tooltip="Clear" tooltipPosition="top-center" className="valign-top" onTouchTap={onClickClear}><ClearIcon /></IconButton>
-
-            <IconButton tooltip="Toggle Fields" tooltipPosition="top-center" className="valign-top" onTouchTap={onClickToggleFields}><ViewColumnIcon /></IconButton>
           </div>
         </div>
       </form>
