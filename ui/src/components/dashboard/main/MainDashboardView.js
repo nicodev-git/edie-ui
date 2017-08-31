@@ -379,7 +379,7 @@ export default class MainDashboardView extends React.Component {
         let {w, h, minH} = getWidgetSize(p, this.props.devices, this.state.flip[p.id])
         if (p.layout) {
           if (w && h) return {...p.layout, i: p.id, w, h, minH}
-          return {...p.layout, i: p.id}
+          return {...p.layout, i: p.id, minH}
         }
         if (x + w > mw) {
           x = 0
