@@ -337,7 +337,12 @@ export function getWidgetSize (gauge, devices, flip) {
       wh.h = 1
   }
 
-  return {w: wh.w * layoutWidthZoom, h: wh.h * layoutHeightZoom, minH: 1 * layoutHeightZoom + 2, minW: 1 * layoutWidthZoom}
+  return {
+    w: wh.w * layoutWidthZoom,
+    h: wh.h * layoutHeightZoom,
+    minH: 1 * layoutHeightZoom + 2,
+    minW: 1 * layoutWidthZoom
+  }
 }
 
 export const gaugeAspectRatio = {
