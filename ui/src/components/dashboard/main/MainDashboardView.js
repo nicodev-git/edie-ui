@@ -231,13 +231,20 @@ export default class MainDashboardView extends React.Component {
     const ratio = this.gaugeAspectRatio(gauge.templateName)
     if (!ratio) return
     if (newItem.w !== oldItem.w) {
-      newItem.h = Math.ceil(newItem.w / ratio.w * ratio.h)
-      if (placeholder) placeholder.h = Math.ceil(placeholder.w / ratio.w * ratio.h)
+      const h = Math.ceil(newItem.w / layoutWidthZoom / ratio.w * ratio.h * layoutHeightZoom)
+      newItem.h = h
+      if (placeholder) placeholder.h = h
     } else {
-      newItem.w = Math.ceil(newItem.h / ratio.h * ratio.w)
-      if (placeholder) placeholder.w = Math.ceil(placeholder.h / ratio.h * ratio.w)
+      const w = Math.ceil(newItem.h / layoutHeightZoom / ratio.h * ratio.w * layoutWidthZoom)
+      newItem.w = w
+      if (placeholder) placeholder.w = w
     }
-    console.log(placeholder)
+    layout.forEach(p => {
+      if (p.i === newItem.i) {
+        p.w = newItem.w
+        p.h = newItem.h
+      }
+    })
   }
   onResizeStop (layout, oldItem, newItem, placeholder, mouseEvent, el) {
     const gauge = this.findGauge(newItem.i)
