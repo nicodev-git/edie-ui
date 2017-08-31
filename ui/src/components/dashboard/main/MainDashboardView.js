@@ -8,7 +8,7 @@ import 'react-grid-layout/css/styles.css'
 import 'react-resizable/css/styles.css'
 
 import GaugeWizardContainer from 'containers/shared/wizard/GaugeWizardContainer'
-import { guid, getWidgetSize, gaugeAspectRatio, layoutCols, layoutRowHeight, layoutWidthZoom, layoutHeightZoom } from 'shared/Global'
+import { guid, getWidgetSize, layoutCols, layoutRowHeight, layoutWidthZoom, layoutHeightZoom } from 'shared/Global'
 import { wizardConfig } from 'components/common/wizard/WizardConfig'
 import { gaugeEditViewStyle } from 'style/common/materialStyles'
 
@@ -146,6 +146,17 @@ export default class MainDashboardView extends React.Component {
     return []
   }
 
+  gaugeAspectRatio (templateName) {
+    const {gauges} = this.props
+    const index = findIndex(gauges, {name: templateName})
+    if (index < 0) return null
+    const {aspectWidth, aspectHeight} = gauges[index]
+    if (aspectWidth && aspectHeight) {
+      return {w: aspectWidth, h: aspectHeight}
+    }
+    return null
+  }
+
   updateLayout(layout, oldItem, newItem, isResize) {
     if (JSON.stringify(oldItem) === JSON.stringify(newItem)) return
     const gaugeItems = this.getGauges()
@@ -217,13 +228,16 @@ export default class MainDashboardView extends React.Component {
       newItem.h = oldItem.h
       return
     }
-    const ratio = gaugeAspectRatio[gauge.templateName]
+    const ratio = this.gaugeAspectRatio(gauge.templateName)
     if (!ratio) return
     if (newItem.w !== oldItem.w) {
       newItem.h = Math.ceil(newItem.w / ratio.w * ratio.h)
+      if (placeholder) placeholder.h = Math.ceil(placeholder.w / ratio.w * ratio.h)
     } else {
       newItem.w = Math.ceil(newItem.h / ratio.h * ratio.w)
+      if (placeholder) placeholder.w = Math.ceil(placeholder.h / ratio.h * ratio.w)
     }
+    console.log(placeholder)
   }
   onResizeStop (layout, oldItem, newItem, placeholder, mouseEvent, el) {
     const gauge = this.findGauge(newItem.i)
