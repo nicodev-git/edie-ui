@@ -22,10 +22,22 @@ export default class GaugePickerView extends React.Component {
   render () {
     const {onHide, gauges} = this.props
     return (
-      <Modal title="Gauge" onRequestClose={onHide} contentStyle={{width: 1058, maxWidth: 'initial'}}>
-        <ul className="web-applet-cards" style={{marginTop: 40}}>
-          {gauges.map(this.renderTpl.bind(this))}
-        </ul>
+      <Modal title="Gauge" onRequestClose={onHide} contentStyle={{width: 1258, maxWidth: 'initial'}}>
+        <div style={{marginTop: 40}} className="flex-horizontal">
+          <div style={{width: 200}}>
+            <ul className="padding-md-left">
+              <li>Dashboards</li>
+              <li>Devices</li>
+              <li>Monitors</li>
+            </ul>
+          </div>
+          <div className="flex-1">
+            <ul className="web-applet-cards">
+              {gauges.map(this.renderTpl.bind(this))}
+            </ul>
+          </div>
+
+        </div>
       </Modal>
     )
   }
