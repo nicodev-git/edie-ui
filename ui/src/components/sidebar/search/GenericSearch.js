@@ -760,6 +760,27 @@ class GenericSearch extends React.Component {
       </div>
     )
   }
+
+  getParams () {
+    const {params} = this.props
+    let q = params.query
+    if (q) q = `(${q})`
+
+    const conditions = []
+
+    if (params.query) conditions.push(`(${params.query})`)
+    if (params.tag) conditions.push(`(tags:${params.tag.split(',').join(' OR ')})`)
+    // if (params.collections)
+    if (params.severity) conditions.push(`(severity:${params.severity.split(',').join(' AND ')})`)
+    // if (params.monitorTypes)
+
+
+    return {
+      ...this.props.params,
+      draw: this.props.searchDraw
+    }
+  }
+
   render () {
     const { handleSubmit, selectedWf, params, monitorTemplates, searchTags, queryChips, selectedWfs } = this.props
     const { severity, dateFrom, dateTo, monitorTypes, monitorId } = params
@@ -870,7 +891,7 @@ class GenericSearch extends React.Component {
                   rowMetadata={{'key': 'id'}}
                   selectable
                   onRowDblClick={this.onRowDblClick.bind(this)}
-                  params={{...this.props.params, draw: this.props.searchDraw}}
+                  params={this.getParams()}
                   pageSize={10}
                   showTableHeading={false}
                   onUpdateCount={this.onResultCountUpdate.bind(this)}
