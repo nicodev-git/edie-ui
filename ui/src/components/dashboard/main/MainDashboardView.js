@@ -376,10 +376,10 @@ export default class MainDashboardView extends React.Component {
       let x = 0
       let y = 0
       return gauges.map((p, i) => {
-        let {w, h, minH} = getWidgetSize(p, this.props.devices, this.state.flip[p.id])
+        let {w, h, minH, minW} = getWidgetSize(p, this.props.devices, this.state.flip[p.id])
         if (p.layout) {
-          if (w && h) return {...p.layout, i: p.id, w, h, minH}
-          return {...p.layout, i: p.id, minH}
+          if (w && h) return {...p.layout, i: p.id, w, h, minW, minH}
+          return {...p.layout, i: p.id, minW, minH}
         }
         if (x + w > mw) {
           x = 0
@@ -389,7 +389,7 @@ export default class MainDashboardView extends React.Component {
           i: p.id,
           x, y,
           w, h,
-          minH
+          minW, minH
         }
 
         x += w
