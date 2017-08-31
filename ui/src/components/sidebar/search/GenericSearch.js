@@ -117,7 +117,7 @@ class GenericSearch extends React.Component {
 
         this.props.updateSearchParams(params, this.props.history)
         this.props.replaceSearchWfs([])
-        this.props.updateSearchTags([])
+        this.props.updateSearchTags(parsed.tag ? parsed.tag.split(',') : [])
         this.props.updateSearchViewFilter('')
         this.props.resetViewCols()
         this.props.updateQueryChips(queryChips)
@@ -656,12 +656,12 @@ class GenericSearch extends React.Component {
         <div style={{height: '400px', width: '100%', overflowY: 'auto', overflowX: 'hidden'}}>
           <table className="table table-hover">
             <thead>
-              <tr>
-                <th><b>Top 10 Values</b></th>
-                <th>Count</th>
-                <th>%</th>
-                <th>&nbsp;</th>
-              </tr>
+            <tr>
+              <th><b>Top 10 Values</b></th>
+              <th>Count</th>
+              <th>%</th>
+              <th>&nbsp;</th>
+            </tr>
             </thead>
             <tbody>
             {
@@ -763,14 +763,10 @@ class GenericSearch extends React.Component {
 
   getParams () {
     const {params} = this.props
-    let q = params.query
-    if (q) q = `(${q})`
-
     const conditions = []
 
     if (params.query) conditions.push(`(${params.query})`)
     if (params.tag) conditions.push(`(tags:${params.tag.split(',').join(' OR ')})`)
-    // if (params.collections)
     if (params.severity) conditions.push(`(severity:${params.severity.split(',').join(' AND ')})`)
     // if (params.monitorTypes)
     const dateFrom = moment(params.dateFrom, dateFormat).valueOf()
@@ -778,8 +774,15 @@ class GenericSearch extends React.Component {
     conditions.push(`(startTimestamp:${dateFrom} TO ${dateTo})`)
     conditions.push(`(timestamp:${dateFrom} TO ${dateTo})`)
 
+    const q = conditions.join(' AND ')
 
+    const pp = {
+      draw: this.props.searchDraw,
+      q,
+      types: params.collections.split(',')
+    }
 
+    console.log(pp)
 
     return {
       ...this.props.params,
@@ -854,7 +857,7 @@ class GenericSearch extends React.Component {
                     onRequestDelete={this.onClickRemoveWfChip.bind(this, i)}>
                     <b>Workflow: </b>{p.name}
                   </Chip>
-                  )}
+                )}
                 {
                   searchTags.map((p, i) =>
                     <Chip
