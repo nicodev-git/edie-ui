@@ -773,6 +773,12 @@ class GenericSearch extends React.Component {
     // if (params.collections)
     if (params.severity) conditions.push(`(severity:${params.severity.split(',').join(' AND ')})`)
     // if (params.monitorTypes)
+    const dateFrom = moment(params.dateFrom, dateFormat).valueOf()
+    const dateTo = moment(params.dateTo, dateFormat).valueOf()
+    conditions.push(`(startTimestamp:${dateFrom} TO ${dateTo})`)
+    conditions.push(`(timestamp:${dateFrom} TO ${dateTo})`)
+
+
 
 
     return {
