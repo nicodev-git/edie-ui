@@ -1,8 +1,14 @@
 import React from 'react'
+import {Drawer, IconButton} from 'material-ui'
+
+import DashboardIcon from 'material-ui/svg-icons/action/dashboard'
+import PlaylistIcon from 'material-ui/svg-icons/av/playlist-add-check'
 
 import { Modal } from 'components/modal/parts'
 import AppletCard from 'components/common/AppletCard'
 import { extImageBaseUrl, appletColors as colors } from 'shared/Global'
+
+import {sidebarWidth, sidebarStyle} from 'style/common/materialStyles'
 
 export default class GaugePickerView extends React.Component {
   renderTpl (tpl, i) {
@@ -22,14 +28,14 @@ export default class GaugePickerView extends React.Component {
   render () {
     const {onHide, gauges} = this.props
     return (
-      <Modal title="Gauge" onRequestClose={onHide} contentStyle={{width: 1258, maxWidth: 'initial'}}>
+      <Modal title="Gauge" onRequestClose={onHide} contentStyle={{width: 1158, maxWidth: 'initial'}}>
         <div style={{marginTop: 40}} className="flex-horizontal">
-          <div style={{width: 200}}>
-            <ul className="padding-md-left">
-              <li>Dashboards</li>
-              <li>Devices</li>
-              <li>Monitors</li>
-            </ul>
+          <div>
+            <Drawer open width={sidebarWidth} containerStyle={{...sidebarStyle, left: 'initial', bottom: 0, top: 56, height: 'initial'}}>
+              <div>
+                <IconButton><DashboardIcon color="#ffffff"/></IconButton>
+              </div>
+            </Drawer>
           </div>
           <div className="flex-1">
             <ul className="web-applet-cards">
