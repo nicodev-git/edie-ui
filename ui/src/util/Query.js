@@ -1,6 +1,6 @@
 export function findField (parsed, field) {
   if (parsed.field) {
-    return parsed.field === field ? { found: parsed } : null
+    return parsed.field === field ? { field: parsed } : null
   }
 
   if (parsed.left) {

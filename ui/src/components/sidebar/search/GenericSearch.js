@@ -230,13 +230,13 @@ class GenericSearch extends React.Component {
     this.props.submit(this.props.handleSubmit(this.handleFormSubmit.bind(this)))
   }
 
-  parse (query, suppress = true) {
+  parse (query, suppress = false) {
     try {
       const parsed = QueryParser.parse(query)
       if (!parsed) throw new Error()
       return parsed
     } catch (e) {
-      if (!suppress) showAlert('Parse failed.')
+      if (!suppress) showAlert('Invalid query typed.')
     }
     return null
   }
@@ -245,7 +245,7 @@ class GenericSearch extends React.Component {
     const { queryParams } = this.props
     const { query } = values
 
-    const parsed = this.parse(query, false)
+    const parsed = this.parse(query)
     if (!parsed) return
 
     console.log(parsed)
@@ -464,6 +464,30 @@ class GenericSearch extends React.Component {
 
     const parsed = this.parse(formValues.query)
     if (!parsed) return
+
+    let extras = []
+
+    let found = findField(parsed, 'startTimestamp')
+    if (found) {
+      found.field.term = startDate.valueOf()
+      found.parent.right.right.term = endDate.valueOf()
+    } else {
+      extras.push(`(startTimestamp:${startDate.valueOf()} TO ${endDate.valueOf()})`)
+    }
+
+    found = findField(parsed, 'timestamp')
+    if (found) {
+      found.field.term = startDate.valueOf()
+      found.parent.right.right.term = endDate.valueOf()
+    } else {
+      extras.push(`(timestamp:${startDate.valueOf()} TO ${endDate.valueOf()})`)
+    }
+
+    let newQuery = QueryParser.toString(parsed)
+    if(newQuery) extras = [newQuery, ...extras]
+    newQuery = extras.join(' AND ')
+
+    this.props.change('query', newQuery)
 
     // this.props.updateQueryParams()
 
@@ -952,6 +976,6 @@ export default connect(
   state => ({
     initialValues: assign({}, state.search.params, {query: ''}),
     selectedSearchOption: selector(state, 'searchOptionIndex'),
-    formValues: selector(state, 'query')
+    formValues: selector(state, 'query', 'searchOptionIndex')
   })
 )(GenericSearchForm)
