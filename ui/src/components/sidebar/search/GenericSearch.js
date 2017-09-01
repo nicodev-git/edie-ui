@@ -19,6 +19,8 @@ import {chipStyles} from 'style/common/materialStyles'
 import {getRanges, getRangeLabel} from 'components/common/DateRangePicker'
 import {showAlert} from 'components/common/Alert'
 
+import {findField} from 'util/Query'
+
 import SearchFormView from './SearchFormView'
 import SearchSavePopover from './SearchSavePopover'
 import WorkflowSelectModal from './WorkflowSelectModal'
@@ -228,20 +230,26 @@ class GenericSearch extends React.Component {
     this.props.submit(this.props.handleSubmit(this.handleFormSubmit.bind(this)))
   }
 
+  parse (query, suppress = true) {
+    try {
+      const parsed = QueryParser.parse(query)
+      if (!parsed) throw new Error()
+      return parsed
+    } catch (e) {
+      if (!suppress) showAlert('Parse failed.')
+    }
+    return null
+  }
+
   handleFormSubmit (values) {
     const { queryParams } = this.props
     const { query } = values
 
-    let parsed
-    try {
-      parsed = QueryParser.parse(query)
-      if (!parsed) throw new Error()
-    } catch (e) {
-      showAlert('Parse failed.')
-      return
-    }
+    const parsed = this.parse(query, false)
+    if (!parsed) return
 
     console.log(parsed)
+    console.log(QueryParser.toString(parsed))
 
     this.props.updateQueryParams({
       ...queryParams,
@@ -451,7 +459,14 @@ class GenericSearch extends React.Component {
     }), this.props.history)
   }
 
-  onChangeDataeRange ({startDate, endDate}) {
+  onChangeDateRange ({startDate, endDate}) {
+    const {queryParams, formValues} = this.props
+
+    const parsed = this.parse(formValues.query)
+    if (!parsed) return
+
+    // this.props.updateQueryParams()
+
     // this.props.updateSearchParams(assign({}, this.props.params, {
     //   dateFrom: startDate.format(dateFormat),
     //   dateTo: endDate.format(dateFormat)
