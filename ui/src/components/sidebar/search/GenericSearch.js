@@ -462,6 +462,7 @@ class GenericSearch extends React.Component {
     const found = findField(parsed, 'severity')
     const el = `(severity:${values.join(' AND ')})`
     if (found) {
+      for (var member in found.parent) delete found.parent[member];
       assign(found.parent, QueryParser.parse(el).left)
       newQuery = QueryParser.toString(parsed)
     } else {
