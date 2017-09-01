@@ -460,41 +460,40 @@ class GenericSearch extends React.Component {
   }
 
   onChangeDateRange ({startDate, endDate}) {
-    const {queryParams, formValues} = this.props
+    // const {queryParams, formValues} = this.props
+    //
+    // const parsed = this.parse(formValues.query)
+    // if (!parsed) return
+    //
+    // let extras = []
+    //
+    // let found = findField(parsed, 'startTimestamp')
+    // if (found) {
+    //   found.field.term = startDate.valueOf()
+    //   found.parent.right.right.term = endDate.valueOf()
+    // } else {
+    //   extras.push(`(startTimestamp:${startDate.valueOf()} TO ${endDate.valueOf()})`)
+    // }
+    //
+    // found = findField(parsed, 'timestamp')
+    // if (found) {
+    //   found.field.term = startDate.valueOf()
+    //   found.parent.right.right.term = endDate.valueOf()
+    // } else {
+    //   extras.push(`(timestamp:${startDate.valueOf()} TO ${endDate.valueOf()})`)
+    // }
+    //
+    // let newQuery = QueryParser.toString(parsed)
+    // if(newQuery) extras = [newQuery, ...extras]
+    // newQuery = extras.join(' AND ')
+    //
+    // this.props.change('query', newQuery)
 
-    const parsed = this.parse(formValues.query)
-    if (!parsed) return
-
-    let extras = []
-
-    let found = findField(parsed, 'startTimestamp')
-    if (found) {
-      found.field.term = startDate.valueOf()
-      found.parent.right.right.term = endDate.valueOf()
-    } else {
-      extras.push(`(startTimestamp:${startDate.valueOf()} TO ${endDate.valueOf()})`)
-    }
-
-    found = findField(parsed, 'timestamp')
-    if (found) {
-      found.field.term = startDate.valueOf()
-      found.parent.right.right.term = endDate.valueOf()
-    } else {
-      extras.push(`(timestamp:${startDate.valueOf()} TO ${endDate.valueOf()})`)
-    }
-
-    let newQuery = QueryParser.toString(parsed)
-    if(newQuery) extras = [newQuery, ...extras]
-    newQuery = extras.join(' AND ')
-
-    this.props.change('query', newQuery)
-
-    // this.props.updateQueryParams()
-
-    // this.props.updateSearchParams(assign({}, this.props.params, {
-    //   dateFrom: startDate.format(dateFormat),
-    //   dateTo: endDate.format(dateFormat)
-    // }), this.props.history)
+    this.props.updateQueryParams({
+      ...this.props.queryParams,
+      from: startDate.valueOf(),
+      to: endDate.valueOf()
+    }, this.props.history)
   }
 
   onResultCountUpdate (total, data) {
@@ -844,7 +843,8 @@ class GenericSearch extends React.Component {
 
   render () {
     const { handleSubmit, selectedWf, params, monitorTemplates, searchTags, queryChips, selectedWfs, queryParams } = this.props
-    const { severity, dateFrom, dateTo, monitorTypes, monitorId } = params
+    const { severity, monitorTypes, monitorId } = params
+    const { from, to } = queryParams
     const workflow = this.props.workflows.filter(m => m.id === selectedWf)
 
     return (
@@ -865,8 +865,8 @@ class GenericSearch extends React.Component {
             severities={severities}
             selectedSeverities={severity.split(',')}
             onChangeSeverity={this.onChangeSeverity.bind(this)}
-            startDate={dateFrom}
-            endDate={dateTo}
+            startDate={from}
+            endDate={to}
             onChangeDateRange={this.onChangeDateRange.bind(this)}
             onClickIllustrate={this.onClickIllustrate.bind(this)}
             onClickSavedSearch={this.onClickSavedSearch.bind(this)}
