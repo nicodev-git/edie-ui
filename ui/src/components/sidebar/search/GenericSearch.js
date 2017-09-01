@@ -6,6 +6,7 @@ import moment from 'moment'
 import ReactTooltip from 'react-tooltip'
 import {Popover, FlatButton, Chip} from 'material-ui'
 import NavigationClose from 'material-ui/svg-icons/navigation/close'
+import QueryParser from 'lucene-query-parser'
 
 import InfiniteTable from 'components/common/InfiniteTable'
 import TabPage from 'components/common/TabPage'
@@ -231,18 +232,20 @@ class GenericSearch extends React.Component {
     const { queryChips } = this.props
     const { query } = values
 
-    const newChips = parseSearchQuery(query)
-    const newQueryChips = concat([], queryChips, newChips)
+    console.log(QueryParser.parse(query))
 
-    this.props.updateQueryChips(newQueryChips)
-
-    const newQuery = newQueryChips.map(m => `${m.name}=${m.value}`).join(' and ')
-    const params = assign({}, this.props.params, {
-      query: newQuery
-    })
-    this.props.updateSearchParams(params, this.props.history)
-
-    this.props.change('query', '')
+    // const newChips = parseSearchQuery(query)
+    // const newQueryChips = concat([], queryChips, newChips)
+    //
+    // this.props.updateQueryChips(newQueryChips)
+    //
+    // const newQuery = newQueryChips.map(m => `${m.name}=${m.value}`).join(' and ')
+    // const params = assign({}, this.props.params, {
+    //   query: newQuery
+    // })
+    // this.props.updateSearchParams(params, this.props.history)
+    //
+    // this.props.change('query', '')
   }
 
   getTypeChar (type) {
