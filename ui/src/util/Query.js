@@ -1,26 +1,33 @@
+import QueryParser from 'lucene'
+import {assign} from 'lodash'
+
 const implicit = '<implicit>'
 
 export function findField (parsed, field) {
   if (parsed.field) {
-    return parsed.field === field ? { field: parsed } : null
+    return parsed.field === field ? { field: parsed, parent: [] } : null
   }
 
   if (parsed.left) {
     const res = findField(parsed.left, field)
-    if (res && !res.parent) {
-      res.parent = parsed
-      res.type = 'left'
+    if (res) {
+      res.parent.push({
+        field: parsed,
+        type: 'left'
+      })
+      return res
     }
-    if (res) return res
   }
 
   if (parsed.right) {
     const res = findField(parsed.right, field)
     if (res && !res.parent) {
-      res.parent = parsed
-      res.type = 'right'
+      res.parent.push({
+        field: parsed,
+        type: 'right'
+      })
+      return res
     }
-    if (res) return res
   }
 
   return null
@@ -125,4 +132,41 @@ export function queryToString(ast) {
   }
 
   return result;
+}
+
+
+function clearObject(object) {
+  for (const member in object) delete object[member]
+}
+
+export function modifyArrayValues (query, field, values, operator = 'AND') {
+  let parsed
+  try {
+    parsed = QueryParser.parse(query)
+    if (!parsed) return null
+  } catch (e) {
+    return null
+  }
+
+  let newQuery = query
+  const found = findField(parsed, field)
+  const el = `(${field}:${values.join(` ${operator} `)})`
+  if (found) {
+
+    clearObject(found.parent[0])
+    assign(found.parent[0], QueryParser.parse(el).left)
+
+    let parentIndex = 1
+    while (parentIndex < found.parent.length) {
+      if (found.parent[parentIndex].right) break
+      assign(found.parent[parentIndex], found.parent[0])
+      parentIndex++
+    }
+
+    newQuery = queryToString(parsed)
+  } else {
+    if (!values.length) return
+    if (newQuery) newQuery = `${newQuery} AND `
+    newQuery = `${newQuery}${el}`
+  }
 }
