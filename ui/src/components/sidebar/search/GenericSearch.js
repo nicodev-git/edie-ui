@@ -16,7 +16,7 @@ import { parseSearchQuery, guid, dateFormat, collections, severities, viewFilter
 import {renderEntity} from 'components/common/CellRenderers'
 import {chipStyles} from 'style/common/materialStyles'
 import {getRanges, getRangeLabel} from 'components/common/DateRangePicker'
-import QueryParser from 'util/QueryParser'
+import QueryParser from 'lucene'
 
 import SearchFormView from './SearchFormView'
 import SearchSavePopover from './SearchSavePopover'
