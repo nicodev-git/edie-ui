@@ -87,7 +87,7 @@ const initialState = {
   },
   queryParams: {
     draw: 1,
-    q: '',
+    q: '(severity:HIGH AND MEDIUM)',
     from: moment().add(-1, 'days').startOf('day').valueOf(),
     to: moment().endOf('day').valueOf(),
     types: ['incident', 'event']

@@ -454,9 +454,25 @@ class GenericSearch extends React.Component {
   }
 
   onChangeSeverity (e, index, values) {
-    this.props.updateSearchParams(assign({}, this.props.params, {
-      severity: values.join(',')
-    }), this.props.history)
+    const {queryParams, formValues} = this.props
+    const parsed = this.parse(formValues.query)
+    if (!parsed) return
+
+    let newQuery = formValues.query
+    let found = findField(parsed, 'severity')
+    if (found) {
+
+    } else {
+      if (!values.length) return
+      if (newQuery) newQuery = `${newQuery} AND `
+      newQuery = `${newQuery}(severity:${values.join(' AND ')})`
+    }
+
+    this.props.change('query', newQuery)
+    this.props.updateQueryParams({
+      ...queryParams,
+      q: newQuery
+    }, this.props.history)
   }
 
   onChangeDateRange ({startDate, endDate}) {
@@ -974,7 +990,7 @@ const selector = formValueSelector('genericSearchForm')
 
 export default connect(
   state => ({
-    initialValues: assign({}, state.search.params, {query: ''}),
+    initialValues: {query: state.search.queryParams.q},
     selectedSearchOption: selector(state, 'searchOptionIndex'),
     formValues: selector(state, 'query', 'searchOptionIndex')
   })
