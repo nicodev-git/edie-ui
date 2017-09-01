@@ -6,7 +6,7 @@ import moment from 'moment'
 import ReactTooltip from 'react-tooltip'
 import {Popover, FlatButton, Chip} from 'material-ui'
 import NavigationClose from 'material-ui/svg-icons/navigation/close'
-import QueryParser from 'lucene-query-parser'
+import {parse} from 'query-string'
 
 import InfiniteTable from 'components/common/InfiniteTable'
 import TabPage from 'components/common/TabPage'
@@ -16,6 +16,7 @@ import { parseSearchQuery, guid, dateFormat, collections, severities, viewFilter
 import {renderEntity} from 'components/common/CellRenderers'
 import {chipStyles} from 'style/common/materialStyles'
 import {getRanges, getRangeLabel} from 'components/common/DateRangePicker'
+import QueryParser from 'util/QueryParser'
 
 import SearchFormView from './SearchFormView'
 import SearchSavePopover from './SearchSavePopover'
@@ -30,7 +31,7 @@ import SearchGraphModal from './SearchGraphModal'
 import TagPickerModal from 'containers/settings/tag/TagPickerModalContainer'
 import SearchMonitorModal from './SearchMonitorModal'
 
-import {parse} from 'query-string'
+
 
 class GenericSearch extends React.Component {
   constructor (props) {
@@ -229,7 +230,7 @@ class GenericSearch extends React.Component {
   }
 
   handleFormSubmit (values) {
-    const { queryChips } = this.props
+    // const { queryChips } = this.props
     const { query } = values
 
     console.log(QueryParser.parse(query))
