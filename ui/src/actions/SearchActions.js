@@ -3,6 +3,7 @@ import moment from 'moment'
 import { assign } from 'lodash'
 import {
   UPDATE_SEARCH_PARAMS,
+  UPDATE_QUERY_PARAMS,
   UPDATE_SEARCH_FIELDS,
   OPEN_FIELDS_POPOVER,
   CLOSE_FIELDS_POPOVER,
@@ -76,6 +77,12 @@ export const updateSearchParams = (params, history) => {
       pathname: '/search',
       search: `?q=${encodeURIComponent(JSON.stringify(params))}`
     })
+  }
+}
+
+export const updateQueryParams = (params, history) => {
+  return dispatch => {
+    dispatch({type: UPDATE_QUERY_PARAMS, params})
   }
 }
 

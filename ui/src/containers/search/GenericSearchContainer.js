@@ -12,6 +12,7 @@ import {
   closeFieldsPopover,
   fetchFieldTopValues,
   updateQueryChips,
+  updateQueryParams,
 
   addSearchOption,
   updateSearchOption,
@@ -89,6 +90,8 @@ export default connect(
     fieldTopValues: state.search.fieldTopValues,
     searchOptions: state.search.searchOptions,
 
+    queryParams: state.search.queryParams,
+
     savePopoverOpen: state.search.savePopoverOpen,
     searchSaveType: state.search.searchSaveType,
     selectedOption: state.search.selectedOption,
@@ -152,6 +155,7 @@ export default connect(
       closeFieldsPopover,
       fetchFieldTopValues,
       updateQueryChips,
+      updateQueryParams,
 
       addSearchOption,
       updateSearchOption,

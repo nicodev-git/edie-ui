@@ -84,6 +84,10 @@ const initialState = {
     dateTo: moment().endOf('day').format(dateFormat),
     monitorId: ''
   },
+  queryParams: {
+    q: '',
+    types: ['incident', 'event']
+  },
   incidentParams: {
     severity: ['HIGH', 'MEDIUM'],
     fixed: 'false',
