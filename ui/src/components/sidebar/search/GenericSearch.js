@@ -782,13 +782,6 @@ class GenericSearch extends React.Component {
       types: params.collections.split(',')
     }
 
-    // console.log(pp)
-    //
-    // return {
-    //   ...this.props.params,
-    //   draw: this.props.searchDraw
-    // }
-
     return pp
   }
 
