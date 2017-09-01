@@ -845,6 +845,7 @@ class GenericSearch extends React.Component {
     if (parsed) {
       let found = findField(parsed, 'severity')
       if (found) {
+        found = found.parent
         while(found) {
           if (found.left) ret.severity.push(found.left.term)
           else if (found.term) ret.severity.push(found.term)
