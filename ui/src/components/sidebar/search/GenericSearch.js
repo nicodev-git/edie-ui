@@ -431,8 +431,8 @@ class GenericSearch extends React.Component {
     if (!values.length) {
       return
     }
-    this.props.updateSearchParams(assign({}, this.props.params, {
-      collections: values.join(',')
+    this.props.updateQueryParams(assign({}, this.props.queryParams, {
+      types: values
     }), this.props.history)
   }
 
@@ -451,11 +451,11 @@ class GenericSearch extends React.Component {
     }), this.props.history)
   }
 
-  onChangeRange ({startDate, endDate}) {
-    this.props.updateSearchParams(assign({}, this.props.params, {
-      dateFrom: startDate.format(dateFormat),
-      dateTo: endDate.format(dateFormat)
-    }), this.props.history)
+  onChangeDataeRange ({startDate, endDate}) {
+    // this.props.updateSearchParams(assign({}, this.props.params, {
+    //   dateFrom: startDate.format(dateFormat),
+    //   dateTo: endDate.format(dateFormat)
+    // }), this.props.history)
   }
 
   onResultCountUpdate (total, data) {
@@ -804,9 +804,8 @@ class GenericSearch extends React.Component {
   }
 
   render () {
-    const { handleSubmit, selectedWf, params, monitorTemplates, searchTags, queryChips, selectedWfs, queryParams, searchDraw } = this.props
+    const { handleSubmit, selectedWf, params, monitorTemplates, searchTags, queryChips, selectedWfs, queryParams } = this.props
     const { severity, dateFrom, dateTo, monitorTypes, monitorId } = params
-    const selectedCollections = params.collections
     const workflow = this.props.workflows.filter(m => m.id === selectedWf)
 
     return (
@@ -818,7 +817,7 @@ class GenericSearch extends React.Component {
             starFilled={!!this.props.selectedSearchOption}
             workflow={workflow.length ? workflow[0].name : ''}
             collections={collections}
-            selectedCollections={selectedCollections ? selectedCollections.split(',') : []}
+            selectedCollections={queryParams.types}
             onChangeCollection={this.onChangeCollection.bind(this)}
             onClearWorkflow={this.onClearWorkflow.bind(this)}
             onClickWorkflow={this.onClickWorkflow.bind(this)}
@@ -829,7 +828,7 @@ class GenericSearch extends React.Component {
             onChangeSeverity={this.onChangeSeverity.bind(this)}
             startDate={dateFrom}
             endDate={dateTo}
-            onChangeDateRange={this.onChangeRange.bind(this)}
+            onChangeDateRange={this.onChangeDateRange.bind(this)}
             onClickIllustrate={this.onClickIllustrate.bind(this)}
             onClickSavedSearch={this.onClickSavedSearch.bind(this)}
             onClickRelDevices={this.onClickRelDevices.bind(this)}
@@ -937,6 +936,7 @@ const selector = formValueSelector('genericSearchForm')
 export default connect(
   state => ({
     initialValues: assign({}, state.search.params, {query: ''}),
-    selectedSearchOption: selector(state, 'searchOptionIndex')
+    selectedSearchOption: selector(state, 'searchOptionIndex'),
+    formValues: selector(state, 'query')
   })
 )(GenericSearchForm)

@@ -83,6 +83,10 @@ export const updateSearchParams = (params, history) => {
 export const updateQueryParams = (params, history) => {
   return dispatch => {
     dispatch({type: UPDATE_QUERY_PARAMS, params})
+    history.replace({
+      pathname: '/search',
+      search: `?q=${encodeURIComponent(JSON.stringify(params))}`
+    })
   }
 }
 
