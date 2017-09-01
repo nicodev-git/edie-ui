@@ -11,6 +11,7 @@ import {
   FETCH_FIELD_TOP_VALUES,
   UPDATE_QUERY_CHIPS,
   UPDATE_INCIDENTS_PARAMS,
+  UPDATE_QUERY_PARAMS,
 
   UPDATE_SEARCH_VIEW_FILTER,
   SHOW_VIEW_FILTER_MODAL,
@@ -85,7 +86,8 @@ const initialState = {
     monitorId: ''
   },
   queryParams: {
-    q: '',
+    draw: 1,
+    q: ' ',
     types: ['incident', 'event']
   },
   incidentParams: {
@@ -148,6 +150,9 @@ export default function (state = initialState, action) {
 
     case UPDATE_SEARCH_PARAMS:
       return { ...state, params: action.params }
+
+    case UPDATE_QUERY_PARAMS:
+      return { ...state, queryParams: action.params }
 
     case UPDATE_SEARCH_FIELDS:
       return { ...state, fields: action.data.filter(k => k.count > 0) }

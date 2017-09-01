@@ -7,6 +7,7 @@ import ReactTooltip from 'react-tooltip'
 import {Popover, FlatButton, Chip} from 'material-ui'
 import NavigationClose from 'material-ui/svg-icons/navigation/close'
 import {parse} from 'query-string'
+import QueryParser from 'lucene'
 
 import InfiniteTable from 'components/common/InfiniteTable'
 import TabPage from 'components/common/TabPage'
@@ -16,7 +17,7 @@ import { parseSearchQuery, guid, dateFormat, collections, severities, viewFilter
 import {renderEntity} from 'components/common/CellRenderers'
 import {chipStyles} from 'style/common/materialStyles'
 import {getRanges, getRangeLabel} from 'components/common/DateRangePicker'
-import QueryParser from 'lucene'
+import {showAlert} from 'components/common/Alert'
 
 import SearchFormView from './SearchFormView'
 import SearchSavePopover from './SearchSavePopover'
@@ -101,63 +102,63 @@ class GenericSearch extends React.Component {
   }
 
   componentWillMount () {
-    const {filterType} = this.props.location.state || {}
-    const {q} = parse(this.props.location.search || {})
-    let params = assign({}, this.props.params)
+    // const {filterType} = this.props.location.state || {}
+    // const {q} = parse(this.props.location.search || {})
+    // let params = assign({}, this.props.params)
 
     this.props.fetchDevicesGroups()
     this.props.updateSearchViewFilter(viewFilters.standard)
 
-    if (q) {
-      try {
-        const parsed = JSON.parse(q)
-        const {query} = parsed
-        const queryChips = parseSearchQuery(query)
-        params = assign(params, parsed)
-
-        this.props.updateSearchParams(params, this.props.history)
-        this.props.replaceSearchWfs([])
-        this.props.updateSearchTags(parsed.tag ? parsed.tag.split(',') : [])
-        this.props.updateSearchViewFilter('')
-        this.props.resetViewCols()
-        this.props.updateQueryChips(queryChips)
-        this.props.change('query', '')
-        this.props.change('searchOptionIndex', '')
-      } catch (e) {}
-    } else if (filterType) {
-      let query = ''
-      if (filterType === 'today') {
-        params.dateFrom = moment().startOf('day').format(dateFormat)
-        params.dateTo = moment().endOf('day').format(dateFormat)
-      } else if (filterType === 'month') {
-        params.dateFrom = moment().startOf('month').format(dateFormat)
-        params.dateTo = moment().endOf('month').format(dateFormat)
-      } else if (filterType === 'open') {
-        params.dateFrom = moment().startOf('year').format(dateFormat)
-        params.dateTo = moment().endOf('year').format(dateFormat)
-        query = 'fixed=false'
-      }
-      const queryChips = parseSearchQuery(query)
-
-      params = assign(params, {
-        query,
-        severity: 'HIGH,MEDIUM',
-        collections: 'incident',
-        workflow: '',
-        tag: '',
-        monitorId: ''
-      })
-
-      this.props.updateSearchParams(params, this.props.history)
-      this.props.replaceSearchWfs([])
-      this.props.updateSearchTags([])
-      this.props.updateSearchViewFilter('')
-      this.props.resetViewCols()
-      this.props.updateQueryChips(queryChips)
-      this.props.change('query', '')
-      this.props.change('searchOptionIndex', '')
-    }
-    this.props.fetchSearchFields(params)
+    // if (q) {
+    //   try {
+    //     const parsed = JSON.parse(q)
+    //     const {query} = parsed
+    //     const queryChips = parseSearchQuery(query)
+    //     params = assign(params, parsed)
+    //
+    //     this.props.updateSearchParams(params, this.props.history)
+    //     this.props.replaceSearchWfs([])
+    //     this.props.updateSearchTags(parsed.tag ? parsed.tag.split(',') : [])
+    //     this.props.updateSearchViewFilter('')
+    //     this.props.resetViewCols()
+    //     this.props.updateQueryChips(queryChips)
+    //     this.props.change('query', '')
+    //     this.props.change('searchOptionIndex', '')
+    //   } catch (e) {}
+    // } else if (filterType) {
+    //   let query = ''
+    //   if (filterType === 'today') {
+    //     params.dateFrom = moment().startOf('day').format(dateFormat)
+    //     params.dateTo = moment().endOf('day').format(dateFormat)
+    //   } else if (filterType === 'month') {
+    //     params.dateFrom = moment().startOf('month').format(dateFormat)
+    //     params.dateTo = moment().endOf('month').format(dateFormat)
+    //   } else if (filterType === 'open') {
+    //     params.dateFrom = moment().startOf('year').format(dateFormat)
+    //     params.dateTo = moment().endOf('year').format(dateFormat)
+    //     query = 'fixed=false'
+    //   }
+    //   const queryChips = parseSearchQuery(query)
+    //
+    //   params = assign(params, {
+    //     query,
+    //     severity: 'HIGH,MEDIUM',
+    //     collections: 'incident',
+    //     workflow: '',
+    //     tag: '',
+    //     monitorId: ''
+    //   })
+    //
+    //   this.props.updateSearchParams(params, this.props.history)
+    //   this.props.replaceSearchWfs([])
+    //   this.props.updateSearchTags([])
+    //   this.props.updateSearchViewFilter('')
+    //   this.props.resetViewCols()
+    //   this.props.updateQueryChips(queryChips)
+    //   this.props.change('query', '')
+    //   this.props.change('searchOptionIndex', '')
+    // }
+    // this.props.fetchSearchFields(params)
 
     this.props.fetchWorkflows()
     this.props.fetchMonitorTemplates()
@@ -228,10 +229,25 @@ class GenericSearch extends React.Component {
   }
 
   handleFormSubmit (values) {
-    // const { queryChips } = this.props
+    const { queryParams } = this.props
     const { query } = values
 
-    console.log(QueryParser.parse(query))
+    let parsed
+    try {
+      parsed = QueryParser.parse(query)
+      if (!parsed) throw new Error()
+    } catch (e) {
+      showAlert('Parse failed.')
+      return
+    }
+
+    console.log(parsed)
+
+    this.props.updateQueryParams({
+      ...queryParams,
+      q: query,
+      draw: queryParams.draw + 1
+    }, this.props.history)
 
     // const newChips = parseSearchQuery(query)
     // const newQueryChips = concat([], queryChips, newChips)
@@ -788,7 +804,7 @@ class GenericSearch extends React.Component {
   }
 
   render () {
-    const { handleSubmit, selectedWf, params, monitorTemplates, searchTags, queryChips, selectedWfs } = this.props
+    const { handleSubmit, selectedWf, params, monitorTemplates, searchTags, queryChips, selectedWfs, queryParams, searchDraw } = this.props
     const { severity, dateFrom, dateTo, monitorTypes, monitorId } = params
     const selectedCollections = params.collections
     const workflow = this.props.workflows.filter(m => m.id === selectedWf)
@@ -897,7 +913,7 @@ class GenericSearch extends React.Component {
                   rowMetadata={{'key': 'id'}}
                   selectable
                   onRowDblClick={this.onRowDblClick.bind(this)}
-                  params={this.getParams()}
+                  params={queryParams}
                   pageSize={10}
                   showTableHeading={false}
                   onUpdateCount={this.onResultCountUpdate.bind(this)}
