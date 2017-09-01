@@ -31,8 +31,6 @@ import SearchGraphModal from './SearchGraphModal'
 import TagPickerModal from 'containers/settings/tag/TagPickerModalContainer'
 import SearchMonitorModal from './SearchMonitorModal'
 
-
-
 class GenericSearch extends React.Component {
   constructor (props) {
     super(props)
