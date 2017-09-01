@@ -459,13 +459,15 @@ class GenericSearch extends React.Component {
     if (!parsed) return
 
     let newQuery = formValues.query
-    let found = findField(parsed, 'severity')
+    const found = findField(parsed, 'severity')
+    const el = `(severity:${values.join(' AND ')})`
     if (found) {
-
+      assign(found.parent, QueryParser.parse(el).left)
+      newQuery = QueryParser.toString(parsed)
     } else {
       if (!values.length) return
       if (newQuery) newQuery = `${newQuery} AND `
-      newQuery = `${newQuery}(severity:${values.join(' AND ')})`
+      newQuery = `${newQuery}${el}`
     }
 
     this.props.change('query', newQuery)
@@ -834,33 +836,31 @@ class GenericSearch extends React.Component {
   }
 
   getParams () {
-    const {params} = this.props
-    const conditions = []
+    const {queryParams} = this.props
+    const parsed = this.parse(queryParams.q)
 
-    if (params.query) conditions.push(`(${params.query})`)
-    if (params.tag) conditions.push(`(tags:${params.tag.split(',').join(' OR ')})`)
-    if (params.severity) conditions.push(`(severity:${params.severity.split(',').join(' AND ')})`)
-    if (params.monitorTypes) conditions.push(`(monitortype:${params.monitorTypes.split(',').join(' OR ')})`)
-    const dateFrom = moment(params.dateFrom, dateFormat).valueOf()
-    const dateTo = moment(params.dateTo, dateFormat).valueOf()
-    conditions.push(`(startTimestamp:${dateFrom} TO ${dateTo})`)
-    conditions.push(`(timestamp:${dateFrom} TO ${dateTo})`)
-
-    const q = conditions.join(' AND ')
-
-    const pp = {
-      draw: this.props.searchDraw,
-      q,
-      types: params.collections.split(',')
+    const ret = {
+      severity: []
+    }
+    if (parsed) {
+      let found = findField(parsed, 'severity')
+      if (found) {
+        while(found) {
+          if (found.left) ret.severity.push(found.left.term)
+          else if (found.term) ret.severity.push(found.term)
+          found = found.right
+        }
+      }
     }
 
-    return pp
+    return ret
   }
 
   render () {
     const { handleSubmit, selectedWf, params, monitorTemplates, searchTags, queryChips, selectedWfs, queryParams } = this.props
-    const { severity, monitorTypes, monitorId } = params
+    const { monitorTypes, monitorId } = params
     const { from, to } = queryParams
+    const { severity } = this.getParams()
     const workflow = this.props.workflows.filter(m => m.id === selectedWf)
 
     return (
@@ -879,7 +879,7 @@ class GenericSearch extends React.Component {
             onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
             onClickSearch={this.onClickSearch.bind(this)}
             severities={severities}
-            selectedSeverities={severity.split(',')}
+            selectedSeverities={severity}
             onChangeSeverity={this.onChangeSeverity.bind(this)}
             startDate={from}
             endDate={to}
