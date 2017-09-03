@@ -790,6 +790,9 @@ class GenericSearch extends React.Component {
     const {queryParams} = this.props
     const parsed = this.parse(queryParams.q)
 
+    const dateFromValues = getArrayValues(parsed, 'from')
+    const dateToValues = getArrayValues(parsed, 'to')
+
     const ret = {
       severity: getArrayValues(parsed, 'severity'),
       monitorTypes: getArrayValues(parsed, 'monitortype'),
