@@ -104,66 +104,55 @@ class GenericSearch extends React.Component {
   }
 
   componentWillMount () {
-    // const {filterType} = this.props.location.state || {}
-    // const {q} = parse(this.props.location.search || {})
-    // let params = assign({}, this.props.params)
+    const {filterType} = this.props.location.state || {}
+    const {q} = parse(this.props.location.search || {})
+    let params = assign({}, this.props.queryParams)
 
     this.props.fetchDevicesGroups()
-    this.props.updateSearchViewFilter(viewFilters.standard)
-
-    // if (q) {
-    //   try {
-    //     const parsed = JSON.parse(q)
-    //     const {query} = parsed
-    //     const queryChips = parseSearchQuery(query)
-    //     params = assign(params, parsed)
-    //
-    //     this.props.updateSearchParams(params, this.props.history)
-    //     this.props.replaceSearchWfs([])
-    //     this.props.updateSearchTags(parsed.tag ? parsed.tag.split(',') : [])
-    //     this.props.updateSearchViewFilter('')
-    //     this.props.resetViewCols()
-    //     this.props.updateQueryChips(queryChips)
-    //     this.props.change('query', '')
-    //     this.props.change('searchOptionIndex', '')
-    //   } catch (e) {}
-    // } else if (filterType) {
-    //   let query = ''
-    //   if (filterType === 'today') {
-    //     params.dateFrom = moment().startOf('day').format(dateFormat)
-    //     params.dateTo = moment().endOf('day').format(dateFormat)
-    //   } else if (filterType === 'month') {
-    //     params.dateFrom = moment().startOf('month').format(dateFormat)
-    //     params.dateTo = moment().endOf('month').format(dateFormat)
-    //   } else if (filterType === 'open') {
-    //     params.dateFrom = moment().startOf('year').format(dateFormat)
-    //     params.dateTo = moment().endOf('year').format(dateFormat)
-    //     query = 'fixed=false'
-    //   }
-    //   const queryChips = parseSearchQuery(query)
-    //
-    //   params = assign(params, {
-    //     query,
-    //     severity: 'HIGH,MEDIUM',
-    //     collections: 'incident',
-    //     workflow: '',
-    //     tag: '',
-    //     monitorId: ''
-    //   })
-    //
-    //   this.props.updateSearchParams(params, this.props.history)
-    //   this.props.replaceSearchWfs([])
-    //   this.props.updateSearchTags([])
-    //   this.props.updateSearchViewFilter('')
-    //   this.props.resetViewCols()
-    //   this.props.updateQueryChips(queryChips)
-    //   this.props.change('query', '')
-    //   this.props.change('searchOptionIndex', '')
-    // }
-    // this.props.fetchSearchFields(params)
-
     this.props.fetchWorkflows()
     this.props.fetchMonitorTemplates()
+
+    if (q) {
+      try {
+        const parsed = JSON.parse(q)
+        params = assign(params, parsed, {
+          draw: 1
+        })
+        this.props.updateSearchViewFilter('')
+        this.props.resetViewCols()
+        this.props.updateQueryParams(params, this.props.history)
+        this.props.change('query', params.q)
+      } catch (e) {}
+    } else if (filterType) {
+      let query = []
+      if (filterType === 'today') {
+        params.from = moment().startOf('day').valueOf()
+        params.to = moment().endOf('day').valueOf()
+      } else if (filterType === 'month') {
+        params.from = moment().startOf('month').valueOf()
+        params.to = moment().endOf('month').valueOf()
+      } else if (filterType === 'open') {
+        params.from = moment().startOf('year').valueOf()
+        params.to = moment().endOf('year').valueOf()
+        query.push('(fixed:false)')
+      }
+      query.push('(severity:HIGH OR MEDIUM)')
+
+      const q = query.join(' AND ')
+      params = assign(params, {
+        q,
+        types: ['incident'],
+        draw: 1
+      })
+
+      this.props.updateSearchViewFilter('')
+      this.props.resetViewCols()
+      this.props.updateQueryParams(params, this.props.history)
+      this.props.change('query', q)
+    } else {
+      this.props.updateSearchViewFilter(viewFilters.standard)
+    }
+    // this.props.fetchSearchFields(params)
   }
 
   formatDate (time) {
