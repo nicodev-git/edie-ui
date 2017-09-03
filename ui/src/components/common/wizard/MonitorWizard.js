@@ -47,7 +47,7 @@ class MonitorWizard extends React.Component {
 
     //Step 3
     if (monitorConfig.needWindowsAgentCollector) {
-      if (collectors.filter(p => p.ostype === 'WINDOWS').length) return false
+      // if (collectors.filter(p => p.ostype === 'WINDOWS').length) return false
     } else {
       if (collectors.filter(p => p.ostype === 'LINUX').length) return false
     }
@@ -141,6 +141,13 @@ class MonitorWizard extends React.Component {
       value: p.id
     }))
   }
+  getCollectors () {
+    const {monitorConfig, collectors} = this.props
+    if (monitorConfig.needWindowsAgentCollector) {
+      return collectors.filter(p => p.ostype === 'WINDOWS')
+    }
+    return collectors.filter(p => p.ostype === 'LINUX')
+  }
   renderParamEditModal () {
     if (!this.props.paramEditModalOpen) return null
     return (
@@ -174,7 +181,7 @@ class MonitorWizard extends React.Component {
     )
   }
   render () {
-    const { title, handleSubmit, monitorConfig, selectedDevice, collectors, initialValues } = this.props
+    const { title, handleSubmit, monitorConfig, selectedDevice, initialValues } = this.props
     const header = title || `${monitorConfig ? monitorConfig.name : ''} Monitor`
     const paramEditModal = this.renderParamEditModal()
 
@@ -193,7 +200,7 @@ class MonitorWizard extends React.Component {
         credentials={this.getRelevantCreds()}
 
         showAgentType={this.showAgentType(true)}
-        collectors={collectors}
+        collectors={this.getCollectors()}
 
         agent={selectedDevice && !!selectedDevice.agent}
 
