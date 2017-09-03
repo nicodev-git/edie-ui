@@ -184,12 +184,33 @@ export function modifyArrayValues (query, field, values, operator = 'OR') {
           delete itemfield.operator
           break
         }
-        // clearObject(item.field)
-        // assign(item.field, parent)
         parentIndex++
       }
     }
 
+    newQuery = queryToString(parsed)
+  } else {
+    if (newQuery && el) newQuery = `${newQuery} AND `
+    newQuery = `${newQuery}${el}`
+  }
+
+  return newQuery
+}
+
+export function modifyFieldValue (query, field, value) {
+  let parsed
+  try {
+    parsed = QueryParser.parse(query)
+    if (!parsed) return null
+  } catch (e) {
+    return null
+  }
+
+  let newQuery = query
+  const found = findField(parsed, field)
+  const el = `(${field}:${value})`
+  if (found) {
+    found.term = value
     newQuery = queryToString(parsed)
   } else {
     if (newQuery && el) newQuery = `${newQuery} AND `
@@ -213,4 +234,14 @@ export function getArrayValues (parsed, field) {
   }
 
   return values
+}
+
+export function getFieldValue (parsed, field) {
+  if (!parsed) return null
+  let found = findField(parsed, field)
+  if (found) {
+    return found.term
+  }
+
+  return null
 }

@@ -19,7 +19,7 @@ import {chipStyles} from 'style/common/materialStyles'
 import {getRanges, getRangeLabel} from 'components/common/DateRangePicker'
 import {showAlert} from 'components/common/Alert'
 
-import {modifyArrayValues, getArrayValues} from 'util/Query'
+import {modifyArrayValues, getArrayValues, modifyFieldValue} from 'util/Query'
 
 import SearchFormView from './SearchFormView'
 import SearchSavePopover from './SearchSavePopover'
@@ -563,9 +563,9 @@ class GenericSearch extends React.Component {
   }
 
   onChangeMonitorId (value) {
-    this.props.updateSearchParams(assign({}, this.props.params, {
-      monitorId: value
-    }), this.props.history)
+    const {formValues} = this.props
+    const newQuery = modifyArrayValues(formValues.query, 'monitorid', value)
+    this.updateQuery(newQuery)
     this.props.showSearchMonitorModal(false)
   }
 
