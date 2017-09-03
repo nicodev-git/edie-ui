@@ -139,7 +139,8 @@ function clearObject(object) {
   for (const member in object) delete object[member]
 }
 
-function removeField(found) {
+export function removeField(found) {
+  if (!found) return
   let parentIndex = 0
   while (parentIndex < found.parent.length) {
     const item = found.parent[parentIndex]

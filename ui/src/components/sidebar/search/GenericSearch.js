@@ -19,7 +19,7 @@ import {chipStyles} from 'style/common/materialStyles'
 import {getRanges, getRangeLabel} from 'components/common/DateRangePicker'
 import {showAlert} from 'components/common/Alert'
 
-import {modifyArrayValues, getArrayValues, modifyFieldValue, getFieldValue} from 'util/Query'
+import {modifyArrayValues, getArrayValues, modifyFieldValue, getFieldValue, removeField, findField, queryToString} from 'util/Query'
 
 import SearchFormView from './SearchFormView'
 import SearchSavePopover from './SearchSavePopover'
@@ -812,8 +812,15 @@ class GenericSearch extends React.Component {
   getServiceParams () {
     const { queryParams } = this.props
     const { from, to } = this.getParams()
+    const parsed = this.parse(queryParams.q)
+
+    removeField(findField(parsed, 'from'))
+    removeField(findField(parsed, 'to'))
+    const q = queryToString(parsed)
+
     return {
       ...queryParams,
+      q,
       from,
       to
     }
