@@ -19,7 +19,7 @@ import {chipStyles} from 'style/common/materialStyles'
 import {getRanges, getRangeLabel} from 'components/common/DateRangePicker'
 import {showAlert} from 'components/common/Alert'
 
-import {findField, queryToString, modifyArrayValues} from 'util/Query'
+import {findField, queryToString, modifyArrayValues, getArrayValues} from 'util/Query'
 
 import SearchFormView from './SearchFormView'
 import SearchSavePopover from './SearchSavePopover'
@@ -282,6 +282,16 @@ class GenericSearch extends React.Component {
     }
   }
 
+  updateQuery (newQuery) {
+    if (newQuery === null) return
+
+    this.props.change('query', newQuery)
+    this.props.updateQueryParams({
+      ...this.props.queryParams,
+      q: newQuery
+    }, this.props.history)
+  }
+
   handleRequestClose () {
     this.props.closeFieldsPopover()
   }
@@ -445,57 +455,20 @@ class GenericSearch extends React.Component {
   }
 
   onChangeMonitorType (e, index, values) {
-    if (!values.length) {
-      return
-    }
-    this.props.updateSearchParams(assign({}, this.props.params, {
-      monitorTypes: values.join(',')
-    }), this.props.history)
+    const {formValues} = this.props
+
+    const newQuery = modifyArrayValues(formValues.query, 'monitortype', values, 'OR')
+    this.updateQuery(newQuery)
   }
 
   onChangeSeverity (e, index, values) {
-    const {queryParams, formValues} = this.props
+    const {formValues} = this.props
 
     const newQuery = modifyArrayValues(formValues.query, 'severity', values)
-    if (newQuery === null) return
-
-    this.props.change('query', newQuery)
-    this.props.updateQueryParams({
-      ...queryParams,
-      q: newQuery
-    }, this.props.history)
+    this.updateQuery(newQuery)
   }
 
   onChangeDateRange ({startDate, endDate}) {
-    // const {queryParams, formValues} = this.props
-    //
-    // const parsed = this.parse(formValues.query)
-    // if (!parsed) return
-    //
-    // let extras = []
-    //
-    // let found = findField(parsed, 'startTimestamp')
-    // if (found) {
-    //   found.field.term = startDate.valueOf()
-    //   found.parent.right.right.term = endDate.valueOf()
-    // } else {
-    //   extras.push(`(startTimestamp:${startDate.valueOf()} TO ${endDate.valueOf()})`)
-    // }
-    //
-    // found = findField(parsed, 'timestamp')
-    // if (found) {
-    //   found.field.term = startDate.valueOf()
-    //   found.parent.right.right.term = endDate.valueOf()
-    // } else {
-    //   extras.push(`(timestamp:${startDate.valueOf()} TO ${endDate.valueOf()})`)
-    // }
-    //
-    // let newQuery = QueryParser.toString(parsed)
-    // if(newQuery) extras = [newQuery, ...extras]
-    // newQuery = extras.join(' AND ')
-    //
-    // this.props.change('query', newQuery)
-
     this.props.updateQueryParams({
       ...this.props.queryParams,
       from: startDate.valueOf(),
@@ -829,18 +802,8 @@ class GenericSearch extends React.Component {
     const parsed = this.parse(queryParams.q)
 
     const ret = {
-      severity: []
-    }
-    if (parsed) {
-      let found = findField(parsed, 'severity')
-      if (found) {
-        found = found.parent[0].field
-        while(found) {
-          if (found.left) ret.severity.push(found.left.term)
-          else if (found.term) ret.severity.push(found.term)
-          found = found.right
-        }
-      }
+      severity: getArrayValues(parsed, 'severity'),
+      monitorTypes: getArrayValues(parsed, 'monitortype')
     }
 
     return ret
@@ -848,9 +811,9 @@ class GenericSearch extends React.Component {
 
   render () {
     const { handleSubmit, selectedWf, params, monitorTemplates, searchTags, queryChips, selectedWfs, queryParams } = this.props
-    const { monitorTypes, monitorId } = params
+    const { monitorId } = params
     const { from, to } = queryParams
-    const { severity } = this.getParams()
+    const { severity, monitorTypes } = this.getParams()
     const workflow = this.props.workflows.filter(m => m.id === selectedWf)
 
     return (
@@ -880,7 +843,7 @@ class GenericSearch extends React.Component {
             onClickIrrelDevices={this.onClickIrrelDevices.bind(this)}
 
             monitorTemplates={monitorTemplates}
-            selectedMonitorTypes={(monitorTypes || '').split(',').filter(p => !!p)}
+            selectedMonitorTypes={monitorTypes}
             onChangeMonitorType={this.onChangeMonitorType.bind(this)}
 
             onClickViewFilter={this.onClickViewFilter.bind(this)}

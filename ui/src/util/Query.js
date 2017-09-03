@@ -165,25 +165,23 @@ export function modifyArrayValues (query, field, values, operator = 'AND') {
         assign(found.parent[parentIndex].field, parent)
         parentIndex++
       }
-
-      newQuery = queryToString(parsed)
     } else {
       let parentIndex = 0
       while (parentIndex < found.parent.length) {
         const item = found.parent[parentIndex]
-        const field = item.field
+        const itemfield = item.field
         if (item.type === 'left') {
-          if (field.right) {
-            field.left = field.right
-            delete field.right
-            delete field.operator
+          if (itemfield.right) {
+            itemfield.left = itemfield.right
+            delete itemfield.right
+            delete itemfield.operator
             break
           } else {
 
           }
         } else {
-          delete field.right
-          delete field.operator
+          delete itemfield.right
+          delete itemfield.operator
           break
         }
         // clearObject(item.field)
@@ -191,10 +189,28 @@ export function modifyArrayValues (query, field, values, operator = 'AND') {
         parentIndex++
       }
     }
+
+    newQuery = queryToString(parsed)
   } else {
     if (newQuery && el) newQuery = `${newQuery} AND `
     newQuery = `${newQuery}${el}`
   }
 
   return newQuery
+}
+
+export function getArrayValues (parsed, field) {
+  const values = []
+  if (!parsed) return values
+  let found = findField(parsed, field)
+  if (found) {
+    found = found.parent[0].field
+    while(found) {
+      if (found.left) values.push(found.left.term)
+      else if (found.term) values.push(found.term)
+      found = found.right
+    }
+  }
+
+  return values
 }
