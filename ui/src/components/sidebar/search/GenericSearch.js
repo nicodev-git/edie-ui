@@ -458,11 +458,11 @@ class GenericSearch extends React.Component {
   }
 
   onChangeDateRange ({startDate, endDate}) {
-    this.props.updateQueryParams({
-      ...this.props.queryParams,
-      from: startDate.valueOf(),
-      to: endDate.valueOf()
-    }, this.props.history)
+    const {formValues} = this.props
+
+    let newQuery = modifyFieldValue(formValues.query, 'from', startDate.format(queryDateFormat))
+    newQuery = modifyFieldValue(newQuery, 'to', endDate.format(queryDateFormat))
+    this.updateQuery(newQuery)
   }
 
   onResultCountUpdate (total, data) {
@@ -790,11 +790,11 @@ class GenericSearch extends React.Component {
     const {queryParams} = this.props
     const parsed = this.parse(queryParams.q)
 
-    const dateFromStr = getArrayValues(parsed, 'from')
-    const dateToStr = getArrayValues(parsed, 'to')
+    const dateFromStr = getFieldValue(parsed, 'from')
+    const dateToStr = getFieldValue(parsed, 'to')
 
-    const dateFrom = dateFromStr ? moment(dateFromStr, queryDateFormat).valueOf() : moment().startOf('year').valueOf()
-    const dateTo = dateToStr ? moment(dateToStr, queryDateFormat).valueOf() : moment().endOf('day').valueOf()
+    const from = dateFromStr ? moment(dateFromStr, queryDateFormat).valueOf() : moment().startOf('year').valueOf()
+    const to = dateToStr ? moment(dateToStr, queryDateFormat).valueOf() : moment().endOf('day').valueOf()
 
     const ret = {
       severity: getArrayValues(parsed, 'severity'),
@@ -802,17 +802,26 @@ class GenericSearch extends React.Component {
       workflowIds: getArrayValues(parsed, 'workflowids'),
       tags: getArrayValues(parsed, 'tags'),
       monitorId: getFieldValue(parsed, 'monitorid'),
-      dateFrom,
-      dateTo
+      from,
+      to
     }
 
     return ret
   }
 
+  getServiceParams () {
+    const { queryParams } = this.props
+    const { from, to } = this.getParams()
+    return {
+      ...queryParams,
+      from,
+      to
+    }
+  }
+
   render () {
     const { handleSubmit, monitorTemplates, searchTags, queryChips, selectedWfs, queryParams } = this.props
-    const { from, to } = queryParams
-    const { severity, monitorTypes, monitorId } = this.getParams()
+    const { severity, monitorTypes, monitorId, from, to } = this.getParams()
 
     return (
       <TabPage>
@@ -915,7 +924,7 @@ class GenericSearch extends React.Component {
                   rowMetadata={{'key': 'id'}}
                   selectable
                   onRowDblClick={this.onRowDblClick.bind(this)}
-                  params={queryParams}
+                  params={this.getServiceParams()}
                   pageSize={10}
                   showTableHeading={false}
                   onUpdateCount={this.onResultCountUpdate.bind(this)}

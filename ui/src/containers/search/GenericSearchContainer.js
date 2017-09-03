@@ -6,7 +6,6 @@ import { withRouter } from 'react-router'
 import GenericSearch from 'components/sidebar/search/GenericSearch'
 
 import {
-  updateSearchParams,
   fetchSearchFields,
   openFieldsPopover,
   closeFieldsPopover,
@@ -81,7 +80,6 @@ class GenericSearchContainer extends React.Component {
 }
 export default connect(
   state => ({
-    params: state.search.params,
     queryChips: state.search.queryChips,
     fields: state.search.fields,
     fieldPopoverOpen: state.search.fieldPopoverOpen,
@@ -149,7 +147,6 @@ export default connect(
   }),
   dispatch => ({
     ...bindActionCreators({
-      updateSearchParams,
       fetchSearchFields,
       openFieldsPopover,
       closeFieldsPopover,

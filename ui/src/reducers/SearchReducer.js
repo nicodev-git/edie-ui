@@ -68,28 +68,19 @@ import {
 } from 'actions/types'
 import { concat } from 'lodash'
 
-import {dateFormat} from 'shared/Global'
+import {queryDateFormat} from 'shared/Global'
 
 const initialState = {
   incidents: [],
   incidentDevices: [],
   incidentDraw: 1,
-  params: {
-    query: '',
-    workflow: '',
-    tag: '',
-    collections: 'incident,event',
-    severity: 'HIGH,MEDIUM',
-    monitorTypes: '',
-    dateFrom: moment().add(-1, 'days').startOf('day').format(dateFormat),
-    dateTo: moment().endOf('day').format(dateFormat),
-    monitorId: ''
-  },
   queryParams: {
     draw: 1,
-    q: '(severity:HIGH OR MEDIUM)',
-    from: moment().add(-1, 'days').startOf('day').valueOf(),
-    to: moment().endOf('day').valueOf(),
+    q: [
+      '(severity:HIGH OR MEDIUM)',
+      `(from:"${moment().add(-1, 'days').startOf('day').format(queryDateFormat)}")`,
+      `(to:"${moment().endOf('day').format(queryDateFormat)}")`
+    ].join(' AND '),
     types: ['incident', 'event']
   },
   incidentParams: {
