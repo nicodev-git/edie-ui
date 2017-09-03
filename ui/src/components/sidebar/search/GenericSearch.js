@@ -19,7 +19,7 @@ import {chipStyles} from 'style/common/materialStyles'
 import {getRanges, getRangeLabel} from 'components/common/DateRangePicker'
 import {showAlert} from 'components/common/Alert'
 
-import {findField, modifyArrayValues, getArrayValues} from 'util/Query'
+import {modifyArrayValues, getArrayValues} from 'util/Query'
 
 import SearchFormView from './SearchFormView'
 import SearchSavePopover from './SearchSavePopover'
@@ -551,27 +551,21 @@ class GenericSearch extends React.Component {
     }), this.props.history)
   }
   onClickClearSearch () {
-    const {updateSearchTags, updateQueryChips, replaceSearchWfs, updateSearchViewFilter, resetViewCols} = this.props
-    updateQueryChips([])
-    updateSearchTags([])
-    replaceSearchWfs([])
+    const {updateSearchViewFilter, resetViewCols} = this.props
     updateSearchViewFilter(null)
     resetViewCols()
 
-    this.props.updateSearchParams(assign({}, this.props.params, {
-      query: '',
-      workflow: '',
-      tag: '',
-      collections: 'incident,event',
-      severity: 'HIGH,MEDIUM',
-      monitorTypes: '',
-      dateFrom: moment().add(-1, 'days').startOf('day').format(dateFormat),
-      dateTo: moment().endOf('day').format(dateFormat),
-      monitorId: ''
-    }), this.props.history)
+    const q = '(severity:HIGH OR MEDIUM)'
+    this.props.updateQueryParams({
+      ...this.props.queryParams,
+      draw: 1,
+      q,
+      from: moment().add(-1, 'days').startOf('day').valueOf(),
+      to: moment().endOf('day').valueOf(),
+      types: ['incident', 'event']
+    }, this.props.history)
 
-    this.props.change('query', '')
-    this.props.change('searchOptionIndex', '')
+    this.props.change('query', q)
   }
 
   onClickToggleFields () {
@@ -829,7 +823,6 @@ class GenericSearch extends React.Component {
           <SearchFormView
             onSearchKeyDown={this.onSearchKeyDown.bind(this)}
             onClickStar={this.onClickStar.bind(this)}
-            starFilled={!!this.props.selectedSearchOption}
             collections={collections}
             selectedCollections={queryParams.types}
             onChangeCollection={this.onChangeCollection.bind(this)}
@@ -949,7 +942,6 @@ const selector = formValueSelector('genericSearchForm')
 export default connect(
   state => ({
     initialValues: {query: state.search.queryParams.q},
-    selectedSearchOption: selector(state, 'searchOptionIndex'),
     formValues: selector(state, 'query', 'searchOptionIndex')
   })
 )(GenericSearchForm)
