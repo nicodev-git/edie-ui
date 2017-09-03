@@ -21,7 +21,7 @@ export function findField (parsed, field) {
 
   if (parsed.right) {
     const res = findField(parsed.right, field)
-    if (res && !res.parent) {
+    if (res) {
       res.parent.push({
         field: parsed,
         type: 'right'
@@ -150,25 +150,49 @@ export function modifyArrayValues (query, field, values, operator = 'AND') {
 
   let newQuery = query
   const found = findField(parsed, field)
-  const el = `(${field}:${values.join(` ${operator} `)})`
+  const el = values && values.length ? `(${field}:${values.join(` ${operator} `)})` : ''
   if (found) {
-
     const parent = found.parent[0].field
-    clearObject(parent)
-    assign(parent, QueryParser.parse(el).left)
 
-    let parentIndex = 1
-    while (parentIndex < found.parent.length) {
-      if (found.parent[parentIndex].field.right) break
-      clearObject(found.parent[parentIndex].field)
-      assign(found.parent[parentIndex].field, parent)
-      parentIndex++
+    if (el) {
+      clearObject(parent)
+      assign(parent, QueryParser.parse(el).left)
+
+      let parentIndex = 1
+      while (parentIndex < found.parent.length) {
+        if (found.parent[parentIndex].field.right) break
+        clearObject(found.parent[parentIndex].field)
+        assign(found.parent[parentIndex].field, parent)
+        parentIndex++
+      }
+
+      newQuery = queryToString(parsed)
+    } else {
+      let parentIndex = 0
+      while (parentIndex < found.parent.length) {
+        const item = found.parent[parentIndex]
+        const field = item.field
+        if (item.type === 'left') {
+          if (field.right) {
+            field.left = field.right
+            delete field.right
+            delete field.operator
+            break
+          } else {
+
+          }
+        } else {
+          delete field.right
+          delete field.operator
+          break
+        }
+        // clearObject(item.field)
+        // assign(item.field, parent)
+        parentIndex++
+      }
     }
-
-    newQuery = queryToString(parsed)
   } else {
-    if (!values.length) return
-    if (newQuery) newQuery = `${newQuery} AND `
+    if (newQuery && el) newQuery = `${newQuery} AND `
     newQuery = `${newQuery}${el}`
   }
 
