@@ -153,13 +153,15 @@ export function modifyArrayValues (query, field, values, operator = 'AND') {
   const el = `(${field}:${values.join(` ${operator} `)})`
   if (found) {
 
-    clearObject(found.parent[0])
-    assign(found.parent[0], QueryParser.parse(el).left)
+    const parent = found.parent[0].field
+    clearObject(parent)
+    assign(parent, QueryParser.parse(el).left)
 
     let parentIndex = 1
     while (parentIndex < found.parent.length) {
-      if (found.parent[parentIndex].right) break
-      assign(found.parent[parentIndex], found.parent[0])
+      if (found.parent[parentIndex].field.right) break
+      clearObject(found.parent[parentIndex].field)
+      assign(found.parent[parentIndex].field, parent)
       parentIndex++
     }
 
@@ -169,4 +171,6 @@ export function modifyArrayValues (query, field, values, operator = 'AND') {
     if (newQuery) newQuery = `${newQuery} AND `
     newQuery = `${newQuery}${el}`
   }
+
+  return newQuery
 }

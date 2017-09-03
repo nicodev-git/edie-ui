@@ -19,7 +19,7 @@ import {chipStyles} from 'style/common/materialStyles'
 import {getRanges, getRangeLabel} from 'components/common/DateRangePicker'
 import {showAlert} from 'components/common/Alert'
 
-import {findField} from 'util/Query'
+import {findField, queryToString, modifyArrayValues} from 'util/Query'
 
 import SearchFormView from './SearchFormView'
 import SearchSavePopover from './SearchSavePopover'
@@ -455,21 +455,9 @@ class GenericSearch extends React.Component {
 
   onChangeSeverity (e, index, values) {
     const {queryParams, formValues} = this.props
-    const parsed = this.parse(formValues.query)
-    if (!parsed) return
 
-    let newQuery = formValues.query
-    const found = findField(parsed, 'severity')
-    const el = `(severity:${values.join(' AND ')})`
-    if (found) {
-      for (var member in found.parent) delete found.parent[member];
-      assign(found.parent, QueryParser.parse(el).left)
-      newQuery = QueryParser.toString(parsed)
-    } else {
-      if (!values.length) return
-      if (newQuery) newQuery = `${newQuery} AND `
-      newQuery = `${newQuery}${el}`
-    }
+    const newQuery = modifyArrayValues(formValues.query, 'severity', values)
+    if (newQuery === null) return
 
     this.props.change('query', newQuery)
     this.props.updateQueryParams({
@@ -846,7 +834,7 @@ class GenericSearch extends React.Component {
     if (parsed) {
       let found = findField(parsed, 'severity')
       if (found) {
-        found = found.parent
+        found = found.parent[0].field
         while(found) {
           if (found.left) ret.severity.push(found.left.term)
           else if (found.term) ret.severity.push(found.term)
