@@ -421,19 +421,19 @@ class GenericSearch extends React.Component {
     this.props.openSearchWfModal()
   }
 
-  onClearWorkflow () {
-    this.props.selectSearchWf('')
-    this.props.updateSearchParams(assign({}, this.props.params, {
-      workflow: ''
-    }), this.props.history)
-  }
-
   onClickSelectWorkflow () {
-    if (!this.props.selectedRowWf) return
-    this.props.addSearchWf(this.props.selectedRowWf)
-    this.props.updateSearchParams(assign({}, this.props.params, {
-      workflow: concat([], this.props.selectedWfs, this.props.selectedRowWf).map(m => m.id).join(',')
-    }), this.props.history)
+    const {selectedRowWf, formValues} = this.props
+    if (!selectedRowWf) return
+    // this.props.addSearchWf(this.props.selectedRowWf)
+    // this.props.updateSearchParams(assign({}, this.props.params, {
+    //   workflow: concat([], this.props.selectedWfs, this.props.selectedRowWf).map(m => m.id).join(',')
+    // }), this.props.history)
+    const {workflowIds} = this.getParams()
+    if (!workflowIds.includes(selectedRowWf.id)) {
+      const newQuery = modifyArrayValues(formValues.query, 'workflowids', [...workflowIds, selectedRowWf.id])
+      this.updateQuery(newQuery)
+    }
+
     this.props.closeSearchWfModal()
   }
 
@@ -803,18 +803,18 @@ class GenericSearch extends React.Component {
 
     const ret = {
       severity: getArrayValues(parsed, 'severity'),
-      monitorTypes: getArrayValues(parsed, 'monitortype')
+      monitorTypes: getArrayValues(parsed, 'monitortype'),
+      workflowIds: getArrayValues(parsed, 'workflowids')
     }
 
     return ret
   }
 
   render () {
-    const { handleSubmit, selectedWf, params, monitorTemplates, searchTags, queryChips, selectedWfs, queryParams } = this.props
+    const { handleSubmit, params, monitorTemplates, searchTags, queryChips, selectedWfs, queryParams } = this.props
     const { monitorId } = params
     const { from, to } = queryParams
     const { severity, monitorTypes } = this.getParams()
-    const workflow = this.props.workflows.filter(m => m.id === selectedWf)
 
     return (
       <TabPage>
@@ -823,11 +823,9 @@ class GenericSearch extends React.Component {
             onSearchKeyDown={this.onSearchKeyDown.bind(this)}
             onClickStar={this.onClickStar.bind(this)}
             starFilled={!!this.props.selectedSearchOption}
-            workflow={workflow.length ? workflow[0].name : ''}
             collections={collections}
             selectedCollections={queryParams.types}
             onChangeCollection={this.onChangeCollection.bind(this)}
-            onClearWorkflow={this.onClearWorkflow.bind(this)}
             onClickWorkflow={this.onClickWorkflow.bind(this)}
             onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
             onClickSearch={this.onClickSearch.bind(this)}
