@@ -19,7 +19,7 @@ import {chipStyles} from 'style/common/materialStyles'
 import {getRanges, getRangeLabel} from 'components/common/DateRangePicker'
 import {showAlert} from 'components/common/Alert'
 
-import {findField, queryToString, modifyArrayValues, getArrayValues} from 'util/Query'
+import {findField, modifyArrayValues, getArrayValues} from 'util/Query'
 
 import SearchFormView from './SearchFormView'
 import SearchSavePopover from './SearchSavePopover'
@@ -457,7 +457,7 @@ class GenericSearch extends React.Component {
   onChangeMonitorType (e, index, values) {
     const {formValues} = this.props
 
-    const newQuery = modifyArrayValues(formValues.query, 'monitortype', values, 'OR')
+    const newQuery = modifyArrayValues(formValues.query, 'monitortype', values)
     this.updateQuery(newQuery)
   }
 
@@ -523,18 +523,24 @@ class GenericSearch extends React.Component {
     })
     this.props.showSearchTagModal(true)
   }
-  onPickTag (tags) {
-    const {searchTags, updateSearchTags} = this.props
-    const newTags = [...searchTags]
-    tags.forEach(tag => {
-      if (newTags.indexOf(tag.name) >= 0) return
-      newTags.push(tag.name)
-    })
-    updateSearchTags(newTags)
+  onPickTag (selected) {
+    const {formValues} = this.props
+    const {tags} = this.getParams()
 
-    this.props.updateSearchParams(assign({}, this.props.params, {
-      tag: newTags.join(',')
-    }), this.props.history)
+    selected.forEach(tag => {
+      if (!tags.includes(tag.name)) tags.push(tag.name)
+    })
+
+    const newQuery = modifyArrayValues(formValues.query, 'tags', tags)
+    this.updateQuery(newQuery)
+
+    // const {searchTags, updateSearchTags} = this.props
+    // const newTags = [...searchTags]
+    // tags.forEach(tag => {
+    //   if (newTags.indexOf(tag.name) >= 0) return
+    //   newTags.push(tag.name)
+    // })
+    // updateSearchTags(newTags)
   }
   onClickRemoveTagChip (index) {
     const {searchTags, updateSearchTags} = this.props
@@ -804,7 +810,8 @@ class GenericSearch extends React.Component {
     const ret = {
       severity: getArrayValues(parsed, 'severity'),
       monitorTypes: getArrayValues(parsed, 'monitortype'),
-      workflowIds: getArrayValues(parsed, 'workflowids')
+      workflowIds: getArrayValues(parsed, 'workflowids'),
+      tags: getArrayValues(parsed, 'tags')
     }
 
     return ret

@@ -139,7 +139,7 @@ function clearObject(object) {
   for (const member in object) delete object[member]
 }
 
-export function modifyArrayValues (query, field, values, operator = 'AND') {
+export function modifyArrayValues (query, field, values, operator = 'OR') {
   let parsed
   try {
     parsed = QueryParser.parse(query)
