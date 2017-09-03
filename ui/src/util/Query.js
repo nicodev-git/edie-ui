@@ -139,6 +139,29 @@ function clearObject(object) {
   for (const member in object) delete object[member]
 }
 
+function removeField(found) {
+  let parentIndex = 0
+  while (parentIndex < found.parent.length) {
+    const item = found.parent[parentIndex]
+    const itemfield = item.field
+    if (item.type === 'left') {
+      if (itemfield.right) {
+        itemfield.left = itemfield.right
+        delete itemfield.right
+        delete itemfield.operator
+        break
+      } else {
+
+      }
+    } else {
+      delete itemfield.right
+      delete itemfield.operator
+      break
+    }
+    parentIndex++
+  }
+}
+
 export function modifyArrayValues (query, field, values, operator = 'OR') {
   let parsed
   try {
@@ -166,26 +189,7 @@ export function modifyArrayValues (query, field, values, operator = 'OR') {
         parentIndex++
       }
     } else {
-      let parentIndex = 0
-      while (parentIndex < found.parent.length) {
-        const item = found.parent[parentIndex]
-        const itemfield = item.field
-        if (item.type === 'left') {
-          if (itemfield.right) {
-            itemfield.left = itemfield.right
-            delete itemfield.right
-            delete itemfield.operator
-            break
-          } else {
-
-          }
-        } else {
-          delete itemfield.right
-          delete itemfield.operator
-          break
-        }
-        parentIndex++
-      }
+      removeField(found)
     }
 
     newQuery = queryToString(parsed)
@@ -208,11 +212,14 @@ export function modifyFieldValue (query, field, value) {
 
   let newQuery = query
   const found = findField(parsed, field)
-  const el = `(${field}:${value})`
   if (found) {
-    found.term = value
+    if (value)
+      found.field.term = value
+    else
+      removeField(found)
     newQuery = queryToString(parsed)
-  } else {
+  } else if (value !== null) {
+    const el = `(${field}:${value})`
     if (newQuery && el) newQuery = `${newQuery} AND `
     newQuery = `${newQuery}${el}`
   }
@@ -240,8 +247,7 @@ export function getFieldValue (parsed, field) {
   if (!parsed) return null
   let found = findField(parsed, field)
   if (found) {
-    return found.term
+    return found.field.term
   }
-
   return null
 }

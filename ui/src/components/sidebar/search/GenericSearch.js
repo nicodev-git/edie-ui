@@ -19,7 +19,7 @@ import {chipStyles} from 'style/common/materialStyles'
 import {getRanges, getRangeLabel} from 'components/common/DateRangePicker'
 import {showAlert} from 'components/common/Alert'
 
-import {modifyArrayValues, getArrayValues, modifyFieldValue} from 'util/Query'
+import {modifyArrayValues, getArrayValues, modifyFieldValue, getFieldValue} from 'util/Query'
 
 import SearchFormView from './SearchFormView'
 import SearchSavePopover from './SearchSavePopover'
@@ -564,7 +564,7 @@ class GenericSearch extends React.Component {
 
   onChangeMonitorId (value) {
     const {formValues} = this.props
-    const newQuery = modifyArrayValues(formValues.query, 'monitorid', value)
+    const newQuery = modifyFieldValue(formValues.query, 'monitorid', value)
     this.updateQuery(newQuery)
     this.props.showSearchMonitorModal(false)
   }
@@ -794,17 +794,17 @@ class GenericSearch extends React.Component {
       severity: getArrayValues(parsed, 'severity'),
       monitorTypes: getArrayValues(parsed, 'monitortype'),
       workflowIds: getArrayValues(parsed, 'workflowids'),
-      tags: getArrayValues(parsed, 'tags')
+      tags: getArrayValues(parsed, 'tags'),
+      monitorId: getFieldValue(parsed, 'monitorid')
     }
 
     return ret
   }
 
   render () {
-    const { handleSubmit, params, monitorTemplates, searchTags, queryChips, selectedWfs, queryParams } = this.props
-    const { monitorId } = params
+    const { handleSubmit, monitorTemplates, searchTags, queryChips, selectedWfs, queryParams } = this.props
     const { from, to } = queryParams
-    const { severity, monitorTypes } = this.getParams()
+    const { severity, monitorTypes, monitorId } = this.getParams()
 
     return (
       <TabPage>
