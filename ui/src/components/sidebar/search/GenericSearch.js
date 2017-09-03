@@ -13,7 +13,7 @@ import InfiniteTable from 'components/common/InfiniteTable'
 import TabPage from 'components/common/TabPage'
 import TabPageBody from 'components/common/TabPageBody'
 import TabPageHeader from 'components/common/TabPageHeader'
-import { parseSearchQuery, guid, dateFormat, collections, severities, viewFilters } from 'shared/Global'
+import { parseSearchQuery, guid, dateFormat, collections, severities, viewFilters, queryDateFormat } from 'shared/Global'
 import {renderEntity} from 'components/common/CellRenderers'
 import {chipStyles} from 'style/common/materialStyles'
 import {getRanges, getRangeLabel} from 'components/common/DateRangePicker'
@@ -790,15 +790,20 @@ class GenericSearch extends React.Component {
     const {queryParams} = this.props
     const parsed = this.parse(queryParams.q)
 
-    const dateFromValues = getArrayValues(parsed, 'from')
-    const dateToValues = getArrayValues(parsed, 'to')
+    const dateFromStr = getArrayValues(parsed, 'from')
+    const dateToStr = getArrayValues(parsed, 'to')
+
+    const dateFrom = dateFromStr ? moment(dateFromStr, queryDateFormat).valueOf() : moment().startOf('year').valueOf()
+    const dateTo = dateToStr ? moment(dateToStr, queryDateFormat).valueOf() : moment().endOf('day').valueOf()
 
     const ret = {
       severity: getArrayValues(parsed, 'severity'),
       monitorTypes: getArrayValues(parsed, 'monitortype'),
       workflowIds: getArrayValues(parsed, 'workflowids'),
       tags: getArrayValues(parsed, 'tags'),
-      monitorId: getFieldValue(parsed, 'monitorid')
+      monitorId: getFieldValue(parsed, 'monitorid'),
+      dateFrom,
+      dateTo
     }
 
     return ret

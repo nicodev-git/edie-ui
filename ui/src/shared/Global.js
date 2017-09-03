@@ -9,6 +9,8 @@ import { iconStyle } from 'style/common/materialStyles'
 export const dateFormat = 'DD/MM/YYYY HH:mm:ss'
 export const defaultDateFormat = 'YYYY-MM-DD HH:mm:ss'
 
+export const queryDateFormat = 'YYYY-MM-DD HH:mm:ss'
+
 export const extImageBaseUrl = `${ROOT_URL}/externalpictures?name=`
 export function getCustomImageUrl (img) {
   return `data:${img.mimeType};base64,${img.content}`
