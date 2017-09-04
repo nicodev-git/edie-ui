@@ -9,7 +9,7 @@ import Device from './gaugeSubItem/Device'
 import Monitor from './gaugeSubItem/Monitor'
 import { Modal } from 'components/modal/parts'
 
-import {sidebarWidth, sidebarStyle} from 'style/common/materialStyles'
+import { iconButtonStyle,sidebarWidth, sidebarStyle } from 'style/common/materialStyles'
 
 export default class GaugePickerView extends React.Component {
   constructor() {
@@ -69,13 +69,25 @@ export default class GaugePickerView extends React.Component {
           <div style={{width: sidebarWidth}}>
             <Drawer open width={sidebarWidth} containerStyle={{...sidebarStyle, left: 'initial', bottom: 0, top: 56, height: 'initial'}}>
               <div>
-                <IconButton><DashboardIcon color="#ffffff" onClick={this.onClickSubItem.bind(this, 'dashboard')}/></IconButton>
+                <IconButton
+                  tooltip="Dashboard"
+                  tooltipPosition="top-right"
+                  style={iconButtonStyle}
+                ><DashboardIcon color="#ffffff" onClick={this.onClickSubItem.bind(this, 'dashboard')}/></IconButton>
               </div>
               <div>
-                <IconButton><PlaylistIcon color="#ffffff" onClick={this.onClickSubItem.bind(this, 'monitor')}/></IconButton>
+                <IconButton
+                  tooltip="Monitor"
+                  tooltipPosition="top-right"
+                  style={iconButtonStyle}
+                ><PlaylistIcon color="#ffffff" onClick={this.onClickSubItem.bind(this, 'monitor')}/></IconButton>
               </div>
               <div>
-                <IconButton><DeviceIcon color="#ffffff" onClick={this.onClickSubItem.bind(this, 'device')}/></IconButton>
+                <IconButton
+                  tooltip="Device"
+                  tooltipPosition="top-right"
+                  style={iconButtonStyle}
+                ><DeviceIcon color="#ffffff" onClick={this.onClickSubItem.bind(this, 'device')}/></IconButton>
               </div>
             </Drawer>
           </div>

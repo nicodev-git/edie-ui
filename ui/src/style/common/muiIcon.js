@@ -3,7 +3,7 @@ import React from 'react'
 export const iconButtonStyle = {
   padding: '4px',
   width: 50,
-  height: 50
+  height: 50,
 }
 
 export const iconStyle = {
