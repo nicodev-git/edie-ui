@@ -816,7 +816,8 @@ class GenericSearch extends React.Component {
     removeField(findField(parsed, 'to'))
     removeField(findField(parsed, 'workflows'))
     removeField(findField(parsed, 'monitor'))
-    if (typeField) removeField(typeField.parent[0].field)
+    if (typeField)
+      removeField(typeField.parent[0])
 
     const qs = []
     const q = queryToString(parsed)
