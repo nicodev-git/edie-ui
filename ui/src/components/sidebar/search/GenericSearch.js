@@ -455,8 +455,8 @@ class GenericSearch extends React.Component {
   onChangeDateRange ({startDate, endDate}) {
     const {formValues} = this.props
 
-    let newQuery = modifyFieldValue(formValues.query, 'from', `"${startDate.format(queryDateFormat)}"`)
-    newQuery = modifyFieldValue(newQuery, 'to', `"${endDate.format(queryDateFormat)}"`)
+    let newQuery = modifyFieldValue(formValues.query, 'from', startDate.format(queryDateFormat), true)
+    newQuery = modifyFieldValue(newQuery, 'to', endDate.format(queryDateFormat), true)
     this.updateQuery(newQuery)
   }
 
@@ -810,11 +810,13 @@ class GenericSearch extends React.Component {
     const { from, to, workflowNames, monitorName, types } = this.getParams()
     const parsed = this.parse(queryParams.q)
 
+    const typeField = findField(parsed, 'type')
+
     removeField(findField(parsed, 'from'))
     removeField(findField(parsed, 'to'))
     removeField(findField(parsed, 'workflows'))
     removeField(findField(parsed, 'monitor'))
-    removeField(findField(parsed, 'type'))
+    if (typeField) removeField(typeField.parent[0].field)
 
     const qs = []
     const q = queryToString(parsed)
