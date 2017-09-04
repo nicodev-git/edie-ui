@@ -431,12 +431,11 @@ class GenericSearch extends React.Component {
   }
 
   onChangeCollection (e, index, values) {
-    if (!values.length) {
-      return
-    }
-    this.props.updateQueryParams(assign({}, this.props.queryParams, {
-      types: values
-    }), this.props.history)
+    if (!values.length) return
+    const {formValues} = this.props
+
+    const newQuery = modifyArrayValues(formValues.query, 'type', values)
+    this.updateQuery(newQuery)
   }
 
   onChangeMonitorType (e, index, values) {
@@ -847,7 +846,7 @@ class GenericSearch extends React.Component {
   }
 
   render () {
-    const { handleSubmit, monitorTemplates, searchTags, queryChips, selectedWfs, queryParams } = this.props
+    const { handleSubmit, monitorTemplates, searchTags, queryChips, selectedWfs } = this.props
     const { severity, monitorTypes, monitorName, from, to, types } = this.getParams()
 
     return (
@@ -856,8 +855,8 @@ class GenericSearch extends React.Component {
           <SearchFormView
             onSearchKeyDown={this.onSearchKeyDown.bind(this)}
             onClickStar={this.onClickStar.bind(this)}
-            collections={types}
-            selectedCollections={queryParams.types}
+            collections={collections}
+            selectedCollections={types}
             onChangeCollection={this.onChangeCollection.bind(this)}
             onClickWorkflow={this.onClickWorkflow.bind(this)}
             onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
