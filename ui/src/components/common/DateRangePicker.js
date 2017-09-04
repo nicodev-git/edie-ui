@@ -78,7 +78,7 @@ export const getRanges = () => {
   }
 }
 
-export const getRangeLabel = (rangeConfig, startDate, endDate) => {
+export const getRangeLabel = (rangeConfig, startDate, endDate, allowEmpty) => {
   const momentStartDate = isString(startDate) ? moment(startDate, dateFormat) : (isNumber(startDate) ? moment(startDate) : startDate)
   const momentEndDate = isString(endDate) ? moment(endDate, dateFormat) : (isNumber(endDate) ? moment(endDate) : endDate)
 
@@ -94,7 +94,7 @@ export const getRangeLabel = (rangeConfig, startDate, endDate) => {
     }
   })
 
-  if (!label) label = `${startDateStr} - ${endDateStr}`
+  if (!label && !allowEmpty) label = `${startDateStr} - ${endDateStr}`
   return {label, momentStartDate, momentEndDate}
 }
 

@@ -214,9 +214,10 @@ export function modifyFieldValue (query, field, value, quote) {
   let newQuery = query
   const found = findField(parsed, field)
   if (found) {
-    if (value)
+    if (value){
       found.field.term = value
-    else
+      found.field.quoted = !!quote
+    } else
       removeField(found)
     newQuery = queryToString(parsed)
   } else if (value !== null) {
