@@ -373,35 +373,35 @@ class GenericSearch extends React.Component {
   }
 
   onChangeSearchOption (selectedSearch) {
-    let found
-    try {
-      found = JSON.parse(selectedSearch.data)
-    } catch (e) {
-      found = {}
-    }
-
-    const newQueryChips = parseSearchQuery(found.query || '')
-    const params = assign({}, this.props.params, found)
-    if (selectedSearch.dateLabel) {
-      const dateRange = getRanges()[selectedSearch.dateLabel]
-      if (dateRange) {
-        params.dateFrom = dateRange[0].format(dateFormat)
-        params.dateTo = dateRange[1].format(dateFormat)
-      }
-    }
-
-    const workflowIds = params.workflow.split(',')
-    const workflows = this.props.workflows.filter(p => workflowIds.indexOf(p.id) >= 0)
-    params.workflow = workflows.map(p => p.id).join(',')
-    const tags = params.tag.split(',').filter(p => !!p)
-
-    this.props.updateSearchParams(params, this.props.history)
-    this.props.updateQueryChips(newQueryChips)
-    this.props.updateSearchViewFilter(selectedSearch.viewFilter || '')
-    this.props.resetViewCols(selectedSearch.viewCols || [])
-    this.props.replaceSearchWfs(workflows)
-    this.props.updateSearchTags(tags)
-    this.props.change('query', '')
+    // let found
+    // try {
+    //   found = JSON.parse(selectedSearch.data)
+    // } catch (e) {
+    //   found = {}
+    // }
+    //
+    // const newQueryChips = parseSearchQuery(found.query || '')
+    // const params = assign({}, this.props.params, found)
+    // if (selectedSearch.dateLabel) {
+    //   const dateRange = getRanges()[selectedSearch.dateLabel]
+    //   if (dateRange) {
+    //     params.dateFrom = dateRange[0].format(dateFormat)
+    //     params.dateTo = dateRange[1].format(dateFormat)
+    //   }
+    // }
+    //
+    // const workflowIds = params.workflow.split(',')
+    // const workflows = this.props.workflows.filter(p => workflowIds.indexOf(p.id) >= 0)
+    // params.workflow = workflows.map(p => p.id).join(',')
+    // const tags = params.tag.split(',').filter(p => !!p)
+    //
+    // this.props.updateSearchParams(params, this.props.history)
+    // this.props.updateQueryChips(newQueryChips)
+    // this.props.updateSearchViewFilter(selectedSearch.viewFilter || '')
+    // this.props.resetViewCols(selectedSearch.viewCols || [])
+    // this.props.replaceSearchWfs(workflows)
+    // this.props.updateSearchTags(tags)
+    // this.props.change('query', '')
 
     this.props.closeSearchSavePopover()
   }
@@ -413,10 +413,6 @@ class GenericSearch extends React.Component {
   onClickSelectWorkflow () {
     const {selectedRowWf, formValues} = this.props
     if (!selectedRowWf) return
-    // this.props.addSearchWf(this.props.selectedRowWf)
-    // this.props.updateSearchParams(assign({}, this.props.params, {
-    //   workflow: concat([], this.props.selectedWfs, this.props.selectedRowWf).map(m => m.id).join(',')
-    // }), this.props.history)
     const {workflowIds} = this.getParams()
     if (!workflowIds.includes(selectedRowWf.id)) {
       const newQuery = modifyArrayValues(formValues.query, 'workflowids', [...workflowIds, selectedRowWf.id])
@@ -799,7 +795,7 @@ class GenericSearch extends React.Component {
     const ret = {
       severity: getArrayValues(parsed, 'severity'),
       monitorTypes: getArrayValues(parsed, 'monitortype'),
-      workflowIds: getArrayValues(parsed, 'workflowids'),
+      workflowNames: getArrayValues(parsed, 'workflows'),
       tags: getArrayValues(parsed, 'tags'),
       monitorId: getFieldValue(parsed, 'monitorid'),
       from,
@@ -810,13 +806,19 @@ class GenericSearch extends React.Component {
   }
 
   getServiceParams () {
-    const { queryParams } = this.props
-    const { from, to } = this.getParams()
+    const { queryParams, workflows } = this.props
+    const { from, to, workflowNames } = this.getParams()
     const parsed = this.parse(queryParams.q)
 
     removeField(findField(parsed, 'from'))
     removeField(findField(parsed, 'to'))
     const q = queryToString(parsed)
+
+    const workflowIds = []
+    workflowNames.forEach(name => {
+      const index = findIndex(workflows, {name})
+      if (index >= 0) workflowIds.push(workflows[index].name)
+    })
 
     return {
       ...queryParams,
