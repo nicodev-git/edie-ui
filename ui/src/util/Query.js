@@ -202,7 +202,7 @@ export function modifyArrayValues (query, field, values, operator = 'OR') {
   return newQuery
 }
 
-export function modifyFieldValue (query, field, value) {
+export function modifyFieldValue (query, field, value, quote) {
   let parsed
   try {
     parsed = QueryParser.parse(query)
@@ -220,7 +220,7 @@ export function modifyFieldValue (query, field, value) {
       removeField(found)
     newQuery = queryToString(parsed)
   } else if (value !== null) {
-    const el = `(${field}:${value})`
+    const el = `(${field}:${quote ? '"' : ''}${value}${quote ? '"' : ''})`
     if (newQuery && el) newQuery = `${newQuery} AND `
     newQuery = `${newQuery}${el}`
   }

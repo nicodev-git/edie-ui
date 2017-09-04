@@ -558,24 +558,24 @@ class GenericSearch extends React.Component {
     collapseSearchFields(!searchFieldsVisible)
   }
 
-  onChangeMonitorId (value) {
+  onChangeMonitorId (monitor) {
     const {formValues} = this.props
-    const newQuery = modifyFieldValue(formValues.query, 'monitorid', value)
+    const newQuery = modifyFieldValue(formValues.query, 'monitor', monitor.name, true)
     this.updateQuery(newQuery)
     this.props.showSearchMonitorModal(false)
   }
 
-  getMonitorName(monitorId) {
+  getMonitorId(monitorName) {
     const {allDevices} = this.props
-    let name = ''
+    let uid = ''
     allDevices.forEach(p => {
-      const index = findIndex(p.monitors, {uid: monitorId})
+      const index = findIndex(p.monitors, {name: monitorName})
       if (index >= 0) {
-        name = `${p.name} - ${p.monitors[index].name}`
+        uid = p.monitors[index].uid
         return false
       }
     })
-    return name
+    return uid
   }
 
   onClickSearchMonitor () {
@@ -797,7 +797,7 @@ class GenericSearch extends React.Component {
       monitorTypes: getArrayValues(parsed, 'monitortype'),
       workflowNames: getArrayValues(parsed, 'workflows'),
       tags: getArrayValues(parsed, 'tags'),
-      monitorId: getFieldValue(parsed, 'monitorid'),
+      monitorName: getFieldValue(parsed, 'monitor'),
       from,
       to
     }
@@ -807,12 +807,13 @@ class GenericSearch extends React.Component {
 
   getServiceParams () {
     const { queryParams, workflows } = this.props
-    const { from, to, workflowNames } = this.getParams()
+    const { from, to, workflowNames, monitorName } = this.getParams()
     const parsed = this.parse(queryParams.q)
 
     removeField(findField(parsed, 'from'))
     removeField(findField(parsed, 'to'))
     removeField(findField(parsed, 'workflows'))
+    removeField(findField(parsed, 'monitor'))
 
     const qs = []
     const q = queryToString(parsed)
@@ -828,6 +829,12 @@ class GenericSearch extends React.Component {
       qs.push(`(workflowids:${workflowIds.join(' OR ')})`)
     }
 
+    //Monitor
+    if (monitorName) {
+      const uid = this.getMonitorId(monitorName)
+      if (uid) qs.push(`(monitorid:${uid})`)
+    }
+
     return {
       ...queryParams,
       q: qs.join(' AND '),
@@ -838,7 +845,7 @@ class GenericSearch extends React.Component {
 
   render () {
     const { handleSubmit, monitorTemplates, searchTags, queryChips, selectedWfs, queryParams } = this.props
-    const { severity, monitorTypes, monitorId, from, to } = this.getParams()
+    const { severity, monitorTypes, monitorName, from, to } = this.getParams()
 
     return (
       <TabPage>
@@ -875,7 +882,7 @@ class GenericSearch extends React.Component {
             onClickClear={this.onClickClearSearch.bind(this)}
             onClickToggleFields={this.onClickToggleFields.bind(this)}
 
-            searchMonitor={this.getMonitorName(monitorId) || 'Any'}
+            searchMonitor={monitorName || 'Any'}
             onClickSearchMonitor={this.onClickSearchMonitor.bind(this)}
           />
 

@@ -14,8 +14,8 @@ export default class SearchMonitorModalView extends React.Component {
               {allDevices.map(device => (device.monitors || []).map(monitor =>
                 <tr
                   key={monitor.uid}
-                  onClick={() => onClickRow(monitor.uid)}
-                  className={selected === monitor.uid ? 'selected' : ''}
+                  onClick={() => onClickRow(monitor)}
+                  className={selected && selected.uid === monitor.uid ? 'selected' : ''}
                 >
                   <td>{`${device.name} - ${monitor.name}`}</td>
                 </tr>
