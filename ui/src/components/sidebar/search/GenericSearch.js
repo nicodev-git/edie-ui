@@ -456,8 +456,8 @@ class GenericSearch extends React.Component {
   onChangeDateRange ({startDate, endDate}) {
     const {formValues} = this.props
 
-    let newQuery = modifyFieldValue(formValues.query, 'from', startDate.format(queryDateFormat))
-    newQuery = modifyFieldValue(newQuery, 'to', endDate.format(queryDateFormat))
+    let newQuery = modifyFieldValue(formValues.query, 'from', `"${startDate.format(queryDateFormat)}"`)
+    newQuery = modifyFieldValue(newQuery, 'to', `"${endDate.format(queryDateFormat)}"`)
     this.updateQuery(newQuery)
   }
 
@@ -790,7 +790,7 @@ class GenericSearch extends React.Component {
     const dateToStr = getFieldValue(parsed, 'to')
 
     const from = dateFromStr ? moment(dateFromStr, queryDateFormat).valueOf() : moment().startOf('year').valueOf()
-    const to = dateToStr ? moment(dateToStr, queryDateFormat).valueOf() : moment().endOf('day').valueOf()
+    const to = dateToStr ? moment(dateToStr, queryDateFormat).valueOf() : moment().endOf('year').valueOf()
 
     const ret = {
       severity: getArrayValues(parsed, 'severity'),
