@@ -549,14 +549,15 @@ class GenericSearch extends React.Component {
     updateSearchViewFilter(null)
     resetViewCols()
 
-    const q = '(severity:HIGH OR MEDIUM)'
+    const q = [
+      '(type:all)',
+      '(severity:HIGH OR MEDIUM)',
+      `(from:Yesterday)`
+    ].join(' AND ')
     this.props.updateQueryParams({
       ...this.props.queryParams,
       draw: 1,
-      q,
-      from: moment().add(-1, 'days').startOf('day').valueOf(),
-      to: moment().endOf('day').valueOf(),
-      types: ['incident', 'event']
+      q
     }, this.props.history)
 
     this.props.change('query', q)
