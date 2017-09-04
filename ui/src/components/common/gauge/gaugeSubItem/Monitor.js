@@ -34,7 +34,7 @@ export default class Monitor extends React.Component {
             </SelectField>          
         </div>
         <div className="col-md-12">
-            <div style={{height:'350', overflow: 'auto', border: '1px solid gray', textAlign:'center'}}>
+            <div style={{height: 350, overflow: 'auto', border: '1px solid gray', textAlign:'center'}}>
                 <table className={`table table-hover `}>
                 <tbody>
                 <tr>
