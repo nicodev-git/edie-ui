@@ -22,7 +22,7 @@ export default class SearchFormView extends React.Component {
     )
   }
   severityRenderer (severities, values) {
-    if (!values.length || values.length === severities.length) return 'All'
+    if (/*!values.length ||*/ values.length === severities.length) return 'All'
     return values.map(value => {
       const i = findIndex(severities, {value})
       return severities[i].label

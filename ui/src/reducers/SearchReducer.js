@@ -77,11 +77,11 @@ const initialState = {
   queryParams: {
     draw: 1,
     q: [
+      '(type:incident OR event)',
       '(severity:HIGH OR MEDIUM)',
       `(from:"${moment().add(-1, 'days').startOf('day').format(queryDateFormat)}")`,
       `(to:"${moment().endOf('day').format(queryDateFormat)}")`
-    ].join(' AND '),
-    types: ['incident', 'event']
+    ].join(' AND ')
   },
   incidentParams: {
     severity: ['HIGH', 'MEDIUM'],

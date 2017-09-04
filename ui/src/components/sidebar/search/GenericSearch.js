@@ -798,6 +798,7 @@ class GenericSearch extends React.Component {
       workflowNames: getArrayValues(parsed, 'workflows'),
       tags: getArrayValues(parsed, 'tags'),
       monitorName: getFieldValue(parsed, 'monitor'),
+      types: getArrayValues(parsed, 'type', ['incident', 'event']),
       from,
       to
     }
@@ -807,13 +808,14 @@ class GenericSearch extends React.Component {
 
   getServiceParams () {
     const { queryParams, workflows } = this.props
-    const { from, to, workflowNames, monitorName } = this.getParams()
+    const { from, to, workflowNames, monitorName, types } = this.getParams()
     const parsed = this.parse(queryParams.q)
 
     removeField(findField(parsed, 'from'))
     removeField(findField(parsed, 'to'))
     removeField(findField(parsed, 'workflows'))
     removeField(findField(parsed, 'monitor'))
+    removeField(findField(parsed, 'type'))
 
     const qs = []
     const q = queryToString(parsed)
@@ -839,13 +841,14 @@ class GenericSearch extends React.Component {
       ...queryParams,
       q: qs.join(' AND '),
       from,
-      to
+      to,
+      types
     }
   }
 
   render () {
     const { handleSubmit, monitorTemplates, searchTags, queryChips, selectedWfs, queryParams } = this.props
-    const { severity, monitorTypes, monitorName, from, to } = this.getParams()
+    const { severity, monitorTypes, monitorName, from, to, types } = this.getParams()
 
     return (
       <TabPage>
@@ -853,7 +856,7 @@ class GenericSearch extends React.Component {
           <SearchFormView
             onSearchKeyDown={this.onSearchKeyDown.bind(this)}
             onClickStar={this.onClickStar.bind(this)}
-            collections={collections}
+            collections={types}
             selectedCollections={queryParams.types}
             onChangeCollection={this.onChangeCollection.bind(this)}
             onClickWorkflow={this.onClickWorkflow.bind(this)}

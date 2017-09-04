@@ -228,9 +228,9 @@ export function modifyFieldValue (query, field, value, quote) {
   return newQuery
 }
 
-export function getArrayValues (parsed, field) {
+export function getArrayValues (parsed, field, def) {
   const values = []
-  if (!parsed) return values
+  if (!parsed) return def ? def : values
   let found = findField(parsed, field)
   if (found) {
     found = found.parent[0].field
@@ -241,7 +241,7 @@ export function getArrayValues (parsed, field) {
     }
   }
 
-  return values
+  return values.length || !def ? values : def
 }
 
 export function getFieldValue (parsed, field) {
