@@ -75,7 +75,7 @@ const initialState = {
   queryParams: {
     draw: 1,
     q: [
-      '(type:incident OR event)',
+      '(type:all)',
       '(severity:HIGH OR MEDIUM)',
       `(from:Yesterday)`
     ].join(' AND ')
