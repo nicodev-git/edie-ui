@@ -13,7 +13,7 @@ import InfiniteTable from 'components/common/InfiniteTable'
 import TabPage from 'components/common/TabPage'
 import TabPageBody from 'components/common/TabPageBody'
 import TabPageHeader from 'components/common/TabPageHeader'
-import { parseSearchQuery, guid, dateFormat, collections, severities, viewFilters, queryDateFormat } from 'shared/Global'
+import { guid, collections, severities, viewFilters, queryDateFormat } from 'shared/Global'
 import {renderEntity} from 'components/common/CellRenderers'
 import {chipStyles} from 'style/common/materialStyles'
 import {getRanges, getRangeLabel} from 'components/common/DateRangePicker'
@@ -413,9 +413,9 @@ class GenericSearch extends React.Component {
   onClickSelectWorkflow () {
     const {selectedRowWf, formValues} = this.props
     if (!selectedRowWf) return
-    const {workflowIds} = this.getParams()
-    if (!workflowIds.includes(selectedRowWf.id)) {
-      const newQuery = modifyArrayValues(formValues.query, 'workflowids', [...workflowIds, selectedRowWf.id])
+    const {workflowNames} = this.getParams()
+    if (!workflowNames.includes(selectedRowWf.name)) {
+      const newQuery = modifyArrayValues(formValues.query, 'workflows', [...workflowNames, selectedRowWf.name].map(p => `"${p}"`))
       this.updateQuery(newQuery)
     }
 
@@ -812,17 +812,25 @@ class GenericSearch extends React.Component {
 
     removeField(findField(parsed, 'from'))
     removeField(findField(parsed, 'to'))
-    const q = queryToString(parsed)
+    removeField(findField(parsed, 'workflows'))
 
+    const qs = []
+    const q = queryToString(parsed)
+    if (q) qs.push(q)
+
+    //Workflow
     const workflowIds = []
     workflowNames.forEach(name => {
       const index = findIndex(workflows, {name})
-      if (index >= 0) workflowIds.push(workflows[index].name)
+      if (index >= 0) workflowIds.push(workflows[index].id)
     })
+    if (workflowIds.length) {
+      qs.push(`(workflowids:${workflowIds.join(' OR ')})`)
+    }
 
     return {
       ...queryParams,
-      q,
+      q: qs.join(' AND '),
       from,
       to
     }
