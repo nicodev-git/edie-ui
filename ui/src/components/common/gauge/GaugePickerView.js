@@ -54,6 +54,14 @@ export default class GaugePickerView extends React.Component {
         />
       );
         break;
+     default:
+        subPage = (
+          <Dashboard
+            gauges={gauges}
+            onClickMenuItem={this.props.onClickMenuItem}
+          />
+        );
+        break;
     }
     return (
       <Modal title="Gauge" onRequestClose={onHide} contentStyle={{width: 1058 + sidebarWidth, maxWidth: 'initial'}}>

@@ -1,5 +1,5 @@
 import React from 'react';
-import {TextField, SelectField, MenuItem, RaisedButton, Checkbox} from 'material-ui'
+import { SelectField, MenuItem } from 'material-ui'
 
 export default class Monitor extends React.Component {
     constructor() {
@@ -16,7 +16,7 @@ export default class Monitor extends React.Component {
         const { devices } = this.props        
         const { selectedItem } = this.state;  
         let monitorNames = [];
-        selectedItem && selectedItem.monitors && selectedItem.monitors.map((monitor, index) => {
+        selectedItem && selectedItem.monitors && selectedItem.monitors.forEach((monitor, index) => {
             monitorNames.push(<tr key={index}><td >{monitor.name}</td></tr>)
         }) 
         return (
