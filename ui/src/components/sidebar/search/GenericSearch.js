@@ -826,28 +826,27 @@ class GenericSearch extends React.Component {
       workflowNames: getArrayValues(parsed, 'workflows'),
       tags: getArrayValues(parsed, 'tags'),
       monitorName: getFieldValue(parsed, 'monitor'),
-      types: getArrayValues(parsed, 'type', ['incident', 'event']),
+      types: getArrayValues(parsed, 'type', collections.map(p => p.value)),
       ...dateRange
     }
+
+    if (ret.types.length === 1 && ret.types[0].toLowerCase() === 'all') ret.types = collections.map(p => p.value)
+    if (ret.severity.length === 1 && ret.severity[0].toLowerCase() === 'all') ret.severity = severities.map(p => p.value)
 
     return ret
   }
 
   getServiceParams () {
     const { queryParams, workflows } = this.props
-    const { from, to, workflowNames, monitorName, types } = this.getParams()
+    const { from, to, workflowNames, monitorName, types, severity } = this.getParams()
     const parsed = this.parse(queryParams.q)
 
-    const typeField = findField(parsed, 'type')
-
-    removeField(findField(parsed, 'from'))
-    removeField(findField(parsed, 'to'))
-    removeField(findField(parsed, 'workflows'))
+    removeField(findField(parsed, 'workflows'), true)
     removeField(findField(parsed, 'monitor'))
-    if (typeField) {
-      removeField({parent: typeField.parent.slice(1)})
-    }
-
+    removeField(findField(parsed, 'to'))
+    removeField(findField(parsed, 'from'))
+    removeField(findField(parsed, 'severity'), true)
+    removeField(findField(parsed, 'type'), true)
 
     const qs = []
     const q = queryToString(parsed)
@@ -868,6 +867,10 @@ class GenericSearch extends React.Component {
       const uid = this.getMonitorId(monitorName)
       if (uid) qs.push(`(monitorid:${uid})`)
     }
+
+    //Severity
+    if (severity.length)
+      qs.push(`(severity:${severity.join(' OR ')})`)
 
     return {
       ...queryParams,
