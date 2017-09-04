@@ -139,8 +139,13 @@ function clearObject(object) {
   for (const member in object) delete object[member]
 }
 
-export function removeField(found) {
+export function removeField(found, startParent) {
   if (!found) return
+
+  if (startParent) {
+    return removeField({parent: found.parent.slice(1)})
+  }
+
   let parentIndex = 0
   while (parentIndex < found.parent.length) {
     const item = found.parent[parentIndex]
@@ -152,7 +157,9 @@ export function removeField(found) {
         delete itemfield.operator
         break
       } else {
-
+        if (parentIndex === found.parent.length - 1) {
+          clearObject(itemfield)
+        }
       }
     } else {
       delete itemfield.right
@@ -214,9 +221,10 @@ export function modifyFieldValue (query, field, value, quote) {
   let newQuery = query
   const found = findField(parsed, field)
   if (found) {
-    if (value)
+    if (value){
       found.field.term = value
-    else
+      found.field.quoted = !!quote
+    } else
       removeField(found)
     newQuery = queryToString(parsed)
   } else if (value !== null) {

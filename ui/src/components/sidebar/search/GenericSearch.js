@@ -455,8 +455,18 @@ class GenericSearch extends React.Component {
   onChangeDateRange ({startDate, endDate}) {
     const {formValues} = this.props
 
-    let newQuery = modifyFieldValue(formValues.query, 'from', startDate.format(queryDateFormat), true)
-    newQuery = modifyFieldValue(newQuery, 'to', endDate.format(queryDateFormat), true)
+    const dateLabel = getRangeLabel(getRanges(), startDate, endDate, true)
+
+    let newQuery
+    if (dateLabel.label) {
+      newQuery = modifyFieldValue(formValues.query, 'from', dateLabel.label, dateLabel.label.indexOf(' ') >= 0)
+      const parsed = this.parse(newQuery)
+      removeField(findField(parsed, 'to'))
+      newQuery = queryToString(parsed)
+    } else {
+      newQuery = modifyFieldValue(formValues.query, 'from', startDate.format(queryDateFormat), true)
+      newQuery = modifyFieldValue(newQuery, 'to', endDate.format(queryDateFormat), true)
+    }
     this.updateQuery(newQuery)
   }
 
@@ -781,15 +791,34 @@ class GenericSearch extends React.Component {
     )
   }
 
+  parseDateRange (parsed) {
+    const dateFromStr = getFieldValue(parsed, 'from')
+    const dateToStr = getFieldValue(parsed, 'to')
+
+    const ranges = getRanges()
+    const value = ranges[dateFromStr]
+    if (value) {
+      return {
+        from: value[0].valueOf(),
+        to: value[1].valueOf()
+      }
+    } else {
+      const from = dateFromStr ? moment(dateFromStr, queryDateFormat).valueOf() : moment().startOf('year').valueOf()
+      const to = dateToStr ? moment(dateToStr, queryDateFormat).valueOf() : moment().endOf('year').valueOf()
+
+      return {
+        from, to
+      }
+    }
+
+
+  }
+
   getParams () {
     const {queryParams} = this.props
     const parsed = this.parse(queryParams.q)
 
-    const dateFromStr = getFieldValue(parsed, 'from')
-    const dateToStr = getFieldValue(parsed, 'to')
-
-    const from = dateFromStr ? moment(dateFromStr, queryDateFormat).valueOf() : moment().startOf('year').valueOf()
-    const to = dateToStr ? moment(dateToStr, queryDateFormat).valueOf() : moment().endOf('year').valueOf()
+    const dateRange = this.parseDateRange(parsed)
 
     const ret = {
       severity: getArrayValues(parsed, 'severity'),
@@ -797,29 +826,27 @@ class GenericSearch extends React.Component {
       workflowNames: getArrayValues(parsed, 'workflows'),
       tags: getArrayValues(parsed, 'tags'),
       monitorName: getFieldValue(parsed, 'monitor'),
-      types: getArrayValues(parsed, 'type', ['incident', 'event']),
-      from,
-      to
+      types: getArrayValues(parsed, 'type', collections.map(p => p.value)),
+      ...dateRange
     }
+
+    if (ret.types.length === 1 && ret.types[0].toLowerCase() === 'all') ret.types = collections.map(p => p.value)
+    if (ret.severity.length === 1 && ret.severity[0].toLowerCase() === 'all') ret.severity = severities.map(p => p.value)
 
     return ret
   }
 
   getServiceParams () {
     const { queryParams, workflows } = this.props
-    const { from, to, workflowNames, monitorName, types } = this.getParams()
+    const { from, to, workflowNames, monitorName, types, severity } = this.getParams()
     const parsed = this.parse(queryParams.q)
 
-    const typeField = findField(parsed, 'type')
-
-    removeField(findField(parsed, 'from'))
-    removeField(findField(parsed, 'to'))
-    removeField(findField(parsed, 'workflows'))
+    removeField(findField(parsed, 'workflows'), true)
     removeField(findField(parsed, 'monitor'))
-    if (typeField) {
-      removeField({parent: typeField.parent.slice(1)})
-    }
-
+    removeField(findField(parsed, 'to'))
+    removeField(findField(parsed, 'from'))
+    removeField(findField(parsed, 'severity'), true)
+    removeField(findField(parsed, 'type'), true)
 
     const qs = []
     const q = queryToString(parsed)
@@ -840,6 +867,10 @@ class GenericSearch extends React.Component {
       const uid = this.getMonitorId(monitorName)
       if (uid) qs.push(`(monitorid:${uid})`)
     }
+
+    //Severity
+    if (severity.length)
+      qs.push(`(severity:${severity.join(' OR ')})`)
 
     return {
       ...queryParams,

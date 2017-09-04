@@ -68,8 +68,6 @@ import {
 } from 'actions/types'
 import { concat } from 'lodash'
 
-import {queryDateFormat} from 'shared/Global'
-
 const initialState = {
   incidents: [],
   incidentDevices: [],
@@ -77,10 +75,9 @@ const initialState = {
   queryParams: {
     draw: 1,
     q: [
-      '(type:incident OR event)',
+      '(type:all)',
       '(severity:HIGH OR MEDIUM)',
-      `(from:"${moment().add(-1, 'days').startOf('day').format(queryDateFormat)}")`,
-      `(to:"${moment().endOf('day').format(queryDateFormat)}")`
+      `(from:Yesterday)`
     ].join(' AND ')
   },
   incidentParams: {
