@@ -1,7 +1,5 @@
 import React from 'react';
 import AppletCard from '../../AppletCard';
-import { Modal } from '../../../../components/modal/parts';
-
 import { extImageBaseUrl, appletColors as colors } from '../../../../shared/Global';
 
 export default class Dashboard extends React.Component {
