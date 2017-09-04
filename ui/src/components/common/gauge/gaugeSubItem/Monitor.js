@@ -13,21 +13,28 @@ export default class Monitor extends React.Component {
         this.setState({selectedItem: payload});
     }   
     render() {
-        const {devices} = this.props        
-        const { selectedItem } = this.state;
+        const { devices } = this.props        
+        const { selectedItem } = this.state;  
+        let monitorNames = [];
+        selectedItem && selectedItem.monitors.map((monitor, index) => {
+            monitorNames.push(<div key={index}>{monitor.name}</div>)
+        }) 
         return (
          <div className="tabs-custom flex-vertical flex-1">
          <div className="padding-lg-left">
-          <SelectField
-            floatingLabelText="Devices" 
-            value={selectedItem} 
-            className="valign-top"
-            onChange={this.onChange}
-          >
-            {(devices || []).map(p =>
-              <MenuItem key={p.id} value={p.id} primaryText={p.name}/>
-            )}
-          </SelectField>          
+            <SelectField
+                floatingLabelText="Devices" 
+                value={selectedItem} 
+                className="valign-top"
+                onChange={this.onChange}
+            >
+                {(devices || []).map(p =>
+                <MenuItem key={p.id} value={p} primaryText={p.name}/>
+                )}
+            </SelectField>          
+        </div>
+        <div>
+        {monitorNames}       
         </div>
       </div>
         );

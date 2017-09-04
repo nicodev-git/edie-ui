@@ -42,16 +42,17 @@ export default class GaugePickerView extends React.Component {
       subPage = (
         <Monitor
           gauges={gauges}
-          onClickMenuItem={this.props.onClickMenuItem}
           devices={this.props.devices}
+          selectedDevice={this.props.selectedDevice}
+          selectedMonitor={this.props.selectedMonitor}
+          onSelectDevice={this.props.onSelectDevice}
         />
       );
         break;
       case 'device':
       subPage = (
         <Device
-          gauges={gauges}
-          onClickMenuItem={this.props.onClickMenuItem}
+          gauges={gauges}          
           devices={this.props.devices}
         />
       );

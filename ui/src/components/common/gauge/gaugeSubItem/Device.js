@@ -14,7 +14,7 @@ export default class Device extends React.Component {
           <table className={`table table-hover ${tableClass}`}>
             <tbody>
             <tr>
-              <td style={{textAlign:'center'}}><b>Device</b></td>
+              <td style={{textAlign:'center'}}><b>Devices</b></td>
             </tr>
             {(devices || []).map((p, i) =>
               <tr key={p.id}>
