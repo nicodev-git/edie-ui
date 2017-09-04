@@ -456,7 +456,7 @@ class GenericSearch extends React.Component {
     const {formValues} = this.props
 
     let newQuery = modifyFieldValue(formValues.query, 'from', startDate.format(queryDateFormat), true)
-    newQuery = modifyFieldValue(newQuery, 'to', endDate.format(queryDateFormat), true)
+    // newQuery = modifyFieldValue(newQuery, 'to', endDate.format(queryDateFormat), true)
     this.updateQuery(newQuery)
   }
 
@@ -781,15 +781,23 @@ class GenericSearch extends React.Component {
     )
   }
 
-  getParams () {
-    const {queryParams} = this.props
-    const parsed = this.parse(queryParams.q)
-
+  parseDateRange (parsed) {
     const dateFromStr = getFieldValue(parsed, 'from')
     const dateToStr = getFieldValue(parsed, 'to')
 
     const from = dateFromStr ? moment(dateFromStr, queryDateFormat).valueOf() : moment().startOf('year').valueOf()
     const to = dateToStr ? moment(dateToStr, queryDateFormat).valueOf() : moment().endOf('year').valueOf()
+
+    return {
+      from, to
+    }
+  }
+
+  getParams () {
+    const {queryParams} = this.props
+    const parsed = this.parse(queryParams.q)
+
+    const dateRange = this.parseDateRange(parsed)
 
     const ret = {
       severity: getArrayValues(parsed, 'severity'),
@@ -798,8 +806,7 @@ class GenericSearch extends React.Component {
       tags: getArrayValues(parsed, 'tags'),
       monitorName: getFieldValue(parsed, 'monitor'),
       types: getArrayValues(parsed, 'type', ['incident', 'event']),
-      from,
-      to
+      ...dateRange
     }
 
     return ret
