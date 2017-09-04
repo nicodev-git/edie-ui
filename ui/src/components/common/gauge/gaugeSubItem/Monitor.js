@@ -21,31 +21,31 @@ export default class Monitor extends React.Component {
         }) 
         return (
          <div className="tabs-custom flex-vertical flex-1">
-         <div className="padding-lg-left">
-            <SelectField
-                floatingLabelText="Devices" 
-                value={selectedItem} 
-                className="valign-top"
-                onChange={this.onChange}
-            >
-                {(devices || []).map(p =>
-                <MenuItem key={p.id} value={p} primaryText={p.name}/>
-                )}
-            </SelectField>          
-        </div>
-        <div className="col-md-12">
-            <div style={{height: 350, overflow: 'auto', border: '1px solid gray', textAlign:'center'}}>
-                <table className={`table table-hover `}>
-                <tbody>
-                <tr>
-                    <td style={{ textAlign:'center'}}><b>Monitors</b></td>
-                </tr>           
-                    {monitorNames}
-                </tbody>
-                </table>
+            <div className="padding-lg-left">
+                <SelectField
+                    floatingLabelText="Devices" 
+                    value={selectedItem} 
+                    className="valign-top"
+                    onChange={this.onChange}
+                >
+                    {(devices || []).map(p =>
+                    <MenuItem key={p.id} value={p} primaryText={p.name}/>
+                    )}
+                </SelectField>          
             </div>
-        </div>
-      </div>
+            <div className="col-md-12">
+                <div style={{height: 350, overflow: 'auto', border: '1px solid gray', textAlign:'center'}}>
+                    <table className={`table table-hover `}>
+                    <tbody>
+                    <tr>
+                        <td style={{ textAlign:'center'}}><b>Monitors</b></td>
+                    </tr>           
+                        {monitorNames}
+                    </tbody>
+                    </table>
+                </div>
+            </div>
+         </div>
         );
     }
 }

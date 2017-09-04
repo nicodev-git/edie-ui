@@ -43,9 +43,6 @@ export default class GaugePickerView extends React.Component {
         <Monitor
           gauges={gauges}
           devices={this.props.devices}
-          selectedDevice={this.props.selectedDevice}
-          selectedMonitor={this.props.selectedMonitor}
-          onSelectDevice={this.props.onSelectDevice}
         />
       );
         break;

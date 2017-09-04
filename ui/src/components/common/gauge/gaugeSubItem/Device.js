@@ -3,9 +3,7 @@ import React from 'react';
 export default class Device extends React.Component {   
     
     render() {
-        const {devices, selectedServers, selectedDevice, selectedRight, selectedMonitor,
-            onSelectDevice, onSelectRight, onSelectMonitor, onClickAddServer, onClickRemoveServer,
-            tableClass, height
+        const { devices, selectedDevice, tableClass, height
           } = this.props
         return ( <div className="padding-md-left padding-md-right">
         <div className="row">
