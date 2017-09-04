@@ -455,8 +455,18 @@ class GenericSearch extends React.Component {
   onChangeDateRange ({startDate, endDate}) {
     const {formValues} = this.props
 
-    let newQuery = modifyFieldValue(formValues.query, 'from', startDate.format(queryDateFormat), true)
-    // newQuery = modifyFieldValue(newQuery, 'to', endDate.format(queryDateFormat), true)
+    const dateLabel = getRangeLabel(getRanges(), startDate, endDate, true)
+
+    let newQuery
+    if (dateLabel.label) {
+      newQuery = modifyFieldValue(formValues.query, 'from', dateLabel.label, dateLabel.label.indexOf(' ') >= 0)
+      const parsed = this.parse(newQuery)
+      removeField(findField(parsed, 'to'))
+      newQuery = queryToString(parsed)
+    } else {
+      newQuery = modifyFieldValue(formValues.query, 'from', startDate.format(queryDateFormat), true)
+      newQuery = modifyFieldValue(newQuery, 'to', endDate.format(queryDateFormat), true)
+    }
     this.updateQuery(newQuery)
   }
 
@@ -785,12 +795,23 @@ class GenericSearch extends React.Component {
     const dateFromStr = getFieldValue(parsed, 'from')
     const dateToStr = getFieldValue(parsed, 'to')
 
-    const from = dateFromStr ? moment(dateFromStr, queryDateFormat).valueOf() : moment().startOf('year').valueOf()
-    const to = dateToStr ? moment(dateToStr, queryDateFormat).valueOf() : moment().endOf('year').valueOf()
+    const ranges = getRanges()
+    const value = ranges[dateFromStr]
+    if (value) {
+      return {
+        from: value[0].valueOf(),
+        to: value[1].valueOf()
+      }
+    } else {
+      const from = dateFromStr ? moment(dateFromStr, queryDateFormat).valueOf() : moment().startOf('year').valueOf()
+      const to = dateToStr ? moment(dateToStr, queryDateFormat).valueOf() : moment().endOf('year').valueOf()
 
-    return {
-      from, to
+      return {
+        from, to
+      }
     }
+
+
   }
 
   getParams () {
