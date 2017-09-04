@@ -17,7 +17,7 @@ export default class Monitor extends React.Component {
         const { selectedItem } = this.state;  
         let monitorNames = [];
         selectedItem && selectedItem.monitors && selectedItem.monitors.map((monitor, index) => {
-            monitorNames.push(<tr><td key={index}>{monitor.name}</td></tr>)
+            monitorNames.push(<tr key={index}><td >{monitor.name}</td></tr>)
         }) 
         return (
          <div className="tabs-custom flex-vertical flex-1">
@@ -34,11 +34,11 @@ export default class Monitor extends React.Component {
             </SelectField>          
         </div>
         <div className="col-md-12">
-            <div style={{ overflow: 'auto', border: '1px solid gray'}}>
+            <div style={{height:'350', overflow: 'auto', border: '1px solid gray', textAlign:'center'}}>
                 <table className={`table table-hover `}>
                 <tbody>
                 <tr>
-                    <td><b>Monitors</b></td>
+                    <td style={{ textAlign:'center'}}><b>Monitors</b></td>
                 </tr>           
                     {monitorNames}
                 </tbody>
