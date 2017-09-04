@@ -157,7 +157,9 @@ export function removeField(found, startParent) {
         delete itemfield.operator
         break
       } else {
-
+        if (parentIndex === found.parent.length - 1) {
+          clearObject(itemfield)
+        }
       }
     } else {
       delete itemfield.right
