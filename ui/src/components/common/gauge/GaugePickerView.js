@@ -51,6 +51,7 @@ export default class GaugePickerView extends React.Component {
         <Device
           gauges={gauges}
           onClickMenuItem={this.props.onClickMenuItem}
+          devices={this.props.devices}
         />
       );
         break;
