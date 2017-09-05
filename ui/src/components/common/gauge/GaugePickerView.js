@@ -25,7 +25,6 @@ export default class GaugePickerView extends React.Component {
     })
   }
 
-
   render () {
     const {onHide, gauges} = this.props
     const {selectedSubItem} = this.state
@@ -36,6 +35,7 @@ export default class GaugePickerView extends React.Component {
           <Monitor
             gauges={gauges}
             devices={this.props.devices}
+            monitorTemplates={this.props.monitorTemplates}
           />
         )
         break

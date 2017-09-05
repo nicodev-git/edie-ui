@@ -44,6 +44,7 @@ export default connect(
   state => ({
     devices: state.devices.deviceAndGroups,
     monitorGroups: state.settings.monitorGroups,
+    monitorTemplates: state.settings.monitorTemplates,
 
     gauges: state.gauge.gauges,
     gaugeItems: state.gauge.gaugeItems,
