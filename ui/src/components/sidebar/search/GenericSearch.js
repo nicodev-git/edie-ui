@@ -363,7 +363,6 @@ class GenericSearch extends React.Component {
     }
 
     this.props.updateSearchViewFilter(selectedSearch.viewFilter || '')
-    this.props.updateSearchViewFilter(selectedSearch.viewFilter || '')
     this.props.resetViewCols(selectedSearch.viewCols || [])
     this.updateQuery(found.q || '(type:all)')
 
