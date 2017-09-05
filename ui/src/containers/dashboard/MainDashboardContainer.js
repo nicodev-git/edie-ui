@@ -39,6 +39,8 @@ import {
   openDevice,
   openDeviceMonitorWizard,
   closeDeviceMonitorWizard,
+  openDeviceMonitorPicker,
+  closeDeviceMonitorPicker,
   updateMapDevice
 } from 'actions'
 
@@ -73,6 +75,7 @@ export default connect(
     logViewParam: state.dashboard.logViewParam,
 
     selectedDevice: state.dashboard.selectedDevice,
+    monitorPickerVisible: state.devices.monitorPickerVisible,
     monitorWizardVisible: state.devices.monitorWizardVisible
   }), {
     fetchDevicesGroups,
@@ -110,6 +113,8 @@ export default connect(
     openDevice,
     openDeviceMonitorWizard,
     closeDeviceMonitorWizard,
+    openDeviceMonitorPicker,
+    closeDeviceMonitorPicker,
     updateMapDevice
   }
 )(withRouter(MainDashboardContainer))
