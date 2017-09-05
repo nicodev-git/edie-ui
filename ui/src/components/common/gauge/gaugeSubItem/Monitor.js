@@ -1,6 +1,7 @@
 import React from 'react'
-import {SelectField, MenuItem} from 'material-ui'
+import {SelectField, MenuItem, IconButton} from 'material-ui'
 import {findIndex, assign, concat} from 'lodash'
+import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
 
 import MonitorWizardContainer from 'containers/shared/wizard/MonitorWizardContainer'
 import AppletCard from 'components/common/AppletCard'
@@ -13,12 +14,19 @@ export default class Monitor extends React.Component {
   constructor () {
     super()
     this.state = {
-      device: null,
+      deviceId: null,
 
       editMonitor: null,
       monitorConfig: null
     }
     this.onChange = this.onChange.bind(this)
+  }
+  getDevice () {
+    const {deviceId} = this.state
+    const {devices} = this.props
+    const index = findIndex(devices, {id: deviceId})
+    if (index < 0) return null
+    return devices[index]
   }
   getMonitorImage (monitortype) {
     const {monitorTemplates} = this.props
@@ -28,7 +36,7 @@ export default class Monitor extends React.Component {
     return `${extImageBaseUrl}${monitorTemplates[index].image}`
   }
   onChange (event, key, payload) {
-    this.setState({device: payload})
+    this.setState({deviceId: payload})
   }
 
   onClickEditMonitor (selected) {
@@ -46,7 +54,7 @@ export default class Monitor extends React.Component {
 
   onFinishMonitorWizard (res, params) {
     let editMonitor = this.state.editMonitor
-    let device = assign({}, this.state.device)
+    let device = assign({}, this.getDevice())
     let monitor = assign({}, editMonitor, params)
 
     if (editMonitor) {
@@ -84,7 +92,8 @@ export default class Monitor extends React.Component {
   renderMonitorWizard () {
     if (!this.props.monitorWizardVisible) return null
 
-    const {monitorConfig, device} = this.state
+    const {monitorConfig} = this.state
+    const device = this.getDevice()
     const type = 'monitor-custom'
     return (
       <MonitorWizardContainer
@@ -97,9 +106,19 @@ export default class Monitor extends React.Component {
       />
     )
   }
+  renderAddMenu () {
+    return (
+      <div className="text-right" style={{position: 'absolute', top: -45, right: 0}}>
+        <IconButton onTouchTap={() => this.props.showGaugePicker(true)}>
+          <AddCircleIcon />
+        </IconButton>
+      </div>
+    )
+  }
   render () {
     const {devices} = this.props
-    const {device} = this.state
+    const {deviceId} = this.state
+    const device = this.getDevice()
     const monitors = device ? (device.monitors || []) : []
 
     return (
@@ -107,14 +126,15 @@ export default class Monitor extends React.Component {
         <div className="padding-lg-left">
           <SelectField
             floatingLabelText="Devices"
-            value={device}
+            value={deviceId}
             className="valign-top"
             onChange={this.onChange}
           >
             {(devices || []).map(p =>
-              <MenuItem key={p.id} value={p} primaryText={p.name}/>
+              <MenuItem key={p.id} value={p.id} primaryText={p.name}/>
             )}
           </SelectField>
+          {this.renderAddMenu()}
         </div>
         <div>
           <ul className="web-applet-cards">

@@ -365,24 +365,6 @@ export default class MainDashboardView extends React.Component {
         </IconButton>
       </div>
     )
-    // const {gauges} = this.props
-    // return (
-    //   <div className="text-right" style={{position: 'absolute', top: -45, right: 0}}>
-    //     <IconMenu
-    //       iconButtonElement={<IconButton><AddCircleIcon /></IconButton>}
-    //       anchorOrigin={{horizontal: 'left', vertical: 'top'}}
-    //       targetOrigin={{horizontal: 'left', vertical: 'top'}}
-    //     >
-    //       {gauges.map(p =>
-    //         <MenuItem
-    //           key={p.id} primaryText={p.name}
-    //           leftIcon={<img src={`${extImageBaseUrl}${p.image}`} alt="" width="24" height="24" style={{background: 'black'}}/>}
-    //           onTouchTap={this.onClickMenuItem.bind(this, p)}
-    //         />
-    //       )}
-    //     </IconMenu>
-    //   </div>
-    // )
   }
 
   renderGaugePicker () {
