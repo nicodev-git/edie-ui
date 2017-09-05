@@ -323,35 +323,18 @@ class GenericSearch extends React.Component {
 
   onClickStar (e) {
     this.props.showSavedSearch(true)
-    // const { userInfo, selectedSearchOption, change, removeSearchOption, openSearchSavePopover } = this.props
-    //
-    // const searchOptions = this.getSearchOptions()
-    // if (selectedSearchOption) {
-    //   const found = searchOptions.filter(i => i.id === selectedSearchOption)
-    //   if (userInfo && found.length) {
-    //     showConfirm('Click OK to remove.', (btn) => {
-    //       if (btn !== 'ok') return
-    //       change('searchOptionIndex', '')
-    //       removeSearchOption(userInfo,  found[0])
-    //     })
-    //   }
-    // } else {
-    //   openSearchSavePopover(null, e.target)
-    // }
   }
 
   onClickSaveSearch (values) {
-    const { userInfo, params, viewFilter, viewCols } = this.props
+    const { userInfo, queryParams, viewFilter, viewCols } = this.props
     if (!userInfo) return
 
-    const dateLabel = getRangeLabel(getRanges(), params.dateFrom, params.dateTo)
     const option = {
       id: guid(),
       name: values.name,
-      data: JSON.stringify(params),
+      data: JSON.stringify(queryParams),
       viewFilter,
-      viewCols,
-      dateLabel: dateLabel.label
+      viewCols
     }
 
     if (!values.searchId) {
@@ -363,45 +346,26 @@ class GenericSearch extends React.Component {
       if (index < 0) return
       this.props.updateSearchOption(userInfo, {
         ...options[index],
-        data: JSON.stringify(params),
+        data: JSON.stringify(queryParams),
         viewFilter,
-        viewCols,
-        dateLabel: dateLabel.label
+        viewCols
       })
     }
     this.props.closeSearchSavePopover()
   }
 
   onChangeSearchOption (selectedSearch) {
-    // let found
-    // try {
-    //   found = JSON.parse(selectedSearch.data)
-    // } catch (e) {
-    //   found = {}
-    // }
-    //
-    // const newQueryChips = parseSearchQuery(found.query || '')
-    // const params = assign({}, this.props.params, found)
-    // if (selectedSearch.dateLabel) {
-    //   const dateRange = getRanges()[selectedSearch.dateLabel]
-    //   if (dateRange) {
-    //     params.dateFrom = dateRange[0].format(dateFormat)
-    //     params.dateTo = dateRange[1].format(dateFormat)
-    //   }
-    // }
-    //
-    // const workflowIds = params.workflow.split(',')
-    // const workflows = this.props.workflows.filter(p => workflowIds.indexOf(p.id) >= 0)
-    // params.workflow = workflows.map(p => p.id).join(',')
-    // const tags = params.tag.split(',').filter(p => !!p)
-    //
-    // this.props.updateSearchParams(params, this.props.history)
-    // this.props.updateQueryChips(newQueryChips)
-    // this.props.updateSearchViewFilter(selectedSearch.viewFilter || '')
-    // this.props.resetViewCols(selectedSearch.viewCols || [])
-    // this.props.replaceSearchWfs(workflows)
-    // this.props.updateSearchTags(tags)
-    // this.props.change('query', '')
+    let found
+    try {
+      found = JSON.parse(selectedSearch.data)
+    } catch (e) {
+      found = {}
+    }
+
+    this.props.updateSearchViewFilter(selectedSearch.viewFilter || '')
+    this.props.updateSearchViewFilter(selectedSearch.viewFilter || '')
+    this.props.resetViewCols(selectedSearch.viewCols || [])
+    this.updateQuery(found.q || '(type:all)')
 
     this.props.closeSearchSavePopover()
   }
