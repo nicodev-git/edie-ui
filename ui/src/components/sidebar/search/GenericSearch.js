@@ -551,8 +551,7 @@ class GenericSearch extends React.Component {
 
     const q = [
       '(type:all)',
-      '(severity:HIGH OR MEDIUM)',
-      `(from:Yesterday)`
+      `(from:Ever)`
     ].join(' AND ')
     this.props.updateQueryParams({
       ...this.props.queryParams,
