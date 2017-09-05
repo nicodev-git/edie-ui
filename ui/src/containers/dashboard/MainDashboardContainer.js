@@ -71,6 +71,7 @@ export default connect(
 
     logViewParam: state.dashboard.logViewParam,
 
+    selectedDevice: state.dashboard.selectedDevice,
     monitorWizardVisible: state.devices.monitorWizardVisible
   }), {
     fetchDevicesGroups,

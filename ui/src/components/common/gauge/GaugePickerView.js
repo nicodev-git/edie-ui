@@ -55,7 +55,7 @@ export default class GaugePickerView extends React.Component {
     }
     return (
       <Modal title="Gauge" onRequestClose={onHide} contentStyle={{width: 998 + sidebarWidth, maxWidth: 'initial'}}>
-        <div style={{marginTop: 40, minHeight: 500}} className="flex-horizontal">
+        <div style={{marginTop: 40, minHeight: 800}} className="flex-horizontal">
           <div style={{width: sidebarWidth}}>
             <Drawer open width={sidebarWidth}
                     containerStyle={{...sidebarStyle, bottom: 0, top: 56, height: 'initial'}}>
