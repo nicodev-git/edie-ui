@@ -46,6 +46,7 @@ export default class Monitor extends React.Component {
 
   onClickAddMonitor () {
     if (!this.state.deviceId) return null
+    this.props.openDevice(this.getDevice())
     this.setState({ editMonitor: null }, () => {
       this.props.openDeviceMonitorPicker()
     })
