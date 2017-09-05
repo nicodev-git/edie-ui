@@ -1,10 +1,22 @@
 import React from 'react'
+import {SelectField, MenuItem} from 'material-ui'
 import { Modal } from 'components/modal/parts'
 
 import AppletCard from 'components/common/AppletCard'
 import { extImageBaseUrl, appletColors as colors } from 'shared/Global'
 
 export default class DeviceTplPicker extends React.Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      category: ''
+    }
+  }
+  onChangeCategory (e, index, value) {
+    this.setState({
+      category: value
+    })
+  }
   renderTpl (tpl, i) {
     return (
       <AppletCard
@@ -26,20 +38,27 @@ export default class DeviceTplPicker extends React.Component {
 
   getCategories () {
     const categories = []// this.props.deviceCategories
-    this.props.deviceTemplates.forEach(p => {
+    this.getTemplates().forEach(p => {
       if (categories.indexOf(p.devicetemplategroup) < 0) categories.push(p.devicetemplategroup)
     })
     categories.sort()
+    return categories
   }
 
   render () {
     const {onHide} = this.props
+    const {category} = this.state
 
     return (
       <Modal title="Devices" onRequestClose={onHide} contentStyle={{width: 996, maxWidth: 'initial'}}>
-
-        <ul className="web-applet-cards" style={{marginTop: 40}}>
-          {this.getTemplates().map(this.renderTpl.bind(this))}
+        <SelectField value={category} onChange={this.onChangeCategory.bind(this)}>
+          <MenuItem value="" primaryText="[All]"/>
+          {this.getCategories().map(p =>
+            <MenuItem key={p} value={p} primaryText={p}/>
+          )}
+        </SelectField>
+        <ul className="web-applet-cards">
+          {this.getTemplates().filter(p => !category || p.devicetemplategroup === category).map(this.renderTpl.bind(this))}
         </ul>
       </Modal>
     )
