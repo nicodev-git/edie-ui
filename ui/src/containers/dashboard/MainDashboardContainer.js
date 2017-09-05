@@ -8,6 +8,7 @@ import {
   fetchMonitorGroups,
   fetchSysSearchOptions,
   fetchWorkflows,
+  fetchMonitorTemplates,
 
   fetchGauges,
   addGaugeItem,
@@ -67,6 +68,7 @@ export default connect(
     fetchMonitorGroups,
     fetchSysSearchOptions,
     fetchWorkflows,
+    fetchMonitorTemplates,
 
     fetchGauges,
     addGaugeItem,

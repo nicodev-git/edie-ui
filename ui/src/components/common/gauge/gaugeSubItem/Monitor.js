@@ -16,9 +16,9 @@ export default class Monitor extends React.Component {
   getMonitorImage (monitortype) {
     const {monitorTemplates} = this.props
     const index = findIndex(monitorTemplates, {monitortype})
-    if (index < 0) return '/'
+    if (index < 0) return '/resources/images/dashboard/gauge.png'
 
-    // const {monitor}
+    return `${extImageBaseUrl}${monitorTemplates[index].image}`
   }
   onChange (event, key, payload) {
     this.setState({selectedItem: payload})
@@ -31,7 +31,7 @@ export default class Monitor extends React.Component {
         color={colors[i % colors.length]}
         name={tpl.monitortype}
         desc={tpl.name}
-        img={`${extImageBaseUrl}${tpl.image}`}
+        img={this.getMonitorImage(tpl.monitortype)}
         onClick={() => onClickMenuItem(tpl)}
       />
     )
