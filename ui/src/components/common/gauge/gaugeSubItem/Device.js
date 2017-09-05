@@ -39,7 +39,11 @@ export default class Device extends React.Component {
   renderDeviceTplPicker () {
     if (!this.props.deviceTplPickerOpen) return null
     return (
-      <DeviceTplPicker onClickItem={this.onClickDeviceTpl.bind(this)} onHide={() => this.props.showDeviceTplPicker(false)}/>
+      <DeviceTplPicker
+        onClickItem={this.onClickDeviceTpl.bind(this)}
+        onHide={() => this.props.showDeviceTplPicker(false)}
+        exclude={['SHAPES', 'GROUPS']}
+      />
     )
   }
   render() {

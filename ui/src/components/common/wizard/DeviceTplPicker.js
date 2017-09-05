@@ -18,12 +18,18 @@ export default class DeviceTplPicker extends React.Component {
     )
   }
 
+  getTemplates () {
+    const {exclude, deviceTemplates} = this.props
+    if (!exclude || !exclude.length) return deviceTemplates
+    return deviceTemplates.filter(p => !exclude.includes(p.devicetemplategroup))
+  }
   render () {
     const {onHide} = this.props
+
     return (
-      <Modal title="Devices" onRequestClose={onHide} contentStyle={{width: 1058, maxWidth: 'initial'}}>
+      <Modal title="Devices" onRequestClose={onHide} contentStyle={{width: 996, maxWidth: 'initial'}}>
         <ul className="web-applet-cards" style={{marginTop: 40}}>
-          {this.props.deviceTemplates.map(this.renderTpl.bind(this))}
+          {this.getTemplates().map(this.renderTpl.bind(this))}
         </ul>
       </Modal>
     )
