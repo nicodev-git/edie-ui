@@ -74,7 +74,7 @@ export default class GaugeWizardView extends React.Component {
     const {formValues} = this.props
     if (formValues.resource !== 'incident') return null
     return (
-      <GaugeWorkflowPicker {...this.props}/>
+      <GaugeWorkflowPicker {...this.props} className="margin-md-top"/>
     )
   }
   renderLogicalGroup () {
@@ -98,7 +98,7 @@ export default class GaugeWizardView extends React.Component {
     const {templateName} = this.props
     if (templateName !== 'Table') return null
     return (
-      <Field name="tableViewMode" component={FormSelect} floatingLabel="View Mode" options={gaugeTableViewModes} className="valign-top"/>
+      <Field name="tableViewMode" component={FormSelect} floatingLabel="View Mode" options={gaugeTableViewModes} className="valign-top" validate={[required]}/>
     )
   }
   renderNormal () {
@@ -157,8 +157,8 @@ export default class GaugeWizardView extends React.Component {
     ]
     return (
       <div>
-        <Field name="name" component={FormInput} floatingLabel="Name" className="valign-top mr-dialog"/>
-        {devices && <Field name="deviceId" component={FormSelect} floatingLabel="Device" options={deviceOptions} className="valign-top"/>}
+        <Field name="name" component={FormInput} floatingLabel="Name" className="valign-top mr-dialog" validate={[required]}/>
+        {devices && <Field name="deviceId" component={FormSelect} floatingLabel="Device" options={deviceOptions} className="valign-top" validate={[required]}/>}
         <SelectField multiple floatingLabelText="Severity" onChange={onChangeSeverity} className={`valign-top ${devices ? 'mr-dialog' : ''}`} value={selectedSeverity}>
           {severities.map(option =>
             <MenuItem key={option.value} insetChildren checked={selectedSeverity && selectedSeverity.includes(option.value)}
@@ -185,8 +185,8 @@ export default class GaugeWizardView extends React.Component {
 
     return (
       <div>
-        <Field name="name" component={FormInput} floatingLabel="Name" className="valign-top mr-dialog"/>
-        <Field name="workflowId" component={FormSelect} floatingLabel="Workflow" options={workflowOptions} className="valign-top mr-dialog"/>
+        <Field name="name" component={FormInput} floatingLabel="Name" className="valign-top mr-dialog" validate={[required]}/>
+        <Field name="workflowId" component={FormSelect} floatingLabel="Workflow" options={workflowOptions} className="valign-top mr-dialog" validate={[required]}/>
       </div>
     )
   }
@@ -196,14 +196,14 @@ export default class GaugeWizardView extends React.Component {
     const deviceOptions = (devices || []).map(p => ({label: p.name, value: p.id}))
     return (
       <div>
-        <Field name="name" component={FormInput} floatingLabel="Name" className="valign-top mr-dialog"/>
+        <Field name="name" component={FormInput} floatingLabel="Name" className="valign-top mr-dialog" validate={[required]}/>
         {devices && <Field key="deviceId" name="deviceId" component={FormSelect} floatingLabel="Device" options={deviceOptions} className="valign-top"/>}
 
-        <Field name="timing" component={FormSelect} floatingLabel="Timing" options={timingOptions} className="valign-top mr-dialog"/>
+        <Field name="timing" component={FormSelect} floatingLabel="Timing" options={timingOptions} className="valign-top mr-dialog" validate={[required]}/>
         <Field
           name="gaugeType" component={FormSelect} floatingLabel="Gauge Type"
           options={formValues.timing === 'realtime' ? realtimeGauges : historicGauges}
-          className="valign-top"
+          className="valign-top" validate={[required]}
           />
 
         {formValues.timing === 'historic' ? (
@@ -220,8 +220,8 @@ export default class GaugeWizardView extends React.Component {
     const {services} = this.props
     return (
       <div>
-        <Field name="name" component={FormInput} floatingLabel="Name" className="valign-top mr-dialog"/>
-        <Field name="serviceName" component={FormSelect} floatingLabel="Service" options={services} className="valign-top mr-dialog"/>
+        <Field name="name" component={FormInput} floatingLabel="Name" className="valign-top mr-dialog" validate={[required]}/>
+        <Field name="serviceName" component={FormSelect} floatingLabel="Service" options={services} className="valign-top mr-dialog" validate={[required]}/>
       </div>
     )
   }
@@ -233,7 +233,7 @@ export default class GaugeWizardView extends React.Component {
 
     return (
       <div>
-        <Field name="name" component={FormInput} floatingLabel="Name" className="valign-top mr-dialog"/>
+        <Field name="name" component={FormInput} floatingLabel="Name" className="valign-top mr-dialog" validate={[required]}/>
         {devices && this.renderDeviceList()}
         <SelectField multiple floatingLabelText="Monitors" value={selectedMonitors} onChange={onChangeMonitors}>
           {(monitors || []).map((p, i) =>
@@ -253,8 +253,8 @@ export default class GaugeWizardView extends React.Component {
     const {services, serviceNames, onChangeServiceNames} = this.props
     return (
       <div>
-        <Field name="name" component={FormInput} floatingLabel="Name" className="valign-top mr-dialog"/>
-        <SelectField multiple floatingLabelText="Services" value={serviceNames} onChange={onChangeServiceNames}>
+        <Field name="name" component={FormInput} floatingLabel="Name" className="valign-top mr-dialog" validate={[required]}/>
+        <SelectField multiple floatingLabelText="Services" value={serviceNames} onChange={onChangeServiceNames} validate={[required]}>
           {(services || []).map((p, i) =>
             <MenuItem
               key={i}
@@ -274,8 +274,8 @@ export default class GaugeWizardView extends React.Component {
 
     return (
       <div>
-        <Field name="name" component={FormInput} floatingLabel="Name" className="valign-top mr-dialog"/>
-        {devices && <Field key="deviceId" name="deviceId" component={FormSelect} floatingLabel="Device" options={deviceOptions} className="valign-top"/>}
+        <Field name="name" component={FormInput} floatingLabel="Name" className="valign-top mr-dialog" validate={[required]}/>
+        {devices && <Field key="deviceId" name="deviceId" component={FormSelect} floatingLabel="Device" options={deviceOptions} className="valign-top" validate={[required]}/>}
 
         <div className="inline-block">
           <Field name="duration" component={FormSelect} floatingLabel="Duration" options={durations} className="valign-top mr-dialog" style={{width: 100}}/>

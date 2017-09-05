@@ -41,7 +41,8 @@ export default class GaugeWorkflowPicker extends React.Component {
     const {devices, selectedDevice, selectedWorkflow,
       onSelectDevice, onSelectWorkflow, onClickAddWorkflow, onClickRemoveWorkflow,
       workflows,
-      tableClass, height
+      tableClass, height,
+      className
     } = this.props
     const wfs = []
     selectedDevice && (selectedDevice.workflowids || []).forEach(id => {
@@ -49,11 +50,11 @@ export default class GaugeWorkflowPicker extends React.Component {
       if (index >= 0) wfs.push(workflows[index])
     })
     return (
-      <div className="padding-md-left padding-md-right">
+      <div className={`padding-md-left padding-md-right ${className || ''}`}>
         <div className="row">
           <div className="col-md-6 p-none">
             <div style={{height: height || 300, overflow: 'auto', border: '1px solid gray'}}>
-              <table className={`table table-hover ${tableClass}`}>
+              <table className={`table table-hover ${tableClass || ''}`}>
                 <tbody>
                 <tr>
                   <td><b>Device</b></td>
