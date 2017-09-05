@@ -4,6 +4,7 @@ import {findIndex, assign, concat} from 'lodash'
 import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
 
 import MonitorWizardContainer from 'containers/shared/wizard/MonitorWizardContainer'
+import MonitorPicker from 'components/dashboard/map/device/monitors/MonitorPicker'
 import AppletCard from 'components/common/AppletCard'
 import { showAlert } from 'components/common/Alert'
 
@@ -35,8 +36,19 @@ export default class Monitor extends React.Component {
 
     return `${extImageBaseUrl}${monitorTemplates[index].image}`
   }
+  addMonitor (monitorConfig) {
+    this.props.openDeviceMonitorWizard(null, monitorConfig)
+    return true
+  }
   onChange (event, key, payload) {
     this.setState({deviceId: payload})
+  }
+
+  onClickAddMonitor () {
+    if (!this.state.deviceId) return null
+    this.setState({ editMonitor: null }, () => {
+      this.props.openDeviceMonitorPicker()
+    })
   }
 
   onClickEditMonitor (selected) {
@@ -52,7 +64,9 @@ export default class Monitor extends React.Component {
       this.props.openDeviceMonitorWizard(selected, monitorConfig)
     })
   }
-
+  onStep0 () {
+    this.onClickAddMonitor()
+  }
   onFinishMonitorWizard (res, params) {
     let editMonitor = this.state.editMonitor
     let device = assign({}, this.getDevice())
@@ -103,6 +117,7 @@ export default class Monitor extends React.Component {
         onClose={this.props.closeDeviceMonitorWizard}
         extraParams={{}}
         configParams={{}}
+        onStep0={this.onStep0.bind(this)}
         onFinish={this.onFinishMonitorWizard.bind(this)}
       />
     )
@@ -110,10 +125,25 @@ export default class Monitor extends React.Component {
   renderAddMenu () {
     return (
       <div className="text-right" style={{position: 'absolute', top: -45, right: 0}}>
-        <IconButton onTouchTap={() => {}}>
+        <IconButton onTouchTap={this.onClickAddMonitor.bind(this)}>
           <AddCircleIcon />
         </IconButton>
       </div>
+    )
+  }
+  renderMonitorPicker () {
+    if (!this.props.monitorPickerVisible) return null
+
+    return (
+      <MonitorPicker
+        {...this.props}
+        onClickItem={monitorConfig => {
+          this.setState({monitorConfig}, () => {
+            this.addMonitor(monitorConfig)
+          })
+          return true
+        }}
+      />
     )
   }
   render () {
@@ -143,6 +173,7 @@ export default class Monitor extends React.Component {
           </ul>
         </div>
 
+        {this.renderMonitorPicker()}
         {this.renderMonitorWizard()}
       </div>
     )
