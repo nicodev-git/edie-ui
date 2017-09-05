@@ -32,11 +32,7 @@ export default class GaugePickerView extends React.Component {
     switch (selectedSubItem) {
       case 'monitor':
         subPage = (
-          <Monitor
-            gauges={gauges}
-            devices={this.props.devices}
-            monitorTemplates={this.props.monitorTemplates}
-          />
+          <Monitor {...this.props}/>
         )
         break
       case 'device':
