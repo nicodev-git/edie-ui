@@ -10,6 +10,9 @@ import {
   fetchWorkflows,
   fetchMonitorTemplates,
 
+  fetchCollectors,
+  fetchCredentials,
+
   fetchGauges,
   addGaugeItem,
   updateGaugeItem,
@@ -31,7 +34,11 @@ import {
   showGaugeModal,
   showGaugePicker,
 
-  updateViewLogParams
+  updateViewLogParams,
+
+  openDeviceMonitorWizard,
+  closeDeviceMonitorWizard,
+  updateMapDevice
 } from 'actions'
 
 class MainDashboardContainer extends React.Component {
@@ -62,13 +69,18 @@ export default connect(
     editGauge: state.gauge.editGauge,
     gaugePickerOpen: state.gauge.gaugePickerOpen,
 
-    logViewParam: state.dashboard.logViewParam
+    logViewParam: state.dashboard.logViewParam,
+
+    monitorWizardVisible: state.devices.monitorWizardVisible
   }), {
     fetchDevicesGroups,
     fetchMonitorGroups,
     fetchSysSearchOptions,
     fetchWorkflows,
     fetchMonitorTemplates,
+
+    fetchCollectors,
+    fetchCredentials,
 
     fetchGauges,
     addGaugeItem,
@@ -91,6 +103,10 @@ export default connect(
     showGaugeModal,
     showGaugePicker,
 
-    updateViewLogParams
+    updateViewLogParams,
+
+    openDeviceMonitorWizard,
+    closeDeviceMonitorWizard,
+    updateMapDevice
   }
 )(withRouter(MainDashboardContainer))

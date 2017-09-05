@@ -7,6 +7,8 @@ import {
   UPDATE_DEVICE_INCIDENT,
   CLOSE_ADD_DEVICE_INCIDENT,
 
+  UPDATE_MAP_DEVICE,
+
   FETCH_GROUP_DEVICES_LINES,
   ADD_GROUP_DEVICE,
   UPDATE_GROUP_DEVICE,
@@ -433,6 +435,15 @@ export default function (state = INITIAL_STATE, action) {
 
     case UPDATE_INSTALL_AGENT_MESSAGE:
       return { ...state, installAgentMessage: action.data }
+
+    case UPDATE_MAP_DEVICE: {
+      const deviceAndGroups = state.deviceAndGroups.map(u => {
+        if (u.id === action.data.id) return {...u, ...action.data}
+        return u
+      })
+
+      return {...state, deviceAndGroups}
+    }
     default:
       return state
   }

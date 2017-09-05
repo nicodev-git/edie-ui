@@ -46,7 +46,7 @@ export default class Monitor extends React.Component {
 
   onFinishMonitorWizard (res, params) {
     let editMonitor = this.state.editMonitor
-    let device = assign({}, this.props.device)
+    let device = assign({}, this.state.device)
     let monitor = assign({}, editMonitor, params)
 
     if (editMonitor) {
@@ -84,16 +84,13 @@ export default class Monitor extends React.Component {
   renderMonitorWizard () {
     if (!this.props.monitorWizardVisible) return null
 
-    const {monitorConfig} = this.state
+    const {monitorConfig, device} = this.state
     const type = 'monitor-custom'
     return (
       <MonitorWizardContainer
         deviceType={type}
-        title={`Add ${monitorConfig ? monitorConfig.name : ''} Monitor To ${this.props.device.name}`}
-        onClose={() => {
-          this.props.closeDeviceMonitorWizard()
-        }}
-        onStep0={this.onStep0.bind(this)}
+        title={`Add ${monitorConfig ? monitorConfig.name : ''} Monitor To ${device.name}`}
+        onClose={this.props.closeDeviceMonitorWizard}
         extraParams={{}}
         configParams={{}}
         onFinish={this.onFinishMonitorWizard.bind(this)}
@@ -110,7 +107,7 @@ export default class Monitor extends React.Component {
         <div className="padding-lg-left">
           <SelectField
             floatingLabelText="Devices"
-            value={device ? device.id : ''}
+            value={device}
             className="valign-top"
             onChange={this.onChange}
           >
