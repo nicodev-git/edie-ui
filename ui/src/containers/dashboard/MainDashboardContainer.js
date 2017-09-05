@@ -41,7 +41,9 @@ import {
   closeDeviceMonitorWizard,
   openDeviceMonitorPicker,
   closeDeviceMonitorPicker,
-  updateMapDevice
+  updateMapDevice,
+
+  showDeviceTplPicker
 } from 'actions'
 
 class MainDashboardContainer extends React.Component {
@@ -76,7 +78,9 @@ export default connect(
 
     selectedDevice: state.dashboard.selectedDevice,
     monitorPickerVisible: state.devices.monitorPickerVisible,
-    monitorWizardVisible: state.devices.monitorWizardVisible
+    monitorWizardVisible: state.devices.monitorWizardVisible,
+
+    deviceTplPickerOpen: state.dashboard.deviceTplPickerOpen
   }), {
     fetchDevicesGroups,
     fetchMonitorGroups,
@@ -115,6 +119,8 @@ export default connect(
     closeDeviceMonitorWizard,
     openDeviceMonitorPicker,
     closeDeviceMonitorPicker,
-    updateMapDevice
+    updateMapDevice,
+
+    showDeviceTplPicker
   }
 )(withRouter(MainDashboardContainer))

@@ -36,6 +36,8 @@ import {
   UPDATE_VIEWLOG_PARAMS,
   SHOW_DETAIL_LOG_MODAL,
 
+  SHOW_DEVICE_TPL_PICKER,
+
   NO_AUTH_ERROR
 } from './types'
 
@@ -246,5 +248,11 @@ export const updateViewLogParams = (params, history) => {
 export const showDetailLogModal = (visible, params) => {
   return dispatch => {
     dispatch({type: SHOW_DETAIL_LOG_MODAL, visible, params})
+  }
+}
+
+export const showDeviceTplPicker = (visible) => {
+  return dispatch => {
+    dispatch({type: SHOW_DEVICE_TPL_PICKER, visible})
   }
 }

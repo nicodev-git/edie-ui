@@ -67,6 +67,8 @@ import {
   UPDATE_VIEWLOG_PARAMS,
   SHOW_DETAIL_LOG_MODAL,
 
+  SHOW_DEVICE_TPL_PICKER,
+
   API_ERROR
 } from 'actions/types'
 
@@ -320,6 +322,9 @@ export default function (state = initialState, action) {
 
     case SHOW_DETAIL_LOG_MODAL:
       return { ...state, detailLogModalOpen: action.visible, detailLogViewParam: action.params }
+
+    case SHOW_DEVICE_TPL_PICKER:
+      return { ...state, deviceTplPickerOpen: action.visible }
     default:
       return state
   }

@@ -37,10 +37,7 @@ export default class GaugePickerView extends React.Component {
         break
       case 'device':
         subPage = (
-          <Device
-            gauges={gauges}
-            devices={this.props.devices}
-          />
+          <Device {...this.props}/>
         )
         break
       case 'dashboard':

@@ -41,6 +41,9 @@ export const SHOW_THREAT_ITEM_MODAL = 'SHOW_THREAT_ITEM_MODAL'
 export const SHOW_COMMENTS_MODAL = 'SHOW_COMMENTS_MODAL'
 
 export const SHOW_ATTACKER_MODAL = 'SHOW_ATTACKER_MODAL'
+
+export const SHOW_DEVICE_TPL_PICKER = 'SHOW_DEVICE_TPL_PICKER'
+
 // ////////////////////////////////////////////////////////////////////
 export const FETCH_DEVICE_INCIDENTS = 'FETCH_DEVICE_INCIDENTS'
 export const ADD_DEVICE_INCIDENT = 'ADD_DEVICE_INCIDENT'
