@@ -134,7 +134,7 @@ div.dropdown-image div:hover {
 
 .web-applet-cards {
     margin: 0;
-    /*padding: 0;*/
+    padding: 0;
     list-style: none;
     display: flex;
     flex-flow: wrap;
