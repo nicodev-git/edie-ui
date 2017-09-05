@@ -41,7 +41,7 @@ export const underlineFocusStyle = {
 
 export const dialogBodyStyle = {
     background: '#efefef',
-    padding: '0',
+    padding: '8px 48px 48px',
     overflowY: 'auto'
 }
 export const dialogTitleStyle = {
