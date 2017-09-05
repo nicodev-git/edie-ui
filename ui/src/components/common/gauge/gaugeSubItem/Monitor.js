@@ -65,6 +65,9 @@ export default class Monitor extends React.Component {
       this.props.openDeviceMonitorWizard(selected, monitorConfig)
     })
   }
+  onClickViewMonitor (selected) {
+
+  }
   onStep0 () {
     this.onClickAddMonitor()
   }
@@ -101,6 +104,7 @@ export default class Monitor extends React.Component {
         name={tpl.monitortype}
         desc={tpl.name}
         img={this.getMonitorImage(tpl.monitortype)}
+        onClickView={() => this.onClickViewMonitor(tpl)}
         onClickEdit={() => this.onClickEditMonitor(tpl)}
       />
     )
