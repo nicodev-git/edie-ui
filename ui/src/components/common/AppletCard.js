@@ -1,9 +1,16 @@
 import React from 'react'
 import CloseIcon from 'material-ui/svg-icons/navigation/close'
+import EditIcon from 'material-ui/svg-icons/image/edit'
+
+const editButtonStyle = {
+  position: 'absolute',
+  right: 15,
+  bottom: 8
+}
 
 export default class AppletCard extends React.Component {
   render () {
-    const {name, desc, img, color, className, onClick, onClickDelete} = this.props
+    const {name, desc, img, color, className, onClick, onClickDelete, onClickEdit} = this.props
     return (
       <li className={`web-applet-card small ${className}`} onClick={onClickDelete ? null : onClick}>
         <div className="applet-card-body " style={{background: color}}>
@@ -24,6 +31,7 @@ export default class AppletCard extends React.Component {
           </div>
           <div className="meta" onClick={onClick}>
             {name}&nbsp;
+            {onClickEdit && <div style={editButtonStyle}><EditIcon size={32} color="white" onTouchTap={onClickEdit}/></div>}
           </div>
         </div>
       </li>

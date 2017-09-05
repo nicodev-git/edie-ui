@@ -24,7 +24,6 @@ export default class Monitor extends React.Component {
     this.setState({selectedItem: payload})
   }
   renderTpl (tpl, i) {
-    const {onClickMenuItem} = this.props
     return (
       <AppletCard
         key={tpl.uid}
@@ -32,7 +31,7 @@ export default class Monitor extends React.Component {
         name={tpl.monitortype}
         desc={tpl.name}
         img={this.getMonitorImage(tpl.monitortype)}
-        onClick={() => onClickMenuItem(tpl)}
+        onClickEdit={() => {}}
       />
     )
   }
