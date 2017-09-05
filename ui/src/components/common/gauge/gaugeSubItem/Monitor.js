@@ -43,6 +43,7 @@ export default class Monitor extends React.Component {
     const {monitorTemplates} = this.props
     if (!selected) return showAlert('Please select monitor.')
 
+    this.props.openDevice(this.getDevice())
     let monitorConfig = monitorTemplates.filter(p => p.monitortype === selected.monitortype)
     monitorConfig = monitorConfig.length ? monitorConfig[0] : null
     this.setState({

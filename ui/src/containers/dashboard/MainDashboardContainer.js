@@ -36,6 +36,7 @@ import {
 
   updateViewLogParams,
 
+  openDevice,
   openDeviceMonitorWizard,
   closeDeviceMonitorWizard,
   updateMapDevice
@@ -106,6 +107,7 @@ export default connect(
 
     updateViewLogParams,
 
+    openDevice,
     openDeviceMonitorWizard,
     closeDeviceMonitorWizard,
     updateMapDevice
