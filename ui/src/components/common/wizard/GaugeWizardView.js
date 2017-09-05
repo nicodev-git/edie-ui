@@ -81,7 +81,7 @@ export default class GaugeWizardView extends React.Component {
     const {devices, formValues, selectedMonitors, toggleMonitorId} = this.props
     if (formValues.resource !== 'logicalgroup') return null
     return (
-      <div style={{maxHeight: 300, overflow: 'auto'}}>
+      <div style={{maxHeight: 300, overflow: 'auto'}} className="margin-md-top">
         <table className="table table-hover">
           <tbody>
           {(devices || []).map(d => (d.monitors || []).map(p =>
@@ -197,7 +197,7 @@ export default class GaugeWizardView extends React.Component {
     return (
       <div>
         <Field name="name" component={FormInput} floatingLabel="Name" className="valign-top mr-dialog" validate={[required]}/>
-        {devices && <Field key="deviceId" name="deviceId" component={FormSelect} floatingLabel="Device" options={deviceOptions} className="valign-top"/>}
+        {devices && <Field key="deviceId" name="deviceId" component={FormSelect} floatingLabel="Device" options={deviceOptions} className="valign-top" validate={[required]}/>}
 
         <Field name="timing" component={FormSelect} floatingLabel="Timing" options={timingOptions} className="valign-top mr-dialog" validate={[required]}/>
         <Field
