@@ -1,6 +1,6 @@
-import React from 'react';
-import AppletCard from '../../AppletCard';
-import { extImageBaseUrl, appletColors as colors } from '../../../../shared/Global';
+import React from 'react'
+import AppletCard from 'components/common/AppletCard'
+import { extImageBaseUrl, appletColors as colors } from 'shared/Global'
 
 export default class Dashboard extends React.Component {
     renderTpl (tpl, i) {

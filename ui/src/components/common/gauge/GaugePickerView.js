@@ -31,14 +31,6 @@ export default class GaugePickerView extends React.Component {
     const {selectedSubItem} = this.state
     let subPage
     switch (selectedSubItem) {
-      case 'dashboard':
-        subPage = (
-          <Dashboard
-            gauges={gauges}
-            onClickMenuItem={this.props.onClickMenuItem}
-          />
-        )
-        break
       case 'monitor':
         subPage = (
           <Monitor
@@ -55,6 +47,7 @@ export default class GaugePickerView extends React.Component {
           />
         )
         break
+      case 'dashboard':
       default:
         subPage = (
           <Dashboard

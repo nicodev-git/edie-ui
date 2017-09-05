@@ -1,32 +1,26 @@
-import React from 'react';
+import React from 'react'
+import AppletCard from 'components/common/AppletCard'
+import { extImageBaseUrl, appletColors as colors } from 'shared/Global'
 
-export default class Device extends React.Component {   
-    
-    render() {
-        const { devices, selectedDevice, tableClass, height
-          } = this.props
-        return ( <div className="padding-md-left padding-md-right">
-        <div className="row">
-          <div className="col-md-12">
-            <div style={{height: height || 450, overflow: 'auto', border: '1px solid gray'}}>
-              <table className={`table table-hover ${tableClass}`}>
-                <tbody>
-                  <tr>
-                    <td style={{textAlign:'center'}}><b>Devices</b></td>
-                  </tr>
-                    {(devices || []).map((p, i) =>
-                      <tr key={p.id}>
-                        <td
-                          className={selectedDevice && selectedDevice.id === p.id ? 'selected' : ''}
-                          >{p.name}</td>               
-                      </tr>
-                    )}
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-        </div>
-        );
-    }
+export default class Device extends React.Component {
+  renderTpl (tpl, i) {
+    const {onClickMenuItem} = this.props
+    return (
+      <AppletCard
+        key={tpl.id}
+        color={colors[i % colors.length]}
+        name={tpl.templateName}
+        desc={tpl.name}
+        img={`${extImageBaseUrl}${tpl.image}`}
+        onClick={() => onClickMenuItem(tpl)}
+      />
+    )
+  }
+  render() {
+    return (
+      <ul className="web-applet-cards">
+        {this.props.devices.map(this.renderTpl.bind(this))}
+      </ul>
+    )
+  }
 }

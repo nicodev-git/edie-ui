@@ -5,7 +5,7 @@ export default class AppletCard extends React.Component {
   render () {
     const {name, desc, img, color, className, onClick, onClickDelete} = this.props
     return (
-      <li className={`web-applet-card small ${className}`}>
+      <li className={`web-applet-card small ${className}`} onClick={onClickDelete ? null : onClick}>
         <div className="applet-card-body " style={{background: color}}>
           <div className="content">
             <div className="card-top">
