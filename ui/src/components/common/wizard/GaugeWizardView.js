@@ -11,6 +11,7 @@ import DateRangePicker from 'components/common/DateRangePicker'
 import GaugeServerPicker from './input/GaugeServerPicker'
 import GaugeLogMonitorPicker from './input/GaugeLogMonitorPicker'
 import GaugeWorkflowPicker from './input/GaugeWorkflowPicker'
+import {required} from 'components/modal/validation/CommonValidation'
 
 const durations = '1 2 3 5 10 15 30'.split(' ').map(p => ({
   label: p, value: p
@@ -38,14 +39,18 @@ export default class GaugeWizardView extends React.Component {
     if (formValues.resource !== 'monitor') return null
     if (!devices) {
       return (
-        <Field name="monitorId" component={FormSelect} floatingLabel="Monitor" options={monitors} className="valign-top mr-dialog"/>
+        <Field
+          name="monitorId" component={FormSelect} floatingLabel="Monitor" options={monitors} className="valign-top mr-dialog"
+          validate={[required]}/>
       )
     }
     const index = findIndex(devices, {id: formValues.deviceId})
     const monitorOptions = index < 0 ? [] : devices[index].monitors.map(p => ({label: p.name, value: p.uid}))
     return [
       this.renderDeviceList(),
-      <Field key="monitorId" name="monitorId" component={FormSelect} floatingLabel="Monitor" options={monitorOptions} className="valign-top"/>
+      <Field
+        key="monitorId" name="monitorId" component={FormSelect} floatingLabel="Monitor" options={monitorOptions} className="valign-top"
+        validate={[required]}/>
     ]
   }
   renderWorkflowPick1 () {
@@ -106,10 +111,14 @@ export default class GaugeWizardView extends React.Component {
     }
     return (
       <div>
-        <Field name="name" component={FormInput} floatingLabel="Name" className="valign-top mr-dialog"/>
+        <Field name="name" component={FormInput} floatingLabel="Name" className="valign-top mr-dialog" validate={[required]}/>
         <Field name="resource" component={FormSelect} floatingLabel="Resource" options={resourceOptions} className="valign-top"/>
 
-        {formValues.resource === 'search' && <Field name="savedSearchId" component={FormSelect} floatingLabel="Saved Search" options={searchList} className="valign-top mr-dialog"/>}
+        {formValues.resource === 'search' &&
+          <Field
+            name="savedSearchId" component={FormSelect} floatingLabel="Saved Search" options={searchList} className="valign-top mr-dialog"
+            validate={[required]}/>
+        }
         {this.renderWorkflowPick()}
         {this.renderMonitorPick()}
         {this.renderLogicalGroup()}
