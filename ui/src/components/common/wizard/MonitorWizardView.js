@@ -18,10 +18,28 @@ const durationUnits = 'days months years'.split(' ').map(p => ({
   label: p, value: p
 }))
 
+const integratedOptions = [{
+  label: 'User/Pass', value: 'false'
+}, {
+  label: 'Integrated', value: 'true'
+}]
+
 export default class MonitorWizardView extends React.Component {
+  renderRequiredParams () {
+    const {requiredParamKeys} = this.props
+    return requiredParamKeys.map(k => {
+      if (k === 'remove_after') return null
+      if (k === 'authentication') {
+        return <Field
+          key={k} name={k} floatingLabel={paramLabels[k] || k} component={FormSelect}
+          options={integratedOptions}
+          className="margin-sm-left margin-sm-right"/>
+      }
+      return <Field key={k} name={k} floatingLabel={paramLabels[k] || k} component={FormInput} className="margin-sm-left margin-sm-right"/>
+    })
+  }
   render () {
     const {header, onSubmit, onHide, paramEditModal, tagsView, credPicker, paramsView,
-      requiredParamKeys,
       credentials,
       showAgentType, collectors, agent,
       isEdit
@@ -50,10 +68,7 @@ export default class MonitorWizardView extends React.Component {
         <form onSubmit={onSubmit}>
           <CardPanel title="Configuration">
             <Field name="name" floatingLabel="Name" component={FormInput} className="margin-sm-left margin-sm-right"/>
-            {requiredParamKeys.map(k =>
-              k !== 'remove_after' && <Field key={k} name={k} floatingLabel={paramLabels[k] || k} component={FormInput} className="margin-sm-left margin-sm-right"/>
-            )}
-
+            {this.renderRequiredParams()}
             <div>
               <div className="inline-block valign-middle" style={{fontSize: '16px', paddingLeft: 7}}>Add remove events after</div>
               <Field
