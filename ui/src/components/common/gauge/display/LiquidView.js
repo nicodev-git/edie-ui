@@ -16,7 +16,7 @@ class LiquidView extends React.Component {
   // }
 
   render () {
-    const {value} = this.props
+    const {value, title} = this.props
     const radius = Math.max(Math.min(this.props.containerWidth, this.props.containerHeight) * 0.48, 10);
     const interpolate = interpolateRgb(startColor, endColor);
     const fillColor = interpolate(value / 100);
@@ -91,6 +91,7 @@ class LiquidView extends React.Component {
             fontFamily: 'Arial'
           }}
         />
+        <div className="text-center">{title}</div>
       </div>
     )
   }
