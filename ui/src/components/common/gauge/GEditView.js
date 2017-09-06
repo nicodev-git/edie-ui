@@ -12,7 +12,7 @@ import GaugeServerPicker from 'components/common/wizard/input/GaugeServerPicker'
 import GaugeWorkflowPicker from 'components/common/wizard/input/GaugeWorkflowPicker'
 import GaugeLogMonitorPicker from 'components/common/wizard/input/GaugeLogMonitorPicker'
 import { dialogBodyStyle, dialogTitleStyle } from 'style/common/materialStyles'
-import {CardPanel} from 'components/modal/parts'
+import {CardPanel, Modal} from 'components/modal/parts'
 
 const durations = '1 2 3 5 10 15 30'.split(' ').map(p => ({
   label: p, value: parseInt(p, 10)
@@ -598,7 +598,7 @@ export default class GEditView extends React.Component {
         return this.renderNormal()
     }
   }
-  render () {
+  render1 () {
     return (
       <div style={{background: 'white'}}>
         <h3 style={dialogTitleStyle}>Edit</h3>
@@ -613,6 +613,15 @@ export default class GEditView extends React.Component {
           </CardPanel>
         </div>
       </div>
+    )
+  }
+  render () {
+    return (
+      <Modal title="Edit" onRequestClose={this.onClickDone.bind(this)} contentStyle={{width: 1000, maxWidth: 'initial'}}>
+        <CardPanel>
+          {this.renderContent()}
+        </CardPanel>
+      </Modal>
     )
   }
 }
