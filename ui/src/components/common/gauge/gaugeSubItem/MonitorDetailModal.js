@@ -29,10 +29,10 @@ export default class MonitorDetailModal extends React.Component {
     }
   }
   render () {
-    const {gaugeMonitor} = this.props
+    const {gaugeMonitor, gaugeDevice} = this.props
     return (
       <MonitorDetailModalView
-        title={gaugeMonitor.name}
+        title={`${gaugeMonitor.name} - ${gaugeDevice.name}`}
         onHide={this.onHide.bind(this)}
         gauge={this.getGagueItem()}
       />

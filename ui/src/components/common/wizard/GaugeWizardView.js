@@ -221,7 +221,7 @@ export default class GaugeWizardView extends React.Component {
     return (
       <div>
         <Field name="name" component={FormInput} floatingLabel="Name" className="valign-top mr-dialog" validate={[required]}/>
-        <Field name="serviceName" component={FormSelect} floatingLabel="Service" options={services} className="valign-top mr-dialog" validate={[required]}/>
+        <Field name="serviceName" component={FormSelect} floatingLabel="Service" options={services} className="valign-top mr-dialog"/>
       </div>
     )
   }
