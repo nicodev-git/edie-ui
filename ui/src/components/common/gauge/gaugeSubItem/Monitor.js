@@ -65,8 +65,16 @@ export default class Monitor extends React.Component {
       this.props.openDeviceMonitorWizard(selected, monitorConfig)
     })
   }
-  onClickViewMonitor (selected) {
-
+  onClickViewMonitor (monitor) {
+    if (monitor.monitortype === 'logfile') {
+      setTimeout(() => {
+        this.props.history.push('/viewlog')
+        this.props.updateViewLogParams({
+          ...this.props.logViewParam,
+          q: `(monitorid:${monitor.uid})`
+        }, this.props.history)
+      }, 1)
+    }
   }
   onStep0 () {
     this.onClickAddMonitor()
@@ -94,8 +102,7 @@ export default class Monitor extends React.Component {
     this.props.updateMapDevice(device)
     this.props.closeDeviceMonitorWizard()
   }
-
-
+  ///////////////////////////////////////////////////////////////////////////////////////////////
   renderItem (tpl, i) {
     return (
       <AppletCard
