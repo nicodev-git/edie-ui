@@ -1,5 +1,6 @@
 import QueryParser from 'lucene'
 import {assign} from 'lodash'
+import moment from 'moment'
 
 const implicit = '<implicit>'
 
@@ -259,4 +260,24 @@ export function getFieldValue (parsed, field) {
     return found.field.term
   }
   return null
+}
+
+export function parseDateRange (parsed, ranges, queryDateFormat) {
+  const dateFromStr = getFieldValue(parsed, 'from')
+  const dateToStr = getFieldValue(parsed, 'to')
+
+  const value = ranges[dateFromStr]
+  if (value) {
+    return {
+      from: value[0].valueOf(),
+      to: value[1].valueOf()
+    }
+  } else {
+    const from = dateFromStr ? moment(dateFromStr, queryDateFormat).valueOf() : moment().startOf('year').valueOf()
+    const to = dateToStr ? moment(dateToStr, queryDateFormat).valueOf() : moment().endOf('year').valueOf()
+
+    return {
+      from, to
+    }
+  }
 }

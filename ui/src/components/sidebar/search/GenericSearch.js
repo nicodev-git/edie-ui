@@ -773,8 +773,6 @@ class GenericSearch extends React.Component {
         from, to
       }
     }
-
-
   }
 
   getParams () {

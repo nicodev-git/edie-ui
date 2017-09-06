@@ -12,28 +12,33 @@ export default class LogSearchFormView extends React.Component {
       <FlatButton label={label}/>
     )
   }
-  render () {
+  renderDatePicker () {
     const {
-      onSearchKeyDown,
-      onSubmit,
-
       startDate,
       endDate,
       onChangeDateRange
     } = this.props
     return (
+      <DateRangePicker
+        className="valign-top"
+        startDate={startDate}
+        endDate={endDate}
+        onApply={onChangeDateRange}
+        renderer={this.renderDateLabel.bind(this)}
+        style={{marginTop: '4px'}}/>
+    )
+  }
+  render () {
+    const {
+      onSearchKeyDown,
+      onSubmit
+    } = this.props
+    return (
       <Form onSubmit={onSubmit}>
         <div style={{background: '#dadada', paddingLeft: 10}}>
           <div className="nowrap">
-            <Field name="query" component={FormInput} label="Search" onKeyDown={onSearchKeyDown} style={{minWidth: 200}} className="valign-top"/>
+            <Field name="q" component={FormInput} label="Search" onKeyDown={onSearchKeyDown} style={{width: '90%'}} className="valign-top"/>
             <IconButton tooltip="Search" type="submit" className="valign-top"><ActionSearch /></IconButton>
-            <DateRangePicker
-              className="valign-top"
-              startDate={startDate}
-              endDate={endDate}
-              onApply={onChangeDateRange}
-              renderer={this.renderDateLabel.bind(this)}
-              style={{marginTop: '4px'}}/>
           </div>
         </div>
       </Form>

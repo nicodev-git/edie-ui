@@ -38,7 +38,7 @@ class LogView extends React.Component {
         const params = assign(...logViewParam, parsed)
 
         this.props.updateViewLogParams(params, this.props.history)
-        this.props.change('query', params.query || '')
+        this.props.change('q', params.q || '')
       } catch (e) {
         console.log(e)
       }
@@ -82,10 +82,10 @@ class LogView extends React.Component {
   }
 
   handleFormSubmit (values) {
-    const { query } = values
+    const { q } = values
 
     const params = assign({}, this.props.logViewParam, {
-      query: query || ''
+      q: q || ''
     })
     this.props.updateViewLogParams(params, this.props.history)
   }
@@ -96,6 +96,29 @@ class LogView extends React.Component {
       dateTo: endDate.format(dateFormat)
     }), this.props.history)
   }
+
+  getParams () {
+    const {queryParams} = this.props
+    const parsed = this.parse(queryParams.q)
+
+    const dateRange = this.parseDateRange(parsed)
+
+    const ret = {
+      // severity: getArrayValues(parsed, 'severity'),
+      // monitorTypes: getArrayValues(parsed, 'monitortype'),
+      // workflowNames: getArrayValues(parsed, 'workflows'),
+      // tags: getArrayValues(parsed, 'tags'),
+      // monitorName: getFieldValue(parsed, 'monitor'),
+      // types: getArrayValues(parsed, 'type', collections.map(p => p.value)),
+      ...dateRange
+    }
+
+    // if (ret.types.length === 1 && ret.types[0].toLowerCase() === 'all') ret.types = collections.map(p => p.value)
+    // if (ret.severity.length === 1 && ret.severity[0].toLowerCase() === 'all') ret.severity = severities.map(p => p.value)
+
+    return ret
+  }
+
 
   renderDetailModal () {
     if (!this.props.detailLogModalOpen) return null
@@ -126,7 +149,7 @@ class LogView extends React.Component {
         <TabPageBody tabs={[]} tab={0} history={this.props.history} location={this.props.location} transparent>
           <div style={{height: '100%', position: 'relative'}}>
             <LogPapers
-              url="/search/all"
+              url="/search/query"
               ref="table"
               rowMetadata={{'key': 'id'}}
               params={logViewParam}
