@@ -554,21 +554,24 @@ export default class GEditView extends React.Component {
 
   renderLog () {
     const {devices} = this.props
-    const {servers, selectedDevice, selectedRight, selectedMonitor} = this.state
+    const {servers, selectedDevice, selectedRight, selectedMonitor, name} = this.state
     return (
-      <GaugeLogMonitorPicker
-        height={400}
-        devices={devices}
-        selectedServers={servers}
-        selectedDevice={selectedDevice}
-        selectedRight={selectedRight}
-        selectedMonitor={selectedMonitor}
-        onSelectDevice={this.onSelectDevice.bind(this)}
-        onSelectRight={this.onSelectRight.bind(this)}
-        onSelectMonitor={this.onSelectMonitor.bind(this)}
-        onClickAddServer={this.onClickAddServer.bind(this)}
-        onClickRemoveServer={this.onClickRemoveServer.bind(this)}
-      />
+      <div>
+        <TextField name="name" value={name} floatingLabelText="Name" className="valign-top mr-dialog" onChange={this.onChangeText.bind(this, 'name')}/>
+        <GaugeLogMonitorPicker
+          height={400}
+          devices={devices}
+          selectedServers={servers}
+          selectedDevice={selectedDevice}
+          selectedRight={selectedRight}
+          selectedMonitor={selectedMonitor}
+          onSelectDevice={this.onSelectDevice.bind(this)}
+          onSelectRight={this.onSelectRight.bind(this)}
+          onSelectMonitor={this.onSelectMonitor.bind(this)}
+          onClickAddServer={this.onClickAddServer.bind(this)}
+          onClickRemoveServer={this.onClickRemoveServer.bind(this)}
+        />
+      </div>
     )
   }
 
