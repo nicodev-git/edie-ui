@@ -19,7 +19,7 @@ import {chipStyles} from 'style/common/materialStyles'
 import {getRanges, getRangeLabel} from 'components/common/DateRangePicker'
 import {showAlert} from 'components/common/Alert'
 
-import {modifyArrayValues, getArrayValues, modifyFieldValue, getFieldValue, removeField, findField, queryToString} from 'util/Query'
+import {modifyArrayValues, getArrayValues, modifyFieldValue, getFieldValue, removeField, findField, queryToString, parseDateRange} from 'util/Query'
 
 import SearchFormView from './SearchFormView'
 import SearchSavePopover from './SearchSavePopover'
@@ -754,32 +754,11 @@ class GenericSearch extends React.Component {
     )
   }
 
-  parseDateRange (parsed) {
-    const dateFromStr = getFieldValue(parsed, 'from')
-    const dateToStr = getFieldValue(parsed, 'to')
-
-    const ranges = getRanges()
-    const value = ranges[dateFromStr]
-    if (value) {
-      return {
-        from: value[0].valueOf(),
-        to: value[1].valueOf()
-      }
-    } else {
-      const from = dateFromStr ? moment(dateFromStr, queryDateFormat).valueOf() : moment().startOf('year').valueOf()
-      const to = dateToStr ? moment(dateToStr, queryDateFormat).valueOf() : moment().endOf('year').valueOf()
-
-      return {
-        from, to
-      }
-    }
-  }
-
   getParams () {
     const {queryParams} = this.props
     const parsed = this.parse(queryParams.q)
 
-    const dateRange = this.parseDateRange(parsed)
+    const dateRange = parseDateRange(parsed, getRanges(), queryDateFormat)
 
     const ret = {
       severity: getArrayValues(parsed, 'severity'),

@@ -7,13 +7,16 @@ import ReactTooltip from 'react-tooltip'
 import TabPage from 'components/common/TabPage'
 import TabPageBody from 'components/common/TabPageBody'
 import TabPageHeader from 'components/common/TabPageHeader'
-import { dateFormat } from 'shared/Global'
+import { dateFormat, queryDateFormat } from 'shared/Global'
 
 import LogSearchFormView from './LogSearchFormView'
 import LogPapers from './LogPapers'
 import DetailLogModal from './DetailLogModal'
 
+import {modifyArrayValues, getArrayValues, modifyFieldValue, getFieldValue, removeField, findField, queryToString, parseDateRange} from 'util/Query'
+
 import {parse} from 'query-string'
+import {getRanges} from 'components/common/DateRangePicker'
 
 class LogView extends React.Component {
   constructor (props) {
@@ -29,7 +32,6 @@ class LogView extends React.Component {
 
   componentWillMount () {
     const {q} = parse(this.props.location.search || {})
-
 
     if (q) {
       try {
@@ -101,7 +103,7 @@ class LogView extends React.Component {
     const {queryParams} = this.props
     const parsed = this.parse(queryParams.q)
 
-    const dateRange = this.parseDateRange(parsed)
+    const dateRange = parseDateRange(parsed, getRanges(), queryDateFormat)
 
     const ret = {
       // severity: getArrayValues(parsed, 'severity'),

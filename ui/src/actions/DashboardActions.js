@@ -37,6 +37,7 @@ import {
   SHOW_DETAIL_LOG_MODAL,
 
   SHOW_DEVICE_TPL_PICKER,
+  SHOW_MONITOR_DETAIL_MODAL,
 
   NO_AUTH_ERROR
 } from './types'
@@ -254,5 +255,11 @@ export const showDetailLogModal = (visible, params) => {
 export const showDeviceTplPicker = (visible) => {
   return dispatch => {
     dispatch({type: SHOW_DEVICE_TPL_PICKER, visible})
+  }
+}
+
+export const showMonitorDetailModal = (visible, monitor, device) => {
+  return dispatch => {
+    dispatch({type: SHOW_MONITOR_DETAIL_MODAL, visible, monitor, device})
   }
 }

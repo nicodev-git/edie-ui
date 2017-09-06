@@ -43,6 +43,7 @@ export const SHOW_COMMENTS_MODAL = 'SHOW_COMMENTS_MODAL'
 export const SHOW_ATTACKER_MODAL = 'SHOW_ATTACKER_MODAL'
 
 export const SHOW_DEVICE_TPL_PICKER = 'SHOW_DEVICE_TPL_PICKER'
+export const SHOW_MONITOR_DETAIL_MODAL = 'SHOW_MONITOR_DETAIL_MODAL'
 
 // ////////////////////////////////////////////////////////////////////
 export const ADD_DEVICE = 'ADD_DEVICE'
