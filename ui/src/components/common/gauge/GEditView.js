@@ -36,7 +36,7 @@ export default class GEditView extends React.Component {
 
     const {gauge, monitorGroup} = props
 
-    let name = gauge.name
+    let name = gauge.name || ''
     if (gauge.templateName === 'Log') {
       name = gauge.templateName
     }
