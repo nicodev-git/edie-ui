@@ -75,6 +75,8 @@ export default class Monitor extends React.Component {
           q: `(monitorid:${monitor.uid})`
         }, this.props.history)
       }, 1)
+    } else {
+      this.props.showMonitorDetailModal(true, monitor, this.getDevice())
     }
   }
   onStep0 () {

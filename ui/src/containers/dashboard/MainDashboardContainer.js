@@ -44,7 +44,8 @@ import {
   updateMapDevice,
 
   showDeviceTplPicker,
-  addDevice
+  addDevice,
+  showMonitorDetailModal
 } from 'actions'
 
 class MainDashboardContainer extends React.Component {
@@ -126,6 +127,7 @@ export default connect(
     updateMapDevice,
 
     showDeviceTplPicker,
-    addDevice
+    addDevice,
+    showMonitorDetailModal
   }
 )(withRouter(MainDashboardContainer))

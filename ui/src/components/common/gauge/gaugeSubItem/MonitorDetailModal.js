@@ -4,7 +4,7 @@ import MonitorDetailModalView from './MonitorDetailModalView'
 
 export default class MonitorDetailModal extends React.Component {
   onHide () {
-    this.props.showmonitorde
+    this.props.showMonitorDetailModal(false)
   }
   render () {
     return (

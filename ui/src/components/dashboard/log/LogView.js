@@ -13,7 +13,7 @@ import LogSearchFormView from './LogSearchFormView'
 import LogPapers from './LogPapers'
 import DetailLogModal from './DetailLogModal'
 
-import {modifyArrayValues, getArrayValues, modifyFieldValue, getFieldValue, removeField, findField, queryToString, parseDateRange} from 'util/Query'
+import {parseDateRange} from 'util/Query'
 
 import {parse} from 'query-string'
 import {getRanges} from 'components/common/DateRangePicker'
