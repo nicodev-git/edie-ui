@@ -45,6 +45,8 @@ export const SHOW_ATTACKER_MODAL = 'SHOW_ATTACKER_MODAL'
 export const SHOW_DEVICE_TPL_PICKER = 'SHOW_DEVICE_TPL_PICKER'
 
 // ////////////////////////////////////////////////////////////////////
+export const ADD_DEVICE = 'ADD_DEVICE'
+
 export const FETCH_DEVICE_INCIDENTS = 'FETCH_DEVICE_INCIDENTS'
 export const ADD_DEVICE_INCIDENT = 'ADD_DEVICE_INCIDENT'
 export const UPDATE_DEVICE_INCIDENT = 'UPDATE_DEVICE_INCIDENT'

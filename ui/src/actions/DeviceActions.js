@@ -6,6 +6,7 @@ import {
 
   OPEN_DEVICE,
   CLOSE_DEVICE,
+  ADD_DEVICE,
 
   OPEN_DEVICE_MONITOR_PICKER,
   CLOSE_DEVICE_MONITOR_PICKER,
@@ -508,20 +509,15 @@ export const closeDeviceEditModal = () => {
   }
 }
 
-export const addDevice = (url, props) => {
+export const addDevice = (props, url) => {
   if (!window.localStorage.getItem('token')) {
     return dispatch => dispatch({ type: NO_AUTH_ERROR })
   }
   return (dispatch) => {
-    axios.post(url, props)
-      .then(() => addDeviceSuccess(dispatch))
-      .catch(error => updateDeviceError(dispatch, error))
+    axios.post(`${ROOT_URL}/${url}`, props).then(res => {
+      dispatch({type: ADD_DEVICE, data: res.data})
+    }).catch(error => updateDeviceError(dispatch, error))
   }
-}
-
-const addDeviceSuccess = (dispatch) => {
-  dispatch(closeDeviceEditModal())
-  dispatch(fetchDevices())
 }
 
 export const updateDevice = (url, props) => {

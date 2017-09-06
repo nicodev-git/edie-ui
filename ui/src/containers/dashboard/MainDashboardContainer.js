@@ -43,7 +43,8 @@ import {
   closeDeviceMonitorPicker,
   updateMapDevice,
 
-  showDeviceTplPicker
+  showDeviceTplPicker,
+  addDevice
 } from 'actions'
 
 class MainDashboardContainer extends React.Component {
@@ -121,6 +122,7 @@ export default connect(
     closeDeviceMonitorPicker,
     updateMapDevice,
 
-    showDeviceTplPicker
+    showDeviceTplPicker,
+    addDevice
   }
 )(withRouter(MainDashboardContainer))

@@ -65,7 +65,7 @@ export default class Device extends React.Component {
 
   onFinishAddWizard (callback, res, params, url) {
     console.log(params)
-    // this.props.addMapDevice(params, url)
+    this.props.addDevice(params, url)
   }
 
   ///////////////////////////////////////////////////////////////////////////////////////////////
