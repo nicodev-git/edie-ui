@@ -3,6 +3,12 @@ import { Modal } from 'components/modal/parts'
 
 import LiquidView from 'components/common/gauge/display/LiquidView'
 
+const containerStyle = {
+  height: 300,
+  position: 'relative',
+  marginTop: 40
+}
+
 export default class MonitorDetailModalView extends React.Component {
   constructor (props) {
     super(props)
@@ -11,10 +17,12 @@ export default class MonitorDetailModalView extends React.Component {
     }
   }
   render () {
-    const {onHide} = this.props
+    const {onHide, title} = this.props
     return (
-      <Modal title="Monitor" onRequestClose={onHide} contentStyle={{}}>
-        <LiquidView value={this.state.value}/>
+      <Modal title={title} onRequestClose={onHide} contentStyle={{}}>
+        <div style={containerStyle}>
+          <LiquidView value={this.state.value}/>
+        </div>
       </Modal>
     )
   }
