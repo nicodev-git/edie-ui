@@ -81,7 +81,10 @@ export default connect(
     monitorPickerVisible: state.devices.monitorPickerVisible,
     monitorWizardVisible: state.devices.monitorWizardVisible,
 
-    deviceTplPickerOpen: state.dashboard.deviceTplPickerOpen
+    deviceTplPickerOpen: state.dashboard.deviceTplPickerOpen,
+    monitorDetailModalOpen: state.dashboard.monitorDetailModalOpen,
+    gaugeDevice: state.dashboard.gaugeDevice,
+    gaugeMonitor: state.dashboard.gaugeMonitor
   }), {
     fetchDevicesGroups,
     fetchMonitorGroups,

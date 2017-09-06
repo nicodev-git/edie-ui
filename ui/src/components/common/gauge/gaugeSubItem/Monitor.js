@@ -5,6 +5,7 @@ import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
 
 import MonitorWizardContainer from 'containers/shared/wizard/MonitorWizardContainer'
 import MonitorPicker from 'components/dashboard/map/device/monitors/MonitorPicker'
+import MonitorDetailModal from './MonitorDetailModal'
 import AppletCard from 'components/common/AppletCard'
 import { showAlert } from 'components/common/Alert'
 
@@ -158,6 +159,12 @@ export default class Monitor extends React.Component {
       />
     )
   }
+  renderMonitorDetail () {
+    if (!this.props.monitorDetailModalOpen) return null
+    return (
+      <MonitorDetailModal {...this.props}/>
+    )
+  }
   render () {
     const {devices} = this.props
     const {deviceId} = this.state
@@ -187,6 +194,7 @@ export default class Monitor extends React.Component {
 
         {this.renderMonitorPicker()}
         {this.renderMonitorWizard()}
+        {this.renderMonitorDetail()}
       </div>
     )
   }
