@@ -5,15 +5,107 @@ import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
 import AppletCard from 'components/common/AppletCard'
 import { extImageBaseUrl, appletColors as colors } from 'shared/Global'
 import DeviceTplPicker from 'containers/shared/wizard/DeviceTplPickerContainer'
+import { wizardConfig, getDeviceType } from 'components/common/wizard/WizardConfig'
+import DeviceWizardContainer from 'containers/shared/wizard/DeviceWizardContainer'
+
+import { showAlert } from 'components/common/Alert'
 
 export default class Device extends React.Component {
+  constructor (props) {
+    super(props)
+
+    this.state = {
+      deviceWizardConfig: {},
+      deviceWizardVisible: false,
+    }
+  }
   onClickAddDevice () {
     this.props.showDeviceTplPicker(true)
   }
   onClickDeviceTpl (tpl) {
-    console.log(tpl)
+    // console.log(tpl)
     this.props.showDeviceTplPicker(false)
+
+
+    const options = {
+      title: tpl.name,
+      type: getDeviceType(tpl.name),
+      imgName: tpl.image,
+      imageUrl: `/externalpictures?name=${tpl.image}`,
+      x: 0,
+      y: 0,
+      width: 50,
+      height: 50,
+
+      monitors: tpl.monitors,
+      templateName: tpl.name,
+      workflowids: tpl.workflowids || []
+    }
+
+    this.showAddWizard(options, (id, name, data) => {
+
+    }, () => {
+
+    })
   }
+
+  showAddWizard (options, callback, closeCallback) {
+    if (wizardConfig[options.type] === null) {
+      showAlert(`Unrecognized Type: ${options.type}`) // eslint-disable-line no-undef
+      return
+    }
+
+    this.setState({
+      deviceWizardConfig: {
+        options, callback, closeCallback
+      },
+      deviceWizardVisible: true
+    })
+  }
+
+  onFinishAddWizard (callback, res, params, url) {
+    console.log(params)
+    // this.props.addMapDevice(params, url)
+  }
+
+  ///////////////////////////////////////////////////////////////////////////////////////////////
+
+  renderDeviceWizard () {
+    if (!this.state.deviceWizardVisible) return null
+
+    const {options, callback, closeCallback} = this.state.deviceWizardConfig
+
+    let extra = {
+      mapid: null,
+      x: options.x,
+      y: options.y,
+      width: options.width,
+      height: options.height,
+      image: options.imgName,
+      templateName: options.templateName,
+      workflowids: options.workflowids
+    }
+
+    const config = {
+      mapid: null
+    }
+
+    return (
+      <DeviceWizardContainer
+        deviceType={options.type}
+        onClose={() => {
+          this.setState({deviceWizardVisible: false})
+          closeCallback && closeCallback()
+        }}
+        title={options.title}
+        monitors={options.monitors}
+        extraParams={extra}
+        configParams={config}
+        onFinish={this.onFinishAddWizard.bind(this, callback)}
+      />
+    )
+  }
+
   renderTpl (tpl, i) {
     const {onClickMenuItem} = this.props
     return (
@@ -54,6 +146,7 @@ export default class Device extends React.Component {
           {this.props.devices.map(this.renderTpl.bind(this))}
         </ul>
         {this.renderDeviceTplPicker()}
+        {this.renderDeviceWizard()}
       </div>
     )
   }

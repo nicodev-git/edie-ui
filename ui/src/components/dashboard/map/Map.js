@@ -14,7 +14,7 @@ import { ZoomOptions, ToolbarToggle } from './toolbar'
 
 import DeviceWizardContainer from 'containers/shared/wizard/DeviceWizardContainer'
 import { wizardConfig, getDeviceType } from 'components/common/wizard/WizardConfig'
-import { showConfirm } from 'components/common/Alert'
+import { showAlert, showConfirm } from 'components/common/Alert'
 
 import { fullScreen } from 'util/Fullscreen'
 import { isGroup } from 'shared/Global'
