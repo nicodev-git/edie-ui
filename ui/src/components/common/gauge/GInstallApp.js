@@ -96,10 +96,11 @@ export default class GInstallApp extends React.Component {
   }
 
   getApps () {
-    const {gauge} = this.props
+    // const {gauge} = this.props
     const {apps} = this.state
-    const dateFrom = moment().add(-gauge.duration, `${gauge.durationUnit}s`).startOf('day').valueOf()
-    return apps.filter(p => moment(p.InstallDate, 'YYYY-MM-DD').valueOf() >= dateFrom)
+    // const dateFrom = moment().add(-gauge.duration, `${gauge.durationUnit}s`).startOf('day').valueOf()
+    // return apps.filter(p => moment(p.InstallDate, 'YYYY-MM-DD').valueOf() >= dateFrom)
+    return apps
   }
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

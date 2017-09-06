@@ -99,7 +99,7 @@ export default class MainDashboardView extends React.Component {
         templateName: tpl.name,
         name: tpl.name,
         resource: 'search'
-      })
+      }, {tpl})
     } else {
       const options = {
         title: tpl.name,
