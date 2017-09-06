@@ -213,7 +213,7 @@ class GaugeWizard extends React.Component {
   }
   handleFormSubmit (formProps) {
     const { selectedSeverity, selectedMonitors, serviceNames, dateFrom, dateTo, selectedServers, selectedWorkflows } = this.state
-    const { extraParams, onFinish } = this.props
+    const { extraParams, onFinish, options } = this.props
 
     const props = assign({
         severities: selectedSeverity,
@@ -236,12 +236,12 @@ class GaugeWizard extends React.Component {
       }).then(res => {
         props.monitorIds = []
         props.monitorGroupId = res.data.id
-        onFinish && onFinish(null, props)
+        onFinish && onFinish(null, props, options)
       }).catch(() => {
         showAlert('Add logical group failed.')
       })
     } else {
-      onFinish && onFinish(null, props)
+      onFinish && onFinish(null, props, options)
     }
   }
 

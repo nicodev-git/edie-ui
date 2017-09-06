@@ -104,7 +104,8 @@ export default class MainDashboardView extends React.Component {
       const options = {
         title: tpl.name,
         templateName: tpl.name,
-        gaugeSize: 'big'
+        gaugeSize: 'big',
+        tpl
       }
 
       this.showAddWizard(options, (id, name, data) => {
@@ -127,11 +128,12 @@ export default class MainDashboardView extends React.Component {
     })
   }
 
-  onFinishAddWizard (callback, res, params, url) {
-    const {templateName} = params
+  onFinishAddWizard (callback, res, params, options) {
+    // const {templateName} = params
+    const {tpl} = options
     params.id = guid()
 
-    if (templateName === 'Cpu' || templateName === 'Memory' || templateName === 'Disk') {
+    /*if (templateName === 'Cpu' || templateName === 'Memory' || templateName === 'Disk') {
       if (params.gaugeType === 'accel') {
         params.layout = {
           x: 0, y: 0,
@@ -139,8 +141,12 @@ export default class MainDashboardView extends React.Component {
         }
         params.gaugeSize = 'custom'
       }
-    } else if(templateName === 'Incident Table') {
-      params.gaugeSize = 'very big'
+    } else */if (tpl.width && tpl.height){
+      params.layout = {
+        x: 0, y: 0,
+        w: tpl.width * layoutWidthZoom, h: tpl.height * layoutHeightZoom
+      }
+      params.gaugeSize = 'custom'
     }
     this.props.addGaugeItem(params, this.props.board)
   }
@@ -328,6 +334,7 @@ export default class MainDashboardView extends React.Component {
         monitors={this.getMonitors()}
         extraParams={extra}
         onFinish={this.onFinishAddWizard.bind(this, callback)}
+        options={options}
       />
     )
   }
