@@ -16,7 +16,9 @@ export default class FlipView extends React.Component {
     this.state = {
       flip: false,
       clicked: false,
-      hovered: false
+      hovered: false,
+
+      editModalOpen: false
     }
 
     this.onMouseEnter = this.onMouseEnter.bind(this)
@@ -30,11 +32,14 @@ export default class FlipView extends React.Component {
   }
 
   onClickFlip (e) {
-    const {onClickFlip} = this.props
-    this.setState({flip: !this.state.flip, clicked: true})
-    e && e.preventDefault()
-
-    onClickFlip && onClickFlip()
+    // const {onClickFlip} = this.props
+    // this.setState({flip: !this.state.flip, clicked: true})
+    // e && e.preventDefault()
+    //
+    // onClickFlip && onClickFlip()
+    this.setState({
+      editModalOpen: !this.state.editModalOpen
+    })
   }
 
   onMouseEnter () {
@@ -129,7 +134,7 @@ export default class FlipView extends React.Component {
 
   render () {
     const {className, style, modalView} = this.props
-    // const {flip} = this.state
+    const {editModalOpen} = this.state
 
     if (modalView) {
       return this.props.renderFrontView()
@@ -137,7 +142,8 @@ export default class FlipView extends React.Component {
 
     return (
       <div className={`${className || ''} card`} style={style}>
-        {this.renderCard('card-back', this.renderBack())}
+        {/*{this.renderCard('card-back', this.renderBack())}*/}
+        {editModalOpen && this.renderBack()}
         {this.renderCard('card-front', this.renderFront(), true)}
       </div>
     )
