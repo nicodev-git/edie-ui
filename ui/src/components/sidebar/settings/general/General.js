@@ -60,7 +60,7 @@ export default class General extends React.Component {
         </div>
 
         <div style={rowStyle} className="margin-md-bottom">
-          <div className="pull-left width-200">
+          <div className="inline-block width-200">
             <Checkbox
               label="Enable DMZ"
               checked={this.getOptionValue('DMZ') === 'true'}
@@ -70,12 +70,12 @@ export default class General extends React.Component {
             text={this.getOptionValue('DMZ', 'value2')}
             paramName="message"
             change={this.onChangeDmzIP.bind(this)}
-            className="pull-left margin-xs-top"
+            className="inline-block margin-xs-top"
             ref="dmzIp"
           />
         </div>
         <div style={rowStyle} className="margin-md-bottom">
-          <div className="pull-left width-200">
+          <div className="inline-block width-200">
             <Checkbox
               label="Pause System"
               checked={this.getOptionValue('PAUSE') === 'true'}
@@ -83,7 +83,7 @@ export default class General extends React.Component {
           </div>
         </div>
         <div style={rowStyle} className="margin-md-bottom">
-          <div className="pull-left width-200">
+          <div className="inline-block width-200">
             <Checkbox
               label="Display Network Traffic"
               checked={this.getOptionValue('NETWORK_TRAFFIC') === 'true'}
@@ -91,7 +91,7 @@ export default class General extends React.Component {
           </div>
         </div>
         <div style={rowStyle} className="margin-md-bottom">
-          <div className="pull-left width-200">
+          <div className="inline-block width-200">
             <Checkbox
               label="Send Error Logs With"
               checked={this.getOptionValue('REMOTE_LOG_ENABLED') === 'true'}
@@ -101,12 +101,12 @@ export default class General extends React.Component {
             text={this.getOptionValue('REMOTE_LOG_BATCH') || '[Empty]'}
             paramName="message"
             change={this.onChangeLogBatch.bind(this)}
-            className="pull-left margin-xs-top"
+            className="inline-block margin-xs-top"
           />
         </div>
 
         <div style={rowStyle} className="margin-md-bottom">
-          <div className="pull-left width-200">
+          <div className="inline-block width-200">
             <Checkbox
               label="Send to mobile"
               checked={this.getOptionValue('IMMOBILE') === 'true'}
@@ -117,14 +117,14 @@ export default class General extends React.Component {
             text={this.getOptionValue('IMMOBILE')}
             paramName="message"
             change={this.onChangeMobileIP.bind(this)}
-            className="pull-left margin-xs-top"
+            className="inline-block margin-xs-top"
             ref="mobileIp"
             minLength={0}
           />
         </div>
 
         <div style={rowStyle} className="margin-md-bottom">
-          <div className="pull-left width-200">
+          <div className="inline-block width-200">
             <Checkbox
               label="Show absolute date"
               checked={this.getUserOptionValue('useAbsoluteDate', false)}
@@ -134,7 +134,7 @@ export default class General extends React.Component {
             text={this.getUserOptionValue('dateFormat', defaultDateFormat)}
             paramName="dateFormat"
             change={this.onChangeDateFormat.bind(this)}
-            className="pull-left margin-xs-top"
+            className="inline-block margin-xs-top"
             ref="dateFormat"
             minLength={0}
           />
@@ -142,7 +142,7 @@ export default class General extends React.Component {
         </div>
 
         <div style={rowStyle} className="margin-md-bottom">
-          <div className="pull-left width-200">
+          <div className="inline-block width-200">
             <Checkbox
               label="Keep Incident Alert"
               checked={!!this.getUserOptionValue('keepIncidentAlert', false)}
@@ -150,8 +150,8 @@ export default class General extends React.Component {
           </div>
         </div>
 
-        <div style={rowStyle} className="margin-md-bottom">
-          <div className="pull-left width-200">
+        <div className="margin-md-bottom">
+          <div className="inline-block width-200">
             <SelectField
               value={this.getUserOptionValue('defaultPage', 'main')}
               onChange={this.onChangeShowPage.bind(this)}
