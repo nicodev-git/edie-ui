@@ -188,9 +188,16 @@ export default class GLineChart extends React.Component {
         tag: '',
         monitorTypes: ''
       }
-      const params = { ...searchParams, splitBy, splitUnit,
-        dateFrom: dateFrom.format(dateFormat),
-        dateTo: dateTo.format(dateFormat)
+      const params = {
+        q: [
+          `(workflowids:${[workflowId, ...workflowIds].filter(p => !!p).join(' OR ')})`,
+          `(severity:${severities.map(p => p.value).join(' OR ')})`
+        ].join(' AND '),
+        splitBy,
+        splitUnit,
+        from: dateFrom.valueOf(),
+        to: dateTo.valueOf(),
+        type: 'incident'
       }
       axios.get(`${ROOT_URL}/search/getRecordCount`, {params}).then(res => {
         this.setState({
@@ -211,9 +218,12 @@ export default class GLineChart extends React.Component {
       }
       const searchParams = JSON.parse(searchList[index].data)
 
-      const params = { ...searchParams, splitBy, splitUnit,
-        dateFrom: dateFrom.format(dateFormat),
-        dateTo: dateTo.format(dateFormat)
+      const params = {
+        ...searchParams,
+        splitBy,
+        splitUnit,
+        from: dateFrom.valueOf(),
+        to: dateTo.valueOf()
       }
       axios.get(`${ROOT_URL}/search/getRecordCount`, {params}).then(res => {
         this.setState({
