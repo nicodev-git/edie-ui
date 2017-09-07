@@ -1,16 +1,14 @@
 import React from 'react'
-import AutoSizer from 'react-virtualized/dist/commonjs/AutoSizer'
+import Dimen from 'react-dimensions'
 import {Line} from 'react-chartjs-2'
 
-export default class LineChart extends React.Component {
+class LineChart extends React.Component {
   render () {
     const {chartData, chartOptions} = this.props
     return (
-      <AutoSizer>
-        {({ height, width }) => (
-          <Line data={chartData} options={chartOptions} width={width} height={height} />
-        )}
-      </AutoSizer>
+      <Line data={chartData} options={chartOptions} width={this.props.containerWidth || 100} height={this.props.containerHeight || 100} />
     )
   }
 }
+
+export default Dimen()(LineChart)

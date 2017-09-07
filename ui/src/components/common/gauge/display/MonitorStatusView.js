@@ -1,6 +1,6 @@
 import React from 'react'
 import moment from 'moment'
-import AutoSizer from 'react-virtualized/dist/commonjs/AutoSizer'
+import Dimen from 'react-dimensions'
 
 const containerStyle = {
   position: 'absolute',
@@ -10,8 +10,10 @@ const containerStyle = {
   width: '100%'
 }
 
-export default class MonitorStatusView extends React.Component {
-  getSizeInfo (w, h) {
+class MonitorStatusView extends React.Component {
+  getSizeInfo () {
+    const w = this.props.containerWidth || 100
+    const h = this.props.containerHeight || 100
     if (w >= 280 && h >= 170) {
       return {
         mt: 20,
@@ -30,27 +32,19 @@ export default class MonitorStatusView extends React.Component {
   render () {
     const {isUp, lastUpdate, hideLabel, title, onClick} = this.props
     const imgName = `/resources/images/dashboard/map/triangle-${isUp ? 'up' : 'down'}.png`
-
+    const size = this.getSizeInfo()
     return (
-      <AutoSizer>
-        {({ width, height }) => {
-          const size = this.getSizeInfo(width, height)
-          return (
-            <div className="text-center link" style={containerStyle} onClick={onClick}>
-              <div className={`text-ellipsis ${isUp ? 'text-success' : 'text-danger'}`} style={{fontSize: size.iconFont}}>
-                <img src={imgName} width={size.icon} alt="" className="valign-top" style={{marginTop: size.mt}}/>
-                <span className="margin-md-left">{title || (isUp ? 'Up' : 'Down')}</span>
-              </div>
-              {!hideLabel && <div style={{fontSize: size.text}}>Last {isUp ? 'down' : 'up'} {lastUpdate ? moment(lastUpdate).fromNow() : 'never'}</div>}
-            </div>
-          )
-        }}
-      </AutoSizer>
+      <div className="text-center link" style={containerStyle} onClick={onClick}>
+        <div className={`text-ellipsis ${isUp ? 'text-success' : 'text-danger'}`} style={{fontSize: size.iconFont}}>
+          <img src={imgName} width={size.icon} alt="" className="valign-top" style={{marginTop: size.mt}}/>
+          <span className="margin-md-left">{title || (isUp ? 'Up' : 'Down')}</span>
+        </div>
+        {!hideLabel && <div style={{fontSize: size.text}}>Last {isUp ? 'down' : 'up'} {lastUpdate ? moment(lastUpdate).fromNow() : 'never'}</div>}
+      </div>
     )
-
   }
 }
 
-// export default Dimen({
-//   elementResize: true
-// })(MonitorStatusView)
+export default Dimen({
+  elementResize: true
+})(MonitorStatusView)
