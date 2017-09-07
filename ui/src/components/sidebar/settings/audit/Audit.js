@@ -21,18 +21,21 @@ export default class Audit extends React.Component {
         return <span>{moment(p.data).format('YYYY-MM-DD HH:mm:ss')}</span>
       }
     }, {
-      'displayName': 'IP',
-      'columnName': 'ipaddress'
+      'displayName': 'Action',
+      'columnName': 'action'
     }, {
       'displayName': 'User',
       'columnName': 'fullname'
+    }, {
+      'displayName': 'IP',
+      'columnName': 'ipaddress'
     }]
   }
 
   renderContent () {
     return (
       <InfiniteTable
-        url="/loginaudit"
+        url="/useraudit"
         cells={this.cells}
         ref="table"
         rowMetadata={{'key': 'id'}}

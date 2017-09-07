@@ -37,13 +37,14 @@ export default class MapMenu extends React.Component {
   }
 
   onClickDelete () {
-    const {selectedMap} = this.props
+    const {selectedMap, userInfo} = this.props
     if (!selectedMap) return showAlert('Please choose a map to delete.')
 
     showConfirm('Are you sure that you want to delete the map?', btn => {
       if (btn !== 'ok') return
 
       this.props.deleteMap(selectedMap)
+      this.props.addAudit(userInfo.username, userInfo.fullname, `Delete Map '${selectedMap.name}'. Id: ${selectedMap.id}`)
     })
   }
 
