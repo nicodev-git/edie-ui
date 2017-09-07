@@ -177,7 +177,7 @@ export default class GBarChart extends React.Component {
       })
 
       const params = {
-        ...searchParams,
+        q: searchParams.q,
         splitBy,
         splitUnit,
         from: dateFrom.valueOf(),
