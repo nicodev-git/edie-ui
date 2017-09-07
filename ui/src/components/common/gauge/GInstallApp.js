@@ -1,5 +1,4 @@
 import React from 'react'
-import moment from 'moment'
 
 import FlipView from './FlipView'
 import GEditView from './GEditView'
@@ -102,6 +101,10 @@ export default class GInstallApp extends React.Component {
     // return apps.filter(p => moment(p.InstallDate, 'YYYY-MM-DD').valueOf() >= dateFrom)
     return apps
   }
+  getTitle () {
+    const {gauge} = this.props
+    return gauge.name
+  }
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   renderFrontView () {
@@ -137,6 +140,7 @@ export default class GInstallApp extends React.Component {
         style={this.props.style}
         className={this.props.className}
         gauge={this.props.gauge}
+        title={this.getTitle()}
 
         loading={this.state.loading}
         renderFrontView={this.renderFrontView}
