@@ -152,7 +152,7 @@ class GenericSearch extends React.Component {
     } else {
       this.props.updateSearchViewFilter(viewFilters.standard)
     }
-    // this.props.fetchSearchFields(params)
+    this.props.fetchSearchFields(params)
   }
 
   formatDate (time) {
