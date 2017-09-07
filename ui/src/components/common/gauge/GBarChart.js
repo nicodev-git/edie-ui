@@ -226,6 +226,14 @@ export default class GBarChart extends React.Component {
       this.props.loadSearch(params, this.props.history)
     }, 1)
   }
+  getTitle () {
+    const {gauge} = this.props
+    if (gauge.resource !== 'monitor') return null
+    const devices = this.props.allDevices || this.props.devices
+    const index = findIndex(devices, {id: gauge.deviceId})
+    if (index < 0) return gauge.name
+    return `[${devices[index].name}] ${gauge.name}`
+  }
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   renderFrontView () {
@@ -270,6 +278,7 @@ export default class GBarChart extends React.Component {
         style={this.props.style}
         className={this.props.className}
         gauge={this.props.gauge}
+        title={this.getTitle()}
 
         loading={this.state.loading}
         renderFrontView={this.renderFrontView}
