@@ -46,12 +46,20 @@ const signUserSuccess = (dispatch, response, redirect, history) => {
         pathname: loc.p,
         search: loc.q
       })
+      dispatch(fetchUserInfo())
       return
     } catch (e) {
 
     }
   }
-  history.push('/')
+
+  dispatch(fetchUserInfo(user => {
+    if (user.defaultPage === 'dashboard') {
+      history.push('/dashboard')
+      return
+    }
+    history.push('/')
+  }))
 }
 
 export const signOut = () => {
@@ -78,20 +86,21 @@ const signupSuccess = (dispatch, response) => {
   // browserHistory.push('/feature')
 }
 
-export const fetchUserInfo = () => {
+export const fetchUserInfo = (cb) => {
   return (dispatch) => {
     axios.get(`${ROOT_URL}/api/me`, getAuthConfig())
-      .then(response => fetchUserInfoSuccess(dispatch, response))
+      .then(response => fetchUserInfoSuccess(dispatch, response, cb))
       .catch(error => authError(dispatch, error))
   }
 }
 
-const fetchUserInfoSuccess = (dispatch, response) => {
+const fetchUserInfoSuccess = (dispatch, response, cb) => {
   axios.get(`${ROOT_URL}/user/${response.data.id}`).then(res => {
     dispatch({
       type: FETCH_USER_INFO,
       data: res.data
     })
+    cb && cb(res.data)
   }).catch(error => authError(dispatch, error))
 }
 

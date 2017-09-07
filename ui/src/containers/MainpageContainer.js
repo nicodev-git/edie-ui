@@ -90,7 +90,7 @@ import {
 
 class MainpageContainer extends Component {
   componentWillMount () {
-    this.props.fetchUserInfo()
+    // this.props.fetchUserInfo()
 
     this.deviceBuffer = []
     this.fnProcessBuffer = debounce(this.processBuffer.bind(this), 1000)
