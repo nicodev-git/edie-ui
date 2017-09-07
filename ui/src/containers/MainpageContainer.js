@@ -85,7 +85,8 @@ import {
   updateDeviceIncident,
   showCommentsModal,
 
-  showAttackerModal
+  showAttackerModal,
+  addAudit
 } from 'actions'
 
 class MainpageContainer extends Component {
@@ -337,5 +338,6 @@ dispatch => bindActionCreators({
   updateDeviceIncident,
   showCommentsModal,
 
-  showAttackerModal
+  showAttackerModal,
+  addAudit
 }, dispatch))(withRouter(MainpageContainer))

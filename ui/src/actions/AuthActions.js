@@ -189,3 +189,13 @@ const fetchMessageSuccess = (dispatch, response) => {
     payload: response.data.username
   })
 }
+
+export const addAudit = (userId, fullname, action) => {
+  return dispatch => {
+    axios.post(`${ROOT_URL}/useraudit`, {
+      userId,
+      fullname,
+      action
+    })
+  }
+}
