@@ -1,4 +1,5 @@
 import React from 'react'
+import {findIndex} from 'lodash'
 
 import FlipView from './FlipView'
 import GEditView from './GEditView'
@@ -103,7 +104,10 @@ export default class GInstallApp extends React.Component {
   }
   getTitle () {
     const {gauge} = this.props
-    return gauge.name
+    const devices = this.props.allDevices || this.props.devices
+    const index = findIndex(devices, {id: gauge.deviceId})
+    if (index < 0) return gauge.name
+    return `[${devices[index].name}] ${gauge.name}`
   }
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
