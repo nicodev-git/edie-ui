@@ -95,6 +95,15 @@ export default class GMonitor extends React.Component {
     }
   }
 
+
+  getTitle () {
+    const {gauge} = this.props
+    if (gauge.resource === 'logicalgroup') return
+    const devices = this.props.allDevices || this.props.devices
+    const index = findIndex(devices, {id: gauge.deviceId})
+    if (index < 0) return gauge.name
+    return `[${devices[index].name}] ${gauge.name}`
+  }
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   renderFrontView () {
@@ -140,6 +149,7 @@ export default class GMonitor extends React.Component {
         style={this.props.style}
         className={this.props.className}
         gauge={this.props.gauge}
+        title={this.getTitle()}
 
         loading={this.state.loading}
         renderFrontView={this.renderFrontView}

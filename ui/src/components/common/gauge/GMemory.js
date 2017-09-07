@@ -154,6 +154,14 @@ export default class GMemory extends React.Component {
     this.props.updateDeviceGauge(gauge, this.props.device)
     options.onClickFlip()
   }
+  getTitle () {
+    const {gauge} = this.props
+    const devices = this.props.allDevices || this.props.devices
+    const index = findIndex(devices, {id: gauge.deviceId})
+    if (index < 0) return gauge.name
+    return `[${devices[index].name}] ${gauge.name}`
+  }
+  //////////////////////////////////////////////////////////////////////////////////////////////
 
   renderFrontView () {
     const {gauge} = this.props
@@ -216,6 +224,7 @@ export default class GMemory extends React.Component {
         style={this.props.style}
         className={this.props.className}
         gauge={this.props.gauge}
+        title={this.getTitle()}
 
         loading={this.state.loading}
         renderFrontView={this.renderFrontView}
