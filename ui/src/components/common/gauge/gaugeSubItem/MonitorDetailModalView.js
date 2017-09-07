@@ -32,7 +32,7 @@ export default class MonitorDetailModalView extends React.Component {
     return (
       <Modal title={title} onRequestClose={onHide} contentStyle={{}}>
         <div className="flex-vertical" style={containerStyle}>
-          {this.renderGauge(gauge)}
+          {gauge && this.renderGauge(gauge)}
         </div>
       </Modal>
     )

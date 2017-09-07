@@ -5,7 +5,8 @@ import MonitorDetailModalView from './MonitorDetailModalView'
 const templateMap = {
   'cpu': 'Cpu',
   'memory': 'Memory',
-  'disk': 'Disk'
+  'disk': 'Disk',
+  'ping': 'Up/Down'
 }
 
 export default class MonitorDetailModal extends React.Component {
@@ -16,25 +17,30 @@ export default class MonitorDetailModal extends React.Component {
     const {gaugeMonitor, gaugeDevice} = this.props
     const {monitortype} = gaugeMonitor
     if (['cpu', 'disk', 'memory'].includes(monitortype)) {
-      const gauge = {
+      return {
         name : '',
         templateName: templateMap[monitortype],
         deviceId : gaugeDevice.id,
         timing: 'realtime',
         gaugeType: monitortype === 'memory' ? 'liquid' : 'accel'
       }
-      return gauge
-    } else {
-
+    } else if (monitortype === 'ping') {
+      return {
+        name : '',
+        templateName: templateMap[monitortype],
+        deviceId : gaugeDevice.id,
+        monitorId: gaugeMonitor.uid
+      }
     }
   }
   render () {
     const {gaugeMonitor, gaugeDevice} = this.props
+    const gauge = this.getGagueItem()
     return (
       <MonitorDetailModalView
         title={`${gaugeMonitor.name} - ${gaugeDevice.name}`}
         onHide={this.onHide.bind(this)}
-        gauge={this.getGagueItem()}
+        gauge={gauge}
       />
     )
   }
