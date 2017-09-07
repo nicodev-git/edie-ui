@@ -283,7 +283,7 @@ export function parseDateRange (parsed, ranges, queryDateFormat) {
 }
 
 export function parseParams (queryParams, {dateRanges, collections, severities, queryDateFormat}) {
-  const parsed = QueryParser.parse(queryParams.q)
+  const parsed = QueryParser.parse(queryParams.q || '')
 
   const dateRange = parseDateRange(parsed, dateRanges, queryDateFormat)
 
@@ -319,7 +319,7 @@ export function buildServiceParams (queryParams, {dateRanges, collections, sever
   const { from, to, workflowNames, monitorName, types, severity } = parseParams(queryParams, {
     dateRanges, collections, severities, queryDateFormat
   })
-  const parsed = QueryParser.parse(queryParams.q)
+  const parsed = QueryParser.parse(queryParams.q || '')
 
   removeField(findField(parsed, 'workflows'), true)
   removeField(findField(parsed, 'monitor'))
