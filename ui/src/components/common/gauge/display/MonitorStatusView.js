@@ -12,8 +12,8 @@ const containerStyle = {
 
 class MonitorStatusView extends React.Component {
   getSizeInfo () {
-    const w = this.props.containerWidth
-    const h = this.props.containerHeight
+    const w = this.props.containerWidth || 100
+    const h = this.props.containerHeight || 100
     if (w >= 280 && h >= 170) {
       return {
         mt: 20,

@@ -17,7 +17,7 @@ class PieChart extends React.Component {
   render () {
     const {chartData} = this.props
     return (
-      <Pie data={chartData} options={chartOptions} width={this.props.containerWidth} height={this.props.containerHeight} />
+      <Pie data={chartData} options={chartOptions} width={this.props.containerWidth || 100} height={this.props.containerHeight || 100} />
     )
   }
 }
