@@ -2,12 +2,12 @@ import React from 'react'
 import { color } from 'd3-color'
 import { interpolateRgb } from 'd3-interpolate'
 import LiquidFillGauge from 'react-liquid-gauge'
-import Dimen from 'react-dimensions'
+import AutoSizer from 'react-virtualized/dist/commonjs/AutoSizer'
 
 const startColor = '#6495ed'; // cornflowerblue
 const endColor = '#dc143c'; // crimson
 
-class LiquidView extends React.Component {
+export default class LiquidView extends React.Component {
   // constructor (props) {
   //   super(props)
   //   this.state = {
@@ -17,7 +17,7 @@ class LiquidView extends React.Component {
 
   render () {
     const {value, title} = this.props
-    const radius = Math.max(Math.min(this.props.containerWidth || 100, this.props.containerHeight || 100) * 0.48, 10);
+
     const interpolate = interpolateRgb(startColor, endColor);
     const fillColor = interpolate(value / 100);
     const gradientStops = [
@@ -42,61 +42,68 @@ class LiquidView extends React.Component {
     ];
 
     return (
-      <div className="text-center" style={{paddingTop: (this.props.containerHeight || 100) / 2 - radius}}>
-        <LiquidFillGauge
-          style={{ margin: '0 auto' }}
-          width={radius * 2}
-          height={radius * 2}
-          value={value}
-          percent="%"
-          textSize={1}
-          textOffsetX={0}
-          textOffsetY={0}
-          textRenderer={(props) => {
-            const value = props.value;
-            const radius = Math.min(props.height / 2, props.width / 2);
-            const textPixels = (props.textSize * radius / 2);
-            const valueStyle = {
-              fontSize: textPixels
-            };
-            const percentStyle = {
-              fontSize: textPixels * 0.6
-            };
+      <AutoSizer>
+        {({ height, width }) => {
+          const radius = Math.max(Math.min(width, height || 100) * 0.48, 10);
+          return (
+            <div className="text-center" style={{paddingTop: (height || 100) / 2 - radius}}>
+              <LiquidFillGauge
+                style={{ margin: '0 auto' }}
+                width={radius * 2}
+                height={radius * 2}
+                value={value}
+                percent="%"
+                textSize={1}
+                textOffsetX={0}
+                textOffsetY={0}
+                textRenderer={(props) => {
+                  const value = props.value;
+                  const radius = Math.min(props.height / 2, props.width / 2);
+                  const textPixels = (props.textSize * radius / 2);
+                  const valueStyle = {
+                    fontSize: textPixels
+                  };
+                  const percentStyle = {
+                    fontSize: textPixels * 0.6
+                  };
 
-            return (
-              <tspan>
-                <tspan className="value" style={valueStyle}>{value}</tspan>
-                <tspan style={percentStyle}>{props.percent}</tspan>
-              </tspan>
-            );
-          }}
-          riseAnimation={false}
-          waveAnimation={false}
-          waveFrequency={2}
-          waveAmplitude={1}
-          gradient
-          gradientStops={gradientStops}
-          circleStyle={{
-            fill: fillColor
-          }}
-          waveStyle={{
-            fill: fillColor
-          }}
-          textStyle={{
-            fill: color('#444').toString(),
-            fontFamily: 'Arial'
-          }}
-          waveTextStyle={{
-            fill: color('#fff').toString(),
-            fontFamily: 'Arial'
-          }}
-        />
-        <div className="text-center">{title}</div>
-      </div>
+                  return (
+                    <tspan>
+                      <tspan className="value" style={valueStyle}>{value}</tspan>
+                      <tspan style={percentStyle}>{props.percent}</tspan>
+                    </tspan>
+                  );
+                }}
+                riseAnimation={false}
+                waveAnimation={false}
+                waveFrequency={2}
+                waveAmplitude={1}
+                gradient
+                gradientStops={gradientStops}
+                circleStyle={{
+                  fill: fillColor
+                }}
+                waveStyle={{
+                  fill: fillColor
+                }}
+                textStyle={{
+                  fill: color('#444').toString(),
+                  fontFamily: 'Arial'
+                }}
+                waveTextStyle={{
+                  fill: color('#fff').toString(),
+                  fontFamily: 'Arial'
+                }}
+              />
+              <div className="text-center">{title}</div>
+            </div>
+          )
+        }}
+      </AutoSizer>
     )
   }
 }
 
-export default Dimen({
-  elementResize: true
-})(LiquidView)
+// export default Dimen({
+//   elementResize: true
+// })(LiquidView)

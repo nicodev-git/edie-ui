@@ -1,5 +1,5 @@
 import React from 'react'
-import Dimen from 'react-dimensions'
+import AutoSizer from 'react-virtualized/dist/commonjs/AutoSizer'
 import {Pie} from 'react-chartjs-2'
 
 const chartOptions = {
@@ -13,13 +13,17 @@ const chartOptions = {
   }
 }
 
-class PieChart extends React.Component {
+export default class PieChart extends React.Component {
   render () {
     const {chartData} = this.props
     return (
-      <Pie data={chartData} options={chartOptions} width={this.props.containerWidth || 100} height={this.props.containerHeight || 100} />
+      <AutoSizer>
+        {({ width, height }) => (
+          <Pie data={chartData} options={chartOptions} width={width} height={height} />
+        )}
+      </AutoSizer>
     )
   }
 }
 
-export default Dimen()(PieChart)
+// export default Dimen()(PieChart)
