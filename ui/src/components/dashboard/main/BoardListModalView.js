@@ -12,10 +12,10 @@ export default class BoardListModalView extends React.Component {
     const {onClickAdd, onClickSetDefault} = this.props
     return (
       <div>
-        <IconButton onTouchTap={onClickSetDefault}>
+        <IconButton onTouchTap={onClickSetDefault} tooltip="Set Default">
           <SetDefIcon size={32}/>
         </IconButton>
-        <IconButton onTouchTap={onClickAdd}>
+        <IconButton onTouchTap={onClickAdd} tooltip="Add New Dashboard">
           <AddCircleIcon size={32}/>
         </IconButton>
       </div>

@@ -39,7 +39,7 @@ export default class BoardListModal extends React.Component {
   }
 
   onClickEdit (item) {
-    showPrompt('Please type name.', '', name => {
+    showPrompt('Please type name.', item.name, name => {
       if (!name) return
       this.props.updateGaugeBoard({
         ...item,
