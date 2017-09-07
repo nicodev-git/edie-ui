@@ -59,7 +59,7 @@ export default class FlipView extends React.Component {
     const {onClickDelete, onClickMinimize, onClickMaximize, onClickRefresh, gauge} = this.props
     return (
       <div
-        style={{position: 'absolute', right: 5, bottom: 5, zIndex: 1}}
+        style={{position: 'absolute', right: 5, bottom: 5, zIndex: 11}}
         className={`link info-button ${hovered ? 'visible' : ''}`}>
         {onClickRefresh && <RefreshIcon onTouchTap={() => onClickRefresh(gauge)}/>}
         {
