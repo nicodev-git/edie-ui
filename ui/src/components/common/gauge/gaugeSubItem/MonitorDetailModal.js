@@ -24,10 +24,10 @@ export default class MonitorDetailModal extends React.Component {
         timing: 'realtime',
         gaugeType: monitortype === 'memory' ? 'liquid' : 'accel'
       }
-    } else if (monitortype === 'ping') {
+    } else {
       return {
         name : '',
-        templateName: templateMap[monitortype],
+        templateName: 'Up/Down',
         deviceId : gaugeDevice.id,
         monitorId: gaugeMonitor.uid
       }
@@ -38,6 +38,7 @@ export default class MonitorDetailModal extends React.Component {
     const gauge = this.getGagueItem()
     return (
       <MonitorDetailModalView
+        {...this.props}
         title={`${gaugeMonitor.name} - ${gaugeDevice.name}`}
         onHide={this.onHide.bind(this)}
         gauge={gauge}
