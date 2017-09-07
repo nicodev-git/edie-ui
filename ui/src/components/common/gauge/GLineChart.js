@@ -177,7 +177,7 @@ export default class GLineChart extends React.Component {
       }).catch(() => {
         setTimeout(() => {
           this.setState({needRefresh: true})
-        }, 2000)
+        }, 5000)
       })
     } else if (resource === 'incident'){
       const searchParams = {
@@ -201,7 +201,7 @@ export default class GLineChart extends React.Component {
       }).catch(() => {
         setTimeout(() => {
           this.setState({needRefresh: true})
-        }, 2000)
+        }, 5000)
       })
     } else {
       const index = findIndex(searchList, {id: savedSearchId})

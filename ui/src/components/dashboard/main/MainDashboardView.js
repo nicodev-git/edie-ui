@@ -340,30 +340,35 @@ export default class MainDashboardView extends React.Component {
   }
 
   renderGauge (p) {
-    let GaugePanel = GaugeMap[p.templateName || 'z']
-    if (!GaugePanel) return <div key={p.id}/>
-    const flip = this.state.flip[p.id]
     return (
-      <div key={p.id} style={flip ? {zIndex: 10} : null}>
-        <GaugePanel
-          {...this.props}
-          gauge={p}
-          device={{id: p.deviceId}}
-          searchList={this.getSearchList()}
-          monitors={this.getMonitors()}
-
-          flip={flip}
-          onClickFlip={this.onClickFlip.bind(this, p.id)}
-
-          updateDeviceGauge={gauge => this.props.updateGaugeItem(gauge, this.props.board)}
-          removeDeviceGauge={gauge => this.props.removeGaugeItem(gauge, this.props.board)}
-          onClickMinimize={this.onClickGaugeMinimize.bind(this)}
-          onClickMaximize={this.onClickGaugeMaximize.bind(this)}
-          onClickModalView={this.onClickGaugeViewModal.bind(this)}
-          style={flip ? gaugeEditViewStyle : {width: '100%', height: '100%'}}
-        />
+      <div key={p.id} style={{background: 'white'}}>
+        {p.name}
       </div>
     )
+    // let GaugePanel = GaugeMap[p.templateName || 'z']
+    // if (!GaugePanel) return <div key={p.id}/>
+    // const flip = this.state.flip[p.id]
+    // return (
+    //   <div key={p.id} style={flip ? {zIndex: 10} : null}>
+    //     <GaugePanel
+    //       {...this.props}
+    //       gauge={p}
+    //       device={{id: p.deviceId}}
+    //       searchList={this.getSearchList()}
+    //       monitors={this.getMonitors()}
+    //
+    //       flip={flip}
+    //       onClickFlip={this.onClickFlip.bind(this, p.id)}
+    //
+    //       updateDeviceGauge={gauge => this.props.updateGaugeItem(gauge, this.props.board)}
+    //       removeDeviceGauge={gauge => this.props.removeGaugeItem(gauge, this.props.board)}
+    //       onClickMinimize={this.onClickGaugeMinimize.bind(this)}
+    //       onClickMaximize={this.onClickGaugeMaximize.bind(this)}
+    //       onClickModalView={this.onClickGaugeViewModal.bind(this)}
+    //       style={flip ? gaugeEditViewStyle : {width: '100%', height: '100%'}}
+    //     />
+    //   </div>
+    // )
   }
 
   renderAddMenu () {
@@ -443,7 +448,7 @@ export default class MainDashboardView extends React.Component {
     return (
       <div>
         {this.renderAddMenu()}
-        {/*{this.renderGrid()}*/}
+        {this.renderGrid()}
 
         {this.renderGaugePicker()}
         {this.renderDeviceWizard()}
