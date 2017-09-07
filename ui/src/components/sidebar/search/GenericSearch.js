@@ -120,7 +120,7 @@ class GenericSearch extends React.Component {
         })
         this.props.updateSearchViewFilter('')
         this.props.resetViewCols()
-        this.props.updateQueryParams(params, this.props.history)
+        this.updateQueryParams(params)
         this.props.change('query', params.q)
       } catch (e) {}
     } else if (filterType) {
@@ -147,12 +147,11 @@ class GenericSearch extends React.Component {
 
       this.props.updateSearchViewFilter('')
       this.props.resetViewCols()
-      this.props.updateQueryParams(params, this.props.history)
+      this.updateQueryParams(params)
       this.props.change('query', q)
     } else {
       this.props.updateSearchViewFilter(viewFilters.standard)
     }
-    this.props.fetchSearchFields(params)
   }
 
   formatDate (time) {
@@ -240,24 +239,11 @@ class GenericSearch extends React.Component {
     console.log(parsed)
     console.log(QueryParser.toString(parsed))
 
-    this.props.updateQueryParams({
+    this.updateQueryParams({
       ...queryParams,
       q: query,
       draw: queryParams.draw + 1
-    }, this.props.history)
-
-    // const newChips = parseSearchQuery(query)
-    // const newQueryChips = concat([], queryChips, newChips)
-    //
-    // this.props.updateQueryChips(newQueryChips)
-    //
-    // const newQuery = newQueryChips.map(m => `${m.name}=${m.value}`).join(' and ')
-    // const params = assign({}, this.props.params, {
-    //   query: newQuery
-    // })
-    // this.props.updateSearchParams(params, this.props.history)
-    //
-    // this.props.change('query', '')
+    })
   }
 
   getTypeChar (type) {
@@ -275,10 +261,14 @@ class GenericSearch extends React.Component {
     if (newQuery === null) return
 
     this.props.change('query', newQuery)
-    this.props.updateQueryParams({
+    this.updateQueryParams({
       ...this.props.queryParams,
       q: newQuery
-    }, this.props.history)
+    })
+  }
+  updateQueryParams (params) {
+    const serviceParams = this.getServiceParams(params)
+    this.props.updateQueryParams(params, serviceParams, this.props.history)
   }
 
   handleRequestClose () {
@@ -516,12 +506,11 @@ class GenericSearch extends React.Component {
       '(type:all)',
       `(from:Ever)`
     ].join(' AND ')
-    this.props.updateQueryParams({
+    this.updateQueryParams({
       ...this.props.queryParams,
       draw: 1,
       q
-    }, this.props.history)
-
+    })
     this.props.change('query', q)
   }
 
@@ -754,8 +743,8 @@ class GenericSearch extends React.Component {
     )
   }
 
-  getParams () {
-    const {queryParams} = this.props
+  getParams (queryParams) {
+    if (!queryParams) queryParams = this.props.queryParams
     const parsed = this.parse(queryParams.q)
 
     const dateRange = parseDateRange(parsed, getRanges(), queryDateFormat)
@@ -776,9 +765,11 @@ class GenericSearch extends React.Component {
     return ret
   }
 
-  getServiceParams () {
-    const { queryParams, workflows } = this.props
-    const { from, to, workflowNames, monitorName, types, severity } = this.getParams()
+  getServiceParams (queryParams) {
+    const { workflows } = this.props
+    if (!queryParams) queryParams = this.props.queryParams
+
+    const { from, to, workflowNames, monitorName, types, severity } = this.getParams(queryParams)
     const parsed = this.parse(queryParams.q)
 
     removeField(findField(parsed, 'workflows'), true)

@@ -64,7 +64,7 @@ import {
 } from './types'
 import { ROOT_URL } from './config'
 import { apiError } from './Errors'
-import {dateFormat, parseSearchQuery} from 'shared/Global'
+import {dateFormat, parseSearchQuery, encodeUrlParams} from 'shared/Global'
 
 export const updateSearchParams = (params, history) => {
   return function (dispatch) {
@@ -80,9 +80,9 @@ export const updateSearchParams = (params, history) => {
   }
 }
 
-export const updateQueryParams = (params, history) => {
+export const updateQueryParams = (params, serviceParams, history) => {
   return dispatch => {
-    dispatch(fetchSearchFields(params))
+    dispatch(fetchSearchFields(serviceParams))
     dispatch({type: UPDATE_QUERY_PARAMS, params})
     history.replace({
       pathname: '/search',
@@ -93,7 +93,7 @@ export const updateQueryParams = (params, history) => {
 
 export const fetchSearchFields = (params) => {
   return dispatch => {
-    axios.get(`${ROOT_URL}/search/fields`, {params}).then(res => {
+    axios.get(`${ROOT_URL}/search/fields?${encodeUrlParams(params)}`).then(res => {
       dispatch({type: UPDATE_SEARCH_FIELDS, data: res.data})
     }).catch(error => apiError(dispatch, error))
   }
