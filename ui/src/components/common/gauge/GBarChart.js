@@ -4,14 +4,16 @@ import {findIndex} from 'lodash'
 import axios from 'axios'
 
 import { ROOT_URL } from 'actions/config'
-import { dateFormat, severities } from 'shared/Global'
+import { severities, queryDateFormat, collections, encodeUrlParams } from 'shared/Global'
 
 import FlipView from './FlipView'
 import BarChart from './display/BarChart'
 import GEditView from './GEditView'
 
 import {showAlert} from 'components/common/Alert'
+import {getRanges} from 'components/common/DateRangePicker'
 
+import {buildServiceParams} from 'util/Query'
 const sampleData = []
 
 const chartOptions = {
@@ -103,8 +105,8 @@ export default class GBarChart extends React.Component {
   }
 
   fetchRecordCount (props) {
-    const {gauge, searchList} = props
-    const {savedSearchId, monitorId, resource, duration, durationUnit, splitBy, splitUnit,workflowId} = gauge
+    const {gauge, searchList, workflows, devices, allDevices} = props
+    const {savedSearchId, monitorId, resource, duration, durationUnit, splitBy, splitUnit,workflowId, workflowIds} = gauge
 
     this.setState({
       loading: true
@@ -139,17 +141,16 @@ export default class GBarChart extends React.Component {
         }, 2000)
       })
     } else if (resource === 'incident'){
-      const searchParams = {
-        query: '',
-        workflow: workflowId,
-        collections: 'incident',
-        severity: severities.map(p => p.value).join(','),
-        tag: '',
-        monitorTypes: ''
-      }
-      const params = { ...searchParams, splitBy, splitUnit,
-        dateFrom: dateFrom.format(dateFormat),
-        dateTo: dateTo.format(dateFormat)
+      const params = {
+        q: [
+          `(workflowids:${[workflowId, ...workflowIds].filter(p => !!p).join(' OR ')})`,
+          `(severity:${severities.map(p => p.value).join(' OR ')})`
+        ].join(' AND '),
+        splitBy,
+        splitUnit,
+        from: dateFrom.valueOf(),
+        to: dateTo.valueOf(),
+        types: 'incident'
       }
       axios.get(`${ROOT_URL}/search/getRecordCount`, {params}).then(res => {
         this.setState({
@@ -168,13 +169,21 @@ export default class GBarChart extends React.Component {
         console.log('Saved search not found.')
         return
       }
-      const searchParams = JSON.parse(searchList[index].data)
+      const searchParams = buildServiceParams(JSON.parse(searchList[index].data), {
+        dateRanges: getRanges(),
+        collections, severities, workflows,
+        allDevices: devices || allDevices,
+        queryDateFormat
+      })
 
-      const params = { ...searchParams, splitBy, splitUnit,
-        dateFrom: dateFrom.format(dateFormat),
-        dateTo: dateTo.format(dateFormat)
+      const params = {
+        ...searchParams,
+        splitBy,
+        splitUnit,
+        from: dateFrom.valueOf(),
+        to: dateTo.valueOf()
       }
-      axios.get(`${ROOT_URL}/search/getRecordCount`, {params}).then(res => {
+      axios.get(`${ROOT_URL}/search/getRecordCount?${encodeUrlParams(params)}`).then(res => {
         this.setState({
           searchRecordCounts: res.data,
           loading: false,

@@ -1,5 +1,5 @@
 import QueryParser from 'lucene'
-import {assign} from 'lodash'
+import {assign, findIndex} from 'lodash'
 import moment from 'moment'
 
 const implicit = '<implicit>'
@@ -279,5 +279,84 @@ export function parseDateRange (parsed, ranges, queryDateFormat) {
     return {
       from, to
     }
+  }
+}
+
+export function parseParams (queryParams, {dateRanges, collections, severities, queryDateFormat}) {
+  const parsed = QueryParser.parse(queryParams.q)
+
+  const dateRange = parseDateRange(parsed, dateRanges, queryDateFormat)
+
+  const ret = {
+    severity: getArrayValues(parsed, 'severity'),
+    monitorTypes: getArrayValues(parsed, 'monitortype'),
+    workflowNames: getArrayValues(parsed, 'workflows'),
+    tags: getArrayValues(parsed, 'tags'),
+    monitorName: getFieldValue(parsed, 'monitor'),
+    types: getArrayValues(parsed, 'type', collections.map(p => p.value)),
+    ...dateRange
+  }
+
+  if (ret.types.length === 1 && ret.types[0].toLowerCase() === 'all') ret.types = collections.map(p => p.value)
+  if (ret.severity.length === 1 && ret.severity[0].toLowerCase() === 'all') ret.severity = severities.map(p => p.value)
+
+  return ret
+}
+
+function getMonitorId(monitorName, allDevices) {
+  let uid = ''
+  allDevices.forEach(p => {
+    const index = findIndex(p.monitors, {name: monitorName})
+    if (index >= 0) {
+      uid = p.monitors[index].uid
+      return false
+    }
+  })
+  return uid
+}
+
+export function buildServiceParams (queryParams, {dateRanges, collections, severities, workflows, allDevices, queryDateFormat}) {
+  const { from, to, workflowNames, monitorName, types, severity } = parseParams(queryParams, {
+    dateRanges, collections, severities, queryDateFormat
+  })
+  const parsed = QueryParser.parse(queryParams.q)
+
+  removeField(findField(parsed, 'workflows'), true)
+  removeField(findField(parsed, 'monitor'))
+  removeField(findField(parsed, 'to'))
+  removeField(findField(parsed, 'from'))
+  removeField(findField(parsed, 'severity'), true)
+  removeField(findField(parsed, 'type'), true)
+
+  const qs = []
+  const q = queryToString(parsed)
+  if (q) qs.push(q)
+
+  //Workflow
+  const workflowIds = []
+  workflowNames.forEach(name => {
+    const index = findIndex(workflows, {name})
+    if (index >= 0) workflowIds.push(workflows[index].id)
+  })
+  if (workflowIds.length) {
+    qs.push(`(workflowids:${workflowIds.join(' OR ')})`)
+  }
+
+  //Monitor
+  if (monitorName) {
+    const uid = getMonitorId(monitorName, allDevices || [])
+    if (uid) qs.push(`(monitorid:${uid})`)
+  }
+
+  //Severity
+  if (severity.length)
+    qs.push(`(severity:${severity.join(' OR ')})`)
+
+  return {
+    ...queryParams,
+    q: qs.join(' AND '),
+    from,
+    to,
+    types
   }
 }

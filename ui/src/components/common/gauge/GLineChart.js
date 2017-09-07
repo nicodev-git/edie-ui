@@ -4,13 +4,16 @@ import {findIndex} from 'lodash'
 import axios from 'axios'
 
 import { ROOT_URL } from 'actions/config'
-import { dateFormat, severities } from 'shared/Global'
+import { severities, queryDateFormat, collections, encodeUrlParams } from 'shared/Global'
 
 import FlipView from './FlipView'
 import LineChart from './display/LineChart'
 import GEditView from './GEditView'
 
 import {showAlert} from 'components/common/Alert'
+import {getRanges} from 'components/common/DateRangePicker'
+
+import {buildServiceParams} from 'util/Query'
 
 const sampleData = []
 
@@ -144,7 +147,7 @@ export default class GLineChart extends React.Component {
   }
 
   fetchRecordCount (props) {
-    const {gauge, searchList} = props
+    const {gauge, searchList, workflows, devices, allDevices} = props
     const {savedSearchId, monitorId, resource, duration, durationUnit, splitBy, splitUnit, workflowId, workflowIds} = gauge
 
     this.setState({
@@ -180,14 +183,6 @@ export default class GLineChart extends React.Component {
         }, 5000)
       })
     } else if (resource === 'incident'){
-      const searchParams = {
-        query: '',
-        workflow: [workflowId, ...workflowIds].join(','),
-        collections: 'incident',
-        severity: severities.map(p => p.value).join(','),
-        tag: '',
-        monitorTypes: ''
-      }
       const params = {
         q: [
           `(workflowids:${[workflowId, ...workflowIds].filter(p => !!p).join(' OR ')})`,
@@ -197,7 +192,7 @@ export default class GLineChart extends React.Component {
         splitUnit,
         from: dateFrom.valueOf(),
         to: dateTo.valueOf(),
-        type: 'incident'
+        types: 'incident'
       }
       axios.get(`${ROOT_URL}/search/getRecordCount`, {params}).then(res => {
         this.setState({
@@ -216,7 +211,12 @@ export default class GLineChart extends React.Component {
         console.log('Saved search not found.')
         return
       }
-      const searchParams = JSON.parse(searchList[index].data)
+      const searchParams = buildServiceParams(JSON.parse(searchList[index].data), {
+        dateRanges: getRanges(),
+        collections, severities, workflows,
+        allDevices: devices || allDevices,
+        queryDateFormat
+      })
 
       const params = {
         ...searchParams,
@@ -225,7 +225,7 @@ export default class GLineChart extends React.Component {
         from: dateFrom.valueOf(),
         to: dateTo.valueOf()
       }
-      axios.get(`${ROOT_URL}/search/getRecordCount`, {params}).then(res => {
+      axios.get(`${ROOT_URL}/search/getRecordCount?${encodeUrlParams(params)}`).then(res => {
         this.setState({
           searchRecordCounts: res.data,
           loading: false,
