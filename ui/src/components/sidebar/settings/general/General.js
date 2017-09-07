@@ -1,7 +1,7 @@
 import React from 'react'
 import moment from 'moment'
 import InlineEdit from 'react-edit-inline'
-import {Checkbox, RaisedButton} from 'material-ui'
+import {Checkbox, RaisedButton, SelectField, MenuItem} from 'material-ui'
 import { assign } from 'lodash'
 
 import SettingTabs from '../SettingTabs' // Never used
@@ -12,7 +12,6 @@ import TabPageHeader from 'components/common/TabPageHeader' // Never used
 import {defaultDateFormat} from 'shared/Global'
 
 const rowStyle = {
-  float: 'left',
   width: '100%',
   height: 30
 }
@@ -152,6 +151,18 @@ export default class General extends React.Component {
         </div>
 
         <div style={rowStyle} className="margin-md-bottom">
+          <div className="pull-left width-200">
+            <SelectField
+              value={this.getUserOptionValue('defaultPage', 'main')}
+              onChange={this.onChangeShowPage.bind(this)}
+              floatingLabelText="Default Page">
+              <MenuItem primaryText="Main" value="main"/>
+              <MenuItem primaryText="Dashboard" value="dashboard"/>
+            </SelectField>
+          </div>
+        </div>
+
+        <div style={rowStyle} className="margin-md-bottom">
           <label className="margin-sm-top margin-sm-bottom width-200">Remove Undefined Events After: </label>
           <InlineEdit
             text={this.getOptionValue('UNDEFINED_EVENTS_RETENTION_DAYS') || 'Days'}
@@ -260,6 +271,10 @@ export default class General extends React.Component {
 
   onChangeKeepIncidentAlert (e) {
     this.updateUserOption('keepIncidentAlert', e.target.checked)
+  }
+
+  onChangeShowPage (e, index, value) {
+    this.updateUserOption('defaultPage', value)
   }
 
   updateUserOption (key, value) {
