@@ -383,7 +383,7 @@ export default class MainDashboardView extends React.Component {
     )
   }
 
-  render () {
+  renderGrid () {
     const gauges = this.getGauges()
     const layout = mw => {
       let x = 0
@@ -421,23 +421,29 @@ export default class MainDashboardView extends React.Component {
       xs: layout(cols['xs']),
       xxs: layout(cols['xxs'])
     }
+
+    return (
+      <ResponsiveReactGridLayout
+        className="layout" cols={cols} rowHeight={layoutRowHeight}
+        layouts={layouts}
+        style={{marginTop: -10}}
+        margin={[16, 16]}
+        onDragStart={this.onDragStart.bind(this)}
+        onDrag={this.onDrag.bind(this)}
+        onDragStop={this.onLayoutChange.bind(this)}
+        onResize={this.onResize.bind(this)}
+        onResizeStop={this.onResizeStop.bind(this)}
+      >
+        {gauges.map(p => this.renderGauge(p))}
+      </ResponsiveReactGridLayout>
+    )
+  }
+
+  render () {
     return (
       <div>
         {this.renderAddMenu()}
-        <ResponsiveReactGridLayout
-          className="layout" cols={cols} rowHeight={layoutRowHeight}
-          layouts={layouts}
-          style={{marginTop: -10}}
-          margin={[16, 16]}
-          onDragStart={this.onDragStart.bind(this)}
-          onDrag={this.onDrag.bind(this)}
-          onDragStop={this.onLayoutChange.bind(this)}
-          onResize={this.onResize.bind(this)}
-          onResizeStop={this.onResizeStop.bind(this)}
-        >
-          {gauges.map(p => this.renderGauge(p))}
-        </ResponsiveReactGridLayout>
-
+        {/*{this.renderGrid()}*/}
 
         {this.renderGaugePicker()}
         {this.renderDeviceWizard()}
