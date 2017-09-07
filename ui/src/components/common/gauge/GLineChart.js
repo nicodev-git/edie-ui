@@ -224,7 +224,7 @@ export default class GLineChart extends React.Component {
       }).catch(() => {
         setTimeout(() => {
           this.setState({needRefresh: true})
-        }, 2000)
+        }, 5000)
       })
     }
   }
