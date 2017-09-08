@@ -114,7 +114,6 @@ export default class EventLogTable extends Component {
       <div className="text-center">
         <div className="pull-left text-left">
           <SelectField
-            floatingLabelText="Log"
             onChange={this.onChangeLogName.bind(this)}
             value={selectedLogName}>
             {monitorLogNames.map((c, i) =>
@@ -145,7 +144,7 @@ export default class EventLogTable extends Component {
     const {device} = this.props
     return (
       <TabPage>
-        <TabPageHeader title="Event Log" titleOptions={<StatusImg {...this.props}/>}>
+        <TabPageHeader title="Event Log" titleOptions={<StatusImg {...this.props}/>} useToolBar>
           {this.renderOptions()}
         </TabPageHeader>
         <TabPageBody tabs={ServerDetailTab(device.id, device.templateName)} history={this.props.history} location={this.props.location} transparent>
