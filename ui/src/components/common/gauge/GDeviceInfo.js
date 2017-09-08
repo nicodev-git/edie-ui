@@ -81,7 +81,9 @@ export default class GDeviceInfo extends React.Component {
     const memValue = memory ? `${memory.UsedSize}M / ${memory.TotalSize}M` : ''
     const diskValue = disk ? `${disk.FreeSpace}G / ${disk.TotalSpace}G` : ''
 
-    const sysDesc = os ? os.Name : ''
+    const hardware = cpu ? `Hardware: ${cpu.Model} ` : ''
+    const software = os ? `Software: ${os.Name} ` : ''
+    const sysDesc = `${hardware}${software}`
 
     return (
       <div>
