@@ -245,6 +245,7 @@ export default class Topology extends React.Component {
       width: 50,
       height: 50,
 
+      tpl: item.template,
       monitors: item.template.monitors,
       templateName: item.template.name,
       dashboard: item.template.dashboard
@@ -440,7 +441,8 @@ export default class Topology extends React.Component {
       height: options.height,
       image: options.imgName,
       templateName: options.templateName,
-      groupid: this.props.device.id
+      groupid: this.props.device.id,
+      tags: options.tpl.tags || []
     }
 
     if (options.dashboard) {

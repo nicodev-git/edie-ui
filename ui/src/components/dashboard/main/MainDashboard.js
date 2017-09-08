@@ -11,6 +11,14 @@ export default class MainDashboard extends React.Component {
   componentWillMount () {
     this.props.selectGaugeBoard(null)
     this.props.fetchGaugeBoards()
+    this.props.fetchGauges()
+    this.props.fetchSysSearchOptions()
+    this.props.fetchWorkflows()
+    this.props.fetchDevicesGroups()
+    this.props.fetchMonitorGroups()
+    this.props.fetchMonitorTemplates()
+    this.props.fetchCredentials()
+    this.props.fetchCollectors()
   }
   componentWillUpdate (nextProps) {
     const {gaugeBoards} = nextProps

@@ -139,7 +139,8 @@ class Map extends React.Component {
       height: options.height,
       image: options.imgName,
       templateName: options.templateName,
-      workflowids: options.workflowids
+      workflowids: options.workflowids,
+      tags: options.tpl.tags || []
     }
 
     let config = {
@@ -334,6 +335,7 @@ class Map extends React.Component {
       width: 50,
       height: 50,
 
+      tpl: item.template,
       monitors: item.template.monitors,
       templateName: item.template.name,
       workflowids: item.template.workflowids || []

@@ -37,6 +37,7 @@ export default class Device extends React.Component {
       width: 50,
       height: 50,
 
+      tpl,
       monitors: tpl.monitors,
       templateName: tpl.name,
       workflowids: tpl.workflowids || []
@@ -83,7 +84,8 @@ export default class Device extends React.Component {
       height: options.height,
       image: options.imgName,
       templateName: options.templateName,
-      workflowids: options.workflowids
+      workflowids: options.workflowids,
+      tags: options.tpl.tags || []
     }
 
     const config = {

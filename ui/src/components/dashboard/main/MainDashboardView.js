@@ -29,16 +29,6 @@ export default class MainDashboardView extends React.Component {
     }
     this.lastPlaceholder = null
   }
-  componentWillMount () {
-    this.props.fetchGauges()
-    this.props.fetchSysSearchOptions()
-    this.props.fetchWorkflows()
-    this.props.fetchDevicesGroups()
-    this.props.fetchMonitorGroups()
-    this.props.fetchMonitorTemplates()
-    this.props.fetchCredentials()
-    this.props.fetchCollectors()
-  }
 
   getGauges () {
     return this.props.board.gauges || []
