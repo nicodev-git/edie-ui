@@ -13,7 +13,8 @@ export default class GDeviceInfo extends React.Component {
       memory: null,
       cpu: null,
       disk: null,
-      os: null
+      os: null,
+      hostname: ''
     }
     this.renderBackView = this.renderBackView.bind(this)
     this.renderFrontView = this.renderFrontView.bind(this)
@@ -36,17 +37,30 @@ export default class GDeviceInfo extends React.Component {
       monitors: 'basic',
       deviceId: this.getDeviceId()
     })
+
+    this.monitorSocket.send({
+      action: 'command',
+      deviceId: this.getDeviceId(),
+      data: {
+        name: 'RunCommand',
+        params: {
+          output: true,
+          command: 'hostname'
+        }
+      }
+    })
   }
 
   onMonitorMessage (msg) {
     if (msg.action === 'update' && msg.deviceId === this.getDeviceId()) {
-      const {cpu, memory, disk, os} = msg.data
-      this.setState({
-        cpu,
-        memory,
-        disk: disk && disk.length && disk[0].Drives ? disk[0].Drives[0] : null,
-        os
-      })
+      const {cpu, memory, disk, os, commandResult} = msg.data
+      const state = {}
+      if (cpu) state.cpu = cpu
+      if (memory) state.memory = memory
+      if (disk) state.disk = disk && disk.length && disk[0].Drives ? disk[0].Drives[0] : null
+      if (os) state.os = os
+      if (commandResult) state.hostname = commandResult
+      this.setState(state)
     }
   }
 
@@ -75,7 +89,7 @@ export default class GDeviceInfo extends React.Component {
     const device = this.getDevice()
     if (!device) return <div />
 
-    const {cpu, memory, disk, os} = this.state
+    const {cpu, memory, disk, os, hostname} = this.state
 
     const cpuValue = cpu ? `${cpu.length ? cpu[0].Usage : cpu.Usage}%` : ''
     const memValue = memory ? `${memory.UsedSize}M / ${memory.TotalSize}M` : ''
@@ -89,7 +103,7 @@ export default class GDeviceInfo extends React.Component {
       <div>
         {this.renderRow('Status', device.agent ? 'UP' : 'DOWN')}
         {this.renderRow('IPAddress', device.wanip || device.lanip)}
-        {this.renderRow('DNS Name', device.hostname)}
+        {this.renderRow('DNS Name', hostname)}
         {this.renderRow('System', sysDesc)}
 
         {this.renderRow('CPU', cpuValue)}
