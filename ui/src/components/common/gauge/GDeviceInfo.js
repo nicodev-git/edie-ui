@@ -1,6 +1,7 @@
 import React from 'react'
-
 import {findIndex} from 'lodash'
+
+import FlipView from './FlipView'
 
 export default class GDeviceInfo extends React.Component {
   constructor (props) {
@@ -37,15 +38,10 @@ export default class GDeviceInfo extends React.Component {
   }
 
   render () {
-    const {gauge} = this.props
     return (
       <FlipView
         {...this.props}
-
         hideHeader
-        style={this.props.style}
-        className={this.props.className}
-        gauge={this.props.gauge}
 
         loading={this.state.loading}
         renderFrontView={this.renderFrontView}
