@@ -47,6 +47,5 @@ export default class ServerDetail extends React.Component {
         <Route path="/serverdetail/:id/command" component={Command}/>
       </Switch>
     )
-    return null
   }
 }
