@@ -1,6 +1,7 @@
 import React from 'react'
 
 import AppletCard from 'components/common/AppletCard'
+
 import { extImageBaseUrl, appletColors as colors } from 'shared/Global'
 
 export default class SysDashboardView extends React.Component {
@@ -9,8 +10,12 @@ export default class SysDashboardView extends React.Component {
     return (devices || allDevices).filter(p => (p.tags || []).includes('Server'))
   }
 
+  onClickServer (server) {
+    this.props.history.push(`/serverdetail/${server.id}`)
+  }
+  /////////////////////////////////////////////////////////////////////////////////////////////////////////
+
   renderServer (server, i) {
-    const {onClickMenuItem} = this.props
     return (
       <AppletCard
         key={server.id}
@@ -18,7 +23,7 @@ export default class SysDashboardView extends React.Component {
         name={server.templateName}
         desc={server.name}
         img={`${extImageBaseUrl}${server.image}`}
-        onClick={() => onClickMenuItem(server)}
+        onClick={() => this.onClickServer(server)}
       />
     )
   }

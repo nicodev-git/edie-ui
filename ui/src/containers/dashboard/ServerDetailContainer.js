@@ -5,8 +5,7 @@ import { connect } from 'react-redux'
 import ServerDetail from 'components/dashboard/serverdetail/ServerDetail'
 
 import {
-  updateViewLogParams,
-  showDetailLogModal
+  fetchDevice
 } from 'actions'
 
 class ServerDetailContainer extends React.Component {
@@ -18,12 +17,8 @@ class ServerDetailContainer extends React.Component {
 }
 export default connect(
   state => ({
-    logViewParam: state.dashboard.logViewParam,
-
-    detailLogModalOpen: state.dashboard.detailLogModalOpen,
-    detailLogViewParam: state.dashboard.detailLogViewParam
+    devices: state.devices.devices
   }), {
-    updateViewLogParams,
-    showDetailLogModal
+    fetchDevice
   }
 )(withRouter(ServerDetailContainer))
