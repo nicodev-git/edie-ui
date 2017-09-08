@@ -29,11 +29,12 @@ export default class BoardListModal extends React.Component {
     this.props.showGaugeBoardsModal(false)
   }
 
-  onClickAdd () {
+  onClickAdd (isSystem) {
     showPrompt('Please type name.', '', name => {
       if (!name) return
       this.props.addGaugeBoard({
-        name
+        name,
+        type: isSystem ? 'system' : 'normal'
       })
     })
   }
@@ -75,7 +76,8 @@ export default class BoardListModal extends React.Component {
         onHide={this.onHide.bind(this)}
         gaugeBoards={gaugeBoards}
         onSelect={this.onSelect.bind(this)}
-        onClickAdd={this.onClickAdd.bind(this)}
+        onClickAdd={() => this.onClickAdd()}
+        onClickAddSystem={() => this.onClickAdd(true)}
         onClickEdit={this.onClickEdit.bind(this)}
         onClickDelete={this.onClickDelete.bind(this)}
         onClickSetDefault={this.onClickSetDefault.bind(this)}

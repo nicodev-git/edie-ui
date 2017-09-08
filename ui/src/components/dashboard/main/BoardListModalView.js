@@ -4,12 +4,13 @@ import DeleteIcon from 'material-ui/svg-icons/action/delete'
 import EditIcon from 'material-ui/svg-icons/editor/mode-edit'
 import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
 import SetDefIcon from 'material-ui/svg-icons/content/sort'
+import NoteAddIcon from 'material-ui/svg-icons/action/note-add'
 
 import {Modal, CardPanel} from 'components/modal/parts'
 
 export default class BoardListModalView extends React.Component {
   renderTools () {
-    const {onClickAdd, onClickSetDefault} = this.props
+    const {onClickAdd, onClickAddSystem, onClickSetDefault} = this.props
     return (
       <div>
         <IconButton onTouchTap={onClickSetDefault} tooltip="Set Default">
@@ -17,6 +18,9 @@ export default class BoardListModalView extends React.Component {
         </IconButton>
         <IconButton onTouchTap={onClickAdd} tooltip="Add New Dashboard">
           <AddCircleIcon size={32}/>
+        </IconButton>
+        <IconButton onTouchTap={onClickAddSystem} tooltip="Add New System Dashboard">
+          <NoteAddIcon size={32}/>
         </IconButton>
       </div>
     )
@@ -31,6 +35,7 @@ export default class BoardListModalView extends React.Component {
               <thead>
               <tr>
                 <th>Name</th>
+                <th>Type</th>
                 <th></th>
                 <th className="text-right">Actions</th>
               </tr>
@@ -39,6 +44,7 @@ export default class BoardListModalView extends React.Component {
               {gaugeBoards.map(p =>
                 <tr key={p.id} onClick={() => onSelect(p)} className={selected && selected.id === p.id ? 'selected' : ''}>
                   <td>{p.name}</td>
+                  <td>{p.type || 'normal'}</td>
                   <td className="text-center">
                     {p.id === defaultBoardId ? (
                       <Chip style={{margin: 'auto'}}>Default</Chip>
