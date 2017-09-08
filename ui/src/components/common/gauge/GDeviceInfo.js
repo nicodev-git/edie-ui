@@ -76,11 +76,11 @@ export default class GDeviceInfo extends React.Component {
     return devices[index]
   }
 
-  renderRow (label, text) {
+  renderRow (label, text, style) {
     return (
       <div className="row">
         <label className="col-md-3 text-right">{label}:</label>
-        <label className="col-md-9" style={{borderLeft: '1px solid #777'}}>{text}&nbsp;</label>
+        <label className="col-md-9" style={{...style, borderLeft: '1px solid #777'}}>{text}&nbsp;&nbsp;</label>
       </div>
     )
   }
@@ -100,11 +100,11 @@ export default class GDeviceInfo extends React.Component {
     const sysDesc = `${hardware}${software}`
 
     return (
-      <div>
+      <div style={{marginTop: 26}}>
         {this.renderRow('Status', device.agent ? 'UP' : 'DOWN')}
         {this.renderRow('IPAddress', device.wanip || device.lanip)}
         {this.renderRow('DNS Name', hostname)}
-        {this.renderRow('System', sysDesc)}
+        {this.renderRow('System', sysDesc, {height: '4em'})}
 
         {this.renderRow('CPU', cpuValue)}
         {this.renderRow('RAM', memValue)}
@@ -121,7 +121,7 @@ export default class GDeviceInfo extends React.Component {
     return (
       <FlipView
         {...this.props}
-        hideHeader
+        hideTitle
 
         loading={this.state.loading}
         renderFrontView={this.renderFrontView}
