@@ -15,6 +15,8 @@ import GInstallApp from 'components/common/gauge/GInstallApp'
 import GNews from 'components/common/gauge/GNews'
 import GLog from 'components/common/gauge/GLog'
 import GService from 'components/common/gauge/GService'
+import GDeviceInfo from 'components/common/gauge/GDeviceInfo'
+
 const gaugeMap = {
   'Line Chart': GLineChart,
   'Bar Chart': GBarChart,
@@ -33,7 +35,8 @@ const gaugeMap = {
   'Installed App': GInstallApp,
   'News': GNews,
   'Log': GLog,
-  'Service': GService
+  'Service': GService,
+  'Device Info': GDeviceInfo
 }
 
 export default gaugeMap

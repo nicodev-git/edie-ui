@@ -6,6 +6,8 @@ import TabPageBody from 'components/common/TabPageBody'
 import TabPageHeader from 'components/common/TabPageHeader'
 import ServerDetailTab from './ServerDetailTab'
 
+import GaugeMap from 'components/common/gauge/GaugeMap'
+
 export default class MainControl extends React.Component {
   getDeviceId () {
     return this.props.match.params.id
