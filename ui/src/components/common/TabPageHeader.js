@@ -1,4 +1,5 @@
 import React from 'react'
+import {Toolbar} from 'material-ui/Toolbar'
 
 export default class TabPageHeader extends React.Component {
   constructor (props) {
@@ -7,6 +8,7 @@ export default class TabPageHeader extends React.Component {
   }
 
   render () {
+    const {useToolBar} = this.props
     return (
       <div className="tab-header">
         <div>
@@ -16,9 +18,15 @@ export default class TabPageHeader extends React.Component {
             {this.props.headerOptions}
           </div>
         </div>
-        <div className="margin-md-top" style={{...this.props.style, width: '100%'}}>
-          {this.props.children}
-        </div>
+        {useToolBar ? (
+          <Toolbar style={{background: '#D7D7D7', marginTop: 24}}>
+            {this.props.children}
+          </Toolbar>
+        ) : (
+          <div className="margin-md-top" style={{...this.props.style, width: '100%'}}>
+            {this.props.children}
+          </div>
+        )}
       </div>
     )
   }

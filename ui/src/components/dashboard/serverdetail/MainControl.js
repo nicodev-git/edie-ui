@@ -123,7 +123,7 @@ export default class MainControl extends React.Component {
     const device = this.getDevice()
     return (
       <TabPage>
-        <TabPageHeader title={device.name}>
+        <TabPageHeader title={device.name} useToolBar>
         </TabPageHeader>
         <TabPageBody tabs={ServerDetailTab(device.id, device.templateName)} history={this.props.history} location={this.props.location} transparent>
           {this.renderGrid()}
