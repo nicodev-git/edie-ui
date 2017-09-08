@@ -1,6 +1,6 @@
 export default (deviceId, templateName) => {
   const items = [{
-    title: 'Monitors',
+    title: 'Main',
     path: `/serverdetail/${deviceId}`
   }, {
     title: 'Event Logs',
