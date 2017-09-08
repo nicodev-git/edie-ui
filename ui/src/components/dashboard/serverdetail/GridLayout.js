@@ -1,0 +1,80 @@
+import React from 'react'
+
+import GaugeMap from 'components/common/gauge/GaugeMap'
+import { getWidgetSize, layoutCols, layoutRowHeight, layoutWidthZoom, layoutHeightZoom } from 'shared/Global'
+
+export default class GridLayout extends React.Component {
+  renderGauge (p) {
+    let GaugePanel = GaugeMap[p.templateName || 'z']
+    if (!GaugePanel) return <div key={p.id}/>
+    return (
+      <div key={p.id}>
+        <GaugePanel
+          {...this.props}
+          gauge={p}
+          device={{id: p.deviceId}}
+          searchList={[]}
+          monitors={[]}
+
+          updateDeviceGauge={() => {}}
+          removeDeviceGauge={() => {}}
+          onClickMinimize={() => {}}
+          onClickMaximize={() => {}}
+          onClickModalView={() => {}}
+          style={{width: '100%', height: '100%'}}
+        />
+      </div>
+    )
+  }
+
+  render () {
+    const gauges = this.props.gauges
+    const layout = mw => {
+      let x = 0
+      let y = 0
+      return gauges.map((p, i) => {
+        let {w, h, minH, minW} = getWidgetSize(p, this.props.devices, false)
+        if (p.layout) {
+          if (w && h) return {...p.layout, i: p.id, w, h, minW, minH}
+          return {...p.layout, i: p.id, minW, minH}
+        }
+        if (x + w > mw) {
+          x = 0
+          y++
+        }
+        const op = {
+          i: p.id,
+          x, y,
+          w, h,
+          minW, minH
+        }
+
+        x += w
+        if (x >= mw) {
+          x = 0
+          y++
+        }
+        return op
+      })
+    }
+    const cols = layoutCols
+    const layouts = {
+      lg: layout(cols['lg']),
+      md: layout(cols['md']),
+      sm: layout(cols['sm']),
+      xs: layout(cols['xs']),
+      xxs: layout(cols['xxs'])
+    }
+
+    return (
+      <ResponsiveReactGridLayout
+        className="layout" cols={cols} rowHeight={layoutRowHeight}
+        layouts={layouts}
+        style={{marginTop: -10}}
+        margin={[16, 16]}
+      >
+        {gauges.map(p => this.renderGauge(p))}
+      </ResponsiveReactGridLayout>
+    )
+  }
+}

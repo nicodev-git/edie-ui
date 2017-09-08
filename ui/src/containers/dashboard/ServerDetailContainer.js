@@ -5,7 +5,8 @@ import { connect } from 'react-redux'
 import ServerDetail from 'components/dashboard/serverdetail/ServerDetail'
 
 import {
-  fetchDevice
+  fetchDevice,
+  openDevice
 } from 'actions'
 
 class ServerDetailContainer extends React.Component {
@@ -17,8 +18,10 @@ class ServerDetailContainer extends React.Component {
 }
 export default connect(
   state => ({
+    device: state.dashboard.selectedDevice,
     devices: state.devices.devices
   }), {
-    fetchDevice
+    fetchDevice,
+    openDevice
   }
 )(withRouter(ServerDetailContainer))

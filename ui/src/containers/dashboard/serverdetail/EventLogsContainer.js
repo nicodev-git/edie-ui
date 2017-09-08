@@ -1,5 +1,5 @@
 import React from 'react'
-import EventLogs from 'components/dashboard/map/device/monitors/EventLogTable'
+import EventLogs from 'components/dashboard/serverdetail/EventLogTable'
 
 import { withRouter } from 'react-router'
 import { connect } from 'react-redux'

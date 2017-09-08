@@ -20,15 +20,29 @@ export default class ServerDetail extends React.Component {
     return this.props.match.params.id
   }
 
-  getDevice () {
-    const {devices} = this.props
-    const index = findIndex(devices, {id: this.getDeviceId()})
+  findDevice (props) {
+    const {devices} = props
+    const index = findIndex(devices, {id: props.match.params.id})
     if (index < 0) return null
     return devices[index]
   }
 
+  getDevice () {
+    return this.findDevice(this.props)
+  }
+
   componentWillMount () {
     this.props.fetchDevice(this.getDeviceId())
+    this.props.openDevice(this.getDevice())
+  }
+
+  componentWillUpdate (nextProps) {
+    const device = this.findDevice(nextProps)
+    if (device) {
+      if (!nextProps.device || nextProps.device.id !== device.id) {
+        nextProps.openDevice(device)
+      }
+    }
   }
 
   render () {
@@ -36,7 +50,7 @@ export default class ServerDetail extends React.Component {
     if (!device) return <RefreshOverlay/>
     return (
       <Switch>
-        <Route path="/serverdetail/:id" component={MainControl}/>
+        <Route path="/serverdetail/:id" exact component={MainControl}/>
         <Route path="/serverdetail/:id/eventlog" component={EventLogs}/>
         <Route path="/serverdetail/:id/app" component={Apps}/>
         <Route path="/serverdetail/:id/process" component={Processes}/>
