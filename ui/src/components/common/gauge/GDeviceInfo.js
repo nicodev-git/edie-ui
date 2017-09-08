@@ -3,19 +3,55 @@ import {findIndex} from 'lodash'
 
 import FlipView from './FlipView'
 
+import MonitorSocket from 'util/socket/MonitorSocket'
+
 export default class GDeviceInfo extends React.Component {
   constructor (props) {
     super (props)
     this.state = {
-      loading: false
+      loading: false,
+      memory: null,
+      cpu: null,
+      disk: null
     }
     this.renderBackView = this.renderBackView.bind(this)
     this.renderFrontView = this.renderFrontView.bind(this)
   }
 
+  componentDidMount () {
+    this.monitorSocket = new MonitorSocket({
+      listener: this.onMonitorMessage.bind(this)
+    })
+    this.monitorSocket.connect(this.onSocketOpen.bind(this))
+  }
+
+  componentWillUnmount () {
+    this.monitorSocket && this.monitorSocket.close()
+  }
+
+  onSocketOpen () {
+    this.monitorSocket.send({
+      action: 'enable-realtime',
+      monitors: 'basic',
+      deviceId: this.getDeviceId()
+    })
+  }
+
+  onMonitorMessage (msg) {
+    if (msg.action === 'update' && msg.deviceId === this.getDeviceId()) {
+      const {cpu, memory, disk} = msg.data
+      this.setState({ cpu, memory, disk })
+    }
+  }
+
+  ////////////////////////////////////////////////////
+  getDeviceId () {
+    return this.props.gauge.deviceId
+  }
+
   getDevice () {
-    const {devices, gauge} = this.props
-    const index = findIndex(devices, {id: gauge.deviceId})
+    const {devices} = this.props
+    const index = findIndex(devices, {id: this.getDeviceId()})
     if (index < 0) return null
     return devices[index]
   }
@@ -32,6 +68,9 @@ export default class GDeviceInfo extends React.Component {
   renderFrontView () {
     const device = this.getDevice()
     if (!device) return <div />
+
+    const {cpu, memory, disk} = this.state
+
     return (
       <div>
         {this.renderRow('Status', device.agent ? 'UP' : 'DOWN')}
