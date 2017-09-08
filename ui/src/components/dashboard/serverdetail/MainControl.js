@@ -29,10 +29,16 @@ export default class MainControl extends React.Component {
     const device = this.getDevice()
     if (device) {
       gauges.push({
-        id: device.id,
+        id: 'basic0',
         name: '',
         templateName: 'Device Info',
-        deviceId: device.id
+        deviceId: device.id,
+        gaugeSize: 'custom',
+        layout: {
+          i: 'basic0',
+          x: 0, y: 0,
+          w: 4 * layoutWidthZoom, h: 2.5 * layoutHeightZoom
+        }
       })
     }
     return gauges
