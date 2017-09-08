@@ -1,5 +1,5 @@
 import React from 'react'
-import Network from 'components/dashboard/map/device/monitors/NetworkTable'
+import Network from 'components/dashboard/serverdetail/NetworkTable'
 import { withRouter } from 'react-router'
 import { connect } from 'react-redux'
 import {

@@ -1,5 +1,5 @@
 import React from 'react'
-import Command from 'components/dashboard/map/device/monitors/CommandTable'
+import Command from 'components/dashboard/serverdetail/CommandTable'
 import { withRouter } from 'react-router'
 import { connect } from 'react-redux'
 import {
