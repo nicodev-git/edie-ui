@@ -17,6 +17,7 @@ import SignoutContainer from 'containers/auth/SignoutContainer'
 import Settings from 'components/sidebar/settings/Settings'
 import DeviceContainer from 'containers/device/DeviceContainer'
 import LogView from 'containers/dashboard/LogViewContainer'
+import ServerDetailContainer from 'containers/dashboard/ServerDetailContainer'
 
 import {
   closeDevice,
@@ -197,6 +198,7 @@ class MainpageContainer extends Component {
           <Route path="/dashboard" component={MainDashboardContainer} exact/>
           <Route path="/dashboard/:id" component={MainDashboardContainer} />
         </Switch>
+        <Route path="/serverdeatail/:id" component={ServerDetailContainer} />
         <Route path="/chat" component={ChatContainer}/>
         <Route path="/search" component={SearchGeneric}/>
         <Route path="/threatmap" component={ThreatMapContainer}/>
