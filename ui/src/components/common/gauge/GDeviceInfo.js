@@ -12,7 +12,8 @@ export default class GDeviceInfo extends React.Component {
       loading: false,
       memory: null,
       cpu: null,
-      disk: null
+      disk: null,
+      os: null
     }
     this.renderBackView = this.renderBackView.bind(this)
     this.renderFrontView = this.renderFrontView.bind(this)
@@ -39,8 +40,13 @@ export default class GDeviceInfo extends React.Component {
 
   onMonitorMessage (msg) {
     if (msg.action === 'update' && msg.deviceId === this.getDeviceId()) {
-      const {cpu, memory, disk} = msg.data
-      this.setState({ cpu, memory, disk })
+      const {cpu, memory, disk, os} = msg.data
+      this.setState({
+        cpu,
+        memory,
+        disk: disk && disk.length && disk[0].Drives ? disk[0].Drives[0] : null,
+        os
+      })
     }
   }
 
@@ -69,13 +75,24 @@ export default class GDeviceInfo extends React.Component {
     const device = this.getDevice()
     if (!device) return <div />
 
-    const {cpu, memory, disk} = this.state
+    const {cpu, memory, disk, os} = this.state
+
+    const cpuValue = cpu ? `${cpu.length ? cpu[0].Usage : cpu.Usage}%` : ''
+    const memValue = memory ? `${memory.UsedSize}M / ${memory.TotalSize}M` : ''
+    const diskValue = disk ? `${disk.FreeSpace}G / ${disk.TotalSpace}G` : ''
+
+    const sysDesc = os ? os.Name : ''
 
     return (
       <div>
         {this.renderRow('Status', device.agent ? 'UP' : 'DOWN')}
         {this.renderRow('IPAddress', device.wanip || device.lanip)}
         {this.renderRow('DNS Name', device.hostname)}
+        {this.renderRow('System', sysDesc)}
+
+        {this.renderRow('CPU', cpuValue)}
+        {this.renderRow('RAM', memValue)}
+        {this.renderRow('Disk', diskValue)}
       </div>
     )
   }
