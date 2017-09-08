@@ -1,5 +1,5 @@
 import React from 'react'
-import {RaisedButton} from 'material-ui'
+import {RaisedButton, ToolbarGroup} from 'material-ui'
 import InfiniteTable from 'components/common/InfiniteTable'
 
 import TabPage from 'components/common/TabPage'
@@ -102,16 +102,16 @@ export default class UserTable extends React.Component {
   }
 
   renderOptions () {
-    return (
-      <div className="text-center">
-        <div className="pull-right">
-          <RaisedButton label="Create" onTouchTap={this.onClickCreate.bind(this)}/>&nbsp;
-          <RaisedButton label="Enable" onTouchTap={this.onClickEnable.bind(this)}/>&nbsp;
-          <RaisedButton label="Disable" onTouchTap={this.onClickDisable.bind(this)}/>&nbsp;
-          <RaisedButton label="Delete" onTouchTap={this.onClickDelete.bind(this)}/>&nbsp;
-        </div>
-      </div>
-    )
+    return [
+      <ToolbarGroup key="0" firstChild>
+      </ToolbarGroup>,
+      <ToolbarGroup key="1">
+        <RaisedButton label="Create" onTouchTap={this.onClickCreate.bind(this)}/>
+        <RaisedButton label="Enable" onTouchTap={this.onClickEnable.bind(this)}/>
+        <RaisedButton label="Disable" onTouchTap={this.onClickDisable.bind(this)}/>
+        <RaisedButton label="Delete" onTouchTap={this.onClickDelete.bind(this)}/>
+      </ToolbarGroup>
+    ]
   }
   renderBody () {
     return (
@@ -137,7 +137,7 @@ export default class UserTable extends React.Component {
     const {device} = this.props
     return (
       <TabPage>
-        <TabPageHeader title={device.name} titleOptions={<StatusImg {...this.props}/>} useToolBar>
+        <TabPageHeader title="Users" titleOptions={<StatusImg {...this.props}/>} useToolBar>
           {this.renderOptions()}
         </TabPageHeader>
         <TabPageBody tabs={ServerDetailTab(device.id, device.templateName)} history={this.props.history} location={this.props.location} transparent>
