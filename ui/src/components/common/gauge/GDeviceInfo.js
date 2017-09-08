@@ -20,15 +20,23 @@ export default class GDeviceInfo extends React.Component {
     return devices[index]
   }
 
-  renderFront () {
+  renderRow (label, text) {
+    return (
+      <div className="row">
+        <label className="col-md-4 text-right">{label}:</label>
+        <label className="col-md-8">{text}</label>
+      </div>
+    )
+  }
+
+  renderFrontView () {
     const device = this.getDevice()
     if (!device) return <div />
     return (
       <div>
-        <div className="row">
-          <label className="col-md-4 text-right">Status:</label>
-          <label className="col-md-8">{device.agent ? 'UP' : 'DOWN'}</label>
-        </div>
+        {this.renderRow('Status', device.agent ? 'UP' : 'DOWN')}
+        {this.renderRow('IPAddress', device.wanip || device.lanip)}
+        {this.renderRow('DNS Name', device.hostname)}
       </div>
     )
   }

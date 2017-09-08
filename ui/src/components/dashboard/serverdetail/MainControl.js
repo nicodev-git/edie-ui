@@ -25,7 +25,17 @@ export default class MainControl extends React.Component {
   }
 
   getGauges () {
-    return []
+    const gauges = []
+    const device = this.getDevice()
+    if (device) {
+      gauges.push({
+        id: device.id,
+        name: '',
+        templateName: 'Device Info',
+        deviceId: device.id
+      })
+    }
+    return gauges
   }
   /////////////////////////////////////////////////////////////////////
 
