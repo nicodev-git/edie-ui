@@ -9,8 +9,6 @@ import GEditView from './GEditView'
 import {showAlert} from 'components/common/Alert'
 import {getRanges} from 'components/common/DateRangePicker'
 
-import {dateFormat} from 'shared/Global'
-
 export default class GLog extends React.Component {
   constructor (props) {
     super (props)
@@ -72,11 +70,10 @@ export default class GLog extends React.Component {
     setTimeout(() => {
       this.props.history.push('/viewlog')
       this.props.updateViewLogParams({
-        ...this.props.logViewParam,
-        query: '',
-        monitorId: monitor.uid,
-        dateFrom: ranges['Ever'][0].format(dateFormat),
-        dateTo: ranges['Ever'][1].format(dateFormat)
+        q: `(monitorid:${monitor.uid})`,
+        types: ['incident', 'event'],
+        from: ranges['Ever'][0].valueOf(),
+        to: ranges['Ever'][1].valueOf()
       }, this.props.history)
     }, 1)
   }
