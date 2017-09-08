@@ -143,6 +143,7 @@ const INITIAL_STATE = {
   monitorNetworks: [],
   moniotrLogNames: [],
   selectedLogName: 'Application',
+  monitorLogNames: [],
 
   deviceAppTab: 'app',
 
@@ -150,7 +151,9 @@ const INITIAL_STATE = {
   workflows: [],
   workflowListDraw: 1,
 
-  deviceAndGroups: []
+  deviceAndGroups: [],
+
+  monitorQuery: ''
 }
 
 export default function (state = INITIAL_STATE, action) {

@@ -129,24 +129,6 @@ export default class EventLogTable extends Component {
       </div>
     )
   }
-  renderBody2 () {
-    return (
-      <InfiniteTable
-        cells={this.columns}
-        ref="table"
-        rowMetadata={{'key': 'id'}}
-        rowHeight={400}
-        selectable
-        url="/event/search/findAgentEvents"
-        params={{
-          deviceid: this.props.device.id,
-          eventType: 'AGENT',
-          monitortype: 'log',
-          sort: 'timestamp,desc'
-        }}
-      />
-    )
-  }
   renderBody () {
     return (
       <InfiniteTable
