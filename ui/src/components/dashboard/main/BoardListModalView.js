@@ -57,7 +57,9 @@ export default class BoardListModalView extends React.Component {
                       <IconButton style={{padding: 0, width: 24, height: 24}} onTouchTap={() => onClickEdit(p)}>
                         <EditIcon color="#545454" hoverColor="#f44336"/>
                       </IconButton>&nbsp;&nbsp;&nbsp;
-                      <IconButton style={{padding: 0, width: 24, height: 24}} onTouchTap={() => onClickDelete(p)}>
+                      <IconButton
+                        style={{padding: 0, width: 24, height: 24}} onTouchTap={() => onClickDelete(p)}
+                        className={p.type === 'system' ? 'hidden' : ''}>
                         <DeleteIcon color="#545454" hoverColor="#f44336"/>
                       </IconButton>
                     </td>
