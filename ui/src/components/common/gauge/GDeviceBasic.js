@@ -78,16 +78,15 @@ export default class GDeviceBasic extends React.Component {
 
     const {cpu, memory, disk} = this.state
 
-    const cpuValue = cpu ? `${cpu.length ? cpu[0].Usage : cpu.Usage}%` : ''
-    const memValue = memory ? `${memory.UsedSize}M / ${memory.TotalSize}M` : ''
-    const diskValue = disk ? `${disk.FreeSpace}G / ${disk.TotalSpace}G` : ''
+    const cpuValue = cpu ? (cpu.length ? cpu[0].Usage : cpu.Usage) : 0
+    const memValue = memory ?  Math.ceil(memory.UsedSize * 100 / memory.TotalSize) : 0
+    const diskValue = disk ? Math.ceil(disk.FreeSpace * 100 / disk.TotalSpace) : 0
 
     return (
       <div style={{marginTop: 26}}>
-        <AccelView />
-        {this.renderRow('CPU', cpuValue)}
-        {this.renderRow('RAM', memValue)}
-        {this.renderRow('Disk', diskValue)}
+        <AccelView title="CPU" value={cpuValue}/>
+        <AccelView title="Memory" value={memValue}/>
+        <AccelView title="Disk" value={diskValue}/>
       </div>
     )
   }

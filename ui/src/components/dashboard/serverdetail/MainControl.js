@@ -40,6 +40,19 @@ export default class MainControl extends React.Component {
           w: 4 * layoutWidthZoom, h: 2.5 * layoutHeightZoom
         }
       })
+
+      gauges.push({
+        id: 'basic1',
+        name: '',
+        templateName: 'Device Basic',
+        deviceId: device.id,
+        gaugeSize: 'custom',
+        layout: {
+          i: 'basic1',
+          x: 0, y: gauges[0].y + gauges[0].h,
+          w: 4 * layoutWidthZoom, h: 4 * layoutHeightZoom
+        }
+      })
     }
     return gauges
   }
