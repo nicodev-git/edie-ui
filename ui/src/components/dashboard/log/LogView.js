@@ -171,5 +171,8 @@ const LogViewForm = reduxForm({form: 'logViewForm'})(LogView)
 
 export default connect(
   state => ({
+    initialValues: {
+      q: state.dashboard.logViewParam.q
+    }
   })
 )(LogViewForm)
