@@ -1,4 +1,5 @@
 import React from 'react'
+import moment from 'moment'
 import { keys, reverse } from 'lodash'
 import axios from 'axios'
 
@@ -23,14 +24,14 @@ export default class DetailLogModal extends React.Component {
   componentWillMount () {
     const {detailLogViewParam} = this.props
     axios.all([
-      axios.get(`${ROOT_URL}/search/all?${encodeUrlParams({
+      axios.get(`${ROOT_URL}/search/query?${encodeUrlParams({
         ...detailLogViewParam,
         sortDir: 'desc'
       })}`),
-      axios.get(`${ROOT_URL}/search/all?${encodeUrlParams({
+      axios.get(`${ROOT_URL}/search/query?${encodeUrlParams({
         ...detailLogViewParam,
-        dateFromEpoch: detailLogViewParam.dateToEpoch + 1,
-        dateToEpoch: 0,
+        from: detailLogViewParam.to + 1,
+        to: moment().endOf('year'),
         sortDir: 'asc'
       })}`)
     ]).then(res => {

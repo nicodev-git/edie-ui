@@ -7,7 +7,7 @@ import ReactTooltip from 'react-tooltip'
 import TabPage from 'components/common/TabPage'
 import TabPageBody from 'components/common/TabPageBody'
 import TabPageHeader from 'components/common/TabPageHeader'
-import { dateFormat, queryDateFormat } from 'shared/Global'
+import { queryDateFormat } from 'shared/Global'
 
 import LogSearchFormView from './LogSearchFormView'
 import LogPapers from './LogPapers'
@@ -67,14 +67,12 @@ class LogView extends React.Component {
 
   onClickDetailView (row, index, page, pageSize) {
     const params = {
-      ...this.props.logViewParam,
-      query: '',
-      dateFrom: '',
-      dateTo: '',
-      dateFromEpoch: 0,
-      dateToEpoch: row.entity.timestamp,
+      q: this.props.logViewParam.q,
+      from: 0,
+      to: row.entity.timestamp,
       page: 0,
       size: 100,
+      types: 'event',
       rowId: row.id
     }
 
@@ -94,8 +92,8 @@ class LogView extends React.Component {
 
   onChangeRange ({startDate, endDate}) {
     this.props.updateViewLogParams(assign({}, this.props.logViewParam, {
-      dateFrom: startDate.format(dateFormat),
-      dateTo: endDate.format(dateFormat)
+      from: startDate.valueOf(),
+      to: endDate.valueOf()
     }), this.props.history)
   }
 
@@ -134,7 +132,7 @@ class LogView extends React.Component {
 
   render () {
     const { handleSubmit, logViewParam } = this.props
-    const { dateFrom, dateTo } = logViewParam
+    const { from, to } = logViewParam
 
     return (
       <TabPage>
@@ -143,8 +141,8 @@ class LogView extends React.Component {
             onSearchKeyDown={this.onSearchKeyDown.bind(this)}
             onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
 
-            startDate={dateFrom}
-            endDate={dateTo}
+            startDate={from}
+            endDate={to}
             onChangeDateRange={this.onChangeRange.bind(this)}
           />
         </TabPageHeader>
