@@ -112,16 +112,7 @@ export default class IncidentTable extends Component {
   }
 
   onClickViewRaw (row) {
-    if (this.hasLogFile(row.events || [])) {
-      // this.props.updateViewLogParams({
-      //   q: `(monitorid:${monitor.uid})`,
-      //   types: ['incident', 'event'],
-      //   from: ranges['Ever'][0].valueOf(),
-      //   to: ranges['Ever'][1].valueOf()
-      // }, this.props.history, true)
-    } else {
-      showIncidentRaw(row)
-    }
+    showIncidentRaw(row)
   }
 
   renderSun () {
