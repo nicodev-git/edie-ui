@@ -9,7 +9,7 @@ export default class GDeviceInfo extends React.Component {
   constructor (props) {
     super (props)
     this.state = {
-      loading: false,
+      loading: true,
       memory: null,
       cpu: null,
       disk: null,
@@ -60,6 +60,9 @@ export default class GDeviceInfo extends React.Component {
       if (disk) state.disk = disk && disk.length && disk[0].Drives ? disk[0].Drives[0] : null
       if (os) state.os = os
       if (commandResult) state.hostname = commandResult
+
+      state.loading = false
+
       this.setState(state)
     }
   }
