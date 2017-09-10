@@ -87,7 +87,10 @@ import {
   showCommentsModal,
 
   showAttackerModal,
-  addAudit
+  addAudit,
+
+  updateViewLogParams,
+  showDetailLogModal
 } from 'actions'
 
 class MainpageContainer extends Component {
@@ -341,5 +344,8 @@ dispatch => bindActionCreators({
   showCommentsModal,
 
   showAttackerModal,
-  addAudit
+  addAudit,
+
+  updateViewLogParams,
+  showDetailLogModal
 }, dispatch))(withRouter(MainpageContainer))

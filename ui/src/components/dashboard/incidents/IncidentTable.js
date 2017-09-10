@@ -9,6 +9,7 @@ import {showIncidentRaw} from 'components/common/incident/Incident'
 import InfiniteTable from 'components/common/InfiniteTable'
 import {showPrompt} from 'components/common/Alert'
 import CommentsModal from 'components/common/incident/CommentsModal'
+import {getRanges} from 'components/common/DateRangePicker'
 
 export default class IncidentTable extends Component {
   constructor (props) {
@@ -88,9 +89,9 @@ export default class IncidentTable extends Component {
     }]
   }
 
-  hasLogFile (events) {
-    const found = events.filter(p => p.monitortype === 'logfile')
-    return found.length > 0
+  findLogFile (events) {
+    const found = (events || []).filter(p => p.monitortype === 'logfile')
+    return found
   }
 
   onClickFixIncident (incident) {
@@ -112,6 +113,30 @@ export default class IncidentTable extends Component {
   }
 
   onClickViewRaw (row) {
+    const logEvents = this.findLogFile(row.events)
+    if (logEvents.length) {
+      const ranges = getRanges()
+      const q = `(monitorid:${logEvents[0].monitorid})`
+
+      this.props.updateViewLogParams({
+        q,
+        types: 'event',
+        from: ranges['Ever'][0].valueOf(),
+        to: ranges['Ever'][1].valueOf(),
+      }, this.props.history, true)
+
+      const params = {
+        q,
+        from: 0,
+        to: logEvents[0].timestamp,
+        page: 0,
+        size: 100,
+        types: 'event',
+        rowId: logEvents[0].id
+      }
+      this.props.showDetailLogModal(true, params)
+      return
+    }
     showIncidentRaw(row)
   }
 
