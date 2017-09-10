@@ -69,7 +69,7 @@ export default class IncidentTable extends Component {
                 {row.fixed ? done : notdone}
             </div>
 
-            <div onClick={showIncidentRaw.bind(null, row)}>
+            <div onClick={this.onClickViewRaw.bind(this, row)}>
                 {rawtext}
             </div>
 
@@ -88,6 +88,11 @@ export default class IncidentTable extends Component {
     }]
   }
 
+  hasLogFile (events) {
+    const found = events.filter(p => p.monitortype === 'logfile')
+    return found.length > 0
+  }
+
   onClickFixIncident (incident) {
     showPrompt('Please type comment.', '', text => {
       if (!text) return
@@ -104,6 +109,19 @@ export default class IncidentTable extends Component {
   }
 
   onRowDblClick () {
+  }
+
+  onClickViewRaw (row) {
+    if (this.hasLogFile(row.events || [])) {
+      // this.props.updateViewLogParams({
+      //   q: `(monitorid:${monitor.uid})`,
+      //   types: ['incident', 'event'],
+      //   from: ranges['Ever'][0].valueOf(),
+      //   to: ranges['Ever'][1].valueOf()
+      // }, this.props.history, true)
+    } else {
+      showIncidentRaw(row)
+    }
   }
 
   renderSun () {

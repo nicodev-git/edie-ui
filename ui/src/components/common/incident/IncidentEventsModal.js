@@ -6,13 +6,23 @@ import {Modal, CardPanel} from 'components/modal/parts'
 import {renderEntity} from 'components/common/CellRenderers'
 
 export default class IncidentEventsModal extends React.Component {
-  hasLogFile () {
+  findLogLines () {
     const {events} = this.props.incident
     const found = events.filter(p => p.monitortype === 'logfile')
-    return found.length > 0
+    return found
   }
   renderTable () {
     const {events} = this.props.incident
+
+    const logEvents = this.findLogLines()
+    if (logEvents.length) {
+      return logEvents.map(p =>
+        <div key={p.id}>
+          {p.dataobj ? p.dataobj.line : ''}
+        </div>
+      )
+    }
+
     return (
       <table className="table table-hover dataTable">
         <thead>
