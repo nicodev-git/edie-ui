@@ -43,14 +43,14 @@ export default class MainControl extends React.Component {
 
       gauges.push({
         id: 'basic1',
-        name: '',
+        name: 'Status',
         templateName: 'Device Basic',
         deviceId: device.id,
         gaugeSize: 'custom',
         layout: {
           i: 'basic1',
           x: 0, y: gauges[0].y + gauges[0].h,
-          w: 4 * layoutWidthZoom, h: 4 * layoutHeightZoom
+          w: 4 * layoutWidthZoom, h: 2 * layoutHeightZoom
         }
       })
     }

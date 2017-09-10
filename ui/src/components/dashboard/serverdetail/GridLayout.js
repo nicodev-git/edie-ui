@@ -1,7 +1,10 @@
 import React from 'react'
+import {Responsive, WidthProvider} from 'react-grid-layout'
 
 import GaugeMap from 'components/common/gauge/GaugeMap'
 import { getWidgetSize, layoutCols, layoutRowHeight, layoutWidthZoom, layoutHeightZoom } from 'shared/Global'
+
+const ResponsiveReactGridLayout = WidthProvider(Responsive)
 
 export default class GridLayout extends React.Component {
   renderGauge (p) {
@@ -28,7 +31,7 @@ export default class GridLayout extends React.Component {
   }
 
   render () {
-    const gauges = this.props.gauges
+    const gauges = this.props.gauges || []
     const layout = mw => {
       let x = 0
       let y = 0

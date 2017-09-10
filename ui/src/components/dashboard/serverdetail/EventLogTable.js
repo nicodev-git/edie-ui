@@ -15,6 +15,8 @@ import MonitorSocket from 'util/socket/MonitorSocket'
 
 import { parseSearchQuery, dateFormat } from 'shared/Global'
 
+import GridLayout from './GridLayout'
+
 export default class EventLogTable extends Component {
   constructor (props) {
     super(props)
@@ -128,7 +130,7 @@ export default class EventLogTable extends Component {
       </div>
     )
   }
-  renderBody () {
+  renderBody1 () {
     return (
       <InfiniteTable
         cells={this.columns}
@@ -137,6 +139,14 @@ export default class EventLogTable extends Component {
         selectable
         data={this.props.eventLogs}
         useExternal={false}
+      />
+    )
+  }
+  renderBody () {
+    return (
+      <GridLayout
+        {...this.props}
+        gauges={[]}
       />
     )
   }
