@@ -2,7 +2,7 @@ import React from 'react'
 import {findIndex} from 'lodash'
 
 import FlipView from './FlipView'
-import Speedometer from 'react-d3-speedometer'
+import Speedometer from './display/Speedometer'
 
 import MonitorSocket from 'util/socket/MonitorSocket'
 
@@ -66,7 +66,7 @@ export default class GDeviceBasic extends React.Component {
   renderItem (item) {
     return (
       <div className="flex-1" style={{height: '100%'}}>
-        <Speedometer minValue={0} maxValue={100} segments={1} value={item.value}/>
+        <Speedometer value={item.value}/>
       </div>
     )
   }
@@ -81,13 +81,13 @@ export default class GDeviceBasic extends React.Component {
     const memValue = memory ?  Math.ceil(memory.UsedSize * 100 / memory.TotalSize) : 0
     const diskValue = disk ? Math.ceil(disk.FreeSpace * 100 / disk.TotalSpace) : 0
 
-    const items = [/*{
+    const items = [{
       value: cpuValue
     }, {
       value: memValue
     }, {
       value: diskValue
-    }*/]
+    }]
 
     return (
       <div className="flex-1 flex-horizontal" style={{marginTop: 26}}>
