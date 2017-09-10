@@ -13,15 +13,21 @@ export default class IncidentEventsModal extends React.Component {
   }
   renderTable () {
     const {events} = this.props.incident
-
-    const logEvents = this.findLogLines()
-    if (logEvents.length) {
-      return logEvents.map(p =>
+    if (events) {
+      return events.map(p =>
         <div key={p.id}>
-          {p.dataobj ? p.dataobj.line : ''}
+          {p.description}
         </div>
       )
     }
+    // const logEvents = this.findLogLines()
+    // if (logEvents.length) {
+    //   return logEvents.map(p =>
+    //     <div key={p.id}>
+    //       {p.dataobj ? p.dataobj.line : ''}
+    //     </div>
+    //   )
+    // }
 
     return (
       <table className="table table-hover dataTable">
