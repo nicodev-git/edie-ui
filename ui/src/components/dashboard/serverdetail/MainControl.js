@@ -50,7 +50,7 @@ export default class MainControl extends React.Component {
         layout: {
           i: 'basic1',
           x: 0, y: gauges[0].y + gauges[0].h,
-          w: 6 * layoutWidthZoom, h: 2 * layoutHeightZoom
+          w: 6 * layoutWidthZoom, h: 2.5 * layoutHeightZoom
         }
       })
     }
