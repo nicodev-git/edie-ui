@@ -68,13 +68,13 @@ export default class GLog extends React.Component {
   onClickLog (monitor) {
     const ranges = getRanges()
     setTimeout(() => {
-      this.props.history.push('/viewlog')
+      // this.props.history.push('/viewlog')
       this.props.updateViewLogParams({
         q: `(monitorid:${monitor.uid})`,
         types: ['incident', 'event'],
         from: ranges['Ever'][0].valueOf(),
         to: ranges['Ever'][1].valueOf()
-      }, this.props.history)
+      }, this.props.history, true)
     }, 1)
   }
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

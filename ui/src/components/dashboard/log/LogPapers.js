@@ -57,6 +57,7 @@ export default class LogPapers extends React.Component {
   componentWillMount () {
     const {onUpdateCount} = this.props
     onUpdateCount && onUpdateCount(0, [], true)
+    this.getExternalData(1, true)
   }
 
   componentDidUpdate (prevProps, prevState) {
