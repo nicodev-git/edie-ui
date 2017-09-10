@@ -2,7 +2,7 @@ import React from 'react'
 import {findIndex} from 'lodash'
 
 import FlipView from './FlipView'
-import AccelView from './display/AccelMeterView'
+import Speedometer from 'react-d3-speedometer'
 
 import MonitorSocket from 'util/socket/MonitorSocket'
 
@@ -63,11 +63,10 @@ export default class GDeviceBasic extends React.Component {
     return devices[index]
   }
 
-  renderRow (label, text, style) {
+  renderItem (item) {
     return (
-      <div className="row">
-        <label className="col-md-3 text-right">{label}:</label>
-        <label className="col-md-9" style={{...style, borderLeft: '1px solid #777'}}>{text}&nbsp;&nbsp;</label>
+      <div className="flex-1" style={{height: '100%'}}>
+        <Speedometer minValue={0} maxValue={100} segments={1} value={item.value}/>
       </div>
     )
   }
@@ -82,11 +81,17 @@ export default class GDeviceBasic extends React.Component {
     const memValue = memory ?  Math.ceil(memory.UsedSize * 100 / memory.TotalSize) : 0
     const diskValue = disk ? Math.ceil(disk.FreeSpace * 100 / disk.TotalSpace) : 0
 
+    const items = [/*{
+      value: cpuValue
+    }, {
+      value: memValue
+    }, {
+      value: diskValue
+    }*/]
+
     return (
-      <div style={{marginTop: 26}}>
-        <AccelView title="CPU" value={cpuValue}/>
-        <AccelView title="Memory" value={memValue}/>
-        <AccelView title="Disk" value={diskValue}/>
+      <div className="flex-1 flex-horizontal" style={{marginTop: 26}}>
+        {items.map(item => this.renderItem(item))}
       </div>
     )
   }

@@ -24,6 +24,7 @@
     "react-bootstrap-datetimerangepicker": "^2.0.4",
     "react-chartjs-2": "^2.1.0",
     "react-color": "^2.13.0",
+    "react-d3-speedometer": "^0.1.11",
     "react-dimensions": "^1.3.0",
     "react-dnd": "^2.4.0",
     "react-dnd-html5-backend": "^2.4.1",
