@@ -17,7 +17,7 @@ import Snackbar from 'components/common/Snackbar'
 import { mainMenu, deviceMenu, contentType } from './sidebar/Config'
 import {sidebarWidth} from 'style/common/materialStyles'
 
-const dashboardId = mainMenu[0].id
+const homeId = 'home'
 
 class Main extends React.Component {
   constructor (props) {
@@ -81,12 +81,12 @@ class Main extends React.Component {
     const {location, device, history} = this.props
     const {pathname} = location
 
-    let pageId = dashboardId
+    let pageId = homeId
     let pageType = contentType.Main
 
     let found = false
     mainMenu.forEach(item => {
-      if (item.id === dashboardId) return true
+      if (item.id === homeId) return true
       const matched = pathname === '/' || item.path === '/' ?
         (item.path === pathname && (location.search || '') === (item.search || '')) :
         startsWith(pathname, item.path)
@@ -101,7 +101,7 @@ class Main extends React.Component {
     if (!found) {
       let deviceId = device ? device.id : 'main'
       deviceMenu(deviceId).forEach(item => {
-        if (item.id === dashboardId) return true
+        if (item.id === homeId) return true
         if (startsWith(pathname, item.path)) {
           pageId = item.id
           pageType = contentType.Device

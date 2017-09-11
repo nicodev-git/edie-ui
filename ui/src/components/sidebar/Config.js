@@ -24,8 +24,8 @@ const dashboard = <DashboardIcon color={sidebarIconsColor}/>
 const map = <MapIcon color={sidebarIconsColor}/>
 
 export const mainMenu = [
-  {id: 'home', title: 'Home', icon: map, path: '/'},
   {id: 'dashboard', title: 'Dashboard', icon: dashboard, path: '/dashboard'},
+  {id: 'home', title: 'Map', icon: map, path: '/'},
   {id: 'search', title: 'Search', icon: search, path: '/search'},
   {id: 'incidents', title: 'Incidents', icon: incidents, path: '/', search: '?bigincidents='},
   {id: 'chat', title: 'Chat', icon: chat, path: '/chat'},

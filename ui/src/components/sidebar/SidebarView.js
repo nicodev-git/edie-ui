@@ -57,9 +57,10 @@ export default class SidebarView extends Component {
     const {onToggle, contentType, mainMenu, deviceMenu, onMainMenu,
       device, pageId, pageType, searchVisible, onSearch,
       sidebarMessageMenuOpen,
-      openSidebarMessageMenu, closeSidebarMessageMenu
+      openSidebarMessageMenu, closeSidebarMessageMenu, user
     } = this.props
 
+    const mainMenuItems = user.defaultPage !== 'dashboard' ? [mainMenu[1], mainMenu[0], ...mainMenu.slice(2)] : mainMenu
     const deviceMenuItems = deviceMenu(device ? device.id : 'main')
     return (
       <Drawer open width={sidebarWidth} containerStyle={sidebarStyle}>
@@ -72,10 +73,10 @@ export default class SidebarView extends Component {
           </IconButton>
         </div>
         <div style={{display: contentType.Main === pageType ? 'block' : 'none'}} className="sidebar">
-          {mainMenu.map((item, index) => {
+          {mainMenuItems.map((item, index) => {
             // if (index === (user.defaultPage !== 'dashboard' ? 0 : 1)) return null
             return (
-              <div key={index} onClick={onMainMenu.bind(this, index)}>
+              <div key={index} onClick={onMainMenu.bind(this, item.id)}>
                 <div className={pageId === item.id ? 'sidebar-chosen' : ''}>
                   <div className="sidebar-item-container">
                     {item.badge ? this.renderBadge(item) : this.renderButton(item)}

@@ -1,6 +1,6 @@
 import React from 'react'
 import $ from 'jquery'
-import { assign } from 'lodash'
+import { assign, findIndex } from 'lodash'
 
 import { isGroup, parseSearchQuery } from 'shared/Global'
 import SidebarView from './SidebarView'
@@ -61,8 +61,9 @@ export default class Sidebar extends React.Component {
     this.props.onClickItem(this.props.contentType.Device, this.props.deviceMenu(this.props.device.id)[index])
   }
 
-  onClickMainMenu (index) {
+  onClickMainMenu (id) {
     this.setState({ tooltipText: '' })
+    const index = findIndex(this.props.mainMenu, {id})
     this.props.onClickItem(this.props.contentType.Main, this.props.mainMenu[index])
   }
 
