@@ -19,12 +19,13 @@ export const updateDeviceError = (dispatch, error) => {
   })
 }
 
-export const authError = (dispatch, {response}) => {
+export const authError = (dispatch, {response, message}) => {
   window.localStorage.removeItem('token')
   let msg = 'Wrong credentials.'
   if (response) {
-    if (response.status === 503) msg = 'Can\'t connect please retry'
-    // console.log(response)
+    if (response.status === 503 || response.status === 504) msg = 'Can\'t connect please retry'
+  } else if (message === 'Network Error') {
+    msg = 'Can\'t connect please retry'
   }
   dispatch({
     type: AUTH_ERROR,
