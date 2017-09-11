@@ -59,7 +59,7 @@ export default class GDeviceInfo extends React.Component {
       if (memory) state.memory = memory
       if (disk) state.disk = disk && disk.length && disk[0].Drives ? disk[0].Drives[0] : null
       if (os) state.os = os
-      if (commandResult) state.hostname = commandResult
+      if (commandResult && !this.state.hostname) state.hostname = commandResult
 
       state.loading = false
 

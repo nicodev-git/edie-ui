@@ -82,21 +82,23 @@ export default class GDeviceBasic extends React.Component {
 
     const items = [{
       title1: `${memValue}%`,
-      title2: 'Memory Utilization',
+      title2: memory ? `${memory.UsedSize}M / ${memory.TotalSize}M` : '',
+      title3: 'Memory Utilization',
       value: memValue
     }, {
       title1: `${diskValue}%`,
-      title2: 'Disk Utilization',
-      value: diskValue,
-      secondaryColor: true
+      title2: disk ? `${disk.FreeSpace}G / ${disk.TotalSpace}G` : '',
+      title3: 'Disk Utilization',
+      value: diskValue
     }, {
       title1: `${cpuValue}%`,
-      title2: 'CPU Utilization',
+      title2: cpu ? `${cpu.length ? cpu[0].Model : cpu.Model}` : '',
+      title3: 'CPU Utilization',
       value: cpuValue
     }]
 
     return (
-      <div className="flex-1 flex-horizontal" style={{marginTop: 16}}>
+      <div className="flex-1 flex-horizontal" style={{marginTop: 8}}>
         {items.map(this.renderItem.bind(this))}
       </div>
     )
