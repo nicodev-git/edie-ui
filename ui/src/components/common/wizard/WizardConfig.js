@@ -125,6 +125,29 @@ export const wizardConfig = {
     // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // Devices
 
+  'group': {
+    title: 'Group',
+    server: {
+      url: '/group',
+      params: {}
+    },
+    steps: [{
+      title: 'Basic',
+      panels: [{
+        items: [{
+          type: 'text',
+          label: {
+            text: 'Name',
+            type: 'attach',
+            width: 3
+          },
+          required: true,
+          name: 'name'
+        }]
+      }]
+    }]
+  },
+
   'custom': {
     title: 'Custom',
     width: POPUP_WIDTH_SM,
