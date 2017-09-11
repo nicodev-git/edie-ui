@@ -18,6 +18,7 @@ class Speedometer extends React.Component {
           startColor={value > 50 ? colorRed : colorGreen}
           endColor={value > 50 ? colorRed : colorGreen}
           needleColor="#2B436E"
+          ringWidth={containerWidth / 4}
         />
         <div style={{fontSize: 28, marginTop: -55}}>
           {title1}
