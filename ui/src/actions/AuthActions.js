@@ -30,7 +30,7 @@ export const signUser = ({ email, password }, redirect, history) => {
       getRequestConfig()
     )
     .then(response => signUserSuccess(dispatch, response, redirect, history))
-    .catch(() => authError(dispatch))
+    .catch((res) => authError(dispatch, res))
   }
 }
 

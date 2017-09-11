@@ -19,11 +19,15 @@ export const updateDeviceError = (dispatch, error) => {
   })
 }
 
-export const authError = (dispatch) => {
+export const authError = (dispatch, {response}) => {
   window.localStorage.removeItem('token')
+  let msg = 'Wrong credentials.'
+  if (response) {
+    // if (response.msg) msg = response.msg
+  }
   dispatch({
     type: AUTH_ERROR,
-    msg: 'Wrong credentials.'
+    msg
   })
 }
 
