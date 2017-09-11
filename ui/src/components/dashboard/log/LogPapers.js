@@ -122,6 +122,12 @@ export default class LogPapers extends React.Component {
 
       this.setState(state)
       onUpdateCount && onUpdateCount(total, state.results)
+    }).fail(() => {
+      if (page === 1) {
+        this.reloadTimer = setTimeout(() => {
+          this.getExternalData(page)
+        }, 2000)
+      }
     })
 
     return this.lastRequest

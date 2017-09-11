@@ -125,8 +125,9 @@ class InfiniteTable extends React.Component {
         this.reloadTimer = setTimeout(() => {
           this.setState({
             isLoading: false
+          }, () => {
+            this.getExternalData(page, clear)
           })
-          this.getExternalData(page, clear)
         }, 2000)
       }
     })
