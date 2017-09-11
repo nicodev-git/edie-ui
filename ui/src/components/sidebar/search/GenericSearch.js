@@ -53,11 +53,11 @@ class GenericSearch extends React.Component {
         const {entity} = rowData
 
         if (viewFilter === viewFilters.log.name) {
-          if (!entity.dataobj) return <span/>
+          const data = entity.dataobj || {}
           return (
             <div style={chipStyles.wrapper}>
-              {<div className="inline-block flex-1">{entity.dataobj.line}</div>}
-              {entity.dataobj.file && <Chip style={chipStyles.smallChip} labelStyle={chipStyles.smallLabel}>{entity.dataobj.file}</Chip>}
+              {<div className="inline-block flex-1">{data.line || entity.description || '[Empty]'}</div>}
+              {data.file && <Chip style={chipStyles.smallChip} labelStyle={chipStyles.smallLabel}>{data.file}</Chip>}
             </div>
           )
         } else if (viewFilter === viewFilters.raw.name) {
