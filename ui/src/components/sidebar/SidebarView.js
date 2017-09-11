@@ -94,13 +94,13 @@ export default class SidebarView extends Component {
                 }
                 <Divider style={{margin: 0, backgroundColor: '#393b42'}}/>
 
-                {index === 0 ? (
+                {index === 1 ? (
                   <MessageBox
                     open={sidebarMessageMenuOpen}
                     openSidebarMessageMenu={openSidebarMessageMenu}
                     closeSidebarMessageMenu={closeSidebarMessageMenu}/>
                 ) : null}
-                {index === 0 ? (
+                {index === 1 ? (
                   <Divider style={{margin: 0, backgroundColor: '#393b42'}}/>
                 ) : null}
               </div>

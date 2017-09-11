@@ -1,5 +1,5 @@
 import React from 'react'
-import HomeIcon from 'material-ui/svg-icons/action/home'
+// import HomeIcon from 'material-ui/svg-icons/action/home'
 import SearchIcon from 'material-ui/svg-icons/action/search'
 import ChatIcon from 'material-ui/svg-icons/communication/chat'
 import BugReportIcon from 'material-ui/svg-icons/action/bug-report'
@@ -10,8 +10,9 @@ import DashboardIcon from 'material-ui/svg-icons/action/dashboard'
 // import ExitIcon from 'material-ui/svg-icons/action/exit-to-app'
 import PlaylistIcon from 'material-ui/svg-icons/av/playlist-add-check'
 import { sidebarIconsColor } from 'style/common/materialStyles'
+import MapIcon from 'material-ui/svg-icons/maps/map'
 
-const home = <HomeIcon color={sidebarIconsColor}/>
+// const home = <HomeIcon color={sidebarIconsColor}/>
 const search = <SearchIcon color={sidebarIconsColor}/>
 const chat = <ChatIcon color={sidebarIconsColor}/>
 const threatmap = <BugReportIcon color={sidebarIconsColor}/>
@@ -20,11 +21,11 @@ const settings = <SettingsIcon color={sidebarIconsColor}/>
 const back = <BackIcon color={sidebarIconsColor}/>
 const monitors = <PlaylistIcon color={sidebarIconsColor}/>
 const dashboard = <DashboardIcon color={sidebarIconsColor}/>
-// const exit = <ExitIcon color={sidebarIconsColor}/>
+const map = <MapIcon color={sidebarIconsColor}/>
 
 export const mainMenu = [
-  {id: 'home', title: 'Home', icon: home, path: '/'},
   {id: 'dashboard', title: 'Dashboard', icon: dashboard, path: '/dashboard'},
+  {id: 'home', title: 'Home', icon: map, path: '/'},
   {id: 'search', title: 'Search', icon: search, path: '/search'},
   {id: 'incidents', title: 'Incidents', icon: incidents, path: '/', search: '?bigincidents='},
   {id: 'chat', title: 'Chat', icon: chat, path: '/chat'},

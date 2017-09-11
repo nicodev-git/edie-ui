@@ -81,6 +81,11 @@ export default class GDeviceBasic extends React.Component {
     const diskValue = disk ? Math.ceil(disk.FreeSpace * 100 / disk.TotalSpace) : 0
 
     const items = [{
+      title1: `${cpuValue}%`,
+      title2: cpu ? `${cpu.length ? cpu[0].Model : cpu.Model}` : '',
+      title3: 'CPU Utilization',
+      value: cpuValue
+    }, {
       title1: `${memValue}%`,
       title2: memory ? `${memory.UsedSize}M / ${memory.TotalSize}M` : '',
       title3: 'Memory Utilization',
@@ -90,11 +95,6 @@ export default class GDeviceBasic extends React.Component {
       title2: disk ? `${disk.FreeSpace}G / ${disk.TotalSpace}G` : '',
       title3: 'Disk Utilization',
       value: diskValue
-    }, {
-      title1: `${cpuValue}%`,
-      title2: cpu ? `${cpu.length ? cpu[0].Model : cpu.Model}` : '',
-      title3: 'CPU Utilization',
-      value: cpuValue
     }]
 
     return (

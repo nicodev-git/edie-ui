@@ -21,14 +21,14 @@ class Speedometer extends React.Component {
           needleColor="#2B436E"
           ringWidth={width / 4}
         />
-        <div className="nowrap text-ellipsis" style={{fontSize: 28, marginTop: -20}}>
+        <div className="nowrap text-ellipsis" style={{marginTop: -20}}>
+          {title3}
+        </div>
+        <div className="nowrap text-ellipsis" style={{fontSize: 28}}>
           {title1}
         </div>
         <div className="nowrap text-ellipsis">
           {title2}
-        </div>
-        <div className="nowrap text-ellipsis">
-          {title3}
         </div>
 
       </div>
