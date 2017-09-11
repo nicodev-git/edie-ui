@@ -23,7 +23,8 @@ export const authError = (dispatch, {response}) => {
   window.localStorage.removeItem('token')
   let msg = 'Wrong credentials.'
   if (response) {
-    // if (response.msg) msg = response.msg
+    if (response.status === 503) msg = 'Can\'t connect please retry'
+    // console.log(response)
   }
   dispatch({
     type: AUTH_ERROR,
