@@ -7,17 +7,25 @@ const colorRed = '#EF5A5A'
 
 class Speedometer extends React.Component {
   render () {
-    const {value, containerWidth, containerHeight} = this.props
+    const {value, title1, title2, containerWidth, containerHeight} = this.props
     return (
-      <D3Speedometer
-        textColor="transparent"
-        minValue={0} maxValue={100} segments={2} value={value}
-        width={containerWidth}
-        height={containerHeight}
-        startColor={value > 50 ? colorRed : colorGreen}
-        endColor={value > 50 ? colorRed : colorGreen}
-        needleColor="#2B436E"
-      />
+      <div className="text-center">
+        <D3Speedometer
+          textColor="transparent"
+          minValue={0} maxValue={100} segments={2} value={value}
+          width={containerWidth}
+          height={containerHeight}
+          startColor={value > 50 ? colorRed : colorGreen}
+          endColor={value > 50 ? colorRed : colorGreen}
+          needleColor="#2B436E"
+        />
+        <div style={{fontSize: 28, marginTop: -55}}>
+          {title1}
+        </div>
+        <div className="nowrap text-ellipsis">
+          {title2}
+        </div>
+      </div>
     )
   }
 }

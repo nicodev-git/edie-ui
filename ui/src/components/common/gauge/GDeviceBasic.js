@@ -65,8 +65,8 @@ export default class GDeviceBasic extends React.Component {
 
   renderItem (item) {
     return (
-      <div className="flex-1" style={{height: '100%'}}>
-        <Speedometer value={item.value}/>
+      <div className="flex-1" style={{height: '100%', position: 'relative'}}>
+        <Speedometer {...item}/>
       </div>
     )
   }
@@ -82,15 +82,21 @@ export default class GDeviceBasic extends React.Component {
     const diskValue = disk ? Math.ceil(disk.FreeSpace * 100 / disk.TotalSpace) : 0
 
     const items = [{
-      value: cpuValue
-    }, {
+      title1: `${memValue}%`,
+      title2: 'Memory Utilization',
       value: memValue
     }, {
+      title1: `${diskValue}%`,
+      title2: 'Disk Utilization',
       value: diskValue
+    }, {
+      title1: `${cpuValue}%`,
+      title2: 'CPU Utilization',
+      value: cpuValue
     }]
 
     return (
-      <div className="flex-1 flex-horizontal" style={{marginTop: 26}}>
+      <div className="flex-1 flex-horizontal" style={{marginTop: 16}}>
         {items.map(item => this.renderItem(item))}
       </div>
     )
