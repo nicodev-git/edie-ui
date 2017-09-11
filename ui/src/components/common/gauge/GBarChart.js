@@ -143,7 +143,7 @@ export default class GBarChart extends React.Component {
     } else if (resource === 'incident'){
       const params = {
         q: [
-          `(workflowids:${[workflowId, ...workflowIds].filter(p => !!p).join(' OR ')})`,
+          `(workflowids:${[workflowId || '', ...(workflowIds || [])].filter(p => !!p).join(' OR ')})`,
           `(severity:${severities.map(p => p.value).join(' OR ')})`
         ].join(' AND '),
         splitBy,
