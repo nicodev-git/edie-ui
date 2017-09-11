@@ -123,7 +123,8 @@ export default class LogPapers extends React.Component {
 
       this.setState(state)
       onUpdateCount && onUpdateCount(total, state.results)
-    }).fail(() => {
+    }).fail((req, reason) => {
+      if (reason === 'abort') return
       if (page === 1) {
         this.reloadTimer = setTimeout(() => {
           this.getExternalData(page)
@@ -171,7 +172,7 @@ export default class LogPapers extends React.Component {
             <div className="header-red">{title} : {timeFrom} ~ {timeTo}</div>
             {list.map((row, index) =>
               <div key={row.id} className="padding-xs row-hover">
-                <div className="inline-block" dangerouslySetInnerHTML={{__html: row.entity && row.entity.dataobj ? row.entity.dataobj.line : ' '}}/>
+                <span dangerouslySetInnerHTML={{__html: row.entity && row.entity.dataobj ? row.entity.dataobj.line : ' '}}/>
                 <div className="link text-primary margin-md-left" onClick={this.onClickView.bind(this, row, index)}>
                   View
                 </div>

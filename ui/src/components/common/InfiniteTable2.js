@@ -120,7 +120,8 @@ class InfiniteTable extends React.Component {
 
       this.setState(state)
       onUpdateCount && onUpdateCount(total, state.results)
-    }).fail(() => {
+    }).fail((req, reason) => {
+      if (reason === 'abort') return
       if (page === 1) {
         this.reloadTimer = setTimeout(() => {
           this.setState({

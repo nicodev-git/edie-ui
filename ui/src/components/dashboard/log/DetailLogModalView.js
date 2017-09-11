@@ -15,7 +15,7 @@ export default class DetailLogModalView extends React.Component {
     const {rowId} = this.props
 
     return (
-      <div className="bg-white">
+      <div className="bg-white" style={{marginTop: 40}}>
         {list.map((row, index) =>
           <div key={row.id} className={row.id === rowId ? 'highlight' : ''} ref={row.id === rowId ? this.onRefRow.bind(this) : null}>
             <div dangerouslySetInnerHTML={{__html: row.entity && row.entity.dataobj ? row.entity.dataobj.line : ' '}}/>
