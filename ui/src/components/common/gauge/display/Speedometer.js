@@ -2,8 +2,8 @@ import React from 'react'
 import Dimen from 'react-dimensions'
 import D3Speedometer from 'react-d3-speedometer'
 
-const colorGreen = '#65CE67'
-const colorRed = '#EF5A5A'
+const colorGreen = '#64D10C'
+const colorRed = '#F52C11'
 
 class Speedometer extends React.Component {
   render () {
