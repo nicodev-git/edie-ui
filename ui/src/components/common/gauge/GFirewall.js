@@ -22,20 +22,31 @@ export default class GFirewall extends React.Component {
 
     this.columns = [{
       'displayName': 'Name',
-      'columnName': 'ServiceName',
-      'cssClassName': 'width-200'
+      'columnName': 'Name'
     }, {
-      'displayName': 'Display Name',
-      'columnName': 'DisplayName'
-    }, {
-      'displayName': '    ',
-      'columnName': 'Status',
-      'cssClassName': 'width-200',
-      'customComponent': (props) => {
-        const val = props.data
-        const label = val === 'Running' ? 'Stop' : 'Start'
-        return <RaisedButton label={label} onTouchTap={this.onClickStart.bind(this, props.rowData)} primary={val !== 'Running'}/>
+      'displayName': 'Source',
+      'columnName': 'LocalIP',
+      'customComponent': p => {
+        const data = p.rowData
+        return <span>{data.Direction === 'In' ? data.RemoteIP : data.LocalIP}</span>
       }
+    }, {
+      'displayName': 'Destination',
+      'columnName': 'RemoteIP',
+      'customComponent': p => {
+        const data = p.rowData
+        return <span>{data.Direction === 'In' ? data.LocalIP : data.RemoteIP}</span>
+      }
+    }, {
+      'displayName': 'Service',
+      'columnName': 'RemotePort',
+      'customComponent': p => {
+        const data = p.rowData
+        return <span>{data.Direction === 'In' ? data.LocalPort : data.RemotePort} / {data.Protocol}</span>
+      }
+    }, {
+      'displayName': 'Action',
+      'columnName': 'Action'
     }]
   }
 
@@ -53,7 +64,7 @@ export default class GFirewall extends React.Component {
   onSocketOpen () {
     this.monitorSocket.send({
       action: 'enable-realtime',
-      monitors: 'service',
+      monitors: 'firewall',
       deviceId: this.props.device.id
     })
   }
@@ -76,12 +87,10 @@ export default class GFirewall extends React.Component {
       }
     })
   }
-  onClickStart (service) {
-    if (service.Status === 'Running') {
-      this.sendCommandMessage('StopServiceCommand', {service: service.ServiceName})
-    } else {
-      this.sendCommandMessage('StartServiceCommand', {service: service.ServiceName})
-    }
+  onToggleStatus (e, checked) {
+    this.sendCommandMessage('SetFirewallStatusCommand', {
+      status: checked ? 'on' : 'off'
+    })
   }
   onSubmit (options, values) {
     console.log(values)
