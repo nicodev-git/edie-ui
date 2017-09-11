@@ -87,7 +87,7 @@ export default class GDeviceBasic extends React.Component {
     }, {
       title1: `${diskValue}%`,
       title2: 'Disk Utilization',
-      value: diskValue + 20
+      value: diskValue
     }, {
       title1: `${cpuValue}%`,
       title2: 'CPU Utilization',
