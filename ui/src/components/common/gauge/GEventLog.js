@@ -12,39 +12,31 @@ export default class GEventLog extends React.Component {
   constructor (props) {
     super (props)
     this.state = {
-      apps: []
+      eventLogs: [],
+      selectedLogName: 'Application'
     }
     this.renderBackView = this.renderBackView.bind(this)
     this.renderFrontView = this.renderFrontView.bind(this)
 
     this.columns = [{
-      'displayName': 'Name',
-      'columnName': 'Name'
+      'displayName': 'Time',
+      'columnName': 'LogTime',
+      'cssClassName': 'nowrap width-140'
     }, {
-      'displayName': 'InstallDate',
-      'columnName': 'InstallDate',
-      'cssClassName': 'width-140',
-      'customComponent': (props) => {
-        let val = props.data
-        if (!val) return <span />
-        val = `${val.substring(0, 4)}-${
-          val.substring(4, 6)}-${
-          val.substring(6)}`
-
-        return <span>{val}</span>
-      }
+      'displayName': 'LogName',
+      'columnName': 'LogName',
+      'cssClassName': 'width-100'
     }, {
-      'displayName': 'Version',
-      'columnName': 'Version',
-      'cssClassName': 'width-120'
+      'displayName': 'EventID',
+      'columnName': 'EventID',
+      'cssClassName': 'width-80'
     }, {
-      'displayName': 'Publisher',
-      'columnName': 'Publisher',
-      'cssClassName': 'width-200'
+      'displayName': 'User',
+      'columnName': 'User',
+      'cssClassName': 'width-160'
     }, {
-      'displayName': 'Size',
-      'columnName': 'Size',
-      'cssClassName': 'width-120'
+      'displayName': 'Data',
+      'columnName': 'Data'
     }]
   }
 
@@ -62,15 +54,18 @@ export default class GEventLog extends React.Component {
   onSocketOpen () {
     this.monitorSocket.send({
       action: 'enable-realtime',
-      monitors: 'app',
-      deviceId: this.props.device.id
+      monitors: 'eventlog',
+      deviceId: this.props.device.id,
+      data: {
+        name: this.state.selectedLogName
+      }
     })
   }
   onMonitorMessage (msg) {
     if (msg.action === 'update' && msg.deviceId === this.props.device.id) {
-      const {app} = msg.data
+      const {eventlog} = msg.data
       this.setState({
-        apps: app.map((u, i) => ({...u, id: i}))
+        eventLogs: eventlog.map((u, i) => assign(u, {id: i}))
       })
     }
   }
@@ -113,16 +108,14 @@ export default class GEventLog extends React.Component {
 
   renderFrontView () {
     return (
-      <div className="flex-vertical flex-1">
-        <InfiniteTable
-          cells={this.columns}
-          ref="table"
-          rowMetadata={{'key': 'id'}}
-          selectable
-          data={this.getApps()}
-          useExternal={false}
-        />
-      </div>
+      <InfiniteTable
+        cells={this.columns}
+        ref="table"
+        rowMetadata={{'key': 'id'}}
+        selectable
+        data={this.state.eventLogs}
+        useExternal={false}
+      />
     )
   }
   renderBackView (options) {
