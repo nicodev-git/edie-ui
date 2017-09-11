@@ -7,8 +7,9 @@ const colorRed = '#F52C11'
 
 class Speedometer extends React.Component {
   render () {
-    const {value, title1, title2, title3, containerWidth} = this.props
-    const width = containerWidth
+    const {value, title1, title2, title3, containerWidth, containerHeight} = this.props
+    const width = Math.min(containerWidth, containerHeight)
+
     return (
       <div className="text-center">
         <D3Speedometer
