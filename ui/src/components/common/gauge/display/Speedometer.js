@@ -7,7 +7,7 @@ const colorRed = '#EF5A5A'
 
 class Speedometer extends React.Component {
   render () {
-    const {value, title1, title2, containerWidth} = this.props
+    const {value, title1, title2, containerWidth, secondaryColor} = this.props
     const width = containerWidth * 0.9
     return (
       <div className="text-center">
@@ -16,8 +16,8 @@ class Speedometer extends React.Component {
           minValue={0} maxValue={100} segments={2} value={value}
           width={width}
           height={width * 0.6}
-          startColor={value > 50 ? colorRed : colorGreen}
-          endColor={value > 50 ? colorRed : colorGreen}
+          startColor={secondaryColor ? colorRed : colorGreen}
+          endColor={secondaryColor ? colorRed : colorGreen}
           needleColor="#2B436E"
           ringWidth={width / 4}
         />

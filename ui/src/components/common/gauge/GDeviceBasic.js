@@ -63,9 +63,9 @@ export default class GDeviceBasic extends React.Component {
     return devices[index]
   }
 
-  renderItem (item) {
+  renderItem (item, i) {
     return (
-      <div className="flex-1" style={{height: '100%', position: 'relative', overflow: 'hidden'}}>
+      <div key={i} className="flex-1" style={{height: '100%', position: 'relative', overflow: 'hidden'}}>
         <Speedometer {...item}/>
       </div>
     )
@@ -87,7 +87,8 @@ export default class GDeviceBasic extends React.Component {
     }, {
       title1: `${diskValue}%`,
       title2: 'Disk Utilization',
-      value: diskValue
+      value: diskValue,
+      secondaryColor: true
     }, {
       title1: `${cpuValue}%`,
       title2: 'CPU Utilization',
@@ -96,7 +97,7 @@ export default class GDeviceBasic extends React.Component {
 
     return (
       <div className="flex-1 flex-horizontal" style={{marginTop: 16}}>
-        {items.map(item => this.renderItem(item))}
+        {items.map(this.renderItem.bind(this))}
       </div>
     )
   }
