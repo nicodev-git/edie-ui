@@ -15,7 +15,7 @@ export default class GFirewall extends React.Component {
   constructor (props) {
     super (props)
     this.state = {
-      services: []
+      rules: []
     }
     this.renderBackView = this.renderBackView.bind(this)
     this.renderFrontView = this.renderFrontView.bind(this)
@@ -71,7 +71,7 @@ export default class GFirewall extends React.Component {
 
   onMonitorMessage (msg) {
     if (msg.action === 'update' && msg.deviceId === this.props.device.id) {
-      const {service} = msg.data
+      const {firewallRules} = msg.data
       this.setState({
         services: service
       })
@@ -125,12 +125,12 @@ export default class GFirewall extends React.Component {
       <InfiniteTable
         cells={this.columns}
         ref="table"
-        rowMetadata={{'key': 'ServiceName'}}
+        rowMetadata={{'key': 'id'}}
         selectable
         rowHeight={40}
 
         useExternal={false}
-        data={this.state.services}
+        data={this.state.rules}
       />
     )
   }
