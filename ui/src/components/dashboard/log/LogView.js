@@ -3,6 +3,7 @@ import { reduxForm, submit } from 'redux-form'
 import { connect } from 'react-redux'
 import { assign, debounce } from 'lodash'
 import ReactTooltip from 'react-tooltip'
+import QueryParser from 'lucene'
 
 import TabPage from 'components/common/TabPage'
 import TabPageBody from 'components/common/TabPageBody'
@@ -13,7 +14,7 @@ import LogSearchFormView from './LogSearchFormView'
 import LogPapers from './LogPapers'
 import DetailLogModal from './DetailLogModal'
 
-import {parseDateRange} from 'util/Query'
+import {parseDateRange, getFieldValue} from 'util/Query'
 
 import {parse} from 'query-string'
 import {getRanges} from 'components/common/DateRangePicker'
@@ -66,8 +67,10 @@ class LogView extends React.Component {
   }
 
   onClickDetailView (row, index, page, pageSize) {
+    const {logViewParam} = this.props
+    const monitorid = getFieldValue(QueryParser.parse(logViewParam.q || ''), 'monitorid')
     const params = {
-      q: this.props.logViewParam.q,
+      q: monitorid ? `(monitorid:${monitorid})` : logViewParam.q,
       from: 0,
       to: row.entity.timestamp,
       page: 0,
