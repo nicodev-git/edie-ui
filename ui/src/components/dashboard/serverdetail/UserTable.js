@@ -1,12 +1,12 @@
 import React from 'react'
-import {RaisedButton, ToolbarGroup} from 'material-ui'
-import InfiniteTable from 'components/common/InfiniteTable'
 
 import TabPage from 'components/common/TabPage'
 import TabPageBody from 'components/common/TabPageBody'
 import TabPageHeader from 'components/common/TabPageHeader'
 import ServerDetailTab from './ServerDetailTab'
-import MonitorSocket from 'util/socket/MonitorSocket'
+
+import { layoutWidthZoom, layoutHeightZoom } from 'shared/Global'
+import GridLayout from './GridLayout'
 
 export default class UserTable extends React.Component {
   getDeviceId () {
@@ -44,7 +44,6 @@ export default class UserTable extends React.Component {
         </TabPageHeader>
         <TabPageBody tabs={ServerDetailTab(device.id, device.templateName)} history={this.props.history} location={this.props.location} transparent>
           {this.renderBody()}
-          {this.renderLocalUserModal()}
         </TabPageBody>
       </TabPage>
     )
