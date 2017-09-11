@@ -14,29 +14,45 @@ export default class GaugeServerPicker extends React.Component {
       <div className="padding-md-left padding-md-right">
         <div className="row">
           <div className="col-md-6 p-none">
-            <div style={{height: height || 300, overflow: 'auto', border: '1px solid gray'}}>
-              <table className={`table table-hover ${tableClass}`}>
-                <tbody>
-                <tr>
-                  <td><b>Device</b></td>
-                  <td><b>Monitor</b></td>
-                </tr>
-                {(devices || []).map((p, i) =>
-                  <tr key={p.id}>
-                    <td
-                      width="50%"
-                      className={selectedDevice && selectedDevice.id === p.id ? 'selected' : ''}
-                      onClick={() => onSelectDevice(p)}>{p.name}</td>
-                    <td
-                      width="50%"
-                      className={i < monitors.length && selectedMonitor && selectedMonitor.uid === monitors[i].uid ? 'selected' : ''}
-                      onClick={i < monitors.length ? () => onSelectMonitor(monitors[i]) : null}>
-                      {i < monitors.length ? monitors[i].name : ''}
-                    </td>
+            <div className="flex-horizontal" style={{height: height || 300, border: '1px solid gray'}}>
+              <div className="flex-1" style={{overflow: 'auto'}}>
+                <table className={`table table-hover ${tableClass}`}>
+                  <tbody>
+                  <tr>
+                    <td><b>Device</b></td>
                   </tr>
-                )}
-                </tbody>
-              </table>
+                  {(devices || []).map((p, i) =>
+                    <tr key={p.id}>
+                      <td
+                        width="50%"
+                        className={selectedDevice && selectedDevice.id === p.id ? 'selected' : ''}
+                        onClick={() => onSelectDevice(p)}>{p.name}</td>
+                    </tr>
+                  )}
+                  </tbody>
+                </table>
+              </div>
+              <div className="flex-1" style={{overflow: 'auto'}}>
+                <table className={`table table-hover ${tableClass}`}>
+                  <tbody>
+                  <tr>
+                    <td><b>Monitor</b></td>
+                  </tr>
+                  {monitors.map((p, i) =>
+                    <tr key={p.uid}>
+                      <td
+                        width="50%"
+                        className={selectedMonitor && selectedMonitor.uid === p.uid ? 'selected' : ''}
+                        onClick={() => onSelectMonitor(monitors[i])}>
+                        {p.name}
+                      </td>
+                    </tr>
+                  )}
+                  </tbody>
+                </table>
+              </div>
+
+
             </div>
           </div>
           <div className="col-md-1 p-none">
