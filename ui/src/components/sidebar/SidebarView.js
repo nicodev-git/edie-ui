@@ -57,7 +57,8 @@ export default class SidebarView extends Component {
     const {onToggle, contentType, mainMenu, deviceMenu, onMainMenu,
       device, pageId, pageType, searchVisible, onSearch,
       sidebarMessageMenuOpen,
-      openSidebarMessageMenu, closeSidebarMessageMenu
+      openSidebarMessageMenu, closeSidebarMessageMenu,
+      user
     } = this.props
 
     const deviceMenuItems = deviceMenu(device ? device.id : 'main')
@@ -72,37 +73,40 @@ export default class SidebarView extends Component {
           </IconButton>
         </div>
         <div style={{display: contentType.Main === pageType ? 'block' : 'none'}} className="sidebar">
-          {mainMenu.map((item, index) =>
-            <div key={index} onClick={onMainMenu.bind(this, index)}>
-              <div className={pageId === item.id ? 'sidebar-chosen' : ''}>
-                <div className="sidebar-item-container">
-                  {item.badge ? this.renderBadge(item) : this.renderButton(item)}
-                  <div className="sidebar-title">{item.title}</div>
+          {mainMenu.map((item, index) => {
+            // if (index === (user.defaultPage !== 'dashboard' ? 0 : 1)) return null
+            return (
+              <div key={index} onClick={onMainMenu.bind(this, index)}>
+                <div className={pageId === item.id ? 'sidebar-chosen' : ''}>
+                  <div className="sidebar-item-container">
+                    {item.badge ? this.renderBadge(item) : this.renderButton(item)}
+                    <div className="sidebar-title">{item.title}</div>
+                  </div>
                 </div>
-              </div>
-              {
-                index === 1 && searchVisible && pageId !== item.id ? <div className={`sidebar-tooltip`}>
-                  <SearchBarContainer
-                    defaultKeyword={this.props.params.query}
-                    onSearch={onSearch}
-                    updateSidebarSearchActive={this.props.updateSidebarSearchActive}
-                    sidebarSearchActive={this.props.sidebarSearchActive}
-                  />
-                </div> : null
-              }
-              <Divider style={{margin: 0, backgroundColor: '#393b42'}}/>
-
-              {index === 0 ? (
-                <MessageBox
-                  open={sidebarMessageMenuOpen}
-                  openSidebarMessageMenu={openSidebarMessageMenu}
-                  closeSidebarMessageMenu={closeSidebarMessageMenu}/>
-              ) : null}
-              {index === 0 ? (
+                {
+                  index === 1 && searchVisible && pageId !== item.id ? <div className={`sidebar-tooltip`}>
+                    <SearchBarContainer
+                      defaultKeyword={this.props.params.query}
+                      onSearch={onSearch}
+                      updateSidebarSearchActive={this.props.updateSidebarSearchActive}
+                      sidebarSearchActive={this.props.sidebarSearchActive}
+                    />
+                  </div> : null
+                }
                 <Divider style={{margin: 0, backgroundColor: '#393b42'}}/>
-              ) : null}
-            </div>
-          )}
+
+                {index === 0 ? (
+                  <MessageBox
+                    open={sidebarMessageMenuOpen}
+                    openSidebarMessageMenu={openSidebarMessageMenu}
+                    closeSidebarMessageMenu={closeSidebarMessageMenu}/>
+                ) : null}
+                {index === 0 ? (
+                  <Divider style={{margin: 0, backgroundColor: '#393b42'}}/>
+                ) : null}
+              </div>
+            )
+          })}
         </div>
 
         {contentType.Device === pageType ? this.renderDeviceMenuItem(deviceMenuItems[0], 0) : null}
