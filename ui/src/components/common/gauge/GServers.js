@@ -81,7 +81,8 @@ export default class GServers extends React.Component {
         pathname: `/dashboard/${gauge.forwardBoardId}`
       })
     } else {
-      this.props.history.push(`/device/${device.id}/dashboard`)
+      this.props.closeDevice()
+      this.props.history.push(`/serverdetail/${device.id}`)
     }
   }
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -37,6 +37,7 @@ import {
   updateViewLogParams,
 
   openDevice,
+  closeDevice,
   openDeviceMonitorWizard,
   closeDeviceMonitorWizard,
   openDeviceMonitorPicker,
@@ -120,6 +121,7 @@ export default connect(
     updateViewLogParams,
 
     openDevice,
+    closeDevice,
     openDeviceMonitorWizard,
     closeDeviceMonitorWizard,
     openDeviceMonitorPicker,

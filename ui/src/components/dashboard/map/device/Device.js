@@ -19,7 +19,7 @@ export default class Device extends React.Component {
 
   render () {
     const {deviceId} = this.props.match.params
-    if (!this.props.selectedDevice) {
+    if (!this.props.selectedDevice || this.props.selectedDevice.id !== deviceId) {
       if (!this.props.devices.length) {
         console.log('fetch devices')
         this.props.fetchDevice(deviceId)
