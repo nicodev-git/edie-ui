@@ -7,138 +7,40 @@ import TabPageBody from 'components/common/TabPageBody'
 import TabPageHeader from 'components/common/TabPageHeader'
 import ServerDetailTab from './ServerDetailTab'
 import MonitorSocket from 'util/socket/MonitorSocket'
-import StatusImg from './StatusImg'
-
-import LocalUserModal from './LocalUserModal'
-import {showConfirm} from 'components/common/Alert'
 
 export default class UserTable extends React.Component {
-  constructor (props) {
-    super(props)
-    this.state = {
-      query: ''
-    }
-    this.columns = [{
-      'displayName': 'Name',
-      'columnName': 'Name',
-      'cssClassName': 'width-200'
-    }, {
-      'displayName': 'Domain',
-      'columnName': 'Domain'
-    }, {
-      'displayName': 'Status',
-      'columnName': 'Disabled',
-      'customComponent': p => {
-        return <span>{p.data ? 'Disabled' : 'Enabled'}</span>
+  getDeviceId () {
+    return this.props.match.params.id
+  }
+
+  getGauges () {
+    return [{
+      id: 'basic0',
+      name: 'Users',
+      templateName: 'Users',
+      deviceId: this.getDeviceId(),
+      gaugeSize: 'custom',
+      layout: {
+        i: 'basic0',
+        x: 0, y: 0,
+        w: 12 * layoutWidthZoom, h: 5 * layoutHeightZoom
       }
     }]
   }
-  componentWillMount () {
-    this.props.clearMonitors()
-  }
-  componentDidMount () {
-    this.monitorSocket = new MonitorSocket({
-      listener: this.onMonitorMessage.bind(this)
-    })
-    this.monitorSocket.connect(this.onSocketOpen.bind(this))
-  }
-
-  componentWillUnmount () {
-    this.monitorSocket.close()
-  }
-
-  onSocketOpen () {
-    this.monitorSocket.send({
-      action: 'enable-realtime',
-      monitors: 'user',
-      deviceId: this.props.device.id
-    })
-  }
-  onMonitorMessage (msg) {
-    console.log(msg)
-    if (msg.action === 'update' && msg.deviceId === this.props.device.id) {
-      this.props.updateMonitorRealTime(msg.data)
-    }
-  }
-  sendCommandMessage (name, params) {
-    this.monitorSocket.send({
-      action: 'command',
-      deviceId: this.props.device.id,
-      data: {
-        name,
-        params
-      }
-    })
-  }
-  onClickCreate () {
-    this.props.showLocalUserModal(true)
-  }
-  onSaveUser (values) {
-    this.sendCommandMessage('CreateUserCommand', values)
-  }
-  onClickDelete () {
-    const sel = this.refs.table.getSelected()
-    if (!sel) return
-    showConfirm('Click OK to delete user.', btn => {
-      if (btn !== 'ok') return
-      this.sendCommandMessage('DeleteUserCommand', {
-        username: sel.Name
-      })
-    })
-  }
-  onClickEnable () {
-    const sel = this.refs.table.getSelected()
-    if (!sel) return
-    this.sendCommandMessage('EnableUserCommand', {
-      username: sel.Name
-    })
-  }
-  onClickDisable () {
-    const sel = this.refs.table.getSelected()
-    if (!sel) return
-    this.sendCommandMessage('DisableUserCommand', {
-      username: sel.Name
-    })
-  }
-
-  renderOptions () {
-    return [
-      <ToolbarGroup key="0" firstChild>
-      </ToolbarGroup>,
-      <ToolbarGroup key="1">
-        <RaisedButton label="Create" onTouchTap={this.onClickCreate.bind(this)}/>
-        <RaisedButton label="Enable" onTouchTap={this.onClickEnable.bind(this)}/>
-        <RaisedButton label="Disable" onTouchTap={this.onClickDisable.bind(this)}/>
-        <RaisedButton label="Delete" onTouchTap={this.onClickDelete.bind(this)}/>
-      </ToolbarGroup>
-    ]
-  }
   renderBody () {
     return (
-      <InfiniteTable
-        cells={this.columns}
-        ref="table"
-        rowMetadata={{'key': 'Name'}}
-        selectable
-        rowHeight={40}
-
-        useExternal={false}
-        data={this.props.monitorUsers}
+      <GridLayout
+        {...this.props}
+        gauges={this.getGauges()}
       />
-    )
-  }
-  renderLocalUserModal () {
-    if (!this.props.localUserModalOpen) return
-    return (
-      <LocalUserModal {...this.props} onSave={this.onSaveUser.bind(this)}/>
     )
   }
   render () {
     const {device} = this.props
     return (
       <TabPage>
-        <TabPageHeader title="Users" titleOptions={<StatusImg {...this.props}/>} useToolBar>
-          {this.renderOptions()}
+        <TabPageHeader title="Users" useToolBar>
+          {/*{this.renderOptions()}*/}
         </TabPageHeader>
         <TabPageBody tabs={ServerDetailTab(device.id, device.templateName)} history={this.props.history} location={this.props.location} transparent>
           {this.renderBody()}

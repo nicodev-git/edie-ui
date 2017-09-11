@@ -20,6 +20,7 @@ import GDeviceBasic from 'components/common/gauge/GDeviceBasic'
 import GEventLog from 'components/common/gauge/GEventLog'
 import GProcessList from 'components/common/gauge/GProcessList'
 import GServiceList from 'components/common/gauge/GServiceList'
+import GUsers from 'components/common/gauge/GUsers'
 
 const gaugeMap = {
   'Line Chart': GLineChart,
@@ -44,7 +45,8 @@ const gaugeMap = {
   'Device Basic': GDeviceBasic,
   'Event Log': GEventLog,
   'Process': GProcessList,
-  'Services': GServiceList
+  'Services': GServiceList,
+  'Users': GUsers
 }
 
 export default gaugeMap
