@@ -8,6 +8,8 @@ import {showAlert} from 'components/common/Alert'
 import MonitorSocket from 'util/socket/MonitorSocket'
 import InfiniteTable from 'components/common/InfiniteTable'
 
+import {gaugeTitleStyle1} from 'style/common/materialStyles'
+
 export default class GEventLog extends React.Component {
   constructor (props) {
     super (props)
@@ -134,7 +136,7 @@ export default class GEventLog extends React.Component {
       <FlipView
         {...this.props}
 
-        titleStyle={{background: '#CACEE4', margin: '12px 12px 0', fontWeight: 'bold'}}
+        titleStyle={gaugeTitleStyle1}
         style={this.props.style}
         className={this.props.className}
         gauge={this.props.gauge}

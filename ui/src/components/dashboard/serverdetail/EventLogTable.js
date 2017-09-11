@@ -1,11 +1,9 @@
 import React, { Component } from 'react'
 
-
 import TabPage from 'components/common/TabPage'
 import TabPageBody from 'components/common/TabPageBody'
 import TabPageHeader from 'components/common/TabPageHeader'
 import ServerDetailTab from './ServerDetailTab'
-import StatusImg from './StatusImg'
 
 import { layoutWidthZoom, layoutHeightZoom } from 'shared/Global'
 
@@ -55,7 +53,7 @@ export default class EventLogTable extends Component {
     const {device} = this.props
     return (
       <TabPage>
-        <TabPageHeader title="Event Log" titleOptions={<StatusImg {...this.props}/>} useToolBar>
+        <TabPageHeader title="Event Log" useToolBar>
         </TabPageHeader>
         <TabPageBody tabs={ServerDetailTab(device.id, device.templateName)} history={this.props.history} location={this.props.location} transparent>
           {this.renderBody()}

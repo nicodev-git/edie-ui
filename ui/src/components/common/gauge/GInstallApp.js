@@ -63,11 +63,11 @@ export default class GInstallApp extends React.Component {
     this.monitorSocket.send({
       action: 'enable-realtime',
       monitors: 'app',
-      deviceId: this.props.device.id
+      deviceId: this.props.gauge.deviceId
     })
   }
   onMonitorMessage (msg) {
-    if (msg.action === 'update' && msg.deviceId === this.props.device.id) {
+    if (msg.action === 'update' && msg.deviceId === this.props.gauge.deviceId) {
       const {app} = msg.data
       this.setState({
         apps: app.map((u, i) => ({...u, id: i}))
