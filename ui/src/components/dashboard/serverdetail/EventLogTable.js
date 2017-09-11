@@ -32,14 +32,14 @@ export default class EventLogTable extends Component {
   getGauges () {
     return [{
       id: 'basic0',
-      name: '',
+      name: 'Event Log',
       templateName: 'Event Log',
       deviceId: this.getDeviceId(),
       gaugeSize: 'custom',
       layout: {
         i: 'basic0',
         x: 0, y: 0,
-        w: 12 * layoutWidthZoom, h: 3 * layoutHeightZoom
+        w: 12 * layoutWidthZoom, h: 5 * layoutHeightZoom
       }
     }]
   }
@@ -56,7 +56,6 @@ export default class EventLogTable extends Component {
     return (
       <TabPage>
         <TabPageHeader title="Event Log" titleOptions={<StatusImg {...this.props}/>} useToolBar>
-          {this.renderOptions()}
         </TabPageHeader>
         <TabPageBody tabs={ServerDetailTab(device.id, device.templateName)} history={this.props.history} location={this.props.location} transparent>
           {this.renderBody()}

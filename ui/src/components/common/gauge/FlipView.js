@@ -92,7 +92,7 @@ export default class FlipView extends React.Component {
   }
 
   renderCard (cls, children, front) {
-    const {title, gauge, loading, viewOnly, onClickModalView, paperStyle, hideTitle, hideContentPadding} = this.props
+    const {title, gauge, loading, viewOnly, onClickModalView, paperStyle, hideTitle, hideContentPadding, titleStyle} = this.props
     return (
       <div className={`${cls} ${this.getFlipClass()}`}>
         <div className="flex-vertical" style={{height: '100%'}}>
@@ -110,7 +110,7 @@ export default class FlipView extends React.Component {
                 </div>
               ) : (
                 <Paper className="flex-1 flex-vertical" style={paperStyle} zDepth={paperZDepth} onMouseEnter={this.onMouseEnter} onMouseLeave={this.onMouseLeave}>
-                  {!hideTitle && <div style={{fontSize: 14, color: 'rgba(0, 0, 0, 0.54)', height: 48, paddingLeft: 20, paddingTop: 16}}>
+                  {!hideTitle && <div style={{...titleStyle, fontSize: 14, color: 'rgba(0, 0, 0, 0.54)', height: 48, paddingLeft: 20, paddingTop: 16}}>
                     {title || gauge.name}
                   </div>}
                   <div className="flex-1 flex-vertical" style={hideContentPadding ? {paddingBottom: 16} : {padding: '16px 20px 35px'}}>

@@ -65,7 +65,7 @@ export default class GEventLog extends React.Component {
     if (msg.action === 'update' && msg.deviceId === this.props.device.id) {
       const {eventlog} = msg.data
       this.setState({
-        eventLogs: eventlog.map((u, i) => assign(u, {id: i}))
+        eventLogs: eventlog.map((u, i) => ({...u, id: i}))
       })
     }
   }
@@ -134,6 +134,7 @@ export default class GEventLog extends React.Component {
       <FlipView
         {...this.props}
 
+        titleStyle={{background: '#CACEE4', margin: '12px 12px 0', fontWeight: 'bold'}}
         style={this.props.style}
         className={this.props.className}
         gauge={this.props.gauge}
