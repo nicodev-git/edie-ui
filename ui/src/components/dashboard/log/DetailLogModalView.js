@@ -21,6 +21,7 @@ export default class DetailLogModalView extends React.Component {
             <div dangerouslySetInnerHTML={{__html: row.entity && row.entity.dataobj ? row.entity.dataobj.line : ' '}}/>
           </div>
         )}
+        <div style={{height: 700}}></div>
       </div>
     )
   }

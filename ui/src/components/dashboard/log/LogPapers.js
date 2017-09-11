@@ -54,7 +54,7 @@ export default class LogPapers extends React.Component {
     return data
   }
 
-  componentWillMount () {
+  componentDidMount () {
     const {onUpdateCount} = this.props
     onUpdateCount && onUpdateCount(0, [], true)
     this.getExternalData(1, true)
@@ -69,6 +69,7 @@ export default class LogPapers extends React.Component {
   }
 
   componentWillUnmount () {
+    clearTimeout(this.reloadTimer)
     if (this.lastRequest) {
       this.lastRequest.abort()
       this.lastRequest = null
@@ -126,7 +127,7 @@ export default class LogPapers extends React.Component {
       if (page === 1) {
         this.reloadTimer = setTimeout(() => {
           this.getExternalData(page)
-        }, 2000)
+        }, 5000)
       }
     })
 
