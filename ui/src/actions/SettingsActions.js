@@ -793,7 +793,7 @@ export const showSimulationModal = (visible) => {
 
 export const postIncidentSimulation = (data) => {
   return dispatch => {
-    axios.post(`${ROOT_URL}/restlistener/post`, data)
+    axios.post(`${ROOT_URL}/restlistener/post`, {data})
   }
 }
 
