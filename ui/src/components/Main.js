@@ -87,9 +87,9 @@ class Main extends React.Component {
     let found = false
     mainMenu.forEach(item => {
       if (item.id === dashboardId) return true
-      const matched = pathname === '/' ?
+      const matched = pathname === '/' || item.path === '/' ?
         (item.path === pathname && (location.search || '') === (item.search || '')) :
-        pathname === item.path
+        startsWith(pathname, item.path)
       if (matched) {
         pageId = item.id
         pageType = contentType.Main
