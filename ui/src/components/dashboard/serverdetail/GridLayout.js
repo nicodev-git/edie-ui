@@ -2,7 +2,7 @@ import React from 'react'
 import {Responsive, WidthProvider} from 'react-grid-layout'
 
 import GaugeMap from 'components/common/gauge/GaugeMap'
-import { getWidgetSize, layoutCols, layoutRowHeight, layoutWidthZoom, layoutHeightZoom } from 'shared/Global'
+import { getWidgetSize, layoutCols, layoutRowHeight } from 'shared/Global'
 
 const ResponsiveReactGridLayout = WidthProvider(Responsive)
 

@@ -1,7 +1,5 @@
 import React from 'react'
 
-import InfiniteTable from 'components/common/InfiniteTable'
-
 import TabPage from 'components/common/TabPage'
 import TabPageBody from 'components/common/TabPageBody'
 import TabPageHeader from 'components/common/TabPageHeader'
