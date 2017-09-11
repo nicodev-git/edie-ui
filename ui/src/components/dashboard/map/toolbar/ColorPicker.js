@@ -3,7 +3,6 @@ import { ChromePicker } from 'react-color'
 
 const ColorPicker = ({popover, cover, line, lineGroup, isPickerDisplayed,
   onColorPick, onPickerChange, onPickerClose }) => (
-  <li>
     <div
       className="input-group colorpicker-element"
       style={{display: lineGroup ? 'block' : 'none'}}
@@ -12,17 +11,17 @@ const ColorPicker = ({popover, cover, line, lineGroup, isPickerDisplayed,
       <div className="input-group-addon">
         <i className="color-preview" style={{background: lineGroup ? line.getStrokeColor() : 'black'}} />
       </div>
+
+      {
+        isPickerDisplayed ? <div style={popover}>
+          <div style={cover} onClick={onPickerClose}/>
+          <ChromePicker
+            color={lineGroup ? line.getStrokeColor() : 'black'}
+            onChangeComplete={onPickerChange}
+          />
+        </div> : null
+      }
     </div>
-    {
-      isPickerDisplayed ? <div style={popover}>
-        <div style={cover} onClick={onPickerClose}/>
-        <ChromePicker
-          color={lineGroup ? line.getStrokeColor() : 'black'}
-          onChangeComplete={onPickerChange}
-        />
-      </div> : null
-    }
-  </li>
 )
 
 export default ColorPicker

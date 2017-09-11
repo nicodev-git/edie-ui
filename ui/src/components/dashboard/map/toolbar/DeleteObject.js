@@ -1,5 +1,4 @@
 import React from 'react'
-import {assign} from 'lodash'
 import IconButton from 'material-ui/IconButton'
 import DeleteIcon from 'material-ui/svg-icons/action/delete'
 
@@ -16,7 +15,8 @@ const iconStyle = {
 
 const DeleteObject = ({ obj, onDelete }) => (
   <IconButton
-    style={assign({}, buttonStyle, {display: obj ? 'block' : 'none'})}
+    style={buttonStyle}
+    className={obj ? '' : 'hidden'}
     iconStyle={iconStyle}
     onTouchTap={onDelete}>
     <DeleteIcon color="#545454"/>

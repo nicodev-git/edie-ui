@@ -16,20 +16,18 @@ const iconStyle = {
 }
 
 const EditMapMenu = ({ onEdit, onUndo }) => (
-  <li>
-    <IconMenu
-      iconButtonElement={
-        <IconButton style={buttonStyle} iconStyle={iconStyle}>
-            <CreateIcon color="#545454"/>
-        </IconButton>
-      }
-      anchorOrigin={{horizontal: 'left', vertical: 'top'}}
-      targetOrigin={{horizontal: 'left', vertical: 'top'}}
-    >
-      <MenuItem onTouchTap={onEdit}>Edit</MenuItem>
-      <MenuItem onTouchTap={onUndo}>Undo</MenuItem>
-    </IconMenu>
-  </li>
+  <IconMenu
+    iconButtonElement={
+      <IconButton style={buttonStyle} iconStyle={iconStyle}>
+          <CreateIcon color="#545454"/>
+      </IconButton>
+    }
+    anchorOrigin={{horizontal: 'left', vertical: 'top'}}
+    targetOrigin={{horizontal: 'left', vertical: 'top'}}
+  >
+    <MenuItem onTouchTap={onEdit}>Edit</MenuItem>
+    <MenuItem onTouchTap={onUndo}>Undo</MenuItem>
+  </IconMenu>
 )
 
 export default EditMapMenu
