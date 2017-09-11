@@ -72,7 +72,7 @@ export default class GDeviceBasic extends React.Component {
   }
 
   renderFrontView () {
-    const device = this.getDevice()
+    // const device = this.getDevice()
     const {cpu, memory, disk, loading} = this.state
     if (loading) return <div />
 
