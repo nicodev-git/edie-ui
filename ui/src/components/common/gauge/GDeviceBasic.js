@@ -65,7 +65,7 @@ export default class GDeviceBasic extends React.Component {
 
   renderItem (item) {
     return (
-      <div className="flex-1" style={{height: '100%', position: 'relative'}}>
+      <div className="flex-1" style={{height: '100%', position: 'relative', overflow: 'hidden'}}>
         <Speedometer {...item}/>
       </div>
     )
@@ -73,9 +73,8 @@ export default class GDeviceBasic extends React.Component {
 
   renderFrontView () {
     const device = this.getDevice()
-    if (!device) return <div />
-
-    const {cpu, memory, disk} = this.state
+    const {cpu, memory, disk, loading} = this.state
+    if (loading) return <div />
 
     const cpuValue = cpu ? (cpu.length ? cpu[0].Usage : cpu.Usage) : 0
     const memValue = memory ?  Math.ceil(memory.UsedSize * 100 / memory.TotalSize) : 0
@@ -88,7 +87,7 @@ export default class GDeviceBasic extends React.Component {
     }, {
       title1: `${diskValue}%`,
       title2: 'Disk Utilization',
-      value: diskValue
+      value: diskValue + 20
     }, {
       title1: `${cpuValue}%`,
       title2: 'CPU Utilization',

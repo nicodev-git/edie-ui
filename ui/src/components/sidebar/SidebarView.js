@@ -57,8 +57,7 @@ export default class SidebarView extends Component {
     const {onToggle, contentType, mainMenu, deviceMenu, onMainMenu,
       device, pageId, pageType, searchVisible, onSearch,
       sidebarMessageMenuOpen,
-      openSidebarMessageMenu, closeSidebarMessageMenu,
-      user
+      openSidebarMessageMenu, closeSidebarMessageMenu
     } = this.props
 
     const deviceMenuItems = deviceMenu(device ? device.id : 'main')
