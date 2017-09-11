@@ -16,8 +16,8 @@ export default class ServiceTable extends React.Component {
   getGauges () {
     return [{
       id: 'basic0',
-      name: 'Service',
-      templateName: 'Service',
+      name: 'Services',
+      templateName: 'Services',
       deviceId: this.getDeviceId(),
       gaugeSize: 'custom',
       layout: {
