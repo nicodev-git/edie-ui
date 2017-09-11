@@ -10,43 +10,34 @@ import InfiniteTable from 'components/common/InfiniteTable'
 
 import {gaugeTitleStyle1} from 'style/common/materialStyles'
 
-export default class GInstallApp extends React.Component {
+export default class GProcessList extends React.Component {
   constructor (props) {
     super (props)
     this.state = {
-      apps: []
+      processes: []
     }
     this.renderBackView = this.renderBackView.bind(this)
     this.renderFrontView = this.renderFrontView.bind(this)
 
     this.columns = [{
       'displayName': 'Name',
-      'columnName': 'Name'
+      'columnName': 'Filename',
+      'cssClassName': 'width-180'
     }, {
-      'displayName': 'InstallDate',
-      'columnName': 'InstallDate',
-      'cssClassName': 'width-140',
-      'customComponent': (props) => {
-        let val = props.data
-        if (!val) return <span />
-        val = `${val.substring(0, 4)}-${
-          val.substring(4, 6)}-${
-          val.substring(6)}`
-
-        return <span>{val}</span>
-      }
+      'displayName': 'Id',
+      'columnName': 'Id',
+      'cssClassName': 'width-80'
     }, {
-      'displayName': 'Version',
-      'columnName': 'Version',
+      'displayName': 'Owner',
+      'columnName': 'Owner',
+      'cssClassName': 'width-220'
+    }, {
+      'displayName': 'Parent',
+      'columnName': 'Parent',
       'cssClassName': 'width-120'
     }, {
-      'displayName': 'Publisher',
-      'columnName': 'Publisher',
-      'cssClassName': 'width-200'
-    }, {
-      'displayName': 'Size',
-      'columnName': 'Size',
-      'cssClassName': 'width-120'
+      'displayName': 'Location',
+      'columnName': 'Location'
     }]
   }
 
@@ -64,15 +55,15 @@ export default class GInstallApp extends React.Component {
   onSocketOpen () {
     this.monitorSocket.send({
       action: 'enable-realtime',
-      monitors: 'app',
-      deviceId: this.props.gauge.deviceId
+      monitors: 'process',
+      deviceId: this.props.device.id
     })
   }
   onMonitorMessage (msg) {
-    if (msg.action === 'update' && msg.deviceId === this.props.gauge.deviceId) {
-      const {app} = msg.data
+    if (msg.action === 'update' && msg.deviceId === this.props.device.id) {
+      const {process} = msg.data
       this.setState({
-        apps: app.map((u, i) => ({...u, id: i}))
+        processes: process
       })
     }
   }
@@ -115,16 +106,16 @@ export default class GInstallApp extends React.Component {
 
   renderFrontView () {
     return (
-      <div className="flex-vertical flex-1">
-        <InfiniteTable
-          cells={this.columns}
-          ref="table"
-          rowMetadata={{'key': 'id'}}
-          selectable
-          data={this.getApps()}
-          useExternal={false}
-        />
-      </div>
+      <InfiniteTable
+        cells={this.columns}
+        ref="table"
+        rowMetadata={{'key': 'Id'}}
+        selectable
+        rowHeight={40}
+
+        useExternal={false}
+        data={this.state.processes}
+      />
     )
   }
   renderBackView (options) {

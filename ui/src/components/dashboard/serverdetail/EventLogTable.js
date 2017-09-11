@@ -6,7 +6,6 @@ import TabPageHeader from 'components/common/TabPageHeader'
 import ServerDetailTab from './ServerDetailTab'
 
 import { layoutWidthZoom, layoutHeightZoom } from 'shared/Global'
-
 import GridLayout from './GridLayout'
 
 export default class EventLogTable extends Component {
