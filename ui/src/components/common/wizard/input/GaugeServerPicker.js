@@ -51,8 +51,6 @@ export default class GaugeServerPicker extends React.Component {
                   </tbody>
                 </table>
               </div>
-
-
             </div>
           </div>
           <div className="col-md-1 p-none">

@@ -150,7 +150,7 @@ class GenericSearch extends React.Component {
       this.updateQueryParams(params)
       this.props.change('query', q)
     } else {
-      this.props.updateSearchViewFilter(viewFilters.standard)
+      this.onClickClearSearch()
     }
   }
 

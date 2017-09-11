@@ -76,8 +76,7 @@ const initialState = {
     draw: 1,
     q: [
       '(type:all)',
-      '(severity:HIGH OR MEDIUM)',
-      `(from:Yesterday)`
+      `(from:Ever)`
     ].join(' AND ')
   },
   incidentParams: {
