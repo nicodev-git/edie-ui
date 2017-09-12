@@ -9,7 +9,7 @@ export default class GDeviceInfo extends React.Component {
   constructor (props) {
     super (props)
     this.state = {
-      loading: true,
+      loading: false,
       memory: null,
       cpu: null,
       disk: null,
@@ -95,26 +95,36 @@ export default class GDeviceInfo extends React.Component {
 
     const {cpu, memory, disk, os, hostname} = this.state
 
-    const cpuValue = cpu ? `${cpu.length ? cpu[0].Usage : cpu.Usage}%` : ''
-    const memValue = memory ? `${memory.UsedSize}M / ${memory.TotalSize}M` : ''
-    const diskValue = disk ? `${disk.FreeSpace}G / ${disk.TotalSpace}G` : ''
+    const up = device.agent && (new Date().getTime() - device.agent.lastSeen) < 3 * 60 * 1000
 
-    const hardware = cpu ? `Hardware: ${cpu.Model} ` : ''
-    const software = os ? `Software: ${os.Name} ` : ''
-    const sysDesc = `${hardware}${software}`
+    if (up) {
+      const cpuValue = cpu ? `${cpu.length ? cpu[0].Usage : cpu.Usage}%` : ''
+      const memValue = memory ? `${memory.UsedSize}M / ${memory.TotalSize}M` : ''
+      const diskValue = disk ? `${disk.FreeSpace}G / ${disk.TotalSpace}G` : ''
 
-    return (
-      <div style={{marginTop: 26}}>
-        {this.renderRow('Status', device.agent ? 'UP' : 'DOWN')}
-        {this.renderRow('IPAddress', device.wanip || device.lanip)}
-        {this.renderRow('DNS Name', hostname)}
-        {this.renderRow('System', sysDesc, {height: '4em'})}
+      const hardware = cpu ? `Hardware: ${cpu.Model} ` : ''
+      const software = os ? `Software: ${os.Name} ` : ''
+      const sysDesc = `${hardware}${software}`
 
-        {this.renderRow('CPU', cpuValue)}
-        {this.renderRow('RAM', memValue)}
-        {this.renderRow('Disk', diskValue)}
-      </div>
-    )
+      return (
+        <div style={{marginTop: 26}}>
+          {this.renderRow('Status', up ? 'UP' : 'DOWN')}
+          {this.renderRow('IPAddress', device.wanip || device.lanip)}
+          {this.renderRow('DNS Name', hostname)}
+          {this.renderRow('System', sysDesc, {height: '4em'})}
+
+          {this.renderRow('CPU', cpuValue)}
+          {this.renderRow('RAM', memValue)}
+          {this.renderRow('Disk', diskValue)}
+        </div>
+      )
+    } else {
+      return (
+        <div style={{marginTop: 26}} className="text-center">
+          <img src="/resources/images/dashboard/nodata.jpg" alt=""/>
+        </div>
+      )
+    }
   }
 
   renderBackView () {
