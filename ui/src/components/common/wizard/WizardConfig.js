@@ -209,6 +209,11 @@ export const wizardConfig = {
         items: [{
           type: 'credpicker'
         }]
+      }, {
+        title: 'Agent',
+        items: [{
+          type: 'agentpicker'
+        }]
       }],
     }, {
       title: 'Monitors',
