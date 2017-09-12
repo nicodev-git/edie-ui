@@ -3,6 +3,7 @@ import {findIndex} from 'lodash'
 import {ToolbarGroup, IconMenu, IconButton, MenuItem} from 'material-ui'
 import {Responsive, WidthProvider} from 'react-grid-layout'
 import NavigationExpandMoreIcon from 'material-ui/svg-icons/navigation/expand-more'
+import EditIcon from 'material-ui/svg-icons/content/create'
 
 import TabPage from 'components/common/TabPage'
 import TabPageBody from 'components/common/TabPageBody'
@@ -63,6 +64,10 @@ export default class MainControl extends React.Component {
   }
 
   onClickMenuItem () {
+
+  }
+
+  onClickEdit () {
 
   }
   /////////////////////////////////////////////////////////////////////
@@ -150,7 +155,11 @@ export default class MainControl extends React.Component {
           useToolBar>
           <ToolbarGroup firstChild/>
           <ToolbarGroup>
+            <IconButton ontouchtap={this.onClickEdit.bind(this)}>
+              <EditIcon/>
+            </IconButton>
             <IconMenu
+              className="hidden"
               iconButtonElement={
                 <IconButton touch={true}>
                   <NavigationExpandMoreIcon />
