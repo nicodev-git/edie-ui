@@ -4,7 +4,8 @@ import { connect } from 'react-redux'
 
 import MainControl from 'components/dashboard/serverdetail/MainControl'
 import {
-  showDeviceEditModal
+  showDeviceEditModal,
+  updateMapDevice
 } from 'actions'
 
 class MainControlContainer extends React.Component {
@@ -20,6 +21,7 @@ export default connect(
     deviceEditModalOpen: state.devices.deviceEditModalOpen,
     editDevice: state.devices.editDevice
   }), {
-    showDeviceEditModal
+    showDeviceEditModal,
+    updateMapDevice
   }
 )(withRouter(MainControlContainer))

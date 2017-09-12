@@ -72,8 +72,8 @@ export default class MainControl extends React.Component {
   onClickEdit () {
     this.props.showDeviceEditModal(true, this.getDevice())
   }
-  onFinishEdit () {
-
+  onFinishEdit (device) {
+    this.props.updateMapDevice(device)
   }
   /////////////////////////////////////////////////////////////////////
 
