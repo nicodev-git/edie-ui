@@ -90,18 +90,13 @@ export default class GCommand extends React.Component {
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   renderFrontView () {
-    const {commandResult, command, output} = this.state
+    const {commandResult, command} = this.state
     return (
       <div className="flex-vertical flex-1">
         <div className="padding-sm-bottom">
           <TextField
             name="command" style={{width: '100%', marginTop: -20}} value={command}
             onChange={(e, command) => this.setState({command})}/>
-          <div className="inline-block valign-bottom">
-            <Checkbox
-              name="output" labelPosition="right" label="Output" checked={output}
-              onCheck={(e, output) => this.setState({output})}/>
-          </div>
           <div>
             <RaisedButton label="Run" onTouchTap={this.onClickSend.bind(this)}/>&nbsp;
           </div>
