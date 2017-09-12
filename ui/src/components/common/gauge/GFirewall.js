@@ -1,6 +1,5 @@
 import React from 'react'
 import {findIndex} from 'lodash'
-import {RaisedButton} from 'material-ui'
 
 import FlipView from './FlipView'
 import GEditView from './GEditView'
@@ -73,7 +72,7 @@ export default class GFirewall extends React.Component {
     if (msg.action === 'update' && msg.deviceId === this.props.device.id) {
       const {firewallRules} = msg.data
       this.setState({
-        services: service
+        rules: firewallRules.map((u, i) => ({...u, id: i}))
       })
     }
   }
