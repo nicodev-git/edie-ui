@@ -10,7 +10,7 @@ export default class GDeviceBasic extends React.Component {
   constructor (props) {
     super (props)
     this.state = {
-      loading: true,
+      loading: false,
       memory: null,
       cpu: null,
       disk: null
@@ -72,36 +72,49 @@ export default class GDeviceBasic extends React.Component {
   }
 
   renderFrontView () {
-    // const device = this.getDevice()
-    const {cpu, memory, disk, loading} = this.state
-    if (loading) return <div />
+    const device = this.getDevice()
 
-    const cpuValue = cpu ? (cpu.length ? cpu[0].Usage : cpu.Usage) : 0
-    const memValue = memory ?  Math.ceil(memory.UsedSize * 100 / memory.TotalSize) : 0
-    const diskValue = disk ? Math.ceil(disk.FreeSpace * 100 / disk.TotalSpace) : 0
 
-    const items = [{
-      title1: `${cpuValue}%`,
-      title2: cpu ? `${cpu.length ? cpu[0].Model : cpu.Model}` : '',
-      title3: 'CPU Utilization',
-      value: cpuValue
-    }, {
-      title1: `${memValue}%`,
-      title2: memory ? `${memory.UsedSize}M / ${memory.TotalSize}M` : '',
-      title3: 'Memory Utilization',
-      value: memValue
-    }, {
-      title1: `${diskValue}%`,
-      title2: disk ? `${disk.FreeSpace}G / ${disk.TotalSpace}G` : '',
-      title3: 'Disk Utilization',
-      value: diskValue
-    }]
+    if (!device) return <div />
 
-    return (
-      <div className="flex-1 flex-horizontal" style={{marginTop: 8}}>
-        {items.map(this.renderItem.bind(this))}
-      </div>
-    )
+    const up = device.agent && (new Date().getTime() - device.agent.lastSeen) < 3 * 60 * 1000
+
+    if (up) {
+      const {cpu, memory, disk} = this.state
+      const cpuValue = cpu ? (cpu.length ? cpu[0].Usage : cpu.Usage) : 0
+      const memValue = memory ?  Math.ceil(memory.UsedSize * 100 / memory.TotalSize) : 0
+      const diskValue = disk ? Math.ceil(disk.FreeSpace * 100 / disk.TotalSpace) : 0
+
+      const items = [{
+        title1: `${cpuValue}%`,
+        title2: cpu ? `${cpu.length ? cpu[0].Model : cpu.Model}` : '',
+        title3: 'CPU Utilization',
+        value: cpuValue
+      }, {
+        title1: `${memValue}%`,
+        title2: memory ? `${memory.UsedSize}M / ${memory.TotalSize}M` : '',
+        title3: 'Memory Utilization',
+        value: memValue
+      }, {
+        title1: `${diskValue}%`,
+        title2: disk ? `${disk.FreeSpace}G / ${disk.TotalSpace}G` : '',
+        title3: 'Disk Utilization',
+        value: diskValue
+      }]
+
+      return (
+        <div className="flex-1 flex-horizontal" style={{marginTop: 8}}>
+          {items.map(this.renderItem.bind(this))}
+        </div>
+      )
+    } else {
+      return (
+        <div style={{marginTop: 26}} className="text-center">
+          <img src="/resources/images/dashboard/nodata.jpg" alt=""/>
+        </div>
+      )
+    }
+
   }
 
   renderBackView () {

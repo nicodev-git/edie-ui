@@ -12,7 +12,7 @@ export default class TabPageHeader extends React.Component {
     return (
       <div className="tab-header">
         <div>
-          <span className="tab-title">{this.props.title}</span>
+          <span className="tab-title valign-middle">{this.props.title}</span>
           {this.props.titleOptions}
           <div className="pull-right">
             {this.props.headerOptions}

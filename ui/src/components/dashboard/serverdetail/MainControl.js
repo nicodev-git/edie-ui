@@ -139,11 +139,26 @@ export default class MainControl extends React.Component {
       </ResponsiveReactGridLayout>
     )
   }
+  renderTitleOptions () {
+    const device = this.getDevice()
+    if (!device) return null
+    const up = device.agent && (new Date().getTime() - device.agent.lastSeen) < 3 * 60 * 1000
+    if (up) return null
+    return (
+      <span className="valign-middle margin-md-left">
+        <img src="/resources/images/dashboard/bell.png" alt="" width={24} className="valign-middle" style={{marginTop: -3}}/>
+        No Agent/Collector not defined
+      </span>
+    )
+  }
   render () {
     const device = this.getDevice()
     return (
       <TabPage>
-        <TabPageHeader title={device.name} useToolBar>
+        <TabPageHeader
+          title={device.name}
+          titleOptions={this.renderTitleOptions()}
+          useToolBar>
           <ToolbarGroup firstChild/>
           <ToolbarGroup>
             <IconMenu
