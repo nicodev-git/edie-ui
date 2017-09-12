@@ -1,6 +1,6 @@
 import React from 'react'
 import {findIndex} from 'lodash'
-import {TextField, Checkbox, RaisedButton} from 'material-ui'
+import {TextField, RaisedButton} from 'material-ui'
 
 import FlipView from './FlipView'
 import GEditView from './GEditView'
@@ -93,16 +93,20 @@ export default class GCommand extends React.Component {
     const {commandResult, command} = this.state
     return (
       <div className="flex-vertical flex-1">
-        <div className="padding-sm-bottom">
-          <TextField
-            name="command" style={{width: '100%', marginTop: -20}} value={command}
-            onChange={(e, command) => this.setState({command})}/>
-          <div>
-            <RaisedButton label="Run" onTouchTap={this.onClickSend.bind(this)}/>&nbsp;
-          </div>
-        </div>
         <div className="flex-1">
-          <textarea value={commandResult} readOnly style={{border: 'none', width: '100%', height: '100%'}}/>
+          <textarea
+            value={commandResult} readOnly
+            style={{border: 'none', width: '100%', height: '100%', background: 'black', color: '#00FF00'}}/>
+        </div>
+        <div className="flex-horizontal">
+          <div className="flex-1">
+            <TextField
+              name="command" style={{width: '100%'}} value={command}
+              onChange={(e, command) => this.setState({command})}/>
+          </div>
+          <div className="padding-md-left margin-xs-top">
+            <RaisedButton label="Run" onTouchTap={this.onClickSend.bind(this)}/>
+          </div>
         </div>
       </div>
     )
