@@ -143,7 +143,7 @@ import {
 
 } from 'actions/types'
 
-import {concat, difference} from 'lodash'
+import {concat, difference, findIndex} from 'lodash'
 
 const initialState = {
   envVarAvailable: false,
@@ -573,8 +573,11 @@ export default function (state = initialState, action) {
       return { ...state, monitorTplCredTypes: action.data }
     case SHOW_AGENT_PRELOADER:
       return { ...state, agentPreloader: !!action.visible }
-    case ADD_AGENT_INSTALL:
-      return { ...state, installAgents: [...state.installAgents, {id: action.data.id, status: 'installing'}] }
+    case ADD_AGENT_INSTALL: {
+      const index = findIndex(state.installAgents, {id: action.data.id})
+      if (index < 0) return { ...state, installAgents: [...state.installAgents, {id: action.data.id, status: 'installing'}] }
+      return { ...state, installAgents: state.installAgents.map(p => p.id === action.data.id ? {...p, status: 'installing'} : p) }
+    }
     case UPDATE_AGENT_INSTALL:
       return { ...state, installAgents: state.installAgents.map(p => p.id === action.data.id ? {...p, status: action.status} : p)}
     case CLEAR_AGENT_INSTALL:

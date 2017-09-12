@@ -34,7 +34,8 @@ export default connect(
 
     monitorGroups: state.settings.monitorGroups,
 
-    installAgentMessage: state.settings.installAgentMessage
+    installAgentMessage: state.devices.installAgentMessage,
+    installAgents: state.settings.installAgents
   }), {
     fetchMonitorTemplates,
     openDeviceMonitorWizard,
