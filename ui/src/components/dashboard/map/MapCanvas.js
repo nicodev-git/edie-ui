@@ -256,8 +256,9 @@ class MapCanvas extends React.Component {
       return
     }
 
+    const zooming = cmap.zooming
     cmap.needReset = !!force
-    cmap && cmap.zooming && cmap.setZooming(false)
+    zooming && cmap.setZooming(false)
 
     if (cmap.needReset) {
       cmap.zoomReset2(deviceData)
@@ -282,6 +283,8 @@ class MapCanvas extends React.Component {
       }
 
       cmap.canvas.renderAll()
+      zooming && cmap.setZooming(zooming)
+      console.log(`Zooming: ${zooming}`)
 
       callback && callback()
     }, 500)
