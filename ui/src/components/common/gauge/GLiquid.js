@@ -12,6 +12,8 @@ import GEditView from './GEditView'
 
 import {showAlert} from 'components/common/Alert'
 
+import {gaugeBodyStyle1} from 'style/common/materialStyles'
+
 export default class GLiquid extends React.Component {
   constructor (props) {
     super (props)
@@ -78,7 +80,7 @@ export default class GLiquid extends React.Component {
         renderFrontView={this.renderFrontView}
         renderBackView={this.renderBackView}
 
-        hideContentPadding
+        bodyStyle={gaugeBodyStyle1}
 
         onClickDelete={this.onClickDelete.bind(this)}
       />

@@ -153,8 +153,8 @@ export default class MainControl extends React.Component {
                 </IconButton>
               }
             >
-              {menuItems.map(p =>
-                <MenuItem primaryText={p} onTouchTap={this.onClickMenuItem.bind(this, p)}/>
+              {menuItems.map((p, i) =>
+                <MenuItem key={i} primaryText={p} onTouchTap={this.onClickMenuItem.bind(this, p)}/>
               )}
             </IconMenu>
           </ToolbarGroup>

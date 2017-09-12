@@ -15,6 +15,8 @@ import MonitorSocket from 'util/socket/MonitorSocket'
 import {showAlert} from 'components/common/Alert'
 import { ROOT_URL } from 'actions/config'
 
+import {gaugeBodyStyle1} from 'style/common/materialStyles'
+
 const sampleData = []
 
 const chartOptions = {
@@ -239,7 +241,7 @@ export default class GDisk extends React.Component {
         renderFrontView={this.renderFrontView}
         renderBackView={this.renderBackView}
 
-        hideContentPadding={gauge.timing !== 'historic' && gauge.gaugeType !== 'accel'}
+        bodyStyle={gauge.timing !== 'historic' && gauge.gaugeType !== 'accel' ? gaugeBodyStyle1 : null}
 
         onClickDelete={this.onClickDelete.bind(this)}
       />

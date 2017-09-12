@@ -104,7 +104,7 @@ export default class GCommand extends React.Component {
               name="command" style={{width: '100%'}} value={command}
               onChange={(e, command) => this.setState({command})}/>
           </div>
-          <div className="padding-md-left margin-xs-top">
+          <div className="padding-md-left" style={{marginTop: 7}}>
             <RaisedButton label="Run" onTouchTap={this.onClickSend.bind(this)}/>
           </div>
         </div>
@@ -132,6 +132,7 @@ export default class GCommand extends React.Component {
         className={this.props.className}
         gauge={this.props.gauge}
         title={this.getTitle()}
+        bodyStyle={{padding: '2px 12px'}}
 
         loading={this.state.loading}
         renderFrontView={this.renderFrontView}
