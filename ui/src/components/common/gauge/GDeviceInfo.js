@@ -14,7 +14,8 @@ export default class GDeviceInfo extends React.Component {
       cpu: null,
       disk: null,
       os: null,
-      hostname: ''
+      hostname: '',
+      lastRequest: new Date().getTime()
     }
     this.renderBackView = this.renderBackView.bind(this)
     this.renderFrontView = this.renderFrontView.bind(this)
