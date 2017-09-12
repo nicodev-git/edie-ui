@@ -17,19 +17,21 @@ const iconStyle = {
 class DeviceMenuContainer extends Component {
   render () {
     return (
-      <IconButton
-        id="device-menu-button"
-        style={buttonStyle}
-        iconStyle={iconStyle}
-        onTouchTap={this.props.onDeviceMenu}>
+      <li>
+        <IconButton
+          id="device-menu-button"
+          style={buttonStyle}
+          iconStyle={iconStyle}
+          onTouchTap={this.props.onDeviceMenu}>
           <AddCircleIcon color="#545454"/>
+        </IconButton>
         { this.props.isDevicesDisplayed
           ? <DeviceMenu {...this.props}
                         onClickItem={this.props.onClickDeviceItem}
                         selectedItem={this.props.selectedItem}
                         onNewIncident={this.props.onNewIncident}/>
           : null }
-      </IconButton>
+      </li>
     )
   }
 }
