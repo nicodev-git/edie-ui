@@ -46,6 +46,8 @@ import {
   SHOW_MONITOR_TAG_MODAL,
   UPDATE_MONITOR_TAGS,
 
+  SHOW_DEVICE_EDIT_MODAL,
+
   OPEN_PARAMS_MODAL,
   CLOSE_PARAMS_MODAL,
   OPEN_PARAM_EDIT_MODAL,
@@ -451,6 +453,10 @@ export default function (state = INITIAL_STATE, action) {
       })
 
       return {...state, deviceAndGroups}
+    }
+
+    case SHOW_DEVICE_EDIT_MODAL: {
+      return { ...state, deviceEditModalOpen: action.visible, editDevice: action.device }
     }
     default:
       return state

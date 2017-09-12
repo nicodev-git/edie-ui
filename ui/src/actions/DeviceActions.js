@@ -17,6 +17,8 @@ import {
   SHOW_MONITOR_TAG_MODAL,
   UPDATE_MONITOR_TAGS,
 
+  SHOW_DEVICE_EDIT_MODAL,
+
   OPEN_PARAMS_MODAL,
   CLOSE_PARAMS_MODAL,
   OPEN_PARAM_EDIT_MODAL,
@@ -1139,5 +1141,11 @@ export function uninstallAgent (device) {
 export function clearAgentInstall () {
   return dispatch => {
     dispatch({type: CLEAR_AGENT_INSTALL})
+  }
+}
+
+export function showDeviceEditModal(visible, device) {
+  return dispatch => {
+    dispatch({type: SHOW_DEVICE_EDIT_MODAL, visible, device})
   }
 }
