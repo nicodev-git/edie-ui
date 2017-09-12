@@ -142,40 +142,53 @@ export default class MonitorTable extends Component {
     )
   }
 
-  render () {
+  renderMonitorGroup () {
     const {monitorGroups, onChangeMonitorGroupType} = this.props
+    if (!monitorGroups) return null
     return (
-      <div style={{marginTop: -22}}>
-        <CardPanel title="Devices">
-          <Field
-            name="monitorDevice" label="Device" component={FormSelect} options={[]} className="valign-top"/>
-          <IconButton onTouchTap={this.onClickAddDevice.bind(this)} className="valign-top">
-            <AddCircleIcon size={32}/>
-          </IconButton>
-        </CardPanel>
-
-        <CardPanel title="Monitor Group">
-          <div className="flex-horizontal">
-            <div style={{paddingTop: 12}}>
-              <RadioButtonGroup
-                name="monitorGroupType" defaultSelected="new" onChange={(e, value) => onChangeMonitorGroupType(value)}
-                style={{marginTop: 10}}>
-                <RadioButton value="new" label="New" className="pull-left"/>
-                <RadioButton value="existing" label="Existing" className="pull-left" style={{width: 120, marginTop: 14}}/>
-              </RadioButtonGroup>
+      <CardPanel title="Monitor Group">
+        <div className="flex-horizontal">
+          <div style={{paddingTop: 12}}>
+            <RadioButtonGroup
+              name="monitorGroupType" defaultSelected="new" onChange={(e, value) => onChangeMonitorGroupType(value)}
+              style={{marginTop: 10}}>
+              <RadioButton value="new" label="New" className="pull-left"/>
+              <RadioButton value="existing" label="Existing" className="pull-left" style={{width: 120, marginTop: 14}}/>
+            </RadioButtonGroup>
+          </div>
+          <div className="flex-1" style={{paddingLeft: 12}}>
+            <div>
+              <Field name="monitorGroupName" component={FormInput} className="valign-top mr-dialog" floatingLabel="Name" style={{marginTop: -20}}/>
             </div>
-            <div className="flex-1" style={{paddingLeft: 12}}>
-              <div>
-                <Field name="monitorGroupName" component={FormInput} className="valign-top mr-dialog" floatingLabel="Name" style={{marginTop: -20}}/>
-              </div>
-              <div style={{marginTop: -4}}>
-                <Field
-                  name="monitorGroup" label="Monitor Group" component={FormSelect}
-                  options={monitorGroups.map(p => ({label: p.name, value: p.id}))}/>
-              </div>
+            <div style={{marginTop: -4}}>
+              <Field
+                name="monitorGroup" label="Monitor Group" component={FormSelect}
+                options={monitorGroups.map(p => ({label: p.name, value: p.id}))}/>
             </div>
           </div>
-        </CardPanel>
+        </div>
+      </CardPanel>
+    )
+  }
+
+  renderDevices () {
+    if (this.props.hideDevices) return null
+    return (
+      <CardPanel title="Devices">
+        <Field
+          name="monitorDevice" label="Device" component={FormSelect} options={[]} className="valign-top"/>
+        <IconButton onTouchTap={this.onClickAddDevice.bind(this)} className="valign-top">
+          <AddCircleIcon size={32}/>
+        </IconButton>
+      </CardPanel>
+    )
+  }
+
+  render () {
+    return (
+      <div style={{marginTop: -22}}>
+        {this.renderDevices()}
+        {this.renderMonitorGroup()}
 
         <CardPanel title="Monitors" tools={this.renderTools()}>
           <div style={{height: 326, overflow: 'auto', padding: '3px'}}>

@@ -53,19 +53,12 @@ class DeviceEditModal extends React.Component {
     this.props.fetchMonitorTemplates()
     this.props.fetchCredentials()
     this.props.fetchCredTypes()
-    this.props.fetchMonitorGroups()
     this.props.fetchCollectors()
   }
 
   onChangeCredential (value) {
     this.setState({
       credentialSelect: value
-    })
-  }
-
-  onChangeMonitorGroupType (value) {
-    this.setState({
-      monitorGroupType: value
     })
   }
 
@@ -217,19 +210,18 @@ class DeviceEditModal extends React.Component {
 
   buildMonitors (config, values) {
     return (
-      <MonitorTable key="monitors"
-                    name="monitorList"
-                    monitors={this.state.monitors}
-                    templates={this.props.monitorTemplates}
-                    onChanged={monitors => { this.setState({ monitors }) }}
-                    values={values}
-                    config={config}
-                    monitorGroups={this.props.monitorGroups}
-                    openDeviceMonitorWizard={this.props.openDeviceMonitorWizard}
-                    monitorGroupType={this.state.monitorGroupType}
-                    deviceTemplates={this.props.deviceTemplates}
-                    collectors={this.props.collectors}
-                    onChangeMonitorGroupType={this.onChangeMonitorGroupType.bind(this)}
+      <MonitorTable
+        key="monitors"
+        name="monitorList"
+        monitors={this.state.monitors}
+        templates={this.props.monitorTemplates}
+        onChanged={monitors => { this.setState({ monitors }) }}
+        values={values}
+        config={config}
+        openDeviceMonitorWizard={this.props.openDeviceMonitorWizard}
+        deviceTemplates={this.props.deviceTemplates}
+        collectors={this.props.collectors}
+        hideDevices
       />
     )
   }
