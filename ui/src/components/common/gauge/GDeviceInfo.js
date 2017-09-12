@@ -121,6 +121,7 @@ export default class GDeviceInfo extends React.Component {
     } else {
       return (
         <div style={{marginTop: 26}} className="text-center">
+          <img src="/resources/images/dashboard/bell.png" alt="" width={32}/><br/>
           <img src="/resources/images/dashboard/nodata.jpg" alt=""/>
         </div>
       )
