@@ -1,5 +1,6 @@
 import React from 'react'
 import {findIndex} from 'lodash'
+import {SelectField, MenuItem} from 'material-ui'
 
 import FlipView from './FlipView'
 import GEditView from './GEditView'
@@ -15,6 +16,7 @@ export default class GEventLog extends React.Component {
     super (props)
     this.state = {
       eventLogs: [],
+      logNames: ['Application', 'System', 'Security'],
       selectedLogName: 'Application'
     }
     this.renderBackView = this.renderBackView.bind(this)
@@ -92,13 +94,6 @@ export default class GEventLog extends React.Component {
     this.props.removeDeviceGauge(this.props.gauge, this.props.device)
   }
 
-  getApps () {
-    // const {gauge} = this.props
-    const {apps} = this.state
-    // const dateFrom = moment().add(-gauge.duration, `${gauge.durationUnit}s`).startOf('day').valueOf()
-    // return apps.filter(p => moment(p.InstallDate, 'YYYY-MM-DD').valueOf() >= dateFrom)
-    return apps
-  }
   getTitle () {
     const {gauge} = this.props
     const devices = this.props.allDevices || this.props.devices
@@ -109,15 +104,27 @@ export default class GEventLog extends React.Component {
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   renderFrontView () {
+    const {logNames} = this.state
     return (
-      <InfiniteTable
-        cells={this.columns}
-        ref="table"
-        rowMetadata={{'key': 'id'}}
-        selectable
-        data={this.state.eventLogs}
-        useExternal={false}
-      />
+      <div className="flex-vertical flex-1">
+        <div>
+          <SelectField floatingLabelText="Log">
+            {logNames.map(p =>
+              <MenuItem value={p} primaryText={p}/>
+            )}
+          </SelectField>
+        </div>
+        <div className="flex-1">
+          <InfiniteTable
+            cells={this.columns}
+            ref="table"
+            rowMetadata={{'key': 'id'}}
+            selectable
+            data={this.state.eventLogs}
+            useExternal={false}
+          />
+        </div>
+      </div>
     )
   }
   renderBackView (options) {
