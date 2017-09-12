@@ -158,6 +158,8 @@ export default class MainControl extends React.Component {
     return (
       <DeviceEditModal
         deviceType={getDeviceType(editDevice.templateName)}
+        title={editDevice.name}
+        monitors={editDevice.monitors}
         onClose={() => this.props.showDeviceEditModal(false)}
         onFinish={this.onFinishEdit.bind(this)}
       />

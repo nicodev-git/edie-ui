@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { assign } from 'lodash'
+import { findIndex, assign } from 'lodash'
 import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
 import {IconButton, RadioButtonGroup, RadioButton} from 'material-ui'
 import {Field} from 'redux-form'
@@ -108,6 +108,19 @@ export default class MonitorTable extends Component {
     this.onClickEdit()
   }
 
+  getMonitorImage (item) {
+    let img = item.image
+    if (!img && item.monitortype) {
+      const {templates} = this.props
+      const index = findIndex(templates, {monitortype: item.monitortype})
+      if (index >= 0) img = templates[index].image
+    }
+
+    return `${extImageBaseUrl}${img}`
+  }
+
+  /////////////////////////////////////////////////////////////////////////////////////////////////
+
   renderMonitorPicker () {
     if (!this.state.monitorPickerVisible) return null
     return (
@@ -162,9 +175,8 @@ export default class MonitorTable extends Component {
               </div>
             </div>
           </div>
-
-
         </CardPanel>
+
         <CardPanel title="Monitors" tools={this.renderTools()}>
           <div style={{height: 326, overflow: 'auto', padding: '3px'}}>
             <ul className="web-applet-cards">
@@ -176,36 +188,13 @@ export default class MonitorTable extends Component {
                     color={colors[index % colors.length]}
                     name={item.name}
                     desc={item.monitortype}
-                    img={`${extImageBaseUrl}${item.image}`}
+                    img={this.getMonitorImage(item)}
                     onClick={this.onClickEditMonitor.bind(this, item)}
                     onClickDelete={this.onClickRemoveMonitor.bind(this, item)}
                   />
                 )
               }
             </ul>
-
-
-            <table className="table dataTable hover hidden">
-              <thead>
-              <tr>
-                <th width="5%">Type</th>
-                <th width="5%">Name</th>
-              </tr>
-              </thead>
-              <tbody>
-              {
-                this.props.monitors.map((item, index) =>
-                  <tr key={index}
-                    className={index === this.state.selected ? 'selected' : ''}
-                    onClick={() => this.setState({selected: index})}
-                    onDoubleClick={this.onRowDblClick.bind(this)}>
-                    <td>{item.monitortype}</td>
-                    <td>{item.name}</td>
-                  </tr>
-                )
-              }
-              </tbody>
-            </table>
 
             {this.renderMonitorWizard()}
             {this.renderMonitorPicker()}
