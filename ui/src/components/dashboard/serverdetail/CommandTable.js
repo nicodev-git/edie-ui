@@ -6,6 +6,7 @@ import TabPage from 'components/common/TabPage'
 import TabPageBody from 'components/common/TabPageBody'
 import TabPageHeader from 'components/common/TabPageHeader'
 import ServerDetailTab from './ServerDetailTab'
+import StatusImg from './StatusImg'
 
 import { layoutWidthZoom, layoutHeightZoom } from 'shared/Global'
 import GridLayout from './GridLayout'
@@ -14,7 +15,6 @@ class CommandTable extends React.Component {
   getDeviceId () {
     return this.props.match.params.id
   }
-
   getGauges () {
     return [{
       id: 'basic0',
@@ -41,7 +41,7 @@ class CommandTable extends React.Component {
     const {device} = this.props
     return (
       <TabPage>
-        <TabPageHeader title="Command" useToolBar>
+        <TabPageHeader title="Command" useToolBar titleOptions={<StatusImg device={device}/>}>
         </TabPageHeader>
         <TabPageBody tabs={ServerDetailTab(device.id, device.templateName)} history={this.props.history} location={this.props.location} transparent>
           {this.renderBody()}

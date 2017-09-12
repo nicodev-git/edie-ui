@@ -8,6 +8,7 @@ import TabPage from 'components/common/TabPage'
 import TabPageBody from 'components/common/TabPageBody'
 import TabPageHeader from 'components/common/TabPageHeader'
 import ServerDetailTab from './ServerDetailTab'
+import StatusImg from './StatusImg'
 
 import GaugeMap from 'components/common/gauge/GaugeMap'
 import { getWidgetSize, layoutCols, layoutRowHeight, layoutWidthZoom, layoutHeightZoom } from 'shared/Global'
@@ -139,31 +140,13 @@ export default class MainControl extends React.Component {
       </ResponsiveReactGridLayout>
     )
   }
-  renderTitleOptions () {
-    const device = this.getDevice()
-    if (!device) return null
-    const up = device.agent && (new Date().getTime() - device.agent.lastSeen) < 3 * 60 * 1000
-    if (up) return null
-    return (
-      <span className="valign-middle margin-md-left">
-        <img
-          src="/resources/images/dashboard/bell.png"
-          alt=""
-          width={24}
-          className="valign-middle margin-sm-right"
-          style={{marginTop: -3}}/>
-        No Agent/Collector not defined
-        <span className="link margin-md-left text-primary">Fix</span>
-      </span>
-    )
-  }
   render () {
     const device = this.getDevice()
     return (
       <TabPage>
         <TabPageHeader
           title={device.name}
-          titleOptions={this.renderTitleOptions()}
+          titleOptions={<StatusImg device={this.getDevice()}/>}
           useToolBar>
           <ToolbarGroup firstChild/>
           <ToolbarGroup>
