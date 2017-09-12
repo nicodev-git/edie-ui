@@ -23,6 +23,7 @@ import GServiceList from 'components/common/gauge/GServiceList'
 import GUsers from 'components/common/gauge/GUsers'
 import GFirewall from 'components/common/gauge/GFirewall'
 import GNetwork from 'components/common/gauge/GNetwork'
+import GCommand from 'components/common/gauge/GCommand'
 
 const gaugeMap = {
   'Line Chart': GLineChart,
@@ -50,7 +51,8 @@ const gaugeMap = {
   'Services': GServiceList,
   'Users': GUsers,
   'Firewall': GFirewall,
-  'Network': GNetwork
+  'Network': GNetwork,
+  'Command': GCommand
 }
 
 export default gaugeMap

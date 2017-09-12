@@ -14,7 +14,9 @@ export default class GCommand extends React.Component {
   constructor (props) {
     super (props)
     this.state = {
-      commandResult: ''
+      commandResult: '',
+      command: '',
+      output: true
     }
     this.renderBackView = this.renderBackView.bind(this)
     this.renderFrontView = this.renderFrontView.bind(this)
@@ -52,9 +54,11 @@ export default class GCommand extends React.Component {
       }
     })
   }
-  onClickSend (values) {
-    this.props.clearMonitors()
-    this.sendCommandMessage('RunCommand', values)
+  onClickSend () {
+    const {command, output} = this.state
+    this.sendCommandMessage('RunCommand', {
+      command, output
+    })
   }
 
   onSubmit (options, values) {
@@ -86,13 +90,17 @@ export default class GCommand extends React.Component {
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   renderFrontView () {
-    const {commandResult} = this.state
+    const {commandResult, command, output} = this.state
     return (
-      <div>
-        <div className="padding-md">
-          <TextField name="command" floatingLabelText="Command" style={{width: '100%'}}/>
+      <div className="flex-vertical flex-1">
+        <div className="padding-sm-bottom">
+          <TextField
+            name="command" style={{width: '100%', marginTop: -20}} value={command}
+            onChange={(e, command) => this.setState({command})}/>
           <div className="inline-block valign-bottom">
-            <Checkbox name="output" labelPosition="right" label="Output"/>
+            <Checkbox
+              name="output" labelPosition="right" label="Output" checked={output}
+              onCheck={(e, output) => this.setState({output})}/>
           </div>
           <div>
             <RaisedButton label="Run" onTouchTap={this.onClickSend.bind(this)}/>&nbsp;
