@@ -1,6 +1,8 @@
 import React from 'react'
 import {findIndex} from 'lodash'
+import {ToolbarGroup, IconMenu, IconButton, MenuItem} from 'material-ui'
 import {Responsive, WidthProvider} from 'react-grid-layout'
+import NavigationExpandMoreIcon from 'material-ui/svg-icons/navigation/expand-more'
 
 import TabPage from 'components/common/TabPage'
 import TabPageBody from 'components/common/TabPageBody'
@@ -11,6 +13,8 @@ import GaugeMap from 'components/common/gauge/GaugeMap'
 import { getWidgetSize, layoutCols, layoutRowHeight, layoutWidthZoom, layoutHeightZoom } from 'shared/Global'
 
 const ResponsiveReactGridLayout = WidthProvider(Responsive)
+
+const menuItems = ['Event Log', 'Installed App', 'Process', 'Services', 'Users', 'Firewall', 'Network', 'Command']
 
 export default class MainControl extends React.Component {
   getDeviceId () {
@@ -55,6 +59,10 @@ export default class MainControl extends React.Component {
       })
     }
     return gauges
+  }
+
+  onClickMenuItem () {
+
   }
   /////////////////////////////////////////////////////////////////////
 
@@ -131,12 +139,25 @@ export default class MainControl extends React.Component {
       </ResponsiveReactGridLayout>
     )
   }
-
   render () {
     const device = this.getDevice()
     return (
       <TabPage>
         <TabPageHeader title={device.name} useToolBar>
+          <ToolbarGroup firstChild/>
+          <ToolbarGroup>
+            <IconMenu
+              iconButtonElement={
+                <IconButton touch={true}>
+                  <NavigationExpandMoreIcon />
+                </IconButton>
+              }
+            >
+              {menuItems.map(p =>
+                <MenuItem primaryText={p} onTouchTap={this.onClickMenuItem.bind(this, p)}/>
+              )}
+            </IconMenu>
+          </ToolbarGroup>
         </TabPageHeader>
         <TabPageBody tabs={ServerDetailTab(device.id, device.templateName)} history={this.props.history} location={this.props.location} transparent>
           {this.renderGrid()}
