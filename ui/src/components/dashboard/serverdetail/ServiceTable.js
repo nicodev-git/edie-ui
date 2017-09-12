@@ -7,6 +7,7 @@ import ServerDetailTab from './ServerDetailTab'
 
 import { layoutWidthZoom, layoutHeightZoom } from 'shared/Global'
 import GridLayout from './GridLayout'
+import StatusImg from './StatusImg'
 
 export default class ServiceTable extends React.Component {
   getDeviceId () {
@@ -39,7 +40,7 @@ export default class ServiceTable extends React.Component {
     const {device} = this.props
     return (
       <TabPage>
-        <TabPageHeader title="Service" useToolBar>
+        <TabPageHeader title="Service" useToolBar titleOptions={<StatusImg device={device}/>}>
         </TabPageHeader>
         <TabPageBody tabs={ServerDetailTab(device.id, device.templateName)} history={this.props.history} location={this.props.location} transparent>
           {this.renderBody()}

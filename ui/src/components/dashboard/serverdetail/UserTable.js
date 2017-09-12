@@ -4,6 +4,7 @@ import TabPage from 'components/common/TabPage'
 import TabPageBody from 'components/common/TabPageBody'
 import TabPageHeader from 'components/common/TabPageHeader'
 import ServerDetailTab from './ServerDetailTab'
+import StatusImg from './StatusImg'
 
 import { layoutWidthZoom, layoutHeightZoom } from 'shared/Global'
 import GridLayout from './GridLayout'
@@ -39,7 +40,7 @@ export default class UserTable extends React.Component {
     const {device} = this.props
     return (
       <TabPage>
-        <TabPageHeader title="Users" useToolBar>
+        <TabPageHeader title="Users" useToolBar titleOptions={<StatusImg device={device}/>}>
           {/*{this.renderOptions()}*/}
         </TabPageHeader>
         <TabPageBody tabs={ServerDetailTab(device.id, device.templateName)} history={this.props.history} location={this.props.location} transparent>
