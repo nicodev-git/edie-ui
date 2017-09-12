@@ -1,9 +1,14 @@
 import React from 'react'
 
+import DeviceEditModalView from './DeviceEditModalView'
+
 export default class DeviceEditModal extends React.Component {
   render () {
     return (
-      <div></div>
+      <DeviceEditModalView
+        {...this.props}
+        header="Device"
+      />
     )
   }
 }

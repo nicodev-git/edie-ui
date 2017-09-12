@@ -10,6 +10,7 @@ import TabPageBody from 'components/common/TabPageBody'
 import TabPageHeader from 'components/common/TabPageHeader'
 import ServerDetailTab from './ServerDetailTab'
 import StatusImg from './StatusImg'
+import DeviceEditModal from 'containers/shared/wizard/DeviceEditModalContainer'
 
 import GaugeMap from 'components/common/gauge/GaugeMap'
 import { getWidgetSize, layoutCols, layoutRowHeight, layoutWidthZoom, layoutHeightZoom } from 'shared/Global'
@@ -68,7 +69,7 @@ export default class MainControl extends React.Component {
   }
 
   onClickEdit () {
-
+    this.props.showDeviceEditModal(true, this.getDevice())
   }
   /////////////////////////////////////////////////////////////////////
 
@@ -145,6 +146,15 @@ export default class MainControl extends React.Component {
       </ResponsiveReactGridLayout>
     )
   }
+
+  renderDeviceEditModal () {
+    if (!this.props.deviceEditModalOpen) return null
+    return (
+      <DeviceEditModal
+        onHide={() => this.props.showDeviceEditModal(false)}
+      />
+    )
+  }
   render () {
     const device = this.getDevice()
     return (
@@ -155,7 +165,7 @@ export default class MainControl extends React.Component {
           useToolBar>
           <ToolbarGroup firstChild/>
           <ToolbarGroup>
-            <IconButton ontouchtap={this.onClickEdit.bind(this)}>
+            <IconButton onTouchTap={this.onClickEdit.bind(this)}>
               <EditIcon/>
             </IconButton>
             <IconMenu
@@ -174,6 +184,7 @@ export default class MainControl extends React.Component {
         </TabPageHeader>
         <TabPageBody tabs={ServerDetailTab(device.id, device.templateName)} history={this.props.history} location={this.props.location} transparent>
           {this.renderGrid()}
+          {this.renderDeviceEditModal()}
         </TabPageBody>
       </TabPage>
     )
