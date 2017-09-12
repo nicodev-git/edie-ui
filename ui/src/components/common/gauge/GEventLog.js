@@ -74,6 +74,21 @@ export default class GEventLog extends React.Component {
     }
   }
 
+  onChangeLog (e, index, value) {
+    this.setState({
+      selectedLogName: value
+    })
+
+    this.monitorSocket.send({
+      action: 'enable-realtime',
+      monitors: 'eventlog',
+      deviceId: this.props.device.id,
+      data: {
+        name: value
+      }
+    })
+  }
+
   onSubmit (options, values) {
     console.log(values)
 
@@ -104,11 +119,11 @@ export default class GEventLog extends React.Component {
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   renderFrontView () {
-    const {logNames} = this.state
+    const {logNames, selectedLogName} = this.state
     return (
       <div className="flex-vertical flex-1">
-        <div>
-          <SelectField floatingLabelText="Log">
+        <div style={{marginTop: -16}}>
+          <SelectField floatingLabelText="Log" value={selectedLogName} onChange={this.onChangeLog.bind(this)}>
             {logNames.map(p =>
               <MenuItem value={p} primaryText={p}/>
             )}
