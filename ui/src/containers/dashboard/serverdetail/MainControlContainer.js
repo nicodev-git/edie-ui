@@ -17,7 +17,8 @@ class MainControlContainer extends React.Component {
 export default connect(
   state => ({
     devices: state.devices.devices,
-    deviceEditModalOpen: state.devices.deviceEditModalOpen
+    deviceEditModalOpen: state.devices.deviceEditModalOpen,
+    editDevice: state.devices.editDevice
   }), {
     showDeviceEditModal
   }

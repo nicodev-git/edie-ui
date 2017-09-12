@@ -8,7 +8,15 @@ export default class DeviceEditModalView extends React.Component {
       onPrev, onNext, paramEditModal, credPicker} = this.props
     return (
       <Modal className="modal-device-wizard" title={header} onRequestClose={onHide} contentStyle={{width: 1035, maxWidth: 'initial'}}>
-
+        <Form onSubmit={onSubmit}>
+          {progressBar}
+          {content}
+          <WizardButtons
+            current={current} steps={steps} onClose={onHide}
+            onPrev={onPrev} onNext={onNext}/>
+        </Form>
+        {paramEditModal}
+        {credPicker}
       </Modal>
     )
   }

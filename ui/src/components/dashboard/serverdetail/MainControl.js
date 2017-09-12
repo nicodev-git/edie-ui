@@ -11,6 +11,7 @@ import TabPageHeader from 'components/common/TabPageHeader'
 import ServerDetailTab from './ServerDetailTab'
 import StatusImg from './StatusImg'
 import DeviceEditModal from 'containers/shared/wizard/DeviceEditModalContainer'
+import { getDeviceType } from 'components/common/wizard/WizardConfig'
 
 import GaugeMap from 'components/common/gauge/GaugeMap'
 import { getWidgetSize, layoutCols, layoutRowHeight, layoutWidthZoom, layoutHeightZoom } from 'shared/Global'
@@ -151,10 +152,13 @@ export default class MainControl extends React.Component {
   }
 
   renderDeviceEditModal () {
-    if (!this.props.deviceEditModalOpen) return null
+    const {editDevice, deviceEditModalOpen} = this.props
+    if (!deviceEditModalOpen) return null
+
     return (
       <DeviceEditModal
-        onHide={() => this.props.showDeviceEditModal(false)}
+        deviceType={getDeviceType(editDevice.templateName)}
+        onClose={() => this.props.showDeviceEditModal(false)}
         onFinish={this.onFinishEdit.bind(this)}
       />
     )
