@@ -71,6 +71,9 @@ export default class MainControl extends React.Component {
   onClickEdit () {
     this.props.showDeviceEditModal(true, this.getDevice())
   }
+  onFinishEdit () {
+
+  }
   /////////////////////////////////////////////////////////////////////
 
   renderGauge (p) {
@@ -152,6 +155,7 @@ export default class MainControl extends React.Component {
     return (
       <DeviceEditModal
         onHide={() => this.props.showDeviceEditModal(false)}
+        onFinish={this.onFinishEdit.bind(this)}
       />
     )
   }
