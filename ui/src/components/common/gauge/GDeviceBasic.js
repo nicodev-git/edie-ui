@@ -3,7 +3,7 @@ import {findIndex} from 'lodash'
 
 import FlipView from './FlipView'
 import Speedometer from './display/Speedometer'
-
+import NoDataPanel from './NoDataPanel'
 import MonitorSocket from 'util/socket/MonitorSocket'
 
 export default class GDeviceBasic extends React.Component {
@@ -109,9 +109,7 @@ export default class GDeviceBasic extends React.Component {
       )
     } else {
       return (
-        <div style={{marginTop: 26}} className="text-center">
-          <img src="/resources/images/dashboard/nodata.jpg" alt=""/>
-        </div>
+        <NoDataPanel />
       )
     }
 

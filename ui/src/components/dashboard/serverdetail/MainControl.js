@@ -146,8 +146,14 @@ export default class MainControl extends React.Component {
     if (up) return null
     return (
       <span className="valign-middle margin-md-left">
-        <img src="/resources/images/dashboard/bell.png" alt="" width={24} className="valign-middle" style={{marginTop: -3}}/>
+        <img
+          src="/resources/images/dashboard/bell.png"
+          alt=""
+          width={24}
+          className="valign-middle margin-sm-right"
+          style={{marginTop: -3}}/>
         No Agent/Collector not defined
+        <span className="link margin-md-left text-primary">Fix</span>
       </span>
     )
   }
