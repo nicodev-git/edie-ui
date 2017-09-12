@@ -533,7 +533,7 @@ var mapObject = {
     if (me.zooming) {
       me.zoomRect.visible = false;
       if (me.zoomRect.width < 50 || me.zoomRect.height < 50) {
-        showAlert("Too small area.");
+        alert("Too small area.");
       } else {
         var px = me.canvas.width / me.zoomRect.width;
         var py = me.canvas.height / me.zoomRect.height;
