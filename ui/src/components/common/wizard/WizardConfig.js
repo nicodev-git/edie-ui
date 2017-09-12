@@ -73,50 +73,6 @@ export const commonconfig = {
       value: 'true'
     }],
     name: 'disabled'
-  },
-
-  credentialsMenu: function (labelWidth) {
-    return {
-      type: 'combo',
-      name: 'credentialid',
-
-      label: {
-        text: 'Credential',
-        type: 'attach',
-        width: labelWidth || 2
-      },
-
-      remote: true,
-      server: {
-        root: 'data',
-        display: 'name',
-        value: 'id'
-      },
-
-      sidebar: {
-        position: 'right',
-        buttons: [{
-          type: 'add',
-          click: 'credentialModal'
-        }]
-      }
-    }
-  },
-
-  monitorList: function (type) {
-    return {
-      type: 'monitors',
-      title: 'Monitors',
-      defaults: {
-        params: {
-          type: type
-        },
-        root: 'object'
-      },
-      style: {
-        padding: 0
-      }
-    }
   }
 }
 
@@ -228,15 +184,18 @@ export const wizardConfig = {
     },
     steps: [{
       title: 'step 1',
-      items: [{
-        type: 'text',
-        name: 'name',
-        required: true,
-        label: {
-          text: 'Text',
-          type: 'attach',
-          width: 2
-        }
+      panels: [{
+        title: 'Basic',
+        items: [{
+          type: 'text',
+          name: 'name',
+          required: true,
+          label: {
+            text: 'Text',
+            type: 'attach',
+            width: 2
+          }
+        }]
       }]
     }]
   }
