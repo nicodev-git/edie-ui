@@ -107,7 +107,7 @@ class DeviceEditModal extends React.Component {
     }
     console.log(props)
     this.closeModal(true)
-    onFinish && onFinish(null, props, currentDevice.server.url)
+    onFinish && onFinish(props)
   }
 
   buildProgressBar () {

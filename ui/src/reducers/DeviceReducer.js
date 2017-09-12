@@ -452,7 +452,12 @@ export default function (state = INITIAL_STATE, action) {
         return u
       })
 
-      return {...state, deviceAndGroups}
+      const devices = state.devices.map(u => {
+        if (u.id === action.data.id) return {...u, ...action.data}
+        return u
+      })
+
+      return {...state, deviceAndGroups, devices}
     }
 
     case SHOW_DEVICE_EDIT_MODAL: {
