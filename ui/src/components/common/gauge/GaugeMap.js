@@ -22,6 +22,7 @@ import GProcessList from 'components/common/gauge/GProcessList'
 import GServiceList from 'components/common/gauge/GServiceList'
 import GUsers from 'components/common/gauge/GUsers'
 import GFirewall from 'components/common/gauge/GFirewall'
+import GNetwork from 'components/common/gauge/GNetwork'
 
 const gaugeMap = {
   'Line Chart': GLineChart,
@@ -48,7 +49,8 @@ const gaugeMap = {
   'Process': GProcessList,
   'Services': GServiceList,
   'Users': GUsers,
-  'Firewall': GFirewall
+  'Firewall': GFirewall,
+  'Network': GNetwork
 }
 
 export default gaugeMap
