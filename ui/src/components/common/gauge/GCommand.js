@@ -102,7 +102,9 @@ export default class GCommand extends React.Component {
           <div className="flex-1">
             <TextField
               name="command" style={{width: '100%'}} value={command}
-              onChange={(e, command) => this.setState({command})}/>
+              onChange={(e, command) => this.setState({command})}
+              autoFocus
+            />
           </div>
           <div className="padding-md-left" style={{marginTop: 7}}>
             <RaisedButton label="Run" onTouchTap={this.onClickSend.bind(this)}/>
