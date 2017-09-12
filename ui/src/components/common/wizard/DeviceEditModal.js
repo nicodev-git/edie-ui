@@ -15,6 +15,7 @@ import {util} from './WizardUtil'
 import DeviceEditModalView from './DeviceEditModalView'
 import TagsView from './input/TagsView'
 import CredPickerInput from './input/CredPicker'
+import AgentPicker from './input/AgentPicker'
 
 import {CardPanel} from 'components/modal/parts'
 
@@ -45,7 +46,8 @@ class DeviceEditModal extends React.Component {
       'paramlist': this.buildParamList.bind(this),
       'combo': this.buildCombo.bind(this),
       'row': this.buildRow.bind(this),
-      'credpicker': this.buildCredPicker.bind(this)
+      'credpicker': this.buildCredPicker.bind(this),
+      'agentpicker': this.buildAgentPicker.bind(this)
     }
   }
 
@@ -252,6 +254,18 @@ class DeviceEditModal extends React.Component {
         onChangeCredential={this.onChangeCredential.bind(this)}
         values={values}
         config={config}/>
+    )
+  }
+
+  buildAgentPicker (config, values) {
+    const {collectors} = this.props
+    return (
+      <AgentPicker
+        key="agentPicker"
+        values={values}
+        config={config}
+        collectors={collectors}
+      />
     )
   }
 
