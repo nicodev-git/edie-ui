@@ -9,7 +9,9 @@ import {
   fetchCredentials,
 
   fetchMonitorGroups,
-  fetchCollectors
+  fetchCollectors,
+
+  installAgent
 } from 'actions'
 
 class DeviceEditModalContainer extends React.Component {
@@ -30,7 +32,9 @@ export default connect(
     credentials: state.settings.credentials,
     credentialTypes: state.settings.credentialTypes,
 
-    monitorGroups: state.settings.monitorGroups
+    monitorGroups: state.settings.monitorGroups,
+
+    installAgentMessage: state.settings.installAgentMessage
   }), {
     fetchMonitorTemplates,
     openDeviceMonitorWizard,
@@ -38,6 +42,8 @@ export default connect(
     fetchCredentials,
 
     fetchMonitorGroups,
-    fetchCollectors
+    fetchCollectors,
+
+    installAgent
   }
 )(DeviceEditModalContainer)

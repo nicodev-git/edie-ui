@@ -1,5 +1,5 @@
 import React from 'react'
-import {RadioButton} from 'material-ui'
+import {RadioButton, CircularProgress} from 'material-ui'
 import {Field} from 'redux-form'
 import {RadioButtonGroup} from 'redux-form-material-ui'
 
@@ -20,7 +20,7 @@ export default class AgentPicker extends React.Component {
         <div>
           <div className="inline-block" style={{width: 100}}>Agent</div>
           <div className="inline-block" style={{textDecoration: 'underline', color: 'rgba(0, 0, 0, 0.87)'}}>Install Agent</div>
-
+          <CircularProgress className="valign-top margin-md-left" size={24}/>
         </div>
       )
     }
