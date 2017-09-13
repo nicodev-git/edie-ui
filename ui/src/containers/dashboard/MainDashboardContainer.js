@@ -35,6 +35,7 @@ import {
   showGaugePicker,
 
   updateViewLogParams,
+  updateViewLogDevice,
 
   openDevice,
   closeDevice,
@@ -119,6 +120,7 @@ export default connect(
     showGaugePicker,
 
     updateViewLogParams,
+    updateViewLogDevice,
 
     openDevice,
     closeDevice,

@@ -310,6 +310,9 @@ export default function (state = initialState, action) {
     case UPDATE_VIEWLOG_PARAMS:
       return { ...state, logViewParam: action.params }
 
+    case UPDATE_VIEWLOG_DEVICE:
+      return { ...state, logViewDevice: action.device }
+
     case SHOW_DETAIL_LOG_MODAL:
       return { ...state, detailLogModalOpen: action.visible, detailLogViewParam: action.params }
 

@@ -64,7 +64,7 @@ export default class GLog extends React.Component {
       monitors = monitors.concat(
         (device.monitors || []).filter(monitor => monitorIds.includes(monitor.uid)).map(p => ({
           ...p,
-          device: device.name
+          device
         }))
       )
     })
@@ -72,6 +72,7 @@ export default class GLog extends React.Component {
   }
   onClickLog (monitor) {
     const ranges = getRanges()
+    this.props.updateViewLogDevice(monitor.device)
     setTimeout(() => {
       // this.props.history.push('/viewlog')
       this.props.updateViewLogParams({
@@ -104,7 +105,7 @@ export default class GLog extends React.Component {
                     width="16" className="valign-middle" alt=""/>
                   <span className="valign-middle margin-md-left">{p.name}</span>
                 </td>
-                <td>{p.device}</td>
+                <td>{p.device ? p.device.name : ''}</td>
                 <td>{p.lastrun ? moment(p.lastrun).fromNow() : ''}</td>
               </tr>
             )}
