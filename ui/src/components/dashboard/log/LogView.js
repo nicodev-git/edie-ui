@@ -3,18 +3,14 @@ import { reduxForm, submit } from 'redux-form'
 import { connect } from 'react-redux'
 import { assign, debounce } from 'lodash'
 import ReactTooltip from 'react-tooltip'
-import QueryParser from 'lucene'
 
 import TabPage from 'components/common/TabPage'
 import TabPageBody from 'components/common/TabPageBody'
 import TabPageHeader from 'components/common/TabPageHeader'
-import { queryDateFormat } from 'shared/Global'
 
 import LogSearchFormView from './LogSearchFormView'
 import LogPapers from './LogPapers'
 import DetailLogModal from './DetailLogModal'
-
-import {parseDateRange, getFieldValue} from 'util/Query'
 
 import {parse} from 'query-string'
 import {getRanges} from 'components/common/DateRangePicker'
@@ -31,20 +27,31 @@ class LogView extends React.Component {
     this.tooltipRebuild = debounce(ReactTooltip.rebuild, 100)
   }
 
-  componentWillMount () {
+  checkParams () {
     const {q} = parse(this.props.location.search || {})
 
-    if (q) {
-      try {
-        const {logViewParam} = this.props
-        const parsed = JSON.parse(q)
-        const params = assign(...logViewParam, parsed)
+    if (!q) return false
 
-        this.props.updateViewLogParams(params, this.props.history)
-        this.props.change('q', params.q || '')
-      } catch (e) {
-        console.log(e)
-      }
+    try {
+      const {logViewParam} = this.props
+      const parsed = JSON.parse(q)
+      if (!parsed.monitorId) return false
+      const params = assign(...logViewParam, parsed)
+
+      this.props.updateViewLogParams(params, this.props.history)
+      this.props.change('q', params.q || '')
+
+      return true
+    } catch (e) {
+      console.log(e)
+    }
+
+    return false
+  }
+
+  componentWillMount () {
+    if (!this.checkParams()) {
+      this.props.history.replace('/')
     }
   }
 
@@ -66,11 +73,10 @@ class LogView extends React.Component {
     }
   }
 
-  onClickDetailView (row, index, page, pageSize) {
+  onClickDetailView (row) {
     const {logViewParam} = this.props
-    const monitorid = getFieldValue(QueryParser.parse(logViewParam.q || ''), 'monitorid')
     const params = {
-      q: monitorid ? `(monitorid:${monitorid})` : logViewParam.q,
+      q: `(monitorid:${logViewParam.monitorId})`,
       from: 0,
       to: row.entity.timestamp,
       page: 0,
@@ -101,25 +107,21 @@ class LogView extends React.Component {
   }
 
   getParams () {
-    const {queryParams} = this.props
-    const parsed = this.parse(queryParams.q)
+    const {logViewParam} = this.props
+    const ranges = getRanges()
+    const from = ranges['Ever'][0].valueOf()
+    const to = ranges['Ever'][1].valueOf()
 
-    const dateRange = parseDateRange(parsed, getRanges(), queryDateFormat)
+    const queries = []
+    if (logViewParam.q) queries.push(`("${logViewParam.q}")`)
+    queries.push(`(monitorid:${logViewParam.monitorId})`)
 
-    const ret = {
-      // severity: getArrayValues(parsed, 'severity'),
-      // monitorTypes: getArrayValues(parsed, 'monitortype'),
-      // workflowNames: getArrayValues(parsed, 'workflows'),
-      // tags: getArrayValues(parsed, 'tags'),
-      // monitorName: getFieldValue(parsed, 'monitor'),
-      // types: getArrayValues(parsed, 'type', collections.map(p => p.value)),
-      ...dateRange
+    return {
+      q: queries.join(' AND '),
+      from,
+      to,
+      types: 'event'
     }
-
-    // if (ret.types.length === 1 && ret.types[0].toLowerCase() === 'all') ret.types = collections.map(p => p.value)
-    // if (ret.severity.length === 1 && ret.severity[0].toLowerCase() === 'all') ret.severity = severities.map(p => p.value)
-
-    return ret
   }
 
 
@@ -134,8 +136,7 @@ class LogView extends React.Component {
   }
 
   render () {
-    const { handleSubmit, logViewParam, logViewDevice } = this.props
-    const { from, to } = logViewParam
+    const { handleSubmit, logViewDevice } = this.props
 
     return (
       <TabPage>
@@ -143,9 +144,8 @@ class LogView extends React.Component {
           <LogSearchFormView
             onSearchKeyDown={this.onSearchKeyDown.bind(this)}
             onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
-
-            startDate={from}
-            endDate={to}
+            startDate={0}
+            endDate={0}
             onChangeDateRange={this.onChangeRange.bind(this)}
           />
         </TabPageHeader>
@@ -155,7 +155,7 @@ class LogView extends React.Component {
               url="/search/query"
               ref="table"
               rowMetadata={{'key': 'id'}}
-              params={logViewParam}
+              params={this.getParams()}
               pageSize={1000}
               revertRows
               onClickView={this.onClickDetailView.bind(this)}

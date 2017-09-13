@@ -94,7 +94,8 @@ const initialState = {
   images: [],
 
   logViewParam: {
-    q: ''
+    q: '',
+    monitorId: ''
   },
 
   sidebarProfileMenuOpen: false,
