@@ -453,6 +453,18 @@ export default class GEditView extends React.Component {
       </div>
     )
   }
+  renderDeviceBasic () {
+    const {devices} = this.props
+    const {name, deviceId} = this.state
+    return (
+      <div>
+        <TextField name="name" value={name} floatingLabelText="Name" className="valign-top mr-dialog" onChange={this.onChangeText.bind(this, 'name')}/>
+        <SelectField value={deviceId} floatingLabelText="Device" className="valign-top" onChange={this.onChangeSelect.bind(this, 'deviceId')}>
+          {(devices || []).map(p => <MenuItem key={p.id} value={p.id} primaryText={p.name}/>)}
+        </SelectField>
+      </div>
+    )
+  }
   renderService () {
     const {services} = this.props
     const {name, serviceName} = this.state
@@ -594,6 +606,15 @@ export default class GEditView extends React.Component {
         return this.renderNews()
       case 'Log':
         return this.renderLog()
+      case 'Installed App':
+      case 'Event Log':
+      case 'Process':
+      case 'Services':
+      case 'Users':
+      case 'Firewall':
+      case 'Network':
+      case 'Command':
+        return this.renderDeviceBasic()
       default:
         return this.renderNormal()
     }

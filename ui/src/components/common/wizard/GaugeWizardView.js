@@ -321,8 +321,6 @@ export default class GaugeWizardView extends React.Component {
         return this.renderService()
       case 'Monitors':
         return this.renderMonitors()
-      case 'Services':
-        return this.renderServices()
       case 'Installed App':
       case 'Event Log':
       case 'Process':
@@ -332,7 +330,6 @@ export default class GaugeWizardView extends React.Component {
       case 'Network':
       case 'Command':
         return this.renderDeviceBasic()
-      //   return this.renderInstalledApp()
       case 'Servers':
         return this.renderServers()
       case 'Log':
