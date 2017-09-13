@@ -8,7 +8,7 @@ import {
   CLOSE_ADD_DEVICE_INCIDENT,
 
   ADD_DEVICE,
-
+  DELETE_MAP_DEVICE,
   UPDATE_MAP_DEVICE,
   UPDATE_MAP_DEVICES,
 
@@ -486,6 +486,12 @@ export default function (state = INITIAL_STATE, action) {
       }
 
       return {...state, deviceAndGroups, devices, editDevice}
+    }
+
+    case DELETE_MAP_DEVICE: {
+      const deviceAndGroups = state.deviceAndGroups.filter(p => p.id !== action.data.id)
+      const devices = state.devices.filter(p => p.id !== action.data.id)
+      return { ...state, deviceAndGroups, devices }
     }
 
     case SHOW_DEVICE_EDIT_MODAL: {

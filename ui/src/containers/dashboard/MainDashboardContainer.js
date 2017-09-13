@@ -48,6 +48,7 @@ import {
 
   showDeviceTplPicker,
   addDevice,
+  deleteMapDevice,
   showMonitorDetailModal
 } from 'actions'
 
@@ -135,6 +136,7 @@ export default connect(
 
     showDeviceTplPicker,
     addDevice,
+    deleteMapDevice,
     showMonitorDetailModal
   }
 )(withRouter(MainDashboardContainer))

@@ -7,7 +7,7 @@ import { extImageBaseUrl, appletColors as colors } from 'shared/Global'
 import { wizardConfig, getDeviceType } from 'components/common/wizard/WizardConfig'
 import DeviceWizardContainer from 'containers/shared/wizard/DeviceWizardContainer'
 
-import { showAlert } from 'components/common/Alert'
+import { showAlert, showConfirm } from 'components/common/Alert'
 
 export default class SysDashboardView extends React.Component {
   constructor (props) {
@@ -26,6 +26,14 @@ export default class SysDashboardView extends React.Component {
 
   onClickServer (server) {
     this.props.history.push(`/serverdetail/${server.id}`)
+  }
+
+  onClickDeleteServer (server) {
+    showConfirm('Click OK to delete.', (btn) => {
+      if (btn !== 'ok') return
+
+      this.props.deleteMapDevice(server)
+    })
   }
 
   getServerTpls () {
@@ -90,6 +98,7 @@ export default class SysDashboardView extends React.Component {
         desc={server.name}
         img={`${extImageBaseUrl}${server.image}`}
         onClick={() => this.onClickServer(server)}
+        onClickDelete={() => this.onClickDeleteServer(server)}
       />
     )
   }
