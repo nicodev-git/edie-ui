@@ -61,7 +61,12 @@ export default class GLog extends React.Component {
 
     const monitorIds = (gauge.servers || []).map(p => p.monitorId)
     devices.forEach(device => {
-      monitors = monitors.concat((device.monitors || []).filter(monitor => monitorIds.includes(monitor.uid)))
+      monitors = monitors.concat(
+        (device.monitors || []).filter(monitor => monitorIds.includes(monitor.uid)).map(p => ({
+          ...p,
+          device: device.name
+        }))
+      )
     })
     return monitors
   }
@@ -86,6 +91,7 @@ export default class GLog extends React.Component {
             <thead>
               <tr>
                 <th>Log</th>
+                <th>Device</th>
                 <th>Changed</th>
               </tr>
             </thead>
@@ -98,6 +104,7 @@ export default class GLog extends React.Component {
                     width="16" className="valign-middle" alt=""/>
                   <span className="valign-middle margin-md-left">{p.name}</span>
                 </td>
+                <td>{p.device}</td>
                 <td>{p.lastrun ? moment(p.lastrun).fromNow() : ''}</td>
               </tr>
             )}

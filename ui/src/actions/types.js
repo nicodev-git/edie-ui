@@ -466,6 +466,7 @@ export const FETCH_MONITOR_GROUPS = 'FETCH_MONITOR_GROUPS'
 ///////////////////////////////////////////////////////////////
 
 export const UPDATE_VIEWLOG_PARAMS = 'UPDATE_VIEWLOG_PARAMS'
+export const UPDATE_VIEWLOG_DEVICE = 'UPDATE_VIEWLOG_DEVICE'
 export const SHOW_DETAIL_LOG_MODAL = 'SHOW_DETAIL_LOG_MODAL'
 
 ///////////////////////////////////////////////////////////////
