@@ -24,7 +24,20 @@ export default class AgentPicker extends React.Component {
     return collectors.filter(p => p.ostype === 'LINUX')
   }
 
+  getDeviceCreds () {
+    const { editDevice, credentials } = this.props
+    return credentials.filter(p => !p.global && p.deviceIds && p.deviceIds.indexOf(editDevice.id) >= 0)
+  }
+
   onClickInstall () {
+    // const creds = this.getDeviceCreds()
+    // if (!creds.length) {
+    //   showAlert('Please add credential.', () => {
+    //     this.onClickAddCred()
+    //   });
+    //   return;
+    // }
+
     this.props.installAgent(this.props.editDevice)
   }
   render () {

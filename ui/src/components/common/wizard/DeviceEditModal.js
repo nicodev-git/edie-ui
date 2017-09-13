@@ -265,17 +265,12 @@ class DeviceEditModal extends React.Component {
   }
 
   buildAgentPicker (config, values) {
-    const {collectors, installAgents, installAgent, editDevice, installAgentMessage} = this.props
     return (
       <AgentPicker
+        {...this.props}
         key="agentPicker"
         values={values}
         config={config}
-        collectors={collectors}
-        installAgents={installAgents}
-        installAgent={installAgent}
-        editDevice={editDevice}
-        installAgentMessage={installAgentMessage}
       />
     )
   }
