@@ -180,6 +180,17 @@ export default class MainControl extends React.Component {
       />
     )
   }
+  renderMenu () {
+    const {gauges} = this.props
+    const items = (gauges || []).filter(p => menuItems.includes(p.name))
+    return (
+      <IconMenu iconButtonElement={<IconButton touch={true}><NavigationExpandMoreIcon /></IconButton>}>
+        {items.map((p, i) =>
+          <MenuItem key={p.id} primaryText={p.name} onTouchTap={this.onClickMenuItem.bind(this, p)}/>
+        )}
+      </IconMenu>
+    )
+  }
   render () {
     const device = this.getDevice()
     return (
@@ -191,11 +202,7 @@ export default class MainControl extends React.Component {
           <ToolbarGroup firstChild/>
           <ToolbarGroup>
             <IconButton onTouchTap={this.onClickEdit.bind(this)}><EditIcon/></IconButton>
-            <IconMenu iconButtonElement={<IconButton touch={true}><NavigationExpandMoreIcon /></IconButton>}>
-              {menuItems.map((p, i) =>
-                <MenuItem key={i} primaryText={p} onTouchTap={this.onClickMenuItem.bind(this, p)}/>
-              )}
-            </IconMenu>
+            {this.renderMenu()}
           </ToolbarGroup>
         </TabPageHeader>
         <TabPageBody tabs={ServerDetailTab(device.id, device.templateName)} history={this.props.history} location={this.props.location} transparent>
