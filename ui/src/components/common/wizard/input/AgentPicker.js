@@ -14,6 +14,14 @@ export default class AgentPicker extends React.Component {
     }
   }
 
+  getCollectors () {
+    const {monitorConfig, collectors} = this.props
+    if (monitorConfig.needWindowsAgentCollector) {
+      return collectors.filter(p => p.ostype === 'WINDOWS')
+    }
+    return collectors.filter(p => p.ostype === 'LINUX')
+  }
+
   onClickInstall () {
     this.props.installAgent(this.props.editDevice)
   }

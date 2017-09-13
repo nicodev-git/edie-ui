@@ -35,6 +35,7 @@ import {
 
   UPDATE_VIEWLOG_PARAMS,
   SHOW_DETAIL_LOG_MODAL,
+  UPDATE_VIEWLOG_DEVICE,
 
   SHOW_DEVICE_TPL_PICKER,
   SHOW_MONITOR_DETAIL_MODAL,
@@ -245,6 +246,12 @@ export const updateViewLogParams = (params, history, push) => {
     }
     if (push) history.push(locationParams)
     else history.replace(locationParams)
+  }
+}
+
+export const updateViewLogDevice = (device) => {
+  return dispatch => {
+    dispatch({type: UPDATE_VIEWLOG_DEVICE, device})
   }
 }
 
