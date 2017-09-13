@@ -20,6 +20,50 @@ const ResponsiveReactGridLayout = WidthProvider(Responsive)
 const menuItems = ['Event Log', 'Installed App', 'Process', 'Services', 'Users', 'Firewall', 'Network', 'Command']
 
 export default class MainControl extends React.Component {
+  componentWillMount () {
+    const device = this.getDevice()
+    if (!device) return
+    if (!device.gauges || !device.gauges.length) {
+      this.resetGauges()
+    }
+  }
+
+  resetGauges () {
+    const device = this.getDevice()
+    const gauges = []
+    gauges.push({
+      id: 'basic0',
+      name: '',
+      templateName: 'Device Info',
+      deviceId: device.id,
+      gaugeSize: 'custom',
+      layout: {
+        i: 'basic0',
+        x: 0, y: 0,
+        w: 5 * layoutWidthZoom, h: 2.5 * layoutHeightZoom
+      }
+    })
+
+    gauges.push({
+      id: 'basic1',
+      name: 'Status',
+      templateName: 'Device Basic',
+      deviceId: device.id,
+      gaugeSize: 'custom',
+      layout: {
+        i: 'basic1',
+        x: 0, y: gauges[0].y + gauges[0].h,
+        w: 5 * layoutWidthZoom, h: 2.5 * layoutHeightZoom
+      }
+    })
+    this.props.updateMapDevice({
+      ...device,
+      gauges
+    })
+  }
+
+  //////////////////////////////////////////////////////////////////////////////////////////////
+
   getDeviceId () {
     return this.props.match.params.id
   }
@@ -32,36 +76,8 @@ export default class MainControl extends React.Component {
   }
 
   getGauges () {
-    const gauges = []
     const device = this.getDevice()
-    if (device) {
-      gauges.push({
-        id: 'basic0',
-        name: '',
-        templateName: 'Device Info',
-        deviceId: device.id,
-        gaugeSize: 'custom',
-        layout: {
-          i: 'basic0',
-          x: 0, y: 0,
-          w: 5 * layoutWidthZoom, h: 2.5 * layoutHeightZoom
-        }
-      })
-
-      gauges.push({
-        id: 'basic1',
-        name: 'Status',
-        templateName: 'Device Basic',
-        deviceId: device.id,
-        gaugeSize: 'custom',
-        layout: {
-          i: 'basic1',
-          x: 0, y: gauges[0].y + gauges[0].h,
-          w: 5 * layoutWidthZoom, h: 2.5 * layoutHeightZoom
-        }
-      })
-    }
-    return gauges
+    return device.gauges || []
   }
 
   onClickMenuItem () {
@@ -174,17 +190,8 @@ export default class MainControl extends React.Component {
           useToolBar>
           <ToolbarGroup firstChild/>
           <ToolbarGroup>
-            <IconButton onTouchTap={this.onClickEdit.bind(this)}>
-              <EditIcon/>
-            </IconButton>
-            <IconMenu
-              className="hidden"
-              iconButtonElement={
-                <IconButton touch={true}>
-                  <NavigationExpandMoreIcon />
-                </IconButton>
-              }
-            >
+            <IconButton onTouchTap={this.onClickEdit.bind(this)}><EditIcon/></IconButton>
+            <IconMenu iconButtonElement={<IconButton touch={true}><NavigationExpandMoreIcon /></IconButton>}>
               {menuItems.map((p, i) =>
                 <MenuItem key={i} primaryText={p} onTouchTap={this.onClickMenuItem.bind(this, p)}/>
               )}
