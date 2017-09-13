@@ -170,7 +170,7 @@ export default class MainControl extends React.Component {
       <TabPage>
         <TabPageHeader
           title={device.name}
-          titleOptions={<StatusImg device={this.getDevice()}/>}
+          titleOptions={<StatusImg device={this.getDevice()} onClickFix={this.onClickEdit.bind(this)}/>}
           useToolBar>
           <ToolbarGroup firstChild/>
           <ToolbarGroup>
