@@ -105,7 +105,7 @@ export default class GLog extends React.Component {
                     width="16" className="valign-middle" alt=""/>
                   <span className="valign-middle margin-md-left">{p.name}</span>
                 </td>
-                <td>{p.device ? p.device.name : ''}</td>
+                <td>[{p.device ? p.device.name : ''}]</td>
                 <td>{p.lastrun ? moment(p.lastrun).fromNow() : ''}</td>
               </tr>
             )}
