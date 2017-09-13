@@ -10,8 +10,8 @@ export default class AgentPicker extends React.Component {
     this.props.installAgent(this.props.values)
   }
   render () {
-    const {values, collectors, installAgents} = this.props
-    const {agent} = values
+    const {editDevice, collectors, installAgents} = this.props
+    const {agent} = editDevice
 
     const collectorOptions = collectors.map(p => ({
       label: p.name, value: p.id
@@ -19,7 +19,7 @@ export default class AgentPicker extends React.Component {
 
     let agentLabel = 'Agent'
     if (!agent) {
-      let installAgent = installAgents.filter(a => a.id === values.id)
+      let installAgent = installAgents.filter(a => a.id === editDevice.id)
       installAgent = installAgent.length ? installAgent[0] : null
       const installing = installAgent && installAgent.status === 'installing'
 

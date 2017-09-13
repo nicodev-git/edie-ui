@@ -457,7 +457,12 @@ export default function (state = INITIAL_STATE, action) {
         return u
       })
 
-      return {...state, deviceAndGroups, devices}
+      let {editDevice} = state
+      if (editDevice.id === action.data.id) {
+        editDevice = {...editDevice, ...action.data}
+      }
+
+      return {...state, deviceAndGroups, devices, editDevice}
     }
 
     case SHOW_DEVICE_EDIT_MODAL: {
