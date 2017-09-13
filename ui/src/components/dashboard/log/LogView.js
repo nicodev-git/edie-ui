@@ -134,12 +134,12 @@ class LogView extends React.Component {
   }
 
   render () {
-    const { handleSubmit, logViewParam } = this.props
+    const { handleSubmit, logViewParam, logViewDevice } = this.props
     const { from, to } = logViewParam
 
     return (
       <TabPage>
-        <TabPageHeader title="Log" style={{overflowX: 'auto', overflowY: 'visible'}}>
+        <TabPageHeader title={logViewDevice ? logViewDevice.name : 'Log'} style={{overflowX: 'auto', overflowY: 'visible'}}>
           <LogSearchFormView
             onSearchKeyDown={this.onSearchKeyDown.bind(this)}
             onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}

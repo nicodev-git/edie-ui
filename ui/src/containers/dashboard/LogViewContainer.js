@@ -18,6 +18,7 @@ class LogViewContainer extends React.Component {
 }
 export default connect(
   state => ({
+    logViewDevice: state.dashboard.logViewDevice,
     logViewParam: state.dashboard.logViewParam,
 
     detailLogModalOpen: state.dashboard.detailLogModalOpen,
