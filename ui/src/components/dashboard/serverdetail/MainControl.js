@@ -21,6 +21,8 @@ const menuItems = ['Event Log', 'Installed App', 'Process', 'Services', 'Users',
 
 export default class MainControl extends React.Component {
   componentWillMount () {
+    this.props.fetchGauges()
+
     const device = this.getDevice()
     if (!device) return
     if (!device.gauges || !device.gauges.length) {
