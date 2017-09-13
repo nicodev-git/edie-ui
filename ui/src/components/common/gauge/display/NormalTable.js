@@ -14,7 +14,8 @@ export default class NormalTable extends React.Component {
     super(props)
 
     this.state = {
-      total: 0
+      total: 0,
+      cols: []
     }
     this.cells = [{
       'displayName': ' ',
@@ -75,6 +76,16 @@ export default class NormalTable extends React.Component {
     }]
   }
 
+  onUpdateCount (count, data) {
+    let {cols} = this.state
+    if (data && data.length) {
+      cols = keys(data[0])
+    }
+    this.setState({
+      cols
+    })
+  }
+
   handleRecord (d) {
     const e = {id: d.id}
 
@@ -93,8 +104,8 @@ export default class NormalTable extends React.Component {
 
   getCells () {
     if (this.props.viewMode === 'table') {
-      const {viewCols} = this.props
-      if (!viewCols || !viewCols.length) return []
+      let {viewCols} = this.props
+      if (!viewCols || !viewCols.length) viewCols = this.state.cols
       return viewCols.map(p => {
         const item = {
           'displayName': p,
@@ -121,6 +132,7 @@ export default class NormalTable extends React.Component {
         showTableHeading={this.props.viewMode === 'table'}
         handleRecord={this.props.viewMode === 'table' ? this.handleRecord.bind(this) : null}
         tableClassName="table-panel2"
+        onUpdateCount={this.onUpdateCount.bind(this)}
       />
     )
   }
