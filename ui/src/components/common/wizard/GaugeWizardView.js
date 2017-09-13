@@ -191,6 +191,17 @@ export default class GaugeWizardView extends React.Component {
     )
   }
 
+  renderDeviceBasic () {
+    const {devices} = this.props
+    const deviceOptions = (devices || []).map(p => ({label: p.name, value: p.id}))
+    return (
+      <div>
+        <Field name="name" component={FormInput} floatingLabel="Name" className="valign-top mr-dialog" validate={[required]}/>
+        <Field key="deviceId" name="deviceId" component={FormSelect} floatingLabel="Device" options={deviceOptions} className="valign-top" validate={[required]}/>
+      </div>
+    )
+  }
+
   renderDevice () {
     const {devices, formValues} = this.props
     const deviceOptions = (devices || []).map(p => ({label: p.name, value: p.id}))
@@ -313,7 +324,15 @@ export default class GaugeWizardView extends React.Component {
       case 'Services':
         return this.renderServices()
       case 'Installed App':
-        return this.renderInstalledApp()
+      case 'Event Log':
+      case 'Process':
+      case 'Services':
+      case 'Users':
+      case 'Firewall':
+      case 'Network':
+      case 'Command':
+        return this.renderDeviceBasic()
+      //   return this.renderInstalledApp()
       case 'Servers':
         return this.renderServers()
       case 'Log':
