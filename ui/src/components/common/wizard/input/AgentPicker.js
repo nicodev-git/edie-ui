@@ -28,8 +28,8 @@ export default class AgentPicker extends React.Component {
           <div className="inline-block" style={{width: 100}}>Agent</div>
           <div
             className="inline-block"
-            style={{textDecoration: 'underline', color: 'rgba(0, 0, 0, 0.87)'}}
-            onClick={this.onClickInstall.bind(this)}>
+            style={{textDecoration: 'underline', color: 'rgba(0, 0, 0, 0.87)', cursor: 'pointer'}}
+            onClick={installing ? null : this.onClickInstall.bind(this)}>
             {installing ? 'Installing...' : 'Install Agent'}
           </div>
           {installing ? <CircularProgress className="valign-top margin-md-left" size={24}/> : null}

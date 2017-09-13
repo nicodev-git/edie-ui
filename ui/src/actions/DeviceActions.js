@@ -1120,7 +1120,12 @@ export function installAgent (device) {
           id: device.id
       }
     }).then(({data})=> {
-      if (!data.success) dispatch({type: UPDATE_AGENT_INSTALL, data: device, status: 'failed'})
+      if (data.success) {
+        dispatch({type: UPDATE_AGENT_INSTALL, data: device, status: 'installed'})
+        dispatch(fetchDevice(device.id))
+      } else {
+        dispatch({type: UPDATE_AGENT_INSTALL, data: device, status: 'failed'})
+      }
       dispatch({type: UPDATE_INSTALL_AGENT_MESSAGE, data: data.success ? 'Successfully installed.' : data.info})
     }).catch(() => {
       dispatch({type: UPDATE_AGENT_INSTALL, data: device, status: 'failed'})
