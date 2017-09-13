@@ -41,7 +41,7 @@ class CommandTable extends React.Component {
     const {device} = this.props
     return (
       <TabPage>
-        <TabPageHeader title="Command" useToolBar titleOptions={<StatusImg device={device}/>}>
+        <TabPageHeader title="Command" useToolBar titleOptions={<StatusImg {...this.props} device={device}/>}>
         </TabPageHeader>
         <TabPageBody tabs={ServerDetailTab(device.id, device.templateName)} history={this.props.history} location={this.props.location} transparent>
           {this.renderBody()}

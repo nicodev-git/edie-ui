@@ -40,7 +40,7 @@ export default class FirewallTable extends React.Component {
     const {device} = this.props
     return (
       <TabPage>
-        <TabPageHeader title="Firewall" useToolBar titleOptions={<StatusImg device={device}/>}>
+        <TabPageHeader title="Firewall" useToolBar titleOptions={<StatusImg {...this.props} device={device}/>}>
         </TabPageHeader>
         <TabPageBody tabs={ServerDetailTab(device.id, device.templateName)} history={this.props.history} location={this.props.location} transparent>
           {this.renderBody()}

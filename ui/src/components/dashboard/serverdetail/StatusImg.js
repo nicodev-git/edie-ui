@@ -1,6 +1,31 @@
 import React from 'react'
 
+import DeviceEditModal from 'containers/shared/wizard/DeviceEditModalContainer'
+
 export default class StatusImg extends React.Component {
+  onClickFix () {
+    this.props.showDeviceEditModal(true, this.props.device)
+  }
+  onFinishEdit (device) {
+    this.props.updateMapDevice(device)
+  }
+
+  ///////////////////////////////////////////
+  renderDeviceEditModal () {
+    const {editDevice, deviceEditModalOpen} = this.props
+    if (!deviceEditModalOpen) return null
+
+    return (
+      <DeviceEditModal
+        deviceType="custom-edit"
+        title={editDevice.name}
+        monitors={editDevice.monitors}
+        onClose={() => this.props.showDeviceEditModal(false)}
+        onFinish={this.onFinishEdit.bind(this)}
+      />
+    )
+  }
+
   render () {
     const {device, onClickFix} = this.props
     if (!device) return null
@@ -15,7 +40,9 @@ export default class StatusImg extends React.Component {
           className="valign-middle margin-sm-right"
           style={{marginTop: -3}}/>
         No Agent/Collector not defined
-        <span className="link margin-md-left text-primary" onClick={onClickFix}>Fix</span>
+        <span className="link margin-md-left text-primary" onClick={onClickFix || this.onClickFix.bind(this)}>Fix</span>
+
+        {this.renderDeviceEditModal()}
       </span>
     )
   }

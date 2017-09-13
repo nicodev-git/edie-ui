@@ -39,7 +39,7 @@ export default class NetworkTable extends React.Component {
     const {device} = this.props
     return (
       <TabPage>
-        <TabPageHeader title="Network" useToolBar titleOptions={<StatusImg device={device}/>}>
+        <TabPageHeader title="Network" useToolBar titleOptions={<StatusImg {...this.props} device={device}/>}>
         </TabPageHeader>
         <TabPageBody tabs={ServerDetailTab(device.id, device.templateName)} history={this.props.history} location={this.props.location} transparent>
           {this.renderBody()}

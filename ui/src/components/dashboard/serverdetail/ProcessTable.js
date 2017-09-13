@@ -28,6 +28,9 @@ export default class ProcessTable extends React.Component {
       }
     }]
   }
+  onClickEdit () {
+    this.props.showDeviceEditModal(true, this.getDevice())
+  }
   renderBody () {
     return (
       <GridLayout
@@ -40,7 +43,7 @@ export default class ProcessTable extends React.Component {
     const {device} = this.props
     return (
       <TabPage>
-        <TabPageHeader title="Process" useToolBar titleOptions={<StatusImg device={device}/>}>
+        <TabPageHeader title="Process" useToolBar titleOptions={<StatusImg {...this.props} device={device}/>}>
         </TabPageHeader>
         <TabPageBody tabs={ServerDetailTab(device.id, device.templateName)} history={this.props.history} location={this.props.location} transparent>
           {this.renderBody()}

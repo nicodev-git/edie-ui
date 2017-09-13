@@ -40,7 +40,7 @@ export default class UserTable extends React.Component {
     const {device} = this.props
     return (
       <TabPage>
-        <TabPageHeader title="Users" useToolBar titleOptions={<StatusImg device={device}/>}>
+        <TabPageHeader title="Users" useToolBar titleOptions={<StatusImg {...this.props} device={device}/>}>
           {/*{this.renderOptions()}*/}
         </TabPageHeader>
         <TabPageBody tabs={ServerDetailTab(device.id, device.templateName)} history={this.props.history} location={this.props.location} transparent>
