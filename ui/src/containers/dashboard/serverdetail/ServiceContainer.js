@@ -9,7 +9,10 @@ import {
   replaceSearchWfs,
   updateQueryChips,
   updateMonitorRealTime,
-  clearMonitors
+  clearMonitors,
+
+  showDeviceEditModal,
+  updateMapDevice
 } from 'actions'
 
 class ServiceContainer extends React.Component {
@@ -23,6 +26,9 @@ class ServiceContainer extends React.Component {
 export default connect(
   state => ({
     device: state.dashboard.selectedDevice,
+    devices: state.devices.devices,
+    deviceEditModalOpen: state.devices.deviceEditModalOpen,
+    editDevice: state.devices.editDevice,
 
     services: state.devices.services,
 
@@ -36,6 +42,9 @@ export default connect(
     replaceSearchWfs,
     updateQueryChips,
     updateMonitorRealTime,
-    clearMonitors
+    clearMonitors,
+
+    showDeviceEditModal,
+    updateMapDevice
   }
 )(withRouter(ServiceContainer))

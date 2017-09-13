@@ -13,7 +13,10 @@ import {
   clearMonitors,
 
   updateMonitorQuery,
-  updateDeviceAppTab
+  updateDeviceAppTab,
+
+  showDeviceEditModal,
+  updateMapDevice
 } from 'actions'
 
 class ProcessContainer extends React.Component {
@@ -26,6 +29,9 @@ class ProcessContainer extends React.Component {
 export default connect(
   state => ({
     device: state.dashboard.selectedDevice,
+    devices: state.devices.devices,
+    deviceEditModalOpen: state.devices.deviceEditModalOpen,
+    editDevice: state.devices.editDevice,
 
     processes: state.devices.processes,
 
@@ -46,6 +52,9 @@ export default connect(
     clearMonitors,
 
     updateMonitorQuery,
-    updateDeviceAppTab
+    updateDeviceAppTab,
+
+    showDeviceEditModal,
+    updateMapDevice
   }
 )(withRouter(ProcessContainer))

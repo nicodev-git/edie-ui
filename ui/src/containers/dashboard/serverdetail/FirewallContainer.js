@@ -9,7 +9,10 @@ import {
   updateMonitorRealTime,
   clearMonitors,
 
-  showFwRuleModal
+  showFwRuleModal,
+
+  showDeviceEditModal,
+  updateMapDevice
 } from 'actions'
 
 class FirewallContainer extends React.Component {
@@ -22,6 +25,9 @@ class FirewallContainer extends React.Component {
 export default connect(
   state => ({
     device: state.dashboard.selectedDevice,
+    devices: state.devices.devices,
+    deviceEditModalOpen: state.devices.deviceEditModalOpen,
+    editDevice: state.devices.editDevice,
 
     monitorFwRules: state.devices.monitorFwRules,
     monitorFwStatus: state.devices.monitorFwStatus,
@@ -37,6 +43,9 @@ export default connect(
     updateMonitorRealTime,
     clearMonitors,
 
-    showFwRuleModal
+    showFwRuleModal,
+
+    showDeviceEditModal,
+    updateMapDevice
   }
 )(withRouter(FirewallContainer))

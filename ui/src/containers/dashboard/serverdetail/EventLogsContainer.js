@@ -15,7 +15,10 @@ import {
 
   selectLogName,
 
-  updateMonitorQuery
+  updateMonitorQuery,
+
+  showDeviceEditModal,
+  updateMapDevice
 } from 'actions'
 
 class EventLogsContainer extends React.Component {
@@ -28,6 +31,9 @@ class EventLogsContainer extends React.Component {
 export default connect(
   state => ({
     device: state.dashboard.selectedDevice,
+    devices: state.devices.devices,
+    deviceEditModalOpen: state.devices.deviceEditModalOpen,
+    editDevice: state.devices.editDevice,
 
     eventLogs: state.devices.eventLogs,
     selectedLogName: state.devices.selectedLogName,
@@ -50,6 +56,9 @@ export default connect(
 
     selectLogName,
 
-    updateMonitorQuery
+    updateMonitorQuery,
+
+    showDeviceEditModal,
+    updateMapDevice
   }
 )(withRouter(EventLogsContainer))

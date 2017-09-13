@@ -13,7 +13,10 @@ import {
   clearMonitors,
 
   updateMonitorQuery,
-  updateDeviceAppTab
+  updateDeviceAppTab,
+
+  showDeviceEditModal,
+  updateMapDevice
 } from 'actions'
 
 class AppsContainer extends React.Component {
@@ -27,6 +30,9 @@ class AppsContainer extends React.Component {
 export default connect(
   state => ({
     device: state.dashboard.selectedDevice,
+    devices: state.devices.devices,
+    deviceEditModalOpen: state.devices.deviceEditModalOpen,
+    editDevice: state.devices.editDevice,
 
     apps: state.devices.apps,
     monitorHotfixes: state.devices.monitorHotfixes,
@@ -48,6 +54,9 @@ export default connect(
     clearMonitors,
 
     updateMonitorQuery,
-    updateDeviceAppTab
+    updateDeviceAppTab,
+
+    showDeviceEditModal,
+    updateMapDevice
   }
 )(withRouter(AppsContainer))
