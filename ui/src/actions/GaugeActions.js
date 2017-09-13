@@ -24,7 +24,7 @@ import { ROOT_URL } from './config'
 
 export const fetchGauges = (cb) => {
   return (dispatch) => {
-    axios.get(`${ROOT_URL}/gauge`).then(response => {
+    axios.get(`${ROOT_URL}/gauge?size=1000`).then(response => {
       dispatch({type: FETCH_GAUGES, data: response.data._embedded.gauges})
     }).catch(error => apiError(dispatch, error))
   }
@@ -32,7 +32,7 @@ export const fetchGauges = (cb) => {
 
 export const fetchGaugeItems = () => {
   return dispatch => {
-    axios.get(`${ROOT_URL}/gaugeitem`).then(res => {
+    axios.get(`${ROOT_URL}/gaugeitem?size=1000`).then(res => {
       dispatch({type: FETCH_GAUGE_ITEMS, data: res.data._embedded.gaugeItems})
     })
   }
@@ -76,7 +76,7 @@ export const removeGaugeItem = (props, board) => {
 export const fetchGaugeBoards = () => {
   return dispatch => {
     dispatch({type: FETCH_GAUGE_BOARDS, data: []})
-    axios.get(`${ROOT_URL}/gaugeboard`).then(res => {
+    axios.get(`${ROOT_URL}/gaugeboard?size=1000`).then(res => {
       const data = res.data._embedded.gaugeBoards
       data.sort((a, b) => {
         if (!a.defaultSetDate && !b.defaultSetDate) return 0
