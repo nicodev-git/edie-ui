@@ -4,10 +4,18 @@ import {Field} from 'redux-form'
 import {RadioButtonGroup} from 'redux-form-material-ui'
 
 import {FormSelect} from 'components/modal/parts'
+import {showAlert} from 'components/common/Alert'
 
 export default class AgentPicker extends React.Component {
+  componentWillReceiveProps (nextProps) {
+    const {installAgentMessage} = nextProps
+    if (!this.props.installAgentMessage && installAgentMessage) {
+      showAlert(installAgentMessage)
+    }
+  }
+
   onClickInstall () {
-    this.props.installAgent(this.props.values)
+    this.props.installAgent(this.props.editDevice)
   }
   render () {
     const {editDevice, collectors, installAgents} = this.props
