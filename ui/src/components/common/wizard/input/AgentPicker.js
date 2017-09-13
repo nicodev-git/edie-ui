@@ -6,6 +6,8 @@ import {RadioButtonGroup} from 'redux-form-material-ui'
 import {FormSelect} from 'components/modal/parts'
 import {showAlert} from 'components/common/Alert'
 
+import {isWindowsDevice} from 'shared/Global'
+
 export default class AgentPicker extends React.Component {
   componentWillReceiveProps (nextProps) {
     const {installAgentMessage} = nextProps
@@ -15,8 +17,8 @@ export default class AgentPicker extends React.Component {
   }
 
   getCollectors () {
-    const {monitorConfig, collectors} = this.props
-    if (monitorConfig.needWindowsAgentCollector) {
+    const {editDevice, collectors} = this.props
+    if (isWindowsDevice(editDevice)) {
       return collectors.filter(p => p.ostype === 'WINDOWS')
     }
     return collectors.filter(p => p.ostype === 'LINUX')
@@ -26,10 +28,10 @@ export default class AgentPicker extends React.Component {
     this.props.installAgent(this.props.editDevice)
   }
   render () {
-    const {editDevice, collectors, installAgents} = this.props
+    const {editDevice, installAgents} = this.props
     let {agent} = editDevice
 
-    const collectorOptions = collectors.map(p => ({
+    const collectorOptions = this.getCollectors().map(p => ({
       label: p.name, value: p.id
     }))
 
