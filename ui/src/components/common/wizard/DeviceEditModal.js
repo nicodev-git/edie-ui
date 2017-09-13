@@ -16,10 +16,9 @@ import DeviceEditModalView from './DeviceEditModalView'
 import TagsView from './input/TagsView'
 import CredPickerInput from './input/CredPicker'
 import AgentPicker from './input/AgentPicker'
-
-import {CardPanel} from 'components/modal/parts'
-
 import CredPicker from 'containers/settings/credentials/CredsPickerContainer'
+import {showAlert} from 'components/common/Alert'
+import {CardPanel} from 'components/modal/parts'
 
 class DeviceEditModal extends React.Component {
   constructor (props) {
@@ -68,6 +67,14 @@ class DeviceEditModal extends React.Component {
     const { extraParams, onFinish, editParams, canAddTags, monitorTags } = this.props
     const { monitors, currentDevice } = this.state
     const params = {}
+
+    if (formProps.agentType === 'collector') {
+      if (!formProps.collectorId) {
+        showAlert('Please install collector.')
+        return
+      }
+    }
+
     if (editParams) {
       editParams.forEach(p => {
         params[p.key] = p.value

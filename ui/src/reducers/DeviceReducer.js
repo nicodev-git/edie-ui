@@ -459,7 +459,7 @@ export default function (state = INITIAL_STATE, action) {
       })
 
       let {editDevice} = state
-      if (editDevice.id === action.data.id) {
+      if (editDevice && editDevice.id === action.data.id) {
         editDevice = {...editDevice, ...action.data}
       }
 
@@ -489,7 +489,7 @@ export default function (state = INITIAL_STATE, action) {
     }
 
     case SHOW_DEVICE_EDIT_MODAL: {
-      return { ...state, deviceEditModalOpen: action.visible, editDevice: action.device }
+      return { ...state, deviceEditModalOpen: action.visible, editDevice: action.visible ? action.device : state.editDevice }
     }
     default:
       return state
