@@ -1,6 +1,6 @@
 import React from 'react'
 import {concat, assign, findIndex} from 'lodash'
-import {IconButton, IconMenu, MenuItem} from 'material-ui'
+import {IconButton} from 'material-ui'
 import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
 import ReactTooltip from 'react-tooltip'
 import {Responsive, WidthProvider} from 'react-grid-layout'
@@ -357,25 +357,11 @@ export default class MainDashboardView extends React.Component {
   }
 
   renderAddMenu () {
-    const {board} = this.props
     return (
       <div className="text-right" style={{position: 'absolute', top: -45, right: 0}}>
-        {board.type === 'system' ? (
-          <IconMenu
-            iconButtonElement={<IconButton><AddCircleIcon /></IconButton>}
-            anchorOrigin={{horizontal: 'right', vertical: 'top'}}
-            targetOrigin={{horizontal: 'right', vertical: 'top'}}
-          >
-            <MenuItem primaryText="Profile"/>
-            <MenuItem primaryText="Messages"/>
-            <MenuItem primaryText="Log out"/>
-          </IconMenu>
-        ) : (
-          <IconButton onTouchTap={() => this.props.showGaugePicker(true)}>
-            <AddCircleIcon />
-          </IconButton>
-        )}
-
+        <IconButton onTouchTap={() => this.props.showGaugePicker(true)}>
+          <AddCircleIcon />
+        </IconButton>
       </div>
     )
   }

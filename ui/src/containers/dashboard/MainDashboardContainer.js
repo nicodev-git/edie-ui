@@ -9,6 +9,7 @@ import {
   fetchSysSearchOptions,
   fetchWorkflows,
   fetchMonitorTemplates,
+  fetchDeviceTemplates,
 
   fetchCollectors,
   fetchCredentials,
@@ -62,6 +63,7 @@ export default connect(
     devices: state.devices.deviceAndGroups,
     monitorGroups: state.settings.monitorGroups,
     monitorTemplates: state.settings.monitorTemplates,
+    deviceTemplates: state.settings.deviceTemplates,
 
     gauges: state.gauge.gauges,
     gaugeItems: state.gauge.gaugeItems,
@@ -94,6 +96,7 @@ export default connect(
     fetchSysSearchOptions,
     fetchWorkflows,
     fetchMonitorTemplates,
+    fetchDeviceTemplates,
 
     fetchCollectors,
     fetchCredentials,

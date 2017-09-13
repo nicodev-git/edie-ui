@@ -19,6 +19,7 @@ export default class MainDashboard extends React.Component {
     this.props.fetchMonitorTemplates()
     this.props.fetchCredentials()
     this.props.fetchCollectors()
+    this.props.fetchDeviceTemplates()
   }
   componentWillUpdate (nextProps) {
     const {gaugeBoards} = nextProps
