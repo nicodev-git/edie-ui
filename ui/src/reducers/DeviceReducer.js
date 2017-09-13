@@ -10,6 +10,7 @@ import {
   ADD_DEVICE,
 
   UPDATE_MAP_DEVICE,
+  UPDATE_MAP_DEVICES,
 
   FETCH_GROUP_DEVICES_LINES,
   ADD_GROUP_DEVICE,
@@ -111,7 +112,7 @@ import {
   UPDATE_DEVICE_ERROR
 } from 'actions/types'
 
-import { concat, keys, assign } from 'lodash'
+import { concat, keys, assign, findIndex } from 'lodash'
 
 const INITIAL_STATE = {
   devices: [],
@@ -460,6 +461,28 @@ export default function (state = INITIAL_STATE, action) {
       let {editDevice} = state
       if (editDevice.id === action.data.id) {
         editDevice = {...editDevice, ...action.data}
+      }
+
+      return {...state, deviceAndGroups, devices, editDevice}
+    }
+
+    case UPDATE_MAP_DEVICES: {
+      const deviceAndGroups = state.deviceAndGroups.map(u => {
+        const index = findIndex(action.data, {id: u.id})
+        if (index >= 0) return {...u, ...action.data[index]}
+        return u
+      })
+
+      const devices = state.devices.map(u => {
+        const index = findIndex(action.data, {id: u.id})
+        if (index >= 0) return {...u, ...action.data[index]}
+        return u
+      })
+
+      let {editDevice} = state
+      if (editDevice) {
+        const index = findIndex(action.data, {id: editDevice.id})
+        editDevice = {...editDevice, ...action.data[index]}
       }
 
       return {...state, deviceAndGroups, devices, editDevice}
