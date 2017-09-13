@@ -113,7 +113,7 @@ export default class NormalTable extends React.Component {
   render () {
     return (
       <InfiniteTable
-        url="/search/all"
+        url="/search/query"
         cells={this.getCells()}
         ref="table"
         rowMetadata={{'key': 'id'}}

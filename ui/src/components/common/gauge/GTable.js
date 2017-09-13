@@ -9,7 +9,7 @@ import NormalTable from './display/NormalTable'
 import GEditView from './GEditView'
 
 import {showAlert} from 'components/common/Alert'
-import { dateFormat, severities, viewFilters } from 'shared/Global'
+import { viewFilters } from 'shared/Global'
 
 export default class GTable extends React.Component {
   constructor (props) {
@@ -49,20 +49,35 @@ export default class GTable extends React.Component {
     const {searchList, gauge} = this.props
     const {resource, duration, durationUnit, workflowId, workflowIds, savedSearchId} = gauge
 
-    const dateFrom = moment().add(-duration, `${durationUnit}s`).startOf(durationUnit).format(dateFormat)
-    const dateTo = moment().endOf(durationUnit).format(dateFormat)
+    const from = moment().add(-duration, `${durationUnit}s`).startOf(durationUnit).valueOf()
+    const to = moment().endOf(durationUnit).valueOf()
 
     if (resource === 'incident')  {
+      let wfIds = []
+      if (workflowId) wfIds.push(workflowId)
+      if (workflowIds) wfIds = [...wfIds, ...workflowIds]
+
       const searchParams = {
         draw: this.state.draw,
-        query: '',
-        workflow: [workflowId, ...workflowIds].join(','),
-        collections: 'incident,event',
-        dateFrom,
-        dateTo,
-        severity: severities.map(p => p.value).join(','),
-        tag: '',
-        monitorTypes: ''
+        q: [
+          `(workflowids:${wfIds.join(' AND ')})`
+        ].join(' AND '),
+        types: ['incident', 'event'],
+        from,
+        to,
+      }
+      return {
+        searchParams
+      }
+    } else if (resource === 'monitor') {
+      const searchParams = {
+        draw: this.state.draw,
+        q: [
+          `(monitorid:${gauge.monitorId})`
+        ].join(' AND '),
+        types: 'event',
+        from,
+        to,
       }
       return {
         searchParams
@@ -75,14 +90,11 @@ export default class GTable extends React.Component {
       return {
         searchParams: {
           draw: this.state.draw,
-          dateFrom,
-          dateTo,
+          from,
+          to,
           query: '',
-          workflow: '',
-          collections: 'incident',
-          severity: 'HIGH,MEDIUM,LOW,AUDIT',
-          tag: '',
-          monitorTypes: ''
+          q: '',
+          types: 'incident',
         }
       }
     }
@@ -93,12 +105,11 @@ export default class GTable extends React.Component {
       searchParams: {
         ...searchParams,
         draw: this.state.draw,
-        dateFrom,
-        dateTo
+        from,
+        to
       },
       viewFilter: savedSearch.viewFilter,
-      viewCols: savedSearch.viewCols,
-      viewMode: gauge.tableViewMode
+      viewCols: savedSearch.viewCols
     }
   }
 
@@ -131,6 +142,7 @@ export default class GTable extends React.Component {
     )
   }
   renderFrontView () {
+    const {gauge} = this.props
     const data = this.getSearchData()
 
     return (
@@ -141,7 +153,7 @@ export default class GTable extends React.Component {
           params={data.searchParams}
           viewFilter={data.viewFilter || ''}
           viewCols={data.viewCols || []}
-          viewMode={data.viewMode || 'json'}
+          viewMode={gauge.tableViewMode || 'json'}
         />
       </div>
     )
