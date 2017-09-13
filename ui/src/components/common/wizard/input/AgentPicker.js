@@ -19,7 +19,7 @@ export default class AgentPicker extends React.Component {
   }
   render () {
     const {editDevice, collectors, installAgents} = this.props
-    const {agent} = editDevice
+    let {agent} = editDevice
 
     const collectorOptions = collectors.map(p => ({
       label: p.name, value: p.id
@@ -30,19 +30,23 @@ export default class AgentPicker extends React.Component {
       let installAgent = installAgents.filter(a => a.id === editDevice.id)
       installAgent = installAgent.length ? installAgent[0] : null
       const installing = installAgent && installAgent.status === 'installing'
-
-      agentLabel = (
-        <div>
-          <div className="inline-block" style={{width: 100}}>Agent</div>
-          <div
-            className="inline-block"
-            style={{textDecoration: 'underline', color: 'rgba(0, 0, 0, 0.87)', cursor: 'pointer'}}
-            onClick={installing ? null : this.onClickInstall.bind(this)}>
-            {installing ? 'Installing...' : 'Install Agent'}
+      if (installAgent && installAgent.status === 'installed') {
+        agent = {}
+      } else {
+        agentLabel = (
+          <div>
+            <div className="inline-block" style={{width: 100}}>Agent</div>
+            <div
+              className="inline-block"
+              style={{textDecoration: 'underline', color: 'rgba(0, 0, 0, 0.87)', cursor: 'pointer'}}
+              onClick={installing ? null : this.onClickInstall.bind(this)}>
+              {installing ? 'Installing...' : 'Install Agent'}
+            </div>
+            {installing ? <CircularProgress className="valign-top margin-md-left" size={24}/> : null}
           </div>
-          {installing ? <CircularProgress className="valign-top margin-md-left" size={24}/> : null}
-        </div>
-      )
+        )
+      }
+
     }
 
     const collectorLabel = (
