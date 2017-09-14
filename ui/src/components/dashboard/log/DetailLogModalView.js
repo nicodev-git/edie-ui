@@ -1,5 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import {RaisedButton} from 'material-ui'
 
 import { Modal } from 'components/modal/parts'
 
@@ -27,9 +28,13 @@ export default class DetailLogModalView extends React.Component {
   }
 
   render () {
-    const {onHide} = this.props
+    const {onHide, onClickPrev, onClickNext} = this.props
     return (
       <Modal title="Log" onRequestClose={onHide} contentStyle={{width: '90%', maxWidth: 'initial'}}>
+        <div>
+          <RaisedButton label="Prev" onTouchTap={onClickPrev}/>
+          <RaisedButton label="Next" onTouchTap={onClickNext}/>
+        </div>
         {this.renderTable()}
       </Modal>
     )

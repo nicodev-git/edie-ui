@@ -46,12 +46,22 @@ export default class DetailLogModal extends React.Component {
     this.props.showDetailLogModal(false)
   }
 
+  onClickPrev () {
+
+  }
+
+  onClickNext () {
+
+  }
+
   render () {
     return (
       <DetailLogModalView
         onHide={this.onHide.bind(this)}
         rowId={this.props.detailLogViewParam.rowId}
         items={this.state.data}
+        onClickPrev={this.onClickPrev.bind(this)}
+        onClickNext={this.onClickNext.bind(this)}
       />
     )
   }
