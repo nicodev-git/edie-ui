@@ -114,16 +114,6 @@ export const wizardConfig = {
       }
     },
     steps: [{
-      title: 'Monitors',
-      panels: [{
-        skip: true,
-        items: [{
-          type: 'monitors',
-          title: 'Monitors'
-        }]
-      }]
-
-    }, {
       title: 'Settings',
       panels: [{
         title: 'Basic',
@@ -153,6 +143,16 @@ export const wizardConfig = {
           type: 'credpicker'
         }]
       }],
+    }, {
+      title: 'Monitors',
+      panels: [{
+        skip: true,
+        items: [{
+          type: 'monitors',
+          title: 'Monitors'
+        }]
+      }]
+
     }, {
       title: 'Advanced',
       panels: [{
