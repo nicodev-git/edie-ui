@@ -212,9 +212,9 @@ export default class MainControl extends React.Component {
           titleOptions={<StatusImg device={this.getDevice()} onClickFix={this.onClickEdit.bind(this)}/>}
           useToolBar>
           <ToolbarGroup firstChild>
-            <IconButton onTouchTap={this.onClickEdit.bind(this)}><EditIcon/></IconButton>
-            <IconButton onTouchTap={this.onClickCredEdit.bind(this)}><CredIcon/></IconButton>
-            <IconButton onTouchTap={this.onClickMonitorEdit.bind(this)}><MonitorIcon/></IconButton>
+            <IconButton onTouchTap={this.onClickEdit.bind(this)} tooltip="General"><EditIcon/></IconButton>
+            <IconButton onTouchTap={this.onClickCredEdit.bind(this)} tooltip="Credentials"><CredIcon/></IconButton>
+            <IconButton onTouchTap={this.onClickMonitorEdit.bind(this)} tooltip="Monitors"><MonitorIcon/></IconButton>
           </ToolbarGroup>
           <ToolbarGroup>
             {this.renderMenu()}
