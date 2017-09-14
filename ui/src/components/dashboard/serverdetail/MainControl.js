@@ -4,6 +4,8 @@ import {ToolbarGroup, IconMenu, IconButton, MenuItem} from 'material-ui'
 import {Responsive, WidthProvider} from 'react-grid-layout'
 import NavigationExpandMoreIcon from 'material-ui/svg-icons/navigation/expand-more'
 import EditIcon from 'material-ui/svg-icons/content/create'
+import CredIcon from 'material-ui/svg-icons/action/credit-card'
+import MonitorIcon from 'material-ui/svg-icons/action/event'
 
 import TabPage from 'components/common/TabPage'
 import TabPageBody from 'components/common/TabPageBody'
@@ -91,6 +93,14 @@ export default class MainControl extends React.Component {
   }
   onFinishEdit (device) {
     this.props.updateMapDevice(device)
+  }
+
+  onClickCredEdit () {
+
+  }
+
+  onClickMonitorEdit () {
+
   }
   /////////////////////////////////////////////////////////////////////
 
@@ -201,9 +211,12 @@ export default class MainControl extends React.Component {
           title={device.name}
           titleOptions={<StatusImg device={this.getDevice()} onClickFix={this.onClickEdit.bind(this)}/>}
           useToolBar>
-          <ToolbarGroup firstChild/>
-          <ToolbarGroup>
+          <ToolbarGroup firstChild>
             <IconButton onTouchTap={this.onClickEdit.bind(this)}><EditIcon/></IconButton>
+            <IconButton onTouchTap={this.onClickCredEdit.bind(this)}><CredIcon/></IconButton>
+            <IconButton onTouchTap={this.onClickMonitorEdit.bind(this)}><MonitorIcon/></IconButton>
+          </ToolbarGroup>
+          <ToolbarGroup>
             {this.renderMenu()}
           </ToolbarGroup>
         </TabPageHeader>
