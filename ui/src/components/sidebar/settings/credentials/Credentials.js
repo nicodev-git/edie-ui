@@ -92,6 +92,15 @@ export default class Credentials extends React.Component {
       this.props.removeCredentials(selected)
     })
   }
+  onSetDefault () {
+    let selected = this.getTable().getSelected()
+    if (!selected) return showAlert('Please choose credentials.')
+    if (!selected.global) return showAlert('Only global credentials can be set as default.')
+    this.props.updateCredentials({
+      ...selected,
+      isDefault: true
+    })
+  }
   render () {
     return (
       <TabPage>
@@ -101,6 +110,7 @@ export default class Credentials extends React.Component {
               <RaisedButton label="Add" onTouchTap={this.onAddCred.bind(this)}/>&nbsp;
               <RaisedButton label="Edit" onTouchTap={this.onEditCred.bind(this)}/>&nbsp;
               <RaisedButton label="Remove" onTouchTap={this.onRemoveCred.bind(this)}/>&nbsp;
+              <RaisedButton label="Set Default" onTouchTap={this.onSetDefault.bind(this)}/>&nbsp;
               <UserTabs history={this.props.history}/>&nbsp;
             </div>
           </div>
