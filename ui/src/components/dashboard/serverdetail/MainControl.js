@@ -102,6 +102,10 @@ export default class MainControl extends React.Component {
   onClickMonitorEdit () {
     this.props.showMonitorEdit(true)
   }
+
+  onClickFix () {
+    const {editDevice} = this.props
+  }
   /////////////////////////////////////////////////////////////////////
 
   renderGauge (p) {
@@ -209,7 +213,7 @@ export default class MainControl extends React.Component {
       <TabPage>
         <TabPageHeader
           title={device.name}
-          titleOptions={<StatusImg device={this.getDevice()} onClickFix={this.onClickEdit.bind(this)}/>}
+          titleOptions={<StatusImg device={this.getDevice()} onClickFix={this.onClickFix.bind(this)}/>}
           useToolBar>
           <ToolbarGroup firstChild>
             <IconButton onTouchTap={this.onClickEdit.bind(this)} tooltip="General"><EditIcon/></IconButton>
