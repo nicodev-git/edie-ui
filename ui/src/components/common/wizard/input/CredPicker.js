@@ -23,7 +23,7 @@ export default class CredPicker extends React.Component {
           <div style={{marginTop: -20}}>
             <Field name="credtype" component={FormSelect} className="valign-top" floatingLabel="Type" style={{width: 150, marginRight: 12}} options={typeOptions}/>
             <Field name="creduser" component={FormInput} className="valign-top mr-dialog" floatingLabel="User" style={{width: 150}}/>
-            <Field name="credpassword" component={FormInput} className="valign-top" floatingLabel="Password" style={{width: 150}}/>
+            <Field name="credpassword" component={FormInput} type="password" className="valign-top" floatingLabel="Password" style={{width: 150}}/>
           </div>
         </div>
       </div>
