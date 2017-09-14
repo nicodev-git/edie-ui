@@ -205,11 +205,6 @@ export const wizardConfig = {
           name: 'wanip'
         }]
       }, {
-        title: 'Credentials',
-        items: [{
-          type: 'credpicker'
-        }]
-      }, {
         title: 'Agent',
         items: [{
           type: 'agentpicker'
