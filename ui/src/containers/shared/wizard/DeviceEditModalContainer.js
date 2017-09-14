@@ -7,6 +7,8 @@ import {
   openDeviceMonitorWizard,
   fetchCredTypes,
   fetchCredentials,
+  showDeviceCredsPicker,
+  addCredentials,
 
   fetchMonitorGroups,
   fetchCollectors,
@@ -37,12 +39,16 @@ export default connect(
     installAgentMessage: state.devices.installAgentMessage,
     installAgents: state.settings.installAgents,
 
-    editDevice: state.devices.editDevice
+    editDevice: state.devices.editDevice,
+
+    deviceCredsPickerVisible: state.devices.deviceCredsPickerVisible
   }), {
     fetchMonitorTemplates,
     openDeviceMonitorWizard,
     fetchCredTypes,
     fetchCredentials,
+    showDeviceCredsPicker,
+    addCredentials,
 
     fetchMonitorGroups,
     fetchCollectors,

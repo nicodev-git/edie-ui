@@ -2,6 +2,7 @@ import React from 'react'
 import {RadioButton, CircularProgress} from 'material-ui'
 import {Field} from 'redux-form'
 import {RadioButtonGroup} from 'redux-form-material-ui'
+import CredentialModal from './CredentialModal'
 
 import {FormSelect} from 'components/modal/parts'
 import {showAlert} from 'components/common/Alert'
@@ -24,22 +25,50 @@ export default class AgentPicker extends React.Component {
     return collectors.filter(p => p.ostype === 'LINUX')
   }
 
+  ///////////////////////////////////////////////////////////////
+
   getDeviceCreds () {
     const { editDevice, credentials } = this.props
     return credentials.filter(p => !p.global && p.deviceIds && p.deviceIds.indexOf(editDevice.id) >= 0)
   }
 
+  onCloseCredPicker (props) {
+    if (props) {
+      const {editDevice} = this.props
+      this.props.addCredentials({
+        ...props,
+        global: false,
+        deviceIds: [editDevice.id]
+      })
+    }
+    this.props.showDeviceCredsPicker(false)
+  }
+
+  ///////////////////////////////////////////////////////////////
+
   onClickInstall () {
-    // const creds = this.getDeviceCreds()
-    // if (!creds.length) {
-    //   showAlert('Please add credential.', () => {
-    //     this.onClickAddCred()
-    //   });
-    //   return;
-    // }
+    const creds = this.getDeviceCreds()
+    if (!creds.length) {
+      showAlert('Please add credential.', () => {
+        this.props.showDeviceCredsPicker(true)
+      });
+      return;
+    }
 
     this.props.installAgent(this.props.editDevice)
   }
+
+  renderCredPicker () {
+    if (!this.props.deviceCredsPickerVisible) return null
+
+    return (
+      <CredentialModal
+        addCredentials={this.onCloseCredPicker.bind(this)}
+        credentialTypes={this.props.credentialTypes}
+        onClose={this.onCloseCredPicker.bind(this)}/>
+    )
+  }
+
   render () {
     const {editDevice, installAgents} = this.props
     let {agent} = editDevice
@@ -86,6 +115,7 @@ export default class AgentPicker extends React.Component {
         </Field>
 
         <Field name="collectorId" label="Collector" component={FormSelect} className="pull-left" options={collectorOptions}/>
+        {this.renderCredPicker()}
       </div>
     )
   }
