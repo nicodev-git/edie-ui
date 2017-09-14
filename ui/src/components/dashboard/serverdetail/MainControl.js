@@ -96,11 +96,11 @@ export default class MainControl extends React.Component {
   }
 
   onClickCredEdit () {
-
+    this.props.showCredEdit(true)
   }
 
   onClickMonitorEdit () {
-
+    this.props.showMonitorEdit(true)
   }
   /////////////////////////////////////////////////////////////////////
 
