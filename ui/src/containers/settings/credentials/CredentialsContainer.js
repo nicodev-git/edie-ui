@@ -26,6 +26,7 @@ export default connect(
   state => ({
     credentials: state.settings.credentials,
     credentialsModalVisible: state.settings.credentialsModalVisible,
+    credentialDraw: state.settings.credentialDraw,
 
     editCredentials: state.settings.editCredentials,
 

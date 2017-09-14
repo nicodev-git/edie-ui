@@ -37,6 +37,12 @@ export default class Credentials extends React.Component {
       'customComponent': p => {
         return <span>{p.data ? 'Yes' : 'No'}</span>
       }
+    }, {
+      'displayName': 'Default',
+      'columnName': 'default',
+      'customComponent': p => {
+        return <span>{p.data ? 'Yes' : ''}</span>
+      }
     }]
   }
 
@@ -98,7 +104,7 @@ export default class Credentials extends React.Component {
     if (!selected.global) return showAlert('Only global credentials can be set as default.')
     this.props.updateCredentials({
       ...selected,
-      isDefault: true
+      default: true
     })
   }
   render () {

@@ -21,7 +21,7 @@ export const fetchCredentials = () => {
     return dispatch => dispatch({ type: NO_AUTH_ERROR })
   }
   return (dispatch) => {
-    axios.get(`${ROOT_URL}/credential`)
+    axios.get(`${ROOT_URL}/credential?size=1000`)
       .then(response => fetchCredentialsSuccess(dispatch, response))
       .catch(error => apiError(dispatch, error))
   }
@@ -69,6 +69,7 @@ const updateCredentialsSuccess = (dispatch, response) => {
     type: UPDATE_CREDENTIALS,
     data: response.data
   })
+  dispatch(fetchCredentials())
   dispatch(closeCredentialsModal())
 }
 

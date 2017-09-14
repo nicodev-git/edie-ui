@@ -150,6 +150,7 @@ const initialState = {
   envVars: [],
   identities: [],
   credentials: [],
+  credentialDraw: 1,
 
   deviceCategories: [],
   deviceTemplates: [],
@@ -366,7 +367,7 @@ export default function (state = initialState, action) {
 
     case UPDATE_CREDENTIALS: {
       const credentials = state.credentials.map(u => u.id === action.data.id ? action.data : u)
-      return { ...state, credentials }
+      return { ...state, credentials, credentialDraw: state.credentialDraw + 1 }
     }
 
     case REMOVE_CREDENTIALS: {
