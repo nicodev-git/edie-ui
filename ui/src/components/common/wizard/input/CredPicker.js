@@ -12,6 +12,7 @@ export default class CredPicker extends React.Component {
       <div className="flex-horizontal">
         <div style={{paddingTop: 16}}>
           <RadioButtonGroup name="credentialSelect" defaultSelected="existing" onChange={(e, value) => onChangeCredential(value)}>
+            <RadioButton value="" label="None"/>
             <RadioButton value="existing" label="Existing"/>
             <RadioButton value="new" label="New" style={{marginTop: 30}} />
           </RadioButtonGroup>
