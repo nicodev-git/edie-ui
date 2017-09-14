@@ -10,15 +10,39 @@ const editButtonStyle = {
 }
 
 export default class AppletCard extends React.Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      hovered: false
+    }
+    this.onMouseEnter = this.onMouseEnter.bind(this)
+    this.onMouseLeave = this.onMouseLeave.bind(this)
+  }
+
+  onMouseEnter () {
+    this.setState({
+      hovered: true
+    })
+  }
+
+  onMouseLeave () {
+    this.setState({
+      hovered: false
+    })
+  }
   render () {
-    const {name, desc, img, color, className, onClick, onClickDelete, onClickEdit, onClickView} = this.props
+    const {name, desc, desc2, desc3, img, color, className, onClick, onClickDelete, onClickEdit, onClickView} = this.props
+    const {hovered} = this.state
     return (
       <li className={`web-applet-card small ${className}`} onClick={onClickDelete ? null : onClick}>
-        <div className="applet-card-body " style={{background: color}}>
+        <div
+          className="applet-card-body " style={{background: color}}
+          onMouseEnter={onClickDelete ? this.onMouseEnter : null}
+          onMouseLeave={onClickDelete ? this.onMouseLeave : null}>
           <div className="content">
             <div className="card-top">
               <img src={img} alt="" onClick={onClickDelete ? onClick : null}/>
-              <div className="pull-right" style={{marginRight: -10, marginTop: -10}}>
+              <div className={`pull-right link info-button ${hovered ? 'visible' : ''}`} style={{marginRight: -10, marginTop: -10}}>
                 {onClickDelete && <CloseIcon size={32} color="white" onTouchTap={onClickDelete}/>}
               </div>
             </div>
@@ -26,8 +50,10 @@ export default class AppletCard extends React.Component {
               {desc}&nbsp;
             </span>
             <p className="author" onClick={onClickDelete ? onClick : null}>
-              by&nbsp;<span><b>Securegion</b></span>&nbsp;
-              <img alt="Verified" src="/resources/images/common/wizard/verified.svg" />
+              <span>{desc2}</span>
+            </p>
+            <p className="author" onClick={onClickDelete ? onClick : null}>
+              <span>{desc3}</span>
             </p>
           </div>
           <div className="meta" onClick={onClickDelete ? onClick : null}>

@@ -94,8 +94,10 @@ export default class SysDashboardView extends React.Component {
       <AppletCard
         key={server.id}
         color={colors[i % colors.length]}
-        name={server.templateName}
+        name={server.templateName || 'Unknown'}
         desc={server.name}
+        desc2={server.wanip || server.lanip || ''}
+        desc3={server.hostname || 'Unknown'}
         img={`${extImageBaseUrl}${server.image}`}
         onClick={() => this.onClickServer(server)}
         onClickDelete={() => this.onClickDeleteServer(server)}
