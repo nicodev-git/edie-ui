@@ -3,6 +3,7 @@ import { assign } from 'lodash'
 
 import DeviceEditWizardContainer from 'containers/shared/wizard/DeviceEditWizardContainer'
 import { deviceTypeMap } from 'components/common/wizard/WizardConfig'
+import RefreshOverlay from 'components/common/RefreshOverlay'
 
 export default class Info extends React.Component {
   componentDidMount () {
@@ -13,13 +14,20 @@ export default class Info extends React.Component {
     this.props.updateMapDevice(device)
   }
 
+  renderOverlay () {
+    const {device, installAgents} = this.props
+    let installAgent = installAgents.filter(a => a.id === device.id)
+    installAgent = installAgent.length ? installAgent[0] : null
+    const installing = installAgent && installAgent.status === 'installing'
+    if (!installing) return null
+    return <RefreshOverlay/>
+  }
+
   render () {
     const {device} = this.props
 
-    let type = deviceTypeMap[device.type] || device.type || 'custom'
-    let extraParams = {
-
-    }
+    const type = deviceTypeMap[device.type] || device.type || 'custom'
+    const extraParams = {}
 
     return (
       <div>
@@ -32,6 +40,7 @@ export default class Info extends React.Component {
           extraParams={extraParams}
           onFinish={this.onFinish.bind(this)}
         />
+        {this.renderOverlay()}
       </div>
 
     )

@@ -16,7 +16,8 @@ class InfoContainer extends React.Component {
 }
 export default connect(
   state => ({
-    device: state.dashboard.selectedDevice
+    device: state.dashboard.selectedDevice,
+    installAgents: state.settings.installAgents
   }), {
     updateMapDevice,
     updateDeviceCreds
