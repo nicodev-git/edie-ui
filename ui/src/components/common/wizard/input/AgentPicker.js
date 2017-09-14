@@ -29,7 +29,11 @@ export default class AgentPicker extends React.Component {
 
   getDeviceCreds () {
     const { editDevice, credentials } = this.props
-    return credentials.filter(p => !p.global && p.deviceIds && p.deviceIds.indexOf(editDevice.id) >= 0)
+    const type = isWindowsDevice(editDevice) ? 'WINDOWS' : 'SSH'
+    return credentials.filter(p =>
+      (!p.global && p.deviceIds && p.deviceIds.indexOf(editDevice.id) >= 0) ||
+      (p.global && p.default && p.type === type)
+    )
   }
 
   onCloseCredPicker (props) {

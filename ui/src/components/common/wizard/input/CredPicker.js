@@ -35,7 +35,7 @@ export default class CredPicker extends React.Component {
     return credentials.filter(p => p.global && p.isDefault)
   }
   render () {
-    const credentials = this.getCredentials()
+    const credentials = []//this.getCredentials()
     return (
       <div style={{maxHeight: 300, overflow: 'auto'}}>
         <table className="table table-hover">

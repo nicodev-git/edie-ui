@@ -272,7 +272,11 @@ class DeviceEditWizard extends React.Component {
 
   getDeviceCreds () {
     const { selectedDevice, credentials } = this.props
-    return credentials.filter(p => !p.global && p.deviceIds && p.deviceIds.indexOf(selectedDevice.id) >= 0)
+    const type = isWindowsDevice(selectedDevice) ? 'WINDOWS' : 'SSH'
+    return credentials.filter(p =>
+      (!p.global && p.deviceIds && p.deviceIds.indexOf(selectedDevice.id) >= 0) ||
+      (p.global && p.default && p.type === type)
+    )
   }
 
   onClickInstall () {
