@@ -97,7 +97,7 @@ export default class SysDashboardView extends React.Component {
         name={server.templateName || 'Unknown'}
         desc={server.name}
         desc2={server.wanip || server.lanip || ''}
-        desc3={server.hostname || 'Unknown'}
+        desc3={server.hostname || (server.agent ? server.agent.host : '') || 'Unknown'}
         img={`${extImageBaseUrl}${server.image}`}
         onClick={() => this.onClickServer(server)}
         onClickDelete={() => this.onClickDeleteServer(server)}
