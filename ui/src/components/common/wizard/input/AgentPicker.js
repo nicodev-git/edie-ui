@@ -82,6 +82,8 @@ export default class AgentPicker extends React.Component {
     }))
 
     let agentLabel = 'Agent'
+    if (agent && (new Date().getTime() - agent.lastSeen) > 3 * 60 * 1000) agent = null
+
     if (!agent) {
       let installAgent = installAgents.filter(a => a.id === editDevice.id)
       installAgent = installAgent.length ? installAgent[0] : null

@@ -10,14 +10,14 @@ export default class CredPicker extends React.Component {
     const typeOptions = credentialTypes.map(p => ({label: p.name, value: p.name}))
     return (
       <div className="flex-horizontal">
-        <div style={{paddingTop: 16}}>
+        <div>
           <RadioButtonGroup name="credentialSelect" defaultSelected="existing" onChange={(e, value) => onChangeCredential(value)}>
             <RadioButton value="" label="None"/>
-            <RadioButton value="existing" label="Existing"/>
+            <RadioButton value="existing" label="Existing" style={{marginTop: 30}}/>
             <RadioButton value="new" label="New" style={{marginTop: 30}} />
           </RadioButtonGroup>
         </div>
-        <div className="flex-1" style={{paddingLeft: 16}}>
+        <div className="flex-1" style={{paddingLeft: 16, paddingTop: 36}}>
           <div>
             <Field name="credentialId" component={FormSelect} className="valign-top mr-dialog" options={options} floatingLabel="Credential" style={{marginTop: -20}}/>
           </div>
