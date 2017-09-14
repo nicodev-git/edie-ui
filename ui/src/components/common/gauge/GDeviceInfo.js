@@ -15,7 +15,8 @@ export default class GDeviceInfo extends React.Component {
       disk: null,
       os: null,
       hostname: '',
-      lastRequest: new Date().getTime()
+      lastRequest: new Date().getTime(),
+      up: false
     }
     this.renderBackView = this.renderBackView.bind(this)
     this.renderFrontView = this.renderFrontView.bind(this)
@@ -32,13 +33,7 @@ export default class GDeviceInfo extends React.Component {
     this.monitorSocket && this.monitorSocket.close()
   }
 
-  onSocketOpen () {
-    this.monitorSocket.send({
-      action: 'enable-realtime',
-      monitors: 'basic',
-      deviceId: this.getDeviceId()
-    })
-
+  sendHostNameCmd () {
     this.monitorSocket.send({
       action: 'command',
       deviceId: this.getDeviceId(),
@@ -52,6 +47,16 @@ export default class GDeviceInfo extends React.Component {
     })
   }
 
+  onSocketOpen () {
+    this.monitorSocket.send({
+      action: 'enable-realtime',
+      monitors: 'basic',
+      deviceId: this.getDeviceId()
+    })
+
+    this.sendHostNameCmd()
+  }
+
   onMonitorMessage (msg) {
     if (msg.action === 'update' && msg.deviceId === this.getDeviceId()) {
       const {cpu, memory, disk, os, commandResult} = msg.data
@@ -63,6 +68,11 @@ export default class GDeviceInfo extends React.Component {
       if (commandResult && !this.state.hostname) state.hostname = commandResult
 
       state.loading = false
+      state.up = true
+
+      if (!this.state.up) {
+        this.sendHostNameCmd()
+      }
 
       this.setState(state)
     }
@@ -95,7 +105,7 @@ export default class GDeviceInfo extends React.Component {
 
     const {cpu, memory, disk, os, hostname} = this.state
 
-    const up = device.agent && (new Date().getTime() - device.agent.lastSeen) < 3 * 60 * 1000
+    const up = this.state.up || (device.agent && (new Date().getTime() - device.agent.lastSeen) < 3 * 60 * 1000)
 
     if (up) {
       const cpuValue = cpu ? `${cpu.length ? cpu[0].Usage : cpu.Usage}%` : ''

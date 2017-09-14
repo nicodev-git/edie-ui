@@ -13,7 +13,8 @@ export default class GDeviceBasic extends React.Component {
       loading: false,
       memory: null,
       cpu: null,
-      disk: null
+      disk: null,
+      up: false
     }
     this.renderBackView = this.renderBackView.bind(this)
     this.renderFrontView = this.renderFrontView.bind(this)
@@ -46,6 +47,7 @@ export default class GDeviceBasic extends React.Component {
       if (memory) state.memory = memory
       if (disk) state.disk = disk && disk.length && disk[0].Drives ? disk[0].Drives[0] : null
       state.loading = false
+      state.up = true
 
       this.setState(state)
     }
@@ -77,7 +79,7 @@ export default class GDeviceBasic extends React.Component {
 
     if (!device) return <div />
 
-    const up = device.agent && (new Date().getTime() - device.agent.lastSeen) < 3 * 60 * 1000
+    const up = this.state.up || (device.agent && (new Date().getTime() - device.agent.lastSeen) < 3 * 60 * 1000)
 
     if (up) {
       const {cpu, memory, disk} = this.state
