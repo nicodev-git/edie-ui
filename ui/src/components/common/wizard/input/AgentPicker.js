@@ -40,6 +40,10 @@ export default class AgentPicker extends React.Component {
         global: false,
         deviceIds: [editDevice.id]
       })
+
+      setTimeout(() => {
+        this.props.installAgent(this.props.editDevice)
+      }, 100)
     }
     this.props.showDeviceCredsPicker(false)
   }

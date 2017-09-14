@@ -13,7 +13,9 @@ import {
   fetchMonitorGroups,
   fetchCollectors,
 
-  installAgent
+  installAgent,
+
+  updateMapDevice
 } from 'actions'
 
 class DeviceEditModalContainer extends React.Component {
@@ -53,6 +55,8 @@ export default connect(
     fetchMonitorGroups,
     fetchCollectors,
 
-    installAgent
+    installAgent,
+
+    updateMapDevice
   }
 )(DeviceEditModalContainer)

@@ -16,7 +16,6 @@ import DeviceEditModalView from './DeviceEditModalView'
 import TagsView from './input/TagsView'
 import CredPickerInput from './input/CredPicker'
 import AgentPicker from './input/AgentPicker'
-import CredPicker from 'containers/settings/credentials/CredsPickerContainer'
 import {showAlert} from 'components/common/Alert'
 import {CardPanel} from 'components/modal/parts'
 
@@ -313,18 +312,6 @@ class DeviceEditModal extends React.Component {
     this.setState({ current })
   }
 
-  onCloseCredPicker (selected) {
-    if (selected) {
-      const {selectedDevice} = this.props
-      const props = {
-        ...selectedDevice,
-        credentials: [selected]
-      }
-      this.props.updateMapDevice(props)
-    }
-    this.props.showDeviceCredsPicker(false)
-  }
-
   renderParamEditModal () {
     if (!this.props.paramEditModalOpen) return null
     return (
@@ -335,13 +322,6 @@ class DeviceEditModal extends React.Component {
   renderTags () {
     return (
       <TagsView {...this.props}/>
-    )
-  }
-
-  renderCredPicker () {
-    if (!this.props.deviceCredsPickerVisible) return null
-    return (
-      <CredPicker onClose={this.onCloseCredPicker.bind(this)}/>
     )
   }
 
@@ -366,7 +346,6 @@ class DeviceEditModal extends React.Component {
         onNext={this.onClickNext.bind(this)}
         onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
         canAddTags={canAddTags}
-        credPicker={this.renderCredPicker()}
       />
     )
   }
