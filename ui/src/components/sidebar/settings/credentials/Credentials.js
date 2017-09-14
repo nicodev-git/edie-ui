@@ -1,5 +1,5 @@
 import React from 'react'
-import {RaisedButton} from 'material-ui'
+import {RaisedButton, Chip} from 'material-ui'
 
 import InfiniteTable from 'components/common/InfiniteTable'
 import { showAlert, showConfirm } from 'components/common/Alert'
@@ -12,6 +12,7 @@ import TabPageBody from 'components/common/TabPageBody'
 import TabPageHeader from 'components/common/TabPageHeader'
 
 import UserTabs from '../users/UserTabs'
+import { chipStyles } from 'style/common/materialStyles'
 
 export default class Credentials extends React.Component {
   constructor (props) {
@@ -38,10 +39,15 @@ export default class Credentials extends React.Component {
         return <span>{p.data ? 'Yes' : 'No'}</span>
       }
     }, {
-      'displayName': 'Default',
+      'displayName': '',
       'columnName': 'default',
       'customComponent': p => {
-        return <span>{p.data ? 'Yes' : ''}</span>
+        if (!p.data) return <span/>
+        return (
+          <div style={chipStyles.wrapper}>
+            <Chip style={chipStyles.chip}>{p.rowData.type}&nbsp;Default</Chip>
+          </div>
+        )
       }
     }]
   }
