@@ -338,6 +338,83 @@ export const wizardConfig = {
     }]
   },
 
+  'linux-edit': {
+    title: 'Custom',
+    width: POPUP_WIDTH_SM,
+    server: {
+      url: '/device',
+      params: {
+        type: 'Custom Device'
+      }
+    },
+    steps: [{
+      title: 'Settings',
+      panels: [{
+        title: 'Basic',
+        items: [{
+          type: 'text',
+          label: {
+            text: 'Name',
+            type: 'attach',
+            width: 3
+          },
+          width: MAX_WIDTH,
+          required: true,
+          name: 'name'
+        }, {
+          type: 'combo',
+          label: {
+            text: 'Distribution',
+            width: 3
+          },
+          items: commonconfig.distribution.values,
+          width: MAX_WIDTH,
+          required: true,
+          name: 'distribution'
+        }, {
+          type: 'text',
+          label: {
+            text: 'IP',
+            type: 'attach',
+            width: 3
+          },
+          width: MAX_WIDTH,
+          name: 'wanip'
+        }]
+      }, {
+        title: 'Agent',
+        items: [{
+          type: 'agentpicker'
+        }]
+      }],
+    }, {
+      title: 'Monitors',
+      panels: [{
+        skip: true,
+        items: [{
+          type: 'monitors',
+          title: 'Monitors'
+        }]
+      }]
+
+    }, {
+      title: 'Advanced',
+      panels: [{
+        title: 'Advanced',
+        items: [{
+          type: 'text',
+          label: {
+            text: 'LAN IP',
+            type: 'attach',
+            width: 3
+          },
+          width: MAX_WIDTH,
+          name: 'lanip'
+        }]
+      }]
+    }]
+  },
+
     // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   'usertext': {

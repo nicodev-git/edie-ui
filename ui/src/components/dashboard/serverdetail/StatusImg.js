@@ -1,5 +1,6 @@
 import React from 'react'
 
+import { getDeviceType } from 'components/common/wizard/WizardConfig'
 import DeviceEditModal from 'containers/shared/wizard/DeviceEditModalContainer'
 
 export default class StatusImg extends React.Component {
@@ -17,7 +18,7 @@ export default class StatusImg extends React.Component {
 
     return (
       <DeviceEditModal
-        deviceType="custom-edit"
+        deviceType={`${getDeviceType(editDevice.templateName)}-edit`}
         title={editDevice.name}
         monitors={editDevice.monitors}
         onClose={() => this.props.showDeviceEditModal(false)}
