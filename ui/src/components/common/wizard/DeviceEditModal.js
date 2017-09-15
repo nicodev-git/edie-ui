@@ -10,7 +10,7 @@ import Combo from './input/Combo'
 import MonitorTable from './input/MonitorTable'
 import ParamEditModal from './input/ParamEditModal'
 import ParamList from './input/ParamList'
-import {wizardConfig} from './WizardConfig'
+import {wizardConfig, commonconfig} from './WizardConfig'
 import {util} from './WizardUtil'
 import DeviceEditModalView from './DeviceEditModalView'
 import TagsView from './input/TagsView'
@@ -54,6 +54,19 @@ class DeviceEditModal extends React.Component {
     this.props.fetchCredentials()
     this.props.fetchCredTypes()
     this.props.fetchCollectors()
+  }
+
+  componentDidMount () {
+    this.updateDistribution()
+  }
+
+  updateDistribution () {
+    const {tags} = this.props.editDevice
+    const dists = commonconfig.distribution.values.map(p => p.value)
+    const found = (tags || []).filter(p => dists.includes(p))
+    if (found.length) {
+      this.props.change('distribution', found[0])
+    }
   }
 
   onChangeCredential (value) {
