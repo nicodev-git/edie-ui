@@ -79,22 +79,22 @@ export const commonconfig = {
   distribution: {
     values: [{
       display: 'Red Hat',
-      value: 'redhat'
+      value: 'Red Hat'
     }, {
       display: 'Fedora',
-      value: 'fedora'
+      value: 'Fedora'
     }, {
       display: 'Cent OS',
-      value: 'centos'
+      value: 'Cent OS'
     }, {
       display: 'Ubuntu',
-      value: 'ubuntu'
+      value: 'Ubuntu'
     }, {
       display: 'Debian',
-      value: 'debian'
+      value: 'Debian'
     }, {
       display: 'Kali',
-      value: 'kali'
+      value: 'Kali'
     }]
   }
 }

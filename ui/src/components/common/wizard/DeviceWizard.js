@@ -72,6 +72,7 @@ class DeviceWizard extends Component {
   handleFormSubmit (formProps) {
     const { extraParams, onFinish, editParams, canAddTags, monitorTags } = this.props
     const { monitors, currentDevice } = this.state
+    const {distribution} = formProps
     const params = {}
     if (editParams) {
       editParams.forEach(p => {
@@ -88,7 +89,12 @@ class DeviceWizard extends Component {
         params
       }
     )
+
     if (canAddTags) props.tags = monitorTags || []
+    if (distribution) {
+      props.tags = [...(props.tags || []), distribution]
+    }
+
     if (this.state.credentialSelect === 'existing') {
       const index = findIndex(this.props.credentials, {id: formProps.credentialId})
       if (index >= 0) {
