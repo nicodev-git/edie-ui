@@ -1,7 +1,7 @@
 import React from 'react'
 // import { Field } from 'redux-form'
 // import { RadioButtonGroup, RadioButton } from 'material-ui'
-import {FormSelect, FormInput} from 'components/modal/parts'
+// import {FormSelect, FormInput} from 'components/modal/parts'
 
 export default class CredPicker extends React.Component {
   // render () {

@@ -193,7 +193,8 @@ class DeviceEditModal extends React.Component {
   }
 
   buildCombo (config, values) {
-    return (<Combo config={config}
+    return (<Combo key={config.name}
+                   config={config}
                    values={values}
                    buildLabel={this.buildLabel.bind(this)}/>)
   }

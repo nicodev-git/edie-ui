@@ -13,6 +13,7 @@ import TabPageHeader from 'components/common/TabPageHeader'
 import ServerDetailTab from './ServerDetailTab'
 import StatusImg from './StatusImg'
 import DeviceEditModal from 'containers/shared/wizard/DeviceEditModalContainer'
+import { getDeviceType } from 'components/common/wizard/WizardConfig'
 
 import GaugeMap from 'components/common/gauge/GaugeMap'
 import { getWidgetSize, layoutCols, layoutRowHeight, layoutWidthZoom, layoutHeightZoom } from 'shared/Global'
@@ -104,7 +105,6 @@ export default class MainControl extends React.Component {
   }
 
   onClickFix () {
-    const {editDevice} = this.props
   }
   /////////////////////////////////////////////////////////////////////
 
@@ -188,7 +188,7 @@ export default class MainControl extends React.Component {
 
     return (
       <DeviceEditModal
-        deviceType="custom-edit"
+        deviceType={`${getDeviceType(editDevice.templateName)}-edit`}
         title={editDevice.name}
         monitors={editDevice.monitors}
         onClose={() => this.props.showDeviceEditModal(false)}
