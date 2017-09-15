@@ -60,10 +60,15 @@ class DeviceEditModal extends React.Component {
     this.updateDistribution()
   }
 
-  updateDistribution () {
+  getDistribution () {
     const {tags} = this.props.editDevice
     const dists = commonconfig.distribution.values.map(p => p.value)
     const found = (tags || []).filter(p => dists.includes(p))
+    if (found.length) return found
+    return []
+  }
+  updateDistribution () {
+    const found = this.getDistribution()
     if (found.length) {
       this.props.change('distribution', found[0])
     }
@@ -102,7 +107,13 @@ class DeviceEditModal extends React.Component {
         params
       }
     )
+
     if (canAddTags) props.tags = monitorTags || []
+
+    const oldTags = this.getDistribution()
+    const tags = (props.tags || []).filter(p => !oldTags.includes(p))
+    if (props.distribution) tags.push(props.distribution)
+
     if (this.state.credentialSelect === 'existing') {
       const index = findIndex(this.props.credentials, {id: formProps.credentialId})
       if (index >= 0) {
