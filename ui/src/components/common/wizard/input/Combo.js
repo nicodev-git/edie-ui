@@ -96,7 +96,7 @@ export default class Combo extends React.Component {
     return (
       <Field
         name={config.name}
-        label={config.label ? config.label.text : ''}
+        floatingLabel={config.label ? config.label.text : ''}
         component={FormSelect}
         style={config.style}
         className={`valign-top mr-dialog ${config.cls}`}

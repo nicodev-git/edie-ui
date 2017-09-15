@@ -9,6 +9,8 @@ export const deviceTypeMap = {
   'DR Site': 'group',
   'Partners': 'group',
 
+  'Linux Server': 'linux',
+
   'Long hub': 'longhub',
   'Free Text': 'usertext'
 }
@@ -73,6 +75,27 @@ export const commonconfig = {
       value: 'true'
     }],
     name: 'disabled'
+  },
+  distribution: {
+    values: [{
+      display: 'Red Hat',
+      value: 'redhat'
+    }, {
+      display: 'Fedora',
+      value: 'fedora'
+    }, {
+      display: 'Cent OS',
+      value: 'centos'
+    }, {
+      display: 'Ubuntu',
+      value: 'ubuntu'
+    }, {
+      display: 'Debian',
+      value: 'debian'
+    }, {
+      display: 'Kali',
+      value: 'kali'
+    }]
   }
 }
 
@@ -127,6 +150,83 @@ export const wizardConfig = {
           width: MAX_WIDTH,
           required: true,
           name: 'name'
+        }, {
+          type: 'text',
+          label: {
+            text: 'IP',
+            type: 'attach',
+            width: 3
+          },
+          width: MAX_WIDTH,
+          name: 'wanip'
+        }]
+      }, {
+        title: 'Credentials',
+        items: [{
+          type: 'credpicker'
+        }]
+      }],
+    }, {
+      title: 'Monitors',
+      panels: [{
+        skip: true,
+        items: [{
+          type: 'monitors',
+          title: 'Monitors'
+        }]
+      }]
+
+    }, {
+      title: 'Advanced',
+      panels: [{
+        title: 'Advanced',
+        items: [{
+          type: 'text',
+          label: {
+            text: 'LAN IP',
+            type: 'attach',
+            width: 3
+          },
+          width: MAX_WIDTH,
+          name: 'lanip'
+        }]
+      }]
+    }]
+  },
+
+  'linux': {
+    title: 'Custom',
+    width: POPUP_WIDTH_SM,
+    server: {
+      url: '/device',
+      params: {
+        type: 'Custom Device'
+      }
+    },
+    steps: [{
+      title: 'Settings',
+      panels: [{
+        title: 'Basic',
+        items: [{
+          type: 'text',
+          label: {
+            text: 'Name',
+            type: 'attach',
+            width: 3
+          },
+          width: MAX_WIDTH,
+          required: true,
+          name: 'name'
+        }, {
+          type: 'combo',
+          label: {
+            text: 'Distribution',
+            width: 3
+          },
+          items: commonconfig.distribution.values,
+          width: MAX_WIDTH,
+          required: true,
+          name: 'distribution'
         }, {
           type: 'text',
           label: {
