@@ -113,6 +113,7 @@ class DeviceEditModal extends React.Component {
     const oldTags = this.getDistribution()
     const tags = (props.tags || []).filter(p => !oldTags.includes(p))
     if (props.distribution) tags.push(props.distribution)
+    props.tags = tags
 
     if (this.state.credentialSelect === 'existing') {
       const index = findIndex(this.props.credentials, {id: formProps.credentialId})
