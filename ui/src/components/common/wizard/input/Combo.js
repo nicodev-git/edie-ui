@@ -3,7 +3,7 @@ import { Field } from 'redux-form'
 import axios from 'axios'
 
 import {FormSelect} from 'components/modal/parts'
-
+import {required} from 'components/modal/validation/CommonValidation'
 import {ROOT_URL} from 'actions/config'
 
 export default class Combo extends React.Component {
@@ -93,6 +93,8 @@ export default class Combo extends React.Component {
   render () {
     const {config} = this.props
     const {options} = this.state
+    const validate = []
+    if (config.required) validate.push(required)
     return (
       <Field
         name={config.name}
@@ -103,6 +105,7 @@ export default class Combo extends React.Component {
         disabled={config.disabled}
         options={options}
         defaultValue={options.length ? options[0].value : null}
+        validate={validate}
       />
     )
   }
