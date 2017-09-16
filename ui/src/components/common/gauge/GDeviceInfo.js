@@ -73,7 +73,6 @@ export default class GDeviceInfo extends React.Component {
       if (commandResult && !this.state.hostname) state.hostname = commandResult
 
       state.loading = false
-      state.up = true
 
       if (!this.state.up) {
         this.sendHostNameCmd()
