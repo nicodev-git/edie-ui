@@ -221,6 +221,11 @@ export const isWindowsDevice = (device) => {
   return device && device.templateName === 'Windows Server'
 }
 
+export const isAgentUp = device => {
+  if (!device.agentType) return false
+  return device.agent && (new Date().getTime() - device.agent.lastSeen) < 3 * 60 * 1000
+}
+
 export const roleOptions = [
   {value: 'ADMIN', label: 'Admin'},
   {value: 'USER', label: 'User'}
