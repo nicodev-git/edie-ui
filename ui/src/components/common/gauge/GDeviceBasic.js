@@ -6,6 +6,8 @@ import Speedometer from './display/Speedometer'
 import NoDataPanel from './NoDataPanel'
 import MonitorSocket from 'util/socket/MonitorSocket'
 
+import {checkAgentUp} from 'shared/Global'
+
 export default class GDeviceBasic extends React.Component {
   constructor (props) {
     super (props)
@@ -25,6 +27,9 @@ export default class GDeviceBasic extends React.Component {
       listener: this.onMonitorMessage.bind(this)
     })
     this.monitorSocket.connect(this.onSocketOpen.bind(this))
+    checkAgentUp(this.getDeviceId(), up => {
+      this.setState({up})
+    })
   }
 
   componentWillUnmount () {
@@ -79,7 +84,7 @@ export default class GDeviceBasic extends React.Component {
 
     if (!device) return <div />
 
-    const up = this.state.up || (device.agent && (new Date().getTime() - device.agent.lastSeen) < 3 * 60 * 1000)
+    const up = this.state.up
 
     if (up) {
       const {cpu, memory, disk} = this.state

@@ -1,8 +1,9 @@
 import React from 'react'
-import axios from 'axios'
 
 import { getDeviceType } from 'components/common/wizard/WizardConfig'
 import DeviceEditModal from 'containers/shared/wizard/DeviceEditModalContainer'
+
+import {checkAgentUp} from 'shared/Global'
 
 export default class StatusImg extends React.Component {
   constructor (props) {
@@ -20,7 +21,9 @@ export default class StatusImg extends React.Component {
   }
 
   componentWillMount () {
-    axios.get('')
+    checkAgentUp(this.props.device.id, up => {
+      this.setState({up})
+    })
   }
 
   ///////////////////////////////////////////
@@ -42,7 +45,7 @@ export default class StatusImg extends React.Component {
   render () {
     const {device, onClickFix} = this.props
     if (!device) return null
-    const up = device.agent && (new Date().getTime() - device.agent.lastSeen) < 3 * 60 * 1000
+    const {up} = this.state
     if (up) return null
     return (
       <span className="valign-middle margin-md-left">

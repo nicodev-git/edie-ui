@@ -5,6 +5,8 @@ import FlipView from './FlipView'
 import NoDataPanel from './NoDataPanel'
 import MonitorSocket from 'util/socket/MonitorSocket'
 
+import {checkAgentUp} from 'shared/Global'
+
 export default class GDeviceInfo extends React.Component {
   constructor (props) {
     super (props)
@@ -27,6 +29,9 @@ export default class GDeviceInfo extends React.Component {
       listener: this.onMonitorMessage.bind(this)
     })
     this.monitorSocket.connect(this.onSocketOpen.bind(this))
+    checkAgentUp(this.getDeviceId(), up => {
+      this.setState({up})
+    })
   }
 
   componentWillUnmount () {
@@ -105,7 +110,7 @@ export default class GDeviceInfo extends React.Component {
 
     const {cpu, memory, disk, os, hostname} = this.state
 
-    const up = this.state.up || (device.agent && (new Date().getTime() - device.agent.lastSeen) < 3 * 60 * 1000)
+    const up = this.state.up
 
     if (up) {
       const cpuValue = cpu ? `${cpu.length ? cpu[0].Usage : cpu.Usage}%` : ''
