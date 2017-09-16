@@ -1,14 +1,26 @@
 import React from 'react'
+import axios from 'axios'
 
 import { getDeviceType } from 'components/common/wizard/WizardConfig'
 import DeviceEditModal from 'containers/shared/wizard/DeviceEditModalContainer'
 
 export default class StatusImg extends React.Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      up: false
+    }
+
+  }
   onClickFix () {
     this.props.showDeviceEditModal(true, this.props.device)
   }
   onFinishEdit (device) {
     this.props.updateMapDevice(device)
+  }
+
+  componentWillMount () {
+    axios.get('')
   }
 
   ///////////////////////////////////////////

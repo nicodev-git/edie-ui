@@ -1,6 +1,8 @@
 import moment from 'moment'
 import React from 'react'
 import {reduce, isNull, isUndefined, isArray, assign} from 'lodash'
+import axios from 'axios'
+
 import { ROOT_URL } from 'actions/config'
 import WarningIcon from 'material-ui/svg-icons/alert/warning'
 import DescriptionIcon from 'material-ui/svg-icons/action/description'
@@ -391,3 +393,6 @@ export function cybertronRenderInfo (item) {
   return {imgUrl, desc, date}
 }
 
+export function checkAgentUp (id, cb) {
+  axios.get(`${ROOT_URL}/`)
+}
