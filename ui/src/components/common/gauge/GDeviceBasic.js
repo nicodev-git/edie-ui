@@ -51,7 +51,7 @@ export default class GDeviceBasic extends React.Component {
       if (cpu) state.cpu = cpu
       if (memory) state.memory = memory
       if (disk) state.disk = disk && disk.length && disk[0].Drives ? disk[0].Drives[0] : null
-      state.loading = false\
+      state.loading = false
 
       this.setState(state)
     }
