@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 import {RaisedButton} from 'material-ui'
 
 import { Modal } from 'components/modal/parts'
+import RefreshOverlay from 'components/common/RefreshOverlay'
 
 export default class DetailLogModalView extends React.Component {
   onRefRow (ref) {
@@ -28,14 +29,15 @@ export default class DetailLogModalView extends React.Component {
   }
 
   render () {
-    const {onHide, onClickPrev, onClickNext} = this.props
+    const {onHide, onClickPrev, onClickNext, loading} = this.props
     return (
       <Modal title="Log" onRequestClose={onHide} contentStyle={{width: '90%', maxWidth: 'initial'}}>
-        <div>
-          <RaisedButton label="Prev" onTouchTap={onClickPrev}/>
-          <RaisedButton label="Next" onTouchTap={onClickNext}/>
+        <div style={{position: 'absolute', top: 11, width: '100%', textAlign: 'center'}}>
+          <RaisedButton label="Prev" onTouchTap={onClickPrev} disabled={loading}/>&nbsp;
+          <RaisedButton label="Next" onTouchTap={onClickNext} disabled={loading}/>
         </div>
         {this.renderTable()}
+        {loading && <RefreshOverlay/>}
       </Modal>
     )
   }

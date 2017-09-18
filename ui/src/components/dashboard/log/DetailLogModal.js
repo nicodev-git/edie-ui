@@ -12,7 +12,8 @@ export default class DetailLogModal extends React.Component {
     super(props)
     this.state = {
       data: [],
-      page: 0
+      page: 0,
+      loading: true
     }
   }
 
@@ -39,7 +40,7 @@ export default class DetailLogModal extends React.Component {
       const data1 = reverse(this.getData(res[0].data))
       const data2 = this.getData(res[1].data)
 
-      this.setState({data: [...data1, ...data2]})
+      this.setState({data: [...data1, ...data2], loading: false})
     })
   }
 
@@ -49,13 +50,15 @@ export default class DetailLogModal extends React.Component {
 
   onClickPrev () {
     this.setState({
-      page: this.state.page - 1
+      page: this.state.page - 1,
+      loading: true
     })
   }
 
   onClickNext () {
     this.setState({
-      page: this.state.page + 1
+      page: this.state.page + 1,
+      loading: true
     })
   }
 
@@ -65,6 +68,7 @@ export default class DetailLogModal extends React.Component {
         onHide={this.onHide.bind(this)}
         rowId={this.props.detailLogViewParam.rowId}
         items={this.state.data}
+        loading={this.state.loading}
         onClickPrev={this.onClickPrev.bind(this)}
         onClickNext={this.onClickNext.bind(this)}
       />
