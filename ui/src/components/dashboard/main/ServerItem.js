@@ -11,18 +11,26 @@ export default class ServerItem extends React.Component {
     }
   }
   componentWillMount () {
-    checkAgentUp(this.props.server.id, up => {
-      this.setState({up})
-    })
+    // checkAgentUp(this.props.server.id, up => {
+    //   this.setState({up})
+    // })
   }
 
   renderRightIcons () {
+    const {lastSeen, agentType, agent} = this.props.server
+    if (!agentType) return null
+    const now = new Date().getTime()
+    if (agentType === 'agent') {
+      if (agent && (now - agent.lastSeen) < 3 * 60 * 1000) return null
+    } else if (agentType === 'collector') {
+      if ((now - lastSeen) < 3 * 60 * 1000) return null
+    }
     return (
       <img
         src="/resources/images/dashboard/bell.png"
         alt=""
         width={20}
-        className="valign-middle margin-sm-right"
+        className="valign-middle"
       />
     )
   }
