@@ -2,10 +2,9 @@ import React from 'react'
 import {IconButton, IconMenu, MenuItem} from 'material-ui'
 import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
 
-import AppletCard from 'components/common/AppletCard'
-import { extImageBaseUrl, appletColors as colors } from 'shared/Global'
 import { wizardConfig, getDeviceType } from 'components/common/wizard/WizardConfig'
 import DeviceWizardContainer from 'containers/shared/wizard/DeviceWizardContainer'
+import ServerItem from './ServerItem'
 
 import { showAlert, showConfirm } from 'components/common/Alert'
 
@@ -91,14 +90,10 @@ export default class SysDashboardView extends React.Component {
 
   renderServer (server, i) {
     return (
-      <AppletCard
+      <ServerItem
         key={server.id}
-        color={colors[i % colors.length]}
-        name={server.templateName || 'Unknown'}
-        desc={server.name}
-        desc2={server.wanip || server.lanip || ''}
-        desc3={server.hostname || (server.agent ? server.agent.host : '') || 'Unknown'}
-        img={`${extImageBaseUrl}${server.image}`}
+        server={server}
+        index={i}
         onClick={() => this.onClickServer(server)}
         onClickDelete={() => this.onClickDeleteServer(server)}
       />
