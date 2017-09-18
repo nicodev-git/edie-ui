@@ -31,7 +31,11 @@ export default class AppletCard extends React.Component {
     })
   }
   render () {
-    const {name, desc, desc2, desc3, img, color, className, onClick, onClickDelete, onClickEdit, onClickView} = this.props
+    const {
+      name, desc, desc2, desc3, img, color, className,
+      rightIcons,
+      onClick, onClickDelete, onClickEdit, onClickView
+    } = this.props
     const {hovered} = this.state
     return (
       <li className={`web-applet-card small ${className}`} onClick={onClickDelete ? null : onClick}>
@@ -59,6 +63,7 @@ export default class AppletCard extends React.Component {
           <div className="meta" onClick={onClickDelete ? onClick : null}>
             {name}&nbsp;
             <div style={editButtonStyle}>
+              {rightIcons}
               {onClickView && <ViewIcon size={32} color="white" onTouchTap={onClickView}/>}
               {onClickEdit && <EditIcon size={32} color="white" onTouchTap={onClickEdit}/>}
             </div>

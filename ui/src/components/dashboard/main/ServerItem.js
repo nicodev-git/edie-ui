@@ -17,7 +17,14 @@ export default class ServerItem extends React.Component {
   }
 
   renderRightIcons () {
-    return null
+    return (
+      <img
+        src="/resources/images/dashboard/bell.png"
+        alt=""
+        width={20}
+        className="valign-middle margin-sm-right"
+      />
+    )
   }
 
   render () {
