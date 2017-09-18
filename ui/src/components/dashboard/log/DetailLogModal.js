@@ -11,7 +11,8 @@ export default class DetailLogModal extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      data: []
+      data: [],
+      page: 0
     }
   }
 
@@ -47,11 +48,15 @@ export default class DetailLogModal extends React.Component {
   }
 
   onClickPrev () {
-
+    this.setState({
+      page: this.state.page - 1
+    })
   }
 
   onClickNext () {
-
+    this.setState({
+      page: this.state.page + 1
+    })
   }
 
   render () {
