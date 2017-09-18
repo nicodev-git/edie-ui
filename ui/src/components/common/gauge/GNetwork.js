@@ -89,14 +89,6 @@ export default class GNetwork extends React.Component {
   onClickDelete () {
     this.props.removeDeviceGauge(this.props.gauge, this.props.device)
   }
-
-  getApps () {
-    // const {gauge} = this.props
-    const {apps} = this.state
-    // const dateFrom = moment().add(-gauge.duration, `${gauge.durationUnit}s`).startOf('day').valueOf()
-    // return apps.filter(p => moment(p.InstallDate, 'YYYY-MM-DD').valueOf() >= dateFrom)
-    return apps
-  }
   getTitle () {
     const {gauge} = this.props
     const devices = this.props.allDevices || this.props.devices
