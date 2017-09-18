@@ -1,21 +1,9 @@
 import React from 'react'
 
 import AppletCard from 'components/common/AppletCard'
-import { extImageBaseUrl, appletColors as colors, checkAgentUp } from 'shared/Global'
+import { extImageBaseUrl, appletColors as colors } from 'shared/Global'
 
 export default class ServerItem extends React.Component {
-  constructor (props) {
-    super(props)
-    this.state = {
-      up: true
-    }
-  }
-  componentWillMount () {
-    // checkAgentUp(this.props.server.id, up => {
-    //   this.setState({up})
-    // })
-  }
-
   renderRightIcons () {
     const {lastSeen, agentType, agent} = this.props.server
     if (!agentType) return null
