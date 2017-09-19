@@ -9,33 +9,22 @@ export default class StatusImg extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      up: false
+      up: false,
+      info: ''
     }
 
   }
   onClickFix () {
     const {device} = this.props.device
-    if (!device.agentType) {
-      this.props.showDeviceEditModal(true, this.props.device)
-      return
-    }
-    if (device.agentType === 'agent') {
-      if (!device.agent) {
-        this.props.showDeviceEditModal(true, this.props.device)
-        return;
-      }
-      showAlert('Please check credentials')
-    } else {
-
-    }
+    this.props.showDeviceEditModal(true, this.props.device)
   }
   onFinishEdit (device) {
     this.props.updateMapDevice(device)
   }
 
   componentWillMount () {
-    checkAgentUp(this.props.device.id, up => {
-      this.setState({up})
+    checkAgentUp(this.props.device.id, (up, info) => {
+      this.setState({up, info})
     })
   }
 
@@ -58,7 +47,7 @@ export default class StatusImg extends React.Component {
   render () {
     const {device, onClickFix} = this.props
     if (!device) return null
-    const {up} = this.state
+    const {up, info} = this.state
     if (up) return null
     return (
       <span className="valign-middle margin-md-left">
@@ -68,7 +57,7 @@ export default class StatusImg extends React.Component {
           width={24}
           className="valign-middle margin-sm-right"
           style={{marginTop: -3}}/>
-        No Agent/Collector not defined
+        {info}
         <span className="link margin-md-left text-primary" onClick={onClickFix || this.onClickFix.bind(this)}>Fix</span>
 
         {this.renderDeviceEditModal()}
