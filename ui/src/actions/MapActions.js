@@ -312,7 +312,9 @@ export const addMapDevice = (props, url) => {
     fetchWorkflowIds(props.workflowids, workflowids => {
       axios.post(`${ROOT_URL}${url || '/device'}`, assign({}, props, {workflowids})).then(response => {
         addMapDeviceSuccess(dispatch, response)
-        dispatch(addDeviceCredential(props.credential, response.data.id))
+        props.credential.forEach(p => {
+          dispatch(addDeviceCredential(p, response.data.id))
+        })
       }).catch(error => apiError(dispatch, error))
     })
   }
