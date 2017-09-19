@@ -2,6 +2,7 @@ import React from 'react'
 // import { Field } from 'redux-form'
 // import { RadioButtonGroup, RadioButton } from 'material-ui'
 // import {FormSelect, FormInput} from 'components/modal/parts'
+import { CardPanel } from 'components/modal/parts'
 
 export default class CredPicker extends React.Component {
   // render () {
@@ -38,31 +39,34 @@ export default class CredPicker extends React.Component {
     return credentials.filter(p => p.global && p.isDefault)
   }
   render () {
-    const credentials = this.state.deviceCredentials
+    const {config} = this.props
+    const credentials = this.props.deviceCredentials
     return (
-      <div style={{maxHeight: 300, overflow: 'auto'}}>
-        <table className="table table-hover">
-          <thead>
-          <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Description</th>
-            <th>User</th>
-            <th />
-          </tr>
-          </thead>
-          <tbody>
-          {credentials.map((p, i) =>
-            <tr key={p.id}>
-              <td>{p.name}</td>
-              <td>{p.type}</td>
-              <td>{p.description}</td>
-              <td>{p.username}</td>
+      <CardPanel title="Credentials">
+        <div style={{maxHeight: 300, overflow: 'auto'}}>
+          <table className="table table-hover">
+            <thead>
+            <tr>
+              <th>Name</th>
+              <th>Type</th>
+              <th>Description</th>
+              <th>User</th>
+              <th />
             </tr>
-          )}
-          </tbody>
-        </table>
-      </div>
+            </thead>
+            <tbody>
+            {credentials.map((p, i) =>
+              <tr key={p.id}>
+                <td>{p.name}</td>
+                <td>{p.type}</td>
+                <td>{p.description}</td>
+                <td>{p.username}</td>
+              </tr>
+            )}
+            </tbody>
+          </table>
+        </div>
+      </CardPanel>
     )
   }
 }

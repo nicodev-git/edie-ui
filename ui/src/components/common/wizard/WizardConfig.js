@@ -162,6 +162,7 @@ export const wizardConfig = {
         }]
       }, {
         title: 'Credentials',
+        skip: true,
         items: [{
           type: 'credpicker'
         }]
@@ -239,6 +240,7 @@ export const wizardConfig = {
         }]
       }, {
         title: 'Credentials',
+        skip: true,
         items: [{
           type: 'credpicker'
         }]

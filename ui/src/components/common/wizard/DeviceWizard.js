@@ -200,9 +200,14 @@ class DeviceWizard extends Component {
   }
 
   buildCombo (config, values) {
-    return (<Combo config={config}
-      values={values}
-      buildLabel={this.buildLabel.bind(this)}/>)
+    return (
+      <Combo
+        key={config.name}
+        config={config}
+        values={values}
+        buildLabel={this.buildLabel.bind(this)}
+      />
+    )
   }
 
   buildCheck (config, values) {
