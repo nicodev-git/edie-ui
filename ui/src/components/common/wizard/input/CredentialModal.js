@@ -26,7 +26,9 @@ class CredentialModal extends Component {
       {name: 'User Name'},
       {name: 'Password'},
       {name: 'Type', type: 'select', options: credentialTypes.map(t => ({label: t.name, value: t.name}))},
-      {name: 'Description'}
+      {name: 'Description'},
+      {name: 'Global', type: 'checkbox'},
+      {name: 'Default', type: 'checkbox'}
     ]
 
     return (
@@ -44,6 +46,6 @@ class CredentialModal extends Component {
 
 export default connect(
   state => ({
-    initialValues: {global: true, ...state.settings.editCredentials}
+    initialValues: {...state.settings.editCredentials}
   })
 )(reduxForm({form: 'credentialsEditForm'})(CredentialModal))
