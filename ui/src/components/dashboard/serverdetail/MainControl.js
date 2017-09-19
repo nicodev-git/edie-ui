@@ -211,7 +211,7 @@ export default class MainControl extends React.Component {
       <TabPage>
         <TabPageHeader
           title={device.name}
-          titleOptions={<StatusImg showDeviceEditModal={this.props.showDeviceEditModal} device={this.getDevice()}/>}
+          titleOptions={<StatusImg {...this.props} device={this.getDevice()}/>}
           useToolBar>
           <ToolbarGroup firstChild>
             <IconButton onTouchTap={this.onClickEdit.bind(this)} tooltip="General"><EditIcon/></IconButton>

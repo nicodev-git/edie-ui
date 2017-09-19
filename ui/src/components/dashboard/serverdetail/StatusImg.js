@@ -2,7 +2,7 @@ import React from 'react'
 
 import { getDeviceType } from 'components/common/wizard/WizardConfig'
 import DeviceEditModal from 'containers/shared/wizard/DeviceEditModalContainer'
-import {showAlert} from 'components/common/Alert'
+// import {showAlert} from 'components/common/Alert'
 import {checkAgentUp} from 'shared/Global'
 
 export default class StatusImg extends React.Component {
@@ -15,14 +15,21 @@ export default class StatusImg extends React.Component {
 
   }
   onClickFix () {
-    const {device} = this.props.device
-    this.props.showDeviceEditModal(true, this.props.device)
+    const {device} = this.props
+    this.props.showDeviceEditModal(true, device)
   }
   onFinishEdit (device) {
     this.props.updateMapDevice(device)
+    setTimeout(() => {
+      this.checkState()
+    }, 200)
   }
 
   componentWillMount () {
+    this.checkState()
+  }
+
+  checkState () {
     checkAgentUp(this.props.device.id, (up, info) => {
       this.setState({up, info})
     })
