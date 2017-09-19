@@ -17,7 +17,8 @@ import CredPickerInput from './input/CredPicker'
 
 import {CardPanel} from 'components/modal/parts'
 
-import CredPicker from 'containers/settings/credentials/CredsPickerContainer'
+// import CredPicker from 'containers/settings/credentials/CredsPickerContainer'
+import CredentialModal from './input/CredentialModal'
 
 class DeviceWizard extends Component {
   constructor (props) {
@@ -272,6 +273,7 @@ class DeviceWizard extends Component {
         credentialTypes={credentialTypes}
         deviceCredentials={deviceCredentials}
         onChangeCredential={this.onChangeCredential.bind(this)}
+        onClickDelete={this.onDeleteDeviceCred.bind(this)}
         showDeviceCredsPicker={showDeviceCredsPicker}
         values={values}
         config={config}/>
@@ -331,6 +333,12 @@ class DeviceWizard extends Component {
     this.props.showDeviceCredsPicker(false)
   }
 
+  onDeleteDeviceCred (index) {
+    this.setState({
+      deviceCredentials: this.state.deviceCredentials.filter((p, i) => i !== index)
+    })
+  }
+
   renderParamEditModal () {
     if (!this.props.paramEditModalOpen) return null
     return (
@@ -347,7 +355,9 @@ class DeviceWizard extends Component {
   renderCredPicker () {
     if (!this.props.deviceCredsPickerVisible) return null
     return (
-      <CredPicker onClose={this.onCloseCredPicker.bind(this)}/>
+      <CredentialModal
+        credentialTypes={this.props.credentialTypes}
+        addCredentials={this.onCloseCredPicker.bind(this)}/>
     )
   }
 

@@ -2,6 +2,7 @@ import React from 'react'
 // import { Field } from 'redux-form'
 import { IconButton } from 'material-ui'
 import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
+import CloseIcon from 'material-ui/svg-icons/navigation/close'
 // import {FormSelect, FormInput} from 'components/modal/parts'
 
 import { CardPanel } from 'components/modal/parts'
@@ -36,6 +37,11 @@ export default class CredPicker extends React.Component {
   onClickAdd () {
     this.props.showDeviceCredsPicker(true)
   }
+
+  onClickDelete (index) {
+    this.props.onClickDelete(index)
+  }
+
   getCredentials() {
     const {credentials} = this.props
     return credentials.filter(p => p.global && p.isDefault)
@@ -67,11 +73,12 @@ export default class CredPicker extends React.Component {
             </thead>
             <tbody>
             {credentials.map((p, i) =>
-              <tr key={p.id}>
+              <tr key={i}>
                 <td>{p.name}</td>
                 <td>{p.type}</td>
                 <td>{p.description}</td>
                 <td>{p.username}</td>
+                <th><CloseIcon className="link" onTouchTap={this.onClickDelete.bind(this, i)}/></th>
               </tr>
             )}
             </tbody>
