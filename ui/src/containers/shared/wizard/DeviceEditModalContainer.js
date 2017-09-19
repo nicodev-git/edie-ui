@@ -9,6 +9,7 @@ import {
   fetchCredentials,
   showDeviceCredsPicker,
   addCredentials,
+  removeCredentials,
 
   fetchMonitorGroups,
   fetchCollectors,
@@ -51,6 +52,7 @@ export default connect(
     fetchCredentials,
     showDeviceCredsPicker,
     addCredentials,
+    removeCredentials,
 
     fetchMonitorGroups,
     fetchCollectors,

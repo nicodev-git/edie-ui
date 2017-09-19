@@ -48,4 +48,4 @@ export default connect(
   state => ({
     initialValues: {...state.settings.editCredentials}
   })
-)(reduxForm({form: 'credentialsEditForm'})(CredentialModal))
+)(reduxForm({form: 'credentialModalForm'})(CredentialModal))

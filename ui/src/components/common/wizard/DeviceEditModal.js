@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { assign, findIndex } from 'lodash'
+import { assign } from 'lodash'
 import { reduxForm } from 'redux-form'
 import {Step, Stepper, StepLabel} from 'material-ui/Stepper'
 
@@ -16,7 +16,7 @@ import DeviceEditModalView from './DeviceEditModalView'
 import TagsView from './input/TagsView'
 import CredPickerInput from './input/CredPicker'
 import AgentPicker from './input/AgentPicker'
-import {showAlert} from 'components/common/Alert'
+import {showAlert, showConfirm} from 'components/common/Alert'
 import {CardPanel} from 'components/modal/parts'
 import CredentialModal from './input/CredentialModal'
 
@@ -102,8 +102,17 @@ class DeviceEditModal extends React.Component {
   }
 
   onDeleteDeviceCred (index) {
-    this.setState({
-      deviceCredentials: this.state.deviceCredentials.filter((p, i) => i !== index)
+    const {deviceCredentials} = this.state
+    showConfirm('Click OK to delete', btn => {
+      if (btn !== 'ok') return
+
+      if (deviceCredentials[index].id) {
+        this.props.removeCredentials(deviceCredentials[index])
+      }
+
+      this.setState({
+        deviceCredentials: deviceCredentials.filter((p, i) => i !== index)
+      })
     })
   }
 
@@ -142,22 +151,23 @@ class DeviceEditModal extends React.Component {
     if (props.distribution) tags.push(props.distribution)
     props.tags = tags
 
-    if (this.state.credentialSelect === 'existing') {
-      const index = findIndex(this.props.credentials, {id: formProps.credentialId})
-      if (index >= 0) {
-        props.credential = this.props.credentials[index]
-      }
-    } else {
-      if (formProps.creduser && formProps.credtype) {
-        props.credential = {
-          username: formProps.creduser,
-          password: formProps.credpassword,
-          global: false,
-          type: formProps.credtype,
-          name: `Cred-${props.name || 'device'}`
-        }
-      }
-    }
+    // if (this.state.credentialSelect === 'existing') {
+    //   const index = findIndex(this.props.credentials, {id: formProps.credentialId})
+    //   if (index >= 0) {
+    //     props.credential = this.props.credentials[index]
+    //   }
+    // } else {
+    //   if (formProps.creduser && formProps.credtype) {
+    //     props.credential = {
+    //       username: formProps.creduser,
+    //       password: formProps.credpassword,
+    //       global: false,
+    //       type: formProps.credtype,
+    //       name: `Cred-${props.name || 'device'}`
+    //     }
+    //   }
+    // }
+    props.credential = this.state.deviceCredentials
     console.log(props)
     this.closeModal(true)
     onFinish && onFinish(props)
@@ -412,6 +422,7 @@ class DeviceEditModal extends React.Component {
         onNext={this.onClickNext.bind(this)}
         onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
         canAddTags={canAddTags}
+        cred
       />
     )
   }

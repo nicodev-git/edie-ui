@@ -58,7 +58,7 @@ export default class AgentPicker extends React.Component {
     const creds = this.getDeviceCreds()
     if (!creds.length) {
       showAlert('Please add credential.', () => {
-        this.props.showDeviceCredsPicker(true)
+        this.props.showDeviceCredsPicker(2)
       });
       return;
     }
@@ -67,7 +67,7 @@ export default class AgentPicker extends React.Component {
   }
 
   renderCredPicker () {
-    if (!this.props.deviceCredsPickerVisible) return null
+    if (this.props.deviceCredsPickerVisible !== 2) return null
 
     return (
       <CredentialModal
