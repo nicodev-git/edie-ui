@@ -35,7 +35,9 @@ class DeviceWizard extends Component {
       currentDevice: {...config, steps: stepItems},
       monitors: props.monitors || [],
 
-      credentialSelect: 'existing'
+      credentialSelect: 'existing',
+
+      deviceCredentials: []
     }
 
     this.mapping = {
@@ -257,11 +259,13 @@ class DeviceWizard extends Component {
 
   buildCredPicker (config, values) {
     const {credentials, credentialTypes} = this.props
+    const {deviceCredentials} = this.state
     return (
       <CredPickerInput
         key="credentialId"
         credentials={credentials}
         credentialTypes={credentialTypes}
+        deviceCredentials={deviceCredentials}
         onChangeCredential={this.onChangeCredential.bind(this)}
         values={values}
         config={config}/>
