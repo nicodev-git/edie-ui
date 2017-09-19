@@ -2,7 +2,7 @@ import React from 'react'
 
 import { getDeviceType } from 'components/common/wizard/WizardConfig'
 import DeviceEditModal from 'containers/shared/wizard/DeviceEditModalContainer'
-import {showAlert} from ''
+import {showAlert} from 'components/common/Alert'
 import {checkAgentUp} from 'shared/Global'
 
 export default class StatusImg extends React.Component {
@@ -22,7 +22,9 @@ export default class StatusImg extends React.Component {
     if (device.agentType === 'agent') {
       if (!device.agent) {
         this.props.showDeviceEditModal(true, this.props.device)
+        return;
       }
+      showAlert('Please check credentials')
     } else {
 
     }
