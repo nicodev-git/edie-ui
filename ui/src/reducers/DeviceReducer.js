@@ -109,6 +109,8 @@ import {
 
   UPDATE_INSTALL_AGENT_MESSAGE,
 
+  SHOW_DEVICE_CREDS_MODAL,
+
   UPDATE_DEVICE_ERROR
 } from 'actions/types'
 
@@ -497,6 +499,9 @@ export default function (state = INITIAL_STATE, action) {
     case SHOW_DEVICE_EDIT_MODAL: {
       return { ...state, deviceEditModalOpen: action.visible, editDevice: action.visible ? action.device : state.editDevice }
     }
+
+    case SHOW_DEVICE_CREDS_MODAL:
+      return { ...state, deviceCredsModalOpen: action.visible, editDevice: action.device }
     default:
       return state
   }

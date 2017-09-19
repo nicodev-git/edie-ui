@@ -7,7 +7,9 @@ import {
   fetchGauges,
 
   showDeviceEditModal,
-  updateMapDevice
+  updateMapDevice,
+
+  showDeviceCredsModal
 } from 'actions'
 
 class MainControlContainer extends React.Component {
@@ -22,6 +24,7 @@ export default connect(
     devices: state.devices.devices,
     deviceEditModalOpen: state.devices.deviceEditModalOpen,
     editDevice: state.devices.editDevice,
+    deviceCredsModalOpen: state.devices.deviceCredsModalOpen,
 
     gauges: state.gauge.gauges,
     gaugeModalOpen: state.gauge.gaugeModalOpen,
@@ -31,6 +34,8 @@ export default connect(
     fetchGauges,
 
     showDeviceEditModal,
-    updateMapDevice
+    updateMapDevice,
+
+    showDeviceCredsModal
   }
 )(withRouter(MainControlContainer))

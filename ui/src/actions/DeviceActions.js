@@ -115,6 +115,8 @@ import {
   CLEAR_AGENT_INSTALL,
   UPDATE_INSTALL_AGENT_MESSAGE,
 
+  SHOW_DEVICE_CREDS_MODAL,
+
   NO_AUTH_ERROR
 } from './types'
 
@@ -1159,5 +1161,11 @@ export function clearAgentInstall () {
 export function showDeviceEditModal(visible, device) {
   return dispatch => {
     dispatch({type: SHOW_DEVICE_EDIT_MODAL, visible, device})
+  }
+}
+
+export function showDeviceCredsModal (visible, device) {
+  return dispatch => {
+    dispatch({type: SHOW_DEVICE_CREDS_MODAL, visible, device})
   }
 }
