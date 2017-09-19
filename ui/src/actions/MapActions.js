@@ -333,8 +333,15 @@ export const updateMapDevice = (entity) => {
   }
   return (dispatch) => {
     axios.put(entity._links.self.href, entity)
-      .then(response => updateMapDeviceSuccess(dispatch, response))
+      .then(response => {updateMapDeviceSuccess(dispatch, response)})
       .catch(error => apiError(dispatch, error))
+
+    if (entity.credential) {
+      entity.credential.forEach(p => {
+        if (p.id) return
+        dispatch(addDeviceCredential(p, entity.id))
+      })
+    }
   }
 }
 

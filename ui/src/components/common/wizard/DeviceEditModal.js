@@ -380,7 +380,7 @@ class DeviceEditModal extends React.Component {
   }
 
   renderCredPicker () {
-    if (!this.props.deviceCredsPickerVisible) return null
+    if (this.props.deviceCredsPickerVisible !== 1) return null
     return (
       <CredentialModal
         credentialTypes={this.props.credentialTypes}
@@ -422,7 +422,7 @@ class DeviceEditModal extends React.Component {
         onNext={this.onClickNext.bind(this)}
         onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
         canAddTags={canAddTags}
-        cred
+        credPicker={this.renderCredPicker()}
       />
     )
   }

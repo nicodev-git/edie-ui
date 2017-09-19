@@ -7,7 +7,7 @@ import { CardPanel } from 'components/modal/parts'
 
 export default class CredPicker extends React.Component {
   onClickAdd () {
-    this.props.showDeviceCredsPicker(true)
+    this.props.showDeviceCredsPicker(1)
   }
 
   onClickDelete (index) {

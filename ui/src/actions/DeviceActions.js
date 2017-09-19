@@ -947,11 +947,6 @@ const updateMapDevice = (entity) => {
     axios.put(entity._links.self.href, entity).then(response => {
       dispatch({type: UPDATE_MAP_DEVICE, data: response.data})
     }).catch(error => apiError(dispatch, error))
-
-    entity.credential.forEach(p => {
-      if (p.id) return
-      dispatch(addDeviceCredential(p, entity.id))
-    })
   }
 }
 
