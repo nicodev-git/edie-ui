@@ -2,7 +2,7 @@ import React from 'react'
 
 import { getDeviceType } from 'components/common/wizard/WizardConfig'
 import DeviceEditModal from 'containers/shared/wizard/DeviceEditModalContainer'
-
+import {showAlert} from ''
 import {checkAgentUp} from 'shared/Global'
 
 export default class StatusImg extends React.Component {
@@ -14,7 +14,18 @@ export default class StatusImg extends React.Component {
 
   }
   onClickFix () {
-    this.props.showDeviceEditModal(true, this.props.device)
+    const {device} = this.props.device
+    if (!device.agentType) {
+      this.props.showDeviceEditModal(true, this.props.device)
+      return
+    }
+    if (device.agentType === 'agent') {
+      if (!device.agent) {
+        this.props.showDeviceEditModal(true, this.props.device)
+      }
+    } else {
+
+    }
   }
   onFinishEdit (device) {
     this.props.updateMapDevice(device)
