@@ -208,7 +208,7 @@ export default class MainControl extends React.Component {
 
   renderDeviceCredsModal () {
     const {deviceCredsModalOpen} = this.props
-    if (!)
+
   }
 
   render () {
