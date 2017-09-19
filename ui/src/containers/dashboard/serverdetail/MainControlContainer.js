@@ -9,7 +9,11 @@ import {
   showDeviceEditModal,
   updateMapDevice,
 
-  showDeviceCredsModal
+  showDeviceCredsModal,
+  selectDeviceCreds,
+  showDeviceCredsPicker,
+  removeCredentials,
+  addCredentials
 } from 'actions'
 
 class MainControlContainer extends React.Component {
@@ -25,6 +29,10 @@ export default connect(
     deviceEditModalOpen: state.devices.deviceEditModalOpen,
     editDevice: state.devices.editDevice,
     deviceCredsModalOpen: state.devices.deviceCredsModalOpen,
+    deviceCredsPickerVisible: state.devices.deviceCredsPickerVisible,
+    selectedDeviceCreds: state.devices.selectedDeviceCreds,
+
+    credentialTypes: state.settings.credentialTypes,
 
     gauges: state.gauge.gauges,
     gaugeModalOpen: state.gauge.gaugeModalOpen,
@@ -36,6 +44,10 @@ export default connect(
     showDeviceEditModal,
     updateMapDevice,
 
-    showDeviceCredsModal
+    showDeviceCredsModal,
+    selectDeviceCreds,
+    showDeviceCredsPicker,
+    removeCredentials,
+    addCredentials
   }
 )(withRouter(MainControlContainer))

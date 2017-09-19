@@ -97,7 +97,7 @@ export default class MainControl extends React.Component {
   }
 
   onClickCredEdit () {
-    this.props.showDeviceCredsModal(true)
+    this.props.showDeviceCredsModal(true, this.getDevice())
   }
 
   onClickMonitorEdit () {
@@ -205,6 +205,12 @@ export default class MainControl extends React.Component {
       </IconMenu>
     )
   }
+
+  renderDeviceCredsModal () {
+    const {deviceCredsModalOpen} = this.props
+    if (!)
+  }
+
   render () {
     const device = this.getDevice()
     return (
@@ -225,6 +231,7 @@ export default class MainControl extends React.Component {
         <TabPageBody tabs={ServerDetailTab(device.id, device.templateName)} history={this.props.history} location={this.props.location} transparent>
           {this.renderGrid()}
           {this.renderDeviceEditModal()}
+          {this.renderDeviceCredsModal()}
         </TabPageBody>
       </TabPage>
     )
