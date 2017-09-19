@@ -14,6 +14,7 @@ import ServerDetailTab from './ServerDetailTab'
 import StatusImg from './StatusImg'
 import DeviceEditModal from 'containers/shared/wizard/DeviceEditModalContainer'
 import { getDeviceType } from 'components/common/wizard/WizardConfig'
+import DeviceCredsModal from './edit/DeviceCredsModal'
 
 import GaugeMap from 'components/common/gauge/GaugeMap'
 import { getWidgetSize, layoutCols, layoutRowHeight, layoutWidthZoom, layoutHeightZoom } from 'shared/Global'
@@ -208,7 +209,12 @@ export default class MainControl extends React.Component {
 
   renderDeviceCredsModal () {
     const {deviceCredsModalOpen} = this.props
-
+    if (!deviceCredsModalOpen) return null
+    return (
+      <DeviceCredsModal
+        {...this.props}
+      />
+    )
   }
 
   render () {

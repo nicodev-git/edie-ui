@@ -5,6 +5,8 @@ import { connect } from 'react-redux'
 import MainControl from 'components/dashboard/serverdetail/MainControl'
 import {
   fetchGauges,
+  fetchCredTypes,
+  fetchCredentials,
 
   showDeviceEditModal,
   updateMapDevice,
@@ -32,6 +34,7 @@ export default connect(
     deviceCredsPickerVisible: state.devices.deviceCredsPickerVisible,
     selectedDeviceCreds: state.devices.selectedDeviceCreds,
 
+    credentials: state.settings.credentials,
     credentialTypes: state.settings.credentialTypes,
 
     gauges: state.gauge.gauges,
@@ -40,6 +43,8 @@ export default connect(
     gaugePickerOpen: state.gauge.gaugePickerOpen,
   }), {
     fetchGauges,
+    fetchCredTypes,
+    fetchCredentials,
 
     showDeviceEditModal,
     updateMapDevice,
