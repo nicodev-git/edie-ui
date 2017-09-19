@@ -27,7 +27,10 @@ export default connect(
     monitorTemplates: state.settings.monitorTemplates,
     deviceTemplates: state.settings.deviceTemplates,
     collectors: state.settings.collectors,
-    initialValues: state.devices.wizardInitialValues,
+    initialValues: {
+      distribution: 'Ubuntu',
+      ...state.devices.wizardInitialValues
+    },
     credentials: state.settings.credentials,
     credentialTypes: state.settings.credentialTypes,
     deviceCredsPickerVisible: state.devices.deviceCredsPickerVisible,

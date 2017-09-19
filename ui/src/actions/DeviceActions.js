@@ -123,6 +123,8 @@ import { ROOT_URL } from './config'
 import { encodeUrlParams, filterDevices } from 'shared/Global'
 import { getAuthConfig, getWorkflowConfig } from './util'
 
+import {addDeviceCredential} from './CredentialsActions'
+
 export const fetchDevice = (id) => {
   if (!window.localStorage.getItem('token')) {
     return dispatch => dispatch({ type: NO_AUTH_ERROR })
@@ -518,6 +520,10 @@ export const addDevice = (props, url) => {
   return (dispatch) => {
     axios.post(`${ROOT_URL}/${url}`, props).then(res => {
       dispatch({type: ADD_DEVICE, data: res.data})
+      props.credential.forEach(p => {
+        dispatch(addDeviceCredential(p, res.data.id))
+      })
+
     }).catch(error => updateDeviceError(dispatch, error))
   }
 }
