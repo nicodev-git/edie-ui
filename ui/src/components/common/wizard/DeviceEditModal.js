@@ -54,7 +54,7 @@ class DeviceEditModal extends React.Component {
 
   componentWillMount () {
     this.props.fetchMonitorTemplates()
-    this.props.fetchCredentials(this.onFetchCreds.bind(this))
+    this.props.fetchCredentials()
     this.props.fetchCredTypes()
     this.props.fetchCollectors()
   }
@@ -167,7 +167,7 @@ class DeviceEditModal extends React.Component {
     //     }
     //   }
     // }
-    props.credential = this.state.deviceCredentials
+    props.credential = []
     console.log(props)
     this.closeModal(true)
     onFinish && onFinish(props)
