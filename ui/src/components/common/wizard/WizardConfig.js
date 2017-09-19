@@ -393,12 +393,12 @@ export const wizardConfig = {
         title: 'Agent',
         items: [{
           type: 'agentpicker'
-        }, {
-          title: 'Credentials',
-          skip: true,
-          items: [{
-            type: 'credpicker'
-          }]
+        }]
+      }, {
+        title: 'Credentials',
+        skip: true,
+        items: [{
+          type: 'credpicker'
         }]
       }],
     }, {

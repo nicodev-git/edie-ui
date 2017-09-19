@@ -18,6 +18,7 @@ import CredPickerInput from './input/CredPicker'
 import AgentPicker from './input/AgentPicker'
 import {showAlert} from 'components/common/Alert'
 import {CardPanel} from 'components/modal/parts'
+import CredentialModal from './input/CredentialModal'
 
 class DeviceEditModal extends React.Component {
   constructor (props) {
@@ -34,7 +35,9 @@ class DeviceEditModal extends React.Component {
       currentDevice: {...config, steps: stepItems},
       monitors: props.monitors || [],
 
-      credentialSelect: 'existing'
+      credentialSelect: 'existing',
+
+      deviceCredentials: []
     }
 
     this.mapping = {
@@ -51,7 +54,7 @@ class DeviceEditModal extends React.Component {
 
   componentWillMount () {
     this.props.fetchMonitorTemplates()
-    this.props.fetchCredentials()
+    this.props.fetchCredentials(this.onFetchCreds.bind(this))
     this.props.fetchCredTypes()
     this.props.fetchCollectors()
   }
@@ -60,6 +63,15 @@ class DeviceEditModal extends React.Component {
     this.updateDistribution()
   }
 
+  onFetchCreds (creds) {
+    const {id} = this.props.editDevice
+    const {deviceCredentials} = this.state
+    creds.forEach(cred => {
+      if (cred.deviceIds && cred.deviceIds.includes(id)) {
+        deviceCredentials.push(cred)
+      }
+    })
+  }
   getDistribution () {
     const {tags} = this.props.editDevice
     const dists = commonconfig.distribution.values.map(p => p.value)
@@ -77,6 +89,21 @@ class DeviceEditModal extends React.Component {
   onChangeCredential (value) {
     this.setState({
       credentialSelect: value
+    })
+  }
+
+  onCloseCredPicker (selected) {
+    if (selected) {
+      this.setState({
+        deviceCredentials: [...this.state.deviceCredentials, selected]
+      })
+    }
+    this.props.showDeviceCredsPicker(false)
+  }
+
+  onDeleteDeviceCred (index) {
+    this.setState({
+      deviceCredentials: this.state.deviceCredentials.filter((p, i) => i !== index)
     })
   }
 
@@ -277,13 +304,17 @@ class DeviceEditModal extends React.Component {
   }
 
   buildCredPicker (config, values) {
-    const {credentials, credentialTypes} = this.props
+    const {credentials, credentialTypes, showDeviceCredsPicker} = this.props
+    const {deviceCredentials} = this.state
     return (
       <CredPickerInput
         key="credentialId"
         credentials={credentials}
         credentialTypes={credentialTypes}
+        deviceCredentials={deviceCredentials}
         onChangeCredential={this.onChangeCredential.bind(this)}
+        onClickDelete={this.onDeleteDeviceCred.bind(this)}
+        showDeviceCredsPicker={showDeviceCredsPicker}
         values={values}
         config={config}/>
     )
@@ -336,6 +367,15 @@ class DeviceEditModal extends React.Component {
 
     current++
     this.setState({ current })
+  }
+
+  renderCredPicker () {
+    if (!this.props.deviceCredsPickerVisible) return null
+    return (
+      <CredentialModal
+        credentialTypes={this.props.credentialTypes}
+        addCredentials={this.onCloseCredPicker.bind(this)}/>
+    )
   }
 
   renderParamEditModal () {

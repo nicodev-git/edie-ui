@@ -16,14 +16,15 @@ import { apiError } from './Errors'
 
 import { ROOT_URL } from './config'
 
-export const fetchCredentials = () => {
+export const fetchCredentials = (cb) => {
   if (!window.localStorage.getItem('token')) {
     return dispatch => dispatch({ type: NO_AUTH_ERROR })
   }
   return (dispatch) => {
-    axios.get(`${ROOT_URL}/credential?size=1000`)
-      .then(response => fetchCredentialsSuccess(dispatch, response))
-      .catch(error => apiError(dispatch, error))
+    axios.get(`${ROOT_URL}/credential?size=1000`).then(response => {
+      fetchCredentialsSuccess(dispatch, response)
+      cb && cb(response.data._embedded.credentials)
+    }).catch(error => apiError(dispatch, error))
   }
 }
 
