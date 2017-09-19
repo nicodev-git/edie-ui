@@ -10,11 +10,15 @@ export default class DeviceCredsModal extends React.Component {
   onHide () {
     this.props.showDeviceCredsModal(false)
   }
+  onClickAdd () {
+    this.props.showDeviceCredsPicker(true)
+  }
   render () {
     return (
       <DeviceCredsModalView
         {...this.props}
         onHide={this.onHide.bind(this)}
+        onClickAdd={this.onClickAdd.bind(this)}
       />
     )
   }
