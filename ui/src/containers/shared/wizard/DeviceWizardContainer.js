@@ -8,6 +8,7 @@ import {
   openDeviceMonitorWizard,
   fetchCredTypes,
   fetchCredentials,
+  showDeviceCredsPicker,
 
   fetchMonitorGroups,
   fetchCollectors
@@ -29,6 +30,7 @@ export default connect(
     initialValues: state.devices.wizardInitialValues,
     credentials: state.settings.credentials,
     credentialTypes: state.settings.credentialTypes,
+    deviceCredsPickerVisible: state.devices.deviceCredsPickerVisible,
 
     monitorGroups: state.settings.monitorGroups
   }),
@@ -39,6 +41,7 @@ export default connect(
       openDeviceMonitorWizard,
       fetchCredTypes,
       fetchCredentials,
+      showDeviceCredsPicker,
 
       fetchMonitorGroups,
       fetchCollectors

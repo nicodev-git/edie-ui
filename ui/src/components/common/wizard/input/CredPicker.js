@@ -1,7 +1,9 @@
 import React from 'react'
 // import { Field } from 'redux-form'
-// import { RadioButtonGroup, RadioButton } from 'material-ui'
+import { IconButton } from 'material-ui'
+import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
 // import {FormSelect, FormInput} from 'components/modal/parts'
+
 import { CardPanel } from 'components/modal/parts'
 
 export default class CredPicker extends React.Component {
@@ -32,17 +34,26 @@ export default class CredPicker extends React.Component {
   //   )
   // }
   onClickAdd () {
-    this.props.showDeviceCredsPicker()
+    this.props.showDeviceCredsPicker(true)
   }
   getCredentials() {
     const {credentials} = this.props
     return credentials.filter(p => p.global && p.isDefault)
   }
+
+  renderButtons () {
+    return (
+      <div>
+        <IconButton onTouchTap={this.onClickAdd.bind(this)} tooltip="Add Credentials">
+          <AddCircleIcon size={32}/>
+        </IconButton>
+      </div>
+    )
+  }
   render () {
-    const {config} = this.props
     const credentials = this.props.deviceCredentials
     return (
-      <CardPanel title="Credentials">
+      <CardPanel title="Credentials" tools={this.renderButtons()}>
         <div style={{maxHeight: 300, overflow: 'auto'}}>
           <table className="table table-hover">
             <thead>
