@@ -106,7 +106,7 @@ class GenericSearch extends React.Component {
               <div className="bt-gradient"/>
             </div>
             <div className="position-ab text-center">
-              <span className="row-expand link text-primary text-sm">Expand</span>
+              <img src="/resources/images/dashboard/expand.png" width="32" alt=""/>
             </div>
           </div>
         )
