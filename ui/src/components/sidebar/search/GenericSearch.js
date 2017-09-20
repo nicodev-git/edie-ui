@@ -570,6 +570,10 @@ class GenericSearch extends React.Component {
     this.props.showSearchMonitorModal(true)
   }
 
+  onClickSearchDevice () {
+    this.props.showSearchDeviceModal(true)
+  }
+
   redrawSearch () {
     // this.props.refreshSearch()
   }
@@ -841,7 +845,7 @@ class GenericSearch extends React.Component {
 
   render () {
     const { handleSubmit, monitorTemplates, searchTags, queryChips, selectedWfs } = this.props
-    const { severity, monitorTypes, monitorName, from, to, types } = this.getParams()
+    const { severity, monitorTypes, monitorName, deviceName, from, to, types } = this.getParams()
 
     return (
       <TabPage>
@@ -880,6 +884,9 @@ class GenericSearch extends React.Component {
 
             searchMonitor={monitorName || 'Any'}
             onClickSearchMonitor={this.onClickSearchMonitor.bind(this)}
+
+            searchDevice={deviceName || 'Any'}
+            onClickSearchDevice={this.onClickSearchDevice.bind(this)}
           />
 
           <div className="text-center">
