@@ -28,6 +28,7 @@ export default connect(
     fixCode: state.devices.fixCode,
 
     credentials: state.settings.credentials,
+    credentialTypes: state.settings.credentialTypes,
     collectors: state.settings.collectors,
 
     installAgentMessage: state.devices.installAgentMessage,
