@@ -14,7 +14,7 @@ export default class SearchDeviceModalView extends React.Component {
                 <tr
                   key={device.id}
                   onClick={() => onClickRow(device)}
-                  className={selected && selected.id === device.id ? 'selected' : ''}
+                  className={selected && selected.filter(p => p.id === device.id).length ? 'selected' : ''}
                 >
                   <td>{device.name}</td>
                 </tr>

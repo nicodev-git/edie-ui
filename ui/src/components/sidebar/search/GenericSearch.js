@@ -554,9 +554,9 @@ class GenericSearch extends React.Component {
     this.props.showSearchMonitorModal(false)
   }
 
-  onChangeDeviceId (device) {
+  onChangeDeviceId (devices) {
     const {formValues} = this.props
-    const newQuery = modifyFieldValue(formValues.query, 'device', device.name, true)
+    const newQuery = modifyArrayValues(formValues.query, 'device', devices.map(p => `"${p.name}"`))
     this.updateQuery(newQuery)
     this.props.showSearchDeviceModal(false)
   }
@@ -801,6 +801,7 @@ class GenericSearch extends React.Component {
       workflowNames: getArrayValues(parsed, 'workflows'),
       tags: getArrayValues(parsed, 'tags'),
       monitorName: getFieldValue(parsed, 'monitor'),
+      deviceNames: getArrayValues(parsed, 'device'),
       types: getArrayValues(parsed, 'type', collections.map(p => p.value)),
       ...dateRange
     }
@@ -812,14 +813,15 @@ class GenericSearch extends React.Component {
   }
 
   getServiceParams (queryParams) {
-    const { workflows } = this.props
+    const { workflows, allDevices } = this.props
     if (!queryParams) queryParams = this.props.queryParams
 
-    const { from, to, workflowNames, monitorName, types, severity } = this.getParams(queryParams)
+    const { from, to, workflowNames, monitorName, deviceNames, types, severity } = this.getParams(queryParams)
     const parsed = this.parse(queryParams.q)
 
     removeField(findField(parsed, 'workflows'), true)
     removeField(findField(parsed, 'monitor'))
+    removeField(findField(parsed, 'device'), true)
     removeField(findField(parsed, 'to'))
     removeField(findField(parsed, 'from'))
     removeField(findField(parsed, 'severity'), true)
@@ -837,6 +839,16 @@ class GenericSearch extends React.Component {
     })
     if (workflowIds.length) {
       qs.push(`(workflowids:${workflowIds.join(' OR ')})`)
+    }
+
+    //Device
+    const deviceIds = []
+    deviceNames.forEach(name => {
+      const index = findIndex(allDevices, {name})
+      if (index >= 0) deviceIds.push(allDevices[index].id)
+    })
+    if (deviceIds.length) {
+      qs.push(`(deviceid:${deviceIds.join(' OR ')})`)
     }
 
     //Monitor
@@ -860,7 +872,7 @@ class GenericSearch extends React.Component {
 
   render () {
     const { handleSubmit, monitorTemplates, searchTags, queryChips, selectedWfs } = this.props
-    const { severity, monitorTypes, monitorName, deviceName, from, to, types } = this.getParams()
+    const { severity, monitorTypes, monitorName, deviceNames, from, to, types } = this.getParams()
 
     return (
       <TabPage>
@@ -900,7 +912,7 @@ class GenericSearch extends React.Component {
             searchMonitor={monitorName || 'Any'}
             onClickSearchMonitor={this.onClickSearchMonitor.bind(this)}
 
-            searchDevice={deviceName || 'Any'}
+            searchDevice={deviceNames.length ? (deviceNames.length > 1 ? `${deviceNames.length} Devices` : deviceNames[0]) : 'Any'}
             onClickSearchDevice={this.onClickSearchDevice.bind(this)}
           />
 
