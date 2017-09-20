@@ -19,7 +19,7 @@ import {chipStyles} from 'style/common/materialStyles'
 import {getRanges, getRangeLabel} from 'components/common/DateRangePicker'
 import {showAlert} from 'components/common/Alert'
 
-import {modifyArrayValues, getArrayValues, modifyFieldValue, getFieldValue, removeField, findField, queryToString, parseDateRange} from 'util/Query'
+import {modifyArrayValues, getArrayValues, modifyFieldValue, removeField, findField, queryToString, parseDateRange} from 'util/Query'
 
 import SearchFormView from './SearchFormView'
 import SearchSavePopover from './SearchSavePopover'
@@ -547,9 +547,9 @@ class GenericSearch extends React.Component {
     collapseSearchFields(!searchFieldsVisible)
   }
 
-  onChangeMonitorId (monitor) {
+  onChangeMonitorId (monitors) {
     const {formValues} = this.props
-    const newQuery = modifyFieldValue(formValues.query, 'monitor', monitor.name, true)
+    const newQuery = modifyArrayValues(formValues.query, 'monitor', monitors.map(p => `"${p.name}"`))
     this.updateQuery(newQuery)
     this.props.showSearchMonitorModal(false)
   }
@@ -800,7 +800,7 @@ class GenericSearch extends React.Component {
       monitorTypes: getArrayValues(parsed, 'monitortype'),
       workflowNames: getArrayValues(parsed, 'workflows'),
       tags: getArrayValues(parsed, 'tags'),
-      monitorName: getFieldValue(parsed, 'monitor'),
+      monitorNames: getArrayValues(parsed, 'monitor'),
       deviceNames: getArrayValues(parsed, 'device'),
       types: getArrayValues(parsed, 'type', collections.map(p => p.value)),
       ...dateRange
@@ -816,11 +816,11 @@ class GenericSearch extends React.Component {
     const { workflows, allDevices } = this.props
     if (!queryParams) queryParams = this.props.queryParams
 
-    const { from, to, workflowNames, monitorName, deviceNames, types, severity } = this.getParams(queryParams)
+    const { from, to, workflowNames, monitorNames, deviceNames, types, severity } = this.getParams(queryParams)
     const parsed = this.parse(queryParams.q)
 
     removeField(findField(parsed, 'workflows'), true)
-    removeField(findField(parsed, 'monitor'))
+    removeField(findField(parsed, 'monitor'), true)
     removeField(findField(parsed, 'device'), true)
     removeField(findField(parsed, 'to'))
     removeField(findField(parsed, 'from'))
@@ -852,9 +852,13 @@ class GenericSearch extends React.Component {
     }
 
     //Monitor
-    if (monitorName) {
-      const uid = this.getMonitorId(monitorName)
-      if (uid) qs.push(`(monitorid:${uid})`)
+    const monitorIds = []
+    monitorNames.forEach(name => {
+      const uid = this.getMonitorId(name)
+      if (uid) monitorIds.push(uid)
+    })
+    if (monitorIds.length) {
+      qs.push(`(monitorid:${monitorIds.join(' OR ')})`)
     }
 
     //Severity
@@ -872,7 +876,7 @@ class GenericSearch extends React.Component {
 
   render () {
     const { handleSubmit, monitorTemplates, searchTags, queryChips, selectedWfs } = this.props
-    const { severity, monitorTypes, monitorName, deviceNames, from, to, types } = this.getParams()
+    const { severity, monitorTypes, monitorNames, deviceNames, from, to, types } = this.getParams()
 
     return (
       <TabPage>
@@ -909,7 +913,7 @@ class GenericSearch extends React.Component {
             onClickClear={this.onClickClearSearch.bind(this)}
             onClickToggleFields={this.onClickToggleFields.bind(this)}
 
-            searchMonitor={monitorName || 'Any'}
+            searchMonitor={monitorNames.length ? (monitorNames.length > 1 ? `${monitorNames.length} Monitors` : monitorNames[0]) : 'Any'}
             onClickSearchMonitor={this.onClickSearchMonitor.bind(this)}
 
             searchDevice={deviceNames.length ? (deviceNames.length > 1 ? `${deviceNames.length} Devices` : deviceNames[0]) : 'Any'}

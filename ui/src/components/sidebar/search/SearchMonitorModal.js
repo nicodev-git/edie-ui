@@ -7,17 +7,23 @@ export default class SearchMonitorModal extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      selected: null
+      selected: []
     }
   }
 
-  onClickRow (selected) {
+  onClickRow (monitor) {
+    let {selected} = this.state
+    if (selected.filter(p => p.id === monitor.uid).length) {
+      selected = selected.filter(p => p.id !== monitor.uid)
+    } else {
+      selected = [...selected, monitor]
+    }
     this.setState({selected})
   }
 
   onClickOK () {
     const {selected} = this.state
-    if (!selected) {
+    if (!selected.length) {
       showAlert('Please select monitor')
       return
     }
@@ -29,7 +35,7 @@ export default class SearchMonitorModal extends React.Component {
   }
 
   onClickShowAny () {
-    this.props.onClickOK('')
+    this.props.onClickOK([])
   }
 
   render () {
