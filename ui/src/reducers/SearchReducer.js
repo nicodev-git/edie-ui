@@ -64,6 +64,8 @@ import {
   COLLAPSE_SEARCH_FIELDS,
   SHOW_SEARCH_MONITOR_MODAL,
 
+  SHOW_SEARCH_DEVICE_MODAL,
+
   UPDATE_SEARCH_MONITOR
 } from 'actions/types'
 import { concat } from 'lodash'
@@ -251,6 +253,8 @@ export default function (state = initialState, action) {
       return { ...state, searchMonitorId: action.monitorId }
     case SHOW_SEARCH_MONITOR_MODAL:
       return { ...state, searchMonitorModalOpen: action.visible }
+    case SHOW_SEARCH_DEVICE_MODAL:
+      return { ...state, searchDeviceModalOpen: action.visible }
     default:
       return state
   }

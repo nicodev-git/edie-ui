@@ -57,6 +57,7 @@ import {
   MAXIMIZE_SEARCH_GRAPH,
 
   UPDATE_GRAPH_PARAMS,
+  SHOW_SEARCH_DEVICE_MODAL,
 
   TOGGLE_VIEW_COL,
   RESET_VIEW_COLS,
@@ -470,5 +471,11 @@ export const loadSearch = (data, history) => {
 export const showSearchMonitorModal = (visible) => {
   return dispatch => {
     dispatch({type: SHOW_SEARCH_MONITOR_MODAL, visible})
+  }
+}
+
+export const showSearchDeviceModal = (visible) => {
+  return dispatch => {
+    dispatch({type: SHOW_SEARCH_DEVICE_MODAL, visible})
   }
 }

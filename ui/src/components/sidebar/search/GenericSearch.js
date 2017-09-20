@@ -33,6 +33,7 @@ import ViewFilterModal from './ViewFilterModal'
 import SearchGraphModal from './SearchGraphModal'
 import TagPickerModal from 'containers/settings/tag/TagPickerModalContainer'
 import SearchMonitorModal from './SearchMonitorModal'
+import SearchDeviceModal from './SearchDeviceModal'
 
 class GenericSearch extends React.Component {
   constructor (props) {
@@ -553,6 +554,13 @@ class GenericSearch extends React.Component {
     this.props.showSearchMonitorModal(false)
   }
 
+  onChangeDeviceId (device) {
+    const {formValues} = this.props
+    const newQuery = modifyFieldValue(formValues.query, 'device', device.name, true)
+    this.updateQuery(newQuery)
+    this.props.showSearchDeviceModal(false)
+  }
+
   getMonitorId(monitorName) {
     const {allDevices} = this.props
     let uid = ''
@@ -763,6 +771,13 @@ class GenericSearch extends React.Component {
     )
   }
 
+  renderSearchDeviceModal () {
+    if (!this.props.searchDeviceModalOpen) return null
+    return (
+      <SearchDeviceModal {...this.props} onClickOK={this.onChangeDeviceId.bind(this)}/>
+    )
+  }
+
   renderFieldsView () {
     const {searchFieldsVisible} = this.props
     if (!searchFieldsVisible) return null
@@ -961,6 +976,7 @@ class GenericSearch extends React.Component {
           {this.renderFilterViewModal()}
           {this.renderTagsModal()}
           {this.renderSearchMonitorModal()}
+          {this.renderSearchDeviceModal()}
           <ReactTooltip/>
         </TabPageBody>
       </TabPage>
