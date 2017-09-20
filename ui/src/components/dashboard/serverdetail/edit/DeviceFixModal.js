@@ -1,14 +1,16 @@
 import React from 'react'
+import { reduxForm } from 'redux-form'
 
 import DeviceFixModalView from './DeviceFixModalView'
+import AgentPicker from 'components/common/wizard/input/AgentPicker'
 
-export default class DeviceFixModal extends React.Component {
+class DeviceFixModal extends React.Component {
   getMessage () {
     const {fixCode} = this.props
     let msg = ''
     switch (fixCode) {
       case 1:
-        msg = 'No Agent/Collector defined. Please edit device and choose agent or collector. If you need agent, click "Install" button to install agent. Otherwise, please choose collector.'
+        msg = 'No Agent/Collector defined. If you need agent, click "Install" button to install agent. Otherwise, please choose collector.'
         break
       case 2:
         msg = 'No login credentials found. Please add SSH credentials.'
@@ -26,16 +28,45 @@ export default class DeviceFixModal extends React.Component {
 
     return msg
   }
+
   onHide () {
     this.props.showDeviceFixModal(false)
   }
+
+  handleFormSubmit (values) {
+
+  }
+
+  ///////////////////////////////////////////////////////////////////////////////
+
+  renderInputs () {
+    const {fixCode} = this.props
+    switch (fixCode) {
+      case 1:
+        return (
+          <div>
+            <AgentPicker {...this.props}/>
+          </div>
+        )
+      default:
+        break
+    }
+  }
   render () {
+    const { handleSubmit } = this.props
+
     return (
       <DeviceFixModalView
         {...this.props}
+        onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
         msg={this.getMessage()}
         onHide={this.onHide.bind(this)}
+        inputs={this.renderInputs()}
       />
     )
   }
 }
+
+export default reduxForm({
+  form: 'editDeviceFixForm'
+})(DeviceFixModal)
