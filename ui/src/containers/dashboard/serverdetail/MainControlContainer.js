@@ -10,6 +10,7 @@ import {
 
   showDeviceEditModal,
   updateMapDevice,
+  showDeviceFixModal,
 
   showDeviceCredsModal,
   selectDeviceCreds,
@@ -34,6 +35,8 @@ export default connect(
     deviceCredsPickerVisible: state.devices.deviceCredsPickerVisible,
     selectedDeviceCreds: state.devices.selectedDeviceCreds,
 
+    deviceFixModalOpen: state.devices.deviceFixModalOpen,
+
     credentials: state.settings.credentials,
     credentialTypes: state.settings.credentialTypes,
 
@@ -48,6 +51,7 @@ export default connect(
 
     showDeviceEditModal,
     updateMapDevice,
+    showDeviceFixModal,
 
     showDeviceCredsModal,
     selectDeviceCreds,

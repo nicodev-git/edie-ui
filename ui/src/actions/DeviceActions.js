@@ -116,6 +116,7 @@ import {
   UPDATE_INSTALL_AGENT_MESSAGE,
 
   SHOW_DEVICE_CREDS_MODAL,
+  SHOW_DEVICE_FIX_MODAL,
 
   NO_AUTH_ERROR
 } from './types'
@@ -1167,5 +1168,11 @@ export function showDeviceEditModal(visible, device) {
 export function showDeviceCredsModal (visible, device) {
   return dispatch => {
     dispatch({type: SHOW_DEVICE_CREDS_MODAL, visible, device})
+  }
+}
+
+export function showDeviceFixModal (visible, device, code) {
+  return dispatch => {
+    dispatch({type: SHOW_DEVICE_FIX_MODAL, visible, device, code})
   }
 }
