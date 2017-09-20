@@ -3,12 +3,16 @@ import moment from 'moment'
 import {assign, concat, isArray, keys} from 'lodash'
 
 export function renderEntity (entity, options) {
+  const ret = renderEntity2(entity, options)
+  return ret.node
+}
+
+export function renderEntity2 (entity, options) {
   const data = assign({}, entity)
   if (data.id) delete data.id
   if (data._links) delete data._links
 
-  const ret = renderData(data, false, '', options, 0)
-  return ret.node
+  return renderData(data, false, '', options, 0)
 }
 
 function renderValue (val, path, options, used) {

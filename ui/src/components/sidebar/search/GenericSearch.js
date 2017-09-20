@@ -14,7 +14,7 @@ import TabPage from 'components/common/TabPage'
 import TabPageBody from 'components/common/TabPageBody'
 import TabPageHeader from 'components/common/TabPageHeader'
 import { guid, collections, severities, viewFilters, queryDateFormat } from 'shared/Global'
-import {renderEntity} from 'components/common/CellRenderers'
+import {renderEntity2} from 'components/common/CellRenderers'
 import {chipStyles} from 'style/common/materialStyles'
 import {getRanges, getRangeLabel} from 'components/common/DateRangePicker'
 import {showAlert} from 'components/common/Alert'
@@ -102,17 +102,22 @@ class GenericSearch extends React.Component {
           timeField,
           limit: expand ? 0 : 750
         }
+        const ret = renderEntity2(data, options)
+        const isOverflow = ret.used >= options.limit
+
         return (
           <div className="padding-sm bt-gray inline-block">
             <div className="inline-block">
-              {renderEntity(data, options)}
-              {expand ? null : <div className="bt-gradient"/>}
+              {ret.node}
+              {expand || !isOverflow ? null : <div className="bt-gradient"/>}
             </div>
-            <div className="position-ab text-center">
-              <img
-                src={`/resources/images/dashboard/${expand ? 'collapse' : 'expand'}.png`} width="32" alt=""
-                onClick={this.onClickExpand.bind(this, entity.id)}/>
-            </div>
+            {isOverflow ? (
+              <div className="position-ab text-center">
+                <img
+                  src={`/resources/images/dashboard/${expand ? 'collapse' : 'expand'}.png`} width="32" alt=""
+                  onClick={this.onClickExpand.bind(this, entity.id)}/>
+              </div>
+            ) : null}
           </div>
         )
       }
