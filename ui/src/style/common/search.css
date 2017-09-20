@@ -52,3 +52,10 @@ input.input-custom.input-sm {
     outline: none;
     color: rgba(0, 0, 0, 0.6);
 }
+
+.row-expand {
+    background: white;
+    padding: 4px;
+    border-radius: 4px;
+    font-weight: bold;
+}

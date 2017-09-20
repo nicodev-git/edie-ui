@@ -97,12 +97,17 @@ class GenericSearch extends React.Component {
         const options = {
           notNull: viewFilter === viewFilters.notNull.name,
           timeField,
-          limit: 650
+          limit: 750
         }
         return (
-          <div className="padding-sm bt-gray">
-            {renderEntity(data, options)}
-            <div className="bt-gradient"/>
+          <div className="padding-sm bt-gray inline-block">
+            <div className="inline-block">
+              {renderEntity(data, options)}
+              <div className="bt-gradient"/>
+            </div>
+            <div className="position-ab text-center">
+              <span className="row-expand link text-primary text-sm">Expand</span>
+            </div>
           </div>
         )
       }

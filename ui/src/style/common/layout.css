@@ -82,6 +82,10 @@ body {
     text-overflow: ellipsis;
 }
 
+.text-sm {
+    font-size: 11px;
+}
+
 .bt-gray {
     border-bottom: 1px solid lightgray;
 }
@@ -89,9 +93,14 @@ body {
 .bt-gradient {
     position: absolute;
     width: 100%;
-    bottom: 4px;
+    bottom: 0px;
     height: 1.5em;
     background: linear-gradient(transparent, white);
+}
+.position-ab {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
 }
 
 a, a:focus, a:hover {
