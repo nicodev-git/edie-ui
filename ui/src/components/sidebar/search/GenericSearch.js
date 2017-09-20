@@ -97,7 +97,7 @@ class GenericSearch extends React.Component {
         const options = {
           notNull: viewFilter === viewFilters.notNull.name,
           timeField,
-          limit: 300
+          limit: 650
         }
         return <div className="padding-sm bt-gray">{renderEntity(data, options)}</div>
       }

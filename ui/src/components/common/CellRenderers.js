@@ -19,13 +19,14 @@ function renderValue (val, path, options, used) {
     endChar = isArray(val) ? ']' : '}'
 
     if (isArray(val)) {
-      val.forEach((item, index) => {
+      val.every((item, index) => {
         const ret = renderValue(item, `${path}[${index}]`, options, used)
         used = ret.used
         children.push(ret.node)
         if (index < val.length - 1) children.push(<div className="field-separator" key={`${path}-sep-${index}`}/>)
 
         if (options.limit && used >= options.limit) return false
+        return true
       })
     } else {
       const ret = renderData(val, true, path, options, used)
@@ -43,7 +44,7 @@ function renderValue (val, path, options, used) {
     }
   }
 
-  let valStr = val
+  let valStr = `${val}`
   const attrs = {}
   if (options.timeField && path === `.${options.timeField}`) {
     valStr = moment(val).fromNow()
@@ -66,8 +67,8 @@ function renderData (entity, isChildren, path, options, used) {  // eslint-disab
   let children = []
   const allKeys = keys(entity)
 
-  allKeys.forEach((key, index) => {
-    if (entity[key] === null && options && options['notNull']) return
+  allKeys.every((key, index) => {
+    if (entity[key] === null && options && options['notNull']) return true
 
     children.push(<span className="field-key" key={`${path}-key-${key}`}>{key} = </span>)
     used += key.length
@@ -81,6 +82,7 @@ function renderData (entity, isChildren, path, options, used) {  // eslint-disab
       children.push(<div className="field-separator" key={`${path}-sep-${index}`}/>)
 
     if (options.limit && used >= options.limit) return false
+    return true
   })
 
   return {
