@@ -13,7 +13,7 @@ export default class SearchMonitorModal extends React.Component {
 
   onClickRow (monitor) {
     let {selected} = this.state
-    if (selected.filter(p => p.id === monitor.uid).length) {
+    if (selected.filter(p => p.uid === monitor.uid).length) {
       selected = selected.filter(p => p.id !== monitor.uid)
     } else {
       selected = [...selected, monitor]

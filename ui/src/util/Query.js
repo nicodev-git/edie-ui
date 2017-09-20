@@ -198,7 +198,11 @@ export function modifyArrayValues (query, field, values, operator = 'OR') {
         parentIndex++
       }
     } else {
-      removeField(found)
+      if (parent && parent.parenthesized && parent.right) {
+        removeField(found, true)
+      } else {
+        removeField(found)
+      }
     }
 
     newQuery = queryToString(parsed)
