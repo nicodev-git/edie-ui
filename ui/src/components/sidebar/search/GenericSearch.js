@@ -69,7 +69,7 @@ class GenericSearch extends React.Component {
 
         }
         if (!entity) return <span/>
-        const highlighted = this.getHighlighted(entity, rowData.highlights)
+        const highlighted = {...entity}//this.getHighlighted(entity, rowData.highlights)
 
         const timeField = entity.startTimestamp ? 'startTimestamp' : 'timestamp'
         delete highlighted[timeField]
@@ -96,7 +96,8 @@ class GenericSearch extends React.Component {
 
         const options = {
           notNull: viewFilter === viewFilters.notNull.name,
-          timeField
+          timeField,
+          limit: 300
         }
         return <div className="padding-sm bt-gray">{renderEntity(data, options)}</div>
       }
