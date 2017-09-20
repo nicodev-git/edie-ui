@@ -8,12 +8,12 @@ export default class DeviceFixModalView extends React.Component {
     const {onHide, msg, inputs, onSubmit} = this.props
     return (
       <Modal title="Fix" onRequestClose={onHide}>
+        <Form onSubmit={onSubmit}>
         <CardPanel>
           {msg}
-          <Form onSubmit={onSubmit}>
-            {inputs}
-          </Form>
+          {inputs}
         </CardPanel>
+        </Form>
       </Modal>
     )
   }

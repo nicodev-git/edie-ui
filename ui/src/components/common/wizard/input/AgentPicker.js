@@ -108,7 +108,6 @@ export default class AgentPicker extends React.Component {
           </div>
         )
       }
-
     }
 
     const collectorLabel = (
@@ -116,7 +115,7 @@ export default class AgentPicker extends React.Component {
     )
 
     return (
-      <div style={{minHeight: 140}}>
+      <div style={{minHeight: 110}}>
         <Field name="agentType" component={RadioButtonGroup} className="margin-md-top">
           <RadioButton value="" label="None" className="pull-left"/>
           <RadioButton value="agent" label={agentLabel} className="pull-left" disabled={!agent} style={{marginTop: 14, cursor: 'pointer'}}

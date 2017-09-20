@@ -3,6 +3,7 @@ import { reduxForm } from 'redux-form'
 
 import DeviceFixModalView from './DeviceFixModalView'
 import AgentPicker from 'components/common/wizard/input/AgentPicker'
+import Credentials from 'components/common/wizard/input/Credentials'
 
 class DeviceFixModal extends React.Component {
   getMessage () {
@@ -39,13 +40,22 @@ class DeviceFixModal extends React.Component {
 
   ///////////////////////////////////////////////////////////////////////////////
 
+  renderCredentials () {
+    const {editDevice} = this.props
+    return (
+      <Credentials {...this.props} selectedDevice={editDevice}/>
+    )
+  }
   renderInputs () {
     const {fixCode} = this.props
     switch (fixCode) {
       case 1:
         return (
-          <div>
-            <AgentPicker {...this.props}/>
+          <div className="margin-md-top">
+            <div style={{border: '1px solid red', borderRadius: 4}}>
+              <AgentPicker {...this.props}/>
+            </div>
+            {/*{this.renderCredentials()}*/}
           </div>
         )
       default:
