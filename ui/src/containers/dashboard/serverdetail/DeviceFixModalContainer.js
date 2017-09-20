@@ -6,6 +6,8 @@ import DeviceFixModal from 'components/dashboard/serverdetail/edit/DeviceFixModa
 import {
   fetchCredentials,
   fetchCredTypes,
+  removeCredentials,
+  addCredentials,
 
   showDeviceFixModal,
   selectDeviceCreds,
@@ -33,10 +35,12 @@ export default connect(
 
     editDevice: state.devices.editDevice,
 
-    deviceCredsModalOpen: state.devices.deviceCredsModalOpen
+    deviceCredsPickerVisible: state.devices.deviceCredsPickerVisible
   }), {
     fetchCredentials,
     fetchCredTypes,
+    removeCredentials,
+    addCredentials,
 
     showDeviceFixModal,
     selectDeviceCreds,
