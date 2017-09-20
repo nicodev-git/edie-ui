@@ -11,7 +11,7 @@ export default class GDeviceInfo extends React.Component {
   constructor (props) {
     super (props)
     this.state = {
-      loading: false,
+      loading: true,
       memory: null,
       cpu: null,
       disk: null,
@@ -30,7 +30,7 @@ export default class GDeviceInfo extends React.Component {
     })
     this.monitorSocket.connect(this.onSocketOpen.bind(this))
     checkAgentUp(this.getDeviceId(), up => {
-      this.setState({up})
+      this.setState({up, loading: false})
     })
   }
 
