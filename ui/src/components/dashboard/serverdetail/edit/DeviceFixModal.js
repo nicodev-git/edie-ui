@@ -1,15 +1,11 @@
 import React from 'react'
 import { reduxForm } from 'redux-form'
-import IconButton from 'material-ui/IconButton'
-import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
 
 import DeviceFixModalView from './DeviceFixModalView'
-import AgentPicker from 'components/common/wizard/input/AgentPicker'
-import Credentials from 'components/common/wizard/input/Credentials'
-
 class DeviceFixModal extends React.Component {
   componentWillMount () {
     this.props.fetchCredentials()
+    this.props.fetchCredTypes()
   }
 
   getMessage () {
@@ -40,6 +36,10 @@ class DeviceFixModal extends React.Component {
     this.props.showDeviceFixModal(false)
   }
 
+  onClickAddCreds () {
+    this.props.showDeviceCredsPicker(true)
+  }
+
   handleFormSubmit (values) {
   }
 
@@ -54,6 +54,7 @@ class DeviceFixModal extends React.Component {
         onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
         msg={this.getMessage()}
         onHide={this.onHide.bind(this)}
+        onClickAddCreds={this.onClickAddCreds.bind(this)}
       />
     )
   }

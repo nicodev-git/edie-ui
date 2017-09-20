@@ -5,9 +5,11 @@ import DeviceFixModal from 'components/dashboard/serverdetail/edit/DeviceFixModa
 
 import {
   fetchCredentials,
+  fetchCredTypes,
 
   showDeviceFixModal,
-  selectDeviceCreds
+  selectDeviceCreds,
+  showDeviceCredsPicker
 } from 'actions'
 
 class DeviceFixModalContainer extends React.Component {
@@ -29,11 +31,15 @@ export default connect(
     installAgentMessage: state.devices.installAgentMessage,
     installAgents: state.settings.installAgents,
 
-    editDevice: state.devices.editDevice
+    editDevice: state.devices.editDevice,
+
+    deviceCredsModalOpen: state.devices.deviceCredsModalOpen
   }), {
     fetchCredentials,
+    fetchCredTypes,
 
     showDeviceFixModal,
-    selectDeviceCreds
+    selectDeviceCreds,
+    showDeviceCredsPicker
   }
 )(DeviceFixModalContainer)
