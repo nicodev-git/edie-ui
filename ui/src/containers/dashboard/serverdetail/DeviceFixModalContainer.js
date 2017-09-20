@@ -4,7 +4,10 @@ import { connect } from 'react-redux'
 import DeviceFixModal from 'components/dashboard/serverdetail/edit/DeviceFixModal'
 
 import {
-  showDeviceFixModal
+  fetchCredentials,
+
+  showDeviceFixModal,
+  selectDeviceCreds
 } from 'actions'
 
 class DeviceFixModalContainer extends React.Component {
@@ -20,6 +23,7 @@ export default connect(
     deviceFixModalOpen: state.devices.deviceFixModalOpen,
     fixCode: state.devices.fixCode,
 
+    credentials: state.settings.credentials,
     collectors: state.settings.collectors,
 
     installAgentMessage: state.devices.installAgentMessage,
@@ -27,6 +31,9 @@ export default connect(
 
     editDevice: state.devices.editDevice
   }), {
-    showDeviceFixModal
+    fetchCredentials,
+
+    showDeviceFixModal,
+    selectDeviceCreds
   }
 )(DeviceFixModalContainer)

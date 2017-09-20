@@ -48,7 +48,7 @@ export default class Credentials extends React.Component {
     const { selectedDeviceCreds, selectDeviceCreds } = this.props
 
     return (
-      <div>
+      <div style={{minHeight: 150}}>
         <table className="table table-hover">
           <thead>
             <tr>

@@ -1,11 +1,17 @@
 import React from 'react'
 import { reduxForm } from 'redux-form'
+import IconButton from 'material-ui/IconButton'
+import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
 
 import DeviceFixModalView from './DeviceFixModalView'
 import AgentPicker from 'components/common/wizard/input/AgentPicker'
 import Credentials from 'components/common/wizard/input/Credentials'
 
 class DeviceFixModal extends React.Component {
+  componentWillMount () {
+    this.props.fetchCredentials()
+  }
+
   getMessage () {
     const {fixCode} = this.props
     let msg = ''
@@ -35,33 +41,10 @@ class DeviceFixModal extends React.Component {
   }
 
   handleFormSubmit (values) {
-
   }
 
   ///////////////////////////////////////////////////////////////////////////////
 
-  renderCredentials () {
-    const {editDevice} = this.props
-    return (
-      <Credentials {...this.props} selectedDevice={editDevice}/>
-    )
-  }
-  renderInputs () {
-    const {fixCode} = this.props
-    switch (fixCode) {
-      case 1:
-        return (
-          <div className="margin-md-top">
-            <div style={{border: '1px solid red', borderRadius: 4}}>
-              <AgentPicker {...this.props}/>
-            </div>
-            {/*{this.renderCredentials()}*/}
-          </div>
-        )
-      default:
-        break
-    }
-  }
   render () {
     const { handleSubmit } = this.props
 
@@ -71,7 +54,6 @@ class DeviceFixModal extends React.Component {
         onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
         msg={this.getMessage()}
         onHide={this.onHide.bind(this)}
-        inputs={this.renderInputs()}
       />
     )
   }
