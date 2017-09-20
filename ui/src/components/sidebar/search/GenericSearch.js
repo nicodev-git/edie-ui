@@ -41,7 +41,8 @@ class GenericSearch extends React.Component {
     this.state = {
       total: 0,
       cols: [],
-      anchorEl: null
+      anchorEl: null,
+      expanded: {}
     }
     this.tooltipRebuild = debounce(ReactTooltip.rebuild, 100)
     this.cells = [{
@@ -49,6 +50,7 @@ class GenericSearch extends React.Component {
       'columnName': 'entity.id',
       'customComponent': (p) => {
         const {viewFilter} = this.props
+        const {expanded} = this.state
         const {rowData} = p
         const {entity} = rowData
 
@@ -94,19 +96,22 @@ class GenericSearch extends React.Component {
           })
         }
 
+        const expand = expanded[entity.id]
         const options = {
           notNull: viewFilter === viewFilters.notNull.name,
           timeField,
-          limit: 750
+          limit: expand ? 0 : 750
         }
         return (
           <div className="padding-sm bt-gray inline-block">
             <div className="inline-block">
               {renderEntity(data, options)}
-              <div className="bt-gradient"/>
+              {expand ? null : <div className="bt-gradient"/>}
             </div>
             <div className="position-ab text-center">
-              <img src="/resources/images/dashboard/expand.png" width="32" alt=""/>
+              <img
+                src={`/resources/images/dashboard/${expand ? 'collapse' : 'expand'}.png`} width="32" alt=""
+                onClick={this.onClickExpand.bind(this, entity.id)}/>
             </div>
           </div>
         )
@@ -219,6 +224,12 @@ class GenericSearch extends React.Component {
     if (e.keyCode === 13) {
       submit('genericSearchForm')
     }
+  }
+
+  onClickExpand (id) {
+    const {expanded} = this.state
+    expanded[id] = !expanded[id]
+    this.setState({expanded})
   }
 
   onRowDblClick () {
@@ -926,7 +937,6 @@ class GenericSearch extends React.Component {
                   cells={this.cells}
                   ref="table"
                   rowMetadata={{'key': 'id'}}
-                  selectable
                   onRowDblClick={this.onRowDblClick.bind(this)}
                   params={this.getServiceParams()}
                   pageSize={10}
