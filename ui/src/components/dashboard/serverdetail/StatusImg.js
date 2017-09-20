@@ -19,14 +19,32 @@ export default class StatusImg extends React.Component {
     const {device} = this.props
     const {resCode} = this.state
 
+    let msg = ''
+
     switch (resCode) {
       case 1:
-        this.props.showDeviceEditModal(true, device)
-        showAlert('No Agent/Collector defined. Please edit device and choose agent or collector. If you need agent, click "Install" button to install agent. Otherwise, please choose collector.')
+        msg = 'No Agent/Collector defined. Please edit device and choose agent or collector. If you need agent, click "Install" button to install agent. Otherwise, please choose collector.'
+        showAlert(msg, () => {
+          this.props.showDeviceEditModal(true, device)
+        })
         break
       case 2:
-        this.props.showDeviceCredsModal(true, device)
-        showAlert('No login credentials found. Please add SSH credentials.')
+        msg = 'No login credentials found. Please add SSH credentials.'
+        showAlert(msg, () => {
+          this.props.showDeviceCredsModal(true, device)
+        })
+        break
+      case 3:
+        msg = 'Please choose linux os name.'
+        showAlert(msg, () => {
+          this.props.showDeviceEditModal(true, device)
+        })
+        break
+      case 4:
+        msg = 'Failed to check device with current credentials. Please check if credentials are correct.'
+        showAlert(msg, () => {
+          this.props.showDeviceCredsModal(true, device)
+        })
         break
     }
   }
