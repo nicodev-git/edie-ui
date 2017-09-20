@@ -103,6 +103,10 @@ body {
     width: 100%;
 }
 
+.position-collapse {
+    height: 30px;
+}
+
 a, a:focus, a:hover {
     outline: 0;
     text-decoration: none;

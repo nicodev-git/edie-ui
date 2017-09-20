@@ -112,7 +112,7 @@ class GenericSearch extends React.Component {
               {expand || !isOverflow ? null : <div className="bt-gradient"/>}
             </div>
             {isOverflow ? (
-              <div className="position-ab text-center">
+              <div className={`${expand ? 'position-collapse' : 'position-ab'} text-center`}>
                 <img
                   src={`/resources/images/dashboard/${expand ? 'collapse' : 'expand'}.png`} width="32" alt=""
                   onClick={this.onClickExpand.bind(this, entity.id)}/>
