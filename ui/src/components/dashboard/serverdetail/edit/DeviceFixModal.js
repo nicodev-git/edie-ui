@@ -33,7 +33,7 @@ export default class DeviceFixModal extends React.Component {
     return (
       <DeviceFixModalView
         {...this.props}
-        msg="Please check credentials"
+        msg={this.getMessage()}
         onHide={this.onHide.bind(this)}
       />
     )
