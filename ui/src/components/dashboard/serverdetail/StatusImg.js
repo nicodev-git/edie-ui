@@ -11,6 +11,7 @@ export default class StatusImg extends React.Component {
     super(props)
     this.state = {
       up: false,
+      loading: true,
       info: '',
       resCode: 0
     }
@@ -34,7 +35,7 @@ export default class StatusImg extends React.Component {
 
   checkState () {
     checkAgentUp(this.props.device.id, (up, info, resCode) => {
-      this.setState({up, info, resCode})
+      this.setState({up, info, resCode, loading: false})
     })
   }
 
@@ -64,8 +65,8 @@ export default class StatusImg extends React.Component {
   render () {
     const {device, onClickFix} = this.props
     if (!device) return null
-    const {up, info} = this.state
-    if (up) return null
+    const {up, info, loading} = this.state
+    if (up || loading) return null
     return (
       <span className="valign-middle margin-md-left">
         <img
