@@ -390,6 +390,6 @@ export function cybertronRenderInfo (item) {
 
 export function checkAgentUp (id, cb) {
   axios.get(`${ROOT_URL}/isAgentUp?id=${id}`).then(res => {
-    cb(res.data.success, res.data.info)
+    cb(res.data.success, res.data.info, parseInt(res.data.object || 0))
   }).catch(() => cb(false))
 }

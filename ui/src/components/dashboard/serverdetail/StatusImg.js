@@ -2,7 +2,7 @@ import React from 'react'
 
 import { getDeviceType } from 'components/common/wizard/WizardConfig'
 import DeviceEditModal from 'containers/shared/wizard/DeviceEditModalContainer'
-// import {showAlert} from 'components/common/Alert'
+import {showAlert} from 'components/common/Alert'
 import {checkAgentUp} from 'shared/Global'
 
 export default class StatusImg extends React.Component {
@@ -10,13 +10,25 @@ export default class StatusImg extends React.Component {
     super(props)
     this.state = {
       up: false,
-      info: ''
+      info: '',
+      resCode: 0
     }
 
   }
   onClickFix () {
     const {device} = this.props
-    this.props.showDeviceEditModal(true, device)
+    const {resCode} = this.state
+
+    switch (resCode) {
+      case 1:
+        this.props.showDeviceEditModal(true, device)
+        showAlert('No Agent/Collector defined. Please edit device and choose agent or collector. If you need agent, click "Install" button to install agent. Otherwise, please choose collector.')
+        break
+      case 2:
+        this.props.showDeviceCredsModal(true, device)
+        showAlert('No login credentials found. Please add SSH credentials.')
+        break
+    }
   }
   onFinishEdit (device) {
     this.props.updateMapDevice(device)
@@ -30,8 +42,8 @@ export default class StatusImg extends React.Component {
   }
 
   checkState () {
-    checkAgentUp(this.props.device.id, (up, info) => {
-      this.setState({up, info})
+    checkAgentUp(this.props.device.id, (up, info, resCode) => {
+      this.setState({up, info, resCode})
     })
   }
 
