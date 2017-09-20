@@ -99,7 +99,12 @@ class GenericSearch extends React.Component {
           timeField,
           limit: 650
         }
-        return <div className="padding-sm bt-gray">{renderEntity(data, options)}</div>
+        return (
+          <div className="padding-sm bt-gray">
+            {renderEntity(data, options)}
+            <div className="bt-gradient"/>
+          </div>
+        )
       }
     }]
   }
