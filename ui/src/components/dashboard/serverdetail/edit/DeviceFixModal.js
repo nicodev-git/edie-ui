@@ -5,6 +5,7 @@ import DeviceFixModalView from './DeviceFixModalView'
 export default class DeviceFixModal extends React.Component {
   getMessage () {
     const {fixCode} = this.props
+    let msg = ''
     switch (fixCode) {
       case 1:
         msg = 'No Agent/Collector defined. Please edit device and choose agent or collector. If you need agent, click "Install" button to install agent. Otherwise, please choose collector.'
@@ -23,10 +24,10 @@ export default class DeviceFixModal extends React.Component {
         break
     }
 
-    retrn msg
+    return msg
   }
   onHide () {
-
+    this.props.showDeviceFixModal(false)
   }
   render () {
     return (

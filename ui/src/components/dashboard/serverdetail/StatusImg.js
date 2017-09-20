@@ -2,8 +2,9 @@ import React from 'react'
 
 import { getDeviceType } from 'components/common/wizard/WizardConfig'
 import DeviceEditModal from 'containers/shared/wizard/DeviceEditModalContainer'
-import {showAlert} from 'components/common/Alert'
+// import {showAlert} from 'components/common/Alert'
 import {checkAgentUp} from 'shared/Global'
+import DeviceFixModal from 'containers/dashboard/serverdetail/DeviceFixModalContainer'
 
 export default class StatusImg extends React.Component {
   constructor (props) {
@@ -53,6 +54,13 @@ export default class StatusImg extends React.Component {
     )
   }
 
+  renderDeviceFixModal () {
+    if (!this.props.deviceFixModalOpen) return null
+    return (
+      <DeviceFixModal/>
+    )
+  }
+
   render () {
     const {device, onClickFix} = this.props
     if (!device) return null
@@ -70,6 +78,7 @@ export default class StatusImg extends React.Component {
         <span className="link margin-md-left text-primary" onClick={onClickFix || this.onClickFix.bind(this)}>Fix</span>
 
         {this.renderDeviceEditModal()}
+        {this.renderDeviceFixModal()}
       </span>
     )
   }

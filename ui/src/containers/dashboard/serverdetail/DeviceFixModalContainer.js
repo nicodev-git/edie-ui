@@ -1,5 +1,7 @@
 import React from 'react'
-import DeviceFixModal from 'comopnents/dashboard/serverdetail/edit/DeviceFixModal'
+import { connect } from 'react-redux'
+
+import DeviceFixModal from 'components/dashboard/serverdetail/edit/DeviceFixModal'
 
 import {
   showDeviceFixModal
