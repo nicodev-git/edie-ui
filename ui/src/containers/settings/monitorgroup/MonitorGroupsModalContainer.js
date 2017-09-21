@@ -1,11 +1,28 @@
 import React from 'react'
+import { connect } from 'react-redux'
 
-export default class MonitorGroupsModalContainer extends React.Component {
+import MonitorGroupsModal from 'components/sidebar/settings/monitorgroup/MonitorGroupsModal'
+
+import {
+  fetchMonitorGroups,
+
+  showMonitorGroupsModal
+} from 'actions'
+
+class MonitorGroupsModalContainer extends React.Component {
   render () {
     return (
-      <div>
-
-      </div>
+      <MonitorGroupsModal {...this.props}/>
     )
   }
 }
+
+export default connect(
+  state => ({
+    monitorGroups: state.settings.monitorGroups
+  }), {
+    fetchMonitorGroups,
+
+    showMonitorGroupsModal
+  }
+)(MonitorGroupsModalContainer)
