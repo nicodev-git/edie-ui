@@ -3,7 +3,8 @@ import {
   FETCH_MONITOR_GROUPS,
   SHOW_MONITOR_GROUPS_MODAL,
   SHOW_MONITOR_GROUP_MODAL,
-  ADD_MONITOR_GROUP
+  ADD_MONITOR_GROUP,
+  UPDATE_MONITOR_GROUP
 } from './types'
 
 import { apiError } from './Errors'
@@ -21,6 +22,14 @@ export const addMonitorGroup = (props) => {
   return dispatch => {
     axios.post(`${ROOT_URL}/monitorgroup`, props).then(res => {
       dispatch({type: ADD_MONITOR_GROUP, data: res.data})
+    }).catch(error => apiError(dispatch, error))
+  }
+}
+
+export const updateMonitorGroup = (entity) => {
+  return dispatch => {
+    axios.put(entity._links.self.href, entity).then(res => {
+      dispatch({type: UPDATE_MONITOR_GROUP, data: res.data})
     }).catch(error => apiError(dispatch, error))
   }
 }

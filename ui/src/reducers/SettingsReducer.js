@@ -141,7 +141,9 @@ import {
 
   FETCH_MONITOR_GROUPS,
   SHOW_MONITOR_GROUPS_MODAL,
-  SHOW_MONITOR_GROUP_MODAL
+  SHOW_MONITOR_GROUP_MODAL,
+  ADD_MONITOR_GROUP,
+  UPDATE_MONITOR_GROUP
 
 } from 'actions/types'
 
@@ -606,6 +608,12 @@ export default function (state = initialState, action) {
 
     case SHOW_MONITOR_GROUP_MODAL:
       return { ...state, monitorGroupModalOpen: action.visible, editMonitorGroup: action.data }
+
+    case ADD_MONITOR_GROUP:
+      return { ...state, monitorGroups: [...state.monitorGroups, action.data] }
+    case UPDATE_MONITOR_GROUP:
+      return { ...state, monitor: state.monitorGroups.map(p => p.id === action.data.id ? action.data : p) }
+
     default:
       return state
   }

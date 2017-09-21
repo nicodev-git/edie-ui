@@ -38,12 +38,19 @@ class MonitorGroupModal extends React.Component {
     this.props.showMonitorGroupModal(false)
   }
   handleFormSubmit (values) {
+    const {editMonitorGroup} = this.props
     const props = {
+      ...editMonitorGroup,
       ...values,
       monitorids: this.state.selectedMonitors.map(p => p.uid)
     }
 
-    console.log(props)
+    if (editMonitorGroup) {
+      this.props.updateMonitorGroup(props)
+    } else {
+      this.props.addMonitorGroup(props)
+    }
+    this.onHide()
   }
   render () {
     const {selectedMonitors} = this.state

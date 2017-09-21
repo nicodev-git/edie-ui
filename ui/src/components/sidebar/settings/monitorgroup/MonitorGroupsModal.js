@@ -10,8 +10,8 @@ export default class MonitorGroupsModal extends React.Component {
   onClickAdd () {
     this.props.showMonitorGroupModal(true)
   }
-  onClickEdit () {
-
+  onClickEdit (entity) {
+    this.props.showMonitorGroupModal(true, entity)
   }
   onClickRemove () {
 

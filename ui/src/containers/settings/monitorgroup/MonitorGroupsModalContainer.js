@@ -7,7 +7,9 @@ import {
   fetchMonitorGroups,
 
   showMonitorGroupsModal,
-  showMonitorGroupModal
+  showMonitorGroupModal,
+  addMonitorGroup,
+  updateMonitorGroup
 } from 'actions'
 
 class MonitorGroupsModalContainer extends React.Component {
@@ -22,12 +24,15 @@ export default connect(
   state => ({
     monitorGroups: state.settings.monitorGroups,
     monitorGroupModalOpen: state.settings.monitorGroupModalOpen,
+    editMonitorGroup: state.settings.editMonitorGroup,
 
     allDevices: state.devices.deviceAndGroups
   }), {
     fetchMonitorGroups,
 
     showMonitorGroupsModal,
-    showMonitorGroupModal
+    showMonitorGroupModal,
+    addMonitorGroup,
+    updateMonitorGroup
   }
 )(MonitorGroupsModalContainer)
