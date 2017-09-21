@@ -6,7 +6,8 @@ import MonitorGroupsModal from 'components/sidebar/settings/monitorgroup/Monitor
 import {
   fetchMonitorGroups,
 
-  showMonitorGroupsModal
+  showMonitorGroupsModal,
+  showMonitorGroupModal
 } from 'actions'
 
 class MonitorGroupsModalContainer extends React.Component {
@@ -19,10 +20,12 @@ class MonitorGroupsModalContainer extends React.Component {
 
 export default connect(
   state => ({
-    monitorGroups: state.settings.monitorGroups
+    monitorGroups: state.settings.monitorGroups,
+    monitorGroupModalOpen: state.settings.monitorGroupModalOpen
   }), {
     fetchMonitorGroups,
 
-    showMonitorGroupsModal
+    showMonitorGroupsModal,
+    showMonitorGroupModal
   }
 )(MonitorGroupsModalContainer)

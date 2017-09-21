@@ -15,6 +15,11 @@ export default class MonitorGroupsModal extends React.Component {
   onClickRemove () {
 
   }
+
+  renderEditModal () {
+    if (!this.props.monitorGroupModalOpen) return null
+  }
+
   render () {
     return (
       <MonitorGroupsModalView
@@ -23,6 +28,7 @@ export default class MonitorGroupsModal extends React.Component {
         onClickAdd={this.onClickAdd.bind(this)}
         onClickEdit={this.onClickEdit.bind(this)}
         onClickRemove={this.onClickRemove.bind(this)}
+        editModal={this.renderEditModal()}
       />
     )
   }

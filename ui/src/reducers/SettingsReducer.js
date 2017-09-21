@@ -140,7 +140,8 @@ import {
   SHOW_SIMULATION_MODAL,
 
   FETCH_MONITOR_GROUPS,
-  SHOW_MONITOR_GROUPS_MODAL
+  SHOW_MONITOR_GROUPS_MODAL,
+  SHOW_MONITOR_GROUP_MODAL
 
 } from 'actions/types'
 
@@ -602,6 +603,9 @@ export default function (state = initialState, action) {
 
     case SHOW_MONITOR_GROUPS_MODAL:
       return { ...state, monitorGroupsModalOpen: action.visible }
+
+    case SHOW_MONITOR_GROUP_MODAL:
+      return { ...state, monitorGroupModalOpen: action.visible, editMonitorGroup: action.data }
     default:
       return state
   }

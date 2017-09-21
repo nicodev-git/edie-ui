@@ -34,8 +34,9 @@ export default class MonitorGroupsModalView extends React.Component {
       </tr>
     )
   }
+
   render () {
-    const {onHide, monitorGroups} = this.props
+    const {onHide, monitorGroups, editModal} = this.props
     return (
       <Modal title="Monitor Groups" onRequestClose={onHide}>
         <CardPanel title="Monitor Groups" tools={this.renderTools()}>
@@ -47,6 +48,7 @@ export default class MonitorGroupsModalView extends React.Component {
             </table>
           </div>
         </CardPanel>
+        {editModal}
       </Modal>
     )
   }
