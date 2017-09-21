@@ -21,7 +21,9 @@ class MonitorGroupsModalContainer extends React.Component {
 export default connect(
   state => ({
     monitorGroups: state.settings.monitorGroups,
-    monitorGroupModalOpen: state.settings.monitorGroupModalOpen
+    monitorGroupModalOpen: state.settings.monitorGroupModalOpen,
+
+    allDevices: state.devices.deviceAndGroups
   }), {
     fetchMonitorGroups,
 
