@@ -7,19 +7,30 @@ export default class SearchMonitorModal extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      selected: [],
+      selectedDevices: [],
+      selectedMonitors: [],
       monitorTreeData: null
     }
   }
 
-  onClickRow (monitor) {
-    let {selected} = this.state
-    if (selected.filter(p => p.uid === monitor.uid).length) {
-      selected = selected.filter(p => p.uid !== monitor.uid)
+  onClickMonitor (monitor) {
+    let {selectedMonitors} = this.state
+    if (selectedMonitors.filter(p => p.uid === monitor.uid).length) {
+      selectedMonitors = selectedMonitors.filter(p => p.uid !== monitor.uid)
     } else {
-      selected = [...selected, monitor]
+      selectedMonitors = [...selectedMonitors, monitor]
     }
-    this.setState({selected})
+    this.setState({selectedMonitors})
+  }
+
+  onClickDevice (device) {
+    let {selectedDevices} = this.state
+    if (selectedDevices.filter(p => p.id === device.id).length) {
+      selectedDevices = selectedDevices.filter(p => p.id !== device.id)
+    } else {
+      selectedDevices = [...selectedDevices, device]
+    }
+    this.setState({selectedDevices})
   }
 
   onClickOK () {
@@ -43,10 +54,12 @@ export default class SearchMonitorModal extends React.Component {
     return (
       <SearchMonitorModalView
         allDevices={this.props.allDevices}
-        selected={this.state.selected}
+        selectedDevices={this.state.selectedDevices}
+        selectedMonitors={this.state.selectedMonitors}
         onClickOK={this.onClickOK.bind(this)}
         onClickClose={this.onClickClose.bind(this)}
-        onClickRow={this.onClickRow.bind(this)}
+        onClickMonitor={this.onClickMonitor.bind(this)}
+        onClickDevice={this.onClickDevice.bind(this)}
         onClickShowAny={this.onClickShowAny.bind(this)}
 
         monitorTreeData={this.state.monitorTreeData}

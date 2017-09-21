@@ -1,32 +1,35 @@
 import React from 'react'
+import {Checkbox} from 'material-ui'
 
 import SortableTree from 'react-sortable-tree'
 
 import {TwoButtonsBlockCustom, Modal, CardPanel} from 'components/modal/parts'
 
 export default class SearchMonitorModalView extends React.Component {
-  renderTitle (monitor) {
-    const {onClickRow, selected} = this.props
+  renderMonitor (monitor) {
+    const {onClickMonitor, selectedMonitors} = this.props
     return (
-      (
-        <div
-          className="link text-primary"
-          onClick={() => onClickRow(monitor)}
-          style={{background: selected && selected.filter(p => p.uid === monitor.uid).length ? '#CCC' : 'white', minWidth: 200}}
-        >
-          {monitor.name}
-        </div>
-      )
+      <Checkbox
+        label={monitor.name} onCheck={() => onClickMonitor(monitor)}
+        checked={selectedMonitors && selectedMonitors.filter(p => p.uid === monitor.uid).length > 0}/>
+    )
+  }
+  renderDevice (device) {
+    const {onClickDevice, selectedDevices} = this.props
+    return (
+      <Checkbox
+        label={device.name} onCheck={() => onClickDevice(device)}
+        checked={selectedDevices && selectedDevices.filter(p => p.id === device.id).length > 0}/>
     )
   }
   renderTree () {
-    const {allDevices, onChangeTreeData, monitorTreeData, onClickRow, selected} = this.props
+    const {allDevices, onChangeTreeData, monitorTreeData} = this.props
     let data = monitorTreeData
     if (!data) {
       data = allDevices.filter(p => p.monitors && p.monitors.length).map(device => ({
-        title: device.name,
+        title: this.renderDevice.bind(this, device),
         children: device.monitors.map(monitor => ({
-          title: this.renderTitle.bind(this, monitor)
+          title: this.renderMonitor.bind(this, monitor)
         }))
       }))
     }
