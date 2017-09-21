@@ -1,13 +1,14 @@
 import React from 'react'
 
 import MonitorGroupsModalView from './MonitorGroupsModalView'
+import MonitorGroupModal from './MonitorGroupModal'
 
 export default class MonitorGroupsModal extends React.Component {
   onHide () {
     this.props.showMonitorGroupsModal(false)
   }
   onClickAdd () {
-
+    this.props.showMonitorGroupModal(true)
   }
   onClickEdit () {
 
@@ -18,6 +19,9 @@ export default class MonitorGroupsModal extends React.Component {
 
   renderEditModal () {
     if (!this.props.monitorGroupModalOpen) return null
+    return (
+      <MonitorGroupModal {...this.props}/>
+    )
   }
 
   render () {
