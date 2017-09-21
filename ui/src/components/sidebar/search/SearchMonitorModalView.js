@@ -32,6 +32,15 @@ export default class SearchMonitorModalView extends React.Component {
           title: this.renderMonitor.bind(this, monitor)
         }))
       }))
+
+      monitorGroups.forEach(group => {
+        // const children = []
+        //
+        // return {
+        //   title: this.renderMonitorGroup.bind(this, group),
+        //   children
+        // }
+      })
     }
     return (
       <div style={{ height: 600 }}>

@@ -802,11 +802,3 @@ export const toggleMapUser = (data) => {
     dispatch({type: TOGGLE_MAP_USER, data})
   }
 }
-
-export const fetchMonitorGroups = () => {
-  return dispatch => {
-    axios.get(`${ROOT_URL}/monitorgroup`).then(response => {
-      dispatch({type: FETCH_MONITOR_GROUPS, data: response.data._embedded.monitorGroups})
-    }).catch(error => apiError(dispatch, error))
-  }
-}

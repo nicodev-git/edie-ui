@@ -466,6 +466,10 @@ export const SHOW_GAUGE_PICKER = 'SHOW_GAUGE_PICKER'
 ///////////////////////////////////////////////////////////////
 
 export const FETCH_MONITOR_GROUPS = 'FETCH_MONITOR_GROUPS'
+export const ADD_MONITOR_GROUP = 'ADD_MONITOR_GROUP'
+export const UPDATE_MONITOR_GROUP = 'UPDATE_MONITOR_GROUP'
+export const REMOVE_MONITOR_GROUP = 'REMOVE_MONITOR_GROUP'
+export const SHOW_MONITOR_GROUP_MODAL = 'SHOW_MONITOR_GROUP_MODAL'
 
 ///////////////////////////////////////////////////////////////
 

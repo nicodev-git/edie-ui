@@ -132,6 +132,7 @@ class GenericSearch extends React.Component {
     this.props.fetchDevicesGroups()
     this.props.fetchWorkflows()
     this.props.fetchMonitorTemplates()
+    this.props.fetchMonitorGroups()
 
     if (q) {
       try {
