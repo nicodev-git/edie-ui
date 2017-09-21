@@ -2,6 +2,7 @@ import React from 'react'
 
 import MonitorGroupsModalView from './MonitorGroupsModalView'
 import MonitorGroupModal from './MonitorGroupModal'
+import {showConfirm} from 'components/common/Alert'
 
 export default class MonitorGroupsModal extends React.Component {
   onHide () {
@@ -13,8 +14,12 @@ export default class MonitorGroupsModal extends React.Component {
   onClickEdit (entity) {
     this.props.showMonitorGroupModal(true, entity)
   }
-  onClickRemove () {
+  onClickRemove (entity) {
+    showConfirm('Are you sure?', btn => {
+      if (btn !== 'ok') return
 
+      this.props.removeMonitorGroup(entity)
+    })
   }
 
   renderEditModal () {

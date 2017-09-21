@@ -143,7 +143,8 @@ import {
   SHOW_MONITOR_GROUPS_MODAL,
   SHOW_MONITOR_GROUP_MODAL,
   ADD_MONITOR_GROUP,
-  UPDATE_MONITOR_GROUP
+  UPDATE_MONITOR_GROUP,
+  REMOVE_MONITOR_GROUP
 
 } from 'actions/types'
 
@@ -612,7 +613,9 @@ export default function (state = initialState, action) {
     case ADD_MONITOR_GROUP:
       return { ...state, monitorGroups: [...state.monitorGroups, action.data] }
     case UPDATE_MONITOR_GROUP:
-      return { ...state, monitor: state.monitorGroups.map(p => p.id === action.data.id ? action.data : p) }
+      return { ...state, monitorGroups: state.monitorGroups.map(p => p.id === action.data.id ? action.data : p) }
+    case REMOVE_MONITOR_GROUP:
+      return { ...state, monitorGroups: state.monitorGroups.filter(p => p.id !== action.data.id)}
 
     default:
       return state

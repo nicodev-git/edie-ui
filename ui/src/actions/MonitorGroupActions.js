@@ -4,7 +4,8 @@ import {
   SHOW_MONITOR_GROUPS_MODAL,
   SHOW_MONITOR_GROUP_MODAL,
   ADD_MONITOR_GROUP,
-  UPDATE_MONITOR_GROUP
+  UPDATE_MONITOR_GROUP,
+  REMOVE_MONITOR_GROUP
 } from './types'
 
 import { apiError } from './Errors'
@@ -30,6 +31,14 @@ export const updateMonitorGroup = (entity) => {
   return dispatch => {
     axios.put(entity._links.self.href, entity).then(res => {
       dispatch({type: UPDATE_MONITOR_GROUP, data: res.data})
+    }).catch(error => apiError(dispatch, error))
+  }
+}
+
+export const removeMonitorGroup = (entity) => {
+  return dispatch => {
+    axios.delete(entity._links.self.href).then(() => {
+      dispatch({type: REMOVE_MONITOR_GROUP, data: entity})
     }).catch(error => apiError(dispatch, error))
   }
 }

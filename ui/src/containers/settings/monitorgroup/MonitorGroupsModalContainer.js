@@ -9,7 +9,8 @@ import {
   showMonitorGroupsModal,
   showMonitorGroupModal,
   addMonitorGroup,
-  updateMonitorGroup
+  updateMonitorGroup,
+  removeMonitorGroup
 } from 'actions'
 
 class MonitorGroupsModalContainer extends React.Component {
@@ -33,6 +34,7 @@ export default connect(
     showMonitorGroupsModal,
     showMonitorGroupModal,
     addMonitorGroup,
-    updateMonitorGroup
+    updateMonitorGroup,
+    removeMonitorGroup
   }
 )(MonitorGroupsModalContainer)
