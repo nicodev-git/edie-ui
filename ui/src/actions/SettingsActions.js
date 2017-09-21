@@ -90,8 +90,6 @@ import {
   SHOW_SIMULATION_MODAL,
   TOGGLE_MAP_USER,
 
-  FETCH_MONITOR_GROUPS,
-
   NO_AUTH_ERROR
 } from './types'
 

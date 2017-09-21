@@ -1,6 +1,7 @@
 import axios from 'axios'
 import {
-  FETCH_MONITOR_GROUPS
+  FETCH_MONITOR_GROUPS,
+  SHOW_MONITOR_GROUPS_MODAL
 } from './types'
 
 import { apiError } from './Errors'
@@ -14,4 +15,8 @@ export const fetchMonitorGroups = () => {
   }
 }
 
-
+export const showMonitorGroupsModal = (visible) => {
+  return dispatch => {
+    dispatch({type: SHOW_MONITOR_GROUPS_MODAL, visible})
+  }
+}
