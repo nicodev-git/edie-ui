@@ -26,7 +26,7 @@ export default class MonitorGroupModalView extends React.Component {
       }))
     }
     return (
-      <div style={{ height: 600 }}>
+      <div style={{ height: 400 }}>
         <SortableTree
           treeData={data}
           onChange={onChangeTreeData}
@@ -38,9 +38,9 @@ export default class MonitorGroupModalView extends React.Component {
   }
 
   render () {
-    const {onHide, onSubmit} = this.props
+    const {onHide, onSubmit, title} = this.props
     return (
-      <Modal title="Monitor Group" onRequestClose={onHide}>
+      <Modal title={title} onRequestClose={onHide}>
         <Form onSubmit={onSubmit}>
           <CardPanel title="Monitor Group">
             <Field name="name" component={FormInput} floatingLabel="Name"/>
