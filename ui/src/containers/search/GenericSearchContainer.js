@@ -71,7 +71,9 @@ import {
   showSearchMonitorModal,
 
   showSearchDeviceModal,
-  fetchMonitorGroups
+  fetchMonitorGroups,
+
+  showMonitorGroupsModal
 } from 'actions'
 
 class GenericSearchContainer extends React.Component {
@@ -149,7 +151,7 @@ export default connect(
     searchMonitorId: state.search.searchMonitorId,
     searchMonitorModalOpen: state.search.searchMonitorModalOpen,
 
-    searchDeviceModalOpen: state.search.searchDeviceModalOpen
+    monitorGroupsModalOpen: state.search.monitorGroupsModalOpen
   }),
   dispatch => ({
     ...bindActionCreators({
@@ -217,7 +219,9 @@ export default connect(
       showSearchMonitorModal,
 
       showSearchDeviceModal,
-      fetchMonitorGroups
+      fetchMonitorGroups,
+
+      showMonitorGroupsModal
     }, dispatch)
   })
 )(withRouter(GenericSearchContainer))

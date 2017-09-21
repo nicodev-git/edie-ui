@@ -50,6 +50,10 @@ export default class SearchMonitorModal extends React.Component {
     this.props.onClickOK([], [])
   }
 
+  onClickMonitorGroups () {
+    this.props.showMonitorGroupsModal(true)
+  }
+
   render () {
     return (
       <SearchMonitorModalView
@@ -62,6 +66,7 @@ export default class SearchMonitorModal extends React.Component {
         onClickMonitor={this.onClickMonitor.bind(this)}
         onClickDevice={this.onClickDevice.bind(this)}
         onClickShowAny={this.onClickShowAny.bind(this)}
+        onClickMonitorGroups={this.onClickMonitorGroups.bind(this)}
 
         monitorTreeData={this.state.monitorTreeData}
         onChangeTreeData={(monitorTreeData) => {this.setState({monitorTreeData})}}

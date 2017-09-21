@@ -33,6 +33,7 @@ import ViewFilterModal from './ViewFilterModal'
 import SearchGraphModal from './SearchGraphModal'
 import TagPickerModal from 'containers/settings/tag/TagPickerModalContainer'
 import SearchMonitorModal from './SearchMonitorModal'
+import MonitorGroupsModal from 'containers/settings/monitorgroup/MonitorGroupsModalContainer'
 
 class GenericSearch extends React.Component {
   constructor (props) {
@@ -762,6 +763,13 @@ class GenericSearch extends React.Component {
     )
   }
 
+  renderMonitorGroupsModal () {
+    if (!this.props.monitorGroupsModalOpen) return null
+    return (
+      <MonitorGroupsModal/>
+    )
+  }
+
   renderFieldsView () {
     const {searchFieldsVisible} = this.props
     if (!searchFieldsVisible) return null
@@ -973,6 +981,7 @@ class GenericSearch extends React.Component {
           {this.renderFilterViewModal()}
           {this.renderTagsModal()}
           {this.renderSearchMonitorModal()}
+          {this.renderMonitorGroupsModal()}
           <ReactTooltip/>
         </TabPageBody>
       </TabPage>

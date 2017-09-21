@@ -1,5 +1,7 @@
 import React from 'react'
 import {Checkbox} from 'material-ui'
+import SetDefIcon from 'material-ui/svg-icons/content/sort'
+import {IconButton} from 'material-ui'
 
 import SortableTree from 'react-sortable-tree'
 
@@ -75,10 +77,12 @@ export default class SearchMonitorModalView extends React.Component {
   }
 
   render () {
-    const {onClickOK, onClickClose, onClickShowAny} = this.props
+    const {onClickOK, onClickClose, onClickShowAny, onClickMonitorGroups} = this.props
     return (
       <Modal title="Devices, monitor groups and monitors" onRequestClose={onClickClose}>
-        <CardPanel title="Devices, monitor groups and monitors">
+        <CardPanel
+          title="Devices, monitor groups and monitors"
+          tools={<IconButton onTouchTap={onClickMonitorGroups} tooltip="Monitor Groups"><SetDefIcon size={32}/></IconButton>}>
           {this.renderTree()}
         </CardPanel>
         <TwoButtonsBlockCustom name1="Show Any" name2="OK" action1={onClickShowAny} action2={onClickOK}/>
