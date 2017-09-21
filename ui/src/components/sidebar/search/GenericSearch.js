@@ -33,7 +33,6 @@ import ViewFilterModal from './ViewFilterModal'
 import SearchGraphModal from './SearchGraphModal'
 import TagPickerModal from 'containers/settings/tag/TagPickerModalContainer'
 import SearchMonitorModal from './SearchMonitorModal'
-import SearchDeviceModal from './SearchDeviceModal'
 
 class GenericSearch extends React.Component {
   constructor (props) {
@@ -547,18 +546,13 @@ class GenericSearch extends React.Component {
     collapseSearchFields(!searchFieldsVisible)
   }
 
-  onChangeMonitorId (monitors) {
+  onChangeMonitorId (monitors, devices) {
     const {formValues} = this.props
-    const newQuery = modifyArrayValues(formValues.query, 'monitor', monitors.map(p => `"${p.name}"`))
+    let newQuery = modifyArrayValues(formValues.query, 'monitor', monitors.map(p => `"${p.name}"`))
+    newQuery = modifyArrayValues(newQuery, 'device', devices.map(p => `"${p.name}"`))
+
     this.updateQuery(newQuery)
     this.props.showSearchMonitorModal(false)
-  }
-
-  onChangeDeviceId (devices) {
-    const {formValues} = this.props
-    const newQuery = modifyArrayValues(formValues.query, 'device', devices.map(p => `"${p.name}"`))
-    this.updateQuery(newQuery)
-    this.props.showSearchDeviceModal(false)
   }
 
   getMonitorId(monitorName) {
@@ -576,10 +570,6 @@ class GenericSearch extends React.Component {
 
   onClickSearchMonitor () {
     this.props.showSearchMonitorModal(true)
-  }
-
-  onClickSearchDevice () {
-    this.props.showSearchDeviceModal(true)
   }
 
   redrawSearch () {
@@ -771,13 +761,6 @@ class GenericSearch extends React.Component {
     )
   }
 
-  renderSearchDeviceModal () {
-    if (!this.props.searchDeviceModalOpen) return null
-    return (
-      <SearchDeviceModal {...this.props} onClickOK={this.onChangeDeviceId.bind(this)}/>
-    )
-  }
-
   renderFieldsView () {
     const {searchFieldsVisible} = this.props
     if (!searchFieldsVisible) return null
@@ -876,7 +859,7 @@ class GenericSearch extends React.Component {
 
   render () {
     const { handleSubmit, monitorTemplates, searchTags, queryChips, selectedWfs } = this.props
-    const { severity, monitorTypes, monitorNames, deviceNames, from, to, types } = this.getParams()
+    const { severity, monitorTypes, from, to, types } = this.getParams()
 
     return (
       <TabPage>
@@ -913,11 +896,8 @@ class GenericSearch extends React.Component {
             onClickClear={this.onClickClearSearch.bind(this)}
             onClickToggleFields={this.onClickToggleFields.bind(this)}
 
-            searchMonitor={monitorNames.length ? (monitorNames.length > 1 ? `${monitorNames.length} Monitors` : monitorNames[0]) : 'Any'}
+            searchMonitor={'Device/Monitor'}
             onClickSearchMonitor={this.onClickSearchMonitor.bind(this)}
-
-            searchDevice={deviceNames.length ? (deviceNames.length > 1 ? `${deviceNames.length} Devices` : deviceNames[0]) : 'Any'}
-            onClickSearchDevice={this.onClickSearchDevice.bind(this)}
           />
 
           <div className="text-center">
@@ -992,7 +972,6 @@ class GenericSearch extends React.Component {
           {this.renderFilterViewModal()}
           {this.renderTagsModal()}
           {this.renderSearchMonitorModal()}
-          {this.renderSearchDeviceModal()}
           <ReactTooltip/>
         </TabPageBody>
       </TabPage>

@@ -34,11 +34,12 @@ export default class SearchMonitorModalView extends React.Component {
       }))
     }
     return (
-      <div style={{ height: 400 }}>
+      <div style={{ height: 600 }}>
         <SortableTree
           treeData={data}
           onChange={onChangeTreeData}
           canDrag={false}
+          rowHeight={50}
         />
       </div>
     )
@@ -67,8 +68,8 @@ export default class SearchMonitorModalView extends React.Component {
   render () {
     const {onClickOK, onClickClose, onClickShowAny} = this.props
     return (
-      <Modal title="Monitors" onRequestClose={onClickClose}>
-        <CardPanel title="Monitors">
+      <Modal title="Device and Monitor" onRequestClose={onClickClose}>
+        <CardPanel title="Device and Monitor">
           {this.renderTree()}
         </CardPanel>
         <TwoButtonsBlockCustom name1="Show Any" name2="OK" action1={onClickShowAny} action2={onClickOK}/>

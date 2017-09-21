@@ -67,10 +67,7 @@ export default class SearchFormView extends React.Component {
       onClickToggleFields,
 
       searchMonitor,
-      onClickSearchMonitor,
-
-      searchDevice,
-      onClickSearchDevice
+      onClickSearchMonitor
     } = this.props
     return (
       <form onSubmit={onSubmit}>
@@ -165,7 +162,6 @@ export default class SearchFormView extends React.Component {
             </SelectField>
 
             <FlatButton label={searchMonitor} onTouchTap={onClickSearchMonitor} className="valign-top margin-xs-top"/>
-            <FlatButton label={searchDevice} onTouchTap={onClickSearchDevice} className="valign-top margin-xs-top"/>
           </div>
         </div>
       </form>
