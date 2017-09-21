@@ -53,6 +53,7 @@ export default class SearchMonitorModal extends React.Component {
   render () {
     return (
       <SearchMonitorModalView
+        monitorGroups={this.props.monitorGroups}
         allDevices={this.props.allDevices}
         selectedDevices={this.state.selectedDevices}
         selectedMonitors={this.state.selectedMonitors}

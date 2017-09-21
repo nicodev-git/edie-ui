@@ -70,7 +70,8 @@ import {
   updateSearchMonitor,
   showSearchMonitorModal,
 
-  showSearchDeviceModal
+  showSearchDeviceModal,
+  fetchMonitorGroups
 } from 'actions'
 
 class GenericSearchContainer extends React.Component {
@@ -144,6 +145,7 @@ export default connect(
     searchFieldsVisible: state.search.searchFieldsVisible,
 
     allDevices: state.devices.deviceAndGroups,
+    monitorGroups: state.settings.monitorGroups,
     searchMonitorId: state.search.searchMonitorId,
     searchMonitorModalOpen: state.search.searchMonitorModalOpen,
 
@@ -214,7 +216,8 @@ export default connect(
       updateSearchMonitor,
       showSearchMonitorModal,
 
-      showSearchDeviceModal
+      showSearchDeviceModal,
+      fetchMonitorGroups
     }, dispatch)
   })
 )(withRouter(GenericSearchContainer))
