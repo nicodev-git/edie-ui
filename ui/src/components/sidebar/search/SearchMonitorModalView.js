@@ -12,7 +12,7 @@ export default class SearchMonitorModalView extends React.Component {
         <div
           className="link text-primary"
           onClick={() => onClickRow(monitor)}
-          style={{background: selected && selected.filter(p => p.uid === monitor.uid).length ? '#888' : ''}}
+          style={{background: selected && selected.filter(p => p.uid === monitor.uid).length ? '#CCC' : 'white', minWidth: 200}}
         >
           {monitor.name}
         </div>
