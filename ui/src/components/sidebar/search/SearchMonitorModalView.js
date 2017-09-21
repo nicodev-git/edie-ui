@@ -6,17 +6,20 @@ import {TwoButtonsBlockCustom, Modal, CardPanel} from 'components/modal/parts'
 
 export default class SearchMonitorModalView extends React.Component {
   renderTree () {
-    const {allDevices, onChangeTreeData} = this.props
-    const monitorTreeData = allDevices.filter(p => p.monitors && p.monitors.length).map(device => ({
-      title: device.name,
-      children: device.monitors.map(monitor => ({
-        title: monitor.name
+    const {allDevices, onChangeTreeData, monitorTreeData} = this.props
+    let data = monitorTreeData
+    if (!data) {
+      data = allDevices.filter(p => p.monitors && p.monitors.length).map(device => ({
+        title: device.name,
+        children: device.monitors.map(monitor => ({
+          title: monitor.name
+        }))
       }))
-    }))
+    }
     return (
       <div style={{ height: 400 }}>
         <SortableTree
-          treeData={monitorTreeData}
+          treeData={data}
           onChange={onChangeTreeData}
           canDrag={false}
         />

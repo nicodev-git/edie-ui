@@ -7,7 +7,8 @@ export default class SearchMonitorModal extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      selected: []
+      selected: [],
+      monitorTreeData: null
     }
   }
 
@@ -47,6 +48,9 @@ export default class SearchMonitorModal extends React.Component {
         onClickClose={this.onClickClose.bind(this)}
         onClickRow={this.onClickRow.bind(this)}
         onClickShowAny={this.onClickShowAny.bind(this)}
+
+        monitorTreeData={this.state.monitorTreeData}
+        onChangeTreeData={(monitorTreeData) => {this.setState({monitorTreeData})}}
       />
     )
   }
