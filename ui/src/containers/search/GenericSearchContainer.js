@@ -151,7 +151,7 @@ export default connect(
     searchMonitorId: state.search.searchMonitorId,
     searchMonitorModalOpen: state.search.searchMonitorModalOpen,
 
-    monitorGroupsModalOpen: state.search.monitorGroupsModalOpen
+    monitorGroupsModalOpen: state.settings.monitorGroupsModalOpen
   }),
   dispatch => ({
     ...bindActionCreators({
