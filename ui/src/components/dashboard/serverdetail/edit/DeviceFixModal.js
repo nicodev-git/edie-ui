@@ -33,7 +33,9 @@ class DeviceFixModal extends React.Component {
   }
 
   onHide () {
+    const {onClose} = this.props
     this.props.showDeviceFixModal(false)
+    onClose && onClose()
   }
 
   onClickAddCreds () {

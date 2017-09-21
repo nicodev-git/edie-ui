@@ -39,6 +39,10 @@ export default class StatusImg extends React.Component {
     })
   }
 
+  onCloseDeviceFix () {
+    this.checkState()
+  }
+
   ///////////////////////////////////////////
   renderDeviceEditModal () {
     const {editDevice, deviceEditModalOpen} = this.props
@@ -58,7 +62,7 @@ export default class StatusImg extends React.Component {
   renderDeviceFixModal () {
     if (!this.props.deviceFixModalOpen) return null
     return (
-      <DeviceFixModal/>
+      <DeviceFixModal onClose={this.onCloseDeviceFix.bind(this)}/>
     )
   }
 

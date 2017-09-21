@@ -11,7 +11,9 @@ import {
 
   showDeviceFixModal,
   selectDeviceCreds,
-  showDeviceCredsPicker
+  showDeviceCredsPicker,
+
+  installAgent
 } from 'actions'
 
 class DeviceFixModalContainer extends React.Component {
@@ -45,6 +47,8 @@ export default connect(
 
     showDeviceFixModal,
     selectDeviceCreds,
-    showDeviceCredsPicker
+    showDeviceCredsPicker,
+
+    installAgent
   }
 )(DeviceFixModalContainer)
