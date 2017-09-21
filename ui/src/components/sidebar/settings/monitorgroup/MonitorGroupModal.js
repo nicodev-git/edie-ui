@@ -10,12 +10,16 @@ class MonitorGroupModal extends React.Component {
     const selectedMonitors = []
     if (props.editMonitorGroup) {
       (props.editMonitorGroup.monitorids || []).forEach(uid => {
-
+        props.allDevices.every(device => {
+          const found = (device.monitors || []).filter(p => p.uid === uid)
+          if (found.length) selectedMonitors.push(found[0])
+          return found.length === 0
+        })
       })
     }
 
     this.state = {
-      selectedMonitors: [],
+      selectedMonitors,
       monitorTreeData: null
     }
   }
@@ -34,9 +38,15 @@ class MonitorGroupModal extends React.Component {
     this.props.showMonitorGroupModal(false)
   }
   handleFormSubmit (values) {
+    const props = {
+      ...values,
+      monitorids: this.state.selectedMonitors.map(p => p.uid)
+    }
 
+    console.log(props)
   }
   render () {
+    const {selectedMonitors} = this.state
     const {handleSubmit, allDevices, editMonitorGroup} = this.props
     return (
       <MonitorGroupModalView
@@ -45,6 +55,7 @@ class MonitorGroupModal extends React.Component {
         onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
 
         allDevices={allDevices}
+        selectedMonitors={selectedMonitors}
         onClickMonitor={this.onClickMonitor.bind(this)}
 
         monitorTreeData={this.state.monitorTreeData}

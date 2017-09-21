@@ -47,6 +47,8 @@ export default class MonitorGroupModalView extends React.Component {
 
             {this.renderTree()}
           </CardPanel>
+
+          <SubmitBlock name="Save"/>
         </Form>
       </Modal>
     )
