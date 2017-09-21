@@ -68,8 +68,8 @@ export default class SearchMonitorModalView extends React.Component {
   render () {
     const {onClickOK, onClickClose, onClickShowAny} = this.props
     return (
-      <Modal title="Device and Monitor" onRequestClose={onClickClose}>
-        <CardPanel title="Device and Monitor">
+      <Modal title="Devices, monitor groups and monitors" onRequestClose={onClickClose}>
+        <CardPanel title="Devices, monitor groups and monitors">
           {this.renderTree()}
         </CardPanel>
         <TwoButtonsBlockCustom name1="Show Any" name2="OK" action1={onClickShowAny} action2={onClickOK}/>
