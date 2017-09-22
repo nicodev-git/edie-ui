@@ -10,8 +10,9 @@ import DeviceCredsModal from './DeviceCredsModal'
 
 export default class DeviceFixModalView extends React.Component {
   renderCredentials () {
-    const {editDevice, fixCode, onClickAddCreds} = this.props
-    if (fixCode !== 1) return null
+    const {editDevice, config, onClickAddCreds} = this.props
+    if (!config.credentials) return null
+
     return (
       <CardPanel title="Credentials" tools={<IconButton onTouchTap={onClickAddCreds}><AddCircleIcon/></IconButton>}>
         <Credentials {...this.props} selectedDevice={editDevice}/>
@@ -19,17 +20,13 @@ export default class DeviceFixModalView extends React.Component {
     )
   }
   renderAgentPick () {
-    const {fixCode} = this.props
-    switch (fixCode) {
-      case 1:
-        return (
-          <div className="margin-md-top">
-            <AgentPicker {...this.props}/>
-          </div>
-        )
-      default:
-        return null
-    }
+    const {config} = this.props
+    if (!config.agentPick) return null
+    return (
+      <div className="margin-md-top">
+        <AgentPicker {...this.props}/>
+      </div>
+    )
   }
 
   renderDeviceCredsModal () {

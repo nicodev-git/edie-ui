@@ -32,6 +32,19 @@ class DeviceFixModal extends React.Component {
     return msg
   }
 
+  getConfig () {
+    const {fixCode} = this.props
+    const config = {
+      agentPick: false,
+      credentials: false
+    }
+    if (fixCode === 1) {
+      config.agentPick = true
+      config.credentials = true
+    }
+    return config
+  }
+
   onHide () {
     const {onClose} = this.props
     this.props.showDeviceFixModal(false)
@@ -53,6 +66,7 @@ class DeviceFixModal extends React.Component {
     return (
       <DeviceFixModalView
         {...this.props}
+        config={this.getConfig()}
         onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
         msg={this.getMessage()}
         onHide={this.onHide.bind(this)}
