@@ -12,7 +12,14 @@ class DeviceFixModal extends React.Component {
     this.props.fetchCredTypes()
     this.props.fetchCollectors()
   }
-
+  // componentWillUpdate(nextProps) {
+  //   const {collectors} = nextProps
+  //   if (this.props.collectors != collectors && collectors.length) {
+  //     if (!nextProps.formValues.collectorId) {
+  //       nextProps.change('collectorId', collectors[0].id)
+  //     }
+  //   }
+  // }
   getStatusMessage (code) {
     let msg = ''
     switch (code) {

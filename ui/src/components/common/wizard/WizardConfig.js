@@ -160,13 +160,21 @@ export const wizardConfig = {
           width: MAX_WIDTH,
           name: 'wanip'
         }]
+      }],
+    }, {
+      title: 'Agent/Collector',
+      panels: [{
+        title: 'Agent',
+        items: [{
+          type: 'agentpicker'
+        }]
       }, {
         title: 'Credentials',
         skip: true,
         items: [{
           type: 'credpicker'
         }]
-      }],
+      }]
     }, {
       title: 'Monitors',
       panels: [{
@@ -238,13 +246,21 @@ export const wizardConfig = {
           width: MAX_WIDTH,
           name: 'wanip'
         }]
+      }],
+    }, {
+      title: 'Agent/Collector',
+      panels: [{
+        title: 'Agent',
+        items: [{
+          type: 'agentpicker'
+        }]
       }, {
         title: 'Credentials',
         skip: true,
         items: [{
           type: 'credpicker'
         }]
-      }],
+      }]
     }, {
       title: 'Monitors',
       panels: [{

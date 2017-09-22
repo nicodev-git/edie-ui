@@ -14,6 +14,7 @@ import {util} from './WizardUtil'
 import DeviceWizardView from './DeviceWizardView'
 import TagsView from './input/TagsView'
 import CredPickerInput from './input/CredPicker'
+import AgentPicker from './input/AgentPicker'
 
 import {CardPanel} from 'components/modal/parts'
 
@@ -48,7 +49,8 @@ class DeviceWizard extends Component {
       'paramlist': this.buildParamList.bind(this),
       'combo': this.buildCombo.bind(this),
       'row': this.buildRow.bind(this),
-      'credpicker': this.buildCredPicker.bind(this)
+      'credpicker': this.buildCredPicker.bind(this),
+      'agentpicker': this.buildAgentPicker.bind(this)
     }
   }
 
@@ -70,6 +72,10 @@ class DeviceWizard extends Component {
     this.setState({
       monitorGroupType: value
     })
+  }
+
+  onChangeAgentType () {
+
   }
 
   handleFormSubmit (formProps) {
@@ -279,6 +285,23 @@ class DeviceWizard extends Component {
         values={values}
         config={config}
         extraParams={extraParams}
+      />
+    )
+  }
+
+  buildAgentPicker (config, values) {
+    const {formValues, extraParams} = this.props
+    return (
+      <AgentPicker
+        {...this.props}
+        key="agentPicker"
+        values={values}
+        config={config}
+        editDevice={{
+          ...formValues,
+          templateName: extraParams.templateName
+        }}
+        onChange={this.onChangeAgentType.bind(this)}
       />
     )
   }

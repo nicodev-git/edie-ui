@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { formValueSelector } from 'redux-form'
 import { bindActionCreators } from 'redux'
 import DeviceWizard from 'components/common/wizard/DeviceWizard'
 import {
@@ -11,7 +12,9 @@ import {
   showDeviceCredsPicker,
 
   fetchMonitorGroups,
-  fetchCollectors
+  fetchCollectors,
+
+  installAgent
 } from 'actions'
 
 class DeviceWizardContainer extends Component {
@@ -22,11 +25,14 @@ class DeviceWizardContainer extends Component {
   }
 }
 
+const selector = formValueSelector('deviceForm')
+
 export default connect(
   (state, props) => ({
     monitorTemplates: state.settings.monitorTemplates,
     deviceTemplates: state.settings.deviceTemplates,
     collectors: state.settings.collectors,
+    formValues: selector(state, 'wanip', 'name'),
     initialValues: {
       distribution: 'Ubuntu',
       ...state.devices.wizardInitialValues
@@ -35,7 +41,11 @@ export default connect(
     credentialTypes: state.settings.credentialTypes,
     deviceCredsPickerVisible: state.devices.deviceCredsPickerVisible,
 
-    monitorGroups: state.settings.monitorGroups
+    monitorGroups: state.settings.monitorGroups,
+
+    collectorModalOpen: state.settings.collectorModalOpen,
+
+    installAgentMessage: state.devices.installAgentMessage
   }),
   dispatch => ({
     ...bindActionCreators({
@@ -47,7 +57,9 @@ export default connect(
       showDeviceCredsPicker,
 
       fetchMonitorGroups,
-      fetchCollectors
+      fetchCollectors,
+
+      installAgent
     }, dispatch)
   })
 )(DeviceWizardContainer)
