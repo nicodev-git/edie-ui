@@ -3,7 +3,7 @@ import { reduxForm } from 'redux-form'
 
 import DeviceFixModalView from './DeviceFixModalView'
 import {showAlert} from 'components/common/Alert'
-// import {getDeviceCredentials} from 'shared/Global'
+import {getDeviceCredentials} from 'shared/Global'
 
 class DeviceFixModal extends React.Component {
   componentWillMount () {
@@ -56,7 +56,7 @@ class DeviceFixModal extends React.Component {
   }
 
   handleFormSubmit (values) {
-    const {editDevice} = this.props
+    const {editDevice, credentials} = this.props
     const config = this.getConfig()
 
     console.log(values)
@@ -69,6 +69,14 @@ class DeviceFixModal extends React.Component {
     if (values.agentType === 'collector') {
       if (!values.collectorId) {
         showAlert('Please select collector.')
+        return
+      }
+    }
+
+    if (config.credentials) {
+      const creds = getDeviceCredentials(credentials, editDevice, true)
+      if (creds.length === 0) {
+        showAlert('Please add device credentials.')
         return
       }
     }
