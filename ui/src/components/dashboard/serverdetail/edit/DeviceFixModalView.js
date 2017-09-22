@@ -3,7 +3,7 @@ import {Form} from 'redux-form'
 import IconButton from 'material-ui/IconButton'
 import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
 
-import { Modal, CardPanel } from 'components/modal/parts'
+import { Modal, CardPanel, SubmitBlock } from 'components/modal/parts'
 import AgentPicker from 'components/common/wizard/input/AgentPicker'
 import Credentials from 'components/common/wizard/input/Credentials'
 import DeviceCredsModal from './DeviceCredsModal'
@@ -51,6 +51,8 @@ export default class DeviceFixModalView extends React.Component {
 
           {this.renderCredentials()}
           {this.renderDeviceCredsModal()}
+
+          <SubmitBlock name="OK"/>
         </Form>
       </Modal>
     )

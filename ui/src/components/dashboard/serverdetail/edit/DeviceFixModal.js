@@ -2,10 +2,13 @@ import React from 'react'
 import { reduxForm } from 'redux-form'
 
 import DeviceFixModalView from './DeviceFixModalView'
+import {showAlert} from 'components/common/Alert'
+
 class DeviceFixModal extends React.Component {
   componentWillMount () {
     this.props.fetchCredentials()
     this.props.fetchCredTypes()
+    this.props.fetchCollectors()
   }
 
   getMessage () {
@@ -56,6 +59,12 @@ class DeviceFixModal extends React.Component {
   }
 
   handleFormSubmit (values) {
+    console.log(values)
+    if (values.agentType === 'collector') {
+      if (!values.collectorId)
+      showAlert('Please select collector.')
+      return
+    }
   }
 
   ///////////////////////////////////////////////////////////////////////////////

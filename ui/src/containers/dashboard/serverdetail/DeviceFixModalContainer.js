@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import DeviceFixModal from 'components/dashboard/serverdetail/edit/DeviceFixModal'
 
 import {
+  fetchCollectors,
   fetchCredentials,
   fetchCredTypes,
   removeCredentials,
@@ -40,6 +41,7 @@ export default connect(
 
     deviceCredsPickerVisible: state.devices.deviceCredsPickerVisible
   }), {
+    fetchCollectors,
     fetchCredentials,
     fetchCredTypes,
     removeCredentials,
