@@ -1,10 +1,11 @@
 import React from 'react'
 import CredentialModal from './CredentialModal'
 import DeleteIcon from 'material-ui/svg-icons/action/delete'
-import {IconButton} from 'material-ui'
+import {IconButton, Chip} from 'material-ui'
 
 import {showConfirm} from 'components/common/Alert'
 import {isWindowsDevice} from 'shared/Global'
+import { chipStyles } from 'style/common/materialStyles'
 
 export default class Credentials extends React.Component {
   componentDidMount () {
@@ -82,7 +83,13 @@ export default class Credentials extends React.Component {
               <td>{p.description}</td>
               <td>{p.type}</td>
               <td>{p.username}</td>
-              <td>{p.global ? 'Global' : ''}</td>
+              <td>
+                {p.global && p.default ? (
+                  <div style={chipStyles.wrapper}>
+                    <Chip style={chipStyles.chip}>{p.type}&nbsp;Default</Chip>
+                  </div>
+                ) : null}
+              </td>
               <td>
                 <IconButton style={{padding: 0, width: 24, height: 24}}
                   onTouchTap={this.onClickRemove.bind(this, p)}>
