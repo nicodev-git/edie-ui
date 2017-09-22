@@ -3,6 +3,7 @@ import { reduxForm } from 'redux-form'
 
 import DeviceFixModalView from './DeviceFixModalView'
 import {showAlert} from 'components/common/Alert'
+// import {getDeviceCredentials} from 'shared/Global'
 
 class DeviceFixModal extends React.Component {
   componentWillMount () {

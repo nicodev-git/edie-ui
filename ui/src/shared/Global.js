@@ -393,3 +393,18 @@ export function checkAgentUp (id, cb) {
     cb(res.data.success, res.data.info, parseInt(res.data.object || 0, 10))
   }).catch(() => cb(false))
 }
+
+export function getDeviceCredentials (selectedDevice, credentials, showGlobal) {
+  const deviceCreds = credentials.filter(p => !p.global && p.deviceIds && p.deviceIds.indexOf(selectedDevice.id) >= 0)
+  if (showGlobal) {
+    const isWin = isWindowsDevice(selectedDevice)
+    credentials.forEach(p => {
+      if (!p.global) return
+      if (isWin && p.type === 'SSH') return
+      if (!isWin && p.type === 'WINDOWS') return
+      if (deviceCreds.filter(d => d.type === p.type).length === 0)
+        deviceCreds.push(p)
+    })
+  }
+  return deviceCreds
+}

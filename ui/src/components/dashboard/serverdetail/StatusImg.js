@@ -33,14 +33,20 @@ export default class StatusImg extends React.Component {
     this.checkState()
   }
 
-  checkState () {
-    checkAgentUp(this.props.device.id, (up, info, resCode) => {
+  componentWillUpdate (nextProps) {
+    const {device} = this.props
+    if (nextProps.device && (!device || device.agentType !== nextProps.device.agentType)) {
+      this.checkState(nextProps.device)
+    }
+  }
+
+  checkState (device) {
+    checkAgentUp(device ? device.id : this.props.device.id, (up, info, resCode) => {
       this.setState({up, info, resCode, loading: false})
     })
   }
 
   onCloseDeviceFix () {
-    this.checkState()
   }
 
   ///////////////////////////////////////////

@@ -4,7 +4,7 @@ import DeleteIcon from 'material-ui/svg-icons/action/delete'
 import {IconButton, Chip} from 'material-ui'
 
 import {showConfirm} from 'components/common/Alert'
-import {isWindowsDevice} from 'shared/Global'
+import {getDeviceCredentials} from 'shared/Global'
 import { chipStyles } from 'style/common/materialStyles'
 
 export default class Credentials extends React.Component {
@@ -44,18 +44,7 @@ export default class Credentials extends React.Component {
   }
   getDeviceCreds () {
     const { selectedDevice, credentials, showGlobal } = this.props
-    const deviceCreds = credentials.filter(p => !p.global && p.deviceIds && p.deviceIds.indexOf(selectedDevice.id) >= 0)
-    if (showGlobal) {
-      const isWin = isWindowsDevice(selectedDevice)
-      credentials.forEach(p => {
-        if (!p.global) return
-        if (isWin && p.type === 'SSH') return
-        if (!isWin && p.type === 'WINDOWS') return
-        if (deviceCreds.filter(d => d.type === p.type).length === 0)
-          deviceCreds.push(p)
-      })
-    }
-    return deviceCreds
+    return getDeviceCredentials(selectedDevice, credentials, showGlobal)
   }
   render () {
     const { selectedDeviceCreds, selectDeviceCreds } = this.props
