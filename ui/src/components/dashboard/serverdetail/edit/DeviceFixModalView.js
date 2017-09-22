@@ -15,7 +15,7 @@ export default class DeviceFixModalView extends React.Component {
 
     return (
       <CardPanel title="Credentials" tools={<IconButton onTouchTap={onClickAddCreds}><AddCircleIcon/></IconButton>}>
-        <Credentials {...this.props} selectedDevice={editDevice}/>
+        <Credentials {...this.props} selectedDevice={editDevice} showGlobal/>
       </CardPanel>
     )
   }

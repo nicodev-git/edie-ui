@@ -41,8 +41,16 @@ export default class Credentials extends React.Component {
     )
   }
   getDeviceCreds () {
-    const { selectedDevice, credentials } = this.props
-    return credentials.filter(p => !p.global && p.deviceIds && p.deviceIds.indexOf(selectedDevice.id) >= 0)
+    const { selectedDevice, credentials, showGlobal } = this.props
+    const deviceCreds = credentials.filter(p => !p.global && p.deviceIds && p.deviceIds.indexOf(selectedDevice.id) >= 0)
+    if (showGlobal) {
+      credentials.forEach(p => {
+        if (!p.global) return
+        if (deviceCreds.filter(d => d.type === p.type).length === 0)
+          deviceCreds.push(p)
+      })
+    }
+    return deviceCreds
   }
   render () {
     const { selectedDeviceCreds, selectDeviceCreds } = this.props
@@ -57,6 +65,7 @@ export default class Credentials extends React.Component {
               <th>Type</th>
               <th>User</th>
               <th />
+              <th />
             </tr>
           </thead>
           <tbody>
@@ -69,6 +78,7 @@ export default class Credentials extends React.Component {
               <td>{p.description}</td>
               <td>{p.type}</td>
               <td>{p.username}</td>
+              <td>{p.global ? 'Global' : ''}</td>
               <td>
                 <IconButton style={{padding: 0, width: 24, height: 24}}
                   onTouchTap={this.onClickRemove.bind(this, p)}>
