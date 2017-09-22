@@ -47,6 +47,7 @@ export default class StatusImg extends React.Component {
   }
 
   onCloseDeviceFix () {
+    this.checkState()
   }
 
   ///////////////////////////////////////////
