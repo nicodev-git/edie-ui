@@ -73,7 +73,7 @@ export default class CredPicker extends React.Component {
                   ) : null}
                 </td>
                 <th>
-                  {!p.global ? (
+                  {!p.id ? (
                     <CloseIcon className="link" onTouchTap={this.onClickDelete.bind(this, i)}/>
                   ) : null}
                 </th>
