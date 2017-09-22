@@ -6,7 +6,7 @@ import { FormInput, FormSelect, FormImg, FileUpload, FormCheckbox,
 const SimpleModalForm = ({show, onHide, onSubmit, header, subheader, buttonText,
   content, imageUpload, fileUpload}) => (
   <Modal title={header} onRequestClose={onHide}>
-    <form onSubmit={onSubmit}>
+    <form onSubmit={onSubmit} autoComplete="off">
       <CardPanel title={subheader || header}className="margin-md-bottom">
         {(imageUpload) ? (<Field name="image" component={FormImg}/>) : null}
         {(fileUpload) ? (<Field name="file" component={FileUpload}/>) : null}
