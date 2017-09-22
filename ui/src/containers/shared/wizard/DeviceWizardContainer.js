@@ -35,6 +35,7 @@ export default connect(
     formValues: selector(state, 'wanip', 'name'),
     initialValues: {
       distribution: 'Ubuntu',
+      agentType: 'collector',
       ...state.devices.wizardInitialValues
     },
     credentials: state.settings.credentials,
@@ -45,6 +46,7 @@ export default connect(
 
     collectorModalOpen: state.settings.collectorModalOpen,
 
+    installAgents: state.settings.installAgents,
     installAgentMessage: state.devices.installAgentMessage
   }),
   dispatch => ({

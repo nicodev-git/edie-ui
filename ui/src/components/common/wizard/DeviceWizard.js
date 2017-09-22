@@ -62,6 +62,15 @@ class DeviceWizard extends Component {
     this.props.fetchCollectors()
   }
 
+  componentWillUpdate(nextProps) {
+    const {collectors} = nextProps
+    if (this.props.collectors !== collectors && collectors.length) {
+      if (!nextProps.formValues.collectorId) {
+        nextProps.change('collectorId', collectors[0].id)
+      }
+    }
+  }
+
   onChangeCredential (value) {
     this.setState({
       credentialSelect: value
