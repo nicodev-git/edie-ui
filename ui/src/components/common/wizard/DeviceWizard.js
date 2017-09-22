@@ -18,7 +18,7 @@ import CredPickerInput from './input/CredPicker'
 import {CardPanel} from 'components/modal/parts'
 
 // import CredPicker from 'containers/settings/credentials/CredsPickerContainer'
-import CredentialModal from './input/CredentialModal'
+import CredentialModal from 'components/credentials/CredentialModal'
 
 class DeviceWizard extends Component {
   constructor (props) {

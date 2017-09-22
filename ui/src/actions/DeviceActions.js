@@ -117,6 +117,7 @@ import {
 
   SHOW_DEVICE_CREDS_MODAL,
   SHOW_DEVICE_FIX_MODAL,
+  UPDATE_DEVICE_FIX_STATUS,
 
   NO_AUTH_ERROR
 } from './types'
@@ -945,10 +946,11 @@ export const removeDeviceGauge = (props, group) => {
   }
 }
 
-const updateMapDevice = (entity) => {
+const updateMapDevice = (entity, cb) => {
   return dispatch => {
     axios.put(entity._links.self.href, entity).then(response => {
       dispatch({type: UPDATE_MAP_DEVICE, data: response.data})
+      cb && cb()
     }).catch(error => apiError(dispatch, error))
   }
 }
@@ -1174,5 +1176,24 @@ export function showDeviceCredsModal (visible, device) {
 export function showDeviceFixModal (visible, device, code) {
   return dispatch => {
     dispatch({type: SHOW_DEVICE_FIX_MODAL, visible, device, code})
+  }
+}
+
+export function fixDevice (entity) {
+  return dispatch => {
+    dispatch({type: UPDATE_DEVICE_FIX_STATUS, data: 'checking'})
+    dispatch(updateMapDevice(entity, () => {
+      dispatch(checkDeviceAgent(entity.id, (success, info, code) => {
+        dispatch({type: UPDATE_DEVICE_FIX_STATUS, data: 'done', info, code})
+      }))
+    }))
+  }
+}
+
+export function checkDeviceAgent (id, cb) {
+  return dispatch => {
+    axios.get(`${ROOT_URL}/isAgentUp?id=${id}`).then(res => {
+      cb(res.data.success, res.data.info, parseInt(res.data.object || 0, 10))
+    }).catch(() => cb(false))
   }
 }

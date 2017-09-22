@@ -1,8 +1,8 @@
 import React from 'react'
-import CredentialModal from './CredentialModal'
 import DeleteIcon from 'material-ui/svg-icons/action/delete'
 import {IconButton, Chip} from 'material-ui'
 
+import CredentialModal from 'components/credentials/CredentialModal'
 import {showConfirm} from 'components/common/Alert'
 import {getDeviceCredentials} from 'shared/Global'
 import { chipStyles } from 'style/common/materialStyles'

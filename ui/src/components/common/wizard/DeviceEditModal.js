@@ -18,7 +18,7 @@ import CredPickerInput from './input/CredPicker'
 import AgentPicker from './input/AgentPicker'
 import {showAlert, showConfirm} from 'components/common/Alert'
 import {CardPanel} from 'components/modal/parts'
-import CredentialModal from './input/CredentialModal'
+import CredentialModal from 'components/credentials/CredentialModal'
 
 class DeviceEditModal extends React.Component {
   constructor (props) {

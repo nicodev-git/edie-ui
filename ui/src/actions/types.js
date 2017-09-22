@@ -47,6 +47,7 @@ export const SHOW_MONITOR_DETAIL_MODAL = 'SHOW_MONITOR_DETAIL_MODAL'
 
 export const SHOW_DEVICE_CREDS_MODAL = 'SHOW_DEVICE_CREDS_MODAL'
 export const SHOW_DEVICE_FIX_MODAL = 'SHOW_DEVICE_FIX_MODAL'
+export const UPDATE_DEVICE_FIX_STATUS = 'UPDATE_DEVICE_FIX_STATUS'
 
 // ////////////////////////////////////////////////////////////////////
 export const ADD_DEVICE = 'ADD_DEVICE'

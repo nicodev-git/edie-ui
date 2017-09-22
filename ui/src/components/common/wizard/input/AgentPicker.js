@@ -2,8 +2,8 @@ import React from 'react'
 import {RadioButton, CircularProgress} from 'material-ui'
 import {Field} from 'redux-form'
 import {RadioButtonGroup} from 'redux-form-material-ui'
-import CredentialModal from './CredentialModal'
 
+import CredentialModal from 'components/credentials/CredentialModal'
 import {FormSelect} from 'components/modal/parts'
 import {showAlert} from 'components/common/Alert'
 
