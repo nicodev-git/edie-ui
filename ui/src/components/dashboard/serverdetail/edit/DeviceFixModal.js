@@ -55,18 +55,31 @@ class DeviceFixModal extends React.Component {
   }
 
   handleFormSubmit (values) {
+    const {editDevice} = this.props
     const config = this.getConfig()
+
     console.log(values)
+
     if (config.agentPick && !values.agentType) {
       showAlert('Please choose agent or collector.')
       return
     }
 
     if (values.agentType === 'collector') {
-      if (!values.collectorId)
-      showAlert('Please select collector.')
-      return
+      if (!values.collectorId) {
+        showAlert('Please select collector.')
+        return
+      }
     }
+
+    if (config.agentPick) {
+      const props = {
+        ...editDevice,
+        ...values
+      }
+      this.props.updateMapDevice(props)
+    }
+    this.onHide()
   }
 
   ///////////////////////////////////////////////////////////////////////////////

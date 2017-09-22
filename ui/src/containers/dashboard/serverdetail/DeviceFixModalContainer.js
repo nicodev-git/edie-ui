@@ -10,6 +10,8 @@ import {
   removeCredentials,
   addCredentials,
 
+  updateMapDevice,
+
   showDeviceFixModal,
   selectDeviceCreds,
   showDeviceCredsPicker,
@@ -46,6 +48,8 @@ export default connect(
     fetchCredTypes,
     removeCredentials,
     addCredentials,
+
+    updateMapDevice,
 
     showDeviceFixModal,
     selectDeviceCreds,
