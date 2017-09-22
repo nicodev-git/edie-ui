@@ -48,7 +48,7 @@ export default class DeviceFixModalView extends React.Component {
       <Modal title="Fix" onRequestClose={onHide}>
         <Form onSubmit={onSubmit}>
           <CardPanel>
-            <span style={{color: '#600000'}}>{msg}</span>
+            <div style={{color: '#600000'}}>{msg}</div>
             {this.renderAgentPick()}
           </CardPanel>
 

@@ -506,7 +506,7 @@ export default function (state = INITIAL_STATE, action) {
       return { ...state, deviceCredsModalOpen: action.visible, editDevice: action.device }
 
     case SHOW_DEVICE_FIX_MODAL:
-      return { ...state, deviceFixModalOpen: action.visible, fixCode: action.code, editDevice: action.device }
+      return { ...state, deviceFixModalOpen: action.visible, fixCode: action.code, editDevice: action.device, fixStatus: '', fixResult: null }
 
     case UPDATE_DEVICE_FIX_STATUS:
       return { ...state, fixStatus: action.data, fixResult: action.result }

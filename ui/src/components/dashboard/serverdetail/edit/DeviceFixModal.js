@@ -1,5 +1,6 @@
 import React from 'react'
 import { reduxForm } from 'redux-form'
+import {CircularProgress} from 'material-ui'
 
 import DeviceFixModalView from './DeviceFixModalView'
 import {showAlert} from 'components/common/Alert'
@@ -12,10 +13,9 @@ class DeviceFixModal extends React.Component {
     this.props.fetchCollectors()
   }
 
-  getMessage () {
-    const {fixCode} = this.props
+  getStatusMessage (code) {
     let msg = ''
-    switch (fixCode) {
+    switch (code) {
       case 1:
         msg = 'No Agent/Collector defined. If you need agent, click "Install" button to install agent. Otherwise, please choose collector.'
         break
@@ -31,6 +31,19 @@ class DeviceFixModal extends React.Component {
       default:
         msg = ''
         break
+    }
+    return msg
+  }
+
+  getMessage () {
+    const {fixCode, fixResult, fixStatus} = this.props
+    let msg = ''
+    let code = fixCode
+    if (fixStatus === 'checking' ) {
+      msg = <span>Trying to access server, please wait…<CircularProgress className="valign-top margin-md-left" size={24}/></span>
+    } else {
+      if (fixStatus === 'done') code = fixResult.code
+      msg = this.getStatusMessage(code)
     }
 
     return msg
@@ -76,7 +89,7 @@ class DeviceFixModal extends React.Component {
     }
 
     console.log(entity)
-    // this.props.fixDevice(entity)
+    this.props.fixDevice(entity)
   }
 
   ////////////////////////////////////////////////////////////////////////////////
