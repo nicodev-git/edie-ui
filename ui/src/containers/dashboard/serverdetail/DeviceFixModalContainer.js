@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import {formValueSelector} from 'redux-form'
 
 import DeviceFixModal from 'components/dashboard/serverdetail/edit/DeviceFixModal'
 
@@ -27,8 +28,11 @@ class DeviceFixModalContainer extends React.Component {
   }
 }
 
+const selector = formValueSelector('editDeviceFixForm')
+
 export default connect(
   state => ({
+    formValues: selector(state, 'agnetType', 'collectorId'),
     deviceFixModalOpen: state.devices.deviceFixModalOpen,
     fixCode: state.devices.fixCode,
 

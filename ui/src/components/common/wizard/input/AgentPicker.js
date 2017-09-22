@@ -78,7 +78,7 @@ export default class AgentPicker extends React.Component {
   }
 
   render () {
-    const {editDevice, installAgents} = this.props
+    const {editDevice, installAgents, onChange} = this.props
     let {agent} = editDevice
 
     const collectorOptions = this.getCollectors().map(p => ({
@@ -116,7 +116,7 @@ export default class AgentPicker extends React.Component {
 
     return (
       <div style={{minHeight: 110}}>
-        <Field name="agentType" component={RadioButtonGroup} className="margin-md-top">
+        <Field name="agentType" component={RadioButtonGroup} className="margin-md-top" onChange={onChange}>
           <RadioButton value="" label="None" className="pull-left"/>
           <RadioButton value="agent" label={agentLabel} className="pull-left" disabled={!agent} style={{marginTop: 14, cursor: 'pointer'}}
                        inputStyle={{width: 120}}/>

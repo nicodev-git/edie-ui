@@ -14,17 +14,20 @@ export default class DeviceFixModalView extends React.Component {
     if (!config.credentials) return null
 
     return (
-      <CardPanel title="Credentials" tools={<IconButton onTouchTap={onClickAddCreds}><AddCircleIcon/></IconButton>}>
+      <CardPanel
+        title="Credentials"
+        tools={<IconButton onTouchTap={onClickAddCreds}><AddCircleIcon/></IconButton>}>
         <Credentials {...this.props} selectedDevice={editDevice} showGlobal/>
       </CardPanel>
     )
   }
+
   renderAgentPick () {
-    const {config} = this.props
+    const {config, onChangeAgentType} = this.props
     if (!config.agentPick) return null
     return (
       <div className="margin-md-top">
-        <AgentPicker {...this.props}/>
+        <AgentPicker {...this.props} onChange={onChangeAgentType}/>
       </div>
     )
   }

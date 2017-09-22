@@ -1,5 +1,5 @@
 import React from 'react'
-import { reduxForm } from 'redux-form'
+import { reduxForm, formValueSelector } from 'redux-form'
 
 import DeviceFixModalView from './DeviceFixModalView'
 import {showAlert} from 'components/common/Alert'
@@ -55,6 +55,13 @@ class DeviceFixModal extends React.Component {
     this.props.showDeviceCredsPicker(true)
   }
 
+  onChangeAgentType (e, value) {
+    if (!value) return
+
+  }
+
+  ////////////////////////////////////////////////////////////////////////////////
+
   handleFormSubmit (values) {
     const {editDevice, credentials} = this.props
     const config = this.getConfig()
@@ -104,6 +111,7 @@ class DeviceFixModal extends React.Component {
         msg={this.getMessage()}
         onHide={this.onHide.bind(this)}
         onClickAddCreds={this.onClickAddCreds.bind(this)}
+        onChangeAgentType={this.onChangeAgentType.bind(this)}
       />
     )
   }
