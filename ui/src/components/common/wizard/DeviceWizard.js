@@ -133,7 +133,7 @@ class DeviceWizard extends Component {
     }
 
     return (
-      <Stepper activeStep={this.state.current - 1} style={{marginTop: 20}}>
+      <Stepper activeStep={this.state.current - 1} style={{marginTop: 0}}>
         {markers}
       </Stepper>
     )

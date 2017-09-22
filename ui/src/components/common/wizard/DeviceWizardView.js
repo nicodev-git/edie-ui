@@ -10,7 +10,9 @@ export default class DeviceWizardView extends Component {
       <Modal className="modal-device-wizard" title={header} onRequestClose={onHide} contentStyle={{width: 1035, maxWidth: 'initial'}}>
           <Form onSubmit={onSubmit}>
             {progressBar}
-            {content}
+            <div style={{marginTop: -24}}>
+              {content}
+            </div>
             <WizardButtons current={current} steps={steps} onClose={onHide}
               onPrev={onPrev} onNext={onNext}/>
           </Form>
