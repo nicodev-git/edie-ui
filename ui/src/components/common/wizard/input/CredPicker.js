@@ -1,9 +1,11 @@
 import React from 'react'
-import { IconButton } from 'material-ui'
+import { IconButton, Chip } from 'material-ui'
 import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
 import CloseIcon from 'material-ui/svg-icons/navigation/close'
 
 import { CardPanel } from 'components/modal/parts'
+import {isWindowsDevice} from 'shared/Global'
+import { chipStyles } from 'style/common/materialStyles'
 
 export default class CredPicker extends React.Component {
   onClickAdd () {
@@ -15,8 +17,20 @@ export default class CredPicker extends React.Component {
   }
 
   getCredentials() {
-    const {credentials} = this.props
-    return credentials.filter(p => p.global && p.isDefault)
+    const {credentials, extraParams, deviceCredentials} = this.props
+    const deviceCreds = [...deviceCredentials]
+    const isWin = isWindowsDevice({templateName: extraParams.templateName})
+
+    credentials.forEach(p => {
+      if (!p.global) return
+      if (isWin && p.type === 'SSH') return
+      if (!isWin && p.type === 'WINDOWS') return
+      if (deviceCreds.filter(d => d.type === p.type).length === 0)
+        deviceCreds.push(p)
+    })
+
+    return deviceCreds
+
   }
 
   renderButtons () {
@@ -29,7 +43,7 @@ export default class CredPicker extends React.Component {
     )
   }
   render () {
-    const credentials = this.props.deviceCredentials
+    const credentials = this.getCredentials()
     return (
       <CardPanel title="Credentials" tools={this.renderButtons()}>
         <div style={{minHeight: 200, maxHeight: 300, overflow: 'auto'}}>
@@ -41,6 +55,7 @@ export default class CredPicker extends React.Component {
               <th>Description</th>
               <th>User</th>
               <th />
+              <th />
             </tr>
             </thead>
             <tbody>
@@ -50,7 +65,18 @@ export default class CredPicker extends React.Component {
                 <td>{p.type}</td>
                 <td>{p.description}</td>
                 <td>{p.username}</td>
-                <th><CloseIcon className="link" onTouchTap={this.onClickDelete.bind(this, i)}/></th>
+                <td>
+                  {p.global && p.default ? (
+                    <div style={chipStyles.wrapper}>
+                      <Chip style={chipStyles.chip}>{p.type}&nbsp;Default</Chip>
+                    </div>
+                  ) : null}
+                </td>
+                <th>
+                  {!p.global ? (
+                    <CloseIcon className="link" onTouchTap={this.onClickDelete.bind(this, i)}/>
+                  ) : null}
+                </th>
               </tr>
             )}
             </tbody>

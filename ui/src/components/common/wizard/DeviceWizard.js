@@ -265,7 +265,7 @@ class DeviceWizard extends Component {
   }
 
   buildCredPicker (config, values) {
-    const {credentials, credentialTypes, showDeviceCredsPicker} = this.props
+    const {credentials, credentialTypes, showDeviceCredsPicker, extraParams} = this.props
     const {deviceCredentials} = this.state
     return (
       <CredPickerInput
@@ -277,7 +277,9 @@ class DeviceWizard extends Component {
         onClickDelete={this.onDeleteDeviceCred.bind(this)}
         showDeviceCredsPicker={showDeviceCredsPicker}
         values={values}
-        config={config}/>
+        config={config}
+        extraParams={extraParams}
+      />
     )
   }
 

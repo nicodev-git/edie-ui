@@ -525,6 +525,7 @@ export const addDevice = (props, url) => {
     axios.post(`${ROOT_URL}/${url}`, props).then(res => {
       dispatch({type: ADD_DEVICE, data: res.data})
       props.credential.forEach(p => {
+        if (p.id) return
         dispatch(addDeviceCredential(p, res.data.id))
       })
 
