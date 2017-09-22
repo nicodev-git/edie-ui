@@ -73,13 +73,14 @@ export default class StatusImg extends React.Component {
     )
   }
 
-  render () {
+  renderBell () {
     const {device, onClickFix} = this.props
     if (!device) return null
     const {up, info, loading} = this.state
     if (up || loading) return null
+
     return (
-      <span className="valign-middle margin-md-left">
+      <span>
         <img
           src="/resources/images/dashboard/bell.png"
           alt=""
@@ -88,7 +89,15 @@ export default class StatusImg extends React.Component {
           style={{marginTop: -3}}/>
         {info}
         <span className="link margin-md-left text-primary" onClick={onClickFix || this.onClickFix.bind(this)}>Fix</span>
+      </span>
+    )
+  }
 
+  render () {
+
+    return (
+      <span className="valign-middle margin-md-left">
+        {this.renderBell()}
         {this.renderDeviceEditModal()}
         {this.renderDeviceFixModal()}
       </span>
