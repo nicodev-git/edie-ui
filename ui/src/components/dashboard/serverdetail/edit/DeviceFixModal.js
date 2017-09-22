@@ -40,10 +40,13 @@ class DeviceFixModal extends React.Component {
     let msg = ''
     let code = fixCode
     if (fixStatus === 'checking' ) {
-      msg = <span>Trying to access server, please wait…<CircularProgress className="valign-top margin-md-left" size={24}/></span>
+      msg = <div style={{color: '#600000'}}>Trying to access server, please wait…<CircularProgress className="valign-top margin-md-left" size={24}/></div>
     } else {
-      if (fixStatus === 'done') code = fixResult.code
-      msg = this.getStatusMessage(code)
+      if (fixStatus === 'done') {
+        code = fixResult.code
+        if (!code) msg = <div style={{color: '#008000'}}>It's Fixed, you can close this windows now</div>
+      }
+      if (code) msg = <div style={{color: '#600000'}}>{this.getStatusMessage(code)}</div>
     }
 
     return msg
