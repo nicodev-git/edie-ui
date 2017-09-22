@@ -11,6 +11,7 @@ import {
   removeCredentials,
   addCredentials,
 
+  fixDevice,
   updateMapDevice,
 
   showDeviceFixModal,
@@ -45,7 +46,10 @@ export default connect(
 
     editDevice: state.devices.editDevice,
 
-    deviceCredsPickerVisible: state.devices.deviceCredsPickerVisible
+    deviceCredsPickerVisible: state.devices.deviceCredsPickerVisible,
+
+    fixStatus: state.devices.fixStatus,
+    fixResult: state.devices.fixResult
   }), {
     fetchCollectors,
     fetchCredentials,
@@ -53,6 +57,7 @@ export default connect(
     removeCredentials,
     addCredentials,
 
+    fixDevice,
     updateMapDevice,
 
     showDeviceFixModal,

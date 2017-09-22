@@ -111,6 +111,7 @@ import {
 
   SHOW_DEVICE_CREDS_MODAL,
   SHOW_DEVICE_FIX_MODAL,
+  UPDATE_DEVICE_FIX_STATUS,
 
   UPDATE_DEVICE_ERROR
 } from 'actions/types'
@@ -506,6 +507,10 @@ export default function (state = INITIAL_STATE, action) {
 
     case SHOW_DEVICE_FIX_MODAL:
       return { ...state, deviceFixModalOpen: action.visible, fixCode: action.code, editDevice: action.device }
+
+    case UPDATE_DEVICE_FIX_STATUS:
+      return { ...state, fixStatus: action.data, fixResult: action.result }
+
     default:
       return state
   }

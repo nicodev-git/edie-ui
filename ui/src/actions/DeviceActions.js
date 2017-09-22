@@ -1184,7 +1184,7 @@ export function fixDevice (entity) {
     dispatch({type: UPDATE_DEVICE_FIX_STATUS, data: 'checking'})
     dispatch(updateMapDevice(entity, () => {
       dispatch(checkDeviceAgent(entity.id, (success, info, code) => {
-        dispatch({type: UPDATE_DEVICE_FIX_STATUS, data: 'done', info, code})
+        dispatch({type: UPDATE_DEVICE_FIX_STATUS, data: 'done', result: {info, code}})
       }))
     }))
   }

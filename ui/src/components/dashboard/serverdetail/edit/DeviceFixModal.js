@@ -1,5 +1,5 @@
 import React from 'react'
-import { reduxForm, formValueSelector } from 'redux-form'
+import { reduxForm } from 'redux-form'
 
 import DeviceFixModalView from './DeviceFixModalView'
 import {showAlert} from 'components/common/Alert'
@@ -56,8 +56,27 @@ class DeviceFixModal extends React.Component {
   }
 
   onChangeAgentType (e, value) {
-    if (!value) return
+    const {editDevice, formValues} = this.props
 
+    const entity = {
+      ...editDevice,
+      agentType: value
+    }
+
+    if (value === 'collector') {
+      if (formValues.collectorId)
+        entity.collectorId = formValues.collectorId
+      else {
+        showAlert('Please choose collector')
+        setTimeout(() => {
+          this.props.change('agentType', '')
+        }, 10)
+        return
+      }
+    }
+
+    console.log(entity)
+    // this.props.fixDevice(entity)
   }
 
   ////////////////////////////////////////////////////////////////////////////////
