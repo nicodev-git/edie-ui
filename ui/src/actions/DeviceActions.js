@@ -1191,10 +1191,32 @@ export function fixDevice (entity) {
   }
 }
 
+export function fixNewDevice (entity) {
+  return dispatch => {
+    dispatch(checkNewDeviceAgent(entity, (success, info, code) => {
+      dispatch({type: UPDATE_DEVICE_FIX_STATUS, data: 'done', result: {info, code}})
+    }))
+  }
+}
+
 export function checkDeviceAgent (id, cb) {
   return dispatch => {
     axios.get(`${ROOT_URL}/isAgentUp?id=${id}`).then(res => {
       cb(res.data.success, res.data.info, parseInt(res.data.object || 0, 10))
     }).catch(() => cb(false))
+  }
+}
+
+export function checkNewDeviceAgent (entity, cb) {
+  return dispatch => {
+    axios.post(`${ROOT_URL}/checkNewDeviceAgent`, entity).then(res => {
+      cb(res.data.success, res.data.info, parseInt(res.data.object || 0, 10))
+    }).catch(() => cb(false))
+  }
+}
+
+export function clearFixStatus () {
+  return dispatch => {
+    dispatch({type: UPDATE_DEVICE_FIX_STATUS, data: '', result: {info: '', code: 0}})
   }
 }

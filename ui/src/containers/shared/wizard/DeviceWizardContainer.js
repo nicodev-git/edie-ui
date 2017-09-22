@@ -14,7 +14,9 @@ import {
   fetchMonitorGroups,
   fetchCollectors,
 
-  installAgent
+  installAgent,
+  clearFixStatus,
+  fixNewDevice
 } from 'actions'
 
 class DeviceWizardContainer extends Component {
@@ -32,7 +34,7 @@ export default connect(
     monitorTemplates: state.settings.monitorTemplates,
     deviceTemplates: state.settings.deviceTemplates,
     collectors: state.settings.collectors,
-    formValues: selector(state, 'wanip', 'name'),
+    formValues: selector(state, 'wanip', 'name', 'agentType', 'collectorId'),
     initialValues: {
       distribution: 'Ubuntu',
       agentType: 'collector',
@@ -47,7 +49,10 @@ export default connect(
     collectorModalOpen: state.settings.collectorModalOpen,
 
     installAgents: state.settings.installAgents,
-    installAgentMessage: state.devices.installAgentMessage
+    installAgentMessage: state.devices.installAgentMessage,
+
+    fixStatus: state.devices.fixStatus,
+    fixResult: state.devices.fixResult
   }),
   dispatch => ({
     ...bindActionCreators({
@@ -61,7 +66,9 @@ export default connect(
       fetchMonitorGroups,
       fetchCollectors,
 
-      installAgent
+      installAgent,
+      clearFixStatus,
+      fixNewDevice
     }, dispatch)
   })
 )(DeviceWizardContainer)

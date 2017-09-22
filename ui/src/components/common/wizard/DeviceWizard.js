@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { assign } from 'lodash'
 import { reduxForm } from 'redux-form'
 import {Step, Stepper, StepLabel} from 'material-ui/Stepper'
+import {CircularProgress} from 'material-ui'
 
 import TextInput from './input/TextInput'
 import Checkbox from './input/Checkbox'
@@ -18,8 +19,11 @@ import AgentPicker from './input/AgentPicker'
 
 import {CardPanel} from 'components/modal/parts'
 
+import {showAlert} from 'components/common/Alert'
+
 // import CredPicker from 'containers/settings/credentials/CredsPickerContainer'
 import CredentialModal from 'components/credentials/CredentialModal'
+import {getAgentStatusMessage} from 'shared/Global'
 
 class DeviceWizard extends Component {
   constructor (props) {
@@ -55,6 +59,7 @@ class DeviceWizard extends Component {
   }
 
   componentWillMount () {
+    this.props.clearFixStatus()
     this.props.fetchMonitorTemplates()
     this.props.fetchCredentials()
     this.props.fetchCredTypes()
@@ -84,7 +89,20 @@ class DeviceWizard extends Component {
   }
 
   onChangeAgentType (e, value) {
+    const {formValues} = this.props
 
+    const entity = {
+      ...formValues,
+      agentType: value
+    }
+
+    if (!entity.wanip) {
+      showAlert('Please input IP')
+      return
+    }
+
+    console.log(entity)
+    this.props.fixNewDevice(entity)
   }
 
   handleFormSubmit (formProps) {
@@ -301,20 +319,31 @@ class DeviceWizard extends Component {
   }
 
   buildAgentPicker (config, values, meta) {
-    const {formValues, extraParams} = this.props
+    const {formValues, extraParams, fixResult, fixStatus} = this.props
+
+    let msg = ''
+    if (fixStatus === 'checking' ) {
+      msg = <div style={{color: '#600000'}}>Trying to access server, please wait…<CircularProgress className="valign-top margin-md-left" size={24}/></div>
+    } else if (fixStatus === 'done') {
+      if (!fixResult.code) msg = <div style={{color: '#008000'}}>It's Fixed, you can close this windows now</div>
+      else msg = <div style={{color: '#600000'}}>{getAgentStatusMessage(fixResult.code)}</div>
+    }
+
     return (
-      <AgentPicker
-        {...this.props}
-        key="agentPicker"
-        values={values}
-        config={config}
-        meta={meta}
-        editDevice={{
-          ...formValues,
-          templateName: extraParams.templateName
-        }}
-        onChange={this.onChangeAgentType.bind(this)}
-      />
+      <div key="agentPicker">
+        {msg}
+        <AgentPicker
+          {...this.props}
+          values={values}
+          config={config}
+          meta={meta}
+          editDevice={{
+            ...formValues,
+            templateName: extraParams.templateName
+          }}
+          onChange={this.onChangeAgentType.bind(this)}
+        />
+      </div>
     )
   }
 

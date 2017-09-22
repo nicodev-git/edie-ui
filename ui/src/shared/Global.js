@@ -408,3 +408,40 @@ export function getDeviceCredentials (selectedDevice, credentials, showGlobal) {
   }
   return deviceCreds
 }
+
+export function mergeCredentials(device, credentials, deviceCredentials) {
+  const deviceCreds = [...deviceCredentials]
+  const isWin = isWindowsDevice(device)
+
+  credentials.forEach(p => {
+    if (!p.global) return
+    if (isWin && p.type === 'SSH') return
+    if (!isWin && p.type === 'WINDOWS') return
+    if (deviceCreds.filter(d => d.type === p.type).length === 0)
+      deviceCreds.push(p)
+  })
+
+  return deviceCreds
+}
+
+export function getAgentStatusMessage (code) {
+  let msg = ''
+  switch (code) {
+    case 1:
+      msg = 'No Agent/Collector defined. If you need agent, click "Install" button to install agent. Otherwise, please choose collector.'
+      break
+    case 2:
+      msg = 'No login credentials found. Please add SSH credentials.'
+      break
+    case 3:
+      msg = 'Please choose linux os name.'
+      break
+    case 4:
+      msg = 'Failed to check device with current credentials. Please check if credentials are correct.'
+      break
+    default:
+      msg = ''
+      break
+  }
+  return msg
+}

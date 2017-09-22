@@ -4,7 +4,7 @@ import {CircularProgress} from 'material-ui'
 
 import DeviceFixModalView from './DeviceFixModalView'
 import {showAlert} from 'components/common/Alert'
-import {getDeviceCredentials} from 'shared/Global'
+import {getDeviceCredentials, getAgentStatusMessage} from 'shared/Global'
 
 class DeviceFixModal extends React.Component {
   componentWillMount () {
@@ -21,25 +21,7 @@ class DeviceFixModal extends React.Component {
   //   }
   // }
   getStatusMessage (code) {
-    let msg = ''
-    switch (code) {
-      case 1:
-        msg = 'No Agent/Collector defined. If you need agent, click "Install" button to install agent. Otherwise, please choose collector.'
-        break
-      case 2:
-        msg = 'No login credentials found. Please add SSH credentials.'
-        break
-      case 3:
-        msg = 'Please choose linux os name.'
-        break
-      case 4:
-        msg = 'Failed to check device with current credentials. Please check if credentials are correct.'
-        break
-      default:
-        msg = ''
-        break
-    }
-    return msg
+    return getAgentStatusMessage(code)
   }
 
   getMessage () {
