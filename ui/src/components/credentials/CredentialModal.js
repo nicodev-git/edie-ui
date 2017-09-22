@@ -24,7 +24,7 @@ class CredentialModal extends Component {
     const content = [
       {name: 'Name'},
       {name: 'User Name'},
-      {name: 'Password'},
+      {name: 'Password', type: 'password'},
       {name: 'Type', type: 'select', options: credentialTypes.map(t => ({label: t.name, value: t.name}))},
       {name: 'Description'},
       {name: 'Global', type: 'checkbox'},
