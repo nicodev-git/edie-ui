@@ -83,7 +83,7 @@ class DeviceWizard extends Component {
     })
   }
 
-  onChangeAgentType () {
+  onChangeAgentType (e, value) {
 
   }
 
@@ -169,17 +169,19 @@ class DeviceWizard extends Component {
     const {canAddTags} = this.props
     const currentDevice = this.state.currentDevice
     const stepConfig = currentDevice.steps[index]
-
+    const meta = {
+      active: index === (this.state.current - 1)
+    }
     return (
-      <div key={index} className={`${(index === (this.state.current - 1)) ? ' active' : 'hidden'}`}>
+      <div key={index} className={`${meta.active ? ' active' : 'hidden'}`}>
         {stepConfig.panels.map((panel, pi) =>
           panel.skip ? (
             <div key={pi}>
-              {panel.items.map(itemConfig => this.buildInput(itemConfig, this.props.values))}
+              {panel.items.map(itemConfig => this.buildInput(itemConfig, this.props.values, meta))}
             </div>
           ) : (
             <CardPanel key={pi} title={panel.title}>
-              {panel.items.map(itemConfig => this.buildInput(itemConfig, this.props.values))}
+              {panel.items.map(itemConfig => this.buildInput(itemConfig, this.props.values, meta))}
             </CardPanel>
           )
         )}
@@ -189,7 +191,7 @@ class DeviceWizard extends Component {
     )
   }
 
-  buildInput (config, values) {
+  buildInput (config, values, meta) {
     let items = []
 
     if (this.props.hideNames && config.name) {
@@ -201,7 +203,7 @@ class DeviceWizard extends Component {
     let func = this.mapping[config.type.toLowerCase()]
 
     if (typeof func !== 'undefined') {
-      items = func(config, values || {})
+      items = func(config, values || {}, meta)
     } else {
 
     }
@@ -298,7 +300,7 @@ class DeviceWizard extends Component {
     )
   }
 
-  buildAgentPicker (config, values) {
+  buildAgentPicker (config, values, meta) {
     const {formValues, extraParams} = this.props
     return (
       <AgentPicker
@@ -306,6 +308,7 @@ class DeviceWizard extends Component {
         key="agentPicker"
         values={values}
         config={config}
+        meta={meta}
         editDevice={{
           ...formValues,
           templateName: extraParams.templateName

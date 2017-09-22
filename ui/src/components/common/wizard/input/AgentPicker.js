@@ -11,9 +11,15 @@ import {isWindowsDevice} from 'shared/Global'
 
 export default class AgentPicker extends React.Component {
   componentWillReceiveProps (nextProps) {
-    const {installAgentMessage} = nextProps
+    const {installAgentMessage, meta} = nextProps
     if (!this.props.installAgentMessage && installAgentMessage) {
       showAlert(installAgentMessage)
+    }
+
+    if (this.props.meta && meta) {
+      if (this.props.meta.active !== meta.active && meta.active) {
+        nextProps.onChange(null, nextProps.formValues.agentType)
+      }
     }
   }
 
@@ -60,7 +66,7 @@ export default class AgentPicker extends React.Component {
       showAlert('Please add credential.', () => {
         this.props.showDeviceCredsPicker(2)
       });
-      return;
+      return
     }
 
     this.props.installAgent(this.props.editDevice)
