@@ -23,7 +23,7 @@ import {showAlert} from 'components/common/Alert'
 
 // import CredPicker from 'containers/settings/credentials/CredsPickerContainer'
 import CredentialModal from 'components/credentials/CredentialModal'
-import {getAgentStatusMessage} from 'shared/Global'
+import {getAgentStatusMessage, mergeCredentials} from 'shared/Global'
 
 class DeviceWizard extends Component {
   constructor (props) {
@@ -89,12 +89,16 @@ class DeviceWizard extends Component {
   }
 
   onChangeAgentType (e, value) {
-    const {formValues} = this.props
+    const {formValues, extraParams, credentials} = this.props
 
     const entity = {
       ...formValues,
-      agentType: value
+      tags: [formValues.distribution || ''],
+      templateName: extraParams.templateName,
+      agentType: value,
     }
+
+    entity.credentials = mergeCredentials(entity, credentials, this.state.deviceCredentials)
 
     if (!entity.wanip) {
       showAlert('Please input IP')
@@ -325,7 +329,7 @@ class DeviceWizard extends Component {
     if (fixStatus === 'checking' ) {
       msg = <div style={{color: '#600000'}}>Trying to access server, please wait…<CircularProgress className="valign-top margin-md-left" size={24}/></div>
     } else if (fixStatus === 'done') {
-      if (!fixResult.code) msg = <div style={{color: '#008000'}}>It's Fixed, you can close this windows now</div>
+      if (!fixResult.code) msg = <div style={{color: '#008000'}}>Connection successful</div>
       else msg = <div style={{color: '#600000'}}>{getAgentStatusMessage(fixResult.code)}</div>
     }
 

@@ -4,7 +4,7 @@ import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
 import CloseIcon from 'material-ui/svg-icons/navigation/close'
 
 import { CardPanel } from 'components/modal/parts'
-import {isWindowsDevice} from 'shared/Global'
+import {mergeCredentials} from 'shared/Global'
 import { chipStyles } from 'style/common/materialStyles'
 
 export default class CredPicker extends React.Component {
@@ -18,19 +18,7 @@ export default class CredPicker extends React.Component {
 
   getCredentials() {
     const {credentials, extraParams, deviceCredentials} = this.props
-    const deviceCreds = [...deviceCredentials]
-    const isWin = isWindowsDevice({templateName: extraParams.templateName})
-
-    credentials.forEach(p => {
-      if (!p.global) return
-      if (isWin && p.type === 'SSH') return
-      if (!isWin && p.type === 'WINDOWS') return
-      if (deviceCreds.filter(d => d.type === p.type).length === 0)
-        deviceCreds.push(p)
-    })
-
-    return deviceCreds
-
+    return mergeCredentials({templateName: extraParams.templateName}, credentials, deviceCredentials)
   }
 
   renderButtons () {

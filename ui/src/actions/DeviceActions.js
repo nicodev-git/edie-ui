@@ -1193,6 +1193,7 @@ export function fixDevice (entity) {
 
 export function fixNewDevice (entity) {
   return dispatch => {
+    dispatch({type: UPDATE_DEVICE_FIX_STATUS, data: 'checking'})
     dispatch(checkNewDeviceAgent(entity, (success, info, code) => {
       dispatch({type: UPDATE_DEVICE_FIX_STATUS, data: 'done', result: {info, code}})
     }))
