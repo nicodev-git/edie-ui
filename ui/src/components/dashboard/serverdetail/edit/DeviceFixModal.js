@@ -38,12 +38,8 @@ class DeviceFixModal extends React.Component {
   getConfig () {
     const {fixCode} = this.props
     const config = {
-      agentPick: false,
-      credentials: false
-    }
-    if (fixCode === 1) {
-      config.agentPick = true
-      config.credentials = true
+      agentPick: fixCode === 1,
+      credentials: fixCode === 1 || fixCode === 4
     }
     return config
   }
@@ -59,7 +55,13 @@ class DeviceFixModal extends React.Component {
   }
 
   handleFormSubmit (values) {
+    const config = this.getConfig()
     console.log(values)
+    if (config.agentPick && !values.agentType) {
+      showAlert('Please choose agent or collector.')
+      return
+    }
+
     if (values.agentType === 'collector') {
       if (!values.collectorId)
       showAlert('Please select collector.')
