@@ -313,7 +313,6 @@ export const addMapDevice = (props, url) => {
       axios.post(`${ROOT_URL}${url || '/device'}`, assign({}, props, {workflowids})).then(response => {
         addMapDeviceSuccess(dispatch, response)
         props.credential.forEach(p => {
-          if (p.id) return
           dispatch(addDeviceCredential(p, response.data.id))
         })
       }).catch(error => apiError(dispatch, error))
@@ -339,7 +338,6 @@ export const updateMapDevice = (entity) => {
 
     if (entity.credential) {
       entity.credential.forEach(p => {
-        if (p.id) return
         dispatch(addDeviceCredential(p, entity.id))
       })
     }

@@ -121,7 +121,7 @@ export const addDeviceCredential = (creds, deviceId) => {
   return dispatch => {
     if (!creds) return
     const deviceIds = [...(creds.deviceIds || [])]
-    if (!creds.global) deviceIds.push(deviceId)
+    if (!creds.default) deviceIds.push(deviceId)
 
     const entity = {
       ...creds,
