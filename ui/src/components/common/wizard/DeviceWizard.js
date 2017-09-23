@@ -123,8 +123,8 @@ class DeviceWizard extends Component {
   }
 
   handleFormSubmit (formProps) {
-    const { extraParams, onFinish, editParams, canAddTags, monitorTags } = this.props
-    const { monitors, currentDevice } = this.state
+    const { extraParams, onFinish, editParams, canAddTags, monitorTags, credentials } = this.props
+    const { monitors, currentDevice, deviceGlobalCredentials, deviceCredentials } = this.state
     const {distribution} = formProps
     const params = {}
     if (editParams) {
@@ -148,7 +148,9 @@ class DeviceWizard extends Component {
       props.tags = [...(props.tags || []), distribution]
     }
 
-    props.credential = this.state.deviceCredentials
+    props.credential = mergeCredentials({
+      templateName: extraParams.templateName
+    }, credentials, deviceGlobalCredentials, deviceCredentials)
     console.log(props)
     this.closeModal(true)
     onFinish && onFinish(null, props, currentDevice.server.url)
