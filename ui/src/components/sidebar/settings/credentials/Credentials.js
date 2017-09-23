@@ -1,5 +1,6 @@
 import React from 'react'
 import {RaisedButton, Chip} from 'material-ui'
+import {findIndex} from 'lodash'
 
 import InfiniteTable from 'components/common/InfiniteTable'
 import { showAlert, showConfirm } from 'components/common/Alert'
@@ -39,6 +40,19 @@ export default class Credentials extends React.Component {
         return <span>{p.data ? 'Yes' : 'No'}</span>
       }
     }, {
+      'displayName': 'Device',
+      'columnName': 'deviceIds',
+      'customComponent': p => {
+        const {devices} = this.props
+        const deviceNames = []
+        const data = p.data || []
+        data.forEach(id => {
+          const index = findIndex(devices, {id})
+          if (index >= 0) deviceNames.push(devices[index].name)
+        })
+        return <span>{deviceNames.join(',')}</span>
+      }
+    }, {
       'displayName': '',
       'columnName': 'default',
       'customComponent': p => {
@@ -55,6 +69,7 @@ export default class Credentials extends React.Component {
   componentWillMount () {
     this.props.fetchCredentials()
     this.props.fetchCredTypes()
+    this.props.fetchDevicesGroups()
   }
 
   renderContent () {

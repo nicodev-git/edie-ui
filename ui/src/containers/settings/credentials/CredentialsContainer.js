@@ -8,6 +8,7 @@ import {
   fetchCredentials,
   openCredentialsModal,
   removeCredentials,
+  fetchDevicesGroups,
 
   fetchCredTypes,
   addCredentials,
@@ -30,13 +31,16 @@ export default connect(
 
     editCredentials: state.settings.editCredentials,
 
-    credentialTypes: state.settings.credentialTypes
+    credentialTypes: state.settings.credentialTypes,
+
+    devices: state.devices.deviceAndGroups
   }),
   dispatch => ({
     ...bindActionCreators({
       fetchCredentials,
       openCredentialsModal,
       removeCredentials,
+      fetchDevicesGroups,
 
       fetchCredTypes,
       addCredentials,

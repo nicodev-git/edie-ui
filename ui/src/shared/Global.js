@@ -429,7 +429,7 @@ export function mergeCredentials(device, credentials, deviceGlobalCredentials, d
   })
 
   deviceGlobalCredentials.forEach(fnCheck)
-  credentials.forEach(fnCheck)
+  credentials.filter(p => p.global && p.default).forEach(fnCheck)
 
   return deviceCreds
 }
