@@ -7,10 +7,11 @@ export default class CredPickerView extends React.Component {
   renderLeftTools () {
     const {credentialTypes, type, onChangeType} = this.props
     return (
-      <div>
+      <div style={{marginTop: -6}}>
         <SelectField onChange={onChangeType} value={type}>
+          <MenuItem primaryText="[All]" value=""/>
           {credentialTypes.map(p =>
-            <MenuItem primaryText={p.name} value={p.name}/>
+            <MenuItem key={p.name} primaryText={p.name} value={p.name}/>
           )}
         </SelectField>
       </div>
@@ -18,10 +19,12 @@ export default class CredPickerView extends React.Component {
   }
 
   render () {
-    const {credentials, onHide, onClickOK, onSelect, selectedCreds} = this.props
+    const {credentials, onHide, onClickOK, onSelect, selectedCreds, type} = this.props
+    const filtered = type ? credentials.filter(p => p.type === type) : credentials
     return (
       <Modal title="Credentials" onRequestClose={onHide}>
-        <CardPanel title="Credentials" leftTools={this.renderLeftTools()}>
+        <CardPanel title="Credentials">
+          {this.renderLeftTools()}
           <div style={{height: 300, overflow: 'auto'}}>
             <table className="table table-hover">
               <thead>
@@ -33,7 +36,7 @@ export default class CredPickerView extends React.Component {
               </tr>
               </thead>
               <tbody>
-              {credentials.map((p, i) =>
+              {filtered.map((p, i) =>
                 <tr
                   key={i}
                   onClick={() => onSelect(p)}

@@ -33,9 +33,11 @@ export default class CredPicker extends Component {
     }
   }
   render () {
-    const {credentials, selectedCreds} = this.props
+    const {credentials, selectedCreds, credentialTypes} = this.props
     return (
       <CredPickerView
+        credentialTypes={credentialTypes}
+        type={this.state.type}
         onSelect={this.onSelect.bind(this)}
         selectedCreds={selectedCreds}
         credentials={credentials}
