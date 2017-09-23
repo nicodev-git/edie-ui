@@ -8,6 +8,7 @@ export default class CollectorInstallModalView extends React.Component {
     const {onHide} = this.props
     return (
       <Modal title="Collector Install" onRequestClose={onHide}>
+        <Field name="ip" component={FormInput} label="IP"/>
         <Field name="user" component={FormInput} label="User"/>
         <Field name="password" component={FormInput} label="Password" type="password"/>
       </Modal>

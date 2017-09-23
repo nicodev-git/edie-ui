@@ -119,6 +119,8 @@ import {
   SHOW_DEVICE_FIX_MODAL,
   UPDATE_DEVICE_FIX_STATUS,
 
+  SHOW_COLLECTOR_INSTALL_MODAL,
+
   NO_AUTH_ERROR
 } from './types'
 
@@ -1219,5 +1221,11 @@ export function checkNewDeviceAgent (entity, cb) {
 export function clearFixStatus () {
   return dispatch => {
     dispatch({type: UPDATE_DEVICE_FIX_STATUS, data: '', result: {info: '', code: 0}})
+  }
+}
+
+export function showCollectorInstallModal (visible) {
+  return dispatch => {
+    dispatch({type: SHOW_COLLECTOR_INSTALL_MODAL, visible})
   }
 }

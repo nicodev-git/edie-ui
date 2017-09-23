@@ -112,6 +112,7 @@ import {
   SHOW_DEVICE_CREDS_MODAL,
   SHOW_DEVICE_FIX_MODAL,
   UPDATE_DEVICE_FIX_STATUS,
+  SHOW_COLLECTOR_INSTALL_MODAL,
 
   UPDATE_DEVICE_ERROR
 } from 'actions/types'
@@ -511,6 +512,8 @@ export default function (state = INITIAL_STATE, action) {
     case UPDATE_DEVICE_FIX_STATUS:
       return { ...state, fixStatus: action.data, fixResult: action.result }
 
+    case SHOW_COLLECTOR_INSTALL_MODAL:
+      return { ...state, collectorInstallModalOpen: action.visible }
     default:
       return state
   }

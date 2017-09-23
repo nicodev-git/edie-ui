@@ -4,9 +4,10 @@ import {Field} from 'redux-form'
 import {RadioButtonGroup} from 'redux-form-material-ui'
 
 import CredentialModal from 'components/credentials/CredentialModal'
+import CollectorInstallModal from './input/CollectorInstallModal'
+
 import {FormSelect} from 'components/modal/parts'
 import {showAlert} from 'components/common/Alert'
-
 import {isWindowsDevice} from 'shared/Global'
 
 export default class AgentPicker extends React.Component {
@@ -83,6 +84,13 @@ export default class AgentPicker extends React.Component {
     )
   }
 
+  renderCollectorInstall () {
+    if (!this.props.collectorInstallModalOpen) return null
+    return (
+      <CollectorInstallModal {...this.props}/>
+    )
+  }
+
   render () {
     const {editDevice, installAgents, onChange} = this.props
     let {agent} = editDevice
@@ -131,6 +139,7 @@ export default class AgentPicker extends React.Component {
 
         <Field name="collectorId" label="Collector" component={FormSelect} className="pull-left" options={collectorOptions}/>
         {this.renderCredPicker()}
+        {this.renderCollectorInstall()}
       </div>
     )
   }
