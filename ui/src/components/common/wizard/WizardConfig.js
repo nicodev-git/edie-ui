@@ -78,23 +78,26 @@ export const commonconfig = {
   },
   distribution: {
     values: [{
-      display: 'Red Hat',
-      value: 'Red Hat'
-    }, {
-      display: 'Fedora',
-      value: 'Fedora'
-    }, {
       display: 'Cent OS',
       value: 'Cent OS'
     }, {
-      display: 'Ubuntu',
-      value: 'Ubuntu'
+      display: 'Core OS',
+      value: 'Core OS'
     }, {
       display: 'Debian',
       value: 'Debian'
     }, {
+      display: 'Fedora',
+      value: 'Fedora'
+    }, {
       display: 'Kali',
       value: 'Kali'
+    }, {
+      display: 'Red Hat',
+      value: 'Red Hat'
+    }, {
+      display: 'Ubuntu',
+      value: 'Ubuntu'
     }]
   }
 }
