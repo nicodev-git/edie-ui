@@ -11,11 +11,22 @@ class CollectorInstallModal extends React.Component {
   handleFormSubmit (values) {
     console.log(values)
   }
+  onClickRefresh () {
+
+  }
+  onClickTest () {
+
+  }
   render () {
+    const {collectors} = this.props
     return (
       <CollectorInstallModalView
         onHide={this.onHide.bind(this)}
         onSubmit={this.props.handleSubmit(this.handleFormSubmit.bind(this))}
+
+        collectors={collectors}
+        onClickRefresh={this.onClickRefresh.bind(this)}
+        onClickTest={this.onClickTest.bind(this)}
       />
     )
   }

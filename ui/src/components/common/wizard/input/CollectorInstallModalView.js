@@ -1,9 +1,9 @@
 import React from 'react'
-import {RaisedButton, IconButton, SelectField} from 'material-ui'
+import {RaisedButton, IconButton} from 'material-ui'
 import { Field, Form } from 'redux-form'
 import RefreshIcon from 'material-ui/svg-icons/navigation/refresh'
 
-import { FormInput, SubmitBlock, Modal, CardPanel } from 'components/modal/parts'
+import { FormInput, FormSelect, SubmitBlock, Modal, CardPanel } from 'components/modal/parts'
 import {ROOT_URL} from 'actions/config'
 
 export default class CollectorInstallModalView extends React.Component {
@@ -19,6 +19,7 @@ export default class CollectorInstallModalView extends React.Component {
     )
   }
   renderDownload () {
+    const {onClickRefresh, onClickTest, collectors} = this.props
     return (
       <div>
         <CardPanel title="Collector Install">
@@ -28,10 +29,12 @@ export default class CollectorInstallModalView extends React.Component {
 
           <div className="margin-lg-top">
             <div className="valign-middle inline-block" style={{marginTop: -20}}>
-              <SelectField floatingLabelText="Collector"/>
+              <Field
+                name="collectorId" component={FormSelect} floatingLabel="Collector"
+                options={collectors.map(p => ({value: p.id, label: p.name}))}/>
             </div>
-            <IconButton className="valign-middle"><RefreshIcon/></IconButton>
-            <RaisedButton label="Test" className="valign-middle margin-md-left"/>
+            <IconButton className="valign-middle" onTouchTap={onClickRefresh}><RefreshIcon/></IconButton>
+            <RaisedButton label="Test" className="valign-middle margin-md-left" onTouchTap={onClickTest}/>
           </div>
         </CardPanel>
         <a
