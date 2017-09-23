@@ -8,11 +8,11 @@ export default class CollectorInstallModalView extends React.Component {
     const {onHide, onSubmit} = this.props
     return (
       <Modal title="Collector Install" onRequestClose={onHide}>
-        <Form onSubmit={onSubmit}>
+        <Form onSubmit={onSubmit} autoComplete="off">
           <CardPanel>
             <Field name="ip" component={FormInput} floatingLabel="IP"/>
             <Field name="user" component={FormInput} floatingLabel="User"/>
-            <Field name="password" component={FormInput} floatingLabel="Password" type="password"/>
+            <Field name="password" component={FormInput} floatingLabel="Password"/>
 
             <SubmitBlock name="Install"/>
           </CardPanel>

@@ -23,6 +23,8 @@ import {showAlert} from 'components/common/Alert'
 
 // import CredPicker from 'containers/settings/credentials/CredsPickerContainer'
 import CredentialModal from 'components/credentials/CredentialModal'
+import CollectorInstallModal from './input/CollectorInstallModal'
+
 import {getAgentStatusMessage, mergeCredentials} from 'shared/Global'
 
 class DeviceWizard extends Component {
@@ -71,7 +73,7 @@ class DeviceWizard extends Component {
     const {collectors} = nextProps
     if (this.props.collectors !== collectors && collectors.length) {
       if (!nextProps.formValues.collectorId) {
-        nextProps.change('collectorId', collectors[0].id)
+        this.props.change('collectorId', collectors[0].id)
       }
     }
   }
@@ -439,6 +441,13 @@ class DeviceWizard extends Component {
     )
   }
 
+  renderCollectorInstallModal () {
+    if (!this.props.collectorInstallModalOpen) return null
+    return (
+      <CollectorInstallModal {...this.props}/>
+    )
+  }
+
   render () {
     const { handleSubmit, canAddTags } = this.props
     const { current, steps } = this.state
@@ -462,6 +471,7 @@ class DeviceWizard extends Component {
         onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
         canAddTags={canAddTags}
         credPicker={this.renderCredPicker()}
+        collectorModal={this.renderCollectorInstallModal()}
       />
     )
   }
