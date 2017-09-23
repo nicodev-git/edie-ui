@@ -105,6 +105,11 @@ class DeviceWizard extends Component {
       return
     }
 
+    if (!entity.collectorId && entity.agentType === 'collector') {
+      this.props.showCollectorInstallModal(true)
+      return
+    }
+
     console.log(entity)
     this.props.fixNewDevice(entity)
   }

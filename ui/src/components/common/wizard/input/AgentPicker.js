@@ -4,7 +4,7 @@ import {Field} from 'redux-form'
 import {RadioButtonGroup} from 'redux-form-material-ui'
 
 import CredentialModal from 'components/credentials/CredentialModal'
-import CollectorInstallModal from './input/CollectorInstallModal'
+import CollectorInstallModal from './CollectorInstallModal'
 
 import {FormSelect} from 'components/modal/parts'
 import {showAlert} from 'components/common/Alert'

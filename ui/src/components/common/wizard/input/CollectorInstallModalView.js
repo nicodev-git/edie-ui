@@ -1,16 +1,22 @@
 import React from 'react'
-import { Field } from 'redux-form'
+import { Field, Form } from 'redux-form'
 
-import { FormInput, FormSelect, SubmitBlock, Modal, CardPanel } from 'components/modal/parts'
+import { FormInput, SubmitBlock, Modal, CardPanel } from 'components/modal/parts'
 
 export default class CollectorInstallModalView extends React.Component {
   render () {
-    const {onHide} = this.props
+    const {onHide, onSubmit} = this.props
     return (
       <Modal title="Collector Install" onRequestClose={onHide}>
-        <Field name="ip" component={FormInput} label="IP"/>
-        <Field name="user" component={FormInput} label="User"/>
-        <Field name="password" component={FormInput} label="Password" type="password"/>
+        <Form onSubmit={onSubmit}>
+          <CardPanel>
+            <Field name="ip" component={FormInput} floatingLabel="IP"/>
+            <Field name="user" component={FormInput} floatingLabel="User"/>
+            <Field name="password" component={FormInput} floatingLabel="Password" type="password"/>
+
+            <SubmitBlock name="Install"/>
+          </CardPanel>
+        </Form>
       </Modal>
     )
   }
