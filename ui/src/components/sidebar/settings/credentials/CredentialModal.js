@@ -35,7 +35,8 @@ class CredentialModal extends Component { // eslint-disable-line react/no-multi-
       {name: 'Password'},
       {name: 'Type', type: 'select', options: credentialTypes.map(t => ({label: t.name, value: t.name}))},
       {name: 'Description'},
-      {name: 'Global', type: 'checkbox'}
+      {name: 'Global', type: 'checkbox'},
+      {name: 'Default', type: 'checkbox'}
     ]
 
     return (
