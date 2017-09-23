@@ -43,8 +43,6 @@ class DeviceWizard extends Component {
       currentDevice: {...config, steps: stepItems},
       monitors: props.monitors || [],
 
-      credentialSelect: 'existing',
-
       deviceCredentials: [],
       deviceGlobalCredentials: []
     }
@@ -92,7 +90,7 @@ class DeviceWizard extends Component {
     })
   }
 
-  checkDeviceAgentStatus (options) {
+  checkDeviceAgentStatus (options = {}) {
     const {formValues, extraParams, credentials} = this.props
 
     const entity = {
@@ -150,22 +148,6 @@ class DeviceWizard extends Component {
       props.tags = [...(props.tags || []), distribution]
     }
 
-    // if (this.state.credentialSelect === 'existing') {
-    //   const index = findIndex(this.props.credentials, {id: formProps.credentialId})
-    //   if (index >= 0) {
-    //     props.credential = this.props.credentials[index]
-    //   }
-    // } else {
-    //   if (formProps.creduser && formProps.credtype) {
-    //     props.credential = {
-    //       username: formProps.creduser,
-    //       password: formProps.credpassword,
-    //       global: false,
-    //       type: formProps.credtype,
-    //       name: `Cred-${props.name || 'device'}`
-    //     }
-    //   }
-    // }
     props.credential = this.state.deviceCredentials
     console.log(props)
     this.closeModal(true)
@@ -326,7 +308,6 @@ class DeviceWizard extends Component {
         key="credentialId"
         deviceCredentials={deviceCredentials}
         deviceGlobalCredentials={deviceGlobalCredentials}
-        onChangeCredential={this.onChangeCredential.bind(this)}
         onChangeGlobalCredential={this.onChangeGlobalCredential.bind(this)}
         onClickDelete={this.onDeleteDeviceCred.bind(this)}
         values={values}
@@ -412,7 +393,7 @@ class DeviceWizard extends Component {
       // this.props.updateMapDevice(props)
       this.setState({
         deviceCredentials: [...this.state.deviceCredentials, selected]
-      })
+      }, () => this.checkDeviceAgentStatus())
     }
     this.props.showDeviceCredsPicker(false)
   }
@@ -420,14 +401,14 @@ class DeviceWizard extends Component {
   onDeleteDeviceCred (index) {
     this.setState({
       deviceCredentials: this.state.deviceCredentials.filter((p, i) => i !== index)
-    })
+    }, () => this.checkDeviceAgentStatus())
   }
 
   onChangeGlobalCredential (newCred, oldCred) {
     let {deviceGlobalCredentials} = this.state
     deviceGlobalCredentials = deviceGlobalCredentials.filter(p => p.id !== oldCred.id)
     deviceGlobalCredentials = [...deviceGlobalCredentials, newCred]
-    this.setState({deviceGlobalCredentials})
+    this.setState({deviceGlobalCredentials}, () => this.checkDeviceAgentStatus())
   }
 
   renderParamEditModal () {
