@@ -15,6 +15,7 @@ import StatusImg from './StatusImg'
 import DeviceEditModal from 'containers/shared/wizard/DeviceEditModalContainer'
 import { getDeviceType } from 'components/common/wizard/WizardConfig'
 import DeviceCredsModal from './edit/DeviceCredsModal'
+import ServerCombo from './ServerCombo'
 
 import GaugeMap from 'components/common/gauge/GaugeMap'
 import { getWidgetSize, layoutCols, layoutRowHeight, layoutWidthZoom, layoutHeightZoom } from 'shared/Global'
@@ -222,8 +223,8 @@ export default class MainControl extends React.Component {
     return (
       <TabPage>
         <TabPageHeader
-          title={device.name}
-          titleOptions={<StatusImg {...this.props} device={this.getDevice()}/>}
+          title={<ServerCombo {...this.props} device={device}/>}
+          titleOptions={<StatusImg {...this.props} device={device}/>}
           useToolBar>
           <ToolbarGroup firstChild>
             <IconButton onTouchTap={this.onClickEdit.bind(this)} tooltip="General"><EditIcon/></IconButton>

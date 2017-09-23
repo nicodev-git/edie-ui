@@ -16,7 +16,8 @@ import {
   selectDeviceCreds,
   showDeviceCredsPicker,
   removeCredentials,
-  addCredentials
+  addCredentials,
+  fetchDevice
 } from 'actions'
 
 class MainControlContainer extends React.Component {
@@ -29,6 +30,7 @@ class MainControlContainer extends React.Component {
 export default connect(
   state => ({
     devices: state.devices.devices,
+    allDevices: state.devices.deviceAndGroups,
     deviceEditModalOpen: state.devices.deviceEditModalOpen,
     editDevice: state.devices.editDevice,
     deviceCredsModalOpen: state.devices.deviceCredsModalOpen,
@@ -57,6 +59,7 @@ export default connect(
     selectDeviceCreds,
     showDeviceCredsPicker,
     removeCredentials,
-    addCredentials
+    addCredentials,
+    fetchDevice
   }
 )(withRouter(MainControlContainer))
