@@ -1,13 +1,27 @@
 import React from 'react'
+import {SelectField, MenuItem} from 'material-ui'
 
 import {TwoButtonsBlockCustom, Modal, CardPanel} from 'components/modal/parts'
 
 export default class CredPickerView extends React.Component {
+  renderLeftTools () {
+    const {credentialTypes, type, onChangeType} = this.props
+    return (
+      <div>
+        <SelectField onChange={onChangeType} value={type}>
+          {credentialTypes.map(p =>
+            <MenuItem primaryText={p.name} value={p.name}/>
+          )}
+        </SelectField>
+      </div>
+    )
+  }
+
   render () {
     const {credentials, onHide, onClickOK, onSelect, selectedCreds} = this.props
     return (
       <Modal title="Credentials" onRequestClose={onHide}>
-        <CardPanel>
+        <CardPanel title="Credentials" leftTools={this.renderLeftTools()}>
           <div style={{height: 300, overflow: 'auto'}}>
             <table className="table table-hover">
               <thead>

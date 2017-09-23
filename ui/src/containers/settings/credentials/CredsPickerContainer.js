@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 
 import {
   fetchCredentials,
+  fetchCredTypes,
   selectCreds
 } from 'actions'
 
@@ -17,9 +18,11 @@ class CredsPickerContainer extends React.Component {
 export default connect(
   state => ({
     credentials: state.settings.credentials,
+    credentialTypes: state.settings.credentialTypes,
     selectedCreds: state.settings.selectedCreds
   }), {
     fetchCredentials,
+    fetchCredTypes,
     selectCreds
   }
 )(CredsPickerContainer)

@@ -52,6 +52,7 @@ import {
   OPEN_CREDENTIALS_MODAL,
   CLOSE_CREDENTIALS_MODAL,
   SELECT_CREDS,
+  SHOW_CRED_LIST_MODAL,
 
   FETCH_WORKFLOWS,
   ADD_WORKFLOW,
@@ -391,7 +392,10 @@ export default function (state = initialState, action) {
     case SELECT_CREDS:
       return { ...state, selectedCreds: action.creds }
 
-        // ///////////////////////////////////////////////////
+    case SHOW_CRED_LIST_MODAL:
+      return { ...state, credListModalOpen: action.visible }
+
+    // ///////////////////////////////////////////////////
 
     case FETCH_WORKFLOWS:
       return { ...state, workflows: action.data }

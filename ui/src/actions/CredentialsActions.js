@@ -9,6 +9,8 @@ import {
 
   SELECT_CREDS,
 
+  SHOW_CRED_LIST_MODAL,
+
   NO_AUTH_ERROR
 } from './types'
 
@@ -131,5 +133,11 @@ export const addDeviceCredential = (creds, deviceId) => {
     } else {
       dispatch(addCredentials(entity))
     }
+  }
+}
+
+export const showCredListModal = (visible) => {
+  return dispatch => {
+    dispatch({type: SHOW_CRED_LIST_MODAL, visible})
   }
 }

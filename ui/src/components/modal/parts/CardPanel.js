@@ -8,6 +8,7 @@ export default class CardPanel extends React.Component {
       <div className={this.props.className} style={this.props.style}>
         <CardLegend>
           {this.props.title}
+          {this.props.leftTools}
           {this.props.tools ? (
             <div className="pull-right" style={{marginTop: -13}}>
               {this.props.tools}

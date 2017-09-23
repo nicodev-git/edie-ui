@@ -3,9 +3,21 @@ import React, { Component } from 'react'
 import CredPickerView from './CredPickerView'
 
 export default class CredPicker extends Component {
+  constructor (props) {
+    super (props)
+    this.state = {
+      type: ''
+    }
+  }
+
   componentWillMount () {
     this.props.fetchCredentials()
     this.props.selectCreds(null)
+  }
+  onChangeType (e, index, value) {
+    this.setState({
+      type: value
+    })
   }
   onSelect (p) {
     this.props.selectCreds(p)
@@ -29,6 +41,7 @@ export default class CredPicker extends Component {
         credentials={credentials}
         onClickOK={this.onClickOK.bind(this)}
         onHide={this.closeModal.bind(this)}
+        onChangeType={this.onChangeType.bind(this)}
       />
     )
   }

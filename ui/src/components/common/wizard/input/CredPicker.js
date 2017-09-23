@@ -2,12 +2,19 @@ import React from 'react'
 import { IconButton, Chip } from 'material-ui'
 import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
 import CloseIcon from 'material-ui/svg-icons/navigation/close'
+import ListIcon from 'material-ui/svg-icons/action/list'
 
 import { CardPanel } from 'components/modal/parts'
 import {mergeCredentials} from 'shared/Global'
 import { chipStyles } from 'style/common/materialStyles'
 
+import CredListPicker from 'containers/settings/credentials/CredsPickerContainer'
+
 export default class CredPicker extends React.Component {
+  componentWillMount () {
+    this.props.fetchCredTypes()
+  }
+
   onClickAdd () {
     this.props.showDeviceCredsPicker(1)
   }
@@ -19,6 +26,26 @@ export default class CredPicker extends React.Component {
   getCredentials() {
     const {credentials, extraParams, deviceCredentials} = this.props
     return mergeCredentials({templateName: extraParams.templateName}, credentials, deviceCredentials)
+  }
+
+  onClickChangeGlobal () {
+    this.props.showCredListModal(true)
+  }
+
+  onClosePicker (selected) {
+    if (selected) {
+
+    }
+    this.props.showCredListModal(false)
+  }
+
+  renderPicker () {
+    if (!this.props.credListModalOpen) return null
+    return (
+      <CredListPicker
+        onClose={this.onClosePicker.bind(this)}
+      />
+    )
   }
 
   renderButtons () {
@@ -63,13 +90,23 @@ export default class CredPicker extends React.Component {
                 <th>
                   {!p.id ? (
                     <CloseIcon className="link" onTouchTap={this.onClickDelete.bind(this, i)}/>
-                  ) : null}
+                  ) : (
+                    <div>
+                      <IconButton tooltip="Choose other credential">
+                        <ListIcon className="link" onTouchTap={this.onClickChangeGlobal.bind(this)}/>
+                      </IconButton>
+                      <IconButton tooltip="Add">
+                        <AddCircleIcon/>
+                      </IconButton>
+                    </div>
+                  )}
                 </th>
               </tr>
             )}
             </tbody>
           </table>
         </div>
+        {this.renderPicker()}
       </CardPanel>
     )
   }

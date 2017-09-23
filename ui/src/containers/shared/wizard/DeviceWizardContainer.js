@@ -10,6 +10,7 @@ import {
   fetchCredTypes,
   fetchCredentials,
   showDeviceCredsPicker,
+  showCredListModal,
 
   fetchMonitorGroups,
   fetchCollectors,
@@ -44,6 +45,7 @@ export default connect(
     credentials: state.settings.credentials,
     credentialTypes: state.settings.credentialTypes,
     deviceCredsPickerVisible: state.devices.deviceCredsPickerVisible,
+    credListModalOpen: state.settings.credListModalOpen,
 
     monitorGroups: state.settings.monitorGroups,
 
@@ -65,6 +67,7 @@ export default connect(
       fetchCredTypes,
       fetchCredentials,
       showDeviceCredsPicker,
+      showCredListModal,
 
       fetchMonitorGroups,
       fetchCollectors,
