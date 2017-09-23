@@ -8,11 +8,11 @@ export default class TabPageHeader extends React.Component {
   }
 
   render () {
-    const {useToolBar} = this.props
+    const {useToolBar, titleStyle} = this.props
     return (
       <div className="tab-header">
         <div>
-          <div className="tab-title valign-middle">{this.props.title}</div>
+          <div className="tab-title valign-middle" style={titleStyle}>{this.props.title}</div>
           {this.props.titleOptions}
           <div className="pull-right">
             {this.props.headerOptions}

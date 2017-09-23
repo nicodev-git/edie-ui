@@ -224,6 +224,7 @@ export default class MainControl extends React.Component {
       <TabPage>
         <TabPageHeader
           title={<ServerCombo {...this.props} device={device}/>}
+          titleStyle={{height: 20, width: 240, display: 'inline-block'}}
           titleOptions={<StatusImg {...this.props} device={device}/>}
           useToolBar>
           <ToolbarGroup firstChild>
