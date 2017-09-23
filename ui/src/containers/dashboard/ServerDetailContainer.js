@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import ServerDetail from 'components/dashboard/serverdetail/ServerDetail'
 
 import {
+  fetchDevicesGroups,
   fetchDevice,
   openDevice
 } from 'actions'
@@ -21,6 +22,7 @@ export default connect(
     device: state.dashboard.selectedDevice,
     devices: state.devices.devices
   }), {
+    fetchDevicesGroups,
     fetchDevice,
     openDevice
   }

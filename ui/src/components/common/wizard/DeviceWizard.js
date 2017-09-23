@@ -123,7 +123,7 @@ class DeviceWizard extends Component {
   }
 
   handleFormSubmit (formProps) {
-    const { extraParams, onFinish, editParams, canAddTags, monitorTags, credentials } = this.props
+    const { extraParams, onFinish, editParams, canAddTags, monitorTags, credentials, fixResult, fixStatus } = this.props
     const { monitors, currentDevice, deviceGlobalCredentials, deviceCredentials } = this.state
     const {distribution} = formProps
     const params = {}
@@ -139,7 +139,8 @@ class DeviceWizard extends Component {
       currentDevice.server.params || {},
       extraParams, {
         monitors: monitors.map(m => assign({}, m, {id: null})),
-        params
+        params,
+        lastSeen: formProps.agentType === 'collector' && fixStatus === 'done' && !fixResult.code ? new Date().getTime() : 0
       }
     )
 

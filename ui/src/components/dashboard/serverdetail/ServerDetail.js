@@ -33,6 +33,7 @@ export default class ServerDetail extends React.Component {
 
   componentWillMount () {
     this.props.fetchDevice(this.getDeviceId())
+    this.props.fetchDevicesGroups()
     this.props.openDevice(this.getDevice())
   }
 
