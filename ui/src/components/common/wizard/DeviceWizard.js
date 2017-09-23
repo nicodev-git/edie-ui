@@ -25,7 +25,7 @@ import {showAlert} from 'components/common/Alert'
 import CredentialModal from 'components/credentials/CredentialModal'
 import CollectorInstallModal from './input/CollectorInstallModal'
 
-import {getAgentStatusMessage, mergeCredentials} from 'shared/Global'
+import {getAgentStatusMessage, mergeCredentials, getDeviceCollectors} from 'shared/Global'
 
 class DeviceWizard extends Component {
   constructor (props) {
@@ -71,9 +71,10 @@ class DeviceWizard extends Component {
 
   componentWillUpdate(nextProps) {
     const {collectors} = nextProps
-    if (this.props.collectors !== collectors && collectors.length) {
-      if (!nextProps.formValues.collectorId) {
-        this.props.change('collectorId', collectors[0].id)
+    if (this.props.collectors !== collectors && collectors.length && !nextProps.formValues.collectorId) {
+      const found = getDeviceCollectors({templateName: this.props.extraParams.templateName}, collectors)
+      if (found.length) {
+        this.props.change('collectorId', found[0].id)
       }
     }
   }

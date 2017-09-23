@@ -409,6 +409,13 @@ export function getDeviceCredentials (selectedDevice, credentials, showGlobal) {
   return deviceCreds
 }
 
+export function getDeviceCollectors (editDevice, collectors) {
+  if (isWindowsDevice(editDevice)) {
+    return collectors.filter(p => p.ostype === 'WINDOWS')
+  }
+  return collectors.filter(p => p.ostype === 'LINUX')
+}
+
 export function mergeCredentials(device, credentials, deviceCredentials) {
   const deviceCreds = [...deviceCredentials]
   const isWin = isWindowsDevice(device)

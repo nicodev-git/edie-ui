@@ -7,7 +7,7 @@ import CredentialModal from 'components/credentials/CredentialModal'
 
 import {FormSelect} from 'components/modal/parts'
 import {showAlert} from 'components/common/Alert'
-import {isWindowsDevice} from 'shared/Global'
+import {isWindowsDevice, getDeviceCollectors} from 'shared/Global'
 
 export default class AgentPicker extends React.Component {
   componentWillReceiveProps (nextProps) {
@@ -25,10 +25,7 @@ export default class AgentPicker extends React.Component {
 
   getCollectors () {
     const {editDevice, collectors} = this.props
-    if (isWindowsDevice(editDevice)) {
-      return collectors.filter(p => p.ostype === 'WINDOWS')
-    }
-    return collectors.filter(p => p.ostype === 'LINUX')
+    return getDeviceCollectors(editDevice, collectors)
   }
 
   ///////////////////////////////////////////////////////////////

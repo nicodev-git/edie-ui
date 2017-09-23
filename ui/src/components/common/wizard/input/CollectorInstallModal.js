@@ -23,6 +23,5 @@ class CollectorInstallModal extends React.Component {
 
 export default connect(
   state => ({
-    initialValues: {}
   })
 )(reduxForm({form: 'collectorInstallForm'})(CollectorInstallModal))
