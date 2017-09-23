@@ -88,7 +88,7 @@ export default class CredPicker extends React.Component {
               <th>Description</th>
               <th>User</th>
               <th />
-              <th />
+              <th>Action</th>
             </tr>
             </thead>
             <tbody>
@@ -110,10 +110,10 @@ export default class CredPicker extends React.Component {
                     <CloseIcon className="link" onTouchTap={this.onClickDelete.bind(this, i)}/>
                   ) : (
                     <div>
-                      <IconButton tooltip="Choose other credential">
+                      <IconButton tooltip="Choose other credential" style={{width: 24, padding: 0}}>
                         <ListIcon className="link" onTouchTap={this.onClickChangeGlobal.bind(this, p)}/>
                       </IconButton>
-                      <IconButton tooltip="Add">
+                      <IconButton tooltip="Add" style={{width: 24, padding: 0}}>
                         <AddCircleIcon/>
                       </IconButton>
                     </div>
