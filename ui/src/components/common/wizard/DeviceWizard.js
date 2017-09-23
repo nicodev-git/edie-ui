@@ -92,14 +92,14 @@ class DeviceWizard extends Component {
     })
   }
 
-  onChangeAgentType (e, value) {
+  checkDeviceAgentStatus (options) {
     const {formValues, extraParams, credentials} = this.props
 
     const entity = {
       ...formValues,
       tags: [formValues.distribution || ''],
       templateName: extraParams.templateName,
-      agentType: value,
+      ...options
     }
 
     entity.credentials = mergeCredentials(entity, credentials, this.state.deviceGlobalCredentials, this.state.deviceCredentials)
@@ -116,6 +116,12 @@ class DeviceWizard extends Component {
 
     console.log(entity)
     this.props.fixNewDevice(entity)
+  }
+
+  onChangeAgentType (e, value) {
+    this.checkDeviceAgentStatus({
+      agentType: value
+    })
   }
 
   handleFormSubmit (formProps) {

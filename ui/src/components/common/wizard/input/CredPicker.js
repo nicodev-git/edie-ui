@@ -26,6 +26,10 @@ export default class CredPicker extends React.Component {
     this.props.showDeviceCredsPicker(1)
   }
 
+  onClickAddByType (cred) {
+    this.props.showDeviceCredsPicker(1, null, cred.type)
+  }
+
   onClickDelete (index) {
     this.props.onClickDelete(index)
   }
@@ -114,7 +118,7 @@ export default class CredPicker extends React.Component {
                         <ListIcon className="link" onTouchTap={this.onClickChangeGlobal.bind(this, p)}/>
                       </IconButton>
                       <IconButton tooltip="Add" style={{width: 24, padding: 0}}>
-                        <AddCircleIcon/>
+                        <AddCircleIcon onTouchTap={this.onClickAddByType.bind(this, p)}/>
                       </IconButton>
                     </div>
                   )}

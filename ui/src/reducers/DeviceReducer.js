@@ -442,7 +442,7 @@ export default function (state = INITIAL_STATE, action) {
     case UPDATE_DEVICE_CREDS:
       return { ...state, deviceCreds: action.creds }
     case SHOW_DEVICE_CREDS_PICKER:
-      return { ...state, deviceCredsPickerVisible: action.visible }
+      return { ...state, deviceCredsPickerVisible: action.visible, credModalDefaultType: action.defaultType }
     case SELECT_DEVICE_CREDS:
       return { ...state, selectedDeviceCreds: action.creds }
 

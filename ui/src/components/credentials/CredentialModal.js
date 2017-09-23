@@ -47,6 +47,9 @@ class CredentialModal extends Component {
 
 export default connect(
   state => ({
-    initialValues: {...state.settings.editCredentials}
+    initialValues: {
+      type: state.devices.credModalDefaultType || '',
+      ...state.settings.editCredentials
+    }
   })
 )(reduxForm({form: 'credentialModalForm'})(CredentialModal))

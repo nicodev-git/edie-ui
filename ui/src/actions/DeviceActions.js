@@ -1112,9 +1112,9 @@ export function updateDeviceCreds (creds) {
   }
 }
 
-export function showDeviceCredsPicker (visible) {
+export function showDeviceCredsPicker (visible, data, defaultType) {
   return dispatch => {
-    dispatch({type: SHOW_DEVICE_CREDS_PICKER, visible})
+    dispatch({type: SHOW_DEVICE_CREDS_PICKER, visible, defaultType})
   }
 }
 

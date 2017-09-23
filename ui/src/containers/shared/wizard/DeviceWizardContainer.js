@@ -45,6 +45,7 @@ export default connect(
     credentials: state.settings.credentials,
     credentialTypes: state.settings.credentialTypes,
     deviceCredsPickerVisible: state.devices.deviceCredsPickerVisible,
+    credModalDefaultType: state.devices.credModalDefaultType,
     credListModalOpen: state.settings.credListModalOpen,
 
     monitorGroups: state.settings.monitorGroups,
