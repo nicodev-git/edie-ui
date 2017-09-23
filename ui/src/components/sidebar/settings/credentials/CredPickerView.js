@@ -19,8 +19,9 @@ export default class CredPickerView extends React.Component {
   }
 
   render () {
-    const {credentials, onHide, onClickOK, onSelect, selectedCreds, type} = this.props
-    const filtered = type ? credentials.filter(p => p.type === type) : credentials
+    const {credentials, onHide, onClickOK, onSelect, selectedCreds, type, global} = this.props
+    let filtered = type ? credentials.filter(p => p.type === type) : credentials
+    if (global) filtered = filtered.filter(p => p.global)
     return (
       <Modal title="Credentials" onRequestClose={onHide}>
         <CardPanel title="Credentials">

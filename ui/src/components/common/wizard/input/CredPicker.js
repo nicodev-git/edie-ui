@@ -7,10 +7,17 @@ import ListIcon from 'material-ui/svg-icons/action/list'
 import { CardPanel } from 'components/modal/parts'
 import {mergeCredentials} from 'shared/Global'
 import { chipStyles } from 'style/common/materialStyles'
+import {showAlert} from 'components/common/Alert'
 
 import CredListPicker from 'containers/settings/credentials/CredsPickerContainer'
 
 export default class CredPicker extends React.Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      selectedGlobal: null
+    }
+  }
   componentWillMount () {
     this.props.fetchCredTypes()
   }
@@ -24,17 +31,27 @@ export default class CredPicker extends React.Component {
   }
 
   getCredentials() {
-    const {credentials, extraParams, deviceCredentials} = this.props
-    return mergeCredentials({templateName: extraParams.templateName}, credentials, deviceCredentials)
+    const {credentials, extraParams, deviceGlobalCredentials, deviceCredentials} = this.props
+    return mergeCredentials({
+      templateName: extraParams.templateName
+    }, credentials, deviceGlobalCredentials, deviceCredentials)
   }
 
-  onClickChangeGlobal () {
+  onClickChangeGlobal (cred) {
+    this.setState({
+      selectedGlobal: cred
+    })
     this.props.showCredListModal(true)
   }
 
   onClosePicker (selected) {
     if (selected) {
-
+      console.log(selected)
+      if (selected.type !== this.state.selectedGlobal.type || !selected.global) {
+        showAlert('Please choose global credential of same type.')
+        return
+      }
+      this.props.onChangeGlobalCredential(selected, this.state.selectedGlobal)
     }
     this.props.showCredListModal(false)
   }
@@ -43,6 +60,7 @@ export default class CredPicker extends React.Component {
     if (!this.props.credListModalOpen) return null
     return (
       <CredListPicker
+        global
         onClose={this.onClosePicker.bind(this)}
       />
     )
@@ -81,11 +99,11 @@ export default class CredPicker extends React.Component {
                 <td>{p.description}</td>
                 <td>{p.username}</td>
                 <td>
-                  {p.global && p.default ? (
+                  {p.global ? (p.default ? (
                     <div style={chipStyles.wrapper}>
                       <Chip style={chipStyles.chip}>{p.type}&nbsp;Default</Chip>
                     </div>
-                  ) : null}
+                  ) : 'Global') : null}
                 </td>
                 <th>
                   {!p.id ? (
@@ -93,7 +111,7 @@ export default class CredPicker extends React.Component {
                   ) : (
                     <div>
                       <IconButton tooltip="Choose other credential">
-                        <ListIcon className="link" onTouchTap={this.onClickChangeGlobal.bind(this)}/>
+                        <ListIcon className="link" onTouchTap={this.onClickChangeGlobal.bind(this, p)}/>
                       </IconButton>
                       <IconButton tooltip="Add">
                         <AddCircleIcon/>

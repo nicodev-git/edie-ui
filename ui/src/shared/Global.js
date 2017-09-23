@@ -416,17 +416,20 @@ export function getDeviceCollectors (editDevice, collectors) {
   return collectors.filter(p => p.ostype === 'LINUX')
 }
 
-export function mergeCredentials(device, credentials, deviceCredentials) {
+export function mergeCredentials(device, credentials, deviceGlobalCredentials, deviceCredentials) {
   const deviceCreds = [...deviceCredentials]
   const isWin = isWindowsDevice(device)
 
-  credentials.forEach(p => {
+  const fnCheck = (p => {
     if (!p.global) return
     if (isWin && p.type === 'SSH') return
     if (!isWin && p.type === 'WINDOWS') return
     if (deviceCreds.filter(d => d.type === p.type).length === 0)
       deviceCreds.push(p)
   })
+
+  deviceGlobalCredentials.forEach(fnCheck)
+  credentials.forEach(fnCheck)
 
   return deviceCreds
 }

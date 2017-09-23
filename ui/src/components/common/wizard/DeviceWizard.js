@@ -45,7 +45,8 @@ class DeviceWizard extends Component {
 
       credentialSelect: 'existing',
 
-      deviceCredentials: []
+      deviceCredentials: [],
+      deviceGlobalCredentials: []
     }
 
     this.mapping = {
@@ -101,7 +102,7 @@ class DeviceWizard extends Component {
       agentType: value,
     }
 
-    entity.credentials = mergeCredentials(entity, credentials, this.state.deviceCredentials)
+    entity.credentials = mergeCredentials(entity, credentials, this.state.deviceGlobalCredentials, this.state.deviceCredentials)
 
     if (!entity.wanip) {
       showAlert('Please input IP')
@@ -312,13 +313,15 @@ class DeviceWizard extends Component {
   }
 
   buildCredPicker (config, values) {
-    const {deviceCredentials} = this.state
+    const {deviceCredentials, deviceGlobalCredentials} = this.state
     return (
       <CredPickerInput
         {...this.props}
         key="credentialId"
         deviceCredentials={deviceCredentials}
+        deviceGlobalCredentials={deviceGlobalCredentials}
         onChangeCredential={this.onChangeCredential.bind(this)}
+        onChangeGlobalCredential={this.onChangeGlobalCredential.bind(this)}
         onClickDelete={this.onDeleteDeviceCred.bind(this)}
         values={values}
         config={config}
@@ -412,6 +415,13 @@ class DeviceWizard extends Component {
     this.setState({
       deviceCredentials: this.state.deviceCredentials.filter((p, i) => i !== index)
     })
+  }
+
+  onChangeGlobalCredential (newCred, oldCred) {
+    let {deviceGlobalCredentials} = this.state
+    deviceGlobalCredentials = deviceGlobalCredentials.filter(p => p.id !== oldCred.id)
+    deviceGlobalCredentials = [...deviceGlobalCredentials, newCred]
+    this.setState({deviceGlobalCredentials})
   }
 
   renderParamEditModal () {
