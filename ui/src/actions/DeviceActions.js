@@ -521,18 +521,36 @@ export const closeDeviceEditModal = () => {
   }
 }
 
+
+export const resolveAddr = (props, cb) => {
+  axios.get(`${ROOT_URL}/resolve/?iporhost=${props.wanip}`).then(r1 => {
+    if (r1.data && (r1.data.ip || r1.data.host)) {
+      if (r1.data.ip) {
+        props.hostname = props.wanip
+        props.wanip = r1.data.ip
+      } else {
+        props.hostname = r1.data.host
+      }
+    }
+    cb && cb(props)
+  }).catch(() => {
+    cb && cb(props)
+  })
+}
+
 export const addDevice = (props, url) => {
   if (!window.localStorage.getItem('token')) {
     return dispatch => dispatch({ type: NO_AUTH_ERROR })
   }
   return (dispatch) => {
-    axios.post(`${ROOT_URL}/${url}`, props).then(res => {
-      dispatch({type: ADD_DEVICE, data: res.data})
-      props.credential.forEach(p => {
-        dispatch(addDeviceCredential(p, res.data.id))
-      })
-
-    }).catch(error => updateDeviceError(dispatch, error))
+    resolveAddr(props, newProps => {
+      axios.post(`${ROOT_URL}/${url}`, newProps).then(res => {
+        dispatch({type: ADD_DEVICE, data: res.data})
+        newProps.credential.forEach(p => {
+          dispatch(addDeviceCredential(p, res.data.id))
+        })
+      }).catch(error => updateDeviceError(dispatch, error))
+    })
   }
 }
 
