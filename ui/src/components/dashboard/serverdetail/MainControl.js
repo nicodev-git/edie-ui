@@ -236,7 +236,9 @@ export default class MainControl extends React.Component {
             {this.renderMenu()}
           </ToolbarGroup>
         </TabPageHeader>
-        <TabPageBody tabs={ServerDetailTab(device.id, device.templateName)} history={this.props.history} location={this.props.location} transparent>
+        <TabPageBody
+          tabs={ServerDetailTab(device.id, device.templateName)}
+          history={this.props.history} location={this.props.location} transparent>
           {this.renderGrid()}
           {this.renderDeviceEditModal()}
           {this.renderDeviceCredsModal()}
