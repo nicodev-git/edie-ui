@@ -35,7 +35,25 @@ export default class AppletCard extends React.Component {
     const {onClickDelete} = this.props
     onClickDelete && onClickDelete()
 
-    e.preventDefault()
+    e.stopPropagation()
+  }
+
+  onClick (e) {
+    const {onClick} = this.props
+    onClick && onClick()
+  }
+
+  onClickView (e) {
+    const {onClickView} = this.props
+    onClickView && onClickView()
+
+    e.stopPropagation()
+  }
+
+  onClickEdit (e) {
+    const {onClickEdit} = this.props
+    onClickEdit && onClickEdit()
+
     e.stopPropagation()
   }
 
@@ -43,11 +61,11 @@ export default class AppletCard extends React.Component {
     const {
       name, desc, desc2, desc3, img, color, className,
       rightIcons,
-      onClick, onClickDelete, onClickEdit, onClickView
+      onClickDelete, onClickEdit, onClickView
     } = this.props
     const {hovered} = this.state
     return (
-      <li className={`web-applet-card small ${className}`} onClick={onClick}>
+      <li className={`web-applet-card small ${className}`} onClick={this.onClick.bind(this)}>
         <div
           className="applet-card-body " style={{background: color}}
           onMouseEnter={onClickDelete ? this.onMouseEnter : null}
@@ -56,7 +74,7 @@ export default class AppletCard extends React.Component {
             <div className="card-top">
               <img src={img} alt="" />
               <div className={`pull-right link info-button ${hovered ? 'visible' : ''}`} style={{marginRight: -10, marginTop: -10}}>
-                {onClickDelete && <CloseIcon size={32} color="white" onTouchTap={this.onClickDelete.bind(this)}/>}
+                {onClickDelete && <CloseIcon size={32} color="white" onClick={this.onClickDelete.bind(this)}/>}
               </div>
             </div>
             <span className="title">
@@ -73,8 +91,8 @@ export default class AppletCard extends React.Component {
             {name}&nbsp;
             <div style={editButtonStyle}>
               {rightIcons}
-              {onClickView && <ViewIcon size={32} color="white" onTouchTap={onClickView}/>}
-              {onClickEdit && <EditIcon size={32} color="white" onTouchTap={onClickEdit}/>}
+              {onClickView && <ViewIcon size={32} color="white" onTouchTap={this.onClickView.bind(this)}/>}
+              {onClickEdit && <EditIcon size={32} color="white" onTouchTap={this.onClickEdit.bind(this)}/>}
             </div>
           </div>
         </div>
