@@ -440,7 +440,7 @@ class DeviceWizard extends Component {
 
   renderCollectorInstallModal () {
     if (!this.props.collectorInstallModalOpen) return null
-    const {collectorTestStatus, showCollectorInstallModal, fetchCollectors} = this.props
+    const {collectorTestStatus, showCollectorInstallModal, fetchCollectors, testCollector} = this.props
     const collectors = getDeviceCollectors({
       templateName: this.props.extraParams.templateName
     }, this.props.collectors)
@@ -449,6 +449,7 @@ class DeviceWizard extends Component {
         collectorTestStatus={collectorTestStatus}
         showCollectorInstallModal={showCollectorInstallModal}
         fetchCollectors={fetchCollectors}
+        testCollector={testCollector}
         collectors={collectors}
       />
     )

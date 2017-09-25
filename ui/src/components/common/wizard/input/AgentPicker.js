@@ -1,7 +1,8 @@
 import React from 'react'
-import {RadioButton, CircularProgress} from 'material-ui'
+import {RadioButton, CircularProgress, IconButton} from 'material-ui'
 import {Field} from 'redux-form'
 import {RadioButtonGroup} from 'redux-form-material-ui'
+import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
 
 import CredentialModal from 'components/credentials/CredentialModal'
 
@@ -53,6 +54,10 @@ export default class AgentPicker extends React.Component {
       }, 100)
     }
     this.props.showDeviceCredsPicker(false)
+  }
+
+  onClickAddCollector () {
+    this.props.showCollectorInstallModal(true)
   }
 
   ///////////////////////////////////////////////////////////////
@@ -127,6 +132,7 @@ export default class AgentPicker extends React.Component {
         </Field>
 
         <Field name="collectorId" label="Collector" component={FormSelect} className="pull-left" options={collectorOptions}/>
+        <IconButton className="pull-left hidden" onTouchTap={this.onClickAddCollector.bind(this)}><AddCircleIcon/></IconButton>
         {this.renderCredPicker()}
       </div>
     )
