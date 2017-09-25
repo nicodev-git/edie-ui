@@ -218,6 +218,11 @@ export default class MainControl extends React.Component {
     )
   }
 
+  renderDeviceMonitorsModal () {
+    if (!this.props.deviceMonitorsModalOpen) return null
+
+  }
+
   render () {
     const device = this.getDevice()
     return (
@@ -242,6 +247,7 @@ export default class MainControl extends React.Component {
           {this.renderGrid()}
           {this.renderDeviceEditModal()}
           {this.renderDeviceCredsModal()}
+          {this.renderDeviceMonitorsModal()}
         </TabPageBody>
       </TabPage>
     )

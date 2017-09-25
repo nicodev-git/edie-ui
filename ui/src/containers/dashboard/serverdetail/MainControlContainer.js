@@ -21,7 +21,9 @@ import {
   updateCredentials,
 
   fetchDevice,
-  showCredListModal
+  showCredListModal,
+
+  openDeviceMonitorWizard
 } from 'actions'
 
 class MainControlContainer extends React.Component {
@@ -40,6 +42,9 @@ export default connect(
     deviceCredsModalOpen: state.devices.deviceCredsModalOpen,
     deviceCredsPickerVisible: state.devices.deviceCredsPickerVisible,
     selectedDeviceCreds: state.devices.selectedDeviceCreds,
+
+    monitorTemplates: state.settings.monitorTemplates,
+    deviceTemplates: state.settings.deviceTemplates,
 
     credModalDefaultType: state.devices.credModalDefaultType,
     credListModalOpen: state.settings.credListModalOpen,
@@ -71,6 +76,8 @@ export default connect(
     updateCredentials,
 
     fetchDevice,
-    showCredListModal
+    showCredListModal,
+
+    openDeviceMonitorWizard
   }
 )(withRouter(MainControlContainer))
