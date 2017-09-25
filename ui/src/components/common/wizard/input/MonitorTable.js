@@ -11,7 +11,8 @@ import MonitorWizardContainer from 'containers/shared/wizard/MonitorWizardContai
 import MonitorPickModal from './MonitorPickModal'
 
 import { extImageBaseUrl, appletColors as colors } from 'shared/Global'
-import DeviceTplPicker from "./DeviceTplPicker";
+import DeviceTplPicker from './DeviceTplPicker'
+import {showConfirm} from 'components/common/Alert'
 
 export default class MonitorTable extends Component {
   constructor (props) {
@@ -74,15 +75,15 @@ export default class MonitorTable extends Component {
     this.props.openDeviceMonitorWizard(monitor)
   }
 
-  onClickRemoveMonitor (monitor, e) {
+  onClickRemoveMonitor (monitor) {
     const {monitors, onChanged} = this.props
     const index = monitors.indexOf(monitor)
     if (index < 0) return
-    monitors.splice(index, 1)
-    onChanged && onChanged(monitors)
-    e.stopPropagation && e.stopPropagation()
-    e.preventDefault()
-    return false
+    showConfirm('Click OK to remove', btn => {
+      if (btn !== 'ok') return
+      monitors.splice(index, 1)
+      onChanged && onChanged(monitors)
+    })
   }
 
   addMonitor (monitorConfig) {

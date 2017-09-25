@@ -57,7 +57,7 @@ class MonitorWizard extends React.Component {
 
   handleFormSubmit (values) {
     const { extraParams, onFinish, editParams, canAddTags, monitorTags, selectedDevice } = this.props
-    if (values.enabled) {
+    if (values.enabled && this.showAgentType()) {
       if (values.agentType === 'collector') {
         if (!values.collectorId) {
           showAlert('Please install collector.')
