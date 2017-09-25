@@ -2,7 +2,7 @@ import React from 'react'
 import { IconButton } from 'material-ui'
 import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
 
-import { Modal, CardPanel } from 'components/modal/parts'
+import { Modal } from 'components/modal/parts'
 import CredPicker from 'components/common/wizard/input/CredPicker'
 
 export default class DeviceCredsModalView extends React.Component {
@@ -17,15 +17,13 @@ export default class DeviceCredsModalView extends React.Component {
     )
   }
   render () {
-    const {onHide, deviceCredentials, deviceGlobalCredentials, onChangeGlobalCredential, onDeleteDeviceCred} = this.props
+    const {onHide, deviceCredentials, deviceGlobalCredentials} = this.props
     return (
       <Modal title="Credentials" onRequestClose={onHide}>
         <CredPicker
           {...this.props}
           deviceCredentials={deviceCredentials}
           deviceGlobalCredentials={deviceGlobalCredentials}
-          onChangeGlobalCredential={onChangeGlobalCredential}
-          onClickDelete={onDeleteDeviceCred}
         />
       </Modal>
     )
