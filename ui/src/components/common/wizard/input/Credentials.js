@@ -1,5 +1,6 @@
 import React from 'react'
 import DeleteIcon from 'material-ui/svg-icons/action/delete'
+import EditIcon from 'material-ui/svg-icons/content/create'
 import {IconButton, Chip} from 'material-ui'
 
 import CredentialModal from 'components/credentials/CredentialModal'
@@ -13,6 +14,9 @@ export default class Credentials extends React.Component {
   }
   onClickAdd () {
     this.props.showDeviceCredsPicker(true)
+  }
+  onClickEdit (selected) {
+    this.props.onClickEditCredentials(selected)
   }
   onClickRemove (selected) {
     showConfirm('Are you sure?', btn => {
@@ -80,6 +84,10 @@ export default class Credentials extends React.Component {
                 ) : null}
               </td>
               <td>
+                <IconButton style={{padding: 0, width: 24, height: 24}}
+                  onTouchTap={this.onClickEdit.bind(this, p)}>
+                  <EditIcon color="#545454" hoverColor="#f44336" />
+                </IconButton>
                 <IconButton style={{padding: 0, width: 24, height: 24}}
                   onTouchTap={this.onClickRemove.bind(this, p)}>
                   <DeleteIcon color="#545454" hoverColor="#f44336"/>
