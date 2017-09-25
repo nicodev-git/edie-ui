@@ -18,7 +18,8 @@ import {
   installAgent,
   clearFixStatus,
   fixNewDevice,
-  showCollectorInstallModal
+  showCollectorInstallModal,
+  testCollector
 } from 'actions'
 
 class DeviceWizardContainer extends Component {
@@ -58,7 +59,8 @@ export default connect(
     fixStatus: state.devices.fixStatus,
     fixResult: state.devices.fixResult,
 
-    collectorInstallModalOpen: state.devices.collectorInstallModalOpen
+    collectorInstallModalOpen: state.devices.collectorInstallModalOpen,
+    collectorTestStatus: state.devices.collectorTestStatus
   }),
   dispatch => ({
     ...bindActionCreators({
@@ -76,7 +78,8 @@ export default connect(
       installAgent,
       clearFixStatus,
       fixNewDevice,
-      showCollectorInstallModal
+      showCollectorInstallModal,
+      testCollector
     }, dispatch)
   })
 )(DeviceWizardContainer)

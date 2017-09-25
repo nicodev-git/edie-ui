@@ -1,10 +1,19 @@
 import React from 'react'
-import { reduxForm } from 'redux-form'
+import { reduxForm, formValueSelector } from 'redux-form'
 import { connect } from 'react-redux'
 
+import {showAlert} from 'components/common/Alert'
 import CollectorInstallModalView from './CollectorInstallModalView'
 
 class CollectorInstallModal extends React.Component {
+  componentWillUpdate(nextProps) {
+    const {collectorTestStatus} = nextProps
+    if (collectorTestStatus && !this.props.collectorTestStatus) {
+      showAlert(collectorTestStatus === 'ok' ?
+        'Connection successful.' : 'Connection failed.')
+    }
+  }
+
   onHide () {
     this.props.showCollectorInstallModal(false)
   }
@@ -15,7 +24,12 @@ class CollectorInstallModal extends React.Component {
     this.props.fetchCollectors()
   }
   onClickTest () {
-
+    const {formValues} = this.props
+    if (!formValues.collectorId) {
+      showAlert('Please choose collector.')
+      return
+    }
+    this.props.testCollector(formValues.collectorId)
   }
   render () {
     const {collectors} = this.props
@@ -34,5 +48,6 @@ class CollectorInstallModal extends React.Component {
 
 export default connect(
   state => ({
+    formValues: formValueSelector('collectorInstallForm')(state, 'collectorId', 'user')
   })
 )(reduxForm({form: 'collectorInstallForm'})(CollectorInstallModal))
