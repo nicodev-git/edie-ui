@@ -34,8 +34,7 @@ export default class Credentials extends React.Component {
     this.props.showDeviceCredsPicker(false)
   }
   onUpdateCredential (props) {
-    console.log(props)
-    // this.props.updateCredentials(props)
+    this.props.updateCredentials(props)
     this.props.showDeviceCredsPicker(false)
   }
   onCloseCredPicker () {
