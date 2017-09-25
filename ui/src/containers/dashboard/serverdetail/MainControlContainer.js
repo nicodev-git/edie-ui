@@ -15,8 +15,11 @@ import {
   showDeviceCredsModal,
   selectDeviceCreds,
   showDeviceCredsPicker,
+
   removeCredentials,
   addCredentials,
+  updateCredentials,
+
   fetchDevice,
   showCredListModal
 } from 'actions'
@@ -62,8 +65,11 @@ export default connect(
     showDeviceCredsModal,
     selectDeviceCreds,
     showDeviceCredsPicker,
+
     removeCredentials,
     addCredentials,
+    updateCredentials,
+
     fetchDevice,
     showCredListModal
   }

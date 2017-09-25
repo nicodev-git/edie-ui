@@ -30,8 +30,8 @@ export default class CredPicker extends React.Component {
     this.props.showDeviceCredsPicker(1, null, cred.type)
   }
 
-  onClickDelete (index) {
-    this.props.onClickDelete(index)
+  onClickDelete (index, cred) {
+    this.props.onClickDelete(index, cred)
   }
 
   getCredentials() {
@@ -110,8 +110,8 @@ export default class CredPicker extends React.Component {
                   ) : 'Global') : null}
                 </td>
                 <th>
-                  {!p.id ? (
-                    <CloseIcon className="link" onTouchTap={this.onClickDelete.bind(this, i)}/>
+                  {!p.global ? (
+                    <CloseIcon className="link" onTouchTap={this.onClickDelete.bind(this, i, p)}/>
                   ) : (
                     <div>
                       <IconButton tooltip="Choose other credential" style={{width: 24, padding: 0}}>
