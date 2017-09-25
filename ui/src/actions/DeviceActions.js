@@ -120,6 +120,7 @@ import {
   UPDATE_DEVICE_FIX_STATUS,
 
   SHOW_COLLECTOR_INSTALL_MODAL,
+  TEST_COLLECTOR,
 
   NO_AUTH_ERROR
 } from './types'
@@ -1226,5 +1227,16 @@ export function clearFixStatus () {
 export function showCollectorInstallModal (visible) {
   return dispatch => {
     dispatch({type: SHOW_COLLECTOR_INSTALL_MODAL, visible})
+  }
+}
+
+export function testCollector (id) {
+  return dispatch => {
+    dispatch({type: TEST_COLLECTOR, data: ''})
+    axios.get(`${ROOT_URL}/checkCollector?id=${id}`).then(res => {
+      dispatch({type: TEST_COLLECTOR, data: res.data.success ? 'ok' : 'fail'})
+    }).catch(() => {
+      dispatch({type: TEST_COLLECTOR, data: 'fail'})
+    })
   }
 }

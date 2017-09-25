@@ -113,6 +113,7 @@ import {
   SHOW_DEVICE_FIX_MODAL,
   UPDATE_DEVICE_FIX_STATUS,
   SHOW_COLLECTOR_INSTALL_MODAL,
+  TEST_COLLECTOR,
 
   UPDATE_DEVICE_ERROR
 } from 'actions/types'
@@ -514,6 +515,10 @@ export default function (state = INITIAL_STATE, action) {
 
     case SHOW_COLLECTOR_INSTALL_MODAL:
       return { ...state, collectorInstallModalOpen: action.visible }
+
+    case TEST_COLLECTOR:
+      return { ...state, collectorTestStatus: action.data }
+
     default:
       return state
   }
