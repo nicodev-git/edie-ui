@@ -12,11 +12,8 @@ export default class Credentials extends React.Component {
   componentDidMount () {
     this.props.selectDeviceCreds(-1)
   }
-  onClickAdd () {
-    this.props.showDeviceCredsPicker(true)
-  }
   onClickEdit (selected) {
-    this.props.onClickEditCredentials(selected)
+    this.props.onClickEditCreds(selected)
   }
   onClickRemove (selected) {
     showConfirm('Are you sure?', btn => {

@@ -60,6 +60,10 @@ class DeviceFixModal extends React.Component {
     this.props.showDeviceCredsPicker(true)
   }
 
+  onClickEditCreds (sel) {
+
+  }
+
   onChangeAgentType (e, value) {
     const {editDevice, formValues} = this.props
 
@@ -135,6 +139,7 @@ class DeviceFixModal extends React.Component {
         msg={this.getMessage()}
         onHide={this.onHide.bind(this)}
         onClickAddCreds={this.onClickAddCreds.bind(this)}
+        onClickEditCreds={this.onClickEditCreds.bind(this)}
         onChangeAgentType={this.onChangeAgentType.bind(this)}
       />
     )
