@@ -29,6 +29,8 @@ import {
 
   RELOAD_DEVICE,
 
+  DELETE_DEVICE_STATE,
+
   NO_AUTH_ERROR
 } from './types'
 
@@ -359,9 +361,14 @@ export const deleteMapDevice = (entity) => {
     return dispatch => dispatch({ type: NO_AUTH_ERROR })
   }
   return (dispatch) => {
-    axios.delete(entity._links.self.href)
-      .then(() => deleteMapDeviceSuccess(dispatch, entity))
-      .catch(error => apiError(dispatch, error))
+    dispatch({type: DELETE_DEVICE_STATE, data: true})
+    axios.delete(entity._links.self.href).then(() => {
+      deleteMapDeviceSuccess(dispatch, entity)
+      dispatch({type: DELETE_DEVICE_STATE, data: false})
+    }).catch(error => {
+      dispatch({type: DELETE_DEVICE_STATE, data: false})
+      apiError(dispatch, error)
+    })
   }
 }
 

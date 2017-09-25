@@ -90,7 +90,9 @@ export default connect(
     deviceTplPickerOpen: state.dashboard.deviceTplPickerOpen,
     monitorDetailModalOpen: state.dashboard.monitorDetailModalOpen,
     gaugeDevice: state.dashboard.gaugeDevice,
-    gaugeMonitor: state.dashboard.gaugeMonitor
+    gaugeMonitor: state.dashboard.gaugeMonitor,
+
+    deleteDeviceState: state.dashboard.deleteDeviceState
   }), {
     fetchDevicesGroups,
     fetchMonitorGroups,

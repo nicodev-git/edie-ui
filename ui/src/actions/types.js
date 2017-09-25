@@ -51,6 +51,7 @@ export const UPDATE_DEVICE_FIX_STATUS = 'UPDATE_DEVICE_FIX_STATUS'
 export const SHOW_COLLECTOR_INSTALL_MODAL = 'SHOW_COLLECTOR_INSTALL_MODAL'
 export const TEST_COLLECTOR = 'TEST_COLLECTOR'
 export const SHOW_DEVICE_MONITORS_MODAL = 'SHOW_DEVICE_MONITORS_MODAL'
+export const DELETE_DEVICE_STATE = 'DELETE_DEVICE_STATE'
 
 // ////////////////////////////////////////////////////////////////////
 export const ADD_DEVICE = 'ADD_DEVICE'

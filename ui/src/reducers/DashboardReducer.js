@@ -69,6 +69,8 @@ import {
   SHOW_DEVICE_TPL_PICKER,
   SHOW_MONITOR_DETAIL_MODAL,
 
+  DELETE_DEVICE_STATE,
+
   API_ERROR
 } from 'actions/types'
 
@@ -323,6 +325,9 @@ export default function (state = initialState, action) {
 
     case SHOW_MONITOR_DETAIL_MODAL:
       return { ...state, monitorDetailModalOpen: action.visible, gaugeDevice: action.device, gaugeMonitor: action.monitor }
+
+    case DELETE_DEVICE_STATE:
+      return { ...state, deleteDeviceState: action.data }
     default:
       return state
   }
