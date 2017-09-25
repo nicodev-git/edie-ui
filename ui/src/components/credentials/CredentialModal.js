@@ -10,9 +10,9 @@ class CredentialModal extends Component {
   }
 
   handleFormSubmit (values) {
-    const { editCredentials } = this.props
-    let props = assign({}, editCredentials, values)
-    if (editCredentials) {
+    const { initialValues } = this.props
+    let props = assign({}, initialValues, values)
+    if (initialValues.id) {
       this.props.updateCredentials(props)
     } else {
       this.props.addCredentials(props)

@@ -34,7 +34,11 @@ export default class Credentials extends React.Component {
     this.props.showDeviceCredsPicker(false)
   }
   onUpdateCredential (props) {
-    this.props.updateCredentials(props)
+    console.log(props)
+    // this.props.updateCredentials(props)
+    this.props.showDeviceCredsPicker(false)
+  }
+  onCloseCredPicker () {
     this.props.showDeviceCredsPicker(false)
   }
   renderPicker () {
@@ -87,7 +91,7 @@ export default class Credentials extends React.Component {
               </td>
               <td>
                 <IconButton style={{padding: 0, width: 24, height: 24}}
-                  class={onClickEditCreds ? '' : 'hidden'}
+                  className={onClickEditCreds ? '' : 'hidden'}
                   onTouchTap={this.onClickEdit.bind(this, p)}>
                   <EditIcon color="#545454" hoverColor="#f44336" />
                 </IconButton>

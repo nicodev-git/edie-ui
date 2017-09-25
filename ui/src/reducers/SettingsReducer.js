@@ -145,7 +145,9 @@ import {
   SHOW_MONITOR_GROUP_MODAL,
   ADD_MONITOR_GROUP,
   UPDATE_MONITOR_GROUP,
-  REMOVE_MONITOR_GROUP
+  REMOVE_MONITOR_GROUP,
+
+  SHOW_DEVICE_CREDS_PICKER
 
 } from 'actions/types'
 
@@ -380,6 +382,9 @@ export default function (state = initialState, action) {
       const credentials = state.credentials.filter(u => u.id !== action.data.id)
       return { ...state, credentials }
     }
+
+    case SHOW_DEVICE_CREDS_PICKER:
+      return { ...state, editCredentials: action.data }
 
     case OPEN_CREDENTIALS_MODAL: {
       return { ...state, credentialsModalVisible: true, editCredentials: action.data }
