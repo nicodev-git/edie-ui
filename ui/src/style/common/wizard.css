@@ -254,6 +254,7 @@ div.dropdown-image div:hover {
     font-weight: 700;
     line-height: 1.2;
     font-weight: lighter;
+    word-break: break-all;
 }
 
 .web-applet-card .author b {

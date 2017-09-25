@@ -5,6 +5,7 @@ import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
 import { wizardConfig, getDeviceType } from 'components/common/wizard/WizardConfig'
 import DeviceWizardContainer from 'containers/shared/wizard/DeviceWizardContainer'
 import ServerItem from './ServerItem'
+import RefreshOverlay from 'components/common/RefreshOverlay'
 
 import { showAlert, showConfirm } from 'components/common/Alert'
 
@@ -153,6 +154,7 @@ export default class SysDashboardView extends React.Component {
     )
   }
   render () {
+    const {deleteDeviceState} = this.props
     return (
       <div>
         {this.renderAddMenu()}
@@ -160,6 +162,7 @@ export default class SysDashboardView extends React.Component {
           {this.getServers().map(this.renderServer.bind(this))}
         </ul>
         {this.renderDeviceWizard()}
+        {deleteDeviceState && <RefreshOverlay />}
       </div>
     )
   }
