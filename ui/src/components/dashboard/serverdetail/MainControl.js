@@ -15,6 +15,7 @@ import StatusImg from './StatusImg'
 import DeviceEditModal from 'containers/shared/wizard/DeviceEditModalContainer'
 import { getDeviceType } from 'components/common/wizard/WizardConfig'
 import DeviceCredsModal from './edit/DeviceCredsModal'
+import DeviceMonitorsModal from './edit/DeviceMonitorsModal'
 import ServerCombo from './ServerCombo'
 
 import GaugeMap from 'components/common/gauge/GaugeMap'
@@ -103,7 +104,7 @@ export default class MainControl extends React.Component {
   }
 
   onClickMonitorEdit () {
-    this.props.showMonitorEdit(true)
+    this.props.showDeviceMonitorsModal(true, this.getDevice())
   }
 
   /////////////////////////////////////////////////////////////////////
@@ -220,7 +221,11 @@ export default class MainControl extends React.Component {
 
   renderDeviceMonitorsModal () {
     if (!this.props.deviceMonitorsModalOpen) return null
-
+    return (
+      <DeviceMonitorsModal
+        {...this.props}
+      />
+    )
   }
 
   render () {

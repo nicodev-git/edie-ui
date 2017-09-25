@@ -22,7 +22,9 @@ import {
 
   fetchDevice,
   showCredListModal,
+  fetchMonitorTemplates,
 
+  showDeviceMonitorsModal,
   openDeviceMonitorWizard
 } from 'actions'
 
@@ -43,6 +45,7 @@ export default connect(
     deviceCredsPickerVisible: state.devices.deviceCredsPickerVisible,
     selectedDeviceCreds: state.devices.selectedDeviceCreds,
 
+    deviceMonitorsModalOpen: state.devices.deviceMonitorsModalOpen,
     monitorTemplates: state.settings.monitorTemplates,
     deviceTemplates: state.settings.deviceTemplates,
 
@@ -77,7 +80,9 @@ export default connect(
 
     fetchDevice,
     showCredListModal,
+    fetchMonitorTemplates,
 
+    showDeviceMonitorsModal,
     openDeviceMonitorWizard
   }
 )(withRouter(MainControlContainer))

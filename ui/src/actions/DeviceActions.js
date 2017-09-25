@@ -118,6 +118,7 @@ import {
   SHOW_DEVICE_CREDS_MODAL,
   SHOW_DEVICE_FIX_MODAL,
   UPDATE_DEVICE_FIX_STATUS,
+  SHOW_DEVICE_MONITORS_MODAL,
 
   SHOW_COLLECTOR_INSTALL_MODAL,
   TEST_COLLECTOR,
@@ -1238,5 +1239,11 @@ export function testCollector (id) {
     }).catch(() => {
       dispatch({type: TEST_COLLECTOR, data: 'fail'})
     })
+  }
+}
+
+export function showDeviceMonitorsModal (visible, device) {
+  return dispatch => {
+    dispatch({type: SHOW_DEVICE_MONITORS_MODAL, visible, device})
   }
 }

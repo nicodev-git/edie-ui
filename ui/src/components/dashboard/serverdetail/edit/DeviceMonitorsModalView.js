@@ -1,6 +1,7 @@
 import React from 'react'
 
 import { Modal } from 'components/modal/parts'
+import MonitorTable from 'components/common/wizard/input/MonitorTable'
 
 export default class DeviceMonitorsModalView extends React.Component {
   renderMonitors () {
@@ -20,7 +21,7 @@ export default class DeviceMonitorsModalView extends React.Component {
   }
 
   render () {
-    const {onHide, onClickPrev, onClickNext} = this.props
+    const {onHide} = this.props
     return (
       <Modal title="Monitors" onRequestClose={onHide}>
         {this.renderMonitors()}
