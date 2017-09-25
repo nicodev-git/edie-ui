@@ -61,7 +61,7 @@ class DeviceFixModal extends React.Component {
   }
 
   onClickEditCreds (sel) {
-
+    this.props.showDeviceCredsPicker(true, sel)
   }
 
   onChangeAgentType (e, value) {

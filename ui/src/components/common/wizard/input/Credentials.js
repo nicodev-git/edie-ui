@@ -22,7 +22,7 @@ export default class Credentials extends React.Component {
     })
 
   }
-  onCloseCredPicker (props) {
+  onAddCredential (props) {
     if (props) {
       const {selectedDevice} = this.props
       this.props.addCredentials({
@@ -33,12 +33,17 @@ export default class Credentials extends React.Component {
     }
     this.props.showDeviceCredsPicker(false)
   }
+  onUpdateCredential (props) {
+    this.props.updateCredentials(props)
+    this.props.showDeviceCredsPicker(false)
+  }
   renderPicker () {
     if (!this.props.deviceCredsPickerVisible) return null
 
     return (
       <CredentialModal
-        addCredentials={this.onCloseCredPicker.bind(this)}
+        addCredentials={this.onAddCredential.bind(this)}
+        updateCredentials={this.onUpdateCredential.bind(this)}
         credentialTypes={this.props.credentialTypes}
         onClose={this.onCloseCredPicker.bind(this)}/>
     )
@@ -48,7 +53,7 @@ export default class Credentials extends React.Component {
     return getDeviceCredentials(selectedDevice, credentials, showGlobal)
   }
   render () {
-    const { selectedDeviceCreds, selectDeviceCreds } = this.props
+    const { selectedDeviceCreds, selectDeviceCreds, onClickEditCreds } = this.props
 
     return (
       <div style={{minHeight: 150}}>
@@ -82,6 +87,7 @@ export default class Credentials extends React.Component {
               </td>
               <td>
                 <IconButton style={{padding: 0, width: 24, height: 24}}
+                  class={onClickEditCreds ? '' : 'hidden'}
                   onTouchTap={this.onClickEdit.bind(this, p)}>
                   <EditIcon color="#545454" hoverColor="#f44336" />
                 </IconButton>

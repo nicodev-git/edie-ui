@@ -10,6 +10,7 @@ import {
   fetchCredTypes,
   removeCredentials,
   addCredentials,
+  updateCredentials,
 
   fixDevice,
   updateMapDevice,
@@ -56,6 +57,7 @@ export default connect(
     fetchCredTypes,
     removeCredentials,
     addCredentials,
+    updateCredentials,
 
     fixDevice,
     updateMapDevice,
