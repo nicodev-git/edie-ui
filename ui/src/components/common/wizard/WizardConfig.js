@@ -156,7 +156,7 @@ export const wizardConfig = {
         }, {
           type: 'text',
           label: {
-            text: 'IP',
+            text: 'IP/Host',
             type: 'attach',
             width: 3
           },
@@ -242,7 +242,7 @@ export const wizardConfig = {
         }, {
           type: 'text',
           label: {
-            text: 'IP',
+            text: 'IP/Host',
             type: 'attach',
             width: 3
           },
