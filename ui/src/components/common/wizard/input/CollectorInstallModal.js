@@ -12,7 +12,7 @@ class CollectorInstallModal extends React.Component {
     console.log(values)
   }
   onClickRefresh () {
-
+    this.props.fetchCollectors()
   }
   onClickTest () {
 
