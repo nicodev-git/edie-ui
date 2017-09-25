@@ -30,6 +30,15 @@ export default class AppletCard extends React.Component {
       hovered: false
     })
   }
+
+  onClickDelete (e) {
+    const {onClickDelete} = this.props
+    onClickDelete && onClickDelete()
+
+    e.preventDefault()
+    e.stopPropagation()
+  }
+
   render () {
     const {
       name, desc, desc2, desc3, img, color, className,
@@ -38,29 +47,29 @@ export default class AppletCard extends React.Component {
     } = this.props
     const {hovered} = this.state
     return (
-      <li className={`web-applet-card small ${className}`} onClick={onClickDelete ? null : onClick}>
+      <li className={`web-applet-card small ${className}`} onClick={onClick}>
         <div
           className="applet-card-body " style={{background: color}}
           onMouseEnter={onClickDelete ? this.onMouseEnter : null}
           onMouseLeave={onClickDelete ? this.onMouseLeave : null}>
           <div className="content">
             <div className="card-top">
-              <img src={img} alt="" onClick={onClickDelete ? onClick : null}/>
+              <img src={img} alt="" />
               <div className={`pull-right link info-button ${hovered ? 'visible' : ''}`} style={{marginRight: -10, marginTop: -10}}>
-                {onClickDelete && <CloseIcon size={32} color="white" onTouchTap={onClickDelete}/>}
+                {onClickDelete && <CloseIcon size={32} color="white" onTouchTap={this.onClickDelete.bind(this)}/>}
               </div>
             </div>
-            <span className="title" onClick={onClickDelete ? onClick : null}>
+            <span className="title">
               {desc}&nbsp;
             </span>
-            <p className="author" onClick={onClickDelete ? onClick : null}>
+            <p className="author">
               <span>{desc2}</span>
             </p>
-            <p className="author" onClick={onClickDelete ? onClick : null}>
+            <p className="author">
               <span>{desc3}</span>
             </p>
           </div>
-          <div className="meta" onClick={onClickDelete ? onClick : null}>
+          <div className="meta">
             {name}&nbsp;
             <div style={editButtonStyle}>
               {rightIcons}
