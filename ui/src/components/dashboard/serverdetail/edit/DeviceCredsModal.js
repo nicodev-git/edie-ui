@@ -11,15 +11,18 @@ export default class DeviceCredsModal extends React.Component {
     this.props.showDeviceCredsModal(false)
   }
 
-  onCloseCredPicker () {
-
+  onCloseCredPicker (selected) {
+    if (selected) {
+      console.log(selected)
+    }
+    this.props.showDeviceCredsPicker(false)
   }
 
   onClickDelete () {
 
   }
 
-  onChangeGlobalCredential () {
+  onChangeGlobalCredential (newCred, oldCred) {
 
   }
 

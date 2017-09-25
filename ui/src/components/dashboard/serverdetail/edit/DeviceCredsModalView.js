@@ -7,16 +7,6 @@ import CredPicker from 'components/common/wizard/input/CredPicker'
 import CredentialModal from 'components/credentials/CredentialModal'
 
 export default class DeviceCredsModalView extends React.Component {
-  renderButtons () {
-    const {onClickAdd} = this.props
-    return (
-      <div>
-        <IconButton onTouchTap={onClickAdd} tooltip="Add Credentials">
-          <AddCircleIcon size={32}/>
-        </IconButton>
-      </div>
-    )
-  }
   renderCredPicker () {
     const {onCloseCredPicker, deviceCredsPickerVisible} = this.props
     if (!deviceCredsPickerVisible) return null
