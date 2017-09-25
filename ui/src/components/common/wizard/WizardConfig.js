@@ -553,6 +553,15 @@ export const wizardEditConfig = {
       }, {
         type: 'text',
         label: {
+          text: 'Hostname',
+          type: 'attach',
+          width: 3
+        },
+        width: MAX_WIDTH,
+        name: 'hostname'
+      }, {
+        type: 'text',
+        label: {
           text: 'Info',
           type: 'attach',
           width: 3
