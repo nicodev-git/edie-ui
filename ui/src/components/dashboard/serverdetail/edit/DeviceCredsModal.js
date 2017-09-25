@@ -10,9 +10,10 @@ export default class DeviceCredsModal extends React.Component {
   onHide () {
     this.props.showDeviceCredsModal(false)
   }
-  // onClickAdd () {
-  //   this.props.showDeviceCredsPicker(true)
-  // }
+
+  onCloseCredPicker () {
+
+  }
 
   onClickDelete () {
 
@@ -26,6 +27,7 @@ export default class DeviceCredsModal extends React.Component {
     return (
       <DeviceCredsModalView
         {...this.props}
+        onCloseCredPicker={this.onCloseCredPicker.bind(this)}
         extraParams={this.props.editDevice}
         deviceCredentials={[]}
         deviceGlobalCredentials={[]}

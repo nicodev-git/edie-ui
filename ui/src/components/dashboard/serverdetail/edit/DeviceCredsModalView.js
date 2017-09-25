@@ -4,6 +4,7 @@ import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
 
 import { Modal } from 'components/modal/parts'
 import CredPicker from 'components/common/wizard/input/CredPicker'
+import CredentialModal from 'components/credentials/CredentialModal'
 
 export default class DeviceCredsModalView extends React.Component {
   renderButtons () {
@@ -16,6 +17,18 @@ export default class DeviceCredsModalView extends React.Component {
       </div>
     )
   }
+  renderCredPicker () {
+    const {onCloseCredPicker, deviceCredsPickerVisible} = this.props
+    if (!deviceCredsPickerVisible) return null
+    return (
+      <CredentialModal
+        credentialTypes={this.props.credentialTypes}
+        addCredentials={onCloseCredPicker}
+        onClose={onCloseCredPicker}
+      />
+    )
+  }
+
   render () {
     const {onHide, deviceCredentials, deviceGlobalCredentials} = this.props
     return (
@@ -25,6 +38,7 @@ export default class DeviceCredsModalView extends React.Component {
           deviceCredentials={deviceCredentials}
           deviceGlobalCredentials={deviceGlobalCredentials}
         />
+        {this.renderCredPicker()}
       </Modal>
     )
   }
