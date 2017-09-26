@@ -260,7 +260,7 @@ class GaugeWizard extends React.Component {
         dateTo,
         servers: selectedServers,
         workflowIds: selectedWorkflows,
-        monitorGroupIds: selectedMonitorGroups
+        logicalGroups: selectedMonitorGroups
       },
       formProps,
       extraParams

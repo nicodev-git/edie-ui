@@ -23,6 +23,7 @@ export default class DashboardPicker extends React.Component {
 
   onClickOK () {
     this.props.onClickOK(this.state.dashboardId)
+    this.onHide()
   }
 
   render () {
@@ -33,12 +34,12 @@ export default class DashboardPicker extends React.Component {
           <SelectField value={this.state.dashboardId} onChange={this.onChangeDashboard.bind(this)}>
             <MenuItem primaryText="[None]" value=""/>
             {gaugeBoards.map(p =>
-              <MenuItem primaryText={p.name} value={p.id}/>
+              <MenuItem key={p.id} primaryText={p.name} value={p.id}/>
             )}
           </SelectField>
         </CardPanel>
         <div className="form-buttons">
-          <RaisedButton label="OK"/>
+          <RaisedButton label="OK" onTouchTap={this.onClickOK.bind(this)} />
         </div>
       </Modal>
     )
