@@ -23,10 +23,10 @@ export default class MainDashboard extends React.Component {
   }
   componentWillUpdate (nextProps) {
     const {gaugeBoards} = nextProps
-    if (!this.props.gaugeBoards.length && gaugeBoards.length) {
-      const {id} = this.props.match.params
+    const {id} = this.props.match.params
+    if ((!this.props.gaugeBoards.length || !nextProps.match.params.id) && gaugeBoards.length) {
       let index = -1
-      if (id) index = findIndex(gaugeBoards, {id})
+      if (id && nextProps.match.params.id) index = findIndex(gaugeBoards, {id})
 
       nextProps.selectGaugeBoard(gaugeBoards[index >= 0 ? index : 0].id, nextProps.history)
     }
