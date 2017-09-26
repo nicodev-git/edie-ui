@@ -455,3 +455,14 @@ export function getAgentStatusMessage (code) {
   }
   return msg
 }
+
+export function isGaugeDeviceUp (device, gauge, lastUpdate) {
+  let time = lastUpdate
+  if (!lastUpdate) {
+    if (device.agentType === 'collector') time = device.lastSeen
+    else if (device.agentType === 'agent' && device.agent) time = device.agent.lastSeen
+  }
+  const interval = gauge.checkInterval || 3
+  const now = new Date().getTime()
+  return time && (now - time) <= (interval * 60 * 1000)
+}

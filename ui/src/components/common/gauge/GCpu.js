@@ -15,6 +15,7 @@ import MonitorSocket from 'util/socket/MonitorSocket'
 import {showAlert} from 'components/common/Alert'
 import { ROOT_URL } from 'actions/config'
 import {gaugeBodyStyle1} from 'style/common/materialStyles'
+import {isGaugeDeviceUp} from 'shared/Global'
 
 const sampleData = []
 
@@ -52,7 +53,8 @@ export default class GCpu extends React.Component {
     this.state = {
       loading: false,
       cpu: null,
-      searchRecordCounts: []
+      searchRecordCounts: [],
+      lastUpdate: 0
     }
     this.renderBackView = this.renderBackView.bind(this)
     this.renderFrontView = this.renderFrontView.bind(this)
@@ -84,7 +86,36 @@ export default class GCpu extends React.Component {
     if (msg.action === 'update' && msg.deviceId === this.props.device.id) {
       const {cpu} = msg.data
       if (cpu) this.setState({ cpu })
+      this.setState({
+        lastUpdate: new Date().getTime()
+      })
     }
+  }
+
+  ////////////////////////////////////////////////////////////////////////////////
+  getDeviceId () {
+    return this.props.gauge.deviceId
+  }
+
+  getDevice () {
+    const {devices} = this.props
+    const index = findIndex(devices, {id: this.getDeviceId()})
+    if (index < 0) return null
+    return devices[index]
+  }
+
+  isUp () {
+    const device = this.getDevice()
+    const {gauge} = this.props
+    const {lastUpdate} = this.state
+    let time = lastUpdate
+    if (!lastUpdate) {
+      if (device.agentType === 'collector') time = device.lastSeen
+      else if (device.agentType === 'agent' && device.agent) time = device.agent.lastSeen
+    }
+    const interval = gauge.checkInterval || 3
+    const now = new Date().getTime()
+    return time && (now - time) <= (interval * 60 * 1000)
   }
 
   fetchRecordCount (props) {
@@ -191,6 +222,11 @@ export default class GCpu extends React.Component {
         </div>
       )
     } else {
+      const device = this.getDevice()
+      if (!device) return <div />
+
+
+
       const {cpu} = this.state
       const value = cpu ? (cpu.length ? cpu[0].Usage : cpu.Usage) : 0
       const title = gauge.name
