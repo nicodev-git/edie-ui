@@ -205,9 +205,9 @@ class GaugeWizard extends React.Component {
   onClickAddMonitorGroup () {
     const {selectedMonitorGroup, selectedMonitorGroups} = this.state
     if (!selectedMonitorGroup) return
-    if (selectedMonitorGroups.includes(selectedMonitorGroup.id)) return
+    if (selectedMonitorGroups.filter(p => p.id === selectedMonitorGroup.id).length) return
     this.setState({
-      selectedMonitorGroups: [...selectedMonitorGroups, selectedMonitorGroup.id],
+      selectedMonitorGroups: [...selectedMonitorGroups, {id: selectedMonitorGroup.id, dashboardId: ''}],
       selectedMonitorGroup: null
     })
   }
@@ -216,7 +216,7 @@ class GaugeWizard extends React.Component {
     const {selectedRight, selectedMonitorGroups} = this.state
     if (!selectedRight) return
     this.setState({
-      selectedMonitorGroups: selectedMonitorGroups.filter(p => p !== selectedRight.id),
+      selectedMonitorGroups: selectedMonitorGroups.filter(p => p.id !== selectedRight.id),
       selectedRight: null
     })
   }
@@ -224,6 +224,14 @@ class GaugeWizard extends React.Component {
   onSelectMonitorGroup (item) {
     this.setState({
       selectedMonitorGroup: item
+    })
+  }
+
+  onUpdateMonitorGroup (item) {
+    this.setState({
+      selectedMonitorGroups: this.state.selectedMonitorGroups.map(p =>
+        p.id === item.id ? item : p
+      )
     })
   }
 
@@ -359,6 +367,7 @@ class GaugeWizard extends React.Component {
         selectedMonitorGroup={selectedMonitorGroup}
         selectedMonitorGroups={selectedMonitorGroups}
         onSelectMonitorGroup={this.onSelectMonitorGroup.bind(this)}
+        onUpdateMonitorGroup={this.onUpdateMonitorGroup.bind(this)}
         onClickAddMonitorGroup={this.onClickAddMonitorGroup.bind(this)}
         onClickRemoveMonitorGroup={this.onClickRemoveMonitorGroup.bind(this)}
       />

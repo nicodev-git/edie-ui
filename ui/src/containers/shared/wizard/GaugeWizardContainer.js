@@ -39,6 +39,8 @@ export default connect(
     workflows: state.settings.workflows,
     monitorGroups: state.settings.monitorGroups,
 
+    gaugeBoards: state.gauge.gaugeBoards,
+
     formValues: formValueSelector('gaugeDeviceForm')(
       state, 'resource', 'monitorId', 'deviceId', 'timing')
   }), {

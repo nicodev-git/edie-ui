@@ -26,13 +26,13 @@ export default class DashboardPicker extends React.Component {
   }
 
   render () {
-    const {dashboards} = this.props
+    const {gaugeBoards} = this.props
     return (
       <Modal title="Dashboard" onHide={this.onHide.bind(this)}>
         <CardPanel title="Dashboard">
           <SelectField value={this.state.dashboardId} onChange={this.onChangeDashboard.bind(this)}>
             <MenuItem primaryText="[None]" value=""/>
-            {dashboards.map(p =>
+            {gaugeBoards.map(p =>
               <MenuItem primaryText={p.name} value={p.id}/>
             )}
           </SelectField>
