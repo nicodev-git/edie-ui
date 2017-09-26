@@ -73,7 +73,7 @@ class GenericSearch extends React.Component {
         }
         if (!entity) return <span/>
         const expand = expanded[entity.id]
-        const highlighted = expand ? this.getHighlighted(entity, rowData.highlights) : {...entity}
+        const highlighted = this.getHighlighted(entity, rowData.highlights)//expand ? this.getHighlighted(entity, rowData.highlights) : {...entity}
 
         const timeField = entity.startTimestamp ? 'startTimestamp' : 'timestamp'
         delete highlighted[timeField]
