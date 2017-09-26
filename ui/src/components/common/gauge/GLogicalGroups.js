@@ -1,11 +1,11 @@
 import React from 'react'
-import {findIndex} from 'lodash'
+// import {findIndex} from 'lodash'
 
 import FlipView from './FlipView'
 import GEditView from './GEditView'
 
 import {showAlert} from 'components/common/Alert'
-import {filterGaugeServers} from 'shared/Global'
+// import {filterGaugeServers} from 'shared/Global'
 
 export default class GLogicalGroups extends React.Component {
   constructor (props) {

@@ -54,7 +54,7 @@ const gaugeMap = {
   'Firewall': GFirewall,
   'Network': GNetwork,
   'Command': GCommand,
-  'GLogicalGroups': GLogicalGroups
+  'Logical Groups': GLogicalGroups
 }
 
 export default gaugeMap

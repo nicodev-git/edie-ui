@@ -27,7 +27,7 @@ export default class LogicalGroupPicker extends React.Component {
               <tr
                 key={p.id} className={isSel  ? 'selected' : ''}
                 onClick={() => onSelectRight(p)}>
-                <td>{p.name}</td>
+                <td>{p.name || 'No Name'}</td>
               </tr>
             )
           })}
@@ -40,7 +40,7 @@ export default class LogicalGroupPicker extends React.Component {
   render () {
     const {
       monitorGroups, selectedMonitorGroup,
-      onSelectMonitorGroup, onClickAddWorkflow, onClickRemoveWorkflow,
+      onSelectMonitorGroup, onClickAddMonitorGroup, onClickRemoveMonitorGroup,
       tableClass, height,
       className
     } = this.props
@@ -52,8 +52,7 @@ export default class LogicalGroupPicker extends React.Component {
               <table className={`table table-hover ${tableClass || ''}`}>
                 <tbody>
                 <tr>
-                  <td><b>Device</b></td>
-                  <td><b>Workflow</b></td>
+                  <td><b>Logical Group</b></td>
                 </tr>
                 {monitorGroups.map((p, i) =>
                   <tr key={p.id}>
@@ -69,10 +68,10 @@ export default class LogicalGroupPicker extends React.Component {
             </div>
           </div>
           <div className="col-md-1 p-none">
-            <IconButton onTouchTap={onClickAddWorkflow}>
+            <IconButton onTouchTap={onClickAddMonitorGroup}>
               <ForwardIcon />
             </IconButton>
-            <IconButton onTouchTap={onClickRemoveWorkflow}>
+            <IconButton onTouchTap={onClickRemoveMonitorGroup}>
               <BackwardIcon />
             </IconButton>
           </div>

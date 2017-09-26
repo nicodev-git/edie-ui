@@ -11,6 +11,7 @@ import DateRangePicker from 'components/common/DateRangePicker'
 import GaugeServerPicker from './input/GaugeServerPicker'
 import GaugeLogMonitorPicker from './input/GaugeLogMonitorPicker'
 import GaugeWorkflowPicker from './input/GaugeWorkflowPicker'
+import LogicalGroupPicker from './input/LogicalGroupPicker'
 import {required} from 'components/modal/validation/CommonValidation'
 
 const durations = '1 2 3 5 10 15 30'.split(' ').map(p => ({
@@ -29,7 +30,9 @@ export default class GaugeWizardView extends React.Component {
   renderDeviceList (showMonitorGroups) {
     const {devices, monitorGroups} = this.props
     let deviceOptions = devices.map(p => ({label: p.name, value: p.id}))
-    deviceOptions = showMonitorGroups ? [...deviceOptions, ...monitorGroups] : deviceOptions
+    const monitorGroupOptions = monitorGroups.map(p => ({label: p.name, value: p.id}))
+
+    deviceOptions = showMonitorGroups ? [...deviceOptions, ...monitorGroupOptions] : deviceOptions
     return (
       <Field key="deviceId" name="deviceId" component={FormSelect} floatingLabel="Device" options={deviceOptions} className="valign-top mr-dialog"/>
     )
@@ -308,7 +311,7 @@ export default class GaugeWizardView extends React.Component {
 
   renderMonitorGroups () {
     return (
-      <div />
+      <LogicalGroupPicker {...this.props} />
     )
   }
   renderLog () {
