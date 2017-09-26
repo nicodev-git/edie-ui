@@ -9,9 +9,17 @@ const style = {
 }
 export default class NoDataPanel extends React.Component {
   render () {
+    const {bell} = this.props
     return (
       <div style={style}>
-        <img src="/resources/images/dashboard/nodata.jpg" alt=""/>
+        {
+          bell ? (
+            <img src="/resources/images/dashboard/bell.png" width="32" alt=""/>
+          ) : (
+            <img src="/resources/images/dashboard/nodata.jpg" alt=""/>
+          )
+        }
+
       </div>
     )
   }

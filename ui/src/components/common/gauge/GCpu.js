@@ -16,6 +16,7 @@ import {showAlert} from 'components/common/Alert'
 import { ROOT_URL } from 'actions/config'
 import {gaugeBodyStyle1} from 'style/common/materialStyles'
 import {isGaugeDeviceUp} from 'shared/Global'
+import NoDataPanel from './NoDataPanel'
 
 const sampleData = []
 
@@ -108,14 +109,8 @@ export default class GCpu extends React.Component {
     const device = this.getDevice()
     const {gauge} = this.props
     const {lastUpdate} = this.state
-    let time = lastUpdate
-    if (!lastUpdate) {
-      if (device.agentType === 'collector') time = device.lastSeen
-      else if (device.agentType === 'agent' && device.agent) time = device.agent.lastSeen
-    }
-    const interval = gauge.checkInterval || 3
-    const now = new Date().getTime()
-    return time && (now - time) <= (interval * 60 * 1000)
+
+    return isGaugeDeviceUp(device, gauge, lastUpdate)
   }
 
   fetchRecordCount (props) {
@@ -225,7 +220,8 @@ export default class GCpu extends React.Component {
       const device = this.getDevice()
       if (!device) return <div />
 
-
+      const up = this.isUp()
+      if (!up) return <NoDataPanel bell/>
 
       const {cpu} = this.state
       const value = cpu ? (cpu.length ? cpu[0].Usage : cpu.Usage) : 0
