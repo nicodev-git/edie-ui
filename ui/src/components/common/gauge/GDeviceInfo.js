@@ -102,7 +102,7 @@ export default class GDeviceInfo extends React.Component {
           {text ? (
             <span>{text}&nbsp;&nbsp;</span>
           ) : (
-            <div style={{height: 16, background: 'gray', width: '90%'}}>&nbsp;</div>
+            <div style={{height: 14, background: 'gray', width: '90%'}}>&nbsp;</div>
           )}
         </label>
       </div>
