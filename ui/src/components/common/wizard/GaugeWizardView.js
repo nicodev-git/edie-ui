@@ -301,17 +301,20 @@ export default class GaugeWizardView extends React.Component {
     )
   }
   renderServers () {
-    // const {devices, selectedServers, selectedDevice, selectedRight, selectedMonitor,
-    //   onSelectDevice, onSelectRight, onSelectMonitor, onClickAddServer, onClickRemoveServer} = this.props
-    // const monitors = selectedDevice ? (selectedDevice.monitors || []) : []
     return (
-      <GaugeServerPicker {...this.props}/>
+      <div>
+        <Field name="name" component={FormInput} floatingLabel="Name" className="valign-top mr-dialog" validate={[required]}/>
+        <GaugeServerPicker {...this.props}/>
+      </div>
     )
   }
 
   renderMonitorGroups () {
     return (
-      <LogicalGroupPicker {...this.props} />
+      <div>
+        <Field name="name" component={FormInput} floatingLabel="Name" className="valign-top mr-dialog" validate={[required]}/>
+        <LogicalGroupPicker {...this.props} />
+      </div>
     )
   }
   renderLog () {

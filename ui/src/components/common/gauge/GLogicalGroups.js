@@ -1,11 +1,10 @@
 import React from 'react'
-// import {findIndex} from 'lodash'
+import {findIndex} from 'lodash'
 
 import FlipView from './FlipView'
 import GEditView from './GEditView'
 
 import {showAlert} from 'components/common/Alert'
-// import {filterGaugeServers} from 'shared/Global'
 
 export default class GLogicalGroups extends React.Component {
   constructor (props) {
@@ -36,8 +35,20 @@ export default class GLogicalGroups extends React.Component {
     this.props.removeDeviceGauge(this.props.gauge, this.props.device)
   }
 
-  getServers () {
-    return []
+  getItems () {
+    const allGroups = this.props.monitorGroups
+    const {gauge}= this.props
+    if (!gauge.monitorGroupIds || !gauge.monitorGroupIds.length) return allGroups
+
+    const items = []
+
+    gauge.monitorGroupIds.forEach(id => {
+      const index = findIndex(allGroups, {id})
+      if (index < 0) return
+      items.push(allGroups[index])
+    })
+
+    return items
   }
 
   onClickItem (device) {
@@ -51,26 +62,25 @@ export default class GLogicalGroups extends React.Component {
     //   this.props.history.push(`/serverdetail/${device.id}`)
     // }
   }
+
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
   renderItemView(item) {
     const {gauge} = this.props
     const isUp = item.status === 'UP'
-    return [
+    return (
       <div key={item.id} className={`server-cell ${gauge.itemSize === 'slim' ? 'slim' : ''}`}>
         <div
           className={`${isUp ? 'bg-success' : 'bg-danger'}`} style={{width: '100%', height: '100%', cursor: 'pointer'}}
           onClick={this.onClickItem.bind(this, item)}>
-          <div className="div-center text-white">
-            <div>{item.name}</div>
-            {gauge.showDeviceType && <div><small>{item.templateName}</small></div>}
-          </div>
+          <div className="div-center text-white">{item.name}</div>
         </div>
-      </div>,
-      ...this.renderMonitorItems(item)
-    ]
+      </div>
+    )
   }
+
   renderFrontView () {
-    const items = this.getServers()
+    const items = this.getItems()
     return (
       <div className="flex-vertical flex-1">
         <div className="flex-1" style={{overflow: 'hidden'}}>
