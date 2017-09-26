@@ -228,6 +228,13 @@ export default class GEditView extends React.Component {
     })
   }
 
+  onUpdateMonitorGroup (item) {
+    this.setState({
+      logicalGroups: this.state.logicalGroups.map(p =>
+        p.id === item.id ? item : p
+      )
+    })
+  }
   ///////////////////////////////////////////////////////////////////////////
   onClickDone () {
     const {onSubmit} = this.props
@@ -566,7 +573,7 @@ export default class GEditView extends React.Component {
   }
 
   renderMonitorGroups () {
-    const {monitorGroups} = this.props
+    const {monitorGroups, gaugeBoards} = this.props
     const {name, itemSize, logicalGroups, selectedMonitorGroup, selectedRight} = this.state
 
     return (
@@ -584,10 +591,13 @@ export default class GEditView extends React.Component {
             selectedMonitorGroup={selectedMonitorGroup}
             selectedRight={selectedRight}
 
+            gaugeBoards={gaugeBoards}
+
             onSelectRight={this.onSelectRight.bind(this)}
             onSelectMonitorGroup={this.onSelectMonitorGroup.bind(this)}
             onClickAddMonitorGroup={this.onClickAddMonitorGroup.bind(this)}
             onClickRemoveMonitorGroup={this.onClickRemoveMonitorGroup.bind(this)}
+            onUpdateMonitorGroup={this.onUpdateMonitorGroup.bind(this)}
           />
         </div>
       </div>

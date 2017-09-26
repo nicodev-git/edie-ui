@@ -1,10 +1,10 @@
 import React from 'react'
-import {IconButton} from 'material-ui'
+import {IconButton, SelectField, MenuItem} from 'material-ui'
 import ForwardIcon from 'material-ui/svg-icons/navigation/arrow-forward'
 import BackwardIcon from 'material-ui/svg-icons/navigation/arrow-back'
 import {findIndex} from 'lodash'
 
-import DashboardPicker from './DashboardPicker'
+// import DashboardPicker from './DashboardPicker'
 
 export default class LogicalGroupPicker extends React.Component {
   constructor (props) {
@@ -15,7 +15,7 @@ export default class LogicalGroupPicker extends React.Component {
     }
   }
 
-  onChangeDashboard (dashboardId) {
+  onChangeDashboard (e, index, dashboardId) {
     const {selectedRight, onUpdateMonitorGroup} = this.props
     onUpdateMonitorGroup({
       ...selectedRight,
@@ -23,27 +23,27 @@ export default class LogicalGroupPicker extends React.Component {
     })
   }
 
-  onClickDashboard (item) {
-    const {onSelectRight} = this.props
-    onSelectRight(item)
-    this.setState({
-      dashboardModalOpen: true,
-      selected: item.dashboardId
-    })
-  }
+  // onClickDashboard (item) {
+  //   const {onSelectRight} = this.props
+  //   onSelectRight(item)
+  //   this.setState({
+  //     dashboardModalOpen: true,
+  //     selected: item.dashboardId
+  //   })
+  // }
 
-  renderDashboardModal() {
-    if (!this.state.dashboardModalOpen) return null
-    const {gaugeBoards} = this.props
-    return (
-      <DashboardPicker
-        gaugeBoards={gaugeBoards}
-        selected={this.state.selected}
-        onHide={() => this.setState({dashboardModalOpen: false})}
-        onClickOK={this.onChangeDashboard.bind(this)}
-      />
-    )
-  }
+  // renderDashboardModal() {
+  //   if (!this.state.dashboardModalOpen) return null
+  //   const {gaugeBoards} = this.props
+  //   return (
+  //     <DashboardPicker
+  //       gaugeBoards={gaugeBoards}
+  //       selected={this.state.selected}
+  //       onHide={() => this.setState({dashboardModalOpen: false})}
+  //       onClickOK={this.onChangeDashboard.bind(this)}
+  //     />
+  //   )
+  // }
 
   renderRight () {
     const {tableClass, height, monitorGroups, selectedMonitorGroups, selectedRight, onSelectRight, gaugeBoards} = this.props
@@ -76,7 +76,19 @@ export default class LogicalGroupPicker extends React.Component {
                 key={p.id} className={isSel  ? 'selected' : ''}
                 onClick={() => onSelectRight(p)}>
                 <td>{p.name || 'No Name'}</td>
-                <td><div className="link text-primary" onClick={() => this.onClickDashboard(p)}>{p.dashboard}</div></td>
+                <td>
+                  {isSel ? (
+                    <SelectField value={p.dashboardId} onChange={this.onChangeDashboard.bind(this)}>
+                      <MenuItem primaryText="[None]" value=""/>
+                      {gaugeBoards.map(k =>
+                        <MenuItem key={k.id} primaryText={k.name} value={k.id}/>
+                      )}
+                    </SelectField>
+                  ) : (
+                    <div className="link text-primary">{p.dashboard}</div>
+                  )}
+
+                </td>
               </tr>
             )
           })}
@@ -128,8 +140,6 @@ export default class LogicalGroupPicker extends React.Component {
             {this.renderRight()}
           </div>
         </div>
-
-        {this.renderDashboardModal()}
       </div>
     )
   }
