@@ -16,6 +16,8 @@ import {showAlert} from 'components/common/Alert'
 import { ROOT_URL } from 'actions/config'
 
 import {gaugeBodyStyle1} from 'style/common/materialStyles'
+import {isGaugeDeviceUp} from 'shared/Global'
+import NoDataPanel from './NoDataPanel'
 
 const sampleData = []
 
@@ -53,7 +55,8 @@ export default class GDisk extends React.Component {
     this.state = {
       loading: false,
       disk: null,
-      searchRecordCounts: []
+      searchRecordCounts: [],
+      lastUpdate: 0
     }
     this.renderBackView = this.renderBackView.bind(this)
     this.renderFrontView = this.renderFrontView.bind(this)
@@ -86,8 +89,32 @@ export default class GDisk extends React.Component {
       const {disk} = msg.data
       if (disk && disk.length && disk[0].Drives && disk[0].Drives.length)
         this.setState({ disk: disk[0].Drives[0] })
+      this.setState({
+        lastUpdate: new Date().getTime()
+      })
     }
   }
+
+  getDeviceId () {
+    return this.props.gauge.deviceId
+  }
+
+  getDevice () {
+    const {devices} = this.props
+    const index = findIndex(devices, {id: this.getDeviceId()})
+    if (index < 0) return null
+    return devices[index]
+  }
+
+  isUp () {
+    const device = this.getDevice()
+    const {gauge} = this.props
+    const {lastUpdate} = this.state
+
+    return isGaugeDeviceUp(device, gauge, lastUpdate)
+  }
+  ////////////////////////////////////////////////////////////////////////
+
   fetchRecordCount (props) {
     const {gauge, device, devices} = props
     const {duration, durationUnit, splitUnit} = gauge
@@ -192,6 +219,12 @@ export default class GDisk extends React.Component {
         </div>
       )
     } else {
+      const device = this.getDevice()
+      if (!device) return <div />
+
+      const up = this.isUp()
+      if (!up) return <NoDataPanel bell/>
+
       const {disk} = this.state
       const value = disk ? Math.ceil(disk.FreeSpace * 100 / disk.TotalSpace) : 0
       const title = `${gauge.name} ${disk ? `${disk.Name} ${disk.FreeSpace}G/${disk.TotalSpace}G` : ''}`

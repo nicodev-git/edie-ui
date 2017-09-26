@@ -15,6 +15,8 @@ import MonitorSocket from 'util/socket/MonitorSocket'
 import {showAlert} from 'components/common/Alert'
 import { ROOT_URL } from 'actions/config'
 import {gaugeBodyStyle1} from 'style/common/materialStyles'
+import {isGaugeDeviceUp} from 'shared/Global'
+import NoDataPanel from './NoDataPanel'
 
 const sampleData = []
 
@@ -52,7 +54,8 @@ export default class GMemory extends React.Component {
     this.state = {
       loading: false,
       memory: null,
-      searchRecordCounts: []
+      searchRecordCounts: [],
+      lastUpdate: 0
     }
     this.renderBackView = this.renderBackView.bind(this)
     this.renderFrontView = this.renderFrontView.bind(this)
@@ -84,7 +87,29 @@ export default class GMemory extends React.Component {
     if (msg.action === 'update' && msg.deviceId === this.props.device.id) {
       const {memory} = msg.data
       if (memory) this.setState({ memory })
+      this.setState({
+        lastUpdate: new Date().getTime()
+      })
     }
+  }
+
+  getDeviceId () {
+    return this.props.gauge.deviceId
+  }
+
+  getDevice () {
+    const {devices} = this.props
+    const index = findIndex(devices, {id: this.getDeviceId()})
+    if (index < 0) return null
+    return devices[index]
+  }
+
+  isUp () {
+    const device = this.getDevice()
+    const {gauge} = this.props
+    const {lastUpdate} = this.state
+
+    return isGaugeDeviceUp(device, gauge, lastUpdate)
   }
 
   fetchRecordCount (props) {
@@ -191,6 +216,12 @@ export default class GMemory extends React.Component {
         </div>
       )
     } else {
+      const device = this.getDevice()
+      if (!device) return <div />
+
+      const up = this.isUp()
+      if (!up) return <NoDataPanel bell/>
+
       const {memory} = this.state
       const value = memory ? Math.ceil(memory.UsedSize * 100 / memory.TotalSize) : 0
       const title = `${memory ? `${(memory.UsedSize/1024).toFixed(1)}G/${(memory.TotalSize/1024).toFixed(1)}G` : ''}`
