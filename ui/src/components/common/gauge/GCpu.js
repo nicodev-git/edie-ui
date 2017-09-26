@@ -62,6 +62,29 @@ export default class GCpu extends React.Component {
   }
 
   componentDidMount () {
+    this.startUpdate()
+  }
+
+  componentDidUpdate (prevProps, prevState) {
+    if (JSON.stringify(prevProps.gauge) !== JSON.stringify(this.props.gauge)) {
+      this.stopUpdate()
+      setTimeout(() => {
+        this.startUpdate()
+      }, 10)
+    }
+  }
+
+  componentWillUnmount () {
+    this.stopUpdate()
+  }
+
+  startUpdate () {
+    this.setState({
+      loading: false,
+      cpu: null,
+      searchRecordCounts: [],
+      lastUpdate: 0
+    })
     if (this.props.gauge.timing === 'realtime') {
       this.monitorSocket = new MonitorSocket({
         listener: this.onMonitorMessage.bind(this)
@@ -72,7 +95,7 @@ export default class GCpu extends React.Component {
     }
   }
 
-  componentWillUnmount () {
+  stopUpdate () {
     this.monitorSocket && this.monitorSocket.close()
   }
 
