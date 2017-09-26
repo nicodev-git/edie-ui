@@ -11,8 +11,11 @@ import DateRangePicker from 'components/common/DateRangePicker'
 import GaugeServerPicker from 'components/common/wizard/input/GaugeServerPicker'
 import GaugeWorkflowPicker from 'components/common/wizard/input/GaugeWorkflowPicker'
 import GaugeLogMonitorPicker from 'components/common/wizard/input/GaugeLogMonitorPicker'
+import LogicalGroupPicker from 'components/common/wizard/input/LogicalGroupPicker'
+
 import { dialogBodyStyle, dialogTitleStyle } from 'style/common/materialStyles'
 import {CardPanel, Modal} from 'components/modal/parts'
+
 
 const durations = '1 2 3 5 10 15 30'.split(' ').map(p => ({
   label: p, value: parseInt(p, 10)
@@ -78,6 +81,9 @@ export default class GEditView extends React.Component {
       servers: gauge.servers || [],
 
       selectedWorkflow: null,
+
+      monitorGroupIds: gauge.monitorGroupIds || [],
+      selectedMonitorGroup: null,
 
       tableViewMode: gauge.tableViewMode || 'json',
 
@@ -168,6 +174,8 @@ export default class GEditView extends React.Component {
     })
   }
 
+  ///////////////////////////////////////////////////////////////////////////
+
   onSelectWorkflow (item) {
     this.setState({
       selectedWorkflow: item
@@ -193,6 +201,34 @@ export default class GEditView extends React.Component {
     })
   }
 
+  ///////////////////////////////////////////////////////////////////////////
+
+  onSelectMonitorGroup (item) {
+    this.setState({
+      selectedMonitorGroup: item
+    })
+  }
+
+  onClickAddMonitorGroup () {
+    const {selectedMonitorGroup, monitorGroupIds} = this.state
+    if (!selectedMonitorGroup) return
+    if (monitorGroupIds.includes(selectedMonitorGroup.id)) return
+    this.setState({
+      monitorGroupIds: [...monitorGroupIds, selectedMonitorGroup.id],
+      selectedMonitorGroup: null
+    })
+  }
+
+  onClickRemoveMonitorGroup () {
+    const {selectedRight, monitorGroupIds} = this.state
+    if (!selectedRight) return
+    this.setState({
+      monitorGroupIds: monitorGroupIds.filter(p => p !== selectedRight.id),
+      selectedRight: null
+    })
+  }
+
+  ///////////////////////////////////////////////////////////////////////////
   onClickDone () {
     const {onSubmit} = this.props
     const {
@@ -201,7 +237,8 @@ export default class GEditView extends React.Component {
       severities, dateFrom, dateTo, fixed,
       itemSize, showDeviceType, gaugeSize,
       forward, forwardBoardId, servers,
-      tableViewMode, showImage
+      tableViewMode, showImage,
+      monitorGroupIds
     }  = this.state
     const values = {
       resource, savedSearchId, monitorId, workflowId, workflowIds, deviceId, serviceName, monitorIds,
@@ -209,7 +246,8 @@ export default class GEditView extends React.Component {
       severities, dateFrom, dateTo, fixed,
       itemSize, showDeviceType, gaugeSize,
       forward, forwardBoardId, servers,
-      tableViewMode, showImage
+      tableViewMode, showImage,
+      monitorGroupIds
     }
     onSubmit && onSubmit(values)
   }
@@ -526,6 +564,36 @@ export default class GEditView extends React.Component {
       </div>
     )
   }
+
+  renderMonitorGroups () {
+    const {monitorGroups} = this.props
+    const {name, itemSize, monitorGroupIds, selectedMonitorGroup, selectedRight} = this.state
+
+    return (
+      <div>
+        <TextField name="name" value={name} floatingLabelText="Name" className="valign-top mr-dialog" onChange={this.onChangeText.bind(this, 'name')}/>
+        <SelectField value={itemSize} floatingLabelText="Item Size" className="valign-top" onChange={this.onChangeSelect.bind(this, 'itemSize')}>
+          <MenuItem value="normal" primaryText="Normal"/>
+          <MenuItem value="slim" primaryText="Slim"/>
+        </SelectField>
+        <div>
+          <LogicalGroupPicker
+            height={400}
+            monitorGroups={monitorGroups}
+            selectedMonitorGroups={monitorGroupIds}
+            selectedMonitorGroup={selectedMonitorGroup}
+            selectedRight={selectedRight}
+
+            onSelectRight={this.onSelectRight.bind(this)}
+            onSelectMonitorGroup={this.onSelectMonitorGroup.bind(this)}
+            onClickAddMonitorGroup={this.onClickAddMonitorGroup.bind(this)}
+            onClickRemoveMonitorGroup={this.onClickRemoveMonitorGroup.bind(this)}
+          />
+        </div>
+      </div>
+    )
+  }
+
   renderMonitors () {
     const {device, devices} = this.props
     const {name, monitorIds, deviceId} = this.state
@@ -604,6 +672,8 @@ export default class GEditView extends React.Component {
         return this.renderService()
       case 'Servers':
         return this.renderServers()
+      case 'Logical Groups':
+        return this.renderMonitorGroups()
       case 'Monitors':
         return this.renderMonitors()
       case 'News':
