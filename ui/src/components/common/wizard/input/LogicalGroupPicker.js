@@ -4,7 +4,36 @@ import ForwardIcon from 'material-ui/svg-icons/navigation/arrow-forward'
 import BackwardIcon from 'material-ui/svg-icons/navigation/arrow-back'
 import {findIndex} from 'lodash'
 
+import DashboardPicker from './DashboardPicker'
+
 export default class LogicalGroupPicker extends React.Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      dashboardModalOpen: false,
+    }
+  }
+
+  onChangeDashboard (dashboardId) {
+    const {selectedRight, onUpdateMonitorGroup} = this.props
+    onUpdateMonitorGroup({
+      ...selectedRight,
+      dashboardId
+    })
+  }
+
+  renderDashboardModal() {
+    if (!this.state.dashboardModalOpen) return null
+    const {dashboards} = this.props
+    return (
+      <DashboardPicker
+        dashboards={dashboards}
+        onHide={() => this.setState({dashboardModalOpen: false})}
+        onClickOK={this.onChangeDashboard.bind(this)}
+      />
+    )
+  }
+
   renderRight () {
     const {tableClass, height, monitorGroups, selectedMonitorGroups, selectedRight, onSelectRight} = this.props
 
@@ -81,6 +110,8 @@ export default class LogicalGroupPicker extends React.Component {
             {this.renderRight()}
           </div>
         </div>
+
+        {this.renderDashboardModal()}
       </div>
     )
   }
