@@ -38,12 +38,12 @@ export default class GLogicalGroups extends React.Component {
   getItems () {
     const allGroups = this.props.monitorGroups
     const {gauge}= this.props
-    if (!gauge.monitorGroupIds || !gauge.monitorGroupIds.length) return allGroups
+    if (!gauge.logicalGroups || !gauge.logicalGroups.length) return allGroups
 
     const items = []
 
-    gauge.monitorGroupIds.forEach(id => {
-      const index = findIndex(allGroups, {id})
+    gauge.logicalGroups.forEach(p => {
+      const index = findIndex(allGroups, {id: p.id})
       if (index < 0) return
       items.push(allGroups[index])
     })

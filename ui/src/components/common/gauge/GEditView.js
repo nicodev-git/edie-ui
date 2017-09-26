@@ -82,7 +82,7 @@ export default class GEditView extends React.Component {
 
       selectedWorkflow: null,
 
-      monitorGroupIds: gauge.monitorGroupIds || [],
+      logicalGroups: gauge.logicalGroups || [],
       selectedMonitorGroup: null,
 
       tableViewMode: gauge.tableViewMode || 'json',
@@ -210,20 +210,20 @@ export default class GEditView extends React.Component {
   }
 
   onClickAddMonitorGroup () {
-    const {selectedMonitorGroup, monitorGroupIds} = this.state
+    const {selectedMonitorGroup, logicalGroups} = this.state
     if (!selectedMonitorGroup) return
-    if (monitorGroupIds.includes(selectedMonitorGroup.id)) return
+    if (logicalGroups.filter(p => p.id === selectedMonitorGroup.id).length) return
     this.setState({
-      monitorGroupIds: [...monitorGroupIds, selectedMonitorGroup.id],
+      logicalGroups: [...logicalGroups, {id: selectedMonitorGroup.id, dashboardId: ''}],
       selectedMonitorGroup: null
     })
   }
 
   onClickRemoveMonitorGroup () {
-    const {selectedRight, monitorGroupIds} = this.state
+    const {selectedRight, logicalGroups} = this.state
     if (!selectedRight) return
     this.setState({
-      monitorGroupIds: monitorGroupIds.filter(p => p !== selectedRight.id),
+      logicalGroups: logicalGroups.filter(p => p.id !== selectedRight.id),
       selectedRight: null
     })
   }
@@ -238,7 +238,7 @@ export default class GEditView extends React.Component {
       itemSize, showDeviceType, gaugeSize,
       forward, forwardBoardId, servers,
       tableViewMode, showImage,
-      monitorGroupIds
+      logicalGroups
     }  = this.state
     const values = {
       resource, savedSearchId, monitorId, workflowId, workflowIds, deviceId, serviceName, monitorIds,
@@ -247,7 +247,7 @@ export default class GEditView extends React.Component {
       itemSize, showDeviceType, gaugeSize,
       forward, forwardBoardId, servers,
       tableViewMode, showImage,
-      monitorGroupIds
+      logicalGroups
     }
     onSubmit && onSubmit(values)
   }
@@ -567,7 +567,7 @@ export default class GEditView extends React.Component {
 
   renderMonitorGroups () {
     const {monitorGroups} = this.props
-    const {name, itemSize, monitorGroupIds, selectedMonitorGroup, selectedRight} = this.state
+    const {name, itemSize, logicalGroups, selectedMonitorGroup, selectedRight} = this.state
 
     return (
       <div>
@@ -580,7 +580,7 @@ export default class GEditView extends React.Component {
           <LogicalGroupPicker
             height={400}
             monitorGroups={monitorGroups}
-            selectedMonitorGroups={monitorGroupIds}
+            selectedMonitorGroups={logicalGroups}
             selectedMonitorGroup={selectedMonitorGroup}
             selectedRight={selectedRight}
 
