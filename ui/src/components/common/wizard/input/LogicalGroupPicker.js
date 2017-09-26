@@ -11,6 +11,7 @@ export default class LogicalGroupPicker extends React.Component {
     super(props)
     this.state = {
       dashboardModalOpen: false,
+      selected: null,
     }
   }
 
@@ -22,12 +23,22 @@ export default class LogicalGroupPicker extends React.Component {
     })
   }
 
+  onClickDashboard (item) {
+    const {onSelectRight} = this.props
+    onSelectRight(item)
+    this.setState({
+      dashboardModalOpen: true,
+      selected: item.dashboardId
+    })
+  }
+
   renderDashboardModal() {
     if (!this.state.dashboardModalOpen) return null
     const {gaugeBoards} = this.props
     return (
       <DashboardPicker
         gaugeBoards={gaugeBoards}
+        selected={this.state.selected}
         onHide={() => this.setState({dashboardModalOpen: false})}
         onClickOK={this.onChangeDashboard.bind(this)}
       />
@@ -44,6 +55,7 @@ export default class LogicalGroupPicker extends React.Component {
         const dindex = p.dashboardId ? findIndex(gaugeBoards, {id: p.dashboardId}) : -1
         wfs.push({
           ...monitorGroups[index],
+          dashboardId: p.dashboardId,
           dashboard: dindex < 0 ? 'None' : gaugeBoards[dindex].name
         })
       }
@@ -64,7 +76,7 @@ export default class LogicalGroupPicker extends React.Component {
                 key={p.id} className={isSel  ? 'selected' : ''}
                 onClick={() => onSelectRight(p)}>
                 <td>{p.name || 'No Name'}</td>
-                <td><div className="link text-primary">{p.dashboard}</div></td>
+                <td><div className="link text-primary" onClick={() => this.onClickDashboard(p)}>{p.dashboard}</div></td>
               </tr>
             )
           })}

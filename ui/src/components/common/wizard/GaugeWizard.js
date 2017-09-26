@@ -291,7 +291,8 @@ class GaugeWizard extends React.Component {
       selectedWorkflow, selectedWorkflows,
       selectedMonitorGroup, selectedMonitorGroups
     } = this.state
-    const { handleSubmit, sysSearchOptions, monitors, title, formValues, workflows, templateName, devices, device, monitorGroups } = this.props
+    const { handleSubmit, sysSearchOptions, monitors, title, formValues, workflows, templateName,
+      devices, device, monitorGroups, gaugeBoards } = this.props
 
     const searchList = concat([], this.getSearchOptions().map(p => {
       return assign({}, p, {
@@ -364,6 +365,7 @@ class GaugeWizard extends React.Component {
         onClickAddWorkflow={this.onClickAddWorkflow.bind(this)}
         onClickRemoveWorkflow={this.onClickRemoveWorkflow.bind(this)}
 
+        gaugeBoards={gaugeBoards}
         selectedMonitorGroup={selectedMonitorGroup}
         selectedMonitorGroups={selectedMonitorGroups}
         onSelectMonitorGroup={this.onSelectMonitorGroup.bind(this)}

@@ -7,7 +7,7 @@ export default class DashboardPicker extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      dashboardId: ''
+      dashboardId: props.selected || ''
     }
   }
 
