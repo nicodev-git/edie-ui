@@ -1,5 +1,5 @@
 import React from 'react'
-import {IconButton, SelectField, MenuItem} from 'material-ui'
+import {IconButton} from 'material-ui'
 import ForwardIcon from 'material-ui/svg-icons/navigation/arrow-forward'
 import BackwardIcon from 'material-ui/svg-icons/navigation/arrow-back'
 import {findIndex} from 'lodash'
@@ -19,7 +19,7 @@ export default class LogicalGroupPicker extends React.Component {
     const {selectedRight, onUpdateMonitorGroup} = this.props
     onUpdateMonitorGroup({
       ...selectedRight,
-      dashboardId
+      dashboardId: e.target.value
     })
   }
 
@@ -78,12 +78,15 @@ export default class LogicalGroupPicker extends React.Component {
                 <td>{p.name || 'No Name'}</td>
                 <td>
                   {isSel ? (
-                    <SelectField value={p.dashboardId} onChange={this.onChangeDashboard.bind(this)}>
-                      <MenuItem primaryText="[None]" value=""/>
+                    <select
+                      value={p.dashboardId}
+                      onChange={this.onChangeDashboard.bind(this)}
+                      className="text-primary" style={{fontSize: 14}}>
+                      <option value="">[None]</option>
                       {gaugeBoards.map(k =>
-                        <MenuItem key={k.id} primaryText={k.name} value={k.id}/>
+                        <option key={k.id} value={k.id}>{k.name}</option>
                       )}
-                    </SelectField>
+                    </select>
                   ) : (
                     <div className="link text-primary">{p.dashboard}</div>
                   )}
