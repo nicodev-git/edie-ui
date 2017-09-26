@@ -20,6 +20,7 @@ export default class LogicalGroupPicker extends React.Component {
           <tbody>
           <tr>
             <td><b>Selected</b></td>
+            <td><b>Forward</b></td>
           </tr>
           {wfs.map(p => {
             let isSel = selectedRight && p.id === selectedRight.id
@@ -28,6 +29,7 @@ export default class LogicalGroupPicker extends React.Component {
                 key={p.id} className={isSel  ? 'selected' : ''}
                 onClick={() => onSelectRight(p)}>
                 <td>{p.name || 'No Name'}</td>
+                <td></td>
               </tr>
             )
           })}
