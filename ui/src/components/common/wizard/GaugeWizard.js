@@ -28,7 +28,10 @@ class GaugeWizard extends React.Component {
       selectedServers: [],
 
       selectedWorkflow: null,
-      selectedWorkflows: []
+      selectedWorkflows: [],
+
+      selectedMonitorGroup: null,
+      selectedMonitorGroups: []
     }
   }
 

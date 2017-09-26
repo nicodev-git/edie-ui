@@ -305,6 +305,12 @@ export default class GaugeWizardView extends React.Component {
       <GaugeServerPicker {...this.props}/>
     )
   }
+
+  renderMonitorGroups () {
+    return (
+      <div />
+    )
+  }
   renderLog () {
     return (
       <GaugeLogMonitorPicker {...this.props}/>
@@ -334,6 +340,8 @@ export default class GaugeWizardView extends React.Component {
         return this.renderDeviceBasic()
       case 'Servers':
         return this.renderServers()
+      case 'Logical Groups':
+        return this.renderMonitorGroups()
       case 'Log':
         return this.renderLog()
       default:
