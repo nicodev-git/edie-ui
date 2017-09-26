@@ -98,7 +98,13 @@ export default class GDeviceInfo extends React.Component {
     return (
       <div className="row">
         <label className="col-md-3 text-right">{label}:</label>
-        <label className="col-md-9" style={{...style, borderLeft: '1px solid #777'}}>{text}&nbsp;&nbsp;</label>
+        <label className="col-md-9" style={{...style, borderLeft: '1px solid #777'}}>
+          {text ? (
+            <span>{text}&nbsp;&nbsp;</span>
+          ) : (
+            <div style={{height: 16, background: 'gray', width: '90%'}}>&nbsp;</div>
+          )}
+        </label>
       </div>
     )
   }
