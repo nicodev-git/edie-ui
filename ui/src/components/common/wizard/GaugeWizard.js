@@ -202,6 +202,31 @@ class GaugeWizard extends React.Component {
     })
   }
 
+  onClickAddMonitorGroup () {
+    const {selectedMonitorGroup, selectedMonitorGroups} = this.state
+    if (!selectedMonitorGroup) return
+    if (selectedMonitorGroups.includes(selectedMonitorGroup.id)) return
+    this.setState({
+      selectedMonitorGroups: [...selectedMonitorGroups, selectedMonitorGroup.id],
+      selectedMonitorGroup: null
+    })
+  }
+
+  onClickRemoveMonitorGroup () {
+    const {selectedRight, selectedMonitorGroups} = this.state
+    if (!selectedRight) return
+    this.setState({
+      selectedMonitorGroups: selectedMonitorGroups.filter(p => p !== selectedRight.id),
+      selectedRight: null
+    })
+  }
+
+  onSelectMonitorGroup (item) {
+    this.setState({
+      selectedMonitorGroup: item
+    })
+  }
+
   getSearchOptions () {
     const {userInfo} = this.props
     if (!userInfo) return []
@@ -215,7 +240,8 @@ class GaugeWizard extends React.Component {
     return []
   }
   handleFormSubmit (formProps) {
-    const { selectedSeverity, selectedMonitors, serviceNames, dateFrom, dateTo, selectedServers, selectedWorkflows } = this.state
+    const { selectedSeverity, selectedMonitors, serviceNames, dateFrom, dateTo,
+      selectedServers, selectedWorkflows, selectedMonitorGroups } = this.state
     const { extraParams, onFinish, options } = this.props
 
     const props = assign({
@@ -225,7 +251,8 @@ class GaugeWizard extends React.Component {
         dateFrom,
         dateTo,
         servers: selectedServers,
-        workflowIds: selectedWorkflows
+        workflowIds: selectedWorkflows,
+        monitorGroupIds: selectedMonitorGroups
       },
       formProps,
       extraParams
@@ -252,7 +279,10 @@ class GaugeWizard extends React.Component {
     this.props.onClose && this.props.onClose(this, data)
   }
   render () {
-    const {selectedDevice, selectedServers, selectedRight, selectedMonitor, selectedWorkflow, selectedWorkflows} = this.state
+    const {selectedDevice, selectedServers, selectedRight, selectedMonitor,
+      selectedWorkflow, selectedWorkflows,
+      selectedMonitorGroup, selectedMonitorGroups
+    } = this.state
     const { handleSubmit, sysSearchOptions, monitors, title, formValues, workflows, templateName, devices, device, monitorGroups } = this.props
 
     const searchList = concat([], this.getSearchOptions().map(p => {
@@ -273,7 +303,6 @@ class GaugeWizard extends React.Component {
 
     const workflowOptions = workflows.map(p => ({label: p.name, value: p.id}))
     const serviceOptions = this.state.services.map(p => ({label: p.DisplayName || p.ServiceName, value: p.ServiceName}))
-    const monitorGroupOptions = monitorGroups.map(p => ({label: p.name, value: p.id}))
     return (
       <GaugeWizardView
         title={title}
@@ -306,7 +335,7 @@ class GaugeWizard extends React.Component {
         dateTo={this.state.dateTo}
         onChangeDateRange={this.onChangeDateRange.bind(this)}
 
-        monitorGroups={monitorGroupOptions}
+        monitorGroups={monitorGroups}
 
         selectedDevice={selectedDevice}
         selectedMonitor={selectedMonitor}
@@ -326,6 +355,12 @@ class GaugeWizard extends React.Component {
         onSelectWorkflow={this.onSelectWorkflow.bind(this)}
         onClickAddWorkflow={this.onClickAddWorkflow.bind(this)}
         onClickRemoveWorkflow={this.onClickRemoveWorkflow.bind(this)}
+
+        selectedMonitorGroup={selectedMonitorGroup}
+        selectedMonitorGroups={selectedMonitorGroups}
+        onSelectMonitorGroup={this.onSelectMonitorGroup.bind(this)}
+        onClickAddMonitorGroup={this.onClickAddMonitorGroup.bind(this)}
+        onClickRemoveMonitorGroup={this.onClickRemoveMonitorGroup.bind(this)}
       />
     )
   }
