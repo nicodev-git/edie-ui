@@ -31,6 +31,7 @@ export default connect(
       fixed: 'false',
       timing: 'realtime',
       tableViewMode: 'json',
+      checkInterval: 3,
       ...state.devices.wizardInitialValues
     },
     userInfo: state.dashboard.userInfo,

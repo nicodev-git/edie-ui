@@ -198,6 +198,7 @@ export default class GaugeWizardView extends React.Component {
       <div>
         <Field name="name" component={FormInput} floatingLabel="Name" className="valign-top mr-dialog" validate={[required]}/>
         <Field key="deviceId" name="deviceId" component={FormSelect} floatingLabel="Device" options={deviceOptions} className="valign-top" validate={[required]}/>
+        <Field name="checkInterval" component={FormInput} floatingLabel="Interval" className="valign-top mr-dialog"/>
       </div>
     )
   }
@@ -222,8 +223,9 @@ export default class GaugeWizardView extends React.Component {
             <Field name="duration" component={FormSelect} floatingLabel="Duration" options={durations} className="valign-top mr-dialog" style={{width: 100}}/>
             <Field name="durationUnit" component={FormSelect} floatingLabel="  "options={gaugeDurationTypes} className="valign-top" style={{width: 120}}/>
           </div>
-        ) : null
-        }
+        ) : (
+          <Field name="checkInterval" component={FormInput} floatingLabel="Interval" className="valign-top mr-dialog"/>
+        )}
       </div>
     )
   }

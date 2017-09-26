@@ -63,6 +63,8 @@ export default class GEditView extends React.Component {
       dateFrom: gauge.dateFrom || 0,
       dateTo: gauge.dateTo || 0,
 
+      checkInterval: gauge.checkInterval || 3,
+
       itemSize: gauge.itemSize || 'normal',
       gaugeSize: gauge.gaugeSize || 'big',
       showDeviceType: gauge.showDeviceType || false,
@@ -450,6 +452,8 @@ export default class GEditView extends React.Component {
         {devices && <SelectField value={deviceId} floatingLabelText="Device" className="valign-top" onChange={this.onChangeSelect.bind(this, 'deviceId')}>
           {devices.map(p => <MenuItem key={p.id} value={p.id} primaryText={p.name}/>)}
         </SelectField>}
+
+        <TextField name="checkInterval" floatingLabelText="Interval" className="valign-top mr-dialog" onChange={this.onChangeText.bind(this, 'checkInterval')}/>
       </div>
     )
   }
