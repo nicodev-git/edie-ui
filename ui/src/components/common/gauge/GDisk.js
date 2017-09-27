@@ -66,6 +66,15 @@ export default class GDisk extends React.Component {
     this.startUpdate()
   }
 
+  componentDidUpdate (prevProps, prevState) {
+    if (JSON.stringify(prevProps.gauge) !== JSON.stringify(this.props.gauge)) {
+      this.stopUpdate()
+      setTimeout(() => {
+        this.startUpdate()
+      }, 10)
+    }
+  }
+
   componentWillUnmount () {
     this.stopUpdate()
   }
