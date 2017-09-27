@@ -34,6 +34,7 @@ import SearchGraphModal from './SearchGraphModal'
 import TagPickerModal from 'containers/settings/tag/TagPickerModalContainer'
 import SearchMonitorModal from './SearchMonitorModal'
 import MonitorGroupsModal from 'containers/settings/monitorgroup/MonitorGroupsModalContainer'
+import EntityDetailModal from './EntityDetailModal'
 
 class GenericSearch extends React.Component {
   constructor (props) {
@@ -572,6 +573,12 @@ class GenericSearch extends React.Component {
     this.props.showSearchMonitorModal(true)
   }
 
+  onClickEntityView () {
+    const selected = this.refs.table.getSelected()
+    if (!selected) return
+    this.props.showEntityDetailModal(true, selected)
+  }
+
   redrawSearch () {
     // this.props.refreshSearch()
   }
@@ -768,6 +775,15 @@ class GenericSearch extends React.Component {
     )
   }
 
+  renderEntityDetailModal () {
+    if (!this.props.entityDetailModalOpen) return null
+    return (
+      <EntityDetailModal
+        {...this.props}
+      />
+    )
+  }
+
   renderFieldsView () {
     const {searchFieldsVisible} = this.props
     if (!searchFieldsVisible) return null
@@ -905,6 +921,8 @@ class GenericSearch extends React.Component {
 
             searchMonitor={'Device/Monitor'}
             onClickSearchMonitor={this.onClickSearchMonitor.bind(this)}
+
+            onClickEntityView={this.onClickEntityView.bind(this)}
           />
 
           <div className="text-center">
@@ -972,6 +990,7 @@ class GenericSearch extends React.Component {
                   pageSize={10}
                   showTableHeading={false}
                   onUpdateCount={this.onResultCountUpdate.bind(this)}
+                  selectable
                 />
               </div>
             </div>
@@ -980,6 +999,7 @@ class GenericSearch extends React.Component {
           {this.renderTagsModal()}
           {this.renderSearchMonitorModal()}
           {this.renderMonitorGroupsModal()}
+          {this.renderEntityDetailModal()}
           <ReactTooltip/>
         </TabPageBody>
       </TabPage>
