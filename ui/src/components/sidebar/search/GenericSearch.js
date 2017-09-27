@@ -493,9 +493,6 @@ class GenericSearch extends React.Component {
     this.props.showSearchGraphModal(true)
   }
   onClickTags (e) {
-    this.setState({
-      anchorEl: e.target
-    })
     this.props.showSearchTagModal(true)
   }
   onPickTag (selected) {
@@ -756,8 +753,6 @@ class GenericSearch extends React.Component {
     return (
       <TagPickerModal
         hideAdd
-        viewMode="popover"
-        anchorEl={this.state.anchorEl}
         onPickMulti={this.onPickTag.bind(this)}
         onClickClose={() => this.props.showSearchTagModal(false)}/>
     )
@@ -921,7 +916,6 @@ class GenericSearch extends React.Component {
             onClickClear={this.onClickClearSearch.bind(this)}
             onClickToggleFields={this.onClickToggleFields.bind(this)}
 
-            searchMonitor={'Device/Monitor'}
             onClickSearchMonitor={this.onClickSearchMonitor.bind(this)}
 
             onClickEntityView={this.onClickEntityView.bind(this)}

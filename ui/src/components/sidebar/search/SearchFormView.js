@@ -84,7 +84,6 @@ export default class SearchFormView extends React.Component {
 
       onClickToggleFields,
 
-      searchMonitor,
       onClickSearchMonitor,
 
       onClickEntityView
