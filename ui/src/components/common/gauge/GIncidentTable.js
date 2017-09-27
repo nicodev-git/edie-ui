@@ -1,4 +1,6 @@
 import React from 'react'
+import {findIndex} from 'lodash'
+
 import FlipView from './FlipView'
 import IncidentTable from './display/IncidentTable'
 import GEditView from './GEditView'
@@ -37,26 +39,38 @@ export default class GIncidentTable extends React.Component {
 
   getParams () {
     const {logicalGroups, servers, monitorIds, monitorGroups} = this.props.gauge
-    const q = [
-      `(deviceid:${(monitorIds || []).join(' OR ')})`,
-      `()`
-    ].join(' OR ')
+    const q = []
     if (servers && servers.length) {
       q.push(
         `(deviceid:${servers.join(' OR ')})`
       )
     }
+
+    let ids = []
     if (monitorIds && monitorIds.length) {
-      q.push(
-        `(monitorid:${monitorIds.join(' OR ')})`
-      )
+      ids = [...monitorIds]
     }
 
     if (monitorGroups && monitorGroups.length) {
-      const ids = []
-
+      monitorGroups.forEach(group => {
+        const index = findIndex(logicalGroups, {id: group.id})
+        if (index < 0) return
+        logicalGroups[index].monitorIds.forEach(monitorId => {
+          if (!ids.includes(monitorId)) ids.push(monitorId)
+        })
+      })
     }
-    return q
+
+    if (ids.length) {
+      q.push(
+        `(monitorid:${ids.join(' OR ')})`
+      )
+    }
+
+    return {
+      q: q.join(' OR '),
+      types: 'incident'
+    }
   }
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -64,7 +78,10 @@ export default class GIncidentTable extends React.Component {
   renderFrontView () {
     return (
       <div className="flex-vertical flex-1">
-        <IncidentTable {...this.props}/>
+        <IncidentTable
+          {...this.props}
+          params={this.getParams()}
+        />
       </div>
     )
   }

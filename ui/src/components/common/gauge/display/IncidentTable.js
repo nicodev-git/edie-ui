@@ -23,21 +23,20 @@ export default class IncidentTable extends React.Component {
     this.state = {
       openExceptionModal: false,
       commentModalVisible: false,
-      params: {},
 
       incident: null
     }
 
     this.cells = [{
       'displayName': 'Severity',
-      'columnName': 'severity',
+      'columnName': 'entity.severity',
       'cssClassName': 'text-center width-80',
       'customComponent': (props) => {
         return getSeverityIcon(props.data)
       }
     }, {
       'displayName': 'Date/Time',
-      'columnName': 'startTimestamp',
+      'columnName': 'entity.startTimestamp',
       'cssClassName': 'nowrap text-center width-140',
       'customComponent': (props) => {
         const {data} = props
@@ -50,15 +49,15 @@ export default class IncidentTable extends React.Component {
       }
     }, {
       'displayName': 'System',
-      'columnName': 'devicename',
+      'columnName': 'entity.devicename',
       'cssClassName': 'width-120'
     }, {
       'displayName': 'Workflow',
-      'columnName': 'workflow',
+      'columnName': 'entity.workflow',
       'cssClassName': 'width-120'
     }, {
       'displayName': 'Description',
-      'columnName': 'description',
+      'columnName': 'entity.description',
       'customComponent': (props) => {
         let str = props.data
         if (props.rowData.lastcomment) {
@@ -69,7 +68,7 @@ export default class IncidentTable extends React.Component {
       }
     }, {
       'displayName': 'Actions',
-      'columnName': 'actions',
+      'columnName': 'entity.actions',
       'cssClassName': 'nowrap width-220',
       'customComponent': (p) => {
         const row = p.rowData
@@ -127,23 +126,9 @@ export default class IncidentTable extends React.Component {
       this.props.fixIncident(incident, user, text)
     })
   }
-  getParams () {
-    const { severities, fixed, dateFrom, dateTo } = this.props.gauge
-    const searchParams = {
-      draw: this.props.incidentDraw,
-      description: '""',
-      severity: severities,
-      afterStartTimestamp: dateFrom,
-      beforeStartTimestamp: dateTo,
-      deviceid: this.props.device.id,
-      sort: 'startTimestamp,desc'
-    }
-    if (fixed) searchParams.fixed = fixed
-    return searchParams
-  }
-
   render () {
     const {incident} = this.state
+    const {params} = this.props
     return (
       <div className="flex-1">
         <InfiniteTable
@@ -155,8 +140,8 @@ export default class IncidentTable extends React.Component {
           onRowDblClick={this.onRowDblClick.bind(this)}
           tableClassName="table-panel2"
 
-          url="/incident/search/findBy"
-          params={this.getParams()}
+          url="/search/query"
+          params={params}
         />
 
         {this.state.commentModalVisible &&
