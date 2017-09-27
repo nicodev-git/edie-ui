@@ -20,7 +20,9 @@ export default class DeviceMonitorPicker extends React.Component {
     return (
       <Checkbox
         label={device.name} onCheck={() => onClickToggleDevice(device)}
-        checked={checked}/>
+        checked={checked}
+        labelStyle={{color: 'green'}}
+      />
     )
   }
   renderMonitorGroup (group) {
@@ -31,7 +33,9 @@ export default class DeviceMonitorPicker extends React.Component {
     return (
       <Checkbox
         label={name || 'No Name'} onCheck={() => onClickToggleMonitorGroup(group)}
-        checked={checked}/>
+        checked={checked}
+        labelStyle={{color: 'blue'}}
+      />
     )
   }
   render () {

@@ -257,7 +257,7 @@ class GaugeWizard extends React.Component {
 
   onClickToggleMonitorGroup (group) {
     let {selectedMonitorGroups} = this.state
-    if (selectedMonitorGroups.includes(group.id)) {
+    if (selectedMonitorGroups.filter(p => p.id === group.id).length > 0) {
       selectedMonitorGroups = selectedMonitorGroups.filter(p => p.id !== group.id)
     } else {
       selectedMonitorGroups = [...selectedMonitorGroups, {id: group.id}]
