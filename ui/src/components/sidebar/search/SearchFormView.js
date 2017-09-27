@@ -70,7 +70,9 @@ export default class SearchFormView extends React.Component {
       searchMonitor,
       onClickSearchMonitor,
 
-      onClickEntityView
+      onClickEntityView,
+
+      onClickSearchBy
     } = this.props
     return (
       <form onSubmit={onSubmit}>
@@ -166,6 +168,7 @@ export default class SearchFormView extends React.Component {
             </SelectField>
 
             <FlatButton label={searchMonitor} onTouchTap={onClickSearchMonitor} className="valign-top margin-xs-top"/>
+            <FlatButton label="Search By" onTouchTap={onClickSearchBy} className="valign-top margin-xs-top"/>
           </div>
         </div>
       </form>
