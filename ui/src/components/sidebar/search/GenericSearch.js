@@ -583,10 +583,6 @@ class GenericSearch extends React.Component {
     // this.props.refreshSearch()
   }
 
-  onClickSearchBy () {
-
-  }
-
   ////////////////////////////////////////////////////////////////////////////////////////////////
 
   renderFields () {
@@ -929,7 +925,6 @@ class GenericSearch extends React.Component {
             onClickSearchMonitor={this.onClickSearchMonitor.bind(this)}
 
             onClickEntityView={this.onClickEntityView.bind(this)}
-            onClickSearchBy={this.onClickSearchBy.bind(this)}
           />
 
           <div className="text-center">

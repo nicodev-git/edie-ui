@@ -1,7 +1,7 @@
 import React from 'react'
 import { Field } from 'redux-form'
 import { findIndex } from 'lodash'
-import {FlatButton, SelectField, MenuItem, IconButton} from 'material-ui'
+import {FlatButton, SelectField, Popover, Menu, MenuItem, IconButton} from 'material-ui'
 import ActionSearch from 'material-ui/svg-icons/action/search'
 import ToggleStar from 'material-ui/svg-icons/toggle/star-border'
 import FilledStar from 'material-ui/svg-icons/toggle/star'
@@ -11,12 +11,23 @@ import NoSim from 'material-ui/svg-icons/communication/no-sim'
 import ClearIcon from 'material-ui/svg-icons/content/clear'
 import ViewColumnIcon from 'material-ui/svg-icons/action/view-column'
 import PageViewIcon from 'material-ui/svg-icons/action/pageview'
-// import {Toolbar} from 'material-ui/Toolbar'
 
 import { FormInput } from 'components/modal/parts'
 import DateRangePicker from 'components/common/DateRangePicker'
 
 export default class SearchFormView extends React.Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      openSearchBy: false
+    }
+  }
+  onClickSearchBy (e) {
+    this.setState({
+      openSearchBy: true,
+      anchorEl: e.target
+    })
+  }
   renderDateLabel (label) {
     return (
       <FlatButton label={label}/>
@@ -70,9 +81,7 @@ export default class SearchFormView extends React.Component {
       searchMonitor,
       onClickSearchMonitor,
 
-      onClickEntityView,
-
-      onClickSearchBy
+      onClickEntityView
     } = this.props
     return (
       <form onSubmit={onSubmit}>
@@ -87,9 +96,6 @@ export default class SearchFormView extends React.Component {
           </div>
 
           <div>
-            <IconButton tooltip="Workflow" tooltipPosition="top-center" onTouchTap={onClickWorkflow} className="valign-top"><img src="/resources/images/sidebar/search/wf-icon.png" width="24" alt=""/></IconButton>
-            <IconButton tooltip="Tags" tooltipPosition="top-center" onTouchTap={onClickTags} className="valign-top"><img src="/resources/images/sidebar/search/tag.png" width="24" alt=""/></IconButton>
-
             <IconButton tooltip="Favorite" tooltipPosition="top-center" className="valign-top" onTouchTap={onClickStar}>{starFilled ? <FilledStar/> : <ToggleStar/>}</IconButton>
             <IconButton tooltip="Illustrate" tooltipPosition="top-center" className="valign-top" onTouchTap={onClickIllustrate}><LocalMovie/></IconButton>
             <IconButton tooltip="Related devices" tooltipPosition="top-center" className="valign-top" onTouchTap={onClickRelDevices}><Computer/></IconButton>
@@ -167,8 +173,22 @@ export default class SearchFormView extends React.Component {
               )}
             </SelectField>
 
-            <FlatButton label={searchMonitor} onTouchTap={onClickSearchMonitor} className="valign-top margin-xs-top"/>
-            <FlatButton label="Search By" onTouchTap={onClickSearchBy} className="valign-top margin-xs-top"/>
+            <FlatButton label="Search By" onTouchTap={this.onClickSearchBy.bind(this)} className="valign-top margin-xs-top"/>
+            <Popover
+              open={this.state.openSearchBy}
+              anchorEl={this.state.anchorEl}
+              anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
+              targetOrigin={{horizontal: 'left', vertical: 'top'}}
+              onRequestClose={() => this.setState({openSearchBy: false})}
+            >
+              <Menu>
+                <MenuItem primaryText="Workflows" onTouchTap={onClickWorkflow}/>
+                <MenuItem primaryText="Device/Monitors" onTouchTap={onClickSearchMonitor} />
+                <MenuItem primaryText="Tags" onTouchTap={onClickTags}/>
+                <MenuItem primaryText="MonitorTypes"/>
+                <MenuItem primaryText="Severity" />
+              </Menu>
+            </Popover>
           </div>
         </div>
       </form>
