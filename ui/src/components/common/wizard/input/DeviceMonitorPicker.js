@@ -32,7 +32,7 @@ export default class DeviceMonitorPicker extends React.Component {
     const name = index < 0 ? '' : monitorGroups[index].name
     return (
       <Checkbox
-        label={name || 'No Name'} onCheck={() => onClickToggleMonitorGroup(group)}
+        label={`${name || 'No Name'} (Monitor Group)`} onCheck={() => onClickToggleMonitorGroup(group)}
         checked={checked}
         labelStyle={{color: 'blue'}}
       />

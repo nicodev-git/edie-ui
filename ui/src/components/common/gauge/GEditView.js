@@ -12,6 +12,7 @@ import GaugeServerPicker from 'components/common/wizard/input/GaugeServerPicker'
 import GaugeWorkflowPicker from 'components/common/wizard/input/GaugeWorkflowPicker'
 import GaugeLogMonitorPicker from 'components/common/wizard/input/GaugeLogMonitorPicker'
 import LogicalGroupPicker from 'components/common/wizard/input/LogicalGroupPicker'
+import DeviceMonitorPicker from 'components/common/wizard/input/DeviceMonitorPicker'
 
 import { dialogBodyStyle, dialogTitleStyle } from 'style/common/materialStyles'
 import {CardPanel, Modal} from 'components/modal/parts'
@@ -235,6 +236,40 @@ export default class GEditView extends React.Component {
       )
     })
   }
+
+  ///////////////////////////////////////////////////////////////////////////
+
+  onClickToggleMonitor (monitor) {
+    let {monitorIds} = this.state
+    if (monitorIds.includes(monitor.uid)) {
+      monitorIds = monitorIds.filter(p => p !== monitor.uid)
+    } else {
+      monitorIds = [...monitorIds, monitor.uid]
+    }
+    this.setState({monitorIds})
+  }
+
+  onClickToggleDevice (device) {
+    let {servers} = this.state
+    if (servers.includes(device.id)) {
+      servers = servers.filter(p => p !== device.id)
+    } else {
+      servers = [...servers, device.id]
+    }
+    this.setState({servers})
+  }
+
+  onClickToggleMonitorGroup (group) {
+    let {logicalGroups} = this.state
+    if (logicalGroups.filter(p => p.id === group.id).length > 0) {
+      logicalGroups = logicalGroups.filter(p => p.id !== group.id)
+    } else {
+      logicalGroups = [...logicalGroups, {id: group.id}]
+    }
+    this.setState({logicalGroups})
+  }
+
+
   ///////////////////////////////////////////////////////////////////////////
   onClickDone () {
     const {onSubmit} = this.props
@@ -456,7 +491,7 @@ export default class GEditView extends React.Component {
     )
   }
 
-  renderIncidentTable () {
+  renderIncidentTable2 () {
     const {devices} = this.props
     const {deviceId, fixed, severities, dateFrom, dateTo, name} = this.state
     return (
@@ -488,6 +523,30 @@ export default class GEditView extends React.Component {
       </div>
     )
   }
+
+  renderIncidentTable () {
+    const {devices, monitorGroups} = this.props
+    const {monitorIds, servers, logicalGroups, monitorTreeData, name} = this.state
+    return (
+      <div>
+        <TextField name="name" value={name} floatingLabelText="Name" className="valign-top mr-dialog" onChange={this.onChangeText.bind(this, 'name')}/>
+        <DeviceMonitorPicker
+          allDevices={devices}
+          monitorGroups={monitorGroups}
+          onClickToggleMonitor={this.onClickToggleMonitor.bind(this)}
+          onClickToggleDevice={this.onClickToggleDevice.bind(this)}
+          onClickToggleMonitorGroup={this.onClickToggleMonitorGroup.bind(this)}
+          selectedServers={servers}
+          selectedMonitorGroups={logicalGroups}
+          selectedMonitors={monitorIds}
+
+          monitorTreeData={monitorTreeData}
+          onChangeTreeData={(monitorTreeData) => {this.setState({monitorTreeData})}}
+        />
+      </div>
+    )
+  }
+
   renderDevice () {
     const {devices} = this.props
     const {name, deviceId} = this.state
