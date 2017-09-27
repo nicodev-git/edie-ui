@@ -36,10 +36,26 @@ export default class GIncidentTable extends React.Component {
   }
 
   getParams () {
-    const {logicalGroups, servers, monitorIds} = this.props.gauge
+    const {logicalGroups, servers, monitorIds, monitorGroups} = this.props.gauge
     const q = [
-      ''
-    ].join(' AND ')
+      `(deviceid:${(monitorIds || []).join(' OR ')})`,
+      `()`
+    ].join(' OR ')
+    if (servers && servers.length) {
+      q.push(
+        `(deviceid:${servers.join(' OR ')})`
+      )
+    }
+    if (monitorIds && monitorIds.length) {
+      q.push(
+        `(monitorid:${monitorIds.join(' OR ')})`
+      )
+    }
+
+    if (monitorGroups && monitorGroups.length) {
+      const ids = []
+
+    }
     return q
   }
 
