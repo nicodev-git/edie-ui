@@ -49,6 +49,14 @@ export default class IncidentTable extends React.Component {
         )
       }
     }, {
+      'displayName': 'System',
+      'columnName': 'devicename',
+      'cssClassName': 'width-120'
+    }, {
+      'displayName': 'Workflow',
+      'columnName': 'workflow',
+      'cssClassName': 'width-120'
+    }, {
       'displayName': 'Description',
       'columnName': 'description',
       'customComponent': (props) => {
@@ -59,14 +67,6 @@ export default class IncidentTable extends React.Component {
 
         return <span dangerouslySetInnerHTML={{ __html: str }} /> // eslint-disable-line react/no-danger
       }
-    }, {
-      'displayName': 'System',
-      'columnName': 'devicename',
-      'cssClassName': 'width-120'
-    }, {
-      'displayName': 'Workflow',
-      'columnName': 'workflow',
-      'cssClassName': 'width-120'
     }, {
       'displayName': 'Actions',
       'columnName': 'actions',
