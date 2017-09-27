@@ -61,7 +61,8 @@ import {
 
   TOGGLE_VIEW_COL,
   RESET_VIEW_COLS,
-  COLLAPSE_SEARCH_FIELDS
+  COLLAPSE_SEARCH_FIELDS,
+  SHOW_ENTITY_DETAIL_MODAL
 } from './types'
 import { ROOT_URL } from './config'
 import { apiError } from './Errors'
@@ -477,5 +478,11 @@ export const showSearchMonitorModal = (visible) => {
 export const showSearchDeviceModal = (visible) => {
   return dispatch => {
     dispatch({type: SHOW_SEARCH_DEVICE_MODAL, visible})
+  }
+}
+
+export const showEntityDetailModal = (visible, entity) => {
+  return dispatch => {
+    dispatch({type: SHOW_ENTITY_DETAIL_MODAL, visible, entity})
   }
 }

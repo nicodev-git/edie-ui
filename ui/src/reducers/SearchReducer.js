@@ -66,7 +66,8 @@ import {
 
   SHOW_SEARCH_DEVICE_MODAL,
 
-  UPDATE_SEARCH_MONITOR
+  UPDATE_SEARCH_MONITOR,
+  SHOW_ENTITY_DETAIL_MODAL
 } from 'actions/types'
 import { concat } from 'lodash'
 
@@ -255,6 +256,9 @@ export default function (state = initialState, action) {
       return { ...state, searchMonitorModalOpen: action.visible }
     case SHOW_SEARCH_DEVICE_MODAL:
       return { ...state, searchDeviceModalOpen: action.visible }
+    case SHOW_ENTITY_DETAIL_MODAL:
+      return { ...state, entityDetailModalOpen: action.visible, detailEntity: action.entity }
+
     default:
       return state
   }
