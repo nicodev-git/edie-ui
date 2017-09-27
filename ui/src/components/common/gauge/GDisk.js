@@ -63,6 +63,20 @@ export default class GDisk extends React.Component {
   }
 
   componentDidMount () {
+    this.startUpdate()
+  }
+
+  componentWillUnmount () {
+    this.stopUpdate()
+  }
+
+  startUpdate () {
+    this.setState({
+      loading: false,
+      disk: null,
+      searchRecordCounts: [],
+      lastUpdate: 0
+    })
     if (this.props.gauge.timing === 'realtime') {
       this.monitorSocket = new MonitorSocket({
         listener: this.onMonitorMessage.bind(this)
@@ -73,9 +87,11 @@ export default class GDisk extends React.Component {
     }
   }
 
-  componentWillUnmount () {
+  stopUpdate () {
     this.monitorSocket && this.monitorSocket.close()
   }
+
+  //////////////////////////////////////////////////////////////////////////////////////////
 
   onSocketOpen () {
     this.monitorSocket.send({
