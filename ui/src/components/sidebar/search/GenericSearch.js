@@ -141,7 +141,7 @@ class GenericSearch extends React.Component {
         params = assign(params, parsed, {
           draw: 1
         })
-        this.props.updateSearchViewFilter('')
+        this.props.updateSearchViewFilter(viewFilters.notNull.name)
         this.props.resetViewCols()
         this.updateQueryParams(params)
         this.props.change('query', params.q)
@@ -168,7 +168,7 @@ class GenericSearch extends React.Component {
         draw: 1
       })
 
-      this.props.updateSearchViewFilter('')
+      this.props.updateSearchViewFilter(viewFilters.notNull.name)
       this.props.resetViewCols()
       this.updateQueryParams(params)
       this.props.change('query', q)
@@ -486,8 +486,6 @@ class GenericSearch extends React.Component {
     this.props.fetchIrrelDevices(this.props.params)
   }
   onClickViewFilter () {
-    // if (this.props.viewFilter) this.props.updateSearchViewFilter(null)
-    // else this.props.updateSearchViewFilter('dataobj.line')
     this.props.showViewFilterModal(true)
   }
   onClickGraph () {
@@ -528,7 +526,7 @@ class GenericSearch extends React.Component {
   }
   onClickClearSearch () {
     const {updateSearchViewFilter, resetViewCols} = this.props
-    updateSearchViewFilter(null)
+    updateSearchViewFilter(viewFilters.notNull.name)
     resetViewCols()
 
     const q = [
