@@ -4,7 +4,7 @@ import EntityDetailModalView from './EntityDetailModalView'
 
 export default class EntityDetailModal extends React.Component {
   onHide () {
-
+    this.props.showEntityDetailModal(false)
   }
   render () {
     return (
