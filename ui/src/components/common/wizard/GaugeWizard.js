@@ -235,6 +235,28 @@ class GaugeWizard extends React.Component {
     })
   }
 
+  onClickToggleMonitor (monitor) {
+    let {selectedMonitors} = this.state
+    if (selectedMonitors.includes(monitor.uid)) {
+      selectedMonitors = selectedMonitors.filter(p => p !== monitor.uid)
+    } else {
+      selectedMonitors = [...selectedMonitors, monitor.uid]
+    }
+    this.setState({selectedMonitors})
+  }
+
+  onClickToggleDevice (device) {
+    let {selectedServers} = this.state
+    if (selectedServers.includes(device.id)) {
+      selectedServers = selectedServers.filter(p => p !== device.id)
+    } else {
+      selectedServers = [...selectedServers, device.id]
+    }
+    this.setState({selectedServers})
+  }
+
+  ///////////////////////////////////////////////////////////////////////////////////
+
   getSearchOptions () {
     const {userInfo} = this.props
     if (!userInfo) return []
@@ -292,7 +314,7 @@ class GaugeWizard extends React.Component {
       selectedMonitorGroup, selectedMonitorGroups
     } = this.state
     const { handleSubmit, sysSearchOptions, monitors, title, formValues, workflows, templateName,
-      devices, device, monitorGroups, gaugeBoards } = this.props
+      devices, device, monitorGroups, gaugeBoards, allDevices } = this.props
 
     const searchList = concat([], this.getSearchOptions().map(p => {
       return assign({}, p, {
@@ -372,6 +394,13 @@ class GaugeWizard extends React.Component {
         onUpdateMonitorGroup={this.onUpdateMonitorGroup.bind(this)}
         onClickAddMonitorGroup={this.onClickAddMonitorGroup.bind(this)}
         onClickRemoveMonitorGroup={this.onClickRemoveMonitorGroup.bind(this)}
+
+        allDevices={allDevices}
+        onClickToggleMonitor={this.onClickToggleMonitor.bind(this)}
+        onClickToggleDevice={this.onClickToggleDevice.bind(this)}
+
+        monitorTreeData={this.state.monitorTreeData}
+        onChangeTreeData={(monitorTreeData) => {this.setState({monitorTreeData})}}
       />
     )
   }

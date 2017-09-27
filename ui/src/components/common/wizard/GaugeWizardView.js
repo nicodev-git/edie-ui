@@ -12,6 +12,7 @@ import GaugeServerPicker from './input/GaugeServerPicker'
 import GaugeLogMonitorPicker from './input/GaugeLogMonitorPicker'
 import GaugeWorkflowPicker from './input/GaugeWorkflowPicker'
 import LogicalGroupPicker from './input/LogicalGroupPicker'
+import DeviceMonitorPicker from './input/DeviceMonitorPicker'
 import {required} from 'components/modal/validation/CommonValidation'
 
 const durations = '1 2 3 5 10 15 30'.split(' ').map(p => ({
@@ -151,7 +152,7 @@ export default class GaugeWizardView extends React.Component {
       <RaisedButton label={label}/>
     )
   }
-  renderIncidentTable () {
+  renderIncidentTable2 () {
     const {selectedSeverity, onChangeSeverity, dateFrom, dateTo, onChangeDateRange, devices} = this.props
     let deviceOptions = (devices || []).map(p => ({label: p.name, value: p.id}))
     deviceOptions = [
@@ -179,6 +180,17 @@ export default class GaugeWizardView extends React.Component {
             renderer={this.renderDateLabel.bind(this)}
           />
         </div>
+      </div>
+    )
+  }
+
+  renderIncidentTable () {
+    return (
+      <div>
+        <Field name="name" component={FormInput} floatingLabel="Name" className="valign-top mr-dialog" validate={[required]}/>
+        <DeviceMonitorPicker
+          {...this.props}
+        />
       </div>
     )
   }

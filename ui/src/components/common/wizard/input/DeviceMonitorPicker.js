@@ -1,27 +1,25 @@
 import React from 'react'
 import {Checkbox} from 'material-ui'
-import SetDefIcon from 'material-ui/svg-icons/content/sort'
-import {IconButton} from 'material-ui'
 
 import SortableTree from 'react-sortable-tree'
-import {Modal, CardPanel} from 'components/modal/parts'
 
 export default class DeviceMonitorPicker extends React.Component {
   renderMonitor (monitor) {
-    const {onClickAddMonitor, onClickRemoveMonitor, selectedMonitors} = this.props
-    const checked = selectedMonitors && selectedMonitors.includes(monitor.uid).length > 0
+    const {onClickToggleMonitor, selectedMonitors} = this.props
+    const checked = selectedMonitors && selectedMonitors.includes(monitor.uid)
     return (
       <Checkbox
-        label={monitor.name} onCheck={() => checked ? onClickRemoveMonitor(monitor.uid) : onClickAddMonitor(monitor.uid)}
+        label={monitor.name} onCheck={() => onClickToggleMonitor(monitor)}
         checked={checked}/>
     )
   }
   renderDevice (device) {
-    const {onClickDevice, selectedServers} = this.props
+    const {onClickToggleDevice, selectedServers} = this.props
+    const checked = selectedServers && selectedServers.includes(device.id)
     return (
       <Checkbox
-        label={device.name} onCheck={() => onClickDevice(device)}
-        checked={selectedServers && selectedServers.filter(p => p.id === device.id).length > 0}/>
+        label={device.name} onCheck={() => onClickToggleDevice(device)}
+        checked={checked}/>
     )
   }
   render () {
