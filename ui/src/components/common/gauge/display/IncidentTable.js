@@ -60,6 +60,14 @@ export default class IncidentTable extends React.Component {
         return <span dangerouslySetInnerHTML={{ __html: str }} /> // eslint-disable-line react/no-danger
       }
     }, {
+      'displayName': 'System',
+      'columnName': 'devicename',
+      'cssClassName': 'width-120'
+    }, {
+      'displayName': 'Workflow',
+      'columnName': 'workflow',
+      'cssClassName': 'width-120'
+    }, {
       'displayName': 'Actions',
       'columnName': 'actions',
       'cssClassName': 'nowrap width-220',
