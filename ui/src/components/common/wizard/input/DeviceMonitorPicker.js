@@ -4,25 +4,27 @@ import SetDefIcon from 'material-ui/svg-icons/content/sort'
 import {IconButton} from 'material-ui'
 
 import SortableTree from 'react-sortable-tree'
+import {Modal, CardPanel} from 'components/modal/parts'
 
 export default class DeviceMonitorPicker extends React.Component {
   renderMonitor (monitor) {
-    const {onClickMonitor, selectedMonitors} = this.props
+    const {onClickAddMonitor, onClickRemoveMonitor, selectedMonitors} = this.props
+    const checked = selectedMonitors && selectedMonitors.includes(monitor.uid).length > 0
     return (
       <Checkbox
-        label={monitor.name} onCheck={() => onClickMonitor(monitor)}
-        checked={selectedMonitors && selectedMonitors.filter(p => p.uid === monitor.uid).length > 0}/>
+        label={monitor.name} onCheck={() => checked ? onClickRemoveMonitor(monitor.uid) : onClickAddMonitor(monitor.uid)}
+        checked={checked}/>
     )
   }
   renderDevice (device) {
-    const {onClickDevice, selectedDevices} = this.props
+    const {onClickDevice, selectedServers} = this.props
     return (
       <Checkbox
         label={device.name} onCheck={() => onClickDevice(device)}
-        checked={selectedDevices && selectedDevices.filter(p => p.id === device.id).length > 0}/>
+        checked={selectedServers && selectedServers.filter(p => p.id === device.id).length > 0}/>
     )
   }
-  renderTree () {
+  render () {
     const {allDevices, onChangeTreeData, monitorTreeData, monitorGroups} = this.props
     let data = monitorTreeData
     if (!data) {
@@ -43,7 +45,7 @@ export default class DeviceMonitorPicker extends React.Component {
       })
     }
     return (
-      <div style={{ height: 600 }}>
+      <div style={{ height: 400 }}>
         <SortableTree
           treeData={data}
           onChange={onChangeTreeData}
@@ -51,20 +53,6 @@ export default class DeviceMonitorPicker extends React.Component {
           rowHeight={50}
         />
       </div>
-    )
-  }
-
-  render () {
-    const {onClickOK, onClickClose, onClickShowAny, onClickMonitorGroups} = this.props
-    return (
-      <Modal title="Devices, monitor groups and monitors" onRequestClose={onClickClose}>
-        <CardPanel
-          title="Devices, monitor groups and monitors"
-          tools={<IconButton onTouchTap={onClickMonitorGroups} tooltip="Monitor Groups"><SetDefIcon size={32}/></IconButton>}>
-          {this.renderTree()}
-        </CardPanel>
-        <TwoButtonsBlockCustom name1="Show Any" name2="OK" action1={onClickShowAny} action2={onClickOK}/>
-      </Modal>
     )
   }
 }

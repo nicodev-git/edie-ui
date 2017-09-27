@@ -40,6 +40,7 @@ export default connect(
     monitorGroups: state.settings.monitorGroups,
 
     gaugeBoards: state.gauge.gaugeBoards,
+    allDevices: state.devices.deviceAndGroups,
 
     formValues: formValueSelector('gaugeDeviceForm')(
       state, 'resource', 'monitorId', 'deviceId', 'timing')
