@@ -35,6 +35,14 @@ export default class GIncidentTable extends React.Component {
     this.props.removeDeviceGauge(this.props.gauge, this.props.device)
   }
 
+  getParams () {
+    const {logicalGroups, servers, monitorIds} = this.props.gauge
+    const q = [
+      ''
+    ].join(' AND ')
+    return q
+  }
+
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   renderFrontView () {
