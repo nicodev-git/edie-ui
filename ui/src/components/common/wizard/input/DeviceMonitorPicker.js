@@ -1,5 +1,6 @@
 import React from 'react'
 import {Checkbox} from 'material-ui'
+import {findIndex} from 'lodash'
 
 import SortableTree from 'react-sortable-tree'
 
@@ -22,6 +23,17 @@ export default class DeviceMonitorPicker extends React.Component {
         checked={checked}/>
     )
   }
+  renderMonitorGroup (group) {
+    const {onClickToggleMonitorGroup, selectedMonitorGroups, monitorGroups} = this.props
+    const checked = selectedMonitorGroups && selectedMonitorGroups.filter(p => p.id === group.id).length > 0
+    const index = findIndex(monitorGroups, {id: group.id})
+    const name = index < 0 ? '' : monitorGroups[index].name
+    return (
+      <Checkbox
+        label={name || 'No Name'} onCheck={() => onClickToggleMonitorGroup(group)}
+        checked={checked}/>
+    )
+  }
   render () {
     const {allDevices, onChangeTreeData, monitorTreeData, monitorGroups} = this.props
     let data = monitorTreeData
@@ -34,12 +46,11 @@ export default class DeviceMonitorPicker extends React.Component {
       }))
 
       monitorGroups.forEach(group => {
-        // const children = []
-        //
-        // return {
-        //   title: this.renderMonitorGroup.bind(this, group),
-        //   children
-        // }
+        const children = []
+        data.push({
+          title: this.renderMonitorGroup.bind(this, group),
+          children
+        })
       })
     }
     return (

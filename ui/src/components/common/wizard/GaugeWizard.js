@@ -255,6 +255,16 @@ class GaugeWizard extends React.Component {
     this.setState({selectedServers})
   }
 
+  onClickToggleMonitorGroup (group) {
+    let {selectedMonitorGroups} = this.state
+    if (selectedMonitorGroups.includes(group.id)) {
+      selectedMonitorGroups = selectedMonitorGroups.filter(p => p.id !== group.id)
+    } else {
+      selectedMonitorGroups = [...selectedMonitorGroups, {id: group.id}]
+    }
+    this.setState({selectedMonitorGroups})
+  }
+
   ///////////////////////////////////////////////////////////////////////////////////
 
   getSearchOptions () {
@@ -398,6 +408,7 @@ class GaugeWizard extends React.Component {
         allDevices={allDevices}
         onClickToggleMonitor={this.onClickToggleMonitor.bind(this)}
         onClickToggleDevice={this.onClickToggleDevice.bind(this)}
+        onClickToggleMonitorGroup={this.onClickToggleMonitorGroup.bind(this)}
 
         monitorTreeData={this.state.monitorTreeData}
         onChangeTreeData={(monitorTreeData) => {this.setState({monitorTreeData})}}
