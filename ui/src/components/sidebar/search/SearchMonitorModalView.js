@@ -28,7 +28,7 @@ export default class SearchMonitorModalView extends React.Component {
     const {allDevices, onChangeTreeData, monitorTreeData, monitorGroups} = this.props
     let data = monitorTreeData
     if (!data) {
-      data = allDevices.filter(p => p.monitors && p.monitors.length).map(device => ({
+      data = allDevices.map(device => ({
         title: this.renderDevice.bind(this, device),
         children: device.monitors.map(monitor => ({
           title: this.renderMonitor.bind(this, monitor)
