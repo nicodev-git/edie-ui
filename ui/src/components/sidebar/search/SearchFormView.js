@@ -28,6 +28,12 @@ export default class SearchFormView extends React.Component {
       anchorEl: e.target
     })
   }
+  hideSearchBy () {
+    this.setState({
+      openSearchBy: false
+    })
+    return true
+  }
   renderDateLabel (label) {
     return (
       <FlatButton label={label}/>
@@ -98,8 +104,8 @@ export default class SearchFormView extends React.Component {
           <div>
             <IconButton tooltip="Favorite" tooltipPosition="top-center" className="valign-top" onTouchTap={onClickStar}>{starFilled ? <FilledStar/> : <ToggleStar/>}</IconButton>
             <IconButton tooltip="Illustrate" tooltipPosition="top-center" className="valign-top" onTouchTap={onClickIllustrate}><LocalMovie/></IconButton>
-            <IconButton tooltip="Related devices" tooltipPosition="top-center" className="valign-top" onTouchTap={onClickRelDevices}><Computer/></IconButton>
-            <IconButton tooltip="Non-related devices" tooltipPosition="top-center" className="valign-top" onTouchTap={onClickIrrelDevices}><NoSim/></IconButton>
+            <IconButton tooltip="Related devices" tooltipPosition="top-center" className="valign-top hidden" onTouchTap={onClickRelDevices}><Computer/></IconButton>
+            <IconButton tooltip="Non-related devices" tooltipPosition="top-center" className="valign-top hidden" onTouchTap={onClickIrrelDevices}><NoSim/></IconButton>
             <IconButton tooltip="Views" tooltipPosition="top-center" className="valign-top" onTouchTap={onClickViewFilter}><img src="/resources/images/sidebar/search/view-icon.png" width="24" alt=""/></IconButton>
             <IconButton tooltip="Graph" tooltipPosition="top-center" className="valign-top" onTouchTap={onClickGraph}><img src="/resources/images/sidebar/search/graph-icon.png" width="24" alt=""/></IconButton>
 
@@ -118,24 +124,6 @@ export default class SearchFormView extends React.Component {
               style={{marginTop: '4px'}}/>
             <SelectField
               multiple
-              hintText="Severity"
-              value={selectedSeverities}
-              onChange={onChangeSeverity}
-              className="text-left valign-top"
-              selectionRenderer={this.severityRenderer.bind(this, severities)}
-            >
-              {severities.map(option =>
-                <MenuItem
-                  key={option.value}
-                  insetChildren
-                  checked={selectedSeverities && selectedSeverities.includes(option.value)}
-                  value={option.value}
-                  primaryText={option.label}
-                />
-              )}
-            </SelectField>
-            <SelectField
-              multiple
               hintText="Collection"
               value={selectedCollections}
               onChange={onChangeCollection}
@@ -151,27 +139,7 @@ export default class SearchFormView extends React.Component {
                 />
               )}
             </SelectField>
-            <SelectField
-              menuStyle={{
-                width: 220
-              }}
-              multiple
-              hintText="MonitorType"
-              value={selectedMonitorTypes}
-              onChange={onChangeMonitorType}
-              style={{width: '180px', overflow: 'hidden'}}
-              className="valign-top"
-            >
-              {monitorTemplates.map(option =>
-                <MenuItem
-                  key={option.id}
-                  insetChildren
-                  checked={selectedMonitorTypes && selectedMonitorTypes.includes(option.monitortype)}
-                  value={option.monitortype}
-                  primaryText={option.name}
-                />
-              )}
-            </SelectField>
+
 
             <FlatButton label="Search By" onTouchTap={this.onClickSearchBy.bind(this)} className="valign-top margin-xs-top"/>
             <Popover
@@ -179,15 +147,57 @@ export default class SearchFormView extends React.Component {
               anchorEl={this.state.anchorEl}
               anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
               targetOrigin={{horizontal: 'left', vertical: 'top'}}
-              onRequestClose={() => this.setState({openSearchBy: false})}
+              onRequestClose={this.hideSearchBy.bind(this)}
+              style={{minWidth: 300}}
             >
               <Menu>
-                <MenuItem primaryText="Workflows" onTouchTap={onClickWorkflow}/>
-                <MenuItem primaryText="Device/Monitors" onTouchTap={onClickSearchMonitor} />
-                <MenuItem primaryText="Tags" onTouchTap={onClickTags}/>
-                <MenuItem primaryText="MonitorTypes"/>
-                <MenuItem primaryText="Severity" />
+                <MenuItem primaryText="Workflows" onTouchTap={() => this.hideSearchBy() && onClickWorkflow()}/>
+                <MenuItem primaryText="Device/Monitors" onTouchTap={() => this.hideSearchBy() && onClickSearchMonitor()} />
+                <MenuItem primaryText="Tags" onTouchTap={(e) => this.hideSearchBy() && onClickTags(e)}/>
               </Menu>
+
+              <div style={{marginTop: -10}}>
+                <SelectField
+                  multiple
+                  floatingLabelText="Severity"
+                  value={selectedSeverities}
+                  onChange={onChangeSeverity}
+                  style={{width: 300}}
+                  className="text-left margin-md-left"
+                  selectionRenderer={this.severityRenderer.bind(this, severities)}
+                >
+                  {severities.map(option =>
+                    <MenuItem
+                      key={option.value}
+                      insetChildren
+                      checked={selectedSeverities && selectedSeverities.includes(option.value)}
+                      value={option.value}
+                      primaryText={option.label}
+                    />
+                  )}
+                </SelectField>
+              </div>
+
+              <div>
+                <SelectField
+                  multiple
+                  floatingLabelText="MonitorType"
+                  value={selectedMonitorTypes}
+                  onChange={onChangeMonitorType}
+                  style={{width: 300}}
+                  className="margin-md-left"
+                >
+                  {monitorTemplates.map(option =>
+                    <MenuItem
+                      key={option.id}
+                      insetChildren
+                      checked={selectedMonitorTypes && selectedMonitorTypes.includes(option.monitortype)}
+                      value={option.monitortype}
+                      primaryText={option.name}
+                    />
+                  )}
+                </SelectField>
+              </div>
             </Popover>
           </div>
         </div>
