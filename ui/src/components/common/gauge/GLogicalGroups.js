@@ -51,16 +51,16 @@ export default class GLogicalGroups extends React.Component {
     return items
   }
 
-  onClickItem (device) {
-    // const {gauge} = this.props
-    // if (gauge.forward && gauge.forwardBoardId) {
-    //   this.props.history.push({
-    //     pathname: `/dashboard/${gauge.forwardBoardId}`
-    //   })
-    // } else {
-    //   this.props.closeDevice()
-    //   this.props.history.push(`/serverdetail/${device.id}`)
-    // }
+  onClickItem (item) {
+    const {gauge} = this.props
+    const index = findIndex(gauge.logicalGroups || [], {id: item.id})
+    if (index < 0) return
+    const {dashboardId} = gauge.logicalGroups[index]
+    if (!dashboardId) return
+
+    this.props.history.push({
+      pathname: `/dashboard/${dashboardId}`
+    })
   }
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -85,7 +85,7 @@ export default class GLogicalGroups extends React.Component {
       <div className="flex-vertical flex-1">
         <div className="flex-1" style={{overflow: 'hidden'}}>
           <div style={{height: '100%', overflow: 'auto'}}>
-            {items.map(item => this.renderItemView(item, items.length))}
+            {items.map(item => this.renderItemView(item))}
           </div>
         </div>
       </div>
