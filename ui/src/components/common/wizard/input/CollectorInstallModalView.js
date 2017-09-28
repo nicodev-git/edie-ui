@@ -38,7 +38,7 @@ export default class CollectorInstallModalView extends React.Component {
           </div>
         </CardPanel>
         <a
-          href={`${ROOT_URL}/downloadCollector?filename=`}
+          href={`${ROOT_URL}/download/windows collector`}
           target="_blank"
           style={{textDecoration: 'underline', fontSize: 13}}>
           Click here to download collector.</a><br/>
