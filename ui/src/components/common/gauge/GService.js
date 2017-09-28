@@ -22,14 +22,36 @@ export default class GService extends React.Component {
   }
 
   componentDidMount () {
+    this.startUpdate()
+  }
+
+  componentDidUpdate (prevProps, prevState) {
+    if (JSON.stringify(prevProps.gauge) !== JSON.stringify(this.props.gauge)) {
+      this.stopUpdate()
+      setTimeout(() => {
+        this.startUpdate()
+      }, 10)
+    }
+  }
+
+  componentWillUnmount () {
+    this.stopUpdate()
+  }
+
+  startUpdate () {
+    this.setState({
+      loading: true,
+      isUp: false,
+      services: []
+    })
     this.monitorSocket = new MonitorSocket({
       listener: this.onMonitorMessage.bind(this)
     })
     this.monitorSocket.connect(this.onSocketOpen.bind(this))
   }
 
-  componentWillUnmount () {
-    this.monitorSocket.close()
+  stopUpdate () {
+    this.monitorSocket && this.monitorSocket.close()
   }
 
   sendCommandMessage (name, params) {

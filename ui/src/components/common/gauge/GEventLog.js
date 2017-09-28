@@ -87,14 +87,10 @@ export default class GEventLog extends React.Component {
       logNames: ['Application', 'System', 'Security'],
       selectedLogName: 'Application'
     })
-    if (this.props.gauge.timing === 'realtime') {
-      this.monitorSocket = new MonitorSocket({
-        listener: this.onMonitorMessage.bind(this)
-      })
-      this.monitorSocket.connect(this.onSocketOpen.bind(this))
-    } else {
-      this.fetchRecordCount(this.props)
-    }
+    this.monitorSocket = new MonitorSocket({
+      listener: this.onMonitorMessage.bind(this)
+    })
+    this.monitorSocket.connect(this.onSocketOpen.bind(this))
   }
 
   stopUpdate () {

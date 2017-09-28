@@ -42,15 +42,37 @@ export default class GProcessList extends React.Component {
   }
 
   componentDidMount () {
+    this.startUpdate()
+  }
+
+  componentDidUpdate (prevProps, prevState) {
+    if (JSON.stringify(prevProps.gauge) !== JSON.stringify(this.props.gauge)) {
+      this.stopUpdate()
+      setTimeout(() => {
+        this.startUpdate()
+      }, 10)
+    }
+  }
+
+  componentWillUnmount () {
+    this.stopUpdate()
+  }
+
+  startUpdate () {
+    this.setState({
+      processes: []
+    })
     this.monitorSocket = new MonitorSocket({
       listener: this.onMonitorMessage.bind(this)
     })
     this.monitorSocket.connect(this.onSocketOpen.bind(this))
   }
 
-  componentWillUnmount () {
+  stopUpdate () {
     this.monitorSocket && this.monitorSocket.close()
   }
+
+  //////////////////////////////////////////////////////////////////////////////////////////
 
   onSocketOpen () {
     this.monitorSocket.send({
@@ -62,6 +84,7 @@ export default class GProcessList extends React.Component {
   onMonitorMessage (msg) {
     if (msg.action === 'update' && msg.deviceId === this.props.device.id) {
       const {process} = msg.data
+      if (!process) return
       this.setState({
         processes: process
       })

@@ -71,14 +71,10 @@ export default class GInstallApp extends React.Component {
     this.setState({
       apps: []
     })
-    if (this.props.gauge.timing === 'realtime') {
-      this.monitorSocket = new MonitorSocket({
-        listener: this.onMonitorMessage.bind(this)
-      })
-      this.monitorSocket.connect(this.onSocketOpen.bind(this))
-    } else {
-      this.fetchRecordCount(this.props)
-    }
+    this.monitorSocket = new MonitorSocket({
+      listener: this.onMonitorMessage.bind(this)
+    })
+    this.monitorSocket.connect(this.onSocketOpen.bind(this))
   }
 
   stopUpdate () {

@@ -67,14 +67,10 @@ export default class GNetwork extends React.Component {
       searchRecordCounts: [],
       lastUpdate: 0
     })
-    if (this.props.gauge.timing === 'realtime') {
-      this.monitorSocket = new MonitorSocket({
-        listener: this.onMonitorMessage.bind(this)
-      })
-      this.monitorSocket.connect(this.onSocketOpen.bind(this))
-    } else {
-      this.fetchRecordCount(this.props)
-    }
+    this.monitorSocket = new MonitorSocket({
+      listener: this.onMonitorMessage.bind(this)
+    })
+    this.monitorSocket.connect(this.onSocketOpen.bind(this))
   }
 
   stopUpdate () {
