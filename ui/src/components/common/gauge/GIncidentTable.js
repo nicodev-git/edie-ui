@@ -38,6 +38,7 @@ export default class GIncidentTable extends React.Component {
   }
 
   getParams () {
+    const {incidentDraw} = this.props
     const {logicalGroups, servers, monitorIds, monitorGroups} = this.props.gauge
     const q = []
     if (servers && servers.length) {
@@ -68,6 +69,7 @@ export default class GIncidentTable extends React.Component {
     }
 
     return {
+      draw: incidentDraw,
       q: q.join(' OR '),
       types: 'incident'
     }
