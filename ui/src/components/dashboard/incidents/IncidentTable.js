@@ -56,7 +56,8 @@ export default class IncidentTable extends Component {
       'columnName': 'actions',
       'cssClassName': 'width-180',
       'customComponent': (p) => {
-        const row = p.rowData
+        const row = {...p.rowData.entity}
+        row.id = p.rowData.id
         // setTimeout(() => {
         //   ReactTooltip.rebuild()
         // }, 1)
