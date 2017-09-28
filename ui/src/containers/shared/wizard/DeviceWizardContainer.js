@@ -37,7 +37,7 @@ export default connect(
     monitorTemplates: state.settings.monitorTemplates,
     deviceTemplates: state.settings.deviceTemplates,
     collectors: state.settings.collectors,
-    formValues: selector(state, 'wanip', 'name', 'agentType', 'collectorId', 'distribution'),
+    formValues: selector(state, 'wanip', 'name', 'agentType', 'collectorId', 'distribution', 'agentCollectorId'),
     initialValues: {
       distribution: 'Ubuntu',
       agentType: 'collector',

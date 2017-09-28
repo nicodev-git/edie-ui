@@ -19,6 +19,7 @@ class DeviceFixModal extends React.Component {
       const found = getDeviceCollectors(editDevice, collectors)
       if (found.length) {
         this.props.change('collectorId', found[0].id)
+        this.props.change('agentCollectorId', found[0].id)
       }
     }
   }

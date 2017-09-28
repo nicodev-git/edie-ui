@@ -74,6 +74,7 @@ class DeviceWizard extends Component {
       const found = getDeviceCollectors({templateName: this.props.extraParams.templateName}, collectors)
       if (found.length) {
         this.props.change('collectorId', found[0].id)
+        this.props.change('agentCollectorId', found[0].id)
       }
     }
   }

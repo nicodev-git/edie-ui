@@ -39,7 +39,7 @@ export default connect(
       agentType: 'collector',
       ...state.devices.editDevice
     },
-    formValues: formValueSelector('editDeviceFixForm')(state, 'agentType', 'collectorId'),
+    formValues: formValueSelector('editDeviceFixForm')(state, 'agentType', 'collectorId', 'agentCollectorId'),
     deviceFixModalOpen: state.devices.deviceFixModalOpen,
     fixCode: state.devices.fixCode,
 
