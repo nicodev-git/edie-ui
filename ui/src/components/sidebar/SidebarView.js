@@ -3,6 +3,7 @@ import {Drawer, IconButton} from 'material-ui'
 import Badge from 'material-ui/Badge'
 import Divider from 'material-ui/Divider'
 import MenuIcon from 'material-ui/svg-icons/navigation/menu'
+
 import {badgeStyle, badgeRootStyle, iconStyle, iconButtonStyle, sidebarWidth, sidebarStyle} from 'style/common/materialStyles'
 
 import SearchBarContainer from './parts/SearchBarContainer'
@@ -30,8 +31,8 @@ export default class SidebarView extends Component {
   renderButton (item) {
     return (
       <IconButton
-        tooltip={item.title}
-        tooltipPosition="top-right"
+        data-tip={item.title}
+        data-place="right"
         style={iconButtonStyle}
         iconStyle={iconStyle}>
           {item.icon}
