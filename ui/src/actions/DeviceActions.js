@@ -123,6 +123,8 @@ import {
   SHOW_COLLECTOR_INSTALL_MODAL,
   TEST_COLLECTOR,
 
+  SET_ADDING_DEVICE,
+
   NO_AUTH_ERROR
 } from './types'
 
@@ -523,6 +525,10 @@ export const closeDeviceEditModal = () => {
 
 
 export const resolveAddr = (props, cb) => {
+  if (!props.wanip) {
+    cb && cb(props)
+    return
+  }
   axios.get(`${ROOT_URL}/resolve/?iporhost=${props.wanip}`).then(r1 => {
     if (r1.data && (r1.data.ip || r1.data.host)) {
       if (r1.data.ip) {
@@ -543,13 +549,21 @@ export const addDevice = (props, url) => {
     return dispatch => dispatch({ type: NO_AUTH_ERROR })
   }
   return (dispatch) => {
+    dispatch({type: SET_ADDING_DEVICE, data: true})
     resolveAddr(props, newProps => {
       axios.post(`${ROOT_URL}/${url}`, newProps).then(res => {
         dispatch({type: ADD_DEVICE, data: res.data})
-        newProps.credential.forEach(p => {
-          dispatch(addDeviceCredential(p, res.data.id))
-        })
-      }).catch(error => updateDeviceError(dispatch, error))
+        if (newProps.credential) {
+          newProps.credential.forEach(p => {
+            dispatch(addDeviceCredential(p, res.data.id))
+          })
+        }
+
+        dispatch({type: SET_ADDING_DEVICE, data: false})
+      }).catch(error => {
+        updateDeviceError(dispatch, error)
+        dispatch({type: SET_ADDING_DEVICE, data: false})
+      })
     })
   }
 }

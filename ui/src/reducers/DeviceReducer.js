@@ -116,6 +116,8 @@ import {
   TEST_COLLECTOR,
   SHOW_DEVICE_MONITORS_MODAL,
 
+  SET_ADDING_DEVICE,
+
   UPDATE_DEVICE_ERROR
 } from 'actions/types'
 
@@ -522,6 +524,9 @@ export default function (state = INITIAL_STATE, action) {
 
     case SHOW_DEVICE_MONITORS_MODAL:
       return { ...state, deviceMonitorsModalOpen: action.visible, editDevice: action.device }
+
+    case SET_ADDING_DEVICE:
+      return { ...state, addingDevice: action.data }
 
     default:
       return state

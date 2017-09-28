@@ -34,15 +34,18 @@ const selector = formValueSelector('deviceForm')
 
 export default connect(
   (state, props) => ({
-    monitorTemplates: state.settings.monitorTemplates,
-    deviceTemplates: state.settings.deviceTemplates,
-    collectors: state.settings.collectors,
     formValues: selector(state, 'wanip', 'name', 'agentType', 'collectorId', 'distribution', 'agentCollectorId'),
     initialValues: {
       distribution: 'Ubuntu',
       agentType: 'collector',
       ...state.devices.wizardInitialValues
     },
+    editDevice: state.devices.editDevice,
+    addingDevice: state.devices.addingDevice,
+
+    monitorTemplates: state.settings.monitorTemplates,
+    deviceTemplates: state.settings.deviceTemplates,
+    collectors: state.settings.collectors,
     credentials: state.settings.credentials,
     credentialTypes: state.settings.credentialTypes,
     deviceCredsPickerVisible: state.devices.deviceCredsPickerVisible,

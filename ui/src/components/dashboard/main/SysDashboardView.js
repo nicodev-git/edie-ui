@@ -150,6 +150,7 @@ export default class SysDashboardView extends React.Component {
         extraParams={extra}
         configParams={config}
         onFinish={this.onFinishAddWizard.bind(this, callback)}
+        addDevice={this.props.addDevice}
       />
     )
   }

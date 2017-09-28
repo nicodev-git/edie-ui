@@ -79,18 +79,6 @@ class DeviceWizard extends Component {
     }
   }
 
-  onChangeCredential (value) {
-    this.setState({
-      credentialSelect: value
-    })
-  }
-
-  onChangeMonitorGroupType (value) {
-    this.setState({
-      monitorGroupType: value
-    })
-  }
-
   checkDeviceAgentStatus (options = {}) {
     const {formValues, extraParams, credentials} = this.props
 
@@ -385,16 +373,30 @@ class DeviceWizard extends Component {
 
     current++
     this.setState({ current })
+    if (current === 2 && !this.props.editDevice) {
+      const { extraParams, formValues } = this.props
+      const { currentDevice } = this.state
+      const {distribution} = formValues
+
+      const props = assign(
+        {},
+        formValues,
+        currentDevice.server.params || {},
+        extraParams,
+      )
+
+      if (distribution) {
+        props.tags = [...(props.tags || []), distribution]
+      }
+
+      // this.props.addDevice(props, currentDevice.server.url, {
+      //   editDevice: true
+      // })
+    }
   }
 
   onCloseCredPicker (selected) {
     if (selected) {
-      // const {selectedDevice} = this.props
-      // const props = {
-      //   ...selectedDevice,
-      //   credentials: [selected]
-      // }
-      // this.props.updateMapDevice(props)
       this.setState({
         deviceCredentials: [...this.state.deviceCredentials, selected]
       }, () => this.checkDeviceAgentStatus())
@@ -457,10 +459,8 @@ class DeviceWizard extends Component {
   }
 
   render () {
-    const { handleSubmit, canAddTags } = this.props
+    const { handleSubmit, canAddTags, addingDevice } = this.props
     const { current, steps } = this.state
-    /* let cssPrevious = ''
-    if (current < 2) cssPrevious = onStep0 ? '' : 'hidden' */
     let header = this.props.title || this.state.currentDevice.title || ''
     let progressBar = this.buildProgressBar()
     let content = this.buildContent()
@@ -480,6 +480,7 @@ class DeviceWizard extends Component {
         canAddTags={canAddTags}
         credPicker={this.renderCredPicker()}
         collectorModal={this.renderCollectorInstallModal()}
+        addingDevice={addingDevice}
       />
     )
   }
@@ -496,10 +497,6 @@ DeviceWizard.defaultProps = {
   onStep0: null,
   onFinish: null
 }
-
-// export const MonitorWizard = reduxForm({
-//   form: 'monitorWizardForm'
-// })(DeviceWizard)
 
 export default reduxForm({
   form: 'deviceForm'
