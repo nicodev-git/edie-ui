@@ -559,7 +559,7 @@ export const addDevice = (props, url) => {
           })
         }
 
-        dispatch({type: SET_ADDING_DEVICE, data: false})
+        dispatch({type: SET_ADDING_DEVICE, data: false, device: res.data})
       }).catch(error => {
         updateDeviceError(dispatch, error)
         dispatch({type: SET_ADDING_DEVICE, data: false})

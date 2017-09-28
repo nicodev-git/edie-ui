@@ -526,7 +526,7 @@ export default function (state = INITIAL_STATE, action) {
       return { ...state, deviceMonitorsModalOpen: action.visible, editDevice: action.device }
 
     case SET_ADDING_DEVICE:
-      return { ...state, addingDevice: action.data }
+      return { ...state, addingDevice: action.data, editDevice: action.device }
 
     default:
       return state

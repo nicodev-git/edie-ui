@@ -389,9 +389,7 @@ class DeviceWizard extends Component {
         props.tags = [...(props.tags || []), distribution]
       }
 
-      // this.props.addDevice(props, currentDevice.server.url, {
-      //   editDevice: true
-      // })
+      this.props.addDevice(props, currentDevice.server.url)
     }
   }
 
