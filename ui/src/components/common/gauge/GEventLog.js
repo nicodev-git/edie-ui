@@ -74,6 +74,7 @@ export default class GEventLog extends React.Component {
   onMonitorMessage (msg) {
     if (msg.action === 'update' && msg.deviceId === this.props.device.id) {
       const {eventlog} = msg.data
+      if (!eventlog) return
       this.setState({
         eventLogs: eventlog.map((u, i) => ({...u, id: i}))
       })

@@ -50,13 +50,37 @@ export default class GFirewall extends React.Component {
   }
 
   componentDidMount () {
-    this.monitorSocket = new MonitorSocket({
-      listener: this.onMonitorMessage.bind(this)
-    })
-    this.monitorSocket.connect(this.onSocketOpen.bind(this))
+    this.startUpdate()
+  }
+
+  componentDidUpdate (prevProps, prevState) {
+    if (JSON.stringify(prevProps.gauge) !== JSON.stringify(this.props.gauge)) {
+      this.stopUpdate()
+      setTimeout(() => {
+        this.startUpdate()
+      }, 10)
+    }
   }
 
   componentWillUnmount () {
+    this.stopUpdate()
+  }
+
+  startUpdate () {
+    this.setState({
+      rules: []
+    })
+    if (this.props.gauge.timing === 'realtime') {
+      this.monitorSocket = new MonitorSocket({
+        listener: this.onMonitorMessage.bind(this)
+      })
+      this.monitorSocket.connect(this.onSocketOpen.bind(this))
+    } else {
+      this.fetchRecordCount(this.props)
+    }
+  }
+
+  stopUpdate () {
     this.monitorSocket && this.monitorSocket.close()
   }
 
@@ -71,6 +95,7 @@ export default class GFirewall extends React.Component {
   onMonitorMessage (msg) {
     if (msg.action === 'update' && msg.deviceId === this.props.device.id) {
       const {firewallRules} = msg.data
+      if (!firewallRules) return
       this.setState({
         rules: firewallRules.map((u, i) => ({...u, id: i}))
       })
