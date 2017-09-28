@@ -5,6 +5,7 @@ import {CircularProgress} from 'material-ui'
 import DeviceFixModalView from './DeviceFixModalView'
 import {showAlert} from 'components/common/Alert'
 import {getDeviceCredentials, getAgentStatusMessage, getDeviceCollectors, mergeCredentials} from 'shared/Global'
+import CollectorInstallModal from 'components/common/wizard/input/CollectorInstallModal'
 
 class DeviceFixModal extends React.Component {
   componentWillMount () {
@@ -20,6 +21,12 @@ class DeviceFixModal extends React.Component {
         this.props.change('collectorId', found[0].id)
       }
     }
+  }
+
+  componentDidMount () {
+    // const config = this.getConfig()
+    // if (!config.agentPick) return
+    // this.onChangeAgentType(null, this.props.formValues.agentType || 'collector')
   }
 
   getStatusMessage (code) {
@@ -67,55 +74,23 @@ class DeviceFixModal extends React.Component {
   }
 
   onChangeAgentType (e, value) {
-    // this.checkDeviceAgentStatus({
-    //   agentType: value
-    // })
-    // const {editDevice, formValues} = this.props
-    //
-    // const entity = {
-    //   ...editDevice,
-    //   agentType: value
-    // }
-    //
-    // if (value === 'collector') {
-    //   if (formValues.collectorId)
-    //     entity.collectorId = formValues.collectorId
-    //   else {
-    //     showAlert('Please choose collector')
-    //     setTimeout(() => {
-    //       this.props.change('agentType', '')
-    //     }, 10)
-    //     return
-    //   }
-    // }
-    //
-    // console.log(entity)
-    // this.props.fixDevice(entity)
-  }
-
-  checkDeviceAgentStatus (options = {}) {
-    const {formValues, editDevice, credentials} = this.props
+    const {editDevice, formValues} = this.props
 
     const entity = {
       ...editDevice,
       ...formValues,
-      ...options
+      agentType: value
     }
 
-    entity.credentials = mergeCredentials(entity, credentials, this.state.deviceGlobalCredentials, this.state.deviceCredentials)
-
-    if (!entity.wanip) {
-      showAlert('Please input IP')
-      return
-    }
-
-    if (!entity.collectorId && entity.agentType === 'collector') {
-      this.props.showCollectorInstallModal(true)
-      return
+    if (value === 'collector') {
+      if (!formValues.collectorId) {
+        this.props.showCollectorInstallModal(true)
+        return
+      }
     }
 
     console.log(entity)
-    this.props.fixNewDevice(entity)
+    this.props.fixDevice(entity)
   }
 
   ////////////////////////////////////////////////////////////////////////////////
@@ -158,6 +133,21 @@ class DeviceFixModal extends React.Component {
 
   ///////////////////////////////////////////////////////////////////////////////
 
+  renderCollectorInstallModal () {
+    if (!this.props.collectorInstallModalOpen) return null
+    const {collectorTestStatus, showCollectorInstallModal, fetchCollectors, testCollector} = this.props
+    const collectors = getDeviceCollectors(this.props.editDevice, this.props.collectors)
+    return (
+      <CollectorInstallModal
+        collectorTestStatus={collectorTestStatus}
+        showCollectorInstallModal={showCollectorInstallModal}
+        fetchCollectors={fetchCollectors}
+        testCollector={testCollector}
+        collectors={collectors}
+      />
+    )
+  }
+
   render () {
     const { handleSubmit } = this.props
 
@@ -171,6 +161,7 @@ class DeviceFixModal extends React.Component {
         onClickAddCreds={this.onClickAddCreds.bind(this)}
         onClickEditCreds={this.onClickEditCreds.bind(this)}
         onChangeAgentType={this.onChangeAgentType.bind(this)}
+        modals={this.renderCollectorInstallModal()}
       />
     )
   }

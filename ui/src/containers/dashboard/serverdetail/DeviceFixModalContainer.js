@@ -20,7 +20,9 @@ import {
   showDeviceCredsPicker,
 
   installAgent,
-  showCollectorInstallModal
+  showCollectorInstallModal,
+
+  testCollector
 } from 'actions'
 
 class DeviceFixModalContainer extends React.Component {
@@ -31,14 +33,13 @@ class DeviceFixModalContainer extends React.Component {
   }
 }
 
-const selector = formValueSelector('editDeviceFixForm')
-
 export default connect(
   state => ({
     initialValues: {
-      agentType: 'collector'
+      agentType: 'collector',
+      ...state.devices.editDevice
     },
-    formValues: selector(state, 'agnetType', 'collectorId'),
+    formValues: formValueSelector('editDeviceFixForm')(state, 'agentType', 'collectorId'),
     deviceFixModalOpen: state.devices.deviceFixModalOpen,
     fixCode: state.devices.fixCode,
 
@@ -54,7 +55,10 @@ export default connect(
     deviceCredsPickerVisible: state.devices.deviceCredsPickerVisible,
 
     fixStatus: state.devices.fixStatus,
-    fixResult: state.devices.fixResult
+    fixResult: state.devices.fixResult,
+
+    collectorInstallModalOpen: state.devices.collectorInstallModalOpen,
+    collectorTestStatus: state.devices.collectorTestStatus
   }), {
     fetchCollectors,
     fetchCredentials,
@@ -71,6 +75,8 @@ export default connect(
     showDeviceCredsPicker,
 
     installAgent,
-    showCollectorInstallModal
+    showCollectorInstallModal,
+
+    testCollector
   }
 )(DeviceFixModalContainer)

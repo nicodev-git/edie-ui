@@ -43,7 +43,7 @@ export default class DeviceFixModalView extends React.Component {
   }
 
   render () {
-    const {onHide, msg, onSubmit} = this.props
+    const {onHide, msg, onSubmit, modals} = this.props
     return (
       <Modal title="Fix" onRequestClose={onHide}>
         <Form onSubmit={onSubmit}>
@@ -57,6 +57,7 @@ export default class DeviceFixModalView extends React.Component {
 
           <SubmitBlock name="OK"/>
         </Form>
+        {modals}
       </Modal>
     )
   }
