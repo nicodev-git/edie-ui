@@ -113,6 +113,10 @@ export default class AgentPicker extends React.Component {
               {installing ? 'Installing...' : 'Install Agent'}
             </div>
             {installing ? <CircularProgress className="valign-top margin-md-left" size={24}/> : null}
+            <div className="inline-block margin-md-left">
+              <Field name="agentCollectorId" label="Collector" component={FormSelect} className="valign-top" options={collectorOptions}
+                     style={{marginTop: -14}}/>
+            </div>
           </div>
         )
       }
