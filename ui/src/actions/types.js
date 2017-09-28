@@ -55,6 +55,7 @@ export const DELETE_DEVICE_STATE = 'DELETE_DEVICE_STATE'
 
 // ////////////////////////////////////////////////////////////////////
 export const ADD_DEVICE = 'ADD_DEVICE'
+export const SET_ADDING_DEVICE = 'SET_ADDING_DEVICE'
 
 export const FETCH_DEVICE_INCIDENTS = 'FETCH_DEVICE_INCIDENTS'
 export const ADD_DEVICE_INCIDENT = 'ADD_DEVICE_INCIDENT'

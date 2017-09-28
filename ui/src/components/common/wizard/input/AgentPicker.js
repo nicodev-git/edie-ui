@@ -103,6 +103,8 @@ export default class AgentPicker extends React.Component {
       if (installAgent && installAgent.status === 'installed') {
         agent = {}
       } else {
+        const agentCollector = isWindowsDevice(editDevice) && !!editDevice.id
+
         agentLabel = (
           <div>
             <div className="inline-block" style={{width: 100}}>Agent</div>
@@ -112,12 +114,16 @@ export default class AgentPicker extends React.Component {
               onClick={installing ? null : this.onClickInstall.bind(this)}>
               {installing ? 'Installing...' : 'Install Agent'}
             </div>
-            <div className="inline-block margin-md-left">
-              <label className="margin-md-left">via</label>
-              <Field name="agentCollectorId" label="Collector"
-                     component={FormSelect} className="valign-top" options={collectorOptions}
-                     style={{marginTop: -12, width: 180}}/>
-            </div>
+            {
+              agentCollector ? (
+                <div className="inline-block margin-md-left">
+                  <label className="margin-md-right">via</label>
+                  <Field name="agentCollectorId" label="Collector"
+                         component={FormSelect} className="valign-top" options={collectorOptions}
+                         style={{marginTop: -12, width: 180}}/>
+                </div>
+              ) : null
+            }
             {installing ? <CircularProgress className="valign-top margin-md-left" size={24}/> : null}
           </div>
         )

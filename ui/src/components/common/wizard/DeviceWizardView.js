@@ -7,7 +7,7 @@ export default class DeviceWizardView extends Component {
     const {header, progressBar, content, current, steps, onSubmit, onHide,
       onPrev, onNext, paramEditModal, credPicker, collectorModal} = this.props
     return (
-      <Modal className="modal-device-wizard" title={header} onRequestClose={onHide} contentStyle={{width: 1035, maxWidth: 'initial'}}>
+      <Modal className="modal-device-wizard" title={header} onRequestClose={onHide} modal contentStyle={{width: 1035, maxWidth: 'initial'}}>
           <Form onSubmit={onSubmit}>
             {progressBar}
             <div style={{marginTop: -24}}>
