@@ -19,7 +19,8 @@ import {
   selectDeviceCreds,
   showDeviceCredsPicker,
 
-  installAgent
+  installAgent,
+  showCollectorInstallModal
 } from 'actions'
 
 class DeviceFixModalContainer extends React.Component {
@@ -34,6 +35,9 @@ const selector = formValueSelector('editDeviceFixForm')
 
 export default connect(
   state => ({
+    initialValues: {
+      agentType: 'collector'
+    },
     formValues: selector(state, 'agnetType', 'collectorId'),
     deviceFixModalOpen: state.devices.deviceFixModalOpen,
     fixCode: state.devices.fixCode,
@@ -66,6 +70,7 @@ export default connect(
     selectDeviceCreds,
     showDeviceCredsPicker,
 
-    installAgent
+    installAgent,
+    showCollectorInstallModal
   }
 )(DeviceFixModalContainer)

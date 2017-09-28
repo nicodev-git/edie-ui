@@ -4,7 +4,7 @@ import {CircularProgress} from 'material-ui'
 
 import DeviceFixModalView from './DeviceFixModalView'
 import {showAlert} from 'components/common/Alert'
-import {getDeviceCredentials, getAgentStatusMessage, getDeviceCollectors} from 'shared/Global'
+import {getDeviceCredentials, getAgentStatusMessage, getDeviceCollectors, mergeCredentials} from 'shared/Global'
 
 class DeviceFixModal extends React.Component {
   componentWillMount () {
@@ -67,27 +67,55 @@ class DeviceFixModal extends React.Component {
   }
 
   onChangeAgentType (e, value) {
-    const {editDevice, formValues} = this.props
+    // this.checkDeviceAgentStatus({
+    //   agentType: value
+    // })
+    // const {editDevice, formValues} = this.props
+    //
+    // const entity = {
+    //   ...editDevice,
+    //   agentType: value
+    // }
+    //
+    // if (value === 'collector') {
+    //   if (formValues.collectorId)
+    //     entity.collectorId = formValues.collectorId
+    //   else {
+    //     showAlert('Please choose collector')
+    //     setTimeout(() => {
+    //       this.props.change('agentType', '')
+    //     }, 10)
+    //     return
+    //   }
+    // }
+    //
+    // console.log(entity)
+    // this.props.fixDevice(entity)
+  }
+
+  checkDeviceAgentStatus (options = {}) {
+    const {formValues, editDevice, credentials} = this.props
 
     const entity = {
       ...editDevice,
-      agentType: value
+      ...formValues,
+      ...options
     }
 
-    if (value === 'collector') {
-      if (formValues.collectorId)
-        entity.collectorId = formValues.collectorId
-      else {
-        showAlert('Please choose collector')
-        setTimeout(() => {
-          this.props.change('agentType', '')
-        }, 10)
-        return
-      }
+    entity.credentials = mergeCredentials(entity, credentials, this.state.deviceGlobalCredentials, this.state.deviceCredentials)
+
+    if (!entity.wanip) {
+      showAlert('Please input IP')
+      return
+    }
+
+    if (!entity.collectorId && entity.agentType === 'collector') {
+      this.props.showCollectorInstallModal(true)
+      return
     }
 
     console.log(entity)
-    this.props.fixDevice(entity)
+    this.props.fixNewDevice(entity)
   }
 
   ////////////////////////////////////////////////////////////////////////////////
