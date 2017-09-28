@@ -31,7 +31,6 @@ class CredentialModal extends Component {
       {name: 'Default', type: 'checkbox'}
     ]
 
-
     return (
       <SimpleModalForm
         show
