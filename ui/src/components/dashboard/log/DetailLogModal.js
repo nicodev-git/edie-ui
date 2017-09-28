@@ -29,8 +29,13 @@ export default class DetailLogModal extends React.Component {
 
   fetchLog () {
     const {page} = this.state
+    const {detailLogViewParam} = this.props
+
+    this.setState({
+      loading: true
+    })
+
     if (page === 0) {
-      const {detailLogViewParam} = this.props
       axios.all([
         axios.get(`${ROOT_URL}/search/query?${encodeUrlParams({
           ...detailLogViewParam,
@@ -49,9 +54,23 @@ export default class DetailLogModal extends React.Component {
         this.setState({data: [...data1, ...data2], loading: false})
       })
     } else if (page < 0) {
-
+      axios.get(`${ROOT_URL}/search/query?${encodeUrlParams({
+        ...detailLogViewParam,
+        sortDir: 'desc',
+        page: -page + 1
+      })}`).then(res => {
+        this.setState({data: this.getData(res.data), loading: false})
+      })
     } else {
-
+      axios.get(`${ROOT_URL}/search/query?${encodeUrlParams({
+        ...detailLogViewParam,
+        from: detailLogViewParam.to + 1,
+        to: moment().endOf('year'),
+        page,
+        sortDir: 'asc'
+      })}`).then(res => {
+        this.setState({data: this.getData(res.data), loading: false})
+      })
     }
   }
 
@@ -61,15 +80,17 @@ export default class DetailLogModal extends React.Component {
 
   onClickPrev () {
     this.setState({
-      page: this.state.page - 1,
-      loading: true
+      page: this.state.page - 1
+    }, () => {
+      this.fetchLog()
     })
   }
 
   onClickNext () {
     this.setState({
-      page: this.state.page + 1,
-      loading: true
+      page: this.state.page + 1
+    }, () => {
+      this.fetchLog()
     })
   }
 
@@ -79,6 +100,7 @@ export default class DetailLogModal extends React.Component {
         onHide={this.onHide.bind(this)}
         rowId={this.props.detailLogViewParam.rowId}
         items={this.state.data}
+        page={this.state.page}
         loading={this.state.loading}
         onClickPrev={this.onClickPrev.bind(this)}
         onClickNext={this.onClickNext.bind(this)}
