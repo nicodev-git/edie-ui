@@ -147,7 +147,10 @@ class MainpageContainer extends Component {
   onReceiveIncidents (msg) {
     // console.log(msg)
     if (msg && msg.length && (msg[0].severity === 'HIGH' || msg[0].severity === 'MEDIUM')) {
-      this.props.addDashboardIncident(msg)
+      clearTimeout(this.incidentTimer)
+      this.incidentTimer = setTimeout(() => {
+        this.props.addDashboardIncident(msg)
+      }, 500)
     }
   }
 
