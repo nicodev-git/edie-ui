@@ -61,6 +61,7 @@ class DeviceWizard extends Component {
 
   componentWillMount () {
     this.props.clearFixStatus()
+    this.props.clearEditDevice()
     this.props.fetchMonitorTemplates()
     this.props.fetchCredentials()
     this.props.fetchCredTypes()

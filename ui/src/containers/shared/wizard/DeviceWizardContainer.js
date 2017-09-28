@@ -17,6 +17,7 @@ import {
 
   installAgent,
   clearFixStatus,
+  clearEditDevice,
   fixNewDevice,
   showCollectorInstallModal,
   testCollector
@@ -80,6 +81,7 @@ export default connect(
 
       installAgent,
       clearFixStatus,
+      clearEditDevice,
       fixNewDevice,
       showCollectorInstallModal,
       testCollector

@@ -71,7 +71,14 @@ export default class AgentPicker extends React.Component {
       return
     }
 
-    this.props.installAgent(this.props.editDevice)
+    const {editDevice} = this.props
+    const {agentCollectorId} = this.props.formValues
+    if (isWindowsDevice(editDevice) && !agentCollectorId) {
+      this.onClickAddCollector()
+      return
+    }
+
+    this.props.installAgent(editDevice, agentCollectorId)
   }
 
   renderCredPicker () {
@@ -103,7 +110,7 @@ export default class AgentPicker extends React.Component {
       if (installAgent && installAgent.status === 'installed') {
         agent = {}
       } else {
-        const agentCollector = isWindowsDevice(editDevice) && !!editDevice.id
+        const agentCollector = isWindowsDevice(editDevice)
 
         agentLabel = (
           <div>

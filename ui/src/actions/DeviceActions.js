@@ -124,6 +124,7 @@ import {
   TEST_COLLECTOR,
 
   SET_ADDING_DEVICE,
+  CLEAR_EDIT_DEVICE,
 
   NO_AUTH_ERROR
 } from './types'
@@ -1158,13 +1159,14 @@ export function selectDeviceCreds (creds) {
   }
 }
 
-export function installAgent (device) {
+export function installAgent (device, collectorId) {
   return dispatch => {
     dispatch({type: ADD_AGENT_INSTALL, data: device})
     dispatch({type: UPDATE_INSTALL_AGENT_MESSAGE, data: ''})
     axios.get(`${ROOT_URL}/installAgent`, {
       params: {
-          id: device.id
+        id: device.id,
+        collectorId
       }
     }).then(({data})=> {
       if (data.success) {
@@ -1254,6 +1256,12 @@ export function checkNewDeviceAgent (entity, cb) {
 export function clearFixStatus () {
   return dispatch => {
     dispatch({type: UPDATE_DEVICE_FIX_STATUS, data: '', result: {info: '', code: 0}})
+  }
+}
+
+export function clearEditDevice () {
+  return dispatch => {
+    dispatch({type: CLEAR_EDIT_DEVICE})
   }
 }
 

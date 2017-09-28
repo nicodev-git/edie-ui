@@ -117,6 +117,7 @@ import {
   SHOW_DEVICE_MONITORS_MODAL,
 
   SET_ADDING_DEVICE,
+  CLEAR_EDIT_DEVICE,
 
   UPDATE_DEVICE_ERROR
 } from 'actions/types'
@@ -528,6 +529,8 @@ export default function (state = INITIAL_STATE, action) {
     case SET_ADDING_DEVICE:
       return { ...state, addingDevice: action.data, editDevice: action.device }
 
+    case CLEAR_EDIT_DEVICE:
+      return { ...state, editDevice: null}
     default:
       return state
   }
