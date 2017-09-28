@@ -13,10 +13,7 @@ import {
   fixAllDeviceIncidents,
   closeDevice,
 
-  replaceSearchWfs,
-  updateQueryChips,
-  updateSearchParams,
-  updateSearchTags,
+  updateQueryParams,
 
   fixDeviceIncidents,
   updateDeviceIncident
@@ -51,10 +48,7 @@ export default connect(
       fixAllDeviceIncidents,
       closeDevice,
 
-      replaceSearchWfs,
-      updateQueryChips,
-      updateSearchParams,
-      updateSearchTags,
+      updateQueryParams,
 
       fixDeviceIncidents,
       updateDeviceIncident

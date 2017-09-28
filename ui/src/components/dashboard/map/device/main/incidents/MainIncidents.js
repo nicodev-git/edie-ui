@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import moment from 'moment'
-import { findIndex, assign, debounce } from 'lodash'
+import { findIndex, debounce } from 'lodash'
 import {
   RaisedButton,
   MenuItem,
@@ -21,7 +21,7 @@ import AddExceptionModal from './AddExceptionModal'
 import CommentsModal from 'components/common/incident/CommentsModal'
 
 import { showAlert, showPrompt } from 'components/common/Alert'
-import { getSeverityIcon, parseSearchQuery, dateFormat, encodeUrlParams, severities } from 'shared/Global'
+import { getSeverityIcon, encodeUrlParams, severities } from 'shared/Global'
 import MainTabs from '../MainTabs'
 import TabPage from 'components/common/TabPage'
 import TabPageBody from 'components/common/TabPageBody'
@@ -277,22 +277,18 @@ export default class MainIncidents extends Component {
   }
 
   onClickEvents () {
-    const query = `deviceid=${this.props.device.id}`
-    const queryChips = parseSearchQuery(query)
-    this.props.history.push('/search')
-    this.props.updateSearchParams(assign({}, this.props.params, {
-      query,
-      severity: 'HIGH,MEDIUM',
-      collections: 'event',
-      workflow: '',
-      tag: '',
-      dateFrom: moment().startOf('year').format(dateFormat),
-      dateTo: moment().endOf('year').format(dateFormat)
-    }), this.props.history)
+    const q = [
+      '(type:event)',
+      `(from:Ever)`,
+      `(deviceid:${this.props.device.id})`
+    ].join(' AND ')
 
-    this.props.replaceSearchWfs([])
-    this.props.updateSearchTags([])
-    this.props.updateQueryChips(queryChips)
+    this.props.updateQueryParams({
+      q
+    }, {
+      q: `(deviceid:${this.props.device.id})`,
+      types: 'event'
+    }, this.props.history)
   }
 
   onChangeSeverity (e, index, values) {
