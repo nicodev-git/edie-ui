@@ -45,14 +45,20 @@ export default class GEventLog extends React.Component {
   }
 
   componentDidMount () {
-    this.monitorSocket = new MonitorSocket({
-      listener: this.onMonitorMessage.bind(this)
-    })
-    this.monitorSocket.connect(this.onSocketOpen.bind(this))
+    this.startUpdate()
+  }
+
+  componentDidUpdate (prevProps, prevState) {
+    if (JSON.stringify(prevProps.gauge) !== JSON.stringify(this.props.gauge)) {
+      this.stopUpdate()
+      setTimeout(() => {
+        this.startUpdate()
+      }, 10)
+    }
   }
 
   componentWillUnmount () {
-    this.monitorSocket && this.monitorSocket.close()
+    this.stopUpdate()
   }
 
   onSocketOpen () {
@@ -73,6 +79,28 @@ export default class GEventLog extends React.Component {
       })
     }
   }
+
+  startUpdate () {
+    this.setState({
+      eventLogs: [],
+      logNames: ['Application', 'System', 'Security'],
+      selectedLogName: 'Application'
+    })
+    if (this.props.gauge.timing === 'realtime') {
+      this.monitorSocket = new MonitorSocket({
+        listener: this.onMonitorMessage.bind(this)
+      })
+      this.monitorSocket.connect(this.onSocketOpen.bind(this))
+    } else {
+      this.fetchRecordCount(this.props)
+    }
+  }
+
+  stopUpdate () {
+    this.monitorSocket && this.monitorSocket.close()
+  }
+
+  //////////////////////////////////////////////////////////////////////////////////////////
 
   onChangeLog (e, index, value) {
     this.setState({
