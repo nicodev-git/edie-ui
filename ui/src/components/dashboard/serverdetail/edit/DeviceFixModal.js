@@ -4,7 +4,7 @@ import {CircularProgress} from 'material-ui'
 
 import DeviceFixModalView from './DeviceFixModalView'
 import {showAlert} from 'components/common/Alert'
-import {getDeviceCredentials, getAgentStatusMessage} from 'shared/Global'
+import {getDeviceCredentials, getAgentStatusMessage, getDeviceCollectors} from 'shared/Global'
 
 class DeviceFixModal extends React.Component {
   componentWillMount () {
@@ -12,14 +12,16 @@ class DeviceFixModal extends React.Component {
     this.props.fetchCredTypes()
     this.props.fetchCollectors()
   }
-  // componentWillUpdate(nextProps) {
-  //   const {collectors} = nextProps
-  //   if (this.props.collectors != collectors && collectors.length) {
-  //     if (!nextProps.formValues.collectorId) {
-  //       nextProps.change('collectorId', collectors[0].id)
-  //     }
-  //   }
-  // }
+  componentWillUpdate(nextProps) {
+    const {collectors, editDevice} = nextProps
+    if (this.props.collectors !== collectors && collectors.length && !nextProps.formValues.collectorId) {
+      const found = getDeviceCollectors(editDevice, collectors)
+      if (found.length) {
+        this.props.change('collectorId', found[0].id)
+      }
+    }
+  }
+
   getStatusMessage (code) {
     return getAgentStatusMessage(code)
   }
