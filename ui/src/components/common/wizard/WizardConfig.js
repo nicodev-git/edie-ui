@@ -324,6 +324,15 @@ export const wizardConfig = {
           },
           width: MAX_WIDTH,
           name: 'wanip'
+        }, {
+          type: 'text',
+          label: {
+            text: 'Hostname',
+            type: 'attach',
+            width: 3
+          },
+          width: MAX_WIDTH,
+          name: 'hostname'
         }]
       }, {
         title: 'Agent',
@@ -401,6 +410,15 @@ export const wizardConfig = {
           },
           width: MAX_WIDTH,
           name: 'wanip'
+        }, {
+          type: 'text',
+          label: {
+            text: 'Hostname',
+            type: 'attach',
+            width: 3
+          },
+          width: MAX_WIDTH,
+          name: 'hostname'
         }]
       }, {
         title: 'Agent',
