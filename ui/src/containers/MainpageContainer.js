@@ -150,7 +150,7 @@ class MainpageContainer extends Component {
       clearTimeout(this.incidentTimer)
       this.incidentTimer = setTimeout(() => {
         this.props.addDashboardIncident(msg)
-      }, 500)
+      }, 1000)
     }
   }
 
