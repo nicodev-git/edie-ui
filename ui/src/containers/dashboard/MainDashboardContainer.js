@@ -44,10 +44,10 @@ import {
   closeDeviceMonitorWizard,
   openDeviceMonitorPicker,
   closeDeviceMonitorPicker,
-  updateMapDevice,
 
   showDeviceTplPicker,
   addDevice,
+  updateMapDevice,
   deleteMapDevice,
   showMonitorDetailModal
 } from 'actions'
@@ -134,10 +134,10 @@ export default connect(
     closeDeviceMonitorWizard,
     openDeviceMonitorPicker,
     closeDeviceMonitorPicker,
-    updateMapDevice,
 
     showDeviceTplPicker,
     addDevice,
+    updateMapDevice,
     deleteMapDevice,
     showMonitorDetailModal
   }

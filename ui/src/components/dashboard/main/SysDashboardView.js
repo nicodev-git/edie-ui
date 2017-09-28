@@ -83,8 +83,9 @@ export default class SysDashboardView extends React.Component {
   }
 
   onFinishAddWizard (callback, res, params, url) {
-    console.log(params)
-    this.props.addDevice(params, url)
+    // console.log(params)
+    // this.props.addDevice(params, url)
+    this.props.updateMapDevice(params)
   }
 
   /////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -151,6 +152,7 @@ export default class SysDashboardView extends React.Component {
         configParams={config}
         onFinish={this.onFinishAddWizard.bind(this, callback)}
         addDevice={this.props.addDevice}
+        removeDevice={this.props.deleteMapDevice}
       />
     )
   }

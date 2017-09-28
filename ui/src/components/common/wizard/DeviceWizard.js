@@ -112,7 +112,7 @@ class DeviceWizard extends Component {
   }
 
   handleFormSubmit (formProps) {
-    const { extraParams, onFinish, editParams, canAddTags, monitorTags, credentials, fixResult, fixStatus } = this.props
+    const { extraParams, onFinish, editParams, canAddTags, monitorTags, credentials, fixResult, fixStatus, editDevice } = this.props
     const { monitors, currentDevice, deviceGlobalCredentials, deviceCredentials } = this.state
     const {distribution} = formProps
     const params = {}
@@ -124,6 +124,7 @@ class DeviceWizard extends Component {
 
     const props = assign(
       {},
+      editDevice,
       formProps,
       currentDevice.server.params || {},
       extraParams, {
@@ -353,6 +354,10 @@ class DeviceWizard extends Component {
   }
 
   closeModal (data) {
+    const {editDevice, removeDevice} = this.props
+    if (!data && editDevice && removeDevice) {
+      removeDevice(editDevice)
+    }
     this.props.onClose && this.props.onClose(this, data)
   }
 
@@ -373,7 +378,7 @@ class DeviceWizard extends Component {
 
     current++
     this.setState({ current })
-    if (current === 2 && !this.props.editDevice) {
+    if (current === 2 && !this.props.editDevice && this.props.addDevice) {
       const { extraParams, formValues } = this.props
       const { currentDevice } = this.state
       const {distribution} = formValues
@@ -471,7 +476,7 @@ class DeviceWizard extends Component {
         current={current}
         steps={steps}
         paramEditModal={paramEditModal}
-        onHide={this.closeModal.bind(this)}
+        onHide={() => this.closeModal()}
         onPrev={this.onClickPrevious.bind(this)}
         onNext={this.onClickNext.bind(this)}
         onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
