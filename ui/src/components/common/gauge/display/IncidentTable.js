@@ -71,7 +71,8 @@ export default class IncidentTable extends React.Component {
       'columnName': 'entity.actions',
       'cssClassName': 'nowrap width-220',
       'customComponent': (p) => {
-        const row = p.rowData
+        const row = p.rowData.entity
+        row.id = p.rowData.id
         return (
           <div className="table-icons-container">
             <div onClick={() => showIncidentDetail(row)}>
