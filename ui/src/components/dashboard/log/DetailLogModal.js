@@ -24,24 +24,35 @@ export default class DetailLogModal extends React.Component {
   }
 
   componentWillMount () {
-    const {detailLogViewParam} = this.props
-    axios.all([
-      axios.get(`${ROOT_URL}/search/query?${encodeUrlParams({
-        ...detailLogViewParam,
-        sortDir: 'desc'
-      })}`),
-      axios.get(`${ROOT_URL}/search/query?${encodeUrlParams({
-        ...detailLogViewParam,
-        from: detailLogViewParam.to + 1,
-        to: moment().endOf('year'),
-        sortDir: 'asc'
-      })}`)
-    ]).then(res => {
-      const data1 = reverse(this.getData(res[0].data))
-      const data2 = this.getData(res[1].data)
+    this.fetchLog()
+  }
 
-      this.setState({data: [...data1, ...data2], loading: false})
-    })
+  fetchLog () {
+    const {page} = this.state
+    if (page === 0) {
+      const {detailLogViewParam} = this.props
+      axios.all([
+        axios.get(`${ROOT_URL}/search/query?${encodeUrlParams({
+          ...detailLogViewParam,
+          sortDir: 'desc'
+        })}`),
+        axios.get(`${ROOT_URL}/search/query?${encodeUrlParams({
+          ...detailLogViewParam,
+          from: detailLogViewParam.to + 1,
+          to: moment().endOf('year'),
+          sortDir: 'asc'
+        })}`)
+      ]).then(res => {
+        const data1 = reverse(this.getData(res[0].data))
+        const data2 = this.getData(res[1].data)
+
+        this.setState({data: [...data1, ...data2], loading: false})
+      })
+    } else if (page < 0) {
+
+    } else {
+
+    }
   }
 
   onHide () {
