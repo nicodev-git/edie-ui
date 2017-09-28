@@ -51,15 +51,41 @@ export default class GInstallApp extends React.Component {
   }
 
   componentDidMount () {
-    this.monitorSocket = new MonitorSocket({
-      listener: this.onMonitorMessage.bind(this)
-    })
-    this.monitorSocket.connect(this.onSocketOpen.bind(this))
+    this.startUpdate()
+  }
+
+  componentDidUpdate (prevProps, prevState) {
+    if (JSON.stringify(prevProps.gauge) !== JSON.stringify(this.props.gauge)) {
+      this.stopUpdate()
+      setTimeout(() => {
+        this.startUpdate()
+      }, 10)
+    }
   }
 
   componentWillUnmount () {
+    this.stopUpdate()
+  }
+
+  startUpdate () {
+    this.setState({
+      apps: []
+    })
+    if (this.props.gauge.timing === 'realtime') {
+      this.monitorSocket = new MonitorSocket({
+        listener: this.onMonitorMessage.bind(this)
+      })
+      this.monitorSocket.connect(this.onSocketOpen.bind(this))
+    } else {
+      this.fetchRecordCount(this.props)
+    }
+  }
+
+  stopUpdate () {
     this.monitorSocket && this.monitorSocket.close()
   }
+
+  //////////////////////////////////////////////////////////////////////////////////////////
 
   onSocketOpen () {
     this.monitorSocket.send({
@@ -71,6 +97,7 @@ export default class GInstallApp extends React.Component {
   onMonitorMessage (msg) {
     if (msg.action === 'update' && msg.deviceId === this.props.gauge.deviceId) {
       const {app} = msg.data
+      if (!app) return
       this.setState({
         apps: app.map((u, i) => ({...u, id: i}))
       })
