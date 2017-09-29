@@ -4,8 +4,9 @@ import { connect } from 'react-redux'
 import { merge, assign, concat, isArray, keys, findIndex, debounce } from 'lodash'
 import moment from 'moment'
 import ReactTooltip from 'react-tooltip'
-import {Popover, FlatButton, Chip} from 'material-ui'
+import {Popover, FlatButton, Chip, IconButton} from 'material-ui'
 import NavigationClose from 'material-ui/svg-icons/navigation/close'
+import PageViewIcon from 'material-ui/svg-icons/action/pageview'
 import {parse} from 'query-string'
 import QueryParser from 'lucene'
 
@@ -121,7 +122,7 @@ class GenericSearch extends React.Component {
               </div>
             ) : null}
             <div className="position-abr link text-primary">
-              JSON
+              <IconButton onTouchTap={this.onClickEntityView.bind(this, rowData)}><PageViewIcon /></IconButton>
             </div>
           </div>
         )
@@ -573,10 +574,8 @@ class GenericSearch extends React.Component {
     this.props.showSearchMonitorModal(true)
   }
 
-  onClickEntityView () {
-    const selected = this.refs.table.getSelected()
-    if (!selected) return
-    this.props.showEntityDetailModal(true, selected)
+  onClickEntityView (data) {
+    this.props.showEntityDetailModal(true, data)
   }
 
   redrawSearch () {

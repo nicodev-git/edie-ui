@@ -8,12 +8,15 @@ export default class EntityDetailModalView extends React.Component {
     return (
       <Modal title="Detail" onRequestClose={onHide} contentStyle={{width: 1035, maxWidth: 'initial'}}>
         <CardPanel title="Detail">
-          <ReactJson
-            name={false}
-            displayDataTypes={false}
-            displayObjectSize={false}
-            src={detailEntity}
-          />
+          <div style={{width: '100%', overflow: 'auto'}}>
+            <ReactJson
+              name={false}
+              displayDataTypes={false}
+              displayObjectSize={false}
+              src={detailEntity}
+            />
+          </div>
+
         </CardPanel>
       </Modal>
     )
