@@ -155,7 +155,7 @@ export default class SearchFormView extends React.Component {
                 <MenuItem primaryText="Tags" onTouchTap={(e) => this.hideSearchBy() && onClickTags(e)}/>
               </Menu>
 
-              <div style={{marginTop: -10}}>
+              <div style={{marginTop: -35}}>
                 <SelectField
                   multiple
                   floatingLabelText="Severity"
@@ -177,7 +177,7 @@ export default class SearchFormView extends React.Component {
                 </SelectField>
               </div>
 
-              <div>
+              <div style={{marginTop: -20}}>
                 <SelectField
                   multiple
                   floatingLabelText="MonitorType"
