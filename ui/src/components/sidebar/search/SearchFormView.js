@@ -9,7 +9,6 @@ import LocalMovie from 'material-ui/svg-icons/maps/local-movies'
 import Computer from 'material-ui/svg-icons/hardware/computer'
 import NoSim from 'material-ui/svg-icons/communication/no-sim'
 import ClearIcon from 'material-ui/svg-icons/content/clear'
-import ViewColumnIcon from 'material-ui/svg-icons/action/view-column'
 
 import { FormInput } from 'components/modal/parts'
 import DateRangePicker from 'components/common/DateRangePicker'
@@ -81,8 +80,6 @@ export default class SearchFormView extends React.Component {
       onClickClear,
       onClickSearch,
 
-      onClickToggleFields,
-
       onClickSearchMonitor
     } = this.props
     return (
@@ -106,9 +103,6 @@ export default class SearchFormView extends React.Component {
             <IconButton tooltip="Graph" tooltipPosition="top-center" className="valign-top" onTouchTap={onClickGraph}><img src="/resources/images/sidebar/search/graph-icon.png" width="24" alt=""/></IconButton>
 
             <IconButton tooltip="Clear" tooltipPosition="top-center" className="valign-top" onTouchTap={onClickClear}><ClearIcon /></IconButton>
-
-            <IconButton tooltip="Toggle Fields" tooltipPosition="top-center" className="valign-top" onTouchTap={onClickToggleFields}><ViewColumnIcon /></IconButton>
-
 
             <DateRangePicker
               className="valign-top"

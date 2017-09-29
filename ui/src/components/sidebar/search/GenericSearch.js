@@ -587,7 +587,7 @@ class GenericSearch extends React.Component {
   renderFields () {
     const {selectedField} = this.props
     return (
-      <div className="padding-sm" style={{position: 'absolute', height: '100%', minWidth: '100%'}}>
+      <div style={{position: 'absolute', height: '100%', minWidth: '100%'}}>
         <div className="header-blue">
           Fields
         </div>
@@ -879,6 +879,20 @@ class GenericSearch extends React.Component {
     }
   }
 
+  renderSidebarCollapse () {
+    const {searchFieldsVisible} = this.props
+    return (
+      <div style={{width: 24, height: '100%', position: 'relative'}}>
+        <img src={`resources/images/dashboard/${searchFieldsVisible ? 'backward' : 'forward'}.png`}
+             width="24" height="48" alt=""
+             className="link"
+             style={{position: 'absolute', top: '50%', transform: 'translate(0, -50%)'}}
+             onClick={this.onClickToggleFields.bind(this)}
+        />
+      </div>
+    )
+  }
+
   render () {
     const { handleSubmit, monitorTemplates, searchTags, queryChips, selectedWfs } = this.props
     const { severity, monitorTypes, from, to, types } = this.getParams()
@@ -916,7 +930,6 @@ class GenericSearch extends React.Component {
             onClickTags={this.onClickTags.bind(this)}
 
             onClickClear={this.onClickClearSearch.bind(this)}
-            onClickToggleFields={this.onClickToggleFields.bind(this)}
 
             onClickSearchMonitor={this.onClickSearchMonitor.bind(this)}
 
@@ -970,7 +983,8 @@ class GenericSearch extends React.Component {
         <TabPageBody tabs={[]} tab={0} history={this.props.history} location={this.props.location}>
           <div className="flex-horizontal" style={{height: '100%'}}>
             {this.renderFieldsView()}
-            <div className="flex-1 flex-vertical padding-sm">
+            {this.renderSidebarCollapse()}
+            <div className="flex-1 flex-vertical">
               <div className="header-red">
                 Content
                 <div className="pull-right">
