@@ -11,6 +11,17 @@ import {showAlert} from 'components/common/Alert'
 import {isWindowsDevice, getDeviceCollectors} from 'shared/Global'
 
 export default class AgentPicker extends React.Component {
+  componentWillUpdate(nextProps) {
+    const {collectors, editDevice} = nextProps
+    if (editDevice && this.props.collectors !== collectors && collectors.length) {
+      const found = getDeviceCollectors(editDevice, collectors)
+      if (found.length) {
+        if (!nextProps.formValues.collectorId) this.props.change('collectorId', found[0].id)
+        if (!nextProps.formValues.agentCollectorId) this.props.change('agentCollectorId', found[0].id)
+      }
+    }
+  }
+
   componentWillReceiveProps (nextProps) {
     const {installAgentMessage, meta, editDevice} = nextProps
     if (!this.props.installAgentMessage && installAgentMessage) {
@@ -40,8 +51,17 @@ export default class AgentPicker extends React.Component {
   ///////////////////////////////////////////////////////////////
 
   startAgentCheck () {
+    this.agentCheckStarted = new Date().getTime()
     this.agentCheckTimer = setInterval(() => {
       const {editDevice} = this.props
+      const now = new Date().getTime()
+
+      if ((now - this.agentCheckStarted) > 30 * 1000) {
+        //If 30secs timeout
+        this.props.updateInstallAgentStatus(editDevice, false, 'Timed out')
+        this.stopAgentCheck()
+        return
+      }
       if (!editDevice) return
       this.props.fetchDevice(editDevice.id)
     }, 3000)
@@ -124,7 +144,7 @@ export default class AgentPicker extends React.Component {
       label: p.name, value: p.id
     }))
 
-    let agentLabel = 'Agent'
+    let agentCombo = ''
     if (agent && (new Date().getTime() - agent.lastSeen) > 3 * 60 * 1000) agent = null
 
     if (!agent) {
@@ -136,9 +156,8 @@ export default class AgentPicker extends React.Component {
       } else {
         const isWin = isWindowsDevice(editDevice)
 
-        agentLabel = (
-          <div>
-            <div className="inline-block" style={{width: 100}}>Agent</div>
+        agentCombo = (
+          <div style={{position: 'absolute', top: 40, left: 130, zIndex: 3}}>
             <div
               className="inline-block"
               style={{textDecoration: 'underline', color: 'rgba(0, 0, 0, 0.87)', cursor: 'pointer'}}
@@ -151,6 +170,7 @@ export default class AgentPicker extends React.Component {
                   <label className="margin-md-right">via</label>
                   <Field name="agentCollectorId" label="Collector"
                          component={FormSelect} className="valign-top" options={collectorOptions}
+                         defaultValue={collectorOptions.length ? collectorOptions[0].value : null}
                          style={{marginTop: -12, width: 180}}/>
                 </div>
               ) : null
@@ -161,6 +181,9 @@ export default class AgentPicker extends React.Component {
       }
     }
 
+    const agentLabel = (
+      <div style={{width: 100}} className="inline-block">Agent</div>
+    )
     const collectorLabel = (
       <div style={{width: 100}} className="inline-block">Collector</div>
     )
@@ -170,9 +193,11 @@ export default class AgentPicker extends React.Component {
         <Field name="agentType" component={RadioButtonGroup} className="margin-md-top" onChange={onChange}>
           <RadioButton value="" label="None" className="pull-left"/>
           <RadioButton value="agent" label={agentLabel} className="pull-left" disabled={!agent} style={{marginTop: 14, cursor: 'pointer'}}
-                       inputStyle={{width: 120}}/>
+                       />
           <RadioButton value="collector" label={collectorLabel} className="pull-left" style={{width: 120, marginTop: 14}}/>
         </Field>
+
+        {agentCombo}
 
         <Field name="collectorId" label="Collector" component={FormSelect} className="pull-left" options={collectorOptions}/>
         <IconButton className="pull-left hidden" onTouchTap={this.onClickAddCollector.bind(this)}><AddCircleIcon/></IconButton>

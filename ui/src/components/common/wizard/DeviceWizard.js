@@ -69,17 +69,6 @@ class DeviceWizard extends Component {
     this.props.fetchCollectors()
   }
 
-  componentWillUpdate(nextProps) {
-    const {collectors} = nextProps
-    if (this.props.collectors !== collectors && collectors.length && !nextProps.formValues.collectorId) {
-      const found = getDeviceCollectors({templateName: this.props.extraParams.templateName}, collectors)
-      if (found.length) {
-        this.props.change('collectorId', found[0].id)
-        this.props.change('agentCollectorId', found[0].id)
-      }
-    }
-  }
-
   checkDeviceAgentStatus (options = {}) {
     const {formValues, extraParams, credentials} = this.props
 
