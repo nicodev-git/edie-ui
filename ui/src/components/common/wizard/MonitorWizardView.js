@@ -10,6 +10,10 @@ const paramLabels = {
   'timeout': 'Timeout (seconds)'
 }
 
+const paramHints = {
+  'filepath': '/var/log/messages'
+}
+
 const durationOptions = [1,2,3,5,10,15,20,25].map(p => ({
   label: `${p}`, value: p
 }))
@@ -35,7 +39,14 @@ export default class MonitorWizardView extends React.Component {
           options={integratedOptions}
           className="margin-sm-left margin-sm-right"/>
       }
-      return <Field key={k} name={k} floatingLabel={paramLabels[k] || k} component={FormInput} className="margin-sm-left margin-sm-right"/>
+      const hintText = paramHints[k] || ''
+      return (
+        <Field
+          key={k} name={k} floatingLabel={paramLabels[k] || k}
+          component={FormInput} className="margin-sm-left margin-sm-right"
+          label={hintText}
+        />
+      )
     })
   }
   render () {
