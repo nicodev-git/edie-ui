@@ -12,7 +12,7 @@ import {isWindowsDevice, getDeviceCollectors} from 'shared/Global'
 
 export default class AgentPicker extends React.Component {
   componentWillReceiveProps (nextProps) {
-    const {installAgentMessage, meta} = nextProps
+    const {installAgentMessage, meta, editDevice} = nextProps
     if (!this.props.installAgentMessage && installAgentMessage) {
       showAlert(installAgentMessage)
     }
@@ -27,6 +27,19 @@ export default class AgentPicker extends React.Component {
   getCollectors () {
     const {editDevice, collectors} = this.props
     return getDeviceCollectors(editDevice, collectors)
+  }
+  ///////////////////////////////////////////////////////////////
+
+  startAgentCheck () {
+    this.agentCheckTimer = setInterval(() => {
+      const {editDevice} = this.props
+      if (!editDevice) return
+      this.props.fetchDevice(editDevice.id)
+    }, 3000)
+  }
+
+  stopAgentCheck () {
+    clearInterval(this.agentCheckTimer)
   }
 
   ///////////////////////////////////////////////////////////////
@@ -110,7 +123,7 @@ export default class AgentPicker extends React.Component {
       if (installAgent && installAgent.status === 'installed') {
         agent = {}
       } else {
-        const agentCollector = isWindowsDevice(editDevice)
+        const isWin = isWindowsDevice(editDevice)
 
         agentLabel = (
           <div>
@@ -122,7 +135,7 @@ export default class AgentPicker extends React.Component {
               {installing ? 'Installing...' : 'Install Agent'}
             </div>
             {
-              agentCollector ? (
+              isWin ? (
                 <div className="inline-block margin-md-left">
                   <label className="margin-md-right">via</label>
                   <Field name="agentCollectorId" label="Collector"

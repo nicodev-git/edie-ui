@@ -131,7 +131,7 @@ import {
 
 import { apiError, updateDeviceError } from './Errors'
 import { ROOT_URL } from './config'
-import { encodeUrlParams, filterDevices } from 'shared/Global'
+import { encodeUrlParams, filterDevices, isWindowsDevice } from 'shared/Global'
 import { getAuthConfig, getWorkflowConfig } from './util'
 
 import {addDeviceCredential} from './CredentialsActions'
@@ -1170,6 +1170,10 @@ export function installAgent (device, collectorId) {
       }
     }).then(({data})=> {
       if (data.success) {
+        if (isWindowsDevice(device)) {
+          //skip message show
+          return
+        }
         dispatch({type: UPDATE_AGENT_INSTALL, data: device, status: 'installed'})
         dispatch(fetchDevice(device.id))
       } else {
