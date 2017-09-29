@@ -72,7 +72,7 @@ export default class MonitorTable extends Component {
 
   onClickEditMonitor (monitor) {
     this.setState({ monitorWizardVisible: true, editMonitor: monitor, monitorConfig: monitor })
-    this.props.openDeviceMonitorWizard(monitor)
+    this.props.openDeviceMonitorWizard(monitor, monitor)
   }
 
   onClickRemoveMonitor (monitor) {
@@ -87,7 +87,7 @@ export default class MonitorTable extends Component {
   }
 
   addMonitor (monitorConfig) {
-    this.props.openDeviceMonitorWizard(monitorConfig)
+    this.props.openDeviceMonitorWizard(monitorConfig, monitorConfig)
     this.setState({ monitorWizardVisible: true, monitorConfig })
   }
 
