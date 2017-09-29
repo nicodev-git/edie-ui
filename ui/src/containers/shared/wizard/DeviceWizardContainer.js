@@ -12,6 +12,8 @@ import {
   showDeviceCredsPicker,
   showCredListModal,
 
+  fetchDevice,
+
   fetchMonitorGroups,
   fetchCollectors,
 
@@ -77,6 +79,8 @@ export default connect(
       fetchCredentials,
       showDeviceCredsPicker,
       showCredListModal,
+
+      fetchDevice,
 
       fetchMonitorGroups,
       fetchCollectors,
