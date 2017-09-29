@@ -91,6 +91,7 @@ export default class SearchFormView extends React.Component {
             </div>
             <div>
               <IconButton tooltip="Search" onTouchTap={onClickSearch} type="submit" className="valign-top"><ActionSearch /></IconButton>
+              <IconButton tooltip="Clear" className="valign-top" onTouchTap={onClickClear}><ClearIcon /></IconButton>
             </div>
           </div>
 
@@ -101,8 +102,6 @@ export default class SearchFormView extends React.Component {
             <IconButton tooltip="Non-related devices" tooltipPosition="top-center" className="valign-top hidden" onTouchTap={onClickIrrelDevices}><NoSim/></IconButton>
             <IconButton tooltip="Views" tooltipPosition="top-center" className="valign-top" onTouchTap={onClickViewFilter}><img src="/resources/images/sidebar/search/view-icon.png" width="24" alt=""/></IconButton>
             <IconButton tooltip="Graph" tooltipPosition="top-center" className="valign-top" onTouchTap={onClickGraph}><img src="/resources/images/sidebar/search/graph-icon.png" width="24" alt=""/></IconButton>
-
-            <IconButton tooltip="Clear" tooltipPosition="top-center" className="valign-top" onTouchTap={onClickClear}><ClearIcon /></IconButton>
 
             <DateRangePicker
               className="valign-top"
