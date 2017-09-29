@@ -28,6 +28,8 @@ export default connect(
       durationUnit: 'day',
       splitBy: '1',
       splitUnit: 'day',
+      checkDuration: '1',
+      checkDurationUnit: 'day',
       fixed: 'false',
       timing: 'realtime',
       tableViewMode: 'json',
