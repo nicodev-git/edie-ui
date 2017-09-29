@@ -12,9 +12,11 @@ import {isWindowsDevice, getDeviceCollectors} from 'shared/Global'
 
 export default class AgentPicker extends React.Component {
   componentWillUpdate(nextProps) {
-    const {collectors, editDevice} = nextProps
-    if (editDevice && this.props.collectors !== collectors && collectors.length) {
-      const found = getDeviceCollectors(editDevice, collectors)
+    const {collectors, editDevice, extraParams} = nextProps
+    if (this.props.collectors !== collectors && collectors.length) {
+      const found = getDeviceCollectors(editDevice || {
+        templateName: extraParams.templateName
+      }, collectors)
       if (found.length) {
         if (!nextProps.formValues.collectorId) this.props.change('collectorId', found[0].id)
         if (!nextProps.formValues.agentCollectorId) this.props.change('agentCollectorId', found[0].id)
@@ -189,11 +191,10 @@ export default class AgentPicker extends React.Component {
     )
 
     return (
-      <div style={{minHeight: 110}}>
+      <div style={{minHeight: 110, position: 'relative'}}>
         <Field name="agentType" component={RadioButtonGroup} className="margin-md-top" onChange={onChange}>
           <RadioButton value="" label="None" className="pull-left"/>
-          <RadioButton value="agent" label={agentLabel} className="pull-left" disabled={!agent} style={{marginTop: 14, cursor: 'pointer'}}
-                       />
+          <RadioButton value="agent" label={agentLabel} className="pull-left" disabled={!agent} style={{marginTop: 14, cursor: 'pointer'}}/>
           <RadioButton value="collector" label={collectorLabel} className="pull-left" style={{width: 120, marginTop: 14}}/>
         </Field>
 

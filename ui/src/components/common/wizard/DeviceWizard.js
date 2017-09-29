@@ -300,7 +300,7 @@ class DeviceWizard extends Component {
   }
 
   buildAgentPicker (config, values, meta) {
-    const {editDevice, formValues, fixResult, fixStatus} = this.props
+    const {editDevice, formValues, extraParams, fixResult, fixStatus} = this.props
 
     let msg = ''
     if (fixStatus === 'checking' ) {
@@ -319,6 +319,7 @@ class DeviceWizard extends Component {
           config={config}
           meta={meta}
           editDevice={{
+            ...extraParams,
             ...editDevice,
             ...formValues
           }}
