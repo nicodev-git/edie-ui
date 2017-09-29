@@ -15,6 +15,11 @@ export default class AgentPicker extends React.Component {
     const {installAgentMessage, meta, editDevice} = nextProps
     if (!this.props.installAgentMessage && installAgentMessage) {
       showAlert(installAgentMessage)
+      if (isWindowsDevice(editDevice)) this.stopAgentCheck()
+    }
+
+    if (isWindowsDevice(editDevice) && !this.props.editDevice.agent && editDevice.agent) {
+      this.props.updateInstallAgentStatus(editDevice, true)
     }
 
     if (this.props.meta && meta) {
@@ -22,6 +27,10 @@ export default class AgentPicker extends React.Component {
         nextProps.onChange(null, nextProps.formValues.agentType)
       }
     }
+  }
+
+  componentWillUnmount () {
+    this.stopAgentCheck()
   }
 
   getCollectors () {
@@ -75,7 +84,7 @@ export default class AgentPicker extends React.Component {
 
   ///////////////////////////////////////////////////////////////
 
-  onClickInstall () {
+  onClickInstallAgent () {
     const creds = this.getDeviceCreds()
     if (!creds.length) {
       showAlert('Please add credential.', () => {
@@ -91,7 +100,9 @@ export default class AgentPicker extends React.Component {
       return
     }
 
-    this.props.installAgent(editDevice, agentCollectorId)
+    this.props.installAgent(editDevice, agentCollectorId, () => {
+      this.startAgentCheck()
+    })
   }
 
   renderCredPicker () {
@@ -131,7 +142,7 @@ export default class AgentPicker extends React.Component {
             <div
               className="inline-block"
               style={{textDecoration: 'underline', color: 'rgba(0, 0, 0, 0.87)', cursor: 'pointer'}}
-              onClick={installing ? null : this.onClickInstall.bind(this)}>
+              onClick={installing ? null : this.onClickInstallAgent.bind(this)}>
               {installing ? 'Installing...' : 'Install Agent'}
             </div>
             {

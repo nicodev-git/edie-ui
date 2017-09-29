@@ -20,6 +20,7 @@ import {
   showDeviceCredsPicker,
 
   installAgent,
+  updateInstallAgentStatus,
   showCollectorInstallModal,
 
   testCollector
@@ -75,6 +76,7 @@ export default connect(
     showDeviceCredsPicker,
 
     installAgent,
+    updateInstallAgentStatus,
     showCollectorInstallModal,
 
     testCollector

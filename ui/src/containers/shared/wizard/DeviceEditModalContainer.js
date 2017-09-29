@@ -16,6 +16,7 @@ import {
   fetchCollectors,
 
   installAgent,
+  updateInstallAgentStatus,
 
   updateMapDevice
 } from 'actions'
@@ -62,6 +63,7 @@ export default connect(
     fetchCollectors,
 
     installAgent,
+    updateInstallAgentStatus,
 
     updateMapDevice
   }

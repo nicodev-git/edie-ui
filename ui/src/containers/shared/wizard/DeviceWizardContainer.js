@@ -16,11 +16,13 @@ import {
   fetchCollectors,
 
   installAgent,
+  updateInstallAgentStatus,
+
   clearFixStatus,
   clearEditDevice,
   fixNewDevice,
   showCollectorInstallModal,
-  testCollector
+  testCollector,
 } from 'actions'
 
 class DeviceWizardContainer extends Component {
@@ -80,6 +82,8 @@ export default connect(
       fetchCollectors,
 
       installAgent,
+      updateInstallAgentStatus,
+
       clearFixStatus,
       clearEditDevice,
       fixNewDevice,

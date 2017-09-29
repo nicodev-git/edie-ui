@@ -1159,7 +1159,7 @@ export function selectDeviceCreds (creds) {
   }
 }
 
-export function installAgent (device, collectorId) {
+export function installAgent (device, collectorId, cb) {
   return dispatch => {
     dispatch({type: ADD_AGENT_INSTALL, data: device})
     dispatch({type: UPDATE_INSTALL_AGENT_MESSAGE, data: ''})
@@ -1170,20 +1170,25 @@ export function installAgent (device, collectorId) {
       }
     }).then(({data})=> {
       if (data.success) {
+        //skip message show if windows
         if (isWindowsDevice(device)) {
-          //skip message show
+          cb && cb()
           return
         }
-        dispatch({type: UPDATE_AGENT_INSTALL, data: device, status: 'installed'})
         dispatch(fetchDevice(device.id))
-      } else {
-        dispatch({type: UPDATE_AGENT_INSTALL, data: device, status: 'failed'})
       }
-      dispatch({type: UPDATE_INSTALL_AGENT_MESSAGE, data: data.success ? 'Successfully installed.' : data.info})
+
+      dispatch(updateInstallAgentStatus(device, data.success, data.info))
     }).catch(() => {
-      dispatch({type: UPDATE_AGENT_INSTALL, data: device, status: 'failed'})
-      dispatch({type: UPDATE_INSTALL_AGENT_MESSAGE, data: 'Installation failed.'})
+      dispatch(updateInstallAgentStatus(device, false, 'Connection failed.'))
     })
+  }
+}
+
+export function updateInstallAgentStatus(device, success, msg) {
+  return dispatch => {
+    dispatch({type: UPDATE_AGENT_INSTALL, data: device, status: (success ? 'installed' : 'failed')})
+    dispatch({type: UPDATE_INSTALL_AGENT_MESSAGE, data: success ? 'Successfully installed' : msg})
   }
 }
 
