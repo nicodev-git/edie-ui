@@ -120,6 +120,9 @@ class GenericSearch extends React.Component {
                   onClick={this.onClickExpand.bind(this, entity.id)}/>
               </div>
             ) : null}
+            <div className="position-abr link text-primary">
+              JSON
+            </div>
           </div>
         )
       }

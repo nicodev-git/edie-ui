@@ -6,7 +6,7 @@ export default class EntityDetailModalView extends React.Component {
   render () {
     const {onHide, detailEntity} = this.props
     return (
-      <Modal title="Detail" onRequestClose={onHide}>
+      <Modal title="Detail" onRequestClose={onHide} contentStyle={{width: 1035, maxWidth: 'initial'}}>
         <CardPanel title="Detail">
           <ReactJson
             name={false}
