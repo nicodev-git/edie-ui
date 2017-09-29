@@ -368,6 +368,7 @@ class DeviceEditModal extends React.Component {
     return (
       <TagsView
         {...this.props}
+        key="tags"
         showMonitorTagModal={this.props.showDeviceTagModal}
         updateMonitorTags={this.props.updateDeviceTags}
         monitorTagModalOpen={this.props.deviceTagModalOpen}
