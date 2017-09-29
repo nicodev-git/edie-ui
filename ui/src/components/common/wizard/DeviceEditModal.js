@@ -19,6 +19,7 @@ import AgentPicker from './input/AgentPicker'
 import {showAlert, showConfirm} from 'components/common/Alert'
 import {CardPanel} from 'components/modal/parts'
 import CredentialModal from 'components/credentials/CredentialModal'
+import IconUploader from './input/IconUploader'
 import ImageUploaderModal from 'components/sidebar/settings/template/ImageUploaderModal'
 
 class DeviceEditModal extends React.Component {
@@ -49,7 +50,8 @@ class DeviceEditModal extends React.Component {
       'combo': this.buildCombo.bind(this),
       'row': this.buildRow.bind(this),
       'credpicker': this.buildCredPicker.bind(this),
-      'agentpicker': this.buildAgentPicker.bind(this)
+      'agentpicker': this.buildAgentPicker.bind(this),
+      'icon': this.buildIconUploader.bind(this)
     }
   }
 
@@ -58,6 +60,8 @@ class DeviceEditModal extends React.Component {
     this.props.fetchCredentials()
     this.props.fetchCredTypes()
     this.props.fetchCollectors()
+
+    this.props.closeTplImageModal('')
   }
 
   componentDidMount () {
@@ -342,6 +346,18 @@ class DeviceEditModal extends React.Component {
     )
   }
 
+  buildIconUploader (config) {
+    return (
+      <IconUploader
+        key={config.name}
+        config={config}
+        values={this.props.initialValues}
+        openTplImageModal={this.props.openTplImageModal}
+        selectedTplImage={this.props.selectedTplImage}
+      />
+    )
+  }
+
   buildRow (config, values) {
     let children = []
     let items = config.items || []
@@ -431,6 +447,7 @@ class DeviceEditModal extends React.Component {
         onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
         canAddTags={canAddTags}
         credPicker={this.renderCredPicker()}
+        iconPicker={this.renderTplImageModal()}
       />
     )
   }

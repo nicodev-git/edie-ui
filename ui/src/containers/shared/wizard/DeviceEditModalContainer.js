@@ -24,7 +24,7 @@ import {
   openTplImageModal,
   closeTplImageModal,
   fetchImages,
-  uploadImage,
+  uploadImage
 } from 'actions'
 
 class DeviceEditModalContainer extends React.Component {
@@ -80,6 +80,6 @@ export default connect(
     openTplImageModal,
     closeTplImageModal,
     fetchImages,
-    uploadImage,
+    uploadImage
   }
 )(DeviceEditModalContainer)
