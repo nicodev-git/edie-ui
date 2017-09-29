@@ -42,6 +42,7 @@ export default connect(
     initialValues: state.devices.editDevice,
     formValues: selector(state, 'wanip', 'name', 'agentType', 'collectorId', 'distribution', 'agentCollectorId'),
 
+    images: state.dashboard.images,
     tplImageModalVisible: state.settings.tplImageModalVisible,
     selectedTplImage: state.settings.selectedTplImage,
 

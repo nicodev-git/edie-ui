@@ -16,7 +16,7 @@ export default class IconUploader extends React.Component {
     this.props.openTplImageModal()
   }
   getImageUrl () {
-    const {config, values, selectedTplImage, className} = this.props
+    const {config, values, selectedTplImage} = this.props
 
     let imgUrl = ''
     if (selectedTplImage) {
@@ -28,7 +28,7 @@ export default class IconUploader extends React.Component {
   }
   render () {
     return (
-      <ImageUploader className={className || this.props.config.cls} imgUrl={this.getImageUrl()} onChange={this.onClickChange.bind(this)}/>
+      <ImageUploader className={this.props.className || this.props.config.cls} imgUrl={this.getImageUrl()} onChange={this.onClickChange.bind(this)}/>
     )
   }
 }

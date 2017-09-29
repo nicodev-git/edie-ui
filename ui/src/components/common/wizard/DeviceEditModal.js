@@ -122,7 +122,7 @@ class DeviceEditModal extends React.Component {
   }
 
   handleFormSubmit (formProps) {
-    const { extraParams, onFinish, editParams, canAddTags, monitorTags } = this.props
+    const { extraParams, onFinish, editParams, canAddTags, monitorTags, selectedTplImage } = this.props
     const { monitors, currentDevice } = this.state
     const params = {}
 
@@ -148,6 +148,7 @@ class DeviceEditModal extends React.Component {
         params
       }
     )
+    if (selectedTplImage) props.image = selectedTplImage.uuid
 
     if (canAddTags) props.tags = monitorTags || []
 
@@ -354,6 +355,7 @@ class DeviceEditModal extends React.Component {
         values={this.props.initialValues}
         openTplImageModal={this.props.openTplImageModal}
         selectedTplImage={this.props.selectedTplImage}
+        className="margin-md-top"
       />
     )
   }
