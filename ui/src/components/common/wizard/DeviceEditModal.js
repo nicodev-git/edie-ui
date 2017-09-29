@@ -51,7 +51,8 @@ class DeviceEditModal extends React.Component {
       'row': this.buildRow.bind(this),
       'credpicker': this.buildCredPicker.bind(this),
       'agentpicker': this.buildAgentPicker.bind(this),
-      'icon': this.buildIconUploader.bind(this)
+      'icon': this.buildIconUploader.bind(this),
+      'tags': this.buildTags.bind(this)
     }
   }
 
@@ -66,6 +67,10 @@ class DeviceEditModal extends React.Component {
 
   componentDidMount () {
     this.updateDistribution()
+    const {initialValues} = this.props
+    if (initialValues) {
+      this.props.updateDeviceTags(initialValues.tags || [])
+    }
   }
 
   onFetchCreds (creds) {
@@ -122,7 +127,7 @@ class DeviceEditModal extends React.Component {
   }
 
   handleFormSubmit (formProps) {
-    const { extraParams, onFinish, editParams, canAddTags, monitorTags, selectedTplImage } = this.props
+    const { extraParams, onFinish, editParams, deviceTags, selectedTplImage } = this.props
     const { monitors, currentDevice } = this.state
     const params = {}
 
@@ -145,12 +150,11 @@ class DeviceEditModal extends React.Component {
       currentDevice.server.params || {},
       extraParams, {
         monitors: monitors.map(m => assign({}, m, {id: null})),
+        tags: deviceTags,
         params
       }
     )
     if (selectedTplImage) props.image = selectedTplImage.uuid
-
-    if (canAddTags) props.tags = monitorTags || []
 
     const oldTags = this.getDistribution()
     const tags = (props.tags || []).filter(p => !oldTags.includes(p))
@@ -356,6 +360,18 @@ class DeviceEditModal extends React.Component {
         openTplImageModal={this.props.openTplImageModal}
         selectedTplImage={this.props.selectedTplImage}
         className="margin-md-top"
+      />
+    )
+  }
+
+  buildTags () {
+    return (
+      <TagsView
+        {...this.props}
+        showMonitorTagModal={this.props.showDeviceTagModal}
+        updateMonitorTags={this.props.updateDeviceTags}
+        monitorTagModalOpen={this.props.deviceTagModalOpen}
+        monitorTags={this.props.deviceTags}
       />
     )
   }

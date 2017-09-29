@@ -24,7 +24,10 @@ import {
   openTplImageModal,
   closeTplImageModal,
   fetchImages,
-  uploadImage
+  uploadImage,
+
+  showDeviceTagModal,
+  updateDeviceTags
 } from 'actions'
 
 class DeviceEditModalContainer extends React.Component {
@@ -51,6 +54,8 @@ export default connect(
     collectors: state.settings.collectors,
     credentials: state.settings.credentials,
     credentialTypes: state.settings.credentialTypes,
+    deviceTagModalOpen: state.devices.deviceTagModalOpen,
+    deviceTags: state.devices.deviceTags,
 
     monitorGroups: state.settings.monitorGroups,
 
@@ -81,6 +86,9 @@ export default connect(
     openTplImageModal,
     closeTplImageModal,
     fetchImages,
-    uploadImage
+    uploadImage,
+
+    showDeviceTagModal,
+    updateDeviceTags
   }
 )(DeviceEditModalContainer)
