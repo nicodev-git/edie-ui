@@ -363,6 +363,25 @@ export const wizardConfig = {
           },
           width: MAX_WIDTH,
           name: 'lanip'
+        }, {
+          type: 'text',
+          label: {
+            text: 'Template',
+            type: 'attach',
+            width: 3
+          },
+          name: 'templateName'
+        }, {
+          type: 'text',
+          label: {
+            text: 'Info',
+            type: 'attach',
+            width: 3
+          },
+          name: 'info'
+        }, {
+          type: 'icon',
+          name: 'image'
         }]
       }]
     }]

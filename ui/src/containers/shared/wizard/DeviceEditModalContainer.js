@@ -19,7 +19,12 @@ import {
   installAgent,
   updateInstallAgentStatus,
 
-  updateMapDevice
+  updateMapDevice,
+
+  openTplImageModal,
+  closeTplImageModal,
+  fetchImages,
+  uploadImage,
 } from 'actions'
 
 class DeviceEditModalContainer extends React.Component {
@@ -36,6 +41,9 @@ export default connect(
   state => ({
     initialValues: state.devices.editDevice,
     formValues: selector(state, 'wanip', 'name', 'agentType', 'collectorId', 'distribution', 'agentCollectorId'),
+
+    tplImageModalVisible: state.settings.tplImageModalVisible,
+    selectedTplImage: state.settings.selectedTplImage,
 
     monitorTemplates: state.settings.monitorTemplates,
     deviceTemplates: state.settings.deviceTemplates,
@@ -67,6 +75,11 @@ export default connect(
     installAgent,
     updateInstallAgentStatus,
 
-    updateMapDevice
+    updateMapDevice,
+
+    openTplImageModal,
+    closeTplImageModal,
+    fetchImages,
+    uploadImage,
   }
 )(DeviceEditModalContainer)

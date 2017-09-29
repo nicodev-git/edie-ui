@@ -19,6 +19,7 @@ import AgentPicker from './input/AgentPicker'
 import {showAlert, showConfirm} from 'components/common/Alert'
 import {CardPanel} from 'components/modal/parts'
 import CredentialModal from 'components/credentials/CredentialModal'
+import ImageUploaderModal from 'components/sidebar/settings/template/ImageUploaderModal'
 
 class DeviceEditModal extends React.Component {
   constructor (props) {
@@ -398,6 +399,13 @@ class DeviceEditModal extends React.Component {
   renderTags () {
     return (
       <TagsView {...this.props}/>
+    )
+  }
+
+  renderTplImageModal () {
+    if (!this.props.tplImageModalVisible) return null
+    return (
+      <ImageUploaderModal {...this.props} closeOnSelect/>
     )
   }
 
