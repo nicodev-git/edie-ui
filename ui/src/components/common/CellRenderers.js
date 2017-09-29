@@ -29,7 +29,7 @@ function renderValue (val, path, options, used) {
         children.push(ret.node)
         if (index < val.length - 1) children.push(<div className="field-separator" key={`${path}-sep-${index}`}/>)
 
-        if (options.limit && used >= options.limit) return false
+        if (options && options.limit && used >= options.limit) return false
         return true
       })
     } else {
@@ -50,12 +50,12 @@ function renderValue (val, path, options, used) {
 
   let valStr = `${val}`
   const attrs = {}
-  if (options.timeField && path === `.${options.timeField}`) {
+  if (options && options.timeField && path === `.${options.timeField}`) {
     valStr = moment(val).fromNow()
     attrs['data-tip'] = moment(val).format('YYYY-MM-DD HH:mm:ss')
   }
 
-  if (options.limit && (used + valStr.length > options.limit)) {
+  if (options && options.limit && (used + valStr.length > options.limit)) {
     valStr = valStr.substring(0, options.limit - used)
   }
 
@@ -85,7 +85,7 @@ function renderData (entity, isChildren, path, options, used) {  // eslint-disab
     if (index < allKeys.length - 1)
       children.push(<div className="field-separator" key={`${path}-sep-${index}`}/>)
 
-    if (options.limit && used >= options.limit) return false
+    if (options && options.limit && used >= options.limit) return false
     return true
   })
 

@@ -1,5 +1,7 @@
 import React from 'react'
 import moment from 'moment'
+import ReactToolTip from 'react-tooltip'
+import {debounce} from 'lodash'
 
 import { getSeverityIcon } from 'shared/Global'
 import CommentsModal from 'components/common/incident/CommentsModal'
@@ -26,6 +28,8 @@ export default class IncidentTable extends React.Component {
 
       incident: null
     }
+
+    this.tooltipRebuild = debounce(ReactToolTip.rebuild, 100)
 
     this.cells = [{
       'displayName': 'Severity',
@@ -127,6 +131,10 @@ export default class IncidentTable extends React.Component {
       this.props.fixIncident(incident, user, text)
     })
   }
+  onResultCountUpdate (total, data) {
+    this.tooltipRebuild()
+  }
+
   render () {
     const {incident} = this.state
     const {params} = this.props
@@ -141,6 +149,8 @@ export default class IncidentTable extends React.Component {
           onRowDblClick={this.onRowDblClick.bind(this)}
           tableClassName="table-panel2"
 
+          onUpdateCount={this.onResultCountUpdate.bind(this)}
+
           url="/search/query"
           params={params}
         />
@@ -152,6 +162,8 @@ export default class IncidentTable extends React.Component {
           onClose={() => {
             this.setState({commentModalVisible: false})
           }}/>}
+
+        <ReactToolTip/>
       </div>
     )
   }
