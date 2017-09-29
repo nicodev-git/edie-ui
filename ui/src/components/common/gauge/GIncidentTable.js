@@ -68,9 +68,17 @@ export default class GIncidentTable extends React.Component {
       )
     }
 
+    const mq = [
+      '(fixed:false)'
+    ]
+
+    if (q.length) {
+      mq.push(`(${q.join(' OR ')})`)
+    }
+
     return {
       draw: incidentDraw,
-      q: q.join(' OR '),
+      q: mq.join(' AND '),
       types: 'incident'
     }
   }
