@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { formValueSelector } from 'redux-form'
 import DeviceEditModal from 'components/common/wizard/DeviceEditModal'
 
 import {
@@ -27,9 +28,12 @@ class DeviceEditModalContainer extends React.Component {
   }
 }
 
+const selector = formValueSelector('editDeviceForm')
+
 export default connect(
   state => ({
     initialValues: state.devices.editDevice,
+    formValues: selector(state, 'wanip', 'name', 'agentType', 'collectorId', 'distribution', 'agentCollectorId'),
 
     monitorTemplates: state.settings.monitorTemplates,
     deviceTemplates: state.settings.deviceTemplates,
