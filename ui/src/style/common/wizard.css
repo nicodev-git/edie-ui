@@ -203,7 +203,7 @@ div.dropdown-image div:hover {
 }
 
 .web-applet-card.small .content {
-    padding: 1em;
+    padding: 0.5em;
 }
 
 .web-applet-card .card-top {
@@ -257,6 +257,13 @@ div.dropdown-image div:hover {
     word-break: break-all;
 }
 
+
+.web-applet-card .author img{
+    margin-top: -2px;
+    width: 18px;
+    height: 18px;
+}
+
 .web-applet-card .author b {
     color: #fff;
     vertical-align: top;
@@ -264,13 +271,9 @@ div.dropdown-image div:hover {
 }
 
 .web-applet-card .meta {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -moz-flex;
-    display: -ms-flexbox;
-    display: flex;
+    text-align: center;
     font-weight: 800;
-    padding: .75em 1.5em;
+    padding: .6em 1.5em;
     background: rgba(0, 0, 0, 0.2);
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;

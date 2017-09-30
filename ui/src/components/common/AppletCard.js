@@ -60,7 +60,7 @@ export default class AppletCard extends React.Component {
   render () {
     const {
       name, desc, desc2, desc3, img, color, className,
-      rightIcons,
+      rightIcons, verified,
       onClickDelete, onClickEdit, onClickView
     } = this.props
     const {hovered} = this.state
@@ -73,7 +73,7 @@ export default class AppletCard extends React.Component {
           <div className="content">
             <div className="card-top">
               <img src={img} alt="" />
-              <div className={`pull-right link info-button ${hovered ? 'visible' : ''}`} style={{marginRight: -10, marginTop: -10}}>
+              <div className={`pull-right link info-button ${hovered ? 'visible' : ''}`}>
                 {onClickDelete && <CloseIcon size={32} color="white" onClick={this.onClickDelete.bind(this)}/>}
               </div>
             </div>
@@ -81,9 +81,9 @@ export default class AppletCard extends React.Component {
               {desc}&nbsp;
             </span>
             <p className="author">
+              {verified && <span>by&nbsp;<b>Securegion</b>&nbsp;</span>}
+              {verified && <img alt="Verified" src="/resources/images/common/wizard/verified.svg" />}
               <span>{desc2}</span>
-            </p>
-            <p className="author">
               <span>{desc3}</span>
             </p>
           </div>

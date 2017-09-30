@@ -15,6 +15,7 @@ export default class MonitorPickModalView extends React.Component {
         desc={tpl.description}
         img={`${extImageBaseUrl}${tpl.image}`}
         onClick={() => onClick(tpl)}
+        verified
       />
     )
   }

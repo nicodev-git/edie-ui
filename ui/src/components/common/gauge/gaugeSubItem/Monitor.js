@@ -116,6 +116,7 @@ export default class Monitor extends React.Component {
         img={this.getMonitorImage(tpl.monitortype)}
         onClickView={() => this.onClickViewMonitor(tpl)}
         onClickEdit={() => this.onClickEditMonitor(tpl)}
+        verified
       />
     )
   }

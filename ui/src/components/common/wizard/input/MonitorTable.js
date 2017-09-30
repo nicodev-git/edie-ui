@@ -205,6 +205,7 @@ export default class MonitorTable extends Component {
                     img={this.getMonitorImage(item)}
                     onClick={this.onClickEditMonitor.bind(this, item)}
                     onClickDelete={this.onClickRemoveMonitor.bind(this, item)}
+                    verified
                   />
                 )
               }
