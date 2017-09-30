@@ -40,7 +40,7 @@ class MonitorWizard extends React.Component {
     if (!selectedDevice) return true
 
     //Step 1
-    if (selectedDevice.agent) return false
+    // if (selectedDevice.agent) return false
 
     //Step 2
     if (credTypes.length === 0) return false
