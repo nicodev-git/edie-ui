@@ -46,6 +46,7 @@ const gaugeMap = {
   'Log': GLog,
   'Service': GService,
   'Device Info': GDeviceInfo,
+  'CPU/Memory/Disk': GDeviceBasic,
   'Device Basic': GDeviceBasic,
   'Event Log': GEventLog,
   'Process': GProcessList,

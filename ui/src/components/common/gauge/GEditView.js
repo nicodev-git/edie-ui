@@ -736,6 +736,7 @@ export default class GEditView extends React.Component {
       case 'Cpu':
       case 'Memory':
       case 'Disk':
+      case 'CPU/Memory/Disk':
         return this.renderDevice()
       case 'Service':
         return this.renderService()
