@@ -32,11 +32,11 @@ export default class DetailLogModalView extends React.Component {
     const {onHide, onClickPrev, onClickNext, loading} = this.props
     return (
       <Modal title="Log" onRequestClose={onHide} contentStyle={{width: '90%', maxWidth: 'initial'}}>
-        <div style={{position: 'absolute', top: 11, left: 60, right: 60, textAlign: 'center', zIndex: 1}}>
+        {this.renderTable()}
+        <div style={{position: 'absolute', top: 11, left: 60, right: 60, textAlign: 'center', zIndex: 10}}>
           <RaisedButton label="Prev" onTouchTap={onClickPrev} disabled={loading} secondary/>&nbsp;
           <RaisedButton label="Next" onTouchTap={onClickNext} disabled={loading} secondary/>
         </div>
-        {this.renderTable()}
         {loading && <RefreshOverlay/>}
       </Modal>
     )
