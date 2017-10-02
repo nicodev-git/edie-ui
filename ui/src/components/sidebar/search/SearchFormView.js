@@ -95,21 +95,8 @@ export default class SearchFormView extends React.Component {
             </div>
           </div>
 
-          <div>
-            <IconButton tooltip="Favorite" tooltipPosition="top-center" className="valign-top" onTouchTap={onClickStar}>{starFilled ? <FilledStar/> : <ToggleStar/>}</IconButton>
-            <IconButton tooltip="Illustrate" tooltipPosition="top-center" className="valign-top" onTouchTap={onClickIllustrate}><LocalMovie/></IconButton>
-            <IconButton tooltip="Related devices" tooltipPosition="top-center" className="valign-top hidden" onTouchTap={onClickRelDevices}><Computer/></IconButton>
-            <IconButton tooltip="Non-related devices" tooltipPosition="top-center" className="valign-top hidden" onTouchTap={onClickIrrelDevices}><NoSim/></IconButton>
-            <IconButton tooltip="Views" tooltipPosition="top-center" className="valign-top" onTouchTap={onClickViewFilter}><img src="/resources/images/sidebar/search/view-icon.png" width="24" alt=""/></IconButton>
-            <IconButton tooltip="Graph" tooltipPosition="top-center" className="valign-top" onTouchTap={onClickGraph}><img src="/resources/images/sidebar/search/graph-icon.png" width="24" alt=""/></IconButton>
-
-            <DateRangePicker
-              className="valign-top"
-              startDate={startDate}
-              endDate={endDate}
-              onApply={onChangeDateRange}
-              renderer={this.renderDateLabel.bind(this)}
-              style={{marginTop: '4px'}}/>
+          <div style={{height: 48}}>
+            <FlatButton label="Search By" onTouchTap={this.onClickSearchBy.bind(this)} className="valign-top margin-xs-top"/>
             <SelectField
               multiple
               hintText="Collection"
@@ -127,9 +114,21 @@ export default class SearchFormView extends React.Component {
                 />
               )}
             </SelectField>
+            <DateRangePicker
+              className="valign-top"
+              startDate={startDate}
+              endDate={endDate}
+              onApply={onChangeDateRange}
+              renderer={this.renderDateLabel.bind(this)}
+              style={{marginTop: '4px'}}/>
 
+            <IconButton tooltip="Favorite" tooltipPosition="top-center" className="valign-top" onTouchTap={onClickStar}>{starFilled ? <FilledStar/> : <ToggleStar/>}</IconButton>
+            <IconButton tooltip="Illustrate" tooltipPosition="top-center" className="valign-top" onTouchTap={onClickIllustrate}><LocalMovie/></IconButton>
+            <IconButton tooltip="Related devices" tooltipPosition="top-center" className="valign-top hidden" onTouchTap={onClickRelDevices}><Computer/></IconButton>
+            <IconButton tooltip="Non-related devices" tooltipPosition="top-center" className="valign-top hidden" onTouchTap={onClickIrrelDevices}><NoSim/></IconButton>
+            <IconButton tooltip="Views" tooltipPosition="top-center" className="valign-top" onTouchTap={onClickViewFilter}><img src="/resources/images/sidebar/search/view-icon.png" width="24" alt=""/></IconButton>
+            <IconButton tooltip="Graph" tooltipPosition="top-center" className="valign-top" onTouchTap={onClickGraph}><img src="/resources/images/sidebar/search/graph-icon.png" width="24" alt=""/></IconButton>
 
-            <FlatButton label="Search By" onTouchTap={this.onClickSearchBy.bind(this)} className="valign-top margin-xs-top"/>
             <Popover
               open={this.state.openSearchBy}
               anchorEl={this.state.anchorEl}

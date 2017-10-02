@@ -8,7 +8,7 @@ export default class TabPageHeader extends React.Component {
   }
 
   render () {
-    const {useToolBar, titleStyle} = this.props
+    const {useToolBar, titleStyle, headerClassName} = this.props
     return (
       <div className="tab-header">
         <div>
@@ -23,7 +23,7 @@ export default class TabPageHeader extends React.Component {
             {this.props.children}
           </Toolbar>
         ) : (
-          <div className="margin-md-top" style={{...this.props.style, width: '100%'}}>
+          <div className={headerClassName || "margin-md-top"} style={{...this.props.style, width: '100%'}}>
             {this.props.children}
           </div>
         )}

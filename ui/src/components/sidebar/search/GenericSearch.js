@@ -899,7 +899,7 @@ class GenericSearch extends React.Component {
 
     return (
       <TabPage>
-        <TabPageHeader title="" style={{overflowX: 'auto', overflowY: 'visible'}}>
+        <TabPageHeader title="" style={{overflowX: 'auto', overflowY: 'visible'}} headerClassName="margin-xs-top">
           <SearchFormView
             onSearchKeyDown={this.onSearchKeyDown.bind(this)}
             onClickStar={this.onClickStar.bind(this)}
