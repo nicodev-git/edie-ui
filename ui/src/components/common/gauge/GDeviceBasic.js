@@ -5,8 +5,10 @@ import FlipView from './FlipView'
 import Speedometer from './display/Speedometer'
 import NoDataPanel from './NoDataPanel'
 import MonitorSocket from 'util/socket/MonitorSocket'
+import GEditView from './GEditView'
 
 import {checkAgentUp} from 'shared/Global'
+import {showAlert} from 'components/common/Alert'
 
 export default class GDeviceBasic extends React.Component {
   constructor (props) {
@@ -23,18 +25,44 @@ export default class GDeviceBasic extends React.Component {
   }
 
   componentDidMount () {
+    this.startUpdate()
+  }
+
+  componentDidUpdate (prevProps, prevState) {
+    if (JSON.stringify(prevProps.gauge) !== JSON.stringify(this.props.gauge)) {
+      this.stopUpdate()
+      setTimeout(() => {
+        this.startUpdate()
+      }, 10)
+    }
+  }
+
+  componentWillUnmount () {
+    this.stopUpdate()
+  }
+
+  startUpdate () {
+    this.setState({
+      loading: true,
+      memory: null,
+      cpu: null,
+      disk: null,
+      up: false
+    })
     this.monitorSocket = new MonitorSocket({
       listener: this.onMonitorMessage.bind(this)
     })
     this.monitorSocket.connect(this.onSocketOpen.bind(this))
+
     checkAgentUp(this.getDeviceId(), up => {
       this.setState({up, loading: false})
     })
   }
 
-  componentWillUnmount () {
+  stopUpdate () {
     this.monitorSocket && this.monitorSocket.close()
   }
+  ///////////////////////////////////////////////////////////////////
 
   onSocketOpen () {
     this.monitorSocket.send({
@@ -68,6 +96,31 @@ export default class GDeviceBasic extends React.Component {
     if (index < 0) return null
     return devices[index]
   }
+
+  onSubmit (options, values) {
+    console.log(values)
+
+    if (!values.name) {
+      showAlert('Please type name.')
+      return
+    }
+    const gauge = {
+      ...this.props.gauge,
+      ...values
+    }
+
+    this.props.updateDeviceGauge(gauge, this.props.device)
+    options.onClickFlip()
+  }
+  getTitle () {
+    const {gauge} = this.props
+    const devices = this.props.allDevices || this.props.devices
+    const index = findIndex(devices, {id: gauge.deviceId})
+    if (index < 0) return gauge.name
+    return `[${devices[index].name}] ${gauge.name}`
+  }
+
+  /////////////////////////////////////////////////////
 
   renderItem (item, i) {
     return (
@@ -121,15 +174,23 @@ export default class GDeviceBasic extends React.Component {
 
   }
 
-  renderBackView () {
-    return null
+  renderBackView (options) {
+    return (
+      <div>
+        <GEditView
+          {...this.props}
+          onSubmit={this.onSubmit.bind(this, options)}
+        />
+      </div>
+    )
   }
 
   render () {
     return (
       <FlipView
         {...this.props}
-        hideTitle={false}
+
+        title={this.getTitle()}
         bodyStyle={{padding: "0px 20px 20px"}}
 
         loading={this.state.loading}
