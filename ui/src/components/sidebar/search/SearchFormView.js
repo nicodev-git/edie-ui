@@ -9,6 +9,8 @@ import LocalMovie from 'material-ui/svg-icons/maps/local-movies'
 import Computer from 'material-ui/svg-icons/hardware/computer'
 import NoSim from 'material-ui/svg-icons/communication/no-sim'
 import ClearIcon from 'material-ui/svg-icons/content/clear'
+import ArrowDownIcon from 'material-ui/svg-icons/hardware/keyboard-arrow-down'
+import ArrowUpIcon from 'material-ui/svg-icons/hardware/keyboard-arrow-up'
 
 import { FormInput } from 'components/modal/parts'
 import DateRangePicker from 'components/common/DateRangePicker'
@@ -17,13 +19,19 @@ export default class SearchFormView extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      openSearchBy: false
+      openSearchBy: false,
+      advanced: false
     }
   }
   onClickSearchBy (e) {
     this.setState({
       openSearchBy: true,
       anchorEl: e.target
+    })
+  }
+  onClickToggleAdvanced () {
+    this.setState({
+      advanced: !this.state.advanced
     })
   }
   hideSearchBy () {
@@ -82,6 +90,9 @@ export default class SearchFormView extends React.Component {
 
       onClickSearchMonitor
     } = this.props
+
+    const {advanced} = this.state
+
     return (
       <form onSubmit={onSubmit}>
         <div style={{background: '#dadada', paddingLeft: 10}}>
@@ -92,6 +103,9 @@ export default class SearchFormView extends React.Component {
             <div>
               <IconButton tooltip="Search" onTouchTap={onClickSearch} type="submit" className="valign-top"><ActionSearch /></IconButton>
               <IconButton tooltip="Clear" className="valign-top" onTouchTap={onClickClear}><ClearIcon /></IconButton>
+              <IconButton tooltip="Advanced" className="valign-top" onTouchTap={this.onClickToggleAdvanced.bind(this)}>
+                {advanced ? <ArrowUpIcon /> : <ArrowDownIcon />}
+              </IconButton>
             </div>
           </div>
 
@@ -121,14 +135,14 @@ export default class SearchFormView extends React.Component {
               onApply={onChangeDateRange}
               renderer={this.renderDateLabel.bind(this)}
               style={{marginTop: '4px'}}/>
-
-            <IconButton tooltip="Favorite" tooltipPosition="top-center" className="valign-top" onTouchTap={onClickStar}>{starFilled ? <FilledStar/> : <ToggleStar/>}</IconButton>
-            <IconButton tooltip="Illustrate" tooltipPosition="top-center" className="valign-top" onTouchTap={onClickIllustrate}><LocalMovie/></IconButton>
-            <IconButton tooltip="Related devices" tooltipPosition="top-center" className="valign-top hidden" onTouchTap={onClickRelDevices}><Computer/></IconButton>
-            <IconButton tooltip="Non-related devices" tooltipPosition="top-center" className="valign-top hidden" onTouchTap={onClickIrrelDevices}><NoSim/></IconButton>
-            <IconButton tooltip="Views" tooltipPosition="top-center" className="valign-top" onTouchTap={onClickViewFilter}><img src="/resources/images/sidebar/search/view-icon.png" width="24" alt=""/></IconButton>
-            <IconButton tooltip="Graph" tooltipPosition="top-center" className="valign-top" onTouchTap={onClickGraph}><img src="/resources/images/sidebar/search/graph-icon.png" width="24" alt=""/></IconButton>
-
+            <div className="pull-right">
+              <IconButton tooltip="Favorite" tooltipPosition="top-center" className="valign-top" onTouchTap={onClickStar}>{starFilled ? <FilledStar/> : <ToggleStar/>}</IconButton>
+              <IconButton tooltip="Illustrate" tooltipPosition="top-center" className="valign-top" onTouchTap={onClickIllustrate}><LocalMovie/></IconButton>
+              <IconButton tooltip="Related devices" tooltipPosition="top-center" className="valign-top hidden" onTouchTap={onClickRelDevices}><Computer/></IconButton>
+              <IconButton tooltip="Non-related devices" tooltipPosition="top-center" className="valign-top hidden" onTouchTap={onClickIrrelDevices}><NoSim/></IconButton>
+              <IconButton tooltip="Views" tooltipPosition="top-center" className="valign-top" onTouchTap={onClickViewFilter}><img src="/resources/images/sidebar/search/view-icon.png" width="24" alt=""/></IconButton>
+              <IconButton tooltip="Graph" tooltipPosition="top-center" className="valign-top" onTouchTap={onClickGraph}><img src="/resources/images/sidebar/search/graph-icon.png" width="24" alt=""/></IconButton>
+            </div>
             <Popover
               open={this.state.openSearchBy}
               anchorEl={this.state.anchorEl}
