@@ -76,12 +76,14 @@ class LogView extends React.Component {
   onClickDetailView (row) {
     const {logViewParam} = this.props
     const params = {
-      q: `(monitorid:${logViewParam.monitorId})`,
-      from: 0,
-      to: row.entity.timestamp,
-      page: 0,
-      size: 100,
-      types: 'event',
+      query: {
+        q: `(monitorid:${logViewParam.monitorId})`,
+        from: 0,
+        to: row.entity.timestamp,
+        page: 0,
+        size: 100,
+        types: 'event',
+      },
       rowId: row.id
     }
 

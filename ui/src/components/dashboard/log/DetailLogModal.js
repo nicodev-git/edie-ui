@@ -29,7 +29,7 @@ export default class DetailLogModal extends React.Component {
 
   fetchLog () {
     const {page} = this.state
-    const {detailLogViewParam} = this.props
+    const {query} = this.props.detailLogViewParam
 
     this.setState({
       loading: true
@@ -38,12 +38,12 @@ export default class DetailLogModal extends React.Component {
     if (page === 0) {
       axios.all([
         axios.get(`${ROOT_URL}/search/query?${encodeUrlParams({
-          ...detailLogViewParam,
+          ...query,
           sortDir: 'desc'
         })}`),
         axios.get(`${ROOT_URL}/search/query?${encodeUrlParams({
-          ...detailLogViewParam,
-          from: detailLogViewParam.to + 1,
+          ...query,
+          from: query.to + 1,
           to: moment().endOf('year'),
           sortDir: 'asc'
         })}`)
@@ -55,7 +55,7 @@ export default class DetailLogModal extends React.Component {
       })
     } else if (page < 0) {
       axios.get(`${ROOT_URL}/search/query?${encodeUrlParams({
-        ...detailLogViewParam,
+        ...query,
         sortDir: 'desc',
         page: -page + 1
       })}`).then(res => {
@@ -63,8 +63,8 @@ export default class DetailLogModal extends React.Component {
       })
     } else {
       axios.get(`${ROOT_URL}/search/query?${encodeUrlParams({
-        ...detailLogViewParam,
-        from: detailLogViewParam.to + 1,
+        ...query,
+        from: query.to + 1,
         to: moment().endOf('year'),
         page,
         sortDir: 'asc'
