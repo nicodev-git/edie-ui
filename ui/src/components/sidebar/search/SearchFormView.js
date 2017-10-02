@@ -1,7 +1,7 @@
 import React from 'react'
 import { Field } from 'redux-form'
 import { findIndex } from 'lodash'
-import {FlatButton, SelectField, Popover, Menu, MenuItem, IconButton} from 'material-ui'
+import {FlatButton, SelectField, TextField, Popover, Menu, MenuItem, IconButton} from 'material-ui'
 import ActionSearch from 'material-ui/svg-icons/action/search'
 import ToggleStar from 'material-ui/svg-icons/toggle/star-border'
 import FilledStar from 'material-ui/svg-icons/toggle/star'
@@ -122,7 +122,7 @@ export default class SearchFormView extends React.Component {
               onApply={onChangeDateRange}
               renderer={this.renderDateLabel.bind(this)}
               style={{marginTop: '4px'}}/>
-            <div className="pull-right">
+            <div className="pull-right margin-sm-right">
               <IconButton tooltip="Favorite" className="valign-top" onTouchTap={onClickStar}>{starFilled ? <FilledStar/> : <ToggleStar/>}</IconButton>
               <IconButton tooltip="Illustrate" className="valign-top" onTouchTap={onClickIllustrate}><LocalMovie/></IconButton>
               <IconButton tooltip="Related devices" className="valign-top hidden" onTouchTap={onClickRelDevices}><Computer/></IconButton>
@@ -140,6 +140,9 @@ export default class SearchFormView extends React.Component {
               onRequestClose={this.hideSearchBy.bind(this)}
               style={{minWidth: 300}}
             >
+              <div className="margin-md-left">
+                <TextField name="text" style={{width: 300}} hintText="Free Text"/>
+              </div>
               <Menu>
                 <MenuItem primaryText="Workflows" onTouchTap={() => this.hideSearchBy() && onClickWorkflow()}/>
                 <MenuItem primaryText="Device/Monitors" onTouchTap={() => this.hideSearchBy() && onClickSearchMonitor()} />
