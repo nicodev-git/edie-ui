@@ -19,7 +19,7 @@ import {chipStyles} from 'style/common/materialStyles'
 import {getRanges, getRangeLabel} from 'components/common/DateRangePicker'
 import {showAlert} from 'components/common/Alert'
 
-import {modifyArrayValues, getArrayValues, modifyFieldValue, removeField, findField, queryToString, parseDateRange} from 'util/Query'
+import {modifyArrayValues, getArrayValues, modifyFieldValue, getFieldValue, removeField, findField, queryToString, parseDateRange} from 'util/Query'
 
 import SearchFormView from './SearchFormView'
 import SearchSavePopover from './SearchSavePopover'
@@ -456,6 +456,14 @@ class GenericSearch extends React.Component {
     this.updateQuery(newQuery)
   }
 
+  onKeyUpFreeText (e, value) {
+    if (e.keyCode === 13) {
+      console.log(e.target.value)
+    }
+    e.stopPropagation()
+  }
+
+
   onResultCountUpdate (total, data) {
     let {cols} = this.state
     if (data && data.length) {
@@ -807,6 +815,7 @@ class GenericSearch extends React.Component {
       monitorNames: getArrayValues(parsed, 'monitor'),
       deviceNames: getArrayValues(parsed, 'device'),
       types: getArrayValues(parsed, 'type', collections.map(p => p.value)),
+      freeText: getFieldValue(parsed, '_all'),
       ...dateRange
     }
 
@@ -920,6 +929,8 @@ class GenericSearch extends React.Component {
                 onClickSavedSearch={this.onClickSavedSearch.bind(this)}
                 onClickRelDevices={this.onClickRelDevices.bind(this)}
                 onClickIrrelDevices={this.onClickIrrelDevices.bind(this)}
+
+                onKeyUpFreeText={this.onKeyUpFreeText.bind(this)}
 
                 monitorTemplates={monitorTemplates}
                 selectedMonitorTypes={monitorTypes}

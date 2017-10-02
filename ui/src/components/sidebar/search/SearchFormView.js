@@ -20,7 +20,8 @@ export default class SearchFormView extends React.Component {
     super(props)
     this.state = {
       openSearchBy: false,
-      advanced: false
+      advanced: false,
+      freeText: ''
     }
   }
   onClickSearchBy (e) {
@@ -88,7 +89,9 @@ export default class SearchFormView extends React.Component {
       onClickClear,
       onClickSearch,
 
-      onClickSearchMonitor
+      onClickSearchMonitor,
+
+      onKeyUpFreeText
     } = this.props
 
     const {advanced} = this.state
@@ -141,7 +144,8 @@ export default class SearchFormView extends React.Component {
               style={{minWidth: 300}}
             >
               <div className="margin-md-left">
-                <TextField name="text" style={{width: 300}} hintText="Free Text"/>
+                <TextField name="text" style={{width: 300}} hintText="Free Text" value={this.state.freeText} onKeyUpCapture={onKeyUpFreeText}
+                  onChange={(e, freeText) => this.setState({freeText})}/>
               </div>
               <Menu>
                 <MenuItem primaryText="Workflows" onTouchTap={() => this.hideSearchBy() && onClickWorkflow()}/>
