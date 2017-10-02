@@ -75,7 +75,7 @@ class GenericSearch extends React.Component {
         }
         if (!entity) return <span/>
         let expand = expanded[entity.id]
-        if (expand === undefined) expand = allExpanded
+        if (typeof expand === 'undefined') expand = allExpanded
 
         const highlighted = this.getHighlighted(entity, rowData.highlights)//expand ? this.getHighlighted(entity, rowData.highlights) : {...entity}
 
@@ -105,7 +105,7 @@ class GenericSearch extends React.Component {
         const options = {
           notNull: viewFilter === viewFilters.notNull.name,
           timeField,
-          limit: 750
+          limit: expand ? 0 : 750
         }
         const ret = renderEntity2(data, options)
         const isOverflow = ret.used >= options.limit
@@ -120,7 +120,7 @@ class GenericSearch extends React.Component {
               <div className={`${expand ? 'position-collapse' : 'position-ab'} text-center`}>
                 <img
                   src={`/resources/images/dashboard/${expand ? 'collapse' : 'expand'}.png`} width="32" alt=""
-                  onClick={this.onClickExpand.bind(this, entity.id)}/>
+                  onClick={this.onClickExpand.bind(this, entity.id, expand)}/>
               </div>
             ) : null}
             <div className="position-abr link text-primary">
@@ -240,9 +240,9 @@ class GenericSearch extends React.Component {
     }
   }
 
-  onClickExpand (id) {
+  onClickExpand (id, ex) {
     const {expanded} = this.state
-    expanded[id] = !expanded[id]
+    expanded[id] = !ex
     this.setState({expanded})
   }
 
