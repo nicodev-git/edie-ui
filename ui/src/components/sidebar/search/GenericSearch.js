@@ -456,11 +456,12 @@ class GenericSearch extends React.Component {
     this.updateQuery(newQuery)
   }
 
-  onKeyUpFreeText (e, value) {
+  onKeyUpFreeText (e) {
     if (e.keyCode === 13) {
-      console.log(e.target.value)
+      const {formValues} = this.props
+      const newQuery = modifyFieldValue(formValues.query, '_all', e.target.value, true)
+      this.updateQuery(newQuery)
     }
-    e.stopPropagation()
   }
 
 

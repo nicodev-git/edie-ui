@@ -1,7 +1,7 @@
 import React from 'react'
 import { Field } from 'redux-form'
 import { findIndex } from 'lodash'
-import {FlatButton, SelectField, TextField, Popover, Menu, MenuItem, IconButton} from 'material-ui'
+import {FlatButton, SelectField, TextField, Popover, MenuItem, IconButton} from 'material-ui'
 import ActionSearch from 'material-ui/svg-icons/action/search'
 import ToggleStar from 'material-ui/svg-icons/toggle/star-border'
 import FilledStar from 'material-ui/svg-icons/toggle/star'
@@ -144,7 +144,7 @@ export default class SearchFormView extends React.Component {
               style={{minWidth: 300}}
             >
               <div className="margin-md-left">
-                <TextField name="text" style={{width: 300}} hintText="Free Text" value={this.state.freeText} onKeyUpCapture={onKeyUpFreeText}
+                <TextField name="text" style={{width: 300}} hintText="Free Text" value={this.state.freeText} onKeyUp={onKeyUpFreeText}
                   onChange={(e, freeText) => this.setState({freeText})}/>
               </div>
               <div>
