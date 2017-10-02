@@ -1,7 +1,7 @@
 import React from 'react'
-// import {keys} from 'lodash'
 
 import EntityDetailModalView from './EntityDetailModalView'
+import {removeNullValues} from 'components/common/CellRenderers'
 
 export default class EntityDetailModal extends React.Component {
   constructor (props) {
@@ -13,11 +13,9 @@ export default class EntityDetailModal extends React.Component {
 
   getEntity () {
     const {detailEntity} = this.props
-    return detailEntity
-    // if (this.state.isShowNull) return detailEntity
+    if (this.state.isShowNull) return detailEntity
 
-    // keys(detailEntity)
-    //entity[key] === null
+    return removeNullValues(detailEntity)
   }
 
   onCheckShowNull (e, checked) {

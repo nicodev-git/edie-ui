@@ -95,7 +95,7 @@ function renderData (entity, isChildren, path, options, used) {  // eslint-disab
   }
 }
 
-function removeNullValues(entity) {
+export function removeNullValues(entity) {
   if (isObject(entity)) {
     const allKeys = keys(entity)
     const newEntity = {}
