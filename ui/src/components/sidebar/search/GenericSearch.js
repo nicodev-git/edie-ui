@@ -882,9 +882,9 @@ class GenericSearch extends React.Component {
   renderSidebarCollapse () {
     const {searchFieldsVisible} = this.props
     return (
-      <div style={{width: 24, height: '100%', position: 'relative'}}>
+      <div style={{width: 16, height: '100%', position: 'relative'}}>
         <img src={`resources/images/dashboard/${searchFieldsVisible ? 'backward' : 'forward'}.png`}
-             width="24" height="48" alt=""
+             width="16" height="48" alt=""
              className="link"
              style={{position: 'absolute', top: '50%', transform: 'translate(0, -50%)'}}
              onClick={this.onClickToggleFields.bind(this)}
