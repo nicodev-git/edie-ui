@@ -147,11 +147,11 @@ export default class SearchFormView extends React.Component {
                 <TextField name="text" style={{width: 300}} hintText="Free Text" value={this.state.freeText} onKeyUpCapture={onKeyUpFreeText}
                   onChange={(e, freeText) => this.setState({freeText})}/>
               </div>
-              <Menu>
-                <MenuItem primaryText="Workflows" onTouchTap={() => this.hideSearchBy() && onClickWorkflow()}/>
-                <MenuItem primaryText="Device/Monitors" onTouchTap={() => this.hideSearchBy() && onClickSearchMonitor()} />
-                <MenuItem primaryText="Tags" onTouchTap={(e) => this.hideSearchBy() && onClickTags(e)}/>
-              </Menu>
+              <div>
+                <FlatButton label="Workflows" onTouchTap={() => this.hideSearchBy() && onClickWorkflow()} style={{width: '100%', textAlign: 'left'}}/>
+                <FlatButton label="Device/Monitors" onTouchTap={() => this.hideSearchBy() && onClickSearchMonitor()} style={{width: '100%', textAlign: 'left'}}/>
+                <FlatButton label="Tags" onTouchTap={(e) => this.hideSearchBy() && onClickTags(e)} style={{width: '100%', textAlign: 'left'}}/>
+              </div>
 
               <div style={{marginTop: -35}}>
                 <SelectField
