@@ -13,7 +13,6 @@ import QueryParser from 'lucene'
 import InfiniteTable from 'components/common/InfiniteTable'
 import TabPage from 'components/common/TabPage'
 import TabPageBody from 'components/common/TabPageBody'
-import TabPageHeader from 'components/common/TabPageHeader'
 import { guid, collections, severities, viewFilters, queryDateFormat } from 'shared/Global'
 import {renderEntity2} from 'components/common/CellRenderers'
 import {chipStyles} from 'style/common/materialStyles'
@@ -899,114 +898,118 @@ class GenericSearch extends React.Component {
 
     return (
       <TabPage>
-        <TabPageHeader title="" style={{overflowX: 'auto', overflowY: 'visible'}} headerClassName="margin-xs-top">
-          <SearchFormView
-            onSearchKeyDown={this.onSearchKeyDown.bind(this)}
-            onClickStar={this.onClickStar.bind(this)}
-            collections={collections}
-            selectedCollections={types}
-            onChangeCollection={this.onChangeCollection.bind(this)}
-            onClickWorkflow={this.onClickWorkflow.bind(this)}
-            onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
-            onClickSearch={this.onClickSearch.bind(this)}
-            severities={severities}
-            selectedSeverities={severity}
-            onChangeSeverity={this.onChangeSeverity.bind(this)}
-            startDate={from}
-            endDate={to}
-            onChangeDateRange={this.onChangeDateRange.bind(this)}
-            onClickIllustrate={this.onClickIllustrate.bind(this)}
-            onClickSavedSearch={this.onClickSavedSearch.bind(this)}
-            onClickRelDevices={this.onClickRelDevices.bind(this)}
-            onClickIrrelDevices={this.onClickIrrelDevices.bind(this)}
+        <TabPageBody tabs={[]} tab={0} history={this.props.history} location={this.props.location}>
+          <div className="flex-vertical" style={{height: '100%'}}>
+            <div>
+              <SearchFormView
+                onSearchKeyDown={this.onSearchKeyDown.bind(this)}
+                onClickStar={this.onClickStar.bind(this)}
+                collections={collections}
+                selectedCollections={types}
+                onChangeCollection={this.onChangeCollection.bind(this)}
+                onClickWorkflow={this.onClickWorkflow.bind(this)}
+                onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
+                onClickSearch={this.onClickSearch.bind(this)}
+                severities={severities}
+                selectedSeverities={severity}
+                onChangeSeverity={this.onChangeSeverity.bind(this)}
+                startDate={from}
+                endDate={to}
+                onChangeDateRange={this.onChangeDateRange.bind(this)}
+                onClickIllustrate={this.onClickIllustrate.bind(this)}
+                onClickSavedSearch={this.onClickSavedSearch.bind(this)}
+                onClickRelDevices={this.onClickRelDevices.bind(this)}
+                onClickIrrelDevices={this.onClickIrrelDevices.bind(this)}
 
-            monitorTemplates={monitorTemplates}
-            selectedMonitorTypes={monitorTypes}
-            onChangeMonitorType={this.onChangeMonitorType.bind(this)}
+                monitorTemplates={monitorTemplates}
+                selectedMonitorTypes={monitorTypes}
+                onChangeMonitorType={this.onChangeMonitorType.bind(this)}
 
-            onClickViewFilter={this.onClickViewFilter.bind(this)}
-            onClickGraph={this.onClickGraph.bind(this)}
+                onClickViewFilter={this.onClickViewFilter.bind(this)}
+                onClickGraph={this.onClickGraph.bind(this)}
 
-            onClickTags={this.onClickTags.bind(this)}
+                onClickTags={this.onClickTags.bind(this)}
 
-            onClickClear={this.onClickClearSearch.bind(this)}
+                onClickClear={this.onClickClearSearch.bind(this)}
 
-            onClickSearchMonitor={this.onClickSearchMonitor.bind(this)}
+                onClickSearchMonitor={this.onClickSearchMonitor.bind(this)}
 
-            onClickEntityView={this.onClickEntityView.bind(this)}
-          />
+                onClickEntityView={this.onClickEntityView.bind(this)}
+              />
 
-          <div className="text-center">
-            <div className="inline">
-              <div style={chipStyles.wrapper}>
-                {queryChips.map((p, i) =>
-                  <Chip
-                    key={`${p.name}${p.value}`}
-                    style={chipStyles.chip}
-                    onTouchTap={this.onClickChip.bind(this, i)}
-                    onRequestDelete={this.onClickRemoveChip.bind(this, i)}>
-                    {p.name !== '_all' ? <b>{p.name}: </b> : null}{p.value}
-                  </Chip>
-                )}
-                {selectedWfs.map((p, i) =>
-                  <Chip
-                    key={p.id}
-                    style={chipStyles.chip}
-                    onRequestDelete={this.onClickRemoveWfChip.bind(this, i)}>
-                    <b>Workflow: </b>{p.name}
-                  </Chip>
-                )}
-                {
-                  searchTags.map((p, i) =>
-                    <Chip
-                      key={i}
-                      style={chipStyles.chip}
-                      onRequestDelete={this.onClickRemoveTagChip.bind(this, i)}>
-                      <b>Tag: </b>{p}
-                    </Chip>
-                  )
-                }
+              <div className="text-center">
+                <div className="inline">
+                  <div style={chipStyles.wrapper}>
+                    {queryChips.map((p, i) =>
+                      <Chip
+                        key={`${p.name}${p.value}`}
+                        style={chipStyles.chip}
+                        onTouchTap={this.onClickChip.bind(this, i)}
+                        onRequestDelete={this.onClickRemoveChip.bind(this, i)}>
+                        {p.name !== '_all' ? <b>{p.name}: </b> : null}{p.value}
+                      </Chip>
+                    )}
+                    {selectedWfs.map((p, i) =>
+                      <Chip
+                        key={p.id}
+                        style={chipStyles.chip}
+                        onRequestDelete={this.onClickRemoveWfChip.bind(this, i)}>
+                        <b>Workflow: </b>{p.name}
+                      </Chip>
+                    )}
+                    {
+                      searchTags.map((p, i) =>
+                        <Chip
+                          key={i}
+                          style={chipStyles.chip}
+                          onRequestDelete={this.onClickRemoveTagChip.bind(this, i)}>
+                          <b>Tag: </b>{p}
+                        </Chip>
+                      )
+                    }
+                  </div>
+                </div>
+
+                {this.renderRelDevicesPopover()}
+                {this.renderIrrelDevicesModal()}
+                {this.renderSavePopover()}
+                {this.renderWfSelectModal()}
+                {this.renderSavedSearchModal()}
+                {this.renderSearchFieldsModal()}
+                {this.renderSearchGraphModal()}
               </div>
             </div>
-
-            {this.renderRelDevicesPopover()}
-            {this.renderIrrelDevicesModal()}
-            {this.renderSavePopover()}
-            {this.renderWfSelectModal()}
-            {this.renderSavedSearchModal()}
-            {this.renderSearchFieldsModal()}
-            {this.renderSearchGraphModal()}
-          </div>
-
-        </TabPageHeader>
-
-        <TabPageBody tabs={[]} tab={0} history={this.props.history} location={this.props.location}>
-          <div className="flex-horizontal" style={{height: '100%'}}>
-            {this.renderFieldsView()}
-            {this.renderSidebarCollapse()}
-            <div className="flex-1 flex-vertical">
-              <div className="header-red">
-                Content
-                <div className="pull-right">
-                  Total: {this.state.total}
+            <div className="flex-1">
+              <div className="flex-horizontal" style={{height: '100%'}}>
+                {this.renderFieldsView()}
+                {this.renderSidebarCollapse()}
+                <div className="flex-1 flex-vertical">
+                  <div className="header-red">
+                    Content
+                    <div className="pull-right">
+                      Total: {this.state.total}
+                    </div>
+                  </div>
+                  <div className={`flex-1 table-no-gap ${this.getTableClass()}`}>
+                    <InfiniteTable
+                      url="/search/query"
+                      cells={this.cells}
+                      ref="table"
+                      rowMetadata={{'key': 'id'}}
+                      onRowDblClick={this.onRowDblClick.bind(this)}
+                      params={this.getServiceParams()}
+                      pageSize={10}
+                      showTableHeading={false}
+                      onUpdateCount={this.onResultCountUpdate.bind(this)}
+                      selectable
+                    />
+                  </div>
                 </div>
               </div>
-              <div className={`flex-1 table-no-gap ${this.getTableClass()}`}>
-                <InfiniteTable
-                  url="/search/query"
-                  cells={this.cells}
-                  ref="table"
-                  rowMetadata={{'key': 'id'}}
-                  onRowDblClick={this.onRowDblClick.bind(this)}
-                  params={this.getServiceParams()}
-                  pageSize={10}
-                  showTableHeading={false}
-                  onUpdateCount={this.onResultCountUpdate.bind(this)}
-                  selectable
-                />
-              </div>
             </div>
+
           </div>
+
           {this.renderFilterViewModal()}
           {this.renderTagsModal()}
           {this.renderSearchMonitorModal()}

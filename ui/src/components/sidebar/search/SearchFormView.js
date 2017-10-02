@@ -100,7 +100,7 @@ export default class SearchFormView extends React.Component {
             <div className="flex-1">
               <Field name="query" component={FormInput} label="Search" onKeyDown={onSearchKeyDown} style={{width: '100%'}} className="valign-top"/>
             </div>
-            <div>
+            <div style={{width: 155}}>
               <IconButton tooltip="Search" onTouchTap={onClickSearch} type="submit" className="valign-top"><ActionSearch /></IconButton>
               <IconButton tooltip="Clear" className="valign-top" onTouchTap={onClickClear}><ClearIcon /></IconButton>
               <IconButton tooltip="Advanced" className="valign-top" onTouchTap={this.onClickToggleAdvanced.bind(this)}>
