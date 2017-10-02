@@ -129,7 +129,8 @@ export default class GDeviceBasic extends React.Component {
     return (
       <FlipView
         {...this.props}
-        hideTitle
+        hideTitle={false}
+        bodyStyle={{padding: "0px 20px 20px"}}
 
         loading={this.state.loading}
         renderFrontView={this.renderFrontView}
