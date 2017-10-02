@@ -44,7 +44,8 @@ class GenericSearch extends React.Component {
       total: 0,
       cols: [],
       anchorEl: null,
-      expanded: {}
+      expanded: {},
+      allExpanded: false
     }
     this.tooltipRebuild = debounce(ReactTooltip.rebuild, 100)
     this.cells = [{
@@ -52,7 +53,7 @@ class GenericSearch extends React.Component {
       'columnName': 'entity.id',
       'customComponent': (p) => {
         const {viewFilter} = this.props
-        const {expanded} = this.state
+        const {expanded, allExpanded} = this.state
         const {rowData} = p
         const {entity} = rowData
 
@@ -73,7 +74,9 @@ class GenericSearch extends React.Component {
 
         }
         if (!entity) return <span/>
-        const expand = expanded[entity.id]
+        let expand = expanded[entity.id]
+        if (expand === undefined) expand = allExpanded
+
         const highlighted = this.getHighlighted(entity, rowData.highlights)//expand ? this.getHighlighted(entity, rowData.highlights) : {...entity}
 
         const timeField = entity.startTimestamp ? 'startTimestamp' : 'timestamp'
@@ -102,13 +105,13 @@ class GenericSearch extends React.Component {
         const options = {
           notNull: viewFilter === viewFilters.notNull.name,
           timeField,
-          limit: expand ? 0 : 750
+          limit: 750
         }
         const ret = renderEntity2(data, options)
         const isOverflow = ret.used >= options.limit
 
         return (
-          <div className="padding-sm bt-gray inline-block">
+          <div className="padding-sm bt-gray">
             <div className="inline-block">
               {ret.node}
               {expand || !isOverflow ? null : <div className="bt-gradient"/>}
@@ -590,6 +593,14 @@ class GenericSearch extends React.Component {
     // this.props.refreshSearch()
   }
 
+  onClickToggleExpand () {
+    const {allExpanded} = this.state
+    this.setState({
+      allExpanded: !allExpanded,
+      expanded: {}
+    })
+  }
+
   ////////////////////////////////////////////////////////////////////////////////////////////////
 
   renderFields () {
@@ -964,6 +975,9 @@ class GenericSearch extends React.Component {
                   <div className="header-red">
                     Content
                     <div className="pull-right">
+                      <div className="link margin-md-right" onClick={this.onClickToggleExpand.bind(this)}>
+                        {this.state.allExpanded ? 'Collapse All' : 'Expand All'}
+                      </div>
                       Total: {this.state.total}
                     </div>
                   </div>
