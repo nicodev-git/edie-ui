@@ -1,6 +1,6 @@
 import React from 'react'
 import moment from 'moment'
-import {assign, concat, isArray, keys} from 'lodash'
+import {assign, concat, isArray, keys, isObject} from 'lodash'
 
 export function renderEntity (entity, options) {
   const ret = renderEntity2(entity, options)
@@ -93,4 +93,24 @@ function renderData (entity, isChildren, path, options, used) {  // eslint-disab
     used,
     node: isChildren ? children : <div className="inline-block">{children}</div>
   }
+}
+
+function removeNullValues(entity) {
+  if (isObject(entity)) {
+    const allKeys = keys(entity)
+    const newEntity = {}
+    allKeys.forEach(key => {
+      const value = entity[key]
+      if (value === null) return
+      newEntity[key] = removeNullValues (value)
+    })
+    return newEntity
+  } else if (isArray(entity)) {
+    const newEntity = []
+    entity.forEach(item => {
+      newEntity.push(removeNullValues(item))
+    })
+    return newEntity
+  }
+  return entity
 }
