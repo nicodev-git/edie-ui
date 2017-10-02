@@ -83,8 +83,7 @@ export default class AppletCard extends React.Component {
             <p className="author">
               {verified && <span>by&nbsp;<b>Securegion</b>&nbsp;</span>}
               {verified && <img alt="Verified" src="/resources/images/common/wizard/verified.svg" />}
-              <span>{desc2}</span>
-              <span>{desc3}</span>
+              <span>{desc2}<br/>{desc3}</span>
             </p>
           </div>
           <div className="meta">
