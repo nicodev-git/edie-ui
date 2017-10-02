@@ -893,14 +893,14 @@ class GenericSearch extends React.Component {
   }
 
   render () {
-    const { handleSubmit, monitorTemplates, searchTags, queryChips, selectedWfs } = this.props
+    const { handleSubmit, monitorTemplates } = this.props
     const { severity, monitorTypes, from, to, types } = this.getParams()
 
     return (
       <TabPage>
         <TabPageBody tabs={[]} tab={0} history={this.props.history} location={this.props.location}>
           <div className="flex-vertical" style={{height: '100%'}}>
-            <div>
+            <div style={{paddingTop: 10, paddingBottom: 20, backgroundColor: '#e5e7ec'}}>
               <SearchFormView
                 onSearchKeyDown={this.onSearchKeyDown.bind(this)}
                 onClickStar={this.onClickStar.bind(this)}
@@ -936,48 +936,13 @@ class GenericSearch extends React.Component {
 
                 onClickEntityView={this.onClickEntityView.bind(this)}
               />
-
-              <div className="text-center">
-                <div className="inline">
-                  <div style={chipStyles.wrapper}>
-                    {queryChips.map((p, i) =>
-                      <Chip
-                        key={`${p.name}${p.value}`}
-                        style={chipStyles.chip}
-                        onTouchTap={this.onClickChip.bind(this, i)}
-                        onRequestDelete={this.onClickRemoveChip.bind(this, i)}>
-                        {p.name !== '_all' ? <b>{p.name}: </b> : null}{p.value}
-                      </Chip>
-                    )}
-                    {selectedWfs.map((p, i) =>
-                      <Chip
-                        key={p.id}
-                        style={chipStyles.chip}
-                        onRequestDelete={this.onClickRemoveWfChip.bind(this, i)}>
-                        <b>Workflow: </b>{p.name}
-                      </Chip>
-                    )}
-                    {
-                      searchTags.map((p, i) =>
-                        <Chip
-                          key={i}
-                          style={chipStyles.chip}
-                          onRequestDelete={this.onClickRemoveTagChip.bind(this, i)}>
-                          <b>Tag: </b>{p}
-                        </Chip>
-                      )
-                    }
-                  </div>
-                </div>
-
-                {this.renderRelDevicesPopover()}
-                {this.renderIrrelDevicesModal()}
-                {this.renderSavePopover()}
-                {this.renderWfSelectModal()}
-                {this.renderSavedSearchModal()}
-                {this.renderSearchFieldsModal()}
-                {this.renderSearchGraphModal()}
-              </div>
+              {this.renderRelDevicesPopover()}
+              {this.renderIrrelDevicesModal()}
+              {this.renderSavePopover()}
+              {this.renderWfSelectModal()}
+              {this.renderSavedSearchModal()}
+              {this.renderSearchFieldsModal()}
+              {this.renderSearchGraphModal()}
             </div>
             <div className="flex-1">
               <div className="flex-horizontal" style={{height: '100%'}}>
@@ -1007,7 +972,6 @@ class GenericSearch extends React.Component {
                 </div>
               </div>
             </div>
-
           </div>
 
           {this.renderFilterViewModal()}
