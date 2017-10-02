@@ -109,7 +109,7 @@ export default class SearchFormView extends React.Component {
             </div>
           </div>
 
-          <div style={{height: 48}}>
+          <div className={advanced ? '' : 'hidden'} style={{height: 48}}>
             <FlatButton label="Search By" onTouchTap={this.onClickSearchBy.bind(this)} className="valign-top margin-xs-top"/>
             <SelectField
               multiple
