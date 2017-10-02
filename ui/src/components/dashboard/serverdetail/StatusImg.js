@@ -1,8 +1,5 @@
 import React from 'react'
 
-import { getDeviceType } from 'components/common/wizard/WizardConfig'
-import DeviceEditModal from 'containers/shared/wizard/DeviceEditModalContainer'
-// import {showAlert} from 'components/common/Alert'
 import {checkAgentUp} from 'shared/Global'
 import DeviceFixModal from 'containers/dashboard/serverdetail/DeviceFixModalContainer'
 
@@ -51,20 +48,6 @@ export default class StatusImg extends React.Component {
   }
 
   ///////////////////////////////////////////
-  renderDeviceEditModal () {
-    const {editDevice, deviceEditModalOpen} = this.props
-    if (!deviceEditModalOpen) return null
-
-    return (
-      <DeviceEditModal
-        deviceType={`${getDeviceType(editDevice.templateName)}-edit`}
-        title={editDevice.name}
-        monitors={editDevice.monitors}
-        onClose={() => this.props.showDeviceEditModal(false)}
-        onFinish={this.onFinishEdit.bind(this)}
-      />
-    )
-  }
 
   renderDeviceFixModal () {
     if (!this.props.deviceFixModalOpen) return null
@@ -98,7 +81,6 @@ export default class StatusImg extends React.Component {
     return (
       <span className="valign-middle margin-md-left">
         {this.renderBell()}
-        {this.renderDeviceEditModal()}
         {this.renderDeviceFixModal()}
       </span>
     )
