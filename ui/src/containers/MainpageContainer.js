@@ -37,8 +37,7 @@ import {
 
   fetchUserInfo,
 
-  updateSearchParams,
-  updateQueryChips,
+  updateQueryParams,
 
   updateBigIncidentParams,
   fetchBigIncidents,
@@ -297,8 +296,7 @@ dispatch => bindActionCreators({
 
   fetchUserInfo,
 
-  updateSearchParams,
-  updateQueryChips,
+  updateQueryParams,
 
   updateBigIncidentParams,
   fetchBigIncidents,
