@@ -6,6 +6,7 @@ import NavigationExpandMoreIcon from 'material-ui/svg-icons/navigation/expand-mo
 import EditIcon from 'material-ui/svg-icons/content/create'
 import CredIcon from 'material-ui/svg-icons/action/credit-card'
 import MonitorIcon from 'material-ui/svg-icons/action/event'
+import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
 
 import TabPage from 'components/common/TabPage'
 import TabPageBody from 'components/common/TabPageBody'
@@ -229,18 +230,11 @@ export default class MainControl extends React.Component {
   }
 
   renderAddMenu () {
-    const tpls = this.getServerTpls()
     return (
       <div className="text-right" style={{position: 'absolute', top: -45, right: 0}}>
-        <IconMenu
-          iconButtonElement={<IconButton><AddCircleIcon /></IconButton>}
-          anchorOrigin={{horizontal: 'right', vertical: 'bottom'}}
-          targetOrigin={{horizontal: 'right', vertical: 'top'}}
-        >
-          {tpls.map(p =>
-            <MenuItem key={p.id} primaryText={p.name} onTouchTap={this.onClickAddItem.bind(this, p)}/>
-          )}
-        </IconMenu>
+        <IconButton onTouchTap={() => this.props.showGaugePicker(true)}>
+          <AddCircleIcon />
+        </IconButton>
       </div>
     )
   }
