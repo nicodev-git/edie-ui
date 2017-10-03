@@ -33,6 +33,7 @@ export default class MainControl extends React.Component {
     this.state = {
       deviceWizardVisible: false
     }
+    this.lastPlaceholder = null
   }
   componentWillMount () {
     this.props.fetchGauges()
@@ -164,6 +165,77 @@ export default class MainControl extends React.Component {
 
   /////////////////////////////////////////////////////////////////////
 
+  updateLayout(layout, oldItem, newItem, isResize) {
+    if (JSON.stringify(oldItem) === JSON.stringify(newItem)) return
+    const gaugeItems = this.getGauges()
+    const items = []
+    layout.forEach((p, i) => {
+      const index = findIndex(gaugeItems, {id: p.i})
+      if (index < 0) return
+      const gauge = {
+        ...gaugeItems[index],
+        layout: {
+          i: p.i,
+          x: p.x, y: p.y,
+          w: p.w, h: p.h
+        }
+      }
+      if (isResize) {
+        if (newItem.i === gauge.id) {
+          gauge.gaugeSize = 'custom'
+        } else if (!gauge.minimized) {
+          if (gauge.layout.y === newItem.y) gauge.layout.h = newItem.h
+        }
+      } else {
+        if (!gauge.minimized) {
+          if (gauge.layout.y === newItem.y) gauge.layout.h = newItem.h
+        }
+      }
+      items.push(gauge)
+    })
+
+    const device = this.getDevice()
+    this.props.updateMapDevice({
+      ...device,
+      gauges: items
+    })
+  }
+  onLayoutChange (layout, oldItem, newItem) {
+    if (!this.lastPlaceholder) return
+    newItem.x = this.lastPlaceholder.x
+    newItem.y = this.lastPlaceholder.y
+    this.updateLayout(layout, oldItem, newItem)
+  }
+  onDragStart () {
+    this.lastPlaceholder = null
+  }
+  onDrag (layout, oldItem, newItem, placeholder, e) {
+    const rowItems = layout.filter(p => p.y === placeholder.y)
+    if (!rowItems.length) return
+    if (findIndex(rowItems, {i: newItem.i}) < 0) rowItems.push(placeholder)
+    rowItems.sort((a, b) => {
+      if (a.x > b.x) return 1
+      if (a.x < b.x) return -1
+      return 0
+    })
+
+    let x = -1
+    rowItems.forEach(p => {
+      if (x < 0) {
+        x = p.x
+      } else {
+        p.x = x
+      }
+      x += p.w
+    })
+
+    if (e) {
+      this.lastPlaceholder = placeholder
+    }
+  }
+
+  /////////////////////////////////////////////////////////////////////
+
   renderDeviceWizard () {
     if (!this.state.deviceWizardVisible) return null
 
@@ -258,6 +330,10 @@ export default class MainControl extends React.Component {
         layouts={layouts}
         style={{marginTop: -10}}
         margin={[16, 16]}
+        isResizable={false}
+        onDragStart={this.onDragStart.bind(this)}
+        onDrag={this.onDrag.bind(this)}
+        onDragStop={this.onLayoutChange.bind(this)}
       >
         {gauges.map(p => this.renderGauge(p))}
       </ResponsiveReactGridLayout>
