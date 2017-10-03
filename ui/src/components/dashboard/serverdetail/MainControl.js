@@ -1,6 +1,6 @@
 import React from 'react'
 import {findIndex} from 'lodash'
-import {ToolbarGroup, IconButton} from 'material-ui'
+import {ToolbarGroup, IconButton, IconMenu, MenuItem} from 'material-ui'
 import {Responsive, WidthProvider} from 'react-grid-layout'
 import EditIcon from 'material-ui/svg-icons/content/create'
 import CredIcon from 'material-ui/svg-icons/action/credit-card'
@@ -25,7 +25,7 @@ import { guid, getWidgetSize, layoutCols, layoutRowHeight, layoutWidthZoom, layo
 
 const ResponsiveReactGridLayout = WidthProvider(Responsive)
 
-// const menuItems = ['Event Log', 'Installed App', 'Process', 'Services', 'Users', 'Firewall', 'Network', 'Command']
+const menuItems = ['Event Log', 'Installed App', 'Process', 'Services', 'Users', 'Firewall', 'Network', 'Command']
 
 export default class MainControl extends React.Component {
   constructor (props) {
@@ -99,26 +99,16 @@ export default class MainControl extends React.Component {
   onClickMenuItem (tpl) {
     console.log(tpl)
 
-    this.props.showGaugePicker(false)
-
-    if (['News'].indexOf(tpl.name) >= 0) {
-      this.onFinishAddWizard(null, null, {
-        templateName: tpl.name,
-        name: tpl.name,
-        resource: 'search'
-      }, {tpl})
-    } else {
-      const options = {
-        title: tpl.name,
-        templateName: tpl.name,
-        gaugeSize: 'big',
-        tpl
-      }
-
-      this.showAddWizard(options, (id, name, data) => {
-
-      })
+    const options = {
+      title: tpl.name,
+      templateName: tpl.name,
+      gaugeSize: 'big',
+      tpl
     }
+
+    this.showAddWizard(options, (id, name, data) => {
+
+    })
   }
 
   onFinishAddWizard (callback, res, params, options) {
@@ -164,6 +154,14 @@ export default class MainControl extends React.Component {
     this.props.showDeviceMonitorsModal(true, this.getDevice())
   }
 
+  onClickRemoveGauge (gauge) {
+    const device = this.getDevice()
+    this.props.updateMapDevice({
+      ...device,
+      gauges: device.gauges.filter(p => p !== gauge)
+    })
+  }
+
   /////////////////////////////////////////////////////////////////////
 
   renderDeviceWizard () {
@@ -205,7 +203,7 @@ export default class MainControl extends React.Component {
           monitors={[]}
 
           updateDeviceGauge={() => {}}
-          removeDeviceGauge={() => {}}
+          removeDeviceGauge={this.onClickRemoveGauge.bind(this)}
           onClickMinimize={() => {}}
           onClickMaximize={() => {}}
           onClickModalView={() => {}}
@@ -281,21 +279,21 @@ export default class MainControl extends React.Component {
     )
   }
   renderMenu () {
-    // const {gauges} = this.props
-    // const items = (gauges || []).filter(p => menuItems.includes(p.name))
-    // return (
-    //   <IconMenu iconButtonElement={<IconButton touch={true}><NavigationExpandMoreIcon /></IconButton>}>
-    //     {items.map((p, i) =>
-    //       <MenuItem key={p.id} primaryText={p.name} onTouchTap={this.onClickMenuItem.bind(this, p)}/>
-    //     )}
-    //   </IconMenu>
-    // )
-
+    const {gauges} = this.props
+    const items = (gauges || []).filter(p => menuItems.includes(p.name))
     return (
-      <IconButton onTouchTap={() => this.props.showGaugePicker(true)}>
-        <AddCircleIcon />
-      </IconButton>
+      <IconMenu iconButtonElement={<IconButton touch={true}><AddCircleIcon /></IconButton>}>
+        {items.map((p, i) =>
+          <MenuItem key={p.id} primaryText={p.name} onTouchTap={this.onClickMenuItem.bind(this, p)}/>
+        )}
+      </IconMenu>
     )
+
+    // return (
+    //   <IconButton onTouchTap={() => this.props.showGaugePicker(true)}>
+    //     <AddCircleIcon />
+    //   </IconButton>
+    // )
   }
 
 
@@ -321,7 +319,7 @@ export default class MainControl extends React.Component {
   renderGaugePicker () {
     if (!this.props.gaugePickerOpen) return null
     return (
-      <GaugePicker {...this.props} onClickMenuItem={this.onClickMenuItem.bind(this)}/>
+      <GaugePicker {...this.props} onClickMenuItem={this.onClickMenuItem.bind(this)} types={menuItems}/>
     )
   }
 
