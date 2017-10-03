@@ -20,11 +20,12 @@ import ServerCombo from './ServerCombo'
 
 import GaugeMap from 'components/common/gauge/GaugeMap'
 import GaugePicker from 'components/common/gauge/GaugePicker'
-import { getWidgetSize, layoutCols, layoutRowHeight, layoutWidthZoom, layoutHeightZoom } from 'shared/Global'
+import GaugeWizardContainer from 'containers/shared/wizard/GaugeWizardContainer'
+import { guid, getWidgetSize, layoutCols, layoutRowHeight, layoutWidthZoom, layoutHeightZoom } from 'shared/Global'
 
 const ResponsiveReactGridLayout = WidthProvider(Responsive)
 
-const menuItems = ['Event Log', 'Installed App', 'Process', 'Services', 'Users', 'Firewall', 'Network', 'Command']
+// const menuItems = ['Event Log', 'Installed App', 'Process', 'Services', 'Users', 'Firewall', 'Network', 'Command']
 
 export default class MainControl extends React.Component {
   componentWillMount () {
@@ -89,8 +90,57 @@ export default class MainControl extends React.Component {
     return device.gauges || []
   }
 
-  onClickMenuItem () {
+  onClickMenuItem (tpl) {
+    console.log(tpl)
 
+    this.props.showGaugePicker(false)
+
+    if (['News'].indexOf(tpl.name) >= 0) {
+      this.onFinishAddWizard(null, null, {
+        templateName: tpl.name,
+        name: tpl.name,
+        resource: 'search'
+      }, {tpl})
+    } else {
+      const options = {
+        title: tpl.name,
+        templateName: tpl.name,
+        gaugeSize: 'big',
+        tpl
+      }
+
+      this.showAddWizard(options, (id, name, data) => {
+
+      })
+    }
+  }
+
+  onFinishAddWizard (callback, res, params, options) {
+    const {editDevice} = this.prosp
+    const {tpl} = options
+    params.id = guid()
+
+    if (tpl.width && tpl.height){
+      params.layout = {
+        x: 0, y: 0,
+        w: tpl.width * layoutWidthZoom, h: tpl.height * layoutHeightZoom
+      }
+      params.gaugeSize = 'custom'
+    }
+
+    this.props.updateMapDevice({
+      ...editDevice,
+      gauges: [...editDevice.gauges, params]
+    })
+  }
+
+  showAddWizard (options, callback, closeCallback) {
+    this.setState({
+      deviceWizardConfig: {
+        options, callback, closeCallback
+      },
+      deviceWizardVisible: true
+    })
   }
 
   onClickEdit () {
@@ -109,6 +159,32 @@ export default class MainControl extends React.Component {
   }
 
   /////////////////////////////////////////////////////////////////////
+
+  renderDeviceWizard () {
+    if (!this.state.deviceWizardVisible) return null
+
+    const {options, callback, closeCallback} = this.state.deviceWizardConfig
+
+    const extra = {
+      templateName: options.templateName
+    }
+
+    return (
+      <GaugeWizardContainer
+        templateName={options.templateName}
+        onClose={() => {
+          this.setState({deviceWizardVisible: false})
+          closeCallback && closeCallback()
+        }}
+        title={options.title}
+        devices={this.props.devices || []}
+        monitors={this.getMonitors()}
+        extraParams={extra}
+        onFinish={this.onFinishAddWizard.bind(this, callback)}
+        options={options}
+      />
+    )
+  }
 
   renderGauge (p) {
     let GaugePanel = GaugeMap[p.templateName || 'z']
@@ -269,6 +345,7 @@ export default class MainControl extends React.Component {
           {this.renderDeviceCredsModal()}
           {this.renderDeviceMonitorsModal()}
           {this.renderGaugePicker()}
+          {this.renderDeviceWizard()}
         </TabPageBody>
       </TabPage>
     )
