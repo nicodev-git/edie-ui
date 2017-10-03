@@ -27,6 +27,13 @@ export default class DetailLogModal extends React.Component {
     this.fetchLog()
   }
 
+  componentDidUpdate (prevProps) {
+    const {detailLogViewParam} = this.props
+    if (prevProps.detailLogViewParam && detailLogViewParam && detailLogViewParam.index !== prevProps.detailLogViewParam.index) {
+      this.fetchLog()
+    }
+  }
+
   fetchLog () {
     const {page} = this.state
     const {detailLogViewParam} = this.props
@@ -37,16 +44,17 @@ export default class DetailLogModal extends React.Component {
     })
 
     if (page === 0) {
+      const to = detailLogViewParam.data[detailLogViewParam.index].entity.timestamp
       axios.all([
         axios.get(`${ROOT_URL}/search/query?${encodeUrlParams({
           ...query,
           from: 0,
-          to: detailLogViewParam.data[detailLogViewParam.index].entity.timestamp,
+          to,
           sortDir: 'desc'
         })}`),
         axios.get(`${ROOT_URL}/search/query?${encodeUrlParams({
           ...query,
-          from: query.to + 1,
+          from: to + 1,
           to: moment().endOf('year'),
           sortDir: 'asc'
         })}`)
@@ -56,7 +64,7 @@ export default class DetailLogModal extends React.Component {
 
         this.setState({data: [...data1, ...data2], loading: false})
       })
-    } else if (page < 0) {
+    }/* else if (page < 0) {
       axios.get(`${ROOT_URL}/search/query?${encodeUrlParams({
         ...query,
         sortDir: 'desc',
@@ -74,7 +82,7 @@ export default class DetailLogModal extends React.Component {
       })}`).then(res => {
         this.setState({data: this.getData(res.data), loading: false})
       })
-    }
+    }*/
   }
 
   onHide () {
