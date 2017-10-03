@@ -105,7 +105,7 @@ export default class SysDashboardView extends React.Component {
   renderAddMenu () {
     const tpls = this.getServerTpls()
     return (
-      <div className="text-right" style={{position: 'absolute', top: -45, right: 0}}>
+      <div className="text-right" style={{position: 'absolute', top: 0, right: 0}}>
         <IconMenu
           iconButtonElement={<IconButton><AddCircleIcon /></IconButton>}
           anchorOrigin={{horizontal: 'right', vertical: 'bottom'}}
