@@ -22,6 +22,7 @@ class LogView extends React.Component {
     this.state = {
       total: 0,
       cols: [],
+      data: [],
       anchorEl: null
     }
     this.tooltipRebuild = debounce(ReactTooltip.rebuild, 100)
@@ -56,16 +57,9 @@ class LogView extends React.Component {
   }
 
   onResultCountUpdate (total, data) {
-    // let {cols} = this.state
-    // if (data && data.length) {
-    //   cols = keys(data[0].entity)
-    // }
-    // this.setState({
-    //   total,
-    //   cols
-    // })
-    //
-    // this.tooltipRebuild()
+    this.setState({
+      data
+    })
   }
   onSearchKeyDown (e) {
     if (e.keyCode === 13) {
@@ -84,6 +78,7 @@ class LogView extends React.Component {
         size: 100,
         types: 'event',
       },
+      data: logViewParam.q ? this.state.data : [],
       rowId: row.id
     }
 
