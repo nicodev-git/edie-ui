@@ -28,6 +28,12 @@ const ResponsiveReactGridLayout = WidthProvider(Responsive)
 // const menuItems = ['Event Log', 'Installed App', 'Process', 'Services', 'Users', 'Firewall', 'Network', 'Command']
 
 export default class MainControl extends React.Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      deviceWizardVisible: false
+    }
+  }
   componentWillMount () {
     this.props.fetchGauges()
 
@@ -116,7 +122,7 @@ export default class MainControl extends React.Component {
   }
 
   onFinishAddWizard (callback, res, params, options) {
-    const {editDevice} = this.prosp
+    const editDevice = this.getDevice()
     const {tpl} = options
     params.id = guid()
 
@@ -177,8 +183,8 @@ export default class MainControl extends React.Component {
           closeCallback && closeCallback()
         }}
         title={options.title}
-        devices={this.props.devices || []}
-        monitors={this.getMonitors()}
+        devices={this.props.allDevices || []}
+        monitors={[]}
         extraParams={extra}
         onFinish={this.onFinishAddWizard.bind(this, callback)}
         options={options}

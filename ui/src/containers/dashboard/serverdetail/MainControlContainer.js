@@ -50,6 +50,7 @@ export default connect(
     deviceMonitorsModalOpen: state.devices.deviceMonitorsModalOpen,
     monitorTemplates: state.settings.monitorTemplates,
     deviceTemplates: state.settings.deviceTemplates,
+    monitorGroups: state.settings.monitorGroups,
 
     credModalDefaultType: state.devices.credModalDefaultType,
     credListModalOpen: state.settings.credListModalOpen,
