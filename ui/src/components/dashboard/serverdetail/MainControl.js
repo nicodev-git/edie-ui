@@ -228,6 +228,23 @@ export default class MainControl extends React.Component {
     )
   }
 
+  renderAddMenu () {
+    const tpls = this.getServerTpls()
+    return (
+      <div className="text-right" style={{position: 'absolute', top: -45, right: 0}}>
+        <IconMenu
+          iconButtonElement={<IconButton><AddCircleIcon /></IconButton>}
+          anchorOrigin={{horizontal: 'right', vertical: 'bottom'}}
+          targetOrigin={{horizontal: 'right', vertical: 'top'}}
+        >
+          {tpls.map(p =>
+            <MenuItem key={p.id} primaryText={p.name} onTouchTap={this.onClickAddItem.bind(this, p)}/>
+          )}
+        </IconMenu>
+      </div>
+    )
+  }
+
   render () {
     const device = this.getDevice()
     return (
@@ -249,6 +266,7 @@ export default class MainControl extends React.Component {
         <TabPageBody
           tabs={ServerDetailTab(device.id, device.templateName)}
           history={this.props.history} location={this.props.location} transparent>
+          {this.renderAddMenu()}
           {this.renderGrid()}
           {this.renderDeviceEditModal()}
           {this.renderDeviceCredsModal()}
