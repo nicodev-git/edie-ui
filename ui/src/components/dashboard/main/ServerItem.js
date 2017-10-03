@@ -4,18 +4,35 @@ import AppletCard from 'components/common/AppletCard'
 import { extImageBaseUrl, appletColors as colors } from 'shared/Global'
 
 export default class ServerItem extends React.Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      up: false
+    }
+  }
 
-
-  renderRightIcons () {
+  getStatus () {
     const {lastSeen, agentType, agent} = this.props.server
     if (agentType) {
       const now = new Date().getTime()
       if (agentType === 'agent') {
-        if (agent && (now - agent.lastSeen) < 3 * 60 * 1000) return null
+        if (agent && (now - agent.lastSeen) < 3 * 60 * 1000) return true
       } else if (agentType === 'collector') {
-        if ((now - lastSeen) < 3 * 60 * 1000) return null
+        if ((now - lastSeen) < 3 * 60 * 1000) return true
       }
     }
+    return false
+  }
+
+  componentWillMount () {
+    this.setState({
+      up: this.getStatus()
+    })
+  }
+
+  renderRightIcons () {
+    const {up} = this.state
+    if (up) return null
 
     return (
       <img
