@@ -25,7 +25,9 @@ import {
   fetchMonitorTemplates,
 
   showDeviceMonitorsModal,
-  openDeviceMonitorWizard
+  openDeviceMonitorWizard,
+
+  showGaugePicker
 } from 'actions'
 
 class MainControlContainer extends React.Component {
@@ -83,6 +85,8 @@ export default connect(
     fetchMonitorTemplates,
 
     showDeviceMonitorsModal,
-    openDeviceMonitorWizard
+    openDeviceMonitorWizard,
+
+    showGaugePicker
   }
 )(withRouter(MainControlContainer))

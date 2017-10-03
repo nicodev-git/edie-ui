@@ -1,8 +1,7 @@
 import React from 'react'
 import {findIndex} from 'lodash'
-import {ToolbarGroup, IconMenu, IconButton, MenuItem} from 'material-ui'
+import {ToolbarGroup, IconButton} from 'material-ui'
 import {Responsive, WidthProvider} from 'react-grid-layout'
-import NavigationExpandMoreIcon from 'material-ui/svg-icons/navigation/expand-more'
 import EditIcon from 'material-ui/svg-icons/content/create'
 import CredIcon from 'material-ui/svg-icons/action/credit-card'
 import MonitorIcon from 'material-ui/svg-icons/action/event'
@@ -20,6 +19,7 @@ import DeviceMonitorsModal from './edit/DeviceMonitorsModal'
 import ServerCombo from './ServerCombo'
 
 import GaugeMap from 'components/common/gauge/GaugeMap'
+import GaugePicker from 'components/common/gauge/GaugePicker'
 import { getWidgetSize, layoutCols, layoutRowHeight, layoutWidthZoom, layoutHeightZoom } from 'shared/Global'
 
 const ResponsiveReactGridLayout = WidthProvider(Responsive)
@@ -199,16 +199,23 @@ export default class MainControl extends React.Component {
     )
   }
   renderMenu () {
-    const {gauges} = this.props
-    const items = (gauges || []).filter(p => menuItems.includes(p.name))
+    // const {gauges} = this.props
+    // const items = (gauges || []).filter(p => menuItems.includes(p.name))
+    // return (
+    //   <IconMenu iconButtonElement={<IconButton touch={true}><NavigationExpandMoreIcon /></IconButton>}>
+    //     {items.map((p, i) =>
+    //       <MenuItem key={p.id} primaryText={p.name} onTouchTap={this.onClickMenuItem.bind(this, p)}/>
+    //     )}
+    //   </IconMenu>
+    // )
+
     return (
-      <IconMenu iconButtonElement={<IconButton touch={true}><NavigationExpandMoreIcon /></IconButton>}>
-        {items.map((p, i) =>
-          <MenuItem key={p.id} primaryText={p.name} onTouchTap={this.onClickMenuItem.bind(this, p)}/>
-        )}
-      </IconMenu>
+      <IconButton onTouchTap={() => this.props.showGaugePicker(true)}>
+        <AddCircleIcon />
+      </IconButton>
     )
   }
+
 
   renderDeviceCredsModal () {
     const {deviceCredsModalOpen} = this.props
@@ -229,13 +236,10 @@ export default class MainControl extends React.Component {
     )
   }
 
-  renderAddMenu () {
+  renderGaugePicker () {
+    if (!this.props.gaugePickerOpen) return null
     return (
-      <div className="text-right" style={{position: 'absolute', top: -45, right: 0}}>
-        <IconButton onTouchTap={() => this.props.showGaugePicker(true)}>
-          <AddCircleIcon />
-        </IconButton>
-      </div>
+      <GaugePicker {...this.props} onClickMenuItem={this.onClickMenuItem.bind(this)}/>
     )
   }
 
@@ -260,11 +264,11 @@ export default class MainControl extends React.Component {
         <TabPageBody
           tabs={ServerDetailTab(device.id, device.templateName)}
           history={this.props.history} location={this.props.location} transparent>
-          {this.renderAddMenu()}
           {this.renderGrid()}
           {this.renderDeviceEditModal()}
           {this.renderDeviceCredsModal()}
           {this.renderDeviceMonitorsModal()}
+          {this.renderGaugePicker()}
         </TabPageBody>
       </TabPage>
     )
