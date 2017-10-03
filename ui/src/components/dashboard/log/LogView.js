@@ -1,7 +1,7 @@
 import React from 'react'
 import { reduxForm, submit } from 'redux-form'
 import { connect } from 'react-redux'
-import { assign, debounce } from 'lodash'
+import { assign, debounce, findIndex } from 'lodash'
 import ReactTooltip from 'react-tooltip'
 
 import TabPage from 'components/common/TabPage'
@@ -69,17 +69,22 @@ class LogView extends React.Component {
 
   onClickDetailView (row) {
     const {logViewParam} = this.props
+    const {data} = this.state
+
+    const index = logViewParam.q ? findIndex(data, {id: row.id}) : 0
+
+
     const params = {
       query: {
         q: `(monitorid:${logViewParam.monitorId})`,
-        from: 0,
-        to: row.entity.timestamp,
+        // from: 0,
+        // to: row.entity.timestamp,
         page: 0,
         size: 100,
         types: 'event',
       },
-      data: logViewParam.q ? this.state.data : [],
-      rowId: row.id
+      data: logViewParam.q ? data : [row],
+      index
     }
 
     // console.log(`${row.entity.timestamp} Between ${params.dateFromEpoch} - ${params.dateToEpoch}`)

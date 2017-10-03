@@ -29,7 +29,8 @@ export default class DetailLogModal extends React.Component {
 
   fetchLog () {
     const {page} = this.state
-    const {query} = this.props.detailLogViewParam
+    const {detailLogViewParam} = this.props
+    const {query} = detailLogViewParam
 
     this.setState({
       loading: true
@@ -39,6 +40,8 @@ export default class DetailLogModal extends React.Component {
       axios.all([
         axios.get(`${ROOT_URL}/search/query?${encodeUrlParams({
           ...query,
+          from: 0,
+          to: detailLogViewParam.data[detailLogViewParam.index].entity.timestamp,
           sortDir: 'desc'
         })}`),
         axios.get(`${ROOT_URL}/search/query?${encodeUrlParams({
@@ -79,28 +82,42 @@ export default class DetailLogModal extends React.Component {
   }
 
   onClickPrev () {
-    this.setState({
-      page: this.state.page - 1
-    }, () => {
-      this.fetchLog()
+    const params = this.props.detailLogViewParam
+
+    this.props.showDetailLogModal(true, {
+      ...params,
+      index: params.index - 1
     })
+    // this.setState({
+    //   page: this.state.page - 1
+    // }, () => {
+    //   this.fetchLog()
+    // })
   }
 
   onClickNext () {
-    this.setState({
-      page: this.state.page + 1
-    }, () => {
-      this.fetchLog()
+    const params = this.props.detailLogViewParam
+
+    this.props.showDetailLogModal(true, {
+      ...params,
+      index: params.index + 1
     })
+    // this.setState({
+    //   page: this.state.page + 1
+    // }, () => {
+    //   this.fetchLog()
+    // })
   }
 
   render () {
+    const params = this.props.detailLogViewParam
     return (
       <DetailLogModalView
         onHide={this.onHide.bind(this)}
-        rowId={this.props.detailLogViewParam.rowId}
+        rowId={params.data[params.index].id}
         items={this.state.data}
-        page={this.state.page}
+        page={params.index}
+        size={params.data.length}
         loading={this.state.loading}
         onClickPrev={this.onClickPrev.bind(this)}
         onClickNext={this.onClickNext.bind(this)}

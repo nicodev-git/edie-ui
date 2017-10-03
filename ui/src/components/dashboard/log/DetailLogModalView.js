@@ -14,7 +14,7 @@ export default class DetailLogModalView extends React.Component {
   }
   renderTable () {
     const list = this.props.items
-    const {rowId, page} = this.props
+    const {rowId} = this.props
 
     return (
       <div className="bg-white" style={{marginTop: 40}}>
@@ -23,19 +23,19 @@ export default class DetailLogModalView extends React.Component {
             <div dangerouslySetInnerHTML={{__html: row.entity && row.entity.dataobj ? row.entity.dataobj.line : ' '}}/>
           </div>
         )}
-        {page === 0 && <div style={{height: 700}}/>}
+        <div style={{height: 700}}/>
       </div>
     )
   }
 
   render () {
-    const {onHide, onClickPrev, onClickNext, loading} = this.props
+    const {onHide, onClickPrev, onClickNext, loading, page, size} = this.props
     return (
       <Modal title="Log" onRequestClose={onHide} contentStyle={{width: '90%', maxWidth: 'initial'}}>
         {this.renderTable()}
         <div style={{position: 'absolute', top: 11, left: 60, right: 60, textAlign: 'center', zIndex: 10}}>
-          <RaisedButton label="Prev" onTouchTap={onClickPrev} disabled={loading} secondary/>&nbsp;
-          <RaisedButton label="Next" onTouchTap={onClickNext} disabled={loading} secondary/>
+          <RaisedButton label="Prev" onTouchTap={onClickPrev} disabled={loading || page < 1} secondary/>&nbsp;
+          <RaisedButton label="Next" onTouchTap={onClickNext} disabled={loading || page >= (size - 1)} secondary/>
         </div>
         {loading && <RefreshOverlay/>}
       </Modal>
