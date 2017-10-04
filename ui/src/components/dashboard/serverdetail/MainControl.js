@@ -106,10 +106,14 @@ export default class MainControl extends React.Component {
       gaugeSize: 'big',
       tpl
     }
+    //
+    // this.showAddWizard(options, (id, name, data) => {
+    //
+    // })
 
-    this.showAddWizard(options, (id, name, data) => {
-
-    })
+    this.onFinishAddWizard(null, null, {
+      name: tpl.name
+    }, options)
   }
 
   onFinishAddWizard (callback, res, params, options) {
