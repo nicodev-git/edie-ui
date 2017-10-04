@@ -112,7 +112,9 @@ export default class MainControl extends React.Component {
     // })
 
     this.onFinishAddWizard(null, null, {
-      name: tpl.name
+      name: tpl.name,
+      templateName: tpl.name,
+      gaugeSize: options.gaugeSize
     }, options)
   }
 
@@ -280,9 +282,7 @@ export default class MainControl extends React.Component {
 
           updateDeviceGauge={() => {}}
           removeDeviceGauge={this.onClickRemoveGauge.bind(this)}
-          onClickMinimize={() => {}}
-          onClickMaximize={() => {}}
-          onClickModalView={() => {}}
+          viewOnly
           style={{width: '100%', height: '100%'}}
         />
       </div>

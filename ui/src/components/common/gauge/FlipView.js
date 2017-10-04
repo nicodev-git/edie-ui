@@ -64,7 +64,7 @@ export default class FlipView extends React.Component {
 
   renderInfoIcon () {
     const {hovered} = this.state
-    const {onClickDelete, onClickMinimize, onClickMaximize, onClickRefresh, gauge} = this.props
+    const {onClickDelete, onClickMinimize, onClickMaximize, onClickRefresh, gauge, viewOnly} = this.props
     return (
       <div
         style={{position: 'absolute', right: 5, bottom: 5, zIndex: 11}}
@@ -72,13 +72,13 @@ export default class FlipView extends React.Component {
         {onClickRefresh && <RefreshIcon onTouchTap={() => onClickRefresh(gauge)}/>}
         {
           gauge.minimized ? (
-            <MaximizeIcon onTouchTap={() => onClickMaximize(gauge)}/>
+            <MaximizeIcon onTouchTap={() => onClickMaximize(gauge)} className={onClickMaximize ? '' : 'hidden'}/>
           ) : (
-            <MinimizeIcon onTouchTap={() => onClickMinimize(gauge)}/>
+            <MinimizeIcon onTouchTap={() => onClickMinimize(gauge)} className={onClickMinimize ? '' : 'hidden'}/>
           )
         }
         <DeleteIcon onTouchTap={() => onClickDelete(gauge)}/>
-        <InfoIcon size={24} onClick={this.onClickFlip.bind(this)}/>
+        {!viewOnly && <InfoIcon size={24} onClick={this.onClickFlip.bind(this)}/>}
       </div>
     )
   }
@@ -100,7 +100,7 @@ export default class FlipView extends React.Component {
   }
 
   renderCard (cls, children, front) {
-    const {title, gauge, loading, viewOnly, onClickModalView, paperStyle, hideTitle, bodyStyle, titleStyle} = this.props
+    const {title, gauge, loading, onClickModalView, paperStyle, hideTitle, bodyStyle, titleStyle} = this.props
     return (
       <div className={`${cls} ${this.getFlipClass()}`}>
         <div className="flex-vertical" style={{height: '100%'}}>
@@ -114,7 +114,7 @@ export default class FlipView extends React.Component {
                   onClick={() => onClickModalView(gauge)}>
                   <img src="/resources/images/dashboard/gauge.png" width="48" alt=""/><br/>
                   {gauge.name}
-                  {!viewOnly && this.renderInfoIcon()}
+                  {this.renderInfoIcon()}
                 </div>
               ) : (
                 <Paper className="flex-1 flex-vertical" style={paperStyle} zDepth={paperZDepth} onMouseEnter={this.onMouseEnter} onMouseLeave={this.onMouseLeave}>
@@ -124,7 +124,7 @@ export default class FlipView extends React.Component {
                   <div className="flex-1 flex-vertical" style={bodyStyle || {padding: '16px 20px 35px'}}>
                     {children}
                   </div>
-                  {!viewOnly && this.renderInfoIcon()}
+                  {this.renderInfoIcon()}
                   {loading && front && <RefreshOverlay />}
                 </Paper>
               )
