@@ -98,10 +98,13 @@ export default class IncidentTable extends Component {
     showPrompt('Please type comment.', '', text => {
       if (!text) return
 
-      const {userInfo} = this.props
+      const {userInfo, newIncidentMsg} = this.props
       const user = userInfo ? userInfo.username : 'User'
 
       this.props.fixIncident(incident, user, text)
+      if (newIncidentMsg && newIncidentMsg.incident.id === incident.id) {
+        this.props.updateNewIncidentMsg(null)
+      }
     })
   }
 
