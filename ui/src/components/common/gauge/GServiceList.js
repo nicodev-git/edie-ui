@@ -1,5 +1,5 @@
 import React from 'react'
-import {findIndex} from 'lodash'
+import {findIndex, keys} from 'lodash'
 import {RaisedButton, CircularProgress} from 'material-ui'
 
 import FlipView from './FlipView'
@@ -32,13 +32,14 @@ export default class GServiceList extends React.Component {
       'displayName': '    ',
       'columnName': 'Status',
       'cssClassName': 'width-200',
-      'customComponent': (props) => {
-        const val = props.data
+      'customComponent': (p) => {
+        const val = p.data
         const label = val === 'Running' ? 'Stop' : 'Start'
+        const waiting = this.state.waiting[p.rowData.ServiceName]
         return (
           <div>
-            <RaisedButton label={label} onTouchTap={this.onClickStart.bind(this, props.rowData)} primary={val !== 'Running'}/>
-
+            <RaisedButton label={label} onTouchTap={this.onClickStart.bind(this, p.rowData)} primary={val !== 'Running'} disabled={waiting}/>
+            {waiting && <CircularProgress size={24} className="valign-middle margin-lg-left"/>}
           </div>
         )
       }
@@ -64,7 +65,8 @@ export default class GServiceList extends React.Component {
 
   startUpdate () {
     this.setState({
-      services: []
+      services: [],
+      waiting: {}
     })
     this.monitorSocket = new MonitorSocket({
       listener: this.onMonitorMessage.bind(this)
@@ -77,6 +79,11 @@ export default class GServiceList extends React.Component {
   }
 
   //////////////////////////////////////////////////////////////////////////////////////////
+  getServiceStatus(services, name) {
+    const index = findIndex(services, {ServiceName: name})
+    if (index < 0) return ''
+    return services[index].Status
+  }
 
   onSocketOpen () {
     this.monitorSocket.send({
@@ -89,8 +96,16 @@ export default class GServiceList extends React.Component {
   onMonitorMessage (msg) {
     if (msg.action === 'update' && msg.deviceId === this.props.device.id) {
       const {service} = msg.data
+      const {waiting, services} = this.state
+
+      const updatedWaiting = {}
+      keys(waiting).forEach(p => {
+        if (this.getServiceStatus(services, p) !== this.getServiceStatus(service, p)) return
+        updatedWaiting[p] = true
+      })
       this.setState({
-        services: service
+        services: service,
+        waiting: updatedWaiting
       })
     }
   }
@@ -110,6 +125,13 @@ export default class GServiceList extends React.Component {
     } else {
       this.sendCommandMessage('StartServiceCommand', {service: service.ServiceName})
     }
+
+    const {waiting} = this.state
+    waiting[service.ServiceName] = true
+
+    this.setState({
+      waiting
+    })
   }
   onSubmit (options, values) {
     console.log(values)
