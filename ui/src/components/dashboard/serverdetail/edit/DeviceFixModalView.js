@@ -42,6 +42,16 @@ export default class DeviceFixModalView extends React.Component {
     )
   }
 
+  renderDistribution () {
+    const {config} = this.props
+    if (!config.distribution) return null
+    return (
+      <div>
+
+      </div>
+    )
+  }
+
   render () {
     const {onHide, msg, onSubmit, modals} = this.props
     return (
@@ -50,6 +60,7 @@ export default class DeviceFixModalView extends React.Component {
           <CardPanel>
             {msg}
             {this.renderAgentPick()}
+            {this.renderDistribution()}
           </CardPanel>
 
           {this.renderCredentials()}

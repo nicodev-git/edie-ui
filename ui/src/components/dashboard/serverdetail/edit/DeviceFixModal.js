@@ -45,7 +45,8 @@ class DeviceFixModal extends React.Component {
     const {fixCode} = this.props
     const config = {
       agentPick: fixCode === 1,
-      credentials: fixCode === 1 || fixCode === 4 || fixCode === 2
+      credentials: fixCode === 1 || fixCode === 4 || fixCode === 2,
+      distribution: fixCode === 3
     }
     return config
   }
