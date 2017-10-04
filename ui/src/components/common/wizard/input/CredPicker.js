@@ -3,8 +3,9 @@ import { IconButton, Chip } from 'material-ui'
 import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
 import CloseIcon from 'material-ui/svg-icons/navigation/close'
 import ListIcon from 'material-ui/svg-icons/action/list'
+import { Field } from 'redux-form'
 
-import { CardPanel } from 'components/modal/parts'
+import { CardPanel, FormCheckbox } from 'components/modal/parts'
 import {mergeCredentials} from 'shared/Global'
 import { chipStyles } from 'style/common/materialStyles'
 import {showAlert} from 'components/common/Alert'
@@ -83,6 +84,10 @@ export default class CredPicker extends React.Component {
     const credentials = this.getCredentials()
     return (
       <CardPanel title="Credentials" tools={this.renderButtons()}>
+        <div>
+          <Field name="useIntegratedSecurity" component={FormCheckbox} type="checkbox" label="Integrated Security"/>
+        </div>
+
         <div style={{minHeight: 200, maxHeight: 300, overflow: 'auto'}}>
           <table className="table table-hover">
             <thead>

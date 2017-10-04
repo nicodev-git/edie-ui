@@ -1,6 +1,5 @@
 import React from 'react'
-// import { IconButton } from 'material-ui'
-// import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
+import {Form} from 'redux-form'
 
 import { Modal } from 'components/modal/parts'
 import CredPicker from 'components/common/wizard/input/CredPicker'
@@ -23,11 +22,13 @@ export default class DeviceCredsModalView extends React.Component {
     const {onHide, deviceCredentials, deviceGlobalCredentials} = this.props
     return (
       <Modal title="Credentials" onRequestClose={onHide}>
-        <CredPicker
-          {...this.props}
-          deviceCredentials={deviceCredentials}
-          deviceGlobalCredentials={deviceGlobalCredentials}
-        />
+        <Form onSubmit={() => {}}>
+          <CredPicker
+            {...this.props}
+            deviceCredentials={deviceCredentials}
+            deviceGlobalCredentials={deviceGlobalCredentials}
+          />
+        </Form>
         {this.renderCredPicker()}
       </Modal>
     )

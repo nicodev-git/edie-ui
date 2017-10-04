@@ -2,11 +2,9 @@ import React from 'react'
 import DeleteIcon from 'material-ui/svg-icons/action/delete'
 import EditIcon from 'material-ui/svg-icons/content/create'
 import {IconButton, Chip} from 'material-ui'
-import { Field } from 'redux-form'
 
 import CredentialModal from 'components/credentials/CredentialModal'
 import {showConfirm} from 'components/common/Alert'
-import { FormCheckbox } from 'components/modal/parts'
 import {getDeviceCredentials} from 'shared/Global'
 import { chipStyles } from 'style/common/materialStyles'
 
@@ -62,9 +60,6 @@ export default class Credentials extends React.Component {
 
     return (
       <div style={{minHeight: 150}}>
-        <div>
-          <Field name="useIntegratedSecurity" component={FormCheckbox} type="checkbox" label="Integrated Security"/>
-        </div>
         <table className="table table-hover">
           <thead>
             <tr>

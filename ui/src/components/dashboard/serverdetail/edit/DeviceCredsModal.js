@@ -1,8 +1,9 @@
 import React from 'react'
+import { reduxForm } from 'redux-form'
 
 import DeviceCredsModalView from './DeviceCredsModalView'
 
-export default class DeviceCredsModal extends React.Component {
+class DeviceCredsModal extends React.Component {
   componentWillMount () {
     this.props.fetchCredTypes()
     this.props.fetchCredentials()
@@ -56,3 +57,7 @@ export default class DeviceCredsModal extends React.Component {
     )
   }
 }
+
+export default reduxForm({
+  form: 'deviceCredsForm'
+})(DeviceCredsModal)
