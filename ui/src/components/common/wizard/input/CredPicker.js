@@ -86,13 +86,14 @@ export default class CredPicker extends React.Component {
     )
   }
   render () {
+    const {isWin} = this.props
     const credentials = this.getCredentials()
     return (
       <CardPanel title="Credentials" tools={this.renderButtons()}>
-        <div>
+        <div className={isWin ? '' : 'hidden'}>
           <Field
             name="useIntegratedSecurity" component={FormCheckbox} type="checkbox" label="Integrated Security"
-            onCheck={this.onChangeIntegrated.bind(this)}/>
+            onChange={this.onChangeIntegrated.bind(this)}/>
         </div>
 
         <div style={{minHeight: 200, maxHeight: 300, overflow: 'auto'}}>

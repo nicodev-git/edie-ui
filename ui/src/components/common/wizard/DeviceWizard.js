@@ -26,6 +26,7 @@ import CredentialModal from 'components/credentials/CredentialModal'
 import CollectorInstallModal from './input/CollectorInstallModal'
 
 import {getAgentStatusMessage, mergeCredentials, getDeviceCollectors} from 'shared/Global'
+import {isWindowsDevice} from 'shared/Global'
 
 class DeviceWizard extends Component {
   constructor (props) {
@@ -296,6 +297,9 @@ class DeviceWizard extends Component {
         onChangeIntegratedSecurity={this.onChangeIntegratedSecurity.bind(this)}
         values={values}
         config={config}
+        isWin={isWindowsDevice({
+          templateName: this.props.extraParams.templateName
+        })}
       />
     )
   }

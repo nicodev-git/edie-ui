@@ -4,6 +4,7 @@ import {Form} from 'redux-form'
 import { Modal } from 'components/modal/parts'
 import CredPicker from 'components/common/wizard/input/CredPicker'
 import CredentialModal from 'components/credentials/CredentialModal'
+import {isWindowsDevice} from 'shared/Global'
 
 export default class DeviceCredsModalView extends React.Component {
   renderCredPicker () {
@@ -19,7 +20,7 @@ export default class DeviceCredsModalView extends React.Component {
   }
 
   render () {
-    const {onHide, deviceCredentials, deviceGlobalCredentials} = this.props
+    const {onHide, deviceCredentials, deviceGlobalCredentials, editDevice} = this.props
     return (
       <Modal title="Credentials" onRequestClose={onHide}>
         <Form onSubmit={() => {}}>
@@ -27,6 +28,7 @@ export default class DeviceCredsModalView extends React.Component {
             {...this.props}
             deviceCredentials={deviceCredentials}
             deviceGlobalCredentials={deviceGlobalCredentials}
+            isWin={isWindowsDevice(editDevice)}
           />
         </Form>
         {this.renderCredPicker()}
