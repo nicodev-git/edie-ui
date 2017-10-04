@@ -6,6 +6,7 @@ import EditIcon from 'material-ui/svg-icons/content/create'
 import CredIcon from 'material-ui/svg-icons/action/credit-card'
 import MonitorIcon from 'material-ui/svg-icons/action/event'
 import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
+import RenewIcon from 'material-ui/svg-icons/action/autorenew'
 
 import TabPage from 'components/common/TabPage'
 import TabPageBody from 'components/common/TabPageBody'
@@ -22,6 +23,8 @@ import GaugeMap from 'components/common/gauge/GaugeMap'
 import GaugePicker from 'components/common/gauge/GaugePicker'
 import GaugeWizardContainer from 'containers/shared/wizard/GaugeWizardContainer'
 import { guid, getWidgetSize, layoutCols, layoutRowHeight, layoutWidthZoom, layoutHeightZoom } from 'shared/Global'
+
+import {showConfirm} from 'components/common/Alert'
 
 const ResponsiveReactGridLayout = WidthProvider(Responsive)
 
@@ -167,6 +170,13 @@ export default class MainControl extends React.Component {
     this.props.updateMapDevice({
       ...device,
       gauges: device.gauges.filter(p => p !== gauge)
+    })
+  }
+
+  onClickReset () {
+    showConfirm('Click OK to reset', btn => {
+      if (btn !== 'ok') return
+      this.resetGauges()
     })
   }
 
@@ -478,6 +488,7 @@ export default class MainControl extends React.Component {
             <IconButton onTouchTap={this.onClickMonitorEdit.bind(this)} tooltip="Monitors"><MonitorIcon/></IconButton>
           </ToolbarGroup>
           <ToolbarGroup>
+            <IconButton onTouchTap={this.onClickReset.bind(this)} tooltip="Reset"><RenewIcon/></IconButton>
             {this.renderMenu()}
           </ToolbarGroup>
         </TabPageHeader>
