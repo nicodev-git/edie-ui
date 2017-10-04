@@ -19,11 +19,8 @@ export default class GridLayout extends React.Component {
           searchList={[]}
           monitors={[]}
 
-          updateDeviceGauge={() => {}}
-          removeDeviceGauge={() => {}}
-          onClickMinimize={() => {}}
-          onClickMaximize={() => {}}
-          onClickModalView={() => {}}
+          viewOnly
+          noDelete
           style={{width: '100%', height: '100%'}}
         />
       </div>
@@ -75,6 +72,7 @@ export default class GridLayout extends React.Component {
         layouts={layouts}
         style={{marginTop: -10}}
         margin={[16, 16]}
+        isResizable={false}
       >
         {gauges.map(p => this.renderGauge(p))}
       </ResponsiveReactGridLayout>

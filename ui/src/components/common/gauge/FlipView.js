@@ -64,7 +64,7 @@ export default class FlipView extends React.Component {
 
   renderInfoIcon () {
     const {hovered} = this.state
-    const {onClickDelete, onClickMinimize, onClickMaximize, onClickRefresh, gauge, viewOnly} = this.props
+    const {onClickDelete, onClickMinimize, onClickMaximize, onClickRefresh, gauge, viewOnly, noDelete} = this.props
     return (
       <div
         style={{position: 'absolute', right: 5, bottom: 5, zIndex: 11}}
@@ -77,7 +77,7 @@ export default class FlipView extends React.Component {
             <MinimizeIcon onTouchTap={() => onClickMinimize(gauge)} className={onClickMinimize ? '' : 'hidden'}/>
           )
         }
-        <DeleteIcon onTouchTap={() => onClickDelete(gauge)}/>
+        {!noDelete && <DeleteIcon onTouchTap={() => onClickDelete(gauge)}/>}
         {!viewOnly && <InfoIcon size={24} onClick={this.onClickFlip.bind(this)}/>}
       </div>
     )
