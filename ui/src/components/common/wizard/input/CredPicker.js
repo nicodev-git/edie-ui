@@ -61,6 +61,11 @@ export default class CredPicker extends React.Component {
     this.props.showCredListModal(false)
   }
 
+  onChangeIntegrated (e, checked) {
+    const {onChangeIntegratedSecurity} = this.props
+    onChangeIntegratedSecurity && onChangeIntegratedSecurity(checked)
+  }
+
   renderPicker () {
     if (!this.props.credListModalOpen) return null
     return (
@@ -85,7 +90,9 @@ export default class CredPicker extends React.Component {
     return (
       <CardPanel title="Credentials" tools={this.renderButtons()}>
         <div>
-          <Field name="useIntegratedSecurity" component={FormCheckbox} type="checkbox" label="Integrated Security"/>
+          <Field
+            name="useIntegratedSecurity" component={FormCheckbox} type="checkbox" label="Integrated Security"
+            onCheck={this.onChangeIntegrated.bind(this)}/>
         </div>
 
         <div style={{minHeight: 200, maxHeight: 300, overflow: 'auto'}}>

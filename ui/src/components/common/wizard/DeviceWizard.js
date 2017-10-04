@@ -293,6 +293,7 @@ class DeviceWizard extends Component {
         deviceGlobalCredentials={deviceGlobalCredentials}
         onChangeGlobalCredential={this.onChangeGlobalCredential.bind(this)}
         onClickDelete={this.onDeleteDeviceCred.bind(this)}
+        onChangeIntegratedSecurity={this.onChangeIntegratedSecurity.bind(this)}
         values={values}
         config={config}
       />
@@ -410,6 +411,14 @@ class DeviceWizard extends Component {
     deviceGlobalCredentials = [...deviceGlobalCredentials, newCred]
     this.setState({deviceGlobalCredentials}, () => this.checkDeviceAgentStatus())
   }
+
+  onChangeIntegratedSecurity (enabled) {
+    setTimeout(() => {
+      this.checkDeviceAgentStatus()
+    }, 1)
+  }
+
+  /////////////////////////////////////////////////////////////////////////////////////////////////
 
   renderParamEditModal () {
     if (!this.props.paramEditModalOpen) return null

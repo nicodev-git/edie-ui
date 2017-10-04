@@ -39,7 +39,7 @@ const selector = formValueSelector('deviceForm')
 
 export default connect(
   (state, props) => ({
-    formValues: selector(state, 'wanip', 'name', 'agentType', 'collectorId', 'distribution', 'agentCollectorId'),
+    formValues: selector(state, 'wanip', 'name', 'agentType', 'collectorId', 'distribution', 'agentCollectorId', 'useIntegratedSecurity'),
     initialValues: {
       distribution: 'Ubuntu',
       agentType: 'collector',
