@@ -1,6 +1,6 @@
 import React from 'react'
 import {findIndex} from 'lodash'
-import {RaisedButton} from 'material-ui'
+import {RaisedButton, CircularProgress} from 'material-ui'
 
 import FlipView from './FlipView'
 import GEditView from './GEditView'
@@ -15,7 +15,8 @@ export default class GServiceList extends React.Component {
   constructor (props) {
     super (props)
     this.state = {
-      services: []
+      services: [],
+      waiting: {}
     }
     this.renderBackView = this.renderBackView.bind(this)
     this.renderFrontView = this.renderFrontView.bind(this)
@@ -34,7 +35,12 @@ export default class GServiceList extends React.Component {
       'customComponent': (props) => {
         const val = props.data
         const label = val === 'Running' ? 'Stop' : 'Start'
-        return <RaisedButton label={label} onTouchTap={this.onClickStart.bind(this, props.rowData)} primary={val !== 'Running'}/>
+        return (
+          <div>
+            <RaisedButton label={label} onTouchTap={this.onClickStart.bind(this, props.rowData)} primary={val !== 'Running'}/>
+
+          </div>
+        )
       }
     }]
   }
