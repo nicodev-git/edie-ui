@@ -69,7 +69,7 @@ export default class MainControl extends React.Component {
       gaugeSize: 'custom',
       layout: {
         i: 'basic1',
-        x: 0, y: gauges[0].y + gauges[0].h,
+        x: 0, y: gauges[0].layout.y + gauges[0].layout.h,
         w: 5 * layoutWidthZoom, h: 2.5 * layoutHeightZoom
       }
     })
@@ -114,7 +114,8 @@ export default class MainControl extends React.Component {
     this.onFinishAddWizard(null, null, {
       name: tpl.name,
       templateName: tpl.name,
-      gaugeSize: options.gaugeSize
+      gaugeSize: options.gaugeSize,
+      deviceId: this.getDeviceId()
     }, options)
   }
 
@@ -170,6 +171,23 @@ export default class MainControl extends React.Component {
   }
 
   /////////////////////////////////////////////////////////////////////
+  findGauge (id) {
+    const gauges = this.getGauges()
+    const index = findIndex(gauges, {id})
+    if (index < 0) return null
+    return gauges[index]
+  }
+
+  gaugeAspectRatio (templateName) {
+    const {gauges} = this.props
+    const index = findIndex(gauges, {name: templateName})
+    if (index < 0) return null
+    const {aspectWidth, aspectHeight} = gauges[index]
+    if (aspectWidth && aspectHeight) {
+      return {w: aspectWidth, h: aspectHeight}
+    }
+    return null
+  }
 
   updateLayout(layout, oldItem, newItem, isResize) {
     if (JSON.stringify(oldItem) === JSON.stringify(newItem)) return
@@ -215,6 +233,7 @@ export default class MainControl extends React.Component {
   onDragStart () {
     this.lastPlaceholder = null
   }
+
   onDrag (layout, oldItem, newItem, placeholder, e) {
     const rowItems = layout.filter(p => p.y === placeholder.y)
     if (!rowItems.length) return
@@ -238,6 +257,44 @@ export default class MainControl extends React.Component {
     if (e) {
       this.lastPlaceholder = placeholder
     }
+  }
+
+  onResize (layout, oldItem, newItem, placeholder, mouseEvent, el) {
+    const gauge = this.findGauge(newItem.i)
+    if (!gauge) return
+    if (gauge.minimized) {
+      newItem.w = oldItem.w
+      newItem.h = oldItem.h
+      return
+    }
+    const ratio = this.gaugeAspectRatio(gauge.templateName)
+    if (!ratio) return
+    if (newItem.w !== oldItem.w) {
+      const h = Math.ceil(newItem.w / layoutWidthZoom / ratio.w * ratio.h * layoutHeightZoom)
+      newItem.h = h
+      if (placeholder) placeholder.h = h
+    } else {
+      const w = Math.ceil(newItem.h / layoutHeightZoom / ratio.h * ratio.w * layoutWidthZoom)
+      newItem.w = w
+      if (placeholder) placeholder.w = w
+    }
+    layout.forEach(p => {
+      if (p.i === newItem.i) {
+        p.w = newItem.w
+        p.h = newItem.h
+      }
+    })
+  }
+  onResizeStop (layout, oldItem, newItem, placeholder, mouseEvent, el) {
+    const gauge = this.findGauge(newItem.i)
+    if (!gauge) return
+    if (gauge.minimized) {
+      newItem.w = oldItem.w
+      newItem.h = oldItem.h
+      return
+    }
+    this.onDrag(layout, oldItem, newItem, newItem)
+    this.updateLayout(layout, oldItem, newItem, true)
   }
 
   /////////////////////////////////////////////////////////////////////
@@ -334,10 +391,13 @@ export default class MainControl extends React.Component {
         layouts={layouts}
         style={{marginTop: -10}}
         margin={[16, 16]}
-        isResizable={false}
+
         onDragStart={this.onDragStart.bind(this)}
         onDrag={this.onDrag.bind(this)}
         onDragStop={this.onLayoutChange.bind(this)}
+
+        onResize={this.onResize.bind(this)}
+        onResizeStop={this.onResizeStop.bind(this)}
       >
         {gauges.map(p => this.renderGauge(p))}
       </ResponsiveReactGridLayout>
