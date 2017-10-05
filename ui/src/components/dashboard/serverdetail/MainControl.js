@@ -52,7 +52,7 @@ export default class MainControl extends React.Component {
     const device = this.getDevice()
     const gauges = []
 
-    const tpls = ['Device Info', 'Device Basic', 'Network', 'Disk']
+    const tpls = ['Device Info', 'Device Basic', 'Network']
 
     const w = 5 * layoutWidthZoom
     const h = 2.5 * layoutHeightZoom
@@ -62,6 +62,7 @@ export default class MainControl extends React.Component {
         name: '',
         templateName: tpl,
         gaugeSize: 'custom',
+        deviceId: device.id,
         layout: {
           i: `basic${i}`,
           x: (i % 2) * w, y: parseInt(i / 2, 10) * h,
@@ -69,6 +70,7 @@ export default class MainControl extends React.Component {
         }
       })
     })
+
 
     this.props.updateMapDevice({
       ...device,
