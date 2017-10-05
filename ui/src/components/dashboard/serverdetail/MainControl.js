@@ -51,31 +51,25 @@ export default class MainControl extends React.Component {
   resetGauges () {
     const device = this.getDevice()
     const gauges = []
-    gauges.push({
-      id: 'basic0',
-      name: '',
-      templateName: 'Device Info',
-      deviceId: device.id,
-      gaugeSize: 'custom',
-      layout: {
-        i: 'basic0',
-        x: 0, y: 0,
-        w: 5 * layoutWidthZoom, h: 2.5 * layoutHeightZoom
-      }
+
+    const tpls = ['Device Info', 'Device Basic', 'Network', 'Disk']
+
+    const w = 5 * layoutWidthZoom
+    const h = 2.5 * layoutHeightZoom
+    tpls.forEach((tpl, i) => {
+      gauges.push({
+        id: `basic${i}`,
+        name: '',
+        templateName: tpl,
+        gaugeSize: 'custom',
+        layout: {
+          i: `basic${i}`,
+          x: (i % 2) * w, y: parseInt(i / 2, 10) * h,
+          w, h
+        }
+      })
     })
 
-    gauges.push({
-      id: 'basic1',
-      name: 'Status',
-      templateName: 'Device Basic',
-      deviceId: device.id,
-      gaugeSize: 'custom',
-      layout: {
-        i: 'basic1',
-        x: 0, y: gauges[0].layout.y + gauges[0].layout.h,
-        w: 5 * layoutWidthZoom, h: 2.5 * layoutHeightZoom
-      }
-    })
     this.props.updateMapDevice({
       ...device,
       gauges
