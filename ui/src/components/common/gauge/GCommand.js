@@ -31,8 +31,11 @@ export default class GCommand extends React.Component {
   }
 
   componentWillUnmount () {
+    this.stopCommandTimer()
     this.monitorSocket && this.monitorSocket.close()
   }
+
+  ////////////////////////////////////////////////
 
   onSocketOpen () {
 
@@ -41,8 +44,10 @@ export default class GCommand extends React.Component {
     if (msg.action === 'update' && msg.deviceId === this.props.gauge.deviceId) {
       const {commandResult} = msg.data
       this.setState({
-        commandResult
+        commandResult,
+        loading: false
       })
+      this.stopCommandTimer()
     }
   }
   sendCommandMessage (name, params) {
@@ -55,15 +60,40 @@ export default class GCommand extends React.Component {
       }
     })
   }
+
+  startCommandTimer () {
+    this.stopCommandTimer()
+    this.commandTimer = setTimeout(() => {
+      this.setState({
+        loading: false
+      })
+    }, 15000)
+  }
+
+  stopCommandTimer () {
+    this.commandTimer && clearTimeout(this.commandTimer)
+    this.commandTimer = 0
+  }
+
   onClickSend () {
     const {command, output} = this.state
+    if (!command) return
     this.sendCommandMessage('RunCommand', {
       command, output
     })
 
     this.setState({
-      loading: true
+      loading: true,
+      command: ''
     })
+
+    this.startCommandTimer()
+  }
+
+  onKeyDownInput (e) {
+    if (e.keyCode === 13) {
+      this.onClickSend()
+    }
   }
 
   onSubmit (options, values) {
@@ -108,6 +138,7 @@ export default class GCommand extends React.Component {
             <TextField
               name="command" style={{width: '100%'}} value={command}
               onChange={(e, command) => this.setState({command})}
+              onKeyDown={this.onKeyDownInput.bind(this)}
               autoFocus
             />
           </div>
