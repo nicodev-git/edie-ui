@@ -16,7 +16,8 @@ export default class GCommand extends React.Component {
     this.state = {
       commandResult: '',
       command: '',
-      output: true
+      output: true,
+      loading: false
     }
     this.renderBackView = this.renderBackView.bind(this)
     this.renderFrontView = this.renderFrontView.bind(this)
@@ -58,6 +59,10 @@ export default class GCommand extends React.Component {
     const {command, output} = this.state
     this.sendCommandMessage('RunCommand', {
       command, output
+    })
+
+    this.setState({
+      loading: true
     })
   }
 
