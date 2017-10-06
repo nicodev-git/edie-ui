@@ -100,8 +100,8 @@ export default class SearchFormView extends React.Component {
       <form onSubmit={onSubmit}>
         <div style={{background: '#dadada', paddingLeft: 10}}>
           <div style={{height: 48}}>
-            <TextField name="text" style={{width: 300}} hintText="Free Text" value={this.state.freeText} onKeyUp={onKeyUpFreeText}
-                       onChange={(e, freeText) => this.setState({freeText})}/>
+            <TextField name="text" style={{width: 300}} hintText="Search..." value={this.state.freeText} onKeyUp={onKeyUpFreeText}
+                       onChange={(e, freeText) => this.setState({freeText})} className={`valign-top ${advanced ? 'hidden' : ''}`}/>
             <FlatButton label="Search By" onTouchTap={this.onClickSearchBy.bind(this)} className="valign-top margin-xs-top"/>
             <SelectField
               multiple
