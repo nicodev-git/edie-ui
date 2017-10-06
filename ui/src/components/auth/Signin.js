@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import ReactDOM from 'react-dom'
 import { reduxForm, Field } from 'redux-form'
 import {parse} from 'query-string'
 import RefreshOverlay from 'components/common/RefreshOverlay'
@@ -17,6 +18,9 @@ class Signin extends Component {
       this.setState({
         loading: false
       }, () => {
+        // this.refs.pw && this.refs.pw.getRenderedCompont().focus()
+        // ReactDOM.findDOMNode(this.refs.formDiv).focus()
+        this.field1.getRenderedComponent().focus()
       })
     }
   }
@@ -62,7 +66,7 @@ class Signin extends Component {
           <h1>Incident Manager</h1>
           <p>Version 2017.2</p>
         </div>
-        <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
+        <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))} ref="formDiv">
           <div className="box">
             <div className="logo"><img src="/resources/images/auth/logo.png" alt=""/></div>
             <div className="form">
@@ -72,7 +76,9 @@ class Signin extends Component {
               <div className="line" />
 
               <div className="field"><img src="/resources/images/auth/pass_icon.png" alt=""/></div>
-              <Field name="password" component={this.renderInput} type="password" label="Password" className="text_field"/>
+              <Field name="password" component={this.renderInput} type="password" label="Password" className="text_field" withRef
+                     ref={(componentRef) => this.field1 = componentRef}
+                     refField="field1"/>
 
             </div>
             <button type="submit" style={{border: 'none', padding: 0, background: 'none'}}>
