@@ -39,6 +39,12 @@ export default class ProcessTable extends React.Component {
     }, {
       'displayName': 'Location',
       'columnName': 'Location'
+    }, {
+      'displayName': 'CPU',
+      'columnName': 'Cpu'
+    }, {
+      'displayName': 'Memory',
+      'columnName': 'Mem'
     }]
   }
   componentWillMount () {

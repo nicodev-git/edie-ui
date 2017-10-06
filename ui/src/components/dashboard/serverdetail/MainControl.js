@@ -7,6 +7,8 @@ import CredIcon from 'material-ui/svg-icons/action/credit-card'
 import MonitorIcon from 'material-ui/svg-icons/action/event'
 import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
 import RenewIcon from 'material-ui/svg-icons/action/autorenew'
+import LockOpenIcon from 'material-ui/svg-icons/action/lock-open'
+import LockOutlineIcon from 'material-ui/svg-icons/action/lock-outline'
 
 import TabPage from 'components/common/TabPage'
 import TabPageBody from 'components/common/TabPageBody'
@@ -176,6 +178,15 @@ export default class MainControl extends React.Component {
     })
   }
 
+  onClickToggleLock () {
+    const device = this.getDevice()
+    this.props.updateMapDevice({
+      ...device,
+      gaugeLocked: !device.gaugeLocked
+    })
+  }
+
+
   /////////////////////////////////////////////////////////////////////
   findGauge (id) {
     const gauges = this.getGauges()
@@ -334,6 +345,8 @@ export default class MainControl extends React.Component {
   renderGauge (p) {
     let GaugePanel = GaugeMap[p.templateName || 'z']
     if (!GaugePanel) return <div key={p.id}/>
+
+    const device = this.getDevice()
     return (
       <div key={p.id}>
         <GaugePanel
@@ -346,6 +359,7 @@ export default class MainControl extends React.Component {
           updateDeviceGauge={() => {}}
           removeDeviceGauge={this.onClickRemoveGauge.bind(this)}
           viewOnly
+          noDelete={device.gaugeLocked}
           style={{width: '100%', height: '100%'}}
         />
       </div>
@@ -353,6 +367,7 @@ export default class MainControl extends React.Component {
   }
 
   renderGrid () {
+    const device = this.getDevice()
     const gauges = this.getGauges()
     const layout = mw => {
       let x = 0
@@ -404,6 +419,9 @@ export default class MainControl extends React.Component {
 
         onResize={this.onResize.bind(this)}
         onResizeStop={this.onResizeStop.bind(this)}
+
+        isResizable={!device.gaugeLocked}
+        isDraggable={!device.gaugeLocked}
       >
         {gauges.map(p => this.renderGauge(p))}
       </ResponsiveReactGridLayout>
@@ -484,6 +502,9 @@ export default class MainControl extends React.Component {
             <IconButton onTouchTap={this.onClickMonitorEdit.bind(this)} tooltip="Monitors"><MonitorIcon/></IconButton>
           </ToolbarGroup>
           <ToolbarGroup>
+            <IconButton onTouchTap={this.onClickToggleLock.bind(this)} tooltip={device.gaugeLocked ? 'Unlock' : 'Lock'}>
+              {device.gaugeLocked ? <LockOpenIcon/> : <LockOutlineIcon/>}
+            </IconButton>
             <IconButton onTouchTap={this.onClickReset.bind(this)} tooltip="Reset"><RenewIcon/></IconButton>
             {this.renderMenu()}
           </ToolbarGroup>
