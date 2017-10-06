@@ -279,11 +279,15 @@ class GenericSearch extends React.Component {
     console.log(parsed)
     console.log(QueryParser.toString(parsed))
 
-    this.updateQueryParams({
+    const params ={
       ...queryParams,
       q: query,
       draw: queryParams.draw + 1
-    })
+    }
+    this.updateQueryParams(params)
+
+    const {freeText} = this.getParams(params)
+    this.props.change('freeText', freeText)
   }
 
   getTypeChar (type) {
