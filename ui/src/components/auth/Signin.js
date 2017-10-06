@@ -1,13 +1,33 @@
 import React, { Component } from 'react'
 import { reduxForm, Field } from 'redux-form'
 import {parse} from 'query-string'
+import RefreshOverlay from 'components/common/RefreshOverlay'
 
 class Signin extends Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      loading: false
+    }
+  }
+
+  componentDidUpdate (prevProps) {
+    const {errorMessage} = prevProps
+    if (!errorMessage && this.props.errorMessage) {
+      this.setState({
+        loading: false
+      }, () => {
+      })
+    }
+  }
 
   handleFormSubmit ({ email, password }) {
     const { signUser, location, history } = this.props
     const params = parse(location.search)
     signUser({ email, password }, params['redirect'], history)
+    this.setState({
+      loading: true
+    })
   }
   renderAlert () {
     let { errorMessage } = this.props
@@ -47,8 +67,7 @@ class Signin extends Component {
             <div className="logo"><img src="/resources/images/auth/logo.png" alt=""/></div>
             <div className="form">
               <div className="field"><img src="/resources/images/auth/user_icon.png" alt="" /></div>
-              <Field
-                name="email" component={this.renderInput} type="text" label="Username" className="text_field" autoFocus/>
+              <Field name="email" component={this.renderInput} type="text" label="Username" className="text_field" autoFocus/>
 
               <div className="line" />
 
@@ -61,6 +80,8 @@ class Signin extends Component {
             </button>
 
             { this.renderAlert() }
+
+            {this.state.loading && <RefreshOverlay/>}
           </div>
         </form>
         <div className="copyright_text">

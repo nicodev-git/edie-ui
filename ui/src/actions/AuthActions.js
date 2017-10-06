@@ -12,6 +12,8 @@ import {
   ACTIVATE_USER,
   ACTIVATE_MSG,
   FETCH_MESSAGE,
+
+  AUTH_ERROR,
   NO_AUTH_ERROR
 } from './types'
 
@@ -22,6 +24,7 @@ import { getAuthConfig, getRequestConfig } from './util'
 
 export const signUser = ({ email, password }, redirect, history) => {
   return (dispatch) => {
+    dispatch({type: AUTH_ERROR, msg: ''})
     axios.post(`${ROOT_URL}/api/auth/login`,
       {
         username: email,

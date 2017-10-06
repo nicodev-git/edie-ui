@@ -1,4 +1,5 @@
 import React from 'react'
+import ReactDOM from 'react-dom'
 import {RefreshIndicator} from 'material-ui'
 
 const loadingStyle = {
@@ -19,10 +20,13 @@ const overlayStyle = {
 }
 
 export default class RefreshOverlay extends React.Component {
+  componentDidMount () {
+    ReactDOM.findDOMNode(this.refs.containerDiv).focus();
+  }
   render () {
     return (
       <div style={overlayStyle}>
-        <div style={loadingStyle}>
+        <div style={loadingStyle} tabIndex="0" ref="containerDiv">
           <RefreshIndicator
             size={50}
             left={0}
