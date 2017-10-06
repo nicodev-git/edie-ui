@@ -100,6 +100,8 @@ export default class SearchFormView extends React.Component {
       <form onSubmit={onSubmit}>
         <div style={{background: '#dadada', paddingLeft: 10}}>
           <div style={{height: 48}}>
+            <TextField name="text" style={{width: 300}} hintText="Free Text" value={this.state.freeText} onKeyUp={onKeyUpFreeText}
+                       onChange={(e, freeText) => this.setState({freeText})}/>
             <FlatButton label="Search By" onTouchTap={this.onClickSearchBy.bind(this)} className="valign-top margin-xs-top"/>
             <SelectField
               multiple
@@ -143,10 +145,6 @@ export default class SearchFormView extends React.Component {
               onRequestClose={this.hideSearchBy.bind(this)}
               style={{minWidth: 300}}
             >
-              <div className="margin-md-left">
-                <TextField name="text" style={{width: 300}} hintText="Free Text" value={this.state.freeText} onKeyUp={onKeyUpFreeText}
-                  onChange={(e, freeText) => this.setState({freeText})}/>
-              </div>
               <div>
                 <FlatButton label="Workflows" onTouchTap={() => this.hideSearchBy() && onClickWorkflow()} style={{width: '100%', textAlign: 'left'}}/>
                 <FlatButton label="Device/Monitors" onTouchTap={() => this.hideSearchBy() && onClickSearchMonitor()} style={{width: '100%', textAlign: 'left'}}/>
