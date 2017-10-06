@@ -1,7 +1,7 @@
 import React from 'react'
 import { Field } from 'redux-form'
 import { findIndex } from 'lodash'
-import {FlatButton, SelectField, TextField, Popover, MenuItem, IconButton} from 'material-ui'
+import {FlatButton, SelectField, Popover, MenuItem, IconButton} from 'material-ui'
 import ActionSearch from 'material-ui/svg-icons/action/search'
 import ToggleStar from 'material-ui/svg-icons/toggle/star-border'
 import FilledStar from 'material-ui/svg-icons/toggle/star'
@@ -20,8 +20,7 @@ export default class SearchFormView extends React.Component {
     super(props)
     this.state = {
       openSearchBy: false,
-      advanced: false,
-      freeText: ''
+      advanced: false
     }
   }
   onClickSearchBy (e) {
@@ -91,7 +90,7 @@ export default class SearchFormView extends React.Component {
 
       onClickSearchMonitor,
 
-      onKeyUpFreeText
+      onKeyDownFreeText
     } = this.props
 
     const {advanced} = this.state
@@ -100,8 +99,8 @@ export default class SearchFormView extends React.Component {
       <form onSubmit={onSubmit}>
         <div style={{background: '#dadada', paddingLeft: 10}}>
           <div style={{height: 48}}>
-            <TextField name="text" style={{width: 300}} hintText="Search..." value={this.state.freeText} onKeyUp={onKeyUpFreeText}
-                       onChange={(e, freeText) => this.setState({freeText})} className={`valign-top ${advanced ? 'hidden' : ''}`}/>
+            <Field name="freeText" component={FormInput} label="Search" onKeyDown={onKeyDownFreeText} style={{width: 300}}
+                   className={`valign-top ${advanced ? 'hidden' : ''}`}/>
             <FlatButton label="Search By" onTouchTap={this.onClickSearchBy.bind(this)} className="valign-top margin-xs-top"/>
             <SelectField
               multiple

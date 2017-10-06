@@ -152,6 +152,9 @@ class GenericSearch extends React.Component {
         this.props.resetViewCols()
         this.updateQueryParams(params)
         this.props.change('query', params.q)
+
+        const {freeText} = this.getParams(params)
+        this.props.change('freeText', freeText)
       } catch (e) {}
     } else if (filterType) {
       let query = []
@@ -179,6 +182,7 @@ class GenericSearch extends React.Component {
       this.props.resetViewCols()
       this.updateQueryParams(params)
       this.props.change('query', q)
+      this.props.change('freeText', '')
     } else {
       this.onClickClearSearch()
     }
@@ -322,27 +326,11 @@ class GenericSearch extends React.Component {
     if (!selectedField) return
     this.props.closeFieldsPopover()
     this.props.change('query', '')
+    this.props.change('freeText', '')
 
     const newQueryChips = concat([], queryChips, {name: selectedField.path, value})
     this.props.updateQueryChips(newQueryChips)
     this.props.updateSearchParams(assign({}, params, {
-      query: newQueryChips.map(m => `${m.name}=${m.value}`).join(' and ')
-    }), this.props.history)
-  }
-
-  onClickChip (index) {
-    const chip = this.props.queryChips[index]
-    const newQueryChips = this.props.queryChips.filter((p, i) => i !== index)
-    this.props.updateQueryChips(newQueryChips)
-
-    const query = chip.name === '_all' ? chip.value : `${chip.name}=${chip.value}`
-    this.props.change('query', query)
-  }
-
-  onClickRemoveChip (index) {
-    const newQueryChips = this.props.queryChips.filter((p, i) => i !== index)
-    this.props.updateQueryChips(newQueryChips)
-    this.props.updateSearchParams(assign({}, this.props.params, {
       query: newQueryChips.map(m => `${m.name}=${m.value}`).join(' and ')
     }), this.props.history)
   }
@@ -459,7 +447,7 @@ class GenericSearch extends React.Component {
     this.updateQuery(newQuery)
   }
 
-  onKeyUpFreeText (e) {
+  onKeyDownFreeText (e) {
     if (e.keyCode === 13) {
       const {formValues} = this.props
       const newQuery = modifyFieldValue(formValues.query, '_all', e.target.value, true)
@@ -520,14 +508,6 @@ class GenericSearch extends React.Component {
 
     const newQuery = modifyArrayValues(formValues.query, 'tags', tags)
     this.updateQuery(newQuery)
-
-    // const {searchTags, updateSearchTags} = this.props
-    // const newTags = [...searchTags]
-    // tags.forEach(tag => {
-    //   if (newTags.indexOf(tag.name) >= 0) return
-    //   newTags.push(tag.name)
-    // })
-    // updateSearchTags(newTags)
   }
   onClickRemoveTagChip (index) {
     const {searchTags, updateSearchTags} = this.props
@@ -552,6 +532,7 @@ class GenericSearch extends React.Component {
       q
     })
     this.props.change('query', q)
+    this.props.change('freeText', '')
   }
 
   onClickToggleFields () {
@@ -923,7 +904,7 @@ class GenericSearch extends React.Component {
 
   render () {
     const { handleSubmit, monitorTemplates } = this.props
-    const { severity, monitorTypes, from, to, types } = this.getParams()
+    const { severity, monitorTypes, from, to, types, freeText } = this.getParams()
 
     return (
       <TabPage>
@@ -950,7 +931,8 @@ class GenericSearch extends React.Component {
                 onClickRelDevices={this.onClickRelDevices.bind(this)}
                 onClickIrrelDevices={this.onClickIrrelDevices.bind(this)}
 
-                onKeyUpFreeText={this.onKeyUpFreeText.bind(this)}
+                freeText={freeText}
+                onKeyDownFreeText={this.onKeyDownFreeText.bind(this)}
 
                 monitorTemplates={monitorTemplates}
                 selectedMonitorTypes={monitorTypes}
@@ -1026,6 +1008,6 @@ const selector = formValueSelector('genericSearchForm')
 export default connect(
   state => ({
     initialValues: {query: state.search.queryParams.q},
-    formValues: selector(state, 'query', 'searchOptionIndex')
+    formValues: selector(state, 'query', 'searchOptionIndex', 'freeText')
   })
 )(GenericSearchForm)
