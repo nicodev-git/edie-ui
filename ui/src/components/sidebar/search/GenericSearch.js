@@ -828,6 +828,7 @@ class GenericSearch extends React.Component {
       deviceNames: getArrayValues(parsed, 'device'),
       types: getArrayValues(parsed, 'type', collections.map(p => p.value)),
       freeText: getFieldValue(parsed, '_all'),
+      eventLog: getFieldValue(parsed, 'eventlog'),
       ...dateRange
     }
 
@@ -841,7 +842,7 @@ class GenericSearch extends React.Component {
     const { workflows, allDevices } = this.props
     if (!queryParams) queryParams = this.props.queryParams
 
-    const { from, to, workflowNames, monitorNames, deviceNames, types, severity } = this.getParams(queryParams)
+    const { from, to, workflowNames, monitorNames, deviceNames, types, severity, eventLog } = this.getParams(queryParams)
     const parsed = this.parse(queryParams.q)
 
     removeField(findField(parsed, 'workflows'), true)
@@ -851,6 +852,7 @@ class GenericSearch extends React.Component {
     removeField(findField(parsed, 'from'))
     removeField(findField(parsed, 'severity'), true)
     removeField(findField(parsed, 'type'), true)
+    removeField(findField(parsed, 'eventlog'))
 
     const qs = []
     const q = queryToString(parsed)
@@ -889,6 +891,12 @@ class GenericSearch extends React.Component {
     //Severity
     if (severity.length)
       qs.push(`(severity:${severity.join(' OR ')})`)
+
+    //EventLog
+    if (eventLog) {
+      qs.push(`(_all:${eventLog})`)
+      qs.push(`(monitortype:log)`)
+    }
 
     return {
       ...queryParams,
