@@ -82,7 +82,7 @@ export default class GServers extends React.Component {
       })
     } else {
       this.props.closeDevice()
-      this.props.history.push(`/serverdetail/${device.id}`)
+      this.props.history.push(`/dashboard/serverdetail/${device.id}`)
     }
   }
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

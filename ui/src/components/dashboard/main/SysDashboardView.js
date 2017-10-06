@@ -25,7 +25,7 @@ export default class SysDashboardView extends React.Component {
   }
 
   onClickServer (server) {
-    this.props.history.push(`/serverdetail/${server.id}`)
+    this.props.history.push(`/dashboard/serverdetail/${server.id}`)
   }
 
   onClickDeleteServer (server) {

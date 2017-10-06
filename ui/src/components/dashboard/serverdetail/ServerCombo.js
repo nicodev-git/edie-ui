@@ -12,7 +12,7 @@ export default class ServerCombo extends React.Component {
     // const i = findIndex(allDevices, {id: value})
 
     this.props.fetchDevice(value)
-    this.props.history.push(`/serverdetail/${value}`)
+    this.props.history.push(`/dashboard/serverdetail/${value}`)
   }
 
   render () {
