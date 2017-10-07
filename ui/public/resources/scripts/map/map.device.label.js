@@ -114,6 +114,7 @@ fabric.DeviceLabel.create = function(options){
 
     canvas: null,
     hasRotatingPoint: false,
+    hasBorders: false,
 
     deviceObj: null,
     lines: [],

@@ -404,6 +404,7 @@ fabric.Device.create = function(options, callback){
     statusImageTop: config.statusImageTop,
 
     hasRotatingPoint: false,
+    hasBorders: false,
     lockScalingFlip: true,
 
     canvas: config.canvas,
@@ -495,6 +496,7 @@ fabric.Device.create = function(options, callback){
     data: config.data,
 
     hasRotatingPoint: false,
+    hasBorders: false,
 
     imageObj: imageObj,
     labelObj: labelObj,

@@ -116,7 +116,8 @@ fabric.ShapeText.create = function(options){
     selectable: options.canvas.map.editable,
     lines: [],
     canvas: null,
-    hasRotatingPoint: false
+    hasRotatingPoint: false,
+    hasBorders: false
   };
 
   var config = $.extend({}, defaults, options);

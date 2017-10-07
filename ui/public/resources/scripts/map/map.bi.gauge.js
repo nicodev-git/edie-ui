@@ -93,6 +93,7 @@ fabric.BiGauge.create = function(options){
     lines: [],
     canvas: null,
     hasRotatingPoint: false,
+    hasBorders: false,
   };
 
   var config = $.extend({}, defaults, options);

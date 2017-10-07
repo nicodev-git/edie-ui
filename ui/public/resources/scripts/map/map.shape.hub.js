@@ -110,6 +110,7 @@ fabric.ShapeHub.create = function(options){
 
     lines: [],
     hasRotatingPoint: false,
+    hasBorders: false,
     angle: config.angle || 0,
 
     data: config.data,
