@@ -195,7 +195,7 @@ export default class Toolbar extends React.Component {
     }
 
     return (
-      <div className={`panel-heading text-center map-heading ${this.state.headerCollapsed ? 'collapsed' : ''}`}>
+      <div className={`panel-heading ${this.state.headerCollapsed ? 'collapsed' : ''}`}>
         <MapMenu {...this.props}/>
 
         <a href="javascript:;" className="btn-new-incident" onClick={this.onClickNewIncident.bind(this)}>

@@ -162,7 +162,7 @@ export default class Toolbar extends Component {
     const popover = {
       position: 'absolute',
       zIndex: '2',
-      left: '-40px',
+      right: 0,
       top: '30px'
     }
     const cover = {
@@ -175,8 +175,7 @@ export default class Toolbar extends Component {
     const lineTypes = this.renderLineTypes(popover, cover)
 
     return (
-      <div className={`panel-heading map-toolbar text-center map-heading
-        ${this.state.headerCollapsed ? 'collapsed' : ''}`}>
+      <div className={`map-toolbar p-none ${this.state.headerCollapsed ? 'collapsed' : ''}`}>
         <MapMenu {...this.props}/>
         <ToolbarOptions
           onNewIncident={this.onClickNewIncident.bind(this)}

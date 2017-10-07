@@ -5,7 +5,7 @@ const ColorPicker = ({popover, cover, line, lineGroup, isPickerDisplayed,
   onColorPick, onPickerChange, onPickerClose }) => (
     <div
       className="input-group colorpicker-element"
-      style={{display: lineGroup ? 'block' : 'none'}}
+      style={lineGroup ? null : {display: 'none'}}
       onClick={onColorPick}
     >
       <div className="input-group-addon">
