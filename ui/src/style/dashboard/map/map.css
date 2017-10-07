@@ -119,19 +119,6 @@ select.map-select {
     vertical-align: middle;
 }
 
-.map-heading.collapsed {
-    padding: 0;
-    height: 12px;
-}
-
-.map-heading.collapsed > * {
-    display: none;
-}
-
-.map-heading .panel-options {
-    right: 40px;
-}
-
 a.btn-new-incident {
     margin-left: 5px;
     vertical-align: middle;
@@ -212,19 +199,6 @@ li.dropdown-settings {
     display: none;
 }
 
-.map-heading.collapsed #map-header-toggle{
-    display: block;
-    top: -11px;
-}
-
-.map-heading.collapsed #map-header-toggle .up{
-    display: none;
-}
-
-.map-heading.collapsed #map-header-toggle .down{
-    display: block;
-}
-
 .map-hover {
     position: absolute;
     cursor: pointer;
@@ -239,6 +213,8 @@ li.dropdown-settings {
 .map-toolbar {
     background-color: #333333 !important;
     border: 0px !important;
+    position: absolute;
+    width: 100%;
 }
 
 .toolbar-options {

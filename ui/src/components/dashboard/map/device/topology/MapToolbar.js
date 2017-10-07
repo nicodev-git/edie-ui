@@ -285,7 +285,7 @@ export default class Toolbar extends React.Component {
     // }
 
     return (
-      <div className="panel-heading map-heading">
+      <div className="panel-heading">
         <h4 className="panel-title">Topology</h4>
         <div className="panel-options" style={{top: 4}}>
           <IconButton style={buttonStyle} iconStyle={iconStyle} onTouchTap={this.props.onClickEdit}>

@@ -660,7 +660,7 @@ class Map extends React.Component {
     return (
       <div className={`map-row${maximized ? ' map-maximized' : ''}`}
         tabIndex="-1" style={{ outline: 0 }} onKeyUp={this.onMapKeyUp.bind(this)}>
-        <div className="panel panel-default mb-none" id="mapeditdiv">
+        <div className="panel panel-default mb-none" id="mapeditdiv" style={{position: 'relative'}}>
           <MapToolbar
             {...this.props}
             {...events}
