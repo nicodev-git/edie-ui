@@ -35,6 +35,7 @@
     border-radius: 10px;
     border: 1px solid #414345;
     text-align: center;
+    position: relative;
 }
 
 .logo {
