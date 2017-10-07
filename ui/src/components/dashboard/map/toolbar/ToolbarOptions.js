@@ -3,7 +3,7 @@ import {IconButton} from 'material-ui'
 import ArrowDownIcon from 'material-ui/svg-icons/navigation/arrow-downward'
 import ArrowUpIcon from 'material-ui/svg-icons/navigation/arrow-upward'
 
-import { DeleteObject, ColorPicker, LineWidthInc, LineWidthDec,
+import { DeleteObject, ColorPicker,
   TextChange, RotateHubLeft, RotateHubRight, ChangeLineType, OptionUploader,
   EditMapMenu, DropdownToggle, DeviceMenuContainer } from './index'
 
@@ -37,18 +37,28 @@ class ToolbarOptions extends Component {
           onPickerChange={this.props.onPickerChange}
           onPickerClose={this.props.onPickerClose}
         />
-        <LineWidthInc
-          lineGroup={this.props.lineGroup}
-          onLineWidthInc={this.props.onClickLineWidthInc}
-        />
-        <LineWidthDec
-          lineGroup={this.props.lineGroup}
-          onLineWidthDec={this.props.onClickLineWidthDec}
-        />
+
+        <IconButton
+          onTouchTap={this.props.onClickLineWidthInc}
+          className={this.props.lineGroup ? '' : 'hidden'}
+          style={buttonStyle}
+          iconStyle={iconStyle}
+          tooltip="Increase Line Width">
+          <ArrowUpIcon color="#545454"/>
+        </IconButton>
+
+        <IconButton
+          onTouchTap={this.props.onClickLineWidthDec}
+          className={this.props.lineGroup ? '' : 'hidden'}
+          style={buttonStyle}
+          iconStyle={iconStyle}
+          tooltip="Decrease Line Width">
+          <ArrowDownIcon color="#545454"/>
+        </IconButton>
 
         <IconButton
           onTouchTap={this.props.onClickFontSizeUp}
-          className={this.props.obj ? '' : 'hidden'}
+          className={this.props.obj && !this.props.lineGroup ? '' : 'hidden'}
           style={buttonStyle}
           iconStyle={iconStyle}
           tooltip="Increase Font Size">
@@ -57,7 +67,7 @@ class ToolbarOptions extends Component {
 
         <IconButton
           onTouchTap={this.props.onClickFontSizeDown}
-          className={this.props.obj ? '' : 'hidden'}
+          className={this.props.obj && !this.props.lineGroup ? '' : 'hidden'}
           style={buttonStyle}
           iconStyle={iconStyle}
           tooltip="Decrease Font Size">
