@@ -2,11 +2,13 @@ import React from 'react'
 import DeleteIcon from 'material-ui/svg-icons/action/delete'
 import EditIcon from 'material-ui/svg-icons/content/create'
 import {IconButton, Chip} from 'material-ui'
+import {Field} from 'redux-form'
 
 import CredentialModal from 'components/credentials/CredentialModal'
 import {showConfirm} from 'components/common/Alert'
 import {getDeviceCredentials} from 'shared/Global'
 import { chipStyles } from 'style/common/materialStyles'
+import { FormToggle } from 'components/modal/parts'
 
 export default class Credentials extends React.Component {
   componentDidMount () {
@@ -56,54 +58,61 @@ export default class Credentials extends React.Component {
     return getDeviceCredentials(selectedDevice, credentials, showGlobal)
   }
   render () {
-    const { selectedDeviceCreds, selectDeviceCreds, onClickEditCreds } = this.props
+    const { selectedDeviceCreds, selectDeviceCreds, onClickEditCreds, onChangeIntegrated, isWin } = this.props
 
     return (
-      <div style={{minHeight: 150}}>
-        <table className="table table-hover">
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Description</th>
-              <th>Type</th>
-              <th>User</th>
-              <th />
-              <th />
-            </tr>
-          </thead>
-          <tbody>
-          {this.getDeviceCreds().map((p, i) =>
-            <tr
-              key={i}
-              className={selectedDeviceCreds === i ? 'selected' : ''}
-              onClick={() => selectDeviceCreds(i)}>
-              <td>{p.name}</td>
-              <td>{p.description}</td>
-              <td>{p.type}</td>
-              <td>{p.username}</td>
-              <td>
-                {p.global && p.default ? (
-                  <div style={chipStyles.wrapper}>
-                    <Chip style={chipStyles.chip}>{p.type}&nbsp;Default</Chip>
-                  </div>
-                ) : null}
-              </td>
-              <td>
-                <IconButton style={{padding: 0, width: 24, height: 24}}
-                  className={onClickEditCreds ? '' : 'hidden'}
-                  onTouchTap={this.onClickEdit.bind(this, p)}>
-                  <EditIcon color="#545454" hoverColor="#f44336" />
-                </IconButton>
-                <IconButton style={{padding: 0, width: 24, height: 24}}
-                  onTouchTap={this.onClickRemove.bind(this, p)}>
-                  <DeleteIcon color="#545454" hoverColor="#f44336"/>
-                </IconButton>
-              </td>
-            </tr>
-          )}
-          </tbody>
-        </table>
-        {this.renderPicker()}
+      <div>
+        <div className={isWin ? '' : 'hidden'}>
+          <Field
+            name="useIntegratedSecurity" component={FormToggle} type="checkbox" label="Integrated Security"
+            onChange={this.onChangeIntegrated.bind(this)}/>
+        </div>
+        <div style={{minHeight: 150}}>
+          <table className="table table-hover">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Type</th>
+                <th>User</th>
+                <th />
+                <th />
+              </tr>
+            </thead>
+            <tbody>
+            {this.getDeviceCreds().map((p, i) =>
+              <tr
+                key={i}
+                className={selectedDeviceCreds === i ? 'selected' : ''}
+                onClick={() => selectDeviceCreds(i)}>
+                <td>{p.name}</td>
+                <td>{p.description}</td>
+                <td>{p.type}</td>
+                <td>{p.username}</td>
+                <td>
+                  {p.global && p.default ? (
+                    <div style={chipStyles.wrapper}>
+                      <Chip style={chipStyles.chip}>{p.type}&nbsp;Default</Chip>
+                    </div>
+                  ) : null}
+                </td>
+                <td>
+                  <IconButton style={{padding: 0, width: 24, height: 24}}
+                    className={onClickEditCreds ? '' : 'hidden'}
+                    onTouchTap={this.onClickEdit.bind(this, p)}>
+                    <EditIcon color="#545454" hoverColor="#f44336" />
+                  </IconButton>
+                  <IconButton style={{padding: 0, width: 24, height: 24}}
+                    onTouchTap={this.onClickRemove.bind(this, p)}>
+                    <DeleteIcon color="#545454" hoverColor="#f44336"/>
+                  </IconButton>
+                </td>
+              </tr>
+            )}
+            </tbody>
+          </table>
+          {this.renderPicker()}
+        </div>
       </div>
     )
   }

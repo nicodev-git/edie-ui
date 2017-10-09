@@ -4,7 +4,10 @@ import {CircularProgress} from 'material-ui'
 
 import DeviceFixModalView from './DeviceFixModalView'
 import {showAlert} from 'components/common/Alert'
-import {getDeviceCredentials, getAgentStatusMessage, getDeviceCollectors} from 'shared/Global'
+import {
+  getDeviceCredentials, getAgentStatusMessage, getDeviceCollectors,
+  isWindowsDevice
+} from 'shared/Global'
 import CollectorInstallModal from 'components/common/wizard/input/CollectorInstallModal'
 
 class DeviceFixModal extends React.Component {
@@ -85,6 +88,10 @@ class DeviceFixModal extends React.Component {
     this.props.fixDevice(entity)
   }
 
+  onChangeIntegrated () {
+
+  }
+
   ////////////////////////////////////////////////////////////////////////////////
 
   handleFormSubmit (values) {
@@ -123,6 +130,10 @@ class DeviceFixModal extends React.Component {
     this.onHide()
   }
 
+  onChangeIntegrated () {
+
+  }
+
   ///////////////////////////////////////////////////////////////////////////////
 
   renderCollectorInstallModal () {
@@ -141,7 +152,7 @@ class DeviceFixModal extends React.Component {
   }
 
   render () {
-    const { handleSubmit } = this.props
+    const { handleSubmit, editDevice } = this.props
 
     return (
       <DeviceFixModalView
@@ -154,6 +165,9 @@ class DeviceFixModal extends React.Component {
         onClickEditCreds={this.onClickEditCreds.bind(this)}
         onChangeAgentType={this.onChangeAgentType.bind(this)}
         modals={this.renderCollectorInstallModal()}
+
+        isWin={isWindowsDevice(editDevice)}
+        onChangeIntegrated={this.onChangeIntegrated.bind(this)}
       />
     )
   }
