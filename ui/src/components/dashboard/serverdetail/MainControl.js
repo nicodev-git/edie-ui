@@ -462,11 +462,12 @@ export default class MainControl extends React.Component {
 
 
   renderDeviceCredsModal () {
-    const {deviceCredsModalOpen} = this.props
+    const {deviceCredsModalOpen, editDevice} = this.props
     if (!deviceCredsModalOpen) return null
     return (
       <DeviceCredsModal
         {...this.props}
+        initialValues={editDevice}
       />
     )
   }
