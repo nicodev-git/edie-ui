@@ -40,6 +40,14 @@ class DeviceCredsModal extends React.Component {
     })
   }
 
+  onChangeIntegratedSecurity (checked) {
+    const {editDevice} = this.props
+    this.props.updateMapDevice({
+      ...editDevice,
+      useIntegratedSecurity: checked
+    })
+  }
+
   render () {
     const {credentials, editDevice} = this.props
     const deviceCreds = credentials.filter(p => !p.global && (p.deviceIds || []).includes(editDevice.id))
@@ -53,6 +61,7 @@ class DeviceCredsModal extends React.Component {
         onHide={this.onHide.bind(this)}
         onClickDelete={this.onClickDelete.bind(this)}
         onChangeGlobalCredential={this.onChangeGlobalCredential.bind(this)}
+        onChangeIntegratedSecurity={this.onChangeIntegratedSecurity.bind(this)}
       />
     )
   }
