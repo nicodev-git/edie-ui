@@ -5,7 +5,7 @@ import CloseIcon from 'material-ui/svg-icons/navigation/close'
 import ListIcon from 'material-ui/svg-icons/action/list'
 import { Field } from 'redux-form'
 
-import { CardPanel, FormCheckbox } from 'components/modal/parts'
+import { CardPanel, FormToggle } from 'components/modal/parts'
 import {mergeCredentials} from 'shared/Global'
 import { chipStyles } from 'style/common/materialStyles'
 import {showAlert} from 'components/common/Alert'
@@ -92,7 +92,7 @@ export default class CredPicker extends React.Component {
       <CardPanel title="Credentials" tools={this.renderButtons()}>
         <div className={isWin ? '' : 'hidden'}>
           <Field
-            name="useIntegratedSecurity" component={FormCheckbox} type="checkbox" label="Integrated Security"
+            name="useIntegratedSecurity" component={FormToggle} type="checkbox" label="Integrated Security"
             onChange={this.onChangeIntegrated.bind(this)}/>
         </div>
 

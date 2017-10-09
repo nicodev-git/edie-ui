@@ -18,6 +18,7 @@ import CheckboxItem from './CheckboxItem'
 import TwoButtonsBlockCustom from './TwoButtonsBlockCustom'
 import WizardButtons from './WizardButtons'
 import FormCheckbox from './FormCheckbox'
+import FormToggle from './FormToggle'
 import Monitors from './Monitors'
 import Workflows from './Workflows'
 import MonitorTemplates from './MonitorTemplates'
@@ -48,6 +49,7 @@ export {
     CheckboxItem,
     WizardButtons,
     FormCheckbox,
+    FormToggle,
     Monitors,
     Workflows,
     MonitorTemplates,
