@@ -122,7 +122,7 @@ class DeviceFixModal extends React.Component {
 
     if (config.credentials) {
       const creds = getDeviceCredentials(editDevice, credentials, true)
-      if (creds.length === 0) {
+      if (creds.length === 0 && !values.useIntegratedSecurity) {
         showAlert('Please add device credentials.')
         return
       }
