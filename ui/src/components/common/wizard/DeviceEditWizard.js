@@ -77,6 +77,10 @@ class DeviceEditWizard extends React.Component {
     this.fnSaveDeb()
   }
 
+  onChangeIntegrated () {
+
+  }
+
   didSave (res) {
     if (!res) return
     const {onFinish} = this.props
@@ -265,8 +269,11 @@ class DeviceEditWizard extends React.Component {
     return null
   }
   buildCredentials () {
+    const isWin = isWindowsDevice(this.props.selectedDevice)
     return (
-      <Credentials {...this.props}/>
+      <div className="padding-md-top">
+        <Credentials {...this.props} isWin={isWin} onChangeIntegrated={this.onChangeIntegrated.bind(this)}/>
+      </div>
     )
   }
 
