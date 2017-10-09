@@ -39,15 +39,21 @@ export default class DeviceMonitorPicker extends React.Component {
     )
   }
   render () {
-    const {allDevices, onChangeTreeData, monitorTreeData, monitorGroups} = this.props
+    const {allDevices, onChangeTreeData, monitorTreeData, monitorGroups, selectedMonitors} = this.props
     let data = monitorTreeData
     if (!data) {
-      data = allDevices.map(device => ({
-        title: this.renderDevice.bind(this, device),
-        children: (device.monitors || []).map(monitor => ({
-          title: this.renderMonitor.bind(this, monitor)
-        }))
-      }))
+      data = allDevices.map(device => {
+        const monitors = device.monitors || []
+        const expanded = selectedMonitors ?
+          monitors.filter(p => selectedMonitors.includes(p.uid)).length > 0 : false
+        return {
+          title: this.renderDevice.bind(this, device),
+          expanded,
+          children: monitors.map(monitor => ({
+            title: this.renderMonitor.bind(this, monitor)
+          }))
+        }
+      })
 
       monitorGroups.forEach(group => {
         const children = []
