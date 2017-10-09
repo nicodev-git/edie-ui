@@ -7,7 +7,7 @@ import NoDataPanel from './NoDataPanel'
 import MonitorSocket from 'util/socket/MonitorSocket'
 import GEditView from './GEditView'
 
-import {checkAgentUp} from 'shared/Global'
+import {checkAgentUp, sumDisks} from 'shared/Global'
 import {showAlert} from 'components/common/Alert'
 
 export default class GDeviceBasic extends React.Component {
@@ -78,7 +78,7 @@ export default class GDeviceBasic extends React.Component {
       const state = {}
       if (cpu) state.cpu = cpu
       if (memory) state.memory = memory
-      if (disk) state.disk = disk && disk.length && disk[0].Drives ? disk[0].Drives[0] : null
+      if (disk) state.disk = sumDisks(disk)
       state.loading = false
 
       this.setState(state)

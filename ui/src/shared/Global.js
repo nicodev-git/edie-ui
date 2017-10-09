@@ -466,3 +466,21 @@ export function isGaugeDeviceUp (device, gauge, lastUpdate) {
   const now = new Date().getTime()
   return time && (now - time) <= (interval * 60 * 1000)
 }
+
+export function sumDisks (disks) {
+  if (disks == null || !disks.length) return null
+  let free = 0
+  let total = 0
+  disks.forEach(disk => {
+    if (!disk.Drives) return
+    disk.Drives.forEach(d => {
+      free += d.FreeSpace || 0
+      total += d.TotalSpace || 0
+    })
+  })
+  if (!total) return null
+  return {
+    FreeSpace: free,
+    TotalSpace: total
+  }
+}
