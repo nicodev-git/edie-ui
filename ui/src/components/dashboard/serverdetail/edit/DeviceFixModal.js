@@ -69,15 +69,21 @@ class DeviceFixModal extends React.Component {
   }
 
   onChangeAgentType (e, value) {
+    this.checkDevice({
+      agentType: value
+    })
+  }
+
+  checkDevice (extra) {
     const {editDevice, formValues} = this.props
 
     const entity = {
       ...editDevice,
       ...formValues,
-      agentType: value
+      ...extra
     }
 
-    if (value === 'collector') {
+    if (entity.agentType === 'collector') {
       if (!formValues.collectorId) {
         this.props.showCollectorInstallModal(true)
         return
@@ -88,8 +94,10 @@ class DeviceFixModal extends React.Component {
     this.props.fixDevice(entity)
   }
 
-  onChangeIntegrated () {
-
+  onChangeIntegrated (e, checked) {
+    this.checkDevice({
+      useIntegratedSecurity: checked
+    })
   }
 
   ////////////////////////////////////////////////////////////////////////////////
@@ -128,10 +136,6 @@ class DeviceFixModal extends React.Component {
       this.props.updateMapDevice(props)
     }
     this.onHide()
-  }
-
-  onChangeIntegrated () {
-
   }
 
   ///////////////////////////////////////////////////////////////////////////////

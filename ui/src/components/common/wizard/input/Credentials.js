@@ -65,7 +65,7 @@ export default class Credentials extends React.Component {
         <div className={isWin ? '' : 'hidden'}>
           <Field
             name="useIntegratedSecurity" component={FormToggle} type="checkbox" label="Integrated Security"
-            onChange={this.onChangeIntegrated.bind(this)}/>
+            onChange={onChangeIntegrated}/>
         </div>
         <div style={{minHeight: 150}}>
           <table className="table table-hover">
