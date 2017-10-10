@@ -491,39 +491,6 @@ export default class GEditView extends React.Component {
     )
   }
 
-  renderIncidentTable2 () {
-    const {devices} = this.props
-    const {deviceId, fixed, severities, dateFrom, dateTo, name} = this.state
-    return (
-      <div>
-        <TextField name="name" value={name} floatingLabelText="Name" className="valign-top mr-dialog" onChange={this.onChangeText.bind(this, 'name')}/>
-        {devices && <SelectField value={deviceId} floatingLabelText="Device" className="valign-top" onChange={this.onChangeSelect.bind(this, 'deviceId')}>
-          <MenuItem value="*" primaryText="[Any Device]"/>
-          {devices.map(p => <MenuItem key={p.id} value={p.id} primaryText={p.name}/>)}
-        </SelectField>}
-        <SelectField multiple floatingLabelText="Severity" onChange={this.onChangeSelect.bind(this, 'severities')} className="valign-top mr-dialog" value={severities}>
-          {allSeverities.map(option =>
-            <MenuItem key={option.value} insetChildren checked={severities && severities.includes(option.value)}
-                      value={option.value} primaryText={option.label}/>
-          )}
-        </SelectField>
-
-        <SelectField value={fixed} floatingLabelText="Status" className="valign-top mr-dialog" onChange={this.onChangeSelect.bind(this, 'fixed')}>
-          {fixOptions.map(p => <MenuItem key={p.value} value={p.value} primaryText={p.label}/>)}
-        </SelectField>
-
-        <div className="inline-block mr-dialog" style={{marginTop: 24}}>
-          <DateRangePicker
-            startDate={moment(dateFrom)}
-            endDate={moment(dateTo)}
-            onApply={this.onChangeDateRange.bind(this)}
-            renderer={this.renderDateLabel.bind(this)}
-          />
-        </div>
-      </div>
-    )
-  }
-
   renderIncidentTable () {
     const {devices, monitorGroups} = this.props
     const {monitorIds, servers, logicalGroups, monitorTreeData, name} = this.state
