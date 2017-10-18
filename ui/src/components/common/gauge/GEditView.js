@@ -1,12 +1,10 @@
 import React from 'react'
-import moment from 'moment'
 import {TextField, SelectField, MenuItem, RaisedButton, Checkbox} from 'material-ui'
 import {findIndex} from 'lodash'
 import IconButton from 'material-ui/IconButton'
 import CloseIcon from 'material-ui/svg-icons/navigation/close'
 
-import {gaugeDurationTypes, gaugeResources, severities as allSeverities, gaugeTableViewModes} from 'shared/Global'
-import DateRangePicker from 'components/common/DateRangePicker'
+import {gaugeDurationTypes, gaugeResources, gaugeTableViewModes} from 'shared/Global'
 
 import GaugeServerPicker from 'components/common/wizard/input/GaugeServerPicker'
 import GaugeWorkflowPicker from 'components/common/wizard/input/GaugeWorkflowPicker'
@@ -25,14 +23,6 @@ const durations = '1 2 3 5 10 15 30'.split(' ').map(p => ({
 const inputStyle = {
   width: '100%'
 }
-
-const fixOptions = [{
-  label: 'Any', value: '',
-}, {
-  label: 'Unfixed', value: 'false'
-}, {
-  label: 'Fixed', value: 'true'
-}]
 
 export default class GEditView extends React.Component {
   constructor (props) {

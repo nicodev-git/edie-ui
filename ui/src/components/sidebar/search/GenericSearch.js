@@ -133,6 +133,7 @@ class GenericSearch extends React.Component {
   }
 
   componentWillMount () {
+    const {searchFieldsVisible} = this.props
     const {filterType} = this.props.location.state || {}
     const {q} = parse(this.props.location.search || {})
     let params = assign({}, this.props.queryParams)
@@ -141,6 +142,8 @@ class GenericSearch extends React.Component {
     this.props.fetchWorkflows()
     this.props.fetchMonitorTemplates()
     this.props.fetchMonitorGroups()
+
+    if (searchFieldsVisible) this.props.collapseSearchFields(!searchFieldsVisible)
 
     if (q) {
       try {
@@ -312,7 +315,7 @@ class GenericSearch extends React.Component {
   }
   updateQueryParams (params) {
     const serviceParams = this.getServiceParams(params)
-    this.props.updateQueryParams(params, serviceParams, this.props.history)
+    this.props.updateQueryParams(params, serviceParams, this.props.history, this.props.searchFieldsVisible)
   }
 
   handleRequestClose () {
@@ -542,6 +545,9 @@ class GenericSearch extends React.Component {
   onClickToggleFields () {
     const {searchFieldsVisible, collapseSearchFields} = this.props
     collapseSearchFields(!searchFieldsVisible)
+    if (!searchFieldsVisible)  {
+      this.props.fetchSearchFields(this.getServiceParams())
+    }
   }
 
   onChangeMonitorId (monitors, devices) {

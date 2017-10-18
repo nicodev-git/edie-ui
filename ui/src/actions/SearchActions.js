@@ -82,9 +82,9 @@ export const updateSearchParams = (params, history) => {
   }
 }
 
-export const updateQueryParams = (params, serviceParams, history) => {
+export const updateQueryParams = (params, serviceParams, history, fields) => {
   return dispatch => {
-    dispatch(fetchSearchFields(serviceParams))
+    if (fields) dispatch(fetchSearchFields(serviceParams))
     dispatch({type: UPDATE_QUERY_PARAMS, params})
     history.replace({
       pathname: '/search',

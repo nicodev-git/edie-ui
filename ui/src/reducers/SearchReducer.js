@@ -118,7 +118,7 @@ const initialState = {
 
   viewCols: [],
 
-  searchFieldsVisible: true
+  searchFieldsVisible: false
 }
 
 export default function (state = initialState, action) {
