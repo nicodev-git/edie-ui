@@ -88,6 +88,10 @@ export default class GaugeWizardView extends React.Component {
       <Field name="tableViewMode" component={FormSelect} floatingLabel="View Mode" options={gaugeTableViewModes} className="valign-top" validate={[required]}/>
     )
   }
+
+  renderSearchShortcuts () {
+
+  }
   renderNormal () {
     const {searchList, formValues, durationVisible, splitVisible, templateName} = this.props
     let resourceOptions = gaugeResources
@@ -346,6 +350,8 @@ export default class GaugeWizardView extends React.Component {
         return this.renderMonitorGroups()
       case 'Log':
         return this.renderLog()
+      case 'Search Shortcuts':
+        return this.renderSearchShortcuts()
       default:
         return this.renderNormal()
     }
