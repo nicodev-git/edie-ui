@@ -8,11 +8,11 @@ import {findIndex} from 'lodash'
 import {gaugeDurationTypes, gaugeResources, severities, timingOptions, realtimeGauges, historicGauges, gaugeTableViewModes} from 'shared/Global'
 import DateRangePicker from 'components/common/DateRangePicker'
 
-import GaugeServerPicker from './input/GaugeServerPicker'
 import GaugeLogMonitorPicker from './input/GaugeLogMonitorPicker'
 import GaugeWorkflowPicker from './input/GaugeWorkflowPicker'
 import LogicalGroupPicker from './input/LogicalGroupPicker'
 import DeviceMonitorPicker from './input/DeviceMonitorPicker'
+import SavedSearchPicker from './input/SavedSearchPicker'
 import {required} from 'components/modal/validation/CommonValidation'
 
 const durations = '1 2 3 5 10 15 30'.split(' ').map(p => ({
@@ -90,7 +90,12 @@ export default class GaugeWizardView extends React.Component {
   }
 
   renderSearchShortcuts () {
-
+    return (
+      <div>
+        <Field name="name" component={FormInput} floatingLabel="Name" className="valign-top mr-dialog" validate={[required]}/>
+        <SavedSearchPicker {...this.props}/>
+      </div>
+    )
   }
   renderNormal () {
     const {searchList, formValues, durationVisible, splitVisible, templateName} = this.props
@@ -303,7 +308,7 @@ export default class GaugeWizardView extends React.Component {
     return (
       <div>
         <Field name="name" component={FormInput} floatingLabel="Name" className="valign-top mr-dialog" validate={[required]}/>
-        <GaugeServerPicker {...this.props}/>
+        <SavedSearchPicker {...this.props}/>
       </div>
     )
   }

@@ -31,7 +31,9 @@ class GaugeWizard extends React.Component {
       selectedWorkflows: [],
 
       selectedMonitorGroup: null,
-      selectedMonitorGroups: []
+      selectedMonitorGroups: [],
+
+      selectedSearchIds: []
     }
   }
 
@@ -265,6 +267,17 @@ class GaugeWizard extends React.Component {
     this.setState({selectedMonitorGroups})
   }
 
+
+  onClickToggleSearch (savedSearchId) {
+    let {selectedSearchIds} = this.state
+    if (selectedSearchIds.includes(savedSearchId)) {
+      selectedSearchIds = selectedSearchIds.filter(p => p !== savedSearchId)
+    } else {
+      selectedSearchIds = [...selectedSearchIds, savedSearchId]
+    }
+    this.setState({selectedSearchIds})
+  }
+
   ///////////////////////////////////////////////////////////////////////////////////
 
   getSearchOptions () {
@@ -281,7 +294,7 @@ class GaugeWizard extends React.Component {
   }
   handleFormSubmit (formProps) {
     const { selectedSeverity, selectedMonitors, serviceNames, dateFrom, dateTo,
-      selectedServers, selectedWorkflows, selectedMonitorGroups } = this.state
+      selectedServers, selectedWorkflows, selectedMonitorGroups, selectedSearchIds } = this.state
     const { extraParams, onFinish, options } = this.props
 
     const props = assign({
@@ -292,7 +305,8 @@ class GaugeWizard extends React.Component {
         dateTo,
         servers: selectedServers,
         workflowIds: selectedWorkflows,
-        logicalGroups: selectedMonitorGroups
+        logicalGroups: selectedMonitorGroups,
+        searchIds: selectedSearchIds
       },
       formProps,
       extraParams
@@ -412,6 +426,9 @@ class GaugeWizard extends React.Component {
 
         monitorTreeData={this.state.monitorTreeData}
         onChangeTreeData={(monitorTreeData) => {this.setState({monitorTreeData})}}
+
+        selectedSearchIds={this.state.selectedSearchIds}
+        onClickToggleSearch={this.onClickToggleSearch.bind(this)}
       />
     )
   }
