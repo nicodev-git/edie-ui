@@ -135,7 +135,7 @@ class GenericSearch extends React.Component {
   componentWillMount () {
     const {searchFieldsVisible} = this.props
     const {filterType} = this.props.location.state || {}
-    const {q} = parse(this.props.location.search || {})
+    const {q, searchId} = parse(this.props.location.search || {})
     let params = assign({}, this.props.queryParams)
 
     this.props.fetchDevicesGroups()
@@ -186,6 +186,8 @@ class GenericSearch extends React.Component {
       this.updateQueryParams(params)
       this.props.change('query', q)
       this.props.change('freeText', '')
+    } else if (searchId) {
+
     } else {
       this.onClickClearSearch()
     }
@@ -206,6 +208,21 @@ class GenericSearch extends React.Component {
       console.log(e)
     }
     return []
+  }
+
+  getSearchList () {
+    const {userOptions, sysSearchOptions} = this.props
+    const options = concat([], userOptions.map(p => {
+      return assign({}, p, {
+        type: 'User'
+      })
+    }), sysSearchOptions.map(p => {
+      return assign({}, p, {
+        type: 'System'
+      })
+    }))
+
+    return options
   }
 
   getHighlighted (entity, highlights) {

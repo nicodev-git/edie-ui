@@ -53,7 +53,7 @@ export default class GSavedSearch extends React.Component {
   }
 
   onClickRow (search) {
-
+    this.props.history.push(`/search?searchId=${search.id}`)
   }
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
