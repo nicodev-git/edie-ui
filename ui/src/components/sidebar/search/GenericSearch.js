@@ -187,7 +187,11 @@ class GenericSearch extends React.Component {
       this.props.change('query', q)
       this.props.change('freeText', '')
     } else if (searchId) {
-
+      const searchList = this.getSearchList()
+      const index = findIndex(searchList, {id: searchId})
+      if (index >= 0) {
+        this.onChangeSearchOption(searchList[index])
+      }
     } else {
       this.onClickClearSearch()
     }
@@ -211,7 +215,8 @@ class GenericSearch extends React.Component {
   }
 
   getSearchList () {
-    const {userOptions, sysSearchOptions} = this.props
+    const {sysSearchOptions} = this.props
+    const userOptions = this.getSearchOptions()
     const options = concat([], userOptions.map(p => {
       return assign({}, p, {
         type: 'User'
