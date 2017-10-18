@@ -25,6 +25,7 @@ import GFirewall from 'components/common/gauge/GFirewall'
 import GNetwork from 'components/common/gauge/GNetwork'
 import GCommand from 'components/common/gauge/GCommand'
 import GLogicalGroups from 'components/common/gauge/GLogicalGroups'
+import GSavedSearch from 'components/common/gauge/GSavedSearch'
 
 const gaugeMap = {
   'Line Chart': GLineChart,
@@ -55,7 +56,8 @@ const gaugeMap = {
   'Firewall': GFirewall,
   'Network': GNetwork,
   'Command': GCommand,
-  'Logical Groups': GLogicalGroups
+  'Logical Groups': GLogicalGroups,
+  'Search Shortcuts': GSavedSearch
 }
 
 export default gaugeMap
