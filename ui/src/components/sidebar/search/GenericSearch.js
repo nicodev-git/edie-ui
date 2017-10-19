@@ -480,7 +480,7 @@ class GenericSearch extends React.Component {
   onKeyDownFreeText (e) {
     if (e.keyCode === 13) {
       const {formValues} = this.props
-      const newQuery = modifyFieldValue(formValues.query, '_all', e.target.value, true)
+      const newQuery = modifyFieldValue(formValues.query, '_all', e.target.value || null, true)
       this.updateQuery(newQuery)
     }
   }
