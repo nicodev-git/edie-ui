@@ -1,6 +1,6 @@
 import axios from 'axios'
 import moment from 'moment'
-import { assign } from 'lodash'
+import { assign, keys } from 'lodash'
 import {
   UPDATE_SEARCH_PARAMS,
   UPDATE_QUERY_PARAMS,
@@ -62,7 +62,9 @@ import {
   TOGGLE_VIEW_COL,
   RESET_VIEW_COLS,
   COLLAPSE_SEARCH_FIELDS,
-  SHOW_ENTITY_DETAIL_MODAL
+  SHOW_ENTITY_DETAIL_MODAL,
+
+  FETCH_VIEW_COLS
 } from './types'
 import { ROOT_URL } from './config'
 import { apiError } from './Errors'
@@ -484,5 +486,31 @@ export const showSearchDeviceModal = (visible) => {
 export const showEntityDetailModal = (visible, entity) => {
   return dispatch => {
     dispatch({type: SHOW_ENTITY_DETAIL_MODAL, visible, entity})
+  }
+}
+
+function findCols (object) {
+  let list = []
+  keys(object).forEach(key => {
+    if (object[key].type === 'nested') {
+      const sublist = findCols(object.properties)
+      list = [...list, ...sublist]
+    } else {
+      list.push(key)
+    }
+  })
+
+  return list
+}
+
+export const fetchViewCols = () => {
+  return dispatch => {
+    axios.get(`${ROOT_URL}/search/getMappping`).then(res => {
+      const list = [
+        ...findCols(res.data['event']),
+        ...findCols(res.data['incident'])
+      ]
+      //dispatch({type: FETCH_VIEW_COLS, })
+    }).catch(error => apiError(dispatch, error))
   }
 }
