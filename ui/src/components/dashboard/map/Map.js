@@ -214,7 +214,7 @@ class Map extends React.Component {
       // this.props.history.push(`/device/${obj.data.id}/main`)
       this.props.history.push(`/device/${obj.data.id}/dashboard`)
     }
-    // ReactTooltip.hide(findDOMNode(this.refs.deviceTooltip))
+    ReactTooltip.hide()
   }
 
   onMapObjectMoving () {
@@ -298,7 +298,7 @@ class Map extends React.Component {
       tipHeight: rect.height,
       tipObject: obj
     }, () => {
-      //ReactTooltip.rebuild()
+      ReactTooltip.show(findDOMNode(this.refs.deviceTooltip))
     })
   }
 
@@ -307,6 +307,7 @@ class Map extends React.Component {
     this.setState({
       tooltip: null
     })
+    ReactTooltip.hide()
   }
 
   onMapZoomRect () {
@@ -671,6 +672,11 @@ class Map extends React.Component {
 
           <div className="panel-body p-none"
             style={{height: maximized ? '100%' : (`${mapHeight}px`), position: 'relative'}}>
+            <div className={`map-hover ${tooltip ? '' : 'hidden'}`} ref="deviceTooltip"
+                 data-tip={tooltip}
+                 data-html
+                 style={{ left: tipLeft, top: tipTop, width: tipWidth, height: tipHeight }}
+                 onClick={this.onClickTooltip.bind(this)} />
             <MapCanvas
               listener={this.mapListener}
               editable={editable}
@@ -693,11 +699,6 @@ class Map extends React.Component {
               />
               <ToolbarToggle onToggle={this.onClickMaximize.bind(this)}/>
             </div>
-            <div className={`map-hover ${tooltip ? '' : 'hidden'}`} ref="deviceTooltip"
-              data-tip={tooltip}
-              data-html
-              style={{ left: tipLeft, top: tipTop, width: tipWidth, height: tipHeight }}
-              onClick={this.onClickTooltip.bind(this)} />
           </div>
         </div>
 
