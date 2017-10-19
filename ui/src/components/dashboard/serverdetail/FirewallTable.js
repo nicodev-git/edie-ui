@@ -33,6 +33,7 @@ export default class FirewallTable extends React.Component {
       <GridLayout
         {...this.props}
         gauges={this.getGauges()}
+        fullSize
       />
     )
   }

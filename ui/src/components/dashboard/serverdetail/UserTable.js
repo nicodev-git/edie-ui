@@ -33,6 +33,7 @@ export default class UserTable extends React.Component {
       <GridLayout
         {...this.props}
         gauges={this.getGauges()}
+        fullSize
       />
     )
   }

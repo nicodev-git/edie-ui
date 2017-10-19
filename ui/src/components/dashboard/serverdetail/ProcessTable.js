@@ -36,6 +36,7 @@ export default class ProcessTable extends React.Component {
       <GridLayout
         {...this.props}
         gauges={this.getGauges()}
+        fullSize
       />
     )
   }

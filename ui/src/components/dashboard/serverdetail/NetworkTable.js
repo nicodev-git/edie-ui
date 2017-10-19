@@ -32,6 +32,7 @@ export default class NetworkTable extends React.Component {
       <GridLayout
         {...this.props}
         gauges={this.getGauges()}
+        fullSize
       />
     )
   }

@@ -33,6 +33,7 @@ export default class ApplicationTable extends Component {
       <GridLayout
         {...this.props}
         gauges={this.getGauges()}
+        fullSize
       />
     )
   }
