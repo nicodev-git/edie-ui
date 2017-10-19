@@ -1,6 +1,6 @@
 import axios from 'axios'
 import moment from 'moment'
-import { assign, keys } from 'lodash'
+import { assign, keys, uniqBy } from 'lodash'
 import {
   UPDATE_SEARCH_PARAMS,
   UPDATE_QUERY_PARAMS,
@@ -493,7 +493,7 @@ function findCols (object) {
   let list = []
   keys(object).forEach(key => {
     if (object[key].type === 'nested') {
-      const sublist = findCols(object.properties)
+      const sublist = findCols(object[key].properties)
       list = [...list, ...sublist]
     } else {
       list.push(key)
@@ -510,7 +510,7 @@ export const fetchTableViewCols = () => {
         ...findCols(res.data['event']),
         ...findCols(res.data['incident'])
       ]
-      dispatch({type: FETCH_VIEW_COLS, list})
+      dispatch({type: FETCH_VIEW_COLS, list: uniqBy(list)})
     }).catch(error => apiError(dispatch, error))
   }
 }
