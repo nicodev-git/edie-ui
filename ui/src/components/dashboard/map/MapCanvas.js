@@ -29,6 +29,7 @@ class MapCanvas extends React.Component {
     super(props)
     this.state = {
       canvas: null,
+      editable: false,
       containerId: uniqueId('container-'),
       canvasId: uniqueId('canvas-'),
       cmap: null,

@@ -214,7 +214,7 @@ class Map extends React.Component {
       // this.props.history.push(`/device/${obj.data.id}/main`)
       this.props.history.push(`/device/${obj.data.id}/dashboard`)
     }
-    ReactTooltip.hide(findDOMNode(this.refs.deviceTooltip))
+    // ReactTooltip.hide(findDOMNode(this.refs.deviceTooltip))
   }
 
   onMapObjectMoving () {
@@ -298,7 +298,7 @@ class Map extends React.Component {
       tipHeight: rect.height,
       tipObject: obj
     }, () => {
-      ReactTooltip.rebuild()
+      //ReactTooltip.rebuild()
     })
   }
 
