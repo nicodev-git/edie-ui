@@ -11,23 +11,33 @@ export default class GridLayout extends React.Component {
     let GaugePanel = GaugeMap[p.templateName || 'z']
     if (!GaugePanel) return <div key={p.id}/>
     return (
-      <div key={p.id}>
-        <GaugePanel
-          {...this.props}
-          gauge={p}
-          device={{id: p.deviceId}}
-          searchList={[]}
-          monitors={[]}
+      <GaugePanel
+        {...this.props}
 
-          viewOnly
-          noDelete
-          style={{width: '100%', height: '100%'}}
-        />
-      </div>
+        key={p.id}
+
+        gauge={p}
+        device={{id: p.deviceId}}
+        searchList={[]}
+        monitors={[]}
+
+        viewOnly
+        noDelete
+        style={{width: '100%', height: '100%'}}
+      />
     )
   }
 
+  renderFullSize () {
+    const gauges = this.props.gauges || []
+    if (!gauges.length) return <div/>
+    return this.renderGauge(gauges[0])
+  }
+
   render () {
+    const {fullSize} = this.props
+    if (fullSize) return this.renderFullSize()
+
     const gauges = this.props.gauges || []
     const layout = mw => {
       let x = 0

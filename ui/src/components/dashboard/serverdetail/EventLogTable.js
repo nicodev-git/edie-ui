@@ -45,6 +45,7 @@ export default class EventLogTable extends Component {
       <GridLayout
         {...this.props}
         gauges={this.getGauges()}
+        fullSize
       />
     )
   }

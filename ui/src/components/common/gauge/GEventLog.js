@@ -17,7 +17,7 @@ export default class GEventLog extends React.Component {
     super (props)
     this.state = {
       eventLogs: [],
-      logNames: ['Application', 'System', 'Security'],
+      logNames: [],
       selectedLogName: 'Application'
     }
     this.renderBackView = this.renderBackView.bind(this)
@@ -74,10 +74,11 @@ export default class GEventLog extends React.Component {
   }
   onMonitorMessage (msg) {
     if (msg.action === 'update' && msg.deviceId === this.props.device.id) {
-      const {eventlog} = msg.data
+      const {eventlog, logNames} = msg.data
       if (!eventlog) return
       this.setState({
-        eventLogs: eventlog.map((u, i) => ({...u, id: i}))
+        eventLogs: eventlog.map((u, i) => ({...u, id: i})),
+        logNames: logNames || this.state.logNames
       })
     }
   }
@@ -151,7 +152,7 @@ export default class GEventLog extends React.Component {
         <div style={{marginTop: -16}}>
           <SelectField floatingLabelText="Log" value={selectedLogName} onChange={this.onChangeLog.bind(this)}>
             {logNames.map(p =>
-              <MenuItem value={p} primaryText={p}/>
+              <MenuItem key={p} value={p} primaryText={p}/>
             )}
           </SelectField>
         </div>
