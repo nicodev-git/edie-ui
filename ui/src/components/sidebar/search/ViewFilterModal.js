@@ -24,7 +24,7 @@ export default class ViewFilterModal extends React.Component {
   render () {
     return (
       <ViewFilterModalView
-        cols={this.props.cols}
+        cols={this.props.tableViewCols}
         viewCols={this.props.viewCols}
         selectedViewFilter={this.props.selectedViewFilter}
         selectViewFilter={this.props.selectViewFilter}

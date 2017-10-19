@@ -74,7 +74,9 @@ import {
   fetchMonitorGroups,
 
   showMonitorGroupsModal,
-  showEntityDetailModal
+  showEntityDetailModal,
+
+  fetchTableViewCols
 } from 'actions'
 
 class GenericSearchContainer extends React.Component {
@@ -143,6 +145,7 @@ export default connect(
     searchTags: state.search.searchTags,
 
     viewCols: state.search.viewCols,
+    tableViewCols: state.search.tableViewCols,
     searchDraw: state.search.searchDraw,
 
     searchFieldsVisible: state.search.searchFieldsVisible,
@@ -226,7 +229,9 @@ export default connect(
       fetchMonitorGroups,
 
       showMonitorGroupsModal,
-      showEntityDetailModal
+      showEntityDetailModal,
+
+      fetchTableViewCols
     }, dispatch)
   })
 )(withRouter(GenericSearchContainer))

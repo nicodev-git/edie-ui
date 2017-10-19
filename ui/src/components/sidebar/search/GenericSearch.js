@@ -142,6 +142,7 @@ class GenericSearch extends React.Component {
     this.props.fetchWorkflows()
     this.props.fetchMonitorTemplates()
     this.props.fetchMonitorGroups()
+    this.props.fetchTableViewCols()
 
     if (searchFieldsVisible) this.props.collapseSearchFields(!searchFieldsVisible)
 

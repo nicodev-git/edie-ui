@@ -67,7 +67,9 @@ import {
   SHOW_SEARCH_DEVICE_MODAL,
 
   UPDATE_SEARCH_MONITOR,
-  SHOW_ENTITY_DETAIL_MODAL
+  SHOW_ENTITY_DETAIL_MODAL,
+
+  FETCH_VIEW_COLS
 } from 'actions/types'
 import { concat } from 'lodash'
 
@@ -117,6 +119,7 @@ const initialState = {
   searchSaveType: 'new',
 
   viewCols: [],
+  tableViewCols: [],
 
   searchFieldsVisible: false
 }
@@ -259,6 +262,8 @@ export default function (state = initialState, action) {
     case SHOW_ENTITY_DETAIL_MODAL:
       return { ...state, entityDetailModalOpen: action.visible, detailEntity: action.entity }
 
+    case FETCH_VIEW_COLS:
+      return { ...state, tableViewCols: action.list }
     default:
       return state
   }

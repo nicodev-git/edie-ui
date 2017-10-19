@@ -503,14 +503,14 @@ function findCols (object) {
   return list
 }
 
-export const fetchViewCols = () => {
+export const fetchTableViewCols = () => {
   return dispatch => {
     axios.get(`${ROOT_URL}/search/getMappping`).then(res => {
       const list = [
         ...findCols(res.data['event']),
         ...findCols(res.data['incident'])
       ]
-      //dispatch({type: FETCH_VIEW_COLS, })
+      dispatch({type: FETCH_VIEW_COLS, list})
     }).catch(error => apiError(dispatch, error))
   }
 }
