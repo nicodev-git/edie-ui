@@ -7,10 +7,10 @@ export default class SavedSearchPicker extends React.Component {
     return (
       <div style={{maxHeight: 300, overflow: 'auto'}}>
         {searchList.map(p =>
-          <div key={p.value}>
+          <div key={p.value || p.id}>
             <Checkbox
-              label={p.label} onCheck={() => onClickToggleSearch(p.value)}
-              checked={selectedSearchIds.includes(p.value)}
+              label={p.label || p.name} onCheck={() => onClickToggleSearch(p.value || p.id)}
+              checked={selectedSearchIds.includes(p.value || p.id)}
             />
           </div>
         )}

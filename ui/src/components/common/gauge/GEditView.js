@@ -77,6 +77,8 @@ export default class GEditView extends React.Component {
       logicalGroups: gauge.logicalGroups || [],
       selectedMonitorGroup: null,
 
+      searchIds: gauge.searchIds || [],
+
       tableViewMode: gauge.tableViewMode || 'json',
 
       showImage: !!gauge.showImage
@@ -260,6 +262,15 @@ export default class GEditView extends React.Component {
     this.setState({logicalGroups})
   }
 
+  onClickToggleSearch (savedSearchId) {
+    let {searchIds} = this.state
+    if (searchIds.includes(savedSearchId)) {
+      searchIds = searchIds.filter(p => p !== savedSearchId)
+    } else {
+      searchIds = [...searchIds, savedSearchId]
+    }
+    this.setState({searchIds})
+  }
 
   ///////////////////////////////////////////////////////////////////////////
   onClickDone () {
@@ -271,7 +282,8 @@ export default class GEditView extends React.Component {
       itemSize, showDeviceType, gaugeSize,
       forward, forwardBoardId, servers,
       tableViewMode, showImage,
-      logicalGroups
+      logicalGroups,
+      searchIds
     }  = this.state
     const values = {
       resource, savedSearchId, monitorId, workflowId, workflowIds, deviceId, serviceName, monitorIds,
@@ -280,7 +292,8 @@ export default class GEditView extends React.Component {
       itemSize, showDeviceType, gaugeSize,
       forward, forwardBoardId, servers,
       tableViewMode, showImage,
-      logicalGroups
+      logicalGroups,
+      searchIds
     }
     onSubmit && onSubmit(values)
   }
@@ -687,11 +700,16 @@ export default class GEditView extends React.Component {
   }
 
   renderSearchShortcuts () {
-    const {name} = this.state
+    const {name, searchIds} = this.state
+    const {searchList} = this.props
     return (
       <div>
         <TextField name="name" value={name} floatingLabelText="Name" className="valign-top mr-dialog" onChange={this.onChangeText.bind(this, 'name')}/>
-        <SavedSearchPicker {...this.props}/>
+        <SavedSearchPicker
+          searchList={searchList}
+          selectedSearchIds={searchIds}
+          onClickToggleSearch={this.onClickToggleSearch.bind(this)}
+        />
       </div>
     )
   }
