@@ -11,6 +11,7 @@ import GaugeWorkflowPicker from 'components/common/wizard/input/GaugeWorkflowPic
 import GaugeLogMonitorPicker from 'components/common/wizard/input/GaugeLogMonitorPicker'
 import LogicalGroupPicker from 'components/common/wizard/input/LogicalGroupPicker'
 import DeviceMonitorPicker from 'components/common/wizard/input/DeviceMonitorPicker'
+import SavedSearchPicker from 'components/common/wizard/input/SavedSearchPicker'
 
 import { dialogBodyStyle, dialogTitleStyle } from 'style/common/materialStyles'
 import {CardPanel, Modal} from 'components/modal/parts'
@@ -685,6 +686,16 @@ export default class GEditView extends React.Component {
     )
   }
 
+  renderSearchShortcuts () {
+    const {name} = this.state
+    return (
+      <div>
+        <TextField name="name" value={name} floatingLabelText="Name" className="valign-top mr-dialog" onChange={this.onChangeText.bind(this, 'name')}/>
+        <SavedSearchPicker {...this.props}/>
+      </div>
+    )
+  }
+
   renderContent () {
     const {gauge} = this.props
     switch(gauge.templateName) {
@@ -716,6 +727,8 @@ export default class GEditView extends React.Component {
       case 'Command':
       case 'CPU/Memory/Disk':
         return this.renderDeviceBasic()
+      case 'Search Shortcuts':
+        return this.renderSearchShortcuts()
       default:
         return this.renderNormal()
     }
