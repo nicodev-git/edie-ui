@@ -201,6 +201,15 @@ export const wizardConfig = {
           },
           width: MAX_WIDTH,
           name: 'lanip'
+        }, {
+          type: 'text',
+          label: {
+            text: 'Add remove events after',
+            type: 'attach',
+            width: 3
+          },
+          width: MAX_WIDTH,
+          name: 'params.remove_after'
         }]
       }]
     }]
@@ -287,6 +296,15 @@ export const wizardConfig = {
           },
           width: MAX_WIDTH,
           name: 'lanip'
+        }, {
+          type: 'text',
+          label: {
+            text: 'Add remove events after',
+            type: 'attach',
+            width: 3
+          },
+          width: MAX_WIDTH,
+          name: 'params.remove_after'
         }]
       }]
     }]
