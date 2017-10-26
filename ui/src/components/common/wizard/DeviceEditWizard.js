@@ -106,18 +106,19 @@ class DeviceEditWizard extends React.Component {
     })
 
     const params = formProps.params || {}
-    if (formProps.params && formProps.params.remove_after) {
-      switch (formProps.params.remove_after_unit) {
+    if (formProps.remove_after) {
+      switch (formProps.remove_after_unit) {
         case 'months':
-          params.remove_after = formProps.params.remove_after * 30
+          params.remove_after = formProps.remove_after * 30
           break
         case 'years':
-          params.remove_after = formProps.params.remove_after * 365
+          params.remove_after = formProps.remove_after * 365
           break
         default:
-          params.remove_after = formProps.params.remove_after
+          params.remove_after = formProps.remove_after
       }
     }
+    formProps.params = params
 
     console.log(entity)
     this.didSave(entity)
@@ -263,6 +264,7 @@ class DeviceEditWizard extends React.Component {
     return (
       <RemoveAfter
         key="remove_after"
+        onChange={this.onChangeForm.bind(this)}
       />
     )
   }
