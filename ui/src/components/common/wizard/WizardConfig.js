@@ -647,6 +647,15 @@ export const wizardEditConfig = {
         width: MAX_WIDTH,
         name: 'info'
       }, {
+        type: 'removeAfter',
+        label: {
+          text: 'Add remove events after',
+          type: 'attach',
+          width: 3
+        },
+        width: MAX_WIDTH,
+        name: 'params.remove_after'
+      }, {
         type: 'label',
         text: '',
         width: 3
