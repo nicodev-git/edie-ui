@@ -228,6 +228,16 @@ export const roleOptions = [
   {value: 'USER', label: 'User'}
 ]
 
+const removeAfterDurations = [1,2,3,5,10,15,20,25].map(p => ({
+  label: `${p}`, value: p
+}))
+
+const removeAfterDurationUnits = 'days months years'.split(' ').map(p => ({
+  label: p, value: p
+}))
+
+//////////////////////////////////////
+
 export const gaugeTypes = [{
   label: 'Line', value: 'line'
 }, {
