@@ -22,7 +22,6 @@ import {CardPanel} from 'components/modal/parts'
 
 import {showAlert} from 'components/common/Alert'
 
-// import CredPicker from 'containers/settings/credentials/CredsPickerContainer'
 import CredentialModal from 'components/credentials/CredentialModal'
 import CollectorInstallModal from './input/CollectorInstallModal'
 
@@ -58,7 +57,7 @@ class DeviceWizard extends Component {
       'row': this.buildRow.bind(this),
       'credpicker': this.buildCredPicker.bind(this),
       'agentpicker': this.buildAgentPicker.bind(this),
-      "removeafter": this.buildRemoveAfter.bind(this)
+      'removeafter': this.buildRemoveAfter.bind(this)
     }
   }
 

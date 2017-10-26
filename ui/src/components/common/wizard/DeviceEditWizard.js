@@ -16,6 +16,7 @@ import RadioCombo from './input/RadioCombo'
 import Checkbox from './input/Checkbox'
 import IconUploader from './input/IconUploader'
 import Credentials from './input/Credentials'
+import RemoveAfter from './input/RemoveAfter'
 
 import ImageUploaderModal from 'components/sidebar/settings/template/ImageUploaderModal'
 import ContentPanel from './ContentPanel'
@@ -38,7 +39,8 @@ class DeviceEditWizard extends React.Component {
       'text': this.buildText.bind(this),
       'check': this.buildCheck.bind(this),
       'row': this.buildRow.bind(this),
-      'uploader': this.buildIconUploader.bind(this)
+      'uploader': this.buildIconUploader.bind(this),
+      'removeafter': this.buildRemoveAfter.bind(this)
     }
 
     props.closeTplImageModal('')
@@ -92,21 +94,37 @@ class DeviceEditWizard extends React.Component {
     onFinish && onFinish(res)
   }
 
-  handleFormSubmit (params) {
+  handleFormSubmit (formProps) {
     const {currentDevice} = this.state
     const {initialValues, selectedTplImage, deviceTags, deviceCreds} = this.props
 
     // let elem = document.getElementById('submitButton')
     // elem.style.backgroundColor = '#d1d1d1'
-    assign(params, currentDevice.server.params)
-    assign(params, this.props.extraParams)
-    assign(params, {
+    const entity = {...formProps}
+    assign(entity, currentDevice.server.params)
+    assign(entity, this.props.extraParams)
+    assign(entity, {
       image: selectedTplImage ? selectedTplImage.uuid : initialValues['image'],
       tags: deviceTags || [],
       credentials: deviceCreds
     })
-    console.log(params)
-    this.didSave(params)
+
+    const params = formProps.params || {}
+    if (formProps.params && formProps.params.remove_after) {
+      switch (formProps.params.remove_after_unit) {
+        case 'months':
+          params.remove_after = formProps.params.remove_after * 30
+          break
+        case 'years':
+          params.remove_after = formProps.params.remove_after * 365
+          break
+        default:
+          params.remove_after = formProps.params.remove_after
+      }
+    }
+
+    console.log(entity)
+    this.didSave(entity)
   }
 
   buildContent (tab, index) {
@@ -188,42 +206,10 @@ class DeviceEditWizard extends React.Component {
     )
   }
 
-  buildCombo (config) {
-    return (<Combo key={config.name}
-      config={config}
-      buildLabel={this.buildLabel.bind(this)}/>)
-  }
-
-  buildRadioCombo (config) {
-    return (<RadioCombo key={config.name}
-      config={config}
-      buildLabel={this.buildLabel.bind(this)}
-      buildInput={this.buildInput.bind(this)}/>)
-  }
-
   buildCheck (config) {
     return (<Checkbox key={config.name}
       config={config}
       buildLabel={this.buildLabel.bind(this)}/>)
-  }
-
-  buildPassword (config) {
-    let text = []
-    if (config.label !== null) {
-      if (config.label.type === 'place') {
-
-      } else {
-        text.push(this.buildLabel(config.label))
-      }
-    }
-
-    text.push(
-      <div className={`col-md-${util.calcWidth(config.width)}`}
-        style={util.convertStyle(config.style)}>
-          <Password config={config}/>
-      </div>
-    )
-    return text
   }
 
   buildLabel (config) {
@@ -265,11 +251,6 @@ class DeviceEditWizard extends React.Component {
     )
   }
 
-  buildTextArea (config) {
-    return (<TextArea config={config}
-      buildLabel={this.buildLabel.bind(this)}/>)
-  }
-
   buildForm (config) {
     return null
   }
@@ -279,6 +260,14 @@ class DeviceEditWizard extends React.Component {
       <div className="padding-md-top">
         <Credentials {...this.props} isWin={isWin} onChangeIntegrated={this.onChangeIntegrated.bind(this)}/>
       </div>
+    )
+  }
+
+  buildRemoveAfter (config, values, meta) {
+    return (
+      <RemoveAfter
+        key="remove_after"
+      />
     )
   }
 

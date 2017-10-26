@@ -494,3 +494,25 @@ export function sumDisks (disks) {
     TotalSpace: total
   }
 }
+
+export function getRemoveAfter (monitor) {
+  const values = {
+    remove_after: 1,
+    remove_after_unit: 'days'
+  }
+  if (!monitor || !monitor.params) return values
+  const remove_after = parseInt(monitor.params.remove_after || 1, 10)
+  if (!remove_after || isNaN(remove_after)) return values
+  if (remove_after >= 365) {
+    values.remove_after = remove_after / 365
+    values.remove_after_unit = 'years'
+    return values
+  }
+  if (remove_after >= 30) {
+    values.remove_after = remove_after / 30
+    values.remove_after_unit = 'months'
+    return values
+  }
+  values.remove_after = remove_after || 1
+  return values
+}

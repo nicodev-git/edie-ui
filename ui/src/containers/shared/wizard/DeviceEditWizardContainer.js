@@ -27,6 +27,8 @@ import {
   addCollector
 } from 'actions'
 
+import {getRemoveAfter} from 'shared/Global'
+
 class DeviceEditWizardContainer extends React.Component {
   render () {
     return (
@@ -73,7 +75,10 @@ DeviceEditWizard.defaultProps = {
 
 export default connect(
   state => ({
-    initialValues: state.dashboard.selectedDevice,
+    initialValues: {
+      ...state.dashboard.selectedDevice,
+      ...getRemoveAfter(state.dashboard.selectedDevice),
+    },
 
     selectedDevice: state.dashboard.selectedDevice,
 
