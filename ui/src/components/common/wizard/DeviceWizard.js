@@ -58,7 +58,7 @@ class DeviceWizard extends Component {
       'row': this.buildRow.bind(this),
       'credpicker': this.buildCredPicker.bind(this),
       'agentpicker': this.buildAgentPicker.bind(this),
-      "removeAfter": this.buildRemoveAfter.bind(this)
+      "removeafter": this.buildRemoveAfter.bind(this)
     }
   }
 
