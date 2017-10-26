@@ -109,12 +109,24 @@ class DeviceWizard extends Component {
     const { monitors, currentDevice, deviceGlobalCredentials, deviceCredentials } = this.state
     const {distribution} = formProps
     const params = {
-      ...(formProps.params || {})
     }
     if (editParams) {
       editParams.forEach(p => {
         params[p.key] = p.value
       })
+    }
+
+    if (formProps.params && formProps.params.remove_after) {
+      switch (formProps.params.remove_after_unit) {
+        case 'months':
+          params.remove_after = formProps.params.remove_after * 30
+          break
+        case 'years':
+          params.remove_after = formProps.params.remove_after * 365
+          break
+        default:
+          params.remove_after = formProps.params.remove_after
+      }
     }
 
     const props = assign(
