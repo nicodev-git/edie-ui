@@ -43,11 +43,7 @@ export default connect(
     initialValues: {
       distribution: 'Ubuntu',
       agentType: 'collector',
-      ...state.devices.wizardInitialValues,
-      params: {
-        remove_after: 3,
-        remove_after_unit: 'months'
-      }
+      ...state.devices.wizardInitialValues
     },
     editDevice: state.devices.editDevice,
     addingDevice: state.devices.addingDevice,
