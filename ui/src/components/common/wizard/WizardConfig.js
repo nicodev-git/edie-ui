@@ -202,7 +202,7 @@ export const wizardConfig = {
           width: MAX_WIDTH,
           name: 'lanip'
         }, {
-          type: 'text',
+          type: 'removeAfter',
           label: {
             text: 'Add remove events after',
             type: 'attach',
@@ -297,7 +297,7 @@ export const wizardConfig = {
           width: MAX_WIDTH,
           name: 'lanip'
         }, {
-          type: 'text',
+          type: 'removeAfter',
           label: {
             text: 'Add remove events after',
             type: 'attach',

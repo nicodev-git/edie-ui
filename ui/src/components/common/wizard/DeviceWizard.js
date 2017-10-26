@@ -16,6 +16,7 @@ import DeviceWizardView from './DeviceWizardView'
 import TagsView from './input/TagsView'
 import CredPickerInput from './input/CredPicker'
 import AgentPicker from './input/AgentPicker'
+import RemoveAfter from './input/RemoveAfter'
 
 import {CardPanel} from 'components/modal/parts'
 
@@ -56,7 +57,8 @@ class DeviceWizard extends Component {
       'combo': this.buildCombo.bind(this),
       'row': this.buildRow.bind(this),
       'credpicker': this.buildCredPicker.bind(this),
-      'agentpicker': this.buildAgentPicker.bind(this)
+      'agentpicker': this.buildAgentPicker.bind(this),
+      "removeAfter": this.buildRemoveAfter.bind(this)
     }
   }
 
@@ -106,7 +108,9 @@ class DeviceWizard extends Component {
     const { extraParams, onFinish, editParams, canAddTags, monitorTags, credentials, fixResult, fixStatus, editDevice } = this.props
     const { monitors, currentDevice, deviceGlobalCredentials, deviceCredentials } = this.state
     const {distribution} = formProps
-    const params = {}
+    const params = {
+      ...(formProps.params || {})
+    }
     if (editParams) {
       editParams.forEach(p => {
         params[p.key] = p.value
@@ -331,6 +335,14 @@ class DeviceWizard extends Component {
           onChange={this.onChangeAgentType.bind(this)}
         />
       </div>
+    )
+  }
+
+  buildRemoveAfter (config, values, meta) {
+    return (
+      <RemoveAfter
+        key="remove_after"
+      />
     )
   }
 

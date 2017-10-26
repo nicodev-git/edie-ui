@@ -5,6 +5,8 @@ import {RadioButtonGroup} from 'redux-form-material-ui'
 
 import {FormInput, FormCheckbox, FormSelect, CardPanel, Modal} from 'components/modal/parts'
 
+import {removeAfterDurations, removeAfterDurationUnits} from 'shared/Global'
+
 const paramLabels = {
   'checkinterval': 'Interval (seconds)',
   'timeout': 'Timeout (seconds)'
@@ -13,14 +15,6 @@ const paramLabels = {
 const paramHints = {
   'filepath': '/var/log/messages'
 }
-
-const durationOptions = [1,2,3,5,10,15,20,25].map(p => ({
-  label: `${p}`, value: p
-}))
-
-const durationUnits = 'days months years'.split(' ').map(p => ({
-  label: p, value: p
-}))
 
 const integratedOptions = [{
   label: 'User/Pass', value: 'false'
@@ -83,10 +77,10 @@ export default class MonitorWizardView extends React.Component {
             <div>
               <div className="inline-block valign-middle" style={{fontSize: '16px', paddingLeft: 7}}>Add remove events after</div>
               <Field
-                name="remove_after" component={FormSelect} options={durationOptions}
+                name="remove_after" component={FormSelect} options={removeAfterDurations}
                 style={{width: 80, paddingLeft: 15}} className="valign-middle"/>
               <Field
-                name="remove_after_unit" component={FormSelect} options={durationUnits}
+                name="remove_after_unit" component={FormSelect} options={removeAfterDurationUnits}
                 style={{width: 120}} className="valign-middle"/>
             </div>
 
