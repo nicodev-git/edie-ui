@@ -942,7 +942,7 @@ class GenericSearch extends React.Component {
     return (
       <TabPage>
         <TabPageBody tabs={[]} tab={0} history={this.props.history} location={this.props.location}>
-          <div className="flex-vertical" style={{height: '100%'}}>
+          <div className="flex-vertical" style={{height: '100%', overflow: 'hidden'}}>
             <div style={{paddingTop: 10, paddingBottom: 20, backgroundColor: '#e5e7ec'}}>
               <SearchFormView
                 onSearchKeyDown={this.onSearchKeyDown.bind(this)}
