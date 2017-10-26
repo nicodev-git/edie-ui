@@ -55,7 +55,7 @@ DeviceEditWizard.defaultProps = {
   }, {
     title: 'Advanced',
     id: 'tab-devinfo-advanced',
-    include: ['server_url', 'deviceid', 'devicetype', 'response', 'checkinterval', 'status', 'basicchecks', 'externalIP', 'tags'],
+    include: ['server_url', 'deviceid', 'devicetype', 'response', 'checkinterval', 'status', 'basicchecks', 'externalIP', 'tags', 'params.remove_after'],
     extra: [{
       name: 'id',
       title: 'DeviceId'

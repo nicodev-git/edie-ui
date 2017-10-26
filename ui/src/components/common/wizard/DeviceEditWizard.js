@@ -335,6 +335,7 @@ class DeviceEditWizard extends React.Component {
       />
     )
   }
+
   render () {
     const { handleSubmit, tabs, selectedDevice } = this.props
     return (
