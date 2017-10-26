@@ -505,7 +505,7 @@ function findCols (object) {
 
 export const fetchTableViewCols = () => {
   return dispatch => {
-    axios.get(`${ROOT_URL}/search/getMappping`).then(res => {
+    axios.get(`${ROOT_URL}/search/getMapping`).then(res => {
       const list = uniqBy([
         ...findCols(res.data['event']),
         ...findCols(res.data['incident'])
