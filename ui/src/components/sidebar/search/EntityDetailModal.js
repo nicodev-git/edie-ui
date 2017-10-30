@@ -19,6 +19,16 @@ export default class EntityDetailModal extends React.Component {
     delete detailEntity.highlights
     delete detailEntity['entity.id']
 
+    try {
+      var parsed = JSON.parse(detailEntity.entity.rawdata)
+      if (parsed) {
+        detailEntity.entity.rawdata = parsed
+      }
+    } catch (e) {
+
+    }
+
+
     return detailEntity
   }
 
