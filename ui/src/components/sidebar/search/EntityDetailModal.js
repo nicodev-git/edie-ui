@@ -33,6 +33,18 @@ export default class EntityDetailModal extends React.Component {
   }
 
   renderValue (raw) {
+    const {detailEntity} = this.props
+    let i = 2
+    let path = ''
+    while(i < arguments.length - 2) {
+      path = `${arguments[i]}${path ? '.' : ''}${path}`
+      i++
+    }
+
+    const highlight = path ? detailEntity.highlights[path] : ''
+    if (highlight) {
+      return <span dangerouslySetInnerHTML={{__html: `${highlight}`}}/>
+    }
     return raw
   }
 

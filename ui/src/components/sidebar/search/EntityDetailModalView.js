@@ -24,8 +24,8 @@ export default class EntityDetailModalView extends React.Component {
           <div style={{width: '100%', overflow: 'auto'}}>
             <JSONTree
               data={detailEntity}
-              invertTheme
               shouldExpandNode={() => true}
+              valueRenderer={valueRenderer}
             />
           </div>
 
