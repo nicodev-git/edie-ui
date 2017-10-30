@@ -17,6 +17,7 @@ export default class EntityDetailModal extends React.Component {
       detailEntity = removeNullValues(detailEntity)
 
     delete detailEntity.highlights
+    delete detailEntity['entity.id']
 
     return detailEntity
   }
@@ -30,6 +31,11 @@ export default class EntityDetailModal extends React.Component {
   onHide () {
     this.props.showEntityDetailModal(false)
   }
+
+  renderValue (raw) {
+    return raw
+  }
+
   render () {
     return (
       <EntityDetailModalView
@@ -37,6 +43,7 @@ export default class EntityDetailModal extends React.Component {
         onHide={this.onHide.bind(this)}
         isShowNull={this.state.isShowNull}
         onCheckShowNull={this.onCheckShowNull.bind(this)}
+        valueRenderer={this.renderValue.bind(this)}
       />
     )
   }
