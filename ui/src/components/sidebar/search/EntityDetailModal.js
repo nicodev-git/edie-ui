@@ -1,4 +1,5 @@
 import React from 'react'
+import {keys} from 'lodash'
 
 import EntityDetailModalView from './EntityDetailModalView'
 import {removeNullValues} from 'components/common/CellRenderers'
@@ -11,6 +12,24 @@ export default class EntityDetailModal extends React.Component {
     }
   }
 
+  expandEntity (entity) {
+    keys(entity).forEach(k => {
+      const val = entity[k]
+      try {
+        const t = typeof val
+        if (t === 'string') {
+          const parsed = JSON.parse(val)
+          if (parsed) entity[k] = this.expandEntity(parsed)
+        } else if (t === 'object') {
+          entity[k] = this.expandEntity(val)
+        }
+      } catch (e) {
+
+      }
+    })
+    return entity
+  }
+
   getEntity () {
     let detailEntity = {...this.props.detailEntity}
     if (!this.state.isShowNull)
@@ -19,16 +38,7 @@ export default class EntityDetailModal extends React.Component {
     delete detailEntity.highlights
     delete detailEntity['entity.id']
 
-    try {
-      var parsed = JSON.parse(detailEntity.entity.rawdata)
-      if (parsed) {
-        detailEntity.entity.rawdata = parsed
-      }
-    } catch (e) {
-
-    }
-
-
+    detailEntity = this.expandEntity(detailEntity)
     return detailEntity
   }
 
