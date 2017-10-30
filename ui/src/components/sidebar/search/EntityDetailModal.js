@@ -12,10 +12,13 @@ export default class EntityDetailModal extends React.Component {
   }
 
   getEntity () {
-    const {detailEntity} = this.props
-    if (this.state.isShowNull) return detailEntity
+    let detailEntity = {...this.props.detailEntity}
+    if (!this.state.isShowNull)
+      detailEntity = removeNullValues(detailEntity)
 
-    return removeNullValues(detailEntity)
+    delete detailEntity.highlights
+
+    return detailEntity
   }
 
   onCheckShowNull (e, checked) {
