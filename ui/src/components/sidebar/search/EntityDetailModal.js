@@ -1,8 +1,7 @@
 import React from 'react'
-import {keys} from 'lodash'
 
 import EntityDetailModalView from './EntityDetailModalView'
-import {removeNullValues} from 'components/common/CellRenderers'
+import {removeNullValues, expandEntity} from 'components/common/CellRenderers'
 
 export default class EntityDetailModal extends React.Component {
   constructor (props) {
@@ -10,24 +9,6 @@ export default class EntityDetailModal extends React.Component {
     this.state = {
       isShowNull: false
     }
-  }
-
-  expandEntity (entity) {
-    keys(entity).forEach(k => {
-      const val = entity[k]
-      try {
-        const t = typeof val
-        if (t === 'string') {
-          const parsed = JSON.parse(val)
-          if (parsed) entity[k] = this.expandEntity(parsed)
-        } else if (t === 'object') {
-          entity[k] = this.expandEntity(val)
-        }
-      } catch (e) {
-
-      }
-    })
-    return entity
   }
 
   getEntity () {
@@ -38,7 +19,7 @@ export default class EntityDetailModal extends React.Component {
     delete detailEntity.highlights
     delete detailEntity['entity.id']
 
-    detailEntity = this.expandEntity(detailEntity)
+    detailEntity = expandEntity(detailEntity)
     return detailEntity
   }
 

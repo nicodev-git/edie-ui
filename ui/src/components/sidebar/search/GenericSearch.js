@@ -14,7 +14,7 @@ import InfiniteTable from 'components/common/InfiniteTable'
 import TabPage from 'components/common/TabPage'
 import TabPageBody from 'components/common/TabPageBody'
 import { guid, collections, severities, viewFilters, queryDateFormat } from 'shared/Global'
-import {renderEntity2} from 'components/common/CellRenderers'
+import {renderEntity2, expandEntity} from 'components/common/CellRenderers'
 import {chipStyles} from 'style/common/materialStyles'
 import {getRanges, getRangeLabel} from 'components/common/DateRangePicker'
 import {showAlert} from 'components/common/Alert'
@@ -83,12 +83,12 @@ class GenericSearch extends React.Component {
         delete highlighted[timeField]
 
         const {severity, ...others} = highlighted
-        const data = {
+        const data = expandEntity({
           type: rowData.type,
           [timeField]: entity[timeField],
           severity,
           ...others
-        }
+        })
         if (!severity) delete data.severity
 
         const {viewCols} = this.props

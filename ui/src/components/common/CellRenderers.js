@@ -114,3 +114,21 @@ export function removeNullValues(entity) {
   }
   return entity
 }
+
+export function expandEntity (entity) {
+  keys(entity).forEach(k => {
+    const val = entity[k]
+    try {
+      const t = typeof val
+      if (t === 'string') {
+        const parsed = JSON.parse(val)
+        if (parsed) entity[k] = expandEntity(parsed)
+      } else if (t === 'object') {
+        entity[k] = expandEntity(val)
+      }
+    } catch (e) {
+
+    }
+  })
+  return entity
+}
