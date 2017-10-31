@@ -1,7 +1,7 @@
 import React from 'react'
 
 import EntityDetailModalView from './EntityDetailModalView'
-import {removeNullValues, expandEntity} from 'components/common/CellRenderers'
+import {removeNullValues, expandEntity, getHighlighted} from 'components/common/CellRenderers'
 
 export default class EntityDetailModal extends React.Component {
   constructor (props) {
@@ -15,6 +15,7 @@ export default class EntityDetailModal extends React.Component {
     let detailEntity = {...this.props.detailEntity}
     if (!this.state.isShowNull)
       detailEntity = removeNullValues(detailEntity)
+    detailEntity.entity = getHighlighted (detailEntity.entity, detailEntity.highlights)
 
     delete detailEntity.highlights
     delete detailEntity['entity.id']
@@ -33,20 +34,13 @@ export default class EntityDetailModal extends React.Component {
     this.props.showEntityDetailModal(false)
   }
 
-  renderValue (raw) {
-    const {detailEntity} = this.props
-    let i = 2
-    let path = ''
-    while(i < arguments.length - 2) {
-      path = `${arguments[i]}${path ? '.' : ''}${path}`
-      i++
-    }
+  labelRenderer (raw) {
+    const val = raw ? raw[0] : ''
+    return <span dangerouslySetInnerHTML={{__html: `${val || ''}:`}}/>
+  }
 
-    const highlight = path ? detailEntity.highlights[path] : ''
-    if (highlight) {
-      return <span dangerouslySetInnerHTML={{__html: `${highlight}`}}/>
-    }
-    return raw
+  valueRenderer (raw) {
+    return <span dangerouslySetInnerHTML={{__html: `${raw || ''}`}}/>
   }
 
   render () {
@@ -56,7 +50,8 @@ export default class EntityDetailModal extends React.Component {
         onHide={this.onHide.bind(this)}
         isShowNull={this.state.isShowNull}
         onCheckShowNull={this.onCheckShowNull.bind(this)}
-        valueRenderer={this.renderValue.bind(this)}
+        labelRenderer={this.labelRenderer.bind(this)}
+        valueRenderer={this.valueRenderer.bind(this)}
       />
     )
   }

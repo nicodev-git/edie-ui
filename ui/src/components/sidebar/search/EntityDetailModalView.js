@@ -36,7 +36,7 @@ const theme = {
 
 export default class EntityDetailModalView extends React.Component {
   render () {
-    const {onHide, detailEntity, isShowNull, onCheckShowNull, valueRenderer} = this.props
+    const {onHide, detailEntity, isShowNull, onCheckShowNull, labelRenderer, valueRenderer} = this.props
     return (
       <Modal title="Detail" onRequestClose={onHide} contentStyle={{width: 1035, maxWidth: 'initial'}}>
         <CardPanel title="Detail">
@@ -47,6 +47,7 @@ export default class EntityDetailModalView extends React.Component {
               theme={theme}
               invertTheme={false}
               shouldExpandNode={() => true}
+              labelRenderer={labelRenderer}
               valueRenderer={valueRenderer}
             />
           </div>
