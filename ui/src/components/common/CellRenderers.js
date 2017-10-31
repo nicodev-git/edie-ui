@@ -1,6 +1,6 @@
 import React from 'react'
 import moment from 'moment'
-import {assign, concat, isArray, keys, isObject} from 'lodash'
+import {assign, concat, isArray, keys, merge, isObject} from 'lodash'
 
 export function renderEntity (entity, options) {
   const ret = renderEntity2(entity, options)
@@ -74,7 +74,7 @@ function renderData (entity, isChildren, path, options, used) {  // eslint-disab
   allKeys.every((key, index) => {
     if (entity[key] === null && options && options['notNull']) return true
 
-    children.push(<span className="field-key" key={`${path}-key-${key}`}>{key} = </span>)
+    children.push(<span className="field-key" key={`${path}-key-${key}`} dangerouslySetInnerHTML={{__html: `${key} = `}}/>)
     used += key.length
 
     const ret = renderValue(entity[key], `${path}.${key}`, options, used)
@@ -131,4 +131,32 @@ export function expandEntity (entity) {
     }
   })
   return entity
+}
+
+
+export function getHighlighted (entity, highlights) {
+  let data = merge({}, entity)
+  keys(highlights).forEach(path => {
+    const highlighted = highlights[path]
+    const pathElements = path.split('.')
+
+    let el = data
+    pathElements.forEach((pathEl, index) => {
+      if (index === pathElements.length - 1) {
+        if (isArray(el[pathEl])) {
+          el = el[pathEl]
+          el.forEach((item, index) => {
+            if (highlighted.match(item)) el[index] = highlighted
+          })
+        } else {
+          el[pathEl] = highlighted
+        }
+      } else {
+        el = el[pathEl]
+        if (isArray(el)) el = el[0]
+      }
+    })
+  })
+
+  return data
 }

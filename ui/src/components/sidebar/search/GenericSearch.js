@@ -1,7 +1,7 @@
 import React from 'react'
 import { reduxForm, submit, formValueSelector } from 'redux-form'
 import { connect } from 'react-redux'
-import { merge, assign, concat, isArray, keys, findIndex, debounce } from 'lodash'
+import { assign, concat, keys, findIndex, debounce } from 'lodash'
 import moment from 'moment'
 import ReactTooltip from 'react-tooltip'
 import {Popover, FlatButton, Chip, IconButton} from 'material-ui'
@@ -14,7 +14,7 @@ import InfiniteTable from 'components/common/InfiniteTable'
 import TabPage from 'components/common/TabPage'
 import TabPageBody from 'components/common/TabPageBody'
 import { guid, collections, severities, viewFilters, queryDateFormat } from 'shared/Global'
-import {renderEntity2, expandEntity} from 'components/common/CellRenderers'
+import {renderEntity2, expandEntity, getHighlighted} from 'components/common/CellRenderers'
 import {chipStyles} from 'style/common/materialStyles'
 import {getRanges, getRangeLabel} from 'components/common/DateRangePicker'
 import {showAlert} from 'components/common/Alert'
@@ -77,7 +77,7 @@ class GenericSearch extends React.Component {
         let expand = expanded[entity.id]
         if (typeof expand === 'undefined') expand = allExpanded
 
-        const highlighted = this.getHighlighted(entity, rowData.highlights)//expand ? this.getHighlighted(entity, rowData.highlights) : {...entity}
+        const highlighted = getHighlighted(entity, rowData.highlights)//expand ? this.getHighlighted(entity, rowData.highlights) : {...entity}
 
         const timeField = entity.startTimestamp ? 'startTimestamp' : 'timestamp'
         delete highlighted[timeField]
@@ -229,33 +229,6 @@ class GenericSearch extends React.Component {
     }))
 
     return options
-  }
-
-  getHighlighted (entity, highlights) {
-    let data = merge({}, entity)
-    keys(highlights).forEach(path => {
-      const highlighted = highlights[path]
-      const pathElements = path.split('.')
-
-      let el = data
-      pathElements.forEach((pathEl, index) => {
-        if (index === pathElements.length - 1) {
-          if (isArray(el[pathEl])) {
-            el = el[pathEl]
-            el.forEach((item, index) => {
-              if (highlighted.match(item)) el[index] = highlighted
-            })
-          } else {
-            el[pathEl] = highlighted
-          }
-        } else {
-          el = el[pathEl]
-          if (isArray(el)) el = el[0]
-        }
-      })
-    })
-
-    return data
   }
 
   getTableClass () {
