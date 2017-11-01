@@ -4,7 +4,7 @@ import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
 import {findIndex} from 'lodash'
 
 import MainDashboardView from './MainDashboardView'
-import SysDashboardView from './SysDashboardView'
+import ServerDashboardView from './ServerDashboardView'
 import BoardListModal from './BoardListModal'
 
 export default class MainDashboard extends React.Component {
@@ -62,9 +62,9 @@ export default class MainDashboard extends React.Component {
   renderContent () {
     const board = this.getSelected()
     if (!board) return null
-    if (board.type === 'system') {
+    if (board.type === 'system' && board.name === 'Servers') {
       return (
-        <SysDashboardView board={board} {...this.props}/>
+        <ServerDashboardView board={board} {...this.props}/>
       )
     }
     return (

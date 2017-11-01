@@ -9,7 +9,7 @@ import RefreshOverlay from 'components/common/RefreshOverlay'
 
 import { showAlert, showConfirm } from 'components/common/Alert'
 
-export default class SysDashboardView extends React.Component {
+export default class ServerDashboardView extends React.Component {
   constructor (props) {
     super(props)
 
