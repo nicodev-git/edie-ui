@@ -82,7 +82,7 @@ export const addGaugeRect = (props, board) => {
   }
 }
 
-export const updateGaugeRect = (props, board) => {
+export const updateGaugeRect = (props, board, stateOnly) => {
   return dispatch => {
     const rects = (board.rects || []).map(p => {
       if (props.length) {
@@ -92,10 +92,17 @@ export const updateGaugeRect = (props, board) => {
         return p.id === props.id ? props : p
       }
     })
-    dispatch(updateGaugeBoard({
+
+    const data = {
       ...board,
       rects
-    }))
+    }
+    if (stateOnly) {
+      dispatch({type: UPDATE_GAUGE_BOARD, data})
+    } else {
+      dispatch(updateGaugeBoard(data))
+    }
+
   }
 }
 

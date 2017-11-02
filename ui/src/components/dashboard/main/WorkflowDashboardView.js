@@ -71,9 +71,12 @@ export default class WorkflowDashboardView extends React.Component {
 
   ////////////////////
   renderRect (rect, index) {
+    const map = rect.map || {}
     return (
       <Draggable
-        key={rect.id || index}>
+        key={rect.id || index}
+        position={{x: map.x || 0 , y: map.y || 0}}
+      >
         <div className="inline-block">
           <RectItem
             {...this.props}
