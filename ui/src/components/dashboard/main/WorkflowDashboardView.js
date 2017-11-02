@@ -1,6 +1,6 @@
 import React from 'react'
 import {concat} from 'lodash'
-import {IconButton, IconMenu, MenuItem} from 'material-ui'
+import {IconButton} from 'material-ui'
 import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
 
 import WfRectModal from './workflow/WfRectModal'
@@ -63,7 +63,7 @@ export default class WorkflowDashboardView extends React.Component {
   renderRect (rect, index) {
     return (
       <RectItem
-        key={rect.id}
+        key={rect.id || index}
         index={index}
         rect={rect}
       />

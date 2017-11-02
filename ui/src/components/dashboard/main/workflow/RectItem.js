@@ -1,9 +1,13 @@
 import React from 'react'
 import {findIndex} from 'lodash'
+import axios from 'axios'
 
 import AppletCard from 'components/common/AppletCard'
 
+import { ROOT_URL } from 'actions/config'
 import {buildServiceParams} from 'util/Query'
+import {getRanges} from 'components/common/DateRangePicker'
+import { severities, queryDateFormat, collections } from 'shared/Global'
 
 export default class RectItem extends React.Component {
   constructor (props) {
@@ -36,26 +40,44 @@ export default class RectItem extends React.Component {
     return searchList[index]
   }
 
-  getSearchResult (id) {
-    const search = this.getSearch(id)
-    if (!search) return false
+  getSearchResult (search, cb) {
+    const {workflows, devices, allDevices} = this.props
+
     const data = JSON.parse(search.data)
-    const params = {
-      page: 0,
-      size: 1,
-      draw: 1,
-      q: data.q
-    }
+    const searchParams = buildServiceParams(data, {
+      dateRanges: getRanges(),
+      collections, severities, workflows,
+      allDevices: devices || allDevices,
+      queryDateFormat
+    })
+
+    axios.get(`${ROOT_URL}/search/query`, {
+      params: searchParams
+    }).then(res => {
+      cb(res.data.page.totalElements)
+    }).catch(() => {
+      cb(0)
+    })
     return true
   }
 
   fetchResult () {
     const {goodId, badId} = this.props.rect
-    if (goodId) {
 
+    const goodSearch = goodId ? this.getSearch(goodId) : null
+    const badSearch = badId ? this.getSearch(badId) : null
+
+    if (!goodSearch && !badSearch) return
+
+    if (goodSearch) {
+      this.getSearchResult(goodSearch, count => {
+        this.setState({good: count})
+      })
     }
-    if (badId) {
-
+    if (badSearch) {
+      this.getSearchResult(badSearch, count => {
+        this.setState({bad: count})
+      })
     }
 
     this.setState({
