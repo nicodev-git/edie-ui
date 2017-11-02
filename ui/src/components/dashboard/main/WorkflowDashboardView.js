@@ -5,6 +5,8 @@ import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
 
 import WfRectModal from './workflow/WfRectModal'
 
+import {guid} from 'shared/Global'
+
 export default class WorkflowDashboardView extends React.Component {
 
   getUserSearchOptions () {
@@ -35,6 +37,10 @@ export default class WorkflowDashboardView extends React.Component {
     }))
   }
 
+  getRects () {
+    return this.props.board.rects || []
+  }
+
   ////////////////////
 
   onClickAddItem () {
@@ -45,11 +51,17 @@ export default class WorkflowDashboardView extends React.Component {
     this.props.showWfRectModal(false)
   }
 
-  onSaveWfRect (values) {
-
+  onSaveWfRect (params) {
+    if (!params.id) {
+      params.id = guid()
+    }
+    this.props.addGaugeRect(params, this.props.board)
   }
 
   ////////////////////
+  renderRect (rect) {
+
+  }
 
   renderWfRectModal () {
     if (!this.props.wfRectModalOpen) return null
@@ -77,6 +89,7 @@ export default class WorkflowDashboardView extends React.Component {
       <div>
         {this.renderAddMenu()}
         <ul className="web-applet-cards">
+          {this.getRects().map(this.renderRect.bind(this))}
         </ul>
         {this.renderWfRectModal()}
       </div>

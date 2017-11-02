@@ -19,6 +19,10 @@ import {
   updateGaugeItem,
   removeGaugeItem,
 
+  addGaugeRect,
+  updateGaugeRect,
+  removeGaugeRect,
+
   fetchGaugeBoards,
   addGaugeBoard,
   updateGaugeBoard,
@@ -112,6 +116,10 @@ export default connect(
     addGaugeItem,
     updateGaugeItem,
     removeGaugeItem,
+
+    addGaugeRect,
+    updateGaugeRect,
+    removeGaugeRect,
 
     fetchGaugeBoards,
     addGaugeBoard,
