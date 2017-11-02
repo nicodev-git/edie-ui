@@ -52,7 +52,16 @@ export default class RectItem extends React.Component {
     })
 
     axios.get(`${ROOT_URL}/search/query`, {
-      params: searchParams
+      params: {
+        q: searchParams.query,
+        from: searchParams.from,
+        to: searchParams.to,
+        types: searchParams.types,
+        collections: searchParams.collections,
+        severity: searchParams.severity,
+        page: 0,
+        size: 1
+      }
     }).then(res => {
       cb(res.data.page.totalElements)
     }).catch(() => {
@@ -87,9 +96,13 @@ export default class RectItem extends React.Component {
 
   render () {
     const {rect, onClick, onClickDelete} = this.props
+    const {good, bad} = this.state
+    const color = bad ? '#D1282C' : (good ?
+      '#3cba54' :
+      'gray')
     return (
       <AppletCard
-        color="#3cba54"
+        color={color}
         desc={rect.name}
         img="/resources/images/dashboard/workflow.png"
         onClick={onClick}
