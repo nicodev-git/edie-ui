@@ -45,6 +45,10 @@ export default class WorkflowDashboardView extends React.Component {
     this.props.showWfRectModal(false)
   }
 
+  onSaveWfRect (values) {
+
+  }
+
   ////////////////////
 
   renderWfRectModal () {
@@ -56,6 +60,7 @@ export default class WorkflowDashboardView extends React.Component {
     return (
       <WfRectModal
         searchList={searchList}
+        onSubmit={this.onSaveWfRect.bind(this)}
         onHide={this.onCloseWfRectModal.bind(this)}/>
     )
   }

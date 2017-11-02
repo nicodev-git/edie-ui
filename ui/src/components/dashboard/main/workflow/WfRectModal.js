@@ -11,7 +11,7 @@ class WfRectModal extends React.Component {
     if (!values.name) {
       return showAlert('Please type name.')
     }
-
+    this.props.onSubmit(values)
     this.props.onHide()
   }
   render () {
