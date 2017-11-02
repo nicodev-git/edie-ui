@@ -9,7 +9,9 @@ export default class WfRectModal extends React.Component {
   render () {
     const {handleFormSubmit} = this.props
     return (
-      <WfRectModalView onSubmit={handleFormSubmit(this.onSubmit.bind(this))}/>
+      <WfRectModalView
+        searchList={[]}
+        onSubmit={handleFormSubmit(this.onSubmit.bind(this))}/>
     )
   }
 }

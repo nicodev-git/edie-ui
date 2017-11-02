@@ -49,7 +49,9 @@ import {
   addDevice,
   updateMapDevice,
   deleteMapDevice,
-  showMonitorDetailModal
+  showMonitorDetailModal,
+
+  showWfRectModal
 } from 'actions'
 
 class MainDashboardContainer extends React.Component {
@@ -92,7 +94,9 @@ export default connect(
     gaugeDevice: state.dashboard.gaugeDevice,
     gaugeMonitor: state.dashboard.gaugeMonitor,
 
-    deleteDeviceState: state.dashboard.deleteDeviceState
+    deleteDeviceState: state.dashboard.deleteDeviceState,
+
+    wfRectModalOpen: state.dashboard.wfRectModalOpen
   }), {
     fetchDevicesGroups,
     fetchMonitorGroups,
@@ -139,6 +143,8 @@ export default connect(
     addDevice,
     updateMapDevice,
     deleteMapDevice,
-    showMonitorDetailModal
+    showMonitorDetailModal,
+
+    showWfRectModal
   }
 )(withRouter(MainDashboardContainer))
