@@ -86,7 +86,7 @@ class InfiniteTable extends React.Component {
       return
     }
 
-    const {url, params, pageSize, onUpdateCount, handleRecord} = this.props
+    const {url, params, pageSize, onUpdateCount, onUpdateLoading, handleRecord} = this.props
     if (!url) return
     page = clear ? 1 : (page || 1)
     let urlParams = assign({
@@ -97,6 +97,8 @@ class InfiniteTable extends React.Component {
     this.setState({
       isLoading: true
     })
+
+    onUpdateLoading && onUpdateLoading(true, page)
 
     if (this.lastRequest) {
       this.lastRequest.abort()
@@ -121,6 +123,7 @@ class InfiniteTable extends React.Component {
 
       this.setState(state)
       onUpdateCount && onUpdateCount(total, state.results)
+      onUpdateLoading && onUpdateLoading(false)
     }).fail(() => {
       let state = {
         isLoading: false,
@@ -129,6 +132,7 @@ class InfiniteTable extends React.Component {
 
       this.setState(state)
       onUpdateCount && onUpdateCount(this.state.total, this.state.results)
+      onUpdateLoading && onUpdateLoading(false, page)
     })
 
     return this.lastRequest

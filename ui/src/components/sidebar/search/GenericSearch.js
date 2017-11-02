@@ -35,6 +35,7 @@ import TagPickerModal from 'containers/settings/tag/TagPickerModalContainer'
 import SearchMonitorModal from './SearchMonitorModal'
 import MonitorGroupsModal from 'containers/settings/monitorgroup/MonitorGroupsModalContainer'
 import EntityDetailModal from './EntityDetailModal'
+import RefreshOverlay from "../../common/RefreshOverlay";
 
 class GenericSearch extends React.Component {
   constructor (props) {
@@ -45,7 +46,8 @@ class GenericSearch extends React.Component {
       cols: [],
       anchorEl: null,
       expanded: {},
-      allExpanded: false
+      allExpanded: false,
+      loading: false
     }
     this.tooltipRebuild = debounce(ReactTooltip.rebuild, 100)
     this.cells = [{
@@ -470,6 +472,13 @@ class GenericSearch extends React.Component {
     })
 
     this.tooltipRebuild()
+  }
+
+  onUpdateLoading (loading, page) {
+    if (page === 1 || !loading) {
+      this.setState({loading})
+    }
+
   }
 
   onClickIllustrate () {
@@ -988,8 +997,10 @@ class GenericSearch extends React.Component {
                       pageSize={10}
                       showTableHeading={false}
                       onUpdateCount={this.onResultCountUpdate.bind(this)}
+                      onUpdateLoading={this.onUpdateLoading.bind(this)}
                       selectable
                     />
+                    {this.state.loading && <RefreshOverlay/>}
                   </div>
                 </div>
               </div>
