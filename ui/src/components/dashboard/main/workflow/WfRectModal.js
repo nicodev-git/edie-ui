@@ -8,15 +8,12 @@ class WfRectModal extends React.Component {
   onSubmit (values) {
 
   }
-  onHide () {
-
-  }
   render () {
-    const {handleSubmit} = this.props
+    const {handleSubmit, searchList, onHide} = this.props
     return (
       <WfRectModalView
-        onHide={this.onHide.bind(this)}
-        searchList={[]}
+        onHide={onHide}
+        searchList={searchList}
         onSubmit={handleSubmit(this.onSubmit.bind(this))}/>
     )
   }
