@@ -136,11 +136,6 @@ div.dropdown-image div:hover {
     margin: 0;
     padding: 0;
     list-style: none;
-    display: flex;
-    flex-flow: wrap;
-    /*-webkit-box-pack: center;*/
-    /*-ms-flex-pack: center;*/
-    /*justify-content: center;*/
     margin-left: auto;
     margin-right: auto;
 }
@@ -154,6 +149,7 @@ div.dropdown-image div:hover {
     height: 260px;
     padding: .5em;
     text-align: left;
+    display: inline-block;
 }
 
 .web-applet-card.small {

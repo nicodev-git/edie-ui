@@ -72,13 +72,16 @@ export default class WorkflowDashboardView extends React.Component {
   ////////////////////
   renderRect (rect, index) {
     return (
-      <RectItem
-        {...this.props}
-        key={rect.id || index}
-        rect={rect}
-        searchList={this.getSearchList()}
-        onClick={this.onClickEditItem.bind(this, rect)}
-      />
+      <Draggable
+        key={rect.id || index}>
+        <div className="inline-block">
+          <RectItem
+            {...this.props}
+            rect={rect}
+            searchList={this.getSearchList()}
+          />
+        </div>
+      </Draggable>
     )
   }
 
