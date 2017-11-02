@@ -3,6 +3,7 @@ import {concat} from 'lodash'
 import {IconButton} from 'material-ui'
 import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
 import Draggable from 'react-draggable'
+import {debounce} from 'lodash'
 
 import WfRectModal from './workflow/WfRectModal'
 import RectItem from './workflow/RectItem'
@@ -10,6 +11,13 @@ import RectItem from './workflow/RectItem'
 import {guid} from 'shared/Global'
 
 export default class WorkflowDashboardView extends React.Component {
+  componentWillMount () {
+    this.debUpdateBoard = debounce(this.updateBoard.bind(this), 2000)
+  }
+
+  updateBoard () {
+    this.props.updateGaugeBoard(this.props.board)
+  }
 
   getUserSearchOptions () {
     const {userInfo} = this.props
@@ -69,6 +77,15 @@ export default class WorkflowDashboardView extends React.Component {
     this.props.showWfRectModal(true, rect)
   }
 
+  onStopDrag (rect, e, data) {
+    rect.map = rect.map || {}
+    rect.map.x = data.x
+    rect.map.y = data.y
+
+    this.props.updateGaugeRect(rect, this.props.board, true)
+    this.debUpdateBoard()
+  }
+
   ////////////////////
   renderRect (rect, index) {
     const map = rect.map || {}
@@ -76,6 +93,8 @@ export default class WorkflowDashboardView extends React.Component {
       <Draggable
         key={rect.id || index}
         position={{x: map.x || 0 , y: map.y || 0}}
+        onStop={this.onStopDrag.bind(this, rect)}
+        defaultPosition={{x: map.x || 0 , y: map.y || 0}}
       >
         <div className="inline-block">
           <RectItem
