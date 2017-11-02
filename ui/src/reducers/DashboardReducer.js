@@ -71,6 +71,8 @@ import {
 
   DELETE_DEVICE_STATE,
 
+  SHOW_WFRECT_MODAL,
+
   API_ERROR
 } from 'actions/types'
 
@@ -328,6 +330,10 @@ export default function (state = initialState, action) {
 
     case DELETE_DEVICE_STATE:
       return { ...state, deleteDeviceState: action.data }
+
+    case SHOW_WFRECT_MODAL:
+      return { ...state, wfRectModalOpen: action.visible }
+
     default:
       return state
   }

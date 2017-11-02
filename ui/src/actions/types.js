@@ -473,6 +473,8 @@ export const SHOW_GAUGE_BOARDS_MODAL = 'SHOW_GAUGE_BOARDS_MODAL'
 export const SHOW_GAUGE_MODAL = 'SHOW_GAUGE_MODAL'
 export const SHOW_GAUGE_PICKER = 'SHOW_GAUGE_PICKER'
 
+export const SHOW_WFRECT_MODAL = 'SHOW_WFRECT_MODAL'
+
 ///////////////////////////////////////////////////////////////
 
 export const FETCH_MONITOR_GROUPS = 'FETCH_MONITOR_GROUPS'
