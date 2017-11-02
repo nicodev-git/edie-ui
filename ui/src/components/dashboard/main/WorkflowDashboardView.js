@@ -4,6 +4,7 @@ import {IconButton, IconMenu, MenuItem} from 'material-ui'
 import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
 
 import WfRectModal from './workflow/WfRectModal'
+import RectItem from './workflow/RectItem'
 
 import {guid} from 'shared/Global'
 
@@ -59,8 +60,14 @@ export default class WorkflowDashboardView extends React.Component {
   }
 
   ////////////////////
-  renderRect (rect) {
-
+  renderRect (rect, index) {
+    return (
+      <RectItem
+        key={rect.id}
+        index={index}
+        rect={rect}
+      />
+    )
   }
 
   renderWfRectModal () {
