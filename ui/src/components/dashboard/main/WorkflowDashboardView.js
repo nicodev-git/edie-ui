@@ -72,7 +72,9 @@ export default class WorkflowDashboardView extends React.Component {
 
   renderWfRectModal () {
     if (!this.props.wfRectModalOpen) return null
-    const searchList = this.getSearchList().map(p => ({
+    const list = this.getSearchList()
+    console.log(list)
+    const searchList = list.map(p => ({
       label: p.name,
       value: p.id
     }))

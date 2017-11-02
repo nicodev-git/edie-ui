@@ -3,6 +3,8 @@ import {findIndex} from 'lodash'
 
 import AppletCard from 'components/common/AppletCard'
 
+import {buildServiceParams} from 'util/Query'
+
 export default class RectItem extends React.Component {
   constructor (props) {
     super(props)
@@ -31,7 +33,20 @@ export default class RectItem extends React.Component {
     if (!searchList) return null
     const index = findIndex(searchList, {id})
     if (index < 0) return null
-    return
+    return searchList[index]
+  }
+
+  getSearchResult (id) {
+    const search = this.getSearch(id)
+    if (!search) return false
+    const data = JSON.parse(search.data)
+    const params = {
+      page: 0,
+      size: 1,
+      draw: 1,
+      q: data.q
+    }
+    return true
   }
 
   fetchResult () {
