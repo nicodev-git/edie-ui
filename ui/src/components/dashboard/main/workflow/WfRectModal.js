@@ -1,17 +1,33 @@
 import React from 'react'
+import { reduxForm } from 'redux-form'
+import { connect } from 'react-redux'
 
 import WfRectModalView from './WfRectModalView'
 
-export default class WfRectModal extends React.Component {
+class WfRectModal extends React.Component {
   onSubmit (values) {
 
   }
+  onHide () {
+
+  }
   render () {
-    const {handleFormSubmit} = this.props
+    const {handleSubmit} = this.props
     return (
       <WfRectModalView
+        onHide={this.onHide.bind(this)}
         searchList={[]}
-        onSubmit={handleFormSubmit(this.onSubmit.bind(this))}/>
+        onSubmit={handleSubmit(this.onSubmit.bind(this))}/>
     )
   }
 }
+
+const WfRectModalForm = reduxForm({form: 'wfRectForm'})(WfRectModal)
+
+export default connect(
+  state => ({
+    initialValues: {
+    }
+  })
+)(WfRectModalForm)
+
