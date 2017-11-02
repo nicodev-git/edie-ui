@@ -4,9 +4,15 @@ import { connect } from 'react-redux'
 
 import WfRectModalView from './WfRectModalView'
 
+import {showAlert} from 'components/common/Alert'
+
 class WfRectModal extends React.Component {
   onSubmit (values) {
+    if (!values.name) {
+      return showAlert('Please type name.')
+    }
 
+    this.props.onHide()
   }
   render () {
     const {handleSubmit, searchList, onHide} = this.props

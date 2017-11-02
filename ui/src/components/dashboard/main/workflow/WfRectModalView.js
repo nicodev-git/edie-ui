@@ -11,10 +11,10 @@ export default class WfRectModalView extends React.Component {
       <Modal title="RECT" onRequestClose={onHide}>
         <Form onSubmit={onSubmit}>
           <CardPanel title="RECT">
-            <Field name="name" component={FormInput} label="Name" />
+            <Field name="name" component={FormInput} floatingLabel="Name" className="valign-top" />
             <div>
-              <Field name="goodId" label="Good" component={FormSelect} options={searchList} />
-              <Field name="badId" label="Bad" component={FormSelect} options={searchList} className="margin-md-left"/>
+              <Field name="goodId" floatingLabel="Good" component={FormSelect} options={searchList} className="valign-top" />
+              <Field name="badId" floatingLabel="Bad" component={FormSelect} options={searchList} className="valign-top margin-md-left"/>
             </div>
           </CardPanel>
           <SubmitBlock name="Add" onClick={onHide}/>
