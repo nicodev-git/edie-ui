@@ -1,8 +1,53 @@
 import React from 'react'
+import {findIndex} from 'lodash'
 
 import AppletCard from 'components/common/AppletCard'
 
 export default class RectItem extends React.Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      good: 0,
+      bad: 0,
+      fetched: false
+    }
+  }
+  componentWillMount () {
+    this.fetchResult()
+  }
+
+  componentDidUpdate (prevProps, prevState) {
+    const {searchList} = prevProps
+
+    if (JSON.stringify(prevProps.rect) !== JSON.stringify(this.props.rect)) {
+      this.fetchResult()
+    } else if (!this.state.fetched && searchList && JSON.stringify(this.props.searchList) !== JSON.stringify(searchList)) {
+      this.fetchResult()
+    }
+  }
+
+  getSearch (id) {
+    const {searchList} = this.props
+    if (!searchList) return null
+    const index = findIndex(searchList, {id})
+    if (index < 0) return null
+    return
+  }
+
+  fetchResult () {
+    const {goodId, badId} = this.props.rect
+    if (goodId) {
+
+    }
+    if (badId) {
+
+    }
+
+    this.setState({
+      fetched: true
+    })
+  }
+
   render () {
     const {rect, onClick, onClickDelete} = this.props
     return (
