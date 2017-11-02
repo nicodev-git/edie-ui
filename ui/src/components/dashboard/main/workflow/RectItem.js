@@ -52,7 +52,7 @@ export default class RectItem extends React.Component {
     })
 
     const params = {
-      q: searchParams.query,
+      q: searchParams.query || '',
       from: searchParams.from,
       to: searchParams.to,
       types: searchParams.types,
@@ -77,7 +77,7 @@ export default class RectItem extends React.Component {
     const goodSearch = goodId ? this.getSearch(goodId) : null
     const badSearch = badId ? this.getSearch(badId) : null
 
-    if (!goodSearch || !badSearch) return
+    if (!goodSearch && !badSearch) return
 
     if (goodSearch) {
       this.getSearchResult(goodSearch, count => {

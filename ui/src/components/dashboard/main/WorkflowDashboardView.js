@@ -24,7 +24,6 @@ export default class WorkflowDashboardView extends React.Component {
   }
 
   getSearchList () {
-    return []
     const {sysSearchOptions} = this.props
     return concat([], this.getUserSearchOptions().map(p => {
       return {
