@@ -275,8 +275,8 @@ export const showMonitorDetailModal = (visible, monitor, device) => {
   }
 }
 
-export const showWfRectModal = visible => {
+export const showWfRectModal = (visible, data) => {
   return dispatch => {
-    dispatch({type: SHOW_WFRECT_MODAL, visible})
+    dispatch({type: SHOW_WFRECT_MODAL, visible, data})
   }
 }

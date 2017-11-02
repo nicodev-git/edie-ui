@@ -55,8 +55,11 @@ export default class WorkflowDashboardView extends React.Component {
   onSaveWfRect (params) {
     if (!params.id) {
       params.id = guid()
+      this.props.addGaugeRect(params, this.props.board)
+    } else {
+      this.props.updateGaugeRect(params, this.props.board)
     }
-    this.props.addGaugeRect(params, this.props.board)
+
   }
 
   ////////////////////
@@ -88,6 +91,7 @@ export default class WorkflowDashboardView extends React.Component {
     return (
       <WfRectModal
         searchList={searchList}
+        editWfRect={this.props.editWfRect}
         onSubmit={this.onSaveWfRect.bind(this)}
         onHide={this.onCloseWfRectModal.bind(this)}/>
     )

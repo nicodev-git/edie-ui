@@ -17,7 +17,7 @@ export default class WfRectModalView extends React.Component {
               <Field name="badId" floatingLabel="Bad" component={FormSelect} options={searchList} className="valign-top margin-md-left"/>
             </div>
           </CardPanel>
-          <SubmitBlock name="Add" onClick={onHide}/>
+          <SubmitBlock name="Save" onClick={onHide}/>
         </Form>
       </Modal>
     )

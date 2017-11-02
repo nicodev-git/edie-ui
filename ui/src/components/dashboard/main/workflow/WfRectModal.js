@@ -11,7 +11,12 @@ class WfRectModal extends React.Component {
     if (!values.name) {
       return showAlert('Please type name.')
     }
-    this.props.onSubmit(values)
+
+    const entity = {
+      ...this.props.editWfRect,
+      ...values
+    }
+    this.props.onSubmit(entity)
     this.props.onHide()
   }
   render () {
@@ -29,8 +34,7 @@ const WfRectModalForm = reduxForm({form: 'wfRectForm'})(WfRectModal)
 
 export default connect(
   state => ({
-    initialValues: {
-    }
+    initialValues: state.dashboard.editWfRect
   })
 )(WfRectModalForm)
 

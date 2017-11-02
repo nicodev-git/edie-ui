@@ -332,7 +332,7 @@ export default function (state = initialState, action) {
       return { ...state, deleteDeviceState: action.data }
 
     case SHOW_WFRECT_MODAL:
-      return { ...state, wfRectModalOpen: action.visible }
+      return { ...state, wfRectModalOpen: action.visible, editWfRect: action.data }
 
     default:
       return state

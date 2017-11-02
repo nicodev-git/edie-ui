@@ -100,7 +100,8 @@ export default connect(
 
     deleteDeviceState: state.dashboard.deleteDeviceState,
 
-    wfRectModalOpen: state.dashboard.wfRectModalOpen
+    wfRectModalOpen: state.dashboard.wfRectModalOpen,
+    editWfRect: state.dashboard.editWfRect
   }), {
     fetchDevicesGroups,
     fetchMonitorGroups,
