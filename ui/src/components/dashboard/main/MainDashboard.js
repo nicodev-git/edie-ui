@@ -6,6 +6,7 @@ import {findIndex} from 'lodash'
 import MainDashboardView from './MainDashboardView'
 import ServerDashboardView from './ServerDashboardView'
 import BoardListModal from './BoardListModal'
+import WorkflowDashboardView from './WorkflowDashboardView'
 
 export default class MainDashboard extends React.Component {
   componentWillMount () {
@@ -62,10 +63,17 @@ export default class MainDashboard extends React.Component {
   renderContent () {
     const board = this.getSelected()
     if (!board) return null
-    if (board.type === 'system' && board.name === 'Servers') {
-      return (
-        <ServerDashboardView board={board} {...this.props}/>
-      )
+    if (board.type === 'system') {
+      if (board.name === 'Servers') {
+        return (
+          <ServerDashboardView board={board} {...this.props}/>
+        )
+      } else if (board.name === 'Workflows') {
+        return (
+          <WorkflowDashboardView board={board} {...this.props}/>
+        )
+      }
+
     }
     return (
       <MainDashboardView board={board} {...this.props}/>
