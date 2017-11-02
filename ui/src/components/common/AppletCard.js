@@ -65,7 +65,7 @@ export default class AppletCard extends React.Component {
     } = this.props
     const {hovered} = this.state
     return (
-      <li className={`web-applet-card small ${className}`} onClick={this.onClick.bind(this)}>
+      <div className={`web-applet-card small ${className || ''}`} onClick={this.onClick.bind(this)}>
         <div
           className="applet-card-body " style={{background: color}}
           onMouseEnter={onClickDelete ? this.onMouseEnter : null}
@@ -95,7 +95,7 @@ export default class AppletCard extends React.Component {
             </div>
           </div>
         </div>
-      </li>
+      </div>
     )
   }
 }

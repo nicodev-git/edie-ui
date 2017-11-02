@@ -2,6 +2,7 @@ import React from 'react'
 import {concat} from 'lodash'
 import {IconButton} from 'material-ui'
 import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
+import Draggable from 'react-draggable'
 
 import WfRectModal from './workflow/WfRectModal'
 import RectItem from './workflow/RectItem'
@@ -108,9 +109,9 @@ export default class WorkflowDashboardView extends React.Component {
     return (
       <div>
         {this.renderAddMenu()}
-        <ul className="web-applet-cards">
+        <div className="web-applet-cards">
           {this.getRects().map(this.renderRect.bind(this))}
-        </ul>
+        </div>
         {this.renderWfRectModal()}
       </div>
     )
