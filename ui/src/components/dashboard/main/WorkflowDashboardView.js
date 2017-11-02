@@ -6,7 +6,7 @@ export default class WorkflowDashboardView extends React.Component {
   renderAddMenu () {
     return (
       <div className="text-right" style={{position: 'absolute', top: -45, right: 0}}>
-        <IconButton onTouchTap={this.onClickAddItem.bind(this, p)}><AddCircleIcon /></IconButton>
+        <IconButton onTouchTap={this.onClickAddItem.bind(this)}><AddCircleIcon /></IconButton>
       </div>
     )
   }
