@@ -24,6 +24,7 @@ export default class WorkflowDashboardView extends React.Component {
   }
 
   getSearchList () {
+    return []
     const {sysSearchOptions} = this.props
     return concat([], this.getUserSearchOptions().map(p => {
       return {
@@ -60,6 +61,12 @@ export default class WorkflowDashboardView extends React.Component {
   }
 
   ////////////////////
+
+  onClickEditItem (rect) {
+    this.props.showWfRectModal(true, rect)
+  }
+
+  ////////////////////
   renderRect (rect, index) {
     return (
       <RectItem
@@ -67,6 +74,7 @@ export default class WorkflowDashboardView extends React.Component {
         key={rect.id || index}
         rect={rect}
         searchList={this.getSearchList()}
+        onClick={this.onClickEditItem.bind(this, rect)}
       />
     )
   }

@@ -7,7 +7,7 @@ import AppletCard from 'components/common/AppletCard'
 import { ROOT_URL } from 'actions/config'
 import {buildServiceParams} from 'util/Query'
 import {getRanges} from 'components/common/DateRangePicker'
-import { severities, queryDateFormat, collections } from 'shared/Global'
+import { severities, queryDateFormat, collections, encodeUrlParams } from 'shared/Global'
 
 export default class RectItem extends React.Component {
   constructor (props) {
@@ -51,18 +51,19 @@ export default class RectItem extends React.Component {
       queryDateFormat
     })
 
-    axios.get(`${ROOT_URL}/search/query`, {
-      params: {
-        q: searchParams.query,
-        from: searchParams.from,
-        to: searchParams.to,
-        types: searchParams.types,
-        collections: searchParams.collections,
-        severity: searchParams.severity,
-        page: 0,
-        size: 1
-      }
-    }).then(res => {
+    const params = {
+      q: searchParams.query,
+      from: searchParams.from,
+      to: searchParams.to,
+      types: searchParams.types,
+      collections: searchParams.collections,
+      severity: searchParams.severity,
+      page: 0,
+      size: 1,
+      draw: 1
+    }
+
+    axios.get(`${ROOT_URL}/search/query?${encodeUrlParams(params)}`).then(res => {
       cb(res.data.page.totalElements)
     }).catch(() => {
       cb(0)
@@ -76,7 +77,7 @@ export default class RectItem extends React.Component {
     const goodSearch = goodId ? this.getSearch(goodId) : null
     const badSearch = badId ? this.getSearch(badId) : null
 
-    if (!goodSearch && !badSearch) return
+    if (!goodSearch || !badSearch) return
 
     if (goodSearch) {
       this.getSearchResult(goodSearch, count => {
