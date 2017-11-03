@@ -19,6 +19,10 @@ export default class WorkflowDashboardView extends React.Component {
     const node = window.mxUtils.load('/resources/plugins/mxgraph/config/workfloweditor.xml').getDocumentElement();
     const editor = new window.mxEditor(node);
     const graph = editor.graph
+
+    graph.minFitScale = 1
+    graph.maxFitScale = 1
+    graph.maximumGraphBounds = new window.mxRectangle(0, 0, 1024, 768)
     // const graph = new window.mxGraph(document.getElementById('graphContainer'))
     editor.setMode('connect')
     //editor.defaultEdge.style = 'straightEdge'
@@ -47,6 +51,10 @@ export default class WorkflowDashboardView extends React.Component {
       // Updates the display
       graph.getModel().endUpdate()
     }
+    // graph.zoomActual()
+    graph.fit()
+    graph.view.rendering = true
+    graph.refresh()
 
     /////////////////////////
 
