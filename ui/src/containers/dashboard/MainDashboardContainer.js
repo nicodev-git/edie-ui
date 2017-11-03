@@ -56,7 +56,8 @@ import {
   showMonitorDetailModal,
 
   showWfRectModal,
-  showRectSearchModal
+  showRectSearchModal,
+  showEntityDetailModal
 } from 'actions'
 
 class MainDashboardContainer extends React.Component {
@@ -105,7 +106,8 @@ export default connect(
     editWfRect: state.dashboard.editWfRect,
 
     rectSearchModalOpen: state.dashboard.rectSearchModalOpen,
-    rectSearchParams: state.dashboard.rectSearchParams
+    rectSearchParams: state.dashboard.rectSearchParams,
+    entityDetailModalOpen: state.search.entityDetailModalOpen
   }), {
     fetchDevicesGroups,
     fetchMonitorGroups,
@@ -159,6 +161,7 @@ export default connect(
     showMonitorDetailModal,
 
     showWfRectModal,
-    showRectSearchModal
+    showRectSearchModal,
+    showEntityDetailModal
   }
 )(withRouter(MainDashboardContainer))

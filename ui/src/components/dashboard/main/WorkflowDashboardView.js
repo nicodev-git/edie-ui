@@ -14,6 +14,7 @@ import RectSearchModal from './workflow/RectSearchModal'
 
 import {buildServiceParams} from 'util/Query'
 import {getRanges} from 'components/common/DateRangePicker'
+import EntityDetailModal from 'components/sidebar/search/EntityDetailModal'
 
 export default class WorkflowDashboardView extends React.Component {
   constructor (props) {
@@ -376,25 +377,15 @@ export default class WorkflowDashboardView extends React.Component {
     const index = findIndex(searchList, {id: good ? rect.goodId : rect.badId})
     if (index < 0) return
     const search = searchList[index]
-
+    const data = JSON.parse(search.data || '{}')
     const {workflows, devices, allDevices} = this.props
-    const searchParams = buildServiceParams(search, {
+    const searchParams = buildServiceParams(data, {
       dateRanges: getRanges(),
       collections, severities, workflows,
       allDevices: devices || allDevices,
       queryDateFormat
     })
-
-    const params = {
-      q: searchParams.query || '',
-      from: searchParams.from,
-      to: searchParams.to,
-      types: searchParams.types,
-      collections: searchParams.collections,
-      severity: searchParams.severity
-    }
-
-    this.props.showRectSearchModal(true, params)
+    this.props.showRectSearchModal(true, searchParams)
   }
 
   onCloseRectSearch () {
@@ -435,7 +426,17 @@ export default class WorkflowDashboardView extends React.Component {
     return (
       <RectSearchModal
         params={this.props.rectSearchParams}
+        showEntityDetailModal={this.props.showEntityDetailModal}
         onHide={this.onCloseRectSearch.bind(this)}/>
+    )
+  }
+
+  renderEntityDetailModal () {
+    if (!this.props.entityDetailModalOpen) return null
+    return (
+      <EntityDetailModal
+        {...this.props}
+      />
     )
   }
 
@@ -456,6 +457,7 @@ export default class WorkflowDashboardView extends React.Component {
         <div id="graph" className="graph-base" style={{width: '100%', height: '100%'}}></div>
         {this.renderWfRectModal()}
         {this.renderSearchModal()}
+        {this.renderEntityDetailModal()}
       </div>
     )
   }
