@@ -8,7 +8,7 @@ import {debounce, findIndex} from 'lodash'
 import WfRectModal from './workflow/WfRectModal'
 import RectItem from './workflow/RectItem'
 
-import {guid, severities, queryDateFormat, collections, encodeUrlParams} from 'shared/Global'
+import {guid, severities, queryDateFormat, collections} from 'shared/Global'
 import {showAlert} from 'components/common/Alert'
 import RectSearchModal from './workflow/RectSearchModal'
 
