@@ -15,6 +15,31 @@ export default class WorkflowDashboardView extends React.Component {
     this.debUpdateBoard = debounce(this.updateBoard.bind(this), 2000)
   }
 
+  componentDidMount () {
+    const graph = new window.mxGraph(document.getElementById('graphContainer'))
+
+    // Enables rubberband selection
+    new window.mxRubberband(graph)
+
+    // Gets the default parent for inserting new cells. This
+    // is normally the first child of the root (ie. layer 0).
+    const parent = graph.getDefaultParent()
+
+    // Adds cells to the model in a single step
+    graph.getModel().beginUpdate()
+    try {
+      const v1 = graph.insertVertex(parent, null,
+        'Hello,', 20, 20, 80, 30)
+      const v2 = graph.insertVertex(parent, null,
+        'World!', 200, 150, 80, 30)
+      graph.insertEdge(parent, null, '', v1, v2)
+    }
+    finally {
+      // Updates the display
+      graph.getModel().endUpdate()
+    }
+  }
+
   updateBoard () {
     this.props.updateGaugeBoard(this.props.board)
   }
@@ -92,9 +117,9 @@ export default class WorkflowDashboardView extends React.Component {
     return (
       <Draggable
         key={rect.id || index}
-        position={{x: map.x || 0 , y: map.y || 0}}
+        position={{x: map.x || 0, y: map.y || 0}}
         onStop={this.onStopDrag.bind(this, rect)}
-        defaultPosition={{x: map.x || 0 , y: map.y || 0}}
+        defaultPosition={{x: map.x || 0, y: map.y || 0}}
       >
         <div className="inline-block">
           <RectItem
@@ -122,20 +147,21 @@ export default class WorkflowDashboardView extends React.Component {
         onHide={this.onCloseWfRectModal.bind(this)}/>
     )
   }
+
   renderAddMenu () {
     return (
       <div className="text-right" style={{position: 'absolute', top: -45, right: 0}}>
-        <IconButton onTouchTap={this.onClickAddItem.bind(this)}><AddCircleIcon /></IconButton>
+        <IconButton onTouchTap={this.onClickAddItem.bind(this)}><AddCircleIcon/></IconButton>
       </div>
     )
   }
 
   render () {
     return (
-      <div>
+      <div className="flex-1">
         {this.renderAddMenu()}
-        <div className="web-applet-cards">
-          {this.getRects().map(this.renderRect.bind(this))}
+        <div id="graphContainer" style={{width: '100%', height: '100%'}}>
+
         </div>
         {this.renderWfRectModal()}
       </div>
