@@ -41,6 +41,7 @@ import {
   SHOW_MONITOR_DETAIL_MODAL,
 
   SHOW_WFRECT_MODAL,
+  SHOW_RECT_SEARCH_MODAL,
 
   NO_AUTH_ERROR
 } from './types'
@@ -278,5 +279,11 @@ export const showMonitorDetailModal = (visible, monitor, device) => {
 export const showWfRectModal = (visible, data) => {
   return dispatch => {
     dispatch({type: SHOW_WFRECT_MODAL, visible, data})
+  }
+}
+
+export const showRectSearchModal = (visible, params) => {
+  return dispatch => {
+    dispatch({type: SHOW_RECT_SEARCH_MODAL, visible, params})
   }
 }

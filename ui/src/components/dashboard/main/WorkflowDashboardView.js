@@ -10,6 +10,7 @@ import RectItem from './workflow/RectItem'
 
 import {guid} from 'shared/Global'
 import {showAlert} from "../../common/Alert";
+import RectSearchModal from "./workflow/RectSearchModal";
 
 export default class WorkflowDashboardView extends React.Component {
   constructor (props) {
@@ -365,6 +366,12 @@ export default class WorkflowDashboardView extends React.Component {
   }
 
   ////////////////////
+
+  onCloseRectSearch () {
+    this.props.showRectSearchModal(false)
+  }
+
+  ////////////////////
   renderRect (rect, index) {
     return (
       <RectItem
@@ -393,6 +400,13 @@ export default class WorkflowDashboardView extends React.Component {
     )
   }
 
+  renderSearchModal () {
+    if (!this.props.rectSearchModalOpen) return null
+    return (
+      <RectSearchModal onHide={this.onCloseRectSearch.bind(this)}/>
+    )
+  }
+
   renderMenu () {
     return (
       <div className="text-right" style={{position: 'absolute', top: -45, right: 0}}>
@@ -409,6 +423,7 @@ export default class WorkflowDashboardView extends React.Component {
         {this.getRects().map(this.renderRect.bind(this))}
         <div id="graph" className="graph-base" style={{width: '100%', height: '100%'}}></div>
         {this.renderWfRectModal()}
+        {this.renderSearchModal()}
       </div>
     )
   }

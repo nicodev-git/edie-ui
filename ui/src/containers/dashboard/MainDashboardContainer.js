@@ -55,7 +55,8 @@ import {
   deleteMapDevice,
   showMonitorDetailModal,
 
-  showWfRectModal
+  showWfRectModal,
+  showRectSearchModal
 } from 'actions'
 
 class MainDashboardContainer extends React.Component {
@@ -101,7 +102,10 @@ export default connect(
     deleteDeviceState: state.dashboard.deleteDeviceState,
 
     wfRectModalOpen: state.dashboard.wfRectModalOpen,
-    editWfRect: state.dashboard.editWfRect
+    editWfRect: state.dashboard.editWfRect,
+
+    rectSearchModalOpen: state.dashboard.rectSearchModalOpen,
+    rectSearchParams: state.dashboard.rectSearchParams
   }), {
     fetchDevicesGroups,
     fetchMonitorGroups,
@@ -154,6 +158,7 @@ export default connect(
     deleteMapDevice,
     showMonitorDetailModal,
 
-    showWfRectModal
+    showWfRectModal,
+    showRectSearchModal
   }
 )(withRouter(MainDashboardContainer))

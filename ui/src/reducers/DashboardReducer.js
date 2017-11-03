@@ -72,6 +72,7 @@ import {
   DELETE_DEVICE_STATE,
 
   SHOW_WFRECT_MODAL,
+  SHOW_RECT_SEARCH_MODAL,
 
   API_ERROR
 } from 'actions/types'
@@ -334,6 +335,8 @@ export default function (state = initialState, action) {
     case SHOW_WFRECT_MODAL:
       return { ...state, wfRectModalOpen: action.visible, editWfRect: action.data }
 
+    case SHOW_RECT_SEARCH_MODAL:
+      return { ...state, rectSearchModalOpen: action.visible, rectSearchParams: action.params }
     default:
       return state
   }

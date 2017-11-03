@@ -474,6 +474,7 @@ export const SHOW_GAUGE_MODAL = 'SHOW_GAUGE_MODAL'
 export const SHOW_GAUGE_PICKER = 'SHOW_GAUGE_PICKER'
 
 export const SHOW_WFRECT_MODAL = 'SHOW_WFRECT_MODAL'
+export const SHOW_RECT_SEARCH_MODAL = 'SHOW_RECT_SEARCH_MODAL'
 
 ///////////////////////////////////////////////////////////////
 
