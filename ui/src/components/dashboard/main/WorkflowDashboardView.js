@@ -41,6 +41,8 @@ export default class WorkflowDashboardView extends React.Component {
     style[mxConstants.STYLE_STROKECOLOR] = '#D1282C'
     style[mxConstants.STYLE_FILLCOLOR] = '#D1282C'
     style[mxConstants.STYLE_FONTCOLOR] = '#ffffff'
+    style[mxConstants.STYLE_FONTSIZE] = '15'
+    style[mxConstants.STYLE_FONTSTYLE] = mxConstants.FONT_BOLD
     style[mxConstants.STYLE_ROUNDED] = 1
     graph.getStylesheet().putCellStyle('boxstyle', style)
 
