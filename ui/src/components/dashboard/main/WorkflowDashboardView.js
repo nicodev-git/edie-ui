@@ -16,7 +16,7 @@ export default class WorkflowDashboardView extends React.Component {
   }
 
   componentDidMount () {
-    const {mxConstants, mxUtils, mxEditor} = window
+    const {mxConstants, mxUtils, mxEditor, mxEvent} = window
     const node = mxUtils.load('/resources/plugins/mxgraph/config/workfloweditor.xml').getDocumentElement();
     const editor = new mxEditor(node);
     const graph = editor.graph
@@ -55,9 +55,9 @@ export default class WorkflowDashboardView extends React.Component {
 
     /////////////////////////
 
-    graph.addListener(window.mxEvent.CELLS_MOVED, (sender, evt) => {
+    graph.addListener(mxEvent.CELLS_MOVED, (sender, evt) => {
       const v = evt.properties.cells[0]
-      const id = v.userData
+      const {id} = v.userData
       // console.log(v)
 
       const rect = this.findRect(id)
@@ -70,6 +70,35 @@ export default class WorkflowDashboardView extends React.Component {
       console.log(rect)
 
       this.props.updateGaugeRect(rect, this.props.board, true)
+      this.debUpdateBoard()
+    })
+
+    /////////////////////////
+
+    graph.addListener(mxEvent.CELL_CONNECTED, (sender, evt) => {
+      const {edge, source} = evt.properties
+      if (source) return
+      const sourceId = edge.source.userData.id
+      const destId = edge.target.userData.id
+
+      const sourceRect = this.findRect(sourceId)
+      if (!sourceRect) {
+        console.log(`Rect not found: ${sourceId}`)
+        return
+      }
+      sourceRect.map = sourceRect.map || {}
+      sourceRect.map.lines = sourceRect.map.lines || []
+      const existing = findIndex(sourceRect.map.lines, {id: destId})
+      if (existing >= 0) {
+        console.log('Already connected')
+        return
+      }
+
+      sourceRect.map.lines.push({
+        id: destId
+      })
+
+      this.props.updateGaugeRect(sourceRect, this.props.board, true)
       this.debUpdateBoard()
     })
   }
@@ -125,7 +154,9 @@ export default class WorkflowDashboardView extends React.Component {
 
         const v = graph.insertVertex(parent, null,
           p.name, map.x || 10, map.y || 10, 135, 135, 'boxstyle')
-        v.userData = p.id
+        v.userData = {
+          id: p.id
+        }
       })
     }
     finally {
@@ -193,7 +224,8 @@ export default class WorkflowDashboardView extends React.Component {
     if (!params.id) {
       params.id = guid()
       params.map = {
-        x: 100, y: 100
+        x: 100, y: 100,
+        lines: []
       }
       this.props.addGaugeRect(params, this.props.board)
     } else {
