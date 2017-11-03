@@ -21,6 +21,8 @@ export default class WorkflowDashboardView extends React.Component {
     const editor = new mxEditor(node);
     const graph = editor.graph
 
+    this.editor = editor
+
     graph.minFitScale = 1
     graph.maxFitScale = 1
     // graph.maximumGraphBounds = new window.mxRectangle(0, 0, 1024, 768)
@@ -31,10 +33,6 @@ export default class WorkflowDashboardView extends React.Component {
     // Enables rubberband selection
     new window.mxRubberband(graph)
 
-    // Gets the default parent for inserting new cells. This
-    // is normally the first child of the root (ie. layer 0).
-    const parent = graph.getDefaultParent()
-
     //Register styles
     var style = {}
     style[mxConstants.STYLE_SHAPE] = 'box'
@@ -44,25 +42,12 @@ export default class WorkflowDashboardView extends React.Component {
     style[mxConstants.STYLE_FONTSIZE] = '15'
     style[mxConstants.STYLE_FONTSTYLE] = mxConstants.FONT_BOLD
     style[mxConstants.STYLE_ROUNDED] = 1
+    style[mxConstants.STYLE_ARCSIZE] = 6
     graph.getStylesheet().putCellStyle('boxstyle', style)
 
     // Adds cells to the model in a single step
-    graph.getModel().beginUpdate()
-    try {
+    this.addGraphRects(this.getRects())
 
-      this.getRects().forEach(p => {
-        const map = p.map || {}
-
-        const v = graph.insertVertex(parent, null,
-          p.name, map.x || 10, map.y || 10, 100, 100, 'boxstyle')
-        v.userData = p.id
-      })
-      // graph.insertEdge(parent, null, '', v1, v2)
-    }
-    finally {
-      // Updates the display
-      graph.getModel().endUpdate()
-    }
     // graph.zoomActual()
     graph.fit()
     graph.view.rendering = true
@@ -90,14 +75,13 @@ export default class WorkflowDashboardView extends React.Component {
   }
 
   componentDidUpdate (prevProps) {
-    // const prevRects = prevProps.board.rects || []
-    // const rects = this.getRects()
-    // const check = this.needUpdateRects(prevRects, rects)
-    // if (check.result) {
-    //
-    // } else {
-    //
-    // }
+    const prevRects = prevProps.board.rects || []
+    const rects = this.getRects()
+    const check = this.needUpdateRects(prevRects, rects)
+    if (check.result) {
+      console.log(`Change detected. Added: ${check.added.length} Updated: ${check.updated.length} Removed: ${check.removed.length}`)
+      this.addGraphRects(check.added)
+    }
   }
 
   needUpdateRects(prevRects, rects) {
@@ -126,6 +110,28 @@ export default class WorkflowDashboardView extends React.Component {
   isRectDifferent (n, p) {
     if (n.name !== p.name) return true
     return false
+  }
+  ///////////////////////////////////////////
+
+  addGraphRects (items) {
+    const {graph} = this.editor
+    const parent = graph.getDefaultParent()
+
+    graph.getModel().beginUpdate()
+
+    try {
+      items.forEach(p => {
+        const map = p.map || {}
+
+        const v = graph.insertVertex(parent, null,
+          p.name, map.x || 10, map.y || 10, 135, 135, 'boxstyle')
+        v.userData = p.id
+      })
+    }
+    finally {
+      // Updates the display
+      graph.getModel().endUpdate()
+    }
   }
 
   ///////////////////////////////////////////
@@ -186,6 +192,9 @@ export default class WorkflowDashboardView extends React.Component {
   onSaveWfRect (params) {
     if (!params.id) {
       params.id = guid()
+      params.map = {
+        x: 100, y: 100
+      }
       this.props.addGaugeRect(params, this.props.board)
     } else {
       this.props.updateGaugeRect(params, this.props.board)
