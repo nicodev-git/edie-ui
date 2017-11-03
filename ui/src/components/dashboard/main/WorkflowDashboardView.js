@@ -365,6 +365,8 @@ export default class WorkflowDashboardView extends React.Component {
 
   onClickShowSearch (rect) {
     if (!rect) return null
+    const searchList = this.getSearchList()
+    const index = findIndex({id: rect.})
     this.props.showRectSearchModal(true)
   }
 
@@ -404,7 +406,8 @@ export default class WorkflowDashboardView extends React.Component {
   renderSearchModal () {
     if (!this.props.rectSearchModalOpen) return null
     return (
-      <RectSearchModal onHide={this.onCloseRectSearch.bind(this)}/>
+      <RectSearchModal
+        onHide={this.onCloseRectSearch.bind(this)}/>
     )
   }
 
