@@ -2,12 +2,14 @@ import React from 'react'
 import {concat} from 'lodash'
 import {IconButton} from 'material-ui'
 import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
+import InfoIcon from 'material-ui/svg-icons/action/info'
 import {debounce, findIndex} from 'lodash'
 
 import WfRectModal from './workflow/WfRectModal'
 import RectItem from './workflow/RectItem'
 
 import {guid} from 'shared/Global'
+import {showAlert} from "../../common/Alert";
 
 export default class WorkflowDashboardView extends React.Component {
   constructor (props) {
@@ -212,6 +214,13 @@ export default class WorkflowDashboardView extends React.Component {
     }
   }
 
+  getSelectedRect () {
+    const {graph} = this.editor
+    const cell = graph.getSelectionCell()
+    if (!cell || !cell.userData) return null
+    return this.findRect(cell.userData.id)
+  }
+
   onUpdateRectState (id, good, bad) {
     if (!bad && !good) return
 
@@ -291,12 +300,14 @@ export default class WorkflowDashboardView extends React.Component {
     } else {
       this.props.updateGaugeRect(params, this.props.board)
     }
-
   }
 
   ////////////////////
 
-  onClickEditItem (rect) {
+  onClickEditItem () {
+    const rect = this.getSelectedRect()
+    if (!rect) return showAlert('Please choose rect')
+
     this.props.showWfRectModal(true, rect)
   }
 
@@ -338,10 +349,11 @@ export default class WorkflowDashboardView extends React.Component {
     )
   }
 
-  renderAddMenu () {
+  renderMenu () {
     return (
       <div className="text-right" style={{position: 'absolute', top: -45, right: 0}}>
         <IconButton onTouchTap={this.onClickAddItem.bind(this)}><AddCircleIcon/></IconButton>
+        <IconButton onTouchTap={this.onClickEditItem.bind(this)}><InfoIcon/></IconButton>
       </div>
     )
   }
@@ -349,7 +361,7 @@ export default class WorkflowDashboardView extends React.Component {
   render () {
     return (
       <div className="flex-1">
-        {this.renderAddMenu()}
+        {this.renderMenu()}
         {this.getRects().map(this.renderRect.bind(this))}
         <div id="graph" className="graph-base" style={{width: '100%', height: '100%'}}></div>
         {this.renderWfRectModal()}

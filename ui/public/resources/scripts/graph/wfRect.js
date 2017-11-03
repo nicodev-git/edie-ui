@@ -16,6 +16,7 @@ mxWfRect.prototype.paintBackground = function(c, x, y, w, h)
 mxWfRect.prototype.paintForeground = function(c, x, y, w, h)
 {
   mxRectangleShape.prototype.paintForeground.apply(this, arguments);
+  // c.image(x + w - 32, y + h - 32, 24, 24, '/images/info.png', this.preserveImageAspect, false, false);
 };
 
 mxCellRenderer.registerShape('wfRect', mxWfRect);
