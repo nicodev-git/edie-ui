@@ -107,7 +107,8 @@ export default connect(
 
     rectSearchModalOpen: state.dashboard.rectSearchModalOpen,
     rectSearchParams: state.dashboard.rectSearchParams,
-    entityDetailModalOpen: state.search.entityDetailModalOpen
+    entityDetailModalOpen: state.search.entityDetailModalOpen,
+    detailEntity: state.search.detailEntity
   }), {
     fetchDevicesGroups,
     fetchMonitorGroups,
