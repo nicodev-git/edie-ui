@@ -189,7 +189,14 @@ export default class WorkflowDashboardView extends React.Component {
 
   onUpdateRectState (id, color) {
     console.log(`${id} : ${color}`)
-    // const {graph} = this.editor
+    const {graph} = this.editor
+    const cells = graph.getChildVertices(graph.getDefaultParent())
+    const index = findIndex(cells, {
+      userData: {id}
+    })
+    if (index < 0) return
+    console.log(cells[index])
+
   }
 
   ///////////////////////////////////////////
