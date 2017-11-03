@@ -16,7 +16,11 @@ export default class WorkflowDashboardView extends React.Component {
   }
 
   componentDidMount () {
-    const graph = new window.mxGraph(document.getElementById('graphContainer'))
+    const editor = new window.mxEditor(document.getElementById('graphContainer'));
+    const graph = editor.graph
+
+    editor.setMode('connect')
+    //editor.defaultEdge.style = 'straightEdge'
 
     // Enables rubberband selection
     new window.mxRubberband(graph)

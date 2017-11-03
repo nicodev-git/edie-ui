@@ -32,3 +32,5 @@ import './threatmap.css'
 
 import './common/antd.css'
 import './common/cybertron.css'
+
+import './mxgraph.css'
