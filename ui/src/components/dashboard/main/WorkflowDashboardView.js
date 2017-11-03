@@ -102,6 +102,22 @@ export default class WorkflowDashboardView extends React.Component {
       this.props.updateGaugeRect(sourceRect, this.props.board, true)
       this.debUpdateBoard()
     })
+
+    ///////////////////////////
+
+    graph.addListener(mxEvent.CLICK, (sender, evt) => {
+      // const e = evt.getProperty('event'); // mouse event
+      const cell = evt.getProperty('cell'); // cell may be null
+
+      if (cell != null ) {
+        if (cell.userData) {
+          evt.consume();
+          const rect = this.findRect(cell.userData.id)
+          this.onClickShowSearch(rect)
+        }
+      }
+    })
+
   }
 
   componentDidUpdate (prevProps) {
@@ -344,13 +360,8 @@ export default class WorkflowDashboardView extends React.Component {
     this.props.showWfRectModal(true, rect)
   }
 
-  onStopDrag (rect, e, data) {
-    rect.map = rect.map || {}
-    rect.map.x = data.x
-    rect.map.y = data.y
-
-    this.props.updateGaugeRect(rect, this.props.board, true)
-    this.debUpdateBoard()
+  onClickShowSearch (rect) {
+    if (!rect) return null
   }
 
   ////////////////////
