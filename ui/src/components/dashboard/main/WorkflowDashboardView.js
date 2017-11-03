@@ -8,9 +8,12 @@ import {debounce, findIndex} from 'lodash'
 import WfRectModal from './workflow/WfRectModal'
 import RectItem from './workflow/RectItem'
 
-import {guid} from 'shared/Global'
-import {showAlert} from "../../common/Alert";
+import {guid, severities, queryDateFormat, collections, encodeUrlParams} from 'shared/Global'
+import {showAlert} from 'components/common/Alert'
 import RectSearchModal from './workflow/RectSearchModal'
+
+import {buildServiceParams} from 'util/Query'
+import {getRanges} from 'components/common/DateRangePicker'
 
 export default class WorkflowDashboardView extends React.Component {
   constructor (props) {
@@ -373,7 +376,25 @@ export default class WorkflowDashboardView extends React.Component {
     const index = findIndex(searchList, {id: good ? rect.goodId : rect.badId})
     if (index < 0) return
     const search = searchList[index]
-    this.props.showRectSearchModal(true, search)
+
+    const {workflows, devices, allDevices} = this.props
+    const searchParams = buildServiceParams(search, {
+      dateRanges: getRanges(),
+      collections, severities, workflows,
+      allDevices: devices || allDevices,
+      queryDateFormat
+    })
+
+    const params = {
+      q: searchParams.query || '',
+      from: searchParams.from,
+      to: searchParams.to,
+      types: searchParams.types,
+      collections: searchParams.collections,
+      severity: searchParams.severity
+    }
+
+    this.props.showRectSearchModal(true, params)
   }
 
   onCloseRectSearch () {
@@ -413,6 +434,7 @@ export default class WorkflowDashboardView extends React.Component {
     if (!this.props.rectSearchModalOpen) return null
     return (
       <RectSearchModal
+        params={this.props.rectSearchParams}
         onHide={this.onCloseRectSearch.bind(this)}/>
     )
   }
