@@ -37,9 +37,9 @@ export default class WorkflowDashboardView extends React.Component {
       this.getRects().forEach(p => {
         const map = p.map || {}
 
-        graph.insertVertex(parent, null,
+        const v = graph.insertVertex(parent, null,
           p.name, map.x || 10, map.y || 10, 100, 100)
-        graph.userData = p.id
+        v.userData = p.id
       })
       // graph.insertEdge(parent, null, '', v1, v2)
     }
@@ -53,15 +53,19 @@ export default class WorkflowDashboardView extends React.Component {
     graph.addListener(window.mxEvent.CELLS_MOVED, (sender, evt) => {
       const v = evt.properties.cells[0]
       const id = v.userData
-      console.log(v)
+      // console.log(v)
 
       const rect = this.findRect(id)
       if (!rect) return
 
+      rect.map = rect.map || {}
+      rect.map.x = v.geometry.x + evt.properties.dx
+      rect.map.y = v.geometry.y + evt.properties.dy
+
       console.log(rect)
-      // rect.x =
-      // this.props.updateGaugeRect(rect, this.props.board, true)
-      // this.debUpdateBoard()
+
+      this.props.updateGaugeRect(rect, this.props.board, true)
+      this.debUpdateBoard()
     })
   }
 
