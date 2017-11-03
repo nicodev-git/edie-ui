@@ -64,8 +64,8 @@ export default class WorkflowDashboardView extends React.Component {
       if (!rect) return
 
       rect.map = rect.map || {}
-      rect.map.x = v.geometry.x + evt.properties.dx
-      rect.map.y = v.geometry.y + evt.properties.dy
+      rect.map.x = v.geometry.x
+      rect.map.y = v.geometry.y
 
       console.log(rect)
 
@@ -98,6 +98,7 @@ export default class WorkflowDashboardView extends React.Component {
         id: destId
       })
 
+      console.log(sourceRect)
       this.props.updateGaugeRect(sourceRect, this.props.board, true)
       this.debUpdateBoard()
     })
@@ -149,6 +150,7 @@ export default class WorkflowDashboardView extends React.Component {
     graph.getModel().beginUpdate()
 
     try {
+      const vertices = []
       items.forEach(p => {
         const map = p.map || {}
 
@@ -157,6 +159,22 @@ export default class WorkflowDashboardView extends React.Component {
         v.userData = {
           id: p.id
         }
+
+        vertices.push(v)
+      })
+
+      items.forEach((p, i) => {
+        const map = p.map || {}
+        if (!map.lines) return
+        map.lines.forEach(t => {
+          const targetIndex = findIndex(items, {id: t.id})
+          if (targetIndex < 0) return
+
+          const target = vertices[targetIndex]
+          const source = vertices[i]
+
+          graph.insertEdge(parent, null, '', source, target)
+        })
       })
     }
     finally {
