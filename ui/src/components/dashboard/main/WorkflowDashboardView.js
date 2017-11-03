@@ -115,7 +115,7 @@ export default class WorkflowDashboardView extends React.Component {
   registerGraphStyles (graph) {
     const {mxConstants} = window
     let style = {}
-    style[mxConstants.STYLE_SHAPE] = 'box'
+    style[mxConstants.STYLE_SHAPE] = 'wfRect'
     style[mxConstants.STYLE_FONTCOLOR] = '#ffffff'
     style[mxConstants.STYLE_FONTSIZE] = '15'
     style[mxConstants.STYLE_FONTSTYLE] = mxConstants.FONT_BOLD
