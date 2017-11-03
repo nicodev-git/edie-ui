@@ -10,7 +10,7 @@ import RectItem from './workflow/RectItem'
 
 import {guid} from 'shared/Global'
 import {showAlert} from "../../common/Alert";
-import RectSearchModal from "./workflow/RectSearchModal";
+import RectSearchModal from './workflow/RectSearchModal'
 
 export default class WorkflowDashboardView extends React.Component {
   constructor (props) {
@@ -114,7 +114,10 @@ export default class WorkflowDashboardView extends React.Component {
         if (cell.userData) {
           evt.consume();
           const rect = this.findRect(cell.userData.id)
-          this.onClickShowSearch(rect)
+          const style = graph.getModel().getStyle(cell)
+          if (style === 'box-gray') return
+
+          this.onClickShowSearch(rect, style === 'box-green')
         }
       }
     })
@@ -363,11 +366,14 @@ export default class WorkflowDashboardView extends React.Component {
 
   ////////////////////
 
-  onClickShowSearch (rect) {
-    if (!rect) return null
+  onClickShowSearch (rect, good) {
+    if (!rect) return
     const searchList = this.getSearchList()
-    const index = findIndex({id: rect.})
-    this.props.showRectSearchModal(true)
+
+    const index = findIndex(searchList, {id: good ? rect.goodId : rect.badId})
+    if (index < 0) return
+    const search = searchList[index]
+    this.props.showRectSearchModal(true, search)
   }
 
   onCloseRectSearch () {

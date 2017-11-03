@@ -1,4 +1,5 @@
 import React from 'react'
+import InfiniteTable from 'components/common/InfiniteTable'
 
 import {Modal, CardPanel} from 'components/modal/parts'
 
