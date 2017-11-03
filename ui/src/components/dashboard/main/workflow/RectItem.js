@@ -2,7 +2,7 @@ import React from 'react'
 import {findIndex} from 'lodash'
 import axios from 'axios'
 
-import AppletCard from 'components/common/AppletCard'
+// import AppletCard from 'components/common/AppletCard'
 
 import { ROOT_URL } from 'actions/config'
 import {buildServiceParams} from 'util/Query'
@@ -81,12 +81,12 @@ export default class RectItem extends React.Component {
 
     if (goodSearch) {
       this.getSearchResult(goodSearch, count => {
-        this.setState({good: count})
+        this.setState({good: count}, this.notifyColor.bind(this))
       })
     }
     if (badSearch) {
       this.getSearchResult(badSearch, count => {
-        this.setState({bad: count})
+        this.setState({bad: count}, this.notifyColor.bind(this))
       })
     }
 
@@ -95,20 +95,35 @@ export default class RectItem extends React.Component {
     })
   }
 
-  render () {
-    const {rect, onClick, onClickDelete} = this.props
+  getColor () {
     const {good, bad} = this.state
     const color = bad ? '#D1282C' : (good ?
       '#3cba54' :
       'gray')
-    return (
-      <AppletCard
-        color={color}
-        desc={rect.name}
-        img="/resources/images/dashboard/workflow.png"
-        onClick={onClick}
-        onClickDelete={onClickDelete}
-      />
-    )
+    return color
+  }
+
+  notifyColor () {
+    const color = this.getColor()
+    const {onUpdateColor, rect} = this.props
+    onUpdateColor && onUpdateColor(rect.id, color)
+  }
+
+  render () {
+    return null
+    // const {rect, onClick, onClickDelete} = this.props
+    // const {good, bad} = this.state
+    // const color = bad ? '#D1282C' : (good ?
+    //   '#3cba54' :
+    //   'gray')
+    // return (
+    //   <AppletCard
+    //     color={color}
+    //     desc={rect.name}
+    //     img="/resources/images/dashboard/workflow.png"
+    //     onClick={onClick}
+    //     onClickDelete={onClickDelete}
+    //   />
+    // )
   }
 }

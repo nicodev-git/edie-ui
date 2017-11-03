@@ -2,7 +2,6 @@ import React from 'react'
 import {concat} from 'lodash'
 import {IconButton} from 'material-ui'
 import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
-import Draggable from 'react-draggable'
 import {debounce, findIndex} from 'lodash'
 
 import WfRectModal from './workflow/WfRectModal'
@@ -11,6 +10,11 @@ import RectItem from './workflow/RectItem'
 import {guid} from 'shared/Global'
 
 export default class WorkflowDashboardView extends React.Component {
+  constructor (props) {
+    super(props)
+    this.state = {}
+    this.rectState = {}
+  }
   componentWillMount () {
     this.debUpdateBoard = debounce(this.updateBoard.bind(this), 2000)
   }
@@ -183,6 +187,11 @@ export default class WorkflowDashboardView extends React.Component {
     }
   }
 
+  onUpdateRectState (id, color) {
+    console.log(`${id} : ${color}`)
+    // const {graph} = this.editor
+  }
+
   ///////////////////////////////////////////
   updateBoard () {
     this.props.updateGaugeBoard(this.props.board)
@@ -269,22 +278,14 @@ export default class WorkflowDashboardView extends React.Component {
 
   ////////////////////
   renderRect (rect, index) {
-    const map = rect.map || {}
     return (
-      <Draggable
+      <RectItem
+        {...this.props}
         key={rect.id || index}
-        position={{x: map.x || 0, y: map.y || 0}}
-        onStop={this.onStopDrag.bind(this, rect)}
-        defaultPosition={{x: map.x || 0, y: map.y || 0}}
-      >
-        <div className="inline-block">
-          <RectItem
-            {...this.props}
-            rect={rect}
-            searchList={this.getSearchList()}
-          />
-        </div>
-      </Draggable>
+        rect={rect}
+        searchList={this.getSearchList()}
+        onUpdateColor={this.onUpdateRectState.bind(this)}
+      />
     )
   }
 
@@ -316,9 +317,8 @@ export default class WorkflowDashboardView extends React.Component {
     return (
       <div className="flex-1">
         {this.renderAddMenu()}
-        <div id="graph" className="graph-base" style={{width: '100%', height: '100%'}}>
-
-        </div>
+        {this.getRects().map(this.renderRect.bind(this))}
+        <div id="graph" className="graph-base" style={{width: '100%', height: '100%'}}></div>
         {this.renderWfRectModal()}
       </div>
     )
