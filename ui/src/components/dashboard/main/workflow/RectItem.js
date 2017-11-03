@@ -79,14 +79,15 @@ export default class RectItem extends React.Component {
 
     if (!goodSearch && !badSearch) return
 
-    if (goodSearch) {
-      this.getSearchResult(goodSearch, count => {
-        this.setState({good: count}, this.notifyColor.bind(this))
-      })
-    }
     if (badSearch) {
       this.getSearchResult(badSearch, count => {
-        this.setState({bad: count}, this.notifyColor.bind(this))
+        this.setState({bad: count}, this.notifyUpdate.bind(this))
+      })
+    }
+
+    if (goodSearch) {
+      this.getSearchResult(goodSearch, count => {
+        this.setState({good: count}, this.notifyUpdate.bind(this))
       })
     }
 
@@ -103,10 +104,10 @@ export default class RectItem extends React.Component {
     return color
   }
 
-  notifyColor () {
-    const color = this.getColor()
+  notifyUpdate () {
+    const {good, bad} = this.state
     const {onUpdateColor, rect} = this.props
-    onUpdateColor && onUpdateColor(rect.id, color)
+    onUpdateColor && onUpdateColor(rect.id, good, bad)
   }
 
   render () {

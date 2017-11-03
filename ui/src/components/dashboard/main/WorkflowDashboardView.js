@@ -20,7 +20,7 @@ export default class WorkflowDashboardView extends React.Component {
   }
 
   componentDidMount () {
-    const {mxConstants, mxUtils, mxEditor, mxEvent} = window
+    const {mxUtils, mxEditor, mxEvent} = window
     const node = mxUtils.load('/resources/plugins/mxgraph/config/workfloweditor.xml').getDocumentElement();
     const editor = new mxEditor(node);
     const graph = editor.graph
@@ -38,16 +38,7 @@ export default class WorkflowDashboardView extends React.Component {
     new window.mxRubberband(graph)
 
     //Register styles
-    var style = {}
-    style[mxConstants.STYLE_SHAPE] = 'box'
-    style[mxConstants.STYLE_STROKECOLOR] = '#D1282C'
-    style[mxConstants.STYLE_FILLCOLOR] = '#D1282C'
-    style[mxConstants.STYLE_FONTCOLOR] = '#ffffff'
-    style[mxConstants.STYLE_FONTSIZE] = '15'
-    style[mxConstants.STYLE_FONTSTYLE] = mxConstants.FONT_BOLD
-    style[mxConstants.STYLE_ROUNDED] = 1
-    style[mxConstants.STYLE_ARCSIZE] = 6
-    graph.getStylesheet().putCellStyle('boxstyle', style)
+    this.registerGraphStyles(graph)
 
     // Adds cells to the model in a single step
     this.addGraphRects(this.getRects())
@@ -118,6 +109,37 @@ export default class WorkflowDashboardView extends React.Component {
     }
   }
 
+  registerGraphStyles (graph) {
+    const {mxConstants} = window
+    let style = {}
+    style[mxConstants.STYLE_SHAPE] = 'box'
+    style[mxConstants.STYLE_FONTCOLOR] = '#ffffff'
+    style[mxConstants.STYLE_FONTSIZE] = '15'
+    style[mxConstants.STYLE_FONTSTYLE] = mxConstants.FONT_BOLD
+    style[mxConstants.STYLE_ROUNDED] = 1
+    style[mxConstants.STYLE_ARCSIZE] = 6
+    style[mxConstants.STYLE_STROKECOLOR] = '#D1282C'
+    style[mxConstants.STYLE_FILLCOLOR] = '#D1282C'
+
+    graph.getStylesheet().putCellStyle('box-red', style)
+
+    style = {
+      ...style,
+      [mxConstants.STYLE_STROKECOLOR]: '#3cba54',
+      [mxConstants.STYLE_FILLCOLOR]: '#3cba54'
+    }
+
+    graph.getStylesheet().putCellStyle('box-green', style)
+
+    style = {
+      ...style,
+      [mxConstants.STYLE_STROKECOLOR]: 'gray',
+      [mxConstants.STYLE_FILLCOLOR]: 'gray'
+    }
+
+    graph.getStylesheet().putCellStyle('box-gray', style)
+  }
+
   needUpdateRects(prevRects, rects) {
     const added = []
     const updated = []
@@ -159,7 +181,7 @@ export default class WorkflowDashboardView extends React.Component {
         const map = p.map || {}
 
         const v = graph.insertVertex(parent, null,
-          p.name, map.x || 10, map.y || 10, 135, 135, 'boxstyle')
+          p.name, map.x || 10, map.y || 10, 135, 135, 'box-gray')
         v.userData = {
           id: p.id
         }
@@ -187,16 +209,17 @@ export default class WorkflowDashboardView extends React.Component {
     }
   }
 
-  onUpdateRectState (id, color) {
-    console.log(`${id} : ${color}`)
+  onUpdateRectState (id, good, bad) {
+    if (!bad && !good) return
+
     const {graph} = this.editor
     const cells = graph.getChildVertices(graph.getDefaultParent())
     const index = findIndex(cells, {
       userData: {id}
     })
     if (index < 0) return
-    console.log(cells[index])
 
+    graph.getModel().setStyle(cells[index], bad ? 'box-red' : 'box-green')
   }
 
   ///////////////////////////////////////////
