@@ -3,7 +3,7 @@ import {concat} from 'lodash'
 import {IconButton} from 'material-ui'
 import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
 import Draggable from 'react-draggable'
-import {debounce} from 'lodash'
+import {debounce, findIndex} from 'lodash'
 
 import WfRectModal from './workflow/WfRectModal'
 import RectItem from './workflow/RectItem'
@@ -33,16 +33,36 @@ export default class WorkflowDashboardView extends React.Component {
     // Adds cells to the model in a single step
     graph.getModel().beginUpdate()
     try {
-      const v1 = graph.insertVertex(parent, null,
-        'Hello,', 20, 20, 80, 30)
-      const v2 = graph.insertVertex(parent, null,
-        'World!', 200, 150, 80, 30)
-      graph.insertEdge(parent, null, '', v1, v2)
+
+      this.getRects().forEach(p => {
+        const map = p.map || {}
+
+        graph.insertVertex(parent, null,
+          p.name, map.x || 10, map.y || 10, 100, 100)
+        graph.userData = p.id
+      })
+      // graph.insertEdge(parent, null, '', v1, v2)
     }
     finally {
       // Updates the display
       graph.getModel().endUpdate()
     }
+
+    /////////////////////////
+
+    graph.addListener(window.mxEvent.CELLS_MOVED, (sender, evt) => {
+      const v = evt.properties.cells[0]
+      const id = v.userData
+      console.log(v)
+
+      const rect = this.findRect(id)
+      if (!rect) return
+
+      console.log(rect)
+      // rect.x =
+      // this.props.updateGaugeRect(rect, this.props.board, true)
+      // this.debUpdateBoard()
+    })
   }
 
   updateBoard () {
@@ -79,6 +99,14 @@ export default class WorkflowDashboardView extends React.Component {
 
   getRects () {
     return this.props.board.rects || []
+  }
+
+  findRect (id) {
+    const rects = this.getRects()
+    const index = findIndex(rects, {id})
+    if (index < 0) return null
+
+    return rects[index]
   }
 
   ////////////////////
