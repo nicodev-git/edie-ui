@@ -111,6 +111,7 @@ export default class WorkflowDashboardView extends React.Component {
     if (check.result) {
       console.log(`Change detected. Added: ${check.added.length} Updated: ${check.updated.length} Removed: ${check.removed.length}`)
       this.addGraphRects(check.added)
+      this.updateGraphRects(check.updated)
     }
   }
 
@@ -155,7 +156,7 @@ export default class WorkflowDashboardView extends React.Component {
       if (found.length) {
         const p = found[0]
         if (this.isRectDifferent(n, p)) {
-          updated.add(n)
+          updated.push(n)
         }
       } else {
         added.push(n)
@@ -214,6 +215,26 @@ export default class WorkflowDashboardView extends React.Component {
     }
   }
 
+  updateGraphRects (rects) {
+    const {graph} = this.editor
+    graph.getModel().beginUpdate()
+
+    try {
+      const cells = this.getAllGraphCells()
+      rects.forEach(p => {
+        const cell = this.findGraphCell(p.id, cells)
+        if (!cell) return
+
+        graph.getModel().setValue(cell, p.name)
+      })
+    }
+    finally {
+      // Updates the display
+      graph.getModel().endUpdate()
+    }
+
+  }
+
   getSelectedRect () {
     const {graph} = this.editor
     const cell = graph.getSelectionCell()
@@ -221,17 +242,29 @@ export default class WorkflowDashboardView extends React.Component {
     return this.findRect(cell.userData.id)
   }
 
+  getAllGraphCells () {
+    const {graph} = this.editor
+    const cells = graph.getChildVertices(graph.getDefaultParent())
+    return cells
+  }
+
+  findGraphCell (rectId, allCells) {
+    const cells = allCells || this.getAllGraphCells()
+    const index = findIndex(cells, {
+      userData: {id: rectId}
+    })
+    if (index < 0) return null
+    return cells[index]
+  }
+
   onUpdateRectState (id, good, bad) {
     if (!bad && !good) return
 
     const {graph} = this.editor
-    const cells = graph.getChildVertices(graph.getDefaultParent())
-    const index = findIndex(cells, {
-      userData: {id}
-    })
-    if (index < 0) return
+    const cell = this.findGraphCell(id)
+    if (!cell) return
 
-    graph.getModel().setStyle(cells[index], bad ? 'box-red' : 'box-green')
+    graph.getModel().setStyle(cell, bad ? 'box-red' : 'box-green')
   }
 
   ///////////////////////////////////////////
