@@ -361,11 +361,12 @@ export default class WorkflowDashboardView extends React.Component {
     this.props.showWfRectModal(true, rect)
   }
 
+  ////////////////////
+
   onClickShowSearch (rect) {
     if (!rect) return null
+    this.props.showRectSearchModal(true)
   }
-
-  ////////////////////
 
   onCloseRectSearch () {
     this.props.showRectSearchModal(false)
