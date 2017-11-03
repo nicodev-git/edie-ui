@@ -16,10 +16,11 @@ export default class WorkflowDashboardView extends React.Component {
   }
 
   componentDidMount () {
-    const editor = new window.mxEditor(document.getElementById('graphContainer'));
+    const node = window.mxUtils.load('/resources/plugins/mxgraph/config/workfloweditor.xml').getDocumentElement();
+    const editor = new window.mxEditor(node);
     const graph = editor.graph
-
-    editor.setMode('connect')
+    // const graph = new window.mxGraph(document.getElementById('graphContainer'))
+    // editor.setMode('connect')
     //editor.defaultEdge.style = 'straightEdge'
 
     // Enables rubberband selection
@@ -164,7 +165,7 @@ export default class WorkflowDashboardView extends React.Component {
     return (
       <div className="flex-1">
         {this.renderAddMenu()}
-        <div id="graphContainer" style={{width: '100%', height: '100%'}}>
+        <div id="graph" className="graph-base" style={{width: '100%', height: '100%'}}>
 
         </div>
         {this.renderWfRectModal()}
