@@ -29,6 +29,7 @@ export default class WorkflowDashboardView extends React.Component {
 
     graph.minFitScale = 1
     graph.maxFitScale = 1
+    graph.setCellsResizable(false)
     // graph.maximumGraphBounds = new window.mxRectangle(0, 0, 1024, 768)
     // const graph = new window.mxGraph(document.getElementById('graphContainer'))
     editor.setMode('connect')
@@ -51,28 +52,30 @@ export default class WorkflowDashboardView extends React.Component {
     /////////////////////////
 
     graph.addListener(mxEvent.CELLS_MOVED, (sender, evt) => {
-      const v = evt.properties.cells[0]
-      const {id} = v.userData
-      // console.log(v)
+      evt.properties.cells.forEach(v => {
+        if (!v.userData) return
+        const {id} = v.userData
+        // console.log(v)
 
-      const rect = this.findRect(id)
-      if (!rect) return
+        const rect = this.findRect(id)
+        if (!rect) return
 
-      rect.map = rect.map || {}
-      rect.map.x = v.geometry.x
-      rect.map.y = v.geometry.y
+        rect.map = rect.map || {}
+        rect.map.x = v.geometry.x
+        rect.map.y = v.geometry.y
 
-      console.log(rect)
+        console.log(rect)
 
-      this.props.updateGaugeRect(rect, this.props.board, true)
-      this.debUpdateBoard()
+        this.props.updateGaugeRect(rect, this.props.board, true)
+        this.debUpdateBoard()
+      })
     })
 
     /////////////////////////
 
     graph.addListener(mxEvent.CELL_CONNECTED, (sender, evt) => {
       const {edge, source} = evt.properties
-      if (source) return
+      if (source || !edge.source || !edge.target) return
       const sourceId = edge.source.userData.id
       const destId = edge.target.userData.id
 
