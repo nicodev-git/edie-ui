@@ -16,8 +16,9 @@ export default class WorkflowDashboardView extends React.Component {
   }
 
   componentDidMount () {
-    const node = window.mxUtils.load('/resources/plugins/mxgraph/config/workfloweditor.xml').getDocumentElement();
-    const editor = new window.mxEditor(node);
+    const {mxConstants, mxUtils, mxEditor} = window
+    const node = mxUtils.load('/resources/plugins/mxgraph/config/workfloweditor.xml').getDocumentElement();
+    const editor = new mxEditor(node);
     const graph = editor.graph
 
     graph.minFitScale = 1
@@ -34,6 +35,15 @@ export default class WorkflowDashboardView extends React.Component {
     // is normally the first child of the root (ie. layer 0).
     const parent = graph.getDefaultParent()
 
+    //Register styles
+    var style = {}
+    style[mxConstants.STYLE_SHAPE] = 'box'
+    style[mxConstants.STYLE_STROKECOLOR] = '#D1282C'
+    style[mxConstants.STYLE_FILLCOLOR] = '#D1282C'
+    style[mxConstants.STYLE_FONTCOLOR] = '#ffffff'
+    style[mxConstants.STYLE_ROUNDED] = 1
+    graph.getStylesheet().putCellStyle('boxstyle', style)
+
     // Adds cells to the model in a single step
     graph.getModel().beginUpdate()
     try {
@@ -42,7 +52,7 @@ export default class WorkflowDashboardView extends React.Component {
         const map = p.map || {}
 
         const v = graph.insertVertex(parent, null,
-          p.name, map.x || 10, map.y || 10, 100, 100)
+          p.name, map.x || 10, map.y || 10, 100, 100, 'boxstyle')
         v.userData = p.id
       })
       // graph.insertEdge(parent, null, '', v1, v2)
