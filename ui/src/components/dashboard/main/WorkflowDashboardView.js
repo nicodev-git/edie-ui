@@ -22,7 +22,7 @@ export default class WorkflowDashboardView extends React.Component {
 
     graph.minFitScale = 1
     graph.maxFitScale = 1
-    graph.maximumGraphBounds = new window.mxRectangle(0, 0, 1024, 768)
+    // graph.maximumGraphBounds = new window.mxRectangle(0, 0, 1024, 768)
     // const graph = new window.mxGraph(document.getElementById('graphContainer'))
     editor.setMode('connect')
     //editor.defaultEdge.style = 'straightEdge'
@@ -77,6 +77,46 @@ export default class WorkflowDashboardView extends React.Component {
     })
   }
 
+  componentDidUpdate (prevProps) {
+    // const prevRects = prevProps.board.rects || []
+    // const rects = this.getRects()
+    // const check = this.needUpdateRects(prevRects, rects)
+    // if (check.result) {
+    //
+    // } else {
+    //
+    // }
+  }
+
+  needUpdateRects(prevRects, rects) {
+    const added = []
+    const updated = []
+    const removed = prevRects.filter(p => rects.filter(n => n.id === p.id) === 0)
+
+    rects.forEach(n => {
+      const found = prevRects.filter(p => p.id === n.id)
+      if (found.length) {
+        const p = found[0]
+        if (this.isRectDifferent(n, p)) {
+          updated.add(n)
+        }
+      } else {
+        added.push(n)
+      }
+    })
+
+    return {
+      result: (added.length + updated.length + removed.length) > 0,
+      added, updated, removed
+    }
+  }
+
+  isRectDifferent (n, p) {
+    if (n.name !== p.name) return true
+    return false
+  }
+
+  ///////////////////////////////////////////
   updateBoard () {
     this.props.updateGaugeBoard(this.props.board)
   }
