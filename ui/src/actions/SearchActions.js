@@ -510,7 +510,9 @@ export const fetchTableViewCols = () => {
         ...findCols(res.data['event']),
         ...findCols(res.data['incident'])
       ])
-      list.sort()
+      list.sort((a, b) => {
+        return a.toLowerCase().localeCompare(b.toLowerCase())
+      })
 
       dispatch({type: FETCH_VIEW_COLS, list})
     }).catch(error => apiError(dispatch, error))
