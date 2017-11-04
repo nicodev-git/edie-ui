@@ -564,14 +564,14 @@ export default class WorkflowDashboardView extends React.Component {
   }
 
   render () {
-    const {selectWfRectGroup} = this.props
+    const {selectedWfRectGroup} = this.props
     return (
       <div className="flex-vertical flex-1">
         <div>
           <SelectField
             hintText="Group"
             className="valign-top margin-lg-left"
-            value={selectWfRectGroup ? selectWfRectGroup.id : null}
+            value={selectedWfRectGroup ? selectedWfRectGroup.id : null}
             onChange={this.onChangeGroup.bind(this)}
             style={{width: 140}}>
             {this.props.wfRectGroups.map(p =>

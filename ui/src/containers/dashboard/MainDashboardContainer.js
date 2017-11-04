@@ -120,7 +120,7 @@ export default connect(
 
     wfRectGroups: state.dashboard.wfRectGroups,
     wfRectGroupsModalOpen: state.dashboard.wfRectGroupsModalOpen,
-    selectedWfRectGroup: state.dashbaord.selectedWfRectGroup
+    selectedWfRectGroup: state.dashboard.selectedWfRectGroup
   }), {
     fetchDevicesGroups,
     fetchMonitorGroups,
