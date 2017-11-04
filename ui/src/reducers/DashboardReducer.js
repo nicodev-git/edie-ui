@@ -79,6 +79,7 @@ import {
   UPDATE_WFRECT_GROUP,
   REMOVE_WFRECT_GROUP,
   SHOW_WFRECT_GROUPS_MODAL,
+  SELECT_WFRECT_GROUP,
 
   API_ERROR
 } from 'actions/types'
@@ -356,6 +357,9 @@ export default function (state = initialState, action) {
       return { ...state, wfRectGroups: state.wfRectGroups.filter(p => p.id !== action.data.id) }
     case SHOW_WFRECT_GROUPS_MODAL:
       return { ...state, wfRectGroupsModalOpen: action.visible }
+
+    case SELECT_WFRECT_GROUP:
+      return { ...state, selectedWfRectGroup: action.group }
     default:
       return state
   }

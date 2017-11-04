@@ -490,6 +490,11 @@ export default class WorkflowDashboardView extends React.Component {
     this.props.showWfRectGroupsModal(false)
   }
 
+  onChangeGroup (e, index, value) {
+    const {wfRectGroups} = this.props
+    this.props.selectWfRectGroup(wfRectGroups[index])
+  }
+
   ////////////////////
   renderRect (rect, index) {
     return (
@@ -559,12 +564,15 @@ export default class WorkflowDashboardView extends React.Component {
   }
 
   render () {
+    const {selectWfRectGroup} = this.props
     return (
       <div className="flex-vertical flex-1">
         <div>
           <SelectField
             hintText="Group"
             className="valign-top margin-lg-left"
+            value={selectWfRectGroup ? selectWfRectGroup.id : null}
+            onChange={this.onChangeGroup.bind(this)}
             style={{width: 140}}>
             {this.props.wfRectGroups.map(p =>
               <MenuItem key={p.id} value={p.id} primaryText={p.name}/>

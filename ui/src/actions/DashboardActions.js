@@ -48,6 +48,7 @@ import {
   UPDATE_WFRECT_GROUP,
   REMOVE_WFRECT_GROUP,
   SHOW_WFRECT_GROUPS_MODAL,
+  SELECT_WFRECT_GROUP,
 
   NO_AUTH_ERROR
 } from './types'
@@ -334,3 +335,8 @@ export const showWfRectGroupsModal = (visible) => {
   }
 }
 
+export const selectWfRectGroup = (group) => {
+  return dispatch => {
+    dispatch({type: SELECT_WFRECT_GROUP, group})
+  }
+}

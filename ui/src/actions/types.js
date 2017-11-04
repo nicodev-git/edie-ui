@@ -481,6 +481,7 @@ export const ADD_WFRECT_GROUP = 'ADD_WFRECT_GROUP'
 export const UPDATE_WFRECT_GROUP = 'UPDATE_WFRECT_GROUP'
 export const REMOVE_WFRECT_GROUP = 'REMOVE_WFRECT_GROUP'
 export const SHOW_WFRECT_GROUPS_MODAL = 'SHOW_WFRECT_GROUPS_MODAL'
+export const SELECT_WFRECT_GROUP = 'SELECT_WFRECT_GROUP'
 
 ///////////////////////////////////////////////////////////////
 

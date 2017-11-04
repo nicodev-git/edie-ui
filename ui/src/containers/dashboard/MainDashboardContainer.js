@@ -64,7 +64,8 @@ import {
   updateWfRectGroup,
   removeWfRectGroup,
 
-  showWfRectGroupsModal
+  showWfRectGroupsModal,
+  selectWfRectGroup
 } from 'actions'
 
 class MainDashboardContainer extends React.Component {
@@ -118,7 +119,8 @@ export default connect(
     detailEntity: state.search.detailEntity,
 
     wfRectGroups: state.dashboard.wfRectGroups,
-    wfRectGroupsModalOpen: state.dashboard.wfRectGroupsModalOpen
+    wfRectGroupsModalOpen: state.dashboard.wfRectGroupsModalOpen,
+    selectedWfRectGroup: state.dashbaord.selectedWfRectGroup
   }), {
     fetchDevicesGroups,
     fetchMonitorGroups,
@@ -180,6 +182,7 @@ export default connect(
     updateWfRectGroup,
     removeWfRectGroup,
 
-    showWfRectGroupsModal
+    showWfRectGroupsModal,
+    selectWfRectGroup
   }
 )(withRouter(MainDashboardContainer))
