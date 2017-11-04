@@ -482,7 +482,7 @@ export default class WorkflowDashboardView extends React.Component {
   ////////////////////
 
   onClickShowGroups () {
-
+    this.props.showWfRectGroupsModal(true)
   }
 
   ////////////////////
@@ -543,6 +543,11 @@ export default class WorkflowDashboardView extends React.Component {
     )
   }
 
+  renderRectGroupsModal () {
+    if (!this.props.wfRectGroupsModalOpen) return null
+
+  }
+
   render () {
     return (
       <div className="flex-vertical flex-1">
@@ -569,6 +574,7 @@ export default class WorkflowDashboardView extends React.Component {
           {this.renderWfRectModal()}
           {this.renderSearchModal()}
           {this.renderEntityDetailModal()}
+          {this.renderRectGroupsModal()}
         </div>
       </div>
 

@@ -47,6 +47,7 @@ import {
   ADD_WFRECT_GROUP,
   UPDATE_WFRECT_GROUP,
   REMOVE_WFRECT_GROUP,
+  SHOW_WFRECT_GROUPS_MODAL,
 
   NO_AUTH_ERROR
 } from './types'
@@ -324,6 +325,12 @@ export const removeWfRectGroup = (entity) => {
     axios.delete(entity._links.self.href, entity).then(() => {
       dispatch({type: REMOVE_WFRECT_GROUP, data: entity})
     })
+  }
+}
+
+export const showWfRectGroupsModal = (visible) => {
+  return dispatch => {
+    dispatch({type: SHOW_WFRECT_GROUPS_MODAL, visible})
   }
 }
 
