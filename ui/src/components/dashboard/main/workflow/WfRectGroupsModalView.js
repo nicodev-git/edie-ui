@@ -16,6 +16,11 @@ export default class WfRectGroupsModalView extends React.Component {
         <CardPanel title="Edit Groups">
           <div style={{maxHeight: 300, overflow: 'auto'}}>
             <table className="table">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                </tr>
+              </thead>
               <tbody>
               {wfRectGroups.map(p =>
                 <tr key={p.id}>
