@@ -16,6 +16,7 @@ import RectSearchModal from './workflow/RectSearchModal'
 import {buildServiceParams} from 'util/Query'
 import {getRanges} from 'components/common/DateRangePicker'
 import EntityDetailModal from 'components/sidebar/search/EntityDetailModal'
+import WfRectGroupsModal from "./workflow/WfRectGroupsModal";
 
 export default class WorkflowDashboardView extends React.Component {
   constructor (props) {
@@ -485,6 +486,10 @@ export default class WorkflowDashboardView extends React.Component {
     this.props.showWfRectGroupsModal(true)
   }
 
+  onCloseRectGroupsModal () {
+    this.props.showWfRectGroupsModal(false)
+  }
+
   ////////////////////
   renderRect (rect, index) {
     return (
@@ -545,7 +550,12 @@ export default class WorkflowDashboardView extends React.Component {
 
   renderRectGroupsModal () {
     if (!this.props.wfRectGroupsModalOpen) return null
-
+    return (
+      <WfRectGroupsModal
+        {...this.props}
+        onHide={this.onCloseRectGroupsModal.bind(this)}
+      />
+    )
   }
 
   render () {
