@@ -152,6 +152,18 @@ export default class WorkflowDashboardView extends React.Component {
       this.updateGraphRects(check.updated)
       this.removeGraphRects(check.removed)
     }
+
+    const {wfRectGroups, selectedWfRectGroup} = this.props
+    if (prevProps.wfRectGroups !== wfRectGroups) {
+      if (!selectedWfRectGroup || findIndex(wfRectGroups, {id: selectedWfRectGroup.id}) < 0) {
+        this.props.selectWfRectGroup(wfRectGroups.length > 0 ? wfRectGroups[0] : null)
+      }
+    }
+
+    if (selectedWfRectGroup && (!prevProps.selectedWfRectGroup ||
+        prevProps.selectedWfRectGroup.id !== selectedWfRectGroup.id)) {
+      
+    }
   }
 
   registerGraphStyles (graph) {
