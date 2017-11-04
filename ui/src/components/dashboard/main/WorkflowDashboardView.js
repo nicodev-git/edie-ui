@@ -66,12 +66,18 @@ export default class WorkflowDashboardView extends React.Component {
         const {id} = v.userData
         // console.log(v)
 
-        const rect = this.findRect(id)
+        let rect = this.findRect(id)
         if (!rect) return
 
-        rect.map = rect.map || {}
-        rect.map.x = v.geometry.x
-        rect.map.y = v.geometry.y
+
+        rect = {
+          ...rect,
+          map: {
+            ...(rect.map || {}),
+            x: v.geometry.x,
+            y: v.geometry.y
+          }
+        }
 
         console.log(rect)
 
@@ -88,7 +94,7 @@ export default class WorkflowDashboardView extends React.Component {
       const sourceId = edge.source.userData.id
       const destId = edge.target.userData.id
 
-      const sourceRect = this.findRect(sourceId)
+      let sourceRect = this.findRect(sourceId)
       if (!sourceRect) {
         console.log(`Rect not found: ${sourceId}`)
         return
@@ -101,9 +107,15 @@ export default class WorkflowDashboardView extends React.Component {
         return
       }
 
-      sourceRect.map.lines.push({
-        id: destId
-      })
+      sourceRect = {
+        ...sourceRect,
+        map: {
+          ...sourceRect.map,
+          lines: [...sourceRect.map.lines, {
+            id: destId
+          }]
+        }
+      }
 
       console.log(sourceRect)
       this.props.updateGaugeRect(sourceRect, this.props.board, true)
@@ -257,23 +269,22 @@ export default class WorkflowDashboardView extends React.Component {
         /////////////////////////////////////////
 
         if (p.map && p.map.lines) {
-          // const edges = graph.getAllEdges([cell])
-          //   .filter(p => p.source === cell)
-          //
-          // const {lines} = p.map
-          // const targetIds = []
-          // edges.forEach(edge => {
-          //   const data = edge.target.userData
-          //   if (!data) return
-          //   const targetId = data.id
-          //   targetIds.push(targetId)
-          //   if (lines.includes(targetId)) return
-          //
-          //   graph.removeCells([edge])
-          // })
+          const edges = graph.getAllEdges([cell])
+            .filter(p => p.source === cell)
 
+          const {lines} = p.map
+          const targetIds = []
+          edges.forEach(edge => {
+            const data = edge.target.userData
+            if (!data) return
+            const targetId = data.id
+            targetIds.push(targetId)
+            const lineIndex = findIndex(lines, {id: targetId})
+            if (lineIndex >= 0) return
+
+            graph.removeCells([edge])
+          })
         }
-
         /////////////////////////////////////////
       })
     }
