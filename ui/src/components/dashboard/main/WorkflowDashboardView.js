@@ -38,6 +38,7 @@ export default class WorkflowDashboardView extends React.Component {
     graph.minFitScale = 1
     graph.maxFitScale = 1
     graph.setCellsResizable(false)
+    graph.setAllowDanglingEdges(false);
     // graph.maximumGraphBounds = new window.mxRectangle(0, 0, 1024, 768)
     // const graph = new window.mxGraph(document.getElementById('graphContainer'))
     editor.setMode('connect')
@@ -196,7 +197,7 @@ export default class WorkflowDashboardView extends React.Component {
   }
 
   isRectDifferent (n, p) {
-    if (n.name !== p.name) return true
+    if (JSON.stringify(n) !== JSON.stringify(p)) return true
     return false
   }
   ///////////////////////////////////////////
@@ -252,6 +253,28 @@ export default class WorkflowDashboardView extends React.Component {
         if (!cell) return
 
         graph.getModel().setValue(cell, p.name)
+
+        /////////////////////////////////////////
+
+        if (p.map && p.map.lines) {
+          // const edges = graph.getAllEdges([cell])
+          //   .filter(p => p.source === cell)
+          //
+          // const {lines} = p.map
+          // const targetIds = []
+          // edges.forEach(edge => {
+          //   const data = edge.target.userData
+          //   if (!data) return
+          //   const targetId = data.id
+          //   targetIds.push(targetId)
+          //   if (lines.includes(targetId)) return
+          //
+          //   graph.removeCells([edge])
+          // })
+
+        }
+
+        /////////////////////////////////////////
       })
     }
     finally {
