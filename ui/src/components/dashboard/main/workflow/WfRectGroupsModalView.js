@@ -13,7 +13,7 @@ export default class WfRectGroupsModalView extends React.Component {
           <RaisedButton label="Add" className="margin-lg-left" onClick={onClickAdd}/>
         </CardPanel>
 
-        <CardPanel title="Edit Grups">
+        <CardPanel title="Edit Groups">
           <div style={{maxHeight: 300, overflow: 'auto'}}>
             <table className="table">
               <tbody>

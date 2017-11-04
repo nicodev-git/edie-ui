@@ -1,6 +1,7 @@
 import React from 'react'
 
 import WfRectGroupsModalView from './WfRectGroupsModalView'
+import {showAlert} from 'components/common/Alert'
 
 export default class WfRectGroupsModal extends React.Component {
   constructor (props){
@@ -17,7 +18,13 @@ export default class WfRectGroupsModal extends React.Component {
   }
 
   onClickAdd () {
-
+    const {name} = this.state
+    if (!name) {
+      return showAlert('Please type name')
+    }
+    this.props.addWfRectGroup({
+      name: this.state.name
+    })
   }
 
   render () {
