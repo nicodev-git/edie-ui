@@ -564,7 +564,8 @@ export default class WorkflowDashboardView extends React.Component {
         <div>
           <SelectField
             hintText="Group"
-            className="valign-top margin-lg-left">
+            className="valign-top margin-lg-left"
+            style={{width: 140}}>
             {this.props.wfRectGroups.map(p =>
               <MenuItem key={p.id} value={p.id} primaryText={p.name}/>
             )}

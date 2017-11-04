@@ -91,7 +91,8 @@ export default class MainDashboard extends React.Component {
         <div className="padding-lg-left">
           <SelectField
             floatingLabelText="Dashboard" value={this.getSelectedId()} onChange={this.onChangeBoard.bind(this)}
-            className="valign-top">
+            className="valign-top"
+            style={{width: 140}}>
             {this.getBoards().map(p =>
               <MenuItem key={p.id} value={p.id} primaryText={p.name}/>
             )}
