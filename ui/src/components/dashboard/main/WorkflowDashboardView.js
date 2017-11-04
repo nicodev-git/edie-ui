@@ -390,13 +390,29 @@ export default class WorkflowDashboardView extends React.Component {
   }
 
   onClickDeleteItem () {
-    const rect = this.getSelectedRect()
-    if (!rect) return showAlert('Please choose rect')
+    const {graph} = this.editor
+    const cell = graph.getSelectionCell()
+    if (!cell) return
 
-    showConfirm('Are you sure you want to remove?', btn => {
-      if (btn !== 'ok') return
-      this.props.removeGaugeRect(rect, this.props.board)
-    })
+    if (cell.vertex){
+      if (!cell.userData) return
+
+      const rect = this.findRect(cell.userData.id)
+
+      if (!rect) return showAlert('Please choose rect')
+
+      showConfirm('Are you sure you want to remove?', btn => {
+        if (btn !== 'ok') return
+        this.props.removeGaugeRect(rect, this.props.board)
+      })
+    } else if (cell.edge) {
+      if (cell.source && cell.target) {
+        const source = this.findRect(cell.source.userData.id)
+        if (!source) return
+        source.map.lines = source.map.lines.filter(p => p.id !== cell.target.userData.id)
+        this.props.updateGaugeRect(source, this.props.board)
+      }
+    }
   }
 
   ////////////////////
