@@ -480,6 +480,12 @@ export default class WorkflowDashboardView extends React.Component {
   }
 
   ////////////////////
+
+  onClickShowGroups () {
+
+  }
+
+  ////////////////////
   renderRect (rect, index) {
     return (
       <RectItem
@@ -542,12 +548,14 @@ export default class WorkflowDashboardView extends React.Component {
       <div className="flex-vertical flex-1">
         <div>
           <SelectField
-            floatingLabelText="Group"
-            className="valign-top">
+            hintText="Group"
+            className="valign-top margin-lg-left">
             {this.props.wfRectGroups.map(p =>
               <MenuItem key={p.id} value={p.id} primaryText={p.name}/>
             )}
           </SelectField>
+
+          <IconButton onTouchTap={this.onClickShowGroups.bind(this)}><AddCircleIcon/></IconButton>
 
           <div className="pull-right text-right">
             <IconButton onTouchTap={this.onClickAddItem.bind(this)}><AddCircleIcon/></IconButton>
@@ -556,7 +564,6 @@ export default class WorkflowDashboardView extends React.Component {
           </div>
         </div>
         <div className="flex-1">
-          {this.renderMenu()}
           {this.getRects().map(this.renderRect.bind(this))}
           <div id="graph" className="graph-base" style={{width: '100%', height: '100%'}}></div>
           {this.renderWfRectModal()}

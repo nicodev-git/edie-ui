@@ -108,6 +108,8 @@ const initialState = {
     monitorId: ''
   },
 
+  wfRectGroups: [],
+
   sidebarProfileMenuOpen: false,
   sidebarMessageMenuOpen: false,
 
