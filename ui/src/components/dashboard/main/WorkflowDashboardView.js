@@ -29,7 +29,7 @@ export default class WorkflowDashboardView extends React.Component {
   }
 
   componentDidMount () {
-    const {mxUtils, mxEditor, mxEvent} = window
+    const {mxUtils, mxEditor, mxEvent, mxConstants, mxEdgeStyle} = window
     const node = mxUtils.load('/resources/plugins/mxgraph/config/workfloweditor.xml').getDocumentElement();
     const editor = new mxEditor(node);
     const graph = editor.graph
@@ -43,7 +43,9 @@ export default class WorkflowDashboardView extends React.Component {
     // graph.maximumGraphBounds = new window.mxRectangle(0, 0, 1024, 768)
     // const graph = new window.mxGraph(document.getElementById('graphContainer'))
     editor.setMode('connect')
-    editor.defaultEdge.style = 'straightEdge'
+
+    const style = graph.getStylesheet().getDefaultEdgeStyle()
+    style[mxConstants.STYLE_EDGE] = mxEdgeStyle.EntityRelation
 
     // Enables rubberband selection
     new window.mxRubberband(graph)
