@@ -137,6 +137,7 @@ export default class WorkflowDashboardView extends React.Component {
       console.log(`Change detected. Added: ${check.added.length} Updated: ${check.updated.length} Removed: ${check.removed.length}`)
       this.addGraphRects(check.added)
       this.updateGraphRects(check.updated)
+      this.removeGraphRects(check.removed)
     }
   }
 
@@ -258,6 +259,25 @@ export default class WorkflowDashboardView extends React.Component {
       graph.getModel().endUpdate()
     }
 
+  }
+
+  removeGraphRects (rects) {
+    const {graph} = this.editor
+    graph.getModel().beginUpdate()
+
+    try {
+      const cells = this.getAllGraphCells()
+      rects.forEach(p => {
+        const cell = this.findGraphCell(p.id, cells)
+        if (!cell) return
+
+        graph.getModel().remove(cell)
+      })
+    }
+    finally {
+      // Updates the display
+      graph.getModel().endUpdate()
+    }
   }
 
   getSelectedRect () {
