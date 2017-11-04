@@ -350,11 +350,20 @@ export default function (state = initialState, action) {
     case FETCH_WFRECT_GROUPS:
       return { ...state, wfRectGroups: action.data }
     case ADD_WFRECT_GROUP:
-      return { ...state, wfRectGroups: [...state.wfRectGroups, action.data]}
-    case UPDATE_WFRECT_GROUP:
-      return { ...state, wfRectGroups: state.wfRectGroups.map(p => p.id === action.data.id ? action.data : p) }
-    case REMOVE_WFRECT_GROUP:
-      return { ...state, wfRectGroups: state.wfRectGroups.filter(p => p.id !== action.data.id) }
+      return { ...state, wfRectGroups: [...state.wfRectGroups, action.data] }
+
+    case UPDATE_WFRECT_GROUP: {
+      let {selectedWfRectGroup} = state
+      if (selectedWfRectGroup && selectedWfRectGroup.id === action.data.id ) selectedWfRectGroup = action.data
+      return { ...state, wfRectGroups: state.wfRectGroups.map(p => p.id === action.data.id ? action.data : p), selectedWfRectGroup }
+    }
+
+    case REMOVE_WFRECT_GROUP: {
+      let {selectedWfRectGroup} = state
+      if (selectedWfRectGroup && selectedWfRectGroup.id === action.data.id ) selectedWfRectGroup = null
+      return { ...state, wfRectGroups: state.wfRectGroups.filter(p => p.id !== action.data.id), selectedWfRectGroup }
+    }
+
     case SHOW_WFRECT_GROUPS_MODAL:
       return { ...state, wfRectGroupsModalOpen: action.visible }
 

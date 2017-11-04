@@ -42,7 +42,7 @@ export default class WorkflowDashboardView extends React.Component {
     editor.setMode('connect')
 
     const style = graph.getStylesheet().getDefaultEdgeStyle()
-    style[mxConstants.STYLE_EDGE] = mxEdgeStyle.EntityRelation
+    // style[mxConstants.STYLE_EDGE] = mxEdgeStyle.EntityRelation
 
     // Enables rubberband selection
     new window.mxRubberband(graph)
@@ -138,6 +138,7 @@ export default class WorkflowDashboardView extends React.Component {
     const prevRects = prevProps.selectedWfRectGroup ? (prevProps.selectedWfRectGroup.rects || []) : []
     const rects = this.getRects()
     const check = this.needUpdateRects(prevRects, rects)
+    if (prevRects.length !== rects.length) console.log('Detected.')
     if (check.result) {
       console.log(`Change detected. Added: ${check.added.length} Updated: ${check.updated.length} Removed: ${check.removed.length}`)
       this.addGraphRects(check.added)
