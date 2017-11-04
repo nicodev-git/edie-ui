@@ -139,7 +139,7 @@ export const addGaugeBoard = (props) => {
   }
 }
 
-export const  updateGaugeBoard = (entity) => {
+export const updateGaugeBoard = (entity) => {
   return dispatch => {
     axios.put(entity._links.self.href, entity).then(res => {
       dispatch({type: UPDATE_GAUGE_BOARD, data: res.data})

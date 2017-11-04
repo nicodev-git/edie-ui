@@ -1,6 +1,6 @@
 import React from 'react'
 import {concat} from 'lodash'
-import {IconButton} from 'material-ui'
+import {IconButton, SelectField, MenuItem} from 'material-ui'
 import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
 import DeleteIcon from 'material-ui/svg-icons/action/delete'
 import InfoIcon from 'material-ui/svg-icons/action/info'
@@ -539,14 +539,32 @@ export default class WorkflowDashboardView extends React.Component {
 
   render () {
     return (
-      <div className="flex-1">
-        {this.renderMenu()}
-        {this.getRects().map(this.renderRect.bind(this))}
-        <div id="graph" className="graph-base" style={{width: '100%', height: '100%'}}></div>
-        {this.renderWfRectModal()}
-        {this.renderSearchModal()}
-        {this.renderEntityDetailModal()}
+      <div className="flex-vertical flex-1">
+        <div>
+          <SelectField
+            floatingLabelText="Group"
+            className="valign-top">
+            {this.props.wfRectGroups.map(p =>
+              <MenuItem key={p.id} value={p.id} primaryText={p.name}/>
+            )}
+          </SelectField>
+
+          <div className="pull-right text-right">
+            <IconButton onTouchTap={this.onClickAddItem.bind(this)}><AddCircleIcon/></IconButton>
+            <IconButton onTouchTap={this.onClickEditItem.bind(this)}><InfoIcon/></IconButton>
+            <IconButton onTouchTap={this.onClickDeleteItem.bind(this)}><DeleteIcon/></IconButton>
+          </div>
+        </div>
+        <div className="flex-1">
+          {this.renderMenu()}
+          {this.getRects().map(this.renderRect.bind(this))}
+          <div id="graph" className="graph-base" style={{width: '100%', height: '100%'}}></div>
+          {this.renderWfRectModal()}
+          {this.renderSearchModal()}
+          {this.renderEntityDetailModal()}
+        </div>
       </div>
+
     )
   }
 }

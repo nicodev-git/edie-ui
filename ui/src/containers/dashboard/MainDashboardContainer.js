@@ -57,7 +57,12 @@ import {
 
   showWfRectModal,
   showRectSearchModal,
-  showEntityDetailModal
+  showEntityDetailModal,
+
+  fetchWfRectGroups,
+  addWfRectGroup,
+  updateWfRectGroup,
+  removeWfRectGroup
 } from 'actions'
 
 class MainDashboardContainer extends React.Component {
@@ -108,7 +113,9 @@ export default connect(
     rectSearchModalOpen: state.dashboard.rectSearchModalOpen,
     rectSearchParams: state.dashboard.rectSearchParams,
     entityDetailModalOpen: state.search.entityDetailModalOpen,
-    detailEntity: state.search.detailEntity
+    detailEntity: state.search.detailEntity,
+
+    wfRectGroups: state.dashboard.wfRectGroups
   }), {
     fetchDevicesGroups,
     fetchMonitorGroups,
@@ -163,6 +170,11 @@ export default connect(
 
     showWfRectModal,
     showRectSearchModal,
-    showEntityDetailModal
+    showEntityDetailModal,
+
+    fetchWfRectGroups,
+    addWfRectGroup,
+    updateWfRectGroup,
+    removeWfRectGroup
   }
 )(withRouter(MainDashboardContainer))

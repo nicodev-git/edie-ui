@@ -311,7 +311,7 @@ export const addWfRectGroup = (props) => {
   }
 }
 
-export const  updateWfRectGroup = (entity) => {
+export const updateWfRectGroup = (entity) => {
   return dispatch => {
     axios.put(entity._links.self.href, entity).then(res => {
       dispatch({type: UPDATE_WFRECT_GROUP, data: res.data})
