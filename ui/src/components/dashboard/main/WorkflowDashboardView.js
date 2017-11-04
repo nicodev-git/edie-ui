@@ -43,7 +43,7 @@ export default class WorkflowDashboardView extends React.Component {
     // graph.maximumGraphBounds = new window.mxRectangle(0, 0, 1024, 768)
     // const graph = new window.mxGraph(document.getElementById('graphContainer'))
     editor.setMode('connect')
-    //editor.defaultEdge.style = 'straightEdge'
+    editor.defaultEdge.style = 'straightEdge'
 
     // Enables rubberband selection
     new window.mxRubberband(graph)
@@ -160,6 +160,7 @@ export default class WorkflowDashboardView extends React.Component {
     let style = {}
     style[mxConstants.STYLE_SHAPE] = 'wfRect'
     style[mxConstants.STYLE_FONTCOLOR] = '#ffffff'
+    style[mxConstants.STYLE_LABEL_BACKGROUNDCOLOR] = 'transparent'
     style[mxConstants.STYLE_FONTSIZE] = '15'
     style[mxConstants.STYLE_FONTSTYLE] = mxConstants.FONT_BOLD
     style[mxConstants.STYLE_ROUNDED] = 1

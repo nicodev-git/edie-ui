@@ -3,7 +3,7 @@
 	tasksWindowImage="images/tasks.gif"
 	forcedInserting="0"
 	swimlaneRequired="0">
-	<include name="config/editor-commons.xml"/>
+	<include name="/resources/plugins/mxgraph/config/editor-commons.xml"/>
 	<add as="onInit">
 		function ()
 		{
