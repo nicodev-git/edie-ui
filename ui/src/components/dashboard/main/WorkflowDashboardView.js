@@ -19,11 +19,6 @@ import EntityDetailModal from 'components/sidebar/search/EntityDetailModal'
 import WfRectGroupsModal from "./workflow/WfRectGroupsModal";
 
 export default class WorkflowDashboardView extends React.Component {
-  constructor (props) {
-    super(props)
-    this.state = {}
-    this.rectState = {}
-  }
   componentWillMount () {
     this.debUpdateBoard = debounce(this.updateBoard.bind(this), 2000)
     this.props.fetchWfRectGroups()
@@ -39,6 +34,7 @@ export default class WorkflowDashboardView extends React.Component {
 
     graph.minFitScale = 1
     graph.maxFitScale = 1
+    graph.autoExtend = 0
     graph.setCellsResizable(false)
     graph.setAllowDanglingEdges(false);
     // graph.maximumGraphBounds = new window.mxRectangle(0, 0, 1024, 768)
@@ -58,9 +54,9 @@ export default class WorkflowDashboardView extends React.Component {
     this.addGraphRects(this.getRects())
 
     // graph.zoomActual()
-    graph.fit()
-    graph.view.rendering = true
-    graph.refresh()
+    // graph.fit()
+    // graph.view.rendering = true
+    // graph.refresh()
 
     /////////////////////////
 
