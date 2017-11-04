@@ -2,6 +2,7 @@ import React from 'react'
 
 import WfRectGroupsModalView from './WfRectGroupsModalView'
 import {showAlert} from 'components/common/Alert'
+import {showPrompt} from "../../../common/Alert";
 
 export default class WfRectGroupsModal extends React.Component {
   constructor (props){
@@ -27,6 +28,14 @@ export default class WfRectGroupsModal extends React.Component {
     })
   }
 
+  onClickEdit () {
+    // showPrompt()
+  }
+
+  onClickDelete () {
+
+  }
+
   render () {
     const {onHide, wfRectGroups} = this.props
     return (
@@ -35,6 +44,8 @@ export default class WfRectGroupsModal extends React.Component {
         onChangeName={this.onChangeName.bind(this)}
         onHide={onHide}
         onClickAdd={this.onClickAdd.bind(this)}
+        onClickEdit={this.onClickEdit.bind(this)}
+        onClickDelete={this.onClickDelete.bind(this)}
         wfRectGroups={wfRectGroups}
       />
     )
