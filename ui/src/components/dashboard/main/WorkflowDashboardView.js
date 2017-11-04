@@ -2,6 +2,7 @@ import React from 'react'
 import {concat} from 'lodash'
 import {IconButton} from 'material-ui'
 import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
+import DeleteIcon from 'material-ui/svg-icons/action/delete'
 import InfoIcon from 'material-ui/svg-icons/action/info'
 import {debounce, findIndex} from 'lodash'
 
@@ -368,6 +369,11 @@ export default class WorkflowDashboardView extends React.Component {
     this.props.showWfRectModal(true, rect)
   }
 
+  onClickDeleteItem () {
+    const rect = this.getSelectedRect()
+    if (!rect) return showAlert('Please choose rect')
+  }
+
   ////////////////////
 
   onClickShowSearch (rect, good) {
@@ -445,6 +451,7 @@ export default class WorkflowDashboardView extends React.Component {
       <div className="text-right" style={{position: 'absolute', top: -45, right: 0}}>
         <IconButton onTouchTap={this.onClickAddItem.bind(this)}><AddCircleIcon/></IconButton>
         <IconButton onTouchTap={this.onClickEditItem.bind(this)}><InfoIcon/></IconButton>
+        <IconButton onTouchTap={this.onClickDeleteItem.bind(this)}><DeleteIcon/></IconButton>
       </div>
     )
   }
