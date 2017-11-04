@@ -1,4 +1,5 @@
 import axios from 'axios'
+import {findIndex} from 'lodash'
 import {
   UPDATE_DASHBOARD,
 
@@ -340,3 +341,46 @@ export const selectWfRectGroup = (group) => {
     dispatch({type: SELECT_WFRECT_GROUP, group})
   }
 }
+
+export const addGaugeRect = (props, board) => {
+  return dispatch => {
+    dispatch(updateWfRectGroup({
+      ...board,
+      rects: [...(board.rects || []), props]
+    }))
+  }
+}
+
+export const updateGaugeRect = (props, board, stateOnly) => {
+  return dispatch => {
+    const rects = (board.rects || []).map(p => {
+      if (props.length) {
+        const index = findIndex(props, {id: p.id})
+        return index < 0 ? p : props[index]
+      } else {
+        return p.id === props.id ? props : p
+      }
+    })
+
+    const data = {
+      ...board,
+      rects
+    }
+    if (stateOnly) {
+      dispatch({type: UPDATE_WFRECT_GROUP, data})
+    } else {
+      dispatch(updateWfRectGroup(data))
+    }
+
+  }
+}
+
+export const removeGaugeRect = (props, board) => {
+  return dispatch => {
+    dispatch(updateWfRectGroup({
+      ...board,
+      rects: (board.rects || []).filter(p => p.id !== props.id)
+    }))
+  }
+}
+

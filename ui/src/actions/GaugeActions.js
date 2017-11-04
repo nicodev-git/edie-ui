@@ -73,48 +73,6 @@ export const removeGaugeItem = (props, board) => {
   }
 }
 
-export const addGaugeRect = (props, board) => {
-  return dispatch => {
-    dispatch(updateGaugeBoard({
-      ...board,
-      rects: [...(board.rects || []), props]
-    }))
-  }
-}
-
-export const updateGaugeRect = (props, board, stateOnly) => {
-  return dispatch => {
-    const rects = (board.rects || []).map(p => {
-      if (props.length) {
-        const index = findIndex(props, {id: p.id})
-        return index < 0 ? p : props[index]
-      } else {
-        return p.id === props.id ? props : p
-      }
-    })
-
-    const data = {
-      ...board,
-      rects
-    }
-    if (stateOnly) {
-      dispatch({type: UPDATE_GAUGE_BOARD, data})
-    } else {
-      dispatch(updateGaugeBoard(data))
-    }
-
-  }
-}
-
-export const removeGaugeRect = (props, board) => {
-  return dispatch => {
-    dispatch(updateGaugeBoard({
-      ...board,
-      rects: (board.rects || []).filter(p => p.id !== props.id)
-    }))
-  }
-}
-
 export const fetchGaugeBoards = () => {
   return dispatch => {
     dispatch({type: FETCH_GAUGE_BOARDS, data: []})

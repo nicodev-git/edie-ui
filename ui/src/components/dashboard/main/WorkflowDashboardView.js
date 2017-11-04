@@ -20,7 +20,7 @@ import WfRectGroupsModal from "./workflow/WfRectGroupsModal";
 
 export default class WorkflowDashboardView extends React.Component {
   componentWillMount () {
-    this.debUpdateBoard = debounce(this.updateBoard.bind(this), 2000)
+    this.debUpdateGroup = debounce(this.updateGroup.bind(this), 2000)
     this.props.fetchWfRectGroups()
   }
 
@@ -50,14 +50,6 @@ export default class WorkflowDashboardView extends React.Component {
     //Register styles
     this.registerGraphStyles(graph)
 
-    // Adds cells to the model in a single step
-    this.addGraphRects(this.getRects())
-
-    // graph.zoomActual()
-    // graph.fit()
-    // graph.view.rendering = true
-    // graph.refresh()
-
     /////////////////////////
 
     graph.addListener(mxEvent.CELLS_MOVED, (sender, evt) => {
@@ -81,8 +73,8 @@ export default class WorkflowDashboardView extends React.Component {
 
         console.log(rect)
 
-        this.props.updateGaugeRect(rect, this.props.board, true)
-        this.debUpdateBoard()
+        this.props.updateGaugeRect(rect, this.props.selectedWfRectGroup, true)
+        this.debUpdateGroup()
       })
     })
 
@@ -118,8 +110,8 @@ export default class WorkflowDashboardView extends React.Component {
       }
 
       console.log(sourceRect)
-      this.props.updateGaugeRect(sourceRect, this.props.board, true)
-      this.debUpdateBoard()
+      this.props.updateGaugeRect(sourceRect, this.props.selectedWfRectGroup, true)
+      this.debUpdateGroup()
     })
 
     ///////////////////////////
@@ -143,7 +135,7 @@ export default class WorkflowDashboardView extends React.Component {
   }
 
   componentDidUpdate (prevProps) {
-    const prevRects = prevProps.board.rects || []
+    const prevRects = prevProps.selectedWfRectGroup ? (prevProps.selectedWfRectGroup.rects || []) : []
     const rects = this.getRects()
     const check = this.needUpdateRects(prevRects, rects)
     if (check.result) {
@@ -162,7 +154,7 @@ export default class WorkflowDashboardView extends React.Component {
 
     if (selectedWfRectGroup && (!prevProps.selectedWfRectGroup ||
         prevProps.selectedWfRectGroup.id !== selectedWfRectGroup.id)) {
-      
+      this.loadGroup(selectedWfRectGroup)
     }
   }
 
@@ -225,7 +217,27 @@ export default class WorkflowDashboardView extends React.Component {
     if (JSON.stringify(n) !== JSON.stringify(p)) return true
     return false
   }
+
   ///////////////////////////////////////////
+
+  loadGroup (group) {
+    this.clearGraph()
+    // Adds cells to the model in a single step
+    this.addGraphRects(this.getRects())
+
+    // graph.zoomActual()
+    // graph.fit()
+    // graph.view.rendering = true
+    // graph.refresh()
+  }
+
+  ///////////////////////////////////////////
+
+  clearGraph () {
+    const {graph} = this.editor
+    const cells = this.getAllGraphCells()
+    graph.removeCells(cells, true)
+  }
 
   addGraphRects (items) {
     const {graph} = this.editor
@@ -360,8 +372,8 @@ export default class WorkflowDashboardView extends React.Component {
   }
 
   ///////////////////////////////////////////
-  updateBoard () {
-    this.props.updateGaugeBoard(this.props.board)
+  updateGroup () {
+    this.props.updateWfRectGroup(this.props.selectedWfRectGroup)
   }
 
   getUserSearchOptions () {
@@ -393,7 +405,10 @@ export default class WorkflowDashboardView extends React.Component {
   }
 
   getRects () {
-    return this.props.board.rects || []
+    const {selectedWfRectGroup} = this.props
+    if (!selectedWfRectGroup) return []
+
+    return selectedWfRectGroup.rects || []
   }
 
   findRect (id) {
@@ -421,9 +436,9 @@ export default class WorkflowDashboardView extends React.Component {
         x: 100, y: 100,
         lines: []
       }
-      this.props.addGaugeRect(params, this.props.board)
+      this.props.addGaugeRect(params, this.props.selectedWfRectGroup)
     } else {
-      this.props.updateGaugeRect(params, this.props.board)
+      this.props.updateGaugeRect(params, this.props.selectedWfRectGroup)
     }
   }
 
@@ -450,7 +465,7 @@ export default class WorkflowDashboardView extends React.Component {
 
       showConfirm('Are you sure you want to remove?', btn => {
         if (btn !== 'ok') return
-        this.props.removeGaugeRect(rect, this.props.board)
+        this.props.removeGaugeRect(rect, this.props.selectedWfRectGroup)
       })
     } else if (cell.edge) {
       if (cell.source && cell.target) {
@@ -463,7 +478,7 @@ export default class WorkflowDashboardView extends React.Component {
             lines: source.map.lines.filter(p => p.id !== cell.target.userData.id)
           }
         }
-        this.props.updateGaugeRect(source, this.props.board)
+        this.props.updateGaugeRect(source, this.props.selectedWfRectGroup)
       }
     }
   }
