@@ -112,10 +112,10 @@ export default class WorkflowDashboardView extends React.Component {
     ///////////////////////////
 
     graph.addListener(mxEvent.CLICK, (sender, evt) => {
-      // const e = evt.getProperty('event'); // mouse event
+      const e = evt.getProperty('event'); // mouse event
       const cell = evt.getProperty('cell'); // cell may be null
 
-      if (cell != null ) {
+      if (cell != null && e.currentTarget.textContent) {
         if (cell.userData) {
           evt.consume();
           const rect = this.findRect(cell.userData.id)

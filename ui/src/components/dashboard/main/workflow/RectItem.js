@@ -53,23 +53,13 @@ export default class RectItem extends React.Component {
     })
 
     const params = {
-      q: searchParams.query || '',
-      from: searchParams.from,
-      to: searchParams.to,
-      types: searchParams.types,
-      collections: searchParams.collections,
-      severity: searchParams.severity,
+      ...searchParams,
       page: 0,
       size: 1,
       draw: 1
     }
 
-    return axios.get(`${ROOT_URL}/search/query?${encodeUrlParams(params)}`)/*.then(res => {
-      cb(res.data.page.totalElements)
-    }).catch(() => {
-      cb(0)
-    })
-    return true*/
+    return axios.get(`${ROOT_URL}/search/query?${encodeUrlParams(params)}`)
   }
 
   fetchResult () {
@@ -78,7 +68,7 @@ export default class RectItem extends React.Component {
     const goodSearch = goodId ? this.getSearch(goodId) : null
     const badSearch = badId ? this.getSearch(badId) : null
 
-    if (!goodSearch && !badSearch) return
+    if (!goodSearch || !badSearch) return
 
     axios.all([
       this.getSearchResult(badSearch),
@@ -89,6 +79,8 @@ export default class RectItem extends React.Component {
 
       this.setState({bad, good}, this.notifyUpdate.bind(this))
     }))
+
+    this.setState({fetched: true})
   }
 
   getColor () {
