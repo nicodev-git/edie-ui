@@ -1,8 +1,7 @@
 import React from 'react'
 
 import WfRectGroupsModalView from './WfRectGroupsModalView'
-import {showAlert} from 'components/common/Alert'
-import {showPrompt} from "../../../common/Alert";
+import {showAlert, showPrompt, showConfirm} from 'components/common/Alert'
 
 export default class WfRectGroupsModal extends React.Component {
   constructor (props){
@@ -28,12 +27,20 @@ export default class WfRectGroupsModal extends React.Component {
     })
   }
 
-  onClickEdit () {
-    // showPrompt()
+  onClickEdit (group) {
+    showPrompt('Please type name', group.name, name => {
+      this.props.updateWfRectGroup({
+        ...group,
+        name
+      })
+    })
   }
 
-  onClickDelete () {
-
+  onClickDelete (group) {
+    showConfirm('Are you sure?', btn => {
+      if (btn !== 'ok') return
+      this.props.removeWfRectGroup(group)
+    })
   }
 
   render () {
