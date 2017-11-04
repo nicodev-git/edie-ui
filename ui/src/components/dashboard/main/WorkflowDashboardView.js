@@ -441,9 +441,15 @@ export default class WorkflowDashboardView extends React.Component {
       })
     } else if (cell.edge) {
       if (cell.source && cell.target) {
-        const source = this.findRect(cell.source.userData.id)
+        let source = this.findRect(cell.source.userData.id)
         if (!source) return
-        source.map.lines = source.map.lines.filter(p => p.id !== cell.target.userData.id)
+        source = {
+          ...source,
+          map: {
+            ...source.map,
+            lines: source.map.lines.filter(p => p.id !== cell.target.userData.id)
+          }
+        }
         this.props.updateGaugeRect(source, this.props.board)
       }
     }
