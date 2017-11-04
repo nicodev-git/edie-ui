@@ -476,6 +476,11 @@ export const SHOW_GAUGE_PICKER = 'SHOW_GAUGE_PICKER'
 export const SHOW_WFRECT_MODAL = 'SHOW_WFRECT_MODAL'
 export const SHOW_RECT_SEARCH_MODAL = 'SHOW_RECT_SEARCH_MODAL'
 
+export const FETCH_WFRECT_GROUPS = 'FETCH_WFRECT_GROUPS'
+export const ADD_WFRECT_GROUP = 'ADD_WFRECT_GROUP'
+export const UPDATE_WFRECT_GROUP = 'UPDATE_WFRECT_GROUP'
+export const REMOVE_WFRECT_GROUP = 'REMOVE_WFRECT_GROUP'
+
 ///////////////////////////////////////////////////////////////
 
 export const FETCH_MONITOR_GROUPS = 'FETCH_MONITOR_GROUPS'

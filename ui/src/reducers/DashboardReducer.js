@@ -74,6 +74,11 @@ import {
   SHOW_WFRECT_MODAL,
   SHOW_RECT_SEARCH_MODAL,
 
+  FETCH_WFRECT_GROUPS,
+  ADD_WFRECT_GROUP,
+  UPDATE_WFRECT_GROUP,
+  REMOVE_WFRECT_GROUP,
+
   API_ERROR
 } from 'actions/types'
 
@@ -337,6 +342,15 @@ export default function (state = initialState, action) {
 
     case SHOW_RECT_SEARCH_MODAL:
       return { ...state, rectSearchModalOpen: action.visible, rectSearchParams: action.params }
+
+    case FETCH_WFRECT_GROUPS:
+      return { ...state, wfRectGroups: action.data }
+    case ADD_WFRECT_GROUP:
+      return { ...state, wfRectGroups: [...state.wfRectGroups, action.data]}
+    case UPDATE_WFRECT_GROUP:
+      return { ...state, wfRectGroups: state.wfRectGroups.map(p => p.id === action.data.id ? action.data : p) }
+    case REMOVE_WFRECT_GROUP:
+      return { ...state, wfRectGroups: state.wfRectGroups.filter(p => p.id !== action.data.id) }
     default:
       return state
   }

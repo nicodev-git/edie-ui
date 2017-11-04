@@ -43,6 +43,11 @@ import {
   SHOW_WFRECT_MODAL,
   SHOW_RECT_SEARCH_MODAL,
 
+  FETCH_WFRECT_GROUPS,
+  ADD_WFRECT_GROUP,
+  UPDATE_WFRECT_GROUP,
+  REMOVE_WFRECT_GROUP,
+
   NO_AUTH_ERROR
 } from './types'
 
@@ -276,6 +281,8 @@ export const showMonitorDetailModal = (visible, monitor, device) => {
   }
 }
 
+/////////////////////////////////////////////////
+
 export const showWfRectModal = (visible, data) => {
   return dispatch => {
     dispatch({type: SHOW_WFRECT_MODAL, visible, data})
@@ -287,3 +294,36 @@ export const showRectSearchModal = (visible, params) => {
     dispatch({type: SHOW_RECT_SEARCH_MODAL, visible, params})
   }
 }
+
+export const fetchWfRectGroups = () => {
+  return (dispatch) => {
+    axios.get(`${ROOT_URL}/workflowrectgroup?size=1000`).then(response => {
+      dispatch({type: FETCH_WFRECT_GROUPS, data: response.data._embedded.workflowRectGroups})
+    }).catch(error => apiError(dispatch, error))
+  }
+}
+
+export const addWfRectGroup = (props) => {
+  return dispatch => {
+    axios.post(`${ROOT_URL}/workflowrectgroup`, props).then(res => {
+      dispatch({type: ADD_WFRECT_GROUP, data: res.data})
+    })
+  }
+}
+
+export const  updateWfRectGroup = (entity) => {
+  return dispatch => {
+    axios.put(entity._links.self.href, entity).then(res => {
+      dispatch({type: UPDATE_WFRECT_GROUP, data: res.data})
+    })
+  }
+}
+
+export const removeWfRectGroup = (entity) => {
+  return dispatch => {
+    axios.delete(entity._links.self.href, entity).then(() => {
+      dispatch({type: REMOVE_WFRECT_GROUP, data: entity})
+    })
+  }
+}
+
