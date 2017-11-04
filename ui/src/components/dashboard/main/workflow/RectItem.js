@@ -41,6 +41,7 @@ export default class RectItem extends React.Component {
   }
 
   getSearchResult (search, cb) {
+    if (!search) return true
     const {workflows, devices, allDevices} = this.props
 
     const data = JSON.parse(search.data)
@@ -63,12 +64,12 @@ export default class RectItem extends React.Component {
       draw: 1
     }
 
-    axios.get(`${ROOT_URL}/search/query?${encodeUrlParams(params)}`).then(res => {
+    return axios.get(`${ROOT_URL}/search/query?${encodeUrlParams(params)}`)/*.then(res => {
       cb(res.data.page.totalElements)
     }).catch(() => {
       cb(0)
     })
-    return true
+    return true*/
   }
 
   fetchResult () {
@@ -79,21 +80,15 @@ export default class RectItem extends React.Component {
 
     if (!goodSearch && !badSearch) return
 
-    if (badSearch) {
-      this.getSearchResult(badSearch, count => {
-        this.setState({bad: count}, this.notifyUpdate.bind(this))
-      })
-    }
+    axios.all([
+      this.getSearchResult(badSearch),
+      this.getSearchResult(goodSearch)
+    ]).then(axios.spread((res1, res2) => {
+      const bad = res1.data ? res1.data.page.totalElements : 0
+      const good = res2.data ? res2.data.page.totalElements : 0
 
-    if (goodSearch) {
-      this.getSearchResult(goodSearch, count => {
-        this.setState({good: count}, this.notifyUpdate.bind(this))
-      })
-    }
-
-    this.setState({
-      fetched: true
-    })
+      this.setState({bad, good}, this.notifyUpdate.bind(this))
+    }))
   }
 
   getColor () {
