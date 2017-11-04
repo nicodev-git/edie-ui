@@ -10,7 +10,7 @@ import WfRectModal from './workflow/WfRectModal'
 import RectItem from './workflow/RectItem'
 
 import {guid, severities, queryDateFormat, collections} from 'shared/Global'
-import {showAlert} from 'components/common/Alert'
+import {showAlert, showConfirm} from 'components/common/Alert'
 import RectSearchModal from './workflow/RectSearchModal'
 
 import {buildServiceParams} from 'util/Query'
@@ -174,7 +174,7 @@ export default class WorkflowDashboardView extends React.Component {
   needUpdateRects(prevRects, rects) {
     const added = []
     const updated = []
-    const removed = prevRects.filter(p => rects.filter(n => n.id === p.id) === 0)
+    const removed = prevRects.filter(p => rects.filter(n => n.id === p.id).length === 0)
 
     rects.forEach(n => {
       const found = prevRects.filter(p => p.id === n.id)
@@ -372,6 +372,11 @@ export default class WorkflowDashboardView extends React.Component {
   onClickDeleteItem () {
     const rect = this.getSelectedRect()
     if (!rect) return showAlert('Please choose rect')
+
+    showConfirm('Are you sure you want to remove?', btn => {
+      if (btn !== 'ok') return
+      this.props.removeGaugeRect(rect, this.props.board)
+    })
   }
 
   ////////////////////
