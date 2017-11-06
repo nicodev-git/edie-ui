@@ -25,22 +25,22 @@ export default class RectItem extends React.Component {
     this.startTimer()
   }
 
-  componentDidUpdate (prevProps, prevState) {
-    const {searchList} = prevProps
-    const {rect, paramName, paramValue} = this.props
-
-    if (prevProps.rect.interval !== rect.interval || prevProps.rect.intervalUnit !== rect.intervalUnit) {
-      this.stopTimer()
-      this.startTimer()
-    }
-    if (JSON.stringify(prevProps.rect) !== JSON.stringify(this.props.rect)) {
-      this.fetchResult()
-    } else if (!this.state.fetched && searchList && JSON.stringify(this.props.searchList) !== JSON.stringify(searchList)) {
-      this.fetchResult()
-    } else if (prevProps.paramName !== paramName || prevProps.paramValue !== paramValue) {
-      if (paramName || prevProps.paramName) this.debFetchResult()
-    }
-  }
+  // componentDidUpdate (prevProps, prevState) {
+  //   const {searchList} = prevProps
+  //   const {rect, paramName, paramValue} = this.props
+  //
+  //   if (prevProps.rect.interval !== rect.interval || prevProps.rect.intervalUnit !== rect.intervalUnit) {
+  //     this.stopTimer()
+  //     this.startTimer()
+  //   }
+  //   if (JSON.stringify(prevProps.rect) !== JSON.stringify(this.props.rect)) {
+  //     this.fetchResult()
+  //   } else if (!this.state.fetched && searchList && JSON.stringify(this.props.searchList) !== JSON.stringify(searchList)) {
+  //     this.fetchResult()
+  //   } else if (prevProps.paramName !== paramName || prevProps.paramValue !== paramValue) {
+  //     if (paramName || prevProps.paramName) this.debFetchResult()
+  //   }
+  // }
 
   componentWillUnmount () {
     this.stopTimer()
@@ -105,14 +105,7 @@ export default class RectItem extends React.Component {
   ////////////////////////////////////////////////////////////
 
   startTimer () {
-    const {interval, intervalUnit} = this.props.rect
-    let delay = interval * 1000
-    if (intervalUnit === 'min') delay *= 60
-    else if (intervalUnit === 'hour') delay *= 3600
-
-    if (delay < 1) delay = 2000
-
-    this.timer = setInterval(this.fetchResult.bind(this, true), delay)
+    this.timer = setInterval(this.fetchResult.bind(this, true), 3000)
   }
 
   stopTimer () {
