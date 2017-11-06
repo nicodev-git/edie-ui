@@ -475,10 +475,7 @@ class GenericSearch extends React.Component {
   }
 
   onUpdateLoading (loading, page) {
-    if (page === 1 || !loading) {
-      this.setState({loading})
-    }
-
+    this.setState({loading})
   }
 
   onClickIllustrate () {
@@ -994,7 +991,7 @@ class GenericSearch extends React.Component {
                       rowMetadata={{'key': 'id'}}
                       onRowDblClick={this.onRowDblClick.bind(this)}
                       params={this.getServiceParams()}
-                      pageSize={10}
+                      pageSize={20}
                       showTableHeading={false}
                       onUpdateCount={this.onResultCountUpdate.bind(this)}
                       onUpdateLoading={this.onUpdateLoading.bind(this)}
