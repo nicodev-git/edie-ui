@@ -97,10 +97,11 @@ export default class RectItem extends React.Component {
 
   startTimer () {
     const {interval, intervalUnit} = this.props.rect
-    if (interval < 1) return
     let delay = interval * 1000
     if (intervalUnit === 'min') delay *= 60
     else if (intervalUnit === 'hour') delay *= 3600
+
+    if (delay < 1) delay = 2000
 
     this.timer = setInterval(this.fetchResult.bind(this, true), delay)
   }
