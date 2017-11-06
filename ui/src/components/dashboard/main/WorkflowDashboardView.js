@@ -86,6 +86,8 @@ export default class WorkflowDashboardView extends React.Component {
       const sourceId = edge.source.userData.id
       const destId = edge.target.userData.id
 
+      graph.getModel().setValue(edge, '')
+
       let sourceRect = this.findRect(sourceId)
       if (!sourceRect) {
         console.log(`Rect not found: ${sourceId}`)
