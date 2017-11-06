@@ -44,7 +44,7 @@ export default class IncidentSocket {
           console.log('Socket Retrying To Connect...')
           setTimeout(() => {
             me.connect(cb)
-          }, 3000)
+          }, 10000)
         }
       })
     } catch (e) {
