@@ -1,6 +1,7 @@
 import React from 'react'
 import {findIndex} from 'lodash'
 import axios from 'axios'
+import moment from 'moment'
 
 import { ROOT_URL } from 'actions/config'
 import {buildServiceParams} from 'util/Query'
@@ -52,7 +53,7 @@ export default class RectItem extends React.Component {
 
   getSearchResult (search, cb) {
     if (!search) return true
-    const {workflows, devices, allDevices, paramName, paramValue} = this.props
+    const {workflows, devices, allDevices, paramName, paramValue, rect} = this.props
 
     const data = JSON.parse(search.data)
     const searchParams = buildServiceParams(data, {
@@ -68,6 +69,9 @@ export default class RectItem extends React.Component {
       size: 1,
       draw: 1
     }
+
+    params.to = new Date().getTime()
+    params.from = moment().subtract(rect.interval, rect.intervalUnit).valueOf()
 
     if (paramName) {
       params.q = params.q.replace(

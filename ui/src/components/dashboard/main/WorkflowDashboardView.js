@@ -5,6 +5,7 @@ import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
 import DeleteIcon from 'material-ui/svg-icons/action/delete'
 import InfoIcon from 'material-ui/svg-icons/action/info'
 import {debounce, findIndex} from 'lodash'
+import moment from 'moment'
 
 import WfRectModal from './workflow/WfRectModal'
 import RectItem from './workflow/RectItem'
@@ -513,6 +514,9 @@ export default class WorkflowDashboardView extends React.Component {
       allDevices: devices || allDevices,
       queryDateFormat
     })
+
+    searchParams.to = new Date().getTime()
+    searchParams.from = moment().subtract(rect.interval, rect.intervalUnit).valueOf()
 
     if (paramName) {
       searchParams.q = searchParams.q.replace(
