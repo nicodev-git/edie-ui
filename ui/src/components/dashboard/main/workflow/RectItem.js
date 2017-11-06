@@ -19,17 +19,23 @@ export default class RectItem extends React.Component {
     }
   }
   componentWillMount () {
+    this.fetchResult()
     this.startTimer()
   }
 
   componentDidUpdate (prevProps, prevState) {
-    // const {searchList} = prevProps
+    const {searchList} = prevProps
+    const {rect} = this.props
 
-    // if (JSON.stringify(prevProps.rect) !== JSON.stringify(this.props.rect)) {
-    //   this.fetchResult()
-    // } else if (!this.state.fetched && searchList && JSON.stringify(this.props.searchList) !== JSON.stringify(searchList)) {
-    //   this.fetchResult()
-    // }
+    if (prevProps.rect.interval !== rect.interval || prevProps.rect.intervalUnit !== rect.intervalUnit) {
+      this.stopTimer()
+      this.startTimer()
+    }
+    if (JSON.stringify(prevProps.rect) !== JSON.stringify(this.props.rect)) {
+      this.fetchResult()
+    } else if (!this.state.fetched && searchList && JSON.stringify(this.props.searchList) !== JSON.stringify(searchList)) {
+      this.fetchResult()
+    }
   }
 
   componentWillUnmount () {
@@ -90,7 +96,13 @@ export default class RectItem extends React.Component {
   ////////////////////////////////////////////////////////////
 
   startTimer () {
-    this.timer = setInterval(this.fetchResult.bind(this, true), 5000)
+    const {interval, intervalUnit} = this.props.rect
+    if (interval < 1) return
+    let delay = interval * 1000
+    if (intervalUnit === 'min') delay *= 60
+    else if (intervalUnit === 'hour') delay *= 3600
+
+    this.timer = setInterval(this.fetchResult.bind(this, true), delay)
   }
 
   stopTimer () {
