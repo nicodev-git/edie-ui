@@ -202,10 +202,10 @@ export default class WorkflowDashboardView extends React.Component {
   needUpdateRects(prevRects, rects) {
     const added = []
     const updated = []
-    const removed = prevRects.filter(p => rects.filter(n => n.id === p.id).length === 0)
+    const removed = prevRects.filter(p => rects.filter(n => n.uid === p.uid).length === 0)
 
     rects.forEach(n => {
-      const found = prevRects.filter(p => p.id === n.id)
+      const found = prevRects.filter(p => p.uid === n.uid)
       if (found.length) {
         const p = found[0]
         if (this.isRectDifferent(n, p)) {
@@ -262,7 +262,7 @@ export default class WorkflowDashboardView extends React.Component {
         const v = graph.insertVertex(parent, null,
           p.name, map.x || 10, map.y || 10, 135, 135, 'box-gray')
         v.userData = {
-          id: p.id
+          id: p.uid
         }
 
         vertices.push(v)
@@ -272,7 +272,7 @@ export default class WorkflowDashboardView extends React.Component {
         const map = p.map || {}
         if (!map.lines) return
         map.lines.forEach(t => {
-          const targetIndex = findIndex(items, {id: t.id})
+          const targetIndex = findIndex(items, {uid: t.id})
           if (targetIndex < 0) return
 
           const target = vertices[targetIndex]
@@ -295,7 +295,7 @@ export default class WorkflowDashboardView extends React.Component {
     try {
       const cells = this.getAllGraphCells()
       rects.forEach(p => {
-        const cell = this.findGraphCell(p.id, cells)
+        const cell = this.findGraphCell(p.uid, cells)
         if (!cell) return
 
         graph.getModel().setValue(cell, p.name)
@@ -336,7 +336,7 @@ export default class WorkflowDashboardView extends React.Component {
     try {
       const cells = this.getAllGraphCells()
       rects.forEach(p => {
-        const cell = this.findGraphCell(p.id, cells)
+        const cell = this.findGraphCell(p.uid, cells)
         if (!cell) return
 
         graph.getModel().remove(cell)
@@ -420,9 +420,9 @@ export default class WorkflowDashboardView extends React.Component {
     return selectedWfRectGroup.rects || []
   }
 
-  findRect (id) {
+  findRect (uid) {
     const rects = this.getRects()
-    const index = findIndex(rects, {id})
+    const index = findIndex(rects, {uid})
     if (index < 0) return null
 
     return rects[index]
@@ -439,15 +439,16 @@ export default class WorkflowDashboardView extends React.Component {
   }
 
   onSaveWfRect (params) {
-    if (!params.id) {
-      params.id = guid()
+    if (!params.uid) {
+      params.uid = guid()
       params.map = {
         x: 100, y: 100,
         lines: []
       }
       this.props.addGaugeRect(params, this.props.selectedWfRectGroup)
     } else {
-      this.props.updateGaugeRect(params, this.props.selectedWfRectGroup)
+      this.props.updateGaugeRect(params, this.props.selectedWfRectGroup, true)
+      this.debUpdateGroup()
     }
   }
 
@@ -474,7 +475,8 @@ export default class WorkflowDashboardView extends React.Component {
 
       showConfirm('Are you sure you want to remove?', btn => {
         if (btn !== 'ok') return
-        this.props.removeGaugeRect(rect, this.props.selectedWfRectGroup)
+        this.props.removeGaugeRect(rect, this.props.selectedWfRectGroup, true)
+        this.debUpdateGroup()
       })
     } else if (cell.edge) {
       if (cell.source && cell.target) {
@@ -487,7 +489,8 @@ export default class WorkflowDashboardView extends React.Component {
             lines: source.map.lines.filter(p => p.id !== cell.target.userData.id)
           }
         }
-        this.props.updateGaugeRect(source, this.props.selectedWfRectGroup)
+        this.props.updateGaugeRect(source, this.props.selectedWfRectGroup, true)
+        this.debUpdateGroup()
       }
     }
   }
@@ -554,7 +557,7 @@ export default class WorkflowDashboardView extends React.Component {
     return (
       <RectItem
         {...this.props}
-        key={rect.id || index}
+        key={rect.uid || index}
         rect={rect}
         searchList={this.getSearchList()}
         onUpdateColor={this.onUpdateRectState.bind(this)}

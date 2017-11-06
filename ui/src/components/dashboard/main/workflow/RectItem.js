@@ -1,5 +1,5 @@
 import React from 'react'
-import {findIndex} from 'lodash'
+import {findIndex, debounce} from 'lodash'
 import axios from 'axios'
 
 // import AppletCard from 'components/common/AppletCard'
@@ -17,6 +17,8 @@ export default class RectItem extends React.Component {
       bad: 0,
       fetched: false
     }
+
+    this.debFetchResult = debounce(this.fetchResult.bind(this), 2500)
   }
   componentWillMount () {
     this.fetchResult()
@@ -25,7 +27,7 @@ export default class RectItem extends React.Component {
 
   componentDidUpdate (prevProps, prevState) {
     const {searchList} = prevProps
-    const {rect} = this.props
+    const {rect, paramName, paramValue} = this.props
 
     if (prevProps.rect.interval !== rect.interval || prevProps.rect.intervalUnit !== rect.intervalUnit) {
       this.stopTimer()
@@ -35,6 +37,8 @@ export default class RectItem extends React.Component {
       this.fetchResult()
     } else if (!this.state.fetched && searchList && JSON.stringify(this.props.searchList) !== JSON.stringify(searchList)) {
       this.fetchResult()
+    } else if (prevProps.paramName !== paramName || prevProps.paramValue !== paramValue) {
+      if (paramName || prevProps.paramName) this.debFetchResult()
     }
   }
 
@@ -52,7 +56,7 @@ export default class RectItem extends React.Component {
 
   getSearchResult (search, cb) {
     if (!search) return true
-    const {workflows, devices, allDevices} = this.props
+    const {workflows, devices, allDevices, paramName, paramValue} = this.props
 
     const data = JSON.parse(search.data)
     const searchParams = buildServiceParams(data, {
@@ -67,6 +71,11 @@ export default class RectItem extends React.Component {
       page: 0,
       size: 1,
       draw: 1
+    }
+
+    if (paramName) {
+      params.q = params.q.replace(
+        new RegExp(`\\$${paramName}`, 'i'), paramValue)
     }
 
     return axios.get(`${ROOT_URL}/search/query?${encodeUrlParams(params)}`)
@@ -123,7 +132,7 @@ export default class RectItem extends React.Component {
   notifyUpdate () {
     const {good, bad} = this.state
     const {onUpdateColor, rect} = this.props
-    onUpdateColor && onUpdateColor(rect.id, good, bad)
+    onUpdateColor && onUpdateColor(rect.uid, good, bad)
   }
 
   render () {

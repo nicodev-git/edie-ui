@@ -355,10 +355,10 @@ export const updateGaugeRect = (props, board, stateOnly) => {
   return dispatch => {
     const rects = (board.rects || []).map(p => {
       if (props.length) {
-        const index = findIndex(props, {id: p.id})
+        const index = findIndex(props, {uid: p.uid})
         return index < 0 ? p : props[index]
       } else {
-        return p.id === props.id ? props : p
+        return p.uid === props.uid ? props : p
       }
     })
 
@@ -375,12 +375,16 @@ export const updateGaugeRect = (props, board, stateOnly) => {
   }
 }
 
-export const removeGaugeRect = (props, board) => {
+export const removeGaugeRect = (props, board, stateOnly) => {
   return dispatch => {
-    dispatch(updateWfRectGroup({
+    const data = {
       ...board,
-      rects: (board.rects || []).filter(p => p.id !== props.id)
-    }))
+      rects: (board.rects || []).filter(p => p.uid !== props.uid)
+    }
+    if (stateOnly)
+      dispatch({type: UPDATE_WFRECT_GROUP, data})
+    else
+      dispatch(updateWfRectGroup(data))
   }
 }
 
