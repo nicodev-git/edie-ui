@@ -146,7 +146,6 @@ export default class WorkflowDashboardView extends React.Component {
     const prevRects = prevProps.selectedWfRectGroup ? (prevProps.selectedWfRectGroup.rects || []) : []
     const rects = this.getRects()
     const check = this.needUpdateRects(prevRects, rects)
-    if (prevRects.length !== rects.length) console.log('Detected.')
     if (check.result) {
       console.log(`Change detected. Added: ${check.added.length} Updated: ${check.updated.length} Removed: ${check.removed.length}`)
       this.addGraphRects(check.added)

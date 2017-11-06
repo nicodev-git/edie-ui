@@ -34,7 +34,11 @@ const WfRectModalForm = reduxForm({form: 'wfRectForm'})(WfRectModal)
 
 export default connect(
   state => ({
-    initialValues: state.dashboard.editWfRect
+    initialValues: {
+      interval: 2,
+      intervalUnit: 'sec',
+      ...state.dashboard.editWfRect
+    }
   })
 )(WfRectModalForm)
 
