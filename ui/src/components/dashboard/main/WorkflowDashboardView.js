@@ -1,9 +1,9 @@
 import React from 'react'
 import {concat} from 'lodash'
-import {IconButton, SelectField, MenuItem, TextField, RaisedButton} from 'material-ui'
+import {IconButton, SelectField, MenuItem, TextField} from 'material-ui'
 import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
 import DeleteIcon from 'material-ui/svg-icons/action/delete'
-// import InfoIcon from 'material-ui/svg-icons/action/info'
+import AssignIcon from 'material-ui/svg-icons/action/assessment'
 import {debounce, findIndex} from 'lodash'
 import moment from 'moment'
 
@@ -215,12 +215,7 @@ export default class WorkflowDashboardView extends React.Component {
       [mxConstants.STYLE_SHAPE]: mxConstants.SHAPE_IMAGE,
       [mxConstants.STYLE_PERIMETER]: mxPerimeter.RectanglePerimeter,
       [mxConstants.STYLE_IMAGE]: '/resources/images/dashboard/info.png',
-      [mxConstants.STYLE_MOVABLE]: 0,
-
-      [mxConstants.STYLE_STROKECOLOR]: 'none',
-      [mxConstants.STYLE_STROKEWIDTH]: 0,
-
-      [mxConstants.CURSOR_MOVABLE_VERTEX]: 'pointer'
+      [mxConstants.STYLE_MOVABLE]: 0
     })
   }
 
@@ -301,6 +296,7 @@ export default class WorkflowDashboardView extends React.Component {
         const infoBtn = graph.insertVertex(v, null, '', RECT_W - 28, RECT_H - 28, 24, 24, 'info-button')
         infoBtn.setConnectable(false)
         infoBtn.userData = v.userData
+        infoBtn.cursor = 'pointer'
 
         ///////////////////
 
@@ -687,11 +683,7 @@ export default class WorkflowDashboardView extends React.Component {
 
           <IconButton onTouchTap={this.onClickShowGroups.bind(this)}><AddCircleIcon/></IconButton>
 
-          <TextField name="paramValue"
-                     value={this.state.paramValue}
-                     hintText={this.state.paramName || 'Value'}
-                     onChange={this.onChangeParamValue.bind(this)} className="valign-top margin-lg-left"/>
-          <RaisedButton label="Set" className="valign-top margin-sm-left margin-xs-top" onTouchTap={this.onClickParamSet.bind(this)}/>
+
 
           <div className="pull-right text-right">
             <IconButton onTouchTap={this.onClickAddItem.bind(this)}><AddCircleIcon/></IconButton>
@@ -701,6 +693,23 @@ export default class WorkflowDashboardView extends React.Component {
         <div className="flex-1">
           {this.getRects().map(this.renderRect.bind(this))}
           <div id="graph" className="graph-base" style={{width: '100%', height: '100%'}}></div>
+
+          <div style={{position: 'absolute', left: 20, top: 5}}>
+            <TextField name="paramValue"
+                       value={this.state.paramValue}
+                       hintText={this.state.paramName || 'Value'}
+                       onChange={this.onChangeParamValue.bind(this)}
+                       className="valign-top margin-lg-left"
+                       style={{width: 160}}
+            />
+            <IconButton
+              style={{marginLeft: -40}}
+              className="valign-top margin-xs-top"
+              onTouchTap={this.onClickParamSet.bind(this)}>
+              <AssignIcon/>
+            </IconButton>
+          </div>
+
           {this.renderWfRectModal()}
           {this.renderSearchModal()}
           {this.renderEntityDetailModal()}
