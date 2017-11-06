@@ -5,11 +5,13 @@ import { FormInput, FormSelect, SubmitBlock } from 'components/modal/parts'
 import {Modal, CardPanel} from 'components/modal/parts'
 
 const units = [{
-  label: 'Secs', value: 'sec'
+  label: 'Minutes', value: 'm'
 }, {
-  label: 'Minutes', value: 'min'
+  label: 'Hours', value: 'h'
 }, {
-  label: 'Hours', value: 'hour'
+  label: 'Days', value: 'd'
+}, {
+  label: 'Months', value: 'M'
 }]
 
 export default class WfRectModalView extends React.Component {

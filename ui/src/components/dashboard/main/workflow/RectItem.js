@@ -1,8 +1,6 @@
 import React from 'react'
-import {findIndex, debounce} from 'lodash'
+import {findIndex} from 'lodash'
 import axios from 'axios'
-
-// import AppletCard from 'components/common/AppletCard'
 
 import { ROOT_URL } from 'actions/config'
 import {buildServiceParams} from 'util/Query'
@@ -17,8 +15,6 @@ export default class RectItem extends React.Component {
       bad: 0,
       fetched: false
     }
-
-    this.debFetchResult = debounce(this.fetchResult.bind(this), 2500)
   }
   componentWillMount () {
     this.fetchResult()
