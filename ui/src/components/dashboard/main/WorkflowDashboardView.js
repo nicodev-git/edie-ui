@@ -1,6 +1,6 @@
 import React from 'react'
 import {concat} from 'lodash'
-import {IconButton, SelectField, MenuItem} from 'material-ui'
+import {IconButton, SelectField, MenuItem, TextField} from 'material-ui'
 import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
 import DeleteIcon from 'material-ui/svg-icons/action/delete'
 import InfoIcon from 'material-ui/svg-icons/action/info'
@@ -19,6 +19,12 @@ import EntityDetailModal from 'components/sidebar/search/EntityDetailModal'
 import WfRectGroupsModal from "./workflow/WfRectGroupsModal";
 
 export default class WorkflowDashboardView extends React.Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      query: ''
+    }
+  }
   componentWillMount () {
     this.debUpdateGroup = debounce(this.updateGroup.bind(this), 2000)
     this.props.fetchWfRectGroups()
@@ -525,6 +531,14 @@ export default class WorkflowDashboardView extends React.Component {
     this.props.selectWfRectGroup(wfRectGroups[index])
   }
 
+  /////////////////////
+
+  onChangeQuery (e, value) {
+    this.setState({
+      query: value
+    })
+  }
+
   ////////////////////
   renderRect (rect, index) {
     return (
@@ -610,6 +624,8 @@ export default class WorkflowDashboardView extends React.Component {
           </SelectField>
 
           <IconButton onTouchTap={this.onClickShowGroups.bind(this)}><AddCircleIcon/></IconButton>
+
+          <TextField name="inputquery" hintText="Query" value={this.state.query} onChange={this.onChangeQuery.bind(this)} className="valign-top margin-lg-left"/>
 
           <div className="pull-right text-right">
             <IconButton onTouchTap={this.onClickAddItem.bind(this)}><AddCircleIcon/></IconButton>
