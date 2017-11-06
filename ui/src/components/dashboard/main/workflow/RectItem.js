@@ -19,17 +19,17 @@ export default class RectItem extends React.Component {
     }
   }
   componentWillMount () {
-    this.fetchResult()
+    this.startTimer()
   }
 
   componentDidUpdate (prevProps, prevState) {
-    const {searchList} = prevProps
+    // const {searchList} = prevProps
 
-    if (JSON.stringify(prevProps.rect) !== JSON.stringify(this.props.rect)) {
-      this.fetchResult()
-    } else if (!this.state.fetched && searchList && JSON.stringify(this.props.searchList) !== JSON.stringify(searchList)) {
-      this.fetchResult()
-    }
+    // if (JSON.stringify(prevProps.rect) !== JSON.stringify(this.props.rect)) {
+    //   this.fetchResult()
+    // } else if (!this.state.fetched && searchList && JSON.stringify(this.props.searchList) !== JSON.stringify(searchList)) {
+    //   this.fetchResult()
+    // }
   }
 
   componentWillUnmount () {
@@ -66,7 +66,7 @@ export default class RectItem extends React.Component {
     return axios.get(`${ROOT_URL}/search/query?${encodeUrlParams(params)}`)
   }
 
-  fetchResult (timer) {
+  fetchResult () {
     const {goodId, badId} = this.props.rect
 
     const goodSearch = goodId ? this.getSearch(goodId) : null
@@ -85,18 +85,16 @@ export default class RectItem extends React.Component {
     }))
 
     this.setState({fetched: true})
-
-    if (timer || !this.state.fetched) this.startTimer()
   }
 
   ////////////////////////////////////////////////////////////
 
   startTimer () {
-    this.timer = setTimeout(this.fetchResult.bind(this, true), 10000)
+    this.timer = setInterval(this.fetchResult.bind(this, true), 5000)
   }
 
   stopTimer () {
-    clearTimeout(this.timer)
+    clearInterval(this.timer)
   }
 
   ////////////////////////////////////////////////////////////
