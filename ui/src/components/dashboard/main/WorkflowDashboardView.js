@@ -1,6 +1,6 @@
 import React from 'react'
 import {concat} from 'lodash'
-import {IconButton, SelectField, MenuItem, TextField} from 'material-ui'
+import {IconButton, SelectField, MenuItem, TextField, RaisedButton} from 'material-ui'
 import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
 import DeleteIcon from 'material-ui/svg-icons/action/delete'
 import InfoIcon from 'material-ui/svg-icons/action/info'
@@ -631,8 +631,9 @@ export default class WorkflowDashboardView extends React.Component {
 
           <IconButton onTouchTap={this.onClickShowGroups.bind(this)}><AddCircleIcon/></IconButton>
 
-          <TextField name="paramName" hintText="Name" value={this.state.paramName} onChange={this.onChangeParamName.bind(this)} className="valign-top margin-lg-left"/>
-          <TextField name="paramValue" hintText="Value" value={this.state.paramValue} onChange={this.onChangeParamValue.bind(this)} className="valign-top margin-lg-left"/>
+          <TextField name="paramValue" hintText="Value" value={this.state.paramValue}
+                     onChange={this.onChangeParamValue.bind(this)} className="valign-top margin-lg-left"/>
+          <RaisedButton label="Set" className="valign-top margin-sm-left margin-xs-top"/>
 
           <div className="pull-right text-right">
             <IconButton onTouchTap={this.onClickAddItem.bind(this)}><AddCircleIcon/></IconButton>
