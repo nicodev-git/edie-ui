@@ -3,7 +3,7 @@ import {concat} from 'lodash'
 import {IconButton, SelectField, MenuItem, TextField, RaisedButton} from 'material-ui'
 import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
 import DeleteIcon from 'material-ui/svg-icons/action/delete'
-import InfoIcon from 'material-ui/svg-icons/action/info'
+// import InfoIcon from 'material-ui/svg-icons/action/info'
 import {debounce, findIndex} from 'lodash'
 import moment from 'moment'
 
@@ -132,16 +132,24 @@ export default class WorkflowDashboardView extends React.Component {
     graph.addListener(mxEvent.CLICK, (sender, evt) => {
       const e = evt.getProperty('event'); // mouse event
       const cell = evt.getProperty('cell'); // cell may be null
+      if (!cell) return
 
-      if (cell != null && e.currentTarget.textContent) {
-        if (cell.userData) {
+      const style = graph.getModel().getStyle(cell)
+
+      if (style.startsWith('box-')) {
+        if (e.currentTarget.textContent && cell.userData) {
           evt.consume();
           const rect = this.findRect(cell.userData.id)
-          const style = graph.getModel().getStyle(cell)
+
           if (style === 'box-gray') return
 
           this.onClickShowSearch(rect, style === 'box-green')
         }
+      } else if (style === 'info-button') {
+        evt.consume();
+
+        const rect = this.findRect(cell.userData.id)
+        this.onClickEditItem(rect)
       }
     })
 
@@ -207,7 +215,12 @@ export default class WorkflowDashboardView extends React.Component {
       [mxConstants.STYLE_SHAPE]: mxConstants.SHAPE_IMAGE,
       [mxConstants.STYLE_PERIMETER]: mxPerimeter.RectanglePerimeter,
       [mxConstants.STYLE_IMAGE]: '/resources/images/dashboard/info.png',
-      [mxConstants.STYLE_MOVABLE]: 0
+      [mxConstants.STYLE_MOVABLE]: 0,
+
+      [mxConstants.STYLE_STROKECOLOR]: 'none',
+      [mxConstants.STYLE_STROKEWIDTH]: 0,
+
+      [mxConstants.CURSOR_MOVABLE_VERTEX]: 'pointer'
     })
   }
 
@@ -287,6 +300,7 @@ export default class WorkflowDashboardView extends React.Component {
 
         const infoBtn = graph.insertVertex(v, null, '', RECT_W - 28, RECT_H - 28, 24, 24, 'info-button')
         infoBtn.setConnectable(false)
+        infoBtn.userData = v.userData
 
         ///////////////////
 
@@ -478,8 +492,7 @@ export default class WorkflowDashboardView extends React.Component {
 
   ////////////////////
 
-  onClickEditItem () {
-    const rect = this.getSelectedRect()
+  onClickEditItem (rect) {
     if (!rect) return showAlert('Please choose rect')
 
     this.props.showWfRectModal(true, rect)
@@ -641,7 +654,6 @@ export default class WorkflowDashboardView extends React.Component {
     return (
       <div className="text-right" style={{position: 'absolute', top: -45, right: 0}}>
         <IconButton onTouchTap={this.onClickAddItem.bind(this)}><AddCircleIcon/></IconButton>
-        <IconButton onTouchTap={this.onClickEditItem.bind(this)}><InfoIcon/></IconButton>
         <IconButton onTouchTap={this.onClickDeleteItem.bind(this)}><DeleteIcon/></IconButton>
       </div>
     )
@@ -683,7 +695,6 @@ export default class WorkflowDashboardView extends React.Component {
 
           <div className="pull-right text-right">
             <IconButton onTouchTap={this.onClickAddItem.bind(this)}><AddCircleIcon/></IconButton>
-            <IconButton onTouchTap={this.onClickEditItem.bind(this)}><InfoIcon/></IconButton>
             <IconButton onTouchTap={this.onClickDeleteItem.bind(this)}><DeleteIcon/></IconButton>
           </div>
         </div>
