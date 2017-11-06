@@ -32,6 +32,10 @@ export default class RectItem extends React.Component {
     }
   }
 
+  componentWillUnmount () {
+    this.stopTimer()
+  }
+
   getSearch (id) {
     const {searchList} = this.props
     if (!searchList) return null
@@ -62,7 +66,7 @@ export default class RectItem extends React.Component {
     return axios.get(`${ROOT_URL}/search/query?${encodeUrlParams(params)}`)
   }
 
-  fetchResult () {
+  fetchResult (timer) {
     const {goodId, badId} = this.props.rect
 
     const goodSearch = goodId ? this.getSearch(goodId) : null
@@ -81,7 +85,21 @@ export default class RectItem extends React.Component {
     }))
 
     this.setState({fetched: true})
+
+    if (timer || !this.state.fetched) this.startTimer()
   }
+
+  ////////////////////////////////////////////////////////////
+
+  startTimer () {
+    this.timer = setTimeout(this.fetchResult.bind(this, true), 10000)
+  }
+
+  stopTimer () {
+    clearTimeout(this.timer)
+  }
+
+  ////////////////////////////////////////////////////////////
 
   getColor () {
     const {good, bad} = this.state
