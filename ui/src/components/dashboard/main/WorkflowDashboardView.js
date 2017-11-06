@@ -10,7 +10,7 @@ import WfRectModal from './workflow/WfRectModal'
 import RectItem from './workflow/RectItem'
 
 import {guid, severities, queryDateFormat, collections} from 'shared/Global'
-import {showAlert, showConfirm} from 'components/common/Alert'
+import {showAlert, showConfirm, showPrompt} from 'components/common/Alert'
 import RectSearchModal from './workflow/RectSearchModal'
 
 import {buildServiceParams} from 'util/Query'
@@ -533,9 +533,12 @@ export default class WorkflowDashboardView extends React.Component {
 
   /////////////////////
 
-  onChangeParamName (e, value) {
-    this.setState({
-      paramName: value
+  onClickParamSet () {
+    showPrompt('Param Name', '', text => {
+      if (!text) return
+      this.setState({
+        paramName: text
+      })
     })
   }
 
@@ -547,6 +550,7 @@ export default class WorkflowDashboardView extends React.Component {
 
   ////////////////////
   renderRect (rect, index) {
+    const {paramName, paramValue} = this.state
     return (
       <RectItem
         {...this.props}
@@ -554,6 +558,8 @@ export default class WorkflowDashboardView extends React.Component {
         rect={rect}
         searchList={this.getSearchList()}
         onUpdateColor={this.onUpdateRectState.bind(this)}
+        paramName={paramName}
+        paramValue={paramValue}
       />
     )
   }
@@ -631,9 +637,11 @@ export default class WorkflowDashboardView extends React.Component {
 
           <IconButton onTouchTap={this.onClickShowGroups.bind(this)}><AddCircleIcon/></IconButton>
 
-          <TextField name="paramValue" hintText="Value" value={this.state.paramValue}
+          <TextField name="paramValue"
+                     value={this.state.paramValue}
+                     hintText={this.state.paramName || 'Value'}
                      onChange={this.onChangeParamValue.bind(this)} className="valign-top margin-lg-left"/>
-          <RaisedButton label="Set" className="valign-top margin-sm-left margin-xs-top"/>
+          <RaisedButton label="Set" className="valign-top margin-sm-left margin-xs-top" onTouchTap={this.onClickParamSet.bind(this)}/>
 
           <div className="pull-right text-right">
             <IconButton onTouchTap={this.onClickAddItem.bind(this)}><AddCircleIcon/></IconButton>
