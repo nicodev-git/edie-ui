@@ -669,7 +669,7 @@ export default class WorkflowDashboardView extends React.Component {
     const {selectedWfRectGroup} = this.props
     return (
       <div className="flex-vertical flex-1">
-        <div>
+        <div style={{position: 'absolute', top: -48, left: 200, right: 0}}>
           <SelectField
             hintText="Group"
             className="valign-top margin-lg-left"
@@ -682,8 +682,6 @@ export default class WorkflowDashboardView extends React.Component {
           </SelectField>
 
           <IconButton onTouchTap={this.onClickShowGroups.bind(this)}><AddCircleIcon/></IconButton>
-
-
 
           <div className="pull-right text-right">
             <IconButton onTouchTap={this.onClickAddItem.bind(this)}><AddCircleIcon/></IconButton>
