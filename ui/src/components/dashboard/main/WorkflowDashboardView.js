@@ -22,7 +22,8 @@ export default class WorkflowDashboardView extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      query: ''
+      paramName: '',
+      paramValue: '',
     }
   }
   componentWillMount () {
@@ -532,9 +533,15 @@ export default class WorkflowDashboardView extends React.Component {
 
   /////////////////////
 
-  onChangeQuery (e, value) {
+  onChangeParamName (e, value) {
     this.setState({
-      query: value
+      paramName: value
+    })
+  }
+
+  onChangeParamValue (e, value) {
+    this.setState({
+      paramValue: value
     })
   }
 
@@ -624,7 +631,8 @@ export default class WorkflowDashboardView extends React.Component {
 
           <IconButton onTouchTap={this.onClickShowGroups.bind(this)}><AddCircleIcon/></IconButton>
 
-          <TextField name="inputquery" hintText="Query" value={this.state.query} onChange={this.onChangeQuery.bind(this)} className="valign-top margin-lg-left"/>
+          <TextField name="paramName" hintText="Name" value={this.state.paramName} onChange={this.onChangeParamName.bind(this)} className="valign-top margin-lg-left"/>
+          <TextField name="paramValue" hintText="Value" value={this.state.paramValue} onChange={this.onChangeParamValue.bind(this)} className="valign-top margin-lg-left"/>
 
           <div className="pull-right text-right">
             <IconButton onTouchTap={this.onClickAddItem.bind(this)}><AddCircleIcon/></IconButton>
