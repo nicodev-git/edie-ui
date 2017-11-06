@@ -19,6 +19,8 @@ import {getRanges} from 'components/common/DateRangePicker'
 import EntityDetailModal from 'components/sidebar/search/EntityDetailModal'
 import WfRectGroupsModal from "./workflow/WfRectGroupsModal";
 
+const RECT_W = 135
+const RECT_H = 135
 export default class WorkflowDashboardView extends React.Component {
   constructor (props) {
     super(props)
@@ -43,6 +45,7 @@ export default class WorkflowDashboardView extends React.Component {
     graph.minFitScale = 1
     graph.maxFitScale = 1
     graph.autoExtend = 0
+    graph.foldingEnabled = 0
     graph.setCellsResizable(false)
     graph.setAllowDanglingEdges(false);
     // graph.maximumGraphBounds = new window.mxRectangle(0, 0, 1024, 768)
@@ -169,7 +172,7 @@ export default class WorkflowDashboardView extends React.Component {
   }
 
   registerGraphStyles (graph) {
-    const {mxConstants} = window
+    const {mxConstants, mxPerimeter} = window
     let style = {}
     style[mxConstants.STYLE_SHAPE] = 'wfRect'
     style[mxConstants.STYLE_FONTCOLOR] = '#ffffff'
@@ -198,6 +201,14 @@ export default class WorkflowDashboardView extends React.Component {
     }
 
     graph.getStylesheet().putCellStyle('box-gray', style)
+
+
+    graph.getStylesheet().putCellStyle('info-button', {
+      [mxConstants.STYLE_SHAPE]: mxConstants.SHAPE_IMAGE,
+      [mxConstants.STYLE_PERIMETER]: mxPerimeter.RectanglePerimeter,
+      [mxConstants.STYLE_IMAGE]: '/resources/images/dashboard/info.png',
+      [mxConstants.STYLE_MOVABLE]: 0
+    })
   }
 
   needUpdateRects(prevRects, rects) {
@@ -260,13 +271,25 @@ export default class WorkflowDashboardView extends React.Component {
       items.forEach(p => {
         const map = p.map || {}
 
+        const x = map.x || 10
+        const y = map.y || 10
+
+        ////////////////////
+
         const v = graph.insertVertex(parent, null,
-          p.name, map.x || 10, map.y || 10, 135, 135, 'box-gray')
+          p.name, x, y, RECT_W, RECT_H, 'box-gray')
         v.userData = {
           id: p.uid
         }
-
         vertices.push(v)
+
+        ////////////////////
+
+        const infoBtn = graph.insertVertex(v, null, '', RECT_W - 28, RECT_H - 28, 24, 24, 'info-button')
+        infoBtn.setConnectable(false)
+
+        ///////////////////
+
       })
 
       items.forEach((p, i) => {
