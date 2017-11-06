@@ -499,6 +499,7 @@ export default class WorkflowDashboardView extends React.Component {
 
   onClickShowSearch (rect, good) {
     if (!rect) return
+    const {paramName, paramValue} = this.state
     const searchList = this.getSearchList()
 
     const index = findIndex(searchList, {id: good ? rect.goodId : rect.badId})
@@ -512,6 +513,13 @@ export default class WorkflowDashboardView extends React.Component {
       allDevices: devices || allDevices,
       queryDateFormat
     })
+
+    if (paramName) {
+      searchParams.q = searchParams.q.replace(
+        new RegExp(`\\$${paramName}`, 'i'), paramValue)
+    }
+
+
     this.props.showRectSearchModal(true, searchParams)
   }
 
