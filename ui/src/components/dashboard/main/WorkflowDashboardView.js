@@ -666,7 +666,7 @@ export default class WorkflowDashboardView extends React.Component {
   /////////////////////
 
   onClickParamSet () {
-    showPrompt('Param Name', '', text => {
+    showPrompt('Param Name', this.state.paramName || '', text => {
       if (!text) return
       this.setState({
         paramName: text
