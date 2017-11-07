@@ -40,6 +40,12 @@ export default class GNetwork extends React.Component {
       'customComponent': p => {
         return <span>{p.data ? 'YES' : 'NO'}</span>
       }
+    }, {
+      'displayName': 'SentPerSec',
+      'columnName': 'BytesSentPerSec'
+    }, {
+      'displayName': 'ReceivedPerSec',
+      'columnName': 'BytesReceivedPerSec'
     }]
   }
 
