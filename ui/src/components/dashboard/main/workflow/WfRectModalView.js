@@ -28,7 +28,7 @@ export default class WfRectModalView extends React.Component {
             </div>
             <div>
               <Field name="interval" floatingLabel="Interval" component={FormInput} className="valign-top" style={{width: 80}} />
-              <Field name="intervalUnit" floatingLabel="Unit" component={FormSelect} options={units} className="valign-top margin-md-left" style={{width: 100}}/>
+              <Field name="intervalUnit" floatingLabel="Unit" component={FormSelect} options={units} className="valign-top margin-md-left" style={{width: 150}}/>
             </div>
           </CardPanel>
           <SubmitBlock name="Save" onClick={onHide}/>
