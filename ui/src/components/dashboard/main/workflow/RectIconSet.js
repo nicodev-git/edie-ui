@@ -13,10 +13,10 @@ export default class RectIconSet {
     img.setAttribute('title', 'Duplicate')
     img.style.position = 'absolute'
     img.style.cursor = 'pointer'
-    img.style.width = '24px'
-    img.style.height = '24px'
-    img.style.left = (state.x + state.width - 28) + 'px'
-    img.style.top = (state.y + state.height - 28) + 'px'
+    img.style.width = '16px'
+    img.style.height = '16px'
+    img.style.left = (state.x + state.width - 20) + 'px'
+    img.style.top = (state.y + state.height - 20) + 'px'
 
     mxEvent.addGestureListeners(img, mxUtils.bind(this, (evt) => {
       mxEvent.consume(evt)
@@ -32,10 +32,10 @@ export default class RectIconSet {
     img.setAttribute('title', 'Delete')
     img.style.position = 'absolute'
     img.style.cursor = 'pointer'
-    img.style.width = '24px'
-    img.style.height = '24px'
-    img.style.left = (state.x + state.width - 28 * 2) + 'px'
-    img.style.top = (state.y + state.height - 28) + 'px'
+    img.style.width = '16px'
+    img.style.height = '16px'
+    img.style.left = (state.x + state.width - 36) + 'px'
+    img.style.top = (state.y + state.height - 20) + 'px'
 
     mxEvent.addGestureListeners(img, mxUtils.bind(this, (evt) => {
       mxEvent.consume(evt)

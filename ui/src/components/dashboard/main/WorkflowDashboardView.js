@@ -6,6 +6,7 @@ import AssignIcon from 'material-ui/svg-icons/action/assessment'
 import {debounce, findIndex} from 'lodash'
 import moment from 'moment'
 import EditIcon from 'material-ui/svg-icons/editor/mode-edit'
+import ArrowRightIcon from 'material-ui/svg-icons/hardware/keyboard-arrow-right'
 
 import WfRectModal from './workflow/WfRectModal'
 import RectItem from './workflow/RectItem'
@@ -768,7 +769,9 @@ export default class WorkflowDashboardView extends React.Component {
 
           <div className="pull-right text-right">
             <IconButton onTouchTap={this.onClickAddItem.bind(this)}><AddCircleIcon/></IconButton>
-            <IconButton onTouchTap={this.onClickEditMode.bind(this)}><EditIcon/></IconButton>
+            <IconButton onTouchTap={this.onClickEditMode.bind(this)}>
+              {this.state.editMode ? <EditIcon/> : <ArrowRightIcon/>}
+            </IconButton>
           </div>
         </div>
         <div className="flex-1">
