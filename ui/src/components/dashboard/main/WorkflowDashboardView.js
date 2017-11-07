@@ -17,7 +17,8 @@ import RectSearchModal from './workflow/RectSearchModal'
 import {buildServiceParams} from 'util/Query'
 import {getRanges} from 'components/common/DateRangePicker'
 import EntityDetailModal from 'components/sidebar/search/EntityDetailModal'
-import WfRectGroupsModal from "./workflow/WfRectGroupsModal";
+import WfRectGroupsModal from './workflow/WfRectGroupsModal'
+import RectIconSet from './workflow/RectIconSet'
 
 const RECT_W = 135
 const RECT_H = 135
@@ -153,6 +154,8 @@ export default class WorkflowDashboardView extends React.Component {
       }
     })
 
+    this.initEvents()
+
   }
 
   componentDidUpdate (prevProps) {
@@ -221,16 +224,67 @@ export default class WorkflowDashboardView extends React.Component {
 
   initEvents () {
     const {graph} = this.editor
+    const {mxRectangle, mxUtils} = window
+
+    const iconTolerance = 20
     graph.addMouseListener({
-      dragEnter: function(evt, state) {
-        if (this.currentIconSet == null)
+      mouseDown: function(sender, me) {
+        // Hides icons on mouse down
+        if (this.currentState)
         {
-          this.currentIconSet = new window.mxIconSet(state);
+          this.dragLeave(me.getEvent(), this.currentState);
+          this.currentState = null;
+        }
+      },
+      mouseMove: function(sender, me) {
+        let tmp
+        if (this.currentState && (me.getState() === this.currentState ||
+            me.getState() == null))
+        {
+          var tol = iconTolerance;
+          tmp = new mxRectangle(me.getGraphX() - tol,
+            me.getGraphY() - tol, 2 * tol, 2 * tol);
+
+          if (mxUtils.intersects(tmp, this.currentState))
+          {
+            return;
+          }
+        }
+
+        tmp = graph.view.getState(me.getCell());
+
+        // Ignores everything but vertices
+        if (graph.isMouseDown || (tmp && !graph.getModel().isVertex(tmp.cell)))
+        {
+          tmp = null;
+        }
+
+        if (tmp !== this.currentState)
+        {
+          if (this.currentState)
+          {
+            this.dragLeave(me.getEvent(), this.currentState);
+          }
+
+          this.currentState = tmp;
+
+          if (this.currentState)
+          {
+            this.dragEnter(me.getEvent(), this.currentState);
+          }
+        }
+      },
+      mouseUp: function(sender, me) {
+
+      },
+
+      dragEnter: function(evt, state) {
+        if (!this.currentIconSet) {
+          this.currentIconSet = new RectIconSet(state);
         }
       },
       dragLeave: function(evt, state) {
-        if (this.currentIconSet != null)
-        {
+        if (this.currentIconSet) {
           this.currentIconSet.destroy();
           this.currentIconSet = null;
         }
