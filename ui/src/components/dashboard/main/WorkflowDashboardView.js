@@ -28,6 +28,7 @@ export default class WorkflowDashboardView extends React.Component {
     this.state = {
       paramName: '',
       paramValue: '',
+      editMode: false
     }
   }
   componentWillMount () {
@@ -276,6 +277,7 @@ export default class WorkflowDashboardView extends React.Component {
       },
 
       dragEnter: function(evt, state) {
+        if (!me.state.editMode) return
         if (!this.currentIconSet) {
           this.currentIconSet = new RectIconSet({
             state,
@@ -679,7 +681,10 @@ export default class WorkflowDashboardView extends React.Component {
   }
 
   onClickEditMode () {
-
+    const {editMode} = this.state
+    this.setState({
+      editMode: !editMode
+    })
   }
 
   ////////////////////
@@ -763,13 +768,14 @@ export default class WorkflowDashboardView extends React.Component {
 
           <div className="pull-right text-right">
             <IconButton onTouchTap={this.onClickAddItem.bind(this)}><AddCircleIcon/></IconButton>
+            <IconButton onTouchTap={this.onClickEditMode.bind(this)}><EditIcon/></IconButton>
           </div>
         </div>
         <div className="flex-1">
           {this.getRects().map(this.renderRect.bind(this))}
           <div id="graph" className="graph-base" style={{width: '100%', height: '100%'}}></div>
 
-          <div style={{position: 'absolute', left: 20, top: 5}}>
+          <div style={{position: 'absolute', left: 20, top: 5}} className={this.state.editMode ? '' : 'hidden'}>
             <TextField name="paramValue"
                        value={this.state.paramValue}
                        hintText={this.state.paramName || 'Value'}
@@ -782,14 +788,6 @@ export default class WorkflowDashboardView extends React.Component {
               className="valign-top margin-xs-top"
               onTouchTap={this.onClickParamSet.bind(this)}>
               <AssignIcon/>
-            </IconButton>
-
-            <IconButton
-              style={{marginLeft: -40}}
-              className="valign-top margin-xs-top"
-              onTouchTap={this.onClickEditMode.bind(this)}
-            >
-              <EditIcon/>
             </IconButton>
           </div>
 
