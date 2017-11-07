@@ -1,26 +1,27 @@
 export default class RectIconSet {
   
-  constructor (state) {
+  constructor (props) {
     this.images = []
 
+    const {state} = props
+
     const {mxUtils, mxEvent} = window
-    const graph = state.view.graph
+    // const graph = state.view.graph
 
     // Icon1
-    let img = mxUtils.createImage('/resources/images/dashboard/info.png')
+    let img = mxUtils.createImage('/resources/images/dashboard/multiply.png')
     img.setAttribute('title', 'Duplicate')
     img.style.position = 'absolute'
     img.style.cursor = 'pointer'
-    img.style.width = '16px'
-    img.style.height = '16px'
-    img.style.left = (state.x + state.width) + 'px'
-    img.style.top = (state.y + state.height) + 'px'
+    img.style.width = '24px'
+    img.style.height = '24px'
+    img.style.left = (state.x + state.width - 28) + 'px'
+    img.style.top = (state.y + state.height - 28) + 'px'
 
     mxEvent.addGestureListeners(img, mxUtils.bind(this, (evt) => {
-      const s = graph.gridSize
-      graph.setSelectionCells(graph.moveCells([state.cell], s, s, true))
       mxEvent.consume(evt)
-      this.destroy()
+      // this.destroy()
+      props.onClickDelete(state.cell)
     }))
 
     state.view.graph.container.appendChild(img)
@@ -31,20 +32,14 @@ export default class RectIconSet {
     img.setAttribute('title', 'Delete')
     img.style.position = 'absolute'
     img.style.cursor = 'pointer'
-    img.style.width = '16px'
-    img.style.height = '16px'
-    img.style.left = (state.x + state.width) + 'px'
-    img.style.top = (state.y - 16) + 'px'
+    img.style.width = '24px'
+    img.style.height = '24px'
+    img.style.left = (state.x + state.width - 28 * 2) + 'px'
+    img.style.top = (state.y + state.height - 28) + 'px'
 
     mxEvent.addGestureListeners(img, mxUtils.bind(this, (evt) => {
-      // Disables dragging the image
       mxEvent.consume(evt)
-    }))
-
-    mxEvent.addListener(img, 'click', mxUtils.bind(this, (evt) => {
-      graph.removeCells([state.cell])
-      mxEvent.consume(evt)
-      this.destroy()
+      props.onClickInfo(state.cell)
     }))
 
     state.view.graph.container.appendChild(img)

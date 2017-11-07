@@ -2,7 +2,6 @@ import React from 'react'
 import {concat} from 'lodash'
 import {IconButton, SelectField, MenuItem, TextField} from 'material-ui'
 import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
-import DeleteIcon from 'material-ui/svg-icons/action/delete'
 import AssignIcon from 'material-ui/svg-icons/action/assessment'
 import {debounce, findIndex} from 'lodash'
 import moment from 'moment'
@@ -136,6 +135,7 @@ export default class WorkflowDashboardView extends React.Component {
       if (!cell) return
 
       const style = graph.getModel().getStyle(cell)
+      if (!style) return
 
       if (style.startsWith('box-')) {
         if (e.currentTarget.textContent && cell.userData) {
@@ -146,11 +146,6 @@ export default class WorkflowDashboardView extends React.Component {
 
           this.onClickShowSearch(rect, style === 'box-green')
         }
-      } else if (style === 'info-button') {
-        evt.consume();
-
-        const rect = this.findRect(cell.userData.id)
-        this.onClickEditItem(rect)
       }
     })
 
@@ -225,6 +220,7 @@ export default class WorkflowDashboardView extends React.Component {
   initEvents () {
     const {graph} = this.editor
     const {mxRectangle, mxUtils} = window
+    const me = this
 
     const iconTolerance = 20
     graph.addMouseListener({
@@ -280,12 +276,16 @@ export default class WorkflowDashboardView extends React.Component {
 
       dragEnter: function(evt, state) {
         if (!this.currentIconSet) {
-          this.currentIconSet = new RectIconSet(state);
+          this.currentIconSet = new RectIconSet({
+            state,
+            onClickInfo: me.onClickInfoIcon.bind(me),
+            onClickDelete: me.onClickDeleteIcon.bind(me)
+          })
         }
       },
       dragLeave: function(evt, state) {
         if (this.currentIconSet) {
-          this.currentIconSet.destroy();
+          this.currentIconSet.destroy()
           this.currentIconSet = null;
         }
       }
@@ -318,6 +318,17 @@ export default class WorkflowDashboardView extends React.Component {
   isRectDifferent (n, p) {
     if (JSON.stringify(n) !== JSON.stringify(p)) return true
     return false
+  }
+
+  ///////////////////////////////////////////
+
+  onClickInfoIcon (cell) {
+    const rect = this.findRect(cell.userData.id)
+    this.onClickEditItem(rect)
+  }
+
+  onClickDeleteIcon (cell) {
+    this.onClickDeleteItem(cell)
   }
 
   ///////////////////////////////////////////
@@ -366,10 +377,10 @@ export default class WorkflowDashboardView extends React.Component {
 
         ////////////////////
 
-        const infoBtn = graph.insertVertex(v, null, '', RECT_W - 28, RECT_H - 28, 24, 24, 'info-button')
-        infoBtn.setConnectable(false)
-        infoBtn.userData = v.userData
-        infoBtn.cursor = 'pointer'
+        // const infoBtn = graph.insertVertex(v, null, '', RECT_W - 28, RECT_H - 28, 24, 24, 'info-button')
+        // infoBtn.setConnectable(false)
+        // infoBtn.userData = v.userData
+        // infoBtn.cursor = 'pointer'
 
         ///////////////////
 
@@ -567,9 +578,7 @@ export default class WorkflowDashboardView extends React.Component {
     this.props.showWfRectModal(true, rect)
   }
 
-  onClickDeleteItem () {
-    const {graph} = this.editor
-    const cell = graph.getSelectionCell()
+  onClickDeleteItem (cell) {
     if (!cell) return
 
     if (cell.vertex){
@@ -719,15 +728,6 @@ export default class WorkflowDashboardView extends React.Component {
     )
   }
 
-  renderMenu () {
-    return (
-      <div className="text-right" style={{position: 'absolute', top: -45, right: 0}}>
-        <IconButton onTouchTap={this.onClickAddItem.bind(this)}><AddCircleIcon/></IconButton>
-        <IconButton onTouchTap={this.onClickDeleteItem.bind(this)}><DeleteIcon/></IconButton>
-      </div>
-    )
-  }
-
   renderRectGroupsModal () {
     if (!this.props.wfRectGroupsModalOpen) return null
     return (
@@ -758,7 +758,6 @@ export default class WorkflowDashboardView extends React.Component {
 
           <div className="pull-right text-right">
             <IconButton onTouchTap={this.onClickAddItem.bind(this)}><AddCircleIcon/></IconButton>
-            <IconButton onTouchTap={this.onClickDeleteItem.bind(this)}><DeleteIcon/></IconButton>
           </div>
         </div>
         <div className="flex-1">
