@@ -1009,7 +1009,7 @@ class GenericSearch extends React.Component {
                       Total: {this.state.total}
                     </div>
                   </div>
-                  <div className={`flex-1 table-no-gap ${this.getTableClass()}`}>
+                  <div className="flex-1 table-no-gap">
                     <InfiniteTable
                       url="/search/query"
                       cells={this.cells}
