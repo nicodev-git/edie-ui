@@ -219,6 +219,25 @@ export default class WorkflowDashboardView extends React.Component {
     })
   }
 
+  initEvents () {
+    const {graph} = this.editor
+    graph.addMouseListener({
+      dragEnter: function(evt, state) {
+        if (this.currentIconSet == null)
+        {
+          this.currentIconSet = new window.mxIconSet(state);
+        }
+      },
+      dragLeave: function(evt, state) {
+        if (this.currentIconSet != null)
+        {
+          this.currentIconSet.destroy();
+          this.currentIconSet = null;
+        }
+      }
+    })
+  }
+
   needUpdateRects(prevRects, rects) {
     const added = []
     const updated = []
