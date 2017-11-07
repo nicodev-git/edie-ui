@@ -132,6 +132,32 @@ class GenericSearch extends React.Component {
         )
       }
     }]
+
+
+    this.onSearchKeyDown = this.onSearchKeyDown.bind(this)
+    this.onClickStar = this.onClickStar.bind(this)
+    this.onChangeCollection = this.onChangeCollection.bind(this)
+    this.onClickWorkflow = this.onClickWorkflow.bind(this)
+    this.handleFormSubmit = this.handleFormSubmit.bind(this)
+    this.onClickSearch = this.onClickSearch.bind(this)
+    this.onChangeSeverity = this.onChangeSeverity.bind(this)
+    this.onChangeDateRange = this.onChangeDateRange.bind(this)
+    this.onClickIllustrate = this.onClickIllustrate.bind(this)
+    this.onClickSavedSearch = this.onClickSavedSearch.bind(this)
+    this.onClickRelDevices = this.onClickRelDevices.bind(this)
+    this.onClickIrrelDevices = this.onClickIrrelDevices.bind(this)
+    this.onKeyDownFreeText = this.onKeyDownFreeText.bind(this)
+    this.onChangeMonitorType = this.onChangeMonitorType.bind(this)
+    this.onClickViewFilter = this.onClickViewFilter.bind(this)
+    this.onClickGraph = this.onClickGraph.bind(this)
+    this.onClickTags = this.onClickTags.bind(this)
+    this.onClickClearSearch = this.onClickClearSearch.bind(this)
+    this.onClickSearchMonitor = this.onClickSearchMonitor.bind(this)
+    this.onClickEntityView = this.onClickEntityView.bind(this)
+    this.onClickToggleExpand = this.onClickToggleExpand.bind(this)
+    this.onRowDblClick = this.onRowDblClick.bind(this)
+    this.onResultCountUpdate = this.onResultCountUpdate.bind(this)
+    this.onUpdateLoading = this.onUpdateLoading.bind(this)
   }
 
   componentWillMount () {
@@ -924,42 +950,42 @@ class GenericSearch extends React.Component {
           <div className="flex-vertical" style={{height: '100%', overflow: 'hidden'}}>
             <div style={{paddingTop: 10, paddingBottom: 20, backgroundColor: '#e5e7ec'}}>
               <SearchFormView
-                onSearchKeyDown={this.onSearchKeyDown.bind(this)}
-                onClickStar={this.onClickStar.bind(this)}
+                onSearchKeyDown={this.onSearchKeyDown}
+                onClickStar={this.onClickStar}
                 collections={collections}
                 selectedCollections={types}
-                onChangeCollection={this.onChangeCollection.bind(this)}
-                onClickWorkflow={this.onClickWorkflow.bind(this)}
-                onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
-                onClickSearch={this.onClickSearch.bind(this)}
+                onChangeCollection={this.onChangeCollection}
+                onClickWorkflow={this.onClickWorkflow}
+                onSubmit={handleSubmit(this.handleFormSubmit)}
+                onClickSearch={this.onClickSearch}
                 severities={severities}
                 selectedSeverities={severity}
-                onChangeSeverity={this.onChangeSeverity.bind(this)}
+                onChangeSeverity={this.onChangeSeverity}
                 startDate={from}
                 endDate={to}
-                onChangeDateRange={this.onChangeDateRange.bind(this)}
-                onClickIllustrate={this.onClickIllustrate.bind(this)}
-                onClickSavedSearch={this.onClickSavedSearch.bind(this)}
-                onClickRelDevices={this.onClickRelDevices.bind(this)}
-                onClickIrrelDevices={this.onClickIrrelDevices.bind(this)}
+                onChangeDateRange={this.onChangeDateRange}
+                onClickIllustrate={this.onClickIllustrate}
+                onClickSavedSearch={this.onClickSavedSearch}
+                onClickRelDevices={this.onClickRelDevices}
+                onClickIrrelDevices={this.onClickIrrelDevices}
 
                 freeText={freeText}
-                onKeyDownFreeText={this.onKeyDownFreeText.bind(this)}
+                onKeyDownFreeText={this.onKeyDownFreeText}
 
                 monitorTemplates={monitorTemplates}
                 selectedMonitorTypes={monitorTypes}
-                onChangeMonitorType={this.onChangeMonitorType.bind(this)}
+                onChangeMonitorType={this.onChangeMonitorType}
 
-                onClickViewFilter={this.onClickViewFilter.bind(this)}
-                onClickGraph={this.onClickGraph.bind(this)}
+                onClickViewFilter={this.onClickViewFilter}
+                onClickGraph={this.onClickGraph}
 
-                onClickTags={this.onClickTags.bind(this)}
+                onClickTags={this.onClickTags}
 
-                onClickClear={this.onClickClearSearch.bind(this)}
+                onClickClear={this.onClickClearSearch}
 
-                onClickSearchMonitor={this.onClickSearchMonitor.bind(this)}
+                onClickSearchMonitor={this.onClickSearchMonitor}
 
-                onClickEntityView={this.onClickEntityView.bind(this)}
+                onClickEntityView={this.onClickEntityView}
               />
               {this.renderRelDevicesPopover()}
               {this.renderIrrelDevicesModal()}
@@ -977,7 +1003,7 @@ class GenericSearch extends React.Component {
                   <div className="header-red">
                     Content
                     <div className="pull-right">
-                      <div className="link margin-md-right" onClick={this.onClickToggleExpand.bind(this)}>
+                      <div className="link margin-md-right" onClick={this.onClickToggleExpand}>
                         {this.state.allExpanded ? 'Collapse All' : 'Expand All'}
                       </div>
                       Total: {this.state.total}
@@ -989,12 +1015,12 @@ class GenericSearch extends React.Component {
                       cells={this.cells}
                       ref="table"
                       rowMetadata={{'key': 'id'}}
-                      onRowDblClick={this.onRowDblClick.bind(this)}
+                      onRowDblClick={this.onRowDblClick}
                       params={this.getServiceParams()}
                       pageSize={20}
                       showTableHeading={false}
-                      onUpdateCount={this.onResultCountUpdate.bind(this)}
-                      onUpdateLoading={this.onUpdateLoading.bind(this)}
+                      onUpdateCount={this.onResultCountUpdate}
+                      onUpdateLoading={this.onUpdateLoading}
                       selectable
                     />
                     {this.state.loading && <RefreshOverlay/>}

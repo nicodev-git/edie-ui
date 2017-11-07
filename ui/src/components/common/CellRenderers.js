@@ -1,14 +1,13 @@
 import React from 'react'
 import moment from 'moment'
-import {assign, concat, isArray, keys, merge, isObject} from 'lodash'
+import {isArray, keys, merge, isObject} from 'lodash'
 
 export function renderEntity (entity, options) {
   const ret = renderEntity2(entity, options)
   return ret.node
 }
 
-export function renderEntity2 (entity, options) {
-  const data = assign({}, entity)
+export function renderEntity2 (data, options) {
   if (data.id) delete data.id
   if (data._links) delete data._links
 
@@ -40,11 +39,11 @@ function renderValue (val, path, options, used) {
 
     return {
       used,
-      node: concat([],
+      node: [
         <span className="field-key" key={`${path}-char-1`}>{startChar}&nbsp;</span>,
-        children,
+        ...children,
         <span className="field-key" key={`${path}-char-2`}>&nbsp;{endChar}</span>
-      )
+      ]
     }
   }
 
@@ -80,7 +79,7 @@ function renderData (entity, isChildren, path, options, used) {  // eslint-disab
     const ret = renderValue(entity[key], `${path}.${key}`, options, used)
     used = ret.used
 
-    children = concat(children, ret.node)
+    children = [...children, ret.node]
 
     if (index < allKeys.length - 1)
       children.push(<div className="field-separator" key={`${path}-sep-${index}`}/>)
