@@ -5,6 +5,7 @@ import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
 import AssignIcon from 'material-ui/svg-icons/action/assessment'
 import {debounce, findIndex} from 'lodash'
 import moment from 'moment'
+import EditIcon from 'material-ui/svg-icons/editor/mode-edit'
 
 import WfRectModal from './workflow/WfRectModal'
 import RectItem from './workflow/RectItem'
@@ -677,6 +678,10 @@ export default class WorkflowDashboardView extends React.Component {
     })
   }
 
+  onClickEditMode () {
+
+  }
+
   ////////////////////
   renderRect (rect, index) {
     const {paramName, paramValue} = this.state
@@ -777,6 +782,14 @@ export default class WorkflowDashboardView extends React.Component {
               className="valign-top margin-xs-top"
               onTouchTap={this.onClickParamSet.bind(this)}>
               <AssignIcon/>
+            </IconButton>
+
+            <IconButton
+              style={{marginLeft: -40}}
+              className="valign-top margin-xs-top"
+              onTouchTap={this.onClickEditMode.bind(this)}
+            >
+              <EditIcon/>
             </IconButton>
           </div>
 
