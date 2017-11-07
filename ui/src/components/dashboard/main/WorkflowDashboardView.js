@@ -2,7 +2,6 @@ import React from 'react'
 import {concat} from 'lodash'
 import {IconButton, SelectField, MenuItem, TextField} from 'material-ui'
 import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
-import AssignIcon from 'material-ui/svg-icons/action/assessment'
 import {debounce, findIndex} from 'lodash'
 import moment from 'moment'
 import EditIcon from 'material-ui/svg-icons/editor/mode-edit'
@@ -27,6 +26,7 @@ export default class WorkflowDashboardView extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
+      paramValueInput: '',
       paramName: '',
       paramValue: '',
       editMode: false
@@ -677,7 +677,13 @@ export default class WorkflowDashboardView extends React.Component {
 
   onChangeParamValue (e, value) {
     this.setState({
-      paramValue: value
+      paramValueInput: value
+    })
+  }
+
+  onClickSetParamValue () {
+    this.setState({
+      paramValue: this.state.paramValueInput
     })
   }
 
@@ -769,29 +775,37 @@ export default class WorkflowDashboardView extends React.Component {
 
           <div className="pull-right text-right">
             <IconButton onTouchTap={this.onClickAddItem.bind(this)}><AddCircleIcon/></IconButton>
-            <IconButton onTouchTap={this.onClickEditMode.bind(this)}>
-              {this.state.editMode ? <EditIcon/> : <ArrowRightIcon/>}
-            </IconButton>
+            <IconButton onTouchTap={this.onClickEditMode.bind(this)}><EditIcon/></IconButton>
           </div>
         </div>
         <div className="flex-1">
           {this.getRects().map(this.renderRect.bind(this))}
           <div id="graph" className="graph-base" style={{width: '100%', height: '100%'}}></div>
 
-          <div style={{position: 'absolute', left: 20, top: 5}} className={this.state.editMode ? '' : 'hidden'}>
+          <div style={{position: 'absolute', left: 20, top: 5}}>
             <TextField name="paramValue"
-                       value={this.state.paramValue}
+                       value={this.state.paramValueInput}
                        hintText={this.state.paramName || 'Value'}
                        onChange={this.onChangeParamValue.bind(this)}
                        className="valign-top margin-lg-left"
                        style={{width: 160}}
             />
-            <IconButton
-              style={{marginLeft: -40}}
-              className="valign-top margin-xs-top"
-              onTouchTap={this.onClickParamSet.bind(this)}>
-              <AssignIcon/>
-            </IconButton>
+            {this.state.editMode ? (
+              <IconButton
+                style={{marginLeft: -40}}
+                className="valign-top margin-xs-top"
+                onTouchTap={this.onClickParamSet.bind(this)}>
+                <EditIcon/>
+              </IconButton>
+            ) : (
+              <IconButton
+                style={{marginLeft: -40}}
+                className="valign-top margin-xs-top"
+                onTouchTap={this.onClickSetParamValue.bind(this)}>
+                <ArrowRightIcon/>
+              </IconButton>
+            )}
+
           </div>
 
           {this.renderWfRectModal()}
