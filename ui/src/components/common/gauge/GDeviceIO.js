@@ -71,7 +71,7 @@ export default class GDeviceIO extends React.Component {
 
   onMonitorMessage (msg) {
     if (msg.action === 'update' && msg.deviceId === this.getDeviceId()) {
-      const {network} = msg.data
+      const {network, disk} = msg.data
       const state = {}
       if (network) state.network = network
       if (disk) state.disk = sumDisks(disk)
@@ -121,10 +121,13 @@ export default class GDeviceIO extends React.Component {
     let sent = 0
     let received = 0
 
-    networks.forEach(p => {
-      sent += p.BytesSentPerSec
-      received += p.BytesReceivedPerSec
-    })
+    if (networks) {
+      networks.forEach(p => {
+        sent += p.BytesSentPerSec
+        received += p.BytesReceivedPerSec
+      })
+    }
+
 
     return {
       sent: (sent / 1024).toFixed(1),
@@ -165,7 +168,7 @@ export default class GDeviceIO extends React.Component {
         title1: `${diskValue}%`,
         title2: disk ? `${disk.FreeSpace}G / ${disk.TotalSpace}G` : '',
         title3: 'Disk Utilization',
-        value: diskValue
+        value: diskValue || ' '
       }]
 
       return (
