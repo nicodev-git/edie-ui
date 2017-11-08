@@ -7,7 +7,7 @@ import NoDataPanel from './NoDataPanel'
 import MonitorSocket from 'util/socket/MonitorSocket'
 import GEditView from './GEditView'
 
-import {checkAgentUp, sumDisks} from 'shared/Global'
+import {checkAgentUp} from 'shared/Global'
 import {showAlert} from 'components/common/Alert'
 
 export default class GDeviceIO extends React.Component {
@@ -74,7 +74,7 @@ export default class GDeviceIO extends React.Component {
       const {network, disk} = msg.data
       const state = {}
       if (network) state.network = network
-      if (disk) state.disk = sumDisks(disk)
+      if (disk) state.disk = disk
       state.up = true
       state.loading = false
 
@@ -136,6 +136,25 @@ export default class GDeviceIO extends React.Component {
     }
   }
 
+  sumDisks (disks) {
+    let read = 0
+    let write = 0
+
+    if (disks) {
+      disks.forEach(p => {
+        read += p.DiskReadBytesPerSec
+        write += p.DiskWriteBytesPerSec
+      })
+    }
+
+
+    return {
+      read: (read / 1024).toFixed(1),
+      write: (write / 1024).toFixed(1),
+      sum: read + write
+    }
+  }
+
   /////////////////////////////////////////////////////
 
   renderItem (item, i) {
@@ -157,7 +176,7 @@ export default class GDeviceIO extends React.Component {
     if (up) {
       const {network, disk} = this.state
       const networkValue = this.sumNetworks(network)
-      const diskValue = disk ? Math.ceil(disk.FreeSpace * 100 / disk.TotalSpace) : 0
+      const diskValue = this.sumDisks(disk)
 
       const items = [{
         title1: `${networkValue.sent}KB / ${networkValue.received}KB`,
@@ -165,10 +184,10 @@ export default class GDeviceIO extends React.Component {
         title3: 'Network Utilization',
         value: 0
       }, {
-        title1: `${diskValue}%`,
-        title2: disk ? `${disk.FreeSpace}G / ${disk.TotalSpace}G` : '',
+        title1: `${diskValue.read}KB / ${diskValue.write}KB`,
+        title2: 'Read / Write',
         title3: 'Disk Utilization',
-        value: diskValue || ' '
+        value: 0
       }]
 
       return (
