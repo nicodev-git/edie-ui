@@ -181,12 +181,12 @@ export default class GDeviceIO extends React.Component {
       const items = [{
         title1: `${networkValue.sent}KB / ${networkValue.received}KB`,
         title2: 'Sent / Received',
-        title3: 'Network Utilization',
+        title3: 'Network IO',
         value: 0
       }, {
         title1: `${diskValue.read}KB / ${diskValue.write}KB`,
         title2: 'Read / Write',
-        title3: 'Disk Utilization',
+        title3: 'Disk IO',
         value: 0
       }]
 
