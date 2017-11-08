@@ -64,7 +64,7 @@ export default class GDeviceIO extends React.Component {
   onSocketOpen () {
     this.monitorSocket.send({
       action: 'enable-realtime',
-      monitors: 'network',
+      monitors: 'network,disk',
       deviceId: this.getDeviceId()
     })
   }
@@ -74,7 +74,8 @@ export default class GDeviceIO extends React.Component {
       const {network} = msg.data
       const state = {}
       if (network) state.network = network
-      // if (disk) state.disk = sumDisks(disk)
+      if (disk) state.disk = sumDisks(disk)
+      state.up = true
       state.loading = false
 
       this.setState(state)
@@ -126,8 +127,8 @@ export default class GDeviceIO extends React.Component {
     })
 
     return {
-      sent,
-      received,
+      sent: (sent / 1024).toFixed(1),
+      received: (received / 1024).toFixed(1),
       sum: sent + received
     }
   }
@@ -151,15 +152,20 @@ export default class GDeviceIO extends React.Component {
     const up = this.state.up
 
     if (up) {
-      const {network} = this.state
+      const {network, disk} = this.state
       const networkValue = this.sumNetworks(network)
-
+      const diskValue = disk ? Math.ceil(disk.FreeSpace * 100 / disk.TotalSpace) : 0
 
       const items = [{
-        title1: `${networkValue.sent} / ${networkValue.received}`,
-        title2: 'Network',
+        title1: `${networkValue.sent}KB / ${networkValue.received}KB`,
+        title2: 'Sent / Received',
         title3: 'Network Utilization',
         value: 0
+      }, {
+        title1: `${diskValue}%`,
+        title2: disk ? `${disk.FreeSpace}G / ${disk.TotalSpace}G` : '',
+        title3: 'Disk Utilization',
+        value: diskValue
       }]
 
       return (
