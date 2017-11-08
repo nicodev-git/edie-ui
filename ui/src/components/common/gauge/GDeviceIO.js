@@ -5,8 +5,7 @@ export default class GDeviceIO extends React.Component {
     super (props)
     this.state = {
       loading: true,
-      memory: null,
-      cpu: null,
+      network: null,
       disk: null,
       up: false
     }
@@ -33,10 +32,8 @@ export default class GDeviceIO extends React.Component {
 
   startUpdate () {
     this.setState({
-      loading: true,
-      memory: null,
-      cpu: null,
       disk: null,
+      network:null,
       up: false
     })
     this.monitorSocket = new MonitorSocket({
@@ -57,14 +54,14 @@ export default class GDeviceIO extends React.Component {
   onSocketOpen () {
     this.monitorSocket.send({
       action: 'enable-realtime',
-      monitors: 'basic',
+      monitors: 'network,disk',
       deviceId: this.getDeviceId()
     })
   }
 
   onMonitorMessage (msg) {
     if (msg.action === 'update' && msg.deviceId === this.getDeviceId()) {
-      const {cpu, memory, disk} = msg.data
+      const {network, disk} = msg.data
       const state = {}
       if (cpu) state.cpu = cpu
       if (memory) state.memory = memory
