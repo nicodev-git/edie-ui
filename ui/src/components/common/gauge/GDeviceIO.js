@@ -54,18 +54,17 @@ export default class GDeviceIO extends React.Component {
   onSocketOpen () {
     this.monitorSocket.send({
       action: 'enable-realtime',
-      monitors: 'network,disk',
+      monitors: 'network',
       deviceId: this.getDeviceId()
     })
   }
 
   onMonitorMessage (msg) {
     if (msg.action === 'update' && msg.deviceId === this.getDeviceId()) {
-      const {network, disk} = msg.data
+      const {network} = msg.data
       const state = {}
-      if (cpu) state.cpu = cpu
-      if (memory) state.memory = memory
-      if (disk) state.disk = sumDisks(disk)
+      if (network) state.network = network
+      // if (disk) state.disk = sumDisks(disk)
       state.loading = false
 
       this.setState(state)
@@ -107,6 +106,22 @@ export default class GDeviceIO extends React.Component {
     return `[${devices[index].name}] ${gauge.name}`
   }
 
+  sumNetworks (networks) {
+    let sent = 0
+    let received = 0
+
+    networks.forEach(p => {
+      sent += p.BytesSentPerSec
+      received += p.BytesReceivedPerSec
+    })
+
+    return {
+      sent,
+      received,
+      sum: sent + received
+    }
+  }
+
   /////////////////////////////////////////////////////
 
   renderItem (item, i) {
@@ -126,26 +141,15 @@ export default class GDeviceIO extends React.Component {
     const up = this.state.up
 
     if (up) {
-      const {cpu, memory, disk} = this.state
-      const cpuValue = cpu ? (cpu.length ? cpu[0].Usage : cpu.Usage) : 0
-      const memValue = memory ?  Math.ceil(memory.UsedSize * 100 / memory.TotalSize) : 0
-      const diskValue = disk ? Math.ceil(disk.FreeSpace * 100 / disk.TotalSpace) : 0
+      const {network} = this.state
+      const networkValue = this.sumNetworks(network)
+
 
       const items = [{
-        title1: `${cpuValue}%`,
-        title2: cpu ? `${cpu.length ? cpu[0].Model : cpu.Model}` : '',
-        title3: 'CPU Utilization',
-        value: cpuValue
-      }, {
-        title1: `${memValue}%`,
-        title2: memory ? `${memory.UsedSize}M / ${memory.TotalSize}M` : '',
-        title3: 'Memory Utilization',
-        value: memValue
-      }, {
-        title1: `${diskValue}%`,
-        title2: disk ? `${disk.FreeSpace}G / ${disk.TotalSpace}G` : '',
-        title3: 'Disk Utilization',
-        value: diskValue
+        title1: `${networkValue.sent} / ${networkValue.received}`,
+        title2: 'Network',
+        title3: 'Network Utilization',
+        value: 0
       }]
 
       return (
