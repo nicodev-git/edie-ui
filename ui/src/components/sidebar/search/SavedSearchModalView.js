@@ -8,6 +8,10 @@ import EditIcon from 'material-ui/svg-icons/content/create'
 
 import { TwoButtonsBlockCustom, Modal, CardPanel } from 'components/modal/parts'
 
+const sorter = (a, b) => {
+  return a.name.toLowerCase().localeCompare(b.name.toLowerCase())
+}
+
 class SavedSearchModalView extends React.Component {
   render () {
     const {
@@ -37,6 +41,8 @@ class SavedSearchModalView extends React.Component {
       })
     })).filter(p => (p.name || '').toLowerCase().indexOf(keyword) >= 0
       || (p.description || '').toLowerCase().indexOf(keyword) >= 0)
+
+    options.sort(sorter)
 
     if (panelMode) return this.renderContent()
     return (
