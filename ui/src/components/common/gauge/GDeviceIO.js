@@ -9,6 +9,7 @@ import GEditView from './GEditView'
 
 import {checkAgentUp} from 'shared/Global'
 import {showAlert} from 'components/common/Alert'
+import {bytesToSize} from 'util/Formatter'
 
 export default class GDeviceIO extends React.Component {
   constructor (props) {
@@ -130,8 +131,8 @@ export default class GDeviceIO extends React.Component {
 
 
     return {
-      sent: (sent / 1024).toFixed(1),
-      received: (received / 1024).toFixed(1),
+      sent,
+      received,
       sum: sent + received
     }
   }
@@ -149,8 +150,8 @@ export default class GDeviceIO extends React.Component {
 
 
     return {
-      read: (read / 1024).toFixed(1),
-      write: (write / 1024).toFixed(1),
+      read,
+      write,
       sum: read + write
     }
   }
@@ -179,12 +180,12 @@ export default class GDeviceIO extends React.Component {
       const diskValue = this.sumDisks(disk)
 
       const items = [{
-        title1: `${networkValue.sent}KB / ${networkValue.received}KB`,
+        title1: `${bytesToSize(networkValue.sent)} / ${bytesToSize(networkValue.received)}`,
         title2: 'Sent / Received',
         title3: 'Network IO',
         value: 0
       }, {
-        title1: `${diskValue.read}KB / ${diskValue.write}KB`,
+        title1: `${bytesToSize(diskValue.read)} / ${bytesToSize(diskValue.write)}`,
         title2: 'Read / Write',
         title3: 'Disk IO',
         value: 0
