@@ -396,3 +396,13 @@ a, a:focus, a:hover {
 .row-hover:hover .link {
     display: inline-block;
 }
+
+.floating-item {
+    transform: scale(0);
+    transition: all 0.3s;
+}
+
+.floating-item.visible {
+    transform: scale(1);
+    transition: all 0.5s;
+}

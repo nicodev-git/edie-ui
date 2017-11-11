@@ -1,11 +1,13 @@
 import React from 'react'
 import {concat} from 'lodash'
 import {IconButton, SelectField, MenuItem, TextField} from 'material-ui'
-import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
 import {debounce, findIndex} from 'lodash'
 import moment from 'moment'
+
 import EditIcon from 'material-ui/svg-icons/editor/mode-edit'
 import ArrowRightIcon from 'material-ui/svg-icons/hardware/keyboard-arrow-right'
+import IconWork from 'material-ui/svg-icons/action/work'
+import IconGroup from 'material-ui/svg-icons/action/group-work'
 
 import WfRectModal from './workflow/WfRectModal'
 import RectItem from './workflow/RectItem'
@@ -20,8 +22,11 @@ import EntityDetailModal from 'components/sidebar/search/EntityDetailModal'
 import WfRectGroupsModal from './workflow/WfRectGroupsModal'
 import RectIconSet from './workflow/RectIconSet'
 
+import FloatingMenu from 'components/common/floating/FloatingMenu'
+
 const RECT_W = 135
 const RECT_H = 135
+
 export default class WorkflowDashboardView extends React.Component {
   constructor (props) {
     super(props)
@@ -31,6 +36,20 @@ export default class WorkflowDashboardView extends React.Component {
       paramValue: '',
       editMode: false
     }
+
+    this.menuItems = [{
+      label: 'Group',
+      icon: <IconGroup/>,
+      onClick: this.onClickShowGroups.bind(this)
+    }, {
+      label: 'Rect',
+      icon: <IconWork/>,
+      onClick: this.onClickAddItem.bind(this)
+    }, {
+      label: 'Edit',
+      icon: <EditIcon/>,
+      onClick: this.onClickEditMode.bind(this)
+    }]
   }
   componentWillMount () {
     this.debUpdateGroup = debounce(this.updateGroup.bind(this), 2000)
@@ -771,11 +790,7 @@ export default class WorkflowDashboardView extends React.Component {
             )}
           </SelectField>
 
-          <IconButton onTouchTap={this.onClickShowGroups.bind(this)}><AddCircleIcon/></IconButton>
-
           <div className="pull-right text-right">
-            <IconButton onTouchTap={this.onClickAddItem.bind(this)}><AddCircleIcon/></IconButton>
-            <IconButton onTouchTap={this.onClickEditMode.bind(this)}><EditIcon/></IconButton>
           </div>
         </div>
         <div className="flex-1">
@@ -807,6 +822,8 @@ export default class WorkflowDashboardView extends React.Component {
             )}
 
           </div>
+
+          <FloatingMenu menuItems={this.menuItems}/>
 
           {this.renderWfRectModal()}
           {this.renderSearchModal()}
