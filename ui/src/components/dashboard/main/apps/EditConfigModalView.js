@@ -1,17 +1,19 @@
 import React from 'react'
-import {Form} from 'redux-form'
-import {Modal, CardPanel, SubmitBlock} from 'components/modal/parts'
+import {Form, Field} from 'redux-form'
+import {Modal, CardPanel, SubmitBlock, FormCheckbox} from 'components/modal/parts'
 
 export default class EditConfigModalView extends React.Component {
   render () {
-    const {onHide, onClickOK} = this.props
+    const {onHide, onSubmit} = this.props
     return (
       <Modal title="Config" onRequestClose={onHide}>
-        <CardPanel title="Config">
+        <Form onSubmit={onSubmit}>
+          <CardPanel title="Config">
+            <Field name="hideDuplicate" component={FormCheckbox} label="Hide Duplicates"/>
+          </CardPanel>
 
-        </CardPanel>
-
-        <SubmitBlock onSave={onClickOK}/>
+          <SubmitBlock name="Save"/>
+        </Form>
       </Modal>
     )
   }
