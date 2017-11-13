@@ -11,12 +11,24 @@ class EditConfigModal extends React.Component {
   onHide () {
     this.props.onClickClose()
   }
+  getDevices () {
+    const {devices} = this.props
+    return devices.filter(p => p.templateName === 'Windows Server')
+  }
+  getChecked (device) {
+    if (!device.monitors) return false
+    return device.monitors.filter(p => p.monitortype === 'app').length > 0
+  }
   render () {
     const {handleSubmit} = this.props
     return (
       <EditConfigModalView
         onHide={this.onHide.bind(this)}
-        onSubmit={handleSubmit(this.onSubmit.bind(this))}/>
+        onSubmit={handleSubmit(this.onSubmit.bind(this))}
+
+        devices={this.getDevices()}
+        getChecked={this.getChecked.bind(this)}
+      />
     )
   }
 }
