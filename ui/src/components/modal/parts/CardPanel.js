@@ -15,7 +15,7 @@ export default class CardPanel extends React.Component {
             </div>
           ) : null}
         </CardLegend>
-        <Card>
+        <Card style={{paddingBottom: 0}}>
           <CardText style={contentStyle}>
             {this.props.children}
           </CardText>

@@ -3,6 +3,7 @@ import {Form, Field} from 'redux-form'
 import {Checkbox} from 'material-ui'
 
 import {Modal, CardPanel, SubmitBlock, FormCheckbox} from 'components/modal/parts'
+import {isWindowsDevice} from 'shared/Global'
 
 export default class EditConfigModalView extends React.Component {
   render () {
@@ -12,11 +13,17 @@ export default class EditConfigModalView extends React.Component {
         <Form onSubmit={onSubmit}>
           <CardPanel title="Config">
             <Field name="hideDuplicate" component={FormCheckbox} label="Hide Duplicates"/>
+          </CardPanel>
 
+          <CardPanel title="Devices">
             <div style={{maxHeight: 300, overflow: 'auto'}} className="margin-md-top">
-              <table>
+              <table className="table table-hover">
                 <thead>
-                  <tr><th>Device</th></tr>
+                <tr>
+                  <th>Name</th>
+                  <th>OS</th>
+                  <th>IP</th>
+                </tr>
                 </thead>
                 <tbody>
                 {devices.map(p =>
@@ -24,6 +31,8 @@ export default class EditConfigModalView extends React.Component {
                     <td>
                       <Checkbox label={p.name} checked={getChecked(p)} onCheck={(e, value) => onCheckChange(p, e, value)}/>
                     </td>
+                    <td>{isWindowsDevice(p) ? 'Windows' : 'Linux'}</td>
+                    <td>{p.wanip || p.lanip}</td>
                   </tr>
                 )}
                 </tbody>
