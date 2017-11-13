@@ -51,6 +51,8 @@ import {
   SHOW_WFRECT_GROUPS_MODAL,
   SELECT_WFRECT_GROUP,
 
+  SHOW_APPS_PREF_MODAL,
+
   NO_AUTH_ERROR
 } from './types'
 
@@ -385,6 +387,12 @@ export const removeGaugeRect = (props, board, stateOnly) => {
       dispatch({type: UPDATE_WFRECT_GROUP, data})
     else
       dispatch(updateWfRectGroup(data))
+  }
+}
+
+export const showAppsPrefModal = (visible) => {
+  return dispatch => {
+    dispatch({type: SHOW_APPS_PREF_MODAL, visible})
   }
 }
 

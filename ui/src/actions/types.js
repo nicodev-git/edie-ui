@@ -483,6 +483,8 @@ export const REMOVE_WFRECT_GROUP = 'REMOVE_WFRECT_GROUP'
 export const SHOW_WFRECT_GROUPS_MODAL = 'SHOW_WFRECT_GROUPS_MODAL'
 export const SELECT_WFRECT_GROUP = 'SELECT_WFRECT_GROUP'
 
+export const SHOW_APPS_PREF_MODAL = 'SHOW_APPS_PREF_MODAL'
+
 ///////////////////////////////////////////////////////////////
 
 export const FETCH_MONITOR_GROUPS = 'FETCH_MONITOR_GROUPS'

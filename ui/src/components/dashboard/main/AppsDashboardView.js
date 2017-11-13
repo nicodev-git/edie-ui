@@ -43,6 +43,11 @@ export default class AppsDashboardView extends React.Component {
     )
   }
 
+  renderPrefModal () {
+    if (!this.props.appsPrefModalOpen) return null
+
+  }
+
   render () {
     return (
       <div>
