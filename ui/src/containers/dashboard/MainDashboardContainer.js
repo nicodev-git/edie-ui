@@ -124,7 +124,8 @@ export default connect(
     wfRectGroupsModalOpen: state.dashboard.wfRectGroupsModalOpen,
     selectedWfRectGroup: state.dashboard.selectedWfRectGroup,
 
-    appsPrefModalOpen: state.dashboard.appsPrefModalOpen
+    appsPrefModalOpen: state.dashboard.appsPrefModalOpen,
+    appsPref: state.dashboard.appsPref
   }), {
     fetchDevicesGroups,
     fetchMonitorGroups,

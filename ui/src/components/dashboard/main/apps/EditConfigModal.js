@@ -23,6 +23,6 @@ class EditConfigModal extends React.Component {
 
 export default connect(
   state => ({
-    initialValues: {}
+    initialValues: state.dashboard.appsPref
   })
 )(reduxForm({form: 'appsConfigForm'})(EditConfigModal))

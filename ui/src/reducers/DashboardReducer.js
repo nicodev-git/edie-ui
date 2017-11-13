@@ -114,6 +114,10 @@ const initialState = {
 
   wfRectGroups: [],
 
+  appsPref: {
+    hideDuplicate: false
+  },
+
   sidebarProfileMenuOpen: false,
   sidebarMessageMenuOpen: false,
 
