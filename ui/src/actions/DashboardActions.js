@@ -54,6 +54,8 @@ import {
   SHOW_APPS_PREF_MODAL,
   UPDATE_APPS_PREF,
 
+  FETCH_ALL_APPS,
+
   NO_AUTH_ERROR
 } from './types'
 
@@ -400,5 +402,13 @@ export const showAppsPrefModal = (visible) => {
 export const updateAppsPref = (data) => {
   return dispatch => {
     dispatch({type: UPDATE_APPS_PREF, data})
+  }
+}
+
+export const fetchAllApps = () => {
+  return dispatch => {
+    axios.get(`${ROOT_URL}/findAllApps`).then(res => {
+      dispatch({type: FETCH_ALL_APPS, data: res.data})
+    })
   }
 }

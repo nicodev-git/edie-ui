@@ -68,7 +68,8 @@ import {
   selectWfRectGroup,
 
   showAppsPrefModal,
-  updateAppsPref
+  updateAppsPref,
+  fetchAllApps
 } from 'actions'
 
 class MainDashboardContainer extends React.Component {
@@ -126,7 +127,8 @@ export default connect(
     selectedWfRectGroup: state.dashboard.selectedWfRectGroup,
 
     appsPrefModalOpen: state.dashboard.appsPrefModalOpen,
-    appsPref: state.dashboard.appsPref
+    appsPref: state.dashboard.appsPref,
+    allApps: state.dashboard.allApps
   }), {
     fetchDevicesGroups,
     fetchMonitorGroups,
@@ -192,6 +194,7 @@ export default connect(
     selectWfRectGroup,
 
     showAppsPrefModal,
-    updateAppsPref
+    updateAppsPref,
+    fetchAllApps
   }
 )(withRouter(MainDashboardContainer))

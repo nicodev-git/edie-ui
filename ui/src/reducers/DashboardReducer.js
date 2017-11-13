@@ -83,6 +83,7 @@ import {
 
   SHOW_APPS_PREF_MODAL,
   UPDATE_APPS_PREF,
+  FETCH_ALL_APPS,
 
   API_ERROR
 } from 'actions/types'
@@ -118,6 +119,7 @@ const initialState = {
   appsPref: {
     hideDuplicate: false
   },
+  allApps: [],
 
   sidebarProfileMenuOpen: false,
   sidebarMessageMenuOpen: false,
@@ -382,6 +384,9 @@ export default function (state = initialState, action) {
 
     case UPDATE_APPS_PREF:
       return { ...state, appsPref: action.data }
+
+    case FETCH_ALL_APPS:
+      return { ...state, allApps: action.data }
     default:
       return state
   }

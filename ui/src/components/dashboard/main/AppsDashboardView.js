@@ -2,19 +2,17 @@ import React from 'react'
 import {IconButton} from 'material-ui'
 import EditIcon from 'material-ui/svg-icons/content/create'
 
-import ServerItem from './ServerItem'
-import EditConfigModal from "./apps/EditConfigModal";
+import EditConfigModal from './apps/EditConfigModal'
+import AppletCard from 'components/common/AppletCard'
+import { appletColors as colors } from 'shared/Global'
 
 export default class AppsDashboardView extends React.Component {
-  constructor (props) {
-    super(props)
-
-    this.state = {
-    }
+  componentWillMount () {
+    this.props.fetchAllApps()
   }
 
   getServers () {
-    return []
+    return this.props.allApps || []
   }
 
   onClickPref () {
@@ -32,14 +30,15 @@ export default class AppsDashboardView extends React.Component {
 
   /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  renderServer (server, i) {
+  renderServer (item, index) {
     return (
-      <ServerItem
-        key={server.id}
-        server={server}
-        index={i}
-        onClick={() => this.onClickServer(server)}
-        onClickDelete={() => this.onClickDeleteServer(server)}
+      <AppletCard
+        key={item.ID}
+        color={colors[index % colors.length]}
+        name={item.Publisher}
+        desc={item.Name}
+        desc2={item.Version}
+        desc3=""
       />
     )
   }
