@@ -19,6 +19,37 @@ class EditConfigModal extends React.Component {
     if (!device.monitors) return false
     return device.monitors.filter(p => p.monitortype === 'app').length > 0
   }
+  onCheckChange (device, e, checked) {
+    if (checked) {
+      const monitor = {
+        credentialTypes: ['WINDOWS'],
+        enabled: true,
+        monitortype: 'app',
+        name: 'Installed App',
+        params: {
+          checkinterval: 60000,
+          remove_after: 1000
+        },
+        tags: []
+      }
+
+      this.props.updateMapDevice({
+        ...device,
+        monitors: [
+          ...(device.monitors || []),
+          monitor
+        ]
+      })
+    } else {
+      this.props.updateMapDevice({
+        ...device,
+        monitors: device.monitors.filter(p => p.monitortype !== 'app')
+      })
+    }
+  }
+
+  /////////////////////////////////////////
+
   render () {
     const {handleSubmit} = this.props
     return (
@@ -28,6 +59,7 @@ class EditConfigModal extends React.Component {
 
         devices={this.getDevices()}
         getChecked={this.getChecked.bind(this)}
+        onCheckChange={this.onCheckChange.bind(this)}
       />
     )
   }

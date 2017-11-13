@@ -6,7 +6,7 @@ import {Modal, CardPanel, SubmitBlock, FormCheckbox} from 'components/modal/part
 
 export default class EditConfigModalView extends React.Component {
   render () {
-    const {onHide, onSubmit, devices, getChecked} = this.props
+    const {onHide, onSubmit, devices, getChecked, onCheckChange} = this.props
     return (
       <Modal title="Config" onRequestClose={onHide}>
         <Form onSubmit={onSubmit}>
@@ -22,7 +22,7 @@ export default class EditConfigModalView extends React.Component {
                 {devices.map(p =>
                   <tr key={p.id}>
                     <td>
-                      <Checkbox label={p.name} checked={getChecked(p)}/>
+                      <Checkbox label={p.name} checked={getChecked(p)} onCheck={(e, value) => onCheckChange(p, e, value)}/>
                     </td>
                   </tr>
                 )}
