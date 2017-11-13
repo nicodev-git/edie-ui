@@ -8,7 +8,7 @@ import { appletColors as colors } from 'shared/Global'
 
 export default class AppsDashboardView extends React.Component {
   componentWillMount () {
-    this.props.fetchAllApps()
+    this.props.fetchAllApps(false)
   }
 
   getServers () {
@@ -22,6 +22,8 @@ export default class AppsDashboardView extends React.Component {
   onSavePref (values) {
     this.props.updateAppsPref(values)
     this.props.showAppsPrefModal(false)
+
+    this.props.fetchAllApps(!!values.hideDuplicate)
   }
 
   onClosePrefModal () {

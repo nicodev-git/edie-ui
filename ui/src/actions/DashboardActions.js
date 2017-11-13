@@ -405,9 +405,11 @@ export const updateAppsPref = (data) => {
   }
 }
 
-export const fetchAllApps = () => {
+export const fetchAllApps = (hideDuplicate) => {
   return dispatch => {
-    axios.get(`${ROOT_URL}/findAllApps`).then(res => {
+    axios.get(`${ROOT_URL}/findAllApps`, {
+      params: {hideDuplicate}
+    }).then(res => {
       dispatch({type: FETCH_ALL_APPS, data: res.data})
     })
   }
