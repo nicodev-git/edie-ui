@@ -131,7 +131,8 @@ export default connect(
     appsPref: state.dashboard.appsPref,
     allApps: state.dashboard.allApps,
     appDevicesModalOpen: state.dashboard.appDevicesModalOpen,
-    appDeviceIds:state.dashboard.appDeviceIds
+    appDeviceIds: state.dashboard.appDeviceIds,
+    selectedApp: state.dashboard.selectedApp
   }), {
     fetchDevicesGroups,
     fetchMonitorGroups,

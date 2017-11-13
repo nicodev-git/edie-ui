@@ -390,7 +390,7 @@ export default function (state = initialState, action) {
       return { ...state, allApps: action.data }
 
     case SHOW_APP_DEVICES_MODAL:
-      return { ...state, appDevicesModalOpen: action.visible, appDeviceIds: action.deviceIds }
+      return { ...state, appDevicesModalOpen: action.visible, appDeviceIds: action.deviceIds, selectedApp: action.app }
     default:
       return state
   }

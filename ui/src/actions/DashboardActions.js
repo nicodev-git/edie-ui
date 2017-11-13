@@ -416,8 +416,8 @@ export const fetchAllApps = (hideDuplicate) => {
   }
 }
 
-export const showAppDevicesModal = (visible, deviceIds) => {
+export const showAppDevicesModal = (visible, deviceIds, app) => {
   return dispatch => {
-    dispatch({type: SHOW_APP_DEVICES_MODAL, visible, deviceIds})
+    dispatch({type: SHOW_APP_DEVICES_MODAL, visible, deviceIds, app})
   }
 }
