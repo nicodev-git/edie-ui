@@ -7,6 +7,7 @@ import MainDashboardView from './MainDashboardView'
 import ServerDashboardView from './ServerDashboardView'
 import BoardListModal from './BoardListModal'
 import WorkflowDashboardView from './WorkflowDashboardView'
+import AppsDashboardView from './AppsDashboardView'
 
 export default class MainDashboard extends React.Component {
   componentWillMount () {
@@ -72,8 +73,11 @@ export default class MainDashboard extends React.Component {
         return (
           <WorkflowDashboardView board={board} {...this.props}/>
         )
+      } else if (board.name === 'Apps') {
+        return (
+          <AppsDashboardView board={board} {...this.props}/>
+        )
       }
-
     }
     return (
       <MainDashboardView board={board} {...this.props}/>
