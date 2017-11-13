@@ -55,6 +55,7 @@ export default class WorkflowDashboardView extends React.Component {
   }
   componentWillMount () {
     this.debUpdateGroup = debounce(this.updateGroup.bind(this), 2000)
+    this.props.selectWfRectGroup(null)
     this.props.fetchWfRectGroups()
   }
 
