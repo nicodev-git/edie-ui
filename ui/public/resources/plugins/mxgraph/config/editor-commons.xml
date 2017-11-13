@@ -2,7 +2,6 @@
 	<ui>
 		<resource basename="/resources/plugins/mxgraph/resources/app"/>
 	</ui>
-	<include name="/resources/plugins/mxgraph/config/keyhandler-commons.xml"/>
 	<Array as="actions">
 		<add as="open"><![CDATA[
 			function (editor)
