@@ -77,7 +77,7 @@ export default class AppletCard extends React.Component {
                 {onClickDelete && <CloseIcon size={32} color="white" onClick={this.onClickDelete.bind(this)}/>}
               </div>
             </div>
-            <span className="title">
+            <span className={`title ${desc.length > 45 ? 'title-sm' : ''}`}>
               {desc}&nbsp;
             </span>
             <p className="author">

@@ -233,8 +233,12 @@ div.dropdown-image div:hover {
     word-break: normal;
 }
 
-.web-applet-card.small .title {
+.web-applet-card.small .title{
     font-size: 15px;
+}
+
+.web-applet-card.small .title.title-sm {
+    font-size: 12px;
 }
 
 .web-applet-card .author {
