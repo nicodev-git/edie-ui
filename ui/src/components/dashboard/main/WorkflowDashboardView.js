@@ -50,6 +50,8 @@ export default class WorkflowDashboardView extends React.Component {
       icon: <EditIcon/>,
       onClick: this.onClickEditMode.bind(this)
     }]
+
+    this.debOnClick = debounce(this.onClickRect.bind(this), 250)
   }
   componentWillMount () {
     this.debUpdateGroup = debounce(this.updateGroup.bind(this), 2000)
@@ -161,13 +163,48 @@ export default class WorkflowDashboardView extends React.Component {
 
       if (style.startsWith('box-')) {
         if (e.currentTarget.textContent && cell.userData) {
-          evt.consume();
+          evt.consume()
           const rect = this.findRect(cell.userData.id)
 
           if (style === 'box-gray') return
 
-          this.onClickShowSearch(rect, style === 'box-green')
+          this.debOnClick()
+          this.fnOnClick = () => {
+            this.onClickShowSearch(rect, style === 'box-green')
+          }
         }
+      }
+    })
+
+    ///////////////////////////
+
+    graph.addListener(mxEvent.DOUBLE_CLICK, (sender, evt) => {
+      const e = evt.getProperty('event'); // mouse event
+      const cell = evt.getProperty('cell'); // cell may be null
+      if (!cell) return
+
+      const style = graph.getModel().getStyle(cell)
+      if (!style) return
+
+      if (style.startsWith('box-')) {
+        evt.consume();
+        if (e.currentTarget.textContent && cell.userData) {
+          const rect = this.findRect(cell.userData.id)
+
+          this.debOnClick()
+          this.fnOnClick = () => {
+            this.onClickEditItem(rect)
+          }
+        }
+
+        // if (e.currentTarget.textContent && cell.userData) {
+        //
+        //   const rect = this.findRect(cell.userData.id)
+        //
+        //   if (style === 'box-gray') return
+        //
+        //   this.onClickShowSearch(rect, style === 'box-green')
+        // }
       }
     })
 
@@ -352,6 +389,10 @@ export default class WorkflowDashboardView extends React.Component {
 
   onClickDeleteIcon (cell) {
     this.onClickDeleteItem(cell)
+  }
+
+  onClickRect () {
+    this.fnOnClick && this.fnOnClick()
   }
 
   ///////////////////////////////////////////
