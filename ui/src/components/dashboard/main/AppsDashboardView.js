@@ -3,6 +3,7 @@ import {IconButton} from 'material-ui'
 import EditIcon from 'material-ui/svg-icons/content/create'
 
 import ServerItem from './ServerItem'
+import EditConfigModal from "./apps/EditConfigModal";
 
 export default class AppsDashboardView extends React.Component {
   constructor (props) {
@@ -19,6 +20,10 @@ export default class AppsDashboardView extends React.Component {
   getServerTpls () {
     const {deviceTemplates} = this.props
     return deviceTemplates.filter(p => (p.tags || []).includes('Server'))
+  }
+
+  onClickPref () {
+    this.props.showAppsPrefModal(true)
   }
 
   /////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -38,14 +43,16 @@ export default class AppsDashboardView extends React.Component {
   renderAddMenu () {
     return (
       <div className="text-right" style={{position: 'absolute', top: -45, right: 0}}>
-        <IconButton><EditIcon /></IconButton>
+        <IconButton onTouchTap={this.onClickPref.bind(this)}><EditIcon /></IconButton>
       </div>
     )
   }
 
   renderPrefModal () {
     if (!this.props.appsPrefModalOpen) return null
-
+    return (
+      <EditConfigModal {...this.props}/>
+    )
   }
 
   render () {
@@ -55,6 +62,8 @@ export default class AppsDashboardView extends React.Component {
         <ul className="web-applet-cards">
           {this.getServers().map(this.renderServer.bind(this))}
         </ul>
+
+        {this.renderPrefModal()}
       </div>
     )
   }
