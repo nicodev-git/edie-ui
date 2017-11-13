@@ -56,7 +56,7 @@ export default class AppsDashboardView extends React.Component {
       deviceIds = list.filter(p => p.Name === app.Name).map(p => p.DeviceId)
     }
 
-    this.props.showAppDevicesModal(true, deviceIds)
+    this.props.showAppDevicesModal(true, deviceIds, app)
   }
 
   getAppDevices () {
@@ -111,6 +111,7 @@ export default class AppsDashboardView extends React.Component {
       <AppDevicesModal
         onHide={this.onCloseAppDevicesModal.bind(this)}
         devices={this.getAppDevices()}
+        selectedApp={this.props.selectedApp}
       />
     )
   }

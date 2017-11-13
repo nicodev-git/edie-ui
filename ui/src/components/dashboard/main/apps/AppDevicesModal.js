@@ -4,10 +4,12 @@ import AppDevicesModalView from './AppDevicesModalView'
 
 export default class AppDevicesModal extends React.Component {
   render () {
+    const {devices, onHide, selectedApp} = this.props
     return (
       <AppDevicesModalView
-        devices={[]}
-        onHide={this.props.onHide}
+        devices={devices}
+        onHide={onHide}
+        selectedApp={selectedApp}
       />
     )
   }
