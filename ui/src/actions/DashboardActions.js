@@ -55,6 +55,7 @@ import {
   UPDATE_APPS_PREF,
 
   FETCH_ALL_APPS,
+  SHOW_APP_DEVICES_MODAL,
 
   NO_AUTH_ERROR
 } from './types'
@@ -412,5 +413,11 @@ export const fetchAllApps = (hideDuplicate) => {
     }).then(res => {
       dispatch({type: FETCH_ALL_APPS, data: res.data})
     })
+  }
+}
+
+export const showAppDevicesModal = (visible, deviceIds) => {
+  return dispatch => {
+    dispatch({type: SHOW_APP_DEVICES_MODAL, visible, deviceIds})
   }
 }

@@ -84,6 +84,7 @@ import {
   SHOW_APPS_PREF_MODAL,
   UPDATE_APPS_PREF,
   FETCH_ALL_APPS,
+  SHOW_APP_DEVICES_MODAL,
 
   API_ERROR
 } from 'actions/types'
@@ -387,6 +388,9 @@ export default function (state = initialState, action) {
 
     case FETCH_ALL_APPS:
       return { ...state, allApps: action.data }
+
+    case SHOW_APP_DEVICES_MODAL:
+      return { ...state, appDevicesModalOpen: action.visible, appDeviceIds: action.deviceIds }
     default:
       return state
   }

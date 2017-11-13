@@ -83,6 +83,11 @@ export default class AppsDashboardView extends React.Component {
     )
   }
 
+  renderDevicesModal () {
+    if (!this.props.appDevicesModalOpen) return null
+
+  }
+
   render () {
     return (
       <div>
@@ -92,6 +97,7 @@ export default class AppsDashboardView extends React.Component {
         </ul>
 
         {this.renderPrefModal()}
+        {this.renderDevicesModal()}
       </div>
     )
   }
