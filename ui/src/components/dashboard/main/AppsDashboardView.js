@@ -5,6 +5,7 @@ import EditIcon from 'material-ui/svg-icons/content/create'
 import EditConfigModal from './apps/EditConfigModal'
 import AppletCard from 'components/common/AppletCard'
 import { appletColors as colors } from 'shared/Global'
+import AppDevicesModal from './apps/AppDevicesModal'
 
 export default class AppsDashboardView extends React.Component {
   constructor (props) {
@@ -48,6 +49,26 @@ export default class AppsDashboardView extends React.Component {
 
   /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+  onClickApp (app) {
+    let deviceIds = app['DeviceIds']
+    const list = this.props.allApps || []
+    if (!deviceIds) {
+      deviceIds = list.filter(p => p.Name === app.Name).map(p => p.DeviceId)
+    }
+
+    this.props.showAppDevicesModal(true, deviceIds)
+  }
+
+  getAppDevices () {
+    const {appDeviceIds, devices} = this.props
+    return devices.filter(p => appDeviceIds.includes(p.id))
+  }
+  onCloseAppDevicesModal () {
+    this.props.showAppDevicesModal(false)
+  }
+
+  /////////////////////////////////////////////////////////////////////////////////////////////////////////
+
   renderServer (item, index) {
     return (
       <AppletCard
@@ -57,6 +78,7 @@ export default class AppsDashboardView extends React.Component {
         desc={item.Name}
         desc2={item.Version}
         desc3=""
+        onClick={this.onClickApp.bind(this, item)}
       />
     )
   }
@@ -85,7 +107,12 @@ export default class AppsDashboardView extends React.Component {
 
   renderDevicesModal () {
     if (!this.props.appDevicesModalOpen) return null
-
+    return (
+      <AppDevicesModal
+        onHide={this.onCloseAppDevicesModal.bind(this)}
+        devices={this.getAppDevices()}
+      />
+    )
   }
 
   render () {
