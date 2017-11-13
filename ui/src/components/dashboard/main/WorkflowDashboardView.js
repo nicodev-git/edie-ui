@@ -70,6 +70,7 @@ export default class WorkflowDashboardView extends React.Component {
     graph.maxFitScale = 1
     graph.autoExtend = 0
     graph.foldingEnabled = 0
+    graph.cellsEditable = 0
     graph.setCellsResizable(false)
     graph.setAllowDanglingEdges(false);
     // graph.maximumGraphBounds = new window.mxRectangle(0, 0, 1024, 768)
