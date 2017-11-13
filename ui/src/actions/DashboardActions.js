@@ -52,6 +52,7 @@ import {
   SELECT_WFRECT_GROUP,
 
   SHOW_APPS_PREF_MODAL,
+  UPDATE_APPS_PREF,
 
   NO_AUTH_ERROR
 } from './types'
@@ -396,3 +397,8 @@ export const showAppsPrefModal = (visible) => {
   }
 }
 
+export const updateAppsPref = (data) => {
+  return dispatch => {
+    dispatch({type: UPDATE_APPS_PREF, data})
+  }
+}

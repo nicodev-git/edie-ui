@@ -67,7 +67,8 @@ import {
   showWfRectGroupsModal,
   selectWfRectGroup,
 
-  showAppsPrefModal
+  showAppsPrefModal,
+  updateAppsPref
 } from 'actions'
 
 class MainDashboardContainer extends React.Component {
@@ -190,6 +191,7 @@ export default connect(
     showWfRectGroupsModal,
     selectWfRectGroup,
 
-    showAppsPrefModal
+    showAppsPrefModal,
+    updateAppsPref
   }
 )(withRouter(MainDashboardContainer))

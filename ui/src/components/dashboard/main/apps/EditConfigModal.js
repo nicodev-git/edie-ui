@@ -6,10 +6,10 @@ import EditConfigModalView from './EditConfigModalView'
 
 class EditConfigModal extends React.Component {
   onSubmit (values) {
-    console.log(values)
+    this.props.onClickSave(values)
   }
   onHide () {
-
+    this.props.onClickClose()
   }
   render () {
     const {handleSubmit} = this.props

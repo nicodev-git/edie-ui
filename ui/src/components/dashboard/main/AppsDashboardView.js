@@ -17,13 +17,17 @@ export default class AppsDashboardView extends React.Component {
     return []
   }
 
-  getServerTpls () {
-    const {deviceTemplates} = this.props
-    return deviceTemplates.filter(p => (p.tags || []).includes('Server'))
-  }
-
   onClickPref () {
     this.props.showAppsPrefModal(true)
+  }
+
+  onSavePref (values) {
+    this.props.updateAppsPref(values)
+    this.props.showAppsPrefModal(false)
+  }
+
+  onClosePrefModal () {
+    this.props.showAppsPrefModal(false)
   }
 
   /////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -51,7 +55,11 @@ export default class AppsDashboardView extends React.Component {
   renderPrefModal () {
     if (!this.props.appsPrefModalOpen) return null
     return (
-      <EditConfigModal {...this.props}/>
+      <EditConfigModal
+        {...this.props}
+        onClickSave={this.onSavePref.bind(this)}
+        onClickClose={this.onClosePrefModal.bind(this)}
+      />
     )
   }
 

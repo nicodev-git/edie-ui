@@ -82,6 +82,7 @@ import {
   SELECT_WFRECT_GROUP,
 
   SHOW_APPS_PREF_MODAL,
+  UPDATE_APPS_PREF,
 
   API_ERROR
 } from 'actions/types'
@@ -378,6 +379,9 @@ export default function (state = initialState, action) {
 
     case SHOW_APPS_PREF_MODAL:
       return { ...state, appsPrefModalOpen: action.visible }
+
+    case UPDATE_APPS_PREF:
+      return { ...state, appsPref: action.data }
     default:
       return state
   }

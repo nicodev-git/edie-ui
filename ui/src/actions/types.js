@@ -484,6 +484,7 @@ export const SHOW_WFRECT_GROUPS_MODAL = 'SHOW_WFRECT_GROUPS_MODAL'
 export const SELECT_WFRECT_GROUP = 'SELECT_WFRECT_GROUP'
 
 export const SHOW_APPS_PREF_MODAL = 'SHOW_APPS_PREF_MODAL'
+export const UPDATE_APPS_PREF = 'UPDATE_APPS_PREF'
 
 ///////////////////////////////////////////////////////////////
 
