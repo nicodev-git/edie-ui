@@ -11,7 +11,8 @@ export default class RectSearchModal extends React.Component {
     return (
       <RectSearchModalView
         onHide={onHide}
-        params={params}
+        name={params.name}
+        params={params.searchParams}
         onRowDblClick={this.onRowDblClick.bind(this)}
       />
     )

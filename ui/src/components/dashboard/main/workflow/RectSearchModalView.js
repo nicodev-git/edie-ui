@@ -7,7 +7,10 @@ import {renderEntity, getHighlighted} from 'components/common/CellRenderers'
 export default class RectSearchModalView extends React.Component {
   constructor (props) {
     super(props)
-    this.state = {}
+    this.state = {
+      allExpanded: false,
+      total: 0
+    }
     this.cells = [{
       'displayName': ' ',
       'columnName': 'entity.id',
@@ -39,12 +42,32 @@ export default class RectSearchModalView extends React.Component {
         return ret
       }
     }]
+
+    this.onResultCountUpdate = this.onResultCountUpdate.bind(this)
   }
+
+  onClickToggleExpand () {
+
+  }
+
+  onResultCountUpdate () {
+
+  }
+
   render () {
-    const {onHide, params, onRowDblClick} = this.props
+    const {onHide, name, params, onRowDblClick} = this.props
     return (
       <Modal title="Search Result" onRequestClose={onHide} contentStyle={{width: '90%', maxWidth: 'initial'}}>
         <CardPanel title="Result">
+          <div className="header-red">
+            {name}
+            <div className="pull-right">
+              <div className="link margin-md-right" onClick={this.onClickToggleExpand}>
+                {this.state.allExpanded ? 'Collapse All' : 'Expand All'}
+              </div>
+              Total: {this.state.total}
+            </div>
+          </div>
           <div style={{height: 500, position: 'relative'}}>
             <InfiniteTable
               url="/search/query"
@@ -56,6 +79,7 @@ export default class RectSearchModalView extends React.Component {
               pageSize={10}
               showTableHeading={false}
               selectable
+              onUpdateCount={this.onResultCountUpdate}
             />
           </div>
         </CardPanel>

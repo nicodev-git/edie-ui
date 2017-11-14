@@ -707,8 +707,10 @@ export default class WorkflowDashboardView extends React.Component {
         new RegExp(`\\$${paramName}`, 'i'), paramValue)
     }
 
-
-    this.props.showRectSearchModal(true, searchParams)
+    this.props.showRectSearchModal(true, {
+      name: search.name,
+      searchParams
+    })
   }
 
   onCloseRectSearch () {
