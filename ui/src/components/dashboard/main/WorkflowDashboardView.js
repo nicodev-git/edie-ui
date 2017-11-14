@@ -45,10 +45,6 @@ export default class WorkflowDashboardView extends React.Component {
       label: 'Rect',
       icon: <IconWork/>,
       onClick: this.onClickAddItem.bind(this)
-    }, {
-      label: 'Edit',
-      icon: <EditIcon/>,
-      onClick: this.onClickEditMode.bind(this)
     }]
 
     this.debOnClick = debounce(this.onClickRect.bind(this), 250)
@@ -845,6 +841,7 @@ export default class WorkflowDashboardView extends React.Component {
           </SelectField>
 
           <div className="pull-right text-right">
+            <IconButton onTouchTap={this.onClickEditMode.bind(this)}><EditIcon/></IconButton>
           </div>
         </div>
         <div className="flex-1">
