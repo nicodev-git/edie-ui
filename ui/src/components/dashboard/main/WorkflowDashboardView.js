@@ -559,13 +559,14 @@ export default class WorkflowDashboardView extends React.Component {
   }
 
   onUpdateRectState (id, good, bad) {
-    if (!bad && !good) return
-
     const {graph} = this.editor
     const cell = this.findGraphCell(id)
     if (!cell) return
 
-    graph.getModel().setStyle(cell, bad ? 'box-red' : 'box-green')
+    let style = 'box-gray'
+    if (bad || good) style = bad ? 'box-red' : 'box-green'
+
+    graph.getModel().setStyle(cell, style)
   }
 
   ///////////////////////////////////////////
