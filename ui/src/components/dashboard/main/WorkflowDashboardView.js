@@ -406,7 +406,8 @@ export default class WorkflowDashboardView extends React.Component {
 
     this.setState({
       paramName: group.paramName || '',
-      paramValue: ''
+      paramValue: '',
+      paramValueInput: ''
     })
     // graph.zoomActual()
     // graph.fit()
