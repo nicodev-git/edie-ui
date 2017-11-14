@@ -404,6 +404,10 @@ export default class WorkflowDashboardView extends React.Component {
     // Adds cells to the model in a single step
     this.addGraphRects(this.getRects())
 
+    this.setState({
+      paramName: group.paramName || '',
+      paramValue: ''
+    })
     // graph.zoomActual()
     // graph.fit()
     // graph.view.rendering = true
@@ -729,9 +733,15 @@ export default class WorkflowDashboardView extends React.Component {
   /////////////////////
 
   onClickParamSet () {
+    const {selectedWfRectGroup} = this.props
     showPrompt('Param Name', this.state.paramName || '', text => {
       if (!text) return
       this.setState({
+        paramName: text
+      })
+
+      this.props.updateWfRectGroup({
+        ...selectedWfRectGroup,
         paramName: text
       })
     })
