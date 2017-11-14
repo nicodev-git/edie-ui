@@ -57,6 +57,8 @@ import {
   FETCH_ALL_APPS,
   SHOW_APP_DEVICES_MODAL,
 
+  SHOW_SERVER_SEARCH_MODAL,
+
   NO_AUTH_ERROR
 } from './types'
 
@@ -419,5 +421,11 @@ export const fetchAllApps = (hideDuplicate) => {
 export const showAppDevicesModal = (visible, deviceIds, app) => {
   return dispatch => {
     dispatch({type: SHOW_APP_DEVICES_MODAL, visible, deviceIds, app})
+  }
+}
+
+export const showServerSearchModal = (visible) => {
+  return dispatch => {
+    dispatch({type: SHOW_SERVER_SEARCH_MODAL, visible})
   }
 }

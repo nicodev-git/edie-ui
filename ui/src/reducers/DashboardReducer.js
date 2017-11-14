@@ -86,6 +86,8 @@ import {
   FETCH_ALL_APPS,
   SHOW_APP_DEVICES_MODAL,
 
+  SHOW_SERVER_SEARCH_MODAL,
+
   API_ERROR
 } from 'actions/types'
 
@@ -391,6 +393,9 @@ export default function (state = initialState, action) {
 
     case SHOW_APP_DEVICES_MODAL:
       return { ...state, appDevicesModalOpen: action.visible, appDeviceIds: action.deviceIds, selectedApp: action.app }
+
+    case SHOW_SERVER_SEARCH_MODAL:
+      return { ...state, serverSearchModalOpen: action.visible }
     default:
       return state
   }

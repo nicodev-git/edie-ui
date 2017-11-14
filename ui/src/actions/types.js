@@ -489,6 +489,8 @@ export const UPDATE_APPS_PREF = 'UPDATE_APPS_PREF'
 export const FETCH_ALL_APPS = 'FETCH_ALL_APPS'
 export const SHOW_APP_DEVICES_MODAL = 'SHOW_APP_DEVICES_MODAL'
 
+export const SHOW_SERVER_SEARCH_MODAL = 'SHOW_SERVER_SEARCH_MODAL'
+
 ///////////////////////////////////////////////////////////////
 
 export const FETCH_MONITOR_GROUPS = 'FETCH_MONITOR_GROUPS'

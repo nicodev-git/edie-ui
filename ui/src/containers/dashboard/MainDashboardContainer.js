@@ -70,7 +70,9 @@ import {
   showAppsPrefModal,
   updateAppsPref,
   fetchAllApps,
-  showAppDevicesModal
+  showAppDevicesModal,
+
+  showServerSearchModal
 } from 'actions'
 
 class MainDashboardContainer extends React.Component {
@@ -132,7 +134,9 @@ export default connect(
     allApps: state.dashboard.allApps,
     appDevicesModalOpen: state.dashboard.appDevicesModalOpen,
     appDeviceIds: state.dashboard.appDeviceIds,
-    selectedApp: state.dashboard.selectedApp
+    selectedApp: state.dashboard.selectedApp,
+
+    serverSearchModalOpen: state.dashboard.serverSearchModalOpen
   }), {
     fetchDevicesGroups,
     fetchMonitorGroups,
@@ -200,6 +204,8 @@ export default connect(
     showAppsPrefModal,
     updateAppsPref,
     fetchAllApps,
-    showAppDevicesModal
+    showAppDevicesModal,
+
+    showServerSearchModal
   }
 )(withRouter(MainDashboardContainer))

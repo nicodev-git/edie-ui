@@ -1,6 +1,7 @@
 import React from 'react'
 import {IconButton, IconMenu, MenuItem} from 'material-ui'
 import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
+import SearchIcon from 'material-ui/svg-icons/action/search'
 
 import { wizardConfig, getDeviceType } from 'components/common/wizard/WizardConfig'
 import DeviceWizardContainer from 'containers/shared/wizard/DeviceWizardContainer'
@@ -8,6 +9,7 @@ import ServerItem from './ServerItem'
 import RefreshOverlay from 'components/common/RefreshOverlay'
 
 import { showAlert, showConfirm } from 'components/common/Alert'
+import ServerSearchModal from './server/ServerSearchModal'
 
 export default class ServerDashboardView extends React.Component {
   constructor (props) {
@@ -90,6 +92,24 @@ export default class ServerDashboardView extends React.Component {
 
   /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+  onClickSearch () {
+    this.props.showServerSearchModal(true)
+  }
+
+  onCloseSearchModal () {
+    this.props.showServerSearchModal(false)
+  }
+  /////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  renderSearchModal () {
+    if (!this.props.serverSearchModalOpen) return null
+    return (
+      <ServerSearchModal
+        onHide={this.onCloseSearchModal.bind(this)}
+      />
+    )
+  }
+
   renderServer (server, i) {
     return (
       <ServerItem
@@ -106,6 +126,7 @@ export default class ServerDashboardView extends React.Component {
     const tpls = this.getServerTpls()
     return (
       <div className="text-right" style={{position: 'absolute', top: -45, right: 0}}>
+        <IconButton onTouchTap={this.onClickSearch.bind(this)}><SearchIcon/></IconButton>
         <IconMenu
           iconButtonElement={<IconButton><AddCircleIcon /></IconButton>}
           anchorOrigin={{horizontal: 'right', vertical: 'bottom'}}
@@ -165,6 +186,7 @@ export default class ServerDashboardView extends React.Component {
           {this.getServers().map(this.renderServer.bind(this))}
         </ul>
         {this.renderDeviceWizard()}
+        {this.renderSearchModal()}
         {deleteDeviceState && <RefreshOverlay />}
       </div>
     )
