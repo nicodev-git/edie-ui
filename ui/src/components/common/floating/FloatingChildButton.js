@@ -2,15 +2,16 @@ import React from 'react'
 import {FloatingActionButton} from 'material-ui'
 
 const style = {
-    position: 'absolute',
-    right: '100%',
-    background: 'black',
-    padding: 4,
-    color: '#ececec',
-    top: '50%',
-    transform: 'translate(0, -50%)',
-    borderRadius: 2,
-    fontSize: 13
+  position: 'absolute',
+  right: '100%',
+  background: 'black',
+  padding: 4,
+  color: '#ececec',
+  top: '50%',
+  transform: 'translate(0, -50%)',
+  borderRadius: 2,
+  fontSize: 13,
+  whiteSpace: 'nowrap'
 }
 
 const containerStyle = {
