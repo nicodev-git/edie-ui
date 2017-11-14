@@ -76,7 +76,9 @@ import {
   showMonitorGroupsModal,
   showEntityDetailModal,
 
-  fetchTableViewCols
+  fetchTableViewCols,
+
+  updateCurrentSavedSearch
 } from 'actions'
 
 class GenericSearchContainer extends React.Component {
@@ -233,7 +235,9 @@ export default connect(
       showMonitorGroupsModal,
       showEntityDetailModal,
 
-      fetchTableViewCols
+      fetchTableViewCols,
+
+      updateCurrentSavedSearch
     }, dispatch)
   })
 )(withRouter(GenericSearchContainer))

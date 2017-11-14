@@ -336,6 +336,9 @@ class GenericSearch extends React.Component {
       ...this.props.queryParams,
       q: newQuery
     })
+
+
+    this.props.updateCurrentSavedSearch(null)
   }
   updateQueryParams (params) {
     const serviceParams = this.getServiceParams(params)
@@ -410,6 +413,8 @@ class GenericSearch extends React.Component {
     this.props.updateSearchViewFilter(selectedSearch.viewFilter || '')
     this.props.resetViewCols(selectedSearch.viewCols || [])
     this.updateQuery(found.q || '(type:all)')
+
+    this.props.updateCurrentSavedSearch(selectedSearch.name)
 
     this.props.closeSearchSavePopover()
   }
@@ -941,7 +946,7 @@ class GenericSearch extends React.Component {
   }
 
   render () {
-    const { handleSubmit, monitorTemplates } = this.props
+    const { handleSubmit, monitorTemplates, currentSavedSearch } = this.props
     const { severity, monitorTypes, from, to, types, freeText } = this.getParams()
 
     return (
@@ -994,6 +999,9 @@ class GenericSearch extends React.Component {
               {this.renderSavedSearchModal()}
               {this.renderSearchFieldsModal()}
               {this.renderSearchGraphModal()}
+            </div>
+            <div className={currentSavedSearch ? 'padding-sm' : 'hidden'}>
+              Saved Search: {currentSavedSearch}
             </div>
             <div className="flex-1">
               <div className="flex-horizontal" style={{height: '100%'}}>
