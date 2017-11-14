@@ -69,6 +69,8 @@ import {
   UPDATE_SEARCH_MONITOR,
   SHOW_ENTITY_DETAIL_MODAL,
 
+  UPDATE_CURRENT_SAVED_SEARCH,
+
   FETCH_VIEW_COLS
 } from 'actions/types'
 import { concat } from 'lodash'
@@ -264,6 +266,9 @@ export default function (state = initialState, action) {
 
     case FETCH_VIEW_COLS:
       return { ...state, tableViewCols: action.list }
+
+    case UPDATE_CURRENT_SAVED_SEARCH:
+      return { ...state, currentSavedSearch: action.data }
     default:
       return state
   }

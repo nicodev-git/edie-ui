@@ -158,7 +158,9 @@ export default connect(
     monitorGroupsModalOpen: state.settings.monitorGroupsModalOpen,
 
     entityDetailModalOpen: state.search.entityDetailModalOpen,
-    detailEntity: state.search.detailEntity
+    detailEntity: state.search.detailEntity,
+
+    currentSavedSearch: state.search.currentSavedSearch
   }),
   dispatch => ({
     ...bindActionCreators({

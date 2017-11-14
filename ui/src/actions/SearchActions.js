@@ -63,6 +63,7 @@ import {
   RESET_VIEW_COLS,
   COLLAPSE_SEARCH_FIELDS,
   SHOW_ENTITY_DETAIL_MODAL,
+  UPDATE_CURRENT_SAVED_SEARCH,
 
   FETCH_VIEW_COLS
 } from './types'
@@ -516,5 +517,11 @@ export const fetchTableViewCols = () => {
 
       dispatch({type: FETCH_VIEW_COLS, list})
     }).catch(error => apiError(dispatch, error))
+  }
+}
+
+export const updateCurrentSavedSearch = (data) => {
+  return dispatch => {
+    dispatch({type: UPDATE_CURRENT_SAVED_SEARCH, data})
   }
 }
