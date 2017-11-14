@@ -56,7 +56,9 @@ export default class FloatingChildButton extends React.Component {
                  style={containerStyle}
                  onMouseEnter={this.onMouseEnter}
                  onMouseLeave={this.onMouseLeave}>
-                <FloatingActionButton secondary mini onClick={item.onClick}>
+                <FloatingActionButton secondary={!item.color} mini
+                                      onClick={item.onClick}
+                                      backgroundColor={item.color}>
                     {item.icon}
                 </FloatingActionButton>
                 {this.renderLabel()}

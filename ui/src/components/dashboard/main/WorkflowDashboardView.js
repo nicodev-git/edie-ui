@@ -3,6 +3,7 @@ import {concat} from 'lodash'
 import {IconButton, SelectField, MenuItem, TextField} from 'material-ui'
 import {debounce, findIndex} from 'lodash'
 import moment from 'moment'
+import {deepPurpleA400, purple500} from 'material-ui/styles/colors'
 
 import EditIcon from 'material-ui/svg-icons/editor/mode-edit'
 import ArrowRightIcon from 'material-ui/svg-icons/hardware/keyboard-arrow-right'
@@ -40,10 +41,12 @@ export default class WorkflowDashboardView extends React.Component {
     this.menuItems = [{
       label: 'Group',
       icon: <IconGroup/>,
+      color: purple500,
       onClick: this.onClickShowGroups.bind(this)
     }, {
       label: 'Rect',
       icon: <IconWork/>,
+      color: deepPurpleA400,
       onClick: this.onClickAddItem.bind(this)
     }]
 

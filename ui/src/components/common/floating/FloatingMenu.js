@@ -1,6 +1,6 @@
 import React from 'react'
 import {FloatingActionButton} from 'material-ui'
-import ContentAdd from 'material-ui/svg-icons/content/add'
+import EditIcon from 'material-ui/svg-icons/editor/mode-edit'
 
 import FloatingChildButton from './FloatingChildButton'
 
@@ -47,7 +47,7 @@ export default class FloatingMenu extends React.Component {
                 {this.renderMenu()}
                 <FloatingActionButton
                     secondary>
-                    <ContentAdd />
+                    <EditIcon />
                 </FloatingActionButton>
             </div>
         )
