@@ -1,7 +1,6 @@
 import React from 'react'
 
 import {Modal, CardPanel} from 'components/modal/parts'
-import {isWindowsDevice} from 'shared/Global'
 
 export default class AppDevicesModalView extends React.Component {
   render () {
@@ -22,8 +21,8 @@ export default class AppDevicesModalView extends React.Component {
               {devices.map(p =>
                 <tr key={p.id}>
                   <td>{p.name}</td>
-                  <td>{isWindowsDevice(p) ? 'Windows' : 'Linux'}</td>
-                  <td>{p.wanip || p.lanip}</td>
+                  <td>{p.os}</td>
+                  <td>{p.ip}</td>
                 </tr>
               )}
               </tbody>
