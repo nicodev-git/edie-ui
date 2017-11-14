@@ -1,6 +1,6 @@
 import React from 'react'
 import {FloatingActionButton} from 'material-ui'
-import EditIcon from 'material-ui/svg-icons/editor/mode-edit'
+import EditIcon from 'material-ui/svg-icons/content/add'
 
 import FloatingChildButton from './FloatingChildButton'
 
