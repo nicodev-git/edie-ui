@@ -1,57 +1,112 @@
 import React from 'react'
 import InfiniteTable from 'components/common/InfiniteTable'
+import {IconButton} from 'material-ui'
+import PageViewIcon from 'material-ui/svg-icons/action/pageview'
 
 import {Modal, CardPanel} from 'components/modal/parts'
-import {renderEntity, getHighlighted} from 'components/common/CellRenderers'
+import {renderEntity2, expandEntity, getHighlighted} from 'components/common/CellRenderers'
 
 export default class RectSearchModalView extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
       allExpanded: false,
-      total: 0
+      total: 0,
+      expanded: {}
     }
     this.cells = [{
       'displayName': ' ',
       'columnName': 'entity.id',
       'customComponent': (p) => {
+        // const {viewFilter} = this.props
+        const {expanded, allExpanded} = this.state
         const {rowData} = p
         const {entity} = rowData
-        if (!entity) return <span/>
 
-        const highlighted = getHighlighted(entity, rowData.highlights)
+        // if (viewFilter === viewFilters.log.name) {
+        //   const data = entity.dataobj || {}
+        //   return (
+        //     <div style={chipStyles.wrapper}>
+        //       {<div className="inline-block flex-1">{data.line || entity.description || '[Empty]'}</div>}
+        //       {data.file && <Chip style={chipStyles.smallChip} labelStyle={chipStyles.smallLabel}>{data.file}</Chip>}
+        //     </div>
+        //   )
+        // } else if (viewFilter === viewFilters.raw.name) {
+        //   if (!entity.rawdata) return <span/>
+        //   return (
+        //     <div className="padding-sm bt-gray">{entity.rawdata}</div>
+        //   )
+        // } else if (viewFilter === viewFilters.notNull.name) {
+        //
+        // }
+        if (!entity) return <span/>
+        let expand = expanded[entity.id]
+        if (typeof expand === 'undefined') expand = allExpanded
+
+        const highlighted = getHighlighted(entity, rowData.highlights)//expand ? this.getHighlighted(entity, rowData.highlights) : {...entity}
 
         const timeField = entity.startTimestamp ? 'startTimestamp' : 'timestamp'
         delete highlighted[timeField]
 
         const {severity, ...others} = highlighted
-        const data = {
+        const data = expandEntity({
           type: rowData.type,
           [timeField]: entity[timeField],
           severity,
           ...others
-        }
+        })
         if (!severity) delete data.severity
 
+
         const options = {
-          notNull: true,
+          notNull: false,
           timeField,
-          limit: 0
+          limit: expand ? 0 : 750
         }
-        const ret = renderEntity(data, options)
-        return ret
+        const ret = renderEntity2(data, options)
+        const isOverflow = ret.used >= options.limit
+
+        return (
+          <div className="padding-sm bt-gray">
+            <div className="inline-block">
+              {ret.node}
+              {expand || !isOverflow ? null : <div className="bt-gradient"/>}
+            </div>
+            {isOverflow ? (
+              <div className={`${expand ? 'position-collapse' : 'position-ab'} text-center`}>
+                <img
+                  src={`/resources/images/dashboard/${expand ? 'collapse' : 'expand'}.png`} width="32" alt=""
+                  onClick={this.onClickExpand.bind(this, entity.id, expand)}/>
+              </div>
+            ) : null}
+            <div className="position-abr link text-primary">
+              <IconButton onTouchTap={() => this.props.onRowDblClick(rowData)}><PageViewIcon /></IconButton>
+            </div>
+          </div>
+        )
       }
     }]
 
     this.onResultCountUpdate = this.onResultCountUpdate.bind(this)
+    this.onClickToggleExpand = this.onClickToggleExpand.bind(this)
+  }
+
+  onClickExpand (id, ex) {
+    const {expanded} = this.state
+    expanded[id] = !ex
+    this.setState({expanded})
   }
 
   onClickToggleExpand () {
-
+    const {allExpanded} = this.state
+    this.setState({
+      allExpanded: !allExpanded,
+      expanded: {}
+    })
   }
 
-  onResultCountUpdate () {
-
+  onResultCountUpdate (total, data) {
+    this.setState({total})
   }
 
   render () {
@@ -68,7 +123,7 @@ export default class RectSearchModalView extends React.Component {
               Total: {this.state.total}
             </div>
           </div>
-          <div style={{height: 500, position: 'relative'}}>
+          <div className="table-no-gap" style={{height: 500, position: 'relative'}}>
             <InfiniteTable
               url="/search/query"
               cells={this.cells}
