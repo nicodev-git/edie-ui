@@ -10,7 +10,7 @@ export default class RemoveAfter extends React.Component {
     const {onChange} = this.props
     return (
       <div className="inline-block valign-bottom">
-        <div className="inline-block valign-middle" style={{fontSize: '16px', paddingLeft: 7}}>Add remove events after</div>
+        <div className="inline-block valign-middle" style={{fontSize: '16px', paddingLeft: 7}}>Remove events after</div>
         <Field
           name="remove_after" component={FormSelect} options={removeAfterDurations}
           style={{width: 80, paddingLeft: 15}} className="valign-middle"

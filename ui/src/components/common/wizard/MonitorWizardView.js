@@ -75,7 +75,7 @@ export default class MonitorWizardView extends React.Component {
             <Field name="name" floatingLabel="Name" component={FormInput} className="margin-sm-left margin-sm-right"/>
             {this.renderRequiredParams()}
             <div>
-              <div className="inline-block valign-middle" style={{fontSize: '16px', paddingLeft: 7}}>Add remove events after</div>
+              <div className="inline-block valign-middle" style={{fontSize: '16px', paddingLeft: 7}}>Remove events after</div>
               <Field
                 name="remove_after" component={FormSelect} options={removeAfterDurations}
                 style={{width: 80, paddingLeft: 15}} className="valign-middle"/>

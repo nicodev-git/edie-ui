@@ -204,7 +204,7 @@ export const wizardConfig = {
         }, {
           type: 'removeAfter',
           label: {
-            text: 'Add remove events after',
+            text: 'Remove events after',
             type: 'attach',
             width: 3
           },
@@ -299,7 +299,7 @@ export const wizardConfig = {
         }, {
           type: 'removeAfter',
           label: {
-            text: 'Add remove events after',
+            text: 'Remove events after',
             type: 'attach',
             width: 3
           },
@@ -649,7 +649,7 @@ export const wizardEditConfig = {
       }, {
         type: 'removeAfter',
         label: {
-          text: 'Add remove events after',
+          text: 'Remove events after',
           type: 'attach',
           width: 3
         },
