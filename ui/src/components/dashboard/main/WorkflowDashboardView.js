@@ -39,12 +39,12 @@ export default class WorkflowDashboardView extends React.Component {
     }
 
     this.menuItems = [{
-      label: 'Group',
+      label: 'Add Group',
       icon: <IconGroup/>,
       color: purple500,
       onClick: this.onClickShowGroups.bind(this)
     }, {
-      label: 'Rect',
+      label: 'Add Item',
       icon: <IconWork/>,
       color: deepPurpleA400,
       onClick: this.onClickAddItem.bind(this)
