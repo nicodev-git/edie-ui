@@ -1,5 +1,5 @@
 import React from 'react'
-import {IconButton, IconMenu, MenuItem} from 'material-ui'
+import {IconButton, IconMenu, MenuItem, Card} from 'material-ui'
 import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
 import SearchIcon from 'material-ui/svg-icons/action/search'
 
@@ -10,6 +10,16 @@ import RefreshOverlay from 'components/common/RefreshOverlay'
 
 import { showAlert, showConfirm } from 'components/common/Alert'
 import ServerSearchModal from './server/ServerSearchModal'
+
+const inputStyle = {
+  'verticalAlign': 'middle',
+  'border': 'none',
+  'display': 'inline-block',
+  'height': '30px',
+  'marginTop': '-18px',
+  'marginLeft': '4px',
+  'fontSize': '18px'
+}
 
 export default class ServerDashboardView extends React.Component {
   constructor (props) {
@@ -149,17 +159,23 @@ export default class ServerDashboardView extends React.Component {
   renderAddMenu () {
     const tpls = this.getServerTpls()
     return (
-      <div className="text-right" style={{position: 'absolute', top: -45, right: 0}}>
-        <IconButton onTouchTap={this.onClickSearch.bind(this)}><SearchIcon/></IconButton>
-        <IconMenu
-          iconButtonElement={<IconButton><AddCircleIcon /></IconButton>}
-          anchorOrigin={{horizontal: 'right', vertical: 'bottom'}}
-          targetOrigin={{horizontal: 'right', vertical: 'top'}}
-        >
-          {tpls.map(p =>
-            <MenuItem key={p.id} primaryText={p.name} onTouchTap={this.onClickAddItem.bind(this, p)}/>
-          )}
-        </IconMenu>
+      <div className="text-center" style={{position: 'absolute', top: -45, width: '100%'}}>
+        <div className="inline-block">
+          <Card>
+            <input type="text" style={inputStyle}/>
+            <IconButton onTouchTap={this.onClickSearch.bind(this)}><SearchIcon/></IconButton>
+            <IconMenu
+              iconButtonElement={<IconButton><AddCircleIcon /></IconButton>}
+              anchorOrigin={{horizontal: 'right', vertical: 'bottom'}}
+              targetOrigin={{horizontal: 'right', vertical: 'top'}}
+            >
+              {tpls.map(p =>
+                <MenuItem key={p.id} primaryText={p.name} onTouchTap={this.onClickAddItem.bind(this, p)}/>
+              )}
+            </IconMenu>
+          </Card>
+        </div>
+
       </div>
     )
   }
