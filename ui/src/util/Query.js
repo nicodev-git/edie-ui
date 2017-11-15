@@ -297,6 +297,7 @@ export function parseParams (queryParams, {dateRanges, collections, severities, 
     workflowNames: getArrayValues(parsed, 'workflows'),
     tags: getArrayValues(parsed, 'tags'),
     monitorName: getFieldValue(parsed, 'monitor'),
+    deviceName: getFieldValue(parsed, 'device'),
     types: getArrayValues(parsed, 'type', collections.map(p => p.value)),
     ...dateRange
   }
@@ -319,14 +320,21 @@ function getMonitorId(monitorName, allDevices) {
   return uid
 }
 
+function getDeviceId(deviceName, allDevices) {
+  const index = findIndex(allDevices, {name: deviceName})
+  if (index >= 0) return allDevices[index].id
+  return null
+}
+
 export function buildServiceParams (queryParams, {dateRanges, collections, severities, workflows, allDevices, queryDateFormat}) {
-  const { from, to, workflowNames, monitorName, types, severity } = parseParams(queryParams, {
+  const { from, to, workflowNames, monitorName, deviceName, types, severity } = parseParams(queryParams, {
     dateRanges, collections, severities, queryDateFormat
   })
   const parsed = QueryParser.parse(queryParams.q || '')
 
   removeField(findField(parsed, 'workflows'), true)
   removeField(findField(parsed, 'monitor'))
+  removeField(findField(parsed, 'device'))
   removeField(findField(parsed, 'to'))
   removeField(findField(parsed, 'from'))
   removeField(findField(parsed, 'severity'), true)
@@ -350,6 +358,15 @@ export function buildServiceParams (queryParams, {dateRanges, collections, sever
   if (monitorName) {
     const uid = getMonitorId(monitorName, allDevices || [])
     if (uid) qs.push(`(monitorid:${uid})`)
+  }
+
+  //Device
+  if (deviceName) {
+    const matches = deviceName.match(/^"(.*)"$/)
+    const deviceNameReal = matches ? matches[1] : deviceName
+
+    const uid = getDeviceId(deviceNameReal, allDevices || [])
+    if (uid) qs.push(`(deviceid:${uid})`)
   }
 
   //Severity
