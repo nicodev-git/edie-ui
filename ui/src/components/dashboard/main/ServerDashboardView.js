@@ -3,6 +3,7 @@ import {IconButton, IconMenu, MenuItem, Card} from 'material-ui'
 import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
 import SettingsIcon from 'material-ui/svg-icons/action/settings'
 import ClearIcon from 'material-ui/svg-icons/communication/clear-all'
+import ComputerIcon from 'material-ui/svg-icons/hardware/computer'
 
 import { wizardConfig, getDeviceType } from 'components/common/wizard/WizardConfig'
 import DeviceWizardContainer from 'containers/shared/wizard/DeviceWizardContainer'
@@ -138,6 +139,13 @@ export default class ServerDashboardView extends React.Component {
     this.props.updateServerSearchResults(null)
     this.props.showServerSearchModal(false)
   }
+
+  /////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  onClickCommand () {
+
+  }
+
   /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   renderSearchModal () {
@@ -182,6 +190,7 @@ export default class ServerDashboardView extends React.Component {
                 <MenuItem key={p.id} primaryText={p.name} onTouchTap={this.onClickAddItem.bind(this, p)}/>
               )}
             </IconMenu>
+            <IconButton onTouchTap={this.onClickCommand.bind(this)}><ComputerIcon/></IconButton>
           </Card>
         </div>
 
