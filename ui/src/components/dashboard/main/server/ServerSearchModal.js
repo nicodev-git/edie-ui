@@ -7,6 +7,7 @@ import ServerSearchModalView from './ServerSearchModalView'
 class ServerSearchModal extends React.Component {
   onSubmit (values) {
     console.log(values)
+    this.props.onSubmit(values)
   }
   render () {
     const {onHide, handleSubmit} = this.props

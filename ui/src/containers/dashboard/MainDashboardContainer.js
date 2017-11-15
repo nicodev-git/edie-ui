@@ -73,7 +73,8 @@ import {
   showAppDevicesModal,
 
   showServerSearchModal,
-  searchServers
+  searchServers,
+  updateServerSearchResults
 } from 'actions'
 
 class MainDashboardContainer extends React.Component {
@@ -209,6 +210,7 @@ export default connect(
     showAppDevicesModal,
 
     showServerSearchModal,
-    searchServers
+    searchServers,
+    updateServerSearchResults
   }
 )(withRouter(MainDashboardContainer))

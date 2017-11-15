@@ -434,7 +434,13 @@ export const showServerSearchModal = (visible) => {
 export const searchServers = params => {
   return dispatch => {
     axios.get(`${ROOT_URL}/search/device`, {params}).then(res => {
-      dispatch({type: UPDATE_SERVER_SEARCH_RESULTS, data: res.data.map(p => p.id)})
+      dispatch(updateServerSearchResults(res.data.map(p => p.id)))
     })
+  }
+}
+
+export const updateServerSearchResults = (data) => {
+  return dispatch => {
+    dispatch({type: UPDATE_SERVER_SEARCH_RESULTS, data})
   }
 }
