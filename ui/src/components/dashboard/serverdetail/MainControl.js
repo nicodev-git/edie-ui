@@ -151,7 +151,11 @@ export default class MainControl extends React.Component {
   }
 
   onClickBack () {
-
+    const {gaugeBoards} = this.props
+    const found = gaugeBoards.filter(p => p.name === 'Servers' && p.type === 'system')
+    if (found.length) {
+      this.props.history.push(`/dashboard/${found[0].id}`)
+    }
   }
 
   onClickEdit () {
