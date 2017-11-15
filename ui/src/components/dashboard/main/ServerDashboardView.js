@@ -158,6 +158,7 @@ export default class ServerDashboardView extends React.Component {
     return (
       <ServerCmdModal
         onHide={this.onCloseCmdModal.bind(this)}
+        devices={this.getServers()}
       />
     )
   }

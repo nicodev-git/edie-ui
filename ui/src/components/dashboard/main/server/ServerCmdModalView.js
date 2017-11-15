@@ -10,7 +10,7 @@ export default class ServerCmdModalView extends React.Component {
       <Modal title="Command" onRequestClose={onHide}>
         <Form onSubmit={onSubmit}>
           <CardPanel title="Command">
-            <Field name="cmd" component={FormInput}/>
+            <Field name="cmd" component={FormInput} hintText="Command"/>
           </CardPanel>
         </Form>
       </Modal>
