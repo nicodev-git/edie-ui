@@ -3,6 +3,13 @@ import {Form, Field} from 'redux-form'
 
 import {Modal, CardPanel, FormCheckbox, FormInput, SubmitBlock} from 'components/modal/parts'
 
+const checkStyle = {
+  width: 200
+}
+const inputStyle = {
+  width: 50
+}
+
 export default class ServerSearchModalView extends React.Component {
   render () {
     const {onHide, onSubmit} = this.props
@@ -11,24 +18,26 @@ export default class ServerSearchModalView extends React.Component {
         <Form onSubmit={onSubmit}>
           <CardPanel title="Search">
             <div>
-              <div className="inline-block valign-middle nowrap">
+              <div className="inline-block valign-middle nowrap" style={checkStyle}>
                 <Field name="diskEnabled" component={FormCheckbox} label="Free space less than"/>
               </div>
 
-              <Field name="diskSize" component={FormInput} className="valign-middle margin-sm-left"/>
+              <Field name="diskSize" component={FormInput} className="valign-middle margin-sm-left" style={inputStyle}/>
+              <label className="valign-middle">GB</label>
             </div>
             <div>
-              <div className="inline-block valign-middle nowrap">
+              <div className="inline-block valign-middle nowrap" style={checkStyle}>
                 <Field name="ipEnabled" component={FormCheckbox} label="Contains IP"/>
               </div>
-              <Field name="ip" component={FormInput} className="valign-middle margin-sm-left"/>
+              <Field name="ip" component={FormInput} className="valign-middle margin-sm-left" style={{width: 150}}/>
             </div>
 
             <div>
-              <div className="inline-block valign-middle nowrap">
-                <Field name="memoryEnabled" component={FormCheckbox} label="Have more memory than "/>
+              <div className="inline-block valign-middle nowrap" style={checkStyle}>
+                <Field name="memoryEnabled" component={FormCheckbox} label="Memory more than "/>
               </div>
-              <Field name="memory" component={FormInput} className="valign-middle margin-sm-left"/>
+              <Field name="memorySize" component={FormInput} className="valign-middle margin-sm-left" style={inputStyle}/>
+              <label className="valign-middle">GB</label>
             </div>
 
           </CardPanel>
