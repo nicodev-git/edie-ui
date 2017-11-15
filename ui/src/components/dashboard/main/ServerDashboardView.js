@@ -12,6 +12,7 @@ import RefreshOverlay from 'components/common/RefreshOverlay'
 
 import { showAlert, showConfirm } from 'components/common/Alert'
 import ServerSearchModal from './server/ServerSearchModal'
+import ServerCmdModal from "./server/ServerCmdModal";
 
 const inputStyle = {
   'verticalAlign': 'middle',
@@ -143,10 +144,23 @@ export default class ServerDashboardView extends React.Component {
   /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   onClickCommand () {
+    this.props.showServerCmdModal(true)
+  }
 
+  onCloseCmdModal () {
+    this.props.showServerCmdModal(false)
   }
 
   /////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  renderCmdModal () {
+    if (!this.props.serverCmdModalOpen) return null
+    return (
+      <ServerCmdModal
+        onHide={this.onCloseCmdModal.bind(this)}
+      />
+    )
+  }
 
   renderSearchModal () {
     if (!this.props.serverSearchModalOpen) return null
@@ -179,7 +193,9 @@ export default class ServerDashboardView extends React.Component {
           <Card>
             <input type="text" style={inputStyle}/>
             <IconButton onTouchTap={this.onClickSearch.bind(this)} style={btnStyle}><SettingsIcon/></IconButton>
-            <IconButton onTouchTap={this.onClearSearch.bind(this)} style={btnStyle} className="margin-md-right"><ClearIcon/></IconButton>
+            <IconButton onTouchTap={this.onClearSearch.bind(this)} style={btnStyle}><ClearIcon/></IconButton>
+            <IconButton onTouchTap={this.onClickCommand.bind(this)} style={btnStyle}
+                        className="margin-md-right"><ComputerIcon/></IconButton>
             <IconMenu
               className="hidden"
               iconButtonElement={<IconButton><AddCircleIcon /></IconButton>}
@@ -190,7 +206,6 @@ export default class ServerDashboardView extends React.Component {
                 <MenuItem key={p.id} primaryText={p.name} onTouchTap={this.onClickAddItem.bind(this, p)}/>
               )}
             </IconMenu>
-            <IconButton onTouchTap={this.onClickCommand.bind(this)}><ComputerIcon/></IconButton>
           </Card>
         </div>
 
@@ -245,6 +260,7 @@ export default class ServerDashboardView extends React.Component {
         </ul>
         {this.renderDeviceWizard()}
         {this.renderSearchModal()}
+        {this.renderCmdModal()}
         {deleteDeviceState && <RefreshOverlay />}
       </div>
     )

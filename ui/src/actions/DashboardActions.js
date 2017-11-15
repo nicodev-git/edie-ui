@@ -61,6 +61,7 @@ import {
   UPDATE_SERVER_SEARCH_RESULTS,
 
   UPDATE_SERVER_SEARCH_PARAMS,
+  SHOW_SERVER_CMD_MODAL,
 
   NO_AUTH_ERROR
 } from './types'
@@ -450,5 +451,11 @@ export const updateServerSearchResults = (data) => {
 export const updateServerSearchParams = (data) => {
   return dispatch => {
     dispatch({type: UPDATE_SERVER_SEARCH_PARAMS, data})
+  }
+}
+
+export const showServerCmdModal = visible => {
+  return dispatch => {
+    dispatch({type: SHOW_SERVER_CMD_MODAL, visible})
   }
 }

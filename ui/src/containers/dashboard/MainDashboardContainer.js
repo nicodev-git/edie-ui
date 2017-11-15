@@ -75,7 +75,8 @@ import {
   showServerSearchModal,
   searchServers,
   updateServerSearchResults,
-  updateServerSearchParams
+  updateServerSearchParams,
+  showServerCmdModal
 } from 'actions'
 
 class MainDashboardContainer extends React.Component {
@@ -141,7 +142,9 @@ export default connect(
 
     serverSearchModalOpen: state.dashboard.serverSearchModalOpen,
     serverSearchResults: state.dashboard.serverSearchResults,
-    serverSearchParams: state.dashboard.serverSearchParams
+    serverSearchParams: state.dashboard.serverSearchParams,
+
+    serverCmdModalOpen: state.dashboard.serverCmdModalOpen
   }), {
     fetchDevicesGroups,
     fetchMonitorGroups,
@@ -214,6 +217,7 @@ export default connect(
     showServerSearchModal,
     searchServers,
     updateServerSearchResults,
-    updateServerSearchParams
+    updateServerSearchParams,
+    showServerCmdModal
   }
 )(withRouter(MainDashboardContainer))

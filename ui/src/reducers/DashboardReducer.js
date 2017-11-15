@@ -89,6 +89,7 @@ import {
   SHOW_SERVER_SEARCH_MODAL,
   UPDATE_SERVER_SEARCH_RESULTS,
   UPDATE_SERVER_SEARCH_PARAMS,
+  SHOW_SERVER_CMD_MODAL,
 
   API_ERROR
 } from 'actions/types'
@@ -404,6 +405,9 @@ export default function (state = initialState, action) {
 
     case UPDATE_SERVER_SEARCH_PARAMS:
       return  { ...state, serverSearchParams: action.data }
+
+    case SHOW_SERVER_CMD_MODAL:
+      return { ...state, serverCmdModalOpen: action.visible }
     default:
       return state
   }
