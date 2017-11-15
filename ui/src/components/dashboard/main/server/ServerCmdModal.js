@@ -11,7 +11,8 @@ class ServerCmdModal extends React.Component {
     this.state = {
       connected: false,
       cmd: '',
-      loading: false
+      loading: false,
+      results: []
     }
 
     this.sockets = []
@@ -24,32 +25,83 @@ class ServerCmdModal extends React.Component {
       loading: true
     })
 
+    this.setState({
+      results: []
+    })
     if (!this.state.connected) {
       this.connect()
 
       this.setState({
         connected: true
       })
+    } else {
+      this.sockets.forEach(socket => {
+        this.sendCommandMessage(socket)
+      })
     }
+    this.startLoadTimer()
   }
   connect () {
-    this.props.forEach(device => {
+    this.props.devices.forEach(device => {
       const socket = new MonitorSocket({
-        listener: this.onMonitorMessage.bind(this)
+        listener: this.onMonitorMessage.bind(this, socket)
       })
       socket.device = device
-      socket.connect(this.onSocketOpen.bind(this))
+      socket.connect(this.onSocketOpen.bind(this, socket))
 
       this.sockets.push(socket)
     })
   }
 
   componentWillUnmount () {
+    this.stopLoadTimer()
     this.sockets.forEach(socket => {
       socket.close()
     })
-
   }
+
+  //////////////////////////////////////////////////////////////////
+
+  onSocketOpen (socket) {
+    this.sendCommandMessage(socket, this.state.cmd)
+  }
+  onMonitorMessage (socket, msg) {
+    if (msg.action === 'update') {
+      const {commandResult} = msg.data
+      this.setState({
+        results: [...this.state.results, {
+          device: socket.device,
+          output: commandResult
+        }]
+      })
+    }
+  }
+  sendCommandMessage (socket, command) {
+    socket.send({
+      action: 'command',
+      deviceId: socket.device.id,
+      data: {
+        name: 'RunCommand',
+        params: {
+          output: true,
+          command
+        }
+      }
+    })
+  }
+  //////////////////////////////////////////////////////////////////
+
+  startLoadTimer () {
+    this.loadTimer = setTimeout(() => {
+
+    }, 15000)
+  }
+
+  stopLoadTimer () {
+    clearTimeout(this.loadTimer)
+  }
+
+  //////////////////////////////////////////////////////////////////
 
   render () {
     const {onHide, handleSubmit} = this.props
