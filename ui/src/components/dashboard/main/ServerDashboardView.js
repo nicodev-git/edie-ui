@@ -187,7 +187,6 @@ export default class ServerDashboardView extends React.Component {
   }
 
   renderAddMenu () {
-    const tpls = this.getServerTpls()
     return (
       <div className="text-center" style={{position: 'absolute', top: -68, width: '100%'}}>
         <div className="inline-block">
@@ -197,22 +196,28 @@ export default class ServerDashboardView extends React.Component {
             <IconButton onTouchTap={this.onClearSearch.bind(this)} style={btnStyle}><ClearIcon/></IconButton>
             <IconButton onTouchTap={this.onClickCommand.bind(this)} style={btnStyle}
                         className="margin-md-right"><ComputerIcon/></IconButton>
-            <IconMenu
-              className="hidden"
-              iconButtonElement={<IconButton><AddCircleIcon /></IconButton>}
-              anchorOrigin={{horizontal: 'right', vertical: 'bottom'}}
-              targetOrigin={{horizontal: 'right', vertical: 'top'}}
-            >
-              {tpls.map(p =>
-                <MenuItem key={p.id} primaryText={p.name} onTouchTap={this.onClickAddItem.bind(this, p)}/>
-              )}
-            </IconMenu>
           </Card>
         </div>
-
       </div>
     )
   }
+  renderRightMenu () {
+    const tpls = this.getServerTpls()
+    return (
+      <div style={{position: 'absolute', top: -68, right: 20}}>
+        <IconMenu
+          iconButtonElement={<IconButton><AddCircleIcon /></IconButton>}
+          anchorOrigin={{horizontal: 'right', vertical: 'bottom'}}
+          targetOrigin={{horizontal: 'right', vertical: 'top'}}
+        >
+          {tpls.map(p =>
+            <MenuItem key={p.id} primaryText={p.name} onTouchTap={this.onClickAddItem.bind(this, p)}/>
+          )}
+        </IconMenu>
+      </div>
+    )
+  }
+
   renderDeviceWizard () {
     if (!this.state.deviceWizardVisible) return null
 
@@ -256,6 +261,7 @@ export default class ServerDashboardView extends React.Component {
     return (
       <div>
         {this.renderAddMenu()}
+        {this.renderRightMenu()}
         <ul className="web-applet-cards">
           {this.getServers().map(this.renderServer.bind(this))}
         </ul>

@@ -9,25 +9,45 @@ class ServerCmdModal extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-
+      connected: false,
+      cmd: '',
+      loading: false
     }
+
+    this.sockets = []
   }
   onSubmit (values) {
     const {cmd} = values
     if (!cmd) return
-    console.log(values)
+    this.setState({
+      cmd,
+      loading: true
+    })
+
+    if (!this.state.connected) {
+      this.connect()
+
+      this.setState({
+        connected: true
+      })
+    }
   }
   connect () {
     this.props.forEach(device => {
-      this.monitorSocket = new MonitorSocket({
+      const socket = new MonitorSocket({
         listener: this.onMonitorMessage.bind(this)
       })
-      this.monitorSocket.connect(this.onSocketOpen.bind(this))
-    })
+      socket.device = device
+      socket.connect(this.onSocketOpen.bind(this))
 
+      this.sockets.push(socket)
+    })
   }
 
-  disconnect () {
+  componentWillUnmount () {
+    this.sockets.forEach(socket => {
+      socket.close()
+    })
 
   }
 
