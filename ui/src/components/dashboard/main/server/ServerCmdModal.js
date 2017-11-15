@@ -1,8 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { reduxForm } from 'redux-form'
-import MonitorSocket from 'util/socket/MonitorSocket'
+import {keys} from 'lodash'
 
+import MonitorSocket from 'util/socket/MonitorSocket'
 import ServerCmdModalView from './ServerCmdModalView'
 
 class ServerCmdModal extends React.Component {
@@ -12,7 +13,7 @@ class ServerCmdModal extends React.Component {
       connected: false,
       cmd: '',
       loading: false,
-      results: []
+      results: {}
     }
 
     this.sockets = []
@@ -26,7 +27,7 @@ class ServerCmdModal extends React.Component {
     })
 
     this.setState({
-      results: []
+      results: {}
     })
     if (!this.state.connected) {
       this.connect()
@@ -36,7 +37,7 @@ class ServerCmdModal extends React.Component {
       })
     } else {
       this.sockets.forEach(socket => {
-        this.sendCommandMessage(socket)
+        this.sendCommandMessage(socket, this.state.cmd)
       })
     }
     this.startLoadTimer()
@@ -44,7 +45,7 @@ class ServerCmdModal extends React.Component {
   connect () {
     this.props.devices.forEach(device => {
       const socket = new MonitorSocket({
-        listener: this.onMonitorMessage.bind(this, socket)
+        listener: this.onMonitorMessage.bind(this)
       })
       socket.device = device
       socket.connect(this.onSocketOpen.bind(this, socket))
@@ -65,15 +66,22 @@ class ServerCmdModal extends React.Component {
   onSocketOpen (socket) {
     this.sendCommandMessage(socket, this.state.cmd)
   }
-  onMonitorMessage (socket, msg) {
+  onMonitorMessage (msg) {
     if (msg.action === 'update') {
       const {commandResult} = msg.data
-      this.setState({
-        results: [...this.state.results, {
-          device: socket.device,
-          output: commandResult
-        }]
-      })
+
+      const results = {
+        ...this.state.results,
+        [msg.deviceId]: commandResult
+      }
+      this.setState({results})
+
+      if (keys(results).length === this.props.devices.length) {
+        this.stopLoadTimer()
+        this.setState({
+          loading: false
+        })
+      }
     }
   }
   sendCommandMessage (socket, command) {
@@ -93,8 +101,10 @@ class ServerCmdModal extends React.Component {
 
   startLoadTimer () {
     this.loadTimer = setTimeout(() => {
-
-    }, 15000)
+      this.setState({
+        loading: false
+      })
+    }, 5000)
   }
 
   stopLoadTimer () {
@@ -104,11 +114,15 @@ class ServerCmdModal extends React.Component {
   //////////////////////////////////////////////////////////////////
 
   render () {
-    const {onHide, handleSubmit} = this.props
+    const {loading, results} = this.state
+    const {onHide, handleSubmit, devices} = this.props
     return (
       <ServerCmdModalView
         onHide={onHide}
         onSubmit={handleSubmit(this.onSubmit.bind(this))}
+        loading={loading}
+        results={results}
+        devices={devices}
       />
     )
   }
