@@ -94,6 +94,16 @@ export default class GDeviceInfo extends React.Component {
     return devices[index]
   }
 
+  getMemoryInfo (memory) {
+    if (!memory) return ''
+
+    if (memory.TotalSize >= 1024) {
+      return `${(memory.UsedSize / 1024).toFixed(1)}G / ${(memory.TotalSize / 1024).toFixed(1)}G`
+    }
+
+    return `${memory.UsedSize}M / ${memory.TotalSize}M`
+  }
+
   renderRow (label, text, style) {
     return (
       <div className="row">
@@ -119,7 +129,7 @@ export default class GDeviceInfo extends React.Component {
 
     if (up) {
       const cpuValue = cpu ? `${cpu.length ? cpu[0].Usage : cpu.Usage}%` : ''
-      const memValue = memory ? `${memory.UsedSize}M / ${memory.TotalSize}M` : ''
+      const memValue = this.getMemoryInfo(memory)
       const diskValue = disk ? `${disk.FreeSpace}G / ${disk.TotalSpace}G` : ''
 
       const hardware = cpu ? `Hardware: ${cpu.Model} ` : ''
