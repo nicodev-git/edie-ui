@@ -85,7 +85,7 @@ export default class AppsDashboardView extends React.Component {
 
   renderAddMenu () {
     return (
-      <div className="text-right" style={{position: 'absolute', top: -45, right: 0}}>
+      <div className="text-right" style={{position: 'absolute', top: -68, right: 0}}>
         <TextField name="filter" value={this.state.filter} onChange={this.onChangeFilter.bind(this)}
                    hintText="Search"
                    className="valign-top"/>

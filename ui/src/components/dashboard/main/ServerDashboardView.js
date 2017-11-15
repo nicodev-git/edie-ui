@@ -1,7 +1,8 @@
 import React from 'react'
 import {IconButton, IconMenu, MenuItem, Card} from 'material-ui'
 import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
-import SearchIcon from 'material-ui/svg-icons/action/search'
+import SettingsIcon from 'material-ui/svg-icons/action/settings'
+import ClearIcon from 'material-ui/svg-icons/communication/clear-all'
 
 import { wizardConfig, getDeviceType } from 'components/common/wizard/WizardConfig'
 import DeviceWizardContainer from 'containers/shared/wizard/DeviceWizardContainer'
@@ -15,10 +16,16 @@ const inputStyle = {
   'verticalAlign': 'middle',
   'border': 'none',
   'display': 'inline-block',
-  'height': '30px',
+  'height': '34px',
   'marginTop': '-18px',
-  'marginLeft': '4px',
-  'fontSize': '18px'
+  'marginLeft': '16px',
+  'fontSize': '16px',
+  'width': 510
+}
+
+const btnStyle = {
+  padding: '10px 0',
+  width: 40
 }
 
 export default class ServerDashboardView extends React.Component {
@@ -159,12 +166,14 @@ export default class ServerDashboardView extends React.Component {
   renderAddMenu () {
     const tpls = this.getServerTpls()
     return (
-      <div className="text-center" style={{position: 'absolute', top: -45, width: '100%'}}>
+      <div className="text-center" style={{position: 'absolute', top: -68, width: '100%'}}>
         <div className="inline-block">
           <Card>
             <input type="text" style={inputStyle}/>
-            <IconButton onTouchTap={this.onClickSearch.bind(this)}><SearchIcon/></IconButton>
+            <IconButton onTouchTap={this.onClickSearch.bind(this)} style={btnStyle}><SettingsIcon/></IconButton>
+            <IconButton onTouchTap={this.onClearSearch.bind(this)} style={btnStyle} className="margin-md-right"><ClearIcon/></IconButton>
             <IconMenu
+              className="hidden"
               iconButtonElement={<IconButton><AddCircleIcon /></IconButton>}
               anchorOrigin={{horizontal: 'right', vertical: 'bottom'}}
               targetOrigin={{horizontal: 'right', vertical: 'top'}}

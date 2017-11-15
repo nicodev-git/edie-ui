@@ -834,7 +834,7 @@ export default class WorkflowDashboardView extends React.Component {
     const {selectedWfRectGroup} = this.props
     return (
       <div className="flex-vertical flex-1">
-        <div style={{position: 'absolute', top: -48, left: 200, right: 0}}>
+        <div style={{position: 'absolute', top: -68, left: 200, right: 0}}>
           <SelectField
             hintText="Group"
             className="valign-top margin-lg-left"
