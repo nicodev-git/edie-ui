@@ -37,7 +37,7 @@ class ServerCmdModal extends React.Component {
       })
     } else {
       this.sockets.forEach(socket => {
-        this.sendCommandMessage(socket, this.state.cmd)
+        this.sendCommandMessage(socket, cmd)
       })
     }
     this.startLoadTimer()
