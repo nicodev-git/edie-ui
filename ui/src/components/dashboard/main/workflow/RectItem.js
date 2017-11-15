@@ -22,23 +22,6 @@ export default class RectItem extends React.Component {
     this.startTimer()
   }
 
-  // componentDidUpdate (prevProps, prevState) {
-  //   const {searchList} = prevProps
-  //   const {rect, paramName, paramValue} = this.props
-  //
-  //   if (prevProps.rect.interval !== rect.interval || prevProps.rect.intervalUnit !== rect.intervalUnit) {
-  //     this.stopTimer()
-  //     this.startTimer()
-  //   }
-  //   if (JSON.stringify(prevProps.rect) !== JSON.stringify(this.props.rect)) {
-  //     this.fetchResult()
-  //   } else if (!this.state.fetched && searchList && JSON.stringify(this.props.searchList) !== JSON.stringify(searchList)) {
-  //     this.fetchResult()
-  //   } else if (prevProps.paramName !== paramName || prevProps.paramValue !== paramValue) {
-  //     if (paramName || prevProps.paramName) this.debFetchResult()
-  //   }
-  // }
-
   componentWillUnmount () {
     this.stopTimer()
   }
@@ -74,6 +57,8 @@ export default class RectItem extends React.Component {
     params.from = moment().subtract(rect.interval, rect.intervalUnit).valueOf()
 
     if (paramName) {
+      if (!paramValue && params.q.indexOf(`$${paramName}`) >= 0) return true
+
       params.q = params.q.replace(
         new RegExp(`\\$${paramName}`, 'i'), paramValue)
     }
@@ -93,6 +78,8 @@ export default class RectItem extends React.Component {
       this.getSearchResult(badSearch),
       this.getSearchResult(goodSearch)
     ]).then(axios.spread((res1, res2) => {
+      if (!res1.data || !res2.data) return
+
       const bad = res1.data ? res1.data.page.totalElements : 0
       const good = res2.data ? res2.data.page.totalElements : 0
 
