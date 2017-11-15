@@ -92,7 +92,7 @@ export default class MainDashboard extends React.Component {
   render () {
     return (
       <div className="tabs-custom flex-vertical flex-1">
-        <div className="padding-lg-left">
+        <div className="padding-lg-left" style={{height: 90}}>
           <SelectField
             floatingLabelText="Dashboard" value={this.getSelectedId()} onChange={this.onChangeBoard.bind(this)}
             className="valign-top"
