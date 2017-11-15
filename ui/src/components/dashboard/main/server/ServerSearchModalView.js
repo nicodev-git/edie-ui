@@ -1,7 +1,7 @@
 import React from 'react'
 import {Form, Field} from 'redux-form'
 
-import {Modal, CardPanel, FormCheckbox, FormInput, SubmitBlock} from 'components/modal/parts'
+import {Modal, CardPanel, FormCheckbox, FormInput, SubmitBlock, TwoButtonsBlock} from 'components/modal/parts'
 
 const checkStyle = {
   width: 200

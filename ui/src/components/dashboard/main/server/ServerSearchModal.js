@@ -22,6 +22,6 @@ class ServerSearchModal extends React.Component {
 
 export default connect(
   state => ({
-    initialValues: {}
+    initialValues: state.dashboard.serverSearchParams
   })
 )(reduxForm({form: 'serverSearchForm'})(ServerSearchModal))

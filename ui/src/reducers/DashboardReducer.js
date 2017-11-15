@@ -88,6 +88,7 @@ import {
 
   SHOW_SERVER_SEARCH_MODAL,
   UPDATE_SERVER_SEARCH_RESULTS,
+  UPDATE_SERVER_SEARCH_PARAMS,
 
   API_ERROR
 } from 'actions/types'
@@ -400,6 +401,9 @@ export default function (state = initialState, action) {
 
     case UPDATE_SERVER_SEARCH_RESULTS:
       return { ...state, serverSearchResults: action.data }
+
+    case UPDATE_SERVER_SEARCH_PARAMS:
+      return  { ...state, serverSearchParams: action.data }
     default:
       return state
   }

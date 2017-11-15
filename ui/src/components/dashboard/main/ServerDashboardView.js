@@ -21,9 +21,19 @@ export default class ServerDashboardView extends React.Component {
     }
   }
 
+  componentWillMount () {
+    this.props.updateServerSearchResults(null)
+  }
+
   getServers () {
-    const {devices, allDevices} = this.props
-    return (devices || allDevices).filter(p => (p.tags || []).includes('Server'))
+    const {devices, allDevices, serverSearchResults} = this.props
+    let list = (devices || allDevices).filter(p => (p.tags || []).includes('Server'))
+
+    if (serverSearchResults) {
+      list = list.filter(p => serverSearchResults.includes(p.id))
+    }
+
+    return list
   }
 
   onClickServer (server) {
@@ -102,6 +112,7 @@ export default class ServerDashboardView extends React.Component {
 
   onSubmitSearch (params) {
     this.props.searchServers(params)
+    this.props.updateServerSearchParams(params)
     this.props.showServerSearchModal(false)
   }
   /////////////////////////////////////////////////////////////////////////////////////////////////////////

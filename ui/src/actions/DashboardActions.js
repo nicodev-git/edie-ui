@@ -60,6 +60,8 @@ import {
   SHOW_SERVER_SEARCH_MODAL,
   UPDATE_SERVER_SEARCH_RESULTS,
 
+  UPDATE_SERVER_SEARCH_PARAMS,
+
   NO_AUTH_ERROR
 } from './types'
 
@@ -442,5 +444,11 @@ export const searchServers = params => {
 export const updateServerSearchResults = (data) => {
   return dispatch => {
     dispatch({type: UPDATE_SERVER_SEARCH_RESULTS, data})
+  }
+}
+
+export const updateServerSearchParams = (data) => {
+  return dispatch => {
+    dispatch({type: UPDATE_SERVER_SEARCH_PARAMS, data})
   }
 }
