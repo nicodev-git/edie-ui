@@ -1,14 +1,18 @@
 import React from 'react'
-import {Modal, CardPanel} from 'components/modal/parts'
+import {Form, Field} from 'redux-form'
+
+import {Modal, CardPanel, FormInput} from 'components/modal/parts'
 
 export default class ServerCmdModalView extends React.Component {
   render () {
-    const {onHide} = this.props
+    const {onHide, onSubmit} = this.props
     return (
       <Modal title="Command" onRequestClose={onHide}>
-        <CardPanel title="Command">
-
-        </CardPanel>
+        <Form onSubmit={onSubmit}>
+          <CardPanel title="Command">
+            <Field name="cmd" component={FormInput}/>
+          </CardPanel>
+        </Form>
       </Modal>
     )
   }
