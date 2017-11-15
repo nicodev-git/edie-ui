@@ -9,6 +9,7 @@ import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
 import RenewIcon from 'material-ui/svg-icons/action/autorenew'
 import LockOpenIcon from 'material-ui/svg-icons/action/lock-open'
 import LockOutlineIcon from 'material-ui/svg-icons/action/lock-outline'
+import LeftArrowIcon from 'material-ui/svg-icons/navigation/arrow-back'
 
 import TabPage from 'components/common/TabPage'
 import TabPageBody from 'components/common/TabPageBody'
@@ -41,6 +42,7 @@ export default class MainControl extends React.Component {
     this.lastPlaceholder = null
   }
   componentWillMount () {
+    this.props.fetchGaugeBoards()
     this.props.fetchGauges()
 
     const device = this.getDevice()
@@ -146,6 +148,10 @@ export default class MainControl extends React.Component {
       },
       deviceWizardVisible: true
     })
+  }
+
+  onClickBack () {
+
   }
 
   onClickEdit () {
@@ -498,6 +504,7 @@ export default class MainControl extends React.Component {
           titleOptions={<StatusImg {...this.props} device={device}/>}
           useToolBar>
           <ToolbarGroup firstChild>
+            <IconButton onTouchTap={this.onClickBack.bind(this)} tooltip="Back"><LeftArrowIcon/></IconButton>
             <IconButton onTouchTap={this.onClickEdit.bind(this)} tooltip="General"><EditIcon/></IconButton>
             <IconButton onTouchTap={this.onClickCredEdit.bind(this)} tooltip="Credentials"><CredIcon/></IconButton>
             <IconButton onTouchTap={this.onClickMonitorEdit.bind(this)} tooltip="Monitors"><MonitorIcon/></IconButton>

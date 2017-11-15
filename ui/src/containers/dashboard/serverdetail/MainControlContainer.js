@@ -7,6 +7,7 @@ import {
   fetchGauges,
   fetchCredTypes,
   fetchCredentials,
+  fetchGaugeBoards,
 
   showDeviceEditModal,
   updateMapDevice,
@@ -61,6 +62,7 @@ export default connect(
     credentialTypes: state.settings.credentialTypes,
 
     gauges: state.gauge.gauges,
+    gaugeBoards: state.gauge.gaugeBoards,
     gaugeModalOpen: state.gauge.gaugeModalOpen,
     editGauge: state.gauge.editGauge,
     gaugePickerOpen: state.gauge.gaugePickerOpen,
@@ -68,6 +70,7 @@ export default connect(
     fetchGauges,
     fetchCredTypes,
     fetchCredentials,
+    fetchGaugeBoards,
 
     showDeviceEditModal,
     updateMapDevice,
