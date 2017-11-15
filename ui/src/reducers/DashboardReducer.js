@@ -396,6 +396,9 @@ export default function (state = initialState, action) {
 
     case SHOW_SERVER_SEARCH_MODAL:
       return { ...state, serverSearchModalOpen: action.visible }
+
+    case UPDATE_SERVER_SEARCH_RESULTS:
+      return { ...state, serverSearchResults: action.data }
     default:
       return state
   }

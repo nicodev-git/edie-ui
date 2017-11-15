@@ -58,6 +58,7 @@ import {
   SHOW_APP_DEVICES_MODAL,
 
   SHOW_SERVER_SEARCH_MODAL,
+  UPDATE_SERVER_SEARCH_RESULTS,
 
   NO_AUTH_ERROR
 } from './types'
@@ -427,5 +428,13 @@ export const showAppDevicesModal = (visible, deviceIds, app) => {
 export const showServerSearchModal = (visible) => {
   return dispatch => {
     dispatch({type: SHOW_SERVER_SEARCH_MODAL, visible})
+  }
+}
+
+export const searchServers = params => {
+  return dispatch => {
+    axios.get(`${ROOT_URL}/search/device`, {params}).then(res => {
+      dispatch({type: UPDATE_SERVER_SEARCH_RESULTS, data: res.data.map(p => p.id)})
+    })
   }
 }
