@@ -1,7 +1,8 @@
 import React from 'react'
 import {Form, Field} from 'redux-form'
+import {RaisedButton} from 'material-ui'
 
-import {Modal, CardPanel, FormCheckbox, FormInput, SubmitBlock, TwoButtonsBlock} from 'components/modal/parts'
+import {Modal, CardPanel, FormCheckbox, FormInput} from 'components/modal/parts'
 
 const checkStyle = {
   width: 200
@@ -12,7 +13,7 @@ const inputStyle = {
 
 export default class ServerSearchModalView extends React.Component {
   render () {
-    const {onHide, onSubmit} = this.props
+    const {onHide, onSubmit, onClickClear} = this.props
     return (
       <Modal title="Search" onRequestClose={onHide}>
         <Form onSubmit={onSubmit}>
@@ -42,7 +43,11 @@ export default class ServerSearchModalView extends React.Component {
 
           </CardPanel>
 
-          <SubmitBlock name="Search"/>
+          <div className="form-buttons">
+            <RaisedButton label="Clear Filter" onTouchTap={onClickClear}/>
+
+            <RaisedButton label="Search" type="submit"/>
+          </div>
         </Form>
       </Modal>
     )
