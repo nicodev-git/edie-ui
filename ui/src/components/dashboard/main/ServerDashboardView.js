@@ -104,7 +104,8 @@ export default class ServerDashboardView extends React.Component {
   }
 
   onClickAddRange () {
-    this.props.showRangeAddModal(true)
+    // this.props.showRangeAddModal(true)
+    this.props.history.push('/dashboard/server/range')
   }
 
   onCloseAddRange () {

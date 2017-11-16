@@ -18,6 +18,7 @@ import Settings from 'components/sidebar/settings/Settings'
 import DeviceContainer from 'containers/device/DeviceContainer'
 import LogView from 'containers/dashboard/LogViewContainer'
 import ServerDetailContainer from 'containers/dashboard/ServerDetailContainer'
+import ServerRangeContainer from 'containers/dashboard/ServerRangeContainer'
 
 import {
   closeDevice,
@@ -201,6 +202,7 @@ class MainpageContainer extends Component {
       <Main {...this.props}>
         <Switch>
           <Route path="/dashboard" component={MainDashboardContainer} exact/>
+          <Route path="/dashboard/server/range" component={ServerRangeContainer} exact/>
           <Route path="/dashboard/:id" component={MainDashboardContainer} exact/>
           <Route path="/dashboard/serverdetail/:id" component={ServerDetailContainer} />
         </Switch>
