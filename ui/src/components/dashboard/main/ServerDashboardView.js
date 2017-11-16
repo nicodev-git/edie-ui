@@ -15,6 +15,7 @@ import { showAlert, showConfirm } from 'components/common/Alert'
 import ServerSearchModal from './server/ServerSearchModal'
 import ServerCmdModal from './server/ServerCmdModal'
 import FloatingMenu from 'components/common/floating/FloatingMenu'
+import RangeAddModal from './server/RangeAddModal'
 
 const inputStyle = {
   'verticalAlign': 'middle',
@@ -103,7 +104,11 @@ export default class ServerDashboardView extends React.Component {
   }
 
   onClickAddRange () {
+    this.props.showRangeAddModal(true)
+  }
 
+  onCloseAddRange () {
+    this.props.showRangeAddModal(false)
   }
   /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -160,6 +165,15 @@ export default class ServerDashboardView extends React.Component {
   }
 
   /////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  renderRangeAddModal () {
+    if (!this.props.rangeAddModalOpen) return null
+    return (
+      <RangeAddModal
+        onHide={this.onCloseAddRange.bind(this)}
+      />
+    )
+  }
 
   renderCmdModal () {
     if (!this.props.serverCmdModalOpen) return null
@@ -281,6 +295,7 @@ export default class ServerDashboardView extends React.Component {
         {this.renderDeviceWizard()}
         {this.renderSearchModal()}
         {this.renderCmdModal()}
+        {this.renderRangeAddModal()}
         {deleteDeviceState && <RefreshOverlay />}
       </div>
     )

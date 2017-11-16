@@ -63,6 +63,8 @@ import {
   UPDATE_SERVER_SEARCH_PARAMS,
   SHOW_SERVER_CMD_MODAL,
 
+  SHOW_RANGE_ADD_MODAL,
+
   NO_AUTH_ERROR
 } from './types'
 
@@ -457,5 +459,11 @@ export const updateServerSearchParams = (data) => {
 export const showServerCmdModal = visible => {
   return dispatch => {
     dispatch({type: SHOW_SERVER_CMD_MODAL, visible})
+  }
+}
+
+export const showRangeAddModal = visible => {
+  return dispatch => {
+    dispatch({type: SHOW_RANGE_ADD_MODAL, visible})
   }
 }

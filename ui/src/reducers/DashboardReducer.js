@@ -91,6 +91,8 @@ import {
   UPDATE_SERVER_SEARCH_PARAMS,
   SHOW_SERVER_CMD_MODAL,
 
+  SHOW_RANGE_ADD_MODAL,
+
   API_ERROR
 } from 'actions/types'
 
@@ -409,6 +411,9 @@ export default function (state = initialState, action) {
 
     case SHOW_SERVER_CMD_MODAL:
       return { ...state, serverCmdModalOpen: action.visible }
+
+    case SHOW_RANGE_ADD_MODAL:
+      return { ...state, rangeAddModalOpen: action.visible }
     default:
       return state
   }
