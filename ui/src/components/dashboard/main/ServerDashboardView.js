@@ -1,9 +1,9 @@
 import React from 'react'
-import {IconButton, IconMenu, MenuItem, Card} from 'material-ui'
-import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
+import {IconButton, Card} from 'material-ui'
 import SettingsIcon from 'material-ui/svg-icons/action/settings'
 import ClearIcon from 'material-ui/svg-icons/communication/clear-all'
 import ComputerIcon from 'material-ui/svg-icons/hardware/computer'
+import {purple500} from 'material-ui/styles/colors'
 
 import { wizardConfig, getDeviceType } from 'components/common/wizard/WizardConfig'
 import DeviceWizardContainer from 'containers/shared/wizard/DeviceWizardContainer'
@@ -12,7 +12,8 @@ import RefreshOverlay from 'components/common/RefreshOverlay'
 
 import { showAlert, showConfirm } from 'components/common/Alert'
 import ServerSearchModal from './server/ServerSearchModal'
-import ServerCmdModal from "./server/ServerCmdModal";
+import ServerCmdModal from './server/ServerCmdModal'
+import FloatingMenu from 'components/common/floating/FloatingMenu'
 
 const inputStyle = {
   'verticalAlign': 'middle',
@@ -201,21 +202,15 @@ export default class ServerDashboardView extends React.Component {
       </div>
     )
   }
-  renderRightMenu () {
+  getMenuItems () {
     const tpls = this.getServerTpls()
-    return (
-      <div style={{position: 'absolute', top: -68, right: 20}}>
-        <IconMenu
-          iconButtonElement={<IconButton><AddCircleIcon /></IconButton>}
-          anchorOrigin={{horizontal: 'right', vertical: 'bottom'}}
-          targetOrigin={{horizontal: 'right', vertical: 'top'}}
-        >
-          {tpls.map(p =>
-            <MenuItem key={p.id} primaryText={p.name} onTouchTap={this.onClickAddItem.bind(this, p)}/>
-          )}
-        </IconMenu>
-      </div>
-    )
+
+    return tpls.map(p => ({
+      label: p.name,
+      icon: <ComputerIcon/>,
+      color: purple500,
+      onClick: this.onClickAddItem.bind(this, p)
+    }))
   }
 
   renderDeviceWizard () {
@@ -261,10 +256,11 @@ export default class ServerDashboardView extends React.Component {
     return (
       <div>
         {this.renderAddMenu()}
-        {this.renderRightMenu()}
         <ul className="web-applet-cards">
           {this.getServers().map(this.renderServer.bind(this))}
         </ul>
+
+        <FloatingMenu menuItems={this.getMenuItems()}/>
         {this.renderDeviceWizard()}
         {this.renderSearchModal()}
         {this.renderCmdModal()}
