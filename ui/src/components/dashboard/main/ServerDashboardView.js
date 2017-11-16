@@ -3,6 +3,7 @@ import {IconButton, Card} from 'material-ui'
 import SettingsIcon from 'material-ui/svg-icons/action/settings'
 import ClearIcon from 'material-ui/svg-icons/communication/clear-all'
 import ComputerIcon from 'material-ui/svg-icons/hardware/computer'
+import DevicesIcon from 'material-ui/svg-icons/device/devices'
 import {purple500, deepPurpleA400} from 'material-ui/styles/colors'
 
 import { wizardConfig, getDeviceType } from 'components/common/wizard/WizardConfig'
@@ -99,6 +100,10 @@ export default class ServerDashboardView extends React.Component {
     }, () => {
 
     })
+  }
+
+  onClickAddRange () {
+
   }
   /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -208,12 +213,21 @@ export default class ServerDashboardView extends React.Component {
   getMenuItems () {
     const tpls = this.getServerTpls()
 
-    return tpls.map((p, i) => ({
+    const items = tpls.map((p, i) => ({
       label: p.name,
       icon: <ComputerIcon/>,
       color: tplColors[i % tplColors.length],
       onClick: this.onClickAddItem.bind(this, p)
     }))
+
+    items.push({
+      label: 'Add Range',
+      icon: <DevicesIcon/>,
+      color: deepPurpleA400,
+      onClick: this.onClickAddRange.bind(this)
+    })
+
+    return items
   }
 
   renderDeviceWizard () {
