@@ -21,17 +21,19 @@ class ServerRange extends React.Component {
     const {handleSubmit} = this.props
     return (
       <Form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
-        <CardPanel title="Range">
-          <Field name="from" component={FormInput} floatingLabel="From" />
-          <Field name="to" component={FormInput} floatingLabel="To" className="margin-md-left" />
-          <RaisedButton label="Scan" type="submit"/>
-        </CardPanel>
-
-        <CardPanel title="Result">
-          <div style={{minHeight: 300}}>
-
+        <div className="padding-md-left padding-md-right">
+          <div>
+            <Field name="from" component={FormInput} floatingLabel="From" />
+            <Field name="to" component={FormInput} floatingLabel="To" className="margin-md-left" />
+            <RaisedButton label="Scan" type="submit"/>
           </div>
-        </CardPanel>
+          <CardPanel title="Result">
+
+            <div style={{minHeight: 300}}>
+
+            </div>
+          </CardPanel>
+        </div>
       </Form>
     )
   }
