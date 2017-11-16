@@ -51,7 +51,7 @@ export default class ServerCmdModalView extends React.Component {
   render () {
     const {onHide, onSubmit, loading, devices, results} = this.props
     return (
-      <Modal title="Command" onRequestClose={onHide} contentStyle={{maxWidth: 'initial', width: '90%', paddingLeft: '40px'}}>
+      <Modal title="Command" onRequestClose={onHide} contentStyle={{maxWidth: 'initial', width: '90%'}}>
         <Form onSubmit={onSubmit}>
           <Card className="margin-md-top">
             <Field name="cmd" component={FormInput} label="Command" style={{width: '100%'}}/>
