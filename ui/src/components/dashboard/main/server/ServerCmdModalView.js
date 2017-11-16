@@ -1,7 +1,8 @@
 import React from 'react'
 import {Form, Field} from 'redux-form'
 import {CSVLink} from 'react-csv'
-import {Card} from 'material-ui'
+import {Card, IconButton} from 'material-ui'
+import DownloadIcon from 'material-ui/svg-icons/file/file-download'
 
 import {Modal, CardPanel} from 'components/modal/parts'
 import RefreshOverlay from 'components/common/RefreshOverlay'
@@ -19,7 +20,6 @@ const inputStyle = {
 const FormInput = ({input, label, ...custom}) => (
   <input
     {...input}
-    {...custom}
     placeholder={label}
     autoComplete="off"
     style={inputStyle}
@@ -40,18 +40,24 @@ export default class ServerCmdModalView extends React.Component {
 
     return data
   }
+  renderTools () {
+    return (
+      <CSVLink data={this.getData()} filename="data.csv">
+        <IconButton><DownloadIcon/></IconButton>
+      </CSVLink>
+    )
+  }
+
   render () {
     const {onHide, onSubmit, loading, devices, results} = this.props
     return (
-      <Modal title="Command" onRequestClose={onHide} contentStyle={{maxWidth: 'initial', width: '90%'}}>
+      <Modal title="Command" onRequestClose={onHide} contentStyle={{maxWidth: 'initial', width: '90%', paddingLeft: '40px'}}>
         <Form onSubmit={onSubmit}>
           <Card className="margin-md-top">
             <Field name="cmd" component={FormInput} label="Command" style={{width: '100%'}}/>
           </Card>
 
-          <CardPanel title="Command">
-            <CSVLink data={this.getData()} filename="data.csv">CSV</CSVLink>
-
+          <CardPanel title="Command" tools={this.renderTools()}>
             <div style={{maxHeight: 500, overflow: 'auto'}}>
               <table className="table">
                 <thead>
