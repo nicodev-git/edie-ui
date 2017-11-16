@@ -18,7 +18,7 @@ class ServerRange extends React.Component {
     this.props.scanRange(values.from, values.to)
   }
   render () {
-    const {handleSubmit} = this.props
+    const {handleSubmit, rangeScanResults, scanStatus} = this.props
     return (
       <Form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
         <div className="padding-md-left padding-md-right">
@@ -28,9 +28,25 @@ class ServerRange extends React.Component {
             <RaisedButton label="Scan" type="submit"/>
           </div>
           <CardPanel title="Result">
-
             <div style={{minHeight: 300}}>
-
+              <table className="table">
+                <thead>
+                <tr>
+                  <th>Host</th>
+                  <th>IP</th>
+                  <th>OS</th>
+                </tr>
+                </thead>
+                <tbody>
+                {rangeScanResults.map(p => {
+                  <tr key={p.host || p.ip}>
+                    <td>{p.host}</td>
+                    <td>{p.ip}</td>
+                    <td>{p.os}</td>
+                  </tr>
+                })}
+                </tbody>
+              </table>
             </div>
           </CardPanel>
         </div>

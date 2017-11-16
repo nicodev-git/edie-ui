@@ -93,6 +93,7 @@ import {
 
   SHOW_RANGE_ADD_MODAL,
   SCAN_RANGE,
+  UPDATE_SCAN_STATUS,
 
   API_ERROR
 } from 'actions/types'
@@ -419,6 +420,8 @@ export default function (state = initialState, action) {
 
     case SCAN_RANGE:
       return { ...state, rangeScanResults: action.data }
+    case UPDATE_SCAN_STATUS:
+      return { ...state, scanStatus: action.status }
     default:
       return state
   }

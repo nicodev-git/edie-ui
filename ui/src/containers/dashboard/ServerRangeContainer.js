@@ -17,8 +17,8 @@ class ServerRangeContainer extends React.Component {
 }
 export default connect(
   state => ({
-    device: state.dashboard.selectedDevice,
-    devices: state.devices.devices
+    rangeScanResults: state.dashboard.rangeScanResults,
+    scanStatus: state.dashboard.scanStatus
   }), {
     scanRange
   }
