@@ -1,6 +1,6 @@
 import React from 'react'
 import {Form, Field} from 'redux-form'
-import {RaisedButton} from 'material-ui'
+import {RaisedButton, Checkbox} from 'material-ui'
 
 import {Modal, CardPanel, FormCheckbox, FormInput} from 'components/modal/parts'
 
@@ -13,7 +13,7 @@ const inputStyle = {
 
 export default class ServerSearchModalView extends React.Component {
   render () {
-    const {onHide, onSubmit} = this.props
+    const {onHide, onSubmit, osNames, selectedOS, onCheckOS} = this.props
     return (
       <Modal title="Search" onRequestClose={onHide}>
         <Form onSubmit={onSubmit}>
@@ -41,6 +41,13 @@ export default class ServerSearchModalView extends React.Component {
               <label className="valign-middle">GB</label>
             </div>
 
+          </CardPanel>
+
+          <CardPanel title="OS">
+            {osNames.map(p =>
+              <Checkbox key={p} name={p} label={p} checked={selectedOS.includes(p)}
+                        onCheck={(e, checked) => onCheckOS(p, checked)}/>
+            )}
           </CardPanel>
 
           <div className="form-buttons">
