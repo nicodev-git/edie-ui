@@ -4,7 +4,7 @@ import {CSVLink} from 'react-csv'
 import {Card, IconButton} from 'material-ui'
 import DownloadIcon from 'material-ui/svg-icons/file/file-download'
 
-import {Modal, CardPanel} from 'components/modal/parts'
+import {ModalFull, CardPanel} from 'components/modal/parts'
 import RefreshOverlay from 'components/common/RefreshOverlay'
 
 const inputStyle = {
@@ -51,7 +51,7 @@ export default class ServerCmdModalView extends React.Component {
   render () {
     const {onHide, onSubmit, loading, devices, results} = this.props
     return (
-      <Modal title="Command" onRequestClose={onHide} contentStyle={{maxWidth: 'initial', width: '90%'}}>
+      <ModalFull title="Command" onRequestClose={onHide}>
         <Form onSubmit={onSubmit}>
           <Card className="margin-md-top">
             <Field name="cmd" component={FormInput} label="Command" style={{width: '100%'}}/>
@@ -80,7 +80,7 @@ export default class ServerCmdModalView extends React.Component {
         </Form>
 
         {loading && <RefreshOverlay/>}
-      </Modal>
+      </ModalFull>
     )
   }
 }

@@ -27,6 +27,7 @@ import CloseIconButton from './CloseIconButton'
 import CardLegend from './CardLegend'
 import CardPanel from './CardPanel'
 import Modal from './Modal'
+import ModalFull from './ModalFull'
 
 export {
     Header,
@@ -57,5 +58,6 @@ export {
     CloseIconButton,
     CardLegend,
     Modal,
-    CardPanel
+    CardPanel,
+    ModalFull
 }
