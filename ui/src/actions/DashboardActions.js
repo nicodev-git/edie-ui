@@ -477,6 +477,7 @@ export const scanRange = (from, to) => {
       params: {from, to}
     }).then(res => {
       dispatch({type: SCAN_RANGE, data: res.data})
+      dispatch(updateScanStatus(''))
     }).catch(() => {
       dispatch(updateScanStatus(''))
     })

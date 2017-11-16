@@ -6,6 +6,7 @@ import {RaisedButton} from 'material-ui'
 import {CardPanel, FormInput} from 'components/modal/parts'
 
 import {showAlert} from 'components/common/Alert'
+import RefreshOverlay from 'components/common/RefreshOverlay'
 
 class ServerRange extends React.Component {
   onSubmit (values) {
@@ -14,7 +15,6 @@ class ServerRange extends React.Component {
       return
     }
 
-    console.log(values)
     this.props.scanRange(values.from, values.to)
   }
   render () {
@@ -38,17 +38,19 @@ class ServerRange extends React.Component {
                 </tr>
                 </thead>
                 <tbody>
-                {rangeScanResults.map(p => {
+                {rangeScanResults.map(p =>
                   <tr key={p.host || p.ip}>
                     <td>{p.host}</td>
                     <td>{p.ip}</td>
                     <td>{p.os}</td>
                   </tr>
-                })}
+                )}
                 </tbody>
               </table>
             </div>
           </CardPanel>
+
+          {scanStatus === 'loading' && <RefreshOverlay/>}
         </div>
       </Form>
     )
