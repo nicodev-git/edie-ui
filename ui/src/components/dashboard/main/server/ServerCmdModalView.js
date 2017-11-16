@@ -43,7 +43,7 @@ export default class ServerCmdModalView extends React.Component {
   render () {
     const {onHide, onSubmit, loading, devices, results} = this.props
     return (
-      <Modal title="Command" onRequestClose={onHide}>
+      <Modal title="Command" onRequestClose={onHide} contentStyle={{maxWidth: 'initial', width: '90%'}}>
         <Form onSubmit={onSubmit}>
           <Card className="margin-md-top">
             <Field name="cmd" component={FormInput} label="Command" style={{width: '100%'}}/>
@@ -52,7 +52,7 @@ export default class ServerCmdModalView extends React.Component {
           <CardPanel title="Command">
             <CSVLink data={this.getData()} filename="data.csv">CSV</CSVLink>
 
-            <div style={{maxHeight: 350, overflow: 'auto'}}>
+            <div style={{maxHeight: 500, overflow: 'auto'}}>
               <table className="table">
                 <thead>
                 <tr>
