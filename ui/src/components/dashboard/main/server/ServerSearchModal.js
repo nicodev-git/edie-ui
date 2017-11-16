@@ -36,6 +36,8 @@ class ServerSearchModal extends React.Component {
     values.diskEnabled = !!values.diskEnabled
     values.ipEnabled = !!values.ipEnabled
     values.memoryEnabled = !!values.memoryEnabled
+
+    values.osNames = this.state.selectedOS
     this.props.onSubmit(values)
   }
   render () {
