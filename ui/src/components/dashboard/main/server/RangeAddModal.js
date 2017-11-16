@@ -2,11 +2,18 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { reduxForm } from 'redux-form'
 
+import {showAlert} from 'components/common/Alert'
+
 import RangeAddModalView from './RangeAddModalView'
 
 class RangeAddModal extends React.Component {
   onSubmit (values) {
+    if (!values.from || !values.to) {
+      showAlert('Please type range')
+      return
+    }
 
+    console.log(values)
   }
   render () {
     const {onHide, handleSubmit} = this.props
