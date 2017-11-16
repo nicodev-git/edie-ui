@@ -15,7 +15,7 @@ class ServerSearchModal extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      selectedOS: []
+      selectedOS: props.serverSearchParams.osNames || []
     }
   }
 

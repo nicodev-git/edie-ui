@@ -170,6 +170,7 @@ export default class ServerDashboardView extends React.Component {
     if (!this.props.serverSearchModalOpen) return null
     return (
       <ServerSearchModal
+        serverSearchParams={this.props.serverSearchParams}
         onSubmit={this.onSubmitSearch.bind(this)}
         onHide={this.onCloseSearchModal.bind(this)}
         onClickClear={this.onClearSearch.bind(this)}

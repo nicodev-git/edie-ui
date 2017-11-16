@@ -126,6 +126,7 @@ const initialState = {
     hideDuplicate: false
   },
   allApps: [],
+  serverSearchParams: {},
 
   sidebarProfileMenuOpen: false,
   sidebarMessageMenuOpen: false,
