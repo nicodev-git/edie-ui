@@ -1,20 +1,29 @@
 import React from 'react'
 import {Form, Field} from 'redux-form'
+import {RaisedButton} from 'material-ui'
 
-import {Modal, CardPanel, FormInput} from 'components/modal/parts'
+import {CardPanel, FormInput, ModalFull} from 'components/modal/parts'
 
 export default class RangeAddModalView extends React.Component {
   render () {
     const {onSubmit, onHide} = this.props
     return (
-      <Modal title="Range" onRequestClose={onHide}>
+      <ModalFull title="Range" onRequestClose={onHide} contentStyle={{maxWidth: 'initial', width: '100%'}}
+             className="modal-full">
         <Form onSubmit={onSubmit}>
           <CardPanel title="Range">
             <Field name="from" component={FormInput} floatingLabel="From" />
             <Field name="to" component={FormInput} floatingLabel="To" className="margin-md-left" />
+            <RaisedButton label="Scan" type="submit"/>
+          </CardPanel>
+
+          <CardPanel title="Result">
+            <div style={{minHeight: 300}}>
+
+            </div>
           </CardPanel>
         </Form>
-      </Modal>
+      </ModalFull>
     )
   }
 }

@@ -14,6 +14,7 @@ class RangeAddModal extends React.Component {
     }
 
     console.log(values)
+    this.props.scanRange(values.from, values.to)
   }
   render () {
     const {onHide, handleSubmit} = this.props
