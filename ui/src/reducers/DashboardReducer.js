@@ -92,6 +92,7 @@ import {
   SHOW_SERVER_CMD_MODAL,
 
   SHOW_RANGE_ADD_MODAL,
+  SCAN_RANGE,
 
   API_ERROR
 } from 'actions/types'
@@ -129,6 +130,7 @@ const initialState = {
   },
   allApps: [],
   serverSearchParams: {},
+  rangeScanResults: [],
 
   sidebarProfileMenuOpen: false,
   sidebarMessageMenuOpen: false,
@@ -414,6 +416,9 @@ export default function (state = initialState, action) {
 
     case SHOW_RANGE_ADD_MODAL:
       return { ...state, rangeAddModalOpen: action.visible }
+
+    case SCAN_RANGE:
+      return { ...state, rangeScanResults: action.data }
     default:
       return state
   }

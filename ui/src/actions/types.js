@@ -494,6 +494,7 @@ export const UPDATE_SERVER_SEARCH_PARAMS = 'UPDATE_SERVER_SEARCH_PARAMS'
 export const UPDATE_SERVER_SEARCH_RESULTS = 'UPDATE_SERVER_SEARCH_RESULTS'
 export const SHOW_SERVER_CMD_MODAL = 'SHOW_SERVER_CMD_MODAL'
 export const SHOW_RANGE_ADD_MODAL = 'SHOW_RANGE_ADD_MODAL'
+export const SCAN_RANGE = 'SCAN_RANGE'
 
 ///////////////////////////////////////////////////////////////
 

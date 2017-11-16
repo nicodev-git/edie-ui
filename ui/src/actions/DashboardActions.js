@@ -64,6 +64,7 @@ import {
   SHOW_SERVER_CMD_MODAL,
 
   SHOW_RANGE_ADD_MODAL,
+  SCAN_RANGE,
 
   NO_AUTH_ERROR
 } from './types'
@@ -465,5 +466,15 @@ export const showServerCmdModal = visible => {
 export const showRangeAddModal = visible => {
   return dispatch => {
     dispatch({type: SHOW_RANGE_ADD_MODAL, visible})
+  }
+}
+
+export const scanRange = (from, to) => {
+  return dispatch => {
+    axios.get(`${ROOT_URL}/scanRange`, {
+      params: {from, to}
+    }).then(res => {
+      dispatch({type: SCAN_RANGE, data: res.data})
+    })
   }
 }

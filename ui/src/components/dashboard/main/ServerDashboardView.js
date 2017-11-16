@@ -171,6 +171,7 @@ export default class ServerDashboardView extends React.Component {
     return (
       <RangeAddModal
         onHide={this.onCloseAddRange.bind(this)}
+        scanRange={this.props.scanRange}
       />
     )
   }
