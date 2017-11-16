@@ -65,6 +65,7 @@ import {
 
   SHOW_RANGE_ADD_MODAL,
   SCAN_RANGE,
+  UPDATE_SCAN_STATUS,
 
   NO_AUTH_ERROR
 } from './types'
@@ -471,10 +472,20 @@ export const showRangeAddModal = visible => {
 
 export const scanRange = (from, to) => {
   return dispatch => {
+    dispatch(updateScanStatus('loading'))
     axios.get(`${ROOT_URL}/scanRange`, {
       params: {from, to}
     }).then(res => {
       dispatch({type: SCAN_RANGE, data: res.data})
+      dispatch(updateScanStatus(''))
+    }).catch(() => {
+      dispatch(updateScanStatus(''))
     })
+  }
+}
+
+export const updateScanStatus = (status) => {
+  return dispatch => {
+    dispatch({type: UPDATE_SCAN_STATUS, status})
   }
 }

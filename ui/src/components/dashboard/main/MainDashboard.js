@@ -25,24 +25,42 @@ export default class MainDashboard extends React.Component {
   }
   componentWillUpdate (nextProps) {
     const {gaugeBoards} = nextProps
-    const {id} = this.props.match.params
+    let {id} = this.props.match.params
     if ((!this.props.gaugeBoards.length || !nextProps.match.params.id) && gaugeBoards.length) {
       let index = -1
-      if (id && nextProps.match.params.id) index = findIndex(gaugeBoards, {id})
+      if (id && nextProps.match.params.id) {
+        if (id === 'servers') {
+          const servers = gaugeBoards.filter(p => this.isServerDashboard(p))
+          if (servers.length) id = servers[0].id
+        }
+        index = findIndex(gaugeBoards, {id})
+      }
 
-      nextProps.selectGaugeBoard(gaugeBoards[index >= 0 ? index : 0].id, nextProps.history)
+      const board = gaugeBoards[index >= 0 ? index : 0]
+      nextProps.selectGaugeBoard(board.id, this.isServerDashboard(board) ? 'servers' : '', nextProps.history)
     }
   }
   getSelectedId () {
-    return this.props.match.params.id
+    const {id} = this.props.match.params
+    if (id === 'servers') {
+      const found = this.props.gaugeBoards.filter(p => this.isServerDashboard(p))
+      if (found.length) return found[0].id
+    }
+    return id
   }
   getSelected () {
     const index = findIndex(this.props.gaugeBoards, {id: this.getSelectedId()})
     if (index < 0) return null
     return this.props.gaugeBoards[index]
   }
+
+  isServerDashboard (board) {
+    return board && board.type === 'system' && board.name === 'Servers'
+  }
   onChangeBoard (e, index, value) {
-    this.props.selectGaugeBoard(value, this.props.history, true)
+    const {gaugeBoards} = this.props
+    const url = this.isServerDashboard(gaugeBoards[index]) ? 'servers' : ''
+    this.props.selectGaugeBoard(value, url, this.props.history, true)
   }
   onClickAdd () {
     // showPrompt('Please type name.', '', name => {

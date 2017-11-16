@@ -5,9 +5,7 @@ import { connect } from 'react-redux'
 import ServerRange from 'components/dashboard/main/server/ServerRange'
 
 import {
-  fetchDevicesGroups,
-  fetchDevice,
-  openDevice
+  scanRange
 } from 'actions'
 
 class ServerRangeContainer extends React.Component {
@@ -19,11 +17,9 @@ class ServerRangeContainer extends React.Component {
 }
 export default connect(
   state => ({
-    device: state.dashboard.selectedDevice,
-    devices: state.devices.devices
+    rangeScanResults: state.dashboard.rangeScanResults,
+    scanStatus: state.dashboard.scanStatus
   }), {
-    fetchDevicesGroups,
-    fetchDevice,
-    openDevice
+    scanRange
   }
 )(withRouter(ServerRangeContainer))
