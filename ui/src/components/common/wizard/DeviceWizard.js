@@ -490,7 +490,7 @@ class DeviceWizard extends Component {
   }
 
   render () {
-    const { handleSubmit, canAddTags, addingDevice } = this.props
+    const { handleSubmit, canAddTags, addingDevice, noModal } = this.props
     const { current, steps } = this.state
     let header = this.props.title || this.state.currentDevice.title || ''
     let progressBar = this.buildProgressBar()
@@ -498,6 +498,7 @@ class DeviceWizard extends Component {
     let paramEditModal = this.renderParamEditModal()
     return (
       <DeviceWizardView
+        noModal
         header={header}
         content={content}
         progressBar={progressBar}

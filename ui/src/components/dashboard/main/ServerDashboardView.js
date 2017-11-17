@@ -6,7 +6,7 @@ import ComputerIcon from 'material-ui/svg-icons/hardware/computer'
 import DevicesIcon from 'material-ui/svg-icons/device/devices'
 import {purple500, deepPurpleA400} from 'material-ui/styles/colors'
 
-import { wizardConfig, getDeviceType } from 'components/common/wizard/WizardConfig'
+import { wizardConfig } from 'components/common/wizard/WizardConfig'
 import DeviceWizardContainer from 'containers/shared/wizard/DeviceWizardContainer'
 import ServerItem from './ServerItem'
 import RefreshOverlay from 'components/common/RefreshOverlay'
@@ -78,29 +78,30 @@ export default class ServerDashboardView extends React.Component {
   }
 
   onClickAddItem (tpl) {
-    console.log(tpl)
-
-    const options = {
-      title: tpl.name,
-      type: getDeviceType(tpl.name),
-      imgName: tpl.image,
-      imageUrl: `/externalpictures?name=${tpl.image}`,
-      x: 0,
-      y: 0,
-      width: 50,
-      height: 50,
-
-      tpl,
-      monitors: tpl.monitors,
-      templateName: tpl.name,
-      workflowids: tpl.workflowids || []
-    }
-
-    this.showAddWizard(options, (id, name, data) => {
-
-    }, () => {
-
-    })
+    // console.log(tpl)
+    //
+    // const options = {
+    //   title: tpl.name,
+    //   type: getDeviceType(tpl.name),
+    //   imgName: tpl.image,
+    //   imageUrl: `/externalpictures?name=${tpl.image}`,
+    //   x: 0,
+    //   y: 0,
+    //   width: 50,
+    //   height: 50,
+    //
+    //   tpl,
+    //   monitors: tpl.monitors,
+    //   templateName: tpl.name,
+    //   workflowids: tpl.workflowids || []
+    // }
+    //
+    // this.showAddWizard(options, (id, name, data) => {
+    //
+    // }, () => {
+    //
+    // })
+    this.props.history.push(`/addserver?tpl=${tpl.id}&from=servers`)
   }
 
   onClickAddRange () {

@@ -12,7 +12,8 @@ export default class AddServer extends React.Component {
   }
 
   getTplId () {
-    return this.props.match.params.tpl
+    const params = parse(this.props.location.search)
+    return params.tpl
   }
 
   getTemplate () {
@@ -57,6 +58,7 @@ export default class AddServer extends React.Component {
 
     return (
       <DeviceWizardContainer
+        noModal
         deviceType={getDeviceType(tpl.name)}
         onClose={this.closeCallback.bind(this)}
         title={tpl.name}
