@@ -12,10 +12,12 @@ export default class DeviceWizardView extends Component {
     if (noModal) {
       return (
         <div>
-          {content}
-          <div style={{paddingLeft: 20}} className="pull-left margin-md-top margin-md-bottom">
-            <RaisedButton label="Save" onTouchTap={onNext}/>
-          </div>
+          <Form onSubmit={onSubmit}>
+            {content}
+            <div style={{paddingLeft: 20}} className="pull-left margin-md-top margin-md-bottom">
+              <RaisedButton label="Save" type="submit"/>
+            </div>
+          </Form>
         </div>
       )
     }

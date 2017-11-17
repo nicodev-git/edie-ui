@@ -36,8 +36,13 @@ export default class AddServer extends React.Component {
 
   }
 
-  onFinishAddWizard () {
+  onFinishAddWizard (callback, res, params, url) {
+    this.props.addDevice(params, url)
 
+    const query = parse(this.props.location.search)
+    if (query.from === 'servers') {
+      this.props.history.push('/dashboard/servers')
+    }
   }
 
   render () {

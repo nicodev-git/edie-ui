@@ -6,7 +6,8 @@ import AddServer from 'components/dashboard/main/AddServer'
 
 import {
   fetchDeviceTemplates,
-  fetchMonitorTemplates
+  fetchMonitorTemplates,
+  addDevice
 } from 'actions'
 
 class AddServerContainer extends React.Component {
@@ -23,6 +24,7 @@ export default connect(
     deviceTemplates: state.settings.deviceTemplates
   }), {
     fetchDeviceTemplates,
-    fetchMonitorTemplates
+    fetchMonitorTemplates,
+    addDevice
   }
 )(withRouter(AddServerContainer))

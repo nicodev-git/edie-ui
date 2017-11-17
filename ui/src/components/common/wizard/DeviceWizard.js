@@ -104,7 +104,8 @@ class DeviceWizard extends Component {
   }
 
   handleFormSubmit (formProps) {
-    const { extraParams, onFinish, editParams, canAddTags, monitorTags, credentials, fixResult, fixStatus, editDevice } = this.props
+    const { extraParams, onFinish, editParams, canAddTags,
+      monitorTags, credentials, fixResult, fixStatus, editDevice } = this.props
     const { monitors, currentDevice, deviceGlobalCredentials, deviceCredentials } = this.state
     const {distribution} = formProps
     const params = {
