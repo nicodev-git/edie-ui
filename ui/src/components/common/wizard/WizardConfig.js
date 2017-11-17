@@ -147,6 +147,15 @@ export const wizardConfig = {
         items: [{
           type: 'text',
           label: {
+            text: 'IP/Host',
+            type: 'attach',
+            width: 3
+          },
+          width: MAX_WIDTH,
+          name: 'wanip'
+        }, {
+          type: 'text',
+          label: {
             text: 'Name',
             type: 'attach',
             width: 3
@@ -154,15 +163,6 @@ export const wizardConfig = {
           width: MAX_WIDTH,
           required: true,
           name: 'name'
-        }, {
-          type: 'text',
-          label: {
-            text: 'IP/Host',
-            type: 'attach',
-            width: 3
-          },
-          width: MAX_WIDTH,
-          name: 'wanip'
         }]
       }],
     }, {
@@ -234,13 +234,12 @@ export const wizardConfig = {
         items: [{
           type: 'text',
           label: {
-            text: 'Name',
+            text: 'IP/Host',
             type: 'attach',
             width: 3
           },
           width: MAX_WIDTH,
-          required: true,
-          name: 'name'
+          name: 'wanip'
         }, {
           type: 'combo',
           label: {
@@ -254,12 +253,13 @@ export const wizardConfig = {
         }, {
           type: 'text',
           label: {
-            text: 'IP/Host',
+            text: 'Name',
             type: 'attach',
             width: 3
           },
           width: MAX_WIDTH,
-          name: 'wanip'
+          required: true,
+          name: 'name'
         }]
       }],
     }, {
