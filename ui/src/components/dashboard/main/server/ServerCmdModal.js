@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { reduxForm } from 'redux-form'
 import {keys} from 'lodash'
+import axios from 'axios'
 
 import MonitorSocket from 'util/socket/MonitorSocket'
 import ServerCmdModalView from './ServerCmdModalView'
@@ -17,6 +18,30 @@ class ServerCmdModal extends React.Component {
     }
 
     this.sockets = []
+  }
+  componentWillMount () {
+    axios.get(`${ROOT_URL}/findBasicInfo`, {
+      params: {
+        deviceIds: this.props.devices.map(p => p.id).join(',')
+      }
+    }).then(res => {
+      this.setState({
+        devices: res.data.map(p => {
+          const data = {
+            id: p.device.id,
+            name: p.device.name,
+            os: 'Windows',
+            ip: p.device.wanip || p.device.lanip
+          }
+
+          if (p.data) {
+            data.os = p.data.OS.Name
+          }
+
+          return data
+        })
+      })
+    })
   }
   onSubmit (values) {
     const {cmd} = values
@@ -70,31 +95,21 @@ class ServerCmdModal extends React.Component {
     if (msg.action === 'update') {
       const {commandResult} = msg.data
 
-      if (commandResult) {
-        const results = {
-          ...this.state.results,
-          [msg.deviceId]: commandResult
-        }
-        this.setState({results})
+      const results = {
+        ...this.state.results,
+        [msg.deviceId]: commandResult
+      }
+      this.setState({results})
 
-        if (keys(results).length === this.props.devices.length) {
-          this.stopLoadTimer()
-          this.setState({
-            loading: false
-          })
-        }
+      if (keys(results).length === this.props.devices.length) {
+        this.stopLoadTimer()
+        this.setState({
+          loading: false
+        })
       }
     }
   }
   sendCommandMessage (socket, command) {
-    socket.send({
-      action: 'realtime-data',
-      deviceId: socket.device.id,
-      monitors: 'basic',
-      data: {
-      }
-    })
-
     socket.send({
       action: 'command',
       deviceId: socket.device.id,

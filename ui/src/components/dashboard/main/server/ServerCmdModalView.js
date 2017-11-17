@@ -65,7 +65,7 @@ export default class ServerCmdModalView extends React.Component {
                     <th>Device</th>
                     <th>IP</th>
                     <th>OS</th>
-                    <th></th>
+                    <th>Result</th>
                   </tr>
                 </thead>
                 <tbody>
