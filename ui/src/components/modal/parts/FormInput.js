@@ -12,7 +12,7 @@ const FormInput = ({input, label, floatingLabel, meta: { touched, error }, ...cu
     errorStyle={errorStyle}
     inputStyle={inputStyle}
     underlineFocusStyle={underlineStyle}
-    autoComplete="new-password123"
+    autoComplete={custom.type === 'password' ? 'new-password' : 'off'}
   />
 )
 
