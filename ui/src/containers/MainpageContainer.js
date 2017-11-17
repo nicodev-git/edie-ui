@@ -19,6 +19,7 @@ import DeviceContainer from 'containers/device/DeviceContainer'
 import LogView from 'containers/dashboard/LogViewContainer'
 import ServerDetailContainer from 'containers/dashboard/ServerDetailContainer'
 import ServerRangeContainer from 'containers/dashboard/ServerRangeContainer'
+import AddServerContainer from 'containers/dashboard/AddServerContainer'
 
 import {
   closeDevice,
