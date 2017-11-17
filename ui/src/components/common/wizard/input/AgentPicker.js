@@ -159,7 +159,7 @@ export default class AgentPicker extends React.Component {
         const isWin = isWindowsDevice(editDevice)
 
         agentCombo = (
-          <div style={{position: 'absolute', top: 40, left: 130, zIndex: 3}}>
+          <div style={{position: 'absolute', top: 55, left: 130, zIndex: 3}}>
             <div
               className="inline-block"
               style={{textDecoration: 'underline', color: 'rgba(0, 0, 0, 0.87)', cursor: 'pointer'}}

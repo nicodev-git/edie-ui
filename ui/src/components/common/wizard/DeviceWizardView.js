@@ -30,6 +30,11 @@ export default class DeviceWizardView extends Component {
             </div>
             <div style={{height: 140, width: '100%'}} className="pull-left">&nbsp;</div>
           </Form>
+
+          {paramEditModal}
+          {credPicker}
+          {collectorModal}
+          {addingDevice && <RefreshOverlay/>}
         </div>
       )
     }

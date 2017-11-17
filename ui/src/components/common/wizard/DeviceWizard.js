@@ -29,7 +29,7 @@ import CollectorInstallModal from './input/CollectorInstallModal'
 import {getAgentStatusMessage, mergeCredentials, getDeviceCollectors} from 'shared/Global'
 import {isWindowsDevice} from 'shared/Global'
 
-const credCheckTriggers = ['lanip', 'hostname']
+const credCheckTriggers = ['lanip', 'wanip', 'hostname']
 
 class DeviceWizard extends Component {
   constructor (props) {
@@ -63,7 +63,7 @@ class DeviceWizard extends Component {
       'removeafter': this.buildRemoveAfter.bind(this)
     }
 
-    this.debCheckAgent = debounce(this.checkDeviceAgentStatus.bind(this), 350)
+    this.debCheckAgent = debounce(this.checkDeviceAgentStatus.bind(this), 1000)
   }
 
   componentWillMount () {
