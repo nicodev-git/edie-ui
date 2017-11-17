@@ -184,14 +184,14 @@ class DeviceWizard extends Component {
   }
 
   buildStep (index) {
-    const {canAddTags} = this.props
+    const {canAddTags, noModal} = this.props
     const currentDevice = this.state.currentDevice
     const stepConfig = currentDevice.steps[index]
     const meta = {
       active: index === (this.state.current - 1)
     }
     return (
-      <div key={index} className={`${meta.active ? ' active' : 'hidden'}`}>
+      <div key={index} className={`${noModal ? '' : (meta.active ? ' active' : 'hidden')}`}>
         {stepConfig.panels.map((panel, pi) =>
           panel.skip ? (
             <div key={pi}>
@@ -498,7 +498,7 @@ class DeviceWizard extends Component {
     let paramEditModal = this.renderParamEditModal()
     return (
       <DeviceWizardView
-        noModal
+        noModal={noModal}
         header={header}
         content={content}
         progressBar={progressBar}

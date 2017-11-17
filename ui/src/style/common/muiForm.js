@@ -11,16 +11,16 @@ export const inputStyle = {
 }
 
 export const selectLabelStyle = {
-  marginTop: -8,
-  height: 40
+  // marginTop: -8,
+  // height: 40
 }
 
 export const selectIconStyle = {
-  marginTop: -8
+  // marginTop: -8
 }
 
 export const inputContainerStyle = {
-    height: 40
+    // height: 40
 }
 
 export const smallInputStyle = {

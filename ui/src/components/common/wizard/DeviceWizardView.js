@@ -14,7 +14,7 @@ export default class DeviceWizardView extends Component {
         <div>
           {content}
           <div>
-            <RaisedButton onTouchTap={onNext}/>
+            <RaisedButton label="Save" onTouchTap={onNext}/>
           </div>
         </div>
       )
