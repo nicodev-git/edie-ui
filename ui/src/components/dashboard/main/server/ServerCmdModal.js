@@ -70,21 +70,31 @@ class ServerCmdModal extends React.Component {
     if (msg.action === 'update') {
       const {commandResult} = msg.data
 
-      const results = {
-        ...this.state.results,
-        [msg.deviceId]: commandResult
-      }
-      this.setState({results})
+      if (commandResult) {
+        const results = {
+          ...this.state.results,
+          [msg.deviceId]: commandResult
+        }
+        this.setState({results})
 
-      if (keys(results).length === this.props.devices.length) {
-        this.stopLoadTimer()
-        this.setState({
-          loading: false
-        })
+        if (keys(results).length === this.props.devices.length) {
+          this.stopLoadTimer()
+          this.setState({
+            loading: false
+          })
+        }
       }
     }
   }
   sendCommandMessage (socket, command) {
+    socket.send({
+      action: 'realtime-data',
+      deviceId: socket.device.id,
+      monitors: 'basic',
+      data: {
+      }
+    })
+
     socket.send({
       action: 'command',
       deviceId: socket.device.id,
