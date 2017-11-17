@@ -6,8 +6,12 @@ export const errorStyle = {
 }
 
 export const inputStyle = {
-    color: textColor,
-    fontSize: fontSize
+  color: textColor,
+  fontSize: fontSize
+}
+
+export const inputContainerStyle = {
+    height: 40
 }
 
 export const smallInputStyle = {
@@ -36,7 +40,7 @@ export const subHeaderStyle = {
 }
 
 export const underlineFocusStyle = {
-
+    marginTop: -7
 }
 
 export const dialogBodyStyle = {
