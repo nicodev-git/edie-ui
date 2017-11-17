@@ -289,9 +289,11 @@ export default class ServerDashboardView extends React.Component {
     return (
       <div>
         {this.renderAddMenu()}
-        <ul className="web-applet-cards">
-          {this.getServers().map(this.renderServer.bind(this))}
-        </ul>
+        <div style={{paddingLeft: 20}}>
+          <ul className="web-applet-cards">
+            {this.getServers().map(this.renderServer.bind(this))}
+          </ul>
+        </div>
 
         <FloatingMenu menuItems={this.getMenuItems()}/>
         {this.renderDeviceWizard()}
