@@ -36,7 +36,7 @@ export default class AddServer extends React.Component {
 
   }
 
-  onFinishAddWizard (callback, res, params, url) {
+  onFinishAddWizard (res, params, url) {
     this.props.addDevice(params, url)
 
     const query = parse(this.props.location.search)
