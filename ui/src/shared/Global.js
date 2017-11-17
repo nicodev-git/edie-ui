@@ -491,6 +491,7 @@ export function sumDisks (disks) {
   if (!total) return null
   return {
     FreeSpace: free,
+    UsedSpace: total - free,
     TotalSpace: total
   }
 }

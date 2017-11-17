@@ -130,7 +130,7 @@ export default class GDeviceInfo extends React.Component {
     if (up) {
       const cpuValue = cpu ? `${cpu.length ? cpu[0].Usage : cpu.Usage}%` : ''
       const memValue = this.getMemoryInfo(memory)
-      const diskValue = disk ? `${disk.FreeSpace}G / ${disk.TotalSpace}G` : ''
+      const diskValue = disk ? `${disk.UsedSpace}G / ${disk.TotalSpace}G` : ''
 
       const hardware = cpu ? `Hardware: ${cpu.Model} ` : ''
       const software = os ? `Software: ${os.Name} ` : ''
