@@ -8,7 +8,12 @@ class CredentialModal extends Component {
   closeModal () {
     this.props.onClose()
   }
-
+  componentWillMount () {
+    if (this.props.credentials && !this.props.credentials.length && !this.props.initialValues.id) {
+      this.props.change('global', true)
+      this.props.change('default', true)
+    }
+  }
   handleFormSubmit (values) {
     const { initialValues } = this.props
     let props = assign({}, initialValues, values)
@@ -47,7 +52,7 @@ class CredentialModal extends Component {
 export default connect(
   state => ({
     initialValues: {
-      type: state.devices.credModalDefaultType || '',
+      type: state.devices.credModalDefaultType || 'SSH',
       ...state.settings.editCredentials
     }
   })

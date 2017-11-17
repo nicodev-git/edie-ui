@@ -47,6 +47,7 @@ export default class Credentials extends React.Component {
 
     return (
       <CredentialModal
+        credentials={this.props.credentials}
         addCredentials={this.onAddCredential.bind(this)}
         updateCredentials={this.onUpdateCredential.bind(this)}
         credentialTypes={this.props.credentialTypes}

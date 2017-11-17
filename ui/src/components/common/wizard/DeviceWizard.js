@@ -464,6 +464,7 @@ class DeviceWizard extends Component {
     if (!this.props.deviceCredsPickerVisible) return null
     return (
       <CredentialModal
+        credentials={this.props.credentials}
         credentialTypes={this.props.credentialTypes}
         addCredentials={this.onCloseCredPicker.bind(this)}
         onClose={this.onCloseCredPicker.bind(this)}
