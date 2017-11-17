@@ -516,3 +516,16 @@ export function getRemoveAfter (monitor) {
   values.remove_after = remove_after || 1
   return values
 }
+
+
+export function slugify(string) {
+  return string
+    .toString()
+    .trim()
+    .toLowerCase()
+    .replace(/\s+/g, "-")
+    .replace(/[^\w-]+/g, "")
+    .replace(/--+/g, "-")
+    .replace(/^-+/, "")
+    .replace(/-+$/, "")
+}

@@ -202,9 +202,9 @@ class MainpageContainer extends Component {
       <Main {...this.props}>
         <Switch>
           <Route path="/dashboard" component={MainDashboardContainer} exact/>
-          <Route path="/dashboard/servers/addrange" component={ServerRangeContainer} exact/>
-          <Route path="/dashboard/:id" component={MainDashboardContainer} exact/>
-          <Route path="/dashboard/serverdetail/:id" component={ServerDetailContainer} />
+          <Route path="/dashboard/servers/addrange" component={ServerRangeContainer}/>
+          <Route path="/dashboard/serverdetail/:id" component={ServerDetailContainer}/>
+          <Route path="/dashboard/:id" component={MainDashboardContainer}/>
         </Switch>
         <Route path="/chat" component={ChatContainer}/>
         <Route path="/search" component={SearchGeneric}/>
