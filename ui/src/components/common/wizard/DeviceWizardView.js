@@ -13,7 +13,7 @@ export default class DeviceWizardView extends Component {
       return (
         <div>
           {content}
-          <div>
+          <div style={{paddingLeft: 20}} className="pull-left margin-md-top margin-md-bottom">
             <RaisedButton label="Save" onTouchTap={onNext}/>
           </div>
         </div>

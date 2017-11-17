@@ -182,7 +182,7 @@ class DeviceWizard extends Component {
     }
     if (noModal) {
       return (
-        <div className="row" style={{paddingLeft: 25, paddingRight: 25}}>
+        <div style={{paddingLeft: 5, paddingRight: 5}}>
           {tabs}
         </div>
       )
