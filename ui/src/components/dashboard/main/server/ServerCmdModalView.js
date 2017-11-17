@@ -61,15 +61,19 @@ export default class ServerCmdModalView extends React.Component {
             <div style={{maxHeight: 500, overflow: 'auto'}}>
               <table className="table">
                 <thead>
-                <tr>
-                  <th>Device</th>
-                  <th>Result</th>
-                </tr>
+                  <tr>
+                    <th>Device</th>
+                    <th>IP</th>
+                    <th>OS</th>
+                    <th></th>
+                  </tr>
                 </thead>
                 <tbody>
                 {devices.map(p =>
                   <tr key={p.id}>
                     <td>{p.name}</td>
+                    <td></td>
+                    <td></td>
                     <td>{results[p.id] || ''}</td>
                   </tr>
                 )}
