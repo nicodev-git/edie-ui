@@ -3,6 +3,7 @@ import { assign } from 'lodash'
 import { reduxForm } from 'redux-form'
 import {Step, Stepper, StepLabel} from 'material-ui/Stepper'
 import {CircularProgress} from 'material-ui'
+import {debounce} from 'lodash'
 
 import TextInput from './input/TextInput'
 import Checkbox from './input/Checkbox'
@@ -27,6 +28,8 @@ import CollectorInstallModal from './input/CollectorInstallModal'
 
 import {getAgentStatusMessage, mergeCredentials, getDeviceCollectors} from 'shared/Global'
 import {isWindowsDevice} from 'shared/Global'
+
+const credCheckTriggers = ['lanip', 'hostname']
 
 class DeviceWizard extends Component {
   constructor (props) {
@@ -59,6 +62,8 @@ class DeviceWizard extends Component {
       'agentpicker': this.buildAgentPicker.bind(this),
       'removeafter': this.buildRemoveAfter.bind(this)
     }
+
+    this.debCheckAgent = debounce(this.checkDeviceAgentStatus.bind(this), 350)
   }
 
   componentWillMount () {
@@ -153,6 +158,18 @@ class DeviceWizard extends Component {
     this.closeModal(true)
     onFinish && onFinish(null, props, currentDevice.server.url)
   }
+
+  onChangeForm (e) {
+    const {noModal} = this.props
+    if (noModal) {
+      if (credCheckTriggers.includes(e.target.name)) {
+        this.debCheckAgent()
+      }
+    }
+  }
+
+  ////////////////////////////////////////////////////////////////////////////////
+
 
   buildProgressBar () {
     if (this.state.steps <= 1) return null
@@ -259,10 +276,15 @@ class DeviceWizard extends Component {
   }
 
   buildText (config, values) {
-    return (<TextInput key={config.name}
-      config={config}
-      values={values}
-      buildLabel={this.buildLabel.bind(this)}/>)
+    return (
+      <TextInput
+        key={config.name}
+        config={config}
+        values={values}
+        buildLabel={this.buildLabel.bind(this)}
+        onChange={this.onChangeForm.bind(this)}
+      />
+    )
   }
 
   buildCombo (config, values) {
