@@ -98,6 +98,9 @@ export const commonconfig = {
     }, {
       display: 'Ubuntu',
       value: 'Ubuntu'
+    }, {
+      display: 'Windows',
+      value: 'Windows'
     }]
   }
 }
@@ -153,6 +156,16 @@ export const wizardConfig = {
           },
           width: MAX_WIDTH,
           name: 'wanip'
+        }, {
+          type: 'combo',
+          label: {
+            text: 'Distribution',
+            width: 3
+          },
+          items: commonconfig.distribution.values,
+          width: MAX_WIDTH,
+          required: true,
+          name: 'distribution'
         }, {
           type: 'text',
           label: {

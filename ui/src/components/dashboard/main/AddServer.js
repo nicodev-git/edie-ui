@@ -24,6 +24,11 @@ export default class AddServer extends React.Component {
     return deviceTemplates[index]
   }
 
+  onChangeDistribution () {
+    console.log(arguments)
+  }
+
+
   closeCallback () {
 
   }
@@ -73,6 +78,7 @@ export default class AddServer extends React.Component {
         onFinish={this.onFinishAddWizard.bind(this)}
         addDevice={this.addDevice.bind(this)}
         removeDevice={this.deleteMapDevice.bind(this)}
+        onChangeDistribution={this.onChangeDistribution.bind(this)}
       />
     )
   }

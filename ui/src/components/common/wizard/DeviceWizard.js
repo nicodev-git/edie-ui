@@ -159,11 +159,16 @@ class DeviceWizard extends Component {
     onFinish && onFinish(null, props, currentDevice.server.url)
   }
 
-  onChangeForm (e) {
-    const {noModal} = this.props
+  onChangeForm (e, value) {
+    const {noModal, onChangeDistribution} = this.props
     if (noModal) {
-      if (credCheckTriggers.includes(e.target.name)) {
+      const {name} = e.target
+      if (credCheckTriggers.includes(name)) {
         this.debCheckAgent()
+      }
+
+      if (name === 'distribution') {
+        onChangeDistribution && onChangeDistribution(value)
       }
     }
   }
@@ -294,6 +299,7 @@ class DeviceWizard extends Component {
         config={config}
         values={values}
         buildLabel={this.buildLabel.bind(this)}
+        onChange={this.onChangeForm.bind(this)}
       />
     )
   }
