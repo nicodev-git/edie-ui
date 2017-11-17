@@ -143,6 +143,7 @@ export const wizardConfig = {
       title: 'Settings',
       panels: [{
         title: 'Basic',
+        width: 6,
         items: [{
           type: 'text',
           label: {
@@ -168,6 +169,7 @@ export const wizardConfig = {
       title: 'Agent/Collector',
       panels: [{
         title: 'Agent',
+        width: 6,
         items: [{
           type: 'agentpicker'
         }]
@@ -228,6 +230,7 @@ export const wizardConfig = {
       title: 'Settings',
       panels: [{
         title: 'Basic',
+        width: 6,
         items: [{
           type: 'text',
           label: {
@@ -263,6 +266,7 @@ export const wizardConfig = {
       title: 'Agent/Collector',
       panels: [{
         title: 'Agent',
+        width: 6,
         items: [{
           type: 'agentpicker'
         }]

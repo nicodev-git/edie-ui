@@ -173,11 +173,19 @@ class DeviceWizard extends Component {
   }
 
   buildContent () {
+    const {noModal} = this.props
     let tabs = []
 
     for (let i = 0; i < this.state.steps; i++) {
       let tab = this.buildStep(i)
       tabs.push(tab)
+    }
+    if (noModal) {
+      return (
+        <div className="row" style={{paddingLeft: 25, paddingRight: 25}}>
+          {tabs}
+        </div>
+      )
     }
 
     return tabs
@@ -190,20 +198,38 @@ class DeviceWizard extends Component {
     const meta = {
       active: index === (this.state.current - 1)
     }
-    return (
-      <div key={index} className={`${noModal ? '' : (meta.active ? ' active' : 'hidden')}`}>
-        {stepConfig.panels.map((panel, pi) =>
-          panel.skip ? (
-            <div key={pi}>
-              {panel.items.map(itemConfig => this.buildInput(itemConfig, this.props.values, meta))}
-            </div>
-          ) : (
-            <CardPanel key={pi} title={panel.title}>
-              {panel.items.map(itemConfig => this.buildInput(itemConfig, this.props.values, meta))}
-            </CardPanel>
-          )
-        )}
 
+    const panelContents = stepConfig.panels.map((panel, pi) => {
+      const panelContent = panel.skip ? (
+        <div key={pi}>
+          {panel.items.map(itemConfig => this.buildInput(itemConfig, this.props.values, meta))}
+        </div>
+      ) : (
+        <CardPanel key={pi} title={panel.title}>
+          {panel.items.map(itemConfig => this.buildInput(itemConfig, this.props.values, meta))}
+        </CardPanel>
+      )
+
+      if (noModal) {
+        return (
+          <div key={pi} className={noModal ? `col-md-${panel.width || 12}` : ''}>
+            {panelContent}
+          </div>
+        )
+      }
+
+      return panelContent
+    })
+
+    if (noModal) {
+      if (canAddTags) {
+        panelContents.push(this.renderTags())
+      }
+      return panelContents
+    }
+    return (
+      <div key={index} className={`${meta.active ? ' active' : 'hidden'}`}>
+        {panelContents}
         {index === 1 && canAddTags ? this.renderTags() : null}
       </div>
     )
