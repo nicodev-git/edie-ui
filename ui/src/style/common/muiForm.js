@@ -10,6 +10,15 @@ export const inputStyle = {
   fontSize: fontSize
 }
 
+export const selectLabelStyle = {
+  marginTop: -8,
+  height: 40
+}
+
+export const selectIconStyle = {
+  marginTop: -8
+}
+
 export const inputContainerStyle = {
     height: 40
 }
@@ -40,7 +49,7 @@ export const subHeaderStyle = {
 }
 
 export const underlineFocusStyle = {
-    marginTop: -7
+
 }
 
 export const dialogBodyStyle = {
