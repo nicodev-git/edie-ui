@@ -5,6 +5,17 @@ import {RaisedButton} from 'material-ui'
 import { WizardButtons, Modal } from 'components/modal/parts'
 import RefreshOverlay from 'components/common/RefreshOverlay'
 
+const fixedBarStyle = {
+  position: 'fixed',
+  bottom: 0,
+  background: '#e6e8ed',
+  left: 0,
+  right: 0,
+  borderTop: '1px solid lightgray',
+  zIndex: 10,
+  padding: '13px 20px 20px 0'
+}
+
 export default class DeviceWizardView extends Component {
   render () {
     const {noModal, header, progressBar, content, current, steps, onSubmit, onHide,
@@ -14,8 +25,8 @@ export default class DeviceWizardView extends Component {
         <div>
           <Form onSubmit={onSubmit}>
             {content}
-            <div style={{paddingLeft: 20}} className="pull-left margin-md-top margin-md-bottom">
-              <RaisedButton label="Save" type="submit"/>
+            <div style={fixedBarStyle} className="text-right">
+              <RaisedButton label="Save" type="submit" backgroundColor="rgb(36, 104, 255)" labelColor="white"/>
             </div>
           </Form>
         </div>
