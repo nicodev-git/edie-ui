@@ -1,5 +1,8 @@
 import React from 'react'
-import { wizardConfig, getDeviceType } from 'components/common/wizard/WizardConfig'
+import {findIndex} from 'lodash'
+import {parse} from 'query-string'
+
+import { getDeviceType } from 'components/common/wizard/WizardConfig'
 import DeviceWizardContainer from 'containers/shared/wizard/DeviceWizardContainer'
 
 export default class AddServer extends React.Component {
@@ -8,13 +11,26 @@ export default class AddServer extends React.Component {
     this.props.fetchMonitorTemplates()
   }
 
+  getTplId () {
+    return this.props.match.params.tpl
+  }
+
+  getTemplate () {
+    const {deviceTemplates} = this.props
+    const id = this.getTplId()
+    const index = findIndex(deviceTemplates, {id})
+    if (index < 0) return null
+    return deviceTemplates[index]
+  }
 
   closeCallback () {
 
   }
+
   addDevice () {
 
   }
+
   deleteMapDevice () {
 
   }
@@ -24,25 +40,27 @@ export default class AddServer extends React.Component {
   }
 
   render () {
-    const {options} = this.state.deviceWizardConfig
-
+    const tpl = this.getTemplate()
+    if (!tpl) {
+      return <div>Loading...</div>
+    }
     let extra = {
       x: 0,
       y: 0,
       width: 50,
       height: 50,
-      image: options.imgName,
-      templateName: options.templateName,
-      workflowids: options.workflowids,
-      tags: options.tpl.tags || []
+      image: tpl.image,
+      templateName: tpl.name,
+      workflowids: tpl.workflowids || [],
+      tags: tpl.tags || []
     }
 
     return (
       <DeviceWizardContainer
-        deviceType={options.type}
+        deviceType={getDeviceType(tpl.name)}
         onClose={this.closeCallback.bind(this)}
-        title={options.title}
-        monitors={options.monitors}
+        title={tpl.name}
+        monitors={tpl.monitors || []}
         extraParams={extra}
         configParams={{}}
         onFinish={this.onFinishAddWizard.bind(this)}
