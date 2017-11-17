@@ -205,6 +205,7 @@ class MainpageContainer extends Component {
           <Route path="/dashboard/servers/addrange" component={ServerRangeContainer}/>
           <Route path="/dashboard/serverdetail/:id" component={ServerDetailContainer}/>
           <Route path="/dashboard/:id" component={MainDashboardContainer}/>
+          <Route path="/addserver" component={AddServerContainer}/>
         </Switch>
         <Route path="/chat" component={ChatContainer}/>
         <Route path="/search" component={SearchGeneric}/>
