@@ -6,6 +6,7 @@ import axios from 'axios'
 
 import MonitorSocket from 'util/socket/MonitorSocket'
 import ServerCmdModalView from './ServerCmdModalView'
+import {ROOT_URL} from 'actions/config'
 
 class ServerCmdModal extends React.Component {
   constructor (props) {
@@ -14,7 +15,8 @@ class ServerCmdModal extends React.Component {
       connected: false,
       cmd: '',
       loading: false,
-      results: {}
+      results: {},
+      deviceData: {}
     }
 
     this.sockets = []
@@ -25,22 +27,26 @@ class ServerCmdModal extends React.Component {
         deviceIds: this.props.devices.map(p => p.id).join(',')
       }
     }).then(res => {
-      this.setState({
-        devices: res.data.map(p => {
-          const data = {
-            id: p.device.id,
-            name: p.device.name,
-            os: 'Windows',
-            ip: p.device.wanip || p.device.lanip
-          }
+      const deviceData = {}
 
-          if (p.data) {
-            data.os = p.data.OS.Name
-          }
+      res.data.forEach(p => {
+        const data = {
+          id: p.device.id,
+          name: p.device.name,
+          os: '',
+          ip: p.device.wanip || p.device.lanip,
+          host: ''
+        }
 
-          return data
-        })
+        if (p.data) {
+          data.os = p.data.OS.Name
+          data.ip = p.data.LanIP
+          data.host = p.data.Host
+        }
+
+        deviceData[p.device.id] = data
       })
+      this.setState({deviceData})
     })
   }
   onSubmit (values) {
@@ -139,7 +145,7 @@ class ServerCmdModal extends React.Component {
   //////////////////////////////////////////////////////////////////
 
   render () {
-    const {loading, results} = this.state
+    const {loading, results, deviceData} = this.state
     const {onHide, handleSubmit, devices} = this.props
     return (
       <ServerCmdModalView
@@ -147,6 +153,7 @@ class ServerCmdModal extends React.Component {
         onSubmit={handleSubmit(this.onSubmit.bind(this))}
         loading={loading}
         results={results}
+        deviceData={deviceData}
         devices={devices}
       />
     )
