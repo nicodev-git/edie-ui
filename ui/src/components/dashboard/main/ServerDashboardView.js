@@ -101,7 +101,7 @@ export default class ServerDashboardView extends React.Component {
     // }, () => {
     //
     // })
-    this.props.history.push(`/addserver?tpl=${tpl.id}&from=servers`)
+    this.props.history.push(`/addserver?from=servers`)
   }
 
   onClickAddRange () {
@@ -228,14 +228,21 @@ export default class ServerDashboardView extends React.Component {
     )
   }
   getMenuItems () {
-    const tpls = this.getServerTpls()
+    // const tpls = this.getServerTpls()
 
-    const items = tpls.map((p, i) => ({
-      label: p.name,
+    // const items = tpls.map((p, i) => ({
+    //   label: p.name,
+    //   icon: <ComputerIcon/>,
+    //   color: tplColors[i % tplColors.length],
+    //   onClick: this.onClickAddItem.bind(this, p)
+    // }))
+
+    const items = [{
+      label: 'Add Server',
       icon: <ComputerIcon/>,
-      color: tplColors[i % tplColors.length],
-      onClick: this.onClickAddItem.bind(this, p)
-    }))
+      color: tplColors[0],
+      onClick: this.onClickAddItem.bind(this)
+    }]
 
     items.push({
       label: 'Add Range',
