@@ -540,14 +540,14 @@ export const resolveAddr = (props, cb) => {
       }
       cb && cb(props)
     } else {
-      cb && cb(null, 'Host/IP resolve failed')
+      cb && cb(null, 'Host resolve failed')
     }
   }).catch(() => {
-    cb && cb(null, 'Host/IP resolve failed')
+    cb && cb(null, 'Host resolve failed')
   })
 }
 
-export const addDevice = (props, url) => {
+export const addDevice = (props, url, cb) => {
   if (!window.localStorage.getItem('token')) {
     return dispatch => dispatch({ type: NO_AUTH_ERROR })
   }
@@ -556,6 +556,7 @@ export const addDevice = (props, url) => {
     resolveAddr(props, (newProps, error) => {
       if (error) {
         dispatch({type: SET_ADDING_DEVICE, data: false, error})
+        cb && cb({success:false, error})
         return
       }
       axios.post(`${ROOT_URL}/${url}`, newProps).then(res => {
@@ -567,9 +568,11 @@ export const addDevice = (props, url) => {
         }
 
         dispatch({type: SET_ADDING_DEVICE, data: false, device: res.data})
+        cb && cb({success: true})
       }).catch(error => {
         updateDeviceError(dispatch, error)
         dispatch({type: SET_ADDING_DEVICE, data: false})
+        cb && cb({success: false, error: 'Add Failed'})
       })
     })
   }

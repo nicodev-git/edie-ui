@@ -169,7 +169,7 @@ class DeviceWizard extends Component {
     }, credentials, deviceGlobalCredentials, deviceCredentials)
     console.log(props)
     this.closeModal(true)
-    onFinish && onFinish(null, props, currentDevice.server.url)
+    if (onFinish) return onFinish(null, props, currentDevice.server.url)
   }
 
   onChangeForm (e, value) {

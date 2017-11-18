@@ -1,6 +1,7 @@
 import React from 'react'
 import {findIndex} from 'lodash'
 import {parse} from 'query-string'
+import { SubmissionError } from 'redux-form'
 
 import { getDeviceType, commonconfig } from 'components/common/wizard/WizardConfig'
 import DeviceWizardContainer from 'containers/shared/wizard/DeviceWizardContainer'
@@ -27,16 +28,16 @@ export default class AddServer extends React.Component {
       })
     }
 
-    if (prevProps.addingDevice && !this.props.addingDevice) {
-      if (this.props.addDeviceError) {
-        showAlert(this.props.addDeviceError)
-      } else {
-        const query = parse(this.props.location.search)
-        if (query.from === 'servers') {
-          this.props.history.push('/dashboard/servers')
-        }
-      }
-    }
+    // if (prevProps.addingDevice && !this.props.addingDevice) {
+    //   if (this.props.addDeviceError) {
+    //     // showAlert(this.props.addDeviceError)
+    //   } else {
+    //     const query = parse(this.props.location.search)
+    //     if (query.from === 'servers') {
+    //       this.props.history.push('/dashboard/servers')
+    //     }
+    //   }
+    // }
   }
 
   onChangeDistribution (value) {
@@ -67,7 +68,23 @@ export default class AddServer extends React.Component {
   }
 
   onFinishAddWizard (res, params, url) {
-    this.props.addDevice(params, url)
+    const check = () => new Promise(resolve => {
+      this.props.addDevice(params, url, resolve)
+    })
+    return check().then(({success, error}) => {
+      if (!success) {
+        if (error.indexOf('resolve') >= 0) {
+          throw new SubmissionError({ wanip: error, _error: 'Add failed!' })
+        } else {
+          showAlert(error)
+        }
+      } else {
+        const query = parse(this.props.location.search)
+        if (query.from === 'servers') {
+          this.props.history.push('/dashboard/servers')
+        }
+      }
+    })
   }
 
   render () {
