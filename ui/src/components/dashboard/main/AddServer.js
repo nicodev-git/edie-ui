@@ -1,8 +1,8 @@
 import React from 'react'
-// import {findIndex} from 'lodash'
+import {findIndex} from 'lodash'
 import {parse} from 'query-string'
 
-import { getDeviceType } from 'components/common/wizard/WizardConfig'
+import { getDeviceType, commonconfig } from 'components/common/wizard/WizardConfig'
 import DeviceWizardContainer from 'containers/shared/wizard/DeviceWizardContainer'
 
 export default class AddServer extends React.Component {
@@ -39,8 +39,18 @@ export default class AddServer extends React.Component {
   //   return deviceTemplates[index]
   // }
 
-  onChangeDistribution () {
+  onChangeDistribution (value) {
     console.log(arguments)
+    const {deviceTemplates} = this.props
+    const distIndex = findIndex(commonconfig.distribution.values, {value})
+    if (distIndex < 0) return
+    const dist = commonconfig.distribution.values[distIndex]
+    const index = findIndex(deviceTemplates, {name: dist.template})
+    if (index < 0) return
+    this.setState({
+      tpl: deviceTemplates[index]
+    })
+    console.log(deviceTemplates[index])
   }
 
 

@@ -79,28 +79,36 @@ export const commonconfig = {
   distribution: {
     values: [{
       display: 'Cent OS',
-      value: 'Cent OS'
+      value: 'Cent OS',
+      template: 'Linux Server'
     }, {
       display: 'Core OS',
-      value: 'Core OS'
+      value: 'Core OS',
+      template: 'Linux Server'
     }, {
       display: 'Debian',
-      value: 'Debian'
+      value: 'Debian',
+      template: 'Linux Server'
     }, {
       display: 'Fedora',
-      value: 'Fedora'
+      value: 'Fedora',
+      template: 'Linux Server'
     }, {
       display: 'Kali',
-      value: 'Kali'
+      value: 'Kali',
+      template: 'Linux Server'
     }, {
       display: 'Red Hat',
-      value: 'Red Hat'
+      value: 'Red Hat',
+      template: 'Linux Server'
     }, {
       display: 'Ubuntu',
-      value: 'Ubuntu'
+      value: 'Ubuntu',
+      template: 'Linux Server'
     }, {
       display: 'Windows',
-      value: 'Windows'
+      value: 'Windows',
+      template: 'Windows Server'
     }]
   }
 }

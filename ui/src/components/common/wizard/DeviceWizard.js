@@ -76,6 +76,19 @@ class DeviceWizard extends Component {
     this.props.fetchCollectors()
   }
 
+  componentDidUpdate (prevProps) {
+    const {deviceType} = this.props
+    if (deviceType !== prevProps.deviceType) {
+      const config = wizardConfig[deviceType]
+      const stepItems = config.steps
+
+      this.setState({
+        currentDevice: {...config, steps: stepItems},
+        monitors: this.props.monitors || [],
+      })
+    }
+  }
+
   checkDeviceAgentStatus (options = {}) {
     const {formValues, extraParams, credentials} = this.props
 
