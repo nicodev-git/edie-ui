@@ -70,11 +70,12 @@ export default class Credentials extends React.Component {
   onCloseExistingPicker (cred) {
     const { onReplaceCreds } = this.props
     const { selectedCred } = this.state
-    if (!cred) return null
 
     this.setState({
       pickerOpen: false
     })
+
+    if (!cred) return null
 
     cred && onReplaceCreds && onReplaceCreds(selectedCred, cred)
   }
