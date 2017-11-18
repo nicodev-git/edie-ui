@@ -1,28 +1,43 @@
 import React from 'react'
-import {findIndex} from 'lodash'
+// import {findIndex} from 'lodash'
 import {parse} from 'query-string'
 
 import { getDeviceType } from 'components/common/wizard/WizardConfig'
 import DeviceWizardContainer from 'containers/shared/wizard/DeviceWizardContainer'
 
 export default class AddServer extends React.Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      tpl: null
+    }
+  }
   componentWillMount () {
     this.props.fetchDeviceTemplates()
     this.props.fetchMonitorTemplates()
   }
 
-  getTplId () {
-    const params = parse(this.props.location.search)
-    return params.tpl
+  componentDidUpdate(prevProps) {
+    const {deviceTemplates} = this.props
+    if (!this.state.tpl && deviceTemplates !== prevProps.deviceTemplates && deviceTemplates.length) {
+      this.setState({
+        tpl: deviceTemplates[0]
+      })
+    }
   }
 
-  getTemplate () {
-    const {deviceTemplates} = this.props
-    const id = this.getTplId()
-    const index = findIndex(deviceTemplates, {id})
-    if (index < 0) return null
-    return deviceTemplates[index]
-  }
+  // getTplId () {
+  //   const params = parse(this.props.location.search)
+  //   return params.tpl
+  // }
+  //
+  // getTemplate () {
+  //   const {deviceTemplates} = this.props
+  //   const id = this.getTplId()
+  //   const index = findIndex(deviceTemplates, {id})
+  //   if (index < 0) return null
+  //   return deviceTemplates[index]
+  // }
 
   onChangeDistribution () {
     console.log(arguments)
@@ -51,7 +66,7 @@ export default class AddServer extends React.Component {
   }
 
   render () {
-    const tpl = this.getTemplate()
+    const {tpl} = this.state
     if (!tpl) {
       return <div>Loading...</div>
     }

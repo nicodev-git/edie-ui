@@ -19,7 +19,7 @@ const FormSelect = ({input, label, floatingLabel, className, style, meta: { touc
     style={style || inputContainerStyle}
     className={className}
     {...input}
-    onChange={(event, index, value) => input.onChange(value)}>
+    onChange={(event, index, value) => input.onChange(value, event)}>
     {options.map(option => <MenuItem key={option.value} value={option.value} primaryText={option.label}/>)}
   </SelectField>
 )
