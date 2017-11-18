@@ -405,7 +405,7 @@ export function checkAgentUp (id, cb) {
 }
 
 export function getDeviceCredentials (selectedDevice, credentials, showGlobal) {
-  const deviceCreds = credentials.filter(p => !p.global && p.deviceIds && p.deviceIds.indexOf(selectedDevice.id) >= 0)
+  const deviceCreds = credentials.filter(p => /*!p.global && */p.deviceIds && p.deviceIds.indexOf(selectedDevice.id) >= 0)
   if (showGlobal) {
     const isWin = isWindowsDevice(selectedDevice)
     credentials.forEach(p => {
