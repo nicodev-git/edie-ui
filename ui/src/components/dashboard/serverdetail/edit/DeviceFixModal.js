@@ -100,6 +100,10 @@ class DeviceFixModal extends React.Component {
     })
   }
 
+  onReplaceCreds (oldCred, newCred) {
+
+  }
+
   ////////////////////////////////////////////////////////////////////////////////
 
   handleFormSubmit (values) {
@@ -172,6 +176,7 @@ class DeviceFixModal extends React.Component {
 
         isWin={isWindowsDevice(editDevice)}
         onChangeIntegrated={this.onChangeIntegrated.bind(this)}
+        onReplaceCreds={this.onReplaceCreds.bind(this)}
       />
     )
   }

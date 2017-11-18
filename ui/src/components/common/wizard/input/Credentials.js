@@ -20,6 +20,13 @@ const iconStyle = {
 }
 
 export default class Credentials extends React.Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      pickerOpen: false,
+      selectedCred: null
+    }
+  }
   componentDidMount () {
     this.props.selectDeviceCreds(-1)
   }
@@ -54,17 +61,28 @@ export default class Credentials extends React.Component {
   //////////////////////////////////////////////////////////
 
   onClickChange (cred) {
-
+    this.setState({
+      pickerOpen: true,
+      selectedCred: cred
+    })
   }
 
-  onCloseExistingPicker () {
+  onCloseExistingPicker (cred) {
+    const { onReplaceCreds } = this.props
+    const { selectedCred } = this.state
+    if (!cred) return null
 
+    this.setState({
+      pickerOpen: false
+    })
+
+    cred && onReplaceCreds && onReplaceCreds(selectedCred, cred)
   }
 
   //////////////////////////////////////////////////////////
 
-  renderPicker () {
-    if (!this.props.credListModalOpen) return null
+  renderExistingPicker () {
+    if (!this.state.pickerOpen) return null
     return (
       <CredListPicker
         global
@@ -147,6 +165,7 @@ export default class Credentials extends React.Component {
             </tbody>
           </table>
           {this.renderPicker()}
+          {this.renderExistingPicker()}
         </div>
       </div>
     )

@@ -10,14 +10,15 @@ import DeviceCredsModal from './DeviceCredsModal'
 
 export default class DeviceFixModalView extends React.Component {
   renderCredentials () {
-    const {editDevice, config, onClickAddCreds} = this.props
+    const {editDevice, config, onClickAddCreds, onReplaceCreds} = this.props
     if (!config.credentials) return null
 
     return (
       <CardPanel
         title="Credentials"
         tools={<IconButton onTouchTap={onClickAddCreds}><AddCircleIcon/></IconButton>}>
-        <Credentials {...this.props} selectedDevice={editDevice} showGlobal/>
+        <Credentials {...this.props} selectedDevice={editDevice} showGlobal
+                     onReplaceCreds={onReplaceCreds}/>
       </CardPanel>
     )
   }
