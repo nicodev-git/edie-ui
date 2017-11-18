@@ -530,7 +530,17 @@ export const resolveAddr = (props, cb) => {
     cb && cb(props)
     return
   }
-  axios.get(`${ROOT_URL}/resolve/?iporhost=${props.wanip}`).then(r1 => {
+
+  const cred = props.credential && props.credential.length > 0 ?
+    props.credential[0] : null
+  axios.get(`${ROOT_URL}/getHostname`, {
+    params: {
+      iporhost: props.wanip,
+      user: cred.username,
+      password: cred.password,
+      isWindows: isWindowsDevice(props)
+    }
+  }).then(r1 => {
     if (r1.data && (r1.data.ip || r1.data.host)) {
       if (r1.data.ip) {
         props.hostname = props.wanip
