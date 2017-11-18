@@ -23,9 +23,12 @@ export default class AddServer extends React.Component {
   componentDidUpdate(prevProps) {
     const {deviceTemplates} = this.props
     if (!this.state.tpl && deviceTemplates !== prevProps.deviceTemplates && deviceTemplates.length) {
-      this.setState({
-        tpl: deviceTemplates[0]
-      })
+      const found = deviceTemplates.filter(p => (p.tags || []).includes('Server'))
+      if (found.length) {
+        this.setState({
+          tpl: found[0]
+        })
+      }
     }
 
     // if (prevProps.addingDevice && !this.props.addingDevice) {
