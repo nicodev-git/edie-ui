@@ -86,7 +86,6 @@ export default class Credentials extends React.Component {
     if (!this.state.pickerOpen) return null
     return (
       <CredListPicker
-        global
         onClose={this.onCloseExistingPicker.bind(this)}
       />
     )

@@ -112,6 +112,7 @@ class DeviceFixModal extends React.Component {
     if (!(newCred.deviceIds || []).includes(editDevice.id)) {
       this.props.updateCredentials({
         ...newCred,
+        global: false,
         deviceIds: [...(newCred.deviceIds || []), editDevice.id]
       })
     }
