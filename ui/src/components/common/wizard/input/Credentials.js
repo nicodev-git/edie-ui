@@ -1,14 +1,23 @@
 import React from 'react'
 import DeleteIcon from 'material-ui/svg-icons/action/delete'
 import EditIcon from 'material-ui/svg-icons/content/create'
+import ListIcon from 'material-ui/svg-icons/action/list'
 import {IconButton, Chip} from 'material-ui'
 import {Field} from 'redux-form'
 
 import CredentialModal from 'components/credentials/CredentialModal'
+import CredListPicker from 'containers/settings/credentials/CredsPickerContainer'
+
 import {showConfirm} from 'components/common/Alert'
 import {getDeviceCredentials} from 'shared/Global'
 import { chipStyles } from 'style/common/materialStyles'
 import { FormToggle } from 'components/modal/parts'
+
+const iconStyle = {
+  padding: 0,
+  width: 24,
+  height: 24
+}
 
 export default class Credentials extends React.Component {
   componentDidMount () {
@@ -22,7 +31,6 @@ export default class Credentials extends React.Component {
       if (btn !== 'ok') return
       this.props.removeCredentials(selected)
     })
-
   }
   onAddCredential (props) {
     if (props) {
@@ -42,6 +50,29 @@ export default class Credentials extends React.Component {
   onCloseCredPicker () {
     this.props.showDeviceCredsPicker(false)
   }
+
+  //////////////////////////////////////////////////////////
+
+  onClickChange (cred) {
+
+  }
+
+  onCloseExistingPicker () {
+
+  }
+
+  //////////////////////////////////////////////////////////
+
+  renderPicker () {
+    if (!this.props.credListModalOpen) return null
+    return (
+      <CredListPicker
+        global
+        onClose={this.onCloseExistingPicker.bind(this)}
+      />
+    )
+  }
+
   renderPicker () {
     if (!this.props.deviceCredsPickerVisible) return null
 
@@ -98,14 +129,17 @@ export default class Credentials extends React.Component {
                   ) : null}
                 </td>
                 <td>
-                  <IconButton style={{padding: 0, width: 24, height: 24}}
+                  <IconButton style={iconStyle}
                     className={onClickEditCreds ? '' : 'hidden'}
                     onTouchTap={this.onClickEdit.bind(this, p)}>
                     <EditIcon color="#545454" hoverColor="#f44336" />
                   </IconButton>
-                  <IconButton style={{padding: 0, width: 24, height: 24}}
+                  <IconButton style={iconStyle}
                     onTouchTap={this.onClickRemove.bind(this, p)}>
                     <DeleteIcon color="#545454" hoverColor="#f44336"/>
+                  </IconButton>
+                  <IconButton style={iconStyle} onTouchTap={this.onClickChange.bind(this, p)}>
+                    <ListIcon color="#545454" hoverColor="#f44336"/>
                   </IconButton>
                 </td>
               </tr>
