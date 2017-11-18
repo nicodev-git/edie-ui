@@ -541,13 +541,9 @@ export const resolveAddr = (props, cb) => {
       isWindows: isWindowsDevice(props)
     }
   }).then(r1 => {
-    if (r1.data && (r1.data.ip || r1.data.host)) {
-      if (r1.data.ip) {
-        props.hostname = props.wanip
-        props.wanip = r1.data.ip
-      } else {
-        props.hostname = r1.data.host
-      }
+    if (r1.data && r1.data.host && r1.data.os) {
+      props.hostname = r1.data.host
+      props.osDetails = r1.data.os
       cb && cb(props)
     } else {
       cb && cb(null, 'Host resolve failed')
