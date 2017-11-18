@@ -52,8 +52,8 @@ export default class ServerItem extends React.Component {
         color={colors[index % colors.length]}
         name={server.templateName || 'Unknown'}
         desc={server.name}
-        desc2={server.wanip || server.lanip || ''}
-        desc3={server.hostname || (server.agent ? server.agent.host : '') || 'Unknown'}
+        desc2={<span>{server.osDetails}<br/>{server.wanip || ''}</span>}
+        desc3={server.hostname || 'Unknown'}
         img={`${extImageBaseUrl}${server.image}`}
         onClick={onClick}
         onClickDelete={onClickDelete}
