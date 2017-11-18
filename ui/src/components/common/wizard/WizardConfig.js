@@ -79,11 +79,11 @@ export const commonconfig = {
   distribution: {
     values: [{
       display: 'Cent OS',
-      value: 'CentOS',
+      value: 'Cent OS',
       template: 'Linux Server'
     }, {
       display: 'Core OS',
-      value: 'CoreOS',
+      value: 'Core OS',
       template: 'Linux Server'
     }, {
       display: 'Debian',
@@ -99,7 +99,7 @@ export const commonconfig = {
       template: 'Linux Server'
     }, {
       display: 'Red Hat',
-      value: 'RedHat',
+      value: 'Red Hat',
       template: 'Linux Server'
     }, {
       display: 'Ubuntu',
