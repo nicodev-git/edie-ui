@@ -4,6 +4,8 @@ import {parse} from 'query-string'
 
 import { getDeviceType, commonconfig } from 'components/common/wizard/WizardConfig'
 import DeviceWizardContainer from 'containers/shared/wizard/DeviceWizardContainer'
+import RefreshOverlay from 'components/common/RefreshOverlay'
+import {showAlert} from "../../common/Alert";
 
 export default class AddServer extends React.Component {
   constructor (props) {
@@ -24,20 +26,18 @@ export default class AddServer extends React.Component {
         tpl: deviceTemplates[0]
       })
     }
-  }
 
-  // getTplId () {
-  //   const params = parse(this.props.location.search)
-  //   return params.tpl
-  // }
-  //
-  // getTemplate () {
-  //   const {deviceTemplates} = this.props
-  //   const id = this.getTplId()
-  //   const index = findIndex(deviceTemplates, {id})
-  //   if (index < 0) return null
-  //   return deviceTemplates[index]
-  // }
+    if (prevProps.addingDevice && !this.props.addingDevice) {
+      if (this.props.addDeviceError) {
+        showAlert(this.props.addDeviceError)
+      } else {
+        const query = parse(this.props.location.search)
+        if (query.from === 'servers') {
+          this.props.history.push('/dashboard/servers')
+        }
+      }
+    }
+  }
 
   onChangeDistribution (value) {
     console.log(arguments)
@@ -68,15 +68,10 @@ export default class AddServer extends React.Component {
 
   onFinishAddWizard (res, params, url) {
     this.props.addDevice(params, url)
-
-    const query = parse(this.props.location.search)
-    if (query.from === 'servers') {
-      this.props.history.push('/dashboard/servers')
-    }
   }
 
   render () {
-    const {tpl} = this.state
+    const {tpl, addingDevice} = this.state
     if (!tpl) {
       return <div>Loading...</div>
     }
@@ -92,19 +87,22 @@ export default class AddServer extends React.Component {
     }
 
     return (
-      <DeviceWizardContainer
-        noModal
-        deviceType={getDeviceType(tpl.name)}
-        onClose={this.closeCallback.bind(this)}
-        title={tpl.name}
-        monitors={tpl.monitors || []}
-        extraParams={extra}
-        configParams={{}}
-        onFinish={this.onFinishAddWizard.bind(this)}
-        addDevice={this.addDevice.bind(this)}
-        removeDevice={this.deleteMapDevice.bind(this)}
-        onChangeDistribution={this.onChangeDistribution.bind(this)}
-      />
+      <div>
+        <DeviceWizardContainer
+          noModal
+          deviceType={getDeviceType(tpl.name)}
+          onClose={this.closeCallback.bind(this)}
+          title={tpl.name}
+          monitors={tpl.monitors || []}
+          extraParams={extra}
+          configParams={{}}
+          onFinish={this.onFinishAddWizard.bind(this)}
+          addDevice={this.addDevice.bind(this)}
+          removeDevice={this.deleteMapDevice.bind(this)}
+          onChangeDistribution={this.onChangeDistribution.bind(this)}
+        />
+        {addingDevice && <RefreshOverlay/>}
+      </div>
     )
   }
 }

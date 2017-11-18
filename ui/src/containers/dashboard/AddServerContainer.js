@@ -21,7 +21,10 @@ class AddServerContainer extends React.Component {
 export default connect(
   state => ({
     monitorTemplates: state.settings.monitorTemplates,
-    deviceTemplates: state.settings.deviceTemplates
+    deviceTemplates: state.settings.deviceTemplates,
+
+    addDeviceError: state.devices.addDeviceError,
+    addingDevice: state.devices.addingDevice
   }), {
     fetchDeviceTemplates,
     fetchMonitorTemplates,

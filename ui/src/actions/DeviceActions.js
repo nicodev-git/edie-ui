@@ -538,10 +538,12 @@ export const resolveAddr = (props, cb) => {
       } else {
         props.hostname = r1.data.host
       }
+      cb && cb(props)
+    } else {
+      cb && cb(null, 'Host/IP resolve failed')
     }
-    cb && cb(props)
   }).catch(() => {
-    cb && cb(props)
+    cb && cb(null, 'Host/IP resolve failed')
   })
 }
 
@@ -551,7 +553,11 @@ export const addDevice = (props, url) => {
   }
   return (dispatch) => {
     dispatch({type: SET_ADDING_DEVICE, data: true})
-    resolveAddr(props, newProps => {
+    resolveAddr(props, (newProps, error) => {
+      if (error) {
+        dispatch({type: SET_ADDING_DEVICE, data: false, error})
+        return
+      }
       axios.post(`${ROOT_URL}/${url}`, newProps).then(res => {
         dispatch({type: ADD_DEVICE, data: res.data})
         if (newProps.credential) {
