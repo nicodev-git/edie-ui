@@ -29,12 +29,17 @@ const FormInput = ({input, label, ...custom}) => (
 export default class ServerCmdModalView extends React.Component {
   getData () {
     const data = []
-    const {results, devices} = this.props
+    const {results, devices, deviceData} = this.props
 
+    data.push(['Device', 'IP', 'OS', 'Result'])
     devices.forEach(p => {
+      const r = (results[p.id] || '').replace(/\r?\n/gi, ' ')
+
       const row = []
       row.push(p.name)
-      row.push(results[p.id] || '')
+      row.push((deviceData[p.id] || {}).ip || '')
+      row.push((deviceData[p.id] || {}).os || '')
+      row.push(r)
       data.push(row)
     })
 
@@ -49,7 +54,7 @@ export default class ServerCmdModalView extends React.Component {
   }
 
   render () {
-    const {onHide, onSubmit, loading, devices, results} = this.props
+    const {onHide, onSubmit, loading, devices, results, deviceData} = this.props
     return (
       <ModalFull title="Command" onRequestClose={onHide}>
         <Form onSubmit={onSubmit}>
@@ -61,15 +66,19 @@ export default class ServerCmdModalView extends React.Component {
             <div style={{maxHeight: 500, overflow: 'auto'}}>
               <table className="table">
                 <thead>
-                <tr>
-                  <th>Device</th>
-                  <th>Result</th>
-                </tr>
+                  <tr>
+                    <th>Device</th>
+                    <th>IP</th>
+                    <th>OS</th>
+                    <th>Result</th>
+                  </tr>
                 </thead>
                 <tbody>
                 {devices.map(p =>
                   <tr key={p.id}>
                     <td>{p.name}</td>
+                    <td>{(deviceData[p.id] || {}).ip || ''}</td>
+                    <td>{(deviceData[p.id] || {}).os || ''}</td>
                     <td>{results[p.id] || ''}</td>
                   </tr>
                 )}

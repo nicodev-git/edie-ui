@@ -530,28 +530,41 @@ export const resolveAddr = (props, cb) => {
     cb && cb(props)
     return
   }
-  axios.get(`${ROOT_URL}/resolve/?iporhost=${props.wanip}`).then(r1 => {
-    if (r1.data && (r1.data.ip || r1.data.host)) {
-      if (r1.data.ip) {
-        props.hostname = props.wanip
-        props.wanip = r1.data.ip
-      } else {
-        props.hostname = r1.data.host
-      }
+
+  const cred = props.credential && props.credential.length > 0 ?
+    props.credential[0] : null
+  axios.get(`${ROOT_URL}/getHostname`, {
+    params: {
+      iporhost: props.wanip,
+      user: cred.username,
+      password: cred.password,
+      isWindows: isWindowsDevice(props)
     }
-    cb && cb(props)
+  }).then(r1 => {
+    if (r1.data && r1.data.host && r1.data.os) {
+      props.hostname = r1.data.host
+      props.osDetails = r1.data.os
+      cb && cb(props)
+    } else {
+      cb && cb(null, 'Host resolve failed')
+    }
   }).catch(() => {
-    cb && cb(props)
+    cb && cb(null, 'Host resolve failed')
   })
 }
 
-export const addDevice = (props, url) => {
+export const addDevice = (props, url, cb) => {
   if (!window.localStorage.getItem('token')) {
     return dispatch => dispatch({ type: NO_AUTH_ERROR })
   }
   return (dispatch) => {
     dispatch({type: SET_ADDING_DEVICE, data: true})
-    resolveAddr(props, newProps => {
+    resolveAddr(props, (newProps, error) => {
+      if (error) {
+        dispatch({type: SET_ADDING_DEVICE, data: false, error})
+        cb && cb({success:false, error})
+        return
+      }
       axios.post(`${ROOT_URL}/${url}`, newProps).then(res => {
         dispatch({type: ADD_DEVICE, data: res.data})
         if (newProps.credential) {
@@ -561,9 +574,11 @@ export const addDevice = (props, url) => {
         }
 
         dispatch({type: SET_ADDING_DEVICE, data: false, device: res.data})
+        cb && cb({success: true})
       }).catch(error => {
         updateDeviceError(dispatch, error)
         dispatch({type: SET_ADDING_DEVICE, data: false})
+        cb && cb({success: false, error: 'Add Failed'})
       })
     })
   }

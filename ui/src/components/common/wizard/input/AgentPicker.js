@@ -159,7 +159,7 @@ export default class AgentPicker extends React.Component {
         const isWin = isWindowsDevice(editDevice)
 
         agentCombo = (
-          <div style={{position: 'absolute', top: 40, left: 130, zIndex: 3}}>
+          <div style={{position: 'absolute', top: 55, left: 130, zIndex: 3}}>
             <div
               className="inline-block"
               style={{textDecoration: 'underline', color: 'rgba(0, 0, 0, 0.87)', cursor: 'pointer'}}
@@ -192,7 +192,7 @@ export default class AgentPicker extends React.Component {
 
     return (
       <div style={{minHeight: 110, position: 'relative'}}>
-        <Field name="agentType" component={RadioButtonGroup} className="margin-md-top" onChange={onChange}>
+        <Field name="agentType" component={RadioButtonGroup} className="padding-md-top" onChange={onChange}>
           <RadioButton value="" label="None" className="pull-left"/>
           <RadioButton value="agent" label={agentLabel} className="pull-left" disabled={!agent} style={{marginTop: 14, cursor: 'pointer'}}/>
           <RadioButton value="collector" label={collectorLabel} className="pull-left" style={{width: 120, marginTop: 14}}/>

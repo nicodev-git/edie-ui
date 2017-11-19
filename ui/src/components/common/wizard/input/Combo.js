@@ -41,55 +41,15 @@ export default class Combo extends React.Component {
       this.setState({options})
     }
   }
-  // render1 () {
-  //   let config = this.props.config
-  //   let values = this.props.values
-  //
-  //   let label, input
-  //   let width = util.calcWidth(config.width)
-  //
-  //   if (config.label !== null) {
-  //     if (config.label.type === 'place') {
-  //
-  //     } else {
-  //       label = this.props.buildLabel(config.label)
-  //       width = util.calcWidth(config.width) - util.calcWidth(config.label.width)
-  //     }
-  //   }
-  //
-  //   let defaultValue = config.value
-  //
-  //   let options = this.state.options.map(item => {
-  //     if (item.selected && !defaultValue) defaultValue = item.value
-  //     return {
-  //       text: item.label,
-  //       value: item.value
-  //     }
-  //   })
-  //
-  //   if (config.name && values[config.name] !== undefined) {
-  //     defaultValue = values[config.name]
-  //   }
-  //
-  //   if (!defaultValue && options.length) {
-  //     defaultValue = options[0].value
-  //   }
-  //
-  //   input = (
-  //     <div className={`col-md-${width}`}
-  //       style={util.convertStyle(config.style)}>
-  //       <SelectField className={`form-control ${config.cls || ''}`}
-  //         name={config.name}
-  //         validation={config.required ? 'required' : null}
-  //         defaultValue={defaultValue}
-  //         options={options}
-  //       />
-  //       {this.renderSidebar()}
-  //     </div>
-  //   )
-  //
-  //   return util.wrapInputs(label, input, config['useColumn'])
-  // }
+  onChange (e, value) {
+    const {onChange} = this.props
+    onChange && onChange({
+      target: {
+        name: this.props.config.name
+      }
+    }, value)
+
+  }
   render () {
     const {config} = this.props
     const {options} = this.state
@@ -106,6 +66,7 @@ export default class Combo extends React.Component {
         options={options}
         defaultValue={options.length ? options[0].value : null}
         validate={validate}
+        onChange={this.onChange.bind(this)}
       />
     )
   }

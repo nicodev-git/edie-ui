@@ -8,10 +8,11 @@ import {isWindowsDevice} from 'shared/Global'
 
 export default class DeviceCredsModalView extends React.Component {
   renderCredPicker () {
-    const {onCloseCredPicker, deviceCredsPickerVisible} = this.props
+    const {onCloseCredPicker, deviceCredsPickerVisible, credentials} = this.props
     if (!deviceCredsPickerVisible) return null
     return (
       <CredentialModal
+        credentials={credentials}
         credentialTypes={this.props.credentialTypes}
         addCredentials={onCloseCredPicker}
         onClose={onCloseCredPicker}

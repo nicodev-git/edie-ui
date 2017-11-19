@@ -3,6 +3,7 @@ import { assign } from 'lodash'
 import { reduxForm } from 'redux-form'
 import {Step, Stepper, StepLabel} from 'material-ui/Stepper'
 import {CircularProgress} from 'material-ui'
+import {debounce} from 'lodash'
 
 import TextInput from './input/TextInput'
 import Checkbox from './input/Checkbox'
@@ -27,6 +28,8 @@ import CollectorInstallModal from './input/CollectorInstallModal'
 
 import {getAgentStatusMessage, mergeCredentials, getDeviceCollectors} from 'shared/Global'
 import {isWindowsDevice} from 'shared/Global'
+
+const credCheckTriggers = ['lanip', 'wanip', 'hostname']
 
 class DeviceWizard extends Component {
   constructor (props) {
@@ -59,6 +62,8 @@ class DeviceWizard extends Component {
       'agentpicker': this.buildAgentPicker.bind(this),
       'removeafter': this.buildRemoveAfter.bind(this)
     }
+
+    this.debCheckAgent = debounce(this.checkDeviceAgentStatus.bind(this), 1000)
   }
 
   componentWillMount () {
@@ -69,6 +74,19 @@ class DeviceWizard extends Component {
     this.props.fetchCredTypes()
     this.props.fetchMonitorGroups()
     this.props.fetchCollectors()
+  }
+
+  componentDidUpdate (prevProps) {
+    const {deviceType} = this.props
+    if (deviceType !== prevProps.deviceType) {
+      const config = wizardConfig[deviceType]
+      const stepItems = config.steps
+
+      this.setState({
+        currentDevice: {...config, steps: stepItems},
+        monitors: this.props.monitors || [],
+      })
+    }
   }
 
   checkDeviceAgentStatus (options = {}) {
@@ -104,7 +122,8 @@ class DeviceWizard extends Component {
   }
 
   handleFormSubmit (formProps) {
-    const { extraParams, onFinish, editParams, canAddTags, monitorTags, credentials, fixResult, fixStatus, editDevice } = this.props
+    const { extraParams, onFinish, editParams, canAddTags,
+      monitorTags, credentials, fixResult, fixStatus, editDevice } = this.props
     const { monitors, currentDevice, deviceGlobalCredentials, deviceCredentials } = this.state
     const {distribution} = formProps
     const params = {
@@ -150,8 +169,25 @@ class DeviceWizard extends Component {
     }, credentials, deviceGlobalCredentials, deviceCredentials)
     console.log(props)
     this.closeModal(true)
-    onFinish && onFinish(null, props, currentDevice.server.url)
+    if (onFinish) return onFinish(null, props, currentDevice.server.url)
   }
+
+  onChangeForm (e, value) {
+    const {noModal, onChangeDistribution} = this.props
+    if (noModal) {
+      const {name} = e.target
+      if (credCheckTriggers.includes(name)) {
+        this.debCheckAgent()
+      }
+
+      if (name === 'distribution') {
+        onChangeDistribution && onChangeDistribution(value)
+      }
+    }
+  }
+
+  ////////////////////////////////////////////////////////////////////////////////
+
 
   buildProgressBar () {
     if (this.state.steps <= 1) return null
@@ -173,37 +209,65 @@ class DeviceWizard extends Component {
   }
 
   buildContent () {
+    const {noModal} = this.props
     let tabs = []
 
     for (let i = 0; i < this.state.steps; i++) {
       let tab = this.buildStep(i)
       tabs.push(tab)
     }
+    if (noModal) {
+      return (
+        <div style={{paddingLeft: 5, paddingRight: 5}}>
+          {tabs}
+        </div>
+      )
+    }
 
     return tabs
   }
 
   buildStep (index) {
-    const {canAddTags} = this.props
+    const {canAddTags, noModal} = this.props
     const currentDevice = this.state.currentDevice
     const stepConfig = currentDevice.steps[index]
     const meta = {
       active: index === (this.state.current - 1)
     }
+
+    const panelContents = stepConfig.panels.map((panel, pi) => {
+      const panelContent = panel.skip ? (
+        <div key={pi}>
+          {panel.items.map(itemConfig => this.buildInput(itemConfig, this.props.values, meta))}
+        </div>
+      ) : (
+        <CardPanel key={pi} title={panel.title}>
+          <div style={noModal && panel.width ? {minHeight: 180} : null}>
+            {panel.items.map(itemConfig => this.buildInput(itemConfig, this.props.values, meta))}
+          </div>
+        </CardPanel>
+      )
+
+      if (noModal) {
+        return (
+          <div key={pi} className={noModal ? `col-md-${panel.width || 12}` : ''}>
+            {panelContent}
+          </div>
+        )
+      }
+
+      return panelContent
+    })
+
+    if (noModal) {
+      if (canAddTags) {
+        panelContents.push(this.renderTags())
+      }
+      return panelContents
+    }
     return (
       <div key={index} className={`${meta.active ? ' active' : 'hidden'}`}>
-        {stepConfig.panels.map((panel, pi) =>
-          panel.skip ? (
-            <div key={pi}>
-              {panel.items.map(itemConfig => this.buildInput(itemConfig, this.props.values, meta))}
-            </div>
-          ) : (
-            <CardPanel key={pi} title={panel.title}>
-              {panel.items.map(itemConfig => this.buildInput(itemConfig, this.props.values, meta))}
-            </CardPanel>
-          )
-        )}
-
+        {panelContents}
         {index === 1 && canAddTags ? this.renderTags() : null}
       </div>
     )
@@ -230,10 +294,15 @@ class DeviceWizard extends Component {
   }
 
   buildText (config, values) {
-    return (<TextInput key={config.name}
-      config={config}
-      values={values}
-      buildLabel={this.buildLabel.bind(this)}/>)
+    return (
+      <TextInput
+        key={config.name}
+        config={config}
+        values={values}
+        buildLabel={this.buildLabel.bind(this)}
+        onChange={this.onChangeForm.bind(this)}
+      />
+    )
   }
 
   buildCombo (config, values) {
@@ -243,6 +312,7 @@ class DeviceWizard extends Component {
         config={config}
         values={values}
         buildLabel={this.buildLabel.bind(this)}
+        onChange={this.onChangeForm.bind(this)}
       />
     )
   }
@@ -464,6 +534,7 @@ class DeviceWizard extends Component {
     if (!this.props.deviceCredsPickerVisible) return null
     return (
       <CredentialModal
+        credentials={this.props.credentials}
         credentialTypes={this.props.credentialTypes}
         addCredentials={this.onCloseCredPicker.bind(this)}
         onClose={this.onCloseCredPicker.bind(this)}
@@ -489,7 +560,7 @@ class DeviceWizard extends Component {
   }
 
   render () {
-    const { handleSubmit, canAddTags, addingDevice } = this.props
+    const { handleSubmit, canAddTags, addingDevice, noModal } = this.props
     const { current, steps } = this.state
     let header = this.props.title || this.state.currentDevice.title || ''
     let progressBar = this.buildProgressBar()
@@ -497,6 +568,7 @@ class DeviceWizard extends Component {
     let paramEditModal = this.renderParamEditModal()
     return (
       <DeviceWizardView
+        noModal={noModal}
         header={header}
         content={content}
         progressBar={progressBar}

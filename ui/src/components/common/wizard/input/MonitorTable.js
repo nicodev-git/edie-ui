@@ -187,7 +187,7 @@ export default class MonitorTable extends Component {
 
   render () {
     return (
-      <div style={{marginTop: -22}}>
+      <div style={{/*marginTop: -22*/}}>
         {this.renderDevices()}
         {this.renderMonitorGroup()}
 

@@ -6,8 +6,21 @@ export const errorStyle = {
 }
 
 export const inputStyle = {
-    color: textColor,
-    fontSize: fontSize
+  color: textColor,
+  fontSize: fontSize
+}
+
+export const selectLabelStyle = {
+  // marginTop: -8,
+  // height: 40
+}
+
+export const selectIconStyle = {
+  // marginTop: -8
+}
+
+export const inputContainerStyle = {
+    // height: 40
 }
 
 export const smallInputStyle = {

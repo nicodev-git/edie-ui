@@ -2,6 +2,7 @@ import React from 'react'
 import {IconButton, SelectField, MenuItem} from 'material-ui'
 import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
 import {findIndex} from 'lodash'
+import {slugify} from 'shared/Global'
 
 import MainDashboardView from './MainDashboardView'
 import ServerDashboardView from './ServerDashboardView'
@@ -27,25 +28,30 @@ export default class MainDashboard extends React.Component {
     const {gaugeBoards} = nextProps
     let {id} = this.props.match.params
     if ((!this.props.gaugeBoards.length || !nextProps.match.params.id) && gaugeBoards.length) {
-      let index = -1
+      let board
       if (id && nextProps.match.params.id) {
-        if (id === 'servers') {
-          const servers = gaugeBoards.filter(p => this.isServerDashboard(p))
-          if (servers.length) id = servers[0].id
-        }
-        index = findIndex(gaugeBoards, {id})
+        board = this.findBoard(gaugeBoards, id)
       }
 
-      const board = gaugeBoards[index >= 0 ? index : 0]
-      nextProps.selectGaugeBoard(board.id, this.isServerDashboard(board) ? 'servers' : '', nextProps.history)
+      if (!board) board = gaugeBoards[0]
+      nextProps.selectGaugeBoard(board.id, slugify(board.name), nextProps.history)
     }
+  }
+  findBoard (boards, slug) {
+    let found
+    boards.every(p => {
+      if (slugify(p.name) === slug) {
+        found = p
+        return false
+      }
+      return true
+    })
+    return found
   }
   getSelectedId () {
     const {id} = this.props.match.params
-    if (id === 'servers') {
-      const found = this.props.gaugeBoards.filter(p => this.isServerDashboard(p))
-      if (found.length) return found[0].id
-    }
+    const board = this.findBoard(this.props.gaugeBoards, id)
+    if (board) return board.id
     return id
   }
   getSelected () {
@@ -59,7 +65,7 @@ export default class MainDashboard extends React.Component {
   }
   onChangeBoard (e, index, value) {
     const {gaugeBoards} = this.props
-    const url = this.isServerDashboard(gaugeBoards[index]) ? 'servers' : ''
+    const url = slugify(gaugeBoards[index].name)
     this.props.selectGaugeBoard(value, url, this.props.history, true)
   }
   onClickAdd () {

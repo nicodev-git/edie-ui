@@ -6,7 +6,7 @@ import ComputerIcon from 'material-ui/svg-icons/hardware/computer'
 import DevicesIcon from 'material-ui/svg-icons/device/devices'
 import {purple500, deepPurpleA400} from 'material-ui/styles/colors'
 
-import { wizardConfig, getDeviceType } from 'components/common/wizard/WizardConfig'
+import { wizardConfig } from 'components/common/wizard/WizardConfig'
 import DeviceWizardContainer from 'containers/shared/wizard/DeviceWizardContainer'
 import ServerItem from './ServerItem'
 import RefreshOverlay from 'components/common/RefreshOverlay'
@@ -78,29 +78,30 @@ export default class ServerDashboardView extends React.Component {
   }
 
   onClickAddItem (tpl) {
-    console.log(tpl)
-
-    const options = {
-      title: tpl.name,
-      type: getDeviceType(tpl.name),
-      imgName: tpl.image,
-      imageUrl: `/externalpictures?name=${tpl.image}`,
-      x: 0,
-      y: 0,
-      width: 50,
-      height: 50,
-
-      tpl,
-      monitors: tpl.monitors,
-      templateName: tpl.name,
-      workflowids: tpl.workflowids || []
-    }
-
-    this.showAddWizard(options, (id, name, data) => {
-
-    }, () => {
-
-    })
+    // console.log(tpl)
+    //
+    // const options = {
+    //   title: tpl.name,
+    //   type: getDeviceType(tpl.name),
+    //   imgName: tpl.image,
+    //   imageUrl: `/externalpictures?name=${tpl.image}`,
+    //   x: 0,
+    //   y: 0,
+    //   width: 50,
+    //   height: 50,
+    //
+    //   tpl,
+    //   monitors: tpl.monitors,
+    //   templateName: tpl.name,
+    //   workflowids: tpl.workflowids || []
+    // }
+    //
+    // this.showAddWizard(options, (id, name, data) => {
+    //
+    // }, () => {
+    //
+    // })
+    this.props.history.push(`/addserver?from=servers`)
   }
 
   onClickAddRange () {
@@ -227,14 +228,21 @@ export default class ServerDashboardView extends React.Component {
     )
   }
   getMenuItems () {
-    const tpls = this.getServerTpls()
+    // const tpls = this.getServerTpls()
 
-    const items = tpls.map((p, i) => ({
-      label: p.name,
+    // const items = tpls.map((p, i) => ({
+    //   label: p.name,
+    //   icon: <ComputerIcon/>,
+    //   color: tplColors[i % tplColors.length],
+    //   onClick: this.onClickAddItem.bind(this, p)
+    // }))
+
+    const items = [{
+      label: 'Add Server',
       icon: <ComputerIcon/>,
-      color: tplColors[i % tplColors.length],
-      onClick: this.onClickAddItem.bind(this, p)
-    }))
+      color: tplColors[0],
+      onClick: this.onClickAddItem.bind(this)
+    }]
 
     items.push({
       label: 'Add Range',
@@ -289,9 +297,11 @@ export default class ServerDashboardView extends React.Component {
     return (
       <div>
         {this.renderAddMenu()}
-        <ul className="web-applet-cards">
-          {this.getServers().map(this.renderServer.bind(this))}
-        </ul>
+        <div style={{paddingLeft: 20}}>
+          <ul className="web-applet-cards">
+            {this.getServers().map(this.renderServer.bind(this))}
+          </ul>
+        </div>
 
         <FloatingMenu menuItems={this.getMenuItems()}/>
         {this.renderDeviceWizard()}

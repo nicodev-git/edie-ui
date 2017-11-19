@@ -405,7 +405,7 @@ export function checkAgentUp (id, cb) {
 }
 
 export function getDeviceCredentials (selectedDevice, credentials, showGlobal) {
-  const deviceCreds = credentials.filter(p => !p.global && p.deviceIds && p.deviceIds.indexOf(selectedDevice.id) >= 0)
+  const deviceCreds = credentials.filter(p => /*!p.global && */p.deviceIds && p.deviceIds.indexOf(selectedDevice.id) >= 0)
   if (showGlobal) {
     const isWin = isWindowsDevice(selectedDevice)
     credentials.forEach(p => {
@@ -491,6 +491,7 @@ export function sumDisks (disks) {
   if (!total) return null
   return {
     FreeSpace: free,
+    UsedSpace: total - free,
     TotalSpace: total
   }
 }
@@ -515,4 +516,17 @@ export function getRemoveAfter (monitor) {
   }
   values.remove_after = remove_after || 1
   return values
+}
+
+
+export function slugify(string) {
+  return string
+    .toString()
+    .trim()
+    .toLowerCase()
+    .replace(/\s+/g, "-")
+    .replace(/[^\w-]+/g, "")
+    .replace(/--+/g, "-")
+    .replace(/^-+/, "")
+    .replace(/-+$/, "")
 }

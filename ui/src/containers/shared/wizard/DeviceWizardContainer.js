@@ -45,7 +45,7 @@ export default connect(
       agentType: 'collector',
       ...state.devices.wizardInitialValues,
       params: {
-        remove_after: 3,
+        remove_after: '1',
         remove_after_unit: 'months'
       }
     },

@@ -4,14 +4,33 @@ import { assign } from 'lodash'
 import { connect } from 'react-redux'
 import { SimpleModalForm } from 'components/modal'
 
+import {showAlert} from 'components/common/Alert'
+
 class CredentialModal extends Component {
   closeModal () {
     this.props.onClose()
   }
-
+  componentWillMount () {
+    if (this.props.credentials && !this.props.credentials.length && !this.props.initialValues.id) {
+      this.props.change('global', true)
+      this.props.change('default', true)
+    }
+  }
   handleFormSubmit (values) {
     const { initialValues } = this.props
     let props = assign({}, initialValues, values)
+    if (!props.type) {
+      showAlert('Please choose type')
+      return
+    }
+    if (!props.name) {
+      showAlert('Please input name')
+      return
+    }
+    if (!props.username) {
+      showAlert('Please input user name')
+      return
+    }
     if (initialValues.id) {
       this.props.updateCredentials(props)
     } else {
@@ -47,7 +66,7 @@ class CredentialModal extends Component {
 export default connect(
   state => ({
     initialValues: {
-      type: state.devices.credModalDefaultType || '',
+      type: state.devices.credModalDefaultType || 'SSH',
       ...state.settings.editCredentials
     }
   })

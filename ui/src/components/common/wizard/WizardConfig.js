@@ -79,25 +79,36 @@ export const commonconfig = {
   distribution: {
     values: [{
       display: 'Cent OS',
-      value: 'Cent OS'
+      value: 'Cent OS',
+      template: 'Linux Server'
     }, {
       display: 'Core OS',
-      value: 'Core OS'
+      value: 'Core OS',
+      template: 'Linux Server'
     }, {
       display: 'Debian',
-      value: 'Debian'
+      value: 'Debian',
+      template: 'Linux Server'
     }, {
       display: 'Fedora',
-      value: 'Fedora'
+      value: 'Fedora',
+      template: 'Linux Server'
     }, {
       display: 'Kali',
-      value: 'Kali'
+      value: 'Kali',
+      template: 'Linux Server'
     }, {
       display: 'Red Hat',
-      value: 'Red Hat'
+      value: 'Red Hat',
+      template: 'Linux Server'
     }, {
       display: 'Ubuntu',
-      value: 'Ubuntu'
+      value: 'Ubuntu',
+      template: 'Linux Server'
+    }, {
+      display: 'Windows',
+      value: 'Windows',
+      template: 'Windows Server'
     }]
   }
 }
@@ -143,7 +154,27 @@ export const wizardConfig = {
       title: 'Settings',
       panels: [{
         title: 'Basic',
+        width: 6,
         items: [{
+          type: 'text',
+          label: {
+            text: 'IP/Host',
+            type: 'attach',
+            width: 3
+          },
+          width: MAX_WIDTH,
+          name: 'wanip'
+        }, {
+          type: 'combo',
+          label: {
+            text: 'Distribution',
+            width: 3
+          },
+          items: commonconfig.distribution.values,
+          width: MAX_WIDTH,
+          required: true,
+          name: 'distribution'
+        }, {
           type: 'text',
           label: {
             text: 'Name',
@@ -153,21 +184,13 @@ export const wizardConfig = {
           width: MAX_WIDTH,
           required: true,
           name: 'name'
-        }, {
-          type: 'text',
-          label: {
-            text: 'IP/Host',
-            type: 'attach',
-            width: 3
-          },
-          width: MAX_WIDTH,
-          name: 'wanip'
         }]
       }],
     }, {
       title: 'Agent/Collector',
       panels: [{
         title: 'Agent',
+        width: 6,
         items: [{
           type: 'agentpicker'
         }]
@@ -228,16 +251,16 @@ export const wizardConfig = {
       title: 'Settings',
       panels: [{
         title: 'Basic',
+        width: 6,
         items: [{
           type: 'text',
           label: {
-            text: 'Name',
+            text: 'IP/Host',
             type: 'attach',
             width: 3
           },
           width: MAX_WIDTH,
-          required: true,
-          name: 'name'
+          name: 'wanip'
         }, {
           type: 'combo',
           label: {
@@ -251,18 +274,20 @@ export const wizardConfig = {
         }, {
           type: 'text',
           label: {
-            text: 'IP/Host',
+            text: 'Name',
             type: 'attach',
             width: 3
           },
           width: MAX_WIDTH,
-          name: 'wanip'
+          required: true,
+          name: 'name'
         }]
       }],
     }, {
       title: 'Agent/Collector',
       panels: [{
         title: 'Agent',
+        width: 6,
         items: [{
           type: 'agentpicker'
         }]

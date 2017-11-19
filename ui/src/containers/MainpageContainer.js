@@ -19,6 +19,7 @@ import DeviceContainer from 'containers/device/DeviceContainer'
 import LogView from 'containers/dashboard/LogViewContainer'
 import ServerDetailContainer from 'containers/dashboard/ServerDetailContainer'
 import ServerRangeContainer from 'containers/dashboard/ServerRangeContainer'
+import AddServerContainer from 'containers/dashboard/AddServerContainer'
 
 import {
   closeDevice,
@@ -202,9 +203,10 @@ class MainpageContainer extends Component {
       <Main {...this.props}>
         <Switch>
           <Route path="/dashboard" component={MainDashboardContainer} exact/>
-          <Route path="/dashboard/servers/addrange" component={ServerRangeContainer} exact/>
-          <Route path="/dashboard/:id" component={MainDashboardContainer} exact/>
-          <Route path="/dashboard/serverdetail/:id" component={ServerDetailContainer} />
+          <Route path="/dashboard/servers/addrange" component={ServerRangeContainer}/>
+          <Route path="/dashboard/serverdetail/:id" component={ServerDetailContainer}/>
+          <Route path="/dashboard/:id" component={MainDashboardContainer}/>
+          <Route path="/addserver" component={AddServerContainer}/>
         </Switch>
         <Route path="/chat" component={ChatContainer}/>
         <Route path="/search" component={SearchGeneric}/>

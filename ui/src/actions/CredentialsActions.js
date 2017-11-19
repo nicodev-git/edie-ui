@@ -53,6 +53,7 @@ const addCredentialsSuccess = (dispatch, response) => {
     type: ADD_CREDENTIALS,
     data: response.data
   })
+  dispatch(fetchCredentials())
   dispatch(closeCredentialsModal())
 }
 
@@ -92,6 +93,7 @@ const removeCredentialsSuccess = (dispatch, entity) => {
     type: REMOVE_CREDENTIALS,
     data: entity
   })
+  dispatch(fetchCredentials())
 }
 
 export const openCredentialsModal = (entity) => {

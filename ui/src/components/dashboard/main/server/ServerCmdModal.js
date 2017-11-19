@@ -2,9 +2,11 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { reduxForm } from 'redux-form'
 import {keys} from 'lodash'
+import axios from 'axios'
 
 import MonitorSocket from 'util/socket/MonitorSocket'
 import ServerCmdModalView from './ServerCmdModalView'
+import {ROOT_URL} from 'actions/config'
 
 class ServerCmdModal extends React.Component {
   constructor (props) {
@@ -13,10 +15,39 @@ class ServerCmdModal extends React.Component {
       connected: false,
       cmd: '',
       loading: false,
-      results: {}
+      results: {},
+      deviceData: {}
     }
 
     this.sockets = []
+  }
+  componentWillMount () {
+    axios.get(`${ROOT_URL}/findBasicInfo`, {
+      params: {
+        deviceIds: this.props.devices.map(p => p.id).join(',')
+      }
+    }).then(res => {
+      const deviceData = {}
+
+      res.data.forEach(p => {
+        const data = {
+          id: p.device.id,
+          name: p.device.name,
+          os: '',
+          ip: p.device.wanip || p.device.lanip,
+          host: ''
+        }
+
+        if (p.data) {
+          data.os = p.data.OS.Name
+          data.ip = p.data.LanIP
+          data.host = p.data.Host
+        }
+
+        deviceData[p.device.id] = data
+      })
+      this.setState({deviceData})
+    })
   }
   onSubmit (values) {
     const {cmd} = values
@@ -114,7 +145,7 @@ class ServerCmdModal extends React.Component {
   //////////////////////////////////////////////////////////////////
 
   render () {
-    const {loading, results} = this.state
+    const {loading, results, deviceData} = this.state
     const {onHide, handleSubmit, devices} = this.props
     return (
       <ServerCmdModalView
@@ -122,6 +153,7 @@ class ServerCmdModal extends React.Component {
         onSubmit={handleSubmit(this.onSubmit.bind(this))}
         loading={loading}
         results={results}
+        deviceData={deviceData}
         devices={devices}
       />
     )
