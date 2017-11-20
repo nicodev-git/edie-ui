@@ -21,7 +21,7 @@ import RemoveAfter from './input/RemoveAfter'
 
 import {CardPanel} from 'components/modal/parts'
 
-import {showAlert} from 'components/common/Alert'
+// import {showAlert} from 'components/common/Alert'
 
 import CredentialModal from 'components/credentials/CredentialModal'
 import CollectorInstallModal from './input/CollectorInstallModal'
@@ -29,7 +29,7 @@ import CollectorInstallModal from './input/CollectorInstallModal'
 import {getAgentStatusMessage, mergeCredentials, getDeviceCollectors} from 'shared/Global'
 import {isWindowsDevice} from 'shared/Global'
 
-const credCheckTriggers = ['lanip', 'wanip', 'hostname']
+const credCheckTriggers = ['lanip', 'wanip', 'hostname', 'distribution']
 
 class DeviceWizard extends Component {
   constructor (props) {
@@ -102,7 +102,7 @@ class DeviceWizard extends Component {
     entity.credentials = mergeCredentials(entity, credentials, this.state.deviceGlobalCredentials, this.state.deviceCredentials)
 
     if (!entity.wanip) {
-      showAlert('Please input IP')
+      // showAlert('Please input IP')
       return
     }
 

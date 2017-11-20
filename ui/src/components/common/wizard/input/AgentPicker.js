@@ -159,7 +159,7 @@ export default class AgentPicker extends React.Component {
         const isWin = isWindowsDevice(editDevice)
 
         agentCombo = (
-          <div style={{position: 'absolute', top: 55, left: 130, zIndex: 3}}>
+          <div style={{position: 'absolute', top: 55, left: 140, zIndex: 3}}>
             <div
               className="inline-block"
               style={{textDecoration: 'underline', color: 'rgba(0, 0, 0, 0.87)', cursor: 'pointer'}}
@@ -202,6 +202,10 @@ export default class AgentPicker extends React.Component {
 
         <Field name="collectorId" label="Collector" component={FormSelect} className="pull-left" options={collectorOptions}/>
         <IconButton className="pull-left hidden" onTouchTap={this.onClickAddCollector.bind(this)}><AddCircleIcon/></IconButton>
+        {isWindowsDevice(editDevice) && !collectorOptions.length &&
+          <img src="/resources/images/dashboard/question.png" width="24"
+               className="pull-left margin-md-top link" alt=""
+               onClick={() => this.props.showCollectorInstallModal(true)}/>}
         {this.renderCredPicker()}
       </div>
     )
