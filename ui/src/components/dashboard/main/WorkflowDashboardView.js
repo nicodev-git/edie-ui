@@ -9,6 +9,7 @@ import EditIcon from 'material-ui/svg-icons/editor/mode-edit'
 import ArrowRightIcon from 'material-ui/svg-icons/hardware/keyboard-arrow-right'
 import IconWork from 'material-ui/svg-icons/action/work'
 import IconGroup from 'material-ui/svg-icons/action/group-work'
+import DeleteIcon from 'material-ui/svg-icons/action/delete'
 
 import WfRectModal from './workflow/WfRectModal'
 import RectItem from './workflow/RectItem'
@@ -769,6 +770,13 @@ export default class WorkflowDashboardView extends React.Component {
     })
   }
 
+  onClickDelete () {
+    const {graph} = this.editor
+    const cell = graph.getSelectionCell()
+    if (!cell || cell.vertex) return
+    this.onClickDeleteItem(cell)
+  }
+
   ////////////////////
   renderRect (rect, index) {
     const {paramName, paramValue} = this.state
@@ -848,6 +856,7 @@ export default class WorkflowDashboardView extends React.Component {
 
           <div className="pull-right text-right">
             <IconButton onTouchTap={this.onClickEditMode.bind(this)}><EditIcon/></IconButton>
+            <IconButton onTouchTap={this.onClickDelete.bind(this)} tooltip="Delete Connection"><DeleteIcon/></IconButton>
           </div>
         </div>
         <div className="flex-1">
