@@ -620,6 +620,13 @@ export default class WorkflowDashboardView extends React.Component {
   ////////////////////
 
   onClickAddItem () {
+    const {selectedWfRectGroup} = this.props
+    if (!selectedWfRectGroup) {
+      showAlert('Please add group.', () => {
+        this.onClickShowGroups()
+      })
+      return
+    }
     this.props.showWfRectModal(true)
   }
 
