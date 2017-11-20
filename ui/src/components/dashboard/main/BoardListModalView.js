@@ -19,7 +19,7 @@ export default class BoardListModalView extends React.Component {
         <IconButton onTouchTap={onClickAdd} tooltip="Add New Dashboard">
           <AddCircleIcon size={32}/>
         </IconButton>
-        <IconButton onTouchTap={onClickAddSystem} tooltip="Add New System Dashboard">
+        <IconButton onTouchTap={onClickAddSystem} tooltip="Add New System Dashboard" className="hidden">
           <NoteAddIcon size={32}/>
         </IconButton>
       </div>
