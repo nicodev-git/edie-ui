@@ -10,6 +10,7 @@ import ArrowRightIcon from 'material-ui/svg-icons/hardware/keyboard-arrow-right'
 import IconWork from 'material-ui/svg-icons/action/work'
 import IconGroup from 'material-ui/svg-icons/action/group-work'
 import DeleteIcon from 'material-ui/svg-icons/action/delete'
+import IconParam from 'material-ui/svg-icons/action/input'
 
 import WfRectModal from './workflow/WfRectModal'
 import RectItem from './workflow/RectItem'
@@ -33,13 +34,16 @@ export default class WorkflowDashboardView extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      paramValueInput: '',
-      paramName: '',
-      paramValue: '',
-      editMode: false
+      editMode: false,
+      paramValues: [],
+      paramValueInputs: []
     }
 
     this.menuItems = [{
+      label: 'Add Param',
+      icon: <IconParam/>,
+      onClick: this.onClickAddParam.bind(this)
+    }, {
       label: 'Add Group',
       icon: <IconGroup/>,
       color: purple500,
@@ -403,16 +407,10 @@ export default class WorkflowDashboardView extends React.Component {
     this.clearGraph()
     // Adds cells to the model in a single step
     this.addGraphRects(this.getRects())
-
     this.setState({
-      paramName: group.paramName || '',
-      paramValue: '',
-      paramValueInput: ''
+      paramValues: [],
+      paramValueInputs: []
     })
-    // graph.zoomActual()
-    // graph.fit()
-    // graph.view.rendering = true
-    // graph.refresh()
   }
 
   ///////////////////////////////////////////
@@ -624,6 +622,18 @@ export default class WorkflowDashboardView extends React.Component {
     this.props.showWfRectModal(true)
   }
 
+  onClickAddParam () {
+    const {selectedWfRectGroup} = this.props
+    if (!selectedWfRectGroup) return
+    showPrompt('Param Name', '', text => {
+      if (!text) return
+      this.props.updateWfRectGroup({
+        ...selectedWfRectGroup,
+        paramNames: [...selectedWfRectGroup.paramNames, text]
+      })
+    })
+  }
+
   onCloseWfRectModal () {
     this.props.showWfRectModal(false)
   }
@@ -686,7 +696,7 @@ export default class WorkflowDashboardView extends React.Component {
 
   onClickShowSearch (rect, good) {
     if (!rect) return
-    const {paramName, paramValue} = this.state
+    // const {paramName} = this.state
     const searchList = this.getSearchList()
 
     const index = findIndex(searchList, {id: good ? rect.goodId : rect.badId})
@@ -704,10 +714,10 @@ export default class WorkflowDashboardView extends React.Component {
     searchParams.to = new Date().getTime()
     searchParams.from = moment().subtract(rect.interval, rect.intervalUnit).valueOf()
 
-    if (paramName) {
-      searchParams.q = searchParams.q.replace(
-        new RegExp(`\\$${paramName}`, 'i'), paramValue)
-    }
+    // if (paramName) {
+    //   searchParams.q = searchParams.q.replace(
+    //     new RegExp(`\\$${paramName}`, 'i'), paramValue)
+    // }
 
     this.props.showRectSearchModal(true, {
       name: search.name,
@@ -736,6 +746,13 @@ export default class WorkflowDashboardView extends React.Component {
 
   /////////////////////
 
+  onChangeParamValue (i, e, value) {
+    const {paramValueInputs} = this.state
+    this.setState({
+      paramValueInputs: paramValueInputs.map((p, j) => i === j ? value : p)
+    })
+  }
+
   onClickParamSet () {
     const {selectedWfRectGroup} = this.props
     showPrompt('Param Name', this.state.paramName || '', text => {
@@ -751,16 +768,8 @@ export default class WorkflowDashboardView extends React.Component {
     })
   }
 
-  onChangeParamValue (e, value) {
-    this.setState({
-      paramValueInput: value
-    })
-  }
-
   onClickSetParamValue () {
-    this.setState({
-      paramValue: this.state.paramValueInput
-    })
+
   }
 
   onClickEditMode () {
@@ -779,7 +788,7 @@ export default class WorkflowDashboardView extends React.Component {
 
   ////////////////////
   renderRect (rect, index) {
-    const {paramName, paramValue} = this.state
+    // const {paramName, paramValue} = this.state
     return (
       <RectItem
         {...this.props}
@@ -787,8 +796,8 @@ export default class WorkflowDashboardView extends React.Component {
         rect={rect}
         searchList={this.getSearchList()}
         onUpdateColor={this.onUpdateRectState.bind(this)}
-        paramName={paramName}
-        paramValue={paramValue}
+        paramName=""
+        paramValue=""
       />
     )
   }
@@ -838,6 +847,38 @@ export default class WorkflowDashboardView extends React.Component {
     )
   }
 
+  renderParamInputs () {
+    const {selectedWfRectGroup} = this.props
+    const {paramValueInputs} = this.state
+    if (!selectedWfRectGroup || !selectedWfRectGroup.paramNames) return null
+    return selectedWfRectGroup.paramNames.map((p, i) =>
+      <div key={i}>
+        <TextField name="paramValue"
+                   value={paramValueInputs[i]}
+                   hintText={p || 'Value'}
+                   onChange={this.onChangeParamValue.bind(this, i)}
+                   className="valign-top margin-lg-left"
+                   style={{width: 160}}
+        />
+        {this.state.editMode ? (
+          <IconButton
+            style={{marginLeft: -40}}
+            className="valign-top margin-xs-top"
+            onTouchTap={this.onClickParamSet.bind(this)}>
+            <EditIcon/>
+          </IconButton>
+        ) : (
+          <IconButton
+            style={{marginLeft: -40}}
+            className="valign-top margin-xs-top"
+            onTouchTap={this.onClickSetParamValue.bind(this)}>
+            <ArrowRightIcon/>
+          </IconButton>
+        )}
+      </div>
+    )
+  }
+
   render () {
     const {selectedWfRectGroup} = this.props
     return (
@@ -864,29 +905,7 @@ export default class WorkflowDashboardView extends React.Component {
           <div id="graph" className="graph-base" style={{width: '100%', height: '100%'}}></div>
 
           <div style={{position: 'absolute', left: 20, top: 5}}>
-            <TextField name="paramValue"
-                       value={this.state.paramValueInput}
-                       hintText={this.state.paramName || 'Value'}
-                       onChange={this.onChangeParamValue.bind(this)}
-                       className="valign-top margin-lg-left"
-                       style={{width: 160}}
-            />
-            {this.state.editMode ? (
-              <IconButton
-                style={{marginLeft: -40}}
-                className="valign-top margin-xs-top"
-                onTouchTap={this.onClickParamSet.bind(this)}>
-                <EditIcon/>
-              </IconButton>
-            ) : (
-              <IconButton
-                style={{marginLeft: -40}}
-                className="valign-top margin-xs-top"
-                onTouchTap={this.onClickSetParamValue.bind(this)}>
-                <ArrowRightIcon/>
-              </IconButton>
-            )}
-
+            {this.renderParamInputs()}
           </div>
 
           <FloatingMenu menuItems={this.menuItems}/>
