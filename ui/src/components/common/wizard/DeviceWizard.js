@@ -63,7 +63,7 @@ class DeviceWizard extends Component {
       'removeafter': this.buildRemoveAfter.bind(this)
     }
 
-    this.debCheckAgent = debounce(this.checkDeviceAgentStatus.bind(this), 1000)
+    this.debCheckAgent = debounce(this.checkDeviceAgentStatus.bind(this), 4000)
   }
 
   componentWillMount () {
@@ -74,10 +74,11 @@ class DeviceWizard extends Component {
     this.props.fetchCredTypes()
     this.props.fetchMonitorGroups()
     this.props.fetchCollectors()
+    this.props.updateDeviceHost('')
   }
 
   componentDidUpdate (prevProps) {
-    const {deviceType} = this.props
+    const {deviceType, deviceHost} = this.props
     if (deviceType !== prevProps.deviceType) {
       const config = wizardConfig[deviceType]
       const stepItems = config.steps
@@ -86,6 +87,10 @@ class DeviceWizard extends Component {
         currentDevice: {...config, steps: stepItems},
         monitors: this.props.monitors || [],
       })
+    }
+
+    if (deviceHost && deviceHost !== prevProps.deviceHost) {
+      this.props.change('name', deviceHost)
     }
   }
 

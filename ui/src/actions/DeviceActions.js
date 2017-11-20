@@ -126,6 +126,8 @@ import {
   SET_ADDING_DEVICE,
   CLEAR_EDIT_DEVICE,
 
+  UPDATE_DEVICE_HOST,
+
   NO_AUTH_ERROR
 } from './types'
 
@@ -1273,7 +1275,14 @@ export function checkNewDeviceAgent (entity, cb) {
   return dispatch => {
     axios.post(`${ROOT_URL}/checkNewDeviceAgent`, entity).then(res => {
       cb(res.data.success, res.data.info, parseInt(res.data.object || 0, 10))
+      res.data.success && dispatch(updateDeviceHost(res.data.info))
     }).catch(() => cb(false))
+  }
+}
+
+export function updateDeviceHost (data) {
+  return dispatch => {
+    dispatch({type: UPDATE_DEVICE_HOST, data})
   }
 }
 

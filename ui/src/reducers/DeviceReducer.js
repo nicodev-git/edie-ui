@@ -119,6 +119,8 @@ import {
   SET_ADDING_DEVICE,
   CLEAR_EDIT_DEVICE,
 
+  UPDATE_DEVICE_HOST,
+
   UPDATE_DEVICE_ERROR
 } from 'actions/types'
 
@@ -531,6 +533,9 @@ export default function (state = INITIAL_STATE, action) {
 
     case CLEAR_EDIT_DEVICE:
       return { ...state, editDevice: null}
+
+    case UPDATE_DEVICE_HOST:
+      return { ...state, deviceHost: action.data }
     default:
       return state
   }
