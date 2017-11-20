@@ -536,8 +536,8 @@ export const resolveAddr = (props, cb) => {
   axios.get(`${ROOT_URL}/getHostname`, {
     params: {
       iporhost: props.wanip,
-      user: cred.username,
-      password: cred.password,
+      user: props.useIntegratedSecurity ? '' : cred.username,
+      password: props.useIntegratedSecurity ? '' : cred.password,
       isWindows: isWindowsDevice(props)
     }
   }).then(r1 => {
