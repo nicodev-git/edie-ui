@@ -705,7 +705,8 @@ export default class WorkflowDashboardView extends React.Component {
 
   onClickShowSearch (rect, good) {
     if (!rect) return
-    // const {paramName} = this.state
+    const {paramNames} = this.props.selectedWfRectGroup
+    const {paramValues} = this.state
     const searchList = this.getSearchList()
 
     const index = findIndex(searchList, {id: good ? rect.goodId : rect.badId})
@@ -714,7 +715,6 @@ export default class WorkflowDashboardView extends React.Component {
     const data = JSON.parse(search.data || '{}')
     const {workflows, devices, allDevices} = this.props
     const searchParams = buildServiceParams(data, {
-      zzz: true,
       dateRanges: getRanges(),
       collections, severities, workflows,
       allDevices: devices || allDevices,
@@ -724,10 +724,17 @@ export default class WorkflowDashboardView extends React.Component {
     searchParams.to = new Date().getTime()
     searchParams.from = moment().subtract(rect.interval, rect.intervalUnit).valueOf()
 
-    // if (paramName) {
-    //   searchParams.q = searchParams.q.replace(
-    //     new RegExp(`\\$${paramName}`, 'i'), paramValue)
-    // }
+    if (paramNames) {
+      paramNames.forEach((p, i) => {
+        if (!p) return
+        const paramValue = paramValues[i]
+
+        if (!paramValue && searchParams.q.indexOf(`$${p}`) >= 0) return
+
+        searchParams.q = searchParams.q.replace(
+          new RegExp(`\\$${p}`, 'i'), paramValue)
+      })
+    }
 
     this.props.showRectSearchModal(true, {
       name: search.name,
