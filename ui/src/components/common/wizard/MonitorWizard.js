@@ -16,6 +16,7 @@ class MonitorWizard extends React.Component {
     // if (!this.hasCreds()) {
     //   this.props.showDeviceCredsPicker(true)
     // }
+    this.props.fetchCollectors()
   }
 
   hasCreds () {
