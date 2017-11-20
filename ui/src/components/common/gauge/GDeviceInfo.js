@@ -132,6 +132,8 @@ export default class GDeviceInfo extends React.Component {
       const memValue = this.getMemoryInfo(memory)
       const diskValue = disk ? `${disk.UsedSpace}G / ${disk.TotalSpace}G` : ''
 
+      const agentVersion = device.agent ? device.agent.version : ''
+
       const hardware = cpu ? `Hardware: ${cpu.Model} ` : ''
       const software = os ? `Software: ${trimOSName(os.Name)} ` : ''
       const sysDesc = `${hardware}${software}`
@@ -142,6 +144,8 @@ export default class GDeviceInfo extends React.Component {
           {this.renderRow('IPAddress', device.wanip || device.lanip)}
           {this.renderRow('DNS Name', hostname)}
           {this.renderRow('System', sysDesc, {height: '4em'})}
+
+          {agentVersion && this.renderRow('Agent Version', agentVersion)}
 
           {this.renderRow('CPU', cpuValue)}
           {this.renderRow('RAM', memValue)}

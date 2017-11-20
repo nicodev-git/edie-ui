@@ -46,14 +46,13 @@ export default class ServerItem extends React.Component {
 
   render () {
     const {server, index, onClick, onClickDelete} = this.props
-    const agentVersion = server.agent ? server.agent.version : ''
     return (
       <AppletCard
         key={server.id}
         color={colors[index % colors.length]}
         name={server.templateName || 'Unknown'}
         desc={server.name}
-        desc2={<span>{agentVersion}<br/>{trimOSName(server.osDetails)}<br/>{server.wanip || ''}</span>}
+        desc2={<span>{trimOSName(server.osDetails)}<br/>{server.wanip || ''}</span>}
         desc3={server.hostname || 'Unknown'}
         img={`${extImageBaseUrl}${server.image}`}
         onClick={onClick}
