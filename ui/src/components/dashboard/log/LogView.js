@@ -116,7 +116,7 @@ class LogView extends React.Component {
 
     const queries = []
     if (logViewParam.q) queries.push(`("${logViewParam.q}")`)
-    queries.push(`(monitorid:${logViewParam.monitorId})`)
+    if (logViewParam.monitorId) queries.push(`(monitorid:${logViewParam.monitorId})`)
 
     return {
       q: queries.join(' AND '),
