@@ -714,6 +714,7 @@ export default class WorkflowDashboardView extends React.Component {
     const data = JSON.parse(search.data || '{}')
     const {workflows, devices, allDevices} = this.props
     const searchParams = buildServiceParams(data, {
+      zzz: true,
       dateRanges: getRanges(),
       collections, severities, workflows,
       allDevices: devices || allDevices,

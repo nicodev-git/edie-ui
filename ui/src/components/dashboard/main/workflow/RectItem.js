@@ -103,7 +103,7 @@ export default class RectItem extends React.Component {
 
   startTimer () {
     //if (document.location.hostname === 'localhost') return
-    this.timer = setInterval(this.fetchResult.bind(this, true), 3000)
+    this.timer = setInterval(this.fetchResult.bind(this, true), 4000)
   }
 
   stopTimer () {
