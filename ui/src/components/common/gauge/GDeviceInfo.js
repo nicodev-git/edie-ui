@@ -5,7 +5,7 @@ import FlipView from './FlipView'
 import NoDataPanel from './NoDataPanel'
 import MonitorSocket from 'util/socket/MonitorSocket'
 
-import {checkAgentUp, sumDisks} from 'shared/Global'
+import {checkAgentUp, sumDisks, trimOSName} from 'shared/Global'
 
 export default class GDeviceInfo extends React.Component {
   constructor (props) {
@@ -133,7 +133,7 @@ export default class GDeviceInfo extends React.Component {
       const diskValue = disk ? `${disk.UsedSpace}G / ${disk.TotalSpace}G` : ''
 
       const hardware = cpu ? `Hardware: ${cpu.Model} ` : ''
-      const software = os ? `Software: ${os.Name} ` : ''
+      const software = os ? `Software: ${trimOSName(os.Name)} ` : ''
       const sysDesc = `${hardware}${software}`
 
       return (

@@ -1,7 +1,7 @@
 import React from 'react'
 
 import AppletCard from 'components/common/AppletCard'
-import { extImageBaseUrl, appletColors as colors } from 'shared/Global'
+import { extImageBaseUrl, appletColors as colors, trimOSName } from 'shared/Global'
 
 export default class ServerItem extends React.Component {
   constructor (props) {
@@ -52,7 +52,7 @@ export default class ServerItem extends React.Component {
         color={colors[index % colors.length]}
         name={server.templateName || 'Unknown'}
         desc={server.name}
-        desc2={<span>{server.osDetails}<br/>{server.wanip || ''}</span>}
+        desc2={<span>{trimOSName(server.osDetails)}<br/>{server.wanip || ''}</span>}
         desc3={server.hostname || 'Unknown'}
         img={`${extImageBaseUrl}${server.image}`}
         onClick={onClick}

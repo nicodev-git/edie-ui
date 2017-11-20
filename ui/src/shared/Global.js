@@ -530,3 +530,9 @@ export function slugify(string) {
     .replace(/^-+/, "")
     .replace(/-+$/, "")
 }
+
+export function trimOSName(name) {
+  return (name || '')
+    .replace(/Microsoft /g, "")
+    .replace(/ Evaluation/g, "")
+}
