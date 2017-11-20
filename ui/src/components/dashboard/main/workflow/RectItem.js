@@ -36,7 +36,7 @@ export default class RectItem extends React.Component {
 
   getSearchResult (search, cb) {
     if (!search) return true
-    const {workflows, devices, allDevices, paramName, paramValue, rect} = this.props
+    const {workflows, devices, allDevices, paramNames, paramValues, rect} = this.props
 
     const data = JSON.parse(search.data)
     const searchParams = buildServiceParams(data, {
@@ -56,11 +56,21 @@ export default class RectItem extends React.Component {
     params.to = new Date().getTime()
     params.from = moment().subtract(rect.interval, rect.intervalUnit).valueOf()
 
-    if (paramName) {
-      if (!paramValue && params.q.indexOf(`$${paramName}`) >= 0) return true
+    if (paramNames) {
+      let hasEmptyValue = false
+      paramNames.forEach((p, i) => {
+        if (!p) return
+        const paramValue = paramValues[i]
 
-      params.q = params.q.replace(
-        new RegExp(`\\$${paramName}`, 'i'), paramValue)
+        if (!paramValue && params.q.indexOf(`$${p}`) >= 0) {
+          hasEmptyValue = true
+          return
+        }
+
+        params.q = params.q.replace(
+          new RegExp(`\\$${p}`, 'i'), paramValue)
+      })
+      if (hasEmptyValue) return true
     }
 
     return axios.get(`${ROOT_URL}/search/query?${encodeUrlParams(params)}`)

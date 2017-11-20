@@ -755,10 +755,11 @@ export default class WorkflowDashboardView extends React.Component {
 
   /////////////////////
 
-  onChangeParamValue (i, e, value) {
+  onChangeParamValue (i, e) {
     const {paramValueInputs} = this.state
+    paramValueInputs[i] = e.target.value
     this.setState({
-      paramValueInputs: paramValueInputs.map((p, j) => i === j ? value : p)
+      paramValueInputs
     })
   }
 
@@ -793,8 +794,13 @@ export default class WorkflowDashboardView extends React.Component {
     })
   }
 
-  onClickSetParamValue () {
-
+  onClickSetParamValue (i) {
+    let {paramValues, paramValueInputs} = this.state
+    paramValues = [...paramValues]
+    paramValues[i] = paramValueInputs[i]
+    this.setState({
+      paramValues
+    })
   }
 
   onClickEditMode () {
@@ -813,7 +819,8 @@ export default class WorkflowDashboardView extends React.Component {
 
   ////////////////////
   renderRect (rect, index) {
-    // const {paramName, paramValue} = this.state
+    const {selectedWfRectGroup} = this.props
+    const {paramValues} = this.state
     return (
       <RectItem
         {...this.props}
@@ -821,8 +828,8 @@ export default class WorkflowDashboardView extends React.Component {
         rect={rect}
         searchList={this.getSearchList()}
         onUpdateColor={this.onUpdateRectState.bind(this)}
-        paramName=""
-        paramValue=""
+        paramNames={selectedWfRectGroup.paramNames || []}
+        paramValues={paramValues || []}
       />
     )
   }
@@ -878,8 +885,8 @@ export default class WorkflowDashboardView extends React.Component {
     if (!selectedWfRectGroup || !selectedWfRectGroup.paramNames) return null
     return selectedWfRectGroup.paramNames.map((p, i) =>
       <div key={i}>
-        <TextField name="paramValue"
-                   value={paramValueInputs[i]}
+        <TextField name={`paramValue${i}`}
+                   value={paramValueInputs[i] || ''}
                    hintText={p || 'Value'}
                    onChange={this.onChangeParamValue.bind(this, i)}
                    className="valign-top margin-lg-left"
