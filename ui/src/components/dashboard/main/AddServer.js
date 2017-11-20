@@ -6,7 +6,11 @@ import { SubmissionError } from 'redux-form'
 import { getDeviceType, commonconfig } from 'components/common/wizard/WizardConfig'
 import DeviceWizardContainer from 'containers/shared/wizard/DeviceWizardContainer'
 import RefreshOverlay from 'components/common/RefreshOverlay'
-import {showAlert} from "../../common/Alert";
+import {showAlert} from 'components/common/Alert'
+
+const nonScrollStyle = {
+  overflow: 'hidden'
+}
 
 export default class AddServer extends React.Component {
   constructor (props) {
@@ -91,7 +95,8 @@ export default class AddServer extends React.Component {
   }
 
   render () {
-    const {tpl, addingDevice} = this.state
+    const {tpl} = this.state
+    const {addingDevice} = this.props
     if (!tpl) {
       return <div>Loading...</div>
     }
@@ -107,7 +112,7 @@ export default class AddServer extends React.Component {
     }
 
     return (
-      <div>
+      <div style={addingDevice ? nonScrollStyle : null}>
         <DeviceWizardContainer
           noModal
           deviceType={getDeviceType(tpl.name)}
