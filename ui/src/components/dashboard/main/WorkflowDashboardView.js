@@ -11,6 +11,7 @@ import IconWork from 'material-ui/svg-icons/action/work'
 import IconGroup from 'material-ui/svg-icons/action/group-work'
 import DeleteIcon from 'material-ui/svg-icons/action/delete'
 import IconParam from 'material-ui/svg-icons/action/input'
+import IconClose from 'material-ui/svg-icons/navigation/close'
 
 import WfRectModal from './workflow/WfRectModal'
 import RectItem from './workflow/RectItem'
@@ -629,7 +630,15 @@ export default class WorkflowDashboardView extends React.Component {
       if (!text) return
       this.props.updateWfRectGroup({
         ...selectedWfRectGroup,
-        paramNames: [...selectedWfRectGroup.paramNames, text]
+        paramNames: [...(selectedWfRectGroup.paramNames || []), text]
+      })
+
+      const {paramValues, paramValueInputs} = this.state
+      paramValues.push('')
+      paramValueInputs.push('')
+      this.setState({
+        paramValues,
+        paramValueInputs
       })
     })
   }
@@ -753,18 +762,34 @@ export default class WorkflowDashboardView extends React.Component {
     })
   }
 
-  onClickParamSet () {
+  onClickParamEdit (i) {
     const {selectedWfRectGroup} = this.props
-    showPrompt('Param Name', this.state.paramName || '', text => {
+    let {paramNames} = selectedWfRectGroup
+    if (!paramNames) paramNames = []
+    showPrompt('Param Name', paramNames[i] || '', text => {
       if (!text) return
-      this.setState({
-        paramName: text
-      })
-
       this.props.updateWfRectGroup({
         ...selectedWfRectGroup,
-        paramName: text
+        paramNames: paramNames.map((p, j) => i === j ? text : p)
       })
+    })
+  }
+
+  onClickParamDelete (i) {
+    const {selectedWfRectGroup} = this.props
+    let {paramNames} = selectedWfRectGroup
+    paramNames.splice(i, 1)
+    this.props.updateWfRectGroup({
+      ...selectedWfRectGroup,
+      paramNames
+    })
+
+    const {paramValues, paramValueInputs} = this.state
+    paramValues.splice(i, 1)
+    paramValueInputs.splice(i, 1)
+    this.setState({
+      paramValues,
+      paramValueInputs
     })
   }
 
@@ -860,21 +885,27 @@ export default class WorkflowDashboardView extends React.Component {
                    className="valign-top margin-lg-left"
                    style={{width: 160}}
         />
-        {this.state.editMode ? (
-          <IconButton
-            style={{marginLeft: -40}}
-            className="valign-top margin-xs-top"
-            onTouchTap={this.onClickParamSet.bind(this)}>
-            <EditIcon/>
-          </IconButton>
-        ) : (
-          <IconButton
-            style={{marginLeft: -40}}
-            className="valign-top margin-xs-top"
-            onTouchTap={this.onClickSetParamValue.bind(this)}>
-            <ArrowRightIcon/>
-          </IconButton>
-        )}
+        <div className="inline-block valign-top margin-xs-top">
+          {this.state.editMode ? (
+            <IconButton
+              onTouchTap={this.onClickParamEdit.bind(this, i)}>
+              <EditIcon/>
+            </IconButton>
+          ) : (
+            <IconButton
+              onTouchTap={this.onClickSetParamValue.bind(this, i)}>
+              <ArrowRightIcon/>
+            </IconButton>
+          )}
+
+          {this.state.editMode ? (
+            <IconButton
+              onTouchTap={this.onClickParamDelete.bind(this, i)}>
+              <IconClose/>
+            </IconButton>
+          ) : null}
+        </div>
+
       </div>
     )
   }
