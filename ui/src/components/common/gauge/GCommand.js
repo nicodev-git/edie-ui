@@ -83,8 +83,7 @@ export default class GCommand extends React.Component {
     })
 
     this.setState({
-      loading: true,
-      command: ''
+      loading: true
     })
 
     this.startCommandTimer()
