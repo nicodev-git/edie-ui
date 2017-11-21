@@ -1,6 +1,6 @@
 import React from 'react'
 import {findDOMNode} from 'react-dom'
-import {assign, extend} from 'lodash'
+import {assign, extend, findIndex} from 'lodash'
 import ReactTooltip from 'react-tooltip'
 import { withRouter } from 'react-router'
 
@@ -326,58 +326,80 @@ class Map extends React.Component {
     })
     let {x, y} = pos
 
-    console.log(item)
+    if (item.id) {
+      const {allDevices, selectedMap} = this.props
+      const index = findIndex(allDevices, {id: item.id})
+      if (index < 0) return
+      let device = allDevices[index]
+      device = {
+        ...device,
+        mapid: selectedMap.id,
+        x: x,
+        y: y,
+        width: 50,
+        height: 50
+      }
+      this.props.updateMapDevice(device)
 
-    let options = {
-      title: item.title,
-      type: getDeviceType(item.template.name),
-      imgName: item.img,
-      imageUrl: `/externalpictures?name=${item.img}`,
-      x: x,
-      y: y,
-      width: 50,
-      height: 50,
-
-      tpl: item.template,
-      monitors: item.template.monitors,
-      templateName: item.template.name,
-      workflowids: item.template.workflowids || []
-    }
-
-    if (options.type === 'longhub') {
-      options.width = 20
-      options.height = 400
-    } else if (options.type === 'bi-pie') {
-      options.width = 200
-      options.height = 200
-    } else if (options.type === 'bi-bar') {
-      options.width = 200
-      options.height = 200
-    } else if (options.type === 'bi-line') {
-      options.width = 200
-      options.height = 200
-    } else if (options.type === 'usertext') {
-      options.width = 100
-      options.height = 30
-    }
-
-    options.x -= options.width / 2
-    options.y -= options.height / 2
-
-    this.setState({
-      dropItem: item,
-      dropItemPos: offset
-    })
-
-    this.showAddWizard(options, (id, name, data) => {
       const refMap = this.getDivMap()
       let cmap = this.getCanvasMap()
-      refMap.addMapItem(cmap, data, () => {
+      refMap.addMapItem(cmap, device, () => {
 
       })
-    }, () => {
-      this.setState({dropItem: null, selectedItem: {}})
-    })
+    } else {
+      let options = {
+        title: item.title,
+        type: getDeviceType(item.template.name),
+        imgName: item.img,
+        imageUrl: `/externalpictures?name=${item.img}`,
+        x: x,
+        y: y,
+        width: 50,
+        height: 50,
+
+        tpl: item.template,
+        monitors: item.template.monitors,
+        templateName: item.template.name,
+        workflowids: item.template.workflowids || []
+      }
+
+      if (options.type === 'longhub') {
+        options.width = 20
+        options.height = 400
+      } else if (options.type === 'bi-pie') {
+        options.width = 200
+        options.height = 200
+      } else if (options.type === 'bi-bar') {
+        options.width = 200
+        options.height = 200
+      } else if (options.type === 'bi-line') {
+        options.width = 200
+        options.height = 200
+      } else if (options.type === 'usertext') {
+        options.width = 100
+        options.height = 30
+      }
+
+      options.x -= options.width / 2
+      options.y -= options.height / 2
+
+      this.setState({
+        dropItem: item,
+        dropItemPos: offset
+      })
+
+      this.showAddWizard(options, (id, name, data) => {
+        const refMap = this.getDivMap()
+        let cmap = this.getCanvasMap()
+        refMap.addMapItem(cmap, data, () => {
+
+        })
+      }, () => {
+        this.setState({dropItem: null, selectedItem: {}})
+      })
+    }
+
+
   }
 
   onClickTooltip () {
