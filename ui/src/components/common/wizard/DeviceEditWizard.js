@@ -15,10 +15,10 @@ import Credentials from './input/Credentials'
 import RemoveAfter from './input/RemoveAfter'
 
 import ImageUploaderModal from 'components/sidebar/settings/template/ImageUploaderModal'
-import ContentPanel from './ContentPanel'
 import TagsView from './input/TagsView'
 
 import CollectorModal from 'components/sidebar/settings/collector/CollectorModal'
+import {CardPanel} from 'components/modal/parts'
 
 class DeviceEditWizard extends React.Component {
   constructor (props) {
@@ -332,25 +332,26 @@ class DeviceEditWizard extends React.Component {
             </div>
           </div>
 
-          <div className="panel panel-default panel-noborder tab-panel" style={{background: 'transparent'}}>
-            <div className="panel-body p-none">
-              <div className="row m-none">
-                {
-                  tabs.map((tab, i) => (
-                    <ContentPanel key={i} title={tab.title} width={tab.width}>
-                      {this.buildContent(tab, i)}
-                    </ContentPanel>
-                  ))
-                }
-                <ContentPanel title="Credentials" width={12}>
-                  {this.buildCredentials()}
-                </ContentPanel>
-              </div>
-              {this.renderTplImageModal()}
-              {this.renderCollectorModal()}
+          <div style={{paddingLeft: 5, paddingRight: 5}}>
+            {
+              tabs.map((tab, i) => (
+                <div className={`col-md-${tab.width}`}>
+                  <CardPanel key={i} title={tab.title}>
+                    {this.buildContent(tab, i)}
+                  </CardPanel>
+                </div>
+              ))
+            }
+            <div className="col-md-12">
+              <CardPanel title="Credentials">
+                {this.buildCredentials()}
+              </CardPanel>
             </div>
           </div>
         </Form>
+
+        {this.renderTplImageModal()}
+        {this.renderCollectorModal()}
       </div>
     )
   }
