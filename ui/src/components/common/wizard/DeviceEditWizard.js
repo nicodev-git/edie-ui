@@ -268,7 +268,12 @@ class DeviceEditWizard extends React.Component {
     const isWin = isWindowsDevice(this.props.selectedDevice)
     return (
       <div className="padding-md-top">
-        <Credentials {...this.props} isWin={isWin} onChangeIntegrated={this.onChangeIntegrated.bind(this)}/>
+        <Credentials
+          {...this.props}
+          isWin={isWin}
+          onChangeIntegrated={this.onChangeIntegrated.bind(this)}
+          showGlobal
+        />
       </div>
     )
   }

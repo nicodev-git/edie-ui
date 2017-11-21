@@ -409,7 +409,7 @@ export function getDeviceCredentials (selectedDevice, credentials, showGlobal) {
   if (showGlobal) {
     const isWin = isWindowsDevice(selectedDevice)
     credentials.forEach(p => {
-      if (!p.global) return
+      if (!p.global || !p.default) return
       if (isWin && p.type === 'SSH') return
       if (!isWin && p.type === 'WINDOWS') return
       if (deviceCreds.filter(d => d.type === p.type).length === 0)
