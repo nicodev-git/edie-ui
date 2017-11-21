@@ -92,7 +92,9 @@ import {
   addAudit,
 
   updateViewLogParams,
-  showDetailLogModal
+  showDetailLogModal,
+
+  fetchDevicesGroups
 } from 'actions'
 
 class MainpageContainer extends Component {
@@ -226,6 +228,7 @@ class MainpageContainer extends Component {
 export default connect((state) => {
   return {
     device: state.dashboard.selectedDevice,
+    allDevices: state.devices.deviceAndGroups,
     apiErrorModalOpen: state.dashboard.apiErrorModalOpen,
     apiError: state.dashboard.apiError,
 
@@ -354,5 +357,7 @@ dispatch => bindActionCreators({
   addAudit,
 
   updateViewLogParams,
-  showDetailLogModal
+  showDetailLogModal,
+
+  fetchDevicesGroups
 }, dispatch))(withRouter(MainpageContainer))

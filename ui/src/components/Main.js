@@ -29,6 +29,7 @@ class Main extends React.Component {
 
   componentWillMount () {
     this.props.fetchEnvVars()
+    this.props.fetchDevicesGroups()
   }
 
   componentWillUpdate (nextProps, nextState) {

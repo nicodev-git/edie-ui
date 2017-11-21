@@ -39,6 +39,11 @@ export default class DeviceMenu extends React.Component {
     this.setState({ activePanel })
   }
 
+  getNewDevices () {
+    const {devices} = this.props
+    return devices.map(p => p.lines && !p.mapid)
+  }
+
   render () {
     let devicePanels = []
 
@@ -70,7 +75,18 @@ export default class DeviceMenu extends React.Component {
     deviceTypes.forEach((section, sectionIndex) => {
       let items = false
 
-      if (sectionIndex > 0) {
+      if (sectionIndex === 0) {
+        const newDevices = this.getNewDevices()
+        newDevices.forEach(p => {
+          section.items.push({
+            id: p.id,
+            title: p.name,
+            img: p.image || 'windows.png',
+            template: p.templateName
+          })
+        })
+
+      } else {
         section.items.forEach((item, typeIndex) => {
           if ((item.title || '').toLowerCase().indexOf(this.state.keyword.toLowerCase()) < 0) return
           items = true
@@ -87,7 +103,10 @@ export default class DeviceMenu extends React.Component {
     deviceTypes.forEach((section, sectionIndex) => {
       let deviceItems = []
 
-      if (sectionIndex > 0) {
+      if (sectionIndex === 0) {
+
+
+      } else {
         section.items.forEach((item, typeIndex) => {
           const selected = this.props.selectedItem.title === item.title
 
