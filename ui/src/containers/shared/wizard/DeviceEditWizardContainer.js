@@ -24,7 +24,10 @@ import {
 
   fetchCollectors,
   showCollectorModal,
-  addCollector
+  addCollector,
+
+  fetchMonitorTemplates,
+  openDeviceMonitorWizard
 } from 'actions'
 
 import {getRemoveAfter} from 'shared/Global'
@@ -99,6 +102,10 @@ export default connect(
     collectors: state.settings.collectors,
     collectorModalOpen: state.settings.collectorModalOpen,
 
+    monitorTemplates: state.settings.monitorTemplates,
+    deviceTemplates: state.settings.deviceTemplates,
+    deviceMonitorsModalOpen: state.devices.deviceMonitorsModalOpen,
+
     installAgentMessage: state.devices.installAgentMessage
   }), {
     openTplImageModal,
@@ -123,6 +130,9 @@ export default connect(
 
     fetchCollectors,
     showCollectorModal,
-    addCollector
+    addCollector,
+
+    fetchMonitorTemplates,
+    openDeviceMonitorWizard
   }
 )(DeviceEditWizardContainer)

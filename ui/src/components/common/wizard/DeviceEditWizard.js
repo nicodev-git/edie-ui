@@ -19,7 +19,19 @@ import ImageUploaderModal from 'components/sidebar/settings/template/ImageUpload
 import TagsView from './input/TagsView'
 
 import CollectorModal from 'components/sidebar/settings/collector/CollectorModal'
+import MonitorTable from 'components/common/wizard/input/MonitorTable'
 import {CardPanel} from 'components/modal/parts'
+
+const fixedBarStyle = {
+  position: 'fixed',
+  bottom: 0,
+  background: '#e6e8ed',
+  left: 0,
+  right: 0,
+  borderTop: '1px solid lightgray',
+  zIndex: 10,
+  padding: '13px 20px 20px 0'
+}
 
 class DeviceEditWizard extends React.Component {
   constructor (props) {
@@ -52,6 +64,7 @@ class DeviceEditWizard extends React.Component {
     this.props.fetchCredentials()
     this.props.fetchCredTypes()
     this.props.fetchCollectors()
+    this.props.fetchMonitorTemplates()
   }
 
   componentWillReceiveProps (nextProps) {
@@ -160,6 +173,12 @@ class DeviceEditWizard extends React.Component {
     )
   }
 
+  onChangedMonitors () {
+
+  }
+
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
   buildTags () {
     return (
       <TagsView
@@ -251,6 +270,22 @@ class DeviceEditWizard extends React.Component {
       <div className="padding-md-top">
         <Credentials {...this.props} isWin={isWin} onChangeIntegrated={this.onChangeIntegrated.bind(this)}/>
       </div>
+    )
+  }
+
+  buildMonitors () {
+    const {selectedDevice, monitorTemplates, openDeviceMonitorWizard,
+      deviceTemplates, collectors} = this.props
+    return (
+      <MonitorTable
+        monitors={selectedDevice.monitors || []}
+        templates={monitorTemplates}
+        onChanged={this.onChangedMonitors.bind(this)}
+        openDeviceMonitorWizard={openDeviceMonitorWizard}
+        deviceTemplates={deviceTemplates}
+        collectors={collectors}
+        hideDevices
+      />
     )
   }
 
@@ -357,6 +392,15 @@ class DeviceEditWizard extends React.Component {
                 {this.buildCredentials()}
               </CardPanel>
             </div>
+
+            <div className="col-md-12">
+              {this.buildMonitors()}
+            </div>
+          </div>
+
+          <div style={{height: 140, width: '100%'}} className="pull-left">&nbsp;</div>
+          <div style={fixedBarStyle} className="text-right">
+            <RaisedButton label="Save" type="submit" backgroundColor="rgb(36, 104, 255)" labelColor="#fff"/>
           </div>
         </Form>
 
