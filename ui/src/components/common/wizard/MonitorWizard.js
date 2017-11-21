@@ -10,6 +10,7 @@ import CredPicker from 'containers/settings/credentials/CredsPickerContainer'
 import MonitorWizardView from './MonitorWizardView'
 
 import {showAlert} from 'components/common/Alert'
+import {isWindowsDevice} from "../../../shared/Global";
 
 class MonitorWizard extends React.Component {
   componentDidMount () {
@@ -35,7 +36,7 @@ class MonitorWizard extends React.Component {
   }
 
   showAgentType (suppress) {
-    const {monitorConfig, selectedDevice, collectors} = this.props
+    const {monitorConfig, selectedDevice} = this.props
     const credTypes = monitorConfig.credentialTypes || []
 
     if (!selectedDevice) return true
@@ -47,11 +48,11 @@ class MonitorWizard extends React.Component {
     if (credTypes.length === 0) return false
 
     //Step 3
-    if (monitorConfig.needWindowsAgentCollector) {
-      // if (collectors.filter(p => p.ostype === 'WINDOWS').length) return false
-    } else {
-      if (collectors.filter(p => p.ostype === 'LINUX').length) return false
-    }
+    // if (monitorConfig.needWindowsAgentCollector) {
+    //   if (collectors.filter(p => p.ostype === 'WINDOWS').length) return false
+    // } else {
+    //   if (collectors.filter(p => p.ostype === 'LINUX').length) return false
+    // }
 
     return true
   }
@@ -145,8 +146,8 @@ class MonitorWizard extends React.Component {
     }))
   }
   getCollectors () {
-    const {monitorConfig, collectors} = this.props
-    if (monitorConfig.needWindowsAgentCollector) {
+    const {selectedDevice, collectors} = this.props
+    if (isWindowsDevice(selectedDevice)) {
       return collectors.filter(p => p.ostype === 'WINDOWS')
     }
     return collectors.filter(p => p.ostype === 'LINUX')

@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux'
 
 import MonitorWizard from 'components/common/wizard/MonitorWizard'
 
-import {getRemoveAfter} from 'shared/Global'
+import {isWindowsDevice, getRemoveAfter} from 'shared/Global'
 
 import {
   fetchMonitorTemplates,
@@ -33,11 +33,22 @@ class MonitorWizardContainer extends React.Component {
   }
 }
 
+const getDefaultCollectorId = (device, collectors) => {
+  if (!device || !collectors.length) return ''
+  let found
+  if (isWindowsDevice(device)) {
+    found = collectors.filter(p => p.ostype === 'WINDOWS')
+  } else {
+    found = collectors.filter(p => p.ostype === 'LINUX')
+  }
+  return found.length ? found[0].id : ''
+}
+
 export default connect(
   state => ({
     initialValues: {
       agentType: state.dashboard.selectedDevice && state.dashboard.selectedDevice.agent ? 'agent' : 'collector',
-      collectorId: state.settings.collectors.length ? state.settings.collectors[0].id : '',
+      collectorId: getDefaultCollectorId(state.dashboard.selectedDevice, state.settings.collectors),
       // credentialId: (state.dashboard.selectedDevice.credentials || []).length ? state.dashboard.selectedDevice.credentials[0].id : '',
 
       ...state.devices.monitorInitialValues.params,
