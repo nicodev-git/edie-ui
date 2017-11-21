@@ -40,8 +40,8 @@ export default class DeviceMenu extends React.Component {
   }
 
   getNewDevices () {
-    const {devices} = this.props
-    return devices.map(p => p.lines && !p.mapid)
+    const {allDevices} = this.props
+    return allDevices.filter(p => !p.line && !p.mapid)
   }
 
   render () {
@@ -76,15 +76,6 @@ export default class DeviceMenu extends React.Component {
       let items = false
 
       if (sectionIndex === 0) {
-        const newDevices = this.getNewDevices()
-        newDevices.forEach(p => {
-          section.items.push({
-            id: p.id,
-            title: p.name,
-            img: p.image || 'windows.png',
-            template: p.templateName
-          })
-        })
 
       } else {
         section.items.forEach((item, typeIndex) => {
@@ -93,10 +84,9 @@ export default class DeviceMenu extends React.Component {
         })
 
         if (!items) return
-
-        if (firstPanelIndex < 0) firstPanelIndex = sectionIndex
-        if (sectionIndex === this.state.activePanel) hasActive = true
       }
+      if (firstPanelIndex < 0) firstPanelIndex = sectionIndex
+      if (sectionIndex === this.state.activePanel) hasActive = true
     })
     const activeKey = !hasActive && firstPanelIndex >= 0 ? firstPanelIndex : this.state.activePanel
 
@@ -104,8 +94,22 @@ export default class DeviceMenu extends React.Component {
       let deviceItems = []
 
       if (sectionIndex === 0) {
+        const newDevices = this.getNewDevices()
+        newDevices.forEach(p => {
+          if (p.name.toLowerCase().indexOf(this.state.keyword.toLowerCase()) < 0) return
+          const item = {
+            id: p.id,
+            title: p.name,
+            img: p.image || 'windows.png',
+            template: p.templateName
+          }
 
-
+          deviceItems.push(
+            <li key={p.id} onClick={this.onClickItem.bind(this, item)}>
+              <DeviceImg {...item}/>
+            </li>
+          )
+        })
       } else {
         section.items.forEach((item, typeIndex) => {
           const selected = this.props.selectedItem.title === item.title
