@@ -1,7 +1,8 @@
 import React from 'react'
 import { assign, debounce } from 'lodash'
 import { reduxForm, Form } from 'redux-form'
-import RaisedButton from 'material-ui/RaisedButton'
+import {RaisedButton, IconButton} from 'material-ui'
+import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
 
 import { wizardEditConfig } from './WizardConfig'
 import { util } from './WizardUtil'
@@ -315,6 +316,15 @@ class DeviceEditWizard extends React.Component {
       />
     )
   }
+  renderCredButtons () {
+    return (
+      <div>
+        <IconButton onTouchTap={this.onClickAddCred.bind(this)} tooltip="Add Credentials">
+          <AddCircleIcon size={32}/>
+        </IconButton>
+      </div>
+    )
+  }
 
   render () {
     const { handleSubmit, tabs/*, selectedDevice*/ } = this.props
@@ -343,7 +353,7 @@ class DeviceEditWizard extends React.Component {
               ))
             }
             <div className="col-md-12">
-              <CardPanel title="Credentials" >
+              <CardPanel title="Credentials" tools={this.renderCredButtons()}>
                 {this.buildCredentials()}
               </CardPanel>
             </div>
