@@ -152,7 +152,7 @@ class DeviceEditWizard extends React.Component {
     }
 
     return (
-      <div>
+      <div style={tab.width ? {minHeight: 216} : null}>
         {items}
         {tab.include.indexOf('tags') >= 0 && this.buildTags()}
       </div>
@@ -321,7 +321,7 @@ class DeviceEditWizard extends React.Component {
     return (
       <div>
         <Form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
-          <div className="tab-options">
+          <div className="tab-options hidden">
             <div className="margin-md-top"
               style={{position: 'absolute', top: '40px', right: '20px'}}>
               <RaisedButton label="Save" type="submit" primary className="hidden"/>&nbsp;
@@ -335,15 +335,15 @@ class DeviceEditWizard extends React.Component {
           <div style={{paddingLeft: 5, paddingRight: 5}}>
             {
               tabs.map((tab, i) => (
-                <div className={`col-md-${tab.width}`}>
-                  <CardPanel key={i} title={tab.title}>
+                <div key={i} className={`col-md-${tab.width}`}>
+                  <CardPanel title={tab.title}>
                     {this.buildContent(tab, i)}
                   </CardPanel>
                 </div>
               ))
             }
             <div className="col-md-12">
-              <CardPanel title="Credentials">
+              <CardPanel title="Credentials" >
                 {this.buildCredentials()}
               </CardPanel>
             </div>

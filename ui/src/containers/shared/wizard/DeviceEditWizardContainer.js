@@ -49,11 +49,7 @@ DeviceEditWizard.defaultProps = {
   tabs: [{
     title: 'General',
     include: ['name', 'image', 'agentid', 'ipaddress', 'wanip', 'lanip', 'hostname', 'port', 'dbtype', 'sql', 'disabled', 'url'],
-    width: 4
-  }, {
-    title: 'Info',
-    include: ['info'],
-    width: 4
+    width: 6
   }, {
     title: 'Advanced',
     id: 'tab-devinfo-advanced',
@@ -65,7 +61,7 @@ DeviceEditWizard.defaultProps = {
       name: 'templateName',
       title: 'Template Name'
     }],
-    width: 4
+    width: 6
   }/*, {
     title: 'Credentials',
     include: ['credentials'],

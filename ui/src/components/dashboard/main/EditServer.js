@@ -31,9 +31,6 @@ export default class EditServer extends React.Component {
 
     return (
       <div>
-        <div className="tab-header">
-          <div><span className="tab-title">{device.name}</span></div>
-        </div>
         <DeviceEditWizardContainer
           deviceType={type}
           values={device}
