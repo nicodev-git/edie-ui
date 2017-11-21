@@ -7,6 +7,7 @@ const deviceSource = {
   beginDrag (props) {
     // Return the data describing the dragged item
     const item = {
+      id: props.id,
       img: props.img,
       title: props.title,
       template: props.template

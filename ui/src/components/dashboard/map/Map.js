@@ -326,6 +326,8 @@ class Map extends React.Component {
     })
     let {x, y} = pos
 
+    console.log(item)
+
     let options = {
       title: item.title,
       type: getDeviceType(item.template.name),
