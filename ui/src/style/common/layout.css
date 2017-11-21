@@ -410,3 +410,9 @@ a, a:focus, a:hover {
 input:-webkit-autofill {
     -webkit-box-shadow: 0 0 0px 1000px white inset;
 }
+
+.chip-small svg{
+    width: 16px !important;
+    height: 16px !important;
+    margin: 0 !important;
+}
