@@ -19,6 +19,7 @@ import {
 
   fetchCredentials,
   addCredentials,
+  updateCredentials,
   removeCredentials,
   fetchCredTypes,
 
@@ -125,6 +126,7 @@ export default connect(
 
     fetchCredentials,
     addCredentials,
+    updateCredentials,
     removeCredentials,
     fetchCredTypes,
 

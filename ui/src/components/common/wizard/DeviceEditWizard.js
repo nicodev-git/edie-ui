@@ -177,6 +177,23 @@ class DeviceEditWizard extends React.Component {
 
   }
 
+  onReplaceCreds (oldCred, newCred) {
+    const {selectedDevice} = this.props
+    if ((oldCred.deviceIds || []).includes(selectedDevice.id)) {
+      this.props.updateCredentials({
+        ...oldCred,
+        deviceIds: oldCred.deviceIds.filter(p => p !== selectedDevice.id)
+      })
+    }
+
+    if (!(newCred.deviceIds || []).includes(selectedDevice.id)) {
+      this.props.updateCredentials({
+        ...newCred,
+        deviceIds: [...(newCred.deviceIds || []), selectedDevice.id]
+      })
+    }
+  }
+
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   buildTags () {
@@ -261,9 +278,6 @@ class DeviceEditWizard extends React.Component {
     )
   }
 
-  buildForm (config) {
-    return null
-  }
   buildCredentials () {
     const isWin = isWindowsDevice(this.props.selectedDevice)
     return (
@@ -273,6 +287,7 @@ class DeviceEditWizard extends React.Component {
           isWin={isWin}
           onChangeIntegrated={this.onChangeIntegrated.bind(this)}
           showGlobal
+          onReplaceCreds={this.onReplaceCreds.bind(this)}
         />
       </div>
     )
