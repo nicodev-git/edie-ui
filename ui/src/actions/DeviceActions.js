@@ -540,7 +540,8 @@ export const resolveAddr = (props, cb) => {
       iporhost: props.wanip,
       user: props.useIntegratedSecurity ? '' : cred.username,
       password: props.useIntegratedSecurity ? '' : cred.password,
-      isWindows: isWindowsDevice(props)
+      isWindows: isWindowsDevice(props),
+      collectorId: props.collectorId
     }
   }).then(r1 => {
     if (r1.data && r1.data.host && r1.data.os) {
