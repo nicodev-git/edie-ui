@@ -247,7 +247,7 @@ class DeviceWizard extends Component {
         </div>
       ) : (
         <CardPanel key={pi} title={panel.title}>
-          <div style={noModal && panel.width ? {minHeight: 180} : null}>
+          <div style={noModal && panel.width ? {minHeight: 216} : null}>
             {panel.items.map(itemConfig => this.buildInput(itemConfig, this.props.values, meta))}
           </div>
         </CardPanel>
