@@ -1,7 +1,8 @@
 import React from 'react'
-import {SelectField, MenuItem} from 'material-ui'
+import {SelectField, MenuItem, Chip} from 'material-ui'
 
 import {TwoButtonsBlockCustom, Modal, CardPanel} from 'components/modal/parts'
+import { chipStyles } from 'style/common/materialStyles'
 
 export default class CredPickerView extends React.Component {
   renderLeftTools () {
@@ -34,6 +35,7 @@ export default class CredPickerView extends React.Component {
                 <th>Description</th>
                 <th>Type</th>
                 <th>User</th>
+                <th></th>
               </tr>
               </thead>
               <tbody>
@@ -47,6 +49,13 @@ export default class CredPickerView extends React.Component {
                   <td>{p.description}</td>
                   <td>{p.type}</td>
                   <td>{p.username}</td>
+                  <td>
+                    {p.global ? (p.default ? (
+                      <div style={chipStyles.wrapper}>
+                        <Chip style={chipStyles.smallChip} labelStyle={chipStyles.smallLabel}>{p.type}&nbsp;Default</Chip>
+                      </div>
+                    ) : '') : null}
+                  </td>
                 </tr>
               )}
               </tbody>
