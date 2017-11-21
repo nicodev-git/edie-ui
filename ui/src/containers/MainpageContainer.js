@@ -20,6 +20,7 @@ import LogView from 'containers/dashboard/LogViewContainer'
 import ServerDetailContainer from 'containers/dashboard/ServerDetailContainer'
 import ServerRangeContainer from 'containers/dashboard/ServerRangeContainer'
 import AddServerContainer from 'containers/dashboard/AddServerContainer'
+import EditServerContainer from 'containers/dashboard/EditServerContainer'
 
 import {
   closeDevice,
@@ -204,8 +205,9 @@ class MainpageContainer extends Component {
         <Switch>
           <Route path="/dashboard" component={MainDashboardContainer} exact/>
           <Route path="/dashboard/servers/addrange" component={ServerRangeContainer}/>
+          <Route path="/dashboard/servers/edit/:id" component={EditServerContainer}/>
           <Route path="/dashboard/serverdetail/:id" component={ServerDetailContainer}/>
-          <Route path="/dashboard/:id" component={MainDashboardContainer}/>
+          <Route path="/dashboard/:id" component={MainDashboardContainer} exact/>
           <Route path="/addserver" component={AddServerContainer}/>
         </Switch>
         <Route path="/chat" component={ChatContainer}/>

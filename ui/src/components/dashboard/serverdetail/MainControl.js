@@ -159,7 +159,9 @@ export default class MainControl extends React.Component {
   }
 
   onClickEdit () {
-    this.props.showDeviceEditModal(true, this.getDevice())
+    // this.props.showDeviceEditModal(true, this.getDevice())
+    const device = this.getDevice()
+    this.props.history.push(`/servers/edit/${device.id}`)
   }
   onFinishEdit (device) {
     this.props.updateMapDevice(device)

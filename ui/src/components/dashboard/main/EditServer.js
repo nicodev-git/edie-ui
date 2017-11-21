@@ -4,7 +4,7 @@ export default class EditServer extends React.Component {
   render () {
     return (
       <div>
-        Edit
+        {this.props.match.params.id}
       </div>
     )
   }
