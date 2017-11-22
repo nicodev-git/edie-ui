@@ -5,7 +5,12 @@ import { connect } from 'react-redux'
 import Log from 'components/log/Log'
 
 import {
-  fetchDevicesGroups
+  fetchDevicesGroups,
+
+  fetchMonitorGroups,
+  addMonitorGroup,
+  updateMonitorGroup,
+  removeMonitorGroup
 } from 'actions'
 class LogContainer extends React.Component {
   render () {
@@ -19,6 +24,11 @@ export default connect(
   state => ({
     allDevices: state.devices.deviceAndGroups
   }), {
-    fetchDevicesGroups
+    fetchDevicesGroups,
+
+    fetchMonitorGroups,
+    addMonitorGroup,
+    updateMonitorGroup,
+    removeMonitorGroup
   }
 )(withRouter(LogContainer))

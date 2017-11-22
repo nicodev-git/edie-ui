@@ -1,8 +1,10 @@
 import React from 'react'
 import moment from 'moment'
+import {RaisedButton} from 'material-ui'
 
 import TabPage from 'components/common/TabPage'
 import TabPageBody from 'components/common/TabPageBody'
+import TabPageHeader from 'components/common/TabPageHeader'
 import {getRanges} from 'components/common/DateRangePicker'
 import LogPapers from 'components/dashboard/log/LogPapers'
 
@@ -10,6 +12,9 @@ const ranges = getRanges()
 const from = ranges['Ever'][0].valueOf()
 const to = ranges['Ever'][1].valueOf()
 
+const logSort = (a, b) => {
+  return a.name.toLowerCase().localeCompare(b.name.toLowerCase())
+}
 export default class Log extends React.Component {
   constructor (props) {
     super(props)
@@ -29,6 +34,8 @@ export default class Log extends React.Component {
         if (m.monitortype === 'logfile') monitors.push(m)
       })
     })
+
+    monitors.sort(logSort)
 
     return monitors
   }
@@ -58,6 +65,12 @@ export default class Log extends React.Component {
   }
 
   onResultCountUpdate () {
+
+  }
+
+  ///////////////////////////////////////////////////////////////////////////////////
+
+  onClickAddFolder () {
 
   }
 
@@ -107,9 +120,14 @@ export default class Log extends React.Component {
     const monitors = this.getLogMonitors()
     return (
       <TabPage>
-        <div className="padding-md">
-          <span className="tab-title">Logs</span>
-        </div>
+        <TabPageHeader title="Logs">
+          <div className="text-center margin-md-top">
+            <div className="pull-right">
+              <RaisedButton label="Add" onTouchTap={this.onClickAddFolder.bind(this)}/>&nbsp;
+              <RaisedButton label="Edit"/>&nbsp;
+            </div>
+          </div>
+        </TabPageHeader>
 
         <TabPageBody tabs={[]} history={this.props.history} location={this.props.location}>
           <div className="flex-horizontal" style={{height: '100%'}}>
