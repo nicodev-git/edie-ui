@@ -158,6 +158,16 @@ export default class General extends React.Component {
     }
   }
 
+  onCheckDashboardMenu (item, e, checked) {
+    let selected = this.getOptionValue('DASHBOARD_MENU', '').value1.split(',')
+    if (checked) {
+      selected.push(item)
+    } else {
+      selected = selected.filter(p => p !== item)
+    }
+    this.updateOption('DASHBOARD_MENU', selected.join(','))
+  }
+
   /////////////////////////////////////////////////////////////////
 
   renderContent () {
@@ -311,13 +321,14 @@ export default class General extends React.Component {
   }
 
   renderMenuConfig () {
-    return (
-      <CardPanel title="Menu">
-        {menuItems.map(p =>
-          <Checkbox key={p} label={p}/>
-        )}
-      </CardPanel>
-    )
+    // const selected = this.getOptionValue('DASHBOARD_MENU', '').split(',')
+    // return (
+    //   <CardPanel title="Menu">
+    //     {menuItems.map(p =>
+    //       <Checkbox key={p} label={p} checked={selected.includes(p)} onCheck={this.onCheckDashboardMenu.bind(this, p)}/>
+    //     )}
+    //   </CardPanel>
+    // )
   }
 
   render () {
