@@ -10,11 +10,14 @@ import TabPageBody from 'components/common/TabPageBody' // Never used
 import TabPageHeader from 'components/common/TabPageHeader' // Never used
 
 import {defaultDateFormat} from 'shared/Global'
+import {CardPanel} from 'components/modal/parts'
 
 const rowStyle = {
   width: '100%',
   height: 30
 }
+
+const menuItems = ['Servers', 'Workflows', 'Apps']
 export default class General extends React.Component {
   constructor (props) {
     super(props)
@@ -43,154 +46,6 @@ export default class General extends React.Component {
 
   onClickSync () {
     this.props.syncData(false)
-  }
-
-  renderContent () {
-    return (
-      <div className="padding-md form-inline">
-        <div style={rowStyle} className="margin-md-bottom">
-          <label className="margin-sm-top margin-sm-bottom width-200">System Name: </label>
-          <InlineEdit
-            text={this.getOptionValue('SYSTEM_NAME') || '[Empty]'}
-            paramName="message"
-            change={this.onChangeSysName.bind(this)}
-            className="inline-block"
-            minLength={0}
-          />
-        </div>
-
-        <div style={rowStyle} className="margin-md-bottom">
-          <div className="inline-block width-200">
-            <Checkbox
-              label="Enable DMZ"
-              checked={this.getOptionValue('DMZ') === 'true'}
-              onCheck={this.onChangeDmz.bind(this)}/>
-          </div>
-          <InlineEdit
-            text={this.getOptionValue('DMZ', 'value2')}
-            paramName="message"
-            change={this.onChangeDmzIP.bind(this)}
-            className="inline-block margin-xs-top"
-            ref="dmzIp"
-          />
-        </div>
-        <div style={rowStyle} className="margin-md-bottom">
-          <div className="inline-block width-200">
-            <Checkbox
-              label="Pause System"
-              checked={this.getOptionValue('PAUSE') === 'true'}
-              onCheck={this.onChangePause.bind(this)}/>
-          </div>
-        </div>
-        <div style={rowStyle} className="margin-md-bottom">
-          <div className="inline-block width-200">
-            <Checkbox
-              label="Display Network Traffic"
-              checked={this.getOptionValue('NETWORK_TRAFFIC') === 'true'}
-              onCheck={this.onChangeTraffic.bind(this)}/>
-          </div>
-        </div>
-        <div style={rowStyle} className="margin-md-bottom">
-          <div className="inline-block width-200">
-            <Checkbox
-              label="Send Error Logs With"
-              checked={this.getOptionValue('REMOTE_LOG_ENABLED') === 'true'}
-              onCheck={this.onChangeLogEnabled.bind(this)}/>
-          </div>
-          <InlineEdit
-            text={this.getOptionValue('REMOTE_LOG_BATCH') || '[Empty]'}
-            paramName="message"
-            change={this.onChangeLogBatch.bind(this)}
-            className="inline-block margin-xs-top"
-          />
-        </div>
-
-        <div style={rowStyle} className="margin-md-bottom">
-          <div className="inline-block width-200">
-            <Checkbox
-              label="Send to mobile"
-              checked={this.getOptionValue('IMMOBILE') === 'true'}
-              onCheck={this.onChangeSendMobile.bind(this)}/>
-          </div>
-
-          <InlineEdit
-            text={this.getOptionValue('IMMOBILE')}
-            paramName="message"
-            change={this.onChangeMobileIP.bind(this)}
-            className="inline-block margin-xs-top"
-            ref="mobileIp"
-            minLength={0}
-          />
-        </div>
-
-        <div style={rowStyle} className="margin-md-bottom">
-          <div className="inline-block width-200">
-            <Checkbox
-              label="Show absolute date"
-              checked={this.getUserOptionValue('useAbsoluteDate', false)}
-              onCheck={this.onChangeAbsDate.bind(this)}/>
-          </div>
-          <InlineEdit
-            text={this.getUserOptionValue('dateFormat', defaultDateFormat)}
-            paramName="dateFormat"
-            change={this.onChangeDateFormat.bind(this)}
-            className="inline-block margin-xs-top"
-            ref="dateFormat"
-            minLength={0}
-          />
-
-        </div>
-
-        <div style={rowStyle} className="margin-md-bottom">
-          <div className="inline-block width-200">
-            <Checkbox
-              label="Keep Incident Alert"
-              checked={!!this.getUserOptionValue('keepIncidentAlert', false)}
-              onCheck={this.onChangeKeepIncidentAlert.bind(this)}/>
-          </div>
-        </div>
-
-        <div className="margin-md-bottom">
-          <div className="inline-block width-200">
-            <SelectField
-              value={this.getUserOptionValue('defaultPage', 'main')}
-              onChange={this.onChangeShowPage.bind(this)}
-              floatingLabelText="Default Page">
-              <MenuItem primaryText="Main" value="main"/>
-              <MenuItem primaryText="Dashboard" value="dashboard"/>
-            </SelectField>
-          </div>
-        </div>
-
-        <div style={rowStyle} className="margin-md-bottom">
-          <label className="margin-sm-top margin-sm-bottom width-200">Remove Undefined Events After: </label>
-          <InlineEdit
-            text={this.getOptionValue('UNDEFINED_EVENTS_RETENTION_DAYS') || 'Days'}
-            paramName="message"
-            change={this.onChangeRemoveEvents.bind(this)}
-            className="inline-block"
-            minLength={0}
-          />
-          <label className="margin-sm-top margin-sm-bottom width-200">  Days</label>
-        </div>
-
-        {this.renderCustomer()}
-      </div>
-    )
-  }
-
-  renderCustomer () {
-    const lastSync = this.getOptionValue('LAST_WORKFLOW_TIME')
-    return (
-      <div style={{color: '#888'}} className="margin-lg-top">
-        <label className="margin-sm-top margin-sm-bottom">
-          Customer ID: {this.getOptionValue('CUSTOMER_ID') || '[None]'}&nbsp;&nbsp;&nbsp;&nbsp;
-          Last Synced: {lastSync ? moment(parseInt(lastSync, 10)).fromNow() : 'Never'}
-        </label>
-        <br/>
-        <RaisedButton label="Sync" onTouchTap={this.onClickSync.bind(this)}/>
-      </div>
-    )
   }
 
   getOption (key) {
@@ -303,6 +158,168 @@ export default class General extends React.Component {
     }
   }
 
+  /////////////////////////////////////////////////////////////////
+
+  renderContent () {
+    return (
+      <CardPanel title="General">
+        <div className="padding-md form-inline">
+          <div style={rowStyle} className="margin-md-bottom">
+            <label className="margin-sm-top margin-sm-bottom width-200">System Name: </label>
+            <InlineEdit
+              text={this.getOptionValue('SYSTEM_NAME') || '[Empty]'}
+              paramName="message"
+              change={this.onChangeSysName.bind(this)}
+              className="inline-block"
+              minLength={0}
+            />
+          </div>
+
+          <div style={rowStyle} className="margin-md-bottom">
+            <div className="inline-block width-200">
+              <Checkbox
+                label="Enable DMZ"
+                checked={this.getOptionValue('DMZ') === 'true'}
+                onCheck={this.onChangeDmz.bind(this)}/>
+            </div>
+            <InlineEdit
+              text={this.getOptionValue('DMZ', 'value2')}
+              paramName="message"
+              change={this.onChangeDmzIP.bind(this)}
+              className="inline-block margin-xs-top"
+              ref="dmzIp"
+            />
+          </div>
+          <div style={rowStyle} className="margin-md-bottom">
+            <div className="inline-block width-200">
+              <Checkbox
+                label="Pause System"
+                checked={this.getOptionValue('PAUSE') === 'true'}
+                onCheck={this.onChangePause.bind(this)}/>
+            </div>
+          </div>
+          <div style={rowStyle} className="margin-md-bottom">
+            <div className="inline-block width-200">
+              <Checkbox
+                label="Display Network Traffic"
+                checked={this.getOptionValue('NETWORK_TRAFFIC') === 'true'}
+                onCheck={this.onChangeTraffic.bind(this)}/>
+            </div>
+          </div>
+          <div style={rowStyle} className="margin-md-bottom">
+            <div className="inline-block width-200">
+              <Checkbox
+                label="Send Error Logs With"
+                checked={this.getOptionValue('REMOTE_LOG_ENABLED') === 'true'}
+                onCheck={this.onChangeLogEnabled.bind(this)}/>
+            </div>
+            <InlineEdit
+              text={this.getOptionValue('REMOTE_LOG_BATCH') || '[Empty]'}
+              paramName="message"
+              change={this.onChangeLogBatch.bind(this)}
+              className="inline-block margin-xs-top"
+            />
+          </div>
+
+          <div style={rowStyle} className="margin-md-bottom">
+            <div className="inline-block width-200">
+              <Checkbox
+                label="Send to mobile"
+                checked={this.getOptionValue('IMMOBILE') === 'true'}
+                onCheck={this.onChangeSendMobile.bind(this)}/>
+            </div>
+
+            <InlineEdit
+              text={this.getOptionValue('IMMOBILE')}
+              paramName="message"
+              change={this.onChangeMobileIP.bind(this)}
+              className="inline-block margin-xs-top"
+              ref="mobileIp"
+              minLength={0}
+            />
+          </div>
+
+          <div style={rowStyle} className="margin-md-bottom">
+            <div className="inline-block width-200">
+              <Checkbox
+                label="Show absolute date"
+                checked={this.getUserOptionValue('useAbsoluteDate', false)}
+                onCheck={this.onChangeAbsDate.bind(this)}/>
+            </div>
+            <InlineEdit
+              text={this.getUserOptionValue('dateFormat', defaultDateFormat)}
+              paramName="dateFormat"
+              change={this.onChangeDateFormat.bind(this)}
+              className="inline-block margin-xs-top"
+              ref="dateFormat"
+              minLength={0}
+            />
+
+          </div>
+
+          <div style={rowStyle} className="margin-md-bottom">
+            <div className="inline-block width-200">
+              <Checkbox
+                label="Keep Incident Alert"
+                checked={!!this.getUserOptionValue('keepIncidentAlert', false)}
+                onCheck={this.onChangeKeepIncidentAlert.bind(this)}/>
+            </div>
+          </div>
+
+          <div className="margin-md-bottom">
+            <div className="inline-block width-200">
+              <SelectField
+                value={this.getUserOptionValue('defaultPage', 'main')}
+                onChange={this.onChangeShowPage.bind(this)}
+                floatingLabelText="Default Page">
+                <MenuItem primaryText="Main" value="main"/>
+                <MenuItem primaryText="Dashboard" value="dashboard"/>
+              </SelectField>
+            </div>
+          </div>
+
+          <div style={rowStyle} className="margin-md-bottom">
+            <label className="margin-sm-top margin-sm-bottom width-200">Remove Undefined Events After: </label>
+            <InlineEdit
+              text={this.getOptionValue('UNDEFINED_EVENTS_RETENTION_DAYS') || 'Days'}
+              paramName="message"
+              change={this.onChangeRemoveEvents.bind(this)}
+              className="inline-block"
+              minLength={0}
+            />
+            <label className="margin-sm-top margin-sm-bottom width-200">  Days</label>
+          </div>
+
+          {this.renderCustomer()}
+        </div>
+      </CardPanel>
+    )
+  }
+
+  renderCustomer () {
+    const lastSync = this.getOptionValue('LAST_WORKFLOW_TIME')
+    return (
+      <div style={{color: '#888'}} className="margin-lg-top">
+        <label className="margin-sm-top margin-sm-bottom">
+          Customer ID: {this.getOptionValue('CUSTOMER_ID') || '[None]'}&nbsp;&nbsp;&nbsp;&nbsp;
+          Last Synced: {lastSync ? moment(parseInt(lastSync, 10)).fromNow() : 'Never'}
+        </label>
+        <br/>
+        <RaisedButton label="Sync" onTouchTap={this.onClickSync.bind(this)}/>
+      </div>
+    )
+  }
+
+  renderMenuConfig () {
+    return (
+      <CardPanel title="Menu">
+        {menuItems.map(p =>
+          <Checkbox key={p} label={p}/>
+        )}
+      </CardPanel>
+    )
+  }
+
   render () {
     return (
       <TabPage>
@@ -315,8 +332,11 @@ export default class General extends React.Component {
           </div>
         </TabPageHeader>
 
-        <TabPageBody tabs={SettingTabs} tab={0} history={this.props.history} location={this.props.location}>
+        <TabPageBody tabs={SettingTabs} tab={0} history={this.props.history} location={this.props.location} transparent>
           {this.renderContent()}
+          {this.renderMenuConfig()}
+          <br/>&nbsp;
+          <br/>&nbsp;
         </TabPageBody>
       </TabPage>
     )
