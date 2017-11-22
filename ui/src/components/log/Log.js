@@ -9,8 +9,31 @@ export default class Log extends React.Component {
   }
   getLogMonitors () {
     const {allDevices} = this.props
+    const monitors = []
+    allDevices.forEach(p => {
+      if (!p.monitors) return
+      p.monitors.forEach(m => {
+        if (m.monitortype === 'logfile') monitors.push(m)
+      })
+    })
+
+    return monitors
   }
+
+  renderMonitorList (monitors) {
+    return (
+      <div>
+        {monitors.map(m =>
+          <div key={m.uid} className="padding-sm bt-gray">
+            <span className="link">{m.name}</span>
+          </div>
+        )}
+      </div>
+    )
+  }
+
   render () {
+    const monitors = this.getLogMonitors()
     return (
       <TabPage>
         <div className="padding-md">
@@ -19,8 +42,9 @@ export default class Log extends React.Component {
 
         <TabPageBody tabs={[]} history={this.props.history} location={this.props.location}>
           <div className="flex-horizontal" style={{height: '100%'}}>
-            <div>
+            <div style={{minWidth: 200}}>
               <div className="header-blue">Log</div>
+              {this.renderMonitorList(monitors)}
             </div>
             <div className="flex-1">
               <div className="header-red">Content</div>

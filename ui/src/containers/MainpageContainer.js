@@ -215,7 +215,7 @@ class MainpageContainer extends Component {
         </Switch>
         <Route path="/chat" component={ChatContainer}/>
         <Route path="/search" component={SearchGeneric}/>
-        <Route path="/log" component={LogContainer}/>
+        <Route path="/logs" component={LogContainer}/>
         <Route path="/threatmap" component={ThreatMapContainer}/>
         <Route path="/signout" component={SignoutContainer} />
         <Route path="/settings" component={Settings}/>

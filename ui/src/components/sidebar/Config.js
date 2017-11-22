@@ -39,7 +39,7 @@ export const mainMenu = [
   {id: 'dworkflow', title: 'Workflows', icon: dworkflow, path: '/dashboard/workflows'},
   {id: 'dapp', title: 'Apps', icon: dapp, path: '/dashboard/apps', dashboard: true},
   {id: 'search', title: 'Search', icon: search, path: '/search'},
-  {id: 'log', title: 'Log', icon: logIcon, path: '/log'},
+  {id: 'log', title: 'Logs', icon: logIcon, path: '/logs'},
   {id: 'incidents', title: 'Incidents', icon: incidents, path: '/', search: '?bigincidents='},
   {id: 'chat', title: 'Chat', icon: chat, path: '/chat'},
   {id: 'threatmap', title: 'Threat Map', icon: threatmap, path: '/threatmap'},
