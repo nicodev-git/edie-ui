@@ -154,7 +154,7 @@ export default class LogPapers extends React.Component {
     this.props.onClickView(row, index, this.state.currentPage, this.props.pageSize)
   }
   renderTable () {
-    const {pageSize} = this.props
+    const {pageSize, hideHeader} = this.props
 
     const results = this.getCurrentData()
 
@@ -169,7 +169,7 @@ export default class LogPapers extends React.Component {
       return (
         <div key={i} className="padding-sm margin-md-bottom">
           <Paper zDepth={paperZDepth}>
-            <div className="header-red">{title} : {timeFrom} ~ {timeTo}</div>
+            {!hideHeader && <div className="header-red">{title} : {timeFrom} ~ {timeTo}</div>}
             {list.map((row, index) =>
               <div key={row.id} className="padding-xs row-hover">
                 <span dangerouslySetInnerHTML={{__html: row.entity && row.entity.dataobj ? row.entity.dataobj.line : ' '}}/>
@@ -197,7 +197,7 @@ export default class LogPapers extends React.Component {
         marginPagesDisplayed={2}
         pageRangeDisplayed={5}
         onPageChange={this.handlePageClick.bind(this)}
-        containerClassName={"pagination"}
+        containerClassName={"pagination margin-xs-top"}
         subContainerClassName={"pages pagination"}
         activeClassName={"active"}/>
     )
@@ -243,5 +243,7 @@ LogPapers.defaultProps = {
   revertRows: false,
 
   onUpdateCount: null,
-  handleRecord: null
+  handleRecord: null,
+
+  hideHeader: false
 }
