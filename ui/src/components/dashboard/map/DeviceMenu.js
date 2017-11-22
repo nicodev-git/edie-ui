@@ -14,7 +14,7 @@ export default class DeviceMenu extends React.Component {
         items: []
       }],
 
-      activePanel: 0
+      activePanel: 1
     }
   }
 
@@ -48,7 +48,7 @@ export default class DeviceMenu extends React.Component {
     let devicePanels = []
 
     let deviceTypes = concat([], this.state.deviceTypes)
-    const categories = []// this.props.deviceCategories
+    const categories = []
     this.props.deviceTemplates.forEach(p => {
       if (categories.indexOf(p.devicetemplategroup) < 0) categories.push(p.devicetemplategroup)
     })
@@ -72,22 +72,22 @@ export default class DeviceMenu extends React.Component {
     let hasActive = false
     let firstPanelIndex = 0
 
-    // deviceTypes.forEach((section, sectionIndex) => {
-    //   let items = false
-    //
-    //   if (sectionIndex === 0) {
-    //
-    //   } else {
-    //     section.items.forEach((item, typeIndex) => {
-    //       if ((item.title || '').toLowerCase().indexOf(this.state.keyword.toLowerCase()) < 0) return
-    //       items = true
-    //     })
-    //
-    //     if (!items) return
-    //   }
-    //   if (firstPanelIndex < 0) firstPanelIndex = sectionIndex
-    //   if (sectionIndex === this.state.activePanel) hasActive = true
-    // })
+    deviceTypes.forEach((section, sectionIndex) => {
+      let items = false
+
+      if (sectionIndex === 0) {
+
+      } else {
+        section.items.forEach((item, typeIndex) => {
+          if ((item.title || '').toLowerCase().indexOf(this.state.keyword.toLowerCase()) < 0) return
+          items = true
+        })
+
+        if (!items) return
+      }
+      if (firstPanelIndex < 0) firstPanelIndex = sectionIndex
+      if (sectionIndex === this.state.activePanel) hasActive = true
+    })
     const activeKey = !hasActive && firstPanelIndex >= 0 ? firstPanelIndex : this.state.activePanel
 
     deviceTypes.forEach((section, sectionIndex) => {
@@ -111,16 +111,16 @@ export default class DeviceMenu extends React.Component {
           )
         })
       } else {
-        // section.items.forEach((item, typeIndex) => {
-        //   const selected = this.props.selectedItem.title === item.title
-        //
-        //   if (item.title.toLowerCase().indexOf(this.state.keyword.toLowerCase()) < 0) return
-        //   deviceItems.push(
-        //     <li key={typeIndex} className={selected ? 'active' : ''} onClick={this.onClickItem.bind(this, item)}>
-        //       <DeviceImg {...item}/>
-        //     </li>
-        //   )
-        // })
+        section.items.forEach((item, typeIndex) => {
+          const selected = this.props.selectedItem.title === item.title
+
+          if (item.title.toLowerCase().indexOf(this.state.keyword.toLowerCase()) < 0) return
+          deviceItems.push(
+            <li key={typeIndex} className={selected ? 'active' : ''} onClick={this.onClickItem.bind(this, item)}>
+              <DeviceImg {...item}/>
+            </li>
+          )
+        })
 
         if (!deviceItems.length) return
       }
