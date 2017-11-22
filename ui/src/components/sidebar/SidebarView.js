@@ -58,7 +58,8 @@ export default class SidebarView extends Component {
     const {onToggle, contentType, mainMenu, deviceMenu, onMainMenu,
       device, pageId, pageType, searchVisible, onSearch,
       sidebarMessageMenuOpen,
-      openSidebarMessageMenu, closeSidebarMessageMenu, user
+      openSidebarMessageMenu, closeSidebarMessageMenu, user,
+      visibleMenu
     } = this.props
 
     const mainMenuItems = user.defaultPage !== 'dashboard' ? [mainMenu[1], mainMenu[0], ...mainMenu.slice(2)] : mainMenu
@@ -75,9 +76,10 @@ export default class SidebarView extends Component {
         </div>
         <div style={{display: contentType.Main === pageType ? 'block' : 'none'}} className="sidebar">
           {mainMenuItems.map((item, index) => {
+            const visible = item.fixed || visibleMenu.includes(item.id)
             // if (index === (user.defaultPage !== 'dashboard' ? 0 : 1)) return null
             return (
-              <div key={index} onClick={onMainMenu.bind(this, item.id)}>
+              <div key={index} onClick={onMainMenu.bind(this, item.id)} className={visible ? '' : 'hidden'}>
                 <div className={pageId === item.id ? 'sidebar-chosen' : ''}>
                   <div className="sidebar-item-container">
                     {item.badge ? this.renderBadge(item) : this.renderButton(item)}
@@ -96,12 +98,12 @@ export default class SidebarView extends Component {
                 }
                 <Divider style={{margin: 0, backgroundColor: '#393b42'}}/>
 
-                {index === 1 ? (
-                  <MessageBox
-                    open={sidebarMessageMenuOpen}
-                    openSidebarMessageMenu={openSidebarMessageMenu}
-                    closeSidebarMessageMenu={closeSidebarMessageMenu}/>
-                ) : null}
+                {/*{index === 1 ? (*/}
+                  {/*<MessageBox*/}
+                    {/*open={sidebarMessageMenuOpen}*/}
+                    {/*openSidebarMessageMenu={openSidebarMessageMenu}*/}
+                    {/*closeSidebarMessageMenu={closeSidebarMessageMenu}/>*/}
+                {/*) : null}*/}
                 {index === 1 ? (
                   <Divider style={{margin: 0, backgroundColor: '#393b42'}}/>
                 ) : null}

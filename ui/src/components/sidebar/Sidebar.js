@@ -12,6 +12,24 @@ export default class Sidebar extends React.Component {
       searchVisible: false
     }
   }
+
+  getOption (key) {
+    const list = (this.props.envVars || []).filter(u => u.envvars && u.envvars.key === key)
+    if (list.length) return list[0]
+    return null
+  }
+
+  getOptionValue (key, value = 'value1') {
+    const option = this.getOption(key)
+    if (!option) return ''
+    return option.envvars[value]
+  }
+
+  getVisibleMenu () {
+    const selected = (this.getOptionValue('DASHBOARD_MENU') || '').split(',')
+    return selected
+  }
+
   onClickDeviceMenu (index) {
     this.setState({ tooltipText: '' })
     this.props.onClickItem(this.props.contentType.Device, this.props.deviceMenu(this.props.device.id)[index])
@@ -58,6 +76,8 @@ export default class Sidebar extends React.Component {
 
         openSidebarMessageMenu={() => this.props.showSidebarMessageMenu(true)}
         closeSidebarMessageMenu={() => this.props.showSidebarMessageMenu(false)}
+
+        visibleMenu={this.getVisibleMenu()}
       />
     )
   }

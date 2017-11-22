@@ -79,7 +79,7 @@ class Main extends React.Component {
   }
 
   renderSidebar () {
-    const {location, device, history} = this.props
+    const {location, device, history, envVars} = this.props
     const {pathname} = location
 
     let pageId = homeId
@@ -118,6 +118,7 @@ class Main extends React.Component {
         pageId={pageId}
         pageType={pageType}
         device={device}
+        envVars={envVars}
         onClickItem={this.onClickMenuItem.bind(this)}
       />
     )

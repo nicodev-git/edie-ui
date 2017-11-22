@@ -327,7 +327,7 @@ export default class General extends React.Component {
       <CardPanel title="Menu">
         {mainMenu.map(p =>
           <Checkbox
-            key={p.id} label={p.title} checked={selected.includes(p.id)}
+            key={p.id} label={p.title} checked={p.fixed || selected.includes(p.id)}
             onCheck={this.onCheckDashboardMenu.bind(this, p.id)}
             disabled={p.fixed}
           />
