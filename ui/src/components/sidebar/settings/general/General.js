@@ -11,13 +11,13 @@ import TabPageHeader from 'components/common/TabPageHeader' // Never used
 
 import {defaultDateFormat} from 'shared/Global'
 import {CardPanel} from 'components/modal/parts'
+import {mainMenu} from 'components/sidebar/Config'
 
 const rowStyle = {
   width: '100%',
   height: 30
 }
 
-const menuItems = ['Servers', 'Workflows', 'Apps']
 export default class General extends React.Component {
   constructor (props) {
     super(props)
@@ -325,10 +325,12 @@ export default class General extends React.Component {
     const selected = value.split(',')
     return (
       <CardPanel title="Menu">
-        {menuItems.map(p =>
+        {mainMenu.map(p =>
           <Checkbox
-            key={p} label={p} checked={selected.includes(p)}
-            onCheck={this.onCheckDashboardMenu.bind(this, p)}/>
+            key={p.id} label={p.title} checked={selected.includes(p.id)}
+            onCheck={this.onCheckDashboardMenu.bind(this, p.id)}
+            disabled={p.fixed}
+          />
         )}
       </CardPanel>
     )

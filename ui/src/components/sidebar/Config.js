@@ -31,7 +31,7 @@ const dworkflow = <DashboardWfIcon color={sidebarIconsColor}/>
 const dapp = <DashboardAppIcon color={sidebarIconsColor}/>
 
 export const mainMenu = [
-  {id: 'dashboard', title: 'Dashboard', icon: dashboard, path: '/dashboard'},
+  {id: 'dashboard', title: 'Dashboard', icon: dashboard, path: '/dashboard', fixed: true},
   {id: 'home', title: 'Map', icon: map, path: '/'},
   {id: 'dservers', title: 'Servers', icon: dservers, path: '/dashboard/servers'},
   {id: 'dworkflow', title: 'Workflows', icon: dworkflow, path: '/dashboard/workflows'},
@@ -41,7 +41,6 @@ export const mainMenu = [
   {id: 'chat', title: 'Chat', icon: chat, path: '/chat'},
   {id: 'threatmap', title: 'Threat Map', icon: threatmap, path: '/threatmap'},
   {id: 'settings', title: 'Settings', icon: settings, path: '/settings'}
-  // {id: 'logout', title: 'Log Out', icon: exit, path: '/signout'}
 ]
 
 export const deviceMenu = (deviceId) => {
