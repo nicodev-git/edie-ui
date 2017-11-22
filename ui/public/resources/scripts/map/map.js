@@ -441,6 +441,9 @@ var mapObject = {
 
       if(me.editable) {
         obj.onMouseDown && obj.onMouseDown(e);
+        // if (obj.objectSubType == MapItemType.ShapeLine) {
+        //   obj.line.onSelected()
+        // }
       } else {
 
         var deviceObj;
