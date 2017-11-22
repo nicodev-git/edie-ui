@@ -169,6 +169,25 @@ export default class General extends React.Component {
   }
 
   /////////////////////////////////////////////////////////////////
+  renderCustomerPanel () {
+    return (
+      <CardPanel title="Customer">
+        <div style={rowStyle} className="margin-md-bottom">
+          <label className="margin-sm-top margin-sm-bottom width-200">Remove Undefined Events After: </label>
+          <InlineEdit
+            text={this.getOptionValue('UNDEFINED_EVENTS_RETENTION_DAYS') || 'Days'}
+            paramName="message"
+            change={this.onChangeRemoveEvents.bind(this)}
+            className="inline-block"
+            minLength={0}
+          />
+          <label className="margin-sm-top margin-sm-bottom width-200">  Days</label>
+        </div>
+
+        {this.renderCustomer()}
+      </CardPanel>
+    )
+  }
 
   renderContent () {
     return (
@@ -209,7 +228,7 @@ export default class General extends React.Component {
             </div>
           </div>
           <div style={rowStyle} className="margin-md-bottom">
-            <div className="inline-block width-200">
+            <div>
               <Checkbox
                 label="Display Network Traffic"
                 checked={this.getOptionValue('NETWORK_TRAFFIC') === 'true'}
@@ -217,7 +236,7 @@ export default class General extends React.Component {
             </div>
           </div>
           <div style={rowStyle} className="margin-md-bottom">
-            <div className="inline-block width-200">
+            <div className="width-200 pull-left">
               <Checkbox
                 label="Send Error Logs With"
                 checked={this.getOptionValue('REMOTE_LOG_ENABLED') === 'true'}
@@ -227,7 +246,7 @@ export default class General extends React.Component {
               text={this.getOptionValue('REMOTE_LOG_BATCH') || '[Empty]'}
               paramName="message"
               change={this.onChangeLogBatch.bind(this)}
-              className="inline-block margin-xs-top"
+              className="pull-left margin-xs-top"
             />
           </div>
 
@@ -250,7 +269,7 @@ export default class General extends React.Component {
           </div>
 
           <div style={rowStyle} className="margin-md-bottom">
-            <div className="inline-block width-200">
+            <div className="pull-left width-200">
               <Checkbox
                 label="Show absolute date"
                 checked={this.getUserOptionValue('useAbsoluteDate', false)}
@@ -260,7 +279,7 @@ export default class General extends React.Component {
               text={this.getUserOptionValue('dateFormat', defaultDateFormat)}
               paramName="dateFormat"
               change={this.onChangeDateFormat.bind(this)}
-              className="inline-block margin-xs-top"
+              className="pull-left margin-xs-top"
               ref="dateFormat"
               minLength={0}
             />
@@ -275,32 +294,6 @@ export default class General extends React.Component {
                 onCheck={this.onChangeKeepIncidentAlert.bind(this)}/>
             </div>
           </div>
-
-          <div className="margin-md-bottom">
-            <div className="inline-block width-200">
-              <SelectField
-                value={this.getUserOptionValue('defaultPage', 'main')}
-                onChange={this.onChangeShowPage.bind(this)}
-                floatingLabelText="Default Page">
-                <MenuItem primaryText="Main" value="main"/>
-                <MenuItem primaryText="Dashboard" value="dashboard"/>
-              </SelectField>
-            </div>
-          </div>
-
-          <div style={rowStyle} className="margin-md-bottom">
-            <label className="margin-sm-top margin-sm-bottom width-200">Remove Undefined Events After: </label>
-            <InlineEdit
-              text={this.getOptionValue('UNDEFINED_EVENTS_RETENTION_DAYS') || 'Days'}
-              paramName="message"
-              change={this.onChangeRemoveEvents.bind(this)}
-              className="inline-block"
-              minLength={0}
-            />
-            <label className="margin-sm-top margin-sm-bottom width-200">  Days</label>
-          </div>
-
-          {this.renderCustomer()}
         </div>
       </CardPanel>
     )
@@ -325,6 +318,17 @@ export default class General extends React.Component {
     const selected = value.split(',')
     return (
       <CardPanel title="Menu">
+        <div className="margin-md-bottom">
+          <div className="inline-block width-200">
+            <SelectField
+              value={this.getUserOptionValue('defaultPage', 'main')}
+              onChange={this.onChangeShowPage.bind(this)}
+              floatingLabelText="Default Page">
+              <MenuItem primaryText="Main" value="main"/>
+              <MenuItem primaryText="Dashboard" value="dashboard"/>
+            </SelectField>
+          </div>
+        </div>
         {mainMenu.map(p =>
           <Checkbox
             key={p.id} label={p.title} checked={p.fixed || selected.includes(p.id)}
@@ -349,8 +353,15 @@ export default class General extends React.Component {
         </TabPageHeader>
 
         <TabPageBody tabs={SettingTabs} tab={0} history={this.props.history} location={this.props.location} transparent>
-          {this.renderContent()}
-          {this.renderMenuConfig()}
+          <div>
+            <div className="col-md-6">
+              {this.renderContent()}
+            </div>
+            <div className="col-md-6">
+              {this.renderCustomerPanel()}
+              {this.renderMenuConfig()}
+            </div>
+          </div>
           <br/>&nbsp;
           <br/>&nbsp;
         </TabPageBody>
