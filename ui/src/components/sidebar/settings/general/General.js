@@ -159,7 +159,7 @@ export default class General extends React.Component {
   }
 
   onCheckDashboardMenu (item, e, checked) {
-    let selected = this.getOptionValue('DASHBOARD_MENU', '').value1.split(',')
+    let selected = (this.getOptionValue('DASHBOARD_MENU') || '').split(',')
     if (checked) {
       selected.push(item)
     } else {
@@ -321,14 +321,17 @@ export default class General extends React.Component {
   }
 
   renderMenuConfig () {
-    // const selected = this.getOptionValue('DASHBOARD_MENU', '').split(',')
-    // return (
-    //   <CardPanel title="Menu">
-    //     {menuItems.map(p =>
-    //       <Checkbox key={p} label={p} checked={selected.includes(p)} onCheck={this.onCheckDashboardMenu.bind(this, p)}/>
-    //     )}
-    //   </CardPanel>
-    // )
+    const value = this.getOptionValue('DASHBOARD_MENU') || ''
+    const selected = value.split(',')
+    return (
+      <CardPanel title="Menu">
+        {menuItems.map(p =>
+          <Checkbox
+            key={p} label={p} checked={selected.includes(p)}
+            onCheck={this.onCheckDashboardMenu.bind(this, p)}/>
+        )}
+      </CardPanel>
+    )
   }
 
   render () {
