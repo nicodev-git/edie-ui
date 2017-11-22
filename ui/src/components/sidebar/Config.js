@@ -11,6 +11,9 @@ import DashboardIcon from 'material-ui/svg-icons/action/dashboard'
 import PlaylistIcon from 'material-ui/svg-icons/av/playlist-add-check'
 import { sidebarIconsColor } from 'style/common/materialStyles'
 import MapIcon from 'material-ui/svg-icons/maps/map'
+import DashboardServerIcon from 'material-ui/svg-icons/device/devices'
+import DashboardWfIcon from 'material-ui/svg-icons/action/trending-up'
+import DashboardAppIcon from 'material-ui/svg-icons/action/settings-applications'
 
 // const home = <HomeIcon color={sidebarIconsColor}/>
 const search = <SearchIcon color={sidebarIconsColor}/>
@@ -23,9 +26,16 @@ const monitors = <PlaylistIcon color={sidebarIconsColor}/>
 const dashboard = <DashboardIcon color={sidebarIconsColor}/>
 const map = <MapIcon color={sidebarIconsColor}/>
 
+const dservers = <DashboardServerIcon color={sidebarIconsColor}/>
+const dworkflow = <DashboardWfIcon color={sidebarIconsColor}/>
+const dapp = <DashboardAppIcon color={sidebarIconsColor}/>
+
 export const mainMenu = [
   {id: 'dashboard', title: 'Dashboard', icon: dashboard, path: '/dashboard'},
   {id: 'home', title: 'Map', icon: map, path: '/'},
+  {id: 'dservers', title: 'Servers', icon: dservers, path: '/dashboard/servers'},
+  {id: 'dworkflow', title: 'Workflows', icon: dworkflow, path: '/dashboard/workflows'},
+  {id: 'dapp', title: 'Apps', icon: dapp, path: '/dashboard/apps', dashboard: true},
   {id: 'search', title: 'Search', icon: search, path: '/search'},
   {id: 'incidents', title: 'Incidents', icon: incidents, path: '/', search: '?bigincidents='},
   {id: 'chat', title: 'Chat', icon: chat, path: '/chat'},
