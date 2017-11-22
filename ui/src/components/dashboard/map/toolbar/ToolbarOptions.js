@@ -22,11 +22,6 @@ class ToolbarOptions extends Component {
   render () {
     return (
       <div className="panel-options main-map-options toolbar-options" style={{top: '0px'}}>
-        <EditMapMenu
-          onEdit={this.props.onMapEdit}
-          onUndo={this.props.onEditMapUndo}/>
-        <DeviceMenuContainer {...this.props}/>
-        <DeleteObject obj={this.props.obj} onDelete={this.props.onClickDelete}/>
         <ColorPicker
           line={this.props.line}
           popover={this.props.popover}
@@ -74,6 +69,11 @@ class ToolbarOptions extends Component {
           <ArrowDownIcon color="#545454"/>
         </IconButton>
 
+        <DeleteObject obj={this.props.obj} onDelete={this.props.onClickDelete}/>
+        <EditMapMenu
+          onEdit={this.props.onMapEdit}
+          onUndo={this.props.onEditMapUndo}/>
+        <DeviceMenuContainer {...this.props}/>
         <TextChange
           text={this.props.text}
           onChange={this.props.onClickAlignLeft}
@@ -101,6 +101,7 @@ class ToolbarOptions extends Component {
         />
         <OptionUploader />
         <DropdownToggle />
+
       </div>
     )
   }
