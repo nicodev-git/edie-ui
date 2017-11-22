@@ -17,7 +17,7 @@ const rowStyle = {
   height: 30
 }
 
-const menuItems = ['Servers', 'Workflows', 'Apps']
+// const menuItems = ['Servers', 'Workflows', 'Apps']
 export default class General extends React.Component {
   constructor (props) {
     super(props)

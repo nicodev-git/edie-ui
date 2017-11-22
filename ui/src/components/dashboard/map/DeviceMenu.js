@@ -10,11 +10,11 @@ export default class DeviceMenu extends React.Component {
 
       keyword: '',
       deviceTypes: [{
-        title: 'New Devices',
+        title: 'Add Existing Devices',
         items: []
       }],
 
-      activePanel: 1
+      activePanel: 0
     }
   }
 
@@ -128,7 +128,7 @@ export default class DeviceMenu extends React.Component {
       devicePanels.push(
         <div className="panel panel-default" key={sectionIndex} onClick={this.handleSelect.bind(this, sectionIndex)}>
           <div className="panel-heading">
-            <div className="link">{section.title}</div>
+            <div className="link">{section.title === 'DEVICES' ? 'Add New Devices' : section.title}</div>
           </div>
           <ul className={activeKey === sectionIndex ? '' : 'hidden'} style={{background: 'black'}}>
             {deviceItems}
