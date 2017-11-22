@@ -169,30 +169,11 @@ export default class General extends React.Component {
   }
 
   /////////////////////////////////////////////////////////////////
-  renderCustomerPanel () {
-    return (
-      <CardPanel title="Customer">
-        <div style={rowStyle} className="margin-md-bottom">
-          <label className="margin-sm-top margin-sm-bottom width-200">Remove Undefined Events After: </label>
-          <InlineEdit
-            text={this.getOptionValue('UNDEFINED_EVENTS_RETENTION_DAYS') || 'Days'}
-            paramName="message"
-            change={this.onChangeRemoveEvents.bind(this)}
-            className="inline-block"
-            minLength={0}
-          />
-          <label className="margin-sm-top margin-sm-bottom width-200">  Days</label>
-        </div>
-
-        {this.renderCustomer()}
-      </CardPanel>
-    )
-  }
 
   renderContent () {
     return (
       <CardPanel title="General">
-        <div className="padding-md form-inline">
+        <div className="form-inline">
           <div style={rowStyle} className="margin-md-bottom">
             <label className="margin-sm-top margin-sm-bottom width-200">System Name: </label>
             <InlineEdit
@@ -294,6 +275,18 @@ export default class General extends React.Component {
                 onCheck={this.onChangeKeepIncidentAlert.bind(this)}/>
             </div>
           </div>
+
+          <div style={rowStyle}>
+            <label className="margin-sm-top margin-sm-bottom width-200">Remove Undefined Events After: </label>
+            <InlineEdit
+              text={this.getOptionValue('UNDEFINED_EVENTS_RETENTION_DAYS') || 'Days'}
+              paramName="message"
+              change={this.onChangeRemoveEvents.bind(this)}
+              className="inline-block"
+              minLength={0}
+            />
+            <label className="margin-sm-top margin-sm-bottom width-200">  Days</label>
+          </div>
         </div>
       </CardPanel>
     )
@@ -356,9 +349,9 @@ export default class General extends React.Component {
           <div>
             <div className="col-md-6">
               {this.renderContent()}
+              {this.renderCustomer()}
             </div>
             <div className="col-md-6">
-              {this.renderCustomerPanel()}
               {this.renderMenuConfig()}
             </div>
           </div>
