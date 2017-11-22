@@ -12,7 +12,7 @@ import Metric from 'components/common/Metric'
 
 const logoutStyle = {
   position: 'absolute',
-  right: 0,
+  right: 5,
   top: -6,
   zIndex: 2
 }
