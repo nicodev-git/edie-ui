@@ -476,18 +476,20 @@ var mapObject = {
     } else {
       var obj = o.target;
       if(me.editable) {
-        if(o.e.which == 0 && me.canvas.selection) {
-          var p = me.canvas.getPointer(o.e);
-          me.showNearestObject(p, obj);
-          if(me.selRect.visible && me.selRect.nearPoint >= 0) {
-            me.startNewLine(me.selRect.nearObject, me.selRect.nearPoint);
-          } else {
-            me.clearNewLine();
+        if (!me.selectedLine()) {
+          if(o.e.which == 0 && me.canvas.selection) {
+            var p = me.canvas.getPointer(o.e);
+            me.showNearestObject(p, obj);
+            if(me.selRect.visible && me.selRect.nearPoint >= 0) {
+              me.startNewLine(me.selRect.nearObject, me.selRect.nearPoint);
+            } else {
+              me.clearNewLine();
+            }
+            me.canvas.renderAll();
           }
-          me.canvas.renderAll();
-        }
 
-        obj && obj.onMouseMove && obj.onMouseMove(e);
+          obj && obj.onMouseMove && obj.onMouseMove(e);
+        }
       } else {
         if (me.canvas.getZoom() > 1) {
           if(me.isMouseDown) {
