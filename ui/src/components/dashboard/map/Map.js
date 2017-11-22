@@ -364,7 +364,7 @@ class Map extends React.Component {
       }
 
       if (options.type === 'longhub') {
-        options.width = 20
+        options.width = 3
         options.height = 400
       } else if (options.type === 'bi-pie') {
         options.width = 200
@@ -620,8 +620,8 @@ class Map extends React.Component {
       this.onClickEdit()
       this.props.addMapDevice(params)
 
-      this.setState({dropItem: null, selectedItem: {}})
       closeCallback && closeCallback()
+      if (this.state.editable) this.onClickEdit()
     } else {
       if (wizardConfig[options.type] === null) {
         showAlert(`Unrecognized Type: ${options.type}`) // eslint-disable-line no-undef
