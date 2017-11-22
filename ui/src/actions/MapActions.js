@@ -307,6 +307,13 @@ const fetchWorkflowIds = (uuids, cb) => {
   })
 }
 
+const addMapDeviceSuccess = (dispatch, response) => {
+  dispatch({
+    type: ADD_MAP_DEVICE,
+    data: response.data
+  })
+}
+
 export const addMapDevice = (props, url) => {
   if (!window.localStorage.getItem('token')) {
     return dispatch => dispatch({ type: NO_AUTH_ERROR })
@@ -316,20 +323,14 @@ export const addMapDevice = (props, url) => {
       resolveAddr(props, newProps => {
         axios.post(`${ROOT_URL}${url || '/device'}`, assign({}, newProps, {workflowids})).then(response => {
           addMapDeviceSuccess(dispatch, response)
-          (newProps.credential || []).forEach(p => {
+          const creds = newProps.credential || []
+          creds.forEach(p => {
             dispatch(addDeviceCredential(p, response.data.id))
           })
-        }).catch(error => apiError(dispatch, error))
+        })//.catch(error => apiError(dispatch, error))
       })
     })
   }
-}
-
-const addMapDeviceSuccess = (dispatch, response) => {
-  dispatch({
-    type: ADD_MAP_DEVICE,
-    data: response.data
-  })
 }
 
 export const updateMapDevice = (entity) => {
