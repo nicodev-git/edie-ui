@@ -1,6 +1,9 @@
 import React from 'react'
-import DeviceEditWizard from 'components/common/wizard/DeviceEditWizard'
+import { formValueSelector } from 'redux-form'
 import { connect } from 'react-redux'
+
+import DeviceEditWizard from 'components/common/wizard/DeviceEditWizard'
+
 import {
   openTplImageModal,
   closeTplImageModal,
@@ -14,6 +17,7 @@ import {
   showDeviceCredsPicker,
   selectDeviceCreds,
 
+  fixNewDevice,
   installAgent,
   uninstallAgent,
 
@@ -26,12 +30,15 @@ import {
   fetchCollectors,
   showCollectorModal,
   addCollector,
+  showCollectorInstallModal,
 
   fetchMonitorTemplates,
   openDeviceMonitorWizard
 } from 'actions'
 
 import {getRemoveAfter} from 'shared/Global'
+
+const selector = formValueSelector('deviceEditForm')
 
 class DeviceEditWizardContainer extends React.Component {
   render () {
@@ -83,6 +90,7 @@ export default connect(
       ...state.dashboard.selectedDevice,
       ...getRemoveAfter(state.dashboard.selectedDevice),
     },
+    formValues: selector(state, 'wanip', 'name', 'agentType', 'collectorId', 'distribution', 'agentCollectorId', 'useIntegratedSecurity'),
 
     selectedDevice: state.dashboard.selectedDevice,
 
@@ -107,7 +115,16 @@ export default connect(
     deviceTemplates: state.settings.deviceTemplates,
     deviceMonitorsModalOpen: state.devices.deviceMonitorsModalOpen,
 
-    installAgentMessage: state.devices.installAgentMessage
+    installAgents: state.settings.installAgents,
+    installAgentMessage: state.devices.installAgentMessage,
+
+    fixStatus: state.devices.fixStatus,
+    fixResult: state.devices.fixResult,
+
+    collectorInstallModalOpen: state.devices.collectorInstallModalOpen,
+    collectorTestStatus: state.devices.collectorTestStatus,
+
+    deviceHost: state.devices.deviceHost
   }), {
     openTplImageModal,
     closeTplImageModal,
@@ -121,6 +138,7 @@ export default connect(
     showDeviceCredsPicker,
     selectDeviceCreds,
 
+    fixNewDevice,
     installAgent,
     uninstallAgent,
 
@@ -133,6 +151,7 @@ export default connect(
     fetchCollectors,
     showCollectorModal,
     addCollector,
+    showCollectorInstallModal,
 
     fetchMonitorTemplates,
     openDeviceMonitorWizard

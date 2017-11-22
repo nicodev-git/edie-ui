@@ -6,7 +6,7 @@ import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
 
 import { wizardEditConfig } from './WizardConfig'
 import { util } from './WizardUtil'
-import {isWindowsDevice, getAgentStatusMessage} from 'shared/Global'
+import {isWindowsDevice, getAgentStatusMessage, mergeCredentials} from 'shared/Global'
 import {showAlert} from 'components/common/Alert'
 
 import TextInput from './input/TextInput'
@@ -236,6 +236,39 @@ class DeviceEditWizard extends React.Component {
   }
   onClickAddCred () {
     this.props.showDeviceCredsPicker(true)
+  }
+
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  onChangeAgentType (e, value) {
+    this.checkDeviceAgentStatus({
+      agentType: value
+    })
+  }
+
+  checkDeviceAgentStatus (options = {}) {
+    const {selectedDevice, formValues, credentials} = this.props
+
+    const entity = {
+      ...selectedDevice,
+      ...formValues,
+      ...options
+    }
+
+    entity.credentials = mergeCredentials(entity, credentials, [], [])
+
+    if (!entity.wanip) {
+      // showAlert('Please input IP')
+      return
+    }
+
+    if (!entity.collectorId && entity.agentType === 'collector') {
+      this.props.showCollectorInstallModal(true)
+      return
+    }
+
+    console.log(entity)
+    this.props.fixNewDevice(entity)
   }
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
