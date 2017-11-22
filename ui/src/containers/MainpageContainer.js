@@ -21,6 +21,7 @@ import ServerDetailContainer from 'containers/dashboard/ServerDetailContainer'
 import ServerRangeContainer from 'containers/dashboard/ServerRangeContainer'
 import AddServerContainer from 'containers/dashboard/AddServerContainer'
 import EditServerContainer from 'containers/dashboard/EditServerContainer'
+import LogContainer from 'containers/log/LogContainer'
 
 import {
   closeDevice,
@@ -214,6 +215,7 @@ class MainpageContainer extends Component {
         </Switch>
         <Route path="/chat" component={ChatContainer}/>
         <Route path="/search" component={SearchGeneric}/>
+        <Route path="/log" component={LogContainer}/>
         <Route path="/threatmap" component={ThreatMapContainer}/>
         <Route path="/signout" component={SignoutContainer} />
         <Route path="/settings" component={Settings}/>

@@ -14,6 +14,7 @@ import MapIcon from 'material-ui/svg-icons/maps/map'
 import DashboardServerIcon from 'material-ui/svg-icons/device/devices'
 import DashboardWfIcon from 'material-ui/svg-icons/action/trending-up'
 import DashboardAppIcon from 'material-ui/svg-icons/action/settings-applications'
+import LogIcon from 'material-ui/svg-icons/notification/event-available'
 
 // const home = <HomeIcon color={sidebarIconsColor}/>
 const search = <SearchIcon color={sidebarIconsColor}/>
@@ -25,6 +26,7 @@ const back = <BackIcon color={sidebarIconsColor}/>
 const monitors = <PlaylistIcon color={sidebarIconsColor}/>
 const dashboard = <DashboardIcon color={sidebarIconsColor}/>
 const map = <MapIcon color={sidebarIconsColor}/>
+const logIcon = <LogIcon color={sidebarIconsColor}/>
 
 const dservers = <DashboardServerIcon color={sidebarIconsColor}/>
 const dworkflow = <DashboardWfIcon color={sidebarIconsColor}/>
@@ -37,6 +39,7 @@ export const mainMenu = [
   {id: 'dworkflow', title: 'Workflows', icon: dworkflow, path: '/dashboard/workflows'},
   {id: 'dapp', title: 'Apps', icon: dapp, path: '/dashboard/apps', dashboard: true},
   {id: 'search', title: 'Search', icon: search, path: '/search'},
+  {id: 'log', title: 'Log', icon: logIcon, path: '/log'},
   {id: 'incidents', title: 'Incidents', icon: incidents, path: '/', search: '?bigincidents='},
   {id: 'chat', title: 'Chat', icon: chat, path: '/chat'},
   {id: 'threatmap', title: 'Threat Map', icon: threatmap, path: '/threatmap'},
