@@ -33,7 +33,8 @@ import {
   showCollectorInstallModal,
 
   fetchMonitorTemplates,
-  openDeviceMonitorWizard
+  openDeviceMonitorWizard,
+  updateDeviceHost
 } from 'actions'
 
 import {getRemoveAfter} from 'shared/Global'
@@ -154,6 +155,7 @@ export default connect(
     showCollectorInstallModal,
 
     fetchMonitorTemplates,
-    openDeviceMonitorWizard
+    openDeviceMonitorWizard,
+    updateDeviceHost
   }
 )(DeviceEditWizardContainer)

@@ -24,7 +24,7 @@ export default class EditServer extends React.Component {
   }
 
   render () {
-    const {device} = this.props
+    const {device, history} = this.props
 
     const type = deviceTypeMap[device.type] || device.type || 'custom'
     const extraParams = {}
@@ -32,6 +32,7 @@ export default class EditServer extends React.Component {
     return (
       <div>
         <DeviceEditWizardContainer
+          history={history}
           deviceType={type}
           values={device}
           extraParams={extraParams}

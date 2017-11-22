@@ -68,12 +68,31 @@ class DeviceEditWizard extends React.Component {
     this.props.fetchCredTypes()
     this.props.fetchCollectors()
     this.props.fetchMonitorTemplates()
+    this.props.updateDeviceHost('')
   }
 
   componentWillReceiveProps (nextProps) {
     const {installAgentMessage} = nextProps
     if (!this.props.installAgentMessage && installAgentMessage) {
       showAlert(installAgentMessage)
+    }
+  }
+
+  componentDidUpdate (prevProps) {
+    const {deviceHost} = this.props
+    // if (deviceType !== prevProps.deviceType) {
+    //   const config = wizardConfig[deviceType]
+    //   const stepItems = config.steps
+    //
+    //   this.setState({
+    //     currentDevice: {...config, steps: stepItems},
+    //     monitors: this.props.monitors || [],
+    //   })
+    // }
+
+    if (deviceHost && deviceHost !== prevProps.deviceHost) {
+      this.props.change('name', deviceHost)
+      this.fnSaveDeb()
     }
   }
 
@@ -98,6 +117,7 @@ class DeviceEditWizard extends React.Component {
     if (!res) return
     const {onFinish} = this.props
     onFinish && onFinish(res)
+    this.props.history.push('/dashboard/servers')
   }
 
   handleFormSubmit (formProps) {
