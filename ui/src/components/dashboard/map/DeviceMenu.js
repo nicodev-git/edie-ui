@@ -138,7 +138,7 @@ export default class DeviceMenu extends React.Component {
     })
 
     return (
-      <div id="device-menu" className="panel-group devicediv" style={{top: '32px'}}>
+      <div id="device-menu" className="panel-group devicediv" style={{top: '45px'}}>
         <div className="panel panel-default">
           <div className="panel-body">
             <div className="navbar-search" style={{paddingLeft: '5px'}}>
