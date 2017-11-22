@@ -1,4 +1,5 @@
 import React from 'react'
+import moment from 'moment'
 
 import TabPage from 'components/common/TabPage'
 import TabPageBody from 'components/common/TabPageBody'
@@ -65,13 +66,19 @@ export default class Log extends React.Component {
   renderMonitorList (monitors) {
     return (
       <div>
-        {monitors.map(m =>
-          <div key={m.uid} className="padding-sm bt-gray">
-            <span className="link" onClick={this.onClickMonitor.bind(this, m)}>
-              {m.name}
-            </span>
-          </div>
-        )}
+        {monitors.map(m => {
+          let time = ''
+          if (m.lastsuccess) {
+            time = moment(m.lastsuccess).fromNow().replace(' ago', '')
+          }
+          return (
+            <div key={m.uid} className="padding-sm bt-gray">
+              <span className="link" onClick={this.onClickMonitor.bind(this, m)}>
+                {m.name}{time ? ` (${time})` : ''}
+              </span>
+            </div>
+          )
+        })}
       </div>
     )
   }
