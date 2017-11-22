@@ -7,7 +7,7 @@ import MenuIcon from 'material-ui/svg-icons/navigation/menu'
 import {badgeStyle, badgeRootStyle, iconStyle, iconButtonStyle, sidebarWidth, sidebarStyle} from 'style/common/materialStyles'
 
 import SearchBarContainer from './parts/SearchBarContainer'
-import MessageBox from './parts/MessageBox'
+// import MessageBox from './parts/MessageBox'
 
 export default class SidebarView extends Component {
   constructor (props) {
@@ -57,8 +57,9 @@ export default class SidebarView extends Component {
   render () {
     const {onToggle, contentType, mainMenu, deviceMenu, onMainMenu,
       device, pageId, pageType, searchVisible, onSearch,
-      sidebarMessageMenuOpen,
-      openSidebarMessageMenu, closeSidebarMessageMenu, user,
+      // sidebarMessageMenuOpen,
+      // openSidebarMessageMenu, closeSidebarMessageMenu,
+      user,
       visibleMenu
     } = this.props
 
