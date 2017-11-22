@@ -4,6 +4,12 @@ import TabPage from 'components/common/TabPage'
 import TabPageBody from 'components/common/TabPageBody'
 
 export default class Log extends React.Component {
+  componentWillMount () {
+    this.props.fetchDevicesGroups()
+  }
+  getLogMonitors () {
+    const {allDevices} = this.props
+  }
   render () {
     return (
       <TabPage>

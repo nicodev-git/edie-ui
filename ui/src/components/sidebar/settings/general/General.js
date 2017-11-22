@@ -173,7 +173,7 @@ export default class General extends React.Component {
   renderContent () {
     return (
       <CardPanel title="General">
-        <div className="form-inline">
+        <div className="form-inline" style={{minHeight: 400}}>
           <div style={rowStyle} className="margin-md-bottom">
             <label className="margin-sm-top margin-sm-bottom width-200">System Name: </label>
             <InlineEdit
@@ -311,24 +311,26 @@ export default class General extends React.Component {
     const selected = value.split(',')
     return (
       <CardPanel title="Menu">
-        <div className="margin-md-bottom">
-          <div className="inline-block width-200">
-            <SelectField
-              value={this.getUserOptionValue('defaultPage', 'main')}
-              onChange={this.onChangeShowPage.bind(this)}
-              floatingLabelText="Default Page">
-              <MenuItem primaryText="Main" value="main"/>
-              <MenuItem primaryText="Dashboard" value="dashboard"/>
-            </SelectField>
+        <div style={{minHeight: 400}}>
+          <div className="margin-md-bottom">
+            <div className="inline-block width-200">
+              <SelectField
+                value={this.getUserOptionValue('defaultPage', 'main')}
+                onChange={this.onChangeShowPage.bind(this)}
+                floatingLabelText="Default Page">
+                <MenuItem primaryText="Main" value="main"/>
+                <MenuItem primaryText="Dashboard" value="dashboard"/>
+              </SelectField>
+            </div>
           </div>
+          {mainMenu.map(p =>
+            <Checkbox
+              key={p.id} label={p.title} checked={p.fixed || selected.includes(p.id)}
+              onCheck={this.onCheckDashboardMenu.bind(this, p.id)}
+              disabled={p.fixed}
+            />
+          )}
         </div>
-        {mainMenu.map(p =>
-          <Checkbox
-            key={p.id} label={p.title} checked={p.fixed || selected.includes(p.id)}
-            onCheck={this.onCheckDashboardMenu.bind(this, p.id)}
-            disabled={p.fixed}
-          />
-        )}
       </CardPanel>
     )
   }
