@@ -192,7 +192,8 @@ export const wizardConfig = {
         title: 'Agent',
         width: 6,
         items: [{
-          type: 'agentpicker'
+          type: 'agentpicker',
+          name: 'agent'
         }]
       }, {
         title: 'Credentials',
@@ -289,7 +290,8 @@ export const wizardConfig = {
         title: 'Agent',
         width: 6,
         items: [{
-          type: 'agentpicker'
+          type: 'agentpicker',
+          name: 'agent'
         }]
       }, {
         title: 'Credentials',
@@ -380,7 +382,8 @@ export const wizardConfig = {
       }, {
         title: 'Agent',
         items: [{
-          type: 'agentpicker'
+          type: 'agentpicker',
+          name: 'agent'
         }]
       }],
     }, {
@@ -487,7 +490,8 @@ export const wizardConfig = {
       }, {
         title: 'Agent',
         items: [{
-          type: 'agentpicker'
+          type: 'agentpicker',
+          name: 'agent'
         }]
       }],
     }, {
@@ -671,6 +675,9 @@ export const wizardEditConfig = {
         },
         width: MAX_WIDTH,
         name: 'info'
+      }, {
+        type: 'agentpicker',
+        name: 'agent'
       }, {
         type: 'removeAfter',
         label: {

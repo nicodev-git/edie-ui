@@ -56,7 +56,7 @@ DeviceEditWizard.defaultProps = {
     width: 6
   }, {
     title: 'Agent',
-    include: [],
+    include: ['agent'],
     width: 6,
   }/*, {
     title: 'Advanced',

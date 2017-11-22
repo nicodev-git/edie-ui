@@ -1,12 +1,12 @@
 import React from 'react'
 import { assign, debounce } from 'lodash'
 import { reduxForm, Form } from 'redux-form'
-import {RaisedButton, IconButton} from 'material-ui'
+import {RaisedButton, IconButton, CircularProgress} from 'material-ui'
 import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
 
 import { wizardEditConfig } from './WizardConfig'
 import { util } from './WizardUtil'
-import {isWindowsDevice} from 'shared/Global'
+import {isWindowsDevice, getAgentStatusMessage} from 'shared/Global'
 import {showAlert} from 'components/common/Alert'
 
 import TextInput from './input/TextInput'
@@ -14,6 +14,7 @@ import Checkbox from './input/Checkbox'
 import IconUploader from './input/IconUploader'
 import Credentials from './input/Credentials'
 import RemoveAfter from './input/RemoveAfter'
+import AgentPicker from './input/AgentPicker'
 
 import ImageUploaderModal from 'components/sidebar/settings/template/ImageUploaderModal'
 import TagsView from './input/TagsView'
@@ -49,7 +50,9 @@ class DeviceEditWizard extends React.Component {
       'check': this.buildCheck.bind(this),
       'row': this.buildRow.bind(this),
       'uploader': this.buildIconUploader.bind(this),
-      'removeafter': this.buildRemoveAfter.bind(this)
+      'removeafter': this.buildRemoveAfter.bind(this),
+      'agentpicker': this.buildAgentPicker.bind(this)
+
     }
 
     this.fnSaveDeb = debounce(this.onRequestSave.bind(this), 2000)
@@ -196,6 +199,47 @@ class DeviceEditWizard extends React.Component {
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+  getDeviceCreds () {
+    const { selectedDevice, credentials } = this.props
+    const type = isWindowsDevice(selectedDevice) ? 'WINDOWS' : 'SSH'
+    return credentials.filter(p =>
+      (!p.global && p.deviceIds && p.deviceIds.indexOf(selectedDevice.id) >= 0) ||
+      (p.global && p.default && p.type === type)
+    )
+  }
+
+  onClickInstall () {
+    const device = this.props.initialValues
+    const {collectors} = this.props
+
+    if (isWindowsDevice(device)) {
+      const exists = collectors.filter(p => p.ostype === 'WINDOWS').length > 0
+      if (!exists) {
+        showAlert('Please add windows collector.');
+        return;
+      }
+    }
+
+    const creds = this.getDeviceCreds()
+    if (!creds.length) {
+      showAlert('Please add credential.', () => {
+        this.onClickAddCred()
+      });
+      return;
+    }
+
+    this.props.installAgent(device)
+  }
+  onClickUninstall () {
+    const device = this.props.initialValues
+    this.props.uninstallAgent(device)
+  }
+  onClickAddCred () {
+    this.props.showDeviceCredsPicker(true)
+  }
+
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
   buildTags () {
     return (
       <TagsView
@@ -318,44 +362,38 @@ class DeviceEditWizard extends React.Component {
     )
   }
 
-  getDeviceCreds () {
-    const { selectedDevice, credentials } = this.props
-    const type = isWindowsDevice(selectedDevice) ? 'WINDOWS' : 'SSH'
-    return credentials.filter(p =>
-      (!p.global && p.deviceIds && p.deviceIds.indexOf(selectedDevice.id) >= 0) ||
-      (p.global && p.default && p.type === type)
+  buildAgentPicker (config, values, meta) {
+    const {selectedDevice, formValues, extraParams, fixResult, fixStatus} = this.props
+
+    let msg = ''
+    if (fixStatus === 'checking' ) {
+      msg = <div style={{color: '#600000'}}>Trying to access server, please wait…<CircularProgress className="valign-top margin-md-left" size={24}/></div>
+    } else if (fixStatus === 'done') {
+      if (!fixResult.code) msg = <div style={{color: '#008000'}}>Connection successful</div>
+      else msg = <div style={{color: '#600000'}}>{getAgentStatusMessage(fixResult.code)}</div>
+    }
+
+    return (
+      <div key="agentPicker">
+        {msg}
+        <AgentPicker
+          {...this.props}
+          values={values}
+          config={config}
+          meta={meta}
+          editDevice={{
+            ...extraParams,
+            ...selectedDevice,
+            ...formValues
+          }}
+          onChange={this.onChangeAgentType.bind(this)}
+        />
+      </div>
     )
   }
 
-  onClickInstall () {
-    const device = this.props.initialValues
-    const {collectors} = this.props
+  ////////////////////////////////////////////////////////////////////////////////////////
 
-    if (isWindowsDevice(device)) {
-      const exists = collectors.filter(p => p.ostype === 'WINDOWS').length > 0
-      if (!exists) {
-        showAlert('Please add windows collector.');
-        return;
-      }
-    }
-
-    const creds = this.getDeviceCreds()
-    if (!creds.length) {
-      showAlert('Please add credential.', () => {
-        this.onClickAddCred()
-      });
-      return;
-    }
-
-    this.props.installAgent(device)
-  }
-  onClickUninstall () {
-    const device = this.props.initialValues
-    this.props.uninstallAgent(device)
-  }
-  onClickAddCred () {
-    this.props.showDeviceCredsPicker(true)
-  }
   renderTplImageModal () {
     if (!this.props.tplImageModalVisible) return null
     return (
