@@ -130,7 +130,7 @@ fabric.ShapeLineItem = fabric.util.createClass(fabric.Line, {
 
   //////////////////////////////////////////////////////////////////////////////////////
 
-  //Overrride
+  //Override
   containsPoint: function(p){
     var me = this;
 
@@ -146,6 +146,9 @@ fabric.ShapeLineItem = fabric.util.createClass(fabric.Line, {
     }
     c.x /= z;
     c.y /= z;
+
+    var selected = me.canvas.map.selectedLine();
+    if (selected == me.line) return false;
 
     return me.dotLineLength(c.x, c.y, me.x1, me.y1, me.x2, me.y2, true) < 5;
   },
