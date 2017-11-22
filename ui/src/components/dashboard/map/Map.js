@@ -522,14 +522,14 @@ class Map extends React.Component {
     }
   }
 
-    // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   onReceiveMapUpdated (msg) {
     const mapId = parseInt(msg.content, 10)
     if (!mapId) return
   }
 
-    // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   moveMapItem (map, params, type) {
     if (!params) return true
@@ -572,7 +572,11 @@ class Map extends React.Component {
         if (!name) { // eslint-disable-line no-undef
           this.props.deleteMapLine(data)
         } else {
-          this.props.deleteMapDevice(data)
+          // this.props.deleteMapDevice(data)
+          this.props.updateMapDevice({
+            ...data,
+            mapid: null
+          })
         }
       }
       cmap.removeMapItem(object, true)
