@@ -1,13 +1,11 @@
 import React from 'react'
 import moment from 'moment'
-import {RaisedButton} from 'material-ui'
 import SortableTree from 'react-sortable-tree'
 import {findIndex} from 'lodash'
 // import FileTheme from 'react-sortable-tree-theme-file-explorer'
 
 import TabPage from 'components/common/TabPage'
 import TabPageBody from 'components/common/TabPageBody'
-import TabPageHeader from 'components/common/TabPageHeader'
 import {getRanges} from 'components/common/DateRangePicker'
 import LogPapers from 'components/dashboard/log/LogPapers'
 import {showPrompt} from 'components/common/Alert'
@@ -263,20 +261,26 @@ export default class Log extends React.Component {
     const {monitorUid} = this.state
     if (!monitorUid) return <div/>
     return (
-      <div className="flex-1 flex-vertical">
-        <LogPapers
-          url="/search/query"
-          ref="table"
-          rowMetadata={{'key': 'id'}}
-          params={this.getParams()}
-          pageSize={500}
-          revertRows
-          onClickView={this.onClickDetailView.bind(this)}
-          onUpdateCount={this.onResultCountUpdate.bind(this)}
-          reversePage
-          noCard
-          noSearch
-        />
+      <LogPapers
+        url="/search/query"
+        ref="table"
+        rowMetadata={{'key': 'id'}}
+        params={this.getParams()}
+        pageSize={500}
+        revertRows
+        onClickView={this.onClickDetailView.bind(this)}
+        onUpdateCount={this.onResultCountUpdate.bind(this)}
+        reversePage
+        noCard
+        noSearch
+      />
+    )
+  }
+
+  renderLogTools () {
+    return (
+      <div className="pull-right">
+
       </div>
     )
   }
@@ -284,26 +288,26 @@ export default class Log extends React.Component {
   render () {
     return (
       <TabPage>
-        <TabPageHeader title="Logs">
-          <div className="text-center margin-md-top">
-            <div className="pull-right">
-              <RaisedButton label="Add" onTouchTap={this.onClickAddFolder.bind(this)}/>&nbsp;
-            </div>
-          </div>
-        </TabPageHeader>
+        <div style={{margin: '16px 20px 0'}}>
+          <span className="tab-title">Logs</span>
+        </div>
 
-        <TabPageBody tabs={[]} history={this.props.history} location={this.props.location}>
+        <TabPageBody tabs={[]} history={this.props.history} location={this.props.location} transparent>
           <div className="flex-horizontal" style={{height: '100%'}}>
-            <div style={{minWidth: 300}}>
-              <div className="header-blue">Log</div>
-              {this.renderFolderTree()}
-            </div>
-            <div>
-              &nbsp;&nbsp;
+            <div className="flex-vertical margin-md-right" style={{minWidth: 300}}>
+              <div>
+                <span>Log</span>
+                {this.renderLogTools()}
+              </div>
+              <div className="flex-1 paper-bg">
+                {this.renderFolderTree()}
+              </div>
             </div>
             <div className="flex-vertical flex-1" style={{overflow: 'auto'}}>
-              <div className="header-red">Content</div>
-              {this.renderLogs()}
+              <div>Content</div>
+              <div className="flex-1 flex-vertical paper-bg">
+                {this.renderLogs()}
+              </div>
             </div>
           </div>
         </TabPageBody>
