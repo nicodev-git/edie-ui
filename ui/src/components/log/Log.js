@@ -109,8 +109,22 @@ export default class Log extends React.Component {
   }
   canDropObject (args) {
     const {nextParent} = args
-    console.log(args)
     return nextParent && !!nextParent.id
+  }
+
+  onMoveNode (args) {
+    const {treeData, node, path, prevPath} = args
+    if (path[0] === prevPath[0] && path[1] === prevPath[1]) return
+
+    let parentIndex = 0
+    let left = path[0]
+    while(left > 0) {
+      left -= 1
+      left -= treeData[parentIndex].children.length
+      parentIndex++
+    }
+
+    console.log(treeData[parentIndex].name)
   }
   ///////////////////////////////////////////////////////////////////////////////////
   renderFolder (p) {
@@ -167,6 +181,7 @@ export default class Log extends React.Component {
         onChange={this.onChangeTreeData.bind(this)}
         canDrag={this.canDragObject.bind(this)}
         canDrop={this.canDropObject.bind(this)}
+        onMoveNode={this.onMoveNode.bind(this)}
         scaffoldBlockPxWidth={20}
         rowHeight={24}
         className="logs"

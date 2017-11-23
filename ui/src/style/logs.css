@@ -36,5 +36,9 @@
 }
 
 .logs .rst__moveHandle {
-    display: none;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    position: absolute;
+    width: 24px;
 }
