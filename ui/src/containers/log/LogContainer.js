@@ -22,7 +22,8 @@ class LogContainer extends React.Component {
 
 export default connect(
   state => ({
-    allDevices: state.devices.deviceAndGroups
+    allDevices: state.devices.deviceAndGroups,
+    monitorGroups: state.settings.monitorGroups
   }), {
     fetchDevicesGroups,
 

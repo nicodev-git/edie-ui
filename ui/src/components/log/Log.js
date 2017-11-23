@@ -42,6 +42,17 @@ export default class Log extends React.Component {
     return monitors
   }
 
+  getFolders () {
+    const {monitorGroups} = this.props
+    const filtered = monitorGroups.filter(p => p.type === 'folder')
+
+    const list = [{
+      id: 'root',
+      name: 'All'
+    }, ...filtered]
+    return list
+  }
+
   onClickMonitor (monitor) {
     this.setState({
       monitorUid: monitor.uid
@@ -76,7 +87,7 @@ export default class Log extends React.Component {
     showPrompt('Folder Name', '', text => {
       if (!text) return
       this.props.addMonitorGroup({
-        name: '',
+        name: text,
         monitorids: [],
         status: 'UNKNOWN',
         userIds: [],
@@ -88,6 +99,17 @@ export default class Log extends React.Component {
 
   ///////////////////////////////////////////////////////////////////////////////////
 
+  renderFolders () {
+    const folders = this.getFolders()
+    return folders.map(p =>
+      <div key={p.id} className="padding-sm bt-gray">
+        <span className="link">
+          <img src="/resources/images/dashboard/folder.png" width="24" alt=""/>
+          {p.name}
+        </span>
+      </div>
+    )
+  }
   renderMonitorList (monitors) {
     return (
       <div>
@@ -98,7 +120,9 @@ export default class Log extends React.Component {
           }
           return (
             <div key={m.uid} className="padding-sm bt-gray">
+
               <span className="link" onClick={this.onClickMonitor.bind(this, m)}>
+                <img src="/resources/images/dashboard/file.png" width="24" alt=""/>
                 {m.name}{time ? ` (${time})` : ''}
               </span>
             </div>
@@ -146,6 +170,7 @@ export default class Log extends React.Component {
           <div className="flex-horizontal" style={{height: '100%'}}>
             <div style={{minWidth: 200}}>
               <div className="header-blue">Log</div>
+              {this.renderFolders()}
               {this.renderMonitorList(monitors)}
             </div>
             <div>
