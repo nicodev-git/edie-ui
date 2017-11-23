@@ -221,7 +221,7 @@ export default class LogPapers extends React.Component {
     return (
       <div className="flex-vertical" style={{height: '100%'}}>
         {this.renderPaging()}
-        <div className="flex-1" style={{overflow: 'auto'}}>
+        <div className="flex-1" style={{overflow: 'auto', whiteSpace: 'normal', wordBreak: 'break-word'}}>
           {table}
         </div>
         {this.state.isLoading && <RefreshOverlay />}

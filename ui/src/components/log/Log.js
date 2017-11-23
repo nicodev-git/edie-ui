@@ -32,6 +32,35 @@ export default class Log extends React.Component {
     this.props.fetchDevicesGroups()
     this.props.fetchMonitorGroups()
   }
+  getTreeData () {
+    let data = this.state.monitorTreeData
+    if (!data) {
+      const folders = this.getFolders()
+      const monitors = this.getLogMonitors()
+
+      data = folders.map(p => {
+        let children = []
+        if (p.id === 'root') {
+          children = monitors.filter(m => folders.filter(f => f.monitorids && f.monitorids.includes(m.uid)).length === 0)
+        } else {
+          children = monitors.filter(m => p.monitorids && p.monitorids.includes(m.uid))
+        }
+
+        return {
+          id: p.id,
+          name: p.name,
+          title: this.renderFolder.bind(this, p),
+          children: children.map(c => ({
+            uid: c.uid,
+            title: this.renderMonitor.bind(this, c)
+          }))
+        }
+      })
+    }
+
+    return data
+  }
+
   getLogMonitors () {
     const {allDevices} = this.props
     const monitors = []
@@ -115,13 +144,12 @@ export default class Log extends React.Component {
         name: text
       })
 
-      const {monitorTreeData} = this.state
       this.setState({
-        monitorTreeData: monitorTreeData.map(p => {
+        monitorTreeData: this.getTreeData().map(p => {
           if (p.id === selectedFolder) {
             const folder = {
               ...p,
-              name: p.name
+              name: text
             }
             folder.title = this.renderFolder.bind(this, folder)
             return folder
@@ -221,34 +249,9 @@ export default class Log extends React.Component {
   }
 
   renderFolderTree () {
-    let data = this.state.monitorTreeData
-    if (!data) {
-      const folders = this.getFolders()
-      const monitors = this.getLogMonitors()
-
-      data = folders.map(p => {
-        let children = []
-        if (p.id === 'root') {
-          children = monitors.filter(m => folders.filter(f => f.monitorids && f.monitorids.includes(m.uid)).length === 0)
-        } else {
-          children = monitors.filter(m => p.monitorids && p.monitorids.includes(m.uid))
-        }
-
-        return {
-          id: p.id,
-          name: p.name,
-          title: this.renderFolder.bind(this, p),
-          children: children.map(c => ({
-            uid: c.uid,
-            title: this.renderMonitor.bind(this, c)
-          }))
-        }
-      })
-    }
-
     return (
       <SortableTree
-        treeData={data}
+        treeData={this.getTreeData()}
         onChange={this.onChangeTreeData.bind(this)}
         canDrag={this.canDragObject.bind(this)}
         canDrop={this.canDropObject.bind(this)}
@@ -339,7 +342,7 @@ export default class Log extends React.Component {
 
         <TabPageBody tabs={[]} history={this.props.history} location={this.props.location} transparent>
           <div className="flex-horizontal" style={{height: '100%'}}>
-            <div className="flex-vertical margin-md-right" style={{minWidth: 300}}>
+            <div className="flex-vertical" style={{minWidth: 300, marginRight: 5}}>
               <div className="header-blue relative margin-xs-right">
                 Log
                 {this.renderLogTools()}
