@@ -24,7 +24,8 @@ export default class Log extends React.Component {
     super(props)
     this.state = {
       monitorUid: '',
-      monitorTreeData: null
+      monitorTreeData: null,
+      selectedFolder: null
     }
   }
   componentWillMount () {
@@ -102,6 +103,35 @@ export default class Log extends React.Component {
   }
 
   onClickEditFolder () {
+    const {selectedFolder} = this.state
+    if (!selectedFolder) return
+    const {monitorGroups} = this.props
+    const index = findIndex(monitorGroups, {id: selectedFolder})
+    if (index < 0) return
+    showPrompt('Folder Name', monitorGroups[index].name, text => {
+      if (!text) return
+      this.props.updateMonitorGroup({
+        ...monitorGroups[index],
+        name: text
+      })
+
+      const {monitorTreeData} = this.state
+      this.setState({
+        monitorTreeData: monitorTreeData.map(p => {
+          if (p.id === selectedFolder) {
+            const folder = {
+              ...p,
+              name: p.name
+            }
+            folder.title = this.renderFolder.bind(this, folder)
+            return folder
+          } else {
+            return p
+          }
+        })
+      })
+    })
+
 
   }
 
@@ -158,11 +188,19 @@ export default class Log extends React.Component {
       })
     }
   }
+
+  onClickFolder (folder) {
+    this.setState({
+      selectedFolder: folder.id
+    })
+  }
   ///////////////////////////////////////////////////////////////////////////////////
   renderFolder (p) {
+    const {selectedFolder} = this.state
+    const selected = selectedFolder && selectedFolder === p.id
     return (
-      <span className="link">
-            <img src="/resources/images/dashboard/folder.png" width="20" alt="" className="valign-middle"/>
+      <span className={`link ${selected ? 'text-danger' : ''}`} onClick={this.onClickFolder.bind(this, p)}>
+        <img src="/resources/images/dashboard/folder.png" width="20" alt="" className="valign-middle"/>
         &nbsp;{p.name}
       </span>
     )
