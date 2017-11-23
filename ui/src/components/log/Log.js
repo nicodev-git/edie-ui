@@ -103,6 +103,15 @@ export default class Log extends React.Component {
   onChangeTreeData (monitorTreeData) {
     this.setState({monitorTreeData})
   }
+
+  canDragObject ({node}) {
+    return !!node.uid
+  }
+  canDropObject (args) {
+    const {nextParent} = args
+    console.log(args)
+    return nextParent && !!nextParent.id
+  }
   ///////////////////////////////////////////////////////////////////////////////////
   renderFolder (p) {
     return (
@@ -156,7 +165,8 @@ export default class Log extends React.Component {
       <SortableTree
         treeData={data}
         onChange={this.onChangeTreeData.bind(this)}
-        canDrag
+        canDrag={this.canDragObject.bind(this)}
+        canDrop={this.canDropObject.bind(this)}
         scaffoldBlockPxWidth={20}
       />
     )
