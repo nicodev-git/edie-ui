@@ -150,7 +150,7 @@ export default class LogPapers extends React.Component {
   handlePageClick (page) {
     const {maxPages} = this.state
     if (this.props.reversePage) {
-      this.getExternalData(maxPages - page.selected - 1)
+      this.getExternalData(maxPages - page.selected)
     } else {
       this.getExternalData(page.selected + 1)
     }
@@ -190,7 +190,8 @@ export default class LogPapers extends React.Component {
   }
 
   renderPaging () {
-    const {maxPages, currentPage, reversePage} = this.state
+    const {maxPages, currentPage} = this.state
+    const {reversePage} = this.props
     return (
       <ReactPaginate
         previousLabel={"Prev"}
