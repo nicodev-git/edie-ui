@@ -3,7 +3,8 @@ export const chipStyles = {
     margin: 4
   },
   smallChip: {
-    maxHeight: 22
+    maxHeight: 22,
+    margin: 2
   },
   label: {
     fontSize: '12px'

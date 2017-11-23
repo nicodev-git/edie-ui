@@ -28,16 +28,21 @@ export default class GWorkflows extends React.Component {
       'displayName': 'Details',
       'columnName': 'isglobal',
       'customComponent': p => {
-        const {severity} = p.rowData
+        let {severity, tags} = p.rowData
+        tags = tags || []
         return (
-          <div>
-            {p.data ? <Chip>Global</Chip> : ''}
-            <Chip
-              style={chipStyles.smallChip}
-              labelStyle={chipStyles.smallLabel}
-              backgroundColor="rgb(234, 166, 11)">
+          <div style={chipStyles.wrapper}>
+            {p.data ? <Chip style={chipStyles.smallChip} labelStyle={chipStyles.smallLabel}>Global</Chip> : ''}
+
+            <Chip style={chipStyles.smallChip} labelStyle={chipStyles.smallLabel} backgroundColor="rgb(234, 166, 11)">
               {severity}
             </Chip>
+
+            {tags.map(t =>
+              <Chip key={t} style={chipStyles.smallChip} labelStyle={chipStyles.smallLabel}>
+                {t}
+              </Chip>
+            )}
           </div>
         )
       }
