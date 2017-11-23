@@ -29,6 +29,7 @@ import './incidents.css'
 import './device.css'
 import './chat.css'
 import './threatmap.css'
+import './logs.css'
 
 import './common/antd.css'
 import './common/cybertron.css'

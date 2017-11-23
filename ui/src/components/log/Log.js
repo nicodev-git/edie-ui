@@ -168,6 +168,7 @@ export default class Log extends React.Component {
         canDrag={this.canDragObject.bind(this)}
         canDrop={this.canDropObject.bind(this)}
         scaffoldBlockPxWidth={20}
+        className="logs"
       />
     )
   }
