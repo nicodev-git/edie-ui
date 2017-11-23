@@ -1,5 +1,6 @@
 import React from 'react'
 import {findIndex} from 'lodash'
+import {Chip} from 'material-ui'
 
 import FlipView from './FlipView'
 import GEditView from './GEditView'
@@ -7,7 +8,7 @@ import GEditView from './GEditView'
 import {showAlert} from 'components/common/Alert'
 import InfiniteTable from 'components/common/InfiniteTable'
 
-import {gaugeTitleStyle1} from 'style/common/materialStyles'
+import {gaugeTitleStyle1, chipStyles} from 'style/common/materialStyles'
 
 export default class GWorkflows extends React.Component {
   constructor (props) {
@@ -21,21 +22,36 @@ export default class GWorkflows extends React.Component {
       'displayName': 'Name',
       'columnName': 'name'
     }, {
-      'displayName': 'Category',
-      'columnName': 'category'
-    }, {
-      'displayName': 'Severity',
-      'columnName': 'severity'
-    }, {
       'displayName': 'Description',
       'columnName': 'desc'
     }, {
-      'displayName': 'Global',
+      'displayName': 'Details',
       'columnName': 'isglobal',
       'customComponent': p => {
-        return <span>{p.data ? 'YES' : 'NO'}</span>
+        const {severity} = p.rowData
+        return (
+          <div>
+            {p.data ? <Chip>Global</Chip> : ''}
+            <Chip
+              style={chipStyles.smallChip}
+              labelStyle={chipStyles.smallLabel}
+              backgroundColor="rgb(234, 166, 11)">
+              {severity}
+            </Chip>
+          </div>
+        )
       }
     }]
+  }
+  getDeviceId () {
+    return this.props.gauge.deviceId
+  }
+
+  getDevice () {
+    const {devices} = this.props
+    const index = findIndex(devices, {id: this.getDeviceId()})
+    if (index < 0) return null
+    return devices[index]
   }
 
   //////////////////////////////////////////////////////////////////////////////////////////
@@ -70,7 +86,7 @@ export default class GWorkflows extends React.Component {
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   renderFrontView () {
-    const { device } = this.props
+    const device  = this.getDevice()
     return (
       <div className="flex-vertical flex-1">
         <InfiniteTable
@@ -79,6 +95,7 @@ export default class GWorkflows extends React.Component {
           ref="table"
           rowMetadata={{'key': 'id'}}
           selectable
+          tableClassName="table1"
 
           url="/workflow/search/findById"
           params={{
