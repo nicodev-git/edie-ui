@@ -2,6 +2,7 @@ import React from 'react'
 import moment from 'moment'
 import {RaisedButton} from 'material-ui'
 import SortableTree from 'react-sortable-tree'
+import {findIndex} from 'lodash'
 // import FileTheme from 'react-sortable-tree-theme-file-explorer'
 
 import TabPage from 'components/common/TabPage'
@@ -124,7 +125,34 @@ export default class Log extends React.Component {
       parentIndex++
     }
 
-    console.log(treeData[parentIndex].name)
+    ///////////////////////////////////////////
+
+    const groupId = treeData[parentIndex].id
+    const monitorUid = node.uid
+    if (!groupId || !monitorUid) return
+
+    const folders = this.getFolders()
+    //Remove
+    const found = folders.filter(p => p.monitorids && p.monitorids.includes(monitorUid))
+    if (found.length) {
+      console.log(`Remove from: ${found[0].name}`)
+      this.props.updateMonitorGroup({
+        ...found[0],
+        monitorids: found[0].monitorids.map(p => p !== monitorUid)
+      })
+    }
+
+    //Add
+    const index = findIndex(folders, {id: groupId})
+    if (index >= 0) {
+      const group = folders[index]
+      if (group.id === 'root') return
+      console.log(`Append to: ${group.name}`)
+      this.props.updateMonitorGroup({
+        ...group,
+        monitorids: [...(group.monitorids || []), monitorUid]
+      })
+    }
   }
   ///////////////////////////////////////////////////////////////////////////////////
   renderFolder (p) {
@@ -166,6 +194,7 @@ export default class Log extends React.Component {
 
         return {
           id: p.id,
+          name: p.name,
           title: this.renderFolder.bind(this, p),
           children: children.map(c => ({
             uid: c.uid,
@@ -246,6 +275,7 @@ export default class Log extends React.Component {
           onUpdateCount={this.onResultCountUpdate.bind(this)}
           reversePage
           noCard
+          noSearch
         />
       </div>
     )
@@ -258,7 +288,6 @@ export default class Log extends React.Component {
           <div className="text-center margin-md-top">
             <div className="pull-right">
               <RaisedButton label="Add" onTouchTap={this.onClickAddFolder.bind(this)}/>&nbsp;
-              <RaisedButton label="Edit"/>&nbsp;
             </div>
           </div>
         </TabPageHeader>

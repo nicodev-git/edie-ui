@@ -81,7 +81,7 @@ export default class LogPapers extends React.Component {
   }
 
   getExternalData (page) {
-    const {url, params, pageSize, onUpdateCount, handleRecord} = this.props
+    const {url, params, pageSize, onUpdateCount, handleRecord, noSearch} = this.props
     if (!url) return
     page = page || 1
     let urlParams = assign({
@@ -103,7 +103,7 @@ export default class LogPapers extends React.Component {
 
       data = data.map(d => ({
         ...d,
-        entity: this.getHighlighted(d.entity, d.highlights)
+        entity: noSearch ? d.entity: this.getHighlighted(d.entity, d.highlights)
       }))
       if (handleRecord) {
         data = data.map(d => handleRecord(d))
@@ -159,7 +159,7 @@ export default class LogPapers extends React.Component {
     this.props.onClickView(row, index, this.state.currentPage, this.props.pageSize)
   }
   renderTable () {
-    const {pageSize, noCard} = this.props
+    const {pageSize, noCard, noSearch} = this.props
 
     const results = this.getCurrentData()
 
@@ -175,9 +175,9 @@ export default class LogPapers extends React.Component {
       const items = list.map((row, index) =>
         <div key={row.id} className="padding-xs row-hover">
           <span dangerouslySetInnerHTML={{__html: row.entity && row.entity.dataobj ? row.entity.dataobj.line : ' '}}/>
-          <div className="link text-primary margin-md-left" onClick={this.onClickView.bind(this, row, index)}>
+          {!noSearch && <div className="link text-primary margin-md-left" onClick={this.onClickView.bind(this, row, index)}>
             View
-          </div>
+          </div>}
         </div>
       )
       return (
@@ -257,5 +257,7 @@ LogPapers.defaultProps = {
   reversePage: false,
 
   onUpdateCount: null,
-  handleRecord: null
+  handleRecord: null,
+
+  hideHeader: false
 }
