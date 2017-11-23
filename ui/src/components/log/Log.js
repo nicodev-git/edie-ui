@@ -101,14 +101,31 @@ export default class Log extends React.Component {
 
   renderFolders () {
     const folders = this.getFolders()
-    return folders.map(p =>
-      <div key={p.id} className="padding-sm bt-gray">
-        <span className="link">
-          <img src="/resources/images/dashboard/folder.png" width="24" alt=""/>
-          {p.name}
-        </span>
-      </div>
-    )
+
+    const monitors = this.getLogMonitors()
+    return folders.map(p =>{
+      const items = []
+      items.push(
+
+      )
+
+      let files = []
+      if (p.id === 'root') {
+        files = monitors.filter(m => folders.filter(f => f.monitorids.includes(m.uid)) === 0)
+      } else {
+        files = monitors.filter(m => p.monitorids.includes(m.uid))
+      }
+
+      return [
+        <div key={p.id} className="padding-sm bt-gray">
+          <span className="link">
+            <img src="/resources/images/dashboard/folder.png" width="16" alt="" className="valign-middle"/>
+            {p.name}
+          </span>
+        </div>,
+        ...this.renderMonitorList(files)
+      ]
+    })
   }
   renderMonitorList (monitors) {
     return (
@@ -122,7 +139,8 @@ export default class Log extends React.Component {
             <div key={m.uid} className="padding-sm bt-gray">
 
               <span className="link" onClick={this.onClickMonitor.bind(this, m)}>
-                <img src="/resources/images/dashboard/file.png" width="24" alt=""/>
+                <img src="/resources/images/dashboard/file.png" width="16" alt=""
+                     className="valign-middle margin-md-left"/>
                 {m.name}{time ? ` (${time})` : ''}
               </span>
             </div>
@@ -154,7 +172,6 @@ export default class Log extends React.Component {
   }
 
   render () {
-    const monitors = this.getLogMonitors()
     return (
       <TabPage>
         <TabPageHeader title="Logs">
@@ -171,7 +188,6 @@ export default class Log extends React.Component {
             <div style={{minWidth: 200}}>
               <div className="header-blue">Log</div>
               {this.renderFolders()}
-              {this.renderMonitorList(monitors)}
             </div>
             <div>
               &nbsp;&nbsp;
