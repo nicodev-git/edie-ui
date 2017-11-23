@@ -1,6 +1,7 @@
 import React from 'react'
 import moment from 'moment'
 import {RaisedButton} from 'material-ui'
+import SortableTree from 'react-sortable-tree'
 
 import TabPage from 'components/common/TabPage'
 import TabPageBody from 'components/common/TabPageBody'
@@ -20,7 +21,8 @@ export default class Log extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      monitorUid: ''
+      monitorUid: '',
+      monitorTreeData: null
     }
   }
   componentWillMount () {
@@ -97,58 +99,108 @@ export default class Log extends React.Component {
     })
   }
 
-  ///////////////////////////////////////////////////////////////////////////////////
-
-  renderFolders () {
-    const folders = this.getFolders()
-
-    const monitors = this.getLogMonitors()
-    return folders.map(p =>{
-      const items = []
-      items.push(
-
-      )
-
-      let files = []
-      if (p.id === 'root') {
-        files = monitors.filter(m => folders.filter(f => f.monitorids.includes(m.uid)) === 0)
-      } else {
-        files = monitors.filter(m => p.monitorids.includes(m.uid))
-      }
-
-      return [
-        <div key={p.id} className="padding-sm bt-gray">
-          <span className="link">
-            <img src="/resources/images/dashboard/folder.png" width="16" alt="" className="valign-middle"/>
-            {p.name}
-          </span>
-        </div>,
-        ...this.renderMonitorList(files)
-      ]
-    })
+  onChangeTreeData (monitorTreeData) {
+    this.setState({monitorTreeData})
   }
-  renderMonitorList (monitors) {
+  ///////////////////////////////////////////////////////////////////////////////////
+  renderFolder (p) {
     return (
-      <div>
-        {monitors.map(m => {
-          let time = ''
-          if (m.lastsuccess) {
-            time = moment(m.lastsuccess).fromNow().replace(' ago', '')
-          }
-          return (
-            <div key={m.uid} className="padding-sm bt-gray">
-
-              <span className="link" onClick={this.onClickMonitor.bind(this, m)}>
-                <img src="/resources/images/dashboard/file.png" width="16" alt=""
-                     className="valign-middle margin-md-left"/>
-                {m.name}{time ? ` (${time})` : ''}
-              </span>
-            </div>
-          )
-        })}
-      </div>
+      <span className="link">
+            <img src="/resources/images/dashboard/folder.png" width="16" alt="" className="valign-middle"/>
+        &nbsp;{p.name}
+      </span>
     )
   }
+  renderMonitor(m) {
+    let time = ''
+    if (m.lastsuccess) {
+      time = moment(m.lastsuccess).fromNow().replace(' ago', '')
+    }
+
+    return (
+      <span className="link" onClick={this.onClickMonitor.bind(this, m)}>
+            <img src="/resources/images/dashboard/file.png" width="16" alt=""
+                 className="valign-middle margin-sm-left"/>
+        &nbsp;{m.name}{time ? ` (${time})` : ''}
+      </span>
+    )
+  }
+
+  renderFolderTree () {
+    let data = this.state.monitorTreeData
+    if (!data) {
+      const folders = this.getFolders()
+      const monitors = this.getLogMonitors()
+
+      data = folders.map(p => {
+        let children = []
+        if (p.id === 'root') {
+          children = monitors.filter(m => folders.filter(f => f.monitorids && f.monitorids.includes(m.uid)).length === 0)
+        } else {
+          children = monitors.filter(m => p.monitorids && p.monitorids.includes(m.uid))
+        }
+
+        return {
+          id: p.id,
+          title: this.renderFolder.bind(this, p),
+          children: children.map(c => ({
+            uid: c.uid,
+            title: this.renderMonitor.bind(this, c)
+          }))
+        }
+      })
+    }
+
+    return (
+      <SortableTree
+        treeData={data}
+        onChange={this.onChangeTreeData.bind(this)}
+        canDrag={false}
+        rowHeight={45}
+      />
+    )
+  }
+
+  // renderFolders () {
+  //   const folders = this.getFolders()
+  //
+  //   const monitors = this.getLogMonitors()
+  //   return folders.map(p =>{
+  //     let files = []
+  //     if (p.id === 'root') {
+  //       files = monitors.filter(m => folders.filter(f => f.monitorids && f.monitorids.includes(m.uid)).length === 0)
+  //     } else {
+  //       files = monitors.filter(m => p.monitorids && p.monitorids.includes(m.uid))
+  //     }
+  //
+  //     return [
+  //       <div key={p.id} className="padding-sm bt-gray">
+  //         <span className="link">
+  //           <img src="/resources/images/dashboard/folder.png" width="16" alt="" className="valign-middle"/>
+  //           &nbsp;{p.name}
+  //         </span>
+  //       </div>,
+  //       ...this.renderMonitorList(files)
+  //     ]
+  //   })
+  // }
+  // renderMonitorList (monitors) {
+  //   return monitors.map(m => {
+  //     let time = ''
+  //     if (m.lastsuccess) {
+  //       time = moment(m.lastsuccess).fromNow().replace(' ago', '')
+  //     }
+  //     return (
+  //       <div key={m.uid} className="padding-sm bt-gray">
+  //         <span className="link" onClick={this.onClickMonitor.bind(this, m)}>
+  //           <img src="/resources/images/dashboard/file.png" width="16" alt=""
+  //                className="valign-middle margin-sm-left"/>
+  //           &nbsp;{m.name}{time ? ` (${time})` : ''}
+  //         </span>
+  //       </div>
+  //     )
+  //   })
+  // }
 
   renderLogs () {
     const {monitorUid} = this.state
@@ -185,9 +237,9 @@ export default class Log extends React.Component {
 
         <TabPageBody tabs={[]} history={this.props.history} location={this.props.location}>
           <div className="flex-horizontal" style={{height: '100%'}}>
-            <div style={{minWidth: 200}}>
+            <div style={{minWidth: 300}}>
               <div className="header-blue">Log</div>
-              {this.renderFolders()}
+              {this.renderFolderTree()}
             </div>
             <div>
               &nbsp;&nbsp;
