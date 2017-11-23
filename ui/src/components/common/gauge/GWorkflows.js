@@ -8,7 +8,7 @@ import GEditView from './GEditView'
 import {showAlert} from 'components/common/Alert'
 import InfiniteTable from 'components/common/InfiniteTable'
 
-import {gaugeTitleStyle1, chipStyles} from 'style/common/materialStyles'
+import {chipStyles} from 'style/common/materialStyles'
 
 export default class GWorkflows extends React.Component {
   constructor (props) {
@@ -82,11 +82,12 @@ export default class GWorkflows extends React.Component {
   }
 
   getTitle () {
-    const {gauge} = this.props
-    const devices = this.props.allDevices || this.props.devices
-    const index = findIndex(devices, {id: gauge.deviceId})
-    if (index < 0) return gauge.name
-    return `[${devices[index].name}] ${gauge.name}`
+    return '[Workflows]'
+    // const {gauge} = this.props
+    // const devices = this.props.allDevices || this.props.devices
+    // const index = findIndex(devices, {id: gauge.deviceId})
+    // if (index < 0) return gauge.name
+    // return `[${devices[index].name}] ${gauge.name}`
   }
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -129,7 +130,6 @@ export default class GWorkflows extends React.Component {
       <FlipView
         {...this.props}
 
-        titleStyle={gaugeTitleStyle1}
         style={this.props.style}
         className={this.props.className}
         gauge={this.props.gauge}

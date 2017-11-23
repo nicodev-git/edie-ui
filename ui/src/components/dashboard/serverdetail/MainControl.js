@@ -56,21 +56,28 @@ export default class MainControl extends React.Component {
     const device = this.getDevice()
     const gauges = []
 
-    const tpls = ['Device Info', 'Device Basic', 'DeviceIO', 'Workflows', 'Command']
-
     const w = 5 * layoutWidthZoom
     const h = 2.5 * layoutHeightZoom
+
+    const tpls = [
+      ['Device Info', {x: 0, y: 0}],
+      ['Device Basic', {x: w, y: 0}],
+      ['DeviceIO', {x: 0, y: h}],
+      ['Command', {x: w, y: h}],
+      ['Workflows', {x: 0, y: h * 2, w: w * 2}]]
+
+
     tpls.forEach((tpl, i) => {
       gauges.push({
         id: `basic${i}`,
         name: '',
-        templateName: tpl,
+        templateName: tpl[0],
         gaugeSize: 'custom',
         deviceId: device.id,
         layout: {
           i: `basic${i}`,
-          x: (i % 2) * w, y: parseInt(i / 2, 10) * h,
-          w, h
+          x: tpl[1].x, y: tpl[1].y,
+          w: tpl[1].w || w, h
         }
       })
     })
