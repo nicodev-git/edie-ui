@@ -148,7 +148,12 @@ export default class LogPapers extends React.Component {
     return entity && entity.dataobj ? entity.dataobj.file : ''
   }
   handlePageClick (page) {
-    this.getExternalData(page.selected + 1)
+    const {maxPages} = this.state
+    if (this.props.reversePage) {
+      this.getExternalData(page.selected + 1)
+    } else {
+      this.getExternalData(page.selected + 1)
+    }
   }
   onClickView (row, index) {
     this.props.onClickView(row, index, this.state.currentPage, this.props.pageSize)
@@ -185,7 +190,7 @@ export default class LogPapers extends React.Component {
   }
 
   renderPaging () {
-    const {maxPages, currentPage} = this.state
+    const {maxPages, currentPage, reversePage} = this.state
     return (
       <ReactPaginate
         previousLabel={"Prev"}
@@ -193,7 +198,7 @@ export default class LogPapers extends React.Component {
         breakLabel={<a>...</a>}
         breakClassName={"break-me"}
         pageCount={maxPages}
-        forcePage={currentPage}
+        forcePage={reversePage ? (maxPages - 1) : currentPage}
         marginPagesDisplayed={2}
         pageRangeDisplayed={5}
         onPageChange={this.handlePageClick.bind(this)}
@@ -241,6 +246,7 @@ LogPapers.defaultProps = {
 
   pageSize: 20,
   revertRows: false,
+  reversePage: false,
 
   onUpdateCount: null,
   handleRecord: null,
