@@ -92,6 +92,7 @@ export default class GWorkflows extends React.Component {
 
   renderFrontView () {
     const device  = this.getDevice()
+    if (!device) return null
     return (
       <div className="flex-vertical flex-1">
         <InfiniteTable

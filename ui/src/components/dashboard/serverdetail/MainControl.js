@@ -56,7 +56,7 @@ export default class MainControl extends React.Component {
     const device = this.getDevice()
     const gauges = []
 
-    const tpls = ['Device Info', 'Device Basic', 'DeviceIO', 'Workflows']
+    const tpls = ['Device Info', 'Device Basic', 'DeviceIO', 'Workflows', 'Command']
 
     const w = 5 * layoutWidthZoom
     const h = 2.5 * layoutHeightZoom
