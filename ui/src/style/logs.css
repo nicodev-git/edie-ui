@@ -23,3 +23,18 @@
 .logs .rst__expandButton:hover {
     background-size: initial;
 }
+
+.logs .rst__rowContents {
+    border: none;
+    box-shadow: none;
+    -webkit-box-shadow: none;
+    padding: 0;
+}
+
+.logs .rst__rowWrapper {
+    padding: 0;
+}
+
+.logs .rst__moveHandle {
+    display: none;
+}

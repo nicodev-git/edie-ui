@@ -116,7 +116,7 @@ export default class Log extends React.Component {
   renderFolder (p) {
     return (
       <span className="link">
-            <img src="/resources/images/dashboard/folder.png" width="16" alt="" className="valign-middle"/>
+            <img src="/resources/images/dashboard/folder.png" width="20" alt="" className="valign-middle"/>
         &nbsp;{p.name}
       </span>
     )
@@ -129,8 +129,8 @@ export default class Log extends React.Component {
 
     return (
       <span className="link" onClick={this.onClickMonitor.bind(this, m)}>
-            <img src="/resources/images/dashboard/file.png" width="16" alt=""
-                 className="valign-middle margin-sm-left"/>
+            <img src="/resources/images/dashboard/file.png" width="20" alt=""
+                 className="valign-middle"/>
         &nbsp;{m.name}{time ? ` (${time})` : ''}
       </span>
     )
@@ -168,6 +168,7 @@ export default class Log extends React.Component {
         canDrag={this.canDragObject.bind(this)}
         canDrop={this.canDropObject.bind(this)}
         scaffoldBlockPxWidth={20}
+        rowHeight={24}
         className="logs"
       />
     )
@@ -228,8 +229,8 @@ export default class Log extends React.Component {
           revertRows
           onClickView={this.onClickDetailView.bind(this)}
           onUpdateCount={this.onResultCountUpdate.bind(this)}
-          hideHeader
           reversePage
+          noCard
         />
       </div>
     )
@@ -256,7 +257,7 @@ export default class Log extends React.Component {
             <div>
               &nbsp;&nbsp;
             </div>
-            <div className="flex-vertical flex-1">
+            <div className="flex-vertical flex-1" style={{overflow: 'auto'}}>
               <div className="header-red">Content</div>
               {this.renderLogs()}
             </div>

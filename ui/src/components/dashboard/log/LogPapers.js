@@ -159,7 +159,7 @@ export default class LogPapers extends React.Component {
     this.props.onClickView(row, index, this.state.currentPage, this.props.pageSize)
   }
   renderTable () {
-    const {pageSize, hideHeader} = this.props
+    const {pageSize, noCard} = this.props
 
     const results = this.getCurrentData()
 
@@ -171,19 +171,26 @@ export default class LogPapers extends React.Component {
         timeFrom = moment(list[0].entity.timestamp).format(dateFormat)
         timeTo = moment(list[list.length - 1].entity.timestamp).format(dateFormat)
       }
+
+      const items = list.map((row, index) =>
+        <div key={row.id} className="padding-xs row-hover">
+          <span dangerouslySetInnerHTML={{__html: row.entity && row.entity.dataobj ? row.entity.dataobj.line : ' '}}/>
+          <div className="link text-primary margin-md-left" onClick={this.onClickView.bind(this, row, index)}>
+            View
+          </div>
+        </div>
+      )
       return (
         <div key={i} className="padding-sm margin-md-bottom">
-          <Paper zDepth={paperZDepth}>
-            {!hideHeader && <div className="header-red">{title} : {timeFrom} ~ {timeTo}</div>}
-            {list.map((row, index) =>
-              <div key={row.id} className="padding-xs row-hover">
-                <span dangerouslySetInnerHTML={{__html: row.entity && row.entity.dataobj ? row.entity.dataobj.line : ' '}}/>
-                <div className="link text-primary margin-md-left" onClick={this.onClickView.bind(this, row, index)}>
-                  View
-                </div>
-              </div>
-            )}
-          </Paper>
+          {noCard ? (
+            items
+          ) : (
+            <Paper zDepth={paperZDepth}>
+              <div className="header-red">{title} : {timeFrom} ~ {timeTo}</div>
+              {items}
+            </Paper>
+          )}
+
         </div>
       )
     })
@@ -250,7 +257,5 @@ LogPapers.defaultProps = {
   reversePage: false,
 
   onUpdateCount: null,
-  handleRecord: null,
-
-  hideHeader: false
+  handleRecord: null
 }
