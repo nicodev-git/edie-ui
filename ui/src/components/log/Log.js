@@ -111,6 +111,7 @@ export default class Log extends React.Component {
           onClickView={this.onClickDetailView.bind(this)}
           onUpdateCount={this.onResultCountUpdate.bind(this)}
           hideHeader
+          reversePage
         />
       </div>
     )

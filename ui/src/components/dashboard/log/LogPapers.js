@@ -150,7 +150,7 @@ export default class LogPapers extends React.Component {
   handlePageClick (page) {
     const {maxPages} = this.state
     if (this.props.reversePage) {
-      this.getExternalData(page.selected + 1)
+      this.getExternalData(maxPages - page.selected - 1)
     } else {
       this.getExternalData(page.selected + 1)
     }
