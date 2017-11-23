@@ -7,6 +7,7 @@ import TabPageBody from 'components/common/TabPageBody'
 import TabPageHeader from 'components/common/TabPageHeader'
 import {getRanges} from 'components/common/DateRangePicker'
 import LogPapers from 'components/dashboard/log/LogPapers'
+import {showPrompt} from 'components/common/Alert'
 
 const ranges = getRanges()
 const from = ranges['Ever'][0].valueOf()
@@ -24,6 +25,7 @@ export default class Log extends React.Component {
   }
   componentWillMount () {
     this.props.fetchDevicesGroups()
+    this.props.fetchMonitorGroups()
   }
   getLogMonitors () {
     const {allDevices} = this.props
@@ -71,7 +73,17 @@ export default class Log extends React.Component {
   ///////////////////////////////////////////////////////////////////////////////////
 
   onClickAddFolder () {
-
+    showPrompt('Folder Name', '', text => {
+      if (!text) return
+      this.props.addMonitorGroup({
+        name: '',
+        monitorids: [],
+        status: 'UNKNOWN',
+        userIds: [],
+        tags: [],
+        type: 'folder'
+      })
+    })
   }
 
   ///////////////////////////////////////////////////////////////////////////////////
