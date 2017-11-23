@@ -428,5 +428,9 @@ input:-webkit-autofill {
     border-radius: 2px;
     z-index: 1;
     padding-bottom: 0px;
-    margin: 0 2px 2px 0;
+    margin: 0 3px 2px 0;
+}
+
+.relative {
+    position: relative;
 }

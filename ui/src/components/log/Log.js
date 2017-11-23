@@ -3,6 +3,7 @@ import moment from 'moment'
 import SortableTree from 'react-sortable-tree'
 import {findIndex} from 'lodash'
 // import FileTheme from 'react-sortable-tree-theme-file-explorer'
+import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
 
 import TabPage from 'components/common/TabPage'
 import TabPageBody from 'components/common/TabPageBody'
@@ -279,8 +280,8 @@ export default class Log extends React.Component {
 
   renderLogTools () {
     return (
-      <div className="pull-right">
-
+      <div style={{position: 'absolute', right: 5, top: 8}}>
+        <AddCircleIcon className="link"/>
       </div>
     )
   }
@@ -295,8 +296,8 @@ export default class Log extends React.Component {
         <TabPageBody tabs={[]} history={this.props.history} location={this.props.location} transparent>
           <div className="flex-horizontal" style={{height: '100%'}}>
             <div className="flex-vertical margin-md-right" style={{minWidth: 300}}>
-              <div>
-                <span>Log</span>
+              <div className="header-blue relative margin-xs-right">
+                Log
                 {this.renderLogTools()}
               </div>
               <div className="flex-1 paper-bg">
@@ -304,7 +305,7 @@ export default class Log extends React.Component {
               </div>
             </div>
             <div className="flex-vertical flex-1" style={{overflow: 'auto'}}>
-              <div>Content</div>
+              <div className="header-red margin-xs-right">Content</div>
               <div className="flex-1 flex-vertical paper-bg">
                 {this.renderLogs()}
               </div>
