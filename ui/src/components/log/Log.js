@@ -2,6 +2,7 @@ import React from 'react'
 import moment from 'moment'
 import {RaisedButton} from 'material-ui'
 import SortableTree from 'react-sortable-tree'
+// import FileTheme from 'react-sortable-tree-theme-file-explorer'
 
 import TabPage from 'components/common/TabPage'
 import TabPageBody from 'components/common/TabPageBody'
@@ -155,8 +156,8 @@ export default class Log extends React.Component {
       <SortableTree
         treeData={data}
         onChange={this.onChangeTreeData.bind(this)}
-        canDrag={false}
-        rowHeight={45}
+        canDrag
+        scaffoldBlockPxWidth={20}
       />
     )
   }
