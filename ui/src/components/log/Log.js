@@ -106,7 +106,7 @@ export default class Log extends React.Component {
           ref="table"
           rowMetadata={{'key': 'id'}}
           params={this.getParams()}
-          pageSize={1000}
+          pageSize={500}
           revertRows
           onClickView={this.onClickDetailView.bind(this)}
           onUpdateCount={this.onResultCountUpdate.bind(this)}
