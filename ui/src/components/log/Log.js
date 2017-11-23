@@ -4,6 +4,7 @@ import SortableTree from 'react-sortable-tree'
 import {findIndex} from 'lodash'
 // import FileTheme from 'react-sortable-tree-theme-file-explorer'
 import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
+import EditIcon from 'material-ui/svg-icons/content/create'
 
 import TabPage from 'components/common/TabPage'
 import TabPageBody from 'components/common/TabPageBody'
@@ -98,6 +99,10 @@ export default class Log extends React.Component {
         type: 'folder'
       })
     })
+  }
+
+  onClickEditFolder () {
+
   }
 
   onChangeTreeData (monitorTreeData) {
@@ -281,7 +286,8 @@ export default class Log extends React.Component {
   renderLogTools () {
     return (
       <div style={{position: 'absolute', right: 5, top: 8}}>
-        <AddCircleIcon className="link"/>
+        <AddCircleIcon className="link" onTouchTap={this.onClickAddFolder.bind(this)}/>
+        <EditIcon className="link" onTouchTap={this.onClickEditFolder.bind(this)}/>
       </div>
     )
   }
