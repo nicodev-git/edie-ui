@@ -181,7 +181,7 @@ export default class LogPapers extends React.Component {
         </div>
       )
       return (
-        <div key={i} className="padding-sm margin-md-bottom">
+        <div key={i} className="padding-sm-left padding-sm-right margin-md-bottom">
           {noCard ? (
             items
           ) : (
@@ -210,7 +210,7 @@ export default class LogPapers extends React.Component {
         marginPagesDisplayed={2}
         pageRangeDisplayed={5}
         onPageChange={this.handlePageClick.bind(this)}
-        containerClassName={"pagination margin-xs-top"}
+        containerClassName={"pagination margin-xs-top inline-block"}
         subContainerClassName={"pages pagination"}
         activeClassName={"active"}/>
     )
@@ -220,7 +220,9 @@ export default class LogPapers extends React.Component {
     const table = this.renderTable()
     return (
       <div className="flex-vertical" style={{height: '100%'}}>
-        {this.renderPaging()}
+        <div className="text-center">
+          {this.renderPaging()}
+        </div>
         <div className="flex-1" style={{overflow: 'auto', whiteSpace: 'normal', wordBreak: 'break-word'}}>
           {table}
         </div>
