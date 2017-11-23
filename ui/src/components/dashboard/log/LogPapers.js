@@ -210,7 +210,7 @@ export default class LogPapers extends React.Component {
         marginPagesDisplayed={2}
         pageRangeDisplayed={5}
         onPageChange={this.handlePageClick.bind(this)}
-        containerClassName={"pagination margin-xs-top inline-block"}
+        containerClassName={"pagination inline-block"}
         subContainerClassName={"pages pagination"}
         activeClassName={"active"}/>
     )
@@ -220,7 +220,7 @@ export default class LogPapers extends React.Component {
     const table = this.renderTable()
     return (
       <div className="flex-vertical" style={{height: '100%'}}>
-        <div className="text-center">
+        <div className="text-center" style={{marginTop: 10, marginBottom: 6}}>
           {this.renderPaging()}
         </div>
         <div className="flex-1" style={{overflow: 'auto', whiteSpace: 'normal', wordBreak: 'break-word'}}>
