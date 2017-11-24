@@ -17,6 +17,10 @@ export default class EditWf extends React.Component {
     return null
   }
 
+  onClickDiagram () {
+    this.props.history.push(`/${this.props.match.params.device}/editwf/diagram/${this.getWorkflowId()}`)
+  }
+
   onFinish () {
     this.props.history.push('/devicewf')
   }
@@ -27,6 +31,7 @@ export default class EditWf extends React.Component {
     return (
       <MainWorkflowModal
         noModal
+        onClickDiagram={this.onClickDiagram.bind(this)}
         onFinish={this.onFinish.bind(this)}
       />
     )

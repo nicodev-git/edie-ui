@@ -157,7 +157,13 @@ class MainWorkflowModal extends Component {
   }
 
   onClickDiagram () {
-    this.props.openDeviceWfDiagramModal(this.state.diagram)
+    const {onClickDiagram} = this.props
+    if (onClickDiagram) {
+      onClickDiagram()
+    } else {
+      this.props.openDeviceWfDiagramModal(this.state.diagram)
+    }
+
   }
 
   onDiagramModalClose (data) {

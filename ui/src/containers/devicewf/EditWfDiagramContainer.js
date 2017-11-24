@@ -5,7 +5,6 @@ import { connect } from 'react-redux'
 import EditWfDiagram from 'components/devicewf/EditWfDiagram'
 
 import {
-  fetchDevices,
   fetchWorkflow,
   setWorkflow,
 
@@ -24,12 +23,8 @@ class EditWfDiagramContainer extends React.Component {
 export default connect(
   state => ({
     devices: state.devices.devices,
-    editWorkflow: state.devices.editWorkflow,
-
-    workflowModalOpen: state.devices.workflowModalOpen,
-    workflowListDraw: state.devices.workflowListDraw
+    editWorkflow: state.devices.editWorkflow
   }), {
-    fetchDevices,
     fetchWorkflow,
     setWorkflow,
 
