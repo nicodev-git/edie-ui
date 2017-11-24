@@ -2,6 +2,7 @@ import React from 'react'
 
 import TabPage from 'components/common/TabPage'
 import TabPageBody from 'components/common/TabPageBody'
+import MainWorkflowModal from 'components/dashboard/map/device/main/workflows/MainWorkflowModal'
 
 export default class EditWf extends React.Component {
   componentWillMount () {
@@ -16,8 +17,19 @@ export default class EditWf extends React.Component {
     return null
   }
 
-  renderContent () {
+  onFinish () {
+    this.props.history.push('/devicewf')
+  }
 
+  ////////////////////////////////////////////////
+
+  renderContent () {
+    return (
+      <MainWorkflowModal
+        noModal
+        onFinish={this.onFinish.bind(this)}
+      />
+    )
   }
 
   render () {

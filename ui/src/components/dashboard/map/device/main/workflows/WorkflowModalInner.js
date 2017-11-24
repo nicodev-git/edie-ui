@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import {RaisedButton} from 'material-ui'
+
 import RuleModal from './RuleModal'
 import CategoryModal from './CategoryModal'
 import ActionModal from './ActionModal'
@@ -53,13 +55,11 @@ export default class WorkflowModalInner extends Component {
     )
   }
 
-  renderStep () {
-    const {current, rules, selectedRuleIndex, actions, selectedActionIndex, onClickRawData, editWorkflowTags, removeWorkflowTag} = this.props
-    let categoryModal = this.renderCategoryModal()
-    let ruleModal = this.renderRuleModal()
-    let actionModal = this.renderActionModal()
+  renderStep (step) {
+    const {rules, selectedRuleIndex, actions, selectedActionIndex, onClickRawData, editWorkflowTags, removeWorkflowTag} = this.props
 
-    if (current === 1) {
+    if (step === 1) {
+      const categoryModal = this.renderCategoryModal()
       return (
         <WorkflowStep1
           tags={editWorkflowTags}
@@ -73,7 +73,8 @@ export default class WorkflowModalInner extends Component {
           categoryModal={categoryModal}
         />
       )
-    } else if (current === 2) {
+    } else if (step === 2) {
+      const ruleModal = this.renderRuleModal()
       return (
         <WorkflowStep2
           onRemoveRule={this.props.onClickRemoveRule}
@@ -86,7 +87,8 @@ export default class WorkflowModalInner extends Component {
           selected={selectedRuleIndex}
         />
       )
-    } else if (current === 3) {
+    } else if (step === 3) {
+      const actionModal = this.renderActionModal()
       return (
         <WorkflowStep3
           onAddAction={this.props.onClickAddAction}
@@ -103,39 +105,62 @@ export default class WorkflowModalInner extends Component {
   }
 
   renderWizard () {
-    const {current, steps} = this.props
-    let step = this.renderStep()
-    let diagramModal = this.renderDiagramModal()
-    let markers = []
-    for (let i = 0; i < steps; i++) {
-      const cls = `marker ${current >= (i + 1) ? 'marker-checked' : ''}`
-      markers.push(
-        <div key={i} className={cls} style={{left: `${100 / steps * (i + 0.5)}%`}}>
-          <div className="marker-label">{i + 1}</div>
+    const {current, steps, noModal, isDiagramButton} = this.props
+    if (noModal) {
+      return (
+        <div>
+
+          <div className="col-md-6">
+            {this.renderStep(1)}
+          </div>
+          <div className="col-md-6">
+            {this.renderStep(2)}
+            {this.renderStep(3)}
+          </div>
+          <div className="col-md-12 margin-md-top">
+            { isDiagramButton
+              ? (<RaisedButton label="Diagram" onClick={this.props.onClickDiagram}/>) : null}
+            &nbsp;
+            <RaisedButton label="Finish" type="submit"/>
+          </div>
         </div>
       )
+    } else {
+      let step = this.renderStep()
+      let diagramModal = this.renderDiagramModal()
+      let markers = []
+      for (let i = 0; i < steps; i++) {
+        const cls = `marker ${current >= (i + 1) ? 'marker-checked' : ''}`
+        markers.push(
+          <div key={i} className={cls} style={{left: `${100 / steps * (i + 0.5)}%`}}>
+            <div className="marker-label">{i + 1}</div>
+          </div>
+        )
+      }
+      return (
+        <WorkflowWizard
+          markers={markers}
+          step={step}
+          steps={steps}
+          current={current}
+          diagramModal={diagramModal}
+          isDiagramButton={this.props.isDiagramButton}
+          onClose={this.props.onClickClose}
+          onDiagram={this.props.onClickDiagram}
+          onPrev={this.props.onClickPrev}
+          onNext={this.props.onClickNext}
+        />
+      )
     }
-    return (
-      <WorkflowWizard
-        markers={markers}
-        step={step}
-        steps={steps}
-        current={current}
-        diagramModal={diagramModal}
-        isDiagramButton={this.props.isDiagramButton}
-        onClose={this.props.onClickClose}
-        onDiagram={this.props.onClickDiagram}
-        onPrev={this.props.onClickPrev}
-        onNext={this.props.onClickNext}
-      />
-    )
+
   }
 
   render () {
-    const {onSubmit} = this.props
+    const {onSubmit, noModal} = this.props
     let wizard = this.renderWizard()
     return (
       <MainWorkflowModalView
+        noModal={noModal}
         onSubmit={onSubmit}
         wizard={wizard}
         onClose={this.props.onClickClose}

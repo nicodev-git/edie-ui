@@ -52,7 +52,7 @@ class MainWorkflowModal extends Component {
   }
 
   handleFormSubmit (values) {
-    const {editWorkflow, workflowCategories, editWorkflowTags} = this.props
+    const {editWorkflow, workflowCategories, editWorkflowTags, onFinish} = this.props
     const { rules, actions, diagram } = this.state
     let props = assign({}, editWorkflow, values, {
       isglobal: false,
@@ -73,6 +73,7 @@ class MainWorkflowModal extends Component {
     } else {
       this.props.addDeviceWorkflow(props, this.props.device)
     }
+    onFinish && onFinish()
   }
 
   onClickClose () {
