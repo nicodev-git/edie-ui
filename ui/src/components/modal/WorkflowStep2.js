@@ -21,9 +21,6 @@ export default class WorkflowStep2 extends Component {
             </Chip>
           </div>
           <div className="pull-right" style={{marginTop: -5}}>
-            <IconButton onTouchTap={onRemoveRule}>
-              <DeleteIcon color="#545454" className="link"/>
-            </IconButton>
           </div>
           <div className="pull-right">
             <Chip style={chipStyles.chip} onTouchTap={() => onClickValueChip('.*')}>
@@ -37,6 +34,7 @@ export default class WorkflowStep2 extends Component {
               <tr>
                 <th>Key</th>
                 <th>Value</th>
+                <th></th>
               </tr>
             </thead>
             <tbody>
@@ -67,6 +65,11 @@ export default class WorkflowStep2 extends Component {
                       display: 'block'
                     }}
                   />
+                </td>
+                <td className="text-right">
+                  <IconButton onTouchTap={() => setTimeout(onRemoveRule, 1)} className={index !== (rules.length - 1) ? '' : 'hidden'}>
+                    <DeleteIcon color="#545454" className="link"/>
+                  </IconButton>
                 </td>
               </tr>
             )}

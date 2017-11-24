@@ -7,42 +7,47 @@ import { CardPanel } from 'components/modal/parts'
 
 export default class WorkflowStep3 extends Component {
   renderTools () {
-    const {onAddAction, onEditAction, onRemoveAction} = this.props
+    const {onAddAction} = this.props
     return (
       <div>
         <IconButton onTouchTap={onAddAction}>
           <AddCircleIcon color="#545454"/>
         </IconButton>
-
-        <IconButton onTouchTap={onEditAction}>
-          <CreateIcon color="#545454"/>
-        </IconButton>
-        <IconButton onTouchTap={onRemoveAction}>
-          <DeleteIcon color="#545454"/>
-        </IconButton>
-
       </div>
     )
   }
   render () {
     const {onActionClick, actions,
-      selected, actionModal} = this.props
+      selected, actionModal,
+      onEditAction, onRemoveAction
+    } = this.props
     return (
-      <CardPanel title="Actions">
+      <CardPanel title="Actions" tools={this.renderTools()}>
         {this.renderTools()}
         <table className="table table-hover">
           <thead>
           <tr>
             <th>Name</th>
             <th>Type</th>
+            <th></th>
           </tr>
           </thead>
           <tbody>
           {
             actions.map((a, index) =>
-              <tr key={index} className={selected === index ? 'selected' : ''} onClick={onActionClick.bind(this, index)}>
+              <tr key={index}
+                  className={selected === index ? 'selected' : ''}
+                  onClick={onActionClick.bind(this, index)}>
                 <td>{a.name}</td>
                 <td>{a.actionType}</td>
+                <td className="text-right">
+                  <IconButton onTouchTap={() => setTimeout(onEditAction, 1)}>
+                    <CreateIcon color="#545454"/>
+                  </IconButton>
+                  <IconButton onTouchTap={() => setTimeout(onRemoveAction, 1)}>
+                    <DeleteIcon color="#545454"/>
+                  </IconButton>
+                </td>
               </tr>
             )
           }
