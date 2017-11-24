@@ -216,6 +216,7 @@ class MainpageContainer extends Component {
           <Route path="/addserver" component={AddServerContainer}/>
         </Switch>
         <Route path="/devicewf" component={DeviceWfContainer}/>
+        <Route path="/:device/editwf/diagram/:id" component={EditWfContainer} exact/>
         <Route path="/:device/editwf/:id" component={EditWfContainer} exact/>
         <Route path="/chat" component={ChatContainer}/>
         <Route path="/search" component={SearchGeneric}/>
