@@ -1,5 +1,5 @@
 import React from 'react'
-import {findIndex} from 'lodash'
+// import {findIndex} from 'lodash'
 import {TextField, RaisedButton} from 'material-ui'
 
 import FlipView from './FlipView'
@@ -115,11 +115,12 @@ export default class GCommand extends React.Component {
     this.props.removeDeviceGauge(this.props.gauge, this.props.device)
   }
   getTitle () {
-    const {gauge} = this.props
-    const devices = this.props.allDevices || this.props.devices
-    const index = findIndex(devices, {id: gauge.deviceId})
-    if (index < 0) return gauge.name
-    return `[${devices[index].name}] ${gauge.name}`
+    return "[CMD]"
+    // const {gauge} = this.props
+    // const devices = this.props.allDevices || this.props.devices
+    // const index = findIndex(devices, {id: gauge.deviceId})
+    // if (index < 0) return gauge.name
+    // return `[${devices[index].name}] ${gauge.name}`
   }
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
