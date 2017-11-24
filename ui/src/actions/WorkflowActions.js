@@ -1,5 +1,6 @@
 import axios from 'axios'
 import {
+  FETCH_WORKFLOW,
   FETCH_WORKFLOWS,
   ADD_WORKFLOW,
   UPDATE_WORKFLOW,
@@ -138,5 +139,13 @@ export const removeWorkflowTag = (index) => {
 export const showWorkflowTagModal = (visible) => {
   return dispatch => {
     dispatch({type: SHOW_WF_TAG_MODAL, visible})
+  }
+}
+
+export const fetchWorkflow = (id) => {
+  return dispatch => {
+    axios.get(`${ROOT_URL}/workflow?id=${id}`).then(({data}) => {
+      dispatch({type: FETCH_WORKFLOW, data})
+    })
   }
 }

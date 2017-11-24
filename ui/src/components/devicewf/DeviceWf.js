@@ -67,7 +67,7 @@ export default class DeviceWf extends React.Component {
     const selected = this.getTable().getSelected()
     if (!selected) return window.alert('Please select workflow.')
     // this.props.openDeviceWorkflowModal(selected, this.state.selected)
-    this.props.history.push(`/editwf/${selected.id}`)
+    this.props.history.push(`/${this.state.selected.name}/editwf/${selected.id}`)
   }
 
   //////////////////////////////////////////////////////////////////////////////////////////////////

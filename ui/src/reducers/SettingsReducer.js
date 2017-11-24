@@ -54,6 +54,7 @@ import {
   SELECT_CREDS,
   SHOW_CRED_LIST_MODAL,
 
+  FETCH_WORKFLOW,
   FETCH_WORKFLOWS,
   ADD_WORKFLOW,
   UPDATE_WORKFLOW,
@@ -401,7 +402,8 @@ export default function (state = initialState, action) {
       return { ...state, credListModalOpen: action.visible }
 
     // ///////////////////////////////////////////////////
-
+    case FETCH_WORKFLOW:
+      return { ...state, editWorkflow: action.data }
     case FETCH_WORKFLOWS:
       return { ...state, workflows: action.data }
 
