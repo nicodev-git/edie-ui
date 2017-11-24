@@ -54,11 +54,11 @@ export default class IncidentTable extends React.Component {
     }, {
       'displayName': 'System',
       'columnName': 'entity.devicename',
-      'cssClassName': 'width-120'
-    }, {
-      'displayName': 'Workflow',
-      'columnName': 'entity.workflow',
-      'cssClassName': 'width-120'
+      'cssClassName': 'width-200',
+      'customComponent': p => {
+        const {workflow} = p.rowData.entity
+        return <span>{p.data}{workflow ? `(${workflow})` : ''}</span>
+      }
     }, {
       'displayName': 'Description',
       'columnName': 'entity.description',
