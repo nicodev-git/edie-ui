@@ -31,7 +31,8 @@ import {showConfirm} from 'components/common/Alert'
 
 const ResponsiveReactGridLayout = WidthProvider(Responsive)
 
-const menuItems = ['Event Log', 'Installed App', 'Process', 'Services', 'Users', 'Firewall', 'Network', 'Command']
+const menuItems = ['Event Log', 'Installed App', 'Process', 'Services', 'Users', 'Firewall', 'Network', 'Command',
+  'Workflows', 'Incidents']
 
 export default class MainControl extends React.Component {
   constructor (props) {
@@ -64,7 +65,9 @@ export default class MainControl extends React.Component {
       ['Device Basic', {x: w, y: 0}],
       ['DeviceIO', {x: 0, y: h}],
       ['Command', {x: w, y: h}],
-      ['Workflows', {x: 0, y: h * 2, w: w * 2}]]
+      ['Workflows', {x: 0, y: h * 2, w: w * 2}],
+      ['Incidents', {x: 0, y: h * 3, w: w * 2}]
+    ]
 
 
     tpls.forEach((tpl, i) => {

@@ -28,6 +28,7 @@ import GLogicalGroups from 'components/common/gauge/GLogicalGroups'
 import GSavedSearch from 'components/common/gauge/GSavedSearch'
 import GDeviceIO from 'components/common/gauge/GDeviceIO'
 import GWorkflows from 'components/common/gauge/GWorkflows'
+import GIncidents from 'components/common/gauge/GIncidents'
 
 const gaugeMap = {
   'Line Chart': GLineChart,
@@ -61,7 +62,8 @@ const gaugeMap = {
   'Logical Groups': GLogicalGroups,
   'Search Shortcuts': GSavedSearch,
   'DeviceIO': GDeviceIO,
-  'Workflows': GWorkflows
+  'Workflows': GWorkflows,
+  'Incidents': GIncidents
 }
 
 export default gaugeMap
