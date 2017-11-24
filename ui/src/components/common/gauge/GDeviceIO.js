@@ -220,7 +220,7 @@ export default class GDeviceIO extends React.Component {
       <FlipView
         {...this.props}
 
-        title={this.getTitle()}
+        title="[Network/Disk]"
         bodyStyle={{padding: "0px 20px 20px"}}
 
         loading={this.state.loading}

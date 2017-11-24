@@ -190,7 +190,7 @@ export default class GDeviceBasic extends React.Component {
       <FlipView
         {...this.props}
 
-        title={this.getTitle()}
+        title="[CPU/Memory/Disk]"
         bodyStyle={{padding: "0px 20px 20px"}}
 
         loading={this.state.loading}
