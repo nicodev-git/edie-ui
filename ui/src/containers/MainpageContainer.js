@@ -22,6 +22,7 @@ import ServerRangeContainer from 'containers/dashboard/ServerRangeContainer'
 import AddServerContainer from 'containers/dashboard/AddServerContainer'
 import EditServerContainer from 'containers/dashboard/EditServerContainer'
 import LogContainer from 'containers/log/LogContainer'
+import DeviceWfContainer from 'containers/devicewf/DeviceWfContainer'
 
 import {
   closeDevice,
@@ -213,11 +214,12 @@ class MainpageContainer extends Component {
           <Route path="/dashboard/:id" component={MainDashboardContainer}/>
           <Route path="/addserver" component={AddServerContainer}/>
         </Switch>
+        <Route path="/devicewf" component={DeviceWfContainer}/>
         <Route path="/chat" component={ChatContainer}/>
         <Route path="/search" component={SearchGeneric}/>
         <Route path="/logs" component={LogContainer}/>
         <Route path="/threatmap" component={ThreatMapContainer}/>
-        <Route path="/signout" component={SignoutContainer} />
+        <Route path="/signout" component={SignoutContainer}/>
         <Route path="/settings" component={Settings}/>
         <Route path="/viewlog" component={LogView}/>
 
