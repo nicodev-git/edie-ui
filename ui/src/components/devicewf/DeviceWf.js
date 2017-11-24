@@ -3,8 +3,48 @@ import React from 'react'
 import TabPage from 'components/common/TabPage'
 import TabPageBody from 'components/common/TabPageBody'
 import {extImageBaseUrl} from 'shared/Global'
+import {chipStyles} from 'style/common/materialStyles'
+
+import InfiniteTable from 'components/common/InfiniteTable';
 
 export default class DeviceWf extends React.Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      selected: null
+    }
+
+    this.cells = [{
+      'displayName': 'Name',
+      'columnName': 'name'
+    }, {
+      'displayName': 'Description',
+      'columnName': 'desc'
+    }, {
+      'displayName': 'Details',
+      'columnName': 'isglobal',
+      'customComponent': p => {
+        let {severity, tags} = p.rowData
+        tags = tags || []
+        return (
+          <div style={chipStyles.wrapper}>
+            {p.data ? <Chip style={chipStyles.smallChip} labelStyle={chipStyles.smallLabel}>Global</Chip> : ''}
+
+            <Chip style={chipStyles.smallChip} labelStyle={chipStyles.smallLabel} backgroundColor="rgb(234, 166, 11)">
+              {severity}
+            </Chip>
+
+            {tags.map(t =>
+              <Chip key={t} style={chipStyles.smallChip} labelStyle={chipStyles.smallLabel}>
+                {t}
+              </Chip>
+            )}
+          </div>
+        )
+      }
+    }]
+  }
+
   componentWillMount () {
     this.props.fetchDevices()
   }
@@ -12,6 +52,8 @@ export default class DeviceWf extends React.Component {
   getDevices () {
     return this.props.devices.filter(p => p.tags && p.tags.includes('Server'))
   }
+
+  //////////////////////////////////////////////////////////////////////////////////////////////////
 
   renderDevices () {
     return this.getDevices().map(p =>
@@ -25,9 +67,29 @@ export default class DeviceWf extends React.Component {
     )
 
   }
-  renderWorkflows () {
 
+  renderWorkflows () {
+    const {selected} = this.state
+    if (!selected) return null
+
+    return (
+      <InfiniteTable
+        id="rule1"
+        cells={this.cells}
+        ref="table"
+        rowMetadata={{'key': 'id'}}
+        selectable
+        tableClassName="table1"
+
+        url="/workflow/search/findById"
+        params={{
+          id: selected.workflowids || [],
+          draw: 1
+        }}
+      />
+    )
   }
+
   render () {
     return (
       <TabPage>
