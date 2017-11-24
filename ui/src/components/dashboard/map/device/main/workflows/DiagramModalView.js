@@ -5,9 +5,9 @@ import { TwoButtonsBlockCustom, Modal } from 'components/modal/parts'
 export default class DiagramModalView extends Component {
   render () {
     const {header, onHide, onSave, dragLayer, toolbar, sidebar,
-      panel, objectModal} = this.props
-    return (
-      <Modal title={header} onRequestClose={onHide}>
+      panel, objectModal, noModal} = this.props
+    const content = (
+      <div>
         <div className="diagram">
           {dragLayer}
           {toolbar}
@@ -18,6 +18,12 @@ export default class DiagramModalView extends Component {
         </div>
         {objectModal}
         <TwoButtonsBlockCustom name2="Save" action2={onSave}/>
+      </div>
+    )
+    if (noModal) return content
+    return (
+      <Modal title={header} onRequestClose={onHide}>
+        {content}
       </Modal>
     )
   }

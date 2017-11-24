@@ -8,7 +8,8 @@ import {
   fetchWorkflow,
   setWorkflow,
 
-  openDeviceWorkflowModal
+  openDeviceWfDiagramModal,
+  updateDeviceWorkflow
 } from 'actions'
 class EditWfDiagramContainer extends React.Component {
   render () {
@@ -30,6 +31,7 @@ export default connect(
     fetchWorkflow,
     setWorkflow,
 
-    openDeviceWorkflowModal
+    openDeviceWfDiagramModal,
+    updateDeviceWorkflow
   }
 )(withRouter(EditWfDiagramContainer))

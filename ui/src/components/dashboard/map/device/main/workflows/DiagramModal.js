@@ -173,6 +173,7 @@ class DiagramModal extends Component {
   }
 
   render () {
+    const {noModal} = this.props
     let header = 'Workflow'
     let dragLayer = this.renderDragLayer()
     let toolbar = this.renderToolbar()
@@ -181,6 +182,7 @@ class DiagramModal extends Component {
     let objectModal = this.renderObjectModal()
     return (
       <DiagramModalView
+        noModal={noModal}
         show
         onHide={this.onClickClose.bind(this)}
         onSave={this.onClickSave.bind(this)}

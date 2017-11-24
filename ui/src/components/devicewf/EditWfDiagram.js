@@ -1,6 +1,7 @@
 import React from 'react'
 import TabPage from 'components/common/TabPage'
 import TabPageBody from 'components/common/TabPageBody'
+import DiagramModalContainer from 'containers/device/main/workflows/DiagramModalContainer'
 
 export default class EditWfDiagram extends React.Component {
   componentWillMount () {
@@ -22,8 +23,15 @@ export default class EditWfDiagram extends React.Component {
     return null
   }
 
-  onDiagramModalClose () {
+  onDiagramModalClose (flowchart) {
+    const {editWorkflow} = this.props
+    if (!editWorkflow) return
+    this.props.updateDeviceWorkflow({
+      ...editWorkflow,
+      flowchart
+    })
 
+    this.props.history.push(`/${this.props.match.params.device}/editwf/${this.getWorkflowId()}`)
   }
 
   //////////////////////////////////////////////////////////
@@ -35,7 +43,8 @@ export default class EditWfDiagram extends React.Component {
       <DiagramModalContainer
         noModal
         commands={editWorkflow.actions.map(a => a.command)}
-        onClose={this.onDiagramModalClose.bind(this)}/>
+        onClose={this.onDiagramModalClose.bind(this)}
+      />
     )
   }
   render () {
