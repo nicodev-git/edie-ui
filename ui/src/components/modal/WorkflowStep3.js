@@ -28,7 +28,8 @@ export default class WorkflowStep3 extends Component {
     const {onActionClick, actions,
       selected, actionModal} = this.props
     return (
-      <CardPanel title="Actions" tools={this.renderTools()}>
+      <CardPanel title="Actions">
+        {this.renderTools()}
         <table className="table table-hover">
           <thead>
           <tr>
