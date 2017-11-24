@@ -1,4 +1,5 @@
 import React from 'react'
+import ReactDOM from 'react-dom'
 import {Paper} from 'material-ui'
 import { assign, isEqual, keys, chunk, reverse, merge, isArray } from 'lodash'
 import $ from 'jquery'
@@ -121,7 +122,12 @@ export default class LogPapers extends React.Component {
         hasMore: data.length > 0
       }
 
-      this.setState(state)
+      this.setState(state, () => {
+        setTimeout(() => {
+          const node = ReactDOM.findDOMNode(this.refRowEnd)
+          node && node.scrollIntoView({behavior: 'smooth'})
+        }, 100)
+      })
       onUpdateCount && onUpdateCount(total, state.results)
     }).fail((req, reason) => {
       if (reason === 'abort') return
@@ -158,6 +164,9 @@ export default class LogPapers extends React.Component {
   onClickView (row, index) {
     this.props.onClickView(row, index, this.state.currentPage, this.props.pageSize)
   }
+  onRefRow (ref) {
+    this.refRowEnd = ref
+  }
   renderTable () {
     const {pageSize, noCard, noSearch} = this.props
 
@@ -180,6 +189,12 @@ export default class LogPapers extends React.Component {
           </div>}
         </div>
       )
+      if (items.length) {
+        items.push(
+
+        )
+      }
+
       return (
         <div key={i} className="padding-sm-left padding-sm-right margin-md-bottom">
           {noCard ? (
@@ -190,7 +205,7 @@ export default class LogPapers extends React.Component {
               {items}
             </Paper>
           )}
-
+          <div key="row-end" ref={this.onRefRow.bind(this)}></div>
         </div>
       )
     })
