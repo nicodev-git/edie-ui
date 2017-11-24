@@ -8,6 +8,13 @@ export default class EditWfDiagram extends React.Component {
     this.props.fetchWorkflow(this.getWorkflowId())
   }
 
+  componentDidUpdate (prevProps) {
+    const {editWorkflow} = this.props
+    if (!prevProps.editWorkflow && editWorkflow) {
+      this.props.openDeviceWfDiagramModal(editWorkflow.flowchart || '')
+    }
+  }
+
   getWorkflowId () {
     return this.props.match.params.id
   }
@@ -15,8 +22,21 @@ export default class EditWfDiagram extends React.Component {
     return null
   }
 
-  renderContent () {
+  onDiagramModalClose () {
 
+  }
+
+  //////////////////////////////////////////////////////////
+
+  renderContent () {
+    const {editWorkflow} = this.props
+    if (!this.props.wfDiagramModalOpen) return null
+    return (
+      <DiagramModalContainer
+        noModal
+        commands={editWorkflow.actions.map(a => a.command)}
+        onClose={this.onDiagramModalClose.bind(this)}/>
+    )
   }
   render () {
     const {editWorkflow} = this.props

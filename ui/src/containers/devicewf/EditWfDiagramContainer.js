@@ -23,7 +23,9 @@ class EditWfDiagramContainer extends React.Component {
 export default connect(
   state => ({
     devices: state.devices.devices,
-    editWorkflow: state.devices.editWorkflow
+    editWorkflow: state.devices.editWorkflow,
+
+    wfDiagramModalOpen: state.devices.wfDiagramModalOpen
   }), {
     fetchWorkflow,
     setWorkflow,
