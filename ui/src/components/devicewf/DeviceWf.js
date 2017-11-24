@@ -1,4 +1,5 @@
 import React from 'react'
+import {Chip} from 'material-ui'
 
 import TabPage from 'components/common/TabPage'
 import TabPageBody from 'components/common/TabPageBody'
@@ -53,12 +54,17 @@ export default class DeviceWf extends React.Component {
     return this.props.devices.filter(p => p.tags && p.tags.includes('Server'))
   }
 
+  onClickDevice (selected) {
+    this.setState({selected})
+  }
+
   //////////////////////////////////////////////////////////////////////////////////////////////////
 
   renderDevices () {
+    const {selected} = this.state
     return this.getDevices().map(p =>
-      <div key={p.id} className="padding-sm bt-gray">
-        <span className="link">
+      <div key={p.id} className={`padding-sm bt-gray ${selected && selected.id === p.id ? 'text-danger' : ''}`}>
+        <span className="link" onClick={this.onClickDevice.bind(this, p)}>
           <img src={`${extImageBaseUrl}${p.image}`}
                width="16" alt="" className="valign-middle bg-black"/>
           &nbsp;{p.name}
