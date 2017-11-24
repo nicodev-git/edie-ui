@@ -3,7 +3,6 @@ import { Field } from 'redux-form'
 import IconButton from 'material-ui/IconButton'
 import HelpIcon from 'material-ui/svg-icons/action/help'
 import {Chip} from 'material-ui'
-import ReactTooltip from 'react-tooltip'
 
 import { FormInput, FormSelect, FormCheckbox, CardPanel } from 'components/modal/parts'
 import { buttonStyle, iconStyle, chipStyles } from 'style/common/materialStyles'
@@ -16,30 +15,38 @@ export default class WorkflowStep1 extends Component {
     return (
       <div className="wizard-step-1-container">
         <CardPanel title="Basic">
-          <div className="form-column wizard-step-1">
-            <Field name="name" component={FormInput} label="Name"/>
-            <Field name="desc" component={FormInput} label="Description"/>
-            <div>
-              <Chip style={chipStyles.chip} onTouchTap={onClickRawData}>
-                SHOW_RAW_DATA
-              </Chip>
+          <div>
+            <div className="col-md-6 p-none">
+              <Field name="name" component={FormInput} label="Name"/>
             </div>
-            <Field name="display_incident_desc" component={FormInput} label="Display Incident Description"/>
-            <Field name="severity" component={FormSelect} label="Severity" options={severities}/>
+            <div className="col-md-6 p-none">
+              <Field name="desc" component={FormInput} label="Description"/>
+            </div>
           </div>
-          <div className="width-100">
-            <Field name="enable" label="Enabled" component={FormCheckbox}/>
+          <Field name="severity" component={FormSelect} label="Severity" options={severities}/>
+        </CardPanel>
+
+        <CardPanel title="Rule">
+          <div>
+            <Chip style={chipStyles.chip} onTouchTap={onClickRawData}>
+              SHOW_RAW_DATA
+            </Chip>
           </div>
-          <div className="wizard-step-1-help" data-class="tt-workflow" data-tip={`Use \${KEY} for show key’s value.<br/>Example: 'User \${user} was blocked at: \${datetime}'`}>
+          <Field name="display_incident_desc" component={FormInput} label="Display Incident Description" style={{width: '100%'}}/>
+          <div className="inline-block margin-sm-top">
             <IconButton
               style={buttonStyle}
-              iconStyle={iconStyle}>
+              iconStyle={iconStyle}
+              tooltip={`Use \${KEY} for show key’s value.<br/>Example: 'User \${user} was blocked at: \${datetime}'`}
+            >
               <HelpIcon color="#2196f3"/>
             </IconButton>
           </div>
-
-          <ReactTooltip />
         </CardPanel>
+
+        <div className="width-100">
+          <Field name="enable" label="Enabled" component={FormCheckbox}/>
+        </div>
 
         <CardPanel title="Tags">
           <div style={chipStyles.wrapper}>
