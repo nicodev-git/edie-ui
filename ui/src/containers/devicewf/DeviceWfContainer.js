@@ -5,12 +5,7 @@ import { connect } from 'react-redux'
 import DeviceWf from 'components/devicewf/DeviceWf'
 
 import {
-  fetchDevicesGroups,
-
-  fetchMonitorGroups,
-  addMonitorGroup,
-  updateMonitorGroup,
-  removeMonitorGroup
+  fetchDevices
 } from 'actions'
 class DeviceWfContainer extends React.Component {
   render () {
@@ -22,14 +17,8 @@ class DeviceWfContainer extends React.Component {
 
 export default connect(
   state => ({
-    allDevices: state.devices.deviceAndGroups,
-    monitorGroups: state.settings.monitorGroups
+    devices: state.devices.devices
   }), {
-    fetchDevicesGroups,
-
-    fetchMonitorGroups,
-    addMonitorGroup,
-    updateMonitorGroup,
-    removeMonitorGroup
+    fetchDevices
   }
 )(withRouter(DeviceWfContainer))
