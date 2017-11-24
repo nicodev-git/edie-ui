@@ -66,7 +66,8 @@ export default class DeviceWf extends React.Component {
   onClickEdit () {
     const selected = this.getTable().getSelected()
     if (!selected) return window.alert('Please select workflow.')
-    this.props.openDeviceWorkflowModal(selected, this.state.selected)
+    // this.props.openDeviceWorkflowModal(selected, this.state.selected)
+    this.props.history.push(`/editwf/${selected.id}`)
   }
 
   //////////////////////////////////////////////////////////////////////////////////////////////////
