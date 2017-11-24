@@ -139,7 +139,7 @@ export default class GDeviceInfo extends React.Component {
       const sysDesc = `${hardware}${software}`
 
       return (
-        <div style={{marginTop: 26}}>
+        <div>
           {this.renderRow('Status', up ? 'UP' : 'DOWN')}
           {this.renderRow('IPAddress', device.wanip || device.lanip)}
           {this.renderRow('DNS Name', hostname)}
@@ -167,7 +167,9 @@ export default class GDeviceInfo extends React.Component {
     return (
       <FlipView
         {...this.props}
-        hideTitle
+
+        title="[General]"
+        bodyStyle={{padding: "0px 20px 20px"}}
 
         loading={this.state.loading}
         renderFrontView={this.renderFrontView}
