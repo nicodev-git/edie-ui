@@ -27,24 +27,26 @@ export default class WorkflowStep1 extends Component {
         </CardPanel>
 
         <CardPanel title="Rule">
-          <div>
-            <Chip style={chipStyles.chip} onTouchTap={onClickRawData}>
+          <div className="margin-lg-bottom">
+            <Chip style={chipStyles.smallChip} labelStyle={chipStyles.smallLabel} onTouchTap={onClickRawData}>
               SHOW_RAW_DATA
             </Chip>
           </div>
-          <Field name="display_incident_desc" component={FormInput} label="Display Incident Description" style={{width: '100%'}}/>
-          <div className="inline-block margin-sm-top">
-            <IconButton
-              style={buttonStyle}
-              iconStyle={iconStyle}
-              tooltip={`Use \${KEY} for show key’s value.<br/>Example: 'User \${user} was blocked at: \${datetime}'`}
-            >
-              <HelpIcon color="#2196f3"/>
-            </IconButton>
+          <div className="relative">
+            <Field name="display_incident_desc" component={FormInput} label="Display Incident Description" style={{width: '100%'}}/>
+            <div style={{position: 'absolute', right: 0, top: 0}}>
+              <IconButton
+                style={buttonStyle}
+                iconStyle={iconStyle}
+                tooltip={`Use \${KEY} for show key’s value.<br/>Example: 'User \${user} was blocked at: \${datetime}'`}
+              >
+                <HelpIcon color="#2196f3"/>
+              </IconButton>
+            </div>
           </div>
         </CardPanel>
 
-        <div className="width-100">
+        <div className="margin-md-top">
           <Field name="enable" label="Enabled" component={FormCheckbox}/>
         </div>
 

@@ -7,28 +7,23 @@ import { CardPanel } from 'components/modal/parts'
 import { chipStyles } from 'style/common/materialStyles'
 
 export default class WorkflowStep2 extends Component {
-  renderTools () {
-    const {onRemoveRule} = this.props
-    return (
-      <div>
-        <IconButton onTouchTap={onRemoveRule}>
-          <DeleteIcon color="#545454" className="link"/>
-        </IconButton>
-      </div>
-    )
-  }
   render () {
     const {
       rules, onRuleChange, onRuleClick, ruleModal, selected,
-      onClickKeyChip, onClickValueChip
+      onClickKeyChip, onClickValueChip, onRemoveRule
     } = this.props
     return (
-      <CardPanel title="Rules" tools={this.renderTools()}>
+      <CardPanel title="Rules">
         <div>
           <div className="pull-left">
             <Chip style={chipStyles.chip} onTouchTap={() => onClickKeyChip('KEY_RAW_DATA')}>
               KEY_RAW_DATA
             </Chip>
+          </div>
+          <div className="pull-right" style={{marginTop: -5}}>
+            <IconButton onTouchTap={onRemoveRule}>
+              <DeleteIcon color="#545454" className="link"/>
+            </IconButton>
           </div>
           <div className="pull-right">
             <Chip style={chipStyles.chip} onTouchTap={() => onClickValueChip('.*')}>
