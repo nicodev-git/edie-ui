@@ -15,6 +15,7 @@ import DashboardServerIcon from 'material-ui/svg-icons/device/devices'
 import DashboardWfIcon from 'material-ui/svg-icons/action/trending-up'
 import DashboardAppIcon from 'material-ui/svg-icons/action/settings-applications'
 import LogIcon from 'material-ui/svg-icons/notification/event-available'
+import DeviceWfIcon from 'material-ui/svg-icons/hardware/developer-board'
 
 // const home = <HomeIcon color={sidebarIconsColor}/>
 const search = <SearchIcon color={sidebarIconsColor}/>
@@ -27,7 +28,7 @@ const monitors = <PlaylistIcon color={sidebarIconsColor}/>
 const dashboard = <DashboardIcon color={sidebarIconsColor}/>
 const map = <MapIcon color={sidebarIconsColor}/>
 const logIcon = <LogIcon color={sidebarIconsColor}/>
-
+const deviceWfIcon = <DeviceWfIcon color={sidebarIconsColor}/>
 const dservers = <DashboardServerIcon color={sidebarIconsColor}/>
 const dworkflow = <DashboardWfIcon color={sidebarIconsColor}/>
 const dapp = <DashboardAppIcon color={sidebarIconsColor}/>
@@ -39,6 +40,7 @@ export const mainMenu = [
   {id: 'dworkflow', title: 'Workflows', icon: dworkflow, path: '/dashboard/workflows'},
   {id: 'dapp', title: 'Apps', icon: dapp, path: '/dashboard/apps', dashboard: true},
   {id: 'search', title: 'Search', icon: search, path: '/search'},
+  {id: 'devicewf', title: 'Device Workflow', icon: deviceWfIcon, path: '/devicewf'},
   {id: 'log', title: 'Logs', icon: logIcon, path: '/logs'},
   {id: 'incidents', title: 'Incidents', icon: incidents, path: '/', search: '?bigincidents='},
   {id: 'chat', title: 'Chat', icon: chat, path: '/chat'},
