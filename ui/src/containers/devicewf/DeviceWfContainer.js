@@ -22,9 +22,7 @@ export default connect(
     devices: state.devices.devices,
 
     workflowModalOpen: state.devices.workflowModalOpen,
-    workflowListDraw: state.devices.workflowListDraw,
-    wfTagModalOpen: state.settings.wfTagModalOpen,
-    editWorkflowTags: state.settings.editWorkflowTags
+    workflowListDraw: state.devices.workflowListDraw
   }), {
     fetchDevices,
 

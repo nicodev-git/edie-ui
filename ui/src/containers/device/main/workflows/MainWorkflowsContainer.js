@@ -7,22 +7,8 @@ import {
   fetchDeviceWorkflows,
   removeDeviceWorkflow,
 
-  addWorkflowTag,
-  removeWorkflowTag,
-
-  closeDeviceWorkflowModal,
   addDeviceWorkflow,
   updateDeviceWorkflow,
-  fetchWorkflowCategories,
-  openDeviceRuleModal,
-  closeDeviceRuleModal,
-  openWfCategoryModal,
-  openWfActionModal,
-  closeWfActionModal,
-  openDeviceWfDiagramModal,
-
-  addWfCategory,
-  closeWfCategoryModal,
 
   fetchWorkflows,
   openSysWorkflowsModal,
@@ -30,11 +16,7 @@ import {
   selectSysWorkflow,
   deselectSysWorkflow,
   addDeviceWorkflows,
-  selectSysWorkflowCategory,
-
-  showWorkflowTagModal,
-
-  addWorkflow
+  selectSysWorkflowCategory
 } from 'actions'
 
 class MainRulesContainer extends React.Component {
@@ -51,45 +33,17 @@ export default connect(
     workflowModalOpen: state.devices.workflowModalOpen,
     workflowListDraw: state.devices.workflowListDraw,
 
-    editWorkflow: state.devices.editWorkflow,
-    editWfAction: state.devices.editWfAction,
-    editWfCategory: state.devices.editWfCategory,
-    editRule: state.devices.editRule,
-
-    workflowCategories: state.devices.workflowCategories,
-    ruleModalOpen: state.devices.ruleModalOpen,
-    wfCategoryModalOpen: state.devices.wfCategoryModalOpen,
-    wfActionModalOpen: state.devices.wfActionModalOpen,
-    wfDiagramModalOpen: state.devices.wfDiagramModalOpen,
-
     sysWorkflows: state.settings.workflows,
     sysWorkflowsModalOpen: state.devices.sysWorkflowsModalOpen,
     selectedSysWorkflows: state.devices.selectedSysWorkflows,
-    selectedSysWorkflowCategory: state.devices.selectedSysWorkflowCategory,
-
-    wfTagModalOpen: state.settings.wfTagModalOpen,
-    editWorkflowTags: state.settings.editWorkflowTags
+    selectedSysWorkflowCategory: state.devices.selectedSysWorkflowCategory
   }), {
     openDeviceWorkflowModal,
     fetchDeviceWorkflows,
     removeDeviceWorkflow,
 
-    addWorkflowTag,
-    removeWorkflowTag,
-
-    closeDeviceWorkflowModal,
     addDeviceWorkflow,
     updateDeviceWorkflow,
-    fetchWorkflowCategories,
-    openDeviceRuleModal,
-    closeDeviceRuleModal,
-    openWfCategoryModal,
-    openWfActionModal,
-    closeWfActionModal,
-    openDeviceWfDiagramModal,
-
-    addWfCategory,
-    closeWfCategoryModal,
 
     fetchWorkflows,
     openSysWorkflowsModal,
@@ -97,10 +51,6 @@ export default connect(
     selectSysWorkflow,
     deselectSysWorkflow,
     addDeviceWorkflows,
-    selectSysWorkflowCategory,
-
-    showWorkflowTagModal,
-
-    addWorkflow
+    selectSysWorkflowCategory
   }
 )(withRouter(MainRulesContainer))

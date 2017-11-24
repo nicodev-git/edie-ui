@@ -6,6 +6,29 @@ import WorkflowModalInner from './WorkflowModalInner'
 
 import {WorkflowActionTypes} from 'shared/Global'
 
+import {
+  closeDeviceWorkflowModal,
+  addDeviceWorkflow,
+  updateDeviceWorkflow,
+
+  fetchWorkflowCategories,
+  openDeviceRuleModal,
+  closeDeviceRuleModal,
+  openWfCategoryModal,
+  openWfActionModal,
+  closeWfActionModal,
+  openDeviceWfDiagramModal,
+
+  addWorkflowTag,
+  removeWorkflowTag,
+
+  addWfCategory,
+  closeWfCategoryModal,
+
+  showWorkflowTagModal,
+  addWorkflow
+} from 'actions'
+
 class MainWorkflowModal extends Component {
   constructor (props) {
     super(props)
@@ -218,6 +241,42 @@ export default connect(
     initialValues: assign({
       enable: true,
       severity: 'HIGH'
-    }, state.devices.editWorkflow)
-  })
+    }, state.devices.editWorkflow),
+    workflows: state.devices.workflows,
+
+    workflowCategories: state.devices.workflowCategories,
+    ruleModalOpen: state.devices.ruleModalOpen,
+    wfCategoryModalOpen: state.devices.wfCategoryModalOpen,
+    wfActionModalOpen: state.devices.wfActionModalOpen,
+    wfDiagramModalOpen: state.devices.wfDiagramModalOpen,
+
+    editWorkflow: state.devices.editWorkflow,
+    editWfAction: state.devices.editWfAction,
+    editWfCategory: state.devices.editWfCategory,
+    editRule: state.devices.editRule,
+
+    wfTagModalOpen: state.settings.wfTagModalOpen,
+    editWorkflowTags: state.settings.editWorkflowTags
+  }), {
+    closeDeviceWorkflowModal,
+    addDeviceWorkflow,
+    updateDeviceWorkflow,
+
+    fetchWorkflowCategories,
+    openDeviceRuleModal,
+    closeDeviceRuleModal,
+    openWfCategoryModal,
+    openWfActionModal,
+    closeWfActionModal,
+    openDeviceWfDiagramModal,
+
+    addWorkflowTag,
+    removeWorkflowTag,
+
+    addWfCategory,
+    closeWfCategoryModal,
+
+    showWorkflowTagModal,
+    addWorkflow
+  }
 )(reduxForm({form: 'workflowForm'})(MainWorkflowModal))
