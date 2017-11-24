@@ -7,6 +7,7 @@ import {extImageBaseUrl} from 'shared/Global'
 import {chipStyles} from 'style/common/materialStyles'
 
 import InfiniteTable from 'components/common/InfiniteTable';
+import MainWorkflowModal from 'components/dashboard/map/device/main/workflows/MainWorkflowModal'
 
 export default class DeviceWf extends React.Component {
   constructor (props) {
@@ -54,8 +55,18 @@ export default class DeviceWf extends React.Component {
     return this.props.devices.filter(p => p.tags && p.tags.includes('Server'))
   }
 
+  getTable () {
+    return this.refs.table
+  }
+
   onClickDevice (selected) {
     this.setState({selected})
+  }
+
+  onClickEdit () {
+    const selected = this.getTable().getSelected()
+    if (!selected) return window.alert('Please select workflow.')
+    this.props.openDeviceWorkflowModal(selected, this.state.selected)
   }
 
   //////////////////////////////////////////////////////////////////////////////////////////////////
@@ -92,6 +103,18 @@ export default class DeviceWf extends React.Component {
           id: selected.workflowids || [],
           draw: 1
         }}
+
+        onRowDblClick={this.onClickEdit.bind(this)}
+      />
+    )
+  }
+
+  renderWorkflowModal () {
+    if (!this.props.workflowModalOpen) return null
+    return (
+      <MainWorkflowModal
+        {...this.props}
+        device={this.state.selected}
       />
     )
   }
@@ -117,6 +140,8 @@ export default class DeviceWf extends React.Component {
                 {this.renderWorkflows()}
               </div>
             </div>
+
+            {this.renderWorkflowModal()}
           </div>
         </TabPageBody>
       </TabPage>

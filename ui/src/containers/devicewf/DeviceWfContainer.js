@@ -5,7 +5,9 @@ import { connect } from 'react-redux'
 import DeviceWf from 'components/devicewf/DeviceWf'
 
 import {
-  fetchDevices
+  fetchDevices,
+
+  openDeviceWorkflowModal
 } from 'actions'
 class DeviceWfContainer extends React.Component {
   render () {
@@ -17,8 +19,15 @@ class DeviceWfContainer extends React.Component {
 
 export default connect(
   state => ({
-    devices: state.devices.devices
+    devices: state.devices.devices,
+
+    workflowModalOpen: state.devices.workflowModalOpen,
+    workflowListDraw: state.devices.workflowListDraw,
+    wfTagModalOpen: state.settings.wfTagModalOpen,
+    editWorkflowTags: state.settings.editWorkflowTags
   }), {
-    fetchDevices
+    fetchDevices,
+
+    openDeviceWorkflowModal
   }
 )(withRouter(DeviceWfContainer))
