@@ -41,12 +41,16 @@ export default class WorkflowStep3 extends Component {
                 <td>{a.name}</td>
                 <td>{a.actionType}</td>
                 <td className="text-right">
-                  <IconButton onTouchTap={() => setTimeout(onEditAction, 1)}>
-                    <CreateIcon color="#545454"/>
-                  </IconButton>
-                  <IconButton onTouchTap={() => setTimeout(onRemoveAction, 1)}>
-                    <DeleteIcon color="#545454"/>
-                  </IconButton>
+                  <CreateIcon
+                    color="#545454"
+                    onTouchTap={() => setTimeout(onEditAction, 1)}
+                    className="link"
+                  />
+                  <DeleteIcon
+                    color="#545454"
+                    onTouchTap={() => setTimeout(onRemoveAction, 1)}
+                    className="link margin-sm-left"
+                  />
                 </td>
               </tr>
             )
