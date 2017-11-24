@@ -42,11 +42,11 @@ export default class IncidentTable extends Component {
     }, {
       'displayName': 'System',
       'columnName': 'devicename',
-      'cssClassName': 'width-180'
-    }, {
-      'displayName': 'Workflow',
-      'columnName': 'workflow',
-      'cssClassName': 'width-180'
+      'cssClassName': 'width-200',
+      'customComponent': p => {
+        const {workflow} = p.rowData
+        return <span>{p.data}{workflow ? `(${workflow})` : ''}</span>
+      }
     }, {
       'displayName': 'Description',
       'columnName': 'description',
