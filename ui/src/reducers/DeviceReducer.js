@@ -121,6 +121,8 @@ import {
 
   UPDATE_DEVICE_HOST,
 
+  FETCH_WORKFLOW,
+
   UPDATE_DEVICE_ERROR
 } from 'actions/types'
 
@@ -239,6 +241,9 @@ export default function (state = INITIAL_STATE, action) {
 
     case CLOSE_DEVICE_WORKFLOW_MODAL:
       return { ...state, workflowModalOpen: false }
+
+    case FETCH_WORKFLOW:
+      return { ...state, editWorkflow: action.data }
 
     case ADD_DEVICE_WORKFLOW:
     case UPDATE_DEVICE_WORKFLOW:

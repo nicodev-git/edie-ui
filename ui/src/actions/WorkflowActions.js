@@ -144,8 +144,14 @@ export const showWorkflowTagModal = (visible) => {
 
 export const fetchWorkflow = (id) => {
   return dispatch => {
-    axios.get(`${ROOT_URL}/workflow?id=${id}`).then(({data}) => {
-      dispatch({type: FETCH_WORKFLOW, data})
+    axios.get(`${ROOT_URL}/workflow/${id}`).then(({data}) => {
+      dispatch(setWorkflow(data))
     })
+  }
+}
+
+export const setWorkflow = (data) => {
+  return dispatch => {
+    dispatch({type: FETCH_WORKFLOW, data})
   }
 }
