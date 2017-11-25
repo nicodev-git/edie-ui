@@ -1,5 +1,5 @@
 import React from 'react'
-import {Checkbox} from 'material-ui'
+import {Checkbox, SelectField, MenuItem} from 'material-ui'
 import {findIndex} from 'lodash'
 
 import TabPage from 'components/common/TabPage'
@@ -7,11 +7,14 @@ import TabPageBody from 'components/common/TabPageBody'
 import MainWorkflowModal from 'components/dashboard/map/device/main/workflows/MainWorkflowModal'
 import AddWfTabs from './AddWfTabs'
 
+import {severities} from 'shared/Global'
+
 export default class AddWf extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      tab:0
+      tab:0,
+      severity: ''
     }
   }
   componentWillMount () {
@@ -50,41 +53,59 @@ export default class AddWf extends React.Component {
     }
   }
 
+  onChangeSeverity (e, index, value) {
+    this.setState({
+      severity: value
+    })
+  }
+
   ////////////////////////////////////////////////
   renderTab1 () {
     const {sysWorkflows, selectedSysWorkflows} = this.props
     return (
-      <div className="flex-1" style={{overflow: 'auto'}}>
-        <table className="table table-hover">
-          <thead>
-          <tr>
-            <th>Category</th>
-            <th>Severity</th>
-            <th>Name</th>
-            <th>Description</th>
-            <th>Version</th>
-          </tr>
-          </thead>
-          <tbody>
-          {
-            sysWorkflows.map(w =>
-              <tr key={w.id}>
-                <td>
-                  <Checkbox
-                    label={w.category}
-                    checked={findIndex(selectedSysWorkflows, {id: w.id}) >= 0}
-                    onCheck={(e, c) => this.onChangeCheck(w, e, c)}
-                  />
-                </td>
-                <td>{w.severity}</td>
-                <td>{w.name}</td>
-                <td>{w.desc}</td>
-                <td>{w.version}</td>
-              </tr>
-            )
-          }
-          </tbody>
-        </table>
+      <div className="flex-vertical flex-1">
+        <div className="padding-xs">
+          <SelectField value={this.state.severity} onChange={this.onChangeSeverity.bind(this)}>
+            <MenuItem value="" primaryText="[All]"/>
+            {severities.map(option =>
+              <MenuItem
+                key={option.value}
+                value={option.value}
+                primaryText={option.label}
+              />
+            )}
+          </SelectField>
+        </div>
+        <div className="flex-1" style={{overflow: 'auto'}}>
+          <table className="table table-hover">
+            <thead>
+            <tr>
+              <th>Severity</th>
+              <th>Name</th>
+              <th>Description</th>
+              <th>Version</th>
+            </tr>
+            </thead>
+            <tbody>
+            {
+              sysWorkflows.map(w =>
+                <tr key={w.id}>
+                  <td>
+                    <Checkbox
+                      label={w.severity}
+                      checked={findIndex(selectedSysWorkflows, {id: w.id}) >= 0}
+                      onCheck={(e, c) => this.onChangeCheck(w, e, c)}
+                    />
+                  </td>
+                  <td>{w.name}</td>
+                  <td>{w.desc}</td>
+                  <td>{w.version}</td>
+                </tr>
+              )
+            }
+            </tbody>
+          </table>
+        </div>
       </div>
     )
   }
