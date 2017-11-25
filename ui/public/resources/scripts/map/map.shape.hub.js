@@ -22,7 +22,7 @@ fabric.ShapeHub = fabric.util.createClass(fabric.Image, {
     var me = this;
     var map = me.canvas.map;
 
-    // console.log("Moved: " + me.left + ' ' + me.top)
+    console.log("Moved: " + me.left + ' ' + me.top)
     return map.notifyMoved(me.id, {
       left: me.left + (group ? (group.left + group.width / 2): 0),
       top: me.top + (group ? (group.top + group.height / 2): 0),
@@ -37,7 +37,7 @@ fabric.ShapeHub = fabric.util.createClass(fabric.Image, {
     var me = this;
     // console.log("Rotated1: " + me.left + ' ' + me.top)
     me.setCoords();
-    // console.log("Rotated2: " + me.left + ' ' + me.top)
+    // console.log("Rotated2: " + me.getLeft() + ' ' + me.getTop())
 
     me.updateLines(null, null, null, true);
 

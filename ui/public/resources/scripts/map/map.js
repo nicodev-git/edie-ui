@@ -392,6 +392,7 @@ var mapObject = {
     if (!obj) return;
 
     obj.onRotating && obj.onRotating(e);
+
   },
 
   onMouseOver: function(e) {
