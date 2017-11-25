@@ -125,25 +125,20 @@ export default class GCommand extends React.Component {
   renderFrontView () {
     const {commandResult, command} = this.state
     return (
-      <div className="flex-vertical flex-1">
-        <div className="flex-1">
-          <textarea
-            value={commandResult} readOnly
-            style={{border: 'none', width: '100%', height: '100%', background: 'black', color: '#00FF00'}}/>
+      <div className="flex-1 relative">
+        <textarea
+          value={commandResult} readOnly
+          style={{border: 'none', width: '100%', height: '100%', background: 'black', color: '#00FF00'}}/>
+
+        <div style={{width: '100%', left: 0, position: 'absolute', bottom: 0}}>
+          <TextField
+            name="command" style={{width: '100%'}} value={command}
+            onChange={(e, command) => this.setState({command})}
+            onKeyDown={this.onKeyDownInput.bind(this)}
+            autoFocus
+          />
         </div>
-        <div className="flex-horizontal">
-          <div className="flex-1">
-            <TextField
-              name="command" style={{width: '100%'}} value={command}
-              onChange={(e, command) => this.setState({command})}
-              onKeyDown={this.onKeyDownInput.bind(this)}
-              autoFocus
-            />
-          </div>
-          <div className="padding-md-left" style={{marginTop: 7}}>
-            <RaisedButton label="Run" onTouchTap={this.onClickSend.bind(this)}/>
-          </div>
-        </div>
+
       </div>
     )
   }
@@ -167,7 +162,7 @@ export default class GCommand extends React.Component {
         className={this.props.className}
         gauge={this.props.gauge}
         title={this.getTitle()}
-        bodyStyle={{padding: '2px 12px'}}
+        bodyStyle={{padding: '2px 12px 10px 12px'}}
 
         loading={this.state.loading}
         renderFrontView={this.renderFrontView}
