@@ -141,8 +141,10 @@ export default class AddWf extends React.Component {
     return (
       <MainWorkflowModal
         noModal
+        isDiagramButton={false}
         onClickDiagram={this.onClickDiagram.bind(this)}
         onFinish={this.onFinish.bind(this)}
+        device={this.getDevice()}
       />
     )
   }
