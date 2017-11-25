@@ -3,6 +3,7 @@ import {findIndex} from 'lodash'
 import {Chip} from 'material-ui'
 import DeleteIcon from 'material-ui/svg-icons/action/delete'
 import EditIcon from 'material-ui/svg-icons/content/create'
+import PublicIcon from 'material-ui/svg-icons/social/public'
 
 import FlipView from './FlipView'
 import GEditView from './GEditView'
@@ -25,11 +26,11 @@ export default class GWorkflows extends React.Component {
     this.cells = [{
       'displayName': 'Name',
       'columnName': 'name',
-      'cssClassName': 'width-200'
+      'cssClassName': 'width-180'
     }, {
       'displayName': 'Description',
       'columnName': 'desc',
-      'cssClassName': 'width-200'
+      'cssClassName': 'width-240'
     }, {
       'displayName': 'Details',
       'columnName': 'isglobal',
@@ -50,17 +51,23 @@ export default class GWorkflows extends React.Component {
                 {t}
               </Chip>
             )}
+
+            {p.rowData.isglobal ? (
+              <PublicIcon />
+            ) : null}
           </div>
         )
       }
     }, {
       'displayName': 'Action',
       'columnName': 'id',
+      'cssClassName': 'width-120',
       'customComponent': p=> {
         return (
           <div>
             <EditIcon onTouchTap={this.onClickEditWf.bind(this, p.rowData)} className="link"/>
             <DeleteIcon onTouchTap={this.onClickDeleteWf.bind(this, p.rowData)} className="link margin-sm-left"/>
+
           </div>
         )
       }

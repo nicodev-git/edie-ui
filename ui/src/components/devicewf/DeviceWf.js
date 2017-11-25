@@ -3,6 +3,7 @@ import {Chip} from 'material-ui'
 import DeleteIcon from 'material-ui/svg-icons/action/delete'
 import EditIcon from 'material-ui/svg-icons/content/create'
 import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
+import PublicIcon from 'material-ui/svg-icons/social/public'
 
 import TabPage from 'components/common/TabPage'
 import TabPageBody from 'components/common/TabPageBody'
@@ -23,11 +24,11 @@ export default class DeviceWf extends React.Component {
     this.cells = [{
       'displayName': 'Name',
       'columnName': 'name',
-      'cssClassName': 'width-200'
+      'cssClassName': 'width-180'
     }, {
       'displayName': 'Description',
       'columnName': 'desc',
-      'cssClassName': 'width-200'
+      'cssClassName': 'width-240'
     }, {
       'displayName': 'Details',
       'columnName': 'isglobal',
@@ -36,8 +37,6 @@ export default class DeviceWf extends React.Component {
         tags = tags || []
         return (
           <div style={chipStyles.wrapper}>
-            {p.data ? <Chip style={chipStyles.smallChip} labelStyle={chipStyles.smallLabel}>Global</Chip> : ''}
-
             <Chip style={chipStyles.smallChip} labelStyle={chipStyles.smallLabel}
                   backgroundColor={getSeverityColor(severity)}>
               {severity}
@@ -48,12 +47,17 @@ export default class DeviceWf extends React.Component {
                 {t}
               </Chip>
             )}
+
+            {p.rowData.isglobal ? (
+              <PublicIcon />
+            ) : null}
           </div>
         )
       }
     }, {
       'displayName': 'Action',
       'columnName': 'id',
+      'cssClassName': 'width-80',
       'customComponent': p=> {
         return (
           <div>
@@ -109,14 +113,20 @@ export default class DeviceWf extends React.Component {
 
   renderDevices () {
     const {selected} = this.state
-    return this.getDevices().map(p =>
-      <div key={p.id} className={`padding-sm bt-gray ${selected && selected.id === p.id ? 'text-danger' : ''}`}>
-        <span className="link" onClick={this.onClickDevice.bind(this, p)}>
-          <img src={`${extImageBaseUrl}${p.image}`}
-               width="16" alt="" className="valign-middle bg-black"/>
-          &nbsp;{p.name}
-        </span>
-      </div>
+    return (
+      <table className="table table-hover">
+        <tbody>
+        {this.getDevices().map(p =>
+            <tr key={p.id} className={`${selected && selected.id === p.id ? 'text-danger' : ''}`}>
+              <td onClick={this.onClickDevice.bind(this, p)} style={{cursor: 'pointer'}}>
+                <img src={`${extImageBaseUrl}${p.image}`}
+                     width="16" alt="" className="valign-middle bg-black"/>
+                &nbsp;{p.name}
+              </td>
+            </tr>
+        )}
+        </tbody>
+      </table>
     )
 
   }
