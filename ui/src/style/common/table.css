@@ -16,6 +16,13 @@ table.table tbody td.selected{
     vertical-align: middle;
 }
 
+.table > thead > tr > th, .table > thead > tr > td {
+    padding: 9px 6px;
+}
+.table > tbody > tr > th, .table > tbody > tr > td, .table > tfoot > tr > th, .table > tfoot > tr > td {
+    padding: 4px 6px;
+}
+
 /*Table column size */
 
 .width-40 {

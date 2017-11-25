@@ -120,7 +120,7 @@ export default class DeviceWf extends React.Component {
             <tr key={p.id} className={`${selected && selected.id === p.id ? 'text-danger' : ''}`}>
               <td onClick={this.onClickDevice.bind(this, p)} style={{cursor: 'pointer'}}>
                 <img src={`${extImageBaseUrl}${p.image}`}
-                     width="16" alt="" className="valign-middle bg-black"/>
+                     width="28" alt="" className="valign-middle bg-black"/>
                 &nbsp;{p.name}
               </td>
             </tr>
