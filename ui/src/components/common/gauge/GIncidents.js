@@ -6,7 +6,6 @@ import IncidentTable from './display/IncidentTable'
 import GEditView from './GEditView'
 
 import {showAlert} from 'components/common/Alert'
-import {gaugeTitleStyle1} from 'style/common/materialStyles'
 
 export default class GIncidents extends React.Component {
   constructor (props) {
@@ -94,11 +93,11 @@ export default class GIncidents extends React.Component {
         {...this.props}
 
         title="[Incidents]"
-        titleStyle={gaugeTitleStyle1}
 
         style={this.props.style}
         className={this.props.className}
         gauge={this.props.gauge}
+        bodyStyle={{padding: '2px 12px'}}
 
         loading={this.state.loading}
         renderFrontView={this.renderFrontView}

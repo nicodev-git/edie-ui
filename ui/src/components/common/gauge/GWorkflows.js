@@ -9,7 +9,6 @@ import {showAlert} from 'components/common/Alert'
 import InfiniteTable from 'components/common/InfiniteTable'
 
 import {chipStyles} from 'style/common/materialStyles'
-import {gaugeTitleStyle1} from 'style/common/materialStyles'
 
 export default class GWorkflows extends React.Component {
   constructor (props) {
@@ -133,11 +132,11 @@ export default class GWorkflows extends React.Component {
       <FlipView
         {...this.props}
 
-        titleStyle={gaugeTitleStyle1}
         style={this.props.style}
         className={this.props.className}
         gauge={this.props.gauge}
         title={this.getTitle()}
+        bodyStyle={{padding: '2px 12px'}}
 
         loading={this.state.loading}
         renderFrontView={this.renderFrontView}

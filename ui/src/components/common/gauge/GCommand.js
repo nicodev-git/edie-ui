@@ -1,6 +1,4 @@
 import React from 'react'
-// import {findIndex} from 'lodash'
-import {TextField, RaisedButton} from 'material-ui'
 
 import FlipView from './FlipView'
 import GEditView from './GEditView'
@@ -125,19 +123,24 @@ export default class GCommand extends React.Component {
   renderFrontView () {
     const {commandResult, command} = this.state
     return (
-      <div className="flex-1 relative">
+      <div className="flex-1 relative" style={{background: 'black'}}>
         <textarea
           value={commandResult} readOnly
-          style={{border: 'none', width: '100%', height: '100%', background: 'black', color: '#00FF00'}}/>
+          style={{position: 'absolute', border: 'none', width: '100%', top: 0, bottom: 30, background: 'black', color: '#20FF20'}}/>
 
-        <div style={{width: '100%', left: 0, position: 'absolute', bottom: 0}}>
-          <TextField
-            name="command" style={{width: '100%'}} value={command}
-            onChange={(e, command) => this.setState({command})}
-            onKeyDown={this.onKeyDownInput.bind(this)}
-            autoFocus
-          />
+        <div style={{left: 4, right: 4, position: 'absolute', bottom: 0}} className="flex-horizontal">
+          <label style={{color: '#50FF50'}}>bash#</label>
+          <div className="flex-1">
+            <input
+              name="command" style={{width: '100%', background: 'transparent', color: '#20FF20', fontSize: 12, border: 'none'}}
+              value={command}
+              onChange={e => this.setState({command: e.target.value})}
+              onKeyDown={this.onKeyDownInput.bind(this)}
+              autoFocus
+            />
+          </div>
         </div>
+
 
       </div>
     )
