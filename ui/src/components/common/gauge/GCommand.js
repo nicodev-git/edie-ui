@@ -8,8 +8,6 @@ import GEditView from './GEditView'
 import {showAlert} from 'components/common/Alert'
 import MonitorSocket from 'util/socket/MonitorSocket'
 
-import {gaugeTitleStyle1} from 'style/common/materialStyles'
-
 export default class GCommand extends React.Component {
   constructor (props) {
     super (props)
@@ -165,7 +163,6 @@ export default class GCommand extends React.Component {
       <FlipView
         {...this.props}
 
-        titleStyle={gaugeTitleStyle1}
         style={this.props.style}
         className={this.props.className}
         gauge={this.props.gauge}

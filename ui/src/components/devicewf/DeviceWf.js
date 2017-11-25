@@ -18,10 +18,12 @@ export default class DeviceWf extends React.Component {
 
     this.cells = [{
       'displayName': 'Name',
-      'columnName': 'name'
+      'columnName': 'name',
+      'cssClassName': 'width-200'
     }, {
       'displayName': 'Description',
-      'columnName': 'desc'
+      'columnName': 'desc',
+      'cssClassName': 'width-200'
     }, {
       'displayName': 'Details',
       'columnName': 'isglobal',
