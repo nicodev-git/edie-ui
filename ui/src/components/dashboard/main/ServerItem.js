@@ -1,13 +1,15 @@
 import React from 'react'
+import ReactTooltip from 'react-tooltip'
 
 import AppletCard from 'components/common/AppletCard'
-import { extImageBaseUrl, appletColors as colors, trimOSName } from 'shared/Global'
+import { extImageBaseUrl, appletColors as colors, trimOSName, checkAgentUp } from 'shared/Global'
 
 export default class ServerItem extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      up: false
+      up: false,
+      info: ''
     }
   }
 
@@ -25,9 +27,16 @@ export default class ServerItem extends React.Component {
   }
 
   componentWillMount () {
-    this.setState({
-      up: this.getStatus()
-    })
+    const up = this.getStatus()
+    this.setState({ up })
+
+    if (!up) {
+      const device = this.props.server
+      checkAgentUp(device.id, (up, info, resCode) => {
+        if (!up) this.setState({info})
+        setTimeout(ReactTooltip.rebuild, 100)
+      })
+    }
   }
 
   renderRightIcons () {
@@ -40,6 +49,8 @@ export default class ServerItem extends React.Component {
         alt=""
         width={20}
         className="valign-middle"
+        title={this.state.info}
+        data-tip={this.state.info}
       />
     )
   }

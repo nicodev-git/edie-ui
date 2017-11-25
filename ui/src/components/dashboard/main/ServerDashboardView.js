@@ -5,6 +5,7 @@ import ClearIcon from 'material-ui/svg-icons/communication/clear-all'
 import ComputerIcon from 'material-ui/svg-icons/hardware/computer'
 import DevicesIcon from 'material-ui/svg-icons/device/devices'
 import {purple500, deepPurpleA400} from 'material-ui/styles/colors'
+import ReactTooltip from 'react-tooltip'
 
 import { wizardConfig } from 'components/common/wizard/WizardConfig'
 import DeviceWizardContainer from 'containers/shared/wizard/DeviceWizardContainer'
@@ -309,6 +310,7 @@ export default class ServerDashboardView extends React.Component {
         {this.renderCmdModal()}
         {this.renderRangeAddModal()}
         {deleteDeviceState && <RefreshOverlay />}
+        <ReactTooltip />
       </div>
     )
   }
