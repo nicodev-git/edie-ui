@@ -36,6 +36,7 @@ fabric.ShapeHub = fabric.util.createClass(fabric.Image, {
   onRotating: function() {
     var me = this;
     // console.log("Rotated: " + me.getAngle())
+    me.updateLines();
     clearTimeout(me.rotateTimer)
     me.rotateTimer = setTimeout(function() {
       me.onMoved()

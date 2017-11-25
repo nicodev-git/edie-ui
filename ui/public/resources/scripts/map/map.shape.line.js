@@ -153,8 +153,6 @@ fabric.ShapeLine = fabric.util.createClass(fabric.Object, {
       if (Math.abs(startX - endX) < 1) startX = endX;
     }
 
-    var groupItems = [];
-
     var step = me.steps[0];
     step.set({
       x1: startX,

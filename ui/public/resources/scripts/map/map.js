@@ -1753,9 +1753,6 @@ var mapObject = {
     if(hub) {
       var r = obj.getBoundingRect();
 
-      if (obj.id == '3214984')
-        obj.left += 0;
-
       var dx = obj.width * obj.scaleX * props[point][0] / 60.0;
       var dy = obj.height * obj.scaleY * props[point][1] / 2.0;
       var dl = Math.sqrt(dx * dx + dy * dy);
