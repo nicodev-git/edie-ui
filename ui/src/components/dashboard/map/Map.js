@@ -133,6 +133,7 @@ class Map extends React.Component {
 
     let extra = {
       mapid: this.props.selectedMap.id,
+      mapids: [this.props.selectedMap.id],
       x: options.x,
       y: options.y,
       width: options.width,
@@ -144,7 +145,8 @@ class Map extends React.Component {
     }
 
     let config = {
-      mapid: this.props.selectedMap.id
+      mapid: this.props.selectedMap.id,
+      mapids: [this.props.selectedMap.id]
     }
 
     return (
@@ -232,6 +234,7 @@ class Map extends React.Component {
     if (!lineId) {
       let props = {
         mapid: this.props.selectedMap.id,
+        mapids: [this.props.selectedMap.id],
         line: {
           from: lineObj.startObj.id,
           fromPoint: lineObj.startPoint,
@@ -575,7 +578,8 @@ class Map extends React.Component {
           // this.props.deleteMapDevice(data)
           this.props.updateMapDevice({
             ...data,
-            mapid: null
+            mapid: this.props.selectedMap.id === data.mapid ? null : data.mapid,
+            mapids: data.mapids.filter(p => p !== this.props.selectedMap.id)
           })
         }
       }
