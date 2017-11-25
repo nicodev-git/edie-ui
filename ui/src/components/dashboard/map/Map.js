@@ -340,6 +340,8 @@ class Map extends React.Component {
         mapids: [...(device.mapids || []), selectedMap.id],
         x: x,
         y: y,
+        textX: x,
+        textY: y + 60,
         width: 50,
         height: 50
       }
