@@ -2,7 +2,7 @@ import React from 'react'
 import {Chip} from 'material-ui'
 import DeleteIcon from 'material-ui/svg-icons/action/delete'
 import EditIcon from 'material-ui/svg-icons/content/create'
-
+import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
 
 import TabPage from 'components/common/TabPage'
 import TabPageBody from 'components/common/TabPageBody'
@@ -99,6 +99,12 @@ export default class DeviceWf extends React.Component {
     this.props.history.push(`/${this.state.selected.name}/editwf/${selected.id}`)
   }
 
+  onClickAddWf () {
+    const {selected} = this.state
+    if (!selected) return
+    this.props.history.push(`/${selected.name}/addwf?z=${selected.id}`)
+  }
+
   //////////////////////////////////////////////////////////////////////////////////////////////////
 
   renderDevices () {
@@ -165,7 +171,12 @@ export default class DeviceWf extends React.Component {
               </div>
             </div>
             <div className="flex-vertical flex-1" style={{overflow: 'auto'}}>
-              <div className="header-red margin-xs-right">Workflows</div>
+              <div className="header-red margin-xs-right relative">
+                Workflows
+                <div style={{position: 'absolute', right: 4, top: 8}}>
+                  <AddCircleIcon className="link" onTouchTap={this.onClickAddWf.bind(this)}/>
+                </div>
+              </div>
               <div className="flex-1 flex-vertical paper-bg">
                 {this.renderWorkflows()}
               </div>
