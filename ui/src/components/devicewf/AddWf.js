@@ -1,4 +1,6 @@
 import React from 'react'
+import {Checkbox} from 'material-ui'
+import {findIndex} from 'lodash'
 
 import TabPage from 'components/common/TabPage'
 import TabPageBody from 'components/common/TabPageBody'
@@ -14,6 +16,7 @@ export default class AddWf extends React.Component {
   }
   componentWillMount () {
     // this.props.fetchDevice(this.getDeviceId())
+    this.props.fetchWorkflows()
   }
 
   getDeviceId () {
@@ -39,7 +42,54 @@ export default class AddWf extends React.Component {
 
   ////////////////////////////////////////////////
 
-  renderContent () {
+  onChangeCheck (workflow, e, checked) {
+    if (checked) {
+      this.props.selectSysWorkflow(workflow)
+    } else {
+      this.props.deselectSysWorkflow(workflow)
+    }
+  }
+
+  ////////////////////////////////////////////////
+  renderTab1 () {
+    const {sysWorkflows, selectedSysWorkflows} = this.props
+    return (
+      <div className="flex-1" style={{overflow: 'auto'}}>
+        <table className="table table-hover">
+          <thead>
+          <tr>
+            <th>Category</th>
+            <th>Severity</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Version</th>
+          </tr>
+          </thead>
+          <tbody>
+          {
+            sysWorkflows.map(w =>
+              <tr key={w.id}>
+                <td>
+                  <Checkbox
+                    label={w.category}
+                    checked={findIndex(selectedSysWorkflows, {id: w.id}) >= 0}
+                    onCheck={(e, c) => this.onChangeCheck(w, e, c)}
+                  />
+                </td>
+                <td>{w.severity}</td>
+                <td>{w.name}</td>
+                <td>{w.desc}</td>
+                <td>{w.version}</td>
+              </tr>
+            )
+          }
+          </tbody>
+        </table>
+      </div>
+    )
+  }
+
+  renderTab2 () {
     return (
       <MainWorkflowModal
         noModal
@@ -49,13 +99,19 @@ export default class AddWf extends React.Component {
     )
   }
 
+  renderContent () {
+    if (this.state.tab === 0) {
+      return this.renderTab1()
+    } else {
+      return this.renderTab2()
+    }
+  }
+
   render () {
-    const {editWorkflow} = this.props
-    if (!editWorkflow) return <div>Loading...</div>
     return (
       <TabPage>
         <div style={{margin: '16px 20px 0'}}>
-          <span className="tab-title">{editWorkflow.name}</span>
+          <span className="tab-title">Add Workflow</span>
         </div>
 
         <TabPageBody tabs={AddWfTabs} tab={this.state.tab} onClickTab={this.onClickTab.bind(this)}>

@@ -5,11 +5,11 @@ import { connect } from 'react-redux'
 import AddWf from 'components/devicewf/AddWf'
 
 import {
-  fetchDevices,
-  fetchWorkflow,
-  setWorkflow,
+  fetchWorkflowCategories,
+  fetchWorkflows,
 
-  openDeviceWorkflowModal
+  selectSysWorkflow,
+  deselectSysWorkflow
 } from 'actions'
 class AddWfContainer extends React.Component {
   render () {
@@ -24,15 +24,16 @@ class AddWfContainer extends React.Component {
 export default connect(
   state => ({
     devices: state.devices.devices,
-    editWorkflow: state.devices.editWorkflow,
 
-    workflowModalOpen: state.devices.workflowModalOpen,
-    workflowListDraw: state.devices.workflowListDraw
+    workflowCategories: state.devices.workflowCategories,
+
+    sysWorkflows: state.settings.workflows,
+    selectedSysWorkflows: state.devices.selectedSysWorkflows
   }), {
-    fetchDevices,
-    fetchWorkflow,
-    setWorkflow,
+    fetchWorkflowCategories,
+    fetchWorkflows,
 
-    openDeviceWorkflowModal
+    selectSysWorkflow,
+    deselectSysWorkflow
   }
 )(withRouter(AddWfContainer))

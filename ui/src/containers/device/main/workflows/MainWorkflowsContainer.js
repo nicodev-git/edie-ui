@@ -10,6 +10,7 @@ import {
   addDeviceWorkflow,
   updateDeviceWorkflow,
 
+  fetchWorkflowCategories,
   fetchWorkflows,
   openSysWorkflowsModal,
   closeSysWorkflowsModal,
@@ -33,6 +34,8 @@ export default connect(
     workflowModalOpen: state.devices.workflowModalOpen,
     workflowListDraw: state.devices.workflowListDraw,
 
+    workflowCategories: state.devices.workflowCategories,
+
     sysWorkflows: state.settings.workflows,
     sysWorkflowsModalOpen: state.devices.sysWorkflowsModalOpen,
     selectedSysWorkflows: state.devices.selectedSysWorkflows,
@@ -45,6 +48,7 @@ export default connect(
     addDeviceWorkflow,
     updateDeviceWorkflow,
 
+    fetchWorkflowCategories,
     fetchWorkflows,
     openSysWorkflowsModal,
     closeSysWorkflowsModal,

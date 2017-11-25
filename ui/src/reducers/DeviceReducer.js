@@ -170,6 +170,8 @@ const INITIAL_STATE = {
 
   deviceAndGroups: [],
 
+  selectedSysWorkflows: [],
+
   monitorQuery: ''
 }
 
