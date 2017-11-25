@@ -621,7 +621,8 @@ class Map extends React.Component {
         width: options.width,
         height: options.height,
         templateName: options.templateName,
-        mapid: this.props.selectedMap.id
+        mapid: this.props.selectedMap.id,
+        mapids: [this.props.selectedMap.id]
       }
 
       this.onClickEdit()

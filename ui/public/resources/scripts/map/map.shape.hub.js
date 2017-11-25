@@ -32,6 +32,16 @@ fabric.ShapeHub = fabric.util.createClass(fabric.Image, {
     }, null, null, me.data.fatherid);
   },
 
+
+  onRotating: function() {
+    var me = this;
+    // console.log("Rotated: " + me.getAngle())
+    clearTimeout(me.rotateTimer)
+    me.rotateTimer = setTimeout(function() {
+      me.onMoved()
+    }, 500);
+  },
+
   rotate: function(right) {
     var me = this;
     var angle = me.getAngle();
@@ -109,7 +119,7 @@ fabric.ShapeHub.create = function(options){
     height:config.height,
 
     lines: [],
-    hasRotatingPoint: false,
+    hasRotatingPoint: true,
     hasBorders: false,
     angle: config.angle || 0,
 

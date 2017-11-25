@@ -211,7 +211,9 @@ var mapObject = {
     canvas.on('object:scaling', function(e){
       me.onObjectScaling(e);
     });
-
+    canvas.on('object:rotating', function(e){
+      me.onObjectRotating(e);
+    })
     canvas.on('mouse:move', function(e){
       me.onMouseMove(e);
     });
@@ -380,6 +382,15 @@ var mapObject = {
 
     me.lastSX = obj.scaleX;
     me.lastSY = obj.scaleY;
+  },
+
+  onObjectRotating: function (e) {
+    var me = this;
+    var canvas = me.canvas;
+    var obj = e.target;
+    if (!obj) return;
+
+    obj.onRotating && obj.onRotating(e);
   },
 
   onMouseOver: function(e) {
