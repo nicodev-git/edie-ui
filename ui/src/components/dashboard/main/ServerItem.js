@@ -9,7 +9,7 @@ export default class ServerItem extends React.Component {
     super(props)
     this.state = {
       up: false,
-      info: ''
+      info: 'Collector not working'
     }
   }
 
@@ -33,7 +33,7 @@ export default class ServerItem extends React.Component {
     if (!up) {
       const device = this.props.server
       checkAgentUp(device.id, (up, info, resCode) => {
-        if (!up) this.setState({info})
+        if (!up && info) this.setState({info})
         setTimeout(ReactTooltip.rebuild, 100)
       })
     }
