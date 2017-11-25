@@ -11,6 +11,7 @@ import {chipStyles} from 'style/common/materialStyles'
 
 import InfiniteTable from 'components/common/InfiniteTable';
 import MainWorkflowModal from 'components/dashboard/map/device/main/workflows/MainWorkflowModal'
+import {showConfirm} from "../common/Alert";
 
 export default class DeviceWf extends React.Component {
   constructor (props) {
@@ -55,8 +56,8 @@ export default class DeviceWf extends React.Component {
       'customComponent': p=> {
         return (
           <div>
-            <EditIcon onTouchTap={this.onClickEditWf.bind(this, p.data)} className="link"/>
-            <DeleteIcon onTouchTap={this.onClickDeleteWf.bind(this, p.data)} className="link margin-sm-left"/>
+            <EditIcon onTouchTap={this.onClickEditWf.bind(this, p.rowData)} className="link"/>
+            <DeleteIcon onTouchTap={this.onClickDeleteWf.bind(this, p.rowData)} className="link margin-sm-left"/>
           </div>
         )
       }
@@ -75,12 +76,15 @@ export default class DeviceWf extends React.Component {
     return this.refs.table
   }
 
-  onClickEditWf () {
-
+  onClickEditWf (wf) {
+    this.props.history.push(`/${this.state.selected.name}/editwf/${wf.id}`)
   }
 
-  onClickDeleteWf () {
-
+  onClickDeleteWf (wf) {
+    showConfirm('Are you sure?', btn => {
+      if (btn !== 'ok') return
+      this.props.removeWorkflow(wf)
+    })
   }
 
   onClickDevice (selected) {
@@ -126,7 +130,7 @@ export default class DeviceWf extends React.Component {
         url="/workflow/search/findById"
         params={{
           id: selected.workflowids || [],
-          draw: 1
+          draw: this.props.workflowDraw
         }}
 
         onRowDblClick={this.onClickEdit.bind(this)}

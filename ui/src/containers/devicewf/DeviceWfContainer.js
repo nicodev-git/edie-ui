@@ -7,7 +7,8 @@ import DeviceWf from 'components/devicewf/DeviceWf'
 import {
   fetchDevices,
 
-  openDeviceWorkflowModal
+  openDeviceWorkflowModal,
+  removeWorkflow
 } from 'actions'
 class DeviceWfContainer extends React.Component {
   render () {
@@ -22,10 +23,12 @@ export default connect(
     devices: state.devices.devices,
 
     workflowModalOpen: state.devices.workflowModalOpen,
-    workflowListDraw: state.devices.workflowListDraw
+    workflowListDraw: state.devices.workflowListDraw,
+    workflowDraw: state.settings.workflowDraw
   }), {
     fetchDevices,
 
-    openDeviceWorkflowModal
+    openDeviceWorkflowModal,
+    removeWorkflow
   }
 )(withRouter(DeviceWfContainer))

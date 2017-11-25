@@ -196,7 +196,9 @@ const initialState = {
 
   users: [],
   mapUsers: [],
-  monitorGroups: []
+  monitorGroups: [],
+
+  workflowDraw: 1
 }
 
 export default function (state = initialState, action) {
@@ -417,7 +419,7 @@ export default function (state = initialState, action) {
 
     case REMOVE_WORKFLOW: {
       const workflows = state.workflows.filter(u => u.id !== action.data.id)
-      return { ...state, workflows }
+      return { ...state, workflows, workflowDraw: state.workflowDraw + 1 }
     }
 
     case OPEN_WORKFLOW_MODAL: {
