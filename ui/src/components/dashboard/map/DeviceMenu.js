@@ -40,8 +40,9 @@ export default class DeviceMenu extends React.Component {
   }
 
   getNewDevices () {
-    const {allDevices} = this.props
-    return allDevices.filter(p => !p.line && !p.mapid)
+    const {allDevices, selectedMap} = this.props
+    if (!selectedMap) return []
+    return allDevices.filter(p => !p.line && (!p.mapids || !p.mapids.includes(selectedMap.id)))
   }
 
   render () {

@@ -336,7 +336,8 @@ class Map extends React.Component {
       let device = allDevices[index]
       device = {
         ...device,
-        mapid: selectedMap.id,
+        mapid: device.mapid || selectedMap.id,
+        mapids: [...(device.mapids || []), selectedMap.id],
         x: x,
         y: y,
         width: 50,
