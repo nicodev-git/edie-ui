@@ -151,7 +151,7 @@ export default class GDeviceBasic extends React.Component {
         value: cpuValue
       }, {
         title1: `${memValue}%`,
-        title2: memory ? `${memory.UsedSize}M / ${memory.TotalSize}M` : '',
+        title2: memory ? `${(memory.UsedSize / 1024).toFixed(1)}G / ${(memory.TotalSize / 1024).toFixed(1)}G` : '',
         title3: 'Memory Utilization',
         value: memValue
       }, {
