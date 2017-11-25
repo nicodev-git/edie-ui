@@ -590,8 +590,8 @@ class MapCanvas extends React.Component {
       else imageUrl = extImageBaseUrl + picture
             // Status
       let okurl = this.deviceStatusImageName(devicestatus)
-      let statusImageLeft = -4
-      let statusImageTop = -4
+      let statusImageLeft = -6
+      let statusImageTop = -10
             // if (devicetype === 'Firewall') {
             //     statusImageLeft = -10;
             //     statusImageTop = 2;
@@ -747,8 +747,8 @@ class MapCanvas extends React.Component {
 
             // Status
       let okurl = this.deviceStatusImageName(devicestatus)
-      let statusImageLeft = -4
-      let statusImageTop = -4
+      let statusImageLeft = -6
+      let statusImageTop = -12
 
       // IP
       let tooltip = ''
