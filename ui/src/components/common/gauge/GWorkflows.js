@@ -12,6 +12,7 @@ import InfiniteTable from 'components/common/InfiniteTable'
 
 import {chipStyles} from 'style/common/materialStyles'
 import {showConfirm} from 'components/common/Alert'
+import {getSeverityColor} from 'shared/Global'
 
 export default class GWorkflows extends React.Component {
   constructor (props) {
@@ -39,7 +40,8 @@ export default class GWorkflows extends React.Component {
           <div style={chipStyles.wrapper}>
             {p.data ? <Chip style={chipStyles.smallChip} labelStyle={chipStyles.smallLabel}>Global</Chip> : ''}
 
-            <Chip style={chipStyles.smallChip} labelStyle={chipStyles.smallLabel} backgroundColor="rgb(234, 166, 11)">
+            <Chip style={chipStyles.smallChip} labelStyle={chipStyles.smallLabel}
+                  backgroundColor={getSeverityColor(severity)}>
               {severity}
             </Chip>
 

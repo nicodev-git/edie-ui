@@ -69,6 +69,15 @@ export function getSeverityIcon (severity) {
   }
 }
 
+export function getSeverityColor (severity) {
+  switch ((severity || '').toLowerCase()) {
+    case 'high': return 'rgb(243, 105, 11)'
+    case 'low': return 'rgb(234, 166, 11)'
+    case 'medium': return 'rgb(226, 221, 12)'
+    default: return 'rgb(100, 209, 12)'
+  }
+}
+
 export function dateFormatter (datetime) {
   let date = datetime.substring(0, 10)
   let time = datetime.substring(11, 16)

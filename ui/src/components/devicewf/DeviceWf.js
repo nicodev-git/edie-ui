@@ -6,7 +6,7 @@ import EditIcon from 'material-ui/svg-icons/content/create'
 
 import TabPage from 'components/common/TabPage'
 import TabPageBody from 'components/common/TabPageBody'
-import {extImageBaseUrl} from 'shared/Global'
+import {extImageBaseUrl, getSeverityColor} from 'shared/Global'
 import {chipStyles} from 'style/common/materialStyles'
 
 import InfiniteTable from 'components/common/InfiniteTable';
@@ -38,7 +38,8 @@ export default class DeviceWf extends React.Component {
           <div style={chipStyles.wrapper}>
             {p.data ? <Chip style={chipStyles.smallChip} labelStyle={chipStyles.smallLabel}>Global</Chip> : ''}
 
-            <Chip style={chipStyles.smallChip} labelStyle={chipStyles.smallLabel} backgroundColor="rgb(234, 166, 11)">
+            <Chip style={chipStyles.smallChip} labelStyle={chipStyles.smallLabel}
+                  backgroundColor={getSeverityColor(severity)}>
               {severity}
             </Chip>
 
