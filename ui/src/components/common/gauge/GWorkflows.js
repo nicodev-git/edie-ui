@@ -1,6 +1,8 @@
 import React from 'react'
 import {findIndex} from 'lodash'
 import {Chip} from 'material-ui'
+import DeleteIcon from 'material-ui/svg-icons/action/delete'
+import EditIcon from 'material-ui/svg-icons/content/create'
 
 import FlipView from './FlipView'
 import GEditView from './GEditView'
@@ -9,6 +11,7 @@ import {showAlert} from 'components/common/Alert'
 import InfiniteTable from 'components/common/InfiniteTable'
 
 import {chipStyles} from 'style/common/materialStyles'
+import {showConfirm} from 'components/common/Alert'
 
 export default class GWorkflows extends React.Component {
   constructor (props) {
@@ -48,6 +51,17 @@ export default class GWorkflows extends React.Component {
           </div>
         )
       }
+    }, {
+      'displayName': 'Action',
+      'columnName': 'id',
+      'customComponent': p=> {
+        return (
+          <div>
+            <EditIcon onTouchTap={this.onClickEditWf.bind(this, p.rowData)} className="link"/>
+            <DeleteIcon onTouchTap={this.onClickDeleteWf.bind(this, p.rowData)} className="link margin-sm-left"/>
+          </div>
+        )
+      }
     }]
   }
   getDeviceId () {
@@ -59,6 +73,19 @@ export default class GWorkflows extends React.Component {
     const index = findIndex(devices, {id: this.getDeviceId()})
     if (index < 0) return null
     return devices[index]
+  }
+
+  //////////////////////////////////////////////////////////////////////////////////////////
+
+  onClickEditWf (wf) {
+    this.props.history.push(`/${this.getDevice().name}/editwf/${wf.id}`)
+  }
+
+  onClickDeleteWf (wf) {
+    showConfirm('Are you sure?', btn => {
+      if (btn !== 'ok') return
+      this.props.removeWorkflow(wf)
+    })
   }
 
   //////////////////////////////////////////////////////////////////////////////////////////
@@ -109,8 +136,7 @@ export default class GWorkflows extends React.Component {
           url="/workflow/search/findById"
           params={{
             id: device.workflowids || [],
-            draw: 1,
-            // sort: `${currentSortCol},${currentSortDir}`
+            draw: this.props.workflowDraw
           }}
         />
       </div>

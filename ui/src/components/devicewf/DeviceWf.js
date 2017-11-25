@@ -11,7 +11,7 @@ import {chipStyles} from 'style/common/materialStyles'
 
 import InfiniteTable from 'components/common/InfiniteTable';
 import MainWorkflowModal from 'components/dashboard/map/device/main/workflows/MainWorkflowModal'
-import {showConfirm} from "../common/Alert";
+import {showConfirm} from 'components/common/Alert'
 
 export default class DeviceWf extends React.Component {
   constructor (props) {

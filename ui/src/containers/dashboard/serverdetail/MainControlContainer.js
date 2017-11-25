@@ -28,7 +28,8 @@ import {
   showDeviceMonitorsModal,
   openDeviceMonitorWizard,
 
-  showGaugePicker
+  showGaugePicker,
+  removeWorkflow
 } from 'actions'
 
 class MainControlContainer extends React.Component {
@@ -66,6 +67,8 @@ export default connect(
     gaugeModalOpen: state.gauge.gaugeModalOpen,
     editGauge: state.gauge.editGauge,
     gaugePickerOpen: state.gauge.gaugePickerOpen,
+
+    workflowDraw: state.settings.workflowDraw
   }), {
     fetchGauges,
     fetchCredTypes,
@@ -91,6 +94,7 @@ export default connect(
     showDeviceMonitorsModal,
     openDeviceMonitorWizard,
 
-    showGaugePicker
+    showGaugePicker,
+    removeWorkflow
   }
 )(withRouter(MainControlContainer))

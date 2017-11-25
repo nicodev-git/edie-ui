@@ -98,7 +98,9 @@ import {
   updateViewLogParams,
   showDetailLogModal,
 
-  fetchDevicesGroups
+  fetchDevicesGroups,
+
+  removeWorkflow
 } from 'actions'
 
 class MainpageContainer extends Component {
@@ -292,7 +294,8 @@ export default connect((state) => {
     commentsModalVisible: state.dashboard.commentsModalVisible,
     commentsIncident: state.dashboard.commentsIncident,
 
-    attackerModalOpen: state.dashboard.attackerModalOpen
+    attackerModalOpen: state.dashboard.attackerModalOpen,
+    workflowDraw: state.settings.workflowDraw
   }
 },
 dispatch => bindActionCreators({
@@ -367,5 +370,7 @@ dispatch => bindActionCreators({
   updateViewLogParams,
   showDetailLogModal,
 
-  fetchDevicesGroups
+  fetchDevicesGroups,
+
+  removeWorkflow
 }, dispatch))(withRouter(MainpageContainer))
