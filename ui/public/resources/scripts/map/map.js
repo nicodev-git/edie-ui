@@ -1750,32 +1750,18 @@ var mapObject = {
       point = props.length - 1;
     }
     if(hub) {
-      if (hubRotate) {
-        var dx = obj.width * obj.scaleX * (props[point][0] / 60.0 - 0.5);
-        var dy = obj.height * obj.scaleY * (props[point][1] / 2.0 - 0.5);
-        var dl = Math.sqrt(dx * dx + dy * dy);
-        var alpha = Math.PI / 180 - Math.atan2(dy, dx);
+      const cxy = obj.getCenterPoint()
+      var dx = obj.width * obj.scaleX * (props[point][0] / 60.0 - 0.5);
+      var dy = obj.height * obj.scaleY * (props[point][1] / 2.0 - 0.5);
+      var dl = Math.sqrt(dx * dx + dy * dy);
+      var alpha = Math.atan2(dy, dx);
 
-        var pos = {
-          x: obj.left + Math.cos(obj.getAngle() * Math.PI / 180 + alpha) * dl + (group ? (group.left + group.width / 2): 0),
-          y: obj.top + Math.sin(obj.getAngle() * Math.PI / 180 + alpha) * dl + (group ? (group.top + group.height / 2): 0)
-        };
+      var pos = {
+        x: cxy.x + Math.cos(obj.getAngle() * Math.PI / 180 + alpha) * dl + (group ? (group.left + group.width / 2): 0),
+        y: cxy.y + Math.sin(obj.getAngle() * Math.PI / 180 + alpha) * dl + (group ? (group.top + group.height / 2): 0)
+      };
 
-        return pos;
-      } else {
-        var dx = obj.width * obj.scaleX * props[point][0] / 60.0;
-        var dy = obj.height * obj.scaleY * props[point][1] / 2.0;
-        var dl = Math.sqrt(dx * dx + dy * dy);
-        var alpha = Math.atan2(dy, dx);
-
-        var pos = {
-          x: obj.left + Math.cos(obj.getAngle() * Math.PI / 180 + alpha) * dl + (group ? (group.left + group.width / 2): 0),
-          y: obj.top + Math.sin(obj.getAngle() * Math.PI / 180 + alpha) * dl + (group ? (group.top + group.height / 2): 0)
-        };
-
-        return pos;
-      }
-
+      return pos;
     }
 
     var pos = {
