@@ -1731,7 +1731,7 @@ var mapObject = {
     pts.push(0, 1)
     return pts;
   })(),
-  getConnectionPoint: function(obj, point, group, hub) {
+  getConnectionPoint: function(obj, point, group, hub, hubRotate) {
     var me = this;
     var props = hub ? me.hubPoints : me.devicePoints;
 
@@ -1749,21 +1749,33 @@ var mapObject = {
     } else if (props.length <= point) {
       point = props.length - 1;
     }
-
     if(hub) {
-      var r = obj.getBoundingRect();
+      if (hubRotate) {
+        var dx = obj.width * obj.scaleX * (props[point][0] / 60.0 - 0.5);
+        var dy = obj.height * obj.scaleY * (props[point][1] / 2.0 - 0.5);
+        var dl = Math.sqrt(dx * dx + dy * dy);
+        var alpha = Math.PI / 180 - Math.atan2(dy, dx);
 
-      var dx = obj.width * obj.scaleX * props[point][0] / 60.0;
-      var dy = obj.height * obj.scaleY * props[point][1] / 2.0;
-      var dl = Math.sqrt(dx * dx + dy * dy);
-      var alpha = Math.atan2(dy, dx);
+        var pos = {
+          x: obj.left + Math.cos(obj.getAngle() * Math.PI / 180 + alpha) * dl + (group ? (group.left + group.width / 2): 0),
+          y: obj.top + Math.sin(obj.getAngle() * Math.PI / 180 + alpha) * dl + (group ? (group.top + group.height / 2): 0)
+        };
 
-      var pos = {
-        x: obj.left + Math.cos(obj.getAngle() * Math.PI / 180 + alpha) * dl + (group ? (group.left + group.width / 2): 0),
-        y: obj.top + Math.sin(obj.getAngle() * Math.PI / 180 + alpha) * dl + (group ? (group.top + group.height / 2): 0)
-      };
+        return pos;
+      } else {
+        var dx = obj.width * obj.scaleX * props[point][0] / 60.0;
+        var dy = obj.height * obj.scaleY * props[point][1] / 2.0;
+        var dl = Math.sqrt(dx * dx + dy * dy);
+        var alpha = Math.atan2(dy, dx);
 
-      return pos;
+        var pos = {
+          x: obj.left + Math.cos(obj.getAngle() * Math.PI / 180 + alpha) * dl + (group ? (group.left + group.width / 2): 0),
+          y: obj.top + Math.sin(obj.getAngle() * Math.PI / 180 + alpha) * dl + (group ? (group.top + group.height / 2): 0)
+        };
+
+        return pos;
+      }
+
     }
 
     var pos = {

@@ -117,7 +117,7 @@ fabric.ShapeLine = fabric.util.createClass(fabric.Object, {
     map.notifyLineUpdate(me);
   },
 
-  updatePosition: function (group, diff, object) {
+  updatePosition: function (group, diff, object, hubRotate) {
     var me = this;
 
     if (!me.steps || !me.steps.length) return;
@@ -142,8 +142,8 @@ fabric.ShapeLine = fabric.util.createClass(fabric.Object, {
         endY += diff.y;
       }
     } else {
-      var startXY = me.startObj ? startObj.getConnectionPoint(me.startPoint, group) : {x: -100 , y: -100};
-      var endXY = me.endObj ? endObj.getConnectionPoint(me.endPoint, group) : startXY;
+      var startXY = me.startObj ? startObj.getConnectionPoint(me.startPoint, group, hubRotate) : {x: -100 , y: -100};
+      var endXY = me.endObj ? endObj.getConnectionPoint(me.endPoint, group, hubRotate) : startXY;
 
       startX = startXY.x;
       startY = startXY.y;
@@ -160,7 +160,7 @@ fabric.ShapeLine = fabric.util.createClass(fabric.Object, {
       x2: endX,
       y2: endY,
     });
-    step.updatePosition(null, group);
+    step.updatePosition(null, group, hubRotate);
     step.anim && step.anim.updatePosition();
   },
 

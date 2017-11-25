@@ -14,8 +14,8 @@ fabric.ShapeHub = fabric.util.createClass(fabric.Image, {
     me.selectable = editable;
   },
 
-  getConnectionPoint: function(point, group) {
-    return mapObject.getConnectionPoint(this, point, group, true);
+  getConnectionPoint: function(point, group, hubRotate) {
+    return mapObject.getConnectionPoint(this, point, group, true, hubRotate);
   },
 
   onMoved: function(group) {
@@ -35,9 +35,12 @@ fabric.ShapeHub = fabric.util.createClass(fabric.Image, {
 
   onRotating: function() {
     var me = this;
-    // console.log("Rotated: " + me.left + ' ' + me.top)
+    // console.log("Rotated1: " + me.left + ' ' + me.top)
     me.setCoords();
-    me.updateLines();
+    // console.log("Rotated2: " + me.left + ' ' + me.top)
+
+    me.updateLines(null, null, null, true);
+
     clearTimeout(me.rotateTimer)
     me.rotateTimer = setTimeout(function() {
       me.onMoved()
@@ -62,10 +65,10 @@ fabric.ShapeHub = fabric.util.createClass(fabric.Image, {
     me.canvas.renderAll();
   },
 
-  updateLines: function(group, diff, object) {
+  updateLines: function(group, diff, object, hubRotate) {
     var me = this;
     $.each(me.lines, function(i, line){
-      line.updatePosition(group, diff, object);
+      line.updatePosition(group, diff, object, hubRotate);
     });
   },
 
