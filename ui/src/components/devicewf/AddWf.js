@@ -1,5 +1,5 @@
 import React from 'react'
-import {Checkbox, SelectField, MenuItem} from 'material-ui'
+import {Checkbox, SelectField, MenuItem, RaisedButton} from 'material-ui'
 import {findIndex} from 'lodash'
 
 import TabPage from 'components/common/TabPage'
@@ -64,6 +64,15 @@ export default class AddWf extends React.Component {
     })
   }
 
+  onClickAddTemplates () {
+    const {selectedSysWorkflows} = this.props
+    const device = this.getDevice()
+    device.workflowids = device.workflowids || []
+    device.workflowids = [...device.workflowids, ...selectedSysWorkflows.map(p => p.id)]
+    this.props.updateMapDevice(device)
+    this.props.history.push('/devicewf')
+  }
+
   ////////////////////////////////////////////////
   renderTab1 () {
     const {sysWorkflows, selectedSysWorkflows} = this.props
@@ -77,7 +86,9 @@ export default class AddWf extends React.Component {
     return (
       <div className="flex-vertical flex-1">
         <div className="padding-md-left">
-          <SelectField value={severity} onChange={this.onChangeSeverity.bind(this)}
+          <SelectField
+            className="valign-top"
+            value={severity} onChange={this.onChangeSeverity.bind(this)}
             style={{width: 150}}>
             <MenuItem value="" primaryText="[All]"/>
             {severities.map(option =>
@@ -88,6 +99,9 @@ export default class AddWf extends React.Component {
               />
             )}
           </SelectField>
+
+          <RaisedButton label="Add Selected" onTouchTap={this.onClickAddTemplates.bind(this)}
+                        className="valign-top margin-xs-top margin-md-left"/>
         </div>
         <div className="flex-1" style={{overflow: 'auto'}}>
           <table className="table table-hover">

@@ -10,7 +10,9 @@ import {
   fetchWorkflows,
 
   selectSysWorkflow,
-  deselectSysWorkflow
+  deselectSysWorkflow,
+
+  updateMapDevice
 } from 'actions'
 class AddWfContainer extends React.Component {
   render () {
@@ -36,6 +38,8 @@ export default connect(
     fetchWorkflows,
 
     selectSysWorkflow,
-    deselectSysWorkflow
+    deselectSysWorkflow,
+
+    updateMapDevice
   }
 )(withRouter(AddWfContainer))
