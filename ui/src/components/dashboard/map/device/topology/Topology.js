@@ -252,8 +252,8 @@ export default class Topology extends React.Component {
     }
 
     if (options.type === 'longhub') {
-      options.width = 20
-      options.height = 400
+      options.width = 400
+      options.height = 3
     } else if (options.type === 'bi-pie') {
       options.width = 200
       options.height = 200
