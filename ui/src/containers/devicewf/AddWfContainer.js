@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import AddWf from 'components/devicewf/AddWf'
 
 import {
+  fetchDevice,
   fetchWorkflowCategories,
   fetchWorkflows,
 
@@ -30,6 +31,7 @@ export default connect(
     sysWorkflows: state.settings.workflows,
     selectedSysWorkflows: state.devices.selectedSysWorkflows
   }), {
+    fetchDevice,
     fetchWorkflowCategories,
     fetchWorkflows,
 

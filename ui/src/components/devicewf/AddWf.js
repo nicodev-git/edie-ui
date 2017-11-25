@@ -7,6 +7,7 @@ import TabPageBody from 'components/common/TabPageBody'
 import MainWorkflowModal from 'components/dashboard/map/device/main/workflows/MainWorkflowModal'
 import AddWfTabs from './AddWfTabs'
 
+import {parse} from 'query-string'
 import {severities} from 'shared/Global'
 
 export default class AddWf extends React.Component {
@@ -18,15 +19,19 @@ export default class AddWf extends React.Component {
     }
   }
   componentWillMount () {
-    // this.props.fetchDevice(this.getDeviceId())
+    this.props.fetchDevice(this.getDeviceId())
     this.props.fetchWorkflows()
   }
 
   getDeviceId () {
-    return this.props.match.params.z
+    const {z} = parse(this.props.location.search || {})
+    return z
   }
   getDevice () {
-    return null
+    const {devices} = this.props
+    const index = findIndex(devices, {id: this.getDeviceId()})
+    if (index < 0) return null
+    return devices[index]
   }
 
   onClickDiagram () {
@@ -62,10 +67,18 @@ export default class AddWf extends React.Component {
   ////////////////////////////////////////////////
   renderTab1 () {
     const {sysWorkflows, selectedSysWorkflows} = this.props
+    const {severity} = this.state
+    const device = this.getDevice()
+
+    let workflows = sysWorkflows.filter(p => !(device.workflowids || []).includes(p.id))
+    if (severity) {
+      workflows = workflows.filter(p => p.severity === severity)
+    }
     return (
       <div className="flex-vertical flex-1">
-        <div className="padding-xs">
-          <SelectField value={this.state.severity} onChange={this.onChangeSeverity.bind(this)}>
+        <div className="padding-md-left">
+          <SelectField value={severity} onChange={this.onChangeSeverity.bind(this)}
+            style={{width: 150}}>
             <MenuItem value="" primaryText="[All]"/>
             {severities.map(option =>
               <MenuItem
@@ -88,7 +101,7 @@ export default class AddWf extends React.Component {
             </thead>
             <tbody>
             {
-              sysWorkflows.map(w =>
+              workflows.map(w =>
                 <tr key={w.id}>
                   <td>
                     <Checkbox
@@ -129,6 +142,8 @@ export default class AddWf extends React.Component {
   }
 
   render () {
+    const device = this.getDevice()
+    if (!device) return <div>Loading...</div>
     return (
       <TabPage>
         <div style={{margin: '16px 20px 0'}}>
