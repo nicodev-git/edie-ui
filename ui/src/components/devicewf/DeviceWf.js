@@ -1,5 +1,8 @@
 import React from 'react'
 import {Chip} from 'material-ui'
+import DeleteIcon from 'material-ui/svg-icons/action/delete'
+import EditIcon from 'material-ui/svg-icons/content/create'
+
 
 import TabPage from 'components/common/TabPage'
 import TabPageBody from 'components/common/TabPageBody'
@@ -46,6 +49,17 @@ export default class DeviceWf extends React.Component {
           </div>
         )
       }
+    }, {
+      'displayName': 'Action',
+      'columnName': 'id',
+      'customComponent': p=> {
+        return (
+          <div>
+            <EditIcon onTouchTap={this.onClickEditWf.bind(this, p.data)} className="link"/>
+            <DeleteIcon onTouchTap={this.onClickDeleteWf.bind(this, p.data)} className="link margin-sm-left"/>
+          </div>
+        )
+      }
     }]
   }
 
@@ -59,6 +73,14 @@ export default class DeviceWf extends React.Component {
 
   getTable () {
     return this.refs.table
+  }
+
+  onClickEditWf () {
+
+  }
+
+  onClickDeleteWf () {
+
   }
 
   onClickDevice (selected) {
