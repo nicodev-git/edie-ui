@@ -61,7 +61,8 @@ export default class AppletCard extends React.Component {
     const {
       name, desc, desc2, desc3, img, color, className,
       rightIcons, verified,
-      onClickDelete, onClickEdit, onClickView
+      onClickDelete, onClickEdit, onClickView,
+      titleLimit
     } = this.props
     const {hovered} = this.state
     return (
@@ -77,7 +78,7 @@ export default class AppletCard extends React.Component {
                 {onClickDelete && <CloseIcon size={32} color="white" onClick={this.onClickDelete.bind(this)}/>}
               </div>
             </div>
-            <span className={`title ${desc.length > 45 ? 'title-sm' : ''}`}>
+            <span className={`title ${desc.length > (titleLimit || 45) ? 'title-sm' : ''}`}>
               {desc}&nbsp;
             </span>
             <p className="author">

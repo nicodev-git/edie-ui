@@ -69,6 +69,7 @@ export default class ServerItem extends React.Component {
         onClick={onClick}
         onClickDelete={onClickDelete}
         rightIcons={this.renderRightIcons()}
+        titleLimit={15}
       />
     )
   }
