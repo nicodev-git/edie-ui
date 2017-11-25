@@ -90,6 +90,7 @@ var mapObject = {
     var options = me.options;
 
     fabric.StaticCanvas.prototype.imageSmoothingEnabled = true;
+    fabric.Object.prototype.transparentCorners = false;
     var canvas = new fabric.Canvas(options.canvas);
 
     me.editable = options.editable;
