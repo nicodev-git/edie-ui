@@ -31,13 +31,26 @@ import FloatingMenu from 'components/common/floating/FloatingMenu'
 const RECT_W = 135
 const RECT_H = 135
 
+const units = [{
+  label: 'Minutes', value: 'm'
+}, {
+  label: 'Hours', value: 'h'
+}, {
+  label: 'Days', value: 'd'
+}, {
+  label: 'Months', value: 'M'
+}]
+
 export default class WorkflowDashboardView extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
       editMode: false,
       paramValues: [],
-      paramValueInputs: []
+      paramValueInputs: [],
+
+      interval: 30,
+      intervalUnit: 'm'
     }
 
     this.menuItems = [{
@@ -832,10 +845,24 @@ export default class WorkflowDashboardView extends React.Component {
     this.onClickDeleteItem(cell)
   }
 
+  ///////////////////////////////////////////////////////
+
+  onChangeInterval (e, value) {
+    this.setState({
+      interval: value
+    })
+  }
+
+  onChangeIntervalUnit (e, index, value) {
+    this.setState({
+      intervalUnit: value
+    })
+  }
+
   ////////////////////
   renderRect (rect, index) {
     const {selectedWfRectGroup} = this.props
-    const {paramValues} = this.state
+    const {paramValues, interval, intervalUnit} = this.state
     return (
       <RectItem
         {...this.props}
@@ -845,6 +872,8 @@ export default class WorkflowDashboardView extends React.Component {
         onUpdateColor={this.onUpdateRectState.bind(this)}
         paramNames={selectedWfRectGroup.paramNames || []}
         paramValues={paramValues || []}
+        interval={interval}
+        intervalUnit={intervalUnit}
       />
     )
   }
@@ -948,6 +977,23 @@ export default class WorkflowDashboardView extends React.Component {
             )}
           </SelectField>
 
+          <TextField
+            name="interval" hintText="Interval"
+            className="valign-top margin-md-left"
+            style={{width: 40, textAlign: 'right'}}
+            value={this.state.interval} onChange={this.onChangeInterval.bind(this)}/>
+          <label className="inline-block" style={{marginTop: 15}}>m</label>
+          <SelectField
+            hintText="Unit"
+            className="valign-top margin-md-left hidden"
+            value={this.state.intervalUnit}
+            onChange={this.onChangeIntervalUnit.bind(this)}
+            style={{width: 150}}>
+            {units.map(p =>
+              <MenuItem key={p.value} value={p.value} primaryText={p.label}/>
+            )}
+          </SelectField>
+
           <div className="pull-right text-right">
             <IconButton onTouchTap={this.onClickEditMode.bind(this)}><EditIcon/></IconButton>
             <IconButton onTouchTap={this.onClickDelete.bind(this)} tooltip="Delete Connection"><DeleteIcon/></IconButton>
@@ -957,7 +1003,7 @@ export default class WorkflowDashboardView extends React.Component {
           {this.getRects().map(this.renderRect.bind(this))}
           <div id="graph" className="graph-base" style={{width: '100%', height: '100%'}}></div>
 
-          <div style={{position: 'absolute', left: 20, top: 5}}>
+          <div style={{position: 'absolute', right: 20, top: 5}}>
             {this.renderParamInputs()}
           </div>
 
@@ -969,7 +1015,6 @@ export default class WorkflowDashboardView extends React.Component {
           {this.renderRectGroupsModal()}
         </div>
       </div>
-
     )
   }
 }

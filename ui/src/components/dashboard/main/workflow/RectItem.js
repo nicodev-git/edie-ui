@@ -36,7 +36,7 @@ export default class RectItem extends React.Component {
 
   getSearchResult (search, cb) {
     if (!search) return true
-    const {workflows, devices, allDevices, paramNames, paramValues, rect} = this.props
+    const {workflows, devices, allDevices, paramNames, paramValues, interval, intervalUnit} = this.props
 
     const data = JSON.parse(search.data)
     const searchParams = buildServiceParams(data, {
@@ -54,7 +54,7 @@ export default class RectItem extends React.Component {
     }
 
     params.to = new Date().getTime()
-    params.from = moment().subtract(rect.interval, rect.intervalUnit).valueOf()
+    params.from = moment().subtract(interval, intervalUnit).valueOf()
 
     if (paramNames) {
       let hasEmptyValue = false
