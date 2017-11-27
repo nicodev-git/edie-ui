@@ -192,13 +192,17 @@ export default class LogPapers extends React.Component {
   }
 
   onClickAutoRenew () {
+    if (this.state.isAutoPull) return
+    this.setState({
+      isAutoPull: true
+    })
     this.startAutoPull()
   }
 
   startAutoPull () {
     this.autoPullTimer = setInterval(() => {
       this.lastPullRequest = this.buildRequest(this.state.maxPages).done(res => {
-        const {results, maxPages, currentPage, isAutoPull} = this.state
+        const {results, currentPage, isAutoPull} = this.state
         if (currentPage !== 0 || !isAutoPull) return
         const data = this.parseResponse(res).filter(p => findIndex(results, {id: p.id}) < 0)
         this.setState({
@@ -291,6 +295,7 @@ export default class LogPapers extends React.Component {
           {this.renderPaging()}
         </div>
         <div style={{position: 'absolute', right: 10, top: 10}} className={showRenew ? '' : 'hidden'}>
+          {this.state.isAutoPull ? 'Auto Updating... ' : ''}
           <RenewIcon className="link" onTouchTap={this.onClickAutoRenew.bind(this)}/>
         </div>
         <div className="flex-1" style={{overflow: 'auto', whiteSpace: 'normal', wordBreak: 'break-word'}}>
