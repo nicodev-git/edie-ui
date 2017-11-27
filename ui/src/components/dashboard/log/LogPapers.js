@@ -1,11 +1,11 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import {Paper} from 'material-ui'
+import {Paper, IconButton} from 'material-ui'
 import { assign, isEqual, keys, chunk, reverse, merge, isArray, findIndex } from 'lodash'
 import $ from 'jquery'
 import moment from 'moment'
 import ReactPaginate from 'react-paginate'
-import RenewIcon from 'material-ui/svg-icons/action/autorenew'
+import RenewIcon from 'material-ui/svg-icons/action/visibility'
 
 import { encodeUrlParams, dateFormat } from 'shared/Global'
 import { ROOT_URL } from 'actions/config'
@@ -196,14 +196,18 @@ export default class LogPapers extends React.Component {
   }
 
   onClickAutoRenew () {
-    if (this.state.isAutoPull) return
-    this.setState({
-      isAutoPull: true
-    })
-    this.startAutoPull()
+    if (this.state.isAutoPull) {
+      this.stopAutoPull()
+    } else {
+      this.startAutoPull()
+    }
   }
 
   startAutoPull () {
+    this.setState({
+      isAutoPull: true
+    })
+
     this.autoPullTimer = setInterval(() => {
       this.lastPullRequest = this.buildRequest(this.state.maxPages).done(res => {
         const {results, currentPage, isAutoPull} = this.state
@@ -301,8 +305,9 @@ export default class LogPapers extends React.Component {
           {this.renderPaging()}
         </div>
         <div style={{position: 'absolute', right: 10, top: 10}} className={showRenew ? '' : 'hidden'}>
-          <div className="valign-middle">{this.state.isAutoPull ? 'Auto Updating... ' : ''}</div>
-          <RenewIcon className="link" onTouchTap={this.onClickAutoRenew.bind(this)}/>
+          <IconButton onTouchTap={this.onClickAutoRenew.bind(this)} tooltip="Show changes on realtime">
+            <RenewIcon color={this.state.isAutoPull ? '#00bcd4' : ''}/>
+          </IconButton>
         </div>
         <div className="flex-1" style={{overflow: 'auto', whiteSpace: 'normal', wordBreak: 'break-word'}}>
           {table}
