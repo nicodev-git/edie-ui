@@ -7,17 +7,14 @@ export default class DiagramModalView extends Component {
     const {header, onHide, onSave, dragLayer, toolbar, sidebar,
       panel, objectModal, noModal} = this.props
     const content = (
-      <div>
-        <div className="diagram">
-          {dragLayer}
-          {toolbar}
-          <div className="flex-horizontal">
-            {sidebar}
-            {panel}
-          </div>
+      <div className={`diagram ${noModal ? 'flex-vertical' : ''}`} style={noModal ? {height: '100%'} : null}>
+        {dragLayer}
+        {toolbar}
+        <div className="flex-1 flex-horizontal">
+          {sidebar}
+          {panel}
         </div>
         {objectModal}
-        <TwoButtonsBlockCustom name2="Save" action2={onSave}/>
       </div>
     )
     if (noModal) return content
