@@ -146,10 +146,7 @@ export default class LogPapers extends React.Component {
       }
 
       this.setState(state, () => {
-        setTimeout(() => {
-          const node = ReactDOM.findDOMNode(this.refRowEnd)
-          node && node.scrollIntoView()
-        }, 100)
+        this.focusBottom()
       })
       onUpdateCount && onUpdateCount(total, state.results)
     }).fail((req, reason) => {
@@ -162,6 +159,13 @@ export default class LogPapers extends React.Component {
     })
 
     return this.lastRequest
+  }
+
+  focusBottom () {
+    setTimeout(() => {
+      const node = ReactDOM.findDOMNode(this.refRowEnd)
+      node && node.scrollIntoView()
+    }, 100)
   }
 
   refresh () {
@@ -207,6 +211,8 @@ export default class LogPapers extends React.Component {
         const data = this.parseResponse(res).filter(p => findIndex(results, {id: p.id}) < 0)
         this.setState({
           results: [...results, ...data]
+        }, () => {
+          this.focusBottom()
         })
       })
     }, 5000)
@@ -295,7 +301,7 @@ export default class LogPapers extends React.Component {
           {this.renderPaging()}
         </div>
         <div style={{position: 'absolute', right: 10, top: 10}} className={showRenew ? '' : 'hidden'}>
-          {this.state.isAutoPull ? 'Auto Updating... ' : ''}
+          <div className="valign-middle">{this.state.isAutoPull ? 'Auto Updating... ' : ''}</div>
           <RenewIcon className="link" onTouchTap={this.onClickAutoRenew.bind(this)}/>
         </div>
         <div className="flex-1" style={{overflow: 'auto', whiteSpace: 'normal', wordBreak: 'break-word'}}>
