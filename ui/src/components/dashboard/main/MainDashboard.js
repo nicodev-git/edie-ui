@@ -33,7 +33,7 @@ export default class MainDashboard extends React.Component {
         board = this.findBoard(gaugeBoards, id)
       }
 
-      if (!board) board = gaugeBoards[0]
+      if (!board) board = gaugeBoards.filter(p => p.type !== 'system')[0]
       nextProps.selectGaugeBoard(board.id, slugify(board.name), nextProps.history)
     }
   }
@@ -83,7 +83,7 @@ export default class MainDashboard extends React.Component {
     this.props.setDefaultGaugeBoard(board)
   }
   getBoards () {
-    return this.props.gaugeBoards.filter(p => !this.isServerDashboard(p))
+    return this.props.gaugeBoards.filter(p => p.type !== 'system')
   }
   renderContent () {
     const board = this.getSelected()
@@ -113,20 +113,29 @@ export default class MainDashboard extends React.Component {
       <BoardListModal {...this.props}/>
     )
   }
+
+  renderTopbar () {
+    const board = this.getSelected()
+    if (!board) return null
+    if (board.type === 'system') return null
+    return (
+      <div className="padding-lg-left" style={{height: 90}}>
+        <SelectField
+          floatingLabelText="Dashboard" value={this.getSelectedId()} onChange={this.onChangeBoard.bind(this)}
+          className="valign-top"
+          style={{width: 140}}>
+          {this.getBoards().map(p =>
+            <MenuItem key={p.id} value={p.id} primaryText={p.name}/>
+          )}
+        </SelectField>
+        <IconButton onTouchTap={this.onClickAdd.bind(this)} className="valign-bottom"><AddCircleIcon /></IconButton>
+      </div>
+    )
+  }
   render () {
     return (
       <div className="tabs-custom flex-vertical flex-1">
-        <div className="padding-lg-left" style={{height: 90}}>
-          <SelectField
-            floatingLabelText="Dashboard" value={this.getSelectedId()} onChange={this.onChangeBoard.bind(this)}
-            className="valign-top"
-            style={{width: 140}}>
-            {this.getBoards().map(p =>
-              <MenuItem key={p.id} value={p.id} primaryText={p.name}/>
-            )}
-          </SelectField>
-          <IconButton onTouchTap={this.onClickAdd.bind(this)} className="valign-bottom"><AddCircleIcon /></IconButton>
-        </div>
+        {this.renderTopbar()}
 
         <div className="flex-vertical flex-1">
           {this.renderContent()}
