@@ -113,7 +113,23 @@ export default class Credentials extends React.Component {
     let selected = this.getTable().getSelected()
     if (!selected) return showAlert('Please choose credentials.')
 
-    showConfirm('Are you sure? Click OK to remove.', (btn) => {
+
+    const {devices} = this.props
+    const deviceNames = []
+    const data = selected.deviceIds || []
+    data.forEach(id => {
+      const index = findIndex(devices, {id})
+      if (index >= 0) deviceNames.push(devices[index].name)
+    })
+    const affected = deviceNames.join(',')
+    const affectedMsg = affected ? `Affected: ${affected}` : ''
+    const msg = (
+      <div>
+        Are you sure? Click OK to remove. <br/>
+        {affectedMsg}
+      </div>
+    )
+    showConfirm(msg, (btn) => {
       if (btn !== 'ok') return
 
       this.props.removeCredentials(selected)
