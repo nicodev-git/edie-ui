@@ -117,7 +117,7 @@ fabric.ShapeLine = fabric.util.createClass(fabric.Object, {
     map.notifyLineUpdate(me);
   },
 
-  updatePosition: function (group, diff, object, hubRotate) {
+  updatePosition: function (group, diff, object) {
     var me = this;
 
     if (!me.steps || !me.steps.length) return;
@@ -127,11 +127,13 @@ fabric.ShapeLine = fabric.util.createClass(fabric.Object, {
 
     var startX,startY,endX,endY;
 
+    var step = me.steps[0];
+
     if (diff && object) {
-      startX = me.steps[0].x1;
-      startY = me.steps[0].y1;
-      endX = me.steps[0].x2;
-      endY = me.steps[0].y2;
+      startX = step.x1;
+      startY = step.y1;
+      endX = step.x2;
+      endY = step.y2;
 
       if (object == startObj) {
         startX += diff.x;
@@ -142,8 +144,8 @@ fabric.ShapeLine = fabric.util.createClass(fabric.Object, {
         endY += diff.y;
       }
     } else {
-      var startXY = me.startObj ? startObj.getConnectionPoint(me.startPoint, group, hubRotate) : {x: -100 , y: -100};
-      var endXY = me.endObj ? endObj.getConnectionPoint(me.endPoint, group, hubRotate) : startXY;
+      var startXY = me.startObj ? startObj.getConnectionPoint(me.startPoint, group) : {x: -100 , y: -100};
+      var endXY = me.endObj ? endObj.getConnectionPoint(me.endPoint, group) : startXY;
 
       startX = startXY.x;
       startY = startXY.y;
@@ -153,15 +155,17 @@ fabric.ShapeLine = fabric.util.createClass(fabric.Object, {
       if (Math.abs(startX - endX) < 1) startX = endX;
     }
 
-    var step = me.steps[0];
     step.set({
       x1: startX,
       y1: startY,
       x2: endX,
       y2: endY,
     });
-    step.updatePosition(null, group, hubRotate);
+    step.updatePosition(null, group);
     step.anim && step.anim.updatePosition();
+
+    // console.log(step)
+    // console.log(diff)
   },
 
   //////////////////////////////////////////////////////////////////////////////////////

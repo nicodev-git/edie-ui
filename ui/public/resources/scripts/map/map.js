@@ -453,6 +453,10 @@ var mapObject = {
       me.mouseOffsetY = mouse.y - obj.top;
 
       if(me.editable) {
+        if (obj) {
+          me.lastX = obj.left;
+          me.lastY = obj.top;
+        }
         obj.onMouseDown && obj.onMouseDown(e);
         // if (obj.objectSubType == MapItemType.ShapeLine) {
         //   obj.line.onSelected()
@@ -1732,7 +1736,7 @@ var mapObject = {
     pts.push(0, 1)
     return pts;
   })(),
-  getConnectionPoint: function(obj, point, group, hub, hubRotate) {
+  getConnectionPoint: function(obj, point, group, hub) {
     var me = this;
     var props = hub ? me.hubPoints : me.devicePoints;
 
