@@ -4,8 +4,8 @@ import CropFreeIcon from 'material-ui/svg-icons/image/crop-free'
 
 const buttonStyle = {
   padding: '4px',
-  width: 50,
-  height: 50
+  width: 40,
+  height: 40
 }
 
 const iconStyle = {

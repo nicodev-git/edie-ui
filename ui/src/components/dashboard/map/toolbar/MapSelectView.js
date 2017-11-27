@@ -6,8 +6,8 @@ import ChromeReaderModeIcon from 'material-ui/svg-icons/action/chrome-reader-mod
 
 const buttonStyle = {
   padding: '4px',
-  width: 50,
-  height: 50
+  width: 40,
+  height: 40
 }
 
 const iconStyle = {
