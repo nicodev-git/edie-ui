@@ -100,7 +100,7 @@ export default class LogPapers extends React.Component {
   }
 
   getExternalData (page) {
-    const {url, params, pageSize, onUpdateCount, handleRecord, noSearch} = this.props
+    const {url, onUpdateCount, handleRecord, noSearch} = this.props
     if (!url) return
 
     this.setState({
@@ -189,40 +189,40 @@ export default class LogPapers extends React.Component {
   }
 
   startAutoPull () {
-    this.autoPullTimer = setInterval(() => {
-      this.lastPullRequest = $.get(`${ROOT_URL}${url}?${encodeUrlParams(urlParams)}`).done(res => {
-        const embedded = res._embedded
-        let data = embedded[keys(embedded)[0]]
-
-        data = data.map(d => ({
-          ...d,
-          entity: noSearch ? d.entity: this.getHighlighted(d.entity, d.highlights)
-        }))
-        if (handleRecord) {
-          data = data.map(d => handleRecord(d))
-        }
-
-        if (this.props.revertRows) data = reverse(data)
-
-        const total = res.page.totalElements
-        let state = {
-          results: data || [],
-          currentPage: page - 1,
-          maxPages: res.page.totalPages,
-          total,
-          isLoading: false,
-          hasMore: data.length > 0
-        }
-
-        this.setState(state, () => {
-          setTimeout(() => {
-            const node = ReactDOM.findDOMNode(this.refRowEnd)
-            node && node.scrollIntoView()
-          }, 100)
-        })
-        onUpdateCount && onUpdateCount(total, state.results)
-      })
-    }, 5000)
+    // this.autoPullTimer = setInterval(() => {
+    //   this.lastPullRequest = this.buildRequest(this.state.maxPages).done(res => {
+    //     const embedded = res._embedded
+    //     let data = embedded[keys(embedded)[0]]
+    //
+    //     data = data.map(d => ({
+    //       ...d,
+    //       entity: noSearch ? d.entity: this.getHighlighted(d.entity, d.highlights)
+    //     }))
+    //     if (handleRecord) {
+    //       data = data.map(d => handleRecord(d))
+    //     }
+    //
+    //     if (this.props.revertRows) data = reverse(data)
+    //
+    //     const total = res.page.totalElements
+    //     let state = {
+    //       results: data || [],
+    //       currentPage: page - 1,
+    //       maxPages: res.page.totalPages,
+    //       total,
+    //       isLoading: false,
+    //       hasMore: data.length > 0
+    //     }
+    //
+    //     this.setState(state, () => {
+    //       setTimeout(() => {
+    //         const node = ReactDOM.findDOMNode(this.refRowEnd)
+    //         node && node.scrollIntoView()
+    //       }, 100)
+    //     })
+    //     onUpdateCount && onUpdateCount(total, state.results)
+    //   })
+    // }, 5000)
   }
 
   stopAutoPull () {
