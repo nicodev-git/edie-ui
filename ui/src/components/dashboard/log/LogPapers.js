@@ -192,10 +192,7 @@ export default class LogPapers extends React.Component {
   }
 
   onClickAutoRenew () {
-    // if (this.state.isAutoPull) return
-    // this.setState({
-    //   isAutoPull: true
-    // })
+    this.startAutoPull()
   }
 
   startAutoPull () {
