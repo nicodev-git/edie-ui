@@ -5,6 +5,7 @@ import { assign, isEqual, keys, chunk, reverse, merge, isArray } from 'lodash'
 import $ from 'jquery'
 import moment from 'moment'
 import ReactPaginate from 'react-paginate'
+import RenewIcon from 'material-ui/svg-icons/action/autorenew'
 
 import { encodeUrlParams, dateFormat } from 'shared/Global'
 import { ROOT_URL } from 'actions/config'
@@ -23,9 +24,12 @@ export default class LogPapers extends React.Component {
       total: 0,
       hasMore: true,
 
-      selected: []
+      selected: [],
+
+      isAutoPull: false
     }
     this.lastRequest = null
+    this.lastPullRequest = null
   }
 
   getHighlighted (entity, highlights) {
@@ -75,20 +79,29 @@ export default class LogPapers extends React.Component {
       this.lastRequest.abort()
       this.lastRequest = null
     }
+    this.stopAutoPull()
   }
 
   getCurrentData () {
     return this.props.useExternal ? this.state.results : this.props.data
   }
 
-  getExternalData (page) {
-    const {url, params, pageSize, onUpdateCount, handleRecord, noSearch} = this.props
-    if (!url) return
+
+  buildRequest (page) {
+    const {url, params, pageSize} = this.props
+    if (!url) return null
     page = page || 1
     let urlParams = assign({
       page: page - 1,
       size: pageSize || 10
     }, params)
+
+    return $.get(`${ROOT_URL}${url}?${encodeUrlParams(urlParams)}`)
+  }
+
+  getExternalData (page) {
+    const {url, params, pageSize, onUpdateCount, handleRecord, noSearch} = this.props
+    if (!url) return
 
     this.setState({
       isLoading: true
@@ -98,7 +111,7 @@ export default class LogPapers extends React.Component {
       this.lastRequest.abort()
     }
 
-    this.lastRequest = $.get(`${ROOT_URL}${url}?${encodeUrlParams(urlParams)}`).done(res => {
+    this.lastRequest = this.buildRequest(page).done(res => {
       const embedded = res._embedded
       let data = embedded[keys(embedded)[0]]
 
@@ -125,7 +138,7 @@ export default class LogPapers extends React.Component {
       this.setState(state, () => {
         setTimeout(() => {
           const node = ReactDOM.findDOMNode(this.refRowEnd)
-          node && node.scrollIntoView({behavior: 'smooth'})
+          node && node.scrollIntoView()
         }, 100)
       })
       onUpdateCount && onUpdateCount(total, state.results)
@@ -167,6 +180,57 @@ export default class LogPapers extends React.Component {
   onRefRow (ref) {
     this.refRowEnd = ref
   }
+
+  onClickAutoRenew () {
+    // if (this.state.isAutoPull) return
+    // this.setState({
+    //   isAutoPull: true
+    // })
+  }
+
+  startAutoPull () {
+    this.autoPullTimer = setInterval(() => {
+      this.lastPullRequest = $.get(`${ROOT_URL}${url}?${encodeUrlParams(urlParams)}`).done(res => {
+        const embedded = res._embedded
+        let data = embedded[keys(embedded)[0]]
+
+        data = data.map(d => ({
+          ...d,
+          entity: noSearch ? d.entity: this.getHighlighted(d.entity, d.highlights)
+        }))
+        if (handleRecord) {
+          data = data.map(d => handleRecord(d))
+        }
+
+        if (this.props.revertRows) data = reverse(data)
+
+        const total = res.page.totalElements
+        let state = {
+          results: data || [],
+          currentPage: page - 1,
+          maxPages: res.page.totalPages,
+          total,
+          isLoading: false,
+          hasMore: data.length > 0
+        }
+
+        this.setState(state, () => {
+          setTimeout(() => {
+            const node = ReactDOM.findDOMNode(this.refRowEnd)
+            node && node.scrollIntoView()
+          }, 100)
+        })
+        onUpdateCount && onUpdateCount(total, state.results)
+      })
+    }, 5000)
+  }
+
+  stopAutoPull () {
+    clearInterval(this.autoPullTimer)
+  }
+
+  ////////////////////////////////////////////////////////////////////////////////////
+
   renderTable () {
     const {pageSize, noCard, noSearch} = this.props
 
@@ -233,10 +297,14 @@ export default class LogPapers extends React.Component {
 
   render () {
     const table = this.renderTable()
+    const {showRenew} = this.props
     return (
-      <div className="flex-vertical" style={{height: '100%'}}>
+      <div className="flex-vertical" style={{height: '100%', position: 'relative'}}>
         <div className="text-center" style={{marginTop: 10, marginBottom: 6}}>
           {this.renderPaging()}
+        </div>
+        <div style={{position: 'absolute', right: 10, top: 10}} className={showRenew ? '' : 'hidden'}>
+          <RenewIcon className="link" onTouchTap={this.onClickAutoRenew.bind(this)}/>
         </div>
         <div className="flex-1" style={{overflow: 'auto', whiteSpace: 'normal', wordBreak: 'break-word'}}>
           {table}
@@ -245,20 +313,6 @@ export default class LogPapers extends React.Component {
       </div>
     )
   }
-
-  // render () {
-  //   const table = this.renderTable()
-  //   if (!this.props.bodyHeight) {
-  //     return (
-  //       <ReduxInfiniteScroll
-  //         children={table}
-  //         loadMore={this.loadMoreDeb}
-  //         loadingMore={this.state.isLoading}
-  //       />
-  //     )
-  //   }
-  //   return table
-  // }
 }
 
 LogPapers.defaultProps = {
