@@ -928,7 +928,7 @@ export default class WorkflowDashboardView extends React.Component {
     const {paramValueInputs} = this.state
     if (!selectedWfRectGroup || !selectedWfRectGroup.paramNames) return null
     return selectedWfRectGroup.paramNames.map((p, i) =>
-      <div key={i}>
+      <div key={i} className="inline-block">
         <TextField name={`paramValue${i}`}
                    value={paramValueInputs[i] || ''}
                    hintText={p || 'Value'}
@@ -1003,7 +1003,7 @@ export default class WorkflowDashboardView extends React.Component {
           {this.getRects().map(this.renderRect.bind(this))}
           <div id="graph" className="graph-base" style={{width: '100%', height: '100%'}}></div>
 
-          <div style={{position: 'absolute', right: 20, top: 5}}>
+          <div style={{position: 'absolute', left: 1, top: 2}}>
             {this.renderParamInputs()}
           </div>
 
