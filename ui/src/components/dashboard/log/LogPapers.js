@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import {Paper} from 'material-ui'
-import { assign, isEqual, keys, chunk, reverse, merge, isArray } from 'lodash'
+import { assign, isEqual, keys, chunk, reverse, merge, isArray, findIndex } from 'lodash'
 import $ from 'jquery'
 import moment from 'moment'
 import ReactPaginate from 'react-paginate'
@@ -99,31 +99,41 @@ export default class LogPapers extends React.Component {
     return $.get(`${ROOT_URL}${url}?${encodeUrlParams(urlParams)}`)
   }
 
+
+  parseResponse (res) {
+    const {handleRecord, noSearch, revertRows} = this.props
+    const embedded = res._embedded
+    let data = embedded[keys(embedded)[0]]
+
+    data = data.map(d => ({
+      ...d,
+      entity: noSearch ? d.entity: this.getHighlighted(d.entity, d.highlights)
+    }))
+    if (handleRecord) {
+      data = data.map(d => handleRecord(d))
+    }
+
+    if (revertRows) data = reverse(data)
+
+    return data
+  }
+
   getExternalData (page) {
-    const {url, onUpdateCount, handleRecord, noSearch} = this.props
+    const {url, onUpdateCount} = this.props
     if (!url) return
 
     this.setState({
       isLoading: true
     })
 
+    this.stopAutoPull()
+
     if (this.lastRequest) {
       this.lastRequest.abort()
     }
 
     this.lastRequest = this.buildRequest(page).done(res => {
-      const embedded = res._embedded
-      let data = embedded[keys(embedded)[0]]
-
-      data = data.map(d => ({
-        ...d,
-        entity: noSearch ? d.entity: this.getHighlighted(d.entity, d.highlights)
-      }))
-      if (handleRecord) {
-        data = data.map(d => handleRecord(d))
-      }
-
-      if (this.props.revertRows) data = reverse(data)
+      let data = this.parseResponse(res)
 
       const total = res.page.totalElements
       let state = {
@@ -189,44 +199,24 @@ export default class LogPapers extends React.Component {
   }
 
   startAutoPull () {
-    // this.autoPullTimer = setInterval(() => {
-    //   this.lastPullRequest = this.buildRequest(this.state.maxPages).done(res => {
-    //     const embedded = res._embedded
-    //     let data = embedded[keys(embedded)[0]]
-    //
-    //     data = data.map(d => ({
-    //       ...d,
-    //       entity: noSearch ? d.entity: this.getHighlighted(d.entity, d.highlights)
-    //     }))
-    //     if (handleRecord) {
-    //       data = data.map(d => handleRecord(d))
-    //     }
-    //
-    //     if (this.props.revertRows) data = reverse(data)
-    //
-    //     const total = res.page.totalElements
-    //     let state = {
-    //       results: data || [],
-    //       currentPage: page - 1,
-    //       maxPages: res.page.totalPages,
-    //       total,
-    //       isLoading: false,
-    //       hasMore: data.length > 0
-    //     }
-    //
-    //     this.setState(state, () => {
-    //       setTimeout(() => {
-    //         const node = ReactDOM.findDOMNode(this.refRowEnd)
-    //         node && node.scrollIntoView()
-    //       }, 100)
-    //     })
-    //     onUpdateCount && onUpdateCount(total, state.results)
-    //   })
-    // }, 5000)
+    this.autoPullTimer = setInterval(() => {
+      this.lastPullRequest = this.buildRequest(this.state.maxPages).done(res => {
+        const {results, maxPages, currentPage, isAutoPull} = this.state
+        if (maxPages !== currentPage || !isAutoPull) return
+        const data = this.parseResponse(res).filter(p => findIndex(results, {id: p.id}) < 0)
+        this.setState({
+          results: [...results, ...data]
+        })
+      })
+    }, 5000)
   }
 
   stopAutoPull () {
     clearInterval(this.autoPullTimer)
+    if (this.lastPullRequest) this.lastPullRequest.abort()
+    this.setState({
+      isAutoPull: false
+    })
   }
 
   ////////////////////////////////////////////////////////////////////////////////////

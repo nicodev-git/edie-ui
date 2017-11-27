@@ -320,6 +320,7 @@ export default class Log extends React.Component {
         reversePage
         noCard
         noSearch
+        showRenew
       />
     )
   }
