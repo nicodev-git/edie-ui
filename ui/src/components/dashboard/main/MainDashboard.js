@@ -64,7 +64,7 @@ export default class MainDashboard extends React.Component {
     return board && board.type === 'system' && board.name === 'Servers'
   }
   onChangeBoard (e, index, value) {
-    const {gaugeBoards} = this.props
+    const gaugeBoards = this.getBoards()
     const url = slugify(gaugeBoards[index].name)
     this.props.selectGaugeBoard(value, url, this.props.history, true)
   }
@@ -83,7 +83,7 @@ export default class MainDashboard extends React.Component {
     this.props.setDefaultGaugeBoard(board)
   }
   getBoards () {
-    return this.props.gaugeBoards
+    return this.props.gaugeBoards.filter(p => !this.isServerDashboard(p))
   }
   renderContent () {
     const board = this.getSelected()
