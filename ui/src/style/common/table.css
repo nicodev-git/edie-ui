@@ -65,6 +65,10 @@ table.table tbody td.selected{
     width: 220px;
 }
 
+.width-240 {
+    width: 240px;
+}
+
 .width-280 {
     width: 280px;
 }

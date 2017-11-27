@@ -26,7 +26,7 @@ export default class GWorkflows extends React.Component {
     this.cells = [{
       'displayName': 'Name',
       'columnName': 'name',
-      'cssClassName': 'width-180'
+      'cssClassName': 'width-240'
     }, {
       'displayName': 'Description',
       'columnName': 'desc',
