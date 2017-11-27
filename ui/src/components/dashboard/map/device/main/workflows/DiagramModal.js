@@ -38,6 +38,15 @@ class DiagramModal extends Component {
     this.props.closeDeviceWfDiagramModal()
   }
 
+  componentDidUpdate (prevProps) {
+    const { objects, lines, lastId, onSave } = this.props
+    if (onSave) {
+      if (prevProps.lastId !== lastId || prevProps.objects !== objects || prevProps.lines !== lines) {
+        onSave(JSON.stringify({objects, lines, lastId}))
+      }
+    }
+  }
+
   // ////////////////////////////////////////////////////
   onSearchChange (e) {
     const text = e.target.value

@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 
-import { /*TwoButtonsBlockCustom, */Modal } from 'components/modal/parts'
+import { TwoButtonsBlockCustom, Modal } from 'components/modal/parts'
 
 export default class DiagramModalView extends Component {
   render () {
-    const {header, onHide,/* onSave,*/ dragLayer, toolbar, sidebar,
+    const {header, onHide, onSave, dragLayer, toolbar, sidebar,
       panel, objectModal, noModal} = this.props
     const content = (
       <div className={`diagram ${noModal ? 'flex-vertical' : ''}`}
@@ -22,6 +22,7 @@ export default class DiagramModalView extends Component {
     return (
       <Modal title={header} onRequestClose={onHide}>
         {content}
+        <TwoButtonsBlockCustom name2="Save" action2={onSave}/>
       </Modal>
     )
   }
