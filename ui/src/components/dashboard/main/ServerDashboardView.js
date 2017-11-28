@@ -9,7 +9,7 @@ import ReactTooltip from 'react-tooltip'
 
 import { wizardConfig } from 'components/common/wizard/WizardConfig'
 import DeviceWizardContainer from 'containers/shared/wizard/DeviceWizardContainer'
-import ServerItem from './ServerItem'
+import ServerItem from './server/ServerItem'
 import RefreshOverlay from 'components/common/RefreshOverlay'
 
 import { showAlert, showConfirm } from 'components/common/Alert'
