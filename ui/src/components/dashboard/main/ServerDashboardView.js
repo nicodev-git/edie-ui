@@ -36,7 +36,7 @@ const btnStyle = {
 
 const tplColors = [purple500, deepPurpleA400]
 
-const menuItems = ['Workflows', 'Severs', 'Appliances']
+const menuItems = ['Workflows', 'Servers', 'Appliances']
 
 export default class ServerDashboardView extends React.Component {
   constructor (props) {
@@ -224,7 +224,7 @@ export default class ServerDashboardView extends React.Component {
   renderAddMenu () {
     return (
       <div style={{position: 'absolute', top: -68, width: '100%'}}>
-        <div className="pull-left">
+        <div className="pull-left margin-md-left">
           <SelectField
             value={this.state.page} onChange={this.onChangePage.bind(this)}
             className="valign-top"
