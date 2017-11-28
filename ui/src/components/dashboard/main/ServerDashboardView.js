@@ -175,6 +175,9 @@ export default class ServerDashboardView extends React.Component {
   /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   onChangePage (e, index, value) {
+    this.setState({
+      page: value
+    })
   }
 
   /////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -352,7 +355,7 @@ export default class ServerDashboardView extends React.Component {
     return (
       <div>
         {this.renderAddMenu()}
-        {this.renderServers()}
+        {this.renderContent()}
       </div>
     )
   }
