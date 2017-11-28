@@ -27,6 +27,8 @@ export default class ServerItem extends React.Component {
   }
 
   componentWillMount () {
+    const {noCred} = this.props
+    if (noCred) return
     const up = this.getStatus()
     this.setState({ up })
 
@@ -40,6 +42,8 @@ export default class ServerItem extends React.Component {
   }
 
   renderRightIcons () {
+    const {noCred} = this.props
+    if (noCred) return null
     const {up} = this.state
     if (up) return null
 

@@ -52,6 +52,7 @@ export default class AppliancesView extends React.Component {
       <ServerItem
         key={server.id}
         server={server}
+        noCred
         index={i}
         onClick={() => this.onClickServer(server)}
         onClickDelete={() => this.onClickDeleteServer(server)}
