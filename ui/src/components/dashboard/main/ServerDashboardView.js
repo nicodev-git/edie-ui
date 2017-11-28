@@ -226,11 +226,12 @@ export default class ServerDashboardView extends React.Component {
   }
 
   renderAddMenu () {
+    const {page} = this.state
     return (
       <div style={{position: 'absolute', top: -68, width: '100%'}}>
         <div className="pull-left margin-md-left">
           <SelectField
-            value={this.state.page} onChange={this.onChangePage.bind(this)}
+            value={page} onChange={this.onChangePage.bind(this)}
             className="valign-top"
             style={{width: 140}}>
             {menuItems.map(p =>
@@ -238,15 +239,17 @@ export default class ServerDashboardView extends React.Component {
             )}
           </SelectField>
         </div>
-        <div className="inline-block margin-lg-left">
-          <Card>
-            <input type="text" style={inputStyle}/>
-            <IconButton onTouchTap={this.onClickSearch.bind(this)} style={btnStyle}><SettingsIcon/></IconButton>
-            <IconButton onTouchTap={this.onClearSearch.bind(this)} style={btnStyle}><ClearIcon/></IconButton>
-            <IconButton onTouchTap={this.onClickCommand.bind(this)} style={btnStyle}
-                        className="margin-md-right"><ComputerIcon/></IconButton>
-          </Card>
-        </div>
+        {page === 'Servers' ? (
+          <div className="inline-block margin-lg-left">
+            <Card>
+              <input type="text" style={inputStyle}/>
+              <IconButton onTouchTap={this.onClickSearch.bind(this)} style={btnStyle}><SettingsIcon/></IconButton>
+              <IconButton onTouchTap={this.onClearSearch.bind(this)} style={btnStyle}><ClearIcon/></IconButton>
+              <IconButton onTouchTap={this.onClickCommand.bind(this)} style={btnStyle}
+                          className="margin-md-right"><ComputerIcon/></IconButton>
+            </Card>
+          </div>
+        ) : null}
       </div>
     )
   }
@@ -317,7 +320,6 @@ export default class ServerDashboardView extends React.Component {
   }
 
   renderServers () {
-    const {deleteDeviceState} = this.props
     return (
       <div>
         <div style={{paddingLeft: 20}}>
@@ -328,11 +330,7 @@ export default class ServerDashboardView extends React.Component {
 
         <FloatingMenu menuItems={this.getMenuItems()}/>
         {this.renderDeviceWizard()}
-        {this.renderSearchModal()}
-        {this.renderCmdModal()}
         {this.renderRangeAddModal()}
-        {deleteDeviceState && <RefreshOverlay />}
-        <ReactTooltip />
       </div>
     )
   }
@@ -352,10 +350,16 @@ export default class ServerDashboardView extends React.Component {
   }
 
   render () {
+    const {deleteDeviceState} = this.props
     return (
       <div>
         {this.renderAddMenu()}
         {this.renderContent()}
+
+        {deleteDeviceState && <RefreshOverlay />}
+        {this.renderSearchModal()}
+        {this.renderCmdModal()}
+        <ReactTooltip />
       </div>
     )
   }

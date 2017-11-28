@@ -2,13 +2,14 @@ import React from 'react'
 import ComputerIcon from 'material-ui/svg-icons/hardware/computer'
 import {purple500, deepPurpleA400} from 'material-ui/styles/colors'
 
+import { wizardConfig } from 'components/common/wizard/WizardConfig'
 import FloatingMenu from 'components/common/floating/FloatingMenu'
 
 const tplColors = [purple500, deepPurpleA400]
 
 export default class AppliancesView extends React.Component {
-  onClickAddItem () {
-
+  onClickAddItem (tpl) {
+    this.props.history.push(`/addserver?from=servers`)
   }
 
   getMenuItems () {
@@ -26,6 +27,8 @@ export default class AppliancesView extends React.Component {
     return (
       <div>
         <FloatingMenu menuItems={this.getMenuItems()}/>
+
+        {this.renderDeviceWizard()}
       </div>
     )
   }
