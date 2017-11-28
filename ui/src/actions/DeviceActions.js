@@ -544,11 +544,10 @@ export const resolveAddr = (props, cb) => {
       noCred: !!props.noCred
     }
   }).then(r1 => {
-    if (props.noCred) {
-      r1.data = r1.data || {}
-      r1.data.host = r1.data.host || 'Unknown'
-      r1.data.os = r1.data.os || 'Unknown'
-    }
+    r1.data = r1.data || {}
+    r1.data.host = r1.data.host || 'Unknown'
+    r1.data.os = r1.data.os || 'Unknown'
+
     if (r1.data && r1.data.host && r1.data.os) {
       props.hostname = r1.data.host
       props.osDetails = r1.data.os
