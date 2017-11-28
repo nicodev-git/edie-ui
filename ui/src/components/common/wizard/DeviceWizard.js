@@ -96,6 +96,7 @@ class DeviceWizard extends Component {
 
   checkDeviceAgentStatus (options = {}) {
     const {formValues, extraParams, credentials, noCred} = this.props
+    if (noCred) return
 
     const entity = {
       ...formValues,
@@ -104,8 +105,7 @@ class DeviceWizard extends Component {
       ...options
     }
 
-    entity.credentials = noCred ? [] :
-      mergeCredentials(entity, credentials, this.state.deviceGlobalCredentials, this.state.deviceCredentials)
+    entity.credentials = mergeCredentials(entity, credentials, this.state.deviceGlobalCredentials, this.state.deviceCredentials)
 
     if (!entity.wanip) {
       // showAlert('Please input IP')
@@ -162,7 +162,8 @@ class DeviceWizard extends Component {
         monitors: monitors.map(m => assign({}, m, {id: null})),
         params,
         lastSeen: formProps.agentType === 'collector' && fixStatus === 'done' && !fixResult.code ? new Date().getTime() : 0
-      }
+      },
+      noCred
     )
 
     if (canAddTags) props.tags = monitorTags || []

@@ -533,15 +533,15 @@ export const resolveAddr = (props, cb) => {
     return
   }
 
-  const cred = props.credential && props.credential.length > 0 ?
-    props.credential[0] : null
+  const cred = props.credential && props.credential.length > 0 ? props.credential[0] : null
   axios.get(`${ROOT_URL}/getHostname`, {
     params: {
       iporhost: props.wanip,
       user: props.useIntegratedSecurity ? '' : (cred ? cred.username : ''),
       password: props.useIntegratedSecurity ? '' : (cred ? cred.password : ''),
       isWindows: isWindowsDevice(props),
-      collectorId: props.collectorId
+      collectorId: props.collectorId,
+      noCred: props.noCred
     }
   }).then(r1 => {
     if (r1.data && r1.data.host && r1.data.os) {
