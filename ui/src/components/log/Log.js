@@ -41,6 +41,7 @@ export default class Log extends React.Component {
       if (!data) return
       const monitors = this.getLogMonitors()
       data = data.map(p => ({
+        ...p,
         id: p.id,
         name: p.name,
         title: p.title,
@@ -48,11 +49,16 @@ export default class Log extends React.Component {
           const index = findIndex(monitors, {uid: c.uid})
           if (index < 0) return c
           return {
+            ...c,
             uid: monitors[index].uid,
             title: this.renderMonitor.bind(this, monitors[index])
           }
         })
       }))
+
+      this.setState({
+        monitorTreeData: data
+      })
     }
   }
 
