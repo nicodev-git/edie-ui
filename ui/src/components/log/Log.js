@@ -35,8 +35,8 @@ export default class Log extends React.Component {
   }
 
   componentDidUpdate (prevProps) {
-    const {devices} = this.props
-    if (prevProps.devices !== devices) {
+    const {allDevices} = this.props
+    if (prevProps.allDevices !== allDevices) {
       let data = this.state.monitorTreeData
       if (!data) return
       const monitors = this.getLogMonitors()
