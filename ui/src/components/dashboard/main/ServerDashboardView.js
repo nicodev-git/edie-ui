@@ -36,7 +36,7 @@ const btnStyle = {
 
 const tplColors = [purple500, deepPurpleA400]
 
-const menuItems = ['Workflows', 'Servers', 'Appliances']
+const menuItems = ['Servers', 'Workstations', 'Appliances']
 
 export default class ServerDashboardView extends React.Component {
   constructor (props) {
