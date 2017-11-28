@@ -95,7 +95,7 @@ class DeviceWizard extends Component {
   }
 
   checkDeviceAgentStatus (options = {}) {
-    const {formValues, extraParams, credentials} = this.props
+    const {formValues, extraParams, credentials, noCred} = this.props
 
     const entity = {
       ...formValues,
@@ -104,7 +104,8 @@ class DeviceWizard extends Component {
       ...options
     }
 
-    entity.credentials = mergeCredentials(entity, credentials, this.state.deviceGlobalCredentials, this.state.deviceCredentials)
+    entity.credentials = noCred ? [] :
+      mergeCredentials(entity, credentials, this.state.deviceGlobalCredentials, this.state.deviceCredentials)
 
     if (!entity.wanip) {
       // showAlert('Please input IP')
@@ -128,7 +129,7 @@ class DeviceWizard extends Component {
 
   handleFormSubmit (formProps) {
     const { extraParams, onFinish, editParams, canAddTags,
-      monitorTags, credentials, fixResult, fixStatus, editDevice } = this.props
+      monitorTags, credentials, fixResult, fixStatus, editDevice, noCred } = this.props
     const { monitors, currentDevice, deviceGlobalCredentials, deviceCredentials } = this.state
     const {distribution} = formProps
     const params = {
@@ -169,7 +170,7 @@ class DeviceWizard extends Component {
       props.tags = [...(props.tags || []), distribution]
     }
 
-    props.credential = mergeCredentials({
+    props.credential = noCred ? null : mergeCredentials({
       templateName: extraParams.templateName
     }, credentials, deviceGlobalCredentials, deviceCredentials)
     console.log(props)

@@ -1,5 +1,5 @@
 import React from 'react'
-import {parse} from 'query-string'
+// import {parse} from 'query-string'
 import { SubmissionError } from 'redux-form'
 
 import { getDeviceType } from 'components/common/wizard/WizardConfig'
@@ -59,7 +59,7 @@ export default class AddAppliance extends React.Component {
           showAlert(error)
         }
       } else {
-        const query = parse(this.props.location.search)
+        // const query = parse(this.props.location.search)
         this.props.history.push('/dashboard/servers')
       }
     })
@@ -86,6 +86,7 @@ export default class AddAppliance extends React.Component {
       <div style={addingDevice ? nonScrollStyle : null}>
         <DeviceWizardContainer
           noModal
+          noCred
           deviceType={getDeviceType(tpl.name)}
           onClose={this.closeCallback.bind(this)}
           title={tpl.name}
