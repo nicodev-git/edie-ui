@@ -60,9 +60,7 @@ export default class AddAppliance extends React.Component {
         }
       } else {
         const query = parse(this.props.location.search)
-        if (query.from === 'servers') {
-          this.props.history.push('/dashboard/servers')
-        }
+        this.props.history.push('/dashboard/servers')
       }
     })
   }
