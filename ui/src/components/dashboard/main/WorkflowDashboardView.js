@@ -32,13 +32,13 @@ const RECT_W = 135
 const RECT_H = 135
 
 const units = [{
-  label: 'Minutes', value: 'm'
+  label: 'm', value: 'm'
 }, {
-  label: 'Hours', value: 'h'
+  label: 'h', value: 'h'
 }, {
-  label: 'Days', value: 'd'
+  label: 'd', value: 'd'
 }, {
-  label: 'Months', value: 'M'
+  label: 'M', value: 'M'
 }]
 
 export default class WorkflowDashboardView extends React.Component {
@@ -982,13 +982,12 @@ export default class WorkflowDashboardView extends React.Component {
             className="valign-top margin-md-left"
             style={{width: 40, textAlign: 'right'}}
             value={this.state.interval} onChange={this.onChangeInterval.bind(this)}/>
-          <label className="inline-block" style={{marginTop: 15}}>m</label>
           <SelectField
             hintText="Unit"
-            className="valign-top margin-md-left hidden"
+            className="valign-top margin-md-left"
             value={this.state.intervalUnit}
             onChange={this.onChangeIntervalUnit.bind(this)}
-            style={{width: 150}}>
+            style={{width: 20}}>
             {units.map(p =>
               <MenuItem key={p.value} value={p.value} primaryText={p.label}/>
             )}
