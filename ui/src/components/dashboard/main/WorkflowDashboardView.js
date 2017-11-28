@@ -70,6 +70,7 @@ export default class WorkflowDashboardView extends React.Component {
     }]
 
     this.debOnClick = debounce(this.onClickRect.bind(this), 250)
+    this.debSaveInterval = debounce(this.saveInterval.bind(this), 250)
   }
   componentWillMount () {
     this.debUpdateGroup = debounce(this.updateGroup.bind(this), 2000)
@@ -423,7 +424,20 @@ export default class WorkflowDashboardView extends React.Component {
     this.addGraphRects(this.getRects())
     this.setState({
       paramValues: [],
-      paramValueInputs: []
+      paramValueInputs: [],
+      interval: group.interval || 30,
+      intervalUnit: group.intervalUnit || 'm'
+    })
+  }
+
+  saveInterval () {
+    const {selectedWfRectGroup} = this.props
+    if (!selectedWfRectGroup) return
+
+    this.props.updateWfRectGroup({
+      ...selectedWfRectGroup,
+      interval: this.state.interval || 30,
+      intervalUnit: this.state.intervalUnit
     })
   }
 
@@ -851,12 +865,14 @@ export default class WorkflowDashboardView extends React.Component {
     this.setState({
       interval: value
     })
+    this.debSaveInterval()
   }
 
   onChangeIntervalUnit (e, index, value) {
     this.setState({
       intervalUnit: value
     })
+    this.debSaveInterval()
   }
 
   ////////////////////
