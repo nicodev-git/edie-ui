@@ -375,16 +375,6 @@ export const wizardConfig = {
         }]
       }],
     }, {
-      title: 'Agent/Collector',
-      panels: [{
-        title: 'Agent',
-        width: 6,
-        items: [{
-          type: 'agentpicker',
-          name: 'agent'
-        }]
-      }]
-    }, {
       title: 'Monitors',
       panels: [{
         skip: true,
