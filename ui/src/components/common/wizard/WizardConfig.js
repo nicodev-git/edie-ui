@@ -179,12 +179,11 @@ export const wizardConfig = {
         }, {
           type: 'text',
           label: {
-            text: 'Name',
+            text: 'Name (Optional)',
             type: 'attach',
             width: 3
           },
           width: MAX_WIDTH,
-          required: true,
           name: 'name'
         }]
       }],
@@ -277,12 +276,11 @@ export const wizardConfig = {
         }, {
           type: 'text',
           label: {
-            text: 'Name',
+            text: 'Name (Optional)',
             type: 'attach',
             width: 3
           },
           width: MAX_WIDTH,
-          required: true,
           name: 'name'
         }]
       }],
@@ -370,7 +368,6 @@ export const wizardConfig = {
             width: 3
           },
           width: MAX_WIDTH,
-          required: true,
           name: 'name'
         }]
       }],

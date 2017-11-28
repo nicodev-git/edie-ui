@@ -550,6 +550,7 @@ export const resolveAddr = (props, cb) => {
 
     if (r1.data && r1.data.host && r1.data.os) {
       props.hostname = r1.data.host
+      if (!props.name) props.name = props.hostname
       props.osDetails = r1.data.os
       cb && cb(props)
     } else {

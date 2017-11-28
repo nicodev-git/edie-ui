@@ -78,7 +78,7 @@ class DeviceWizard extends Component {
   }
 
   componentDidUpdate (prevProps) {
-    const {deviceType, deviceHost} = this.props
+    const {deviceType} = this.props
     if (deviceType !== prevProps.deviceType) {
       const config = wizardConfig[deviceType]
       const stepItems = config.steps
@@ -89,9 +89,9 @@ class DeviceWizard extends Component {
       })
     }
 
-    if (deviceHost && deviceHost !== prevProps.deviceHost) {
-      this.props.change('name', deviceHost)
-    }
+    // if (deviceHost && deviceHost !== prevProps.deviceHost) {
+    //   this.props.change('name', deviceHost)
+    // }
   }
 
   checkDeviceAgentStatus (options = {}) {
