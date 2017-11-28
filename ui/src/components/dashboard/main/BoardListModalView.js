@@ -41,7 +41,7 @@ export default class BoardListModalView extends React.Component {
               </tr>
               </thead>
               <tbody>
-              {gaugeBoards.map(p =>
+              {gaugeBoards.filter(p => p.type !== 'system').map(p =>
                 <tr key={p.id} onClick={() => onSelect(p)} className={selected && selected.id === p.id ? 'selected' : ''}>
                   <td>{p.name}</td>
                   <td>{p.type || 'normal'}</td>
