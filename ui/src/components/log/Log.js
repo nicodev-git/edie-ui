@@ -272,7 +272,11 @@ export default class Log extends React.Component {
   renderMonitor(m) {
     let time = ''
     if (m.lastsuccess) {
-      time = moment(m.lastsuccess).fromNow().replace(' ago', '')
+      time = moment(m.lastsuccess).fromNow()
+        .replace(' ago', '')
+        .replace(' minutes', 'm')
+        .replace(' hours', 'h')
+        .replace(' days', 'd')
     }
 
     return (
