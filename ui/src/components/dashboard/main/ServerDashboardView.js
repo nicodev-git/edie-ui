@@ -17,6 +17,7 @@ import ServerSearchModal from './server/ServerSearchModal'
 import ServerCmdModal from './server/ServerCmdModal'
 import FloatingMenu from 'components/common/floating/FloatingMenu'
 import RangeAddModal from './server/RangeAddModal'
+import AppliancesView from './server/AppliancesView'
 
 const inputStyle = {
   'verticalAlign': 'middle',
@@ -311,11 +312,11 @@ export default class ServerDashboardView extends React.Component {
       />
     )
   }
-  render () {
+
+  renderServers () {
     const {deleteDeviceState} = this.props
     return (
       <div>
-        {this.renderAddMenu()}
         <div style={{paddingLeft: 20}}>
           <ul className="web-applet-cards">
             {this.getServers().map(this.renderServer.bind(this))}
@@ -329,6 +330,29 @@ export default class ServerDashboardView extends React.Component {
         {this.renderRangeAddModal()}
         {deleteDeviceState && <RefreshOverlay />}
         <ReactTooltip />
+      </div>
+    )
+  }
+
+  renderAppliances () {
+    return (
+      <AppliancesView {...this.props}/>
+    )
+  }
+
+  renderContent () {
+    switch(this.state.page) {
+      case 'Workstations': return null
+      case 'Appliances': return this.renderAppliances()
+      default: return this.renderServers()
+    }
+  }
+
+  render () {
+    return (
+      <div>
+        {this.renderAddMenu()}
+        {this.renderServers()}
       </div>
     )
   }
