@@ -29,9 +29,45 @@ export default class Log extends React.Component {
     }
   }
   componentWillMount () {
-    this.props.fetchDevicesGroups()
+    this.props.fetchDevices()
     this.props.fetchMonitorGroups()
+    this.startTimer()
   }
+
+  componentDidUpdate (prevProps) {
+    const {devices} = this.props
+    if (prevProps.devices !== devices) {
+      let data = this.state.monitorTreeData
+      if (!data) return
+      const monitors = this.getLogMonitors()
+      data = data.map(p => ({
+        id: p.id,
+        name: p.name,
+        title: p.title,
+        children: p.children.map(c => {
+          const index = findIndex(monitors, {uid: c.uid})
+          if (index < 0) return c
+          return {
+            uid: monitors[index].uid,
+            title: this.renderMonitor.bind(this, monitors[index])
+          }
+        })
+      }))
+    }
+  }
+
+  componentWillUnmount() {
+    this.stopTimer()
+  }
+
+  startTimer () {
+    this.timer = setInterval(this.props.fetchDevices, 6000)
+  }
+
+  stopTimer () {
+    clearInterval(this.timer)
+  }
+
   getTreeData () {
     let data = this.state.monitorTreeData
     if (!data) {
