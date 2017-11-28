@@ -228,8 +228,8 @@ export default class ServerDashboardView extends React.Component {
   renderAddMenu () {
     const {page} = this.state
     return (
-      <div style={{position: 'absolute', top: -68, width: '100%'}}>
-        <div className="pull-left margin-md-left">
+      <div style={{position: 'absolute', top: -68, width: '100%'}} className="text-center">
+        <div style={{position: 'absolute', left: 27}}>
           <SelectField
             value={page} onChange={this.onChangePage.bind(this)}
             className="valign-top"
@@ -240,7 +240,7 @@ export default class ServerDashboardView extends React.Component {
           </SelectField>
         </div>
         {page === 'Servers' ? (
-          <div className="inline-block margin-lg-left">
+          <div className="inline-block">
             <Card>
               <input type="text" style={inputStyle}/>
               <IconButton onTouchTap={this.onClickSearch.bind(this)} style={btnStyle}><SettingsIcon/></IconButton>
