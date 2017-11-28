@@ -153,8 +153,9 @@ class DeviceWizard extends Component {
       }
     }
 
-    const props = assign(
-      {},
+    const props = assign({
+        noCred
+      },
       editDevice,
       formProps,
       currentDevice.server.params || {},
@@ -162,8 +163,7 @@ class DeviceWizard extends Component {
         monitors: monitors.map(m => assign({}, m, {id: null})),
         params,
         lastSeen: formProps.agentType === 'collector' && fixStatus === 'done' && !fixResult.code ? new Date().getTime() : 0
-      },
-      noCred
+      }
     )
 
     if (canAddTags) props.tags = monitorTags || []
