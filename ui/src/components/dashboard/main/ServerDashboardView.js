@@ -1,5 +1,5 @@
 import React from 'react'
-import {IconButton, Card} from 'material-ui'
+import {IconButton, Card, SelectField, MenuItem} from 'material-ui'
 import SettingsIcon from 'material-ui/svg-icons/action/settings'
 import ClearIcon from 'material-ui/svg-icons/communication/clear-all'
 import ComputerIcon from 'material-ui/svg-icons/hardware/computer'
@@ -36,6 +36,8 @@ const btnStyle = {
 
 const tplColors = [purple500, deepPurpleA400]
 
+const menuItems = ['Workflows', 'Severs', 'Appliances']
+
 export default class ServerDashboardView extends React.Component {
   constructor (props) {
     super(props)
@@ -43,6 +45,8 @@ export default class ServerDashboardView extends React.Component {
     this.state = {
       deviceWizardConfig: {},
       deviceWizardVisible: false,
+
+      page: 'Servers'
     }
   }
 
@@ -169,6 +173,10 @@ export default class ServerDashboardView extends React.Component {
 
   /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+  onChangePage (e, index, value) {
+  }
+
+  /////////////////////////////////////////////////////////////////////////////////////////////////////////
   renderRangeAddModal () {
     if (!this.props.rangeAddModalOpen) return null
     return (
@@ -215,8 +223,18 @@ export default class ServerDashboardView extends React.Component {
 
   renderAddMenu () {
     return (
-      <div className="text-center" style={{position: 'absolute', top: -68, width: '100%'}}>
-        <div className="inline-block">
+      <div style={{position: 'absolute', top: -68, width: '100%'}}>
+        <div className="pull-left">
+          <SelectField
+            value={this.state.page} onChange={this.onChangePage.bind(this)}
+            className="valign-top"
+            style={{width: 140}}>
+            {menuItems.map(p =>
+              <MenuItem key={p} value={p} primaryText={p}/>
+            )}
+          </SelectField>
+        </div>
+        <div className="inline-block margin-lg-left">
           <Card>
             <input type="text" style={inputStyle}/>
             <IconButton onTouchTap={this.onClickSearch.bind(this)} style={btnStyle}><SettingsIcon/></IconButton>

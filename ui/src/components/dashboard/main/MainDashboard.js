@@ -117,7 +117,11 @@ export default class MainDashboard extends React.Component {
   renderTopbar () {
     const board = this.getSelected()
     if (!board) return null
-    if (board.type === 'system') return null
+    if (board.type === 'system') {
+      return (
+        <div className="padding-lg-left" style={{height: 90}} />
+      )
+    }
     return (
       <div className="padding-lg-left" style={{height: 90}}>
         <SelectField
