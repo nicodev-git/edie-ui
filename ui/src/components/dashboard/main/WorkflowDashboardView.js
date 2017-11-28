@@ -980,14 +980,15 @@ export default class WorkflowDashboardView extends React.Component {
           <TextField
             name="interval" hintText="Interval"
             className="valign-top margin-md-left"
-            style={{width: 40, textAlign: 'right'}}
+            style={{width: 30, textAlign: 'right'}}
             value={this.state.interval} onChange={this.onChangeInterval.bind(this)}/>
           <SelectField
             hintText="Unit"
             className="valign-top margin-md-left"
             value={this.state.intervalUnit}
             onChange={this.onChangeIntervalUnit.bind(this)}
-            style={{width: 20}}>
+            style={{width: 20}}
+            menuStyle={{width: 150}}>
             {units.map(p =>
               <MenuItem key={p.value} value={p.value} primaryText={p.label}/>
             )}
