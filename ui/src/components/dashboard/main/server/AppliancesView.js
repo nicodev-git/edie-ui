@@ -8,7 +8,7 @@ const tplColors = [purple500, deepPurpleA400]
 
 export default class AppliancesView extends React.Component {
   onClickAddItem (tpl) {
-    this.props.history.push(`/addserver?from=servers`)
+    this.props.history.push(`/addappliance`)
   }
 
   getMenuItems () {

@@ -12,7 +12,9 @@ export const deviceTypeMap = {
   'Linux Server': 'linux',
 
   'Long hub': 'longhub',
-  'Free Text': 'usertext'
+  'Free Text': 'usertext',
+
+  'Appliance': 'appliance'
 }
 
 export const monitorTypeMap = {
@@ -298,6 +300,88 @@ export const wizardConfig = {
         skip: true,
         items: [{
           type: 'credpicker'
+        }]
+      }]
+    }, {
+      title: 'Monitors',
+      panels: [{
+        skip: true,
+        items: [{
+          type: 'monitors',
+          title: 'Monitors'
+        }]
+      }]
+
+    }, {
+      title: 'Advanced',
+      panels: [{
+        title: 'Advanced',
+        items: [{
+          type: 'text',
+          label: {
+            text: 'LAN IP',
+            type: 'attach',
+            width: 3
+          },
+          width: MAX_WIDTH,
+          name: 'lanip'
+        }, {
+          type: 'removeAfter',
+          label: {
+            text: 'Remove events after',
+            type: 'attach',
+            width: 3
+          },
+          width: MAX_WIDTH,
+          name: 'params.remove_after'
+        }]
+      }]
+    }]
+  },
+
+  'appliance': {
+    title: 'Custom',
+    width: POPUP_WIDTH_SM,
+    server: {
+      url: '/device',
+      params: {
+        type: 'Custom Device'
+      }
+    },
+    steps: [{
+      title: 'Settings',
+      panels: [{
+        title: 'Basic',
+        width: 6,
+        items: [{
+          type: 'text',
+          label: {
+            text: 'IP/Host',
+            type: 'attach',
+            width: 3
+          },
+          width: MAX_WIDTH,
+          name: 'wanip'
+        }, {
+          type: 'text',
+          label: {
+            text: 'Name',
+            type: 'attach',
+            width: 3
+          },
+          width: MAX_WIDTH,
+          required: true,
+          name: 'name'
+        }]
+      }],
+    }, {
+      title: 'Agent/Collector',
+      panels: [{
+        title: 'Agent',
+        width: 6,
+        items: [{
+          type: 'agentpicker',
+          name: 'agent'
         }]
       }]
     }, {

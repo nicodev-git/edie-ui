@@ -26,6 +26,7 @@ import DeviceWfContainer from 'containers/devicewf/DeviceWfContainer'
 import EditWfContainer from 'containers/devicewf/EditWfContainer'
 import EditWfDiagramContainer from 'containers/devicewf/EditWfDiagramContainer'
 import AddWfContainer from 'containers/devicewf/AddWfContainer'
+import AddApplianceContainer from 'containers/dashboard/AddApplianceContainer'
 
 import {
   closeDevice,
@@ -218,6 +219,7 @@ class MainpageContainer extends Component {
           <Route path="/dashboard/serverdetail/:id" component={ServerDetailContainer}/>
           <Route path="/dashboard/:id" component={MainDashboardContainer}/>
           <Route path="/addserver" component={AddServerContainer}/>
+          <Route path="/addappliance" component={AddApplianceContainer}/>
         </Switch>
         <Route path="/devicewf" component={DeviceWfContainer}/>
         <Route path="/:device/addwf" component={AddWfContainer}/>

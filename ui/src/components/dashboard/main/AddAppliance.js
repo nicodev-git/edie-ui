@@ -1,9 +1,8 @@
 import React from 'react'
-import {findIndex} from 'lodash'
 import {parse} from 'query-string'
 import { SubmissionError } from 'redux-form'
 
-import { getDeviceType, commonconfig } from 'components/common/wizard/WizardConfig'
+import { getDeviceType } from 'components/common/wizard/WizardConfig'
 import DeviceWizardContainer from 'containers/shared/wizard/DeviceWizardContainer'
 import RefreshOverlay from 'components/common/RefreshOverlay'
 import {showAlert} from 'components/common/Alert'
@@ -27,7 +26,7 @@ export default class AddAppliance extends React.Component {
   componentDidUpdate(prevProps) {
     const {deviceTemplates} = this.props
     if (!this.state.tpl && deviceTemplates !== prevProps.deviceTemplates && deviceTemplates.length) {
-      const found = deviceTemplates.filter(p => (p.tags || []).includes('Server'))
+      const found = deviceTemplates.filter(p => (p.tags || []).includes('Appliance'))
       if (found.length) {
         this.setState({
           tpl: found[0]
