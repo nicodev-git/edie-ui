@@ -209,7 +209,7 @@ export default class LogPapers extends React.Component {
     })
 
     this.autoPullTimer = setInterval(() => {
-      this.lastPullRequest = this.buildRequest(this.state.maxPages).done(res => {
+      this.lastPullRequest = this.buildRequest(0).done(res => {
         const {results, currentPage, isAutoPull} = this.state
         if (currentPage !== 0 || !isAutoPull) return
         const data = this.parseResponse(res).filter(p => findIndex(results, {id: p.id}) < 0)
