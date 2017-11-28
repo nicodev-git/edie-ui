@@ -13,7 +13,7 @@ import './style'
 const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore)
 const store = createStoreWithMiddleware(reducers)
 
-console.log('Version: 0.32.17')
+console.log('Version: 0.32.18')
 
 injectTapEventPlugin()
 ReactDOM.render(
