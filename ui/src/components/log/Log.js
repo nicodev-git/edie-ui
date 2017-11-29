@@ -5,6 +5,7 @@ import {findIndex, debounce} from 'lodash'
 // import FileTheme from 'react-sortable-tree-theme-file-explorer'
 import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
 import EditIcon from 'material-ui/svg-icons/content/create'
+import FilterIcon from 'material-ui/svg-icons/content/filter-list'
 
 import TabPage from 'components/common/TabPage'
 import TabPageBody from 'components/common/TabPageBody'
@@ -284,6 +285,9 @@ export default class Log extends React.Component {
     })
   }
 
+  onClickFilterList () {
+
+  }
   ///////////////////////////////////////////////////////////////////////////////////
   renderFolder (p) {
     const {selectedFolder} = this.state
@@ -365,6 +369,9 @@ export default class Log extends React.Component {
       <div style={{position: 'absolute', right: 5, top: 8}} className="form-inline">
         <input type="text" className="form-control input-sm" placeholder="Search..." value={keyword}
                onChange={this.onChangeKeyword.bind(this)}/>
+        <div className="valign-middle inline-block margin-lg-left">
+          <FilterIcon className="link" onTouchTap={this.onClickFilterList.bind(this)}/>
+        </div>
       </div>
     )
   }
