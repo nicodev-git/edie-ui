@@ -233,7 +233,7 @@ export default class LogPapers extends React.Component {
   ////////////////////////////////////////////////////////////////////////////////////
 
   renderTable () {
-    const {pageSize, noCard, noSearch} = this.props
+    const {pageSize, noCard, noSearch, ignoreFilters} = this.props
 
     const results = this.getCurrentData()
 
@@ -246,7 +246,23 @@ export default class LogPapers extends React.Component {
         timeTo = moment(list[list.length - 1].entity.timestamp).format(dateFormat)
       }
 
-      const items = list.map((row, index) =>
+      let items = list
+      if (ignoreFilters.length) {
+        items = items.filter(row => {
+          const line = row.entity && row.entity.dataobj ? row.entity.dataobj.line : ' '
+          let found = false
+          ignoreFilters.every(filter => {
+            if (line.match(filter)) {
+              found = true
+              return false
+            }
+            return true
+          })
+          return !found
+        })
+      }
+
+      items = items.map((row, index) =>
         <div key={row.id} className="padding-xs row-hover">
           <span dangerouslySetInnerHTML={{__html: row.entity && row.entity.dataobj ? row.entity.dataobj.line : ' '}}/>
           {!noSearch && <div className="link text-primary margin-md-left" onClick={this.onClickView.bind(this, row, index)}>
@@ -254,12 +270,6 @@ export default class LogPapers extends React.Component {
           </div>}
         </div>
       )
-      if (items.length) {
-        items.push(
-
-        )
-      }
-
       return (
         <div key={i} className="padding-sm-left padding-sm-right margin-md-bottom">
           {noCard ? (
@@ -333,5 +343,6 @@ LogPapers.defaultProps = {
   onUpdateCount: null,
   handleRecord: null,
 
-  hideHeader: false
+  hideHeader: false,
+  ignoreFilters: []
 }

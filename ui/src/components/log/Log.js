@@ -365,6 +365,20 @@ export default class Log extends React.Component {
 
   }
 
+  getIgnoreFilters () {
+    const {monitorUid} = this.state
+    if (!monitorUid) return []
+    const device = this.getDeviceByMonitor(monitorUid)
+    if (!device) return []
+    const monitor = device.monitors[findIndex(device.monitors, {uid: monitorUid})]
+    if (!monitor) return []
+
+    const params = monitor.params || {}
+    const filters = params.ignore_view_filters || []
+
+    return filters
+  }
+
   ///////////////////////////////////////////////////////////////////////////////////
   renderFolder (p) {
     const {selectedFolder} = this.state
@@ -410,7 +424,7 @@ export default class Log extends React.Component {
     )
   }
 
-  renderLogs () {
+  renderLogs (filters) {
     const {monitorUid} = this.state
     if (!monitorUid) return <div/>
     return (
@@ -427,6 +441,7 @@ export default class Log extends React.Component {
         noCard
         noSearch
         showRenew
+        ignoreFilters={filters}
       />
     )
   }
@@ -440,15 +455,7 @@ export default class Log extends React.Component {
     )
   }
 
-  renderIgnoreFilters () {
-    const {monitorUid} = this.state
-    const device = this.getDeviceByMonitor(monitorUid)
-    if (!device) return null
-    const monitor = device.monitors[findIndex(device.monitors, {uid: monitorUid})]
-    if (!monitor) return null
-
-    const params = monitor.params || {}
-    const filters = params.ignore_view_filters || []
+  renderIgnoreFilters (filters) {
     return (
       <IconMenu iconButtonElement={
         <IconButton style={{padding: 0, width: 24, height: 24}}
@@ -465,18 +472,19 @@ export default class Log extends React.Component {
     )
   }
 
-  renderSearchTools () {
+  renderSearchTools (filters) {
     return (
       <div style={{position: 'absolute', right: 5, top: 5}} className="form-inline">
         <div className="valign-middle inline-block margin-md-left margin-md-right">
           <FilterIcon className="link margin-xs-top" onTouchTap={this.onClickAddFilter.bind(this)}/>
-          {this.renderIgnoreFilters()}
+          {this.renderIgnoreFilters(filters)}
         </div>
       </div>
     )
   }
 
   render () {
+    const filters = this.getIgnoreFilters()
     return (
       <TabPage>
         <div style={{margin: '16px 20px 0'}}>
@@ -497,10 +505,10 @@ export default class Log extends React.Component {
             <div className="flex-vertical flex-1">
               <div className="header-red margin-xs-right">
                 Content
-                {this.renderSearchTools()}
+                {this.renderSearchTools(filters)}
               </div>
               <div className="flex-1 flex-vertical paper-bg">
-                {this.renderLogs()}
+                {this.renderLogs(filters)}
               </div>
             </div>
           </div>
