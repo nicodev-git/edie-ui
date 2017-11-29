@@ -21,6 +21,7 @@ export default class LogPapers extends React.Component {
       isLoading: false,
       maxPages: 0,
       results: [],
+      filteredResults: [],
       total: 0,
       hasMore: true,
 
@@ -66,10 +67,16 @@ export default class LogPapers extends React.Component {
   }
 
   componentDidUpdate (prevProps, prevState) {
-    const {url, params, handleRecord} = this.props
+    const {url, params, handleRecord, ignoreFilters} = this.props
     if (url !== prevProps.url || !isEqual(params, prevProps.params) ||
       (prevProps.handleRecord && !handleRecord) || (!prevProps.handleRecord && handleRecord)) {
       this.refresh()
+    }
+
+    if (JSON.stringify(prevProps.ignoreFilters) !== JSON.stringify(ignoreFilters)) {
+      this.setState({
+        filteredResults: this.filterData(this.state.results)
+      })
     }
   }
 
@@ -83,7 +90,7 @@ export default class LogPapers extends React.Component {
   }
 
   getCurrentData () {
-    return this.props.useExternal ? this.state.results : this.props.data
+    return this.props.useExternal ? this.state.filteredResults : this.props.data
   }
 
 
@@ -118,6 +125,23 @@ export default class LogPapers extends React.Component {
     return data
   }
 
+  filterData (data) {
+    const {ignoreFilters} = this.props
+    if (!ignoreFilters.length) return data
+    return data.filter(row => {
+      const line = row.entity && row.entity.dataobj ? row.entity.dataobj.line : ' '
+      let found = false
+      ignoreFilters.every(filter => {
+        if (line.match(filter)) {
+          found = true
+          return false
+        }
+        return true
+      })
+      return !found
+    })
+  }
+
   getExternalData (page) {
     const {url, onUpdateCount} = this.props
     if (!url) return
@@ -138,6 +162,7 @@ export default class LogPapers extends React.Component {
       const total = res.page.totalElements
       let state = {
         results: data || [],
+        filteredResults: this.filterData(data || []),
         currentPage: page - 1,
         maxPages: res.page.totalPages,
         total,
@@ -213,8 +238,11 @@ export default class LogPapers extends React.Component {
         const {results, currentPage, isAutoPull} = this.state
         if (currentPage !== 0 || !isAutoPull) return
         const data = this.parseResponse(res).filter(p => findIndex(results, {id: p.id}) < 0)
+
+        const newData = [...results, ...data]
         this.setState({
-          results: [...results, ...data]
+          results: newData,
+          filteredResults: this.filterData(newData)
         }, () => {
           this.focusBottom()
         })
@@ -233,7 +261,7 @@ export default class LogPapers extends React.Component {
   ////////////////////////////////////////////////////////////////////////////////////
 
   renderTable () {
-    const {pageSize, noCard, noSearch, ignoreFilters} = this.props
+    const {pageSize, noCard, noSearch} = this.props
 
     const results = this.getCurrentData()
 
@@ -246,21 +274,7 @@ export default class LogPapers extends React.Component {
         timeTo = moment(list[list.length - 1].entity.timestamp).format(dateFormat)
       }
 
-      let items = list
-      if (ignoreFilters.length) {
-        items = items.filter(row => {
-          const line = row.entity && row.entity.dataobj ? row.entity.dataobj.line : ' '
-          let found = false
-          ignoreFilters.every(filter => {
-            if (line.match(filter)) {
-              found = true
-              return false
-            }
-            return true
-          })
-          return !found
-        })
-      }
+      let items = this.state.filteredResults
 
       items = items.map((row, index) =>
         <div key={row.id} className="padding-xs row-hover">
