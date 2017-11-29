@@ -1,13 +1,11 @@
 import React from 'react'
 import moment from 'moment'
 import SortableTree from 'react-sortable-tree'
-import {findIndex, debounce} from 'lodash'
+import {findIndex} from 'lodash'
 // import FileTheme from 'react-sortable-tree-theme-file-explorer'
 import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
 import EditIcon from 'material-ui/svg-icons/content/create'
 import FilterIcon from 'material-ui/svg-icons/content/filter-list'
-import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert'
-import {IconMenu, IconButton, MenuItem} from 'material-ui'
 
 import TabPage from 'components/common/TabPage'
 import TabPageBody from 'components/common/TabPageBody'
@@ -29,11 +27,8 @@ export default class Log extends React.Component {
       monitorUid: '',
       monitorTreeData: null,
       selectedFolder: null,
-      keyword: '',
-      keywordParam: ''
+      keyword: ''
     }
-
-    this.debChangeKeyword = debounce(this.changeKeyword.bind(this), 500)
   }
   componentWillMount () {
     this.props.fetchDevices()
@@ -143,12 +138,9 @@ export default class Log extends React.Component {
   }
 
   getParams () {
-    const {monitorUid, keywordParam} = this.state
+    const {monitorUid} = this.state
 
     const queries = []
-    if (keywordParam) {
-      queries.push(`(_all:"${keywordParam}")`)
-    }
     queries.push(`(monitorid:${monitorUid})`)
 
     return {
@@ -276,29 +268,12 @@ export default class Log extends React.Component {
   }
   ///////////////////////////////////////////////////////////////////////////////////
 
-  onChangeKeyword (e) {
-    this.setState({keyword: e.target.value})
-    this.debChangeKeyword()
-  }
-
-  changeKeyword () {
-    this.setState({
-      keywordParam: this.state.keyword
-    })
-  }
-
   onClickAddFilter () {
-    const {keyword} = this.state
-    if (!keyword) return showAlert('Please type keyword')
-    this.props.addLogFilter({
-      keyword
-    })
-  }
-
-  onClickFilter (filter) {
-    this.setState({
-      keyword: filter.keyword
-    })
+    // const {keyword} = this.state
+    // if (!keyword) return showAlert('Please type keyword')
+    // this.props.addLogFilter({
+    //   keyword
+    // })
   }
   ///////////////////////////////////////////////////////////////////////////////////
   renderFolder (p) {
@@ -376,24 +351,10 @@ export default class Log extends React.Component {
   }
 
   renderSearchTools () {
-    const {keyword} = this.state
-    const {logFilters} = this.props
     return (
       <div style={{position: 'absolute', right: 5, top: 8}} className="form-inline">
-        <input type="text" className="form-control input-sm" placeholder="Search..." value={keyword}
-               onChange={this.onChangeKeyword.bind(this)}/>
         <div className="valign-middle inline-block margin-md-left margin-md-right">
           <FilterIcon className="link" onTouchTap={this.onClickAddFilter.bind(this)}/>
-
-          <IconMenu iconButtonElement={
-            <IconButton style={{padding: 0, width: 24, height: 24}}
-              iconStyle={{width: 24, height: 24}}>
-              <MoreVertIcon/>
-            </IconButton>}>
-            {logFilters.map(p =>
-              <MenuItem key={p.id} primaryText={p.keyword} onTouchTap={this.onClickFilter.bind(this, p)}/>
-            )}
-          </IconMenu>
         </div>
       </div>
     )
