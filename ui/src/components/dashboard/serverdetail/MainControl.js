@@ -25,7 +25,7 @@ import ServerCombo from './ServerCombo'
 import GaugeMap from 'components/common/gauge/GaugeMap'
 import GaugePicker from 'components/common/gauge/GaugePicker'
 import GaugeWizardContainer from 'containers/shared/wizard/GaugeWizardContainer'
-import { guid, getWidgetSize, layoutCols, layoutRowHeight, layoutWidthZoom, layoutHeightZoom } from 'shared/Global'
+import { guid, getWidgetSize, layoutCols, layoutRowHeight, layoutWidthZoom, layoutHeightZoom, mergeCredentials } from 'shared/Global'
 
 import {showConfirm, showAlert} from 'components/common/Alert'
 import {resolveAddr} from 'shared/HostUtil'
@@ -171,7 +171,7 @@ export default class MainControl extends React.Component {
     const {gaugeBoards} = this.props
     const found = gaugeBoards.filter(p => p.name === 'Servers' && p.type === 'system')
     if (found.length) {
-      this.props.history.push(`/dashboard/${found[0].id}`)
+      this.props.history.push(`/dashboard/servers`)
     }
   }
 
@@ -208,7 +208,8 @@ export default class MainControl extends React.Component {
       ////////////////////////////////
       const {credentials} = this.props
       const deviceCreds = credentials.filter(p => !p.global && (p.deviceIds || []).includes(editDevice.id))
-      editDevice.credential = deviceCreds
+      const deivceGlobalCreds = credentials.filter(p => p.global && !p.default && (p.deviceIds || []).includes(editDevice.id))
+      editDevice.credential = mergeCredentials(editDevice, credentials, deivceGlobalCreds, deviceCreds)
       resolveAddr(editDevice, (newProps) => {
         if (!newProps) {
           showAlert('Host name resolve failed.')
