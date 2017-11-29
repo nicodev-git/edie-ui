@@ -11,7 +11,7 @@ import TabPage from 'components/common/TabPage'
 import TabPageBody from 'components/common/TabPageBody'
 import {getRanges} from 'components/common/DateRangePicker'
 import LogPapers from 'components/dashboard/log/LogPapers'
-import {showPrompt, showAlert} from 'components/common/Alert'
+import {showPrompt, showConfirm} from 'components/common/Alert'
 
 const ranges = getRanges()
 const from = ranges['Ever'][0].valueOf()
@@ -129,6 +129,19 @@ export default class Log extends React.Component {
       name: 'All'
     }, ...filtered]
     return list
+  }
+
+  getDeviceByMonitor(monitorUid) {
+    const {allDevices} = this.props
+    const monitors = []
+    allDevices.forEach(p => {
+      if (!p.monitors) return
+      p.monitors.forEach(m => {
+        if (m.monitortype === 'logfile') monitors.push(m)
+      })
+    })
+
+    return monitors
   }
 
   onClickMonitor (monitor) {
@@ -269,12 +282,46 @@ export default class Log extends React.Component {
   ///////////////////////////////////////////////////////////////////////////////////
 
   onClickAddFilter () {
+    const text = this.getSelectionText()
+    console.log(text)
+
+    const {monitorUid} = this.state
+    if (!monitorUid) return
+    const monitors = this.getLogMonitors()
+
+    const index = findIndex(monitors, {uid: monitorUid})
+    if (index < 0) return
+
+
+    showConfirm(`Click OK to add ignore filter. Text: ${text}`, btn => {
+      if (btn !== 'ok') return
+
+
+
+    })
     // const {keyword} = this.state
     // if (!keyword) return showAlert('Please type keyword')
     // this.props.addLogFilter({
     //   keyword
     // })
   }
+
+  getSelectionText() {
+    let text = ""
+    const activeEl = document.activeElement
+    const activeElTagName = activeEl ? activeEl.tagName.toLowerCase() : null
+    if (
+      (activeElTagName == "textarea") || (activeElTagName == "input" &&
+        /^(?:text|search|password|tel|url)$/i.test(activeEl.type)) &&
+      (typeof activeEl.selectionStart == "number")
+    ) {
+      text = activeEl.value.slice(activeEl.selectionStart, activeEl.selectionEnd)
+    } else if (window.getSelection) {
+      text = window.getSelection().toString()
+    }
+    return text
+  }
+
   ///////////////////////////////////////////////////////////////////////////////////
   renderFolder (p) {
     const {selectedFolder} = this.state
