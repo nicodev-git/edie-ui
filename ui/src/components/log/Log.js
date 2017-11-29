@@ -1,7 +1,7 @@
 import React from 'react'
 import moment from 'moment'
 import SortableTree from 'react-sortable-tree'
-import {findIndex} from 'lodash'
+import {findIndex, debounce} from 'lodash'
 // import FileTheme from 'react-sortable-tree-theme-file-explorer'
 import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
 import EditIcon from 'material-ui/svg-icons/content/create'
@@ -25,8 +25,12 @@ export default class Log extends React.Component {
     this.state = {
       monitorUid: '',
       monitorTreeData: null,
-      selectedFolder: null
+      selectedFolder: null,
+      keyword: '',
+      keywordParam: ''
     }
+
+    this.debChangeKeyword = debounce(this.changeKeyword.bind(this), 500)
   }
   componentWillMount () {
     this.props.fetchDevices()
@@ -136,9 +140,12 @@ export default class Log extends React.Component {
   }
 
   getParams () {
-    const {monitorUid} = this.state
+    const {monitorUid, keywordParam} = this.state
 
     const queries = []
+    if (keywordParam) {
+      queries.push(`(_all:"${keywordParam}")`)
+    }
     queries.push(`(monitorid:${monitorUid})`)
 
     return {
@@ -265,6 +272,19 @@ export default class Log extends React.Component {
     })
   }
   ///////////////////////////////////////////////////////////////////////////////////
+
+  onChangeKeyword (e) {
+    this.setState({keyword: e.target.value})
+    this.debChangeKeyword()
+  }
+
+  changeKeyword () {
+    this.setState({
+      keywordParam: this.state.keyword
+    })
+  }
+
+  ///////////////////////////////////////////////////////////////////////////////////
   renderFolder (p) {
     const {selectedFolder} = this.state
     const selected = selectedFolder && selectedFolder === p.id
@@ -309,47 +329,6 @@ export default class Log extends React.Component {
     )
   }
 
-  // renderFolders () {
-  //   const folders = this.getFolders()
-  //
-  //   const monitors = this.getLogMonitors()
-  //   return folders.map(p =>{
-  //     let files = []
-  //     if (p.id === 'root') {
-  //       files = monitors.filter(m => folders.filter(f => f.monitorids && f.monitorids.includes(m.uid)).length === 0)
-  //     } else {
-  //       files = monitors.filter(m => p.monitorids && p.monitorids.includes(m.uid))
-  //     }
-  //
-  //     return [
-  //       <div key={p.id} className="padding-sm bt-gray">
-  //         <span className="link">
-  //           <img src="/resources/images/dashboard/folder.png" width="16" alt="" className="valign-middle"/>
-  //           &nbsp;{p.name}
-  //         </span>
-  //       </div>,
-  //       ...this.renderMonitorList(files)
-  //     ]
-  //   })
-  // }
-  // renderMonitorList (monitors) {
-  //   return monitors.map(m => {
-  //     let time = ''
-  //     if (m.lastsuccess) {
-  //       time = moment(m.lastsuccess).fromNow().replace(' ago', '')
-  //     }
-  //     return (
-  //       <div key={m.uid} className="padding-sm bt-gray">
-  //         <span className="link" onClick={this.onClickMonitor.bind(this, m)}>
-  //           <img src="/resources/images/dashboard/file.png" width="16" alt=""
-  //                className="valign-middle margin-sm-left"/>
-  //           &nbsp;{m.name}{time ? ` (${time})` : ''}
-  //         </span>
-  //       </div>
-  //     )
-  //   })
-  // }
-
   renderLogs () {
     const {monitorUid} = this.state
     if (!monitorUid) return <div/>
@@ -381,9 +360,11 @@ export default class Log extends React.Component {
   }
 
   renderSearchTools () {
+    const {keyword} = this.state
     return (
       <div style={{position: 'absolute', right: 5, top: 8}} className="form-inline">
-        <input type="text" className="form-control input-sm" placeholder="Search..."/>
+        <input type="text" className="form-control input-sm" placeholder="Search..." value={keyword}
+               onChange={this.onChangeKeyword.bind(this)}/>
       </div>
     )
   }
@@ -406,7 +387,7 @@ export default class Log extends React.Component {
                 {this.renderFolderTree()}
               </div>
             </div>
-            <div className="flex-vertical flex-1" style={{overflow: 'auto'}}>
+            <div className="flex-vertical flex-1">
               <div className="header-red margin-xs-right">
                 Content
                 {this.renderSearchTools()}
