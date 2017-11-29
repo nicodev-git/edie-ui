@@ -90,6 +90,11 @@ import {
   SHOW_SIMULATION_MODAL,
   TOGGLE_MAP_USER,
 
+  FETCH_LOG_FILTERS,
+  ADD_LOG_FILTER,
+  UPDATE_LOG_FILTER,
+  REMOVE_LOG_FILTER,
+
   NO_AUTH_ERROR
 } from './types'
 
@@ -798,5 +803,37 @@ export const postIncidentSimulation = (data) => {
 export const toggleMapUser = (data) => {
   return dispatch => {
     dispatch({type: TOGGLE_MAP_USER, data})
+  }
+}
+
+export const fetchLogFilters = () => {
+  return dispatch => {
+    axios.get(`${ROOT_URL}/logfilter?size=100`).then(({data}) => {
+      dispatch({type: FETCH_LOG_FILTERS, data: data._embedded.logFilters})
+    })
+  }
+}
+
+export const addLogFilter = (props) => {
+  return (dispatch) => {
+    axios.post(`${ROOT_URL}/logfilter`, props).then(response => {
+      dispatch({type: ADD_LOG_FILTER, data: response.data})
+    }).catch(error => apiError(dispatch, error))
+  }
+}
+
+export const updateLogFilter = (entity) => {
+  return dispatch => {
+    axios.put(entity._links.self.href, entity).then(response => {
+      dispatch({type: UPDATE_LOG_FILTER, data: response.data})
+    }).catch(error => apiError(dispatch, error))
+  }
+}
+
+export const removeLogFilter = (entity) => {
+  return dispatch => {
+    axios.delete(entity._links.self.href).then(() => {
+      dispatch({type: REMOVE_LOG_FILTER, data: entity})
+    }).catch(error => apiError(dispatch, error))
   }
 }

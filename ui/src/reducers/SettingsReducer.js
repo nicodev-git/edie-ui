@@ -147,6 +147,11 @@ import {
   UPDATE_MONITOR_GROUP,
   REMOVE_MONITOR_GROUP,
 
+  FETCH_LOG_FILTERS,
+  ADD_LOG_FILTER,
+  UPDATE_LOG_FILTER,
+  REMOVE_LOG_FILTER,
+
   SHOW_DEVICE_CREDS_PICKER
 
 } from 'actions/types'
@@ -197,6 +202,8 @@ const initialState = {
   users: [],
   mapUsers: [],
   monitorGroups: [],
+
+  logFilters: [],
 
   workflowDraw: 1
 }
@@ -627,6 +634,15 @@ export default function (state = initialState, action) {
       return { ...state, monitorGroups: state.monitorGroups.map(p => p.id === action.data.id ? action.data : p) }
     case REMOVE_MONITOR_GROUP:
       return { ...state, monitorGroups: state.monitorGroups.filter(p => p.id !== action.data.id)}
+
+    case FETCH_LOG_FILTERS:
+      return { ...state, logFilters: action.data }
+    case ADD_LOG_FILTER:
+      return { ...state, logFilters: [...state.logFilters, action.data] }
+    case UPDATE_LOG_FILTER:
+      return { ...state, logFilters: state.logFilters.map(p => p.id === action.data.id ? action.data : p) }
+    case REMOVE_LOG_FILTER:
+      return { ...state, logFilters: state.logFilters.filter(p => p.id !== action.data.id)}
 
     default:
       return state
