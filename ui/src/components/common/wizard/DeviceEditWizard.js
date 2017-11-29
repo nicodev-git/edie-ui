@@ -117,7 +117,6 @@ class DeviceEditWizard extends React.Component {
     if (!res) return
     const {onFinish} = this.props
     onFinish && onFinish(res)
-    this.props.history.push('/dashboard/servers')
   }
 
   handleFormSubmit (formProps) {

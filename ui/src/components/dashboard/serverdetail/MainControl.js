@@ -197,6 +197,7 @@ export default class MainControl extends React.Component {
     showConfirm('Click OK to reset', btn => {
       if (btn !== 'ok') return
       this.resetGauges()
+
     })
   }
 
