@@ -7,7 +7,8 @@ import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
 import EditIcon from 'material-ui/svg-icons/content/create'
 import FilterIcon from 'material-ui/svg-icons/content/filter-list'
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert'
-import {IconMenu, IconButton, MenuItem} from 'material-ui'
+import DeleteIcon from 'material-ui/svg-icons/action/delete'
+import {IconMenu, IconButton} from 'material-ui'
 
 import TabPage from 'components/common/TabPage'
 import TabPageBody from 'components/common/TabPageBody'
@@ -309,7 +310,6 @@ export default class Log extends React.Component {
         }
       }
 
-
       this.props.updateMapDevice({
         ...device,
         monitors: device.monitors.map(p => p.uid === monitor.uid ? monitor : p)
@@ -336,15 +336,33 @@ export default class Log extends React.Component {
     return text
   }
 
-  onClickRemoveFilter (p) {
+  onClickRemoveFilter (keyword) {
     const {monitorUid} = this.state
     const device = this.getDeviceByMonitor(monitorUid)
     if (!device) return null
-    const monitor = device.monitors[findIndex(device.monitors, {uid: monitorUid})]
+    let monitor = device.monitors[findIndex(device.monitors, {uid: monitorUid})]
     if (!monitor) return null
 
-    const params = monitor.params || {}
-    const filters = params.ignore_view_filters || []
+    showConfirm('Click OK to remove.', btn => {
+      if (btn !== 'ok') return
+
+      const filters = (monitor.params || {}).ignore_view_filters || []
+
+      monitor.params = monitor.params || {}
+      monitor = {
+        ...monitor,
+        params: {
+          ...monitor.params,
+          ignore_view_filters: filters.filter(p => p !== keyword)
+        }
+      }
+
+      this.props.updateMapDevice({
+        ...device,
+        monitors: device.monitors.map(p => p.uid === monitor.uid ? monitor : p)
+      })
+    })
+
   }
 
   ///////////////////////////////////////////////////////////////////////////////////
@@ -438,7 +456,10 @@ export default class Log extends React.Component {
           <MoreVertIcon/>
         </IconButton>}>
         {filters.map((p, i) =>
-          <MenuItem key={i} primaryText={p} onTouchTap={this.onClickRemoveFilter.bind(this, p)}/>
+          <div key={i} className="padding-sm">
+            {p}
+            <DeleteIcon className="link pull-right" onTouchTap={this.onClickRemoveFilter.bind(this, p)} />
+          </div>
         )}
       </IconMenu>
     )
