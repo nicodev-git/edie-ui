@@ -40,7 +40,7 @@ import { ROOT_URL } from './config'
 import {encodeUrlParams} from 'shared/Global'
 
 import {addDeviceCredential} from './CredentialsActions'
-import {resolveAddr} from './DeviceActions'
+import {resolveAddr} from 'shared/HostUtil'
 
 export const fetchMaps = (initial) => {
   if (!window.localStorage.getItem('token')) {

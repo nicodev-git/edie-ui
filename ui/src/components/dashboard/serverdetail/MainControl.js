@@ -27,7 +27,8 @@ import GaugePicker from 'components/common/gauge/GaugePicker'
 import GaugeWizardContainer from 'containers/shared/wizard/GaugeWizardContainer'
 import { guid, getWidgetSize, layoutCols, layoutRowHeight, layoutWidthZoom, layoutHeightZoom } from 'shared/Global'
 
-import {showConfirm} from 'components/common/Alert'
+import {showConfirm, showAlert} from 'components/common/Alert'
+import {resolveAddr} from 'shared/HostUtil'
 
 const ResponsiveReactGridLayout = WidthProvider(Responsive)
 
@@ -46,6 +47,9 @@ export default class MainControl extends React.Component {
     this.props.fetchGaugeBoards()
     this.props.fetchGauges()
 
+    this.props.fetchCredTypes()
+    this.props.fetchCredentials()
+
     const device = this.getDevice()
     if (!device) return
     if (!device.gauges || !device.gauges.length) {
@@ -53,7 +57,7 @@ export default class MainControl extends React.Component {
     }
   }
 
-  resetGauges () {
+  resetGauges (valueOnly) {
     const device = this.getDevice()
     const gauges = []
 
@@ -86,10 +90,13 @@ export default class MainControl extends React.Component {
     })
 
 
-    this.props.updateMapDevice({
+    const params = {
       ...device,
       gauges
-    })
+    }
+    if (valueOnly) return params
+
+    this.props.updateMapDevice(params)
   }
 
   //////////////////////////////////////////////////////////////////////////////////////////////
@@ -196,8 +203,19 @@ export default class MainControl extends React.Component {
   onClickReset () {
     showConfirm('Click OK to reset', btn => {
       if (btn !== 'ok') return
-      this.resetGauges()
+      const editDevice = this.resetGauges(true)
 
+      ////////////////////////////////
+      const {credentials} = this.props
+      const deviceCreds = credentials.filter(p => !p.global && (p.deviceIds || []).includes(editDevice.id))
+      editDevice.credential = deviceCreds
+      resolveAddr(editDevice, (newProps) => {
+        if (!newProps) {
+          showAlert('Host name resolve failed.')
+          return
+        }
+        this.props.updateMapDevice(newProps)
+      })
     })
   }
 
@@ -208,7 +226,6 @@ export default class MainControl extends React.Component {
       gaugeLocked: !device.gaugeLocked
     })
   }
-
 
   /////////////////////////////////////////////////////////////////////
   findGauge (id) {
