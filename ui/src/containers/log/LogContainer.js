@@ -10,7 +10,12 @@ import {
   fetchMonitorGroups,
   addMonitorGroup,
   updateMonitorGroup,
-  removeMonitorGroup
+  removeMonitorGroup,
+
+  fetchLogFilters,
+  addLogFilter,
+  updateLogFilter,
+  removeLogFilter
 } from 'actions'
 class LogContainer extends React.Component {
   render () {
@@ -23,13 +28,19 @@ class LogContainer extends React.Component {
 export default connect(
   state => ({
     allDevices: state.devices.devices,
-    monitorGroups: state.settings.monitorGroups
+    monitorGroups: state.settings.monitorGroups,
+    logFilters: state.settings.logFilters
   }), {
     fetchDevices,
 
     fetchMonitorGroups,
     addMonitorGroup,
     updateMonitorGroup,
-    removeMonitorGroup
+    removeMonitorGroup,
+
+    fetchLogFilters,
+    addLogFilter,
+    updateLogFilter,
+    removeLogFilter
   }
 )(withRouter(LogContainer))

@@ -11,7 +11,7 @@ import TabPage from 'components/common/TabPage'
 import TabPageBody from 'components/common/TabPageBody'
 import {getRanges} from 'components/common/DateRangePicker'
 import LogPapers from 'components/dashboard/log/LogPapers'
-import {showPrompt} from 'components/common/Alert'
+import {showPrompt, showAlert} from 'components/common/Alert'
 
 const ranges = getRanges()
 const from = ranges['Ever'][0].valueOf()
@@ -285,8 +285,12 @@ export default class Log extends React.Component {
     })
   }
 
-  onClickFilterList () {
-
+  onClickAddFilter () {
+    const {keyword} = this.state
+    if (!keyword) return showAlert('Please type keyword')
+    this.props.addLogFilter({
+      keyword
+    })
   }
   ///////////////////////////////////////////////////////////////////////////////////
   renderFolder (p) {
@@ -370,7 +374,7 @@ export default class Log extends React.Component {
         <input type="text" className="form-control input-sm" placeholder="Search..." value={keyword}
                onChange={this.onChangeKeyword.bind(this)}/>
         <div className="valign-middle inline-block margin-md-left margin-md-right">
-          <FilterIcon className="link" onTouchTap={this.onClickFilterList.bind(this)}/>
+          <FilterIcon className="link" onTouchTap={this.onClickAddFilter.bind(this)}/>
         </div>
       </div>
     )
