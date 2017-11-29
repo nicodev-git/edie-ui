@@ -380,6 +380,14 @@ export default class Log extends React.Component {
     )
   }
 
+  renderSearchTools () {
+    return (
+      <div style={{position: 'absolute', right: 5, top: 8}} className="form-inline">
+        <input type="text" className="form-control input-sm" placeholder="Search..."/>
+      </div>
+    )
+  }
+
   render () {
     return (
       <TabPage>
@@ -399,7 +407,10 @@ export default class Log extends React.Component {
               </div>
             </div>
             <div className="flex-vertical flex-1" style={{overflow: 'auto'}}>
-              <div className="header-red margin-xs-right">Content</div>
+              <div className="header-red margin-xs-right">
+                Content
+                {this.renderSearchTools()}
+              </div>
               <div className="flex-1 flex-vertical paper-bg">
                 {this.renderLogs()}
               </div>
