@@ -369,11 +369,15 @@ export default class Log extends React.Component {
       <div style={{position: 'absolute', right: 5, top: 8}} className="form-inline">
         <input type="text" className="form-control input-sm" placeholder="Search..." value={keyword}
                onChange={this.onChangeKeyword.bind(this)}/>
-        <div className="valign-middle inline-block margin-lg-left">
+        <div className="valign-middle inline-block margin-md-left margin-md-right">
           <FilterIcon className="link" onTouchTap={this.onClickFilterList.bind(this)}/>
         </div>
       </div>
     )
+  }
+
+  renderLogFiltersModal () {
+
   }
 
   render () {
@@ -404,6 +408,7 @@ export default class Log extends React.Component {
               </div>
             </div>
           </div>
+          {this.renderLogFiltersModal()}
         </TabPageBody>
       </TabPage>
     )

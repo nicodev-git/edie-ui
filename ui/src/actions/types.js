@@ -514,6 +514,7 @@ export const SHOW_MONITOR_GROUP_MODAL = 'SHOW_MONITOR_GROUP_MODAL'
 export const UPDATE_VIEWLOG_PARAMS = 'UPDATE_VIEWLOG_PARAMS'
 export const UPDATE_VIEWLOG_DEVICE = 'UPDATE_VIEWLOG_DEVICE'
 export const SHOW_DETAIL_LOG_MODAL = 'SHOW_DETAIL_LOG_MODAL'
+export const SHOW_LOG_FILTERS_MODAL = 'SHOW_LOG_FILTERS_MODAL'
 
 ///////////////////////////////////////////////////////////////
 
