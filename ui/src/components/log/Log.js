@@ -6,6 +6,8 @@ import {findIndex} from 'lodash'
 import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
 import EditIcon from 'material-ui/svg-icons/content/create'
 import FilterIcon from 'material-ui/svg-icons/content/filter-list'
+import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert'
+import {IconMenu, IconButton, MenuItem} from 'material-ui'
 
 import TabPage from 'components/common/TabPage'
 import TabPageBody from 'components/common/TabPageBody'
@@ -334,6 +336,17 @@ export default class Log extends React.Component {
     return text
   }
 
+  onClickRemoveFilter (p) {
+    const {monitorUid} = this.state
+    const device = this.getDeviceByMonitor(monitorUid)
+    if (!device) return null
+    const monitor = device.monitors[findIndex(device.monitors, {uid: monitorUid})]
+    if (!monitor) return null
+
+    const params = monitor.params || {}
+    const filters = params.ignore_view_filters || []
+  }
+
   ///////////////////////////////////////////////////////////////////////////////////
   renderFolder (p) {
     const {selectedFolder} = this.state
@@ -419,25 +432,27 @@ export default class Log extends React.Component {
     const params = monitor.params || {}
     const filters = params.ignore_view_filters || []
     return (
-      <div className="inline-block valign-middle">
-        {filters.map((p, i) => <span key={i} className="margin-md-right">{p}</span>)}
-      </div>
+      <IconMenu iconButtonElement={
+        <IconButton style={{padding: 0, width: 24, height: 24}}
+                    iconStyle={{width: 24, height: 24}}>
+          <MoreVertIcon/>
+        </IconButton>}>
+        {filters.map((p, i) =>
+          <MenuItem key={i} primaryText={p} onTouchTap={this.onClickRemoveFilter.bind(this, p)}/>
+        )}
+      </IconMenu>
     )
   }
 
   renderSearchTools () {
     return (
-      <div style={{position: 'absolute', right: 5, top: 8}} className="form-inline">
-        {this.renderIgnoreFilters()}
+      <div style={{position: 'absolute', right: 5, top: 5}} className="form-inline">
         <div className="valign-middle inline-block margin-md-left margin-md-right">
-          <FilterIcon className="link" onTouchTap={this.onClickAddFilter.bind(this)}/>
+          <FilterIcon className="link margin-xs-top" onTouchTap={this.onClickAddFilter.bind(this)}/>
+          {this.renderIgnoreFilters()}
         </div>
       </div>
     )
-  }
-
-  renderLogFiltersModal () {
-
   }
 
   render () {
@@ -468,7 +483,6 @@ export default class Log extends React.Component {
               </div>
             </div>
           </div>
-          {this.renderLogFiltersModal()}
         </TabPageBody>
       </TabPage>
     )
