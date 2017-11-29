@@ -69,7 +69,7 @@ export default class Log extends React.Component {
   }
 
   startTimer () {
-    this.timer = setInterval(this.props.fetchDevices, 6000)
+    this.timer = setInterval(this.props.fetchDevices, 20000)
   }
 
   stopTimer () {
@@ -133,15 +133,15 @@ export default class Log extends React.Component {
 
   getDeviceByMonitor(monitorUid) {
     const {allDevices} = this.props
-    const monitors = []
+    let device = null
     allDevices.forEach(p => {
       if (!p.monitors) return
       p.monitors.forEach(m => {
-        if (m.monitortype === 'logfile') monitors.push(m)
+        if (m.uid === monitorUid) device = p
       })
     })
 
-    return monitors
+    return device
   }
 
   onClickMonitor (monitor) {
@@ -282,22 +282,36 @@ export default class Log extends React.Component {
   ///////////////////////////////////////////////////////////////////////////////////
 
   onClickAddFilter () {
+    const {monitorUid} = this.state
     const text = this.getSelectionText()
+    if (!text) return
     console.log(text)
 
-    const {monitorUid} = this.state
-    if (!monitorUid) return
-    const monitors = this.getLogMonitors()
+    const device = this.getDeviceByMonitor(monitorUid)
+    if (!device) return
 
-    const index = findIndex(monitors, {uid: monitorUid})
-    if (index < 0) return
-
+    let monitor = device.monitors[findIndex(device.monitors, {uid: monitorUid})]
 
     showConfirm(`Click OK to add ignore filter. Text: ${text}`, btn => {
       if (btn !== 'ok') return
 
+      let filters = (monitor.params || {}).ignore_view_filters || []
+      filters = [...filters, `.*${text}.*`]
+
+      monitor.params = monitor.params || {}
+      monitor = {
+        ...monitor,
+        params: {
+          ...monitor.params,
+          ignore_view_filters: filters
+        }
+      }
 
 
+      this.props.updateMapDevice({
+        ...device,
+        monitors: device.monitors.map(p => p.uid === monitor.uid ? monitor : p)
+      })
     })
     // const {keyword} = this.state
     // if (!keyword) return showAlert('Please type keyword')
@@ -310,11 +324,9 @@ export default class Log extends React.Component {
     let text = ""
     const activeEl = document.activeElement
     const activeElTagName = activeEl ? activeEl.tagName.toLowerCase() : null
-    if (
-      (activeElTagName == "textarea") || (activeElTagName == "input" &&
-        /^(?:text|search|password|tel|url)$/i.test(activeEl.type)) &&
-      (typeof activeEl.selectionStart == "number")
-    ) {
+    if (((activeElTagName === "textarea") || (activeElTagName === "input" &&
+        /^(?:text|search|password|tel|url)$/i.test(activeEl.type))) &&
+      (typeof activeEl.selectionStart === "number")) {
       text = activeEl.value.slice(activeEl.selectionStart, activeEl.selectionEnd)
     } else if (window.getSelection) {
       text = window.getSelection().toString()
@@ -397,9 +409,26 @@ export default class Log extends React.Component {
     )
   }
 
+  renderIgnoreFilters () {
+    const {monitorUid} = this.state
+    const device = this.getDeviceByMonitor(monitorUid)
+    if (!device) return null
+    const monitor = device.monitors[findIndex(device.monitors, {uid: monitorUid})]
+    if (!monitor) return null
+
+    const params = monitor.params || {}
+    const filters = params.ignore_view_filters || []
+    return (
+      <div className="inline-block valign-middle">
+        {filters.map((p, i) => <span key={i} className="margin-md-right">{p}</span>)}
+      </div>
+    )
+  }
+
   renderSearchTools () {
     return (
       <div style={{position: 'absolute', right: 5, top: 8}} className="form-inline">
+        {this.renderIgnoreFilters()}
         <div className="valign-middle inline-block margin-md-left margin-md-right">
           <FilterIcon className="link" onTouchTap={this.onClickAddFilter.bind(this)}/>
         </div>
