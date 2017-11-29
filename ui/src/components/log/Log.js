@@ -6,6 +6,8 @@ import {findIndex, debounce} from 'lodash'
 import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
 import EditIcon from 'material-ui/svg-icons/content/create'
 import FilterIcon from 'material-ui/svg-icons/content/filter-list'
+import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert'
+import {IconMenu, IconButton, MenuItem} from 'material-ui'
 
 import TabPage from 'components/common/TabPage'
 import TabPageBody from 'components/common/TabPageBody'
@@ -292,6 +294,12 @@ export default class Log extends React.Component {
       keyword
     })
   }
+
+  onClickFilter (filter) {
+    this.setState({
+      keyword: filter.keyword
+    })
+  }
   ///////////////////////////////////////////////////////////////////////////////////
   renderFolder (p) {
     const {selectedFolder} = this.state
@@ -369,12 +377,23 @@ export default class Log extends React.Component {
 
   renderSearchTools () {
     const {keyword} = this.state
+    const {logFilters} = this.props
     return (
       <div style={{position: 'absolute', right: 5, top: 8}} className="form-inline">
         <input type="text" className="form-control input-sm" placeholder="Search..." value={keyword}
                onChange={this.onChangeKeyword.bind(this)}/>
         <div className="valign-middle inline-block margin-md-left margin-md-right">
           <FilterIcon className="link" onTouchTap={this.onClickAddFilter.bind(this)}/>
+
+          <IconMenu iconButtonElement={
+            <IconButton style={{padding: 0, width: 24, height: 24}}
+              iconStyle={{width: 24, height: 24}}>
+              <MoreVertIcon/>
+            </IconButton>}>
+            {logFilters.map(p =>
+              <MenuItem key={p.id} primaryText={p.keyword} onTouchTap={this.onClickFilter.bind(this, p)}/>
+            )}
+          </IconMenu>
         </div>
       </div>
     )
