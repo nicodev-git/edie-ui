@@ -315,7 +315,7 @@ export default class General extends React.Component {
           <div className="margin-md-bottom">
             <div className="inline-block width-200">
               <SelectField
-                value={this.getUserOptionValue('defaultPage', 'main')}
+                value={this.getUserOptionValue('defaultPage', 'dashboard')}
                 onChange={this.onChangeShowPage.bind(this)}
                 floatingLabelText="Default Page">
                 <MenuItem primaryText="Map" value="main"/>

@@ -63,7 +63,7 @@ export default class SidebarView extends Component {
       visibleMenu
     } = this.props
 
-    const mainMenuItems = user.defaultPage !== 'dashboard' ? [mainMenu[1], mainMenu[0], ...mainMenu.slice(2)] : mainMenu
+    const mainMenuItems = (user.defaultPage || 'dashboard') !== 'dashboard' ? [mainMenu[1], mainMenu[0], ...mainMenu.slice(2)] : mainMenu
     const deviceMenuItems = deviceMenu(device ? device.id : 'main')
     return (
       <Drawer open width={sidebarWidth} containerStyle={sidebarStyle}>
@@ -78,7 +78,6 @@ export default class SidebarView extends Component {
         <div style={{display: contentType.Main === pageType ? 'block' : 'none'}} className="sidebar">
           {mainMenuItems.map((item, index) => {
             const visible = item.fixed || visibleMenu.includes(item.id)
-            // if (index === (user.defaultPage !== 'dashboard' ? 0 : 1)) return null
             return (
               <div key={index} onClick={onMainMenu.bind(this, item.id)} className={visible ? '' : 'hidden'}>
                 <div className={pageId === item.id ? 'sidebar-chosen' : ''}>

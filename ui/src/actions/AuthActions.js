@@ -57,8 +57,8 @@ const signUserSuccess = (dispatch, response, redirect, history) => {
   }
 
   dispatch(fetchUserInfo(user => {
-    if (user.defaultPage === 'dashboard') {
-      history.push('/dashboard')
+    if ((user.defaultPage || 'dashboard') === 'dashboard') {
+      history.push('/dashboard/servers')
       return
     }
     history.push('/')
