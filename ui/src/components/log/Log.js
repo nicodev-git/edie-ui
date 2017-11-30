@@ -533,6 +533,7 @@ export default class Log extends React.Component {
     return (
       <LogFiltersModal
         {...this.props}
+        keyword={this.state.searchValue}
         onHide={this.onCloseFiltersModal.bind(this)}
       />
     )
