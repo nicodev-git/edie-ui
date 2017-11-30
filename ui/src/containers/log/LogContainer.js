@@ -16,7 +16,8 @@ import {
   fetchLogFilters,
   addLogFilter,
   updateLogFilter,
-  removeLogFilter
+  removeLogFilter,
+  showLogFiltersModal
 } from 'actions'
 class LogContainer extends React.Component {
   render () {
@@ -44,6 +45,7 @@ export default connect(
     fetchLogFilters,
     addLogFilter,
     updateLogFilter,
-    removeLogFilter
+    removeLogFilter,
+    showLogFiltersModal
   }
 )(withRouter(LogContainer))

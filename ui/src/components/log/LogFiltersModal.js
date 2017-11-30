@@ -4,10 +4,11 @@ import LogFiltersModalView from './LogFiltersModalView'
 
 export default class LogFiltersModal extends React.Component {
   render () {
-    const {onHide} = this.props
+    const {onHide, logFilters} = this.props
     return (
       <LogFiltersModalView
         onHide={onHide}
+        logFilters={logFilters}
       />
     )
   }

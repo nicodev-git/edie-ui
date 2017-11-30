@@ -15,6 +15,7 @@ import TabPageBody from 'components/common/TabPageBody'
 import {getRanges} from 'components/common/DateRangePicker'
 import LogPapers from 'components/dashboard/log/LogPapers'
 import {showPrompt, showConfirm} from 'components/common/Alert'
+import LogFiltersModal from './LogFiltersModal'
 
 const ranges = getRanges()
 const from = ranges['Ever'][0].valueOf()
@@ -413,6 +414,14 @@ export default class Log extends React.Component {
     }
   }
 
+  onClickFiltersModal () {
+    this.props.showLogFiltersModal(true)
+  }
+
+  onCloseFiltersModal () {
+    this.props.showLogFiltersModal(false)
+  }
+
   ///////////////////////////////////////////////////////////////////////////////////
   renderFolder (p) {
     const {selectedFolder} = this.state
@@ -519,6 +528,16 @@ export default class Log extends React.Component {
     )
   }
 
+  renderLogFiltersModal () {
+    if (!this.props.logFiltersModalOpen) return null
+    return (
+      <LogFiltersModal
+        {...this.props}
+        onHide={this.onCloseFiltersModal.bind(this)}
+      />
+    )
+  }
+
   render () {
     const filters = this.getIgnoreFilters()
     return (
@@ -535,7 +554,7 @@ export default class Log extends React.Component {
             </div>
 
            <div style={{position: 'absolute', right: 10, top: 2}}>
-             <IconButton><ToggleStar/></IconButton>
+             <IconButton onTouchTap={this.onClickFiltersModal.bind(this)}><ToggleStar/></IconButton>
            </div>
           </div>
         </div>
@@ -562,6 +581,7 @@ export default class Log extends React.Component {
               </div>
             </div>
           </div>
+          {this.renderLogFiltersModal()}
         </TabPageBody>
       </TabPage>
     )
