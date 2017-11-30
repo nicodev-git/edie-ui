@@ -7,7 +7,8 @@ import EditIcon from 'material-ui/svg-icons/content/create'
 import FilterIcon from 'material-ui/svg-icons/content/filter-list'
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert'
 import DeleteIcon from 'material-ui/svg-icons/action/delete'
-import {IconMenu, IconButton} from 'material-ui'
+import ToggleStar from 'material-ui/svg-icons/toggle/star-border'
+import {IconMenu, IconButton, TextField} from 'material-ui'
 
 import TabPage from 'components/common/TabPage'
 import TabPageBody from 'components/common/TabPageBody'
@@ -29,7 +30,8 @@ export default class Log extends React.Component {
       monitorUid: '',
       monitorTreeData: null,
       selectedFolder: null,
-      keyword: ''
+      keyword: '',
+      search: ''
     }
   }
   componentWillMount () {
@@ -392,6 +394,14 @@ export default class Log extends React.Component {
   }
 
   ///////////////////////////////////////////////////////////////////////////////////
+
+  onChangeSearch (e, value) {
+    this.setState({
+      search: value
+    })
+  }
+
+  ///////////////////////////////////////////////////////////////////////////////////
   renderFolder (p) {
     const {selectedFolder} = this.state
     const selected = selectedFolder && selectedFolder === p.id
@@ -502,8 +512,16 @@ export default class Log extends React.Component {
     return (
       <TabPage>
         <div style={{margin: '16px 20px 0'}}>
-          <span className="tab-title">Logs</span>
+          <div>
+            <span className="tab-title">Logs</span>
+          </div>
+          <div className="text-center relative" style={{background: 'rgb(218, 218, 218)'}}>
+            <div className="inline-block">
+              <TextField name="search" value={this.state.search} onChange={this.onChangeSearch.bind(this)} hintText="Search..."/>
+            </div>
+          </div>
         </div>
+
 
         <TabPageBody tabs={[]} history={this.props.history} location={this.props.location} transparent>
           <div className="flex-horizontal" style={{height: '100%'}}>
