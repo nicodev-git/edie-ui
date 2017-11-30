@@ -62,6 +62,7 @@ fabric.ShapeLineHandle = fabric.util.createClass(fabric.Circle, {
     } else {
       me.line.reset();
     }
+    map.canvas.discardActiveObject();
   },
 
 
