@@ -10,10 +10,14 @@ import InfiniteTable from 'components/common/InfiniteTable'
 
 import {gaugeTitleStyle1} from 'style/common/materialStyles'
 
+import {strSorter, numSorter} from 'util/Sorter'
+
 export default class GProcessList extends React.Component {
   constructor (props) {
     super (props)
     this.state = {
+      currentSortCol: 'Cpu',
+      currentSortDir: 'asc',
       processes: []
     }
     this.renderBackView = this.renderBackView.bind(this)
@@ -22,28 +26,35 @@ export default class GProcessList extends React.Component {
     this.columns = [{
       'displayName': 'Name',
       'columnName': 'Filename',
+      'customHeaderComponent': this.renderColHeader.bind(this),
       'cssClassName': 'width-180'
     }, {
       'displayName': 'Id',
       'columnName': 'Id',
+      'customHeaderComponent': this.renderColHeader.bind(this),
       'cssClassName': 'width-80'
     }, {
       'displayName': 'Owner',
       'columnName': 'Owner',
+      'customHeaderComponent': this.renderColHeader.bind(this),
       'cssClassName': 'width-220'
     }, {
       'displayName': 'Parent',
       'columnName': 'Parent',
+      'customHeaderComponent': this.renderColHeader.bind(this),
       'cssClassName': 'width-120'
     }, {
       'displayName': 'Location',
-      'columnName': 'Location'
+      'columnName': 'Location',
+      'customHeaderComponent': this.renderColHeader.bind(this)
     }, {
       'displayName': 'CPU',
-      'columnName': 'Cpu'
+      'columnName': 'Cpu',
+      'customHeaderComponent': this.renderColHeader.bind(this)
     }, {
       'displayName': 'Memory',
-      'columnName': 'Mem'
+      'columnName': 'Mem',
+      'customHeaderComponent': this.renderColHeader.bind(this)
     }]
   }
 
@@ -80,6 +91,50 @@ export default class GProcessList extends React.Component {
 
   //////////////////////////////////////////////////////////////////////////////////////////
 
+  renderColHeader (col) {
+    const {columnName, displayName} = col
+    const { currentSortCol, currentSortDir } = this.state
+    let caretEl = null
+
+    if (columnName === currentSortCol) {
+      caretEl = currentSortDir === 'asc' ? '▲': '▼  '
+    }
+
+    return (
+      <span className="nowrap text-black link" onClick={this.onClickColHeader.bind(this, col)}>
+        {displayName}{caretEl}
+      </span>
+    )
+  }
+
+  onClickColHeader (col) {
+    const {
+      columnName
+    } = col
+    let { currentSortCol, currentSortDir, processes } = this.state
+
+    if (columnName === currentSortCol) {
+      currentSortDir = currentSortDir === 'asc' ? 'desc' : 'asc'
+    } else {
+      currentSortCol = columnName
+      currentSortDir = 'asc'
+    }
+
+    processes = this.sortData(currentSortCol, currentSortDir, processes)
+
+    this.setState({ currentSortCol, currentSortDir, processes })
+
+  }
+
+  sortData (col, dir, data) {
+    const sorter = ['Mem', 'Cpu', 'Id'].includes(col) ? numSorter : strSorter
+    const result = [...data]
+    result.sort(sorter.bind(this, col, dir === 'desc'))
+    return result
+  }
+
+  //////////////////////////////////////////////////////////////////////////////////////////
+
   onSocketOpen () {
     this.monitorSocket.send({
       action: 'enable-realtime',
@@ -90,9 +145,10 @@ export default class GProcessList extends React.Component {
   onMonitorMessage (msg) {
     if (msg.action === 'update' && msg.deviceId === this.props.device.id) {
       const {process} = msg.data
+      const { currentSortCol, currentSortDir } = this.state
       if (!process) return
       this.setState({
-        processes: process
+        processes: this.sortData(currentSortCol, currentSortDir, process)
       })
     }
   }

@@ -5,11 +5,7 @@ export function strSorter(field, desc, a, b) {
 }
 
 export function numSorter(field, desc, a, b) {
-  let value = 0
-  let n1 = a[field] || 0
-  let n2 = b[field] || 0
-  if (n1 > n2) value = -1
-  else if (n1 < n2) value = 1
+  let value = (a[field] || 0) - (b[field] || 0)
   if (desc) value = -value
   return value
 }
