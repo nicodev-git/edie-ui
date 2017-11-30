@@ -96,6 +96,8 @@ import {
   REMOVE_LOG_FILTER,
   SHOW_LOG_FILTERS_MODAL,
 
+  FETCH_ROLES,
+
   NO_AUTH_ERROR
 } from './types'
 
@@ -842,5 +844,13 @@ export const removeLogFilter = (entity) => {
 export const showLogFiltersModal = visible => {
   return dispatch => {
     dispatch({type: SHOW_LOG_FILTERS_MODAL, visible})
+  }
+}
+
+export const fetchRoles = () => {
+  return dispatch => {
+    axios.get(`${ROOT_URL}/role`).then(res => {
+      dispatch({type: FETCH_ROLES, data: res.data._embedded.roles})
+    })
   }
 }

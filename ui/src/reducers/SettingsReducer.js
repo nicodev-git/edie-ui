@@ -153,7 +153,9 @@ import {
   REMOVE_LOG_FILTER,
   SHOW_LOG_FILTERS_MODAL,
 
-  SHOW_DEVICE_CREDS_PICKER
+  SHOW_DEVICE_CREDS_PICKER,
+
+  FETCH_ROLES
 
 } from 'actions/types'
 
@@ -646,6 +648,9 @@ export default function (state = initialState, action) {
       return { ...state, logFilters: state.logFilters.filter(p => p.id !== action.data.id)}
     case SHOW_LOG_FILTERS_MODAL:
       return { ...state, logFiltersModalOpen: action.visible }
+
+    case FETCH_ROLES:
+      return { ...state, roles: action.data }
     default:
       return state
   }

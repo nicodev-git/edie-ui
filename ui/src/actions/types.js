@@ -52,6 +52,9 @@ export const SHOW_COLLECTOR_INSTALL_MODAL = 'SHOW_COLLECTOR_INSTALL_MODAL'
 export const TEST_COLLECTOR = 'TEST_COLLECTOR'
 export const SHOW_DEVICE_MONITORS_MODAL = 'SHOW_DEVICE_MONITORS_MODAL'
 export const DELETE_DEVICE_STATE = 'DELETE_DEVICE_STATE'
+// ////////////////////////////////////////////////////////////////////
+
+export const FETCH_ROLES = 'FETCH_ROLES'
 
 // ////////////////////////////////////////////////////////////////////
 export const ADD_DEVICE = 'ADD_DEVICE'
