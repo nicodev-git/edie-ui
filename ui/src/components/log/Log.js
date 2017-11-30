@@ -2,7 +2,6 @@ import React from 'react'
 import moment from 'moment'
 import SortableTree from 'react-sortable-tree'
 import {findIndex} from 'lodash'
-// import FileTheme from 'react-sortable-tree-theme-file-explorer'
 import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
 import EditIcon from 'material-ui/svg-icons/content/create'
 import FilterIcon from 'material-ui/svg-icons/content/filter-list'
@@ -219,8 +218,11 @@ export default class Log extends React.Component {
         })
       })
     })
+  }
 
-
+  onClickRemoveFolder () {
+    const {selectedFolder} = this.state
+    if (!selectedFolder) return
   }
 
   onChangeTreeData (monitorTreeData) {
@@ -452,6 +454,7 @@ export default class Log extends React.Component {
       <div style={{position: 'absolute', right: 5, top: 8}}>
         <AddCircleIcon className="link" onTouchTap={this.onClickAddFolder.bind(this)}/>
         <EditIcon className="link" onTouchTap={this.onClickEditFolder.bind(this)}/>
+        <DeleteIcon className="link" onTouchTap={this.onClickRemoveFolder.bind(this)}/>
       </div>
     )
   }
