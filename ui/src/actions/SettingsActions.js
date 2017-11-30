@@ -94,6 +94,7 @@ import {
   ADD_LOG_FILTER,
   UPDATE_LOG_FILTER,
   REMOVE_LOG_FILTER,
+  SHOW_LOG_FILTERS_MODAL,
 
   NO_AUTH_ERROR
 } from './types'
@@ -835,5 +836,11 @@ export const removeLogFilter = (entity) => {
     axios.delete(entity._links.self.href).then(() => {
       dispatch({type: REMOVE_LOG_FILTER, data: entity})
     }).catch(error => apiError(dispatch, error))
+  }
+}
+
+export const showLogFiltersModal = visible => {
+  return dispatch => {
+    dispatch({type: SHOW_LOG_FILTERS_MODAL, visible})
   }
 }

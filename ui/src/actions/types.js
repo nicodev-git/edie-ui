@@ -519,6 +519,7 @@ export const FETCH_LOG_FILTERS = 'FETCH_LOG_FILTERS'
 export const ADD_LOG_FILTER = 'ADD_LOG_FILTER'
 export const UPDATE_LOG_FILTER = 'UPDATE_LOG_FILTER'
 export const REMOVE_LOG_FILTER = 'REMOVE_LOG_FILTER'
+export const SHOW_LOG_FILTERS_MODAL = 'SHOW_LOG_FILTERS_MODAL'
 
 ///////////////////////////////////////////////////////////////
 

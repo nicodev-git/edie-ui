@@ -151,6 +151,7 @@ import {
   ADD_LOG_FILTER,
   UPDATE_LOG_FILTER,
   REMOVE_LOG_FILTER,
+  SHOW_LOG_FILTERS_MODAL,
 
   SHOW_DEVICE_CREDS_PICKER
 
@@ -643,7 +644,8 @@ export default function (state = initialState, action) {
       return { ...state, logFilters: state.logFilters.map(p => p.id === action.data.id ? action.data : p) }
     case REMOVE_LOG_FILTER:
       return { ...state, logFilters: state.logFilters.filter(p => p.id !== action.data.id)}
-
+    case SHOW_LOG_FILTERS_MODAL:
+      return { ...state, logFiltersModalOpen: action.visible }
     default:
       return state
   }

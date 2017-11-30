@@ -30,7 +30,8 @@ export default connect(
   state => ({
     allDevices: state.devices.devices,
     monitorGroups: state.settings.monitorGroups,
-    logFilters: state.settings.logFilters
+    logFilters: state.settings.logFilters,
+    logFiltersModalOpen: state.settings.logFiltersModalOpen
   }), {
     fetchDevices,
     updateMapDevice,
