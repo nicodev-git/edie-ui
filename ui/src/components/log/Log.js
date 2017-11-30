@@ -41,27 +41,8 @@ export default class Log extends React.Component {
   componentDidUpdate (prevProps) {
     const {allDevices} = this.props
     if (prevProps.allDevices !== allDevices) {
-      let data = this.state.monitorTreeData
-      if (!data) return
-      const monitors = this.getLogMonitors()
-      data = data.map(p => ({
-        ...p,
-        id: p.id,
-        name: p.name,
-        title: p.title,
-        children: p.children.map(c => {
-          const index = findIndex(monitors, {uid: c.uid})
-          if (index < 0) return c
-          return {
-            ...c,
-            uid: monitors[index].uid,
-            title: this.renderMonitor.bind(this, monitors[index])
-          }
-        })
-      }))
-
       this.setState({
-        monitorTreeData: data
+        monitorTreeData: this.getTreeData(true)
       })
     }
   }
@@ -78,9 +59,9 @@ export default class Log extends React.Component {
     clearInterval(this.timer)
   }
 
-  getTreeData () {
+  getTreeData (force) {
     let data = this.state.monitorTreeData
-    if (!data) {
+    if (!data || force) {
       const folders = this.getFolders()
       const monitors = this.getLogMonitors()
 
@@ -92,7 +73,14 @@ export default class Log extends React.Component {
           children = monitors.filter(m => p.monitorids && p.monitorids.includes(m.uid))
         }
 
+        let existing = {}
+        if (force && data) {
+          const index = findIndex(data, {id: p.id})
+          if (index >= 0) existing = data[index]
+        }
+
         return {
+          ...existing,
           id: p.id,
           name: p.name,
           title: this.renderFolder.bind(this, p),
@@ -223,6 +211,28 @@ export default class Log extends React.Component {
   onClickRemoveFolder () {
     const {selectedFolder} = this.state
     if (!selectedFolder) return
+    const {monitorGroups} = this.props
+    const index = findIndex(monitorGroups, {id: selectedFolder})
+    if (index < 0) return
+
+    showConfirm('Click OK to remove', btn => {
+      if (btn !== 'ok') return
+      this.props.removeMonitorGroup(monitorGroups[index])
+
+      const monitorTreeData = []
+
+      this.getTreeData().forEach(p => {
+        if (p.id === selectedFolder) {
+          monitorTreeData[0].children = [...monitorTreeData[0].children, ...p.children]
+        } else {
+          monitorTreeData.push(p)
+        }
+      })
+
+      this.setState({
+        monitorTreeData
+      })
+    })
   }
 
   onChangeTreeData (monitorTreeData) {
