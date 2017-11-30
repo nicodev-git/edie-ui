@@ -254,10 +254,10 @@ export const fetchMapDevicesAndLines = (mapid) => {
       return
     }
 
-    const req1 = axios.get(`${ROOT_URL}/device/search/findDevicesByMapid`, {params: {mapid}})
+    const req1 = axios.get(`${ROOT_URL}/device/search/findDevicesByMapids`, {params: {mapids: mapid}})
       .then(response => fetchDevicesByMapid(response))
 
-    const req2 = axios.get(`${ROOT_URL}/device/search/findLinesByMapid`, {params: {mapid}})
+    const req2 = axios.get(`${ROOT_URL}/device/search/findLinesByMapids`, {params: {mapids: mapid}})
       .then(response => fetchLinesByMapid(response))
 
     const req3 = axios.get(`${ROOT_URL}/group/search/findByMapid`, {params: {mapid}})
