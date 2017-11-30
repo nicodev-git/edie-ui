@@ -398,6 +398,7 @@ export default class Log extends React.Component {
         .replace(' minutes', 'm')
         .replace(' hours', 'h')
         .replace(' days', 'd')
+        .replace('a day', '1d')
     }
 
     return (
