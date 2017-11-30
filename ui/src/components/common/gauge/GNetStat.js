@@ -9,8 +9,6 @@ import {showAlert} from 'components/common/Alert'
 import MonitorSocket from 'util/socket/MonitorSocket'
 import InfiniteTable from 'components/common/InfiniteTable'
 
-import {gaugeTitleStyle1} from 'style/common/materialStyles'
-
 export default class GNetStat extends React.Component {
   constructor (props) {
     super (props)
@@ -23,12 +21,6 @@ export default class GNetStat extends React.Component {
     this.columns = [{
       'displayName': 'Protocol',
       'columnName': 'Protocol'
-    }, {
-      'displayName': 'Recv-Q',
-      'columnName': 'RecvQ'
-    }, {
-      'displayName': 'Send-Q',
-      'columnName': 'SendQ'
     }, {
       'displayName': 'Local Address',
       'columnName': 'LocalAddress'
@@ -155,11 +147,11 @@ export default class GNetStat extends React.Component {
       <FlipView
         {...this.props}
 
-        titleStyle={gaugeTitleStyle1}
         style={this.props.style}
+        bodyStyle={{padding: '2px 12px'}}
         className={this.props.className}
         gauge={this.props.gauge}
-        title={this.getTitle()}
+        title="[Netstat]"
 
         loading={this.state.loading}
         renderFrontView={this.renderFrontView}
