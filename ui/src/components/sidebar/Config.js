@@ -34,18 +34,18 @@ const dworkflow = <DashboardWfIcon color={sidebarIconsColor}/>
 const dapp = <DashboardAppIcon color={sidebarIconsColor}/>
 
 export const mainMenu = [
-  {id: 'dashboard', title: 'Dashboard', icon: dashboard, path: '/dashboard', fixed: true},
-  {id: 'home', title: 'Map', icon: map, path: '/'},
-  {id: 'dservers', title: 'Servers', icon: dservers, path: '/dashboard/servers'},
-  {id: 'dworkflow', title: 'Workflows', icon: dworkflow, path: '/dashboard/workflows'},
-  {id: 'dapp', title: 'Apps', icon: dapp, path: '/dashboard/apps', dashboard: true},
-  {id: 'search', title: 'Search', icon: search, path: '/search'},
-  {id: 'devicewf', title: 'Device Workflow', icon: deviceWfIcon, path: '/devicewf'},
-  {id: 'log', title: 'Logs', icon: logIcon, path: '/logs'},
-  {id: 'incidents', title: 'Incidents', icon: incidents, path: '/', search: '?bigincidents='},
-  {id: 'chat', title: 'Chat', icon: chat, path: '/chat'},
-  {id: 'threatmap', title: 'Threat Map', icon: threatmap, path: '/threatmap'},
-  {id: 'settings', title: 'Settings', icon: settings, path: '/settings'}
+  {id: 'dashboard', title: 'Dashboard', icon: dashboard, path: '/dashboard', fixed: true, roleMenuId: 'Dashboard'},
+  {id: 'home', title: 'Map', icon: map, path: '/', roleMenuId: 'Map'},
+  {id: 'dservers', title: 'Servers', icon: dservers, path: '/dashboard/servers', roleMenuId: 'Servers'},
+  {id: 'dworkflow', title: 'Workflows', icon: dworkflow, path: '/dashboard/workflows', roleMenuId: 'Workflows'},
+  {id: 'dapp', title: 'Apps', icon: dapp, path: '/dashboard/apps', dashboard: true, roleMenuId: 'Apps'},
+  {id: 'search', title: 'Search', icon: search, path: '/search', roleMenuId: 'Search'},
+  {id: 'devicewf', title: 'Device Workflow', icon: deviceWfIcon, path: '/devicewf', roleMenuId: 'DeviceWorkflows'},
+  {id: 'log', title: 'Logs', icon: logIcon, path: '/logs', roleMenuId: 'Logs'},
+  {id: 'incidents', title: 'Incidents', icon: incidents, path: '/', search: '?bigincidents=', roleMenuId: 'Incidents'},
+  {id: 'chat', title: 'Chat', icon: chat, path: '/chat', roleMenuId: 'Chat'},
+  {id: 'threatmap', title: 'Threat Map', icon: threatmap, path: '/threatmap', roleMenuId: 'ThreatMap'},
+  {id: 'settings', title: 'Settings', icon: settings, path: '/settings', roleMenuId: 'Settings'}
 ]
 
 export const deviceMenu = (deviceId) => {

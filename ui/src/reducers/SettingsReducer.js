@@ -208,6 +208,8 @@ const initialState = {
 
   logFilters: [],
 
+  roles: [],
+
   workflowDraw: 1
 }
 

@@ -97,6 +97,7 @@ import {
   SHOW_LOG_FILTERS_MODAL,
 
   FETCH_ROLES,
+  UPDATE_ROLE,
 
   NO_AUTH_ERROR
 } from './types'
@@ -852,5 +853,13 @@ export const fetchRoles = () => {
     axios.get(`${ROOT_URL}/role`).then(res => {
       dispatch({type: FETCH_ROLES, data: res.data._embedded.roles})
     })
+  }
+}
+
+export const updateRole = entity => {
+  return dispatch => {
+    axios.put(entity._links.self.href, entity).then(response => {
+      dispatch({type: UPDATE_ROLE, data: response.data})
+    }).catch(error => apiError(dispatch, error))
   }
 }

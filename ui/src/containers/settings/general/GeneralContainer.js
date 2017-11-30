@@ -9,7 +9,10 @@ import {
   updateEnvVar,
 
   updateUserOption,
-  syncData
+  syncData,
+
+  fetchRoles,
+  updateRole
 } from 'actions'
 
 class GeneralContainer extends React.Component {
@@ -22,7 +25,9 @@ class GeneralContainer extends React.Component {
 export default connect(
   state => ({
     envVars: state.settings.envVars,
-    userInfo: state.dashboard.userInfo
+    userInfo: state.dashboard.userInfo,
+
+    roles: state.settings.roles
   }),
   dispatch => ({
     ...bindActionCreators({
@@ -31,7 +36,10 @@ export default connect(
       updateEnvVar,
 
       updateUserOption,
-      syncData
+      syncData,
+
+      fetchRoles,
+      updateRole
     }, dispatch)
   })
 )(GeneralContainer)

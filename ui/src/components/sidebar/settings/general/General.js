@@ -42,6 +42,7 @@ export default class General extends React.Component {
 
   componentWillMount () {
     this.props.fetchEnvVars()
+    this.props.fetchRoles()
   }
 
   onClickSync () {
@@ -158,14 +159,17 @@ export default class General extends React.Component {
     }
   }
 
-  onCheckDashboardMenu (item, e, checked) {
-    let selected = (this.getOptionValue('DASHBOARD_MENU') || '').split(',')
+  onCheckDashboardMenu (role, roleMenuId, e, checked) {
+    let selected = [...role.menuIds]
     if (checked) {
-      selected.push(item)
+      selected.push(roleMenuId)
     } else {
-      selected = selected.filter(p => p !== item)
+      selected = selected.filter(p => p !== roleMenuId)
     }
-    this.updateOption('DASHBOARD_MENU', selected.join(','))
+    this.props.updateRole({
+      ...role,
+      menuIds: selected
+    })
   }
 
   /////////////////////////////////////////////////////////////////
@@ -307,29 +311,48 @@ export default class General extends React.Component {
   }
 
   renderMenuConfig () {
-    const value = this.getOptionValue('DASHBOARD_MENU') || ''
-    const selected = value.split(',')
+    const {roles} = this.props
     return (
       <CardPanel title="Menu">
         <div style={{minHeight: 400}}>
-          <div className="margin-md-bottom">
-            <div className="inline-block width-200">
-              <SelectField
-                value={this.getUserOptionValue('defaultPage', 'dashboard')}
-                onChange={this.onChangeShowPage.bind(this)}
-                floatingLabelText="Default Page">
-                <MenuItem primaryText="Map" value="main"/>
-                <MenuItem primaryText="Dashboard" value="dashboard"/>
-              </SelectField>
-            </div>
+          <div>
+            <SelectField
+              value={this.getUserOptionValue('defaultPage', 'dashboard')}
+              onChange={this.onChangeShowPage.bind(this)}
+              floatingLabelText="Default Page">
+              <MenuItem primaryText="Map" value="main"/>
+              <MenuItem primaryText="Dashboard" value="dashboard"/>
+            </SelectField>
           </div>
-          {mainMenu.map(p =>
-            <Checkbox
-              key={p.id} label={p.title} checked={p.fixed || selected.includes(p.id)}
-              onCheck={this.onCheckDashboardMenu.bind(this, p.id)}
-              disabled={p.fixed}
-            />
-          )}
+          <table className="table">
+            <thead>
+            <tr>
+              <th></th>
+              {roles.map(p =>
+                <th key={p.id}>{p.name}</th>
+              )}
+            </tr>
+            </thead>
+            <tbody>
+            {mainMenu.map(p =>
+              <tr key={p.id}>
+                <td>
+                  {p.title}
+                </td>
+                {roles.map(r =>
+                  <td key={r.id}>
+                    <Checkbox
+                      label="" checked={p.fixed || r.menuIds.includes(p.roleMenuId)}
+                      onCheck={this.onCheckDashboardMenu.bind(this, r, p.roleMenuId)}
+                      disabled={p.fixed}
+                    />
+                  </td>
+                )}
+              </tr>
+            )}
+            </tbody>
+          </table>
+
         </div>
       </CardPanel>
     )
