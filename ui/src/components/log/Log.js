@@ -31,7 +31,8 @@ export default class Log extends React.Component {
       monitorTreeData: null,
       selectedFolder: null,
       keyword: '',
-      search: ''
+      search: '',
+      searchValue: ''
     }
   }
   componentWillMount () {
@@ -143,10 +144,13 @@ export default class Log extends React.Component {
   }
 
   getParams () {
-    const {monitorUid} = this.state
+    const {monitorUid, search} = this.state
 
     const queries = []
     queries.push(`(monitorid:${monitorUid})`)
+    if (search) {
+      queries.push(`(_all:"${search}")`)
+    }
 
     return {
       q: queries.join(' AND '),
@@ -395,10 +399,18 @@ export default class Log extends React.Component {
 
   ///////////////////////////////////////////////////////////////////////////////////
 
-  onChangeSearch (e, value) {
+  onChangeSearchValue (e, value) {
     this.setState({
-      search: value
+      searchValue: value
     })
+  }
+
+  onSearchKeyDown (e) {
+    if (e.keyCode === 13) {
+      this.setState({
+        search: this.state.searchValue
+      })
+    }
   }
 
   ///////////////////////////////////////////////////////////////////////////////////
@@ -425,7 +437,7 @@ export default class Log extends React.Component {
 
     return (
       <span className="link" onClick={this.onClickMonitor.bind(this, m)}>
-            <img src="/resources/images/dashboard/file.png" width="20" alt=""
+            <img src="/resojurces/images/dashboard/file.png" width="20" alt=""
                  className="valign-middle"/>
         &nbsp;{m.name}{time ? ` (${time})` : ''}
       </span>
@@ -517,8 +529,14 @@ export default class Log extends React.Component {
           </div>
           <div className="text-center relative" style={{background: 'rgb(218, 218, 218)'}}>
             <div className="inline-block">
-              <TextField name="search" value={this.state.search} onChange={this.onChangeSearch.bind(this)} hintText="Search..."/>
+              <TextField name="search" value={this.state.searchValue}
+                         onChange={this.onChangeSearchValue.bind(this)} hintText="Search..."
+                         onKeyDown={this.onSearchKeyDown.bind(this)}/>
             </div>
+
+           <div style={{position: 'absolute', right: 10, top: 2}}>
+             <IconButton><ToggleStar/></IconButton>
+           </div>
           </div>
         </div>
 
