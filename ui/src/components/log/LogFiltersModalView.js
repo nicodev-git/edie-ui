@@ -2,13 +2,14 @@ import React from 'react'
 import {IconButton} from 'material-ui'
 import DeleteIcon from 'material-ui/svg-icons/action/delete'
 import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
+import EditIcon from 'material-ui/svg-icons/content/create'
 
 import Modal from 'components/modal/parts/Modal'
 import CardPanel from 'components/modal/parts/CardPanel'
 
 export default class LogFiltersModalView extends React.Component {
   render () {
-    const {onHide, logFilters, onClickRow, onClickAdd, onClickDelete, selectedSearch} = this.props
+    const {onHide, logFilters, onClickRow, onClickAdd, onClickDelete, onClickEdit, selectedSearch} = this.props
     return (
       <Modal title="Filters" onRequestClose={onHide}>
         <CardPanel title="Filters"
@@ -27,6 +28,7 @@ export default class LogFiltersModalView extends React.Component {
                   <td>{logFilters.keyword}</td>
                   <td className="p-none nowrap">
                     <IconButton onTouchTap={() => onClickDelete(p)}><DeleteIcon/></IconButton>
+                    <IconButton onTouchTap={() => onClickEdit(p)}><EditIcon/></IconButton>
                   </td>
                 </tr>
               )}
