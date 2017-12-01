@@ -160,7 +160,7 @@ export default class General extends React.Component {
   }
 
   onCheckDashboardMenu (role, roleMenuId, e, checked) {
-    let selected = [...role.menuIds]
+    let selected = [...role.permissions]
     if (checked) {
       selected.push(roleMenuId)
     } else {
@@ -168,7 +168,7 @@ export default class General extends React.Component {
     }
     this.props.updateRole({
       ...role,
-      menuIds: selected
+      permissions: selected
     })
   }
 
@@ -342,7 +342,7 @@ export default class General extends React.Component {
                 {roles.map(r =>
                   <td key={r.id}>
                     <Checkbox
-                      label="" checked={p.fixed || r.menuIds.includes(p.roleMenuId)}
+                      label="" checked={p.fixed || r.permissions.includes(p.roleMenuId)}
                       onCheck={this.onCheckDashboardMenu.bind(this, r, p.roleMenuId)}
                       disabled={p.fixed}
                     />

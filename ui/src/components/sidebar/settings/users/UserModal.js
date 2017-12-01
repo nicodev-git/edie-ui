@@ -4,7 +4,6 @@ import { assign } from 'lodash'
 import { reduxForm, change } from 'redux-form'
 import axios from 'axios'
 import { validate } from 'components/modal/validation/NameValidation'
-import { roleOptions } from 'shared/Global'
 
 import UserModalView from './UserModalView'
 import {mainMenu} from 'components/sidebar/Config'
@@ -53,14 +52,14 @@ class UserModal extends React.Component {
     return options
   }
   render () {
-    const { handleSubmit, maps, selectedRoles, selectedPermissions } = this.props
+    const { handleSubmit, maps, selectedRoles, selectedPermissions, roles } = this.props
     const defaultmaps = maps.map(p => ({label: p.name, value: p.id}))
     return (
       <UserModalView
         onHide={this.closeModal}
         onSubmit={handleSubmit(this.handleFormSubmit)}
         defaultmaps={defaultmaps}
-        roles={roleOptions}
+        roles={roles}
         selectedRoles={selectedRoles}
         onChangeRole={this.onChangeRole.bind(this)}
         mainMenu={mainMenu}

@@ -57,6 +57,7 @@ export default class Users extends React.Component {
     this.loadGroups()
     this.props.fetchSettingUsers()
     this.props.fetchSettingMaps()
+    this.props.fetchRoles()
   }
 
   loadGroups () {
@@ -253,6 +254,7 @@ export default class Users extends React.Component {
           {this.renderContent()}
           {this.renderPasswordModal()}
           {this.renderProfileModal()}
+          {this.renderUserModal()}
         </TabPageBody>
       </TabPage>
     )

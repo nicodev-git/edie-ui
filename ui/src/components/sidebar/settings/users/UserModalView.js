@@ -23,13 +23,13 @@ export default class UserModalView extends React.Component {
 
             <SelectField multiple hintText="Role" onChange={onChangeRole} value={selectedRoles}
               className="mr-dialog">
-              {roles.map(option =>
+              {roles.map(r =>
                 <MenuItem
-                  key={option.value}
+                  key={r.id}
                   insetChildren
-                  checked={selectedRoles.includes(option.value)}
-                  value={option.value}
-                  primaryText={option.label}
+                  checked={selectedRoles.includes(r.name)}
+                  value={r.name}
+                  primaryText={r.name}
                 />
               )}
             </SelectField>

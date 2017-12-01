@@ -22,7 +22,9 @@ import {
 
   fetchSettingMaps,
   selectUserRoles,
-  selectUserPermissions
+  selectUserPermissions,
+
+  fetchRoles
 } from 'actions'
 
 
@@ -38,6 +40,8 @@ export default connect(
     users: state.settings.users,
     userModalVisible: state.settings.userModalVisible,
     userPasswordModalVisible: state.settings.userPasswordModalVisible,
+
+    roles: state.settings.roles,
 
     editUser: state.settings.editUser,
     selectedRoles: state.settings.selectedRoles,
@@ -66,6 +70,8 @@ export default connect(
 
     fetchSettingMaps,
     selectUserRoles,
-    selectUserPermissions
+    selectUserPermissions,
+
+    fetchRoles
   }
 )(withRouter(EditUserContainer))

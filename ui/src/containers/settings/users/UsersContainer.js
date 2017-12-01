@@ -23,7 +23,9 @@ import {
 
   fetchSettingMaps,
   selectUserRoles,
-  selectUserPermissions
+  selectUserPermissions,
+
+  fetchRoles
 } from 'actions'
 
 class UsersContainer extends React.Component {
@@ -42,6 +44,8 @@ export default connect(
     editUser: state.settings.editUser,
     selectedRoles: state.settings.selectedRoles,
     selectedPermissions: state.settings.selectedPermissions,
+
+    roles: state.settings.roles,
 
     user: state.dashboard.userInfo || {},
     maps: state.dashboard.maps,
@@ -68,7 +72,9 @@ export default connect(
 
       fetchSettingMaps,
       selectUserRoles,
-      selectUserPermissions
+      selectUserPermissions,
+
+      fetchRoles
     }, dispatch)
   })
 )(withRouter(UsersContainer))

@@ -3,10 +3,9 @@ import {findIndex, assign} from 'lodash'
 import { reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
 
-import {SelectField, MenuItem, Checkbox} from 'material-ui'
+import {Checkbox} from 'material-ui'
 import { Field } from 'redux-form'
 import { FormInput, FormSelect, FormCheckbox, SubmitBlock, CardPanel } from 'components/modal/parts'
-import { roleOptions } from 'shared/Global'
 import {mainMenu} from 'components/sidebar/Config'
 import { validate } from 'components/modal/validation/NameValidation'
 import TabPage from 'components/common/TabPage'
@@ -18,6 +17,7 @@ class EditUser extends React.Component {
 
     this.props.fetchSettingUsers()
     this.props.fetchSettingMaps()
+    this.props.fetchRoles()
   }
   componentDidUpdate (prevProps) {
     const {users, editUser, match} = this.props
@@ -44,20 +44,35 @@ class EditUser extends React.Component {
     }
   }
   onCheckRole (value) {
-    //
+    let {selectedRoles} = this.props
+    if (selectedRoles.includes(value)) {
+      selectedRoles = selectedRoles.filter(p => p !== value)
+    } else {
+      selectedRoles = [...selectedRoles, value]
+    }
+    this.props.selectUserRoles(selectedRoles)
   }
   onChangeRole (e, index, values) {
     this.props.selectUserRoles(values)
+  }
+
+  onCheckPermission (value) {
+    let {selectedPermissions} = this.props
+    if (selectedPermissions.includes(value)) {
+      selectedPermissions = selectedPermissions.filter(p => p !== value)
+    } else {
+      selectedPermissions = [...selectedPermissions, value]
+    }
+    this.props.selectUserPermissions(selectedPermissions)
   }
   onChangePermission (e, index, values) {
     this.props.selectUserPermissions(values)
   }
 
   render () {
-    const { handleSubmit, maps, selectedRoles, selectedPermissions, editUser } = this.props
+    const { handleSubmit, maps, selectedRoles, selectedPermissions, editUser, roles } = this.props
 
     const defaultmaps = maps.map(p => ({label: p.name, value: p.id}))
-    const roles = roleOptions
     const permissions = selectedPermissions
     if (!editUser) return <div>Loading...</div>
     return (
@@ -78,35 +93,6 @@ class EditUser extends React.Component {
               <Field name="phone" component={FormInput} label="Phone" className="valign-top mr-dialog"/>
               <Field name="defaultMapId" component={FormSelect} label="Default Map" options={defaultmaps} className="valign-top mr-dialog"/>
 
-
-              <div className="hidden">
-              <SelectField multiple hintText="Role" onChange={this.onChangeRole.bind(this)} value={selectedRoles}
-                           className="mr-dialog">
-                {roles.map(option =>
-                  <MenuItem
-                    key={option.value}
-                    insetChildren
-                    checked={selectedRoles.includes(option.value)}
-                    value={option.value}
-                    primaryText={option.label}
-                  />
-                )}
-              </SelectField>
-
-
-              <SelectField multiple hintText="Permission" onChange={this.onChangePermission.bind(this)} value={permissions}>
-                {mainMenu.map(p =>
-                  <MenuItem
-                    key={p.id}
-                    insetChildren
-                    checked={permissions.includes(p.roleMenuId)}
-                    value={p.roleMenuId}
-                    primaryText={p.title}
-                  />
-                )}
-              </SelectField>
-              </div>
-
               <Field name="enabled" component={FormCheckbox} label="Enabled" />
             </CardPanel>
 
@@ -115,11 +101,11 @@ class EditUser extends React.Component {
                 <CardPanel title="Roles">
                   <table className="table table-hover">
                     <tbody>
-                    {roles.map(option =>
-                      <tr key={option.value}>
+                    {roles.map(r =>
+                      <tr key={r.id}>
                         <td>
-                          <Checkbox label={option.label} checked={selectedRoles.includes(option.value)}
-                                    onCheck={this.onCheckRole.bind(this, option.value)}/>
+                          <Checkbox label={r.name} checked={selectedRoles.includes(r.name)}
+                                    onCheck={this.onCheckRole.bind(this, r.name)}/>
                         </td>
                       </tr>
                     )}
@@ -129,6 +115,18 @@ class EditUser extends React.Component {
               </div>
               <div className="col-md-6">
                 <CardPanel title="Permissions">
+                  <table className="table table-hover">
+                    <tbody>
+                    {mainMenu.map(p =>
+                      <tr key={p.id}>
+                        <td>
+                          <Checkbox label={p.title} checked={permissions.includes(p.roleMenuId)}
+                                    onCheck={this.onCheckPermission.bind(this, p.roleMenuId)}/>
+                        </td>
+                      </tr>
+                    )}
+                    </tbody>
+                  </table>
                 </CardPanel>
               </div>
             </div>
