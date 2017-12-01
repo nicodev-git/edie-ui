@@ -42,6 +42,7 @@ class EditUser extends React.Component {
     } else {
       this.props.addSettingUser(user)
     }
+    this.props.history.push(`/settings/users`)
   }
   onCheckRole (value) {
     let {selectedRoles} = this.props

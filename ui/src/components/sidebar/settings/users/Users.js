@@ -54,14 +54,10 @@ export default class Users extends React.Component {
   }
 
   componentWillMount () {
-    this.loadGroups()
+    this.props.closeSettingUserModal()
     this.props.fetchSettingUsers()
     this.props.fetchSettingMaps()
     this.props.fetchRoles()
-  }
-
-  loadGroups () {
-
   }
 
   renderContent () {
