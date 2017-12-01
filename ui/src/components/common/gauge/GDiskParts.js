@@ -16,7 +16,6 @@ export default class GDiskParts extends React.Component {
     super (props)
     this.state = {
       loading: true,
-      network: null,
       disk: null,
       up: false
     }
@@ -44,7 +43,6 @@ export default class GDiskParts extends React.Component {
   startUpdate () {
     this.setState({
       disk: null,
-      network:null,
       up: false
     })
     this.monitorSocket = new MonitorSocket({
@@ -65,16 +63,15 @@ export default class GDiskParts extends React.Component {
   onSocketOpen () {
     this.monitorSocket.send({
       action: 'enable-realtime',
-      monitors: 'network,disk',
+      monitors: 'disk',
       deviceId: this.getDeviceId()
     })
   }
 
   onMonitorMessage (msg) {
     if (msg.action === 'update' && msg.deviceId === this.getDeviceId()) {
-      const {network, disk} = msg.data
+      const {disk} = msg.data
       const state = {}
-      if (network) state.network = network
       if (disk) state.disk = disk
       state.up = true
       state.loading = false
@@ -118,32 +115,6 @@ export default class GDiskParts extends React.Component {
     return `[${devices[index].name}] ${gauge.name}`
   }
 
-  sumNetworks (networks) {
-    let sent = 0
-    let received = 0
-
-    let speed = 100
-    if (networks) {
-      networks.forEach(p => {
-        sent += p.BytesSentPerSec
-        received += p.BytesReceivedPerSec
-
-        const netSpeed = parseInt(p.Speed || '0', 10)
-        if (speed < netSpeed) speed = netSpeed
-      })
-    }
-
-    speed = speed / 8
-    const util = Math.min(Math.round(Math.max(sent, received) / 1024 / 1024 * 100 / speed), 100)
-
-    return {
-      sent,
-      received,
-      util,
-      sum: sent + received
-    }
-  }
-
   sumDisks (disks) {
     let read = 0
     let write = 0
@@ -169,14 +140,6 @@ export default class GDiskParts extends React.Component {
 
   /////////////////////////////////////////////////////
 
-  renderItem (item, i) {
-    return (
-      <div key={i} className="flex-1" style={{height: '100%', position: 'relative', overflow: 'hidden'}}>
-        <Speedometer {...item}/>
-      </div>
-    )
-  }
-
   renderFrontView () {
     const device = this.getDevice()
 
@@ -186,25 +149,36 @@ export default class GDiskParts extends React.Component {
     const up = this.state.up
 
     if (up) {
-      const {network, disk} = this.state
-      const networkValue = this.sumNetworks(network)
-      const diskValue = this.sumDisks(disk)
-
-      const items = [{
-        title1: `${bytesToSize(networkValue.sent)} / ${bytesToSize(networkValue.received)}`,
-        title2: 'Sent / Received',
-        title3: 'Network IO',
-        value: networkValue.util
-      }, {
-        title1: `${bytesToSize(diskValue.read)} / ${bytesToSize(diskValue.write)}`,
-        title2: 'Read / Write',
-        title3: 'Disk IO',
-        value: diskValue.util
-      }]
+      const {disk} = this.state
 
       return (
-        <div className="flex-1 flex-horizontal" style={{marginTop: 8}}>
-          {items.map(this.renderItem.bind(this))}
+        <div className="flex-1 flex-horizontal" style={{marginTop: 8, overflow: 'auto'}}>
+          <table className="table">
+            <thead>
+              <tr>
+                <th>Filesystem</th>
+                <th>Size</th>
+                <th>Used</th>
+                <th>Avail</th>
+                <th>Use%</th>
+              </tr>
+            </thead>
+            <tbody>
+            {
+              disk.map(d => d.Drives.map(p => {
+                return (
+                  <tr key={d.DeviceID + p.Name}>
+                    <td>{p.Name}</td>
+                    <td>{p.TotalSpace}</td>
+                    <td>{p.TotalSpace - p.FreeSpace}</td>
+                    <td>{p.FreeSpace}</td>
+                    <td></td>
+                  </tr>
+                )
+              }))
+            }
+            </tbody>
+          </table>
         </div>
       )
     } else {
@@ -231,7 +205,7 @@ export default class GDiskParts extends React.Component {
       <FlipView
         {...this.props}
 
-        title="[Network/Disk]"
+        title="[Disk]"
         bodyStyle={{padding: "0px 20px 20px"}}
 
         loading={this.state.loading}
