@@ -422,6 +422,14 @@ export default class Log extends React.Component {
     this.props.showLogFiltersModal(false)
   }
 
+  onClickSavedSearch (filter) {
+    this.setState({
+      search: filter.keyword,
+      searchValue: filter.keyword
+    })
+    this.onCloseFiltersModal()
+  }
+
   ///////////////////////////////////////////////////////////////////////////////////
   renderFolder (p) {
     const {selectedFolder} = this.state
@@ -446,7 +454,7 @@ export default class Log extends React.Component {
 
     return (
       <span className="link" onClick={this.onClickMonitor.bind(this, m)}>
-            <img src="/resojurces/images/dashboard/file.png" width="20" alt=""
+            <img src="/resources/images/dashboard/file.png" width="20" alt=""
                  className="valign-middle"/>
         &nbsp;{m.name}{time ? ` (${time})` : ''}
       </span>
@@ -535,6 +543,7 @@ export default class Log extends React.Component {
         {...this.props}
         keyword={this.state.searchValue}
         onHide={this.onCloseFiltersModal.bind(this)}
+        onClickSearch={this.onClickSavedSearch.bind(this)}
       />
     )
   }

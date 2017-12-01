@@ -12,6 +12,7 @@ export default class EditServer extends React.Component {
   onFinish (params) {
     const device = assign({}, this.props.device, params)
     this.props.updateMapDevice(device)
+    this.props.history.push(`/dashboard/serverdetail/${device.id}`)
   }
 
   renderOverlay () {
