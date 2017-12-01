@@ -122,17 +122,24 @@ export default class GDeviceIO extends React.Component {
     let sent = 0
     let received = 0
 
+    let speed = 100
     if (networks) {
       networks.forEach(p => {
         sent += p.BytesSentPerSec
         received += p.BytesReceivedPerSec
+
+        const netSpeed = parseInt(p.Speed || '0', 10)
+        if (speed < netSpeed) speed = netSpeed
       })
     }
 
+    speed = speed / 8
+    const util = Math.min(Math.round(Math.max(sent, received) / 1024 / 1024 * 100 / speed), 100)
 
     return {
       sent,
       received,
+      util,
       sum: sent + received
     }
   }
@@ -148,10 +155,14 @@ export default class GDeviceIO extends React.Component {
       })
     }
 
+    const speed = 500
+
+    const util = Math.min(Math.round(Math.max(read, write) / 1024 / 1024 * 100 / speed), 100)
 
     return {
       read,
       write,
+      util,
       sum: read + write
     }
   }
@@ -183,12 +194,12 @@ export default class GDeviceIO extends React.Component {
         title1: `${bytesToSize(networkValue.sent)} / ${bytesToSize(networkValue.received)}`,
         title2: 'Sent / Received',
         title3: 'Network IO',
-        value: 0
+        value: networkValue.util
       }, {
         title1: `${bytesToSize(diskValue.read)} / ${bytesToSize(diskValue.write)}`,
         title2: 'Read / Write',
         title3: 'Disk IO',
-        value: 0
+        value: diskValue.util
       }]
 
       return (
