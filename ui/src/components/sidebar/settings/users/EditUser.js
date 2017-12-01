@@ -16,13 +16,45 @@ export default class EditUser extends React.Component {
   componentDidUpdate (prevProps) {
     const {users, editUser, match} = this.props
     if (prevProps.users !== users && !editUser) {
-
-      //this.props.openSettingUserModal()
+      const index = findIndex(users, {username: match.params.user})
+      if (index < 0) {
+        this.props.history.push(`/settings/users`)
+        return
+      }
+      this.props.openSettingUserModal(users[index])
     }
   }
+
+  handleFormSubmit (values) {
+    const { editUser, selectedRoles, selectedPermissions } = this.props
+    const user = assign({}, editUser, values, {
+      roles: selectedRoles,
+      permissions: selectedPermissions
+    })
+    if (editUser) {
+      this.props.updateSettingUser(user)
+    } else {
+      this.props.addSettingUser(user)
+    }
+  }
+
+  onClickPin () {
+    axios.get('/genpin').then(response => {
+      this.props.dispatch(change('userEditForm', 'pincode', response.data))
+    })
+  }
+
+  onChangeRole (e, index, values) {
+    this.props.selectUserRoles(values)
+  }
+  onChangePermission (e, index, values) {
+    this.props.selectUserPermissions(values)
+  }
+
   render () {
-    const {onHide, onSubmit, defaultmaps, roles, selectedRoles, onChangeRole,
-      permissions, onChangePermission, mainMenu} = this.props
+    const {onSubmit, defaultmaps, roles, selectedRoles, onChangeRole,
+      permissions, onChangePermission, mainMenu, editUser} = this.props
+    if (!editUser) return <div>Loading...</div>
     return (
       <div>
         <form onSubmit={onSubmit}>
