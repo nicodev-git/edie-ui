@@ -2,7 +2,6 @@ import React from 'react'
 import {findIndex} from 'lodash'
 
 import FlipView from './FlipView'
-import Speedometer from './display/Speedometer'
 import NoDataPanel from './NoDataPanel'
 import MonitorSocket from 'util/socket/MonitorSocket'
 import GEditView from './GEditView'
@@ -142,17 +141,15 @@ export default class GDiskParts extends React.Component {
 
   renderFrontView () {
     const device = this.getDevice()
-
-
     if (!device) return <div />
 
     const up = this.state.up
 
     if (up) {
-      const {disk} = this.state
+      const disk = this.state.disk || []
 
       return (
-        <div className="flex-1 flex-horizontal" style={{marginTop: 8, overflow: 'auto'}}>
+        <div className="flex-1 flex-horizontal" style={{overflow: 'auto'}}>
           <table className="table">
             <thead>
               <tr>
@@ -169,10 +166,10 @@ export default class GDiskParts extends React.Component {
                 return (
                   <tr key={d.DeviceID + p.Name}>
                     <td>{p.Name}</td>
-                    <td>{p.TotalSpace}</td>
-                    <td>{p.TotalSpace - p.FreeSpace}</td>
-                    <td>{p.FreeSpace}</td>
-                    <td></td>
+                    <td>{p.TotalSpace}G</td>
+                    <td>{p.TotalSpace - p.FreeSpace}G</td>
+                    <td>{p.FreeSpace}G</td>
+                    <td>{((p.TotalSpace - p.FreeSpace) * 100 / (p.TotalSpace || 1)).toFixed(1)}%</td>
                   </tr>
                 )
               }))

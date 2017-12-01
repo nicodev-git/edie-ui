@@ -71,7 +71,8 @@ export default class MainControl extends React.Component {
       ['Command', {x: w, y: h}],
       ['Incidents', {x: 0, y: h * 2, w: w * 2}],
       ['Workflows', {x: 0, y: h * 3, w: w * 2}],
-      ['NetStat', {x: 0, y: h * 4, w: w * 2}]
+      ['NetStat', {x: 0, y: h * 4, w: w * 2}],
+      ['DiskParts', {x: 0, y: h * 5, w}]
     ]
 
 

@@ -5,6 +5,7 @@ import GMonitor from 'components/common/gauge/GMonitor'
 import GCpu from 'components/common/gauge/GCpu'
 import GMemory from 'components/common/gauge/GMemory'
 import GDisk from 'components/common/gauge/GDisk'
+import GDiskParts from 'components/common/gauge/GDiskParts'
 import GAccelView from 'components/common/gauge/GAccelView'
 import GLiquid from 'components/common/gauge/GLiquid'
 import GIncidentTable from 'components/common/gauge/GIncidentTable'
@@ -40,6 +41,7 @@ const gaugeMap = {
   'Cpu': GCpu,
   'Memory': GMemory,
   'Disk': GDisk,
+  'DiskParts': GDiskParts,
   'Accelerometer': GAccelView,
   'Liquid': GLiquid,
   'Incident Table': GIncidentTable,
