@@ -1,17 +1,19 @@
 import React from 'react'
 import {findIndex, assign} from 'lodash'
-import { reduxForm, change } from 'redux-form'
-import axios from 'axios'
+import { reduxForm } from 'redux-form'
+import { connect } from 'react-redux'
 
 import {SelectField, MenuItem} from 'material-ui'
 import { Field } from 'redux-form'
 import { FormInput, FormSelect, FormCheckbox, SubmitBlock, Modal, CardPanel } from 'components/modal/parts'
+import { roleOptions } from 'shared/Global'
+import {mainMenu} from 'components/sidebar/Config'
+import { validate } from 'components/modal/validation/NameValidation'
 
-export default class EditUser extends React.Component {
+class EditUser extends React.Component {
   componentWillMount () {
     this.props.closeSettingUserModal()
 
-    this.loadGroups()
     this.props.fetchSettingUsers()
     this.props.fetchSettingMaps()
   }
@@ -40,12 +42,6 @@ export default class EditUser extends React.Component {
     }
   }
 
-  onClickPin () {
-    axios.get('/genpin').then(response => {
-      this.props.dispatch(change('userEditForm', 'pincode', response.data))
-    })
-  }
-
   onChangeRole (e, index, values) {
     this.props.selectUserRoles(values)
   }
@@ -54,12 +50,15 @@ export default class EditUser extends React.Component {
   }
 
   render () {
-    const {onSubmit, defaultmaps, roles, selectedRoles, onChangeRole,
-      permissions, onChangePermission, mainMenu, editUser} = this.props
+    const { handleSubmit, maps, selectedRoles, selectedPermissions, editUser } = this.props
+
+    const defaultmaps = maps.map(p => ({label: p.name, value: p.id}))
+    const roles = roleOptions
+    const permissions = selectedPermissions
     if (!editUser) return <div>Loading...</div>
     return (
       <div>
-        <form onSubmit={onSubmit}>
+        <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
           <CardPanel title="User Settings" className="margin-md-bottom">
             <Field name="username" component={FormInput} label="Name" className="mr-dialog"/>
             <Field name="fullname" component={FormInput} label="Full Name"/>
@@ -70,7 +69,7 @@ export default class EditUser extends React.Component {
             <Field name="phone" component={FormInput} label="Phone" className="valign-top mr-dialog"/>
             <Field name="defaultMapId" component={FormSelect} label="Default Map" options={defaultmaps} className="valign-top"/>
 
-            <SelectField multiple hintText="Role" onChange={onChangeRole} value={selectedRoles}
+            <SelectField multiple hintText="Role" onChange={this.onChangeRole.bind(this)} value={selectedRoles}
                          className="mr-dialog">
               {roles.map(option =>
                 <MenuItem
@@ -84,7 +83,7 @@ export default class EditUser extends React.Component {
             </SelectField>
 
 
-            <SelectField multiple hintText="Permission" onChange={onChangePermission} value={permissions}>
+            <SelectField multiple hintText="Permission" onChange={this.onChangePermission.bind(this)} value={permissions}>
               {mainMenu.map(p =>
                 <MenuItem
                   key={p.id}
@@ -104,3 +103,10 @@ export default class EditUser extends React.Component {
     )
   }
 }
+
+export default connect(
+  state => ({
+    initialValues: state.settings.editUser,
+    validate: validate
+  })
+)(reduxForm({form: 'userEditForm'})(EditUser))

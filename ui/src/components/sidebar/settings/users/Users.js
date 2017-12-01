@@ -145,7 +145,8 @@ export default class Users extends React.Component {
     const selected = this.getUsers().getSelected()
     if (!selected) return showAlert('Please select user.')
 
-    this.props.openSettingUserModal(selected)
+    // this.props.openSettingUserModal(selected)
+    this.props.history.push(`/settings/users/${selected.username}/edit`)
   }
 
   onRemoveUser () {
