@@ -1,0 +1,72 @@
+import React from 'react'
+import {findIndex} from 'lodash'
+
+import {SelectField, MenuItem} from 'material-ui'
+import { Field } from 'redux-form'
+import { FormInput, FormSelect, FormCheckbox, SubmitBlock, Modal, CardPanel } from 'components/modal/parts'
+
+export default class EditUser extends React.Component {
+  componentWillMount () {
+    this.props.closeSettingUserModal()
+
+    this.loadGroups()
+    this.props.fetchSettingUsers()
+    this.props.fetchSettingMaps()
+  }
+  componentDidUpdate (prevProps) {
+    const {users, editUser, match} = this.props
+    if (prevProps.users !== users && !editUser) {
+
+      //this.props.openSettingUserModal()
+    }
+  }
+  render () {
+    const {onHide, onSubmit, defaultmaps, roles, selectedRoles, onChangeRole,
+      permissions, onChangePermission, mainMenu} = this.props
+    return (
+      <div>
+        <form onSubmit={onSubmit}>
+          <CardPanel title="User Settings" className="margin-md-bottom">
+            <Field name="username" component={FormInput} label="Name" className="mr-dialog"/>
+            <Field name="fullname" component={FormInput} label="Full Name"/>
+
+            <Field name="password" type="password" component={FormInput} label="Password" className="mr-dialog"/>
+            <Field name="email" component={FormInput} label="Email"/>
+
+            <Field name="phone" component={FormInput} label="Phone" className="valign-top mr-dialog"/>
+            <Field name="defaultMapId" component={FormSelect} label="Default Map" options={defaultmaps} className="valign-top"/>
+
+            <SelectField multiple hintText="Role" onChange={onChangeRole} value={selectedRoles}
+                         className="mr-dialog">
+              {roles.map(option =>
+                <MenuItem
+                  key={option.value}
+                  insetChildren
+                  checked={selectedRoles.includes(option.value)}
+                  value={option.value}
+                  primaryText={option.label}
+                />
+              )}
+            </SelectField>
+
+
+            <SelectField multiple hintText="Permission" onChange={onChangePermission} value={permissions}>
+              {mainMenu.map(p =>
+                <MenuItem
+                  key={p.id}
+                  insetChildren
+                  checked={permissions.includes(p.roleMenuId)}
+                  value={p.roleMenuId}
+                  primaryText={p.title}
+                />
+              )}
+            </SelectField>
+
+            <Field name="enabled" component={FormCheckbox} label="Enabled" />
+          </CardPanel>
+          <SubmitBlock name="Save"/>
+        </form>
+      </div>
+    )
+  }
+}

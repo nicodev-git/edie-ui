@@ -469,7 +469,7 @@ export default function (state = initialState, action) {
       }
 
     case CLOSE_SETTING_USER_MODAL:
-      return { ...state, userModalVisible: false }
+      return { ...state, userModalVisible: false, editUser: null }
 
     case ADD_SETTING_USER: {
       const users = concat(state.users || [], action.data)

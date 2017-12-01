@@ -250,7 +250,6 @@ export default class Users extends React.Component {
 
         <TabPageBody tabs={SettingTabs} tab={3} history={this.props.history} location={this.props.location} transparent>
           {this.renderContent()}
-          {this.renderUserModal()}
           {this.renderPasswordModal()}
           {this.renderProfileModal()}
         </TabPageBody>
