@@ -6,7 +6,8 @@ import { FormInput, FormSelect, FormCheckbox, SubmitBlock, Modal, CardPanel } fr
 
 export default class UserModalView extends React.Component {
   render () {
-    const {onHide, onSubmit, defaultmaps, roles, selectedRoles, onChangeRole} = this.props
+    const {onHide, onSubmit, defaultmaps, roles, selectedRoles, onChangeRole,
+      permissions, onChangePermission} = this.props
     return (
       <Modal title="User" onRequestClose={onHide} contentStyle={{width: 685}}>
         <form onSubmit={onSubmit}>
@@ -28,6 +29,19 @@ export default class UserModalView extends React.Component {
                   checked={selectedRoles.includes(option.value)}
                   value={option.value}
                   primaryText={option.label}
+                />
+              )}
+            </SelectField>
+
+
+            <SelectField multiple hintText="Role" onChange={onChangePermission} value={permissions}>
+              {mainMenu.map(p =>
+                <MenuItem
+                  key={p.id}
+                  insetChildren
+                  checked={permissions.includes(p.roleMenuId)}
+                  value={p.roleMenuId}
+                  primaryText={p.title}
                 />
               )}
             </SelectField>
