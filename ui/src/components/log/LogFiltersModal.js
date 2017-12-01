@@ -44,7 +44,14 @@ export default class LogFiltersModal extends React.Component {
         keyword
       })
     })
+  }
 
+  onClickSearch () {
+    const {selectedSearch} = this.state
+    if (!selectedSearch) return showAlert('Please select search')
+
+    const {onClickSearch} = this.props
+    onClickSearch && onClickSearch(selectedSearch)
   }
 
   render () {
@@ -59,6 +66,7 @@ export default class LogFiltersModal extends React.Component {
         onClickAdd={this.onClickAdd.bind(this)}
         onClickDelete={this.onClickDelete.bind(this)}
         onClickEdit={this.onClickEdit.bind(this)}
+        onClickSearch={this.onClickSearch.bind(this)}
       />
     )
   }

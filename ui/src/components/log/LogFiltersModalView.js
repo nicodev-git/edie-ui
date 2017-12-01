@@ -1,5 +1,5 @@
 import React from 'react'
-import {IconButton} from 'material-ui'
+import {IconButton, RaisedButton} from 'material-ui'
 import DeleteIcon from 'material-ui/svg-icons/action/delete'
 import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
 import EditIcon from 'material-ui/svg-icons/content/create'
@@ -9,7 +9,8 @@ import CardPanel from 'components/modal/parts/CardPanel'
 
 export default class LogFiltersModalView extends React.Component {
   render () {
-    const {onHide, logFilters, onClickRow, onClickAdd, onClickDelete, onClickEdit, selectedSearch} = this.props
+    const {onHide, logFilters, onClickRow, onClickAdd, onClickDelete, onClickEdit, selectedSearch,
+      onClickSearch} = this.props
     return (
       <Modal title="Filters" onRequestClose={onHide}>
         <CardPanel title="Filters"
@@ -19,13 +20,14 @@ export default class LogFiltersModalView extends React.Component {
               <thead>
               <tr>
                 <th>Keyword</th>
+                <th></th>
               </tr>
               </thead>
               <tbody>
               {logFilters.map(p =>
                 <tr key={p.id} onClick={() => onClickRow(p)}
                     className={`${selectedSearch && selectedSearch.id === p.id ? 'selected' : ''}`}>
-                  <td>{logFilters.keyword}</td>
+                  <td>{p.keyword}</td>
                   <td className="p-none nowrap">
                     <IconButton onTouchTap={() => onClickDelete(p)}><DeleteIcon/></IconButton>
                     <IconButton onTouchTap={() => onClickEdit(p)}><EditIcon/></IconButton>
@@ -36,6 +38,10 @@ export default class LogFiltersModalView extends React.Component {
             </table>
           </div>
         </CardPanel>
+
+        <div className="form-buttons">
+          <RaisedButton label="Search" onTouchTap={onClickSearch}/>
+        </div>
       </Modal>
     )
   }
