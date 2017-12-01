@@ -11,7 +11,6 @@ import Services from 'containers/dashboard/serverdetail/ServiceContainer'
 import Users from 'containers/dashboard/serverdetail/UsersContainer'
 import Firewall from 'containers/dashboard/serverdetail/FirewallContainer'
 import Network from 'containers/dashboard/serverdetail/NetworkContainer'
-import Command from 'containers/dashboard/serverdetail/CommandContainer'
 
 import RefreshOverlay from 'components/common/RefreshOverlay'
 
@@ -59,7 +58,6 @@ export default class ServerDetail extends React.Component {
         <Route path="/dashboard/serverdetail/:id/user" component={Users}/>
         <Route path="/dashboard/serverdetail/:id/firewall" component={Firewall}/>
         <Route path="/dashboard/serverdetail/:id/network" component={Network}/>
-        <Route path="/dashboard/serverdetail/:id/command" component={Command}/>
       </Switch>
     )
   }

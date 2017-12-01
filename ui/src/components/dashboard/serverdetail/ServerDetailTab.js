@@ -25,9 +25,6 @@ export default (deviceId, templateName) => {
   }, {
     title: 'Network',
     path: `/dashboard/serverdetail/${deviceId}/network`
-  }, {
-    title: 'Command',
-    path: `/dashboard/serverdetail/${deviceId}/command`
   }]
 
   if (templateName) {

@@ -8,7 +8,6 @@ import GEditView from './GEditView'
 
 import {checkAgentUp} from 'shared/Global'
 import {showAlert} from 'components/common/Alert'
-import {bytesToSize} from 'util/Formatter'
 
 export default class GDiskParts extends React.Component {
   constructor (props) {
