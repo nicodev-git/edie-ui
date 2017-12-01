@@ -26,7 +26,16 @@ export default class Sidebar extends React.Component {
   }
 
   getVisibleMenu () {
-    const selected = (this.getOptionValue('DASHBOARD_MENU') || '').split(',')
+    const {userInfo, roles} = this.props
+    let selected = []
+    const userRoles = userInfo ? (userInfo.roles || []) : []
+    userRoles.forEach(p => {
+      const index = findIndex(roles, {name: p})
+      if (index >= 0) {
+        const role = roles[index]
+        selected = [...selected, ...role.menuIds]
+      }
+    })
     return selected
   }
 

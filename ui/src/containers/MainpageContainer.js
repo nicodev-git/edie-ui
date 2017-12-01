@@ -102,7 +102,9 @@ import {
 
   fetchDevicesGroups,
 
-  removeWorkflow
+  removeWorkflow,
+
+  fetchRoles
 } from 'actions'
 
 class MainpageContainer extends Component {
@@ -299,7 +301,9 @@ export default connect((state) => {
     commentsIncident: state.dashboard.commentsIncident,
 
     attackerModalOpen: state.dashboard.attackerModalOpen,
-    workflowDraw: state.settings.workflowDraw
+    workflowDraw: state.settings.workflowDraw,
+
+    roles: state.settings.roles
   }
 },
 dispatch => bindActionCreators({
@@ -376,5 +380,7 @@ dispatch => bindActionCreators({
 
   fetchDevicesGroups,
 
-  removeWorkflow
+  removeWorkflow,
+
+  fetchRoles
 }, dispatch))(withRouter(MainpageContainer))

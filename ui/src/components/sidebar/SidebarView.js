@@ -77,7 +77,7 @@ export default class SidebarView extends Component {
         </div>
         <div style={{display: contentType.Main === pageType ? 'block' : 'none'}} className="sidebar">
           {mainMenuItems.map((item, index) => {
-            const visible = item.fixed || visibleMenu.includes(item.id)
+            const visible = item.fixed || visibleMenu.includes(item.roleMenuId)
             return (
               <div key={index} onClick={onMainMenu.bind(this, item.id)} className={visible ? '' : 'hidden'}>
                 <div className={pageId === item.id ? 'sidebar-chosen' : ''}>

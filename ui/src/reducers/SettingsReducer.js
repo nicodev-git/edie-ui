@@ -155,7 +155,8 @@ import {
 
   SHOW_DEVICE_CREDS_PICKER,
 
-  FETCH_ROLES
+  FETCH_ROLES,
+  UPDATE_ROLE
 
 } from 'actions/types'
 
@@ -653,6 +654,8 @@ export default function (state = initialState, action) {
 
     case FETCH_ROLES:
       return { ...state, roles: action.data }
+    case UPDATE_ROLE:
+      return { ...state, roles: state.roles.map(p => p.id === action.data.id ? action.data : p) }
     default:
       return state
   }

@@ -30,6 +30,7 @@ class Main extends React.Component {
   componentWillMount () {
     this.props.fetchEnvVars()
     this.props.fetchDevicesGroups()
+    this.props.fetchRoles()
   }
 
   componentWillUpdate (nextProps, nextState) {
@@ -79,7 +80,7 @@ class Main extends React.Component {
   }
 
   renderSidebar () {
-    const {location, device, history, envVars} = this.props
+    const {location, device, history, envVars, userInfo, roles} = this.props
     const {pathname} = location
 
     let pageId = homeId
@@ -119,6 +120,8 @@ class Main extends React.Component {
         pageType={pageType}
         device={device}
         envVars={envVars}
+        userInfo={userInfo}
+        roles={roles}
         onClickItem={this.onClickMenuItem.bind(this)}
       />
     )
