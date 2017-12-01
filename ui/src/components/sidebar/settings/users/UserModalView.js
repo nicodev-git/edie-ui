@@ -7,7 +7,7 @@ import { FormInput, FormSelect, FormCheckbox, SubmitBlock, Modal, CardPanel } fr
 export default class UserModalView extends React.Component {
   render () {
     const {onHide, onSubmit, defaultmaps, roles, selectedRoles, onChangeRole,
-      permissions, onChangePermission} = this.props
+      permissions, onChangePermission, mainMenu} = this.props
     return (
       <Modal title="User" onRequestClose={onHide} contentStyle={{width: 685}}>
         <form onSubmit={onSubmit}>
@@ -21,7 +21,8 @@ export default class UserModalView extends React.Component {
             <Field name="phone" component={FormInput} label="Phone" className="valign-top mr-dialog"/>
             <Field name="defaultMapId" component={FormSelect} label="Default Map" options={defaultmaps} className="valign-top"/>
 
-            <SelectField multiple hintText="Role" onChange={onChangeRole} value={selectedRoles}>
+            <SelectField multiple hintText="Role" onChange={onChangeRole} value={selectedRoles}
+              className="mr-dialog">
               {roles.map(option =>
                 <MenuItem
                   key={option.value}
@@ -34,7 +35,7 @@ export default class UserModalView extends React.Component {
             </SelectField>
 
 
-            <SelectField multiple hintText="Role" onChange={onChangePermission} value={permissions}>
+            <SelectField multiple hintText="Permission" onChange={onChangePermission} value={permissions}>
               {mainMenu.map(p =>
                 <MenuItem
                   key={p.id}

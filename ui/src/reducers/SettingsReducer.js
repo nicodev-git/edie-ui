@@ -89,6 +89,7 @@ import {
   OPEN_USER_PASSWORD_MODAL,
   CLOSE_USER_PASSWORD_MODAL,
   SELECT_USER_ROLES,
+  SELECT_USER_PERMISSIONS,
 
   FETCH_PARSER_TYPES,
   ADD_PARSER_TYPE,
@@ -461,7 +462,11 @@ export default function (state = initialState, action) {
       return { ...state, users: action.data }
 
     case OPEN_SETTING_USER_MODAL:
-      return { ...state, userModalVisible: true, editUser: action.data, editUserPin: '', selectedRoles: action.data ? (action.data.roles || []) : [] }
+      return {
+        ...state, userModalVisible: true, editUser: action.data, editUserPin: '',
+        selectedRoles: action.data ? (action.data.roles || []) : [],
+        selectedPermissions: action.data ? (action.data.permissions || []) : []
+      }
 
     case CLOSE_SETTING_USER_MODAL:
       return { ...state, userModalVisible: false }
@@ -490,6 +495,9 @@ export default function (state = initialState, action) {
 
     case SELECT_USER_ROLES:
       return { ...state, selectedRoles: action.data }
+
+    case SELECT_USER_PERMISSIONS:
+      return { ...state, selectedPermissions: action.data }
 
     case FETCH_PARSER_TYPES:
       return { ...state, parserTypes: action.data }

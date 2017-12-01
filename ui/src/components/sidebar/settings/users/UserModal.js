@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import { assign } from 'lodash'
 import { reduxForm, change } from 'redux-form'
 import axios from 'axios'
-import { SimpleModalForm } from 'components/modal'
 import { validate } from 'components/modal/validation/NameValidation'
 import { roleOptions } from 'shared/Global'
 
@@ -25,9 +24,10 @@ class UserModal extends React.Component {
   }
 
   handleFormSubmit (values) {
-    const { editUser, selectedRoles } = this.props
+    const { editUser, selectedRoles, selectedPermissions } = this.props
     const user = assign({}, editUser, values, {
-      roles: selectedRoles
+      roles: selectedRoles,
+      permissions: selectedPermissions
     })
     if (editUser) {
       this.props.updateSettingUser(user)
@@ -46,7 +46,7 @@ class UserModal extends React.Component {
     this.props.selectUserRoles(values)
   }
   onChangePermission (e, index, values) {
-
+    this.props.selectUserPermissions(values)
   }
   renderMapOptions () {
     let options = [].map(item => ({value: item.id, label: item.mapname}))
