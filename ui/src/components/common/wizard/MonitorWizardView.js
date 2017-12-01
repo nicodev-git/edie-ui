@@ -93,9 +93,11 @@ export default class MonitorWizardView extends React.Component {
             </div>
           </CardPanel>
 
-          <CardPanel title="Credentials">
-            <Field name="credentialId" component={FormSelect} className="margin-sm-left margin-sm-right" options={credentials}/>
-          </CardPanel>
+          <div className="hidden">
+            <CardPanel title="Credentials">
+              <Field name="credentialId" component={FormSelect} className="margin-sm-left margin-sm-right" options={credentials}/>
+            </CardPanel>
+          </div>
 
           {paramsView}
           {tagsView}
