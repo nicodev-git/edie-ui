@@ -3,7 +3,7 @@ import {findIndex, assign} from 'lodash'
 import { reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
 
-import {Checkbox} from 'material-ui'
+import {Checkbox, RaisedButton} from 'material-ui'
 import { Field } from 'redux-form'
 import { FormInput, FormSelect, FormCheckbox, SubmitBlock, CardPanel } from 'components/modal/parts'
 import {mainMenu} from 'components/sidebar/Config'
@@ -12,6 +12,12 @@ import TabPage from 'components/common/TabPage'
 import TabPageBody from 'components/common/TabPageBody'
 
 class EditUser extends React.Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      selectedRole: null
+    }
+  }
   componentWillMount () {
     this.props.closeSettingUserModal()
 
@@ -71,6 +77,7 @@ class EditUser extends React.Component {
   }
 
   render () {
+    const {selectedRole} = this.state
     const { handleSubmit, maps, selectedRoles, selectedPermissions, editUser, roles } = this.props
 
     const defaultmaps = maps.map(p => ({label: p.name, value: p.id}))
@@ -84,26 +91,32 @@ class EditUser extends React.Component {
 
         <TabPageBody tabs={[]} transparent>
           <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
-            <CardPanel title="User Settings" className="margin-md-bottom">
-              <Field name="username" component={FormInput} label="Name" className="mr-dialog"/>
-              <Field name="fullname" component={FormInput} label="Full Name" className="mr-dialog"/>
+            <div>
+              <div className="col-md-12">
+                <CardPanel title="User Settings" className="margin-md-bottom">
+                  <Field name="username" component={FormInput} label="Name" className="mr-dialog"/>
+                  <Field name="fullname" component={FormInput} label="Full Name" className="mr-dialog"/>
 
-              <Field name="password" type="password" component={FormInput} label="Password" className="mr-dialog"/>
-              <Field name="email" component={FormInput} label="Email" className="mr-dialog"/>
+                  <Field name="password" type="password" component={FormInput} label="Password" className="mr-dialog"/>
+                  <Field name="email" component={FormInput} label="Email" className="mr-dialog"/>
 
-              <Field name="phone" component={FormInput} label="Phone" className="valign-top mr-dialog"/>
-              <Field name="defaultMapId" component={FormSelect} label="Default Map" options={defaultmaps} className="valign-top mr-dialog"/>
+                  <Field name="phone" component={FormInput} label="Phone" className="valign-top mr-dialog"/>
+                  <Field name="defaultMapId" component={FormSelect} label="Default Map" options={defaultmaps} className="valign-top mr-dialog"/>
 
-              <Field name="enabled" component={FormCheckbox} label="Enabled" />
-            </CardPanel>
+                  <Field name="enabled" component={FormCheckbox} label="Enabled" />
+                </CardPanel>
+              </div>
+            </div>
 
-            <div className="row">
+            <div>
               <div className="col-md-6">
                 <CardPanel title="Roles">
                   <table className="table table-hover">
                     <tbody>
                     {roles.map(r =>
-                      <tr key={r.id}>
+                      <tr key={r.id}
+                          onClick={() => this.setState({selectedRole: r})}
+                          className={selectedRole && selectedRole.id === r.id ? 'selected' : ''}>
                         <td>
                           <Checkbox label={r.name} checked={selectedRoles.includes(r.name)}
                                     onCheck={this.onCheckRole.bind(this, r.name)}/>
@@ -113,13 +126,18 @@ class EditUser extends React.Component {
                     </tbody>
                   </table>
                 </CardPanel>
+
+                <RaisedButton label="Show All" onTouchTap={() => this.setState({selectedRole: null})}
+                              className="margin-md-top"/>
+
               </div>
               <div className="col-md-6">
                 <CardPanel title="Permissions">
                   <table className="table table-hover">
                     <tbody>
                     {mainMenu.map(p =>
-                      <tr key={p.id}>
+                      <tr key={p.id}
+                          className={!selectedRole || selectedRole.permissions.includes(p.roleMenuId) ? '' : 'hidden'}>
                         <td>
                           <Checkbox label={p.title} checked={permissions.includes(p.roleMenuId)}
                                     onCheck={this.onCheckPermission.bind(this, p.roleMenuId)}/>
@@ -131,7 +149,12 @@ class EditUser extends React.Component {
                 </CardPanel>
               </div>
             </div>
-            <SubmitBlock name="Save"/>
+
+            <div>
+              <div className="col-md-12">
+                <SubmitBlock name="Save"/>
+              </div>
+            </div>
           </form>
         </TabPageBody>
       </TabPage>
