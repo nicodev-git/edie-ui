@@ -5,6 +5,7 @@ import MapSaveModal from '../MapSaveModal'
 import MapImportModal from '../MapImportModal'
 import MapMenuList from './MapMenuList'
 import { showAlert, showPrompt, showConfirm } from 'components/common/Alert'
+import {hasPermission} from 'shared/Permission'
 
 export default class MapMenu extends Component {
   constructor (props) {
@@ -74,13 +75,16 @@ export default class MapMenu extends Component {
   }
 
   render () {
+    const {userInfo} = this.props
+    const canAdd = hasPermission(userInfo, 'AddMap')
+    const canEdit = hasPermission(userInfo, 'EditMap')
     return (
       <div>
         <MapSelect {...this.props} ref="select"/>
         <MapMenuList
-          onAdd={this.onClickAdd}
-          onRename={this.onClickRename}
-          onDelete={this.onClickDelete}
+          onAdd={canAdd ? this.onClickAdd : null}
+          onRename={canEdit ? this.onClickRename : null}
+          onDelete={canEdit ? this.onClickDelete : null}
           onSave={this.onClickSave}
           onImport={this.onClickImport}
         />

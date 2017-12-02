@@ -25,9 +25,9 @@ const MapMenuList = ({ onAdd, onRename, onDelete, onSave, onImport }) => (
     anchorOrigin={{horizontal: 'left', vertical: 'top'}}
     targetOrigin={{horizontal: 'left', vertical: 'top'}}
   >
-    <MenuItem onTouchTap={onAdd}>Add Map</MenuItem>
-    <MenuItem onTouchTap={onRename}>Rename Map</MenuItem>
-    <MenuItem onTouchTap={onDelete}>Delete Map</MenuItem>
+    {onAdd && <MenuItem onTouchTap={onAdd}>Add Map</MenuItem>}
+    {onRename && <MenuItem onTouchTap={onRename}>Rename Map</MenuItem>}
+    {onDelete && <MenuItem onTouchTap={onDelete}>Delete Map</MenuItem>}
     <MenuItem onTouchTap={onSave}>Export Map</MenuItem>
     <MenuItem onTouchTap={onImport}>Import Map</MenuItem>
   </IconMenu>
