@@ -24,7 +24,9 @@ import {
   selectUserRoles,
   selectUserPermissions,
 
-  fetchRoles
+  fetchRoles,
+
+  submitForm
 } from 'actions'
 
 
@@ -72,6 +74,8 @@ export default connect(
     selectUserRoles,
     selectUserPermissions,
 
-    fetchRoles
+    fetchRoles,
+
+    submitForm
   }
 )(withRouter(EditUserContainer))

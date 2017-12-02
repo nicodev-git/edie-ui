@@ -1,11 +1,11 @@
 import React from 'react'
-import {findIndex, assign} from 'lodash'
-import { reduxForm } from 'redux-form'
+import {findIndex, assign, debounce} from 'lodash'
+import { reduxForm, formValueSelector } from 'redux-form'
 import { connect } from 'react-redux'
 
 import {Checkbox, RaisedButton} from 'material-ui'
 import { Field } from 'redux-form'
-import { FormInput, FormSelect, FormCheckbox, SubmitBlock, CardPanel } from 'components/modal/parts'
+import { FormInput, FormSelect, FormCheckbox, CardPanel } from 'components/modal/parts'
 import {rolePermissions} from 'shared/Permission'
 import { validate } from 'components/modal/validation/NameValidation'
 import TabPage from 'components/common/TabPage'
@@ -17,16 +17,19 @@ class EditUser extends React.Component {
     this.state = {
       selectedRole: null
     }
+
+    this.debSave = debounce(this.submitForm.bind(this), 500)
   }
   componentWillMount () {
     this.props.closeSettingUserModal()
 
     this.props.fetchSettingUsers()
+    this.props.fetchSettingUsers()
     this.props.fetchSettingMaps()
     this.props.fetchRoles()
   }
   componentDidUpdate (prevProps) {
-    const {users, editUser, match} = this.props
+    const {users, editUser, match, formValues} = this.props
     if (users && users.length && prevProps.users !== users && !editUser) {
       const index = findIndex(users, {username: match.params.user})
       if (index < 0) {
@@ -35,6 +38,15 @@ class EditUser extends React.Component {
       }
       this.props.openSettingUserModal(users[index])
     }
+
+    if (JSON.stringify(prevProps.formValues) !== JSON.stringify(formValues)) {
+      console.log('Form Changed')
+      this.debSave()
+    }
+  }
+
+  submitForm () {
+    this.props.handleFormSubmit(this.props.formValues)
   }
 
   handleFormSubmit (values) {
@@ -48,7 +60,7 @@ class EditUser extends React.Component {
     } else {
       this.props.addSettingUser(user)
     }
-    this.props.history.push(`/settings/users`)
+    // this.props.history.push(`/settings/users`)
   }
   onCheckRole (role) {
     const value = role.name
@@ -157,12 +169,6 @@ class EditUser extends React.Component {
                 </CardPanel>
               </div>
             </div>
-
-            <div>
-              <div className="col-md-12">
-                <SubmitBlock name="Save"/>
-              </div>
-            </div>
           </form>
         </TabPageBody>
       </TabPage>
@@ -173,6 +179,8 @@ class EditUser extends React.Component {
 export default connect(
   state => ({
     initialValues: state.settings.editUser,
+    formValues: formValueSelector('userEditForm')(state,
+      'username', 'fullname', 'password', 'email', 'phone', 'defaultMapId', 'enabled'),
     validate: validate
   })
 )(reduxForm({form: 'userEditForm'})(EditUser))

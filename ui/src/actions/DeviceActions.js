@@ -1,5 +1,6 @@
 import axios from 'axios'
 import {assign, findIndex} from 'lodash'
+import { submit } from 'redux-form'
 import {
   FETCH_DEVICES,
   FETCH_DEVICES_GROUPS,
@@ -138,6 +139,12 @@ import { getAuthConfig, getWorkflowConfig } from './util'
 
 import {addDeviceCredential} from './CredentialsActions'
 import {resolveAddr} from 'shared/HostUtil'
+
+export const submitForm = (form) => {
+  return dispatch => {
+    dispatch(submit(form))
+  }
+}
 
 export const fetchDevice = (id) => {
   if (!window.localStorage.getItem('token')) {
