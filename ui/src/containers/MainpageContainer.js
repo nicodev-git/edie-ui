@@ -218,7 +218,7 @@ class MainpageContainer extends Component {
           <Route path="/dashboard" component={MainDashboardContainer} exact/>
           <Route path="/dashboard/servers/addrange" component={ServerRangeContainer}/>
           <Route path="/dashboard/servers/:id/edit" component={EditServerContainer}/>
-          <Route path="/dashboard/serverdetail/:id" component={ServerDetailContainer}/>
+          <Route path="/dashboard/servers/:id/detail" component={ServerDetailContainer}/>
           <Route path="/dashboard/:id" component={MainDashboardContainer}/>
           <Route path="/addserver" component={AddServerContainer}/>
           <Route path="/addappliance" component={AddApplianceContainer}/>
