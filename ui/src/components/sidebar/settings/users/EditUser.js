@@ -46,7 +46,7 @@ class EditUser extends React.Component {
   }
 
   submitForm () {
-    this.props.handleFormSubmit(this.props.formValues)
+    this.handleFormSubmit(this.props.formValues)
   }
 
   handleFormSubmit (values) {
@@ -55,12 +55,7 @@ class EditUser extends React.Component {
       roles: selectedRoles,
       permissions: selectedPermissions
     })
-    if (editUser) {
-      this.props.updateSettingUser(user)
-    } else {
-      this.props.addSettingUser(user)
-    }
-    // this.props.history.push(`/settings/users`)
+    this.props.updateSettingUser(user, true)
   }
   onCheckRole (role) {
     const value = role.name
@@ -138,8 +133,10 @@ class EditUser extends React.Component {
                           onClick={() => this.setState({selectedRole: r})}
                           className={selectedRole && selectedRole.id === r.id ? 'selected' : ''}>
                         <td>
-                          <Checkbox label={r.name} checked={selectedRoles.includes(r.name)}
-                                    onCheck={this.onCheckRole.bind(this, r)}/>
+                          <div className="inline-block valign-middle">
+                            <Checkbox checked={selectedRoles.includes(r.name)} onCheck={this.onCheckRole.bind(this, r)}/>
+                          </div>
+                          <label className="valign-middle">{r.name}</label>
                         </td>
                       </tr>
                     )}

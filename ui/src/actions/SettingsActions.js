@@ -240,22 +240,23 @@ const addSettingUserSuccess = (dispatch, response) => {
   dispatch(closeSettingUserModal())
 }
 
-export const updateSettingUser = (entity) => {
+export const updateSettingUser = (entity, keepModal) => {
   if (!window.localStorage.getItem('token')) {
     return dispatch => dispatch({ type: NO_AUTH_ERROR })
   }
   return (dispatch) => {
     axios.put(entity._links.self.href, entity)
-      .then(response => updateSettingUserSuccess(dispatch, response))
+      .then(response => updateSettingUserSuccess(dispatch, response, keepModal))
       .catch(error => apiError(dispatch, error))
   }
 }
 
-const updateSettingUserSuccess = (dispatch, response) => {
+const updateSettingUserSuccess = (dispatch, response, keepModal) => {
   dispatch({
     type: UPDATE_SETTING_USER,
     data: response.data
   })
+  if (keepModal) return
   dispatch(closeSettingUserModal())
   dispatch(closeUserPasswordModal())
 }
