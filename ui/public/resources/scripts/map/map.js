@@ -172,25 +172,6 @@ var mapObject = {
         removes[i].line && removes[i].line.updatePosition(obj)
       }
 
-      //Tweak
-      // if (removes.length > 0) {
-      //   for (i = 0; i < removes.length; i++) {
-      //     var object = removes[i];
-      //     obj._moveFlippedObject(object);
-      //   }
-      //
-      //   obj._restoreObjectsState();
-      //   obj.forEachObject(obj._setObjectActive, obj);
-      //
-      //   for (i = 0; i < removes.length; i++) {
-      //     var object = removes[i];
-      //     obj.remove(object);
-      //   }
-      //
-      //   obj._calcBounds();
-      //   obj._updateObjectsCoords();
-      // }
-
       if(objects.length == 0) {
         me.onSelectionCleared(ev);
       }
