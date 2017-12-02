@@ -68,7 +68,9 @@ export default connect(
     editGauge: state.gauge.editGauge,
     gaugePickerOpen: state.gauge.gaugePickerOpen,
 
-    workflowDraw: state.settings.workflowDraw
+    workflowDraw: state.settings.workflowDraw,
+
+    userInfo: state.dashboard.userInfo
   }), {
     fetchGauges,
     fetchCredTypes,

@@ -17,3 +17,10 @@ export const rolePermissions = [
   'EditServer'
 ]
 
+
+export function hasPermission(user, permission) {
+  if (!(user && user.permissions && user.permissions.includes(permission))) {
+    return false
+  }
+  return true
+}

@@ -29,6 +29,7 @@ import { guid, getWidgetSize, layoutCols, layoutRowHeight, layoutWidthZoom, layo
 
 import {showConfirm, showAlert} from 'components/common/Alert'
 import {resolveAddr} from 'shared/HostUtil'
+import {hasPermission} from 'shared/Permission'
 
 const ResponsiveReactGridLayout = WidthProvider(Responsive)
 
@@ -116,8 +117,13 @@ export default class MainControl extends React.Component {
   }
 
   getGauges () {
+    const {userInfo} = this.props
     const device = this.getDevice()
-    return device.gauges || []
+    let gauges = device.gauges || []
+    if (!hasPermission(userInfo, 'CommandLine')) {
+      gauges = gauges.filter(p => p.templateName !== 'Command')
+    }
+    return gauges
   }
 
   onClickMenuItem (tpl) {
