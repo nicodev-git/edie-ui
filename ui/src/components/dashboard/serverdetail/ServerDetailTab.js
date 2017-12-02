@@ -1,30 +1,30 @@
 export default (deviceId, templateName) => {
   const items = [{
     title: 'Main',
-    path: `/dashboard/serverdetail/${deviceId}`
+    path: `/dashboard/servers/${deviceId}/detail`
   }, {
     title: 'Event Logs',
-    path: `/dashboard/serverdetail/${deviceId}/eventlog`,
+    path: `/dashboard/servers/${deviceId}/detail/eventlog`,
     exclude: ['Linux Server']
   }, {
     title: 'Applications',
-    path: `/dashboard/serverdetail/${deviceId}/app`,
+    path: `/dashboard/servers/${deviceId}/detail/app`,
     exclude: ['Linux Server']
   }, {
     title: 'Processes',
-    path: `/dashboard/serverdetail/${deviceId}/process`
+    path: `/dashboard/servers/${deviceId}/detail/process`
   }, {
     title: 'Services',
-    path: `/dashboard/serverdetail/${deviceId}/service`
+    path: `/dashboard/servers/${deviceId}/detail/service`
   }, {
     title: 'Users',
-    path: `/dashboard/serverdetail/${deviceId}/user`
+    path: `/dashboard/servers/${deviceId}/detail/user`
   }, {
     title: 'Firewall',
-    path: `/dashboard/serverdetail/${deviceId}/firewall`
+    path: `/dashboard/servers/${deviceId}/detail/firewall`
   }, {
     title: 'Network',
-    path: `/dashboard/serverdetail/${deviceId}/network`
+    path: `/dashboard/servers/${deviceId}/detail/network`
   }]
 
   if (templateName) {

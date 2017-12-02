@@ -50,14 +50,14 @@ export default class ServerDetail extends React.Component {
     if (!device) return <RefreshOverlay/>
     return (
       <Switch>
-        <Route path="/dashboard/serverdetail/:id" exact component={MainControl}/>
-        <Route path="/dashboard/serverdetail/:id/eventlog" component={EventLogs}/>
-        <Route path="/dashboard/serverdetail/:id/app" component={Apps}/>
-        <Route path="/dashboard/serverdetail/:id/process" component={Processes}/>
-        <Route path="/dashboard/serverdetail/:id/service" component={Services}/>
-        <Route path="/dashboard/serverdetail/:id/user" component={Users}/>
-        <Route path="/dashboard/serverdetail/:id/firewall" component={Firewall}/>
-        <Route path="/dashboard/serverdetail/:id/network" component={Network}/>
+        <Route path="/dashboard/servers/:id/detail" exact component={MainControl}/>
+        <Route path="/dashboard/servers/:id/detail/eventlog" component={EventLogs}/>
+        <Route path="/dashboard/servers/:id/detail/app" component={Apps}/>
+        <Route path="/dashboard/servers/:id/detail/process" component={Processes}/>
+        <Route path="/dashboard/servers/:id/detail/service" component={Services}/>
+        <Route path="/dashboard/servers/:id/detail/user" component={Users}/>
+        <Route path="/dashboard/servers/:id/detail/firewall" component={Firewall}/>
+        <Route path="/dashboard/servers/:id/detail/network" component={Network}/>
       </Switch>
     )
   }
