@@ -161,6 +161,19 @@ export const fetchDevice = (id) => {
   }
 }
 
+export const fetchDeviceByName = (name) => {
+  return (dispatch) => {
+    axios.get(`${ROOT_URL}/device/search/findByName`, {
+      params: { name }
+    }).then(response => dispatch(fetchDeviceSuccess(response))).catch(() => {
+        axios.get(`${ROOT_URL}/group/search/findByName`, {
+          params: {name}
+        }).then(response => dispatch(fetchDeviceSuccess(response)))
+          .catch(error => apiError(dispatch, error))
+    })
+  }
+}
+
 const fetchDeviceSuccess = (response) => {
   return dispatch => {
     dispatch({type: FETCH_DEVICES, payload: [response.data]})
