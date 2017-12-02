@@ -59,7 +59,9 @@ export default connect(
   state => ({
     installAgents: state.settings.installAgents,
     device: state.dashboard.selectedDevice,
-    devices: state.devices.devices
+    devices: state.devices.devices,
+
+    userInfo: state.dashboard.userInfo
   }), {
     fetchDevicesGroups,
     fetchDevice,
