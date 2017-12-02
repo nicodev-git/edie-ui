@@ -95,6 +95,8 @@ import {
   SCAN_RANGE,
   UPDATE_SCAN_STATUS,
 
+  UPDATE_SETTING_USER,
+
   API_ERROR
 } from 'actions/types'
 
@@ -278,6 +280,17 @@ export default function (state = initialState, action) {
 
     case UPDATE_USER_INFO:
       return { ...state, userInfo: action.data }
+
+    case UPDATE_SETTING_USER: {
+      let {userInfo} = state
+      if (userInfo && userInfo.id === action.data.id) {
+        userInfo = {
+          ...userInfo,
+          ...action.data
+        }
+      }
+      return { ...state, userInfo }
+    }
 
     case OPEN_PROFILE_MODAL:
       return { ...state, profileModalVisible: true, profileImg: null }

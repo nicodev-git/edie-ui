@@ -24,7 +24,9 @@ export default connect(
     deviceTemplates: state.settings.deviceTemplates,
 
     addDeviceError: state.devices.addDeviceError,
-    addingDevice: state.devices.addingDevice
+    addingDevice: state.devices.addingDevice,
+
+    userInfo: state.dashboard.userInfo
   }), {
     fetchDeviceTemplates,
     fetchMonitorTemplates,

@@ -20,6 +20,11 @@ export default class AddServer extends React.Component {
     }
   }
   componentWillMount () {
+    const {userInfo} = this.props
+    if (!(userInfo && userInfo.permissions && userInfo.permissions.includes('AddServer'))) {
+      this.props.history.push('/')
+      return
+    }
     this.props.fetchDeviceTemplates()
     this.props.fetchMonitorTemplates()
   }
