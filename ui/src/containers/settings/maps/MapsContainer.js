@@ -37,7 +37,9 @@ export default connect(
     editMap: state.settings.editMap,
 
     mapUsers: state.settings.mapUsers,
-    users: state.settings.users
+    users: state.settings.users,
+
+    userInfo: state.dashboard.userInfo
   }),
   dispatch => ({
     ...bindActionCreators({

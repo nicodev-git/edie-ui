@@ -11,6 +11,7 @@ import SettingTabs from '../SettingTabs'
 import TabPage from 'components/common/TabPage'
 import TabPageBody from 'components/common/TabPageBody'
 import TabPageHeader from 'components/common/TabPageHeader'
+import {hasPermission} from 'shared/Permission'
 
 export default class Maps extends React.Component {
   constructor (props) {
@@ -41,14 +42,14 @@ export default class Maps extends React.Component {
     this.props.fetchSettingMaps()
   }
 
-  renderContent () {
+  renderContent (canEdit) {
     return (
       <InfiniteTable
         cells={this.cells}
         ref="maps"
         rowMetadata={{'key': 'id'}}
         selectable
-        onRowDblClick={this.onMapEdit.bind(this)}
+        onRowDblClick={canEdit ? this.onMapEdit.bind(this) : null}
 
         useExternal={false}
         data={this.props.maps}
@@ -104,21 +105,25 @@ export default class Maps extends React.Component {
   }
 
   render () {
+    const {userInfo} = this.props
+    const canAdd = hasPermission(userInfo, 'AddMap')
+    const canEdit = hasPermission(userInfo, 'EditMap')
+
     return (
       <TabPage>
         <TabPageHeader title="Settings">
           <div className="text-center margin-md-top">
             <div style={{position: 'absolute', right: '25px'}}>
-              <RaisedButton label="Add Map" onTouchTap={this.onMapAdd.bind(this)}/>&nbsp;
-              <RaisedButton label="Edit Map" onTouchTap={this.onMapEdit.bind(this)}/>&nbsp;
-              <RaisedButton label="Delete Map" onTouchTap={this.onMapDelete.bind(this)}/>&nbsp;
+              <RaisedButton label="Add Map" onTouchTap={this.onMapAdd.bind(this)} className={canAdd ? '' : 'hidden'}/>&nbsp;
+              <RaisedButton label="Edit Map" onTouchTap={this.onMapEdit.bind(this)} className={canEdit ? '' : 'hidden'}/>&nbsp;
+              <RaisedButton label="Delete Map" onTouchTap={this.onMapDelete.bind(this)} className={canEdit ? '' : 'hidden'}/>&nbsp;
               <RaisedButton label="Edit Map Users" onTouchTap={this.onMapUsers.bind(this)} className="hidden"/>&nbsp;
             </div>
           </div>
         </TabPageHeader>
 
         <TabPageBody tabs={SettingTabs} tab={2} tclass="small-table" history={this.props.history} location={this.props.location} transparent>
-          {this.renderContent()}
+          {this.renderContent(canEdit)}
           {this.renderMapModal()}
           {this.renderMapUsersModal()}
         </TabPageBody>
