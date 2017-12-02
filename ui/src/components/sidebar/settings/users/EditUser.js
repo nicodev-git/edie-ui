@@ -50,14 +50,22 @@ class EditUser extends React.Component {
     }
     this.props.history.push(`/settings/users`)
   }
-  onCheckRole (value) {
-    let {selectedRoles} = this.props
+  onCheckRole (role) {
+    const value = role.name
+    const checked = role.defaultChecked || []
+
+    let {selectedRoles, selectedPermissions} = this.props
     if (selectedRoles.includes(value)) {
       selectedRoles = selectedRoles.filter(p => p !== value)
+      selectedPermissions = selectedPermissions.filter(p => !checked.includes(p))
     } else {
       selectedRoles = [...selectedRoles, value]
+      checked.forEach(p => {
+        if (!selectedPermissions.includes(p)) selectedPermissions = [...selectedPermissions, p]
+      })
     }
     this.props.selectUserRoles(selectedRoles)
+    this.props.selectUserPermissions(selectedPermissions)
   }
   onChangeRole (e, index, values) {
     this.props.selectUserRoles(values)
@@ -119,7 +127,7 @@ class EditUser extends React.Component {
                           className={selectedRole && selectedRole.id === r.id ? 'selected' : ''}>
                         <td>
                           <Checkbox label={r.name} checked={selectedRoles.includes(r.name)}
-                                    onCheck={this.onCheckRole.bind(this, r.name)}/>
+                                    onCheck={this.onCheckRole.bind(this, r)}/>
                         </td>
                       </tr>
                     )}
