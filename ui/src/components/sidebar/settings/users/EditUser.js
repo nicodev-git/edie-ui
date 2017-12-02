@@ -73,9 +73,7 @@ class EditUser extends React.Component {
     }
     this.props.selectUserRoles(selectedRoles)
     this.props.selectUserPermissions(selectedPermissions)
-  }
-  onChangeRole (e, index, values) {
-    this.props.selectUserRoles(values)
+    this.debSave()
   }
 
   onCheckPermission (value) {
@@ -86,9 +84,7 @@ class EditUser extends React.Component {
       selectedPermissions = [...selectedPermissions, value]
     }
     this.props.selectUserPermissions(selectedPermissions)
-  }
-  onChangePermission (e, index, values) {
-    this.props.selectUserPermissions(values)
+    this.debSave()
   }
 
   render () {
