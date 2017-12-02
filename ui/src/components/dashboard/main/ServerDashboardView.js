@@ -67,7 +67,7 @@ export default class ServerDashboardView extends React.Component {
   }
 
   onClickServer (server) {
-    this.props.history.push(`/dashboard/servers/${server.id}/detail`)
+    this.props.history.push(`/dashboard/servers/${server.name}/detail`)
   }
 
   onClickDeleteServer (server) {
