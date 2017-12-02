@@ -1,6 +1,10 @@
 export const rolePermissions = [
   'Dashboard',
+
   'Map',
+  'AddMap',
+  'EditMap',
+
   'Servers',
   'Workflows',
   'Apps',
