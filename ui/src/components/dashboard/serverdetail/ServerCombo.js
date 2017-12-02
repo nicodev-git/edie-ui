@@ -8,11 +8,9 @@ export default class ServerCombo extends React.Component {
     return (allDevices).filter(p => (p.tags || []).includes('Server'))
   }
   onChangeValue (e, index, value) {
-    // const {allDevices} = this.props
-    // const i = findIndex(allDevices, {id: value})
-
+    const device = this.getServers()[index]
     this.props.fetchDevice(value)
-    this.props.history.push(`/dashboard/servers/${value}/detail`)
+    this.props.history.push(`/dashboard/servers/${device.name}/detail`)
   }
 
   render () {

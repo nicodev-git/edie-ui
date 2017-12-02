@@ -15,13 +15,13 @@ import Network from 'containers/dashboard/serverdetail/NetworkContainer'
 import RefreshOverlay from 'components/common/RefreshOverlay'
 
 export default class ServerDetail extends React.Component {
-  getDeviceId () {
-    return this.props.match.params.id
+  getDeviceName () {
+    return this.props.match.params.name
   }
 
   findDevice (props) {
     const {devices} = props
-    const index = findIndex(devices, {id: props.match.params.id})
+    const index = findIndex(devices, {name: props.match.params.name})
     if (index < 0) return null
     return devices[index]
   }
@@ -31,7 +31,7 @@ export default class ServerDetail extends React.Component {
   }
 
   componentWillMount () {
-    this.props.fetchDevice(this.getDeviceId())
+    this.props.fetchDeviceByName(this.getDeviceName())
     this.props.fetchDevicesGroups()
     this.props.openDevice(this.getDevice())
   }
@@ -50,14 +50,14 @@ export default class ServerDetail extends React.Component {
     if (!device) return <RefreshOverlay/>
     return (
       <Switch>
-        <Route path="/dashboard/servers/:id/detail" exact component={MainControl}/>
-        <Route path="/dashboard/servers/:id/detail/eventlog" component={EventLogs}/>
-        <Route path="/dashboard/servers/:id/detail/app" component={Apps}/>
-        <Route path="/dashboard/servers/:id/detail/process" component={Processes}/>
-        <Route path="/dashboard/servers/:id/detail/service" component={Services}/>
-        <Route path="/dashboard/servers/:id/detail/user" component={Users}/>
-        <Route path="/dashboard/servers/:id/detail/firewall" component={Firewall}/>
-        <Route path="/dashboard/servers/:id/detail/network" component={Network}/>
+        <Route path="/dashboard/servers/:name/detail" exact component={MainControl}/>
+        <Route path="/dashboard/servers/:name/detail/eventlog" component={EventLogs}/>
+        <Route path="/dashboard/servers/:name/detail/app" component={Apps}/>
+        <Route path="/dashboard/servers/:name/detail/process" component={Processes}/>
+        <Route path="/dashboard/servers/:name/detail/service" component={Services}/>
+        <Route path="/dashboard/servers/:name/detail/user" component={Users}/>
+        <Route path="/dashboard/servers/:name/detail/firewall" component={Firewall}/>
+        <Route path="/dashboard/servers/:name/detail/network" component={Network}/>
       </Switch>
     )
   }

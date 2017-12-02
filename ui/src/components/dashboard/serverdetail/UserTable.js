@@ -10,16 +10,12 @@ import { layoutWidthZoom, layoutHeightZoom } from 'shared/Global'
 import GridLayout from './GridLayout'
 
 export default class UserTable extends React.Component {
-  getDeviceId () {
-    return this.props.match.params.id
-  }
-
   getGauges () {
     return [{
       id: 'basic0',
       name: 'Users',
       templateName: 'Users',
-      deviceId: this.getDeviceId(),
+      deviceId: this.props.device.id,
       gaugeSize: 'custom',
       layout: {
         i: 'basic0',
@@ -44,7 +40,7 @@ export default class UserTable extends React.Component {
         <TabPageHeader title="Users" useToolBar titleOptions={<StatusImg {...this.props} device={device}/>}>
           {/*{this.renderOptions()}*/}
         </TabPageHeader>
-        <TabPageBody tabs={ServerDetailTab(device.id, device.templateName)} history={this.props.history} location={this.props.location} transparent>
+        <TabPageBody tabs={ServerDetailTab(device.name, device.templateName)} history={this.props.history} location={this.props.location} transparent>
           {this.renderBody()}
         </TabPageBody>
       </TabPage>

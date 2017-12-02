@@ -105,13 +105,13 @@ export default class MainControl extends React.Component {
 
   //////////////////////////////////////////////////////////////////////////////////////////////
 
-  getDeviceId () {
-    return this.props.match.params.id
+  getDeviceName () {
+    return this.props.match.params.name
   }
 
   getDevice () {
     const {devices} = this.props
-    const index = findIndex(devices, {id: this.getDeviceId()})
+    const index = findIndex(devices, {name: this.getDeviceName()})
     if (index < 0) return null
     return devices[index]
   }
@@ -144,7 +144,7 @@ export default class MainControl extends React.Component {
       name: tpl.name,
       templateName: tpl.name,
       gaugeSize: options.gaugeSize,
-      deviceId: this.getDeviceId()
+      deviceId: this.getDevice().id
     }, options)
   }
 
@@ -562,7 +562,7 @@ export default class MainControl extends React.Component {
           </ToolbarGroup>
         </TabPageHeader>
         <TabPageBody
-          tabs={ServerDetailTab(device.id, device.templateName)}
+          tabs={ServerDetailTab(device.name, device.templateName)}
           history={this.props.history} location={this.props.location} transparent>
           {this.renderGrid()}
           {this.renderDeviceEditModal()}

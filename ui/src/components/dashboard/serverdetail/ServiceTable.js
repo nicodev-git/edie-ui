@@ -10,16 +10,12 @@ import GridLayout from './GridLayout'
 import StatusImg from './StatusImg'
 
 export default class ServiceTable extends React.Component {
-  getDeviceId () {
-    return this.props.match.params.id
-  }
-
   getGauges () {
     return [{
       id: 'basic0',
       name: 'Services',
       templateName: 'Services',
-      deviceId: this.getDeviceId(),
+      deviceId: this.props.device.id,
       gaugeSize: 'custom',
       layout: {
         i: 'basic0',
@@ -43,7 +39,7 @@ export default class ServiceTable extends React.Component {
       <TabPage>
         <TabPageHeader title="Service" useToolBar titleOptions={<StatusImg {...this.props} device={device}/>}>
         </TabPageHeader>
-        <TabPageBody tabs={ServerDetailTab(device.id, device.templateName)} history={this.props.history} location={this.props.location} transparent>
+        <TabPageBody tabs={ServerDetailTab(device.name, device.templateName)} history={this.props.history} location={this.props.location} transparent>
           {this.renderBody()}
         </TabPageBody>
       </TabPage>
