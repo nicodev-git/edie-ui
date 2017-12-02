@@ -11,7 +11,7 @@ import TabPageHeader from 'components/common/TabPageHeader' // Never used
 
 import {defaultDateFormat} from 'shared/Global'
 import {CardPanel} from 'components/modal/parts'
-import {mainMenu} from 'components/sidebar/Config'
+import {rolePermissions} from 'shared/Permission'
 
 const rowStyle = {
   width: '100%',
@@ -334,17 +334,16 @@ export default class General extends React.Component {
             </tr>
             </thead>
             <tbody>
-            {mainMenu.map(p =>
-              <tr key={p.id}>
+            {rolePermissions.map(p =>
+              <tr key={p}>
                 <td>
-                  {p.title}
+                  {p}
                 </td>
                 {roles.map(r =>
                   <td key={r.id}>
                     <Checkbox
-                      label="" checked={p.fixed || r.permissions.includes(p.roleMenuId)}
-                      onCheck={this.onCheckDashboardMenu.bind(this, r, p.roleMenuId)}
-                      disabled={p.fixed}
+                      label="" checked={r.permissions.includes(p)}
+                      onCheck={this.onCheckDashboardMenu.bind(this, r, p)}
                     />
                   </td>
                 )}

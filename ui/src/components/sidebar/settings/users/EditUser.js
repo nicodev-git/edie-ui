@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 import {Checkbox, RaisedButton} from 'material-ui'
 import { Field } from 'redux-form'
 import { FormInput, FormSelect, FormCheckbox, SubmitBlock, CardPanel } from 'components/modal/parts'
-import {mainMenu} from 'components/sidebar/Config'
+import {rolePermissions} from 'shared/Permission'
 import { validate } from 'components/modal/validation/NameValidation'
 import TabPage from 'components/common/TabPage'
 import TabPageBody from 'components/common/TabPageBody'
@@ -135,12 +135,12 @@ class EditUser extends React.Component {
                 <CardPanel title="Permissions">
                   <table className="table table-hover">
                     <tbody>
-                    {mainMenu.map(p =>
-                      <tr key={p.id}
-                          className={!selectedRole || selectedRole.permissions.includes(p.roleMenuId) ? '' : 'hidden'}>
+                    {rolePermissions.map(p =>
+                      <tr key={p}
+                          className={!selectedRole || selectedRole.permissions.includes(p) ? '' : 'hidden'}>
                         <td>
-                          <Checkbox label={p.title} checked={permissions.includes(p.roleMenuId)}
-                                    onCheck={this.onCheckPermission.bind(this, p.roleMenuId)}/>
+                          <Checkbox label={p} checked={permissions.includes(p)}
+                                    onCheck={this.onCheckPermission.bind(this, p)}/>
                         </td>
                       </tr>
                     )}
