@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { MapMenu, ToolbarOptions, LineTypesMenu } from './index'
 import NewIncidentModal from '../NewIncidentModal'
 import { lineTypes } from 'shared/Global'
+import {hasPermission} from 'shared/Permission'
 
 export default class Toolbar extends Component {
   constructor (props) {
@@ -152,6 +153,7 @@ export default class Toolbar extends Component {
   }
 
   render () {
+    const {userInfo} = this.props
     const cmap = this.props.cmap
     const obj = this.props.selectedObj
     const line = obj ? cmap.selectedLine() : null
@@ -174,6 +176,7 @@ export default class Toolbar extends Component {
     }
     const lineTypes = this.renderLineTypes(popover, cover)
 
+    const canEdit = hasPermission(userInfo, 'EditMap')
     return (
       <div className={`map-toolbar p-none ${this.state.headerCollapsed ? 'collapsed' : ''}`}>
         <MapMenu {...this.props}/>
@@ -199,6 +202,7 @@ export default class Toolbar extends Component {
           cover={cover}
           isPickerDisplayed={this.state.displayColorPicker}
           isDevicesDisplayed={this.state.displayDevices}
+          canEdit={canEdit}
           {...this.props}
         />
         {this.renderNewIncidentModal()}

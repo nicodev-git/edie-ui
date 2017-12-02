@@ -20,6 +20,7 @@ const iconStyle = {
 
 class ToolbarOptions extends Component {
   render () {
+    const {canEdit} = this.props
     return (
       <div className="panel-options main-map-options toolbar-options" style={{top: '0px'}}>
         <ColorPicker
@@ -70,10 +71,10 @@ class ToolbarOptions extends Component {
         </IconButton>
 
         <DeleteObject obj={this.props.obj} onDelete={this.props.onClickDelete}/>
-        <EditMapMenu
+        {canEdit && <EditMapMenu
           onEdit={this.props.onMapEdit}
-          onUndo={this.props.onEditMapUndo}/>
-        <DeviceMenuContainer {...this.props}/>
+          onUndo={this.props.onEditMapUndo}/>}
+        {canEdit && <DeviceMenuContainer {...this.props}/>}
         <TextChange
           text={this.props.text}
           onChange={this.props.onClickAlignLeft}
