@@ -169,7 +169,9 @@ var mapObject = {
 
       for (i = 0; i < removes.length; i++) {
         obj.removeWithUpdate(removes[i]);
+        removes[i].line && removes[i].line.updatePosition(obj)
       }
+
       //Tweak
       // if (removes.length > 0) {
       //   for (i = 0; i < removes.length; i++) {

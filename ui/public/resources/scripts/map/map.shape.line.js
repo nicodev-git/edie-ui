@@ -160,6 +160,7 @@ fabric.ShapeLine = fabric.util.createClass(fabric.Object, {
       y1: startY,
       x2: endX,
       y2: endY,
+      dirty: true
     });
     step.updatePosition(null, group);
     step.anim && step.anim.updatePosition();
