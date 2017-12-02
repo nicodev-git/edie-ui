@@ -72,7 +72,10 @@ class UserModal extends React.Component {
 
 export default connect(
   state => ({
-    initialValues: state.settings.editUser,
+    initialValues: {
+      enabled: true,
+      ...state.settings.editUser
+    },
     validate: validate
   })
 )(reduxForm({form: 'userEditForm'})(UserModal))

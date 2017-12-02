@@ -10,7 +10,6 @@ import SettingAudit from 'containers/settings/audit/AuditContainer'
 import SettingTags from 'components/sidebar/settings/tag/TagRoutes'
 import SettingUsers from 'components/sidebar/settings/users/UserRoutes'
 import SettingCollectors from 'components/sidebar/settings/collector/CollectorRoutes'
-import EditUser from 'containers/settings/users/EditUserContainer'
 
 class Settings extends React.Component {
   render () {
@@ -20,8 +19,7 @@ class Settings extends React.Component {
         <Route path="/settings/collectors" component={SettingCollectors} />
         <Route path="/settings/tags" component={SettingTags}/>
         <Route path="/settings/maps" component={SettingMapsContainer} />
-        <Route path="/settings/users" component={SettingUsers} exact/>
-        <Route path="/settings/users/:user/edit" component={EditUser}/>
+        <Route path="/settings/users" component={SettingUsers}/>
         <Route path="/settings/identities" component={SettingIdentitiesContainer} />
         <Route path="/settings/audit" component={SettingAudit} />
         <Route path="/settings/advanced" component={SettingAdvancedContainer} />
