@@ -314,7 +314,7 @@ export default class General extends React.Component {
     const {roles} = this.props
     return (
       <CardPanel title="Menu">
-        <div style={{minHeight: 400}}>
+        <div style={{minHeight: 400, overflow: 'auto'}}>
           <div>
             <SelectField
               value={this.getUserOptionValue('defaultPage', 'dashboard')}
