@@ -10,6 +10,8 @@ import BoardListModal from './BoardListModal'
 import WorkflowDashboardView from './WorkflowDashboardView'
 import AppsDashboardView from './AppsDashboardView'
 
+import {hasPermission} from 'shared/Permission'
+
 export default class MainDashboard extends React.Component {
   componentWillMount () {
     this.props.selectGaugeBoard(null)
@@ -114,7 +116,7 @@ export default class MainDashboard extends React.Component {
     )
   }
 
-  renderTopbar () {
+  renderTopbar (canEdit) {
     const board = this.getSelected()
     if (!board) return null
     if (board.type === 'system') {
@@ -132,14 +134,16 @@ export default class MainDashboard extends React.Component {
             <MenuItem key={p.id} value={p.id} primaryText={p.name}/>
           )}
         </SelectField>
-        <IconButton onTouchTap={this.onClickAdd.bind(this)} className="valign-bottom"><AddCircleIcon /></IconButton>
+        {canEdit && <IconButton onTouchTap={this.onClickAdd.bind(this)} className="valign-bottom"><AddCircleIcon /></IconButton>}
       </div>
     )
   }
   render () {
+    const {userInfo} = this.props
+    const canEdit = hasPermission(userInfo, 'EditDashboard')
     return (
       <div className="tabs-custom flex-vertical flex-1">
-        {this.renderTopbar()}
+        {this.renderTopbar(canEdit)}
 
         <div className="flex-vertical flex-1">
           {this.renderContent()}

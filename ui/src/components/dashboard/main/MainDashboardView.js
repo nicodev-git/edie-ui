@@ -17,7 +17,6 @@ import {showAlert} from 'components/common/Alert'
 import GaugeModal from 'components/common/gauge/GaugeModal'
 import GaugeMap from 'components/common/gauge/GaugeMap'
 import GaugePicker from 'components/common/gauge/GaugePicker'
-
 const ResponsiveReactGridLayout = WidthProvider(Responsive)
 
 export default class MainDashboardView extends React.Component {
@@ -430,9 +429,10 @@ export default class MainDashboardView extends React.Component {
   }
 
   render () {
+    const {canEdit} = this.props
     return (
       <div>
-        {this.renderAddMenu()}
+        {canEdit && this.renderAddMenu()}
         {this.renderGrid()}
 
         {this.renderGaugePicker()}
