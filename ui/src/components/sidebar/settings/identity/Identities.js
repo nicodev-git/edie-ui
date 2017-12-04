@@ -15,6 +15,7 @@ import { errorStyle, inputStyle, underlineStyle } from 'style/common/materialSty
 
 import IdentityModal from './IdentityModal'
 import SegmentListModal from './SegmentListModal'
+import {hasPermission} from "../../../../shared/Permission";
 
 export default class Identities extends React.Component {
   constructor (props) {
@@ -105,15 +106,19 @@ export default class Identities extends React.Component {
   }
 
   render () {
+    const {userInfo} = this.props
+    const canEdit = hasPermission(userInfo, 'EditSettings')
     return (
       <TabPage>
         <TabPageHeader title="Settings">
           <div className="text-center margin-md-top">
-            <div className="pull-right">
-              <RaisedButton label="Add" onTouchTap={this.onAddIdentity.bind(this)}/>&nbsp;
-              <RaisedButton label="Edit" onTouchTap={this.onEditIdentity.bind(this)}/>&nbsp;
-              <RaisedButton label="Remove" onTouchTap={this.onRemoveIdentity.bind(this)}/>&nbsp;
-            </div>
+            {canEdit ? (
+              <div className="pull-right">
+                <RaisedButton label="Add" onTouchTap={this.onAddIdentity.bind(this)}/>&nbsp;
+                <RaisedButton label="Edit" onTouchTap={this.onEditIdentity.bind(this)}/>&nbsp;
+                <RaisedButton label="Remove" onTouchTap={this.onRemoveIdentity.bind(this)}/>&nbsp;
+              </div>
+            ) : null}
 
             <div className="inline-block">
               <TextField

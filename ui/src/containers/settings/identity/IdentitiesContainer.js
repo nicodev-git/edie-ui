@@ -23,7 +23,8 @@ export default connect(
   state => ({
     identities: state.settings.identities,
     editIdentity: state.settings.editIdentity,
-    identityModalVisible: state.settings.identityModalVisible
+    identityModalVisible: state.settings.identityModalVisible,
+    userInfo: state.dashboard.userInfo
   }),
   dispatch => ({
     ...bindActionCreators({
