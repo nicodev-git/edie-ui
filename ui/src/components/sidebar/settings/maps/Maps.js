@@ -106,8 +106,9 @@ export default class Maps extends React.Component {
 
   render () {
     const {userInfo} = this.props
-    const canAdd = hasPermission(userInfo, 'AddMap')
-    const canEdit = hasPermission(userInfo, 'EditMap')
+    const canSetting = hasPermission(userInfo, 'EditSettings')
+    const canAdd = canSetting && hasPermission(userInfo, 'AddMap')
+    const canEdit = canSetting && hasPermission(userInfo, 'EditMap')
 
     return (
       <TabPage>

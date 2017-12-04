@@ -12,6 +12,7 @@ import TabPageHeader from 'components/common/TabPageHeader'
 
 import CollectorModal from './CollectorModal'
 import {showAlert, showConfirm} from 'components/common/Alert'
+import {hasPermission} from "../../../../shared/Permission";
 
 export default class Collectors extends React.Component {
   constructor (props) {
@@ -91,12 +92,15 @@ export default class Collectors extends React.Component {
     )
   }
   render () {
+    const {userInfo} = this.props
+    const canEdit = hasPermission(userInfo, 'EditSettings')
     return (
       <TabPage>
         <TabPageHeader title="Settings">
           <div className="text-center margin-md-top">
             <div className="pull-right">
-              <RaisedButton label="Remove" onTouchTap={this.onClickRemove.bind(this)}/>&nbsp;
+              {canEdit && <RaisedButton label="Remove" onTouchTap={this.onClickRemove.bind(this)}/>}
+              &nbsp;
               <CollectorTabs history={this.props.history}/>
             </div>
           </div>

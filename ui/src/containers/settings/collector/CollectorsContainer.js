@@ -22,7 +22,9 @@ export default connect(
   state => ({
     collectorDraw: state.settings.collectorDraw,
     collectorModalOpen: state.settings.collectorModalOpen,
-    editCollector: state.settings.editCollector
+    editCollector: state.settings.editCollector,
+
+    userInfo: state.dashboard.userInfo
   }),{
     showCollectorModal,
     addCollector,
