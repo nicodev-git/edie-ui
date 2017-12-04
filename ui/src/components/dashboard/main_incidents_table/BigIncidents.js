@@ -10,6 +10,7 @@ import { showIncidentRaw, showIncidentComments } from 'components/common/inciden
 import BigIncidentsView from './BigIncidentsView'
 
 import InfiniteTable from 'components/common/InfiniteTable'
+import {hasPermission} from 'shared/Permission'
 
 class BigIncidents extends Component {
   constructor (props) {
@@ -46,16 +47,17 @@ class BigIncidents extends Component {
       'cssClassName': 'width-180',
       'customComponent': (p) => {
         const row = p.rowData
-        // setTimeout(() => {
-        //   ReactTooltip.rebuild()
-        // }, 1)
+
+        const {userInfo} = this.props
+        const canEdit = hasPermission(userInfo, 'EditIncidents')
+
         return (
           <div className = "table-icons-container">
-            <div onClick={() => { this.props.ackIncident(row) }}>
+            <div onClick={canEdit ? () => this.props.ackIncident(row) : null}>
               {row.acknowledged ? thumbup : thumpdown}
             </div>
 
-            <div onClick={() => { this.props.fixIncident(row) }}>
+            <div onClick={canEdit ? () => this.props.fixIncident(row) : null}>
               {row.fixed ? done : notdone}
             </div>
 
