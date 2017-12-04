@@ -159,15 +159,17 @@ class EditUser extends React.Component {
             <div>
               <div className="col-md-6">
                 <CardPanel title="Roles">
-                  <table className="table table-hover table-noborder">
-                    <tbody>
-                    {items}
-                    </tbody>
-                  </table>
+                  <div style={{height: 335, overflow: 'auto'}}>
+                    <table className="table table-hover table-noborder">
+                      <tbody>
+                      {items}
+                      </tbody>
+                    </table>
+                  </div>
                 </CardPanel>
 
                 <RaisedButton label="Show All" onTouchTap={() => this.setState({selectedRole: null})}
-                              className="margin-md-top"/>
+                              className="margin-md-top margin-md-bottom"/>
 
               </div>
               <div className="col-md-6">

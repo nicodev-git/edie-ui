@@ -6,10 +6,16 @@ export const rolePermissions = [
   'EditMap',
 
   'Servers',
+
   'Workflows',
+  'EditWorkflow',
+
   'Apps',
   'Search',
+
   'DeviceWorkflows',
+  'EditDeviceWorkflow',
+
   'Logs',
   'Incidents',
   'Chat',
