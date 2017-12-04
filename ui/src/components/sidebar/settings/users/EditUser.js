@@ -147,14 +147,16 @@ class EditUser extends React.Component {
               <div className="col-md-6">
                 <CardPanel title="Permissions">
                   <div style={{height: 335, overflow: 'auto'}}>
-                    <table className="table table-hover">
+                    <table className="table table-hover table-noborder">
                       <tbody>
                       {rolePermissions.map(p =>
                         <tr key={p}
                             className={!selectedRole || selectedRole.permissions.includes(p) ? '' : 'hidden'}>
                           <td>
                             <Checkbox label={p} checked={permissions.includes(p)}
-                                      onCheck={this.onCheckPermission.bind(this, p)}/>
+                                      onCheck={this.onCheckPermission.bind(this, p)}
+                                      disabled={!selectedRole}
+                            />
                           </td>
                         </tr>
                       )}

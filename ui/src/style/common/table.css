@@ -100,3 +100,7 @@ table.table tbody td.selected{
 .width-800 {
     width: 800px;
 }
+
+.table.table-noborder > tbody > tr > td {
+    border-top: none;
+}
