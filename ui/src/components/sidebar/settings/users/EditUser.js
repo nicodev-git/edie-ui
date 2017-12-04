@@ -89,13 +89,48 @@ class EditUser extends React.Component {
     this.debSave()
   }
 
+  getSections () {
+    const sections = []
+    const {roles} = this.props
+    roles.forEach(p => {
+      if (sections.includes(p.section)) return
+      sections.push(p.section)
+    })
+    return sections
+  }
+
   render () {
     const {selectedRole} = this.state
     const { handleSubmit, maps, selectedRoles, selectedPermissions, editUser, roles } = this.props
+    const sections = this.getSections()
 
     const defaultmaps = maps.map(p => ({label: p.name, value: p.id}))
     const permissions = selectedPermissions
     if (!editUser) return <div>Loading...</div>
+
+    const items = []
+    sections.forEach(s => {
+      items.push(
+        <tr key={s}>
+          <td><b>{s}</b></td>
+        </tr>
+      )
+      roles.filter(r => r.section === s).forEach(r =>
+        items.push(
+          <tr key={r.id}
+              onClick={() => this.setState({selectedRole: r})}
+              className={selectedRole && selectedRole.id === r.id ? 'selected' : ''}>
+            <td>
+              <div className="inline-block valign-middle">
+                <Checkbox checked={selectedRoles.includes(r.name)} onCheck={this.onCheckRole.bind(this, r)}/>
+              </div>
+              <label className="valign-middle">{r.name}</label>
+            </td>
+          </tr>
+        )
+      )
+    })
+
     return (
       <TabPage>
         <div style={{margin: '16px 20px 0'}}>
@@ -124,20 +159,9 @@ class EditUser extends React.Component {
             <div>
               <div className="col-md-6">
                 <CardPanel title="Roles">
-                  <table className="table table-hover">
+                  <table className="table table-hover table-noborder">
                     <tbody>
-                    {roles.map(r =>
-                      <tr key={r.id}
-                          onClick={() => this.setState({selectedRole: r})}
-                          className={selectedRole && selectedRole.id === r.id ? 'selected' : ''}>
-                        <td>
-                          <div className="inline-block valign-middle">
-                            <Checkbox checked={selectedRoles.includes(r.name)} onCheck={this.onCheckRole.bind(this, r)}/>
-                          </div>
-                          <label className="valign-middle">{r.name}</label>
-                        </td>
-                      </tr>
-                    )}
+                    {items}
                     </tbody>
                   </table>
                 </CardPanel>
