@@ -47,6 +47,8 @@ class EditUser extends React.Component {
   }
 
   submitForm () {
+    const {user} = this.props
+    if (!hasPermission(user, 'EditSettings')) return
     this.handleFormSubmit(this.props.formValues)
   }
 
@@ -124,7 +126,7 @@ class EditUser extends React.Component {
     return sections
   }
 
-  renderRoles () {
+  renderRoles (canEdit) {
     const {selectedRole, checkedSections} = this.state
     const { selectedRoles, roles } = this.props
     const sections = this.getSections()
@@ -137,7 +139,7 @@ class EditUser extends React.Component {
         <tr key={s}>
           <td>
             <Checkbox label={s} checked={checked}
-              onCheck={this.onCheckSection.bind(this, s)}/>
+                      onCheck={canEdit ? this.onCheckSection.bind(this, s) : null}/>
           </td>
         </tr>
       )
@@ -148,7 +150,7 @@ class EditUser extends React.Component {
               className={selectedRole && selectedRole.id === r.id ? 'selected' : ''}>
             <td className="padding-lg-left">
               <div className="inline-block valign-middle">
-                <Checkbox checked={selectedRoles.includes(r.name)} onCheck={checked ? this.onCheckRole.bind(this, r) : null}/>
+                <Checkbox checked={selectedRoles.includes(r.name)} onCheck={canEdit && checked ? this.onCheckRole.bind(this, r) : null}/>
               </div>
               <label className="valign-middle">{r.name}</label>
             </td>
@@ -159,14 +161,21 @@ class EditUser extends React.Component {
 
     return (
       <CardPanel title="Roles">
-        <div style={{height: 335, overflow: 'auto'}}>
+        <div style={{height: 335, overflow: 'auto'}} className="relative">
           <table className="table table-hover table-noborder">
             <tbody>
             {items}
             </tbody>
           </table>
         </div>
+
       </CardPanel>
+    )
+  }
+
+  renderMask () {
+    return (
+      <div style={{position: 'absolute', left: 0, right: 0, top: 0, bottom: 0, zIndex: 5}}></div>
     )
   }
 
@@ -199,6 +208,8 @@ class EditUser extends React.Component {
                   <Field name="defaultMapId" component={FormSelect} label="Default Map" options={defaultmaps} className="valign-top mr-dialog"/>
 
                   <Field name="enabled" component={FormCheckbox} label="Enabled" />
+
+                  {!canEdit && this.renderMask()}
                 </CardPanel>
               </div>
             </div>
@@ -213,7 +224,7 @@ class EditUser extends React.Component {
               </div>
               <div className="col-md-6">
                 <CardPanel title="Permissions">
-                  <div style={{height: 335, overflow: 'auto'}}>
+                  <div style={{height: 335, overflow: 'auto'}} className="relative">
                     <table className="table table-hover table-noborder">
                       <tbody>
                       {rolePermissions.map(p =>
@@ -221,7 +232,7 @@ class EditUser extends React.Component {
                             className={!selectedRole || selectedRole.permissions.includes(p) ? '' : 'hidden'}>
                           <td>
                             <Checkbox label={p} checked={permissions.includes(p)}
-                                      onCheck={this.onCheckPermission.bind(this, p)}
+                                      onCheck={canEdit ? this.onCheckPermission.bind(this, p) : null}
                             />
                           </td>
                         </tr>
