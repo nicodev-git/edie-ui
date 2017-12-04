@@ -27,7 +27,8 @@ class SavedSearchModalView extends React.Component {
       onClickDelete,
       onClickAdd,
       onClickEdit,
-      panelMode
+      panelMode,
+      canEdit
     } = this.props
 
     const keyword = savedSearchKeyword.toLowerCase();
@@ -51,7 +52,7 @@ class SavedSearchModalView extends React.Component {
           title="Saved Search"
           className="margin-md-bottom"
           contentStyle={{paddingTop: 0}}
-          tools={<IconButton onTouchTap={onClickAdd}><AddCircleIcon size={32}/></IconButton>}>
+          tools={canEdit && <IconButton onTouchTap={onClickAdd}><AddCircleIcon size={32}/></IconButton>}>
 
           <TextField value={savedSearchKeyword} floatingLabelText="Search" onChange={onChangeKeyword}/>
 
@@ -72,9 +73,9 @@ class SavedSearchModalView extends React.Component {
                   <td>{p.description}</td>
                   <td>{p.type}</td>
                   <td className="p-none nowrap">
-                    {p.type === 'User' ? <IconButton onTouchTap={() => onClickShare(p)}><Share/></IconButton> : null}
-                    {p.type === 'User' ? <IconButton onTouchTap={() => onClickEdit(p)}><EditIcon/></IconButton> : null}
-                    {p.type === 'User' ? <IconButton onTouchTap={() => onClickDelete(p)}><DeleteIcon/></IconButton> : null}
+                    {p.type === 'User' && canEdit ? <IconButton onTouchTap={() => onClickShare(p)}><Share/></IconButton> : null}
+                    {p.type === 'User' && canEdit ? <IconButton onTouchTap={() => onClickEdit(p)}><EditIcon/></IconButton> : null}
+                    {p.type === 'User' && canEdit ? <IconButton onTouchTap={() => onClickDelete(p)}><DeleteIcon/></IconButton> : null}
                   </td>
                 </tr>
               )}

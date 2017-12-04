@@ -35,7 +35,8 @@ import TagPickerModal from 'containers/settings/tag/TagPickerModalContainer'
 import SearchMonitorModal from './SearchMonitorModal'
 import MonitorGroupsModal from 'containers/settings/monitorgroup/MonitorGroupsModalContainer'
 import EntityDetailModal from './EntityDetailModal'
-import RefreshOverlay from "../../common/RefreshOverlay";
+import RefreshOverlay from 'components/common/RefreshOverlay'
+import {hasPermission} from 'shared/Permission'
 
 class GenericSearch extends React.Component {
   constructor (props) {
@@ -757,7 +758,7 @@ class GenericSearch extends React.Component {
     )
   }
 
-  renderSavedSearchModal () {
+  renderSavedSearchModal (canEdit) {
     if (!this.props.savedSearchModalOpen) return
     return (
       <SavedSearchModal
@@ -765,6 +766,7 @@ class GenericSearch extends React.Component {
         onAddSearch={this.onClickSaveSearch.bind(this)}
         onChangeSearchOption={this.onChangeSearchOption.bind(this)}
         userOptions={this.getSearchOptions()}
+        canEdit={canEdit}
       />
     )
   }
@@ -947,8 +949,10 @@ class GenericSearch extends React.Component {
   }
 
   render () {
-    const { handleSubmit, monitorTemplates, currentSavedSearch } = this.props
+    const { handleSubmit, monitorTemplates, currentSavedSearch, userInfo } = this.props
     const { severity, monitorTypes, from, to, types, freeText } = this.getParams()
+
+    const canEdit = hasPermission(userInfo, 'EditSearch')
 
     return (
       <TabPage>
@@ -997,7 +1001,7 @@ class GenericSearch extends React.Component {
               {this.renderIrrelDevicesModal()}
               {this.renderSavePopover()}
               {this.renderWfSelectModal()}
-              {this.renderSavedSearchModal()}
+              {this.renderSavedSearchModal(canEdit)}
               {this.renderSearchFieldsModal()}
               {this.renderSearchGraphModal()}
             </div>
