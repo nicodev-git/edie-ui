@@ -16,6 +16,7 @@ import {getRanges} from 'components/common/DateRangePicker'
 import LogPapers from 'components/dashboard/log/LogPapers'
 import {showPrompt, showConfirm} from 'components/common/Alert'
 import LogFiltersModal from './LogFiltersModal'
+import {hasPermission} from 'shared/Permission'
 
 const ranges = getRanges()
 const from = ranges['Ever'][0].valueOf()
@@ -307,7 +308,6 @@ export default class Log extends React.Component {
     const {monitorUid} = this.state
     const text = this.getSelectionText()
     if (!text) return
-    console.log(text)
 
     const device = this.getDeviceByMonitor(monitorUid)
     if (!device) return
@@ -508,14 +508,14 @@ export default class Log extends React.Component {
     )
   }
 
-  renderIgnoreFilters (filters) {
+  renderIgnoreFilters (filters, canEdit) {
     return (
       <IconMenu iconButtonElement={
         <IconButton style={{padding: 0, width: 24, height: 24}}
                     iconStyle={{width: 24, height: 24}}>
           <MoreVertIcon/>
         </IconButton>}>
-        {filters.map((p, i) =>
+        {canEdit && filters.map((p, i) =>
           <div key={i} className="padding-sm">
             {p}
             <DeleteIcon className="link pull-right" onTouchTap={this.onClickRemoveFilter.bind(this, p)} />
@@ -525,12 +525,12 @@ export default class Log extends React.Component {
     )
   }
 
-  renderSearchTools (filters) {
+  renderSearchTools (filters, canEdit) {
     return (
       <div style={{position: 'absolute', right: 5, top: 5}} className="form-inline">
         <div className="valign-middle inline-block margin-md-left margin-md-right">
-          <FilterIcon className="link margin-xs-top" onTouchTap={this.onClickAddFilter.bind(this)}/>
-          {this.renderIgnoreFilters(filters)}
+          {canEdit && <FilterIcon className="link margin-xs-top" onTouchTap={this.onClickAddFilter.bind(this)}/>}
+          {this.renderIgnoreFilters(filters, canEdit)}
         </div>
       </div>
     )
@@ -549,7 +549,10 @@ export default class Log extends React.Component {
   }
 
   render () {
+    const {userInfo} = this.props
     const filters = this.getIgnoreFilters()
+
+    const canEdit = hasPermission(userInfo, 'EditLogs')
     return (
       <TabPage>
         <div style={{margin: '16px 20px 0'}}>
@@ -575,7 +578,7 @@ export default class Log extends React.Component {
             <div className="flex-vertical" style={{minWidth: 300, marginRight: 5}}>
               <div className="header-blue relative margin-xs-right">
                 Log
-                {this.renderLogTools()}
+                {canEdit && this.renderLogTools()}
               </div>
               <div className="flex-1 paper-bg">
                 {this.renderFolderTree()}
@@ -584,7 +587,7 @@ export default class Log extends React.Component {
             <div className="flex-vertical flex-1">
               <div className="header-red margin-xs-right">
                 Content
-                {this.renderSearchTools(filters)}
+                {this.renderSearchTools(filters, canEdit)}
               </div>
               <div className="flex-1 flex-vertical paper-bg">
                 {this.renderLogs(filters)}
