@@ -13,6 +13,7 @@ import {chipStyles} from 'style/common/materialStyles'
 import InfiniteTable from 'components/common/InfiniteTable';
 import MainWorkflowModal from 'components/dashboard/map/device/main/workflows/MainWorkflowModal'
 import {showConfirm} from 'components/common/Alert'
+import {hasPermission} from "../../shared/Permission";
 
 export default class DeviceWf extends React.Component {
   constructor (props) {
@@ -59,6 +60,8 @@ export default class DeviceWf extends React.Component {
       'columnName': 'id',
       'cssClassName': 'width-80',
       'customComponent': p=> {
+        const canEdit = hasPermission(this.props.userInfo, 'EditDeviceWorkflow')
+        if (!canEdit) return <div/>
         return (
           <div>
             <EditIcon onTouchTap={this.onClickEditWf.bind(this, p.rowData)} className="link"/>
@@ -131,7 +134,7 @@ export default class DeviceWf extends React.Component {
 
   }
 
-  renderWorkflows () {
+  renderWorkflows (canEdit) {
     const {selected} = this.state
     if (!selected) return null
 
@@ -150,7 +153,7 @@ export default class DeviceWf extends React.Component {
           draw: this.props.workflowDraw
         }}
 
-        onRowDblClick={this.onClickEdit.bind(this)}
+        onRowDblClick={canEdit ? this.onClickEdit.bind(this) : null}
       />
     )
   }
@@ -166,6 +169,8 @@ export default class DeviceWf extends React.Component {
   }
 
   render () {
+    const {userInfo} = this.props
+    const canEdit = hasPermission(userInfo, 'EditDeviceWorkflow')
     return (
       <TabPage>
         <div style={{margin: '16px 20px 0'}}>
@@ -183,12 +188,14 @@ export default class DeviceWf extends React.Component {
             <div className="flex-vertical flex-1" style={{overflow: 'auto'}}>
               <div className="header-red margin-xs-right relative">
                 Workflows
-                <div style={{position: 'absolute', right: 4, top: 8}}>
-                  <AddCircleIcon className="link" onTouchTap={this.onClickAddWf.bind(this)}/>
-                </div>
+                {canEdit ? (
+                  <div style={{position: 'absolute', right: 4, top: 8}}>
+                    <AddCircleIcon className="link" onTouchTap={this.onClickAddWf.bind(this)}/>
+                  </div>
+                ) : null}
               </div>
               <div className="flex-1 flex-vertical paper-bg">
-                {this.renderWorkflows()}
+                {this.renderWorkflows(canEdit)}
               </div>
             </div>
 

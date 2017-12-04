@@ -21,6 +21,7 @@ class DeviceWfContainer extends React.Component {
 export default connect(
   state => ({
     devices: state.devices.devices,
+    userInfo: state.dashboard.userInfo,
 
     workflowModalOpen: state.devices.workflowModalOpen,
     workflowListDraw: state.devices.workflowListDraw,
