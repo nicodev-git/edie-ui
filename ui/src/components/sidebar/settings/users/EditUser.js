@@ -15,7 +15,8 @@ class EditUser extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      selectedRole: null
+      selectedRole: null,
+      checkedSections: []
     }
 
     this.debSave = debounce(this.submitForm.bind(this), 500)
@@ -76,8 +77,28 @@ class EditUser extends React.Component {
     this.debSave()
   }
 
-  onCheckSection () {
+  onCheckSection (section, e, checked) {
+    const {checkedSections} = this.state
+    if (checked) {
+      if (!checkedSections.includes(section)) {
+        this.setState({
+          checkedSections: [...checkedSections, section]
+        })
+      }
+    } else {
+      this.setState({
+        checkedSections: checkedSections.filter(p => p !== section)
+      })
 
+
+      const {selectedRoles, roles} = this.props
+      const filteredRoles =roles.filter(r => r.section === section)
+      filteredRoles.forEach(r => {
+        if (selectedRoles.includes(r.name)) {
+          this.onCheckRole(r)
+        }
+      })
+    }
   }
 
   onCheckPermission (value) {
@@ -104,17 +125,18 @@ class EditUser extends React.Component {
   }
 
   renderRoles () {
-    const {selectedRole} = this.state
+    const {selectedRole, checkedSections} = this.state
     const { selectedRoles, roles } = this.props
     const sections = this.getSections()
 
     const items = []
     sections.forEach(s => {
       const filteredRoles = roles.filter(r => r.section === s)
+      const checked = checkedSections.includes(s) || filteredRoles.filter(r => selectedRoles.includes(r.name)).length > 0
       items.push(
         <tr key={s}>
           <td>
-            <Checkbox label={s} checked={filteredRoles.filter(r => selectedRoles.includes(r.name)).length > 0}
+            <Checkbox label={s} checked={checked}
               onCheck={this.onCheckSection.bind(this, s)}/>
           </td>
         </tr>
@@ -126,7 +148,7 @@ class EditUser extends React.Component {
               className={selectedRole && selectedRole.id === r.id ? 'selected' : ''}>
             <td className="padding-lg-left">
               <div className="inline-block valign-middle">
-                <Checkbox checked={selectedRoles.includes(r.name)} onCheck={this.onCheckRole.bind(this, r)}/>
+                <Checkbox checked={selectedRoles.includes(r.name)} onCheck={checked ? this.onCheckRole.bind(this, r) : null}/>
               </div>
               <label className="valign-middle">{r.name}</label>
             </td>
