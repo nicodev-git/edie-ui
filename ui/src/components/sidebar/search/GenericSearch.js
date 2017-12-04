@@ -573,6 +573,7 @@ class GenericSearch extends React.Component {
     })
     this.props.change('query', q)
     this.props.change('freeText', '')
+    this.props.updateCurrentSavedSearch(null)
   }
 
   onClickToggleFields () {

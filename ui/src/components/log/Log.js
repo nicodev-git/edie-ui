@@ -222,7 +222,6 @@ export default class Log extends React.Component {
     const index = findIndex(monitorGroups, {id: selectedFolder})
     if (index < 0) return
 
-    const selected = monitorGroups[index]
     showConfirm(`Click OK to remove. Selected: ${monitorGroups[index].name}`, btn => {
       if (btn !== 'ok') return
       this.props.removeMonitorGroup(monitorGroups[index])
