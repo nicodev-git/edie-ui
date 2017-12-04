@@ -12,7 +12,7 @@ import TabPageHeader from 'components/common/TabPageHeader'
 
 import CollectorModal from './CollectorModal'
 import {showAlert, showConfirm} from 'components/common/Alert'
-import {hasPermission} from "../../../../shared/Permission";
+import {hasPermission} from 'shared/Permission'
 
 export default class Collectors extends React.Component {
   constructor (props) {

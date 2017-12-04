@@ -16,6 +16,7 @@ import TabPageHeader from 'components/common/TabPageHeader'
 import UserTabs from './UserTabs'
 
 import { errorStyle, underlineFocusStyle, inputStyle, selectedItemStyle } from 'style/common/materialStyles'
+import {hasPermission} from 'shared/Permission'
 
 export default class Users extends React.Component {
   constructor (props) {
@@ -129,7 +130,6 @@ export default class Users extends React.Component {
         groups: groups
       })
 
-      emit(EVENTS.USERS_GROUP_CHANGED, '') // eslint-disable-line no-undef
       this.refs.groups.value = ''
     })
   }
@@ -195,6 +195,8 @@ export default class Users extends React.Component {
   }
 
   render () {
+    const {user} = this.props
+    const canEdit = hasPermission(user, 'EditSettings')
     return (
       <TabPage>
         <TabPageHeader title="Settings">
@@ -229,17 +231,20 @@ export default class Users extends React.Component {
                 <MenuItem primaryText="Remove" onTouchTap={this.onClickRemoveGroup.bind(this)}/>
               </IconMenu>&nbsp;
 
-              <IconMenu
-                iconButtonElement={<RaisedButton label="User"/>}
-                anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
-                targetOrigin={{horizontal: 'left', vertical: 'top'}}
-              >
-                <MenuItem primaryText="Add" onTouchTap={this.onAddUser.bind(this)}/>
-                <MenuItem primaryText="Edit" onTouchTap={this.onEditUser.bind(this)}/>
-                <MenuItem primaryText="Remove" onTouchTap={this.onRemoveUser.bind(this)}/>
-                <MenuItem primaryText="Change Password" onTouchTap={this.onChangePassword.bind(this)}/>
-                <MenuItem primaryText="Regenerate Pin" onTouchTap={this.onClickPin.bind(this)}/>
-              </IconMenu>&nbsp;
+              {canEdit ? (
+                <IconMenu
+                  iconButtonElement={<RaisedButton label="User"/>}
+                  anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
+                  targetOrigin={{horizontal: 'left', vertical: 'top'}}
+                >
+                  <MenuItem primaryText="Add" onTouchTap={this.onAddUser.bind(this)}/>
+                  <MenuItem primaryText="Edit" onTouchTap={this.onEditUser.bind(this)}/>
+                  <MenuItem primaryText="Remove" onTouchTap={this.onRemoveUser.bind(this)}/>
+                  <MenuItem primaryText="Change Password" onTouchTap={this.onChangePassword.bind(this)}/>
+                  <MenuItem primaryText="Regenerate Pin" onTouchTap={this.onClickPin.bind(this)}/>
+                </IconMenu>
+              ) : null}
+              &nbsp;
               <RaisedButton label="Profile" onTouchTap={this.onClickProfile.bind(this)}/>&nbsp;
               <UserTabs history={this.props.history}/>&nbsp;
             </div>
