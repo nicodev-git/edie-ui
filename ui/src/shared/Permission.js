@@ -1,30 +1,42 @@
 export const rolePermissions = [
   'Dashboard',
+  'EditDashboard',
 
   'Map',
   'AddMap',
   'EditMap',
 
   'Servers',
+  'CommandLine',
+  'AddServer',
+  'EditServer',
 
   'Workflows',
   'EditWorkflow',
 
   'Apps',
+  'EditApps',
+
   'Search',
+  'EditSearch',
 
   'DeviceWorkflows',
   'EditDeviceWorkflow',
 
   'Logs',
-  'Incidents',
-  'Chat',
-  'ThreatMap',
-  'Settings',
+  'EditLogs',
 
-  'CommandLine',
-  'AddServer',
-  'EditServer'
+  'Incidents',
+  'EditIncidents',
+
+  'Chat',
+  'EditChat',
+
+  'ThreatMap',
+  'EditThreatMap',
+
+  'Settings',
+  'EditSettings'
 ]
 
 
