@@ -191,7 +191,7 @@ export default class Log extends React.Component {
     const {monitorGroups} = this.props
     const index = findIndex(monitorGroups, {id: selectedFolder})
     if (index < 0) return
-    showPrompt('Folder Name', monitorGroups[index].name, text => {
+    showPrompt(`Selected Folder: ${monitorGroups[index].name}`, monitorGroups[index].name, text => {
       if (!text) return
       this.props.updateMonitorGroup({
         ...monitorGroups[index],
@@ -222,7 +222,8 @@ export default class Log extends React.Component {
     const index = findIndex(monitorGroups, {id: selectedFolder})
     if (index < 0) return
 
-    showConfirm('Click OK to remove', btn => {
+    const selected = monitorGroups[index]
+    showConfirm(`Click OK to remove. Selected: ${monitorGroups[index].name}`, btn => {
       if (btn !== 'ok') return
       this.props.removeMonitorGroup(monitorGroups[index])
 
