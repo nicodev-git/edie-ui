@@ -10,11 +10,11 @@ import CardPanel from 'components/modal/parts/CardPanel'
 export default class LogFiltersModalView extends React.Component {
   render () {
     const {onHide, logFilters, onClickRow, onClickAdd, onClickDelete, onClickEdit, selectedSearch,
-      onClickSearch} = this.props
+      onClickSearch, canEdit} = this.props
     return (
       <Modal title="Filters" onRequestClose={onHide}>
         <CardPanel title="Filters"
-                   tools={<IconButton onTouchTap={onClickAdd}><AddCircleIcon size={32}/></IconButton>}>
+                   tools={canEdit && <IconButton onTouchTap={onClickAdd}><AddCircleIcon size={32}/></IconButton>}>
           <div style={{maxHeight: '350px', overflow: 'auto', width: '100%'}}>
             <table className="table table-hover">
               <thead>
@@ -29,8 +29,8 @@ export default class LogFiltersModalView extends React.Component {
                     className={`${selectedSearch && selectedSearch.id === p.id ? 'selected' : ''}`}>
                   <td>{p.keyword}</td>
                   <td className="p-none nowrap">
-                    <IconButton onTouchTap={() => onClickDelete(p)}><DeleteIcon/></IconButton>
-                    <IconButton onTouchTap={() => onClickEdit(p)}><EditIcon/></IconButton>
+                    {canEdit && <IconButton onTouchTap={() => onClickDelete(p)}><DeleteIcon/></IconButton>}
+                    {canEdit && <IconButton onTouchTap={() => onClickEdit(p)}><EditIcon/></IconButton>}
                   </td>
                 </tr>
               )}

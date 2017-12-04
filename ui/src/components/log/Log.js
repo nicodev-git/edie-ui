@@ -536,7 +536,7 @@ export default class Log extends React.Component {
     )
   }
 
-  renderLogFiltersModal () {
+  renderLogFiltersModal (canEdit) {
     if (!this.props.logFiltersModalOpen) return null
     return (
       <LogFiltersModal
@@ -544,6 +544,7 @@ export default class Log extends React.Component {
         keyword={this.state.searchValue}
         onHide={this.onCloseFiltersModal.bind(this)}
         onClickSearch={this.onClickSavedSearch.bind(this)}
+        canEdit={canEdit}
       />
     )
   }
@@ -594,7 +595,7 @@ export default class Log extends React.Component {
               </div>
             </div>
           </div>
-          {this.renderLogFiltersModal()}
+          {this.renderLogFiltersModal(canEdit)}
         </TabPageBody>
       </TabPage>
     )

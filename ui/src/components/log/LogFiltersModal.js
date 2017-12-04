@@ -56,7 +56,7 @@ export default class LogFiltersModal extends React.Component {
 
   render () {
     const {selectedSearch} = this.state
-    const {onHide, logFilters} = this.props
+    const {onHide, logFilters, canEdit} = this.props
     return (
       <LogFiltersModalView
         onHide={onHide}
@@ -67,6 +67,7 @@ export default class LogFiltersModal extends React.Component {
         onClickDelete={this.onClickDelete.bind(this)}
         onClickEdit={this.onClickEdit.bind(this)}
         onClickSearch={this.onClickSearch.bind(this)}
+        canEdit={canEdit}
       />
     )
   }
