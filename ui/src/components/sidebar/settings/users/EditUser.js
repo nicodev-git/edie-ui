@@ -185,7 +185,7 @@ class EditUser extends React.Component {
 
   render () {
     const {selectedRole} = this.state
-    const { handleSubmit, maps, selectedPermissions, editUser, user } = this.props
+    const { handleSubmit, maps, selectedPermissions, editUser } = this.props
     const defaultmaps = maps.map(p => ({label: p.name, value: p.id}))
     const permissions = selectedPermissions
     if (!editUser) return <div>Loading...</div>

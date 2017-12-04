@@ -20,7 +20,8 @@ export default connect(
   state => ({
     credentialTypeDraw: state.settings.credentialTypeDraw,
     credTypeModalOpen: state.settings.credTypeModalOpen,
-    editCredType: state.settings.editCredType
+    editCredType: state.settings.editCredType,
+    userInfo: state.dashboard.userInfo
   }), {
     showCredTypeModal,
     addCredType,

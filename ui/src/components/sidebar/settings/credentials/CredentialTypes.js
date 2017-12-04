@@ -12,6 +12,7 @@ import TabPageBody from 'components/common/TabPageBody'
 import TabPageHeader from 'components/common/TabPageHeader'
 
 import UserTabs from '../users/UserTabs'
+import {hasPermission} from 'shared/Permission'
 
 export default class CredentialTypes extends React.Component {
   constructor (props) {
@@ -66,13 +67,15 @@ export default class CredentialTypes extends React.Component {
     })
   }
   render () {
+    const {userInfo} = this.props
+    const canEdit = hasPermission(userInfo, 'EditSettings')
     return (
       <TabPage>
         <TabPageHeader title="Credential Types">
           <div className="text-center margin-md-top">
             <div className="pull-right">
-              <RaisedButton label="Add" onTouchTap={this.onAddCred.bind(this)}/>&nbsp;
-              <RaisedButton label="Remove" onTouchTap={this.onRemoveCred.bind(this)}/>&nbsp;
+              {canEdit && <RaisedButton label="Add" onTouchTap={this.onAddCred.bind(this)}/>}&nbsp;
+              {canEdit && <RaisedButton label="Remove" onTouchTap={this.onRemoveCred.bind(this)}/>}&nbsp;
               <UserTabs history={this.props.history}/>&nbsp;
             </div>
           </div>

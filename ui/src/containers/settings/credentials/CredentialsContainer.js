@@ -33,7 +33,9 @@ export default connect(
 
     credentialTypes: state.settings.credentialTypes,
 
-    devices: state.devices.deviceAndGroups
+    devices: state.devices.deviceAndGroups,
+
+    userInfo: state.dashboard.userInfo
   }),
   dispatch => ({
     ...bindActionCreators({

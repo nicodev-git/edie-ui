@@ -14,6 +14,7 @@ import TabPageHeader from 'components/common/TabPageHeader'
 
 import UserTabs from '../users/UserTabs'
 import { chipStyles } from 'style/common/materialStyles'
+import {hasPermission} from 'shared/Permission'
 
 export default class Credentials extends React.Component {
   constructor (props) {
@@ -72,14 +73,14 @@ export default class Credentials extends React.Component {
     this.props.fetchDevicesGroups()
   }
 
-  renderContent () {
+  renderContent (canEdit) {
     return (
       <InfiniteTable
         cells={this.cells}
         ref="credentials"
         rowMetadata={{'key': 'id'}}
         selectable
-        onRowDblClick={this.onEditCred.bind(this)}
+        onRowDblClick={canEdit ? this.onEditCred.bind(this) : null}
 
         useExternal={false}
         data={this.props.credentials}
@@ -145,22 +146,28 @@ export default class Credentials extends React.Component {
     })
   }
   render () {
+    const {userInfo} = this.props
+    const canEdit = hasPermission(userInfo, 'EditSettings')
     return (
       <TabPage>
         <TabPageHeader title="Credentials">
           <div className="text-center margin-md-top">
             <div className="pull-right">
-              <RaisedButton label="Add" onTouchTap={this.onAddCred.bind(this)}/>&nbsp;
-              <RaisedButton label="Edit" onTouchTap={this.onEditCred.bind(this)}/>&nbsp;
-              <RaisedButton label="Remove" onTouchTap={this.onRemoveCred.bind(this)}/>&nbsp;
-              <RaisedButton label="Set Default" onTouchTap={this.onSetDefault.bind(this)}/>&nbsp;
+              {canEdit ? (
+                <div className="inline-block">
+                  <RaisedButton label="Add" onTouchTap={this.onAddCred.bind(this)}/>&nbsp;
+                  <RaisedButton label="Edit" onTouchTap={this.onEditCred.bind(this)}/>&nbsp;
+                  <RaisedButton label="Remove" onTouchTap={this.onRemoveCred.bind(this)}/>&nbsp;
+                  <RaisedButton label="Set Default" onTouchTap={this.onSetDefault.bind(this)}/>&nbsp;
+                </div>
+              ) : null}
               <UserTabs history={this.props.history}/>&nbsp;
             </div>
           </div>
         </TabPageHeader>
 
         <TabPageBody tabs={SettingTabs} tab={3} history={this.props.history} location={this.props.location} transparent>
-          {this.renderContent()}
+          {this.renderContent(canEdit)}
           {this.renderCredentialsModal()}
         </TabPageBody>
       </TabPage>
