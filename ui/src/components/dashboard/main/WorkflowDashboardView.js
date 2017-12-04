@@ -27,6 +27,7 @@ import WfRectGroupsModal from './workflow/WfRectGroupsModal'
 import RectIconSet from './workflow/RectIconSet'
 
 import FloatingMenu from 'components/common/floating/FloatingMenu'
+import {hasPermission} from 'shared/Permission'
 
 const RECT_W = 135
 const RECT_H = 135
@@ -79,6 +80,9 @@ export default class WorkflowDashboardView extends React.Component {
   }
 
   componentDidMount () {
+    const {userInfo} = this.props
+    const canEdit = hasPermission(userInfo, 'EditWorkflow')
+
     const {mxUtils, mxEditor, mxEvent} = window
     const node = mxUtils.load('/resources/plugins/mxgraph/config/workfloweditor.xml').getDocumentElement();
     const editor = new mxEditor(node);
@@ -91,6 +95,7 @@ export default class WorkflowDashboardView extends React.Component {
     graph.autoExtend = 0
     graph.foldingEnabled = 0
     graph.cellsEditable = 0
+    graph.cellsMovable = canEdit ? 1 : 0
     graph.setCellsResizable(false)
     graph.setAllowDanglingEdges(false);
     // graph.maximumGraphBounds = new window.mxRectangle(0, 0, 1024, 768)
@@ -450,8 +455,11 @@ export default class WorkflowDashboardView extends React.Component {
   }
 
   addGraphRects (items) {
+    const {userInfo} = this.props
     const {graph} = this.editor
     const parent = graph.getDefaultParent()
+
+    const canEdit = hasPermission(userInfo, 'EditWorkflow')
 
     graph.getModel().beginUpdate()
 
@@ -472,6 +480,7 @@ export default class WorkflowDashboardView extends React.Component {
         }
         vertices.push(v)
 
+        v.setConnectable(canEdit ? 1 : 0)
         ////////////////////
 
         // const infoBtn = graph.insertVertex(v, null, '', RECT_W - 28, RECT_H - 28, 24, 24, 'info-button')
@@ -561,13 +570,6 @@ export default class WorkflowDashboardView extends React.Component {
       // Updates the display
       graph.getModel().endUpdate()
     }
-  }
-
-  getSelectedRect () {
-    const {graph} = this.editor
-    const cell = graph.getSelectionCell()
-    if (!cell || !cell.userData) return null
-    return this.findRect(cell.userData.id)
   }
 
   getAllGraphCells () {
@@ -978,7 +980,8 @@ export default class WorkflowDashboardView extends React.Component {
   }
 
   render () {
-    const {selectedWfRectGroup} = this.props
+    const {selectedWfRectGroup, userInfo} = this.props
+    const canEdit = hasPermission(userInfo, 'EditWorkflow')
     return (
       <div className="flex-vertical flex-1">
         <div style={{position: 'absolute', top: -68, left: 200, right: 0}}>
@@ -1010,10 +1013,10 @@ export default class WorkflowDashboardView extends React.Component {
             )}
           </SelectField>
 
-          <div className="pull-right text-right">
+          {canEdit && <div className="pull-right text-right">
             <IconButton onTouchTap={this.onClickEditMode.bind(this)}><EditIcon/></IconButton>
             <IconButton onTouchTap={this.onClickDelete.bind(this)} tooltip="Delete Connection"><DeleteIcon/></IconButton>
-          </div>
+          </div>}
         </div>
         <div className="flex-1">
           {this.getRects().map(this.renderRect.bind(this))}
@@ -1023,7 +1026,7 @@ export default class WorkflowDashboardView extends React.Component {
             {this.renderParamInputs()}
           </div>
 
-          <FloatingMenu menuItems={this.menuItems}/>
+          {canEdit && <FloatingMenu menuItems={this.menuItems}/>}
 
           {this.renderWfRectModal()}
           {this.renderSearchModal()}
