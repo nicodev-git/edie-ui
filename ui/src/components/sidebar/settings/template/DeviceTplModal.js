@@ -89,7 +89,8 @@ class DeviceTplModal extends React.Component { // eslint-disable-line react/no-m
   }
 
   render () {
-    const { handleSubmit, editDeviceTplTags, removeDeviceTplTag, editTplWorkflows, showWfSelectModal, removeDeviceTplWf } = this.props
+    const { handleSubmit, editDeviceTplTags, removeDeviceTplTag, editTplWorkflows, showWfSelectModal, removeDeviceTplWf,
+      canEdit } = this.props
     let header = 'Device Template'
     let imgUrl = this.getImageUrl()
     let options = this.renderOptions()
@@ -103,7 +104,7 @@ class DeviceTplModal extends React.Component { // eslint-disable-line react/no-m
 
         monitors={this.state.monitors}
         monitorTemplates={this.props.monitorTemplates}
-        onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
+        onSubmit={canEdit ? handleSubmit(this.handleFormSubmit.bind(this)) : null}
         onHide={this.onClickClose.bind(this)}
         options={options}
         imgUrl={imgUrl}

@@ -22,6 +22,7 @@ import { errorStyle, underlineFocusStyle, inputStyle, selectedItemStyle, chipSty
 
 import { extImageBaseUrl } from 'shared/Global'
 import WfTabs from '../rule/WorkflowTabs'
+import {hasPermission} from 'shared/Permission'
 
 export default class Templates extends Component {
   constructor (props) {
@@ -52,7 +53,7 @@ export default class Templates extends Component {
   onDblClickRow (selected) {
   }
 
-  renderDeviceTemplates () {
+  renderDeviceTemplates (canEdit) {
     const {selectedDeviceTpl} = this.props
     return (
       <div>
@@ -84,12 +85,12 @@ export default class Templates extends Component {
                   </div>
                 </td>
                 <td className="text-right fa-lg">
-                  {item.origin === 'SYSTEM' && <IconButton
+                  {item.origin === 'SYSTEM' && canEdit && <IconButton
                     style={{padding: 0, width: 24, height: 24}}
                     onTouchTap={this.onClickCloneDeviceTpl.bind(this, item)}>
                     <CopyIcon color="#545454" hoverColor="#f44336"/>
                   </IconButton>}
-                  {item.origin !== 'SYSTEM' && <IconButton
+                  {item.origin !== 'SYSTEM' && canEdit && <IconButton
                     style={{padding: 0, width: 24, height: 24}}
                     onTouchTap={this.onClickDeleteDeviceTpl.bind(this, item)}>
                     <DeleteIcon color="#545454" hoverColor="#f44336"/>
@@ -101,13 +102,13 @@ export default class Templates extends Component {
           </tbody>
         </table>
 
-        {this.renderDeviceTplModal()}
-        {this.renderMonitorTplModal()}
+        {this.renderDeviceTplModal(canEdit)}
+        {this.renderMonitorTplModal(canEdit)}
       </div>
     )
   }
 
-  renderMonitorTemplates () {
+  renderMonitorTemplates (canEdit) {
     return (
       <div>
         <table className="table table-hover dataTable">
@@ -125,17 +126,17 @@ export default class Templates extends Component {
                 <td>{item.description}</td>
                 <td>{item.enabled ? 'Enabled' : 'Disabled'}</td>
                 <td className="text-right fa-lg">
-                  {item.origin !== 'SYSTEM' && <IconButton
+                  {item.origin !== 'SYSTEM' && canEdit && <IconButton
                     style={{padding: 0, width: 24, height: 24}}
                     onTouchTap={this.onClickShareMonitorTpl.bind(this, item)}>
                     <Share color="#545454" hoverColor="#f44336"/>
                   </IconButton>}
-                  {item.origin !== 'SYSTEM' && <IconButton
+                  {item.origin !== 'SYSTEM' && canEdit && <IconButton
                     style={{padding: 0, width: 24, height: 24}}
                     onTouchTap={this.onClickEditMonitorTpl.bind(this, item)}>
                     <EditIcon color="#545454" hoverColor="#f44336"/>
                   </IconButton>}
-                  {item.origin !== 'SYSTEM' && <IconButton
+                  {item.origin !== 'SYSTEM' && canEdit && <IconButton
                     style={{padding: 0, width: 24, height: 24}}
                     onTouchTap={this.onClickDeleteMonitorTpl.bind(this, item)}>
                     <DeleteIcon color="#545454" hoverColor="#f44336"/>
@@ -152,17 +153,17 @@ export default class Templates extends Component {
     )
   }
 
-  renderDeviceTplModal () {
+  renderDeviceTplModal (canEdit) {
     if (!this.props.deviceTplModalVisible) return null
     return (
-      <DeviceTplModal {...this.props} />
+      <DeviceTplModal {...this.props} canEdit={canEdit}/>
     )
   }
 
-  renderMonitorTplModal () {
+  renderMonitorTplModal (canEdit) {
     if (!this.props.monitorTplModalVisible) return null
     return (
-      <MonitorTplModal {...this.props} />
+      <MonitorTplModal {...this.props} canEdit={canEdit}/>
     )
   }
 
@@ -256,6 +257,9 @@ export default class Templates extends Component {
 
   render () {
     const {type} = this.state
+    const {userInfo} = this.props
+
+    const canEdit = hasPermission(userInfo, 'EditSettings')
     return (
       <TabPage>
         <TabPageHeader title="Settings">
@@ -275,7 +279,7 @@ export default class Templates extends Component {
             </div>
 
             <div style={{position: 'absolute', right: '25px'}}>
-              <RaisedButton label="Add" onTouchTap={this.onClickAdd.bind(this)}/>&nbsp;
+              {canEdit && <RaisedButton label="Add" onTouchTap={this.onClickAdd.bind(this)}/>}&nbsp;
               <WfTabs history={this.props.history}/>
             </div>
           </div>
@@ -285,7 +289,7 @@ export default class Templates extends Component {
           <div style={{position: 'absolute', width: '100%', height: '100%'}}>
             <div className="flex-horizontal" style={{height: '100%'}}>
               <div className="flex-1 padding-md-right" style={{overflow: 'auto'}}>
-                {type === 'Device' ? this.renderDeviceTemplates() : this.renderMonitorTemplates()}
+                {type === 'Device' ? this.renderDeviceTemplates(canEdit) : this.renderMonitorTemplates(canEdit)}
               </div>
               <div className="flex-1 padding-md" style={{overflow: 'auto'}}>
                 {this.renderDeviceTplView()}

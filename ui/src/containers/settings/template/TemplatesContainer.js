@@ -86,7 +86,9 @@ export default connect(
     monitorTplCredTypes: state.settings.monitorTplCredTypes,
     monitorTplCredTypePickerOpen: state.settings.monitorTplCredTypePickerOpen,
 
-    images: state.dashboard.images
+    images: state.dashboard.images,
+
+    userInfo: state.dashboard.userInfo
   }),
   dispatch => ({
     ...bindActionCreators({
