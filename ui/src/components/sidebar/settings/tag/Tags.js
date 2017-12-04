@@ -13,6 +13,7 @@ import TagModal from './TagModal'
 import WfTabs from '../rule/WorkflowTabs'
 
 import {chipStyles} from 'style/common/materialStyles'
+import {hasPermission} from "../../../../shared/Permission";
 
 export default class Tags extends React.Component {
   componentWillMount () {
@@ -86,7 +87,7 @@ export default class Tags extends React.Component {
       <TagModal {...this.props}/>
     )
   }
-  renderTags () {
+  renderTags (canEdit) {
     const {tags, multiSelTags} = this.props
     return (
       <div style={chipStyles.wrapper}>
@@ -97,7 +98,7 @@ export default class Tags extends React.Component {
             labelStyle={chipStyles.label}
             backgroundColor={multiSelTags.filter(t => t.id === p.id).length ? blue300 : null}
             onTouchTap={this.onClickTag.bind(this, p)}
-            onRequestDelete={this.onDeleteTag.bind(this, p)}
+            onRequestDelete={canEdit ? this.onDeleteTag.bind(this, p) : null}
           >
             {p.name}
           </Chip>
@@ -155,13 +156,15 @@ export default class Tags extends React.Component {
     )
   }
   render () {
+    const {userInfo} = this.props
+    const canEdit = hasPermission(userInfo, 'EditSettings')
     return (
       <TabPage>
         <TabPageHeader title="Tags">
           <div className="text-center margin-md-top">
             <div className="pull-right">
-              <RaisedButton label="Add" onTouchTap={this.onAddTag.bind(this)}/>&nbsp;
-              <RaisedButton label="Edit" onTouchTap={this.onEditTag.bind(this)}/>&nbsp;
+              {canEdit && <RaisedButton label="Add" onTouchTap={this.onAddTag.bind(this)}/>}&nbsp;
+              {canEdit && <RaisedButton label="Edit" onTouchTap={this.onEditTag.bind(this)}/>}&nbsp;
               <WfTabs history={this.props.history}/>
             </div>
           </div>
@@ -170,7 +173,7 @@ export default class Tags extends React.Component {
         <TabPageBody tabs={SettingTabs} tab={5} history={this.props.history} location={this.props.location}>
           <div className="padding-md">
             <div><b>Tags</b></div>
-            {this.renderTags()}
+            {this.renderTags(canEdit)}
             <div>Related</div>
             {this.renderItems()}
           </div>

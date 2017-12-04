@@ -39,7 +39,9 @@ export default connect(
     tagMonitorTpls: state.tag.tagMonitorTpls,
     tagMonitors: [],
 
-    devices: state.devices.devices
+    devices: state.devices.devices,
+
+    userInfo: state.dashboard.userInfo
   }), {
     showTagModal,
     addTag,
