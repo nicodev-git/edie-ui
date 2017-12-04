@@ -47,8 +47,7 @@ class EditUser extends React.Component {
   }
 
   submitForm () {
-    const {user} = this.props
-    if (!hasPermission(user, 'EditSettings')) return
+    if (!this.checkCanEdit()) return
     this.handleFormSubmit(this.props.formValues)
   }
 
@@ -126,6 +125,11 @@ class EditUser extends React.Component {
     return sections
   }
 
+  checkCanEdit () {
+    const canEdit = hasPermission(this.props.user, 'EditSettings')
+    return canEdit
+  }
+
   renderRoles (canEdit) {
     const {selectedRole, checkedSections} = this.state
     const { selectedRoles, roles } = this.props
@@ -186,7 +190,7 @@ class EditUser extends React.Component {
     const permissions = selectedPermissions
     if (!editUser) return <div>Loading...</div>
 
-    const canEdit = hasPermission(user, 'EditSettings')
+    const canEdit = this.checkCanEdit()
     return (
       <TabPage>
         <div style={{margin: '16px 20px 0'}}>
