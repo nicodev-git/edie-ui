@@ -87,26 +87,26 @@ export default class MainDashboard extends React.Component {
   getBoards () {
     return this.props.gaugeBoards.filter(p => p.type !== 'system')
   }
-  renderContent () {
+  renderContent (canEdit) {
     const board = this.getSelected()
     if (!board) return null
     if (board.type === 'system') {
       if (board.name === 'Servers') {
         return (
-          <ServerDashboardView board={board} {...this.props}/>
+          <ServerDashboardView board={board} {...this.props} canEdit={canEdit}/>
         )
       } else if (board.name === 'Workflows') {
         return (
-          <WorkflowDashboardView board={board} {...this.props}/>
+          <WorkflowDashboardView board={board} {...this.props} canEdit={canEdit}/>
         )
       } else if (board.name === 'Apps') {
         return (
-          <AppsDashboardView board={board} {...this.props}/>
+          <AppsDashboardView board={board} {...this.props} canEdit={canEdit}/>
         )
       }
     }
     return (
-      <MainDashboardView board={board} {...this.props}/>
+      <MainDashboardView board={board} {...this.props} canEdit={canEdit}/>
     )
   }
   renderBoardsModal () {
@@ -146,7 +146,7 @@ export default class MainDashboard extends React.Component {
         {this.renderTopbar(canEdit)}
 
         <div className="flex-vertical flex-1">
-          {this.renderContent()}
+          {this.renderContent(canEdit)}
           {this.renderBoardsModal()}
         </div>
       </div>

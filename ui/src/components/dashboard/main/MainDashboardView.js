@@ -329,6 +329,7 @@ export default class MainDashboardView extends React.Component {
   }
 
   renderGauge (p) {
+    const {canEdit} = this.props
     let GaugePanel = GaugeMap[p.templateName || 'z']
     if (!GaugePanel) return <div key={p.id}/>
     const flip = this.state.flip[p.id]
@@ -350,6 +351,9 @@ export default class MainDashboardView extends React.Component {
           onClickMaximize={this.onClickGaugeMaximize.bind(this)}
           onClickModalView={this.onClickGaugeViewModal.bind(this)}
           style={flip ? gaugeEditViewStyle : {width: '100%', height: '100%'}}
+
+          noDelete={!canEdit}
+          viewOnly={!canEdit}
         />
       </div>
     )
@@ -372,32 +376,34 @@ export default class MainDashboardView extends React.Component {
     )
   }
 
-  renderGrid () {
+  renderGrid (canEdit) {
     const gauges = this.getGauges()
     const layout = mw => {
       let x = 0
       let y = 0
       return gauges.map((p, i) => {
+        let op
         let {w, h, minH, minW} = getWidgetSize(p, this.props.devices, this.state.flip[p.id])
         if (p.layout) {
-          if (w && h) return {...p.layout, i: p.id, w, h, minW, minH}
-          return {...p.layout, i: p.id, minW, minH}
-        }
-        if (x + w > mw) {
-          x = 0
-          y++
-        }
-        const op = {
-          i: p.id,
-          x, y,
-          w, h,
-          minW, minH
-        }
+          if (w && h) op = {...p.layout, i: p.id, w, h, minW, minH}
+          else op = {...p.layout, i: p.id, minW, minH}
+        } else {
+          if (x + w > mw) {
+            x = 0
+            y++
+          }
+          op = {
+            i: p.id,
+            x, y,
+            w, h,
+            minW, minH,
+          }
 
-        x += w
-        if (x >= mw) {
-          x = 0
-          y++
+          x += w
+          if (x >= mw) {
+            x = 0
+            y++
+          }
         }
         return op
       })
@@ -422,6 +428,8 @@ export default class MainDashboardView extends React.Component {
         onDragStop={this.onLayoutChange.bind(this)}
         onResize={this.onResize.bind(this)}
         onResizeStop={this.onResizeStop.bind(this)}
+        isDraggable={canEdit}
+        isResizable={canEdit}
       >
         {gauges.map(p => this.renderGauge(p))}
       </ResponsiveReactGridLayout>
@@ -433,7 +441,7 @@ export default class MainDashboardView extends React.Component {
     return (
       <div>
         {canEdit && this.renderAddMenu()}
-        {this.renderGrid()}
+        {this.renderGrid(canEdit)}
 
         {this.renderGaugePicker()}
         {this.renderDeviceWizard()}
