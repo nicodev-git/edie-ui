@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 import {Checkbox, RaisedButton} from 'material-ui'
 import { Field } from 'redux-form'
 import { FormInput, FormSelect, FormCheckbox, CardPanel } from 'components/modal/parts'
-import {rolePermissions} from 'shared/Permission'
+import {rolePermissions, hasPermission} from 'shared/Permission'
 import { validate } from 'components/modal/validation/NameValidation'
 import TabPage from 'components/common/TabPage'
 import TabPageBody from 'components/common/TabPageBody'
@@ -76,6 +76,10 @@ class EditUser extends React.Component {
     this.debSave()
   }
 
+  onCheckSection () {
+
+  }
+
   onCheckPermission (value) {
     let {selectedPermissions} = this.props
     const {selectedRole} = this.state
@@ -99,28 +103,28 @@ class EditUser extends React.Component {
     return sections
   }
 
-  render () {
+  renderRoles () {
     const {selectedRole} = this.state
-    const { handleSubmit, maps, selectedRoles, selectedPermissions, editUser, roles } = this.props
+    const { selectedRoles, roles } = this.props
     const sections = this.getSections()
-
-    const defaultmaps = maps.map(p => ({label: p.name, value: p.id}))
-    const permissions = selectedPermissions
-    if (!editUser) return <div>Loading...</div>
 
     const items = []
     sections.forEach(s => {
+      const filteredRoles = roles.filter(r => r.section === s)
       items.push(
         <tr key={s}>
-          <td><b>{s}</b></td>
+          <td>
+            <Checkbox label={s} checked={filteredRoles.filter(r => selectedRoles.includes(r.name)).length > 0}
+              onCheck={this.onCheckSection.bind(this, s)}/>
+          </td>
         </tr>
       )
-      roles.filter(r => r.section === s).forEach(r =>
+      filteredRoles.forEach(r =>
         items.push(
           <tr key={r.id}
               onClick={() => this.setState({selectedRole: r})}
               className={selectedRole && selectedRole.id === r.id ? 'selected' : ''}>
-            <td>
+            <td className="padding-lg-left">
               <div className="inline-block valign-middle">
                 <Checkbox checked={selectedRoles.includes(r.name)} onCheck={this.onCheckRole.bind(this, r)}/>
               </div>
@@ -131,6 +135,27 @@ class EditUser extends React.Component {
       )
     })
 
+    return (
+      <CardPanel title="Roles">
+        <div style={{height: 335, overflow: 'auto'}}>
+          <table className="table table-hover table-noborder">
+            <tbody>
+            {items}
+            </tbody>
+          </table>
+        </div>
+      </CardPanel>
+    )
+  }
+
+  render () {
+    const {selectedRole} = this.state
+    const { handleSubmit, maps, selectedPermissions, editUser, user } = this.props
+    const defaultmaps = maps.map(p => ({label: p.name, value: p.id}))
+    const permissions = selectedPermissions
+    if (!editUser) return <div>Loading...</div>
+
+    const canEdit = hasPermission(user, 'EditSettings')
     return (
       <TabPage>
         <div style={{margin: '16px 20px 0'}}>
@@ -158,15 +183,7 @@ class EditUser extends React.Component {
 
             <div>
               <div className="col-md-6">
-                <CardPanel title="Roles">
-                  <div style={{height: 335, overflow: 'auto'}}>
-                    <table className="table table-hover table-noborder">
-                      <tbody>
-                      {items}
-                      </tbody>
-                    </table>
-                  </div>
-                </CardPanel>
+                {this.renderRoles(canEdit)}
 
                 <RaisedButton label="Show All" onTouchTap={() => this.setState({selectedRole: null})}
                               className="margin-md-top margin-md-bottom"/>
