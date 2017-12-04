@@ -11,7 +11,7 @@ import TabPageHeader from 'components/common/TabPageHeader' // Never used
 
 import {defaultDateFormat} from 'shared/Global'
 import {CardPanel} from 'components/modal/parts'
-import {rolePermissions} from 'shared/Permission'
+import {rolePermissions, hasPermission} from 'shared/Permission'
 
 const rowStyle = {
   width: '100%',
@@ -174,10 +174,10 @@ export default class General extends React.Component {
 
   /////////////////////////////////////////////////////////////////
 
-  renderContent () {
+  renderContent (canEdit) {
     return (
       <CardPanel title="General">
-        <div className="form-inline" style={{minHeight: 400}}>
+        <div className="form-inline relative" style={{minHeight: 400}}>
           <div style={rowStyle} className="margin-md-bottom">
             <label className="margin-sm-top margin-sm-bottom width-200">System Name: </label>
             <InlineEdit
@@ -291,6 +291,8 @@ export default class General extends React.Component {
             />
             <label className="margin-sm-top margin-sm-bottom width-200">  Days</label>
           </div>
+
+          {!canEdit && <div style={{position: 'absolute', left: 0, right: 0, top: 0, bottom: 0, zIndex: 5}}/>}
         </div>
       </CardPanel>
     )
@@ -310,8 +312,40 @@ export default class General extends React.Component {
     )
   }
 
-  renderMenuConfig () {
+  renderRoles () {
     const {roles} = this.props
+    return (
+      <table className="table">
+        <thead>
+        <tr>
+          <th></th>
+          {roles.map(p =>
+            <th key={p.id}>{p.name}</th>
+          )}
+        </tr>
+        </thead>
+        <tbody>
+        {rolePermissions.map(p =>
+          <tr key={p}>
+            <td>
+              {p}
+            </td>
+            {roles.map(r =>
+              <td key={r.id}>
+                <Checkbox
+                  label="" checked={r.permissions.includes(p)}
+                  onCheck={this.onCheckDashboardMenu.bind(this, r, p)}
+                />
+              </td>
+            )}
+          </tr>
+        )}
+        </tbody>
+      </table>
+    )
+  }
+
+  renderMenuConfig (canEdit) {
     return (
       <CardPanel title="Menu">
         <div style={{minHeight: 400, overflow: 'auto'}}>
@@ -324,40 +358,18 @@ export default class General extends React.Component {
               <MenuItem primaryText="Dashboard" value="dashboard"/>
             </SelectField>
           </div>
-          <table className="table">
-            <thead>
-            <tr>
-              <th></th>
-              {roles.map(p =>
-                <th key={p.id}>{p.name}</th>
-              )}
-            </tr>
-            </thead>
-            <tbody>
-            {rolePermissions.map(p =>
-              <tr key={p}>
-                <td>
-                  {p}
-                </td>
-                {roles.map(r =>
-                  <td key={r.id}>
-                    <Checkbox
-                      label="" checked={r.permissions.includes(p)}
-                      onCheck={this.onCheckDashboardMenu.bind(this, r, p)}
-                    />
-                  </td>
-                )}
-              </tr>
-            )}
-            </tbody>
-          </table>
 
+          {/*{this.renderRoles()}*/}
         </div>
+
+        {!canEdit && <div style={{position: 'absolute', left: 0, right: 0, top: 0, bottom: 0, zIndex: 5}}/>}
       </CardPanel>
     )
   }
 
   render () {
+    const {userInfo} = this.props
+    const canEdit = hasPermission(userInfo, 'EditSettings')
     return (
       <TabPage>
         <TabPageHeader title="Settings">
@@ -372,11 +384,11 @@ export default class General extends React.Component {
         <TabPageBody tabs={SettingTabs} tab={0} history={this.props.history} location={this.props.location} transparent>
           <div>
             <div className="col-md-6">
-              {this.renderContent()}
+              {this.renderContent(canEdit)}
               {this.renderCustomer()}
             </div>
             <div className="col-md-6">
-              {this.renderMenuConfig()}
+              {this.renderMenuConfig(canEdit)}
             </div>
           </div>
           <br/>&nbsp;
