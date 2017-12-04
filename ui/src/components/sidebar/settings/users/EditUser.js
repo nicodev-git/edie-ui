@@ -78,6 +78,8 @@ class EditUser extends React.Component {
 
   onCheckPermission (value) {
     let {selectedPermissions} = this.props
+    const {selectedRole} = this.state
+    if (!selectedRole) return
     if (selectedPermissions.includes(value)) {
       selectedPermissions = selectedPermissions.filter(p => p !== value)
     } else {
@@ -155,7 +157,6 @@ class EditUser extends React.Component {
                           <td>
                             <Checkbox label={p} checked={permissions.includes(p)}
                                       onCheck={this.onCheckPermission.bind(this, p)}
-                                      disabled={!selectedRole}
                             />
                           </td>
                         </tr>
