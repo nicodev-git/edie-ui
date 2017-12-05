@@ -9,7 +9,8 @@
 .sidebar {
     width: 100%;
     position: absolute;
-    top: 170px;
+    top: 50%;
+    transform: translate(0, -50%);
 }
 
 .sidebar-item-container {
