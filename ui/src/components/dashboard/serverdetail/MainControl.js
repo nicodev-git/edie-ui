@@ -4,7 +4,7 @@ import {ToolbarGroup, IconButton, IconMenu, MenuItem} from 'material-ui'
 import {Responsive, WidthProvider} from 'react-grid-layout'
 import EditIcon from 'material-ui/svg-icons/content/create'
 // import CredIcon from 'material-ui/svg-icons/action/credit-card'
-// import MonitorIcon from 'material-ui/svg-icons/action/event'
+import MonitorIcon from 'material-ui/svg-icons/action/event'
 import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
 import RenewIcon from 'material-ui/svg-icons/action/autorenew'
 import LockOpenIcon from 'material-ui/svg-icons/action/lock-open'
@@ -550,6 +550,7 @@ export default class MainControl extends React.Component {
           <ToolbarGroup firstChild>
             <IconButton onTouchTap={this.onClickBack.bind(this)} tooltip="Back"><LeftArrowIcon/></IconButton>
             <IconButton onTouchTap={this.onClickEdit.bind(this)} tooltip="General"><EditIcon/></IconButton>
+            <IconButton onTouchTap={this.onClickMonitorEdit.bind(this)} tooltip="Monitors"><MonitorIcon/></IconButton>
           </ToolbarGroup>
           <ToolbarGroup>
             <IconButton onTouchTap={this.onClickToggleLock.bind(this)} tooltip={device.gaugeLocked ? 'Unlock' : 'Lock'}>
