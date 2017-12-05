@@ -166,7 +166,7 @@ class EditUser extends React.Component {
     return (
       <CardPanel title="Roles">
         <div style={{height: 335, overflow: 'auto'}} className="relative">
-          <table className="table table-hover table-noborder">
+          <table className="table table-hover table-noborder table-pt-none table-pb-none">
             <tbody>
             {items}
             </tbody>
@@ -229,7 +229,7 @@ class EditUser extends React.Component {
               <div className="col-md-6">
                 <CardPanel title="Permissions">
                   <div style={{height: 335, overflow: 'auto'}} className="relative">
-                    <table className="table table-hover table-noborder">
+                    <table className="table table-hover table-noborder table-pt-none table-pb-none">
                       <tbody>
                       {rolePermissions.map(p =>
                         <tr key={p}

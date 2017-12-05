@@ -104,3 +104,11 @@ table.table tbody td.selected{
 .table.table-noborder > tbody > tr > td {
     border-top: none;
 }
+
+.table.table-pt-none > tbody > tr > td{
+    padding-top: 0;
+}
+
+.table.table-pb-none > tbody > tr > td{
+    padding-bottom: 0;
+}
