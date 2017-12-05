@@ -32,7 +32,9 @@ export default connect(
     workflowModalVisible: state.settings.workflowModalVisible,
     workflowCategories: state.devices.workflowCategories,
     selectedWorkflowCategory: state.devices.selectedWorkflowCategory,
-    shareWorkflowResult: state.settings.shareWorkflowResult
+    shareWorkflowResult: state.settings.shareWorkflowResult,
+
+    userInfo: state.dashboard.userInfo
   }),
   dispatch => ({
     ...bindActionCreators({

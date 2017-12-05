@@ -13,6 +13,7 @@ import TabPageHeader from 'components/common/TabPageHeader'
 import WorkflowModalContainer from 'containers/settings/rule/WorkflowModalContainer'
 
 import WfTabs from './WorkflowTabs'
+import {hasPermission} from 'shared/Permission'
 
 export default class Rules extends React.Component {
   constructor (props) {
@@ -74,14 +75,14 @@ export default class Rules extends React.Component {
     this.props.shareWorkflow(props)
   }
 
-  renderContent () {
+  renderContent (canEdit) {
     return (
       <InfiniteTable
         cells={this.cells}
         ref="logicalRules"
         rowMetadata={{'key': 'id'}}
         selectable
-        onRowDblClick={this.onEditWorkflow.bind(this)}
+        onRowDblClick={canEdit ? this.onEditWorkflow.bind(this) : null}
 
         useExternal={false}
         data={this.props.workflows}
@@ -117,21 +118,23 @@ export default class Rules extends React.Component {
     this.props.removeWorkflow(selected)
   }
   render () {
+    const {userInfo} = this.props
+    const canEdit = hasPermission(userInfo, 'EditSettings')
     return (
       <TabPage>
         <TabPageHeader title="Settings">
           <div className="text-center margin-md-top">
             <div className="pull-right">
-              <RaisedButton label="Add" onTouchTap={this.onAddWorkflow.bind(this)}/>&nbsp;
-              <RaisedButton label="Edit" onTouchTap={this.onEditWorkflow.bind(this)}/>&nbsp;
-              <RaisedButton label="Remove" onTouchTap={this.onRemoveWorkflow.bind(this)}/>&nbsp;
+              {canEdit && <RaisedButton label="Add" onTouchTap={this.onAddWorkflow.bind(this)}/>}&nbsp;
+              {canEdit && <RaisedButton label="Edit" onTouchTap={this.onEditWorkflow.bind(this)}/>}&nbsp;
+              {canEdit && <RaisedButton label="Remove" onTouchTap={this.onRemoveWorkflow.bind(this)}/>}&nbsp;
               <WfTabs history={this.props.history}/>
             </div>
           </div>
         </TabPageHeader>
 
         <TabPageBody tabs={SettingTabs} tab={5} history={this.props.history} location={this.props.location} transparent>
-          {this.renderContent()}
+          {this.renderContent(canEdit)}
           {this.renderWorkflowModal()}
         </TabPageBody>
       </TabPage>
