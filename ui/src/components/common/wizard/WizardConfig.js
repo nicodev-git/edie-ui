@@ -466,6 +466,15 @@ export const wizardConfig = {
           type: 'agentpicker',
           name: 'agent'
         }]
+      }, {
+        type: 'removeAfter',
+        label: {
+          text: 'Remove events after',
+          type: 'attach',
+          width: 3
+        },
+        width: MAX_WIDTH,
+        name: 'params.remove_after'
       }],
     }, {
       title: 'Monitors',
@@ -574,6 +583,15 @@ export const wizardConfig = {
           type: 'agentpicker',
           name: 'agent'
         }]
+      }, {
+        type: 'removeAfter',
+        label: {
+          text: 'Remove events after',
+          type: 'attach',
+          width: 3
+        },
+        width: MAX_WIDTH,
+        name: 'params.remove_after'
       }],
     }, {
       title: 'Monitors',
