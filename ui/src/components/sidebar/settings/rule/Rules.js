@@ -54,7 +54,9 @@ export default class Rules extends React.Component {
       'columnName': 'id',
       'cssClassName': 'width-80',
       'customComponent': p => {
-        return p.rowData.origin === 'USER' ? <IconButton onTouchTap={() => this.onClickShare(p.rowData)}><Share/></IconButton> : null
+        const {userInfo} = this.props
+        const canEdit = hasPermission(userInfo, 'EditSettings')
+        return p.rowData.origin === 'USER' && canEdit ? <IconButton onTouchTap={() => this.onClickShare(p.rowData)}><Share/></IconButton> : null
       }
     }]
   }

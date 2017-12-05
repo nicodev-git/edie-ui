@@ -58,7 +58,9 @@ export default connect(
     editPattern: state.settings.editPattern,
 
     parserTypeTagModalOpen: state.settings.parserTypeTagModalOpen,
-    editParserTypeTags: state.settings.editParserTypeTags
+    editParserTypeTags: state.settings.editParserTypeTags,
+
+    userInfo: state.dashboard.userInfo
   }),
   dispatch => ({
     ...bindActionCreators({

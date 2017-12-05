@@ -13,6 +13,7 @@ import SimulationModal from './SimulationModal'
 
 import WfTabs from '../rule/WorkflowTabs'
 import { showAlert } from 'components/common/Alert'
+import {hasPermission} from "../../../../shared/Permission";
 
 class ParserTypes extends React.Component {
   constructor (props) {
@@ -95,15 +96,17 @@ class ParserTypes extends React.Component {
   }
 
   render () {
+    const {userInfo} = this.props
+    const canEdit = hasPermission(userInfo, 'EditSettings')
     return (
       <TabPage>
         <TabPageHeader title="ParserTypes">
           <div className="text-center margin-md-top">
             <div style={{position: 'absolute', right: '25px'}}>
-              <RaisedButton label="Add" onTouchTap={this.onClickAdd.bind(this)}/>&nbsp;
-              <RaisedButton label="Edit" onTouchTap={this.onClickEdit.bind(this)}/>&nbsp;
-              <RaisedButton label="Remove" onTouchTap={this.onClickRemove.bind(this)}/>&nbsp;
-              <RaisedButton label="Simulation" onTouchTap={this.onClickSimulation.bind(this)}/>&nbsp;
+              {canEdit && <RaisedButton label="Add" onTouchTap={this.onClickAdd.bind(this)}/>}&nbsp;
+              {canEdit && <RaisedButton label="Edit" onTouchTap={this.onClickEdit.bind(this)}/>}&nbsp;
+              {canEdit && <RaisedButton label="Remove" onTouchTap={this.onClickRemove.bind(this)}/>}&nbsp;
+              {canEdit && <RaisedButton label="Simulation" onTouchTap={this.onClickSimulation.bind(this)}/>}&nbsp;
               <WfTabs history={this.props.history}/>
             </div>
           </div>
@@ -115,7 +118,7 @@ class ParserTypes extends React.Component {
             ref="table"
             rowMetadata={{'key': 'id'}}
             selectable
-            onRowDblClick={this.onClickEdit.bind(this)}
+            onRowDblClick={canEdit ? this.onClickEdit.bind(this) : null}
             rowHeight={40}
             url="/parsertype"
             params={{
