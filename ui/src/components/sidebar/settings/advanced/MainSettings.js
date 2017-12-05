@@ -96,6 +96,7 @@ export default class MainSettings extends Component {
   }
 
   render () {
+    const {canEdit} = this.props
     return (
       <div className="padding-md">
         <div style={rowStyle} className="margin-md-bottom bt-gray">
@@ -103,31 +104,37 @@ export default class MainSettings extends Component {
             <Checkbox
               label="Send IMP Logs to IMAdmin"
               checked={this.getOptionValue('SEND_LOGS') === 'true'}
-              onCheck={this.onChangeSendLogOption.bind(this)}/>
+              onCheck={this.onChangeSendLogOption.bind(this)}
+              disabled={!canEdit}
+            />
           </div>
         </div>
         <div>
           <SelectField
             floatingLabelText="Send IMP Logs Level"
             value={this.getOptionValue('SEND_LOGS_LEVEL')}
-            onChange={this.onChangeSendLogLevel.bind(this)}>
+            onChange={this.onChangeSendLogLevel.bind(this)}
+            disabled={!canEdit}
+          >
             {logLevels.map(option => <MenuItem key={option.value} value={option.value} primaryText={option.label}/>)}
           </SelectField>
         </div>
-        <div className="padding-md-top">
-          <label className="margin-sm-right">Update The System</label>
-          <RaisedButton label="Update" onTouchTap={this.onClickSync.bind(this)}/>
+        {canEdit && <div>
+          <div className="padding-md-top">
+            <label className="margin-sm-right">Update The System</label>
+            <RaisedButton label="Update" onTouchTap={this.onClickSync.bind(this)}/>
 
-          <RaisedButton label="Sync All" onTouchTap={this.onClickSyncAll.bind(this)} className="margin-lg-left"/>
-        </div>
+            <RaisedButton label="Sync All" onTouchTap={this.onClickSyncAll.bind(this)} className="margin-lg-left"/>
+          </div>
 
-        <div className="padding-md-top">
-          <RaisedButton label="Import From File SyncData" onTouchTap={this.onClickImportSync.bind(this)}/>
-        </div>
+          <div className="padding-md-top">
+            <RaisedButton label="Import From File SyncData" onTouchTap={this.onClickImportSync.bind(this)}/>
+          </div>
 
-        <div className="padding-md-top">
-          <RaisedButton label="Simulate" onTouchTap={this.onClickSimulate.bind(this)}/>
-        </div>
+          <div className="padding-md-top">
+            <RaisedButton label="Simulate" onTouchTap={this.onClickSimulate.bind(this)}/>
+          </div>
+        </div>}
 
         {this.renderImportModal()}
         {this.renderSimulationModal()}

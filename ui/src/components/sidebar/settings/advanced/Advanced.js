@@ -10,6 +10,7 @@ import TabPage from 'components/common/TabPage'
 import TabPageBody from 'components/common/TabPageBody'
 import TabPageHeader from 'components/common/TabPageHeader'
 import {showAlert} from 'components/common/Alert'
+import {hasPermission} from "../../../../shared/Permission";
 
 export default class Advanced extends React.Component {
   constructor (props) {
@@ -27,12 +28,12 @@ export default class Advanced extends React.Component {
     }
   }
 
-  renderContent () {
+  renderContent (canEdit) {
     switch (this.state.pageIndex) {
       case 1:
         return <Websocket />
       default:
-        return <MainSettings {...this.props} />
+        return <MainSettings {...this.props} canEdit={canEdit}/>
     }
   }
 
@@ -70,6 +71,8 @@ export default class Advanced extends React.Component {
   }
   render () {
     const {pageIndex} = this.state
+    const {userInfo} = this.props
+    const canEdit = hasPermission(userInfo, 'EditSettings')
     return (
       <TabPage>
         <TabPageHeader title="Settings">
@@ -107,7 +110,7 @@ export default class Advanced extends React.Component {
         </TabPageHeader>
 
         <TabPageBody tabs={SettingTabs} tab={7} history={this.props.history} location={this.props.location}>
-          {this.renderContent()}
+          {this.renderContent(canEdit)}
         </TabPageBody>
       </TabPage>
     )

@@ -27,7 +27,9 @@ export default connect(
     envVars: state.settings.envVars,
     syncStatus: state.settings.syncStatus,
     importSyncModalOpen: state.settings.importSyncModalOpen,
-    simulationModalOpen: state.settings.simulationModalOpen
+    simulationModalOpen: state.settings.simulationModalOpen,
+
+    userInfo: state.dashboard.userInfo
   }), {
     fetchEnvVars,
     addEnvVar,

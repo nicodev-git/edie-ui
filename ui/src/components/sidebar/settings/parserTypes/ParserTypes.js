@@ -13,7 +13,7 @@ import SimulationModal from './SimulationModal'
 
 import WfTabs from '../rule/WorkflowTabs'
 import { showAlert } from 'components/common/Alert'
-import {hasPermission} from "../../../../shared/Permission";
+import {hasPermission} from 'shared/Permission'
 
 class ParserTypes extends React.Component {
   constructor (props) {
