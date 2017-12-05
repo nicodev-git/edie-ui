@@ -60,7 +60,7 @@ DeviceEditWizard.defaultProps = {
 
   tabs: [{
     title: 'Basic',
-    include: ['wanip', 'name', 'hostname', 'removeAfter'/*, 'image', 'lanip', 'agentid'*/],
+    include: ['wanip', 'name', 'hostname', 'params.remove_after'/*, 'image', 'lanip', 'agentid'*/],
     width: 6
   }, {
     title: 'Agent',

@@ -227,7 +227,7 @@ export const wizardConfig = {
           width: MAX_WIDTH,
           name: 'lanip'
         }, {
-          type: 'removeAfter',
+          type: 'removeafter',
           label: {
             text: 'Remove events after',
             type: 'attach',
@@ -324,7 +324,7 @@ export const wizardConfig = {
           width: MAX_WIDTH,
           name: 'lanip'
         }, {
-          type: 'removeAfter',
+          type: 'removeafter',
           label: {
             text: 'Remove events after',
             type: 'attach',
@@ -405,7 +405,7 @@ export const wizardConfig = {
           width: MAX_WIDTH,
           name: 'lanip'
         }, {
-          type: 'removeAfter',
+          type: 'removeafter',
           label: {
             text: 'Remove events after',
             type: 'attach',
@@ -467,7 +467,7 @@ export const wizardConfig = {
           name: 'agent'
         }]
       }, {
-        type: 'removeAfter',
+        type: 'removeafter',
         label: {
           text: 'Remove events after',
           type: 'attach',
@@ -584,7 +584,7 @@ export const wizardConfig = {
           name: 'agent'
         }]
       }, {
-        type: 'removeAfter',
+        type: 'removeafter',
         label: {
           text: 'Remove events after',
           type: 'attach',
@@ -778,7 +778,7 @@ export const wizardEditConfig = {
         type: 'agentpicker',
         name: 'agent'
       }, {
-        type: 'removeAfter',
+        type: 'removeafter',
         label: {
           text: 'Remove events after',
           type: 'attach',
