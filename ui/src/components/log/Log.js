@@ -470,7 +470,7 @@ export default class Log extends React.Component {
         canDrop={this.canDropObject.bind(this)}
         onMoveNode={this.onMoveNode.bind(this)}
         scaffoldBlockPxWidth={20}
-        rowHeight={24}
+        rowHeight={20}
         className="logs"
       />
     )
