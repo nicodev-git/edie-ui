@@ -19,7 +19,7 @@ export default class DeviceTplModalView extends Component {
           <div className="form-column mb-none">
             <Field name="name" component={FormInput} label="Name"/>
             <Field name="devicetemplategroup" component={FormInput} label="Group"/>
-            <Field name="dashboard" component={FormCheckbox} label="Dashboard"/>
+            <Field name="dashboard" component={FormCheckbox} label="Dashboard" disabled={!onSubmit}/>
             <ImageUploader imgUrl={imgUrl} onChange={onSubmit ? onChange : null}/>
           </div>
         </CardPanel>

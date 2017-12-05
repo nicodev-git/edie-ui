@@ -235,7 +235,7 @@ export default class Templates extends Component {
     }
   }
 
-  renderDeviceTplView () {
+  renderDeviceTplView (canEdit) {
     const {selectedDeviceTpl, selectedDeviceMonitors} = this.props
     if (!selectedDeviceTpl) return
     return (
@@ -244,6 +244,7 @@ export default class Templates extends Component {
         enableReinitialize
         deviceTpl={selectedDeviceTpl}
         monitors={selectedDeviceMonitors}
+        canEdit={canEdit}
       />
     )
   }
@@ -292,7 +293,7 @@ export default class Templates extends Component {
                 {type === 'Device' ? this.renderDeviceTemplates(canEdit) : this.renderMonitorTemplates(canEdit)}
               </div>
               <div className="flex-1 padding-md" style={{overflow: 'auto'}}>
-                {this.renderDeviceTplView()}
+                {this.renderDeviceTplView(canEdit)}
               </div>
             </div>
           </div>
