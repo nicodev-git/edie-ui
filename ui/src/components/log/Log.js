@@ -311,6 +311,28 @@ export default class Log extends React.Component {
       selectedFolder: folder.id
     })
   }
+
+  ///////////////////////////////////////////////////////////////////////////////////
+
+  onClickEditMonitor () {
+    const {monitorUid} = this.state
+    const device = this.getDeviceByMonitor(monitorUid)
+    if (!device) return
+
+    const index = findIndex(device.monitors, {uid: monitorUid})
+    const monitor = device.monitors[index]
+
+    const {monitorTemplates} = this.props
+
+    let monitorConfig = monitorTemplates.filter(p => p.monitortype === monitor.monitortype)
+    monitorConfig = monitorConfig.length ? monitorConfig[0] : null
+    this.setState({
+      editMonitor: monitor
+    }, () => {
+      this.props.openDeviceMonitorWizard(monitor, monitorConfig)
+    })
+  }
+
   ///////////////////////////////////////////////////////////////////////////////////
 
   onClickAddFilter () {
@@ -577,6 +599,7 @@ export default class Log extends React.Component {
     return (
       <div style={{position: 'absolute', right: 5, top: 5}} className="form-inline">
         <div className="valign-middle inline-block margin-md-left margin-md-right">
+          {canEdit && <EditIcon className="link" onTouchTap={this.onClickEditMonitor.bind(this)}/>}
           {canEdit && <FilterIcon className="link margin-xs-top" onTouchTap={this.onClickAddFilter.bind(this)}/>}
           {this.renderIgnoreFilters(filters, canEdit)}
         </div>
