@@ -161,13 +161,13 @@ export const fetchDevice = (id) => {
   }
 }
 
-export const fetchDeviceByName = (name) => {
+export const fetchDeviceBySlug = (slug) => {
   return (dispatch) => {
-    axios.get(`${ROOT_URL}/device/search/findByName`, {
-      params: { name }
+    axios.get(`${ROOT_URL}/device/search/findBySlug`, {
+      params: { slug }
     }).then(response => dispatch(fetchDeviceSuccess(response))).catch(() => {
-        axios.get(`${ROOT_URL}/group/search/findByName`, {
-          params: {name}
+        axios.get(`${ROOT_URL}/group/search/findBySlug`, {
+          params: { slug }
         }).then(response => dispatch(fetchDeviceSuccess(response)))
           .catch(error => apiError(dispatch, error))
     })

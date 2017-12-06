@@ -7,7 +7,7 @@ import ServerDetail from 'components/dashboard/serverdetail/ServerDetail'
 import {
   fetchDevicesGroups,
   fetchDevice,
-  fetchDeviceByName,
+  fetchDeviceBySlug,
   openDevice
 } from 'actions'
 
@@ -25,7 +25,7 @@ export default connect(
   }), {
     fetchDevicesGroups,
     fetchDevice,
-    fetchDeviceByName,
+    fetchDeviceBySlug,
     openDevice
   }
 )(withRouter(ServerDetailContainer))
