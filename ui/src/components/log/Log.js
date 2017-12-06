@@ -462,7 +462,12 @@ export default class Log extends React.Component {
 
     const device = this.getDeviceByMonitor(m.uid)
     const up = getAgentStatus(device)
-    if (!up) this.tooltipRebuild()
+
+    let tip = ''
+    if (!up) {
+      tip = `Collector builtin is up.<br/>Server ${device.name} IP ${device.wanip} is down.`
+      this.tooltipRebuild()
+    }
     return (
       <span className="link">
         <span className="valign-middle" onClick={this.onClickMonitor.bind(this, m)}>
@@ -471,7 +476,8 @@ export default class Log extends React.Component {
         {m.name}{time ? ` (${time})` : ''}&nbsp;
         </span>
         {!up && <img src="/resources/images/log/down.png" width="16" alt="Device not working"
-             className="valign-middle" data-tip={`${device.wanip} is down`} onClick={this.onClickFixDevice.bind(this, device)}/>}
+             className="valign-middle" data-tip={tip} data-html
+                     onClick={this.onClickFixDevice.bind(this, device)}/>}
       </span>
     )
   }

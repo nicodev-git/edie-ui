@@ -438,3 +438,7 @@ input:-webkit-autofill {
 .relative {
     position: relative;
 }
+
+.__react_component_tooltip.type-dark {
+    font-size: 11px;
+}
