@@ -1,7 +1,7 @@
 import React from 'react'
 import moment from 'moment'
 import SortableTree from 'react-sortable-tree'
-import {findIndex} from 'lodash'
+import {debounce, findIndex} from 'lodash'
 import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
 import EditIcon from 'material-ui/svg-icons/content/create'
 import FilterIcon from 'material-ui/svg-icons/content/filter-list'
@@ -9,6 +9,7 @@ import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert'
 import DeleteIcon from 'material-ui/svg-icons/action/delete'
 import ToggleStar from 'material-ui/svg-icons/toggle/star-border'
 import {IconMenu, IconButton, TextField} from 'material-ui'
+import ReactToolTip from 'react-tooltip'
 
 import TabPage from 'components/common/TabPage'
 import TabPageBody from 'components/common/TabPageBody'
@@ -37,6 +38,8 @@ export default class Log extends React.Component {
       search: '',
       searchValue: ''
     }
+
+    this.tooltipRebuild = debounce(ReactToolTip.rebuild, 150)
   }
   componentWillMount () {
     this.props.fetchDevices()
@@ -168,6 +171,10 @@ export default class Log extends React.Component {
   }
 
   onResultCountUpdate () {
+
+  }
+
+  onClickFixDevice () {
 
   }
 
@@ -453,15 +460,18 @@ export default class Log extends React.Component {
         .replace('a day', '1d')
     }
 
-    const up = getAgentStatus(this.getDeviceByMonitor(m.uid))
-
+    const device = this.getDeviceByMonitor(m.uid)
+    const up = getAgentStatus(device)
+    if (!up) this.tooltipRebuild()
     return (
-      <span className="link" onClick={this.onClickMonitor.bind(this, m)}>
+      <span className="link">
+        <span className="valign-middle" onClick={this.onClickMonitor.bind(this, m)}>
         <img src="/resources/images/dashboard/file.png" width="20" alt=""
                  className="valign-middle"/>&nbsp;
         {m.name}{time ? ` (${time})` : ''}&nbsp;
-        {!up && <img src="/resources/images/dashboard/bell.png" width="16" alt="Device not working"
-             className="valign-middle"/>}
+        </span>
+        {!up && <img src="/resources/images/log/down.png" width="16" alt="Device not working"
+             className="valign-middle" data-tip={`${device.wanip} is down`} onClick={this.onClickFixDevice.bind(this, device)}/>}
       </span>
     )
   }
@@ -601,6 +611,7 @@ export default class Log extends React.Component {
             </div>
           </div>
           {this.renderLogFiltersModal(canEdit)}
+          <ReactToolTip/>
         </TabPageBody>
       </TabPage>
     )
