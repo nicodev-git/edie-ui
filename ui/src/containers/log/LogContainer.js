@@ -7,6 +7,7 @@ import Log from 'components/log/Log'
 import {
   fetchDevices,
   fetchCollectors,
+  fetchMonitorTemplates,
   updateMapDevice,
 
   fetchMonitorGroups,
@@ -20,6 +21,7 @@ import {
   removeLogFilter,
   showLogFiltersModal,
 
+  openDevice,
   openDeviceMonitorWizard,
   closeDeviceMonitorWizard
 } from 'actions'
@@ -38,6 +40,7 @@ export default connect(
     logFilters: state.settings.logFilters,
     logFiltersModalOpen: state.settings.logFiltersModalOpen,
 
+    monitorTemplates: state.settings.monitorTemplates,
     collectors: state.settings.collectors,
     monitorPickerVisible: state.devices.monitorPickerVisible,
     monitorWizardVisible: state.devices.monitorWizardVisible,
@@ -46,6 +49,7 @@ export default connect(
   }), {
     fetchDevices,
     fetchCollectors,
+    fetchMonitorTemplates,
     updateMapDevice,
 
     fetchMonitorGroups,
@@ -59,6 +63,7 @@ export default connect(
     removeLogFilter,
     showLogFiltersModal,
 
+    openDevice,
     openDeviceMonitorWizard,
     closeDeviceMonitorWizard
   }

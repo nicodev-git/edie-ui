@@ -1,7 +1,7 @@
 import React from 'react'
 import moment from 'moment'
 import SortableTree from 'react-sortable-tree'
-import {debounce, findIndex} from 'lodash'
+import {assign, concat, debounce, findIndex} from 'lodash'
 import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
 import EditIcon from 'material-ui/svg-icons/content/create'
 import FilterIcon from 'material-ui/svg-icons/content/filter-list'
@@ -19,6 +19,7 @@ import {showPrompt, showConfirm} from 'components/common/Alert'
 import LogFiltersModal from './LogFiltersModal'
 import {hasPermission} from 'shared/Permission'
 import {getAgentStatus} from 'util/Device'
+import MonitorWizardContainer from 'containers/shared/wizard/MonitorWizardContainer'
 
 const ranges = getRanges()
 const from = ranges['Ever'][0].valueOf()
@@ -44,6 +45,7 @@ export default class Log extends React.Component {
   componentWillMount () {
     this.props.fetchDevices()
     this.props.fetchMonitorGroups()
+    this.props.fetchMonitorTemplates()
     this.props.fetchCollectors()
     this.startTimer()
   }
@@ -326,8 +328,12 @@ export default class Log extends React.Component {
 
     let monitorConfig = monitorTemplates.filter(p => p.monitortype === monitor.monitortype)
     monitorConfig = monitorConfig.length ? monitorConfig[0] : null
+
+    this.props.openDevice(device)
     this.setState({
-      editMonitor: monitor
+      editMonitor: monitor,
+      editDevice: device,
+      monitorConfig
     }, () => {
       this.props.openDeviceMonitorWizard(monitor, monitorConfig)
     })
@@ -459,6 +465,32 @@ export default class Log extends React.Component {
       searchValue: filter.keyword
     })
     this.onCloseFiltersModal()
+  }
+
+  ///////////////////////////////////////////////////////////////////////////////////
+
+  onFinishMonitorWizard (res, params) {
+    let editMonitor = this.state.editMonitor
+    let device = assign({}, this.state.editDevice)
+    let monitor = assign({}, editMonitor, params)
+
+    if (editMonitor) {
+      // Edit
+      const index = findIndex(device.monitors, {uid: editMonitor.uid})
+      if (index >= 0) device.monitors[index] = monitor
+    } else {
+      // Add
+
+      const {monitorConfig} = this.state
+      assign(monitor, {
+        monitortype: monitorConfig.monitortype
+      })
+
+      device.monitors = concat(device.monitors || [], monitor)
+    }
+
+    this.props.updateMapDevice(device)
+    this.props.closeDeviceMonitorWizard()
   }
 
   ///////////////////////////////////////////////////////////////////////////////////
@@ -620,6 +652,25 @@ export default class Log extends React.Component {
     )
   }
 
+  renderMonitorWizard () {
+    if (!this.props.monitorWizardVisible) return null
+
+    const {monitorConfig} = this.state
+    const type = 'monitor-custom'
+    return (
+      <MonitorWizardContainer
+        deviceType={type}
+        title={`Edit ${monitorConfig ? monitorConfig.name : ''} Monitor`}
+        onClose={() => {
+          this.props.closeDeviceMonitorWizard()
+        }}
+        extraParams={{}}
+        configParams={{}}
+        onFinish={this.onFinishMonitorWizard.bind(this)}
+      />
+    )
+  }
+
   render () {
     const {userInfo} = this.props
     const filters = this.getIgnoreFilters()
@@ -667,6 +718,7 @@ export default class Log extends React.Component {
             </div>
           </div>
           {this.renderLogFiltersModal(canEdit)}
+          {this.renderMonitorWizard()}
           <ReactToolTip/>
         </TabPageBody>
       </TabPage>
