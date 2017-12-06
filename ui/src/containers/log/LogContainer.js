@@ -6,6 +6,7 @@ import Log from 'components/log/Log'
 
 import {
   fetchDevices,
+  fetchCollectors,
   updateMapDevice,
 
   fetchMonitorGroups,
@@ -34,9 +35,12 @@ export default connect(
     logFilters: state.settings.logFilters,
     logFiltersModalOpen: state.settings.logFiltersModalOpen,
 
+    collectors: state.settings.collectors,
+
     userInfo: state.dashboard.userInfo
   }), {
     fetchDevices,
+    fetchCollectors,
     updateMapDevice,
 
     fetchMonitorGroups,

@@ -44,6 +44,7 @@ export default class Log extends React.Component {
   componentWillMount () {
     this.props.fetchDevices()
     this.props.fetchMonitorGroups()
+    this.props.fetchCollectors()
     this.startTimer()
   }
 
@@ -450,6 +451,7 @@ export default class Log extends React.Component {
     )
   }
   renderMonitor(m) {
+    const {collectors} = this.props
     let time = ''
     if (m.lastsuccess) {
       time = moment(m.lastsuccess).fromNow()
@@ -465,7 +467,30 @@ export default class Log extends React.Component {
 
     let tip = ''
     if (!up) {
-      tip = `Collector builtin is up.<br/>Server ${device.name} IP ${device.wanip} is down.`
+      if (device.agentType === 'collector') {
+        const index = findIndex(collectors, {id: device.collectorId})
+        if (index < 0) {
+          tip = `Collector not found.`
+        } else {
+          const collectorUp = (new Date().getTime() - collectors[index].lastSeen) < 3 * 60 * 1000
+          tip = `Collector ${collectors[index].name} is ${collectorUp ? 'up' : 'down'}. <br/>`
+          if (collectorUp) {
+            tip = `${tip} Server ${device.name} IP ${device.wanip} is down.`
+          }
+        }
+      } else {
+        const {agent} = device
+        if (!agent) {
+          tip = `Agent not installed.`
+        } else {
+          const agentUp = (new Date().getTime() - agent.lastSeen) < 3 * 60 * 1000
+          tip = `Agent is ${agentUp ? 'up' : 'down'}. <br/>`
+          if (agentUp) {
+            tip = `${tip} Server ${device.name} IP ${device.wanip} is down.`
+          }
+        }
+      }
+
       this.tooltipRebuild()
     }
     return (
@@ -477,7 +502,9 @@ export default class Log extends React.Component {
         </span>
         {!up && <img src="/resources/images/log/down.png" width="16" alt="Device not working"
              className="valign-middle" data-tip={tip} data-html
-                     onClick={this.onClickFixDevice.bind(this, device)}/>}
+                     onClick={this.onClickFixDevice.bind(this, device)}/>}&nbsp;
+        <img src="/resources/images/log/hdd.png" width="16" alt="" data-tip={(m.params || {}).filepath || ''}
+             className="valign-middle"/>
       </span>
     )
   }
