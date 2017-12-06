@@ -10,7 +10,7 @@ export default class ServerCombo extends React.Component {
   onChangeValue (e, index, value) {
     const device = this.getServers()[index]
     this.props.fetchDevice(value)
-    this.props.history.push(`/dashboard/servers/${device.name}/detail`)
+    this.props.history.push(`/dashboard/servers/${device.slug}/detail`)
   }
 
   render () {

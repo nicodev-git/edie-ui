@@ -15,13 +15,13 @@ import Network from 'containers/dashboard/serverdetail/NetworkContainer'
 import RefreshOverlay from 'components/common/RefreshOverlay'
 
 export default class ServerDetail extends React.Component {
-  getDeviceName () {
+  getDeviceSlug () {
     return this.props.match.params.name
   }
 
   findDevice (props) {
     const {devices} = props
-    const index = findIndex(devices, {name: props.match.params.name})
+    const index = findIndex(devices, {slug: props.match.params.name})
     if (index < 0) return null
     return devices[index]
   }
@@ -31,7 +31,7 @@ export default class ServerDetail extends React.Component {
   }
 
   componentWillMount () {
-    this.props.fetchDeviceByName(this.getDeviceName())
+    this.props.fetchDeviceBySlug(this.getDeviceSlug())
     this.props.fetchDevicesGroups()
     this.props.openDevice(this.getDevice())
   }

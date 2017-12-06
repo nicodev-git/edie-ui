@@ -34,7 +34,7 @@ export default class AppliancesView extends React.Component {
   ////////////////////////////////////////////////////////
 
   onClickServer (server) {
-    this.props.history.push(`/dashboard/servers/${server.id}`)
+    this.props.history.push(`/dashboard/servers/${server.slug}`)
   }
 
   onClickDeleteServer (server) {

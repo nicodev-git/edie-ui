@@ -40,7 +40,7 @@ class CommandTable extends React.Component {
       <TabPage>
         <TabPageHeader title="Command" useToolBar titleOptions={<StatusImg {...this.props} device={device}/>}>
         </TabPageHeader>
-        <TabPageBody tabs={ServerDetailTab(device.name, device.templateName)} history={this.props.history} location={this.props.location} transparent>
+        <TabPageBody tabs={ServerDetailTab(device.slug, device.templateName)} history={this.props.history} location={this.props.location} transparent>
           {this.renderBody()}
         </TabPageBody>
       </TabPage>

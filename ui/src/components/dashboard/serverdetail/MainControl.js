@@ -105,13 +105,13 @@ export default class MainControl extends React.Component {
 
   //////////////////////////////////////////////////////////////////////////////////////////////
 
-  getDeviceName () {
+  getDeviceSlug () {
     return this.props.match.params.name
   }
 
   getDevice () {
     const {devices} = this.props
-    const index = findIndex(devices, {name: this.getDeviceName()})
+    const index = findIndex(devices, {slug: this.getDeviceSlug()})
     if (index < 0) return null
     return devices[index]
   }
@@ -561,7 +561,7 @@ export default class MainControl extends React.Component {
           </ToolbarGroup>
         </TabPageHeader>
         <TabPageBody
-          tabs={ServerDetailTab(device.name, device.templateName)}
+          tabs={ServerDetailTab(device.slug, device.templateName)}
           history={this.props.history} location={this.props.location} transparent>
           {this.renderGrid()}
           {this.renderDeviceEditModal()}
