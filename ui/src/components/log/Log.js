@@ -453,11 +453,15 @@ export default class Log extends React.Component {
         .replace('a day', '1d')
     }
 
+    const up = getAgentStatus(this.getDeviceByMonitor(m.uid))
+
     return (
       <span className="link" onClick={this.onClickMonitor.bind(this, m)}>
-            <img src="/resources/images/dashboard/file.png" width="20" alt=""
-                 className="valign-middle"/>
-        &nbsp;{m.name}{time ? ` (${time})` : ''}
+        <img src="/resources/images/dashboard/file.png" width="20" alt=""
+                 className="valign-middle"/>&nbsp;
+        {m.name}{time ? ` (${time})` : ''}&nbsp;
+        {!up && <img src="/resources/images/dashboard/bell.png" width="16" alt="Device not working"
+             className="valign-middle"/>}
       </span>
     )
   }
