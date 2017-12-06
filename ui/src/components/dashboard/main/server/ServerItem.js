@@ -3,6 +3,7 @@ import ReactTooltip from 'react-tooltip'
 
 import AppletCard from 'components/common/AppletCard'
 import { extImageBaseUrl, appletColors as colors, trimOSName, checkAgentUp } from 'shared/Global'
+import {getAgentStatus} from 'util/Device'
 
 export default class ServerItem extends React.Component {
   constructor (props) {
@@ -13,23 +14,10 @@ export default class ServerItem extends React.Component {
     }
   }
 
-  getStatus () {
-    const {lastSeen, agentType, agent} = this.props.server
-    if (agentType) {
-      const now = new Date().getTime()
-      if (agentType === 'agent') {
-        if (agent && (now - agent.lastSeen) < 3 * 60 * 1000) return true
-      } else if (agentType === 'collector') {
-        if ((now - lastSeen) < 3 * 60 * 1000) return true
-      }
-    }
-    return false
-  }
-
   componentWillMount () {
     const {noCred} = this.props
     if (noCred) return
-    const up = this.getStatus()
+    const up = getAgentStatus(this.props.server)
     this.setState({ up })
 
     if (!up) {

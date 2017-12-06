@@ -17,6 +17,7 @@ import LogPapers from 'components/dashboard/log/LogPapers'
 import {showPrompt, showConfirm} from 'components/common/Alert'
 import LogFiltersModal from './LogFiltersModal'
 import {hasPermission} from 'shared/Permission'
+import {getAgentStatus} from 'util/Device'
 
 const ranges = getRanges()
 const from = ranges['Ever'][0].valueOf()
