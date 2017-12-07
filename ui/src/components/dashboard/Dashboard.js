@@ -28,11 +28,11 @@ export default class Dashboard extends React.Component {
 
   render () {
     const hidden = this.isHidden()
-    const showTraffic = this.getOptionValue('NETWORK_TRAFFIC') === 'true'
+    const showTraffic = hidden ? false : this.getOptionValue('NETWORK_TRAFFIC') === 'true'
     return (
       <div className={`flex-vertical flex-1 ${hidden ? 'hidden' : ''}`} hidden={hidden}>
         <MetricPanel {...this.props}/>
-        <Map {...this.props} hidden={hidden} showTraffic={!hidden && showTraffic}/>
+        <Map {...this.props} hidden={hidden} showTraffic={showTraffic}/>
         <MainIncidentPanel {...this.props} hidden={hidden}/>
       </div>
     )
