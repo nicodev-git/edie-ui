@@ -26,7 +26,7 @@ export default class WorkflowStep1 extends Component {
           <Field name="severity" component={FormSelect} label="Severity" options={severities}/>
         </CardPanel>
 
-        <CardPanel title="Rule">
+        <CardPanel title="Description">
           <div className="margin-lg-bottom">
             <Chip style={chipStyles.smallChip} labelStyle={chipStyles.smallLabel} onTouchTap={onClickRawData}>
               SHOW_RAW_DATA
