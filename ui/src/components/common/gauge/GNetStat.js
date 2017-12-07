@@ -84,7 +84,10 @@ export default class GNetStat extends React.Component {
       const {netstat} = msg.data
       if (!netstat) return
       this.setState({
-        netstats: netstat
+        netstats: netstat.map(p => ({
+          ...p,
+          Id: `${p.LocalAddress}-${p.ForeignAddress}`
+        }))
       })
     }
   }
@@ -122,7 +125,7 @@ export default class GNetStat extends React.Component {
       <InfiniteTable
         cells={this.columns}
         ref="table"
-        rowMetadata={{'key': 'LocalAddress'}}
+        rowMetadata={{'key': 'Id'}}
         selectable
         rowHeight={40}
 
