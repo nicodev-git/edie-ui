@@ -35,6 +35,7 @@ class ServerRange extends React.Component {
                   <th>Host</th>
                   <th>IP</th>
                   <th>OS</th>
+                  <th>Status</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -43,6 +44,7 @@ class ServerRange extends React.Component {
                     <td>{p.host}</td>
                     <td>{p.ip}</td>
                     <td>{p.os}</td>
+                    <td>{p.status}</td>
                   </tr>
                 )}
                 </tbody>
