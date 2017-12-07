@@ -697,7 +697,7 @@ export default class Log extends React.Component {
 
 
         <TabPageBody tabs={[]} history={this.props.history} location={this.props.location} transparent>
-          <div className="flex-horizontal" style={{height: '100%'}}>
+          <div className="flex-horizontal flex-1" style={{height: '100%'}}>
             <div className="flex-vertical" style={{minWidth: 300, marginRight: 5}}>
               <div className="header-blue relative margin-xs-right">
                 Log
