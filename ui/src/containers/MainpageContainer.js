@@ -273,7 +273,6 @@ export default connect((state) => {
     mapDevices: state.dashboard.mapDevices,
     mapLines: state.dashboard.mapLines,
     selectedMap: state.dashboard.selectedMap,
-    showTraffic: state.settings.showTraffic,
 
     newIncidentModalOpen: state.dashboard.newIncidentModalOpen,
 

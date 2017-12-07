@@ -190,8 +190,6 @@ const initialState = {
   workflows: [],
   editWorkflowTags: [],
 
-  showTraffic: true,
-
   monitorTplTags: [],
   monitorTplCredTypes: [],
 
