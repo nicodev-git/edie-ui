@@ -8,7 +8,9 @@ import {
   fetchDevices,
 
   openDeviceWorkflowModal,
-  removeWorkflow
+  removeWorkflow,
+
+  updateMapDevice
 } from 'actions'
 class DeviceWfContainer extends React.Component {
   render () {
@@ -30,6 +32,8 @@ export default connect(
     fetchDevices,
 
     openDeviceWorkflowModal,
-    removeWorkflow
+    removeWorkflow,
+
+    updateMapDevice
   }
 )(withRouter(DeviceWfContainer))

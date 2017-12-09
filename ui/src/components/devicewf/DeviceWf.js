@@ -81,6 +81,16 @@ export default class DeviceWf extends React.Component {
     return this.props.devices.filter(p => p.tags && p.tags.includes('Server'))
   }
 
+  getSelectedDevice () {
+    let {selected} = this.state
+    if (!selected) return null
+
+    const {devices} = this.props
+    const index = findIndex(devices, {id: selected.id})
+    if (index >= 0) selected = devices[index]
+    return selected
+  }
+
   getTable () {
     return this.refs.table
   }
@@ -90,9 +100,14 @@ export default class DeviceWf extends React.Component {
   }
 
   onClickDeleteWf (wf) {
+    const device = this.getSelectedDevice()
+    if (!device) return
     showConfirm('Are you sure?', btn => {
       if (btn !== 'ok') return
-      this.props.removeWorkflow(wf)
+      this.props.updateMapDevice({
+        ...device,
+        workflowids: device.workflowids.filter(p => p !== wf.id)
+      })
     })
   }
 
@@ -136,13 +151,8 @@ export default class DeviceWf extends React.Component {
   }
 
   renderWorkflows (canEdit) {
-    let {selected} = this.state
+    const selected = this.getSelectedDevice()
     if (!selected) return null
-
-    const {devices} = this.props
-    const index = findIndex(devices, {id: selected.id})
-    if (index >= 0) selected = devices[index]
-
     return (
       <InfiniteTable
         id="rule1"
