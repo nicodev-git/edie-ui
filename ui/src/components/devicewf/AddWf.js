@@ -70,7 +70,7 @@ export default class AddWf extends React.Component {
     device.workflowids = device.workflowids || []
     device.workflowids = [...device.workflowids, ...selectedSysWorkflows.map(p => p.id)]
     this.props.updateMapDevice(device)
-    this.props.history.push('/devicewf')
+    setTimeout(() => this.props.history.push('/devicewf'), 10)
   }
 
   ////////////////////////////////////////////////

@@ -4,6 +4,7 @@ import DeleteIcon from 'material-ui/svg-icons/action/delete'
 import EditIcon from 'material-ui/svg-icons/content/create'
 import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
 import PublicIcon from 'material-ui/svg-icons/social/public'
+import {findIndex} from 'lodash'
 
 import TabPage from 'components/common/TabPage'
 import TabPageBody from 'components/common/TabPageBody'
@@ -13,7 +14,7 @@ import {chipStyles} from 'style/common/materialStyles'
 import InfiniteTable from 'components/common/InfiniteTable';
 import MainWorkflowModal from 'components/dashboard/map/device/main/workflows/MainWorkflowModal'
 import {showConfirm} from 'components/common/Alert'
-import {hasPermission} from "../../shared/Permission";
+import {hasPermission} from 'shared/Permission'
 
 export default class DeviceWf extends React.Component {
   constructor (props) {
@@ -135,8 +136,12 @@ export default class DeviceWf extends React.Component {
   }
 
   renderWorkflows (canEdit) {
-    const {selected} = this.state
+    let {selected} = this.state
     if (!selected) return null
+
+    const {devices} = this.props
+    const index = findIndex(devices, {id: selected.id})
+    if (index >= 0) selected = devices[index]
 
     return (
       <InfiniteTable
