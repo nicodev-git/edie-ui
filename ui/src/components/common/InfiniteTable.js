@@ -77,13 +77,13 @@ class InfiniteTable extends React.Component {
     return Math.max(this.props.useExternal ? this.state.results.length : this.props.data.length, this.props.pageSize)
   }
 
-  getExternalData (page, clear) {
+  getExternalData (page, clear, force) {
     if (this.state.isLoading) {
       if (clear) {
         if (this.state.results.length) this.setState({results: []})
       }
       // console.log('Already loading.')
-      return
+      if (!force) return
     }
 
     const {url, params, pageSize, onUpdateCount, onUpdateLoading, handleRecord} = this.props
@@ -210,7 +210,7 @@ class InfiniteTable extends React.Component {
       this.setState({
         hasMore: true
       })
-      this.getExternalData(1, true)
+      this.getExternalData(1, true, true)
     }
   }
 
