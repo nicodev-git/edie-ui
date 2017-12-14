@@ -78,8 +78,8 @@ class DeviceWizard extends Component {
   }
 
   componentDidUpdate (prevProps) {
-    const {deviceType} = this.props
-    if (deviceType !== prevProps.deviceType) {
+    const {deviceType, templateName} = this.props
+    if (deviceType !== prevProps.deviceType || templateName !== prevProps.templateName) {
       const config = wizardConfig[deviceType]
       const stepItems = config.steps
 

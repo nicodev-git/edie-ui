@@ -120,6 +120,7 @@ export default class AddServer extends React.Component {
       <div style={addingDevice ? nonScrollStyle : null}>
         <DeviceWizardContainer
           noModal
+          templateName={tpl.name}
           deviceType={getDeviceType(tpl.name)}
           onClose={this.closeCallback.bind(this)}
           title={tpl.name}

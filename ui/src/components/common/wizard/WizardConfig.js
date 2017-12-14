@@ -10,6 +10,13 @@ export const deviceTypeMap = {
   'Partners': 'group',
 
   'Linux Server': 'linux',
+  'Cent OS': 'linux',
+  'Core OS': 'linux',
+  'Ubuntu': 'linux',
+  'Red Hat': 'linux',
+  'Debian': 'linux',
+  'Fedora': 'linux',
+  'Kali': 'linux',
 
   'Long hub': 'longhub',
   'Free Text': 'usertext',
