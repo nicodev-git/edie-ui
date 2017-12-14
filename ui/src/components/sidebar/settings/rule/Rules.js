@@ -119,6 +119,10 @@ export default class Rules extends React.Component {
 
     this.props.removeWorkflow(selected)
   }
+
+  onCloneWorkflow () {
+
+  }
   render () {
     const {userInfo} = this.props
     const canEdit = hasPermission(userInfo, 'EditSettings')
@@ -130,6 +134,7 @@ export default class Rules extends React.Component {
               {canEdit && <RaisedButton label="Add" onTouchTap={this.onAddWorkflow.bind(this)}/>}&nbsp;
               {canEdit && <RaisedButton label="Edit" onTouchTap={this.onEditWorkflow.bind(this)}/>}&nbsp;
               {canEdit && <RaisedButton label="Remove" onTouchTap={this.onRemoveWorkflow.bind(this)}/>}&nbsp;
+              {canEdit && <RaisedButton label="Clone" onTouchTap={this.onCloneWorkflow.bind(this)}/>}&nbsp;
               <WfTabs history={this.props.history}/>
             </div>
           </div>
