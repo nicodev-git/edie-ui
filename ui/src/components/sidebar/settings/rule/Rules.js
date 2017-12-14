@@ -109,18 +109,20 @@ export default class Rules extends React.Component {
 
   onEditWorkflow () {
     const selected = this.getTable().getSelected()
-    if (!selected) return showAlert('Please select map.')
+    if (!selected) return showAlert('Please select workflow.')
     this.props.openWorkflowModal(selected)
   }
 
   onRemoveWorkflow () {
     const selected = this.getTable().getSelected()
-    if (!selected) return showAlert('Please select map.')
+    if (!selected) return showAlert('Please select workflow.')
 
     this.props.removeWorkflow(selected)
   }
 
   onCloneWorkflow () {
+    const selected = this.getTable().getSelected()
+    if (!selected) return showAlert('Please select workflow.')
 
   }
   render () {
