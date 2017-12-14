@@ -82,31 +82,31 @@ export const commonconfig = {
     values: [{
       display: 'Cent OS',
       value: 'Cent OS',
-      template: 'Linux Server'
+      template: 'Cent OS'
     }, {
       display: 'Core OS',
       value: 'Core OS',
-      template: 'Linux Server'
+      template: 'Core OS'
     }, {
       display: 'Debian',
       value: 'Debian',
-      template: 'Linux Server'
+      template: 'Debian'
     }, {
       display: 'Fedora',
       value: 'Fedora',
-      template: 'Linux Server'
+      template: 'Fedora'
     }, {
       display: 'Kali',
       value: 'Kali',
-      template: 'Linux Server'
+      template: 'Kali'
     }, {
       display: 'Red Hat',
       value: 'Red Hat',
-      template: 'Linux Server'
+      template: 'Red Hat'
     }, {
       display: 'Ubuntu',
       value: 'Ubuntu',
-      template: 'Linux Server'
+      template: 'Ubuntu'
     }, {
       display: 'Windows',
       value: 'Windows',
