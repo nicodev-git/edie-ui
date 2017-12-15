@@ -15,7 +15,7 @@ export default class WorkflowStep0 extends Component {
           <Field name="name" component={FormInput} label="Name"/>
         </div>
         <div className="wizard-diagram-choice">
-          <SubHeader name="Add by"/>
+          <div className="col-md-3">Add By</div>
           <div className="col-md-9">
             <FlatButton
               icon={<ActionList color={workflowEditType === 'wizard' ? 'white' : null}/>}
