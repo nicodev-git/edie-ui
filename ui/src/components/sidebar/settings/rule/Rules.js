@@ -123,13 +123,13 @@ export default class Rules extends React.Component {
   onCloneWorkflow () {
     const selected = this.getTable().getSelected()
     if (!selected) return showAlert('Please select workflow.')
-      this.props.addWorkflow({
-          ...selected,
-          id: null,
-          origin: 'USER',
-          uuid: null,
-          version: selected.version + 1
-      })
+    this.props.addWorkflow({
+        ...selected,
+        id: null,
+        origin: 'USER',
+        uuid: null,
+        version: selected.version + 1
+    })
   }
   render () {
     const {userInfo} = this.props
