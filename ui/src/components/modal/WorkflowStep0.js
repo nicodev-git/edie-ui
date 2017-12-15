@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Field } from 'redux-form'
-import { FormInput, SubHeader } from 'components/modal/parts'
+import { FormInput } from 'components/modal/parts'
 import ActionList from 'material-ui/svg-icons/action/list'
 import ActionTrendingUp from 'material-ui/svg-icons/action/trending-up'
 import {FlatButton} from 'material-ui'
