@@ -264,7 +264,8 @@ export default connect(
 
     wfTagModalOpen: state.settings.wfTagModalOpen,
     editWorkflowTags: state.settings.editWorkflowTags,
-    editWfParams: state.settings.editWfParams
+    editWfParams: state.settings.editWfParams,
+    paramEditModalOpen: state.devices.paramEditModalOpen
   }), {
     closeDeviceWorkflowModal,
     addDeviceWorkflow,

@@ -2,7 +2,7 @@ import React from 'react'
 import {reduxForm} from 'redux-form'
 import {connect} from 'react-redux'
 import {assign} from 'lodash'
-import ParamEditModalView from './ParamEditModalView'
+import ParamEditModalView from 'components/common/wizard/input/ParamEditModalView'
 import {
   closeParamEditModal,
   updateParam,
@@ -23,13 +23,9 @@ const styles = {
   }
 }
 
-class ParamEditModal extends React.Component {
+class WfParamEditModal extends React.Component {
   onClickClose () {
     this.props.closeParamEditModal()
-  }
-
-  onClickAdd () {
-    // TODO
   }
 
   onClickDefaultKey (key) {
@@ -62,11 +58,6 @@ class ParamEditModal extends React.Component {
   }
 }
 
-export default connect(state => ({
-  initialValues: state.devices.editParam,
-  editParam: state.devices.editParam
-}), {
-  closeParamEditModal,
-  updateParam,
-  addParam
-})(reduxForm({form: 'monitorParamEdit'})(ParamEditModal))
+export default connect((state, props) => ({
+  initialValues: props.editParam
+}))(reduxForm({form: 'wfParamEdit'})(WfParamEditModal))

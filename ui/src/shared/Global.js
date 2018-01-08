@@ -56,6 +56,11 @@ export const lineTypes = [{
   visible: true
 }]
 
+const defaultKeys = [
+  'port', 'user', 'password', 'hostname', 'checkinterval', 'timeout', 'url', 'filepath', 'remove_after', 'parse',
+  'integrated'
+]
+
 export function getSeverityIcon (severity) {
   switch ((severity || '').toLowerCase()) {
     case 'high':

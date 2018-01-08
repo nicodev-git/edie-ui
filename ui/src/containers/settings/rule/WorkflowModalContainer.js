@@ -44,6 +44,7 @@ export default connect(
     editWorkflowTags: state.settings.editWorkflowTags,
 
     editWfParams: state.settings.editWfParams,
+    paramEditModalOpen: state.devices.paramEditModalOpen,
 
     initialValues: assign({
       enable: true,

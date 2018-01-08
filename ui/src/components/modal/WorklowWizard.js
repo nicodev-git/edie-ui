@@ -4,7 +4,7 @@ import { WizardButtons } from 'components/modal/parts'
 export default class WorkflowWizard extends Component {
   render () {
     const {step, steps, current, markers, onClose, onDiagram,
-      onPrev, onNext, diagramModal, isDiagramButton} = this.props
+      onPrev, onNext, diagramModal, isDiagramButton, modals} = this.props
     return (
       <div>
         <div className="wizard-container p-none m-none">
@@ -20,6 +20,7 @@ export default class WorkflowWizard extends Component {
             onNext={onNext} onDiagram={onDiagram} isDiagramButton={isDiagramButton}/>
         </div>
         {diagramModal}
+        {modals}
       </div>
     )
   }

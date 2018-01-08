@@ -5,6 +5,7 @@ import DiagramViewContainer from 'containers/settings/rule/DiagramViewContainer'
 import { WorkflowStep0, WorkflowStep1, WorkflowStep2, WorkflowStep3, WorkflowWizard,
   MainWorkflowModalView } from 'components/modal'
 import TagPickerModal from 'containers/settings/tag/TagPickerModalContainer'
+import ParamEditModal from 'components/common/wizard/input/ParamEditModal'
 
 export default class WorkflowModalInner extends Component {
   onClickAddTag () {
@@ -52,7 +53,7 @@ export default class WorkflowModalInner extends Component {
   }
 
   renderWizardStep () {
-    const {current, rules, selectedRuleIndex, actions, selectedActionIndex, onClickRawData, editWorkflowTags, removeWorkflowTag} = this.props
+    const {current, rules, selectedRuleIndex, actions, selectedActionIndex, onClickRawData, editWorkflowTags, removeWorkflowTag, editWfParams} = this.props
     let categoryModal = this.renderCategoryModal()
     let ruleModal = null
     let actionModal = this.renderActionModal()
@@ -96,7 +97,7 @@ export default class WorkflowModalInner extends Component {
         onAddCategory={this.props.onClickAddCategory}
         categoryModal={categoryModal}
 
-        editParams={[]}
+        editParams={editWfParams}
         onClickAddParam={() => {}}
       />
     )
@@ -112,6 +113,13 @@ export default class WorkflowModalInner extends Component {
     }
   }
 
+  renderParamEditModal () {
+    if (!this.props.paramEditModalOpen) return null
+    return (
+      <ParamEditModal/>
+    )
+  }
+
   renderWizard () {
     const {current, steps} = this.props
     let step = this.renderStep()
@@ -125,6 +133,11 @@ export default class WorkflowModalInner extends Component {
         </div>
       )
     }
+    const modals = (
+      <div>
+        {this.renderParamEditModal()}
+      </div>
+    )
     return (
       <WorkflowWizard
         markers={markers}
@@ -132,6 +145,7 @@ export default class WorkflowModalInner extends Component {
         steps={steps}
         current={current}
         diagramModal={diagramModal}
+        modals={modals}
         onClose={this.props.onClickClose}
         onDiagram={this.props.onClickDiagram}
         onPrev={this.props.onClickPrev}
