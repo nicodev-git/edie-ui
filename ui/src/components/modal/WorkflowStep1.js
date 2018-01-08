@@ -10,6 +10,27 @@ import { buttonStyle, iconStyle, chipStyles } from 'style/common/materialStyles'
 import {severities} from 'shared/Global'
 
 export default class WorkflowStep1 extends Component {
+  renderParams () {
+    const {editParams, onClickAddParam} = this.props
+
+    return (
+      <CardPanel title="Params">
+        <div style={chipStyles.wrapper}>
+          {editParams.map(p =>
+            <Chip
+              key={p.key}
+              style={chipStyles.chip}
+              onTouchTap={() => {}}
+              onRequestDelete={() => {}}
+            >
+              <b>{p.key}</b>: {p.value}
+            </Chip>
+          )}
+          <Chip style={chipStyles.chip} onTouchTap={onClickAddParam}><b>&nbsp;&nbsp;+&nbsp;&nbsp;</b></Chip>
+        </div>
+      </CardPanel>
+    )
+  }
   render () {
     const {onClickRawData, tags, onClickAddTag, onClickDeleteTag, tagModal} = this.props
     return (
@@ -45,6 +66,8 @@ export default class WorkflowStep1 extends Component {
             </div>
           </div>
         </CardPanel>
+
+        {this.renderParams()}
 
         <div className="margin-md-top">
           <Field name="enable" label="Enabled" component={FormCheckbox}/>
