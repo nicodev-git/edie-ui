@@ -20,7 +20,9 @@ import {
 
   showWorkflowTagModal,
   addWorkflowTag,
-  removeWorkflowTag
+  removeWorkflowTag,
+
+  showWfParamModal
 } from 'actions'
 
 class WorkflowModalContainer extends React.Component {
@@ -44,7 +46,8 @@ export default connect(
     editWorkflowTags: state.settings.editWorkflowTags,
 
     editWfParams: state.settings.editWfParams,
-    paramEditModalOpen: state.devices.paramEditModalOpen,
+    wfParamModalOpen: state.settings.wfParamModalOpen,
+    editWfParam: state.settings.editWfParam,
 
     initialValues: assign({
       enable: true,
@@ -68,7 +71,9 @@ export default connect(
 
       showWorkflowTagModal,
       addWorkflowTag,
-      removeWorkflowTag
+      removeWorkflowTag,
+
+      showWfParamModal
     }, dispatch)
   })
 )(WorkflowModalContainer)

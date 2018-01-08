@@ -100,6 +100,8 @@ import {
   FETCH_ROLES,
   UPDATE_ROLE,
 
+  SHOW_WF_PARAM_MODAL,
+
   NO_AUTH_ERROR
 } from './types'
 
@@ -869,5 +871,11 @@ export const updateRole = entity => {
     axios.put(entity._links.self.href, entity).then(response => {
       dispatch({type: UPDATE_ROLE, data: response.data})
     }).catch(error => apiError(dispatch, error))
+  }
+}
+
+export const showWfParamModal = (visible, param) => {
+  return dispatch => {
+    dispatch({type: SHOW_WF_PARAM_MODAL, visible, param})
   }
 }

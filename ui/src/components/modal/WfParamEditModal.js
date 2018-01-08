@@ -3,11 +3,6 @@ import {reduxForm} from 'redux-form'
 import {connect} from 'react-redux'
 import {assign} from 'lodash'
 import ParamEditModalView from 'components/common/wizard/input/ParamEditModalView'
-import {
-  closeParamEditModal,
-  updateParam,
-  addParam
-} from 'actions'
 
 import {defaultKeys} from 'shared/Global'
 

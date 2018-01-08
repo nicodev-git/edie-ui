@@ -26,7 +26,9 @@ import {
   closeWfCategoryModal,
 
   showWorkflowTagModal,
-  addWorkflow
+  addWorkflow,
+
+  showWfParamModal
 } from 'actions'
 
 class MainWorkflowModal extends Component {
@@ -265,7 +267,8 @@ export default connect(
     wfTagModalOpen: state.settings.wfTagModalOpen,
     editWorkflowTags: state.settings.editWorkflowTags,
     editWfParams: state.settings.editWfParams,
-    paramEditModalOpen: state.devices.paramEditModalOpen
+    wfParamModalOpen: state.settings.wfParamModalOpen,
+    editWfParam: state.settings.editWfParam
   }), {
     closeDeviceWorkflowModal,
     addDeviceWorkflow,
@@ -286,6 +289,8 @@ export default connect(
     closeWfCategoryModal,
 
     showWorkflowTagModal,
-    addWorkflow
+    addWorkflow,
+
+    showWfParamModal
   }
 )(reduxForm({form: 'workflowForm'})(MainWorkflowModal))

@@ -6,9 +6,8 @@ import CategoryModal from './CategoryModal'
 import ActionModal from './ActionModal'
 import DiagramModalContainer from 'containers/device/main/workflows/DiagramModalContainer'
 import { WorkflowStep1, WorkflowStep2, WorkflowStep3, WorkflowWizard,
-  MainWorkflowModalView } from 'components/modal'
+  MainWorkflowModalView, WfParamEditModal } from 'components/modal'
 import TagPickerModal from 'containers/settings/tag/TagPickerModalContainer'
-import ParamEditModal from 'components/common/wizard/input/ParamEditModal'
 
 export default class WorkflowModalInner extends Component {
   onClickAddTag () {
@@ -57,7 +56,8 @@ export default class WorkflowModalInner extends Component {
   }
 
   renderStep (step) {
-    const {rules, selectedRuleIndex, actions, selectedActionIndex, onClickRawData, editWorkflowTags, removeWorkflowTag, editWfParams} = this.props
+    const {rules, selectedRuleIndex, actions, selectedActionIndex, onClickRawData,
+      editWorkflowTags, removeWorkflowTag, editWfParams, showWfParamModal} = this.props
 
     if (step === 1) {
       const categoryModal = this.renderCategoryModal()
@@ -74,7 +74,7 @@ export default class WorkflowModalInner extends Component {
           categoryModal={categoryModal}
 
           editParams={editWfParams}
-          onClickAddParam={() => {}}
+          onClickAddParam={() => showWfParamModal(true)}
         />
       )
     } else if (step === 2) {
@@ -108,9 +108,9 @@ export default class WorkflowModalInner extends Component {
     return null
   }
   renderParamEditModal () {
-    if (!this.props.paramEditModalOpen) return null
+    if (!this.props.wfParamModalOpen) return null
     return (
-      <ParamEditModal/>
+      <WfParamEditModal editParam={{}}/>
     )
   }
   renderWizard () {

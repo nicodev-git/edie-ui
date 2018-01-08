@@ -157,7 +157,9 @@ import {
   SHOW_DEVICE_CREDS_PICKER,
 
   FETCH_ROLES,
-  UPDATE_ROLE
+  UPDATE_ROLE,
+
+  SHOW_WF_PARAM_MODAL
 
 } from 'actions/types'
 
@@ -678,6 +680,9 @@ export default function (state = initialState, action) {
       return { ...state, roles: action.data }
     case UPDATE_ROLE:
       return { ...state, roles: state.roles.map(p => p.id === action.data.id ? action.data : p) }
+
+    case SHOW_WF_PARAM_MODAL:
+      return { ...state, wfParamModalOpen: action.visible, editWfParam: action.param }
     default:
       return state
   }

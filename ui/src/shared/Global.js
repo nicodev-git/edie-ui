@@ -56,7 +56,7 @@ export const lineTypes = [{
   visible: true
 }]
 
-const defaultKeys = [
+export const defaultKeys = [
   'port', 'user', 'password', 'hostname', 'checkinterval', 'timeout', 'url', 'filepath', 'remove_after', 'parse',
   'integrated'
 ]
