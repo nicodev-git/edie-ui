@@ -263,7 +263,8 @@ export default connect(
     editRule: state.devices.editRule,
 
     wfTagModalOpen: state.settings.wfTagModalOpen,
-    editWorkflowTags: state.settings.editWorkflowTags
+    editWorkflowTags: state.settings.editWorkflowTags,
+    editWfParams: state.settings.editWfParams
   }), {
     closeDeviceWorkflowModal,
     addDeviceWorkflow,

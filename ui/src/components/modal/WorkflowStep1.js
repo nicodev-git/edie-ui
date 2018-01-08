@@ -26,7 +26,7 @@ export default class WorkflowStep1 extends Component {
               <b>{p.key}</b>: {p.value}
             </Chip>
           )}
-          <Chip style={chipStyles.chip} onTouchTap={onClickAddParam}><b>&nbsp;&nbsp;+&nbsp;&nbsp;</b></Chip>
+          <Chip style={chipStyles.chip} onTouchTap={onClickAddParam}><b>+</b></Chip>
         </div>
       </CardPanel>
     )

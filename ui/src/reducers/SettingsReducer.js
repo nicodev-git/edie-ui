@@ -161,7 +161,7 @@ import {
 
 } from 'actions/types'
 
-import {concat, difference, findIndex} from 'lodash'
+import {concat, difference, findIndex, keys} from 'lodash'
 
 const initialState = {
   envVarAvailable: false,
@@ -189,6 +189,7 @@ const initialState = {
 
   workflows: [],
   editWorkflowTags: [],
+  editWfParams: [],
 
   monitorTplTags: [],
   monitorTplCredTypes: [],
@@ -437,12 +438,27 @@ export default function (state = initialState, action) {
     case OPEN_WORKFLOW_MODAL: {
       const editWorkflow = action.data
       const editWorkflowTags = editWorkflow ? (editWorkflow.tags || []) : []
-      return { ...state, workflowModalVisible: true, editWorkflow, workflowEditType: 'wizard', editWorkflowTags }
+
+      const paramKeys = keys(editWorkflow ? (editWorkflow.params || {}) : {})
+      const editWfParams = []
+      paramKeys.forEach(k => {
+        editWfParams.push({
+          key: k, value: editWorkflow.params[k]
+        })
+      })
+      return { ...state, workflowModalVisible: true, editWorkflow, workflowEditType: 'wizard', editWorkflowTags, editWfParams }
     }
     case OPEN_DEVICE_WORKFLOW_MODAL: {
       const editWorkflow = action.data
       const editWorkflowTags = editWorkflow ? (editWorkflow.tags || []) : []
-      return { ...state, editWorkflowTags }
+      const paramKeys = keys(editWorkflow ? (editWorkflow.params || {}) : {})
+      const editWfParams = []
+      paramKeys.forEach(k => {
+        editWfParams.push({
+          key: k, value: editWorkflow.params[k]
+        })
+      })
+      return { ...state, editWorkflowTags, editWfParams }
     }
 
     case CLOSE_WORKFLOW_MODAL: {

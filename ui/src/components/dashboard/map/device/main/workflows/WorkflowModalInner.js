@@ -71,6 +71,9 @@ export default class WorkflowModalInner extends Component {
           categories={this.props.workflowCategories}
           onAddCategory={this.props.onClickAddCategory}
           categoryModal={categoryModal}
+
+          editParams={[]}
+          onClickAddParam={() => {}}
         />
       )
     } else if (step === 2) {

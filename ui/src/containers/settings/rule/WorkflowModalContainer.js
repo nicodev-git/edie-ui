@@ -43,6 +43,8 @@ export default connect(
     wfTagModalOpen: state.settings.wfTagModalOpen,
     editWorkflowTags: state.settings.editWorkflowTags,
 
+    editWfParams: state.settings.editWfParams,
+
     initialValues: assign({
       enable: true,
       severity: 'HIGH'

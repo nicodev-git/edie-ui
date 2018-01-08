@@ -58,19 +58,6 @@ export default class WorkflowModalInner extends Component {
     let actionModal = this.renderActionModal()
 
     if (current === 2) {
-      return (
-        <WorkflowStep1
-          tags={editWorkflowTags}
-          onClickDeleteTag={removeWorkflowTag}
-          onClickAddTag={this.onClickAddTag.bind(this)}
-          tagModal={this.renderTagsModal()}
-
-          onClickRawData={onClickRawData}
-          categories={this.props.workflowCategories}
-          onAddCategory={this.props.onClickAddCategory}
-          categoryModal={categoryModal}
-        />
-      )
     } else if (current === 3) {
       return (
         <WorkflowStep2
@@ -97,7 +84,22 @@ export default class WorkflowModalInner extends Component {
         />
       )
     }
-    return null
+    return (
+      <WorkflowStep1
+        tags={editWorkflowTags}
+        onClickDeleteTag={removeWorkflowTag}
+        onClickAddTag={this.onClickAddTag.bind(this)}
+        tagModal={this.renderTagsModal()}
+
+        onClickRawData={onClickRawData}
+        categories={this.props.workflowCategories}
+        onAddCategory={this.props.onClickAddCategory}
+        categoryModal={categoryModal}
+
+        editParams={[]}
+        onClickAddParam={() => {}}
+      />
+    )
   }
 
   renderDiagramStep (current) {
