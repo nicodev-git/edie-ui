@@ -101,6 +101,9 @@ import {
   UPDATE_ROLE,
 
   SHOW_WF_PARAM_MODAL,
+  ADD_WF_PARAM,
+  UPDATE_WF_PARAM,
+  REMOVE_WF_PARAM,
 
   NO_AUTH_ERROR
 } from './types'
@@ -877,5 +880,23 @@ export const updateRole = entity => {
 export const showWfParamModal = (visible, param) => {
   return dispatch => {
     dispatch({type: SHOW_WF_PARAM_MODAL, visible, param})
+  }
+}
+
+export function addWfParam (param) {
+  return dispatch => {
+    dispatch({type: ADD_WF_PARAM, param})
+  }
+}
+
+export function updateWfParam (oldParam, newParam) {
+  return dispatch => {
+    dispatch({type: UPDATE_WF_PARAM, oldParam, newParam})
+  }
+}
+
+export function removeWfParam (param) {
+  return dispatch => {
+    dispatch({type: REMOVE_WF_PARAM, param})
   }
 }
