@@ -53,7 +53,7 @@ export default class WorkflowModalInner extends Component {
 
   renderWizardStep () {
     const {current, rules, selectedRuleIndex, actions, selectedActionIndex, onClickRawData,
-      editWorkflowTags, removeWorkflowTag, editWfParams, showWfParamModal} = this.props
+      editWorkflowTags, removeWorkflowTag, editWfParams, showWfParamModal, removeWfParam} = this.props
     let categoryModal = this.renderCategoryModal()
     let ruleModal = null
     let actionModal = this.renderActionModal()
@@ -98,6 +98,8 @@ export default class WorkflowModalInner extends Component {
         categoryModal={categoryModal}
 
         editParams={editWfParams}
+        onClickEditParam={p => showWfParamModal(true, p)}
+        onClickRemoveParam={removeWfParam}
         onClickAddParam={() => showWfParamModal(true)}
       />
     )

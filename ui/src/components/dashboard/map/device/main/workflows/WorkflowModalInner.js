@@ -57,7 +57,7 @@ export default class WorkflowModalInner extends Component {
 
   renderStep (step) {
     const {rules, selectedRuleIndex, actions, selectedActionIndex, onClickRawData,
-      editWorkflowTags, removeWorkflowTag, editWfParams, showWfParamModal} = this.props
+      editWorkflowTags, removeWorkflowTag, editWfParams, showWfParamModal, removeWfParam} = this.props
 
     if (step === 1) {
       const categoryModal = this.renderCategoryModal()
@@ -74,6 +74,8 @@ export default class WorkflowModalInner extends Component {
           categoryModal={categoryModal}
 
           editParams={editWfParams}
+          onClickEditParam={p => showWfParamModal(true, p)}
+          onClickRemoveParam={removeWfParam}
           onClickAddParam={() => showWfParamModal(true)}
         />
       )
@@ -110,7 +112,12 @@ export default class WorkflowModalInner extends Component {
   renderParamEditModal () {
     if (!this.props.wfParamModalOpen) return null
     return (
-      <WfParamEditModal editParam={{}}/>
+      <WfParamEditModal
+        editParam={this.props.editWfParam}
+        addParam={this.props.addWfParam}
+        updateParam={this.props.updateWfParam}
+        onClose={() => this.props.showWfParamModal(false)}
+      />
     )
   }
   renderWizard () {
