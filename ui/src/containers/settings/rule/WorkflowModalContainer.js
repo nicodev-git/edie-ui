@@ -22,7 +22,10 @@ import {
   addWorkflowTag,
   removeWorkflowTag,
 
-  showWfParamModal
+  showWfParamModal,
+  addWfParam,
+  updateWfParam,
+  removeWfParam
 } from 'actions'
 
 class WorkflowModalContainer extends React.Component {
@@ -73,7 +76,10 @@ export default connect(
       addWorkflowTag,
       removeWorkflowTag,
 
-      showWfParamModal
+      showWfParamModal,
+      addWfParam,
+      updateWfParam,
+      removeWfParam
     }, dispatch)
   })
 )(WorkflowModalContainer)

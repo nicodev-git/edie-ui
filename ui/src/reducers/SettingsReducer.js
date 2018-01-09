@@ -159,7 +159,10 @@ import {
   FETCH_ROLES,
   UPDATE_ROLE,
 
-  SHOW_WF_PARAM_MODAL
+  SHOW_WF_PARAM_MODAL,
+  ADD_WF_PARAM,
+  UPDATE_WF_PARAM,
+  REMOVE_WF_PARAM
 
 } from 'actions/types'
 
@@ -683,6 +686,13 @@ export default function (state = initialState, action) {
 
     case SHOW_WF_PARAM_MODAL:
       return { ...state, wfParamModalOpen: action.visible, editWfParam: action.param }
+    case ADD_WF_PARAM:
+      return { ...state, editWfParams: concat(state.editWfParams, action.param) }
+    case UPDATE_WF_PARAM:
+      return { ...state, editWfParams: state.editWfParams.map(p => p.key === action.oldParam.key ? action.newParam : p) }
+    case REMOVE_WF_PARAM:
+      return { ...state, editWfParams: state.editWfParams.filter(p => p.key !== action.param.key) }
+
     default:
       return state
   }

@@ -28,7 +28,10 @@ import {
   showWorkflowTagModal,
   addWorkflow,
 
-  showWfParamModal
+  showWfParamModal,
+  addWfParam,
+  updateWfParam,
+  removeWfParam
 } from 'actions'
 
 class MainWorkflowModal extends Component {
@@ -291,6 +294,9 @@ export default connect(
     showWorkflowTagModal,
     addWorkflow,
 
-    showWfParamModal
+    showWfParamModal,
+    addWfParam,
+    updateWfParam,
+    removeWfParam
   }
 )(reduxForm({form: 'workflowForm'})(MainWorkflowModal))
