@@ -11,7 +11,7 @@ import {severities} from 'shared/Global'
 
 export default class WorkflowStep1 extends Component {
   renderParams () {
-    const {editParams, onClickAddParam} = this.props
+    const {editParams, onClickAddParam, onClickEditParam, onClickRemoveParam} = this.props
 
     return (
       <CardPanel title="Params">
@@ -20,8 +20,8 @@ export default class WorkflowStep1 extends Component {
             <Chip
               key={p.key}
               style={chipStyles.chip}
-              onTouchTap={() => {}}
-              onRequestDelete={() => {}}
+              onTouchTap={() => onClickEditParam(p)}
+              onRequestDelete={() => onClickRemoveParam(p)}
             >
               <b>{p.key}</b>: {p.value}
             </Chip>

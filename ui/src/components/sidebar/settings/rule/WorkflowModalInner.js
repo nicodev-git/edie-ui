@@ -116,7 +116,11 @@ export default class WorkflowModalInner extends Component {
   renderParamEditModal () {
     if (!this.props.wfParamModalOpen) return null
     return (
-      <WfParamEditModal editParam={{}}/>
+      <WfParamEditModal
+        editParam={this.props.editWfParam}
+        addParam={this.props.addWfParam}
+        updateParam={this.props.updateWfParam}
+        onClose={() => this.props.showWfParamModal(false)}/>
     )
   }
 

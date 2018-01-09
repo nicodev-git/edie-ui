@@ -20,7 +20,7 @@ const styles = {
 
 class WfParamEditModal extends React.Component {
   onClickClose () {
-    this.props.closeParamEditModal()
+    this.props.onClose()
   }
 
   onClickDefaultKey (key) {
@@ -37,6 +37,7 @@ class WfParamEditModal extends React.Component {
     } else {
       this.props.addParam(param)
     }
+    this.onClickClose()
   }
 
   render () {
