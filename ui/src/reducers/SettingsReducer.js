@@ -54,6 +54,7 @@ import {
   SELECT_CREDS,
   SHOW_CRED_LIST_MODAL,
 
+  FETCH_WORKFLOW,
   FETCH_WORKFLOWS,
   ADD_WORKFLOW,
   UPDATE_WORKFLOW,
@@ -422,6 +423,9 @@ export default function (state = initialState, action) {
 
     // ///////////////////////////////////////////////////
 
+    case FETCH_WORKFLOW:{
+      return { ...state, editWfParams: [] }
+    }
     case FETCH_WORKFLOWS:
       return { ...state, workflows: action.data }
 

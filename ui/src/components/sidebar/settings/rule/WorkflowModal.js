@@ -65,13 +65,14 @@ class WorkflowModal extends React.Component { // eslint-disable-line react/no-mu
   }
 
   handleFormSubmit (values) {
-    const { editWorkflow, editWorkflowTags, workflowCategories } = this.props
+    const { editWorkflow, editWorkflowTags, workflowCategories, editWfParams } = this.props
     const { rules, actions, diagram } = this.state
     let props = assign({}, editWorkflow, values, {
       rules: {},
       actions: actions,
       flowchart: diagram,
-      tags: editWorkflowTags
+      tags: editWorkflowTags,
+      params: {}
     })
     props.origin = props.origin || 'USER'
     if (workflowCategories && workflowCategories.length) {
@@ -79,6 +80,9 @@ class WorkflowModal extends React.Component { // eslint-disable-line react/no-mu
     }
     rules.forEach(r => {
       if (r.key) props.rules[r.key] = r.value
+    })
+    editWfParams.forEach(r => {
+      props.params[r.key] = r.value
     })
     if (!props.name) return window.alert('Please type name.')
 

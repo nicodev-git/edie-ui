@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import {reduxForm} from 'redux-form'
-import {assign, concat, forOwn} from 'lodash'
+import {assign, concat, forOwn, keys, findIndex} from 'lodash'
 import { connect } from 'react-redux'
 import WorkflowModalInner from './WorkflowModalInner'
 
@@ -56,21 +56,37 @@ class MainWorkflowModal extends Component {
     }
   }
 
+  componentWillMount () {
+    const {editWorkflow, editWfParams} = this.props
+    if (editWorkflow && editWorkflow.params) {
+      keys(editWorkflow.params).forEach(key => {
+        if (findIndex(editWfParams, {key}) < 0) {
+          const value = editWorkflow.params[key]
+          this.props.addWfParam({key, value})
+        }
+      })
+    }
+  }
+
   handleFormSubmit (values) {
-    const {editWorkflow, workflowCategories, editWorkflowTags, onFinish} = this.props
+    const {editWorkflow, workflowCategories, editWorkflowTags, onFinish, editWfParams} = this.props
     const { rules, actions, diagram } = this.state
     let props = assign({}, editWorkflow, values, {
       isglobal: false,
       rules: {},
       actions: actions,
       flowchart: diagram,
-      tags: editWorkflowTags
+      tags: editWorkflowTags,
+      params: {}
     })
     if (workflowCategories && workflowCategories.length) {
       props.category = props.category || workflowCategories[0].name
     }
     rules.forEach(r => {
       if (r.key) props.rules[r.key] = r.value
+    })
+    editWfParams.forEach(r => {
+      props.params[r.key] = r.value
     })
     if (!props.name) return window.alert('Please type name.')
     if (editWorkflow) {
