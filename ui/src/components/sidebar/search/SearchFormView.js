@@ -15,6 +15,8 @@ import ArrowUpIcon from 'material-ui/svg-icons/hardware/keyboard-arrow-up'
 import { FormInput } from 'components/modal/parts'
 import DateRangePicker from 'components/common/DateRangePicker'
 
+const dateRangeStyle = {marginTop: '4px'}
+
 export default class SearchFormView extends React.Component {
   constructor (props) {
     super(props)
@@ -22,6 +24,8 @@ export default class SearchFormView extends React.Component {
       openSearchBy: false,
       advanced: false
     }
+
+    this.renderDateLabel = this.renderDateLabel.bind(this)
   }
   onClickSearchBy (e) {
     this.setState({
@@ -124,8 +128,10 @@ export default class SearchFormView extends React.Component {
               startDate={startDate}
               endDate={endDate}
               onApply={onChangeDateRange}
-              renderer={this.renderDateLabel.bind(this)}
-              style={{marginTop: '4px'}}/>
+              renderer={this.renderDateLabel}
+              style={dateRangeStyle}
+              autoApply
+            />
             <div className="pull-right margin-sm-right">
               <IconButton tooltip="Favorite" className="valign-top" onTouchTap={onClickStar}>{starFilled ? <FilledStar/> : <ToggleStar/>}</IconButton>
               <IconButton tooltip="Illustrate" className="valign-top" onTouchTap={onClickIllustrate}><LocalMovie/></IconButton>

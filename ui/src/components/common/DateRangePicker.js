@@ -114,7 +114,7 @@ export default class DateRangePicker extends React.Component {
 
   render () {
     const {rangeConfig} = this.state
-    let { className, startDate, endDate, children, renderer, style } = this.props
+    let { className, startDate, endDate, children, renderer, style, autoApply } = this.props
 
     const {label, momentStartDate, momentEndDate} = getRangeLabel(rangeConfig, startDate, endDate)
 
@@ -138,6 +138,8 @@ export default class DateRangePicker extends React.Component {
         className={className}
 
         onApply={this.onApply.bind(this)}
+
+        autoApply={autoApply}
       >
         {renderer ? null : <div className={renderer ? 'hidden' : 'link'}>{label}</div>}
         {renderer ? <div className="nowrap">{renderer(label)}</div> : null}
