@@ -7,6 +7,8 @@ import './common/griddle.css'
 import './common/griddle.custom.css'
 import './common/slider.css'
 
+import './common/datepicker.custom.css'
+
 import './common/layout.css'
 import './common/wizard.css'
 import './common/table.css'
