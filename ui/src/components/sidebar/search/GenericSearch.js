@@ -565,7 +565,7 @@ class GenericSearch extends React.Component {
 
     const q = [
       '(type:all)',
-      `(from:Ever)`
+      `(from:${moment().format('YYYY')})`
     ].join(' AND ')
     this.updateQueryParams({
       ...this.props.queryParams,

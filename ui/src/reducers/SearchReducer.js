@@ -83,7 +83,7 @@ const initialState = {
     draw: 1,
     q: [
       '(type:all)',
-      `(from:Ever)`
+      `(from:${moment().format('YYYY')})`
     ].join(' AND ')
   },
   incidentParams: {
