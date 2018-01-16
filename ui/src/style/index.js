@@ -1,5 +1,6 @@
 import './common/theme.css'
 import './roboto/roboto.css'
+import './fa/css/font-awesome.min.css'
 
 import './common/jquery-jvectormap-2.0.3.css'
 
