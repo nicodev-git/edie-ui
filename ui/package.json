@@ -21,6 +21,7 @@
     "react": "^15.5.4",
     "react-addons-css-transition-group": "^15.6.0",
     "react-autocomplete": "^1.7.1",
+    "react-bootstrap-daterangepicker": "^3.4.1",
     "react-bootstrap-datetimerangepicker": "^2.0.4",
     "react-chartjs-2": "^2.1.0",
     "react-color": "^2.13.0",
