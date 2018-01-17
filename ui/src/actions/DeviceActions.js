@@ -190,7 +190,6 @@ export const fetchDevices = (cb) => {
     config.cancelToken = source.token
     axios.get(`${ROOT_URL}/device?size=1000`, config)
       .then(response => fetchDevicesSuccess(dispatch, response))
-      .catch(error => apiError(dispatch, error))
     cb && cb(source)
   }
 }

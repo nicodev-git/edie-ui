@@ -76,6 +76,7 @@ export default class Log extends React.Component {
 
   stopTimer () {
     this.lastReq && this.lastReq.cancel('Stop timer')
+    this.lastReq = null
     clearInterval(this.timer)
     console.log('Timer stopped')
   }
