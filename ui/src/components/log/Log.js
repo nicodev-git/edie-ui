@@ -332,8 +332,12 @@ export default class Log extends React.Component {
     })
   }
 
-  onDragStateChanged () {
-
+  onDragStateChanged ({isDragging, draggedNode}) {
+    if (isDragging) {
+      this.stopTimer()
+    } else {
+      this.startTimer()
+    }
   }
 
   ///////////////////////////////////////////////////////////////////////////////////
