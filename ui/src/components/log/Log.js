@@ -53,11 +53,13 @@ export default class Log extends React.Component {
   }
 
   componentDidUpdate (prevProps) {
-    const {allDevices} = this.props
-    if (prevProps.allDevices !== allDevices) {
+    // const {allDevices} = this.props
+    if (JSON.stringify(this.getLogMonitors(prevProps)) !== JSON.stringify(this.getLogMonitors())) {
+    // if (prevProps.allDevices !== allDevices) {
       this.setState({
         monitorTreeData: this.getTreeData(true)
       })
+      // console.log('-----Tree updated-----')
     }
   }
 
@@ -117,8 +119,8 @@ export default class Log extends React.Component {
     return data
   }
 
-  getLogMonitors () {
-    const {allDevices} = this.props
+  getLogMonitors (props) {
+    const {allDevices} = props || this.props
     const monitors = []
     allDevices.forEach(p => {
       if (!p.monitors) return
