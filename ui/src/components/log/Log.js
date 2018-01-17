@@ -66,11 +66,18 @@ export default class Log extends React.Component {
   }
 
   startTimer () {
-    this.timer = setInterval(this.props.fetchDevices, 20000)
+    this.timer = setInterval(() => {
+      this.props.fetchDevices(req => {
+        this.lastReq = req
+      })
+    }, 3000)
+    console.log('Timer started')
   }
 
   stopTimer () {
+    this.lastReq && this.lastReq.cancel('Stop timer')
     clearInterval(this.timer)
+    console.log('Timer stopped')
   }
 
   getTreeData (force) {
@@ -333,6 +340,7 @@ export default class Log extends React.Component {
   }
 
   onDragStateChanged ({isDragging, draggedNode}) {
+    console.log(`Dragging: ${isDragging}`)
     if (isDragging) {
       this.stopTimer()
     } else {

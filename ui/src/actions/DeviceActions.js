@@ -180,14 +180,18 @@ const fetchDeviceSuccess = (response) => {
   }
 }
 
-export const fetchDevices = () => {
+export const fetchDevices = (cb) => {
   if (!window.localStorage.getItem('token')) {
     return dispatch => dispatch({ type: NO_AUTH_ERROR })
   }
   return (dispatch) => {
-    axios.get(`${ROOT_URL}/device?size=1000`, getAuthConfig())
+    const source = axios.CancelToken.source()
+    const config = getAuthConfig()
+    config.cancelToken = source.token
+    axios.get(`${ROOT_URL}/device?size=1000`, config)
       .then(response => fetchDevicesSuccess(dispatch, response))
       .catch(error => apiError(dispatch, error))
+    cb && cb(source)
   }
 }
 
