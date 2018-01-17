@@ -23,7 +23,9 @@ import {
 
   openDevice,
   openDeviceMonitorWizard,
-  closeDeviceMonitorWizard
+  closeDeviceMonitorWizard,
+
+  showDetailLogModal
 } from 'actions'
 class LogContainer extends React.Component {
   render () {
@@ -39,6 +41,10 @@ export default connect(
     monitorGroups: state.settings.monitorGroups,
     logFilters: state.settings.logFilters,
     logFiltersModalOpen: state.settings.logFiltersModalOpen,
+
+    logViewParam: state.dashboard.logViewParam,
+    detailLogModalOpen: state.dashboard.detailLogModalOpen,
+    detailLogViewParam: state.dashboard.detailLogViewParam,
 
     monitorTemplates: state.settings.monitorTemplates,
     collectors: state.settings.collectors,
@@ -65,6 +71,8 @@ export default connect(
 
     openDevice,
     openDeviceMonitorWizard,
-    closeDeviceMonitorWizard
+    closeDeviceMonitorWizard,
+
+    showDetailLogModal
   }
 )(withRouter(LogContainer))

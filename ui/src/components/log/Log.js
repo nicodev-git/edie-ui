@@ -37,7 +37,8 @@ export default class Log extends React.Component {
       selectedFolder: null,
       keyword: '',
       search: '',
-      searchValue: ''
+      searchValue: '',
+      data: []
     }
 
     this.tooltipRebuild = debounce(ReactToolTip.rebuild, 150)
@@ -169,12 +170,31 @@ export default class Log extends React.Component {
     }
   }
 
-  onClickDetailView () {
+  onClickDetailView (row) {
+    const {logViewParam} = this.props
+    const {data} = this.state
 
+    const index = logViewParam.q ? findIndex(data, {id: row.id}) : 0
+
+
+    const params = {
+      query: {
+        q: `(monitorid:${logViewParam.monitorId})`,
+        page: 0,
+        size: 100,
+        types: 'event',
+      },
+      data: logViewParam.q ? data : [row],
+      index
+    }
+
+    this.props.showDetailLogModal(true, params)
   }
 
-  onResultCountUpdate () {
-
+  onResultCountUpdate (total, data) {
+    this.setState({
+      data
+    })
   }
 
   onClickFixDevice () {
@@ -593,7 +613,6 @@ export default class Log extends React.Component {
         onUpdateCount={this.onResultCountUpdate.bind(this)}
         reversePage
         noCard
-        noSearch
         showRenew
         ignoreFilters={filters}
       />
@@ -671,6 +690,16 @@ export default class Log extends React.Component {
     )
   }
 
+  renderDetailModal () {
+    if (!this.props.detailLogModalOpen) return null
+    return (
+      <DetailLogModal
+        {...this.props}
+        revertRows
+      />
+    )
+  }
+
   render () {
     const {userInfo} = this.props
     const filters = this.getIgnoreFilters()
@@ -719,6 +748,7 @@ export default class Log extends React.Component {
           </div>
           {this.renderLogFiltersModal(canEdit)}
           {this.renderMonitorWizard()}
+          {this.renderDetailModal()}
           <ReactToolTip/>
         </TabPageBody>
       </TabPage>
