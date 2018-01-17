@@ -172,20 +172,17 @@ export default class Log extends React.Component {
   }
 
   onClickDetailView (row) {
-    const {logViewParam} = this.props
-    const {data} = this.state
-
-    const index = logViewParam.q ? findIndex(data, {id: row.id}) : 0
-
+    const {data, monitorUid, search} = this.state
+    const index = search ? findIndex(data, {id: row.id}) : 0
 
     const params = {
       query: {
-        q: `(monitorid:${logViewParam.monitorId})`,
+        q: `(monitorid:${monitorUid})`,
         page: 0,
         size: 100,
         types: 'event',
       },
-      data: logViewParam.q ? data : [row],
+      data: search ? data : [row],
       index
     }
 
