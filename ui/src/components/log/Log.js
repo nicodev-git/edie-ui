@@ -72,7 +72,7 @@ export default class Log extends React.Component {
       this.props.fetchDevices(req => {
         this.lastReq = req
       })
-    }, 3000)
+    }, 20000)
     console.log('Timer started')
   }
 
