@@ -332,6 +332,10 @@ export default class Log extends React.Component {
     })
   }
 
+  onDragStateChanged () {
+
+  }
+
   ///////////////////////////////////////////////////////////////////////////////////
 
   onClickEditMonitor () {
@@ -592,6 +596,7 @@ export default class Log extends React.Component {
         scaffoldBlockPxWidth={20}
         rowHeight={20}
         className="logs"
+        onDragStateChanged={this.onDragStateChanged.bind(this)}
       />
     )
   }
