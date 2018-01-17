@@ -20,6 +20,7 @@ import LogFiltersModal from './LogFiltersModal'
 import {hasPermission} from 'shared/Permission'
 import {getAgentStatus} from 'util/Device'
 import MonitorWizardContainer from 'containers/shared/wizard/MonitorWizardContainer'
+import DetailLogModal from 'components/dashboard/log/DetailLogModal'
 
 const ranges = getRanges()
 const from = ranges['Ever'][0].valueOf()
