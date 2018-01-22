@@ -108,6 +108,7 @@ class MonitorWizard extends React.Component {
 
     //Merge required params
     this.getRequiredParamKeys().forEach(key => {
+      if (key === 'remove_after' || key === 'checkinterval') return
       props.params[key] = props[key]
     })
 
