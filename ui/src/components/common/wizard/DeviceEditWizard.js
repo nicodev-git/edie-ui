@@ -42,7 +42,8 @@ class DeviceEditWizard extends React.Component {
     console.log(`Device type: ${this.props.deviceType}`)
 
     this.state = {
-      currentDevice: config
+      currentDevice: config,
+      monitors: props.selectedDevice ? (props.selectedDevice.monitors || []) : []
     }
 
     this.mapping = {
@@ -120,7 +121,7 @@ class DeviceEditWizard extends React.Component {
   }
 
   handleFormSubmit (formProps) {
-    const {currentDevice} = this.state
+    const {currentDevice, monitors} = this.state
     const {initialValues, selectedTplImage, deviceTags, deviceCreds} = this.props
 
     // let elem = document.getElementById('submitButton')
@@ -131,7 +132,8 @@ class DeviceEditWizard extends React.Component {
     assign(entity, {
       image: selectedTplImage ? selectedTplImage.uuid : initialValues['image'],
       tags: deviceTags || [],
-      credentials: deviceCreds
+      credentials: deviceCreds,
+      monitors
     })
 
     const params = formProps.params || {}
@@ -196,7 +198,7 @@ class DeviceEditWizard extends React.Component {
   }
 
   onChangedMonitors (monitors) {
-
+    this.setState({monitors}, () => this.onRequestSave())
   }
 
   onReplaceCreds (oldCred, newCred) {
@@ -390,11 +392,11 @@ class DeviceEditWizard extends React.Component {
   }
 
   buildMonitors () {
-    const {selectedDevice, monitorTemplates, openDeviceMonitorWizard,
+    const {monitorTemplates, openDeviceMonitorWizard,
       deviceTemplates, collectors} = this.props
     return (
       <MonitorTable
-        monitors={selectedDevice.monitors || []}
+        monitors={this.state.monitors}
         templates={monitorTemplates}
         onChanged={this.onChangedMonitors.bind(this)}
         openDeviceMonitorWizard={openDeviceMonitorWizard}
