@@ -195,7 +195,7 @@ class DeviceEditWizard extends React.Component {
     )
   }
 
-  onChangedMonitors () {
+  onChangedMonitors (monitors) {
 
   }
 
