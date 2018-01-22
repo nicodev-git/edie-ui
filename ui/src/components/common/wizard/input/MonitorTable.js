@@ -96,9 +96,8 @@ export default class MonitorTable extends Component {
 
     const {editMonitor} = this.state
     if (editMonitor) {
-      const index = monitors.indexOf(editMonitor)
-      if (index < 0) return
-      monitors[index] = assign({}, editMonitor, params)
+      monitors = monitors.map(p => p.uid === editMonitor.uid ?
+        {...p, ...params} : p)
     } else {
       monitors = [ ...monitors, params ]
     }

@@ -10,7 +10,7 @@ import CredPicker from 'containers/settings/credentials/CredsPickerContainer'
 import MonitorWizardView from './MonitorWizardView'
 
 import {showAlert} from 'components/common/Alert'
-import {isWindowsDevice} from "../../../shared/Global";
+import {isWindowsDevice} from 'shared/Global'
 
 class MonitorWizard extends React.Component {
   componentDidMount () {
