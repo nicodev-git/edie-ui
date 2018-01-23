@@ -39,7 +39,8 @@ export default class Log extends React.Component {
       keyword: '',
       search: '',
       searchValue: '',
-      data: []
+      data: [],
+      draggingUid: ''
     }
 
     this.tooltipRebuild = debounce(ReactToolTip.rebuild, 150)
@@ -59,7 +60,7 @@ export default class Log extends React.Component {
       this.setState({
         monitorTreeData: this.getTreeData(true)
       })
-      // console.log('-----Tree updated-----')
+      console.log('-----Tree updated-----')
     }
   }
 
@@ -72,20 +73,21 @@ export default class Log extends React.Component {
       this.props.fetchDevices(req => {
         this.lastReq = req
       })
-    }, 20000)
-    console.log('Timer started')
+    }, 3000)
+    console.log('---Timer started---')
   }
 
   stopTimer () {
     this.lastReq && this.lastReq.cancel('Stop timer')
     this.lastReq = null
     clearInterval(this.timer)
-    console.log('Timer stopped')
+    console.log('---Timer stopped---')
   }
 
   getTreeData (force) {
     let data = this.state.monitorTreeData
     if (!data || force) {
+      const {draggingUid} = this.state
       const folders = this.getFolders()
       const monitors = this.getLogMonitors()
 
@@ -95,6 +97,9 @@ export default class Log extends React.Component {
           children = monitors.filter(m => folders.filter(f => f.monitorids && f.monitorids.includes(m.uid)).length === 0)
         } else {
           children = monitors.filter(m => p.monitorids && p.monitorids.includes(m.uid))
+        }
+        if (draggingUid) {
+          children = children.filter(m => m.uid !== draggingUid)
         }
 
         let existing = {}
@@ -346,8 +351,14 @@ export default class Log extends React.Component {
     console.log(`Dragging: ${isDragging}`)
     if (isDragging) {
       this.stopTimer()
+      this.setState({
+        draggingUid: draggedNode.uid
+      })
     } else {
       this.startTimer()
+      this.setState({
+        draggingUid: ''
+      })
     }
   }
 
