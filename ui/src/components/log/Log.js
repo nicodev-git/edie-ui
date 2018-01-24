@@ -97,7 +97,10 @@ export default class Log extends React.Component {
         if (p.id === 'root') {
           children = monitors.filter(m => folders.filter(f => f.monitorids && f.monitorids.includes(m.uid)).length === 0)
         } else {
-          children = monitors.filter(m => p.monitorids && p.monitorids.includes(m.uid))
+          p.monitorids.forEach(uid => {
+            const index = findIndex(monitors, {uid})
+            if (index >= 0) children.push(monitors[index])
+          })
         }
         if (draggingUid) {
           children = children.filter(m => m.uid !== draggingUid)
@@ -312,6 +315,7 @@ export default class Log extends React.Component {
 
     let parentIndex = 0
     let left = path[0]
+    const childIndex = path[1] - path[0] - 1
     while(left > 0) {
       left -= 1
       if (treeData[parentIndex].expanded)
@@ -334,18 +338,25 @@ export default class Log extends React.Component {
       console.log(`Remove from: ${found[0].name}`)
       items.push({
         ...found[0],
-        monitorids: found[0].monitorids.map(p => p !== monitorUid)
+        monitorids: found[0].monitorids.filter(p => p !== monitorUid)
       })
     }
 
     //Add
     const index = findIndex(folders, {id: groupId})
     if (index >= 0) {
-      const group = folders[index]
+      let group = folders[index]
       if (group.id !== 'root') {
+        if (items.length && items[0].id === group.id) {
+          group = items[0]
+          items.splice(0, 1)
+        }
+        let monitorids = group.monitorids || []
+        monitorids = monitorids.filter(p => p !== 'true' && p !== 'false')
+        monitorids.splice(childIndex, 0, monitorUid)
         items.push({
           ...group,
-          monitorids: [...(group.monitorids || []), monitorUid]
+          monitorids
         })
       }
       console.log(`Append to: ${group.name}`)
