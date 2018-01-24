@@ -40,7 +40,8 @@ export default class Log extends React.Component {
       search: '',
       searchValue: '',
       data: [],
-      draggingUid: ''
+      draggingUid: '',
+      draggingFolderId: ''
     }
 
     this.tooltipRebuild = debounce(ReactToolTip.rebuild, 150)
@@ -301,13 +302,15 @@ export default class Log extends React.Component {
 
   onMoveNode (args) {
     const {treeData, node, path, prevPath} = args
+
     if (path[0] === prevPath[0] && path[1] === prevPath[1]) return
 
     let parentIndex = 0
     let left = path[0]
     while(left > 0) {
       left -= 1
-      left -= treeData[parentIndex].children.length
+      if (treeData[parentIndex].expanded)
+        left -= treeData[parentIndex].children.length
       parentIndex++
     }
 
@@ -352,12 +355,13 @@ export default class Log extends React.Component {
     if (isDragging) {
       this.stopTimer()
       this.setState({
-        draggingUid: draggedNode.uid
+        draggingUid: draggedNode.uid,
+        draggingFolderId: ''
       })
     } else {
       this.startTimer()
       this.setState({
-        draggingUid: ''
+        draggingUid: '',
       })
     }
   }
