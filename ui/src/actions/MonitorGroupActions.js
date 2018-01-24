@@ -5,6 +5,7 @@ import {
   SHOW_MONITOR_GROUP_MODAL,
   ADD_MONITOR_GROUP,
   UPDATE_MONITOR_GROUP,
+  UPDATE_MONITOR_GROUPS,
   REMOVE_MONITOR_GROUP
 } from './types'
 
@@ -31,6 +32,17 @@ export const updateMonitorGroup = (entity) => {
   return dispatch => {
     axios.put(entity._links.self.href, entity).then(res => {
       dispatch({type: UPDATE_MONITOR_GROUP, data: res.data})
+    }).catch(error => apiError(dispatch, error))
+  }
+}
+
+export const updateMonitorGroups = (items) => {
+  return dispatch => {
+    dispatch({type: UPDATE_MONITOR_GROUPS, data: items})
+
+    const reqs = items.map(entity => axios.put(entity._links.self.href, entity))
+    axios.all(reqs).then(res => {
+      dispatch({type: UPDATE_MONITOR_GROUPS, data: res.map(r => r.data)})
     }).catch(error => apiError(dispatch, error))
   }
 }

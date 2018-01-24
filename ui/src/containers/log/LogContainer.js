@@ -13,6 +13,7 @@ import {
   fetchMonitorGroups,
   addMonitorGroup,
   updateMonitorGroup,
+  updateMonitorGroups,
   removeMonitorGroup,
 
   fetchLogFilters,
@@ -61,6 +62,7 @@ export default connect(
     fetchMonitorGroups,
     addMonitorGroup,
     updateMonitorGroup,
+    updateMonitorGroups,
     removeMonitorGroup,
 
     fetchLogFilters,

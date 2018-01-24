@@ -131,7 +131,12 @@ export default class Log extends React.Component {
     allDevices.forEach(p => {
       if (!p.monitors) return
       p.monitors.forEach(m => {
-        if (m.monitortype === 'logfile') monitors.push(m)
+        if (m.monitortype === 'logfile') monitors.push({
+          uid: m.uid,
+          name: m.name,
+          lastsuccess: m.lastsuccess,
+          params: m.params
+        })
       })
     })
 
@@ -323,9 +328,11 @@ export default class Log extends React.Component {
     const folders = this.getFolders()
     //Remove
     const found = folders.filter(p => p.monitorids && p.monitorids.includes(monitorUid))
+
+    const items = []
     if (found.length) {
       console.log(`Remove from: ${found[0].name}`)
-      this.props.updateMonitorGroup({
+      items.push({
         ...found[0],
         monitorids: found[0].monitorids.map(p => p !== monitorUid)
       })
@@ -335,13 +342,16 @@ export default class Log extends React.Component {
     const index = findIndex(folders, {id: groupId})
     if (index >= 0) {
       const group = folders[index]
-      if (group.id === 'root') return
+      if (group.id !== 'root') {
+        items.push({
+          ...group,
+          monitorids: [...(group.monitorids || []), monitorUid]
+        })
+      }
       console.log(`Append to: ${group.name}`)
-      this.props.updateMonitorGroup({
-        ...group,
-        monitorids: [...(group.monitorids || []), monitorUid]
-      })
     }
+
+    this.props.updateMonitorGroups(items)
   }
 
   onClickFolder (folder) {

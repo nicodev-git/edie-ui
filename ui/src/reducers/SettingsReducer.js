@@ -147,6 +147,7 @@ import {
   SHOW_MONITOR_GROUP_MODAL,
   ADD_MONITOR_GROUP,
   UPDATE_MONITOR_GROUP,
+  UPDATE_MONITOR_GROUPS,
   REMOVE_MONITOR_GROUP,
 
   FETCH_LOG_FILTERS,
@@ -669,6 +670,12 @@ export default function (state = initialState, action) {
       return { ...state, monitorGroups: [...state.monitorGroups, action.data] }
     case UPDATE_MONITOR_GROUP:
       return { ...state, monitorGroups: state.monitorGroups.map(p => p.id === action.data.id ? action.data : p) }
+    case UPDATE_MONITOR_GROUPS:
+      return { ...state, monitorGroups: state.monitorGroups.map(p => {
+          const index = findIndex(action.data, {id: p.id})
+          if (index < 0) return p
+          return action.data[index]
+      })}
     case REMOVE_MONITOR_GROUP:
       return { ...state, monitorGroups: state.monitorGroups.filter(p => p.id !== action.data.id)}
 
