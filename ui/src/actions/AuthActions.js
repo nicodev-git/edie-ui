@@ -11,21 +11,19 @@ import {
   CLOSE_ACTIVATION_MODAL,
   ACTIVATE_USER,
   ACTIVATE_MSG,
-  FETCH_MESSAGE,
 
-  AUTH_ERROR,
-  NO_AUTH_ERROR
+  AUTH_ERROR
 } from './types'
 
 import { apiError, authError } from './Errors'
 
-import { ROOT_URL } from './config'
+import { ROOT_URL, SRA_URL } from './config'
 import { getAuthConfig, getRequestConfig } from './util'
 
 export const signUser = ({ email, password }, redirect, history) => {
   return (dispatch) => {
     dispatch({type: AUTH_ERROR, msg: ''})
-    axios.post(`${ROOT_URL}/api/auth/login`,
+    axios.post(`${SRA_URL}/api/auth/login`,
       {
         username: email,
         password: password
@@ -91,14 +89,14 @@ const signupSuccess = (dispatch, response) => {
 
 export const fetchUserInfo = (cb) => {
   return (dispatch) => {
-    axios.get(`${ROOT_URL}/api/me`, getAuthConfig())
+    axios.get(`${SRA_URL}/api/me`, getAuthConfig())
       .then(response => fetchUserInfoSuccess(dispatch, response, cb))
       .catch(error => authError(dispatch, error))
   }
 }
 
 const fetchUserInfoSuccess = (dispatch, response, cb) => {
-  axios.get(`${ROOT_URL}/user/${response.data.id}`).then(res => {
+  axios.get(`${SRA_URL}/user/${response.data.id}`).then(res => {
     dispatch({
       type: FETCH_USER_INFO,
       data: res.data
@@ -109,7 +107,7 @@ const fetchUserInfoSuccess = (dispatch, response, cb) => {
 
 export const updateUserProfile = (props) => {
   return (dispatch) => {
-    axios.put(`${ROOT_URL}/user/${props.id}`, props)
+    axios.put(`${SRA_URL}/user/${props.id}`, props)
       .then(response => updateUserProfileSuccess(dispatch, response))
       .catch(error => apiError(dispatch, error))
   }
@@ -173,24 +171,6 @@ export function closeActivationModal () {
   return dispatch => {
     dispatch({type: CLOSE_ACTIVATION_MODAL})
   }
-}
-
-export const fetchMessage = () => {
-  if (!window.localStorage.getItem('token')) {
-    return dispatch => dispatch({ type: NO_AUTH_ERROR })
-  }
-  return (dispatch) => {
-    axios.get(`${ROOT_URL}/api/me`, getAuthConfig())
-      .then(response => fetchMessageSuccess(dispatch, response))
-      .catch(error => authError(error)) // TODO: here may be another error action
-  }
-}
-
-const fetchMessageSuccess = (dispatch, response) => {
-  dispatch({
-    type: FETCH_MESSAGE,
-    payload: response.data.username
-  })
 }
 
 export const addAudit = (userId, fullname, action) => {
