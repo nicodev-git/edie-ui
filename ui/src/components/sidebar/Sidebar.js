@@ -27,7 +27,8 @@ export default class Sidebar extends React.Component {
 
   getVisibleMenu () {
     const {userInfo} = this.props
-    return userInfo ? (userInfo.permissions || []) : []
+    const permissions =  userInfo ? (userInfo.permissions || []) : []
+    return permissions.map(p => p.name)
   }
 
   onClickDeviceMenu (index) {
