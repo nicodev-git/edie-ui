@@ -9,6 +9,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 
 import MainpageContainer from './containers/MainpageContainer'
 import SigninContainer from './containers/auth/SigninContainer'
+import Signin2Container from './containers/auth/Signin2Container'
 
 import RequireAuth from './components/auth/RequireAuth'
 
@@ -19,6 +20,7 @@ export default class App extends React.Component {
         <BrowserRouter>
           <Switch>
             <Route exact path="/signin" component={SigninContainer}/>
+            <Route exact path="/signin2" component={Signin2Container}/>
             <Route path="/" component={RequireAuth(MainpageContainer)}/>
           </Switch>
         </BrowserRouter>
