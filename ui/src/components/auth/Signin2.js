@@ -1,13 +1,28 @@
 import React, { Component } from 'react'
 import { reduxForm, Field, Form } from 'redux-form'
 import {parse} from 'query-string'
+import {RaisedButton} from 'material-ui'
+
 import RefreshOverlay from 'components/common/RefreshOverlay'
+import { FormInput } from 'components/modal/parts'
+
+const boxStyle = {
+  margin: '50px auto',
+  background: 'white',
+  width: 300,
+  height: 300,
+  borderRadius: 10,
+  border: '1px solid #414345',
+  textAlign: 'center',
+  position: 'relative'
+}
 
 class Signin2 extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      loading: false
+      loading: false,
+      page: 1
     }
   }
 
@@ -39,41 +54,44 @@ class Signin2 extends Component {
     }
   }
 
-  renderInput (field) {
-    return (
-      <div>
-        <input
-          {...field.input}
-          ref={null}
-          className={`form-control ${field.className}`}
-          type={field.type}
-          placeholder={field.label}
-          autoFocus={field.autoFocus}
-        />
-      </div>
-    )
+  renderPage () {
+    const { page } = this.state
+
+    if (page === 1) {
+      return (
+        <div>
+          <Field name="username" component={FormInput} type="text" floatingLabel="User Name" autoFocus/>
+          <RaisedButton label="Next" primary className="margin-md-top"/>
+        </div>
+      )
+    } else {
+      return (
+        <div>
+          <Field name="password" component={FormInput} type="password" floatingLabel="Password" autoFocus/>
+          <RaisedButton label="Prev" className="margin-md" primary/>
+          <RaisedButton label="Login" primary className="margin-md"/>
+        </div>
+      )
+    }
   }
 
   render () {
     const { handleSubmit } = this.props
+
+
     return (
       <div className="login">
-        <div className="heading">
-          <h1>Incident Manager</h1>
-          <p>Version 2017.2</p>
-        </div>
         <Form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))} ref="formDiv">
-          <div className="box">
-            New sign in box
+          <div style={boxStyle}>
+            <h3 className="margin-xl-bottom text-center" style={{fontSize: '31px'}}>Login</h3>
+
+            {this.renderPage()}
 
             { this.renderAlert() }
 
             {this.state.loading && <RefreshOverlay/>}
           </div>
         </Form>
-        <div className="copyright_text">
-          Copyright 2017 SecuRegion Ltd. All Rights Reserved.
-        </div>
       </div>
     )
   }
