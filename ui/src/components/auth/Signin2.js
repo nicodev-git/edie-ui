@@ -35,6 +35,27 @@ class Signin2 extends Component {
     }
   }
 
+  onClickNext () {
+    this.setState({
+      page: this.state.page + 1
+    })
+  }
+
+  onClickPrev () {
+    this.setState({
+      page: this.state.page - 1
+    })
+  }
+
+  onKeyDown (e) {
+    if (e.keyCode === 13) {
+      e.preventDefault()
+
+      if (this.state.page === 1) this.onClickNext()
+      else this.onClickPrev()
+    }
+  }
+
   handleFormSubmit ({ email, password }) {
     const { signUser, location, history } = this.props
     const params = parse(location.search)
@@ -60,16 +81,17 @@ class Signin2 extends Component {
     if (page === 1) {
       return (
         <div>
-          <Field name="username" component={FormInput} type="text" floatingLabel="User Name" autoFocus/>
-          <RaisedButton label="Next" primary className="margin-md-top"/>
+          <Field name="email" component={FormInput} type="text" floatingLabel="User Name" autoFocus
+                 onKeyDown={this.onKeyDown.bind(this)}/>
+          <RaisedButton label="Next" primary className="margin-lg-top" onTouchTap={this.onClickNext.bind(this)}/>
         </div>
       )
     } else {
       return (
         <div>
           <Field name="password" component={FormInput} type="password" floatingLabel="Password" autoFocus/>
-          <RaisedButton label="Prev" className="margin-md" primary/>
-          <RaisedButton label="Login" primary className="margin-md"/>
+          <RaisedButton label="Prev" className="margin-lg" primary onTouchTap={this.onClickPrev.bind(this)}/>
+          <RaisedButton label="Login" primary className="margin-lg" type="submit"/>
         </div>
       )
     }
@@ -77,7 +99,6 @@ class Signin2 extends Component {
 
   render () {
     const { handleSubmit } = this.props
-
 
     return (
       <div className="login">

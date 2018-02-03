@@ -19,8 +19,8 @@ export default class App extends React.Component {
       <MuiThemeProvider>
         <BrowserRouter>
           <Switch>
-            <Route exact path="/signin" component={SigninContainer}/>
-            <Route exact path="/signin2" component={Signin2Container}/>
+            <Route exact path="/signin2" component={SigninContainer}/>
+            <Route exact path="/signin" component={Signin2Container}/>
             <Route path="/" component={RequireAuth(MainpageContainer)}/>
           </Switch>
         </BrowserRouter>
