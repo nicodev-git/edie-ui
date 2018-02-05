@@ -160,6 +160,7 @@ import {
 
   FETCH_ROLES,
   UPDATE_ROLE,
+  FETCH_PERMISSIONS,
 
   SHOW_WF_PARAM_MODAL,
   ADD_WF_PARAM,
@@ -217,6 +218,7 @@ const initialState = {
   logFilters: [],
 
   roles: [],
+  permissions: [],
 
   workflowDraw: 1
 }
@@ -694,6 +696,8 @@ export default function (state = initialState, action) {
       return { ...state, roles: action.data }
     case UPDATE_ROLE:
       return { ...state, roles: state.roles.map(p => p.id === action.data.id ? action.data : p) }
+    case FETCH_PERMISSIONS:
+      return { ...state, permissions: action.data }
 
     case SHOW_WF_PARAM_MODAL:
       return { ...state, wfParamModalOpen: action.visible, editWfParam: action.param }

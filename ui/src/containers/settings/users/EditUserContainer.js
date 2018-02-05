@@ -25,6 +25,7 @@ import {
   selectUserPermissions,
 
   fetchRoles,
+  fetchPermissions,
 
   submitForm
 } from 'actions'
@@ -48,6 +49,7 @@ export default connect(
     editUser: state.settings.editUser,
     selectedRoles: state.settings.selectedRoles,
     selectedPermissions: state.settings.selectedPermissions,
+    permissions: state.settings.permissions,
 
     user: state.dashboard.userInfo || {},
     maps: state.dashboard.maps,
@@ -75,6 +77,7 @@ export default connect(
     selectUserPermissions,
 
     fetchRoles,
+    fetchPermissions,
 
     submitForm
   }

@@ -99,6 +99,7 @@ import {
 
   FETCH_ROLES,
   UPDATE_ROLE,
+  FETCH_PERMISSIONS,
 
   SHOW_WF_PARAM_MODAL,
   ADD_WF_PARAM,
@@ -871,6 +872,14 @@ export const updateRole = entity => {
     axios.put(entity._links.self.href, entity).then(response => {
       dispatch({type: UPDATE_ROLE, data: response.data})
     }).catch(error => apiError(dispatch, error))
+  }
+}
+
+export const fetchPermissions = () => {
+  return dispatch => {
+    axios.get(`${ROOT_URL}/findAllPermissions`).then(res => {
+      dispatch({type: FETCH_PERMISSIONS, data: res.data})
+    })
   }
 }
 

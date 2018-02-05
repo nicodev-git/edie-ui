@@ -56,6 +56,7 @@ export const DELETE_DEVICE_STATE = 'DELETE_DEVICE_STATE'
 
 export const FETCH_ROLES = 'FETCH_ROLES'
 export const UPDATE_ROLE = 'UPDATE_ROLE'
+export const FETCH_PERMISSIONS = 'FETCH_PERMISSIONS'
 
 // ////////////////////////////////////////////////////////////////////
 export const ADD_DEVICE = 'ADD_DEVICE'
