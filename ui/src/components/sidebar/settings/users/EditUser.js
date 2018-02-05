@@ -27,6 +27,7 @@ class EditUser extends React.Component {
     this.props.fetchSettingUsers()
     this.props.fetchSettingMaps()
     this.props.fetchRoles()
+    this.props.fetchPermissions()
   }
   componentDidUpdate (prevProps) {
     const {users, editUser, match, formValues} = this.props
@@ -204,6 +205,32 @@ class EditUser extends React.Component {
           </table>
         </div>
 
+      </CardPanel>
+    )
+  }
+
+  renderPermissions (canEdit) {
+    const {selectedRole} = this.state
+    const { selectedPermissions, permissions } = this.props
+
+    const rolePermissions = permissions.filter(p => selectedRole.permissionIds.includes(p.id))
+    return (
+      <CardPanel title="Permissions">
+        <div style={{height: 335, overflow: 'auto'}} className="relative">
+          <table className="table table-hover table-noborder table-pt-none table-pb-none">
+            <tbody>
+            {rolePermissions.map(p =>
+              <tr key={p}>
+                <td>
+                  <Checkbox label={p} checked={selectedPermissions.includes(p)}
+                            onCheck={canEdit ? this.onCheckPermission.bind(this, p) : null}
+                  />
+                </td>
+              </tr>
+            )}
+            </tbody>
+          </table>
+        </div>
       </CardPanel>
     )
   }
