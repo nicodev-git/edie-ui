@@ -25,7 +25,6 @@ class EditUser extends React.Component {
     this.props.closeSettingUserModal()
 
     this.props.fetchSettingUsers()
-    this.props.fetchSettingUsers()
     this.props.fetchSettingMaps()
     this.props.fetchRoles()
   }
