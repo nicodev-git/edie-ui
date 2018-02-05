@@ -89,7 +89,7 @@ const signupSuccess = (dispatch, response) => {
 
 export const fetchUserInfo = (cb) => {
   return (dispatch) => {
-    axios.get(`${SRA_URL}/api/me`, getAuthConfig())
+    axios.get(`${ROOT_URL}/getUserInfo`, getAuthConfig())
       .then(response => fetchUserInfoSuccess(dispatch, response, cb))
       .catch(error => authError(dispatch, error))
   }

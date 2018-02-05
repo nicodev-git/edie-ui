@@ -863,8 +863,8 @@ export const showLogFiltersModal = visible => {
 
 export const fetchRoles = () => {
   return dispatch => {
-    axios.get(`${ROOT_URL}/role?size=100`).then(res => {
-      dispatch({type: FETCH_ROLES, data: res.data._embedded.roles})
+    axios.get(`${ROOT_URL}/findAllRoles`).then(res => {
+      dispatch({type: FETCH_ROLES, data: res.data})
     })
   }
 }
