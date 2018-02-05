@@ -176,6 +176,38 @@ class EditUser extends React.Component {
     )
   }
 
+  renderRoles2 (canEdit) {
+    const {selectedRole} = this.state
+    const { selectedRoles, roles } = this.props
+
+    const items = roles.map(r =>
+      <tr key={r.id}
+          onClick={() => this.setState({selectedRole: r})}
+          className={selectedRole && selectedRole.id === r.id ? 'selected' : ''}>
+        <td className="padding-lg-left">
+          <div className="inline-block valign-middle">
+            <Checkbox checked={selectedRoles.includes(r.name)}
+                      onCheck={canEdit && selectedRoles.includes(r.name) ? this.onCheckRole.bind(this, r) : null}/>
+          </div>
+          <label className="valign-middle">{r.name}</label>
+        </td>
+      </tr>
+    )
+
+    return (
+      <CardPanel title="Roles">
+        <div style={{height: 335, overflow: 'auto'}} className="relative">
+          <table className="table table-hover table-noborder table-pt-none table-pb-none">
+            <tbody>
+            {items}
+            </tbody>
+          </table>
+        </div>
+
+      </CardPanel>
+    )
+  }
+
   renderMask () {
     return (
       <div style={{position: 'absolute', left: 0, right: 0, top: 0, bottom: 0, zIndex: 5}}></div>
