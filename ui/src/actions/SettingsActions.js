@@ -114,6 +114,7 @@ import { ROOT_URL } from './config'
 import { encodeUrlParams } from 'shared/Global'
 
 import {fetchEnvVars} from './EnvActions'
+import { getAuthConfig } from './util'
 
 export const fetchSettingMaps = () => {
   if (!window.localStorage.getItem('token')) {
@@ -213,17 +214,13 @@ export const fetchSettingUsers = () => {
   return (dispatch) => {
     dispatch({type: FETCH_SETTING_USERS, data: []})
 
-    axios.get(`${ROOT_URL}/user`)
-      .then(response => fetchSettingUsersSuccess(dispatch, response))
-      .catch(error => apiError(dispatch, error))
+    axios.get(`${ROOT_URL}/getUsers`, getAuthConfig()).then(response => {
+      dispatch({
+        type: FETCH_SETTING_USERS,
+        data: response.data
+      })
+    }).catch(error => apiError(dispatch, error))
   }
-}
-
-const fetchSettingUsersSuccess = (dispatch, response) => {
-  dispatch({
-    type: FETCH_SETTING_USERS,
-    data: response.data._embedded.users
-  })
 }
 
 export const addSettingUser = (props) => {
