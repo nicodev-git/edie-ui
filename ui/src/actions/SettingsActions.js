@@ -291,6 +291,16 @@ export const deleteSettingUser = (entity) => {
   }
 }
 
+export const deleteSettingUser2 = (entity) => {
+  return (dispatch) => {
+    axios.delete(`${ROOT_URL}/deleteUser?userId=${entity.id}`).then(res => {
+      if (res.data.success) {
+        dispatch({type: REMOVE_SETTING_USER, data: entity})
+      }
+    }).catch(error => apiError(dispatch, error))
+  }
+}
+
 const deleteSettingUserSuccess = (dispatch, entity) => {
   dispatch({
     type: REMOVE_SETTING_USER,
