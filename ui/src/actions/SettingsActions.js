@@ -875,12 +875,6 @@ export const updateRole = entity => {
   }
 }
 
-export const updateRole2 = entity => {
-  return dispatch => {
-
-  }
-}
-
 export const fetchPermissions = () => {
   return dispatch => {
     axios.get(`${ROOT_URL}/findAllPermissions`).then(res => {
