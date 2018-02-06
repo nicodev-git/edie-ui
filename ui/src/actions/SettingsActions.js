@@ -264,6 +264,14 @@ const updateSettingUserSuccess = (dispatch, response, keepModal) => {
   dispatch(closeUserPasswordModal())
 }
 
+export const updateSettingUser2 = (entity, keepModal) => {
+  return (dispatch) => {
+    axios.post(`${ROOT_URL}/saveUser`, entity)
+      .then(response => updateSettingUserSuccess(dispatch, response, keepModal))
+      .catch(error => apiError(dispatch, error))
+  }
+}
+
 export const deleteSettingUser = (entity) => {
   if (!window.localStorage.getItem('token')) {
     return dispatch => dispatch({ type: NO_AUTH_ERROR })
