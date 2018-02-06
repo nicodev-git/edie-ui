@@ -245,7 +245,7 @@ const addSettingUserSuccess = (dispatch, response) => {
 
 export const addSettingUser2 = (entity) => {
   return (dispatch) => {
-    axios.post(`${ROOT_URL}/adduser`, entity)
+    axios.post(`${ROOT_URL}/addUser`, entity, getAuthConfig())
       .then(response => addSettingUserSuccess(dispatch, response))
       .catch(error => apiError(dispatch, error))
   }
