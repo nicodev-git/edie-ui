@@ -243,6 +243,14 @@ const addSettingUserSuccess = (dispatch, response) => {
   dispatch(closeSettingUserModal())
 }
 
+export const addSettingUser2 = (entity) => {
+  return (dispatch) => {
+    axios.post(`${ROOT_URL}/adduser`, entity)
+      .then(response => addSettingUserSuccess(dispatch, response))
+      .catch(error => apiError(dispatch, error))
+  }
+}
+
 export const updateSettingUser = (entity, keepModal) => {
   if (!window.localStorage.getItem('token')) {
     return dispatch => dispatch({ type: NO_AUTH_ERROR })
