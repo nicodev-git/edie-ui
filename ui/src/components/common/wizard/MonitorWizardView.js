@@ -32,6 +32,12 @@ export default class MonitorWizardView extends React.Component {
           key={k} name={k} floatingLabel={paramLabels[k] || k} component={FormSelect}
           options={integratedOptions}
           className="margin-sm-left margin-sm-right"/>
+      } else if (k === 'dynamicFile') {
+        <Field
+          key={k} name={k} floatingLabel={paramLabels[k] || k}
+          component={FormCheckbox} className="margin-sm-left margin-sm-right"
+          label={hintText}
+        />
       }
       const hintText = paramHints[k] || ''
       return (
