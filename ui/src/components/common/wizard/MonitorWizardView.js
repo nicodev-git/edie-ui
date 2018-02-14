@@ -9,7 +9,8 @@ import {removeAfterDurations, removeAfterDurationUnits} from 'shared/Global'
 
 const paramLabels = {
   'checkinterval': 'Interval (seconds)',
-  'timeout': 'Timeout (seconds)'
+  'timeout': 'Timeout (seconds)',
+  'dynamicFile': 'Dynamic File'
 }
 
 const paramHints = {
@@ -27,13 +28,18 @@ export default class MonitorWizardView extends React.Component {
     const {requiredParamKeys} = this.props
     return requiredParamKeys.map(k => {
       if (k === 'remove_after') return null
+      const hintText = paramHints[k] || ''
       if (k === 'authentication') {
         return <Field
           key={k} name={k} floatingLabel={paramLabels[k] || k} component={FormSelect}
           options={integratedOptions}
           className="margin-sm-left margin-sm-right"/>
+      } else if (k === 'dynamicFile') {
+        return <Field
+          key={k} name={k} component={FormCheckbox} className="margin-sm-left margin-sm-right"
+          label={paramLabels[k] || k}
+        />
       }
-      const hintText = paramHints[k] || ''
       return (
         <Field
           key={k} name={k} floatingLabel={paramLabels[k] || k}
