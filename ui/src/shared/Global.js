@@ -279,7 +279,7 @@ export const gaugeResources = [{
 }, {
   label: 'Incident', value: 'incident'
 }, {
-  label: 'Connector', value: 'connector'
+  label: 'UserConnector', value: 'userconnector'
 }]
 
 export const timingOptions = [{
