@@ -81,6 +81,14 @@ export default class GaugeWizardView extends React.Component {
       </div>
     )
   }
+
+  renderUserConnector () {
+    const {formValues} = this.props
+    if (formValues.resource !== 'userconnector') return null
+    return (
+      <Field name="userConnectorId" component={FormInput} floatingLabel="User Connector Id" className="valign-top mr-dialog" validate={[required]}/>
+    )
+  }
   renderTableViewMode () {
     const {templateName} = this.props
     if (templateName !== 'Table') return null
@@ -108,7 +116,7 @@ export default class GaugeWizardView extends React.Component {
     return (
       <div>
         <Field name="name" component={FormInput} floatingLabel="Name" className="valign-top mr-dialog" validate={[required]}/>
-        <Field name="resource" component={FormSelect} floatingLabel="Resource" options={resourceOptions} className="valign-top"/>
+        <Field name="resource" component={FormSelect} floatingLabel="Resource" options={resourceOptions} className="valign-top mr-dialog"/>
 
         {formValues.resource === 'search' &&
           <Field
@@ -118,6 +126,7 @@ export default class GaugeWizardView extends React.Component {
         {this.renderWorkflowPick()}
         {this.renderMonitorPick()}
         {this.renderLogicalGroup()}
+        {this.renderUserConnector()}
 
         {this.renderTableViewMode()}
 

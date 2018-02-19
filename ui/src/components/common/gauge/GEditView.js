@@ -751,23 +751,6 @@ export default class GEditView extends React.Component {
         return this.renderNormal()
     }
   }
-  render1 () {
-    return (
-      <div style={{background: 'white'}}>
-        <h3 style={dialogTitleStyle}>Edit</h3>
-        <div style={{position: 'absolute', right: 4, top: 0}}>
-          <IconButton onTouchTap={this.onClickDone.bind(this)}>
-            <CloseIcon size={24} color="white"/>
-          </IconButton>
-        </div>
-        <div style={dialogBodyStyle}>
-          <CardPanel>
-            {this.renderContent()}
-          </CardPanel>
-        </div>
-      </div>
-    )
-  }
   render () {
     return (
       <Modal title="Edit" onRequestClose={this.onClickDone.bind(this)} contentStyle={{width: 1000, maxWidth: 'initial'}}>
