@@ -60,7 +60,11 @@ const connectorChartOptions = {
   },
   scales: {
     xAxes: [{
-      display: true
+      display: true,
+      // ticks: {
+      //   autoSkip: true,
+      //   maxTicksLimit: 4
+      // }
     }],
     yAxes: [{
       display: true,
