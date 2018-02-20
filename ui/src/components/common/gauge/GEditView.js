@@ -47,6 +47,7 @@ export default class GEditView extends React.Component {
       workflowIds: gauge.workflowIds || [],
       serviceName: gauge.serviceName || '',
       monitorIds: (monitorGroup ? monitorGroup.monitorids : gauge.monitorIds) || [],
+      userConnectorId: gauge.userConnectorId || '',
 
       duration: gauge.duration || '3',
       durationUnit: gauge.durationUnit || 'day',
@@ -283,7 +284,7 @@ export default class GEditView extends React.Component {
       forward, forwardBoardId, servers,
       tableViewMode, showImage,
       logicalGroups,
-      searchIds
+      searchIds, userConnectorId
     }  = this.state
     const values = {
       resource, savedSearchId, monitorId, workflowId, workflowIds, deviceId, serviceName, monitorIds,
@@ -293,7 +294,7 @@ export default class GEditView extends React.Component {
       forward, forwardBoardId, servers,
       tableViewMode, showImage,
       logicalGroups,
-      searchIds
+      searchIds, userConnectorId
     }
     onSubmit && onSubmit(values)
   }
@@ -317,6 +318,17 @@ export default class GEditView extends React.Component {
             </tbody>
           </table>
         </div>
+      </div>
+    )
+  }
+
+  renderUserConnector () {
+    const {userConnectorId} = this.state
+    if (this.state.resource !== 'userconnector') return null
+    return (
+      <div className="col-md-6">
+        <TextField name="userConnectorId" value={userConnectorId} floatingLabelText="User Connector Id"
+                   className="valign-top mr-dialog" onChange={this.onChangeText.bind(this, 'userConnectorId')} fullWidth/>
       </div>
     )
   }
@@ -346,37 +358,6 @@ export default class GEditView extends React.Component {
       <div key="monitorId" className="col-md-6">
         <SelectField value={monitorId} floatingLabelText="Monitor" className="valign-top" style={inputStyle} onChange={this.onChangeSelect.bind(this, 'monitorId')}>
           {monitorOptions.map(p => <MenuItem key={p.value} value={p.value} primaryText={p.label}/>)}
-        </SelectField>
-      </div>
-    ]
-  }
-  renderWorkflowPick2 () {
-    const {deviceId, workflowId} = this.state
-    const {devices, workflows} = this.props
-    if (this.state.resource !== 'incident') return null
-    if (!devices) {
-      return (
-        <div className="col-md-6">
-          <SelectField value={workflowId} floatingLabelText="Workflow" className="valign-top" style={inputStyle} onChange={this.onChangeSelect.bind(this, 'workflowId')}>
-            {workflows.map(p => <MenuItem key={p.id} value={p.id} primaryText={p.name}/>)}
-          </SelectField>
-        </div>
-      )
-    }
-    const index = findIndex(devices, {id: deviceId})
-
-    const wfs = index < 0 ? [] : (devices[index].workflowids || [])
-    const wfOptions = workflows.filter(p => wfs.includes(p.id))
-
-    return [
-      <div key="deviceId" className="col-md-6">
-        <SelectField value={deviceId} floatingLabelText="Device" className="valign-top" style={inputStyle} onChange={this.onChangeSelect.bind(this, 'deviceId')}>
-          {devices.map(p => <MenuItem key={p.id} value={p.id} primaryText={p.name}/>)}
-        </SelectField>
-      </div>,
-      <div key="monitorId" className="col-md-6">
-        <SelectField value={workflowId} floatingLabelText="Workflow" className="valign-top" style={inputStyle} onChange={this.onChangeSelect.bind(this, 'workflowId')}>
-          {wfOptions.map(p => <MenuItem key={p.id} value={p.id} primaryText={p.name}/>)}
         </SelectField>
       </div>
     ]
@@ -458,6 +439,7 @@ export default class GEditView extends React.Component {
           {this.renderMonitorPick()}
           {this.renderTableViewMode()}
           {this.renderLogicalGroup()}
+          {this.renderUserConnector()}
 
           {!hideDuration && <div className="col-md-3">
             <SelectField value={duration} floatingLabelText="Duration" className="valign-top mr-dialog" style={inputStyle} onChange={this.onChangeSelect.bind(this, 'duration')}>
@@ -473,7 +455,7 @@ export default class GEditView extends React.Component {
 
         {gauge.templateName === 'Up/Down' ? this.renderForward() : null}
 
-        {!hideSplit && resource !== 'monitor' && <div className="row">
+        {!hideSplit && resource !== 'monitor' && resource !== 'userconnector' && <div className="row">
           <div className="col-md-3">
             <SelectField value={splitBy} floatingLabelText="Resolution" className="valign-top mr-dialog" style={inputStyle} onChange={this.onChangeSelect.bind(this, 'splitBy')}>
               {durations.map(p => <MenuItem key={p.value} value={p.value} primaryText={p.label}/>)}
