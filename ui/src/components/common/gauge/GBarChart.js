@@ -47,6 +47,37 @@ const chartOptions = {
   }
 }
 
+const connectorChartOptions = {
+  maintainAspectRatio: false,
+  legend: {
+    display: false
+  },
+  elements: {
+    line: {
+      tension: 0
+    }
+  },
+  scales: {
+    xAxes: [{
+      display: true
+    }],
+    yAxes: [{
+      display: true,
+      ticks: {
+        min: 0,
+        fontColor: '#9e9e9e',
+        callback: function(value, index, values) {
+          if (Math.floor(value) === value) return value
+        }
+      },
+      gridLines: {
+        display: true,
+        drawBorder: false
+      }
+    }]
+  }
+}
+
 export default class GBarChart extends React.Component {
   constructor (props) {
     super (props)
@@ -106,7 +137,8 @@ export default class GBarChart extends React.Component {
 
   fetchRecordCount (props) {
     const {gauge, searchList, workflows, devices, allDevices} = props
-    const {savedSearchId, monitorId, resource, duration, durationUnit, splitBy, splitUnit,workflowId, workflowIds} = gauge
+    const {savedSearchId, monitorId, resource, duration, durationUnit,
+      splitBy, splitUnit,workflowId, workflowIds, userConnectorId} = gauge
 
     this.setState({
       loading: true
@@ -139,6 +171,28 @@ export default class GBarChart extends React.Component {
         setTimeout(() => {
           this.setState({needRefresh: true})
         }, 2000)
+      })
+    } else if (resource === 'userconnector'){
+      axios.get(`${ROOT_URL}/event/search/findByUserConnector`, {
+        params: {
+          dateFrom: dateFrom.valueOf(),
+          dateTo: dateTo.valueOf(),
+          userConnectorId,
+          sort: 'timestamp'
+        }
+      }).then(res => {
+        this.setState({
+          searchRecordCounts: res.data._embedded.events.map(p => ({
+            date: moment(p.timestamp).format('MM-DD HH:mm'),
+            count: parseFloat(p.lastResultData)
+          })),
+          loading: false,
+          needRefresh: false
+        })
+      }).catch(() => {
+        setTimeout(() => {
+          this.setState({needRefresh: true})
+        }, 5000)
       })
     } else if (resource === 'incident'){
       const params = {
@@ -246,6 +300,7 @@ export default class GBarChart extends React.Component {
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   renderFrontView () {
+    const {gauge} = this.props
     const {searchRecordCounts} = this.state
 
     const chartData = {
@@ -258,10 +313,12 @@ export default class GBarChart extends React.Component {
       }]
     }
 
-    const options = {
-      ...chartOptions,
-      onClick: this.onClickPoint.bind(this)
-    }
+    const options = gauge.resource === 'userconnector' ?
+      connectorChartOptions :
+      {
+        ...chartOptions,
+        onClick: this.onClickPoint.bind(this)
+      }
 
     return (
       <div className="flex-1" style={{overflow: 'hidden'}}>
