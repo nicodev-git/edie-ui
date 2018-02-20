@@ -233,7 +233,7 @@ export default class ServerDashboardView extends React.Component {
           <SelectField
             value={page} onChange={this.onChangePage.bind(this)}
             className="valign-top"
-            style={{width: 140}}>
+            style={{width: 180}}>
             {menuItems.map(p =>
               <MenuItem key={p} value={p} primaryText={p}/>
             )}

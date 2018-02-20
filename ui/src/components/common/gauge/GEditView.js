@@ -1,8 +1,8 @@
 import React from 'react'
 import {TextField, SelectField, MenuItem, RaisedButton, Checkbox} from 'material-ui'
 import {findIndex} from 'lodash'
-import IconButton from 'material-ui/IconButton'
-import CloseIcon from 'material-ui/svg-icons/navigation/close'
+// import IconButton from 'material-ui/IconButton'
+// import CloseIcon from 'material-ui/svg-icons/navigation/close'
 
 import {gaugeDurationTypes, gaugeResources, gaugeTableViewModes} from 'shared/Global'
 
@@ -13,7 +13,7 @@ import LogicalGroupPicker from 'components/common/wizard/input/LogicalGroupPicke
 import DeviceMonitorPicker from 'components/common/wizard/input/DeviceMonitorPicker'
 import SavedSearchPicker from 'components/common/wizard/input/SavedSearchPicker'
 
-import { dialogBodyStyle, dialogTitleStyle } from 'style/common/materialStyles'
+// import { dialogBodyStyle, dialogTitleStyle } from 'style/common/materialStyles'
 import {CardPanel, Modal} from 'components/modal/parts'
 
 

@@ -48,6 +48,37 @@ const chartOptions = {
   }
 }
 
+const connectorChartOptions = {
+  maintainAspectRatio: false,
+  legend: {
+    display: false
+  },
+  elements: {
+    line: {
+      tension: 0
+    }
+  },
+  scales: {
+    xAxes: [{
+      display: true
+    }],
+    yAxes: [{
+      display: true,
+      ticks: {
+        min: 0,
+        fontColor: '#9e9e9e',
+        callback: function(value, index, values) {
+          if (Math.floor(value) === value) return value
+        }
+      },
+      gridLines: {
+        display: true,
+        drawBorder: false
+      }
+    }]
+  }
+}
+
 const monitorChartOptions = {
   maintainAspectRatio: false,
   legend: {
@@ -119,7 +150,7 @@ export default class GLineChart extends React.Component {
 
   getParams () {
     const {gauge, searchList} = this.props
-    const {savedSearchId, monitorId, resource, workflowId, workflowIds} = gauge
+    const {savedSearchId, monitorId, resource, workflowId, workflowIds, userConnectorId} = gauge
 
     if (resource === 'monitor') {
       return {
@@ -133,6 +164,10 @@ export default class GLineChart extends React.Component {
         severity: severities.map(p => p.value).join(','),
         tag: '',
         monitorTypes: ''
+      }
+    } else if (resource === 'userconnector') {
+      return {
+        query: `userConnectorId=${userConnectorId}`
       }
     } else {
       const index = findIndex(searchList, {id: savedSearchId})
@@ -148,7 +183,8 @@ export default class GLineChart extends React.Component {
 
   fetchRecordCount (props) {
     const {gauge, searchList, workflows, devices, allDevices} = props
-    const {savedSearchId, monitorId, resource, duration, durationUnit, splitBy, splitUnit, workflowId, workflowIds} = gauge
+    const {savedSearchId, monitorId, resource, duration, durationUnit,
+      splitBy, splitUnit, workflowId, workflowIds, userConnectorId} = gauge
 
     this.setState({
       loading: true
@@ -197,6 +233,28 @@ export default class GLineChart extends React.Component {
       axios.get(`${ROOT_URL}/search/getRecordCount`, {params}).then(res => {
         this.setState({
           searchRecordCounts: res.data,
+          loading: false,
+          needRefresh: false
+        })
+      }).catch(() => {
+        setTimeout(() => {
+          this.setState({needRefresh: true})
+        }, 5000)
+      })
+    } else if (resource === 'userconnector'){
+      axios.get(`${ROOT_URL}/event/search/findByUserConnector`, {
+        params: {
+          dateFrom: dateFrom.valueOf(),
+          dateTo: dateTo.valueOf(),
+          userConnectorId,
+          sort: 'timestamp'
+        }
+      }).then(res => {
+        this.setState({
+          searchRecordCounts: res.data._embedded.events.map(p => ({
+            date: moment(p.timestamp).format('MM-DD HH:mm'),
+            count: parseFloat(p.lastResultData)
+          })),
           loading: false,
           needRefresh: false
         })
@@ -306,6 +364,8 @@ export default class GLineChart extends React.Component {
     let options
     if (gauge.resource === 'monitor') {
       options = monitorChartOptions
+    } else if (gauge.resource === 'userconnector') {
+      options = connectorChartOptions
     } else {
       options = {
         ...chartOptions,
