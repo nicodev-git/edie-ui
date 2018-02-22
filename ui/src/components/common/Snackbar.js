@@ -1,6 +1,6 @@
 import React from 'react'
 import Snackbar from 'material-ui/Snackbar'
-import SearchIcon from 'material-ui/svg-icons/action/search'
+import SearchIcon from 'material-ui-icons/Search'
 
 const searchIconStyle = {
   marginTop: '6px'

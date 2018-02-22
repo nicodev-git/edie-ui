@@ -1,6 +1,6 @@
 import React from 'react'
 import {Button, Chip, Avatar} from 'material-ui'
-import {blue300, indigo900} from 'material-ui/styles/colors'
+import {blue300, indigo900} from 'material-ui/colors'
 
 import {showConfirm} from 'components/common/Alert'
 

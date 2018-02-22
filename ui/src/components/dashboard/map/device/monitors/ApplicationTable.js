@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import {TextField, Button, MenuItem} from 'material-ui'
-import IconMenu from 'material-ui/IconMenu'
-import ActionSearch from 'material-ui/svg-icons/action/search'
+import Menu from 'material-ui/Menu'
+import ActionSearch from 'material-ui-icons/Search'
 import moment from 'moment'
 import {assign} from 'lodash'
 
@@ -20,6 +20,7 @@ export default class ApplicationTable extends Component {
   constructor (props) {
     super(props)
     this.state = {
+      moreOpen: false
     }
     this.columns = [{
       'displayName': 'Name',
@@ -149,14 +150,11 @@ export default class ApplicationTable extends Component {
           <Button variant="flat" icon={<ActionSearch />} onTouchTap={this.onClickSearch.bind(this)}/>
         </div>
         <div className="pull-right">
-          <IconMenu
-            iconButtonElement={<Button variant="raised" label="More" primary/>}
-            anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
-            targetOrigin={{horizontal: 'left', vertical: 'top'}}
-          >
+          <Button variant="raised" label="More" color="primary" onClick={() => this.setState({moreOpen: !this.state.moreOpen})}/>
+          <Menu open={this.state.moreOpen}>
             <MenuItem primaryText="Applications" onTouchTap={this.onClickGetApp.bind(this)}/>
             <MenuItem primaryText="Hotfix" onTouchTap={this.onClickGetHotfix.bind(this)}/>
-          </IconMenu>
+          </Menu>
         </div>
       </div>
     )

@@ -1,12 +1,12 @@
 import React from 'react'
 import ComputerIcon from 'material-ui/svg-icons/hardware/computer'
-import {purple500, deepPurpleA400} from 'material-ui/styles/colors'
+import {purple, deepPurple} from 'material-ui/colors'
 
 import FloatingMenu from 'components/common/floating/FloatingMenu'
 import ServerItem from './ServerItem'
 import { showConfirm } from 'components/common/Alert'
 
-const tplColors = [purple500, deepPurpleA400]
+const tplColors = [purple[500], deepPurple['A400']]
 
 export default class AppliancesView extends React.Component {
   getAppliances () {

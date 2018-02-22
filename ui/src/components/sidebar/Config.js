@@ -1,6 +1,6 @@
 import React from 'react'
 // import HomeIcon from 'material-ui/svg-icons/action/home'
-import SearchIcon from 'material-ui/svg-icons/action/search'
+import SearchIcon from 'material-ui-icons/Search'
 import ChatIcon from 'material-ui/svg-icons/communication/chat'
 import BugReportIcon from 'material-ui/svg-icons/action/bug-report'
 import NotificationsNoneIcon from 'material-ui/svg-icons/social/notifications-none'

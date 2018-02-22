@@ -11,7 +11,7 @@ import {
 } from 'material-ui'
 import ReactTooltip from 'react-tooltip'
 import ArrowBack from 'material-ui/svg-icons/navigation/arrow-back'
-import ActionSearch from 'material-ui/svg-icons/action/search'
+import ActionSearch from 'material-ui-icons/Search'
 
 import DateRangePicker from 'components/common/DateRangePicker'
 import InfiniteTable from 'components/common/InfiniteTable'

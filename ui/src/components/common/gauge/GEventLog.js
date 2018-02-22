@@ -1,7 +1,7 @@
 import React from 'react'
 import {findIndex} from 'lodash'
 import {Select, MenuItem} from 'material-ui'
-// import ActionSearch from 'material-ui/svg-icons/action/search'
+// import ActionSearch from 'material-ui-icons/Search'
 
 import FlipView from './FlipView'
 import GEditView from './GEditView'

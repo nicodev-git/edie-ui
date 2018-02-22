@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import {TextField, Button, Select, MenuItem} from 'material-ui'
-import ActionSearch from 'material-ui/svg-icons/action/search'
+import ActionSearch from 'material-ui-icons/Search'
 import moment from 'moment'
 import {assign} from 'lodash'
 

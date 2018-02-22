@@ -4,7 +4,7 @@ import SettingsIcon from 'material-ui/svg-icons/action/settings'
 import ClearIcon from 'material-ui/svg-icons/communication/clear-all'
 import ComputerIcon from 'material-ui/svg-icons/hardware/computer'
 import DevicesIcon from 'material-ui/svg-icons/device/devices'
-import {purple500, deepPurpleA400} from 'material-ui/styles/colors'
+import {purple, deepPurple} from 'material-ui/colors'
 import ReactTooltip from 'react-tooltip'
 
 import { wizardConfig } from 'components/common/wizard/WizardConfig'
@@ -35,7 +35,7 @@ const btnStyle = {
   width: 40
 }
 
-const tplColors = [purple500, deepPurpleA400]
+const tplColors = [purple[500], deepPurple['A400']]
 
 const menuItems = ['Servers', 'Workstations', 'Appliances']
 
@@ -273,7 +273,7 @@ export default class ServerDashboardView extends React.Component {
     items.push({
       label: 'Add Range',
       icon: <DevicesIcon/>,
-      color: deepPurpleA400,
+      color: deepPurple['A400'],
       onClick: this.onClickAddRange.bind(this)
     })
 

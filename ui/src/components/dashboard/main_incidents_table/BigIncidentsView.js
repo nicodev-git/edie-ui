@@ -1,7 +1,7 @@
 import React from 'react'
 import moment from 'moment'
 import {Button, MenuItem, Select, TextField} from 'material-ui'
-import ActionSearch from 'material-ui/svg-icons/action/search'
+import ActionSearch from 'material-ui-icons/Search'
 import ReactTooltip from 'react-tooltip'
 
 import DateRangePicker from 'components/common/DateRangePicker'

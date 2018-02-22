@@ -1,7 +1,7 @@
 import React from 'react'
 import {Chip, Popover} from 'material-ui'
 import {findIndex} from 'lodash'
-import {blue300} from 'material-ui/styles/colors'
+import {blue300} from 'material-ui/colors'
 // import Tags from 'react-material-tags'
 import Select from 'react-select'
 import 'react-select/dist/react-select.css'

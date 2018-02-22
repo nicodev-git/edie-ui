@@ -1,7 +1,7 @@
 import React from 'react'
 import { Form, Field } from 'redux-form'
 import {Button, IconButton} from 'material-ui'
-import ActionSearch from 'material-ui/svg-icons/action/search'
+import ActionSearch from 'material-ui-icons/Search'
 
 import { FormInput } from 'components/modal/parts'
 import DateRangePicker from 'components/common/DateRangePicker'
