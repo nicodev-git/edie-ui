@@ -4,8 +4,8 @@ import {reduce, isNull, isUndefined, isArray, assign} from 'lodash'
 import axios from 'axios'
 
 import { ROOT_URL } from 'actions/config'
-import WarningIcon from 'material-ui/svg-icons/alert/warning'
-import DescriptionIcon from 'material-ui/svg-icons/action/description'
+import WarningIcon from 'material-ui-icons/Warning'
+import DescriptionIcon from 'material-ui-icons/Description'
 import { iconStyle } from 'style/common/materialStyles'
 
 export const dateFormat = 'DD/MM/YYYY HH:mm:ss'

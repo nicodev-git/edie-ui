@@ -1,7 +1,6 @@
 import React from 'react'
 import IconButton from 'material-ui/IconButton'
-import IconMenu from 'material-ui/IconMenu'
-import {MenuItem} from 'material-ui/Menu'
+import Menu, {MenuItem} from 'material-ui/Menu'
 import ChromeReaderModeIcon from 'material-ui/svg-icons/action/chrome-reader-mode'
 
 const buttonStyle = {
@@ -16,24 +15,20 @@ const iconStyle = {
 }
 
 const MapSelectView = ({ onChange, maps }) => (
-  <IconMenu
-    iconButtonElement={
-      <IconButton style={buttonStyle} iconStyle={iconStyle}>
-          <ChromeReaderModeIcon color="#545454"/>
-      </IconButton>
-    }
-    anchorOrigin={{horizontal: 'left', vertical: 'top'}}
-    targetOrigin={{horizontal: 'left', vertical: 'top'}}
-    onItemTouchTap={onChange}
-  >
-    {
-      maps.map(map =>
-        <MenuItem value={map.id} key={map.id}>
-          {map.name}
-        </MenuItem>
-      )
-    }
-  </IconMenu>
+  <div className="inline-block">
+    <IconButton style={buttonStyle} iconStyle={iconStyle}>
+      <ChromeReaderModeIcon color="#545454"/>
+    </IconButton>
+    <Menu open={false}>
+      {
+        maps.map(map =>
+          <MenuItem value={map.id} key={map.id}>
+            {map.name}
+          </MenuItem>
+        )
+      }
+    </Menu>
+  </div>
 )
 
 export default MapSelectView
