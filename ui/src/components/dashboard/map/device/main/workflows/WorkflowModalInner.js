@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {RaisedButton} from 'material-ui'
+import {Button} from 'material-ui'
 
 import RuleModal from './RuleModal'
 import CategoryModal from './CategoryModal'
@@ -140,9 +140,9 @@ export default class WorkflowModalInner extends Component {
           </div>
           <div className="col-md-12 margin-md-top">
             { isDiagramButton
-              ? (<RaisedButton label="Diagram" onClick={this.props.onClickDiagram}/>) : null}
+              ? (<Button variant="raised" label="Diagram" onClick={this.props.onClickDiagram}/>) : null}
             &nbsp;
-            <RaisedButton label="Finish" type="submit"/>
+            <Button variant="raised" label="Finish" type="submit"/>
           </div>
           {modals}
         </div>

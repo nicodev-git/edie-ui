@@ -1,6 +1,6 @@
 import React from 'react'
 
-import {RaisedButton, IconMenu, MenuItem, SelectField} from 'material-ui'
+import {Button, IconMenu, MenuItem, Select} from 'material-ui'
 import InfiniteTable from 'components/common/InfiniteTable'
 import { showAlert, showConfirm } from 'components/common/Alert'
 
@@ -202,7 +202,7 @@ export default class Users extends React.Component {
         <TabPageHeader title="Settings">
           <div className="text-center margin-md-top">
             <div className="pull-left text-left">
-              <SelectField
+              <Select
                 errorStyle={errorStyle}
                 underlineStyle={underlineFocusStyle}
                 selectedMenuItemStyle={selectedItemStyle}
@@ -216,13 +216,13 @@ export default class Users extends React.Component {
                     <MenuItem key={item.id} value={item.id} primaryText={item.name}/>
                   )
                 }
-              </SelectField>
+              </Select>
             </div>
 
             <div style={{position: 'absolute', right: '25px'}}>
               <IconMenu
                 className="hidden"
-                iconButtonElement={<RaisedButton label="Group"/>}
+                iconButtonElement={<Button variant="raised" label="Group"/>}
                 anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
                 targetOrigin={{horizontal: 'left', vertical: 'top'}}
               >
@@ -233,7 +233,7 @@ export default class Users extends React.Component {
 
               {canEdit ? (
                 <IconMenu
-                  iconButtonElement={<RaisedButton label="User"/>}
+                  iconButtonElement={<Button variant="raised" label="User"/>}
                   anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
                   targetOrigin={{horizontal: 'left', vertical: 'top'}}
                 >
@@ -245,7 +245,7 @@ export default class Users extends React.Component {
                 </IconMenu>
               ) : null}
               &nbsp;
-              <RaisedButton label="Profile" onTouchTap={this.onClickProfile.bind(this)}/>&nbsp;
+              <Button variant="raised" label="Profile" onTouchTap={this.onClickProfile.bind(this)}/>&nbsp;
               <UserTabs history={this.props.history}/>&nbsp;
             </div>
           </div>

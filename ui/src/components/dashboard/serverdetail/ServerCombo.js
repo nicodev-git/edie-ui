@@ -1,6 +1,6 @@
 import React from 'react'
 // import {findIndex} from 'lodash'
-import {SelectField, MenuItem} from 'material-ui'
+import {Select, MenuItem} from 'material-ui'
 
 export default class ServerCombo extends React.Component {
   getServers () {
@@ -18,11 +18,11 @@ export default class ServerCombo extends React.Component {
     const servers = this.getServers()
     return (
       <div style={{position: 'absolute', marginTop: -10}}>
-        <SelectField value={device.id} onChange={this.onChangeValue.bind(this)}>
+        <Select value={device.id} onChange={this.onChangeValue.bind(this)}>
           {servers.map(p =>
             <MenuItem key={p.id} primaryText={p.name} value={p.id}/>
           )}
-        </SelectField>
+        </Select>
       </div>
     )
   }

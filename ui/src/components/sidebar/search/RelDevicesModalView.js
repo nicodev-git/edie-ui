@@ -1,5 +1,5 @@
 import React from 'react'
-import {SelectField, MenuItem} from 'material-ui'
+import {Select, MenuItem} from 'material-ui'
 
 import { CloseButton, Modal, CardPanel } from 'components/modal/parts'
 
@@ -25,7 +25,7 @@ export default class RelDevicesModalView extends React.Component {
       <Modal title="Relevant Devices" onRequestClose={onHide}>
         <CardPanel title="Relevant Devices" className="margin-md-bottom">
           <div>
-            <SelectField
+            <Select
               hintText="Field"
               value={searchFields[0]}
               onChange={onChangeSearchField}
@@ -38,7 +38,7 @@ export default class RelDevicesModalView extends React.Component {
                   primaryText={option.path.replace(/\.dataobj\./gi, '.').replace(/dataobj\./gi, '')}
                 />
               )}
-            </SelectField>
+            </Select>
           </div>
           <div style={{height: '500px', overflow: 'auto'}}>
             <table className="table table-hover dataTable">

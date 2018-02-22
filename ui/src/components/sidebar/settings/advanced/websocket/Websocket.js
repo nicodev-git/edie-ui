@@ -1,6 +1,6 @@
 import React from 'react'
 import { ChromePicker } from 'react-color'
-import {TextField, SelectField, MenuItem, RaisedButton} from 'material-ui'
+import {TextField, Select, MenuItem, Button} from 'material-ui'
 
 export default class Websocket extends React.Component {
   constructor (props) {
@@ -114,43 +114,43 @@ export default class Websocket extends React.Component {
         <div className="padding-md form-mui-inline">
           <TextField floatingLabelText="Name"/>&nbsp;
           <TextField floatingLabelText="Description"/>&nbsp;
-          <SelectField
+          <Select
             floatingLabelText="Severity"
             value="HIGH">
             <MenuItem value="HIGH" primaryText="High"/>
             <MenuItem value="MEDIUM" primaryText="Medium"/>
             <MenuItem value="LOW" primaryText="Low"/>
             <MenuItem value="AUDIT" primaryText="Audit"/>
-          </SelectField>
+          </Select>
 
-          <RaisedButton label="Add Incident" onTouchTap={this.onClickAddIncident.bind(this)} primary className="margin-md-top"/>
+          <Button variant="raised" label="Add Incident" onTouchTap={this.onClickAddIncident.bind(this)} primary className="margin-md-top"/>
         </div>
 
         <div className="header-red">BI</div>
         <div className="padding-md-left">
           <div className="form-mui-inline">
             <TextField floatingLabelText="Open Incidents"/>&nbsp;
-            <RaisedButton label="Update" onTouchTap={this.onClickUpdateOpenIncident.bind(this)} primary className="margin-md-top"/>
+            <Button variant="raised" label="Update" onTouchTap={this.onClickUpdateOpenIncident.bind(this)} primary className="margin-md-top"/>
           </div>
 
           <div className="form-mui-inline">
             <TextField floatingLabelText="Today Incidents"/>&nbsp;
-            <RaisedButton label="Update" onTouchTap={this.onClickUpdateTodayIncident.bind(this)} primary className="margin-md-top"/>
+            <Button variant="raised" label="Update" onTouchTap={this.onClickUpdateTodayIncident.bind(this)} primary className="margin-md-top"/>
           </div>
 
           <div className="form-mui-inline">
             <TextField floatingLabelText="Attackers Today"/>&nbsp;
-            <RaisedButton label="Update" onTouchTap={this.onClickUpdateAttackerToday.bind(this)} primary className="margin-md-top"/>
+            <Button variant="raised" label="Update" onTouchTap={this.onClickUpdateAttackerToday.bind(this)} primary className="margin-md-top"/>
           </div>
 
           <div className="form-mui-inline">
             <TextField floatingLabelText="Month Incidents"/>&nbsp;
-            <RaisedButton label="Update" onTouchTap={this.onClickUpdateMonthIncident.bind(this)} primary className="margin-md-top"/>
+            <Button variant="raised" label="Update" onTouchTap={this.onClickUpdateMonthIncident.bind(this)} primary className="margin-md-top"/>
           </div>
 
           <div className="form-mui-inline">
             <TextField floatingLabelText="Incident News"/>&nbsp;
-            <RaisedButton label="Push" onTouchTap={this.onClickPushNews.bind(this)} primary className="margin-md-top"/>
+            <Button variant="raised" label="Push" onTouchTap={this.onClickPushNews.bind(this)} primary className="margin-md-top"/>
           </div>
         </div>
 
@@ -158,12 +158,12 @@ export default class Websocket extends React.Component {
         <div className="padding-md-left">
           <div className="form-mui-inline">
             <TextField floatingLabelText="Device ID"/>&nbsp;
-            <SelectField floatingLabelText="Status" value="up">
+            <Select floatingLabelText="Status" value="up">
               <MenuItem value="up" primaryText="Up"/>
               <MenuItem value="down" primaryText="Down"/>
-            </SelectField>
+            </Select>
 
-            <RaisedButton label="Update" onTouchTap={this.onClickUpdateDeviceStatus.bind(this)} primary className="margin-md-top"/>
+            <Button variant="raised" label="Update" onTouchTap={this.onClickUpdateDeviceStatus.bind(this)} primary className="margin-md-top"/>
           </div>
           <div className="form-mui-inline">
             <TextField floatingLabelText="Connection ID"/>&nbsp;
@@ -182,7 +182,7 @@ export default class Websocket extends React.Component {
               }
             </div>
 
-            <RaisedButton label="Update" onTouchTap={this.onClickUpdateColor.bind(this)} primary className="margin-md-top"/>
+            <Button variant="raised" label="Update" onTouchTap={this.onClickUpdateColor.bind(this)} primary className="margin-md-top"/>
           </div>
         </div>
       </div>

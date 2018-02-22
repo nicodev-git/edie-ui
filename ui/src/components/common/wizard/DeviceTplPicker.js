@@ -1,5 +1,5 @@
 import React from 'react'
-import {SelectField, MenuItem} from 'material-ui'
+import {Select, MenuItem} from 'material-ui'
 import { Modal } from 'components/modal/parts'
 
 import AppletCard from 'components/common/AppletCard'
@@ -51,12 +51,12 @@ export default class DeviceTplPicker extends React.Component {
 
     return (
       <Modal title="Devices" onRequestClose={onHide} contentStyle={{width: 996, maxWidth: 'initial'}}>
-        <SelectField value={category} onChange={this.onChangeCategory.bind(this)}>
+        <Select value={category} onChange={this.onChangeCategory.bind(this)}>
           <MenuItem value="" primaryText="[All]"/>
           {this.getCategories().map(p =>
             <MenuItem key={p} value={p} primaryText={p}/>
           )}
-        </SelectField>
+        </Select>
         <ul className="web-applet-cards">
           {this.getTemplates().filter(p => !category || p.devicetemplategroup === category).map(this.renderTpl.bind(this))}
         </ul>

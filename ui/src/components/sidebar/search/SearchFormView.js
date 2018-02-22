@@ -1,7 +1,7 @@
 import React from 'react'
 import { Field } from 'redux-form'
 import { findIndex } from 'lodash'
-import {FlatButton, SelectField, Popover, MenuItem, IconButton} from 'material-ui'
+import {Button, Select, Popover, MenuItem, IconButton} from 'material-ui'
 import ActionSearch from 'material-ui/svg-icons/action/search'
 import ToggleStar from 'material-ui/svg-icons/toggle/star-border'
 import FilledStar from 'material-ui/svg-icons/toggle/star'
@@ -46,7 +46,7 @@ export default class SearchFormView extends React.Component {
   }
   renderDateLabel (label) {
     return (
-      <FlatButton label={label}/>
+      <Button variant="flat" label={label}/>
     )
   }
   severityRenderer (severities, values) {
@@ -105,8 +105,8 @@ export default class SearchFormView extends React.Component {
           <div style={{height: 48}}>
             <Field name="freeText" component={FormInput} label="Search" onKeyDown={onKeyDownFreeText} style={{width: 300}}
                    className={`valign-top ${advanced ? 'hidden' : ''}`}/>
-            <FlatButton label="Search By" onTouchTap={this.onClickSearchBy.bind(this)} className="valign-top margin-xs-top"/>
-            <SelectField
+            <Button variant="flat" label="Search By" onTouchTap={this.onClickSearchBy.bind(this)} className="valign-top margin-xs-top"/>
+            <Select
               multiple
               hintText="Collection"
               value={selectedCollections}
@@ -122,7 +122,7 @@ export default class SearchFormView extends React.Component {
                   primaryText={option.label}
                 />
               )}
-            </SelectField>
+            </Select>
             <DateRangePicker
               className="valign-top"
               startDate={startDate}
@@ -151,13 +151,13 @@ export default class SearchFormView extends React.Component {
               style={{minWidth: 300}}
             >
               <div>
-                <FlatButton label="Workflows" onTouchTap={() => this.hideSearchBy() && onClickWorkflow()} style={{width: '100%', textAlign: 'left'}}/>
-                <FlatButton label="Device/Monitors" onTouchTap={() => this.hideSearchBy() && onClickSearchMonitor()} style={{width: '100%', textAlign: 'left'}}/>
-                <FlatButton label="Tags" onTouchTap={(e) => this.hideSearchBy() && onClickTags(e)} style={{width: '100%', textAlign: 'left'}}/>
+                <Button variant="flat" label="Workflows" onTouchTap={() => this.hideSearchBy() && onClickWorkflow()} style={{width: '100%', textAlign: 'left'}}/>
+                <Button variant="flat" label="Device/Monitors" onTouchTap={() => this.hideSearchBy() && onClickSearchMonitor()} style={{width: '100%', textAlign: 'left'}}/>
+                <Button variant="flat" label="Tags" onTouchTap={(e) => this.hideSearchBy() && onClickTags(e)} style={{width: '100%', textAlign: 'left'}}/>
               </div>
 
               <div style={{marginTop: -35}}>
-                <SelectField
+                <Select
                   multiple
                   floatingLabelText="Severity"
                   value={selectedSeverities}
@@ -175,11 +175,11 @@ export default class SearchFormView extends React.Component {
                       primaryText={option.label}
                     />
                   )}
-                </SelectField>
+                </Select>
               </div>
 
               <div style={{marginTop: -20}}>
-                <SelectField
+                <Select
                   multiple
                   floatingLabelText="MonitorType"
                   value={selectedMonitorTypes}
@@ -196,7 +196,7 @@ export default class SearchFormView extends React.Component {
                       primaryText={option.name}
                     />
                   )}
-                </SelectField>
+                </Select>
               </div>
             </Popover>
           </div>

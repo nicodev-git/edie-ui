@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import {appendComponent, removeComponent} from 'util/Component'
 import { SubHeader, Modal } from '../modal/parts'
-import {TextField, RaisedButton} from 'material-ui'
+import {TextField, Button} from 'material-ui'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import { inputStyle, underlineStyle, buttonStyle, buttonTextStyle } from 'style/common/materialStyles'
 
@@ -64,7 +64,7 @@ export default class Alert extends Component {
             />
           </div>
           <div className="form-buttons">
-            <RaisedButton
+            <Button variant="raised"
               onClick={this.onClickSave.bind(this)}
               label="OK"
               style={buttonStyle}

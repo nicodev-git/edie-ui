@@ -1,5 +1,5 @@
 import React from 'react'
-import {RaisedButton, Popover, Menu, MenuItem} from 'material-ui'
+import {Button, Popover, Menu, MenuItem} from 'material-ui'
 
 const tabs = [{
   title: 'Collectors',
@@ -28,7 +28,7 @@ export default class CollectorTabs extends React.Component {
     const {history} = this.props
     return (
       <div className="inline-block">
-        <RaisedButton label="View" primary onTouchTap={e => this.setState({viewOpen: true, anchorEl: e.currentTarget})}/>
+        <Button variant="raised" label="View" primary onTouchTap={e => this.setState({viewOpen: true, anchorEl: e.currentTarget})}/>
         <Popover
           open={!!this.state.viewOpen}
           anchorEl={this.state.anchorEl}

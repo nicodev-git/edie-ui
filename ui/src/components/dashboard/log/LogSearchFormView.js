@@ -1,6 +1,6 @@
 import React from 'react'
 import { Form, Field } from 'redux-form'
-import {FlatButton, IconButton} from 'material-ui'
+import {Button, IconButton} from 'material-ui'
 import ActionSearch from 'material-ui/svg-icons/action/search'
 
 import { FormInput } from 'components/modal/parts'
@@ -9,7 +9,7 @@ import DateRangePicker from 'components/common/DateRangePicker'
 export default class LogSearchFormView extends React.Component {
   renderDateLabel (label) {
     return (
-      <FlatButton label={label}/>
+      <Button variant="flat" label={label}/>
     )
   }
   renderDatePicker () {

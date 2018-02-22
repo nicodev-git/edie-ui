@@ -1,5 +1,5 @@
 import React from 'react'
-import {RaisedButton, TextField} from 'material-ui'
+import {Button, TextField} from 'material-ui'
 import { assign } from 'lodash'
 
 import InfiniteTable from 'components/common/InfiniteTable'
@@ -114,9 +114,9 @@ export default class Identities extends React.Component {
           <div className="text-center margin-md-top">
             {canEdit ? (
               <div className="pull-right">
-                <RaisedButton label="Add" onTouchTap={this.onAddIdentity.bind(this)}/>&nbsp;
-                <RaisedButton label="Edit" onTouchTap={this.onEditIdentity.bind(this)}/>&nbsp;
-                <RaisedButton label="Remove" onTouchTap={this.onRemoveIdentity.bind(this)}/>&nbsp;
+                <Button variant="raised" label="Add" onTouchTap={this.onAddIdentity.bind(this)}/>&nbsp;
+                <Button variant="raised" label="Edit" onTouchTap={this.onEditIdentity.bind(this)}/>&nbsp;
+                <Button variant="raised" label="Remove" onTouchTap={this.onRemoveIdentity.bind(this)}/>&nbsp;
               </div>
             ) : null}
 

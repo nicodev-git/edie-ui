@@ -1,5 +1,5 @@
 import React from 'react'
-import {RaisedButton, Menu, MenuItem, Popover} from 'material-ui'
+import {Button, Menu, MenuItem, Popover} from 'material-ui'
 import SettingIcon from 'material-ui/svg-icons/action/settings'
 
 import MainSettings from './MainSettings'
@@ -78,7 +78,7 @@ export default class Advanced extends React.Component {
         <TabPageHeader title="Settings">
           <div className="text-center margin-md-top">
             <div style={{position: 'absolute', right: '25px'}}>
-              {pageIndex === 2 && <RaisedButton label="Routing" onTouchTap={this.onClickRouting.bind(this)}/>}&nbsp;
+              {pageIndex === 2 && <Button variant="raised" label="Routing" onTouchTap={this.onClickRouting.bind(this)}/>}&nbsp;
               <Popover
                 open={this.state.routeOpen}
                 anchorEl={this.state.anchorEl}
@@ -91,7 +91,7 @@ export default class Advanced extends React.Component {
                   <MenuItem primaryText="Edit" onTouchTap={this.onClickEditRouting.bind(this)}/>
                 </Menu>
               </Popover>
-              <RaisedButton icon={<SettingIcon />} onTouchTap={this.handleTouchTap.bind(this)} className="hidden"/>
+              <Button variant="raised" icon={<SettingIcon />} onTouchTap={this.handleTouchTap.bind(this)} className="hidden"/>
               <Popover
                 open={this.state.open}
                 anchorEl={this.state.anchorEl}

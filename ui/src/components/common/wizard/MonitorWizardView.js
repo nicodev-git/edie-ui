@@ -1,5 +1,5 @@
 import React from 'react'
-import {RaisedButton, RadioButton} from 'material-ui'
+import {Button, RadioButton} from 'material-ui'
 import {Field} from 'redux-form'
 import {RadioButtonGroup} from 'redux-form-material-ui'
 
@@ -111,7 +111,7 @@ export default class MonitorWizardView extends React.Component {
           <Field name="enabled" component={FormCheckbox} type="checkbox" label="Enabled" className="margin-md-top margin-sm-bottom"/>
 
           <div className="form-buttons">
-            <RaisedButton type="submit" label={isEdit ? 'Save' : 'Add'}/>
+            <Button variant="raised" type="submit" label={isEdit ? 'Save' : 'Add'}/>
           </div>
         </form>
         {paramEditModal}

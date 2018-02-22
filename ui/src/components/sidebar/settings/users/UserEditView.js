@@ -42,7 +42,7 @@ export default class UserEditView extends React.Component {
               </table>
             </CardPanel>
 
-            <RaisedButton label="Show All" onTouchTap={() => this.setState({selectedRole: null})}
+            <Button variant="raised" label="Show All" onTouchTap={() => this.setState({selectedRole: null})}
                           className="margin-md-top"/>
 
           </div>

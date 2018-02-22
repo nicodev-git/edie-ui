@@ -1,5 +1,5 @@
 import React from 'react'
-import {RaisedButton} from 'material-ui'
+import {Button} from 'material-ui'
 
 import InfiniteTable from 'components/common/InfiniteTable'
 import { showAlert, showConfirm } from 'components/common/Alert'
@@ -115,10 +115,10 @@ export default class Maps extends React.Component {
         <TabPageHeader title="Settings">
           <div className="text-center margin-md-top">
             <div style={{position: 'absolute', right: '25px'}}>
-              <RaisedButton label="Add Map" onTouchTap={this.onMapAdd.bind(this)} className={canAdd ? '' : 'hidden'}/>&nbsp;
-              <RaisedButton label="Edit Map" onTouchTap={this.onMapEdit.bind(this)} className={canEdit ? '' : 'hidden'}/>&nbsp;
-              <RaisedButton label="Delete Map" onTouchTap={this.onMapDelete.bind(this)} className={canEdit ? '' : 'hidden'}/>&nbsp;
-              <RaisedButton label="Edit Map Users" onTouchTap={this.onMapUsers.bind(this)} className="hidden"/>&nbsp;
+              <Button variant="raised" label="Add Map" onTouchTap={this.onMapAdd.bind(this)} className={canAdd ? '' : 'hidden'}/>&nbsp;
+              <Button variant="raised" label="Edit Map" onTouchTap={this.onMapEdit.bind(this)} className={canEdit ? '' : 'hidden'}/>&nbsp;
+              <Button variant="raised" label="Delete Map" onTouchTap={this.onMapDelete.bind(this)} className={canEdit ? '' : 'hidden'}/>&nbsp;
+              <Button variant="raised" label="Edit Map Users" onTouchTap={this.onMapUsers.bind(this)} className="hidden"/>&nbsp;
             </div>
           </div>
         </TabPageHeader>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {TextField, FlatButton, SelectField, MenuItem} from 'material-ui'
+import {TextField, Button, Select, MenuItem} from 'material-ui'
 import ActionSearch from 'material-ui/svg-icons/action/search'
 import moment from 'moment'
 import {assign} from 'lodash'
@@ -113,18 +113,18 @@ export default class EventLogTable extends Component {
     return (
       <div className="text-center">
         <div className="pull-left text-left">
-          <SelectField
+          <Select
             floatingLabelText="Log"
             onChange={this.onChangeLogName.bind(this)}
             value={selectedLogName}>
             {monitorLogNames.map((c, i) =>
               <MenuItem key={i} primaryText={c} value={c}/>
             )}
-          </SelectField>
+          </Select>
         </div>
         <div className="inline-block">
           <TextField name="query" value={this.props.monitorQuery} onChange={this.onChangeQuery.bind(this)} onKeyUp={this.onKeyupQuery.bind(this)}/>
-          <FlatButton icon={<ActionSearch />} onTouchTap={this.onClickSearch.bind(this)}/>
+          <Button variant="flat" icon={<ActionSearch />} onTouchTap={this.onClickSearch.bind(this)}/>
         </div>
       </div>
     )

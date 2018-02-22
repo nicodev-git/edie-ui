@@ -1,7 +1,7 @@
 import React from 'react'
 import { assign, debounce } from 'lodash'
 import { reduxForm, Form } from 'redux-form'
-import {RaisedButton, IconButton, CircularProgress} from 'material-ui'
+import {Button, IconButton, CircularProgress} from 'material-ui'
 import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
 
 import { wizardEditConfig } from './WizardConfig'
@@ -481,11 +481,11 @@ class DeviceEditWizard extends React.Component {
           <div className="tab-options hidden">
             <div className="margin-md-top"
               style={{position: 'absolute', top: '40px', right: '20px'}}>
-              <RaisedButton label="Save" type="submit" primary className="hidden"/>&nbsp;
-              {/*{!selectedDevice.agent ? <RaisedButton label="Install Agent" onTouchTap={this.onClickInstall.bind(this)}/> : null}*/}
-              {/*{selectedDevice.agent ? <RaisedButton label="Uninstall Agent" onTouchTap={this.onClickUninstall.bind(this)}/> : null}*/}
+              <Button variant="raised" label="Save" type="submit" primary className="hidden"/>&nbsp;
+              {/*{!selectedDevice.agent ? <Button variant="raised" label="Install Agent" onTouchTap={this.onClickInstall.bind(this)}/> : null}*/}
+              {/*{selectedDevice.agent ? <Button variant="raised" label="Uninstall Agent" onTouchTap={this.onClickUninstall.bind(this)}/> : null}*/}
               &nbsp;
-              <RaisedButton label="Add Credential" onTouchTap={this.onClickAddCred.bind(this)}/>
+              <Button variant="raised" label="Add Credential" onTouchTap={this.onClickAddCred.bind(this)}/>
             </div>
           </div>
 
@@ -512,7 +512,7 @@ class DeviceEditWizard extends React.Component {
 
           <div style={{height: 140, width: '100%'}} className="pull-left">&nbsp;</div>
           <div style={fixedBarStyle} className="text-right">
-            <RaisedButton label="Save" type="submit" backgroundColor="rgb(36, 104, 255)" labelColor="#fff"/>
+            <Button variant="raised" label="Save" type="submit" backgroundColor="rgb(36, 104, 255)" labelColor="#fff"/>
           </div>
         </Form>
 

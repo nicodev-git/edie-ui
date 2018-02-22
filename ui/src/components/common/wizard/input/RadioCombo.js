@@ -1,6 +1,6 @@
 import React from 'react'
 import {util} from '../WizardUtil'
-import {SelectField} from 'material-ui'
+import {Select} from 'material-ui'
 
 export default class RadioCombo extends React.Component {
   constructor (props) {
@@ -86,7 +86,7 @@ export default class RadioCombo extends React.Component {
       <div className={`col-md-${util.calcWidth(width)}`}
         style={util.convertStyle(config.style)}>
 
-        <SelectField className={`form-control ${config.cls || ''}`}
+        <Select className={`form-control ${config.cls || ''}`}
           name={config.name}
           validation={config.required ? 'required' : null}
           defaultValue={defaultValue}

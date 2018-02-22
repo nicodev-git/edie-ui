@@ -1,7 +1,7 @@
 import React from 'react'
 import moment from 'moment'
 import InlineEdit from 'react-edit-inline'
-import {Checkbox, RaisedButton, SelectField, MenuItem} from 'material-ui'
+import {Checkbox, Button, Select, MenuItem} from 'material-ui'
 import { assign } from 'lodash'
 
 import SettingTabs from '../SettingTabs' // Never used
@@ -307,7 +307,7 @@ export default class General extends React.Component {
           Last Synced: {lastSync ? moment(parseInt(lastSync, 10)).fromNow() : 'Never'}
         </label>
         <br/>
-        <RaisedButton label="Sync" onTouchTap={this.onClickSync.bind(this)}/>
+        <Button variant="raised" label="Sync" onTouchTap={this.onClickSync.bind(this)}/>
       </div>
     )
   }
@@ -350,13 +350,13 @@ export default class General extends React.Component {
       <CardPanel title="Menu">
         <div style={{minHeight: 400, overflow: 'auto'}}>
           <div>
-            <SelectField
+            <Select
               value={this.getUserOptionValue('defaultPage', 'dashboard')}
               onChange={this.onChangeShowPage.bind(this)}
               floatingLabelText="Default Page">
               <MenuItem primaryText="Map" value="main"/>
               <MenuItem primaryText="Dashboard" value="dashboard"/>
-            </SelectField>
+            </Select>
           </div>
 
           {/*{this.renderRoles()}*/}
@@ -375,8 +375,8 @@ export default class General extends React.Component {
         <TabPageHeader title="Settings">
           <div className="text-center margin-md-top">
             <div style={{position: 'absolute', right: '25px'}}>
-              <RaisedButton label="System Backup"/>
-              <RaisedButton label="System Restore" className="margin-md-left"/>
+              <Button variant="raised" label="System Backup"/>
+              <Button variant="raised" label="System Restore" className="margin-md-left"/>
             </div>
           </div>
         </TabPageHeader>

@@ -1,7 +1,7 @@
 import React from 'react'
 import {reduxForm, Field} from 'redux-form'
 import {connect} from 'react-redux'
-import {RaisedButton} from 'material-ui'
+import {Button} from 'material-ui'
 
 import TabPage from 'components/common/TabPage'
 import TabPageBody from 'components/common/TabPageBody'
@@ -71,7 +71,7 @@ class CommandTable extends React.Component {
               <Field name="output" component={FormCheckbox} label="Output" labelPosition="right"/>
             </div>
             <div>
-              <RaisedButton label="Run" type="submit"/>&nbsp;
+              <Button variant="raised" label="Run" type="submit"/>&nbsp;
             </div>
           </div>
         </form>

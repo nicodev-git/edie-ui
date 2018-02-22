@@ -1,10 +1,10 @@
 import React from 'react'
-import RaisedButton from 'material-ui/RaisedButton'
+import Button from 'material-ui/Button'
 import { buttonStyle, buttonTextStyle } from 'style/common/materialStyles'
 
 const CloseButton = ({onClose}) => (
   <div className="form-buttons">
-    <RaisedButton label="Close" onClick={onClose} style={buttonStyle} labelStyle={buttonTextStyle}/>
+    <Button variant="raised" label="Close" onClick={onClose} style={buttonStyle} labelStyle={buttonTextStyle}/>
   </div>
 )
 

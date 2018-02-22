@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { assign, concat, keys, findIndex, debounce } from 'lodash'
 import moment from 'moment'
 import ReactTooltip from 'react-tooltip'
-import {Popover, FlatButton, Chip, IconButton} from 'material-ui'
+import {Popover, Button, Chip, IconButton} from 'material-ui'
 import NavigationClose from 'material-ui/svg-icons/navigation/close'
 import PageViewIcon from 'material-ui/svg-icons/action/pageview'
 import {parse} from 'query-string'
@@ -690,7 +690,7 @@ class GenericSearch extends React.Component {
             <h4>{selectedField.path}</h4>
           </div>
           <div className="pull-right padding-sm">
-            <FlatButton icon={<NavigationClose />} style={{minWidth: '44px'}} onTouchTap={this.handleRequestClose.bind(this)}/>
+            <Button variant="flat" icon={<NavigationClose />} style={{minWidth: '44px'}} onTouchTap={this.handleRequestClose.bind(this)}/>
           </div>
         </div>
 

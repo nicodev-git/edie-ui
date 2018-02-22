@@ -1,6 +1,6 @@
 import React from 'react'
 import {findIndex, keys} from 'lodash'
-import {RaisedButton, CircularProgress} from 'material-ui'
+import {Button, CircularProgress} from 'material-ui'
 
 import FlipView from './FlipView'
 import GEditView from './GEditView'
@@ -38,7 +38,7 @@ export default class GServiceList extends React.Component {
         const waiting = this.state.waiting[p.rowData.ServiceName]
         return (
           <div>
-            <RaisedButton label={label} onTouchTap={this.onClickStart.bind(this, p.rowData)} primary={val !== 'Running'} disabled={waiting}/>
+            <Button variant="raised" label={label} onTouchTap={this.onClickStart.bind(this, p.rowData)} primary={val !== 'Running'} disabled={waiting}/>
             {waiting && <CircularProgress size={24} className="valign-middle margin-lg-left"/>}
           </div>
         )

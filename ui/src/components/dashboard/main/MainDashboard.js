@@ -1,5 +1,5 @@
 import React from 'react'
-import {IconButton, SelectField, MenuItem} from 'material-ui'
+import {IconButton, Select, MenuItem} from 'material-ui'
 import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
 import {findIndex} from 'lodash'
 import {slugify} from 'shared/Global'
@@ -126,14 +126,14 @@ export default class MainDashboard extends React.Component {
     }
     return (
       <div className="padding-lg-left" style={{height: 90}}>
-        <SelectField
+        <Select
           floatingLabelText="Dashboard" value={this.getSelectedId()} onChange={this.onChangeBoard.bind(this)}
           className="valign-top"
           style={{width: 180}}>
           {this.getBoards().map(p =>
             <MenuItem key={p.id} value={p.id} primaryText={p.name}/>
           )}
-        </SelectField>
+        </Select>
         {canEdit && <IconButton onTouchTap={this.onClickAdd.bind(this)} className="valign-bottom"><AddCircleIcon /></IconButton>}
       </div>
     )

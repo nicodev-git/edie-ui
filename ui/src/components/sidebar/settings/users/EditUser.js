@@ -3,7 +3,7 @@ import {findIndex, assign, debounce} from 'lodash'
 import { reduxForm, formValueSelector } from 'redux-form'
 import { connect } from 'react-redux'
 
-import {Checkbox, RaisedButton} from 'material-ui'
+import {Checkbox, Button} from 'material-ui'
 import { Field } from 'redux-form'
 import { FormInput, FormSelect, FormCheckbox, CardPanel } from 'components/modal/parts'
 import {rolePermissions, hasPermission} from 'shared/Permission'
@@ -280,7 +280,7 @@ class EditUser extends React.Component {
               <div className="col-md-6">
                 {this.renderRoles(canEdit)}
 
-                <RaisedButton label="Show All" onTouchTap={() => this.setState({selectedRole: null})}
+                <Button variant="raised" label="Show All" onTouchTap={() => this.setState({selectedRole: null})}
                               className="margin-md-top margin-md-bottom"/>
 
               </div>

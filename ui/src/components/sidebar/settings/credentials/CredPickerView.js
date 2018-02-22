@@ -1,5 +1,5 @@
 import React from 'react'
-import {SelectField, MenuItem, Chip} from 'material-ui'
+import {Select, MenuItem, Chip} from 'material-ui'
 
 import {TwoButtonsBlockCustom, Modal, CardPanel} from 'components/modal/parts'
 import { chipStyles } from 'style/common/materialStyles'
@@ -9,12 +9,12 @@ export default class CredPickerView extends React.Component {
     const {credentialTypes, type, onChangeType} = this.props
     return (
       <div style={{marginTop: -6}}>
-        <SelectField onChange={onChangeType} value={type}>
+        <Select onChange={onChangeType} value={type}>
           <MenuItem primaryText="[All]" value=""/>
           {credentialTypes.map(p =>
             <MenuItem key={p.name} primaryText={p.name} value={p.name}/>
           )}
-        </SelectField>
+        </Select>
       </div>
     )
   }

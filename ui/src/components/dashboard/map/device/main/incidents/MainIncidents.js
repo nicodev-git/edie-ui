@@ -2,13 +2,12 @@ import React, { Component } from 'react'
 import moment from 'moment'
 import { findIndex, debounce } from 'lodash'
 import {
-  RaisedButton,
+  Button,
   MenuItem,
   Menu,
   Popover,
-  SelectField,
-  TextField,
-  FlatButton
+  Select,
+  TextField
 } from 'material-ui'
 import ReactTooltip from 'react-tooltip'
 import ArrowBack from 'material-ui/svg-icons/navigation/arrow-back'
@@ -368,7 +367,7 @@ export default class MainIncidents extends Component {
 
   renderDateLabel (label) {
     return (
-      <RaisedButton label={label}/>
+      <Button variant="raised" label={label}/>
     )
   }
 
@@ -382,7 +381,7 @@ export default class MainIncidents extends Component {
     if (!device.groupid) return null
     return (
       <div>
-        <FlatButton icon={<ArrowBack />} label="Group" onClick={this.onClickGroup.bind(this, device.groupid)}/>
+        <Button variant="flat" icon={<ArrowBack />} label="Group" onClick={this.onClickGroup.bind(this, device.groupid)}/>
       </div>
     )
   }
@@ -399,7 +398,7 @@ export default class MainIncidents extends Component {
           <div className="text-center margin-md-top">
             <div className="pull-left">
               <div className="text-left form-mui-inline">
-                <SelectField
+                <Select
                   errorStyle={errorStyle}
                   underlineStyle={underlineFocusStyle}
                   selectedMenuItemStyle={selectedItemStyle}
@@ -420,9 +419,9 @@ export default class MainIncidents extends Component {
                       primaryText={option.label}
                     />
                   )}
-                </SelectField>
+                </Select>
 
-                <SelectField
+                <Select
                   onChange={this.onFixedChange.bind(this)}
                   value={this.state.fixed}
                   className="margin-md-left"
@@ -435,7 +434,7 @@ export default class MainIncidents extends Component {
                   <MenuItem primaryText="Any" value=""/>
                   <MenuItem primaryText="Unfixed" value="false"/>
                   <MenuItem primaryText="Fixed" value="true"/>
-                </SelectField>
+                </Select>
 
                 <DateRangePicker
                   startDate={moment(afterStartTimestamp)}
@@ -446,10 +445,10 @@ export default class MainIncidents extends Component {
             </div>
 
             <div className="pull-right">
-              <RaisedButton label="Open" onTouchTap={this.onClickOpen.bind(this)}/>&nbsp;
-              <RaisedButton label="Fix All" onTouchTap={this.onClickFixAll.bind(this)}/>&nbsp;
-              <RaisedButton label="Fix Selected" onTouchTap={this.onClickFixSelected.bind(this)}/>&nbsp;
-              <RaisedButton label="More" primary onTouchTap={this.handleTouchTap.bind(this)}/>&nbsp;
+              <Button variant="raised" label="Open" onTouchTap={this.onClickOpen.bind(this)}/>&nbsp;
+              <Button variant="raised" label="Fix All" onTouchTap={this.onClickFixAll.bind(this)}/>&nbsp;
+              <Button variant="raised" label="Fix Selected" onTouchTap={this.onClickFixSelected.bind(this)}/>&nbsp;
+              <Button variant="raised" label="More" primary onTouchTap={this.handleTouchTap.bind(this)}/>&nbsp;
               <Popover
                 open={this.state.open}
                 anchorEl={this.state.anchorEl}

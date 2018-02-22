@@ -1,9 +1,9 @@
 import React from 'react'
-import {SelectField, MenuItem} from 'material-ui'
+import {Select, MenuItem} from 'material-ui'
 import { underlineFocusStyle, inputStyle, selectedItemStyle } from 'style/common/materialStyles'
 
 const FormMultiSelect = ({input, label, meta: { touched, error }, value, options, onChange}) => (
-  <SelectField
+  <Select
     {...input}
     underlineStyle={underlineFocusStyle}
     selectedMenuItemStyle={selectedItemStyle}
@@ -22,7 +22,7 @@ const FormMultiSelect = ({input, label, meta: { touched, error }, value, options
         primaryText={option.label}
       />
     )}
-  </SelectField>
+  </Select>
 )
 
 export default FormMultiSelect

@@ -1,6 +1,6 @@
 import React from 'react'
 import {findIndex} from 'lodash'
-import {SelectField, MenuItem} from 'material-ui'
+import {Select, MenuItem} from 'material-ui'
 // import ActionSearch from 'material-ui/svg-icons/action/search'
 
 import FlipView from './FlipView'
@@ -150,11 +150,11 @@ export default class GEventLog extends React.Component {
     return (
       <div className="flex-vertical flex-1">
         <div style={{marginTop: -16}}>
-          <SelectField floatingLabelText="Log" value={selectedLogName} onChange={this.onChangeLog.bind(this)}>
+          <Select floatingLabelText="Log" value={selectedLogName} onChange={this.onChangeLog.bind(this)}>
             {logNames.map(p =>
               <MenuItem key={p} value={p} primaryText={p}/>
             )}
-          </SelectField>
+          </Select>
         </div>
         <div className="flex-1">
           <InfiniteTable

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { reduxForm, Field, Form } from 'redux-form'
 import {parse} from 'query-string'
-import {RaisedButton} from 'material-ui'
+import {Button} from 'material-ui'
 
 import RefreshOverlay from 'components/common/RefreshOverlay'
 import { FormInput } from 'components/modal/parts'
@@ -83,15 +83,15 @@ class Signin2 extends Component {
         <div>
           <Field name="email" component={FormInput} type="text" floatingLabel="User Name" autoFocus
                  onKeyDown={this.onKeyDown.bind(this)}/>
-          <RaisedButton label="Next" primary className="margin-lg-top" onTouchTap={this.onClickNext.bind(this)}/>
+          <Button variant="raised" label="Next" primary className="margin-lg-top" onTouchTap={this.onClickNext.bind(this)}/>
         </div>
       )
     } else {
       return (
         <div>
           <Field name="password" component={FormInput} type="password" floatingLabel="Password" autoFocus/>
-          <RaisedButton label="Prev" className="margin-lg" primary onTouchTap={this.onClickPrev.bind(this)}/>
-          <RaisedButton label="Login" primary className="margin-lg" type="submit"/>
+          <Button variant="raised" label="Prev" className="margin-lg" primary onTouchTap={this.onClickPrev.bind(this)}/>
+          <Button variant="raised" label="Login" primary className="margin-lg" type="submit"/>
         </div>
       )
     }

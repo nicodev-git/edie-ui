@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import {Form} from 'redux-form'
-import {RaisedButton} from 'material-ui'
+import {Button} from 'material-ui'
 
 import { WizardButtons, Modal } from 'components/modal/parts'
 import RefreshOverlay from 'components/common/RefreshOverlay'
@@ -26,7 +26,7 @@ export default class DeviceWizardView extends Component {
           <Form onSubmit={onSubmit}>
             {content}
             <div style={fixedBarStyle} className="text-right">
-              <RaisedButton label="Save" type="submit" backgroundColor="rgb(36, 104, 255)" labelColor="#fff"/>
+              <Button variant="raised" label="Save" type="submit" backgroundColor="rgb(36, 104, 255)" labelColor="#fff"/>
             </div>
             <div style={{height: 140, width: '100%'}} className="pull-left">&nbsp;</div>
           </Form>

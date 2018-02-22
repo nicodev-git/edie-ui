@@ -1,5 +1,5 @@
 import React from 'react'
-import {SelectField, MenuItem, RaisedButton} from 'material-ui'
+import {Select, MenuItem, Button} from 'material-ui'
 
 import { Modal, CardPanel } from 'components/modal/parts'
 
@@ -31,15 +31,15 @@ export default class DashboardPicker extends React.Component {
     return (
       <Modal title="Dashboard" onHide={this.onHide.bind(this)}>
         <CardPanel title="Dashboard">
-          <SelectField value={this.state.dashboardId} onChange={this.onChangeDashboard.bind(this)}>
+          <Select value={this.state.dashboardId} onChange={this.onChangeDashboard.bind(this)}>
             <MenuItem primaryText="[None]" value=""/>
             {gaugeBoards.map(p =>
               <MenuItem key={p.id} primaryText={p.name} value={p.id}/>
             )}
-          </SelectField>
+          </Select>
         </CardPanel>
         <div className="form-buttons">
-          <RaisedButton label="OK" onTouchTap={this.onClickOK.bind(this)} />
+          <Button variant="raised" label="OK" onTouchTap={this.onClickOK.bind(this)} />
         </div>
       </Modal>
     )

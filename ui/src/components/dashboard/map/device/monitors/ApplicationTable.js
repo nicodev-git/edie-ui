@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {TextField, FlatButton, RaisedButton, MenuItem} from 'material-ui'
+import {TextField, Button, MenuItem} from 'material-ui'
 import IconMenu from 'material-ui/IconMenu'
 import ActionSearch from 'material-ui/svg-icons/action/search'
 import moment from 'moment'
@@ -146,11 +146,11 @@ export default class ApplicationTable extends Component {
       <div className="text-center">
         <div className="inline-block">
           <TextField name="query" value={monitorQuery} onChange={this.onChangeQuery.bind(this)} onKeyUp={this.onKeyupQuery.bind(this)}/>
-          <FlatButton icon={<ActionSearch />} onTouchTap={this.onClickSearch.bind(this)}/>
+          <Button variant="flat" icon={<ActionSearch />} onTouchTap={this.onClickSearch.bind(this)}/>
         </div>
         <div className="pull-right">
           <IconMenu
-            iconButtonElement={<RaisedButton label="More" primary/>}
+            iconButtonElement={<Button variant="raised" label="More" primary/>}
             anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
             targetOrigin={{horizontal: 'left', vertical: 'top'}}
           >

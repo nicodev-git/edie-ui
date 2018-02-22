@@ -1,5 +1,5 @@
 import React from 'react'
-import {Checkbox, SelectField, MenuItem, RaisedButton} from 'material-ui'
+import {Checkbox, Select, MenuItem, Button} from 'material-ui'
 import {findIndex} from 'lodash'
 
 import TabPage from 'components/common/TabPage'
@@ -86,7 +86,7 @@ export default class AddWf extends React.Component {
     return (
       <div className="flex-vertical flex-1">
         <div className="padding-md-left">
-          <SelectField
+          <Select
             className="valign-top"
             value={severity} onChange={this.onChangeSeverity.bind(this)}
             style={{width: 150}}>
@@ -98,9 +98,9 @@ export default class AddWf extends React.Component {
                 primaryText={option.label}
               />
             )}
-          </SelectField>
+          </Select>
 
-          <RaisedButton label="Add Selected" onTouchTap={this.onClickAddTemplates.bind(this)}
+          <Button variant="raised" label="Add Selected" onTouchTap={this.onClickAddTemplates.bind(this)}
                         className="valign-top margin-xs-top margin-md-left"/>
         </div>
         <div className="flex-1" style={{overflow: 'auto'}}>

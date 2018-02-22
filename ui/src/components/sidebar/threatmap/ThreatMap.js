@@ -5,8 +5,8 @@ import d3 from 'd3'
 import moment from 'moment'
 import Transition from 'react-addons-css-transition-group'
 import {countries} from 'country-data'
-import SelectField from 'material-ui/SelectField'
-import MenuItem from 'material-ui/MenuItem'
+import Select from 'material-ui/Select'
+import {MenuItem} from 'material-ui/Menu'
 import IconButton from 'material-ui/IconButton'
 import CropFreeIcon from 'material-ui/svg-icons/image/crop-free'
 import FileIcon from 'material-ui/svg-icons/editor/insert-drive-file'
@@ -1393,12 +1393,12 @@ export default class ThreatMap extends Component {
       <div className="flex-vertical flex-1">
         <div className={`flex-vertical flex-1 ${maximized ? 'hidden' : ''}`}>
           <div className="form-inline padding-sm" style={{background: '#CECECE'}}>
-            <SelectField value={mode} onChange={this.onChangeMode.bind(this)} style={{width: '120px', marginLeft: '20px'}}>
+            <Select value={mode} onChange={this.onChangeMode.bind(this)} style={{width: '120px', marginLeft: '20px'}}>
               <MenuItem value="real" primaryText="Real" />
               <MenuItem value="replay" primaryText="Replay" />
               <MenuItem value="demo" primaryText="Demo" />
-            </SelectField>&nbsp;
-            <SelectField value={speed} onChange={this.onChangeSpeed.bind(this)} className={mode === 'replay' ? '' : 'hidden'} style={{width: '120px'}}>
+            </Select>&nbsp;
+            <Select value={speed} onChange={this.onChangeSpeed.bind(this)} className={mode === 'replay' ? '' : 'hidden'} style={{width: '120px'}}>
               <MenuItem value={1} primaryText="Normal" />
               <MenuItem value={2} primaryText="2x" />
               <MenuItem value={5} primaryText="5x"/>
@@ -1406,7 +1406,7 @@ export default class ThreatMap extends Component {
               <MenuItem value={20} primaryText="20x"/>
               <MenuItem value={50} primaryText="50x"/>
               <MenuItem value={100} primaryText="100x"/>
-            </SelectField>
+            </Select>
             <div className="form-group pull-right inline hidden">
               <div className="link" onClick={this.onClickSettings.bind(this)}>
                 <i className="fa fa-x fa-cog valign-middle" />

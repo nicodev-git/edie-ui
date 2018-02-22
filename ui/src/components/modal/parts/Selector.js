@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
-import SelectField from 'material-ui/SelectField'
-import MenuItem from 'material-ui/MenuItem'
+import Select from 'material-ui/Select'
+import {MenuItem} from 'material-ui/Menu'
 
 export const style = {
   width: 128,
@@ -53,7 +53,7 @@ export default class Selector extends Component {
     let menuItemsList = this.renderList()
     let autoWidth = true
     return (
-      <SelectField
+      <Select
         value={this.state.value}
         autoWidth={autoWidth}
         onChange={this.handleChange.bind(this)}
@@ -63,7 +63,7 @@ export default class Selector extends Component {
         underlineStyle={{display: 'none'}}
       >
         {menuItemsList}
-      </SelectField>
+      </Select>
     )
   }
 }

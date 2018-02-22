@@ -1,7 +1,7 @@
 import React from 'react'
 import { reduxForm, Field, formValueSelector } from 'redux-form'
 import { connect } from 'react-redux'
-import {FlatButton, Chip} from 'material-ui'
+import {Button, Chip} from 'material-ui'
 import {chipStyles} from 'style/common/materialStyles'
 import { concat, assign } from 'lodash'
 
@@ -103,10 +103,10 @@ class SimulationModal extends React.Component {
   renderButtons () {
     return (
       <div className="text-right">
-        <FlatButton label="Match Filter" primary onTouchTap={this.onClickMatch.bind(this)}/>
-        <FlatButton label="Parse" primary onTouchTap={this.onClickParse.bind(this)}/>
+        <Button variant="flat" label="Match Filter" primary onTouchTap={this.onClickMatch.bind(this)}/>
+        <Button variant="flat" label="Parse" primary onTouchTap={this.onClickParse.bind(this)}/>
 
-        <FlatButton label="Cancel" primary onTouchTap={this.onClickClose.bind(this)}/>
+        <Button variant="flat" label="Cancel" primary onTouchTap={this.onClickClose.bind(this)}/>
       </div>
     )
   }
@@ -149,7 +149,7 @@ class SimulationModal extends React.Component {
           <div className="row m-none">
             <div className="margin-sm-top pull-left"><b>Filters</b></div>
             <div className="pull-right">
-              <FlatButton label="Add" primary onTouchTap={this.onClickAddFilter.bind(this)}/>
+              <Button variant="flat" label="Add" primary onTouchTap={this.onClickAddFilter.bind(this)}/>
             </div>
           </div>
 
@@ -169,7 +169,7 @@ class SimulationModal extends React.Component {
           <div className="row m-none">
             <div className="margin-sm-top pull-left"><b>Patterns</b></div>
             <div className="pull-right">
-              <FlatButton label="Add" primary onTouchTap={this.onClickAddPattern.bind(this)}/>
+              <Button variant="flat" label="Add" primary onTouchTap={this.onClickAddPattern.bind(this)}/>
             </div>
           </div>
           <div style={chipStyles.wrapper} className="margin-md-bottom" >

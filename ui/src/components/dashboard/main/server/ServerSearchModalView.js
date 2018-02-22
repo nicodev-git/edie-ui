@@ -1,6 +1,6 @@
 import React from 'react'
 import {Form, Field} from 'redux-form'
-import {RaisedButton, Checkbox} from 'material-ui'
+import {Button, Checkbox} from 'material-ui'
 
 import {Modal, CardPanel, FormCheckbox, FormInput} from 'components/modal/parts'
 
@@ -51,7 +51,7 @@ export default class ServerSearchModalView extends React.Component {
           </CardPanel>
 
           <div className="form-buttons">
-            <RaisedButton label="Search" type="submit"/>
+            <Button variant="raised" label="Search" type="submit"/>
           </div>
         </Form>
       </Modal>

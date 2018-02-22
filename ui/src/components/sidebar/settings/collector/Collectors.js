@@ -1,5 +1,5 @@
 import React from 'react'
-import {RaisedButton} from 'material-ui'
+import {Button} from 'material-ui'
 import moment from 'moment'
 
 import CollectorTabs from './CollectorTabs'
@@ -99,7 +99,7 @@ export default class Collectors extends React.Component {
         <TabPageHeader title="Settings">
           <div className="text-center margin-md-top">
             <div className="pull-right">
-              {canEdit && <RaisedButton label="Remove" onTouchTap={this.onClickRemove.bind(this)}/>}
+              {canEdit && <Button variant="raised" label="Remove" onTouchTap={this.onClickRemove.bind(this)}/>}
               &nbsp;
               <CollectorTabs history={this.props.history}/>
             </div>

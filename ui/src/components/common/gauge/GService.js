@@ -1,6 +1,6 @@
 import React from 'react'
 import {findIndex} from 'lodash'
-import {RaisedButton} from 'material-ui'
+import {Button} from 'material-ui'
 
 import FlipView from './FlipView'
 import GEditView from './GEditView'
@@ -121,7 +121,7 @@ export default class GService extends React.Component {
       <div>
         <MonitorStatusView isUp={isUp} hideLabel size={gauge.gaugeSize}/>
         <div style={{position: 'absolute', bottom: 15, width: '100%'}} className="text-center">
-          <RaisedButton label={isUp ? 'Stop' : 'Start'} onTouchTap={this.onClickToggle.bind(this)}/>
+          <Button variant="raised" label={isUp ? 'Stop' : 'Start'} onTouchTap={this.onClickToggle.bind(this)}/>
         </div>
       </div>
     )

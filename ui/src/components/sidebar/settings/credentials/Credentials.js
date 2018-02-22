@@ -1,5 +1,5 @@
 import React from 'react'
-import {RaisedButton, Chip} from 'material-ui'
+import {Button, Chip} from 'material-ui'
 import {findIndex} from 'lodash'
 
 import InfiniteTable from 'components/common/InfiniteTable'
@@ -155,10 +155,10 @@ export default class Credentials extends React.Component {
             <div className="pull-right">
               {canEdit ? (
                 <div className="inline-block">
-                  <RaisedButton label="Add" onTouchTap={this.onAddCred.bind(this)}/>&nbsp;
-                  <RaisedButton label="Edit" onTouchTap={this.onEditCred.bind(this)}/>&nbsp;
-                  <RaisedButton label="Remove" onTouchTap={this.onRemoveCred.bind(this)}/>&nbsp;
-                  <RaisedButton label="Set Default" onTouchTap={this.onSetDefault.bind(this)}/>&nbsp;
+                  <Button variant="raised" label="Add" onTouchTap={this.onAddCred.bind(this)}/>&nbsp;
+                  <Button variant="raised" label="Edit" onTouchTap={this.onEditCred.bind(this)}/>&nbsp;
+                  <Button variant="raised" label="Remove" onTouchTap={this.onRemoveCred.bind(this)}/>&nbsp;
+                  <Button variant="raised" label="Set Default" onTouchTap={this.onSetDefault.bind(this)}/>&nbsp;
                 </div>
               ) : null}
               <UserTabs history={this.props.history}/>&nbsp;

@@ -1,5 +1,5 @@
 import React from 'react'
-import {RaisedButton, IconButton} from 'material-ui'
+import {Button, IconButton} from 'material-ui'
 import Share from 'material-ui/svg-icons/social/share'
 import { assign } from 'lodash'
 
@@ -139,10 +139,10 @@ export default class Rules extends React.Component {
         <TabPageHeader title="Settings">
           <div className="text-center margin-md-top">
             <div className="pull-right">
-              {canEdit && <RaisedButton label="Add" onTouchTap={this.onAddWorkflow.bind(this)}/>}&nbsp;
-              {canEdit && <RaisedButton label="Edit" onTouchTap={this.onEditWorkflow.bind(this)}/>}&nbsp;
-              {canEdit && <RaisedButton label="Remove" onTouchTap={this.onRemoveWorkflow.bind(this)}/>}&nbsp;
-              {canEdit && <RaisedButton label="Clone" onTouchTap={this.onCloneWorkflow.bind(this)}/>}&nbsp;
+              {canEdit && <Button variant="raised" label="Add" onTouchTap={this.onAddWorkflow.bind(this)}/>}&nbsp;
+              {canEdit && <Button variant="raised" label="Edit" onTouchTap={this.onEditWorkflow.bind(this)}/>}&nbsp;
+              {canEdit && <Button variant="raised" label="Remove" onTouchTap={this.onRemoveWorkflow.bind(this)}/>}&nbsp;
+              {canEdit && <Button variant="raised" label="Clone" onTouchTap={this.onCloneWorkflow.bind(this)}/>}&nbsp;
               <WfTabs history={this.props.history}/>
             </div>
           </div>

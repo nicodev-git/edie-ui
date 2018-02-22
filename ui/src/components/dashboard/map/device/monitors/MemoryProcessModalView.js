@@ -1,5 +1,5 @@
 import React from 'react'
-import {FlatButton} from 'material-ui'
+import {Button} from 'material-ui'
 
 import {Modal, CardPanel} from 'components/modal/parts'
 
@@ -14,7 +14,7 @@ export default class MemoryProcessModalView extends React.Component {
           </div>
         </CardPanel>
         <div className="margin-md-top text-right">
-          <FlatButton label="Close" onTouchTap={onHide}/>
+          <Button variant="flat" label="Close" onTouchTap={onHide}/>
         </div>
       </Modal>
     )

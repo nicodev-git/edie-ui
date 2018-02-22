@@ -3,7 +3,7 @@ import {findIndex, assign} from 'lodash'
 import { reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
 
-import {Checkbox, RaisedButton} from 'material-ui'
+import {Checkbox, Button} from 'material-ui'
 import { Field } from 'redux-form'
 import { FormInput, FormSelect, FormCheckbox, SubmitBlock, CardPanel } from 'components/modal/parts'
 import {mainMenu} from 'components/sidebar/Config'

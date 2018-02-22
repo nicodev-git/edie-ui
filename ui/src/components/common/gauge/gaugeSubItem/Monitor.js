@@ -1,5 +1,5 @@
 import React from 'react'
-import {SelectField, MenuItem, IconButton} from 'material-ui'
+import {Select, MenuItem, IconButton} from 'material-ui'
 import {findIndex, assign, concat} from 'lodash'
 import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
 
@@ -177,7 +177,7 @@ export default class Monitor extends React.Component {
     return (
       <div>
         <div className="padding-lg-left">
-          <SelectField
+          <Select
             floatingLabelText="Devices"
             value={deviceId}
             className="valign-top"
@@ -186,7 +186,7 @@ export default class Monitor extends React.Component {
             {(devices || []).map(p =>
               <MenuItem key={p.id} value={p.id} primaryText={p.name}/>
             )}
-          </SelectField>
+          </Select>
           {this.renderAddMenu()}
         </div>
         <div>

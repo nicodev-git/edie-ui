@@ -1,5 +1,5 @@
 import React from 'react'
-import {RaisedButton, IconButton} from 'material-ui'
+import {Button, IconButton} from 'material-ui'
 import { Field, Form } from 'redux-form'
 import RefreshIcon from 'material-ui/svg-icons/navigation/refresh'
 
@@ -34,7 +34,7 @@ export default class CollectorInstallModalView extends React.Component {
                 options={collectors.map(p => ({value: p.id, label: p.name}))}/>
             </div>
             <IconButton className="valign-middle" onTouchTap={onClickRefresh}><RefreshIcon/></IconButton>
-            <RaisedButton label="Test" className="valign-middle margin-md-left" onTouchTap={onClickTest}/>
+            <Button variant="raised" label="Test" className="valign-middle margin-md-left" onTouchTap={onClickTest}/>
           </div>
         </CardPanel>
         <a

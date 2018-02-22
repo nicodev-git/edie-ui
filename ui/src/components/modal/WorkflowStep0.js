@@ -3,7 +3,7 @@ import { Field } from 'redux-form'
 import { FormInput } from 'components/modal/parts'
 import ActionList from 'material-ui/svg-icons/action/list'
 import ActionTrendingUp from 'material-ui/svg-icons/action/trending-up'
-import {FlatButton} from 'material-ui'
+import {Button} from 'material-ui'
 import { selectedItemStyle } from 'style/common/materialStyles'
 
 export default class WorkflowStep0 extends Component {
@@ -17,13 +17,13 @@ export default class WorkflowStep0 extends Component {
         <div className="wizard-diagram-choice">
           <div className="col-md-3">Add By</div>
           <div className="col-md-9">
-            <FlatButton
+            <Button variant="flat"
               icon={<ActionList color={workflowEditType === 'wizard' ? 'white' : null}/>}
               style={selectedItemStyle}
               onTouchTap={updateWorkflowEditType.bind(null, 'wizard')}
 
               backgroundColor={workflowEditType === 'wizard' ? '#2383F3' : null}/>
-            <FlatButton
+            <Button variant="flat"
               icon={<ActionTrendingUp color={workflowEditType === 'diagram' ? 'white' : null}/>}
               style={selectedItemStyle}
               onTouchTap={updateWorkflowEditType.bind(null, 'diagram')}

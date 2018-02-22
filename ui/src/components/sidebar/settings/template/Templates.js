@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import {RaisedButton, MenuItem, SelectField, IconButton, Chip} from 'material-ui'
+import {Button, MenuItem, Select, IconButton, Chip} from 'material-ui'
 import DeleteIcon from 'material-ui/svg-icons/action/delete'
 import EditIcon from 'material-ui/svg-icons/editor/mode-edit'
 import Share from 'material-ui/svg-icons/social/share'
@@ -266,7 +266,7 @@ export default class Templates extends Component {
         <TabPageHeader title="Settings">
           <div className="text-center margin-md-top">
             <div className="pull-left text-left">
-              <SelectField
+              <Select
                 errorStyle={errorStyle}
                 underlineStyle={underlineFocusStyle}
                 selectedMenuItemStyle={selectedItemStyle}
@@ -276,11 +276,11 @@ export default class Templates extends Component {
                 value={type}>
                 <MenuItem value="Device" primaryText="Device"/>
                 <MenuItem value="Monitor" primaryText="Monitor"/>
-              </SelectField>
+              </Select>
             </div>
 
             <div style={{position: 'absolute', right: '25px'}}>
-              {canEdit && <RaisedButton label="Add" onTouchTap={this.onClickAdd.bind(this)}/>}&nbsp;
+              {canEdit && <Button variant="raised" label="Add" onTouchTap={this.onClickAdd.bind(this)}/>}&nbsp;
               <WfTabs history={this.props.history}/>
             </div>
           </div>

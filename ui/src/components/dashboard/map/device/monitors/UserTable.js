@@ -1,5 +1,5 @@
 import React from 'react'
-import {RaisedButton} from 'material-ui'
+import {Button} from 'material-ui'
 import InfiniteTable from 'components/common/InfiniteTable'
 
 import TabPage from 'components/common/TabPage'
@@ -105,10 +105,10 @@ export default class UserTable extends React.Component {
     return (
       <div className="text-center">
         <div className="pull-right">
-          <RaisedButton label="Create" onTouchTap={this.onClickCreate.bind(this)}/>&nbsp;
-          <RaisedButton label="Enable" onTouchTap={this.onClickEnable.bind(this)}/>&nbsp;
-          <RaisedButton label="Disable" onTouchTap={this.onClickDisable.bind(this)}/>&nbsp;
-          <RaisedButton label="Delete" onTouchTap={this.onClickDelete.bind(this)}/>&nbsp;
+          <Button variant="raised" label="Create" onTouchTap={this.onClickCreate.bind(this)}/>&nbsp;
+          <Button variant="raised" label="Enable" onTouchTap={this.onClickEnable.bind(this)}/>&nbsp;
+          <Button variant="raised" label="Disable" onTouchTap={this.onClickDisable.bind(this)}/>&nbsp;
+          <Button variant="raised" label="Delete" onTouchTap={this.onClickDelete.bind(this)}/>&nbsp;
         </div>
       </div>
     )

@@ -1,5 +1,5 @@
 import React from 'react'
-import FlatButton from 'material-ui/FlatButton'
+import Button from 'material-ui/Button'
 
 const style = {
   width: '100%',
@@ -11,7 +11,7 @@ const labelStyle = {
 }
 
 const Metric = ({icon, value, title, onClick}) => (
-  <FlatButton
+  <Button variant="flat"
     label={<span><span className="incident-button-value">{value}</span><span>{title}</span></span>}
     labelPosition="before"
     labelStyle={labelStyle}

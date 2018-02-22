@@ -2,7 +2,7 @@ import React from 'react'
 import CreateIcon from 'material-ui/svg-icons/content/create'
 import DeleteIcon from 'material-ui/svg-icons/action/delete'
 
-import {TextField, RaisedButton} from 'material-ui'
+import {TextField, Button} from 'material-ui'
 import {Modal, CardPanel} from 'components/modal/parts'
 
 export default class WfRectGroupsModalView extends React.Component {
@@ -12,7 +12,7 @@ export default class WfRectGroupsModalView extends React.Component {
       <Modal title="Groups" onRequestClose={onHide}>
         <CardPanel title="Add Group">
           <TextField name="name" hintText="Name" value={name} onChange={onChangeName}/>
-          <RaisedButton label="Add" className="margin-lg-left" onClick={onClickAdd}/>
+          <Button variant="raised" label="Add" className="margin-lg-left" onClick={onClickAdd}/>
         </CardPanel>
 
         <CardPanel title="Edit Groups">

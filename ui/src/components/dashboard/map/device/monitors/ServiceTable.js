@@ -1,5 +1,5 @@
 import React from 'react'
-import {RaisedButton} from 'material-ui'
+import {Button} from 'material-ui'
 import InfiniteTable from 'components/common/InfiniteTable'
 
 import TabPage from 'components/common/TabPage'
@@ -29,7 +29,7 @@ export default class ServiceTable extends React.Component {
       'customComponent': (props) => {
         const val = props.data
         const label = val === 'Running' ? 'Stop' : 'Start'
-        return <RaisedButton label={label} onTouchTap={this.onClickStart.bind(this, props.rowData)} primary={val !== 'Running'}/>
+        return <Button variant="raised" label={label} onTouchTap={this.onClickStart.bind(this, props.rowData)} primary={val !== 'Running'}/>
       }
     }]
   }

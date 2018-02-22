@@ -1,6 +1,6 @@
 import React from 'react'
 import moment from 'moment'
-import {FlatButton, MenuItem, SelectField, TextField} from 'material-ui'
+import {Button, MenuItem, Select, TextField} from 'material-ui'
 import ActionSearch from 'material-ui/svg-icons/action/search'
 import ReactTooltip from 'react-tooltip'
 
@@ -20,10 +20,10 @@ const BigIncidentsView = ({onHide,
   <div className="flex-vertical flex-1" style={{background: 'white'}}>
     <div className="padding-md-left">
       <span style={{fontSize: '22px'}}><b>Incidents</b></span>
-      <FlatButton label="Close" onTouchTap={onHide} className="pull-right hidden"/>
+      <Button variant="flat" label="Close" onTouchTap={onHide} className="pull-right hidden"/>
     </div>
     <div className="form-inline padding-md-left">
-      <SelectField
+      <Select
         errorStyle={errorStyle}
         underlineStyle={underlineFocusStyle}
         selectedMenuItemStyle={selectedItemStyle}
@@ -45,9 +45,9 @@ const BigIncidentsView = ({onHide,
             primaryText={option.label}
           />
         )}
-      </SelectField>
+      </Select>
 
-      <SelectField
+      <Select
         onChange={onChangeFixedStatus}
         value={fixedStatus || ''}
         className="margin-md-left valign-top"
@@ -60,13 +60,13 @@ const BigIncidentsView = ({onHide,
         <MenuItem primaryText="Any" value=""/>
         <MenuItem primaryText="Unfixed" value="false"/>
         <MenuItem primaryText="Fixed" value="true"/>
-      </SelectField>
+      </Select>
         <DateRangePicker
           startDate={moment(startDate)}
           endDate={moment(endDate)}
           onApply={onChangeDateRange}
           renderer={label =>
-            <FlatButton
+            <Button variant="flat"
               label={label} className="valign-top margin-md-left"
               style={{borderBottom: '1px solid lightgray', marginTop: 4}}/>
           }

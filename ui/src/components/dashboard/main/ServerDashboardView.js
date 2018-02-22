@@ -1,5 +1,5 @@
 import React from 'react'
-import {IconButton, Card, SelectField, MenuItem} from 'material-ui'
+import {IconButton, Card, Select, MenuItem} from 'material-ui'
 import SettingsIcon from 'material-ui/svg-icons/action/settings'
 import ClearIcon from 'material-ui/svg-icons/communication/clear-all'
 import ComputerIcon from 'material-ui/svg-icons/hardware/computer'
@@ -230,14 +230,14 @@ export default class ServerDashboardView extends React.Component {
     return (
       <div style={{position: 'absolute', top: -68, width: '100%'}} className="text-center">
         <div style={{position: 'absolute', left: 27}}>
-          <SelectField
+          <Select
             value={page} onChange={this.onChangePage.bind(this)}
             className="valign-top"
             style={{width: 180}}>
             {menuItems.map(p =>
               <MenuItem key={p} value={p} primaryText={p}/>
             )}
-          </SelectField>
+          </Select>
         </div>
         {page === 'Servers' ? (
           <div className="inline-block">

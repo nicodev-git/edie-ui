@@ -1,6 +1,6 @@
 import React from 'react'
 import {Form, Field} from 'redux-form'
-import {RaisedButton} from 'material-ui'
+import {Button} from 'material-ui'
 
 import {CardPanel, FormInput, ModalFull} from 'components/modal/parts'
 
@@ -14,7 +14,7 @@ export default class RangeAddModalView extends React.Component {
           <CardPanel title="Range">
             <Field name="from" component={FormInput} floatingLabel="From" />
             <Field name="to" component={FormInput} floatingLabel="To" className="margin-md-left" />
-            <RaisedButton label="Scan" type="submit"/>
+            <Button variant="raised" label="Scan" type="submit"/>
           </CardPanel>
 
           <CardPanel title="Result">

@@ -1,5 +1,5 @@
 import React from 'react'
-import {IconButton, RaisedButton} from 'material-ui'
+import {IconButton, Button} from 'material-ui'
 import DeleteIcon from 'material-ui/svg-icons/action/delete'
 import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
 import EditIcon from 'material-ui/svg-icons/content/create'
@@ -40,7 +40,7 @@ export default class LogFiltersModalView extends React.Component {
         </CardPanel>
 
         <div className="form-buttons">
-          <RaisedButton label="Search" onTouchTap={onClickSearch}/>
+          <Button variant="raised" label="Search" onTouchTap={onClickSearch}/>
         </div>
       </Modal>
     )

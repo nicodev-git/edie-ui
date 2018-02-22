@@ -1,6 +1,6 @@
 import React from 'react'
 import moment from 'moment'
-import {SelectField, MenuItem, RaisedButton, Checkbox} from 'material-ui'
+import {Select, MenuItem, Button, Checkbox} from 'material-ui'
 import { Field } from 'redux-form'
 import { SubmitBlock, FormInput, FormSelect, Modal, CardPanel } from 'components/modal/parts'
 import {findIndex} from 'lodash'
@@ -150,7 +150,7 @@ export default class GaugeWizardView extends React.Component {
   }
   renderDateLabel (label) {
     return (
-      <RaisedButton label={label}/>
+      <Button variant="raised" label={label}/>
     )
   }
   renderIncidentTable2 () {
@@ -164,12 +164,12 @@ export default class GaugeWizardView extends React.Component {
       <div>
         <Field name="name" component={FormInput} floatingLabel="Name" className="valign-top mr-dialog" validate={[required]}/>
         {devices && <Field name="deviceId" component={FormSelect} floatingLabel="Device" options={deviceOptions} className="valign-top" validate={[required]}/>}
-        <SelectField multiple floatingLabelText="Severity" onChange={onChangeSeverity} className={`valign-top ${devices ? 'mr-dialog' : ''}`} value={selectedSeverity}>
+        <Select multiple floatingLabelText="Severity" onChange={onChangeSeverity} className={`valign-top ${devices ? 'mr-dialog' : ''}`} value={selectedSeverity}>
           {severities.map(option =>
             <MenuItem key={option.value} insetChildren checked={selectedSeverity && selectedSeverity.includes(option.value)}
               value={option.value} primaryText={option.label}/>
           )}
-        </SelectField>
+        </Select>
 
         <Field name="fixed" component={FormSelect} floatingLabel="Status" options={fixOptions} className="valign-top"/>
 
@@ -264,7 +264,7 @@ export default class GaugeWizardView extends React.Component {
       <div>
         <Field name="name" component={FormInput} floatingLabel="Name" className="valign-top mr-dialog" validate={[required]}/>
         {devices && this.renderDeviceList()}
-        <SelectField multiple floatingLabelText="Monitors" value={selectedMonitors} onChange={onChangeMonitors}>
+        <Select multiple floatingLabelText="Monitors" value={selectedMonitors} onChange={onChangeMonitors}>
           {(monitors || []).map((p, i) =>
             <MenuItem
               key={i}
@@ -274,7 +274,7 @@ export default class GaugeWizardView extends React.Component {
               primaryText={p.name}
             />
           )}
-        </SelectField>
+        </Select>
       </div>
     )
   }
@@ -283,7 +283,7 @@ export default class GaugeWizardView extends React.Component {
     return (
       <div>
         <Field name="name" component={FormInput} floatingLabel="Name" className="valign-top mr-dialog" validate={[required]}/>
-        <SelectField multiple floatingLabelText="Services" value={serviceNames} onChange={onChangeServiceNames} validate={[required]}>
+        <Select multiple floatingLabelText="Services" value={serviceNames} onChange={onChangeServiceNames} validate={[required]}>
           {(services || []).map((p, i) =>
             <MenuItem
               key={i}
@@ -293,7 +293,7 @@ export default class GaugeWizardView extends React.Component {
               primaryText={p.label}
             />
           )}
-        </SelectField>
+        </Select>
       </div>
     )
   }

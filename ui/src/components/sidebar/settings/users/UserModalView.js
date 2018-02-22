@@ -1,6 +1,6 @@
 import React from 'react'
 
-import {SelectField, MenuItem} from 'material-ui'
+import {Select, MenuItem} from 'material-ui'
 import { Field } from 'redux-form'
 import { FormInput, FormSelect, FormCheckbox, SubmitBlock, Modal, CardPanel } from 'components/modal/parts'
 
@@ -21,7 +21,7 @@ export default class UserModalView extends React.Component {
             <Field name="phone" component={FormInput} label="Phone" className="valign-top mr-dialog"/>
             <Field name="defaultMapId" component={FormSelect} label="Default Map" options={defaultmaps} className="valign-top"/>
 
-            <SelectField multiple hintText="Role" onChange={onChangeRole} value={selectedRoles}
+            <Select multiple hintText="Role" onChange={onChangeRole} value={selectedRoles}
               className="mr-dialog">
               {roles.map(r =>
                 <MenuItem
@@ -32,10 +32,10 @@ export default class UserModalView extends React.Component {
                   primaryText={r.name}
                 />
               )}
-            </SelectField>
+            </Select>
 
 
-            <SelectField multiple hintText="Permission" onChange={onChangePermission} value={permissions}>
+            <Select multiple hintText="Permission" onChange={onChangePermission} value={permissions}>
               {mainMenu.map(p =>
                 <MenuItem
                   key={p.id}
@@ -45,7 +45,7 @@ export default class UserModalView extends React.Component {
                   primaryText={p.title}
                 />
               )}
-            </SelectField>
+            </Select>
 
             <Field name="enabled" component={FormCheckbox} label="Enabled" />
           </CardPanel>

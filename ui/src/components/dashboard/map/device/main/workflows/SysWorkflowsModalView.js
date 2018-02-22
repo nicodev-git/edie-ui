@@ -1,7 +1,7 @@
 import React from 'react'
 import Checkbox from 'material-ui/Checkbox'
-import SelectField from 'material-ui/SelectField'
-import MenuItem from 'material-ui/MenuItem'
+import Select from 'material-ui/Select'
+import {MenuItem} from 'material-ui/Menu'
 import { findIndex } from 'lodash'
 
 import { TwoButtonsBlockCustom, Modal, CardPanel } from 'components/modal/parts'
@@ -19,7 +19,7 @@ export default class SysWorkflowsModalView extends React.Component {
       <Modal title={header} onRequestClose={onClickClose}>
         <CardPanel title={header}>
           <div className="padding-md-left">
-            <SelectField
+            <Select
               errorStyle={errorStyle}
               underlineStyle={underlineFocusStyle}
               selectedMenuItemStyle={selectedItemStyle}
@@ -32,7 +32,7 @@ export default class SysWorkflowsModalView extends React.Component {
               {workflowCategories.map(c =>
                 <MenuItem key={c.id} value={c.name} primaryText={c.name} />
               )}
-            </SelectField>
+            </Select>
           </div>
           <div style={{maxHeight: '400px', overflow: 'scroll'}}>
             <table className="table table-hover">

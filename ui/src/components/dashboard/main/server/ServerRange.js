@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Form, Field, reduxForm } from 'redux-form'
-import {RaisedButton} from 'material-ui'
+import {Button} from 'material-ui'
 
 import {CardPanel, FormInput} from 'components/modal/parts'
 
@@ -25,7 +25,7 @@ class ServerRange extends React.Component {
           <div>
             <Field name="from" component={FormInput} floatingLabel="From" />
             <Field name="to" component={FormInput} floatingLabel="To" className="margin-md-left" />
-            <RaisedButton label="Scan" type="submit"/>
+            <Button variant="raised" label="Scan" type="submit"/>
           </div>
           <CardPanel title="Result">
             <div style={{minHeight: 300}}>

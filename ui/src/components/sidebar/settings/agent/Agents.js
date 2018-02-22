@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import moment from 'moment'
-import {MenuItem, SelectField, RaisedButton, CircularProgress} from 'material-ui'
+import {MenuItem, Select, Button, CircularProgress} from 'material-ui'
 
 import InfiniteTable from 'components/common/InfiniteTable'
 
@@ -47,7 +47,7 @@ export default class Agents extends Component {
           const installing = installAgent && installAgent.status === 'installing'
           return (
             <div>
-              <RaisedButton
+              <Button variant="raised"
                 label={installing ? 'Installing' : 'Install'}
                 onTouchTap={this.onClickInstall.bind(this, p.rowData)}
                 disabled={!!installAgent}
@@ -116,7 +116,7 @@ export default class Agents extends Component {
 
   renderSelect () {
     return (
-      <SelectField
+      <Select
         errorStyle={errorStyle}
         selectedMenuItemStyle={selectedItemStyle}
         menuItemStyle={inputStyle}
@@ -126,7 +126,7 @@ export default class Agents extends Component {
         <MenuItem value="all" primaryText="All"/>
         <MenuItem value="installed" primaryText="Installed"/>
         <MenuItem value="notinstalled" primaryText="Not Installed"/>
-      </SelectField>
+      </Select>
     )
   }
 

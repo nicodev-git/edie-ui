@@ -1,6 +1,6 @@
 import React from 'react'
 import {concat} from 'lodash'
-import {IconButton, SelectField, MenuItem, TextField} from 'material-ui'
+import {IconButton, Select, MenuItem, TextField} from 'material-ui'
 import {debounce, findIndex} from 'lodash'
 import moment from 'moment'
 import {deepPurpleA400, purple500} from 'material-ui/styles/colors'
@@ -985,7 +985,7 @@ export default class WorkflowDashboardView extends React.Component {
     return (
       <div className="flex-vertical flex-1">
         <div style={{position: 'absolute', top: -68, left: 200, right: 0}}>
-          <SelectField
+          <Select
             hintText="Group"
             className="valign-top margin-lg-left"
             value={selectedWfRectGroup ? selectedWfRectGroup.id : null}
@@ -994,14 +994,14 @@ export default class WorkflowDashboardView extends React.Component {
             {this.props.wfRectGroups.map(p =>
               <MenuItem key={p.id} value={p.id} primaryText={p.name}/>
             )}
-          </SelectField>
+          </Select>
 
           <TextField
             name="interval" hintText="Interval"
             className="valign-top margin-md-left"
             style={{width: 30, textAlign: 'right'}}
             value={this.state.interval} onChange={this.onChangeInterval.bind(this)}/>
-          <SelectField
+          <Select
             hintText="Unit"
             className="valign-top margin-md-left"
             value={this.state.intervalUnit}
@@ -1011,7 +1011,7 @@ export default class WorkflowDashboardView extends React.Component {
             {units.map(p =>
               <MenuItem key={p.value} value={p.value} primaryText={p.label}/>
             )}
-          </SelectField>
+          </Select>
 
           {canEdit && <div className="pull-right text-right">
             <IconButton onTouchTap={this.onClickEditMode.bind(this)}><EditIcon/></IconButton>

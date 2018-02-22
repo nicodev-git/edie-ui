@@ -1,5 +1,5 @@
 import React from 'react'
-import {TextField, FlatButton} from 'material-ui'
+import {TextField, Button} from 'material-ui'
 import ActionSearch from 'material-ui/svg-icons/action/search'
 import moment from 'moment'
 import {assign} from 'lodash'
@@ -112,7 +112,7 @@ export default class ProcessTable extends React.Component {
       <div className="text-center">
         <div className="inline-block">
           <TextField name="query" value={monitorQuery} onChange={this.onChangeQuery.bind(this)} onKeyUp={this.onKeyupQuery.bind(this)}/>
-          <FlatButton icon={<ActionSearch />} onTouchTap={this.onClickSearch.bind(this)}/>
+          <Button variant="flat" icon={<ActionSearch />} onTouchTap={this.onClickSearch.bind(this)}/>
         </div>
       </div>
     )

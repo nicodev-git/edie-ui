@@ -1,5 +1,5 @@
 import React from 'react'
-import {MenuItem, SelectField, TextField} from 'material-ui'
+import {MenuItem, Select, TextField} from 'material-ui'
 
 import { TwoButtonsBlockCustom, Modal, CardPanel } from 'components/modal/parts'
 import { errorStyle, underlineFocusStyle, inputStyle,
@@ -19,7 +19,7 @@ export default class WorkflowSelectModalView extends React.Component {
       <Modal title="Workflow" onRequestClose={onClickClose}>
         <CardPanel title="Workflow">
           <div className="padding-md-left">
-            <SelectField
+            <Select
               errorStyle={errorStyle}
               underlineStyle={underlineFocusStyle}
               selectedMenuItemStyle={selectedItemStyle}
@@ -32,7 +32,7 @@ export default class WorkflowSelectModalView extends React.Component {
               {workflowCategories.map(c =>
                 <MenuItem key={c.id} value={c.name} primaryText={c.name} />
               )}
-            </SelectField>
+            </Select>
             <TextField
               hintText="Search"
               errorStyle={errorStyle}

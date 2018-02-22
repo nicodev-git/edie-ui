@@ -1,5 +1,5 @@
 import React from 'react'
-import {RaisedButton} from 'material-ui'
+import {Button} from 'material-ui'
 
 import InfiniteTable from 'components/common/InfiniteTable'
 import { showAlert, showConfirm } from 'components/common/Alert'
@@ -74,8 +74,8 @@ export default class CredentialTypes extends React.Component {
         <TabPageHeader title="Credential Types">
           <div className="text-center margin-md-top">
             <div className="pull-right">
-              {canEdit && <RaisedButton label="Add" onTouchTap={this.onAddCred.bind(this)}/>}&nbsp;
-              {canEdit && <RaisedButton label="Remove" onTouchTap={this.onRemoveCred.bind(this)}/>}&nbsp;
+              {canEdit && <Button variant="raised" label="Add" onTouchTap={this.onAddCred.bind(this)}/>}&nbsp;
+              {canEdit && <Button variant="raised" label="Remove" onTouchTap={this.onRemoveCred.bind(this)}/>}&nbsp;
               <UserTabs history={this.props.history}/>&nbsp;
             </div>
           </div>

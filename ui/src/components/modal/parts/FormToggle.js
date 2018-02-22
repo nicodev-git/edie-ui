@@ -1,17 +1,12 @@
 import React from 'react'
-import Toggle from 'material-ui/Toggle'
-import { checkboxStyle } from 'style/common/materialStyles'
+import Switch from 'material-ui/Switch'
 
-const FormToggle = ({input, label, labelPosition, meta: { touched, error }, ...custom}) => (
-  <Toggle
+const FormToggle = ({input, label, meta: {touched, error}, ...custom}) => (
+  <Switch
+    label={label}
+    className="toggle"
     {...input}
     {...custom}
-    label={label}
-    labelPosition={labelPosition || 'right'}
-    labelStyle={checkboxStyle}
-    iconStyle={checkboxStyle}
-    toggled={!!input.value}
-    onToggle={(e) => input.onChange(e)}
   />
 )
 

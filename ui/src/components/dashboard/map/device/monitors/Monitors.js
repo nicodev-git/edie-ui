@@ -1,5 +1,5 @@
 import React from 'react'
-import {RaisedButton} from 'material-ui'
+import {Button} from 'material-ui'
 
 import MonitorTable from './MonitorTable'
 import DiskTable from './DiskTable'
@@ -38,9 +38,9 @@ export default class Monitors extends React.Component {
     return (
       <div className="text-center">
         <div style={{position: 'absolute', right: '25px'}}>
-          <RaisedButton label="Add" onTouchTap={this.onClickAddMonitor.bind(this)}/>&nbsp;
-          <RaisedButton label="Edit" onTouchTap={this.onClickEditMonitor.bind(this)}/>&nbsp;
-          <RaisedButton label="Delete" onTouchTap={this.onClickDeleteMonitor.bind(this)}/>&nbsp;
+          <Button variant="raised" label="Add" onTouchTap={this.onClickAddMonitor.bind(this)}/>&nbsp;
+          <Button variant="raised" label="Edit" onTouchTap={this.onClickEditMonitor.bind(this)}/>&nbsp;
+          <Button variant="raised" label="Delete" onTouchTap={this.onClickDeleteMonitor.bind(this)}/>&nbsp;
         </div>
         &nbsp;
       </div>
