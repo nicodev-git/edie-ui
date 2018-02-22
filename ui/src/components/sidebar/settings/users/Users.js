@@ -1,6 +1,7 @@
 import React from 'react'
 
-import {Button, IconMenu, MenuItem, Select} from 'material-ui'
+import {Button, Select} from 'material-ui'
+import Menu, {MenuItem} from 'material-ui/Menu'
 import InfiniteTable from 'components/common/InfiniteTable'
 import { showAlert, showConfirm } from 'components/common/Alert'
 
@@ -220,30 +221,14 @@ export default class Users extends React.Component {
             </div>
 
             <div style={{position: 'absolute', right: '25px'}}>
-              <IconMenu
-                className="hidden"
-                iconButtonElement={<Button variant="raised" label="Group"/>}
-                anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
-                targetOrigin={{horizontal: 'left', vertical: 'top'}}
-              >
-                <MenuItem primaryText="Add" onTouchTap={this.onAddGroup.bind(this)}/>
-                <MenuItem primaryText="Edit" onTouchTap={this.onClickEditGroup.bind(this)}/>
-                <MenuItem primaryText="Remove" onTouchTap={this.onClickRemoveGroup.bind(this)}/>
-              </IconMenu>&nbsp;
-
-              {canEdit ? (
-                <IconMenu
-                  iconButtonElement={<Button variant="raised" label="User"/>}
-                  anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
-                  targetOrigin={{horizontal: 'left', vertical: 'top'}}
-                >
-                  <MenuItem primaryText="Add" onTouchTap={this.onAddUser.bind(this)}/>
-                  <MenuItem primaryText="Edit" onTouchTap={this.onEditUser.bind(this)}/>
-                  <MenuItem primaryText="Remove" onTouchTap={this.onRemoveUser.bind(this)}/>
-                  <MenuItem primaryText="Change Password" onTouchTap={this.onChangePassword.bind(this)}/>
-                  <MenuItem primaryText="Regenerate Pin" onTouchTap={this.onClickPin.bind(this)}/>
-                </IconMenu>
-              ) : null}
+              {canEdit ? <Button variant="raised" label="User"/> : null}
+              <Menu open={false}>
+                <MenuItem primaryText="Add" onTouchTap={this.onAddUser.bind(this)}/>
+                <MenuItem primaryText="Edit" onTouchTap={this.onEditUser.bind(this)}/>
+                <MenuItem primaryText="Remove" onTouchTap={this.onRemoveUser.bind(this)}/>
+                <MenuItem primaryText="Change Password" onTouchTap={this.onChangePassword.bind(this)}/>
+                <MenuItem primaryText="Regenerate Pin" onTouchTap={this.onClickPin.bind(this)}/>
+              </Menu>
               &nbsp;
               <Button variant="raised" label="Profile" onTouchTap={this.onClickProfile.bind(this)}/>&nbsp;
               <UserTabs history={this.props.history}/>&nbsp;

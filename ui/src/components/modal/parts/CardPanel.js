@@ -1,8 +1,9 @@
 import React from 'react'
-import {Card, CardText} from 'material-ui'
+import Card, {CardContent} from 'material-ui/Card'
 import CardLegend from './CardLegend'
+
 export default class CardPanel extends React.Component {
-  render () {
+  render() {
     const {contentStyle} = this.props
     return (
       <div className={this.props.className} style={this.props.style}>
@@ -16,9 +17,9 @@ export default class CardPanel extends React.Component {
           ) : null}
         </CardLegend>
         <Card style={{paddingBottom: 0}}>
-          <CardText style={contentStyle}>
+          <CardContent style={contentStyle}>
             {this.props.children}
-          </CardText>
+          </CardContent>
         </Card>
       </div>
     )

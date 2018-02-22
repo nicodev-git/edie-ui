@@ -1,7 +1,7 @@
 import React from 'react'
 import { assign, concat } from 'lodash'
 import {IconButton, TextField} from 'material-ui'
-import Share from 'material-ui/svg-icons/social/share'
+import Share from 'material-ui-icons/Share'
 import DeleteIcon from 'material-ui-icons/Delete'
 import AddCircleIcon from 'material-ui-icons/AddCircle'
 import EditIcon from 'material-ui-icons/Create'

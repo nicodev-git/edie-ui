@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Field, reduxForm } from 'redux-form'
-import { Popover, RadioButtonGroup, RadioButton } from 'material-ui'
+import { Popover, RadioGroup, Radio } from 'material-ui'
 
 import { FormInput, FormSelect, SubmitBlock } from 'components/modal/parts'
 
@@ -45,11 +45,11 @@ class SearchSavePopover extends React.Component {
       >
         <form onSubmit={handleSubmit(onSubmit)}>
           <div>
-            <RadioButtonGroup name="saveType" defaultSelected="new" onChange={(e, value) => changeSearchSaveType(value)}>
-              <RadioButton value="new" label="New" style={{display: 'inline-block', width: 'auto'}}/>
-              <RadioButton value="replace" label="Replace" style={{display: 'inline-block', width: 'auto', marginLeft: 20}}/>
-              <RadioButton value="existing" label="Existing" style={{display: 'inline-block', width: 'auto', marginLeft: 20}}/>
-            </RadioButtonGroup>
+            <RadioGroup name="saveType" defaultSelected="new" onChange={(e, value) => changeSearchSaveType(value)}>
+              <Radio value="new" label="New" style={{display: 'inline-block', width: 'auto'}}/>
+              <Radio value="replace" label="Replace" style={{display: 'inline-block', width: 'auto', marginLeft: 20}}/>
+              <Radio value="existing" label="Existing" style={{display: 'inline-block', width: 'auto', marginLeft: 20}}/>
+            </RadioGroup>
           </div>
           {this.renderContent()}
         </form>

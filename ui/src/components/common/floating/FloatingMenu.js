@@ -1,5 +1,5 @@
 import React from 'react'
-import {FloatingActionButton} from 'material-ui'
+import {Button} from 'material-ui'
 import EditIcon from 'material-ui-icons/Add'
 
 import FloatingChildButton from './FloatingChildButton'
@@ -45,10 +45,9 @@ export default class FloatingMenu extends React.Component {
                  onMouseEnter={this.onMouseEnter}
                  onMouseLeave={this.onMouseLeave}>
                 {this.renderMenu()}
-                <FloatingActionButton
-                    secondary>
+                <Button variant="fab" color="secondary">
                     <EditIcon />
-                </FloatingActionButton>
+                </Button>
             </div>
         )
     }

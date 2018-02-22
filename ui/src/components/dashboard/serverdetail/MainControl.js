@@ -1,6 +1,6 @@
 import React from 'react'
 import {findIndex} from 'lodash'
-import {ToolbarGroup, IconButton, IconMenu, MenuItem} from 'material-ui'
+import {IconButton, Menu, MenuItem} from 'material-ui'
 import {Responsive, WidthProvider} from 'react-grid-layout'
 import EditIcon from 'material-ui-icons/Create'
 // import CredIcon from 'material-ui/svg-icons/action/credit-card'
@@ -496,11 +496,14 @@ export default class MainControl extends React.Component {
     const {gauges} = this.props
     const items = (gauges || []).filter(p => menuItems.includes(p.name))
     return (
-      <IconMenu iconButtonElement={<IconButton touch={true}><AddCircleIcon /></IconButton>}>
-        {items.map((p, i) =>
-          <MenuItem key={p.id} primaryText={p.name} onTouchTap={this.onClickMenuItem.bind(this, p)}/>
-        )}
-      </IconMenu>
+      <div>
+        <IconButton><AddCircleIcon /></IconButton>
+        <Menu open={false}>
+          {items.map((p, i) =>
+            <MenuItem key={p.id} primaryText={p.name} onTouchTap={this.onClickMenuItem.bind(this, p)}/>
+          )}
+        </Menu>
+      </div>
     )
 
     // return (
@@ -547,18 +550,16 @@ export default class MainControl extends React.Component {
           titleStyle={{height: 20, width: 240, display: 'inline-block'}}
           titleOptions={<StatusImg {...this.props} device={device}/>}
           useToolBar>
-          <ToolbarGroup firstChild>
             <IconButton onTouchTap={this.onClickBack.bind(this)} tooltip="Back"><LeftArrowIcon/></IconButton>
             <IconButton onTouchTap={this.onClickEdit.bind(this)} tooltip="General"><EditIcon/></IconButton>
             <IconButton onTouchTap={this.onClickMonitorEdit.bind(this)} tooltip="Monitors"><MonitorIcon/></IconButton>
-          </ToolbarGroup>
-          <ToolbarGroup>
+
             <IconButton onTouchTap={this.onClickToggleLock.bind(this)} tooltip={device.gaugeLocked ? 'Unlock' : 'Lock'}>
               {device.gaugeLocked ? <LockOpenIcon/> : <LockOutlineIcon/>}
             </IconButton>
+
             <IconButton onTouchTap={this.onClickReset.bind(this)} tooltip="Reset"><RenewIcon/></IconButton>
             {this.renderMenu()}
-          </ToolbarGroup>
         </TabPageHeader>
         <TabPageBody
           tabs={ServerDetailTab(device.slug, device.templateName)}

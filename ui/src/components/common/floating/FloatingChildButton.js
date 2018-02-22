@@ -1,5 +1,5 @@
 import React from 'react'
-import {FloatingActionButton} from 'material-ui'
+import {Button} from 'material-ui'
 
 const style = {
   position: 'absolute',
@@ -57,11 +57,11 @@ export default class FloatingChildButton extends React.Component {
                  style={containerStyle}
                  onMouseEnter={this.onMouseEnter}
                  onMouseLeave={this.onMouseLeave}>
-                <FloatingActionButton secondary={!item.color} mini
+                <Button variant="fab" color={!item.color ? "secondary" : null} mini
                                       onClick={item.onClick}
                                       backgroundColor={item.color}>
                     {item.icon}
-                </FloatingActionButton>
+                </Button>
                 {this.renderLabel()}
             </div>
         )

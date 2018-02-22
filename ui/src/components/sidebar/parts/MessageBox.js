@@ -1,8 +1,7 @@
 import React from 'react'
 import Badge from 'material-ui/Badge'
 import IconButton from 'material-ui/IconButton'
-import IconMenu from 'material-ui/IconMenu'
-import {MenuItem} from 'material-ui/Menu'
+import Menu, {MenuItem} from 'material-ui/Menu'
 import Divider from 'material-ui/Divider'
 import EmailIcon from 'material-ui-icons/Email'
 import InboxIcon from 'material-ui-icons/Inbox'
@@ -45,17 +44,15 @@ const MessageBox = ({open, openSidebarMessageMenu, closeSidebarMessageMenu}) => 
       badgeStyle={badgeStyle}
       style={badgeRootStyle}
     >
-      <IconMenu
-        iconButtonElement={
-          <IconButton
-            style={iconButtonStyle}
-            iconStyle={iconStyle}
-            data-tip="Messages"
-            data-place="right"
-          >
-              <EmailIcon color="#777777"/>
-          </IconButton>
-        }
+      <IconButton
+        style={iconButtonStyle}
+        iconStyle={iconStyle}
+        data-tip="Messages"
+        data-place="right"
+      >
+        <EmailIcon color="#777777"/>
+      </IconButton>
+      <Menu
         open={open}
         onRequestChange={(value) => value ? openSidebarMessageMenu() : closeSidebarMessageMenu()}
         anchorOrigin={{horizontal: 'right', vertical: 'bottom'}}
@@ -87,7 +84,7 @@ const MessageBox = ({open, openSidebarMessageMenu, closeSidebarMessageMenu}) => 
           primaryText="See all messages"
           leftIcon={<InboxIcon/>}
           style={seeAllStyle}/>
-      </IconMenu>
+      </Menu>
     </Badge>
     <div className="sidebar-title">Messages</div>
   </div>

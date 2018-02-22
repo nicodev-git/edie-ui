@@ -1,6 +1,6 @@
 import React from 'react'
 import InfiniteTable from 'components/common/InfiniteTable'
-import {Toggle, Button} from 'material-ui'
+import {Switch, Button} from 'material-ui'
 
 import TabPage from 'components/common/TabPage'
 import TabPageBody from 'components/common/TabPageBody'
@@ -125,7 +125,7 @@ export default class FirewallTable extends React.Component {
   renderOptions () {
     return (
       <div>
-        {this.props.monitorsUpdateTime > 0 && <Toggle toggled={this.props.monitorFwStatus} onToggle={this.onToggleStatus.bind(this)}/>}
+        {this.props.monitorsUpdateTime > 0 && <Switch checked={this.props.monitorFwStatus} onChange={this.onToggleStatus.bind(this)}/>}
         <div className="pull-right">
           <Button variant="raised" label="Add" onTouchTap={this.onClickAdd.bind(this)} className="valign-top"/>&nbsp;
           <Button variant="raised" label="Delete" onTouchTap={this.onClickDelete.bind(this)} className="valign-top"/>&nbsp;

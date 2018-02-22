@@ -9,7 +9,7 @@ import Select from 'material-ui/Select'
 import {MenuItem} from 'material-ui/Menu'
 import IconButton from 'material-ui/IconButton'
 import CropFreeIcon from 'material-ui-icons/CropFree'
-import FileIcon from 'material-ui/svg-icons/editor/insert-drive-file'
+import FileIcon from 'material-ui-icons/InsertDriveFile'
 
 import countryLatlng from 'util/Country-latlng'
 import IncidentSocket from 'util/socket/IncidentSocket'

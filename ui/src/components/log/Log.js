@@ -8,7 +8,7 @@ import FilterIcon from 'material-ui-icons/FilterList'
 import MoreVertIcon from 'material-ui-icons/MoreVert'
 import DeleteIcon from 'material-ui-icons/Delete'
 import ToggleStar from 'material-ui-icons/StarBorder'
-import {IconMenu, IconButton, TextField} from 'material-ui'
+import {IconButton, TextField, Menu} from 'material-ui'
 import ReactToolTip from 'react-tooltip'
 
 import TabPage from 'components/common/TabPage'
@@ -685,18 +685,20 @@ export default class Log extends React.Component {
 
   renderIgnoreFilters (filters, canEdit) {
     return (
-      <IconMenu iconButtonElement={
+      <div className="inline-block">
         <IconButton style={{padding: 0, width: 24, height: 24}}
                     iconStyle={{width: 24, height: 24}}>
           <MoreVertIcon/>
-        </IconButton>}>
-        {canEdit && filters.map((p, i) =>
-          <div key={i} className="padding-sm">
-            {p}
-            <DeleteIcon className="link pull-right" onTouchTap={this.onClickRemoveFilter.bind(this, p)} />
-          </div>
-        )}
-      </IconMenu>
+        </IconButton>
+        <Menu open={false}>
+          {canEdit && filters.map((p, i) =>
+            <div key={i} className="padding-sm">
+              {p}
+              <DeleteIcon className="link pull-right" onTouchTap={this.onClickRemoveFilter.bind(this, p)} />
+            </div>
+          )}
+        </Menu>
+      </div>
     )
   }
 

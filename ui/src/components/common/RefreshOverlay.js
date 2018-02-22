@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import {RefreshIndicator} from 'material-ui'
+import {CircularProgress} from 'material-ui/Progress'
 
 const loadingStyle = {
   position: 'absolute',
@@ -16,7 +16,7 @@ const overlayStyle = {
   width: '100%',
   height: '100%',
   background: 'rgba(80,80,80,0.5)',
-  zIndex: 10
+  zIndex: 10000
 }
 
 export default class RefreshOverlay extends React.Component {
@@ -26,8 +26,8 @@ export default class RefreshOverlay extends React.Component {
   render () {
     return (
       <div style={overlayStyle}>
-        <div style={loadingStyle} tabIndex="0" ref="containerDiv">
-          <RefreshIndicator
+        <div style={loadingStyle} ref="containerDiv">
+          <CircularProgress
             size={50}
             left={0}
             top={0}
