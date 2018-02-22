@@ -1,9 +1,9 @@
 import React from 'react'
 import {Chip} from 'material-ui'
-import DeleteIcon from 'material-ui/svg-icons/action/delete'
-import EditIcon from 'material-ui/svg-icons/content/create'
-import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
-import PublicIcon from 'material-ui/svg-icons/social/public'
+import DeleteIcon from 'material-ui-icons/Delete'
+import EditIcon from 'material-ui-icons/Create'
+import AddCircleIcon from 'material-ui-icons/AddCircle'
+import PublicIcon from 'material-ui-icons/Public'
 import {findIndex} from 'lodash'
 
 import TabPage from 'components/common/TabPage'

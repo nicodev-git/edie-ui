@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 
 import {Button, MenuItem, Select, IconButton, Chip} from 'material-ui'
-import DeleteIcon from 'material-ui/svg-icons/action/delete'
-import EditIcon from 'material-ui/svg-icons/editor/mode-edit'
+import DeleteIcon from 'material-ui-icons/Delete'
+import EditIcon from 'material-ui-icons/ModeEdit'
 import Share from 'material-ui/svg-icons/social/share'
 import CopyIcon from 'material-ui/svg-icons/content/content-copy'
 

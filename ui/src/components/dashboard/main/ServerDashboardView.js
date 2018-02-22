@@ -1,9 +1,9 @@
 import React from 'react'
 import {IconButton, Card, Select, MenuItem} from 'material-ui'
-import SettingsIcon from 'material-ui/svg-icons/action/settings'
-import ClearIcon from 'material-ui/svg-icons/communication/clear-all'
-import ComputerIcon from 'material-ui/svg-icons/hardware/computer'
-import DevicesIcon from 'material-ui/svg-icons/device/devices'
+import SettingsIcon from 'material-ui-icons/Settings'
+import ClearIcon from 'material-ui-icons/ClearAll'
+import ComputerIcon from 'material-ui-icons/Computer'
+import DevicesIcon from 'material-ui-icons/Devices'
 import {purple, deepPurple} from 'material-ui/colors'
 import ReactTooltip from 'react-tooltip'
 

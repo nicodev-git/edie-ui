@@ -1,6 +1,6 @@
 import React from 'react'
-import CreateIcon from 'material-ui/svg-icons/content/create'
-import DeleteIcon from 'material-ui/svg-icons/action/delete'
+import CreateIcon from 'material-ui-icons/Create'
+import DeleteIcon from 'material-ui-icons/Delete'
 
 import {TextField, Button} from 'material-ui'
 import {Modal, CardPanel} from 'components/modal/parts'

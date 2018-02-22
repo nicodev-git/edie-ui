@@ -8,7 +8,7 @@ import {countries} from 'country-data'
 import Select from 'material-ui/Select'
 import {MenuItem} from 'material-ui/Menu'
 import IconButton from 'material-ui/IconButton'
-import CropFreeIcon from 'material-ui/svg-icons/image/crop-free'
+import CropFreeIcon from 'material-ui-icons/CropFree'
 import FileIcon from 'material-ui/svg-icons/editor/insert-drive-file'
 
 import countryLatlng from 'util/Country-latlng'

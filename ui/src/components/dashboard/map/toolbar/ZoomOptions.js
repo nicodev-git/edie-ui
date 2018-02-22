@@ -1,7 +1,7 @@
 import React from 'react'
 import IconButton from 'material-ui/IconButton'
 import Menu, {MenuItem} from 'material-ui/Menu'
-import ZoomInIcon from 'material-ui/svg-icons/action/zoom-in'
+import ZoomInIcon from 'material-ui-icons/ZoomIn'
 
 const buttonStyle = {
   padding: '4px',

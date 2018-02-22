@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import InlineEdit from 'react-edit-inline'
-import DeleteIcon from 'material-ui/svg-icons/action/delete'
+import DeleteIcon from 'material-ui-icons/Delete'
 import {Chip, IconButton} from 'material-ui'
 
 import { CardPanel } from 'components/modal/parts'

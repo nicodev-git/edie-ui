@@ -1,7 +1,7 @@
 import React from 'react'
 import IconButton from 'material-ui/IconButton'
 import Menu, {MenuItem} from 'material-ui/Menu'
-import ChromeReaderModeIcon from 'material-ui/svg-icons/action/chrome-reader-mode'
+import ChromeReaderModeIcon from 'material-ui-icons/ChromeReaderMode'
 
 const buttonStyle = {
   padding: '4px',

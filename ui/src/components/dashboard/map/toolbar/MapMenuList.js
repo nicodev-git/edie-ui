@@ -1,7 +1,7 @@
 import React from 'react'
 import IconButton from 'material-ui/IconButton'
 import Menu, {MenuItem} from 'material-ui/Menu'
-import SettingsIcon from 'material-ui/svg-icons/action/settings'
+import SettingsIcon from 'material-ui-icons/Settings'
 
 const buttonStyle = {
   padding: '4px',

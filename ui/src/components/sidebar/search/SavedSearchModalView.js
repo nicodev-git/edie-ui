@@ -2,9 +2,9 @@ import React from 'react'
 import { assign, concat } from 'lodash'
 import {IconButton, TextField} from 'material-ui'
 import Share from 'material-ui/svg-icons/social/share'
-import DeleteIcon from 'material-ui/svg-icons/action/delete'
-import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
-import EditIcon from 'material-ui/svg-icons/content/create'
+import DeleteIcon from 'material-ui-icons/Delete'
+import AddCircleIcon from 'material-ui-icons/AddCircle'
+import EditIcon from 'material-ui-icons/Create'
 
 import { TwoButtonsBlockCustom, Modal, CardPanel } from 'components/modal/parts'
 

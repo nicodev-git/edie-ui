@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import DeviceMenu from '../DeviceMenu'
 import IconButton from 'material-ui/IconButton'
-import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
+import AddCircleIcon from 'material-ui-icons/AddCircle'
 
 const buttonStyle = {
   padding: '4px',

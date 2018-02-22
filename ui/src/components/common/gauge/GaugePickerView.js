@@ -1,9 +1,9 @@
 import React from 'react'
 import {Drawer, IconButton} from 'material-ui'
 
-import DashboardIcon from 'material-ui/svg-icons/action/dashboard'
-import DeviceIcon from 'material-ui/svg-icons/device/devices'
-import PlaylistIcon from 'material-ui/svg-icons/av/playlist-add-check'
+import DashboardIcon from 'material-ui-icons/Dashboard'
+import DeviceIcon from 'material-ui-icons/Devices'
+import PlaylistIcon from 'material-ui-icons/PlaylistAddCheck'
 import Dashboard from './gaugeSubItem/Dashboard'
 import Device from './gaugeSubItem/Device'
 import Monitor from './gaugeSubItem/Monitor'

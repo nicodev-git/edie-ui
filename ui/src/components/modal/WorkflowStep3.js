@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import IconButton from 'material-ui/IconButton'
-import DeleteIcon from 'material-ui/svg-icons/action/delete'
-import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
-import CreateIcon from 'material-ui/svg-icons/content/create'
+import DeleteIcon from 'material-ui-icons/Delete'
+import AddCircleIcon from 'material-ui-icons/AddCircle'
+import CreateIcon from 'material-ui-icons/Create'
 import { CardPanel } from 'components/modal/parts'
 
 export default class WorkflowStep3 extends Component {

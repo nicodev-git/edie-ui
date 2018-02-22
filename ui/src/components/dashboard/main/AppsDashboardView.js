@@ -1,6 +1,6 @@
 import React from 'react'
 import {IconButton, TextField} from 'material-ui'
-import EditIcon from 'material-ui/svg-icons/content/create'
+import EditIcon from 'material-ui-icons/Create'
 
 import EditConfigModal from './apps/EditConfigModal'
 import AppletCard from 'components/common/AppletCard'

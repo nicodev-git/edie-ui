@@ -2,7 +2,7 @@ import React from 'react'
 import {Form, Field} from 'redux-form'
 import {CSVLink} from 'react-csv'
 import {Card, IconButton} from 'material-ui'
-import DownloadIcon from 'material-ui/svg-icons/file/file-download'
+import DownloadIcon from 'material-ui-icons/FileDownload'
 
 import {ModalFull, CardPanel} from 'components/modal/parts'
 import RefreshOverlay from 'components/common/RefreshOverlay'

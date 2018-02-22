@@ -1,7 +1,7 @@
 import React from 'react'
-import DeleteIcon from 'material-ui/svg-icons/action/delete'
-import EditIcon from 'material-ui/svg-icons/content/create'
-import ListIcon from 'material-ui/svg-icons/action/list'
+import DeleteIcon from 'material-ui-icons/Delete'
+import EditIcon from 'material-ui-icons/Create'
+import ListIcon from 'material-ui-icons/List'
 import {IconButton, Chip} from 'material-ui'
 import {Field} from 'redux-form'
 

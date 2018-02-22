@@ -1,6 +1,6 @@
 import React from 'react'
 import {IconButton, Select, MenuItem} from 'material-ui'
-import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
+import AddCircleIcon from 'material-ui-icons/AddCircle'
 import {findIndex} from 'lodash'
 import {slugify} from 'shared/Global'
 

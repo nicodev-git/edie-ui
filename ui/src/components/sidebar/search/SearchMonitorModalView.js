@@ -1,6 +1,6 @@
 import React from 'react'
 import {Checkbox} from 'material-ui'
-import SetDefIcon from 'material-ui/svg-icons/content/sort'
+import SetDefIcon from 'material-ui-icons/Sort'
 import {IconButton} from 'material-ui'
 
 import SortableTree from 'react-sortable-tree'

@@ -1,10 +1,10 @@
 import React from 'react'
 import {IconButton, Chip} from 'material-ui'
-import DeleteIcon from 'material-ui/svg-icons/action/delete'
-import EditIcon from 'material-ui/svg-icons/editor/mode-edit'
-import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
-import SetDefIcon from 'material-ui/svg-icons/content/sort'
-import NoteAddIcon from 'material-ui/svg-icons/action/note-add'
+import DeleteIcon from 'material-ui-icons/Delete'
+import EditIcon from 'material-ui-icons/ModeEdit'
+import AddCircleIcon from 'material-ui-icons/AddCircle'
+import SetDefIcon from 'material-ui-icons/Sort'
+import NoteAddIcon from 'material-ui-icons/NoteAdd'
 
 import {Modal, CardPanel} from 'components/modal/parts'
 

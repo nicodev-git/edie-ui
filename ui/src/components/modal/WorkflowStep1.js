@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Field } from 'redux-form'
 import IconButton from 'material-ui/IconButton'
-import HelpIcon from 'material-ui/svg-icons/action/help'
+import HelpIcon from 'material-ui-icons/Help'
 import {Chip} from 'material-ui'
 
 import { FormInput, FormSelect, FormCheckbox, CardPanel } from 'components/modal/parts'

@@ -1,8 +1,8 @@
 import React from 'react'
 import {IconButton, Button} from 'material-ui'
-import DeleteIcon from 'material-ui/svg-icons/action/delete'
-import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
-import EditIcon from 'material-ui/svg-icons/content/create'
+import DeleteIcon from 'material-ui-icons/Delete'
+import AddCircleIcon from 'material-ui-icons/AddCircle'
+import EditIcon from 'material-ui-icons/Create'
 
 import Modal from 'components/modal/parts/Modal'
 import CardPanel from 'components/modal/parts/CardPanel'

@@ -1,13 +1,12 @@
 import React, { Component } from 'react'
 import moment from 'moment'
-import CheckIcon from 'material-ui/svg-icons/toggle/check-box'
-import CloseIcon from 'material-ui/svg-icons/navigation/close'
-import HelpIcon from 'material-ui/svg-icons/action/help'
+import CheckIcon from 'material-ui-icons/CheckBox'
+import CloseIcon from 'material-ui-icons/Close'
+import HelpIcon from 'material-ui-icons/Help'
 
 import InfiniteTable from 'components/common/InfiniteTable'
 import ShowMoreLine from 'components/common/ShowMoreLine'
-import { CloseButton, Modal } from 'components/modal/parts'
-import CardPanel from "../../../../modal/parts/CardPanel";
+import { CloseButton, Modal, CardPanel } from 'components/modal/parts'
 
 export default class MonitorHistoryModal extends Component {
   constructor (props) {

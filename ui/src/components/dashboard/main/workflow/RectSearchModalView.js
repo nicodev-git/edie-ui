@@ -1,7 +1,7 @@
 import React from 'react'
 import InfiniteTable from 'components/common/InfiniteTable'
 import {IconButton} from 'material-ui'
-import PageViewIcon from 'material-ui/svg-icons/action/pageview'
+import PageViewIcon from 'material-ui-icons/Pageview'
 
 import {Modal, CardPanel} from 'components/modal/parts'
 import {renderEntity2, expandEntity, getHighlighted} from 'components/common/CellRenderers'

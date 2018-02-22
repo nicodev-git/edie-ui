@@ -2,7 +2,7 @@ import React from 'react'
 import {TextField, Select, MenuItem, Button, Checkbox} from 'material-ui'
 import {findIndex} from 'lodash'
 // import IconButton from 'material-ui/IconButton'
-// import CloseIcon from 'material-ui/svg-icons/navigation/close'
+// import CloseIcon from 'material-ui-icons/Close'
 
 import {gaugeDurationTypes, gaugeResources, gaugeTableViewModes} from 'shared/Global'
 

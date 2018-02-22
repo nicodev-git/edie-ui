@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import {Drawer, IconButton} from 'material-ui'
 import Badge from 'material-ui/Badge'
 import Divider from 'material-ui/Divider'
-import MenuIcon from 'material-ui/svg-icons/navigation/menu'
+import MenuIcon from 'material-ui-icons/Menu'
 
 import {badgeStyle, badgeRootStyle, iconStyle, iconButtonStyle, sidebarWidth, sidebarStyle} from 'style/common/materialStyles'
 

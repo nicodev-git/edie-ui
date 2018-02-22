@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { Field } from 'redux-form'
 import { FormInput } from 'components/modal/parts'
-import ActionList from 'material-ui/svg-icons/action/list'
-import ActionTrendingUp from 'material-ui/svg-icons/action/trending-up'
+import ActionList from 'material-ui-icons/List'
+import ActionTrendingUp from 'material-ui-icons/TrendingUp'
 import {Button} from 'material-ui'
 import { selectedItemStyle } from 'style/common/materialStyles'
 

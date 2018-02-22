@@ -1,7 +1,7 @@
 import React from 'react'
-import CloseIcon from 'material-ui/svg-icons/navigation/close'
-import EditIcon from 'material-ui/svg-icons/image/edit'
-import ViewIcon from 'material-ui/svg-icons/action/pageview'
+import CloseIcon from 'material-ui-icons/Close'
+import EditIcon from 'material-ui-icons/Edit'
+import ViewIcon from 'material-ui-icons/Pageview'
 
 const editButtonStyle = {
   position: 'absolute',

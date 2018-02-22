@@ -1,7 +1,7 @@
 import React from 'react'
 import {Select, MenuItem, IconButton} from 'material-ui'
 import {findIndex, assign, concat} from 'lodash'
-import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
+import AddCircleIcon from 'material-ui-icons/AddCircle'
 
 import MonitorWizardContainer from 'containers/shared/wizard/MonitorWizardContainer'
 import MonitorPicker from 'components/dashboard/map/device/monitors/MonitorPicker'

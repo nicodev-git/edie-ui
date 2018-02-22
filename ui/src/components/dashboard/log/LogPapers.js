@@ -5,7 +5,7 @@ import { assign, isEqual, keys, chunk, reverse, merge, isArray, findIndex } from
 import $ from 'jquery'
 import moment from 'moment'
 import ReactPaginate from 'react-paginate'
-import RenewIcon from 'material-ui/svg-icons/action/visibility'
+import RenewIcon from 'material-ui-icons/Visibility'
 
 import { encodeUrlParams, dateFormat } from 'shared/Global'
 import { ROOT_URL } from 'actions/config'

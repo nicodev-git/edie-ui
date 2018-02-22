@@ -1,7 +1,7 @@
 import React from 'react'
 import {concat, assign, findIndex} from 'lodash'
 import {IconButton} from 'material-ui'
-import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
+import AddCircleIcon from 'material-ui-icons/AddCircle'
 import ReactTooltip from 'react-tooltip'
 import {Responsive, WidthProvider} from 'react-grid-layout'
 import 'react-grid-layout/css/styles.css'

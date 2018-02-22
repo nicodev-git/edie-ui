@@ -1,9 +1,9 @@
 import React from 'react'
 import {findIndex} from 'lodash'
 import {Chip} from 'material-ui'
-import DeleteIcon from 'material-ui/svg-icons/action/delete'
-import EditIcon from 'material-ui/svg-icons/content/create'
-import PublicIcon from 'material-ui/svg-icons/social/public'
+import DeleteIcon from 'material-ui-icons/Delete'
+import EditIcon from 'material-ui-icons/Create'
+import PublicIcon from 'material-ui-icons/Public'
 
 import FlipView from './FlipView'
 import GEditView from './GEditView'

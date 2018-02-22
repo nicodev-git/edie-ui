@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { findIndex, assign } from 'lodash'
-import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
+import AddCircleIcon from 'material-ui-icons/AddCircle'
 import {IconButton, RadioButtonGroup, RadioButton} from 'material-ui'
 import {Field} from 'redux-form'
 

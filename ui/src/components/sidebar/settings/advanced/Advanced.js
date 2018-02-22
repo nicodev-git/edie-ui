@@ -1,6 +1,6 @@
 import React from 'react'
 import {Button, Menu, MenuItem, Popover} from 'material-ui'
-import SettingIcon from 'material-ui/svg-icons/action/settings'
+import SettingIcon from 'material-ui-icons/Settings'
 
 import MainSettings from './MainSettings'
 import Websocket from './websocket/Websocket'

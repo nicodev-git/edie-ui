@@ -1,7 +1,7 @@
 import React from 'react'
 import moment from 'moment'
 // import {IconButton} from 'material-ui'
-// import RefreshIcon from 'material-ui/svg-icons/navigation/refresh'
+// import RefreshIcon from 'material-ui-icons/Refresh'
 
 import FlipView from './FlipView'
 import GEditView from './GEditView'

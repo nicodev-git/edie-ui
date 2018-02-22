@@ -1,6 +1,6 @@
 import React from 'react'
 import {IconButton} from 'material-ui'
-import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
+import AddCircleIcon from 'material-ui-icons/AddCircle'
 
 import AppletCard from 'components/common/AppletCard'
 import { extImageBaseUrl, appletColors as colors } from 'shared/Global'

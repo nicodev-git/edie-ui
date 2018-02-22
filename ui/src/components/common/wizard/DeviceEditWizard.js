@@ -2,7 +2,7 @@ import React from 'react'
 import { assign, debounce } from 'lodash'
 import { reduxForm, Form } from 'redux-form'
 import {Button, IconButton, CircularProgress} from 'material-ui'
-import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
+import AddCircleIcon from 'material-ui-icons/AddCircle'
 
 import { wizardEditConfig } from './WizardConfig'
 import { util } from './WizardUtil'

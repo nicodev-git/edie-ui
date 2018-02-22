@@ -2,7 +2,7 @@ import React from 'react'
 import {RadioButton, CircularProgress, IconButton} from 'material-ui'
 import {Field} from 'redux-form'
 import {RadioButtonGroup} from 'redux-form-material-ui'
-import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
+import AddCircleIcon from 'material-ui-icons/AddCircle'
 
 import CredentialModal from 'components/credentials/CredentialModal'
 

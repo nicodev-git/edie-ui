@@ -1,8 +1,8 @@
 import React from 'react'
 import { IconButton, Chip } from 'material-ui'
-import AddCircleIcon from 'material-ui/svg-icons/content/add-circle'
-import CloseIcon from 'material-ui/svg-icons/navigation/close'
-import ListIcon from 'material-ui/svg-icons/action/list'
+import AddCircleIcon from 'material-ui-icons/AddCircle'
+import CloseIcon from 'material-ui-icons/Close'
+import ListIcon from 'material-ui-icons/List'
 import { Field } from 'redux-form'
 
 import { CardPanel, FormToggle } from 'components/modal/parts'

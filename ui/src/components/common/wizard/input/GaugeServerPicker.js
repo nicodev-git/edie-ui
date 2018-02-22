@@ -1,7 +1,7 @@
 import React from 'react'
 import {IconButton} from 'material-ui'
-import ForwardIcon from 'material-ui/svg-icons/navigation/arrow-forward'
-import BackwardIcon from 'material-ui/svg-icons/navigation/arrow-back'
+import ForwardIcon from 'material-ui-icons/ArrowForward'
+import BackwardIcon from 'material-ui-icons/ArrowBack'
 
 export default class GaugeServerPicker extends React.Component {
   render () {

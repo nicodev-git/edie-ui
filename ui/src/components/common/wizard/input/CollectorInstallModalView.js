@@ -1,7 +1,7 @@
 import React from 'react'
 import {Button, IconButton} from 'material-ui'
 import { Field, Form } from 'redux-form'
-import RefreshIcon from 'material-ui/svg-icons/navigation/refresh'
+import RefreshIcon from 'material-ui-icons/Refresh'
 
 import { FormInput, FormSelect, SubmitBlock, Modal, CardPanel } from 'components/modal/parts'
 import {ROOT_URL} from 'actions/config'
