@@ -13,7 +13,8 @@
     "lodash": "^4.17.4",
     "lucene": "^1.1.2",
     "lucene-query-parser": "^1.0.1",
-    "material-ui": "^0.18.1",
+    "material-ui": "^1.0.0-beta.34",
+    "material-ui-icons": "^1.0.0-beta.17",
     "moment": "^2.18.1",
     "net": "^1.0.2",
     "query-string": "^5.0.0",
@@ -52,7 +53,7 @@
     "recharts": "^1.0.0-alpha.2",
     "redux": "^3.6.0",
     "redux-form": "^6.8.0",
-    "redux-form-material-ui": "^4.2.0",
+    "redux-form-material-ui": "^5.0.0-beta.2",
     "redux-infinite-scroll": "^1.0.9",
     "redux-thunk": "^2.2.0",
     "stompjs": "^2.3.3"
