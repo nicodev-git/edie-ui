@@ -46,7 +46,7 @@ export default class SearchFormView extends React.Component {
   }
   renderDateLabel (label) {
     return (
-      <Button variant="flat" label={label}/>
+      <Button variant="flat">{label}</Button>
     )
   }
   severityRenderer (severities, values) {
@@ -105,10 +105,11 @@ export default class SearchFormView extends React.Component {
           <div style={{height: 48}}>
             <Field name="freeText" component={FormInput} label="Search" onKeyDown={onKeyDownFreeText} style={{width: 300}}
                    className={`valign-top ${advanced ? 'hidden' : ''}`}/>
-            <Button variant="flat" label="Search By" onTouchTap={this.onClickSearchBy.bind(this)} className="valign-top margin-xs-top"/>
+            <Button variant="flat" onTouchTap={this.onClickSearchBy.bind(this)}
+                    className="valign-top margin-xs-top">Search By</Button>
             <Select
               multiple
-              hintText="Collection"
+              label="Collection"
               value={selectedCollections}
               onChange={onChangeCollection}
               style={{width: '180px'}}
