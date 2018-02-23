@@ -21,9 +21,13 @@ export default class ServerCombo extends React.Component {
     const servers = this.getServers()
     return (
       <div style={{position: 'absolute', marginTop: -10}}>
-        <Select value={device.id} onChange={this.onChangeValue.bind(this)}>
+        <Select
+          value={device.id}
+          onChange={this.onChangeValue.bind(this)}
+          style={{minWidth: 180}}
+        >
           {servers.map(p =>
-            <MenuItem key={p.id} primaryText={p.name} value={p.id}/>
+            <MenuItem key={p.id} value={p.id}>{p.name}</MenuItem>
           )}
         </Select>
       </div>

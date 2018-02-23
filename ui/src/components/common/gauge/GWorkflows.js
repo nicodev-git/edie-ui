@@ -41,8 +41,10 @@ export default class GWorkflows extends React.Component {
           <div style={chipStyles.wrapper}>
             {p.data ? <Chip style={chipStyles.smallChip} >Global</Chip> : ''}
 
-            <Chip style={chipStyles.smallChip}
-                  backgroundColor={getSeverityColor(severity)}>
+            <Chip style={{
+              ...chipStyles.smallChip,
+              backgroundColor: getSeverityColor(severity)
+            }}>
               {severity}
             </Chip>
 
