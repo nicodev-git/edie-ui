@@ -76,7 +76,7 @@ class SidebarView extends Component {
           <IconButton
             style={iconButtonStyle}
 
-            onTouchTap={onToggle}>
+            onClick={onToggle}>
             <MenuIcon nativeColor="#ffffff"/>
           </IconButton>
         </div>

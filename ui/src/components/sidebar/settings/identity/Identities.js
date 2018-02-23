@@ -114,9 +114,9 @@ export default class Identities extends React.Component {
           <div className="text-center margin-md-top">
             {canEdit ? (
               <div className="pull-right">
-                <Button variant="raised" label="Add" onTouchTap={this.onAddIdentity.bind(this)}/>&nbsp;
-                <Button variant="raised" label="Edit" onTouchTap={this.onEditIdentity.bind(this)}/>&nbsp;
-                <Button variant="raised" label="Remove" onTouchTap={this.onRemoveIdentity.bind(this)}/>&nbsp;
+                <Button variant="raised" label="Add" onClick={this.onAddIdentity.bind(this)}/>&nbsp;
+                <Button variant="raised" label="Edit" onClick={this.onEditIdentity.bind(this)}/>&nbsp;
+                <Button variant="raised" label="Remove" onClick={this.onRemoveIdentity.bind(this)}/>&nbsp;
               </div>
             ) : null}
 

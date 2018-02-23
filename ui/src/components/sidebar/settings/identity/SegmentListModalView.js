@@ -18,19 +18,19 @@ export default class SegmentListModalView extends Component {
               <IconButton
                 style={buttonStyle}
                 
-                onTouchTap={onAdd}>
+                onClick={onAdd}>
                   <AddCircleIcon nativeColor="#545454"/>
               </IconButton>
               <IconButton
                 style={buttonStyle}
                 
-                onTouchTap={onEdit}>
+                onClick={onEdit}>
                   <CreateIcon nativeColor="#545454"/>
               </IconButton>
               <IconButton
                 style={buttonStyle}
                 
-                onTouchTap={onDelete}>
+                onClick={onDelete}>
                   <DeleteIcon nativeColor="#545454"/>
               </IconButton>
             </div>

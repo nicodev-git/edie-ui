@@ -155,10 +155,10 @@ export default class Credentials extends React.Component {
             <div className="pull-right">
               {canEdit ? (
                 <div className="inline-block">
-                  <Button variant="raised" label="Add" onTouchTap={this.onAddCred.bind(this)}/>&nbsp;
-                  <Button variant="raised" label="Edit" onTouchTap={this.onEditCred.bind(this)}/>&nbsp;
-                  <Button variant="raised" label="Remove" onTouchTap={this.onRemoveCred.bind(this)}/>&nbsp;
-                  <Button variant="raised" label="Set Default" onTouchTap={this.onSetDefault.bind(this)}/>&nbsp;
+                  <Button variant="raised" label="Add" onClick={this.onAddCred.bind(this)}/>&nbsp;
+                  <Button variant="raised" label="Edit" onClick={this.onEditCred.bind(this)}/>&nbsp;
+                  <Button variant="raised" label="Remove" onClick={this.onRemoveCred.bind(this)}/>&nbsp;
+                  <Button variant="raised" label="Set Default" onClick={this.onSetDefault.bind(this)}/>&nbsp;
                 </div>
               ) : null}
               <UserTabs history={this.props.history}/>&nbsp;

@@ -14,10 +14,10 @@ const ProfileMenu = ({open, user, onClickProfile, onClickMessages, onSignOut, sh
       <AccoutCircleIcon nativeColor="#777777"/>
     </IconButton>
     <Menu open={open}>
-      <MenuItem primaryText="Profile" onTouchTap={onClickProfile}/>
-      <MenuItem primaryText="Messages" onTouchTap={onClickMessages}/>
+      <MenuItem primaryText="Profile" onClick={onClickProfile}/>
+      <MenuItem primaryText="Messages" onClick={onClickMessages}/>
       <Divider />
-      <MenuItem primaryText="Log out" onTouchTap={onSignOut}/>
+      <MenuItem primaryText="Log out" onClick={onSignOut}/>
     </Menu>
     <div className="sidebar-title">Profile</div>
   </div>

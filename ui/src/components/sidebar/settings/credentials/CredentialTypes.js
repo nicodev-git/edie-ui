@@ -74,8 +74,8 @@ export default class CredentialTypes extends React.Component {
         <TabPageHeader title="Credential Types">
           <div className="text-center margin-md-top">
             <div className="pull-right">
-              {canEdit && <Button variant="raised" label="Add" onTouchTap={this.onAddCred.bind(this)}/>}&nbsp;
-              {canEdit && <Button variant="raised" label="Remove" onTouchTap={this.onRemoveCred.bind(this)}/>}&nbsp;
+              {canEdit && <Button variant="raised" label="Add" onClick={this.onAddCred.bind(this)}/>}&nbsp;
+              {canEdit && <Button variant="raised" label="Remove" onClick={this.onRemoveCred.bind(this)}/>}&nbsp;
               <UserTabs history={this.props.history}/>&nbsp;
             </div>
           </div>

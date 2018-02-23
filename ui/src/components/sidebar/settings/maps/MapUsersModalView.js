@@ -19,7 +19,7 @@ export default class MapUsersModalView extends Component {
                   <IconButton
                     style={buttonStyle}
 
-                    onTouchTap={onAdd}>
+                    onClick={onAdd}>
                       <AddCircleIcon nativeColor="#545454"/>
                   </IconButton>
                 </div>
@@ -27,7 +27,7 @@ export default class MapUsersModalView extends Component {
                   <IconButton
                     style={buttonStyle}
 
-                    onTouchTap={onDelete}>
+                    onClick={onDelete}>
                       <DeleteIcon nativeColor="#545454"/>
                   </IconButton>
                 </div>

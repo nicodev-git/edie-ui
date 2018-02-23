@@ -100,7 +100,7 @@ export default class AddWf extends React.Component {
             )}
           </Select>
 
-          <Button variant="raised" label="Add Selected" onTouchTap={this.onClickAddTemplates.bind(this)}
+          <Button variant="raised" label="Add Selected" onClick={this.onClickAddTemplates.bind(this)}
                         className="valign-top margin-xs-top margin-md-left"/>
         </div>
         <div className="flex-1" style={{overflow: 'auto'}}>

@@ -25,7 +25,7 @@ export default class DeviceTplModalView extends Component {
         </CardPanel>
         <CardPanel title="Tags">
           <div style={chipStyles.wrapper}>
-            <Chip style={chipStyles.chip} onTouchTap={onClickAddTag} className={onSubmit ? '' : 'hidden'}>
+            <Chip style={chipStyles.chip} onClick={onClickAddTag} className={onSubmit ? '' : 'hidden'}>
               <b>+</b>
             </Chip>
             {tags.map((t, i) =>

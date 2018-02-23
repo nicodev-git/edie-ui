@@ -18,7 +18,7 @@ export default class TagPickerModalView extends React.Component {
       <Chip
         key={w.id} style={chipStyles.chip}
         backgroundColor={selected ? blue300 : null}
-        onTouchTap={() => selected ? onDeselectTag(w) : onSelectTag(w)}>
+        onClick={() => selected ? onDeselectTag(w) : onSelectTag(w)}>
         {w.name}
       </Chip>
     )
@@ -33,7 +33,7 @@ export default class TagPickerModalView extends React.Component {
         }
         {!hideAdd && <Chip
           style={chipStyles.chip}
-          onTouchTap={onClickAdd}>
+          onClick={onClickAdd}>
           <b>+</b>
         </Chip>}
       </div>

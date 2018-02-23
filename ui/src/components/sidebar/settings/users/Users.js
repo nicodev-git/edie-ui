@@ -223,14 +223,14 @@ export default class Users extends React.Component {
             <div style={{position: 'absolute', right: '25px'}}>
               {canEdit ? <Button variant="raised" label="User"/> : null}
               <Menu open={false}>
-                <MenuItem primaryText="Add" onTouchTap={this.onAddUser.bind(this)}/>
-                <MenuItem primaryText="Edit" onTouchTap={this.onEditUser.bind(this)}/>
-                <MenuItem primaryText="Remove" onTouchTap={this.onRemoveUser.bind(this)}/>
-                <MenuItem primaryText="Change Password" onTouchTap={this.onChangePassword.bind(this)}/>
-                <MenuItem primaryText="Regenerate Pin" onTouchTap={this.onClickPin.bind(this)}/>
+                <MenuItem primaryText="Add" onClick={this.onAddUser.bind(this)}/>
+                <MenuItem primaryText="Edit" onClick={this.onEditUser.bind(this)}/>
+                <MenuItem primaryText="Remove" onClick={this.onRemoveUser.bind(this)}/>
+                <MenuItem primaryText="Change Password" onClick={this.onChangePassword.bind(this)}/>
+                <MenuItem primaryText="Regenerate Pin" onClick={this.onClickPin.bind(this)}/>
               </Menu>
               &nbsp;
-              <Button variant="raised" label="Profile" onTouchTap={this.onClickProfile.bind(this)}/>&nbsp;
+              <Button variant="raised" label="Profile" onClick={this.onClickProfile.bind(this)}/>&nbsp;
               <UserTabs history={this.props.history}/>&nbsp;
             </div>
           </div>

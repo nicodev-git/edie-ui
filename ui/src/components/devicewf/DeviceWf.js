@@ -39,15 +39,13 @@ export default class DeviceWf extends React.Component {
         tags = tags || []
         return (
           <div style={chipStyles.wrapper}>
-            <Chip style={chipStyles.smallChip}
-                  backgroundColor={getSeverityColor(severity)}>
-              {severity}
-            </Chip>
+            <Chip style={{
+              ...chipStyles.smallChip,
+              backgroundColor: getSeverityColor(severity)
+            }} label={severity}/>
 
             {tags.map(t =>
-              <Chip key={t} style={chipStyles.smallChip} >
-                {t}
-              </Chip>
+              <Chip key={t} style={chipStyles.smallChip} label={t}/>
             )}
 
             {p.rowData.isglobal ? (
@@ -65,8 +63,8 @@ export default class DeviceWf extends React.Component {
         if (!canEdit) return <div/>
         return (
           <div>
-            <EditIcon onTouchTap={this.onClickEditWf.bind(this, p.rowData)} className="link"/>
-            <DeleteIcon onTouchTap={this.onClickDeleteWf.bind(this, p.rowData)} className="link margin-sm-left"/>
+            <EditIcon onClick={this.onClickEditWf.bind(this, p.rowData)} className="link"/>
+            <DeleteIcon onClick={this.onClickDeleteWf.bind(this, p.rowData)} className="link margin-sm-left"/>
           </div>
         )
       }
@@ -205,7 +203,7 @@ export default class DeviceWf extends React.Component {
                 Workflows
                 {canEdit ? (
                   <div style={{position: 'absolute', right: 4, top: 8}}>
-                    <AddCircleIcon className="link" onTouchTap={this.onClickAddWf.bind(this)}/>
+                    <AddCircleIcon className="link" onClick={this.onClickAddWf.bind(this)}/>
                   </div>
                 ) : null}
               </div>

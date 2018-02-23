@@ -82,7 +82,7 @@ export default class SearchMonitorModalView extends React.Component {
       <Modal title="Devices, monitor groups and monitors" onRequestClose={onClickClose}>
         <CardPanel
           title="Devices, monitor groups and monitors"
-          tools={<IconButton onTouchTap={onClickMonitorGroups} tooltip="Monitor Groups"><SetDefIcon size={32}/></IconButton>}>
+          tools={<IconButton onClick={onClickMonitorGroups} tooltip="Monitor Groups"><SetDefIcon size={32}/></IconButton>}>
           {this.renderTree()}
         </CardPanel>
         <TwoButtonsBlockCustom name1="Show Any" name2="OK" action1={onClickShowAny} action2={onClickOK}/>

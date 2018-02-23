@@ -11,7 +11,7 @@ export default class MonitorGroupsModalView extends React.Component {
     const {onClickAdd} = this.props
     return (
       <div>
-        <IconButton onTouchTap={onClickAdd}>
+        <IconButton onClick={onClickAdd}>
           <AddCircleIcon/>
         </IconButton>
       </div>
@@ -24,10 +24,10 @@ export default class MonitorGroupsModalView extends React.Component {
       <tr key={monitorGroup.id}>
         <td>{monitorGroup.name || 'No Name'}</td>
         <td className="text-right">
-          <IconButton onTouchTap={() => onClickEdit(monitorGroup)}>
+          <IconButton onClick={() => onClickEdit(monitorGroup)}>
             <CreateIcon/>
           </IconButton>
-          <IconButton onTouchTap={() => onClickRemove(monitorGroup)}>
+          <IconButton onClick={() => onClickRemove(monitorGroup)}>
             <DeleteIcon/>
           </IconButton>
         </td>

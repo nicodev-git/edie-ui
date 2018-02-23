@@ -20,13 +20,12 @@ export default class WorkflowStep1 extends Component {
             <Chip
               key={p.key}
               style={chipStyles.chip}
-              onTouchTap={() => onClickEditParam(p)}
-              onRequestDelete={() => onClickRemoveParam(p)}
-            >
-              <b>{p.key}</b>: {p.value}
-            </Chip>
+              onClick={() => onClickEditParam(p)}
+              onDelete={() => onClickRemoveParam(p)}
+              label={<span><b>{p.key}</b>: {p.value}</span>}
+            />
           )}
-          <Chip style={chipStyles.chip} onTouchTap={onClickAddParam}><b>+</b></Chip>
+          <Chip style={chipStyles.chip} onClick={onClickAddParam} label={<b>+</b>}/>
         </div>
       </CardPanel>
     )
@@ -49,9 +48,7 @@ export default class WorkflowStep1 extends Component {
 
         <CardPanel title="Description">
           <div className="margin-lg-bottom">
-            <Chip style={chipStyles.smallChip}  onTouchTap={onClickRawData}>
-              SHOW_RAW_DATA
-            </Chip>
+            <Chip style={chipStyles.smallChip}  onClick={onClickRawData} label="SHOW_RAW_DATA"/>
           </div>
           <div className="relative">
             <Field name="display_incident_desc" component={FormInput} label="Display Incident Description" style={{width: '100%'}}/>
@@ -73,9 +70,9 @@ export default class WorkflowStep1 extends Component {
 
         <CardPanel title="Tags">
           <div style={chipStyles.wrapper}>
-            <Chip style={chipStyles.chip} onTouchTap={onClickAddTag}><b>+</b></Chip>
+            <Chip style={chipStyles.chip} onClick={onClickAddTag} label={<b>+</b>}/>
             {tags.map((t, i) =>
-              <Chip key={i} style={chipStyles.chip} onRequestDelete={() => onClickDeleteTag(i)}>{t}</Chip>
+              <Chip key={i} style={chipStyles.chip} onDelete={() => onClickDeleteTag(i)} label={t}/>
             )}
           </div>
           {tagModal}

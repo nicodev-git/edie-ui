@@ -16,14 +16,14 @@ export default class WorkflowStep2 extends Component {
       <CardPanel title="Rules">
         <div>
           <div className="pull-left">
-            <Chip style={chipStyles.chip} onTouchTap={() => onClickKeyChip('KEY_RAW_DATA')}>
+            <Chip style={chipStyles.chip} onClick={() => onClickKeyChip('KEY_RAW_DATA')}>
               KEY_RAW_DATA
             </Chip>
           </div>
           <div className="pull-right" style={{marginTop: -5}}>
           </div>
           <div className="pull-right">
-            <Chip style={chipStyles.chip} onTouchTap={() => onClickValueChip('.*')}>
+            <Chip style={chipStyles.chip} onClick={() => onClickValueChip('.*')}>
               .*
             </Chip>
           </div>
@@ -67,7 +67,7 @@ export default class WorkflowStep2 extends Component {
                   />
                 </td>
                 <td className="text-right">
-                  <IconButton onTouchTap={() => setTimeout(onRemoveRule, 1)} className={index !== (rules.length - 1) ? '' : 'hidden'}>
+                  <IconButton onClick={() => setTimeout(onRemoveRule, 1)} className={index !== (rules.length - 1) ? '' : 'hidden'}>
                     <DeleteIcon nativeColor="#545454" className="link"/>
                   </IconButton>
                 </td>

@@ -103,10 +103,10 @@ class ParserTypes extends React.Component {
         <TabPageHeader title="ParserTypes">
           <div className="text-center margin-md-top">
             <div style={{position: 'absolute', right: '25px'}}>
-              {canEdit && <Button variant="raised" label="Add" onTouchTap={this.onClickAdd.bind(this)}/>}&nbsp;
-              {canEdit && <Button variant="raised" label="Edit" onTouchTap={this.onClickEdit.bind(this)}/>}&nbsp;
-              {canEdit && <Button variant="raised" label="Remove" onTouchTap={this.onClickRemove.bind(this)}/>}&nbsp;
-              {canEdit && <Button variant="raised" label="Simulation" onTouchTap={this.onClickSimulation.bind(this)}/>}&nbsp;
+              {canEdit && <Button variant="raised" label="Add" onClick={this.onClickAdd.bind(this)}/>}&nbsp;
+              {canEdit && <Button variant="raised" label="Edit" onClick={this.onClickEdit.bind(this)}/>}&nbsp;
+              {canEdit && <Button variant="raised" label="Remove" onClick={this.onClickRemove.bind(this)}/>}&nbsp;
+              {canEdit && <Button variant="raised" label="Simulation" onClick={this.onClickSimulation.bind(this)}/>}&nbsp;
               <WfTabs history={this.props.history}/>
             </div>
           </div>

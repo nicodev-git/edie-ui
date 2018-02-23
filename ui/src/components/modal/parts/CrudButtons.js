@@ -11,7 +11,7 @@ const CrudButtons = ({onAdd, onEdit, onDelete}) => (
       <IconButton
         style={buttonStyle}
 
-        onTouchTap={onAdd}>
+        onClick={onAdd}>
           <AddCircleIcon nativeColor="#545454"/>
       </IconButton>
     </div>}
@@ -19,7 +19,7 @@ const CrudButtons = ({onAdd, onEdit, onDelete}) => (
       <IconButton
         style={buttonStyle}
 
-        onTouchTap={onEdit}>
+        onClick={onEdit}>
           <CreateIcon nativeColor="#545454"/>
       </IconButton>
     </div>
@@ -27,7 +27,7 @@ const CrudButtons = ({onAdd, onEdit, onDelete}) => (
       <IconButton
         style={buttonStyle}
 
-        onTouchTap={onDelete}>
+        onClick={onDelete}>
           <DeleteIcon nativeColor="#545454"/>
       </IconButton>
     </div>

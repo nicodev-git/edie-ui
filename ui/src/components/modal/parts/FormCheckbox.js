@@ -1,17 +1,21 @@
 import React from 'react'
 import Checkbox from 'material-ui/Checkbox'
+import { FormControlLabel } from 'material-ui/Form'
 
-const FormCheckbox = ({input, label, labelPosition, meta: { touched, error }, ...custom}) => (
-  <Checkbox
-    {...input}
-    {...custom}
+const FormCheckbox = ({input, label, meta: {touched, error}, ...custom}) => (
+  <FormControlLabel
+    control={
+      <Checkbox
+        {...input}
+        {...custom}
+        checked={!!input.value}
+        onChange={(event, isInputChecked) => input.onChange(isInputChecked)}
+        value=""
+      />
+    }
     label={label}
-    labelPosition={labelPosition || 'right'}
-    
-
-    checked={!!input.value}
-    onCheck={(e) => input.onChange(e)}
   />
+
 )
 
 export default FormCheckbox

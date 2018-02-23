@@ -56,7 +56,7 @@ export default class Rules extends React.Component {
       'customComponent': p => {
         const {userInfo} = this.props
         const canEdit = hasPermission(userInfo, 'EditSettings')
-        return p.rowData.origin === 'USER' && canEdit ? <IconButton onTouchTap={() => this.onClickShare(p.rowData)}><Share/></IconButton> : null
+        return p.rowData.origin === 'USER' && canEdit ? <IconButton onClick={() => this.onClickShare(p.rowData)}><Share/></IconButton> : null
       }
     }]
   }
@@ -139,10 +139,10 @@ export default class Rules extends React.Component {
         <TabPageHeader title="Settings">
           <div className="text-center margin-md-top">
             <div className="pull-right">
-              {canEdit && <Button variant="raised" label="Add" onTouchTap={this.onAddWorkflow.bind(this)}/>}&nbsp;
-              {canEdit && <Button variant="raised" label="Edit" onTouchTap={this.onEditWorkflow.bind(this)}/>}&nbsp;
-              {canEdit && <Button variant="raised" label="Remove" onTouchTap={this.onRemoveWorkflow.bind(this)}/>}&nbsp;
-              {canEdit && <Button variant="raised" label="Clone" onTouchTap={this.onCloneWorkflow.bind(this)}/>}&nbsp;
+              {canEdit && <Button variant="raised" label="Add" onClick={this.onAddWorkflow.bind(this)}/>}&nbsp;
+              {canEdit && <Button variant="raised" label="Edit" onClick={this.onEditWorkflow.bind(this)}/>}&nbsp;
+              {canEdit && <Button variant="raised" label="Remove" onClick={this.onRemoveWorkflow.bind(this)}/>}&nbsp;
+              {canEdit && <Button variant="raised" label="Clone" onClick={this.onCloneWorkflow.bind(this)}/>}&nbsp;
               <WfTabs history={this.props.history}/>
             </div>
           </div>

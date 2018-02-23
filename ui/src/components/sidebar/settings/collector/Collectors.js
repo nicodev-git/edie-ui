@@ -99,7 +99,7 @@ export default class Collectors extends React.Component {
         <TabPageHeader title="Settings">
           <div className="text-center margin-md-top">
             <div className="pull-right">
-              {canEdit && <Button variant="raised" label="Remove" onTouchTap={this.onClickRemove.bind(this)}/>}
+              {canEdit && <Button variant="raised" label="Remove" onClick={this.onClickRemove.bind(this)}/>}
               &nbsp;
               <CollectorTabs history={this.props.history}/>
             </div>

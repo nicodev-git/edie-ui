@@ -44,7 +44,7 @@ export default class SearchGraphModalView extends React.Component {
         onRequestClose={onHide}
       >
         <CloseIconButton onClick={onHide}>
-          <IconButton onTouchTap={onMaximize}>
+          <IconButton onClick={onMaximize}>
             <ZoomOutIcon size={32} color="#545454"/>
           </IconButton>
         </CloseIconButton>

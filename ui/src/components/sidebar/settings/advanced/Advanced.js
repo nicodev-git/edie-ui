@@ -78,7 +78,7 @@ export default class Advanced extends React.Component {
         <TabPageHeader title="Settings">
           <div className="text-center margin-md-top">
             <div style={{position: 'absolute', right: '25px'}}>
-              {pageIndex === 2 && <Button variant="raised" label="Routing" onTouchTap={this.onClickRouting.bind(this)}/>}&nbsp;
+              {pageIndex === 2 && <Button variant="raised" label="Routing" onClick={this.onClickRouting.bind(this)}/>}&nbsp;
               <Popover
                 open={this.state.routeOpen}
                 anchorEl={this.state.anchorEl}
@@ -87,11 +87,11 @@ export default class Advanced extends React.Component {
                 onRequestClose={this.handleRequestClose.bind(this)}
               >
                 <Menu>
-                  <MenuItem primaryText="Add" onTouchTap={this.onClickAddRouting.bind(this)}/>
-                  <MenuItem primaryText="Edit" onTouchTap={this.onClickEditRouting.bind(this)}/>
+                  <MenuItem primaryText="Add" onClick={this.onClickAddRouting.bind(this)}/>
+                  <MenuItem primaryText="Edit" onClick={this.onClickEditRouting.bind(this)}/>
                 </Menu>
               </Popover>
-              <Button variant="raised" icon={<SettingIcon />} onTouchTap={this.handleTouchTap.bind(this)} className="hidden"/>
+              <Button variant="raised" icon={<SettingIcon />} onClick={this.handleTouchTap.bind(this)} className="hidden"/>
               <Popover
                 open={this.state.open}
                 anchorEl={this.state.anchorEl}
@@ -100,9 +100,9 @@ export default class Advanced extends React.Component {
                 onRequestClose={this.handleRequestClose.bind(this)}
               >
                 <Menu>
-                  <MenuItem primaryText="Main" onTouchTap={this.onClickTab.bind(this, 0)}/>
-                  <MenuItem primaryText="Websocket" onTouchTap={this.onClickTab.bind(this, 1)}/>
-                  <MenuItem primaryText="Routing" onTouchTap={this.onClickTab.bind(this, 2)}/>
+                  <MenuItem primaryText="Main" onClick={this.onClickTab.bind(this, 0)}/>
+                  <MenuItem primaryText="Websocket" onClick={this.onClickTab.bind(this, 1)}/>
+                  <MenuItem primaryText="Routing" onClick={this.onClickTab.bind(this, 2)}/>
                 </Menu>
               </Popover>
             </div>

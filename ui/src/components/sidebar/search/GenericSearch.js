@@ -127,7 +127,7 @@ class GenericSearch extends React.Component {
               </div>
             ) : null}
             <div className="position-abr link text-primary">
-              <IconButton onTouchTap={this.onClickEntityView.bind(this, rowData)}><PageViewIcon /></IconButton>
+              <IconButton onClick={this.onClickEntityView.bind(this, rowData)}><PageViewIcon /></IconButton>
             </div>
           </div>
         )
@@ -693,7 +693,7 @@ class GenericSearch extends React.Component {
             <h4>{selectedField.path}</h4>
           </div>
           <div className="pull-right padding-sm">
-            <Button variant="flat" icon={<NavigationClose />} style={{minWidth: '44px'}} onTouchTap={this.handleRequestClose.bind(this)}/>
+            <Button variant="flat" icon={<NavigationClose />} style={{minWidth: '44px'}} onClick={this.handleRequestClose.bind(this)}/>
           </div>
         </div>
 

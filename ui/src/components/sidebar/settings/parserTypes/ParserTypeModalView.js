@@ -20,7 +20,7 @@ export default class ParserTypeModalView extends Component {
             <div className="form-column">
               <Field name="name" component={FormInput} label="name"/>
               <div>
-                <Chip style={chipStyles.chip} onTouchTap={() => onClickValueChip('.*')}>
+                <Chip style={chipStyles.chip} onClick={() => onClickValueChip('.*')}>
                   .*
                 </Chip>
               </div>
@@ -31,7 +31,7 @@ export default class ParserTypeModalView extends Component {
 
           <CardPanel title="Tags">
             <div style={chipStyles.wrapper}>
-              <Chip style={chipStyles.chip} onTouchTap={onClickAddTag}><b>+</b></Chip>
+              <Chip style={chipStyles.chip} onClick={onClickAddTag}><b>+</b></Chip>
               {tags.map((t, i) =>
                 <Chip key={i} style={chipStyles.chip} onRequestDelete={() => onClickDeleteTag(i)}>{t}</Chip>
               )}
@@ -39,7 +39,7 @@ export default class ParserTypeModalView extends Component {
           </CardPanel>
 
           <CardPanel title="Patterns" tools={
-            <IconButton onTouchTap={onDelete}>
+            <IconButton onClick={onDelete}>
               <DeleteIcon nativeColor="#545454"/>
             </IconButton>
           }>

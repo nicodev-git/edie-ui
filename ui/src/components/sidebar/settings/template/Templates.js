@@ -87,12 +87,12 @@ export default class Templates extends Component {
                 <td className="text-right fa-lg">
                   {item.origin === 'SYSTEM' && canEdit && <IconButton
                     style={{padding: 0, width: 24, height: 24}}
-                    onTouchTap={this.onClickCloneDeviceTpl.bind(this, item)}>
+                    onClick={this.onClickCloneDeviceTpl.bind(this, item)}>
                     <CopyIcon nativeColor="#545454" hoverColor="#f44336"/>
                   </IconButton>}
                   {item.origin !== 'SYSTEM' && canEdit && <IconButton
                     style={{padding: 0, width: 24, height: 24}}
-                    onTouchTap={this.onClickDeleteDeviceTpl.bind(this, item)}>
+                    onClick={this.onClickDeleteDeviceTpl.bind(this, item)}>
                     <DeleteIcon nativeColor="#545454" hoverColor="#f44336"/>
                   </IconButton>}
                 </td>
@@ -128,17 +128,17 @@ export default class Templates extends Component {
                 <td className="text-right fa-lg">
                   {item.origin !== 'SYSTEM' && canEdit && <IconButton
                     style={{padding: 0, width: 24, height: 24}}
-                    onTouchTap={this.onClickShareMonitorTpl.bind(this, item)}>
+                    onClick={this.onClickShareMonitorTpl.bind(this, item)}>
                     <Share color="#545454" hoverColor="#f44336"/>
                   </IconButton>}
                   {item.origin !== 'SYSTEM' && canEdit && <IconButton
                     style={{padding: 0, width: 24, height: 24}}
-                    onTouchTap={this.onClickEditMonitorTpl.bind(this, item)}>
+                    onClick={this.onClickEditMonitorTpl.bind(this, item)}>
                     <EditIcon nativeColor="#545454" hoverColor="#f44336"/>
                   </IconButton>}
                   {item.origin !== 'SYSTEM' && canEdit && <IconButton
                     style={{padding: 0, width: 24, height: 24}}
-                    onTouchTap={this.onClickDeleteMonitorTpl.bind(this, item)}>
+                    onClick={this.onClickDeleteMonitorTpl.bind(this, item)}>
                     <DeleteIcon nativeColor="#545454" hoverColor="#f44336"/>
                   </IconButton>}
                 </td>
@@ -280,7 +280,7 @@ export default class Templates extends Component {
             </div>
 
             <div style={{position: 'absolute', right: '25px'}}>
-              {canEdit && <Button variant="raised" label="Add" onTouchTap={this.onClickAdd.bind(this)}/>}&nbsp;
+              {canEdit && <Button variant="raised" label="Add" onClick={this.onClickAdd.bind(this)}/>}&nbsp;
               <WfTabs history={this.props.history}/>
             </div>
           </div>

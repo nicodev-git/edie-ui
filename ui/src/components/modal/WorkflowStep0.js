@@ -20,13 +20,13 @@ export default class WorkflowStep0 extends Component {
             <Button variant="flat"
               icon={<ActionList color={workflowEditType === 'wizard' ? 'white' : null}/>}
               style={selectedItemStyle}
-              onTouchTap={updateWorkflowEditType.bind(null, 'wizard')}
+              onClick={updateWorkflowEditType.bind(null, 'wizard')}
 
               backgroundColor={workflowEditType === 'wizard' ? '#2383F3' : null}/>
             <Button variant="flat"
               icon={<ActionTrendingUp color={workflowEditType === 'diagram' ? 'white' : null}/>}
               style={selectedItemStyle}
-              onTouchTap={updateWorkflowEditType.bind(null, 'diagram')}
+              onClick={updateWorkflowEditType.bind(null, 'diagram')}
               backgroundColor={workflowEditType === 'diagram' ? '#2383F3' : null}/>
           </div>
         </div>

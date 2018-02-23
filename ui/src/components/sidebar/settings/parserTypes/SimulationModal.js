@@ -103,10 +103,10 @@ class SimulationModal extends React.Component {
   renderButtons () {
     return (
       <div className="text-right">
-        <Button variant="flat" label="Match Filter" primary onTouchTap={this.onClickMatch.bind(this)}/>
-        <Button variant="flat" label="Parse" primary onTouchTap={this.onClickParse.bind(this)}/>
+        <Button variant="flat" label="Match Filter" primary onClick={this.onClickMatch.bind(this)}/>
+        <Button variant="flat" label="Parse" primary onClick={this.onClickParse.bind(this)}/>
 
-        <Button variant="flat" label="Cancel" primary onTouchTap={this.onClickClose.bind(this)}/>
+        <Button variant="flat" label="Cancel" primary onClick={this.onClickClose.bind(this)}/>
       </div>
     )
   }
@@ -149,7 +149,7 @@ class SimulationModal extends React.Component {
           <div className="row m-none">
             <div className="margin-sm-top pull-left"><b>Filters</b></div>
             <div className="pull-right">
-              <Button variant="flat" label="Add" primary onTouchTap={this.onClickAddFilter.bind(this)}/>
+              <Button variant="flat" label="Add" primary onClick={this.onClickAddFilter.bind(this)}/>
             </div>
           </div>
 
@@ -158,7 +158,7 @@ class SimulationModal extends React.Component {
               <Chip
                 key={i}
                 style={chipStyles.chip}
-                onTouchTap={this.onClickEditFilter.bind(this, i)}
+                onClick={this.onClickEditFilter.bind(this, i)}
                 onRequestDelete={this.onClickDeleteFilter.bind(this, i)}
               >
                 {this.renderChipContent(k)}
@@ -169,7 +169,7 @@ class SimulationModal extends React.Component {
           <div className="row m-none">
             <div className="margin-sm-top pull-left"><b>Patterns</b></div>
             <div className="pull-right">
-              <Button variant="flat" label="Add" primary onTouchTap={this.onClickAddPattern.bind(this)}/>
+              <Button variant="flat" label="Add" primary onClick={this.onClickAddPattern.bind(this)}/>
             </div>
           </div>
           <div style={chipStyles.wrapper} className="margin-md-bottom" >
@@ -177,7 +177,7 @@ class SimulationModal extends React.Component {
               <Chip
                 key={i}
                 style={chipStyles.chip}
-                onTouchTap={this.onClickEditPattern.bind(this, i)}
+                onClick={this.onClickEditPattern.bind(this, i)}
                 onRequestDelete={this.onClickDeletePattern.bind(this, i)}
               >
                 {k}

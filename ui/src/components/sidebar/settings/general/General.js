@@ -307,7 +307,7 @@ export default class General extends React.Component {
           Last Synced: {lastSync ? moment(parseInt(lastSync, 10)).fromNow() : 'Never'}
         </label>
         <br/>
-        <Button variant="raised" label="Sync" onTouchTap={this.onClickSync.bind(this)}/>
+        <Button variant="raised" label="Sync" onClick={this.onClickSync.bind(this)}/>
       </div>
     )
   }

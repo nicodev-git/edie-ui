@@ -49,7 +49,7 @@ export default class Agents extends Component {
             <div>
               <Button variant="raised"
                 label={installing ? 'Installing' : 'Install'}
-                onTouchTap={this.onClickInstall.bind(this, p.rowData)}
+                onClick={this.onClickInstall.bind(this, p.rowData)}
                 disabled={!!installAgent}
                 className="valign-middle"
               />

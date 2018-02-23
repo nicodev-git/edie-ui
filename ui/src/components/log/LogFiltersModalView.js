@@ -14,7 +14,7 @@ export default class LogFiltersModalView extends React.Component {
     return (
       <Modal title="Filters" onRequestClose={onHide}>
         <CardPanel title="Filters"
-                   tools={canEdit && <IconButton onTouchTap={onClickAdd}><AddCircleIcon size={32}/></IconButton>}>
+                   tools={canEdit && <IconButton onClick={onClickAdd}><AddCircleIcon size={32}/></IconButton>}>
           <div style={{maxHeight: '350px', overflow: 'auto', width: '100%'}}>
             <table className="table table-hover">
               <thead>
@@ -29,8 +29,8 @@ export default class LogFiltersModalView extends React.Component {
                     className={`${selectedSearch && selectedSearch.id === p.id ? 'selected' : ''}`}>
                   <td>{p.keyword}</td>
                   <td className="p-none nowrap">
-                    {canEdit && <IconButton onTouchTap={() => onClickDelete(p)}><DeleteIcon/></IconButton>}
-                    {canEdit && <IconButton onTouchTap={() => onClickEdit(p)}><EditIcon/></IconButton>}
+                    {canEdit && <IconButton onClick={() => onClickDelete(p)}><DeleteIcon/></IconButton>}
+                    {canEdit && <IconButton onClick={() => onClickEdit(p)}><EditIcon/></IconButton>}
                   </td>
                 </tr>
               )}
@@ -40,7 +40,7 @@ export default class LogFiltersModalView extends React.Component {
         </CardPanel>
 
         <div className="form-buttons">
-          <Button variant="raised" label="Search" onTouchTap={onClickSearch}/>
+          <Button variant="raised" label="Search" onClick={onClickSearch}/>
         </div>
       </Modal>
     )

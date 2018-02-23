@@ -36,7 +36,7 @@ export default class MonitorTplModalView extends Component {
               {tags.map((t, i) =>
                 <Chip key={i} style={chipStyles.chip} onRequestDelete={() => onClickDeleteTag(i)}>{t}</Chip>
               )}
-              <Chip style={chipStyles.chip} onTouchTap={onClickAddTag}><b>+</b></Chip>
+              <Chip style={chipStyles.chip} onClick={onClickAddTag}><b>+</b></Chip>
             </div>
           </CardPanel>
 
@@ -45,7 +45,7 @@ export default class MonitorTplModalView extends Component {
               {monitorTplCredTypes.map((t, i) =>
                 <Chip key={i} style={chipStyles.chip} onRequestDelete={() => onClickDeleteCredType(i)}>{t}</Chip>
               )}
-              <Chip style={chipStyles.chip} onTouchTap={onClickAddCredType}><b>+</b></Chip>
+              <Chip style={chipStyles.chip} onClick={onClickAddCredType}><b>+</b></Chip>
             </div>
           </CardPanel>
           <br/>

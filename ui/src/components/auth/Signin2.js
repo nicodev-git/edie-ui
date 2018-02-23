@@ -83,7 +83,7 @@ class Signin2 extends Component {
         <div className="text-center margin-md">
           <Field name="email" component={FormInput} type="text" floatingLabel="User Name" autoFocus
                  onKeyDown={this.onKeyDown.bind(this)} fullWidth/><br/>
-          <Button variant="raised" color="primary" className="margin-lg-top" onTouchTap={this.onClickNext.bind(this)}>
+          <Button variant="raised" color="primary" className="margin-lg-top" onClick={this.onClickNext.bind(this)}>
             Next
           </Button>
         </div>
@@ -92,7 +92,7 @@ class Signin2 extends Component {
       return (
         <div className="text-center margin-md">
           <Field name="password" component={FormInput} type="password" floatingLabel="Password" autoFocus fullWidth/><br/>
-          <Button variant="raised" className="margin-lg" color="primary" onTouchTap={this.onClickPrev.bind(this)}>Prev</Button>
+          <Button variant="raised" className="margin-lg" color="primary" onClick={this.onClickPrev.bind(this)}>Prev</Button>
           <Button variant="raised" color="primary" className="margin-lg" type="submit">Login</Button>
         </div>
       )

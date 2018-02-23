@@ -122,17 +122,17 @@ export default class MainSettings extends Component {
         {canEdit && <div>
           <div className="padding-md-top">
             <label className="margin-sm-right">Update The System</label>
-            <Button variant="raised" label="Update" onTouchTap={this.onClickSync.bind(this)}/>
+            <Button variant="raised" label="Update" onClick={this.onClickSync.bind(this)}/>
 
-            <Button variant="raised" label="Sync All" onTouchTap={this.onClickSyncAll.bind(this)} className="margin-lg-left"/>
+            <Button variant="raised" label="Sync All" onClick={this.onClickSyncAll.bind(this)} className="margin-lg-left"/>
           </div>
 
           <div className="padding-md-top">
-            <Button variant="raised" label="Import From File SyncData" onTouchTap={this.onClickImportSync.bind(this)}/>
+            <Button variant="raised" label="Import From File SyncData" onClick={this.onClickImportSync.bind(this)}/>
           </div>
 
           <div className="padding-md-top">
-            <Button variant="raised" label="Simulate" onTouchTap={this.onClickSimulate.bind(this)}/>
+            <Button variant="raised" label="Simulate" onClick={this.onClickSimulate.bind(this)}/>
           </div>
         </div>}
 

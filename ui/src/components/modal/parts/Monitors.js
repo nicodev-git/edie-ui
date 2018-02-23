@@ -20,7 +20,7 @@ export default class Monitors extends Component {
                       <IconButton
                         style={buttonStyle}
 
-                        onTouchTap={onEditMonitor.bind(this, item)}>
+                        onClick={onEditMonitor.bind(this, item)}>
                           <CreateIcon nativeColor="#d4d4d4"/>
                       </IconButton>
                     </div>}
@@ -28,7 +28,7 @@ export default class Monitors extends Component {
                       <IconButton
                         style={buttonStyle}
 
-                        onTouchTap={onRemoveMonitor.bind(this, index)}>
+                        onClick={onRemoveMonitor.bind(this, index)}>
                           <DeleteIcon nativeColor="#d4d4d4"/>
                       </IconButton>
                     </div>}

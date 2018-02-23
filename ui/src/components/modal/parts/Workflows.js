@@ -9,7 +9,7 @@ export default class Workflows extends React.Component {
     return (
       <div>
         <div style={chipStyles.wrapper}>
-          {showWfSelectModal && <Chip style={chipStyles.chip} onTouchTap={() => showWfSelectModal(true)}><b>+</b></Chip>}
+          {showWfSelectModal && <Chip style={chipStyles.chip} onClick={() => showWfSelectModal(true)}><b>+</b></Chip>}
           {workflows.map((k, i) =>
             <Chip
               key={i}

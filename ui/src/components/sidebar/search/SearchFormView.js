@@ -105,7 +105,7 @@ export default class SearchFormView extends React.Component {
           <div style={{height: 48}}>
             <Field name="freeText" component={FormInput} label="Search" onKeyDown={onKeyDownFreeText} style={{width: 300}}
                    className={`valign-top ${advanced ? 'hidden' : ''}`}/>
-            <Button variant="flat" onTouchTap={this.onClickSearchBy.bind(this)}
+            <Button variant="flat" onClick={this.onClickSearchBy.bind(this)}
                     className="valign-top margin-xs-top">Search By</Button>
             <Select
               multiple
@@ -134,14 +134,14 @@ export default class SearchFormView extends React.Component {
               autoApply
             />
             <div className="pull-right margin-sm-right">
-              <IconButton tooltip="Favorite" className="valign-top" onTouchTap={onClickStar}>{starFilled ? <FilledStar/> : <ToggleStar/>}</IconButton>
-              <IconButton tooltip="Illustrate" className="valign-top" onTouchTap={onClickIllustrate}><LocalMovie/></IconButton>
-              <IconButton tooltip="Related devices" className="valign-top hidden" onTouchTap={onClickRelDevices}><Computer/></IconButton>
-              <IconButton tooltip="Non-related devices" className="valign-top hidden" onTouchTap={onClickIrrelDevices}><NoSim/></IconButton>
-              <IconButton tooltip="Views" className="valign-top" onTouchTap={onClickViewFilter}><img src="/resources/images/sidebar/search/view-icon.png" width="24" alt=""/></IconButton>
-              <IconButton tooltip="Graph" className="valign-top" onTouchTap={onClickGraph}><img src="/resources/images/sidebar/search/graph-icon.png" width="24" alt=""/></IconButton>
-              <IconButton tooltip="Clear" className="valign-top" onTouchTap={onClickClear}><ClearIcon /></IconButton>
-              <IconButton tooltip="Advanced" className="valign-top" onTouchTap={this.onClickToggleAdvanced.bind(this)}>{advanced ? <ArrowUpIcon /> : <ArrowDownIcon />}</IconButton>
+              <IconButton tooltip="Favorite" className="valign-top" onClick={onClickStar}>{starFilled ? <FilledStar/> : <ToggleStar/>}</IconButton>
+              <IconButton tooltip="Illustrate" className="valign-top" onClick={onClickIllustrate}><LocalMovie/></IconButton>
+              <IconButton tooltip="Related devices" className="valign-top hidden" onClick={onClickRelDevices}><Computer/></IconButton>
+              <IconButton tooltip="Non-related devices" className="valign-top hidden" onClick={onClickIrrelDevices}><NoSim/></IconButton>
+              <IconButton tooltip="Views" className="valign-top" onClick={onClickViewFilter}><img src="/resources/images/sidebar/search/view-icon.png" width="24" alt=""/></IconButton>
+              <IconButton tooltip="Graph" className="valign-top" onClick={onClickGraph}><img src="/resources/images/sidebar/search/graph-icon.png" width="24" alt=""/></IconButton>
+              <IconButton tooltip="Clear" className="valign-top" onClick={onClickClear}><ClearIcon /></IconButton>
+              <IconButton tooltip="Advanced" className="valign-top" onClick={this.onClickToggleAdvanced.bind(this)}>{advanced ? <ArrowUpIcon /> : <ArrowDownIcon />}</IconButton>
             </div>
             <Popover
               open={this.state.openSearchBy}
@@ -152,9 +152,9 @@ export default class SearchFormView extends React.Component {
               style={{minWidth: 300}}
             >
               <div>
-                <Button variant="flat" label="Workflows" onTouchTap={() => this.hideSearchBy() && onClickWorkflow()} style={{width: '100%', textAlign: 'left'}}/>
-                <Button variant="flat" label="Device/Monitors" onTouchTap={() => this.hideSearchBy() && onClickSearchMonitor()} style={{width: '100%', textAlign: 'left'}}/>
-                <Button variant="flat" label="Tags" onTouchTap={(e) => this.hideSearchBy() && onClickTags(e)} style={{width: '100%', textAlign: 'left'}}/>
+                <Button variant="flat" label="Workflows" onClick={() => this.hideSearchBy() && onClickWorkflow()} style={{width: '100%', textAlign: 'left'}}/>
+                <Button variant="flat" label="Device/Monitors" onClick={() => this.hideSearchBy() && onClickSearchMonitor()} style={{width: '100%', textAlign: 'left'}}/>
+                <Button variant="flat" label="Tags" onClick={(e) => this.hideSearchBy() && onClickTags(e)} style={{width: '100%', textAlign: 'left'}}/>
               </div>
 
               <div style={{marginTop: -35}}>
@@ -207,7 +207,7 @@ export default class SearchFormView extends React.Component {
               <Field name="query" component={FormInput} label="Search" onKeyDown={onSearchKeyDown} style={{width: '100%'}} className="valign-top"/>
             </div>
             <div style={{width: 65}} className="text-right">
-              <IconButton tooltip="Search" onTouchTap={onClickSearch} type="submit" className="valign-top"><ActionSearch /></IconButton>
+              <IconButton tooltip="Search" onClick={onClickSearch} type="submit" className="valign-top"><ActionSearch /></IconButton>
             </div>
           </div>
         </div>

@@ -7,7 +7,7 @@ const FormToggle = ({input, label, meta: {touched, error}, ...custom}) => (
     {...custom}
     label={label}
     className="toggle"
-    value={!!input.value}
+    value={input.value ? "" : ""}
   />
 )
 

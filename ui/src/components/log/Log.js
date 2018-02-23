@@ -676,9 +676,9 @@ export default class Log extends React.Component {
   renderLogTools () {
     return (
       <div style={{position: 'absolute', right: 5, top: 8}}>
-        <AddCircleIcon className="link" onTouchTap={this.onClickAddFolder.bind(this)}/>
-        <EditIcon className="link" onTouchTap={this.onClickEditFolder.bind(this)}/>
-        <DeleteIcon className="link" onTouchTap={this.onClickRemoveFolder.bind(this)}/>
+        <AddCircleIcon className="link" onClick={this.onClickAddFolder.bind(this)}/>
+        <EditIcon className="link" onClick={this.onClickEditFolder.bind(this)}/>
+        <DeleteIcon className="link" onClick={this.onClickRemoveFolder.bind(this)}/>
       </div>
     )
   }
@@ -694,7 +694,7 @@ export default class Log extends React.Component {
           {canEdit && filters.map((p, i) =>
             <div key={i} className="padding-sm">
               {p}
-              <DeleteIcon className="link pull-right" onTouchTap={this.onClickRemoveFilter.bind(this, p)} />
+              <DeleteIcon className="link pull-right" onClick={this.onClickRemoveFilter.bind(this, p)} />
             </div>
           )}
         </Menu>
@@ -706,8 +706,8 @@ export default class Log extends React.Component {
     return (
       <div style={{position: 'absolute', right: 5, top: 5}} className="form-inline">
         <div className="valign-middle inline-block margin-md-left margin-md-right">
-          {canEdit && <EditIcon className="link" onTouchTap={this.onClickEditMonitor.bind(this)}/>}
-          {canEdit && <FilterIcon className="link margin-xs-top" onTouchTap={this.onClickAddFilter.bind(this)}/>}
+          {canEdit && <EditIcon className="link" onClick={this.onClickEditMonitor.bind(this)}/>}
+          {canEdit && <FilterIcon className="link margin-xs-top" onClick={this.onClickAddFilter.bind(this)}/>}
           {this.renderIgnoreFilters(filters, canEdit)}
         </div>
       </div>
@@ -775,7 +775,7 @@ export default class Log extends React.Component {
             </div>
 
            <div style={{position: 'absolute', right: 10, top: 2}}>
-             <IconButton onTouchTap={this.onClickFiltersModal.bind(this)}><ToggleStar/></IconButton>
+             <IconButton onClick={this.onClickFiltersModal.bind(this)}><ToggleStar/></IconButton>
            </div>
           </div>
         </div>

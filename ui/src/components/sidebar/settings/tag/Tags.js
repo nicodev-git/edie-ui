@@ -97,7 +97,7 @@ export default class Tags extends React.Component {
             style={chipStyles.chip}
 
             backgroundColor={multiSelTags.filter(t => t.id === p.id).length ? blue300 : null}
-            onTouchTap={this.onClickTag.bind(this, p)}
+            onClick={this.onClickTag.bind(this, p)}
             onRequestDelete={canEdit ? this.onDeleteTag.bind(this, p) : null}
           >
             {p.name}
@@ -113,42 +113,42 @@ export default class Tags extends React.Component {
         {tagDevices.map(p =>
           <Chip
             key={p.id} style={chipStyles.chip}
-            onTouchTap={this.onClickTagDevice.bind(this, p)}>
+            onClick={this.onClickTagDevice.bind(this, p)}>
             <Avatar color={blue300} backgroundColor={indigo900}>D</Avatar>{p.name}
           </Chip>
         )}
         {this.getTagMonitors().map(p =>
           <Chip
             key={p.uid} style={chipStyles.chip}
-            onTouchTap={() => {}}>
+            onClick={() => {}}>
             <Avatar color={blue300} backgroundColor={indigo900}>M</Avatar>{p.name}
           </Chip>
         )}
         {tagWorkflows.map(p =>
           <Chip
             key={p.id} style={chipStyles.chip}
-            onTouchTap={this.onClickTagWf.bind(this, p)}>
+            onClick={this.onClickTagWf.bind(this, p)}>
             <Avatar color={blue300} backgroundColor={indigo900}>W</Avatar>{p.name}
           </Chip>
         )}
         {tagParserTypes.map(p =>
           <Chip
             key={p.id} style={chipStyles.chip}
-            onTouchTap={this.onClickTagParserType.bind(this, p)}>
+            onClick={this.onClickTagParserType.bind(this, p)}>
             <Avatar color={blue300} backgroundColor={indigo900}>P</Avatar>{p.name}
           </Chip>
         )}
         {tagDeviceTpls.map(p =>
           <Chip
             key={p.id} style={chipStyles.chip}
-            onTouchTap={this.onClickTagDeviceTpl.bind(this, p)}>
+            onClick={this.onClickTagDeviceTpl.bind(this, p)}>
             <Avatar color={blue300} backgroundColor={indigo900}>DT</Avatar>{p.name}
           </Chip>
         )}
         {tagMonitorTpls.map(p =>
           <Chip
             key={p.id} style={chipStyles.chip}
-            onTouchTap={this.onClickTagMonitorTpl.bind(this, p)}>
+            onClick={this.onClickTagMonitorTpl.bind(this, p)}>
             <Avatar color={blue300} backgroundColor={indigo900}>MT</Avatar>{p.name}
           </Chip>
         )}
@@ -163,8 +163,8 @@ export default class Tags extends React.Component {
         <TabPageHeader title="Tags">
           <div className="text-center margin-md-top">
             <div className="pull-right">
-              {canEdit && <Button variant="raised" label="Add" onTouchTap={this.onAddTag.bind(this)}/>}&nbsp;
-              {canEdit && <Button variant="raised" label="Edit" onTouchTap={this.onEditTag.bind(this)}/>}&nbsp;
+              {canEdit && <Button variant="raised" label="Add" onClick={this.onAddTag.bind(this)}/>}&nbsp;
+              {canEdit && <Button variant="raised" label="Edit" onClick={this.onEditTag.bind(this)}/>}&nbsp;
               <WfTabs history={this.props.history}/>
             </div>
           </div>
