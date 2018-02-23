@@ -6,7 +6,7 @@ import {required} from 'components/modal/validation/CommonValidation'
 
 export default class TextInput extends React.Component {
   renderField (config) {
-    const {input, label, disabled, className, meta: { touched, error }} = config
+    const {input, label, disabled, className} = config
     const field = (
       <TextField
         {...input}

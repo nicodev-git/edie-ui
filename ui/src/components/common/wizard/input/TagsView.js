@@ -32,7 +32,7 @@ export default class TagsView extends React.Component {
         <div style={chipStyles.wrapper}>
           <label className="padding-xs-top" style={{...chipStyles.chip, width: 80}}>Tags</label>
           {monitorTags.map((t, i) =>
-            <Chip key={i} style={chipStyles.chip} onRequestDelete={() => this.onClickDeleteTag(i)}>{t}</Chip>
+            <Chip key={i} style={chipStyles.chip} onDelete={() => this.onClickDeleteTag(i)} label={t}/>
           )}
           <Chip style={chipStyles.chip} onTouchTap={() => this.onClickAddTag()}><b>&nbsp;&nbsp;+&nbsp;&nbsp;</b></Chip>
         </div>

@@ -1,7 +1,7 @@
 import React from 'react'
 import {Button, Radio} from 'material-ui'
 import {Field} from 'redux-form'
-import {RadioButtonGroup} from 'redux-form-material-ui'
+import {RadioGroup} from 'redux-form-material-ui'
 
 import {FormInput, FormCheckbox, FormSelect, CardPanel, Modal} from 'components/modal/parts'
 
@@ -81,7 +81,7 @@ export default class MonitorWizardView extends React.Component {
             <Field name="name" floatingLabel="Name" component={FormInput} className="margin-sm-left margin-sm-right"/>
             {this.renderRequiredParams()}
             <div>
-              <div className="inline-block valign-middle" style={{fontSize: '16px', paddingLeft: 7}}>Remove events after</div>
+              <div className="inline-block valign-middle margin-md-top margin-md-right" style={{fontSize: '16px', paddingLeft: 7}}>Remove events after</div>
               <Field
                 name="remove_after" component={FormSelect} options={removeAfterDurations}
                 style={{width: 80, paddingLeft: 15}} className="valign-middle"/>
@@ -91,7 +91,7 @@ export default class MonitorWizardView extends React.Component {
             </div>
 
             <div className={showAgentType ? '' : 'hidden'} style={{height: 70}}>
-              <Field name="agentType" component={RadioButtonGroup} className="margin-md-top">
+              <Field name="agentType" component={RadioGroup} className="margin-md-top">
                 <Radio value="agent" label={agentLabel} className="pull-left" disabled={!agent}/>
                 <Radio value="collector" label={collectorLabel} className="pull-left" style={{width: 120, marginTop: 14}}/>
               </Field>
@@ -111,7 +111,7 @@ export default class MonitorWizardView extends React.Component {
           <Field name="enabled" component={FormCheckbox} type="checkbox" label="Enabled" className="margin-md-top margin-sm-bottom"/>
 
           <div className="form-buttons">
-            <Button variant="raised" type="submit" label={isEdit ? 'Save' : 'Add'}/>
+            <Button variant="raised" type="submit">{isEdit ? 'Save' : 'Add'}</Button>
           </div>
         </form>
         {paramEditModal}

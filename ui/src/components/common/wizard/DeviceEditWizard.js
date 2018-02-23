@@ -512,7 +512,7 @@ class DeviceEditWizard extends React.Component {
 
           <div style={{height: 140, width: '100%'}} className="pull-left">&nbsp;</div>
           <div style={fixedBarStyle} className="text-right">
-            <Button variant="raised" type="submit" backgroundColor="rgb(36, 104, 255)" labelColor="#fff">Save</Button>
+            <Button variant="raised" type="submit">Save</Button>
           </div>
         </Form>
 

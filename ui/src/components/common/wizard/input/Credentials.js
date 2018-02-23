@@ -150,14 +150,14 @@ export default class Credentials extends React.Component {
                   <IconButton style={iconStyle}
                     className={onClickEditCreds ? '' : 'hidden'}
                     onTouchTap={this.onClickEdit.bind(this, p)}>
-                    <EditIcon nativeColor="#545454" hoverColor="#f44336" />
+                    <EditIcon nativeColor="#545454"/>
                   </IconButton>
                   <IconButton style={iconStyle}
                     onTouchTap={this.onClickRemove.bind(this, p)}>
-                    <DeleteIcon nativeColor="#545454" hoverColor="#f44336"/>
+                    <DeleteIcon nativeColor="#545454"/>
                   </IconButton>
                   <IconButton style={iconStyle} onTouchTap={this.onClickChange.bind(this, p)}>
-                    <ListIcon nativeColor="#545454" hoverColor="#f44336"/>
+                    <ListIcon nativeColor="#545454"/>
                   </IconButton>
                 </td>
               </tr>
