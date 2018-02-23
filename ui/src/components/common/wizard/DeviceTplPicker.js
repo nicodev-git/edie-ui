@@ -12,7 +12,8 @@ export default class DeviceTplPicker extends React.Component {
       category: ''
     }
   }
-  onChangeCategory (e, index, value) {
+  onChangeCategory (e) {
+    const value = e.target.value
     this.setState({
       category: value
     })

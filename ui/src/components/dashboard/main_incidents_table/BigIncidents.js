@@ -124,9 +124,9 @@ class BigIncidents extends Component {
     this.props.router.goBack()
   }
 
-  onChangeSeverity (e, index, values) {
+  onChangeSeverity (e) {
     this.props.updateBigIncidentParams(assign({}, this.props.bigIncidentParams, {
-      severity: values
+      severity: e.target.value
     }))
   }
 
@@ -137,9 +137,9 @@ class BigIncidents extends Component {
     }))
   }
 
-  onChangeFixedStatus (e, index, value) {
+  onChangeFixedStatus (e) {
     this.props.updateBigIncidentParams(assign({}, this.props.bigIncidentParams, {
-      fixed: value || null
+      fixed: e.target.value || null
     }))
   }
 

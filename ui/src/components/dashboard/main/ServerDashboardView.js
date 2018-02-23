@@ -24,7 +24,6 @@ const inputStyle = {
   'border': 'none',
   'display': 'inline-block',
   'height': '34px',
-  'marginTop': '-18px',
   'marginLeft': '16px',
   'fontSize': '16px',
   'width': 510
@@ -174,9 +173,9 @@ export default class ServerDashboardView extends React.Component {
 
   /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  onChangePage (e, index, value) {
+  onChangePage (e) {
     this.setState({
-      page: value
+      page: e.target.value
     })
   }
 
@@ -232,10 +231,10 @@ export default class ServerDashboardView extends React.Component {
         <div style={{position: 'absolute', left: 27}}>
           <Select
             value={page} onChange={this.onChangePage.bind(this)}
-            className="valign-top"
+            className="valign-top text-left"
             style={{width: 180}}>
             {menuItems.map(p =>
-              <MenuItem key={p} value={p} primaryText={p}/>
+              <MenuItem key={p} value={p}>{p}</MenuItem>
             )}
           </Select>
         </div>

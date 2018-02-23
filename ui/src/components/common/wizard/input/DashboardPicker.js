@@ -11,9 +11,9 @@ export default class DashboardPicker extends React.Component {
     }
   }
 
-  onChangeDashboard (e, index, value) {
+  onChangeDashboard (e) {
     this.setState({
-      dashboardId: value
+      dashboardId: e.target.value
     })
   }
 

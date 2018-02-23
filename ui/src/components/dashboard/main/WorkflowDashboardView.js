@@ -792,8 +792,9 @@ export default class WorkflowDashboardView extends React.Component {
     this.props.showWfRectGroupsModal(false)
   }
 
-  onChangeGroup (e, index, value) {
+  onChangeGroup (e) {
     const {wfRectGroups} = this.props
+    const index = findIndex(wfRectGroups, {id: e.target.value})
     this.props.selectWfRectGroup(wfRectGroups[index])
   }
 
@@ -870,9 +871,9 @@ export default class WorkflowDashboardView extends React.Component {
     this.debSaveInterval()
   }
 
-  onChangeIntervalUnit (e, index, value) {
+  onChangeIntervalUnit (e) {
     this.setState({
-      intervalUnit: value
+      intervalUnit: e.target.value
     })
     this.debSaveInterval()
   }

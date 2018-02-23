@@ -290,10 +290,10 @@ export default class MainIncidents extends Component {
     }, this.props.history)
   }
 
-  onChangeSeverity (e, index, values) {
+  onChangeSeverity (e) {
     console.log(arguments)
     this.setState({
-      selectedSeverity: values
+      selectedSeverity: e.target.value
     }, this.onFilterChange)
   }
 
@@ -303,9 +303,9 @@ export default class MainIncidents extends Component {
     })
   }
 
-  onFixedChange (e, index, value) {
+  onFixedChange (e) {
     this.setState({
-      fixed: value
+      fixed: e.target.value
     }, () => {
       this.onFilterChange()
     })

@@ -65,10 +65,11 @@ export default class MainDashboard extends React.Component {
   isServerDashboard (board) {
     return board && board.type === 'system' && board.name === 'Servers'
   }
-  onChangeBoard (e, index, value) {
+  onChangeBoard (e) {
     const gaugeBoards = this.getBoards()
+    const index = findIndex(gaugeBoards, {id: e.target.value})
     const url = slugify(gaugeBoards[index].name)
-    this.props.selectGaugeBoard(value, url, this.props.history, true)
+    this.props.selectGaugeBoard(e.target.value, url, this.props.history, true)
   }
   onClickAdd () {
     // showPrompt('Please type name.', '', name => {

@@ -77,14 +77,14 @@ class GaugeWizard extends React.Component {
     }
   }
 
-  onChangeSeverity (e, index, values) {
+  onChangeSeverity (e) {
     this.setState({
-      selectedSeverity: values
+      selectedSeverity: e.target.value
     })
   }
-  onChangeMonitors (e, index, values) {
+  onChangeMonitors (e) {
     this.setState({
-      selectedMonitors: values
+      selectedMonitors: e.target.value
     })
   }
   toggleMonitorId (id) {
@@ -96,9 +96,9 @@ class GaugeWizard extends React.Component {
     }
     this.setState({ selectedMonitors })
   }
-  onChangeServiceNames (e, index, values) {
+  onChangeServiceNames (e) {
     this.setState({
-      serviceNames: values
+      serviceNames: e.target.value
     })
   }
   onChangeDateRange ({startDate, endDate}) {

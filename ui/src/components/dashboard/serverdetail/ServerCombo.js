@@ -1,5 +1,5 @@
 import React from 'react'
-// import {findIndex} from 'lodash'
+import {findIndex} from 'lodash'
 import {Select, MenuItem} from 'material-ui'
 
 export default class ServerCombo extends React.Component {
@@ -7,8 +7,11 @@ export default class ServerCombo extends React.Component {
     const {allDevices} = this.props
     return (allDevices).filter(p => (p.tags || []).includes('Server'))
   }
-  onChangeValue (e, index, value) {
-    const device = this.getServers()[index]
+  onChangeValue (e) {
+    const {value} = e.target
+    const servers = this.getServers()
+    const index = findIndex(servers, {id: value})
+    const device = servers[index]
     this.props.fetchDevice(value)
     this.props.history.push(`/dashboard/servers/${device.slug}/detail`)
   }

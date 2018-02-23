@@ -101,7 +101,8 @@ export default class GEventLog extends React.Component {
 
   //////////////////////////////////////////////////////////////////////////////////////////
 
-  onChangeLog (e, index, value) {
+  onChangeLog (e) {
+    const value = e.target.value
     this.setState({
       selectedLogName: value
     })

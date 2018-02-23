@@ -96,7 +96,8 @@ export default class EventLogTable extends Component {
     this.props.replaceSearchWfs([])
     this.props.updateQueryChips(queryChips)
   }
-  onChangeLogName (e, index, value) {
+  onChangeLogName (e) {
+    const {value} = e.target
     this.props.selectLogName(value)
 
     this.monitorSocket.send({

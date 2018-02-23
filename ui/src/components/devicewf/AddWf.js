@@ -58,9 +58,9 @@ export default class AddWf extends React.Component {
     }
   }
 
-  onChangeSeverity (e, index, value) {
+  onChangeSeverity (e) {
     this.setState({
-      severity: value
+      severity: e.target.value
     })
   }
 

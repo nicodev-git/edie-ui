@@ -10,18 +10,6 @@ import { layoutWidthZoom, layoutHeightZoom } from 'shared/Global'
 import GridLayout from './GridLayout'
 
 export default class EventLogTable extends Component {
-  // onChangeLogName (e, index, value) {
-  //   this.props.selectLogName(value)
-  //
-  //   this.monitorSocket.send({
-  //     action: 'enable-realtime',
-  //     monitors: 'eventlog',
-  //     deviceId: this.props.device.id,
-  //     data: {
-  //       name: value
-  //     }
-  //   })
-  // }
   getGauges () {
     return [{
       id: 'basic0',
