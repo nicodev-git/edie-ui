@@ -14,9 +14,9 @@ export default class CredPicker extends Component {
     this.props.fetchCredentials()
     this.props.selectCreds(null)
   }
-  onChangeType (e, index, value) {
+  onChangeType (e) {
     this.setState({
-      type: value
+      type: e.target.value
     })
     this.props.selectCreds(null)
   }

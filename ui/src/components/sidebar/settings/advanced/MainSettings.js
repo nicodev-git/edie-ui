@@ -75,8 +75,8 @@ export default class MainSettings extends Component {
     this.updateOption('SEND_LOGS', `${checked}`)
   }
 
-  onChangeSendLogLevel (e, index, value) {
-    this.updateOption('SEND_LOGS_LEVEL', value)
+  onChangeSendLogLevel (e) {
+    this.updateOption('SEND_LOGS_LEVEL', e.target.value)
   }
 
   renderImportModal () {

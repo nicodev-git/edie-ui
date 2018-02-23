@@ -444,7 +444,8 @@ class GenericSearch extends React.Component {
     }), this.props.history)
   }
 
-  onChangeCollection (e, index, values) {
+  onChangeCollection (e) {
+    const values = e.target.value
     if (!values.length) return
     const {formValues} = this.props
 
@@ -452,14 +453,16 @@ class GenericSearch extends React.Component {
     this.updateQuery(newQuery)
   }
 
-  onChangeMonitorType (e, index, values) {
+  onChangeMonitorType (e) {
+    const values = e.target.value
     const {formValues} = this.props
 
     const newQuery = modifyArrayValues(formValues.query, 'monitortype', values)
     this.updateQuery(newQuery)
   }
 
-  onChangeSeverity (e, index, values) {
+  onChangeSeverity (e) {
+    const values = e.target.value
     const {formValues} = this.props
 
     const newQuery = modifyArrayValues(formValues.query, 'severity', values)

@@ -129,8 +129,8 @@ export default class General extends React.Component {
     this.updateUserOption('keepIncidentAlert', e.target.checked)
   }
 
-  onChangeShowPage (e, index, value) {
-    this.updateUserOption('defaultPage', value)
+  onChangeShowPage (e) {
+    this.updateUserOption('defaultPage', e.target.value)
   }
 
   updateUserOption (key, value) {

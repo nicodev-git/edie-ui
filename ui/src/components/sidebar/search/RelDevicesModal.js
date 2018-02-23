@@ -11,7 +11,8 @@ export default class RelDevicesModal extends React.Component {
   // onClickFields () {
   //   this.props.showSearchFieldsModal(true)
   // }
-  onChangeSearchField (e, index, value) {
+  onChangeSearchField (e) {
+    const {value} = e.target
     this.props.updateRelDeviceFields([value])
     this.props.fetchRelDevices(this.props.params, value)
   }

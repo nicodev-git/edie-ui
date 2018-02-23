@@ -469,12 +469,12 @@ export default class ThreatMap extends Component {
 
     // ///////////////////////////////////////////////////////////////
 
-  onChangeMode (e, index, value) {
+  onChangeMode (e) {
     this.onClickStop()
     this.clear()
 
     this.setState({
-      mode: value
+      mode: e.target.value
     }, () => {
       if (this.state.mode === 'real') {
         this.onClickPlay()
@@ -482,10 +482,10 @@ export default class ThreatMap extends Component {
     })
   }
 
-  onChangeSpeed (e, index, value) {
+  onChangeSpeed (e) {
     this.onClickPause()
     this.setState({
-      speed: parseInt(value, 10)
+      speed: parseInt(e.target.value, 10)
     }, () => {
       this.onClickPlay()
     })

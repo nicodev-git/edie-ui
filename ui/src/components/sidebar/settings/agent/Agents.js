@@ -78,8 +78,8 @@ export default class Agents extends Component {
     clearInterval(this.timer)
   }
 
-  onChangeInstall (e, index, value) {
-    this.setState({ install: value })
+  onChangeInstall (e) {
+    this.setState({ install: e.target.value })
   }
 
   onRowDblClick () {

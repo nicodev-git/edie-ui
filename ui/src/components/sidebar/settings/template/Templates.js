@@ -215,8 +215,8 @@ export default class Templates extends Component {
     this.props.shareMonitorTemplate(item)
   }
 
-  onChangeType (e, index, value) {
-    this.setState({ type: value })
+  onChangeType (e) {
+    this.setState({ type: e.target.value })
     this.props.selectDeviceTemplate(null)
   }
 

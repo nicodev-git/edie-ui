@@ -71,8 +71,8 @@ class ProfileModal extends Component { // eslint-disable-line react/no-multi-com
       reader.readAsDataURL(input.files[0])
     }
   }
-  onChangeRoles (e, index, value) {
-    this.props.change('roles', value)
+  onChangeRoles (e) {
+    this.props.change('roles', e.target.value)
   }
   render () {
     const { user, handleSubmit, profileImg } = this.props

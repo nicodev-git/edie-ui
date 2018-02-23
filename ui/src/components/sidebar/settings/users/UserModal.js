@@ -41,11 +41,11 @@ class UserModal extends React.Component {
     })
   }
 
-  onChangeRole (e, index, values) {
-    this.props.selectUserRoles(values)
+  onChangeRole (e) {
+    this.props.selectUserRoles(e.target.value)
   }
-  onChangePermission (e, index, values) {
-    this.props.selectUserPermissions(values)
+  onChangePermission (e) {
+    this.props.selectUserPermissions(e.target.value)
   }
   renderMapOptions () {
     let options = [].map(item => ({value: item.id, label: item.mapname}))
