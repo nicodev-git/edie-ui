@@ -9,7 +9,7 @@ import DateRangePicker from 'components/common/DateRangePicker'
 export default class LogSearchFormView extends React.Component {
   renderDateLabel (label) {
     return (
-      <Button variant="flat" label={label}/>
+      <Button variant="flat">{label}</Button>
     )
   }
   renderDatePicker () {
@@ -38,7 +38,7 @@ export default class LogSearchFormView extends React.Component {
         <div style={{background: '#dadada', paddingLeft: 10}}>
           <div className="nowrap">
             <Field name="q" component={FormInput} label="Search" onKeyDown={onSearchKeyDown} style={{width: '90%'}} className="valign-top"/>
-            <IconButton tooltip="Search" type="submit" className="valign-top"><ActionSearch /></IconButton>
+            <IconButton type="submit" className="valign-top"><ActionSearch /></IconButton>
           </div>
         </div>
       </Form>

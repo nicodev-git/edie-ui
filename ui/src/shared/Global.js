@@ -64,13 +64,13 @@ export const defaultKeys = [
 export function getSeverityIcon (severity) {
   switch ((severity || '').toLowerCase()) {
     case 'high':
-      return <WarningIcon style={iconStyle} color="#e13e3e" data-tip={severity}/>
+      return <WarningIcon style={iconStyle} nativeColor="#e13e3e" data-tip={severity}/>
     case 'low':
-      return <WarningIcon style={iconStyle} color="#ef9f15" data-tip={severity}/>
+      return <WarningIcon style={iconStyle} nativeColor="#ef9f15" data-tip={severity}/>
     case 'medium':
-      return <WarningIcon style={iconStyle} color="#52a1be" data-tip={severity}/>
+      return <WarningIcon style={iconStyle} nativeColor="#52a1be" data-tip={severity}/>
     default:
-      return <DescriptionIcon style={iconStyle} color="#52a1be" data-tip={severity}/>
+      return <DescriptionIcon style={iconStyle} nativeColor="#52a1be" data-tip={severity}/>
   }
 }
 

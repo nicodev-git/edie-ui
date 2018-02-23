@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {Tabs, Tab} from 'material-ui/Tabs'
+import Tabs, {Tab} from 'material-ui/Tabs'
 
 const clearStyle = {
   background: 'transparent'
@@ -46,13 +46,9 @@ export default class TabPageBody extends Component {
 
     return (
       <div className="tabs-custom flex-vertical flex-1">
-        <Tabs
-          value={active}
-          onChange={this.navigate.bind(this)}
-          tabItemContainerStyle={{backgroundColor: 'transparent'}}
-          inkBarStyle={{backgroundColor: '#78a8ca'}}>
+        <Tabs value={active} onChange={this.navigate.bind(this)}>
           {tabs.map((item, i) =>
-            <Tab key={i} label={item.title} value={i} buttonStyle={{textTransform: 'none', color: '#46484a'}}/>
+            <Tab key={i} label={item.title} value={i}/>
           )}
         </Tabs>
 

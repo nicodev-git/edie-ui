@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import {appendComponent, removeComponent} from 'util/Component'
 import { SubHeader, Modal } from '../modal/parts'
 import {TextField, Button} from 'material-ui'
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import { inputStyle, underlineStyle, buttonStyle, buttonTextStyle } from 'style/common/materialStyles'
 
 const TYPE_ALERT = 'alert'
@@ -50,28 +49,26 @@ export default class Alert extends Component {
 
   render () {
     return (
-      <MuiThemeProvider>
-        <Modal title={this.props.title} contentStyle={{width: 450}} onRequestClose={this.onClickClose.bind(this)}>
-          <SubHeader name={this.props.message}/>
-          <div className={`form-column ${this.props.type === TYPE_PROMPT ? '' : 'hidden'}`}>
-            <TextField
-              name="input"
-              defaultValue={this.props.default}
-              inputStyle={inputStyle}
-              underlineFocusStyle={underlineStyle}
-              onKeyUp={this.onKeyUp.bind(this)}
-              ref="input"
-            />
-          </div>
-          <div className="form-buttons">
-            <Button variant="raised"
-              onClick={this.onClickSave.bind(this)}
-              label="OK"
-              style={buttonStyle}
-              labelStyle={buttonTextStyle}/>
-          </div>
-        </Modal>
-      </MuiThemeProvider>
+      <Modal title={this.props.title} contentStyle={{width: 450}} onRequestClose={this.onClickClose.bind(this)}>
+        <SubHeader name={this.props.message}/>
+        <div className={`form-column ${this.props.type === TYPE_PROMPT ? '' : 'hidden'}`}>
+          <TextField
+            name="input"
+            defaultValue={this.props.default}
+            inputStyle={inputStyle}
+            underlineFocusStyle={underlineStyle}
+            onKeyUp={this.onKeyUp.bind(this)}
+            ref="input"
+          />
+        </div>
+        <div className="form-buttons">
+          <Button variant="raised"
+            onClick={this.onClickSave.bind(this)}
+            label="OK"
+            style={buttonStyle}
+            labelStyle={buttonTextStyle}/>
+        </div>
+      </Modal>
     )
   }
 }

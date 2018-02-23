@@ -1,6 +1,5 @@
 import React from 'react'
 import moment from 'moment'
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 
 import {Modal, CardPanel} from 'components/modal/parts'
 import {renderEntity} from 'components/common/CellRenderers'
@@ -38,15 +37,13 @@ export default class IncidentEventsModal extends React.Component {
 
   render () {
     return (
-      <MuiThemeProvider>
-        <Modal title="Incident Events" onRequestClose={this.onClickClose.bind(this)}>
-          <CardPanel>
-            <div style={{height: '600px', overflow: 'auto'}}>
-              {this.renderTable()}
-            </div>
-          </CardPanel>
-        </Modal>
-      </MuiThemeProvider>
+      <Modal title="Incident Events" onRequestClose={this.onClickClose.bind(this)}>
+        <CardPanel>
+          <div style={{height: '600px', overflow: 'auto'}}>
+            {this.renderTable()}
+          </div>
+        </CardPanel>
+      </Modal>
     )
   }
 }
