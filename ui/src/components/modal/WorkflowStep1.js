@@ -58,10 +58,10 @@ export default class WorkflowStep1 extends Component {
             <div style={{position: 'absolute', right: 0, top: 0}}>
               <IconButton
                 style={buttonStyle}
-                iconStyle={iconStyle}
+
                 tooltip={`Use \${KEY} for show key’s value.<br/>Example: 'User \${user} was blocked at: \${datetime}'`}
               >
-                <HelpIcon color="#2196f3"/>
+                <HelpIcon nativeColor="#2196f3"/>
               </IconButton>
             </div>
           </div>

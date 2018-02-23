@@ -17,21 +17,21 @@ import DashboardAppIcon from 'material-ui-icons/SettingsApplications'
 import LogIcon from 'material-ui-icons/EventAvailable'
 import DeviceWfIcon from 'material-ui-icons/DeveloperBoard'
 
-// const home = <HomeIcon color={sidebarIconsColor}/>
-const search = <SearchIcon color={sidebarIconsColor}/>
-const chat = <ChatIcon color={sidebarIconsColor}/>
-const threatmap = <BugReportIcon color={sidebarIconsColor}/>
-const incidents = <NotificationsNoneIcon color={sidebarIconsColor}/>
-const settings = <SettingsIcon color={sidebarIconsColor}/>
-const back = <BackIcon color={sidebarIconsColor}/>
-const monitors = <PlaylistIcon color={sidebarIconsColor}/>
-const dashboard = <DashboardIcon color={sidebarIconsColor}/>
-const map = <MapIcon color={sidebarIconsColor}/>
-const logIcon = <LogIcon color={sidebarIconsColor}/>
-const deviceWfIcon = <DeviceWfIcon color={sidebarIconsColor}/>
-const dservers = <DashboardServerIcon color={sidebarIconsColor}/>
-const dworkflow = <DashboardWfIcon color={sidebarIconsColor}/>
-const dapp = <DashboardAppIcon color={sidebarIconsColor}/>
+// const home = <HomeIcon nativeColor={sidebarIconsColor}/>
+const search = <SearchIcon nativeColor={sidebarIconsColor}/>
+const chat = <ChatIcon nativeColor={sidebarIconsColor}/>
+const threatmap = <BugReportIcon nativeColor={sidebarIconsColor}/>
+const incidents = <NotificationsNoneIcon nativeColor={sidebarIconsColor}/>
+const settings = <SettingsIcon nativeColor={sidebarIconsColor}/>
+const back = <BackIcon nativeColor={sidebarIconsColor}/>
+const monitors = <PlaylistIcon nativeColor={sidebarIconsColor}/>
+const dashboard = <DashboardIcon nativeColor={sidebarIconsColor}/>
+const map = <MapIcon nativeColor={sidebarIconsColor}/>
+const logIcon = <LogIcon nativeColor={sidebarIconsColor}/>
+const deviceWfIcon = <DeviceWfIcon nativeColor={sidebarIconsColor}/>
+const dservers = <DashboardServerIcon nativeColor={sidebarIconsColor}/>
+const dworkflow = <DashboardWfIcon nativeColor={sidebarIconsColor}/>
+const dapp = <DashboardAppIcon nativeColor={sidebarIconsColor}/>
 
 export const mainMenu = [
   {id: 'dashboard', title: 'Dashboard', icon: dashboard, path: '/dashboard', fixed: true, roleMenuId: 'Dashboard'},

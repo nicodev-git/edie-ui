@@ -687,7 +687,7 @@ export default class Log extends React.Component {
     return (
       <div className="inline-block">
         <IconButton style={{padding: 0, width: 24, height: 24}}
-                    iconStyle={{width: 24, height: 24}}>
+                    >
           <MoreVertIcon/>
         </IconButton>
         <Menu open={false}>

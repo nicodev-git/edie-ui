@@ -88,12 +88,12 @@ export default class Templates extends Component {
                   {item.origin === 'SYSTEM' && canEdit && <IconButton
                     style={{padding: 0, width: 24, height: 24}}
                     onTouchTap={this.onClickCloneDeviceTpl.bind(this, item)}>
-                    <CopyIcon color="#545454" hoverColor="#f44336"/>
+                    <CopyIcon nativeColor="#545454" hoverColor="#f44336"/>
                   </IconButton>}
                   {item.origin !== 'SYSTEM' && canEdit && <IconButton
                     style={{padding: 0, width: 24, height: 24}}
                     onTouchTap={this.onClickDeleteDeviceTpl.bind(this, item)}>
-                    <DeleteIcon color="#545454" hoverColor="#f44336"/>
+                    <DeleteIcon nativeColor="#545454" hoverColor="#f44336"/>
                   </IconButton>}
                 </td>
               </tr>
@@ -134,12 +134,12 @@ export default class Templates extends Component {
                   {item.origin !== 'SYSTEM' && canEdit && <IconButton
                     style={{padding: 0, width: 24, height: 24}}
                     onTouchTap={this.onClickEditMonitorTpl.bind(this, item)}>
-                    <EditIcon color="#545454" hoverColor="#f44336"/>
+                    <EditIcon nativeColor="#545454" hoverColor="#f44336"/>
                   </IconButton>}
                   {item.origin !== 'SYSTEM' && canEdit && <IconButton
                     style={{padding: 0, width: 24, height: 24}}
                     onTouchTap={this.onClickDeleteMonitorTpl.bind(this, item)}>
-                    <DeleteIcon color="#545454" hoverColor="#f44336"/>
+                    <DeleteIcon nativeColor="#545454" hoverColor="#f44336"/>
                   </IconButton>}
                 </td>
               </tr>

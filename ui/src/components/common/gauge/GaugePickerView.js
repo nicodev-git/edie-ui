@@ -61,21 +61,21 @@ export default class GaugePickerView extends React.Component {
                   tooltip="Dashboard"
                   tooltipPosition="top-right"
                   style={iconButtonStyle}
-                ><DashboardIcon color="#ffffff" onClick={this.onClickSubItem.bind(this, 'dashboard')}/></IconButton>
+                ><DashboardIcon nativeColor="#ffffff" onClick={this.onClickSubItem.bind(this, 'dashboard')}/></IconButton>
               </div>
               <div>
                 <IconButton
                   tooltip="Monitor"
                   tooltipPosition="top-right"
                   style={iconButtonStyle}
-                ><PlaylistIcon color="#ffffff" onClick={this.onClickSubItem.bind(this, 'monitor')}/></IconButton>
+                ><PlaylistIcon nativeColor="#ffffff" onClick={this.onClickSubItem.bind(this, 'monitor')}/></IconButton>
               </div>
               <div>
                 <IconButton
                   tooltip="Device"
                   tooltipPosition="top-right"
                   style={iconButtonStyle}
-                ><DeviceIcon color="#ffffff" onClick={this.onClickSubItem.bind(this, 'device')}/></IconButton>
+                ><DeviceIcon nativeColor="#ffffff" onClick={this.onClickSubItem.bind(this, 'device')}/></IconButton>
               </div>
             </Drawer>
           </div>

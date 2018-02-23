@@ -268,9 +268,9 @@ export default class ThreatMap extends Component {
               alt=""/>
             <IconButton
               style={{padding: 0, width: 32, height: 32}}
-              iconStyle={{padding: 0}}
+
               onTouchTap={this.onClickData.bind(this, item.data)}>
-              <FileIcon color="#fff"/>
+              <FileIcon nativeColor="#fff"/>
             </IconButton>
           </Transition>
         </div>
@@ -1357,9 +1357,9 @@ export default class ThreatMap extends Component {
               <div style={{position: 'absolute', right: 12, top: 2}}>
                 <IconButton
                   style={{padding: 0, width: 32, height: 32}}
-                  iconStyle={{padding: 0}}
+
                   onTouchTap={this.onToggleMaximize.bind(this)}>
-                  <CropFreeIcon color="#545454"/>
+                  <CropFreeIcon nativeColor="#545454"/>
                 </IconButton>
               </div>
             </div>

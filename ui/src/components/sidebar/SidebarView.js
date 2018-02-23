@@ -34,7 +34,7 @@ export default class SidebarView extends Component {
         data-tip={item.title}
         data-place="right"
         style={iconButtonStyle}
-        iconStyle={iconStyle}>
+        >
           {item.icon}
       </IconButton>
     )
@@ -70,9 +70,9 @@ export default class SidebarView extends Component {
         <div className="hidden">
           <IconButton
             style={iconButtonStyle}
-            iconStyle={iconStyle}
+
             onTouchTap={onToggle}>
-            <MenuIcon color="#ffffff"/>
+            <MenuIcon nativeColor="#ffffff"/>
           </IconButton>
         </div>
         <div style={{display: contentType.Main === pageType ? 'block' : 'none'}} className="sidebar">

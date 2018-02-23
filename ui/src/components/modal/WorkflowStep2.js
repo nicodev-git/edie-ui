@@ -68,7 +68,7 @@ export default class WorkflowStep2 extends Component {
                 </td>
                 <td className="text-right">
                   <IconButton onTouchTap={() => setTimeout(onRemoveRule, 1)} className={index !== (rules.length - 1) ? '' : 'hidden'}>
-                    <DeleteIcon color="#545454" className="link"/>
+                    <DeleteIcon nativeColor="#545454" className="link"/>
                   </IconButton>
                 </td>
               </tr>

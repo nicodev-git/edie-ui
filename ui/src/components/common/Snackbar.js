@@ -13,7 +13,7 @@ export default class IncidentSnackbar extends React.Component {
     }
     this.onClickAlert = this.onClickAlert.bind(this)
 
-    this.searchIcon = <SearchIcon color="white" style={searchIconStyle}/>
+    this.searchIcon = <SearchIcon nativeColor="white" style={searchIconStyle}/>
     this.onSnackClose = this.onSnackClose.bind(this)
   }
   onSnackClose (reason) {

@@ -10,8 +10,8 @@ const ProfileMenu = ({open, user, onClickProfile, onClickMessages, onSignOut, sh
   <div className="sidebar-item-container" onClick={() => showSidebarProfileMenu(true)}>
     <IconButton
       style={iconButtonStyle}
-      iconStyle={iconStyle}>
-      <AccoutCircleIcon color="#777777"/>
+      >
+      <AccoutCircleIcon nativeColor="#777777"/>
     </IconButton>
     <Menu open={open}>
       <MenuItem primaryText="Profile" onTouchTap={onClickProfile}/>

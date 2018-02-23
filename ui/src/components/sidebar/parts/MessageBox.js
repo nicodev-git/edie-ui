@@ -46,11 +46,11 @@ const MessageBox = ({open, openSidebarMessageMenu, closeSidebarMessageMenu}) => 
     >
       <IconButton
         style={iconButtonStyle}
-        iconStyle={iconStyle}
+
         data-tip="Messages"
         data-place="right"
       >
-        <EmailIcon color="#777777"/>
+        <EmailIcon nativeColor="#777777"/>
       </IconButton>
       <Menu
         open={open}

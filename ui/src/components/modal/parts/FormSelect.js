@@ -15,7 +15,7 @@ const FormSelect = ({input, label, floatingLabel, className, style, meta: { touc
     selectedMenuItemStyle={selectedItemStyle}
     menuItemStyle={inputStyle}
     labelStyle={selectLabelStyle}
-    iconStyle={selectIconStyle}
+
     style={style || inputContainerStyle}
     className={className}
     {...input}

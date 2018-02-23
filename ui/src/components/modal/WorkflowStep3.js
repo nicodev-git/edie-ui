@@ -11,7 +11,7 @@ export default class WorkflowStep3 extends Component {
     return (
       <div>
         <IconButton onTouchTap={onAddAction}>
-          <AddCircleIcon color="#545454"/>
+          <AddCircleIcon nativeColor="#545454"/>
         </IconButton>
       </div>
     )

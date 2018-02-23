@@ -10,25 +10,25 @@ const CrudButtons = ({onAdd, onEdit, onDelete}) => (
     {onAdd && <div className="add-button">
       <IconButton
         style={buttonStyle}
-        iconStyle={iconStyle}
+
         onTouchTap={onAdd}>
-          <AddCircleIcon color="#545454"/>
+          <AddCircleIcon nativeColor="#545454"/>
       </IconButton>
     </div>}
     <div className="edit-button">
       <IconButton
         style={buttonStyle}
-        iconStyle={iconStyle}
+
         onTouchTap={onEdit}>
-          <CreateIcon color="#545454"/>
+          <CreateIcon nativeColor="#545454"/>
       </IconButton>
     </div>
     <div className="remove-button">
       <IconButton
         style={buttonStyle}
-        iconStyle={iconStyle}
+
         onTouchTap={onDelete}>
-          <DeleteIcon color="#545454"/>
+          <DeleteIcon nativeColor="#545454"/>
       </IconButton>
     </div>
   </div>

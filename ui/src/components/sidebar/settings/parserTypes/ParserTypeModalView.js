@@ -40,7 +40,7 @@ export default class ParserTypeModalView extends Component {
 
           <CardPanel title="Patterns" tools={
             <IconButton onTouchTap={onDelete}>
-              <DeleteIcon color="#545454"/>
+              <DeleteIcon nativeColor="#545454"/>
             </IconButton>
           }>
             <div style={{maxHeight: '300px', overflow: 'auto'}}>

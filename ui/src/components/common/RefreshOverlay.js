@@ -29,9 +29,6 @@ export default class RefreshOverlay extends React.Component {
         <div style={loadingStyle} ref="containerDiv">
           <CircularProgress
             size={50}
-            left={0}
-            top={0}
-            status="loading"
             style={{display: 'inline-block', position: 'relative'}}
           />
         </div>

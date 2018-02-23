@@ -80,18 +80,20 @@ class Signin2 extends Component {
 
     if (page === 1) {
       return (
-        <div>
+        <div className="text-center margin-md">
           <Field name="email" component={FormInput} type="text" floatingLabel="User Name" autoFocus
-                 onKeyDown={this.onKeyDown.bind(this)}/>
-          <Button variant="raised" label="Next" primary className="margin-lg-top" onTouchTap={this.onClickNext.bind(this)}/>
+                 onKeyDown={this.onKeyDown.bind(this)} fullWidth/><br/>
+          <Button variant="raised" color="primary" className="margin-lg-top" onTouchTap={this.onClickNext.bind(this)}>
+            Next
+          </Button>
         </div>
       )
     } else {
       return (
-        <div>
-          <Field name="password" component={FormInput} type="password" floatingLabel="Password" autoFocus/>
-          <Button variant="raised" label="Prev" className="margin-lg" primary onTouchTap={this.onClickPrev.bind(this)}/>
-          <Button variant="raised" label="Login" primary className="margin-lg" type="submit"/>
+        <div className="text-center margin-md">
+          <Field name="password" component={FormInput} type="password" floatingLabel="Password" autoFocus fullWidth/><br/>
+          <Button variant="raised" className="margin-lg" color="primary" onTouchTap={this.onClickPrev.bind(this)}>Prev</Button>
+          <Button variant="raised" color="primary" className="margin-lg" type="submit">Login</Button>
         </div>
       )
     }

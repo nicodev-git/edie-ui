@@ -6,19 +6,15 @@ const style = {
   color: '#7c7c7e'
 }
 
-const labelStyle = {
-  paddingLeft: '10px'
-}
+// const labelStyle = {
+//   paddingLeft: '10px'
+// }
 
 const Metric = ({icon, value, title, onClick}) => (
   <Button variant="flat"
-    label={<span><span className="incident-button-value">{value}</span><span>{title}</span></span>}
-    labelPosition="before"
-    labelStyle={labelStyle}
     onTouchTap={onClick}
-    icon={icon}
     style={style}
-  />
+  >{icon}<span className="incident-button-value">{value}</span><span>{title}</span></Button>
 )
 
 export default Metric

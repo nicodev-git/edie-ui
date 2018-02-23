@@ -19,7 +19,7 @@ const SearchBar = ({onSearch, active, onBackgroundChange, defaultKeyword}) => (
     onFocus={onBackgroundChange}
     onBlur={onBackgroundChange}>
     <div className="searchbar" style={active ? activeStyle : defaultStyle}>
-      <SearchIcon color={active ? '#000000' : '#ffffff'} style={iconStyle}/>
+      <SearchIcon nativeColor={active ? '#000000' : '#ffffff'} style={iconStyle}/>
       <input
         id="searchInput"
         className="searchbar-input"
