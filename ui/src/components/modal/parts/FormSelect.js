@@ -1,27 +1,20 @@
 import React from 'react'
 import Select from 'material-ui/Select'
 import {MenuItem} from 'material-ui/Menu'
-import { errorStyle, underlineFocusStyle, inputStyle, selectLabelStyle,
-  selectIconStyle,
-  inputContainerStyle, selectedItemStyle } from 'style/common/materialStyles'
+import {InputLabel} from 'material-ui/Input'
+import {FormControl} from 'material-ui/Form'
 
-const FormSelect = ({input, label, floatingLabel, className, style, meta: { touched, error }, options}) => (
-  <Select
-    hintText={label}
-    floatingLabelText={floatingLabel}
-    errorText={touched && error}
-    errorStyle={errorStyle}
-    underlineStyle={underlineFocusStyle}
-    selectedMenuItemStyle={selectedItemStyle}
-    menuItemStyle={inputStyle}
-    labelStyle={selectLabelStyle}
-
-    style={style || inputContainerStyle}
-    className={className}
-    {...input}
-    onChange={(event, index, value) => input.onChange(value, event)}>
-    {options.map(option => <MenuItem key={option.value} value={option.value} primaryText={option.label}/>)}
-  </Select>
+const FormSelect = ({input, label, floatingLabel, style, fullWidth, className, meta: {touched, error}, options, ...custom}) => (
+  <FormControl fullWidth={fullWidth} className={className} style={{minWidth: 160}}>
+    <InputLabel>{floatingLabel}</InputLabel>
+    <Select
+      {...custom}
+      {...input}
+      placeholder={label}
+    >
+      {options.map(option => <MenuItem key={option.value} value={option.value}>{option.label}</MenuItem>)}
+    </Select>
+  </FormControl>
 )
 
 export default FormSelect

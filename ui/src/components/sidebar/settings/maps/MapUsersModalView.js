@@ -4,7 +4,7 @@ import DeleteIcon from 'material-ui-icons/Delete'
 import AddCircleIcon from 'material-ui-icons/AddCircle'
 
 import { CloseButton, Modal, CardPanel } from 'components/modal/parts'
-import { buttonStyle, iconStyle } from 'style/common/materialStyles'
+import { buttonStyle } from 'style/common/materialStyles'
 
 export default class MapUsersModalView extends Component {
   render () {

@@ -5,7 +5,7 @@ import HelpIcon from 'material-ui-icons/Help'
 import {Chip} from 'material-ui'
 
 import { FormInput, FormSelect, FormCheckbox, CardPanel } from 'components/modal/parts'
-import { buttonStyle, iconStyle, chipStyles } from 'style/common/materialStyles'
+import { buttonStyle, chipStyles } from 'style/common/materialStyles'
 
 import {severities} from 'shared/Global'
 

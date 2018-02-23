@@ -9,11 +9,6 @@ const buttonStyle = {
   height: 40
 }
 
-const iconStyle = {
-  width: 30,
-  height: 30
-}
-
 class DeviceMenuContainer extends Component {
   render () {
     return (
@@ -21,9 +16,9 @@ class DeviceMenuContainer extends Component {
         <IconButton
           id="device-menu-button"
           style={buttonStyle}
-          iconStyle={iconStyle}
+
           onTouchTap={this.props.onDeviceMenu}>
-            <AddCircleIcon color="#545454"/>
+            <AddCircleIcon nativeColor="#545454"/>
         </IconButton>
         { this.props.isDevicesDisplayed
           ? <DeviceMenu {...this.props}

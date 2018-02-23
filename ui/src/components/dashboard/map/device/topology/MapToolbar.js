@@ -29,11 +29,6 @@ const buttonStyle = {
   height: 32
 }
 
-const iconStyle = {
-  width: 24,
-  height: 24
-}
-
 export default class Toolbar extends React.Component {
   constructor (props) {
     super(props)
@@ -288,16 +283,16 @@ export default class Toolbar extends React.Component {
       <div className="panel-heading">
         <h4 className="panel-title">Topology</h4>
         <div className="panel-options" style={{top: 4}}>
-          <IconButton style={buttonStyle} iconStyle={iconStyle} onTouchTap={this.props.onClickEdit}>
-            <CreateIcon color="#545454"/>
+          <IconButton style={buttonStyle}  onTouchTap={this.props.onClickEdit}>
+            <CreateIcon nativeColor="#545454"/>
           </IconButton>
 
-          <IconButton style={buttonStyle} iconStyle={iconStyle} onTouchTap={this.onClickAdd.bind(this)} id="device-menu-button">
-            <AddCircleIcon color="#545454"/>
+          <IconButton style={buttonStyle}  onTouchTap={this.onClickAdd.bind(this)} id="device-menu-button">
+            <AddCircleIcon nativeColor="#545454"/>
           </IconButton>
 
-          <IconButton style={{...buttonStyle, display: obj ? 'inline-block' : 'none'}} iconStyle={iconStyle} onTouchTap={this.props.onClickDelete}>
-            <DeleteIcon color="#545454"/>
+          <IconButton style={{...buttonStyle, display: obj ? 'inline-block' : 'none'}}  onTouchTap={this.props.onClickDelete}>
+            <DeleteIcon nativeColor="#545454"/>
           </IconButton>
 
           {

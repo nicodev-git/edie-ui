@@ -9,15 +9,10 @@ const buttonStyle = {
   height: 40
 }
 
-const iconStyle = {
-  width: 30,
-  height: 30
-}
-
 const MapMenuList = ({ onAdd, onRename, onDelete, onSave, onImport }) => (
   <div className="inline-block">
-    <IconButton style={buttonStyle} iconStyle={iconStyle}>
-      <SettingsIcon color="#545454"/>
+    <IconButton style={buttonStyle} >
+      <SettingsIcon nativeColor="#545454"/>
     </IconButton>
     <Menu open={false}>
       {onAdd && <MenuItem onTouchTap={onAdd}>Add Map</MenuItem>}

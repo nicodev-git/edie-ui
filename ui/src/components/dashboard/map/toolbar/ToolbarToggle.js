@@ -8,17 +8,12 @@ const buttonStyle = {
   height: 40
 }
 
-const iconStyle = {
-  width: 30,
-  height: 30
-}
-
 const ToolbarToggle = ({onToggle}) => (
   <IconButton
     style={buttonStyle}
-    iconStyle={iconStyle}
+
     onTouchTap={onToggle}>
-    <CropFreeIcon color="#545454"/>
+    <CropFreeIcon nativeColor="#545454"/>
   </IconButton>
 )
 

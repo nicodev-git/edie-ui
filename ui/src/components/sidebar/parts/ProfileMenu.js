@@ -4,7 +4,7 @@ import Menu, {MenuItem} from 'material-ui/Menu'
 import Divider from 'material-ui/Divider'
 import AccoutCircleIcon from 'material-ui-icons/AccountCircle'
 
-import {iconStyle, iconButtonStyle} from 'style/common/materialStyles'
+import {iconButtonStyle} from 'style/common/materialStyles'
 
 const ProfileMenu = ({open, user, onClickProfile, onClickMessages, onSignOut, showSidebarProfileMenu}) => (
   <div className="sidebar-item-container" onClick={() => showSidebarProfileMenu(true)}>

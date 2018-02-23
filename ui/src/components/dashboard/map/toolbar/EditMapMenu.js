@@ -9,11 +9,6 @@ const buttonStyle = {
   height: 40
 }
 
-const iconStyle = {
-  width: 30,
-  height: 30
-}
-
 class EditMapMenu extends React.Component {
   constructor(props) {
     super(props)
@@ -32,8 +27,8 @@ class EditMapMenu extends React.Component {
     const {onEdit, onUndo} = this.props
     return (
       <div className="inline-block">
-        <IconButton style={buttonStyle} iconStyle={iconStyle} onClick={this.onClick.bind(this)}>
-          <CreateIcon color="#545454"/>
+        <IconButton style={buttonStyle}  onClick={this.onClick.bind(this)}>
+          <CreateIcon nativeColor="#545454"/>
         </IconButton>
         <Menu open={this.state.open}>
           <MenuItem onTouchTap={onEdit}>Edit</MenuItem>

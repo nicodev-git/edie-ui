@@ -13,11 +13,6 @@ const buttonStyle = {
   height: 40
 }
 
-const iconStyle = {
-  width: 30,
-  height: 30
-}
-
 class ToolbarOptions extends Component {
   render () {
     const {canEdit} = this.props
@@ -37,37 +32,29 @@ class ToolbarOptions extends Component {
         <IconButton
           onTouchTap={this.props.onClickLineWidthInc}
           className={this.props.lineGroup ? '' : 'hidden'}
-          style={buttonStyle}
-          iconStyle={iconStyle}
-          tooltip="Increase Line Width">
-          <ArrowUpIcon color="#545454"/>
+          style={buttonStyle}>
+          <ArrowUpIcon nativeColor="#545454"/>
         </IconButton>
 
         <IconButton
           onTouchTap={this.props.onClickLineWidthDec}
           className={this.props.lineGroup ? '' : 'hidden'}
-          style={buttonStyle}
-          iconStyle={iconStyle}
-          tooltip="Decrease Line Width">
-          <ArrowDownIcon color="#545454"/>
+          style={buttonStyle}>
+          <ArrowDownIcon nativeColor="#545454"/>
         </IconButton>
 
         <IconButton
           onTouchTap={this.props.onClickFontSizeUp}
           className={this.props.obj && !this.props.lineGroup ? '' : 'hidden'}
-          style={buttonStyle}
-          iconStyle={iconStyle}
-          tooltip="Increase Font Size">
-          <ArrowUpIcon color="#545454"/>
+          style={buttonStyle}>
+          <ArrowUpIcon nativeColor="#545454"/>
         </IconButton>
 
         <IconButton
           onTouchTap={this.props.onClickFontSizeDown}
           className={this.props.obj && !this.props.lineGroup ? '' : 'hidden'}
-          style={buttonStyle}
-          iconStyle={iconStyle}
-          tooltip="Decrease Font Size">
-          <ArrowDownIcon color="#545454"/>
+          style={buttonStyle}>
+          <ArrowDownIcon nativeColor="#545454"/>
         </IconButton>
 
         <DeleteObject obj={this.props.obj} onDelete={this.props.onClickDelete}/>

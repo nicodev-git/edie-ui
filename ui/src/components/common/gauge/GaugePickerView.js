@@ -1,5 +1,6 @@
 import React from 'react'
 import {Drawer, IconButton} from 'material-ui'
+import { withStyles } from 'material-ui/styles'
 
 import DashboardIcon from 'material-ui-icons/Dashboard'
 import DeviceIcon from 'material-ui-icons/Devices'
@@ -11,7 +12,11 @@ import {Modal} from 'components/modal/parts'
 
 import {iconButtonStyle, sidebarWidth, sidebarStyle} from 'style/common/materialStyles'
 
-export default class GaugePickerView extends React.Component {
+const styles = {
+  sidebar: sidebarStyle
+}
+
+class GaugePickerView extends React.Component {
   constructor () {
     super()
     this.state = {
@@ -26,7 +31,7 @@ export default class GaugePickerView extends React.Component {
   }
 
   render () {
-    const {onHide, gauges} = this.props
+    const {onHide, gauges, classes} = this.props
     const {selectedSubItem} = this.state
     let subPage
     switch (selectedSubItem) {
@@ -54,8 +59,7 @@ export default class GaugePickerView extends React.Component {
       <Modal title="Gauge" onRequestClose={onHide} contentStyle={{width: 998 + sidebarWidth, maxWidth: 'initial'}}>
         <div style={{marginTop: 40, minHeight: 800}} className="flex-horizontal">
           <div style={{width: sidebarWidth}}>
-            <Drawer open width={sidebarWidth}
-                    containerStyle={{...sidebarStyle, bottom: 0, top: 56, height: 'initial'}}>
+            <Drawer variant="permanent" classes={{paper: classes.sidebar}}>
               <div>
                 <IconButton
                   tooltip="Dashboard"
@@ -87,3 +91,5 @@ export default class GaugePickerView extends React.Component {
     )
   }
 }
+
+export default withStyles(styles)(GaugePickerView)

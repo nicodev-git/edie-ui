@@ -1,15 +1,19 @@
 import React, { Component } from 'react'
 import {Drawer, IconButton} from 'material-ui'
+import { withStyles } from 'material-ui/styles'
 import Badge from 'material-ui/Badge'
 import Divider from 'material-ui/Divider'
 import MenuIcon from 'material-ui-icons/Menu'
 
-import {badgeStyle, badgeRootStyle, iconStyle, iconButtonStyle, sidebarWidth, sidebarStyle} from 'style/common/materialStyles'
+import {badgeStyle, badgeRootStyle, iconButtonStyle, sidebarStyle} from 'style/common/materialStyles'
 
 import SearchBarContainer from './parts/SearchBarContainer'
-// import MessageBox from './parts/MessageBox'
 
-export default class SidebarView extends Component {
+const styles = {
+  sidebar: sidebarStyle
+}
+
+class SidebarView extends Component {
   constructor (props) {
     super(props)
     this.renderBadge = this.renderBadge.bind(this)
@@ -60,13 +64,14 @@ export default class SidebarView extends Component {
       // sidebarMessageMenuOpen,
       // openSidebarMessageMenu, closeSidebarMessageMenu,
       user,
-      visibleMenu
+      visibleMenu,
+      classes
     } = this.props
 
     const mainMenuItems = (user.defaultPage || 'dashboard') !== 'dashboard' ? [mainMenu[1], mainMenu[0], ...mainMenu.slice(2)] : mainMenu
     const deviceMenuItems = deviceMenu(device ? device.id : 'main')
     return (
-      <Drawer open width={sidebarWidth} containerStyle={sidebarStyle}>
+      <Drawer variant="permanent" classes={{paper: classes.sidebar}}>
         <div className="hidden">
           <IconButton
             style={iconButtonStyle}
@@ -120,3 +125,4 @@ export default class SidebarView extends Component {
     )
   }
 }
+export default withStyles(styles)(SidebarView)

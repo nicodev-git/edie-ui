@@ -9,15 +9,10 @@ const buttonStyle = {
   height: 40
 }
 
-const iconStyle = {
-  width: 30,
-  height: 30
-}
-
 const ZoomOptions = ({onZoomIn, onZoomOut, onZoomRect, onZoomReset}) => (
   <div className="inline-block">
-    <IconButton style={buttonStyle} iconStyle={iconStyle}>
-      <ZoomInIcon color="#545454"/>
+    <IconButton style={buttonStyle} >
+      <ZoomInIcon nativeColor="#545454"/>
     </IconButton>
     <Menu open={false}>
       <MenuItem onTouchTap={onZoomIn}>Zoom in</MenuItem>

@@ -58,9 +58,13 @@ export const dialogBodyStyle = {
     overflowY: 'auto'
 }
 export const dialogTitleStyle = {
-    background: '#324454',
-    color: 'white',
-    fontSize: 14,
-    padding: '12px 24px',
-    margin: 0
+  background: '#324454',
+  padding: '12px 24px',
+  color: 'white',
+  margin: 0
+}
+
+export const dialogTitleFontStyle = {
+  color: 'white',
+  fontSize: 14,
 }

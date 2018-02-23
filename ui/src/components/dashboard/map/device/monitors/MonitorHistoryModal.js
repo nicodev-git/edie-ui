@@ -27,11 +27,11 @@ export default class MonitorHistoryModal extends Component {
       'cssClassName': 'width-80 text-center',
       'customComponent': props => {
         const val = props.rowData.eventType === 'AGENT' ? 'UP' : props.data
-        let cls = <HelpIcon color="#FDB422"/>
+        let cls = <HelpIcon nativeColor="#FDB422"/>
         if (val === 'UP') {
-          cls = <CheckIcon color="green"/>
+          cls = <CheckIcon nativeColor="green"/>
         } else if (val === 'DOWN') {
-          cls = <CloseIcon color="red"/>
+          cls = <CloseIcon nativeColor="red"/>
         }
         return cls
       }

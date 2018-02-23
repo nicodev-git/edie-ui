@@ -3,7 +3,7 @@ import IconButton from 'material-ui/IconButton'
 import DeleteIcon from 'material-ui-icons/Delete'
 import AddCircleIcon from 'material-ui-icons/AddCircle'
 import CreateIcon from 'material-ui-icons/Create'
-import { buttonStyle, iconStyle } from 'style/common/materialStyles'
+import { buttonStyle } from 'style/common/materialStyles'
 
 const CrudButtons = ({onAdd, onEdit, onDelete}) => (
   <div className="crud-buttons">

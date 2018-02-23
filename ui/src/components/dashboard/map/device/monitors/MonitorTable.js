@@ -84,8 +84,8 @@ export default class MonitorTable extends Component {
         const res = row.checkResult ? JSON.stringify(row.checkResult) : ''
         return (
           <div>
-            <CommentIcon color="#545454" data-tip={res.length > 200 ? `${res.substring(0, 200)}...` : res}/>
-            <DateRangeIcon color="#545454" data-tip="History" onClick={this.onClickCal.bind(this, props.rowData)}/>
+            <CommentIcon nativeColor="#545454" data-tip={res.length > 200 ? `${res.substring(0, 200)}...` : res}/>
+            <DateRangeIcon nativeColor="#545454" data-tip="History" onClick={this.onClickCal.bind(this, props.rowData)}/>
           </div>
         )
       }
@@ -133,11 +133,11 @@ export default class MonitorTable extends Component {
   }
 
   healthFormatter (val) {
-    let cls = <HelpIcon color="#FDB422"/>
+    let cls = <HelpIcon nativeColor="#FDB422"/>
     if (val === 'UP') {
-      cls = <CheckIcon color="green"/>
+      cls = <CheckIcon nativeColor="green"/>
     } else if (val === 'DOWN') {
-      cls = <CloseIcon color="red"/>
+      cls = <CloseIcon nativeColor="red"/>
     }
     return (
       <div className="text-center">

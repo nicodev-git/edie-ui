@@ -75,7 +75,7 @@ export default class AppletCard extends React.Component {
             <div className="card-top">
               <img src={img} alt="" />
               <div className={`pull-right link info-button ${hovered ? 'visible' : ''}`}>
-                {onClickDelete && <CloseIcon size={32} color="white" onClick={this.onClickDelete.bind(this)}/>}
+                {onClickDelete && <CloseIcon size={32} nativeColor="white" onClick={this.onClickDelete.bind(this)}/>}
               </div>
             </div>
             <span className={`title ${(desc || '').length > (titleLimit || 45) ? 'title-sm' : ''}`}>

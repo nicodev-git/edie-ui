@@ -330,7 +330,7 @@ export default class LogPapers extends React.Component {
         </div>
         <div style={{position: 'absolute', right: 10, top: 10}} className={showRenew ? '' : 'hidden'}>
           <IconButton onTouchTap={this.onClickAutoRenew.bind(this)} tooltip="Show changes on realtime">
-            <RenewIcon color={this.state.isAutoPull ? '#00bcd4' : ''}/>
+            <RenewIcon nativeColor={this.state.isAutoPull ? '#00bcd4' : ''}/>
           </IconButton>
         </div>
         <div className="flex-1" style={{overflow: 'auto', whiteSpace: 'normal', wordBreak: 'break-word'}}>

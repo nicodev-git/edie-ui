@@ -9,15 +9,15 @@ const buttonStyle = {
   height: 40
 }
 
-const iconStyle = {
-  width: 30,
-  height: 30
-}
+// const iconStyle = {
+//   width: 30,
+//   height: 30
+// }
 
 const MapSelectView = ({ onChange, maps }) => (
   <div className="inline-block">
-    <IconButton style={buttonStyle} iconStyle={iconStyle}>
-      <ChromeReaderModeIcon color="#545454"/>
+    <IconButton style={buttonStyle}>
+      <ChromeReaderModeIcon nativeColor="#545454"/>
     </IconButton>
     <Menu open={false}>
       {

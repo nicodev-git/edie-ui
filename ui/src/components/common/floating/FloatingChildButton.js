@@ -59,7 +59,7 @@ export default class FloatingChildButton extends React.Component {
                  onMouseLeave={this.onMouseLeave}>
                 <Button variant="fab" color={!item.color ? "secondary" : null} mini
                                       onClick={item.onClick}
-                                      backgroundColor={item.color}>
+                                      style={{backgroundColor: item.color}}>
                     {item.icon}
                 </Button>
                 {this.renderLabel()}

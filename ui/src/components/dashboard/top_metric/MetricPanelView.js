@@ -36,7 +36,7 @@ const MetricPanelView = ({stats, showOpen, showToday, showAttackers, showMonth,
         onClick={showMonth}/>
     </div>
     <div style={logoutStyle}>
-      <Link to="/signout"><IconButton tooltip="Sign Out"><ExitIcon/></IconButton></Link>
+      <Link to="/signout"><IconButton><ExitIcon/></IconButton></Link>
     </div>
     {attackers}
   </div>

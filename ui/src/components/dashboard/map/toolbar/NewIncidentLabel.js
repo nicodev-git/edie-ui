@@ -8,18 +8,13 @@ const buttonStyle = {
   height: 40
 }
 
-const iconStyle = {
-  width: 30,
-  height: 30
-}
-
 const NewIncidentLabel = ({onNewIncident}) => (
   <li>
     <IconButton
       style={buttonStyle}
-      iconStyle={iconStyle}
+
       onTouchTap={onNewIncident}>
-        <AddCircleIcon color="#545454"/>
+        <AddCircleIcon nativeColor="#545454"/>
     </IconButton>
   </li>
 )
