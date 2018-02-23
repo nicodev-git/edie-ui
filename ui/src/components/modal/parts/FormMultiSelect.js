@@ -9,7 +9,7 @@ const FormMultiSelect = ({input, label, meta: { touched, error }, value, options
     selectedMenuItemStyle={selectedItemStyle}
     menuItemStyle={inputStyle}
     multiple
-    hintText={label}
+    label={label}
     value={input.value}
     onChange={onChange || input.onChange}
   >

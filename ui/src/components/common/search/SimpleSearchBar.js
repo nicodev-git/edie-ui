@@ -12,7 +12,7 @@ const activeStyle = {
 
 const SimpleSearchBar = ({onSearch, active, onFocus, onBlur, defaultKeyword, autoFocus}) => (
   <div className="searchbar-container" style={active ? activeStyle : defaultStyle}>
-    <TextField hintText="Search..."
+    <TextField label="Search..."
       inputStyle={inputStyle}
       underlineFocusStyle={underlineStyle}
       onFocus={onFocus}
