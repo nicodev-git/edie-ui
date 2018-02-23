@@ -2,6 +2,7 @@ import React from 'react'
 import {Button, Radio} from 'material-ui'
 import {Field} from 'redux-form'
 import {RadioGroup} from 'redux-form-material-ui'
+import {FormControlLabel} from 'material-ui/Form'
 
 import {FormInput, FormCheckbox, FormSelect, CardPanel, Modal} from 'components/modal/parts'
 
@@ -90,12 +91,14 @@ export default class MonitorWizardView extends React.Component {
                 style={{width: 120}} className="valign-middle"/>
             </div>
 
-            <div className={showAgentType ? '' : 'hidden'} style={{height: 70}}>
+            <div className={showAgentType ? '' : 'hidden'} style={{position: 'relative'}}>
               <Field name="agentType" component={RadioGroup} className="margin-md-top">
-                <Radio value="agent" label={agentLabel} className="pull-left" disabled={!agent}/>
-                <Radio value="collector" label={collectorLabel} className="pull-left" style={{width: 120, marginTop: 14}}/>
+                <FormControlLabel control={<Radio />} value="agent" label={agentLabel} disabled={!agent}/>
+                <FormControlLabel control={<Radio />} value="collector" label={collectorLabel}/>
               </Field>
-              <Field name="collectorId" label="Collector" component={FormSelect} className="pull-left" options={collectorOptions}/>
+              <div style={{position: 'absolute', left: 132, bottom: 10}}>
+                <Field name="collectorId" label="Collector" component={FormSelect} options={collectorOptions}/>
+              </div>
             </div>
           </CardPanel>
 
