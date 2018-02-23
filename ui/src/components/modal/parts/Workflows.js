@@ -9,14 +9,14 @@ export default class Workflows extends React.Component {
     return (
       <div>
         <div style={chipStyles.wrapper}>
-          {showWfSelectModal && <Chip style={chipStyles.chip} onClick={() => showWfSelectModal(true)}><b>+</b></Chip>}
+          {showWfSelectModal && <Chip style={chipStyles.chip} onClick={() => showWfSelectModal(true)} label={<b>+</b>}/>}
           {workflows.map((k, i) =>
             <Chip
               key={i}
               style={chipStyles.chip}
-              onRequestDelete={onClickDeleteWf ? () => onClickDeleteWf(k) : null}>
-              {k.name}
-            </Chip>
+              onDelete={onClickDeleteWf ? () => onClickDeleteWf(k) : null}
+              label={k.name}
+            />
           )}
         </div>
       </div>

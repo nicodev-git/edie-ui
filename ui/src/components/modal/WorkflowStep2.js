@@ -16,16 +16,12 @@ export default class WorkflowStep2 extends Component {
       <CardPanel title="Rules">
         <div>
           <div className="pull-left">
-            <Chip style={chipStyles.chip} onClick={() => onClickKeyChip('KEY_RAW_DATA')}>
-              KEY_RAW_DATA
-            </Chip>
+            <Chip style={chipStyles.chip} onClick={() => onClickKeyChip('KEY_RAW_DATA')} label="KEY_RAW_DATA"/>
           </div>
           <div className="pull-right" style={{marginTop: -5}}>
           </div>
           <div className="pull-right">
-            <Chip style={chipStyles.chip} onClick={() => onClickValueChip('.*')}>
-              .*
-            </Chip>
+            <Chip style={chipStyles.chip} onClick={() => onClickValueChip('.*')} label=".*"/>
           </div>
         </div>
         <div className="margin-md-bottom">
