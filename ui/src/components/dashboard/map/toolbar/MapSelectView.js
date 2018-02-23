@@ -13,22 +13,48 @@ const buttonStyle = {
 //   width: 30,
 //   height: 30
 // }
+export default class MapSelectView extends React.Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      open: false,
+      anchorEl: null
+    }
+  }
 
-const MapSelectView = ({ onChange, maps }) => (
-  <div className="inline-block">
-    <IconButton style={buttonStyle}>
-      <ChromeReaderModeIcon nativeColor="#545454"/>
-    </IconButton>
-    <Menu open={false}>
-      {
-        maps.map(map =>
-          <MenuItem value={map.id} key={map.id}>
-            {map.name}
-          </MenuItem>
-        )
-      }
-    </Menu>
-  </div>
-)
+  onClick(e) {
+    this.setState({
+      anchorEl: e.target,
+      open: true
+    })
+  }
+  onClose () {
+    this.setState({
+      open: false
+    })
+  }
 
-export default MapSelectView
+  onChange (map) {
+    this.onClose()
+    this.props.onChange(map)
+  }
+  render () {
+    const { maps } = this.props
+    return (
+      <div className="inline-block">
+        <IconButton style={buttonStyle} onClick={this.onClick.bind(this)}>
+          <ChromeReaderModeIcon nativeColor="#545454"/>
+        </IconButton>
+        <Menu open={this.state.open} anchorEl={this.state.anchorEl} onClose={this.onClose.bind(this)}>
+          {
+            maps.map(map =>
+              <MenuItem value={map.id} key={map.id} onClick={() => this.onChange(map)}>
+                {map.name}
+              </MenuItem>
+            )
+          }
+        </Menu>
+      </div>
+    )
+  }
+}

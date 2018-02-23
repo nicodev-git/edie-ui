@@ -55,8 +55,6 @@ export default class Alert extends Component {
           <TextField
             name="input"
             defaultValue={this.props.default}
-            inputStyle={inputStyle}
-            underlineFocusStyle={underlineStyle}
             onKeyUp={this.onKeyUp.bind(this)}
             ref="input"
           />
@@ -64,9 +62,11 @@ export default class Alert extends Component {
         <div className="form-buttons">
           <Button variant="raised"
             onClick={this.onClickSave.bind(this)}
-            label="OK"
             style={buttonStyle}
-            labelStyle={buttonTextStyle}/>
+            labelStyle={buttonTextStyle}>
+            OK
+          </Button>
+
         </div>
       </Modal>
     )
