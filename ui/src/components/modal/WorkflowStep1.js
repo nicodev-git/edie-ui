@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Field } from 'redux-form'
 import IconButton from 'material-ui/IconButton'
 import HelpIcon from 'material-ui-icons/Help'
-import {Chip} from 'material-ui'
+import {Chip, Tooltip} from 'material-ui'
 
 import { FormInput, FormSelect, FormCheckbox, CardPanel } from 'components/modal/parts'
 import { buttonStyle, chipStyles } from 'style/common/materialStyles'
@@ -56,13 +56,11 @@ export default class WorkflowStep1 extends Component {
           <div className="relative">
             <Field name="display_incident_desc" component={FormInput} label="Display Incident Description" style={{width: '100%'}}/>
             <div style={{position: 'absolute', right: 0, top: 0}}>
-              <IconButton
-                style={buttonStyle}
-
-                tooltip={`Use \${KEY} for show key’s value.<br/>Example: 'User \${user} was blocked at: \${datetime}'`}
-              >
-                <HelpIcon nativeColor="#2196f3"/>
-              </IconButton>
+              <Tooltip title={`Use \${KEY} for show key’s value.<br/>Example: 'User \${user} was blocked at: \${datetime}'`}>
+                <IconButton style={buttonStyle}>
+                  <HelpIcon nativeColor="#2196f3"/>
+                </IconButton>
+              </Tooltip>
             </div>
           </div>
         </CardPanel>

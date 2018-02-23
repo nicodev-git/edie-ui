@@ -1,7 +1,7 @@
 import React from 'react'
 import { assign, debounce } from 'lodash'
 import { reduxForm, Form } from 'redux-form'
-import {Button, IconButton, CircularProgress} from 'material-ui'
+import {Button, IconButton, CircularProgress, Tooltip} from 'material-ui'
 import AddCircleIcon from 'material-ui-icons/AddCircle'
 
 import { wizardEditConfig } from './WizardConfig'
@@ -466,9 +466,11 @@ class DeviceEditWizard extends React.Component {
   renderCredButtons () {
     return (
       <div>
-        <IconButton onTouchTap={this.onClickAddCred.bind(this)} tooltip="Add Credentials">
-          <AddCircleIcon size={32}/>
-        </IconButton>
+        <Tooltip title="Add Credentials">
+          <IconButton onTouchTap={this.onClickAddCred.bind(this)}>
+            <AddCircleIcon size={32}/>
+          </IconButton>
+        </Tooltip>
       </div>
     )
   }
@@ -481,11 +483,9 @@ class DeviceEditWizard extends React.Component {
           <div className="tab-options hidden">
             <div className="margin-md-top"
               style={{position: 'absolute', top: '40px', right: '20px'}}>
-              <Button variant="raised" label="Save" type="submit" primary className="hidden"/>&nbsp;
-              {/*{!selectedDevice.agent ? <Button variant="raised" label="Install Agent" onTouchTap={this.onClickInstall.bind(this)}/> : null}*/}
-              {/*{selectedDevice.agent ? <Button variant="raised" label="Uninstall Agent" onTouchTap={this.onClickUninstall.bind(this)}/> : null}*/}
+              <Button variant="raised" type="submit" color="primary" className="hidden">Save</Button>&nbsp;
               &nbsp;
-              <Button variant="raised" label="Add Credential" onTouchTap={this.onClickAddCred.bind(this)}/>
+              <Button variant="raised" onTouchTap={this.onClickAddCred.bind(this)}>Add Credential</Button>
             </div>
           </div>
 
@@ -512,7 +512,7 @@ class DeviceEditWizard extends React.Component {
 
           <div style={{height: 140, width: '100%'}} className="pull-left">&nbsp;</div>
           <div style={fixedBarStyle} className="text-right">
-            <Button variant="raised" label="Save" type="submit" backgroundColor="rgb(36, 104, 255)" labelColor="#fff"/>
+            <Button variant="raised" type="submit" backgroundColor="rgb(36, 104, 255)" labelColor="#fff">Save</Button>
           </div>
         </Form>
 

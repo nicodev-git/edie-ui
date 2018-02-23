@@ -39,19 +39,15 @@ export default class GWorkflows extends React.Component {
         tags = tags || []
         return (
           <div style={chipStyles.wrapper}>
-            {p.data ? <Chip style={chipStyles.smallChip} >Global</Chip> : ''}
+            {p.data ? <Chip style={chipStyles.smallChip} label="Global"/> : ''}
 
             <Chip style={{
               ...chipStyles.smallChip,
               backgroundColor: getSeverityColor(severity)
-            }}>
-              {severity}
-            </Chip>
+            }} label={severity}/>
 
             {tags.map(t =>
-              <Chip key={t} style={chipStyles.smallChip} >
-                {t}
-              </Chip>
+              <Chip key={t} style={chipStyles.smallChip} label={t}/>
             )}
 
             {p.rowData.isglobal ? (
@@ -69,7 +65,6 @@ export default class GWorkflows extends React.Component {
           <div>
             <EditIcon onTouchTap={this.onClickEditWf.bind(this, p.rowData)} className="link"/>
             <DeleteIcon onTouchTap={this.onClickDeleteWf.bind(this, p.rowData)} className="link margin-sm-left"/>
-
           </div>
         )
       }

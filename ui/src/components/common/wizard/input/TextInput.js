@@ -2,7 +2,6 @@ import React from 'react'
 import { Field } from 'redux-form'
 import TextField from 'material-ui/TextField'
 
-import { inputStyle, underlineStyle } from 'style/common/materialStyles'
 import {required} from 'components/modal/validation/CommonValidation'
 
 export default class TextInput extends React.Component {
@@ -12,9 +11,6 @@ export default class TextInput extends React.Component {
       <TextField
         {...input}
         label={label}
-        inputStyle={inputStyle}
-        errorText={touched && error}
-        underlineFocusStyle={underlineStyle}
         disabled={!!disabled}
         className={`valign-top mr-dialog ${className}`}
       />
