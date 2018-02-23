@@ -405,7 +405,7 @@ export default class MainIncidents extends Component {
                   menuItemStyle={inputStyle}
                   
                   multiple
-                  hintText="Select severities"
+                  label="Select severities"
                   onChange={this.onChangeSeverity.bind(this)}
                   value={selectedSeverity}
                   style={{width: '160px'}}
@@ -468,7 +468,7 @@ export default class MainIncidents extends Component {
             <div style={{margin: '0 auto', position: 'relative', display: 'inline-block', textAlign: 'center'}}>
               <div className="inline-block" style={{position: 'relative'}}>
                 <TextField
-                  hintText={<ActionSearch style={{bottom: '5px'}} color="#888888"/>}
+                  label={<ActionSearch style={{bottom: '5px'}} color="#888888"/>}
                   errorStyle={errorStyle}
                   inputStyle={inputStyle}
                   underlineFocusStyle={underlineStyle}

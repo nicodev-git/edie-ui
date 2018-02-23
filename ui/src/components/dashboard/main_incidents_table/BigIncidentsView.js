@@ -30,7 +30,7 @@ const BigIncidentsView = ({onHide,
         menuItemStyle={inputStyle}
 
         multiple
-        hintText="Select severities"
+        label="Select severities"
         onChange={onChangeSeverity}
         value={selectedSeverity}
         style={{width: '160px'}}
@@ -73,7 +73,7 @@ const BigIncidentsView = ({onHide,
         />
 
       <TextField
-        hintText={<ActionSearch style={{bottom: '5px'}} color="#888888"/>}
+        label={<ActionSearch style={{bottom: '5px'}} color="#888888"/>}
         errorStyle={errorStyle}
         inputStyle={inputStyle}
         underlineFocusStyle={underlineStyle}

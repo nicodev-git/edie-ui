@@ -770,7 +770,7 @@ export default class Log extends React.Component {
           <div className="text-center relative" style={{background: 'rgb(218, 218, 218)'}}>
             <div className="inline-block">
               <TextField name="search" value={this.state.searchValue}
-                         onChange={this.onChangeSearchValue.bind(this)} hintText="Search..."
+                         onChange={this.onChangeSearchValue.bind(this)} label="Search..."
                          onKeyDown={this.onSearchKeyDown.bind(this)}/>
             </div>
 
