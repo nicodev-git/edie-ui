@@ -11,7 +11,7 @@ export default class TextInput extends React.Component {
     const field = (
       <TextField
         {...input}
-        floatingLabelText={label}
+        label={label}
         inputStyle={inputStyle}
         errorText={touched && error}
         underlineFocusStyle={underlineStyle}

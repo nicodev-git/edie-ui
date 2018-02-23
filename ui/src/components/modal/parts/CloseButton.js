@@ -4,7 +4,7 @@ import { buttonStyle } from 'style/common/materialStyles'
 
 const CloseButton = ({onClose}) => (
   <div className="form-buttons">
-    <Button variant="raised" label="Close" onClick={onClose} style={buttonStyle} />
+    <Button variant="raised" onClick={onClose} style={buttonStyle}>Close</Button>
   </div>
 )
 

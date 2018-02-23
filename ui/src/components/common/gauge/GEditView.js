@@ -327,7 +327,7 @@ export default class GEditView extends React.Component {
     if (this.state.resource !== 'userconnector') return null
     return (
       <div className="col-md-6">
-        <TextField name="userConnectorId" value={userConnectorId} floatingLabelText="User Connector Id"
+        <TextField name="userConnectorId" value={userConnectorId} label="User Connector Id"
                    className="valign-top mr-dialog" onChange={this.onChangeText.bind(this, 'userConnectorId')} fullWidth/>
       </div>
     )
@@ -340,7 +340,7 @@ export default class GEditView extends React.Component {
     if (!devices) {
       return (
         <div className="col-md-6">
-          <Select value={monitorId} floatingLabelText="Monitor" className="valign-top" style={inputStyle} onChange={this.onChangeSelect.bind(this, 'monitorId')}>
+          <Select value={monitorId} label="Monitor" className="valign-top" style={inputStyle} onChange={this.onChangeSelect.bind(this, 'monitorId')}>
             {monitors.map(p => <MenuItem key={p.value} value={p.value} primaryText={p.label}/>)}
           </Select>
         </div>
@@ -351,12 +351,12 @@ export default class GEditView extends React.Component {
     const monitorOptions = index < 0 ? [] : devices[index].monitors.map(p => ({label: p.name, value: p.uid}))
     return [
       <div key="deviceId" className="col-md-6">
-        <Select value={deviceId} floatingLabelText="Device" className="valign-top" style={inputStyle} onChange={this.onChangeSelect.bind(this, 'deviceId')}>
+        <Select value={deviceId} label="Device" className="valign-top" style={inputStyle} onChange={this.onChangeSelect.bind(this, 'deviceId')}>
           {deviceOptions.map(p => <MenuItem key={p.value} value={p.value} primaryText={p.label}/>)}
         </Select>
       </div>,
       <div key="monitorId" className="col-md-6">
-        <Select value={monitorId} floatingLabelText="Monitor" className="valign-top" style={inputStyle} onChange={this.onChangeSelect.bind(this, 'monitorId')}>
+        <Select value={monitorId} label="Monitor" className="valign-top" style={inputStyle} onChange={this.onChangeSelect.bind(this, 'monitorId')}>
           {monitorOptions.map(p => <MenuItem key={p.value} value={p.value} primaryText={p.label}/>)}
         </Select>
       </div>
@@ -369,7 +369,7 @@ export default class GEditView extends React.Component {
     if (!devices) {
       return (
         <div className="col-md-6">
-          <Select value={workflowId} floatingLabelText="Workflow" className="valign-top" style={inputStyle} onChange={this.onChangeSelect.bind(this, 'workflowId')}>
+          <Select value={workflowId} label="Workflow" className="valign-top" style={inputStyle} onChange={this.onChangeSelect.bind(this, 'workflowId')}>
             {workflows.map(p => <MenuItem key={p.id} value={p.id} primaryText={p.name}/>)}
           </Select>
         </div>
@@ -402,7 +402,7 @@ export default class GEditView extends React.Component {
     if (gauge.templateName !== 'Table') return null
     return (
       <div className="col-md-6">
-        <Select value={tableViewMode} floatingLabelText="View Mode" className="valign-top" style={inputStyle} onChange={this.onChangeSelect.bind(this, 'tableViewMode')}>
+        <Select value={tableViewMode} label="View Mode" className="valign-top" style={inputStyle} onChange={this.onChangeSelect.bind(this, 'tableViewMode')}>
           {gaugeTableViewModes.map(p => <MenuItem key={p.value} value={p.value} primaryText={p.label}/>)}
         </Select>
       </div>
@@ -418,10 +418,10 @@ export default class GEditView extends React.Component {
       <div>
         <div className="row">
           <div className="col-md-6">
-            <TextField name="name" value={name} floatingLabelText="Name" className="valign-top" style={inputStyle} onChange={this.onChangeText.bind(this, 'name')}/>
+            <TextField name="name" value={name} label="Name" className="valign-top" style={inputStyle} onChange={this.onChangeText.bind(this, 'name')}/>
           </div>
           <div className="col-md-6">
-            <Select value={resource} floatingLabelText="Resource" className="valign-top" style={inputStyle} onChange={this.onChangeSelect.bind(this, 'resource')}>
+            <Select value={resource} label="Resource" className="valign-top" style={inputStyle} onChange={this.onChangeSelect.bind(this, 'resource')}>
               {gaugeResources.map(p => <MenuItem key={p.value} value={p.value} primaryText={p.label}/>)}
             </Select>
           </div>
@@ -430,7 +430,7 @@ export default class GEditView extends React.Component {
         <div className="row">
           {resource === 'search' ? (
             <div className="col-md-6">
-              <Select value={savedSearchId} floatingLabelText="Saved Search" className="valign-top mr-dialog" style={inputStyle} onChange={this.onChangeSelect.bind(this, 'savedSearchId')}>
+              <Select value={savedSearchId} label="Saved Search" className="valign-top mr-dialog" style={inputStyle} onChange={this.onChangeSelect.bind(this, 'savedSearchId')}>
                 {searchList.map(p => <MenuItem key={p.id} value={p.id} primaryText={p.name}/>)}
               </Select>
             </div>
@@ -442,12 +442,12 @@ export default class GEditView extends React.Component {
           {this.renderUserConnector()}
 
           {!hideDuration && <div className="col-md-3">
-            <Select value={duration} floatingLabelText="Duration" className="valign-top mr-dialog" style={inputStyle} onChange={this.onChangeSelect.bind(this, 'duration')}>
+            <Select value={duration} label="Duration" className="valign-top mr-dialog" style={inputStyle} onChange={this.onChangeSelect.bind(this, 'duration')}>
               {durations.map(p => <MenuItem key={p.value} value={p.value} primaryText={p.label}/>)}
             </Select>
           </div>}
           {!hideDuration && <div className="col-md-3">
-            <Select value={durationUnit} floatingLabelText="  " className="valign-top" style={inputStyle} onChange={this.onChangeSelect.bind(this, 'durationUnit')}>
+            <Select value={durationUnit} label="  " className="valign-top" style={inputStyle} onChange={this.onChangeSelect.bind(this, 'durationUnit')}>
               {gaugeDurationTypes.map(p => <MenuItem key={p.value} value={p.value} primaryText={p.label}/>)}
             </Select>
           </div>}
@@ -457,12 +457,12 @@ export default class GEditView extends React.Component {
 
         {!hideSplit && resource !== 'monitor' && resource !== 'userconnector' && <div className="row">
           <div className="col-md-3">
-            <Select value={splitBy} floatingLabelText="Resolution" className="valign-top mr-dialog" style={inputStyle} onChange={this.onChangeSelect.bind(this, 'splitBy')}>
+            <Select value={splitBy} label="Resolution" className="valign-top mr-dialog" style={inputStyle} onChange={this.onChangeSelect.bind(this, 'splitBy')}>
               {durations.map(p => <MenuItem key={p.value} value={p.value} primaryText={p.label}/>)}
             </Select>
           </div>
           <div className="col-md-3">
-            <Select value={splitUnit} floatingLabelText="  " className="valign-top" style={inputStyle} onChange={this.onChangeSelect.bind(this, 'splitUnit')}>
+            <Select value={splitUnit} label="  " className="valign-top" style={inputStyle} onChange={this.onChangeSelect.bind(this, 'splitUnit')}>
               {gaugeDurationTypes.map(p => <MenuItem key={p.value} value={p.value} primaryText={p.label}/>)}
             </Select>
           </div>
@@ -482,7 +482,7 @@ export default class GEditView extends React.Component {
     const {monitorIds, servers, logicalGroups, monitorTreeData, name} = this.state
     return (
       <div>
-        <TextField name="name" value={name} floatingLabelText="Name" className="valign-top mr-dialog" onChange={this.onChangeText.bind(this, 'name')}/>
+        <TextField name="name" value={name} label="Name" className="valign-top mr-dialog" onChange={this.onChangeText.bind(this, 'name')}/>
         <DeviceMonitorPicker
           allDevices={devices}
           monitorGroups={monitorGroups}
@@ -505,12 +505,12 @@ export default class GEditView extends React.Component {
     const {name, deviceId} = this.state
     return (
       <div>
-        <TextField name="name" value={name} floatingLabelText="Name" className="valign-top mr-dialog" onChange={this.onChangeText.bind(this, 'name')}/>
-        {devices && <Select value={deviceId} floatingLabelText="Device" className="valign-top" onChange={this.onChangeSelect.bind(this, 'deviceId')}>
+        <TextField name="name" value={name} label="Name" className="valign-top mr-dialog" onChange={this.onChangeText.bind(this, 'name')}/>
+        {devices && <Select value={deviceId} label="Device" className="valign-top" onChange={this.onChangeSelect.bind(this, 'deviceId')}>
           {devices.map(p => <MenuItem key={p.id} value={p.id} primaryText={p.name}/>)}
         </Select>}
 
-        <TextField name="checkInterval" floatingLabelText="Interval" className="valign-top mr-dialog" onChange={this.onChangeText.bind(this, 'checkInterval')}/>
+        <TextField name="checkInterval" label="Interval" className="valign-top mr-dialog" onChange={this.onChangeText.bind(this, 'checkInterval')}/>
       </div>
     )
   }
@@ -519,8 +519,8 @@ export default class GEditView extends React.Component {
     const {name, deviceId} = this.state
     return (
       <div>
-        <TextField name="name" value={name} floatingLabelText="Name" className="valign-top mr-dialog" onChange={this.onChangeText.bind(this, 'name')}/>
-        <Select value={deviceId} floatingLabelText="Device" className="valign-top" onChange={this.onChangeSelect.bind(this, 'deviceId')}>
+        <TextField name="name" value={name} label="Name" className="valign-top mr-dialog" onChange={this.onChangeText.bind(this, 'name')}/>
+        <Select value={deviceId} label="Device" className="valign-top" onChange={this.onChangeSelect.bind(this, 'deviceId')}>
           {(devices || []).map(p => <MenuItem key={p.id} value={p.id} primaryText={p.name}/>)}
         </Select>
       </div>
@@ -531,8 +531,8 @@ export default class GEditView extends React.Component {
     const {name, serviceName} = this.state
     return (
       <div>
-        <TextField name="name" value={name} floatingLabelText="Name" className="valign-top mr-dialog" onChange={this.onChangeText.bind(this, 'name')}/>
-        <Select value={serviceName} floatingLabelText="Service" className="valign-top mr-dialog" onChange={this.onChangeSelect.bind(this, 'serviceName')}>
+        <TextField name="name" value={name} label="Name" className="valign-top mr-dialog" onChange={this.onChangeText.bind(this, 'name')}/>
+        <Select value={serviceName} label="Service" className="valign-top mr-dialog" onChange={this.onChangeSelect.bind(this, 'serviceName')}>
           {services.map(p => <MenuItem key={p.ServiceName} value={p.ServiceName} primaryText={p.DisplayName || p.ServiceName}/>)}
         </Select>
       </div>
@@ -557,8 +557,8 @@ export default class GEditView extends React.Component {
 
     return (
       <div>
-        <TextField name="name" value={name} floatingLabelText="Name" className="valign-top mr-dialog" onChange={this.onChangeText.bind(this, 'name')}/>
-        <Select value={itemSize} floatingLabelText="Item Size" className="valign-top" onChange={this.onChangeSelect.bind(this, 'itemSize')}>
+        <TextField name="name" value={name} label="Name" className="valign-top mr-dialog" onChange={this.onChangeText.bind(this, 'name')}/>
+        <Select value={itemSize} label="Item Size" className="valign-top" onChange={this.onChangeSelect.bind(this, 'itemSize')}>
           <MenuItem value="normal" primaryText="Normal"/>
           <MenuItem value="slim" primaryText="Slim"/>
         </Select>
@@ -590,8 +590,8 @@ export default class GEditView extends React.Component {
 
     return (
       <div>
-        <TextField name="name" value={name} floatingLabelText="Name" className="valign-top mr-dialog" onChange={this.onChangeText.bind(this, 'name')}/>
-        <Select value={itemSize} floatingLabelText="Item Size" className="valign-top" onChange={this.onChangeSelect.bind(this, 'itemSize')}>
+        <TextField name="name" value={name} label="Name" className="valign-top mr-dialog" onChange={this.onChangeText.bind(this, 'name')}/>
+        <Select value={itemSize} label="Item Size" className="valign-top" onChange={this.onChangeSelect.bind(this, 'itemSize')}>
           <MenuItem value="normal" primaryText="Normal"/>
           <MenuItem value="slim" primaryText="Slim"/>
         </Select>
@@ -625,13 +625,13 @@ export default class GEditView extends React.Component {
 
     return (
       <div>
-        <TextField name="name" value={name} floatingLabelText="Name" className="valign-top mr-dialog" onChange={this.onChangeText.bind(this, 'name')}/>
+        <TextField name="name" value={name} label="Name" className="valign-top mr-dialog" onChange={this.onChangeText.bind(this, 'name')}/>
 
-        {devices && <Select value={deviceId} floatingLabelText="Device" className="valign-top" onChange={this.onChangeSelect.bind(this, 'deviceId')}>
+        {devices && <Select value={deviceId} label="Device" className="valign-top" onChange={this.onChangeSelect.bind(this, 'deviceId')}>
           {devices.map(p => <MenuItem key={p.id} value={p.id} primaryText={p.name}/>)}
         </Select>}
 
-        <Select multiple floatingLabelText="Monitors" value={monitorIds} onChange={this.onChangeSelect.bind(this, 'monitorIds')}>
+        <Select multiple label="Monitors" value={monitorIds} onChange={this.onChangeSelect.bind(this, 'monitorIds')}>
           {(monitors || []).map(p =>
             <MenuItem
               key={p.uid}
@@ -650,7 +650,7 @@ export default class GEditView extends React.Component {
     const {name, showImage} = this.state
     return (
       <div>
-        <TextField name="name" value={name} floatingLabelText="Name" className="valign-top mr-dialog" onChange={this.onChangeText.bind(this, 'name')}/>
+        <TextField name="name" value={name} label="Name" className="valign-top mr-dialog" onChange={this.onChangeText.bind(this, 'name')}/>
         <div className="margin-md-top">
           <Checkbox label="Show Images" checked={showImage} onCheck={this.onChangeText.bind(this, 'showImage')}/>
         </div>
@@ -663,7 +663,7 @@ export default class GEditView extends React.Component {
     const {servers, selectedDevice, selectedRight, selectedMonitor, name} = this.state
     return (
       <div>
-        <TextField name="name" value={name} floatingLabelText="Name" className="valign-top mr-dialog" onChange={this.onChangeText.bind(this, 'name')}/>
+        <TextField name="name" value={name} label="Name" className="valign-top mr-dialog" onChange={this.onChangeText.bind(this, 'name')}/>
         <GaugeLogMonitorPicker
           height={400}
           devices={devices}
@@ -686,7 +686,7 @@ export default class GEditView extends React.Component {
     const {searchList} = this.props
     return (
       <div>
-        <TextField name="name" value={name} floatingLabelText="Name" className="valign-top mr-dialog" onChange={this.onChangeText.bind(this, 'name')}/>
+        <TextField name="name" value={name} label="Name" className="valign-top mr-dialog" onChange={this.onChangeText.bind(this, 'name')}/>
         <SavedSearchPicker
           searchList={searchList}
           selectedSearchIds={searchIds}

@@ -112,10 +112,10 @@ export default class Websocket extends React.Component {
     return (
       <div>
         <div className="padding-md form-mui-inline">
-          <TextField floatingLabelText="Name"/>&nbsp;
-          <TextField floatingLabelText="Description"/>&nbsp;
+          <TextField label="Name"/>&nbsp;
+          <TextField label="Description"/>&nbsp;
           <Select
-            floatingLabelText="Severity"
+            label="Severity"
             value="HIGH">
             <MenuItem value="HIGH" primaryText="High"/>
             <MenuItem value="MEDIUM" primaryText="Medium"/>
@@ -129,27 +129,27 @@ export default class Websocket extends React.Component {
         <div className="header-red">BI</div>
         <div className="padding-md-left">
           <div className="form-mui-inline">
-            <TextField floatingLabelText="Open Incidents"/>&nbsp;
+            <TextField label="Open Incidents"/>&nbsp;
             <Button variant="raised" label="Update" onTouchTap={this.onClickUpdateOpenIncident.bind(this)} primary className="margin-md-top"/>
           </div>
 
           <div className="form-mui-inline">
-            <TextField floatingLabelText="Today Incidents"/>&nbsp;
+            <TextField label="Today Incidents"/>&nbsp;
             <Button variant="raised" label="Update" onTouchTap={this.onClickUpdateTodayIncident.bind(this)} primary className="margin-md-top"/>
           </div>
 
           <div className="form-mui-inline">
-            <TextField floatingLabelText="Attackers Today"/>&nbsp;
+            <TextField label="Attackers Today"/>&nbsp;
             <Button variant="raised" label="Update" onTouchTap={this.onClickUpdateAttackerToday.bind(this)} primary className="margin-md-top"/>
           </div>
 
           <div className="form-mui-inline">
-            <TextField floatingLabelText="Month Incidents"/>&nbsp;
+            <TextField label="Month Incidents"/>&nbsp;
             <Button variant="raised" label="Update" onTouchTap={this.onClickUpdateMonthIncident.bind(this)} primary className="margin-md-top"/>
           </div>
 
           <div className="form-mui-inline">
-            <TextField floatingLabelText="Incident News"/>&nbsp;
+            <TextField label="Incident News"/>&nbsp;
             <Button variant="raised" label="Push" onTouchTap={this.onClickPushNews.bind(this)} primary className="margin-md-top"/>
           </div>
         </div>
@@ -157,8 +157,8 @@ export default class Websocket extends React.Component {
         <div className="header-green">Device</div>
         <div className="padding-md-left">
           <div className="form-mui-inline">
-            <TextField floatingLabelText="Device ID"/>&nbsp;
-            <Select floatingLabelText="Status" value="up">
+            <TextField label="Device ID"/>&nbsp;
+            <Select label="Status" value="up">
               <MenuItem value="up" primaryText="Up"/>
               <MenuItem value="down" primaryText="Down"/>
             </Select>
@@ -166,7 +166,7 @@ export default class Websocket extends React.Component {
             <Button variant="raised" label="Update" onTouchTap={this.onClickUpdateDeviceStatus.bind(this)} primary className="margin-md-top"/>
           </div>
           <div className="form-mui-inline">
-            <TextField floatingLabelText="Connection ID"/>&nbsp;
+            <TextField label="Connection ID"/>&nbsp;
             <div className="inline-block margin-md-top margin-md-right">
               <div className="input-group colorpicker-element" onClick={this.onClickColorPicker.bind(this)}>
                 <div className="input-group-addon">

@@ -115,7 +115,7 @@ export default class EventLogTable extends Component {
       <div className="text-center">
         <div className="pull-left text-left">
           <Select
-            floatingLabelText="Log"
+            label="Log"
             onChange={this.onChangeLogName.bind(this)}
             value={selectedLogName}>
             {monitorLogNames.map((c, i) =>

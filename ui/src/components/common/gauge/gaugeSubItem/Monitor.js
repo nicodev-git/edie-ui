@@ -178,7 +178,7 @@ export default class Monitor extends React.Component {
       <div>
         <div className="padding-lg-left">
           <Select
-            floatingLabelText="Devices"
+            label="Devices"
             value={deviceId}
             className="valign-top"
             onChange={this.onChange}

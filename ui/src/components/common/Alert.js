@@ -12,7 +12,8 @@ export default class Alert extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      open: true
+      open: true,
+      input: props.default || ''
     }
   }
   onKeyUp (e) {
@@ -26,7 +27,7 @@ export default class Alert extends Component {
   }
 
   onClickSave () {
-    this.closeAlert('ok', this.refs.input.input.value || '')
+    this.closeAlert('ok', this.state.input || '')
   }
 
   onClickClose () {
@@ -54,9 +55,9 @@ export default class Alert extends Component {
         <div className={`form-column ${this.props.type === TYPE_PROMPT ? '' : 'hidden'}`}>
           <TextField
             name="input"
-            defaultValue={this.props.default}
+            value={this.state.input}
+            onChange={e => this.setState({input: e.target.value})}
             onKeyUp={this.onKeyUp.bind(this)}
-            ref="input"
           />
         </div>
         <div className="form-buttons">

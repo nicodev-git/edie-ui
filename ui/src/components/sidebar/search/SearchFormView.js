@@ -160,7 +160,7 @@ export default class SearchFormView extends React.Component {
               <div style={{marginTop: -35}}>
                 <Select
                   multiple
-                  floatingLabelText="Severity"
+                  label="Severity"
                   value={selectedSeverities}
                   onChange={onChangeSeverity}
                   style={{width: 300}}
@@ -182,7 +182,7 @@ export default class SearchFormView extends React.Component {
               <div style={{marginTop: -20}}>
                 <Select
                   multiple
-                  floatingLabelText="MonitorType"
+                  label="MonitorType"
                   value={selectedMonitorTypes}
                   onChange={onChangeMonitorType}
                   style={{width: 300}}

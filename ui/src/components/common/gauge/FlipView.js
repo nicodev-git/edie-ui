@@ -7,7 +7,7 @@ import RefreshIcon from 'material-ui-icons/Refresh'
 import RefreshOverlay from 'components/common/RefreshOverlay'
 import {Paper} from 'material-ui'
 
-import {paperZDepth} from 'style/common/materialStyles'
+// import {paperZDepth} from 'style/common/materialStyles'
 
 const basicTitleStyle = {
   fontSize: 14,
@@ -117,7 +117,9 @@ export default class FlipView extends React.Component {
                   {this.renderInfoIcon()}
                 </div>
               ) : (
-                <Paper className="flex-1 flex-vertical" style={paperStyle} zDepth={paperZDepth} onMouseEnter={this.onMouseEnter} onMouseLeave={this.onMouseLeave}>
+                <Paper className="flex-1 flex-vertical"
+                       style={paperStyle}
+                       onMouseEnter={this.onMouseEnter} onMouseLeave={this.onMouseLeave}>
                   {!hideTitle && <div style={{...basicTitleStyle, ...titleStyle}}>
                     {title || gauge.name}
                   </div>}

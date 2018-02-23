@@ -164,7 +164,7 @@ export default class GaugeWizardView extends React.Component {
       <div>
         <Field name="name" component={FormInput} floatingLabel="Name" className="valign-top mr-dialog" validate={[required]}/>
         {devices && <Field name="deviceId" component={FormSelect} floatingLabel="Device" options={deviceOptions} className="valign-top" validate={[required]}/>}
-        <Select multiple floatingLabelText="Severity" onChange={onChangeSeverity} className={`valign-top ${devices ? 'mr-dialog' : ''}`} value={selectedSeverity}>
+        <Select multiple label="Severity" onChange={onChangeSeverity} className={`valign-top ${devices ? 'mr-dialog' : ''}`} value={selectedSeverity}>
           {severities.map(option =>
             <MenuItem key={option.value} insetChildren checked={selectedSeverity && selectedSeverity.includes(option.value)}
               value={option.value} primaryText={option.label}/>
@@ -264,7 +264,7 @@ export default class GaugeWizardView extends React.Component {
       <div>
         <Field name="name" component={FormInput} floatingLabel="Name" className="valign-top mr-dialog" validate={[required]}/>
         {devices && this.renderDeviceList()}
-        <Select multiple floatingLabelText="Monitors" value={selectedMonitors} onChange={onChangeMonitors}>
+        <Select multiple label="Monitors" value={selectedMonitors} onChange={onChangeMonitors}>
           {(monitors || []).map((p, i) =>
             <MenuItem
               key={i}
@@ -283,7 +283,7 @@ export default class GaugeWizardView extends React.Component {
     return (
       <div>
         <Field name="name" component={FormInput} floatingLabel="Name" className="valign-top mr-dialog" validate={[required]}/>
-        <Select multiple floatingLabelText="Services" value={serviceNames} onChange={onChangeServiceNames} validate={[required]}>
+        <Select multiple label="Services" value={serviceNames} onChange={onChangeServiceNames} validate={[required]}>
           {(services || []).map((p, i) =>
             <MenuItem
               key={i}

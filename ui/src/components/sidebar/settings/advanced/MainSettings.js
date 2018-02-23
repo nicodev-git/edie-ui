@@ -111,7 +111,7 @@ export default class MainSettings extends Component {
         </div>
         <div>
           <Select
-            floatingLabelText="Send IMP Logs Level"
+            label="Send IMP Logs Level"
             value={this.getOptionValue('SEND_LOGS_LEVEL')}
             onChange={this.onChangeSendLogLevel.bind(this)}
             disabled={!canEdit}

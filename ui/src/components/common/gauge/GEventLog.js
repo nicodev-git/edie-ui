@@ -151,7 +151,7 @@ export default class GEventLog extends React.Component {
     return (
       <div className="flex-vertical flex-1">
         <div style={{marginTop: -16}}>
-          <Select floatingLabelText="Log" value={selectedLogName} onChange={this.onChangeLog.bind(this)}>
+          <Select label="Log" value={selectedLogName} onChange={this.onChangeLog.bind(this)}>
             {logNames.map(p =>
               <MenuItem key={p} value={p} primaryText={p}/>
             )}

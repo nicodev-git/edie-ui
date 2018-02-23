@@ -58,28 +58,16 @@ class GaugePickerView extends React.Component {
     return (
       <Modal title="Gauge" onRequestClose={onHide} contentStyle={{width: 998 + sidebarWidth, maxWidth: 'initial'}}>
         <div style={{marginTop: 40, minHeight: 800}} className="flex-horizontal">
-          <div style={{width: sidebarWidth}}>
+          <div style={{width: sidebarWidth}} className="hidden">
             <Drawer variant="permanent" classes={{paper: classes.sidebar}}>
               <div>
-                <IconButton
-                  tooltip="Dashboard"
-                  tooltipPosition="top-right"
-                  style={iconButtonStyle}
-                ><DashboardIcon nativeColor="#ffffff" onClick={this.onClickSubItem.bind(this, 'dashboard')}/></IconButton>
+                <IconButton style={iconButtonStyle}><DashboardIcon nativeColor="#ffffff" onClick={this.onClickSubItem.bind(this, 'dashboard')}/></IconButton>
               </div>
               <div>
-                <IconButton
-                  tooltip="Monitor"
-                  tooltipPosition="top-right"
-                  style={iconButtonStyle}
-                ><PlaylistIcon nativeColor="#ffffff" onClick={this.onClickSubItem.bind(this, 'monitor')}/></IconButton>
+                <IconButton style={iconButtonStyle}><PlaylistIcon nativeColor="#ffffff" onClick={this.onClickSubItem.bind(this, 'monitor')}/></IconButton>
               </div>
               <div>
-                <IconButton
-                  tooltip="Device"
-                  tooltipPosition="top-right"
-                  style={iconButtonStyle}
-                ><DeviceIcon nativeColor="#ffffff" onClick={this.onClickSubItem.bind(this, 'device')}/></IconButton>
+                <IconButton style={iconButtonStyle}><DeviceIcon nativeColor="#ffffff" onClick={this.onClickSubItem.bind(this, 'device')}/></IconButton>
               </div>
             </Drawer>
           </div>

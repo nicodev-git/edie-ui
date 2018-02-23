@@ -122,17 +122,17 @@ export default class MainDashboard extends React.Component {
     if (!board) return null
     if (board.type === 'system') {
       return (
-        <div className="padding-lg-left" style={{height: 90}} />
+        <div className="padding-lg-left margin-sm-top"/>
       )
     }
     return (
-      <div className="padding-lg-left" style={{height: 90}}>
+      <div className="padding-lg-left margin-sm-top">
         <Select
-          floatingLabelText="Dashboard" value={this.getSelectedId()} onChange={this.onChangeBoard.bind(this)}
-          className="valign-top"
+          label="Dashboard" value={this.getSelectedId()} onChange={this.onChangeBoard.bind(this)}
+          className="valign-top margin-sm-top"
           style={{width: 180}}>
           {this.getBoards().map(p =>
-            <MenuItem key={p.id} value={p.id} primaryText={p.name}/>
+            <MenuItem key={p.id} value={p.id}>{p.name}</MenuItem>
           )}
         </Select>
         {canEdit && <IconButton onTouchTap={this.onClickAdd.bind(this)} className="valign-bottom"><AddCircleIcon /></IconButton>}

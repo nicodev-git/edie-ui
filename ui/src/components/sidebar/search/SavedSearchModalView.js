@@ -54,7 +54,7 @@ class SavedSearchModalView extends React.Component {
           contentStyle={{paddingTop: 0}}
           tools={canEdit && <IconButton onTouchTap={onClickAdd}><AddCircleIcon size={32}/></IconButton>}>
 
-          <TextField value={savedSearchKeyword} floatingLabelText="Search" onChange={onChangeKeyword}/>
+          <TextField value={savedSearchKeyword} label="Search" onChange={onChangeKeyword}/>
 
           <div style={{maxHeight: '350px', overflow: 'auto', width: '100%'}}>
             <table className="table table-hover">
