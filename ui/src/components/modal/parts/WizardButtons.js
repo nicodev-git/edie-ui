@@ -1,6 +1,6 @@
 import React from 'react'
 import {Button} from 'material-ui'
-import { buttonStyle, buttonTextStyle, buttonDisabledStyle } from 'style/common/materialStyles'
+import { buttonStyle, buttonDisabledStyle } from 'style/common/materialStyles'
 
 const WizardButtons = ({onClose, onDiagram, onPrev, onNext, current, steps, isDiagramButton}) => (
   <div className="text-right mb-none form-buttons">

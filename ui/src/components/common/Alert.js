@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import {appendComponent, removeComponent} from 'util/Component'
 import { SubHeader, Modal } from '../modal/parts'
 import {TextField, Button} from 'material-ui'
-import { buttonStyle, buttonTextStyle } from 'style/common/materialStyles'
+import { buttonStyle } from 'style/common/materialStyles'
 
 const TYPE_ALERT = 'alert'
 const TYPE_CONFIRM = 'confirm'

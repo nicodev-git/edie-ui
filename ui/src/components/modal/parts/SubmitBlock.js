@@ -1,6 +1,6 @@
 import React from 'react'
 import {Button} from 'material-ui'
-import { buttonStyle, buttonTextStyle } from 'style/common/materialStyles'
+import { buttonStyle } from 'style/common/materialStyles'
 
 const SubmitBlock = ({name, className}) => (
   <div className={`form-buttons ${className}`}>

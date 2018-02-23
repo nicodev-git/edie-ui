@@ -4,8 +4,8 @@ import ArrowDownIcon from 'material-ui-icons/ArrowDownward'
 import ArrowUpIcon from 'material-ui-icons/ArrowUpward'
 
 import { DeleteObject, ColorPicker,
-  TextChange, RotateHubLeft, RotateHubRight, ChangeLineType, OptionUploader,
-  EditMapMenu, DropdownToggle, DeviceMenuContainer } from './index'
+  TextChange, RotateHubLeft, RotateHubRight, ChangeLineType,
+  EditMapMenu, DeviceMenuContainer } from './index'
 
 const buttonStyle = {
   padding: '4px',
@@ -62,34 +62,33 @@ class ToolbarOptions extends Component {
           onEdit={this.props.onMapEdit}
           onUndo={this.props.onEditMapUndo}/>}
         {canEdit && <DeviceMenuContainer {...this.props}/>}
-        <TextChange
-          text={this.props.text}
-          onChange={this.props.onClickAlignLeft}
-          icon="fa fa-align-left"
-          title="Align Left"
-        />
-        <TextChange
-          text={this.props.text}
-          onChange={this.props.onClickAlignCenter}
-          icon="fa fa-align-center"
-          title="Align Center"
-        />
-        <TextChange
-          text={this.props.text}
-          onChange={this.props.onClickAlignLeft}
-          icon="fa fa-align-right"
-          title="Align Right"
-        />
-        <RotateHubLeft hub={this.props.hub} />
-        <RotateHubRight hub={this.props.hub} />
-        <ChangeLineType
-          line={this.props.line}
-          lineTypes={this.props.lineTypes}
-          onChange={this.props.toggleLineTypes}
-        />
-        <OptionUploader />
-        <DropdownToggle />
-
+        <div className="hidden">
+          <TextChange
+            text={this.props.text}
+            onChange={this.props.onClickAlignLeft}
+            icon="fa fa-align-left"
+            title="Align Left"
+          />
+          <TextChange
+            text={this.props.text}
+            onChange={this.props.onClickAlignCenter}
+            icon="fa fa-align-center"
+            title="Align Center"
+          />
+          <TextChange
+            text={this.props.text}
+            onChange={this.props.onClickAlignLeft}
+            icon="fa fa-align-right"
+            title="Align Right"
+          />
+          <RotateHubLeft hub={this.props.hub} />
+          <RotateHubRight hub={this.props.hub} />
+          <ChangeLineType
+            line={this.props.line}
+            lineTypes={this.props.lineTypes}
+            onChange={this.props.toggleLineTypes}
+          />
+        </div>
       </div>
     )
   }

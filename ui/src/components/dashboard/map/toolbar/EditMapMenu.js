@@ -13,15 +13,25 @@ class EditMapMenu extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      open: false
+      open: false,
+      anchorEl: null
     }
   }
 
-  onClick () {
+  onClick (e) {
     this.setState({
-      open: !this.state.open
+      open: true,
+      anchorEl: e.target
     })
   }
+
+  onClose () {
+    this.setState({
+      open: false
+    })
+    return true
+  }
+
 
   render () {
     const {onEdit, onUndo} = this.props
@@ -30,9 +40,11 @@ class EditMapMenu extends React.Component {
         <IconButton style={buttonStyle}  onClick={this.onClick.bind(this)}>
           <CreateIcon nativeColor="#545454"/>
         </IconButton>
-        <Menu open={this.state.open}>
-          <MenuItem onTouchTap={onEdit}>Edit</MenuItem>
-          <MenuItem onTouchTap={onUndo}>Undo</MenuItem>
+        <Menu open={this.state.open}
+              anchorEl={this.state.anchorEl}
+              onClose={this.onClose.bind(this)}>
+          <MenuItem onTouchTap={() => this.onClose() && onEdit()}>Edit</MenuItem>
+          <MenuItem onTouchTap={() => this.onClose() && onUndo()}>Undo</MenuItem>
         </Menu>
       </div>
     )

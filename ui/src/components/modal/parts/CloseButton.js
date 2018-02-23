@@ -1,6 +1,6 @@
 import React from 'react'
 import Button from 'material-ui/Button'
-import { buttonStyle, buttonTextStyle } from 'style/common/materialStyles'
+import { buttonStyle } from 'style/common/materialStyles'
 
 const CloseButton = ({onClose}) => (
   <div className="form-buttons">
