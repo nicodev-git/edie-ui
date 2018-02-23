@@ -58,7 +58,7 @@ export default class Selector extends Component {
         autoWidth={autoWidth}
         onChange={this.handleChange.bind(this)}
         style={style}
-        labelStyle={labelStyle}
+        
         listStyle={listStyle}
         underlineStyle={{display: 'none'}}
       >

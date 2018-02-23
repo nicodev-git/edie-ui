@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import {appendComponent, removeComponent} from 'util/Component'
 import { SubHeader, Modal } from '../modal/parts'
 import {TextField, Button} from 'material-ui'
-import { inputStyle, underlineStyle, buttonStyle, buttonTextStyle } from 'style/common/materialStyles'
+import { buttonStyle, buttonTextStyle } from 'style/common/materialStyles'
 
 const TYPE_ALERT = 'alert'
 const TYPE_CONFIRM = 'confirm'
@@ -62,8 +62,7 @@ export default class Alert extends Component {
         <div className="form-buttons">
           <Button variant="raised"
             onClick={this.onClickSave.bind(this)}
-            style={buttonStyle}
-            labelStyle={buttonTextStyle}>
+            style={buttonStyle}>
             OK
           </Button>
 

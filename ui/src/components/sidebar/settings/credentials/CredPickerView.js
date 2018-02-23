@@ -52,7 +52,7 @@ export default class CredPickerView extends React.Component {
                   <td>
                     {p.global ? (p.default ? (
                       <div style={chipStyles.wrapper}>
-                        <Chip style={chipStyles.smallChip} labelStyle={chipStyles.smallLabel}>{p.type}&nbsp;Default</Chip>
+                        <Chip style={chipStyles.smallChip} >{p.type}&nbsp;Default</Chip>
                       </div>
                     ) : 'Global') : null}
                   </td>

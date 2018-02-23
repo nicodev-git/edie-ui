@@ -49,7 +49,7 @@ export default class WorkflowStep1 extends Component {
 
         <CardPanel title="Description">
           <div className="margin-lg-bottom">
-            <Chip style={chipStyles.smallChip} labelStyle={chipStyles.smallLabel} onTouchTap={onClickRawData}>
+            <Chip style={chipStyles.smallChip}  onTouchTap={onClickRawData}>
               SHOW_RAW_DATA
             </Chip>
           </div>

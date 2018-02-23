@@ -5,7 +5,7 @@ import { primeButtonStyle, primeButtonLabelStyle } from 'style/common/materialSt
 const ImageUploader = ({imgUrl, onChange, className}) => (
   <div className={`image-upload-container ${className || ''}`}>
     {!imgUrl && <Button variant="raised" label="Choose" onClick={onChange}
-      buttonStyle={primeButtonStyle} labelStyle={primeButtonLabelStyle}/>}
+      buttonStyle={primeButtonStyle} />}
     <img onClick={onChange} style={{cursor: 'pointer'}} className={(imgUrl !== '') ? 'file-preview icon-black' : ''} src={imgUrl} alt=""/>
   </div>
 )

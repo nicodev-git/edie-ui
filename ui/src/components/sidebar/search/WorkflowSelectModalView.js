@@ -24,7 +24,7 @@ export default class WorkflowSelectModalView extends React.Component {
               underlineStyle={underlineFocusStyle}
               selectedMenuItemStyle={selectedItemStyle}
               menuItemStyle={inputStyle}
-              labelStyle={inputStyle}
+
               value={selectedCategory || ''}
               onChange={onChangeCategory}
             >

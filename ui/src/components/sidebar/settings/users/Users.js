@@ -208,7 +208,7 @@ export default class Users extends React.Component {
                 underlineStyle={underlineFocusStyle}
                 selectedMenuItemStyle={selectedItemStyle}
                 menuItemStyle={inputStyle}
-                labelStyle={inputStyle}
+                
                 onChange={this.onChangeGroup.bind(this)}
                 value="">
                 <MenuItem value="" primaryText="All groups"/>

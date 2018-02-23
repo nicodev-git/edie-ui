@@ -4,7 +4,7 @@ import { buttonStyle, buttonTextStyle } from 'style/common/materialStyles'
 
 const UploadFile = ({onChangeFile}) => (
   <div className="pull-left upload-file">
-    <Button variant="raised" label="Upload File" style={buttonStyle} labelStyle={buttonTextStyle}>
+    <Button variant="raised" label="Upload File" style={buttonStyle} >
       <input type="file" name="file" onChange={onChangeFile}/>
     </Button>
   </div>

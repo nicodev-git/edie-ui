@@ -77,7 +77,7 @@ export default class Templates extends Component {
                       <Chip
                         key={m.id}
                         style={chipStyles.chip}
-                        labelStyle={chipStyles.label}
+                        
                       >
                         {m.name}
                       </Chip>
@@ -271,7 +271,7 @@ export default class Templates extends Component {
                 underlineStyle={underlineFocusStyle}
                 selectedMenuItemStyle={selectedItemStyle}
                 menuItemStyle={inputStyle}
-                labelStyle={inputStyle}
+                
                 onChange={this.onChangeType.bind(this)}
                 value={type}>
                 <MenuItem value="Device" primaryText="Device"/>

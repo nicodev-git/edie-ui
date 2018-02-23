@@ -28,12 +28,9 @@ export default class MapMenuList extends React.Component {
     this.setState({
       open: false
     })
+    return true
   }
 
-  onChange (map) {
-    this.onClose()
-    this.props.onChange(map)
-  }
   render () {
     const { onAdd, onRename, onDelete, onSave, onImport } = this.props
     return (
@@ -42,11 +39,11 @@ export default class MapMenuList extends React.Component {
           <SettingsIcon nativeColor="#545454"/>
         </IconButton>
         <Menu open={this.state.open} anchorEl={this.state.anchorEl} onClose={this.onClose.bind(this)}>
-          {onAdd && <MenuItem onTouchTap={onAdd}>Add Map</MenuItem>}
-          {onRename && <MenuItem onTouchTap={onRename}>Rename Map</MenuItem>}
-          {onDelete && <MenuItem onTouchTap={onDelete}>Delete Map</MenuItem>}
-          <MenuItem onTouchTap={onSave}>Export Map</MenuItem>
-          <MenuItem onTouchTap={onImport}>Import Map</MenuItem>
+          {onAdd && <MenuItem onTouchTap={() => this.onClose() && onAdd()}>Add Map</MenuItem>}
+          {onRename && <MenuItem onTouchTap={() => this.onClose() && onRename()}>Rename Map</MenuItem>}
+          {onDelete && <MenuItem onTouchTap={() => this.onClose() && onDelete()}>Delete Map</MenuItem>}
+          <MenuItem onTouchTap={() => this.onClose() && onSave()}>Export Map</MenuItem>
+          <MenuItem onTouchTap={() => this.onClose() && onImport()}>Import Map</MenuItem>
         </Menu>
       </div>
     )

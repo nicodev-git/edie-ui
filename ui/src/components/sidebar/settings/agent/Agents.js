@@ -120,7 +120,7 @@ export default class Agents extends Component {
         errorStyle={errorStyle}
         selectedMenuItemStyle={selectedItemStyle}
         menuItemStyle={inputStyle}
-        labelStyle={inputStyle}
+
         onChange={this.onChangeInstall.bind(this)}
         value={this.state.install}>
         <MenuItem value="all" primaryText="All"/>

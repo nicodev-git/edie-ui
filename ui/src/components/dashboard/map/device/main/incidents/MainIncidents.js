@@ -403,7 +403,7 @@ export default class MainIncidents extends Component {
                   underlineStyle={underlineFocusStyle}
                   selectedMenuItemStyle={selectedItemStyle}
                   menuItemStyle={inputStyle}
-                  labelStyle={inputStyle}
+                  
                   multiple
                   hintText="Select severities"
                   onChange={this.onChangeSeverity.bind(this)}
@@ -429,7 +429,7 @@ export default class MainIncidents extends Component {
                   underlineStyle={underlineFocusStyle}
                   selectedMenuItemStyle={selectedItemStyle}
                   menuItemStyle={inputStyle}
-                  labelStyle={inputStyle}
+                  
                   style={{width: '120px'}}>
                   <MenuItem primaryText="Any" value=""/>
                   <MenuItem primaryText="Unfixed" value="false"/>

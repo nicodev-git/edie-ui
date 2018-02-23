@@ -24,7 +24,7 @@ export default class SysWorkflowsModalView extends React.Component {
               underlineStyle={underlineFocusStyle}
               selectedMenuItemStyle={selectedItemStyle}
               menuItemStyle={inputStyle}
-              labelStyle={inputStyle}
+
               value={selectedSysWorkflowCategory || ''}
               onChange={onChangeCategory}
             >

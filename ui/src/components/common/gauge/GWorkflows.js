@@ -39,15 +39,15 @@ export default class GWorkflows extends React.Component {
         tags = tags || []
         return (
           <div style={chipStyles.wrapper}>
-            {p.data ? <Chip style={chipStyles.smallChip} labelStyle={chipStyles.smallLabel}>Global</Chip> : ''}
+            {p.data ? <Chip style={chipStyles.smallChip} >Global</Chip> : ''}
 
-            <Chip style={chipStyles.smallChip} labelStyle={chipStyles.smallLabel}
+            <Chip style={chipStyles.smallChip}
                   backgroundColor={getSeverityColor(severity)}>
               {severity}
             </Chip>
 
             {tags.map(t =>
-              <Chip key={t} style={chipStyles.smallChip} labelStyle={chipStyles.smallLabel}>
+              <Chip key={t} style={chipStyles.smallChip} >
                 {t}
               </Chip>
             )}

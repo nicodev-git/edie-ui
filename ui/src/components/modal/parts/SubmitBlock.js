@@ -4,7 +4,7 @@ import { buttonStyle, buttonTextStyle } from 'style/common/materialStyles'
 
 const SubmitBlock = ({name, className}) => (
   <div className={`form-buttons ${className}`}>
-    <Button variant="raised" type="submit" label={name} style={buttonStyle} labelStyle={buttonTextStyle}/>
+    <Button variant="raised" type="submit" style={buttonStyle} >{name}</Button>
   </div>
 )
 

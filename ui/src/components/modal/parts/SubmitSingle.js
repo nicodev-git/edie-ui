@@ -4,7 +4,7 @@ import { buttonStyle, buttonTextStyle } from 'style/common/materialStyles'
 
 const SubmitSingle = ({name}) => (
   <div className="form-buttons">
-    <Button variant="raised" type="submit" label={name} labelStyle={buttonTextStyle} buttonStyle={buttonStyle}/>
+    <Button variant="raised" type="submit" label={name}  buttonStyle={buttonStyle}/>
   </div>
 )
 

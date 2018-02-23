@@ -95,7 +95,7 @@ export default class Tags extends React.Component {
           <Chip
             key={p.id}
             style={chipStyles.chip}
-            labelStyle={chipStyles.label}
+
             backgroundColor={multiSelTags.filter(t => t.id === p.id).length ? blue300 : null}
             onTouchTap={this.onClickTag.bind(this, p)}
             onRequestDelete={canEdit ? this.onDeleteTag.bind(this, p) : null}
@@ -112,42 +112,42 @@ export default class Tags extends React.Component {
       <div style={chipStyles.wrapper}>
         {tagDevices.map(p =>
           <Chip
-            key={p.id} style={chipStyles.chip} labelStyle={chipStyles.label}
+            key={p.id} style={chipStyles.chip}
             onTouchTap={this.onClickTagDevice.bind(this, p)}>
             <Avatar color={blue300} backgroundColor={indigo900}>D</Avatar>{p.name}
           </Chip>
         )}
         {this.getTagMonitors().map(p =>
           <Chip
-            key={p.uid} style={chipStyles.chip} labelStyle={chipStyles.label}
+            key={p.uid} style={chipStyles.chip}
             onTouchTap={() => {}}>
             <Avatar color={blue300} backgroundColor={indigo900}>M</Avatar>{p.name}
           </Chip>
         )}
         {tagWorkflows.map(p =>
           <Chip
-            key={p.id} style={chipStyles.chip} labelStyle={chipStyles.label}
+            key={p.id} style={chipStyles.chip}
             onTouchTap={this.onClickTagWf.bind(this, p)}>
             <Avatar color={blue300} backgroundColor={indigo900}>W</Avatar>{p.name}
           </Chip>
         )}
         {tagParserTypes.map(p =>
           <Chip
-            key={p.id} style={chipStyles.chip} labelStyle={chipStyles.label}
+            key={p.id} style={chipStyles.chip}
             onTouchTap={this.onClickTagParserType.bind(this, p)}>
             <Avatar color={blue300} backgroundColor={indigo900}>P</Avatar>{p.name}
           </Chip>
         )}
         {tagDeviceTpls.map(p =>
           <Chip
-            key={p.id} style={chipStyles.chip} labelStyle={chipStyles.label}
+            key={p.id} style={chipStyles.chip}
             onTouchTap={this.onClickTagDeviceTpl.bind(this, p)}>
             <Avatar color={blue300} backgroundColor={indigo900}>DT</Avatar>{p.name}
           </Chip>
         )}
         {tagMonitorTpls.map(p =>
           <Chip
-            key={p.id} style={chipStyles.chip} labelStyle={chipStyles.label}
+            key={p.id} style={chipStyles.chip}
             onTouchTap={this.onClickTagMonitorTpl.bind(this, p)}>
             <Avatar color={blue300} backgroundColor={indigo900}>MT</Avatar>{p.name}
           </Chip>

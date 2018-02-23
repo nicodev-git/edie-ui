@@ -39,13 +39,13 @@ export default class DeviceWf extends React.Component {
         tags = tags || []
         return (
           <div style={chipStyles.wrapper}>
-            <Chip style={chipStyles.smallChip} labelStyle={chipStyles.smallLabel}
+            <Chip style={chipStyles.smallChip}
                   backgroundColor={getSeverityColor(severity)}>
               {severity}
             </Chip>
 
             {tags.map(t =>
-              <Chip key={t} style={chipStyles.smallChip} labelStyle={chipStyles.smallLabel}>
+              <Chip key={t} style={chipStyles.smallChip} >
                 {t}
               </Chip>
             )}
