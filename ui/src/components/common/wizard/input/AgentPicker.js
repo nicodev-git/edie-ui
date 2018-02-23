@@ -1,5 +1,5 @@
 import React from 'react'
-import {RadioButton, CircularProgress, IconButton} from 'material-ui'
+import {Radio, CircularProgress, IconButton} from 'material-ui'
 import {Field} from 'redux-form'
 import {RadioButtonGroup} from 'redux-form-material-ui'
 import AddCircleIcon from 'material-ui-icons/AddCircle'
@@ -193,9 +193,9 @@ export default class AgentPicker extends React.Component {
     return (
       <div style={{minHeight: 110, position: 'relative'}}>
         <Field name="agentType" component={RadioButtonGroup} className="padding-md-top" onChange={onChange}>
-          <RadioButton value="" label="None" className="pull-left"/>
-          <RadioButton value="agent" label={agentLabel} className="pull-left" disabled={!agent} style={{marginTop: 14, cursor: 'pointer'}}/>
-          <RadioButton value="collector" label={collectorLabel} className="pull-left" style={{width: 120, marginTop: 14}}/>
+          <Radio value="" label="None" className="pull-left"/>
+          <Radio value="agent" label={agentLabel} className="pull-left" disabled={!agent} style={{marginTop: 14, cursor: 'pointer'}}/>
+          <Radio value="collector" label={collectorLabel} className="pull-left" style={{width: 120, marginTop: 14}}/>
         </Field>
 
         {agentCombo}

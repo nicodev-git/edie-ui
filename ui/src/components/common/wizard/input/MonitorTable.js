@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { findIndex, assign } from 'lodash'
 import AddCircleIcon from 'material-ui-icons/AddCircle'
-import {IconButton, RadioButtonGroup, RadioButton} from 'material-ui'
+import {IconButton, RadioGroup, Radio} from 'material-ui'
 import {Field} from 'redux-form'
 
 import { CardPanel, FormSelect, FormInput } from 'components/modal/parts'
@@ -149,12 +149,12 @@ export default class MonitorTable extends Component {
       <CardPanel title="Monitor Group">
         <div className="flex-horizontal">
           <div style={{paddingTop: 12}}>
-            <RadioButtonGroup
+            <RadioGroup
               name="monitorGroupType" defaultSelected="new" onChange={(e, value) => onChangeMonitorGroupType(value)}
               style={{marginTop: 10}}>
-              <RadioButton value="new" label="New" className="pull-left"/>
-              <RadioButton value="existing" label="Existing" className="pull-left" style={{width: 120, marginTop: 14}}/>
-            </RadioButtonGroup>
+              <Radio value="new" label="New" className="pull-left"/>
+              <Radio value="existing" label="Existing" className="pull-left" style={{width: 120, marginTop: 14}}/>
+            </RadioGroup>
           </div>
           <div className="flex-1" style={{paddingLeft: 12}}>
             <div>

@@ -1,5 +1,5 @@
 import React from 'react'
-import {Button, RadioButton} from 'material-ui'
+import {Button, Radio} from 'material-ui'
 import {Field} from 'redux-form'
 import {RadioButtonGroup} from 'redux-form-material-ui'
 
@@ -92,8 +92,8 @@ export default class MonitorWizardView extends React.Component {
 
             <div className={showAgentType ? '' : 'hidden'} style={{height: 70}}>
               <Field name="agentType" component={RadioButtonGroup} className="margin-md-top">
-                <RadioButton value="agent" label={agentLabel} className="pull-left" disabled={!agent}/>
-                <RadioButton value="collector" label={collectorLabel} className="pull-left" style={{width: 120, marginTop: 14}}/>
+                <Radio value="agent" label={agentLabel} className="pull-left" disabled={!agent}/>
+                <Radio value="collector" label={collectorLabel} className="pull-left" style={{width: 120, marginTop: 14}}/>
               </Field>
               <Field name="collectorId" label="Collector" component={FormSelect} className="pull-left" options={collectorOptions}/>
             </div>
