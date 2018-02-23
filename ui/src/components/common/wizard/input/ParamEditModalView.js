@@ -15,10 +15,9 @@ export default class ParamEditModalView extends Component {
                 <Chip
                   key={k}
                   style={styles.chip}
-                  onTouchTap={onKeyClick.bind(this, k)}
-                >
-                  {k}
-                </Chip>
+                  onClick={onKeyClick.bind(this, k)}
+                  label={k}
+                />
               )}
             </div>
             <div className="form-column">

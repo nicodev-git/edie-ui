@@ -467,7 +467,7 @@ class DeviceEditWizard extends React.Component {
     return (
       <div>
         <Tooltip title="Add Credentials">
-          <IconButton onTouchTap={this.onClickAddCred.bind(this)}>
+          <IconButton onClick={this.onClickAddCred.bind(this)}>
             <AddCircleIcon size={32}/>
           </IconButton>
         </Tooltip>
@@ -485,7 +485,7 @@ class DeviceEditWizard extends React.Component {
               style={{position: 'absolute', top: '40px', right: '20px'}}>
               <Button variant="raised" type="submit" color="primary" className="hidden">Save</Button>&nbsp;
               &nbsp;
-              <Button variant="raised" onTouchTap={this.onClickAddCred.bind(this)}>Add Credential</Button>
+              <Button variant="raised" onClick={this.onClickAddCred.bind(this)}>Add Credential</Button>
             </div>
           </div>
 

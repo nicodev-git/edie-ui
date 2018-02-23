@@ -958,19 +958,19 @@ export default class WorkflowDashboardView extends React.Component {
         <div className="inline-block valign-top margin-xs-top">
           {this.state.editMode ? (
             <IconButton
-              onTouchTap={this.onClickParamEdit.bind(this, i)}>
+              onClick={this.onClickParamEdit.bind(this, i)}>
               <EditIcon/>
             </IconButton>
           ) : (
             <IconButton
-              onTouchTap={this.onClickSetParamValue.bind(this, i)}>
+              onClick={this.onClickSetParamValue.bind(this, i)}>
               <ArrowRightIcon/>
             </IconButton>
           )}
 
           {this.state.editMode ? (
             <IconButton
-              onTouchTap={this.onClickParamDelete.bind(this, i)}>
+              onClick={this.onClickParamDelete.bind(this, i)}>
               <IconClose/>
             </IconButton>
           ) : null}
@@ -1015,8 +1015,8 @@ export default class WorkflowDashboardView extends React.Component {
           </Select>
 
           {canEdit && <div className="pull-right text-right">
-            <IconButton onTouchTap={this.onClickEditMode.bind(this)}><EditIcon/></IconButton>
-            <IconButton onTouchTap={this.onClickDelete.bind(this)} tooltip="Delete Connection"><DeleteIcon/></IconButton>
+            <IconButton onClick={this.onClickEditMode.bind(this)}><EditIcon/></IconButton>
+            <IconButton onClick={this.onClickDelete.bind(this)} tooltip="Delete Connection"><DeleteIcon/></IconButton>
           </div>}
         </div>
         <div className="flex-1">

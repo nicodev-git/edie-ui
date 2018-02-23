@@ -108,7 +108,7 @@ export default class MonitorWizardView extends React.Component {
           {paramsView}
           {tagsView}
 
-          <Field name="enabled" component={FormCheckbox} type="checkbox" label="Enabled" className="margin-md-top margin-sm-bottom"/>
+          <Field name="enabled" component={FormCheckbox} label="Enabled"/>
 
           <div className="form-buttons">
             <Button variant="raised" type="submit">{isEdit ? 'Save' : 'Add'}</Button>

@@ -499,14 +499,14 @@ export default class MainControl extends React.Component {
         <IconButton><AddCircleIcon /></IconButton>
         <Menu open={false}>
           {items.map((p, i) =>
-            <MenuItem key={p.id} primaryText={p.name} onTouchTap={this.onClickMenuItem.bind(this, p)}/>
+            <MenuItem key={p.id} primaryText={p.name} onClick={this.onClickMenuItem.bind(this, p)}/>
           )}
         </Menu>
       </div>
     )
 
     // return (
-    //   <IconButton onTouchTap={() => this.props.showGaugePicker(true)}>
+    //   <IconButton onClick={() => this.props.showGaugePicker(true)}>
     //     <AddCircleIcon />
     //   </IconButton>
     // )
@@ -550,21 +550,21 @@ export default class MainControl extends React.Component {
           titleOptions={<StatusImg {...this.props} device={device}/>}
           useToolBar>
           <Tooltip title="Back">
-            <IconButton onTouchTap={this.onClickBack.bind(this)}><LeftArrowIcon/></IconButton>
+            <IconButton onClick={this.onClickBack.bind(this)}><LeftArrowIcon/></IconButton>
           </Tooltip>
           <Tooltip title="General">
-            <IconButton onTouchTap={this.onClickEdit.bind(this)}><EditIcon/></IconButton>
+            <IconButton onClick={this.onClickEdit.bind(this)}><EditIcon/></IconButton>
           </Tooltip>
           <Tooltip title="Monitors">
-            <IconButton onTouchTap={this.onClickMonitorEdit.bind(this)}><MonitorIcon/></IconButton>
+            <IconButton onClick={this.onClickMonitorEdit.bind(this)}><MonitorIcon/></IconButton>
           </Tooltip>
           <Tooltip title={device.gaugeLocked ? 'Unlock' : 'Lock'}>
-            <IconButton onTouchTap={this.onClickToggleLock.bind(this)}>
+            <IconButton onClick={this.onClickToggleLock.bind(this)}>
               {device.gaugeLocked ? <LockOpenIcon/> : <LockOutlineIcon/>}
             </IconButton>
           </Tooltip>
           <Tooltip title="Reset">
-            <IconButton onTouchTap={this.onClickReset.bind(this)}><RenewIcon/></IconButton>
+            <IconButton onClick={this.onClickReset.bind(this)}><RenewIcon/></IconButton>
           </Tooltip>
             {this.renderMenu()}
         </TabPageHeader>

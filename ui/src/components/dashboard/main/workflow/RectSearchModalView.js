@@ -80,7 +80,7 @@ export default class RectSearchModalView extends React.Component {
               </div>
             ) : null}
             <div className="position-abr link text-primary">
-              <IconButton onTouchTap={() => this.props.onRowDblClick(rowData)}><PageViewIcon /></IconButton>
+              <IconButton onClick={() => this.props.onRowDblClick(rowData)}><PageViewIcon /></IconButton>
             </div>
           </div>
         )

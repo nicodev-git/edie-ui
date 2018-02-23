@@ -13,7 +13,7 @@ const NewIncidentLabel = ({onNewIncident}) => (
     <IconButton
       style={buttonStyle}
 
-      onTouchTap={onNewIncident}>
+      onClick={onNewIncident}>
         <AddCircleIcon nativeColor="#545454"/>
     </IconButton>
   </li>

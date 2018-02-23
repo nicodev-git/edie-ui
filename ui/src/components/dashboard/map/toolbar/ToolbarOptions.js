@@ -30,28 +30,28 @@ class ToolbarOptions extends Component {
         />
 
         <IconButton
-          onTouchTap={this.props.onClickLineWidthInc}
+          onClick={this.props.onClickLineWidthInc}
           className={this.props.lineGroup ? '' : 'hidden'}
           style={buttonStyle}>
           <ArrowUpIcon nativeColor="#545454"/>
         </IconButton>
 
         <IconButton
-          onTouchTap={this.props.onClickLineWidthDec}
+          onClick={this.props.onClickLineWidthDec}
           className={this.props.lineGroup ? '' : 'hidden'}
           style={buttonStyle}>
           <ArrowDownIcon nativeColor="#545454"/>
         </IconButton>
 
         <IconButton
-          onTouchTap={this.props.onClickFontSizeUp}
+          onClick={this.props.onClickFontSizeUp}
           className={this.props.obj && !this.props.lineGroup ? '' : 'hidden'}
           style={buttonStyle}>
           <ArrowUpIcon nativeColor="#545454"/>
         </IconButton>
 
         <IconButton
-          onTouchTap={this.props.onClickFontSizeDown}
+          onClick={this.props.onClickFontSizeDown}
           className={this.props.obj && !this.props.lineGroup ? '' : 'hidden'}
           style={buttonStyle}>
           <ArrowDownIcon nativeColor="#545454"/>

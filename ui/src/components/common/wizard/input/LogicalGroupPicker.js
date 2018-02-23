@@ -132,10 +132,10 @@ export default class LogicalGroupPicker extends React.Component {
             </div>
           </div>
           <div className="col-md-1 p-none">
-            <IconButton onTouchTap={onClickAddMonitorGroup}>
+            <IconButton onClick={onClickAddMonitorGroup}>
               <ForwardIcon />
             </IconButton>
-            <IconButton onTouchTap={onClickRemoveMonitorGroup}>
+            <IconButton onClick={onClickRemoveMonitorGroup}>
               <BackwardIcon />
             </IconButton>
           </div>

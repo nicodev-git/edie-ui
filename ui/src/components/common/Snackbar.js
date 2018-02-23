@@ -42,7 +42,7 @@ export default class IncidentSnackbar extends React.Component {
           action={this.searchIcon}
           message={newIncidentMsg.message}
           autoHideDuration={3600000 * 24 * 7}
-          onActionTouchTap={this.onClickAlert}
+          onActionClick={this.onClickAlert}
           onRequestClose={this.onSnackClose}
         />
         <span className="hidden">{newIncidentMsg.incident.id}</span>

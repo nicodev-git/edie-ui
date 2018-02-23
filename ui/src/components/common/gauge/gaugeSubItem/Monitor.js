@@ -141,7 +141,7 @@ export default class Monitor extends React.Component {
   renderAddMenu () {
     return (
       <div className="text-right" style={{position: 'absolute', top: -45, right: 0}}>
-        <IconButton onTouchTap={this.onClickAddMonitor.bind(this)}>
+        <IconButton onClick={this.onClickAddMonitor.bind(this)}>
           <AddCircleIcon />
         </IconButton>
       </div>

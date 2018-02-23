@@ -112,7 +112,7 @@ export default class ProcessTable extends React.Component {
       <div className="text-center">
         <div className="inline-block">
           <TextField name="query" value={monitorQuery} onChange={this.onChangeQuery.bind(this)} onKeyUp={this.onKeyupQuery.bind(this)}/>
-          <Button variant="flat" icon={<ActionSearch />} onTouchTap={this.onClickSearch.bind(this)}/>
+          <Button variant="flat" icon={<ActionSearch />} onClick={this.onClickSearch.bind(this)}/>
         </div>
       </div>
     )

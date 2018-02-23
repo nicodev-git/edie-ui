@@ -17,7 +17,7 @@ class DeviceMenuContainer extends Component {
           id="device-menu-button"
           style={buttonStyle}
 
-          onTouchTap={this.props.onDeviceMenu}>
+          onClick={this.props.onDeviceMenu}>
             <AddCircleIcon nativeColor="#545454"/>
         </IconButton>
         { this.props.isDevicesDisplayed

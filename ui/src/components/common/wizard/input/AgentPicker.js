@@ -201,7 +201,7 @@ export default class AgentPicker extends React.Component {
         {agentCombo}
 
         <Field name="collectorId" label="Collector" component={FormSelect} className="pull-left" options={collectorOptions}/>
-        <IconButton className="pull-left hidden" onTouchTap={this.onClickAddCollector.bind(this)}><AddCircleIcon/></IconButton>
+        <IconButton className="pull-left hidden" onClick={this.onClickAddCollector.bind(this)}><AddCircleIcon/></IconButton>
         {isWindowsDevice(editDevice) && !collectorOptions.length &&
           <img src="/resources/images/dashboard/question.png" width="24"
                className="pull-left margin-md-top link" alt=""

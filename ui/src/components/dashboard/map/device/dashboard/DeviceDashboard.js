@@ -323,7 +323,7 @@ export default class DeviceDashboard extends React.Component {
   renderAddMenu () {
     return (
       <div className="text-right" style={{position: 'absolute', top: 0, right: 0}}>
-        <IconButton onTouchTap={() => this.props.showGaugePicker(true)}>
+        <IconButton onClick={() => this.props.showGaugePicker(true)}>
           <AddCircleIcon />
         </IconButton>
       </div>
@@ -340,7 +340,7 @@ export default class DeviceDashboard extends React.Component {
     //         <MenuItem
     //           key={p.id} primaryText={p.name}
     //           leftIcon={<img src={`${extImageBaseUrl}${p.image}`} alt="" width="24" height="24" style={{background: 'black'}}/>}
-    //           onTouchTap={this.onClickMenuItem.bind(this, p)}
+    //           onClick={this.onClickMenuItem.bind(this, p)}
     //         />
     //       )}
     //     </IconMenu>

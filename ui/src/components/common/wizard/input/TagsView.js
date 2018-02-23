@@ -34,7 +34,7 @@ export default class TagsView extends React.Component {
           {monitorTags.map((t, i) =>
             <Chip key={i} style={chipStyles.chip} onDelete={() => this.onClickDeleteTag(i)} label={t}/>
           )}
-          <Chip style={chipStyles.chip} onTouchTap={() => this.onClickAddTag()}><b>&nbsp;&nbsp;+&nbsp;&nbsp;</b></Chip>
+          <Chip style={chipStyles.chip} onClick={() => this.onClickAddTag()} label={<b>&nbsp;&nbsp;+&nbsp;&nbsp;</b>}/>
         </div>
         {this.renderTagsModal()}
       </div>

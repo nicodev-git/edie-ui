@@ -445,10 +445,10 @@ export default class MainIncidents extends Component {
             </div>
 
             <div className="pull-right">
-              <Button variant="raised" label="Open" onTouchTap={this.onClickOpen.bind(this)}/>&nbsp;
-              <Button variant="raised" label="Fix All" onTouchTap={this.onClickFixAll.bind(this)}/>&nbsp;
-              <Button variant="raised" label="Fix Selected" onTouchTap={this.onClickFixSelected.bind(this)}/>&nbsp;
-              <Button variant="raised" label="More" primary onTouchTap={this.handleTouchTap.bind(this)}/>&nbsp;
+              <Button variant="raised" label="Open" onClick={this.onClickOpen.bind(this)}/>&nbsp;
+              <Button variant="raised" label="Fix All" onClick={this.onClickFixAll.bind(this)}/>&nbsp;
+              <Button variant="raised" label="Fix Selected" onClick={this.onClickFixSelected.bind(this)}/>&nbsp;
+              <Button variant="raised" label="More" primary onClick={this.handleTouchTap.bind(this)}/>&nbsp;
               <Popover
                 open={this.state.open}
                 anchorEl={this.state.anchorEl}
@@ -457,10 +457,10 @@ export default class MainIncidents extends Component {
                 onRequestClose={this.handleRequestClose.bind(this)}
               >
                 <Menu>
-                  <MenuItem primaryText="Events" onTouchTap={this.onClickEvents.bind(this)}/>
-                  <MenuItem primaryText="Add Incident" onTouchTap={this.onClickAddIncident.bind(this)}/>
-                  <MenuItem primaryText="Add Exception" onTouchTap={this.onClickAddException.bind(this)}/>
-                  <MenuItem primaryText="Export PDF" onTouchTap={this.onClickPDF.bind(this)}/>
+                  <MenuItem primaryText="Events" onClick={this.onClickEvents.bind(this)}/>
+                  <MenuItem primaryText="Add Incident" onClick={this.onClickAddIncident.bind(this)}/>
+                  <MenuItem primaryText="Add Exception" onClick={this.onClickAddException.bind(this)}/>
+                  <MenuItem primaryText="Export PDF" onClick={this.onClickPDF.bind(this)}/>
                 </Menu>
               </Popover>
             </div>

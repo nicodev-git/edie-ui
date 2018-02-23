@@ -147,13 +147,13 @@ export default class ApplicationTable extends Component {
       <div className="text-center">
         <div className="inline-block">
           <TextField name="query" value={monitorQuery} onChange={this.onChangeQuery.bind(this)} onKeyUp={this.onKeyupQuery.bind(this)}/>
-          <Button variant="flat" icon={<ActionSearch />} onTouchTap={this.onClickSearch.bind(this)}/>
+          <Button variant="flat" icon={<ActionSearch />} onClick={this.onClickSearch.bind(this)}/>
         </div>
         <div className="pull-right">
           <Button variant="raised" label="More" color="primary" onClick={() => this.setState({moreOpen: !this.state.moreOpen})}/>
           <Menu open={this.state.moreOpen}>
-            <MenuItem primaryText="Applications" onTouchTap={this.onClickGetApp.bind(this)}/>
-            <MenuItem primaryText="Hotfix" onTouchTap={this.onClickGetHotfix.bind(this)}/>
+            <MenuItem primaryText="Applications" onClick={this.onClickGetApp.bind(this)}/>
+            <MenuItem primaryText="Hotfix" onClick={this.onClickGetHotfix.bind(this)}/>
           </Menu>
         </div>
       </div>

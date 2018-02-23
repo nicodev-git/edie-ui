@@ -127,9 +127,9 @@ export default class FirewallTable extends React.Component {
       <div>
         {this.props.monitorsUpdateTime > 0 && <Switch checked={this.props.monitorFwStatus} onChange={this.onToggleStatus.bind(this)}/>}
         <div className="pull-right">
-          <Button variant="raised" label="Add" onTouchTap={this.onClickAdd.bind(this)} className="valign-top"/>&nbsp;
-          <Button variant="raised" label="Delete" onTouchTap={this.onClickDelete.bind(this)} className="valign-top"/>&nbsp;
-          <Button variant="raised" label="Delete All" onTouchTap={this.onClickDeleteAll.bind(this)} className="valign-top"/>&nbsp;
+          <Button variant="raised" label="Add" onClick={this.onClickAdd.bind(this)} className="valign-top"/>&nbsp;
+          <Button variant="raised" label="Delete" onClick={this.onClickDelete.bind(this)} className="valign-top"/>&nbsp;
+          <Button variant="raised" label="Delete All" onClick={this.onClickDeleteAll.bind(this)} className="valign-top"/>&nbsp;
         </div>
       </div>
     )

@@ -134,7 +134,7 @@ export default class GTable extends React.Component {
     return (
       <div style={{zIndex: 3}}>
         <div style={{position: 'absolute', right: 10, top: 4}}>
-          <IconButton onTouchTap={this.onClickRefresh.bind(this)}>
+          <IconButton onClick={this.onClickRefresh.bind(this)}>
             <RefreshIcon size={32}/>
           </IconButton>
         </div>

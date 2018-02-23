@@ -158,12 +158,12 @@ export default class MainWorkflows extends React.Component {
         <TabPageHeader title={device.name}>
           <div className="text-center margin-md-top">
             <div className="pull-right">
-              <Button variant="raised" onTouchTap={this.onClickAdd.bind(this)} label="Add"/>&nbsp;
-              <Button variant="raised" onTouchTap={this.onClickAddSys.bind(this)} label="Add System Workflow"/>&nbsp;
-              <Button variant="raised" onTouchTap={this.onClickEdit.bind(this)} label="Edit"/>&nbsp;
-              <Button variant="raised" onTouchTap={this.onClickRemove.bind(this)} label="Remove"/>&nbsp;
+              <Button variant="raised" onClick={this.onClickAdd.bind(this)} label="Add"/>&nbsp;
+              <Button variant="raised" onClick={this.onClickAddSys.bind(this)} label="Add System Workflow"/>&nbsp;
+              <Button variant="raised" onClick={this.onClickEdit.bind(this)} label="Edit"/>&nbsp;
+              <Button variant="raised" onClick={this.onClickRemove.bind(this)} label="Remove"/>&nbsp;
 
-              <Button variant="raised" onTouchTap={this.onClickDuplicate.bind(this)} label="Duplicate"/>&nbsp;
+              <Button variant="raised" onClick={this.onClickDuplicate.bind(this)} label="Duplicate"/>&nbsp;
             </div>
           </div>
         </TabPageHeader>

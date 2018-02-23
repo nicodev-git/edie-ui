@@ -38,7 +38,7 @@ export default class GServiceList extends React.Component {
         const waiting = this.state.waiting[p.rowData.ServiceName]
         return (
           <div>
-            <Button variant="raised" label={label} onTouchTap={this.onClickStart.bind(this, p.rowData)} primary={val !== 'Running'} disabled={waiting}/>
+            <Button variant="raised" label={label} onClick={this.onClickStart.bind(this, p.rowData)} primary={val !== 'Running'} disabled={waiting}/>
             {waiting && <CircularProgress size={24} className="valign-middle margin-lg-left"/>}
           </div>
         )

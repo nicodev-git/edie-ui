@@ -135,7 +135,7 @@ export default class MainDashboard extends React.Component {
             <MenuItem key={p.id} value={p.id}>{p.name}</MenuItem>
           )}
         </Select>
-        {canEdit && <IconButton onTouchTap={this.onClickAdd.bind(this)} className="valign-bottom"><AddCircleIcon /></IconButton>}
+        {canEdit && <IconButton onClick={this.onClickAdd.bind(this)} className="valign-bottom"><AddCircleIcon /></IconButton>}
       </div>
     )
   }

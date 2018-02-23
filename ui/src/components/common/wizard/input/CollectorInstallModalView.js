@@ -33,8 +33,8 @@ export default class CollectorInstallModalView extends React.Component {
                 name="collectorId" component={FormSelect} floatingLabel="Collector"
                 options={collectors.map(p => ({value: p.id, label: p.name}))}/>
             </div>
-            <IconButton className="valign-middle" onTouchTap={onClickRefresh}><RefreshIcon/></IconButton>
-            <Button variant="raised" label="Test" className="valign-middle margin-md-left" onTouchTap={onClickTest}/>
+            <IconButton className="valign-middle" onClick={onClickRefresh}><RefreshIcon/></IconButton>
+            <Button variant="raised" label="Test" className="valign-middle margin-md-left" onClick={onClickTest}/>
           </div>
         </CardPanel>
         <a

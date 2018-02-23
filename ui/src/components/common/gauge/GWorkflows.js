@@ -63,8 +63,8 @@ export default class GWorkflows extends React.Component {
       'customComponent': p=> {
         return (
           <div>
-            <EditIcon onTouchTap={this.onClickEditWf.bind(this, p.rowData)} className="link"/>
-            <DeleteIcon onTouchTap={this.onClickDeleteWf.bind(this, p.rowData)} className="link margin-sm-left"/>
+            <EditIcon onClick={this.onClickEditWf.bind(this, p.rowData)} className="link"/>
+            <DeleteIcon onClick={this.onClickDeleteWf.bind(this, p.rowData)} className="link margin-sm-left"/>
           </div>
         )
       }

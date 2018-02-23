@@ -8,7 +8,7 @@ class MonkeyPatchLink extends Component {
   }
 
   static propTypes = {
-    onTouchTap: PropTypes.func,
+    onClick: PropTypes.func,
     onClick: PropTypes.func
   }
 
@@ -19,8 +19,8 @@ class MonkeyPatchLink extends Component {
   }
 
   handleTouchTap (e) {
-    if (this.props.onTouchTap) {
-      this.props.onTouchTap(e)
+    if (this.props.onClick) {
+      this.props.onClick(e)
     }
     if ('button' in e.nativeEvent === false) {
       // If touch event
@@ -38,7 +38,7 @@ class MonkeyPatchLink extends Component {
 
   render () {
     return (
-      <Link {...this.props} onClick={this.handleClick} onTouchTap={this.handleTouchTap} />
+      <Link {...this.props} onClick={this.handleClick} onClick={this.handleTouchTap} />
     )
   }
 }

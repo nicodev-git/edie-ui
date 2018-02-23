@@ -362,7 +362,7 @@ export default class MainDashboardView extends React.Component {
   renderAddMenu () {
     return (
       <div className="text-right" style={{position: 'absolute', top: -45, right: 0}}>
-        <IconButton onTouchTap={() => this.props.showGaugePicker(true)}>
+        <IconButton onClick={() => this.props.showGaugePicker(true)}>
           <AddCircleIcon />
         </IconButton>
       </div>

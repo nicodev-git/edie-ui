@@ -15,10 +15,10 @@ const ZoomOptions = ({onZoomIn, onZoomOut, onZoomRect, onZoomReset}) => (
       <ZoomInIcon nativeColor="#545454"/>
     </IconButton>
     <Menu open={false}>
-      <MenuItem onTouchTap={onZoomIn}>Zoom in</MenuItem>
-      <MenuItem onTouchTap={onZoomOut}>Zoom Out</MenuItem>
-      <MenuItem onTouchTap={onZoomRect}>Zoom Rect</MenuItem>
-      <MenuItem onTouchTap={onZoomReset}>Reset</MenuItem>
+      <MenuItem onClick={onZoomIn}>Zoom in</MenuItem>
+      <MenuItem onClick={onZoomOut}>Zoom Out</MenuItem>
+      <MenuItem onClick={onZoomRect}>Zoom Rect</MenuItem>
+      <MenuItem onClick={onZoomReset}>Reset</MenuItem>
     </Menu>
   </div>
 )

@@ -329,7 +329,7 @@ export default class LogPapers extends React.Component {
           {this.renderPaging()}
         </div>
         <div style={{position: 'absolute', right: 10, top: 10}} className={showRenew ? '' : 'hidden'}>
-          <IconButton onTouchTap={this.onClickAutoRenew.bind(this)} tooltip="Show changes on realtime">
+          <IconButton onClick={this.onClickAutoRenew.bind(this)} tooltip="Show changes on realtime">
             <RenewIcon nativeColor={this.state.isAutoPull ? '#00bcd4' : ''}/>
           </IconButton>
         </div>

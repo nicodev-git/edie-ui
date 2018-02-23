@@ -283,15 +283,15 @@ export default class Toolbar extends React.Component {
       <div className="panel-heading">
         <h4 className="panel-title">Topology</h4>
         <div className="panel-options" style={{top: 4}}>
-          <IconButton style={buttonStyle}  onTouchTap={this.props.onClickEdit}>
+          <IconButton style={buttonStyle}  onClick={this.props.onClickEdit}>
             <CreateIcon nativeColor="#545454"/>
           </IconButton>
 
-          <IconButton style={buttonStyle}  onTouchTap={this.onClickAdd.bind(this)} id="device-menu-button">
+          <IconButton style={buttonStyle}  onClick={this.onClickAdd.bind(this)} id="device-menu-button">
             <AddCircleIcon nativeColor="#545454"/>
           </IconButton>
 
-          <IconButton style={{...buttonStyle, display: obj ? 'inline-block' : 'none'}}  onTouchTap={this.props.onClickDelete}>
+          <IconButton style={{...buttonStyle, display: obj ? 'inline-block' : 'none'}}  onClick={this.props.onClickDelete}>
             <DeleteIcon nativeColor="#545454"/>
           </IconButton>
 

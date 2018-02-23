@@ -91,8 +91,8 @@ export default class AppletCard extends React.Component {
             {name}&nbsp;
             <div style={editButtonStyle}>
               {rightIcons}
-              {onClickView && <ViewIcon size={32} color="white" onTouchTap={this.onClickView.bind(this)}/>}
-              {onClickEdit && <EditIcon size={32} color="white" onTouchTap={this.onClickEdit.bind(this)}/>}
+              {onClickView && <ViewIcon size={32} color="white" onClick={this.onClickView.bind(this)}/>}
+              {onClickEdit && <EditIcon size={32} color="white" onClick={this.onClickEdit.bind(this)}/>}
             </div>
           </div>
         </div>

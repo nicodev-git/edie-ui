@@ -32,7 +32,7 @@ export default class MonitorTable extends Component {
   renderTools () {
     return (
       <div>
-        <IconButton onTouchTap={this.onClickAdd.bind(this)}>
+        <IconButton onClick={this.onClickAdd.bind(this)}>
           <AddCircleIcon size={32}/>
         </IconButton>
       </div>
@@ -177,7 +177,7 @@ export default class MonitorTable extends Component {
       <CardPanel title="Devices">
         <Field
           name="monitorDevice" label="Device" component={FormSelect} options={[]} className="valign-top"/>
-        <IconButton onTouchTap={this.onClickAddDevice.bind(this)} className="valign-top">
+        <IconButton onClick={this.onClickAddDevice.bind(this)} className="valign-top">
           <AddCircleIcon size={32}/>
         </IconButton>
       </CardPanel>

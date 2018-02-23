@@ -242,9 +242,9 @@ export default class ServerDashboardView extends React.Component {
           <div className="inline-block">
             <Card>
               <input type="text" style={inputStyle}/>
-              <IconButton onTouchTap={this.onClickSearch.bind(this)} style={btnStyle}><SettingsIcon/></IconButton>
-              <IconButton onTouchTap={this.onClearSearch.bind(this)} style={btnStyle}><ClearIcon/></IconButton>
-              <IconButton onTouchTap={this.onClickCommand.bind(this)} style={btnStyle}
+              <IconButton onClick={this.onClickSearch.bind(this)} style={btnStyle}><SettingsIcon/></IconButton>
+              <IconButton onClick={this.onClearSearch.bind(this)} style={btnStyle}><ClearIcon/></IconButton>
+              <IconButton onClick={this.onClickCommand.bind(this)} style={btnStyle}
                           className="margin-md-right"><ComputerIcon/></IconButton>
             </Card>
           </div>

@@ -68,14 +68,12 @@ class ParamList extends React.Component {
               <Chip
                 key={p.key}
                 style={styles.chip}
-
-                onTouchTap={this.onClickEdit.bind(this, p)}
-                onRequestDelete={this.onClickRemove.bind(this, p)}
-              >
-                <b>{p.key}</b>: {p.value}
-              </Chip>
+                onClick={this.onClickEdit.bind(this, p)}
+                onDelete={this.onClickRemove.bind(this, p)}
+                label={<span><b>{p.key}</b>: {p.value}</span>}
+              />
             )}
-            <Chip style={styles.chip} onTouchTap={this.onClickAdd.bind(this)}><b>&nbsp;&nbsp;+&nbsp;&nbsp;</b></Chip>
+            <Chip style={styles.chip} onClick={this.onClickAdd.bind(this)} label={<b>&nbsp;&nbsp;+&nbsp;&nbsp;</b>}/>
           </div>
         </CardPanel>
       </div>

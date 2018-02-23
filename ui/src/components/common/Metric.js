@@ -14,7 +14,7 @@ const style = {
 
 const Metric = ({icon, value, title, onClick}) => (
   <Button variant="flat"
-          onTouchTap={onClick}
+          onClick={onClick}
           style={style}
   >
     <div style={style}>

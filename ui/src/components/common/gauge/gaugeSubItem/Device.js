@@ -124,7 +124,7 @@ export default class Device extends React.Component {
   renderAddMenu () {
     return (
       <div className="text-right" style={{position: 'absolute', top: -45, right: 0}}>
-        <IconButton onTouchTap={this.onClickAddDevice.bind(this)}>
+        <IconButton onClick={this.onClickAddDevice.bind(this)}>
           <AddCircleIcon />
         </IconButton>
       </div>

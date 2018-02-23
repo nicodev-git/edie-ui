@@ -79,7 +79,7 @@ export default class CredPicker extends React.Component {
   renderButtons () {
     return (
       <div>
-        <IconButton onTouchTap={this.onClickAdd.bind(this)} tooltip="Add Credentials">
+        <IconButton onClick={this.onClickAdd.bind(this)} tooltip="Add Credentials">
           <AddCircleIcon size={32}/>
         </IconButton>
       </div>
@@ -118,20 +118,20 @@ export default class CredPicker extends React.Component {
                 <td>
                   {p.global ? (p.default ? (
                     <div style={chipStyles.wrapper}>
-                      <Chip style={chipStyles.smallChip} >{p.type}&nbsp;Default</Chip>
+                      <Chip style={chipStyles.smallChip} label={`${p.type}Default`}/>
                     </div>
                   ) : 'Global') : null}
                 </td>
                 <th>
                   {!p.global ? (
-                    <CloseIcon className="link" onTouchTap={this.onClickDelete.bind(this, i, p)}/>
+                    <CloseIcon className="link" onClick={this.onClickDelete.bind(this, i, p)}/>
                   ) : (
                     <div>
                       <IconButton tooltip="Choose other credential" style={{width: 24, padding: 0}}>
-                        <ListIcon className="link" onTouchTap={this.onClickChangeGlobal.bind(this, p)}/>
+                        <ListIcon className="link" onClick={this.onClickChangeGlobal.bind(this, p)}/>
                       </IconButton>
                       <IconButton tooltip="Add" style={{width: 24, padding: 0}}>
-                        <AddCircleIcon onTouchTap={this.onClickAddByType.bind(this, p)}/>
+                        <AddCircleIcon onClick={this.onClickAddByType.bind(this, p)}/>
                       </IconButton>
                     </div>
                   )}

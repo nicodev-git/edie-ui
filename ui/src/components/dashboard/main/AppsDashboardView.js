@@ -89,7 +89,7 @@ export default class AppsDashboardView extends React.Component {
         <TextField name="filter" value={this.state.filter} onChange={this.onChangeFilter.bind(this)}
                    hintText="Search"
                    className="valign-top"/>
-        <IconButton onTouchTap={this.onClickPref.bind(this)}><EditIcon /></IconButton>
+        <IconButton onClick={this.onClickPref.bind(this)}><EditIcon /></IconButton>
       </div>
     )
   }

@@ -43,8 +43,8 @@ class EditMapMenu extends React.Component {
         <Menu open={this.state.open}
               anchorEl={this.state.anchorEl}
               onClose={this.onClose.bind(this)}>
-          <MenuItem onTouchTap={() => this.onClose() && onEdit()}>Edit</MenuItem>
-          <MenuItem onTouchTap={() => this.onClose() && onUndo()}>Undo</MenuItem>
+          <MenuItem onClick={() => this.onClose() && onEdit()}>Edit</MenuItem>
+          <MenuItem onClick={() => this.onClose() && onUndo()}>Undo</MenuItem>
         </Menu>
       </div>
     )

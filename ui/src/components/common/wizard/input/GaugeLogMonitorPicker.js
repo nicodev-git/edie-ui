@@ -40,10 +40,10 @@ export default class GaugeLogMonitorPicker extends React.Component {
             </div>
           </div>
           <div className="col-md-1 p-none">
-            <IconButton onTouchTap={() => onClickAddServer(true)}>
+            <IconButton onClick={() => onClickAddServer(true)}>
               <ForwardIcon />
             </IconButton>
-            <IconButton onTouchTap={onClickRemoveServer}>
+            <IconButton onClick={onClickRemoveServer}>
               <BackwardIcon />
             </IconButton>
           </div>

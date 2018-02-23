@@ -142,21 +142,21 @@ export default class Credentials extends React.Component {
                 <td>
                   {p.global && p.default ? (
                     <div style={chipStyles.wrapper}>
-                      <Chip style={chipStyles.chip}>{p.type}&nbsp;Default</Chip>
+                      <Chip style={chipStyles.chip} label={`${p.type} Default`}/>
                     </div>
                   ) : null}
                 </td>
                 <td>
                   <IconButton style={iconStyle}
                     className={onClickEditCreds ? '' : 'hidden'}
-                    onTouchTap={this.onClickEdit.bind(this, p)}>
+                    onClick={this.onClickEdit.bind(this, p)}>
                     <EditIcon nativeColor="#545454"/>
                   </IconButton>
                   <IconButton style={iconStyle}
-                    onTouchTap={this.onClickRemove.bind(this, p)}>
+                    onClick={this.onClickRemove.bind(this, p)}>
                     <DeleteIcon nativeColor="#545454"/>
                   </IconButton>
-                  <IconButton style={iconStyle} onTouchTap={this.onClickChange.bind(this, p)}>
+                  <IconButton style={iconStyle} onClick={this.onClickChange.bind(this, p)}>
                     <ListIcon nativeColor="#545454"/>
                   </IconButton>
                 </td>

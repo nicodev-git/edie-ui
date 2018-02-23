@@ -69,15 +69,15 @@ export default class FlipView extends React.Component {
       <div
         style={{position: 'absolute', right: 5, bottom: 5, zIndex: 11}}
         className={`link info-button ${hovered ? 'visible' : ''}`}>
-        {onClickRefresh && <RefreshIcon onTouchTap={() => onClickRefresh(gauge)}/>}
+        {onClickRefresh && <RefreshIcon onClick={() => onClickRefresh(gauge)}/>}
         {
           gauge.minimized ? (
-            <MaximizeIcon onTouchTap={() => onClickMaximize(gauge)} className={onClickMaximize ? '' : 'hidden'}/>
+            <MaximizeIcon onClick={() => onClickMaximize(gauge)} className={onClickMaximize ? '' : 'hidden'}/>
           ) : (
-            <MinimizeIcon onTouchTap={() => onClickMinimize(gauge)} className={onClickMinimize ? '' : 'hidden'}/>
+            <MinimizeIcon onClick={() => onClickMinimize(gauge)} className={onClickMinimize ? '' : 'hidden'}/>
           )
         }
-        {!noDelete && <DeleteIcon onTouchTap={() => onClickDelete(gauge)}/>}
+        {!noDelete && <DeleteIcon onClick={() => onClickDelete(gauge)}/>}
         {!viewOnly && <InfoIcon size={24} onClick={this.onClickFlip.bind(this)}/>}
       </div>
     )

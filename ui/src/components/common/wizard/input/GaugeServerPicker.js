@@ -54,10 +54,10 @@ export default class GaugeServerPicker extends React.Component {
             </div>
           </div>
           <div className="col-md-1 p-none">
-            <IconButton onTouchTap={() => onClickAddServer(false)}>
+            <IconButton onClick={() => onClickAddServer(false)}>
               <ForwardIcon />
             </IconButton>
-            <IconButton onTouchTap={onClickRemoveServer}>
+            <IconButton onClick={onClickRemoveServer}>
               <BackwardIcon />
             </IconButton>
           </div>

@@ -13,13 +13,13 @@ export default class BoardListModalView extends React.Component {
     const {onClickAdd, onClickAddSystem, onClickSetDefault} = this.props
     return (
       <div>
-        <IconButton onTouchTap={onClickSetDefault} tooltip="Set Default">
+        <IconButton onClick={onClickSetDefault} tooltip="Set Default">
           <SetDefIcon size={32}/>
         </IconButton>
-        <IconButton onTouchTap={onClickAdd} tooltip="Add New Dashboard">
+        <IconButton onClick={onClickAdd} tooltip="Add New Dashboard">
           <AddCircleIcon size={32}/>
         </IconButton>
-        <IconButton onTouchTap={onClickAddSystem} tooltip="Add New System Dashboard" className="hidden">
+        <IconButton onClick={onClickAddSystem} tooltip="Add New System Dashboard" className="hidden">
           <NoteAddIcon size={32}/>
         </IconButton>
       </div>
@@ -47,18 +47,18 @@ export default class BoardListModalView extends React.Component {
                   <td>{p.type || 'normal'}</td>
                   <td className="text-center">
                     {p.id === defaultBoardId ? (
-                      <Chip style={{margin: 'auto'}}>Default</Chip>
+                      <Chip style={{margin: 'auto'}} label="Default"/>
                     ) : null}
                   </td>
                   {p.origin === 'SYSTEM' ? (
                     <td/>
                   ) : (
                     <td className="text-right">
-                      <IconButton style={{padding: 0, width: 24, height: 24}} onTouchTap={() => onClickEdit(p)}>
+                      <IconButton style={{padding: 0, width: 24, height: 24}} onClick={() => onClickEdit(p)}>
                         <EditIcon nativeColor="#545454" hoverColor="#f44336"/>
                       </IconButton>&nbsp;&nbsp;&nbsp;
                       <IconButton
-                        style={{padding: 0, width: 24, height: 24}} onTouchTap={() => onClickDelete(p)}
+                        style={{padding: 0, width: 24, height: 24}} onClick={() => onClickDelete(p)}
                         className={p.type === 'system' ? 'hidden' : ''}>
                         <DeleteIcon nativeColor="#545454" hoverColor="#f44336"/>
                       </IconButton>

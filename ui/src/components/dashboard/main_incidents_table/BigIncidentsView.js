@@ -20,7 +20,7 @@ const BigIncidentsView = ({onHide,
   <div className="flex-vertical flex-1" style={{background: 'white'}}>
     <div className="padding-md-left">
       <span style={{fontSize: '22px'}}><b>Incidents</b></span>
-      <Button variant="flat" label="Close" onTouchTap={onHide} className="pull-right hidden"/>
+      <Button variant="flat" label="Close" onClick={onHide} className="pull-right hidden"/>
     </div>
     <div className="form-inline padding-md-left">
       <Select

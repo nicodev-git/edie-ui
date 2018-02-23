@@ -13,7 +13,7 @@ const DeleteObject = ({ obj, onDelete }) => (
     style={buttonStyle}
     className={obj ? '' : 'hidden'}
 
-    onTouchTap={onDelete}>
+    onClick={onDelete}>
     <DeleteIcon nativeColor="#545454"/>
   </IconButton>
 )

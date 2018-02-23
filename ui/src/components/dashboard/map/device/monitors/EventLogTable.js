@@ -125,7 +125,7 @@ export default class EventLogTable extends Component {
         </div>
         <div className="inline-block">
           <TextField name="query" value={this.props.monitorQuery} onChange={this.onChangeQuery.bind(this)} onKeyUp={this.onKeyupQuery.bind(this)}/>
-          <Button variant="flat" icon={<ActionSearch />} onTouchTap={this.onClickSearch.bind(this)}/>
+          <Button variant="flat" icon={<ActionSearch />} onClick={this.onClickSearch.bind(this)}/>
         </div>
       </div>
     )

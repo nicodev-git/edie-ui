@@ -79,10 +79,10 @@ export default class GaugeWorkflowPicker extends React.Component {
             </div>
           </div>
           <div className="col-md-1 p-none">
-            <IconButton onTouchTap={onClickAddWorkflow}>
+            <IconButton onClick={onClickAddWorkflow}>
               <ForwardIcon />
             </IconButton>
-            <IconButton onTouchTap={onClickRemoveWorkflow}>
+            <IconButton onClick={onClickRemoveWorkflow}>
               <BackwardIcon />
             </IconButton>
           </div>
