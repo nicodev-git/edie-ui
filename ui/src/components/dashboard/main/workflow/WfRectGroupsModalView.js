@@ -11,8 +11,8 @@ export default class WfRectGroupsModalView extends React.Component {
     return (
       <Modal title="Groups" onRequestClose={onHide}>
         <CardPanel title="Add Group">
-          <TextField name="name" hintText="Name" value={name} onChange={onChangeName}/>
-          <Button variant="raised" label="Add" className="margin-lg-left" onClick={onClickAdd}/>
+          <TextField name="name" label="Name" value={name} onChange={onChangeName}/>
+          <Button variant="raised" className="margin-lg-left" onClick={onClickAdd}>Add</Button>
         </CardPanel>
 
         <CardPanel title="Edit Groups">

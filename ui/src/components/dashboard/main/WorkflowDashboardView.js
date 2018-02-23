@@ -1,6 +1,6 @@
 import React from 'react'
 import {concat} from 'lodash'
-import {IconButton, Select, MenuItem, TextField} from 'material-ui'
+import {IconButton, Select, MenuItem, TextField, Tooltip} from 'material-ui'
 import {debounce, findIndex} from 'lodash'
 import moment from 'moment'
 import {deepPurple, purple} from 'material-ui/colors'
@@ -950,7 +950,7 @@ export default class WorkflowDashboardView extends React.Component {
       <div key={i} className="inline-block">
         <TextField name={`paramValue${i}`}
                    value={paramValueInputs[i] || ''}
-                   hintText={p || 'Value'}
+                   label={p || 'Value'}
                    onChange={this.onChangeParamValue.bind(this, i)}
                    className="valign-top margin-lg-left"
                    style={{width: 160}}
@@ -987,36 +987,38 @@ export default class WorkflowDashboardView extends React.Component {
       <div className="flex-vertical flex-1">
         <div style={{position: 'absolute', top: -68, left: 200, right: 0}}>
           <Select
-            hintText="Group"
+            label="Group"
             className="valign-top margin-lg-left"
             value={selectedWfRectGroup ? selectedWfRectGroup.id : null}
             onChange={this.onChangeGroup.bind(this)}
             style={{width: 140}}>
             {this.props.wfRectGroups.map(p =>
-              <MenuItem key={p.id} value={p.id} primaryText={p.name}/>
+              <MenuItem key={p.id} value={p.id}>{p.name}</MenuItem>
             )}
           </Select>
 
           <TextField
-            name="interval" hintText="Interval"
+            name="interval" label="Interval"
             className="valign-top margin-md-left"
             style={{width: 30, textAlign: 'right'}}
             value={this.state.interval} onChange={this.onChangeInterval.bind(this)}/>
           <Select
-            hintText="Unit"
+            label="Unit"
             className="valign-top margin-md-left"
             value={this.state.intervalUnit}
             onChange={this.onChangeIntervalUnit.bind(this)}
             style={{width: 20}}
             menuStyle={{width: 150}}>
             {units.map(p =>
-              <MenuItem key={p.value} value={p.value} primaryText={p.label}/>
+              <MenuItem key={p.value} value={p.value}>{p.label}</MenuItem>
             )}
           </Select>
 
           {canEdit && <div className="pull-right text-right">
             <IconButton onClick={this.onClickEditMode.bind(this)}><EditIcon/></IconButton>
-            <IconButton onClick={this.onClickDelete.bind(this)} tooltip="Delete Connection"><DeleteIcon/></IconButton>
+            <Tooltip title="Delete Connection">
+              <IconButton onClick={this.onClickDelete.bind(this)}><DeleteIcon/></IconButton>
+            </Tooltip>
           </div>}
         </div>
         <div className="flex-1">

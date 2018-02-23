@@ -87,7 +87,7 @@ export default class AppsDashboardView extends React.Component {
     return (
       <div className="text-right" style={{position: 'absolute', top: -68, right: 0}}>
         <TextField name="filter" value={this.state.filter} onChange={this.onChangeFilter.bind(this)}
-                   hintText="Search"
+                   label="Search"
                    className="valign-top"/>
         <IconButton onClick={this.onClickPref.bind(this)}><EditIcon /></IconButton>
       </div>
