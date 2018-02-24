@@ -10,9 +10,9 @@ export default class CredPickerView extends React.Component {
     return (
       <div style={{marginTop: -6}}>
         <Select onChange={onChangeType} value={type}>
-          <MenuItem primaryText="[All]" value=""/>
+          <MenuItem value="">[All]</MenuItem>
           {credentialTypes.map(p =>
-            <MenuItem key={p.name} primaryText={p.name} value={p.name}/>
+            <MenuItem key={p.name} value={p.name}>{p.name}</MenuItem>
           )}
         </Select>
       </div>

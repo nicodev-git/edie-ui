@@ -123,9 +123,9 @@ export default class Agents extends Component {
 
         onChange={this.onChangeInstall.bind(this)}
         value={this.state.install}>
-        <MenuItem value="all" primaryText="All"/>
-        <MenuItem value="installed" primaryText="Installed"/>
-        <MenuItem value="notinstalled" primaryText="Not Installed"/>
+        <MenuItem value="all">All</MenuItem>
+        <MenuItem value="installed">Installed</MenuItem>
+        <MenuItem value="notinstalled">Not Installed</MenuItem>
       </Select>
     )
   }

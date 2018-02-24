@@ -117,10 +117,10 @@ export default class Websocket extends React.Component {
           <Select
             label="Severity"
             value="HIGH">
-            <MenuItem value="HIGH" primaryText="High"/>
-            <MenuItem value="MEDIUM" primaryText="Medium"/>
-            <MenuItem value="LOW" primaryText="Low"/>
-            <MenuItem value="AUDIT" primaryText="Audit"/>
+            <MenuItem value="HIGH">High</MenuItem>
+            <MenuItem value="MEDIUM">Medium</MenuItem>
+            <MenuItem value="LOW">Low</MenuItem>
+            <MenuItem value="AUDIT">Audit</MenuItem>
           </Select>
 
           <Button variant="raised" onClick={this.onClickAddIncident.bind(this)} color="primary" className="margin-md-top">Add Incident</Button>
@@ -159,8 +159,8 @@ export default class Websocket extends React.Component {
           <div className="form-mui-inline">
             <TextField label="Device ID"/>&nbsp;
             <Select label="Status" value="up">
-              <MenuItem value="up" primaryText="Up"/>
-              <MenuItem value="down" primaryText="Down"/>
+              <MenuItem value="up">Up</MenuItem>
+              <MenuItem value="down">Down</MenuItem>
             </Select>
 
             <Button variant="raised" onClick={this.onClickUpdateDeviceStatus.bind(this)} color="primary" className="margin-md-top">Update</Button>

@@ -116,7 +116,7 @@ export default class MainSettings extends Component {
             onChange={this.onChangeSendLogLevel.bind(this)}
             disabled={!canEdit}
           >
-            {logLevels.map(option => <MenuItem key={option.value} value={option.value} primaryText={option.label}/>)}
+            {logLevels.map(option => <MenuItem key={option.value} value={option.value}>{option.label}</MenuItem>)}
           </Select>
         </div>
         {canEdit && <div>

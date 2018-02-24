@@ -87,8 +87,8 @@ export default class Advanced extends React.Component {
                 onRequestClose={this.handleRequestClose.bind(this)}
               >
                 <Menu>
-                  <MenuItem primaryText="Add" onClick={this.onClickAddRouting.bind(this)}/>
-                  <MenuItem primaryText="Edit" onClick={this.onClickEditRouting.bind(this)}/>
+                  <MenuItem onClick={this.onClickAddRouting.bind(this)}>Add</MenuItem>
+                  <MenuItem onClick={this.onClickEditRouting.bind(this)}>Edit</MenuItem>
                 </Menu>
               </Popover>
               <Button variant="raised" icon={<SettingIcon />} onClick={this.handleTouchTap.bind(this)} className="hidden"/>
@@ -100,9 +100,9 @@ export default class Advanced extends React.Component {
                 onRequestClose={this.handleRequestClose.bind(this)}
               >
                 <Menu>
-                  <MenuItem primaryText="Main" onClick={this.onClickTab.bind(this, 0)}/>
-                  <MenuItem primaryText="Websocket" onClick={this.onClickTab.bind(this, 1)}/>
-                  <MenuItem primaryText="Routing" onClick={this.onClickTab.bind(this, 2)}/>
+                  <MenuItem onClick={this.onClickTab.bind(this, 0)}>Main</MenuItem>
+                  <MenuItem onClick={this.onClickTab.bind(this, 1)}>Websocket</MenuItem>
+                  <MenuItem onClick={this.onClickTab.bind(this, 2)}>Routing</MenuItem>
                 </Menu>
               </Popover>
             </div>
