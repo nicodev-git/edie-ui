@@ -1,6 +1,8 @@
 import React from 'react'
 import { ChromePicker } from 'react-color'
 import {TextField, Select, MenuItem, Button} from 'material-ui'
+import { FormControl } from 'material-ui/Form'
+import { InputLabel } from 'material-ui/Input'
 
 export default class Websocket extends React.Component {
   constructor (props) {
@@ -114,14 +116,16 @@ export default class Websocket extends React.Component {
         <div className="padding-md form-mui-inline">
           <TextField label="Name"/>&nbsp;
           <TextField label="Description"/>&nbsp;
-          <Select
-            label="Severity"
-            value="HIGH">
-            <MenuItem value="HIGH">High</MenuItem>
-            <MenuItem value="MEDIUM">Medium</MenuItem>
-            <MenuItem value="LOW">Low</MenuItem>
-            <MenuItem value="AUDIT">Audit</MenuItem>
-          </Select>
+          <FormControl>
+            <InputLabel>Severity</InputLabel>
+            <Select
+              value="HIGH">
+              <MenuItem value="HIGH">High</MenuItem>
+              <MenuItem value="MEDIUM">Medium</MenuItem>
+              <MenuItem value="LOW">Low</MenuItem>
+              <MenuItem value="AUDIT">Audit</MenuItem>
+            </Select>
+          </FormControl>
 
           <Button variant="raised" onClick={this.onClickAddIncident.bind(this)} color="primary" className="margin-md-top">Add Incident</Button>
         </div>
@@ -158,11 +162,13 @@ export default class Websocket extends React.Component {
         <div className="padding-md-left">
           <div className="form-mui-inline">
             <TextField label="Device ID"/>&nbsp;
-            <Select label="Status" value="up">
-              <MenuItem value="up">Up</MenuItem>
-              <MenuItem value="down">Down</MenuItem>
-            </Select>
-
+            <FormControl>
+              <InputLabel>Status</InputLabel>
+              <Select value="up">
+                <MenuItem value="up">Up</MenuItem>
+                <MenuItem value="down">Down</MenuItem>
+              </Select>
+            </FormControl>
             <Button variant="raised" onClick={this.onClickUpdateDeviceStatus.bind(this)} color="primary" className="margin-md-top">Update</Button>
           </div>
           <div className="form-mui-inline">

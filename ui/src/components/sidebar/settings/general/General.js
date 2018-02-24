@@ -4,6 +4,8 @@ import InlineEdit from 'react-edit-inline'
 import {Checkbox, Button, Select, MenuItem} from 'material-ui'
 import { assign } from 'lodash'
 import { FormControlLabel } from 'material-ui/Form'
+import { FormControl } from 'material-ui/Form'
+import { InputLabel } from 'material-ui/Input'
 
 import SettingTabs from '../SettingTabs' // Never used
 import TabPage from 'components/common/TabPage' // Never used
@@ -379,13 +381,15 @@ export default class General extends React.Component {
       <CardPanel title="Menu">
         <div style={{minHeight: 400, overflow: 'auto'}}>
           <div>
-            <Select
-              value={this.getUserOptionValue('defaultPage', 'dashboard')}
-              onChange={this.onChangeShowPage.bind(this)}
-              label="Default Page">
-              <MenuItem value="main">Map</MenuItem>
-              <MenuItem value="dashboard">Dashboard</MenuItem>
-            </Select>
+            <FormControl>
+              <InputLabel>Default Page</InputLabel>
+              <Select
+                value={this.getUserOptionValue('defaultPage', 'dashboard')}
+                onChange={this.onChangeShowPage.bind(this)}>
+                <MenuItem value="main">Map</MenuItem>
+                <MenuItem value="dashboard">Dashboard</MenuItem>
+              </Select>
+            </FormControl>
           </div>
 
           {/*{this.renderRoles()}*/}

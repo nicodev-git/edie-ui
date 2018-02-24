@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import {assign} from 'lodash'
 import {Checkbox, Button, Select, MenuItem} from 'material-ui'
 import { FormControlLabel } from 'material-ui/Form'
+import { FormControl } from 'material-ui/Form'
+import { InputLabel } from 'material-ui/Input'
 
 import ImportSyncDataModal from './ImportSyncDataModal'
 import SimulationModal from './SimulationModal'
@@ -115,14 +117,16 @@ export default class MainSettings extends Component {
           </div>
         </div>
         <div>
-          <Select
-            label="Send IMP Logs Level"
-            value={this.getOptionValue('SEND_LOGS_LEVEL')}
-            onChange={this.onChangeSendLogLevel.bind(this)}
-            disabled={!canEdit}
-          >
-            {logLevels.map(option => <MenuItem key={option.value} value={option.value}>{option.label}</MenuItem>)}
-          </Select>
+          <FormControl>
+            <InputLabel>Send IMP Logs Level</InputLabel>
+            <Select
+              value={this.getOptionValue('SEND_LOGS_LEVEL')}
+              onChange={this.onChangeSendLogLevel.bind(this)}
+              disabled={!canEdit}
+            >
+              {logLevels.map(option => <MenuItem key={option.value} value={option.value}>{option.label}</MenuItem>)}
+            </Select>
+          </FormControl>
         </div>
         {canEdit && <div>
           <div className="padding-md-top">

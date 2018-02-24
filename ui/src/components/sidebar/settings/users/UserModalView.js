@@ -1,5 +1,6 @@
 import React from 'react'
-
+import { FormControl } from 'material-ui/Form'
+import { InputLabel } from 'material-ui/Input'
 import {Select, MenuItem} from 'material-ui'
 import { Field } from 'redux-form'
 import { FormInput, FormSelect, FormCheckbox, SubmitBlock, Modal, CardPanel } from 'components/modal/parts'
@@ -21,19 +22,23 @@ export default class UserModalView extends React.Component {
             <Field name="phone" component={FormInput} label="Phone" className="valign-top mr-dialog"/>
             <Field name="defaultMapId" component={FormSelect} label="Default Map" options={defaultmaps} className="valign-top"/>
 
-            <Select multiple label="Role" onChange={onChangeRole} value={selectedRoles}
-              className="mr-dialog">
-              {roles.map(r =>
-                <MenuItem key={r.id} value={r.name}>{r.name}</MenuItem>
-              )}
-            </Select>
+            <FormControl className="mr-dialog">
+              <InputLabel>Role</InputLabel>
+              <Select multiple onChange={onChangeRole} value={selectedRoles}>
+                {roles.map(r =>
+                  <MenuItem key={r.id} value={r.name}>{r.name}</MenuItem>
+                )}
+              </Select>
+            </FormControl>
 
-
-            <Select multiple label="Permission" onChange={onChangePermission} value={permissions}>
-              {mainMenu.map(p =>
-                <MenuItem key={p.id} value={p.roleMenuId}>{p.title}</MenuItem>
-              )}
-            </Select>
+            <FormControl>
+              <InputLabel>Permission</InputLabel>
+              <Select multiple onChange={onChangePermission} value={permissions}>
+                {mainMenu.map(p =>
+                  <MenuItem key={p.id} value={p.roleMenuId}>{p.title}</MenuItem>
+                )}
+              </Select>
+            </FormControl>
 
             <Field name="enabled" component={FormCheckbox} label="Enabled" />
           </CardPanel>
