@@ -4,6 +4,8 @@ import {Select, MenuItem, Button, Checkbox} from 'material-ui'
 import { Field } from 'redux-form'
 import { SubmitBlock, FormInput, FormSelect, Modal, CardPanel } from 'components/modal/parts'
 import {findIndex} from 'lodash'
+import { FormControl, FormControlLabel } from 'material-ui/Form'
+import { InputLabel } from 'material-ui/Input'
 
 import {gaugeDurationTypes, gaugeResources, severities, timingOptions, realtimeGauges, historicGauges, gaugeTableViewModes} from 'shared/Global'
 import DateRangePicker from 'components/common/DateRangePicker'
@@ -171,12 +173,15 @@ export default class GaugeWizardView extends React.Component {
       <div>
         <Field name="name" component={FormInput} floatingLabel="Name" className="valign-top mr-dialog" validate={[required]}/>
         {devices && <Field name="deviceId" component={FormSelect} floatingLabel="Device" options={deviceOptions} className="valign-top" validate={[required]}/>}
-        <Select multiple label="Severity" onChange={onChangeSeverity} className={`valign-top ${devices ? 'mr-dialog' : ''}`} value={selectedSeverity}>
-          {severities.map(option =>
-            <MenuItem key={option.value} insetChildren checked={selectedSeverity && selectedSeverity.includes(option.value)}
-                      value={option.value}>{option.label}</MenuItem>
-          )}
-        </Select>
+        <FormControl className={`valign-top ${devices ? 'mr-dialog' : ''}`}>
+          <InputLabel>Severity</InputLabel>
+          <Select multiple onChange={onChangeSeverity} value={selectedSeverity}>
+            {severities.map(option =>
+              <MenuItem key={option.value} insetChildren checked={selectedSeverity && selectedSeverity.includes(option.value)}
+                        value={option.value}>{option.label}</MenuItem>
+            )}
+          </Select>
+        </FormControl>
 
         <Field name="fixed" component={FormSelect} floatingLabel="Status" options={fixOptions} className="valign-top"/>
 
@@ -271,11 +276,15 @@ export default class GaugeWizardView extends React.Component {
       <div>
         <Field name="name" component={FormInput} floatingLabel="Name" className="valign-top mr-dialog" validate={[required]}/>
         {devices && this.renderDeviceList()}
-        <Select multiple label="Monitors" value={selectedMonitors} onChange={onChangeMonitors}>
-          {(monitors || []).map((p, i) =>
-            <MenuItem key={i} value={p.uid}>{p.name}</MenuItem>
-          )}
-        </Select>
+
+        <FormControl>
+          <InputLabel>Monitors</InputLabel>
+          <Select multiple value={selectedMonitors} onChange={onChangeMonitors}>
+            {(monitors || []).map((p, i) =>
+              <MenuItem key={i} value={p.uid}>{p.name}</MenuItem>
+            )}
+          </Select>
+        </FormControl>
       </div>
     )
   }
@@ -284,11 +293,14 @@ export default class GaugeWizardView extends React.Component {
     return (
       <div>
         <Field name="name" component={FormInput} floatingLabel="Name" className="valign-top mr-dialog" validate={[required]}/>
-        <Select multiple label="Services" value={serviceNames} onChange={onChangeServiceNames} validate={[required]}>
-          {(services || []).map((p, i) =>
-            <MenuItem key={i} value={p.value}>{p.label}</MenuItem>
-          )}
-        </Select>
+        <FormControl>
+          <InputLabel>Services</InputLabel>
+          <Select multiple value={serviceNames} onChange={onChangeServiceNames} validate={[required]}>
+            {(services || []).map((p, i) =>
+              <MenuItem key={i} value={p.value}>{p.label}</MenuItem>
+            )}
+          </Select>
+        </FormControl>
       </div>
     )
   }

@@ -1,7 +1,8 @@
 import React from 'react'
 import {findIndex} from 'lodash'
 import {Select, MenuItem} from 'material-ui'
-// import ActionSearch from 'material-ui-icons/Search'
+import { FormControl } from 'material-ui/Form'
+import { InputLabel } from 'material-ui/Input'
 
 import FlipView from './FlipView'
 import GEditView from './GEditView'
@@ -151,11 +152,14 @@ export default class GEventLog extends React.Component {
     return (
       <div className="flex-vertical flex-1">
         <div style={{marginTop: -16}}>
-          <Select label="Log" value={selectedLogName} onChange={this.onChangeLog.bind(this)}>
-            {logNames.map(p =>
-              <MenuItem key={p} value={p}>{p}</MenuItem>
-            )}
-          </Select>
+          <FormControl>
+            <InputLabel>Log</InputLabel>
+            <Select value={selectedLogName} onChange={this.onChangeLog.bind(this)}>
+              {logNames.map(p =>
+                <MenuItem key={p} value={p}>{p}</MenuItem>
+              )}
+            </Select>
+          </FormControl>
         </div>
         <div className="flex-1">
           <InfiniteTable

@@ -4,6 +4,8 @@ import {IconButton, Select, MenuItem, TextField, Tooltip} from 'material-ui'
 import {debounce, findIndex} from 'lodash'
 import moment from 'moment'
 import {deepPurple, purple} from 'material-ui/colors'
+import { FormControl } from 'material-ui/Form'
+import { InputLabel } from 'material-ui/Input'
 
 import EditIcon from 'material-ui-icons/ModeEdit'
 import ArrowRightIcon from 'material-ui-icons/KeyboardArrowRight'
@@ -986,33 +988,36 @@ export default class WorkflowDashboardView extends React.Component {
     return (
       <div className="flex-vertical flex-1">
         <div style={{position: 'absolute', top: -68, left: 200, right: 0}}>
-          <Select
-            label="Group"
-            className="valign-top margin-lg-left"
-            value={selectedWfRectGroup ? selectedWfRectGroup.id : null}
-            onChange={this.onChangeGroup.bind(this)}
-            style={{width: 140}}>
-            {this.props.wfRectGroups.map(p =>
-              <MenuItem key={p.id} value={p.id}>{p.name}</MenuItem>
-            )}
-          </Select>
+          <FormControl className="valign-top margin-lg-left">
+            <InputLabel>Group</InputLabel>
+            <Select
+              value={selectedWfRectGroup ? selectedWfRectGroup.id : null}
+              onChange={this.onChangeGroup.bind(this)}
+              style={{width: 140}}>
+              {this.props.wfRectGroups.map(p =>
+                <MenuItem key={p.id} value={p.id}>{p.name}</MenuItem>
+              )}
+            </Select>
+          </FormControl>
 
           <TextField
             name="interval" label="Interval"
             className="valign-top margin-md-left"
             style={{width: 30, textAlign: 'right'}}
             value={this.state.interval} onChange={this.onChangeInterval.bind(this)}/>
-          <Select
-            label="Unit"
-            className="valign-top margin-md-left"
-            value={this.state.intervalUnit}
-            onChange={this.onChangeIntervalUnit.bind(this)}
-            style={{width: 20}}
-            menuStyle={{width: 150}}>
-            {units.map(p =>
-              <MenuItem key={p.value} value={p.value}>{p.label}</MenuItem>
-            )}
-          </Select>
+
+          <FormControl className="valign-top margin-md-left">
+            <InputLabel>Unit</InputLabel>
+            <Select
+              value={this.state.intervalUnit}
+              onChange={this.onChangeIntervalUnit.bind(this)}
+              style={{width: 20}}
+              menuStyle={{width: 150}}>
+              {units.map(p =>
+                <MenuItem key={p.value} value={p.value}>{p.label}</MenuItem>
+              )}
+            </Select>
+          </FormControl>
 
           {canEdit && <div className="pull-right text-right">
             <IconButton onClick={this.onClickEditMode.bind(this)}><EditIcon/></IconButton>

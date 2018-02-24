@@ -2,6 +2,9 @@ import React from 'react'
 import {IconButton, Select, MenuItem} from 'material-ui'
 import AddCircleIcon from 'material-ui-icons/AddCircle'
 import {findIndex} from 'lodash'
+import { FormControl } from 'material-ui/Form'
+import { InputLabel } from 'material-ui/Input'
+
 import {slugify} from 'shared/Global'
 
 import MainDashboardView from './MainDashboardView'
@@ -127,14 +130,16 @@ export default class MainDashboard extends React.Component {
     }
     return (
       <div className="padding-lg-left margin-sm-top">
-        <Select
-          label="Dashboard" value={this.getSelectedId()} onChange={this.onChangeBoard.bind(this)}
-          className="valign-top margin-sm-top"
-          style={{width: 180}}>
-          {this.getBoards().map(p =>
-            <MenuItem key={p.id} value={p.id}>{p.name}</MenuItem>
-          )}
-        </Select>
+        <FormControl className="valign-top margin-sm-top">
+          <InputLabel>Dashboard</InputLabel>
+          <Select
+            value={this.getSelectedId()} onChange={this.onChangeBoard.bind(this)}
+            style={{width: 180}}>
+            {this.getBoards().map(p =>
+              <MenuItem key={p.id} value={p.id}>{p.name}</MenuItem>
+            )}
+          </Select>
+        </FormControl>
         {canEdit && <IconButton onClick={this.onClickAdd.bind(this)} className="valign-bottom"><AddCircleIcon /></IconButton>}
       </div>
     )

@@ -1,5 +1,6 @@
 import React from 'react'
 import {Checkbox} from 'material-ui'
+import { FormControlLabel } from 'material-ui/Form'
 
 export default class SavedSearchPicker extends React.Component {
   render () {
@@ -8,9 +9,11 @@ export default class SavedSearchPicker extends React.Component {
       <div style={{maxHeight: 300, overflow: 'auto'}}>
         {searchList.map(p =>
           <div key={p.value || p.id}>
-            <Checkbox
-              label={p.label || p.name} onChange={() => onClickToggleSearch(p.value || p.id)}
-              checked={selectedSearchIds.includes(p.value || p.id)}
+            <FormControlLabel
+              control={
+                <Checkbox onChange={() => onClickToggleSearch(p.value || p.id)} checked={selectedSearchIds.includes(p.value || p.id)}/>
+              }
+              label={p.label || p.name}
             />
           </div>
         )}

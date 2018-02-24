@@ -2,6 +2,8 @@ import React from 'react'
 import {Select, MenuItem, IconButton} from 'material-ui'
 import {findIndex, assign, concat} from 'lodash'
 import AddCircleIcon from 'material-ui-icons/AddCircle'
+import { FormControl } from 'material-ui/Form'
+import { InputLabel } from 'material-ui/Input'
 
 import MonitorWizardContainer from 'containers/shared/wizard/MonitorWizardContainer'
 import MonitorPicker from 'components/dashboard/map/device/monitors/MonitorPicker'
@@ -177,16 +179,16 @@ export default class Monitor extends React.Component {
     return (
       <div>
         <div className="padding-lg-left">
-          <Select
-            label="Devices"
-            value={deviceId}
-            className="valign-top"
-            onChange={this.onChange}
-          >
-            {(devices || []).map(p =>
-              <MenuItem key={p.id} value={p.id}>{p.name}</MenuItem>
-            )}
-          </Select>
+          <FormControl className="valign-top">
+            <InputLabel>Devices</InputLabel>
+            <Select
+              value={deviceId}
+              onChange={this.onChange}>
+              {(devices || []).map(p =>
+                <MenuItem key={p.id} value={p.id}>{p.name}</MenuItem>
+              )}
+            </Select>
+          </FormControl>
           {this.renderAddMenu()}
         </div>
         <div>

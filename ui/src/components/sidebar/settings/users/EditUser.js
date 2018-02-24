@@ -230,7 +230,7 @@ class EditUser extends React.Component {
                   <FormControlLabel
                     control={
                       <Checkbox checked={selectedPermissions.includes(p)}
-                                onChange={canEdit ? this.onCheckPermission.bind(this, p) : null}
+                                onChange={canEdit ? this.onCheckPermission.bind(this, p) : null}/>
                     }
                     label={p}
                   />
@@ -306,7 +306,7 @@ class EditUser extends React.Component {
                             <FormControlLabel
                               control={
                                 <Checkbox checked={permissions.includes(p)}
-                                          onChange={canEdit ? this.onCheckPermission.bind(this, p) : null}
+                                          onChange={canEdit ? this.onCheckPermission.bind(this, p) : null}/>
                               }
                               label={p}
                             />

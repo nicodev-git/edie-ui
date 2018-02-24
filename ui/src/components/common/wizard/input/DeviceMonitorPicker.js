@@ -1,6 +1,7 @@
 import React from 'react'
 import {Checkbox} from 'material-ui'
 import {findIndex} from 'lodash'
+import { FormControlLabel } from 'material-ui/Form'
 
 import SortableTree from 'react-sortable-tree'
 
@@ -9,18 +10,23 @@ export default class DeviceMonitorPicker extends React.Component {
     const {onClickToggleMonitor, selectedMonitors} = this.props
     const checked = selectedMonitors && selectedMonitors.includes(monitor.uid)
     return (
-      <Checkbox
-        label={monitor.name} onChange={() => onClickToggleMonitor(monitor)}
-        checked={checked}/>
+      <FormControlLabel
+        control={
+          <Checkbox onChange={() => onClickToggleMonitor(monitor)} checked={checked}/>
+        }
+        label={monitor.name}
+      />
     )
   }
   renderDevice (device) {
     const {onClickToggleDevice, selectedServers} = this.props
     const checked = selectedServers && selectedServers.includes(device.id)
     return (
-      <Checkbox
-        label={device.name} onChange={() => onClickToggleDevice(device)}
-        checked={checked}
+      <FormControlLabel
+        control={
+          <Checkbox onChange={() => onClickToggleDevice(device)} checked={checked}/>
+        }
+        label={device.name}
       />
     )
   }
@@ -30,9 +36,11 @@ export default class DeviceMonitorPicker extends React.Component {
     const index = findIndex(monitorGroups, {id: group.id})
     const name = index < 0 ? '' : monitorGroups[index].name
     return (
-      <Checkbox
-        label={`${name || 'No Name'} (Monitor Group)`} onChange={() => onClickToggleMonitorGroup(group)}
-        checked={checked}
+      <FormControlLabel
+        control={
+          <Checkbox onChange={() => onClickToggleMonitorGroup(group)} checked={checked}/>
+        }
+        label={`${name || 'No Name'} (Monitor Group)`}
       />
     )
   }

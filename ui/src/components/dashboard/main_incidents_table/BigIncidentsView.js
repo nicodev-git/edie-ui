@@ -3,10 +3,12 @@ import moment from 'moment'
 import {Button, MenuItem, Select, TextField} from 'material-ui'
 import ActionSearch from 'material-ui-icons/Search'
 import ReactTooltip from 'react-tooltip'
+import { FormControl } from 'material-ui/Form'
+import { InputLabel } from 'material-ui/Input'
 
 import DateRangePicker from 'components/common/DateRangePicker'
 import {
-  errorStyle, underlineFocusStyle, inputStyle, selectedItemStyle, underlineStyle
+  errorStyle, inputStyle, underlineStyle
 } from 'style/common/materialStyles'
 
 import {severities} from 'shared/Global'
@@ -23,38 +25,31 @@ const BigIncidentsView = ({onHide,
       <Button variant="flat" onClick={onHide} className="pull-right hidden">Close</Button>
     </div>
     <div className="form-inline padding-md-left">
-      <Select
-        errorStyle={errorStyle}
-        underlineStyle={underlineFocusStyle}
-        selectedMenuItemStyle={selectedItemStyle}
-        menuItemStyle={inputStyle}
+      <FormControl className="valign-top">
+        <InputLabel>Select severities</InputLabel>
+        <Select
+          multiple
+          onChange={onChangeSeverity}
+          value={selectedSeverity}
+          style={{width: '160px'}}>
+          {severities.map(option =>
+            <MenuItem key={option.value} value={option.value}>{option.label}</MenuItem>
+          )}
+        </Select>
+      </FormControl>
 
-        multiple
-        label="Select severities"
-        onChange={onChangeSeverity}
-        value={selectedSeverity}
-        style={{width: '160px'}}
-        className="valign-top"
-      >
-        {severities.map(option =>
-          <MenuItem key={option.value} value={option.value}>{option.label}</MenuItem>
-        )}
-      </Select>
+      <FormControl className="margin-md-left valign-top">
+        <InputLabel> </InputLabel>
+        <Select
+          onChange={onChangeFixedStatus}
+          value={fixedStatus || ''}
+          style={{width: '120px'}}>
+          <MenuItem value="">Any</MenuItem>
+          <MenuItem value="false">Unfixed</MenuItem>
+          <MenuItem value="true">Fixed</MenuItem>
+        </Select>
+      </FormControl>
 
-      <Select
-        onChange={onChangeFixedStatus}
-        value={fixedStatus || ''}
-        className="margin-md-left valign-top"
-        errorStyle={errorStyle}
-        underlineStyle={underlineFocusStyle}
-        selectedMenuItemStyle={selectedItemStyle}
-        menuItemStyle={inputStyle}
-
-        style={{width: '120px'}}>
-        <MenuItem value="">Any</MenuItem>
-        <MenuItem value="false">Unfixed</MenuItem>
-        <MenuItem value="true">Fixed</MenuItem>
-      </Select>
         <DateRangePicker
           startDate={moment(startDate)}
           endDate={moment(endDate)}
