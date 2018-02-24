@@ -83,8 +83,7 @@ export default class Advanced extends React.Component {
                 open={this.state.routeOpen}
                 anchorEl={this.state.anchorEl}
                 anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
-                targetOrigin={{horizontal: 'left', vertical: 'top'}}
-                onRequestClose={this.handleRequestClose.bind(this)}
+                onClose={this.handleRequestClose.bind(this)}
               >
                 <Menu>
                   <MenuItem onClick={this.onClickAddRouting.bind(this)}>Add</MenuItem>
@@ -96,8 +95,7 @@ export default class Advanced extends React.Component {
                 open={this.state.open}
                 anchorEl={this.state.anchorEl}
                 anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
-                targetOrigin={{horizontal: 'left', vertical: 'top'}}
-                onRequestClose={this.handleRequestClose.bind(this)}
+                onClose={this.handleRequestClose.bind(this)}
               >
                 <Menu>
                   <MenuItem onClick={this.onClickTab.bind(this, 0)}>Main</MenuItem>

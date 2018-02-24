@@ -33,8 +33,7 @@ export default class CollectorTabs extends React.Component {
           open={!!this.state.viewOpen}
           anchorEl={this.state.anchorEl}
           anchorOrigin={{horizontal: 'right', vertical: 'bottom'}}
-          targetOrigin={{horizontal: 'right', vertical: 'top'}}
-          onRequestClose={this.handleRequestClose.bind(this)}>
+          onClose={this.handleRequestClose.bind(this)}>
           <Menu>
             {tabs.map(p =>
               <MenuItem key={p.path} onClick={() => history.push(p.path)}>{p.title}</MenuItem>
