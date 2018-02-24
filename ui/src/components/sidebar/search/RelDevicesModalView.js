@@ -26,7 +26,7 @@ export default class RelDevicesModalView extends React.Component {
         <CardPanel title="Relevant Devices" className="margin-md-bottom">
           <div>
             <Select
-              hintText="Field"
+              label="Field"
               value={searchFields[0]}
               onChange={onChangeSearchField}
               className="text-left"

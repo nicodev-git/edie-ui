@@ -65,7 +65,7 @@ class GenericSearch extends React.Component {
           return (
             <div style={chipStyles.wrapper}>
               {<div className="inline-block flex-1">{data.line || entity.description || '[Empty]'}</div>}
-              {data.file && <Chip style={chipStyles.smallChip} >{data.file}</Chip>}
+              {data.file && <Chip style={chipStyles.smallChip} label={data.file}/>}
             </div>
           )
         } else if (viewFilter === viewFilters.raw.name) {

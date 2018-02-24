@@ -34,7 +34,7 @@ export default class WorkflowSelectModalView extends React.Component {
               )}
             </Select>
             <TextField
-              hintText="Search"
+              label="Search"
               errorStyle={errorStyle}
               inputStyle={inputStyle}
               underlineFocusStyle={underlineStyle}

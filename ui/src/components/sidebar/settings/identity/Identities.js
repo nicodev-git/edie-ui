@@ -122,7 +122,7 @@ export default class Identities extends React.Component {
 
             <div className="inline-block">
               <TextField
-                hintText="Search"
+                label="Search"
                 errorStyle={errorStyle}
                 inputStyle={inputStyle}
                 underlineFocusStyle={underlineStyle}

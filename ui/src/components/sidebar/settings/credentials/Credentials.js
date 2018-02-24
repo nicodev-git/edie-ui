@@ -60,7 +60,7 @@ export default class Credentials extends React.Component {
         if (!p.data) return <span/>
         return (
           <div style={chipStyles.wrapper}>
-            <Chip style={chipStyles.chip}>{p.rowData.type}&nbsp;Default</Chip>
+            <Chip style={chipStyles.chip} label={<span>{p.rowData.type}&nbsp;Default</span>}/>
           </div>
         )
       }
