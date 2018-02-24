@@ -20,9 +20,7 @@ export default class ParserTypeModalView extends Component {
             <div className="form-column">
               <Field name="name" component={FormInput} label="name"/>
               <div>
-                <Chip style={chipStyles.chip} onClick={() => onClickValueChip('.*')}>
-                  .*
-                </Chip>
+                <Chip style={chipStyles.chip} onClick={() => onClickValueChip('.*')} label=".*"/>
               </div>
               <Field name="filters" component={FormInput} label="filters"/>
               <Field name="ignoredelete" component={FormSelect} label="IgnoreDelete" options={[{label: 'Ignore Delete', value: 'IGNOREDELETE'}]}/>
@@ -31,9 +29,9 @@ export default class ParserTypeModalView extends Component {
 
           <CardPanel title="Tags">
             <div style={chipStyles.wrapper}>
-              <Chip style={chipStyles.chip} onClick={onClickAddTag}><b>+</b></Chip>
+              <Chip style={chipStyles.chip} onClick={onClickAddTag} label={<b>+</b>}/>
               {tags.map((t, i) =>
-                <Chip key={i} style={chipStyles.chip} onRequestDelete={() => onClickDeleteTag(i)}>{t}</Chip>
+                <Chip key={i} style={chipStyles.chip} onDelete={() => onClickDeleteTag(i)} label={t}/>
               )}
             </div>
           </CardPanel>

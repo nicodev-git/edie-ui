@@ -18,9 +18,9 @@ export default class TagPickerModalView extends React.Component {
       <Chip
         key={w.id} style={chipStyles.chip}
         backgroundColor={selected ? blue300 : null}
-        onClick={() => selected ? onDeselectTag(w) : onSelectTag(w)}>
-        {w.name}
-      </Chip>
+        onClick={() => selected ? onDeselectTag(w) : onSelectTag(w)}
+        label={w.name}
+      />
     )
   }
 
@@ -33,9 +33,9 @@ export default class TagPickerModalView extends React.Component {
         }
         {!hideAdd && <Chip
           style={chipStyles.chip}
-          onClick={onClickAdd}>
-          <b>+</b>
-        </Chip>}
+          onClick={onClickAdd}
+          label={<b>+</b>}
+        />}
       </div>
     )
   }
@@ -82,9 +82,7 @@ export default class TagPickerModalView extends React.Component {
       <div style={chipStyles.wrapper}>
         {
           selectedTags.map(p =>
-            <Chip key={p} style={chipStyles.chip}>
-              {p}
-            </Chip>
+            <Chip key={p} style={chipStyles.chip} label={p}/>
           )
         }
       </div>

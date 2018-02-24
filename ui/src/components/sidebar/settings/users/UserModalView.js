@@ -21,7 +21,7 @@ export default class UserModalView extends React.Component {
             <Field name="phone" component={FormInput} label="Phone" className="valign-top mr-dialog"/>
             <Field name="defaultMapId" component={FormSelect} label="Default Map" options={defaultmaps} className="valign-top"/>
 
-            <Select multiple hintText="Role" onChange={onChangeRole} value={selectedRoles}
+            <Select multiple label="Role" onChange={onChangeRole} value={selectedRoles}
               className="mr-dialog">
               {roles.map(r =>
                 <MenuItem
@@ -35,7 +35,7 @@ export default class UserModalView extends React.Component {
             </Select>
 
 
-            <Select multiple hintText="Permission" onChange={onChangePermission} value={permissions}>
+            <Select multiple label="Permission" onChange={onChangePermission} value={permissions}>
               {mainMenu.map(p =>
                 <MenuItem
                   key={p.id}

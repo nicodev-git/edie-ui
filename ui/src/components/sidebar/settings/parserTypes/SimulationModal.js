@@ -159,10 +159,9 @@ class SimulationModal extends React.Component {
                 key={i}
                 style={chipStyles.chip}
                 onClick={this.onClickEditFilter.bind(this, i)}
-                onRequestDelete={this.onClickDeleteFilter.bind(this, i)}
-              >
-                {this.renderChipContent(k)}
-              </Chip>
+                onDelete={this.onClickDeleteFilter.bind(this, i)}
+                label={this.renderChipContent(k)}
+              />
             )}
           </div>
 
@@ -178,10 +177,9 @@ class SimulationModal extends React.Component {
                 key={i}
                 style={chipStyles.chip}
                 onClick={this.onClickEditPattern.bind(this, i)}
-                onRequestDelete={this.onClickDeletePattern.bind(this, i)}
-              >
-                {k}
-              </Chip>
+                onDelete={this.onClickDeletePattern.bind(this, i)}
+                label={k}
+              />
             )}
           </div>
 

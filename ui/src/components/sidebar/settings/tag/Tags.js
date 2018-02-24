@@ -98,7 +98,7 @@ export default class Tags extends React.Component {
 
             backgroundColor={multiSelTags.filter(t => t.id === p.id).length ? blue300 : null}
             onClick={this.onClickTag.bind(this, p)}
-            onRequestDelete={canEdit ? this.onDeleteTag.bind(this, p) : null}
+            onDelete={canEdit ? this.onDeleteTag.bind(this, p) : null}
           >
             {p.name}
           </Chip>
