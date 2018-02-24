@@ -12,6 +12,8 @@ import {
 import ReactTooltip from 'react-tooltip'
 import ArrowBack from 'material-ui-icons/ArrowBack'
 import ActionSearch from 'material-ui-icons/Search'
+import { FormControl } from 'material-ui/Form'
+import { InputLabel } from 'material-ui/Input'
 
 import DateRangePicker from 'components/common/DateRangePicker'
 import InfiniteTable from 'components/common/InfiniteTable'
@@ -30,7 +32,7 @@ import {
   showIncidentRaw
 } from 'components/common/incident/Incident'
 import {
-  errorStyle, underlineFocusStyle, inputStyle, selectedItemStyle, underlineStyle,
+  errorStyle, inputStyle, underlineStyle,
   thumbup, thumpdown, done, notdone,
   rawtext, reason, openicon
 } from 'style/common/materialStyles'
@@ -400,37 +402,31 @@ export default class MainIncidents extends Component {
           <div className="text-center margin-md-top">
             <div className="pull-left">
               <div className="text-left form-mui-inline">
-                <Select
-                  errorStyle={errorStyle}
-                  underlineStyle={underlineFocusStyle}
-                  selectedMenuItemStyle={selectedItemStyle}
-                  menuItemStyle={inputStyle}
-                  
-                  multiple
-                  label="Select severities"
-                  onChange={this.onChangeSeverity.bind(this)}
-                  value={selectedSeverity}
-                  style={{width: '160px'}}
-                >
-                  {severities.map(option =>
-                    <MenuItem key={option.value} value={option.value}>{option.label}</MenuItem>
-                  )}
-                </Select>
+                <FormControl>
+                  <InputLabel>Select severities</InputLabel>
+                  <Select
+                    multiple
+                    onChange={this.onChangeSeverity.bind(this)}
+                    value={selectedSeverity}
+                    style={{width: '160px'}}
+                  >
+                    {severities.map(option =>
+                      <MenuItem key={option.value} value={option.value}>{option.label}</MenuItem>
+                    )}
+                  </Select>
+                </FormControl>
 
-                <Select
-                  onChange={this.onFixedChange.bind(this)}
-                  value={this.state.fixed}
-                  className="margin-md-left"
-                  errorStyle={errorStyle}
-                  underlineStyle={underlineFocusStyle}
-                  selectedMenuItemStyle={selectedItemStyle}
-                  menuItemStyle={inputStyle}
-                  
-                  style={{width: '120px'}}>
-                  <MenuItem value="">Any</MenuItem>
-                  <MenuItem value="false">Unfixed</MenuItem>
-                  <MenuItem value="true">Fixed</MenuItem>
-                </Select>
+                <FormControl className="margin-md-left">
+                  <InputLabel>Select severities</InputLabel>
+                  <Select
+                    onChange={this.onFixedChange.bind(this)}
+                    value={this.state.fixed}
+                    style={{width: '120px'}}>
+                    <MenuItem value="">Any</MenuItem>
+                    <MenuItem value="false">Unfixed</MenuItem>
+                    <MenuItem value="true">Fixed</MenuItem>
+                  </Select>
+                </FormControl>
 
                 <DateRangePicker
                   startDate={moment(afterStartTimestamp)}

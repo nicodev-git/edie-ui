@@ -1,5 +1,7 @@
 import React from 'react'
 import {Select, MenuItem} from 'material-ui'
+import { FormControl } from 'material-ui/Form'
+import { InputLabel } from 'material-ui/Input'
 
 import { CloseButton, Modal, CardPanel } from 'components/modal/parts'
 
@@ -25,16 +27,14 @@ export default class RelDevicesModalView extends React.Component {
       <Modal title="Relevant Devices" onRequestClose={onHide}>
         <CardPanel title="Relevant Devices" className="margin-md-bottom">
           <div>
-            <Select
-              label="Field"
-              value={searchFields[0]}
-              onChange={onChangeSearchField}
-              className="text-left"
-            >
-              {fields.map(option =>
-                <MenuItem key={option.path} value={option.path}>{option.path.replace(/\.dataobj\./gi, '.').replace(/dataobj\./gi, '')}</MenuItem>
-              )}
-            </Select>
+            <FormControl className="text-left">
+              <InputLabel>Field</InputLabel>
+              <Select value={searchFields[0]} onChange={onChangeSearchField}>
+                {fields.map(option =>
+                  <MenuItem key={option.path} value={option.path}>{option.path.replace(/\.dataobj\./gi, '.').replace(/dataobj\./gi, '')}</MenuItem>
+                )}
+              </Select>
+            </FormControl>
           </div>
           <div style={{height: '500px', overflow: 'auto'}}>
             <table className="table table-hover dataTable">

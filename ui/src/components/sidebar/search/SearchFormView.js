@@ -2,6 +2,9 @@ import React from 'react'
 import { Field } from 'redux-form'
 import { findIndex } from 'lodash'
 import {Button, Select, Popover, MenuItem, IconButton} from 'material-ui'
+import { FormControl } from 'material-ui/Form'
+import { InputLabel } from 'material-ui/Input'
+
 import ActionSearch from 'material-ui-icons/Search'
 import ToggleStar from 'material-ui-icons/StarBorder'
 import FilledStar from 'material-ui-icons/Star'
@@ -13,6 +16,7 @@ import ArrowDownIcon from 'material-ui-icons/KeyboardArrowDown'
 import ArrowUpIcon from 'material-ui-icons/KeyboardArrowUp'
 
 import { FormInput } from 'components/modal/parts'
+
 import DateRangePicker from 'components/common/DateRangePicker'
 
 const dateRangeStyle = {marginTop: '4px'}
@@ -107,17 +111,19 @@ export default class SearchFormView extends React.Component {
                    className={`valign-top ${advanced ? 'hidden' : ''}`}/>
             <Button variant="flat" onClick={this.onClickSearchBy.bind(this)}
                     className="valign-top margin-xs-top">Search By</Button>
-            <Select
-              multiple
-              label="Collection"
-              value={selectedCollections}
-              onChange={onChangeCollection}
-              style={{width: '180px'}}
-            >
-              {collections.map(option =>
-                <MenuItem key={option.value} value={option.value}>{option.label}</MenuItem>
-              )}
-            </Select>
+            <FormControl>
+              <InputLabel>Collection</InputLabel>
+              <Select
+                multiple
+                value={selectedCollections}
+                onChange={onChangeCollection}
+                style={{width: '180px'}}
+              >
+                {collections.map(option =>
+                  <MenuItem key={option.value} value={option.value}>{option.label}</MenuItem>
+                )}
+              </Select>
+            </FormControl>
             <DateRangePicker
               className="valign-top"
               startDate={startDate}
@@ -150,34 +156,36 @@ export default class SearchFormView extends React.Component {
               </div>
 
               <div style={{marginTop: -35}}>
-                <Select
-                  multiple
-                  label="Severity"
-                  value={selectedSeverities}
-                  onChange={onChangeSeverity}
-                  style={{width: 300}}
-                  className="text-left margin-md-left"
-                  selectionRenderer={this.severityRenderer.bind(this, severities)}
-                >
-                  {severities.map(option =>
-                    <MenuItem key={option.value} value={option.value}>{option.label}</MenuItem>
-                  )}
-                </Select>
+                <FormControl className="text-left margin-md-left">
+                  <InputLabel>Severity</InputLabel>
+                  <Select
+                    multiple
+                    value={selectedSeverities}
+                    onChange={onChangeSeverity}
+                    style={{width: 300}}
+                    renderValue={this.severityRenderer.bind(this, severities)}
+                  >
+                    {severities.map(option =>
+                      <MenuItem key={option.value} value={option.value}>{option.label}</MenuItem>
+                    )}
+                  </Select>
+                </FormControl>
               </div>
 
               <div style={{marginTop: -20}}>
-                <Select
-                  multiple
-                  label="MonitorType"
-                  value={selectedMonitorTypes}
-                  onChange={onChangeMonitorType}
-                  style={{width: 300}}
-                  className="margin-md-left"
-                >
-                  {monitorTemplates.map(option =>
-                    <MenuItem key={option.id} value={option.monitortype}>{option.name}</MenuItem>
-                  )}
-                </Select>
+                <FormControl className="margin-md-left">
+                  <InputLabel>MonitorType</InputLabel>
+                  <Select
+                    multiple
+                    value={selectedMonitorTypes}
+                    onChange={onChangeMonitorType}
+                    style={{width: 300}}
+                  >
+                    {monitorTemplates.map(option =>
+                      <MenuItem key={option.id} value={option.monitortype}>{option.name}</MenuItem>
+                    )}
+                  </Select>
+                </FormControl>
               </div>
             </Popover>
           </div>

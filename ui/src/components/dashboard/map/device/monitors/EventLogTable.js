@@ -3,6 +3,8 @@ import {TextField, Button, Select, MenuItem} from 'material-ui'
 import ActionSearch from 'material-ui-icons/Search'
 import moment from 'moment'
 import {assign} from 'lodash'
+import { FormControl } from 'material-ui/Form'
+import { InputLabel } from 'material-ui/Input'
 
 import InfiniteTable from 'components/common/InfiniteTable'
 
@@ -114,14 +116,16 @@ export default class EventLogTable extends Component {
     return (
       <div className="text-center">
         <div className="pull-left text-left">
-          <Select
-            label="Log"
-            onChange={this.onChangeLogName.bind(this)}
-            value={selectedLogName}>
-            {monitorLogNames.map((c, i) =>
-              <MenuItem key={i} value={c}>{c}</MenuItem>
-            )}
-          </Select>
+          <FormControl>
+            <InputLabel>Log</InputLabel>
+            <Select
+              onChange={this.onChangeLogName.bind(this)}
+              value={selectedLogName}>
+              {monitorLogNames.map((c, i) =>
+                <MenuItem key={i} value={c}>{c}</MenuItem>
+              )}
+            </Select>
+          </FormControl>
         </div>
         <div className="inline-block">
           <TextField name="query" value={this.props.monitorQuery} onChange={this.onChangeQuery.bind(this)} onKeyUp={this.onKeyupQuery.bind(this)}/>
