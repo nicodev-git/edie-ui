@@ -44,7 +44,7 @@ export default class Selector extends Component {
     let values = this.props.values
     let list = []
     for (let i = 0; i < options.length; i++) {
-      list.push(<MenuItem key={i} value={values[i]} primaryText={options[i]} />)
+      list.push(<MenuItem key={i} value={values[i]}>{options[i]}</MenuItem>)
     }
     return list
   }

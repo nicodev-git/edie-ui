@@ -115,13 +115,7 @@ export default class SearchFormView extends React.Component {
               style={{width: '180px'}}
             >
               {collections.map(option =>
-                <MenuItem
-                  key={option.value}
-                  insetChildren
-                  checked={selectedCollections && selectedCollections.includes(option.value)}
-                  value={option.value}
-                  primaryText={option.label}
-                />
+                <MenuItem key={option.value} value={option.value}>{option.label}</MenuItem>
               )}
             </Select>
             <DateRangePicker
@@ -168,13 +162,7 @@ export default class SearchFormView extends React.Component {
                   selectionRenderer={this.severityRenderer.bind(this, severities)}
                 >
                   {severities.map(option =>
-                    <MenuItem
-                      key={option.value}
-                      insetChildren
-                      checked={selectedSeverities && selectedSeverities.includes(option.value)}
-                      value={option.value}
-                      primaryText={option.label}
-                    />
+                    <MenuItem key={option.value} value={option.value}>{option.label}</MenuItem>
                   )}
                 </Select>
               </div>
@@ -189,13 +177,7 @@ export default class SearchFormView extends React.Component {
                   className="margin-md-left"
                 >
                   {monitorTemplates.map(option =>
-                    <MenuItem
-                      key={option.id}
-                      insetChildren
-                      checked={selectedMonitorTypes && selectedMonitorTypes.includes(option.monitortype)}
-                      value={option.monitortype}
-                      primaryText={option.name}
-                    />
+                    <MenuItem key={option.id} value={option.monitortype}>{option.name}</MenuItem>
                   )}
                 </Select>
               </div>

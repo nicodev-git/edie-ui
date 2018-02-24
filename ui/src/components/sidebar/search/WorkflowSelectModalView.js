@@ -28,9 +28,9 @@ export default class WorkflowSelectModalView extends React.Component {
               value={selectedCategory || ''}
               onChange={onChangeCategory}
             >
-              <MenuItem key="0" value="" primaryText="[All]" />
+              <MenuItem key="0" value="">[All]</MenuItem>
               {workflowCategories.map(c =>
-                <MenuItem key={c.id} value={c.name} primaryText={c.name} />
+                <MenuItem key={c.id} value={c.name}>{c.name}</MenuItem>
               )}
             </Select>
             <TextField

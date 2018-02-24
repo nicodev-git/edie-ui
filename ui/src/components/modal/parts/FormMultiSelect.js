@@ -14,13 +14,7 @@ const FormMultiSelect = ({input, label, meta: { touched, error }, value, options
     onChange={onChange || input.onChange}
   >
     {options.map(option =>
-      <MenuItem
-        key={option.value}
-        insetChildren
-        checked={input.value && input.value.includes(option.value)}
-        value={option.value}
-        primaryText={option.label}
-      />
+      <MenuItem key={option.value} value={option.value}>{option.label}</MenuItem>
     )}
   </Select>
 )

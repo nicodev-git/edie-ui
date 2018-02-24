@@ -59,7 +59,7 @@ const MessageBox = ({open, openSidebarMessageMenu, closeSidebarMessageMenu}) => 
         targetOrigin={{horizontal: 'right', vertical: 'top'}}
         listStyle={iconMenuStyle}
       >
-        <MenuItem style={newStyle} primaryText="New messages" />
+        <MenuItem style={newStyle}>New messages</MenuItem>
         <Divider style={dividerStyle}/>
         <MenuItem style={messageStyle}>
           <Message
@@ -81,9 +81,7 @@ const MessageBox = ({open, openSidebarMessageMenu, closeSidebarMessageMenu}) => 
         <Divider style={dividerStyle}/>
         <MenuItem
           className="see-all-messages"
-          primaryText="See all messages"
-          leftIcon={<InboxIcon/>}
-          style={seeAllStyle}/>
+          style={seeAllStyle}><InboxIcon/>See all messages</MenuItem>
       </Menu>
     </Badge>
     <div className="sidebar-title">Messages</div>

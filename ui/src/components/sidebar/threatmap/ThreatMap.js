@@ -1394,18 +1394,18 @@ export default class ThreatMap extends Component {
         <div className={`flex-vertical flex-1 ${maximized ? 'hidden' : ''}`}>
           <div className="form-inline padding-sm" style={{background: '#CECECE'}}>
             <Select value={mode} onChange={this.onChangeMode.bind(this)} style={{width: '120px', marginLeft: '20px'}}>
-              <MenuItem value="real" primaryText="Real" />
-              <MenuItem value="replay" primaryText="Replay" />
-              <MenuItem value="demo" primaryText="Demo" />
+              <MenuItem value="real">Real</MenuItem>
+              <MenuItem value="replay">Replay</MenuItem>
+              <MenuItem value="demo">Demo</MenuItem>
             </Select>&nbsp;
             <Select value={speed} onChange={this.onChangeSpeed.bind(this)} className={mode === 'replay' ? '' : 'hidden'} style={{width: '120px'}}>
-              <MenuItem value={1} primaryText="Normal" />
-              <MenuItem value={2} primaryText="2x" />
-              <MenuItem value={5} primaryText="5x"/>
-              <MenuItem value={10} primaryText="10x"/>
-              <MenuItem value={20} primaryText="20x"/>
-              <MenuItem value={50} primaryText="50x"/>
-              <MenuItem value={100} primaryText="100x"/>
+              <MenuItem value={1}>Normal</MenuItem>
+              <MenuItem value={2}>2x</MenuItem>
+              <MenuItem value={5}>5x</MenuItem>
+              <MenuItem value={10}>10x</MenuItem>
+              <MenuItem value={20}>20x</MenuItem>
+              <MenuItem value={50}>50x</MenuItem>
+              <MenuItem value={100}>100x</MenuItem>
             </Select>
             <div className="form-group pull-right inline hidden">
               <div className="link" onClick={this.onClickSettings.bind(this)}>

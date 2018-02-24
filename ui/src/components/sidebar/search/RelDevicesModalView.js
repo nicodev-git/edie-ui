@@ -32,11 +32,7 @@ export default class RelDevicesModalView extends React.Component {
               className="text-left"
             >
               {fields.map(option =>
-                <MenuItem
-                  key={option.path}
-                  value={option.path}
-                  primaryText={option.path.replace(/\.dataobj\./gi, '.').replace(/dataobj\./gi, '')}
-                />
+                <MenuItem key={option.path} value={option.path}>{option.path.replace(/\.dataobj\./gi, '.').replace(/dataobj\./gi, '')}</MenuItem>
               )}
             </Select>
           </div>
