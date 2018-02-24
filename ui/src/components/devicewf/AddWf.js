@@ -117,7 +117,7 @@ export default class AddWf extends React.Component {
                     <Checkbox
                       label={w.severity}
                       checked={findIndex(selectedSysWorkflows, {id: w.id}) >= 0}
-                      onCheck={(e, c) => this.onChangeCheck(w, e, c)}
+                      onChange={(e, c) => this.onChangeCheck(w, e, c)}
                     />
                   </td>
                   <td>{w.name}</td>

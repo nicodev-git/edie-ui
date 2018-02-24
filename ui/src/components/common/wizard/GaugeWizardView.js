@@ -73,7 +73,14 @@ export default class GaugeWizardView extends React.Component {
           <tbody>
           {(devices || []).map(d => (d.monitors || []).map(p =>
             <tr key={p.uid}>
-              <td><Checkbox label={`${d.name} - ${p.name}`} checked={selectedMonitors.includes(p.uid)} onChange={() => toggleMonitorId(p.uid)}/></td>
+              <td>
+                <FormControlLabel
+                  control={
+                    <Checkbox checked={selectedMonitors.includes(p.uid)} onChange={() => toggleMonitorId(p.uid)}/>
+                  }
+                  label={`${d.name} - ${p.name}`}
+                />
+              </td>
             </tr>
           ))}
           </tbody>

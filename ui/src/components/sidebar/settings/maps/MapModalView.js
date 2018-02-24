@@ -10,7 +10,7 @@ export default class MapModalView extends React.Component {
     const checked = mapUsers.indexOf(p.username) >= 0
     return (
       <tr key={p.id}><td>
-        <Checkbox label={p.username} checked={checked} onCheck={() => toggleMapUser(p.username)}/>
+        <Checkbox label={p.username} checked={checked} onChange={() => toggleMapUser(p.username)}/>
       </td></tr>
     )
   }

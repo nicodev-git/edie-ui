@@ -143,7 +143,7 @@ class EditUser extends React.Component {
         <tr key={s}>
           <td>
             <Checkbox label={s} checked={checked}
-                      onCheck={canEdit ? this.onCheckSection.bind(this, s) : null}/>
+                      onChange={canEdit ? this.onCheckSection.bind(this, s) : null}/>
           </td>
         </tr>
       )
@@ -154,7 +154,7 @@ class EditUser extends React.Component {
               className={selectedRole && selectedRole.id === r.id ? 'selected' : ''}>
             <td className="padding-lg-left">
               <div className="inline-block valign-middle">
-                <Checkbox checked={selectedRoles.includes(r.name)} onCheck={canEdit && checked ? this.onCheckRole.bind(this, r) : null}/>
+                <Checkbox checked={selectedRoles.includes(r.name)} onChange={canEdit && checked ? this.onCheckRole.bind(this, r) : null}/>
               </div>
               <label className="valign-middle">{r.name}</label>
             </td>
@@ -188,7 +188,7 @@ class EditUser extends React.Component {
         <td className="padding-lg-left">
           <div className="inline-block valign-middle">
             <Checkbox checked={selectedRoles.includes(r.name)}
-                      onCheck={canEdit && selectedRoles.includes(r.name) ? this.onCheckRole.bind(this, r) : null}/>
+                      onChange={canEdit && selectedRoles.includes(r.name) ? this.onCheckRole.bind(this, r) : null}/>
           </div>
           <label className="valign-middle">{r.name}</label>
         </td>
@@ -223,7 +223,7 @@ class EditUser extends React.Component {
               <tr key={p}>
                 <td>
                   <Checkbox label={p} checked={selectedPermissions.includes(p)}
-                            onCheck={canEdit ? this.onCheckPermission.bind(this, p) : null}
+                            onChange={canEdit ? this.onCheckPermission.bind(this, p) : null}
                   />
                 </td>
               </tr>
@@ -294,7 +294,7 @@ class EditUser extends React.Component {
                             className={!selectedRole || selectedRole.permissions.includes(p) ? '' : 'hidden'}>
                           <td>
                             <Checkbox label={p} checked={permissions.includes(p)}
-                                      onCheck={canEdit ? this.onCheckPermission.bind(this, p) : null}
+                                      onChange={canEdit ? this.onCheckPermission.bind(this, p) : null}
                             />
                           </td>
                         </tr>

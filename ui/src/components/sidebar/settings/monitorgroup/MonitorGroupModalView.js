@@ -10,7 +10,7 @@ export default class MonitorGroupModalView extends React.Component {
     const {onClickMonitor, selectedMonitors} = this.props
     return (
       <Checkbox
-        label={monitor.name} onCheck={() => onClickMonitor(monitor)}
+        label={monitor.name} onChange={() => onClickMonitor(monitor)}
         checked={selectedMonitors && selectedMonitors.filter(p => p.uid === monitor.uid).length > 0}/>
     )
   }

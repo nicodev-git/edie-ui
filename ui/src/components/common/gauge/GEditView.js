@@ -551,7 +551,12 @@ export default class GEditView extends React.Component {
     const {forward, forwardBoardId} = this.state
     return [
       <div key="forward" className="inline-block nowrap margin-md-right" style={{marginTop: 12}}>
-        <Checkbox label="Forward to dashboard" checked={forward} onChange={this.onChangeText.bind(this, 'forward')}/>
+        <FormControlLabel
+          control={
+            <Checkbox checked={forward} onChange={this.onChangeText.bind(this, 'forward')}/>
+          }
+          label="Forward to dashboard"
+        />
       </div>,
       <Select key="forwardBoard" value={forwardBoardId} className="valign-top" onChange={this.onChangeSelect.bind(this, 'forwardBoardId')}>
         {(gaugeBoards || []).map(p => <MenuItem key={p.id} value={p.id}>{p.name}</MenuItem>)}
@@ -570,7 +575,13 @@ export default class GEditView extends React.Component {
           <MenuItem value="normal">Normal</MenuItem>
           <MenuItem value="slim">Slim</MenuItem>
         </Select>
-        <Checkbox label="Show Device Type" checked={showDeviceType} onChange={this.onChangeText.bind(this, 'showDeviceType')}/>
+        <FormControlLabel
+          control={
+            <Checkbox checked={showDeviceType} onChange={this.onChangeText.bind(this, 'showDeviceType')}/>
+          }
+          label="Show Device Type"
+        />
+
         {this.renderForward()}
 
         <div>
@@ -657,7 +668,12 @@ export default class GEditView extends React.Component {
       <div>
         <TextField name="name" value={name} label="Name" className="valign-top mr-dialog" onChange={this.onChangeText.bind(this, 'name')}/>
         <div className="margin-md-top">
-          <Checkbox label="Show Images" checked={showImage} onChange={this.onChangeText.bind(this, 'showImage')}/>
+          <FormControlLabel
+            control={
+              <Checkbox checked={showImage} onChange={this.onChangeText.bind(this, 'showImage')}/>
+            }
+            label="Show Images"
+          />
         </div>
       </div>
     )

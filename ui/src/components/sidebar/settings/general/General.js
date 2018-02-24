@@ -194,7 +194,7 @@ export default class General extends React.Component {
               <Checkbox
                 label="Enable DMZ"
                 checked={this.getOptionValue('DMZ') === 'true'}
-                onCheck={this.onChangeDmz.bind(this)}/>
+                onChange={this.onChangeDmz.bind(this)}/>
             </div>
             <InlineEdit
               text={this.getOptionValue('DMZ', 'value2')}
@@ -209,7 +209,7 @@ export default class General extends React.Component {
               <Checkbox
                 label="Pause System"
                 checked={this.getOptionValue('PAUSE') === 'true'}
-                onCheck={this.onChangePause.bind(this)}/>
+                onChange={this.onChangePause.bind(this)}/>
             </div>
           </div>
           <div style={rowStyle} className="margin-md-bottom">
@@ -217,7 +217,7 @@ export default class General extends React.Component {
               <Checkbox
                 label="Display Network Traffic"
                 checked={this.getOptionValue('NETWORK_TRAFFIC') === 'true'}
-                onCheck={this.onChangeTraffic.bind(this)}/>
+                onChange={this.onChangeTraffic.bind(this)}/>
             </div>
           </div>
           <div style={rowStyle} className="margin-md-bottom">
@@ -225,7 +225,7 @@ export default class General extends React.Component {
               <Checkbox
                 label="Send Error Logs With"
                 checked={this.getOptionValue('REMOTE_LOG_ENABLED') === 'true'}
-                onCheck={this.onChangeLogEnabled.bind(this)}/>
+                onChange={this.onChangeLogEnabled.bind(this)}/>
             </div>
             <InlineEdit
               text={this.getOptionValue('REMOTE_LOG_BATCH') || '[Empty]'}
@@ -240,7 +240,7 @@ export default class General extends React.Component {
               <Checkbox
                 label="Send to mobile"
                 checked={this.getOptionValue('IMMOBILE') === 'true'}
-                onCheck={this.onChangeSendMobile.bind(this)}/>
+                onChange={this.onChangeSendMobile.bind(this)}/>
             </div>
 
             <InlineEdit
@@ -258,7 +258,7 @@ export default class General extends React.Component {
               <Checkbox
                 label="Show absolute date"
                 checked={this.getUserOptionValue('useAbsoluteDate', false)}
-                onCheck={this.onChangeAbsDate.bind(this)}/>
+                onChange={this.onChangeAbsDate.bind(this)}/>
             </div>
             <InlineEdit
               text={this.getUserOptionValue('dateFormat', defaultDateFormat)}
@@ -276,7 +276,7 @@ export default class General extends React.Component {
               <Checkbox
                 label="Keep Incident Alert"
                 checked={!!this.getUserOptionValue('keepIncidentAlert', false)}
-                onCheck={this.onChangeKeepIncidentAlert.bind(this)}/>
+                onChange={this.onChangeKeepIncidentAlert.bind(this)}/>
             </div>
           </div>
 
@@ -334,7 +334,7 @@ export default class General extends React.Component {
               <td key={r.id}>
                 <Checkbox
                   label="" checked={r.permissions.includes(p)}
-                  onCheck={this.onCheckDashboardMenu.bind(this, r, p)}
+                  onChange={this.onCheckDashboardMenu.bind(this, r, p)}
                 />
               </td>
             )}

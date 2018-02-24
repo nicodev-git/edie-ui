@@ -34,7 +34,7 @@ export default class UserEditView extends React.Component {
                       className={selectedRole && selectedRole.id === r.id ? 'selected' : ''}>
                     <td>
                       <Checkbox label={r.name} checked={selectedRoles.includes(r.name)}
-                                onCheck={this.onCheckRole.bind(this, r.name)}/>
+                                onChange={this.onCheckRole.bind(this, r.name)}/>
                     </td>
                   </tr>
                 )}
@@ -55,7 +55,7 @@ export default class UserEditView extends React.Component {
                       className={!selectedRole || selectedRole.permissions.includes(p.roleMenuId) ? '' : 'hidden'}>
                     <td>
                       <Checkbox label={p.title} checked={permissions.includes(p.roleMenuId)}
-                                onCheck={this.onCheckPermission.bind(this, p.roleMenuId)}/>
+                                onChange={this.onCheckPermission.bind(this, p.roleMenuId)}/>
                     </td>
                   </tr>
                 )}

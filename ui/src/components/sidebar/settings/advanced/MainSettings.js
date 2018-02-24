@@ -104,7 +104,7 @@ export default class MainSettings extends Component {
             <Checkbox
               label="Send IMP Logs to IMAdmin"
               checked={this.getOptionValue('SEND_LOGS') === 'true'}
-              onCheck={this.onChangeSendLogOption.bind(this)}
+              onChange={this.onChangeSendLogOption.bind(this)}
               disabled={!canEdit}
             />
           </div>
