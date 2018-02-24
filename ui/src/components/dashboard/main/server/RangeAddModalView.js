@@ -14,7 +14,7 @@ export default class RangeAddModalView extends React.Component {
           <CardPanel title="Range">
             <Field name="from" component={FormInput} floatingLabel="From" />
             <Field name="to" component={FormInput} floatingLabel="To" className="margin-md-left" />
-            <Button variant="raised" label="Scan" type="submit"/>
+            <Button variant="raised" type="submit">Scan</Button>
           </CardPanel>
 
           <CardPanel title="Result">

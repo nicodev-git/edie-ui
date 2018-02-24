@@ -34,8 +34,8 @@ export default class DetailLogModalView extends React.Component {
       <Modal title="Log" onRequestClose={onHide} contentStyle={{width: '90%', maxWidth: 'initial'}}>
         {this.renderTable()}
         <div style={{position: 'absolute', top: 11, left: 60, right: 60, textAlign: 'center', zIndex: 10}}>
-          <Button variant="raised" label="Prev" onClick={onClickPrev} disabled={loading || page < 1} secondary/>&nbsp;
-          <Button variant="raised" label="Next" onClick={onClickNext} disabled={loading || page >= (size - 1)} secondary/>
+          <Button variant="raised" onClick={onClickPrev} disabled={loading || page < 1} color="secondary">Prev</Button>&nbsp;
+          <Button variant="raised" onClick={onClickNext} disabled={loading || page >= (size - 1)} color="secondary">Next</Button>
         </div>
         {loading && <RefreshOverlay/>}
       </Modal>

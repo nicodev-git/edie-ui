@@ -29,7 +29,7 @@ export default class ServiceTable extends React.Component {
       'customComponent': (props) => {
         const val = props.data
         const label = val === 'Running' ? 'Stop' : 'Start'
-        return <Button variant="raised" label={label} onClick={this.onClickStart.bind(this, props.rowData)} primary={val !== 'Running'}/>
+        return <Button variant="raised" onClick={this.onClickStart.bind(this, props.rowData)} color={val !== 'Running' ? 'primary' : null}>{label}</Button>
       }
     }]
   }

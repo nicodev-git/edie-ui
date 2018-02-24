@@ -367,7 +367,7 @@ export default class MainIncidents extends Component {
 
   renderDateLabel (label) {
     return (
-      <Button variant="raised" label={label}/>
+      <Button variant="raised">{label}</Button>
     )
   }
 
@@ -381,7 +381,9 @@ export default class MainIncidents extends Component {
     if (!device.groupid) return null
     return (
       <div>
-        <Button variant="flat" icon={<ArrowBack />} label="Group" onClick={this.onClickGroup.bind(this, device.groupid)}/>
+        <Button variant="flat" onClick={this.onClickGroup.bind(this, device.groupid)}>
+          <ArrowBack />Group
+        </Button>
       </div>
     )
   }
@@ -445,10 +447,10 @@ export default class MainIncidents extends Component {
             </div>
 
             <div className="pull-right">
-              <Button variant="raised" label="Open" onClick={this.onClickOpen.bind(this)}/>&nbsp;
-              <Button variant="raised" label="Fix All" onClick={this.onClickFixAll.bind(this)}/>&nbsp;
-              <Button variant="raised" label="Fix Selected" onClick={this.onClickFixSelected.bind(this)}/>&nbsp;
-              <Button variant="raised" label="More" primary onClick={this.handleTouchTap.bind(this)}/>&nbsp;
+              <Button variant="raised" onClick={this.onClickOpen.bind(this)}>Open</Button>&nbsp;
+              <Button variant="raised" onClick={this.onClickFixAll.bind(this)}>Fix All</Button>&nbsp;
+              <Button variant="raised" onClick={this.onClickFixSelected.bind(this)}>Fix Selected</Button>&nbsp;
+              <Button variant="raised" color="primary" onClick={this.handleTouchTap.bind(this)}>More</Button>&nbsp;
               <Popover
                 open={this.state.open}
                 anchorEl={this.state.anchorEl}

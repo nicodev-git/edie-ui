@@ -105,10 +105,10 @@ export default class UserTable extends React.Component {
     return (
       <div className="text-center">
         <div className="pull-right">
-          <Button variant="raised" label="Create" onClick={this.onClickCreate.bind(this)}/>&nbsp;
-          <Button variant="raised" label="Enable" onClick={this.onClickEnable.bind(this)}/>&nbsp;
-          <Button variant="raised" label="Disable" onClick={this.onClickDisable.bind(this)}/>&nbsp;
-          <Button variant="raised" label="Delete" onClick={this.onClickDelete.bind(this)}/>&nbsp;
+          <Button variant="raised" onClick={this.onClickCreate.bind(this)}>Create</Button>&nbsp;
+          <Button variant="raised" onClick={this.onClickEnable.bind(this)}>Enable</Button>&nbsp;
+          <Button variant="raised" onClick={this.onClickDisable.bind(this)}>Disable</Button>&nbsp;
+          <Button variant="raised" onClick={this.onClickDelete.bind(this)}>Delete</Button>&nbsp;
         </div>
       </div>
     )

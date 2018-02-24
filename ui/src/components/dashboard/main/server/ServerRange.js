@@ -25,7 +25,7 @@ class ServerRange extends React.Component {
           <div>
             <Field name="from" component={FormInput} floatingLabel="From" />
             <Field name="to" component={FormInput} floatingLabel="To" className="margin-md-left" />
-            <Button variant="raised" label="Scan" type="submit"/>
+            <Button variant="raised" type="submit">Scan</Button>
           </div>
           <CardPanel title="Result">
             <div style={{minHeight: 300}}>

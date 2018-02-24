@@ -140,9 +140,9 @@ export default class WorkflowModalInner extends Component {
           </div>
           <div className="col-md-12 margin-md-top">
             { isDiagramButton
-              ? (<Button variant="raised" label="Diagram" onClick={this.props.onClickDiagram}/>) : null}
+              ? (<Button variant="raised" onClick={this.props.onClickDiagram}>Diagram</Button>) : null}
             &nbsp;
-            <Button variant="raised" label="Finish" type="submit"/>
+            <Button variant="raised" type="submit">Finish</Button>
           </div>
           {modals}
         </div>

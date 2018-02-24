@@ -14,7 +14,7 @@ export default class CpuProcessModalView extends React.Component {
           </div>
         </CardPanel>
         <div className="margin-md-top text-right">
-          <Button variant="flat" label="Close" onClick={onHide}/>
+          <Button variant="flat" onClick={onHide}>Close</Button>
         </div>
       </Modal>
     )

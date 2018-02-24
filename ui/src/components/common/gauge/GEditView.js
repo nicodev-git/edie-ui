@@ -473,7 +473,7 @@ export default class GEditView extends React.Component {
 
   renderDateLabel (label) {
     return (
-      <Button variant="raised" label={label}/>
+      <Button variant="raised">{label}</Button>
     )
   }
 

@@ -38,9 +38,9 @@ export default class Monitors extends React.Component {
     return (
       <div className="text-center">
         <div style={{position: 'absolute', right: '25px'}}>
-          <Button variant="raised" label="Add" onClick={this.onClickAddMonitor.bind(this)}/>&nbsp;
-          <Button variant="raised" label="Edit" onClick={this.onClickEditMonitor.bind(this)}/>&nbsp;
-          <Button variant="raised" label="Delete" onClick={this.onClickDeleteMonitor.bind(this)}/>&nbsp;
+          <Button variant="raised" onClick={this.onClickAddMonitor.bind(this)}>Add</Button>&nbsp;
+          <Button variant="raised" onClick={this.onClickEditMonitor.bind(this)}>Edit</Button>&nbsp;
+          <Button variant="raised" onClick={this.onClickDeleteMonitor.bind(this)}>Delete</Button>&nbsp;
         </div>
         &nbsp;
       </div>

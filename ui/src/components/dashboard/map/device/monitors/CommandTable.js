@@ -71,7 +71,7 @@ class CommandTable extends React.Component {
               <Field name="output" component={FormCheckbox} label="Output" labelPosition="right"/>
             </div>
             <div>
-              <Button variant="raised" label="Run" type="submit"/>&nbsp;
+              <Button variant="raised" type="submit">Run</Button>&nbsp;
             </div>
           </div>
         </form>

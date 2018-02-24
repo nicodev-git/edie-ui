@@ -51,7 +51,7 @@ export default class ServerSearchModalView extends React.Component {
           </CardPanel>
 
           <div className="form-buttons">
-            <Button variant="raised" label="Search" type="submit"/>
+            <Button variant="raised" type="submit">Search</Button>
           </div>
         </Form>
       </Modal>

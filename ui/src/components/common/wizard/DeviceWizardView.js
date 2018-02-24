@@ -26,7 +26,9 @@ export default class DeviceWizardView extends Component {
           <Form onSubmit={onSubmit}>
             {content}
             <div style={fixedBarStyle} className="text-right">
-              <Button variant="raised" label="Save" type="submit" backgroundColor="rgb(36, 104, 255)" labelColor="#fff"/>
+              <Button variant="raised" type="submit">
+                Save
+              </Button>
             </div>
             <div style={{height: 140, width: '100%'}} className="pull-left">&nbsp;</div>
           </Form>

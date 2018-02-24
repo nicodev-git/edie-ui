@@ -121,7 +121,7 @@ export default class GService extends React.Component {
       <div>
         <MonitorStatusView isUp={isUp} hideLabel size={gauge.gaugeSize}/>
         <div style={{position: 'absolute', bottom: 15, width: '100%'}} className="text-center">
-          <Button variant="raised" label={isUp ? 'Stop' : 'Start'} onClick={this.onClickToggle.bind(this)}/>
+          <Button variant="raised" onClick={this.onClickToggle.bind(this)}>{isUp ? 'Stop' : 'Start'}</Button>
         </div>
       </div>
     )

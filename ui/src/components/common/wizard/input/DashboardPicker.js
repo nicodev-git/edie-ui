@@ -39,7 +39,9 @@ export default class DashboardPicker extends React.Component {
           </Select>
         </CardPanel>
         <div className="form-buttons">
-          <Button variant="raised" label="OK" onClick={this.onClickOK.bind(this)} />
+          <Button variant="raised" onClick={this.onClickOK.bind(this)}>
+            OK
+          </Button>
         </div>
       </Modal>
     )
