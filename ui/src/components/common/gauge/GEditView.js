@@ -93,9 +93,9 @@ export default class GEditView extends React.Component {
     this.setState(state)
   }
 
-  onChangeSelect(key, e, target, value) {
+  onChangeSelect(key, e) {
     const state = {
-      [key]: value
+      [key]: e.target.value
     }
     this.setState(state)
   }

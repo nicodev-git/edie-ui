@@ -39,8 +39,7 @@ class SearchSavePopover extends React.Component {
         open
         anchorEl={anchorEl}
         anchorOrigin={{horizontal: 'right', vertical: 'bottom'}}
-        targetOrigin={{horizontal: 'right', vertical: 'top'}}
-        onRequestClose={onRequestClose}
+        onClose={onRequestClose}
         className="padding-md"
       >
         <form onSubmit={handleSubmit(onSubmit)}>

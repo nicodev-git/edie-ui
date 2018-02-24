@@ -36,8 +36,8 @@ export default class MainAdvanced extends React.Component {
               <textarea className="form-control col-md-12" style={{height: '120px', resize: 'none'}} ref="message"/>
             </div>
             <div className="col-md-offset-3 col-md-9 margin-md-top">
-              <Button variant="raised" primary onClick={this.onClickSend.bind(this)} className="pull-right">
-                send
+              <Button variant="raised" color="primary" onClick={this.onClickSend.bind(this)} className="pull-right">
+                Send
               </Button>
             </div>
           </div>

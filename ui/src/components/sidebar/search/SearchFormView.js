@@ -140,9 +140,7 @@ export default class SearchFormView extends React.Component {
             <Popover
               open={this.state.openSearchBy}
               anchorEl={this.state.anchorEl}
-              anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
-              targetOrigin={{horizontal: 'left', vertical: 'top'}}
-              onRequestClose={this.hideSearchBy.bind(this)}
+              onClose={this.hideSearchBy.bind(this)}
               style={{minWidth: 300}}
             >
               <div>

@@ -156,7 +156,7 @@ export default class ThreatMap extends Component {
 
     const {query} = this.props.location
     if (query && query.mode === 'replay') {
-      this.onChangeMode(null, null, 'replay')
+      this.onChangeMode({target: {value: 'replay'}})
     }
   }
 

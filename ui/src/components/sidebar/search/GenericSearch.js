@@ -684,9 +684,8 @@ class GenericSearch extends React.Component {
         open={fieldPopoverOpen}
         anchorEl={anchorEl}
         anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
-        canAutoPosition
         style={{marginLeft: '100px'}}
-        onRequestClose={this.handleRequestClose.bind(this)}
+        onClose={this.handleRequestClose.bind(this)}
       >
         <div className="padding-md-left">
           <div className="inline-block padding-sm">

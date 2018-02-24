@@ -11,7 +11,7 @@ class PatternModalView extends React.Component {
         <form onSubmit={onSubmit}>
           <CardPanel title="Pattern">
             <div className="form-column">
-              <Field name="text" component={FormInput} type="text" label="Pattern" multiLine/>
+              <Field name="text" component={FormInput} type="text" label="Pattern" multiline/>
             </div>
           </CardPanel>
           <SubmitBlock name="Save"/>

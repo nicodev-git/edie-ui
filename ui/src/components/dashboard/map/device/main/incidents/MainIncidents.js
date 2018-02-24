@@ -449,8 +449,7 @@ export default class MainIncidents extends Component {
                 open={this.state.open}
                 anchorEl={this.state.anchorEl}
                 anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
-                targetOrigin={{horizontal: 'left', vertical: 'top'}}
-                onRequestClose={this.handleRequestClose.bind(this)}
+                onClose={this.handleRequestClose.bind(this)}
               >
                 <Menu>
                   <MenuItem onClick={this.onClickEvents.bind(this)}>Events</MenuItem>
