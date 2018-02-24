@@ -1,7 +1,7 @@
 import React from 'react'
 import {Button, Chip, Avatar} from 'material-ui'
-import {blue300, indigo900} from 'material-ui/colors'
-
+import {blue, indigo} from 'material-ui/colors'
+import { withStyles } from 'material-ui/styles'
 import {showConfirm} from 'components/common/Alert'
 
 import SettingTabs from '../SettingTabs'
@@ -13,9 +13,15 @@ import TagModal from './TagModal'
 import WfTabs from '../rule/WorkflowTabs'
 
 import {chipStyles} from 'style/common/materialStyles'
-import {hasPermission} from "../../../../shared/Permission";
+import {hasPermission} from '../../../../shared/Permission'
 
-export default class Tags extends React.Component {
+const styles = {
+  avatar: {
+    color: blue[300],
+    backgroundColor: indigo[900]
+  }
+}
+class Tags extends React.Component {
   componentWillMount () {
     this.props.fetchTags()
     this.props.fetchDevices()
@@ -94,63 +100,69 @@ export default class Tags extends React.Component {
         {tags.map(p =>
           <Chip
             key={p.id}
-            style={chipStyles.chip}
-
-            backgroundColor={multiSelTags.filter(t => t.id === p.id).length ? blue300 : null}
+            style={{
+              ...chipStyles.chip,
+              backgroundColor: multiSelTags.filter(t => t.id === p.id).length ? blue[300] : null
+            }}
             onClick={this.onClickTag.bind(this, p)}
             onDelete={canEdit ? this.onDeleteTag.bind(this, p) : null}
-          >
-            {p.name}
-          </Chip>
+            label={p.name}
+          />
         )}
       </div>
     )
   }
   renderItems () {
-    const {tagDevices, tagWorkflows, tagParserTypes, tagDeviceTpls, tagMonitorTpls} = this.props
+    const {tagDevices, tagWorkflows, tagParserTypes, tagDeviceTpls, tagMonitorTpls, classes} = this.props
     return (
       <div style={chipStyles.wrapper}>
         {tagDevices.map(p =>
           <Chip
             key={p.id} style={chipStyles.chip}
-            onClick={this.onClickTagDevice.bind(this, p)}>
-            <Avatar color={blue300} backgroundColor={indigo900}>D</Avatar>{p.name}
-          </Chip>
+            onClick={this.onClickTagDevice.bind(this, p)}
+            avatar={<Avatar className={classes.avatar}>D</Avatar>}
+            label={p.name}
+          />
         )}
         {this.getTagMonitors().map(p =>
           <Chip
             key={p.uid} style={chipStyles.chip}
-            onClick={() => {}}>
-            <Avatar color={blue300} backgroundColor={indigo900}>M</Avatar>{p.name}
-          </Chip>
+            onClick={() => {}}
+            avatar={<Avatar className={classes.avatar}>M</Avatar>}
+            label={p.name}
+          />
         )}
         {tagWorkflows.map(p =>
           <Chip
             key={p.id} style={chipStyles.chip}
-            onClick={this.onClickTagWf.bind(this, p)}>
-            <Avatar color={blue300} backgroundColor={indigo900}>W</Avatar>{p.name}
-          </Chip>
+            onClick={this.onClickTagWf.bind(this, p)}
+            avatar={<Avatar className={classes.avatar}>W</Avatar>}
+            label={p.name}
+          />
         )}
         {tagParserTypes.map(p =>
           <Chip
             key={p.id} style={chipStyles.chip}
-            onClick={this.onClickTagParserType.bind(this, p)}>
-            <Avatar color={blue300} backgroundColor={indigo900}>P</Avatar>{p.name}
-          </Chip>
+            onClick={this.onClickTagParserType.bind(this, p)}
+            avatar={<Avatar className={classes.avatar}>P</Avatar>}
+            label={p.name}
+          />
         )}
         {tagDeviceTpls.map(p =>
           <Chip
             key={p.id} style={chipStyles.chip}
-            onClick={this.onClickTagDeviceTpl.bind(this, p)}>
-            <Avatar color={blue300} backgroundColor={indigo900}>DT</Avatar>{p.name}
-          </Chip>
+            onClick={this.onClickTagDeviceTpl.bind(this, p)}
+            avatar={<Avatar className={classes.avatar}>DT</Avatar>}
+            label={p.name}
+          />
         )}
         {tagMonitorTpls.map(p =>
           <Chip
             key={p.id} style={chipStyles.chip}
-            onClick={this.onClickTagMonitorTpl.bind(this, p)}>
-            <Avatar color={blue300} backgroundColor={indigo900}>MT</Avatar>{p.name}
-          </Chip>
+            onClick={this.onClickTagMonitorTpl.bind(this, p)}
+            avatar={<Avatar className={classes.avatar}>MT</Avatar>}
+            label={p.name}
+          />
         )}
       </div>
     )
@@ -183,3 +195,5 @@ export default class Tags extends React.Component {
     )
   }
 }
+
+export default withStyles(styles)(Tags)

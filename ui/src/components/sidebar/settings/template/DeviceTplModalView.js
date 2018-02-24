@@ -29,7 +29,7 @@ export default class DeviceTplModalView extends Component {
               <b>+</b>
             </Chip>
             {tags.map((t, i) =>
-              <Chip key={i} style={chipStyles.chip} onRequestDelete={onSubmit ? () => onClickDeleteTag(i) : null}>{t}</Chip>
+              <Chip key={i} style={chipStyles.chip} onDelete={onSubmit ? () => onClickDeleteTag(i) : null}>{t}</Chip>
             )}
           </div>
           {tagModal}
