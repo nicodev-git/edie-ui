@@ -40,7 +40,7 @@ export default class LogFiltersModalView extends React.Component {
         </CardPanel>
 
         <div className="form-buttons">
-          <Button variant="raised" label="Search" onClick={onClickSearch}/>
+          <Button variant="raised" onClick={onClickSearch}>Search</Button>
         </div>
       </Modal>
     )

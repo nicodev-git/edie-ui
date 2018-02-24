@@ -3,7 +3,7 @@ import Button from 'material-ui/Button'
 
 const ImageUploader = ({imgUrl, onChange, className}) => (
   <div className={`image-upload-container ${className || ''}`}>
-    {!imgUrl && <Button variant="raised" label="Choose" onClick={onChange}/>}
+    {!imgUrl && <Button variant="raised" onClick={onChange}>Choose</Button>}
     <img onClick={onChange} style={{cursor: 'pointer'}} className={(imgUrl !== '') ? 'file-preview icon-black' : ''} src={imgUrl} alt=""/>
   </div>
 )

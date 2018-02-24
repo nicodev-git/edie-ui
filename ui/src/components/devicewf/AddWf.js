@@ -100,8 +100,8 @@ export default class AddWf extends React.Component {
             )}
           </Select>
 
-          <Button variant="raised" label="Add Selected" onClick={this.onClickAddTemplates.bind(this)}
-                        className="valign-top margin-xs-top margin-md-left"/>
+          <Button variant="raised" onClick={this.onClickAddTemplates.bind(this)}
+                  className="valign-top margin-xs-top margin-md-left">Add Selected</Button>
         </div>
         <div className="flex-1" style={{overflow: 'auto'}}>
           <table className="table table-hover">
