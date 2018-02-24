@@ -10,7 +10,7 @@ export default class DeviceMonitorPicker extends React.Component {
     const checked = selectedMonitors && selectedMonitors.includes(monitor.uid)
     return (
       <Checkbox
-        label={monitor.name} onCheck={() => onClickToggleMonitor(monitor)}
+        label={monitor.name} onChange={() => onClickToggleMonitor(monitor)}
         checked={checked}/>
     )
   }
@@ -19,7 +19,7 @@ export default class DeviceMonitorPicker extends React.Component {
     const checked = selectedServers && selectedServers.includes(device.id)
     return (
       <Checkbox
-        label={device.name} onCheck={() => onClickToggleDevice(device)}
+        label={device.name} onChange={() => onClickToggleDevice(device)}
         checked={checked}
       />
     )
@@ -31,7 +31,7 @@ export default class DeviceMonitorPicker extends React.Component {
     const name = index < 0 ? '' : monitorGroups[index].name
     return (
       <Checkbox
-        label={`${name || 'No Name'} (Monitor Group)`} onCheck={() => onClickToggleMonitorGroup(group)}
+        label={`${name || 'No Name'} (Monitor Group)`} onChange={() => onClickToggleMonitorGroup(group)}
         checked={checked}
       />
     )

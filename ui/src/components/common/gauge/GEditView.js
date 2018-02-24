@@ -1,8 +1,7 @@
 import React from 'react'
 import {TextField, Select, MenuItem, Button, Checkbox} from 'material-ui'
 import {findIndex} from 'lodash'
-// import IconButton from 'material-ui/IconButton'
-// import CloseIcon from 'material-ui-icons/Close'
+import { FormControlLabel } from 'material-ui/Form'
 
 import {gaugeDurationTypes, gaugeResources, gaugeTableViewModes} from 'shared/Global'
 
@@ -312,7 +311,16 @@ export default class GEditView extends React.Component {
             <tbody>
             {(devices || []).map(d => (d.monitors || []).map(p =>
               <tr key={p.uid}>
-                <td><Checkbox label={`${d.name} - ${p.name}`} checked={monitorIds.includes(p.uid)} onCheck={() => this.toggleMonitorId(p.uid)}/></td>
+                <td>
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        checked={monitorIds.includes(p.uid)}
+                        onChange={() => this.toggleMonitorId(p.uid)}/>
+                    }
+                    label={`${d.name} - ${p.name}`}
+                  />
+                </td>
               </tr>
             ))}
             </tbody>
@@ -543,7 +551,7 @@ export default class GEditView extends React.Component {
     const {forward, forwardBoardId} = this.state
     return [
       <div key="forward" className="inline-block nowrap margin-md-right" style={{marginTop: 12}}>
-        <Checkbox label="Forward to dashboard" checked={forward} onCheck={this.onChangeText.bind(this, 'forward')}/>
+        <Checkbox label="Forward to dashboard" checked={forward} onChange={this.onChangeText.bind(this, 'forward')}/>
       </div>,
       <Select key="forwardBoard" value={forwardBoardId} className="valign-top" onChange={this.onChangeSelect.bind(this, 'forwardBoardId')}>
         {(gaugeBoards || []).map(p => <MenuItem key={p.id} value={p.id}>{p.name}</MenuItem>)}
@@ -562,7 +570,7 @@ export default class GEditView extends React.Component {
           <MenuItem value="normal">Normal</MenuItem>
           <MenuItem value="slim">Slim</MenuItem>
         </Select>
-        <Checkbox label="Show Device Type" checked={showDeviceType} onCheck={this.onChangeText.bind(this, 'showDeviceType')}/>
+        <Checkbox label="Show Device Type" checked={showDeviceType} onChange={this.onChangeText.bind(this, 'showDeviceType')}/>
         {this.renderForward()}
 
         <div>
@@ -649,7 +657,7 @@ export default class GEditView extends React.Component {
       <div>
         <TextField name="name" value={name} label="Name" className="valign-top mr-dialog" onChange={this.onChangeText.bind(this, 'name')}/>
         <div className="margin-md-top">
-          <Checkbox label="Show Images" checked={showImage} onCheck={this.onChangeText.bind(this, 'showImage')}/>
+          <Checkbox label="Show Images" checked={showImage} onChange={this.onChangeText.bind(this, 'showImage')}/>
         </div>
       </div>
     )

@@ -29,7 +29,7 @@ export default class EditConfigModalView extends React.Component {
                 {devices.map(p =>
                   <tr key={p.id}>
                     <td>
-                      <Checkbox label={p.name} checked={getChecked(p)} onCheck={(e, value) => onCheckChange(p, e, value)}/>
+                      <Checkbox label={p.name} checked={getChecked(p)} onChange={(e, value) => onCheckChange(p, e, value)}/>
                     </td>
                     <td>{isWindowsDevice(p) ? 'Windows' : 'Linux'}</td>
                     <td>{p.wanip || p.lanip}</td>

@@ -53,7 +53,7 @@ export default class SysWorkflowsModalView extends React.Component {
                       <Checkbox
                         label={w.category}
                         checked={findIndex(selectedSysWorkflows, {id: w.id}) >= 0}
-                        onCheck={(e, c) => onChangeCheck(w, e, c)}
+                        onChange={(e, c) => onChangeCheck(w, e, c)}
                       />
                     </td>
                     <td>{w.severity}</td>

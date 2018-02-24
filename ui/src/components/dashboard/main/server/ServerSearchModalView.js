@@ -46,7 +46,7 @@ export default class ServerSearchModalView extends React.Component {
           <CardPanel title="OS">
             {osNames.map(p =>
               <Checkbox key={p} name={p} label={p} checked={selectedOS.includes(p)}
-                        onCheck={(e, checked) => onCheckOS(p, checked)}/>
+                        onChange={(e, checked) => onCheckOS(p, checked)}/>
             )}
           </CardPanel>
 
