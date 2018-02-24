@@ -31,7 +31,7 @@ export default class UserTabs extends React.Component {
     const {history} = this.props
     return (
       <div className="inline-block">
-        <Button variant="raised" label="View" primary onClick={e => this.setState({viewOpen: true, anchorEl: e.currentTarget})}/>
+        <Button variant="raised" color="primary" onClick={e => this.setState({viewOpen: true, anchorEl: e.currentTarget})}>View</Button>
         <Popover
           open={!!this.state.viewOpen}
           anchorEl={this.state.anchorEl}

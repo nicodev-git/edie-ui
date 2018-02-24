@@ -221,7 +221,7 @@ export default class Users extends React.Component {
             </div>
 
             <div style={{position: 'absolute', right: '25px'}}>
-              {canEdit ? <Button variant="raised" label="User"/> : null}
+              {canEdit ? <Button variant="raised">User</Button> : null}
               <Menu open={false}>
                 <MenuItem primaryText="Add" onClick={this.onAddUser.bind(this)}/>
                 <MenuItem primaryText="Edit" onClick={this.onEditUser.bind(this)}/>
@@ -230,7 +230,7 @@ export default class Users extends React.Component {
                 <MenuItem primaryText="Regenerate Pin" onClick={this.onClickPin.bind(this)}/>
               </Menu>
               &nbsp;
-              <Button variant="raised" label="Profile" onClick={this.onClickProfile.bind(this)}/>&nbsp;
+              <Button variant="raised" onClick={this.onClickProfile.bind(this)}>Profile</Button>&nbsp;
               <UserTabs history={this.props.history}/>&nbsp;
             </div>
           </div>

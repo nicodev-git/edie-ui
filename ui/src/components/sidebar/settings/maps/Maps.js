@@ -115,10 +115,10 @@ export default class Maps extends React.Component {
         <TabPageHeader title="Settings">
           <div className="text-center margin-md-top">
             <div style={{position: 'absolute', right: '25px'}}>
-              <Button variant="raised" label="Add Map" onClick={this.onMapAdd.bind(this)} className={canAdd ? '' : 'hidden'}/>&nbsp;
-              <Button variant="raised" label="Edit Map" onClick={this.onMapEdit.bind(this)} className={canEdit ? '' : 'hidden'}/>&nbsp;
-              <Button variant="raised" label="Delete Map" onClick={this.onMapDelete.bind(this)} className={canEdit ? '' : 'hidden'}/>&nbsp;
-              <Button variant="raised" label="Edit Map Users" onClick={this.onMapUsers.bind(this)} className="hidden"/>&nbsp;
+              <Button variant="raised" onClick={this.onMapAdd.bind(this)} className={canAdd ? '' : 'hidden'}>Add Map</Button>&nbsp;
+              <Button variant="raised" onClick={this.onMapEdit.bind(this)} className={canEdit ? '' : 'hidden'}>Edit Map</Button>&nbsp;
+              <Button variant="raised" onClick={this.onMapDelete.bind(this)} className={canEdit ? '' : 'hidden'}>Delete Map</Button>&nbsp;
+              <Button variant="raised" onClick={this.onMapUsers.bind(this)} className="hidden">Edit Map Users</Button>&nbsp;
             </div>
           </div>
         </TabPageHeader>

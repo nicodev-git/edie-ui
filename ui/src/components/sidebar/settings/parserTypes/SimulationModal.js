@@ -103,10 +103,10 @@ class SimulationModal extends React.Component {
   renderButtons () {
     return (
       <div className="text-right">
-        <Button variant="flat" label="Match Filter" primary onClick={this.onClickMatch.bind(this)}/>
-        <Button variant="flat" label="Parse" primary onClick={this.onClickParse.bind(this)}/>
+        <Button variant="flat" color="primary" onClick={this.onClickMatch.bind(this)}>Match Filter</Button>
+        <Button variant="flat" color="primary" onClick={this.onClickParse.bind(this)}>Parse</Button>
 
-        <Button variant="flat" label="Cancel" primary onClick={this.onClickClose.bind(this)}/>
+        <Button variant="flat" color="primary" onClick={this.onClickClose.bind(this)}>Cancel</Button>
       </div>
     )
   }
@@ -149,7 +149,7 @@ class SimulationModal extends React.Component {
           <div className="row m-none">
             <div className="margin-sm-top pull-left"><b>Filters</b></div>
             <div className="pull-right">
-              <Button variant="flat" label="Add" primary onClick={this.onClickAddFilter.bind(this)}/>
+              <Button variant="flat" color="primary" onClick={this.onClickAddFilter.bind(this)}>Add</Button>
             </div>
           </div>
 
@@ -168,7 +168,7 @@ class SimulationModal extends React.Component {
           <div className="row m-none">
             <div className="margin-sm-top pull-left"><b>Patterns</b></div>
             <div className="pull-right">
-              <Button variant="flat" label="Add" primary onClick={this.onClickAddPattern.bind(this)}/>
+              <Button variant="flat" color="primary" onClick={this.onClickAddPattern.bind(this)}>Add</Button>
             </div>
           </div>
           <div style={chipStyles.wrapper} className="margin-md-bottom" >

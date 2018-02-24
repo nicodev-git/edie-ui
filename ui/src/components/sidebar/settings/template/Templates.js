@@ -280,7 +280,7 @@ export default class Templates extends Component {
             </div>
 
             <div style={{position: 'absolute', right: '25px'}}>
-              {canEdit && <Button variant="raised" label="Add" onClick={this.onClickAdd.bind(this)}/>}&nbsp;
+              {canEdit && <Button variant="raised" onClick={this.onClickAdd.bind(this)}>Add</Button>}&nbsp;
               <WfTabs history={this.props.history}/>
             </div>
           </div>

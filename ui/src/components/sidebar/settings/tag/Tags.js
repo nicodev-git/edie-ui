@@ -163,8 +163,8 @@ export default class Tags extends React.Component {
         <TabPageHeader title="Tags">
           <div className="text-center margin-md-top">
             <div className="pull-right">
-              {canEdit && <Button variant="raised" label="Add" onClick={this.onAddTag.bind(this)}/>}&nbsp;
-              {canEdit && <Button variant="raised" label="Edit" onClick={this.onEditTag.bind(this)}/>}&nbsp;
+              {canEdit && <Button variant="raised" onClick={this.onAddTag.bind(this)}>Add</Button>}&nbsp;
+              {canEdit && <Button variant="raised" onClick={this.onEditTag.bind(this)}>Edit</Button>}&nbsp;
               <WfTabs history={this.props.history}/>
             </div>
           </div>

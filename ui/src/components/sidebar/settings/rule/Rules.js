@@ -139,10 +139,10 @@ export default class Rules extends React.Component {
         <TabPageHeader title="Settings">
           <div className="text-center margin-md-top">
             <div className="pull-right">
-              {canEdit && <Button variant="raised" label="Add" onClick={this.onAddWorkflow.bind(this)}/>}&nbsp;
-              {canEdit && <Button variant="raised" label="Edit" onClick={this.onEditWorkflow.bind(this)}/>}&nbsp;
-              {canEdit && <Button variant="raised" label="Remove" onClick={this.onRemoveWorkflow.bind(this)}/>}&nbsp;
-              {canEdit && <Button variant="raised" label="Clone" onClick={this.onCloneWorkflow.bind(this)}/>}&nbsp;
+              {canEdit && <Button variant="raised" onClick={this.onAddWorkflow.bind(this)}>Add</Button>}&nbsp;
+              {canEdit && <Button variant="raised" onClick={this.onEditWorkflow.bind(this)}>Edit</Button>}&nbsp;
+              {canEdit && <Button variant="raised" onClick={this.onRemoveWorkflow.bind(this)}>Remove</Button>}&nbsp;
+              {canEdit && <Button variant="raised" onClick={this.onCloneWorkflow.bind(this)}>Clone</Button>}&nbsp;
               <WfTabs history={this.props.history}/>
             </div>
           </div>

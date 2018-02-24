@@ -152,9 +152,9 @@ export default class SearchFormView extends React.Component {
               style={{minWidth: 300}}
             >
               <div>
-                <Button variant="flat" label="Workflows" onClick={() => this.hideSearchBy() && onClickWorkflow()} style={{width: '100%', textAlign: 'left'}}/>
-                <Button variant="flat" label="Device/Monitors" onClick={() => this.hideSearchBy() && onClickSearchMonitor()} style={{width: '100%', textAlign: 'left'}}/>
-                <Button variant="flat" label="Tags" onClick={(e) => this.hideSearchBy() && onClickTags(e)} style={{width: '100%', textAlign: 'left'}}/>
+                <Button variant="flat" onClick={() => this.hideSearchBy() && onClickWorkflow()} style={{width: '100%', textAlign: 'left'}}>Workflows</Button>
+                <Button variant="flat" onClick={() => this.hideSearchBy() && onClickSearchMonitor()} style={{width: '100%', textAlign: 'left'}}>Device/Monitors</Button>
+                <Button variant="flat" onClick={(e) => this.hideSearchBy() && onClickTags(e)} style={{width: '100%', textAlign: 'left'}}>Tags</Button>
               </div>
 
               <div style={{marginTop: -35}}>

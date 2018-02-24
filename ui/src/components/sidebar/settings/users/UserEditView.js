@@ -42,8 +42,8 @@ export default class UserEditView extends React.Component {
               </table>
             </CardPanel>
 
-            <Button variant="raised" label="Show All" onClick={() => this.setState({selectedRole: null})}
-                          className="margin-md-top"/>
+            <Button variant="raised" onClick={() => this.setState({selectedRole: null})}
+                    className="margin-md-top">Show All</Button>
 
           </div>
           <div className="col-md-6">

@@ -123,34 +123,34 @@ export default class Websocket extends React.Component {
             <MenuItem value="AUDIT" primaryText="Audit"/>
           </Select>
 
-          <Button variant="raised" label="Add Incident" onClick={this.onClickAddIncident.bind(this)} primary className="margin-md-top"/>
+          <Button variant="raised" onClick={this.onClickAddIncident.bind(this)} color="primary" className="margin-md-top">Add Incident</Button>
         </div>
 
         <div className="header-red">BI</div>
         <div className="padding-md-left">
           <div className="form-mui-inline">
             <TextField label="Open Incidents"/>&nbsp;
-            <Button variant="raised" label="Update" onClick={this.onClickUpdateOpenIncident.bind(this)} primary className="margin-md-top"/>
+            <Button variant="raised" onClick={this.onClickUpdateOpenIncident.bind(this)} color="primary" className="margin-md-top">Update</Button>
           </div>
 
           <div className="form-mui-inline">
             <TextField label="Today Incidents"/>&nbsp;
-            <Button variant="raised" label="Update" onClick={this.onClickUpdateTodayIncident.bind(this)} primary className="margin-md-top"/>
+            <Button variant="raised" onClick={this.onClickUpdateTodayIncident.bind(this)} color="primary" className="margin-md-top">Update</Button>
           </div>
 
           <div className="form-mui-inline">
             <TextField label="Attackers Today"/>&nbsp;
-            <Button variant="raised" label="Update" onClick={this.onClickUpdateAttackerToday.bind(this)} primary className="margin-md-top"/>
+            <Button variant="raised" onClick={this.onClickUpdateAttackerToday.bind(this)} color="primary" className="margin-md-top">Update</Button>
           </div>
 
           <div className="form-mui-inline">
             <TextField label="Month Incidents"/>&nbsp;
-            <Button variant="raised" label="Update" onClick={this.onClickUpdateMonthIncident.bind(this)} primary className="margin-md-top"/>
+            <Button variant="raised" onClick={this.onClickUpdateMonthIncident.bind(this)} color="primary" className="margin-md-top">Update</Button>
           </div>
 
           <div className="form-mui-inline">
             <TextField label="Incident News"/>&nbsp;
-            <Button variant="raised" label="Push" onClick={this.onClickPushNews.bind(this)} primary className="margin-md-top"/>
+            <Button variant="raised" onClick={this.onClickPushNews.bind(this)} color="primary" className="margin-md-top">Push</Button>
           </div>
         </div>
 
@@ -163,7 +163,7 @@ export default class Websocket extends React.Component {
               <MenuItem value="down" primaryText="Down"/>
             </Select>
 
-            <Button variant="raised" label="Update" onClick={this.onClickUpdateDeviceStatus.bind(this)} primary className="margin-md-top"/>
+            <Button variant="raised" onClick={this.onClickUpdateDeviceStatus.bind(this)} color="primary" className="margin-md-top">Update</Button>
           </div>
           <div className="form-mui-inline">
             <TextField label="Connection ID"/>&nbsp;
@@ -182,7 +182,7 @@ export default class Websocket extends React.Component {
               }
             </div>
 
-            <Button variant="raised" label="Update" onClick={this.onClickUpdateColor.bind(this)} primary className="margin-md-top"/>
+            <Button variant="raised" onClick={this.onClickUpdateColor.bind(this)} color="primary" className="margin-md-top">Update</Button>
           </div>
         </div>
       </div>

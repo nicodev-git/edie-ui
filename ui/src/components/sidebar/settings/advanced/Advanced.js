@@ -78,7 +78,7 @@ export default class Advanced extends React.Component {
         <TabPageHeader title="Settings">
           <div className="text-center margin-md-top">
             <div style={{position: 'absolute', right: '25px'}}>
-              {pageIndex === 2 && <Button variant="raised" label="Routing" onClick={this.onClickRouting.bind(this)}/>}&nbsp;
+              {pageIndex === 2 && <Button variant="raised" onClick={this.onClickRouting.bind(this)}>Routing</Button>}&nbsp;
               <Popover
                 open={this.state.routeOpen}
                 anchorEl={this.state.anchorEl}

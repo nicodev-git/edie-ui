@@ -280,8 +280,8 @@ class EditUser extends React.Component {
               <div className="col-md-6">
                 {this.renderRoles(canEdit)}
 
-                <Button variant="raised" label="Show All" onClick={() => this.setState({selectedRole: null})}
-                              className="margin-md-top margin-md-bottom"/>
+                <Button variant="raised" onClick={() => this.setState({selectedRole: null})}
+                        className="margin-md-top margin-md-bottom">Show All</Button>
 
               </div>
               <div className="col-md-6">

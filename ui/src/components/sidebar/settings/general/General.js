@@ -307,7 +307,7 @@ export default class General extends React.Component {
           Last Synced: {lastSync ? moment(parseInt(lastSync, 10)).fromNow() : 'Never'}
         </label>
         <br/>
-        <Button variant="raised" label="Sync" onClick={this.onClickSync.bind(this)}/>
+        <Button variant="raised" onClick={this.onClickSync.bind(this)}>Sync</Button>
       </div>
     )
   }
@@ -375,8 +375,8 @@ export default class General extends React.Component {
         <TabPageHeader title="Settings">
           <div className="text-center margin-md-top">
             <div style={{position: 'absolute', right: '25px'}}>
-              <Button variant="raised" label="System Backup"/>
-              <Button variant="raised" label="System Restore" className="margin-md-left"/>
+              <Button variant="raised">System Backup</Button>
+              <Button variant="raised" className="margin-md-left">System Restore</Button>
             </div>
           </div>
         </TabPageHeader>
