@@ -119,7 +119,7 @@ export default class EventLogTable extends Component {
             onChange={this.onChangeLogName.bind(this)}
             value={selectedLogName}>
             {monitorLogNames.map((c, i) =>
-              <MenuItem key={i} primaryText={c} value={c}/>
+              <MenuItem key={i} value={c}>{c}</MenuItem>
             )}
           </Select>
         </div>

@@ -328,24 +328,6 @@ export default class DeviceDashboard extends React.Component {
         </IconButton>
       </div>
     )
-    // const {gauges} = this.props
-    // return (
-    //   <div className="text-right">
-    //     <IconMenu
-    //       iconButtonElement={<IconButton><AddCircleIcon /></IconButton>}
-    //       anchorOrigin={{horizontal: 'left', vertical: 'top'}}
-    //       targetOrigin={{horizontal: 'left', vertical: 'top'}}
-    //     >
-    //       {gauges.map(p =>
-    //         <MenuItem
-    //           key={p.id} primaryText={p.name}
-    //           leftIcon={<img src={`${extImageBaseUrl}${p.image}`} alt="" width="24" height="24" style={{background: 'black'}}/>}
-    //           onClick={this.onClickMenuItem.bind(this, p)}
-    //         />
-    //       )}
-    //     </IconMenu>
-    //   </div>
-    // )
   }
 
   renderAgent () {

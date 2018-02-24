@@ -90,13 +90,9 @@ export default class AddWf extends React.Component {
             className="valign-top"
             value={severity} onChange={this.onChangeSeverity.bind(this)}
             style={{width: 150}}>
-            <MenuItem value="" primaryText="[All]"/>
+            <MenuItem value="">[All]</MenuItem>
             {severities.map(option =>
-              <MenuItem
-                key={option.value}
-                value={option.value}
-                primaryText={option.label}
-              />
+              <MenuItem key={option.value} value={option.value}>{option.label}</MenuItem>
             )}
           </Select>
 

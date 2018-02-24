@@ -153,7 +153,7 @@ export default class GEventLog extends React.Component {
         <div style={{marginTop: -16}}>
           <Select label="Log" value={selectedLogName} onChange={this.onChangeLog.bind(this)}>
             {logNames.map(p =>
-              <MenuItem key={p} value={p} primaryText={p}/>
+              <MenuItem key={p} value={p}>{p}</MenuItem>
             )}
           </Select>
         </div>

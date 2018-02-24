@@ -37,13 +37,7 @@ const BigIncidentsView = ({onHide,
         className="valign-top"
       >
         {severities.map(option =>
-          <MenuItem
-            key={option.value}
-            insetChildren
-            checked={selectedSeverity && selectedSeverity.includes(option.value)}
-            value={option.value}
-            primaryText={option.label}
-          />
+          <MenuItem key={option.value} value={option.value}>{option.label}</MenuItem>
         )}
       </Select>
 
@@ -57,9 +51,9 @@ const BigIncidentsView = ({onHide,
         menuItemStyle={inputStyle}
 
         style={{width: '120px'}}>
-        <MenuItem primaryText="Any" value=""/>
-        <MenuItem primaryText="Unfixed" value="false"/>
-        <MenuItem primaryText="Fixed" value="true"/>
+        <MenuItem value="">Any</MenuItem>
+        <MenuItem value="false">Unfixed</MenuItem>
+        <MenuItem value="true">Fixed</MenuItem>
       </Select>
         <DateRangePicker
           startDate={moment(startDate)}

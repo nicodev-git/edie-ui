@@ -28,9 +28,9 @@ export default class SysWorkflowsModalView extends React.Component {
               value={selectedSysWorkflowCategory || ''}
               onChange={onChangeCategory}
             >
-              <MenuItem key="0" value="" primaryText="[All]" />
+              <MenuItem key="0" value="" >[All]</MenuItem>
               {workflowCategories.map(c =>
-                <MenuItem key={c.id} value={c.name} primaryText={c.name} />
+                <MenuItem key={c.id} value={c.name}>{c.name}</MenuItem>
               )}
             </Select>
           </div>

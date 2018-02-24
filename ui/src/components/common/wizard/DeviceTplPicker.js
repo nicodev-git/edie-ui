@@ -53,9 +53,9 @@ export default class DeviceTplPicker extends React.Component {
     return (
       <Modal title="Devices" onRequestClose={onHide} contentStyle={{width: 996, maxWidth: 'initial'}}>
         <Select value={category} onChange={this.onChangeCategory.bind(this)}>
-          <MenuItem value="" primaryText="[All]"/>
+          <MenuItem value="">[All]</MenuItem>
           {this.getCategories().map(p =>
-            <MenuItem key={p} value={p} primaryText={p}/>
+            <MenuItem key={p} value={p}>{p}</MenuItem>
           )}
         </Select>
         <ul className="web-applet-cards">

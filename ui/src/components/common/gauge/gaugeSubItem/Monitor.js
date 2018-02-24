@@ -184,7 +184,7 @@ export default class Monitor extends React.Component {
             onChange={this.onChange}
           >
             {(devices || []).map(p =>
-              <MenuItem key={p.id} value={p.id} primaryText={p.name}/>
+              <MenuItem key={p.id} value={p.id}>{p.name}</MenuItem>
             )}
           </Select>
           {this.renderAddMenu()}

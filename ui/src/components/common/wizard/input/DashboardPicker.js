@@ -32,9 +32,9 @@ export default class DashboardPicker extends React.Component {
       <Modal title="Dashboard" onHide={this.onHide.bind(this)}>
         <CardPanel title="Dashboard">
           <Select value={this.state.dashboardId} onChange={this.onChangeDashboard.bind(this)}>
-            <MenuItem primaryText="[None]" value=""/>
+            <MenuItem value="">[None]</MenuItem>
             {gaugeBoards.map(p =>
-              <MenuItem key={p.id} primaryText={p.name} value={p.id}/>
+              <MenuItem key={p.id} value={p.id}>{p.name}</MenuItem>
             )}
           </Select>
         </CardPanel>

@@ -154,8 +154,8 @@ export default class ApplicationTable extends Component {
             More
           </Button>
           <Menu open={this.state.moreOpen}>
-            <MenuItem primaryText="Applications" onClick={this.onClickGetApp.bind(this)}/>
-            <MenuItem primaryText="Hotfix" onClick={this.onClickGetHotfix.bind(this)}/>
+            <MenuItem onClick={this.onClickGetApp.bind(this)}>Applications</MenuItem>
+            <MenuItem onClick={this.onClickGetHotfix.bind(this)}>Hotfix</MenuItem>
           </Menu>
         </div>
       </div>

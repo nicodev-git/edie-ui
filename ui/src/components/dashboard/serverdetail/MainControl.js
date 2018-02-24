@@ -499,7 +499,7 @@ export default class MainControl extends React.Component {
         <IconButton><AddCircleIcon /></IconButton>
         <Menu open={false}>
           {items.map((p, i) =>
-            <MenuItem key={p.id} primaryText={p.name} onClick={this.onClickMenuItem.bind(this, p)}/>
+            <MenuItem key={p.id} onClick={this.onClickMenuItem.bind(this, p)}>{p.name}</MenuItem>
           )}
         </Menu>
       </div>

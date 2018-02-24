@@ -413,13 +413,7 @@ export default class MainIncidents extends Component {
                   style={{width: '160px'}}
                 >
                   {severities.map(option =>
-                    <MenuItem
-                      key={option.value}
-                      insetChildren
-                      checked={selectedSeverity && selectedSeverity.includes(option.value)}
-                      value={option.value}
-                      primaryText={option.label}
-                    />
+                    <MenuItem key={option.value} value={option.value}>{option.label}</MenuItem>
                   )}
                 </Select>
 
@@ -433,9 +427,9 @@ export default class MainIncidents extends Component {
                   menuItemStyle={inputStyle}
                   
                   style={{width: '120px'}}>
-                  <MenuItem primaryText="Any" value=""/>
-                  <MenuItem primaryText="Unfixed" value="false"/>
-                  <MenuItem primaryText="Fixed" value="true"/>
+                  <MenuItem value="">Any</MenuItem>
+                  <MenuItem value="false">Unfixed</MenuItem>
+                  <MenuItem value="true">Fixed</MenuItem>
                 </Select>
 
                 <DateRangePicker
@@ -459,10 +453,10 @@ export default class MainIncidents extends Component {
                 onRequestClose={this.handleRequestClose.bind(this)}
               >
                 <Menu>
-                  <MenuItem primaryText="Events" onClick={this.onClickEvents.bind(this)}/>
-                  <MenuItem primaryText="Add Incident" onClick={this.onClickAddIncident.bind(this)}/>
-                  <MenuItem primaryText="Add Exception" onClick={this.onClickAddException.bind(this)}/>
-                  <MenuItem primaryText="Export PDF" onClick={this.onClickPDF.bind(this)}/>
+                  <MenuItem onClick={this.onClickEvents.bind(this)}>Events</MenuItem>
+                  <MenuItem onClick={this.onClickAddIncident.bind(this)}>Add Incident</MenuItem>
+                  <MenuItem onClick={this.onClickAddException.bind(this)}>Add Exception</MenuItem>
+                  <MenuItem onClick={this.onClickPDF.bind(this)}>Export PDF</MenuItem>
                 </Menu>
               </Popover>
             </div>

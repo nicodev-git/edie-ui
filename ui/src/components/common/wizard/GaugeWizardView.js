@@ -167,7 +167,7 @@ export default class GaugeWizardView extends React.Component {
         <Select multiple label="Severity" onChange={onChangeSeverity} className={`valign-top ${devices ? 'mr-dialog' : ''}`} value={selectedSeverity}>
           {severities.map(option =>
             <MenuItem key={option.value} insetChildren checked={selectedSeverity && selectedSeverity.includes(option.value)}
-              value={option.value} primaryText={option.label}/>
+                      value={option.value}>{option.label}</MenuItem>
           )}
         </Select>
 
@@ -266,13 +266,7 @@ export default class GaugeWizardView extends React.Component {
         {devices && this.renderDeviceList()}
         <Select multiple label="Monitors" value={selectedMonitors} onChange={onChangeMonitors}>
           {(monitors || []).map((p, i) =>
-            <MenuItem
-              key={i}
-              insetChildren
-              checked={selectedMonitors && selectedMonitors.includes(p.uid)}
-              value={p.uid}
-              primaryText={p.name}
-            />
+            <MenuItem key={i} value={p.uid}>{p.name}</MenuItem>
           )}
         </Select>
       </div>
@@ -285,13 +279,7 @@ export default class GaugeWizardView extends React.Component {
         <Field name="name" component={FormInput} floatingLabel="Name" className="valign-top mr-dialog" validate={[required]}/>
         <Select multiple label="Services" value={serviceNames} onChange={onChangeServiceNames} validate={[required]}>
           {(services || []).map((p, i) =>
-            <MenuItem
-              key={i}
-              insetChildren
-              checked={serviceNames && serviceNames.includes(p.value)}
-              value={p.value}
-              primaryText={p.label}
-            />
+            <MenuItem key={i} value={p.value}>{p.label}</MenuItem>
           )}
         </Select>
       </div>
