@@ -1,6 +1,7 @@
 import React from 'react'
 import {Checkbox} from 'material-ui'
 import { Field } from 'redux-form'
+import { FormControlLabel } from 'material-ui/Form'
 
 import { SubmitBlock, FormInput, Modal, CardPanel } from 'components/modal/parts'
 
@@ -10,7 +11,12 @@ export default class MapModalView extends React.Component {
     const checked = mapUsers.indexOf(p.username) >= 0
     return (
       <tr key={p.id}><td>
-        <Checkbox label={p.username} checked={checked} onChange={() => toggleMapUser(p.username)}/>
+        <FormControlLabel
+          control={
+            <Checkbox checked={checked} onChange={() => toggleMapUser(p.username)}/>
+          }
+          label={p.username}
+        />
       </td></tr>
     )
   }

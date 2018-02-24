@@ -3,6 +3,7 @@ import moment from 'moment'
 import InlineEdit from 'react-edit-inline'
 import {Checkbox, Button, Select, MenuItem} from 'material-ui'
 import { assign } from 'lodash'
+import { FormControlLabel } from 'material-ui/Form'
 
 import SettingTabs from '../SettingTabs' // Never used
 import TabPage from 'components/common/TabPage' // Never used
@@ -191,10 +192,14 @@ export default class General extends React.Component {
 
           <div style={rowStyle} className="margin-md-bottom">
             <div className="inline-block width-200">
-              <Checkbox
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={this.getOptionValue('DMZ') === 'true'}
+                    onChange={this.onChangeDmz.bind(this)}/>
+                }
                 label="Enable DMZ"
-                checked={this.getOptionValue('DMZ') === 'true'}
-                onChange={this.onChangeDmz.bind(this)}/>
+              />
             </div>
             <InlineEdit
               text={this.getOptionValue('DMZ', 'value2')}
@@ -206,26 +211,38 @@ export default class General extends React.Component {
           </div>
           <div style={rowStyle} className="margin-md-bottom">
             <div className="inline-block width-200">
-              <Checkbox
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={this.getOptionValue('PAUSE') === 'true'}
+                    onChange={this.onChangePause.bind(this)}/>
+                }
                 label="Pause System"
-                checked={this.getOptionValue('PAUSE') === 'true'}
-                onChange={this.onChangePause.bind(this)}/>
+              />
             </div>
           </div>
           <div style={rowStyle} className="margin-md-bottom">
             <div>
-              <Checkbox
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={this.getOptionValue('NETWORK_TRAFFIC') === 'true'}
+                    onChange={this.onChangeTraffic.bind(this)}/>
+                }
                 label="Display Network Traffic"
-                checked={this.getOptionValue('NETWORK_TRAFFIC') === 'true'}
-                onChange={this.onChangeTraffic.bind(this)}/>
+              />
             </div>
           </div>
           <div style={rowStyle} className="margin-md-bottom">
             <div className="width-200 pull-left">
-              <Checkbox
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={this.getOptionValue('REMOTE_LOG_ENABLED') === 'true'}
+                    onChange={this.onChangeLogEnabled.bind(this)}/>
+                }
                 label="Send Error Logs With"
-                checked={this.getOptionValue('REMOTE_LOG_ENABLED') === 'true'}
-                onChange={this.onChangeLogEnabled.bind(this)}/>
+              />
             </div>
             <InlineEdit
               text={this.getOptionValue('REMOTE_LOG_BATCH') || '[Empty]'}
@@ -237,10 +254,14 @@ export default class General extends React.Component {
 
           <div style={rowStyle} className="margin-md-bottom">
             <div className="inline-block width-200">
-              <Checkbox
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={this.getOptionValue('IMMOBILE') === 'true'}
+                    onChange={this.onChangeSendMobile.bind(this)}/>
+                }
                 label="Send to mobile"
-                checked={this.getOptionValue('IMMOBILE') === 'true'}
-                onChange={this.onChangeSendMobile.bind(this)}/>
+              />
             </div>
 
             <InlineEdit
@@ -255,10 +276,14 @@ export default class General extends React.Component {
 
           <div style={rowStyle} className="margin-md-bottom">
             <div className="pull-left width-200">
-              <Checkbox
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={this.getUserOptionValue('useAbsoluteDate', false)}
+                    onChange={this.onChangeAbsDate.bind(this)}/>
+                }
                 label="Show absolute date"
-                checked={this.getUserOptionValue('useAbsoluteDate', false)}
-                onChange={this.onChangeAbsDate.bind(this)}/>
+              />
             </div>
             <InlineEdit
               text={this.getUserOptionValue('dateFormat', defaultDateFormat)}
@@ -273,10 +298,14 @@ export default class General extends React.Component {
 
           <div style={rowStyle} className="margin-md-bottom">
             <div className="inline-block width-200">
-              <Checkbox
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={!!this.getUserOptionValue('keepIncidentAlert', false)}
+                    onChange={this.onChangeKeepIncidentAlert.bind(this)}/>
+                }
                 label="Keep Incident Alert"
-                checked={!!this.getUserOptionValue('keepIncidentAlert', false)}
-                onChange={this.onChangeKeepIncidentAlert.bind(this)}/>
+              />
             </div>
           </div>
 
@@ -333,7 +362,7 @@ export default class General extends React.Component {
             {roles.map(r =>
               <td key={r.id}>
                 <Checkbox
-                  label="" checked={r.permissions.includes(p)}
+                  checked={r.permissions.includes(p)}
                   onChange={this.onCheckDashboardMenu.bind(this, r, p)}
                 />
               </td>

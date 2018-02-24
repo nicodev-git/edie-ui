@@ -1,6 +1,7 @@
 import React from 'react'
 import {Checkbox} from 'material-ui'
 import {keys} from 'lodash'
+import { FormControlLabel } from 'material-ui/Form'
 
 import {TwoButtonsBlockCustom, Modal, CardPanel} from 'components/modal/parts'
 
@@ -41,7 +42,14 @@ export default class ViewFilterModalView extends React.Component {
                   <tbody>
                   {cols.map(k =>
                     <tr key={k}>
-                      <td><Checkbox label={k} checked={viewCols.indexOf(k) >= 0} onCheck={() => this.props.toggleViewCol(k)}/></td>
+                      <td>
+                        <FormControlLabel
+                          control={
+                            <Checkbox checked={viewCols.indexOf(k) >= 0} onChange={() => this.props.toggleViewCol(k)}/>
+                          }
+                          label={k}
+                        />
+                      </td>
                     </tr>
                   )}
                   </tbody>

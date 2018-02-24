@@ -1,5 +1,6 @@
 import React from 'react'
 import { Checkbox } from 'material-ui'
+import { FormControlLabel } from 'material-ui/Form'
 
 import { TwoButtonsBlockCustom, Modal, CardPanel } from 'components/modal/parts'
 
@@ -12,10 +13,12 @@ class SearchFieldsModalView extends React.Component {
           <div className="row" style={{maxHeight: '500px', overflow: 'auto'}}>
             {fields.map(p =>
               <div key={p.path} className="col-md-4">
-                <Checkbox
+                <FormControlLabel
+                  control={
+                    <Checkbox checked={selectedSearchFields.indexOf(p.path) >= 0} onChange={(e, checked) => onCheck(checked, p.path)}/>
+                  }
                   label={p.path.replace(/\.dataobj\./gi, '.').replace(/dataobj\./gi, '')}
-                  checked={selectedSearchFields.indexOf(p.path) >= 0}
-                  onCheck={(e, checked) => onCheck(checked, p.path)}/>
+                />
               </div>
             )}
           </div>

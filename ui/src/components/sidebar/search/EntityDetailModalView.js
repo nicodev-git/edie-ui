@@ -1,7 +1,7 @@
 import React from 'react'
 import {Checkbox} from 'material-ui'
 import JSONTree from 'react-json-tree'
-// import ReactJson from 'react-json-view'
+import { FormControlLabel } from 'material-ui/Form'
 
 import { Modal, CardPanel } from 'components/modal/parts'
 
@@ -40,7 +40,13 @@ export default class EntityDetailModalView extends React.Component {
     return (
       <Modal title="Detail" onRequestClose={onHide} contentStyle={{width: 1035, maxWidth: 'initial'}}>
         <CardPanel title="Detail">
-          <Checkbox label="Show Null" checked={isShowNull} onCheck={onCheckShowNull}/>
+          <FormControlLabel
+            control={
+              <Checkbox checked={isShowNull} onChange={onCheckShowNull}/>
+            }
+            label="Show Null"
+          />
+
           <div style={{width: '100%', overflow: 'auto'}}>
             <JSONTree
               data={detailEntity}

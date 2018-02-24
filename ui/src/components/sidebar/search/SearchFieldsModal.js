@@ -22,7 +22,7 @@ class SearchFieldsModal extends React.Component {
     return (
       <SearchFieldsModalView
         {...this.props}
-        onCheck={this.onCheck.bind(this)}
+        onChange={this.onCheck.bind(this)}
         onClickOK={this.onClickOK.bind(this)}
         onClickClose={this.onClickClose.bind(this)}
       />

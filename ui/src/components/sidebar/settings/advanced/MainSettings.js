@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import {assign} from 'lodash'
 import {Checkbox, Button, Select, MenuItem} from 'material-ui'
+import { FormControlLabel } from 'material-ui/Form'
 
 import ImportSyncDataModal from './ImportSyncDataModal'
 import SimulationModal from './SimulationModal'
@@ -101,11 +102,15 @@ export default class MainSettings extends Component {
       <div className="padding-md">
         <div style={rowStyle} className="margin-md-bottom bt-gray">
           <div>
-            <Checkbox
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={this.getOptionValue('SEND_LOGS') === 'true'}
+                  onChange={this.onChangeSendLogOption.bind(this)}
+                  disabled={!canEdit}
+                />
+              }
               label="Send IMP Logs to IMAdmin"
-              checked={this.getOptionValue('SEND_LOGS') === 'true'}
-              onChange={this.onChangeSendLogOption.bind(this)}
-              disabled={!canEdit}
             />
           </div>
         </div>

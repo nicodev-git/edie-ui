@@ -2,6 +2,7 @@ import React from 'react'
 import {Checkbox} from 'material-ui'
 import SetDefIcon from 'material-ui-icons/Sort'
 import {IconButton} from 'material-ui'
+import { FormControlLabel } from 'material-ui/Form'
 
 import SortableTree from 'react-sortable-tree'
 
@@ -11,17 +12,23 @@ export default class SearchMonitorModalView extends React.Component {
   renderMonitor (monitor) {
     const {onClickMonitor, selectedMonitors} = this.props
     return (
-      <Checkbox
-        label={monitor.name} onCheck={() => onClickMonitor(monitor)}
-        checked={selectedMonitors && selectedMonitors.filter(p => p.uid === monitor.uid).length > 0}/>
+      <FormControlLabel
+        control={
+          <Checkbox onChange={() => onClickMonitor(monitor)} checked={selectedMonitors && selectedMonitors.filter(p => p.uid === monitor.uid).length > 0}/>
+        }
+        label={monitor.name}
+      />
     )
   }
   renderDevice (device) {
     const {onClickDevice, selectedDevices} = this.props
     return (
-      <Checkbox
-        label={device.name} onCheck={() => onClickDevice(device)}
-        checked={selectedDevices && selectedDevices.filter(p => p.id === device.id).length > 0}/>
+      <FormControlLabel
+        control={
+          <Checkbox onChange={() => onClickDevice(device)} checked={selectedDevices && selectedDevices.filter(p => p.id === device.id).length > 0}/>
+        }
+        label={device.name}
+      />
     )
   }
   renderTree () {
