@@ -274,8 +274,8 @@ export default class Templates extends Component {
                 
                 onChange={this.onChangeType.bind(this)}
                 value={type}>
-                <MenuItem value="Device" primaryText="Device"/>
-                <MenuItem value="Monitor" primaryText="Monitor"/>
+                <MenuItem value="Device">Device</MenuItem>
+                <MenuItem value="Monitor">Monitor</MenuItem>
               </Select>
             </div>
 

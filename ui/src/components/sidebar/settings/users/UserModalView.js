@@ -24,26 +24,14 @@ export default class UserModalView extends React.Component {
             <Select multiple label="Role" onChange={onChangeRole} value={selectedRoles}
               className="mr-dialog">
               {roles.map(r =>
-                <MenuItem
-                  key={r.id}
-                  insetChildren
-                  checked={selectedRoles.includes(r.name)}
-                  value={r.name}
-                  primaryText={r.name}
-                />
+                <MenuItem key={r.id} value={r.name}>{r.name}</MenuItem>
               )}
             </Select>
 
 
             <Select multiple label="Permission" onChange={onChangePermission} value={permissions}>
               {mainMenu.map(p =>
-                <MenuItem
-                  key={p.id}
-                  insetChildren
-                  checked={permissions.includes(p.roleMenuId)}
-                  value={p.roleMenuId}
-                  primaryText={p.title}
-                />
+                <MenuItem key={p.id} value={p.roleMenuId}>{p.title}</MenuItem>
               )}
             </Select>
 

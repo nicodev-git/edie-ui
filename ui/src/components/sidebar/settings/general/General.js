@@ -354,8 +354,8 @@ export default class General extends React.Component {
               value={this.getUserOptionValue('defaultPage', 'dashboard')}
               onChange={this.onChangeShowPage.bind(this)}
               label="Default Page">
-              <MenuItem primaryText="Map" value="main"/>
-              <MenuItem primaryText="Dashboard" value="dashboard"/>
+              <MenuItem value="main">Map</MenuItem>
+              <MenuItem value="dashboard">Dashboard</MenuItem>
             </Select>
           </div>
 

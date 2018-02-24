@@ -40,7 +40,7 @@ export default class UserTabs extends React.Component {
           onRequestClose={this.handleRequestClose.bind(this)}>
           <Menu>
             {tabs.map(p =>
-              <MenuItem key={p.path} primaryText={p.title} onClick={() => history.push(p.path)}/>
+              <MenuItem key={p.path} onClick={() => history.push(p.path)}>{p.title}</MenuItem>
             )}
           </Menu>
         </Popover>

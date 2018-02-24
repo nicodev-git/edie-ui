@@ -211,10 +211,10 @@ export default class Users extends React.Component {
                 
                 onChange={this.onChangeGroup.bind(this)}
                 value="">
-                <MenuItem value="" primaryText="All groups"/>
+                <MenuItem value="">All groups</MenuItem>
                 {
                   this.state.groups.map(item =>
-                    <MenuItem key={item.id} value={item.id} primaryText={item.name}/>
+                    <MenuItem key={item.id} value={item.id}>{item.name}</MenuItem>
                   )
                 }
               </Select>
@@ -223,11 +223,11 @@ export default class Users extends React.Component {
             <div style={{position: 'absolute', right: '25px'}}>
               {canEdit ? <Button variant="raised">User</Button> : null}
               <Menu open={false}>
-                <MenuItem primaryText="Add" onClick={this.onAddUser.bind(this)}/>
-                <MenuItem primaryText="Edit" onClick={this.onEditUser.bind(this)}/>
-                <MenuItem primaryText="Remove" onClick={this.onRemoveUser.bind(this)}/>
-                <MenuItem primaryText="Change Password" onClick={this.onChangePassword.bind(this)}/>
-                <MenuItem primaryText="Regenerate Pin" onClick={this.onClickPin.bind(this)}/>
+                <MenuItem onClick={this.onAddUser.bind(this)}>Add</MenuItem>
+                <MenuItem onClick={this.onEditUser.bind(this)}>Edit</MenuItem>
+                <MenuItem onClick={this.onRemoveUser.bind(this)}>Remove</MenuItem>
+                <MenuItem onClick={this.onChangePassword.bind(this)}>Change Password</MenuItem>
+                <MenuItem onClick={this.onClickPin.bind(this)}>Regenerate Pin</MenuItem>
               </Menu>
               &nbsp;
               <Button variant="raised" onClick={this.onClickProfile.bind(this)}>Profile</Button>&nbsp;
