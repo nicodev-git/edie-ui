@@ -1,4 +1,5 @@
 import React from 'react'
+import { FormControlLabel } from 'material-ui/Form'
 
 export default class UserEditView extends React.Component {
   render () {
@@ -33,8 +34,13 @@ export default class UserEditView extends React.Component {
                       onClick={() => this.setState({selectedRole: r})}
                       className={selectedRole && selectedRole.id === r.id ? 'selected' : ''}>
                     <td>
-                      <Checkbox label={r.name} checked={selectedRoles.includes(r.name)}
-                                onChange={this.onCheckRole.bind(this, r.name)}/>
+                      <FormControlLabel
+                        control={
+                          <Checkbox checked={selectedRoles.includes(r.name)}
+                                    onChange={this.onCheckRole.bind(this, r.name)}/>
+                        }
+                        label={r.name}
+                      />
                     </td>
                   </tr>
                 )}
@@ -54,8 +60,13 @@ export default class UserEditView extends React.Component {
                   <tr key={p.id}
                       className={!selectedRole || selectedRole.permissions.includes(p.roleMenuId) ? '' : 'hidden'}>
                     <td>
-                      <Checkbox label={p.title} checked={permissions.includes(p.roleMenuId)}
-                                onChange={this.onCheckPermission.bind(this, p.roleMenuId)}/>
+                      <FormControlLabel
+                        control={
+                          <Checkbox checked={permissions.includes(p.roleMenuId)}
+                                    onChange={this.onCheckPermission.bind(this, p.roleMenuId)}/>
+                        }
+                        label={p.title}
+                      />
                     </td>
                   </tr>
                 )}

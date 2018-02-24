@@ -3,6 +3,7 @@ import Checkbox from 'material-ui/Checkbox'
 import Select from 'material-ui/Select'
 import {MenuItem} from 'material-ui/Menu'
 import { findIndex } from 'lodash'
+import { FormControlLabel } from 'material-ui/Form'
 
 import { TwoButtonsBlockCustom, Modal, CardPanel } from 'components/modal/parts'
 import { errorStyle, underlineFocusStyle, inputStyle,
@@ -50,10 +51,14 @@ export default class SysWorkflowsModalView extends React.Component {
                 sysWorkflows.map(w =>
                   <tr key={w.id}>
                     <td>
-                      <Checkbox
+                      <FormControlLabel
+                        control={
+                          <Checkbox
+                            checked={findIndex(selectedSysWorkflows, {id: w.id}) >= 0}
+                            onChange={(e, c) => onChangeCheck(w, e, c)}
+                          />
+                        }
                         label={w.category}
-                        checked={findIndex(selectedSysWorkflows, {id: w.id}) >= 0}
-                        onChange={(e, c) => onChangeCheck(w, e, c)}
                       />
                     </td>
                     <td>{w.severity}</td>

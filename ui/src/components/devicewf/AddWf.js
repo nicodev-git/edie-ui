@@ -1,6 +1,7 @@
 import React from 'react'
 import {Checkbox, Select, MenuItem, Button} from 'material-ui'
 import {findIndex} from 'lodash'
+import { FormControlLabel } from 'material-ui/Form'
 
 import TabPage from 'components/common/TabPage'
 import TabPageBody from 'components/common/TabPageBody'
@@ -114,10 +115,14 @@ export default class AddWf extends React.Component {
               workflows.map(w =>
                 <tr key={w.id}>
                   <td>
-                    <Checkbox
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          checked={findIndex(selectedSysWorkflows, {id: w.id}) >= 0}
+                          onChange={(e, c) => this.onChangeCheck(w, e, c)}
+                        />
+                      }
                       label={w.severity}
-                      checked={findIndex(selectedSysWorkflows, {id: w.id}) >= 0}
-                      onChange={(e, c) => this.onChangeCheck(w, e, c)}
                     />
                   </td>
                   <td>{w.name}</td>

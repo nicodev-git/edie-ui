@@ -1,6 +1,7 @@
 import React from 'react'
 import {Form, Field} from 'redux-form'
 import {Checkbox} from 'material-ui'
+import { FormControlLabel } from 'material-ui/Form'
 
 import {Modal, CardPanel, SubmitBlock, FormCheckbox} from 'components/modal/parts'
 import {isWindowsDevice} from 'shared/Global'
@@ -29,7 +30,12 @@ export default class EditConfigModalView extends React.Component {
                 {devices.map(p =>
                   <tr key={p.id}>
                     <td>
-                      <Checkbox label={p.name} checked={getChecked(p)} onChange={(e, value) => onCheckChange(p, e, value)}/>
+                      <FormControlLabel
+                        control={
+                          <Checkbox checked={getChecked(p)} onChange={(e, value) => onCheckChange(p, e, value)}/>
+                        }
+                        label={p.name}
+                      />
                     </td>
                     <td>{isWindowsDevice(p) ? 'Windows' : 'Linux'}</td>
                     <td>{p.wanip || p.lanip}</td>

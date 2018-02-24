@@ -2,6 +2,7 @@ import React from 'react'
 import { Form, Field } from 'redux-form'
 import {Checkbox} from 'material-ui'
 import SortableTree from 'react-sortable-tree'
+import { FormControlLabel } from 'material-ui/Form'
 
 import { Modal, CardPanel, FormInput, SubmitBlock } from 'components/modal/parts'
 
@@ -9,9 +10,14 @@ export default class MonitorGroupModalView extends React.Component {
   renderMonitor (monitor) {
     const {onClickMonitor, selectedMonitors} = this.props
     return (
-      <Checkbox
-        label={monitor.name} onChange={() => onClickMonitor(monitor)}
-        checked={selectedMonitors && selectedMonitors.filter(p => p.uid === monitor.uid).length > 0}/>
+      <FormControlLabel
+        control={
+          <Checkbox
+            onChange={() => onClickMonitor(monitor)}
+            checked={selectedMonitors && selectedMonitors.filter(p => p.uid === monitor.uid).length > 0}/>
+        }
+        label={monitor.name}
+      />
     )
   }
   renderTree () {

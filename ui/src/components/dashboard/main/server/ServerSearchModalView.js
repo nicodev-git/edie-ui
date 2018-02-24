@@ -1,6 +1,7 @@
 import React from 'react'
 import {Form, Field} from 'redux-form'
 import {Button, Checkbox} from 'material-ui'
+import { FormControlLabel } from 'material-ui/Form'
 
 import {Modal, CardPanel, FormCheckbox, FormInput} from 'components/modal/parts'
 
@@ -45,8 +46,13 @@ export default class ServerSearchModalView extends React.Component {
 
           <CardPanel title="OS">
             {osNames.map(p =>
-              <Checkbox key={p} name={p} label={p} checked={selectedOS.includes(p)}
-                        onChange={(e, checked) => onCheckOS(p, checked)}/>
+              <FormControlLabel
+                key={p}
+                control={
+                  <Checkbox name={p} checked={selectedOS.includes(p)} onChange={(e, checked) => onCheckOS(p, checked)}/>
+                }
+                label={p}
+              />
             )}
           </CardPanel>
 

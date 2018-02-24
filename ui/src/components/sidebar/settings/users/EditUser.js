@@ -2,6 +2,7 @@ import React from 'react'
 import {findIndex, assign, debounce} from 'lodash'
 import { reduxForm, formValueSelector } from 'redux-form'
 import { connect } from 'react-redux'
+import { FormControlLabel } from 'material-ui/Form'
 
 import {Checkbox, Button} from 'material-ui'
 import { Field } from 'redux-form'
@@ -142,8 +143,12 @@ class EditUser extends React.Component {
       items.push(
         <tr key={s}>
           <td>
-            <Checkbox label={s} checked={checked}
-                      onChange={canEdit ? this.onCheckSection.bind(this, s) : null}/>
+            <FormControlLabel
+              control={
+                <Checkbox checked={checked} onChange={canEdit ? this.onCheckSection.bind(this, s) : null}/>
+              }
+              label={s}
+            />
           </td>
         </tr>
       )
@@ -222,8 +227,13 @@ class EditUser extends React.Component {
             {rolePermissions.map(p =>
               <tr key={p}>
                 <td>
-                  <Checkbox label={p} checked={selectedPermissions.includes(p)}
-                            onChange={canEdit ? this.onCheckPermission.bind(this, p) : null}
+                  <FormControlLabel
+                    control={
+                      <Checkbox checked={selectedPermissions.includes(p)}
+                                onChange={canEdit ? this.onCheckPermission.bind(this, p) : null}
+                    }
+                    label={p}
+                  />
                   />
                 </td>
               </tr>
@@ -293,8 +303,13 @@ class EditUser extends React.Component {
                         <tr key={p}
                             className={!selectedRole || selectedRole.permissions.includes(p) ? '' : 'hidden'}>
                           <td>
-                            <Checkbox label={p} checked={permissions.includes(p)}
-                                      onChange={canEdit ? this.onCheckPermission.bind(this, p) : null}
+                            <FormControlLabel
+                              control={
+                                <Checkbox checked={permissions.includes(p)}
+                                          onChange={canEdit ? this.onCheckPermission.bind(this, p) : null}
+                              }
+                              label={p}
+                            />
                             />
                           </td>
                         </tr>
