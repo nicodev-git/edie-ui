@@ -692,7 +692,9 @@ class GenericSearch extends React.Component {
             <h4>{selectedField.path}</h4>
           </div>
           <div className="pull-right padding-sm">
-            <Button variant="flat" icon={<NavigationClose />} style={{minWidth: '44px'}} onClick={this.handleRequestClose.bind(this)}/>
+            <Button variant="flat" style={{minWidth: '44px'}} onClick={this.handleRequestClose.bind(this)}>
+              <NavigationClose />
+            </Button>
           </div>
         </div>
 

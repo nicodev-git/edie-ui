@@ -36,11 +36,11 @@ export default class WorkflowStep1 extends Component {
       <div className="wizard-step-1-container">
         <CardPanel title="Basic">
           <div>
-            <div className="col-md-6 p-none">
-              <Field name="name" component={FormInput} label="Name"/>
+            <div className="col-md-6 pl-none">
+              <Field name="name" component={FormInput} label="Name" fullWidth/>
             </div>
-            <div className="col-md-6 p-none">
-              <Field name="desc" component={FormInput} label="Description"/>
+            <div className="col-md-6 pr-none">
+              <Field name="desc" component={FormInput} label="Description" fullWidth/>
             </div>
           </div>
           <Field name="severity" component={FormSelect} label="Severity" options={severities}/>

@@ -42,12 +42,12 @@ export default class WorkflowStep3 extends Component {
                 <td>{a.actionType}</td>
                 <td className="text-right">
                   <CreateIcon
-                    color="#545454"
+                    nativeColor="#545454"
                     onClick={() => setTimeout(onEditAction, 1)}
                     className="link"
                   />
                   <DeleteIcon
-                    color="#545454"
+                    nativeColor="#545454"
                     onClick={() => setTimeout(onRemoveAction, 1)}
                     className="link margin-sm-left"
                   />
