@@ -227,8 +227,8 @@ export default class ServerDashboardView extends React.Component {
   renderAddMenu () {
     const {page} = this.state
     return (
-      <div style={{position: 'absolute', top: -68, width: '100%'}} className="text-center">
-        <div style={{position: 'absolute', left: 27}}>
+      <div className="text-center margin-sm-top margin-sm-bottom" style={{minHeight: 40}}>
+        <div style={{position: 'absolute', left: 27, top: 8}}>
           <Select
             value={page} onChange={this.onChangePage.bind(this)}
             className="valign-top text-left"
