@@ -1,5 +1,5 @@
 import React from 'react'
-import {Button, Popover, Menu, MenuItem} from 'material-ui'
+import {Button, Menu, MenuItem} from 'material-ui'
 
 const tabs = [{
   title: 'Tags',

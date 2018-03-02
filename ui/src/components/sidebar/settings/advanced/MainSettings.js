@@ -11,7 +11,7 @@ import SimulationModal from './SimulationModal'
 const rowStyle = {
   float: 'left',
   width: '100%',
-  height: 30
+  height: 50
 }
 
 const logLevels = [{
@@ -117,7 +117,7 @@ export default class MainSettings extends Component {
           </div>
         </div>
         <div>
-          <FormControl>
+          <FormControl style={{width: 200}}>
             <InputLabel>Send IMP Logs Level</InputLabel>
             <Select
               value={this.getOptionValue('SEND_LOGS_LEVEL')}

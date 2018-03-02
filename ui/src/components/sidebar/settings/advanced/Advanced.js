@@ -1,5 +1,5 @@
 import React from 'react'
-import {Button, Menu, MenuItem, Popover} from 'material-ui'
+import {Button, Menu, MenuItem} from 'material-ui'
 import SettingIcon from 'material-ui-icons/Settings'
 
 import MainSettings from './MainSettings'
@@ -16,7 +16,9 @@ export default class Advanced extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      pageIndex: 0
+      pageIndex: 0,
+      routeOpen: false,
+      open: false
     }
   }
 
@@ -52,7 +54,7 @@ export default class Advanced extends React.Component {
   handleTouchTap (event) {
     this.setState({
       open: true,
-      anchorEl: event.currentTarget
+      anchorEl: event.target
     })
   }
 
@@ -66,7 +68,7 @@ export default class Advanced extends React.Component {
   onClickRouting (event) {
     this.setState({
       routeOpen: true,
-      anchorEl: event.currentTarget
+      anchorEl: event.target
     })
   }
   render () {
@@ -79,30 +81,24 @@ export default class Advanced extends React.Component {
           <div className="text-center margin-md-top">
             <div style={{position: 'absolute', right: '25px'}}>
               {pageIndex === 2 && <Button variant="raised" onClick={this.onClickRouting.bind(this)}>Routing</Button>}&nbsp;
-              <Popover
+              <Menu
                 open={this.state.routeOpen}
                 anchorEl={this.state.anchorEl}
                 anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
-                onClose={this.handleRequestClose.bind(this)}
-              >
-                <Menu>
-                  <MenuItem onClick={this.onClickAddRouting.bind(this)}>Add</MenuItem>
-                  <MenuItem onClick={this.onClickEditRouting.bind(this)}>Edit</MenuItem>
-                </Menu>
-              </Popover>
-              <Button variant="raised" icon={<SettingIcon />} onClick={this.handleTouchTap.bind(this)} className="hidden"/>
-              <Popover
+                onClose={this.handleRequestClose.bind(this)}>
+                <MenuItem onClick={this.onClickAddRouting.bind(this)}>Add</MenuItem>
+                <MenuItem onClick={this.onClickEditRouting.bind(this)}>Edit</MenuItem>
+              </Menu>
+              <Button variant="raised" onClick={this.handleTouchTap.bind(this)} className="hidden"><SettingIcon /></Button>
+              <Menu
                 open={this.state.open}
                 anchorEl={this.state.anchorEl}
                 anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
-                onClose={this.handleRequestClose.bind(this)}
-              >
-                <Menu>
-                  <MenuItem onClick={this.onClickTab.bind(this, 0)}>Main</MenuItem>
-                  <MenuItem onClick={this.onClickTab.bind(this, 1)}>Websocket</MenuItem>
-                  <MenuItem onClick={this.onClickTab.bind(this, 2)}>Routing</MenuItem>
-                </Menu>
-              </Popover>
+                onClose={this.handleRequestClose.bind(this)}>
+                <MenuItem onClick={this.onClickTab.bind(this, 0)}>Main</MenuItem>
+                <MenuItem onClick={this.onClickTab.bind(this, 1)}>Websocket</MenuItem>
+                <MenuItem onClick={this.onClickTab.bind(this, 2)}>Routing</MenuItem>
+              </Menu>
             </div>
           </div>
         </TabPageHeader>

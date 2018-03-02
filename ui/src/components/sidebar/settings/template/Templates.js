@@ -127,17 +127,17 @@ export default class Templates extends Component {
                   {item.origin !== 'SYSTEM' && canEdit && <IconButton
                     style={{padding: 0, width: 24, height: 24}}
                     onClick={this.onClickShareMonitorTpl.bind(this, item)}>
-                    <Share color="#545454" hoverColor="#f44336"/>
+                    <Share nativeColor="#545454" hovercolor="#f44336"/>
                   </IconButton>}
                   {item.origin !== 'SYSTEM' && canEdit && <IconButton
                     style={{padding: 0, width: 24, height: 24}}
                     onClick={this.onClickEditMonitorTpl.bind(this, item)}>
-                    <EditIcon nativeColor="#545454" hoverColor="#f44336"/>
+                    <EditIcon nativeColor="#545454" hovercolor="#f44336"/>
                   </IconButton>}
                   {item.origin !== 'SYSTEM' && canEdit && <IconButton
                     style={{padding: 0, width: 24, height: 24}}
                     onClick={this.onClickDeleteMonitorTpl.bind(this, item)}>
-                    <DeleteIcon nativeColor="#545454" hoverColor="#f44336"/>
+                    <DeleteIcon nativeColor="#545454" hovercolor="#f44336"/>
                   </IconButton>}
                 </td>
               </tr>
