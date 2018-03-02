@@ -48,11 +48,11 @@ export default class Agents extends Component {
           return (
             <div>
               <Button variant="raised"
-                label={installing ? 'Installing' : 'Install'}
                 onClick={this.onClickInstall.bind(this, p.rowData)}
                 disabled={!!installAgent}
-                className="valign-middle"
-              />
+                className="valign-middle">
+                {installing ? 'Installing' : 'Install'}
+              </Button>
               {installing ? <CircularProgress className="valign-middle margin-md-left" size={30}/> : null}
               {installAgent && installAgent.status === 'failed' ? 'Failed' : null}
             </div>
@@ -117,10 +117,6 @@ export default class Agents extends Component {
   renderSelect () {
     return (
       <Select
-        errorStyle={errorStyle}
-        selectedMenuItemStyle={selectedItemStyle}
-        menuItemStyle={inputStyle}
-
         onChange={this.onChangeInstall.bind(this)}
         value={this.state.install}>
         <MenuItem value="all">All</MenuItem>
