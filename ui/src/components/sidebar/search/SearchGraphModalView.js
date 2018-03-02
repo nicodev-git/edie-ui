@@ -36,12 +36,10 @@ export default class SearchGraphModalView extends React.Component {
     } = this.props
     return (
       <Dialog
-        open title=""
-        bodyStyle={dialogContentStyle}
-        contentStyle={graphMaximized ? maxContentStyle : {}}
+        open
         className={graphMaximized ? 'pt-none' : ''}
-        style={{left: 5, right: 5, width: 'initial'}}
-        onRequestClose={onHide}
+        style={{...dialogContentStyle, ...(graphMaximized ? maxContentStyle : {}), left: 5, right: 5, width: 'initial'}}
+        onClose={onHide}
       >
         <CloseIconButton onClick={onHide}>
           <IconButton onClick={onMaximize}>

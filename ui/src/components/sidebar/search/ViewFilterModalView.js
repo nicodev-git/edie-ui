@@ -5,7 +5,7 @@ import { FormControlLabel } from 'material-ui/Form'
 
 import {TwoButtonsBlockCustom, Modal, CardPanel} from 'components/modal/parts'
 
-import {Tabs, Tab} from 'material-ui/Tabs'
+import Tabs, {Tab} from 'material-ui/Tabs'
 import {viewFilters} from 'shared/Global'
 
 export default class ViewFilterModalView extends React.Component {
