@@ -18,7 +18,7 @@ import {rolePermissions, hasPermission} from 'shared/Permission'
 
 const rowStyle = {
   width: '100%',
-  height: 30
+  height: 50
 }
 
 export default class General extends React.Component {
@@ -181,7 +181,7 @@ export default class General extends React.Component {
     return (
       <CardPanel title="General">
         <div className="form-inline relative" style={{minHeight: 400}}>
-          <div style={rowStyle} className="margin-md-bottom">
+          <div style={rowStyle} >
             <label className="margin-sm-top margin-sm-bottom width-200">System Name: </label>
             <InlineEdit
               text={this.getOptionValue('SYSTEM_NAME') || '[Empty]'}
@@ -192,7 +192,7 @@ export default class General extends React.Component {
             />
           </div>
 
-          <div style={rowStyle} className="margin-md-bottom">
+          <div style={rowStyle} >
             <div className="inline-block width-200">
               <FormControlLabel
                 control={
@@ -211,7 +211,7 @@ export default class General extends React.Component {
               ref="dmzIp"
             />
           </div>
-          <div style={rowStyle} className="margin-md-bottom">
+          <div style={rowStyle} >
             <div className="inline-block width-200">
               <FormControlLabel
                 control={
@@ -223,7 +223,7 @@ export default class General extends React.Component {
               />
             </div>
           </div>
-          <div style={rowStyle} className="margin-md-bottom">
+          <div style={rowStyle} >
             <div>
               <FormControlLabel
                 control={
@@ -235,7 +235,7 @@ export default class General extends React.Component {
               />
             </div>
           </div>
-          <div style={rowStyle} className="margin-md-bottom">
+          <div style={rowStyle} >
             <div className="width-200 pull-left">
               <FormControlLabel
                 control={
@@ -250,11 +250,11 @@ export default class General extends React.Component {
               text={this.getOptionValue('REMOTE_LOG_BATCH') || '[Empty]'}
               paramName="message"
               change={this.onChangeLogBatch.bind(this)}
-              className="pull-left margin-xs-top"
+              className="pull-left margin-md-top"
             />
           </div>
 
-          <div style={rowStyle} className="margin-md-bottom">
+          <div style={rowStyle} >
             <div className="inline-block width-200">
               <FormControlLabel
                 control={
@@ -270,13 +270,13 @@ export default class General extends React.Component {
               text={this.getOptionValue('IMMOBILE')}
               paramName="message"
               change={this.onChangeMobileIP.bind(this)}
-              className="inline-block margin-xs-top"
+              className="inline-block margin-md-top"
               ref="mobileIp"
               minLength={0}
             />
           </div>
 
-          <div style={rowStyle} className="margin-md-bottom">
+          <div style={rowStyle} >
             <div className="pull-left width-200">
               <FormControlLabel
                 control={
@@ -291,14 +291,14 @@ export default class General extends React.Component {
               text={this.getUserOptionValue('dateFormat', defaultDateFormat)}
               paramName="dateFormat"
               change={this.onChangeDateFormat.bind(this)}
-              className="pull-left margin-xs-top"
+              className="pull-left margin-md-top"
               ref="dateFormat"
               minLength={0}
             />
 
           </div>
 
-          <div style={rowStyle} className="margin-md-bottom">
+          <div style={rowStyle} >
             <div className="inline-block width-200">
               <FormControlLabel
                 control={
