@@ -80,7 +80,7 @@ export default class RadioCombo extends React.Component {
       }
     })
 
-    let defaultValue = options[this.state.selected].value
+    // let defaultValue = options[this.state.selected].value
 
     input = (
       <div className={`col-md-${util.calcWidth(width)}`}
@@ -89,7 +89,6 @@ export default class RadioCombo extends React.Component {
         <Select className={`form-control ${config.cls || ''}`}
           name={config.name}
           validation={config.required ? 'required' : null}
-          defaultValue={defaultValue}
           options={options}
           onChange={this.onSelectChange.bind(this)}
           ref="select"
