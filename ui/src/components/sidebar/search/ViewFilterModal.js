@@ -2,6 +2,12 @@ import React from 'react'
 import ViewFilterModalView from './ViewFilterModalView'
 
 export default class ViewFilterModal extends React.Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      selectedTab: "pre"
+    }
+  }
   componentWillMount () {
     this.props.selectViewFilter(null)
   }
@@ -21,6 +27,9 @@ export default class ViewFilterModal extends React.Component {
   onClickClose () {
     this.props.showViewFilterModal(false)
   }
+  onChangeTab (e, selectedTab) {
+    this.setState({selectedTab})
+  }
   render () {
     return (
       <ViewFilterModalView
@@ -31,6 +40,9 @@ export default class ViewFilterModal extends React.Component {
         toggleViewCol={this.props.toggleViewCol}
         onClickOK={this.onClickOK.bind(this)}
         onClickClose={this.onClickClose.bind(this)}
+
+        selectedTab={this.state.selectedTab}
+        onChangeTab={this.onChangeTab.bind(this)}
       />
     )
   }
