@@ -1,5 +1,5 @@
 import React from 'react'
-import {IconButton, Select, MenuItem} from 'material-ui'
+import {Select, MenuItem} from 'material-ui'
 import AddCircleIcon from 'material-ui-icons/AddCircle'
 import {findIndex} from 'lodash'
 import { FormControl } from 'material-ui/Form'
@@ -140,7 +140,7 @@ export default class MainDashboard extends React.Component {
             )}
           </Select>
         </FormControl>
-        {canEdit && <IconButton onClick={this.onClickAdd.bind(this)} className="valign-bottom"><AddCircleIcon /></IconButton>}
+        {canEdit && <AddCircleIcon onClick={this.onClickAdd.bind(this)} className="link valign-bottom margin-sm-left"/>}
       </div>
     )
   }
