@@ -1,6 +1,6 @@
 import React from 'react'
 import moment from 'moment'
-import InlineEdit from 'react-edit-inline'
+import InlineEdit from 'components/common/ReactEditInline'
 import {Checkbox, Button, Select, MenuItem} from 'material-ui'
 import { assign } from 'lodash'
 import { FormControlLabel } from 'material-ui/Form'

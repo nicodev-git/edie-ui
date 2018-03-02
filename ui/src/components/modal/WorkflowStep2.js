@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import InlineEdit from 'react-edit-inline'
+import InlineEdit from 'components/common/ReactEditInline'
 import DeleteIcon from 'material-ui-icons/Delete'
 import {Chip, IconButton} from 'material-ui'
 

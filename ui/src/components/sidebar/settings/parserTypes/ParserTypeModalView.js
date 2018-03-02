@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import IconButton from 'material-ui/IconButton'
 import DeleteIcon from 'material-ui-icons/Delete'
-import InlineEdit from 'react-edit-inline'
+import InlineEdit from 'components/common/ReactEditInline'
 import { Field } from 'redux-form'
 import {Chip} from 'material-ui'
 
