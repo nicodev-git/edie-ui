@@ -8,7 +8,7 @@ import FilterIcon from 'material-ui-icons/FilterList'
 import MoreVertIcon from 'material-ui-icons/MoreVert'
 import DeleteIcon from 'material-ui-icons/Delete'
 import ToggleStar from 'material-ui-icons/StarBorder'
-import {IconButton, TextField, Menu} from 'material-ui'
+import {IconButton, TextField, Menu, MenuItem, Popover} from 'material-ui'
 import ReactToolTip from 'react-tooltip'
 
 import TabPage from 'components/common/TabPage'
@@ -41,7 +41,9 @@ export default class Log extends React.Component {
       searchValue: '',
       data: [],
       draggingUid: '',
-      draggingFolderId: ''
+      draggingFolderId: '',
+      filterMenuOpen: false,
+      anchorEl: null
     }
 
     this.tooltipRebuild = debounce(ReactToolTip.rebuild, 150)
@@ -414,6 +416,19 @@ export default class Log extends React.Component {
 
   ///////////////////////////////////////////////////////////////////////////////////
 
+  onOpenFilterMenu (e) {
+    this.setState({
+      filterMenuOpen: true,
+      anchorEl: e.target
+    })
+  }
+
+  onCloseFilterMenu () {
+    this.setState({
+      filterMenuOpen: false
+    })
+  }
+
   onClickAddFilter () {
     const {monitorUid} = this.state
     const text = this.getSelectionText()
@@ -510,9 +525,9 @@ export default class Log extends React.Component {
 
   ///////////////////////////////////////////////////////////////////////////////////
 
-  onChangeSearchValue (e, value) {
+  onChangeSearchValue (e) {
     this.setState({
-      searchValue: value
+      searchValue: e.target.value
     })
   }
 
@@ -683,32 +698,26 @@ export default class Log extends React.Component {
     )
   }
 
-  renderIgnoreFilters (filters, canEdit) {
-    return (
-      <div className="inline-block">
-        <IconButton style={{padding: 0, width: 24, height: 24}}
-                    >
-          <MoreVertIcon/>
-        </IconButton>
-        <Menu open={false}>
-          {canEdit && filters.map((p, i) =>
-            <div key={i} className="padding-sm">
-              {p}
-              <DeleteIcon className="link pull-right" onClick={this.onClickRemoveFilter.bind(this, p)} />
-            </div>
-          )}
-        </Menu>
-      </div>
-    )
-  }
-
   renderSearchTools (filters, canEdit) {
     return (
       <div style={{position: 'absolute', right: 5, top: 5}} className="form-inline">
         <div className="valign-middle inline-block margin-md-left margin-md-right">
           {canEdit && <EditIcon className="link" onClick={this.onClickEditMonitor.bind(this)}/>}
-          {canEdit && <FilterIcon className="link margin-xs-top" onClick={this.onClickAddFilter.bind(this)}/>}
-          {this.renderIgnoreFilters(filters, canEdit)}
+          {canEdit && <FilterIcon className="link" onClick={this.onClickAddFilter.bind(this)}/>}
+          {canEdit && <MoreVertIcon className="link" onClick={this.onOpenFilterMenu.bind(this)}/>}
+
+          <Popover
+            open={this.state.filterMenuOpen}
+            onClose={this.onCloseFilterMenu.bind(this)}
+            anchorEl={this.state.anchorEl}
+          >
+            {filters.map((p, i) =>
+              <div key={i}>
+                {p}
+                <DeleteIcon className="link pull-right" onClick={this.onClickRemoveFilter.bind(this, p)}/>
+              </div>
+            )}
+          </Popover>
         </div>
       </div>
     )
@@ -781,7 +790,7 @@ export default class Log extends React.Component {
         </div>
 
 
-        <TabPageBody tabs={[]} history={this.props.history} location={this.props.location} transparent>
+        <TabPageBody history={this.props.history} location={this.props.location} transparent>
           <div className="flex-horizontal flex-1" style={{height: '100%', overflow: 'hidden'}}>
             <div className="flex-vertical" style={{minWidth: 300, marginRight: 5}}>
               <div className="header-blue relative margin-xs-right">
