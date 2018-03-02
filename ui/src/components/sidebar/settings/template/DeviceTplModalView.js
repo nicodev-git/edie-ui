@@ -25,11 +25,14 @@ export default class DeviceTplModalView extends Component {
         </CardPanel>
         <CardPanel title="Tags">
           <div style={chipStyles.wrapper}>
-            <Chip style={chipStyles.chip} onClick={onClickAddTag} className={onSubmit ? '' : 'hidden'}>
-              <b>+</b>
-            </Chip>
+            <Chip
+              style={chipStyles.chip}
+              onClick={onClickAddTag}
+              className={onSubmit ? '' : 'hidden'}
+              label={<b>+</b>}
+            />
             {tags.map((t, i) =>
-              <Chip key={i} style={chipStyles.chip} onDelete={onSubmit ? () => onClickDeleteTag(i) : null}>{t}</Chip>
+              <Chip key={i} style={chipStyles.chip} onDelete={onSubmit ? () => onClickDeleteTag(i) : null} labe={t}/>
             )}
           </div>
           {tagModal}

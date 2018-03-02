@@ -18,7 +18,7 @@ import DeviceTplView from './DeviceTplView'
 import WorkflowSelectModal from './WorkflowSelectModal'
 
 import { showConfirm, showAlert } from 'components/common/Alert'
-import { errorStyle, underlineFocusStyle, inputStyle, selectedItemStyle, chipStyles } from 'style/common/materialStyles'
+import { chipStyles } from 'style/common/materialStyles'
 
 import { extImageBaseUrl } from 'shared/Global'
 import WfTabs from '../rule/WorkflowTabs'
@@ -77,10 +77,8 @@ export default class Templates extends Component {
                       <Chip
                         key={m.id}
                         style={chipStyles.chip}
-                        
-                      >
-                        {m.name}
-                      </Chip>
+                        label={m.name}
+                      />
                     )}
                   </div>
                 </td>
@@ -88,12 +86,12 @@ export default class Templates extends Component {
                   {item.origin === 'SYSTEM' && canEdit && <IconButton
                     style={{padding: 0, width: 24, height: 24}}
                     onClick={this.onClickCloneDeviceTpl.bind(this, item)}>
-                    <CopyIcon nativeColor="#545454" hoverColor="#f44336"/>
+                    <CopyIcon nativeColor="#545454" hovercolor="#f44336"/>
                   </IconButton>}
                   {item.origin !== 'SYSTEM' && canEdit && <IconButton
                     style={{padding: 0, width: 24, height: 24}}
                     onClick={this.onClickDeleteDeviceTpl.bind(this, item)}>
-                    <DeleteIcon nativeColor="#545454" hoverColor="#f44336"/>
+                    <DeleteIcon nativeColor="#545454" hovercolor="#f44336"/>
                   </IconButton>}
                 </td>
               </tr>
@@ -266,14 +264,7 @@ export default class Templates extends Component {
         <TabPageHeader title="Settings">
           <div className="text-center margin-md-top">
             <div className="pull-left text-left">
-              <Select
-                errorStyle={errorStyle}
-                underlineStyle={underlineFocusStyle}
-                selectedMenuItemStyle={selectedItemStyle}
-                menuItemStyle={inputStyle}
-                
-                onChange={this.onChangeType.bind(this)}
-                value={type}>
+              <Select onChange={this.onChangeType.bind(this)} value={type}>
                 <MenuItem value="Device">Device</MenuItem>
                 <MenuItem value="Monitor">Monitor</MenuItem>
               </Select>
