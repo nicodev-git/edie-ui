@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactTable from 'react-table'
 import { concat, assign, isEqual, keys, debounce } from 'lodash'
-// import ReduxInfiniteScroll from 'redux-infinite-scroll'
+import ReduxInfiniteScroll from 'components/common/ReduxInfiniteScroll'
 
 import $ from 'jquery'
 import { encodeUrlParams } from 'shared/Global'
@@ -251,15 +251,15 @@ class InfiniteTable extends React.Component {
 
   render () {
     const table = this.renderTable()
-    // if (!this.props.bodyHeight) {
-    //   return (
-    //     <ReduxInfiniteScroll
-    //       children={[table]}
-    //       loadMore={this.loadMoreDeb}
-    //       loadingMore={this.state.isLoading}
-    //     />
-    //   )
-    // }
+    if (!this.props.bodyHeight) {
+      return (
+        <ReduxInfiniteScroll
+          children={[table]}
+          loadMore={this.loadMoreDeb}
+          loadingMore={this.state.isLoading}
+        />
+      )
+    }
     return table
   }
 }

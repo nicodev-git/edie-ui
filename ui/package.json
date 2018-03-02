@@ -52,7 +52,6 @@
     "redux": "^3.6.0",
     "redux-form": "^7.2.3",
     "redux-form-material-ui": "^5.0.0-beta.2",
-    "redux-infinite-scroll": "^1.0.9",
     "redux-thunk": "^2.2.0",
     "stompjs": "^2.3.3"
   },

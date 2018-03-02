@@ -111,19 +111,16 @@ export default class SearchFormView extends React.Component {
                    className={`valign-top ${advanced ? 'hidden' : ''}`}/>
             <Button variant="flat" onClick={this.onClickSearchBy.bind(this)}
                     className="valign-top margin-xs-top">Search By</Button>
-            <FormControl>
-              <InputLabel>Collection</InputLabel>
-              <Select
-                multiple
-                value={selectedCollections}
-                onChange={onChangeCollection}
-                style={{width: '180px'}}
-              >
-                {collections.map(option =>
-                  <MenuItem key={option.value} value={option.value}>{option.label}</MenuItem>
-                )}
-              </Select>
-            </FormControl>
+            <Select
+              multiple
+              value={selectedCollections}
+              onChange={onChangeCollection}
+              style={{width: '180px'}}
+            >
+              {collections.map(option =>
+                <MenuItem key={option.value} value={option.value}>{option.label}</MenuItem>
+              )}
+            </Select>
             <DateRangePicker
               className="valign-top"
               startDate={startDate}

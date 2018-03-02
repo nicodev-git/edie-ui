@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import Griddle from 'griddle-react'
 import { concat, assign, isEqual, keys, debounce } from 'lodash'
-// import ReduxInfiniteScroll from 'redux-infinite-scroll'
+// import ReduxInfiniteScroll from 'components/common/ReduxInfiniteScroll'
 
 import $ from 'jquery'
 import { encodeUrlParams } from 'shared/Global'
