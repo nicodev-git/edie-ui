@@ -1,13 +1,12 @@
 import React from 'react'
-import ReactTable from 'react-table'
+import ReactDOM from 'react-dom'
+import Griddle from 'griddle-react'
 import { concat, assign, isEqual, keys, debounce } from 'lodash'
-import ReduxInfiniteScroll from 'components/common/ReduxInfiniteScroll'
+// import ReduxInfiniteScroll from 'components/common/ReduxInfiniteScroll'
 
 import $ from 'jquery'
 import { encodeUrlParams } from 'shared/Global'
 import { ROOT_URL } from 'actions/config'
-
-import 'react-table/react-table.css'
 
 class InfiniteTable extends React.Component {
   constructor (props) {
@@ -35,21 +34,23 @@ class InfiniteTable extends React.Component {
   componentWillMount () {
     const {onUpdateCount} = this.props
     onUpdateCount && onUpdateCount(0, [], true)
-
-    this.getExternalData(1, true)
   }
 
   componentDidMount () {
-    // this.domNode = ReactDOM.findDOMNode(this.refs.griddle)
-    // $(this.domNode).on('dblclick', 'tbody tr', (e) => {
-    //   const index = $(e.target).closest('tr').index()
-    //   const data = this.getCurrentData()
-    //   if (data && data[index]) {
-    //     let row = { props: { data: data[index] } }
-    //     this.onRowClick(row)
-    //     this.onRowDblClick(row)
-    //   }
-    // })
+    // if (this.props.useExternal) {
+    //   this.getExternalData()
+    // }
+
+    this.domNode = ReactDOM.findDOMNode(this.refs.griddle)
+    $(this.domNode).on('dblclick', 'tbody tr', (e) => {
+      const index = $(e.target).closest('tr').index()
+      const data = this.getCurrentData()
+      if (data && data[index]) {
+        let row = { props: { data: data[index] } }
+        this.onRowClick(row)
+        this.onRowDblClick(row)
+      }
+    })
   }
 
   componentDidUpdate (prevProps, prevState) {
@@ -61,12 +62,11 @@ class InfiniteTable extends React.Component {
   }
 
   componentWillUnmount () {
-    // $(this.domNode).off('dblclick')
+    $(this.domNode).off('dblclick')
     if (this.lastRequest) {
       this.lastRequest.abort()
       this.lastRequest = null
     }
-    clearTimeout(this.reloadTimer)
   }
 
   getCurrentData () {
@@ -77,15 +77,16 @@ class InfiniteTable extends React.Component {
     return Math.max(this.props.useExternal ? this.state.results.length : this.props.data.length, this.props.pageSize)
   }
 
-  getExternalData (page, clear) {
+  getExternalData (page, clear, force) {
     if (this.state.isLoading) {
-      // if (clear) {
-      //   if (this.state.results.length) this.setState({results: []})
-      // }
-      return
+      if (clear) {
+        if (this.state.results.length) this.setState({results: []})
+      }
+      // console.log('Already loading.')
+      if (!force) return
     }
 
-    const {url, params, pageSize, onUpdateCount, handleRecord} = this.props
+    const {url, params, pageSize, onUpdateCount, onUpdateLoading, handleRecord} = this.props
     if (!url) return
     page = clear ? 1 : (page || 1)
     let urlParams = assign({
@@ -96,6 +97,8 @@ class InfiniteTable extends React.Component {
     this.setState({
       isLoading: true
     })
+
+    onUpdateLoading && onUpdateLoading(true, page)
 
     if (this.lastRequest) {
       this.lastRequest.abort()
@@ -120,17 +123,16 @@ class InfiniteTable extends React.Component {
 
       this.setState(state)
       onUpdateCount && onUpdateCount(total, state.results)
-    }).fail((req, reason) => {
-      if (reason === 'abort') return
-      if (page === 1) {
-        this.reloadTimer = setTimeout(() => {
-          this.setState({
-            isLoading: false
-          }, () => {
-            this.getExternalData(page, clear)
-          })
-        }, 2000)
+      onUpdateLoading && onUpdateLoading(false)
+    }).fail(() => {
+      let state = {
+        isLoading: false,
+        hasMore: false
       }
+
+      this.setState(state)
+      onUpdateCount && onUpdateCount(this.state.total, this.state.results)
+      onUpdateLoading && onUpdateLoading(false, page)
     })
 
     return this.lastRequest
@@ -208,7 +210,7 @@ class InfiniteTable extends React.Component {
       this.setState({
         hasMore: true
       })
-      this.getExternalData(1, true)
+      this.getExternalData(1, true, true)
     }
   }
 
@@ -223,44 +225,57 @@ class InfiniteTable extends React.Component {
   }
 
   renderTable () {
-    const {cells, showTableHeading} = this.props
-    let columns = []
-
-    if (cells) {
-      columns = cells.map(p => ({
-        Header: p.displayName,
-        accessor: p.columnName,
-        className: 'text-center',
-        style: {whiteSpace: 'normal'},
-        Cell: p.customComponent ? props => p.customComponent({rowData: props.row._original, data: props.value}) : null
-      }))
-    }
-
+    const rowMetadata = assign({}
+      , this.defaultRowMetaData
+      , this.props.rowMetadata || {})
+    const bodyHeight = this.getBodyHeight()
+    const {tableClassName} = this.props
     return (
-      <ReactTable
+      <Griddle
         key="0"
-        data={this.getCurrentData()}
-        columns={columns}
+        id={this.props.id}
+        useExternal={false}
+        enableSort={false}
 
-        getTheadProps={() => showTableHeading ? '' : 'hidden'}
+        columns={this.props.cells.map(item => item.columnName)}
+        columnMetadata={this.props.cells}
+        rowMetadata={rowMetadata}
+        rowHeight={this.props.rowHeight}
+        bodyHeight={bodyHeight || null}
+        showTableHeading={this.props.showTableHeading}
 
-        showPagination={false}
+        results={this.getCurrentData()}
+        resultsPerPage={this.getCountPerPage()}
+
+        tableClassName={`table table-hover ${tableClassName || 'table-panel'}`}
+
+        useFixedHeader={false}
+        noDataMessage={this.props.noDataMessage}
+        useGriddleStyles={false}
+
+        onRowClick={this.onRowClick.bind(this)}
+
+        onRowDblClick={this.onRowDblClick.bind(this)}
+        ref="griddle"
       />
     )
   }
 
   render () {
-    const table = this.renderTable()
-    if (!this.props.bodyHeight) {
-      return (
-        <ReduxInfiniteScroll
-          children={[table]}
-          loadMore={this.loadMoreDeb}
-          loadingMore={this.state.isLoading}
-        />
-      )
-    }
-    return table
+    return (
+      <div></div>
+    )
+    // const table = this.renderTable()
+    // if (!this.props.bodyHeight) {
+    //   return (
+    //     <ReduxInfiniteScroll
+    //       children={[table]}
+    //       loadMore={this.loadMoreDeb}
+    //       loadingMore={this.state.isLoading}
+    //     />
+    //   )
+    // }
+    // return table
   }
 }
 

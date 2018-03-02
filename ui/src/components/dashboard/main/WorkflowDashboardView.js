@@ -991,7 +991,7 @@ export default class WorkflowDashboardView extends React.Component {
           <FormControl className="valign-top margin-lg-left">
             <InputLabel>Group</InputLabel>
             <Select
-              value={selectedWfRectGroup ? selectedWfRectGroup.id : null}
+              value={selectedWfRectGroup ? selectedWfRectGroup.id : ""}
               onChange={this.onChangeGroup.bind(this)}
               style={{width: 140}}>
               {this.props.wfRectGroups.map(p =>
@@ -1011,8 +1011,7 @@ export default class WorkflowDashboardView extends React.Component {
             <Select
               value={this.state.intervalUnit}
               onChange={this.onChangeIntervalUnit.bind(this)}
-              style={{width: 20}}
-              menuStyle={{width: 150}}>
+              style={{width: 20}}>
               {units.map(p =>
                 <MenuItem key={p.value} value={p.value}>{p.label}</MenuItem>
               )}
