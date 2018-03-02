@@ -16,7 +16,7 @@ export default class AddWf extends React.Component {
     super(props)
     this.state = {
       tab:0,
-      severity: ''
+      severity: '[All]'
     }
   }
   componentWillMount () {
@@ -81,17 +81,17 @@ export default class AddWf extends React.Component {
     const device = this.getDevice()
 
     let workflows = sysWorkflows.filter(p => !(device.workflowids || []).includes(p.id))
-    if (severity) {
+    if (severity !== '[All]') {
       workflows = workflows.filter(p => p.severity === severity)
     }
     return (
       <div className="flex-vertical flex-1">
-        <div className="padding-md-left">
+        <div className="padding-md-left padding-md-top">
           <Select
-            className="valign-top"
+            className="valign-top margin-sm-top"
             value={severity} onChange={this.onChangeSeverity.bind(this)}
             style={{width: 150}}>
-            <MenuItem value="">[All]</MenuItem>
+            <MenuItem value="[All]">[All]</MenuItem>
             {severities.map(option =>
               <MenuItem key={option.value} value={option.value}>{option.label}</MenuItem>
             )}

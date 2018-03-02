@@ -86,9 +86,9 @@ export default class GEditView extends React.Component {
     }
   }
 
-  onChangeText(key, e, value) {
+  onChangeText(key, e) {
     const state = {
-      [key]: value
+      [key]: e.target.value
     }
     this.setState(state)
   }
