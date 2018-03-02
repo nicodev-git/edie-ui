@@ -21,8 +21,6 @@ import RemoveAfter from './input/RemoveAfter'
 
 import {CardPanel} from 'components/modal/parts'
 
-// import {showAlert} from 'components/common/Alert'
-
 import CredentialModal from 'components/credentials/CredentialModal'
 import CollectorInstallModal from './input/CollectorInstallModal'
 

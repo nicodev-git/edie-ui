@@ -61,7 +61,7 @@ export default class Combo extends React.Component {
         floatingLabel={config.label ? config.label.text : ''}
         component={FormSelect}
         style={config.style}
-        className={`valign-top mr-dialog ${config.cls}`}
+        className={`valign-top margin-md-right ${config.cls}`}
         disabled={config.disabled}
         options={options}
         // defaultValue={options.length ? options[0].value : null}

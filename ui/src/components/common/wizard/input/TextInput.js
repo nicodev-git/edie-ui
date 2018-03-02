@@ -35,7 +35,7 @@ export default class TextInput extends React.Component {
         component={this.renderField}
         style={config.style}
         onChange={onChange}
-        className={config.cls}
+        className={`${config.cls} margin-md-right`}
         disabled={config.disabled}
         validate={validate}
       />
