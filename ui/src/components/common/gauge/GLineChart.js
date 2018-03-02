@@ -258,7 +258,7 @@ export default class GLineChart extends React.Component {
         this.setState({
           searchRecordCounts: res.data._embedded.events.map(p => ({
             date: moment(p.timestamp).format('MM-DD HH:mm'),
-            count: parseFloat(p.lastResultData)
+            count: parseFloat(p.lastResultData || 0)
           })),
           loading: false,
           needRefresh: false
