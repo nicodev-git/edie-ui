@@ -34,18 +34,15 @@ export default class WorkflowTabs extends React.Component {
     const {history} = this.props
     return (
       <div className="inline-block">
-        <Button variant="raised" color="primary" onClick={e => this.setState({viewOpen: true, anchorEl: e.currentTarget})}>View</Button>
-        <Popover
+        <Button variant="raised" color="primary" onClick={e => this.setState({viewOpen: true, anchorEl: e.target})}>View</Button>
+        <Menu
           open={!!this.state.viewOpen}
           anchorEl={this.state.anchorEl}
-          anchorOrigin={{horizontal: 'right', vertical: 'bottom'}}
           onClose={this.handleRequestClose.bind(this)}>
-          <Menu>
-            {tabs.map(p =>
-              <MenuItem key={p.path} onClick={() => history.push(p.path)}>{p.title}</MenuItem>
-            )}
-          </Menu>
-        </Popover>
+          {tabs.map(p =>
+            <MenuItem key={p.path} onClick={() => history.push(p.path)}>{p.title}</MenuItem>
+          )}
+        </Menu>
       </div>
     )
   }

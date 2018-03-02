@@ -11,7 +11,6 @@ import TabPageHeader from 'components/common/TabPageHeader'
 
 import { appendComponent, removeComponent } from 'util/Component'
 import { showAlert, showConfirm } from 'components/common/Alert'
-import { errorStyle, inputStyle, underlineStyle } from 'style/common/materialStyles'
 
 import IdentityModal from './IdentityModal'
 import SegmentListModal from './SegmentListModal'
@@ -121,12 +120,7 @@ export default class Identities extends React.Component {
             ) : null}
 
             <div className="inline-block">
-              <TextField
-                label="Search"
-                errorStyle={errorStyle}
-                inputStyle={inputStyle}
-                underlineFocusStyle={underlineStyle}
-              />
+              <TextField label="Search"/>
             </div>
           </div>
         </TabPageHeader>
