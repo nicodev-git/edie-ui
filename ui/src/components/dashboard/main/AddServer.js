@@ -53,7 +53,6 @@ export default class AddServer extends React.Component {
   }
 
   onChangeDistribution (value) {
-    console.log(arguments)
     const {deviceTemplates} = this.props
     const distIndex = findIndex(commonconfig.distribution.values, {value})
     if (distIndex < 0) return
