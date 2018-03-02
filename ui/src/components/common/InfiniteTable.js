@@ -1,5 +1,4 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
 import { concat, assign, isEqual, keys, debounce } from 'lodash'
 import ReduxInfiniteScroll from 'components/common/ReduxInfiniteScroll'
 
@@ -35,16 +34,16 @@ class InfiniteTable extends React.Component {
     //   this.getExternalData()
     // }
 
-    this.domNode = ReactDOM.findDOMNode(this.refs.griddle)
-    $(this.domNode).on('dblclick', 'tbody tr', (e) => {
-      const index = $(e.target).closest('tr').index()
-      const data = this.getCurrentData()
-      if (data && data[index]) {
-        let row = { props: { data: data[index] } }
-        this.onRowClick(row)
-        this.onRowDblClick(row)
-      }
-    })
+    // this.domNode = ReactDOM.findDOMNode(this.refs.griddle)
+    // $(this.domNode).on('dblclick', 'tbody tr', (e) => {
+    //   const index = $(e.target).closest('tr').index()
+    //   const data = this.getCurrentData()
+    //   if (data && data[index]) {
+    //     let row = { props: { data: data[index] } }
+    //     this.onRowClick(row)
+    //     this.onRowDblClick(row)
+    //   }
+    // })
   }
 
   componentDidUpdate (prevProps, prevState) {
@@ -142,24 +141,24 @@ class InfiniteTable extends React.Component {
     if (!this.props.selectable) return
     if (e && e.metaKey && this.props.allowMultiSelect) {
       const {selected} = this.state
-      const key = row.props.data[this.props.rowMetadata.key]
+      const key = row[this.props.rowMetadata.key]
       const index = selected.indexOf(key)
       if (index >= 0) selected.splice(index, 1)
       else selected.push(key)
       this.setState({ selected })
     } else {
       this.setState({
-        selected: [row.props.data[this.props.rowMetadata.key]]
+        selected: [row[this.props.rowMetadata.key]]
       })
     }
     const {onRowClick} = this.props
-    onRowClick && onRowClick(row.props.data)
+    onRowClick && onRowClick(row)
   }
 
   onRowDblClick (row) {
     if (!this.props.selectable) return
     this.setState({
-      selected: [row.props.data[this.props.rowMetadata.key]]
+      selected: [row[this.props.rowMetadata.key]]
     }, () => {
       this.props.onRowDblClick &&
       this.props.onRowDblClick(this.getSelected())
@@ -297,7 +296,11 @@ class InfiniteTable extends React.Component {
                      )
                    })
                    return (
-                     <tr key={rowMetadata.key ? row[rowMetadata.key] : i} className={cls}>
+                     <tr
+                       key={rowMetadata.key ? row[rowMetadata.key] : i} className={cls}
+                       onClick={this.onRowClick.bind(this, row)}
+                       onDoubleClick={this.onRowDblClick.bind(this, row)}
+                     >
                        {tds}
                      </tr>
                    )

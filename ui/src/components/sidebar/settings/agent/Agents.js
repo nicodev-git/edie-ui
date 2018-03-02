@@ -12,7 +12,6 @@ import TabPageHeader from 'components/common/TabPageHeader'
 import CollectorTabs from '../collector/CollectorTabs'
 import AgentModal from './AgentModal'
 
-import { errorStyle, inputStyle, selectedItemStyle } from 'style/common/materialStyles'
 import {showAlert, showConfirm} from 'components/common/Alert'
 
 import {isWindowsDevice} from 'shared/Global'

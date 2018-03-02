@@ -1,5 +1,5 @@
 import React from 'react'
-import {findIndex, assign, debounce} from 'lodash'
+import {findIndex, debounce} from 'lodash'
 import { reduxForm, formValueSelector } from 'redux-form'
 import { connect } from 'react-redux'
 import { FormControlLabel } from 'material-ui/Form'
@@ -53,12 +53,12 @@ class EditUser extends React.Component {
   }
 
   handleFormSubmit (values) {
-    const { editUser, selectedRoles, selectedPermissions } = this.props
-    const user = assign({}, editUser, values, {
-      roles: selectedRoles,
-      permissions: selectedPermissions
-    })
-    this.props.updateSettingUser(user, true)
+    // const { editUser, selectedRoles, selectedPermissions } = this.props
+    // const user = assign({}, editUser, values, {
+    //   roles: selectedRoles,
+    //   permissions: selectedPermissions
+    // })
+    // this.props.updateSettingUser(user, true)
   }
   onCheckRole (role) {
     const value = role.name
@@ -118,11 +118,11 @@ class EditUser extends React.Component {
 
   getSections () {
     const sections = []
-    const {roles} = this.props
-    roles.forEach(p => {
-      if (sections.includes(p.section)) return
-      sections.push(p.section)
-    })
+    // const {roles} = this.props
+    // roles.forEach(p => {
+    //   if (sections.includes(p.section)) return
+    //   sections.push(p.section)
+    // })
     return sections
   }
 
@@ -234,7 +234,6 @@ class EditUser extends React.Component {
                     }
                     label={p}
                   />
-                  />
                 </td>
               </tr>
             )}
@@ -309,7 +308,6 @@ class EditUser extends React.Component {
                                           onChange={canEdit ? this.onCheckPermission.bind(this, p) : null}/>
                               }
                               label={p}
-                            />
                             />
                           </td>
                         </tr>

@@ -16,7 +16,6 @@ import TabPageHeader from 'components/common/TabPageHeader'
 
 import UserTabs from './UserTabs'
 
-import { errorStyle, underlineFocusStyle, inputStyle, selectedItemStyle } from 'style/common/materialStyles'
 import {hasPermission} from 'shared/Permission'
 
 export default class Users extends React.Component {
@@ -204,11 +203,6 @@ export default class Users extends React.Component {
           <div className="text-center margin-md-top">
             <div className="pull-left text-left">
               <Select
-                errorStyle={errorStyle}
-                underlineStyle={underlineFocusStyle}
-                selectedMenuItemStyle={selectedItemStyle}
-                menuItemStyle={inputStyle}
-                
                 onChange={this.onChangeGroup.bind(this)}
                 value="">
                 <MenuItem value="">All groups</MenuItem>
