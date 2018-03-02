@@ -1,5 +1,5 @@
 import React from 'react'
-import Griddle from 'griddle-react'
+import InfiniteTable from 'components/common/InfiniteTable'
 
 import TabPage from 'components/common/TabPage'
 import TabPageBody from 'components/common/TabPageBody'
@@ -33,17 +33,14 @@ export default class Devices extends React.Component {
       <TabPage>
         <TabPageHeader title={this.props.device.name} />
         <TabPageBody>
-          <Griddle
-            results={(this.props.device.group || {}).devices || []}
-            tableClassName="table tab-table"
-            showFilter={false}
-            showSettings={false}
-            columns={this.state.columns.map(item => item.columnName)}
-            columnMetadata={this.state.columns}
+          <InfiniteTable
+            data={(this.props.device.group || {}).devices || []}
+            className="tab-table"
+            columns={this.state.columns}
             rowMetadata={{key: 'id'}}
-            useGriddleStyles={false}
             resultsPerPage={100}
             bodyHeight={500}
+            useExternal={false}
           />
         </TabPageBody>
       </TabPage>

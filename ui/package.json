@@ -8,7 +8,6 @@
     "chart.js": "^2.6.0",
     "country-data": "0.0.31",
     "d3": "^3.5.17",
-    "griddle-react": "^1.11.2",
     "jquery": "^3.2.1",
     "lodash": "^4.17.4",
     "lucene": "^1.1.2",
