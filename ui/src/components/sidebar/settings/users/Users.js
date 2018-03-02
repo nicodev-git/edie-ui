@@ -24,7 +24,9 @@ export default class Users extends React.Component {
     this.state = {
       groupId: '',
       groups: [],
-      selected: -1
+      selected: -1,
+      userMenuOpen: false,
+      anchorEl: null
     }
 
     this.cells = [{
@@ -187,6 +189,20 @@ export default class Users extends React.Component {
   onClickProfile () {
     this.props.openProfileModal()
   }
+
+  onOpenUserMenu (e) {
+    this.setState({
+      userMenuOpen: true,
+      anchorEl: e.target
+    })
+  }
+
+  onCloseUserMenu () {
+    this.setState({
+      userMenuOpen: false
+    })
+  }
+
   renderProfileModal () {
     if (!this.props.profileModalVisible) return
     return (
@@ -215,8 +231,11 @@ export default class Users extends React.Component {
             </div>
 
             <div style={{position: 'absolute', right: '25px'}}>
-              {canEdit ? <Button variant="raised">User</Button> : null}
-              <Menu open={false}>
+              {canEdit ? <Button variant="raised" onClick={this.onOpenUserMenu.bind(this)}>User</Button> : null}
+              <Menu
+                open={this.state.userMenuOpen}
+                anchorEl={this.state.anchorEl}
+                onClose={this.onCloseUserMenu.bind(this)}>
                 <MenuItem onClick={this.onAddUser.bind(this)}>Add</MenuItem>
                 <MenuItem onClick={this.onEditUser.bind(this)}>Edit</MenuItem>
                 <MenuItem onClick={this.onRemoveUser.bind(this)}>Remove</MenuItem>
