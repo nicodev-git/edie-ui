@@ -64,7 +64,7 @@ export default class Combo extends React.Component {
         className={`valign-top mr-dialog ${config.cls}`}
         disabled={config.disabled}
         options={options}
-        defaultValue={options.length ? options[0].value : null}
+        // defaultValue={options.length ? options[0].value : null}
         validate={validate}
         onChange={this.onChange.bind(this)}
       />

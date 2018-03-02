@@ -18,7 +18,7 @@ const SimpleSearchBar = ({onSearch, active, onFocus, onBlur, defaultKeyword, aut
       onFocus={onFocus}
       onBlur={onBlur}
       autoFocus={autoFocus}
-      defaultValue={defaultKeyword}
+      // defaultValue={defaultKeyword}
       onChange={onSearch}
       id="searchInput"
     />

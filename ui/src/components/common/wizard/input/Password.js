@@ -16,7 +16,7 @@ export default class Password extends React.Component {
       <TextField type="password"
         className={'form-control'}
         name={config.name}
-        defaultValue={defaultValue}
+        // defaultValue={defaultValue}
         validation={config.required ? 'required' : null} />
     )
   }

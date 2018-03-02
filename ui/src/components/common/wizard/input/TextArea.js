@@ -37,7 +37,7 @@ export default class TextArea extends React.Component {
 
         <TextField className={`form-control ${config.cls || ''}`}
           name={config.name}
-          defaultValue={defaultValue}
+          // defaultValue={defaultValue}
           style={util.convertStyle(config.inputStyle)}
           placeholder={placeholder}/>
 

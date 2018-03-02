@@ -143,7 +143,7 @@ export default class GroupModal extends React.Component {
               <input
                 type="text" className="form-control input-sm"
                 style={{width: '30%', marginLeft: '10px', display: 'inline-block'}}
-                defaultValue={group ? group.name : ''}
+                // defaultValue={group ? group.name : ''}
                 ref="name"
               />
             </div>

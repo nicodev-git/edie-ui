@@ -25,7 +25,7 @@ const SearchBar = ({onSearch, active, onBackgroundChange, defaultKeyword}) => (
         className="searchbar-input"
         style={active ? activeStyle : defaultStyle}
         autoFocus
-        defaultValue={defaultKeyword}
+        // defaultValue={defaultKeyword}
         onKeyPress={onSearch}/>
     </div>
   </div>
