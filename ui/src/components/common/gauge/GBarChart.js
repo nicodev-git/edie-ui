@@ -178,7 +178,8 @@ export default class GBarChart extends React.Component {
           dateFrom: dateFrom.valueOf(),
           dateTo: dateTo.valueOf(),
           userConnectorId,
-          sort: 'timestamp'
+          sort: 'timestamp',
+          size: 1000
         }
       }).then(res => {
         this.setState({
