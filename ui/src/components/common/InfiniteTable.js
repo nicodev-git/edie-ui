@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import Griddle from 'griddle-react'
 import { concat, assign, isEqual, keys, debounce } from 'lodash'
-import ReduxInfiniteScroll from 'redux-infinite-scroll'
+// import ReduxInfiniteScroll from 'redux-infinite-scroll'
 
 import $ from 'jquery'
 import { encodeUrlParams } from 'shared/Global'
@@ -262,17 +262,20 @@ class InfiniteTable extends React.Component {
   }
 
   render () {
-    const table = this.renderTable()
-    if (!this.props.bodyHeight) {
-      return (
-        <ReduxInfiniteScroll
-          children={[table]}
-          loadMore={this.loadMoreDeb}
-          loadingMore={this.state.isLoading}
-        />
-      )
-    }
-    return table
+    return (
+      <div></div>
+    )
+    // const table = this.renderTable()
+    // if (!this.props.bodyHeight) {
+    //   return (
+    //     <ReduxInfiniteScroll
+    //       children={[table]}
+    //       loadMore={this.loadMoreDeb}
+    //       loadingMore={this.state.isLoading}
+    //     />
+    //   )
+    // }
+    // return table
   }
 }
 
