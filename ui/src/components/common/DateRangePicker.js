@@ -1,6 +1,6 @@
 import React from 'react'
 import 'bootstrap-daterangepicker/daterangepicker.css'
-import ReactDateRangePicker from 'react-bootstrap-datetimerangepicker'
+import ReactDateRangePicker from 'components/common/DateTimeRangePicker'
 import moment from 'moment'
 import {keys, assign, isString, isNumber} from 'lodash'
 import {dateFormat} from 'shared/Global'
