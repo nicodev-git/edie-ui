@@ -7,11 +7,11 @@ import RefreshOverlay from 'components/common/RefreshOverlay'
 
 export default class EditServer extends React.Component {
   componentWillMount () {
-    const {userInfo} = this.props
-    if (!(userInfo && userInfo.permissions && userInfo.permissions.includes('EditServer'))) {
-      this.props.history.push('/')
-      return
-    }
+    // const {userInfo} = this.props
+    // if (!(userInfo && userInfo.permissions && userInfo.permissions.includes('EditServer'))) {
+    //   this.props.history.push('/')
+    //   return
+    // }
   }
   componentDidMount () {
     this.props.updateDeviceCreds(this.props.device.credentials || [])
