@@ -27,8 +27,8 @@ const sampleData = [{
 }]
 export default class SearchGraphModal extends React.Component {
   componentWillMount () {
-    const {params, updateGraphParams} = this.props
-    updateGraphParams(params, {
+    const {queryParams, updateGraphParams} = this.props
+    updateGraphParams(queryParams, {
       splitBy: 1,
       splitUnit: 'day'
     })
@@ -40,21 +40,21 @@ export default class SearchGraphModal extends React.Component {
     this.props.maximizeSearchGraph(!this.props.graphMaximized)
   }
   onChangeSplitBy (e) {
-    const {params, graphParams, updateGraphParams} = this.props
-    updateGraphParams(params, assign({}, graphParams, {
+    const {queryParams, graphParams, updateGraphParams} = this.props
+    updateGraphParams(queryParams, assign({}, graphParams, {
       splitBy: e.target.value
     }))
   }
 
   onChangeSplitUnit (e) {
-    const {params, graphParams, updateGraphParams} = this.props
-    updateGraphParams(params, assign({}, graphParams, {
+    const {queryParams, graphParams, updateGraphParams} = this.props
+    updateGraphParams(queryParams, assign({}, graphParams, {
       splitUnit: e.target.value
     }))
   }
 
   render () {
-    const {searchRecordCounts, queryChips, params, graphMaximized, graphParams} = this.props
+    const {searchRecordCounts, queryChips, queryParams, graphMaximized, graphParams} = this.props
     const chartData = {
       labels: (searchRecordCounts || sampleData).map(p => p.date),
       datasets: [{
@@ -77,7 +77,7 @@ export default class SearchGraphModal extends React.Component {
     return (
 
       <SearchGraphModalView
-        params={params}
+        params={queryParams}
         queryChips={queryChips}
         loading={!searchRecordCounts}
         chartData={chartData}

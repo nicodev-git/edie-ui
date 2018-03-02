@@ -6,7 +6,7 @@ import moment from 'moment'
 
 import RefreshOverlay from 'components/common/RefreshOverlay'
 import {CloseIconButton} from 'components/modal/parts'
-import {dateFormat} from 'shared/Global'
+// import {dateFormat} from 'shared/Global'
 
 const chipStyle = {
   color: 'white',
@@ -45,12 +45,12 @@ export default class SearchGraphModalView extends React.Component {
       >
         <CloseIconButton onClick={onHide}>
           <IconButton onClick={onMaximize}>
-            <ZoomOutIcon size={32} color="#545454"/>
+            <ZoomOutIcon size={32} nativeColor="#545454"/>
           </IconButton>
         </CloseIconButton>
         <div className="pull-left form-inline margin-md-bottom">
-          <label><small>Duration {moment(params.dateFrom, dateFormat).format('MMM D, YYYY')}&nbsp;-&nbsp;
-            {moment(params.dateTo, dateFormat).format('MMM D, YYYY')} resolution</small></label>
+          <label><small>Duration {moment(params.from).format('MMM D, YYYY')}&nbsp;-&nbsp;
+            {moment(params.to).format('MMM D, YYYY')} resolution</small></label>
 
           <select
             className="form-control input-sm select-custom" value={graphParams.splitBy}
@@ -82,7 +82,7 @@ export default class SearchGraphModalView extends React.Component {
           )}
         </div>
         <div className="margin-md-top">
-          <Line data={chartData} options={chartOptions} width="800" height="250" />
+          <Line data={chartData} options={chartOptions} width={800} height={250} />
         </div>
         {this.props.loading ? <RefreshOverlay /> : null}
       </Dialog>
