@@ -8,7 +8,7 @@ import FilterIcon from 'material-ui-icons/FilterList'
 import MoreVertIcon from 'material-ui-icons/MoreVert'
 import DeleteIcon from 'material-ui-icons/Delete'
 import ToggleStar from 'material-ui-icons/StarBorder'
-import {IconButton, TextField, Menu, MenuItem, Popover} from 'material-ui'
+import {IconButton, TextField, Popover} from 'material-ui'
 import ReactToolTip from 'react-tooltip'
 
 import TabPage from 'components/common/TabPage'
@@ -712,9 +712,9 @@ export default class Log extends React.Component {
             anchorEl={this.state.anchorEl}
           >
             {filters.map((p, i) =>
-              <div key={i}>
+              <div key={i} className="padding-sm nowrap">
                 {p}
-                <DeleteIcon className="link pull-right" onClick={this.onClickRemoveFilter.bind(this, p)}/>
+                <DeleteIcon className="link pull-right" onClick={this.onClickRemoveFilter.bind(this, p)} />
               </div>
             )}
           </Popover>

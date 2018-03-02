@@ -7,9 +7,6 @@ import { FormControl } from 'material-ui/Form'
 import { InputLabel } from 'material-ui/Input'
 
 import DateRangePicker from 'components/common/DateRangePicker'
-import {
-  errorStyle, inputStyle, underlineStyle
-} from 'style/common/materialStyles'
 
 import {severities} from 'shared/Global'
 
@@ -55,17 +52,14 @@ const BigIncidentsView = ({onHide,
           endDate={moment(endDate)}
           onApply={onChangeDateRange}
           renderer={label =>
-            <Button variant="flat"
-              label={label} className="valign-top margin-md-left"
-              style={{borderBottom: '1px solid lightgray', marginTop: 4}}/>
+            <Button
+              variant="flat" className="valign-top margin-md-left"
+              style={{borderBottom: '1px solid lightgray', marginTop: 4}}>{label}</Button>
           }
         />
 
       <TextField
-        label={<ActionSearch style={{bottom: '5px'}} color="#888888"/>}
-        errorStyle={errorStyle}
-        inputStyle={inputStyle}
-        underlineFocusStyle={underlineStyle}
+        label={<ActionSearch style={{bottom: '5px'}} nativeColor="#888888"/>}
         onChange={onChangeKeyword}
         value={keyword}
         className="valign-top margin-md-left"
