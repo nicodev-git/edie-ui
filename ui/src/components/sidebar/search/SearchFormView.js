@@ -108,22 +108,22 @@ export default class SearchFormView extends React.Component {
         <div style={{background: '#dadada', paddingLeft: 10}}>
           <div style={{height: 48}}>
             <Field name="freeText" component={FormInput} label="Search" onKeyDown={onKeyDownFreeText} style={{width: 300}}
-                   className={`valign-middle ${advanced ? 'hidden' : ''}`}/>
-            <Button variant="flat" onClick={this.onClickSearchBy.bind(this)}
-                    className="valign-middle margin-xs-top">Search By</Button>
+                   className={`valign-middle margin-md-right margin-sm-top ${advanced ? 'hidden' : ''}`}/>
             <Select
               multiple
               value={selectedCollections}
               onChange={onChangeCollection}
-              className="valign-middle"
+              className="valign-middle margin-md-right margin-sm-top"
               style={{width: '180px'}}
             >
               {collections.map(option =>
                 <MenuItem key={option.value} value={option.value}>{option.label}</MenuItem>
               )}
             </Select>
+            <Button variant="flat" onClick={this.onClickSearchBy.bind(this)}
+                    className="valign-middle margin-sm-top">Search By</Button>
             <DateRangePicker
-              className="valign-middle"
+              className="valign-middle margin-sm-top"
               startDate={startDate}
               endDate={endDate}
               onApply={onChangeDateRange}
