@@ -7,7 +7,7 @@ import { Route, BrowserRouter } from 'react-router-dom'
 
 import MainpageContainer from './containers/MainpageContainer'
 import SigninContainer from './containers/auth/SigninContainer'
-import Signin2Container from './containers/auth/Signin2Container'
+// import Signin2Container from './containers/auth/Signin2Container'
 
 import RequireAuth from './components/auth/RequireAuth'
 
@@ -16,8 +16,8 @@ export default class App extends React.Component {
     return (
       <BrowserRouter>
         <Switch>
-          <Route exact path="/signin2" component={SigninContainer}/>
-          <Route exact path="/signin" component={Signin2Container}/>
+          <Route exact path="/signin" component={SigninContainer}/>
+          {/*<Route exact path="/signin" component={Signin2Container}/>*/}
           <Route path="/" component={RequireAuth(MainpageContainer)}/>
         </Switch>
       </BrowserRouter>
