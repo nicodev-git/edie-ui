@@ -46,6 +46,8 @@ export default class ServerDashboardView extends React.Component {
       deviceWizardConfig: {},
       deviceWizardVisible: false,
 
+      filter: '',
+
       page: 'Servers'
     }
   }
@@ -55,11 +57,15 @@ export default class ServerDashboardView extends React.Component {
   }
 
   getServers () {
+    const {filter} = this.state
     const {devices, allDevices, serverSearchResults} = this.props
     let list = (devices || allDevices).filter(p => (p.tags || []).includes('Server'))
 
     if (serverSearchResults) {
       list = list.filter(p => serverSearchResults.includes(p.id))
+    }
+    if (filter) {
+      list = list.filter(p => p.name.toLowerCase().indexOf(filter.toLowerCase()) >= 0)
     }
 
     return list
@@ -225,7 +231,7 @@ export default class ServerDashboardView extends React.Component {
   }
 
   renderAddMenu () {
-    const {page} = this.state
+    const {page, filter} = this.state
     return (
       <div className="text-center margin-sm-top margin-sm-bottom" style={{minHeight: 40}}>
         <div style={{position: 'absolute', left: 27, top: 8}}>
@@ -241,7 +247,7 @@ export default class ServerDashboardView extends React.Component {
         {page === 'Servers' ? (
           <div className="inline-block">
             <Card>
-              <input type="text" style={inputStyle}/>
+              <input type="text" style={inputStyle} value={filter} onChange={e => this.setState({filter: e.target.value})}/>
               <IconButton onClick={this.onClickSearch.bind(this)} style={btnStyle}><SettingsIcon/></IconButton>
               <IconButton onClick={this.onClearSearch.bind(this)} style={btnStyle}><ClearIcon/></IconButton>
               <IconButton onClick={this.onClickCommand.bind(this)} style={btnStyle}
