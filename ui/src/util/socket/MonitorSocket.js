@@ -10,7 +10,7 @@ export default class MonitorSocket {
     this.listener = props.listener
   }
 
-  connect (cb) {
+  connect (cb, path = 'monitorupdate') {
     const me = this
 
     if (me.ws) {
@@ -22,7 +22,7 @@ export default class MonitorSocket {
       const domain = getLocation(ROOT_URL || document.location.href).host
       const protocol = document.location.protocol === 'https:' ? 'wss:' : 'ws:'
 
-      me.ws = new window.WebSocket(`${protocol}//${domain}/monitorupdate`)
+      me.ws = new window.WebSocket(`${protocol}//${domain}/${path}`)
       me.connecting = true
       me.ws.onopen = (frame) => {
         me.connecting = false

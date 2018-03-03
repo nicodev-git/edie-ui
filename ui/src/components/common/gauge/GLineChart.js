@@ -13,7 +13,7 @@ import GEditView from './GEditView'
 import {showAlert} from 'components/common/Alert'
 import {getRanges} from 'components/common/DateRangePicker'
 
-import IncidentSocket from 'util/socket/IncidentSocket'
+import MonitorSocket from 'util/socket/MonitorSocket'
 
 import {buildServiceParams} from 'util/Query'
 
@@ -312,12 +312,10 @@ export default class GLineChart extends React.Component {
   ////////////////////////////////////////////
 
   startSocket () {
-    this.eventSocket = new IncidentSocket({
-      listeners: {
-        'eventupdate': this.onEventUpdate.bind(this)
-      }
+    this.eventSocket = new MonitorSocket({
+      listener: this.onEventUpdate.bind(this)
     })
-    this.eventSocket.connect(() => {})
+    this.eventSocket.connect(() => {}, 'eventupdate')
   }
 
   stopSocket() {
