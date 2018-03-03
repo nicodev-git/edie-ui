@@ -78,7 +78,8 @@ import {
 
   fetchTableViewCols,
 
-  updateCurrentSavedSearch
+  updateCurrentSavedSearch,
+  submitForm
 } from 'actions'
 
 class GenericSearchContainer extends React.Component {
@@ -237,7 +238,8 @@ export default connect(
 
       fetchTableViewCols,
 
-      updateCurrentSavedSearch
+      updateCurrentSavedSearch,
+      submitForm
     }, dispatch)
   })
 )(withRouter(GenericSearchContainer))

@@ -1,5 +1,5 @@
 import React from 'react'
-import { reduxForm, submit, formValueSelector } from 'redux-form'
+import { reduxForm, formValueSelector } from 'redux-form'
 import { connect } from 'react-redux'
 import { assign, concat, keys, findIndex, debounce } from 'lodash'
 import moment from 'moment'
@@ -268,7 +268,7 @@ class GenericSearch extends React.Component {
 
   onSearchKeyDown (e) {
     if (e.keyCode === 13) {
-      submit('genericSearchForm')
+      this.props.submitForm('genericSearchForm')
     }
   }
 
@@ -283,7 +283,7 @@ class GenericSearch extends React.Component {
   }
 
   onClickSearch () {
-    this.props.submit(this.props.handleSubmit(this.handleFormSubmit.bind(this)))
+    this.props.submitForm('genericSearchForm')
   }
 
   parse (query, suppress = false) {
@@ -1060,11 +1060,10 @@ class GenericSearch extends React.Component {
 }
 
 const GenericSearchForm = reduxForm({form: 'genericSearchForm'})(GenericSearch)
-const selector = formValueSelector('genericSearchForm')
 
 export default connect(
   state => ({
     initialValues: {query: state.search.queryParams.q},
-    formValues: selector(state, 'query', 'searchOptionIndex', 'freeText')
+    formValues: formValueSelector('genericSearchForm')(state, 'query', 'searchOptionIndex', 'freeText')
   })
 )(GenericSearchForm)

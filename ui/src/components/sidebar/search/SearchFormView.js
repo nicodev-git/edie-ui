@@ -1,5 +1,5 @@
 import React from 'react'
-import { Field } from 'redux-form'
+import { Field, Form } from 'redux-form'
 import { findIndex } from 'lodash'
 import {Button, Select, Popover, MenuItem, IconButton} from 'material-ui'
 import { FormControl } from 'material-ui/Form'
@@ -104,7 +104,7 @@ export default class SearchFormView extends React.Component {
     const {advanced} = this.state
 
     return (
-      <form onSubmit={onSubmit}>
+      <Form onSubmit={onSubmit}>
         <div style={{background: '#dadada', paddingLeft: 10}}>
           <div style={{height: 48}}>
             <Field name="freeText" component={FormInput} label="Search" onKeyDown={onKeyDownFreeText} style={{width: 300}}
@@ -190,14 +190,14 @@ export default class SearchFormView extends React.Component {
 
           <div className={`flex-horizontal ${advanced ? '' : 'hidden'}`} >
             <div className="flex-1">
-              <Field name="query" component={FormInput} label="Search" onKeyDown={onSearchKeyDown} style={{width: '100%'}} className="valign-top"/>
+              <Field name="query" component={FormInput} label="Search" style={{width: '100%'}} className="valign-top"/>
             </div>
             <div style={{width: 65}} className="text-right">
               <IconButton tooltip="Search" onClick={onClickSearch} type="submit" className="valign-top"><ActionSearch /></IconButton>
             </div>
           </div>
         </div>
-      </form>
+      </Form>
     )
   }
 }
