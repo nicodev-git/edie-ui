@@ -7,7 +7,7 @@ import { FormControlLabel } from 'material-ui/Form'
 import {Checkbox, Button} from 'material-ui'
 import { Field } from 'redux-form'
 import { FormInput, FormSelect, FormCheckbox, CardPanel } from 'components/modal/parts'
-import {rolePermissions, hasPermission} from 'shared/Permission'
+import {hasPermission} from 'shared/Permission'
 import { validate } from 'components/modal/validation/NameValidation'
 import TabPage from 'components/common/TabPage'
 import TabPageBody from 'components/common/TabPageBody'
@@ -63,18 +63,13 @@ class EditUser extends React.Component {
   onCheckRole (role) {
     const value = role.id
 
-    let {selectedRoles, selectedPermissions} = this.props
+    let {selectedRoles} = this.props
     if (selectedRoles.includes(value)) {
       selectedRoles = selectedRoles.filter(p => p !== value)
-      // selectedPermissions = selectedPermissions.filter(p => !checked.includes(p))
     } else {
       selectedRoles = [...selectedRoles, value]
-      // checked.forEach(p => {
-      //   if (!selectedPermissions.includes(p)) selectedPermissions = [...selectedPermissions, p]
-      // })
     }
     this.props.selectUserRoles(selectedRoles)
-    // this.props.selectUserPermissions(selectedPermissions)
     this.debSave()
   }
 
@@ -213,36 +208,6 @@ class EditUser extends React.Component {
     )
   }
 
-  renderPermissions (canEdit) {
-    const {selectedRole} = this.state
-    const { selectedPermissions, permissions } = this.props
-
-    const rolePermissions = permissions.filter(p => selectedRole.permissionIds.includes(p.id))
-    return (
-      <CardPanel title="Permissions">
-        <div style={{height: 335, overflow: 'auto'}} className="relative">
-          <table className="table table-hover table-noborder table-pt-none table-pb-none">
-            <tbody>
-            {rolePermissions.map(p =>
-              <tr key={p}>
-                <td>
-                  <FormControlLabel
-                    control={
-                      <Checkbox checked={selectedPermissions.includes(p)}
-                                onChange={canEdit ? this.onCheckPermission.bind(this, p) : null}/>
-                    }
-                    label={p}
-                  />
-                </td>
-              </tr>
-            )}
-            </tbody>
-          </table>
-        </div>
-      </CardPanel>
-    )
-  }
-
   renderMask () {
     return (
       <div style={{position: 'absolute', left: 0, right: 0, top: 0, bottom: 0, zIndex: 5}}></div>
@@ -250,10 +215,8 @@ class EditUser extends React.Component {
   }
 
   render () {
-    const {selectedRole} = this.state
-    const { handleSubmit, maps, selectedPermissions, editUser } = this.props
+    const { handleSubmit, maps, selectedPermissions, editUser, permissions } = this.props
     const defaultmaps = maps.map(p => ({label: p.name, value: p.id}))
-    const permissions = selectedPermissions
     if (!editUser) return <div>Loading...</div>
 
     const canEdit = this.checkCanEdit()
@@ -297,14 +260,13 @@ class EditUser extends React.Component {
                   <div style={{height: 335, overflow: 'auto'}} className="relative">
                     <table className="table table-hover table-noborder table-pt-none table-pb-none">
                       <tbody>
-                      {rolePermissions.map(p =>
-                        <tr key={p}
-                            className={!selectedRole || selectedRole.permissions.includes(p) ? '' : 'hidden'}>
+                      {permissions.map(p =>
+                        <tr key={p}>
                           <td>
                             <FormControlLabel
                               control={
-                                <Checkbox checked={permissions.includes(p)}
-                                          onChange={canEdit ? this.onCheckPermission.bind(this, p) : null}/>
+                                <Checkbox checked={selectedPermissions.includes(p.id)}
+                                          onChange={canEdit ? this.onCheckPermission.bind(this, p.id) : null}/>
                               }
                               label={p}
                             />
