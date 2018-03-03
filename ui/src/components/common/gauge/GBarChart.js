@@ -12,6 +12,7 @@ import GEditView from './GEditView'
 
 import {showAlert} from 'components/common/Alert'
 import {getRanges} from 'components/common/DateRangePicker'
+import MonitorSocket from 'util/socket/MonitorSocket'
 
 import {buildServiceParams} from 'util/Query'
 const sampleData = []
@@ -106,6 +107,10 @@ export default class GBarChart extends React.Component {
     }
   }
 
+  componentWillUnmount () {
+    this.stopSocket()
+  }
+
   getParams () {
     const {gauge, searchList} = this.props
     const {savedSearchId, monitorId, resource, workflowId, workflowIds} = gauge
@@ -195,6 +200,7 @@ export default class GBarChart extends React.Component {
           this.setState({needRefresh: true})
         }, 5000)
       })
+      if (!this.eventSocket) this.startSocket()
     } else if (resource === 'incident'){
       const params = {
         q: [
@@ -251,6 +257,35 @@ export default class GBarChart extends React.Component {
       })
     }
   }
+
+  ////////////////////////////////////////////
+
+  startSocket () {
+    this.eventSocket = new MonitorSocket({
+      listener: this.onEventUpdate.bind(this)
+    })
+    this.eventSocket.connect(() => {}, 'eventupdate')
+  }
+
+  stopSocket() {
+    if (!this.eventSocket) return
+    this.eventSocket.close()
+  }
+
+  onEventUpdate (data) {
+    const {searchRecordCounts} = this.state
+    const {userConnectorId} = this.props.gauge
+    if (!data.userConnectorId || data.userConnectorId !== userConnectorId) return
+
+    this.setState({
+      searchRecordCounts: [...searchRecordCounts, {
+        date: moment(data.timestamp).format('YYYY-MM-DD HH:mm:ss'),
+        count: parseFloat(data.lastResultData || 0)
+      }]
+    })
+  }
+
+  ////////////////////////////////////////////
 
   onSubmit (options, values) {
     console.log(values)

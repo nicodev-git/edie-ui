@@ -334,15 +334,6 @@ export default class GLineChart extends React.Component {
         count: parseFloat(data.lastResultData || 0)
       }]
     })
-
-    // this.setState({
-    //   searchRecordCounts: res.data._embedded.events.map(p => ({
-    //     date: moment(p.timestamp).format('YYYY-MM-DD HH:mm:ss'),
-    //     count: p.eventType === 'AGENT' || (p.lastResult && p.lastResult.status === 'UP') ? 1 : 0
-    //   })),
-    //   loading: false,
-    //   needRefresh: false
-    // })
   }
 
   ////////////////////////////////////////////
