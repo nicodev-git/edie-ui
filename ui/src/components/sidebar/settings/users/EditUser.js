@@ -99,8 +99,6 @@ class EditUser extends React.Component {
 
   onCheckPermission (value) {
     let {selectedPermissions} = this.props
-    const {selectedRole} = this.state
-    if (!selectedRole) return
     if (selectedPermissions.includes(value)) {
       selectedPermissions = selectedPermissions.filter(p => p !== value)
     } else {
@@ -261,14 +259,14 @@ class EditUser extends React.Component {
                     <table className="table table-hover table-noborder table-pt-none table-pb-none">
                       <tbody>
                       {permissions.map(p =>
-                        <tr key={p}>
+                        <tr key={p.id}>
                           <td>
                             <FormControlLabel
                               control={
                                 <Checkbox checked={selectedPermissions.includes(p.id)}
                                           onChange={canEdit ? this.onCheckPermission.bind(this, p.id) : null}/>
                               }
-                              label={p}
+                              label={p.name}
                             />
                           </td>
                         </tr>

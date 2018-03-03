@@ -490,8 +490,8 @@ export default function (state = initialState, action) {
     case OPEN_SETTING_USER_MODAL:
       return {
         ...state, userModalVisible: true, editUser: action.data, editUserPin: '',
-        selectedRoles: action.data ? (action.data.roles || []) : [],
-        selectedPermissions: action.data ? (action.data.permissions || []) : []
+        selectedRoles: action.data ? (action.data.roles || []).map(p => p.id) : [],
+        selectedPermissions: action.data ? (action.data.permissions || []).map(p => p.id) : []
       }
 
     case CLOSE_SETTING_USER_MODAL:
