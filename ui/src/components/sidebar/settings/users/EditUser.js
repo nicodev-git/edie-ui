@@ -269,14 +269,14 @@ class EditUser extends React.Component {
             <div>
               <div className="col-md-12">
                 <CardPanel title="User Settings" className="margin-md-bottom">
-                  <Field name="username" component={FormInput} label="Name" className="mr-dialog"/>
-                  <Field name="fullname" component={FormInput} label="Full Name" className="mr-dialog"/>
+                  <Field name="username" component={FormInput} label="Name" className="margin-md-right"/>
+                  <Field name="fullname" component={FormInput} label="Full Name" className="margin-md-right"/>
 
-                  <Field name="password" type="password" component={FormInput} label="Password" className="mr-dialog"/>
-                  <Field name="email" component={FormInput} label="Email" className="mr-dialog"/>
+                  <Field name="password" type="password" component={FormInput} label="Password" className="margin-md-right"/>
+                  <Field name="email" component={FormInput} label="Email" className="margin-md-right"/>
 
-                  <Field name="phone" component={FormInput} label="Phone" className="valign-top mr-dialog"/>
-                  <Field name="defaultMapId" component={FormSelect} label="Default Map" options={defaultmaps} className="valign-top mr-dialog"/>
+                  <Field name="phone" component={FormInput} label="Phone" className="margin-md-right"/>
+                  <Field name="defaultMapId" component={FormSelect} label="Default Map" options={defaultmaps} className="margin-md-right"/>
 
                   <Field name="enabled" component={FormCheckbox} label="Enabled" />
 
