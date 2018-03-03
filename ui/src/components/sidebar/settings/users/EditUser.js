@@ -17,7 +17,8 @@ class EditUser extends React.Component {
     super(props)
     this.state = {
       selectedRole: null,
-      checkedSections: []
+      checkedSections: [],
+      opening: false
     }
 
     this.debSave = debounce(this.submitForm.bind(this), 500)
@@ -31,7 +32,7 @@ class EditUser extends React.Component {
     this.props.fetchPermissions()
   }
   componentDidUpdate (prevProps) {
-    const {users, editUser, match, formValues, userModalVisible} = this.props
+    const {users, editUser, match, formValues} = this.props
     if (users && users.length && prevProps.users !== users && !editUser) {
       const index = findIndex(users, {username: match.params.user})
       if (index < 0) {
@@ -39,11 +40,13 @@ class EditUser extends React.Component {
         return
       }
       this.props.openSettingUserModal(users[index])
+      this.setState({opening: true})
     }
 
-    if (JSON.stringify(prevProps.formValues) !== JSON.stringify(formValues) && prevProps.userModalVisible === userModalVisible) {
+    if (!this.state.opening && JSON.stringify(prevProps.formValues) !== JSON.stringify(formValues)) {
       console.log('Form Changed')
       this.debSave()
+      this.setState({opening: false})
     }
   }
 
@@ -61,7 +64,7 @@ class EditUser extends React.Component {
       permissions: permissions.filter(p => selectedPermissions.includes(p.id))
     })
     console.log(user)
-    // this.props.updateSettingUser(user, true)
+    this.props.updateSettingUser(user, true)
   }
   onCheckRole (role) {
     const value = role.id

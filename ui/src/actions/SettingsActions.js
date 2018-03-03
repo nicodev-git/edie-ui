@@ -256,7 +256,7 @@ export const updateSettingUser = (entity, keepModal) => {
     return dispatch => dispatch({ type: NO_AUTH_ERROR })
   }
   return (dispatch) => {
-    axios.put(entity._links.self.href, entity)
+    axios.post(`${ROOT_URL}/saveUser`, entity)
       .then(response => updateSettingUserSuccess(dispatch, response, keepModal))
       .catch(error => apiError(dispatch, error))
   }
