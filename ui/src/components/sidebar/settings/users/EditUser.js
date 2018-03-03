@@ -61,21 +61,20 @@ class EditUser extends React.Component {
     // this.props.updateSettingUser(user, true)
   }
   onCheckRole (role) {
-    const value = role.name
-    const checked = role.defaultChecked || []
+    const value = role.id
 
     let {selectedRoles, selectedPermissions} = this.props
     if (selectedRoles.includes(value)) {
       selectedRoles = selectedRoles.filter(p => p !== value)
-      selectedPermissions = selectedPermissions.filter(p => !checked.includes(p))
+      // selectedPermissions = selectedPermissions.filter(p => !checked.includes(p))
     } else {
       selectedRoles = [...selectedRoles, value]
-      checked.forEach(p => {
-        if (!selectedPermissions.includes(p)) selectedPermissions = [...selectedPermissions, p]
-      })
+      // checked.forEach(p => {
+      //   if (!selectedPermissions.includes(p)) selectedPermissions = [...selectedPermissions, p]
+      // })
     }
     this.props.selectUserRoles(selectedRoles)
-    this.props.selectUserPermissions(selectedPermissions)
+    // this.props.selectUserPermissions(selectedPermissions)
     this.debSave()
   }
 
@@ -159,7 +158,7 @@ class EditUser extends React.Component {
               className={selectedRole && selectedRole.id === r.id ? 'selected' : ''}>
             <td className="padding-lg-left">
               <div className="inline-block valign-middle">
-                <Checkbox checked={selectedRoles.includes(r.name)} onChange={canEdit && checked ? this.onCheckRole.bind(this, r) : null}/>
+                <Checkbox checked={selectedRoles.includes(r.name)} onChange={canEdit ? this.onCheckRole.bind(this, r) : null}/>
               </div>
               <label className="valign-middle">{r.name}</label>
             </td>
@@ -192,8 +191,8 @@ class EditUser extends React.Component {
           className={selectedRole && selectedRole.id === r.id ? 'selected' : ''}>
         <td>
           <div className="inline-block valign-middle">
-            <Checkbox checked={selectedRoles.includes(r.name)}
-                      onChange={canEdit && selectedRoles.includes(r.name) ? this.onCheckRole.bind(this, r) : null}/>
+            <Checkbox checked={selectedRoles.includes(r.id)}
+                      onChange={canEdit ? this.onCheckRole.bind(this, r) : null}/>
           </div>
           <label className="valign-middle">{r.name}</label>
         </td>
