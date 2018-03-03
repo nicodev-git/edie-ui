@@ -64,7 +64,7 @@ class SidebarView extends Component {
       // sidebarMessageMenuOpen,
       // openSidebarMessageMenu, closeSidebarMessageMenu,
       user,
-      visibleMenu,
+      // visibleMenu,
       classes
     } = this.props
 
@@ -82,7 +82,7 @@ class SidebarView extends Component {
         </div>
         <div style={{display: contentType.Main === pageType ? 'block' : 'none'}} className="sidebar">
           {mainMenuItems.map((item, index) => {
-            const visible = visibleMenu.includes(item.roleMenuId)
+            const visible = true//visibleMenu.includes(item.roleMenuId)
             return (
               <div key={index} onClick={onMainMenu.bind(this, item.id)} className={visible ? '' : 'hidden'}>
                 <div className={pageId === item.id ? 'sidebar-chosen' : ''}>

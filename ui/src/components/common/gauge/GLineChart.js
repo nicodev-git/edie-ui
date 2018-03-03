@@ -13,6 +13,8 @@ import GEditView from './GEditView'
 import {showAlert} from 'components/common/Alert'
 import {getRanges} from 'components/common/DateRangePicker'
 
+import IncidentSocket from 'util/socket/IncidentSocket'
+
 import {buildServiceParams} from 'util/Query'
 
 const sampleData = []
@@ -152,6 +154,10 @@ export default class GLineChart extends React.Component {
     }
   }
 
+  componentWillUnmount () {
+    this.stopSocket()
+  }
+
   getParams () {
     const {gauge, searchList} = this.props
     const {savedSearchId, monitorId, resource, workflowId, workflowIds, userConnectorId} = gauge
@@ -268,6 +274,7 @@ export default class GLineChart extends React.Component {
           this.setState({needRefresh: true})
         }, 5000)
       })
+      if (!this.eventSocket) this.startSocket()
     } else {
       const index = findIndex(searchList, {id: savedSearchId})
       if (index < 0) {
@@ -301,6 +308,39 @@ export default class GLineChart extends React.Component {
       })
     }
   }
+
+  ////////////////////////////////////////////
+
+  startSocket () {
+    this.eventSocket = new IncidentSocket({
+      listeners: {
+        'eventupdate': this.onEventUpdate.bind(this)
+      }
+    })
+    this.eventSocket.connect(() => {})
+  }
+
+  stopSocket() {
+    if (!this.eventSocket) return
+    this.eventSocket.close()
+  }
+
+  onEventUpdate (data) {
+    // const {searchRecordCounts} = this.state
+
+    console.log(data)
+
+    // this.setState({
+    //   searchRecordCounts: res.data._embedded.events.map(p => ({
+    //     date: moment(p.timestamp).format('YYYY-MM-DD HH:mm:ss'),
+    //     count: p.eventType === 'AGENT' || (p.lastResult && p.lastResult.status === 'UP') ? 1 : 0
+    //   })),
+    //   loading: false,
+    //   needRefresh: false
+    // })
+  }
+
+  ////////////////////////////////////////////
 
   onSubmit (options, values) {
     console.log(values)
