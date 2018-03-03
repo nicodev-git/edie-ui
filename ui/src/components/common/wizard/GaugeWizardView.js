@@ -142,7 +142,7 @@ export default class GaugeWizardView extends React.Component {
         {durationVisible ? (
           <div className="inline-block">
             <Field name="duration" component={FormSelect} floatingLabel="Duration" options={durations} className="valign-top margin-md-right" style={{width: 100}}/>
-            <Field name="durationUnit" component={FormSelect} floatingLabel="  "options={gaugeDurationTypes} className="valign-top" style={{width: 120}}/>
+            <Field name="durationUnit" component={FormSelect} floatingLabel="  "options={gaugeDurationTypes} className="valign-top margin-md-right" style={{width: 120}}/>
           </div>
           ) : null
         }
@@ -150,7 +150,7 @@ export default class GaugeWizardView extends React.Component {
         {splitVisible && (formValues.resource === 'search' || formValues.resource === 'incident') ? (
           <div className="inline-block">
             <Field name="splitBy" component={FormSelect} floatingLabel="Resolution" options={durations} className="valign-top margin-md-right" style={{width: 100}}/>
-            <Field name="splitUnit" component={FormSelect} floatingLabel="  "options={gaugeDurationTypes} className="valign-top" style={{width: 120}}/>
+            <Field name="splitUnit" component={FormSelect} floatingLabel="  "options={gaugeDurationTypes} className="valign-top margin-md-right" style={{width: 120}}/>
           </div>
           ) : null
         }
