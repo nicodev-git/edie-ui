@@ -62,7 +62,6 @@ export default class SearchFormView extends React.Component {
   }
   render () {
     const {
-      onSearchKeyDown,
       onClickStar,
       starFilled,
       onSubmit,
