@@ -131,7 +131,7 @@ class EditUser extends React.Component {
     return canEdit
   }
 
-  renderRoles (canEdit) {
+  renderRoles2 (canEdit) {
     const {selectedRole, checkedSections} = this.state
     const { selectedRoles, roles } = this.props
     const sections = this.getSections()
@@ -182,7 +182,7 @@ class EditUser extends React.Component {
     )
   }
 
-  renderRoles2 (canEdit) {
+  renderRoles (canEdit) {
     const {selectedRole} = this.state
     const { selectedRoles, roles } = this.props
 
@@ -190,7 +190,7 @@ class EditUser extends React.Component {
       <tr key={r.id}
           onClick={() => this.setState({selectedRole: r})}
           className={selectedRole && selectedRole.id === r.id ? 'selected' : ''}>
-        <td className="padding-lg-left">
+        <td>
           <div className="inline-block valign-middle">
             <Checkbox checked={selectedRoles.includes(r.name)}
                       onChange={canEdit && selectedRoles.includes(r.name) ? this.onCheckRole.bind(this, r) : null}/>
