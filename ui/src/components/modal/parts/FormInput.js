@@ -5,6 +5,7 @@ const FormInput = ({input, label, floatingLabel, meta: {touched, error}, ...cust
   <TextField
     {...input}
     {...custom}
+    inputProps={{style: {paddingTop: 3}}}
     label={floatingLabel}
     placeholder={label}
     autoComplete={custom.type === 'password' ? 'new-password' : 'off'}
