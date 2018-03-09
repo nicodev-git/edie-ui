@@ -55,12 +55,12 @@ export default class BoardListModalView extends React.Component {
                   ) : (
                     <td className="text-right">
                       <IconButton style={{padding: 0, width: 24, height: 24}} onClick={() => onClickEdit(p)}>
-                        <EditIcon nativeColor="#545454" hoverColor="#f44336"/>
+                        <EditIcon nativeColor="#545454"/>
                       </IconButton>&nbsp;&nbsp;&nbsp;
                       <IconButton
                         style={{padding: 0, width: 24, height: 24}} onClick={() => onClickDelete(p)}
                         className={p.type === 'system' ? 'hidden' : ''}>
-                        <DeleteIcon nativeColor="#545454" hoverColor="#f44336"/>
+                        <DeleteIcon nativeColor="#545454"/>
                       </IconButton>
                     </td>
                   )}
