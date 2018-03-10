@@ -16,8 +16,7 @@ import {getRanges} from 'components/common/DateRangePicker'
 import MonitorSocket from 'util/socket/MonitorSocket'
 
 import {buildServiceParams} from 'util/Query'
-
-const sampleData = []
+import {appletColors} from 'shared/Global'
 
 const chartOptions = {
   maintainAspectRatio: false,
@@ -195,7 +194,7 @@ export default class GLineChart extends React.Component {
 
   fetchRecordCount (props) {
     const {gauge, searchList, workflows, devices, allDevices} = props
-    const {savedSearchId, monitorId, resource, duration, durationUnit,
+    const {monitorId, resource, duration, durationUnit,
       splitBy, splitUnit, workflowId, workflowIds, userConnectorId, savedSearchIds} = gauge
 
     this.setState({
@@ -265,8 +264,8 @@ export default class GLineChart extends React.Component {
       }).then(res => {
         const {events} = res.data._embedded
         this.setState({
-          labels: res.data.map(p => moment(p.timestamp).format('MM-DD HH:mm')),
-          datasets: [res.data.map(p => parseFloat(p.lastResultData || 0))],
+          labels: events.map(p => moment(p.timestamp).format('MM-DD HH:mm')),
+          datasets: [events.map(p => parseFloat(p.lastResultData || 0))],
 
           loading: false,
           needRefresh: false
@@ -305,7 +304,7 @@ export default class GLineChart extends React.Component {
       axios.get(`${ROOT_URL}/search/getRecordCounts?${encodeUrlParams(params)}`).then(res => {
         this.setState({
           labels: res.data.map(p => p.date),
-          datasets: [res.data.map(p => p.count)],
+          datasets: qs.map((q, i) => res.data.map(p => p.count[i])),
           loading: false,
           needRefresh: false
         })
@@ -428,17 +427,17 @@ export default class GLineChart extends React.Component {
 
   renderFrontView () {
     const {gauge} = this.props
-    const {searchRecordCounts} = this.state
+    const {labels, datasets} = this.state
     const chartData = {
-      labels: (searchRecordCounts || sampleData).map(p => p.date),
-      datasets: [{
-        data: (searchRecordCounts || sampleData).map(p => p.count),
+      labels,
+      datasets: datasets.map((d, i) => ({
+        data: d,
         borderWidth: 2,
-        borderColor: '#0288d1',
+        borderColor: appletColors[i],
         fill: false,
         pointRadius: 0,
         pointHitRadius: 20
-      }]
+      }))
     }
 
     let options
