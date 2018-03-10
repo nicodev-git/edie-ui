@@ -116,16 +116,38 @@ export default class GaugeWizardView extends React.Component {
   }
 
   renderSearchMode () {
-    const {formValues} = this.props
+    const {formValues, searchList, savedSearchIds, onChangeSaveSearch} = this.props
     if (formValues.resource !== 'search') return null
     return (
-      <Field
-        name="savedSearchId" component={FormSelect} floatingLabel="Saved Search" options={searchList} className="valign-top margin-md-right"
-        validate={[required]}/>
+      <div>
+        <table className="table table-hover">
+          <thead>
+            <tr>
+              <th>Saved Search</th>
+            </tr>
+          </thead>
+          <tbody>
+          {savedSearchIds.map((id, i) =>
+            <tr key={i}>
+              <td>
+                <Select value={id} onChange={(e) => onChangeSaveSearch(e.target.value, i)}>
+                  {searchList.map(p =>
+                    <MenuItem key={p.value} value={p.value}>{p.label}</MenuItem>
+                  )}
+                </Select>
+              </td>
+            </tr>
+          )}
+          </tbody>
+        </table>
+        <Field
+          name="savedSearchId" component={FormSelect} floatingLabel="Saved Search" options={searchList} className="valign-top margin-md-right"
+          validate={[required]}/>
+      </div>
     )
   }
   renderNormal () {
-    const {searchList, formValues, durationVisible, splitVisible, templateName} = this.props
+    const {formValues, durationVisible, splitVisible, templateName} = this.props
     let resourceOptions = gaugeResources
     if (templateName === 'Up/Down') {
       resourceOptions = [...resourceOptions, {
