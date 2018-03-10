@@ -132,6 +132,8 @@ export default class GLineChart extends React.Component {
     this.state = {
       loading: true,
       searchRecordCounts: [],
+      labels: [],
+      datasets: [],
       needRefresh: false
     }
     this.renderBackView = this.renderBackView.bind(this)
@@ -215,11 +217,10 @@ export default class GLineChart extends React.Component {
           sort: 'timestamp'
         }
       }).then(res => {
+        const {events} = res.data._embedded
         this.setState({
-          searchRecordCounts: res.data._embedded.events.map(p => ({
-            date: moment(p.timestamp).format('YYYY-MM-DD HH:mm:ss'),
-            count: p.eventType === 'AGENT' || (p.lastResult && p.lastResult.status === 'UP') ? 1 : 0
-          })),
+          labels: events.map(p => moment(p.timestamp).format('YYYY-MM-DD HH:mm:ss')),
+          datasets: [events.map(p => p.eventType === 'AGENT' || (p.lastResult && p.lastResult.status === 'UP') ? 1 : 0)],
           loading: false,
           needRefresh: false
         })
