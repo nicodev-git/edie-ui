@@ -316,8 +316,11 @@ class GaugeWizard extends React.Component {
     return []
   }
   handleFormSubmit (formProps) {
-    const { selectedSeverity, selectedMonitors, serviceNames, dateFrom, dateTo,
-      selectedServers, selectedWorkflows, selectedMonitorGroups, selectedSearchIds } = this.state
+    const {
+      selectedSeverity, selectedMonitors, serviceNames, dateFrom, dateTo,
+      selectedServers, selectedWorkflows, selectedMonitorGroups, selectedSearchIds,
+      savedSearchIds
+    } = this.state
     const { extraParams, onFinish, options } = this.props
 
     const props = assign({
@@ -329,7 +332,8 @@ class GaugeWizard extends React.Component {
         servers: selectedServers,
         workflowIds: selectedWorkflows,
         logicalGroups: selectedMonitorGroups,
-        searchIds: selectedSearchIds
+        searchIds: selectedSearchIds,
+        savedSearchIds
       },
       formProps,
       extraParams
