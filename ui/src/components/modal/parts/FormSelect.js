@@ -10,9 +10,8 @@ const FormSelect = ({input, label, floatingLabel, style, fullWidth, className, m
     <Select
       {...custom}
       {...input}
-      inputProps={{style: {paddingTop: 3}}}
       placeholder={label}
-      onBlur={input.onBlur(input.value)}
+      onBlur={() => input.onBlur(input.value)}
     >
       {options.map(option => <MenuItem key={option.value} value={option.value}>{option.label}</MenuItem>)}
     </Select>

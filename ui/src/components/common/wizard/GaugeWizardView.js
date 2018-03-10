@@ -6,6 +6,7 @@ import { SubmitBlock, FormInput, FormSelect, Modal, CardPanel } from 'components
 import {findIndex} from 'lodash'
 import { FormControl, FormControlLabel } from 'material-ui/Form'
 import { InputLabel } from 'material-ui/Input'
+import AddIcon from 'material-ui-icons/AddCircle'
 
 import {gaugeDurationTypes, gaugeResources, severities, timingOptions, realtimeGauges, historicGauges, gaugeTableViewModes} from 'shared/Global'
 import DateRangePicker from 'components/common/DateRangePicker'
@@ -116,21 +117,24 @@ export default class GaugeWizardView extends React.Component {
   }
 
   renderSearchMode () {
-    const {formValues, searchList, savedSearchIds, onChangeSaveSearch} = this.props
+    const {formValues, searchList, savedSearchIds, onChangeSavedSearch, onClickAddSavedSearch} = this.props
     if (formValues.resource !== 'search') return null
     return (
-      <div>
-        <table className="table table-hover">
+      <div className="margin-md-top">
+        <table className="table table-noborder" style={{border: '1px solid black'}}>
           <thead>
             <tr>
-              <th>Saved Search</th>
+              <th>
+                <span className="valign-middle">Saved Search</span>
+                <AddIcon className="link valign-middle margin-md-left" onClick={onClickAddSavedSearch}/>
+              </th>
             </tr>
           </thead>
           <tbody>
           {savedSearchIds.map((id, i) =>
             <tr key={i}>
               <td>
-                <Select value={id} onChange={(e) => onChangeSaveSearch(e.target.value, i)}>
+                <Select value={id} onChange={(e) => onChangeSavedSearch(e.target.value, i)} style={{minWidth: 200}}>
                   {searchList.map(p =>
                     <MenuItem key={p.value} value={p.value}>{p.label}</MenuItem>
                   )}
@@ -140,9 +144,6 @@ export default class GaugeWizardView extends React.Component {
           )}
           </tbody>
         </table>
-        <Field
-          name="savedSearchId" component={FormSelect} floatingLabel="Saved Search" options={searchList} className="valign-top margin-md-right"
-          validate={[required]}/>
       </div>
     )
   }

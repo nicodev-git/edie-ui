@@ -33,7 +33,9 @@ class GaugeWizard extends React.Component {
       selectedMonitorGroup: null,
       selectedMonitorGroups: [],
 
-      selectedSearchIds: []
+      selectedSearchIds: [],
+
+      savedSearchIds: ['']
     }
   }
 
@@ -280,6 +282,21 @@ class GaugeWizard extends React.Component {
 
   ///////////////////////////////////////////////////////////////////////////////////
 
+  onChangeSavedSearch (id, index) {
+    const {savedSearchIds} = this.state
+    this.setState({
+      savedSearchIds: savedSearchIds.map((p, i) => i === index ? id : p)
+    })
+  }
+
+  onClickAddSavedSearch () {
+    this.setState({
+      savedSearchIds: [...this.state.savedSearchIds, '']
+    })
+  }
+
+  ///////////////////////////////////////////////////////////////////////////////////
+
   getSearchOptions () {
     const {userInfo} = this.props
     if (!userInfo) return []
@@ -335,7 +352,8 @@ class GaugeWizard extends React.Component {
   render () {
     const {selectedDevice, selectedServers, selectedRight, selectedMonitor,
       selectedWorkflow, selectedWorkflows,
-      selectedMonitorGroup, selectedMonitorGroups
+      selectedMonitorGroup, selectedMonitorGroups,
+      savedSearchIds
     } = this.state
     const { handleSubmit, sysSearchOptions, monitors, title, formValues, workflows, templateName,
       devices, device, monitorGroups, gaugeBoards, allDevices } = this.props
@@ -371,6 +389,7 @@ class GaugeWizard extends React.Component {
         services={serviceOptions}
         workflows={workflows}
         workflowOptions={workflowOptions}
+        savedSearchIds={savedSearchIds}
 
         formValues={formValues}
         durationVisible={durationVisible}
@@ -429,6 +448,9 @@ class GaugeWizard extends React.Component {
 
         selectedSearchIds={this.state.selectedSearchIds}
         onClickToggleSearch={this.onClickToggleSearch.bind(this)}
+
+        onChangeSavedSearch={this.onChangeSavedSearch.bind(this)}
+        onClickAddSavedSearch={this.onClickAddSavedSearch.bind(this)}
       />
     )
   }
