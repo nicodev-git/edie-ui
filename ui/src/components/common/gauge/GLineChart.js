@@ -304,7 +304,7 @@ export default class GLineChart extends React.Component {
       axios.get(`${ROOT_URL}/search/getRecordCounts?${encodeUrlParams(params)}`).then(res => {
         this.setState({
           labels: res.data.map(p => p.date),
-          datasets: qs.map((q, i) => res.data.map(p => p.count[i])),
+          datasets: qs.map((q, i) => res.data.map(p => /* parseInt(Math.random() * 20)*/p.count[i])),
           loading: false,
           needRefresh: false
         })
@@ -431,6 +431,7 @@ export default class GLineChart extends React.Component {
     const chartData = {
       labels,
       datasets: datasets.map((d, i) => ({
+        label: `S${i + 1}`,
         data: d,
         borderWidth: 2,
         borderColor: appletColors[i],
