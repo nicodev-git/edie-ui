@@ -243,7 +243,8 @@ export default class GLineChart extends React.Component {
       }
       axios.get(`${ROOT_URL}/search/getRecordCount`, {params}).then(res => {
         this.setState({
-          searchRecordCounts: res.data,
+          labels: res.data.map(p => p.date),
+          datasets: [res.data.map(p => p.count)],
           loading: false,
           needRefresh: false
         })
@@ -262,11 +263,11 @@ export default class GLineChart extends React.Component {
           size: 1000
         }
       }).then(res => {
+        const {events} = res.data._embedded
         this.setState({
-          searchRecordCounts: res.data._embedded.events.map(p => ({
-            date: moment(p.timestamp).format('MM-DD HH:mm'),
-            count: parseFloat(p.lastResultData || 0)
-          })),
+          labels: res.data.map(p => moment(p.timestamp).format('MM-DD HH:mm')),
+          datasets: [res.data.map(p => parseFloat(p.lastResultData || 0))],
+
           loading: false,
           needRefresh: false
         })
@@ -303,7 +304,8 @@ export default class GLineChart extends React.Component {
       }
       axios.get(`${ROOT_URL}/search/getRecordCounts?${encodeUrlParams(params)}`).then(res => {
         this.setState({
-          searchRecordCounts: res.data,
+          labels: res.data.map(p => p.date),
+          datasets: [res.data.map(p => p.count)],
           loading: false,
           needRefresh: false
         })
@@ -350,28 +352,28 @@ export default class GLineChart extends React.Component {
   ////////////////////////////////////////////
 
   startSocket () {
-    this.eventSocket = new MonitorSocket({
-      listener: this.onEventUpdate.bind(this)
-    })
-    this.eventSocket.connect(() => {}, 'eventupdate')
+    // this.eventSocket = new MonitorSocket({
+    //   listener: this.onEventUpdate.bind(this)
+    // })
+    // this.eventSocket.connect(() => {}, 'eventupdate')
   }
 
   stopSocket() {
-    if (!this.eventSocket) return
-    this.eventSocket.close()
+    // if (!this.eventSocket) return
+    // this.eventSocket.close()
   }
 
   onEventUpdate (data) {
-    const {searchRecordCounts} = this.state
-    const {userConnectorId} = this.props.gauge
-    if (!data.userConnectorId || data.userConnectorId !== userConnectorId) return
-
-    this.setState({
-      searchRecordCounts: [...searchRecordCounts, {
-        date: moment(data.timestamp).format('YYYY-MM-DD HH:mm:ss'),
-        count: parseFloat(data.lastResultData || 0)
-      }]
-    })
+    // const {searchRecordCounts} = this.state
+    // const {userConnectorId} = this.props.gauge
+    // if (!data.userConnectorId || data.userConnectorId !== userConnectorId) return
+    //
+    // this.setState({
+    //   searchRecordCounts: [...searchRecordCounts, {
+    //     date: moment(data.timestamp).format('YYYY-MM-DD HH:mm:ss'),
+    //     count: parseFloat(data.lastResultData || 0)
+    //   }]
+    // })
   }
 
   ////////////////////////////////////////////
