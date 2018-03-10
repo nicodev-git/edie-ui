@@ -114,6 +114,16 @@ export default class GaugeWizardView extends React.Component {
       </div>
     )
   }
+
+  renderSearchMode () {
+    const {formValues} = this.props
+    if (formValues.resource !== 'search') return null
+    return (
+      <Field
+        name="savedSearchId" component={FormSelect} floatingLabel="Saved Search" options={searchList} className="valign-top margin-md-right"
+        validate={[required]}/>
+    )
+  }
   renderNormal () {
     const {searchList, formValues, durationVisible, splitVisible, templateName} = this.props
     let resourceOptions = gaugeResources
@@ -127,11 +137,7 @@ export default class GaugeWizardView extends React.Component {
         <Field name="name" component={FormInput} floatingLabel="Name" className="valign-top margin-md-right" validate={[required]}/>
         <Field name="resource" component={FormSelect} floatingLabel="Resource" options={resourceOptions} className="valign-top margin-md-right"/>
 
-        {formValues.resource === 'search' &&
-          <Field
-            name="savedSearchId" component={FormSelect} floatingLabel="Saved Search" options={searchList} className="valign-top margin-md-right"
-            validate={[required]}/>
-        }
+        {this.renderSearchMode()}
         {this.renderWorkflowPick()}
         {this.renderMonitorPick()}
         {this.renderLogicalGroup()}
