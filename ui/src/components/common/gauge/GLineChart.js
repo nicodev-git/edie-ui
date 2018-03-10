@@ -194,7 +194,7 @@ export default class GLineChart extends React.Component {
   fetchRecordCount (props) {
     const {gauge, searchList, workflows, devices, allDevices} = props
     const {savedSearchId, monitorId, resource, duration, durationUnit,
-      splitBy, splitUnit, workflowId, workflowIds, userConnectorId} = gauge
+      splitBy, splitUnit, workflowId, workflowIds, userConnectorId, savedSearchIds} = gauge
 
     this.setState({
       loading: true
@@ -276,26 +276,31 @@ export default class GLineChart extends React.Component {
       })
       if (!this.eventSocket) this.startSocket()
     } else {
-      const index = findIndex(searchList, {id: savedSearchId})
-      if (index < 0) {
-        console.log('Saved search not found.')
-        return
-      }
-      const searchParams = buildServiceParams(JSON.parse(searchList[index].data), {
-        dateRanges: getRanges(),
-        collections, severities, workflows,
-        allDevices: devices || allDevices,
-        queryDateFormat
+      const qs = []
+      savedSearchIds.forEach(savedSearchId => {
+        const index = findIndex(searchList, {id: savedSearchId})
+        if (index < 0) {
+          console.log('Saved search not found.')
+          return
+        }
+        const searchParams = buildServiceParams(JSON.parse(searchList[index].data), {
+          dateRanges: getRanges(),
+          collections, severities, workflows,
+          allDevices: devices || allDevices,
+          queryDateFormat
+        })
+
+        qs.push(searchParams.q)
       })
 
       const params = {
-        q: searchParams.q,
+        qs,
         splitBy,
         splitUnit,
         from: dateFrom.valueOf(),
         to: dateTo.valueOf()
       }
-      axios.get(`${ROOT_URL}/search/getRecordCount?${encodeUrlParams(params)}`).then(res => {
+      axios.get(`${ROOT_URL}/search/getRecordCounts?${encodeUrlParams(params)}`).then(res => {
         this.setState({
           searchRecordCounts: res.data,
           loading: false,
@@ -307,6 +312,38 @@ export default class GLineChart extends React.Component {
         }, 5000)
       })
     }
+    // else {
+    //   const index = findIndex(searchList, {id: savedSearchId})
+    //   if (index < 0) {
+    //     console.log('Saved search not found.')
+    //     return
+    //   }
+    //   const searchParams = buildServiceParams(JSON.parse(searchList[index].data), {
+    //     dateRanges: getRanges(),
+    //     collections, severities, workflows,
+    //     allDevices: devices || allDevices,
+    //     queryDateFormat
+    //   })
+    //
+    //   const params = {
+    //     q: searchParams.q,
+    //     splitBy,
+    //     splitUnit,
+    //     from: dateFrom.valueOf(),
+    //     to: dateTo.valueOf()
+    //   }
+    //   axios.get(`${ROOT_URL}/search/getRecordCount?${encodeUrlParams(params)}`).then(res => {
+    //     this.setState({
+    //       searchRecordCounts: res.data,
+    //       loading: false,
+    //       needRefresh: false
+    //     })
+    //   }).catch(() => {
+    //     setTimeout(() => {
+    //       this.setState({needRefresh: true})
+    //     }, 5000)
+    //   })
+    // }
   }
 
   ////////////////////////////////////////////
