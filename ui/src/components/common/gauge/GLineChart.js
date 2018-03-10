@@ -426,7 +426,6 @@ export default class GLineChart extends React.Component {
   renderFrontView () {
     const {gauge} = this.props
     const {searchRecordCounts} = this.state
-
     const chartData = {
       labels: (searchRecordCounts || sampleData).map(p => p.date),
       datasets: [{
