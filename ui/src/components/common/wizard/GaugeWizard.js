@@ -295,6 +295,12 @@ class GaugeWizard extends React.Component {
     })
   }
 
+  onClickRemoveSavedSearch (i) {
+    this.setState({
+      savedSearchIds: this.state.savedSearchIds.filter((p, index) => index !== i)
+    })
+  }
+
   ///////////////////////////////////////////////////////////////////////////////////
 
   getSearchOptions () {
@@ -451,6 +457,7 @@ class GaugeWizard extends React.Component {
 
         onChangeSavedSearch={this.onChangeSavedSearch.bind(this)}
         onClickAddSavedSearch={this.onClickAddSavedSearch.bind(this)}
+        onClickRemoveSavedSearch={this.onClickRemoveSavedSearch.bind(this)}
       />
     )
   }

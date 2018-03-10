@@ -7,6 +7,7 @@ import {findIndex} from 'lodash'
 import { FormControl, FormControlLabel } from 'material-ui/Form'
 import { InputLabel } from 'material-ui/Input'
 import AddIcon from 'material-ui-icons/AddCircle'
+import DeleteIcon from 'material-ui-icons/Delete'
 
 import {gaugeDurationTypes, gaugeResources, severities, timingOptions, realtimeGauges, historicGauges, gaugeTableViewModes} from 'shared/Global'
 import DateRangePicker from 'components/common/DateRangePicker'
@@ -117,7 +118,7 @@ export default class GaugeWizardView extends React.Component {
   }
 
   renderSearchMode () {
-    const {formValues, searchList, savedSearchIds, onChangeSavedSearch, onClickAddSavedSearch} = this.props
+    const {formValues, searchList, savedSearchIds, onChangeSavedSearch, onClickAddSavedSearch, onClickRemoveSavedSearch} = this.props
     if (formValues.resource !== 'search') return null
     return (
       <div className="margin-md-top">
@@ -139,6 +140,7 @@ export default class GaugeWizardView extends React.Component {
                     <MenuItem key={p.value} value={p.value}>{p.label}</MenuItem>
                   )}
                 </Select>
+                <DeleteIcon className="link" onClick={() => onClickRemoveSavedSearch(i)}/>
               </td>
             </tr>
           )}
