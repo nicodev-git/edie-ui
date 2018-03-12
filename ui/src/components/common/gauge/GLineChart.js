@@ -219,7 +219,10 @@ export default class GLineChart extends React.Component {
         const {events} = res.data._embedded
         this.setState({
           labels: events.map(p => moment(p.timestamp).format('YYYY-MM-DD HH:mm:ss')),
-          datasets: [events.map(p => p.eventType === 'AGENT' || (p.lastResult && p.lastResult.status === 'UP') ? 1 : 0)],
+          datasets: [{
+            label: 'Status',
+            data: events.map(p => p.eventType === 'AGENT' || (p.lastResult && p.lastResult.status === 'UP') ? 1 : 0)
+          }],
           loading: false,
           needRefresh: false
         })
@@ -243,7 +246,10 @@ export default class GLineChart extends React.Component {
       axios.get(`${ROOT_URL}/search/getRecordCount`, {params}).then(res => {
         this.setState({
           labels: res.data.map(p => p.date),
-          datasets: [res.data.map(p => p.count)],
+          datasets: [{
+            label: 'Incident',
+            data: res.data.map(p => p.count)
+          }],
           loading: false,
           needRefresh: false
         })
@@ -265,7 +271,10 @@ export default class GLineChart extends React.Component {
         const {events} = res.data._embedded
         this.setState({
           labels: events.map(p => moment(p.timestamp).format('MM-DD HH:mm')),
-          datasets: [events.map(p => parseFloat(p.lastResultData || 0))],
+          datasets: [{
+            label: 'Value',
+            data: events.map(p => parseFloat(p.lastResultData || 0))
+          }],
 
           loading: false,
           needRefresh: false
@@ -304,7 +313,10 @@ export default class GLineChart extends React.Component {
       axios.get(`${ROOT_URL}/search/getRecordCounts?${encodeUrlParams(params)}`).then(res => {
         this.setState({
           labels: res.data.map(p => p.date),
-          datasets: qs.map((q, i) => res.data.map(p => /* parseInt(Math.random() * 20)*/p.count[i])),
+          datasets: qs.map((q, i) => ({
+            label: 'Count',
+            data: res.data.map(p => /* parseInt(Math.random() * 20)*/p.count[i])
+          })),
           loading: false,
           needRefresh: false
         })
@@ -431,8 +443,8 @@ export default class GLineChart extends React.Component {
     const chartData = {
       labels,
       datasets: datasets.map((d, i) => ({
-        label: `S${i + 1}`,
-        data: d,
+        label: d.label,
+        data: d.data,
         borderWidth: 2,
         borderColor: appletColors[i],
         fill: false,
