@@ -3,6 +3,8 @@ import {TextField, Select, MenuItem, Button, Checkbox} from 'material-ui'
 import {findIndex} from 'lodash'
 import { FormControl, FormControlLabel } from 'material-ui/Form'
 import { InputLabel } from 'material-ui/Input'
+import AddIcon from 'material-ui-icons/AddCircle'
+import DeleteIcon from 'material-ui-icons/Delete'
 
 import {gaugeDurationTypes, gaugeResources, gaugeTableViewModes} from 'shared/Global'
 
@@ -21,10 +23,6 @@ const durations = '1 2 3 5 10 15 30'.split(' ').map(p => ({
   label: p, value: parseInt(p, 10)
 }))
 
-const inputStyle = {
-  width: '100%'
-}
-
 export default class GEditView extends React.Component {
   constructor (props) {
     super(props)
@@ -41,6 +39,7 @@ export default class GEditView extends React.Component {
 
       resource: gauge.resource || 'search',
       savedSearchId: gauge.savedSearchId || '',
+      savedSearchIds: gauge.savedSearchIds || [],
       deviceId: gauge.deviceId || '',
       monitorId: gauge.monitorId || '',
       workflowId: gauge.workflowId || '',
@@ -274,10 +273,30 @@ export default class GEditView extends React.Component {
   }
 
   ///////////////////////////////////////////////////////////////////////////
+  onChangeSavedSearch (id, index) {
+    const {savedSearchIds} = this.state
+    this.setState({
+      savedSearchIds: savedSearchIds.map((p, i) => i === index ? id : p)
+    })
+  }
+
+  onClickAddSavedSearch () {
+    this.setState({
+      savedSearchIds: [...this.state.savedSearchIds, '']
+    })
+  }
+
+  onClickRemoveSavedSearch (i) {
+    this.setState({
+      savedSearchIds: this.state.savedSearchIds.filter((p, index) => index !== i)
+    })
+  }
+
+  ///////////////////////////////////////////////////////////////////////////
   onClickDone () {
     const {onSubmit} = this.props
     const {
-      resource, savedSearchId, monitorId, workflowId, workflowIds, deviceId, serviceName, monitorIds,
+      resource, savedSearchId, savedSearchIds, monitorId, workflowId, workflowIds, deviceId, serviceName, monitorIds,
       duration, durationUnit, splitBy, splitUnit, name,
       severities, dateFrom, dateTo, fixed,
       itemSize, showDeviceType, gaugeSize,
@@ -287,7 +306,7 @@ export default class GEditView extends React.Component {
       searchIds, userConnectorId
     }  = this.state
     const values = {
-      resource, savedSearchId, monitorId, workflowId, workflowIds, deviceId, serviceName, monitorIds,
+      resource, savedSearchId, savedSearchIds, monitorId, workflowId, workflowIds, deviceId, serviceName, monitorIds,
       duration, durationUnit, splitBy, splitUnit, name,
       severities, dateFrom, dateTo, fixed,
       itemSize, showDeviceType, gaugeSize,
@@ -349,9 +368,9 @@ export default class GEditView extends React.Component {
     if (!devices) {
       return (
         <div className="col-md-6">
-          <FormControl className="valign-top">
+          <FormControl className="valign-top" fullWidth>
             <InputLabel>Monitor</InputLabel>
-            <Select value={monitorId} style={inputStyle} onChange={this.onChangeSelect.bind(this, 'monitorId')}>
+            <Select value={monitorId} onChange={this.onChangeSelect.bind(this, 'monitorId')}>
               {monitors.map(p => <MenuItem key={p.value} value={p.value}>{p.label}</MenuItem>)}
             </Select>
           </FormControl>
@@ -363,17 +382,17 @@ export default class GEditView extends React.Component {
     const monitorOptions = index < 0 ? [] : devices[index].monitors.map(p => ({label: p.name, value: p.uid}))
     return [
       <div key="deviceId" className="col-md-6">
-        <FormControl className="valign-top">
+        <FormControl className="valign-top" fullWidth>
           <InputLabel>Device</InputLabel>
-          <Select value={deviceId} style={inputStyle} onChange={this.onChangeSelect.bind(this, 'deviceId')}>
+          <Select value={deviceId} onChange={this.onChangeSelect.bind(this, 'deviceId')}>
             {deviceOptions.map(p => <MenuItem key={p.value} value={p.value}>{p.label}</MenuItem>)}
           </Select>
         </FormControl>
       </div>,
       <div key="monitorId" className="col-md-6">
-        <FormControl className="valign-top">
+        <FormControl className="valign-top" fullWidth>
           <InputLabel>Monitor</InputLabel>
-          <Select value={monitorId} style={inputStyle} onChange={this.onChangeSelect.bind(this, 'monitorId')}>
+          <Select value={monitorId} onChange={this.onChangeSelect.bind(this, 'monitorId')}>
             {monitorOptions.map(p => <MenuItem key={p.value} value={p.value}>{p.label}</MenuItem>)}
           </Select>
         </FormControl>
@@ -387,9 +406,9 @@ export default class GEditView extends React.Component {
     if (!devices) {
       return (
         <div className="col-md-6">
-          <FormControl className="valign-top">
+          <FormControl className="valign-top" fullWidth>
             <InputLabel>Workflow</InputLabel>
-            <Select value={workflowId} style={inputStyle} onChange={this.onChangeSelect.bind(this, 'workflowId')}>
+            <Select value={workflowId} onChange={this.onChangeSelect.bind(this, 'workflowId')}>
               {workflows.map(p => <MenuItem key={p.id} value={p.id}>{p.name}</MenuItem>)}
             </Select>
           </FormControl>
@@ -423,9 +442,9 @@ export default class GEditView extends React.Component {
     if (gauge.templateName !== 'Table') return null
     return (
       <div className="col-md-6">
-        <FormControl className="valign-top">
+        <FormControl className="valign-top" fullWidth>
           <InputLabel>View Mode</InputLabel>
-          <Select value={tableViewMode} style={inputStyle} onChange={this.onChangeSelect.bind(this, 'tableViewMode')}>
+          <Select value={tableViewMode} onChange={this.onChangeSelect.bind(this, 'tableViewMode')}>
             {gaugeTableViewModes.map(p => <MenuItem key={p.value} value={p.value}>{p.label}</MenuItem>)}
           </Select>
         </FormControl>
@@ -434,18 +453,36 @@ export default class GEditView extends React.Component {
   }
 
   renderSearchMode () {
-    const {resource} = this.state
+    const {resource, savedSearchIds} = this.state
     const {searchList} = this.props
     if (resource !== 'search') return null
     return (
-      <div className="row">
-        <div className="col-md-6">
-          <FormControl className="valign-top mr-dialog">
-            <InputLabel>Saved Search</InputLabel>
-            <Select style={inputStyle} onChange={this.onChangeSelect.bind(this, 'savedSearchId')}>
-              {searchList.map(p => <MenuItem key={p.id} value={p.id}>{p.name}</MenuItem>)}
-            </Select>
-          </FormControl>
+      <div className="row margin-md-top">
+        <div className="col-md-12">
+          <table className="table table-noborder" style={{border: '1px solid black'}}>
+            <thead>
+            <tr>
+              <th>
+                <span className="valign-middle">Saved Search</span>
+                <AddIcon className="link valign-middle margin-md-left" onClick={this.onClickAddSavedSearch.bind(this)}/>
+              </th>
+            </tr>
+            </thead>
+            <tbody>
+            {savedSearchIds.map((id, i) =>
+              <tr key={i}>
+                <td>
+                  <Select value={id} onChange={(e) => this.onChangeSavedSearch(e.target.value, i)} style={{minWidth: 200}}>
+                    {searchList.map(p =>
+                      <MenuItem key={p.id} value={p.id}>{p.name}</MenuItem>
+                    )}
+                  </Select>
+                  <DeleteIcon className="link" onClick={() => this.onClickRemoveSavedSearch(i)}/>
+                </td>
+              </tr>
+            )}
+            </tbody>
+          </table>
         </div>
       </div>
     )
@@ -461,18 +498,19 @@ export default class GEditView extends React.Component {
       <div>
         <div className="row">
           <div className="col-md-6">
-            <TextField name="name" value={name} label="Name" className="valign-top" style={inputStyle} onChange={this.onChangeText.bind(this, 'name')}/>
+            <TextField name="name" value={name} label="Name" className="valign-top" fullWidth onChange={this.onChangeText.bind(this, 'name')}/>
           </div>
           <div className="col-md-6">
-            <FormControl className="valign-top">
+            <FormControl className="valign-top" fullWidth>
               <InputLabel>Resource</InputLabel>
-              <Select value={resource} style={inputStyle} onChange={this.onChangeSelect.bind(this, 'resource')}>
+              <Select value={resource} onChange={this.onChangeSelect.bind(this, 'resource')}>
                 {gaugeResources.map(p => <MenuItem key={p.value} value={p.value}>{p.label}</MenuItem>)}
               </Select>
             </FormControl>
           </div>
         </div>
 
+        {this.renderSearchMode()}
 
         <div className="row">
           {this.renderWorkflowPick()}
@@ -482,17 +520,17 @@ export default class GEditView extends React.Component {
           {this.renderUserConnector()}
 
           {!hideDuration && <div className="col-md-3">
-            <FormControl className="valign-top mr-dialog">
+            <FormControl className="valign-top mr-dialog" fullWidth>
               <InputLabel>Duration</InputLabel>
-              <Select value={duration} style={inputStyle} onChange={this.onChangeSelect.bind(this, 'duration')}>
+              <Select value={duration} onChange={this.onChangeSelect.bind(this, 'duration')}>
                 {durations.map(p => <MenuItem key={p.value} value={p.value}>{p.label}</MenuItem>)}
               </Select>
             </FormControl>
           </div>}
           {!hideDuration && <div className="col-md-3">
-            <FormControl className="valign-top">
+            <FormControl className="valign-top" fullWidth>
               <InputLabel>  </InputLabel>
-              <Select value={durationUnit} style={inputStyle} onChange={this.onChangeSelect.bind(this, 'durationUnit')}>
+              <Select value={durationUnit} onChange={this.onChangeSelect.bind(this, 'durationUnit')}>
                 {gaugeDurationTypes.map(p => <MenuItem key={p.value} value={p.value}>{p.label}</MenuItem>)}
               </Select>
             </FormControl>
@@ -503,17 +541,17 @@ export default class GEditView extends React.Component {
 
         {!hideSplit && resource !== 'monitor' && resource !== 'userconnector' && <div className="row">
           <div className="col-md-3">
-            <FormControl className="valign-top mr-dialog">
+            <FormControl className="valign-top mr-dialog" fullWidth>
               <InputLabel>Resolution</InputLabel>
-              <Select value={splitBy} style={inputStyle} onChange={this.onChangeSelect.bind(this, 'splitBy')}>
+              <Select value={splitBy} onChange={this.onChangeSelect.bind(this, 'splitBy')}>
                 {durations.map(p => <MenuItem key={p.value} value={p.value}>{p.label}</MenuItem>)}
               </Select>
             </FormControl>
           </div>
           <div className="col-md-3">
-            <FormControl className="valign-top">
+            <FormControl className="valign-top" fullWidth>
               <InputLabel>  </InputLabel>
-              <Select value={splitUnit} style={inputStyle} onChange={this.onChangeSelect.bind(this, 'splitUnit')}>
+              <Select value={splitUnit} onChange={this.onChangeSelect.bind(this, 'splitUnit')}>
                 {gaugeDurationTypes.map(p => <MenuItem key={p.value} value={p.value}>{p.label}</MenuItem>)}
               </Select>
             </FormControl>
